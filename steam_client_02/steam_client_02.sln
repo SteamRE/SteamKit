@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "steam_client_02", "steam_client_02\steam_client_02.vcxproj", "{BD367236-8348-4328-A6B7-C2640413CE7E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BD367236-8348-4328-A6B7-C2640413CE7E}.Debug|Win32.ActiveCfg = Release|Win32
+		{BD367236-8348-4328-A6B7-C2640413CE7E}.Debug|Win32.Build.0 = Release|Win32
+		{BD367236-8348-4328-A6B7-C2640413CE7E}.Release|Win32.ActiveCfg = Release|Win32
+		{BD367236-8348-4328-A6B7-C2640413CE7E}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
