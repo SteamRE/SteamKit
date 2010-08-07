@@ -24,7 +24,8 @@ int main( int argc, char **argv )
 	AllocConsole();
 
 	g_Logger = new CLogger( argv[ 0 ] );
-	g_udpConnection = new CUDPConnection( argv[ 0 ] );
+
+	g_udpConnection = new CUDPConnection();
 
 	Detour_WSAStartup->Attach();
 

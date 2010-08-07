@@ -12,30 +12,6 @@
 #include <map>
 
 
-enum ENetType
-{
-	eNetType_Invalid = 0,
-
-	eNetType_TCP,
-	eNetType_UDP,
-
-	eNetType_Max,
-};
-
-enum ENetDirection
-{
-	eNetDirection_Invalid = 0,
-
-	eNetDirection_Send,
-	eNetDirection_Recv,
-
-	eNetDriection_Max,
-};
-
-
-typedef std::map< ENetType, uint32 > CountMap;
-typedef std::pair< ENetType, uint32 > CountPair;
-
 
 class CLogger
 {
@@ -43,21 +19,19 @@ class CLogger
 public:
 	CLogger( const char *szBaseDir );
 
-	void LogPacket( ENetType eNetType, ENetDirection eNetDirection, const uint8 *pData, uint32 cubData, uint32 ip = 0, uint16 port = 0 );
-
 
 	void LogConsole( const char *szString, ... );
 
 	void LogFile( const char *szFileName, const char *szString, ... );
+	void AppendFile( const char *szFileName, const char *szString, ... );
+
 	void LogFileData( const char *szFileName, const uint8 *pData, uint32 cubData, bool bAppend = false );
 
-	void AppendFile( const char *szFileName, const char *szString, ... );
+private:
+	const char *GetFileDir( const char *szFile );
 
 private:
 	char m_szDir[ MAX_PATH ];
-
-	CountMap m_typeCounts;
-
 };
 
 

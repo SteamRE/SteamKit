@@ -15,7 +15,7 @@ SETUP_DETOUR_FUNCTION( int, PASCAL, recvfrom, ( SOCKET s, char *buf, int len, in
 
 	sockaddr_in *sockAddr = (sockaddr_in *)from;
 
-	bool bRet = g_udpConnection->ReceivePacket( (uint8 *)buf, len, sockAddr );
+	bool bRet = g_udpConnection->ReceivePacket( (uint8 *)buf, ret, sockAddr );
 
 	if ( !bRet )
 		return 0; // drop the packet

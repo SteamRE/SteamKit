@@ -11,19 +11,11 @@
 #include "steam/clientmsgs.h"
 
 
-CUDPConnection::CUDPConnection( const char *szBasePath )
+const char CUDPConnection::m_szLogFile[] = "UdpLog.txt";
+
+
+CUDPConnection::CUDPConnection() : m_packetMap( DefLessFunc( uint32 ) )
 {
-	memset( m_szLogPath, 0, sizeof( m_szLogPath ) );
-
-	const char *szLastSlash = strrchr( szBasePath, '\\' );
-	memcpy( m_szLogPath, szBasePath, szLastSlash - szBasePath );
-
-	sprintf_s( m_szLogPath, sizeof( m_szLogPath ), "%s\\netlogs", m_szLogPath );
-
-	CreateDirectoryA( m_szLogPath, NULL );
-
-	sprintf_s( m_szLogPath, sizeof( m_szLogPath ), "%s\\UdpLog.txt", m_szLogPath );
-
 	m_bUsingCrypto = false;
 }
 
@@ -47,92 +39,143 @@ bool CUDPConnection::ReceivePacket( const uint8 *pData, uint32 cubData, const so
 		return true;
 	}
 
-	// datagram packets don't seem to be required. v0v
-	// if ( pHdr->m_EUDPPktType == k_EUDPPktTypeDatagram )
-	// 	return false;
+	g_Logger->AppendFile( m_szLogFile, "-> Incoming %s", PchStringFromUDPPktHdr( pHdr ) );
 
-	g_Logger->AppendFile( m_szLogPath, "-> Incoming %s", PchStringFromUDPPktHdr( pHdr ) );
 
-	if ( pHdr->m_EUDPPktType == k_EUDPPktTypeChallenge )
+	size_t headerSize = sizeof( UDPPktHdr_t );
+
+	pData += headerSize;
+	cubData -= headerSize;
+
+	if ( pHdr->m_EUDPPktType == k_EUDPPktTypeDatagram )
 	{
-		struct ChallengeData_t
-		{
-			uint32 m_Challenge1;
-			uint32 m_Challenge2;
-		};
-
-		ChallengeData_t *pChal = (ChallengeData_t *)( pData + sizeof( UDPPktHdr_t ) );
-
-		g_Logger->AppendFile( m_szLogPath,
-
-			"  Challenge Data:\r\n"
-			"    m_Challenge1 = %d\r\n"
-			"    m_Challenge2 = %d\r\n",
-
-			pChal->m_Challenge1,
-			pChal->m_Challenge2
-		);
+		return this->ReceiveDatagram( pHdr, pData, cubData );
+	}
+	else if ( pHdr->m_EUDPPktType == k_EUDPPktTypeChallenge )
+	{
+		return this->ReceiveChallenge( pHdr, pData, cubData );
 	}
 	else if ( pHdr->m_EUDPPktType == k_EUDPPktTypeData )
 	{
-		if ( pHdr->m_nSrcConnectionID != 0 && !m_bUsingCrypto )
-		{
-			MsgHdr_t *pMsgHdr = (MsgHdr_t *)( pData + sizeof( UDPPktHdr_t ) );
-
-			g_Logger->AppendFile( m_szLogPath, "%s", PchStringFromMsgHdr( pMsgHdr ) );
-
-			// server is requesting encryption
-			if ( pMsgHdr->m_EMsg == k_EMsgChannelEncryptRequest )
-			{
-				MsgChannelEncryptRequest_t *pMsgEncrypt = (MsgChannelEncryptRequest_t *)( pData + sizeof( UDPPktHdr_t ) + sizeof ( MsgHdr_t ) );
-
-				g_Logger->AppendFile( m_szLogPath, "  MsgChannelEncryptRequest\r\n" );
-				g_Logger->AppendFile( m_szLogPath, "    m_unProtocolVer = %u\r\n", pMsgEncrypt->m_unProtocolVer );
-				g_Logger->AppendFile( m_szLogPath, "    m_EUniverse = %s (%u)\r\n", PchNameFromEUniverse( (EUniverse)pMsgEncrypt->m_EUniverse ), pMsgEncrypt->m_EUniverse );
-
-			}
-
-			if ( pMsgHdr->m_EMsg == k_EMsgChannelEncryptResult )
-			{
-				MsgChannelEncryptResult_t *pMsgEncrypt = (MsgChannelEncryptResult_t *)( pData + sizeof( UDPPktHdr_t ) + sizeof ( MsgHdr_t ) );
-
-				g_Logger->AppendFile( m_szLogPath, "  MsgChannelEncryptResult\r\n" );
-				g_Logger->AppendFile( m_szLogPath, "    m_EResult = %u\r\n", pMsgEncrypt->m_EResult );
-
-				g_Logger->AppendFile( m_szLogPath, "  USING CRYPTO NOW!!\r\n" );
-
-				if ( pMsgEncrypt->m_EResult == k_EResultOK )
-					m_bUsingCrypto = true; // from this point on everything is using crypto
-			}
-		}
-		else if ( m_bUsingCrypto )
-		{
-			const uint8 *pCryptedData = ( pData + sizeof( UDPPktHdr_t ) );
-			uint32 cubDataSize = pHdr->m_cbMsgData * 2;
-			uint8 *pPlaintextData = new uint8[ cubDataSize ]; // just to be sure!
-
-			bool bCrypt = g_Crypto->SymmetricDecrypt( pCryptedData, pHdr->m_cbMsgData, pPlaintextData, &cubDataSize, g_Crypto->GetSessionKey(), 32 );
-
-			ExtendedClientMsgHdr_t *pExtHdr = (ExtendedClientMsgHdr_t *)pPlaintextData;
-
-			g_Logger->AppendFile( m_szLogPath, "%s", PchStringFromExtendedClientMsgHdr( pExtHdr ) );
-
-			delete[] pPlaintextData;
-		}
-		else
-		{
-			int cubPktMsg = pHdr->m_cbPkt;
-			int cubMsg = pHdr->m_cbMsgData;
-
-			g_Logger->AppendFile( m_szLogPath, "  Data:\r\n    %s", PchStringFromData( pData + sizeof( UDPPktHdr_t ), cubPktMsg ) );
-		}
-
+		return this->ReceiveData( pHdr, pData, cubData );
 	}
 
-	g_Logger->AppendFile( m_szLogPath, "\r\n\r\n" );
+	g_Logger->AppendFile( m_szLogFile, "Unhandled packet type: %s\r\n\r\n", PchNameFromEUDPPktType( (EUDPPktType)pHdr->m_EUDPPktType ) );
 
 	return true;	
 }
+
+
+bool CUDPConnection::ReceiveDatagram( const UDPPktHdr_t *pHdr, const uint8 *pData, uint32 cubData )
+{
+	return true;
+}
+
+bool CUDPConnection::ReceiveChallenge( const UDPPktHdr_t *pHdr, const uint8 *pData, uint32 cubData )
+{
+	struct ChallengeData_t
+	{
+		uint32 m_Challenge1;
+		uint32 m_Challenge2;
+	};
+
+	ChallengeData_t *pChal = (ChallengeData_t *)pData;
+
+	g_Logger->AppendFile( m_szLogFile,
+
+		"  Challenge Data:\r\n"
+		"    m_Challenge1 = %d\r\n"
+		"    m_Challenge2 = %d\r\n\r\n\r\n",
+
+		pChal->m_Challenge1,
+		pChal->m_Challenge2
+		);
+
+	return true;
+}
+
+bool CUDPConnection::ReceiveData( const UDPPktHdr_t *pHdr, const uint8 *pData, uint32 cubData )
+{
+	CNetPacket *pPacket = NULL;
+
+	PacketMapIndex index = m_packetMap.Find( pHdr->m_nMsgStartSeq );
+
+
+	if ( index != m_packetMap.InvalidIndex() )
+	{
+		pPacket = m_packetMap[ index ];
+	}
+	else
+	{
+		pPacket = new CNetPacket( pHdr->m_nMsgStartSeq, pHdr->m_nPktsInMsg, m_bUsingCrypto );
+
+		m_packetMap.Insert( pHdr->m_nMsgStartSeq, pPacket );
+	}
+
+	pPacket->AddData( pHdr, pData, cubData );
+
+	if ( pPacket->IsCompleted() )
+		return this->ReceiveNetPacket( pHdr, pPacket );
+
+	return true;
+}
+
+bool CUDPConnection::ReceiveNetPacket( const UDPPktHdr_t *pHdr, CNetPacket *pPacket )
+{
+	uint8 *pData = pPacket->GetData();
+	uint32 cubData = pPacket->GetSize();
+
+	m_packetMap.Remove( pHdr->m_nMsgStartSeq );
+
+	// decrypt the data before we handle it
+	if ( m_bUsingCrypto )
+	{
+		uint32 cubDecrypted = cubData * 2;
+		uint8 *pDecrypted = new uint8[ cubDecrypted ];
+
+		bool bCrypt = g_Crypto->SymmetricDecrypt( pData, cubData, pDecrypted, &cubDecrypted, g_Crypto->GetSessionKey(), 32 );
+
+		if ( bCrypt )
+			cubData = cubDecrypted;
+		else
+		{
+			delete [] pDecrypted;
+			delete [] pData;
+
+			g_Logger->AppendFile( "EMsgLog.txt", "Failed crypto!!\r\n" );
+
+			return false;
+		}
+
+		delete [] pData;
+		pData = pDecrypted;
+	}
+
+	// handle the net message
+	EMsg *pEMsg = (EMsg *)pData;
+	bool bRet = this->HandleNetMsg( *pEMsg, pData, cubData );
+
+	delete [] pData;
+	return bRet;
+}
+
+bool CUDPConnection::HandleNetMsg( EMsg eMsg, const uint8 *pData, uint32 cubData )
+{
+	g_Logger->AppendFile( "EMsgLog.txt", "Incoming EMsg: %s\r\n", PchNameFromEMsg( eMsg ) );
+
+	if ( eMsg == k_EMsgChannelEncryptResult )
+	{
+		MsgHdr_t *pMsgHdr = (MsgHdr_t *)pData;
+		MsgChannelEncryptResult_t *pMsgBody = (MsgChannelEncryptResult_t *)( pData + sizeof( MsgHdr_t ) );
+
+		if ( pMsgBody->m_EResult == k_EResultOK )
+			m_bUsingCrypto = true;
+
+	}
+
+	return true;
+}
+
 
 
 // outgoing
@@ -158,14 +201,14 @@ bool CUDPConnection::SendPacket( const uint8 *pData, uint32 cubData, const socka
 	// datagram packets don't seem to be required. v0v
 	// if ( pHdr->m_EUDPPktType == k_EUDPPktTypeDatagram )
 	// 	return false;
-
-	g_Logger->AppendFile( m_szLogPath, "<- Outgoing %s", PchStringFromUDPPktHdr( pHdr ) );
+/*
+	g_Logger->AppendFile( m_szLogFile, "<- Outgoing %s", PchStringFromUDPPktHdr( pHdr ) );
 
 	if ( pHdr->m_EUDPPktType == k_EUDPPktTypeConnect )
 	{
 		uint32 *nChallenge = (uint32 *)( pData + sizeof( UDPPktHdr_t ) );
 		uint32 nChal =  *nChallenge ^ k_nChallengeMask;
-		g_Logger->AppendFile( m_szLogPath,
+		g_Logger->AppendFile( m_szLogFile,
 
 			"  Challenge Data:\r\n"
 			"    nChallenge = %d\r\n",
@@ -179,29 +222,29 @@ bool CUDPConnection::SendPacket( const uint8 *pData, uint32 cubData, const socka
 		{
 			MsgHdr_t *pMsgHdr = (MsgHdr_t *)( pData + sizeof( UDPPktHdr_t ) );
 
-			g_Logger->AppendFile( m_szLogPath, "%s", PchStringFromMsgHdr( pMsgHdr ) );
+			g_Logger->AppendFile( m_szLogFile, "%s", PchStringFromMsgHdr( pMsgHdr ) );
 
 			if ( pMsgHdr->m_EMsg == k_EMsgChannelEncryptResponse )
 			{
 				MsgChannelEncryptResponse_t *pMsgEncrypt = (MsgChannelEncryptResponse_t *)( pData + sizeof( UDPPktHdr_t ) + sizeof ( MsgHdr_t ) );
 
-				g_Logger->AppendFile( m_szLogPath, "  MsgChannelEncryptResponse\r\n" );
-				g_Logger->AppendFile( m_szLogPath, "    m_unProtocolVer = %u\r\n", pMsgEncrypt->m_unProtocolVer );
-				g_Logger->AppendFile( m_szLogPath, "    m_cubEncryptedKey = %u\r\n", pMsgEncrypt->m_cubEncryptedKey );
+				g_Logger->AppendFile( m_szLogFile, "  MsgChannelEncryptResponse\r\n" );
+				g_Logger->AppendFile( m_szLogFile, "    m_unProtocolVer = %u\r\n", pMsgEncrypt->m_unProtocolVer );
+				g_Logger->AppendFile( m_szLogFile, "    m_cubEncryptedKey = %u\r\n", pMsgEncrypt->m_cubEncryptedKey );
 			}
 		
 		}
 		else if ( m_bUsingCrypto )
 		{
 			const uint8 *pCryptedData = ( pData + sizeof( UDPPktHdr_t ) );
-			uint32 cubDataSize = pHdr->m_cbMsgData * 2;
+			uint32 cubDataSize = pHdr->m_cbPkt * 2;
 			uint8 *pPlaintextData = new uint8[ cubDataSize ]; // just to be sure!
 
-			bool bCrypt = g_Crypto->SymmetricDecrypt( pCryptedData, pHdr->m_cbMsgData, pPlaintextData, &cubDataSize, g_Crypto->GetSessionKey(), 32 );
+			bool bCrypt = g_Crypto->SymmetricDecrypt( pCryptedData, pHdr->m_cbPkt, pPlaintextData, &cubDataSize, g_Crypto->GetSessionKey(), 32 );
 
 			ExtendedClientMsgHdr_t *pExtHdr = (ExtendedClientMsgHdr_t *)pPlaintextData;
 
-			g_Logger->AppendFile( m_szLogPath, "%s", PchStringFromExtendedClientMsgHdr( pExtHdr ) );
+			g_Logger->AppendFile( m_szLogFile, "%s", PchStringFromExtendedClientMsgHdr( pExtHdr ) );
 
 			delete[] pPlaintextData;
 		}
@@ -210,12 +253,12 @@ bool CUDPConnection::SendPacket( const uint8 *pData, uint32 cubData, const socka
 			int cubPktMsg = pHdr->m_cbPkt;
 			int cubMsg = pHdr->m_cbMsgData;
 
-			g_Logger->AppendFile( m_szLogPath, "  Data:\r\n    %s", PchStringFromData( pData + sizeof( UDPPktHdr_t ), cubPktMsg ) );
+			g_Logger->AppendFile( m_szLogFile, "  Data:\r\n    %s", PchStringFromData( pData + sizeof( UDPPktHdr_t ), cubPktMsg ) );
 		}
 	}
 
 
-	g_Logger->AppendFile( m_szLogPath, "\r\n\r\n" );
-
+	g_Logger->AppendFile( m_szLogFile, "\r\n\r\n" );
+*/
 	return true;
 }

@@ -27,17 +27,12 @@ public:
 
 private:
 	uint8 m_rghSessionKey[ 32 ];
+	bool m_bSessionGen;
 
 };
 
 
 extern CCrypto *g_Crypto;
-
-
-
-//SETUP_DETOUR_EXTERN( bool, __cdecl, CCrypto_SymmetricEncrypt, ( const uint8 *pubPlaintextData, uint32 cubPlaintextData, uint8 *pubEncryptedData, uint32 *pcubEncryptedData, uint32 cubKey ) );
-//SETUP_DETOUR_EXTERN( bool, __cdecl, CCrypto_SymmetricDecrypt, ( const uint8 *pubEncryptedData, uint32 cubEncryptedData, uint8 *pubPlaintextData, uint32 *pcubPlaintextData, const uint8 *pubKey, uint32 cubKey ) );
-SETUP_DETOUR_EXTERN( void, __cdecl, CCrypto_GenerateRandomBlock, ( uint8 *pubDest ) );
 
 
 #endif // !CRYPTO_H_
