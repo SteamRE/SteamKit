@@ -5,16 +5,10 @@
 #pragma once
 #endif
 
-#include "logger.h"
-
 
 #include "steam/steamtypes.h"
 #include "steam/csteamid.h"
 #include "steam/udppkt.h"
-
-
-const char *PchNameFromENetType( ENetType eNetType );
-const char *PchNameFromENetDirection( ENetDirection eNetDirection );
 
 
 const char *PchStringFromUDPPktHdr( const UDPPktHdr_t *pHdr );

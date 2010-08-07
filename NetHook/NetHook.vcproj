@@ -188,6 +188,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\netpacket.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\udpconnection.cpp"
 				>
 			</File>
@@ -213,6 +217,10 @@
 			</File>
 			<File
 				RelativePath=".\logger.h"
+				>
+			</File>
+			<File
+				RelativePath=".\netpacket.h"
 				>
 			</File>
 			<File

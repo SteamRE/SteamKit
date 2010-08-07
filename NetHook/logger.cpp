@@ -20,60 +20,6 @@ CLogger::CLogger( const char *szBaseDir )
 	CreateDirectoryA( m_szDir, NULL );
 }
 
-void CLogger::LogPacket( ENetType eNetType, ENetDirection eNetDirection, const uint8 *pData, uint32 cubData, uint32 ip, uint16 port )
-{
-	if ( cubData == 0 )
-	{
-		//this->LogConsole( "[ %s ] 0 bytes. Direction: %s\n", PchNameFromENetType( eNetType ), PchNameFromENetDirection( eNetDirection ) );
-		return;
-	}
-
-	int count = m_typeCounts[ eNetType ];
-
-	static char szBinPath[ MAX_PATH ];
-	static char szMetaPath[ MAX_PATH ];
-
-	memset( szBinPath, 0, MAX_PATH );
-	memset( szMetaPath, 0, MAX_PATH );
-
-	sprintf_s( szBinPath, MAX_PATH, "%s\\%s\\", m_szDir, PchNameFromENetType( eNetType ) );
-	sprintf_s( szMetaPath, MAX_PATH, "%s\\%s\\", m_szDir, PchNameFromENetType( eNetType ) );
-
-	CreateDirectoryA( szBinPath, NULL );
-
-	sprintf_s( szBinPath, MAX_PATH, "%s\\%d_%s.dump", szBinPath, count, PchNameFromENetDirection( eNetDirection ) );
-	sprintf_s( szMetaPath, MAX_PATH, "%s\\%d_%s.txt", szMetaPath, count, PchNameFromENetDirection( eNetDirection ) );
-
-	m_typeCounts[ eNetType ]++;
-
-	const char *szIp = NULL;
-
-	if ( ip != 0 )
-		szIp = inet_ntoa( *( ( in_addr *)&ip ) );
-
-	this->LogFileData( szBinPath, pData, cubData );
-	this->LogFile( szMetaPath, "%s Packet #%d\r\n%d bytes.\r\n%s: %s:%d\r\n",
-		PchNameFromENetType( eNetType ),
-		count,
-		cubData,
-		( eNetDirection == eNetDirection_Recv ? "From" : "To" ),
-		( szIp == NULL ? "unknown" : szIp ),
-		port
-	);
-
-
-	this->LogConsole( "[ %s ] %s %d bytes.\n", PchNameFromENetType( eNetType ), PchNameFromENetDirection( eNetDirection ), cubData );
-	if ( ip != 0 )
-	{
-		this->LogConsole( "  %s %s:%d\n",
-			( eNetDirection == eNetDirection_Recv ? "From" : "To" ),
-			( szIp == NULL ? "unknown" : szIp ),
-			port
-		);
-	}
-
-	this->LogConsole( "\n" );
-}
 
 void CLogger::LogConsole( const char *szFmt, ... )
 {
@@ -101,7 +47,20 @@ void CLogger::LogFile( const char *szFileName, const char *szString, ... )
 
 	int len = vsprintf_s( szBuff, sizeof( szBuff ), szString, args );
 
-	this->LogFileData( szFileName, (uint8 *)szBuff, len );
+	this->LogFileData( GetFileDir( szFileName ), (uint8 *)szBuff, len );
+}
+
+void CLogger::AppendFile( const char *szFileName, const char *szString, ... )
+{
+	static char szBuff[ 1024 * 100 ];
+	memset( szBuff, 0, sizeof( szBuff ) );
+
+	va_list args;
+	va_start( args, szString );
+
+	int len = vsprintf_s( szBuff, sizeof( szBuff ), szString, args );
+
+	this->LogFileData( GetFileDir( szFileName ), (uint8 *)szBuff, len, true );
 }
 
 void CLogger::LogFileData( const char *szFileName, const uint8 *pData, uint32 cubData, bool bAppend )
@@ -121,16 +80,14 @@ void CLogger::LogFileData( const char *szFileName, const uint8 *pData, uint32 cu
 
 	CloseHandle( hFile );
 }
-void CLogger::AppendFile( const char *szFileName, const char *szString, ... )
+
+
+const char *CLogger::GetFileDir( const char *szFile )
 {
-	static char szBuff[ 1024 * 100 ];
-	memset( szBuff, 0, sizeof( szBuff ) );
+	static char szFilePath[ MAX_PATH ];
+	memset( szFilePath, 0, sizeof( szFilePath ) );
 
-	va_list args;
-	va_start( args, szString );
+	sprintf_s( szFilePath, sizeof( szFilePath ), "%s\\%s", m_szDir, szFile );
 
-	int len = vsprintf_s( szBuff, sizeof( szBuff ), szString, args );
-
-	this->LogFileData( szFileName, (uint8 *)szBuff, len, true );
+	return szFilePath;
 }
-

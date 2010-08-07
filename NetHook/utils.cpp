@@ -1,38 +1,8 @@
 
+
 #include "utils.h"
 
-
-const char *k_szNetTypes[] =
-{
-	"Invalid",
-
-	"TCP",
-	"UDP",
-};
-
-const char *k_szNetDirections[] =
-{
-	"Invalid",
-
-	"Send",
-	"Recv",
-};
-
-const char *PchNameFromENetType( ENetType eNetType )
-{
-	if ( eNetType <= 0 || eNetType >= eNetType_Max )
-		return k_szNetTypes[ 0 ];
-
-	return k_szNetTypes[ (int)eNetType ];
-}
-
-const char *PchNameFromENetDirection( ENetDirection eNetDirection )
-{
-	if ( eNetDirection <= 0 || eNetDirection >= eNetDriection_Max )
-		return k_szNetDirections[ 0 ];
-
-	return k_szNetDirections[ (int)eNetDirection ];
-}
+#include <string>
 
 
 const char *k_szEUDPPktTypes[] =

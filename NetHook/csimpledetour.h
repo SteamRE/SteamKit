@@ -50,4 +50,7 @@ private:
 	extern ret ( conv *name##_T ) params; \
 	extern CSimpleDetour *Detour_##name
 
+#define SETUP_DETOUR_TRAMP( ret, conv, name, params ) \
+	ret ( conv *name##_T ) params = NULL; \
+
 #endif // !CSIMPLEDETOUR_H_
