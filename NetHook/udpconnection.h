@@ -33,17 +33,28 @@ public:
 	bool ReceiveDatagram( const UDPPktHdr_t *pHdr, const uint8 *pData, uint32 cubData );
 	bool ReceiveChallenge( const UDPPktHdr_t *pHdr, const uint8 *pData, uint32 cubData );
 	bool ReceiveData( const UDPPktHdr_t *pHdr, const uint8 *pData, uint32 cubData );
+	bool ReceiveAccept( const UDPPktHdr_t *pHdr, const uint8 *pData, uint32 cubData );
 
 	bool ReceiveNetPacket( const UDPPktHdr_t *pHdr, CNetPacket *pPacket );
 
+
 	bool SendPacket( const uint8 *pData, uint32 cubData, const sockaddr_in *sockAddr );
 
+	bool SendChallengeReq( const UDPPktHdr_t *pHdr, const uint8 *pData, uint32 cubData );
+	bool SendDatagram( const UDPPktHdr_t *pHdr, const uint8 *pData, uint32 cubData );
+	bool SendData( const UDPPktHdr_t *pHdr, const uint8 *pData, uint32 cubData );
+	bool SendConnect( const UDPPktHdr_t *pHdr, const uint8 *pData, uint32 cubData );
 
-	bool HandleNetMsg( EMsg eMsg, const uint8 *pData, uint32 cubData );
+	bool SendNetPacket( const UDPPktHdr_t *pHdr, CNetPacket *pPacket );
+
+
+	bool ReceiveNetMsg( EMsg eMsg, const uint8 *pData, uint32 cubData );
+	bool SendNetMsg( EMsg eMsg, const uint8 *pData, uint32 cubData );
 
 
 private:
-	PacketMap m_packetMap;
+	PacketMap m_recvMap;
+	PacketMap m_sendMap;
 
 	bool m_bUsingCrypto;
 	static const char m_szLogFile[];
