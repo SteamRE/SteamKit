@@ -24,8 +24,19 @@ CUDPConnection::CUDPConnection() :
 	m_bUsingCrypto = false;
 }
 
-// incoming
+
 bool CUDPConnection::ReceivePacket( const uint8 *pData, uint32 cubData, const sockaddr_in *sockAddr )
+{
+	return this->HandlePacket( k_eNetIncoming, pData, cubData, sockAddr );
+}
+
+bool CUDPConnection::SendPacket( const uint8 *pData, uint32 cubData, const sockaddr_in *sockAddr )
+{
+	return this->HandlePacket( k_eNetOutgoing, pData, cubData, sockAddr );
+}
+
+
+bool CUDPConnection::HandlePacket( ENetDirection eDirection, const uint8 *pData, uint32 cubData, const sockaddr_in *sockAddr )
 {
 	if ( cubData < sizeof( UDPPktHdr_t ) )
 	{
@@ -35,17 +46,14 @@ bool CUDPConnection::ReceivePacket( const uint8 *pData, uint32 cubData, const so
 
 	UDPPktHdr_t *pHdr = (UDPPktHdr_t *)pData;
 
+
 	if ( pHdr->m_nMagic == -1 )
 		return true; // we don't need OOB traffic
 
-	if ( pHdr->m_nMagic != k_nMagic )
-	{
-		g_Logger->LogConsole( "Got UDP packet with incorrect magic!\n" );
-		return true;
-	}
 
-	g_Logger->AppendFile( m_szLogFile, "-> Incoming %s", PchStringFromUDPPktHdr( pHdr ) );
+	Assert( pHdr->m_nMagic == k_nMagic );
 
+	g_Logger->AppendFile( m_szLogFile, "<- %s %s", ( eDirection == k_eNetIncoming ? "Incoming" : "Outgoing" ), PchStringFromUDPPktHdr( pHdr ) );
 
 	size_t headerSize = sizeof( UDPPktHdr_t );
 
@@ -54,35 +62,35 @@ bool CUDPConnection::ReceivePacket( const uint8 *pData, uint32 cubData, const so
 
 	if ( pHdr->m_EUDPPktType == k_EUDPPktTypeDatagram )
 	{
-		return this->ReceiveDatagram( pHdr, pData, cubData );
+		return this->HandleDatagram( k_eNetOutgoing, pHdr, pData, cubData );
 	}
-	else if ( pHdr->m_EUDPPktType == k_EUDPPktTypeChallenge )
+	else if ( pHdr->m_EUDPPktType == k_EUDPPktTypeChallengeReq )
 	{
-		return this->ReceiveChallenge( pHdr, pData, cubData );
+		return this->HandleChallengeReq( k_eNetOutgoing, pHdr, pData, cubData );
 	}
 	else if ( pHdr->m_EUDPPktType == k_EUDPPktTypeData )
 	{
-		return this->ReceiveData( pHdr, pData, cubData );
+		return this->HandleData( k_eNetOutgoing, pHdr, pData, cubData );
 	}
-	else if ( pHdr->m_EUDPPktType == k_EUDPPktTypeAccept )
+	else if ( pHdr->m_EUDPPktType == k_EUDPPktTypeConnect )
 	{
-		return this->ReceiveAccept( pHdr, pData, cubData );
+		return this->HandleConnect( k_eNetOutgoing, pHdr, pData, cubData );
 	}
 
 	g_Logger->AppendFile( m_szLogFile, "Unhandled packet type: %s\r\n\r\n", PchNameFromEUDPPktType( (EUDPPktType)pHdr->m_EUDPPktType ) );
 
-	return true;	
+	return true;
 }
 
 
-bool CUDPConnection::ReceiveDatagram( const UDPPktHdr_t *pHdr, const uint8 *pData, uint32 cubData )
+bool CUDPConnection::HandleDatagram( ENetDirection eDirection, const UDPPktHdr_t *pHdr, const uint8 *pData, uint32 cubData )
 {
 	g_Logger->AppendFile( m_szLogFile, "\r\n" );
 
 	return true;
 }
 
-bool CUDPConnection::ReceiveChallenge( const UDPPktHdr_t *pHdr, const uint8 *pData, uint32 cubData )
+bool CUDPConnection::HandleChallenge( ENetDirection eDirection, const UDPPktHdr_t *pHdr, const uint8 *pData, uint32 cubData )
 {
 	struct ChallengeData_t
 	{
@@ -106,48 +114,63 @@ bool CUDPConnection::ReceiveChallenge( const UDPPktHdr_t *pHdr, const uint8 *pDa
 
 	return true;
 }
-
-bool CUDPConnection::ReceiveData( const UDPPktHdr_t *pHdr, const uint8 *pData, uint32 cubData )
+bool CUDPConnection::HandleChallengeReq( ENetDirection eDirection, const UDPPktHdr_t *pHdr, const uint8 *pData, uint32 cubData )
 {
 	g_Logger->AppendFile( m_szLogFile, "\r\n" );
 
+	return true;
+}
+bool CUDPConnection::HandleAccept( ENetDirection eDirection, const UDPPktHdr_t *pHdr, const uint8 *pData, uint32 cubData )
+{
+	g_Logger->AppendFile( m_szLogFile, "\r\n" );
+
+	return true;
+}
+bool CUDPConnection::HandleConnect( ENetDirection eDirection, const UDPPktHdr_t *pHdr, const uint8 *pData, uint32 cubData )
+{
+	g_Logger->AppendFile( m_szLogFile, "\r\n" );
+
+	return true;
+}
+bool CUDPConnection::HandleData( ENetDirection eDirection, const UDPPktHdr_t *pHdr, const uint8 *pData, uint32 cubData )
+{
 	CNetPacket *pPacket = NULL;
 
-	PacketMapIndex index = m_recvMap.Find( pHdr->m_nMsgStartSeq );
+	PacketMap *pMap;
 
+	if ( eDirection == k_eNetIncoming )
+		pMap = &m_recvMap;
+	else
+		pMap = &m_sendMap;
 
-	if ( index != m_recvMap.InvalidIndex() )
-	{
-		pPacket = m_recvMap[ index ];
-	}
+	PacketMapIndex index = pMap->Find( pHdr->m_nMsgStartSeq );
+
+	if ( index != pMap->InvalidIndex() )
+		pPacket = pMap->Element( index );
 	else
 	{
 		pPacket = new CNetPacket( pHdr->m_nMsgStartSeq, pHdr->m_nPktsInMsg, m_bUsingCrypto );
 
-		m_recvMap.Insert( pHdr->m_nMsgStartSeq, pPacket );
+		pMap->Insert( pHdr->m_nMsgStartSeq, pPacket );
 	}
 
 	pPacket->AddData( pHdr, pData, cubData );
 
 	if ( pPacket->IsCompleted() )
-		return this->ReceiveNetPacket( pHdr, pPacket );
+		return this->HandleNetPacket( eDirection, pHdr, pPacket );
 
 	return true;
 }
 
-bool CUDPConnection::ReceiveAccept( const UDPPktHdr_t *pHdr, const uint8 *pData, uint32 cubData )
-{
-	g_Logger->AppendFile( m_szLogFile, "\r\n" );
-
-	return true;
-}
-
-bool CUDPConnection::ReceiveNetPacket( const UDPPktHdr_t *pHdr, CNetPacket *pPacket )
+bool CUDPConnection::HandleNetPacket( ENetDirection eDirection, const UDPPktHdr_t *pHdr, CNetPacket *pPacket )
 {
 	uint8 *pData = pPacket->GetData();
 	uint32 cubData = pPacket->GetSize();
 
-	m_recvMap.Remove( pHdr->m_nMsgStartSeq );
+	if ( eDirection == k_eNetIncoming )
+		m_recvMap.Remove( pHdr->m_nMsgStartSeq );
+	else
+		m_sendMap.Remove( pHdr->m_nMsgStartSeq );
 
 	// decrypt the data before we handle it
 	if ( m_bUsingCrypto )
@@ -170,20 +193,14 @@ bool CUDPConnection::ReceiveNetPacket( const UDPPktHdr_t *pHdr, CNetPacket *pPac
 
 	// handle the net message
 	EMsg *pEMsg = (EMsg *)pData;
-	bool bRet = this->ReceiveNetMsg( *pEMsg, pData, cubData );
+	bool bRet = this->HandleNetMsg( eDirection, *pEMsg, pData, cubData );
 
 	delete [] pData;
 	return bRet;
 }
 
-bool CUDPConnection::ReceiveNetMsg( EMsg eMsg, const uint8 *pData, uint32 cubData )
+bool CUDPConnection::HandleNetMsg( ENetDirection eDirection, EMsg eMsg, const uint8 *pData, uint32 cubData )
 {
-	if ( eMsg != k_EMsgMulti )
-	{
-		g_Logger->AppendFile( "EMsgLog.txt", "Incoming EMsg: %s ( %s)\r\n", PchNameFromEMsg( eMsg ), PchStringFromData( pData, 4 ) );
-		//g_Logger->AppendFile( "EMsgLog.txt", "  Data: %s\r\n\r\n", PchStringFromData( pData, cubData ) );
-	}
-
 	if ( eMsg == k_EMsgChannelEncryptResult )
 	{
 		MsgHdr_t *pMsgHdr = (MsgHdr_t *)pData;
@@ -194,208 +211,72 @@ bool CUDPConnection::ReceiveNetMsg( EMsg eMsg, const uint8 *pData, uint32 cubDat
 
 	}
 
-
 	if ( eMsg == k_EMsgMulti )
+		return this->MultiplexMsgMulti( eDirection, pData, cubData );
+
+	g_Logger->AppendFile( "EMsgLog.txt", "%s EMsg: %s ( %s)\r\n", ( eDirection == k_eNetIncoming ? "Incoming" : "Outgoing" ), PchNameFromEMsg( eMsg ), PchStringFromData( pData, 4 ) );
+
+	return true;
+}
+
+bool CUDPConnection::MultiplexMsgMulti( ENetDirection eDirection, const uint8 * pData, uint32 cubData )
+{
+
+	MsgHdr_t *pMsgHdr = (MsgHdr_t *)pData;
+	MsgMulti_t *pMsgBody = (MsgMulti_t *)( pData + sizeof( MsgHdr_t ) );
+
+	size_t hdrSize = sizeof( MsgHdr_t ) + sizeof( MsgMulti_t );
+
+	uint8 *pMsgData = NULL;
+	uint32 cubMsgData = 0;
+	bool bDecomp = false;
+
+	if ( pMsgBody->m_cubUnzipped != 0 )
 	{
-		MsgHdr_t *pMsgHdr = (MsgHdr_t *)pData;
-		MsgMulti_t *pMsgBody = (MsgMulti_t *)( pData + sizeof( MsgHdr_t ) );
+		// decompress our data
 
-		size_t hdrSize = sizeof( MsgHdr_t ) + sizeof( MsgMulti_t );
+		uint8 *pDecompressed = new uint8[ pMsgBody->m_cubUnzipped ];
+		uint8 *pCompressed = (uint8 *)( pData + hdrSize );
+		uint32 cubCompressed = cubData - hdrSize;
 
-		uint8 *pMsgData = NULL;
-		uint32 cubMsgData = 0;
+		bool bZip = CZip::Inflate( pCompressed, cubCompressed, pDecompressed, pMsgBody->m_cubUnzipped );
 
-		if ( pMsgBody->m_cubUnzipped != 0 )
+		if ( !bZip )
 		{
-			// decompress our data
+			delete [] pDecompressed;
 
-			uint8 *pDecompressed = new uint8[ pMsgBody->m_cubUnzipped ];
-			uint8 *pCompressed = (uint8 *)( pData + hdrSize );
-			uint32 cubCompressed = cubData - hdrSize;
+			g_Logger->AppendFile( "EMsgLog.txt", "Decompression failed!!\r\n" );
 
-			bool bZip = CZip::Inflate( pCompressed, cubCompressed, pDecompressed, pMsgBody->m_cubUnzipped );
-
-			if ( !bZip )
-			{
-				delete [] pDecompressed;
-
-				g_Logger->AppendFile( "EMsgLog.txt", "Decompression failed!!\r\n" );
-
-				return true;
-			}
-
-			pMsgData = pDecompressed;
-			cubMsgData = pMsgBody->m_cubUnzipped;
-		}
-		else
-		{
-			pMsgData = (uint8 *)( pData + hdrSize );
-			cubMsgData = cubData - hdrSize;
-		}
-
-		bf_read reader( pMsgData, cubMsgData );
-
-		//g_Logger->AppendFile( "EMsgLog.txt", "Data: %s\r\n", PchStringFromData( pMsgData, cubMsgData ) );
-
-		
-		while ( reader.GetNumBytesLeft() > 0 )
-		{
-			uint32 cubPayload = (uint32)reader.ReadLong();
-			int off = reader.GetNumBitsRead() >> 3;
-
-			uint8 *pPayload = (uint8 *)( pMsgData + off );
-			EMsg *pEMsg = (EMsg *)pPayload;
-
-			reader.SeekRelative( cubPayload << 3 );
-
-			this->ReceiveNetMsg( *pEMsg, pPayload, cubPayload );
+			return true;
 		}
 
-	}
-
-	return true;
-}
-
-
-
-// outgoing
-bool CUDPConnection::SendPacket( const uint8 *pData, uint32 cubData, const sockaddr_in *sockAddr )
-{
-	if ( cubData < sizeof( UDPPktHdr_t ) )
-	{
-		g_Logger->LogConsole( "Got UDP packet smaller than sizeof( UDPPktHdr_t )!\n" );
-		return true;
-	}
-
-	UDPPktHdr_t *pHdr = (UDPPktHdr_t *)pData;
-
-	if ( pHdr->m_nMagic == -1 )
-		return true; // we don't need OOB traffic
-
-	if ( pHdr->m_nMagic != k_nMagic )
-	{
-		g_Logger->LogConsole( "Got UDP packet with incorrect magic!\n" );
-		return true;
-	}
-
-	g_Logger->AppendFile( m_szLogFile, "<- Outgoing %s", PchStringFromUDPPktHdr( pHdr ) );
-
-	size_t headerSize = sizeof( UDPPktHdr_t );
-
-	pData += headerSize;
-	cubData -= headerSize;
-
-	if ( pHdr->m_EUDPPktType == k_EUDPPktTypeDatagram )
-	{
-		return this->SendDatagram( pHdr, pData, cubData );
-	}
-	else if ( pHdr->m_EUDPPktType == k_EUDPPktTypeChallengeReq )
-	{
-		return this->SendChallengeReq( pHdr, pData, cubData );
-	}
-	else if ( pHdr->m_EUDPPktType == k_EUDPPktTypeData )
-	{
-		return this->SendData( pHdr, pData, cubData );
-	}
-	else if ( pHdr->m_EUDPPktType == k_EUDPPktTypeConnect )
-	{
-		return this->SendConnect( pHdr, pData, cubData );
-	}
-
-	g_Logger->AppendFile( m_szLogFile, "Unhandled packet type: %s\r\n\r\n", PchNameFromEUDPPktType( (EUDPPktType)pHdr->m_EUDPPktType ) );
-
-	return true;
-}
-
-
-bool CUDPConnection::SendChallengeReq( const UDPPktHdr_t *pHdr, const uint8 *pData, uint32 cubData )
-{
-	g_Logger->AppendFile( m_szLogFile, "\r\n" );
-
-	return true;
-}
-bool CUDPConnection::SendDatagram( const UDPPktHdr_t *pHdr, const uint8 *pData, uint32 cubData )
-{
-	g_Logger->AppendFile( m_szLogFile, "\r\n" );
-
-	return true;
-}
-bool CUDPConnection::SendData( const UDPPktHdr_t *pHdr, const uint8 *pData, uint32 cubData )
-{
-
-	g_Logger->AppendFile( m_szLogFile, "\r\n" );
-
-	CNetPacket *pPacket = NULL;
-
-	PacketMapIndex index = m_sendMap.Find( pHdr->m_nMsgStartSeq );
-
-
-	if ( index != m_sendMap.InvalidIndex() )
-	{
-		pPacket = m_sendMap[ index ];
+		pMsgData = pDecompressed;
+		cubMsgData = pMsgBody->m_cubUnzipped;
+		bDecomp = bZip;
 	}
 	else
 	{
-		pPacket = new CNetPacket( pHdr->m_nMsgStartSeq, pHdr->m_nPktsInMsg, m_bUsingCrypto );
-
-		m_sendMap.Insert( pHdr->m_nMsgStartSeq, pPacket );
+		pMsgData = (uint8 *)( pData + hdrSize );
+		cubMsgData = cubData - hdrSize;
 	}
 
-	pPacket->AddData( pHdr, pData, cubData );
+	bf_read reader( pMsgData, cubMsgData );
 
-	if ( pPacket->IsCompleted() )
-		return this->SendNetPacket( pHdr, pPacket );
-
-
-	return true;
-}
-
-bool CUDPConnection::SendConnect( const UDPPktHdr_t *pHdr, const uint8 *pData, uint32 cubData )
-{
-	g_Logger->AppendFile( m_szLogFile, "\r\n" );
-
-	return true;
-}
-
-bool CUDPConnection::SendNetPacket( const UDPPktHdr_t *pHdr, CNetPacket *pPacket )
-{
-	uint8 *pData = pPacket->GetData();
-	uint32 cubData = pPacket->GetSize();
-
-	m_sendMap.Remove( pHdr->m_nMsgStartSeq );
-
-	// decrypt the data before we handle it
-	if ( m_bUsingCrypto )
+	while ( reader.GetNumBytesLeft() > 0 )
 	{
-		uint32 cubDecrypted = cubData * 2;
-		uint8 *pDecrypted = new uint8[ cubDecrypted ];
+		uint32 cubPayload = (uint32)reader.ReadLong();
+		int off = reader.GetNumBitsRead() >> 3;
 
-		bool bCrypt = g_Crypto->SymmetricDecrypt( pData, cubData, pDecrypted, &cubDecrypted, g_Crypto->GetSessionKey(), 32 );
+		uint8 *pPayload = (uint8 *)( pMsgData + off );
+		EMsg *pEMsg = (EMsg *)pPayload;
 
-		if ( bCrypt )
-		{
-			cubData = cubDecrypted;
+		reader.SeekRelative( cubPayload << 3 );
 
-			delete [] pData;
-			pData = pDecrypted;
-		}
-		else
-			g_Logger->AppendFile( "EMsgLog.txt", "Failed crypto!!\r\n" );
+		this->HandleNetMsg( eDirection, *pEMsg, pPayload, cubPayload );
 	}
 
-	// handle the net message
-	EMsg *pEMsg = (EMsg *)pData;
-	bool bRet = this->SendNetMsg( *pEMsg, pData, cubData );
-
-	delete [] pData;
-	return bRet;
-}
-
-bool CUDPConnection::SendNetMsg( EMsg eMsg, const uint8 *pData, uint32 cubData )
-{
-	g_Logger->AppendFile( "EMsgLog.txt", "Outgoing EMsg: %s ( %s)\r\n", PchNameFromEMsg( eMsg ), PchStringFromData( pData, 4 ) );
-
-	//g_Logger->AppendFile( "EMsgLog.txt", "  Data: %s\r\n", PchStringFromData( pData, cubData ) );
+	if ( bDecomp )
+		delete [] pMsgData;
 
 	return true;
 }

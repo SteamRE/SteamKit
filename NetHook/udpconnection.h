@@ -21,6 +21,13 @@ typedef CUtlMap< uint32, CNetPacket * > PacketMap;
 typedef PacketMap::IndexType_t PacketMapIndex;
 
 
+enum ENetDirection
+{
+	k_eNetIncoming,
+	k_eNetOutgoing,
+};
+
+
 class CUDPConnection
 {
 
@@ -29,27 +36,21 @@ public:
 
 
 	bool ReceivePacket( const uint8 *pData, uint32 cubData, const sockaddr_in *sockAddr );
-
-	bool ReceiveDatagram( const UDPPktHdr_t *pHdr, const uint8 *pData, uint32 cubData );
-	bool ReceiveChallenge( const UDPPktHdr_t *pHdr, const uint8 *pData, uint32 cubData );
-	bool ReceiveData( const UDPPktHdr_t *pHdr, const uint8 *pData, uint32 cubData );
-	bool ReceiveAccept( const UDPPktHdr_t *pHdr, const uint8 *pData, uint32 cubData );
-
-	bool ReceiveNetPacket( const UDPPktHdr_t *pHdr, CNetPacket *pPacket );
-
-
 	bool SendPacket( const uint8 *pData, uint32 cubData, const sockaddr_in *sockAddr );
 
-	bool SendChallengeReq( const UDPPktHdr_t *pHdr, const uint8 *pData, uint32 cubData );
-	bool SendDatagram( const UDPPktHdr_t *pHdr, const uint8 *pData, uint32 cubData );
-	bool SendData( const UDPPktHdr_t *pHdr, const uint8 *pData, uint32 cubData );
-	bool SendConnect( const UDPPktHdr_t *pHdr, const uint8 *pData, uint32 cubData );
+	bool HandlePacket( ENetDirection eDirection, const uint8 *pData, uint32 cubData, const sockaddr_in *sockAddr );
 
-	bool SendNetPacket( const UDPPktHdr_t *pHdr, CNetPacket *pPacket );
+	bool HandleDatagram( ENetDirection eDirection, const UDPPktHdr_t *pHdr, const uint8 *pData, uint32 cubData );
+	bool HandleChallenge( ENetDirection eDirection, const UDPPktHdr_t *pHdr, const uint8 *pData, uint32 cubData );
+	bool HandleChallengeReq( ENetDirection eDirection, const UDPPktHdr_t *pHdr, const uint8 *pData, uint32 cubData );
+	bool HandleAccept( ENetDirection eDirection, const UDPPktHdr_t *pHdr, const uint8 *pData, uint32 cubData );
+	bool HandleConnect( ENetDirection eDirection, const UDPPktHdr_t *pHdr, const uint8 *pData, uint32 cubData );
+	bool HandleData( ENetDirection eDirection, const UDPPktHdr_t *pHdr, const uint8 *pData, uint32 cubData );
 
+	bool HandleNetPacket( ENetDirection eDirection, const UDPPktHdr_t *pHdr, CNetPacket *pPacket );
+	bool HandleNetMsg( ENetDirection eDirection, EMsg eMsg, const uint8 *pData, uint32 cubData );
 
-	bool ReceiveNetMsg( EMsg eMsg, const uint8 *pData, uint32 cubData );
-	bool SendNetMsg( EMsg eMsg, const uint8 *pData, uint32 cubData );
+	bool MultiplexMsgMulti( ENetDirection eDirection, const uint8 *pData, uint32 cubData );
 
 
 private:
