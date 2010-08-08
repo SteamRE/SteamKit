@@ -10,6 +10,8 @@
 #include "steam/csteamid.h"
 #include "steam/clientmsgs.h"
 
+#include "bitbuf.h"
+
 
 const char CUDPConnection::m_szLogFile[] = "UdpLog.txt";
 
@@ -163,6 +165,9 @@ bool CUDPConnection::HandleNetMsg( EMsg eMsg, const uint8 *pData, uint32 cubData
 {
 	g_Logger->AppendFile( "EMsgLog.txt", "Incoming EMsg: %s\r\n", PchNameFromEMsg( eMsg ) );
 
+	g_Logger->AppendFile( "EMsgLog.txt", "  Data: %s\r\n\r\n", PchStringFromData( pData, 4 ) );
+
+
 	if ( eMsg == k_EMsgChannelEncryptResult )
 	{
 		MsgHdr_t *pMsgHdr = (MsgHdr_t *)pData;
@@ -171,6 +176,32 @@ bool CUDPConnection::HandleNetMsg( EMsg eMsg, const uint8 *pData, uint32 cubData
 		if ( pMsgBody->m_EResult == k_EResultOK )
 			m_bUsingCrypto = true;
 
+	}
+
+	bf_read reader( (void *)pData, cubData );
+
+	if ( eMsg == k_EMsgMulti )
+	{
+		MsgHdr_t *pMsgHdr = (MsgHdr_t *)pData;
+		MsgMulti_t *pMsgBody = (MsgMulti_t *)( pData + sizeof( MsgHdr_t ) );
+
+		size_t hdrSize = sizeof( MsgHdr_t ) + sizeof( MsgMulti_t );
+		reader.Seek( hdrSize << 3 );
+
+		if ( pMsgBody->m_cubUnzipped == 0 )
+		{
+			uint32 cubPayload = (uint32)reader.ReadLong();
+
+			int off = reader.GetNumBitsRead() >> 3;
+
+			uint8 *pPayload = (uint8 *)( pData + off );
+
+			EMsg *pEMsg = (EMsg *)pPayload;
+
+			return this->HandleNetMsg( *pEMsg, pPayload, cubPayload );
+		}
+
+		// todo: handle zipped data
 	}
 
 	return true;

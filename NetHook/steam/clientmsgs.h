@@ -24,6 +24,11 @@ struct MsgChannelEncryptResult_t
 	int32 m_EResult;
 };
 
+struct MsgMulti_t
+{
+	uint32 m_cubUnzipped;
+};
+
 #pragma pack( pop )
 
 
