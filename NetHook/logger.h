@@ -22,16 +22,17 @@ public:
 
 	void LogConsole( const char *szString, ... );
 
-	void LogFile( const char *szFileName, const char *szString, ... );
 	void AppendFile( const char *szFileName, const char *szString, ... );
 
 	void LogFileData( const char *szFileName, const uint8 *pData, uint32 cubData, bool bAppend = false );
+
 
 private:
 	const char *GetFileDir( const char *szFile );
 
 private:
 	char m_szDir[ MAX_PATH ];
+
 };
 
 

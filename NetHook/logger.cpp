@@ -23,44 +23,50 @@ CLogger::CLogger( const char *szBaseDir )
 
 void CLogger::LogConsole( const char *szFmt, ... )
 {
-	static char szBuff[ 1024 * 80 ];
-	memset( szBuff, 0, sizeof( szBuff ) );
-
 	va_list args;
 	va_start( args, szFmt );
+
+	int buffSize = _vscprintf( szFmt, args ) + 1;
+
+	if ( buffSize == 0 )
+		return;
+
+	char *szBuff = new char[ buffSize ];
+	memset( szBuff, 0, buffSize );
 	
-	int len = vsprintf_s( szBuff, sizeof( szBuff ), szFmt, args );
+	int len = vsprintf_s( szBuff, buffSize, szFmt, args );
+
+	szBuff[ buffSize - 1 ] = 0;
 
 	HANDLE hOutput = GetStdHandle( STD_OUTPUT_HANDLE );
 
 	DWORD numWritten = 0;
 	WriteFile( hOutput, szBuff, len, &numWritten, NULL );
+
+	delete [] szBuff;
 }
 
-void CLogger::LogFile( const char *szFileName, const char *szString, ... )
-{
-	static char szBuff[ 1024 * 80 ];
-	memset( szBuff, 0, sizeof( szBuff ) );
-
-	va_list args;
-	va_start( args, szString );
-
-	int len = vsprintf_s( szBuff, sizeof( szBuff ), szString, args );
-
-	this->LogFileData( GetFileDir( szFileName ), (uint8 *)szBuff, len );
-}
 
 void CLogger::AppendFile( const char *szFileName, const char *szString, ... )
 {
-	static char szBuff[ 1024 * 100 ];
-	memset( szBuff, 0, sizeof( szBuff ) );
-
 	va_list args;
 	va_start( args, szString );
 
-	int len = vsprintf_s( szBuff, sizeof( szBuff ), szString, args );
+	int buffSize = _vscprintf( szString, args ) + 1;
+
+	if ( buffSize == 0 )
+		return;
+
+	char *szBuff = new char[ buffSize ];
+	memset( szBuff, 0, buffSize );
+
+	int len = vsprintf_s( szBuff, buffSize, szString, args );
+
+	szBuff[ buffSize - 1 ] = 0;
 
 	this->LogFileData( GetFileDir( szFileName ), (uint8 *)szBuff, len, true );
+
+	delete [] szBuff;
 }
 
 void CLogger::LogFileData( const char *szFileName, const uint8 *pData, uint32 cubData, bool bAppend )

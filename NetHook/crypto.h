@@ -8,8 +8,6 @@
 
 #include "csimpledetour.h"
 
-#include "cryptobuffer.h"
-
 #include "steam/steamtypes.h"
 
 
