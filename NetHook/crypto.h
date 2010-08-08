@@ -26,8 +26,6 @@ public:
 
 	void GenerateRandomBlock( uint8 *pubDest );
 
-	bool SafeUnzipMemory( const void *pvZipped, int cubZipped, void *pvDest, int cubDest );
-
 
 	uint8 *GetSessionKey() { return m_rghSessionKey; }
 
