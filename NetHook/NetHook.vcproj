@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="tier0;tier1;.;"
+				AdditionalIncludeDirectories="tier0;tier1;public;.;"
 				PreprocessorDefinitions="WIN32;_WIN32;_DEBUG;_WINDOWS;_USRDLL"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -117,7 +117,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="tier0;tier1;.;"
+				AdditionalIncludeDirectories="tier0;tier1;public;.;"
 				PreprocessorDefinitions="WIN32;_WIN32;NDEBUG;_WINDOWS;_USRDLL"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -181,6 +181,10 @@
 			</File>
 			<File
 				RelativePath=".\crypto.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\cryptobuffer.cpp"
 				>
 			</File>
 			<File
@@ -511,11 +515,19 @@
 				Name="Source"
 				>
 				<File
+					RelativePath=".\tier1\bitbuf.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\tier1\checksum_crc.cpp"
 					>
 				</File>
 				<File
 					RelativePath=".\tier1\interface.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\tier1\newbitbuf.cpp"
 					>
 				</File>
 				<File
@@ -816,6 +828,26 @@
 				>
 			</File>
 		</Filter>
+		<Filter
+			Name="public"
+			>
+			<File
+				RelativePath=".\public\bitvec.h"
+				>
+			</File>
+			<File
+				RelativePath=".\public\coordsize.h"
+				>
+			</File>
+			<File
+				RelativePath=".\public\worldsize.h"
+				>
+			</File>
+		</Filter>
+		<File
+			RelativePath=".\cryptobuffer.h"
+			>
+		</File>
 		<File
 			RelativePath=".\detours.lib"
 			>

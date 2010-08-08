@@ -12,11 +12,12 @@
 
 #include "tier0/dbg.h"
 
-#include <ctime>
 
 
 SETUP_DETOUR_TRAMP( bool, __cdecl, CCrypto_SymmetricEncrypt, ( const uint8 *pubPlaintextData, uint32 cubPlaintextData, uint8 *pubEncryptedData, uint32 *pcubEncryptedData, uint32 cubKey ) );
 SETUP_DETOUR_TRAMP( bool, __cdecl, CCrypto_SymmetricDecrypt, ( const uint8 *pubEncryptedData, uint32 cubEncryptedData, uint8 *pubPlaintextData, uint32 *pcubPlaintextData, const uint8 *pubKey, uint32 cubKey ) );
+
+SETUP_DETOUR_TRAMP( bool, __cdecl, SafeUnzipMemory, ( const void *pvZipped, int cubZipped, void *pvDest, int cubDest ) );
 
 
 SETUP_DETOUR_FUNCTION_LATE( void, __cdecl, CCrypto_GenerateRandomBlock, ( uint8 *pubDest ) )
@@ -52,6 +53,29 @@ CCrypto::CCrypto()
 	);
 
 	g_Logger->LogConsole( "CCrypto::SymmetricDecrypt = %d\n", bRet );
+
+
+	/*
+	.text:381B73C0 55                                      push    ebp
+	.text:381B73C1 8B EC                                   mov     ebp, esp
+	.text:381B73C3 6A FF                                   push    0FFFFFFFFh
+	.text:381B73C5 68 A0 73 28 38                          push    offset SEH_381B73C0
+	.text:381B73CA 64 A1 00 00 00 00                       mov     eax, large fs:0
+	.text:381B73D0 50                                      push    eax
+	.text:381B73D1 64 89 25 00 00 00 00                    mov     large fs:0, esp
+	.text:381B73D8 83 EC 0C                                sub     esp, 0Ch
+	.text:381B73DB 8B 45 08                                mov     eax, [ebp+pvZipped]
+	.text:381B73DE 53                                      push    ebx
+	.text:381B73DF 56                                      push    esi
+	*/
+
+	bRet = steamClientScan.FindFunction(
+		"\x55\x8B\xeC\x6A\xFF\x68\xA0\x73\x28\x38\x64\xA1\x00\x00\x00\x00\x50\x64\x89\x25\x00\x00\x00\x00\x83\xEC\x0C\x8B\x45\x08\x53\x56",
+		"xxxxxx????xxxxxxxxxxxxxxxxxxxxxx",
+		(void **)&SafeUnzipMemory_T
+	);
+
+	g_Logger->LogConsole( "CCrypto::BGunzipBuffer = %d\n", bRet );
 
 
 	bRet = steamClientScan.FindFunction(
@@ -108,4 +132,14 @@ void CCrypto::GenerateRandomBlock( uint8 *pubDest )
 
 		g_Logger->LogConsole( "Gen'd session key: %s\n", PchStringFromData( m_rghSessionKey, 32 ) );
 	}
+}
+
+
+bool CCrypto::SafeUnzipMemory( const void *pvZipped, int cubZipped, void *pvDest, int cubDest )
+{
+	Assert( SafeUnzipMemory_T );
+
+	bool bRet = SafeUnzipMemory_T( pvZipped, cubZipped, pvDest, cubDest );
+
+	return bRet;
 }
