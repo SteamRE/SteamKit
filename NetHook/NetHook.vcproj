@@ -239,6 +239,10 @@
 				RelativePath=".\wshooks.h"
 				>
 			</File>
+			<File
+				RelativePath=".\zip.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Steam Headers"
@@ -866,10 +870,6 @@
 		</File>
 		<File
 			RelativePath=".\zdll.lib"
-			>
-		</File>
-		<File
-			RelativePath=".\zip.h"
 			>
 		</File>
 	</Files>
