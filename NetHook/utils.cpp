@@ -2,7 +2,9 @@
 
 #include "utils.h"
 
-#include <string>
+#include <iostream>
+#include <iomanip>
+#include <sstream>
 
 
 const char *k_szEUDPPktTypes[] =
@@ -105,20 +107,23 @@ const char *PchStringFromExtendedClientMsgHdr( const ExtendedClientMsgHdr_t *pMs
 	return szBuff;
 }
 
+char *szData = NULL;
 const char *PchStringFromData( const uint8 *pData, uint32 cubData )
 {
-	static char szBuff[ 1024 * 40 ];
-	memset( szBuff, 0, sizeof( szBuff ) );
+	uint32 memSize = cubData * 4;
+
+	szData = (char *)realloc( szData, memSize );
+	memset( szData, 0, memSize );
 
 	for ( uint32 x = 0; x < cubData; ++x )
 	{
-		sprintf_s( szBuff, sizeof( szBuff ), "%s%02X ", szBuff, (uint8 )pData[ x ] );
+		sprintf_s( szData, memSize, "%s%02X ", szData, (uint8 )pData[ x ] );
 
 		if ( ( x + 1 ) % 12 == 0 )
-			sprintf_s( szBuff, sizeof( szBuff), "%s\r\n    ", szBuff );
+			sprintf_s( szData, memSize, "%s\r\n    ", szData );
 	}
 
-	return szBuff;
+	return szData;
 }
 
 const char *PchNameFromEUDPPktType( EUDPPktType eUdpPktType )

@@ -184,10 +184,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\cryptobuffer.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\logger.cpp"
 				>
 			</File>
@@ -205,6 +201,10 @@
 			</File>
 			<File
 				RelativePath=".\wshooks.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\zip.cpp"
 				>
 			</File>
 		</Filter>
@@ -844,16 +844,32 @@
 				>
 			</File>
 		</Filter>
-		<File
-			RelativePath=".\cryptobuffer.h"
+		<Filter
+			Name="zlib"
 			>
-		</File>
+			<File
+				RelativePath=".\zlib\zconf.h"
+				>
+			</File>
+			<File
+				RelativePath=".\zlib\zlib.h"
+				>
+			</File>
+		</Filter>
 		<File
 			RelativePath=".\detours.lib"
 			>
 		</File>
 		<File
 			RelativePath=".\tier0.lib"
+			>
+		</File>
+		<File
+			RelativePath=".\zdll.lib"
+			>
+		</File>
+		<File
+			RelativePath=".\zip.h"
 			>
 		</File>
 	</Files>

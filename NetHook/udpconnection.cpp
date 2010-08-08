@@ -3,6 +3,7 @@
 
 #include "logger.h"
 #include "crypto.h"
+#include "zip.h"
 
 #include "utils.h"
 
@@ -178,7 +179,10 @@ bool CUDPConnection::ReceiveNetPacket( const UDPPktHdr_t *pHdr, CNetPacket *pPac
 bool CUDPConnection::ReceiveNetMsg( EMsg eMsg, const uint8 *pData, uint32 cubData )
 {
 	if ( eMsg != k_EMsgMulti )
+	{
 		g_Logger->AppendFile( "EMsgLog.txt", "Incoming EMsg: %s ( %s)\r\n", PchNameFromEMsg( eMsg ), PchStringFromData( pData, 4 ) );
+		//g_Logger->AppendFile( "EMsgLog.txt", "  Data: %s\r\n\r\n", PchStringFromData( pData, cubData ) );
+	}
 
 	if ( eMsg == k_EMsgChannelEncryptResult )
 	{
@@ -190,7 +194,6 @@ bool CUDPConnection::ReceiveNetMsg( EMsg eMsg, const uint8 *pData, uint32 cubDat
 
 	}
 
-	bf_read reader( (void *)pData, cubData );
 
 	if ( eMsg == k_EMsgMulti )
 	{
@@ -198,23 +201,56 @@ bool CUDPConnection::ReceiveNetMsg( EMsg eMsg, const uint8 *pData, uint32 cubDat
 		MsgMulti_t *pMsgBody = (MsgMulti_t *)( pData + sizeof( MsgHdr_t ) );
 
 		size_t hdrSize = sizeof( MsgHdr_t ) + sizeof( MsgMulti_t );
-		reader.Seek( hdrSize << 3 );
 
-		if ( pMsgBody->m_cubUnzipped == 0 )
+		uint8 *pMsgData = NULL;
+		uint32 cubMsgData = 0;
+
+		if ( pMsgBody->m_cubUnzipped != 0 )
 		{
-			// data is not zipped, but payload length follows
-			uint32 cubPayload = (uint32)reader.ReadLong();
+			// decompress our data
 
-			int off = reader.GetNumBitsRead() >> 3;
+			uint8 *pDecompressed = new uint8[ pMsgBody->m_cubUnzipped ];
+			uint8 *pCompressed = (uint8 *)( pData + hdrSize );
+			uint32 cubCompressed = cubData - hdrSize;
 
-			uint8 *pPayload = (uint8 *)( pData + off );
+			bool bZip = CZip::Inflate( pCompressed, cubCompressed, pDecompressed, pMsgBody->m_cubUnzipped );
 
-			EMsg *pEMsg = (EMsg *)pPayload;
+			if ( !bZip )
+			{
+				delete [] pDecompressed;
 
-			return this->ReceiveNetMsg( *pEMsg, pPayload, cubPayload );
+				g_Logger->AppendFile( "EMsgLog.txt", "Decompression failed!!\r\n" );
+
+				return true;
+			}
+
+			pMsgData = pDecompressed;
+			cubMsgData = pMsgBody->m_cubUnzipped;
+		}
+		else
+		{
+			pMsgData = (uint8 *)( pData + hdrSize );
+			cubMsgData = cubData - hdrSize;
 		}
 
-		// todo: handle zipped data
+		bf_read reader( pMsgData, cubMsgData );
+
+		//g_Logger->AppendFile( "EMsgLog.txt", "Data: %s\r\n", PchStringFromData( pMsgData, cubMsgData ) );
+
+		
+		while ( reader.GetNumBytesLeft() > 0 )
+		{
+			uint32 cubPayload = (uint32)reader.ReadLong();
+			int off = reader.GetNumBitsRead() >> 3;
+
+			uint8 *pPayload = (uint8 *)( pMsgData + off );
+			EMsg *pEMsg = (EMsg *)pPayload;
+
+			reader.SeekRelative( cubPayload << 3 );
+
+			this->ReceiveNetMsg( *pEMsg, pPayload, cubPayload );
+		}
+
 	}
 
 	return true;
@@ -358,6 +394,8 @@ bool CUDPConnection::SendNetPacket( const UDPPktHdr_t *pHdr, CNetPacket *pPacket
 bool CUDPConnection::SendNetMsg( EMsg eMsg, const uint8 *pData, uint32 cubData )
 {
 	g_Logger->AppendFile( "EMsgLog.txt", "Outgoing EMsg: %s ( %s)\r\n", PchNameFromEMsg( eMsg ), PchStringFromData( pData, 4 ) );
+
+	//g_Logger->AppendFile( "EMsgLog.txt", "  Data: %s\r\n", PchStringFromData( pData, cubData ) );
 
 	return true;
 }

@@ -26,3 +26,4 @@ const char *PchNameFromEUniverse( EUniverse eUniverse );
 
 
 #endif // !UTILS_H_
+
