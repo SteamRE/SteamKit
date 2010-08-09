@@ -27,6 +27,9 @@ enum ENetDirection
 	k_eNetOutgoing,
 };
 
+#define NET_DIRECTION_STRING( eDir ) ( eDirection == k_eNetIncoming ? "Incoming" : "Outgoing" )
+#define NET_ARROW_STRING( eDir ) ( eDirection == k_eNetIncoming ? "->" : "<-" )
+
 
 class CUDPConnection
 {

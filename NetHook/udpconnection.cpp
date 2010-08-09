@@ -46,47 +46,49 @@ bool CUDPConnection::HandlePacket( ENetDirection eDirection, const uint8 *pData,
 
 	UDPPktHdr_t *pHdr = (UDPPktHdr_t *)pData;
 
-
 	if ( pHdr->m_nMagic == -1 )
 		return true; // we don't need OOB traffic
 
-
 	Assert( pHdr->m_nMagic == k_nMagic );
 
-	g_Logger->AppendFile( m_szLogFile, "<- %s %s", ( eDirection == k_eNetIncoming ? "Incoming" : "Outgoing" ), PchStringFromUDPPktHdr( pHdr ) );
+	g_Logger->AppendFile( m_szLogFile, "%s %s %s", NET_ARROW_STRING( eDirection ),NET_DIRECTION_STRING( eDirection ), PchStringFromUDPPktHdr( pHdr ) );
 
 	size_t headerSize = sizeof( UDPPktHdr_t );
 
 	pData += headerSize;
 	cubData -= headerSize;
 
+	bool bRet = true;
+
 	if ( pHdr->m_EUDPPktType == k_EUDPPktTypeDatagram )
 	{
-		return this->HandleDatagram( k_eNetOutgoing, pHdr, pData, cubData );
+		bRet = this->HandleDatagram( k_eNetOutgoing, pHdr, pData, cubData );
 	}
 	else if ( pHdr->m_EUDPPktType == k_EUDPPktTypeChallengeReq )
 	{
-		return this->HandleChallengeReq( k_eNetOutgoing, pHdr, pData, cubData );
+		bRet = this->HandleChallengeReq( k_eNetOutgoing, pHdr, pData, cubData );
 	}
 	else if ( pHdr->m_EUDPPktType == k_EUDPPktTypeData )
 	{
-		return this->HandleData( k_eNetOutgoing, pHdr, pData, cubData );
+		bRet = this->HandleData( k_eNetOutgoing, pHdr, pData, cubData );
 	}
 	else if ( pHdr->m_EUDPPktType == k_EUDPPktTypeConnect )
 	{
-		return this->HandleConnect( k_eNetOutgoing, pHdr, pData, cubData );
+		bRet = this->HandleConnect( k_eNetOutgoing, pHdr, pData, cubData );
+	}
+	else
+	{
+		g_Logger->AppendFile( m_szLogFile, "Unhandled %s packet type: %s\r\n\r\n", NET_DIRECTION_STRING( eDirection ), PchNameFromEUDPPktType( (EUDPPktType)pHdr->m_EUDPPktType ) );
 	}
 
-	g_Logger->AppendFile( m_szLogFile, "Unhandled packet type: %s\r\n\r\n", PchNameFromEUDPPktType( (EUDPPktType)pHdr->m_EUDPPktType ) );
+	g_Logger->AppendFile( m_szLogFile, "\r\n" );
 
-	return true;
+	return bRet;
 }
 
 
 bool CUDPConnection::HandleDatagram( ENetDirection eDirection, const UDPPktHdr_t *pHdr, const uint8 *pData, uint32 cubData )
 {
-	g_Logger->AppendFile( m_szLogFile, "\r\n" );
-
 	return true;
 }
 
@@ -116,19 +118,15 @@ bool CUDPConnection::HandleChallenge( ENetDirection eDirection, const UDPPktHdr_
 }
 bool CUDPConnection::HandleChallengeReq( ENetDirection eDirection, const UDPPktHdr_t *pHdr, const uint8 *pData, uint32 cubData )
 {
-	g_Logger->AppendFile( m_szLogFile, "\r\n" );
-
 	return true;
 }
 bool CUDPConnection::HandleAccept( ENetDirection eDirection, const UDPPktHdr_t *pHdr, const uint8 *pData, uint32 cubData )
 {
-	g_Logger->AppendFile( m_szLogFile, "\r\n" );
 
 	return true;
 }
 bool CUDPConnection::HandleConnect( ENetDirection eDirection, const UDPPktHdr_t *pHdr, const uint8 *pData, uint32 cubData )
 {
-	g_Logger->AppendFile( m_szLogFile, "\r\n" );
 
 	return true;
 }
@@ -214,7 +212,7 @@ bool CUDPConnection::HandleNetMsg( ENetDirection eDirection, EMsg eMsg, const ui
 	if ( eMsg == k_EMsgMulti )
 		return this->MultiplexMsgMulti( eDirection, pData, cubData );
 
-	g_Logger->AppendFile( "EMsgLog.txt", "%s EMsg: %s ( %s)\r\n", ( eDirection == k_eNetIncoming ? "Incoming" : "Outgoing" ), PchNameFromEMsg( eMsg ), PchStringFromData( pData, 4 ) );
+	g_Logger->AppendFile( "EMsgLog.txt", "%s %s EMsg: %s ( %s)\r\n", NET_ARROW_STRING( eDirection ), NET_DIRECTION_STRING( eDirection ), PchNameFromEMsg( eMsg ), PchStringFromData( pData, 4 ) );
 
 	return true;
 }
