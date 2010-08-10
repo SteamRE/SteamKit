@@ -860,6 +860,22 @@
 				>
 			</File>
 		</Filter>
+		<Filter
+			Name="Messages"
+			>
+			<File
+				RelativePath=".\msghandlers.h"
+				>
+			</File>
+			<File
+				RelativePath=".\msgmanager.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\msgmanager.h"
+				>
+			</File>
+		</Filter>
 		<File
 			RelativePath=".\detours.lib"
 			>

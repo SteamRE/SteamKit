@@ -9,7 +9,6 @@
 #include "steam/steamtypes.h"
 
 #include <windows.h>
-#include <map>
 
 
 
@@ -39,4 +38,4 @@ private:
 extern CLogger *g_Logger;
 
 
-#endif
+#endif // !LOGGER_H_
