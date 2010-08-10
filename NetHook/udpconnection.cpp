@@ -4,6 +4,8 @@
 #include "logger.h"
 #include "crypto.h"
 #include "zip.h"
+#include "msgmanager.h"
+#include "msghandlers.h"
 
 #include "utils.h"
 
@@ -22,6 +24,10 @@ CUDPConnection::CUDPConnection() :
 	m_sendMap( DefLessFunc( uint32 ) )
 {
 	m_bUsingCrypto = false;
+
+	// these won't be deallocated until program shutdown anyway
+	// todo: figure out a less retarded way to register these
+	new MsgChannelEncryptResponseHandler();
 }
 
 
@@ -51,7 +57,7 @@ bool CUDPConnection::HandlePacket( ENetDirection eDirection, const uint8 *pData,
 
 	Assert( pHdr->m_nMagic == k_nMagic );
 
-	g_Logger->AppendFile( m_szLogFile, "%s %s %s", NET_ARROW_STRING( eDirection ),NET_DIRECTION_STRING( eDirection ), PchStringFromUDPPktHdr( pHdr ) );
+	g_Logger->AppendFile( m_szLogFile, "%s %s %s", NET_ARROW_STRING( eDirection ), NET_DIRECTION_STRING( eDirection ), PchStringFromUDPPktHdr( pHdr ) );
 
 	size_t headerSize = sizeof( UDPPktHdr_t );
 
@@ -214,7 +220,10 @@ bool CUDPConnection::HandleNetMsg( ENetDirection eDirection, EMsg eMsg, const ui
 
 	g_Logger->AppendFile( "EMsgLog.txt", "%s %s EMsg: %s ( %s)\r\n", NET_ARROW_STRING( eDirection ), NET_DIRECTION_STRING( eDirection ), PchNameFromEMsg( eMsg ), PchStringFromData( pData, 4 ) );
 
-	return true;
+
+	Assert ( g_MsgManager );
+
+	return g_MsgManager->HandleMsg( eMsg, eDirection, pData, cubData );
 }
 
 bool CUDPConnection::MultiplexMsgMulti( ENetDirection eDirection, const uint8 * pData, uint32 cubData )

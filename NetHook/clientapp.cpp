@@ -9,6 +9,7 @@
 #include "udpconnection.h"
 #include "wshooks.h"
 #include "crypto.h"
+#include "msgmanager.h"
 
 
 // define our clientapp entry point
@@ -18,13 +19,18 @@ CLIENTAPP( main );
 CLogger *g_Logger = NULL;
 CUDPConnection *g_udpConnection = NULL;
 
+CMsgManager *g_MsgManager = NULL;
+
+
 
 int main( int argc, char **argv )
 {
+
 	AllocConsole();
 
 	g_Logger = new CLogger( argv[ 0 ] );
 
+	g_MsgManager = new CMsgManager();
 	g_udpConnection = new CUDPConnection();
 
 	Detour_WSAStartup->Attach();
