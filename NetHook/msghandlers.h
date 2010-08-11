@@ -9,7 +9,6 @@
 #include "steam/steamtypes.h"
 
 #include "msgmanager.h"
-#include "logger.h"
 
 
 #define DEFINE_MSGHANDLER( clientmsg, func ) \
@@ -18,20 +17,15 @@
 	public: \
 		clientmsg##Handler() \
 		{ \
-			g_MsgManager->Register( k_E##clientmsg, this ); \
+			g_pMsgManager->Register( k_E##clientmsg, this ); \
 		}\
 		\
 		virtual bool HandleMsg( ENetDirection eDirection, const uint8 *pData, uint32 cubData ) \
 		{ \
 			func \
 		} \
-	}
-
-
-
-DEFINE_MSGHANDLER( MsgChannelEncryptResponse,
-	return true;
-);
+	}; \
+	clientmsg##Handler g_##clientmsg;
 
 
 #endif // !CMSGHANDLERS_H_

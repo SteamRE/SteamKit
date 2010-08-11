@@ -864,6 +864,10 @@
 			Name="Messages"
 			>
 			<File
+				RelativePath=".\msghandlers.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\msghandlers.h"
 				>
 			</File>

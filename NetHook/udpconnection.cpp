@@ -24,10 +24,6 @@ CUDPConnection::CUDPConnection() :
 	m_sendMap( DefLessFunc( uint32 ) )
 {
 	m_bUsingCrypto = false;
-
-	// these won't be deallocated until program shutdown anyway
-	// todo: figure out a less retarded way to register these
-	new MsgChannelEncryptResponseHandler();
 }
 
 
@@ -221,9 +217,9 @@ bool CUDPConnection::HandleNetMsg( ENetDirection eDirection, EMsg eMsg, const ui
 	g_Logger->AppendFile( "EMsgLog.txt", "%s %s EMsg: %s ( %s)\r\n", NET_ARROW_STRING( eDirection ), NET_DIRECTION_STRING( eDirection ), PchNameFromEMsg( eMsg ), PchStringFromData( pData, 4 ) );
 
 
-	Assert ( g_MsgManager );
+	Assert ( g_pMsgManager );
 
-	return g_MsgManager->HandleMsg( eMsg, eDirection, pData, cubData );
+	return g_pMsgManager->HandleMsg( eMsg, eDirection, pData, cubData );
 }
 
 bool CUDPConnection::MultiplexMsgMulti( ENetDirection eDirection, const uint8 * pData, uint32 cubData )

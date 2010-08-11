@@ -19,7 +19,6 @@ CLIENTAPP( main );
 CLogger *g_Logger = NULL;
 CUDPConnection *g_udpConnection = NULL;
 
-CMsgManager *g_MsgManager = NULL;
 
 
 
@@ -30,7 +29,6 @@ int main( int argc, char **argv )
 
 	g_Logger = new CLogger( argv[ 0 ] );
 
-	g_MsgManager = new CMsgManager();
 	g_udpConnection = new CUDPConnection();
 
 	Detour_WSAStartup->Attach();
@@ -67,9 +65,10 @@ int main( int argc, char **argv )
 	Detour_WSAStartup->Detach();
 
 
-	delete g_Crypto; // cleanup crypto hooks
-	delete g_udpConnection;
+	if ( g_Crypto )
+		delete g_Crypto; // cleanup crypto hooks
 
+	delete g_udpConnection;
 	delete g_Logger;
 
 	return ret;
