@@ -48,7 +48,7 @@ private:
 };
 
 
-extern CMsgManager *g_MsgManager;
+extern CMsgManager *g_pMsgManager;
 
 
 #endif // !MSGMANAGER_H_
