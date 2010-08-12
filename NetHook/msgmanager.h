@@ -19,7 +19,7 @@ class IMsgHandler
 {
 
 public:
-	virtual bool HandleMsg( ENetDirection eDirection, const uint8 *pData, uint32 cubData ) = 0;
+	virtual bool HandleMsg( EMsg eMsg, ENetDirection eDirection, const uint8 *pData, uint32 cubData ) = 0;
 
 };
 
@@ -44,6 +44,8 @@ public:
 
 private:
 	MsgMap m_Handlers;
+
+	static const char m_szLogFile[];
 
 };
 

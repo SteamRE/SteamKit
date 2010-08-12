@@ -20,7 +20,7 @@
 			this->Register(); \
 		}\
 		\
-		virtual bool HandleMsg( ENetDirection eDirection, const uint8 *pData, uint32 cubData ) \
+		virtual bool HandleMsg( EMsg eMsg, ENetDirection eDirection, const uint8 *pData, uint32 cubData ) \
 		{ \
 			func \
 		} \

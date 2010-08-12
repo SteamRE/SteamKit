@@ -29,7 +29,7 @@ SETUP_DETOUR_FUNCTION_LATE( void, __cdecl, CCrypto_GenerateRandomBlock, ( uint8 
 
 CCrypto::CCrypto()
 {
-	m_bSessionGen = false;
+	m_bSessionGen = m_bCanReset = false;
 
 
 	CSimpleScan steamClientScan( "steamclient" );
@@ -100,10 +100,11 @@ void CCrypto::GenerateRandomBlock( uint8 *pubDest )
 
 	CCrypto_GenerateRandomBlock_T( pubDest );
 
-	if ( !m_bSessionGen )
+	if ( !m_bSessionGen || m_bCanReset )
 	{
 		memcpy_s( m_rghSessionKey, 32, pubDest, 32 );
 		m_bSessionGen = true;
+		m_bCanReset = false;
 
 		g_Logger->LogConsole( "Gen'd session key: %s\n", PchStringFromData( m_rghSessionKey, 32 ) );
 	}

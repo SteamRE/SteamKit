@@ -24,12 +24,16 @@ public:
 
 	void GenerateRandomBlock( uint8 *pubDest );
 
+	void CanReset() { m_bCanReset = true; }
+
 
 	uint8 *GetSessionKey() { return m_rghSessionKey; }
 
 private:
 	uint8 m_rghSessionKey[ 32 ];
+
 	bool m_bSessionGen;
+	bool m_bCanReset;
 
 };
 
