@@ -71,6 +71,8 @@
 #endif // else _WIN32
 
 
+typedef void  (*SteamAPIWarningMessageHook_t)(int hpipe, const char *message);
+
 
 //-----------------------------------------------------------------------------
 // GID (GlobalID) stuff
@@ -89,6 +91,36 @@ typedef GID_t TxnID_t;			// Each financial transaction has a unique ID
 const GID_t k_TxnIDNil = k_GIDNil;
 const GID_t k_TxnIDUnknown = 0;
 
+// this is baked into client messages and interfaces as an int, 
+// make sure we never break this.  AppIds and DepotIDs also presently
+// share the same namespace, but since we'd like to change that in the future
+// I've defined it seperately here.
+typedef uint32 AppId_t;
+typedef uint32 PackageId_t;
+typedef uint32 DepotId_t;
+
+const DepotId_t k_uDepotIdInvalid = 0x0;
+
+const PackageId_t k_uPackageIdFreeSub = 0x0;
+const PackageId_t k_uPackageIdInvalid = 0xFFFFFFFF;
+const PackageId_t k_uPackageIdWallet = -2;
+const PackageId_t k_uPackageIdMicroTxn = -3;
+
+
+typedef uint32 CellID_t;
+const CellID_t k_uCellIDInvalid = 0xFFFFFFFF;
+
+// handle to a Steam API call
+typedef uint64 SteamAPICall_t;
+const SteamAPICall_t k_uAPICallInvalid = 0x0;
+
+
+// handle to a communication pipe to the Steam client
+typedef int32 HSteamPipe;
+// handle to single instance of a steam user
+typedef int32 HSteamUser;
+// reference to a steam call, to filter results by
+typedef int32 HSteamCall;
 
 
 
@@ -100,8 +132,6 @@ const RTime32 k_RTime32Nil = 0;
 const RTime32 k_RTime32MinValid = 10;
 const RTime32 k_RTime32Infinite = 0x7FFFFFFF;
 
-typedef uint32 CellID_t;
-const CellID_t k_uCellIDInvalid = 0xFFFFFFFF;
 
 
 const uint32 k_nMagic = 0x31305356; // "VS01"
@@ -173,6 +203,45 @@ enum EResult
 	k_EResultDiskFull = 54,
 	k_EResultRemoteCallFailed = 55,
 
+};
+
+
+//-----------------------------------------------------------------------------
+// Purpose: Base values for callback identifiers, each callback must
+//			have a unique ID.
+//-----------------------------------------------------------------------------
+enum ECallbackType
+{
+	k_iSteamUserCallbacks = 100,
+	k_iSteamGameServerCallbacks = 200,
+	k_iSteamFriendsCallbacks = 300,
+	k_iSteamBillingCallbacks = 400,
+	k_iSteamMatchmakingCallbacks = 500,
+	k_iSteamContentServerCallbacks = 600,
+	k_iSteamUtilsCallbacks = 700,
+	k_iClientFriendsCallbacks = 800,
+	k_iClientUserCallbacks = 900,
+	k_iSteamAppsCallbacks = 1000,
+	k_iSteamUserStatsCallbacks = 1100,
+	k_iSteamNetworkingCallbacks = 1200,
+	k_iClientRemoteStorageCallbacks = 1300,
+	k_iSteamUserItemsCallbacks = 1400,
+	k_iSteamGameServerItemsCallbacks = 1500,
+	k_iClientUtilsCallbacks = 1600,
+	k_iSteamGameCoordinatorCallbacks = 1700,
+	k_iSteamGameServerStatsCallbacks = 1800,
+	k_iSteam2AsyncCallbacks = 1900,
+	k_iSteamGameStatsCallbacks = 2000,
+	k_iClientHTTPCallbacks = 2100
+};
+
+// structure that contains client callback data
+struct CallbackMsg_t
+{
+	HSteamUser m_hSteamUser;
+	int m_iCallback;
+	uint8 *m_pubParam;
+	int m_cubParam;
 };
 
 #endif // !STEAMTYPES_H_

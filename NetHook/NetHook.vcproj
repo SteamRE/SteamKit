@@ -20,7 +20,7 @@
 			Name="Debug|Win32"
 			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
-			ConfigurationType="2"
+			ConfigurationType="1"
 			CharacterSet="0"
 			>
 			<Tool
@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="tier0;tier1;public;.;"
+				AdditionalIncludeDirectories="tier0;tier1;public;.;&quot;G:\dev\C++\Open Steamworks\Open Steamworks&quot;"
 				PreprocessorDefinitions="WIN32;_WIN32;_DEBUG;_WINDOWS;_USRDLL"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -63,9 +63,10 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="Ws2_32.lib"
 				LinkIncremental="2"
+				AdditionalLibraryDirectories=""
 				IgnoreDefaultLibraryNames=""
 				GenerateDebugInformation="true"
-				SubSystem="2"
+				SubSystem="1"
 				TargetMachine="1"
 			/>
 			<Tool

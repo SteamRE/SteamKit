@@ -3,7 +3,7 @@
 
 #include "logger.h"
 
-
-DEFINE_MSGHANDLER( MsgChannelEncryptResponse,
+DEFINE_MSGHANDLER( MsgClientAnonLogOn,
 	return true;
 );
+

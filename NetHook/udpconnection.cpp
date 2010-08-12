@@ -72,7 +72,7 @@ bool CUDPConnection::HandlePacket( ENetDirection eDirection, const uint8 *pData,
 	}
 	else if ( pHdr->m_EUDPPktType == k_EUDPPktTypeData )
 	{
-		bRet = this->HandleData( k_eNetOutgoing, pHdr, pData, cubData );
+		bRet = this->HandleData( eDirection, pHdr, pData, cubData );
 	}
 	else if ( pHdr->m_EUDPPktType == k_EUDPPktTypeConnect )
 	{
@@ -217,7 +217,9 @@ bool CUDPConnection::HandleNetMsg( ENetDirection eDirection, EMsg eMsg, const ui
 	g_Logger->AppendFile( "EMsgLog.txt", "%s %s EMsg: %s ( %s)\r\n", NET_ARROW_STRING( eDirection ), NET_DIRECTION_STRING( eDirection ), PchNameFromEMsg( eMsg ), PchStringFromData( pData, 4 ) );
 
 
-	Assert ( g_pMsgManager );
+	// if no msg handlers were defined
+	if ( !g_pMsgManager )
+		g_pMsgManager = new CMsgManager();
 
 	return g_pMsgManager->HandleMsg( eMsg, eDirection, pData, cubData );
 }

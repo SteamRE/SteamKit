@@ -2,8 +2,7 @@
 #include "msgmanager.h"
 
 
-CMsgManager g_MsgManager;
-CMsgManager *g_pMsgManager = &g_MsgManager;
+CMsgManager *g_pMsgManager = NULL;
 
 CMsgManager::CMsgManager() :
 	m_Handlers( DefLessFunc( EMsg ) )
