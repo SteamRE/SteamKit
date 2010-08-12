@@ -83,7 +83,9 @@ SETUP_DETOUR_FUNCTION( int, PASCAL, WSAStartup, ( WORD wVersionRequired, LPWSADA
 
 	g_Logger->LogConsole( "WSAStartup( %d, 0x%p ) = %d\n", wVersionRequired, lpWSAData, ret );
 
-	if ( nStartups == 3 ) // at the third call, steamclient has already been loaded
+	// for steam.exe: nStartups must be 3
+	// otherwise loading just steamclient.dll will call this hook only once
+	if ( nStartups == 1 ) // at the third call, steamclient has already been loaded
 	{
 		g_Logger->LogConsole( "\nApplying hooks...\n\n" );
 
