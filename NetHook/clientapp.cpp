@@ -14,24 +14,15 @@
 #include "interface.h"
 
 
-#define NO_STEAM
 #define STEAMTYPES_H
-
-typedef void *unknown_ret;
 #include "usercommon.h"
 #include "ESteamError.h"
 #include "isteamclient009.h"
 #include "isteamgameserver010.h"
-#include "ISteamUser004.h"
-
 
 
 // define our clientapp entry point
 //CLIENTAPP( main );
-
-
-CLogger *g_Logger = NULL;
-CUDPConnection *g_udpConnection = NULL;
 
 
 typedef bool ( STEAM_CALL *Steam_BGetCallback )( HSteamPipe hSteamPipe, CallbackMsg_t *pCallbackMsg );
@@ -40,25 +31,18 @@ typedef void ( STEAM_CALL *Steam_FreeLastCallback )( HSteamPipe hSteamPipe );
 Steam_BGetCallback GetCallback;
 Steam_FreeLastCallback FreeCallback;
 
-int AnonLogin()
+int Login()
 {
 	CreateInterfaceFn factory = Sys_GetFactory( "steamclient" );
 
 	ISteamClient009 *steamClient = (ISteamClient009 *)factory( STEAMCLIENT_INTERFACE_VERSION_009, NULL );
 
 	HSteamPipe hPipe = 0;
-	HSteamUser hUser = steamClient->CreateLocalUser( &hPipe, k_EAccountTypeAnonUser );
+	HSteamUser hUser = steamClient->CreateLocalUser( &hPipe, k_EAccountTypeAnonGameServer );
 
 	ISteamGameServer010 *gameServer = (ISteamGameServer010 *)steamClient->GetISteamGameServer( hUser, hPipe, STEAMGAMESERVER_INTERFACE_VERSION_010 );
-	ISteamUser004 *steamUser = (ISteamUser004 *)steamClient->GetISteamUser( hUser, hPipe, STEAMUSER_INTERFACE_VERSION_004 );
 
-	CSteamID steamId;
-	steamId.CreateBlankAnonUserLogon( k_EUniversePublic );
-
-	steamUser->LogOn( steamId );
-
-	//gameServer->LogOn();
-
+	gameServer->LogOn();
 
 	CallbackMsg_t callBack;
 
@@ -70,7 +54,13 @@ int AnonLogin()
 
 			// session key is recreated here, so lets allow it
 			if ( callBack.m_iCallback == SteamServerConnectFailure_t::k_iCallback )
+			{
 				g_Crypto->CanReset();
+
+				SteamServerConnectFailure_t *conFailure = (SteamServerConnectFailure_t *)callBack.m_pubParam;
+
+				g_Logger->LogConsole( "Connection failed: %d\n", conFailure->m_eResult );
+			}
 
 			g_Logger->LogConsole( "Got callback %d\n", callBack.m_iCallback );
 
@@ -123,7 +113,7 @@ int main( int argc, char **argv )
 #endif
 
 
-	int ret = AnonLogin();
+	int ret = Login();
 
 	FreeLibrary( steamClient );
 

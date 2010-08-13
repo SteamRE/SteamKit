@@ -40,6 +40,12 @@ void CMsgManager::Unregister( EMsg eMsg )
 
 bool CMsgManager::HandleMsg( EMsg eMsg, ENetDirection eDirection, const uint8 *pData, uint32 cubData )
 {
+	MsgMapIndex indx = m_Handlers.Find( eMsg );
+	IMsgHandler *pHandler = NULL;
+
+	if ( indx != m_Handlers.InvalidIndex() )
+		pHandler = m_Handlers[ indx ];
+
 	// do our own logging
 	g_Logger->AppendFile( m_szLogFile, "%s %s EMsg: %s ( %s)\r\n",
 		NET_ARROW_STRING( eDirection ),
@@ -48,17 +54,48 @@ bool CMsgManager::HandleMsg( EMsg eMsg, ENetDirection eDirection, const uint8 *p
 		PchStringFromData( pData, 4 )
 	);
 
-	g_Logger->AppendFile( m_szLogFile, "    %s\r\n\r\n", PchStringFromData( pData, cubData ) );
+	uint32 headerSize = 0;
+	const uint8 *pDataPrinted = pData;
+	uint32 cubDataPrinted = cubData;
 
+	if ( pHandler )
+	{
+		headerSize = pHandler->GetHeaderSize();
 
+		if ( headerSize == sizeof( MsgHdr_t ) )
+			g_Logger->AppendFile( m_szLogFile, "%s\r\n", PchStringFromMsgHdr( (MsgHdr_t *)pData ) );
+		else if ( headerSize == sizeof( ExtendedClientMsgHdr_t ) )
+			g_Logger->AppendFile( m_szLogFile, "%s\r\n", PchStringFromExtendedClientMsgHdr( (ExtendedClientMsgHdr_t *)pData ) );
+		else if ( headerSize == 0 )
+			; // in case we're not sure what the header is
+		else
+			g_Logger->AppendFile( m_szLogFile, "  Unexpected header size %d!!\r\n", headerSize );
 
-	// check against registered handlers
-	MsgMapIndex indx = m_Handlers.Find( eMsg );
+		pDataPrinted += headerSize;
+		cubDataPrinted -= headerSize;
 
-	if ( indx == m_Handlers.InvalidIndex() )
-		return true;
+		headerSize = pHandler->GetMsgHeaderSize();
 
-	Assert( m_Handlers[ indx ] );
+		g_Logger->AppendFile( m_szLogFile, "%s\r\n", pHandler->PrintHeader( eMsg, pDataPrinted, cubDataPrinted ) );
 
-	return m_Handlers[ indx ]->HandleMsg( eMsg, eDirection, pData, cubData );
+		pDataPrinted += headerSize;
+		cubDataPrinted -= headerSize;
+	}
+	else
+	{
+		// assume extended
+		headerSize = sizeof( ExtendedClientMsgHdr_t );
+
+		g_Logger->AppendFile( m_szLogFile, "%s\r\n", PchStringFromExtendedClientMsgHdr( (ExtendedClientMsgHdr_t *)pData ) );
+
+		pDataPrinted += headerSize;
+		cubDataPrinted -= headerSize;
+	}
+
+	g_Logger->AppendFile( m_szLogFile, "    %s\r\n\r\n\r\n", PchStringFromData( pDataPrinted, cubDataPrinted ) );
+
+	if ( pHandler )
+		return pHandler->HandleMsg( eMsg, eDirection, pData, cubData );
+
+	return true;
 }

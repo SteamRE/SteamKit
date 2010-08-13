@@ -49,7 +49,7 @@ const char *PchStringFromUDPPktHdr( const UDPPktHdr_t *pHdr )
 		pHdr->m_nPktsInMsg,
 		pHdr->m_nMsgStartSeq,
 		pHdr->m_cbMsgData
-		);
+	);
 
 	return szBuff;
 
@@ -62,7 +62,7 @@ const char *PchStringFromMsgHdr( const MsgHdr_t *pMsgHdr )
 
 	sprintf_s( szBuff, sizeof( szBuff ),
 
-		"  MsgHdr\r\n"
+		"   MsgHdr_t\r\n"
 		"    m_EMsg = %s (%u)\r\n"
 		"    m_JobIDTarget = %llu\r\n"
 		"    m_JobIDSource = %llu\r\n",
@@ -81,16 +81,18 @@ const char *PchStringFromExtendedClientMsgHdr( const ExtendedClientMsgHdr_t *pMs
 	static char szBuff[ 1024 * 8 ];
 	memset( szBuff, 0, sizeof( szBuff ) );
 
+	const CSteamID *steamId = &pMsgHdr->m_ulSteamID;
+
 	sprintf_s( szBuff, sizeof( szBuff ),
 
-		"  ExtendedClientMsgHdr\r\n"
+		"   ExtendedClientMsgHdr_t\r\n"
 		"    m_EMsg = %s (%u)\r\n"
 		"    m_nCubHdr = %u\r\n"
 		"    m_nHdrVersion = %u\r\n"
 		"    m_JobIDTarget = %llu\r\n"
 		"    m_JobIDSource = %llu\r\n"
 		"    m_nHdrCanary = %u\r\n"
-		"    m_ulSteamID = %s (%llu)\r\n"
+		"    m_ulSteamID = %s %s (%llu) (id = %d, instance = %d, type = %s (%d), universe = %s (%d))\r\n"
 		"    m_nSessionID = %u\r\n",
 
 		PchNameFromEMsg( (EMsg)pMsgHdr->m_EMsg ), pMsgHdr->m_EMsg,
@@ -99,7 +101,9 @@ const char *PchStringFromExtendedClientMsgHdr( const ExtendedClientMsgHdr_t *pMs
 		pMsgHdr->m_JobIDTarget,
 		pMsgHdr->m_JobIDSource,
 		pMsgHdr->m_nHdrCanary,
-		pMsgHdr->m_ulSteamID.Render(), pMsgHdr->m_ulSteamID.ConvertToUint64(),
+		steamId->Render(), steamId->SteamRender(), steamId->ConvertToUint64(),
+		steamId->GetAccountID(), steamId->GetUnAccountInstance(), PchNameFromEAccountType( steamId->GetEAccountType() ), steamId->GetEAccountType(),
+		PchNameFromEUniverse( steamId->GetEUniverse() ), steamId->GetEUniverse(),
 		pMsgHdr->m_nSessionID
 
 	);
@@ -110,6 +114,9 @@ const char *PchStringFromExtendedClientMsgHdr( const ExtendedClientMsgHdr_t *pMs
 char *szData = NULL;
 const char *PchStringFromData( const uint8 *pData, uint32 cubData )
 {
+	if ( cubData == 0 )
+		return "";
+
 	uint32 memSize = cubData * 4;
 
 	szData = (char *)realloc( szData, memSize );
@@ -6410,4 +6417,95 @@ const char *PchNameFromEMsg( EMsg eMsg )
 		return k_szEMsg[ 0 ];
 
 	return k_szEMsg[ (int)eMsg ];
+}
+
+const char *k_szEResult[] =
+{
+	"Invalid EResult",
+	"k_EResultOK",
+	"k_EResultFail",
+	"k_EResultNoConnection",
+	"k_EResultNoConnectionRetry",
+	"k_EResultInvalidPassword",
+	"k_EResultLoggedInElsewhere",
+	"k_EResultInvalidProtocolVer",
+	"k_EResultInvalidParam",
+	"k_EResultFileNotFound",
+	"k_EResultBusy",
+	"k_EResultInvalidState",
+	"k_EResultInvalidName",
+	"k_EResultInvalidEmail",
+	"k_EResultDuplicateName",
+	"k_EResultAccessDenied",
+	"k_EResultTimeout",
+	"k_EResultBanned",
+	"k_EResultAccountNotFound",
+	"k_EResultInvalidSteamID",
+	"k_EResultServiceUnavailable",
+	"k_EResultNotLoggedOn",
+	"k_EResultPending",
+	"k_EResultEncryptionFailure",
+	"k_EResultInsufficientPrivilege",
+	"k_EResultLimitExceeded",
+	"k_EResultRevoked",
+	"k_EResultExpired",
+	"k_EResultAlreadyRedeemed",
+	"k_EResultDuplicateRequest",
+	"k_EResultAlreadyOwned",
+	"k_EResultIPNotFound",
+	"k_EResultPersistFailed",
+	"k_EResultLockingFailed",
+	"k_EResultLogonSessionReplaced",
+	"k_EResultConnectFailed",
+	"k_EResultHandshakeFailed",
+	"k_EResultIOFailure",
+	"k_EResultRemoteDisconnect",
+	"k_EResultShoppingCartNotFound",
+	"k_EResultBlocked",
+	"k_EResultIgnored",
+	"k_EResultNoMatch",
+	"k_EResultAccountDisabled",
+	"k_EResultServiceReadOnly",
+	"k_EResultAccountNotFeatured",
+	"k_EResultAdministratorOK",
+	"k_EResultContentVersion",
+	"k_EResultTryAnotherCM",
+	"k_EResultPasswordRequiredToKickSession",
+	"k_EResultAlreadyLoggedInElsewhere",
+	"k_EResultSuspended",
+	"k_EResultCancelled",
+	"k_EResultDataCorruption",
+	"k_EResultDiskFull",
+	"k_EResultRemoteCallFailed",
+};
+
+const char *PchNameFromEResult( EResult eResult )
+{
+	if ( eResult <= 0 || eResult >= 55 )
+		return k_szEResult[ 0 ];
+
+	return k_szEResult[ (int)eResult ];
+}
+
+const char *k_szEAccountType[] =
+{
+	"k_EAccountTypeInvalid",
+	"k_EAccountTypeIndividual",
+	"k_EAccountTypeMultiseat",
+	"k_EAccountTypeGameServer",
+	"k_EAccountTypeAnonGameServer",
+	"k_EAccountTypePending",
+	"k_EAccountTypeContentServer",
+	"k_EAccountTypeClan",
+	"k_EAccountTypeChat",
+	"k_EAccountTypeP2PSuperSeeder",
+	"k_EAccountTypeAnonUser",
+};
+
+const char *PchNameFromEAccountType( EAccountType eAccountType )
+{
+	if ( eAccountType <= 0 || eAccountType >= k_EAccountTypeMax )
+		return k_szEAccountType[ 0 ];
+
+	return k_szEAccountType[ (int)eAccountType ];
 }

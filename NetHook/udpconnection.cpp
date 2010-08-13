@@ -16,6 +16,9 @@
 #include "bitbuf.h"
 
 
+CUDPConnection *g_udpConnection = NULL;
+
+
 const char CUDPConnection::m_szLogFile[] = "UdpLog.txt";
 
 
