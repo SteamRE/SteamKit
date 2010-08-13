@@ -20,7 +20,9 @@ class IMsgHandler
 
 public:
 	virtual bool HandleMsg( EMsg eMsg, ENetDirection eDirection, const uint8 *pData, uint32 cubData ) = 0;
-
+	virtual uint32 GetHeaderSize() = 0;
+	virtual uint32 GetMsgHeaderSize() = 0;
+	virtual const char *PrintHeader( EMsg eMsg, const uint8 *pData, uint32 cubData ) = 0;
 };
 
 

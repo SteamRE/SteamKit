@@ -71,6 +71,9 @@
 #endif // else _WIN32
 
 
+typedef uint32	SteamUnsigned64_t;
+
+
 typedef void  (*SteamAPIWarningMessageHook_t)(int hpipe, const char *message);
 
 
@@ -99,12 +102,14 @@ typedef uint32 AppId_t;
 typedef uint32 PackageId_t;
 typedef uint32 DepotId_t;
 
-const DepotId_t k_uDepotIdInvalid = 0x0;
+const AppId_t k_uAppIdInvalid = 0x0;
 
 const PackageId_t k_uPackageIdFreeSub = 0x0;
 const PackageId_t k_uPackageIdInvalid = 0xFFFFFFFF;
 const PackageId_t k_uPackageIdWallet = -2;
 const PackageId_t k_uPackageIdMicroTxn = -3;
+
+const DepotId_t k_uDepotIdInvalid = 0x0;
 
 
 typedef uint32 CellID_t;
@@ -121,6 +126,15 @@ typedef int32 HSteamPipe;
 typedef int32 HSteamUser;
 // reference to a steam call, to filter results by
 typedef int32 HSteamCall;
+
+// return type of GetAuthSessionTicket
+typedef uint32 HAuthTicket;
+const HAuthTicket k_HAuthTicketInvalid = 0;
+
+typedef int HVoiceCall;
+
+
+const int k_cchSystemIMTextMax = 4096;
 
 
 

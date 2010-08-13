@@ -7,11 +7,13 @@
 
 
 #include "steam/steamtypes.h"
+#include "steam/clientmsgs.h"
 
 #include "msgmanager.h"
 
 
-#define DEFINE_MSGHANDLER( clientmsg, func ) \
+// preprocessor madness
+#define DEFINE_MSGHANDLER( clientmsg, hdr, hdrfunc, handlefunc ) \
 	class clientmsg##Handler : public IMsgHandler \
 	{ \
 	public: \
@@ -22,7 +24,18 @@
 		\
 		virtual bool HandleMsg( EMsg eMsg, ENetDirection eDirection, const uint8 *pData, uint32 cubData ) \
 		{ \
-			func \
+			hdr *pMsgHdr = (hdr *)pData; \
+			clientmsg##_t *pClientHdr = (clientmsg##_t *)( pData + sizeof( hdr ) ); \
+			return handlefunc( eMsg, eDirection, pData, cubData ); \
+		} \
+		\
+		virtual uint32 GetHeaderSize() { return sizeof( hdr ); } \
+		\
+		virtual uint32 GetMsgHeaderSize() { return sizeof( clientmsg##_t ); } \
+		\
+		virtual const char *PrintHeader( EMsg eMsg, const uint8 *pData, uint32 cubData ) \
+		{ \
+			return hdrfunc( eMsg, pData, cubData );  \
 		} \
 		\
 	private: \

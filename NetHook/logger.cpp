@@ -6,6 +6,8 @@
 #include <iostream>
 
 
+CLogger *g_Logger = NULL;
+
 
 CLogger::CLogger( const char *szBaseDir )
 {

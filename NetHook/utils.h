@@ -23,6 +23,8 @@ const char *PchNameFromNetFlags( uint32 netFlags );
 const char *PchNameFromEUDPPktType( EUDPPktType eUdpPktType );
 
 const char *PchNameFromEUniverse( EUniverse eUniverse );
+const char *PchNameFromEResult( EResult eResult );
+const char *PchNameFromEAccountType( EAccountType eAccountType );
 
 
 #endif // !UTILS_H_
