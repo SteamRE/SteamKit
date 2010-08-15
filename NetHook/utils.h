@@ -10,6 +10,9 @@
 #include "steam/csteamid.h"
 #include "steam/udppkt.h"
 
+#include <winsock2.h>
+
+
 
 const char *PchStringFromUDPPktHdr( const UDPPktHdr_t *pHdr );
 const char *PchStringFromMsgHdr( const MsgHdr_t *pMsgHdr );
@@ -25,6 +28,8 @@ const char *PchNameFromEUDPPktType( EUDPPktType eUdpPktType );
 const char *PchNameFromEUniverse( EUniverse eUniverse );
 const char *PchNameFromEResult( EResult eResult );
 const char *PchNameFromEAccountType( EAccountType eAccountType );
+
+const char *PchStringFromSockAddr( const sockaddr_in *sockAddr );
 
 
 #endif // !UTILS_H_

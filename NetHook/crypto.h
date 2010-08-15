@@ -6,6 +6,7 @@
 #endif
 
 
+#define _WINSOCKAPI_ // god damn winsock headers
 #include "csimpledetour.h"
 
 #include "steam/steamtypes.h"
