@@ -38,6 +38,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Net\UdpPacket.cs" />
     <Compile Include="Util\ByteBuffer.cs" />
     <Compile Include="Util\DataStream.cs" />
     <Compile Include="Net\NetPacket.cs" />
