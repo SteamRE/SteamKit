@@ -10,7 +10,7 @@ namespace Steam3Lib
         public byte[] Data;
     }
 
-    public class NetPacket
+    class NetPacket
     {
         uint seqStart;
         uint seqEnd;
@@ -38,7 +38,7 @@ namespace Steam3Lib
         }
 
 
-        public void AddData( UDPPktHdr udpHdr, byte[] data )
+        public void AddData( UdpHeader udpHdr, byte[] data )
         {
             if ( HasData( udpHdr ) )
                 return;
@@ -46,7 +46,7 @@ namespace Steam3Lib
             MsgSegment msgSeg = new MsgSegment();
 
             msgSeg.Data = data;
-            msgSeg.DataSequence = udpHdr.m_nSeqThis;
+            msgSeg.DataSequence = udpHdr.SequenceThis;
 
             msgSegments.Add( msgSeg );
 
@@ -89,11 +89,11 @@ namespace Steam3Lib
         }
 
 
-        bool HasData( UDPPktHdr udpHdr )
+        bool HasData( UdpHeader udpHdr )
         {
             foreach ( MsgSegment msgSeg in msgSegments )
             {
-                if ( msgSeg.DataSequence == udpHdr.m_nSeqThis )
+                if ( msgSeg.DataSequence == udpHdr.SequenceThis )
                     return true;
             }
             return false;

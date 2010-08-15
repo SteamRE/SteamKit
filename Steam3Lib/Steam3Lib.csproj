@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -29,6 +30,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -36,11 +38,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="NetPacket.cs" />
+    <Compile Include="Util\ByteBuffer.cs" />
+    <Compile Include="Util\DataStream.cs" />
+    <Compile Include="Net\NetPacket.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UDPConnection.cs" />
-    <Compile Include="UdpPacket.cs" />
-    <Compile Include="UDPPktHdr.cs" />
+    <Compile Include="Util\PsuedoRandom.cs" />
+    <Compile Include="Util\Serializable.cs" />
+    <Compile Include="Util\Singleton.cs" />
+    <Compile Include="Net\UDPConnection.cs" />
+    <Compile Include="Net\UdpHeader.cs" />
+    <Compile Include="Net\UdpSocket.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
