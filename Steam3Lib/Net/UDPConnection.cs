@@ -11,24 +11,54 @@ namespace Steam3Lib
 
 
     [StructLayout( LayoutKind.Sequential, Pack = 1 )]
-    public class ChallengeReply : Serializable<ChallengeReply>
+    public class ChallengeData : Serializable<ChallengeData>
     {
         public UInt32 ChallengeValue;
         public UInt32 ServerLoad;
     }
 
-    public class ChallengeEventArgs : EventArgs
+    [StructLayout( LayoutKind.Sequential, Pack = 1 )]
+    public class ConnectData : Serializable<ConnectData>
     {
-        public ChallengeReply Data { get; private set; }
-        public ChallengeEventArgs( ChallengeReply reply )
+        public UInt32 ChallengeValue;
+    }
+
+
+    public class NetworkEventArgs : EventArgs
+    {
+        public IPEndPoint Sender { get; private set; }
+
+        public NetworkEventArgs( IPEndPoint sender )
         {
-            Data = reply;
+            this.Sender = sender;
         }
     }
 
-    public class UDPConnection
+    public class ChallengeEventArgs : NetworkEventArgs
     {
-        static string[] CMServers =
+        public ChallengeData Data { get; private set; }
+
+        public ChallengeEventArgs( IPEndPoint sender, ChallengeData reply )
+            : base( sender )
+        {
+            this.Data = reply;
+        }
+    }
+
+    public class DataEventArgs : NetworkEventArgs
+    {
+        public byte[] Data { get; private set; }
+
+        public DataEventArgs( IPEndPoint sender, byte[] data )
+            : base( sender )
+        {
+            this.Data = data;
+        }
+    }
+
+    public class UdpConnection
+    {
+        public static string[] CMServers =
         {
             "68.142.64.164",
             "68.142.64.165",
@@ -56,6 +86,7 @@ namespace Steam3Lib
             "208.111.171.83",
         };
 
+
         UdpSocket udpSock;
 
         uint seqThis;
@@ -63,77 +94,107 @@ namespace Steam3Lib
 
 
         public event EventHandler<ChallengeEventArgs> ChallengeReceived;
+        public event EventHandler<NetworkEventArgs> AcceptReceived;
+        public event EventHandler<DataEventArgs> DataReceived;
 
 
-        public UDPConnection()
+        public UdpConnection()
         {
             udpSock = new UdpSocket();
+
+            seqThis = 0;
+            seqAcked = 0;
 
             udpSock.PacketReceived += RecvUdpPacket;
         }
 
 
-        public void Connect( IPEndPoint currentServer )
+        public void SendChallengeReq( IPEndPoint ipAddr )
         {
-        }
+            UdpPacket packet = new UdpPacket( EUdpPacketType.ChallengeReq );
+            packet.Header.SequenceThis = 1;
+            packet.Header.SequenceAcked = seqAcked;
 
-        public void RequestChallenge( IPEndPoint ipAddr )
-        {
-            UdpHeader udpPkt = new UdpHeader();
-
-            udpPkt.PacketType = EUdpPacketType.ChallengeReq;
-            udpPkt.SequenceThis = 1;
-
-            byte[] data = udpPkt.Serialize();
+            byte[] data = packet.GetData();
 
             udpSock.Send( data, ipAddr );
         }
-        public void RequestConnect( IPEndPoint ipAddr )
-        {
-            /*UDPPktHdr udpPkt = new UDPPktHdr();
 
-            udpPkt.m_EUDPPktType = EUDPPktType.Connect;*/
+        public void SendConnect( UInt32 challengeValue, IPEndPoint ipAddr )
+        {
+            seqThis++;
+
+            UdpPacket packet = new UdpPacket( EUdpPacketType.Connect );
+            packet.Header.SequenceThis = seqThis;
+            packet.Header.SequenceAcked = seqAcked;
+
+            packet.Header.PacketsInMsg = 1;
+            packet.Header.MsgStartSequence = seqThis;
+
+            ConnectData cd = new ConnectData();
+            cd.ChallengeValue = challengeValue ^ 0xA426DF2B; // challenge obfuscation mask
+
+            packet.SetPayload( cd.Serialize() );
+
+            byte[] data = packet.GetData();
+
+            udpSock.Send( data, ipAddr );
         }
 
 
-        private void RecvChallenge( UdpHeader udpHdr, byte[] data, IPEndPoint endPoint )
+        void RecvChallenge( UdpPacket udpPkt, IPEndPoint endPoint )
         {
-            int size = Marshal.SizeOf( typeof( ChallengeReply ) );
+            int size = Marshal.SizeOf( typeof( ChallengeData ) );
 
-            if ( data.Length < size )
+            if ( udpPkt.Payload.Length < size )
                 return;
 
-            ChallengeReply cr = ChallengeReply.Deserialize( data );
+            ChallengeData cr = ChallengeData.Deserialize( udpPkt.Payload );
 
             if ( ChallengeReceived != null )
-                ChallengeReceived( this, new ChallengeEventArgs( cr ) );
+                ChallengeReceived( this, new ChallengeEventArgs( endPoint, cr ) );
         }
 
-        private void RecvUdpPacket( object sender, PacketReceivedEventArgs e )
+        void RecvAccept( UdpPacket udpPkt, IPEndPoint endPoint )
         {
-            UdpDataPacket packet = e.Packet;
-            int size = packet.Data.Length;
+            if ( AcceptReceived != null )
+                AcceptReceived( this, new NetworkEventArgs( endPoint ) );
+        }
 
-            int headerSize = Marshal.SizeOf( typeof( UdpHeader ) );
+        void RecvData( UdpPacket udpPkt, IPEndPoint endPoint )
+        {
+            if ( DataReceived != null )
+                DataReceived( this, new DataEventArgs( endPoint, udpPkt.Payload ) );
+        }
 
-            if ( size < headerSize )
+        void RecvUdpPacket( object sender, PacketReceivedEventArgs e )
+        {
+            UdpPacket udpPkt = new UdpPacket( e.Packet.Data );
+
+            if ( !udpPkt.IsValid )
                 return;
 
-            UdpHeader udpPkt = UdpHeader.Deserialize( packet.Data );
+            seqAcked = udpPkt.Header.SequenceThis;
 
-            byte[] payload = new byte[ udpPkt.PayloadSize ];
-
-            Array.Copy( packet.Data, headerSize, payload, 0, payload.Length );
-
-            switch ( udpPkt.PacketType )
+            switch ( udpPkt.Header.PacketType )
             {
                 case EUdpPacketType.Challenge:
-                    RecvChallenge( udpPkt, payload, e.Packet.EndPoint );
+                    RecvChallenge( udpPkt, e.Packet.EndPoint );
+                    break;
+
+                case EUdpPacketType.Accept:
+                    RecvAccept( udpPkt, e.Packet.EndPoint );
+                    break;
+
+                case EUdpPacketType.Data:
+                    RecvData( udpPkt, e.Packet.EndPoint );
                     break;
 
                 default:
                     break; // unsupported type!!
             }
         }
+
+
     }
 }

@@ -56,6 +56,9 @@ namespace Steam3Lib
 
         public void Append( Byte[] data )
         {
+            if ( data == null )
+                return;
+
             buffer.Write( data, 0, data.Length );
         }
 

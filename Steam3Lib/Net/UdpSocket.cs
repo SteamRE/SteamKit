@@ -7,7 +7,7 @@ using System.Net;
 
 namespace Steam3Lib
 {
-    struct UdpDataPacket
+    struct UdpData
     {
         public IPEndPoint EndPoint;
         public byte[] Data;
@@ -15,9 +15,9 @@ namespace Steam3Lib
 
     class PacketReceivedEventArgs : EventArgs
     {
-        public UdpDataPacket Packet { get; set; }
+        public UdpData Packet { get; set; }
 
-        public PacketReceivedEventArgs( UdpDataPacket pkt )
+        public PacketReceivedEventArgs( UdpData pkt )
         {
             Packet = pkt;
         }
@@ -30,7 +30,7 @@ namespace Steam3Lib
 
         bool running;
 
-        Queue<UdpDataPacket> workQueue;
+        Queue<UdpData> workQueue;
 
         object lockObj = new object();
 
@@ -40,7 +40,7 @@ namespace Steam3Lib
 
         public UdpSocket()
         {
-            workQueue = new Queue<UdpDataPacket>();
+            workQueue = new Queue<UdpData>();
 
             sock = new UdpClient( 27000 );
 
@@ -53,16 +53,13 @@ namespace Steam3Lib
 
         public void Shutdown()
         {
-            Monitor.Enter( lockObj );
-
-            running = false;
-
-            Monitor.Exit( lockObj );
+            lock ( lockObj )
+                running = false;
         }
 
         public void Send( byte[] data, IPEndPoint endPoint )
         {
-            UdpDataPacket udp = new UdpDataPacket()
+            UdpData udp = new UdpData()
             {
                 EndPoint = endPoint,
                 Data = data,
@@ -71,7 +68,7 @@ namespace Steam3Lib
             Send( udp );
         }
 
-        public void Send( UdpDataPacket pkt )
+        public void Send( UdpData pkt )
         {
             lock ( lockObj )
             {
@@ -83,6 +80,8 @@ namespace Steam3Lib
         {
             while ( true )
             {
+                Thread.Sleep( 1 );
+
                 lock ( lockObj )
                 {
                     if ( !running )
@@ -90,23 +89,19 @@ namespace Steam3Lib
 
                     if ( workQueue.Count > 0 )
                     {
-                        UdpDataPacket pkt = workQueue.Dequeue();
+                        UdpData pkt = workQueue.Dequeue();
                         sock.Send( pkt.Data, pkt.Data.Length, pkt.EndPoint );
-
-                        Console.WriteLine( "sent pkt" );
                     }
 
                 }
 
-
                 if ( sock.Available == 0 )
                     continue;
-
 
                 IPEndPoint ep = null;
                 byte[] packet = sock.Receive( ref ep );
 
-                UdpDataPacket udpPkt = new UdpDataPacket()
+                UdpData udpPkt = new UdpData()
                 {
                     EndPoint = ep,
                     Data = packet,
@@ -114,7 +109,9 @@ namespace Steam3Lib
 
                 if ( PacketReceived != null )
                     PacketReceived( this, new PacketReceivedEventArgs( udpPkt ) );
+
             }
+
         }
     }
 }
