@@ -10,6 +10,7 @@ namespace Steam3Tester
     {
         static void Main( string[] args )
         {
+            
             UdpConnection udpConn = new UdpConnection();
 
             udpConn.SendChallengeReq( new IPEndPoint( IPAddress.Parse( UdpConnection.CMServers[ 0 ] ), 27017 ) );
@@ -25,10 +26,6 @@ namespace Steam3Tester
             udpConn.AcceptReceived += ( obj, e ) =>
                 {
                     Console.WriteLine( "Connection accepted." );
-                };
-            udpConn.DataReceived += ( obj, e ) =>
-                {
-                    Console.WriteLine( "Got data!" );
                 };
         }
     }
