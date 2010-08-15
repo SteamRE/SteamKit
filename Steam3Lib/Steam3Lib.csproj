@@ -35,20 +35,25 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.DirectoryServices.Protocols" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Net\UdpPacket.cs" />
+    <Compile Include="Client Messages\ClientMsg.cs" />
+    <Compile Include="Client Messages\EMsg.cs" />
+    <Compile Include="CryptoHelper.cs" />
+    <Compile Include="Networking\UdpPacket.cs" />
     <Compile Include="Util\ByteBuffer.cs" />
+    <Compile Include="Util\Crc32.cs" />
     <Compile Include="Util\DataStream.cs" />
-    <Compile Include="Net\NetPacket.cs" />
+    <Compile Include="Networking\NetPacket.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\PsuedoRandom.cs" />
     <Compile Include="Util\Serializable.cs" />
     <Compile Include="Util\Singleton.cs" />
-    <Compile Include="Net\UDPConnection.cs" />
-    <Compile Include="Net\UdpHeader.cs" />
-    <Compile Include="Net\UdpSocket.cs" />
+    <Compile Include="Networking\UDPConnection.cs" />
+    <Compile Include="Networking\UdpHeader.cs" />
+    <Compile Include="Networking\UdpSocket.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
