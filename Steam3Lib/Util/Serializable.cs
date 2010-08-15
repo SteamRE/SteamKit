@@ -27,13 +27,17 @@ namespace Steam3Lib
 
         public static T Deserialize( byte[] data )
         {
+            return Deserialize( data, 0 );
+        }
+        public static T Deserialize( byte[] data, int offset )
+        {
             int structSize = Marshal.SizeOf( typeof( T ) );
 
             if ( data.Length < structSize )
                 return null;
 
             IntPtr ptrMem = Marshal.AllocHGlobal( structSize );
-            Marshal.Copy( data, 0, ptrMem, structSize );
+            Marshal.Copy( data, offset, ptrMem, structSize );
 
             T structObj = ( T )Marshal.PtrToStructure( ptrMem, typeof( T ) );
 
