@@ -56,7 +56,7 @@ bool CUDPConnection::HandlePacket( ENetDirection eDirection, const uint8 *pData,
 
 	Assert( pHdr->m_nMagic == k_nMagic );
 
-	g_Logger->AppendFile( m_szLogFile, "%s %s %s", NET_ARROW_STRING( eDirection ), NET_DIRECTION_STRING( eDirection ), PchStringFromUDPPktHdr( pHdr ) );
+	g_Logger->AppendFile( m_szLogFile, "%s %s (%s) %s", NET_ARROW_STRING( eDirection ), NET_DIRECTION_STRING( eDirection ), PchStringFromSockAddr( sockAddr ), PchStringFromUDPPktHdr( pHdr ) );
 
 	size_t headerSize = sizeof( UDPPktHdr_t );
 
@@ -67,11 +67,15 @@ bool CUDPConnection::HandlePacket( ENetDirection eDirection, const uint8 *pData,
 
 	if ( pHdr->m_EUDPPktType == k_EUDPPktTypeDatagram )
 	{
-		bRet = this->HandleDatagram( k_eNetOutgoing, pHdr, pData, cubData );
+		bRet = this->HandleDatagram( eDirection, pHdr, pData, cubData );
 	}
 	else if ( pHdr->m_EUDPPktType == k_EUDPPktTypeChallengeReq )
 	{
-		bRet = this->HandleChallengeReq( k_eNetOutgoing, pHdr, pData, cubData );
+		bRet = this->HandleChallengeReq( eDirection, pHdr, pData, cubData );
+	}
+	else if ( pHdr->m_EUDPPktType == k_EUDPPktTypeChallenge )
+	{
+		bRet = this->HandleChallenge( eDirection, pHdr, pData, cubData );
 	}
 	else if ( pHdr->m_EUDPPktType == k_EUDPPktTypeData )
 	{
@@ -79,7 +83,7 @@ bool CUDPConnection::HandlePacket( ENetDirection eDirection, const uint8 *pData,
 	}
 	else if ( pHdr->m_EUDPPktType == k_EUDPPktTypeConnect )
 	{
-		bRet = this->HandleConnect( k_eNetOutgoing, pHdr, pData, cubData );
+		bRet = this->HandleConnect( eDirection, pHdr, pData, cubData );
 	}
 	else
 	{

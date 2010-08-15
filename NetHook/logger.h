@@ -8,6 +8,7 @@
 
 #include "steam/steamtypes.h"
 
+#define _WINSOCKAPI_
 #include <windows.h>
 
 

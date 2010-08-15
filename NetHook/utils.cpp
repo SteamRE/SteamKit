@@ -6509,3 +6509,16 @@ const char *PchNameFromEAccountType( EAccountType eAccountType )
 
 	return k_szEAccountType[ (int)eAccountType ];
 }
+
+const char *PchStringFromSockAddr( const sockaddr_in *sockAddr )
+{
+	static char szSockAddr[ 22 ];
+	memset( szSockAddr, 0, sizeof( szSockAddr ) );
+
+	if ( !sockAddr )
+		return NULL;
+
+	sprintf_s( szSockAddr, sizeof( szSockAddr ), "%s:%hu", inet_ntoa( sockAddr->sin_addr ), ntohs( sockAddr->sin_port ) );
+
+	return szSockAddr;
+}
