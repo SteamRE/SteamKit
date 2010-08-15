@@ -15,10 +15,17 @@ namespace Steam3Lib
 
         }
 
+        public byte[] GenerateRandomBlock( int size )
+        {
+            byte[] block = new byte[ size ];
+            rng.GetBytes( block );
+
+            return block;
+        }
+
         public uint GetRandomInt()
         {
-            byte[] data = new byte[ 4 ];
-            rng.GetBytes( data );
+            byte[] data = GenerateRandomBlock( 4 );
 
             return BitConverter.ToUInt32( data, 0 );
         }
