@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Runtime.InteropServices;
+using System.Reflection;
 
-namespace Steam3Lib
+namespace SteamLib
 {
     [StructLayout( LayoutKind.Sequential, Pack = 1)]
     public class Serializable<T> where T : Serializable<T>
@@ -44,6 +45,31 @@ namespace Steam3Lib
             Marshal.FreeHGlobal( ptrMem );
 
             return structObj;
+        }
+
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            Type thisType = this.GetType();
+
+            sb.Append( thisType.Name + " [ " );
+
+            foreach ( var pi in thisType.GetProperties( BindingFlags.Public | BindingFlags.Instance ) )
+            {
+                object value = pi.GetValue( this, null );
+                sb.AppendFormat( "{0} = {1}, ", pi.Name, value );
+            }
+
+            foreach ( var fi in thisType.GetFields( BindingFlags.Public | BindingFlags.Instance ) )
+            {
+                object val = fi.GetValue( this );
+                sb.AppendFormat( "{0} = {1}, ", fi.Name, val );
+            }
+
+            sb.Append( " ]" );
+
+            return sb.ToString();
         }
     }
 }

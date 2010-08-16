@@ -5,7 +5,7 @@ using System.Net.Sockets;
 using System.Threading;
 using System.Net;
 
-namespace Steam3Lib
+namespace SteamLib
 {
     struct UdpData
     {
@@ -99,7 +99,16 @@ namespace Steam3Lib
                     continue;
 
                 IPEndPoint ep = null;
-                byte[] packet = sock.Receive( ref ep );
+                byte[] packet = null;
+
+                try
+                {
+                    packet = sock.Receive( ref ep );
+                }
+                catch
+                {
+                    continue;
+                }
 
                 UdpData udpPkt = new UdpData()
                 {

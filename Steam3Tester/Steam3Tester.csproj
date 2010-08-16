@@ -42,9 +42,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Steam3Lib\Steam3Lib.csproj">
+    <ProjectReference Include="..\Steam3Lib\SteamLib.csproj">
       <Project>{5C00E764-1F76-4E3E-B759-2853DD77C28D}</Project>
-      <Name>Steam3Lib</Name>
+      <Name>SteamLib</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

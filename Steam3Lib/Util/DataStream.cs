@@ -4,7 +4,7 @@ using System.Text;
 using System.IO;
 using System.Runtime.InteropServices;
 
-namespace Steam3Lib
+namespace SteamLib
 {
     /// <summary>
     /// Helper data manip class that allows reading binary data from a byte array.

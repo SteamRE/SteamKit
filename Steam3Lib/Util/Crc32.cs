@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Security.Cryptography;
 
-namespace Steam3Lib
+namespace SteamLib
 {
 
     public class Crc32 : HashAlgorithm

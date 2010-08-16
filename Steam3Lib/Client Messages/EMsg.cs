@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Steam3Lib
+namespace SteamLib
 {
 
     public enum EMsg : int

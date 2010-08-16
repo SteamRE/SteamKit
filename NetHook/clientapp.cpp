@@ -37,6 +37,8 @@ int Login()
 
 	ISteamClient009 *steamClient = (ISteamClient009 *)factory( STEAMCLIENT_INTERFACE_VERSION_009, NULL );
 
+	steamClient->SetLocalIPBinding( 0, 27000 );
+
 	HSteamPipe hPipe = 0;
 	HSteamUser hUser = steamClient->CreateLocalUser( &hPipe, k_EAccountTypeAnonGameServer );
 
