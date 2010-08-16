@@ -116,6 +116,10 @@ namespace SteamLib
             Position += count;
             return returnBuff;
         }
+        public byte[] ReadBytes( uint count )
+        {
+            return this.ReadBytes( ( int )count );
+        }
 
         /// <summary>
         /// Reads a boolean value from the stream.
@@ -209,7 +213,16 @@ namespace SteamLib
         public Double ReadDouble()
         {
             return Read<Double>();
+        }
 
+
+        /// <summary>
+        /// Sizes the remaining size.
+        /// </summary>
+        /// <returns></returns>
+        public long SizeRemaining()
+        {
+            return Length - Position;
         }
 
 
