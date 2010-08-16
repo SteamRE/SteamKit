@@ -39,13 +39,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Client Messages\ClientMsg.cs" />
-    <Compile Include="Client Messages\EMsg.cs" />
+    <Compile Include="Types\ClientMsg.cs" />
+    <Compile Include="Types\EMsg.cs" />
+    <Compile Include="CM\CMInterface.cs" />
     <Compile Include="Crypto\KeyManager.cs" />
-    <Compile Include="CSteamID.cs" />
-    <Compile Include="EAccountType.cs" />
-    <Compile Include="EResult.cs" />
-    <Compile Include="EUniverse.cs" />
+    <Compile Include="Types\CSteamID.cs" />
+    <Compile Include="Types\EAccountType.cs" />
+    <Compile Include="Types\EResult.cs" />
+    <Compile Include="Types\EUniverse.cs" />
     <Compile Include="Networking\NetFilter.cs" />
     <Compile Include="Util\CryptoHelper.cs" />
     <Compile Include="Networking\UdpPacket.cs" />

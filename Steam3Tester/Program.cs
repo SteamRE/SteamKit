@@ -10,23 +10,9 @@ namespace Steam3Tester
     {
         static void Main( string[] args )
         {
-            
-            UdpConnection udpConn = new UdpConnection();
+            CMInterface cmInterface = CMInterface.Instance;
 
-            udpConn.SendChallengeReq( new IPEndPoint( IPAddress.Parse( UdpConnection.CMServers[ 1 ] ), 27014 ) );
-
-
-            udpConn.ChallengeReceived += ( obj, e ) =>
-                {
-                    Console.WriteLine( "Got challenge response. Load: " + e.Data.ServerLoad );
-
-                    udpConn.SendConnect( e.Data.ChallengeValue, e.Sender );
-                };
-
-            udpConn.AcceptReceived += ( obj, e ) =>
-                {
-                    Console.WriteLine( "Connection accepted." );
-                };
+            cmInterface.ConnectToCM();
         }
     }
 }
