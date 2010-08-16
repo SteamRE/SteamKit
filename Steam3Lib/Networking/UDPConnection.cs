@@ -28,7 +28,7 @@ namespace SteamLib
     }
 
 
-    public class NetworkEventArgs : EventArgs
+    class NetworkEventArgs : EventArgs
     {
         public IPEndPoint Sender { get; private set; }
 
@@ -38,7 +38,7 @@ namespace SteamLib
         }
     }
 
-    public class ChallengeEventArgs : NetworkEventArgs
+    class ChallengeEventArgs : NetworkEventArgs
     {
         public ChallengeData Data { get; private set; }
 
@@ -49,7 +49,18 @@ namespace SteamLib
         }
     }
 
-    public class DataEventArgs : NetworkEventArgs
+    class NetMsgEventArgs : DataEventArgs
+    {
+        public EMsg Msg { get; private set; }
+
+        public NetMsgEventArgs( IPEndPoint sender, EMsg eMsg, byte[] data )
+            : base( sender, data )
+        {
+            this.Msg = eMsg;
+        }
+    }
+
+    class DataEventArgs : NetworkEventArgs
     {
         public byte[] Data { get; private set; }
 
@@ -60,37 +71,8 @@ namespace SteamLib
         }
     }
 
-    public class UdpConnection
+    class UdpConnection
     {
-        public static string[] CMServers =
-        {
-            "68.142.64.164",
-            "68.142.64.165",
-            "68.142.91.34",
-            "68.142.91.35",
-            "68.142.91.36",
-            "68.142.116.178",
-            "68.142.116.179",
-
-            "69.28.145.170",
-            "69.28.145.171",
-            "69.28.145.172",
-            "69.28.156.250",
-
-            "72.165.61.185",
-            "72.165.61.186",
-            "72.165.61.187",
-            "72.165.61.188",
-
-            "208.111.133.84",
-            "208.111.133.85",
-            "208.111.158.52",
-            "208.111.158.53",
-            "208.111.171.82",
-            "208.111.171.83",
-        };
-
-
         UdpSocket udpSock;
 
         uint seqThis;
@@ -98,6 +80,7 @@ namespace SteamLib
 
         uint remoteConnID;
 
+        byte[] tempSessionKey;
         NetFilter netFilter;
 
         Dictionary<uint, NetPacket> packetMap;
@@ -105,7 +88,7 @@ namespace SteamLib
 
         public event EventHandler<ChallengeEventArgs> ChallengeReceived;
         public event EventHandler<NetworkEventArgs> AcceptReceived;
-        public event EventHandler<DataEventArgs> DataReceived;
+        public event EventHandler<NetMsgEventArgs> NetMsgReceived;
 
 
         public UdpConnection()
@@ -202,21 +185,12 @@ namespace SteamLib
         {
             remoteConnID = udpPkt.Header.SourceConnID;
 
-            var logon = new ClientMsg<MsgClientAnonLogOn, ExtendedClientMsgHdr>();
-
-            logon.Write( new byte[ 19 ] );
-
-            SendNetMsg( logon, endPoint );
-
             if ( AcceptReceived != null )
                 AcceptReceived( this, new NetworkEventArgs( endPoint ) );
         }
 
         void RecvData( UdpPacket udpPkt, IPEndPoint endPoint )
         {
-            if ( DataReceived != null )
-                DataReceived( this, new DataEventArgs( endPoint, udpPkt.Payload ) );
-
             NetPacket netPacket = null;
 
             if ( packetMap.ContainsKey( udpPkt.Header.MsgStartSequence ) )
@@ -243,7 +217,7 @@ namespace SteamLib
             data = netFilter.ProcessIncoming( data );
 
             if ( data.Length < 4 )
-                return;
+                return; // we need at least an EMsg
 
             EMsg eMsg = ( EMsg )BitConverter.ToUInt32( data, 0 );
             this.RecvNetMsg( eMsg, data, endPoint );
@@ -259,35 +233,58 @@ namespace SteamLib
 
                 Console.WriteLine( "Got encryption request for universe: " + encRec.Universe );
 
-                byte[] sessionKey = CryptoHelper.GenerateRandomBlock( 32 );
-                netFilter = new NetFilterEncryption( sessionKey );
+                tempSessionKey = CryptoHelper.GenerateRandomBlock( 32 );
 
                 var encResp = new ClientMsg<MsgChannelEncryptResponse, MsgHdr>();
 
-                byte[] cryptedSessKey = CryptoHelper.RSAEncrypt( sessionKey, KeyManager.GetPublicKey( encRec.Universe ) );
-                byte[] crc = BitConverter.GetBytes( Crc32.Compute( cryptedSessKey ) );
-                byte[] unk = new byte[ 4 ];
+                byte[] cryptedSessKey = CryptoHelper.RSAEncrypt( tempSessionKey, KeyManager.GetPublicKey( encRec.Universe ) );
 
-                ByteBuffer bb = new ByteBuffer();
-                bb.Append( cryptedSessKey );
-                bb.Append( crc );
-                bb.Append( unk );
+                encResp.Write( cryptedSessKey );
+                encResp.Write<uint>( Crc32.Compute( cryptedSessKey ) );
+                encResp.Write<uint>( 0 );
 
-                encResp.SetPayload( bb.ToArray() );
-
-                SendNetMsg( encResp, endPoint );
+                this.SendNetMsg( encResp, endPoint );
             }
 
             if ( eMsg == EMsg.ChannelEncryptResult )
             {
                 var encRes = ClientMsg<MsgChannelEncryptResult, MsgHdr>.GetMsgHeader( data );
 
+                if ( encRes.Result == EResult.OK )
+                    netFilter = new NetFilterEncryption( tempSessionKey );
+
                 Console.WriteLine( "Crypto result: " + encRes.Result );
             }
 
-            if ( eMsg == EMsg.ClientLogOnResponse )
+            if ( eMsg == EMsg.Multi )
+                this.MultiplexMsgMulti( data, endPoint );
+
+            if ( NetMsgReceived != null )
+                NetMsgReceived( this, new NetMsgEventArgs( endPoint, eMsg, data ) );
+        }
+
+        void MultiplexMsgMulti( byte[] data, IPEndPoint endPoint )
+        {
+            var msgMulti = new ClientMsg<MsgMulti, MsgHdr>( data );
+
+            byte[] payload = msgMulti.GetPayload();
+
+            if ( msgMulti.MsgHeader.UnzippedSize != 0 )
             {
-                var logonResp = new ClientMsg<MsgClientLogOnResponse, ExtendedClientMsgHdr>( data );
+                // todo: inflate data
+                throw new NotImplementedException();
+            }
+
+            DataStream ds = new DataStream( payload );
+
+            while ( ds.SizeRemaining() != 0 )
+            {
+                uint subSize = ds.ReadUInt32();
+                byte[] subData = ds.ReadBytes( subSize );
+
+                EMsg eMsg = ( EMsg )BitConverter.ToUInt32( subData, 0 );
+
+                this.RecvNetMsg( eMsg, subData, endPoint );
             }
         }
 
@@ -315,6 +312,7 @@ namespace SteamLib
                     break;
 
                 default:
+                    Console.WriteLine( "Unhandled UDP packet type: " + udpPkt.Header.PacketType + "!!!" );
                     break; // unsupported type!!
             }
         }
