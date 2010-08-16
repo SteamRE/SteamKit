@@ -6,13 +6,15 @@ using System.Net.Sockets;
 using System.Threading;
 using System.Runtime.InteropServices;
 
-namespace Steam3Lib
+namespace SteamLib
 {
 
 
     [StructLayout( LayoutKind.Sequential, Pack = 1 )]
     public class ChallengeData : Serializable<ChallengeData>
     {
+        public const uint ChallengeMask = 0xA426DF2B;
+
         public UInt32 ChallengeValue;
         public UInt32 ServerLoad;
     }
@@ -20,6 +22,8 @@ namespace Steam3Lib
     [StructLayout( LayoutKind.Sequential, Pack = 1 )]
     public class ConnectData : Serializable<ConnectData>
     {
+        public const uint ChallengeMask = 0xA426DF2B;
+
         public UInt32 ChallengeValue;
     }
 
@@ -94,8 +98,7 @@ namespace Steam3Lib
 
         uint remoteConnID;
 
-        bool usingCrypto;
-        byte[] sessionKey;
+        NetFilter netFilter;
 
         Dictionary<uint, NetPacket> packetMap;
 
@@ -116,7 +119,7 @@ namespace Steam3Lib
 
             remoteConnID = 0;
 
-            usingCrypto = false;
+            netFilter = new NetFilter( null );
 
             udpSock.PacketReceived += RecvUdpPacket;
         }
@@ -146,7 +149,7 @@ namespace Steam3Lib
             packet.Header.MsgStartSequence = seqThis;
 
             ConnectData cd = new ConnectData();
-            cd.ChallengeValue = challengeValue ^ 0xA426DF2B; // challenge obfuscation mask
+            cd.ChallengeValue = challengeValue ^ ConnectData.ChallengeMask;
 
             packet.SetPayload( cd.Serialize() );
 
@@ -175,8 +178,8 @@ namespace Steam3Lib
         }
 
         public void SendNetMsg<MsgHdr, Hdr>( ClientMsg<MsgHdr, Hdr> clientMsg, IPEndPoint ipAddr )
-            where Hdr : Serializable<Hdr>, new()
-            where MsgHdr : Serializable<MsgHdr>, new()
+            where Hdr : Serializable<Hdr>, IMsg, new()
+            where MsgHdr : Serializable<MsgHdr>, IClientMsg, new()
         {
             SendData( clientMsg.GetData(), ipAddr );
         }
@@ -199,6 +202,12 @@ namespace Steam3Lib
         {
             remoteConnID = udpPkt.Header.SourceConnID;
 
+            var logon = new ClientMsg<MsgClientAnonLogOn, ExtendedClientMsgHdr>();
+
+            logon.Write( new byte[ 19 ] );
+
+            SendNetMsg( logon, endPoint );
+
             if ( AcceptReceived != null )
                 AcceptReceived( this, new NetworkEventArgs( endPoint ) );
         }
@@ -214,7 +223,7 @@ namespace Steam3Lib
                 netPacket = packetMap[ udpPkt.Header.MsgStartSequence ];
             else
             {
-                netPacket = new NetPacket( udpPkt.Header.MsgStartSequence, udpPkt.Header.PacketsInMsg, usingCrypto );
+                netPacket = new NetPacket( udpPkt.Header.MsgStartSequence, udpPkt.Header.PacketsInMsg );
 
                 packetMap.Add( udpPkt.Header.MsgStartSequence, netPacket );
             }
@@ -231,11 +240,7 @@ namespace Steam3Lib
 
             packetMap.Remove( udpHdr.MsgStartSequence );
 
-            if ( usingCrypto )
-            {
-                // decrypt!
-                throw new NotImplementedException();
-            }
+            data = netFilter.ProcessIncoming( data );
 
             if ( data.Length < 4 )
                 return;
@@ -252,16 +257,15 @@ namespace Steam3Lib
             {
                 var encRec = ClientMsg<MsgChannelEncryptRequest, MsgHdr>.GetMsgHeader( data );
 
-                sessionKey = CryptoHelper.GenerateRandomBlock( 32 );
+                Console.WriteLine( "Got encryption request for universe: " + encRec.Universe );
 
-                var encResp = new ClientMsg<MsgChannelEncryptResponse, MsgHdr>( EMsg.ChannelEncryptResponse );
+                byte[] sessionKey = CryptoHelper.GenerateRandomBlock( 32 );
+                netFilter = new NetFilterEncryption( sessionKey );
 
-                encResp.MsgHeader.KeySize = 128;
-                encResp.MsgHeader.ProtocolVersion = 1;
+                var encResp = new ClientMsg<MsgChannelEncryptResponse, MsgHdr>();
 
-                byte[] cryptedSessKey = CryptoHelper.RSAEncrypt( sessionKey, CryptoHelper.Public_Key );
+                byte[] cryptedSessKey = CryptoHelper.RSAEncrypt( sessionKey, KeyManager.GetPublicKey( encRec.Universe ) );
                 byte[] crc = BitConverter.GetBytes( Crc32.Compute( cryptedSessKey ) );
-                Array.Reverse( crc );
                 byte[] unk = new byte[ 4 ];
 
                 ByteBuffer bb = new ByteBuffer();
@@ -272,6 +276,18 @@ namespace Steam3Lib
                 encResp.SetPayload( bb.ToArray() );
 
                 SendNetMsg( encResp, endPoint );
+            }
+
+            if ( eMsg == EMsg.ChannelEncryptResult )
+            {
+                var encRes = ClientMsg<MsgChannelEncryptResult, MsgHdr>.GetMsgHeader( data );
+
+                Console.WriteLine( "Crypto result: " + encRes.Result );
+            }
+
+            if ( eMsg == EMsg.ClientLogOnResponse )
+            {
+                var logonResp = new ClientMsg<MsgClientLogOnResponse, ExtendedClientMsgHdr>( data );
             }
         }
 

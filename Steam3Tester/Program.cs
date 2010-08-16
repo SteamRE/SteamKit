@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Steam3Lib;
+using SteamLib;
 using System.Net;
 
 namespace Steam3Tester
@@ -13,7 +13,7 @@ namespace Steam3Tester
             
             UdpConnection udpConn = new UdpConnection();
 
-            udpConn.SendChallengeReq( new IPEndPoint( IPAddress.Parse( UdpConnection.CMServers[ 0 ] ), 27017 ) );
+            udpConn.SendChallengeReq( new IPEndPoint( IPAddress.Parse( UdpConnection.CMServers[ 1 ] ), 27014 ) );
 
 
             udpConn.ChallengeReceived += ( obj, e ) =>

@@ -3,10 +3,15 @@ using System.Collections.Generic;
 using System.Text;
 using System.Runtime.InteropServices;
 
-namespace Steam3Lib
+namespace SteamLib
 {
+    public interface IMsg
+    {
+        void SetEMsg( EMsg eMsg );
+    }
+
     [StructLayout( LayoutKind.Sequential, Pack = 1 )]
-    class MsgHdr : Serializable<MsgHdr>
+    class MsgHdr : Serializable<MsgHdr>, IMsg
     {
         public EMsg EMsg;
 
@@ -16,17 +21,22 @@ namespace Steam3Lib
 
         public MsgHdr()
         {
-            EMsg = EMsg.Invalid;
+            this.EMsg = EMsg.Invalid;
 
-            TargetJobID = 0xFFFFFFFFFFFFFFFF;
-            SourceJobID = 0xFFFFFFFFFFFFFFFF;
+            this.TargetJobID = 0xFFFFFFFFFFFFFFFF;
+            this.SourceJobID = 0xFFFFFFFFFFFFFFFF;
+        }
+
+        public void SetEMsg( EMsg eMsg )
+        {
+            this.EMsg = eMsg;
         }
     }
 
     [StructLayout( LayoutKind.Sequential, Pack = 1 )]
-    class ExtendedClientMsgHdr : Serializable<ExtendedClientMsgHdr>
+    class ExtendedClientMsgHdr : Serializable<ExtendedClientMsgHdr>, IMsg
     {
-        public EMsg EMsg; // EMsg
+        public EMsg EMsg;
 
         public byte HeaderSize;
 
@@ -37,63 +47,61 @@ namespace Steam3Lib
 
         public byte HeaderCanary;
 
-        public ulong SteamID; // todo: CSteamID
+        public ulong SteamID;
 
         public int SessionID;
 
 
         public ExtendedClientMsgHdr()
         {
-            EMsg = EMsg.Invalid;
+            this.EMsg = EMsg.Invalid;
 
-            HeaderSize = 36;
+            this.HeaderSize = 36;
 
-            HeaderVersion = 2;
+            this.HeaderVersion = 2;
 
-            TargetJobID = 0xFFFFFFFFFFFFFFFF;
-            SourceJobID = 0xFFFFFFFFFFFFFFFF;
+            this.TargetJobID = 0xFFFFFFFFFFFFFFFF;
+            this.SourceJobID = 0xFFFFFFFFFFFFFFFF;
 
-            HeaderCanary = 239;
+            this.HeaderCanary = 239;
 
-            SessionID = 0;
+            this.SessionID = 0;
         }
-    };
+
+        public void SetEMsg( EMsg eMsg )
+        {
+            this.EMsg = eMsg;
+        }
+
+    }
 
 
     public class ClientMsg<MsgHdr, Hdr>
         : Serializable<Hdr>
-        where Hdr : Serializable<Hdr>, new()
-        where MsgHdr : Serializable<MsgHdr>, new()
+        where Hdr : Serializable<Hdr>, IMsg, new()
+        where MsgHdr : Serializable<MsgHdr>, IClientMsg, new()
     {
 
         public Hdr Header { get; private set; }
         public MsgHdr MsgHeader { get; private set; }
 
-        public byte[] Payload { get; private set; }
+        ByteBuffer byteBuff;
 
 
-        public ClientMsg( EMsg eMsg )
+        public ClientMsg()
         {
+            byteBuff = new ByteBuffer();
+
             Header = new Hdr();
-
-            byte[] headerData = Header.Serialize();
-            byte[] eMsgData = BitConverter.GetBytes( ( uint )eMsg );
-
-            eMsgData.CopyTo( headerData, 0 );
-
-            Header = Serializable<Hdr>.Deserialize( headerData );
-
             MsgHeader = new MsgHdr();
-        }
 
-        public ClientMsg( EMsg eMsg, byte[] payload )
-            : this( eMsg )
-        {
-            Payload = payload;
+            Header.SetEMsg( MsgHeader.GetEMsg() );
         }
 
         public ClientMsg( byte[] data )
         {
+            byteBuff = new ByteBuffer();
+
             int headerSize = Marshal.SizeOf( typeof( Hdr ) );
 
             this.Header = Serializable<Hdr>.Deserialize( data );
@@ -101,15 +109,22 @@ namespace Steam3Lib
 
             headerSize += Marshal.SizeOf( typeof( MsgHdr ) );
 
-            this.Payload = new byte[ data.Length - headerSize ];
+            byte[] payload = new byte[ data.Length - headerSize ];
+            Array.Copy( data, headerSize, payload, 0, payload.Length );
 
-            Array.Copy( data, headerSize, this.Payload, 0, Payload.Length );
+            SetPayload( payload );
         }
 
 
         public void SetPayload( byte[] data )
         {
-            this.Payload = data;
+            byteBuff.Clear();
+            byteBuff.Append( data );
+        }
+
+        public byte[] GetPayload()
+        {
+            return byteBuff.ToArray();
         }
 
 
@@ -120,9 +135,19 @@ namespace Steam3Lib
             bb.Append( this.Header.Serialize() );
             bb.Append( this.MsgHeader.Serialize() );
 
-            bb.Append( this.Payload );
+            bb.Append( byteBuff.ToArray() );
 
             return bb.ToArray();
+        }
+
+
+        public void Write<T>( T obj ) where T : struct
+        {
+            byteBuff.Append( obj );
+        }
+        public void Write( byte[] obj )
+        {
+            byteBuff.Append( obj );
         }
 
 
@@ -136,30 +161,114 @@ namespace Steam3Lib
         }
         public static byte[] GetPayload( byte[] data )
         {
-            return new ClientMsg<MsgHdr, Hdr>( data ).Payload;
+            return new ClientMsg<MsgHdr, Hdr>( data ).GetPayload();
         }
+    }
+
+    public interface IClientMsg
+    {
+        EMsg GetEMsg();
     }
 
 
     [StructLayout( LayoutKind.Sequential, Pack = 1 )]
-    class MsgChannelEncryptRequest : Serializable<MsgChannelEncryptRequest>
+    class MsgChannelEncryptRequest : Serializable<MsgChannelEncryptRequest>, IClientMsg
     {
         public uint ProtocolVersion;
-        public int Universe; // todo: EUniverse
+        public EUniverse Universe;
 
         public MsgChannelEncryptRequest()
         {
         }
+
+        public EMsg GetEMsg()
+        {
+            return EMsg.ChannelEncryptRequest;
+        }
     }
 
     [StructLayout( LayoutKind.Sequential, Pack = 1 )]
-    class MsgChannelEncryptResponse : Serializable<MsgChannelEncryptResponse>
+    class MsgChannelEncryptResponse : Serializable<MsgChannelEncryptResponse>, IClientMsg
     {
+        public const uint PROTOCOL_VERSION = 1;
+
         public uint ProtocolVersion;
         public uint KeySize;
 
         public MsgChannelEncryptResponse()
         {
+            ProtocolVersion = PROTOCOL_VERSION;
+            KeySize = 128;
+        }
+
+        public EMsg GetEMsg()
+        {
+            return EMsg.ChannelEncryptResponse;
         }
     }
+
+    [StructLayout( LayoutKind.Sequential, Pack = 1 )]
+    class MsgChannelEncryptResult : Serializable<MsgChannelEncryptResult>, IClientMsg
+    {
+        public EResult Result;
+
+        public MsgChannelEncryptResult()
+        {
+        }
+
+        public EMsg GetEMsg()
+        {
+            return EMsg.ChannelEncryptResult;
+        }
+    }
+
+    [StructLayout( LayoutKind.Sequential, Pack = 1 )]
+    class MsgClientAnonLogOn : Serializable<MsgClientAnonLogOn>, IClientMsg
+    {
+        public const uint ObfuscationMask = 0xBAADF00D;
+
+        public const uint CurrentProtocol = 65563;
+
+
+        public uint ProtocolVersion;
+
+        public uint PrivateIPObfuscated;
+        public uint PublicIP;
+
+
+        public MsgClientAnonLogOn()
+        {
+            ProtocolVersion = CurrentProtocol;
+        }
+
+
+        public EMsg GetEMsg()
+        {
+            return EMsg.ClientAnonLogOn;
+        }
+    }
+
+    [StructLayout( LayoutKind.Sequential, Pack = 1)]
+    class MsgClientLogOnResponse : Serializable<MsgClientLogOnResponse>, IClientMsg
+    {
+        public EResult Result;
+
+        public int OutOfGameHeartbeatRateSec;
+        public int InGameHeartbeatRateSec;
+
+        public ulong ClientSuppliedSteamId;
+
+        public uint IPPublic;
+
+        public uint ServerRealTime;
+
+        public MsgClientLogOnResponse()
+        {
+        }
+
+        public EMsg GetEMsg()
+        {
+            return EMsg.ClientLogOnResponse;
+        }
+    };
 }

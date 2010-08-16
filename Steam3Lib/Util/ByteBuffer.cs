@@ -4,7 +4,7 @@ using System.Text;
 using System.Runtime.InteropServices;
 using System.IO;
 
-namespace Steam3Lib
+namespace SteamLib
 {
     public class ByteBuffer
     {
@@ -128,6 +128,13 @@ namespace Steam3Lib
         {
             Append( data, encoding );
             Append<Byte>( 0 );
+        }
+
+
+        public void Clear()
+        {
+            buffer.Close();
+            buffer = new MemoryStream();
         }
 
 

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Steam3Lib
+namespace SteamLib
 {
     struct MsgSegment
     {
@@ -21,10 +21,9 @@ namespace Steam3Lib
 
 
         public bool IsCompleted { get; private set; }
-        public bool IsEncrypted { get; private set; }
 
 
-        public NetPacket( uint seqStart, uint numPkts, bool isEncrypted )
+        public NetPacket( uint seqStart, uint numPkts )
         {
             msgSegments = new List<MsgSegment>();
 
@@ -33,7 +32,6 @@ namespace Steam3Lib
 
             this.numPkts = numPkts;
 
-            this.IsEncrypted = isEncrypted;
             this.IsCompleted = false;
         }
 

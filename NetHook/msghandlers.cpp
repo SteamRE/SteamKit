@@ -5,10 +5,6 @@
 #include "utils.h"
 
 
-struct MsgClientAnonLogOn_t
-{
-};
-
 bool DefaultHandler( EMsg eMsg, ENetDirection eDirection, const uint8 *pData, uint32 cubData )
 {
 	return true;
@@ -77,4 +73,4 @@ const char *PrintAnonLogOn( EMsg eMsg, const uint8 *pData, uint32 cubData )
 	return szHeader;
 }
 
-DEFINE_MSGHANDLER( MsgClientAnonLogOn, ExtendedClientMsgHdr_t, PrintAnonLogOn, DefaultHandler );
+//DEFINE_MSGHANDLER( MsgClientAnonLogOn, ExtendedClientMsgHdr_t, PrintAnonLogOn, DefaultHandler );

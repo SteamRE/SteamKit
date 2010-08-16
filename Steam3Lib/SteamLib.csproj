@@ -8,8 +8,8 @@
     <ProjectGuid>{5C00E764-1F76-4E3E-B759-2853DD77C28D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Steam3Lib</RootNamespace>
-    <AssemblyName>Steam3Lib</AssemblyName>
+    <RootNamespace>SteamLib</RootNamespace>
+    <AssemblyName>SteamLib</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -41,7 +41,13 @@
   <ItemGroup>
     <Compile Include="Client Messages\ClientMsg.cs" />
     <Compile Include="Client Messages\EMsg.cs" />
-    <Compile Include="CryptoHelper.cs" />
+    <Compile Include="Crypto\KeyManager.cs" />
+    <Compile Include="CSteamID.cs" />
+    <Compile Include="EAccountType.cs" />
+    <Compile Include="EResult.cs" />
+    <Compile Include="EUniverse.cs" />
+    <Compile Include="Networking\NetFilter.cs" />
+    <Compile Include="Util\CryptoHelper.cs" />
     <Compile Include="Networking\UdpPacket.cs" />
     <Compile Include="Util\ByteBuffer.cs" />
     <Compile Include="Util\Crc32.cs" />
