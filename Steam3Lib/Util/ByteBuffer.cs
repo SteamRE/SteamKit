@@ -10,17 +10,25 @@ namespace SteamLib
     {
         MemoryStream buffer;
 
+        public bool SwapEndianness { get; set; }
+
         public ByteBuffer()
         {
             buffer = new MemoryStream();
+        }
+        public ByteBuffer( bool swapEndianness )
+            : this()
+        {
+            this.SwapEndianness = swapEndianness;
         }
         public ByteBuffer( int capacity )
         {
             buffer = new MemoryStream( capacity );
         }
-        public ByteBuffer( IEnumerable<byte> collection )
+        public ByteBuffer( int capacity, bool swapEndianness )
+            : this( capacity )
         {
-            buffer = new MemoryStream( ( byte[] )collection );
+            this.SwapEndianness = swapEndianness;
         }
 
 
@@ -36,6 +44,9 @@ namespace SteamLib
             Marshal.Copy( dataBlock, byteData, 0, dataLen );
 
             Marshal.FreeHGlobal( dataBlock );
+
+            if ( SwapEndianness )
+                Array.Reverse( byteData );
 
             Append( byteData );
         }

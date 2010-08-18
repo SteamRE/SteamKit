@@ -152,11 +152,13 @@ namespace SteamLib
 
                 if ( encRes.Result == EResult.OK )
                     SendLogOn( e.Sender );
+                else
+                    Console.WriteLine( "Failed crypto handshake: " + encRes.Result );
             }
 
             if ( e.Msg == EMsg.ClientLogOnResponse )
             {
-                var logonResp = new ClientMsg<MsgClientLogOnResponse,ExtendedClientMsgHdr>( e.Data );
+                var logonResp = new ClientMsg<MsgClientLogOnResponse, ExtendedClientMsgHdr>( e.Data );
 
                 Console.WriteLine( "Logon Response: " + logonResp.MsgHeader.Result );
 
@@ -172,6 +174,22 @@ namespace SteamLib
                     heartBeatFunc.SetFunc( SendHeartbeat );
                     heartBeatFunc.SetObject( this );
                     heartBeatFunc.SetDelay( TimeSpan.FromSeconds( logonResp.MsgHeader.OutOfGameHeartbeatRateSec ) );
+                }
+            }
+
+            if ( e.Msg == EMsg.ClientCMList )
+            {
+                var cmList = new ClientMsg<MsgClientCMList, ExtendedClientMsgHdr>( e.Data );
+
+                Console.WriteLine( "Got CM List: {0} servers.", cmList.MsgHeader.CountCMs );
+
+                DataStream ds = new DataStream( cmList.GetPayload() );
+
+                for ( int x = 0 ; x < cmList.MsgHeader.CountCMs ; ++x )
+                {
+                    IPAddress ipAddr = new IPAddress( ds.ReadBytes( 4, true ) );
+
+                    Console.WriteLine( "  Server: {0}", ipAddr.ToString() );
                 }
             }
         }
