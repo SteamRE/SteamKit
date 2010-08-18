@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ScheduledFunction.cs" />
     <Compile Include="Types\ClientMsg.cs" />
     <Compile Include="Types\EMsg.cs" />
     <Compile Include="CM\CMInterface.cs" />
@@ -48,7 +49,7 @@
     <Compile Include="Types\EResult.cs" />
     <Compile Include="Types\EUniverse.cs" />
     <Compile Include="Networking\NetFilter.cs" />
-    <Compile Include="Util\CryptoHelper.cs" />
+    <Compile Include="Crypto\CryptoHelper.cs" />
     <Compile Include="Networking\UdpPacket.cs" />
     <Compile Include="Util\ByteBuffer.cs" />
     <Compile Include="Util\Crc32.cs" />

@@ -56,13 +56,18 @@ namespace SteamLib
 
         CMServer bestServer;
 
+        CSteamID steamId;
+        int sessionId;
 
         // any network action interacting with members must lock this object
         object netLock = new object();
 
+        ScheduledFunction<CMInterface> heartBeatFunc;
+
 
         public CMInterface()
         {
+            steamId = new CSteamID( 0 );
             bestServer = new CMServer();
 
             udpConn = new UdpConnection();
@@ -70,11 +75,12 @@ namespace SteamLib
             udpConn.AcceptReceived += RecvAccept;
             udpConn.ChallengeReceived += RecvChallenge;
             udpConn.NetMsgReceived += RecvNetMsg;
+            udpConn.DisconnectReceived += RecvDisconnect;
 
             // find our best server while we wait
             foreach ( string ipStr in CMServers )
             {
-                IPEndPoint endPoint = new IPEndPoint( IPAddress.Parse( ipStr ), 27014 );
+                IPEndPoint endPoint = new IPEndPoint( IPAddress.Parse( ipStr ), 27017 );
                 udpConn.SendChallengeReq( endPoint );
             }
         }
@@ -101,6 +107,19 @@ namespace SteamLib
             Monitor.Exit( netLock );
         }
 
+        void SendHeartbeat( CMInterface o )
+        {
+            lock ( netLock )
+            {
+                var heartbeat = new ClientMsg<MsgClientHeartBeat, ExtendedClientMsgHdr>();
+
+                heartbeat.Header.SessionID = this.sessionId;
+                heartbeat.Header.SteamID = this.steamId;
+
+                udpConn.SendNetMsg( heartbeat, this.bestServer.EndPoint );
+            }
+        }
+
 
         void SendLogOn( IPEndPoint endPoint )
         {
@@ -110,17 +129,19 @@ namespace SteamLib
             var anonLogon = new ClientMsg<MsgClientAnonLogOn, ExtendedClientMsgHdr>();
             anonLogon.Header.SteamID = steamId;
 
-            IPHostEntry hostEntry = Dns.GetHostByName( Dns.GetHostName() );
-            byte[] ipBytes = hostEntry.AddressList[ 0 ].GetAddressBytes();
-            uint ip = ( ( uint )ipBytes[ 3 ] << 24 ) + ( ( uint )ipBytes[ 2 ] << 16 ) + ( ( uint )ipBytes[ 1 ] << 8 ) + ( ( uint )ipBytes[ 0 ] );
-
-            anonLogon.MsgHeader.PrivateIPObfuscated = ip ^ MsgClientAnonLogOn.ObfuscationMask;
-
-            anonLogon.Write( new byte[ 19 ] ); // unknown stuff
-
             udpConn.SendNetMsg( anonLogon, endPoint );
         }
 
+        void RecvDisconnect( object sender, NetworkEventArgs e )
+        {
+            lock ( netLock )
+            {
+                this.heartBeatFunc = null;
+
+                this.steamId = new CSteamID( 0 );
+                this.sessionId = 0;
+            }
+        }
 
         void RecvNetMsg( object sender, NetMsgEventArgs e )
         {
@@ -131,36 +152,50 @@ namespace SteamLib
 
                 if ( encRes.Result == EResult.OK )
                     SendLogOn( e.Sender );
+            }
 
+            if ( e.Msg == EMsg.ClientLogOnResponse )
+            {
+                var logonResp = new ClientMsg<MsgClientLogOnResponse,ExtendedClientMsgHdr>( e.Data );
+
+                Console.WriteLine( "Logon Response: " + logonResp.MsgHeader.Result );
+
+                lock ( netLock )
+                {
+                    this.sessionId = logonResp.Header.SessionID;
+                    this.steamId = logonResp.Header.SteamID;
+                }
+
+                if ( logonResp.MsgHeader.Result == EResult.OK )
+                {
+                    heartBeatFunc = new ScheduledFunction<CMInterface>();
+                    heartBeatFunc.SetFunc( SendHeartbeat );
+                    heartBeatFunc.SetObject( this );
+                    heartBeatFunc.SetDelay( TimeSpan.FromSeconds( logonResp.MsgHeader.OutOfGameHeartbeatRateSec ) );
+                }
             }
         }
 
         void RecvChallenge( object sender, ChallengeEventArgs e )
         {
-            Monitor.Enter( netLock );
-
-            if ( e.Data.ServerLoad < bestServer.ServerLoad )
+            lock ( netLock )
             {
-                bestServer.EndPoint = e.Sender;
-                bestServer.ServerLoad = e.Data.ServerLoad;
-                bestServer.Challenge = e.Data.ChallengeValue;
+                if ( e.Data.ServerLoad < bestServer.ServerLoad )
+                {
+                    bestServer.EndPoint = e.Sender;
+                    bestServer.ServerLoad = e.Data.ServerLoad;
+                    bestServer.Challenge = e.Data.ChallengeValue;
 
-                Console.WriteLine( string.Format( "New CM best! Server: {0}. Load: {1}", bestServer.EndPoint, bestServer.ServerLoad ) );
+                    Console.WriteLine( string.Format( "New CM best! Server: {0}. Load: {1}", bestServer.EndPoint, bestServer.ServerLoad ) );
 
-                Monitor.Exit( netLock );
-
-                return;
+                    return;
+                }
             }
-
-            Monitor.Exit( netLock );
         }
 
         void RecvAccept( object sender, NetworkEventArgs e )
         {
             Console.WriteLine( "Connection accepted!" );
-
-            if ( e.Sender.Port == 27014 )
-                SendLogOn( e.Sender );
         }
     }
 }
