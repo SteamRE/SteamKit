@@ -89,6 +89,8 @@ namespace SteamLib
         public event EventHandler<ChallengeEventArgs> ChallengeReceived;
         public event EventHandler<NetworkEventArgs> AcceptReceived;
         public event EventHandler<NetMsgEventArgs> NetMsgReceived;
+        public event EventHandler<DataEventArgs> DatagramReceived;
+        public event EventHandler<NetworkEventArgs> DisconnectReceived;
 
 
         public UdpConnection()
@@ -153,6 +155,8 @@ namespace SteamLib
             packet.Header.PacketsInMsg = 1;
             packet.Header.MsgStartSequence = seqThis;
 
+            data = netFilter.ProcessOutgoing( data );
+
             packet.SetPayload( data );
 
             byte[] packetData = packet.GetData();
@@ -164,6 +168,8 @@ namespace SteamLib
             where Hdr : Serializable<Hdr>, IMsg, new()
             where MsgHdr : Serializable<MsgHdr>, IClientMsg, new()
         {
+            Console.WriteLine( "Sending EMsg: " + clientMsg.MsgHeader.GetEMsg() );
+
             SendData( clientMsg.GetData(), ipAddr );
         }
 
@@ -187,6 +193,18 @@ namespace SteamLib
 
             if ( AcceptReceived != null )
                 AcceptReceived( this, new NetworkEventArgs( endPoint ) );
+        }
+
+        void RecvDatagram( UdpPacket udpPkt, IPEndPoint endPoint )
+        {
+            if ( DatagramReceived != null )
+                DatagramReceived( this, new DataEventArgs( endPoint, udpPkt.Payload ) );
+        }
+
+        void RecvDisconnect( UdpPacket udpPkt, IPEndPoint endPoint )
+        {
+            if ( DisconnectReceived != null )
+                DisconnectReceived( this, new NetworkEventArgs( endPoint ) );
         }
 
         void RecvData( UdpPacket udpPkt, IPEndPoint endPoint )
@@ -311,9 +329,17 @@ namespace SteamLib
                     RecvData( udpPkt, e.Packet.EndPoint );
                     break;
 
+                case EUdpPacketType.Datagram:
+                    RecvDatagram( udpPkt, e.Packet.EndPoint );
+                    break;
+
+                case EUdpPacketType.Disconnect:
+                    RecvDisconnect( udpPkt, e.Packet.EndPoint );
+                    break;
+
                 default:
                     Console.WriteLine( "Unhandled UDP packet type: " + udpPkt.Header.PacketType + "!!!" );
-                    break; // unsupported type!!
+                    break;
             }
         }
 

@@ -226,21 +226,17 @@ namespace SteamLib
     class MsgClientAnonLogOn : Serializable<MsgClientAnonLogOn>, IClientMsg
     {
         public const uint ObfuscationMask = 0xBAADF00D;
-
         public const uint CurrentProtocol = 65563;
-
 
         public uint ProtocolVersion;
 
         public uint PrivateIPObfuscated;
         public uint PublicIP;
 
-
         public MsgClientAnonLogOn()
         {
             ProtocolVersion = CurrentProtocol;
         }
-
 
         public EMsg GetEMsg()
         {
@@ -248,7 +244,7 @@ namespace SteamLib
         }
     }
 
-    [StructLayout( LayoutKind.Sequential, Pack = 1)]
+    [StructLayout( LayoutKind.Sequential, Pack = 1 )]
     class MsgClientLogOnResponse : Serializable<MsgClientLogOnResponse>, IClientMsg
     {
         public EResult Result;
@@ -284,6 +280,84 @@ namespace SteamLib
         public EMsg GetEMsg()
         {
             return EMsg.Multi;
+        }
+    }
+
+    [StructLayout( LayoutKind.Sequential, Pack = 1 )]
+    class MsgClientCMList : Serializable<MsgClientCMList>, IClientMsg
+    {
+        public int CountCMs;
+
+        public MsgClientCMList()
+        {
+        }
+
+        public EMsg GetEMsg()
+        {
+            return EMsg.ClientCMList;
+        }
+    }
+
+    [StructLayout( LayoutKind.Sequential, Pack = 1 )]
+    class MsgClientServersAvailable : Serializable<MsgClientServersAvailable>, IClientMsg
+    {
+        public int m_Unk1;
+        public int m_Unk2;
+        public int m_Unk3;
+        public int m_Unk4;
+        public int m_Unk5;
+        public int m_cCM;
+
+        public MsgClientServersAvailable()
+        {
+        }
+
+        public EMsg GetEMsg()
+        {
+            return EMsg.ClientServersAvailable;
+        }
+    }
+
+    [StructLayout( LayoutKind.Sequential, Pack = 1 )]
+    class MsgClientServerList : Serializable<MsgClientServerList>, IClientMsg
+    {
+        public int ServerCount;
+
+        public MsgClientServerList()
+        {
+        }
+
+        public EMsg GetEMsg()
+        {
+            return EMsg.ClientServerList;
+        }
+    }
+
+    [StructLayout( LayoutKind.Sequential, Pack = 1 )]
+    class MsgClientRequestedClientStats : Serializable<MsgClientRequestedClientStats>, IClientMsg
+    {
+        public int StatCount;
+
+        public MsgClientRequestedClientStats()
+        {
+        }
+
+        public EMsg GetEMsg()
+        {
+            return EMsg.ClientRequestedClientStats;
+        }
+    }
+
+    [StructLayout( LayoutKind.Sequential, Pack = 1 )]
+    class MsgClientHeartBeat : Serializable<MsgClientHeartBeat>, IClientMsg
+    {
+        public MsgClientHeartBeat()
+        {
+        }
+
+        public EMsg GetEMsg()
+        {
+            return EMsg.ClientHeartBeat;
         }
     }
 }

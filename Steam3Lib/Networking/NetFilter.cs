@@ -35,30 +35,17 @@ namespace SteamLib
 
         public override byte[] ProcessIncoming( byte[] data )
         {
-            // first 16 bytes are the iv
-            byte[] iv = new byte[ 16 ];
-            Array.Copy( data, 0, iv, 0, iv.Length );
+            byte[] output = CryptoHelper.SymmetricDecrypt( data, aesSessionKey );
 
-            // rest is ciphertext
-            byte[] cipherText = new byte[ data.Length - iv.Length ];
-            Array.Copy( data, iv.Length, cipherText, 0, cipherText.Length );
-
-            return CryptoHelper.AESDecrypt( cipherText, aesSessionKey, iv );
+            return output;
         }
 
         public override byte[] ProcessOutgoing( byte[] data )
         {
-            byte[] iv = CryptoHelper.GenerateRandomBlock( 16 );
-            byte[] cipherText = CryptoHelper.AESEncrypt( data, aesSessionKey, iv );
-
-            // combine everything
-            byte[] output = new byte[ iv.Length + data.Length ];
-
-
-            Array.Copy( iv, 0, output, 0, iv.Length );
-            Array.Copy( cipherText, 0, output, iv.Length, cipherText.Length );
+            byte[] output = CryptoHelper.SymmetricEncrypt( data, aesSessionKey );
 
             return output;
+
         }
     }
 }

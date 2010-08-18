@@ -21,5 +21,4 @@ namespace SteamLib
 
         Max = 11,
     };
-
 }
