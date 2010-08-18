@@ -39,7 +39,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GDSClient.cs" />
+    <Compile Include="PKZipBuffer.cs" />
     <Compile Include="ScheduledFunction.cs" />
+    <Compile Include="Steam2\TcpConnection.cs" />
+    <Compile Include="TcpSocket.cs" />
     <Compile Include="Types\ClientMsg.cs" />
     <Compile Include="Types\EMsg.cs" />
     <Compile Include="CM\CMInterface.cs" />
@@ -52,7 +56,6 @@
     <Compile Include="Crypto\CryptoHelper.cs" />
     <Compile Include="Networking\UdpPacket.cs" />
     <Compile Include="Util\ByteBuffer.cs" />
-    <Compile Include="Util\Crc32.cs" />
     <Compile Include="Util\DataStream.cs" />
     <Compile Include="Networking\NetPacket.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -62,6 +65,12 @@
     <Compile Include="Networking\UDPConnection.cs" />
     <Compile Include="Networking\UdpHeader.cs" />
     <Compile Include="Networking\UdpSocket.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Hasher\Hasher.csproj">
+      <Project>{692B115B-C471-4A36-B7DB-0876ADA83857}</Project>
+      <Name>Hasher</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -103,6 +103,9 @@ namespace SteamLib
 
                 try
                 {
+                    if ( sock.Available == 0 )
+                        continue;
+
                     packet = sock.Receive( ref ep );
                 }
                 catch

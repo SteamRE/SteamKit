@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using System.Runtime.InteropServices;
+using Classless.Hasher;
 
 namespace SteamLib
 {
@@ -256,10 +257,16 @@ namespace SteamLib
                 var encResp = new ClientMsg<MsgChannelEncryptResponse, MsgHdr>();
 
                 byte[] cryptedSessKey = CryptoHelper.RSAEncrypt( tempSessionKey, KeyManager.GetPublicKey( encRec.Universe ) );
+                Crc crc = new Crc();
+
+                byte[] keyCrc = crc.ComputeHash( cryptedSessKey );
+                Array.Reverse( keyCrc );
 
                 encResp.Write( cryptedSessKey );
-                encResp.Write<uint>( Crc32.Compute( cryptedSessKey ) );
+                encResp.Write( keyCrc );
                 encResp.Write<uint>( 0 );
+
+                crc.Clear();
 
                 this.SendNetMsg( encResp, endPoint );
             }
@@ -289,8 +296,11 @@ namespace SteamLib
 
             if ( msgMulti.MsgHeader.UnzippedSize != 0 )
             {
-                // todo: inflate data
-                throw new NotImplementedException();
+                try
+                {
+                    payload = PKZipBuffer.Decompress( payload );
+                }
+                catch { return; }
             }
 
             DataStream ds = new DataStream( payload );

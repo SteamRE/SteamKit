@@ -19,6 +19,9 @@ namespace SteamLib
         public byte[] Data { get; set; }
 
 
+        public bool SwapEndianness { get; set; }
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="DataStream"/> class.
         /// </summary>
@@ -26,6 +29,13 @@ namespace SteamLib
         {
             Data = new byte[ 0 ];
         }
+
+        public DataStream( bool swapEndianness )
+            : this()
+        {
+            this.SwapEndianness = swapEndianness;
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="DataStream"/> class.
         /// </summary>
@@ -33,6 +43,12 @@ namespace SteamLib
         public DataStream( byte[] data )
         {
             this.Data = data;
+        }
+
+        public DataStream( byte[] data, bool swapEndianness )
+            : this( data )
+        {
+            this.SwapEndianness = swapEndianness;
         }
 
 
@@ -46,7 +62,15 @@ namespace SteamLib
             int dataLen = Marshal.SizeOf( objectType );
             IntPtr dataBlock = Marshal.AllocHGlobal( dataLen );
 
-            Marshal.Copy( Data, ( int )Position, dataBlock, dataLen );
+            byte[] tempData = new byte[ dataLen ];
+
+            Array.Copy( Data, Position, tempData, 0, tempData.Length );
+
+            if ( SwapEndianness )
+                Array.Reverse( tempData );
+
+            //Marshal.Copy( Data, ( int )Position, dataBlock, dataLen );
+            Marshal.Copy( tempData, 0, dataBlock, tempData.Length );
 
             object type = Marshal.PtrToStructure( dataBlock, objectType );
 
@@ -110,8 +134,22 @@ namespace SteamLib
         /// <returns></returns>
         public byte[] ReadBytes( int count )
         {
+            return ReadBytes( count, false );
+        }
+
+        /// <summary>
+        /// Reads a number of bytes from the stream.
+        /// </summary>
+        /// <param name="count">The number of bytes to read.</param>
+        /// <param name="rev">Reverse the output.</param>
+        /// <returns></returns>
+        public byte[] ReadBytes( int count, bool rev )
+        {
             byte[] returnBuff = new byte[ count ];
             Array.Copy( Data, Position, returnBuff, 0, count );
+
+            if ( rev )
+                Array.Reverse( returnBuff );
 
             Position += count;
             return returnBuff;
