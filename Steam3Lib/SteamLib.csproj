@@ -39,7 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Steam2\Client.cs" />
+    <Compile Include="Steam2\ServerClient.cs" />
     <Compile Include="Steam2\ConfigServerClient.cs" />
     <Compile Include="Steam2\ConfigServerDSClient.cs" />
     <Compile Include="Steam2\DSClient.cs" />
