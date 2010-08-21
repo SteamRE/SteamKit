@@ -5,7 +5,7 @@ using System.Net;
 
 namespace SteamLib
 {
-    public enum EServerType : uint
+    enum EServerType : uint
     {
         ProxyASClientAuthentication = 0,
         ContentServer = 1,
@@ -22,10 +22,10 @@ namespace SteamLib
         SlaveASClientAuthentication = 28,
     }
 
-    public class ServerClient
+    class ServerClient
     {
 
-        public TcpSocket socket;
+        protected TcpSocket socket;
 
 
         public ServerClient()
@@ -34,7 +34,7 @@ namespace SteamLib
         }
 
 
-        public bool ConnectToServer( IPEndPoint endPoint )
+        protected bool ConnectToServer( IPEndPoint endPoint )
         {
             try
             {
@@ -47,7 +47,7 @@ namespace SteamLib
             }
         }
 
-        public bool HandshakeServer( EServerType type )
+        protected bool HandshakeServer( EServerType type )
         {
             try
             {
@@ -60,7 +60,7 @@ namespace SteamLib
             }
         }
 
-        public bool SendCommand( byte command, params object[] args )
+        protected bool SendCommand( byte command, params object[] args )
         {
             try
             {
@@ -88,7 +88,7 @@ namespace SteamLib
             }
         }
 
-        public TcpPacket RecvPacket()
+        protected TcpPacket RecvPacket()
         {
             try
             {
@@ -100,7 +100,20 @@ namespace SteamLib
             }
         }
 
-        public void Disconnect()
+        protected bool SendPacket( TcpPacket packet )
+        {
+            try
+            {
+                socket.Send( packet );
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        protected void Disconnect()
         {
             try
             {

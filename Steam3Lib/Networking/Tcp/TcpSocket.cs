@@ -9,7 +9,7 @@ using System.IO;
 namespace SteamLib
 {
 
-    public class TcpPacket : ByteBuffer
+    class TcpPacket : ByteBuffer
     {
         public TcpPacket()
             : base( true )
@@ -42,7 +42,7 @@ namespace SteamLib
         }
     }
 
-    public class TcpSocket
+    class TcpSocket
     {
         Socket sock;
 
@@ -100,7 +100,7 @@ namespace SteamLib
         {
             TcpPacket pack = new TcpPacket();
 
-            uint size = ( uint )IPAddress.NetworkToHostOrder( Reader.ReadInt32() );
+            uint size = NetHelpers.EndianSwap( this.Reader.ReadUInt32() );//( uint )IPAddress.NetworkToHostOrder( Reader.ReadInt32() );
             byte[] payload = Reader.ReadBytes( ( int )size );
 
             pack.SetPayload( payload );

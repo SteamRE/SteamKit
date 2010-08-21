@@ -79,14 +79,13 @@ namespace SteamLib
     }
 
 
-    class ClientMsg<MsgHdr, Hdr>
-        : Serializable<Hdr>
+    class ClientMsg<MsgHdr, Hdr> : Serializable<Hdr>
         where Hdr : Serializable<Hdr>, IMsgHdr, new()
         where MsgHdr : Serializable<MsgHdr>, IClientMsg, new()
     {
 
-        public Hdr Header; //{ get; private set; }
-        public MsgHdr MsgHeader; //{ get; private set; }
+        public Hdr Header;
+        public MsgHdr MsgHeader;
 
         ByteBuffer byteBuff;
 
@@ -137,7 +136,7 @@ namespace SteamLib
         }
 
 
-        public byte[] GetData()
+        public override byte[] Serialize()
         {
             ByteBuffer bb = new ByteBuffer();
 

@@ -56,7 +56,7 @@ namespace SteamLib
 
         CMServer bestServer;
 
-        CSteamID steamId;
+        SteamID steamId;
         int sessionId;
 
         // any network action interacting with members must lock this object
@@ -67,7 +67,7 @@ namespace SteamLib
 
         public CMInterface()
         {
-            steamId = new CSteamID( 0 );
+            steamId = new SteamID( 0 );
             bestServer = new CMServer();
 
             udpConn = new UdpConnection();
@@ -124,7 +124,7 @@ namespace SteamLib
         void SendLogOn( IPEndPoint endPoint )
         {
             // lets send our logon request
-            CSteamID steamId = new CSteamID( 0, 0, EUniverse.Public, EAccountType.AnonGameServer );
+            SteamID steamId = new SteamID( 0, 0, EUniverse.Public, EAccountType.AnonGameServer );
 
             var anonLogon = new ClientMsg<MsgClientAnonLogOn, ExtendedClientMsgHdr>();
             anonLogon.Header.SteamID = steamId;
@@ -142,7 +142,7 @@ namespace SteamLib
                     this.heartBeatFunc = null;
                 }
 
-                this.steamId = new CSteamID( 0 );
+                this.steamId = new SteamID( 0 );
                 this.sessionId = 0;
             }
         }

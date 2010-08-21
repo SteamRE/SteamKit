@@ -35,28 +35,28 @@ namespace SteamLib
         }
     }
 
-    public class CSteamID
+    public class SteamID
     {
         private BitVector64 steamid;
 
-        public CSteamID()
+        public SteamID()
             : this( 0 )
         {
         }
 
-        public CSteamID( UInt32 unAccountID, EUniverse eUniverse, EAccountType eAccountType )
+        public SteamID( UInt32 unAccountID, EUniverse eUniverse, EAccountType eAccountType )
             : this()
         {
             Set( unAccountID, eUniverse, eAccountType );
         }
 
-        public CSteamID( UInt32 unAccountID, UInt32 unInstance, EUniverse eUniverse, EAccountType eAccountType )
+        public SteamID( UInt32 unAccountID, UInt32 unInstance, EUniverse eUniverse, EAccountType eAccountType )
             : this()
         {
             InstancedSet( unAccountID, unInstance, eUniverse, eAccountType );
         }
 
-        public CSteamID( UInt64 id )
+        public SteamID( UInt64 id )
         {
             this.steamid = new BitVector64( id );
         }
@@ -219,14 +219,14 @@ namespace SteamLib
             return Render();
         }
 
-        public static implicit operator UInt64( CSteamID sid )
+        public static implicit operator UInt64( SteamID sid )
         {
             return sid.steamid.Data;
         }
 
-        public static implicit operator CSteamID( UInt64 id )
+        public static implicit operator SteamID( UInt64 id )
         {
-            return new CSteamID( id );
+            return new SteamID( id );
         }
 
         public override bool Equals( System.Object obj )
@@ -234,14 +234,14 @@ namespace SteamLib
             if ( obj == null )
                 return false;
 
-            CSteamID sid = obj as CSteamID;
+            SteamID sid = obj as SteamID;
             if ( ( System.Object )sid == null )
                 return false;
 
             return steamid.Data == sid.steamid.Data;
         }
 
-        public bool Equals( CSteamID sid )
+        public bool Equals( SteamID sid )
         {
             if ( ( object )sid == null )
                 return false;
@@ -249,7 +249,7 @@ namespace SteamLib
             return steamid.Data == sid.steamid.Data;
         }
 
-        public static bool operator ==( CSteamID a, CSteamID b )
+        public static bool operator ==( SteamID a, SteamID b )
         {
             if ( System.Object.ReferenceEquals( a, b ) )
                 return true;
@@ -260,7 +260,7 @@ namespace SteamLib
             return a.steamid.Data == b.steamid.Data;
         }
 
-        public static bool operator !=( CSteamID a, CSteamID b )
+        public static bool operator !=( SteamID a, SteamID b )
         {
             return !( a == b );
         }

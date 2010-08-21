@@ -12,7 +12,7 @@ namespace SteamLib
 
 
     [StructLayout( LayoutKind.Sequential, Pack = 1 )]
-    public class ChallengeData : Serializable<ChallengeData>
+    class ChallengeData : Serializable<ChallengeData>
     {
         public const uint ChallengeMask = 0xA426DF2B;
 
@@ -21,7 +21,7 @@ namespace SteamLib
     }
 
     [StructLayout( LayoutKind.Sequential, Pack = 1 )]
-    public class ConnectData : Serializable<ConnectData>
+    class ConnectData : Serializable<ConnectData>
     {
         public const uint ChallengeMask = 0xA426DF2B;
 
@@ -171,7 +171,7 @@ namespace SteamLib
         {
             Console.WriteLine( "Sending EMsg: " + clientMsg.MsgHeader.GetEMsg() );
 
-            SendData( clientMsg.GetData(), ipAddr );
+            SendData( clientMsg.Serialize(), ipAddr );
         }
 
 

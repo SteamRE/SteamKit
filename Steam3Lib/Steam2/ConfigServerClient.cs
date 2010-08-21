@@ -5,7 +5,7 @@ using System.Net;
 
 namespace SteamLib
 {
-    public class ConfigServerClient : ServerClient
+    class ConfigServerClient : ServerClient
     {
 
         public byte[] GetClientConfigRecord( IPEndPoint configServer )
