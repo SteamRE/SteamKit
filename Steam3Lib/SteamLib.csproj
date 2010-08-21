@@ -39,22 +39,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EChatEntryType.cs" />
-    <Compile Include="GDSClient.cs" />
-    <Compile Include="PKZipBuffer.cs" />
-    <Compile Include="ScheduledFunction.cs" />
-    <Compile Include="Steam2\TcpConnection.cs" />
-    <Compile Include="TcpSocket.cs" />
+    <Compile Include="Types\EChatEntryType.cs" />
+    <Compile Include="Steam2\GDSClient.cs" />
+    <Compile Include="Types\IPAddrPort.cs" />
+    <Compile Include="Types\MicroTime.cs" />
+    <Compile Include="Util\PKZipBuffer.cs" />
+    <Compile Include="Util\ScheduledFunction.cs" />
+    <Compile Include="Networking\TcpSocket.cs" />
     <Compile Include="Types\ClientMsg.cs" />
     <Compile Include="Types\EMsg.cs" />
-    <Compile Include="CM\CMInterface.cs" />
-    <Compile Include="Crypto\KeyManager.cs" />
+    <Compile Include="Steam3\CMInterface.cs" />
+    <Compile Include="Util\KeyManager.cs" />
     <Compile Include="Types\CSteamID.cs" />
     <Compile Include="Types\EAccountType.cs" />
     <Compile Include="Types\EResult.cs" />
     <Compile Include="Types\EUniverse.cs" />
     <Compile Include="Networking\NetFilter.cs" />
-    <Compile Include="Crypto\CryptoHelper.cs" />
+    <Compile Include="Util\CryptoHelper.cs" />
     <Compile Include="Networking\UdpPacket.cs" />
     <Compile Include="Util\ByteBuffer.cs" />
     <Compile Include="Util\DataStream.cs" />
@@ -72,6 +73,10 @@
       <Project>{692B115B-C471-4A36-B7DB-0876ADA83857}</Project>
       <Name>Hasher</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="CM\" />
+    <Folder Include="Crypto\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

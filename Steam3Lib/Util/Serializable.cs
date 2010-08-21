@@ -11,19 +11,22 @@ namespace SteamLib
     {
         public byte[] Serialize()
         {
-            int structSize = Marshal.SizeOf( this );
-            IntPtr ptrMem = Marshal.AllocHGlobal( structSize );
+            int dataSize = Marshal.SizeOf( this );
+            byte[] data = new byte[ dataSize ];
 
-            Marshal.StructureToPtr( this, ptrMem, true );
+            GCHandle dataHandle = GCHandle.Alloc( data, GCHandleType.Pinned );
 
-            byte[] structData = new byte[ structSize ];
+            try
+            {
+                IntPtr dataPtr = dataHandle.AddrOfPinnedObject();
+                Marshal.StructureToPtr( this, dataPtr, false );
+            }
+            finally
+            {
+                dataHandle.Free();
+            }
 
-            Marshal.Copy( ptrMem, structData, 0, structData.Length );
-
-            Marshal.DestroyStructure( ptrMem, typeof( T ) );
-            Marshal.FreeHGlobal( ptrMem );
-
-            return structData;
+            return data;
         }
 
         public static T Deserialize( byte[] data )
@@ -32,19 +35,21 @@ namespace SteamLib
         }
         public static T Deserialize( byte[] data, int offset )
         {
-            int structSize = Marshal.SizeOf( typeof( T ) );
+            T result = default( T );
 
-            if ( data.Length < structSize )
-                return null;
+            GCHandle dataHandle = GCHandle.Alloc( data, GCHandleType.Pinned );
 
-            IntPtr ptrMem = Marshal.AllocHGlobal( structSize );
-            Marshal.Copy( data, offset, ptrMem, structSize );
+            try
+            {
+                IntPtr dataPtr = dataHandle.AddrOfPinnedObject();
+                result = ( T )Marshal.PtrToStructure( dataPtr, typeof( T ) );
+            }
+            finally
+            {
+                dataHandle.Free();
+            }
 
-            T structObj = ( T )Marshal.PtrToStructure( ptrMem, typeof( T ) );
-
-            Marshal.FreeHGlobal( ptrMem );
-
-            return structObj;
+            return result;
         }
 
 
@@ -55,13 +60,7 @@ namespace SteamLib
 
             sb.Append( thisType.Name + " [ " );
 
-            foreach ( var pi in thisType.GetProperties( BindingFlags.Public | BindingFlags.Instance ) )
-            {
-                object value = pi.GetValue( this, null );
-                sb.AppendFormat( "{0} = {1}, ", pi.Name, value );
-            }
-
-            foreach ( var fi in thisType.GetFields( BindingFlags.Public | BindingFlags.Instance ) )
+            foreach ( var fi in thisType.GetFields() )
             {
                 object val = fi.GetValue( this );
                 sb.AppendFormat( "{0} = {1}, ", fi.Name, val );

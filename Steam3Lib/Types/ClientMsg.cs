@@ -82,8 +82,8 @@ namespace SteamLib
         where MsgHdr : Serializable<MsgHdr>, IClientMsg, new()
     {
 
-        public Hdr Header { get; private set; }
-        public MsgHdr MsgHeader { get; private set; }
+        public Hdr Header; //{ get; private set; }
+        public MsgHdr MsgHeader; //{ get; private set; }
 
         ByteBuffer byteBuff;
 
