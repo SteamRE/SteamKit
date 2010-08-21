@@ -65,7 +65,7 @@
     <Compile Include="Util\PsuedoRandom.cs" />
     <Compile Include="Util\Serializable.cs" />
     <Compile Include="Util\Singleton.cs" />
-    <Compile Include="Networking\Udp\UDPConnection.cs" />
+    <Compile Include="Networking\Udp\UdpConnection.cs" />
     <Compile Include="Networking\Udp\UdpHeader.cs" />
     <Compile Include="Networking\Udp\UdpSocket.cs" />
   </ItemGroup>
