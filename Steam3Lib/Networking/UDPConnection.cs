@@ -233,7 +233,14 @@ namespace SteamLib
 
             packetMap.Remove( udpHdr.MsgStartSequence );
 
-            data = netFilter.ProcessIncoming( data );
+            try
+            {
+                data = netFilter.ProcessIncoming( data );
+            }
+            catch
+            {
+                return;
+            }
 
             if ( data.Length < 4 )
                 return; // we need at least an EMsg
@@ -279,6 +286,11 @@ namespace SteamLib
                     netFilter = new NetFilterEncryption( tempSessionKey );
 
                 Console.WriteLine( "Crypto result: " + encRes.Result );
+            }
+
+            if ( eMsg == EMsg.ClientLoggedOff )
+            {
+                netFilter = new NetFilter( null );
             }
 
             if ( eMsg == EMsg.Multi )

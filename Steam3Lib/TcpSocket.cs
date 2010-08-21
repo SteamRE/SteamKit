@@ -66,7 +66,24 @@ namespace SteamLib
             catch { }
 
             sock = new Socket( AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp );
-            sock.Connect( endPoint );
+            sock.LingerState.Enabled = false;
+            sock.ReceiveTimeout = 250;
+
+            IAsyncResult ar = sock.BeginConnect( endPoint, null, null );
+            WaitHandle waitHandle = ar.AsyncWaitHandle;
+
+            try
+            {
+                if ( !waitHandle.WaitOne( TimeSpan.FromMilliseconds( 250 ), false ) )
+                {
+                    Disconnect();
+                }
+
+                sock.EndConnect( ar );
+            }
+            catch { }
+
+            //sock.Connect( endPoint );
 
             netStream = new NetworkStream( sock, true );
 

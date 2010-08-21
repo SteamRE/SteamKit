@@ -149,6 +149,14 @@ namespace SteamLib
         {
             byteBuff.Append( obj );
         }
+        public void WriteNullTermString( string data )
+        {
+            byteBuff.AppendNullTermString( data );
+        }
+        public void WriteNullTermString( string data, Encoding encoding )
+        {
+            byteBuff.AppendNullTermString( data, encoding );
+        }
 
 
         public static Hdr GetHeader( byte[] data )
@@ -358,6 +366,39 @@ namespace SteamLib
         public EMsg GetEMsg()
         {
             return EMsg.ClientHeartBeat;
+        }
+    }
+
+    [StructLayout( LayoutKind.Sequential, Pack = 1 )]
+    class MsgClientFriendMsg : Serializable<MsgClientFriendMsg>, IClientMsg
+    {
+        public ulong SteamID;
+        public EChatEntryType EntryType;
+
+        public MsgClientFriendMsg()
+        {
+        }
+
+        public EMsg GetEMsg()
+        {
+            return EMsg.ClientFriendMsg;
+        }
+    }
+
+    [StructLayout( LayoutKind.Sequential, Pack = 1 )]
+    class MsgClientFriendMsgIncoming : Serializable<MsgClientFriendMsgIncoming>, IClientMsg
+    {
+        public ulong SteamID;
+        public EChatEntryType EntryType;
+        public int MessageSize;
+
+        public MsgClientFriendMsgIncoming()
+        {
+        }
+
+        public EMsg GetEMsg()
+        {
+            return EMsg.ClientFriendMsgIncoming;
         }
     }
 }

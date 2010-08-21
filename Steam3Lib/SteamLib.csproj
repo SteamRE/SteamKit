@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EChatEntryType.cs" />
     <Compile Include="GDSClient.cs" />
     <Compile Include="PKZipBuffer.cs" />
     <Compile Include="ScheduledFunction.cs" />

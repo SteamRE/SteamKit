@@ -91,7 +91,7 @@ namespace SteamLib
         }
         ~ScheduledFunction()
         {
-            FunctionScheduler.RemoveFunc( this );
+            Disable();
         }
 
 
@@ -111,6 +111,11 @@ namespace SteamLib
         {
             lock ( FunctionScheduler.StaticLock )
                 this.func = func;
+        }
+
+        public void Disable()
+        {
+            FunctionScheduler.RemoveFunc( this );
         }
 
 
