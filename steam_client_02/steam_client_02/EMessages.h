@@ -1,7 +1,7 @@
 #ifndef EMESSAGES_H
 #define EMESSAGES_H
 
-#include "SteamTypes.h"
+#include "steam/steamtypes.h"
 
 #pragma pack(push, 1)
 
@@ -25,7 +25,7 @@ struct ExtendedClientMsgHdr_t
 	JobID_t m_JobIDSource;
  
 	uint8 m_nHdrCanary;
- 
+
 	uint64 m_ulSteamID;
  
 	int32 m_nSessionID;
@@ -50,28 +50,49 @@ struct MsgChannelEncryptResult_t
 
 struct MsgClientHeartBeat_t
 {
-    int8 m_cUnknown; //TODO
+	int8 m_cUnknown; //TODO
+};
+
+struct MsgClientLogOnWithCredentials_t
+{
+	uint32 m_unProtocolVer;
+ 
+	uint32 m_unIPPrivateObfuscated;
+	uint32 m_unIPPublic;
+ 
+	uint64 m_ulClientSuppliedSteamId;
+ 
+	uint32 m_unTicketLength;
+ 
+	char m_rgchAccountName[64];
+	char m_rgchPassword[20];
+ 
+	uint32 m_qosLevel; // ENetQOSLevel
 };
 
 struct MsgClientRegisterAuthTicketWithCM_t
 {
-    uint16 m_nUnknown1; //1B 00
-	uint16 m_nUnknown2; //01 00
-
+	uint32 m_unProtocolVer;
 	uint32 m_unTicketLengthWithSignature; //B0 00 00 00
-	uint32 m_unTicketLengthWithoutSignature; //30 00 00 00
-	uint32 m_unTicketVersion; //04 00 00 00
+};
 
-	uint64 m_ulTicketSteamID;
+struct MsgMulti_t
+{
+	uint32 m_cubUnzipped;
+};
 
-	uint32 m_unUnknown3; //07 00 00 00
-
-	uint32 m_unExternalIP;
-	uint32 m_unInternalIP;
-
-	uint32 m_unUnknown4; //0
-
-	uint8 m_rgubUnknown5[128]; //Signature (or key..?)
+struct MsgClientLogOnResponse_t
+{
+	int m_EResult;
+ 
+	int m_nOutOfGameHeartbeatRateSec;
+	int m_nInGameHeartbeatRateSec;
+ 
+	CSteamID m_ulClientSuppliedSteamId;
+ 
+	uint32 m_unIPPublic;
+ 
+	RTime32 m_RTime32ServerRealTime;
 };
 
 #pragma pack(pop)
