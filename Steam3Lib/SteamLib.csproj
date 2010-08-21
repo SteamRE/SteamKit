@@ -41,12 +41,11 @@
   <ItemGroup>
     <Compile Include="Steam2\Client.cs" />
     <Compile Include="Steam2\ConfigServerClient.cs" />
-    <Compile Include="Steam2\ConfigServerDirectoryServerClient.cs" />
-    <Compile Include="Steam2\DirectoryServerClient.cs" />
-    <Compile Include="Steam2\GeneralDirectoryServerClient.cs" />
+    <Compile Include="Steam2\ConfigServerDSClient.cs" />
+    <Compile Include="Steam2\DSClient.cs" />
+    <Compile Include="Steam2\GeneralDSClient.cs" />
     <Compile Include="Steam3\ClientMsgs.cs" />
     <Compile Include="Types\EChatEntryType.cs" />
-    <Compile Include="Steam2\GDSClient.cs" />
     <Compile Include="Types\IPAddrPort.cs" />
     <Compile Include="Types\MicroTime.cs" />
     <Compile Include="Util\PKZipBuffer.cs" />
