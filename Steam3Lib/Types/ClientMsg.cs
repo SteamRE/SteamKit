@@ -23,8 +23,8 @@ namespace SteamLib
         {
             this.EMsg = EMsg.Invalid;
 
-            this.TargetJobID = 0xFFFFFFFFFFFFFFFF;
-            this.SourceJobID = 0xFFFFFFFFFFFFFFFF;
+            this.TargetJobID = UInt64.MaxValue;
+            this.SourceJobID = UInt64.MaxValue;
         }
 
         public void SetEMsg( EMsg eMsg )
@@ -60,8 +60,8 @@ namespace SteamLib
 
             this.HeaderVersion = 2;
 
-            this.TargetJobID = 0xFFFFFFFFFFFFFFFF;
-            this.SourceJobID = 0xFFFFFFFFFFFFFFFF;
+            this.TargetJobID = UInt64.MaxValue;
+            this.SourceJobID = UInt64.MaxValue;
 
             this.HeaderCanary = 239;
 
