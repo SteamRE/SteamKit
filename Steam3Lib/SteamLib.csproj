@@ -53,7 +53,7 @@
     <Compile Include="Steam2\DSClient.cs" />
     <Compile Include="Steam2\GeneralDSClient.cs" />
     <Compile Include="Steam3\ClientMsgs.cs" />
-    <Compile Include="Types\ChatEntryType.cs" />
+    <Compile Include="Types\EChatEntryType.cs" />
     <Compile Include="Types\IPAddrPort.cs" />
     <Compile Include="Types\MicroTime.cs" />
     <Compile Include="Util\PKZipBuffer.cs" />
@@ -64,7 +64,7 @@
     <Compile Include="Steam3\CMInterface.cs" />
     <Compile Include="Util\KeyManager.cs" />
     <Compile Include="Types\SteamID.cs" />
-    <Compile Include="Types\AccountType.cs" />
+    <Compile Include="Types\EAccountType.cs" />
     <Compile Include="Types\EResult.cs" />
     <Compile Include="Types\EUniverse.cs" />
     <Compile Include="Networking\Udp\NetFilter.cs" />
@@ -86,10 +86,6 @@
       <Project>{692B115B-C471-4A36-B7DB-0876ADA83857}</Project>
       <Name>Hasher</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="CM\" />
-    <Folder Include="Crypto\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
