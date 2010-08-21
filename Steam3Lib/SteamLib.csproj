@@ -46,7 +46,7 @@
     <Compile Include="Util\PKZipBuffer.cs" />
     <Compile Include="Util\ScheduledFunction.cs" />
     <Compile Include="Networking\TcpSocket.cs" />
-    <Compile Include="Types\ClientMsg.cs" />
+    <Compile Include="Steam3\ClientMsg.cs" />
     <Compile Include="Types\EMsg.cs" />
     <Compile Include="Steam3\CMInterface.cs" />
     <Compile Include="Util\KeyManager.cs" />
