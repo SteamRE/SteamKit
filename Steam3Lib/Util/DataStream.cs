@@ -258,9 +258,9 @@ namespace SteamLib
         /// Sizes the remaining size.
         /// </summary>
         /// <returns></returns>
-        public long SizeRemaining()
+        public uint SizeRemaining()
         {
-            return Length - Position;
+            return ( uint )Length - ( uint )Position;
         }
 
 
