@@ -11,6 +11,8 @@ namespace BlobLib
     {
         public static readonly int HeaderLength = 10;
 
+        private static byte[] Key;
+
         private List<BlobField> children;
         private ECacheState cachestate;
         private EAutoPreprocessCode processcode;
@@ -129,6 +131,19 @@ namespace BlobLib
         }
 
 
+        public void SetCompressed(int level)
+        {
+            processcode = EAutoPreprocessCode.eAutoPreprocessCodeCompressed;
+            compressionlevel = level;
+        }
+
+        public void SetEncrypted(byte[] IV)
+        {
+            processcode = EAutoPreprocessCode.eAutoPreprocessCodeEncrypted;
+            iv = IV;
+        }
+
+
         public void AddChild(BlobField child)
         {
             children.Add(child);
@@ -148,6 +163,10 @@ namespace BlobLib
             }
         }
 
+        private static void SetKey(byte[] key)
+        {
+            Key = key;
+        }
 
         private static Blob ReadBlobHeader(BinaryReader reader, out Int32 size)
         {
@@ -193,6 +212,7 @@ namespace BlobLib
                                 deflateStream.Read(inflated, 0, inflated.Length);
 
                                 Blob decompressed = Parse(inflated);
+                                decompressed.SetCompressed(level);
                                 size = 0;
                                 return decompressed;
                             }
@@ -200,6 +220,25 @@ namespace BlobLib
                         }
                         else if (processcode == EAutoPreprocessCode.eAutoPreprocessCodeEncrypted)
                         {
+                            Int32 decompressedSize = reader.ReadInt32();
+
+                            RijndaelManaged aes = new RijndaelManaged();
+                            aes.Mode = CipherMode.CBC;
+                            aes.KeySize = 128;
+
+                            byte[] IV = reader.ReadBytes(aes.BlockSize);
+                            byte[] ciphertext = reader.ReadBytes(serializedSize);
+
+                            aes.Key = Key;
+                            aes.IV = IV;
+
+                            ICryptoTransform decrypt = aes.CreateDecryptor();
+                            byte[] plaintext = decrypt.TransformFinalBlock(ciphertext, 0, ciphertext.Length);
+
+                            Blob decrypted = Parse(plaintext);
+                            decrypted.SetEncrypted(IV);
+                            size = 0;
+                            return decrypted;
                         }
                     }
                 }
