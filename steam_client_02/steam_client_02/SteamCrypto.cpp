@@ -4,117 +4,120 @@
 #include "cryptopp/rsa.h"
 #include "cryptopp/osrng.h"
 #include "cryptopp/modes.h"
+#include "cryptopp/sha.h"
+#include "cryptopp/filters.h"
 
 using namespace CryptoPP;
 
 void GenerateRandomBlock(unsigned char *pubRandomBlock, unsigned int cubRandomBlock)
 {
-    AutoSeededRandomPool rnd; 
-    rnd.GenerateBlock(pubRandomBlock, cubRandomBlock);
+	AutoSeededRandomPool rnd; 
+	rnd.GenerateBlock(pubRandomBlock, cubRandomBlock);
 }
 
 bool RSAEncrypt(const unsigned char *pubPlaintextData, unsigned int cubPlaintextData, unsigned char *pubEncryptedData, unsigned int *pcubEncryptedData, const unsigned char *pubKey, unsigned int cubKey)
 {
-    if (!pubPlaintextData)
-        return false;
+	if (!pubPlaintextData)
+		return false;
 
-    if (!cubPlaintextData)
-        return false;
+	if (!cubPlaintextData)
+		return false;
 
-    if (!pubEncryptedData)
-        return false;
+	if (!pubEncryptedData)
+		return false;
 
-    if (!pcubEncryptedData)
-        return false;
+	if (!pcubEncryptedData)
+		return false;
 
-    if (!pubKey)
-        return false;
+	if (!pubKey)
+		return false;
 
-    if (!cubKey)
-        return false;
+	if (!cubKey)
+		return false;
 
-    AutoSeededRandomPool rnd;
+	AutoSeededRandomPool rnd;
 
-    StringSource source(pubKey, cubKey, true);
-   
-    RSAFunction params;
-    params.BERDecode(source);
+	StringSource source(pubKey, cubKey, true);
 
-    RSA::PublicKey rsaPublicKey(params);
-    RSAES_OAEP_SHA_Encryptor rsaEncryption(rsaPublicKey);
+	RSA::PublicKey rsaPublicKey;
+	
+	try
+	{
+		rsaPublicKey.BERDecode( source );
+	}
+	catch(...)
+	{
+		printf("RSAEncrypt: Unable to decode public key\n");
 
-    std::string encryptedDataStr;
+		return false;
+	}
+	
+	RSAES_OAEP_SHA_Encryptor rsaEncryption(rsaPublicKey);
 
-    StringSource(pubPlaintextData, cubPlaintextData, true,
-        new PK_EncryptorFilter(rnd, rsaEncryption,
-            new StringSink(encryptedDataStr)
-        )
-    );
+	std::string encryptedDataStr;
 
-    *pcubEncryptedData = encryptedDataStr.length()+16;
+	StringSource(pubPlaintextData, cubPlaintextData, true,
+		new PK_EncryptorFilter(rnd, rsaEncryption,
+			new StringSink(encryptedDataStr)
+		)
+	);
 
-    const char *encryptedData = encryptedDataStr.c_str();
+	*pcubEncryptedData = encryptedDataStr.length()+16;
 
-    for (unsigned int i=0;i<*pcubEncryptedData;i++)
-        pubEncryptedData[i] = encryptedData[i];
+	const char *encryptedData = encryptedDataStr.c_str();
 
-    return true;
+	for (unsigned int i=0;i<*pcubEncryptedData;i++)
+		pubEncryptedData[i] = encryptedData[i];
+
+	return true;
 }
 
-bool SymmetricEncrypt(const unsigned char *pubPlaintextData, unsigned int cubPlaintextData, unsigned char *pubEncryptedData, unsigned int *pcubEncryptedData, const unsigned char *pubKey, unsigned int cubKey)
+bool AESEncrypt(const unsigned char *pubPlaintextData, unsigned int cubPlaintextData, unsigned char *pubEncryptedData, unsigned int *pcubEncryptedData, const unsigned char *pubKey, unsigned int cubKey, const unsigned char *pubIV, unsigned int cubIV)
 {
-    if (!pubPlaintextData)
-        return false;
+	if (!pubPlaintextData)
+		return false;
 
-    if (!cubPlaintextData)
-        return false;
+	if (!cubPlaintextData)
+		return false;
 
-    if (!pubEncryptedData)
-        return false;
+	if (!pubEncryptedData)
+		return false;
 
-    if (!pcubEncryptedData)
-        return false;
+	if (!pubKey)
+		return false;
 
-    if (!pubKey)
-        return false;
+	if (!cubKey)
+		return false;
 
-    if (!cubKey)
-        return false;
+	if (!pubIV)
+		return false;
 
-    AutoSeededRandomPool rnd;
+	if (!cubIV)
+		return false;
 
-    Rijndael::Encryption rijndaelEncryption;
-    rijndaelEncryption.UncheckedSetKey(pubKey, cubKey, g_nullNameValuePairs);
+	assert( cubIV == AES::BLOCKSIZE );
+	
+	CBC_Mode<AES>::Encryption aesEncryption( pubKey, cubKey, pubIV);
 
-    byte aesIV[16];
-    GenerateRandomBlock(aesIV, AES::BLOCKSIZE);
+	std::string strEncryptedData;
 
-    byte aesBlockIV[16];
-    rijndaelEncryption.ProcessAndXorBlock(aesIV, NULL, aesBlockIV);
+	/*Array*/ StringSource( pubPlaintextData, cubPlaintextData, true,
+		new StreamTransformationFilter( aesEncryption,
+			new StringSink( strEncryptedData )
+		)
+	);
 
-    CBC_Mode<AES>::Encryption aesEncryption;
-    aesEncryption.SetCipherWithIV(rijndaelEncryption, aesIV);
+	unsigned int nLength = strEncryptedData.length();
 
-    std::string encryptedDataStr;
+	if (pcubEncryptedData)
+		*pcubEncryptedData = nLength;
 
-    StreamTransformationFilter filter(aesEncryption, new StringSink(encryptedDataStr));
-    filter.Put(pubPlaintextData, cubPlaintextData);
-    filter.MessageEnd();
-
-    *pcubEncryptedData = encryptedDataStr.length()+16;
-
-    for (int i=0;i<16;i++)
-        pubEncryptedData[i] = aesBlockIV[i];
-
-    const char *encryptedData = encryptedDataStr.c_str();
-
-    for (unsigned int i=0;i<*pcubEncryptedData;i++)
-        pubEncryptedData[i+16] = encryptedData[i];
-
-    return true;
+	memcpy(pubEncryptedData, strEncryptedData.c_str(), nLength);
+	
+	return true;
 }
 
-bool SymmetricDecrypt(const unsigned char *pubEncryptedData, unsigned int cubEncryptedData, unsigned char *pubPlaintextData, unsigned int *pcubPlaintextData, const unsigned char *pubKey, unsigned int cubKey)
+bool AESDecrypt(const unsigned char *pubEncryptedData, unsigned int cubEncryptedData, unsigned char *pubPlaintextData, unsigned int *pcubPlaintextData, const unsigned char *pubKey, unsigned int cubKey, const unsigned char *pubIV, unsigned int cubIV)
 {
     if (!pubEncryptedData)
         return false;
@@ -125,39 +128,163 @@ bool SymmetricDecrypt(const unsigned char *pubEncryptedData, unsigned int cubEnc
     if (!pubPlaintextData)
         return false;
 
-    if (!pcubPlaintextData)
-        return false;
-
     if (!pubKey)
         return false;
 
     if (!cubKey)
         return false;
 
-    if (cubEncryptedData <= 16)
-        return false;
+	if (!pubIV)
+		return false;
 
-    Rijndael::Decryption rijndaelDecryption;
-    rijndaelDecryption.UncheckedSetKey(pubKey, cubKey, g_nullNameValuePairs);
+	if (!cubIV)
+		return false;
 
-    byte aesIV[16];
-    rijndaelDecryption.ProcessAndXorBlock(pubEncryptedData, NULL, aesIV);
+	assert( cubIV == AES::BLOCKSIZE );
+	
+    CBC_Mode<AES>::Decryption aesDecryption( pubKey, cubKey, pubIV);
 
-    CBC_Mode<AES>::Decryption aesDecryption;
-    aesDecryption.SetCipherWithIV(rijndaelDecryption, aesIV);
+    std::string strDecryptedData;
 
-    std::string decryptedDataStr;
+	/*Array*/ StringSource( pubEncryptedData, cubEncryptedData, true,
+		new StreamTransformationFilter( aesDecryption,
+			new StringSink( strDecryptedData )
+		)
+	);
 
-    StreamTransformationFilter filter(aesDecryption, new StringSink(decryptedDataStr));
-    filter.Put(pubEncryptedData+16, cubEncryptedData-16);
-    filter.MessageEnd();
+	unsigned int nLength = strDecryptedData.length();
 
-    *pcubPlaintextData = decryptedDataStr.length();
+	if (pcubPlaintextData)
+		*pcubPlaintextData = nLength;
 
-    const char *decryptedData = decryptedDataStr.c_str();
-
-    for (unsigned int i=0;i<*pcubPlaintextData;i++)
-        pubPlaintextData[i] = decryptedData[i];
+	memcpy(pubPlaintextData, strDecryptedData.c_str(), nLength);
 
     return true;
+}
+
+bool SymmetricEncrypt(const unsigned char *pubPlaintextData, unsigned int cubPlaintextData, unsigned char *pubEncryptedData, unsigned int *pcubEncryptedData, const unsigned char *pubKey, unsigned int cubKey)
+{
+	if (!pubPlaintextData)
+		return false;
+
+	if (!cubPlaintextData)
+		return false;
+
+	if (!pubEncryptedData)
+		return false;
+
+	if (!pcubEncryptedData)
+		return false;
+
+	if (!pubKey)
+		return false;
+
+	if (!cubKey)
+		return false;
+
+	Rijndael::Encryption rijndaelEncryption( pubKey, cubKey );
+	ECB_Mode_ExternalCipher::Encryption ECBEncryption( rijndaelEncryption );
+
+	byte aesIV[16];
+	byte aesBlockIV[16];
+	GenerateRandomBlock(aesIV, AES::BLOCKSIZE);
+	
+	/*Array*/ StringSource( aesIV, sizeof(aesIV), true, 
+		new StreamTransformationFilter( ECBEncryption,
+			new ArraySink( aesBlockIV, sizeof(aesBlockIV) )
+		) 
+	);
+
+	CBC_Mode_ExternalCipher::Encryption aesEncryption( rijndaelEncryption, aesIV );
+
+	std::string strEncryptedData;
+
+	/*Array*/ StringSource( pubPlaintextData, cubPlaintextData, true,
+		new StreamTransformationFilter( aesEncryption,
+			new StringSink( strEncryptedData )
+		)
+	);
+
+	*pcubEncryptedData = strEncryptedData.length() + 16;
+
+	for (int i=0;i<16;i++)
+		pubEncryptedData[i] = aesBlockIV[i];
+
+	const char *pchEncryptedData = strEncryptedData.c_str();
+
+	for (unsigned int i=0;i<*pcubEncryptedData;i++)
+		pubEncryptedData[i+16] = pchEncryptedData[i];
+
+	return true;
+}
+
+bool SymmetricDecrypt(const unsigned char *pubEncryptedData, unsigned int cubEncryptedData, unsigned char *pubPlaintextData, unsigned int *pcubPlaintextData, const unsigned char *pubKey, unsigned int cubKey)
+{
+	if (!pubEncryptedData)
+		return false;
+
+	if (!cubEncryptedData)
+		return false;
+
+	if (!pubPlaintextData)
+		return false;
+
+	if (!pcubPlaintextData)
+		return false;
+
+	if (!pubKey)
+		return false;
+
+	if (!cubKey)
+		return false;
+
+	if (cubEncryptedData <= 16)
+		return false;
+
+	Rijndael::Decryption rijndaelEncryption( pubKey, cubKey );
+	ECB_Mode_ExternalCipher::Decryption ECBDecryption( rijndaelEncryption );
+
+	byte aesIV[16];
+
+	/*Array*/ StringSource( pubEncryptedData, sizeof(aesIV), true, 
+		new StreamTransformationFilter( ECBDecryption,
+			new ArraySink( aesIV, sizeof(aesIV) )
+		) 
+	);
+
+	CBC_Mode_ExternalCipher::Decryption aesDecryption( rijndaelEncryption, aesIV );
+
+	std::string strDecryptedData;
+
+	/*Array*/ StringSource( pubEncryptedData + 16, cubEncryptedData - 16, true,
+		new StreamTransformationFilter( aesDecryption,
+			new StringSink( strDecryptedData )
+		)
+	);
+
+	*pcubPlaintextData = strDecryptedData.length();
+
+	const char *pchDecryptedData = strDecryptedData.c_str();
+
+	for (unsigned int i=0;i<*pcubPlaintextData;i++)
+		pubPlaintextData[i] = pchDecryptedData[i];
+
+	return true;
+}
+
+bool SHA1Hash(const unsigned char *pubData, unsigned int cubData, unsigned char *pubHash)
+{
+	if (!pubData)
+		return false;
+
+	if (!cubData)
+		return false;
+
+	if (!pubHash)
+		return false;
+
+	SHA1 sha1Hash;
+	sha1Hash.CalculateDigest(pubHash, pubData, cubData);
+
+	return true;
 }
