@@ -59,6 +59,30 @@ struct MsgClientLogOnResponse_t
 };
 
 
+struct MsgClientLogOnWithCredentials_t
+{
+	uint32 m_unProtocolVer;
+
+	uint32 m_unIPPrivateObfuscated;
+	uint32 m_unIPPublic;
+
+	uint64 m_ulClientSuppliedSteamId;
+
+	uint32 m_unTicketLength;
+
+	char m_rgchAccountName[ 64 ];
+	char m_rgchPassword[ 20 ];
+
+	uint32 m_qosLevel; // ENetQOSLevel
+};
+
+struct MsgClientRegisterAuthTicketWithCM_t
+{
+	uint32 m_unProtocolVer;
+	uint32 m_unTicketLengthWithSignature; //B0 00 00 00
+};
+
+
 
 #pragma pack( pop )
 
