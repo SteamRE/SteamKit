@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Steam3Tester", "Steam3Teste
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hasher", "Hasher\Hasher.csproj", "{692B115B-C471-4A36-B7DB-0876ADA83857}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlobLib", "BlobLib\BlobLib\BlobLib.csproj", "{DFB5290A-FFCF-46D1-954F-A51711290248}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +61,16 @@ Global
 		{692B115B-C471-4A36-B7DB-0876ADA83857}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{692B115B-C471-4A36-B7DB-0876ADA83857}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{692B115B-C471-4A36-B7DB-0876ADA83857}.Release|Win32.ActiveCfg = Release|Any CPU
+		{DFB5290A-FFCF-46D1-954F-A51711290248}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFB5290A-FFCF-46D1-954F-A51711290248}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFB5290A-FFCF-46D1-954F-A51711290248}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{DFB5290A-FFCF-46D1-954F-A51711290248}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{DFB5290A-FFCF-46D1-954F-A51711290248}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{DFB5290A-FFCF-46D1-954F-A51711290248}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFB5290A-FFCF-46D1-954F-A51711290248}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DFB5290A-FFCF-46D1-954F-A51711290248}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{DFB5290A-FFCF-46D1-954F-A51711290248}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{DFB5290A-FFCF-46D1-954F-A51711290248}.Release|Win32.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
