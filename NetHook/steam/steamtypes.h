@@ -71,7 +71,7 @@
 #endif // else _WIN32
 
 
-typedef uint32	SteamUnsigned64_t;
+typedef uint64	SteamUnsigned64_t;
 
 
 typedef void  (*SteamAPIWarningMessageHook_t)(int hpipe, const char *message);
@@ -247,6 +247,51 @@ enum ECallbackType
 	k_iSteam2AsyncCallbacks = 1900,
 	k_iSteamGameStatsCallbacks = 2000,
 	k_iClientHTTPCallbacks = 2100
+};
+
+// Each Steam instance (licensed Steam Service Provider) has a unique SteamInstanceID_t.
+//
+// Each Steam instance as its own DB of users.
+// Each user in the DB has a unique SteamLocalUserID_t (a serial number, with possible 
+// rare gaps in the sequence).
+
+typedef	unsigned short		SteamInstanceID_t;		// MUST be 16 bits
+
+#if defined (WIN32)
+	typedef	unsigned __int64	SteamLocalUserID_t;		// MUST be 64 bits
+#else
+	typedef	unsigned long long	SteamLocalUserID_t;		// MUST be 64 bits
+#endif
+
+
+
+
+
+
+// Applications need to be able to authenticate Steam users from ANY instance.
+// So a SteamIDTicket contains SteamGlobalUserID, which is a unique combination of 
+// instance and user id.
+
+// SteamLocalUserID is an unsigned 64-bit integer.
+// For platforms without 64-bit int support, we provide access via a union that splits it into 
+// high and low unsigned 32-bit ints.  Such platforms will only need to compare LocalUserIDs 
+// for equivalence anyway - not perform arithmetic with them.
+struct TSteamSplitLocalUserID
+{
+	unsigned int	Low32bits;
+	unsigned int	High32bits;
+};
+
+struct TSteamGlobalUserID
+{
+	SteamInstanceID_t m_SteamInstanceID;
+
+	union m_SteamLocalUserID
+	{
+		SteamLocalUserID_t		As64bits;
+		TSteamSplitLocalUserID	Split;
+	} m_SteamLocalUserID;
+
 };
 
 // structure that contains client callback data

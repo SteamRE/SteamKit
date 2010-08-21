@@ -175,7 +175,6 @@ public:
 		m_steamid.m_unAll64Bits = ulSteamID;
 	}
 
-#ifdef TSTEAMGLOBALUSERID_H // NO_STEAM would not include TSteamGlobalUserID.h, thus we lose this facet of CSteamID
 	//-----------------------------------------------------------------------------
 	// Purpose: Initializes a steam ID from a Steam2 ID structure
 	// Input:	pTSteamGlobalUserID -	Steam2 ID to convert
@@ -203,7 +202,6 @@ public:
 		pTSteamGlobalUserID->m_SteamLocalUserID.Split.High32bits = m_steamid.m_comp.m_unAccountID % 2;
 		pTSteamGlobalUserID->m_SteamLocalUserID.Split.Low32bits = m_steamid.m_comp.m_unAccountID / 2;
 	}
-#endif // TSTEAMGLOBALUSERID_H
 
 	//-----------------------------------------------------------------------------
 	// Purpose: Converts steam ID to its 64-bit representation

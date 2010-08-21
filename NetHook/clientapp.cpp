@@ -22,7 +22,7 @@
 
 
 // define our clientapp entry point
-//CLIENTAPP( main );
+CLIENTAPP( main );
 
 
 typedef bool ( STEAM_CALL *Steam_BGetCallback )( HSteamPipe hSteamPipe, CallbackMsg_t *pCallbackMsg );
@@ -87,13 +87,14 @@ int main( int argc, char **argv )
 
 	Detour_WSAStartup->Attach();
 
+	/*
 	HMODULE steamClient = LoadLibrary( "steamclient.dll" );
 
 	GetCallback = (Steam_BGetCallback)GetProcAddress( steamClient, "Steam_BGetCallback" );
-	FreeCallback = (Steam_FreeLastCallback)GetProcAddress( steamClient, "Steam_FreeLastCallback" );
+	FreeCallback = (Steam_FreeLastCallback)GetProcAddress( steamClient, "Steam_FreeLastCallback" );*/
 
 
-#if 0
+#if 1
 	// load the real client app
 	HMODULE steamUI = LoadLibrary( "SteamUI.dll" );
 	if ( !steamUI )
@@ -115,9 +116,10 @@ int main( int argc, char **argv )
 #endif
 
 
+	/*
 	int ret = Login();
 
-	FreeLibrary( steamClient );
+	FreeLibrary( steamClient );*/
 
 	
 	// udp
