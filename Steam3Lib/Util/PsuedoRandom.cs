@@ -18,7 +18,9 @@ namespace SteamLib
         public byte[] GenerateRandomBlock( int size )
         {
             byte[] block = new byte[ size ];
-            rng.GetBytes( block );
+            //rng.GetBytes( block );
+
+            rng.GetNonZeroBytes( block );
 
             return block;
         }

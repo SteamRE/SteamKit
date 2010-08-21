@@ -136,7 +136,11 @@ namespace SteamLib
         {
             lock ( netLock )
             {
-                this.heartBeatFunc = null;
+                if ( this.heartBeatFunc != null )
+                {
+                    this.heartBeatFunc.Disable();
+                    this.heartBeatFunc = null;
+                }
 
                 this.steamId = new CSteamID( 0 );
                 this.sessionId = 0;
@@ -175,21 +179,18 @@ namespace SteamLib
                     heartBeatFunc.SetObject( this );
                     heartBeatFunc.SetDelay( TimeSpan.FromSeconds( logonResp.MsgHeader.OutOfGameHeartbeatRateSec ) );
                 }
+
             }
 
-            if ( e.Msg == EMsg.ClientCMList )
+            if ( e.Msg == EMsg.ClientLoggedOff )
             {
-                var cmList = new ClientMsg<MsgClientCMList, ExtendedClientMsgHdr>( e.Data );
-
-                Console.WriteLine( "Got CM List: {0} servers.", cmList.MsgHeader.CountCMs );
-
-                DataStream ds = new DataStream( cmList.GetPayload() );
-
-                for ( int x = 0 ; x < cmList.MsgHeader.CountCMs ; ++x )
+                lock ( netLock )
                 {
-                    IPAddress ipAddr = new IPAddress( ds.ReadBytes( 4, true ) );
-
-                    Console.WriteLine( "  Server: {0}", ipAddr.ToString() );
+                    if ( this.heartBeatFunc != null )
+                    {
+                        this.heartBeatFunc.Disable();
+                        this.heartBeatFunc = null;
+                    }
                 }
             }
         }

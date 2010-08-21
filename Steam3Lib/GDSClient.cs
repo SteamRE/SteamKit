@@ -28,7 +28,7 @@ namespace SteamLib
 
     public class Client
     {
-        protected TcpSocket socket;
+        public TcpSocket socket;
 
         public Client()
         {
@@ -207,6 +207,7 @@ namespace SteamLib
             {
                 JenkinsHash jh = new JenkinsHash();
                 byte[] userHash = jh.ComputeHash( Encoding.ASCII.GetBytes( userName.ToLower() ) );
+                Array.Reverse( userHash );
                 jh.Clear();
 
                 bRet = this.SendCommand( ( byte )type, userHash );
