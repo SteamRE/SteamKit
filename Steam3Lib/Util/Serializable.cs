@@ -41,7 +41,7 @@ namespace SteamLib
 
             try
             {
-                IntPtr dataPtr = dataHandle.AddrOfPinnedObject();
+                IntPtr dataPtr = new IntPtr( dataHandle.AddrOfPinnedObject().ToInt32() + offset );
                 result = ( T )Marshal.PtrToStructure( dataPtr, typeof( T ) );
             }
             finally
