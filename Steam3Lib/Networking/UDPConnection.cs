@@ -166,7 +166,7 @@ namespace SteamLib
         }
 
         public void SendNetMsg<MsgHdr, Hdr>( ClientMsg<MsgHdr, Hdr> clientMsg, IPEndPoint ipAddr )
-            where Hdr : Serializable<Hdr>, IMsg, new()
+            where Hdr : Serializable<Hdr>, IMsgHdr, new()
             where MsgHdr : Serializable<MsgHdr>, IClientMsg, new()
         {
             Console.WriteLine( "Sending EMsg: " + clientMsg.MsgHeader.GetEMsg() );

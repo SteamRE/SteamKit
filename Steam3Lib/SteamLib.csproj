@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Steam3\ClientMsgs.cs" />
     <Compile Include="Types\EChatEntryType.cs" />
     <Compile Include="Steam2\GDSClient.cs" />
     <Compile Include="Types\IPAddrPort.cs" />
@@ -46,7 +47,7 @@
     <Compile Include="Util\PKZipBuffer.cs" />
     <Compile Include="Util\ScheduledFunction.cs" />
     <Compile Include="Networking\TcpSocket.cs" />
-    <Compile Include="Steam3\ClientMsg.cs" />
+    <Compile Include="Steam3\MsgBase.cs" />
     <Compile Include="Types\EMsg.cs" />
     <Compile Include="Steam3\CMInterface.cs" />
     <Compile Include="Util\KeyManager.cs" />
