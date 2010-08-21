@@ -46,7 +46,7 @@
     <Compile Include="Types\MicroTime.cs" />
     <Compile Include="Util\PKZipBuffer.cs" />
     <Compile Include="Util\ScheduledFunction.cs" />
-    <Compile Include="Networking\TcpSocket.cs" />
+    <Compile Include="Networking\Tcp\TcpSocket.cs" />
     <Compile Include="Steam3\MsgBase.cs" />
     <Compile Include="Types\EMsg.cs" />
     <Compile Include="Steam3\CMInterface.cs" />
@@ -55,19 +55,19 @@
     <Compile Include="Types\EAccountType.cs" />
     <Compile Include="Types\EResult.cs" />
     <Compile Include="Types\EUniverse.cs" />
-    <Compile Include="Networking\NetFilter.cs" />
+    <Compile Include="Networking\Udp\NetFilter.cs" />
     <Compile Include="Util\CryptoHelper.cs" />
-    <Compile Include="Networking\UdpPacket.cs" />
+    <Compile Include="Networking\Udp\UdpPacket.cs" />
     <Compile Include="Util\ByteBuffer.cs" />
     <Compile Include="Util\DataStream.cs" />
-    <Compile Include="Networking\NetPacket.cs" />
+    <Compile Include="Networking\Udp\NetPacket.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\PsuedoRandom.cs" />
     <Compile Include="Util\Serializable.cs" />
     <Compile Include="Util\Singleton.cs" />
-    <Compile Include="Networking\UDPConnection.cs" />
-    <Compile Include="Networking\UdpHeader.cs" />
-    <Compile Include="Networking\UdpSocket.cs" />
+    <Compile Include="Networking\Udp\UDPConnection.cs" />
+    <Compile Include="Networking\Udp\UdpHeader.cs" />
+    <Compile Include="Networking\Udp\UdpSocket.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Hasher\Hasher.csproj">
