@@ -284,6 +284,7 @@ int main(int argc, char **argv[])
 						plaintextAuthBuffer.WriteNumber64LE(ulTimeObfuscated);
 						plaintextAuthBuffer.WriteNumber32LE(nClientInternalIP);
 
+						byte aesIV[16];
 						GenerateRandomBlock(aesIV, 16);
 						
 						unsigned char aesCipher[16];
