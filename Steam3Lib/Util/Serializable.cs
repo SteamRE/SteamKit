@@ -9,7 +9,7 @@ namespace SteamLib
     [StructLayout( LayoutKind.Sequential, Pack = 1)]
     public class Serializable<T> where T : Serializable<T>
     {
-        public byte[] Serialize()
+        public virtual byte[] Serialize()
         {
             int dataSize = Marshal.SizeOf( this );
             byte[] data = new byte[ dataSize ];

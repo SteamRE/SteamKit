@@ -13,9 +13,16 @@ namespace SteamLib
         public ushort Port;
 
 
+
+        public static implicit operator IPEndPoint( IPAddrPort addr )
+        {
+            return addr.ToEndPoint();
+        }
+
+
         public IPAddress ToIPAddress()
         {
-            return new IPAddress( BitConverter.GetBytes( IPAddress ) );
+            return NetHelpers.GetIPAddress( IPAddress );
         }
 
         public IPEndPoint ToEndPoint()

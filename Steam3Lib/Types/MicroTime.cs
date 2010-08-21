@@ -6,9 +6,37 @@ using System.Runtime.InteropServices;
 namespace SteamLib
 {
     [StructLayout( LayoutKind.Sequential, Pack = 1 )]
-    public class MicroTime : Serializable<MicroTime>
+    public class MicroTime : Serializable<MicroTime>, IEquatable<ulong>, IComparable<ulong>
     {
         public ulong Time;
+
+        public static MicroTime Now
+        {
+            get
+            {
+                return new MicroTime( MicroTime.GetMicroSecNow() );
+            }
+        }
+
+
+        public MicroTime()
+            : this( 0 )
+        {
+        }
+        public MicroTime( ulong time )
+        {
+            this.Time = time;
+        }
+
+
+        public static implicit operator ulong( MicroTime microTime )
+        {
+            return microTime.Time;
+        }
+        public static implicit operator MicroTime( ulong microTime )
+        {
+            return new MicroTime( microTime );
+        }
 
 
         public DateTime ToDateTime()
@@ -20,6 +48,28 @@ namespace SteamLib
         public override string ToString()
         {
             return ToDateTime().ToString();
+        }
+
+
+        public bool Equals( ulong other )
+        {
+            return Time.Equals( other );
+        }
+
+        public int CompareTo( ulong other )
+        {
+            return Time.CompareTo( other );
+        }
+
+
+        static ulong GetMicroSecNow()
+        {
+            return 0xDCBFFEFF2BC000UL + ( ( ulong )GetUnixTime( DateTime.UtcNow ) * 1000000UL );
+        }
+        static uint GetUnixTime( DateTime dt )
+        {
+            TimeSpan ts = ( dt - new DateTime( 1970, 1, 1, 0, 0, 0 ) );
+            return ( uint )ts.TotalSeconds;
         }
     }
 }

@@ -7,7 +7,7 @@ using Classless.Hasher;
 namespace SteamLib
 {
 
-    public class DSClient : ServerClient
+    class DSClient : ServerClient
     {
         public IPEndPoint[] GetServerList( IPEndPoint directoryServer, EServerType type, string userName )
         {

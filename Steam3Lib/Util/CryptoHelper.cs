@@ -8,7 +8,7 @@ using System.IO;
 
 namespace SteamLib
 {
-    public static class CryptoHelper
+    static class CryptoHelper
     {
         public static byte[] RSAEncrypt( byte[] input, byte[] key )
         {

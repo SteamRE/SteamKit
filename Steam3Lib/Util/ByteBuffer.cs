@@ -6,7 +6,7 @@ using System.IO;
 
 namespace SteamLib
 {
-    public class ByteBuffer
+    class ByteBuffer
     {
         MemoryStream buffer;
 

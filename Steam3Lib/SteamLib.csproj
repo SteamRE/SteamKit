@@ -39,13 +39,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Steam2\ServerCache.cs" />
+    <Compile Include="Steam2\Steam2.cs" />
+    <Compile Include="Steam2\AsyncCalls\LoginCall.cs" />
+    <Compile Include="Steam2\AsyncCalls\SteamCallHandle.cs" />
+    <Compile Include="Types\SteamError.cs" />
+    <Compile Include="Types\SteamGlobalUserID.cs" />
+    <Compile Include="Util\NetHelpers.cs" />
+    <Compile Include="Steam2\AuthServerClient.cs" />
     <Compile Include="Steam2\ServerClient.cs" />
     <Compile Include="Steam2\ConfigServerClient.cs" />
     <Compile Include="Steam2\ConfigServerDSClient.cs" />
     <Compile Include="Steam2\DSClient.cs" />
     <Compile Include="Steam2\GeneralDSClient.cs" />
     <Compile Include="Steam3\ClientMsgs.cs" />
-    <Compile Include="Types\EChatEntryType.cs" />
+    <Compile Include="Types\ChatEntryType.cs" />
     <Compile Include="Types\IPAddrPort.cs" />
     <Compile Include="Types\MicroTime.cs" />
     <Compile Include="Util\PKZipBuffer.cs" />
@@ -55,8 +63,8 @@
     <Compile Include="Types\EMsg.cs" />
     <Compile Include="Steam3\CMInterface.cs" />
     <Compile Include="Util\KeyManager.cs" />
-    <Compile Include="Types\CSteamID.cs" />
-    <Compile Include="Types\EAccountType.cs" />
+    <Compile Include="Types\SteamID.cs" />
+    <Compile Include="Types\AccountType.cs" />
     <Compile Include="Types\EResult.cs" />
     <Compile Include="Types\EUniverse.cs" />
     <Compile Include="Networking\Udp\NetFilter.cs" />
