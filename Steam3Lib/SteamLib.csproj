@@ -35,7 +35,6 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.DirectoryServices.Protocols" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -82,6 +81,10 @@
     <Compile Include="Networking\Udp\UdpSocket.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BlobLib\BlobLib\BlobLib.csproj">
+      <Project>{DFB5290A-FFCF-46D1-954F-A51711290248}</Project>
+      <Name>BlobLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Hasher\Hasher.csproj">
       <Project>{692B115B-C471-4A36-B7DB-0876ADA83857}</Project>
       <Name>Hasher</Name>
