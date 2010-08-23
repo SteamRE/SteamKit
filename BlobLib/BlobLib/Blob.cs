@@ -163,7 +163,7 @@ namespace BlobLib
             }
         }
 
-        private static void SetKey(byte[] key)
+        public static void SetKey(byte[] key)
         {
             Key = key;
         }
@@ -220,20 +220,25 @@ namespace BlobLib
                         }
                         else if (processcode == EAutoPreprocessCode.eAutoPreprocessCodeEncrypted)
                         {
-                            Int32 decompressedSize = reader.ReadInt32();
+                            Int32 decryptedSize = reader.ReadInt32();
 
-                            RijndaelManaged aes = new RijndaelManaged();
+                            /*RijndaelManaged aes = new RijndaelManaged();
                             aes.Mode = CipherMode.CBC;
                             aes.KeySize = 128;
+                            aes.BlockSize = 128;*/
 
-                            byte[] IV = reader.ReadBytes(aes.BlockSize);
-                            byte[] ciphertext = reader.ReadBytes(serializedSize);
+                            byte[] IV = reader.ReadBytes( 16 );
+                            byte[] ciphertext = reader.ReadBytes( serializedSize - 50 );
 
+                            /*
                             aes.Key = Key;
                             aes.IV = IV;
+                            */
 
-                            ICryptoTransform decrypt = aes.CreateDecryptor();
-                            byte[] plaintext = decrypt.TransformFinalBlock(ciphertext, 0, ciphertext.Length);
+                            byte[] plaintext = CryptoHelper.AESDecrypt( ciphertext, Key, IV );
+
+                            //ICryptoTransform decrypt = aes.CreateDecryptor();
+                            //byte[] plaintext = decrypt.TransformFinalBlock(ciphertext, 0, ciphertext.Length);
 
                             Blob decrypted = Parse(plaintext);
                             decrypted.SetEncrypted(IV);

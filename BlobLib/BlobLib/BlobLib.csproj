@@ -48,6 +48,7 @@
     <Compile Include="Blob.cs" />
     <Compile Include="BlobComponent.cs" />
     <Compile Include="BlobField.cs" />
+    <Compile Include="CryptoHelper.cs" />
     <Compile Include="Impl\AuthFields.cs" />
     <Compile Include="Impl\CDRFields.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
