@@ -79,7 +79,7 @@ int Login()
 int main( int argc, char **argv )
 {
 
-	//AllocConsole();
+	AllocConsole();
 
 	g_Logger = new CLogger( argv[ 0 ] );
 
