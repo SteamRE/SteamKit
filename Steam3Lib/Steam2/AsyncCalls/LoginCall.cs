@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Net;
+using BlobLib;
+using System.IO;
 
 namespace SteamLib
 {
@@ -143,6 +145,9 @@ namespace SteamLib
                 error = new SteamError( ESteamErrorCode.LoginFailed );
                 return false;
             }
+
+            Blob.SetKey( loginData.ClientTGT.AccountRecordKey );
+            Blob blob = Blob.Parse( loginData.AccountRecord );
 
             return true;
         }

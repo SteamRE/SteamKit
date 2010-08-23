@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Security.Cryptography;
-using System.Security.Cryptography.X509Certificates;
-using System.DirectoryServices.Protocols;
 using System.IO;
 
 namespace SteamLib

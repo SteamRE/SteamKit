@@ -188,7 +188,9 @@ namespace SteamLib
                 serverTGT = ds.ReadBytes( serverTGTSize );
 
                 uint accRecordSize = ds.ReadUInt32();
-                accRecord = ds.ReadBytes( ds.SizeRemaining() );
+                accRecord = ds.ReadBytes( ds.SizeRemaining() - 40 );
+
+                
             }
             catch
             {
