@@ -236,4 +236,48 @@ namespace SteamLib
             return EMsg.ClientFriendMsgIncoming;
         }
     }
+
+    enum ENetQOSLevel : uint
+    {
+        NotSet = 0,
+        Low = 1,
+        Medium = 2,
+        High = 3,
+    };
+
+    [StructLayout( LayoutKind.Sequential, CharSet = CharSet.Ansi, Pack = 1 )]
+    class MsgClientLogOnWithCredentials : Serializable<MsgClientLogOnWithCredentials>, IClientMsg
+    {
+        public const uint ObfuscationMask = 0xBAADF00D;
+        public const uint CurrentProtocol = 65563; // ??
+
+        public uint ProtocolVersion;
+
+        public uint PrivateIPObfuscated;
+        public uint PublicIP;
+
+        public ulong ClientSuppliedSteamID;
+
+        public uint TicketLength;
+
+        [MarshalAs( UnmanagedType.ByValTStr, SizeConst = 64 )]
+        public string AccountName;
+        [MarshalAs( UnmanagedType.ByValTStr, SizeConst = 20 )]
+        public string Password;
+
+        public ENetQOSLevel QOSLevel;
+
+        public MsgClientLogOnWithCredentials()
+        {
+            ProtocolVersion = CurrentProtocol;
+
+            AccountName = "";
+            Password = "";
+        }
+
+        public EMsg GetEMsg()
+        {
+            return EMsg.ClientLogOnWithCredentials;
+        }
+    }
 }

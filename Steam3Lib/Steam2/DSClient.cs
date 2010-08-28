@@ -56,10 +56,12 @@ namespace SteamLib
 
             for ( int x = 0 ; x < numAddrs ; ++x )
             {
-                IPAddress ipAddr = new IPAddress( ds.ReadBytes( 4 ) );
-                int port = IPAddress.NetworkToHostOrder( ds.ReadInt16() );
+                IPAddrPort ipAddr = IPAddrPort.Deserialize( ds.ReadBytes( 6 ) );
 
-                serverList.Add( new IPEndPoint( ipAddr, port ) );
+                //IPAddress ipAddr = new IPAddress( ds.ReadBytes( 4 ) );
+                //int port = IPAddress.NetworkToHostOrder( ds.ReadInt16() );
+
+                serverList.Add( ipAddr );
             }
 
             return serverList.ToArray();

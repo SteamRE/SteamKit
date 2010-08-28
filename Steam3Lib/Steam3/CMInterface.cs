@@ -21,9 +21,9 @@ namespace SteamLib
     }
 
 
-    public class CMInterface : Singleton<CMInterface>
+    public class CMInterface
     {
-        public static string[] CMServers =
+        static string[] CMServers =
         {
             "68.142.64.164",
             "68.142.64.165",
@@ -51,13 +51,22 @@ namespace SteamLib
             "208.111.171.83",
         };
 
+        static CMInterface instance;
+        public static CMInterface Instance
+        {
+            get
+            {
+                if ( instance == null )
+                    instance = new CMInterface();
+
+                return instance;
+            }
+        }
+
 
         UdpConnection udpConn;
 
         CMServer bestServer;
-
-        SteamID steamId;
-        int sessionId;
 
         // any network action interacting with members must lock this object
         object netLock = new object();
@@ -65,9 +74,13 @@ namespace SteamLib
         ScheduledFunction<CMInterface> heartBeatFunc;
 
 
-        public CMInterface()
+        internal CMInterface()
         {
-            steamId = new SteamID( 0 );
+            SteamGlobal.Lock();
+            SteamGlobal.SteamID = new SteamID( 0 );
+            SteamGlobal.SessionID = 0;
+            SteamGlobal.Unlock();
+
             bestServer = new CMServer();
 
             udpConn = new UdpConnection();
@@ -109,27 +122,27 @@ namespace SteamLib
 
         void SendHeartbeat( CMInterface o )
         {
-            lock ( netLock )
-            {
-                var heartbeat = new ClientMsg<MsgClientHeartBeat, ExtendedClientMsgHdr>();
+            SteamGlobal.Lock();
 
-                heartbeat.Header.SessionID = this.sessionId;
-                heartbeat.Header.SteamID = this.steamId;
+            var heartbeat = new ClientMsg<MsgClientHeartBeat, ExtendedClientMsgHdr>();
 
-                udpConn.SendNetMsg( heartbeat, this.bestServer.EndPoint );
-            }
+            heartbeat.Header.SessionID = SteamGlobal.SessionID;
+            heartbeat.Header.SteamID = SteamGlobal.SteamID;
+
+            SteamGlobal.Unlock();
+
+            udpConn.SendNetMsg( heartbeat, this.bestServer.EndPoint );
         }
 
 
         void SendLogOn( IPEndPoint endPoint )
         {
-            // lets send our logon request
-            SteamID steamId = new SteamID( 0, 0, EUniverse.Public, EAccountType.AnonGameServer );
+            var logon = new ClientMsg<MsgClientLogOnWithCredentials, ExtendedClientMsgHdr>();
+            logon.MsgHeader.ClientSuppliedSteamID = 0;
+            logon.MsgHeader.PrivateIPObfuscated = NetHelpers.GetIPAddress( NetHelpers.GetLocalIP() ) ^ MsgClientLogOnWithCredentials.ObfuscationMask;
 
-            var anonLogon = new ClientMsg<MsgClientAnonLogOn, ExtendedClientMsgHdr>();
-            anonLogon.Header.SteamID = steamId;
 
-            udpConn.SendNetMsg( anonLogon, endPoint );
+            udpConn.SendNetMsg( logon, endPoint );
         }
 
         void RecvDisconnect( object sender, NetworkEventArgs e )
@@ -141,10 +154,14 @@ namespace SteamLib
                     this.heartBeatFunc.Disable();
                     this.heartBeatFunc = null;
                 }
-
-                this.steamId = new SteamID( 0 );
-                this.sessionId = 0;
             }
+
+            SteamGlobal.Lock();
+
+            SteamGlobal.SteamID = new SteamID( 0 );
+            SteamGlobal.SessionID = 0;
+
+            SteamGlobal.Unlock();
         }
 
         void RecvNetMsg( object sender, NetMsgEventArgs e )
@@ -166,11 +183,10 @@ namespace SteamLib
 
                 Console.WriteLine( "Logon Response: " + logonResp.MsgHeader.Result );
 
-                lock ( netLock )
-                {
-                    this.sessionId = logonResp.Header.SessionID;
-                    this.steamId = logonResp.Header.SteamID;
-                }
+                SteamGlobal.Lock();
+                SteamGlobal.SessionID = logonResp.Header.SessionID;
+                SteamGlobal.SteamID = logonResp.Header.SteamID;
+                SteamGlobal.Unlock();
 
                 if ( logonResp.MsgHeader.Result == EResult.OK )
                 {
