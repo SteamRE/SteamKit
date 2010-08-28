@@ -47,7 +47,7 @@
       <Project>{DFB5290A-FFCF-46D1-954F-A51711290248}</Project>
       <Name>BlobLib</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Steam3Lib\SteamKit.csproj">
+    <ProjectReference Include="..\SteamKit\SteamKit.csproj">
       <Project>{5C00E764-1F76-4E3E-B759-2853DD77C28D}</Project>
       <Name>SteamKit</Name>
     </ProjectReference>
