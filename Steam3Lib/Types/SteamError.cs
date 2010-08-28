@@ -41,7 +41,7 @@ namespace SteamLib
 
         public override string ToString()
         {
-            return base.ToString();
+            return this.ErrorCode.ToString();
         }
     }
 }

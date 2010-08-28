@@ -8,8 +8,8 @@
     <ProjectGuid>{5C00E764-1F76-4E3E-B759-2853DD77C28D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SteamLib</RootNamespace>
-    <AssemblyName>SteamLib</AssemblyName>
+    <RootNamespace>SteamKit</RootNamespace>
+    <AssemblyName>SteamKit</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -42,6 +42,8 @@
     <Compile Include="Steam2\Steam2.cs" />
     <Compile Include="Steam2\AsyncCalls\LoginCall.cs" />
     <Compile Include="Steam2\AsyncCalls\SteamCallHandle.cs" />
+    <Compile Include="SteamGlobal.cs" />
+    <Compile Include="Types\ClientTGT.cs" />
     <Compile Include="Types\SteamError.cs" />
     <Compile Include="Types\SteamGlobalUserID.cs" />
     <Compile Include="Util\NetHelpers.cs" />

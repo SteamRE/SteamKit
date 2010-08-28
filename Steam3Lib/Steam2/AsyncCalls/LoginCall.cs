@@ -8,13 +8,6 @@ using System.IO;
 namespace SteamLib
 {
 
-    class LoginData
-    {
-        public ClientTGT ClientTGT;
-        public byte[] ServerTGT;
-        public byte[] AccountRecord;
-    }
-
     class LoginCall : SteamCallHandle
     {
         string userName;
@@ -24,15 +17,10 @@ namespace SteamLib
 
         IPEndPoint authServer;
 
-        LoginData loginData;
-
-
         public LoginCall( string userName, string password )
         {
             this.userName = userName;
             this.password = password;
-
-            loginData = new LoginData();
 
             this.asClient = new AuthServerClient();
 
@@ -140,21 +128,27 @@ namespace SteamLib
             error = new SteamError();
             progress.Description = string.Format( "Getting account information..." );
 
-            if ( !asClient.GetAccountInfo( out loginData.ClientTGT, out loginData.ServerTGT, out loginData.AccountRecord ) )
+            ClientTGT clientTgt;
+            byte[] serverTgt;
+            byte[] accountRec;
+
+            if ( !asClient.GetAccountInfo( out clientTgt, out serverTgt, out accountRec ) )
             {
                 error = new SteamError( ESteamErrorCode.LoginFailed );
                 return false;
             }
 
-            Blob.SetKey( loginData.ClientTGT.AccountRecordKey );
-            Blob blob = Blob.Parse( loginData.AccountRecord );
+            SteamGlobal.ClientTGT = clientTgt;
+            SteamGlobal.ServerTGT = serverTgt;
+
+            Blob.SetKey( SteamGlobal.ClientTGT.AccountRecordKey );
+            Blob blob = Blob.Parse( accountRec );
+
+            SteamGlobal.AccountRecord = blob;
+
+            Steam2.LoginState = LoginState.LoggedIn;
 
             return true;
-        }
-
-        internal override object GetCompletionData()
-        {
-            return loginData;
         }
 
         public override string ToString()

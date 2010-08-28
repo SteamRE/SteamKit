@@ -11,6 +11,8 @@ namespace SteamLib
     public class SteamProgress
     {
         public string Description { get; internal set; }
+
+        public bool IsValid() { return !string.IsNullOrEmpty( Description ); }
     }
 
     public class SteamCallHandle
@@ -23,6 +25,9 @@ namespace SteamLib
 
         SteamError lastError;
         SteamProgress progress;
+
+        object lockObj = new object();
+
 
         public static SteamCallHandle InvalidHandle
         {
@@ -51,37 +56,49 @@ namespace SteamLib
         {
             foreach ( AsyncCall call in FuncCalls )
             {
-                if ( !Trigger.WaitOne( TimeSpan.FromSeconds( 5 ) ) )
+#if DEBUG
+                TimeSpan timeOut = TimeSpan.FromMilliseconds( -1 ); // calls never timeout in debug builds
+#else
+                TimeSpan timeOut = TimeSpan.FromSeconds( 5 );
+#endif
+
+                if ( !Trigger.WaitOne( timeOut ) )
                 {
-                    lastError = new SteamError( ESteamErrorCode.CallTimedOut );
+                    lock ( lockObj )
+                    {
+                        lastError = new SteamError( ESteamErrorCode.CallTimedOut );
+                    }
+
                     return;
                 }
 
-                bool result = call( ref progress, out lastError );
+                lock ( lockObj )
+                {
+                    bool result = call( ref progress, out lastError );
 
-                CallsMade++;
+                    CallsMade++;
 
-                if ( !result )
-                    return;
+                    if ( !result )
+                        return;
+                }
             }
         }
 
-        internal bool Process( ref SteamProgress progress, out SteamError err )
+        public bool Process( ref SteamProgress progress, out SteamError err )
         {
-            err = this.lastError;
-            progress = this.progress;
+            lock ( lockObj )
+            {
+                err = this.lastError;
+                progress = this.progress;
 
-            if ( err.IsError() || this.CallsMade == this.FuncCalls.Count )
-                return true;
+
+                if ( err.IsError() || this.CallsMade == this.FuncCalls.Count )
+                    return true;
+            }
 
             Trigger.Set();
 
             return false;
-        }
-
-        internal virtual object GetCompletionData()
-        {
-            return null;
         }
     }
 
