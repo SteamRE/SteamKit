@@ -13,6 +13,14 @@ namespace Steam3Tester
     {
         static void Main( string[] args )
         {
+            CMInterface cmInterface = CMInterface.Instance;
+
+            cmInterface.ConnectToCM();
+
+
+
+#if false
+            // steam2 login code
             SteamError err;
             SteamCallHandle loginHandle = Steam2.Login( "username", "password", out err );
 
@@ -25,11 +33,12 @@ namespace Steam3Tester
             }
 
             SteamProgress progress = new SteamProgress();
-            while ( !Steam2.ProcessCall( loginHandle, ref progress, out err ) )
+            while ( !loginHandle.Process( ref progress, out err ) )
             {
-                Console.WriteLine( "Progress: {0}", progress.Description );
+                if ( progress.IsValid() )
+                    Console.WriteLine( "Progress: {0}", progress.Description );
 
-                Thread.Sleep( 10 );
+                Thread.Sleep( 100 );
             }
 
             if ( err.IsError() )
@@ -50,12 +59,14 @@ namespace Steam3Tester
             }
 
             Console.WriteLine( "UserID: {0}", userId.AccountID );
-
+            Console.ReadKey();
+#endif
 
 
 
 
 #if false
+            // steam2 server query code
             GDSClient gdsClient = new GDSClient();
             CSDSClient csdsClient = new CSDSClient();
 
