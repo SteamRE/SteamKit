@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NetHook", "NetHook\NetHook.vcproj", "{04A24EE0-87D6-4CFB-BE63-7A9BC777B1A8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SteamKit", "Steam3Lib\SteamKit.csproj", "{5C00E764-1F76-4E3E-B759-2853DD77C28D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SteamKit", "SteamKit\SteamKit.csproj", "{5C00E764-1F76-4E3E-B759-2853DD77C28D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SteamTester", "Steam3Tester\SteamTester.csproj", "{57FD7B34-57EB-42E8-AB08-24A15D5FA568}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SteamTester", "SteamTester\SteamTester.csproj", "{57FD7B34-57EB-42E8-AB08-24A15D5FA568}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hasher", "Hasher\Hasher.csproj", "{692B115B-C471-4A36-B7DB-0876ADA83857}"
 EndProject
