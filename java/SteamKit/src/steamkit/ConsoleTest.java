@@ -17,18 +17,14 @@ public class ConsoleTest
 	public static void main(String[] args)
 	{
 		CMInterface cm = new CMInterface();
+		
 		CountDownLatch waithandle = cm.initialize();
 
-		System.out.println( waithandle.getCount() );
-		
 		try {
 			waithandle.await();
 		} catch (InterruptedException e1) {
 			e1.printStackTrace();
 		}
-		
-		System.out.println( waithandle.getCount() );
-		System.out.println("done");
 		
 		waithandle = cm.connect();
 		

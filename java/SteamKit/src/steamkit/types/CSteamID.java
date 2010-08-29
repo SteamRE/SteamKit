@@ -4,6 +4,8 @@ import steamkit.util.BitVector64;
 
 public class CSteamID
 {
+	public static final CSteamID Invalid = new CSteamID();
+	
 	private BitVector64 id;
 	
 	public CSteamID()

@@ -6,6 +6,7 @@ package steamkit.util;
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
+import javax.management.openmbean.InvalidKeyException;
 
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
@@ -181,6 +182,11 @@ public class CryptoHelper
 			aesCipher.init( Cipher.DECRYPT_MODE, aesKey, aesIV );
 			
 			return aesCipher.doFinal( ciphertext, plainIV.length, ciphertext.length - plainIV.length );
+		}
+		catch( InvalidKeyException e )
+		{
+			// this exception likely indicates you aren't using the Unlimited Strength policy
+			e.printStackTrace();
 		}
 		catch( Exception e)
 		{
