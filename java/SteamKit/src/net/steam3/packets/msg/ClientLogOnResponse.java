@@ -44,6 +44,11 @@ public class ClientLogOnResponse
 		return result;
 	}
 	
+	public int getOutofGameHeartbeat()
+	{
+		return outOfGameHeartbeatRateSec;
+	}
+	
 	public static ClientLogOnResponse deserialize( ChannelBuffer buf )
 	{
 		return deserialize( buf.toByteBuffer() );

@@ -4,7 +4,7 @@ import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.zip.CRC32;
 import java.util.zip.Checksum;
 
@@ -31,9 +31,6 @@ import steamkit.util.UniverseKey;
 
 public class UDPConnection implements IUDPHandlerCallback
 {
-	private static final ExecutorService es = Executors.newCachedThreadPool();
-	private static final NioDatagramChannelFactory f = new NioDatagramChannelFactory( es );
-	
 	private ConnectionlessBootstrap b;
 	private DatagramChannel c;
 
@@ -42,20 +39,21 @@ public class UDPConnection implements IUDPHandlerCallback
 	private ISteam3Filter netfilter;
 	private byte[] sessionKey;
 	
-	private int lastAckSeq;
-	private int thisSeq;
+	private AtomicInteger lastAckSeq;
+	private AtomicInteger thisSeq;
 	
 	private int remoteConnID;
 	
-	public UDPConnection( IUDPCallbacks callbacks )
+	public UDPConnection( ExecutorService es, IUDPCallbacks callbacks )
 	{
 		this.callbacks = callbacks;
-	
+
 		netfilter = new PassthruFilter();
 		
-		lastAckSeq = 0;
-		thisSeq = 0;
+		lastAckSeq = new AtomicInteger( 0 );
+		thisSeq = new AtomicInteger( 0 );
 		
+		NioDatagramChannelFactory f = new NioDatagramChannelFactory( es );
 		b = new ConnectionlessBootstrap( f );
 		b.setPipelineFactory( new Steam3ClientPipelineFactory( this ) );
 
@@ -77,7 +75,7 @@ public class UDPConnection implements IUDPHandlerCallback
 	
 	public void UDPRecvCallback( UDPPacket packet, Object message, InetSocketAddress remoteEndpoint )
 	{
-		lastAckSeq = packet.getSequence();
+		lastAckSeq.set( packet.getSequence() );
 		
         if ( message instanceof Challenge )
         {
@@ -133,7 +131,8 @@ public class UDPConnection implements IUDPHandlerCallback
 					buf.get( fragBuf );
 					
 					Data fragData = Data.deserialize( fragBuf );
-					System.out.println( "Multi peek: " + fragData.peekType() + " length: " + fragLength );
+					
+					callbacks.RecvDataCallback( fragData, remoteEndpoint );
 				}
 				
 				break;
@@ -150,8 +149,6 @@ public class UDPConnection implements IUDPHandlerCallback
         else if ( message instanceof Disconnect )
         {
         	callbacks.DisconnectCallback( (Disconnect)message );
-        	
-        	close();
         }
 	}
 	
@@ -163,16 +160,16 @@ public class UDPConnection implements IUDPHandlerCallback
 	private void SendMessage( ISerializable msg, InetSocketAddress endpoint )
 	{
 		UDPPacket data = new UDPPacket();
-		data.initialize( EUdpPacketType.Data, ++thisSeq, lastAckSeq );
+		data.initialize( EUdpPacketType.Data, thisSeq.incrementAndGet(), lastAckSeq.get() );
 		data.setTargetConnID( remoteConnID );
-		data.setCounts( 1, thisSeq );
+		data.setCounts( 1, thisSeq.get() );
 		
 		data.setPayload( netfilter.processOutgoing( msg.serialize() ) );
 		
 		SendUDPMessage( data, endpoint );
 	}
 	
-	public void SendAnonLogOn( CSteamID steamid, InetSocketAddress endpoint )
+	public void SendAnonLogOn( Steam3Session session, CSteamID steamid )
 	{
 		ClientAnonLogOn logon = new ClientAnonLogOn();
 		logon.initialize();
@@ -183,33 +180,43 @@ public class UDPConnection implements IUDPHandlerCallback
 		
 		ClientMsg logonMsg = new ClientMsg( exthdr, logon );
 		
-		SendMessage( logonMsg, endpoint );
+		SendMessage( logonMsg, session.getEndpoint() );
 	}
 	
-	public void SendChallengeRequest( InetSocketAddress endpoint )
-	{
-		UDPPacket challengereq = new UDPPacket();
-		challengereq.initialize( EUdpPacketType.ChallengeReq, 1, lastAckSeq );
-
-		SendUDPMessage( challengereq, endpoint );
-	}
-
-	public void SendConnect( int challenge, InetSocketAddress endpoint )
+	public void SendConnect( Steam3Session session, int challenge )
 	{
 		UDPPacket connectreq = new UDPPacket();
-		connectreq.initialize( EUdpPacketType.Connect, ++thisSeq, lastAckSeq );
+		connectreq.initialize( EUdpPacketType.Connect, thisSeq.incrementAndGet(), lastAckSeq.get() );
 		connectreq.setTargetConnID( remoteConnID );
-		connectreq.setCounts( 1, thisSeq );
+		connectreq.setCounts( 1, thisSeq.get() );
 		
 		ConnectChallenge connectchal = new ConnectChallenge();
 		connectchal.setChallenge( challenge ^ ConnectChallenge.CHALLENGE_MASK );
 		
 		connectreq.setPayload( connectchal.serialize() );
 		
-		SendUDPMessage( connectreq, endpoint );
+		SendUDPMessage( connectreq, session.getEndpoint() );
 	}
 	
+	public void SendHeartbeat( Steam3Session session )
+	{
+		ClientHeartBeat heartbeat = new ClientHeartBeat();
+		
+		ExtendedClientMsgHdr exthdr = new ExtendedClientMsgHdr();
+		exthdr.initialize( heartbeat.getMsg() );
+		session.FillExtHdr( exthdr );
+		
+		SendMessage( heartbeat, session.getEndpoint() );
+	}
 	
+	public void SendChallengeRequest( InetSocketAddress endpoint )
+	{
+		UDPPacket challengereq = new UDPPacket();
+		challengereq.initialize( EUdpPacketType.ChallengeReq, 1, lastAckSeq.get() );
+
+		SendUDPMessage( challengereq, endpoint );
+	}
+
 	private void SendEncryptRequestResponse( ChannelEncryptRequest encreq, InetSocketAddress endpoint )
 	{
 		sessionKey = CryptoHelper.GenerateRandomBlock( 32 );

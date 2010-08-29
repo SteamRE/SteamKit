@@ -1,17 +1,18 @@
 package steamkit.CM;
 
 import net.steam3.IUDPCallbacks;
+import net.steam3.ScheduledHeartbeat;
+import net.steam3.Steam3Session;
 import net.steam3.UDPConnection;
 import net.steam3.packets.*;
 import net.steam3.packets.msg.ClientLogOnResponse;
-import net.steam3.packets.udp.Accept;
-import net.steam3.packets.udp.Challenge;
-import net.steam3.packets.udp.Data;
-import net.steam3.packets.udp.Disconnect;
+import net.steam3.packets.udp.*;
 
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import steamkit.types.CSteamID;
 import steamkit.types.EAccountType;
@@ -51,6 +52,8 @@ public class CMInterface implements IUDPCallbacks
         "208.111.171.83",*/
 	};
 
+	private static final ExecutorService es = Executors.newCachedThreadPool();
+	
 	private UDPConnection connection;
 	
 	private InetSocketAddress optimalEndpoint;
@@ -59,19 +62,23 @@ public class CMInterface implements IUDPCallbacks
 	
 	private CountDownLatch connectLatch;
 	
-	private Boolean connected;
-	private EUniverse connectedUniverse;
+	private Steam3Session session;
 	
 	public CMInterface()
 	{
-		connected = false;
-		connection = new UDPConnection( this );
+		session = new Steam3Session();
+		connection = new UDPConnection( es, this );
 	}
 	
 	public void close()
 	{
+		if ( session.getConnected() )
+		{
+			// send disconnect message..
+		}
+		
+		session.close();
 		connection.close();
-		connected = false;
 	}
 	
 	public CountDownLatch initialize()
@@ -91,31 +98,41 @@ public class CMInterface implements IUDPCallbacks
 	{
 		connectLatch = new CountDownLatch( 1 );
 		
-		connection.SendConnect( optimalChallenge.getChallenge(), optimalEndpoint );
+		connection.SendConnect( session, optimalChallenge.getChallenge() );
 		
 		return connectLatch;
 	}
 	
 	public Boolean isConnected()
 	{
-		return connected;
+		return session.getConnected();
 	}
 	
 	public void anonSignOn( EAccountType type )
 	{
-		CSteamID steamid = new CSteamID( 0, 0, connectedUniverse, type );
+		CSteamID steamid = new CSteamID( 0, 0, session.getUniverse(), type );
 
-		connection.SendAnonLogOn( steamid, optimalEndpoint );
+		connection.SendAnonLogOn( session, steamid );
 	}
 	
-	public void SignOnResponse( EResult result )
+	public void SignOnResponse( ExtendedClientMsgHdr header, ClientLogOnResponse response )
 	{
-		System.out.println( "Sign on response: " + result );
+		System.out.println( "Sign on response: " + response.getResult() );
+		
+		if ( response.getResult() == EResult.OK )
+		{
+			session.updateIDs( header.getSteamID(), header.getSessionID() );
+			
+			ScheduledHeartbeat heartbeat = new ScheduledHeartbeat( connection, session, response.getOutofGameHeartbeat() );
+			session.setHeartbeat( es, (Runnable) heartbeat );
+			
+			System.out.println( "Signed on. ID " + session.getSteamID().getLong() );
+		}
 	}
 	
 	public void SessionNegotiationInitiated( EUniverse universe )
 	{
-		connectedUniverse = universe;
+		session.setUniverse( universe );
 		
 		System.out.println( "Session negotiation started for universe " + universe );
 	}
@@ -145,6 +162,11 @@ public class CMInterface implements IUDPCallbacks
 			optimalEndpoint = remoteEndpoint;
 		}
 	
+		if ( optimalCountdown.getCount() <= 1 )
+		{
+			session.setEndpoint( optimalEndpoint );
+		}
+		
 		optimalCountdown.countDown();
 	}
 	
@@ -157,10 +179,10 @@ public class CMInterface implements IUDPCallbacks
 		switch( data.peekType() )
 		{
 		case ClientLogOnResponse:
-			ExtendedClientMsgHdr.deserialize( buf );
+			ExtendedClientMsgHdr header = ExtendedClientMsgHdr.deserialize( buf );
 			ClientLogOnResponse response = ClientLogOnResponse.deserialize( buf );
 			
-			SignOnResponse( response.getResult() );
+			SignOnResponse( header, response );
 			break;
 		}
 	}
@@ -169,6 +191,7 @@ public class CMInterface implements IUDPCallbacks
 	{
 		System.out.println( "Connection accepted." );
 	}
+	
 	public void DisconnectCallback( Disconnect disconnect )
 	{
 		System.out.println( "Connection closed." );

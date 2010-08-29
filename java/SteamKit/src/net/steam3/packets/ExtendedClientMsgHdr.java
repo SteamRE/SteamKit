@@ -54,6 +54,21 @@ public class ExtendedClientMsgHdr implements ISerializable
 		headerCanary = Canary;
 	}
 	
+	public int getSessionID()
+	{
+		return sessionID;
+	}
+	
+	public void setSessionID( int sessionID )
+	{
+		this.sessionID = sessionID;
+	}
+	
+	public CSteamID getSteamID()
+	{
+		return new CSteamID( steamID );
+	}
+	
 	public void setSteamID( CSteamID steamid )
 	{
 		this.steamID = steamid.getLong();
