@@ -28,24 +28,15 @@ namespace BlobTest
         {
             StringBuilder output = new StringBuilder();
 
-            byte[] clientdata = File.ReadAllBytes("D:\\Steam\\ClientRegistry.blob");
+            byte[] clientdata = File.ReadAllBytes("D:\\Steam\\cdr.blob");
 
             DateTime x = DateTime.Now;
             Blob root = BlobParser.ParseBlob(clientdata);
             Console.WriteLine(DateTime.Now - x);
 
-            Console.ReadKey();
-          
-            Blob TopKey = root.GetBlobDescriptor("TopKey");
-            Blob Info = TopKey.GetBlobDescriptor(2);
-
-            Blob KVBlob = Info.GetBlobDescriptor("SteamInstancePublicKey");
-            byte[] instanceKey = KVBlob.GetDescriptor(2);
-
-            File.WriteAllBytes("E:\\steamre\\instancekey.bin", instanceKey);
-
-            KVBlob = Info.GetBlobDescriptor("ContentDescriptionRecord");
-            Blob CDRRoot = KVBlob.GetBlobDescriptor(2);
+            /*Console.ReadKey();
+            */
+            Blob subroot = root.GetBlobDescriptor((int)CDRFields.EFieldType.eFieldSubscriptionsRecord);
 
             //CDRRoot.Dump(output, 0);
             File.WriteAllText("E:\\steamre\\CDRDump.txt", output.ToString());

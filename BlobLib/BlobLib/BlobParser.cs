@@ -10,7 +10,7 @@ namespace BlobLib
         private static readonly int BlobHeaderLength = 10;
         private static readonly int FieldHeaderLength = 6;
         private static readonly int CompressedHeaderLength = 10;
-        private static readonly int EncryptedHeaderLength = 20;
+        private static readonly int EncryptedHeaderLength = 40;
 
         private static byte[] Key;
 
@@ -69,6 +69,8 @@ namespace BlobLib
                 return null;
             }
 
+            long curpos = reader.Position;
+
             serialized -= BlobHeaderLength;
             Blob blob = null;
 
@@ -82,15 +84,21 @@ namespace BlobLib
                     break;
                 case EAutoPreprocessCode.eAutoPreprocessCodeCompressed:
                     {
-                        return ParseCompressedBlob( reader, serialized );
+                        serialized -= CompressedHeaderLength;
+
+                        blob = ParseCompressedBlob( reader, serialized );
                     }
                     break;
                 case EAutoPreprocessCode.eAutoPreprocessCodeEncrypted:
                     {
-                        return ParseEncryptedBlob( reader, serialized );
+                        serialized -= EncryptedHeaderLength;
+
+                        blob = ParseEncryptedBlob( reader, serialized );
                     }
                     break;
             }
+
+            Debug.Assert( reader.Position == (curpos + serialized + spare) );
 
             return blob;
         }
@@ -98,7 +106,7 @@ namespace BlobLib
         private static Blob ParseEncryptedBlob( CachedBinaryReader reader, long serializedSize )
         {
             Int32 decryptedSize;
-            byte[] IV;
+            byte[] IV, HMAC;
 
             reader.StartTransaction();
 
@@ -106,6 +114,8 @@ namespace BlobLib
             {
                 decryptedSize = reader.ReadInt32();
                 IV = reader.ReadBytes(16);
+
+                HMAC = reader.ReadBytes(20);
 
                 reader.Commit();
             }
@@ -182,6 +192,8 @@ namespace BlobLib
 
         private static void ParseBlobData( CachedBinaryReader reader, Blob blob, long serializedSize, int spare )
         {
+            bool corruptedCompletion = false;
+
             while (serializedSize > FieldHeaderLength && reader.CanRead( FieldHeaderLength ) )
             {
                 long curpos = reader.Position;
@@ -200,15 +212,23 @@ namespace BlobLib
 
                     reader.Commit();
 
-                    if ( descriptorLength <= 0 || dataLength <= 0 || !reader.CanRead( descriptorLength + dataLength ) )
+                    //Debug.Assert(descriptorLength > 0);
+                    //Debug.Assert(dataLength > 0);
+
+                    // when the descriptorLength is 0 assume it's corrupted (the CDR is always corrupted....?)
+                    if ( descriptorLength <= 0 /*|| dataLength <= 0*/ || !reader.CanRead( descriptorLength + dataLength ) )
                     {
                         reader.Rollback();
-                        return;
+                        
+                        corruptedCompletion = true;
+                        break;
                     }
                     
                     descriptor = reader.ReadBytes(descriptorLength);
 
                     reader.Commit();
+
+                    Debug.Assert(descriptor.Length == descriptorLength);
                 }
                 catch (Exception e)
                 {
@@ -242,6 +262,15 @@ namespace BlobLib
             blob.Spare = reader.ReadBytes(spare);
 
             reader.Commit();
+
+            if ( corruptedCompletion )
+            {
+                Debug.WriteLine("Had to complete corrupted blob at " + reader.Position + " (" + serializedSize + ") remaining");
+                reader.StartTransaction();
+                reader.ReadBytes((int)serializedSize);
+                reader.Commit();
+                serializedSize = 0;
+            }
 
             Debug.Assert(serializedSize == 0);
         }
