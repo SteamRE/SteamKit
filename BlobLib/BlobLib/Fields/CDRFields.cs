@@ -6,6 +6,17 @@ namespace BlobLib
     {
         public enum EFieldType : int
         {
+            eFieldVersionNum = 0, // U16
+            eFieldApplicationsRecord = 1, // CApplicationsRecord
+            eFieldSubscriptionsRecord = 2, // CSubscriptionsRecord
+            eFieldLastChangedExistingAppOrSubscriptionTime = 3, // U64
+            eFieldIndexAppIdToSubscriptionIdsRecord = 4, // CIndexAppIdToSubscriptionIdsRecord
+            eFieldAllAppsPublicKeysRecord = 5, // CAllAppsPublicKeysRecord
+            eFieldAllAppsEncryptedPrivateKeysRecord = 6, // CAllAppsEncryptedPrivateKeysRecord
+        };
+
+        public enum ERecordFieldType : int
+        {
             eFieldAppId = 1,  // U32
             eFieldName = 2,  // String
             eFieldInstallDirName = 3,  // String
