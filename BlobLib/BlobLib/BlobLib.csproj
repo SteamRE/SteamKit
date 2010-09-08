@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -29,6 +30,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -46,11 +48,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Blob.cs" />
-    <Compile Include="BlobComponent.cs" />
     <Compile Include="BlobField.cs" />
+    <Compile Include="BlobParser.cs" />
+    <Compile Include="BlobTypes.cs" />
+    <Compile Include="CachedBinaryReader.cs" />
     <Compile Include="CryptoHelper.cs" />
-    <Compile Include="Impl\AuthFields.cs" />
-    <Compile Include="Impl\CDRFields.cs" />
+    <Compile Include="Fields\AuthFields.cs" />
+    <Compile Include="Fields\CDRFields.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
