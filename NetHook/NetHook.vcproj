@@ -61,7 +61,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="Ws2_32.lib steam.lib zdll.lib"
+				AdditionalDependencies="Ws2_32.lib steam.lib"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="&quot;G:\dev\C++\Open Steamworks&quot;;&quot;C:\Users\ryan\Documents\development\Open Steamworks&quot;"
 				IgnoreDefaultLibraryNames=""
