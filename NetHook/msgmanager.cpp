@@ -14,12 +14,9 @@ CMsgManager::CMsgManager() :
 {
 }
 
-
 CMsgManager::~CMsgManager()
 {
 }
-
-
 
 void CMsgManager::Register( EMsg eMsg, IMsgHandler *pHandler )
 {

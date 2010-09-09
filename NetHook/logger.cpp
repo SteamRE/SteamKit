@@ -1,13 +1,9 @@
-
-#include "logger.h"
-
-#include "utils.h"
-
 #include <iostream>
 
+#include "logger.h"
+#include "utils.h"
 
-CLogger *g_Logger = NULL;
-
+CLogger* g_Logger;
 
 CLogger::CLogger( const char *szBaseDir )
 {
@@ -78,7 +74,7 @@ void CLogger::LogFileData( const char *szFileName, const uint8 *pData, uint32 cu
 	if ( bAppend )
 		fileFlags = OPEN_ALWAYS;
 
-	HANDLE hFile = CreateFileA( szFileName, GENERIC_WRITE, FILE_SHARE_READ, NULL, fileFlags, FILE_ATTRIBUTE_NORMAL, NULL );
+	HANDLE hFile = CreateFileA( GetFileDir(szFileName), GENERIC_WRITE, FILE_SHARE_READ, NULL, fileFlags, FILE_ATTRIBUTE_NORMAL, NULL );
 
 	if ( bAppend )
 		SetFilePointer( hFile, 0, NULL, FILE_END );
@@ -89,6 +85,15 @@ void CLogger::LogFileData( const char *szFileName, const uint8 *pData, uint32 cu
 	CloseHandle( hFile );
 }
 
+void CLogger::CreateDir(const char *szDir)
+{
+	const char* szCreatePath = this->GetFileDir(szDir);
+
+	DWORD dwAttribs = GetFileAttributes(szCreatePath);
+
+	if ( dwAttribs == INVALID_FILE_ATTRIBUTES )
+		CreateDirectory(szCreatePath, NULL);
+}
 
 const char *CLogger::GetFileDir( const char *szFile )
 {
