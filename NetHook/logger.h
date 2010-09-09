@@ -26,6 +26,8 @@ public:
 
 	void LogFileData( const char *szFileName, const uint8 *pData, uint32 cubData, bool bAppend = false );
 
+	void CreateDir( const char* szDir );
+
 
 private:
 	const char *GetFileDir( const char *szFile );
@@ -35,8 +37,6 @@ private:
 
 };
 
-
-extern CLogger *g_Logger;
-
+extern CLogger* g_Logger;
 
 #endif // !LOGGER_H_

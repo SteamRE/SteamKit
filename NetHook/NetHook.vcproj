@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="tier0;tier1;public;.;&quot;G:\dev\C++\Open Steamworks\Open Steamworks&quot;"
+				AdditionalIncludeDirectories="tier0;tier1;public;.;&quot;G:\dev\C++\Open Steamworks\Open Steamworks&quot;;&quot;C:\Users\ryan\Documents\development\Open Steamworks\Open Steamworks&quot;"
 				PreprocessorDefinitions="WIN32;_WIN32;_DEBUG;_WINDOWS;_USRDLL"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -61,9 +61,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="Ws2_32.lib steam.lib"
+				AdditionalDependencies="Ws2_32.lib steam.lib zdll.lib"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="G:\dev\C++\Open Steamworks;"
+				AdditionalLibraryDirectories="&quot;G:\dev\C++\Open Steamworks&quot;;&quot;C:\Users\ryan\Documents\development\Open Steamworks&quot;"
 				IgnoreDefaultLibraryNames=""
 				GenerateDebugInformation="true"
 				SubSystem="1"
@@ -185,23 +185,15 @@
 				>
 			</File>
 			<File
+				RelativePath=".\DataDumper.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\logger.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\netpacket.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\udpconnection.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\utils.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\wshooks.cpp"
 				>
 			</File>
 			<File
@@ -221,23 +213,15 @@
 				>
 			</File>
 			<File
+				RelativePath=".\DataDumper.h"
+				>
+			</File>
+			<File
 				RelativePath=".\logger.h"
 				>
 			</File>
 			<File
-				RelativePath=".\netpacket.h"
-				>
-			</File>
-			<File
-				RelativePath=".\udpconnection.h"
-				>
-			</File>
-			<File
 				RelativePath=".\utils.h"
-				>
-			</File>
-			<File
-				RelativePath=".\wshooks.h"
 				>
 			</File>
 			<File
@@ -858,26 +842,6 @@
 			</File>
 			<File
 				RelativePath=".\zlib\zlib.h"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="Messages"
-			>
-			<File
-				RelativePath=".\msghandlers.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\msghandlers.h"
-				>
-			</File>
-			<File
-				RelativePath=".\msgmanager.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\msgmanager.h"
 				>
 			</File>
 		</Filter>
