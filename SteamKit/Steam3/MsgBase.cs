@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Runtime.InteropServices;
+using Serializer = ProtoBuf.Serializer;
 
 namespace SteamLib
 {
@@ -9,6 +10,7 @@ namespace SteamLib
     {
         // in order to interface cleanly with IClientMsg's
         void SetEMsg( EMsg eMsg );
+        EMsg GetEMsg();
     }
 
     [StructLayout( LayoutKind.Sequential, Pack = 1 )]
@@ -32,6 +34,11 @@ namespace SteamLib
         public void SetEMsg( EMsg eMsg )
         {
             this.EMsg = eMsg;
+        }
+
+        public EMsg GetEMsg()
+        {
+            return this.EMsg;
         }
     }
 
@@ -76,8 +83,39 @@ namespace SteamLib
             this.EMsg = eMsg;
         }
 
+        public EMsg GetEMsg()
+        {
+            return this.EMsg;
+        }
     }
 
+    [StructLayout(LayoutKind.Sequential, Pack = 1)]
+    class MsgHdrProtobuf : Serializable<MsgHdrProtobuf>, IMsgHdr
+    {
+
+
+        public EMsg EMsg;
+
+        public int flags;
+
+        public MsgHdrProtobuf()
+        {
+            SetEMsg(EMsg.Invalid);
+
+            flags = 0;
+        }
+
+
+        public void SetEMsg(EMsg eMsg)
+        {
+            this.EMsg = MsgUtil.MakeMsg(eMsg, true);
+        }
+
+        public EMsg GetEMsg()
+        {
+            return MsgUtil.GetMsg(this.EMsg);
+        }
+    }
 
     class ClientMsg<MsgHdr, Hdr> : Serializable<Hdr>
         where Hdr : Serializable<Hdr>, IMsgHdr, new()
@@ -178,6 +216,26 @@ namespace SteamLib
         public static byte[] GetPayload( byte[] data )
         {
             return new ClientMsg<MsgHdr, Hdr>( data ).GetPayload();
+        }
+    }
+
+    public class ClientMsgProtobuf<ProtoBuf, Hdr>
+        where Hdr : Serializable<Hdr>, IMsgHdr, new()
+        where ProtoBuf : global::ProtoBuf.IExtensible
+    {
+        public Hdr Header;
+        public ProtoBuf Proto;
+
+
+        public ClientMsgProtobuf( byte[] data )
+        {
+            int headerSize = Marshal.SizeOf(typeof(Hdr));
+
+            this.Header = Serializable<Hdr>.Deserialize( data );
+
+            MemoryStream ms = new MemoryStream(data, headerSize, data.Length - headerSize);
+
+            this.Proto = Serializer.Deserialize<ProtoBuf>( ms );
         }
     }
 }
