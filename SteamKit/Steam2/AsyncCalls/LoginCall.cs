@@ -141,8 +141,8 @@ namespace SteamLib
             SteamGlobal.ClientTGT = clientTgt;
             SteamGlobal.ServerTGT = serverTgt;
 
-            Blob.SetKey( SteamGlobal.ClientTGT.AccountRecordKey );
-            Blob blob = Blob.Parse( accountRec );
+            BlobParser.SetKey( SteamGlobal.ClientTGT.AccountRecordKey );
+            Blob blob = BlobParser.ParseBlob( accountRec );
 
             SteamGlobal.AccountRecord = blob;
 

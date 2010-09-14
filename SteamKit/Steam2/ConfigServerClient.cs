@@ -68,5 +68,40 @@ namespace SteamLib
 
             return packet.GetPayload();
         }
+
+        // unsure about name
+        // server returns blob
+        public byte[] GetCandidateRecord(IPEndPoint configServer)
+        {
+            if (!this.ConnectToServer(configServer))
+                return null;
+
+            if (!this.HandshakeServer(EServerType.ConfigServer))
+            {
+                this.Disconnect();
+                return null;
+            }
+
+            uint externalIp = socket.Reader.ReadUInt32();
+
+            uint magic = 257;
+
+            if (!this.SendCommand(0, magic)) // command: Get candidate blob
+            {
+                this.Disconnect();
+                return null;
+            }
+
+            int size = socket.Reader.ReadInt32();
+
+            byte[] pack = socket.Reader.ReadBytes(size);
+
+            this.Disconnect();
+
+            if (pack == null)
+                return null;
+
+            return pack;
+        }
     }
 }
