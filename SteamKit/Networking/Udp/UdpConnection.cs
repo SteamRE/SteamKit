@@ -53,11 +53,13 @@ namespace SteamLib
     class NetMsgEventArgs : DataEventArgs
     {
         public EMsg Msg { get; private set; }
+        public bool Proto { get; private set; }
 
         public NetMsgEventArgs( IPEndPoint sender, EMsg eMsg, byte[] data )
             : base( sender, data )
         {
-            this.Msg = eMsg;
+            this.Msg = MsgUtil.GetMsg(eMsg);
+            this.Proto = MsgUtil.IsProtoBuf(eMsg);
         }
     }
 
@@ -174,6 +176,14 @@ namespace SteamLib
             SendData( clientMsg.Serialize(), ipAddr );
         }
 
+        public void SendNetMsg<ProtoBuf>(ClientMsgProtobuf<ProtoBuf> clientMsgProto, IPEndPoint ipAddr)
+            where ProtoBuf : global::ProtoBuf.IExtensible, new()
+        {
+            Console.WriteLine("Sending EMsg: " + clientMsgProto.Header.GetEMsg());
+
+            SendData(clientMsgProto.Serialize(), ipAddr);
+        }
+
 
         void RecvChallenge( UdpPacket udpPkt, IPEndPoint endPoint )
         {
@@ -251,7 +261,7 @@ namespace SteamLib
 
         void RecvNetMsg( EMsg eMsg, byte[] data, IPEndPoint endPoint )
         {
-            Console.WriteLine( "Got EMsg: " + eMsg );
+            Console.WriteLine( "Got EMsg: " + MsgUtil.GetMsg(eMsg) + " (Proto:" + MsgUtil.IsProtoBuf(eMsg) + ")" );
 
             if ( eMsg == EMsg.ChannelEncryptRequest )
             {
@@ -293,14 +303,41 @@ namespace SteamLib
                 netFilter = new NetFilter( null );
             }
 
-            if ( eMsg == EMsg.Multi )
-                this.MultiplexMsgMulti( data, endPoint );
+            if ( MsgUtil.GetMsg(eMsg) == EMsg.Multi)
+            {
+                if (MsgUtil.IsProtoBuf(eMsg))
+                {
+                    this.MultiplexMsgMulti(data, endPoint);
+                }
+                else
+                {
+                    this.MultiplexMsgMultiOld(data, endPoint);
+                }
+            }
 
             if ( NetMsgReceived != null )
                 NetMsgReceived( this, new NetMsgEventArgs( endPoint, eMsg, data ) );
         }
 
-        void MultiplexMsgMulti( byte[] data, IPEndPoint endPoint )
+        void MultiplexMsgMulti(byte[] data, IPEndPoint endPoint)
+        {
+            var msgMulti = new ClientMsgProtobuf<CMsgMulti>( data );
+
+            byte[] payload = msgMulti.Proto.message_body;
+
+            if ( msgMulti.Proto.size_unzipped > 0 )
+            {
+                try
+                {
+                    payload = PKZipBuffer.Decompress( payload );
+                }
+                catch { return; }
+            }
+
+            MultiplexPayload(payload, endPoint);
+        }
+
+        void MultiplexMsgMultiOld( byte[] data, IPEndPoint endPoint )
         {
             var msgMulti = new ClientMsg<MsgMulti, MsgHdr>( data );
 
@@ -315,16 +352,21 @@ namespace SteamLib
                 catch { return; }
             }
 
-            DataStream ds = new DataStream( payload );
+            MultiplexPayload( payload, endPoint );
+        }
 
-            while ( ds.SizeRemaining() != 0 )
+        private void MultiplexPayload( byte[] payload, IPEndPoint endPoint )
+        {
+            DataStream ds = new DataStream(payload);
+
+            while (ds.SizeRemaining() != 0)
             {
                 uint subSize = ds.ReadUInt32();
-                byte[] subData = ds.ReadBytes( subSize );
+                byte[] subData = ds.ReadBytes(subSize);
 
-                EMsg eMsg = ( EMsg )BitConverter.ToUInt32( subData, 0 );
+                EMsg eMsg = (EMsg)BitConverter.ToUInt32(subData, 0);
 
-                this.RecvNetMsg( eMsg, subData, endPoint );
+                this.RecvNetMsg(eMsg, subData, endPoint);
             }
         }
 

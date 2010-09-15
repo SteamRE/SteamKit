@@ -23,7 +23,7 @@ namespace SteamLib
 
     public class CMInterface
     {
-        static string[] CMServers =
+        static readonly string[] CMServers =
         {
             "68.142.64.164",
             "68.142.64.165",
@@ -137,10 +137,21 @@ namespace SteamLib
 
         void SendLogOn( IPEndPoint endPoint )
         {
-            var logon = new ClientMsg<MsgClientLogOnWithCredentials, ExtendedClientMsgHdr>();
+            var logon = new ClientMsgProtobuf<CMsgClientLogon>(EMsg.ClientLogon, true);
+
+            logon.ProtoHeader.client_steam_id = new SteamID(0, 0, EUniverse.Public, EAccountType.AnonGameServer).ConvertToUint64();
+            
+            logon.Proto.obfustucated_private_ip = NetHelpers.GetIPAddress(NetHelpers.GetLocalIP()) ^ MsgClientLogOnWithCredentials.ObfuscationMask;
+            logon.Proto.protocol_version = 65565; // default?
+            logon.Proto.client_os_type = 10; // Windows
+
+            //var logon = new ClientMsg<MsgClientAnonLogOn, ExtendedClientMsgHdr>();
+           // logon.Header.SteamID = new SteamID(0, 0, EUniverse.Public, EAccountType.AnonGameServer);
+
+            /*var logon = new ClientMsg<MsgClientLogOnWithCredentials, ExtendedClientMsgHdr>();
             logon.MsgHeader.ClientSuppliedSteamID = 0;
             logon.MsgHeader.PrivateIPObfuscated = NetHelpers.GetIPAddress( NetHelpers.GetLocalIP() ) ^ MsgClientLogOnWithCredentials.ObfuscationMask;
-
+            */
 
             udpConn.SendNetMsg( logon, endPoint );
         }
@@ -177,7 +188,26 @@ namespace SteamLib
                     Console.WriteLine( "Failed crypto handshake: " + encRes.Result );
             }
 
-            if ( e.Msg == EMsg.ClientLogOnResponse )
+            if (e.Msg == EMsg.ClientLogOnResponse && e.Proto)
+            {
+                var logonResp = new ClientMsgProtobuf<CMsgClientLogonResponse>( e.Data );
+
+                Console.WriteLine("Logon response: " + (EResult)logonResp.Proto.eresult);
+
+                SteamGlobal.Lock();
+                SteamGlobal.SessionID = logonResp.ProtoHeader.client_session_id;
+                SteamGlobal.SteamID = logonResp.ProtoHeader.client_steam_id;
+                SteamGlobal.Unlock();
+
+                if ((EResult)logonResp.Proto.eresult == EResult.OK)
+                {
+                    heartBeatFunc = new ScheduledFunction<CMInterface>();
+                    heartBeatFunc.SetFunc(SendHeartbeat);
+                    heartBeatFunc.SetObject(this);
+                    heartBeatFunc.SetDelay(TimeSpan.FromSeconds(logonResp.Proto.out_of_game_heartbeat_seconds));
+                }
+            }
+            else if ( e.Msg == EMsg.ClientLogOnResponse && !e.Proto )
             {
                 var logonResp = new ClientMsg<MsgClientLogOnResponse, ExtendedClientMsgHdr>( e.Data );
 

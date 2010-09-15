@@ -31,6 +31,10 @@ namespace SteamLib
             this.SwapEndianness = swapEndianness;
         }
 
+        public MemoryStream GetStreamForWrite()
+        {
+            return buffer;
+        }
 
         public void Append( Type dataType, object data )
         {

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Runtime.InteropServices;
+using System.IO;
 using Serializer = ProtoBuf.Serializer;
 
 namespace SteamLib
@@ -96,13 +97,13 @@ namespace SteamLib
 
         public EMsg EMsg;
 
-        public int flags;
+        public int headerLength;
 
         public MsgHdrProtobuf()
         {
             SetEMsg(EMsg.Invalid);
 
-            flags = 0;
+            headerLength = 0;
         }
 
 
@@ -219,23 +220,83 @@ namespace SteamLib
         }
     }
 
-    public class ClientMsgProtobuf<ProtoBuf, Hdr>
-        where Hdr : Serializable<Hdr>, IMsgHdr, new()
-        where ProtoBuf : global::ProtoBuf.IExtensible
+    class ClientMsgProtobuf<ProtoBuf> : Serializable<MsgHdrProtobuf>
+        where ProtoBuf : global::ProtoBuf.IExtensible, new()
     {
-        public Hdr Header;
+        public MsgHdrProtobuf Header;
+        public CMsgProtoBufHeader ProtoHeader;
         public ProtoBuf Proto;
 
+        // ProtoBuf doesn't implement IClientMsg
+        public ClientMsgProtobuf(EMsg msg)
+        {
+            Header = new MsgHdrProtobuf();
+            ProtoHeader = null;
+            Proto = new ProtoBuf();
+
+            Header.SetEMsg(msg);
+        }
+
+        // construct that also makes a protoheader
+        public ClientMsgProtobuf(EMsg msg, bool header) : this(msg)
+        {
+            if (header)
+            {
+                ActivateHeader();
+            }
+        }
 
         public ClientMsgProtobuf( byte[] data )
         {
-            int headerSize = Marshal.SizeOf(typeof(Hdr));
+            int headerSize = Marshal.SizeOf(typeof(MsgHdrProtobuf));
 
-            this.Header = Serializable<Hdr>.Deserialize( data );
+            this.Header = Serializable<MsgHdrProtobuf>.Deserialize( data );
 
-            MemoryStream ms = new MemoryStream(data, headerSize, data.Length - headerSize);
+            MemoryStream ms;
 
+            if (this.Header.headerLength > 0)
+            {
+                ms = new MemoryStream(data, headerSize, this.Header.headerLength);
+                this.ProtoHeader = Serializer.Deserialize<CMsgProtoBufHeader>(ms);
+
+                headerSize += this.Header.headerLength;
+            }
+
+            ms = new MemoryStream(data, headerSize, data.Length - headerSize);
             this.Proto = Serializer.Deserialize<ProtoBuf>( ms );
+        }
+
+        public void ActivateHeader()
+        {
+            if (this.ProtoHeader == null)
+            {
+                this.ProtoHeader = new CMsgProtoBufHeader();
+            }
+        }
+
+        public override byte[] Serialize()
+        {
+            ByteBuffer bb = new ByteBuffer();
+
+            byte[] protoHdrBuf = null;
+
+            if (ProtoHeader != null)
+            {
+                MemoryStream msProtoHeader = new MemoryStream();
+                Serializer.Serialize<CMsgProtoBufHeader>(msProtoHeader, ProtoHeader);
+
+                protoHdrBuf = msProtoHeader.ToArray();
+                this.Header.headerLength = protoHdrBuf.Length;
+            }
+
+            bb.Append(this.Header.Serialize());
+
+            if ( protoHdrBuf != null )
+                bb.Append(protoHdrBuf);
+
+            Serializer.Serialize<ProtoBuf>( bb.GetStreamForWrite(), this.Proto );
+
+            return bb.ToArray();
         }
     }
 }
