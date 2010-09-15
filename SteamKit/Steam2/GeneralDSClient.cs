@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Net;
 
-namespace SteamLib
+namespace SteamKit
 {
-    class GeneralDSClient : DSClient
+    public class GeneralDSClient : DSClient
     {
         public static IPEndPoint[] GDServers = 
         {

@@ -4,7 +4,7 @@ using System.IO.Compression;
 using System.Text;
 using Classless.Hasher;
 
-namespace SteamLib
+namespace SteamKit
 {
     static class PKZipBuffer
     {

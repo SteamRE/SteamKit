@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 using System.IO;
 using Serializer = ProtoBuf.Serializer;
 
-namespace SteamLib
+namespace SteamKit
 {
     interface IMsgHdr
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SteamLib
+namespace SteamKit
 {
     struct MsgSegment
     {

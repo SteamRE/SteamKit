@@ -4,7 +4,7 @@ using System.Text;
 using System.Runtime.InteropServices;
 using System.Reflection;
 
-namespace SteamLib
+namespace SteamKit
 {
     [StructLayout( LayoutKind.Sequential, Pack = 1)]
     public class Serializable<T> where T : Serializable<T>

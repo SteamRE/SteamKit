@@ -4,9 +4,9 @@ using System.Text;
 using System.Runtime.InteropServices;
 using System.IO;
 
-namespace SteamLib
+namespace SteamKit
 {
-    class ByteBuffer
+    public class ByteBuffer
     {
         MemoryStream buffer;
 

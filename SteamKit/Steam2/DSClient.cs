@@ -4,11 +4,16 @@ using System.Text;
 using System.Net;
 using Classless.Hasher;
 
-namespace SteamLib
+namespace SteamKit
 {
 
-    class DSClient : ServerClient
+    public class DSClient : ServerClient
     {
+        public IPEndPoint[] GetServerList( IPEndPoint directoryServer, EServerType type )
+        {
+            return this.GetServerList( directoryServer, type, null );
+        }
+
         public IPEndPoint[] GetServerList( IPEndPoint directoryServer, EServerType type, string userName )
         {
             List<IPEndPoint> serverList = new List<IPEndPoint>();

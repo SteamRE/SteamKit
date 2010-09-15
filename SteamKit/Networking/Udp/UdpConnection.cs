@@ -7,7 +7,7 @@ using System.Threading;
 using System.Runtime.InteropServices;
 using Classless.Hasher;
 
-namespace SteamLib
+namespace SteamKit
 {
 
 

@@ -5,7 +5,7 @@ using System.Net;
 using BlobLib;
 using System.IO;
 
-namespace SteamLib
+namespace SteamKit
 {
 
     class LoginCall : SteamCallHandle

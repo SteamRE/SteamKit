@@ -1,0 +1,775 @@
+message CMsgProtoBufHeader {
+	optional fixed64 client_steam_id = 1;
+	optional int32 client_session_id = 2;
+	optional fixed64 job_id_source = 10;
+	optional fixed64 job_id_target = 11;
+	optional string target_job_name = 12;
+}
+
+message CMsgMulti {
+	optional uint32 size_unzipped = 1;
+	optional bytes message_body = 2;
+}
+
+message CMsgAMGetAccountDetails {
+	optional fixed64 authenticated_steam_id = 1;
+	optional uint32 requester_flags = 2;
+	repeated fixed64 account_list = 3;
+}
+
+message CMsgAMGetAccountDetailsResponse {
+	message AccountDetail {
+		message License {
+			optional int32 package_id = 1;
+		}
+
+		message GamePlayed {
+			optional fixed64 game_id = 1;
+			optional uint32 minutes_played_last_two_weeks = 2;
+			optional uint32 minutes_played_forever = 3;
+		}
+
+		message AccountPublicData {
+			required fixed64 steam_id = 1;
+			optional int32 visibility_state = 2;
+			optional int32 privacy_state = 3;
+			optional int32 profile_state = 4;
+			optional int32 comment_permission = 5;
+			optional uint32 last_logoff_time = 6;
+			optional uint32 ban_expires_time = 7;
+			optional uint32 account_flags = 8;
+			optional bytes sha_digest_avatar = 9;
+			optional int32 clan_count = 10;
+			optional string persona_name = 11;
+			optional string profile_url = 12;
+			optional bool is_vac_banned = 13;
+			optional bool is_limited_account = 14;
+		}
+
+		message AccountPrivateData {
+			optional int32 persona_state = 1;
+			optional fixed64 primary_clan_id = 2;
+			optional int32 friends_count = 3;
+			optional int32 city_id = 4;
+			optional int32 favorite_app_id = 5;
+			optional uint32 time_created = 6;
+			optional fixed64 game_id = 7;
+			optional fixed64 game_server_steam_id = 8;
+			optional uint32 game_server_ip_address = 9;
+			optional uint32 game_server_port = 10;
+			optional int32 skin_id = 11;
+			optional uint32 wishlist_item_count = 12;
+			optional string game_extra_info = 13;
+			optional string real_name = 14;
+			optional string state_code = 15;
+			optional string country_code = 16;
+			optional string email = 17;
+			optional string headline = 18;
+			optional string summary = 19;
+			optional string account_name = 20;
+			repeated .CMsgAMGetAccountDetailsResponse.AccountDetail.License licenses = 21;
+			repeated .CMsgAMGetAccountDetailsResponse.AccountDetail.License temp_licenses = 22;
+			repeated .CMsgAMGetAccountDetailsResponse.AccountDetail.GamePlayed games_played = 23;
+			optional fixed64 lobby_steam_id = 24;
+		}
+
+		optional .CMsgAMGetAccountDetailsResponse.AccountDetail.AccountPublicData public_data = 1;
+		optional .CMsgAMGetAccountDetailsResponse.AccountDetail.AccountPrivateData private_data = 2;
+	}
+
+	repeated .CMsgAMGetAccountDetailsResponse.AccountDetail accounts = 1;
+}
+
+message CMsgAMGetPlayerLinkDetails {
+	optional fixed64 authenticated_steam_id = 1;
+	optional uint32 requester_flags = 2;
+	repeated fixed64 account_list = 3;
+}
+
+message CMsgAMGetPlayerLinkDetailsResponse {
+	message AccountDetail {
+		message AccountPublicData {
+			required fixed64 steam_id = 1;
+			optional int32 visibility_state = 2;
+			optional int32 privacy_state = 3;
+			optional int32 profile_state = 4;
+			optional int32 comment_permission = 5;
+			optional uint32 last_logoff_time = 6;
+			optional uint32 ban_expires_time = 7;
+			optional uint32 account_flags = 8;
+			optional bytes sha_digest_avatar = 9;
+			optional string persona_name = 11;
+			optional string profile_url = 12;
+		}
+
+		message AccountPrivateData {
+			optional int32 persona_state = 1;
+			optional fixed64 primary_clan_id = 2;
+			optional int32 city_id = 4;
+			optional uint32 time_created = 6;
+			optional fixed64 game_id = 7;
+			optional fixed64 game_server_steam_id = 8;
+			optional uint32 game_server_ip_address = 9;
+			optional uint32 game_server_port = 10;
+			optional string game_extra_info = 13;
+			optional string real_name = 14;
+			optional string state_code = 15;
+			optional string country_code = 16;
+			optional string account_name = 20;
+			optional fixed64 lobby_steam_id = 21;
+		}
+
+		optional .CMsgAMGetPlayerLinkDetailsResponse.AccountDetail.AccountPublicData public_data = 1;
+		optional .CMsgAMGetPlayerLinkDetailsResponse.AccountDetail.AccountPrivateData private_data = 2;
+	}
+
+	repeated .CMsgAMGetPlayerLinkDetailsResponse.AccountDetail accounts = 1;
+}
+
+message CMsgWebAPIKey {
+	optional uint32 status = 1;
+	optional uint32 account_id = 2;
+	optional uint32 publisher_group_id = 3;
+	optional uint32 key_id = 4;
+	optional string domain = 5;
+}
+
+message CMsgHttpRequest {
+	message RequestHeader {
+		optional string name = 1;
+		optional string value = 2;
+	}
+
+	message QueryParam {
+		optional string name = 1;
+		optional bytes value = 2;
+	}
+
+	optional uint32 request_method = 1;
+	optional string hostname = 2;
+	optional string url = 3;
+	repeated .CMsgHttpRequest.RequestHeader headers = 4;
+	repeated .CMsgHttpRequest.QueryParam get_params = 5;
+	repeated .CMsgHttpRequest.QueryParam post_params = 6;
+	optional bytes body = 7;
+}
+
+message CMsgWebAPIRequest {
+	optional string UNUSED_job_name = 1;
+	optional string interface_name = 2;
+	optional string method_name = 3;
+	optional uint32 version = 4;
+	optional .CMsgWebAPIKey api_key = 5;
+	optional .CMsgHttpRequest request = 6;
+	optional uint32 routing_app_id = 7;
+}
+
+message CMsgHttpResponse {
+	message ResponseHeader {
+		optional string name = 1;
+		optional string value = 2;
+	}
+
+	optional uint32 status_code = 1;
+	repeated .CMsgHttpResponse.ResponseHeader headers = 2;
+	optional bytes body = 3;
+}
+
+message CMsgClientHeartBeat {
+}
+
+message CMsgClientSubscribeToPersonaFeed {
+	message PersonaFeed {
+		optional fixed64 steamID = 1;
+		optional bool subscribe = 2;
+	}
+
+	repeated .CMsgClientSubscribeToPersonaFeed.PersonaFeed persona_feeds = 1;
+}
+
+message CMsgAMSubscribeToPersonaFeed {
+	optional fixed64 steamid_client = 1;
+	optional fixed64 steamid_persona_feed_owner = 2;
+	optional bool subscribe = 3;
+}
+
+message CMsgClientUDSP2PSessionStarted {
+	optional fixed64 steamid_remote = 1;
+	optional int32 appid = 2;
+}
+
+message CMsgClientUDSP2PSessionEnded {
+	optional fixed64 steamid_remote = 1;
+	optional int32 appid = 2;
+	optional int32 session_length_sec = 3;
+	optional int32 session_error = 4;
+	optional int32 nattype = 5;
+	optional int32 bytes_recv = 6;
+	optional int32 bytes_sent = 7;
+	optional int32 bytes_sent_relay = 8;
+	optional int32 bytes_recv_relay = 9;
+	optional int32 time_to_connect_ms = 10;
+}
+
+message CMsgClientRegisterAuthTicketWithCM {
+	optional uint32 protocol_version = 1;
+	optional bytes ticket = 3;
+}
+
+message CMsgClientTicketAuthComplete {
+	optional fixed64 steam_id = 1;
+	optional fixed64 game_id = 2;
+	optional uint32 estate = 3;
+	optional uint32 eauth_session_response = 4;
+	optional bytes DEPRECATED_ticket = 5;
+	optional uint32 ticket_crc = 6;
+	optional uint32 ticket_sequence = 7;
+}
+
+message CMsgClientLogon {
+	optional uint32 protocol_version = 1;
+	optional uint32 obfustucated_private_ip = 2;
+	optional uint32 cell_id = 3;
+	optional uint32 last_session_id = 4;
+	optional uint32 client_package_version = 5;
+	optional string client_language = 6;
+	optional uint32 client_os_type = 7;
+	optional bool should_remember_password = 8;
+	optional string wine_version = 9;
+	optional uint32 public_ip = 20;
+	optional uint32 qos_level = 21;
+	optional fixed64 client_supplied_steam_id = 22;
+	optional bytes machine_id = 30;
+	optional bytes steam2_auth_ticket = 41;
+	optional string email_address = 42;
+	optional fixed32 rtime32_account_creation = 43;
+	optional string account_name = 50;
+	optional string password = 51;
+	optional string login_key = 60;
+	optional bool was_converted_deprecated_msg = 70;
+	optional string anon_user_target_account_name = 80;
+	optional fixed64 anon_user_target_steam_id = 81;
+}
+
+message CMsgClientLogonResponse {
+	optional int32 eresult = 1;
+	optional int32 out_of_game_heartbeat_seconds = 2;
+	optional int32 in_game_heartbeat_seconds = 3;
+	optional uint32 public_ip = 4;
+	optional fixed32 rtime32_server_time = 5;
+	optional uint32 account_flags = 6;
+	optional fixed64 client_supplied_steamid = 20;
+}
+
+message CMsgClientLogOff {
+}
+
+message CMsgClientLoggedOff {
+	optional int32 eresult = 1;
+}
+
+message CMsgClientCMList {
+	repeated uint32 cm_addresses = 1;
+}
+
+message CMsgClientP2PConnectionInfo {
+	optional fixed64 steam_id_dest = 1;
+	optional fixed64 steam_id_src = 2;
+	optional uint32 app_id = 3;
+	optional bytes candidate = 4;
+}
+
+message CMsgClientP2PConnectionFailInfo {
+	optional fixed64 steam_id_dest = 1;
+	optional fixed64 steam_id_src = 2;
+	optional uint32 app_id = 3;
+	optional uint32 ep2p_session_error = 4;
+}
+
+message CMsgClientGetAppOwnershipTicket {
+	optional uint32 app_id = 1;
+}
+
+message CMsgClientGetAppOwnershipTicketResponse {
+	optional uint32 eresult = 1;
+	optional uint32 app_id = 2;
+	optional bytes ticket = 3;
+}
+
+message CMsgClientSessionToken {
+	optional uint64 token = 1;
+}
+
+message CMsgAuthTicket {
+	optional uint32 estate = 1;
+	optional uint32 eresult = 2;
+	optional fixed64 steam_id = 3;
+	optional fixed64 game_id = 4;
+	optional uint32 h_steam_pipe = 5;
+	optional uint32 ticket_crc = 6;
+	optional bytes ticket = 7;
+}
+
+message CMsgClientGameConnectTokens {
+	optional uint32 max_tokens_to_keep = 1;
+	repeated bytes tokens = 2;
+}
+
+message CMsgGSServerType {
+	optional uint32 app_id_served = 1;
+	optional uint32 flags = 2;
+	optional uint32 game_ip_address = 3;
+	optional uint32 game_port = 4;
+	optional string game_dir = 5;
+	optional string game_version = 6;
+	optional uint32 game_query_port = 7;
+}
+
+message CMsgGSStatusReply {
+	optional bool is_secure = 1;
+}
+
+message CMsgGSUserPlaying {
+	optional fixed64 steam_id = 1;
+	optional uint32 public_ip = 2;
+	optional bytes token = 3;
+}
+
+message CMsgGSDisconnectNotice {
+	optional fixed64 steam_id = 1;
+}
+
+message CMsgClientGamesPlayed {
+	message GamePlayed {
+		optional uint64 steam_id_gs = 1;
+		optional fixed64 game_id = 2;
+		optional uint32 game_ip_address = 3;
+		optional uint32 game_port = 4;
+		optional bool is_secure = 5;
+		optional bytes token = 6;
+		optional string game_extra_info = 7;
+		optional bytes game_data_blob = 8;
+		optional uint32 process_id = 9;
+	}
+
+	repeated .CMsgClientGamesPlayed.GamePlayed games_played = 1;
+}
+
+message CMsgGSApprove {
+	optional fixed64 steam_id = 1;
+}
+
+message CMsgGSDeny {
+	optional fixed64 steam_id = 1;
+	optional int32 edeny_reason = 2;
+	optional string deny_string = 3;
+}
+
+message CMsgGSKick {
+	optional fixed64 steam_id = 1;
+	optional int32 edeny_reason = 2;
+}
+
+message CMsgClientAuthList {
+	optional uint32 tokens_left = 1;
+	optional uint32 last_request_seq = 2;
+	optional uint32 last_request_seq_from_server = 3;
+	repeated .CMsgAuthTicket tickets = 4;
+}
+
+message CMsgAMTicketAuthRequestOrResponse {
+	optional fixed64 steam_id_to = 1;
+	optional .CMsgAuthTicket ticket = 2;
+}
+
+message CMsgClientFriendsList {
+	message Friend {
+		optional fixed64 ulfriendid = 1;
+		optional uint32 efriendrelationship = 2;
+	}
+
+	optional bool bincremental = 1;
+	repeated .CMsgClientFriendsList.Friend friends = 2;
+}
+
+message CMsgClientLicenseList {
+	message License {
+		optional uint32 package_id = 1;
+		optional fixed32 time_created = 2;
+		optional fixed32 time_next_process = 3;
+		optional int32 minute_limit = 4;
+		optional int32 minutes_used = 5;
+		optional uint32 payment_method = 6;
+		optional uint32 flags = 7;
+		optional string purchase_country_code = 8;
+		optional uint32 license_type = 9;
+		optional int32 territory_code = 10;
+	}
+
+	optional int32 eresult = 1;
+	repeated .CMsgClientLicenseList.License licenses = 2;
+}
+
+message CMsgClientLBSSetScore {
+	optional uint32 app_id = 1;
+	optional int32 leaderboard_id = 2;
+	optional int32 score = 3;
+	optional bytes details = 4;
+	optional int32 upload_score_method = 5;
+}
+
+message CMsgClientLBSSetScoreResponse {
+	optional int32 eresult = 1;
+	optional int32 leaderboard_entry_count = 2;
+	optional bool score_changed = 3;
+	optional int32 global_rank_previous = 4;
+	optional int32 global_rank_new = 5;
+}
+
+message CMsgClientLBSFindOrCreateLB {
+	optional uint32 app_id = 1;
+	optional int32 leaderboard_sort_method = 2;
+	optional int32 leaderboard_display_type = 3;
+	optional bool create_if_not_found = 4;
+	optional string leaderboard_name = 5;
+}
+
+message CMsgClientLBSFindOrCreateLBResponse {
+	optional int32 eresult = 1;
+	optional int32 leaderboard_id = 2;
+	optional int32 leaderboard_entry_count = 3;
+	optional int32 leaderboard_sort_method = 4;
+	optional int32 leaderboard_display_type = 5;
+	optional string leaderboard_name = 6;
+}
+
+message CMsgClientLBSGetLBEntries {
+	optional int32 app_id = 1;
+	optional int32 leaderboard_id = 2;
+	optional int32 range_start = 3;
+	optional int32 range_end = 4;
+	optional int32 leaderboard_data_request = 5;
+}
+
+message CMsgClientLBSGetLBEntriesResponse {
+	message Entry {
+		optional fixed64 steam_id_user = 1;
+		optional int32 global_rank = 2;
+		optional int32 score = 3;
+		optional bytes details = 4;
+	}
+
+	optional int32 eresult = 1;
+	optional int32 leaderboard_entry_count = 2;
+	repeated .CMsgClientLBSGetLBEntriesResponse.Entry entries = 3;
+}
+
+message CMsgUFSDownloadRequest {
+	optional fixed64 steam_id = 1;
+	optional int32 app_id = 2;
+	optional string filename = 3;
+}
+
+message CMsgUFSDownloadResponse {
+	message FileData {
+		optional uint32 file_size = 1;
+		optional uint32 raw_file_size = 2;
+		optional bytes sha_file = 3;
+		optional uint64 timestamp = 4;
+	}
+
+	optional uint32 eresult = 1;
+	optional .CMsgUFSDownloadResponse.FileData file_data = 2;
+}
+
+message CMsgUFSDownloadChunk {
+	optional uint32 offset = 1;
+	optional bytes data = 2;
+}
+
+message CMsgUFSDeleteFileRequest {
+	optional fixed64 steam_id = 1;
+	optional int32 app_id = 2;
+	optional string filename = 3;
+}
+
+message CMsgUFSDeleteFileResponse {
+	optional uint32 eresult = 1;
+}
+
+message CMsgClientAccountInfo {
+	optional string persona_name = 1;
+	optional string ip_country = 2;
+	optional bytes salt_password = 3;
+	optional bytes sha_digest_Password = 4;
+}
+
+message CMsgClientAppMinutesPlayedData {
+	message AppMinutesPlayedData {
+		optional uint32 app_id = 1;
+		optional int32 forever = 2;
+		optional int32 last_two_weeks = 3;
+	}
+
+	repeated .CMsgClientAppMinutesPlayedData.AppMinutesPlayedData minutes_played = 1;
+}
+
+message CMsgAMFindAccounts {
+	optional uint32 search_type = 1;
+	optional string search_string = 2;
+}
+
+message CMsgAMFindAccountsResponse {
+	repeated fixed64 steam_id = 1;
+}
+
+message CMsgClientIsLimitedAccount {
+	optional bool bis_limited_account = 1;
+}
+
+message CMsgClientRequestFriendData {
+	optional uint32 persona_state_requested = 1;
+	repeated fixed64 friends = 2;
+}
+
+message CMsgClientPersonaState {
+	message Friend {
+		optional fixed64 friendid = 1;
+		optional uint32 persona_state = 2;
+		optional uint32 game_played_app_id = 3;
+		optional uint32 game_server_ip = 4;
+		optional uint32 game_server_port = 5;
+		optional string player_name = 15;
+		optional uint32 query_port = 20;
+		optional fixed64 steamid_source = 25;
+		optional uint32 cm_ip = 30;
+		optional bytes avatar_hash = 31;
+		optional bytes chat_metadata = 40;
+		optional uint32 last_logoff = 45;
+		optional uint32 last_logon = 46;
+		optional uint32 clan_rank = 50;
+		optional string game_name = 55;
+		optional fixed64 gameid = 56;
+		optional bytes game_data_blob = 60;
+		optional string clan_tag = 65;
+	}
+
+	optional uint32 status_flags = 1;
+	repeated .CMsgClientPersonaState.Friend friends = 2;
+}
+
+message CMsgAMRouteToClients {
+	optional bool contains_protobuf_msg = 1;
+	optional bytes payload = 2;
+	repeated fixed64 clients = 3;
+}
+
+message CMsgClientMMSCreateLobby {
+	optional uint32 app_id = 1;
+	optional int32 max_members = 2;
+	optional int32 lobby_type = 3;
+	optional int32 lobby_flags = 4;
+	optional uint32 cell_id = 5;
+	optional uint32 public_ip = 6;
+	optional bytes metadata = 7;
+	optional string persona_name_owner = 8;
+}
+
+message CMsgClientMMSCreateLobbyResponse {
+	optional uint32 app_id = 1;
+	optional fixed64 steam_id_lobby = 2;
+	optional int32 eresult = 3;
+}
+
+message CMsgClientMMSJoinLobby {
+	optional uint32 app_id = 1;
+	optional fixed64 steam_id_lobby = 2;
+	optional string persona_name = 3;
+}
+
+message CMsgClientMMSJoinLobbyResponse {
+	message Member {
+		optional fixed64 steam_id = 1;
+		optional string persona_name = 2;
+		optional bytes metadata = 3;
+	}
+
+	optional uint32 app_id = 1;
+	optional fixed64 steam_id_lobby = 2;
+	optional int32 chat_room_enter_response = 3;
+	optional int32 max_members = 4;
+	optional int32 lobby_type = 5;
+	optional int32 lobby_flags = 6;
+	optional fixed64 steam_id_owner = 7;
+	optional bytes metadata = 8;
+	repeated .CMsgClientMMSJoinLobbyResponse.Member members = 9;
+}
+
+message CMsgClientMMSLeaveLobby {
+	optional uint32 app_id = 1;
+	optional fixed64 steam_id_lobby = 2;
+}
+
+message CMsgClientMMSLeaveLobbyResponse {
+	optional uint32 app_id = 1;
+	optional fixed64 steam_id_lobby = 2;
+	optional int32 eresult = 3;
+}
+
+message CMsgClientMMSGetLobbyList {
+	message Filter {
+		optional string key = 1;
+		optional string value = 2;
+		optional int32 comparision = 3;
+		optional int32 filter_type = 4;
+	}
+
+	optional uint32 app_id = 1;
+	optional int32 num_lobbies_requested = 3;
+	optional uint32 cell_id = 4;
+	optional uint32 public_ip = 5;
+	repeated .CMsgClientMMSGetLobbyList.Filter filters = 6;
+}
+
+message CMsgClientMMSGetLobbyListResponse {
+	message Lobby {
+		optional fixed64 steam_id = 1;
+		optional int32 max_members = 2;
+		optional int32 lobby_type = 3;
+		optional int32 lobby_flags = 4;
+		optional bytes metadata = 5;
+		optional int32 num_members = 6;
+		optional float distance = 7;
+		optional int64 weight = 8;
+	}
+
+	optional uint32 app_id = 1;
+	optional int32 eresult = 3;
+	repeated .CMsgClientMMSGetLobbyListResponse.Lobby lobbies = 4;
+}
+
+message CMsgClientMMSSetLobbyData {
+	optional uint32 app_id = 1;
+	optional fixed64 steam_id_lobby = 2;
+	optional fixed64 steam_id_member = 3;
+	optional int32 max_members = 4;
+	optional int32 lobby_type = 5;
+	optional int32 lobby_flags = 6;
+	optional bytes metadata = 7;
+}
+
+message CMsgClientMMSSetLobbyDataResponse {
+	optional uint32 app_id = 1;
+	optional fixed64 steam_id_lobby = 2;
+	optional int32 eresult = 3;
+}
+
+message CMsgClientMMSGetLobbyData {
+	optional uint32 app_id = 1;
+	optional fixed64 steam_id_lobby = 2;
+}
+
+message CMsgClientMMSLobbyData {
+	message Member {
+		optional fixed64 steam_id = 1;
+		optional string persona_name = 2;
+		optional bytes metadata = 3;
+	}
+
+	optional uint32 app_id = 1;
+	optional fixed64 steam_id_lobby = 2;
+	optional int32 num_members = 3;
+	optional int32 max_members = 4;
+	optional int32 lobby_type = 5;
+	optional int32 lobby_flags = 6;
+	optional fixed64 steam_id_owner = 7;
+	optional bytes metadata = 8;
+	repeated .CMsgClientMMSLobbyData.Member members = 9;
+}
+
+message CMsgClientMMSSendLobbyChatMsg {
+	optional uint32 app_id = 1;
+	optional fixed64 steam_id_lobby = 2;
+	optional fixed64 steam_id_target = 3;
+	optional bytes lobby_message = 4;
+}
+
+message CMsgClientMMSLobbyChatMsg {
+	optional uint32 app_id = 1;
+	optional fixed64 steam_id_lobby = 2;
+	optional fixed64 steam_id_sender = 3;
+	optional bytes lobby_message = 4;
+}
+
+message CMsgClientMMSSetLobbyOwner {
+	optional uint32 app_id = 1;
+	optional fixed64 steam_id_lobby = 2;
+	optional fixed64 steam_id_new_owner = 3;
+}
+
+message CMsgClientMMSSetLobbyOwnerResponse {
+	optional uint32 app_id = 1;
+	optional fixed64 steam_id_lobby = 2;
+	optional int32 eresult = 3;
+}
+
+message CMsgClientMMSSetLobbyGameServer {
+	optional uint32 app_id = 1;
+	optional fixed64 steam_id_lobby = 2;
+	optional uint32 game_server_ip = 3;
+	optional uint32 game_server_port = 4;
+	optional fixed64 game_server_steam_id = 5;
+}
+
+message CMsgClientMMSLobbyGameServerSet {
+	optional uint32 app_id = 1;
+	optional fixed64 steam_id_lobby = 2;
+	optional uint32 game_server_ip = 3;
+	optional uint32 game_server_port = 4;
+	optional fixed64 game_server_steam_id = 5;
+}
+
+message CMsgClientMMSUserJoinedLobby {
+	optional uint32 app_id = 1;
+	optional fixed64 steam_id_lobby = 2;
+	optional fixed64 steam_id_user = 3;
+	optional string persona_name = 4;
+}
+
+message CMsgClientMMSUserLeftLobby {
+	optional uint32 app_id = 1;
+	optional fixed64 steam_id_lobby = 2;
+	optional fixed64 steam_id_user = 3;
+	optional string persona_name = 4;
+}
+
+message CMsgClientMMSInviteToLobby {
+	optional uint32 app_id = 1;
+	optional fixed64 steam_id_lobby = 2;
+	optional fixed64 steam_id_user_invited = 3;
+}
+
+message CMsgClientChatInvite {
+	optional fixed64 steam_id_invited = 1;
+	optional fixed64 steam_id_chat = 2;
+	optional fixed64 steam_id_patron = 3;
+	optional int32 chatroom_type = 4;
+	optional fixed64 steam_id_friend_chat = 5;
+	optional string chat_name = 6;
+	optional fixed64 game_id = 7;
+}
+
+message CMsgClientReportOverlayDetourFailure {
+	repeated string failure_string = 1;
+}
+
+message CMsgClientRequestEncryptedAppTicket {
+	optional uint32 app_id = 1;
+	optional bytes userdata = 2;
+}
+
+message CMsgClientRequestEncryptedAppTicketResponse {
+	optional uint32 app_id = 1;
+	optional int32 eresult = 2;
+	optional .EncryptedAppTicket encrypted_app_ticket = 3;
+}

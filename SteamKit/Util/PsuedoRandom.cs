@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Security.Cryptography;
 
-namespace SteamLib
+namespace SteamKit
 {
     class PsuedoRandom : Singleton<PsuedoRandom>
     {

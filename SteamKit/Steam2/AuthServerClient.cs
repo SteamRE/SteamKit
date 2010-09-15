@@ -4,7 +4,7 @@ using System.Text;
 using System.Net;
 using System.Runtime.InteropServices;
 
-namespace SteamLib
+namespace SteamKit
 {
     class AuthServerClient : ServerClient
     {
