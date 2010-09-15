@@ -237,6 +237,24 @@ namespace SteamLib
         }
     }
 
+    [StructLayout(LayoutKind.Sequential, Pack = 1)]
+    class MsgGSServerType : Serializable<MsgGSServerType>, IClientMsg
+    {
+        public uint appIdServed;
+        public uint flags;
+        public uint gameIP;
+        public short gamePort;
+
+        public MsgGSServerType()
+        {
+        }
+
+        public EMsg GetEMsg()
+        {
+            return EMsg.GSServerType;
+        }
+    }
+
     enum ENetQOSLevel : uint
     {
         NotSet = 0,
