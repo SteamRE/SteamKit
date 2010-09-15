@@ -24,6 +24,11 @@ namespace SteamLib
             return (integer & ProtoMask) > 0;
         }
 
+        public static bool IsProtoBuf(EMsg msg)
+        {
+            return IsProtoBuf((uint)msg);
+        }
+
         public static EMsg MakeMsg(EMsg msg)
         {
             return msg;
@@ -1035,6 +1040,8 @@ namespace SteamLib
         ClientServerUnavailable = 5500,
         ClientServersAvailable = 5501,
         ClientRegisterAuthTicketWithCM = 5502,
+
+        ClientLogon = 5514,
 
         BaseDFS = 5600,
         DFSGetFile = 5601,
