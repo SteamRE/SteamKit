@@ -11,6 +11,16 @@ namespace BlobLib
     {
         public List<BlobField> Fields { get; private set; }
 
+        public BlobField this[ int descriptor ]
+        {
+            get { return LookupField( descriptor ); }
+        }
+
+        public BlobField this[ string descriptor ]
+        {
+            get { return LookupField( descriptor ); }
+        }
+
         public ECacheState CacheState { get; set; }
         public EAutoPreprocessCode ProcessCode { get; set; }
 
@@ -67,7 +77,7 @@ namespace BlobLib
             if ( field == null || field.HasBlobChild() )
                 return null;
 
-            return field.GetByteData();
+            return field.Descriptor;
         }
 
         public byte[] GetDescriptor( int descriptor )
@@ -77,7 +87,7 @@ namespace BlobLib
             if ( field == null || field.HasBlobChild() )
                 return null;
 
-            return field.GetByteData();
+            return field.Data;
         }
 
 

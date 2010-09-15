@@ -2,60 +2,77 @@
 using System.IO;
 using System.Collections.Generic;
 using System.Text;
+using System.Runtime.InteropServices;
 
 namespace BlobLib
 {
     public class BlobField
     {
-        private byte[] descriptor;
+        public byte[] Descriptor { get; private set; }
+        public byte[] Data { get; private set; }
 
         private Blob childBlob;
-        private byte[] data;
 
-        public BlobField(byte[] Descriptor, byte[] Data)
+        public BlobField( byte[] Descriptor, byte[] Data )
         {
-            descriptor = Descriptor;
-            data = Data;
+            this.Descriptor = Descriptor;
+            this.Data = Data;
         }
 
-        public BlobField(byte[] Descriptor, Blob child)
+        public BlobField( byte[] Descriptor, Blob child )
         {
-            descriptor = Descriptor;
-            childBlob = child;
+            this.Descriptor = Descriptor;
+            this.childBlob = child;
         }
 
 
         public bool HasBlobChild()
         {
-            return (childBlob != null);
+            return ( childBlob != null );
         }
 
         private bool IsStringDescriptor()
         {
-            return descriptor.Length != 4;
+            return Descriptor.Length != 4;
         }
 
         public string GetStringDescriptor()
         {
-            if (!IsStringDescriptor())
+            if ( !IsStringDescriptor() )
                 return null;
 
-            return Encoding.ASCII.GetString(descriptor);
+            return Encoding.ASCII.GetString( Descriptor );
         }
 
         public UInt32 GetIntDescriptor()
         {
-            return BitConverter.ToUInt32(descriptor, 0);
+            return BitConverter.ToUInt32( Descriptor, 0 );
+        }
+
+        public T GetDescriptor<T>()
+        {
+            GCHandle handle = GCHandle.Alloc( Descriptor, GCHandleType.Pinned );
+            try
+            {
+                IntPtr ptr = handle.AddrOfPinnedObject();
+                T obj = ( T )Marshal.PtrToStructure( ptr, typeof( T ) );
+
+                return obj;
+            }
+            finally
+            {
+                handle.Free();
+            }
         }
 
 
         public bool IsStringData()
         {
-            bool nonprint = (data.Length == 1);
+            bool nonprint = ( Data.Length == 1 );
 
-            for (int i = 0; i < data.Length - 1; i++)
+            for ( int i = 0 ; i < Data.Length - 1 ; i++ )
             {
-                if ((data[i] < 32 || data[i] > 126))
+                if ( ( Data[ i ] < 32 || Data[ i ] > 126 ) )
                 {
                     nonprint = true;
                     break;
@@ -67,12 +84,28 @@ namespace BlobLib
 
         public string GetStringData()
         {
-            return Encoding.UTF8.GetString(data, 0, Math.Max(0, data.Length - 1));
+            if ( Data == null )
+                return null;
+
+            return Encoding.UTF8.GetString( Data, 0, Math.Max( 0, Data.Length - 1 ) );
         }
 
-        public byte[] GetByteData()
+
+        public T GetData<T>()
+            where T : struct
         {
-            return data;
+            GCHandle handle = GCHandle.Alloc( Data, GCHandleType.Pinned );
+            try
+            {
+                IntPtr ptr = handle.AddrOfPinnedObject();
+                T obj = ( T )Marshal.PtrToStructure( ptr, typeof( T ) );
+
+                return obj;
+            }
+            finally
+            {
+                handle.Free();
+            }
         }
 
         public Blob GetChildBlob()
@@ -81,5 +114,4 @@ namespace BlobLib
         }
 
     }
-
 }
