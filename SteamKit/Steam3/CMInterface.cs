@@ -156,6 +156,25 @@ namespace SteamLib
             udpConn.SendNetMsg( logon, endPoint );
         }
 
+        void SendGSServer(IPEndPoint endPoint)
+        {
+            var gsserver = new ClientMsgProtobuf<CMsgGSServerType>(EMsg.GSServerType, true);
+
+            SteamGlobal.Lock();
+            gsserver.ProtoHeader.client_session_id = SteamGlobal.SessionID;
+            gsserver.ProtoHeader.client_steam_id = SteamGlobal.SteamID;
+            SteamGlobal.Unlock();
+
+            gsserver.Proto.app_id_served = 4000;
+            gsserver.Proto.flags = 0;
+            gsserver.Proto.game_dir = "garrysmod";
+            gsserver.Proto.game_ip_address = 0;
+            gsserver.Proto.game_port = gsserver.Proto.game_query_port = 27015;
+            gsserver.Proto.game_version = "1.0.0.97";
+
+            udpConn.SendNetMsg( gsserver, endPoint );
+        }
+
         void RecvDisconnect( object sender, NetworkEventArgs e )
         {
             lock ( netLock )
@@ -205,6 +224,8 @@ namespace SteamLib
                     heartBeatFunc.SetFunc(SendHeartbeat);
                     heartBeatFunc.SetObject(this);
                     heartBeatFunc.SetDelay(TimeSpan.FromSeconds(logonResp.Proto.out_of_game_heartbeat_seconds));
+
+                    SendGSServer( e.Sender );
                 }
             }
             else if ( e.Msg == EMsg.ClientLogOnResponse && !e.Proto )
@@ -226,6 +247,13 @@ namespace SteamLib
                     heartBeatFunc.SetDelay( TimeSpan.FromSeconds( logonResp.MsgHeader.OutOfGameHeartbeatRateSec ) );
                 }
 
+            }
+
+            if (e.Msg == EMsg.GSStatusReply && e.Proto)
+            {
+                var statusResp = new ClientMsgProtobuf<CMsgGSStatusReply>( e.Data );
+
+                Console.WriteLine( "GS Status: secure: " + statusResp.Proto.is_secure );
             }
 
             if ( e.Msg == EMsg.ClientLoggedOff )
