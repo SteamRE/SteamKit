@@ -4,7 +4,7 @@ using System.Text;
 using System.Net;
 using System.Threading;
 
-namespace SteamLib
+namespace SteamKit
 {
     class CMServer
     {

@@ -6,10 +6,10 @@ using System.Threading;
 using System.Net;
 using System.IO;
 
-namespace SteamLib
+namespace SteamKit
 {
 
-    class TcpPacket : ByteBuffer
+    public class TcpPacket : ByteBuffer
     {
         public TcpPacket()
             : base( true )
@@ -42,7 +42,7 @@ namespace SteamLib
         }
     }
 
-    class TcpSocket
+    public class TcpSocket
     {
         Socket sock;
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 
-namespace SteamLib
+namespace SteamKit
 {
 
     delegate bool AsyncCall( ref SteamProgress progress, out SteamError err );

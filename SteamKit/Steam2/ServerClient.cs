@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Net;
 
-namespace SteamLib
+namespace SteamKit
 {
-    enum EServerType : uint
+    public enum EServerType : uint
     {
         ProxyASClientAuthentication = 0,
         ContentServer = 1,
@@ -22,7 +22,7 @@ namespace SteamLib
         SlaveASClientAuthentication = 28,
     }
 
-    class ServerClient
+    public class ServerClient
     {
 
         protected TcpSocket socket;

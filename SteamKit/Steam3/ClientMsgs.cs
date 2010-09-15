@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.Runtime.InteropServices;
 
-namespace SteamLib
-{
+namespace SteamKit
+{   
     interface IClientMsg
     {
         // so that IMsgHdr's can get set

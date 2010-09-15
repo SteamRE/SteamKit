@@ -4,7 +4,7 @@ using System.Text;
 using BlobLib;
 using System.Threading;
 
-namespace SteamLib
+namespace SteamKit
 {
     // so steam2 and steam3 can communicate to each other
     static class SteamGlobal

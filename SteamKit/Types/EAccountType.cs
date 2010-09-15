@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SteamLib
+namespace SteamKit
 {
     public enum EAccountType : int
     {

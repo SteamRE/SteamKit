@@ -4,9 +4,9 @@ using System.Text;
 using System.Security.Cryptography;
 using System.IO;
 
-namespace SteamLib
+namespace SteamKit
 {
-    static class CryptoHelper
+    public static class CryptoHelper
     {
         public static byte[] RSAEncrypt( byte[] input, byte[] key )
         {

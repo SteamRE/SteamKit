@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Runtime.InteropServices;
 
-namespace SteamLib
+namespace SteamKit
 {
     [StructLayout( LayoutKind.Sequential, Pack = 1 )]
     public class MicroTime : Serializable<MicroTime>, IEquatable<ulong>, IComparable<ulong>
@@ -42,6 +42,10 @@ namespace SteamLib
         public DateTime ToDateTime()
         {
             return ( DateTime.MinValue + TimeSpan.FromTicks( ( long )Time * 10 ) );
+        }
+        public uint ToUnixTime()
+        {
+            return MicroTime.GetUnixTime( this.ToDateTime() );
         }
 
 

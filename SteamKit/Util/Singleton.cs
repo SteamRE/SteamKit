@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SteamLib
+namespace SteamKit
 {
     public class Singleton<T> where T : Singleton<T>, new()
     {

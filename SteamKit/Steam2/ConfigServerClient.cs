@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Net;
 
-namespace SteamLib
+namespace SteamKit
 {
-    class ConfigServerClient : ServerClient
+    public class ConfigServerClient : ServerClient
     {
 
         public byte[] GetClientConfigRecord( IPEndPoint configServer )
