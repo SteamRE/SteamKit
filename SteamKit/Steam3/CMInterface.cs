@@ -173,10 +173,12 @@ namespace SteamKit
             logon.Proto.account_name = "username";
             logon.Proto.password = "password";
 
-            //STRANGE:
-            byte[] serverTGTMagic = new byte[SteamGlobal.ServerTGT.Length + 4];
-            Array.Copy( NetHelpers.GetLocalIP().GetAddressBytes(), 0, serverTGTMagic, 0, 4);
-            Array.Copy(SteamGlobal.ServerTGT, 0, serverTGTMagic, 4, SteamGlobal.ServerTGT.Length);
+            // private IP inside serverTGT
+            byte[] privateIP = BitConverter.GetBytes( NetHelpers.GetIPAddress( NetHelpers.GetLocalIP() ) );
+
+            byte[] serverTGTMagic = new byte[ SteamGlobal.ServerTGT.Length + 4 ];
+            Array.Copy( privateIP, 0, serverTGTMagic, 0, 4 );
+            Array.Copy( SteamGlobal.ServerTGT, 0, serverTGTMagic, 4, SteamGlobal.ServerTGT.Length );
 
             logon.Proto.steam2_auth_ticket = serverTGTMagic;
 
