@@ -7,7 +7,7 @@ using System.Threading;
 namespace SteamKit
 {
     // so steam2 and steam3 can communicate to each other
-    static class SteamGlobal
+    public static class SteamGlobal
     {
         static object lockObj = new object();
 
