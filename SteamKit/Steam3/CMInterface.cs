@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Net;
 using System.Threading;
+using System.IO;
 
 namespace SteamKit
 {
@@ -144,27 +145,33 @@ namespace SteamKit
             SteamGlobalUserID userid = clientTGT.UserID;
             MicroTime creationTime = MicroTime.Deserialize( SteamGlobal.AccountRecord.GetDescriptor( BlobLib.AuthFields.eFieldTimestamp2 ) );
 
-            logon.ProtoHeader.client_steam_id = new SteamID((uint)userid.AccountID, (uint)userid.Instance, EUniverse.Public, EAccountType.Individual).ConvertToUint64();
+            logon.ProtoHeader.client_steam_id = new SteamID((uint)(userid.AccountID * 2 + userid.Instance), EUniverse.Public, EAccountType.Individual).ConvertToUint64();
+            logon.ProtoHeader.client_session_id = 0;
 
             logon.Proto.obfustucated_private_ip = NetHelpers.GetIPAddress(NetHelpers.GetLocalIP()) ^ MsgClientLogOnWithCredentials.ObfuscationMask;
 
             logon.Proto.protocol_version = 65565; // default?
             logon.Proto.client_os_type = 10; // Windows
-            logon.Proto.client_language = "English"; // yoko
+            logon.Proto.client_language = "english"; // yoko
             logon.Proto.rtime32_account_creation = creationTime.ToUnixTime();
 
-            logon.Proto.cell_id = 10; // TODO
-            logon.Proto.client_package_version = 1367; // TODO
+            logon.Proto.cell_id = 49; // TODO
+            logon.Proto.client_package_version = 1373; // TODO
 
             logon.Proto.email_address = accountRecord.GetStringDescriptor( BlobLib.AuthFields.eFieldEmail );
 
             //logon.Proto.login_key = ""; // todo
-            //logon.Proto.machine_id = new byte[0]; // todo
+            //logon.Proto.machine_id = File.ReadAllBytes(@"C:\steamre\machineid.bin"); // todo
 
             logon.Proto.account_name = "username";
             logon.Proto.password = "password";
 
-            logon.Proto.steam2_auth_ticket = SteamGlobal.ServerTGT;
+            //STRANGE:
+            byte[] serverTGTFix = new byte[SteamGlobal.ServerTGT.Length + 4];
+            Array.Copy(new byte[] { 0x90, 0x00, 0xA8, 0xC0 }, 0, serverTGTFix, 0, 4);
+            Array.Copy(SteamGlobal.ServerTGT, 0, serverTGTFix, 4, SteamGlobal.ServerTGT.Length);
+
+            logon.Proto.steam2_auth_ticket = serverTGTFix;
 
             udpConn.SendNetMsg(logon, endPoint);
         }
