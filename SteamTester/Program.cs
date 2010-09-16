@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using SteamLib;
+using SteamKit;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
 using System.Net;
