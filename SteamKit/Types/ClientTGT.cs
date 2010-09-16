@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 namespace SteamKit
 {
     [StructLayout( LayoutKind.Sequential, Pack = 1 )]
-    class ClientTGT : Serializable<ClientTGT>
+    public class ClientTGT : Serializable<ClientTGT>
     {
         [MarshalAs( UnmanagedType.ByValArray, SizeConst = 16 )]
         public byte[] AccountRecordKey;

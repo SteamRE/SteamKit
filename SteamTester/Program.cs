@@ -6,6 +6,7 @@ using System.Runtime.InteropServices;
 using System.Diagnostics;
 using System.Net;
 using System.Threading;
+using System.IO;
 
 namespace Steam3Tester
 {
@@ -13,13 +14,8 @@ namespace Steam3Tester
     {
         static void Main( string[] args )
         {
-            CMInterface cmInterface = CMInterface.Instance;
 
-            cmInterface.ConnectToCM();
-
-
-
-#if false
+//#if false
             // steam2 login code
             SteamError err;
             SteamCallHandle loginHandle = Steam2.Login( "username", "password", out err );
@@ -58,13 +54,16 @@ namespace Steam3Tester
                 return;
             }
 
-            Console.WriteLine( "UserID: {0}", userId.AccountID );
+            Console.WriteLine( "UserID: {0} email: {1}", userId.AccountID, SteamGlobal.AccountRecord.GetStringDescriptor( BlobLib.AuthFields.eFieldEmail ) );
+            //Console.ReadKey();
+//#endif
+
+
+            CMInterface cmInterface = CMInterface.Instance;
+
+            cmInterface.ConnectToCM();
+
             Console.ReadKey();
-#endif
-
-
-
-
 #if false
             // steam2 server query code
             GDSClient gdsClient = new GDSClient();

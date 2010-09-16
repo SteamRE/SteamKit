@@ -134,8 +134,42 @@ namespace SteamKit
             udpConn.SendNetMsg( heartbeat, this.bestServer.EndPoint );
         }
 
+        void SendUserLogOn(IPEndPoint endPoint)
+        {
+            var logon = new ClientMsgProtobuf<CMsgClientLogon>(EMsg.ClientLogon, true);
 
-        void SendLogOn( IPEndPoint endPoint )
+            BlobLib.Blob accountRecord = SteamGlobal.AccountRecord;
+            ClientTGT clientTGT = SteamGlobal.ClientTGT;
+
+            SteamGlobalUserID userid = clientTGT.UserID;
+            MicroTime creationTime = MicroTime.Deserialize( SteamGlobal.AccountRecord.GetDescriptor( BlobLib.AuthFields.eFieldTimestamp2 ) );
+
+            logon.ProtoHeader.client_steam_id = new SteamID((uint)userid.AccountID, (uint)userid.Instance, EUniverse.Public, EAccountType.Individual).ConvertToUint64();
+
+            logon.Proto.obfustucated_private_ip = NetHelpers.GetIPAddress(NetHelpers.GetLocalIP()) ^ MsgClientLogOnWithCredentials.ObfuscationMask;
+
+            logon.Proto.protocol_version = 65565; // default?
+            logon.Proto.client_os_type = 10; // Windows
+            logon.Proto.client_language = "English"; // yoko
+            logon.Proto.rtime32_account_creation = creationTime.ToUnixTime();
+
+            logon.Proto.cell_id = 10; // TODO
+            logon.Proto.client_package_version = 1367; // TODO
+
+            logon.Proto.email_address = accountRecord.GetStringDescriptor( BlobLib.AuthFields.eFieldEmail );
+
+            //logon.Proto.login_key = ""; // todo
+            //logon.Proto.machine_id = new byte[0]; // todo
+
+            logon.Proto.account_name = "username";
+            logon.Proto.password = "password";
+
+            logon.Proto.steam2_auth_ticket = SteamGlobal.ServerTGT;
+
+            udpConn.SendNetMsg(logon, endPoint);
+        }
+
+        void SendAnonLogOn( IPEndPoint endPoint )
         {
             var logon = new ClientMsgProtobuf<CMsgClientLogon>(EMsg.ClientLogon, true);
 
@@ -202,7 +236,7 @@ namespace SteamKit
                 var encRes = ClientMsg<MsgChannelEncryptResult, MsgHdr>.GetMsgHeader( e.Data );
 
                 if ( encRes.Result == EResult.OK )
-                    SendLogOn( e.Sender );
+                    SendUserLogOn(e.Sender);
                 else
                     Console.WriteLine( "Failed crypto handshake: " + encRes.Result );
             }
@@ -225,7 +259,7 @@ namespace SteamKit
                     heartBeatFunc.SetObject(this);
                     heartBeatFunc.SetDelay(TimeSpan.FromSeconds(logonResp.Proto.out_of_game_heartbeat_seconds));
 
-                    SendGSServer( e.Sender );
+                    //SendGSServer( e.Sender );
                 }
             }
             else if ( e.Msg == EMsg.ClientLogOnResponse && !e.Proto )
