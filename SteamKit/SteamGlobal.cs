@@ -21,6 +21,10 @@ namespace SteamKit
         public static SteamID SteamID { get; set; }
         public static int SessionID { get; set; }
 
+        public static byte[] WinUITicket { get; set; }
+        public static byte[] LoginKey { get; set; }
+
+        public static List<CMsgClientFriendsList.Friend> Friends { get; set; } // lazy!
 
         public static void Lock()
         {

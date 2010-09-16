@@ -204,6 +204,21 @@ namespace SteamKit
         }
     }
 
+    [StructLayout(LayoutKind.Sequential, Pack = 1)]
+    class MsgClientChangeStatus : Serializable<MsgClientChangeStatus>, IClientMsg
+    {
+        public byte personaState;
+
+        public MsgClientChangeStatus()
+        {
+        }
+
+        public EMsg GetEMsg()
+        {
+            return EMsg.ClientChangeStatus;
+        }
+    }
+
     [StructLayout( LayoutKind.Sequential, Pack = 1 )]
     class MsgClientFriendMsg : Serializable<MsgClientFriendMsg>, IClientMsg
     {
@@ -252,6 +267,38 @@ namespace SteamKit
         public EMsg GetEMsg()
         {
             return EMsg.GSServerType;
+        }
+    }
+
+    [StructLayout(LayoutKind.Sequential, Pack = 1)]
+    class MsgClientNewLoginKey : Serializable<MsgClientNewLoginKey>, IClientMsg
+    {
+        public uint uniqueID;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 20)]
+        public byte[] loginKey;
+
+        public MsgClientNewLoginKey()
+        {
+        }
+
+        public EMsg GetEMsg()
+        {
+            return EMsg.ClientNewLoginKey;
+        }
+    }
+
+    [StructLayout(LayoutKind.Sequential, Pack = 1)]
+    class MsgClientNewLoginKeyAccepted : Serializable<MsgClientNewLoginKeyAccepted>, IClientMsg
+    {
+        public uint uniqueID;
+
+        public MsgClientNewLoginKeyAccepted()
+        {
+        }
+
+        public EMsg GetEMsg()
+        {
+            return EMsg.ClientNewLoginKeyAccepted;
         }
     }
 
