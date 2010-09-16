@@ -2,20 +2,26 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Net;
+using System.Net.NetworkInformation;
 
 namespace SteamKit
 {
-    static class NetHelpers
+    public static class NetHelpers
     {
         public static IPAddress GetLocalIP()
         {
-            string hostName = Dns.GetHostName();
-            IPHostEntry hostEntry = Dns.GetHostEntry( hostName );
-
-            foreach ( var ipAddr in hostEntry.AddressList )
+            NetworkInterface[] networks = NetworkInterface.GetAllNetworkInterfaces();
+            foreach (NetworkInterface nw in networks)
             {
-                if ( ipAddr.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork )
-                    return ipAddr;
+                if (nw.Description.IndexOf("Virtual", 0, StringComparison.OrdinalIgnoreCase) > 0)
+                    continue;
+
+                IPInterfaceProperties ipProps = nw.GetIPProperties();
+                foreach (UnicastIPAddressInformation ucip in ipProps.UnicastAddresses)
+                {
+                    if (ucip.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork && ucip.IsDnsEligible)
+                       return ucip.Address;
+                }
             }
 
             return null;
@@ -27,7 +33,7 @@ namespace SteamKit
         }
         public static uint GetIPAddress( IPAddress ipAddr )
         {
-            return BitConverter.ToUInt32( ipAddr.GetAddressBytes(), 0 );
+            return EndianSwap( BitConverter.ToUInt32( ipAddr.GetAddressBytes(), 0 ) );
         }
 
 
