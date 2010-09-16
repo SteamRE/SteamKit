@@ -125,10 +125,17 @@ namespace SteamKit
         {
             SteamGlobal.Lock();
 
+            var heartbeat = new ClientMsgProtobuf<CMsgClientHeartBeat>(EMsg.ClientHeartBeat, true);
+
+            heartbeat.ProtoHeader.client_session_id = SteamGlobal.SessionID;
+            heartbeat.ProtoHeader.client_steam_id = SteamGlobal.SteamID;
+
+            /*
             var heartbeat = new ClientMsg<MsgClientHeartBeat, ExtendedClientMsgHdr>();
 
             heartbeat.Header.SessionID = SteamGlobal.SessionID;
             heartbeat.Header.SteamID = SteamGlobal.SteamID;
+            */
 
             SteamGlobal.Unlock();
 
@@ -216,6 +223,81 @@ namespace SteamKit
             udpConn.SendNetMsg( gsserver, endPoint );
         }
 
+        void SendClientKeyResponse(uint uniqueid, IPEndPoint endPoint)
+        {
+            var response = new ClientMsg<MsgClientNewLoginKeyAccepted, ExtendedClientMsgHdr>();
+
+            SteamGlobal.Lock();
+            response.Header.SessionID = SteamGlobal.SessionID;
+            response.Header.SteamID = SteamGlobal.SteamID;
+            SteamGlobal.Unlock();
+
+            response.MsgHeader.uniqueID = uniqueid;
+
+            udpConn.SendNetMsg(response, endPoint);
+        }
+
+        void SendAppOwnershipRequest(uint appid, IPEndPoint endPoint)
+        {
+            var ownershipReq = new ClientMsgProtobuf<CMsgClientGetAppOwnershipTicket>(EMsg.ClientGetAppOwnershipTicket, true);
+
+            SteamGlobal.Lock();
+            ownershipReq.ProtoHeader.client_session_id = SteamGlobal.SessionID;
+            ownershipReq.ProtoHeader.client_steam_id = SteamGlobal.SteamID;
+            SteamGlobal.Unlock();
+
+            ownershipReq.Proto.app_id = appid;
+
+            udpConn.SendNetMsg(ownershipReq, endPoint);
+        }
+
+        void SendAuthList(IPEndPoint endPoint)
+        {
+            var authlist = new ClientMsgProtobuf<CMsgClientAuthList>(EMsg.ClientAuthList2, true);
+
+            SteamGlobal.Lock();
+            authlist.ProtoHeader.client_session_id = SteamGlobal.SessionID;
+            authlist.ProtoHeader.client_steam_id = SteamGlobal.SteamID;
+            SteamGlobal.Unlock();
+
+            authlist.Proto.tokens_left = 10; // ??
+
+            udpConn.SendNetMsg(authlist, endPoint);
+        }
+
+        void SendFriendsDataRequest(IPEndPoint endPoint)
+        {
+            var friendsdatareq = new ClientMsgProtobuf<CMsgClientRequestFriendData>(EMsg.ClientRequestFriendData, true);
+
+            SteamGlobal.Lock();
+            friendsdatareq.ProtoHeader.client_session_id = SteamGlobal.SessionID;
+            friendsdatareq.ProtoHeader.client_steam_id = SteamGlobal.SteamID;
+            SteamGlobal.Unlock();
+
+            friendsdatareq.Proto.persona_state_requested = 1106; // friend flags.. are they in OSW?
+
+            foreach (CMsgClientFriendsList.Friend friend in SteamGlobal.Friends)
+            {
+                friendsdatareq.Proto.friends.Add(friend.ulfriendid);
+            }
+
+            udpConn.SendNetMsg(friendsdatareq, endPoint);
+        }
+
+        void SendStatusChange(byte state, IPEndPoint endPoint)
+        {
+            var statuschange = new ClientMsg<MsgClientChangeStatus, ExtendedClientMsgHdr>();
+
+            SteamGlobal.Lock();
+            statuschange.Header.SessionID = SteamGlobal.SessionID;
+            statuschange.Header.SteamID = SteamGlobal.SteamID;
+            SteamGlobal.Unlock();
+
+            statuschange.MsgHeader.personaState = state;
+
+            udpConn.SendNetMsg( statuschange, endPoint );
+        }
+
         void RecvDisconnect( object sender, NetworkEventArgs e )
         {
             lock ( netLock )
@@ -252,42 +334,17 @@ namespace SteamKit
             {
                 var logonResp = new ClientMsgProtobuf<CMsgClientLogonResponse>( e.Data );
 
-                Console.WriteLine("Logon response: " + (EResult)logonResp.Proto.eresult);
-
-                SteamGlobal.Lock();
-                SteamGlobal.SessionID = logonResp.ProtoHeader.client_session_id;
-                SteamGlobal.SteamID = logonResp.ProtoHeader.client_steam_id;
-                SteamGlobal.Unlock();
-
-                if ((EResult)logonResp.Proto.eresult == EResult.OK)
-                {
-                    heartBeatFunc = new ScheduledFunction<CMInterface>();
-                    heartBeatFunc.SetFunc(SendHeartbeat);
-                    heartBeatFunc.SetObject(this);
-                    heartBeatFunc.SetDelay(TimeSpan.FromSeconds(logonResp.Proto.out_of_game_heartbeat_seconds));
-
-                    //SendGSServer( e.Sender );
-                }
+                RecvLogonResponse( e, (EResult)logonResp.Proto.eresult, 
+                                        logonResp.ProtoHeader.client_steam_id, logonResp.ProtoHeader.client_session_id, 
+                                        logonResp.Proto.out_of_game_heartbeat_seconds );
             }
             else if ( e.Msg == EMsg.ClientLogOnResponse && !e.Proto )
             {
                 var logonResp = new ClientMsg<MsgClientLogOnResponse, ExtendedClientMsgHdr>( e.Data );
 
-                Console.WriteLine( "Logon Response: " + logonResp.MsgHeader.Result );
-
-                SteamGlobal.Lock();
-                SteamGlobal.SessionID = logonResp.Header.SessionID;
-                SteamGlobal.SteamID = logonResp.Header.SteamID;
-                SteamGlobal.Unlock();
-
-                if ( logonResp.MsgHeader.Result == EResult.OK )
-                {
-                    heartBeatFunc = new ScheduledFunction<CMInterface>();
-                    heartBeatFunc.SetFunc( SendHeartbeat );
-                    heartBeatFunc.SetObject( this );
-                    heartBeatFunc.SetDelay( TimeSpan.FromSeconds( logonResp.MsgHeader.OutOfGameHeartbeatRateSec ) );
-                }
-
+                RecvLogonResponse( e, logonResp.MsgHeader.Result, 
+                                        logonResp.Header.SteamID, logonResp.Header.SessionID,
+                                        logonResp.MsgHeader.OutOfGameHeartbeatRateSec );
             }
 
             if (e.Msg == EMsg.GSStatusReply && e.Proto)
@@ -295,6 +352,78 @@ namespace SteamKit
                 var statusResp = new ClientMsgProtobuf<CMsgGSStatusReply>( e.Data );
 
                 Console.WriteLine( "GS Status: secure: " + statusResp.Proto.is_secure );
+            }
+
+            if (e.Msg == EMsg.ClientSessionToken && e.Proto)
+            {
+                var stok = new ClientMsgProtobuf<CMsgClientSessionToken>(e.Data);
+
+                Console.WriteLine("Session token: " + stok.Proto.token);
+            }
+
+            if (e.Msg == EMsg.ClientFriendsList && e.Proto)
+            {
+                var friends = new ClientMsgProtobuf<CMsgClientFriendsList>( e.Data );
+
+                if (!friends.Proto.bincremental)
+                {
+                    SteamGlobal.Friends = new List<CMsgClientFriendsList.Friend>(friends.Proto.friends.Count);
+                }
+
+                Console.WriteLine("Got friends: " + friends.Proto.friends.Count);
+
+                foreach (CMsgClientFriendsList.Friend friend in friends.Proto.friends)
+                {
+                    Console.WriteLine("Friend " + friend.efriendrelationship + " " + friend.ulfriendid);
+
+                    SteamGlobal.Friends.Add(friend);
+                }
+            }
+
+            if (e.Msg == EMsg.ClientGetAppOwnershipTicketResponse && e.Proto)
+            {
+                var ticket = new ClientMsgProtobuf<CMsgClientGetAppOwnershipTicketResponse>( e.Data );
+
+                Console.WriteLine("Get app ownership: " + (EResult)ticket.Proto.eresult + " appid: " + ticket.Proto.app_id);
+
+                if ( (EResult)ticket.Proto.eresult == EResult.OK && ticket.Proto.app_id == 7)
+                {
+                    SteamGlobal.WinUITicket = ticket.Proto.ticket;
+
+                    SendAuthList( e.Sender );
+                }
+            }
+
+            if (e.Msg == EMsg.ClientPersonaState && e.Proto)
+            {
+                var persona = new ClientMsgProtobuf<CMsgClientPersonaState>( e.Data );
+
+                Console.WriteLine("Persona state flags: " + persona.Proto.status_flags);
+
+                foreach (CMsgClientPersonaState.Friend friend in persona.Proto.friends)
+                {
+                    Console.WriteLine("Friend " + friend.player_name + " state: " + friend.persona_state + " " + friend.steamid_source);
+                }
+            }
+
+            if (e.Msg == EMsg.ClientFriendMsgIncoming)
+            {
+                var messageinc = new ClientMsg<MsgClientFriendMsgIncoming, ExtendedClientMsgHdr>( e.Data );
+
+                string msg = Encoding.UTF8.GetString( messageinc.GetPayload() );
+
+                Console.WriteLine("Message: " + messageinc.MsgHeader.SteamID + ": " + msg); 
+            }
+
+            if (e.Msg == EMsg.ClientNewLoginKey)
+            {
+                var loginKey = new ClientMsg<MsgClientNewLoginKey, ExtendedClientMsgHdr>( e.Data );
+
+                SteamGlobal.LoginKey = loginKey.MsgHeader.loginKey;
+
+                SendClientKeyResponse( loginKey.MsgHeader.uniqueID, e.Sender );
+                SendFriendsDataRequest( e.Sender );
+                SendStatusChange( 1, e.Sender );
             }
 
             if ( e.Msg == EMsg.ClientLoggedOff )
@@ -306,6 +435,33 @@ namespace SteamKit
                         this.heartBeatFunc.Disable();
                         this.heartBeatFunc = null;
                     }
+                }
+            }
+        }
+
+        void RecvLogonResponse(NetMsgEventArgs e, EResult result, UInt64 steamid, Int32 sessionid, int outofgameheartbeat)
+        {
+            Console.WriteLine("Logon Response: " + result);
+
+            SteamGlobal.Lock();
+            SteamGlobal.SessionID = sessionid;
+            SteamGlobal.SteamID = steamid;
+            SteamGlobal.Unlock();
+
+            if (result == EResult.OK)
+            {
+                heartBeatFunc = new ScheduledFunction<CMInterface>();
+                heartBeatFunc.SetFunc(SendHeartbeat);
+                heartBeatFunc.SetObject(this);
+                heartBeatFunc.SetDelay(TimeSpan.FromSeconds(outofgameheartbeat));
+
+                if (SteamGlobal.SteamID.AccountType == EAccountType.Individual && SteamGlobal.WinUITicket == null)
+                {
+                    SendAppOwnershipRequest(7, e.Sender);
+                }
+                else if (SteamGlobal.SteamID.AccountType == EAccountType.AnonGameServer)
+                {
+                    SendGSServer(e.Sender);
                 }
             }
         }
