@@ -16,40 +16,25 @@
 #include "isteamclient009.h"
 #include "isteamgameserver010.h"
 
-// define our clientapp entry point
-CLIENTAPP( main );
+CDataDumper* g_Dumper;
 
-int main( int argc, char **argv )
+BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)
 {
-	g_Logger = new CLogger(argv[0]);
-
-	AllocConsole();
-	LoadLibrary("steamclient.dll");		
-
-	CDataDumper test;
-	g_Crypto = new CCrypto(&test);
-
-	// load the real client app
-	HMODULE steamUI = LoadLibrary( "SteamUI.dll" );
-	if ( !steamUI )
+	if ( fdwReason == DLL_PROCESS_ATTACH )
 	{
-		MessageBox( HWND_DESKTOP, "Unable to load SteamUI.", "Oops!", MB_OK );
-		return -1;
+		AllocConsole();
+		LoadLibrary("steamclient.dll");	
+
+		g_Logger = new CLogger(".\\");
+		g_Dumper = new CDataDumper();
+		g_Crypto = new CCrypto(g_Dumper);
+	}
+	else if ( fdwReason == DLL_PROCESS_DETACH )
+	{
+		delete g_Crypto;
+		delete g_Dumper;
+		delete g_Logger;
 	}
 
-	SteamDllMainFn realSteamMain = ( SteamDllMainFn )GetProcAddress( steamUI, "SteamDllMain" );
-	if ( !realSteamMain )
-	{
-		MessageBox( HWND_DESKTOP, "Unable to find Steam entrypoint.", "Oops!", MB_OK );
-		return -1;
-	}
-
-	int ret = realSteamMain( argc, argv );
-
-	FreeLibrary( steamUI );
-
-	delete g_Crypto;
-	delete g_Logger;
-
-	return ret;
+	return TRUE;
 }

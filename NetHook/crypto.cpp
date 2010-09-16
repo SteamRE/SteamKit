@@ -18,7 +18,7 @@ bool (__cdecl *Decrypt_Orig)(const uint8*, uint32, uint8*, uint32*, const uint8*
 CCrypto::CCrypto(ICryptoCallback* callback) :
 	m_Callback(callback)
 {
-	CSimpleScan steamClientScan( "steamclient" );
+	CSimpleScan steamClientScan( "steamclient.dll" );
 
 	bool bRet = steamClientScan.FindFunction( 
 		"\x55\x8B\xEC\x6A\xFF\x68\x01\x47\x32\x38\x64\xA1\x00\x00\x00\x00\x50\x64\x89\x25\x00\x00\x00\x00\x81\xEC\x04\x09\x00\x00",
