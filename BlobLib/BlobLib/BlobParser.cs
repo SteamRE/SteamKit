@@ -10,7 +10,7 @@ namespace BlobLib
         private static readonly int BlobHeaderLength = 10;
         private static readonly int FieldHeaderLength = 6;
         private static readonly int CompressedHeaderLength = 10;
-        private static readonly int EncryptedHeaderLength = 40;
+        private static readonly int EncryptedHeaderLength = 20;
 
         private static byte[] Key;
 
@@ -61,17 +61,22 @@ namespace BlobLib
                 return null;
             }
 
+            serialized -= BlobHeaderLength;
+
+            if (process == EAutoPreprocessCode.eAutoPreprocessCodeEncrypted)
+            {
+                serialized -= EncryptedHeaderLength;
+            }
+
             if ( !IsValidCacheState( cachestate ) || !IsValidProcess( process ) ||
                     serialized < 0 || spare < 0 ||
-                    !reader.CanRead( serialized + spare - BlobHeaderLength ) )
+                    !reader.CanRead( serialized + spare ) )
             {
                 reader.Rollback();
                 return null;
             }
 
             long curpos = reader.Position;
-
-            serialized -= BlobHeaderLength;
             Blob blob = null;
 
             switch (process)
@@ -84,15 +89,11 @@ namespace BlobLib
                     break;
                 case EAutoPreprocessCode.eAutoPreprocessCodeCompressed:
                     {
-                        serialized -= CompressedHeaderLength;
-
                         blob = ParseCompressedBlob( reader, serialized );
                     }
                     break;
                 case EAutoPreprocessCode.eAutoPreprocessCodeEncrypted:
                     {
-                        serialized -= EncryptedHeaderLength;
-
                         blob = ParseEncryptedBlob( reader, serialized );
                     }
                     break;
@@ -114,8 +115,6 @@ namespace BlobLib
             {
                 decryptedSize = reader.ReadInt32();
                 IV = reader.ReadBytes(16);
-
-                HMAC = reader.ReadBytes(20);
 
                 reader.Commit();
             }
