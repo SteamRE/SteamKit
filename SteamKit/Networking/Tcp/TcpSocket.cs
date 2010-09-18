@@ -74,7 +74,7 @@ namespace SteamKit
 
             try
             {
-                if ( !waitHandle.WaitOne( TimeSpan.FromMilliseconds( 250 ), false ) )
+                if ( !waitHandle.WaitOne( TimeSpan.FromMilliseconds( 2000 ), false ) )
                 {
                     Disconnect();
                 }
