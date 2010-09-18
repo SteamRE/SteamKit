@@ -35,7 +35,17 @@ namespace SteamKit
 
         public override byte[] ProcessIncoming( byte[] data )
         {
-            byte[] output = CryptoHelper.SymmetricDecrypt( data, aesSessionKey );
+            byte[] output;
+
+            try
+            {
+                output = CryptoHelper.SymmetricDecrypt(data, aesSessionKey);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("ProcessIncoming: " + e.Message);
+                return null;
+            }
 
             return output;
         }
