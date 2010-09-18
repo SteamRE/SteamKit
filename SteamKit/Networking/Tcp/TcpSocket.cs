@@ -110,11 +110,17 @@ namespace SteamKit
 
         public void Disconnect()
         {
-            sock.Shutdown( SocketShutdown.Both );
-            sock.Disconnect( true );
-            sock.Close();
+            if (sock != null)
+            {
+                sock.Shutdown(SocketShutdown.Both);
+                sock.Disconnect(true);
+                sock.Close();
+            }
 
-            netStream.Close();
+            if (netStream != null)
+            {
+                netStream.Close();
+            }
         }
 
     }
