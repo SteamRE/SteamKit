@@ -240,7 +240,7 @@ namespace SteamKit
                 //return;
             }
 
-            SendAck( endPoint );
+            uint curSeq = seqThis;
 
             NetPacket netPacket = null;
 
@@ -257,6 +257,12 @@ namespace SteamKit
 
             if ( netPacket.IsCompleted )
                 this.RecvNetPacket( udpPkt.Header, netPacket, endPoint );
+
+            // send a datagram ack if we didn't do anything
+            if ( seqThis == curSeq )
+            {
+                SendAck(endPoint);
+            }
         }
 
         void RecvNetPacket( UdpHeader udpHdr, NetPacket netPacket, IPEndPoint endPoint )
