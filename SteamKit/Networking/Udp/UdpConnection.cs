@@ -184,6 +184,20 @@ namespace SteamKit
             SendData(clientMsgProto.Serialize(), ipAddr);
         }
 
+        public void SendAck( IPEndPoint ipAddr )
+        {
+            UdpPacket packet = new UdpPacket(EUdpPacketType.Datagram);
+            packet.Header.SequenceThis = 0;
+            packet.Header.SequenceAcked = seqAcked;
+            packet.Header.DestinationConnID = remoteConnID;
+
+            packet.Header.PacketsInMsg = 0;
+            packet.Header.MsgStartSequence = 0;
+
+            byte[] packetData = packet.GetData();
+
+            udpSock.Send(packetData, ipAddr);
+        }
 
         void RecvChallenge( UdpPacket udpPkt, IPEndPoint endPoint )
         {
@@ -220,6 +234,14 @@ namespace SteamKit
 
         void RecvData( UdpPacket udpPkt, IPEndPoint endPoint )
         {
+            if (udpPkt.Header.SequenceThis <= seqAcked)
+            {
+                Console.WriteLine("duplicate packet seq " + udpPkt.Header.SequenceThis + " " + seqAcked);
+                //return;
+            }
+
+            SendAck( endPoint );
+
             NetPacket netPacket = null;
 
             if ( packetMap.ContainsKey( udpPkt.Header.MsgStartSequence ) )
@@ -252,7 +274,7 @@ namespace SteamKit
                 return;
             }
 
-            if ( data.Length < 4 )
+            if ( data == null || data.Length < 4 )
                 return; // we need at least an EMsg
 
             EMsg eMsg = ( EMsg )BitConverter.ToUInt32( data, 0 );
@@ -376,12 +398,6 @@ namespace SteamKit
 
             if ( !udpPkt.IsValid )
                 return;
-
-            if (udpPkt.Header.SequenceThis <= seqAcked)
-            {
-                Console.WriteLine("ignoring packet seq " + udpPkt.Header.SequenceThis + " " + seqAcked);
-                return;
-            }
 
             seqAcked = udpPkt.Header.SequenceThis;
 
