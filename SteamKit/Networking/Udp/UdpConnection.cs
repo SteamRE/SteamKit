@@ -377,6 +377,12 @@ namespace SteamKit
             if ( !udpPkt.IsValid )
                 return;
 
+            if (udpPkt.Header.SequenceThis <= seqAcked)
+            {
+                Console.WriteLine("ignoring packet seq " + udpPkt.Header.SequenceThis + " " + seqAcked);
+                return;
+            }
+
             seqAcked = udpPkt.Header.SequenceThis;
 
             switch ( udpPkt.Header.PacketType )
