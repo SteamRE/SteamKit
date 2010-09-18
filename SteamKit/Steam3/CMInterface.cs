@@ -152,7 +152,10 @@ namespace SteamKit
             SteamGlobalUserID userid = clientTGT.UserID;
             MicroTime creationTime = MicroTime.Deserialize( SteamGlobal.AccountRecord.GetDescriptor( BlobLib.AuthFields.eFieldTimestamp2 ) );
 
-            logon.ProtoHeader.client_steam_id = new SteamID((uint)(userid.AccountID * 2 + userid.Instance), EUniverse.Public, EAccountType.Individual).ConvertToUint64();
+            SteamID steamid = new SteamID();
+            steamid.SetFromSteam2( userid, EUniverse.Public );
+
+            logon.ProtoHeader.client_steam_id = steamid.ConvertToUint64();
             logon.ProtoHeader.client_session_id = 0;
 
             logon.Proto.obfustucated_private_ip = NetHelpers.GetIPAddress(NetHelpers.GetLocalIP()) ^ MsgClientLogOnWithCredentials.ObfuscationMask;

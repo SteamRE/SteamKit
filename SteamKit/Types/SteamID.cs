@@ -90,6 +90,16 @@ namespace SteamKit
             this.steamid.Data = ulSteamID;
         }
 
+        public void SetFromSteam2( SteamGlobalUserID steam2id, EUniverse universe )
+        {
+            BitVector64 usersplit = new BitVector64( steam2id.AccountID );
+
+            this.AccountType = EAccountType.Individual;
+            this.AccountInstance = steam2id.Instance;
+            this.AccountUniverse = universe;
+            this.AccountID = (uint)usersplit[ 0, 0xFFFFFFFF ] * 2 + (uint)usersplit[ 32, 0xFFFFFFFF ];
+        }
+
         public UInt64 ConvertToUint64()
         {
             return this.steamid.Data;
