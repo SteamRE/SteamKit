@@ -1,0 +1,100 @@
+#import "header.steamd"
+
+class MsgChannelEncryptRequest<EMsg::ChannelEncryptRequest> expects MsgHdr
+{
+	uint protocolVersion = 1;
+	EUniverse universe = EUniverse::Invalid;
+}
+
+class MsgChannelEncryptResponse<EMsg::ChannelEncryptResponse> expects MsgHdr
+{
+	uint protocolVersion = 1;
+	uint keySize = 128;
+}
+
+class MsgChannelEncryptResult<EMsg::ChannelEncryptResult> expects MsgHdr
+{
+	EResult result = EResult::Invalid;
+}
+
+class MsgMulti<EMsg::Multi> expects MsgHdrProtoBuf
+{
+	proto CMsgMulti proto;
+}
+
+class MsgClientNewLoginKeyAccepted<EMsg::ClientNewLoginKeyAccepted> expects ExtendedClientMsgHdr
+{
+	uint uniqueID;
+}
+ 
+class MsgClientHeartBeat<EMsg::ClientHeartBeat> expects MsgHdrProtoBuf
+{
+	proto CMsgClientHeartBeat proto;
+}
+
+class MsgClientLogon<EMsg::ClientLogon> expects MsgHdrProtoBuf
+{
+	proto CMsgClientLogon proto;
+}
+
+class MsgClientLogonResponse<EMsg::ClientLogOnResponse> expects MsgHdrProtoBuf
+{
+	proto CMsgClientLogonResponse proto;
+}
+
+class MsgGSServerType<EMsg::GSServerType> expects MsgHdrProtoBuf
+{
+	proto CMsgGSServerType proto;
+}
+
+class MsgClientRegisterAuthTicketWithCM<EMsg::ClientRegisterAuthTicketWithCM> expects MsgHdrProtoBuf
+{
+	proto CMsgClientRegisterAuthTicketWithCM proto;
+}
+
+class MsgClientGetAppOwnershipTicket<EMsg::ClientGetAppOwnershipTicket> expects MsgHdrProtoBuf
+{
+	proto CMsgClientGetAppOwnershipTicket proto;
+}
+
+class MsgClientGetAppOwnershipTicketResponse<EMsg::ClientGetAppOwnershipTicketResponse> expects MsgHdrProtoBuf
+{
+	proto CMsgClientGetAppOwnershipTicketResponse proto;
+}
+
+class MsgClientAuthList<EMsg::ClientAuthList> expects MsgHdrProtoBuf
+{
+	proto CMsgClientAuthList proto;
+}
+
+class MsgClientRequestFriendData<EMsg::ClientRequestFriendData> expects MsgHdrProtoBuf
+{
+	proto CMsgClientRequestFriendData proto;
+}
+
+class MsgClientChangeStatus<EMsg::ClientChangeStatus> expects ExtendedClientMsgHdr
+{
+	byte personaState;
+}
+
+class MsgClientPersonaState<EMsg::ClientPersonaState> expects MsgHdrProtoBuf
+{
+	proto CMsgClientPersonaState proto;
+}
+
+class MsgClientSessionToken<EMsg::ClientSessionToken> expects MsgHdrProtoBuf
+{
+	proto CMsgClientSessionToken proto;
+}
+
+class MsgClientFriendsList<EMsg::ClientFriendsList> expects MsgHdrProtoBuf
+{
+	proto CMsgClientFriendsList proto;
+}
+
+class MsgClientFriendMsgIncoming<EMsg::ClientFriendMsgIncoming> expects ExtendedClientMsgHdr
+{
+	steamidmarshal ulong steamID;
+	EChatEntryType entryType;
+	int messageSize;
+}
