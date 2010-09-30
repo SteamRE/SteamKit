@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Text;
 using System.Net;
@@ -9,26 +10,6 @@ using Classless.Hasher;
 
 namespace SteamKit
 {
-
-
-    [StructLayout( LayoutKind.Sequential, Pack = 1 )]
-    class ChallengeData : Serializable<ChallengeData>
-    {
-        public const uint ChallengeMask = 0xA426DF2B;
-
-        public UInt32 ChallengeValue;
-        public UInt32 ServerLoad;
-    }
-
-    [StructLayout( LayoutKind.Sequential, Pack = 1 )]
-    class ConnectData : Serializable<ConnectData>
-    {
-        public const uint ChallengeMask = 0xA426DF2B;
-
-        public UInt32 ChallengeValue;
-    }
-
-
     class NetworkEventArgs : EventArgs
     {
         public IPEndPoint Sender { get; private set; }
@@ -55,7 +36,7 @@ namespace SteamKit
         public EMsg Msg { get; private set; }
         public bool Proto { get; private set; }
 
-        public NetMsgEventArgs( IPEndPoint sender, EMsg eMsg, byte[] data )
+        public NetMsgEventArgs( IPEndPoint sender, EMsg eMsg, MemoryStream data )
             : base( sender, data )
         {
             this.Msg = MsgUtil.GetMsg(eMsg);
@@ -65,9 +46,9 @@ namespace SteamKit
 
     class DataEventArgs : NetworkEventArgs
     {
-        public byte[] Data { get; private set; }
+        public MemoryStream Data { get; private set; }
 
-        public DataEventArgs( IPEndPoint sender, byte[] data )
+        public DataEventArgs( IPEndPoint sender, MemoryStream data )
             : base( sender )
         {
             this.Data = data;
@@ -116,10 +97,10 @@ namespace SteamKit
         public void SendChallengeReq( IPEndPoint ipAddr )
         {
             UdpPacket packet = new UdpPacket( EUdpPacketType.ChallengeReq );
-            packet.Header.SequenceThis = 1;
-            packet.Header.SequenceAcked = seqAcked;
+            packet.Header.SeqThis = 1;
+            packet.Header.SeqAck = seqAcked;
 
-            byte[] data = packet.GetData();
+            byte[] data = packet.GetData().ToArray();
 
             udpSock.Send( data, ipAddr );
         }
@@ -129,19 +110,19 @@ namespace SteamKit
             seqThis++;
 
             UdpPacket packet = new UdpPacket( EUdpPacketType.Connect );
-            packet.Header.SequenceThis = seqThis;
-            packet.Header.SequenceAcked = seqAcked;
-            packet.Header.DestinationConnID = remoteConnID;
+            packet.Header.SeqThis = seqThis;
+            packet.Header.SeqAck = seqAcked;
+            packet.Header.DestConnID = remoteConnID;
 
             packet.Header.PacketsInMsg = 1;
-            packet.Header.MsgStartSequence = seqThis;
+            packet.Header.MsgStartSeq = seqThis;
 
             ConnectData cd = new ConnectData();
-            cd.ChallengeValue = challengeValue ^ ConnectData.ChallengeMask;
+            cd.ChallengeValue = challengeValue ^ ConnectData.CHALLENGE_MASK;
 
-            packet.SetPayload( cd.Serialize() );
+            packet.SetPayload( cd.serialize() );
 
-            byte[] data = packet.GetData();
+            byte[] data = packet.GetData().ToArray();
 
             udpSock.Send( data, ipAddr );
         }
@@ -151,62 +132,46 @@ namespace SteamKit
             seqThis++;
 
             UdpPacket packet = new UdpPacket( EUdpPacketType.Data );
-            packet.Header.SequenceThis = seqThis;
-            packet.Header.SequenceAcked = seqAcked;
-            packet.Header.DestinationConnID = remoteConnID;
+            packet.Header.SeqThis= seqThis;
+            packet.Header.SeqAck = seqAcked;
+            packet.Header.DestConnID = remoteConnID;
 
             packet.Header.PacketsInMsg = 1;
-            packet.Header.MsgStartSequence = seqThis;
+            packet.Header.MsgStartSeq = seqThis;
 
             data = netFilter.ProcessOutgoing( data );
 
-            packet.SetPayload( data );
+            packet.SetPayload( new MemoryStream( data ) );
 
-            byte[] packetData = packet.GetData();
+            byte[] packetData = packet.GetData().ToArray();
 
             udpSock.Send( packetData, ipAddr );
         }
 
-        public void SendNetMsg<MsgHdr, Hdr>( ClientMsg<MsgHdr, Hdr> clientMsg, IPEndPoint ipAddr )
-            where Hdr : Serializable<Hdr>, IMsgHdr, new()
-            where MsgHdr : Serializable<MsgHdr>, IClientMsg, new()
+        public void SendNetMsg( IClientMsg clientMsg, IPEndPoint endPoint )
         {
-            Console.WriteLine( "Sending EMsg: " + clientMsg.MsgHeader.GetEMsg() );
-
-            SendData( clientMsg.Serialize(), ipAddr );
+            SendData( clientMsg.serialize().ToArray(), endPoint );
         }
 
-        public void SendNetMsg<ProtoBuf>(ClientMsgProtobuf<ProtoBuf> clientMsgProto, IPEndPoint ipAddr)
-            where ProtoBuf : global::ProtoBuf.IExtensible, new()
-        {
-            Console.WriteLine("Sending EMsg: " + clientMsgProto.Header.GetEMsg());
-
-            SendData(clientMsgProto.Serialize(), ipAddr);
-        }
-
-        public void SendAck( IPEndPoint ipAddr )
+        public void SendAck(IPEndPoint ipAddr)
         {
             UdpPacket packet = new UdpPacket(EUdpPacketType.Datagram);
-            packet.Header.SequenceThis = 0;
-            packet.Header.SequenceAcked = seqAcked;
-            packet.Header.DestinationConnID = remoteConnID;
+            packet.Header.SeqThis = 0;
+            packet.Header.SeqAck = seqAcked;
+            packet.Header.DestConnID = remoteConnID;
 
             packet.Header.PacketsInMsg = 0;
-            packet.Header.MsgStartSequence = 0;
+            packet.Header.MsgStartSeq = 0;
 
-            byte[] packetData = packet.GetData();
+            byte[] packetData = packet.GetData().ToArray();
 
             udpSock.Send(packetData, ipAddr);
         }
 
         void RecvChallenge( UdpPacket udpPkt, IPEndPoint endPoint )
         {
-            int size = Marshal.SizeOf( typeof( ChallengeData ) );
-
-            if ( udpPkt.Payload.Length < size )
-                return;
-
-            ChallengeData cr = ChallengeData.Deserialize( udpPkt.Payload );
+            ChallengeData cr = new ChallengeData();
+            cr.deserialize( udpPkt.Payload );
 
             if ( ChallengeReceived != null )
                 ChallengeReceived( this, new ChallengeEventArgs( endPoint, cr ) );
@@ -234,23 +199,17 @@ namespace SteamKit
 
         void RecvData( UdpPacket udpPkt, IPEndPoint endPoint )
         {
-            if (udpPkt.Header.SequenceThis <= seqAcked)
-            {
-                Console.WriteLine("duplicate packet seq " + udpPkt.Header.SequenceThis + " " + seqAcked);
-                //return;
-            }
-
             uint curSeq = seqThis;
 
             NetPacket netPacket = null;
 
-            if ( packetMap.ContainsKey( udpPkt.Header.MsgStartSequence ) )
-                netPacket = packetMap[ udpPkt.Header.MsgStartSequence ];
+            if ( packetMap.ContainsKey( udpPkt.Header.MsgStartSeq ) )
+                netPacket = packetMap[ udpPkt.Header.MsgStartSeq ];
             else
             {
-                netPacket = new NetPacket( udpPkt.Header.MsgStartSequence, udpPkt.Header.PacketsInMsg );
+                netPacket = new NetPacket(udpPkt.Header.MsgStartSeq, udpPkt.Header.PacketsInMsg);
 
-                packetMap.Add( udpPkt.Header.MsgStartSequence, netPacket );
+                packetMap.Add(udpPkt.Header.MsgStartSeq, netPacket);
             }
 
             netPacket.AddData( udpPkt.Header, udpPkt.Payload );
@@ -259,7 +218,7 @@ namespace SteamKit
                 this.RecvNetPacket( udpPkt.Header, netPacket, endPoint );
 
             // send a datagram ack if we didn't do anything
-            if ( seqThis == curSeq )
+            if (seqThis == curSeq)
             {
                 SendAck(endPoint);
             }
@@ -267,9 +226,9 @@ namespace SteamKit
 
         void RecvNetPacket( UdpHeader udpHdr, NetPacket netPacket, IPEndPoint endPoint )
         {
-            byte[] data = netPacket.GetData();
+            MemoryStream data = netPacket.GetData();
 
-            packetMap.Remove( udpHdr.MsgStartSequence );
+            packetMap.Remove( udpHdr.MsgStartSeq );
 
             try
             {
@@ -280,28 +239,32 @@ namespace SteamKit
                 return;
             }
 
-            if ( data == null || data.Length < 4 )
+            if ( data.Length < 4 )
                 return; // we need at least an EMsg
 
-            EMsg eMsg = ( EMsg )BitConverter.ToUInt32( data, 0 );
+            byte[] peek = new byte[4];
+            data.Read(peek, 0, peek.Length);
+            data.Seek(0, SeekOrigin.Begin);
+
+            EMsg eMsg = ( EMsg )BitConverter.ToUInt32( peek, 0 );
             this.RecvNetMsg( eMsg, data, endPoint );
         }
 
-        void RecvNetMsg( EMsg eMsg, byte[] data, IPEndPoint endPoint )
+        void RecvNetMsg( EMsg eMsg, MemoryStream data, IPEndPoint endPoint )
         {
             Console.WriteLine( "Got EMsg: " + MsgUtil.GetMsg(eMsg) + " (Proto:" + MsgUtil.IsProtoBuf(eMsg) + ")" );
 
             if ( eMsg == EMsg.ChannelEncryptRequest )
             {
-                var encRec = ClientMsg<MsgChannelEncryptRequest, MsgHdr>.GetMsgHeader( data );
+                var encRec = new ClientMsg<MsgChannelEncryptRequest, MsgHdr>( data );
 
-                Console.WriteLine( "Got encryption request for universe: " + encRec.Universe );
+                Console.WriteLine( "Got encryption request for universe: " + encRec.Msg.Universe );
 
                 tempSessionKey = CryptoHelper.GenerateRandomBlock( 32 );
 
                 var encResp = new ClientMsg<MsgChannelEncryptResponse, MsgHdr>();
 
-                byte[] cryptedSessKey = CryptoHelper.RSAEncrypt( tempSessionKey, KeyManager.GetPublicKey( encRec.Universe ) );
+                byte[] cryptedSessKey = CryptoHelper.RSAEncrypt( tempSessionKey, KeyManager.GetPublicKey( encRec.Msg.Universe ) );
                 Crc crc = new Crc();
 
                 byte[] keyCrc = crc.ComputeHash( cryptedSessKey );
@@ -318,12 +281,12 @@ namespace SteamKit
 
             if ( eMsg == EMsg.ChannelEncryptResult )
             {
-                var encRes = ClientMsg<MsgChannelEncryptResult, MsgHdr>.GetMsgHeader( data );
+                var encRes = new ClientMsg<MsgChannelEncryptResult, MsgHdr>( data );
 
-                if ( encRes.Result == EResult.OK )
+                if ( encRes.Msg.Result == EResult.OK )
                     netFilter = new NetFilterEncryption( tempSessionKey );
 
-                Console.WriteLine( "Crypto result: " + encRes.Result );
+                Console.WriteLine( "Crypto result: " + encRes.Msg.Result );
             }
 
             if ( eMsg == EMsg.ClientLoggedOff )
@@ -331,29 +294,22 @@ namespace SteamKit
                 netFilter = new NetFilter( null );
             }
 
-            if ( MsgUtil.GetMsg(eMsg) == EMsg.Multi)
+            if ( MsgUtil.GetMsg(eMsg) == EMsg.Multi && MsgUtil.IsProtoBuf(eMsg))
             {
-                if (MsgUtil.IsProtoBuf(eMsg))
-                {
-                    this.MultiplexMsgMulti(data, endPoint);
-                }
-                else
-                {
-                    this.MultiplexMsgMultiOld(data, endPoint);
-                }
+                this.MultiplexMsgMulti(data, endPoint);
             }
 
             if ( NetMsgReceived != null )
                 NetMsgReceived( this, new NetMsgEventArgs( endPoint, eMsg, data ) );
         }
 
-        void MultiplexMsgMulti(byte[] data, IPEndPoint endPoint)
+        void MultiplexMsgMulti(MemoryStream data, IPEndPoint endPoint)
         {
-            var msgMulti = new ClientMsgProtobuf<CMsgMulti>( data );
+            var msgMulti = new ClientMsgProtobuf<MsgMulti>( data );
 
-            byte[] payload = msgMulti.Proto.message_body;
+            byte[] payload = msgMulti.Msg.Proto.message_body;
 
-            if ( msgMulti.Proto.size_unzipped > 0 )
+            if ( msgMulti.Msg.Proto.size_unzipped > 0 )
             {
                 try
                 {
@@ -363,24 +319,6 @@ namespace SteamKit
             }
 
             MultiplexPayload(payload, endPoint);
-        }
-
-        void MultiplexMsgMultiOld( byte[] data, IPEndPoint endPoint )
-        {
-            var msgMulti = new ClientMsg<MsgMulti, MsgHdr>( data );
-
-            byte[] payload = msgMulti.GetPayload();
-
-            if ( msgMulti.MsgHeader.UnzippedSize != 0 )
-            {
-                try
-                {
-                    payload = PKZipBuffer.Decompress( payload );
-                }
-                catch { return; }
-            }
-
-            MultiplexPayload( payload, endPoint );
         }
 
         private void MultiplexPayload( byte[] payload, IPEndPoint endPoint )
@@ -394,18 +332,18 @@ namespace SteamKit
 
                 EMsg eMsg = (EMsg)BitConverter.ToUInt32(subData, 0);
 
-                this.RecvNetMsg(eMsg, subData, endPoint);
+                this.RecvNetMsg(eMsg, new MemoryStream(subData), endPoint);
             }
         }
 
         void RecvUdpPacket( object sender, PacketReceivedEventArgs e )
         {
-            UdpPacket udpPkt = new UdpPacket( e.Packet.Data );
+            UdpPacket udpPkt = new UdpPacket( new MemoryStream(e.Packet.Data) );
 
             if ( !udpPkt.IsValid )
                 return;
 
-            seqAcked = udpPkt.Header.SequenceThis;
+            seqAcked = udpPkt.Header.SeqThis;
 
             switch ( udpPkt.Header.PacketType )
             {

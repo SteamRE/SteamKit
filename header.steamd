@@ -3,6 +3,7 @@
 #import "eresult.steamd"
 #import "accounttype.steamd"
 #import "echatentrytype.steamd"
+#import "netheader.steamd"
 
 class MsgHdr
 {

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Runtime.InteropServices;
+using System.IO;
 
 namespace SteamKit
 {
@@ -9,31 +10,35 @@ namespace SteamKit
     {
 
         public UdpHeader Header { get; private set; }
-        public byte[] Payload { get; private set; }
+        public MemoryStream Payload { get; private set; }
 
         public bool IsValid { get; private set; }
 
 
-        public UdpPacket( byte[] data )
+        public UdpPacket( MemoryStream ms )
         {
             this.IsValid = false;
 
-            int headerSize = Marshal.SizeOf( typeof( UdpHeader ) );
+            Header = new UdpHeader();
 
-            if ( data.Length < headerSize )
+            try
+            {
+                Header.deserialize(ms);
+            }
+            catch (Exception)
+            {
+                return;
+            }
+
+            if ( this.Header.Magic != UdpHeader.MAGIC )
                 return;
 
-            this.Header = UdpHeader.Deserialize( data );
+            Payload = new MemoryStream(Header.PayloadSize);
 
-            if ( this.Header == null )
-                return;
-
-            if ( this.Header.Magic != UdpHeader.PACKET_MAGIC )
-                return;
-
-            this.Payload = new byte[ Header.PayloadSize ];
-
-            Array.Copy( data, headerSize, Payload, 0, Payload.Length );
+            if(Header.PayloadSize > 0)
+                ms.CopyTo(Payload, Header.PayloadSize);
+    
+            Payload.Seek(0, SeekOrigin.Begin);
 
             this.IsValid = true;
 
@@ -42,7 +47,7 @@ namespace SteamKit
         public UdpPacket( EUdpPacketType type )
         {
             this.Header = new UdpHeader();
-            this.Payload = new byte[ 0 ];
+            this.Payload = new MemoryStream();
 
             this.Header.PacketType = type;
 
@@ -50,22 +55,24 @@ namespace SteamKit
         }
 
 
-        public void SetPayload( byte[] data )
+        public void SetPayload( MemoryStream ms )
         {
-            Payload = data;
+            Payload = ms;
         }
 
-        public byte[] GetData()
+        public MemoryStream GetData()
         {
-            Header.PayloadSize = ( ushort )Payload.Length;
-            Header.MsgSize = ( uint )Payload.Length;
+            Header.PayloadSize = (ushort)Payload.Length;
+            Header.MsgSize = (uint)Payload.Length;
 
-            ByteBuffer bb = new ByteBuffer();
+            MemoryStream header = Header.serialize();
 
-            bb.Append( Header.Serialize() );
-            bb.Append( Payload );
+            MemoryStream ms = new MemoryStream( (int)header.Length + (int)Payload.Length );
+            header.CopyTo(ms);
+            Payload.CopyTo(ms);
 
-            return bb.ToArray();
+            ms.Seek(0, SeekOrigin.Begin);
+            return ms;
         }
 
     }

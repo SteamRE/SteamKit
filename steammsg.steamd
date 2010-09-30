@@ -1,98 +1,114 @@
 #import "header.steamd"
 
-class MsgChannelEncryptRequest<EMsg::ChannelEncryptRequest> expects MsgHdr
+class MsgChannelEncryptRequest<EMsg::ChannelEncryptRequest>
 {
-	uint protocolVersion = 1;
+	const uint PROTOCOL_VERSION = 1;
+	
+	uint protocolVersion = MsgChannelEncryptRequest::PROTOCOL_VERSION;
 	EUniverse universe = EUniverse::Invalid;
 }
 
-class MsgChannelEncryptResponse<EMsg::ChannelEncryptResponse> expects MsgHdr
+class MsgChannelEncryptResponse<EMsg::ChannelEncryptResponse>
 {
-	uint protocolVersion = 1;
+	uint protocolVersion = MsgChannelEncryptRequest::PROTOCOL_VERSION;
 	uint keySize = 128;
 }
 
-class MsgChannelEncryptResult<EMsg::ChannelEncryptResult> expects MsgHdr
+class MsgChannelEncryptResult<EMsg::ChannelEncryptResult>
 {
 	EResult result = EResult::Invalid;
 }
 
-class MsgMulti<EMsg::Multi> expects MsgHdrProtoBuf
+class MsgMulti<EMsg::Multi>
 {
 	proto CMsgMulti proto;
 }
 
-class MsgClientNewLoginKeyAccepted<EMsg::ClientNewLoginKeyAccepted> expects ExtendedClientMsgHdr
+class MsgClientNewLoginKey<EMsg::ClientNewLoginKey>
+{
+	uint uniqueID;
+	byte<20> loginKey;
+}
+
+class MsgClientNewLoginKeyAccepted<EMsg::ClientNewLoginKeyAccepted>
 {
 	uint uniqueID;
 }
  
-class MsgClientHeartBeat<EMsg::ClientHeartBeat> expects MsgHdrProtoBuf
+class MsgClientHeartBeat<EMsg::ClientHeartBeat>
 {
 	proto CMsgClientHeartBeat proto;
 }
 
-class MsgClientLogon<EMsg::ClientLogon> expects MsgHdrProtoBuf
+class MsgClientLogon<EMsg::ClientLogon>
 {
+	const uint ObfuscationMask = 0xBAADF00D;
+	const uint CurrentProtocol = 65565;
+
 	proto CMsgClientLogon proto;
 }
 
-class MsgClientLogonResponse<EMsg::ClientLogOnResponse> expects MsgHdrProtoBuf
+class MsgClientLogonResponse<EMsg::ClientLogOnResponse>
 {
 	proto CMsgClientLogonResponse proto;
 }
 
-class MsgGSServerType<EMsg::GSServerType> expects MsgHdrProtoBuf
+class MsgGSServerType<EMsg::GSServerType>
 {
 	proto CMsgGSServerType proto;
 }
 
-class MsgClientRegisterAuthTicketWithCM<EMsg::ClientRegisterAuthTicketWithCM> expects MsgHdrProtoBuf
+class MsgGSStatusReply<EMsg::GSStatusReply>
+{
+	proto CMsgGSStatusReply proto;
+}
+
+class MsgClientRegisterAuthTicketWithCM<EMsg::ClientRegisterAuthTicketWithCM>
 {
 	proto CMsgClientRegisterAuthTicketWithCM proto;
 }
 
-class MsgClientGetAppOwnershipTicket<EMsg::ClientGetAppOwnershipTicket> expects MsgHdrProtoBuf
+class MsgClientGetAppOwnershipTicket<EMsg::ClientGetAppOwnershipTicket>
 {
 	proto CMsgClientGetAppOwnershipTicket proto;
 }
 
-class MsgClientGetAppOwnershipTicketResponse<EMsg::ClientGetAppOwnershipTicketResponse> expects MsgHdrProtoBuf
+class MsgClientGetAppOwnershipTicketResponse<EMsg::ClientGetAppOwnershipTicketResponse>
 {
 	proto CMsgClientGetAppOwnershipTicketResponse proto;
 }
 
-class MsgClientAuthList<EMsg::ClientAuthList> expects MsgHdrProtoBuf
+class MsgClientAuthList<EMsg::ClientAuthList>
 {
 	proto CMsgClientAuthList proto;
 }
 
-class MsgClientRequestFriendData<EMsg::ClientRequestFriendData> expects MsgHdrProtoBuf
+class MsgClientRequestFriendData<EMsg::ClientRequestFriendData>
 {
 	proto CMsgClientRequestFriendData proto;
 }
 
-class MsgClientChangeStatus<EMsg::ClientChangeStatus> expects ExtendedClientMsgHdr
+class MsgClientChangeStatus<EMsg::ClientChangeStatus>
 {
 	byte personaState;
 }
 
-class MsgClientPersonaState<EMsg::ClientPersonaState> expects MsgHdrProtoBuf
+class MsgClientPersonaState<EMsg::ClientPersonaState>
 {
 	proto CMsgClientPersonaState proto;
 }
 
-class MsgClientSessionToken<EMsg::ClientSessionToken> expects MsgHdrProtoBuf
+class MsgClientSessionToken<EMsg::ClientSessionToken>
 {
 	proto CMsgClientSessionToken proto;
 }
 
-class MsgClientFriendsList<EMsg::ClientFriendsList> expects MsgHdrProtoBuf
+class MsgClientFriendsList<EMsg::ClientFriendsList>
 {
 	proto CMsgClientFriendsList proto;
 }
 
-class MsgClientFriendMsgIncoming<EMsg::ClientFriendMsgIncoming> expects ExtendedClientMsgHdr
+class MsgClientFriendMsgIncoming<EMsg::ClientFriendMsgIncoming>
 {
 	steamidmarshal ulong steamID;
 	EChatEntryType entryType;

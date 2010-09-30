@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.IO;
 
 namespace SteamKit
 {
@@ -13,8 +14,9 @@ namespace SteamKit
             this.input = input;
         }
 
-        public virtual byte[] ProcessIncoming( byte[] data )
+        public virtual MemoryStream ProcessIncoming( MemoryStream data )
         {
+            data.Seek(0, SeekOrigin.Begin);
             return data;
         }
 
@@ -33,29 +35,14 @@ namespace SteamKit
         {
         }
 
-        public override byte[] ProcessIncoming( byte[] data )
+        public override MemoryStream ProcessIncoming( MemoryStream data )
         {
-            byte[] output;
-
-            try
-            {
-                output = CryptoHelper.SymmetricDecrypt(data, aesSessionKey);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("ProcessIncoming: " + e.Message);
-                return null;
-            }
-
-            return output;
+            return CryptoHelper.SymmetricDecrypt( data, aesSessionKey );
         }
 
         public override byte[] ProcessOutgoing( byte[] data )
         {
-            byte[] output = CryptoHelper.SymmetricEncrypt( data, aesSessionKey );
-
-            return output;
-
+            return CryptoHelper.SymmetricEncrypt( data, aesSessionKey );
         }
     }
 }

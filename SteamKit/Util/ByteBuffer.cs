@@ -11,6 +11,7 @@ namespace SteamKit
         MemoryStream buffer;
 
         public bool SwapEndianness { get; set; }
+        public long Length { get { return buffer.Length; } }
 
         public ByteBuffer()
         {
@@ -29,6 +30,11 @@ namespace SteamKit
             : this( capacity )
         {
             this.SwapEndianness = swapEndianness;
+        }
+
+        public void Flip()
+        {
+            buffer.Seek( 0, SeekOrigin.Begin );
         }
 
         public MemoryStream GetStreamForWrite()
@@ -157,5 +163,11 @@ namespace SteamKit
         {
             return buffer.ToArray();
         }
+
+        public void CopyTo(MemoryStream ms)
+        {
+            buffer.CopyTo( ms );
+        }
+
     }
 }
