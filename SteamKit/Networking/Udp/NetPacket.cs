@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.IO;
 
 namespace SteamKit
 {
     struct MsgSegment
     {
         public uint DataSequence;
-        public byte[] Data;
+        public MemoryStream Data;
     }
 
     class NetPacket
@@ -18,6 +19,7 @@ namespace SteamKit
         uint numPkts;
 
         List<MsgSegment> msgSegments;
+        int totalSize;
 
 
         public bool IsCompleted { get; private set; }
@@ -31,12 +33,13 @@ namespace SteamKit
             this.seqEnd = seqStart + numPkts;
 
             this.numPkts = numPkts;
+            this.totalSize = 0;
 
             this.IsCompleted = false;
         }
 
 
-        public void AddData( UdpHeader udpHdr, byte[] data )
+        public void AddData( UdpHeader udpHdr, MemoryStream data )
         {
             if ( HasData( udpHdr ) )
                 return;
@@ -44,19 +47,17 @@ namespace SteamKit
             MsgSegment msgSeg = new MsgSegment();
 
             msgSeg.Data = data;
-            msgSeg.DataSequence = udpHdr.SequenceThis;
+            msgSeg.DataSequence = udpHdr.SeqThis;
 
             msgSegments.Add( msgSeg );
+            totalSize += (int)data.Length;
 
             if ( msgSegments.Count == this.numPkts )
                 IsCompleted = true;
         }
 
-        public byte[] GetData()
+        public MemoryStream GetData()
         {
-            uint size = GetSize();
-            byte[] data = new byte[ size ];
-
             msgSegments.Sort( ( left, right ) =>
             {
                 if ( left.DataSequence < right.DataSequence )
@@ -68,30 +69,21 @@ namespace SteamKit
                 return 1;
             } );
 
-            int offset = 0;
+            MemoryStream final = new MemoryStream( totalSize );
             msgSegments.ForEach( ( seg ) =>
             {
-                Array.Copy( seg.Data, 0, data, offset, seg.Data.Length );
-                offset += seg.Data.Length;
+                seg.Data.CopyTo(final);
             } );
 
-            return data;
+            final.Seek(0, SeekOrigin.Begin);
+            return final;
         }
-
-        public uint GetSize()
-        {
-            uint size = 0;
-            msgSegments.ForEach( ( seg ) => { size += (uint)seg.Data.Length; } );
-
-            return size;
-        }
-
 
         bool HasData( UdpHeader udpHdr )
         {
             foreach ( MsgSegment msgSeg in msgSegments )
             {
-                if ( msgSeg.DataSequence == udpHdr.SequenceThis )
+                if ( msgSeg.DataSequence == udpHdr.SeqThis )
                     return true;
             }
             return false;

@@ -179,6 +179,80 @@ namespace SteamKit
             return output;
         }
 
+        public static MemoryStream SymmetricEncrypt(MemoryStream input, byte[] key)
+        {
+            RijndaelManaged aes = new RijndaelManaged();
+            aes.BlockSize = 128;
+            aes.KeySize = 256;
+
+            // generate iv
+            byte[] iv = PsuedoRandom.Instance.GenerateRandomBlock(16);
+            byte[] cryptedIv = new byte[16];
+
+            // encrypt iv using ECB and provided key
+            aes.Mode = CipherMode.ECB;
+            aes.Padding = PaddingMode.None;
+
+            ICryptoTransform aesTransform = aes.CreateEncryptor(key, null);
+            cryptedIv = aesTransform.TransformFinalBlock(iv, 0, iv.Length);
+
+            // encrypt input plaintext with CBC using the generated IV and the provided key
+            aes.Mode = CipherMode.CBC;
+            aes.Padding = PaddingMode.PKCS7;
+            aesTransform = aes.CreateEncryptor(key, iv);
+
+            MemoryStream ms = new MemoryStream();
+
+            ms.Write(cryptedIv, 0, cryptedIv.Length);
+
+            CryptoStream cs = new CryptoStream(ms, aesTransform, CryptoStreamMode.Write);
+
+            input.CopyTo(cs);
+            cs.FlushFinalBlock();
+
+
+            // clean up
+            cs.Close();
+            aes.Clear();
+
+            ms.Seek(0, SeekOrigin.Begin);
+            return ms;
+        }
+
+        public static MemoryStream SymmetricDecrypt(MemoryStream input, byte[] key)
+        {
+            RijndaelManaged aes = new RijndaelManaged();
+            aes.BlockSize = 128;
+            aes.KeySize = 256;
+
+            // first 16 bytes of input is the ECB encrypted IV
+            byte[] cryptedIv = new byte[16];
+            byte[] iv = new byte[cryptedIv.Length];
+            input.Read(cryptedIv, 0, cryptedIv.Length);
+
+            // the rest is ciphertext
+
+            // decrypt the IV using ECB
+            aes.Mode = CipherMode.ECB;
+            aes.Padding = PaddingMode.None;
+
+            ICryptoTransform aesTransform = aes.CreateDecryptor(key, null);
+            iv = aesTransform.TransformFinalBlock(cryptedIv, 0, cryptedIv.Length);
+
+            aes.Mode = CipherMode.CBC;
+            aes.Padding = PaddingMode.PKCS7;
+
+            aesTransform = aes.CreateDecryptor(key, iv);
+
+            MemoryStream plain = new MemoryStream((int)input.Length);
+            CryptoStream cs = new CryptoStream(input, aesTransform, CryptoStreamMode.Read);
+
+            cs.CopyTo(plain);
+            plain.Seek(0, SeekOrigin.Begin);
+
+            return plain;
+        }
+
         public static byte[] GenerateRandomBlock( int size )
         {
             return PsuedoRandom.Instance.GenerateRandomBlock( size );

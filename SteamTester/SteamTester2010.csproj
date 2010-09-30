@@ -73,6 +73,10 @@
       <Project>{DFB5290A-FFCF-46D1-954F-A51711290248}</Project>
       <Name>BlobLib</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Hasher\Hasher.csproj">
+      <Project>{692B115B-C471-4A36-B7DB-0876ADA83857}</Project>
+      <Name>Hasher</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SteamKit\SteamKit.csproj">
       <Project>{5C00E764-1F76-4E3E-B759-2853DD77C28D}</Project>
       <Name>SteamKit</Name>
