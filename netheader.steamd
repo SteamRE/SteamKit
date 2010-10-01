@@ -47,3 +47,15 @@ class ConnectData
 	
 	uint challengeValue;
 }
+
+class Accept
+{
+}
+
+class Datagram
+{
+}
+
+class Disconnect
+{
+}
