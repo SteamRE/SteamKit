@@ -111,6 +111,6 @@ class MsgClientFriendsList<EMsg::ClientFriendsList>
 class MsgClientFriendMsgIncoming<EMsg::ClientFriendMsgIncoming>
 {
 	steamidmarshal ulong steamID;
-	EChatEntryType entryType;
+	EChatEntryType entryType = EChatEntryType::Invalid;
 	int messageSize;
 }
