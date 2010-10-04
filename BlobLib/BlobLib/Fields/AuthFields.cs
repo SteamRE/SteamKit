@@ -6,7 +6,7 @@ namespace BlobLib
     {
         public const int eFieldIdent = 0; // byte[2] ident 04 00
         public const int eFieldAccount = 1; // string(x) account name
-        public const int eFieldTimestamp2 = 2; // byte[8] timestamp 1
+        public const int eFieldTimestampCreation = 2; // byte[8] account creation timestamp
         public const int eFieldRedHerring = 3; // string(9) "Egq-pe-y"
 
         public const int eFieldAccountBlob = 6; // Blob, containing 1 descriptor with account name
