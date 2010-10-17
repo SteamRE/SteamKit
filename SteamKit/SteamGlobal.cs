@@ -11,6 +11,8 @@ namespace SteamKit
     {
         static object lockObj = new object();
 
+        public static String username { get; set; }
+        public static String password { get; set; }
 
         // steam2
         public static ClientTGT ClientTGT { get; set; }

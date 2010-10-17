@@ -173,8 +173,8 @@ namespace SteamKit
             //logon.Proto.login_key = ""; // todo
             //logon.Proto.machine_id = File.ReadAllBytes(@"C:\steamre\machineid.bin"); // todo
 
-            logon.Msg.Proto.account_name = "username";
-            logon.Msg.Proto.password = "password";
+            logon.Msg.Proto.account_name = SteamGlobal.username;
+            logon.Msg.Proto.password = SteamGlobal.password;
 
             // private IP inside serverTGT
             byte[] privateIP = BitConverter.GetBytes( NetHelpers.GetIPAddress( NetHelpers.GetLocalIP() ) );
