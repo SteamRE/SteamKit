@@ -150,7 +150,7 @@ namespace SteamKit
             ClientTGT clientTGT = SteamGlobal.ClientTGT;
 
             SteamGlobalUserID userid = clientTGT.UserID;
-            MicroTime creationTime = MicroTime.Deserialize( SteamGlobal.AccountRecord.GetDescriptor( BlobLib.AuthFields.eFieldTimestamp2 ) );
+            MicroTime creationTime = MicroTime.Deserialize( SteamGlobal.AccountRecord.GetDescriptor( BlobLib.AuthFields.eFieldTimestampCreation ) );
 
             SteamID steamid = new SteamID();
             steamid.SetFromSteam2( userid, EUniverse.Public );
