@@ -119,6 +119,9 @@ namespace SteamKit
                 return false;
             }
 
+            SteamGlobal.username = userName;
+            SteamGlobal.password = password;
+
             return true;
         }
 
