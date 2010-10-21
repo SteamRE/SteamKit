@@ -23,6 +23,8 @@ public:
 	void DataEncrypted(const uint8* pubPlaintextData, uint32 cubPlaintextData);
 	void DataDecrypted(const uint8* pubPlaintextData, uint32 cubPlaintextData);
 
+	const char* GetFileName( const char* file );
+
 private:
 	bool HandleNetMsg( ENetDirection eDirection, EMsg eMsg, const uint8 *pData, uint32 cubData );
 	bool MultiplexMsgMulti( ENetDirection eDirection, const uint8 *pData, uint32 cubData );
@@ -32,5 +34,7 @@ private:
 	char m_szSessionDir[MAX_PATH];
 	uint32 m_uiMsgNum;
 };
+
+extern CDataDumper* g_Dumper;
 
 #endif // !DATADUMPER_H_

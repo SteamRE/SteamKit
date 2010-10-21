@@ -8,9 +8,7 @@
 
 #define STEAM_API_EXPORTS
 
-
 #include "steam/steamtypes.h"
-
 
 typedef int ( STEAM_CALL *SteamExeFrameFn )( int, int );
 typedef int ( STEAM_CALL *SteamDllMainFn )( int , char ** );

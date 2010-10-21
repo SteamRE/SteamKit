@@ -62,7 +62,7 @@ void CLogger::AppendFile( const char *szFileName, const char *szString, ... )
 
 	szBuff[ buffSize - 1 ] = 0;
 
-	this->LogFileData( GetFileDir( szFileName ), (uint8 *)szBuff, len, true );
+	this->LogFileData( szFileName, (uint8 *)szBuff, len, true );
 
 	delete [] szBuff;
 }

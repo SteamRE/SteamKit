@@ -6,6 +6,7 @@
 #include "bitbuf.h"
 
 #include "steam/clientmsgs.h"
+#include "steammessages_base.pb.h"
 
 CDataDumper::CDataDumper() :
 	m_uiMsgNum(0)
@@ -30,8 +31,10 @@ void CDataDumper::DataDecrypted(const uint8* pubPlaintextData, uint32 cubPlainte
 
 bool CDataDumper::HandleNetMsg( ENetDirection eDirection, EMsg eMsg, const uint8 *pData, uint32 cubData )
 {
-	//if ( eMsg == k_EMsgMulti )
-	//	return this->MultiplexMsgMulti(eDirection, pData, cubData);
+	eMsg = (EMsg)((int)eMsg & (~0x80000000));
+
+	if ( eMsg == k_EMsgMulti )
+		return this->MultiplexMsgMulti(eDirection, pData, cubData);
 
 	const char* szFile = this->GetFileName(eDirection, eMsg);
 	g_Logger->LogFileData(szFile, pData, cubData);
@@ -47,49 +50,78 @@ const char* CDataDumper::GetFileName(ENetDirection eDirection, EMsg eMsg)
 	
 	sprintf_s(szFileName, sizeof( szFileName ), "%s%d_%s_%d_%s.bin", m_szSessionDir,
 		++m_uiMsgNum, (eDirection == k_eNetIncoming ? "in" : "out"), eMsg,
-		PchNameFromEMsg(eMsg));
+		g_Crypto->GetMessage(eMsg));
+
+	return szFileName;
+}
+
+const char* CDataDumper::GetFileName( const char* file )
+{
+	static char szFileName[MAX_PATH];
+	
+	sprintf_s(szFileName, sizeof( szFileName ), "%s%s", m_szSessionDir,
+		file);
 
 	return szFileName;
 }
 
 bool CDataDumper::MultiplexMsgMulti( ENetDirection eDirection, const uint8 *pData, uint32 cubData )
 {
-	MsgHdr_t *pMsgHdr = (MsgHdr_t *)pData;
-	MsgMulti_t *pMsgBody = (MsgMulti_t *)( pData + sizeof( MsgHdr_t ) );
+	struct ProtoHdr 
+	{
+		EMsg msg;
+		int headerLength;
+	};
 
-	size_t hdrSize = sizeof( MsgHdr_t ) + sizeof( MsgMulti_t );
+	
+	ProtoHdr *pProtoHdr = (ProtoHdr*) pData;
+
+	g_Logger->LogConsole("Multi: msg %d length %d\n", (pProtoHdr->msg & (~0x80000000)), pProtoHdr->headerLength );
+
+	CMsgProtoBufHeader protoheader;
+	protoheader.ParseFromArray( pData + 8, pProtoHdr->headerLength );
+
+	g_Logger->LogConsole("MultiProto\n");
+
+	CMsgMulti multi;
+	multi.ParseFromArray( pData + 8 + pProtoHdr->headerLength, cubData - 8 - pProtoHdr->headerLength );
+
+	g_Logger->LogConsole("MultiMsg: %d %d\n", multi.size_unzipped(), multi.message_body().length() );
 
 	uint8 *pMsgData = NULL;
 	uint32 cubMsgData = 0;
 	bool bDecomp = false;
 
-	if ( pMsgBody->m_cubUnzipped != 0 )
+	if ( multi.has_size_unzipped() && multi.size_unzipped() != 0 )
 	{
 		// decompress our data
 
-		uint8 *pDecompressed = new uint8[ pMsgBody->m_cubUnzipped ];
-		uint8 *pCompressed = (uint8 *)( pData + hdrSize );
-		uint32 cubCompressed = cubData - hdrSize;
+		uint8 *pDecompressed = new uint8[ multi.size_unzipped() ];
+		uint8 *pCompressed = (uint8 *)( multi.message_body().c_str() );
+		uint32 cubCompressed = multi.message_body().length();
 
-		bool bZip = CZip::Inflate( pCompressed, cubCompressed, pDecompressed, pMsgBody->m_cubUnzipped );
+		g_Logger->LogConsole("decomp: %x comp: %x cubcomp: %d unzipped: %d\n", pDecompressed, pCompressed, cubCompressed, multi.size_unzipped());
+
+		// whoever wrote CZip needs to be shot
+		bool bZip = false; //CZip::Inflate( pCompressed, cubCompressed, pDecompressed, multi.size_unzipped() );
 
 		if ( !bZip )
 		{
 			delete [] pDecompressed;
 
-			g_Logger->AppendFile( "EMsgLog.txt", "Decompression failed!!\r\n" );
+			g_Logger->LogConsole("Unable to decompress buffer\n");
 
 			return true;
 		}
 
 		pMsgData = pDecompressed;
-		cubMsgData = pMsgBody->m_cubUnzipped;
+		cubMsgData = multi.size_unzipped();
 		bDecomp = bZip;
 	}
 	else
 	{
-		pMsgData = (uint8 *)( pData + hdrSize );
-		cubMsgData = cubData - hdrSize;
+		pMsgData = (uint8 *)( multi.message_body().c_str() );
+		cubMsgData = multi.message_body().length();
 	}
 
 	bf_read reader( pMsgData, cubMsgData );
