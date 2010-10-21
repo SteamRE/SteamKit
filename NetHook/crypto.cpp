@@ -1,5 +1,6 @@
 #include "crypto.h"
 
+#include "DataDumper.h"
 #include "logger.h"
 #include "utils.h"
 
@@ -9,11 +10,13 @@
 #include "steam/steamtypes.h"
 
 #include "tier0/dbg.h"
+#undef GetMessage
 
 CCrypto* g_Crypto = NULL;
 
 bool (__cdecl *Encrypt_Orig)(const uint8*, uint32, uint8*, uint32*, uint32);
 bool (__cdecl *Decrypt_Orig)(const uint8*, uint32, uint8*, uint32*, const uint8*, uint32);
+bool (__cdecl *GetMessageFn)( int * );
 
 CCrypto::CCrypto(ICryptoCallback* callback) :
 	m_Callback(callback)
@@ -36,6 +39,31 @@ CCrypto::CCrypto(ICryptoCallback* callback) :
 	);
 
 	g_Logger->LogConsole( "CCrypto::SymmetricDecrypt = 0x%x\n", Decrypt_Orig );
+
+	/*
+	"51 A1 FC 24 33 38 | 8B 08 85 C9 75 05 89 0C 24 EB 28 E8 DA 09 E7 FF 8D 14 24 52 6A 04 6A 00 68 BC"
+	"\x51\xA1\xFF\xFF\xFF\xFF\x8B\x08\x85\xC9\x75\x05\x89\x0C\x24\xEB\x28\xE8"
+	"xx????"
+
+	  "\x51\xA1\x00\x95\x32\x38\x8B\x08\x85\xC9\x75\x05\x89\x0C\x24\xEB\x28\xE8\xA1\xBF\xE5\xFF\x8D\x14\x24\x52"
+  "\x6A\x04\x6A\x00\x68\x9C\x35\x36\x38\x6A\x00\x68\xF8\xEF\x38\x38\x8B\xC8\x89\x44\x24\x18",
+  "xx????xxxxx?xxxx?x????xxxx"
+  "xxxxxxxxxxxxxxxxxxxxxx",
+  */
+
+ bRet = steamClientScan.FindFunction(
+  "\x51\xA1\x00\x95\x32\x38\x8B\x08\x85\xC9\x75\x05\x89\x0C\x24\xEB\x28\xE8",
+  "xx????xxxxxxxxxxxx",
+  (void **) &GetMessageFn
+ );
+
+ g_Logger->LogConsole( "CMessageList::GetMessage = 0x%x\n", GetMessageFn );
+
+ for ( int x = 0; x < 7003; ++x )
+ {
+  //g_Logger->AppendFile( g_Dumper->GetFileName( "emsg_list.txt" ), "\t%s = %d,\r\n", this->GetMessage( (EMsg)x ), x );
+ }
+
 
 	static bool (__cdecl *encrypt)(const uint8*, uint32, uint8*, uint32*, uint32) = &CCrypto::SymmetricEncrypt;
 	static bool (__cdecl *decrypt)(const uint8*, uint32, uint8*, uint32*, const uint8*, uint32) = &CCrypto::SymmetricDecrypt;
@@ -108,4 +136,38 @@ bool __cdecl CCrypto::SymmetricDecrypt( const uint8 *pubEncryptedData, uint32 cu
 		g_Crypto->m_Callback->DataDecrypted(pubPlaintextData, *pcubPlaintextData);
 
 	return ret;
+}
+
+const char* CCrypto::GetMessage( EMsg eMsg )
+{
+ static char *szMsg = new char[ 200 ];
+
+ int ieMsg = (int)eMsg;
+
+ bool bRet = false;
+
+ __asm
+ {
+  pushad
+
+  lea esi, [ szMsg ]
+  mov ecx, 200
+  mov edi, ieMsg
+
+  push 0xFF
+
+  call GetMessageFn
+  mov bRet, al
+
+  popad
+ }
+
+ if ( bRet )
+ {
+  return szMsg;
+ }
+ else
+ {
+	 return "INVALID";
+ }
 }

@@ -1,6 +1,7 @@
 
 
 #include "utils.h"
+#include "crypto.h"
 
 #include <iostream>
 #include <iomanip>
@@ -67,7 +68,7 @@ const char *PchStringFromMsgHdr( const MsgHdr_t *pMsgHdr )
 		"    m_JobIDTarget = %llu\r\n"
 		"    m_JobIDSource = %llu\r\n",
 
-		PchNameFromEMsg( (EMsg)pMsgHdr->m_EMsg ), pMsgHdr->m_EMsg,
+		g_Crypto->GetMessage( (EMsg)pMsgHdr->m_EMsg ), pMsgHdr->m_EMsg,
 		pMsgHdr->m_JobIDTarget,
 		pMsgHdr->m_JobIDSource
 
@@ -95,7 +96,7 @@ const char *PchStringFromExtendedClientMsgHdr( const ExtendedClientMsgHdr_t *pMs
 		"    m_ulSteamID = %s %s (%llu) (id = %d, instance = %d, type = %s (%d), universe = %s (%d))\r\n"
 		"    m_nSessionID = %u\r\n",
 
-		PchNameFromEMsg( (EMsg)pMsgHdr->m_EMsg ), pMsgHdr->m_EMsg,
+		g_Crypto->GetMessage( (EMsg)pMsgHdr->m_EMsg ), pMsgHdr->m_EMsg,
 		pMsgHdr->m_nCubHdr,
 		pMsgHdr->m_nHdrVersion,
 		pMsgHdr->m_JobIDTarget,
@@ -6411,6 +6412,7 @@ const char *k_szEMsg[] =
 	"k_EMsgClientCSGetDepotManifestResponse",
 };
 
+/*
 const char *PchNameFromEMsg( EMsg eMsg )
 {
 	if ( eMsg <= k_EMsgInvalid || eMsg > k_EMsgClientCSGetDepotManifestResponse )
@@ -6418,6 +6420,7 @@ const char *PchNameFromEMsg( EMsg eMsg )
 
 	return k_szEMsg[ (int)eMsg ];
 }
+*/
 
 const char *k_szEResult[] =
 {

@@ -10,6 +10,8 @@
 #include "logger.h"
 #include "csimpledetour.h"
 #include "steam/steamtypes.h"
+#include "steam/emsg.h"
+#undef GetMessage
 
 class ICryptoCallback
 {
@@ -23,6 +25,8 @@ class CCrypto
 public:
 	CCrypto(ICryptoCallback* callback);
 	~CCrypto();
+
+	const char* GetMessage( EMsg eMsg );
 
 private:
 	ICryptoCallback* m_Callback;
