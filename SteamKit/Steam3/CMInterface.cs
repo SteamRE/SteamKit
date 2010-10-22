@@ -121,6 +121,20 @@ namespace SteamKit
             Monitor.Exit( netLock );
         }
 
+        public void Disconnect()
+        {
+            SteamGlobal.Lock();
+
+            var clientlogoff = new ClientMsgProtobuf<MsgClientLogOff>();
+
+            clientlogoff.ProtoHeader.client_session_id = SteamGlobal.SessionID;
+            clientlogoff.ProtoHeader.client_steam_id = SteamGlobal.SteamID;
+
+            SteamGlobal.Unlock();
+
+            udpConn.SendNetMsg(clientlogoff, this.bestServer.EndPoint);
+        }
+
         void SendHeartbeat( CMInterface o )
         {
             SteamGlobal.Lock();
@@ -165,8 +179,8 @@ namespace SteamKit
             logon.Msg.Proto.client_language = "english"; // yoko
             logon.Msg.Proto.rtime32_account_creation = creationTime.ToUnixTime();
 
-            logon.Msg.Proto.cell_id = 49; // TODO
-            logon.Msg.Proto.client_package_version = 1373; // TODO
+            logon.Msg.Proto.cell_id = 10; // TODO
+            logon.Msg.Proto.client_package_version = 1385; // TODO
 
             logon.Msg.Proto.email_address = accountRecord.GetStringDescriptor( BlobLib.AuthFields.eFieldEmail );
 
@@ -330,10 +344,13 @@ namespace SteamKit
             {
                 var encRes = new ClientMsg<MsgChannelEncryptResult, MsgHdr>( e.Data );
 
-                if ( encRes.Msg.Result == EResult.OK )
+                if (encRes.Msg.Result == EResult.OK)
+                {
+                    //SendAnonLogOn(e.Sender);
                     SendUserLogOn(e.Sender);
+                }
                 else
-                    Console.WriteLine( "Failed crypto handshake: " + encRes.Msg.Result );
+                    Console.WriteLine("Failed crypto handshake: " + encRes.Msg.Result);
             }
 
             if (e.Msg == EMsg.ClientLogOnResponse && e.Proto)
@@ -357,6 +374,20 @@ namespace SteamKit
                 var stok = new ClientMsgProtobuf<MsgClientSessionToken>(e.Data);
 
                 Console.WriteLine("Session token: " + stok.Msg.Proto.token);
+            }
+
+            if (e.Msg == EMsg.ClientGameConnectTokens)
+            {
+                var tokens = new ClientMsgProtobuf<MsgClientGameConnectTokens>(e.Data);
+
+                Console.WriteLine("Got connect tokens: " + tokens.Msg.Proto.max_tokens_to_keep);
+
+                int i = 0;
+                foreach (byte[] ticket in tokens.Msg.Proto.tokens)
+                {
+                    i++;
+                    File.WriteAllBytes("C:\\steamre\\ticket_" + i + ".bin", ticket); 
+                }
             }
 
             if (e.Msg == EMsg.ClientFriendsList && e.Proto)
@@ -384,11 +415,15 @@ namespace SteamKit
 
                 Console.WriteLine("Get app ownership: " + (EResult)ticket.Msg.Proto.eresult + " appid: " + ticket.Msg.Proto.app_id);
 
-                if ( (EResult)ticket.Msg.Proto.eresult == EResult.OK && ticket.Msg.Proto.app_id == 7)
+                if ((EResult)ticket.Msg.Proto.eresult == EResult.OK && ticket.Msg.Proto.app_id == 7)
                 {
                     SteamGlobal.WinUITicket = ticket.Msg.Proto.ticket;
 
-                    SendAuthList( e.Sender );
+                    SendAuthList(e.Sender);
+                }
+                else
+                {
+                    File.WriteAllBytes("C:\\steamre\\owner_" + ticket.Msg.Proto.app_id + ".bin", ticket.Msg.Proto.ticket);
                 }
             }
 
@@ -422,6 +457,7 @@ namespace SteamKit
                 SendClientKeyResponse( loginKey.Msg.UniqueID, e.Sender );
                 SendFriendsDataRequest( e.Sender );
                 SendStatusChange( 1, e.Sender );
+                SendAppOwnershipRequest(630, e.Sender);
             }
 
             if ( e.Msg == EMsg.ClientLoggedOff )

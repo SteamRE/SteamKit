@@ -14,8 +14,7 @@ namespace Steam3Tester
     {
         static void Main( string[] args )
         {
-
-//#if false
+#if true
             // steam2 login code
             SteamError err;
             SteamCallHandle loginHandle = Steam2.Login( "username", "password", out err );
@@ -56,14 +55,16 @@ namespace Steam3Tester
 
             Console.WriteLine( "UserID: {0} email: {1}", userId.AccountID, SteamGlobal.AccountRecord.GetStringDescriptor( BlobLib.AuthFields.eFieldEmail ) );
             //Console.ReadKey();
-//#endif
-
 
             CMInterface cmInterface = CMInterface.Instance;
 
             cmInterface.ConnectToCM();
+#endif
 
             Console.ReadKey();
+
+            cmInterface.Disconnect();
+
 #if false
             // steam2 server query code
             GDSClient gdsClient = new GDSClient();

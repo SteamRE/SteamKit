@@ -1285,6 +1285,78 @@ namespace SteamKit
         }
     }
 
+    public class Accept : ISteamSerializable
+    {
+
+        public Accept()
+        {
+        }
+
+        public MemoryStream serialize()
+        {
+            MemoryStream msBuffer = new MemoryStream(0);
+
+            BinaryWriter writer = new BinaryWriter(msBuffer);
+
+
+
+            msBuffer.Seek(0, SeekOrigin.Begin);
+            return msBuffer;
+        }
+
+        public void deserialize(MemoryStream ms)
+        {
+        }
+    }
+
+    public class Datagram : ISteamSerializable
+    {
+
+        public Datagram()
+        {
+        }
+
+        public MemoryStream serialize()
+        {
+            MemoryStream msBuffer = new MemoryStream(0);
+
+            BinaryWriter writer = new BinaryWriter(msBuffer);
+
+
+
+            msBuffer.Seek(0, SeekOrigin.Begin);
+            return msBuffer;
+        }
+
+        public void deserialize(MemoryStream ms)
+        {
+        }
+    }
+
+    public class Disconnect : ISteamSerializable
+    {
+
+        public Disconnect()
+        {
+        }
+
+        public MemoryStream serialize()
+        {
+            MemoryStream msBuffer = new MemoryStream(0);
+
+            BinaryWriter writer = new BinaryWriter(msBuffer);
+
+
+
+            msBuffer.Seek(0, SeekOrigin.Begin);
+            return msBuffer;
+        }
+
+        public void deserialize(MemoryStream ms)
+        {
+        }
+    }
+
     public class MsgHdr : ISteamSerializableHeader
     {
         public void SetEMsg(EMsg msg) { this.Msg = msg; }
@@ -1322,7 +1394,7 @@ namespace SteamKit
         {
             BinaryReader reader = new BinaryReader(ms);
 
-            Msg = (EMsg)reader.ReadUInt32();
+            Msg = (EMsg)reader.ReadInt32();
             TargetJobID = reader.ReadInt64();
             SourceJobID = reader.ReadInt64();
         }
@@ -1386,7 +1458,7 @@ namespace SteamKit
         {
             BinaryReader reader = new BinaryReader(ms);
 
-            Msg = (EMsg)reader.ReadUInt32();
+            Msg = (EMsg)reader.ReadInt32();
             HeaderSize = reader.ReadByte();
             HeaderVersion = reader.ReadUInt16();
             TargetJobID = reader.ReadInt64();
@@ -1481,7 +1553,7 @@ namespace SteamKit
             BinaryReader reader = new BinaryReader(ms);
 
             ProtocolVersion = reader.ReadUInt32();
-            Universe = (EUniverse)reader.ReadUInt32();
+            Universe = (EUniverse)reader.ReadInt32();
         }
     }
 
@@ -1552,7 +1624,7 @@ namespace SteamKit
         {
             BinaryReader reader = new BinaryReader(ms);
 
-            Result = (EResult)reader.ReadUInt32();
+            Result = (EResult)reader.ReadInt32();
         }
     }
 
@@ -1704,6 +1776,32 @@ namespace SteamKit
         public void deserialize(MemoryStream ms)
         {
             Proto = ProtoBuf.Serializer.Deserialize<CMsgClientLogon>(ms);
+        }
+    }
+
+    public class MsgClientLogOff : ISteamSerializableMessage
+    {
+        public EMsg GetEMsg() { return EMsg.ClientLogOff; }
+
+        // Static size: 0
+        public CMsgClientLogOff Proto { get; set; }
+
+        public MsgClientLogOff()
+        {
+            Proto = new CMsgClientLogOff();
+        }
+
+        public MemoryStream serialize()
+        {
+            MemoryStream msProto = new MemoryStream();
+            ProtoBuf.Serializer.Serialize<CMsgClientLogOff>(msProto, Proto);
+            msProto.Seek(0, SeekOrigin.Begin);
+            return msProto;
+        }
+
+        public void deserialize(MemoryStream ms)
+        {
+            Proto = ProtoBuf.Serializer.Deserialize<CMsgClientLogOff>(ms);
         }
     }
 
@@ -2000,6 +2098,32 @@ namespace SteamKit
         }
     }
 
+    public class MsgClientGameConnectTokens : ISteamSerializableMessage
+    {
+        public EMsg GetEMsg() { return EMsg.ClientGameConnectTokens; }
+
+        // Static size: 0
+        public CMsgClientGameConnectTokens Proto { get; set; }
+
+        public MsgClientGameConnectTokens()
+        {
+            Proto = new CMsgClientGameConnectTokens();
+        }
+
+        public MemoryStream serialize()
+        {
+            MemoryStream msProto = new MemoryStream();
+            ProtoBuf.Serializer.Serialize<CMsgClientGameConnectTokens>(msProto, Proto);
+            msProto.Seek(0, SeekOrigin.Begin);
+            return msProto;
+        }
+
+        public void deserialize(MemoryStream ms)
+        {
+            Proto = ProtoBuf.Serializer.Deserialize<CMsgClientGameConnectTokens>(ms);
+        }
+    }
+
     public class MsgClientFriendsList : ISteamSerializableMessage
     {
         public EMsg GetEMsg() { return EMsg.ClientFriendsList; }
@@ -2041,7 +2165,7 @@ namespace SteamKit
         public MsgClientFriendMsgIncoming()
         {
             steamID = 0;
-            EntryType = 0;
+            EntryType = EChatEntryType.Invalid;
             MessageSize = 0;
         }
 
@@ -2065,7 +2189,7 @@ namespace SteamKit
             BinaryReader reader = new BinaryReader(ms);
 
             steamID = reader.ReadUInt64();
-            EntryType = (EChatEntryType)reader.ReadUInt32();
+            EntryType = (EChatEntryType)reader.ReadInt32();
             MessageSize = reader.ReadInt32();
         }
     }

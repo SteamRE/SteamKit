@@ -68,8 +68,11 @@
     <Compile Include="Steam2\Steam2.cs" />
     <Compile Include="Steam2\AsyncCalls\LoginCall.cs" />
     <Compile Include="Steam2\AsyncCalls\SteamCallHandle.cs" />
-    <Compile Include="Steam3\MsgProto.cs" />
+    <Compile Include="Steam3\EncryptedAppTicket.cs" />
+    <Compile Include="Steam3\MsgBase.cs" />
     <Compile Include="Steam3\SteamLanguage.cs" />
+    <Compile Include="Steam3\SteamMsgBase.cs" />
+    <Compile Include="Steam3\SteamMsgClientServer.cs" />
     <Compile Include="SteamGlobal.cs" />
     <Compile Include="Types\ClientTGT.cs" />
     <Compile Include="Types\SteamError.cs" />
@@ -88,7 +91,6 @@
     <Compile Include="Util\ProtoSerializer.cs" />
     <Compile Include="Util\ScheduledFunction.cs" />
     <Compile Include="Networking\Tcp\TcpSocket.cs" />
-    <Compile Include="Steam3\MsgBase.cs" />
     <Compile Include="Steam3\CMInterface.cs" />
     <Compile Include="Util\KeyManager.cs" />
     <Compile Include="Types\SteamID.cs" />
