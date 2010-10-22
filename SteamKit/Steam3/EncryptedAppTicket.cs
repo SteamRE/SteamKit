@@ -7,8 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generated from: steamstruct.proto
-namespace SteamLib
+// Generated from: encrypted_app_ticket.proto
+namespace SteamKit
 {
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"EncryptedAppTicket")]
   public partial class EncryptedAppTicket : global::ProtoBuf.IExtensible

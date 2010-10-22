@@ -148,9 +148,17 @@ namespace SteamKit
             udpSock.Send( packetData, ipAddr );
         }
 
+        public void SendDisconnect()
+        {
+            
+        }
         public void SendNetMsg( IClientMsg clientMsg, IPEndPoint endPoint )
         {
-            SendData( clientMsg.serialize().ToArray(), endPoint );
+            byte[] array = clientMsg.serialize().ToArray();
+
+            Console.WriteLine("Sending message " + MsgUtil.GetMsg( BitConverter.ToUInt32( array, 0 )) );
+
+            SendData( array, endPoint );
         }
 
         public void SendAck(IPEndPoint ipAddr)

@@ -48,6 +48,11 @@ class MsgClientLogon<EMsg::ClientLogon>
 	proto CMsgClientLogon proto;
 }
 
+class MsgClientLogOff<EMsg::ClientLogOff>
+{
+	proto CMsgClientLogOff proto;
+}
+
 class MsgClientLogonResponse<EMsg::ClientLogOnResponse>
 {
 	proto CMsgClientLogonResponse proto;
@@ -101,6 +106,11 @@ class MsgClientPersonaState<EMsg::ClientPersonaState>
 class MsgClientSessionToken<EMsg::ClientSessionToken>
 {
 	proto CMsgClientSessionToken proto;
+}
+
+class MsgClientGameConnectTokens<EMsg::ClientGameConnectTokens>
+{
+	proto CMsgClientGameConnectTokens proto;
 }
 
 class MsgClientFriendsList<EMsg::ClientFriendsList>

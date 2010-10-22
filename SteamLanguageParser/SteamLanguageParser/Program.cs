@@ -11,15 +11,16 @@ namespace SteamLanguageParser
     {
         static void Main(string[] args)
         {
-            Queue<Token> tokenList = LanguageParser.TokenizeString( File.ReadAllText( @"steammsg.steamd" ) );
+            Queue<Token> tokenList = LanguageParser.TokenizeString( File.ReadAllText( @"C:\steamre\steammsg.steamd" ) );
 
             Node root = TokenAnalyzer.Analyze( tokenList );
 
             StringBuilder sb = new StringBuilder();
-            JavaGen cgen = new JavaGen();
+            //JavaGen cgen = new JavaGen();
+            CSharpGen cgen = new CSharpGen();
 
             CodeGenerator.EmitCode(root, cgen, sb);
-            File.WriteAllText(@"C:\steamre\test.java", sb.ToString());
+            File.WriteAllText(@"C:\steamre\test.cs", sb.ToString());
         }
     }
 }
