@@ -2124,6 +2124,32 @@ namespace SteamKit
         }
     }
 
+    public class MsgClientGamesPlayed : ISteamSerializableMessage
+    {
+        public EMsg GetEMsg() { return EMsg.ClientGamesPlayedWithDataBlob; }
+
+        // Static size: 0
+        public CMsgClientGamesPlayed Proto { get; set; }
+
+        public MsgClientGamesPlayed()
+        {
+            Proto = new CMsgClientGamesPlayed();
+        }
+
+        public MemoryStream serialize()
+        {
+            MemoryStream msProto = new MemoryStream();
+            ProtoBuf.Serializer.Serialize<CMsgClientGamesPlayed>(msProto, Proto);
+            msProto.Seek(0, SeekOrigin.Begin);
+            return msProto;
+        }
+
+        public void deserialize(MemoryStream ms)
+        {
+            Proto = ProtoBuf.Serializer.Deserialize<CMsgClientGamesPlayed>(ms);
+        }
+    }
+
     public class MsgClientFriendsList : ISteamSerializableMessage
     {
         public EMsg GetEMsg() { return EMsg.ClientFriendsList; }

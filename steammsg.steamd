@@ -113,6 +113,11 @@ class MsgClientGameConnectTokens<EMsg::ClientGameConnectTokens>
 	proto CMsgClientGameConnectTokens proto;
 }
 
+class MsgClientGamesPlayed<EMsg::ClientGamesPlayedWithDataBlob>
+{
+	proto CMsgClientGamesPlayed proto;
+}
+
 class MsgClientFriendsList<EMsg::ClientFriendsList>
 {
 	proto CMsgClientFriendsList proto;
