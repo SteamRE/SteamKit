@@ -115,11 +115,15 @@ namespace SteamKit
                 sock.Shutdown(SocketShutdown.Both);
                 sock.Disconnect(true);
                 sock.Close();
+
+                sock = null;
             }
 
             if (netStream != null)
             {
                 netStream.Close();
+
+                netStream = null;
             }
         }
 
