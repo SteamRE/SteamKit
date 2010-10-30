@@ -129,3 +129,8 @@ class MsgClientFriendMsgIncoming<EMsg::ClientFriendMsgIncoming>
 	EChatEntryType entryType = EChatEntryType::Invalid;
 	int messageSize;
 }
+
+class MsgClientVACBanStatus<EMsg::ClientVACBanStatus>
+{
+	uint numBans;
+};

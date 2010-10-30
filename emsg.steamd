@@ -331,6 +331,7 @@ enum EMsg
 	GSGetReputationResponse = 937;
 	ChannelEncryptRequest = 1303;
 	ChannelEncryptResponse = 1304;
+	ChannelEncryptResult = 1305;
 	ClientChatRoomInfo = 4026;
 	ClientUFSUploadFileRequest = 5202;
 	ClientUFSUploadFileResponse = 5203;
