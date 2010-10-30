@@ -102,8 +102,7 @@ bool CDataDumper::MultiplexMsgMulti( ENetDirection eDirection, const uint8 *pDat
 
 		g_Logger->LogConsole("decomp: %x comp: %x cubcomp: %d unzipped: %d\n", pDecompressed, pCompressed, cubCompressed, multi.size_unzipped());
 
-		// whoever wrote CZip needs to be shot
-		bool bZip = false; //CZip::Inflate( pCompressed, cubCompressed, pDecompressed, multi.size_unzipped() );
+		bool bZip = CZip::Inflate( pCompressed, cubCompressed, pDecompressed, multi.size_unzipped() );
 
 		if ( !bZip )
 		{

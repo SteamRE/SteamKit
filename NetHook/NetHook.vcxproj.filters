@@ -520,7 +520,7 @@
   <ItemGroup>
     <Library Include="detours.lib" />
     <Library Include="tier0.lib" />
-    <Library Include="zdll.lib" />
     <Library Include="libprotobuf.lib" />
+    <Library Include="zlib.lib" />
   </ItemGroup>
 </Project>
