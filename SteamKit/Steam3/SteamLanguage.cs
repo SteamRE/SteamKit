@@ -243,7 +243,6 @@ namespace SteamKit
         GSDeny = 759,
         GSKick = 760,
         ClientCreateAcctResponse = 761,
-        ClientVACBanStatus = 762,
         ClientPurchaseResponse = 763,
         ClientPing = 764,
         ClientNOP = 765,
@@ -259,7 +258,7 @@ namespace SteamKit
         ClientGameConnectTokens = 779,
         ClientLicenseList = 780,
         ClientCancelLicenseResponse = 781,
-        ClientVACBanStatus2 = 782,
+        ClientVACBanStatus = 782,
         ClientCMList = 783,
         ClientEncryptPct = 784,
         ClientGetLegacyGameKeyResponse = 785,
@@ -2217,6 +2216,40 @@ namespace SteamKit
             steamID = reader.ReadUInt64();
             EntryType = (EChatEntryType)reader.ReadInt32();
             MessageSize = reader.ReadInt32();
+        }
+    }
+
+
+    public class MsgClientVACBanStatus : ISteamSerializableMessage
+    {
+        public EMsg GetEMsg() { return EMsg.ClientVACBanStatus; }
+
+        // Static size: 4
+        public uint NumBans { get; set; }
+
+        public MsgClientVACBanStatus()
+        {
+            NumBans = 0;
+        }
+
+        public MemoryStream serialize()
+        {
+            MemoryStream msBuffer = new MemoryStream(4);
+
+            BinaryWriter writer = new BinaryWriter(msBuffer);
+
+            writer.Write(NumBans);
+
+
+            msBuffer.Seek(0, SeekOrigin.Begin);
+            return msBuffer;
+        }
+
+        public void deserialize(MemoryStream ms)
+        {
+            BinaryReader reader = new BinaryReader(ms);
+
+            NumBans = reader.ReadUInt32();
         }
     }
 
