@@ -347,7 +347,7 @@ namespace SteamKit
                 if (encRes.Msg.Result == EResult.OK)
                 {
                     //SendAnonLogOn(e.Sender);
-                    SendUserLogOn(e.Sender);
+                    SendAnonLogOn(e.Sender);
                 }
                 else
                     Console.WriteLine("Failed crypto handshake: " + encRes.Msg.Result);
@@ -460,6 +460,27 @@ namespace SteamKit
                 SendAppOwnershipRequest(630, e.Sender);
             }
 
+            if (e.Msg == EMsg.ClientVACBanStatus)
+            {
+                var vacban = new ClientMsg<MsgClientVACBanStatus, ExtendedClientMsgHdr>( e.Data );
+
+                Console.WriteLine("I am VAC banned, " + vacban.Msg.NumBans + " entries.");
+
+                // messy, blah.
+                vacban.Payload.Flip();
+                MemoryStream ms = vacban.Payload.GetStreamForWrite();
+
+                BinaryReader reader = new BinaryReader(ms);
+                for (int i = 0; i < vacban.Msg.NumBans; i++)
+                {
+                    uint rangestart = reader.ReadUInt32();
+                    uint rangeend = reader.ReadUInt32();
+                    uint amireallybanned = reader.ReadUInt32();
+
+                    Console.WriteLine("Read ban: (" + rangestart + "-" + rangeend + ") amireallybanned: " + amireallybanned);
+                }
+            }
+
             if ( e.Msg == EMsg.ClientLoggedOff )
             {
                 lock ( netLock )
@@ -481,6 +502,8 @@ namespace SteamKit
             SteamGlobal.SessionID = sessionid;
             SteamGlobal.SteamID = steamid;
             SteamGlobal.Unlock();
+
+            Console.WriteLine("SteamID: " + steamid);
 
             if (result == EResult.OK)
             {
