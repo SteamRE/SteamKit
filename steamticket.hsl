@@ -1,0 +1,51 @@
+#include "standard-types.hsl"
+
+#pragma displayname("steam app ticket")
+#pragma byteorder(little_endian) 
+
+struct TSECTION
+{
+	DWORD length;
+	BYTE data[length];
+};
+
+struct GCTOKEN
+{
+	QUAD token;
+	QUAD steamid;
+	time_t time;
+};
+
+// this is only seen in GetAuthSession tickets
+struct SESSIONHEADER
+{
+	DWORD unk1; // 1
+	DWORD unk2; // 2
+	DWORD externalIP;
+	DWORD filler;
+	DWORD someToken; // not sure
+	DWORD unk4; // 4
+};
+
+typedef struct tOWNERSHIPTICKET
+{
+	DWORD length;
+	DWORD version;
+	QUAD steamid;
+	DWORD appid;
+	DWORD externalIP;
+	DWORD internalIP;
+	DWORD ownershipFlags;
+	time_t ticketGeneration;
+	time_t ticketExpiration;
+	WORD licenseCount;
+	DWORD license[licenseCount];
+	DWORD filler;
+} OWNERSHIPTICKET;
+
+struct OWNERSHIPSECTIONWITHSIGNATURE
+{
+	DWORD sectlength;
+	OWNERSHIPTICKET ticket;
+	BYTE signature[128];
+};
