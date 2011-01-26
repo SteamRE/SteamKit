@@ -1,0 +1,22 @@
+message CMsgTFGetUserData {
+	optional fixed32 price_sheet_version = 1;
+}
+
+message CMsgTFGetUserDataResponse {
+	optional int32 result = 1;
+	optional int32 currency = 2;
+	optional string country = 3;
+	optional fixed32 price_sheet_version = 4;
+	optional uint64 experiment_data = 5 [default = 0];
+	optional int32 featured_item_idx = 6;
+	optional bool show_hat_descriptions = 7 [default = true];
+	optional bytes price_sheet = 8;
+	optional int32 default_item_sort = 9 [default = 0];
+}
+
+message CMsgTFGoldenWrenchBroadcast {
+	optional int32 wrench_number = 1;
+	optional bool deleted = 2;
+	optional string user_name = 3;
+}
+
