@@ -1,0 +1,136 @@
+#import "header.steamd"
+
+class MsgChannelEncryptRequest<EMsg::ChannelEncryptRequest>
+{
+	const uint PROTOCOL_VERSION = 1;
+	
+	uint protocolVersion = MsgChannelEncryptRequest::PROTOCOL_VERSION;
+	EUniverse universe = EUniverse::Invalid;
+}
+
+class MsgChannelEncryptResponse<EMsg::ChannelEncryptResponse>
+{
+	uint protocolVersion = MsgChannelEncryptRequest::PROTOCOL_VERSION;
+	uint keySize = 128;
+}
+
+class MsgChannelEncryptResult<EMsg::ChannelEncryptResult>
+{
+	EResult result = EResult::Invalid;
+}
+
+class MsgMulti<EMsg::Multi>
+{
+	proto CMsgMulti proto;
+}
+
+class MsgClientNewLoginKey<EMsg::ClientNewLoginKey>
+{
+	uint uniqueID;
+	byte<20> loginKey;
+}
+
+class MsgClientNewLoginKeyAccepted<EMsg::ClientNewLoginKeyAccepted>
+{
+	uint uniqueID;
+}
+ 
+class MsgClientHeartBeat<EMsg::ClientHeartBeat>
+{
+	proto CMsgClientHeartBeat proto;
+}
+
+class MsgClientLogon<EMsg::ClientLogon>
+{
+	const uint ObfuscationMask = 0xBAADF00D;
+	const uint CurrentProtocol = 65565;
+
+	proto CMsgClientLogon proto;
+}
+
+class MsgClientLogOff<EMsg::ClientLogOff>
+{
+	proto CMsgClientLogOff proto;
+}
+
+class MsgClientLogonResponse<EMsg::ClientLogOnResponse>
+{
+	proto CMsgClientLogonResponse proto;
+}
+
+class MsgGSServerType<EMsg::GSServerType>
+{
+	proto CMsgGSServerType proto;
+}
+
+class MsgGSStatusReply<EMsg::GSStatusReply>
+{
+	proto CMsgGSStatusReply proto;
+}
+
+class MsgClientRegisterAuthTicketWithCM<EMsg::ClientRegisterAuthTicketWithCM>
+{
+	proto CMsgClientRegisterAuthTicketWithCM proto;
+}
+
+class MsgClientGetAppOwnershipTicket<EMsg::ClientGetAppOwnershipTicket>
+{
+	proto CMsgClientGetAppOwnershipTicket proto;
+}
+
+class MsgClientGetAppOwnershipTicketResponse<EMsg::ClientGetAppOwnershipTicketResponse>
+{
+	proto CMsgClientGetAppOwnershipTicketResponse proto;
+}
+
+class MsgClientAuthList<EMsg::ClientAuthList>
+{
+	proto CMsgClientAuthList proto;
+}
+
+class MsgClientRequestFriendData<EMsg::ClientRequestFriendData>
+{
+	proto CMsgClientRequestFriendData proto;
+}
+
+class MsgClientChangeStatus<EMsg::ClientChangeStatus>
+{
+	byte personaState;
+}
+
+class MsgClientPersonaState<EMsg::ClientPersonaState>
+{
+	proto CMsgClientPersonaState proto;
+}
+
+class MsgClientSessionToken<EMsg::ClientSessionToken>
+{
+	proto CMsgClientSessionToken proto;
+}
+
+class MsgClientGameConnectTokens<EMsg::ClientGameConnectTokens>
+{
+	proto CMsgClientGameConnectTokens proto;
+}
+
+class MsgClientGamesPlayed<EMsg::ClientGamesPlayedWithDataBlob>
+{
+	proto CMsgClientGamesPlayed proto;
+}
+
+class MsgClientFriendsList<EMsg::ClientFriendsList>
+{
+	proto CMsgClientFriendsList proto;
+}
+
+class MsgClientFriendMsgIncoming<EMsg::ClientFriendMsgIncoming>
+{
+	steamidmarshal ulong steamID;
+	EChatEntryType entryType = EChatEntryType::Invalid;
+	int messageSize;
+}
+
+class MsgClientVACBanStatus<EMsg::ClientVACBanStatus>
+{
+	uint numBans;
+};

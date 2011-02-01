@@ -1,0 +1,33 @@
+#import "emsg.steamd"
+#import "universe.steamd"
+#import "eresult.steamd"
+#import "accounttype.steamd"
+#import "echatentrytype.steamd"
+#import "netheader.steamd"
+
+class MsgHdr
+{
+	EMsg msg = EMsg::Invalid;
+	long targetJobID = -1;
+	long sourceJobID = -1;
+}
+
+class ExtendedClientMsgHdr
+{
+	EMsg msg = EMsg::Invalid;
+	byte headerSize = 36;
+	ushort headerVersion = 2;
+	long targetJobID = -1;
+	long sourceJobID = -1;
+	byte headerCanary = 239;
+	steamidmarshal ulong steamID;
+	int sessionID;
+}
+
+class MsgHdrProtoBuf
+{
+	protomask EMsg msg = EMsg::Invalid;
+	int headerLength;
+	
+	proto<headerLength> CMsgProtoBufHeader protoHeader;
+}
