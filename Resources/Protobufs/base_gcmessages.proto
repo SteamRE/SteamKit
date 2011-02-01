@@ -1,0 +1,4 @@
+message CMsgSystemBroadcast {
+	optional string message = 1;
+}
+
