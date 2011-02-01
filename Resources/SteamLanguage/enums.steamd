@@ -1,0 +1,60 @@
+
+enum EUniverse
+{
+	Invalid = 0;
+	
+	Public = 1;
+	Beta = 2;
+	Internal = 3;
+	Dev = 4;
+	RC = 5;
+}
+
+enum EChatEntryType
+{
+	Invalid = 0;
+	
+	ChatMsg = 1;
+	Typing = 2;
+	InviteGame = 3;
+	Emote = 4;
+	LobbyGameStart = 5;
+	LeftConversation = 6;
+}
+
+enum EPersonaState
+{
+	Offline = 0;
+	Online = 1;
+	Busy = 2;
+	Away = 3;
+	Snooze = 4;
+}
+
+enum EAccountType
+{
+	Invalid = 0;
+
+	Individual = 1;
+	Multiseat = 2;
+	GameServer = 3;
+	AnonGameServer = 4;
+	Pending = 5;
+	ContentServer = 6;
+	Clan = 7;
+	Chat = 8;
+	P2PSuperSeeder = 9;
+	AnonUser = 10;
+}
+
+enum EFriendRelationship
+{
+	None = 0;
+	
+	Blocked = 1;
+	RequestRecipient = 2;
+	Friend = 3;
+	RequestInitiator = 4;
+	Ignored = 5;
+	IgnoredFriend = 6;
+}

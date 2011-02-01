@@ -71,6 +71,8 @@ namespace SteamKit2
             new IPEndPoint( IPAddress.Parse( "208.111.171.83" ), 27017 ),
         };
 
+        protected object ConnLock = new object();
+
         public NetFilterEncryption NetFilter { get; set; }
 
 

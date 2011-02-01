@@ -36,10 +36,14 @@ namespace SteamKit2
             Handlers = new Dictionary<string, ClientMsgHandler>( StringComparer.OrdinalIgnoreCase );
 
             AddHandler( new SteamUser() );
+            AddHandler( new SteamFriends() );
         }
 
         public void AddHandler( ClientMsgHandler handler )
         {
+            if ( Handlers.ContainsKey( handler.Name ) )
+                return;
+
             Handlers[ handler.Name ] = handler;
 
             handler.Setup( this );
@@ -51,6 +55,16 @@ namespace SteamKit2
                 return ( T )Handlers[ name ];
 
             return null;
+        }
+
+        protected override void OnClientMsgReceived( ClientMsgEventArgs e )
+        {
+            base.OnClientMsgReceived( e );
+
+            foreach ( var kvp in Handlers )
+            {
+                kvp.Value.HandleMsg( e.EMsg, e.Data );
+            }
         }
 
     }

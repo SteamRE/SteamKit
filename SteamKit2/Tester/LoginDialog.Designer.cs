@@ -86,13 +86,13 @@
             // 
             // btnLogin
             // 
-            this.btnLogin.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnLogin.Location = new System.Drawing.Point( 195, 93 );
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size( 75, 23 );
             this.btnLogin.TabIndex = 5;
             this.btnLogin.Text = "Login";
             this.btnLogin.UseVisualStyleBackColor = true;
+            this.btnLogin.Click += new System.EventHandler( this.btnLogin_Click );
             // 
             // btnCancel
             // 
@@ -103,6 +103,7 @@
             this.btnCancel.TabIndex = 6;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler( this.btnCancel_Click );
             // 
             // LoginDialog
             // 

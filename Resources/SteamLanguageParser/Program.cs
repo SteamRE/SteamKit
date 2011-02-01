@@ -11,7 +11,7 @@ namespace SteamLanguageParser
     {
         static void Main(string[] args)
         {
-            Queue<Token> tokenList = LanguageParser.TokenizeString( File.ReadAllText( @"G:\dev\C++\Steam\steammsg.steamd" ) );
+            Queue<Token> tokenList = LanguageParser.TokenizeString( File.ReadAllText( @"G:\dev\SteamRE\Resources\SteamLanguage\steammsg.steamd" ) );
 
             Node root = TokenAnalyzer.Analyze( tokenList );
 
@@ -20,7 +20,7 @@ namespace SteamLanguageParser
             CSharpGen cgen = new CSharpGen();
 
             CodeGenerator.EmitCode(root, cgen, sb);
-            File.WriteAllText( @"G:\dev\C++\Steam\test.cs", sb.ToString() );
+            File.WriteAllText( @"G:\dev\SteamRE\SteamKit2\SteamKit2\Base\SteamLanguage.cs", sb.ToString() );
         }
     }
 }

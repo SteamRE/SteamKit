@@ -42,6 +42,7 @@ namespace SteamKit2
         {
             try
             {
+                internalIp = NetHelpers.GetIPAddress( NetHelpers.GetLocalIP() );
                 uint userHash = BitConverter.ToUInt32( CryptoHelper.JenkinsHash( Encoding.ASCII.GetBytes( user ) ), 0 );
 
                 ByteBuffer bb = new ByteBuffer( true );
