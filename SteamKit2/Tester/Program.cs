@@ -15,48 +15,14 @@ namespace Tester
         [STAThread]
         static void Main()
         {
-            string userName = "";
-            string password = "";
+            Application.EnableVisualStyles();
 
-            GeneralDSClient gdsClient = new GeneralDSClient();
-            gdsClient.Connect( GeneralDSClient.GDServers[ 0 ] );
+            LoginDialog ld = new LoginDialog();
 
-            IPEndPoint[] authServers = gdsClient.GetServerList( EServerType.ProxyASClientAuthentication, userName );
-            gdsClient.Disconnect();
+            if ( ld.ShowDialog() != DialogResult.OK )
+                return;
 
-            AuthServerClient asClient = new AuthServerClient();
-            asClient.Connect( authServers[ 0 ] );
-
-            ClientTGT clientTgt;
-            byte[] serverTgt;
-            Blob accRecord;
-
-            bool bRet = asClient.Login( userName, password, out clientTgt, out serverTgt, out accRecord );
-            asClient.Disconnect();
-
-
-            SteamClient steamClient = new SteamClient();
-            steamClient.ChannelEncrypted += ( obj, e ) =>
-                {
-
-                    SteamUser user = steamClient.GetHandler<SteamUser>( SteamUser.NAME );
-
-                    var details = new LogOnDetails()
-                    {
-                        Username = userName,
-                        Password = password,
-
-                        ClientTGT = clientTgt,
-                        ServerTGT = serverTgt,
-                        AccRecord = accRecord,
-                    };
-
-                    user.LogOn( details );
-                };
-
-            steamClient.Connect();
-
-            while ( true ) Thread.Sleep( 10 ); // spin
+            Application.Run( new MainForm() );
         }
     }
 }

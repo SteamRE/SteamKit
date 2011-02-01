@@ -30,7 +30,7 @@ namespace SteamLanguageParser
                 sb.AppendLine("using System.IO;");
                 sb.AppendLine( "using System.Runtime.InteropServices;" );
                 sb.AppendLine();
-                sb.AppendLine("namespace SteamLanguageGenerated");
+                sb.AppendLine("namespace SteamKit2");
                 sb.AppendLine("{");
             }
         }

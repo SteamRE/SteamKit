@@ -59,10 +59,11 @@
     <Compile Include="Blob\CachedBinaryReader.cs" />
     <Compile Include="Blob\Fields\AuthFields.cs" />
     <Compile Include="Blob\Fields\CDRFields.cs" />
+    <Compile Include="Steam3\Handlers\SteamFriends.cs" />
+    <Compile Include="Util\ScheduledFunction.cs" />
     <Compile Include="Steam3\Handlers\SteamUser.cs" />
     <Compile Include="Util\ZipUtil.cs" />
     <Compile Include="Steam3\SteamClient.cs" />
-    <Compile Include="Util\Extensions.cs" />
     <Compile Include="Steam3\CMClient.cs" />
     <Compile Include="Steam2\GeneralDSClient.cs" />
     <Compile Include="Steam2\DSClient.cs" />

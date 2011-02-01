@@ -26,11 +26,11 @@ namespace SteamKit2
 
     public class CMClient
     {
-        protected Connection Connection { get; private set; }
-
-        byte[] tempSessionKey;
 
         public EUniverse ConnectedUniverse { get; private set; }
+        public int SessionID { get; private set; }
+        public ulong SteamID { get; private set; }
+
 
         public event EventHandler<ClientMsgEventArgs> ClientMsgReceived;
         protected virtual void OnClientMsgReceived( ClientMsgEventArgs e )
@@ -47,8 +47,17 @@ namespace SteamKit2
         }
 
 
+        Connection Connection { get; set; }
+        byte[] tempSessionKey;
+
+        ScheduledFunction heartBeatFunc;
+
+
         public CMClient()
         {
+            SessionID = 0;
+            SteamID = 0;
+
             Connection = new TcpConnection();
             Connection.NetMsgReceived += NetMsgReceived;
         }
@@ -60,16 +69,31 @@ namespace SteamKit2
             // not sure how the client challenges servers when using tcp
             Connection.Connect( Connection.CMServers[ 0 ] );
         }
-
         public void Disconnect()
         {
+            if ( heartBeatFunc != null )
+            {
+                heartBeatFunc.Stop();
+            }
+
             Connection.Disconnect();
         }
 
+
         public void Send( IClientMsg clientMsg )
         {
+#if DEBUG
+            byte[] data = clientMsg.Serialize();
+
+            uint rawEMsg = BitConverter.ToUInt32( data, 0 );
+            EMsg eMsg = MsgUtil.GetMsg( rawEMsg );
+
+            Trace.WriteLine( string.Format( "CMClient Sent -> EMsg: {0} (Proto: {1})", eMsg, MsgUtil.IsProtoBuf( rawEMsg ) ), "Steam3" );
+#endif
+
             Connection.Send( clientMsg );
         }
+
 
         void NetMsgReceived( object sender, NetMsgEventArgs e )
         {
@@ -79,7 +103,7 @@ namespace SteamKit2
             EMsg eMsg = MsgUtil.GetMsg( rawEMsg );
 
 #if DEBUG
-            Trace.WriteLine( string.Format( "CMClient Recv'd EMsg: {0} (Proto: {1})", eMsg, MsgUtil.IsProtoBuf( rawEMsg ) ), "Steam3" );
+            Trace.WriteLine( string.Format( "CMClient <- Recv'd EMsg: {0} (Proto: {1})", eMsg, MsgUtil.IsProtoBuf( rawEMsg ) ), "Steam3" );
 #endif
 
             switch ( eMsg )
@@ -95,23 +119,26 @@ namespace SteamKit2
                 case EMsg.Multi:
                     HandleMulti( data );
                     break;
+
+                case EMsg.ClientLogOnResponse:
+                    HandleLogOnResponse( data );
+                    break;
             }
 
             OnClientMsgReceived( new ClientMsgEventArgs( eMsg, data ) );
         }
 
-        void MultiplexMulti( byte[] payload )
+
+        void SendHeartbeat()
         {
-            DataStream ds = new DataStream( payload );
+            var beat = new ClientMsgProtobuf<MsgClientHeartBeat>();
 
-            while ( ds.SizeRemaining() != 0 )
-            {
-                uint subSize = ds.ReadUInt32();
-                byte[] subData = ds.ReadBytes( subSize );
+            beat.ProtoHeader.client_session_id = SessionID;
+            beat.ProtoHeader.client_steam_id = SteamID;
 
-                NetMsgReceived( this, new NetMsgEventArgs( subData ) );
-            }
+            Send( beat );
         }
+
 
         void HandleMulti( byte[] data )
         {
@@ -135,9 +162,35 @@ namespace SteamKit2
                 }
             }
 
-            MultiplexMulti( payload );
-        }
+            DataStream ds = new DataStream( payload );
 
+            while ( ds.SizeRemaining() != 0 )
+            {
+                uint subSize = ds.ReadUInt32();
+                byte[] subData = ds.ReadBytes( subSize );
+
+                NetMsgReceived( this, new NetMsgEventArgs( subData ) );
+            }
+
+        }
+        void HandleLogOnResponse( byte[] data )
+        {
+            var logonResp = new ClientMsgProtobuf<MsgClientLogonResponse>( data );
+
+            if ( logonResp.Msg.Proto.eresult == ( int )EResult.OK )
+            {
+                SessionID = logonResp.ProtoHeader.client_session_id;
+                SteamID = logonResp.ProtoHeader.client_steam_id;
+
+                int hbDelay = logonResp.Msg.Proto.out_of_game_heartbeat_seconds;
+
+                heartBeatFunc = new ScheduledFunction(
+                    SendHeartbeat,
+                    TimeSpan.FromSeconds( hbDelay ),
+                    "HeartBeatFunc"
+                );
+            }
+        }
         void HandleEncryptRequest( byte[] data )
         {
             var encRequest = new ClientMsg<MsgChannelEncryptRequest, MsgHdr>( data );

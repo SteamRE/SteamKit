@@ -1,8 +1,6 @@
 #import "emsg.steamd"
-#import "universe.steamd"
 #import "eresult.steamd"
-#import "accounttype.steamd"
-#import "echatentrytype.steamd"
+#import "enums.steamd"
 #import "netheader.steamd"
 
 class MsgHdr

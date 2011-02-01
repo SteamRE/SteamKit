@@ -24,33 +24,42 @@ namespace SteamKit2
 
         public override void Connect( IPEndPoint endPoint )
         {
-            sock.Connect( endPoint );
-            StartRecv();
+            lock ( ConnLock )
+            {
+                sock.Connect( endPoint );
+                StartRecv();
+            }
         }
 
         public override void Disconnect()
         {
-            sock.Shutdown( SocketShutdown.Both );
-            sock.Disconnect( true );
-            sock.Close();
+            lock ( ConnLock )
+            {
+                sock.Shutdown( SocketShutdown.Both );
+                sock.Disconnect( true );
+                sock.Close();
+            }
         }
 
         public override void Send( IClientMsg clientMsg )
         {
-            byte[] data = clientMsg.Serialize();
-
-            if ( NetFilter != null )
+            lock ( ConnLock )
             {
-                data = NetFilter.ProcessOutgoing( data );
+                byte[] data = clientMsg.Serialize();
+
+                if ( NetFilter != null )
+                {
+                    data = NetFilter.ProcessOutgoing( data );
+                }
+
+                ByteBuffer bb = new ByteBuffer( data.Length + 8 );
+                bb.Append( ( uint )data.Length );
+                bb.Append( TcpConnection.Magic );
+                bb.Append( data );
+
+
+                sock.Send( bb.ToArray() );
             }
-
-            ByteBuffer bb = new ByteBuffer( data.Length + 8 );
-            bb.Append( ( uint )data.Length );
-            bb.Append( TcpConnection.Magic );
-            bb.Append( data );
-
-
-            sock.Send( bb.ToArray() );
         }
 
 

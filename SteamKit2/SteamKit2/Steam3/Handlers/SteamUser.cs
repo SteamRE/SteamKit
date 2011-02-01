@@ -15,9 +15,16 @@ namespace SteamKit2
         public Blob AccRecord { get; set; }
     }
 
+
+    public class LogOnResponseEventArgs : EventArgs
+    {
+    }
+
     public class SteamUser : ClientMsgHandler
     {
         public const string NAME = "SteamUser";
+
+        //public event EventHandler<LogOnResponseEventArgs>
 
         public SteamUser()
             : base( SteamUser.NAME )
@@ -74,7 +81,7 @@ namespace SteamKit2
         }
 
 
-        private void HandleLogOnResponse( byte[] data )
+        void HandleLogOnResponse( byte[] data )
         {
             var logonResp = new ClientMsgProtobuf<MsgClientLogonResponse>( data );
         }
