@@ -1,0 +1,268 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{04A24EE0-87D6-4CFB-BE63-7A9BC777B1A8}</ProjectGuid>
+    <RootNamespace>NetHook</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>NotSet</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>NotSet</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Configuration)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Configuration)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>tier0;tier1;public;.;G:\dev\C++\Open Steamworks\Open Steamworks;C:\Users\ryan\Documents\development\Open Steamworks\Open Steamworks;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WIN32;_DEBUG;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>Ws2_32.lib;steam.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>G:\dev\C++\Open Steamworks;C:\Users\ryan\Documents\development\Open Steamworks;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>tier0;tier1;public;.;C:\opensteamworks\Open Steamworks;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WIN32;NDEBUG;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>Ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="clientapp.cpp" />
+    <ClCompile Include="crypto.cpp" />
+    <ClCompile Include="DataDumper.cpp" />
+    <ClCompile Include="logger.cpp" />
+    <ClCompile Include="steammessages_base.pb.cc" />
+    <ClCompile Include="utils.cpp" />
+    <ClCompile Include="zip.cpp" />
+    <ClCompile Include="tier1\bitbuf.cpp" />
+    <ClCompile Include="tier1\checksum_crc.cpp" />
+    <ClCompile Include="tier1\interface.cpp" />
+    <ClCompile Include="tier1\newbitbuf.cpp" />
+    <ClCompile Include="tier1\strtools.cpp" />
+    <ClCompile Include="csimpledetour.cpp" />
+    <ClCompile Include="csimplescan.cpp" />
+    <ClCompile Include="sigscan.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="clientapp.h" />
+    <ClInclude Include="crypto.h" />
+    <ClInclude Include="DataDumper.h" />
+    <ClInclude Include="logger.h" />
+    <ClInclude Include="steammessages_base.pb.h" />
+    <ClInclude Include="utils.h" />
+    <ClInclude Include="zip.h" />
+    <ClInclude Include="steam\clientmsgs.h" />
+    <ClInclude Include="steam\csteamid.h" />
+    <ClInclude Include="steam\emsg.h" />
+    <ClInclude Include="steam\steamtypes.h" />
+    <ClInclude Include="steam\udppkt.h" />
+    <ClInclude Include="tier1\bitbuf.h" />
+    <ClInclude Include="tier1\byteswap.h" />
+    <ClInclude Include="tier1\callqueue.h" />
+    <ClInclude Include="tier1\characterset.h" />
+    <ClInclude Include="tier1\checksum_crc.h" />
+    <ClInclude Include="tier1\checksum_md5.h" />
+    <ClInclude Include="tier1\CommandBuffer.h" />
+    <ClInclude Include="tier1\convar.h" />
+    <ClInclude Include="tier1\convar_serverbounded.h" />
+    <ClInclude Include="tier1\datamanager.h" />
+    <ClInclude Include="tier1\delegates.h" />
+    <ClInclude Include="tier1\diff.h" />
+    <ClInclude Include="tier1\fmtstr.h" />
+    <ClInclude Include="tier1\functors.h" />
+    <ClInclude Include="tier1\generichash.h" />
+    <ClInclude Include="tier1\iconvar.h" />
+    <ClInclude Include="tier1\interface.h" />
+    <ClInclude Include="tier1\KeyValues.h" />
+    <ClInclude Include="tier1\lzmaDecoder.h" />
+    <ClInclude Include="tier1\lzss.h" />
+    <ClInclude Include="tier1\mempool.h" />
+    <ClInclude Include="tier1\memstack.h" />
+    <ClInclude Include="tier1\netadr.h" />
+    <ClInclude Include="tier1\processor_detect.h" />
+    <ClInclude Include="tier1\rangecheckedvar.h" />
+    <ClInclude Include="tier1\refcount.h" />
+    <ClInclude Include="tier1\smartptr.h" />
+    <ClInclude Include="tier1\stringpool.h" />
+    <ClInclude Include="tier1\strtools.h" />
+    <ClInclude Include="tier1\tier1.h" />
+    <ClInclude Include="tier1\tokenreader.h" />
+    <ClInclude Include="tier1\uniqueid.h" />
+    <ClInclude Include="tier1\utlbidirectionalset.h" />
+    <ClInclude Include="tier1\utlblockmemory.h" />
+    <ClInclude Include="tier1\utlbuffer.h" />
+    <ClInclude Include="tier1\utlbufferutil.h" />
+    <ClInclude Include="tier1\utldict.h" />
+    <ClInclude Include="tier1\utlenvelope.h" />
+    <ClInclude Include="tier1\utlfixedmemory.h" />
+    <ClInclude Include="tier1\utlflags.h" />
+    <ClInclude Include="tier1\utlhandletable.h" />
+    <ClInclude Include="tier1\utlhash.h" />
+    <ClInclude Include="tier1\utlhashdict.h" />
+    <ClInclude Include="tier1\utlintrusivelist.h" />
+    <ClInclude Include="tier1\utllinkedlist.h" />
+    <ClInclude Include="tier1\utlmap.h" />
+    <ClInclude Include="tier1\utlmemory.h" />
+    <ClInclude Include="tier1\utlmultilist.h" />
+    <ClInclude Include="tier1\utlntree.h" />
+    <ClInclude Include="tier1\utlobjectreference.h" />
+    <ClInclude Include="tier1\utlpriorityqueue.h" />
+    <ClInclude Include="tier1\utlqueue.h" />
+    <ClInclude Include="tier1\utlrbtree.h" />
+    <ClInclude Include="tier1\utlsoacontainer.h" />
+    <ClInclude Include="tier1\UtlSortVector.h" />
+    <ClInclude Include="tier1\utlstack.h" />
+    <ClInclude Include="tier1\utlstring.h" />
+    <ClInclude Include="tier1\UtlStringMap.h" />
+    <ClInclude Include="tier1\utlsymbol.h" />
+    <ClInclude Include="tier1\utlvector.h" />
+    <ClInclude Include="tier0\basetypes.h" />
+    <ClInclude Include="tier0\commonmacros.h" />
+    <ClInclude Include="tier0\dbg.h" />
+    <ClInclude Include="tier0\dbgflag.h" />
+    <ClInclude Include="tier0\EventMasks.h" />
+    <ClInclude Include="tier0\EventModes.h" />
+    <ClInclude Include="tier0\fasttimer.h" />
+    <ClInclude Include="tier0\ia32detect.h" />
+    <ClInclude Include="tier0\icommandline.h" />
+    <ClInclude Include="tier0\IOCTLCodes.h" />
+    <ClInclude Include="tier0\K8PerformanceCounters.h" />
+    <ClInclude Include="tier0\l2cache.h" />
+    <ClInclude Include="tier0\mem.h" />
+    <ClInclude Include="tier0\memalloc.h" />
+    <ClInclude Include="tier0\memdbgoff.h" />
+    <ClInclude Include="tier0\memdbgon.h" />
+    <ClInclude Include="tier0\minidump.h" />
+    <ClInclude Include="tier0\P4PerformanceCounters.h" />
+    <ClInclude Include="tier0\P5P6PerformanceCounters.h" />
+    <ClInclude Include="tier0\platform.h" />
+    <ClInclude Include="tier0\pmc360.h" />
+    <ClInclude Include="tier0\PMELib.h" />
+    <ClInclude Include="tier0\progressbar.h" />
+    <ClInclude Include="tier0\protected_things.h" />
+    <ClInclude Include="tier0\systeminformation.h" />
+    <ClInclude Include="tier0\testthread.h" />
+    <ClInclude Include="tier0\threadtools.h" />
+    <ClInclude Include="tier0\tslist.h" />
+    <ClInclude Include="tier0\validator.h" />
+    <ClInclude Include="tier0\valobject.h" />
+    <ClInclude Include="tier0\valve_minmax_off.h" />
+    <ClInclude Include="tier0\valve_minmax_on.h" />
+    <ClInclude Include="tier0\valve_off.h" />
+    <ClInclude Include="tier0\valve_on.h" />
+    <ClInclude Include="tier0\vcr_shared.h" />
+    <ClInclude Include="tier0\vcrmode.h" />
+    <ClInclude Include="tier0\vprof.h" />
+    <ClInclude Include="tier0\wchartypes.h" />
+    <ClInclude Include="tier0\xbox_codeline_defines.h" />
+    <ClInclude Include="mathlib\amd3dx.h" />
+    <ClInclude Include="mathlib\anorms.h" />
+    <ClInclude Include="mathlib\bumpvects.h" />
+    <ClInclude Include="mathlib\compressed_3d_unitvec.h" />
+    <ClInclude Include="mathlib\compressed_light_cube.h" />
+    <ClInclude Include="mathlib\compressed_vector.h" />
+    <ClInclude Include="mathlib\halton.h" />
+    <ClInclude Include="mathlib\IceKey.H" />
+    <ClInclude Include="mathlib\lightdesc.h" />
+    <ClInclude Include="mathlib\math_pfns.h" />
+    <ClInclude Include="mathlib\mathlib.h" />
+    <ClInclude Include="mathlib\noise.h" />
+    <ClInclude Include="mathlib\polyhedron.h" />
+    <ClInclude Include="mathlib\quantize.h" />
+    <ClInclude Include="mathlib\simdvectormatrix.h" />
+    <ClInclude Include="mathlib\spherical_geometry.h" />
+    <ClInclude Include="mathlib\ssemath.h" />
+    <ClInclude Include="mathlib\ssequaternion.h" />
+    <ClInclude Include="mathlib\vector.h" />
+    <ClInclude Include="mathlib\vector2d.h" />
+    <ClInclude Include="mathlib\vector4d.h" />
+    <ClInclude Include="mathlib\vmatrix.h" />
+    <ClInclude Include="mathlib\vplane.h" />
+    <ClInclude Include="csimpledetour.h" />
+    <ClInclude Include="csimplescan.h" />
+    <ClInclude Include="detours.h" />
+    <ClInclude Include="sigscan.h" />
+    <ClInclude Include="public\bitvec.h" />
+    <ClInclude Include="public\coordsize.h" />
+    <ClInclude Include="public\worldsize.h" />
+    <ClInclude Include="zlib\zconf.h" />
+    <ClInclude Include="zlib\zlib.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="detours.lib" />
+    <Library Include="libprotobuf.lib" />
+    <Library Include="tier0.lib" />
+    <Library Include="zlib.lib" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
