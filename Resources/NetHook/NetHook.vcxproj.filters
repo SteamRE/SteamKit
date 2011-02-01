@@ -1,0 +1,526 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Headers">
+      <UniqueIdentifier>{93ff0feb-41ba-4a2c-9515-743871565253}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Steam Headers">
+      <UniqueIdentifier>{ed4f167c-f6fc-4a3f-b5c7-5c0d4571646f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tier1">
+      <UniqueIdentifier>{fa004520-6c3d-4c8b-9247-46be82bbb9f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tier1\Headers">
+      <UniqueIdentifier>{7674315e-74a1-451d-a9f1-1a33fb9f8a3a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tier1\Source">
+      <UniqueIdentifier>{cefb79e7-d12e-4d17-ab50-23b2365add3d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tier0">
+      <UniqueIdentifier>{b948904a-73d7-445e-bfa7-146fcdf8dffa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tier0\Headers">
+      <UniqueIdentifier>{f03368a7-6e2f-45f0-aabc-6aa1fcdee7f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="mathlib">
+      <UniqueIdentifier>{9b6b88a4-c98c-4a87-b335-1fc72128660a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Helpers">
+      <UniqueIdentifier>{ce62386e-1161-49e4-9f21-f912acbb45e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="public">
+      <UniqueIdentifier>{f9881518-2823-4cab-ae08-0a00f32a3207}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="zlib">
+      <UniqueIdentifier>{66a163d1-a739-4f18-8b60-d2b5790462c3}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="clientapp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="crypto.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DataDumper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="logger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="utils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="zip.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tier1\bitbuf.cpp">
+      <Filter>tier1\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="tier1\checksum_crc.cpp">
+      <Filter>tier1\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="tier1\interface.cpp">
+      <Filter>tier1\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="tier1\newbitbuf.cpp">
+      <Filter>tier1\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="tier1\strtools.cpp">
+      <Filter>tier1\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="csimpledetour.cpp">
+      <Filter>Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="csimplescan.cpp">
+      <Filter>Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="sigscan.cpp">
+      <Filter>Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="steammessages_base.pb.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="clientapp.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="crypto.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="DataDumper.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="logger.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="utils.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="zip.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="steam\clientmsgs.h">
+      <Filter>Steam Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="steam\csteamid.h">
+      <Filter>Steam Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="steam\emsg.h">
+      <Filter>Steam Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="steam\steamtypes.h">
+      <Filter>Steam Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="steam\udppkt.h">
+      <Filter>Steam Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier1\bitbuf.h">
+      <Filter>tier1\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier1\byteswap.h">
+      <Filter>tier1\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier1\callqueue.h">
+      <Filter>tier1\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier1\characterset.h">
+      <Filter>tier1\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier1\checksum_crc.h">
+      <Filter>tier1\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier1\checksum_md5.h">
+      <Filter>tier1\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier1\CommandBuffer.h">
+      <Filter>tier1\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier1\convar.h">
+      <Filter>tier1\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier1\convar_serverbounded.h">
+      <Filter>tier1\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier1\datamanager.h">
+      <Filter>tier1\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier1\delegates.h">
+      <Filter>tier1\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier1\diff.h">
+      <Filter>tier1\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier1\fmtstr.h">
+      <Filter>tier1\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier1\functors.h">
+      <Filter>tier1\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier1\generichash.h">
+      <Filter>tier1\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier1\iconvar.h">
+      <Filter>tier1\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier1\interface.h">
+      <Filter>tier1\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier1\KeyValues.h">
+      <Filter>tier1\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier1\lzmaDecoder.h">
+      <Filter>tier1\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier1\lzss.h">
+      <Filter>tier1\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier1\mempool.h">
+      <Filter>tier1\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier1\memstack.h">
+      <Filter>tier1\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier1\netadr.h">
+      <Filter>tier1\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier1\processor_detect.h">
+      <Filter>tier1\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier1\rangecheckedvar.h">
+      <Filter>tier1\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier1\refcount.h">
+      <Filter>tier1\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier1\smartptr.h">
+      <Filter>tier1\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier1\stringpool.h">
+      <Filter>tier1\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier1\strtools.h">
+      <Filter>tier1\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier1\tier1.h">
+      <Filter>tier1\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier1\tokenreader.h">
+      <Filter>tier1\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier1\uniqueid.h">
+      <Filter>tier1\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier1\utlbidirectionalset.h">
+      <Filter>tier1\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier1\utlblockmemory.h">
+      <Filter>tier1\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier1\utlbuffer.h">
+      <Filter>tier1\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier1\utlbufferutil.h">
+      <Filter>tier1\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier1\utldict.h">
+      <Filter>tier1\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier1\utlenvelope.h">
+      <Filter>tier1\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier1\utlfixedmemory.h">
+      <Filter>tier1\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier1\utlflags.h">
+      <Filter>tier1\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier1\utlhandletable.h">
+      <Filter>tier1\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier1\utlhash.h">
+      <Filter>tier1\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier1\utlhashdict.h">
+      <Filter>tier1\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier1\utlintrusivelist.h">
+      <Filter>tier1\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier1\utllinkedlist.h">
+      <Filter>tier1\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier1\utlmap.h">
+      <Filter>tier1\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier1\utlmemory.h">
+      <Filter>tier1\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier1\utlmultilist.h">
+      <Filter>tier1\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier1\utlntree.h">
+      <Filter>tier1\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier1\utlobjectreference.h">
+      <Filter>tier1\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier1\utlpriorityqueue.h">
+      <Filter>tier1\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier1\utlqueue.h">
+      <Filter>tier1\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier1\utlrbtree.h">
+      <Filter>tier1\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier1\utlsoacontainer.h">
+      <Filter>tier1\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier1\UtlSortVector.h">
+      <Filter>tier1\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier1\utlstack.h">
+      <Filter>tier1\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier1\utlstring.h">
+      <Filter>tier1\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier1\UtlStringMap.h">
+      <Filter>tier1\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier1\utlsymbol.h">
+      <Filter>tier1\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier1\utlvector.h">
+      <Filter>tier1\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier0\basetypes.h">
+      <Filter>tier0\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier0\commonmacros.h">
+      <Filter>tier0\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier0\dbg.h">
+      <Filter>tier0\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier0\dbgflag.h">
+      <Filter>tier0\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier0\EventMasks.h">
+      <Filter>tier0\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier0\EventModes.h">
+      <Filter>tier0\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier0\fasttimer.h">
+      <Filter>tier0\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier0\ia32detect.h">
+      <Filter>tier0\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier0\icommandline.h">
+      <Filter>tier0\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier0\IOCTLCodes.h">
+      <Filter>tier0\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier0\K8PerformanceCounters.h">
+      <Filter>tier0\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier0\l2cache.h">
+      <Filter>tier0\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier0\mem.h">
+      <Filter>tier0\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier0\memalloc.h">
+      <Filter>tier0\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier0\memdbgoff.h">
+      <Filter>tier0\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier0\memdbgon.h">
+      <Filter>tier0\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier0\minidump.h">
+      <Filter>tier0\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier0\P4PerformanceCounters.h">
+      <Filter>tier0\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier0\P5P6PerformanceCounters.h">
+      <Filter>tier0\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier0\platform.h">
+      <Filter>tier0\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier0\pmc360.h">
+      <Filter>tier0\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier0\PMELib.h">
+      <Filter>tier0\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier0\progressbar.h">
+      <Filter>tier0\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier0\protected_things.h">
+      <Filter>tier0\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier0\systeminformation.h">
+      <Filter>tier0\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier0\testthread.h">
+      <Filter>tier0\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier0\threadtools.h">
+      <Filter>tier0\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier0\tslist.h">
+      <Filter>tier0\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier0\validator.h">
+      <Filter>tier0\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier0\valobject.h">
+      <Filter>tier0\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier0\valve_minmax_off.h">
+      <Filter>tier0\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier0\valve_minmax_on.h">
+      <Filter>tier0\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier0\valve_off.h">
+      <Filter>tier0\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier0\valve_on.h">
+      <Filter>tier0\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier0\vcr_shared.h">
+      <Filter>tier0\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier0\vcrmode.h">
+      <Filter>tier0\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier0\vprof.h">
+      <Filter>tier0\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier0\wchartypes.h">
+      <Filter>tier0\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tier0\xbox_codeline_defines.h">
+      <Filter>tier0\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="mathlib\amd3dx.h">
+      <Filter>mathlib</Filter>
+    </ClInclude>
+    <ClInclude Include="mathlib\anorms.h">
+      <Filter>mathlib</Filter>
+    </ClInclude>
+    <ClInclude Include="mathlib\bumpvects.h">
+      <Filter>mathlib</Filter>
+    </ClInclude>
+    <ClInclude Include="mathlib\compressed_3d_unitvec.h">
+      <Filter>mathlib</Filter>
+    </ClInclude>
+    <ClInclude Include="mathlib\compressed_light_cube.h">
+      <Filter>mathlib</Filter>
+    </ClInclude>
+    <ClInclude Include="mathlib\compressed_vector.h">
+      <Filter>mathlib</Filter>
+    </ClInclude>
+    <ClInclude Include="mathlib\halton.h">
+      <Filter>mathlib</Filter>
+    </ClInclude>
+    <ClInclude Include="mathlib\IceKey.H">
+      <Filter>mathlib</Filter>
+    </ClInclude>
+    <ClInclude Include="mathlib\lightdesc.h">
+      <Filter>mathlib</Filter>
+    </ClInclude>
+    <ClInclude Include="mathlib\math_pfns.h">
+      <Filter>mathlib</Filter>
+    </ClInclude>
+    <ClInclude Include="mathlib\mathlib.h">
+      <Filter>mathlib</Filter>
+    </ClInclude>
+    <ClInclude Include="mathlib\noise.h">
+      <Filter>mathlib</Filter>
+    </ClInclude>
+    <ClInclude Include="mathlib\polyhedron.h">
+      <Filter>mathlib</Filter>
+    </ClInclude>
+    <ClInclude Include="mathlib\quantize.h">
+      <Filter>mathlib</Filter>
+    </ClInclude>
+    <ClInclude Include="mathlib\simdvectormatrix.h">
+      <Filter>mathlib</Filter>
+    </ClInclude>
+    <ClInclude Include="mathlib\spherical_geometry.h">
+      <Filter>mathlib</Filter>
+    </ClInclude>
+    <ClInclude Include="mathlib\ssemath.h">
+      <Filter>mathlib</Filter>
+    </ClInclude>
+    <ClInclude Include="mathlib\ssequaternion.h">
+      <Filter>mathlib</Filter>
+    </ClInclude>
+    <ClInclude Include="mathlib\vector.h">
+      <Filter>mathlib</Filter>
+    </ClInclude>
+    <ClInclude Include="mathlib\vector2d.h">
+      <Filter>mathlib</Filter>
+    </ClInclude>
+    <ClInclude Include="mathlib\vector4d.h">
+      <Filter>mathlib</Filter>
+    </ClInclude>
+    <ClInclude Include="mathlib\vmatrix.h">
+      <Filter>mathlib</Filter>
+    </ClInclude>
+    <ClInclude Include="mathlib\vplane.h">
+      <Filter>mathlib</Filter>
+    </ClInclude>
+    <ClInclude Include="csimpledetour.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="csimplescan.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="detours.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="sigscan.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="public\bitvec.h">
+      <Filter>public</Filter>
+    </ClInclude>
+    <ClInclude Include="public\coordsize.h">
+      <Filter>public</Filter>
+    </ClInclude>
+    <ClInclude Include="public\worldsize.h">
+      <Filter>public</Filter>
+    </ClInclude>
+    <ClInclude Include="zlib\zconf.h">
+      <Filter>zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="zlib\zlib.h">
+      <Filter>zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="steammessages_base.pb.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="detours.lib" />
+    <Library Include="tier0.lib" />
+    <Library Include="libprotobuf.lib" />
+    <Library Include="zlib.lib" />
+  </ItemGroup>
+</Project>
