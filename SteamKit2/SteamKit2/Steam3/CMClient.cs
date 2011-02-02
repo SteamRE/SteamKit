@@ -24,7 +24,7 @@ namespace SteamKit2
         }
     }
 
-    public class CMClient
+    public abstract class CMClient
     {
 
         public EUniverse ConnectedUniverse { get; private set; }
@@ -183,6 +183,11 @@ namespace SteamKit2
                 SteamID = logonResp.ProtoHeader.client_steam_id;
 
                 int hbDelay = logonResp.Msg.Proto.out_of_game_heartbeat_seconds;
+
+                if ( heartBeatFunc != null )
+                {
+                    heartBeatFunc.Stop();
+                }
 
                 heartBeatFunc = new ScheduledFunction(
                     SendHeartbeat,

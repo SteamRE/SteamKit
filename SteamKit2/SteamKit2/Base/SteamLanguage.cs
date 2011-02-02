@@ -638,6 +638,29 @@ namespace SteamKit2
 		IgnoredFriend = 6,
 		Max = 7,
 	}
+
+    [Flags]
+	public enum EAccountFlags
+	{
+		NormalUser = 0,
+		PersonaNameSet = 1,
+		Unbannable = 2,
+		PasswordSet = 4,
+		Support = 8,
+		Admin = 16,
+		Supervisor = 32,
+		AppEditor = 64,
+		HWIDSet = 128,
+		PersonalQASet = 256,
+		VacBeta = 512,
+		Debug = 1024,
+		Disabled = 2048,
+		LimitedUser = 4096,
+		LimitedUserForce = 8192,
+		EmailValidated = 16384,
+		MarketingTreatment = 32768,
+		Max = 32769,
+	}
 	public enum EUdpPacketType
 	{
 		Invalid = 0,

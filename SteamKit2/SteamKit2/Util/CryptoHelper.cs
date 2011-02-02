@@ -7,7 +7,7 @@ using Classless.Hasher;
 
 namespace SteamKit2
 {
-    static class CryptoHelper
+    public static class CryptoHelper
     {
         public static byte[] RSAEncrypt( byte[] input, byte[] key )
         {
