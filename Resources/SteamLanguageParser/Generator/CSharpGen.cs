@@ -342,7 +342,7 @@ namespace SteamLanguageParser
                 }
             }
 
-            sb.AppendLine(padding + "\tByteBuffer bb = new ByteBuffer( " + String.Join(" + ", varLengthProps) + " );");
+            sb.AppendLine(padding + "\tByteBuffer bb = new ByteBuffer( " + String.Join(" + ", varLengthProps.ToArray()) + " );");
             sb.AppendLine();
             //sb.AppendLine(padding + "\tBinaryWriter writer = new BinaryWriter( msBuffer );");
             //sb.AppendLine();
