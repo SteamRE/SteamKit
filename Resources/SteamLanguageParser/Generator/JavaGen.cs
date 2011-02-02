@@ -356,7 +356,7 @@ namespace SteamLanguageParser
                 }
             }
 
-            sb.AppendLine(padding + "\tByteBuffer buffer = ByteBuffer.allocate( " + String.Join(" + ", varLengthProps) + " );");
+            sb.AppendLine(padding + "\tByteBuffer buffer = ByteBuffer.allocate( " + String.Join(" + ", varLengthProps.ToArray()) + " );");
             sb.AppendLine(padding + "\tbuffer.order( ByteOrder.LITTLE_ENDIAN );");
             sb.AppendLine();
 
