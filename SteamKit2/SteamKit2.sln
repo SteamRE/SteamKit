@@ -5,7 +5,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SteamKit2", "SteamKit2\Stea
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tester", "Tester\Tester.csproj", "{36FFD5FA-0894-4B19-BB9F-A7487920E635}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SteamLanguage", "SteamLanguage", "{9B9ED32F-938F-4CC1-B3EC-AE94BB102FC1}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Steam Language", "Steam Language", "{9B9ED32F-938F-4CC1-B3EC-AE94BB102FC1}"
 	ProjectSection(SolutionItems) = preProject
 		..\Resources\SteamLanguage\emsg.steamd = ..\Resources\SteamLanguage\emsg.steamd
 		..\Resources\SteamLanguage\enums.steamd = ..\Resources\SteamLanguage\enums.steamd

@@ -13,6 +13,7 @@ namespace SteamKit2
         public byte[] Data { get; private set; }
 
         public NetMsgEventArgs()
+            : this( new byte[ 0 ] )
         {
         }
         public NetMsgEventArgs( byte[] data )
@@ -41,7 +42,7 @@ namespace SteamKit2
         }
     }
 
-    public abstract class Connection
+    abstract class Connection
     {
         public static readonly IPEndPoint[] CMServers =
         {

@@ -14,6 +14,22 @@ namespace Tester
         public static SteamUser SteamUser { get; private set; }
         public static SteamFriends SteamFriends { get; private set; }
 
+        public static LogOnDetails LoginDetails
+        {
+            get
+            {
+                return new LogOnDetails()
+                {
+                    Username = userName,
+                    Password = password,
+
+                    ClientTGT = clientTgt,
+                    ServerTGT = serverTgt,
+                    AccRecord = accRecord,
+                };
+            }
+        }
+
 
         static string userName;
         static string password;
@@ -49,22 +65,6 @@ namespace Tester
 
             SteamUser = SteamClient.GetHandler<SteamUser>( SteamUser.NAME );
             SteamFriends = SteamClient.GetHandler<SteamFriends>( SteamFriends.NAME );
-
-            SteamClient.ChannelEncrypted += ( obj, e ) =>
-            {
-
-                var details = new LogOnDetails()
-                {
-                    Username = userName,
-                    Password = password,
-
-                    ClientTGT = clientTgt,
-                    ServerTGT = serverTgt,
-                    AccRecord = accRecord,
-                };
-
-                SteamUser.LogOn( details );
-            };
 
             SteamClient.Connect();
         }
