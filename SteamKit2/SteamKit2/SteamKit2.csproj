@@ -59,6 +59,8 @@
     <Compile Include="Blob\CachedBinaryReader.cs" />
     <Compile Include="Blob\Fields\AuthFields.cs" />
     <Compile Include="Blob\Fields\CDRFields.cs" />
+    <Compile Include="Steam2\ConfigServerClient.cs" />
+    <Compile Include="Util\Utils.cs" />
     <Compile Include="Steam3\Handlers\SteamFriends.cs" />
     <Compile Include="Util\ScheduledFunction.cs" />
     <Compile Include="Steam3\Handlers\SteamUser.cs" />
@@ -80,10 +82,8 @@
     <Compile Include="Util\ByteBuffer.cs" />
     <Compile Include="Networking\Steam3\Connection.cs" />
     <Compile Include="Networking\Steam2\TcpPacket.cs" />
-    <Compile Include="Util\NetHelpers.cs" />
     <Compile Include="Util\KeyDictionary.cs" />
     <Compile Include="Util\CryptoHelper.cs" />
-    <Compile Include="Util\MsgUtil.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\PsuedoRandom.cs" />
     <Compile Include="Types\SteamGlobalUserID.cs" />

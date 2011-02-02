@@ -5,6 +5,9 @@ using System.Text;
 
 namespace SteamKit2
 {
+    public abstract class CallbackMsg
+    {
+    }
 
     public abstract class ClientMsgHandler
     {
@@ -24,21 +27,29 @@ namespace SteamKit2
         }
 
 
-        internal abstract void HandleMsg( EMsg eMsg, byte[] data );
+        public abstract void HandleMsg( EMsg eMsg, byte[] data );
     }
 
-    public class SteamClient : CMClient
+    public sealed class SteamClient : CMClient
     {
         public Dictionary<string, ClientMsgHandler> Handlers { get; private set; }
 
+        object callbackLock = new object();
+        Queue<CallbackMsg> callbackQueue;
+
+
         public SteamClient()
         {
-            Handlers = new Dictionary<string, ClientMsgHandler>( StringComparer.OrdinalIgnoreCase );
+            this.Handlers = new Dictionary<string, ClientMsgHandler>( StringComparer.OrdinalIgnoreCase );
 
-            AddHandler( new SteamUser() );
-            AddHandler( new SteamFriends() );
+            callbackQueue = new Queue<CallbackMsg>();
+
+            // add this library's handlers
+            this.AddHandler( new SteamUser() );
+            this.AddHandler( new SteamFriends() );
         }
 
+        // handlers
         public void AddHandler( ClientMsgHandler handler )
         {
             if ( Handlers.ContainsKey( handler.Name ) )
@@ -48,6 +59,17 @@ namespace SteamKit2
 
             handler.Setup( this );
         }
+        public void RemoveHandler( string handler )
+        {
+            if ( !Handlers.ContainsKey( handler ) )
+                return;
+
+            Handlers.Remove( handler );
+        }
+        public void RemoveHandler( ClientMsgHandler handler )
+        {
+            this.RemoveHandler( handler.Name );
+        }
 
         public T GetHandler<T>( string name ) where T : ClientMsgHandler
         {
@@ -56,6 +78,41 @@ namespace SteamKit2
 
             return null;
         }
+
+
+        // callbacks
+        public CallbackMsg GetCallback()
+        {
+            lock ( callbackLock )
+            {
+                if ( callbackQueue.Count == 0 )
+                    return null;
+
+                return callbackQueue.Peek();
+            }
+        }
+        public void FreeLastCallback()
+        {
+            lock ( callbackLock )
+            {
+                if ( callbackQueue.Count == 0 )
+                    return;
+
+                callbackQueue.Dequeue();
+            }
+        }
+        public void PostCallback( CallbackMsg msg )
+        {
+            lock ( callbackLock )
+            {
+                if ( msg == null )
+                    return;
+
+                callbackQueue.Enqueue( msg );
+            }
+        }
+
+
 
         protected override void OnClientMsgReceived( ClientMsgEventArgs e )
         {

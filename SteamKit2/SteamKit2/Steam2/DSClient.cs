@@ -8,6 +8,10 @@ namespace SteamKit2
 {
     public class DSClient : ServerClient
     {
+        public IPEndPoint[] GetServerList( EServerType type )
+        {
+            return GetServerList( type, null );
+        }
 
         public IPEndPoint[] GetServerList( EServerType type, string userName )
         {
