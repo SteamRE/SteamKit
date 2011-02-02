@@ -27,7 +27,17 @@ namespace SteamKit2
         }
 
 
-        public abstract void HandleMsg( EMsg eMsg, byte[] data );
+        public abstract void HandleMsg( ClientMsgEventArgs e );
+    }
+
+    public class ConnectedCallback : CallbackMsg
+    {
+        public EResult Result { get; set; }
+
+        internal ConnectedCallback( MsgChannelEncryptResult result )
+        {
+            this.Result = result.Result;
+        }
     }
 
     public sealed class SteamClient : CMClient
@@ -70,7 +80,6 @@ namespace SteamKit2
         {
             this.RemoveHandler( handler.Name );
         }
-
         public T GetHandler<T>( string name ) where T : ClientMsgHandler
         {
             if ( Handlers.ContainsKey( name ) )
@@ -116,11 +125,28 @@ namespace SteamKit2
 
         protected override void OnClientMsgReceived( ClientMsgEventArgs e )
         {
-            base.OnClientMsgReceived( e );
+            EMsg eMsg = MsgUtil.GetMsg( e.EMsg );
 
+            if ( eMsg == EMsg.ChannelEncryptResult )
+                HandleEncryptResult( e.Data );
+
+            // pass along the clientmsg to all registered handlers
             foreach ( var kvp in Handlers )
             {
-                kvp.Value.HandleMsg( e.EMsg, e.Data );
+                kvp.Value.HandleMsg( e );
+            }
+        }
+
+
+        void HandleEncryptResult( byte[] data )
+        {
+            // if the EResult is OK, we've finished the crypto handshake and can send commands (such as LogOn)
+            var encResult = new ClientMsg<MsgChannelEncryptResult, MsgHdr>( data );
+
+            if ( encResult.Msg.Result == EResult.OK )
+            {
+                //  we've connected
+                PostCallback( new ConnectedCallback( encResult.Msg ) );
             }
         }
 

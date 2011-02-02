@@ -8,7 +8,7 @@ using System.IO;
 
 namespace SteamKit2
 {
-    public class TcpConnection : Connection
+    class TcpConnection : Connection
     {
         static readonly UInt32 Magic = 0x31305456;
 
@@ -27,8 +27,9 @@ namespace SteamKit2
             lock ( ConnLock )
             {
                 sock.Connect( endPoint );
-                StartRecv();
             }
+
+            StartRecv();
         }
 
         public override void Disconnect()
@@ -43,21 +44,20 @@ namespace SteamKit2
 
         public override void Send( IClientMsg clientMsg )
         {
+            byte[] data = clientMsg.Serialize();
+
+            if ( NetFilter != null )
+            {
+                data = NetFilter.ProcessOutgoing( data );
+            }
+
+            ByteBuffer bb = new ByteBuffer( data.Length + 8 );
+            bb.Append( ( uint )data.Length );
+            bb.Append( TcpConnection.Magic );
+            bb.Append( data );
+
             lock ( ConnLock )
             {
-                byte[] data = clientMsg.Serialize();
-
-                if ( NetFilter != null )
-                {
-                    data = NetFilter.ProcessOutgoing( data );
-                }
-
-                ByteBuffer bb = new ByteBuffer( data.Length + 8 );
-                bb.Append( ( uint )data.Length );
-                bb.Append( TcpConnection.Magic );
-                bb.Append( data );
-
-
                 sock.Send( bb.ToArray() );
             }
         }
@@ -71,12 +71,12 @@ namespace SteamKit2
             sockArgs.SetBuffer( recvBuffer, 0, recvBuffer.Length );
             sockArgs.Completed += RecvCompleted;
 
-            bool bCompleted = sock.ReceiveAsync( sockArgs );
+            sock.ReceiveAsync( sockArgs );
 
-            if ( !bCompleted )
+            /*if ( !bCompleted )
             {
                 RecvCompleted( null, sockArgs );
-            }
+            }*/
         }
 
         void RecvCompleted( object sender, SocketAsyncEventArgs e )

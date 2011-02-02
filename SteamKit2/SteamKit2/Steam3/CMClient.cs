@@ -11,6 +11,11 @@ namespace SteamKit2
     {
         public EMsg EMsg { get; private set; }
 
+        public bool IsProto
+        {
+            get { return MsgUtil.IsProtoBuf( EMsg ); }
+        }
+
         public ClientMsgEventArgs()
             : base()
         {
@@ -24,27 +29,13 @@ namespace SteamKit2
         }
     }
 
+    // this base client handles everything required to keep the connection to steam active
     public abstract class CMClient
     {
 
         public EUniverse ConnectedUniverse { get; private set; }
         public int SessionID { get; private set; }
         public ulong SteamID { get; private set; }
-
-
-        public event EventHandler<ClientMsgEventArgs> ClientMsgReceived;
-        protected virtual void OnClientMsgReceived( ClientMsgEventArgs e )
-        {
-            if ( ClientMsgReceived != null )
-                ClientMsgReceived( this, e );
-        }
-
-        public event EventHandler ChannelEncrypted;
-        protected virtual void OnChannelEncrypted( EventArgs e )
-        {
-            if ( ChannelEncrypted != null )
-                ChannelEncrypted( this, e );
-        }
 
 
         Connection Connection { get; set; }
@@ -55,9 +46,10 @@ namespace SteamKit2
 
         public CMClient()
         {
-            SessionID = 0;
-            SteamID = 0;
+            SessionID = default( int );
+            SteamID = default( ulong );
 
+            // todo: UdpConnection needs an implementation
             Connection = new TcpConnection();
             Connection.NetMsgReceived += NetMsgReceived;
         }
@@ -79,7 +71,7 @@ namespace SteamKit2
             Connection.Disconnect();
         }
 
-
+        
         public void Send( IClientMsg clientMsg )
         {
 #if DEBUG
@@ -93,6 +85,35 @@ namespace SteamKit2
 
             Connection.Send( clientMsg );
         }
+        
+        /*
+        public void Send<MsgType>( ClientMsgProtobuf<MsgType> clientMsg )
+            where MsgType : ISteamSerializableMessage, new()
+        {
+            clientMsg.ProtoHeader.client_session_id = this.SessionID;
+            clientMsg.ProtoHeader.client_steam_id = this.SteamID;
+
+            Connection.Send( clientMsg );
+        }
+        public void Send<MsgType>( ClientMsg<MsgType, ExtendedClientMsgHdr> clientMsg )
+            where MsgType : ISteamSerializableMessage, new()
+        {
+            clientMsg.Header.SessionID = this.SessionID;
+            clientMsg.Header.SteamID = this.SteamID;
+
+            Connection.Send( clientMsg );
+        }
+        public void Send<MsgType>( ClientMsg<MsgType, MsgHdr> clientMsg )
+            where MsgType : ISteamSerializableMessage, new()
+        {
+            Connection.Send( clientMsg );
+        }*/
+
+
+        protected virtual void OnClientMsgReceived( ClientMsgEventArgs e )
+        {
+            // nop, SteamClient handles this
+        }
 
 
         void NetMsgReceived( object sender, NetMsgEventArgs e )
@@ -105,6 +126,8 @@ namespace SteamKit2
 #if DEBUG
             Trace.WriteLine( string.Format( "CMClient <- Recv'd EMsg: {0} (Proto: {1})", eMsg, MsgUtil.IsProtoBuf( rawEMsg ) ), "Steam3" );
 #endif
+
+            ClientMsgEventArgs cliEvent = new ClientMsgEventArgs( ( EMsg )rawEMsg, e.Data );
 
             switch ( eMsg )
             {
@@ -125,17 +148,13 @@ namespace SteamKit2
                     break;
             }
 
-            OnClientMsgReceived( new ClientMsgEventArgs( eMsg, data ) );
+            OnClientMsgReceived( cliEvent );
         }
 
 
         void SendHeartbeat()
         {
             var beat = new ClientMsgProtobuf<MsgClientHeartBeat>();
-
-            beat.ProtoHeader.client_session_id = SessionID;
-            beat.ProtoHeader.client_steam_id = SteamID;
-
             Send( beat );
         }
 
@@ -175,25 +194,30 @@ namespace SteamKit2
         }
         void HandleLogOnResponse( byte[] data )
         {
-            var logonResp = new ClientMsgProtobuf<MsgClientLogonResponse>( data );
+            uint eMsg = BitConverter.ToUInt32( data, 0 );
 
-            if ( logonResp.Msg.Proto.eresult == ( int )EResult.OK )
+            if ( MsgUtil.IsProtoBuf( eMsg ) )
             {
-                SessionID = logonResp.ProtoHeader.client_session_id;
-                SteamID = logonResp.ProtoHeader.client_steam_id;
+                var logonResp = new ClientMsgProtobuf<MsgClientLogonResponse>( data );
 
-                int hbDelay = logonResp.Msg.Proto.out_of_game_heartbeat_seconds;
-
-                if ( heartBeatFunc != null )
+                if ( logonResp.Msg.Proto.eresult == ( int )EResult.OK )
                 {
-                    heartBeatFunc.Stop();
-                }
+                    SessionID = logonResp.ProtoHeader.client_session_id;
+                    SteamID = logonResp.ProtoHeader.client_steam_id;
 
-                heartBeatFunc = new ScheduledFunction(
-                    SendHeartbeat,
-                    TimeSpan.FromSeconds( hbDelay ),
-                    "HeartBeatFunc"
-                );
+                    int hbDelay = logonResp.Msg.Proto.out_of_game_heartbeat_seconds;
+
+                    if ( heartBeatFunc != null )
+                    {
+                        heartBeatFunc.Stop();
+                    }
+
+                    heartBeatFunc = new ScheduledFunction(
+                        SendHeartbeat,
+                        TimeSpan.FromSeconds( hbDelay ),
+                        "HeartBeatFunc"
+                    );
+                }
             }
         }
         void HandleEncryptRequest( byte[] data )
@@ -237,9 +261,6 @@ namespace SteamKit2
             Console.WriteLine( "Got Encryption Result: {0}", encResult.Msg.Result );
 
             Connection.NetFilter = new NetFilterEncryption( tempSessionKey );
-
-            if ( encResult.Msg.Result == EResult.OK )
-                OnChannelEncrypted( EventArgs.Empty );
         }
 
     }

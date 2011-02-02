@@ -7,6 +7,7 @@ using System.Threading;
 
 namespace Tester
 {
+
     static class Program
     {
         /// <summary>
@@ -17,12 +18,22 @@ namespace Tester
         {
             Application.EnableVisualStyles();
 
-            LoginDialog ld = new LoginDialog();
+            //TraceDialog td = new TraceDialog();
+            //td.Show();
 
-            if ( ld.ShowDialog() != DialogResult.OK )
+            if ( new LoginDialog().ShowDialog() != DialogResult.OK )
                 return;
 
-            Application.Run( new MainForm() );
+            MainForm mf = new MainForm();
+
+            mf.Show();
+
+            while ( mf.Created )
+            {
+                mf.UpdateCallbacks();
+
+                Application.DoEvents();
+            }
         }
     }
 }
