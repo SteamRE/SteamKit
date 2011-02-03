@@ -22,9 +22,7 @@ namespace SteamKit2
 
                 if ( !this.HandshakeServer( EServerType.GeneralDirectoryServer ) )
                 {
-#if DEBUG
-                    Trace.WriteLine( "DSClient GetServerList failed handshake.", "Steam2" );
-#endif
+                    DebugLog.WriteLine( "DSClient", "GetServerList failed handshake." );
 
                     Socket.Disconnect();
                     return null;
@@ -45,9 +43,7 @@ namespace SteamKit2
 
                 if ( !bRet )
                 {
-#if DEBUG
-                    Trace.WriteLine( "DSClient GetServerList failed sending EServerType command.", "Steam2" );
-#endif
+                    DebugLog.WriteLine( "DSClient", "GetServerList failed sending EServerType command." );
 
                     Socket.Disconnect();
                     return null;
@@ -67,9 +63,7 @@ namespace SteamKit2
             }
             catch ( Exception ex )
             {
-#if DEBUG
-                Trace.WriteLine( string.Format( "DSClient GetServerList threw an exception.\n{0}", ex.ToString() ), "Steam2" );
-#endif
+                DebugLog.WriteLine( "DSClient", "GetServerList threw an exception.\n{0}", ex.ToString() );
 
                 Socket.Disconnect();
                 return null;

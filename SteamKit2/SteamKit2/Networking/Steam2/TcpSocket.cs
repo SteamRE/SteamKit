@@ -36,6 +36,10 @@ namespace SteamKit2
 
         public void Disconnect()
         {
+            // mono doesn't like calling Shutdown if we're not connected
+            if ( sock == null || !sock.Connected )
+                return;
+
             if ( sock != null )
             {
                 sock.Shutdown( SocketShutdown.Both );

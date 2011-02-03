@@ -14,7 +14,6 @@ namespace SteamKit2
 
         public byte[] GetContentDescriptionRecord( byte[] oldCDRHash )
         {
-
             try
             {
                 if ( !this.HandshakeServer( EServerType.ConfigServer ) )
@@ -42,9 +41,8 @@ namespace SteamKit2
             }
             catch ( Exception ex )
             {
-#if DEBUG
-                Trace.WriteLine( string.Format( "ConfigServerClient GetContentDescriptionRecord threw an exception.\n{0}", ex.ToString() ), "Steam2" );
-#endif
+                DebugLog.WriteLine( "ConfigServerClient", "GetContentDescriptionRecord threw an exception.\n{0}", ex.ToString() );
+
                 Socket.Disconnect();
                 return null;
             }

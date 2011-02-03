@@ -85,9 +85,7 @@ namespace SteamKit2
             if ( this.SteamID != default( ulong ) )
                 clientMsg.ProtoHeader.client_steam_id = this.SteamID;
 
-#if DEBUG
-            Trace.WriteLine( string.Format( "CMClient Sent -> EMsg: {0} (Proto: True)", clientMsg.GetEMsg() ), "Steam3" );
-#endif
+            DebugLog.WriteLine( "CMClient", "Sent -> EMsg: {0} (Proto: True)", clientMsg.GetEMsg() );
 
             Connection.Send( clientMsg );
         }
@@ -100,19 +98,14 @@ namespace SteamKit2
             if ( this.SteamID != default( ulong ) )
                 clientMsg.Header.SteamID = this.SteamID;
 
-#if DEBUG
-            Trace.WriteLine( string.Format( "CMClient Sent -> EMsg: {0} (Proto: False)", clientMsg.GetEMsg() ), "Steam3" );
-#endif
+            DebugLog.WriteLine( "CMClient", "Sent -> EMsg: {0} (Proto: False)", clientMsg.GetEMsg() );
 
             Connection.Send( clientMsg );
         }
         public void Send<MsgType>( ClientMsg<MsgType, MsgHdr> clientMsg )
             where MsgType : ISteamSerializableMessage, new()
         {
-
-#if DEBUG
-            Trace.WriteLine( string.Format( "CMClient Sent -> EMsg: {0} (Proto: False)", clientMsg.GetEMsg() ), "Steam3" );
-#endif
+            DebugLog.WriteLine( "CMClient", "Sent -> EMsg: {0} (Proto: False)", clientMsg.GetEMsg() );
 
             Connection.Send( clientMsg );
         }
@@ -133,9 +126,7 @@ namespace SteamKit2
 
             ClientMsgEventArgs cliEvent = new ClientMsgEventArgs( ( EMsg )rawEMsg, e.Data );
 
-#if DEBUG
-            Trace.WriteLine( string.Format( "CMClient <- Recv'd EMsg: {0} (Proto: {1})", eMsg, MsgUtil.IsProtoBuf( rawEMsg ) ), "Steam3" );
-#endif
+            DebugLog.WriteLine( "CMClient", "<- Recv'd EMsg: {0} (Proto: {1})", cliEvent.EMsg, cliEvent.IsProto );
 
             switch ( eMsg )
             {
@@ -171,10 +162,8 @@ namespace SteamKit2
         {
             if ( !e.IsProto )
             {
-#if DEBUG
-                Trace.WriteLine( "CMClient HandleMulti got non-proto MsgMulti!!", "Steam3" );
+                DebugLog.WriteLine( "CMClient", "HandleMulti got non-proto MsgMulti!!" );
                 return;
-#endif
             }
 
             var msgMulti = new ClientMsgProtobuf<MsgMulti>( e.Data );
@@ -189,10 +178,7 @@ namespace SteamKit2
                 }
                 catch ( Exception ex )
                 {
-#if DEBUG
-                    Trace.WriteLine("CMClient HandleMulti encountered an exception.\n" + ex.ToString(), "Steam3");
-#endif
-
+                    DebugLog.WriteLine( "CMClient", "HandleMulti encountered an exception when decompressing.\n{0}", ex.ToString() );
                     return;
                 }
             }
@@ -210,13 +196,10 @@ namespace SteamKit2
         }
         void HandleLogOnResponse( ClientMsgEventArgs e )
         {
-
             if ( !e.IsProto )
             {
-#if DEBUG
-                Trace.WriteLine( "CMClient HandleLogOnResponse got non-proto msg!!", "Steam3" );
+                DebugLog.WriteLine( "CMClient", "HandleLogOnResponse got non-proto MsgClientLogonResponse!!" );
                 return;
-#endif
             }
 
             var logonResp = new ClientMsgProtobuf<MsgClientLogonResponse>( e.Data );
@@ -247,7 +230,7 @@ namespace SteamKit2
             EUniverse eUniv = encRequest.Msg.Universe;
             uint protoVersion = encRequest.Msg.ProtocolVersion;
 
-            Console.WriteLine( "Got Encryption Request for {0} universe. Proto version: {1}", eUniv, protoVersion );
+            DebugLog.WriteLine( "CMClient", "Got encryption request. Universe: {0} Protocol ver: {1}", eUniv, protoVersion );
 
             ConnectedUniverse = eUniv;
 
@@ -256,10 +239,7 @@ namespace SteamKit2
 
             if ( pubKey == null )
             {
-#if DEBUG
-                Trace.WriteLine( string.Format( "CMClient HandleEncryptRequest got request for invalid universe! eUniv: {0} Proto: {1}", eUniv, protoVersion ), "Steam3" );
-#endif
-
+                DebugLog.WriteLine( "CMClient", "HandleEncryptionRequest got request for invalid universe! Universe: {0} Protocol ver: {1}", eUniv, protoVersion );
                 return;
             }
 
@@ -278,9 +258,10 @@ namespace SteamKit2
         {
             var encResult = new ClientMsg<MsgChannelEncryptResult, MsgHdr>( e.Data );
 
-            Console.WriteLine( "Got Encryption Result: {0}", encResult.Msg.Result );
+            DebugLog.WriteLine( "CMClient", "Encryption result: {0}", encResult.Msg.Result );
 
-            Connection.NetFilter = new NetFilterEncryption( tempSessionKey );
+            if ( encResult.Msg.Result == EResult.OK )
+                Connection.NetFilter = new NetFilterEncryption( tempSessionKey );
         }
 
     }
