@@ -32,15 +32,6 @@ namespace SteamKit2
             this.SwapEndianness = swapEndianness;
         }
 
-        public void Flip()
-        {
-            buffer.Seek( 0, SeekOrigin.Begin );
-        }
-
-        public MemoryStream GetStreamForWrite()
-        {
-            return buffer;
-        }
 
         public void Append( Type dataType, object data )
         {

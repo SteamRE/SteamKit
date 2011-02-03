@@ -125,10 +125,9 @@ namespace SteamKit2
 
         protected override void OnClientMsgReceived( ClientMsgEventArgs e )
         {
-            EMsg eMsg = MsgUtil.GetMsg( e.EMsg );
 
-            if ( eMsg == EMsg.ChannelEncryptResult )
-                HandleEncryptResult( e.Data );
+            if ( e.EMsg == EMsg.ChannelEncryptResult )
+                HandleEncryptResult( e );
 
             // pass along the clientmsg to all registered handlers
             foreach ( var kvp in Handlers )
@@ -138,10 +137,10 @@ namespace SteamKit2
         }
 
 
-        void HandleEncryptResult( byte[] data )
+        void HandleEncryptResult( ClientMsgEventArgs e )
         {
             // if the EResult is OK, we've finished the crypto handshake and can send commands (such as LogOn)
-            var encResult = new ClientMsg<MsgChannelEncryptResult, MsgHdr>( data );
+            var encResult = new ClientMsg<MsgChannelEncryptResult, MsgHdr>( e.Data );
 
             if ( encResult.Msg.Result == EResult.OK )
             {

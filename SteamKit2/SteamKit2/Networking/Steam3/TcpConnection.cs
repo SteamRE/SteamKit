@@ -5,41 +5,58 @@ using System.Net.Sockets;
 using System.Net;
 using System.Diagnostics;
 using System.IO;
+using System.Threading;
 
 namespace SteamKit2
 {
+    
     class TcpConnection : Connection
     {
-        static readonly UInt32 Magic = 0x31305456;
+        const uint MAGIC = 0x31305456;
 
         Socket sock;
-        byte[] recvBuffer = new byte[ 1024 * 15 ];
+        MemoryStream recvBuffer;
+
+        Thread netThread;
+        bool bConnected;
+
+        int sizeLeft;
 
 
         public TcpConnection()
         {
             sock = new Socket( AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp );
+
+            recvBuffer = new MemoryStream();
+
+            bConnected = false;
+
+
         }
 
 
         public override void Connect( IPEndPoint endPoint )
         {
-            lock ( ConnLock )
-            {
-                sock.Connect( endPoint );
-            }
+            sock.Connect( endPoint );
 
-            StartRecv();
+            bConnected = true;
+
+            netThread = new Thread( NetLoop );
+            netThread.Start();
         }
 
         public override void Disconnect()
         {
+            sock.Shutdown( SocketShutdown.Both );
+            sock.Disconnect( true );
+            sock.Close();
+
             lock ( ConnLock )
             {
-                sock.Shutdown( SocketShutdown.Both );
-                sock.Disconnect( true );
-                sock.Close();
+                bConnected = false;
             }
+
+            netThread.Join();
         }
 
         public override void Send( IClientMsg clientMsg )
@@ -53,57 +70,85 @@ namespace SteamKit2
 
             ByteBuffer bb = new ByteBuffer( data.Length + 8 );
             bb.Append( ( uint )data.Length );
-            bb.Append( TcpConnection.Magic );
+            bb.Append( TcpConnection.MAGIC );
             bb.Append( data );
 
-            lock ( ConnLock )
-            {
-                sock.Send( bb.ToArray() );
-            }
+            sock.Send( bb.ToArray() );
         }
 
-
-        void StartRecv()
+        void NetLoop()
         {
-            Array.Clear( recvBuffer, 0, recvBuffer.Length );
-
-            SocketAsyncEventArgs sockArgs = new SocketAsyncEventArgs();
-            sockArgs.SetBuffer( recvBuffer, 0, recvBuffer.Length );
-            sockArgs.Completed += RecvCompleted;
-
-            sock.ReceiveAsync( sockArgs );
-
-            /*if ( !bCompleted )
+            while ( true )
             {
-                RecvCompleted( null, sockArgs );
-            }*/
-        }
+                // todo: determine if we have any real performance issues here
+                Thread.Sleep( 10 );
 
-        void RecvCompleted( object sender, SocketAsyncEventArgs e )
-        {
-            DataStream ds = new DataStream( e.Buffer );
+                lock ( ConnLock )
+                {
+                    if ( !bConnected )
+                        return;
+                }
 
-            uint len = ds.ReadUInt32();
-            uint magic = ds.ReadUInt32();
+                if ( sock.Available == 0 )
+                    continue; // we don't want to stay blocked incase the thread needs to shutdown
+                
+                if ( sizeLeft == 0 )
+                {
+                    // new packet
+                    recvBuffer.SetLength( 0 );
 
-            if ( magic != TcpConnection.Magic )
-            {
+                    byte[] packetHeader = new byte[ 8 ];
+                    int headerLen = sock.Receive( packetHeader );
+
+                    if ( headerLen != 8 )
+                    {
 #if DEBUG
-                Trace.WriteLine( "TcpConnection RecvCompleted got a packet with invalid magic!", "Steam3" );
+                        Trace.WriteLine( "TcpConnection Recv'd truncated packet header!!", "Steam3" );
 #endif
 
-                return;
+                        continue;
+                    }
+
+                    DataStream ds = new DataStream( packetHeader );
+
+                    uint packetLen = ds.ReadUInt32();
+                    uint packetMagic = ds.ReadUInt32();
+
+                    if ( packetMagic != TcpConnection.MAGIC )
+                    {
+#if DEBUG
+                        Trace.WriteLine( "TcpConnection RecvCompleted got a packet with invalid magic!", "Steam3" );
+#endif
+
+                        return;
+                    }
+
+                    sizeLeft = ( int )packetLen;
+                }
+
+                // continuing packet
+                int readSize = Math.Min( 1024, sizeLeft );
+                byte[] packetChunk = new byte[ readSize ];
+
+                int numRead = sock.Receive( packetChunk );
+
+                recvBuffer.Write( packetChunk, 0, numRead );
+                sizeLeft -= numRead;
+
+                if ( sizeLeft == 0 )
+                {
+                    // packet completed
+                    byte[] packData = recvBuffer.ToArray();
+
+                    if ( NetFilter != null )
+                    {
+                        packData = NetFilter.ProcessIncoming( packData );
+                    }
+
+                    OnNetMsgReceived( new NetMsgEventArgs( packData ) );
+                }
+
             }
-
-            byte[] packetData = ds.ReadBytes( len );
-
-            if ( NetFilter != null )
-            {
-                packetData = NetFilter.ProcessIncoming( packetData );
-            }
-
-            OnNetMsgReceived( new NetMsgEventArgs( packetData ) );
-            StartRecv();
         }
     }
 }
