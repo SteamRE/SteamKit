@@ -28,17 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lbUsers = new System.Windows.Forms.ListBox();
+            this.lbUsers = new Tester.RefreshableListBox();
             this.SuspendLayout();
             // 
             // lbUsers
             // 
+            this.lbUsers.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbUsers.FormattingEnabled = true;
             this.lbUsers.IntegralHeight = false;
-            this.lbUsers.Location = new System.Drawing.Point( 12, 12 );
+            this.lbUsers.Location = new System.Drawing.Point( 0, 0 );
             this.lbUsers.Name = "lbUsers";
-            this.lbUsers.Size = new System.Drawing.Size( 250, 431 );
+            this.lbUsers.Size = new System.Drawing.Size( 274, 455 );
             this.lbUsers.TabIndex = 0;
+            this.lbUsers.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler( this.lbUsers_MouseDoubleClick );
             // 
             // MainForm
             // 
@@ -47,13 +49,14 @@
             this.ClientSize = new System.Drawing.Size( 274, 455 );
             this.Controls.Add( this.lbUsers );
             this.Name = "MainForm";
-            this.Text = "MainForm";
+            this.Text = "Friends List";
             this.ResumeLayout( false );
 
         }
 
         #endregion
 
-        private System.Windows.Forms.ListBox lbUsers;
+        private RefreshableListBox lbUsers;
+
     }
 }

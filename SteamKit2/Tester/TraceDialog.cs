@@ -34,6 +34,13 @@ namespace Tester
                     } ) );
             }
         }
+
+        protected override void OnFormClosed( FormClosedEventArgs e )
+        {
+            Trace.Listeners.Remove( listener );
+
+            base.OnFormClosed( e );
+        }
     }
 
     class TraceEventArgs : EventArgs

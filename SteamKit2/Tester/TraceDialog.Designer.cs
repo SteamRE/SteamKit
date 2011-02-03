@@ -33,17 +33,20 @@
             // 
             // txtTrace
             // 
-            this.txtTrace.Location = new System.Drawing.Point( 12, 12 );
+            this.txtTrace.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtTrace.Font = new System.Drawing.Font( "Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ( ( byte )( 0 ) ) );
+            this.txtTrace.Location = new System.Drawing.Point( 0, 0 );
             this.txtTrace.Multiline = true;
             this.txtTrace.Name = "txtTrace";
-            this.txtTrace.Size = new System.Drawing.Size( 338, 297 );
+            this.txtTrace.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtTrace.Size = new System.Drawing.Size( 433, 613 );
             this.txtTrace.TabIndex = 0;
             // 
             // TraceDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF( 6F, 13F );
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size( 362, 321 );
+            this.ClientSize = new System.Drawing.Size( 433, 613 );
             this.Controls.Add( this.txtTrace );
             this.Name = "TraceDialog";
             this.Text = "TraceDialog";
