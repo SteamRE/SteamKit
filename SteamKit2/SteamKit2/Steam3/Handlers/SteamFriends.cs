@@ -71,11 +71,9 @@ namespace SteamKit2
         public uint ClanRank { get; set; }
         public string ClanTag { get; set; }
 
-        internal PersonaStateCallback( CMsgClientPersonaState perState )
+        internal PersonaStateCallback( CMsgClientPersonaState.Friend friend, EClientPersonaStateFlag flag )
         {
-            this.StatusFlags = ( EClientPersonaStateFlag )perState.status_flags;
-
-            CMsgClientPersonaState.Friend friend = perState.friends[ 0 ];
+            this.StatusFlags = flag;
 
             this.FriendID = friend.friendid;
             this.State = ( EPersonaState )friend.persona_state;
@@ -244,14 +242,32 @@ namespace SteamKit2
         {
             var list = new ClientMsgProtobuf<MsgClientFriendsList>( e.Data );
 
+            // add ourselves to the cache
+            // todo: figure out a cleaner way to do this
             if ( !list.Msg.Proto.bincremental )
                 cache.Add( new Friend( this.Client.SteamID ) );
 
             foreach ( var friend in list.Msg.Proto.friends )
             {
-                Friend cacheFriend = new Friend( friend.ulfriendid );
-                cache.Add( cacheFriend );
+                if ( friend.efriendrelationship == ( uint )EFriendRelationship.Friend )
+                {
+                    SteamID steamId = new SteamID( friend.ulfriendid );
+
+                    if ( steamId.BIndividualAccount() )
+                    {
+                        Friend cacheFriend = new Friend( steamId );
+                        cache.Add( cacheFriend );
+                    }
+                }
             }
+
+            var reqFriendData = new ClientMsgProtobuf<MsgClientRequestFriendData>();
+
+            // lets get names and persona states for all our friends
+            reqFriendData.Msg.Proto.persona_state_requested = ( uint )( EClientPersonaStateFlag.PlayerName | EClientPersonaStateFlag.Presence );
+            reqFriendData.Msg.Proto.friends.AddRange( cache.ConvertAll<ulong>( ( input ) => { return input.SteamID; } ) );
+
+            this.Client.Send( reqFriendData );
 
             this.Client.PostCallback( new FriendsListCallback() );
         }
@@ -260,21 +276,24 @@ namespace SteamKit2
             var perState = new ClientMsgProtobuf<MsgClientPersonaState>( e.Data );
 
             EClientPersonaStateFlag stateFlags = ( EClientPersonaStateFlag )perState.Msg.Proto.status_flags;
-            CMsgClientPersonaState.Friend friend = perState.Msg.Proto.friends[ 0 ];
 
-            Friend cachedFriend = cache.FindByID( friend.friendid );
-
-            if ( cachedFriend != null )
+            foreach ( var friend in perState.Msg.Proto.friends )
             {
-                if ( ( stateFlags & EClientPersonaStateFlag.PlayerName ) == EClientPersonaStateFlag.PlayerName )
-                    cachedFriend.Name = friend.player_name;
 
-                if ( ( stateFlags & EClientPersonaStateFlag.Presence ) == EClientPersonaStateFlag.Presence )
-                    cachedFriend.State = ( EPersonaState )friend.persona_state;
+                Friend cachedFriend = cache.FindByID( friend.friendid );
+
+                if ( cachedFriend != null )
+                {
+                    if ( ( stateFlags & EClientPersonaStateFlag.PlayerName ) == EClientPersonaStateFlag.PlayerName )
+                        cachedFriend.Name = friend.player_name;
+
+                    if ( ( stateFlags & EClientPersonaStateFlag.Presence ) == EClientPersonaStateFlag.Presence )
+                        cachedFriend.State = ( EPersonaState )friend.persona_state;
+                }
+
+                var callback = new PersonaStateCallback( friend, stateFlags );
+                this.Client.PostCallback( callback );
             }
-
-            var callback = new PersonaStateCallback( perState.Msg.Proto );
-            this.Client.PostCallback( callback );
         }
     }
 }

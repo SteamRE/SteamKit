@@ -58,9 +58,7 @@ namespace SteamKit2
 
                 if ( result != 0 )
                 {
-#if DEBUG
-                    Trace.WriteLine( string.Format( "AuthServerClient RequestIP failed. Result: {0}", result ), "Steam2" );
-#endif
+                    DebugLog.WriteLine( "AuthServerClient", "RequestIP failed. Result: {0}", result );
 
                     Socket.Disconnect();
                     return false;
@@ -70,9 +68,7 @@ namespace SteamKit2
             }
             catch ( Exception ex )
             {
-#if DEBUG
-                Trace.WriteLine( string.Format( "AuthServerClient RequestIP threw an exception.\n{0}", ex.ToString() ), "Steam2" );
-#endif
+                DebugLog.WriteLine( "AuthServerClient", "RequestIP threw an exception.\n{0}", ex.ToString() );
 
                 Socket.Disconnect();
                 return false;
@@ -86,9 +82,7 @@ namespace SteamKit2
 
             if ( !this.SendCommand( 2, userLen, user, userLen, user ) )
             {
-#if DEBUG
-                Trace.WriteLine( "AuthServerClient GetSalt failed.", "Steam2" );
-#endif
+                DebugLog.WriteLine( "AuthServerClient", "GetSalt command '2' failed." );
 
                 Socket.Disconnect();
                 return false;
@@ -101,9 +95,7 @@ namespace SteamKit2
             }
             catch ( Exception ex )
             {
-#if DEBUG
-                Trace.WriteLine( string.Format( "AuthServerClient GetSalt threw an exception.\n{0}", ex.ToString() ), "Steam2" );
-#endif
+                DebugLog.WriteLine ("AuthServerClient", "GetSalt threw an exception while reading the salt.\n{0}", ex.ToString() );
 
                 Socket.Disconnect();
                 return false;
@@ -136,9 +128,7 @@ namespace SteamKit2
             }
             catch ( Exception ex )
             {
-#if DEBUG
-                Trace.WriteLine( string.Format( "AuthServerClient DoLogin threw an exception.\n{0}", ex.ToString() ), "Steam2" );
-#endif
+                DebugLog.WriteLine( "AuthServerClient", "DoLogin threw an exception while sending login packet.\n{0}", ex.ToString() );
 
                 Socket.Disconnect();
                 return false;
@@ -159,9 +149,7 @@ namespace SteamKit2
 
                 if ( result != 0 )
                 {
-#if DEBUG
-                    Trace.WriteLine( string.Format( "AuthServerClient GetAccountInfo failed. Result: {0}", result ), "Steam2" );
-#endif
+                    DebugLog.WriteLine( "AuthServerClient", "GetAccountInfo failed. Result: {0}", result );
 
                     Socket.Disconnect();
                     return false;
@@ -197,9 +185,7 @@ namespace SteamKit2
             }
             catch ( Exception ex )
             {
-#if DEBUG
-                Trace.WriteLine( string.Format( "AuthServerClient GetAccountInfo threw an exception.\n{0}", ex.ToString() ), "Steam2" );
-#endif
+                DebugLog.WriteLine( "AuthServerClient", "GetAccountInfo threw an exception while reading account info.\n{0}", ex.ToString() );
 
                 Socket.Disconnect();
                 return false;

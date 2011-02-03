@@ -59,6 +59,7 @@
     <Compile Include="Blob\CachedBinaryReader.cs" />
     <Compile Include="Blob\Fields\AuthFields.cs" />
     <Compile Include="Blob\Fields\CDRFields.cs" />
+    <Compile Include="Util\DebugLog.cs" />
     <Compile Include="Steam2\ConfigServerClient.cs" />
     <Compile Include="Util\Utils.cs" />
     <Compile Include="Steam3\Handlers\SteamFriends.cs" />

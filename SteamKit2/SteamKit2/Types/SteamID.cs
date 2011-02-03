@@ -129,6 +129,10 @@ namespace SteamKit2
         {
             return ( this.AccountType == EAccountType.Chat ) && ( ( this.AccountInstance & ( 0x000FFFFF + 1 ) >> 2 ) != 0 );
         }
+        public bool BIndividualAccount()
+        {
+            return this.AccountType == EAccountType.Individual;
+        }
         public bool BAnonAccount()
         {
             return this.AccountType == EAccountType.AnonUser || this.AccountType == EAccountType.AnonGameServer;

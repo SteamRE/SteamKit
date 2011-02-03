@@ -47,6 +47,9 @@ namespace SteamKit2
 
         public override void Disconnect()
         {
+            if ( !sock.Connected )
+                return;
+
             sock.Shutdown( SocketShutdown.Both );
             sock.Disconnect( true );
             sock.Close();
@@ -61,6 +64,9 @@ namespace SteamKit2
 
         public override void Send( IClientMsg clientMsg )
         {
+            if ( !sock.Connected )
+                return;
+
             byte[] data = clientMsg.Serialize();
 
             if ( NetFilter != null )
@@ -102,10 +108,7 @@ namespace SteamKit2
 
                     if ( headerLen != 8 )
                     {
-#if DEBUG
-                        Trace.WriteLine( "TcpConnection Recv'd truncated packet header!!", "Steam3" );
-#endif
-
+                        DebugLog.WriteLine( "TcpConnection", "Recv'd truncated packet header!!" );
                         continue;
                     }
 
@@ -116,10 +119,7 @@ namespace SteamKit2
 
                     if ( packetMagic != TcpConnection.MAGIC )
                     {
-#if DEBUG
-                        Trace.WriteLine( "TcpConnection RecvCompleted got a packet with invalid magic!", "Steam3" );
-#endif
-
+                        DebugLog.WriteLine( "TcpConnection", "RecvCompleted got a packet with invalid magic!" );
                         return;
                     }
 
