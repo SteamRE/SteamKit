@@ -16,8 +16,32 @@ namespace SteamKit2
         public Blob AccRecord { get; set; }
     }
 
+    public class LoginKeyCallback : CallbackMsg
+    {
+        public byte[] LoginKey { get; set; }
+        public uint UniqueID { get; set; }
+
+        internal LoginKeyCallback( MsgClientNewLoginKey logKey )
+        {
+            this.LoginKey = logKey.LoginKey;
+            this.UniqueID = logKey.UniqueID;
+        }
+    }
     public class LogOnResponseCallback : CallbackMsg
     {
+        public EResult Result { get; set; }
+
+        public int OutOfGameSecsPerHeartbeat { get; set; }
+        public int InGameSecsPerHeartbeat { get; set; }
+
+        public IPAddress PublicIP { get; set; }
+
+        public DateTime ServerTime { get; set; }
+
+        public EAccountFlags AccountFlags { get; set; }
+
+        public SteamID ClientSteamID { get; set; }
+
         internal LogOnResponseCallback( CMsgClientLogonResponse resp )
         {
             this.Result = ( EResult )resp.eresult;
@@ -33,19 +57,6 @@ namespace SteamKit2
 
             this.ClientSteamID = new SteamID( resp.client_supplied_steamid );
         }
-
-        public EResult Result { get; set; }
-
-        public int OutOfGameSecsPerHeartbeat { get; set; }
-        public int InGameSecsPerHeartbeat { get; set; }
-
-        public IPAddress PublicIP { get; set; }
-
-        public DateTime ServerTime { get; set; }
-
-        public EAccountFlags AccountFlags { get; set; }
-
-        public SteamID ClientSteamID { get; set; }
     }
 
     public class SteamUser : ClientMsgHandler
@@ -64,6 +75,12 @@ namespace SteamKit2
 
             SteamID steamId = new SteamID();
             steamId.SetFromSteam2( details.ClientTGT.UserID, Client.ConnectedUniverse );
+            
+            // todo:
+            // steam2 always gives us an instance of 0,
+            // valve's steamclient seems to ignore this and use an instance of 1
+            // if we use an instance of 0, we never get the NewLoginKey msg and then can't sign on to friends
+            steamId.AccountInstance = 1;
 
             uint localIp = NetHelpers.GetIPAddress( NetHelpers.GetLocalIP() );
 
@@ -82,7 +99,7 @@ namespace SteamKit2
             logon.Msg.Proto.client_language = "english";
             logon.Msg.Proto.rtime32_account_creation = creationTime.ToUnixTime();
 
-            logon.Msg.Proto.cell_id = 10; // TODO: figure out how to grab a cell id
+            logon.Msg.Proto.cell_id = 10; // todo: figure out how to grab a cell id
             logon.Msg.Proto.client_package_version = 1385;
 
             logon.Msg.Proto.email_address = details.AccRecord.GetStringDescriptor( AuthFields.eFieldEmail );
@@ -97,24 +114,43 @@ namespace SteamKit2
             Client.Send( logon );
         }
 
-        public override void HandleMsg( EMsg eMsg, byte[] data )
+
+        public override void HandleMsg( ClientMsgEventArgs e )
         {
-            switch ( eMsg )
+            switch ( e.EMsg )
             {
                 case EMsg.ClientLogOnResponse:
-                    HandleLogOnResponse( data );
+                    HandleLogOnResponse( e );
+                    break;
+
+                case EMsg.ClientNewLoginKey:
+                    HandleLoginKey( e );
                     break;
             }
         }
 
-        void HandleLogOnResponse( byte[] data )
-        {
-            var logonResp = new ClientMsgProtobuf<MsgClientLogonResponse>( data );
 
-            var callback = new LogOnResponseCallback( logonResp.Msg.Proto );
+        void HandleLoginKey( ClientMsgEventArgs e )
+        {
+            var loginKey = new ClientMsg<MsgClientNewLoginKey, ExtendedClientMsgHdr>( e.Data );
+
+            var resp = new ClientMsg<MsgClientNewLoginKeyAccepted, ExtendedClientMsgHdr>();
+            resp.Msg.UniqueID = loginKey.Msg.UniqueID;
+
+            this.Client.Send( resp );
+
+            var callback = new LoginKeyCallback( loginKey.Msg );
             this.Client.PostCallback( callback );
         }
+        void HandleLogOnResponse( ClientMsgEventArgs e )
+        {
+            if ( e.IsProto )
+            {
+                var logonResp = new ClientMsgProtobuf<MsgClientLogonResponse>( e.Data );
 
-
+                var callback = new LogOnResponseCallback( logonResp.Msg.Proto );
+                this.Client.PostCallback( callback );
+            }
+        }
     }
 }

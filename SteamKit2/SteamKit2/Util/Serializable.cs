@@ -18,7 +18,7 @@ namespace SteamKit2
             try
             {
                 IntPtr dataPtr = dataHandle.AddrOfPinnedObject();
-                Marshal.StructureToPtr( this, dataPtr, false );
+                Marshal.StructureToPtr( this, dataPtr, true );
             }
             finally
             {

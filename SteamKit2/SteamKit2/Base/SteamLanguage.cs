@@ -638,8 +638,7 @@ namespace SteamKit2
 		IgnoredFriend = 6,
 		Max = 7,
 	}
-
-    [Flags]
+	[Flags]
 	public enum EAccountFlags
 	{
 		NormalUser = 0,
@@ -660,6 +659,37 @@ namespace SteamKit2
 		EmailValidated = 16384,
 		MarketingTreatment = 32768,
 		Max = 32769,
+	}
+	[Flags]
+	public enum EFriendFlags
+	{
+		None = 0,
+		Blocked = 1,
+		FriendshipRequested = 2,
+		Immediate = 4,
+		ClanMember = 8,
+		GameServer = 16,
+		RequestingFriendship = 128,
+		RequestingInfo = 256,
+		Ignored = 512,
+		IgnoredFriend = 1024,
+		FlagAll = 65535,
+		Max = 65536,
+	}
+	[Flags]
+	public enum EClientPersonaStateFlag
+	{
+		Status = 1,
+		PlayerName = 2,
+		QueryPort = 4,
+		SourceID = 8,
+		Presence = 16,
+		Metadata = 32,
+		LastSeen = 64,
+		ClanInfo = 128,
+		GameExtraInfo = 256,
+		GameDataBlob = 512,
+		Max = 513,
 	}
 	public enum EUdpPacketType
 	{
@@ -1641,6 +1671,41 @@ namespace SteamKit2
 		}
 	}
 
+	public class MsgClientFriendMsg : ISteamSerializableMessage
+	{
+		public EMsg GetEMsg() { return EMsg.ClientFriendMsg; }
+
+		// Static size: 8
+		private ulong steamID;
+		public SteamID SteamID { get { return new SteamID( steamID ); } set { steamID = value.ConvertToUint64(); } }
+		// Static size: 4
+		public EChatEntryType EntryType { get; set; }
+
+		public MsgClientFriendMsg()
+		{
+			steamID = 0;
+			EntryType = EChatEntryType.Invalid;
+		}
+
+		public byte[] Serialize()
+		{
+			ByteBuffer bb = new ByteBuffer( 12 );
+
+			bb.Append( steamID );
+			bb.Append( (int)EntryType );
+
+			return bb.ToArray();
+		}
+
+		public void Deserialize( MemoryStream ms )
+		{
+			BinaryReader br = new BinaryReader( ms );
+
+			steamID = br.ReadUInt64();
+			EntryType = (EChatEntryType)br.ReadInt32();
+		}
+	}
+
 	public class MsgClientFriendMsgIncoming : ISteamSerializableMessage
 	{
 		public EMsg GetEMsg() { return EMsg.ClientFriendMsgIncoming; }
@@ -1651,21 +1716,25 @@ namespace SteamKit2
 		// Static size: 4
 		public EChatEntryType EntryType { get; set; }
 		// Static size: 4
+		public int FromLimitedAccount { get; set; }
+		// Static size: 4
 		public int MessageSize { get; set; }
 
 		public MsgClientFriendMsgIncoming()
 		{
 			steamID = 0;
 			EntryType = EChatEntryType.Invalid;
+			FromLimitedAccount = 0;
 			MessageSize = 0;
 		}
 
 		public byte[] Serialize()
 		{
-			ByteBuffer bb = new ByteBuffer( 16 );
+			ByteBuffer bb = new ByteBuffer( 20 );
 
 			bb.Append( steamID );
 			bb.Append( (int)EntryType );
+			bb.Append( FromLimitedAccount );
 			bb.Append( MessageSize );
 
 			return bb.ToArray();
@@ -1677,6 +1746,7 @@ namespace SteamKit2
 
 			steamID = br.ReadUInt64();
 			EntryType = (EChatEntryType)br.ReadInt32();
+			FromLimitedAccount = br.ReadInt32();
 			MessageSize = br.ReadInt32();
 		}
 	}
