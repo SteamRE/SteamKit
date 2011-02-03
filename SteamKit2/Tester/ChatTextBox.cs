@@ -21,6 +21,9 @@ namespace Tester
         {
             if ( e.KeyChar == ( char )13 )
             {
+                if ( this.Text.Length > 0 )
+                    this.Text = this.Text.Substring( 0, this.Text.Length - 1 );
+
                 OnEnterPressed( EventArgs.Empty );
                 return;
             }
