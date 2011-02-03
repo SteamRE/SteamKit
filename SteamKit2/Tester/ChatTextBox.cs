@@ -17,6 +17,18 @@ namespace Tester
                 EnterPressed( this, e );
         }
 
+        protected override void OnKeyPress( KeyPressEventArgs e )
+        {
+            if ( e.KeyChar == ( char )13 )
+            {
+                OnEnterPressed( EventArgs.Empty );
+                return;
+            }
+
+            base.OnKeyPress( e );
+        }
+
+        /*
         protected override bool ProcessCmdKey( ref Message m, Keys keyData )
         {
             if ( m.Msg == 256 && keyData == Keys.Enter )
@@ -27,6 +39,6 @@ namespace Tester
             }
 
             return base.ProcessCmdKey( ref m, keyData );
-        }
+        }*/
     }
 }
