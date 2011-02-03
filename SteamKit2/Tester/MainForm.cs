@@ -16,8 +16,6 @@ namespace Tester
         public MainForm()
         {
             InitializeComponent();
-
-            SteamContext.InitializeSteam3();
         }
 
         public void UpdateCallbacks()

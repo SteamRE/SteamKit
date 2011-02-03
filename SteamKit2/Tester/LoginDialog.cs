@@ -24,8 +24,6 @@ namespace Tester
                 return;
             }
 
-            SteamContext.InitializeSteam3();
-
             DialogResult = DialogResult.OK;
             this.Close();
         }

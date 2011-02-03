@@ -24,6 +24,8 @@ namespace Tester
             if ( new LoginDialog().ShowDialog() != DialogResult.OK )
                 return;
 
+            SteamContext.InitializeSteam3();
+
             MainForm mf = new MainForm();
 
             mf.Show();
