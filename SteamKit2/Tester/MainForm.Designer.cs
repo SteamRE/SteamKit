@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lbUsers = new Tester.RefreshableListBox();
+            this.lbUsers = new Tester.FriendListBox();
             this.SuspendLayout();
             // 
             // lbUsers
@@ -56,7 +56,7 @@
 
         #endregion
 
-        private RefreshableListBox lbUsers;
+        private FriendListBox lbUsers;
 
     }
 }

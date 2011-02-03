@@ -58,7 +58,14 @@ namespace Tester
             if ( callback is PersonaStateCallback )
             {
                 // refresh the box so we can grab some names
-                lbUsers.RefreshItems();
+                PersonaStateCallback perState = (PersonaStateCallback)callback;
+
+                int index = lbUsers.FindIndexOfFriend( perState.FriendID );
+
+                if ( index == -1 )
+                    return;
+
+                lbUsers.RefreshItem( index );
             }
 
             if ( callback is LoginKeyCallback )
@@ -92,13 +99,4 @@ namespace Tester
         }
     }
 
-    struct Friend
-    {
-        public ulong FriendID;
-
-        public override string ToString()
-        {
-            return SteamContext.SteamFriends.GetFriendPersonaName( FriendID );
-        }
-    }
 }
