@@ -104,7 +104,7 @@ namespace SteamLanguageParser
         {
             string padding = new String('\t', level);
 
-            if ( enode.Name.Contains( "Flags" ) )
+            if ( enode.Name.Contains( "Flag" ) )
                 sb.AppendLine( padding + "[Flags]" );
 
             sb.AppendLine(padding + "public enum " + enode.Name);

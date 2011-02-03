@@ -123,10 +123,17 @@ class MsgClientFriendsList<EMsg::ClientFriendsList>
 	proto CMsgClientFriendsList proto;
 }
 
+class MsgClientFriendMsg<EMsg::ClientFriendMsg>
+{
+	steamidmarshal ulong steamID;
+	EChatEntryType entryType = EChatEntryType::Invalid;
+}
+
 class MsgClientFriendMsgIncoming<EMsg::ClientFriendMsgIncoming>
 {
 	steamidmarshal ulong steamID;
 	EChatEntryType entryType = EChatEntryType::Invalid;
+	int fromLimitedAccount;
 	int messageSize;
 }
 
