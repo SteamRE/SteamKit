@@ -21,10 +21,10 @@ namespace Tester
         {
             if ( e.KeyChar == ( char )13 )
             {
-                if ( this.Text.Length > 0 )
-                    this.Text = this.Text.Substring( 0, this.Text.Length - 1 );
+                this.Text = this.Text.TrimEnd( Environment.NewLine.ToCharArray() );
 
                 OnEnterPressed( EventArgs.Empty );
+                e.Handled = true;
                 return;
             }
 

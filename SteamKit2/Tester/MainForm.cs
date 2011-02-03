@@ -66,6 +66,9 @@ namespace Tester
                     return;
 
                 lbUsers.RefreshItem( index );
+
+                if ( Program.IsMono() )
+                    lbUsers.Refresh(); // hack to get mono to behave, otherwise it won't refresh the item text until you scroll
             }
 
             if ( callback is LoginKeyCallback )
