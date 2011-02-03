@@ -18,8 +18,8 @@ namespace Tester
         {
             Application.EnableVisualStyles();
 
-            //TraceDialog td = new TraceDialog();
-            //td.Show();
+            TraceDialog td = new TraceDialog();
+            td.Show();
 
             if ( new LoginDialog().ShowDialog() != DialogResult.OK )
                 return;
@@ -36,6 +36,8 @@ namespace Tester
 
                 Application.DoEvents();
             }
+
+            SteamContext.ShutdownSteam3();
         }
     }
 }

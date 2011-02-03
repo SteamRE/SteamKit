@@ -68,5 +68,10 @@ namespace Tester
 
             SteamClient.Connect();
         }
+
+        public static void ShutdownSteam3()
+        {
+            SteamClient.Disconnect();
+        }
     }
 }
