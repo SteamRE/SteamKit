@@ -59,12 +59,14 @@
     <Compile Include="Blob\CachedBinaryReader.cs" />
     <Compile Include="Blob\Fields\AuthFields.cs" />
     <Compile Include="Blob\Fields\CDRFields.cs" />
+    <Compile Include="Steam3\Handlers\SteamFriends\Callbacks.cs" />
+    <Compile Include="Steam3\Handlers\SteamFriends\FriendCache.cs" />
     <Compile Include="Util\DebugLog.cs" />
     <Compile Include="Steam2\ConfigServerClient.cs" />
     <Compile Include="Util\Utils.cs" />
-    <Compile Include="Steam3\Handlers\SteamFriends.cs" />
+    <Compile Include="Steam3\Handlers\SteamFriends\SteamFriends.cs" />
     <Compile Include="Util\ScheduledFunction.cs" />
-    <Compile Include="Steam3\Handlers\SteamUser.cs" />
+    <Compile Include="Steam3\Handlers\SteamUser\SteamUser.cs" />
     <Compile Include="Util\ZipUtil.cs" />
     <Compile Include="Steam3\SteamClient.cs" />
     <Compile Include="Steam3\CMClient.cs" />

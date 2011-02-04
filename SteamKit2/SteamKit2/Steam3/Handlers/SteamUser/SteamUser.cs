@@ -6,16 +6,6 @@ using System.Net;
 
 namespace SteamKit2
 {
-    public struct LogOnDetails
-    {
-        public string Username { get; set; }
-        public string Password { get; set; }
-
-        public ClientTGT ClientTGT { get; set; }
-        public byte[] ServerTGT { get; set; }
-        public Blob AccRecord { get; set; }
-    }
-
     public class LoginKeyCallback : CallbackMsg
     {
         public byte[] LoginKey { get; set; }
@@ -69,6 +59,15 @@ namespace SteamKit2
         }
 
 
+        public class LogOnDetails
+        {
+            public string Username;
+            public string Password;
+
+            public ClientTGT ClientTGT;
+            public byte[] ServerTGT;
+            public Blob AccRecord;
+        }
         public void LogOn( LogOnDetails details )
         {
             var logon = new ClientMsgProtobuf<MsgClientLogon>();
@@ -111,7 +110,7 @@ namespace SteamKit2
 
             logon.Msg.Proto.steam2_auth_ticket = serverTgt;
 
-            Client.Send( logon );
+            this.Client.Send( logon );
         }
 
 

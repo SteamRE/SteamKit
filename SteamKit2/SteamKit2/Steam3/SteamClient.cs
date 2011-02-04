@@ -112,11 +112,11 @@ namespace SteamKit2
         }
         public void PostCallback( CallbackMsg msg )
         {
+            if ( msg == null )
+                return;
+
             lock ( callbackLock )
             {
-                if ( msg == null )
-                    return;
-
                 callbackQueue.Enqueue( msg );
             }
         }
