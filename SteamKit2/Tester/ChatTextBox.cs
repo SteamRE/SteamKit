@@ -30,18 +30,5 @@ namespace Tester
 
             base.OnKeyPress( e );
         }
-
-        /*
-        protected override bool ProcessCmdKey( ref Message m, Keys keyData )
-        {
-            if ( m.Msg == 256 && keyData == Keys.Enter )
-            {
-                OnEnterPressed( EventArgs.Empty );
-
-                return true;
-            }
-
-            return base.ProcessCmdKey( ref m, keyData );
-        }*/
     }
 }

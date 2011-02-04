@@ -14,35 +14,18 @@ namespace Tester
         public static SteamUser SteamUser { get; private set; }
         public static SteamFriends SteamFriends { get; private set; }
 
-        public static LogOnDetails LoginDetails
+        public static SteamUser.LogOnDetails LoginDetails { get; private set; }
+
+
+        static SteamContext()
         {
-            get
-            {
-                return new LogOnDetails()
-                {
-                    Username = userName,
-                    Password = password,
-
-                    ClientTGT = clientTgt,
-                    ServerTGT = serverTgt,
-                    AccRecord = accRecord,
-                };
-            }
+            LoginDetails = new SteamUser.LogOnDetails();
         }
-
-
-        static string userName;
-        static string password;
-
-        static ClientTGT clientTgt;
-        static byte[] serverTgt;
-        static Blob accRecord;
-
 
         public static bool InitializeSteam2( string userName, string password )
         {
-            SteamContext.userName = userName;
-            SteamContext.password = password;
+            LoginDetails.Username = userName;
+            LoginDetails.Password = password;
 
             GeneralDSClient gdsClient = new GeneralDSClient();
             gdsClient.Connect( GeneralDSClient.GDServers[ 0 ] );
@@ -53,7 +36,7 @@ namespace Tester
             AuthServerClient asClient = new AuthServerClient();
             asClient.Connect( authServers[ 0 ] );
 
-            bool bRet = asClient.Login( userName, password, out clientTgt, out serverTgt, out accRecord );
+            bool bRet = asClient.Login( userName, password, out LoginDetails.ClientTGT, out LoginDetails.ServerTGT, out LoginDetails.AccRecord );
             asClient.Disconnect();
 
             return bRet;
