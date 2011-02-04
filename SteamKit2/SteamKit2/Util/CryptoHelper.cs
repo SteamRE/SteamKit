@@ -176,6 +176,11 @@ namespace SteamKit2
             byte[] output = new byte[ len ];
             Array.Copy( plaintext, 0, output, 0, len );
 
+            // clean up
+            cs.Close();
+            ms.Close();
+            aes.Clear();
+
             return output;
         }
 
