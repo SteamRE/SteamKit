@@ -34,9 +34,9 @@ namespace Tester
 
             if ( callback is FriendsListCallback )
             {
-                uint friendCount = SteamContext.SteamFriends.GetFriendCount();
+                int friendCount = SteamContext.SteamFriends.GetFriendCount();
 
-                for ( uint x = 0 ; x < friendCount ; x++ )
+                for ( int x = 0 ; x < friendCount ; x++ )
                 {
                     SteamID friendId = SteamContext.SteamFriends.GetFriendByIndex( x );
 
