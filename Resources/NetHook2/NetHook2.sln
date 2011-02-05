@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NetHook2", "NetHook2\NetHook2.vcproj", "{0C1A526F-2D1D-43E0-B7F8-25D3C4E065BB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0C1A526F-2D1D-43E0-B7F8-25D3C4E065BB}.Debug|Win32.ActiveCfg = Debug|Win32
+		{0C1A526F-2D1D-43E0-B7F8-25D3C4E065BB}.Debug|Win32.Build.0 = Debug|Win32
+		{0C1A526F-2D1D-43E0-B7F8-25D3C4E065BB}.Release|Win32.ActiveCfg = Release|Win32
+		{0C1A526F-2D1D-43E0-B7F8-25D3C4E065BB}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
