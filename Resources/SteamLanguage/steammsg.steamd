@@ -141,3 +141,10 @@ class MsgClientVACBanStatus<EMsg::ClientVACBanStatus>
 {
 	uint numBans;
 };
+
+class MsgClientAppUsageEvent<EMsg::ClientAppUsageEvent>
+{
+	EAppUsageEvent AppUsageEvent;
+	ulong GameID;
+	ushort Offline;
+};

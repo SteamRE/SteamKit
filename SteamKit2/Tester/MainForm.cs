@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using SteamKit2;
 using System.Diagnostics;
+using System.Threading;
 
 namespace Tester
 {
@@ -49,7 +50,7 @@ namespace Tester
 
             if ( callback is FriendMsgCallback )
             {
-                FriendMsgCallback friendMsg = (FriendMsgCallback)callback;
+                FriendMsgCallback friendMsg = ( FriendMsgCallback )callback;
 
                 MessageDialog md = FindOrCreateMsgDlg( friendMsg.Sender );
                 md.RecvMessage( friendMsg );
@@ -58,7 +59,7 @@ namespace Tester
             if ( callback is PersonaStateCallback )
             {
                 // refresh the box so we can grab some names
-                PersonaStateCallback perState = (PersonaStateCallback)callback;
+                PersonaStateCallback perState = ( PersonaStateCallback )callback;
 
                 int index = lbUsers.FindIndexOfFriend( perState.FriendID );
 
@@ -101,5 +102,4 @@ namespace Tester
             FindOrCreateMsgDlg( frnd.FriendID );
         }
     }
-
 }
