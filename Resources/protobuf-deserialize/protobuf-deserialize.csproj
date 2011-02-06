@@ -35,13 +35,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="protobuf-net">
-      <HintPath>protobuf-net\protobuf-net.dll</HintPath>
+      <HintPath>..\..\SteamKit2\protobuf-net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
