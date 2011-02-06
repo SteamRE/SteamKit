@@ -5,8 +5,6 @@
 #include "logger.h"
 #include "csimplescan.h"
 
-//#undef GetMessage
-
 
 bool (__cdecl *Encrypt_Orig)(const uint8*, uint32, uint8*, uint32*, uint32) = 0;
 bool (__cdecl *Decrypt_Orig)(const uint8*, uint32, uint8*, uint32*, const uint8*, uint32) = 0;
@@ -85,11 +83,7 @@ __declspec(naked) bool __cdecl CCrypto::SymmetricEncrypt( const uint8 *pubPlaint
 		push ecx;
 	}
 
-	g_pLogger->LogSessionData( k_eNetOutgoing, (uint8 *)pubPlaintextData, cubPlaintextData );
-
-	/*
-	if ( g_Crypto )
-		g_Crypto->m_Callback->DataEncrypted(pubPlaintextData, cubPlaintextData);*/
+	g_pLogger->LogNetMessage( k_eNetOutgoing, (uint8 *)pubPlaintextData, cubPlaintextData );
 
 	__asm {
 		// call it manually here, prevent
@@ -123,10 +117,7 @@ bool __cdecl CCrypto::SymmetricDecrypt( const uint8 *pubEncryptedData, uint32 cu
 {
 	bool ret = (*Decrypt_Orig)(pubEncryptedData, cubEncryptedData, pubPlaintextData, pcubPlaintextData, pubKey, cubKey);
 
-	g_pLogger->LogSessionData( k_eNetIncoming, pubPlaintextData, *pcubPlaintextData );
-	/*
-	if ( g_Crypto )
-		g_Crypto->m_Callback->DataDecrypted(pubPlaintextData, *pcubPlaintextData);*/
+	g_pLogger->LogNetMessage( k_eNetIncoming, pubPlaintextData, *pcubPlaintextData );
 
 	return ret;
 }
