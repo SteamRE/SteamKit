@@ -9,6 +9,7 @@ namespace SteamKit2
     {
     }
 
+
     public abstract class ClientMsgHandler
     {
         public string Name { get; private set; }
@@ -92,13 +93,15 @@ namespace SteamKit2
         // callbacks
         public CallbackMsg GetCallback()
         {
+            CallbackMsg msg = null;
+
             lock ( callbackLock )
             {
-                if ( callbackQueue.Count == 0 )
-                    return null;
-
-                return callbackQueue.Peek();
+                if ( callbackQueue.Count > 0 )
+                    msg = callbackQueue.Peek();
             }
+
+            return msg;
         }
         public void FreeLastCallback()
         {

@@ -66,6 +66,9 @@ namespace SteamKit2
         {
             Friend friend = cache.GetFriend( steamId );
 
+            if ( steamId == localUser.SteamID )
+                friend = localUser;
+
             if ( friend == null )
                 return "[unknown]";
 
@@ -74,6 +77,32 @@ namespace SteamKit2
 
             return friend.Name;
         }
+        public EPersonaState GetFriendPersonaState( SteamID steamId )
+        {
+            Friend friend = cache.GetFriend( steamId );
+
+            if ( steamId == localUser.SteamID )
+                friend = localUser;
+
+            if ( friend == null )
+                return EPersonaState.Offline;
+
+            return friend.PersonaState;
+        }
+
+        public string GetFriendGamePlayedExtraInfo( SteamID steamId )
+        {
+            Friend friend = cache.GetFriend( steamId );
+
+            if ( steamId == localUser.SteamID )
+                friend = localUser;
+
+            if ( friend == null )
+                return "";
+
+            return friend.GameName;
+        }
+
 
 
         public void SendChatMessage( SteamID target, EChatEntryType type, string message )
@@ -200,6 +229,9 @@ namespace SteamKit2
 
                 if ( ( flags & EClientPersonaStateFlag.Presence ) == EClientPersonaStateFlag.Presence )
                     cacheFriend.PersonaState = ( EPersonaState )friend.persona_state;
+
+                if ( ( flags & EClientPersonaStateFlag.GameExtraInfo ) == EClientPersonaStateFlag.GameExtraInfo )
+                    cacheFriend.GameName = friend.game_name;
 
                 var callback = new PersonaStateCallback( friend, flags );
                 this.Client.PostCallback( callback );

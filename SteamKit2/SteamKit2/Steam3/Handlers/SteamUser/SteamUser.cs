@@ -112,6 +112,16 @@ namespace SteamKit2
 
             this.Client.Send( logon );
         }
+        public void LogOff()
+        {
+            var logOff = new ClientMsgProtobuf<MsgClientLogOff>();
+            this.Client.Send( logOff );
+        }
+
+        public SteamID GetSteamID()
+        {
+            return this.Client.SteamID;
+        }
 
 
         public override void HandleMsg( ClientMsgEventArgs e )

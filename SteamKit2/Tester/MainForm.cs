@@ -75,6 +75,8 @@ namespace Tester
             if ( callback is LoginKeyCallback )
             {
                 SteamContext.SteamFriends.SetPersonaState( EPersonaState.Online );
+
+                Thread.Sleep( 2000 );
             }
         }
 

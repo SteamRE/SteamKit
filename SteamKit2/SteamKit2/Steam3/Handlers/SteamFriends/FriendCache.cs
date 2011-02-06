@@ -20,6 +20,8 @@ namespace SteamKit2
         public string Name;
         public EPersonaState PersonaState;
 
+        public string GameName;
+
         public Friend( SteamID steamId )
             : base( steamId )
         {
