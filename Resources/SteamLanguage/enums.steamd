@@ -109,3 +109,15 @@ enum EClientPersonaStateFlag
 	GameExtraInfo = 256;
 	GameDataBlob = 512;
 }
+
+enum EAppUsageEvent
+{
+	GameLaunch = 1;
+	GameLaunchTrial = 2;
+	Media = 3;
+	PreloadStart = 4;
+	PreloadFinish = 5;
+	MarketingMessageView = 6;
+	InGameAdViewed = 7;
+	GameLaunchFreeWeekend = 8;
+}

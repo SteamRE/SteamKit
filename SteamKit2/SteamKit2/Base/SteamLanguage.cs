@@ -691,6 +691,18 @@ namespace SteamKit2
 		GameDataBlob = 512,
 		Max = 513,
 	}
+	public enum EAppUsageEvent
+	{
+		GameLaunch = 1,
+		GameLaunchTrial = 2,
+		Media = 3,
+		PreloadStart = 4,
+		PreloadFinish = 5,
+		MarketingMessageView = 6,
+		InGameAdViewed = 7,
+		GameLaunchFreeWeekend = 8,
+		Max = 9,
+	}
 	public enum EUdpPacketType
 	{
 		Invalid = 0,
@@ -1777,6 +1789,45 @@ namespace SteamKit2
 			BinaryReader br = new BinaryReader( ms );
 
 			NumBans = br.ReadUInt32();
+		}
+	}
+
+	public class MsgClientAppUsageEvent : ISteamSerializableMessage
+	{
+		public EMsg GetEMsg() { return EMsg.ClientAppUsageEvent; }
+
+		// Static size: 4
+		public EAppUsageEvent AppUsageEvent { get; set; }
+		// Static size: 8
+		public ulong GameID { get; set; }
+		// Static size: 1
+		public byte Offline { get; set; }
+
+		public MsgClientAppUsageEvent()
+		{
+			AppUsageEvent = 0;
+			GameID = 0;
+			Offline = 0;
+		}
+
+		public byte[] Serialize()
+		{
+			ByteBuffer bb = new ByteBuffer( 13 );
+
+			bb.Append( (int)AppUsageEvent );
+			bb.Append( GameID );
+			bb.Append( Offline );
+
+			return bb.ToArray();
+		}
+
+		public void Deserialize( MemoryStream ms )
+		{
+			BinaryReader br = new BinaryReader( ms );
+
+			AppUsageEvent = (EAppUsageEvent)br.ReadInt32();
+			GameID = br.ReadUInt64();
+			Offline = br.ReadByte();
 		}
 	}
 
