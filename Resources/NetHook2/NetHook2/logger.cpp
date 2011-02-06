@@ -203,23 +203,6 @@ void CLogger::MultiplexMulti( ENetDirection eDirection, uint8 *pData, uint32 cub
 		this->LogNetMessage( eDirection, pPayload, cubPayload );
 	}
 
-	/*
-	bf_read reader( pMsgData, cubMsgData );
-
-	while ( reader.GetNumBytesLeft() > 0 )
-	{
-		uint32 cubPayload = (uint32)reader.ReadLong();
-		int off = reader.GetNumBitsRead() >> 3;
-
-		uint8 *pPayload = (uint8 *)( pMsgData + off );
-		EMsg *pEMsg = (EMsg *)pPayload;
-
-		reader.SeekRelative( cubPayload << 3 );
-
-		this->HandleNetMsg( eDirection, *pEMsg, pPayload, cubPayload );
-	}*/
-
 	if ( bDecomp )
 		delete [] pMsgData;
-
 }
