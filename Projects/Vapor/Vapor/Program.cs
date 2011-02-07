@@ -9,9 +9,13 @@ namespace Vapor
 {
     class Program
     {
-        public static void Main()
+        public static void Main( string[] args )
         {
-            //Application.EnableVisualStyles();
+            if ( FindArg( args, "-debug" ) )
+            {
+                TraceDialog td = new TraceDialog();
+                td.Show();
+            }
 
             LoginDialog ld = new LoginDialog();
 
@@ -30,6 +34,16 @@ namespace Vapor
             }
 
             Steam3.Shutdown();
+        }
+
+        static bool FindArg( string[] args, string arg )
+        {
+            foreach ( string potentialArg in args )
+            {
+                if ( potentialArg.IndexOf( arg, StringComparison.OrdinalIgnoreCase ) != -1 )
+                    return true;
+            }
+            return false;
         }
     }
 }
