@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Drawing.Imaging;
 using Vapor.Properties;
+using System.Linq;
 using SteamKit2;
 
 namespace Vapor
@@ -16,6 +17,7 @@ namespace Vapor
     {
 
         public Friend Friend { get; private set; }
+        public bool IsHighlighted { get; set; }
 
         bool highlighted;
 
@@ -24,18 +26,32 @@ namespace Vapor
         {
             InitializeComponent();
 
+            IsHighlighted = true;
+
             Steam3.AddHandler( this );
 
+            this.MouseDoubleClick += FriendControl_MouseDoubleClick;
             this.MouseEnter += FriendControl_MouseEnter;
             this.MouseLeave += FriendControl_MouseLeave;
 
             foreach ( Control ctrl in this.Controls )
             {
+                ctrl.MouseDoubleClick += FriendControl_MouseDoubleClick;
                 ctrl.MouseEnter += FriendControl_MouseEnter;
                 ctrl.MouseLeave += FriendControl_MouseLeave;
             }
 
+            if ( Friend == null )
+                return;
+
+            avatarBox.Image = ComposeAvatar( this.Friend, null );
+
         }
+        ~FriendControl()
+        {
+            Steam3.RemoveHandler( this );
+        }
+
         public FriendControl( Friend steamid )
             : this()
         {
@@ -49,9 +65,29 @@ namespace Vapor
             {
                 var perState = ( PersonaStateCallback )msg;
 
-                if ( perState.FriendID == this.Friend.SteamID )
-                    this.SetSteamID( this.Friend );
+
+                if ( perState.FriendID != this.Friend.SteamID )
+                    return;
+
+                this.SetSteamID( this.Friend );
+
+                if ( perState.AvatarHash != null )
+                {
+                    CDNCache.DownloadAvatar( perState.FriendID, perState.AvatarHash, AvatarDownloaded );
+                }
             }
+        }
+
+        void AvatarDownloaded( AvatarDownloadDetails details )
+        {
+            if ( !details.Success )
+                return;
+
+            try
+            {
+                avatarBox.Image = ComposeAvatar( this.Friend, details.Filename );
+            }
+            catch { }
         }
 
         public void SetSteamID( Friend steamid )
@@ -64,13 +100,18 @@ namespace Vapor
 
             nameLbl.ForeColor = statusLbl.ForeColor = gameLbl.ForeColor = Util.GetStatusColor( steamid );
 
-            avatarBox.Image = ComposeAvatar( steamid );
+            byte[] avatarHash = CDNCache.GetAvatarHash( steamid.SteamID );
+
+            if ( avatarHash == null )
+                return;
+
+            CDNCache.DownloadAvatar( steamid.SteamID, avatarHash, AvatarDownloaded );
         }
 
 
         void Highlight()
         {
-            if ( this.Friend == null || this.Friend.SteamID == Steam3.SteamUser.GetSteamID() )
+            if ( !this.IsHighlighted )
                 return;
 
             if ( this.highlighted )
@@ -82,7 +123,7 @@ namespace Vapor
         }
         void UnHighlight()
         {
-            if ( this.Friend.SteamID == Steam3.SteamUser.GetSteamID() )
+            if ( !this.IsHighlighted )
                 return;
 
             if ( !this.highlighted )
@@ -104,55 +145,22 @@ namespace Vapor
 
             return Resources.IconOffline;
         }
-        Bitmap GetAvatar( Friend steamid )
+        Bitmap GetAvatar( string path )
         {
-            GCHandle imgHandle = new GCHandle();
-
-            /*
             try
             {
-                int avatarId = SteamContext.ClientFriends.GetSmallFriendAvatar( steamid.SteamID );
-
-                if ( avatarId == 0 )
-                    return Resources.IconUnknown;
-
-                int width = 32, height = 32;
-                byte[] imgData = new byte[ 4 * width * height ];
-
-                if ( !SteamContext.SteamUtils.GetImageRGBA( avatarId, imgData, imgData.Length ) )
-                    return Resources.IconUnknown;
-
-                // imgData is in RGBA format, .NET expects BGRA
-                // so lets prep the data by swapping R and B
-                for ( int x = 0 ; x < imgData.Length ; x += 4 )
-                {
-                    byte r = imgData[ x ];
-                    byte b = imgData[ x + 2 ];
-
-                    imgData[ x ] = b;
-                    imgData[ x + 2 ] = r;
-                }
-
-                imgHandle = GCHandle.Alloc( imgData, GCHandleType.Pinned );
-
-                return new Bitmap( width, height, 4 * width, PixelFormat.Format32bppArgb, imgHandle.AddrOfPinnedObject() );
+                return ( Bitmap )Bitmap.FromFile( path );
             }
             catch
             {
                 return Resources.IconUnknown;
             }
-            finally
-            {
-                imgHandle.Free();
-            }*/
-
-            return Resources.IconUnknown;
         }
 
-        Bitmap ComposeAvatar( Friend steamid )
+        Bitmap ComposeAvatar( Friend steamid, string path )
         {
             Bitmap holder = GetHolder( steamid );
-            Bitmap avatar = GetAvatar( steamid );
+            Bitmap avatar = GetAvatar( path );
 
             Graphics gfx = null;
             try
@@ -168,13 +176,18 @@ namespace Vapor
             return holder;
         }
 
-        private void FriendControl_MouseEnter( object sender, EventArgs e )
+        void FriendControl_MouseEnter( object sender, EventArgs e )
         {
             this.Highlight();
         }
-        private void FriendControl_MouseLeave( object sender, EventArgs e )
+        void FriendControl_MouseLeave( object sender, EventArgs e )
         {
             this.UnHighlight();
+        }
+
+        void FriendControl_MouseDoubleClick( object sender, MouseEventArgs e )
+        {
+            Steam3.ChatManager.GetChat( this.Friend.SteamID );
         }
     }
 }

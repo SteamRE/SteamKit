@@ -45,6 +45,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="UI\ChatDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\ChatDialog.Designer.cs">
+      <DependentUpon>ChatDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ChatManager.cs" />
+    <Compile Include="UI\ChatTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Steam\CDNCache.cs" />
+    <Compile Include="UI\Base\VaporRichTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="UI\ProgressDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -107,6 +121,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="UI\ChatDialog.resx">
+      <DependentUpon>ChatDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\LoginDialog.resx">
       <DependentUpon>LoginDialog.cs</DependentUpon>
     </EmbeddedResource>

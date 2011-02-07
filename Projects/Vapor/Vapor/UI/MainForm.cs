@@ -12,6 +12,7 @@ namespace Vapor
 {
     partial class MainForm : Form, ICallbackHandler
     {
+        Timer sortTimer;
 
         public MainForm()
         {
@@ -21,7 +22,14 @@ namespace Vapor
 
             this.Icon = Icon.FromHandle( Resources.MainIcon.GetHicon() );
 
+            selfControl.IsHighlighted = false;
             selfControl.BorderStyle = BorderStyle.None;
+        }
+
+        protected override void OnFormClosing( FormClosingEventArgs e )
+        {
+            Steam3.RemoveHandler( this );
+            base.OnFormClosing( e );
         }
 
         public void HandleCallback( CallbackMsg msg )
@@ -35,6 +43,14 @@ namespace Vapor
                     selfControl.SetSteamID( selfControl.Friend );
                     return;
                 }
+
+                if ( sortTimer == null )
+                {
+                    sortTimer = new Timer();
+                    sortTimer.Tick += new EventHandler( sortTimer_Tick );
+                    sortTimer.Interval = 10000;
+                    sortTimer.Start();
+                }
             }
 
             if ( msg is FriendsListCallback )
@@ -47,6 +63,12 @@ namespace Vapor
             {
                 Steam3.SteamFriends.SetPersonaState( EPersonaState.Online );
             }
+        }
+
+        void sortTimer_Tick( object sender, EventArgs e )
+        {
+            sortTimer.Stop();
+            this.ReloadFriends();
         }
 
         void ReloadFriends()
@@ -132,6 +154,11 @@ namespace Vapor
             ResizeFriends();
 
             friendsFlow.ResumeLayout();
+        }
+
+        private void refreshListToolStripMenuItem_Click( object sender, EventArgs e )
+        {
+            this.ReloadFriends();
         }
     }
 }

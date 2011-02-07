@@ -10,7 +10,7 @@ namespace Vapor
     {
         public static void Main()
         {
-            Application.EnableVisualStyles();
+            //Application.EnableVisualStyles();
 
             LoginDialog ld = new LoginDialog();
 
