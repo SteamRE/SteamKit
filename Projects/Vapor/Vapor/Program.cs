@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace Vapor
 {
@@ -24,6 +25,8 @@ namespace Vapor
             {
                 Steam3.Update();
                 Application.DoEvents();
+
+                Thread.Sleep( 1 ); // sue me, AzuiSleet.
             }
 
             Steam3.Shutdown();
