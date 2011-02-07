@@ -10,6 +10,7 @@ namespace SteamKit2
     public class TcpSocket
     {
         Socket sock;
+        bool bConnected;
 
         NetworkStream sockStream;
 
@@ -28,6 +29,8 @@ namespace SteamKit2
             sock = new Socket( AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp );
             sock.Connect( endPoint );
 
+            bConnected = true;
+
             sockStream = new NetworkStream( sock, true );
 
             Reader = new BinaryReader( sockStream );
@@ -40,14 +43,23 @@ namespace SteamKit2
             if ( sock == null || !sock.Connected )
                 return;
 
+            if ( !bConnected )
+                return;
+
             if ( sock != null )
             {
-                sock.Shutdown( SocketShutdown.Both );
-                sock.Disconnect( true );
-                sock.Close();
+                try
+                {
+                    sock.Shutdown( SocketShutdown.Both );
+                    sock.Disconnect( true );
+                    sock.Close();
 
-                sock = null;
+                    sock = null;
+                }
+                catch { }
             }
+
+            bConnected = false;
         }
 
         public void Send( byte[] data )
