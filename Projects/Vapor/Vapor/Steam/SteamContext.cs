@@ -47,14 +47,23 @@ namespace Vapor
 
                 try
                 {
+                    DebugLog.WriteLine( "Vapor Steam2", "Connecting to GDS Server {0}...", gdsServer );
                     gdsClient.Connect( gdsServer );
                 }
-                catch { continue; }
+                catch ( Exception ex )
+                {
+                    DebugLog.WriteLine( "Vapor Steam2", "Unable to connect to server.\n{0}", ex.ToString() );
+                    continue;
+                }
 
+                DebugLog.WriteLine( "Vapor Steam2", "Getting auth server list from {0} using username {1}...", gdsServer, userName );
                 IPEndPoint[] authServerList = gdsClient.GetServerList( EServerType.ProxyASClientAuthentication, userName );
 
                 if ( authServerList == null || authServerList.Length == 0 )
+                {
+                    DebugLog.WriteLine( "Vapor Steam2", "Unable to get auth server list. Trying next GDS server..." );
                     continue;
+                }
 
                 gdsClient.Disconnect();
                 return authServerList;
@@ -77,12 +86,20 @@ namespace Vapor
 
                 try
                 {
+                    DebugLog.WriteLine( "Vapor Steam2", "Connecting to auth server {0}...", authServer );
                     asClient.Connect( authServer );
                 }
-                catch { continue; }
+                catch ( Exception ex )
+                {
+                    DebugLog.WriteLine( "Vapor Steam2", "Unable to connect to auth server.\n{0}", ex.ToString() );
+                    continue;
+                }
 
                 if ( !asClient.Login( userName, password, out clientTgt, out serverTgt, out accRecord ) )
+                {
+                    DebugLog.WriteLine( "Vapor Steam2", "Unable to login!" );
                     continue;
+                }
 
                 asClient.Disconnect();
                 return true;

@@ -45,6 +45,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="UI\TraceDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\TraceDialog.Designer.cs">
+      <DependentUpon>TraceDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\ChatDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -70,7 +76,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Steam\CallbackManager.cs" />
     <Compile Include="Steam\SteamContext.cs" />
     <Compile Include="Steam\Friend.cs" />
     <Compile Include="Program.cs" />
