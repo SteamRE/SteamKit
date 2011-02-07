@@ -59,12 +59,6 @@
     <Compile Include="UI\Base\VaporRichTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="UI\ProgressDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI\ProgressDialog.Designer.cs">
-      <DependentUpon>ProgressDialog.cs</DependentUpon>
-    </Compile>
     <Compile Include="UI\LoginDialog.cs">
       <SubType>Form</SubType>
     </Compile>

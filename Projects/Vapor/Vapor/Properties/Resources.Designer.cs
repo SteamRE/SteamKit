@@ -60,13 +60,6 @@ namespace Vapor.Properties {
             }
         }
         
-        internal static System.Drawing.Bitmap AliasIcon {
-            get {
-                object obj = ResourceManager.GetObject("AliasIcon", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
         internal static System.Drawing.Bitmap IconIngame {
             get {
                 object obj = ResourceManager.GetObject("IconIngame", resourceCulture);
@@ -91,13 +84,6 @@ namespace Vapor.Properties {
         internal static System.Drawing.Bitmap IconUnknown {
             get {
                 object obj = ResourceManager.GetObject("IconUnknown", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap MainIcon {
-            get {
-                object obj = ResourceManager.GetObject("MainIcon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
