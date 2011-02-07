@@ -104,6 +104,8 @@ namespace Vapor
         public static SteamFriends SteamFriends { get; private set; }
         public static SteamUser SteamUser { get; private set; }
 
+        public static ChatManager ChatManager { get; private set; }
+
 
         static List<ICallbackHandler> callbackHandlers;
 
@@ -115,9 +117,14 @@ namespace Vapor
         static Blob accountRecord;
 
 
-        public static void Initialize( string userName, string password, ClientTGT clientTgt, byte[] serverTgt, Blob accRecord )
+        static Steam3()
         {
             callbackHandlers = new List<ICallbackHandler>();
+        }
+
+
+        public static void Initialize( string userName, string password, ClientTGT clientTgt, byte[] serverTgt, Blob accRecord )
+        {
 
             Steam3.userName = userName;
             Steam3.password = password;
@@ -139,6 +146,8 @@ namespace Vapor
             {
                 throw new Steam3Exception( "Unable to connect to CM server.", ex );
             }
+
+            ChatManager = new ChatManager();
         }
 
         public static void Shutdown()
@@ -150,6 +159,10 @@ namespace Vapor
         public static void AddHandler( ICallbackHandler handler )
         {
             callbackHandlers.Add( handler );
+        }
+        public static void RemoveHandler( ICallbackHandler handler )
+        {
+            callbackHandlers.Remove( handler );
         }
 
         public static void Update()

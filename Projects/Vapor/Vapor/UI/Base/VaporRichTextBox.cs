@@ -7,9 +7,9 @@ using System.Drawing;
 
 namespace Vapor
 {
-    class VaporTextBox : TextBox
+    class VaporRichTextBox : RichTextBox
     {
-        public VaporTextBox()
+        public VaporRichTextBox()
         {
             this.BackColor = Color.FromArgb( 58, 58, 58 );
             this.ForeColor = Color.White;
@@ -18,7 +18,6 @@ namespace Vapor
             ResizeRedraw = true;
 
         }
-
 
         protected override void OnPaint( PaintEventArgs e )
         {
