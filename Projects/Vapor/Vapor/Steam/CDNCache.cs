@@ -24,18 +24,16 @@ namespace Vapor
         const string AvatarMedium = "{0}/{1}_medium.jpg";
         const string AvatarSmall = "{0}/{1}.jpg";
 
+        static Semaphore dlPool;
 
-        static object dlLock = new object();
-        static int numDls;
-        static int maxDls;
-
+        static object mapLock = new object();
         static Dictionary<SteamID, byte[]> avatarMap;
 
 
         static CDNCache()
         {
-            numDls = 0;
-            maxDls = 3;
+            dlPool = new Semaphore( 0, 3 );
+            dlPool.Release( 3 );
 
             avatarMap = new Dictionary<SteamID, byte[]>();
         }
@@ -68,10 +66,8 @@ namespace Vapor
             Action<AvatarDownloadDetails> callBack = data.callback;
             byte[] avatarHash = data.hash;
 
-            lock ( dlLock )
-            {
+            lock ( mapLock )
                 avatarMap[ steamId ] = avatarHash;
-            }
 
             string hashStr = BitConverter.ToString( avatarHash ).Replace( "-", "" ).ToLower();
             string hashPrefix = hashStr.Substring( 0, 2 );
@@ -98,21 +94,8 @@ namespace Vapor
                 return;
             }
 
-            while ( true )
-            {
-                Thread.Sleep( 10 );
-
-                lock ( dlLock )
-                {
-                    if ( numDls > maxDls )
-                        continue;
-                }
-
-                break;
-            }
-
-            numDls++;
-
+            dlPool.WaitOne();
+            
             string downloadUri = string.Format( AvatarRoot + AvatarSmall, hashPrefix, hashStr );
 
             using ( WebClient client = new WebClient() )
@@ -123,20 +106,13 @@ namespace Vapor
                 }
                 catch
                 {
+                    dlPool.Release();
                     callBack( new AvatarDownloadDetails() { Success = false } );
-
-                    lock ( dlLock )
-                        numDls--;
-
                     return;
                 }
             }
 
-            lock ( dlLock )
-            {
-                numDls--;
-            }
-
+            dlPool.Release();
             callBack( new AvatarDownloadDetails() { Success = true, Filename = localFile } );
         }
     }

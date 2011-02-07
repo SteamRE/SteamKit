@@ -20,7 +20,7 @@ namespace Vapor
 
             Steam3.AddHandler( this );
 
-            this.Icon = Icon.FromHandle( Resources.MainIcon.GetHicon() );
+            //this.Icon = Icon.FromHandle( Resources.MainIcon.GetHicon() );
 
             selfControl.IsHighlighted = false;
             selfControl.BorderStyle = BorderStyle.None;
