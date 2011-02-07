@@ -51,7 +51,7 @@
     <Compile Include="UI\ChatDialog.Designer.cs">
       <DependentUpon>ChatDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="ChatManager.cs" />
+    <Compile Include="Steam\ChatManager.cs" />
     <Compile Include="UI\ChatTextBox.cs">
       <SubType>Component</SubType>
     </Compile>

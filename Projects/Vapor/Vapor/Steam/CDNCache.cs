@@ -26,22 +26,21 @@ namespace Vapor
 
         static Semaphore dlPool;
 
-        static object mapLock = new object();
         static Dictionary<SteamID, byte[]> avatarMap;
 
 
         static CDNCache()
         {
-            dlPool = new Semaphore( 0, 3 );
-            dlPool.Release( 3 );
+            dlPool = new Semaphore( 0, 6 );
+            dlPool.Release( 6 );
 
             avatarMap = new Dictionary<SteamID, byte[]>();
         }
 
         struct AvatarData
         {
-            public SteamID friend;
-            public byte[] hash;
+            public string hashstr;
+            public string localFile;
             public Action<AvatarDownloadDetails> callback;
         }
 
@@ -55,19 +54,7 @@ namespace Vapor
 
         public static void DownloadAvatar( SteamID steamId, byte[] avatarHash, Action<AvatarDownloadDetails> callBack )
         {
-            ThreadPool.QueueUserWorkItem( DoDownload, new AvatarData() { friend = steamId, hash = avatarHash, callback = callBack } );
-        }
-
-        static void DoDownload( object state )
-        {
-            AvatarData data = ( AvatarData )state;
-
-            SteamID steamId = data.friend;
-            Action<AvatarDownloadDetails> callBack = data.callback;
-            byte[] avatarHash = data.hash;
-
-            lock ( mapLock )
-                avatarMap[ steamId ] = avatarHash;
+            avatarMap[ steamId ] = avatarHash;
 
             string hashStr = BitConverter.ToString( avatarHash ).Replace( "-", "" ).ToLower();
             string hashPrefix = hashStr.Substring( 0, 2 );
@@ -80,8 +67,9 @@ namespace Vapor
                 {
                     Directory.CreateDirectory( localPath ); // try making the cache directory
                 }
-                catch
+                catch ( Exception ex )
                 {
+                    DebugLog.WriteLine( "CDNCache", "Unableto create cache directory.\n{0}", ex.ToString() );
                     callBack( new AvatarDownloadDetails() { Success = false, } );
                     return;
                 }
@@ -94,9 +82,23 @@ namespace Vapor
                 return;
             }
 
+            ThreadPool.QueueUserWorkItem( DoDownload, new AvatarData() { callback = callBack, hashstr = hashStr, localFile = localFile } );
+        }
+
+        static void DoDownload( object state )
+        {
+            AvatarData data = ( AvatarData )state;
+
+            string hashStr = data.hashstr;
+            string hashPrefix = hashStr.Substring( 0, 2 );
+            string localPath = Path.Combine( Application.StartupPath, "cache" );
+            var callBack = data.callback;
+
+
             dlPool.WaitOne();
             
             string downloadUri = string.Format( AvatarRoot + AvatarSmall, hashPrefix, hashStr );
+            string localFile = Path.Combine( localPath, hashStr + ".jpg" );
 
             using ( WebClient client = new WebClient() )
             {
@@ -106,13 +108,15 @@ namespace Vapor
                 }
                 catch
                 {
-                    dlPool.Release();
                     callBack( new AvatarDownloadDetails() { Success = false } );
                     return;
                 }
+                finally
+                {
+                    dlPool.Release();
+                }
             }
 
-            dlPool.Release();
             callBack( new AvatarDownloadDetails() { Success = true, Filename = localFile } );
         }
     }
