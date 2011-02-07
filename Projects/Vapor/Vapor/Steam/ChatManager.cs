@@ -30,6 +30,14 @@ namespace Vapor
             return cd;
         }
 
+        public void Remove( SteamID steamId )
+        {
+            if ( !chatMap.ContainsKey( steamId ) )
+                return;
+
+            chatMap.Remove( steamId );
+        }
+
         public void HandleCallback( CallbackMsg msg )
         {
             if ( !( msg is FriendMsgCallback ) )

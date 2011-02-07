@@ -29,6 +29,12 @@ namespace Vapor
             base.Show();
         }
 
+        protected override void OnFormClosed( FormClosedEventArgs e )
+        {
+            Steam3.ChatManager.Remove( chatFriend.Friend.SteamID );
+            base.OnFormClosed( e );
+        }
+
 
         public void HandleChat( SteamID sender, EChatEntryType type, string msg )
         {
