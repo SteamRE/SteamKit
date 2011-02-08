@@ -1,4 +1,11 @@
-﻿using System;
+﻿/*
+ * This file is subject to the terms and conditions defined in
+ * file 'license.txt', which is part of this source code package.
+ */
+
+
+
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Diagnostics;
@@ -43,7 +50,7 @@ namespace SteamKit2
             try
             {
                 internalIp = NetHelpers.GetIPAddress( NetHelpers.GetLocalIP() );
-                uint userHash = BitConverter.ToUInt32( CryptoHelper.JenkinsHash( Encoding.ASCII.GetBytes( user ) ), 0 );
+                uint userHash = 0; //BitConverter.ToUInt32( CryptoHelper.JenkinsHash( Encoding.ASCII.GetBytes( user ) ), 0 );
 
                 ByteBuffer bb = new ByteBuffer( true );
 
