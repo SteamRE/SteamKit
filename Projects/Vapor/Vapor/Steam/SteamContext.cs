@@ -27,7 +27,7 @@ namespace Vapor
     {
         public static void Initialize( string userName, string password, out ClientTGT clientTgt, out byte[] serverTgt, out Blob accRecord )
         {
-            IPEndPoint[] authServerList = GetAuthServerList( userName );
+            IPEndPoint[] authServerList = GetAuthServerList();
 
             if ( authServerList == null )
                 throw new Steam2Exception( "Unable to get a list of Steam2 authentication servers." );
@@ -37,7 +37,7 @@ namespace Vapor
 
         }
 
-        static IPEndPoint[] GetAuthServerList( string userName )
+        static IPEndPoint[] GetAuthServerList()
         {
             GeneralDSClient gdsClient = new GeneralDSClient();
 
@@ -56,8 +56,8 @@ namespace Vapor
                     continue;
                 }
 
-                DebugLog.WriteLine( "Vapor Steam2", "Getting auth server list from {0} using username {1}...", gdsServer, userName );
-                IPEndPoint[] authServerList = gdsClient.GetServerList( EServerType.ProxyASClientAuthentication, userName );
+                DebugLog.WriteLine( "Vapor Steam2", "Getting auth server list from {0}...", gdsServer );
+                IPEndPoint[] authServerList = gdsClient.GetServerList( EServerType.ProxyASClientAuthentication );
 
                 if ( authServerList == null || authServerList.Length == 0 )
                 {
