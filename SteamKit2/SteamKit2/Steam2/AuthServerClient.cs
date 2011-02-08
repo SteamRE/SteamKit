@@ -50,14 +50,12 @@ namespace SteamKit2
             try
             {
                 internalIp = NetHelpers.GetIPAddress( NetHelpers.GetLocalIP() );
-                uint userHash = 0; //BitConverter.ToUInt32( CryptoHelper.JenkinsHash( Encoding.ASCII.GetBytes( user ) ), 0 );
-
                 ByteBuffer bb = new ByteBuffer( true );
 
                 bb.Append<uint>( 0 );
                 bb.Append<byte>( 4 );
                 bb.Append( internalIp );
-                bb.Append( userHash );
+                bb.Append<uint>( 0 );
 
                 Socket.Send( bb.ToArray() );
 
@@ -86,6 +84,7 @@ namespace SteamKit2
         bool GetSalt( string user )
         {
             ushort userLen = ( ushort )user.Length;
+            user = user.ToLower();
 
             if ( !this.SendCommand( 2, userLen, user, userLen, user ) )
             {
