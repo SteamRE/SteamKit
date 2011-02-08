@@ -89,7 +89,7 @@ namespace SteamKit2
         }
         public static uint GetIPAddress( IPAddress ipAddr )
         {
-            return EndianSwap( BitConverter.ToUInt32( ipAddr.GetAddressBytes(), 0 ) );
+            return BitConverter.ToUInt32( ipAddr.GetAddressBytes(), 0 );
         }
 
 
