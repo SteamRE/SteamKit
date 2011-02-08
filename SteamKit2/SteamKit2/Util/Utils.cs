@@ -80,7 +80,7 @@ namespace SteamKit2
                 }
             }
 
-            return null;
+            return IPAddress.Any;
         }
 
         public static IPAddress GetIPAddress( uint ipAddr )
