@@ -71,7 +71,7 @@ namespace Vapor
 
                 this.SetSteamID( this.Friend );
 
-                if ( perState.AvatarHash != null && !Utils.IsZeros(perState.AvatarHash) )
+                if ( perState.AvatarHash != null && !Util.IsZeros(perState.AvatarHash) )
                 {
                     CDNCache.DownloadAvatar( perState.FriendID, perState.AvatarHash, AvatarDownloaded );
                 }

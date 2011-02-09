@@ -22,15 +22,6 @@ namespace SteamKit2
             DateTime origin = new DateTime( 1970, 1, 1, 0, 0, 0, 0 );
             return origin.AddSeconds( unixTime );
         }
-        public static bool IsZeros(byte[] bytes)
-        {
-            for (int i = 0; i < bytes.Length; i++)
-            {
-                if (bytes[i] != 0)
-                    return false;
-            }
-            return true;
-        }
     }
 
     public static class MsgUtil
