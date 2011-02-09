@@ -127,7 +127,7 @@ namespace Vapor
         {
             foreach ( FriendControl fc in friendsFlow.Controls )
             {
-                fc.Width = this.Width - 34;
+                fc.Width = this.ClientSize.Width - 28;
             }
         }
 
