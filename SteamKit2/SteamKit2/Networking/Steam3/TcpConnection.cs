@@ -13,7 +13,6 @@ using System.Net;
 using System.Diagnostics;
 using System.IO;
 using System.Threading;
-using SteamKit2.Util;
 
 namespace SteamKit2
 {
