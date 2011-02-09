@@ -18,6 +18,8 @@ namespace Vapor
             InitializeComponent();
 
             chatFriend.SetSteamID( new Friend( steamId ) );
+            chatFriend.BorderStyle = BorderStyle.None;
+
             this.Text = string.Format( "{0} - Chat", chatFriend.Friend.GetName() );
 
             this.chatFriend.IsHighlighted = false;
