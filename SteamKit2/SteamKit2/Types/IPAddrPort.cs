@@ -14,7 +14,7 @@ using System.Net;
 namespace SteamKit2
 {
     [StructLayout( LayoutKind.Sequential, Pack = 1 )]
-    public class IPAddrPort : Serializable<IPAddrPort>
+    public class IPAddrPort //: Serializable<IPAddrPort>
     {
         public uint IPAddress;
         public ushort Port;
@@ -41,6 +41,32 @@ namespace SteamKit2
         public override string ToString()
         {
             return ToEndPoint().ToString();
+        }
+
+
+        
+        public static IPAddrPort Deserialize( byte[] data )
+        {
+            DataStream ds = new DataStream( data );
+
+            IPAddrPort ipAddr = new IPAddrPort();
+
+            ipAddr.IPAddress = ds.ReadUInt32();
+            ipAddr.Port = ds.ReadUInt16();
+
+            return ipAddr;
+        }
+
+        public byte[] Serialize()
+        {
+            using ( BinaryWriterEx bw = new BinaryWriterEx() )
+            {
+
+                bw.Write( this.IPAddress );
+                bw.Write( this.Port );
+
+                return bw.ToArray();
+            }
         }
     }
 }
