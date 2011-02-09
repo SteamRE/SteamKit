@@ -8,13 +8,15 @@
 using System;
 using System.IO;
 using System.Runtime.InteropServices;
+using ProtoBuf;
+using SteamKit2.Util;
 
 namespace SteamKit2
 {
 	public interface ISteamSerializable
 	{
-		byte[] Serialize();
-		void Deserialize( MemoryStream ms );
+		void Serialize(Stream stream);
+		void Deserialize( Stream stream );
 	}
 	public interface ISteamSerializableHeader : ISteamSerializable
 	{
@@ -763,28 +765,26 @@ namespace SteamKit2
 			MsgSize = 0;
 		}
 
-		public byte[] Serialize()
+		public void Serialize(Stream stream)
 		{
-			ByteBuffer bb = new ByteBuffer( 36 );
+            BinaryWriterEx bw = new BinaryWriterEx(stream);
 
-			bb.Append( Magic );
-			bb.Append( PayloadSize );
-			bb.Append( (byte)PacketType );
-			bb.Append( Flags );
-			bb.Append( SourceConnID );
-			bb.Append( DestConnID );
-			bb.Append( SeqThis );
-			bb.Append( SeqAck );
-			bb.Append( PacketsInMsg );
-			bb.Append( MsgStartSeq );
-			bb.Append( MsgSize );
-
-			return bb.ToArray();
+			bw.Write( Magic );
+			bw.Write( PayloadSize );
+			bw.Write( (byte)PacketType );
+			bw.Write( Flags );
+			bw.Write( SourceConnID );
+			bw.Write( DestConnID );
+			bw.Write( SeqThis );
+			bw.Write( SeqAck );
+			bw.Write( PacketsInMsg );
+			bw.Write( MsgStartSeq );
+			bw.Write( MsgSize );
 		}
 
-		public void Deserialize( MemoryStream ms )
+		public void Deserialize( Stream stream )
 		{
-			BinaryReader br = new BinaryReader( ms );
+			BinaryReaderEx br = new BinaryReaderEx( stream );
 
 			Magic = br.ReadUInt32();
 			PayloadSize = br.ReadUInt16();
@@ -814,19 +814,17 @@ namespace SteamKit2
 			ServerLoad = 0;
 		}
 
-		public byte[] Serialize()
+		public void Serialize(Stream stream)
 		{
-			ByteBuffer bb = new ByteBuffer( 8 );
+            BinaryWriterEx bw = new BinaryWriterEx(stream);
 
-			bb.Append( ChallengeValue );
-			bb.Append( ServerLoad );
-
-			return bb.ToArray();
+			bw.Write( ChallengeValue );
+			bw.Write( ServerLoad );
 		}
 
-		public void Deserialize( MemoryStream ms )
+		public void Deserialize( Stream stream )
 		{
-			BinaryReader br = new BinaryReader( ms );
+			BinaryReaderEx br = new BinaryReaderEx( stream );
 
 			ChallengeValue = br.ReadUInt32();
 			ServerLoad = br.ReadUInt32();
@@ -844,18 +842,16 @@ namespace SteamKit2
 			ChallengeValue = 0;
 		}
 
-		public byte[] Serialize()
+		public void Serialize(Stream s)
 		{
-			ByteBuffer bb = new ByteBuffer( 4 );
+			BinaryWriterEx bb = new BinaryWriterEx( s );
 
-			bb.Append( ChallengeValue );
-
-			return bb.ToArray();
+			bb.Write( ChallengeValue );
 		}
 
-		public void Deserialize( MemoryStream ms )
+		public void Deserialize( Stream ms )
 		{
-			BinaryReader br = new BinaryReader( ms );
+			BinaryReaderEx br = new BinaryReaderEx( ms );
 
 			ChallengeValue = br.ReadUInt32();
 		}
@@ -868,15 +864,11 @@ namespace SteamKit2
 		{
 		}
 
-		public byte[] Serialize()
+		public void Serialize(Stream s)
 		{
-			ByteBuffer bb = new ByteBuffer( 0 );
-
-
-			return bb.ToArray();
 		}
 
-		public void Deserialize( MemoryStream ms )
+		public void Deserialize( Stream ms )
 		{
 		}
 	}
@@ -888,15 +880,11 @@ namespace SteamKit2
 		{
 		}
 
-		public byte[] Serialize()
+		public void Serialize(Stream s)
 		{
-			ByteBuffer bb = new ByteBuffer( 0 );
-
-
-			return bb.ToArray();
 		}
 
-		public void Deserialize( MemoryStream ms )
+		public void Deserialize( Stream ms )
 		{
 		}
 	}
@@ -908,15 +896,11 @@ namespace SteamKit2
 		{
 		}
 
-		public byte[] Serialize()
+		public void Serialize(Stream s)
 		{
-			ByteBuffer bb = new ByteBuffer( 0 );
-
-
-			return bb.ToArray();
 		}
 
-		public void Deserialize( MemoryStream ms )
+		public void Deserialize( Stream ms )
 		{
 		}
 	}
@@ -940,20 +924,18 @@ namespace SteamKit2
 			SourceJobID = -1;
 		}
 
-		public byte[] Serialize()
+		public void Serialize(Stream s)
 		{
-			ByteBuffer bb = new ByteBuffer( 20 );
+            BinaryWriterEx bb = new BinaryWriterEx(s);
 
-			bb.Append( (int)Msg );
-			bb.Append( TargetJobID );
-			bb.Append( SourceJobID );
-
-			return bb.ToArray();
+			bb.Write( (int)Msg );
+			bb.Write( TargetJobID );
+			bb.Write( SourceJobID );
 		}
 
-		public void Deserialize( MemoryStream ms )
+		public void Deserialize( Stream ms )
 		{
-			BinaryReader br = new BinaryReader( ms );
+			BinaryReaderEx br = new BinaryReaderEx( ms );
 
 			Msg = (EMsg)br.ReadInt32();
 			TargetJobID = br.ReadInt64();
@@ -996,25 +978,23 @@ namespace SteamKit2
 			SessionID = 0;
 		}
 
-		public byte[] Serialize()
+		public void Serialize(Stream s)
 		{
-			ByteBuffer bb = new ByteBuffer( 36 );
+			BinaryWriterEx bb = new BinaryWriterEx( s );
 
-			bb.Append( (int)Msg );
-			bb.Append( HeaderSize );
-			bb.Append( HeaderVersion );
-			bb.Append( TargetJobID );
-			bb.Append( SourceJobID );
-			bb.Append( HeaderCanary );
-			bb.Append( steamID );
-			bb.Append( SessionID );
-
-			return bb.ToArray();
+			bb.Write( (int)Msg );
+			bb.Write( HeaderSize );
+			bb.Write( HeaderVersion );
+			bb.Write( TargetJobID );
+			bb.Write( SourceJobID );
+			bb.Write( HeaderCanary );
+			bb.Write( steamID );
+			bb.Write( SessionID );
 		}
 
-		public void Deserialize( MemoryStream ms )
+		public void Deserialize( Stream ms )
 		{
-			BinaryReader br = new BinaryReader( ms );
+			BinaryReaderEx br = new BinaryReaderEx( ms );
 
 			Msg = (EMsg)br.ReadInt32();
 			HeaderSize = br.ReadByte();
@@ -1046,25 +1026,21 @@ namespace SteamKit2
 			ProtoHeader = new CMsgProtoBufHeader();
 		}
 
-		public byte[] Serialize()
+		public void Serialize(Stream s)
 		{
-			MemoryStream msProtoHeader = new MemoryStream();
-			ProtoBuf.Serializer.Serialize<CMsgProtoBufHeader>(msProtoHeader, ProtoHeader);
-			HeaderLength = (int)msProtoHeader.Length;
-			ByteBuffer bb = new ByteBuffer( 8 + (int)msProtoHeader.Length );
+            MemoryStream ms = new MemoryStream();
+            ProtoBuf.Serializer.Serialize<CMsgProtoBufHeader>(ms, ProtoHeader);
+            HeaderLength = (int)ms.Length;
 
-			bb.Append( (int)MsgUtil.MakeMsg( Msg, true ) );
-			bb.Append( HeaderLength );
-			byte[] buff = msProtoHeader.ToArray();
-			bb.Append( buff );
+            BinaryWriterEx bb = new BinaryWriterEx(s);
 
-			msProtoHeader.Close();
-			return bb.ToArray();
+			bb.Write( (int)MsgUtil.MakeMsg( Msg, true ) );
+            ProtoBuf.Serializer.SerializeWithLengthPrefix<CMsgProtoBufHeader>(bb, ProtoHeader, PrefixStyle.Fixed32);
 		}
 
-		public void Deserialize( MemoryStream ms )
+		public void Deserialize( Stream ms )
 		{
-			BinaryReader br = new BinaryReader( ms );
+			BinaryReaderEx br = new BinaryReaderEx( ms );
 
 			Msg = (EMsg)MsgUtil.GetMsg( (uint)br.ReadInt32() );
 			HeaderLength = br.ReadInt32();
@@ -1089,19 +1065,17 @@ namespace SteamKit2
 			Universe = EUniverse.Invalid;
 		}
 
-		public byte[] Serialize()
+		public void Serialize(Stream s)
 		{
-			ByteBuffer bb = new ByteBuffer( 8 );
+			BinaryWriterEx bb = new BinaryWriterEx( s );
 
-			bb.Append( ProtocolVersion );
-			bb.Append( (int)Universe );
-
-			return bb.ToArray();
+			bb.Write( ProtocolVersion );
+			bb.Write( (int)Universe );
 		}
 
-		public void Deserialize( MemoryStream ms )
+		public void Deserialize( Stream ms )
 		{
-			BinaryReader br = new BinaryReader( ms );
+			BinaryReaderEx br = new BinaryReaderEx( ms );
 
 			ProtocolVersion = br.ReadUInt32();
 			Universe = (EUniverse)br.ReadInt32();
@@ -1123,19 +1097,17 @@ namespace SteamKit2
 			KeySize = 128;
 		}
 
-		public byte[] Serialize()
+		public void Serialize(Stream s)
 		{
-			ByteBuffer bb = new ByteBuffer( 8 );
+			BinaryWriterEx bb = new BinaryWriterEx( s );
 
-			bb.Append( ProtocolVersion );
-			bb.Append( KeySize );
-
-			return bb.ToArray();
+			bb.Write( ProtocolVersion );
+			bb.Write( KeySize );
 		}
 
-		public void Deserialize( MemoryStream ms )
+		public void Deserialize( Stream ms )
 		{
-			BinaryReader br = new BinaryReader( ms );
+			BinaryReaderEx br = new BinaryReaderEx( ms );
 
 			ProtocolVersion = br.ReadUInt32();
 			KeySize = br.ReadUInt32();
@@ -1154,18 +1126,16 @@ namespace SteamKit2
 			Result = EResult.Invalid;
 		}
 
-		public byte[] Serialize()
+		public void Serialize(Stream s)
 		{
-			ByteBuffer bb = new ByteBuffer( 4 );
+			BinaryWriterEx bb = new BinaryWriterEx( s );
 
-			bb.Append( (int)Result );
-
-			return bb.ToArray();
+			bb.Write( (int)Result );
 		}
 
-		public void Deserialize( MemoryStream ms )
+		public void Deserialize( Stream ms )
 		{
-			BinaryReader br = new BinaryReader( ms );
+			BinaryReaderEx br = new BinaryReaderEx( ms );
 
 			Result = (EResult)br.ReadInt32();
 		}
@@ -1183,14 +1153,12 @@ namespace SteamKit2
 			Proto = new CMsgMulti();
 		}
 
-		public byte[] Serialize()
+		public void Serialize(Stream s)
 		{
-			MemoryStream msProto = new MemoryStream();
-			ProtoBuf.Serializer.Serialize<CMsgMulti>(msProto, Proto);
-			return msProto.ToArray();
+			ProtoBuf.Serializer.Serialize<CMsgMulti>(s, Proto);
 		}
 
-		public void Deserialize( MemoryStream ms )
+		public void Deserialize( Stream ms )
 		{
 			Proto = ProtoBuf.Serializer.Deserialize<CMsgMulti>( ms );
 		}
@@ -1211,19 +1179,17 @@ namespace SteamKit2
 			LoginKey = new byte[20];
 		}
 
-		public byte[] Serialize()
+		public void Serialize(Stream s)
 		{
-			ByteBuffer bb = new ByteBuffer( 24 );
+            BinaryWriterEx bb = new BinaryWriterEx(s);
 
-			bb.Append( UniqueID );
-			bb.Append( LoginKey );
-
-			return bb.ToArray();
+			bb.Write( UniqueID );
+			bb.Write( LoginKey );
 		}
 
-		public void Deserialize( MemoryStream ms )
+		public void Deserialize( Stream ms )
 		{
-			BinaryReader br = new BinaryReader( ms );
+			BinaryReaderEx br = new BinaryReaderEx( ms );
 
 			UniqueID = br.ReadUInt32();
 			LoginKey = br.ReadBytes( 20 );
@@ -1242,18 +1208,16 @@ namespace SteamKit2
 			UniqueID = 0;
 		}
 
-		public byte[] Serialize()
+		public void Serialize(Stream s)
 		{
-			ByteBuffer bb = new ByteBuffer( 4 );
+            BinaryWriterEx bb = new BinaryWriterEx(s);
 
-			bb.Append( UniqueID );
-
-			return bb.ToArray();
+			bb.Write( UniqueID );
 		}
 
-		public void Deserialize( MemoryStream ms )
+		public void Deserialize( Stream ms )
 		{
-			BinaryReader br = new BinaryReader( ms );
+			BinaryReaderEx br = new BinaryReaderEx( ms );
 
 			UniqueID = br.ReadUInt32();
 		}
@@ -1271,14 +1235,12 @@ namespace SteamKit2
 			Proto = new CMsgClientHeartBeat();
 		}
 
-		public byte[] Serialize()
+		public void Serialize(Stream s)
 		{
-			MemoryStream msProto = new MemoryStream();
-			ProtoBuf.Serializer.Serialize<CMsgClientHeartBeat>(msProto, Proto);
-			return msProto.ToArray();
+			ProtoBuf.Serializer.Serialize<CMsgClientHeartBeat>(s, Proto);
 		}
 
-		public void Deserialize( MemoryStream ms )
+		public void Deserialize( Stream ms )
 		{
 			Proto = ProtoBuf.Serializer.Deserialize<CMsgClientHeartBeat>( ms );
 		}
@@ -1298,14 +1260,12 @@ namespace SteamKit2
 			Proto = new CMsgClientLogon();
 		}
 
-		public byte[] Serialize()
+		public void Serialize(Stream s)
 		{
-			MemoryStream msProto = new MemoryStream();
-			ProtoBuf.Serializer.Serialize<CMsgClientLogon>(msProto, Proto);
-			return msProto.ToArray();
+			ProtoBuf.Serializer.Serialize<CMsgClientLogon>(s, Proto);
 		}
 
-		public void Deserialize( MemoryStream ms )
+		public void Deserialize( Stream ms )
 		{
 			Proto = ProtoBuf.Serializer.Deserialize<CMsgClientLogon>( ms );
 		}
@@ -1323,14 +1283,12 @@ namespace SteamKit2
 			Proto = new CMsgClientLogOff();
 		}
 
-		public byte[] Serialize()
+		public void Serialize(Stream s)
 		{
-			MemoryStream msProto = new MemoryStream();
-			ProtoBuf.Serializer.Serialize<CMsgClientLogOff>(msProto, Proto);
-			return msProto.ToArray();
+			ProtoBuf.Serializer.Serialize<CMsgClientLogOff>(s, Proto);
 		}
 
-		public void Deserialize( MemoryStream ms )
+		public void Deserialize( Stream ms )
 		{
 			Proto = ProtoBuf.Serializer.Deserialize<CMsgClientLogOff>( ms );
 		}
@@ -1348,14 +1306,12 @@ namespace SteamKit2
 			Proto = new CMsgClientLogonResponse();
 		}
 
-		public byte[] Serialize()
+		public void Serialize(Stream s)
 		{
-			MemoryStream msProto = new MemoryStream();
-			ProtoBuf.Serializer.Serialize<CMsgClientLogonResponse>(msProto, Proto);
-			return msProto.ToArray();
+			ProtoBuf.Serializer.Serialize<CMsgClientLogonResponse>(s, Proto);
 		}
 
-		public void Deserialize( MemoryStream ms )
+		public void Deserialize( Stream ms )
 		{
 			Proto = ProtoBuf.Serializer.Deserialize<CMsgClientLogonResponse>( ms );
 		}
@@ -1373,14 +1329,12 @@ namespace SteamKit2
 			Proto = new CMsgGSServerType();
 		}
 
-		public byte[] Serialize()
+		public void Serialize(Stream s)
 		{
-			MemoryStream msProto = new MemoryStream();
-			ProtoBuf.Serializer.Serialize<CMsgGSServerType>(msProto, Proto);
-			return msProto.ToArray();
+			ProtoBuf.Serializer.Serialize<CMsgGSServerType>(s, Proto);
 		}
 
-		public void Deserialize( MemoryStream ms )
+		public void Deserialize( Stream ms )
 		{
 			Proto = ProtoBuf.Serializer.Deserialize<CMsgGSServerType>( ms );
 		}
@@ -1398,14 +1352,12 @@ namespace SteamKit2
 			Proto = new CMsgGSStatusReply();
 		}
 
-		public byte[] Serialize()
+		public void Serialize(Stream s)
 		{
-			MemoryStream msProto = new MemoryStream();
-			ProtoBuf.Serializer.Serialize<CMsgGSStatusReply>(msProto, Proto);
-			return msProto.ToArray();
+			ProtoBuf.Serializer.Serialize<CMsgGSStatusReply>(s, Proto);
 		}
 
-		public void Deserialize( MemoryStream ms )
+		public void Deserialize( Stream ms )
 		{
 			Proto = ProtoBuf.Serializer.Deserialize<CMsgGSStatusReply>( ms );
 		}
@@ -1423,14 +1375,12 @@ namespace SteamKit2
 			Proto = new CMsgClientRegisterAuthTicketWithCM();
 		}
 
-		public byte[] Serialize()
+		public void Serialize(Stream s)
 		{
-			MemoryStream msProto = new MemoryStream();
-			ProtoBuf.Serializer.Serialize<CMsgClientRegisterAuthTicketWithCM>(msProto, Proto);
-			return msProto.ToArray();
+			ProtoBuf.Serializer.Serialize<CMsgClientRegisterAuthTicketWithCM>(s, Proto);
 		}
 
-		public void Deserialize( MemoryStream ms )
+		public void Deserialize( Stream ms )
 		{
 			Proto = ProtoBuf.Serializer.Deserialize<CMsgClientRegisterAuthTicketWithCM>( ms );
 		}
@@ -1448,14 +1398,12 @@ namespace SteamKit2
 			Proto = new CMsgClientGetAppOwnershipTicket();
 		}
 
-		public byte[] Serialize()
+		public void Serialize(Stream s)
 		{
-			MemoryStream msProto = new MemoryStream();
-			ProtoBuf.Serializer.Serialize<CMsgClientGetAppOwnershipTicket>(msProto, Proto);
-			return msProto.ToArray();
+			ProtoBuf.Serializer.Serialize<CMsgClientGetAppOwnershipTicket>(s, Proto);
 		}
 
-		public void Deserialize( MemoryStream ms )
+		public void Deserialize( Stream ms )
 		{
 			Proto = ProtoBuf.Serializer.Deserialize<CMsgClientGetAppOwnershipTicket>( ms );
 		}
@@ -1473,14 +1421,12 @@ namespace SteamKit2
 			Proto = new CMsgClientGetAppOwnershipTicketResponse();
 		}
 
-		public byte[] Serialize()
+		public void Serialize(Stream s)
 		{
-			MemoryStream msProto = new MemoryStream();
-			ProtoBuf.Serializer.Serialize<CMsgClientGetAppOwnershipTicketResponse>(msProto, Proto);
-			return msProto.ToArray();
+			ProtoBuf.Serializer.Serialize<CMsgClientGetAppOwnershipTicketResponse>(s, Proto);
 		}
 
-		public void Deserialize( MemoryStream ms )
+		public void Deserialize( Stream ms )
 		{
 			Proto = ProtoBuf.Serializer.Deserialize<CMsgClientGetAppOwnershipTicketResponse>( ms );
 		}
@@ -1498,14 +1444,12 @@ namespace SteamKit2
 			Proto = new CMsgClientAuthList();
 		}
 
-		public byte[] Serialize()
+		public void Serialize(Stream s)
 		{
-			MemoryStream msProto = new MemoryStream();
-			ProtoBuf.Serializer.Serialize<CMsgClientAuthList>(msProto, Proto);
-			return msProto.ToArray();
+			ProtoBuf.Serializer.Serialize<CMsgClientAuthList>(s, Proto);
 		}
 
-		public void Deserialize( MemoryStream ms )
+		public void Deserialize( Stream ms )
 		{
 			Proto = ProtoBuf.Serializer.Deserialize<CMsgClientAuthList>( ms );
 		}
@@ -1523,14 +1467,12 @@ namespace SteamKit2
 			Proto = new CMsgClientRequestFriendData();
 		}
 
-		public byte[] Serialize()
+		public void Serialize(Stream s)
 		{
-			MemoryStream msProto = new MemoryStream();
-			ProtoBuf.Serializer.Serialize<CMsgClientRequestFriendData>(msProto, Proto);
-			return msProto.ToArray();
+			ProtoBuf.Serializer.Serialize<CMsgClientRequestFriendData>(s, Proto);
 		}
 
-		public void Deserialize( MemoryStream ms )
+		public void Deserialize( Stream ms )
 		{
 			Proto = ProtoBuf.Serializer.Deserialize<CMsgClientRequestFriendData>( ms );
 		}
@@ -1548,18 +1490,16 @@ namespace SteamKit2
 			PersonaState = 0;
 		}
 
-		public byte[] Serialize()
+		public void Serialize(Stream s)
 		{
-			ByteBuffer bb = new ByteBuffer( 1 );
+			BinaryWriterEx bb = new BinaryWriterEx(s);
 
-			bb.Append( PersonaState );
-
-			return bb.ToArray();
+			bb.Write( PersonaState );
 		}
 
-		public void Deserialize( MemoryStream ms )
+		public void Deserialize( Stream ms )
 		{
-			BinaryReader br = new BinaryReader( ms );
+			BinaryReaderEx br = new BinaryReaderEx( ms );
 
 			PersonaState = br.ReadByte();
 		}
@@ -1577,14 +1517,12 @@ namespace SteamKit2
 			Proto = new CMsgClientPersonaState();
 		}
 
-		public byte[] Serialize()
+		public void Serialize(Stream s)
 		{
-			MemoryStream msProto = new MemoryStream();
-			ProtoBuf.Serializer.Serialize<CMsgClientPersonaState>(msProto, Proto);
-			return msProto.ToArray();
+			ProtoBuf.Serializer.Serialize<CMsgClientPersonaState>(s, Proto);
 		}
 
-		public void Deserialize( MemoryStream ms )
+		public void Deserialize( Stream ms )
 		{
 			Proto = ProtoBuf.Serializer.Deserialize<CMsgClientPersonaState>( ms );
 		}
@@ -1602,14 +1540,12 @@ namespace SteamKit2
 			Proto = new CMsgClientSessionToken();
 		}
 
-		public byte[] Serialize()
+		public void Serialize(Stream s)
 		{
-			MemoryStream msProto = new MemoryStream();
-			ProtoBuf.Serializer.Serialize<CMsgClientSessionToken>(msProto, Proto);
-			return msProto.ToArray();
+			ProtoBuf.Serializer.Serialize<CMsgClientSessionToken>(s, Proto);
 		}
 
-		public void Deserialize( MemoryStream ms )
+		public void Deserialize( Stream ms )
 		{
 			Proto = ProtoBuf.Serializer.Deserialize<CMsgClientSessionToken>( ms );
 		}
@@ -1627,14 +1563,12 @@ namespace SteamKit2
 			Proto = new CMsgClientGameConnectTokens();
 		}
 
-		public byte[] Serialize()
+		public void Serialize(Stream s)
 		{
-			MemoryStream msProto = new MemoryStream();
-			ProtoBuf.Serializer.Serialize<CMsgClientGameConnectTokens>(msProto, Proto);
-			return msProto.ToArray();
+			ProtoBuf.Serializer.Serialize<CMsgClientGameConnectTokens>(s, Proto);
 		}
 
-		public void Deserialize( MemoryStream ms )
+		public void Deserialize( Stream ms )
 		{
 			Proto = ProtoBuf.Serializer.Deserialize<CMsgClientGameConnectTokens>( ms );
 		}
@@ -1652,14 +1586,12 @@ namespace SteamKit2
 			Proto = new CMsgClientGamesPlayed();
 		}
 
-		public byte[] Serialize()
+		public void Serialize(Stream s)
 		{
-			MemoryStream msProto = new MemoryStream();
-			ProtoBuf.Serializer.Serialize<CMsgClientGamesPlayed>(msProto, Proto);
-			return msProto.ToArray();
+			ProtoBuf.Serializer.Serialize<CMsgClientGamesPlayed>(s, Proto);
 		}
 
-		public void Deserialize( MemoryStream ms )
+		public void Deserialize( Stream ms )
 		{
 			Proto = ProtoBuf.Serializer.Deserialize<CMsgClientGamesPlayed>( ms );
 		}
@@ -1677,14 +1609,12 @@ namespace SteamKit2
 			Proto = new CMsgClientFriendsList();
 		}
 
-		public byte[] Serialize()
+		public void Serialize(Stream s)
 		{
-			MemoryStream msProto = new MemoryStream();
-			ProtoBuf.Serializer.Serialize<CMsgClientFriendsList>(msProto, Proto);
-			return msProto.ToArray();
+			ProtoBuf.Serializer.Serialize<CMsgClientFriendsList>(s, Proto);
 		}
 
-		public void Deserialize( MemoryStream ms )
+		public void Deserialize( Stream ms )
 		{
 			Proto = ProtoBuf.Serializer.Deserialize<CMsgClientFriendsList>( ms );
 		}
@@ -1706,19 +1636,17 @@ namespace SteamKit2
 			EntryType = EChatEntryType.Invalid;
 		}
 
-		public byte[] Serialize()
+		public void Serialize(Stream s)
 		{
-			ByteBuffer bb = new ByteBuffer( 12 );
+			BinaryWriterEx bb = new BinaryWriterEx( s );
 
-			bb.Append( steamID );
-			bb.Append( (int)EntryType );
-
-			return bb.ToArray();
+			bb.Write( steamID );
+			bb.Write( (int)EntryType );
 		}
 
-		public void Deserialize( MemoryStream ms )
+		public void Deserialize( Stream ms )
 		{
-			BinaryReader br = new BinaryReader( ms );
+			BinaryReaderEx br = new BinaryReaderEx( ms );
 
 			steamID = br.ReadUInt64();
 			EntryType = (EChatEntryType)br.ReadInt32();
@@ -1747,21 +1675,19 @@ namespace SteamKit2
 			MessageSize = 0;
 		}
 
-		public byte[] Serialize()
+		public void Serialize(Stream s)
 		{
-			ByteBuffer bb = new ByteBuffer( 20 );
+			BinaryWriterEx bb = new BinaryWriterEx( s );
 
-			bb.Append( steamID );
-			bb.Append( (int)EntryType );
-			bb.Append( FromLimitedAccount );
-			bb.Append( MessageSize );
-
-			return bb.ToArray();
+			bb.Write( steamID );
+			bb.Write( (int)EntryType );
+			bb.Write( FromLimitedAccount );
+			bb.Write( MessageSize );
 		}
 
-		public void Deserialize( MemoryStream ms )
+		public void Deserialize( Stream ms )
 		{
-			BinaryReader br = new BinaryReader( ms );
+			BinaryReaderEx br = new BinaryReaderEx( ms );
 
 			steamID = br.ReadUInt64();
 			EntryType = (EChatEntryType)br.ReadInt32();
@@ -1782,18 +1708,16 @@ namespace SteamKit2
 			NumBans = 0;
 		}
 
-		public byte[] Serialize()
+		public void Serialize(Stream s)
 		{
-			ByteBuffer bb = new ByteBuffer( 4 );
+            BinaryWriterEx bb = new BinaryWriterEx(s);
 
-			bb.Append( NumBans );
-
-			return bb.ToArray();
+			bb.Write( NumBans );
 		}
 
-		public void Deserialize( MemoryStream ms )
+		public void Deserialize( Stream ms )
 		{
-			BinaryReader br = new BinaryReader( ms );
+			BinaryReaderEx br = new BinaryReaderEx( ms );
 
 			NumBans = br.ReadUInt32();
 		}
@@ -1817,20 +1741,18 @@ namespace SteamKit2
 			Offline = 0;
 		}
 
-		public byte[] Serialize()
+		public void Serialize(Stream s)
 		{
-			ByteBuffer bb = new ByteBuffer( 13 );
+			BinaryWriterEx bb = new BinaryWriterEx( s );
 
-			bb.Append( (int)AppUsageEvent );
-			bb.Append( GameID );
-			bb.Append( Offline );
-
-			return bb.ToArray();
+			bb.Write( (int)AppUsageEvent );
+			bb.Write( GameID );
+			bb.Write( Offline );
 		}
 
-		public void Deserialize( MemoryStream ms )
+		public void Deserialize( Stream ms )
 		{
-			BinaryReader br = new BinaryReader( ms );
+			BinaryReaderEx br = new BinaryReaderEx( ms );
 
 			AppUsageEvent = (EAppUsageEvent)br.ReadInt32();
 			GameID = br.ReadUInt64();

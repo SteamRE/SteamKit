@@ -13,6 +13,7 @@ using System.Net;
 using System.Diagnostics;
 using System.IO;
 using System.Threading;
+using SteamKit2.Util;
 
 namespace SteamKit2
 {
@@ -68,17 +69,20 @@ namespace SteamKit2
             if (!sock.Connected)
                 return;
 
-            byte[] data = clientMsg.Serialize();
+            //TODO: Change this
+            MemoryStream ms = new MemoryStream();
+            clientMsg.Serialize(ms);
+            byte[] data = ms.ToArray();
 
             if (NetFilter != null)
             {
                 data = NetFilter.ProcessOutgoing(data);
             }
 
-            ByteBuffer bb = new ByteBuffer(data.Length + 8);
-            bb.Append((uint)data.Length);
-            bb.Append(TcpConnection.MAGIC);
-            bb.Append(data);
+            BinaryWriterEx bb = new BinaryWriterEx();
+            bb.Write((uint)data.Length);
+            bb.Write(TcpConnection.MAGIC);
+            bb.Write(data);
 
             writer.Write(bb.ToArray());
         }

@@ -8,12 +8,13 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 using System.Runtime.InteropServices;
+using SteamKit2.Util;
 
 namespace SteamKit2
 {
     public interface IClientMsg
     {
-        byte[] Serialize();
+        void Serialize(Stream stream);
     }
 
     public class ClientMsg<MsgType, Hdr> : IClientMsg
@@ -24,13 +25,13 @@ namespace SteamKit2
         public Hdr Header { get; private set; }
         public MsgType Msg { get; private set; }
 
-        public ByteBuffer Payload { get; private set; }
+        public BinaryWriterEx Payload { get; private set; }
 
         public ClientMsg()
         {
             Header = new Hdr();
             Msg = new MsgType();
-            Payload = new ByteBuffer();
+            Payload = new BinaryWriterEx();
 
             Header.SetEMsg( Msg.GetEMsg() );
         }
@@ -46,7 +47,7 @@ namespace SteamKit2
             byte[] payload = new byte[ ms.Length - ms.Position ];
             ms.Read( payload, 0, payload.Length );
 
-            Payload.Append( payload );
+            Payload.Write( payload );
         }
 
 
@@ -55,16 +56,14 @@ namespace SteamKit2
             return Msg.GetEMsg();
         }
 
-        public byte[] Serialize()
+        public void Serialize(Stream s)
         {
-            ByteBuffer bb = new ByteBuffer();
+            BinaryWriterEx bb = new BinaryWriterEx(s);
 
-            bb.Append( Header.Serialize() );
-            bb.Append( Msg.Serialize() );
+            Header.Serialize(bb);
+            Msg.Serialize(bb);
 
-            bb.Append( Payload.ToArray() );
-
-            return bb.ToArray();
+            bb.Write(Payload.ToArray());
         }
     }
 
