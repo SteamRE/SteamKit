@@ -256,9 +256,9 @@ namespace SteamKit2
             byte[] cryptedSessKey = CryptoHelper.RSAEncrypt( tempSessionKey, pubKey );
             byte[] keyCrc = CryptoHelper.CRCHash( cryptedSessKey );
 
-            encResp.Payload.Append( cryptedSessKey );
-            encResp.Payload.Append( keyCrc );
-            encResp.Payload.Append<uint>( 0 );
+            encResp.Payload.Write( cryptedSessKey );
+            encResp.Payload.Write( keyCrc );
+            encResp.Payload.WriteType<uint>( 0 );
 
             Connection.Send( encResp );
         }

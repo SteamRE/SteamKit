@@ -67,16 +67,16 @@ namespace SteamKit2
             {
                 TcpPacket packet = new TcpPacket();
 
-                packet.Append( command );
+                packet.Write( command );
 
                 foreach ( object arg in args )
                 {
                     if ( arg is byte[] )
-                        packet.Append( ( byte[] )arg );
+                        packet.Write( ( byte[] )arg );
                     else if ( arg is string )
-                        packet.Append( ( string )arg, Encoding.ASCII );
+                        packet.Write( ( string )arg, Encoding.ASCII );
                     else
-                        packet.Append( arg.GetType(), arg );
+                        packet.Write( arg.GetType(), arg );
                 }
 
                 Socket.Send( packet );

@@ -121,8 +121,8 @@ namespace SteamKit2
             chatMsg.Msg.EntryType = type;
             chatMsg.Msg.SteamID = target;
 
-            chatMsg.Payload.Append( msgData );
-            chatMsg.Payload.Append<byte>( 0 );
+            chatMsg.Payload.Write( msgData );
+            chatMsg.Payload.WriteType<byte>( 0 );
 
             this.Client.Send( chatMsg );
         }

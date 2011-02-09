@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Diagnostics;
+using SteamKit2.Util;
 
 namespace SteamKit2
 {
@@ -54,12 +55,12 @@ namespace SteamKit2
                 byte[] userHash = CryptoHelper.JenkinsHash( Encoding.ASCII.GetBytes( user ) );
                 uint userData = BitConverter.ToUInt32( userHash, 0 ) & 1;
 
-                ByteBuffer bb = new ByteBuffer( true );
+                BinaryWriterEx bb = new BinaryWriterEx(true);
 
-                bb.Append<uint>( 0 );
-                bb.Append<byte>( 4 );
-                bb.Append( internalIp );
-                bb.Append( userData );
+                bb.WriteType<uint>( 0 );
+                bb.WriteType<byte>( 4 );
+                bb.Write( internalIp );
+                bb.Write( userData );
 
                 Socket.Send( bb.ToArray() );
 
@@ -129,10 +130,10 @@ namespace SteamKit2
 
                 TcpPacket packet = new TcpPacket();
 
-                packet.Append( iv );
-                packet.Append( ( ushort )plainText.Length );
-                packet.Append( ( ushort )cipherText.Length );
-                packet.Append( cipherText );
+                packet.Write( iv );
+                packet.Write( ( ushort )plainText.Length );
+                packet.Write( ( ushort )cipherText.Length );
+                packet.Write( cipherText );
 
                 Socket.Send( packet );
             }
@@ -206,11 +207,11 @@ namespace SteamKit2
 
         static byte[] GenerateAESKey( uint salt1, uint salt2, string pass )
         {
-            ByteBuffer bb = new ByteBuffer();
+            BinaryWriterEx bb = new BinaryWriterEx();
 
-            bb.Append( salt1 );
-            bb.Append( Encoding.ASCII.GetBytes( pass ) );
-            bb.Append( salt2 );
+            bb.Write( salt1 );
+            bb.Write( Encoding.ASCII.GetBytes( pass ) );
+            bb.Write( salt2 );
 
             byte[] digest = CryptoHelper.SHAHash( bb.ToArray() );
 
@@ -221,10 +222,10 @@ namespace SteamKit2
         }
         static ulong GetObfuscationMask( uint internalIp, uint externalIp )
         {
-            ByteBuffer bb = new ByteBuffer();
+            BinaryWriterEx bb = new BinaryWriterEx();
 
-            bb.Append( externalIp );
-            bb.Append( internalIp );
+            bb.Write( externalIp );
+            bb.Write( internalIp );
 
             byte[] digest = CryptoHelper.SHAHash( bb.ToArray() );
 
@@ -232,10 +233,10 @@ namespace SteamKit2
         }
         static byte[] GetPlaintext( ulong timeStamp, uint internalIp )
         {
-            ByteBuffer bb = new ByteBuffer();
+            BinaryWriterEx bb = new BinaryWriterEx();
 
-            bb.Append( timeStamp );
-            bb.Append( internalIp );
+            bb.Write( timeStamp );
+            bb.Write( internalIp );
 
             return bb.ToArray();
         }
