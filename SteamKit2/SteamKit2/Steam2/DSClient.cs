@@ -17,6 +17,11 @@ namespace SteamKit2
     {
         public IPEndPoint[] GetServerList( EServerType type )
         {
+            return this.GetServerList( type, null );
+        }
+
+        public IPEndPoint[] GetServerList( EServerType type, string userName )
+        {
             List<IPEndPoint> serverList = new List<IPEndPoint>();
 
             try
@@ -30,7 +35,21 @@ namespace SteamKit2
                     return null;
                 }
 
-                if ( !this.SendCommand( ( byte )type, ( uint )0 ) )
+                bool bRet = false;
+
+                if ( userName != null )
+                {
+                    byte[] userHash = CryptoHelper.JenkinsHash( Encoding.ASCII.GetBytes( userName ) );
+                    uint userData = BitConverter.ToUInt32( userHash, 0 ) & 1;
+
+                    bRet = this.SendCommand( ( byte )type, NetHelpers.EndianSwap( userData ) );
+                }
+                else
+                {
+                    bRet = this.SendCommand( ( byte )type );
+                }
+
+                if ( !bRet )
                 {
                     DebugLog.WriteLine( "DSClient", "GetServerList failed sending EServerType command." );
 

@@ -196,7 +196,7 @@ namespace SteamKit2
             using ( JHash jHash = new JHash() )
             {
                 byte[] hash = jHash.ComputeHash( input );
-                //Array.Reverse( hash );
+                Array.Reverse( hash );
 
                 return hash;
             }
