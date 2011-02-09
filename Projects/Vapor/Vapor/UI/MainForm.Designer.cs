@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager( typeof( MainForm ) );
             this.panel1 = new System.Windows.Forms.Panel();
             this.selfControl = new Vapor.FriendControl();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -107,6 +108,7 @@
             this.ContextMenuStrip = this.contextMenuStrip1;
             this.Controls.Add( this.panel2 );
             this.Controls.Add( this.panel1 );
+            this.Icon = ( ( System.Drawing.Icon )( resources.GetObject( "$this.Icon" ) ) );
             this.MinimumSize = new System.Drawing.Size( 8, 200 );
             this.Name = "MainForm";
             this.Text = "Vapor";

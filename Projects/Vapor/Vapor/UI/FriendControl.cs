@@ -80,12 +80,9 @@ namespace Vapor
 
         void AvatarDownloaded( AvatarDownloadDetails details )
         {
-            if ( !details.Success )
-                return;
-
             try
             {
-                avatarBox.Image = ComposeAvatar( this.Friend, details.Filename );
+                avatarBox.Image = ComposeAvatar( this.Friend, ( details.Success ? details.Filename : null ) );
             }
             catch { }
         }
@@ -103,7 +100,10 @@ namespace Vapor
             byte[] avatarHash = CDNCache.GetAvatarHash( steamid.SteamID );
 
             if ( avatarHash == null )
+            {
+                avatarBox.Image = ComposeAvatar( this.Friend, null );
                 return;
+            }
 
             CDNCache.DownloadAvatar( steamid.SteamID, avatarHash, AvatarDownloaded );
         }

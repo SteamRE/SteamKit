@@ -16,32 +16,43 @@ namespace Vapor
         public string Filename;
     }
 
+    class AvatarData
+    {
+        public string hashstr;
+        public string localFile;
+        public Action<AvatarDownloadDetails> callback;
+    }
+
     static class CDNCache
     {
+
         const string AvatarRoot = "http://media.steampowered.com/steamcommunity/public/images/avatars/";
 
         const string AvatarFull = "{0}/{1}_full.jpg";
         const string AvatarMedium = "{0}/{1}_medium.jpg";
         const string AvatarSmall = "{0}/{1}.jpg";
 
-        static Semaphore dlPool;
+
+        static Thread cdnThread;
+
+        static readonly object lockObj = new object();
+        static Queue<AvatarData> jobQueue;
 
         static Dictionary<SteamID, byte[]> avatarMap;
 
-
-        static CDNCache()
+        public static void Initialize()
         {
-            dlPool = new Semaphore( 0, 6 );
-            dlPool.Release( 6 );
-
             avatarMap = new Dictionary<SteamID, byte[]>();
+            jobQueue = new Queue<AvatarData>();
+
+            cdnThread = new Thread( JobFunc );
+            cdnThread.Start();
         }
 
-        struct AvatarData
+        public static void Shutdown()
         {
-            public string hashstr;
-            public string localFile;
-            public Action<AvatarDownloadDetails> callback;
+            AddJob( null );
+            cdnThread.Join();
         }
 
         public static byte[] GetAvatarHash( SteamID steamId )
@@ -82,42 +93,67 @@ namespace Vapor
                 return;
             }
 
-            ThreadPool.QueueUserWorkItem( DoDownload, new AvatarData() { callback = callBack, hashstr = hashStr, localFile = localFile } );
+            AvatarData ad = new AvatarData
+            {
+                localFile = localFile,
+                callback = callBack,
+                hashstr = hashStr,
+            };
+
+            AddJob( ad );
         }
 
-        static void DoDownload( object state )
+        static void AddJob( AvatarData data )
         {
-            AvatarData data = ( AvatarData )state;
-
-            string hashStr = data.hashstr;
-            string hashPrefix = hashStr.Substring( 0, 2 );
-            string localPath = Path.Combine( Application.StartupPath, "cache" );
-            var callBack = data.callback;
-
-
-            dlPool.WaitOne();
-            
-            string downloadUri = string.Format( AvatarRoot + AvatarSmall, hashPrefix, hashStr );
-            string localFile = Path.Combine( localPath, hashStr + ".jpg" );
-
-            using ( WebClient client = new WebClient() )
+            lock ( lockObj )
             {
-                try
-                {
-                    client.DownloadFile( downloadUri, localFile );
-                }
-                catch
-                {
-                    callBack( new AvatarDownloadDetails() { Success = false } );
-                    return;
-                }
-                finally
-                {
-                    dlPool.Release();
-                }
+                jobQueue.Enqueue( data );
+                Monitor.Pulse( lockObj );
             }
+        }
 
-            callBack( new AvatarDownloadDetails() { Success = true, Filename = localFile } );
+        static void JobFunc()
+        {
+            while ( true )
+            {
+
+                AvatarData data;
+
+                lock ( lockObj )
+                {
+                    while ( jobQueue.Count == 0 )
+                        Monitor.Wait( lockObj );
+
+                    data = jobQueue.Dequeue();
+                }
+
+                if ( data == null )
+                    return; // exit signal
+
+                string hashStr = data.hashstr;
+                string hashPrefix = hashStr.Substring( 0, 2 );
+                string localPath = Path.Combine( Application.StartupPath, "cache" );
+                var callBack = data.callback;
+
+
+                string downloadUri = string.Format( AvatarRoot + AvatarSmall, hashPrefix, hashStr );
+                string localFile = Path.Combine( localPath, hashStr + ".jpg" );
+
+                using ( WebClient client = new WebClient() )
+                {
+                    try
+                    {
+                        client.DownloadFile( downloadUri, localFile );
+                    }
+                    catch
+                    {
+                        callBack( new AvatarDownloadDetails() { Success = false } );
+                        continue;
+                    }
+                }
+
+                callBack( new AvatarDownloadDetails() { Success = true, Filename = localFile } );
+            }
         }
     }
 }
