@@ -80,7 +80,6 @@
     <Compile Include="Types\ClientTGT.cs" />
     <Compile Include="Networking\Steam3\UdpConnection.cs" />
     <Compile Include="Util\DataStream.cs" />
-    <Compile Include="Util\Serializable.cs" />
     <Compile Include="Steam2\ServerClient.cs" />
     <Compile Include="Networking\Steam2\TcpSocket.cs" />
     <Compile Include="Networking\Steam3\Connection.cs" />
@@ -95,7 +94,7 @@
     <Compile Include="Base\SteamMsgAppTicket.cs" />
     <Compile Include="Base\SteamMsgBase.cs" />
     <Compile Include="Base\SteamMsgClientServer.cs" />
-	<Compile Include="Util\BinaryEx.cs" />
+    <Compile Include="Util\BinaryEx.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="license.txt" />

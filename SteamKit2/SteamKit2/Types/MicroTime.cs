@@ -13,7 +13,7 @@ using System.Runtime.InteropServices;
 namespace SteamKit2
 {
     [StructLayout( LayoutKind.Sequential, Pack = 1 )]
-    public class MicroTime : Serializable<MicroTime>, IEquatable<ulong>, IComparable<ulong>
+    public class MicroTime : /*Serializable<MicroTime>,*/ IEquatable<ulong>, IComparable<ulong>
     {
         public ulong Time;
 
@@ -81,6 +81,28 @@ namespace SteamKit2
         {
             TimeSpan ts = ( dt - new DateTime( 1970, 1, 1, 0, 0, 0 ) );
             return ( uint )ts.TotalSeconds;
+        }
+
+        
+        public static MicroTime Deserialize( byte[] data )
+        {
+            DataStream ds = new DataStream( data );
+
+            MicroTime mt = new MicroTime();
+
+            mt.Time = ds.ReadUInt64();
+
+            return mt;
+        }
+
+        public byte[] Serialize()
+        {
+            using ( BinaryWriterEx bw = new BinaryWriterEx() )
+            {
+                bw.Write( this.Time );
+
+                return bw.ToArray();
+            }
         }
     }
 }
