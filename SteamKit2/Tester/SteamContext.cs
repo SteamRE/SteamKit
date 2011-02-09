@@ -30,7 +30,7 @@ namespace Tester
             GeneralDSClient gdsClient = new GeneralDSClient();
             gdsClient.Connect( GeneralDSClient.GDServers[ 0 ] );
 
-            IPEndPoint[] authServers = gdsClient.GetServerList( EServerType.ProxyASClientAuthentication, userName );
+            IPEndPoint[] authServers = gdsClient.GetServerList( EServerType.ProxyASClientAuthentication );
             gdsClient.Disconnect();
 
             AuthServerClient asClient = new AuthServerClient();

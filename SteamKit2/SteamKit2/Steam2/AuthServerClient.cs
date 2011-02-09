@@ -49,7 +49,7 @@ namespace SteamKit2
         {
             try
             {
-                internalIp = NetHelpers.GetIPAddress( NetHelpers.GetLocalIP() );
+                internalIp = NetHelpers.GetIPAddress( Socket.GetLocalIP() );
                 ByteBuffer bb = new ByteBuffer( true );
 
                 bb.Append<uint>( 0 );

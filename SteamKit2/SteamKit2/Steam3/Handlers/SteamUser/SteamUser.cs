@@ -88,7 +88,7 @@ namespace SteamKit2
             // if we use an instance of 0, we never get the NewLoginKey msg and then can't sign on to friends
             steamId.AccountInstance = 1;
 
-            uint localIp = NetHelpers.GetIPAddress( NetHelpers.GetLocalIP() );
+            uint localIp = NetHelpers.GetIPAddress( this.Client.GetLocalIP() );
 
             MicroTime creationTime = MicroTime.Deserialize( details.AccRecord.GetDescriptor( AuthFields.eFieldTimestampCreation ) );
 

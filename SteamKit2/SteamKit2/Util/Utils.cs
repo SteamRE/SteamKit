@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Net;
+using System.Net.Sockets;
 using System.Net.NetworkInformation;
 
 namespace SteamKit2
@@ -64,23 +65,14 @@ namespace SteamKit2
 
     static class NetHelpers
     {
-        public static IPAddress GetLocalIP()
+        public static IPAddress GetLocalIP(Socket activeSocket)
         {
-            NetworkInterface[] networks = NetworkInterface.GetAllNetworkInterfaces();
-            foreach ( NetworkInterface nw in networks )
+            if ((activeSocket.LocalEndPoint is IPEndPoint) == false || ((IPEndPoint)activeSocket.LocalEndPoint).Address == IPAddress.Any )
             {
-                if ( nw.Description.IndexOf( "Virtual", 0, StringComparison.OrdinalIgnoreCase ) > 0 )
-                    continue;
-
-                IPInterfaceProperties ipProps = nw.GetIPProperties();
-                foreach ( UnicastIPAddressInformation ucip in ipProps.UnicastAddresses )
-                {
-                    if ( ucip.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork && ucip.IsDnsEligible )
-                        return ucip.Address;
-                }
+                throw new Exception("Not connected");
             }
 
-            return IPAddress.Any;
+            return ((IPEndPoint)activeSocket.LocalEndPoint).Address;
         }
 
         public static IPAddress GetIPAddress( uint ipAddr )

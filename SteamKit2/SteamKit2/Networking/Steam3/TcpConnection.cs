@@ -157,5 +157,10 @@ namespace SteamKit2
 
             }
         }
+
+        public override IPAddress GetLocalIP()
+        {
+            return NetHelpers.GetLocalIP(sock);
+        }
     }
 }

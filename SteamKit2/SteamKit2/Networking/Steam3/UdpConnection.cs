@@ -32,5 +32,11 @@ namespace SteamKit2
         {
             throw new NotImplementedException();
         }
+
+        public override IPAddress GetLocalIP()
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }

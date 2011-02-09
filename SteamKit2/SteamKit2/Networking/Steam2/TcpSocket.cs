@@ -90,5 +90,10 @@ namespace SteamKit2
 
             return pack;
         }
+
+        public IPAddress GetLocalIP()
+        {
+            return NetHelpers.GetLocalIP(sock);
+        }
     }
 }
