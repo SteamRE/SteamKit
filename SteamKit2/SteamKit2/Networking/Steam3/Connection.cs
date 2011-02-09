@@ -96,6 +96,8 @@ namespace SteamKit2
 
         public abstract void Send( IClientMsg clientMsg );
 
+
+        public abstract IPAddress GetLocalIP();
     }
 
 }

@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 using System.Diagnostics;
+using System.Net;
 
 namespace SteamKit2
 {
@@ -269,6 +270,11 @@ namespace SteamKit2
 
             if ( encResult.Msg.Result == EResult.OK )
                 Connection.NetFilter = new NetFilterEncryption( tempSessionKey );
+        }
+
+        public IPAddress GetLocalIP()
+        {
+            return Connection.GetLocalIP();
         }
 
     }
