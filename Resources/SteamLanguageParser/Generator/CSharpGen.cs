@@ -41,8 +41,8 @@ namespace SteamLanguageParser
 
             sb.AppendLine(padding + "public interface ISteamSerializable");
             sb.AppendLine(padding + "{");
-            sb.AppendLine(padding + "\tbyte[] Serialize();");
-            sb.AppendLine(padding + "\tvoid Deserialize( MemoryStream ms );");
+            sb.AppendLine(padding + "\tvoid Serialize(Stream stream);");
+            sb.AppendLine(padding + "\tvoid Deserialize( Stream stream );");
             sb.AppendLine(padding + "}");
 
             sb.AppendLine(padding + "public interface ISteamSerializableHeader : ISteamSerializable");
@@ -290,7 +290,7 @@ namespace SteamLanguageParser
             string padding = new String('\t', level);
 
             sb.AppendLine();
-            sb.AppendLine(padding + "public byte[] Serialize()");
+            sb.AppendLine(padding + "public void Serialize(Stream stream)");
             sb.AppendLine(padding + "{");
 
 
@@ -301,7 +301,7 @@ namespace SteamLanguageParser
 
             if (cnode.Parent != null)
             {
-                sb.AppendLine(padding + "\tbyte[] msHeader = Header.Serialize();");
+                sb.AppendLine(padding + "\tHeader.Serialize(stream);");
                 varLengthProps.Add("(int)msHeader.Length");
                 openedStreams.Add("msHeader");
 
@@ -317,6 +317,14 @@ namespace SteamLanguageParser
                 {
                     if (prop.Flags != null && prop.Flags == "proto")
                     {
+                        if (baseSize == 0)
+                        {
+                            // early exit
+                            sb.AppendLine(padding + "\tProtoBuf.Serializer.Serialize<" + typestr + ">(stream, " + GetUpperName(prop.Name) + ");");
+                            sb.AppendLine(padding + "}");
+                            return;
+                        }
+
                         sb.AppendLine(padding + "\tMemoryStream ms" + GetUpperName(prop.Name) + " = new MemoryStream();");
                         sb.AppendLine(padding + "\tProtoBuf.Serializer.Serialize<" + typestr + ">(ms" + GetUpperName(prop.Name) + ", " + GetUpperName(prop.Name) + ");");
   
@@ -326,14 +334,6 @@ namespace SteamLanguageParser
                         }
 
                         //sb.AppendLine(padding + "\tms" + GetUpperName(prop.Name) + ".Seek( 0, SeekOrigin.Begin );");
-
-                        if (baseSize == 0)
-                        {
-                            // early exit
-                            sb.AppendLine(padding + "\treturn ms" + GetUpperName(prop.Name) + ".ToArray();");
-                            sb.AppendLine(padding + "}");
-                            return;
-                        }
                     }
                     else
                     {
@@ -345,7 +345,7 @@ namespace SteamLanguageParser
                 }
             }
 
-            sb.AppendLine(padding + "\tByteBuffer bb = new ByteBuffer( " + String.Join(" + ", varLengthProps.ToArray()) + " );");
+            sb.AppendLine(padding + "\tBinaryWriterEx bw = new BinaryWriterEx( stream );");
             sb.AppendLine();
             //sb.AppendLine(padding + "\tBinaryWriter writer = new BinaryWriter( msBuffer );");
             //sb.AppendLine();
@@ -379,9 +379,7 @@ namespace SteamLanguageParser
                     }
                     else if (prop.Flags == "proto")
                     {
-                        //sb.AppendLine(padding + "\tms" + propName + ".CopyTo( msBuffer );");
-                        sb.AppendLine( padding + "\tbyte[] buff = ms" + propName + ".ToArray();" );
-                        sb.AppendLine( padding + "\tbb.Append( buff );" );
+                        sb.AppendLine(padding + "\tbw.Write( ms" + propName + ".ToArray() );");
                         continue;
                     }
                     else if (prop.Flags == "const")
@@ -395,7 +393,7 @@ namespace SteamLanguageParser
                     propName = "MsgUtil.MakeMsg( " + propName + ", true )";
                 }
 
-                sb.AppendLine(padding + "\tbb.Append( " + typecast + propName + " );");
+                sb.AppendLine(padding + "\tbw.Write( " + typecast + propName + " );");
             }
 
             sb.AppendLine();
@@ -407,7 +405,6 @@ namespace SteamLanguageParser
 
             //sb.AppendLine();
             //sb.AppendLine(padding + "\tmsBuffer.Seek( 0, SeekOrigin.Begin );");
-            sb.AppendLine(padding + "\treturn bb.ToArray();");
             sb.AppendLine(padding + "}");
         }
 
@@ -420,18 +417,18 @@ namespace SteamLanguageParser
             string padding = new String('\t', level);
 
             sb.AppendLine();
-            sb.AppendLine(padding + "public void Deserialize( MemoryStream ms )");
+            sb.AppendLine(padding + "public void Deserialize( Stream stream )");
             sb.AppendLine(padding + "{");
 
             if (baseSize > 0)
             {
-                sb.AppendLine(padding + "\tBinaryReader br = new BinaryReader( ms );");
+                sb.AppendLine(padding + "\tBinaryReaderEx br = new BinaryReaderEx( stream );");
                 sb.AppendLine();
             }
 
             if (cnode.Parent != null)
             {
-                sb.AppendLine(padding + "\tHeader.Deserialize( ms );");
+                sb.AppendLine(padding + "\tHeader.Deserialize( stream );");
             }
 
             foreach (PropNode prop in cnode.childNodes)
@@ -462,12 +459,12 @@ namespace SteamLanguageParser
                         }
                         else
                         {
-                            sb.AppendLine(padding + "\t" + GetUpperName(prop.Name) + " = ProtoBuf.Serializer.Deserialize<" + typestr + ">( ms );");
+                            sb.AppendLine(padding + "\t" + GetUpperName(prop.Name) + " = ProtoBuf.Serializer.Deserialize<" + typestr + ">( stream );");
                         }
                     }
                     else
                     {
-                        sb.AppendLine(padding + "\t" + GetUpperName(prop.Name) + ".Deserialize( ms );");
+                        sb.AppendLine(padding + "\t" + GetUpperName(prop.Name) + ".Deserialize( stream );");
                     }
                 }
                 else

@@ -1,4 +1,11 @@
-﻿using System;
+﻿/*
+ * This file is subject to the terms and conditions defined in
+ * file 'license.txt', which is part of this source code package.
+ */
+
+
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -6,7 +13,7 @@ using System.Net;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace SteamKit2.Util
+namespace SteamKit2
 {
     public class BinaryReaderEx : BinaryReader
     {

@@ -9,7 +9,6 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Diagnostics;
-using SteamKit2.Util;
 
 namespace SteamKit2
 {

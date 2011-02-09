@@ -8,7 +8,6 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using SteamKit2.Util;
 
 namespace SteamKit2
 {
