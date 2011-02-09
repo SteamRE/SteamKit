@@ -33,5 +33,15 @@ namespace Vapor
             return online;
         }
 
+        public static bool IsZeros( byte[] bytes )
+        {
+            for ( int i = 0 ; i < bytes.Length ; i++ )
+            {
+                if ( bytes[ i ] != 0 )
+                    return false;
+            }
+            return true;
+        }
+
     }
 }

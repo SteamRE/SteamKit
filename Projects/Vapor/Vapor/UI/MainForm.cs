@@ -20,8 +20,6 @@ namespace Vapor
 
             Steam3.AddHandler( this );
 
-            //this.Icon = Icon.FromHandle( Resources.MainIcon.GetHicon() );
-
             selfControl.IsHighlighted = false;
             selfControl.BorderStyle = BorderStyle.None;
         }
@@ -57,6 +55,17 @@ namespace Vapor
             {
                 selfControl.SetSteamID( new Friend( Steam3.SteamUser.GetSteamID() ) );
                 this.ReloadFriends();
+            }
+
+            if ( msg is LogOnResponseCallback )
+            {
+                var logOnResp = ( LogOnResponseCallback )msg;
+
+                if ( logOnResp.Result != EResult.OK )
+                {
+                    Util.MsgBox( this, string.Format( "Unable to login to Steam3. Result code: {0}", logOnResp.Result ) );
+                    return;
+                }
             }
 
             if ( msg is LoginKeyCallback )
