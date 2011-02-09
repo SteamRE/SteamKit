@@ -83,7 +83,6 @@
     <Compile Include="Util\Serializable.cs" />
     <Compile Include="Steam2\ServerClient.cs" />
     <Compile Include="Networking\Steam2\TcpSocket.cs" />
-    <Compile Include="Util\ByteBuffer.cs" />
     <Compile Include="Networking\Steam3\Connection.cs" />
     <Compile Include="Networking\Steam2\TcpPacket.cs" />
     <Compile Include="Util\KeyDictionary.cs" />
@@ -96,6 +95,7 @@
     <Compile Include="Base\SteamMsgAppTicket.cs" />
     <Compile Include="Base\SteamMsgBase.cs" />
     <Compile Include="Base\SteamMsgClientServer.cs" />
+	<Compile Include="Util\BinaryEx.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="license.txt" />
