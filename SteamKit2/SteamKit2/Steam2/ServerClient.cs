@@ -93,7 +93,7 @@ namespace SteamKit2
         {
             try
             {
-                Socket.Writer.Write( ( uint )type );
+                Socket.Writer.Write( NetHelpers.EndianSwap( ( uint )type ) );
                 return Socket.Reader.ReadByte() == 1;
             }
             catch

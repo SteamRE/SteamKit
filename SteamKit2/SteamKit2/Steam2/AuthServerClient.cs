@@ -50,12 +50,16 @@ namespace SteamKit2
             try
             {
                 internalIp = NetHelpers.GetIPAddress( Socket.GetLocalIP() );
+
+                byte[] userHash = CryptoHelper.JenkinsHash( Encoding.ASCII.GetBytes( user ) );
+                uint userData = BitConverter.ToUInt32( userHash, 0 ) & 1;
+
                 ByteBuffer bb = new ByteBuffer( true );
 
                 bb.Append<uint>( 0 );
                 bb.Append<byte>( 4 );
                 bb.Append( internalIp );
-                bb.Append<uint>( 0 );
+                bb.Append( userData );
 
                 Socket.Send( bb.ToArray() );
 
