@@ -22,6 +22,8 @@ namespace Vapor
             if ( ld.ShowDialog() != DialogResult.OK )
                 return;
 
+            CDNCache.Initialize();
+
             MainForm mf = new MainForm();
             mf.Show();
 
@@ -34,6 +36,8 @@ namespace Vapor
             }
 
             Steam3.Shutdown();
+
+            CDNCache.Shutdown();
         }
 
         static bool FindArg( string[] args, string arg )

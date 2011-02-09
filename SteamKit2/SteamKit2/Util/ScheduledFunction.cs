@@ -53,6 +53,8 @@ namespace SteamKit2
             {
                 running = false;
             }
+
+            funcThread.Join();
         }
 
         void ThreadFunc()

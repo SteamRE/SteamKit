@@ -42,6 +42,7 @@ namespace SteamKit2
             writer = new BinaryWriter(stream);
 
             netThread = new Thread(NetLoop);
+            netThread.Name = "TcpConnection Thread";
             netThread.Start();
         }
 
@@ -96,7 +97,7 @@ namespace SteamKit2
                     byte[] packetHeader = reader.ReadBytes(8);
 
                     if (packetHeader.Length != 8)
-                        throw new IOException("Connection lost");
+                        throw new IOException("Connection lost while reading packet header");
 
                     DataStream ds = new DataStream(packetHeader);
                     uint packetLen = ds.ReadUInt32();
@@ -107,7 +108,7 @@ namespace SteamKit2
 
                     byte[] packData = reader.ReadBytes((int)packetLen);
                     if (packData.Length != packetLen)
-                        throw new IOException("Connection lost");
+                        throw new IOException("Connection lost while reading packet payload");
 
                     if (NetFilter != null)
                         packData = NetFilter.ProcessIncoming(packData);
