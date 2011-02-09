@@ -81,12 +81,6 @@ namespace SteamKit2
 
             SteamID steamId = new SteamID();
             steamId.SetFromSteam2( details.ClientTGT.UserID, Client.ConnectedUniverse );
-            
-            // todo:
-            // steam2 always gives us an instance of 0,
-            // valve's steamclient seems to ignore this and use an instance of 1
-            // if we use an instance of 0, we never get the NewLoginKey msg and then can't sign on to friends
-            steamId.AccountInstance = 1;
 
             uint localIp = NetHelpers.GetIPAddress( this.Client.GetLocalIP() );
 

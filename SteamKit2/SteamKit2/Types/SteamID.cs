@@ -102,7 +102,7 @@ namespace SteamKit2
             BitVector64 usersplit = new BitVector64( steam2id.AccountID );
 
             this.AccountType = EAccountType.Individual;
-            this.AccountInstance = steam2id.Instance;
+            this.AccountInstance = 1;
             this.AccountUniverse = universe;
             this.AccountID = ( uint )usersplit[ 0, 0xFFFFFFFF ] * 2 + ( uint )usersplit[ 32, 0xFFFFFFFF ];
         }
