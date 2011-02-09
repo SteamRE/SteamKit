@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager( typeof( TraceDialog ) );
             this.txtTrace = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
@@ -48,6 +49,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size( 433, 613 );
             this.Controls.Add( this.txtTrace );
+            this.Icon = ( ( System.Drawing.Icon )( resources.GetObject( "$this.Icon" ) ) );
             this.Name = "TraceDialog";
             this.Text = "TraceDialog";
             this.ResumeLayout( false );

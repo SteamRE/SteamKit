@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager( typeof( ChatDialog ) );
             this.panel1 = new System.Windows.Forms.Panel();
             this.chatFriend = new Vapor.FriendControl();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
@@ -51,6 +52,7 @@
             // chatFriend
             // 
             this.chatFriend.BackColor = System.Drawing.Color.FromArgb( ( ( int )( ( ( byte )( 38 ) ) ) ), ( ( int )( ( ( byte )( 38 ) ) ) ), ( ( int )( ( ( byte )( 39 ) ) ) ) );
+            this.chatFriend.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.chatFriend.IsHighlighted = true;
             this.chatFriend.Location = new System.Drawing.Point( 3, 3 );
             this.chatFriend.Name = "chatFriend";
@@ -113,6 +115,7 @@
             this.ClientSize = new System.Drawing.Size( 292, 270 );
             this.Controls.Add( this.splitContainer1 );
             this.Controls.Add( this.panel1 );
+            this.Icon = ( ( System.Drawing.Icon )( resources.GetObject( "$this.Icon" ) ) );
             this.Name = "ChatDialog";
             this.Text = "Chat";
             this.panel1.ResumeLayout( false );
