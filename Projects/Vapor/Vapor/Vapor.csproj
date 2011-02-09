@@ -155,7 +155,6 @@
     <None Include="Resources\IconUnknown.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\Vapor.ico" />
     <Content Include="Vapor.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
