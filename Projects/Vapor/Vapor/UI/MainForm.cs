@@ -32,7 +32,7 @@ namespace Vapor
 
         public void HandleCallback( CallbackMsg msg )
         {
-            if ( msg is PersonaStateCallback )
+            if ( msg.IsType<PersonaStateCallback>() )
             {
                 var perState = ( PersonaStateCallback )msg;
 
@@ -51,15 +51,15 @@ namespace Vapor
                 }
             }
 
-            if ( msg is FriendsListCallback )
+            if ( msg.IsType<FriendsListCallback>() )
             {
                 selfControl.SetSteamID( new Friend( Steam3.SteamUser.GetSteamID() ) );
                 this.ReloadFriends();
             }
 
-            if ( msg is LogOnResponseCallback )
+            if ( msg.IsType<SteamUser.LogOnCallback>() )
             {
-                var logOnResp = ( LogOnResponseCallback )msg;
+                var logOnResp = ( SteamUser.LogOnCallback )msg;
 
                 if ( logOnResp.Result != EResult.OK )
                 {
@@ -68,7 +68,7 @@ namespace Vapor
                 }
             }
 
-            if ( msg is LoginKeyCallback )
+            if ( msg.IsType<SteamUser.LoginKeyCallback>() )
             {
                 Steam3.SteamFriends.SetPersonaState( EPersonaState.Online );
             }
