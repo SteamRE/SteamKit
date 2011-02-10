@@ -13,74 +13,68 @@ using System.Net;
 
 namespace SteamKit2
 {
-    public class LoginKeyCallback : CallbackMsg
+    /// <summary>
+    /// This handler handles all user log on/log off related actions and callbacks.
+    /// </summary>
+    public sealed partial class SteamUser : ClientMsgHandler
     {
-        public byte[] LoginKey { get; set; }
-        public uint UniqueID { get; set; }
-
-        internal LoginKeyCallback( MsgClientNewLoginKey logKey )
-        {
-            this.LoginKey = logKey.LoginKey;
-            this.UniqueID = logKey.UniqueID;
-        }
-    }
-    public class LogOnResponseCallback : CallbackMsg
-    {
-        public EResult Result { get; set; }
-
-        public int OutOfGameSecsPerHeartbeat { get; set; }
-        public int InGameSecsPerHeartbeat { get; set; }
-
-        public IPAddress PublicIP { get; set; }
-
-        public DateTime ServerTime { get; set; }
-
-        public EAccountFlags AccountFlags { get; set; }
-
-        public SteamID ClientSteamID { get; set; }
-
-        internal LogOnResponseCallback( CMsgClientLogonResponse resp )
-        {
-            this.Result = ( EResult )resp.eresult;
-
-            this.OutOfGameSecsPerHeartbeat = resp.out_of_game_heartbeat_seconds;
-            this.InGameSecsPerHeartbeat = resp.in_game_heartbeat_seconds;
-
-            this.PublicIP = NetHelpers.GetIPAddress( resp.public_ip );
-
-            this.ServerTime = Utils.DateTimeFromUnixTime( resp.rtime32_server_time );
-
-            this.AccountFlags = (EAccountFlags)resp.account_flags;
-
-            this.ClientSteamID = new SteamID( resp.client_supplied_steamid );
-        }
-    }
-
-    public class SteamUser : ClientMsgHandler
-    {
+        /// <summary>
+        /// The unique name of this hadler.
+        /// </summary>
         public const string NAME = "SteamUser";
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SteamUser"/> class.
+        /// </summary>
         public SteamUser()
             : base( SteamUser.NAME )
         {
         }
 
 
+        /// <summary>
+        /// Represents the details required to log into Steam3.
+        /// </summary>
         public class LogOnDetails
         {
-            public string Username;
-            public string Password;
+            /// <summary>
+            /// Gets or sets the username.
+            /// </summary>
+            /// <value>The username.</value>
+            public string Username { get; set; }
+            /// <summary>
+            /// Gets or sets the password.
+            /// </summary>
+            /// <value>The password.</value>
+            public string Password { get; set; }
 
-            public ClientTGT ClientTGT;
-            public byte[] ServerTGT;
-            public Blob AccRecord;
+            /// <summary>
+            /// Gets or sets the client Ticket Granting Ticket.
+            /// </summary>
+            /// <value>The client TGT.</value>
+            public ClientTGT ClientTGT { get; set; }
+            /// <summary>
+            /// Gets or sets the server Ticket Granting Ticket.
+            /// </summary>
+            /// <value>The server TGT.</value>
+            public byte[] ServerTGT { get; set; }
+            /// <summary>
+            /// Gets or sets the account record.
+            /// </summary>
+            /// <value>The account record.</value>
+            public Blob AccRecord { get; set; }
         }
+        /// <summary>
+        /// Logs the client into the Steam3 network. The client should already have been connected at this point.
+        /// Results are returned in a <see cref="LogOnCallback"/>.
+        /// </summary>
+        /// <param name="details">The details.</param>
         public void LogOn( LogOnDetails details )
         {
             var logon = new ClientMsgProtobuf<MsgClientLogon>();
 
             SteamID steamId = new SteamID();
-            steamId.SetFromSteam2( details.ClientTGT.UserID, Client.ConnectedUniverse );
+            steamId.SetFromSteam2( details.ClientTGT.UserID, this.Client.ConnectedUniverse );
 
             uint localIp = NetHelpers.GetIPAddress( this.Client.GetLocalIP() );
 
@@ -113,18 +107,33 @@ namespace SteamKit2
 
             this.Client.Send( logon );
         }
+
+        /// <summary>
+        /// Logs the client off of the Steam3 network. This method does not disconnect the client.
+        /// Results are returned in a <see cref="LogOffCallback"/>.
+        /// </summary>
         public void LogOff()
         {
             var logOff = new ClientMsgProtobuf<MsgClientLogOff>();
             this.Client.Send( logOff );
+
+            this.Client.PostCallback( new LogOffCallback() );
         }
 
+        /// <summary>
+        /// Gets the SteamID of this client. This value is assigned after a logon attempt has succeeded.
+        /// </summary>
+        /// <value>The SteamID.</value>
         public SteamID GetSteamID()
         {
             return this.Client.SteamID;
         }
 
 
+        /// <summary>
+        /// Handles a client message. This should not be called directly.
+        /// </summary>
+        /// <param name="e">The <see cref="SteamKit2.ClientMsgEventArgs"/> instance containing the event data.</param>
         public override void HandleMsg( ClientMsgEventArgs e )
         {
             switch ( e.EMsg )
@@ -158,7 +167,7 @@ namespace SteamKit2
             {
                 var logonResp = new ClientMsgProtobuf<MsgClientLogonResponse>( e.Data );
 
-                var callback = new LogOnResponseCallback( logonResp.Msg.Proto );
+                var callback = new LogOnCallback( logonResp.Msg.Proto );
                 this.Client.PostCallback( callback );
             }
         }

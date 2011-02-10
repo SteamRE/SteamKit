@@ -19,7 +19,7 @@ namespace SteamKit2
 
     class TcpConnection : Connection
     {
-        const uint MAGIC = 0x31305456;
+        const uint MAGIC = 0x31305456; // "VT01"
 
         Socket sock;
 
@@ -29,33 +29,33 @@ namespace SteamKit2
         BinaryReader reader;
         BinaryWriter writer;
 
-        public override void Connect(IPEndPoint endPoint)
+        public override void Connect( IPEndPoint endPoint )
         {
             Disconnect();
 
-            sock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            sock.Connect(endPoint);
+            sock = new Socket( AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp );
+            sock.Connect( endPoint );
 
-            stream = new NetworkStream(sock, true);
-            reader = new BinaryReader(stream);
-            writer = new BinaryWriter(stream);
+            stream = new NetworkStream( sock, true );
+            reader = new BinaryReader( stream );
+            writer = new BinaryWriter( stream );
 
-            netThread = new Thread(NetLoop);
+            netThread = new Thread( NetLoop );
             netThread.Name = "TcpConnection Thread";
             netThread.Start();
         }
 
         public override void Disconnect()
         {
-            if (sock == null || !sock.Connected)
+            if ( sock == null || !sock.Connected )
                 return;
 
-            if (sock != null)
+            if ( sock != null )
             {
                 try
                 {
-                    sock.Shutdown(SocketShutdown.Both);
-                    sock.Disconnect(true);
+                    sock.Shutdown( SocketShutdown.Both );
+                    sock.Disconnect( true );
                     sock.Close();
 
                     sock = null;
@@ -64,66 +64,66 @@ namespace SteamKit2
             }
         }
 
-        public override void Send(IClientMsg clientMsg)
+        public override void Send( IClientMsg clientMsg )
         {
-            if (!sock.Connected)
+            if ( !sock.Connected )
                 return;
 
             //TODO: Change this
             MemoryStream ms = new MemoryStream();
-            clientMsg.Serialize(ms);
+            clientMsg.Serialize( ms );
             byte[] data = ms.ToArray();
 
-            if (NetFilter != null)
+            if ( NetFilter != null )
             {
-                data = NetFilter.ProcessOutgoing(data);
+                data = NetFilter.ProcessOutgoing( data );
             }
 
             BinaryWriterEx bb = new BinaryWriterEx();
-            bb.Write((uint)data.Length);
-            bb.Write(TcpConnection.MAGIC);
-            bb.Write(data);
+            bb.Write( ( uint )data.Length );
+            bb.Write( TcpConnection.MAGIC );
+            bb.Write( data );
 
-            writer.Write(bb.ToArray());
+            writer.Write( bb.ToArray() );
         }
 
         void NetLoop()
         {
             try
             {
-                while (sock.Connected)
+                while ( sock.Connected )
                 {
-                    byte[] packetHeader = reader.ReadBytes(8);
+                    byte[] packetHeader = reader.ReadBytes( 8 );
 
-                    if (packetHeader.Length != 8)
-                        throw new IOException("Connection lost while reading packet header");
+                    if ( packetHeader.Length != 8 )
+                        throw new IOException( "Connection lost while reading packet header" );
 
-                    DataStream ds = new DataStream(packetHeader);
+                    DataStream ds = new DataStream( packetHeader );
                     uint packetLen = ds.ReadUInt32();
                     uint packetMagic = ds.ReadUInt32();
 
-                    if (packetMagic != TcpConnection.MAGIC)
-                        throw new IOException("RecvCompleted got a packet with invalid magic!");
+                    if ( packetMagic != TcpConnection.MAGIC )
+                        throw new IOException( "RecvCompleted got a packet with invalid magic!" );
 
-                    byte[] packData = reader.ReadBytes((int)packetLen);
-                    if (packData.Length != packetLen)
-                        throw new IOException("Connection lost while reading packet payload");
+                    byte[] packData = reader.ReadBytes( ( int )packetLen );
+                    if ( packData.Length != packetLen )
+                        throw new IOException( "Connection lost while reading packet payload" );
 
-                    if (NetFilter != null)
-                        packData = NetFilter.ProcessIncoming(packData);
+                    if ( NetFilter != null )
+                        packData = NetFilter.ProcessIncoming( packData );
 
-                    OnNetMsgReceived(new NetMsgEventArgs(packData));
+                    OnNetMsgReceived( new NetMsgEventArgs( packData, sock.RemoteEndPoint as IPEndPoint ) );
                 }
             }
-            catch (Exception e)
+            catch ( Exception e )
             {
-                DebugLog.WriteLine("TcpConnection", e.ToString());
+                DebugLog.WriteLine( "TcpConnection", e.ToString() );
             }
         }
 
         public override IPAddress GetLocalIP()
         {
-            return NetHelpers.GetLocalIP(sock);
+            return NetHelpers.GetLocalIP( sock );
         }
     }
 }

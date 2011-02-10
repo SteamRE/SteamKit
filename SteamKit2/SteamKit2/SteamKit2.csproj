@@ -61,6 +61,10 @@
     <Compile Include="Blob\Fields\CDRFields.cs" />
     <Compile Include="Steam3\Handlers\SteamFriends\Callbacks.cs" />
     <Compile Include="Steam3\Handlers\SteamFriends\FriendCache.cs" />
+    <Compile Include="Steam3\Handlers\SteamUser\Callbacks.cs" />
+    <Compile Include="Steam3\SteamClient\CallbackMsg.cs" />
+    <Compile Include="Steam3\SteamClient\Callbacks.cs" />
+    <Compile Include="Steam3\SteamClient\ClientMsgHandler.cs" />
     <Compile Include="Types\GameID.cs" />
     <Compile Include="Util\DebugLog.cs" />
     <Compile Include="Steam2\ConfigServerClient.cs" />
@@ -69,7 +73,7 @@
     <Compile Include="Util\ScheduledFunction.cs" />
     <Compile Include="Steam3\Handlers\SteamUser\SteamUser.cs" />
     <Compile Include="Util\ZipUtil.cs" />
-    <Compile Include="Steam3\SteamClient.cs" />
+    <Compile Include="Steam3\SteamClient\SteamClient.cs" />
     <Compile Include="Steam3\CMClient.cs" />
     <Compile Include="Steam2\GeneralDSClient.cs" />
     <Compile Include="Steam2\DSClient.cs" />

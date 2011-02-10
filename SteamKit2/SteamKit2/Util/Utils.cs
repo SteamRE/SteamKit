@@ -67,12 +67,12 @@ namespace SteamKit2
     {
         public static IPAddress GetLocalIP(Socket activeSocket)
         {
-            if ((activeSocket.LocalEndPoint is IPEndPoint) == false || ((IPEndPoint)activeSocket.LocalEndPoint).Address == IPAddress.Any )
-            {
-                throw new Exception("Not connected");
-            }
+            IPEndPoint ipEndPoint = activeSocket.LocalEndPoint as IPEndPoint;
 
-            return ((IPEndPoint)activeSocket.LocalEndPoint).Address;
+            if ( ipEndPoint == null || ipEndPoint.Address == IPAddress.Any )
+                throw new Exception( "Socket not connected" );
+
+            return ipEndPoint.Address;
         }
 
         public static IPAddress GetIPAddress( uint ipAddr )
