@@ -15,21 +15,22 @@ using System.IO;
 
 namespace SteamKit2
 {
+    /// <summary>
+    /// Represents data that has been received over the network.
+    /// </summary>
     public class NetMsgEventArgs : EventArgs
     {
         public byte[] Data { get; private set; }
+        public IPEndPoint EndPoint { get; private set; }
 
-        public NetMsgEventArgs()
-            : this( new byte[ 0 ] )
-        {
-        }
-        public NetMsgEventArgs( byte[] data )
+        public NetMsgEventArgs( byte[] data, IPEndPoint endPoint )
         {
             this.Data = data;
+            this.EndPoint = endPoint;
         }
     }
 
-    public class NetFilterEncryption
+    class NetFilterEncryption
     {
         byte[] sessionKey;
 
@@ -79,8 +80,6 @@ namespace SteamKit2
             new IPEndPoint( IPAddress.Parse( "208.111.171.83" ), 27017 ),
         };
 
-        protected object ConnLock = new object();
-
         public NetFilterEncryption NetFilter { get; set; }
 
 
@@ -95,7 +94,6 @@ namespace SteamKit2
         public abstract void Disconnect();
 
         public abstract void Send( IClientMsg clientMsg );
-
 
         public abstract IPAddress GetLocalIP();
     }
