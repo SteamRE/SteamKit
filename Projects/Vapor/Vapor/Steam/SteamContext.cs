@@ -191,7 +191,7 @@ namespace Vapor
 
             SteamClient.FreeLastCallback();
 
-            if ( msg is ConnectedCallback )
+            if ( msg.IsType<SteamClient.ConnectCallback>() )
             {
                 SteamUser.LogOn( new SteamUser.LogOnDetails()
                     {
