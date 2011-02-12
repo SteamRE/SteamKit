@@ -32,9 +32,9 @@ namespace Vapor
 
         public void HandleCallback( CallbackMsg msg )
         {
-            if ( msg.IsType<PersonaStateCallback>() )
+            if ( msg.IsType<SteamFriends.PersonaStateCallback>() )
             {
-                var perState = ( PersonaStateCallback )msg;
+                var perState = ( SteamFriends.PersonaStateCallback )msg;
 
                 if ( perState.FriendID == selfControl.Friend.SteamID )
                 {
@@ -51,7 +51,7 @@ namespace Vapor
                 }
             }
 
-            if ( msg.IsType<FriendsListCallback>() )
+            if ( msg.IsType<SteamFriends.FriendsListCallback>() )
             {
                 selfControl.SetSteamID( new Friend( Steam3.SteamUser.GetSteamID() ) );
                 this.ReloadFriends();

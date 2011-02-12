@@ -23,6 +23,10 @@ namespace Vapor
             Color inGame = Color.FromArgb( 177, 251, 80 );
             Color online = Color.FromArgb( 111, 189, 255 );
             Color offline = Color.FromArgb( 137, 137, 137 );
+            Color blocked = Color.FromArgb( 251, 80, 80 );
+
+            if ( steamid.IsBlocked() )
+                return blocked;
 
             if ( steamid.IsInGame() )
                 return inGame;
