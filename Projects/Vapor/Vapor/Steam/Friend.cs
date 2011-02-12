@@ -24,7 +24,7 @@ namespace Vapor
                 return "";
             try
             {
-                return Steam3.SteamFriends.GetFriendGamePlayedExtraInfo( this.SteamID );
+                return Steam3.SteamFriends.GetFriendGamePlayedName( this.SteamID );
             }
             catch
             {
@@ -37,13 +37,19 @@ namespace Vapor
         {
             try
             {
-                string gameName = Steam3.SteamFriends.GetFriendGamePlayedExtraInfo( this.SteamID );
+                string gameName = Steam3.SteamFriends.GetFriendGamePlayedName( this.SteamID );
                 return !string.IsNullOrEmpty( gameName );
             }
             catch
             {
                 return false;
             }
+        }
+
+        public bool IsBlocked()
+        {
+            EFriendRelationship relationship = Steam3.SteamFriends.GetFriendRelationship( this.SteamID );
+            return ( relationship == EFriendRelationship.Ignored || relationship == EFriendRelationship.IgnoredFriend );
         }
 
         public bool IsOnline()
@@ -71,27 +77,48 @@ namespace Vapor
         {
             try
             {
+                string str = "";
+
                 if ( this.IsInGame() )
-                    return "In-Game";
+                {
+                    str = "In-Game";
+
+                    if ( this.IsBlocked() )
+                        str += " (Blocked)";
+
+                    return str;
+                }
 
                 EPersonaState state = Steam3.SteamFriends.GetFriendPersonaState( this.SteamID );
 
                 switch ( state )
                 {
                     case EPersonaState.Away:
-                        return "Away";
+                        str = "Away";
+                        break;
 
                     case EPersonaState.Busy:
-                        return "Busy";
+                        str = "Busy";
+                        break;
 
                     case EPersonaState.Online:
-                        return "Online";
+                        str = "Online";
+                        break;
 
                     case EPersonaState.Snooze:
-                        return "Snooze";
+                        str = "Snooze";
+                        break;
+
+                    default:
+                        str = "Offline";
+                        break;
                 }
 
-                return "Offline";
+
+                if ( this.IsBlocked() )
+                    str += " (Blocked)";
+
+                return str;
             }
             catch
             {

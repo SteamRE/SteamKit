@@ -40,10 +40,10 @@ namespace Vapor
 
         public void HandleCallback( CallbackMsg msg )
         {
-            if ( !( msg is FriendMsgCallback ) )
+            if ( !msg.IsType<SteamFriends.FriendMsgCallback>() )
                 return;
 
-            var friendMsg = ( FriendMsgCallback )msg;
+            var friendMsg = ( SteamFriends.FriendMsgCallback )msg;
 
             EChatEntryType type = friendMsg.EntryType;
 

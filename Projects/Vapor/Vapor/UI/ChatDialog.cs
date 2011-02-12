@@ -64,7 +64,7 @@ namespace Vapor
             this.AppendText( Environment.NewLine );
             this.ScrollLog();
         }
-        public void HandleChat( FriendMsgCallback friendMsg )
+        public void HandleChat( SteamFriends.FriendMsgCallback friendMsg )
         {
             HandleChat( friendMsg.Sender, friendMsg.EntryType, friendMsg.Message );
         }

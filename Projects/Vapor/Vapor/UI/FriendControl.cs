@@ -61,9 +61,9 @@ namespace Vapor
 
         public void HandleCallback( CallbackMsg msg )
         {
-            if ( msg is PersonaStateCallback )
+            if ( msg.IsType<SteamFriends.PersonaStateCallback>() )
             {
-                var perState = ( PersonaStateCallback )msg;
+                var perState = ( SteamFriends.PersonaStateCallback )msg;
 
 
                 if ( perState.FriendID != this.Friend.SteamID )
