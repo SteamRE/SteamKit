@@ -13,91 +13,251 @@ using System.Net;
 
 namespace SteamKit2
 {
-    public class PersonaStateCallback : CallbackMsg
+    public partial class SteamFriends
     {
-        public EClientPersonaStateFlag StatusFlags { get; set; }
-
-        public SteamID FriendID { get; set; }
-        public EPersonaState State { get; set; }
-
-        public uint GameAppID { get; set; }
-        public ulong GameID { get; set; }
-        public string GameName { get; set; }
-
-        public IPAddress GameServerIP { get; set; }
-        public uint GameServerPort { get; set; }
-        public uint QueryPort { get; set; }
-
-        public SteamID SourceSteamID { get; set; }
-
-        public byte[] GameDataBlob { get; set; }
-
-        public string Name { get; set; }
-
-        public IPAddress CMIPAddress { get; set; }
-
-        public byte[] AvatarHash { get; set; }
-        public byte[] ChatMetaData { get; set; }
-
-        public DateTime LastLogOff { get; set; }
-        public DateTime LastLogOn { get; set; }
-
-        public uint ClanRank { get; set; }
-        public string ClanTag { get; set; }
-
-        internal PersonaStateCallback( CMsgClientPersonaState.Friend friend, EClientPersonaStateFlag flag )
+        /// <summary>
+        /// This callback is fired in response to someone changing their friend details over the network.
+        /// </summary>
+        public class PersonaStateCallback : CallbackMsg
         {
-            this.StatusFlags = flag;
+            /// <summary>
+            /// Gets the status flags. This shows what has changed.
+            /// </summary>
+            /// <value>The status flags.</value>
+            public EClientPersonaStateFlag StatusFlags { get; private set; }
 
-            this.FriendID = friend.friendid;
-            this.State = ( EPersonaState )friend.persona_state;
+            /// <summary>
+            /// Gets the friend ID.
+            /// </summary>
+            /// <value>The friend ID.</value>
+            public SteamID FriendID { get; private set; }
+            /// <summary>
+            /// Gets the state.
+            /// </summary>
+            /// <value>The state.</value>
+            public EPersonaState State { get; private set; }
 
-            this.GameAppID = friend.game_played_app_id;
-            this.GameID = friend.gameid;
-            this.GameName = friend.game_name;
+            /// <summary>
+            /// Gets the game app ID.
+            /// </summary>
+            /// <value>The game app ID.</value>
+            public uint GameAppID { get; private set; }
+            /// <summary>
+            /// Gets the game ID.
+            /// </summary>
+            /// <value>The game ID.</value>
+            public GameID GameID { get; private set; }
+            /// <summary>
+            /// Gets the name of the game.
+            /// </summary>
+            /// <value>The name of the game.</value>
+            public string GameName { get; private set; }
 
-            this.GameServerIP = NetHelpers.GetIPAddress( friend.game_server_ip );
-            this.GameServerPort = friend.game_server_port;
-            this.QueryPort = friend.query_port;
+            /// <summary>
+            /// Gets the game server IP.
+            /// </summary>
+            /// <value>The game server IP.</value>
+            public IPAddress GameServerIP { get; private set; }
+            /// <summary>
+            /// Gets the game server port.
+            /// </summary>
+            /// <value>The game server port.</value>
+            public uint GameServerPort { get; private set; }
+            /// <summary>
+            /// Gets the query port.
+            /// </summary>
+            /// <value>The query port.</value>
+            public uint QueryPort { get; private set; }
 
-            this.SourceSteamID = friend.steamid_source;
+            /// <summary>
+            /// Gets the source steam ID.
+            /// </summary>
+            /// <value>The source steam ID.</value>
+            public SteamID SourceSteamID { get; private set; }
 
-            this.GameDataBlob = friend.game_data_blob;
+            /// <summary>
+            /// Gets the game data blob.
+            /// </summary>
+            /// <value>The game data blob.</value>
+            public byte[] GameDataBlob { get; private set; }
 
-            this.Name = friend.player_name;
+            /// <summary>
+            /// Gets the name.
+            /// </summary>
+            /// <value>The name.</value>
+            public string Name { get; private set; }
 
-            this.CMIPAddress = NetHelpers.GetIPAddress( friend.cm_ip );
+            /// <summary>
+            /// Gets the avatar hash.
+            /// </summary>
+            /// <value>The avatar hash.</value>
+            public byte[] AvatarHash { get; private set; }
+            /// <summary>
+            /// Gets the chat meta data.
+            /// </summary>
+            /// <value>The chat meta data.</value>
+            public byte[] ChatMetaData { get; private set; }
 
-            this.AvatarHash = friend.avatar_hash;
-            this.ChatMetaData = friend.chat_metadata;
+            /// <summary>
+            /// Gets the last log off.
+            /// </summary>
+            /// <value>The last log off.</value>
+            public DateTime LastLogOff { get; private set; }
+            /// <summary>
+            /// Gets the last log on.
+            /// </summary>
+            /// <value>The last log on.</value>
+            public DateTime LastLogOn { get; private set; }
 
-            this.LastLogOff = Utils.DateTimeFromUnixTime( friend.last_logoff );
-            this.LastLogOn = Utils.DateTimeFromUnixTime( friend.last_logon );
+            /// <summary>
+            /// Gets the clan rank.
+            /// </summary>
+            /// <value>The clan rank.</value>
+            public uint ClanRank { get; private set; }
+            /// <summary>
+            /// Gets the clan tag.
+            /// </summary>
+            /// <value>The clan tag.</value>
+            public string ClanTag { get; private set; }
 
-            this.ClanRank = friend.clan_rank;
-            this.ClanTag = friend.clan_tag;
+            /// <summary>
+            /// Gets the online session instances.
+            /// </summary>
+            /// <value>The online session instances.</value>
+            public uint OnlineSessionInstances { get; private set; }
+            /// <summary>
+            /// Gets the published session ID.
+            /// </summary>
+            /// <value>The published session ID.</value>
+            public uint PublishedSessionID { get; private set; }
+
+            internal PersonaStateCallback( CMsgClientPersonaState.Friend friend )
+            {
+                this.StatusFlags = ( EClientPersonaStateFlag )friend.persona_state_flags;
+
+                this.FriendID = friend.friendid;
+                this.State = ( EPersonaState )friend.persona_state;
+
+                this.GameAppID = friend.game_played_app_id;
+                this.GameID = friend.gameid;
+                this.GameName = friend.game_name;
+
+                this.GameServerIP = NetHelpers.GetIPAddress( friend.game_server_ip );
+                this.GameServerPort = friend.game_server_port;
+                this.QueryPort = friend.query_port;
+
+                this.SourceSteamID = friend.steamid_source;
+
+                this.GameDataBlob = friend.game_data_blob;
+
+                this.Name = friend.player_name;
+
+                this.AvatarHash = friend.avatar_hash;
+                this.ChatMetaData = friend.chat_metadata;
+
+                this.LastLogOff = Utils.DateTimeFromUnixTime( friend.last_logoff );
+                this.LastLogOn = Utils.DateTimeFromUnixTime( friend.last_logon );
+
+                this.ClanRank = friend.clan_rank;
+                this.ClanTag = friend.clan_tag;
+
+                this.OnlineSessionInstances = friend.online_session_instances;
+                this.PublishedSessionID = friend.published_instance_id;
+            }
         }
-    }
-    public class FriendsListCallback : CallbackMsg
-    {
-    }
-    public class FriendMsgCallback : CallbackMsg
-    {
-        public SteamID Sender { get; set; }
-        public EChatEntryType EntryType { get; set; }
 
-        public bool FromLimitedAccount { get; set; }
-
-        public string Message { get; set; }
-
-        internal FriendMsgCallback( MsgClientFriendMsgIncoming msg, byte[] msgData )
+        /// <summary>
+        /// This callback is fired when the client receives a list of friends.
+        /// </summary>
+        public class FriendsListCallback : CallbackMsg
         {
-            this.Sender = msg.SteamID;
-            this.EntryType = msg.EntryType;
+            /// <summary>
+            /// Represents a single friend entry in a client's friendlist.
+            /// </summary>
+            public class Friend
+            {
+                public SteamID SteamID { get; private set; }
+                public EFriendRelationship Relationship { get; private set; }
 
-            this.FromLimitedAccount = ( msg.FromLimitedAccount == 1 );
+                internal Friend( CMsgClientFriendsList.Friend friend )
+                {
+                    this.SteamID = friend.ulfriendid;
+                    this.Relationship = ( EFriendRelationship )friend.efriendrelationship;
+                }
+            }
 
-            this.Message = Encoding.UTF8.GetString( msgData, 0, msgData.Length - 1 );
+            /// <summary>
+            /// Gets a value indicating whether this <see cref="FriendsListCallback"/> is an incremental update.
+            /// </summary>
+            /// <value><c>true</c> if incremental; otherwise, <c>false</c>.</value>
+            public bool Incremental { get; private set; }
+            /// <summary>
+            /// Gets the friend list.
+            /// </summary>
+            /// <value>The friend list.</value>
+            public List<Friend> FriendList { get; private set; }
+
+            internal FriendsListCallback( CMsgClientFriendsList msg )
+            {
+                this.Incremental = msg.bincremental;
+
+                this.FriendList = msg.friends.ConvertAll<Friend>(
+                    ( input ) =>
+                    {
+                        return new Friend( input );
+                    }
+                );
+            }
+        }
+
+        /// <summary>
+        /// This callback is fired in response to receiving a message from a friend.
+        /// </summary>
+        public class FriendMsgCallback : CallbackMsg
+        {
+            /// <summary>
+            /// Gets or sets the sender.
+            /// </summary>
+            /// <value>The sender.</value>
+            public SteamID Sender { get; private set; }
+            /// <summary>
+            /// Gets the chat entry type.
+            /// </summary>
+            /// <value>The chat entry type.</value>
+            public EChatEntryType EntryType { get; private set; }
+
+            /// <summary>
+            /// Gets a value indicating whether this message is from a limited account.
+            /// </summary>
+            /// <value><c>true</c> if this message is from a limited account; otherwise, <c>false</c>.</value>
+            public bool FromLimitedAccount { get; private set; }
+
+            /// <summary>
+            /// Gets the message.
+            /// </summary>
+            /// <value>The message.</value>
+            public string Message { get; private set; }
+
+
+            internal FriendMsgCallback( MsgClientFriendMsgIncoming msg, byte[] msgData )
+            {
+                this.Sender = msg.SteamID;
+                this.EntryType = msg.EntryType;
+
+                this.FromLimitedAccount = ( msg.FromLimitedAccount == 1 );
+
+                this.Message = Encoding.UTF8.GetString( msgData, 0, msgData.Length - 1 );
+            }
+
+            internal FriendMsgCallback( CMsgClientFriendMsgIncoming msg )
+            {
+                this.Sender = msg.steamid_from;
+                this.EntryType = ( EChatEntryType )msg.chat_entry_type;
+
+                this.FromLimitedAccount = msg.from_limited_account;
+
+                this.Message = Encoding.UTF8.GetString( msg.message, 0, msg.message.Length - 1 );
+            }
         }
     }
 }
