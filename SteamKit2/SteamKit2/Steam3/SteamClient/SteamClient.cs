@@ -157,9 +157,9 @@ namespace SteamKit2
             catch ( Exception ex )
             {
                 DebugLog.WriteLine( "SteamClient", "HandleEncryptResult encountered an exception while reading client msg.\n{0}", ex.ToString() );
-                return;
 
-                // todo: should we post a callback here?
+                PostCallback( new ConnectCallback( EResult.Fail ) );
+                return;
             }
 
             PostCallback( new ConnectCallback( encResult.Msg ) );

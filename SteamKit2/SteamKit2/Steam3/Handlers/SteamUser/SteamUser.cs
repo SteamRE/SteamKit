@@ -23,10 +23,8 @@ namespace SteamKit2
         /// </summary>
         public const string NAME = "SteamUser";
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SteamUser"/> class.
-        /// </summary>
-        public SteamUser()
+
+        internal SteamUser()
             : base( SteamUser.NAME )
         {
         }

@@ -12,121 +12,127 @@ using System.Text;
 
 namespace SteamKit2
 {
-    class FriendsObj
+    public partial class SteamFriends
     {
-        public SteamID SteamID;
-
-        public FriendsObj( SteamID steamId )
+        class FriendsObj
         {
-            this.SteamID = steamId;
-        }
-    }
+            public SteamID SteamID;
 
-    class Friend : FriendsObj
-    {
-        public string Name;
-        public EPersonaState PersonaState;
-
-        public string GameName;
-
-        public Friend( SteamID steamId )
-            : base( steamId )
-        {
-        }
-
-    }
-    class Clan : FriendsObj
-    {
-        public string Name;
-
-        public Clan( SteamID steamId )
-            : base( steamId )
-        {
-        }
-    }
-
-
-    class FriendsObjList<T>
-        where T : FriendsObj
-    {
-        List<T> list;
-
-        public int Count { get { return list.Count; } }
-
-        public FriendsObjList()
-        {
-            list = new List<T>();
-        }
-
-        public T GetByID( SteamID steamId )
-        {
-            foreach ( T obj in list )
+            public FriendsObj( SteamID steamId )
             {
-                if ( obj.SteamID == steamId )
-                    return obj;
+                this.SteamID = steamId;
+            }
+        }
+
+        class Friend : FriendsObj
+        {
+            public string Name;
+            public EPersonaState PersonaState;
+            public EFriendRelationship Relationship;
+
+            public string GameName;
+            public uint GameAppID;
+            public GameID GameID;
+
+            public Friend( SteamID steamId )
+                : base( steamId )
+            {
             }
 
-            return null;
         }
-        public T GetByIndex( int index )
+        class Clan : FriendsObj
         {
-            if ( index >= list.Count )
+            public string Name;
+
+            public Clan( SteamID steamId )
+                : base( steamId )
+            {
+            }
+        }
+
+
+        class FriendsObjList<T>
+            where T : FriendsObj
+        {
+            List<T> list;
+
+            public int Count { get { return list.Count; } }
+
+            public FriendsObjList()
+            {
+                list = new List<T>();
+            }
+
+            public T GetByID( SteamID steamId )
+            {
+                foreach ( T obj in list )
+                {
+                    if ( obj.SteamID == steamId )
+                        return obj;
+                }
+
                 return null;
+            }
+            public T GetByIndex( int index )
+            {
+                if ( index >= list.Count )
+                    return null;
 
-            return list[ index ];
-        }
-        public void Add( T obj )
-        {
-            if ( GetByID( obj.SteamID ) != null )
-                return; // don't duplicate objects
+                return list[ index ];
+            }
+            public void Add( T obj )
+            {
+                if ( GetByID( obj.SteamID ) != null )
+                    return; // don't duplicate objects
 
-            list.Add( obj );
-        }
-    }
-
-    class FriendCache
-    {
-        FriendsObjList<Friend> friendList;
-        FriendsObjList<Clan> clanList;
-
-        public FriendCache()
-        {
-            friendList = new FriendsObjList<Friend>();
-            clanList = new FriendsObjList<Clan>();
+                list.Add( obj );
+            }
         }
 
-        public Friend GetFriend( SteamID steamId )
+        class FriendCache
         {
-            return friendList.GetByID( steamId );
-        }
-        public Friend GetFriendByIndex( int index )
-        {
-            return friendList.GetByIndex( index );
-        }
-        public int GetFriendCount()
-        {
-            return friendList.Count;
-        }
-        public void AddFriend( Friend friend )
-        {
-            friendList.Add( friend );
-        }
+            FriendsObjList<Friend> friendList;
+            FriendsObjList<Clan> clanList;
 
-        public Clan GetClan( SteamID steamId )
-        {
-            return clanList.GetByID( steamId );
-        }
-        public Clan GetClanByIndex( int index )
-        {
-            return clanList.GetByIndex( index );
-        }
-        public int GetClanCount()
-        {
-            return clanList.Count;
-        }
-        public void AddClan( Clan clan )
-        {
-            clanList.Add( clan );
+            public FriendCache()
+            {
+                friendList = new FriendsObjList<Friend>();
+                clanList = new FriendsObjList<Clan>();
+            }
+
+            public Friend GetFriend( SteamID steamId )
+            {
+                return friendList.GetByID( steamId );
+            }
+            public Friend GetFriendByIndex( int index )
+            {
+                return friendList.GetByIndex( index );
+            }
+            public int GetFriendCount()
+            {
+                return friendList.Count;
+            }
+            public void AddFriend( Friend friend )
+            {
+                friendList.Add( friend );
+            }
+
+            public Clan GetClan( SteamID steamId )
+            {
+                return clanList.GetByID( steamId );
+            }
+            public Clan GetClanByIndex( int index )
+            {
+                return clanList.GetByIndex( index );
+            }
+            public int GetClanCount()
+            {
+                return clanList.Count;
+            }
+            public void AddClan( Clan clan )
+            {
+                clanList.Add( clan );
+            }
         }
     }
 }

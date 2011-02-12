@@ -14,6 +14,7 @@ namespace SteamKit2
     public interface IClientMsg
     {
         void Serialize(Stream stream);
+        void SetData( byte[] data );
     }
 
     public class ClientMsg<MsgType, Hdr> : IClientMsg
@@ -37,6 +38,11 @@ namespace SteamKit2
 
         public ClientMsg( byte[] data )
             : this()
+        {
+            this.SetData( data );
+        }
+
+        public void SetData( byte[] data )
         {
             MemoryStream ms = new MemoryStream( data );
 
