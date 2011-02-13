@@ -32,8 +32,7 @@ namespace Vapor
             if ( authServerList == null )
                 throw new Steam2Exception( "Unable to get a list of Steam2 authentication servers." );
 
-            if ( !ConnectToAuthServer( authServerList, userName, password, out clientTgt, out serverTgt, out accRecord ) )
-                throw new Steam2Exception( "Unable to connect to auth server." );
+            ConnectToAuthServer( authServerList, userName, password, out clientTgt, out serverTgt, out accRecord );
 
         }
 
@@ -95,11 +94,10 @@ namespace Vapor
                     continue;
                 }
 
-                if ( !asClient.Login( userName, password, out clientTgt, out serverTgt, out accRecord ) )
-                {
-                    DebugLog.WriteLine( "Vapor Steam2", "Unable to login!" );
-                    continue;
-                }
+                AuthServerClient.LoginResult loginResult = asClient.Login( userName, password, out clientTgt, out serverTgt, out accRecord );
+
+                if ( loginResult != AuthServerClient.LoginResult.LoggedIn )
+                    throw new Steam2Exception( "Result: " + loginResult );
 
                 asClient.Disconnect();
                 return true;

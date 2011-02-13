@@ -30,12 +30,16 @@ namespace Vapor
 
         public void WriteLine( string msg )
         {
-            this.Invoke( new MethodInvoker( () =>
+            this.BeginInvoke( new MethodInvoker( () =>
             {
                 lock ( logLock )
                 {
-                    txtTrace.AppendText( msg + Environment.NewLine );
-                    txtTrace.ScrollToCaret();
+                    try
+                    {
+                        txtTrace.AppendText( msg + Environment.NewLine );
+                        txtTrace.ScrollToCaret();
+                    }
+                    catch { }
                 }
             } ) );
         }
