@@ -12,8 +12,14 @@ using System.Net;
 
 namespace SteamKit2
 {
-    public class GeneralDSClient : DSClient
+    /// <summary>
+    /// Represents a client capable of connecting to the Steam2 General Directory Server.
+    /// </summary>
+    public sealed class GeneralDSClient : DSClient
     {
+        /// <summary>
+        /// This is the boostrap list of General Directory Servers.
+        /// </summary>
         public static readonly IPEndPoint[] GDServers = 
         {
             new IPEndPoint( IPAddress.Parse( "72.165.61.189" ), 27030 ), // gds1.steampowered.com
