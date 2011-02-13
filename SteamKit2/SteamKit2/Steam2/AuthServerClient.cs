@@ -12,38 +12,114 @@ using System.Diagnostics;
 
 namespace SteamKit2
 {
-    public class AuthServerClient : ServerClient
+    /// <summary>
+    /// Represents a client capable of connecting to an authentication server.
+    /// </summary>
+    public sealed class AuthServerClient : ServerClient
     {
         uint internalIp, externalIp;
         uint salt1, salt2;
 
         byte[] aesKey, iv;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AuthServerClient"/> class.
+        /// </summary>
         public AuthServerClient()
         {
         }
 
-        public bool Login( string user, string pass, out ClientTGT clientTgt, out byte[] serverTgt, out Blob accRecord )
+
+        /// <summary>
+        /// Represents a set of possible results for calling Login.
+        /// </summary>
+        public enum LoginResult
+        {
+            /// <summary>
+            /// An error occurred while requesting the client's external IP.
+            /// </summary>
+            ErrorRequestIP,
+            /// <summary>
+            /// An error occurred while reading the salt.
+            /// </summary>
+            ErrorGetSalt,
+            /// <summary>
+            /// An error occured while attempting the login command.
+            /// </summary>
+            ErrorDoLogin,
+            /// <summary>
+            /// An error occured while reading account info.
+            /// </summary>
+            ErrorGetAccountInfo,
+
+            /// <summary>
+            /// Successfully logged in.
+            /// </summary>
+            LoggedIn,
+
+            /// <summary>
+            /// Ocurrs when the password for the account is invalid, or the client's system clock is not accurate.
+            /// </summary>
+            InvalidPassword,
+            /// <summary>
+            /// The specified account does not exist.
+            /// </summary>
+            AccountNotFound,
+            /// <summary>
+            /// The account is disabled.
+            /// </summary>
+            AccountDisabled,
+        }
+
+        /// <summary>
+        /// Attempts a login to the connected authentication server.
+        /// </summary>
+        /// <param name="user">The username.</param>
+        /// <param name="pass">The pass.</param>
+        /// <param name="clientTgt">The client TGT.</param>
+        /// <param name="serverTgt">The server TGT.</param>
+        /// <param name="accRecord">The client account record.</param>
+        /// <returns>A LoginResult value describing what result.</returns>
+        public LoginResult Login( string user, string pass, out ClientTGT clientTgt, out byte[] serverTgt, out Blob accRecord )
         {
             clientTgt = null;
             serverTgt = null;
             accRecord = null;
 
             if ( !this.RequestIP( user ) )
-                return false;
+                return LoginResult.ErrorRequestIP;
 
             if ( !this.GetSalt( user ) )
-                return false;
+                return LoginResult.ErrorGetSalt;
 
             if ( !this.DoLogin( pass ) )
-                return false;
+                return LoginResult.ErrorDoLogin;
 
-            if ( !this.GetAccountInfo( out clientTgt, out serverTgt, out accRecord ) )
-                return false;
+            sbyte accResult = this.GetAccountInfo( out clientTgt, out serverTgt, out accRecord );
 
-            return true;
+            switch ( accResult )
+            {
+                case -1:
+                    return LoginResult.ErrorGetAccountInfo;
+
+                case 0:
+                    return LoginResult.LoggedIn;
+
+                case 1:
+                    return LoginResult.AccountNotFound;
+
+                case 2:
+                    return LoginResult.InvalidPassword;
+
+                case 4:
+                    return LoginResult.AccountDisabled;
+
+                default:
+                    return LoginResult.ErrorGetAccountInfo;
+            }
 
         }
+
 
         bool RequestIP( string user )
         {
@@ -146,7 +222,7 @@ namespace SteamKit2
 
             return true;
         }
-        bool GetAccountInfo( out ClientTGT clientTgt, out byte[] serverTgt, out Blob accRecord )
+        sbyte GetAccountInfo( out ClientTGT clientTgt, out byte[] serverTgt, out Blob accRecord )
         {
             clientTgt = null;
             serverTgt = null;
@@ -162,7 +238,7 @@ namespace SteamKit2
                     DebugLog.WriteLine( "AuthServerClient", "GetAccountInfo failed. Result: {0}", result );
 
                     Socket.Disconnect();
-                    return false;
+                    return ( sbyte )result;
                 }
 
                 ulong loginTime = Socket.Reader.ReadUInt64();
@@ -198,11 +274,12 @@ namespace SteamKit2
                 DebugLog.WriteLine( "AuthServerClient", "GetAccountInfo threw an exception while reading account info.\n{0}", ex.ToString() );
 
                 Socket.Disconnect();
-                return false;
+                return -1;
             }
 
-            return true;
+            return 0;
         }
+
 
         static byte[] GenerateAESKey( uint salt1, uint salt2, string pass )
         {

@@ -12,12 +12,25 @@ using System.Diagnostics;
 
 namespace SteamKit2
 {
-    public class ConfigServerClient : ServerClient
+    /// <summary>
+    /// This client is capable of connecting to a config server.
+    /// </summary>
+    public sealed class ConfigServerClient : ServerClient
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ConfigServerClient"/> class.
+        /// </summary>
         public ConfigServerClient()
         {
         }
 
+        /// <summary>
+        /// Gets the current content description record (CDR) provided by the config server.
+        /// Accepts an old CDR hash in order to determine if a new CDR should be downloaded or not.
+        /// The old CDR hash is a SHA-1 hash of the entire CDR payload.
+        /// </summary>
+        /// <param name="oldCDRHash">The old CDR hash.</param>
+        /// <returns>A byte blob representing the CDR on success; otherwise, null.</returns>
         public byte[] GetContentDescriptionRecord( byte[] oldCDRHash )
         {
             try
