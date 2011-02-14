@@ -195,19 +195,6 @@ namespace SteamKit2
             chatMsg.Msg.Proto.message = Encoding.UTF8.GetBytes( message );
 
             this.Client.Send( chatMsg );
-
-            /*
-            var chatMsg = new ClientMsg<MsgClientFriendMsg, ExtendedClientMsgHdr>();
-
-            byte[] msgData = Encoding.UTF8.GetBytes( message );
-
-            chatMsg.Msg.EntryType = type;
-            chatMsg.Msg.SteamID = target;
-
-            chatMsg.Payload.Write( msgData );
-            chatMsg.Payload.WriteType<byte>( 0 );
-
-            this.Client.Send( chatMsg );*/
         }
 
 
@@ -230,10 +217,32 @@ namespace SteamKit2
                 case EMsg.ClientFriendMsgIncoming:
                     HandleFriendMsg( e );
                     break;
+
+                case EMsg.ClientAccountInfo:
+                    HandleAccountInfo( e );
+                    break;
             }
         }
 
 
+
+        #region ClientMsg Handlers
+        void HandleAccountInfo( ClientMsgEventArgs e )
+        {
+            var accInfo = new ClientMsgProtobuf<MsgClientAccountInfo>();
+
+            try
+            {
+                accInfo.SetData( e.Data );
+            }
+            catch ( Exception ex )
+            {
+                DebugLog.WriteLine( "SteamFriends", "HandleAccountInfo encountered an exception when trying to read clientmsg.\n{0}", ex.ToString() );
+                return;
+            }
+
+            localUser.Name = accInfo.Msg.Proto.persona_name;
+        }
         void HandleFriendMsg( ClientMsgEventArgs e )
         {
             ClientMsg<MsgClientFriendMsgIncoming, ExtendedClientMsgHdr> friendMsg = null;
@@ -271,11 +280,11 @@ namespace SteamKit2
 
             var reqLocalData = new ClientMsgProtobuf<MsgClientRequestFriendData>();
             reqLocalData.Msg.Proto.persona_state_requested = ( uint )( EClientPersonaStateFlag.PlayerName | EClientPersonaStateFlag.Presence );
-            reqLocalData.Msg.Proto.friends.Add( this.Client.SteamID ); // request our own information as well
 
             foreach ( var friend in list.Msg.Proto.friends )
             {
                 SteamID friendId = new SteamID( friend.ulfriendid );
+
 
                 if ( friendId.BIndividualAccount() )
                 {
@@ -338,5 +347,6 @@ namespace SteamKit2
                 this.Client.PostCallback( callback );
             }
         }
+        #endregion
     }
 }

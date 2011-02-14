@@ -198,7 +198,7 @@ namespace SteamKit2
 
             ClientMsgEventArgs cliEvent = new ClientMsgEventArgs( ( EMsg )rawEMsg, e.Data, e.EndPoint );
 
-            DebugLog.WriteLine( "CMClient", "<- Recv'd EMsg: {0} (Proto: {1})", cliEvent.EMsg, cliEvent.IsProto );
+            DebugLog.WriteLine( "CMClient", "<- Recv'd EMsg: {0} ({1}) (Proto: {2})", cliEvent.EMsg, (int)eMsg, cliEvent.IsProto );
 
             switch ( eMsg )
             {
