@@ -158,3 +158,52 @@ class MsgClientAppUsageEvent<EMsg::ClientAppUsageEvent>
 	ulong GameID;
 	ushort Offline;
 };
+
+class MsgClientAccountInfo<EMsg::ClientAccountInfo>
+{
+	proto CMsgClientAccountInfo proto;
+};
+
+class MsgClientLicenseList<EMsg::ClientLicenseList>
+{
+	proto CMsgClientLicenseList proto;
+};
+
+class MsgClientAppMinutesPlayedData<EMsg::ClientAppMinutesPlayedData>
+{
+	proto CMsgClientAppMinutesPlayedData proto;
+};
+
+class MsgClientWalletInfoUpdate<EMsg::ClientWalletInfoUpdate>
+{
+	proto CMsgClientWalletInfoUpdate proto;
+};
+
+class MsgClientCMList<EMsg::ClientCMList>
+{
+	proto CMsgClientCMList proto;
+};
+
+class MsgClientEmailAddrInfo<EMsg::ClientEmailAddrInfo>
+{
+	uint passwordStrength;
+	uint flagsAccountSecurityPolicy;
+	byte validated;
+}; 
+
+cass MsgClientUpdateGuestPassesList<EMsg::ClientUpdateGuestPassesList>
+{
+	EResult result;
+	int countGuestPassesToGive;
+	int countGuestPassesToRedeem;
+};
+
+class MsgClientServerList<EMsg::ClientServerList>
+{
+	int countServers;
+};
+
+class MsgClientRequestedClientStats<EMsg::ClientRequestedClientStats>
+{	
+	int countStats;
+};
