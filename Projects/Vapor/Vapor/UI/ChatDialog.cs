@@ -42,17 +42,18 @@ namespace Vapor
         {
 
             string friendName = Steam3.SteamFriends.GetFriendPersonaName( sender );
+            string time = DateTime.Now.ToString( "h:mm tt" );
 
             switch ( type )
             {
                 case EChatEntryType.ChatMsg:
-                    this.AppendText( Util.GetStatusColor( new Friend( sender ) ), friendName );
+                    this.AppendText( Util.GetStatusColor( new Friend( sender ) ), string.Format( "{0} - {1}", time, friendName ) );
                     this.AppendText( Color.White, ": " + msg );
                     break;
 
                 case EChatEntryType.Emote:
                     this.AppendText( Color.White, "* " );
-                    this.AppendText( Util.GetStatusColor( new Friend( sender ) ), friendName );
+                    this.AppendText( Util.GetStatusColor( new Friend( sender ) ), string.Format( "{0} - {1}", time, friendName ) );
                     this.AppendText( Color.White, " " + msg );
                     break;
 
