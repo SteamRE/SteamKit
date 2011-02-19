@@ -40,6 +40,10 @@ namespace Vapor
                 ctrl.MouseEnter += FriendControl_MouseEnter;
                 ctrl.MouseLeave += FriendControl_MouseLeave;
             }
+			
+			this.MouseDoubleClick += FriendControl_MouseDoubleClick;
+			this.MouseEnter += FriendControl_MouseEnter;
+			this.MouseLeave += FriendControl_MouseLeave;
 
             if ( Friend == null )
                 return;

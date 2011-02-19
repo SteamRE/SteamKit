@@ -23,6 +23,8 @@ namespace Vapor
             this.Text = string.Format( "{0} - Chat", chatFriend.Friend.GetName() );
 
             this.chatFriend.IsHighlighted = false;
+			
+			this.txtChat.Select();
         }
 
         public new void Show()
