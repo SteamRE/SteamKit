@@ -191,7 +191,7 @@ class MsgClientEmailAddrInfo<EMsg::ClientEmailAddrInfo>
 	byte validated;
 }; 
 
-cass MsgClientUpdateGuestPassesList<EMsg::ClientUpdateGuestPassesList>
+class MsgClientUpdateGuestPassesList<EMsg::ClientUpdateGuestPassesList>
 {
 	EResult result;
 	int countGuestPassesToGive;
@@ -206,4 +206,21 @@ class MsgClientServerList<EMsg::ClientServerList>
 class MsgClientRequestedClientStats<EMsg::ClientRequestedClientStats>
 {	
 	int countStats;
+};
+
+class MsgClientAddFriend2<EMsg::ClientAddFriend2>
+{
+	proto CMsgClientAddFriend proto;
+};
+
+class MsgClientAddFriendResponse2<EMsg::ClientAddFriendResponse2>
+{
+	ulong jobIdClient;
+	steamidmarshal ulong friendId;
+	EResult eResult;
+};
+
+class MsgClientRemoveFriend<EMsg::ClientRemoveFriend>
+{
+	proto CMsgClientRemoveFriend proto;
 };
