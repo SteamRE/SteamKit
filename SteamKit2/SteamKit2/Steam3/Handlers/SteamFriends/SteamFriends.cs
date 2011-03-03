@@ -178,8 +178,6 @@ namespace SteamKit2
             return friend.GameID;
         }
 
-
-
         /// <summary>
         /// Sends a chat message to a friend.
         /// </summary>
@@ -195,6 +193,44 @@ namespace SteamKit2
             chatMsg.Msg.Proto.message = Encoding.UTF8.GetBytes( message );
 
             this.Client.Send( chatMsg );
+        }
+
+        /// <summary>
+        /// Sends a friend request to a user.
+        /// </summary>
+        /// <param name="accountNameOrEmail">The account name or email of the user.</param>
+        public void AddFriend( string accountNameOrEmail )
+        {
+            var addFriend = new ClientMsgProtobuf<MsgClientAddFriend2>();
+
+            addFriend.Msg.Proto.accountname_or_email_to_add = accountNameOrEmail;
+
+            this.Client.Send( addFriend );
+        }
+        /// <summary>
+        /// Sends a friend request to a user.
+        /// </summary>
+        /// <param name="steamId">The SteamID of the friend to add.</param>
+        public void AddFriend( SteamID steamId )
+        {
+            var addFriend = new ClientMsgProtobuf<MsgClientAddFriend2>();
+
+            addFriend.Msg.Proto.steamid_to_add = steamId;
+
+            this.Client.Send( addFriend );
+        }
+
+        /// <summary>
+        /// Removes a friend from your friends list.
+        /// </summary>
+        /// <param name="steamId">The SteamID of the friend to remove.</param>
+        public void RemoveFriend( SteamID steamId )
+        {
+            var removeFriend = new ClientMsgProtobuf<MsgClientRemoveFriend>();
+
+            removeFriend.Msg.Proto.friendid = steamId;
+
+            this.Client.Send( removeFriend );
         }
 
 
@@ -221,8 +257,14 @@ namespace SteamKit2
                 case EMsg.ClientAccountInfo:
                     HandleAccountInfo( e );
                     break;
+
+                case EMsg.ClientAddFriendResponse2:
+                    HandleFriendResponse( e );
+                    break;
             }
         }
+
+
 
 
 
@@ -279,7 +321,7 @@ namespace SteamKit2
             localUser.SteamID = this.Client.SteamID;
 
             var reqLocalData = new ClientMsgProtobuf<MsgClientRequestFriendData>();
-            reqLocalData.Msg.Proto.persona_state_requested = ( uint )( EClientPersonaStateFlag.PlayerName | EClientPersonaStateFlag.Presence );
+            reqLocalData.Msg.Proto.persona_state_requested = ( uint )( EClientPersonaStateFlag.PlayerName );
 
             foreach ( var friend in list.Msg.Proto.friends )
             {
@@ -346,6 +388,25 @@ namespace SteamKit2
                 var callback = new PersonaStateCallback( friend );
                 this.Client.PostCallback( callback );
             }
+        }
+        void HandleFriendResponse( ClientMsgEventArgs e )
+        {
+            var friendResponse = new ClientMsg<MsgClientAddFriendResponse2, ExtendedClientMsgHdr>();
+
+            try
+            {
+                friendResponse.SetData( e.Data );
+            }
+            catch ( Exception ex )
+            {
+                DebugLog.WriteLine( "SteamFriends", "HandleFriendResponse encounted an exception when trying to read clientmsg.\n{0}", ex.ToString() );
+                return;
+            }
+
+            byte[] personaName = friendResponse.Payload.ToArray();
+
+            var callback = new FriendAddedCallback( friendResponse.Msg, personaName );
+            this.Client.PostCallback( callback );
         }
         #endregion
     }

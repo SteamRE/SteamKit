@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace SteamKit2
 {
@@ -46,6 +47,11 @@ namespace SteamKit2
     {
         private BitVector64 steamid;
 
+        static Regex SteamIDRegex = new Regex(
+            @"STEAM_(?<universe>[0-5]):(?<authserver>[0-1]):(?<accountid>\d+)",
+            RegexOptions.Compiled | RegexOptions.IgnoreCase );
+
+
         public SteamID()
             : this( 0 )
         {
@@ -67,6 +73,18 @@ namespace SteamKit2
         {
             this.steamid = new BitVector64( id );
         }
+
+        public SteamID( string steamId )
+            : this ( steamId, EUniverse.Public )
+        {
+        }
+
+        public SteamID( string steamId, EUniverse eUniverse )
+            : this()
+        {
+            SetFromString( steamId, eUniverse );
+        }
+
 
         public void Set( UInt32 unAccountID, EUniverse eUniverse, EAccountType eAccountType )
         {
@@ -105,6 +123,21 @@ namespace SteamKit2
             this.AccountInstance = 1;
             this.AccountUniverse = universe;
             this.AccountID = ( uint )usersplit[ 0, 0xFFFFFFFF ] * 2 + ( uint )usersplit[ 32, 0xFFFFFFFF ];
+        }
+        public void SetFromString( string steamId, EUniverse eUniverse )
+        {
+            Match m = SteamIDRegex.Match( steamId );
+
+            if ( !m.Success )
+                return;
+
+            uint accId = uint.Parse( m.Groups[ "accountid" ].Value );
+            uint authServer = uint.Parse( m.Groups[ "authserver" ].Value );
+
+            this.AccountUniverse = eUniverse;
+            this.AccountInstance = 1;
+            this.AccountType = EAccountType.Individual;
+            this.AccountID = ( accId << 1 ) | authServer;
         }
 
         public UInt64 ConvertToUint64()
