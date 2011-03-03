@@ -1976,6 +1976,44 @@ namespace SteamKit2
 		}
 	}
 
+	public class MsgClientUpdateGuestPassesList : ISteamSerializableMessage
+	{
+		public EMsg GetEMsg() { return EMsg.ClientUpdateGuestPassesList; }
+
+		// Static size: 4
+		public EResult Result { get; set; }
+		// Static size: 4
+		public int CountGuestPassesToGive { get; set; }
+		// Static size: 4
+		public int CountGuestPassesToRedeem { get; set; }
+
+		public MsgClientUpdateGuestPassesList()
+		{
+			Result = 0;
+			CountGuestPassesToGive = 0;
+			CountGuestPassesToRedeem = 0;
+		}
+
+		public void Serialize(Stream stream)
+		{
+			BinaryWriterEx bw = new BinaryWriterEx( stream );
+
+			bw.Write( (int)Result );
+			bw.Write( CountGuestPassesToGive );
+			bw.Write( CountGuestPassesToRedeem );
+
+		}
+
+		public void Deserialize( Stream stream )
+		{
+			BinaryReaderEx br = new BinaryReaderEx( stream );
+
+			Result = (EResult)br.ReadInt32();
+			CountGuestPassesToGive = br.ReadInt32();
+			CountGuestPassesToRedeem = br.ReadInt32();
+		}
+	}
+
 	public class MsgClientServerList : ISteamSerializableMessage
 	{
 		public EMsg GetEMsg() { return EMsg.ClientServerList; }
@@ -2029,6 +2067,91 @@ namespace SteamKit2
 			BinaryReaderEx br = new BinaryReaderEx( stream );
 
 			CountStats = br.ReadInt32();
+		}
+	}
+
+	public class MsgClientAddFriend2 : ISteamSerializableMessage
+	{
+		public EMsg GetEMsg() { return EMsg.ClientAddFriend2; }
+
+		// Static size: 0
+		public CMsgClientAddFriend Proto { get; set; }
+
+		public MsgClientAddFriend2()
+		{
+			Proto = new CMsgClientAddFriend();
+		}
+
+		public void Serialize(Stream stream)
+		{
+			ProtoBuf.Serializer.Serialize<CMsgClientAddFriend>(stream, Proto);
+		}
+
+		public void Deserialize( Stream stream )
+		{
+			Proto = ProtoBuf.Serializer.Deserialize<CMsgClientAddFriend>( stream );
+		}
+	}
+
+	public class MsgClientAddFriendResponse2 : ISteamSerializableMessage
+	{
+		public EMsg GetEMsg() { return EMsg.ClientAddFriendResponse2; }
+
+		// Static size: 8
+		public ulong JobIdClient { get; set; }
+		// Static size: 8
+		private ulong friendId;
+		public SteamID FriendId { get { return new SteamID( friendId ); } set { friendId = value.ConvertToUint64(); } }
+		// Static size: 4
+		public EResult EResult { get; set; }
+
+		public MsgClientAddFriendResponse2()
+		{
+			JobIdClient = 0;
+			friendId = 0;
+			EResult = 0;
+		}
+
+		public void Serialize(Stream stream)
+		{
+			BinaryWriterEx bw = new BinaryWriterEx( stream );
+
+			bw.Write( JobIdClient );
+			bw.Write( friendId );
+			bw.Write( (int)EResult );
+
+		}
+
+		public void Deserialize( Stream stream )
+		{
+			BinaryReaderEx br = new BinaryReaderEx( stream );
+
+			JobIdClient = br.ReadUInt64();
+			friendId = br.ReadUInt64();
+			EResult = (EResult)br.ReadInt32();
+		}
+	}
+
+	public class MsgClientRemoveFriend : ISteamSerializableMessage
+	{
+		public EMsg GetEMsg() { return EMsg.ClientRemoveFriend; }
+
+		// Static size: 0
+		public CMsgClientRemoveFriend Proto { get; set; }
+
+		public MsgClientRemoveFriend()
+		{
+			Proto = new CMsgClientRemoveFriend();
+		}
+
+		public void Serialize(Stream stream)
+		{
+			ProtoBuf.Serializer.Serialize<CMsgClientRemoveFriend>(stream, Proto);
+		}
+
+		public void Deserialize( Stream stream )
+		{
+			Proto = ProtoBuf.Serializer.Deserialize<CMsgClientRemoveFriend>( stream );
 		}
 	}
 
