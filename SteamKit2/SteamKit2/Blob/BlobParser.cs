@@ -28,17 +28,17 @@ namespace SteamKit2
 
         public static Blob ParseBlob( byte[] buffer )
         {
-            if (buffer.Length < BlobHeaderLength)
+            if ( buffer.Length < BlobHeaderLength )
                 return null;
 
-            using (MemoryStream ms = new MemoryStream(buffer))
+            using ( MemoryStream ms = new MemoryStream( buffer ) )
             using ( CachedBinaryReader reader = new CachedBinaryReader( ms ) )
             {
                 return ParseBlob( reader );
             }
         }
 
-        private static Blob ParseBlob(CachedBinaryReader reader)
+        private static Blob ParseBlob( CachedBinaryReader reader )
         {
             if ( !reader.CanRead( BlobHeaderLength ) )
                 return null;
@@ -52,17 +52,17 @@ namespace SteamKit2
 
             try
             {
-                cachestate = (ECacheState)reader.ReadByte();
-                process = (EAutoPreprocessCode)reader.ReadByte();
+                cachestate = ( ECacheState )reader.ReadByte();
+                process = ( EAutoPreprocessCode )reader.ReadByte();
 
                 serialized = reader.ReadInt32();
                 spare = reader.ReadInt32();
 
                 reader.Commit();
             }
-            catch (Exception e)
+            catch ( Exception e )
             {
-                Debug.Write(e);
+                Debug.Write( e );
 
                 reader.Rollback();
                 return null;
@@ -70,7 +70,7 @@ namespace SteamKit2
 
             serialized -= BlobHeaderLength;
 
-            if (process == EAutoPreprocessCode.eAutoPreprocessCodeEncrypted)
+            if ( process == EAutoPreprocessCode.eAutoPreprocessCodeEncrypted )
             {
                 serialized -= EncryptedHeaderLength;
             }
@@ -86,12 +86,12 @@ namespace SteamKit2
             long curpos = reader.Position;
             Blob blob = null;
 
-            switch (process)
+            switch ( process )
             {
                 case EAutoPreprocessCode.eAutoPreprocessCodePlaintext:
                     {
-                        blob = new Blob(cachestate, process);
-                        ParseBlobData(reader, blob, serialized, spare );
+                        blob = new Blob( cachestate, process );
+                        ParseBlobData( reader, blob, serialized, spare );
                     }
                     break;
                 case EAutoPreprocessCode.eAutoPreprocessCodeCompressed:
@@ -106,7 +106,7 @@ namespace SteamKit2
                     break;
             }
 
-            Debug.Assert( reader.Position == (curpos + serialized + spare) );
+            Debug.Assert( reader.Position == ( curpos + serialized + spare ) );
 
             return blob;
         }
@@ -121,13 +121,13 @@ namespace SteamKit2
             try
             {
                 decryptedSize = reader.ReadInt32();
-                IV = reader.ReadBytes(16);
+                IV = reader.ReadBytes( 16 );
 
                 reader.Commit();
             }
-            catch (Exception e)
+            catch ( Exception e )
             {
-                Debug.Write(e);
+                Debug.Write( e );
 
                 reader.Rollback();
                 return null;
@@ -136,11 +136,11 @@ namespace SteamKit2
             serializedSize -= EncryptedHeaderLength;
             reader.StartTransaction();
 
-            byte[] ciphertext = reader.ReadBytes((int)serializedSize);
+            byte[] ciphertext = reader.ReadBytes( ( int )serializedSize );
 
             reader.Commit();
 
-            byte[] plaintext = CryptoHelper.AESDecrypt(ciphertext, Key, IV);
+            byte[] plaintext = CryptoHelper.AESDecrypt( ciphertext, Key, IV );
 
             Blob encryptedblob = ParseBlob( plaintext );
             encryptedblob.IV = IV;
@@ -163,13 +163,13 @@ namespace SteamKit2
 
                 // note: http://www.chiramattel.com/george/blog/2007/09/09/deflatestream-block-length-does-not-match.html
                 // need to skip two bytes for implementation mismatch
-                reader.ReadBytes(2);
+                reader.ReadBytes( 2 );
 
                 reader.Commit();
             }
             catch ( Exception e )
             {
-                Debug.Write(e);
+                Debug.Write( e );
 
                 reader.Rollback();
                 return null;
@@ -179,12 +179,12 @@ namespace SteamKit2
             reader.StartTransaction();
 
             // the DeflateStream reads too much, so we pull out a buffer
-            byte[] compressed = reader.ReadBytes((int)serializedSize);
+            byte[] compressed = reader.ReadBytes( ( int )serializedSize );
 
             reader.Commit();
 
-            using (MemoryStream ms = new MemoryStream(compressed))
-            using ( DeflateStream deflateStream = new DeflateStream(ms, CompressionMode.Decompress ) )
+            using ( MemoryStream ms = new MemoryStream( compressed ) )
+            using ( DeflateStream deflateStream = new DeflateStream( ms, CompressionMode.Decompress ) )
             {
                 byte[] inflated = new byte[ decompressedSize ];
                 deflateStream.Read( inflated, 0, inflated.Length );
@@ -200,7 +200,7 @@ namespace SteamKit2
         {
             bool corruptedCompletion = false;
 
-            while (serializedSize > FieldHeaderLength && reader.CanRead( FieldHeaderLength ) )
+            while ( serializedSize > FieldHeaderLength && reader.CanRead( FieldHeaderLength ) )
             {
                 long curpos = reader.Position;
 
@@ -225,73 +225,72 @@ namespace SteamKit2
                     if ( descriptorLength <= 0 /*|| dataLength <= 0*/ || !reader.CanRead( descriptorLength + dataLength ) )
                     {
                         reader.Rollback();
-                        
+
                         corruptedCompletion = true;
                         break;
                     }
-                    
-                    descriptor = reader.ReadBytes(descriptorLength);
+
+                    descriptor = reader.ReadBytes( descriptorLength );
 
                     reader.Commit();
 
-                    Debug.Assert(descriptor.Length == descriptorLength);
+                    Debug.Assert( descriptor.Length == descriptorLength );
                 }
-                catch (Exception e)
+                catch ( Exception e )
                 {
-                    Debug.Write(e);
+                    Debug.Write( e );
 
                     reader.Rollback();
                     return;
                 }
 
                 Blob innerBlob = BlobParser.ParseBlob( reader );
-                if (innerBlob == null)
+                if ( innerBlob == null )
                 {
                     reader.StartTransaction();
 
-                    data = reader.ReadBytes(dataLength);
+                    data = reader.ReadBytes( dataLength );
 
                     reader.Commit();
 
-                    blob.AddField(new BlobField(descriptor, data));
+                    blob.AddField( new BlobField( descriptor, data ) );
                 }
                 else
                 {
-                    blob.AddField(new BlobField(descriptor, innerBlob));
+                    blob.AddField( new BlobField( descriptor, innerBlob ) );
                 }
 
-                serializedSize -= (reader.Position - curpos);
+                serializedSize -= ( reader.Position - curpos );
             }
 
             reader.StartTransaction();
 
-            blob.Spare = reader.ReadBytes(spare);
+            blob.Spare = reader.ReadBytes( spare );
 
             reader.Commit();
 
             if ( corruptedCompletion )
             {
-                Debug.WriteLine("Had to complete corrupted blob at " + reader.Position + " (" + serializedSize + ") remaining");
+                Debug.WriteLine( "Had to complete corrupted blob at " + reader.Position + " (" + serializedSize + ") remaining" );
                 reader.StartTransaction();
-                reader.ReadBytes((int)serializedSize);
+                reader.ReadBytes( ( int )serializedSize );
                 reader.Commit();
                 serializedSize = 0;
             }
 
-            Debug.Assert(serializedSize == 0);
+            Debug.Assert( serializedSize == 0 );
         }
 
 
-        private static bool IsValidCacheState(ECacheState cachestate)
+        static bool IsValidCacheState( ECacheState cachestate )
         {
-            return (cachestate >= ECacheState.eCacheEmpty && cachestate <= ECacheState.eCachePtrIsCopyOnWritePlaintextVersion);
+            return ( cachestate >= ECacheState.eCacheEmpty && cachestate <= ECacheState.eCachePtrIsCopyOnWritePlaintextVersion );
         }
-
-        private static bool IsValidProcess(EAutoPreprocessCode process)
+        static bool IsValidProcess( EAutoPreprocessCode process )
         {
-            return (process == EAutoPreprocessCode.eAutoPreprocessCodePlaintext ||
+            return ( process == EAutoPreprocessCode.eAutoPreprocessCodePlaintext ||
                     process == EAutoPreprocessCode.eAutoPreprocessCodeCompressed ||
-                    process == EAutoPreprocessCode.eAutoPreprocessCodeEncrypted);
+                    process == EAutoPreprocessCode.eAutoPreprocessCodeEncrypted );
         }
 
     }

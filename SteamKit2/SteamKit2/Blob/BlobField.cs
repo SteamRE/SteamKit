@@ -20,12 +20,12 @@ namespace SteamKit2
 
         private Blob childBlob;
 
+
         public BlobField( byte[] Descriptor, byte[] Data )
         {
             this.Descriptor = Descriptor;
             this.Data = Data;
         }
-
         public BlobField( byte[] Descriptor, Blob child )
         {
             this.Descriptor = Descriptor;
@@ -33,14 +33,10 @@ namespace SteamKit2
         }
 
 
-        public bool HasBlobChild()
+        // descriptor
+        public bool IsStringDescriptor()
         {
-            return ( childBlob != null );
-        }
-
-        private bool IsStringDescriptor()
-        {
-            return Descriptor.Length != 4;
+            return IsString( Descriptor );
         }
 
         public string GetStringDescriptor()
@@ -50,43 +46,20 @@ namespace SteamKit2
 
             return Encoding.ASCII.GetString( Descriptor );
         }
-
         public UInt32 GetIntDescriptor()
         {
             return BitConverter.ToUInt32( Descriptor, 0 );
         }
 
-        public T GetDescriptor<T>()
-        {
-            GCHandle handle = GCHandle.Alloc( Descriptor, GCHandleType.Pinned );
-            try
-            {
-                IntPtr ptr = handle.AddrOfPinnedObject();
-                T obj = ( T )Marshal.PtrToStructure( ptr, typeof( T ) );
 
-                return obj;
-            }
-            finally
-            {
-                handle.Free();
-            }
-        }
-
-
+        // data
         public bool IsStringData()
         {
-            bool nonprint = ( Data.Length == 1 );
-
-            for ( int i = 0 ; i < Data.Length - 1 ; i++ )
-            {
-                if ( ( Data[ i ] < 32 || Data[ i ] > 126 ) )
-                {
-                    nonprint = true;
-                    break;
-                }
-            }
-
-            return !nonprint;
+            return IsString( Data );
+        }
+        public bool HasChildBlob()
+        {
+            return ( childBlob != null );
         }
 
         public string GetStringData()
@@ -96,28 +69,33 @@ namespace SteamKit2
 
             return Encoding.UTF8.GetString( Data, 0, Math.Max( 0, Data.Length - 1 ) );
         }
-
-
-        public T GetData<T>()
-            where T : struct
+        public int GetIntData()
         {
-            GCHandle handle = GCHandle.Alloc( Data, GCHandleType.Pinned );
-            try
-            {
-                IntPtr ptr = handle.AddrOfPinnedObject();
-                T obj = ( T )Marshal.PtrToStructure( ptr, typeof( T ) );
-
-                return obj;
-            }
-            finally
-            {
-                handle.Free();
-            }
+            return BitConverter.ToInt32( Data, 0 );
         }
-
         public Blob GetChildBlob()
         {
             return childBlob;
+        }
+
+
+        bool IsString( byte[] data )
+        {
+            if ( data == null )
+                return false;
+
+            bool nonprint = ( data.Length == 1 );
+
+            for ( int i = 0 ; i < data.Length - 1 ; i++ )
+            {
+                if ( ( data[ i ] < 32 || data[ i ] > 126 ) )
+                {
+                    nonprint = true;
+                    break;
+                }
+            }
+
+            return !nonprint;
         }
 
     }
