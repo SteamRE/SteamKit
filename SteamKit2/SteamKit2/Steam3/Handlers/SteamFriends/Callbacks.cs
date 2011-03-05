@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Net;
+using System.Collections.ObjectModel;
 
 namespace SteamKit2
 {
@@ -174,9 +175,17 @@ namespace SteamKit2
             /// <summary>
             /// Represents a single friend entry in a client's friendlist.
             /// </summary>
-            public class Friend
+            public sealed class Friend
             {
+                /// <summary>
+                /// Gets the SteamID of the friend.
+                /// </summary>
+                /// <value>The SteamID.</value>
                 public SteamID SteamID { get; private set; }
+                /// <summary>
+                /// Gets the relationship to this friend.
+                /// </summary>
+                /// <value>The relationship.</value>
                 public EFriendRelationship Relationship { get; private set; }
 
                 internal Friend( CMsgClientFriendsList.Friend friend )
@@ -195,18 +204,20 @@ namespace SteamKit2
             /// Gets the friend list.
             /// </summary>
             /// <value>The friend list.</value>
-            public List<Friend> FriendList { get; private set; }
+            public ReadOnlyCollection<Friend> FriendList { get; private set; }
 
             internal FriendsListCallback( CMsgClientFriendsList msg )
             {
                 this.Incremental = msg.bincremental;
 
-                this.FriendList = msg.friends.ConvertAll<Friend>(
+                var list = msg.friends.ConvertAll<Friend>(
                     ( input ) =>
                     {
                         return new Friend( input );
                     }
                 );
+
+                this.FriendList = new ReadOnlyCollection<Friend>( list );
             }
         }
 
@@ -260,11 +271,26 @@ namespace SteamKit2
             }
         }
 
+        /// <summary>
+        /// This callback is fired in response to adding a user to your friends list.
+        /// </summary>
         public class FriendAddedCallback : CallbackMsg
         {
+            /// <summary>
+            /// Gets the result of the request.
+            /// </summary>
+            /// <value>The result.</value>
             public EResult Result { get; private set; }
 
+            /// <summary>
+            /// Gets the SteamID of the friend that was added.
+            /// </summary>
+            /// <value>The SteamID.</value>
             public SteamID SteamID { get; private set; }
+            /// <summary>
+            /// Gets the persona name of the friend.
+            /// </summary>
+            /// <value>The persona name.</value>
             public string PersonaName { get; private set; }
 
 

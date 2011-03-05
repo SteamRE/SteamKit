@@ -12,6 +12,7 @@ using System.Text;
 using System.Net;
 using System.Net.Sockets;
 using System.Net.NetworkInformation;
+using System.Management;
 
 namespace SteamKit2
 {
@@ -21,6 +22,66 @@ namespace SteamKit2
         {
             DateTime origin = new DateTime( 1970, 1, 1, 0, 0, 0, 0 );
             return origin.AddSeconds( unixTime );
+        }
+
+        public static byte[] GenerateMachineID()
+        {
+            // this is steamkit's own implementation, it doesn't match what steamclient does
+            // but this should make it so individual systems can be identified
+
+            PlatformID platform = Environment.OSVersion.Platform;
+
+            if ( platform == PlatformID.Win32NT )
+            {
+                StringBuilder hwString = new StringBuilder();
+
+                try
+                {
+                    ManagementClass procClass = new ManagementClass( "Win32_Processor" );
+                    foreach ( var procObj in procClass.GetInstances() )
+                    {
+                        hwString.AppendLine( procObj[ "ProcessorID" ].ToString() );
+                    }
+                }
+                catch { }
+
+                try
+                {
+                    ManagementClass hdClass = new ManagementClass( "Win32_LogicalDisk" );
+                    foreach ( var hdObj in hdClass.GetInstances() )
+                    {
+                        string hdType = hdObj[ "DriveType" ].ToString();
+
+                        if ( hdType != "3" )
+                            continue; // only want local disks
+
+                        hwString.AppendLine( hdObj[ "VolumeSerialNumber" ].ToString() );
+                    }
+                }
+                catch { }
+
+                try
+                {
+                    ManagementClass moboClass = new ManagementClass( "Win32_BaseBoard" );
+                    foreach ( var moboObj in moboClass.GetInstances() )
+                    {
+                        hwString.AppendLine( moboObj[ "SerialNumber" ].ToString() );
+                    }
+                }
+                catch { }
+
+
+                try
+                {
+                    return CryptoHelper.SHAHash( Encoding.ASCII.GetBytes( hwString.ToString() ) );
+                }
+                catch { return null; }
+            }
+            else
+            {
+                // todo: implement me!
+                return null;
+            }
         }
     }
 

@@ -36,6 +36,7 @@ namespace SteamKit2
             // add this library's handlers
             this.AddHandler( new SteamUser() );
             this.AddHandler( new SteamFriends() );
+            this.AddHandler( new SteamApps() );
         }
 
 

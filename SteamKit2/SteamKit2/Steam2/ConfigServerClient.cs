@@ -67,5 +67,30 @@ namespace SteamKit2
             }
 
         }
+
+        public byte[] GetClientConfigRecord()
+        {
+
+            if ( !this.HandshakeServer( EServerType.ConfigServer ) )
+            {
+                this.Disconnect();
+                return null;
+            }
+
+            uint externalIp = Socket.Reader.ReadUInt32();
+
+            if ( !this.SendCommand( 1 ) ) // command: Get CCR
+            {
+                return null;
+            }
+
+            TcpPacket pack = Socket.ReceivePacket();
+            this.Disconnect();
+
+            if ( pack == null )
+                return null;
+
+            return pack.GetPayload();
+        }
     }
 }
