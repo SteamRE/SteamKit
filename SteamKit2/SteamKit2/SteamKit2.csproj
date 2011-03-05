@@ -23,7 +23,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -48,6 +48,7 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Data" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -59,6 +60,8 @@
     <Compile Include="Blob\CachedBinaryReader.cs" />
     <Compile Include="Blob\Fields\AuthFields.cs" />
     <Compile Include="Blob\Fields\CDRFields.cs" />
+    <Compile Include="Steam3\Handlers\SteamApps\Callbacks.cs" />
+    <Compile Include="Steam3\Handlers\SteamApps\SteamApps.cs" />
     <Compile Include="Steam3\Handlers\SteamFriends\Callbacks.cs" />
     <Compile Include="Steam3\Handlers\SteamFriends\FriendCache.cs" />
     <Compile Include="Steam3\Handlers\SteamUser\Callbacks.cs" />

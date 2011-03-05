@@ -94,6 +94,8 @@ namespace SteamKit2
             logon.Msg.Proto.cell_id = 10; // todo: figure out how to grab a cell id
             logon.Msg.Proto.client_package_version = 1385;
 
+            logon.Msg.Proto.machine_id = Utils.GenerateMachineID();
+
             logon.Msg.Proto.email_address = details.AccRecord.GetStringDescriptor( AuthFields.eFieldEmail );
 
             byte[] serverTgt = new byte[ details.ServerTGT.Length + 4 ];

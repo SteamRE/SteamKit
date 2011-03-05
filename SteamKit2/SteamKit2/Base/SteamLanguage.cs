@@ -703,6 +703,42 @@ namespace SteamKit2
 		GameLaunchFreeWeekend = 8,
 		Max = 9,
 	}
+	[Flags]
+	public enum ELicenseFlags
+	{
+		Renew = 0x01,
+		RenewalFailed = 0x02,
+		Pending = 0x04,
+		Expired = 0x08,
+		CancelledByUser = 0x10,
+		CancelledByAdmin = 0x20,
+		Max = 33,
+	}
+	public enum ELicenseType
+	{
+		NoLicense = 0,
+		SinglePurchase = 1,
+		SinglePurchaseLimitedUse = 2,
+		RecurringCharge = 3,
+		RecurringChargeLimitedUse = 4,
+		RecurringChargeLimitedUseWithOverages = 5,
+		Max = 6,
+	}
+	public enum EPaymentMethod
+	{
+		None = 0,
+		ActivationCode = 1,
+		CreditCard = 2,
+		PayPal = 4,
+		GuestPass = 8,
+		HardwarePromo = 16,
+		ClickAndBuy = 32,
+		AutoGrant = 64,
+		Wallet = 128,
+		OEMTicket = 256,
+		Split = 512,
+		Max = 513,
+	}
 	public enum EUdpPacketType
 	{
 		Invalid = 0,
