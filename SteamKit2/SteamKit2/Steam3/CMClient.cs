@@ -274,7 +274,7 @@ namespace SteamKit2
                 return;
             }
 
-            var logonResp = new ClientMsgProtobuf<MsgClientLogonResponse>( e.Data );
+            var logonResp = new ClientMsgProtobuf<MsgClientLogOnResponse>( e.Data );
 
             if ( logonResp.Msg.Proto.eresult == ( int )EResult.OK )
             {

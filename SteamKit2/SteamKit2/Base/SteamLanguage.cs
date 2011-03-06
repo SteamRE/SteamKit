@@ -1299,7 +1299,7 @@ namespace SteamKit2
 		public EMsg GetEMsg() { return EMsg.ClientLogon; }
 
 		public static readonly uint ObfuscationMask = 0xBAADF00D;
-		public static readonly uint CurrentProtocol = 65565;
+		public static readonly uint CurrentProtocol = 65569;
 		// Static size: 0
 		public CMsgClientLogon Proto { get; set; }
 
@@ -1342,14 +1342,14 @@ namespace SteamKit2
 		}
 	}
 
-	public class MsgClientLogonResponse : ISteamSerializableMessage
+	public class MsgClientLogOnResponse : ISteamSerializableMessage
 	{
 		public EMsg GetEMsg() { return EMsg.ClientLogOnResponse; }
 
 		// Static size: 0
 		public CMsgClientLogonResponse Proto { get; set; }
 
-		public MsgClientLogonResponse()
+		public MsgClientLogOnResponse()
 		{
 			Proto = new CMsgClientLogonResponse();
 		}
