@@ -43,7 +43,7 @@ class MsgClientHeartBeat<EMsg::ClientHeartBeat>
 class MsgClientLogon<EMsg::ClientLogon>
 {
 	const uint ObfuscationMask = 0xBAADF00D;
-	const uint CurrentProtocol = 65565;
+	const uint CurrentProtocol = 65569;
 
 	proto CMsgClientLogon proto;
 }
@@ -53,7 +53,7 @@ class MsgClientLogOff<EMsg::ClientLogOff>
 	proto CMsgClientLogOff proto;
 }
 
-class MsgClientLogonResponse<EMsg::ClientLogOnResponse>
+class MsgClientLogOnResponse<EMsg::ClientLogOnResponse>
 {
 	proto CMsgClientLogonResponse proto;
 }
