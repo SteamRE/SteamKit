@@ -225,3 +225,12 @@ class MsgClientRemoveFriend<EMsg::ClientRemoveFriend>
 {
 	proto CMsgClientRemoveFriend proto;
 };
+
+
+class MsgClientP2PIntroducerMessage<EMsg::ClientP2PIntroducerMessage>
+{
+	steamidmarshal ulong steamID;
+	EIntroducerRouting routingType;
+	byte<1450> data;
+	uint dataLen;
+};
