@@ -43,6 +43,9 @@ namespace NetHookAnalyzer
             {
                 Packet pk = new Packet( file.FullName );
 
+                if ( !pk.IsValid )
+                    continue;
+
                 if ( chBoxIn.Checked && pk.Direction == "in" )
                     listPackets.Items.Add( pk );
 
@@ -403,6 +406,8 @@ namespace NetHookAnalyzer
         public int EMsg { get; private set; }
         public string EMsgName { get; private set; }
 
+        public bool IsValid { get; private set; }
+
 
 
         public Packet( string fileName )
@@ -410,6 +415,10 @@ namespace NetHookAnalyzer
             this.FullPath = fileName;
 
             Match m = NameRegex.Match( Path.GetFileNameWithoutExtension( fileName ) );
+            this.IsValid = m.Success;
+
+            if ( !this.IsValid )
+                return;
 
             this.PacketNum = Int32.Parse( m.Groups[ "num" ].Value );
             this.Direction = m.Groups[ "direction" ].Value;
