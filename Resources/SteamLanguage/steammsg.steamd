@@ -208,12 +208,13 @@ class MsgClientRequestedClientStats<EMsg::ClientRequestedClientStats>
 	int countStats;
 };
 
-class MsgClientAddFriend2<EMsg::ClientAddFriend2>
+class MsgClientAddFriend<EMsg::ClientAddFriend>
 {
 	proto CMsgClientAddFriend proto;
 };
 
-class MsgClientAddFriendResponse2<EMsg::ClientAddFriendResponse2>
+
+class MsgClientAddFriendResponse<EMsg::ClientAddFriendResponse>
 {
 	ulong jobIdClient;
 	steamidmarshal ulong friendId;
