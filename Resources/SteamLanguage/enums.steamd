@@ -156,3 +156,10 @@ enum EPaymentMethod
 	OEMTicket = 256;
 	Split = 512;
 }
+
+enum EIntroducerRouting
+{
+	FileShare = 0;
+	P2PVoiceChat = 1;
+	P2PNetworking = 2;
+}
