@@ -201,7 +201,7 @@ namespace SteamKit2
         /// <param name="accountNameOrEmail">The account name or email of the user.</param>
         public void AddFriend( string accountNameOrEmail )
         {
-            var addFriend = new ClientMsgProtobuf<MsgClientAddFriend2>();
+            var addFriend = new ClientMsgProtobuf<MsgClientAddFriend>();
 
             addFriend.Msg.Proto.accountname_or_email_to_add = accountNameOrEmail;
 
@@ -213,7 +213,7 @@ namespace SteamKit2
         /// <param name="steamId">The SteamID of the friend to add.</param>
         public void AddFriend( SteamID steamId )
         {
-            var addFriend = new ClientMsgProtobuf<MsgClientAddFriend2>();
+            var addFriend = new ClientMsgProtobuf<MsgClientAddFriend>();
 
             addFriend.Msg.Proto.steamid_to_add = steamId;
 
@@ -258,7 +258,7 @@ namespace SteamKit2
                     HandleAccountInfo( e );
                     break;
 
-                case EMsg.ClientAddFriendResponse2:
+                case EMsg.ClientAddFriendResponse:
                     HandleFriendResponse( e );
                     break;
             }
@@ -391,7 +391,7 @@ namespace SteamKit2
         }
         void HandleFriendResponse( ClientMsgEventArgs e )
         {
-            var friendResponse = new ClientMsg<MsgClientAddFriendResponse2, ExtendedClientMsgHdr>();
+            var friendResponse = new ClientMsg<MsgClientAddFriendResponse, ExtendedClientMsgHdr>();
 
             try
             {

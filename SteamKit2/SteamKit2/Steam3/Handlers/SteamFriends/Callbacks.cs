@@ -294,7 +294,7 @@ namespace SteamKit2
             public string PersonaName { get; private set; }
 
 
-            internal FriendAddedCallback( MsgClientAddFriendResponse2 msg, byte[] nameData )
+            internal FriendAddedCallback( MsgClientAddFriendResponse msg, byte[] nameData )
             {
                 this.Result = msg.EResult;
 
