@@ -10,6 +10,9 @@
 #include "steam/steamtypes.h"
 #include "steam/emsg.h"
 
+#ifdef DeleteFile
+#undef DeleteFile
+#endif
 
 enum ENetDirection
 {
@@ -25,13 +28,15 @@ public:
 
 	void LogConsole( const char *szFmt, ... );
 
+	void DeleteFile( const char *szFileName, bool bSession );
+
 	void LogNetMessage( ENetDirection eDirection, uint8 *pData, uint32 cubData );
 
 	void LogSessionData( ENetDirection eDirection, uint8 *pData, uint32 cubData );
 	void LogFile( const char *szFileName, bool bSession, const char *szFmt, ... );
 
 private:
-	const char *GetFileName( ENetDirection eDirection, EMsg eMsg );
+	const char *GetFileName( ENetDirection eDirection, EMsg eMsg, uint8 serverType = 0xFF );
 	void MultiplexMulti( ENetDirection eDirection, uint8 *pData, uint32 cubData );
 
 private:

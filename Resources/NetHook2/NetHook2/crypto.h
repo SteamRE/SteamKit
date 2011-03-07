@@ -16,7 +16,7 @@ public:
 	CCrypto();
 	~CCrypto();
 
-	const char* GetMessage( EMsg eMsg );
+	const char* GetMessage( EMsg eMsg, uint8 serverType );
 
 	CSimpleDetour* Encrypt_Detour;
 	CSimpleDetour* Decrypt_Detour;
