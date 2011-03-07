@@ -29,6 +29,8 @@ BOOL WINAPI DllMain( HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved )
 		delete g_pLogger;
 
 		delete g_pCrypto;
+
+		FreeConsole();
 	}
 
 	return TRUE;

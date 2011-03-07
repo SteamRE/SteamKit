@@ -5,10 +5,27 @@
 #include "logger.h"
 #include "csimplescan.h"
 
+#include <vector>
 
 bool (__cdecl *Encrypt_Orig)(const uint8*, uint32, uint8*, uint32*, uint32) = 0;
 bool (__cdecl *Decrypt_Orig)(const uint8*, uint32, uint8*, uint32*, const uint8*, uint32) = 0;
 bool (__cdecl *GetMessageFn)( int * ) = 0;
+
+struct EMsg_s
+{
+	EMsg eMsg;
+	uint8 serverType;
+};
+
+bool HasEMsg( std::vector<EMsg_s> eMsgList, EMsg eMsg )
+{
+	for ( int x = 0; x < eMsgList.size(); ++x )
+	{
+		if ( eMsgList[ x ].eMsg == eMsg )
+			return true;
+	}
+	return false;
+}
 
 CCrypto::CCrypto()
 {
@@ -39,15 +56,43 @@ CCrypto::CCrypto()
 
 	g_pLogger->LogConsole( "CMessageList::GetMessage = 0x%x\n", GetMessageFn );
 
-	for ( int x = 0; x < 8000; ++x )
+
+	#define MAX_EMSGS 7599 // rough guess, don't really have a way of getting an exact number
+
+	std::vector<EMsg_s> eMsgList;
+	std::vector<EMsg_s>::iterator eMsgIter;
+
+	g_pLogger->DeleteFile( "emsg_list.txt", false );
+
+	for ( uint8 serverType = 0; serverType < 0xFF; ++serverType )
 	{
-		const char *szMsg = this->GetMessage( (EMsg)x );
+		for ( int x = 0; x < MAX_EMSGS; ++x )
+		{
+			EMsg eMsg = (EMsg)x;
+			const char *szMsg = this->GetMessage( eMsg, serverType );
 
-		if ( szMsg == NULL )
-			continue;
+			if ( szMsg == NULL )
+				continue;
 
-		g_pLogger->LogFile( "emsg_list.txt", false, "\t%s = %d,\r\n", szMsg, x );
+			if ( !HasEMsg( eMsgList, eMsg ) )
+			{
+				EMsg_s eMsgInfo = { eMsg, serverType };
+				eMsgList.push_back( eMsgInfo );
+			}
+
+		}
 	}
+
+	for ( int x = 0; x < eMsgList.size(); ++x )
+	{
+		EMsg_s info = eMsgList[ x ];
+
+		const char *szMsg = this->GetMessage( info.eMsg, info.serverType );
+
+		g_pLogger->LogFile( "emsg_list.txt", false, "\t%s = %d,\r\n", szMsg, info.eMsg );
+	}
+
+	
 
 	static bool (__cdecl *encrypt)(const uint8*, uint32, uint8*, uint32*, uint32) = &CCrypto::SymmetricEncrypt;
 	static bool (__cdecl *decrypt)(const uint8*, uint32, uint8*, uint32*, const uint8*, uint32) = &CCrypto::SymmetricDecrypt;
@@ -123,11 +168,12 @@ bool __cdecl CCrypto::SymmetricDecrypt( const uint8 *pubEncryptedData, uint32 cu
 }
 
 
-const char* CCrypto::GetMessage( EMsg eMsg )
+const char* CCrypto::GetMessage( EMsg eMsg, uint8 serverType )
 {
 	static char *szMsg = new char[ 200 ];
 
 	int ieMsg = (int)eMsg;
+	uint32 iServerType = serverType;
 
 	bool bRet = false;
 
@@ -139,7 +185,7 @@ const char* CCrypto::GetMessage( EMsg eMsg )
 		mov ecx, 200
 		mov edi, ieMsg
 
-		push 0xFF
+		push iServerType
 
 		call GetMessageFn
 		mov bRet, al

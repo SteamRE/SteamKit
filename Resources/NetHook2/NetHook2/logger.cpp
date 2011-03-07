@@ -64,6 +64,14 @@ void CLogger::LogConsole( const char *szFmt, ... )
 	delete [] szBuff;
 }
 
+void CLogger::DeleteFile( const char *szFileName, bool bSession )
+{
+	std::string outputFile = ( bSession ? m_LogDir : m_RootDir );
+	outputFile += szFileName;
+
+	DeleteFileA( outputFile.c_str() );
+}
+
 void CLogger::LogNetMessage( ENetDirection eDirection, uint8 *pData, uint32 cubData )
 {
 	EMsg eMsg = (EMsg)*(uint16*)pData;
@@ -127,11 +135,18 @@ void CLogger::LogFile( const char *szFileName, bool bSession, const char *szFmt,
 	delete [] szBuff;
 }
 
-const char *CLogger::GetFileName( ENetDirection eDirection, EMsg eMsg )
+const char *CLogger::GetFileName( ENetDirection eDirection, EMsg eMsg, uint8 serverType )
 {
 	static char szFileName[MAX_PATH];
 
-	sprintf_s(szFileName, sizeof( szFileName ), "%d_%s_%d_%s.bin", ++m_uiMsgNum, (eDirection == k_eNetIncoming ? "in" : "out"), eMsg, g_pCrypto->GetMessage(eMsg));
+	sprintf_s(
+		szFileName, sizeof( szFileName ),
+		"%d_%s_%d_%s.bin",
+		++m_uiMsgNum,
+		( eDirection == k_eNetIncoming ? "in" : "out" ),
+		eMsg,
+		g_pCrypto->GetMessage( eMsg, serverType )
+	);
 
 	return szFileName;
 }
