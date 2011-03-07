@@ -589,6 +589,13 @@ namespace SteamKit2
 		Split = 512,
 		Max = 513,
 	}
+	public enum EIntroducerRouting
+	{
+		FileShare = 0,
+		P2PVoiceChat = 1,
+		P2PNetworking = 2,
+		Max = 3,
+	}
 	public enum EUdpPacketType
 	{
 		Invalid = 0,
@@ -2038,6 +2045,50 @@ namespace SteamKit2
 		public void Deserialize( Stream stream )
 		{
 			Proto = ProtoBuf.Serializer.Deserialize<CMsgClientRemoveFriend>( stream );
+		}
+	}
+
+	public class MsgClientP2PIntroducerMessage : ISteamSerializableMessage
+	{
+		public EMsg GetEMsg() { return EMsg.ClientP2PIntroducerMessage; }
+
+		// Static size: 8
+		private ulong steamID;
+		public SteamID SteamID { get { return new SteamID( steamID ); } set { steamID = value.ConvertToUint64(); } }
+		// Static size: 4
+		public EIntroducerRouting RoutingType { get; set; }
+		// Static size: 1450
+		public byte[] Data { get; set; }
+		// Static size: 4
+		public uint DataLen { get; set; }
+
+		public MsgClientP2PIntroducerMessage()
+		{
+			steamID = 0;
+			RoutingType = 0;
+			Data = new byte[1450];
+			DataLen = 0;
+		}
+
+		public void Serialize(Stream stream)
+		{
+			BinaryWriterEx bw = new BinaryWriterEx( stream );
+
+			bw.Write( steamID );
+			bw.Write( (int)RoutingType );
+			bw.Write( Data );
+			bw.Write( DataLen );
+
+		}
+
+		public void Deserialize( Stream stream )
+		{
+			BinaryReaderEx br = new BinaryReaderEx( stream );
+
+			steamID = br.ReadUInt64();
+			RoutingType = (EIntroducerRouting)br.ReadInt32();
+			Data = br.ReadBytes( 1450 );
+			DataLen = br.ReadUInt32();
 		}
 	}
 
