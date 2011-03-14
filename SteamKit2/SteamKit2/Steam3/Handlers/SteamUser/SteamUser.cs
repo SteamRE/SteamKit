@@ -91,9 +91,12 @@ namespace SteamKit2
             logon.Msg.Proto.client_language = "english";
             logon.Msg.Proto.rtime32_account_creation = creationTime.ToUnixTime();
 
-            logon.Msg.Proto.cell_id = 1; // steam seems to always use cellid 1 for steam3?
+            logon.Msg.Proto.cell_id = 1; // reported cell id, not always 1.
+
+            // this is not a proper client package version that Steam will allow
             logon.Msg.Proto.client_package_version = 10 /* our version, we'll increase it whenever */ | 0xFF000000; // steamkit's version mask
 
+            // this is not a proper machine id that Steam accepts
             logon.Msg.Proto.machine_id = Utils.GenerateMachineID();
 
             logon.Msg.Proto.email_address = details.AccRecord.GetStringDescriptor( AuthFields.eFieldEmail );
