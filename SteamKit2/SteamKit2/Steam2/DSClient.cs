@@ -25,8 +25,11 @@ namespace SteamKit2
         /// <returns>A list of servers on success; otherwise, <c>null</c>.</returns>
         public IPEndPoint[] GetServerList( EServerType type )
         {
-
             TcpPacket packet = this.GetRawServerList( type );
+
+            if ( packet == null )
+                return null;
+
             DataStream ds = new DataStream( packet.GetPayload(), true );
 
             ushort numAddrs = ds.ReadUInt16();
