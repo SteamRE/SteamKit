@@ -13,7 +13,7 @@ using System.Net;
 namespace SteamKit2
 {
     /// <summary>
-    /// Represents a client capable of connecting to the Steam2 General Directory Server.
+    /// Represents a client that is capable of connecting to the Steam2 General Directory Server.
     /// </summary>
     public sealed class GeneralDSClient : DSClient
     {
@@ -43,6 +43,9 @@ namespace SteamKit2
             uint userData = BitConverter.ToUInt32( userHash, 0 ) & 1;
 
             TcpPacket packet = base.GetRawServerList( EServerType.ProxyASClientAuthentication, NetHelpers.EndianSwap( userData ) );
+
+            if ( packet == null )
+                return null;
 
             DataStream ds = new DataStream( packet.GetPayload(), true );
 
