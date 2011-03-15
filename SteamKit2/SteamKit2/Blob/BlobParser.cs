@@ -14,10 +14,10 @@ namespace SteamKit2
 {
     public class BlobParser
     {
-        private static readonly int BlobHeaderLength = 10;
-        private static readonly int FieldHeaderLength = 6;
-        private static readonly int CompressedHeaderLength = 10;
-        private static readonly int EncryptedHeaderLength = 20;
+        private const int BlobHeaderLength = 10;
+        private const int FieldHeaderLength = 6;
+        private const int CompressedHeaderLength = 10;
+        private const int EncryptedHeaderLength = 20;
 
         private static byte[] Key;
 
