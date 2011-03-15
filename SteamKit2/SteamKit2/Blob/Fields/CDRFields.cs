@@ -45,6 +45,35 @@ namespace SteamKit2
         public const int eFieldManifestOnlyApp = 20; // Boolean (U8)
         public const int eFieldAppOfManifestOnlyCache = 21; // U32
     }
+    public static class CDRAppVersionFields
+    {
+        public const int eFieldDescription = 1; // String
+        public const int eFieldVersionId = 2; // U32
+        public const int eFieldIsNotAvailable = 3; // Boolean (U8)
+        public const int eFieldLaunchOptionIdsRecord = 4; // CApplicationLaunchOptionIdsRecord
+        public const int eFieldDepotEncryptionKey = 5; // String
+        public const int eFieldIsEncryptionKeyAvailable = 6; // Boolean (U8)
+        public const int eFieldIsRebased = 7; // Boolean (U8)
+        public const int eFieldIsLongVersionRoll = 8; // Boolean (U8)
+    }
+
+
+    public static class CDRAppLaunchOptionFields
+    {
+        public const int eFieldDescription = 1; // String
+        public const int eFieldCommandLine = 2; // String
+        public const int eFieldIconIndex = 3; // I32
+        public const int eFieldNoDesktopShortcut = 4; // Boolean (U8)
+        public const int eFieldNoStartMenuShortcut = 5; // Boolean (U8)
+        public const int eFieldLongRunningUnattended = 6; // Boolean (U8)
+    }
+
+    public static class CDRAppFilesystemFields
+    {
+        public const int eFieldAppId = 1; // U32
+        public const int eFieldMountName = 2; // String
+        public const int eFieldIsOptional = 3; // Boolean (U8)
+    }
 
 
     public static class CDRSubRecordFields
@@ -73,4 +102,27 @@ namespace SteamKit2
         public const int eFieldIsSteam3Subscription = 22; // Boolean (U8)
         public const int eFieldExtendedInfoRecord = 23; // CSubscriptionExtendedInfoRecord
     }
+
+    public static class CDRSubRateLimitFields
+    {
+        public const int eFieldLimit = 1; // U32
+        public const int eFieldPeriodInMinutes = 2; // U32
+    }
+
+
+    public static class CDRSubDiscountFields
+    {
+        public const int eFieldName = 1; // String
+        public const int eFieldDiscountInCents = 2; // U32
+        public const int eFieldDiscountQualifiersRecord = 3; // CSubscriptionDiscountQualifiersRecord
+    }
+
+    public static class CDRSubDiscountQualifierFields
+    {
+        public const int eFieldName = 1; // String
+        public const int eFieldSubscriptionRequired = 2; // U32
+        public const int eFieldIsDisqualifier = 3; // Boolean (U8)
+    };
+
+
 }

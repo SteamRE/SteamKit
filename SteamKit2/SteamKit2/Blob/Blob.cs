@@ -214,7 +214,7 @@ namespace SteamKit2
         {
             foreach ( BlobField field in Fields )
             {
-                if ( field.GetIntDescriptor() == descriptor )
+                if ( field.GetInt32Descriptor() == descriptor )
                 {
                     return field;
                 }

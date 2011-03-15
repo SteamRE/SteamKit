@@ -46,7 +46,11 @@ namespace SteamKit2
 
             return Encoding.ASCII.GetString( Descriptor );
         }
-        public UInt32 GetIntDescriptor()
+        public Int32 GetInt32Descriptor()
+        {
+            return BitConverter.ToInt32( Descriptor, 0 );
+        }
+        public UInt32 GetUInt32Descriptor()
         {
             return BitConverter.ToUInt32( Descriptor, 0 );
         }
@@ -69,10 +73,39 @@ namespace SteamKit2
 
             return Encoding.UTF8.GetString( Data, 0, Math.Max( 0, Data.Length - 1 ) );
         }
-        public int GetIntData()
+
+        public long GetInt64Data()
+        {
+            return BitConverter.ToInt64( Data, 0 );
+        }
+        public ulong GetUInt64Data()
+        {
+            return BitConverter.ToUInt64( Data, 0 );
+        }
+
+        public int GetInt32Data()
         {
             return BitConverter.ToInt32( Data, 0 );
         }
+        public uint GetUInt32Data()
+        {
+            return BitConverter.ToUInt32( Data, 0 );
+        }
+
+        public short GetInt16Data()
+        {
+            return BitConverter.ToInt16( Data, 0 );
+        }
+        public ushort GetUInt16Data()
+        {
+            return BitConverter.ToUInt16( Data, 0 );
+        }
+
+        public bool GetBoolData()
+        {
+            return BitConverter.ToBoolean( Data, 0 );
+        }
+
         public Blob GetChildBlob()
         {
             return childBlob;
@@ -97,6 +130,5 @@ namespace SteamKit2
 
             return !nonprint;
         }
-
     }
 }

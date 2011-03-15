@@ -32,7 +32,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Classless.Hasher, Version=0.7.2247.36474, Culture=neutral, PublicKeyToken=bad6dfcf741043ca, processorArchitecture=MSIL">
@@ -60,6 +60,7 @@
     <Compile Include="Blob\CachedBinaryReader.cs" />
     <Compile Include="Blob\Fields\AuthFields.cs" />
     <Compile Include="Blob\Fields\CDRFields.cs" />
+    <Compile Include="Steam2\ContentServerDSClient.cs" />
     <Compile Include="Steam3\Handlers\SteamApps\Callbacks.cs" />
     <Compile Include="Steam3\Handlers\SteamApps\SteamApps.cs" />
     <Compile Include="Steam3\Handlers\SteamFriends\Callbacks.cs" />
