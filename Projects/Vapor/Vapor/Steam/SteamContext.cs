@@ -180,49 +180,6 @@ namespace Vapor
             callbackHandlers.Remove( handler );
         }
 
-        static void DumpBlob( StringBuilder sb, Blob blob, int tabs )
-        {
-            foreach ( var blobField in blob.Fields )
-            {
-                string strTabs = "".PadLeft( tabs, '\t' );
-                sb.Append( strTabs );
-
-                if ( blobField.IsStringDescriptor() )
-                {
-                    sb.AppendFormat( "\"{0}\" - ", blobField.GetStringDescriptor() );
-                }
-                else
-                {
-                    sb.AppendFormat( "{0} - ", blobField.GetInt32Descriptor() );
-                }
-
-                if ( blobField.IsStringData() )
-                {
-                    sb.AppendFormat( "\"{0}\"", blobField.GetStringData() );
-                }
-                else if ( blobField.Data != null && blobField.Data.Length == 4 )
-                {
-                    sb.AppendFormat( "Int32 {0}", blobField.GetInt32Data() );
-                }
-                else if ( blobField.Data != null )
-                {
-                    sb.AppendFormat( "Bin {0}", BitConverter.ToString( blobField.Data ).Replace( "-", "" ) );
-                }
-
-                if ( blobField.HasChildBlob() )
-                {
-                    sb.Append( "(Blob)" );
-                    sb.AppendLine();
-                    DumpBlob( sb, blobField.GetChildBlob(), tabs + 1 );
-                    continue;
-                }
-                else
-                {
-                    sb.AppendLine();
-                }
-            }
-        }
-
         public static void Update()
         {
             CallbackMsg msg = SteamClient.GetCallback();
@@ -234,9 +191,6 @@ namespace Vapor
 
             if ( msg.IsType<SteamClient.ConnectCallback>() )
             {
-                StringBuilder sb = new StringBuilder();
-                DumpBlob( sb, Steam3.accountRecord, 0 );
-
                 SteamUser.LogOn( new SteamUser.LogOnDetails()
                     {
                         Username = Steam3.userName,
