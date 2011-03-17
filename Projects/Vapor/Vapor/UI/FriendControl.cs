@@ -26,6 +26,9 @@ namespace Vapor
         {
             InitializeComponent();
 
+            btnAccept.Visible = false;
+            btnDeny.Visible = false;
+
             IsHighlighted = true;
 
             Steam3.AddHandler( this );
@@ -40,10 +43,7 @@ namespace Vapor
                 ctrl.MouseEnter += FriendControl_MouseEnter;
                 ctrl.MouseLeave += FriendControl_MouseLeave;
             }
-			
-			this.MouseDoubleClick += FriendControl_MouseDoubleClick;
-			this.MouseEnter += FriendControl_MouseEnter;
-			this.MouseLeave += FriendControl_MouseLeave;
+
 
             if ( Friend == null )
                 return;
@@ -75,7 +75,7 @@ namespace Vapor
 
                 this.SetSteamID( this.Friend );
 
-                if ( perState.AvatarHash != null && !Util.IsZeros(perState.AvatarHash) )
+                if ( perState.AvatarHash != null && !Util.IsZeros( perState.AvatarHash ) )
                 {
                     CDNCache.DownloadAvatar( perState.FriendID, perState.AvatarHash, AvatarDownloaded );
                 }
@@ -98,6 +98,12 @@ namespace Vapor
             nameLbl.Text = steamid.GetName();
             statusLbl.Text = steamid.GetStatus();
             gameLbl.Text = steamid.GetGameName();
+
+            if ( steamid.IsRequestingFriendship() )
+            {
+                btnAccept.Visible = true;
+                btnDeny.Visible = true;
+            }
 
             nameLbl.ForeColor = statusLbl.ForeColor = gameLbl.ForeColor = Util.GetStatusColor( steamid );
 
@@ -194,6 +200,42 @@ namespace Vapor
         void FriendControl_MouseDoubleClick( object sender, MouseEventArgs e )
         {
             Steam3.ChatManager.GetChat( this.Friend.SteamID );
+        }
+
+        private void btnAccept_Click( object sender, EventArgs e )
+        {
+            Steam3.SteamFriends.AddFriend( this.Friend.SteamID );
+        }
+
+        private void btnDeny_Click( object sender, EventArgs e )
+        {
+            Steam3.SteamFriends.RemoveFriend( this.Friend.SteamID );
+        }
+
+        private void removeFriendToolStripMenuItem_Click( object sender, EventArgs e )
+        {
+            DialogResult result = Util.MsgBox(
+                this,
+                string.Format( "Are you sure you wish to remove {0} from your friends list?", this.Friend.GetName() ),
+                MessageBoxButtons.YesNo
+            );
+
+            if ( result != DialogResult.Yes )
+                return;
+
+            Steam3.SteamFriends.RemoveFriend( this.Friend.SteamID );
+        }
+
+        private void addFriendToolStripMenuItem_Click( object sender, EventArgs e )
+        {
+            MainForm mf = this.ParentForm as MainForm;
+            mf.AddFriend();
+        }
+
+        private void refreshToolStripMenuItem_Click( object sender, EventArgs e )
+        {
+            MainForm mf = this.ParentForm as MainForm;
+            mf.ReloadFriends();
         }
     }
 }

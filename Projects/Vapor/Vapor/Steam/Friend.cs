@@ -52,6 +52,17 @@ namespace Vapor
             return ( relationship == EFriendRelationship.Ignored || relationship == EFriendRelationship.IgnoredFriend );
         }
 
+        public bool IsRequestingFriendship()
+        {
+            EFriendRelationship relationship = Steam3.SteamFriends.GetFriendRelationship( this.SteamID );
+            return ( relationship == EFriendRelationship.RequestRecipient );
+        }
+
+        public bool IsAcceptingFriendship()
+        {
+            return ( Steam3.SteamFriends.GetFriendRelationship( this.SteamID ) == EFriendRelationship.RequestInitiator );
+        }
+
         public bool IsOnline()
         {
             try
@@ -113,6 +124,12 @@ namespace Vapor
                         str = "Offline";
                         break;
                 }
+
+                if ( this.IsAcceptingFriendship() )
+                    str = "Invited";
+
+                if ( this.IsRequestingFriendship() )
+                    str = "Req. Friendship";
 
 
                 if ( this.IsBlocked() )
