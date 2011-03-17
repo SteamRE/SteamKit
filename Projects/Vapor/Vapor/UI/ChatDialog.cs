@@ -19,6 +19,8 @@ namespace Vapor
 
             chatFriend.SetSteamID( new Friend( steamId ) );
             chatFriend.BorderStyle = BorderStyle.None;
+            chatFriend.DisableContextMenu();
+            chatFriend.DisableDoubleClick();
 
             this.Text = string.Format( "{0} - Chat", chatFriend.Friend.GetName() );
 
