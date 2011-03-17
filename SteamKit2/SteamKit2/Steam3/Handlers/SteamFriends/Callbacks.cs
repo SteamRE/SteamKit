@@ -294,14 +294,13 @@ namespace SteamKit2
             public string PersonaName { get; private set; }
 
 
-            internal FriendAddedCallback( MsgClientAddFriendResponse msg, byte[] nameData )
+            internal FriendAddedCallback( CMsgClientAddFriendResponse msg )
             {
-                this.Result = msg.EResult;
+                this.Result = ( EResult )msg.eresult;
 
-                this.SteamID = msg.FriendId;
+                this.SteamID = msg.steam_id_added;
 
-                string name = Encoding.UTF8.GetString( nameData, 0, nameData.Length - 1 );
-                this.PersonaName = name;
+                this.PersonaName = msg.persona_name_added;
             }
         }
     }

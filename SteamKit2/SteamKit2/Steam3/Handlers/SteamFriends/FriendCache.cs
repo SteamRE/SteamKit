@@ -73,6 +73,15 @@ namespace SteamKit2
 
                 return null;
             }
+            public int GetIndexOf( SteamID steamId )
+            {
+                for ( int x = 0 ; x < list.Count ; ++x )
+                {
+                    if ( list[ x ].SteamID == steamId )
+                        return x;
+                }
+                return -1;
+            }
             public T GetByIndex( int index )
             {
                 if ( index >= list.Count )
@@ -80,12 +89,29 @@ namespace SteamKit2
 
                 return list[ index ];
             }
+
             public void Add( T obj )
             {
-                if ( GetByID( obj.SteamID ) != null )
-                    return; // don't duplicate objects
+                int index = GetIndexOf( obj.SteamID );
 
-                list.Add( obj );
+                if ( index == -1 )
+                {
+                    list.Add( obj );
+                    return;
+                }
+
+                // the object already exists, so we'll just update it
+                list[ index ] = obj;
+            }
+
+            public void Remove( Friend friend )
+            {
+                int index = GetIndexOf( friend.SteamID );
+
+                if ( index == -1 )
+                    return; // nothing to remove
+
+                list.RemoveAt( index );
             }
         }
 
@@ -115,6 +141,10 @@ namespace SteamKit2
             public void AddFriend( Friend friend )
             {
                 friendList.Add( friend );
+            }
+            public void RemoveFriend( Friend friend )
+            {
+                friendList.Remove( friend );
             }
 
             public Clan GetClan( SteamID steamId )

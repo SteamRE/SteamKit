@@ -12,7 +12,7 @@ using System.Runtime.InteropServices;
 
 namespace SteamKit2
 {
-    public class ClientTGT
+    public sealed class ClientTGT
     {
         public byte[] AccountRecordKey;
 
