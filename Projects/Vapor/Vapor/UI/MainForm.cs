@@ -17,6 +17,7 @@ namespace Vapor
         public MainForm()
         {
             InitializeComponent();
+            this.Enabled = false; // input is disabled until we login to steam3
 
             Steam3.AddHandler( this );
 
@@ -71,6 +72,17 @@ namespace Vapor
             if ( msg.IsType<SteamUser.LoginKeyCallback>() )
             {
                 Steam3.SteamFriends.SetPersonaState( EPersonaState.Online );
+                this.Enabled = true;
+            }
+
+            if ( msg.IsType<SteamFriends.FriendAddedCallback>() )
+            {
+                var friendAdded = ( SteamFriends.FriendAddedCallback )msg;
+
+                if ( friendAdded.Result != EResult.OK )
+                {
+                    Util.MsgBox( this, "Unable to add friend! Result: " + friendAdded.Result );
+                }
             }
         }
 
@@ -80,12 +92,28 @@ namespace Vapor
             this.ReloadFriends();
         }
 
-        void ReloadFriends()
+        public void ReloadFriends()
         {
             List<Friend> friendsList = GetFriends();
 
             friendsList.Sort( ( a, b ) =>
             {
+                // always show requesters on top
+                if ( a.IsRequestingFriendship() )
+                    return -1;
+
+                if ( b.IsRequestingFriendship() )
+                    return 1;
+
+
+                // show people we've added at the bottom
+                if ( a.IsAcceptingFriendship() )
+                    return 1;
+
+                if ( b.IsAcceptingFriendship() )
+                    return -1;
+
+
                 if ( a.IsInGame() && b.IsInGame() )
                     return StringComparer.OrdinalIgnoreCase.Compare( a.GetName(), b.GetName() );
 
@@ -132,11 +160,14 @@ namespace Vapor
             friendsFlow.VerticalScroll.Value = scroll;
         }
 
-        private void ResizeFriends()
+        void ResizeFriends()
         {
             foreach ( FriendControl fc in friendsFlow.Controls )
             {
-                fc.Width = this.ClientSize.Width - 28;
+                fc.Width = this.ClientSize.Width - 6;
+
+                if ( friendsFlow.VerticalScroll.Visible )
+                    fc.Width -= 18;
             }
         }
 
@@ -156,6 +187,13 @@ namespace Vapor
             return friends;
         }
 
+        public void AddFriend()
+        {
+            var friendDialog = new AddFriendDialog();
+
+            friendDialog.ShowDialog( this );
+        }
+
         private void MainForm_Resize( object sender, EventArgs e )
         {
             friendsFlow.SuspendLayout();
@@ -168,6 +206,14 @@ namespace Vapor
         private void refreshListToolStripMenuItem_Click( object sender, EventArgs e )
         {
             this.ReloadFriends();
+        }
+        private void btnAddFriend_Click( object sender, EventArgs e )
+        {
+            this.AddFriend();
+        }
+        private void addFriendToolStripMenuItem_Click( object sender, EventArgs e )
+        {
+            this.AddFriend();
         }
     }
 }

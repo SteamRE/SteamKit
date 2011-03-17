@@ -47,6 +47,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="UI\AddFriendDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\AddFriendDialog.Designer.cs">
+      <DependentUpon>AddFriendDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Base\VaporContextMenu.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="UI\TraceDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -122,6 +131,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="UI\AddFriendDialog.resx">
+      <DependentUpon>AddFriendDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\ChatDialog.resx">
       <DependentUpon>ChatDialog.cs</DependentUpon>
     </EmbeddedResource>
@@ -158,6 +170,9 @@
     <None Include="Resources\IconUnknown.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="license.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Vapor.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
