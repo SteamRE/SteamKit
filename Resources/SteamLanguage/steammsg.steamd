@@ -216,9 +216,7 @@ class MsgClientAddFriend<EMsg::ClientAddFriend>
 
 class MsgClientAddFriendResponse<EMsg::ClientAddFriendResponse>
 {
-	ulong jobIdClient;
-	steamidmarshal ulong friendId;
-	EResult eResult;
+	proto CMsgClientAddFriendResponse proto;
 };
 
 class MsgClientRemoveFriend<EMsg::ClientRemoveFriend>
