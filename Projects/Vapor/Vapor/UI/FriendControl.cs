@@ -62,6 +62,18 @@ namespace Vapor
             SetSteamID( steamid );
         }
 
+        public void DisableContextMenu()
+        {
+            this.ContextMenuStrip = null;
+        }
+        public void DisableDoubleClick()
+        {
+            this.MouseDoubleClick -= FriendControl_MouseDoubleClick;
+
+            foreach ( Control ctrl in this.Controls )
+                ctrl.MouseDoubleClick -= FriendControl_MouseDoubleClick;
+        }
+
 
         public void HandleCallback( CallbackMsg msg )
         {

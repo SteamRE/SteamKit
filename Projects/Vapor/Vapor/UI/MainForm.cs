@@ -23,6 +23,8 @@ namespace Vapor
 
             selfControl.IsHighlighted = false;
             selfControl.BorderStyle = BorderStyle.None;
+            selfControl.DisableContextMenu();
+            selfControl.DisableDoubleClick();
         }
 
         protected override void OnFormClosing( FormClosingEventArgs e )
