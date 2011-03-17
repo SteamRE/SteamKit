@@ -287,11 +287,11 @@ namespace SteamKit2
         }
         void HandleFriendMsg( ClientMsgEventArgs e )
         {
-            ClientMsg<MsgClientFriendMsgIncoming, ExtendedClientMsgHdr> friendMsg = null;
+            ClientMsgProtobuf<MsgClientFriendMsgIncomingProto> friendMsg = null;
 
             try
             {
-                friendMsg = new ClientMsg<MsgClientFriendMsgIncoming, ExtendedClientMsgHdr>( e.Data );
+                friendMsg = new ClientMsgProtobuf<MsgClientFriendMsgIncomingProto>( e.Data );
             }
             catch ( Exception ex )
             {
@@ -301,7 +301,7 @@ namespace SteamKit2
 
             byte[] msgData = friendMsg.Payload.ToArray();
 
-            var callback = new FriendMsgCallback( friendMsg.Msg, msgData );
+            var callback = new FriendMsgCallback( friendMsg.Msg.Proto );
             this.Client.PostCallback( callback );
         }
         void HandleFriendsList( ClientMsgEventArgs e )
@@ -332,7 +332,15 @@ namespace SteamKit2
                 {
                     Friend cacheFriend = new Friend( friendId );
                     cacheFriend.Relationship = ( EFriendRelationship )friend.efriendrelationship;
-                    cache.AddFriend( cacheFriend );
+
+                    if ( cacheFriend.Relationship == EFriendRelationship.None || cacheFriend.Relationship == EFriendRelationship.Blocked )
+                    {
+                        cache.RemoveFriend( cacheFriend );
+                    }
+                    else
+                    {
+                        cache.AddFriend( cacheFriend );
+                    }
 
                     reqLocalData.Msg.Proto.friends.Add( friend.ulfriendid );
                 }
@@ -391,7 +399,7 @@ namespace SteamKit2
         }
         void HandleFriendResponse( ClientMsgEventArgs e )
         {
-            var friendResponse = new ClientMsg<MsgClientAddFriendResponse, ExtendedClientMsgHdr>();
+            var friendResponse = new ClientMsgProtobuf<MsgClientAddFriendResponse>();
 
             try
             {
@@ -403,9 +411,7 @@ namespace SteamKit2
                 return;
             }
 
-            byte[] personaName = friendResponse.Payload.ToArray();
-
-            var callback = new FriendAddedCallback( friendResponse.Msg, personaName );
+            var callback = new FriendAddedCallback( friendResponse.Msg.Proto );
             this.Client.PostCallback( callback );
         }
         #endregion

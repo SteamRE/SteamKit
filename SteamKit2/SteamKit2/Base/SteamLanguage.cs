@@ -1990,38 +1990,22 @@ namespace SteamKit2
 	{
 		public EMsg GetEMsg() { return EMsg.ClientAddFriendResponse; }
 
-		// Static size: 8
-		public ulong JobIdClient { get; set; }
-		// Static size: 8
-		private ulong friendId;
-		public SteamID FriendId { get { return new SteamID( friendId ); } set { friendId = value.ConvertToUint64(); } }
-		// Static size: 4
-		public EResult EResult { get; set; }
+		// Static size: 0
+		public CMsgClientAddFriendResponse Proto { get; set; }
 
 		public MsgClientAddFriendResponse()
 		{
-			JobIdClient = 0;
-			friendId = 0;
-			EResult = 0;
+			Proto = new CMsgClientAddFriendResponse();
 		}
 
 		public void Serialize(Stream stream)
 		{
-			BinaryWriterEx bw = new BinaryWriterEx( stream );
-
-			bw.Write( JobIdClient );
-			bw.Write( friendId );
-			bw.Write( (int)EResult );
-
+			ProtoBuf.Serializer.Serialize<CMsgClientAddFriendResponse>(stream, Proto);
 		}
 
 		public void Deserialize( Stream stream )
 		{
-			BinaryReaderEx br = new BinaryReaderEx( stream );
-
-			JobIdClient = br.ReadUInt64();
-			friendId = br.ReadUInt64();
-			EResult = (EResult)br.ReadInt32();
+			Proto = ProtoBuf.Serializer.Deserialize<CMsgClientAddFriendResponse>( stream );
 		}
 	}
 
