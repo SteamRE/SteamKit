@@ -115,10 +115,12 @@ namespace NetHookAnalyzer
                     return sb.ToString();
                 }
 
+                uint headerSize = BitConverter.ToUInt32( data, 4 );
+
                 IExtensible protoMsg;
                 try
                 {
-                    ms.Seek( 22, SeekOrigin.Begin );
+                    ms.Seek( 8 /* emsg + header size */ + headerSize, SeekOrigin.Begin );
                     protoMsg = ( IExtensible )Deserialize( protoType, ms );
                 }
                 catch ( Exception ex )
@@ -136,6 +138,15 @@ namespace NetHookAnalyzer
                 {
                     object propData = prop.GetValue( protoMsg, null );
                     BuildString( sb, prop, propData, 1 );
+                }
+
+                if ( ms.Length > ms.Position )
+                {
+                    int diff = ( int )( ms.Length - ms.Position );
+                    byte[] payload = new byte[ diff ];
+                    ms.Read( payload, 0, payload.Length );
+
+                    BuildPayload( sb, payload );
                 }
 
                 return sb.ToString();
@@ -195,14 +206,18 @@ namespace NetHookAnalyzer
             MethodInfo mi = pi.PropertyType.GetMethod( "ToArray", BindingFlags.Public | BindingFlags.Instance );
             byte[] data = ( byte[] )mi.Invoke( payloadObj, null );
 
+            BuildPayload( sb, data );
+
+        }
+        void BuildPayload( StringBuilder sb, byte[] data )
+        {
             sb.AppendLine();
-            sb.AppendLine( "Payload:");
+            sb.AppendLine( "Payload:" );
             sb.AppendFormat( "\tBin: {0}", BitConverter.ToString( data ).Replace( "-", "" ) );
             sb.AppendLine();
             sb.AppendFormat( "\tASCII: {0}", Encoding.ASCII.GetString( data ).Replace( "\0", "\\0" ) );
             sb.AppendLine();
             sb.AppendFormat( "\tUTF8: {0}", Encoding.UTF8.GetString( data ).Replace( "\0", "\\0" ) );
-
         }
 
         object Deserialize( Type genericParam, Stream stream )
