@@ -1,22 +1,182 @@
-message CMsgTFGetUserData {
-	optional fixed32 price_sheet_version = 1;
-}
-
-message CMsgTFGetUserDataResponse {
-	optional int32 result = 1;
-	optional int32 currency = 2;
-	optional string country = 3;
-	optional fixed32 price_sheet_version = 4;
-	optional uint64 experiment_data = 5 [default = 0];
-	optional int32 featured_item_idx = 6;
-	optional bool show_hat_descriptions = 7 [default = true];
-	optional bytes price_sheet = 8;
-	optional int32 default_item_sort = 9 [default = 0];
-}
+import "steammessages.proto";
 
 message CMsgTFGoldenWrenchBroadcast {
 	optional int32 wrench_number = 1;
 	optional bool deleted = 2;
 	optional string user_name = 3;
+}
+
+message CSOTFDuelSummary {
+	optional uint32 account_id = 1;
+	optional uint32 duel_wins = 2;
+	optional uint32 duel_losses = 3;
+	optional uint32 last_duel_account_id = 4;
+	optional uint32 last_duel_timestamp = 5;
+	optional uint32 last_duel_status = 6;
+}
+
+message CSOTFMapContribution {
+	optional uint32 account_id = 1;
+	optional uint32 def_index = 2;
+	optional uint32 contribution_level = 3;
+}
+
+message CMsgTFVoteKickBanPlayer {
+	optional uint32 account_id_subject = 1;
+	optional uint32 kick_reason = 2;
+}
+
+message CMsgTFVoteKickBanPlayerResult {
+	optional uint32 account_id_initiator = 1;
+	optional uint32 account_id_subject = 2;
+	optional uint32 kick_reason = 3;
+	optional bool kick_successful = 4;
+	optional uint32 num_yes_votes = 5;
+	optional uint32 num_no_votes = 6;
+	optional uint32 num_possible_votes = 7;
+}
+
+message CMsgTFKickPlayer {
+	optional uint32 account_id_player = 1;
+	optional uint32 kick_reason = 2;
+}
+
+message CMsgTFStartedTraining {
+}
+
+message CMsgTFFreeTrialChooseMostHelpfulFriend {
+	optional uint32 account_id_friend = 1;
+}
+
+message CMsgTFRequestTF2Friends {
+	repeated uint32 account_ids = 1;
+}
+
+message CMsgTFRequestTF2FriendsResponse {
+	repeated uint32 account_ids = 1;
+}
+
+message CSOTFPlayerInfo {
+	optional uint32 num_new_users_helped = 1;
+	optional bool trial_account = 2 [default = false];
+}
+
+message CMsgReplayUploadedToYouTube {
+	optional string youtube_url = 1;
+}
+
+message CMsgTFCoaching_AddToCoaches {
+}
+
+message CMsgTFCoaching_RemoveFromCoaches {
+}
+
+message CMsgTFCoaching_FindCoach {
+	optional uint32 account_id_friend_as_coach = 1;
+}
+
+message CMsgTFCoaching_FindCoachResponse {
+	optional bool found_coach = 1;
+	optional uint32 num_likes = 2;
+	optional string coach_name = 3;
+}
+
+message CMsgTFCoaching_AskCoach {
+	optional uint32 account_id_student = 1;
+	optional bool student_is_friend = 2;
+}
+
+message CMsgTFCoaching_AskCoachResponse {
+	optional bool accept_coaching_assignment = 1;
+}
+
+message CMsgTFCoaching_CoachJoinGame {
+	optional bool join_game = 1;
+	optional uint32 server_address = 2;
+	optional uint32 server_port = 3;
+	optional uint32 account_id_student = 4;
+}
+
+message CMsgTFCoaching_CoachJoining {
+	optional uint32 account_id_coach = 1;
+	optional uint32 account_id_student = 2;
+}
+
+message CMsgTFCoaching_CoachJoined {
+	optional uint32 account_id_coach = 1;
+}
+
+message CMsgTFCoaching_LikeCurrentCoach {
+	optional bool like_coach = 1;
+}
+
+message CMsgTFCoaching_RemoveCurrentCoach {
+	optional uint32 account_id_coach = 1;
+}
+
+message CMsgTFQuickplay_ScoreServers {
+	message ServerInfo {
+		optional uint32 server_address = 1;
+		optional uint32 server_port = 2;
+		optional uint32 num_users = 3;
+		optional uint32 ping = 4;
+		optional uint64 steam_id = 5;
+	}
+
+	repeated .CMsgTFQuickplay_ScoreServers.ServerInfo servers = 1;
+	optional uint32 server_info_updated_timestamp = 2;
+}
+
+message CMsgTFQuickplay_ScoreServersResponse {
+	message ServerInfo {
+		optional uint32 server_address = 1;
+		optional uint32 server_port = 2;
+		optional int32 score = 3;
+		optional bool should_blacklist = 4;
+	}
+
+	repeated .CMsgTFQuickplay_ScoreServersResponse.ServerInfo servers = 1;
+}
+
+message CMsgGC_GameServer_LevelInfo {
+	optional bool level_loaded = 1;
+	optional string level_name = 2;
+}
+
+message CMsgGC_GameServer_AuthChallenge {
+	optional string challenge_string = 1;
+}
+
+message CMsgGC_GameServer_AuthResult {
+	optional bool authenticated = 1;
+}
+
+message CMsgGC_GameServer_AuthChallengeResponse {
+	optional uint32 game_server_account_id = 1;
+	optional bytes hashed_challenge_string = 2;
+}
+
+message CMsgGC_GameServer_CreateIdentity {
+	optional uint32 account_id = 1;
+}
+
+message CMsgGC_GameServer_CreateIdentityResponse {
+	optional bool account_created = 1;
+	optional uint32 game_server_account_id = 2;
+	optional string game_server_identity_token = 3;
+}
+
+message CMsgGC_GameServer_List {
+	optional uint32 account_id = 1;
+}
+
+message CMsgGC_GameServer_ListResponse {
+	message GameServerIdentity {
+		optional uint32 game_server_account_id = 1;
+		optional string game_server_identity_token = 2;
+		optional int32 game_server_standing = 3;
+	}
+
+	repeated .CMsgGC_GameServer_ListResponse.GameServerIdentity owned_game_servers = 1;
 }
 
