@@ -113,7 +113,7 @@ class MsgClientGameConnectTokens<EMsg::ClientGameConnectTokens>
 	proto CMsgClientGameConnectTokens proto;
 }
 
-class MsgClientGamesPlayed<EMsg::ClientGamesPlayedWithDataBlob>
+class MsgClientGamesPlayedWithDataBlob<EMsg::ClientGamesPlayedWithDataBlob>
 {
 	proto CMsgClientGamesPlayed proto;
 }
@@ -125,24 +125,10 @@ class MsgClientFriendsList<EMsg::ClientFriendsList>
 
 class MsgClientFriendMsg<EMsg::ClientFriendMsg>
 {
-	steamidmarshal ulong steamID;
-	EChatEntryType entryType = EChatEntryType::Invalid;
-}
-
-class MsgClientFriendMsgProto<EMsg::ClientFriendMsg>
-{
 	proto CMsgClientFriendMsg proto;
 }
 
 class MsgClientFriendMsgIncoming<EMsg::ClientFriendMsgIncoming>
-{
-	steamidmarshal ulong steamID;
-	EChatEntryType entryType = EChatEntryType::Invalid;
-	int fromLimitedAccount;
-	int messageSize;
-}
-
-class MsgClientFriendMsgIncomingProto<EMsg::ClientFriendMsgIncoming>
 {
 	proto CMsgClientFriendMsgIncoming proto;
 }
