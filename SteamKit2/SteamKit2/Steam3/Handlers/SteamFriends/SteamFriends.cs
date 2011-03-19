@@ -186,7 +186,7 @@ namespace SteamKit2
         /// <param name="message">The message to send.</param>
         public void SendChatMessage( SteamID target, EChatEntryType type, string message )
         {
-            var chatMsg = new ClientMsgProtobuf<MsgClientFriendMsgProto>();
+            var chatMsg = new ClientMsgProtobuf<MsgClientFriendMsg>();
 
             chatMsg.Msg.Proto.steamid = target;
             chatMsg.Msg.Proto.chat_entry_type = ( int )type;
@@ -287,11 +287,11 @@ namespace SteamKit2
         }
         void HandleFriendMsg( ClientMsgEventArgs e )
         {
-            ClientMsgProtobuf<MsgClientFriendMsgIncomingProto> friendMsg = null;
+            ClientMsgProtobuf<MsgClientFriendMsgIncoming> friendMsg = null;
 
             try
             {
-                friendMsg = new ClientMsgProtobuf<MsgClientFriendMsgIncomingProto>( e.Data );
+                friendMsg = new ClientMsgProtobuf<MsgClientFriendMsgIncoming>( e.Data );
             }
             catch ( Exception ex )
             {
