@@ -25,7 +25,7 @@ namespace SteamKit2
         /// <returns>A list of servers on success; otherwise, <c>null</c>.</returns>
         public IPEndPoint[] GetServerList( EServerType type )
         {
-            TcpPacket packet = this.GetRawServerList( type );
+            TcpPacket packet = this.GetRawServerList( ( byte )type );
 
             if ( packet == null )
                 return null;
@@ -49,6 +49,11 @@ namespace SteamKit2
 
         protected TcpPacket GetRawServerList( EServerType type, params object[] args )
         {
+            return this.GetRawServerList( ( byte )type, args );
+        }
+
+        protected TcpPacket GetRawServerList( byte commandOrType, params object[] args )
+        {
 
             try
             {
@@ -61,7 +66,7 @@ namespace SteamKit2
                     return null;
                 }
 
-                bool bRet = this.SendCommand( ( byte )type, args );
+                bool bRet = this.SendCommand( commandOrType, args );
 
                 if ( !bRet )
                 {
