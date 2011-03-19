@@ -1480,14 +1480,14 @@ namespace SteamKit2
 		}
 	}
 
-	public class MsgClientGamesPlayed : ISteamSerializableMessage
+	public class MsgClientGamesPlayedWithDataBlob : ISteamSerializableMessage
 	{
 		public EMsg GetEMsg() { return EMsg.ClientGamesPlayedWithDataBlob; }
 
 		// Static size: 0
 		public CMsgClientGamesPlayed Proto { get; set; }
 
-		public MsgClientGamesPlayed()
+		public MsgClientGamesPlayedWithDataBlob()
 		{
 			Proto = new CMsgClientGamesPlayed();
 		}
@@ -1530,44 +1530,10 @@ namespace SteamKit2
 	{
 		public EMsg GetEMsg() { return EMsg.ClientFriendMsg; }
 
-		// Static size: 8
-		private ulong steamID;
-		public SteamID SteamID { get { return new SteamID( steamID ); } set { steamID = value.ConvertToUint64(); } }
-		// Static size: 4
-		public EChatEntryType EntryType { get; set; }
-
-		public MsgClientFriendMsg()
-		{
-			steamID = 0;
-			EntryType = EChatEntryType.Invalid;
-		}
-
-		public void Serialize(Stream stream)
-		{
-			BinaryWriterEx bw = new BinaryWriterEx( stream );
-
-			bw.Write( steamID );
-			bw.Write( (int)EntryType );
-
-		}
-
-		public void Deserialize( Stream stream )
-		{
-			BinaryReaderEx br = new BinaryReaderEx( stream );
-
-			steamID = br.ReadUInt64();
-			EntryType = (EChatEntryType)br.ReadInt32();
-		}
-	}
-
-	public class MsgClientFriendMsgProto : ISteamSerializableMessage
-	{
-		public EMsg GetEMsg() { return EMsg.ClientFriendMsg; }
-
 		// Static size: 0
 		public CMsgClientFriendMsg Proto { get; set; }
 
-		public MsgClientFriendMsgProto()
+		public MsgClientFriendMsg()
 		{
 			Proto = new CMsgClientFriendMsg();
 		}
@@ -1587,54 +1553,10 @@ namespace SteamKit2
 	{
 		public EMsg GetEMsg() { return EMsg.ClientFriendMsgIncoming; }
 
-		// Static size: 8
-		private ulong steamID;
-		public SteamID SteamID { get { return new SteamID( steamID ); } set { steamID = value.ConvertToUint64(); } }
-		// Static size: 4
-		public EChatEntryType EntryType { get; set; }
-		// Static size: 4
-		public int FromLimitedAccount { get; set; }
-		// Static size: 4
-		public int MessageSize { get; set; }
-
-		public MsgClientFriendMsgIncoming()
-		{
-			steamID = 0;
-			EntryType = EChatEntryType.Invalid;
-			FromLimitedAccount = 0;
-			MessageSize = 0;
-		}
-
-		public void Serialize(Stream stream)
-		{
-			BinaryWriterEx bw = new BinaryWriterEx( stream );
-
-			bw.Write( steamID );
-			bw.Write( (int)EntryType );
-			bw.Write( FromLimitedAccount );
-			bw.Write( MessageSize );
-
-		}
-
-		public void Deserialize( Stream stream )
-		{
-			BinaryReaderEx br = new BinaryReaderEx( stream );
-
-			steamID = br.ReadUInt64();
-			EntryType = (EChatEntryType)br.ReadInt32();
-			FromLimitedAccount = br.ReadInt32();
-			MessageSize = br.ReadInt32();
-		}
-	}
-
-	public class MsgClientFriendMsgIncomingProto : ISteamSerializableMessage
-	{
-		public EMsg GetEMsg() { return EMsg.ClientFriendMsgIncoming; }
-
 		// Static size: 0
 		public CMsgClientFriendMsgIncoming Proto { get; set; }
 
-		public MsgClientFriendMsgIncomingProto()
+		public MsgClientFriendMsgIncoming()
 		{
 			Proto = new CMsgClientFriendMsgIncoming();
 		}
