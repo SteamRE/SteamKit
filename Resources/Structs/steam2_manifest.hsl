@@ -1,0 +1,57 @@
+
+#include "standard-types.hsl"
+
+typedef long int32;
+typedef unsigned long uint32;
+
+#pragma maxarray( 0xFFFF )
+#pragma displayname( "Steam2 Content Manifest" )
+#pragma byteorder( little_endian )
+
+#pragma hide()
+typedef struct tManifestDirectoryEntry
+{
+	uint32 NameOffset; // the offset after DirEntries where the name of this entry begins
+	uint32 ItemSize; // final file size of the item (used when decompressing)
+	int32 FileID; // or -1 if this is not a file
+	uint32 DirectoryType; // if 0 this is a directory, not a file
+	uint32 ParentIndex; // the index in the DirEntries array that relates to this entry's parent
+	uint32 NextIndex;
+	uint32 FirstIndex;
+} ManifestDirectoryEntry;
+
+typedef struct tManifestHeader
+{
+	uint32 Unk1;
+	uint32 DepotID;
+	uint32 DepotVersion;
+	uint32 NumItems; // number of directory entries in this manifest
+	uint32 NumFiles; // number of actual files in this manifest
+	uint32 BlockSize;
+	uint32 DirSize; // the size of the directory entry list
+	uint32 DirNameSize; // the size of all of the directory entry names
+	
+	// everything here is unknown
+	uint32 Info1Count;
+	uint32 CopyCount;
+	uint32 LocalCount;
+	uint32 Unk2;
+	uint32 Unk3;
+	uint32 DepotChecksum;
+	
+	ManifestDirectoryEntry DirEntries[ NumItems ];
+} ManifestHeader;
+
+
+#pragma show()
+struct Manifest
+{
+
+	#pragma lockAt( 0 )
+	ManifestHeader Header;
+	
+	// the directory names follow the header
+	
+	// after the directory names the rest is unknown data
+	
+};
