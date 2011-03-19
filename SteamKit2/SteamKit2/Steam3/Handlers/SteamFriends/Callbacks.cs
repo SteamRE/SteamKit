@@ -250,16 +250,6 @@ namespace SteamKit2
             public string Message { get; private set; }
 
 
-            internal FriendMsgCallback( MsgClientFriendMsgIncoming msg, byte[] msgData )
-            {
-                this.Sender = msg.SteamID;
-                this.EntryType = msg.EntryType;
-
-                this.FromLimitedAccount = ( msg.FromLimitedAccount == 1 );
-
-                this.Message = Encoding.UTF8.GetString( msgData, 0, msgData.Length - 1 );
-            }
-
             internal FriendMsgCallback( CMsgClientFriendMsgIncoming msg )
             {
                 this.Sender = msg.steamid_from;
