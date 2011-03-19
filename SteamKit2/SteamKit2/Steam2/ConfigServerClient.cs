@@ -24,12 +24,54 @@ namespace SteamKit2
         {
         }
 
+
+#if false
+        // v0v
+        public byte[] GetUnk()
+        {
+            if ( !this.HandshakeServer( EServerType.ConfigServer ) )
+                return null;
+
+            uint externalIp = this.Socket.Reader.ReadUInt32();
+
+            if ( !this.SendCommand( 7 ) ) // command: who knows!
+                return null;
+
+            return this.Socket.Reader.ReadBytes( 9 );
+
+        }
+#endif
+
+        public byte[] GetNetworkKey()
+        {
+            if ( !this.HandshakeServer( EServerType.ConfigServer ) )
+                return null;
+
+            uint externalIp = this.Socket.Reader.ReadUInt32();
+
+            if ( !this.SendCommand( 4 ) ) // command: get network key
+                return null;
+
+            ushort keyLen = NetHelpers.EndianSwap( this.Socket.Reader.ReadUInt16() );
+            byte[] key = this.Socket.Reader.ReadBytes( keyLen );
+
+            ushort sigLen = NetHelpers.EndianSwap( this.Socket.Reader.ReadUInt16() );
+            byte[] signature = this.Socket.Reader.ReadBytes( sigLen );
+
+            return key;
+        }
+
+
+        public byte[] GetContentDescriptionRecord()
+        {
+            return this.GetContentDescriptionRecord( null );
+        }
         /// <summary>
         /// Gets the current content description record (CDR) provided by the config server.
-        /// Accepts an old CDR hash in order to determine if a new CDR should be downloaded or not.
+        /// Optionally accepts an old CDR hash in order to determine if a new CDR should be downloaded or not.
         /// The old CDR hash is a SHA-1 hash of the entire CDR payload.
         /// </summary>
-        /// <param name="oldCDRHash">The old CDR hash.</param>
+        /// <param name="oldCDRHash">An optional CDR hash.</param>
         /// <returns>A byte blob representing the CDR on success; otherwise, null.</returns>
         public byte[] GetContentDescriptionRecord( byte[] oldCDRHash )
         {
