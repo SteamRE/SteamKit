@@ -81,7 +81,7 @@ namespace SteamKit2
         /// <summary>
         /// This callback is returned in response to a log off attempt, or when the client is told to log off by the server.
         /// </summary>
-        public class LogOffCallback : CallbackMsg
+        public sealed class LogOffCallback : CallbackMsg
         {
             /// <summary>
             /// Gets the result of the log off.
@@ -102,7 +102,7 @@ namespace SteamKit2
         /// <summary>
         /// This callback is returned in response to a log on attempt. After this callback it is safe to change the client persona state to online.
         /// </summary>
-        public class LoginKeyCallback : CallbackMsg
+        public sealed class LoginKeyCallback : CallbackMsg
         {
             /// <summary>
             /// Gets the login key.
@@ -119,6 +119,16 @@ namespace SteamKit2
             {
                 this.LoginKey = logKey.LoginKey;
                 this.UniqueID = logKey.UniqueID;
+            }
+        }
+
+        public sealed class SessionTokenCallback : CallbackMsg
+        {
+            public ulong SessionToken { get; private set; }
+
+            internal SessionTokenCallback( CMsgClientSessionToken msg )
+            {
+                this.SessionToken = msg.token;
             }
         }
     }

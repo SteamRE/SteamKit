@@ -129,5 +129,20 @@ namespace SteamKit2
             }
         }
 
+        public sealed class AppOwnershipTicketCallback : CallbackMsg
+        {
+            public EResult Result { get; private set; }
+
+            public uint AppID { get; private set; }
+            public byte[] Ticket { get; private set; }
+
+            internal AppOwnershipTicketCallback( CMsgClientGetAppOwnershipTicketResponse msg )
+            {
+                this.Result = ( EResult )msg.eresult;
+                this.AppID = msg.app_id;
+                this.Ticket = msg.ticket;
+            }
+        }
+
     }
 }

@@ -91,12 +91,16 @@ namespace SteamKit2
             logon.Msg.Proto.client_language = "english";
             logon.Msg.Proto.rtime32_account_creation = creationTime.ToUnixTime();
 
-            logon.Msg.Proto.cell_id = 1; // reported cell id, not always 1.
+            // because steamkit doesn't attempt to find the best cellid
+            // we'll just use the default one
+            // this is really only relevant for steam2, so it's a mystery as to why steam3 wants to know
+            logon.Msg.Proto.cell_id = 0;
 
             // this is not a proper client package version that Steam will allow
             logon.Msg.Proto.client_package_version = 10 /* our version, we'll increase it whenever */ | 0xFF000000; // steamkit's version mask
 
             // this is not a proper machine id that Steam accepts
+            // but it's good enough for identifying a machine
             logon.Msg.Proto.machine_id = Utils.GenerateMachineID();
 
             logon.Msg.Proto.email_address = details.AccRecord.GetStringDescriptor( AuthFields.eFieldEmail );
@@ -148,13 +152,46 @@ namespace SteamKit2
                 case EMsg.ClientNewLoginKey:
                     HandleLoginKey( e );
                     break;
+
+                case EMsg.ClientSessionToken:
+                    HandleSessionToken( e );
+                    break;
             }
         }
 
 
+        #region ClientMsg Handlers
+        void HandleSessionToken( ClientMsgEventArgs e )
+        {
+            var sessToken = new ClientMsgProtobuf<MsgClientSessionToken>();
+
+            try
+            {
+                sessToken.SetData( e.Data );
+            }
+            catch ( Exception ex )
+            {
+                DebugLog.WriteLine( "SteamUser", "HandleSessionToken encountered an exception while reading client msg.\n{0}", ex.ToString() );
+                return;
+            }
+
+            var callback = new SessionTokenCallback( sessToken.Msg.Proto );
+            this.Client.PostCallback( callback );
+        }
+
         void HandleLoginKey( ClientMsgEventArgs e )
         {
-            var loginKey = new ClientMsg<MsgClientNewLoginKey, ExtendedClientMsgHdr>( e.Data );
+            var loginKey = new ClientMsg<MsgClientNewLoginKey, ExtendedClientMsgHdr>();
+
+            try
+            {
+                loginKey.SetData( e.Data );
+            }
+            catch ( Exception ex )
+            {
+                DebugLog.WriteLine( "SteamUser", "HandleLoginKey encountered an exception while reading client msg.\n{0}", ex.ToString() );
+                return;
+            }
 
             var resp = new ClientMsg<MsgClientNewLoginKeyAccepted, ExtendedClientMsgHdr>();
             resp.Msg.UniqueID = loginKey.Msg.UniqueID;
@@ -164,15 +201,27 @@ namespace SteamKit2
             var callback = new LoginKeyCallback( loginKey.Msg );
             this.Client.PostCallback( callback );
         }
+
         void HandleLogOnResponse( ClientMsgEventArgs e )
         {
             if ( e.IsProto )
             {
-                var logonResp = new ClientMsgProtobuf<MsgClientLogOnResponse>( e.Data );
+                var logonResp = new ClientMsgProtobuf<MsgClientLogOnResponse>();
+
+                try
+                {
+                    logonResp.SetData( e.Data );
+                }
+                catch ( Exception ex )
+                {
+                    DebugLog.WriteLine( "SteamUser", "HandleLogOnResponse encountered an exception while reading client msg.\n{0}", ex.ToString() );
+                    return;
+                }
 
                 var callback = new LogOnCallback( logonResp.Msg.Proto );
                 this.Client.PostCallback( callback );
             }
         }
+        #endregion
     }
 }

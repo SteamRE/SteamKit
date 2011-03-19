@@ -26,6 +26,16 @@ namespace SteamKit2
         {
         }
 
+
+        public void GetAppOwnershipTicket( uint appid )
+        {
+            var request = new ClientMsgProtobuf<MsgClientGetAppOwnershipTicket>();
+
+            request.Msg.Proto.app_id = appid;
+
+            this.Client.Send( request );
+        }
+
         /// <summary>
         /// Handles a client message. This should not be called directly.
         /// </summary>
@@ -38,11 +48,34 @@ namespace SteamKit2
                     HandleLicenseList( e );
                     break;
 
+                case EMsg.ClientGetAppOwnershipTicketResponse:
+                    HandleAppOwnershipTicketResponse( e );
+                    break;
+
             }
         }
 
 
+
         #region ClientMsg Handlers
+        void HandleAppOwnershipTicketResponse( ClientMsgEventArgs e )
+        {
+            var ticketResponse = new ClientMsgProtobuf<MsgClientGetAppOwnershipTicketResponse>();
+
+            try
+            {
+                ticketResponse.SetData( e.Data );
+            }
+            catch ( Exception ex )
+            {
+                DebugLog.WriteLine( "SteamApps", "HandleAppOwnershipTicketResponse encountered an exception while reading client msg.\n{0}", ex.ToString() );
+                return;
+            }
+
+            var callback = new AppOwnershipTicketCallback( ticketResponse.Msg.Proto );
+            this.Client.PostCallback( callback );
+        }
+
         void HandleLicenseList( ClientMsgEventArgs e )
         {
             var licenseList = new ClientMsgProtobuf<MsgClientLicenseList>();
@@ -53,7 +86,7 @@ namespace SteamKit2
             }
             catch ( Exception ex )
             {
-                DebugLog.WriteLine( "SteamApps", "HandleLicenseList encounter an exception while reading client msg.\n{0}", ex.ToString() );
+                DebugLog.WriteLine( "SteamApps", "HandleLicenseList encountered an exception while reading client msg.\n{0}", ex.ToString() );
                 return;
             }
 
