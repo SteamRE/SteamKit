@@ -218,3 +218,15 @@ class MsgClientP2PIntroducerMessage<EMsg::ClientP2PIntroducerMessage>
 	byte<1450> data;
 	uint dataLen;
 };
+
+class MsgClientFromGC<EMsg::ClientFromGC>
+{
+	uint appId;
+	uint GCEMsg;
+};
+
+class MsgClientToGC<EMsg::ClientToGC>
+{
+	uint appId;
+	uint GCEMsg;
+};
