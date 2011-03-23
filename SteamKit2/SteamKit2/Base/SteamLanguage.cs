@@ -1998,4 +1998,70 @@ namespace SteamKit2
 		}
 	}
 
+	public class MsgClientFromGC : ISteamSerializableMessage
+	{
+		public EMsg GetEMsg() { return EMsg.ClientFromGC; }
+
+		// Static size: 4
+		public uint AppId { get; set; }
+		// Static size: 4
+		public uint GCEMsg { get; set; }
+
+		public MsgClientFromGC()
+		{
+			AppId = 0;
+			GCEMsg = 0;
+		}
+
+		public void Serialize(Stream stream)
+		{
+			BinaryWriterEx bw = new BinaryWriterEx( stream );
+
+			bw.Write( AppId );
+			bw.Write( GCEMsg );
+
+		}
+
+		public void Deserialize( Stream stream )
+		{
+			BinaryReaderEx br = new BinaryReaderEx( stream );
+
+			AppId = br.ReadUInt32();
+			GCEMsg = br.ReadUInt32();
+		}
+	}
+
+	public class MsgClientToGC : ISteamSerializableMessage
+	{
+		public EMsg GetEMsg() { return EMsg.ClientToGC; }
+
+		// Static size: 4
+		public uint AppId { get; set; }
+		// Static size: 4
+		public uint GCEMsg { get; set; }
+
+		public MsgClientToGC()
+		{
+			AppId = 0;
+			GCEMsg = 0;
+		}
+
+		public void Serialize(Stream stream)
+		{
+			BinaryWriterEx bw = new BinaryWriterEx( stream );
+
+			bw.Write( AppId );
+			bw.Write( GCEMsg );
+
+		}
+
+		public void Deserialize( Stream stream )
+		{
+			BinaryReaderEx br = new BinaryReaderEx( stream );
+
+			AppId = br.ReadUInt32();
+			GCEMsg = br.ReadUInt32();
+		}
+	}
+
 }

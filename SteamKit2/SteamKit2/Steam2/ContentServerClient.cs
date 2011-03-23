@@ -158,7 +158,7 @@ namespace SteamKit2
                     depotVersion,
                     ( ushort )credentials.ServerTGT.Length,
                     credentials.ServerTGT,
-                    credentials.SessionToken,
+                    NetHelpers.EndianSwap( credentials.SessionToken ),
                     ( byte )credentials.AppTicket.Length,
                     credentials.AppTicket
                 );
