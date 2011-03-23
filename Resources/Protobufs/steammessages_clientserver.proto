@@ -76,6 +76,9 @@ message CMsgClientLogon {
 	optional int32 eresult_sentryfile = 82;
 	optional bytes sha_sentryfile = 83;
 	optional string auth_code = 84;
+	optional int32 otp_type = 85;
+	optional uint32 otp_value = 86;
+	optional string otp_identifier = 87;
 }
 
 message CMsgClientLogonResponse {
@@ -85,6 +88,7 @@ message CMsgClientLogonResponse {
 	optional uint32 public_ip = 4;
 	optional fixed32 rtime32_server_time = 5;
 	optional uint32 account_flags = 6;
+	optional string email_domain = 8;
 	optional fixed64 client_supplied_steamid = 20;
 }
 
@@ -304,6 +308,9 @@ message CMsgClientAccountInfo {
 	optional string ip_country = 2;
 	optional bytes salt_password = 3;
 	optional bytes sha_digest_Password = 4;
+	optional int32 count_authed_computers = 5;
+	optional bool locked_with_ipt = 6;
+	optional uint32 account_flags = 7;
 }
 
 message CMsgClientAppMinutesPlayedData {
@@ -820,7 +827,8 @@ message CMsgClientUFSUploadFileRequest {
 	optional bytes sha_file = 4;
 	optional uint64 time_stamp = 5;
 	optional string file_name = 6;
-	optional uint32 platforms_to_sync = 7;
+	optional uint32 platforms_to_sync_deprecated = 7;
+	optional uint32 platforms_to_sync = 8 [default = 4294967295];
 }
 
 message CMsgClientUFSUploadFileResponse {
@@ -1085,6 +1093,17 @@ message CMsgClientUCMAddScreenshotResponse {
 	optional fixed64 screenshotid = 2 [default = 18446744073709551615];
 }
 
+message CMsgClientUCMDeleteScreenshot {
+	optional fixed64 screenshotid = 1 [default = 18446744073709551615];
+}
+
+message CMsgClientUCMDeleteScreenshotResponse {
+	optional int32 eresult = 1 [default = 2];
+}
+
+message CMsgClientScreenshotsChanged {
+}
+
 message CMsgClientUpdateUserGameInfo {
 	optional fixed64 steamid_idgs = 1;
 	optional fixed64 gameid = 2;
@@ -1156,13 +1175,13 @@ message CMsgClientUCMGetScreenshotListResponse {
 	repeated .CMsgClientUCMGetScreenshotListResponse.ScreenshotInfo screenshots = 3;
 }
 
-message CMsgClientReadSentryFile {
+message CMsgClientReadMachineAuth {
 	optional string filename = 1;
 	optional uint32 offset = 2;
 	optional uint32 cubtoread = 3;
 }
 
-message CMsgClientReadSentryFileResponse {
+message CMsgClientReadMachineAuthResponse {
 	optional string filename = 1;
 	optional uint32 eresult = 2;
 	optional uint32 filesize = 3;
@@ -1174,14 +1193,18 @@ message CMsgClientReadSentryFileResponse {
 	optional string filename_sentry = 9;
 }
 
-message CMsgClientUpdateSentryFile {
+message CMsgClientUpdateMachineAuth {
 	optional string filename = 1;
 	optional uint32 offset = 2;
 	optional uint32 cubtowrite = 3;
 	optional bytes bytes = 4;
+	optional uint32 otp_type = 5;
+	optional string otp_identifier = 6;
+	optional bytes otp_sharedsecret = 7;
+	optional uint32 otp_timedrift = 8;
 }
 
-message CMsgClientUpdateSentryFileResponse {
+message CMsgClientUpdateMachineAuthResponse {
 	optional string filename = 1;
 	optional uint32 eresult = 2;
 	optional uint32 filesize = 3;
@@ -1189,17 +1212,70 @@ message CMsgClientUpdateSentryFileResponse {
 	optional uint32 getlasterror = 5;
 	optional uint32 offset = 6;
 	optional uint32 cubwrote = 7;
+	optional int32 otp_type = 8;
+	optional uint32 otp_value = 9;
+	optional string otp_identifier = 10;
 }
 
-message CMsgClientRequestSentryFile {
+message CMsgClientRequestMachineAuth {
 	optional string filename = 1;
 	optional uint32 eresult_sentryfile = 2;
 	optional uint32 filesize = 3;
 	optional bytes sha_sentryfile = 4;
 	optional int32 lock_account_action = 6;
+	optional uint32 otp_type = 7;
+	optional string otp_identifier = 8;
+	optional bytes otp_sharedsecret = 9;
+	optional uint32 otp_value = 10;
 }
 
-message CMsgClientRequestSentryFileResponse {
+message CMsgClientRequestMachineAuthResponse {
 	optional uint32 eresult = 1;
+}
+
+message CMsgClientRegisterKey {
+	optional string key = 1;
+}
+
+message CMsgClientPurchaseResponse {
+	optional int32 eresult = 1 [default = 2];
+	optional int32 purchase_result_details = 2;
+	optional bytes purchase_receipt_info = 3;
+}
+
+message CMsgClientActivateOEMLicense {
+	optional string bios_manufacturer = 1;
+	optional string bios_serialnumber = 2;
+	optional bytes license_file = 3;
+}
+
+message CMsgClientPurchaseWithMachineID {
+	optional uint32 package_id = 1;
+	optional bytes machine_info = 2;
+}
+
+message CMsgTrading_InitiateTradeRequest {
+	optional uint32 trade_request_id = 1;
+	optional uint64 other_steamid = 2;
+	optional string other_name = 3;
+}
+
+message CMsgTrading_InitiateTradeResponse {
+	optional uint32 response = 1;
+	optional uint32 trade_request_id = 2;
+}
+
+message CMsgTrading_StartSession {
+}
+
+message CMsgClientEmailChange {
+	optional string password = 1;
+	optional string email = 2;
+	optional string code = 3;
+	optional bool final = 4;
+}
+
+message CMsgClientEmailChangeResponse {
+	optional int32 eresult = 1 [default = 2];
 }
 
