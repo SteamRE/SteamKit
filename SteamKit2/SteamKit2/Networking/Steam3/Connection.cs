@@ -64,7 +64,7 @@ namespace SteamKit2
 
             new IPEndPoint( IPAddress.Parse( "69.28.145.170" ), 27017 ),
             new IPEndPoint( IPAddress.Parse( "69.28.145.171" ), 27017 ),
-            new IPEndPoint( IPAddress.Parse(  "69.28.145.172" ), 27017 ),
+            new IPEndPoint( IPAddress.Parse( "69.28.145.172" ), 27017 ),
             new IPEndPoint( IPAddress.Parse( "69.28.156.250" ), 27017 ),
 
             new IPEndPoint( IPAddress.Parse( "72.165.61.185" ), 27017 ),

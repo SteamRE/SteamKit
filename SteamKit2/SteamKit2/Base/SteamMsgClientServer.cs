@@ -42,7 +42,7 @@ namespace SteamKit2
 
     private ulong _steamID = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steamID", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong steamID
     {
       get { return _steamID; }
@@ -51,7 +51,7 @@ namespace SteamKit2
 
     private bool _subscribe = default(bool);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"subscribe", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
+    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
     public bool subscribe
     {
       get { return _subscribe; }
@@ -75,7 +75,7 @@ namespace SteamKit2
 
     private ulong _steamid_remote = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steamid_remote", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong steamid_remote
     {
       get { return _steamid_remote; }
@@ -84,7 +84,7 @@ namespace SteamKit2
 
     private int _appid = default(int);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"appid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int appid
     {
       get { return _appid; }
@@ -103,7 +103,7 @@ namespace SteamKit2
 
     private ulong _steamid_remote = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steamid_remote", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong steamid_remote
     {
       get { return _steamid_remote; }
@@ -112,7 +112,7 @@ namespace SteamKit2
 
     private int _appid = default(int);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"appid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int appid
     {
       get { return _appid; }
@@ -121,7 +121,7 @@ namespace SteamKit2
 
     private int _session_length_sec = default(int);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"session_length_sec", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int session_length_sec
     {
       get { return _session_length_sec; }
@@ -130,7 +130,7 @@ namespace SteamKit2
 
     private int _session_error = default(int);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"session_error", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int session_error
     {
       get { return _session_error; }
@@ -139,7 +139,7 @@ namespace SteamKit2
 
     private int _nattype = default(int);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"nattype", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int nattype
     {
       get { return _nattype; }
@@ -148,7 +148,7 @@ namespace SteamKit2
 
     private int _bytes_recv = default(int);
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"bytes_recv", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int bytes_recv
     {
       get { return _bytes_recv; }
@@ -157,7 +157,7 @@ namespace SteamKit2
 
     private int _bytes_sent = default(int);
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"bytes_sent", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int bytes_sent
     {
       get { return _bytes_sent; }
@@ -166,7 +166,7 @@ namespace SteamKit2
 
     private int _bytes_sent_relay = default(int);
     [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"bytes_sent_relay", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int bytes_sent_relay
     {
       get { return _bytes_sent_relay; }
@@ -175,7 +175,7 @@ namespace SteamKit2
 
     private int _bytes_recv_relay = default(int);
     [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"bytes_recv_relay", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int bytes_recv_relay
     {
       get { return _bytes_recv_relay; }
@@ -184,7 +184,7 @@ namespace SteamKit2
 
     private int _time_to_connect_ms = default(int);
     [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"time_to_connect_ms", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int time_to_connect_ms
     {
       get { return _time_to_connect_ms; }
@@ -203,7 +203,7 @@ namespace SteamKit2
 
     private uint _protocol_version = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"protocol_version", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint protocol_version
     {
       get { return _protocol_version; }
@@ -212,7 +212,7 @@ namespace SteamKit2
 
     private byte[] _ticket = null;
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"ticket", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
     public byte[] ticket
     {
       get { return _ticket; }
@@ -231,7 +231,7 @@ namespace SteamKit2
 
     private ulong _steam_id = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steam_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong steam_id
     {
       get { return _steam_id; }
@@ -240,7 +240,7 @@ namespace SteamKit2
 
     private ulong _game_id = default(ulong);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"game_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong game_id
     {
       get { return _game_id; }
@@ -249,7 +249,7 @@ namespace SteamKit2
 
     private uint _estate = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"estate", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint estate
     {
       get { return _estate; }
@@ -258,7 +258,7 @@ namespace SteamKit2
 
     private uint _eauth_session_response = default(uint);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"eauth_session_response", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint eauth_session_response
     {
       get { return _eauth_session_response; }
@@ -267,7 +267,7 @@ namespace SteamKit2
 
     private byte[] _DEPRECATED_ticket = null;
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"DEPRECATED_ticket", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
     public byte[] DEPRECATED_ticket
     {
       get { return _DEPRECATED_ticket; }
@@ -276,7 +276,7 @@ namespace SteamKit2
 
     private uint _ticket_crc = default(uint);
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"ticket_crc", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint ticket_crc
     {
       get { return _ticket_crc; }
@@ -285,7 +285,7 @@ namespace SteamKit2
 
     private uint _ticket_sequence = default(uint);
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"ticket_sequence", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint ticket_sequence
     {
       get { return _ticket_sequence; }
@@ -304,7 +304,7 @@ namespace SteamKit2
 
     private uint _protocol_version = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"protocol_version", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint protocol_version
     {
       get { return _protocol_version; }
@@ -313,7 +313,7 @@ namespace SteamKit2
 
     private uint _obfustucated_private_ip = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"obfustucated_private_ip", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint obfustucated_private_ip
     {
       get { return _obfustucated_private_ip; }
@@ -322,7 +322,7 @@ namespace SteamKit2
 
     private uint _cell_id = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"cell_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint cell_id
     {
       get { return _cell_id; }
@@ -331,7 +331,7 @@ namespace SteamKit2
 
     private uint _last_session_id = default(uint);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"last_session_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint last_session_id
     {
       get { return _last_session_id; }
@@ -340,7 +340,7 @@ namespace SteamKit2
 
     private uint _client_package_version = default(uint);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"client_package_version", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint client_package_version
     {
       get { return _client_package_version; }
@@ -349,7 +349,7 @@ namespace SteamKit2
 
     private string _client_language = "";
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"client_language", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string client_language
     {
       get { return _client_language; }
@@ -358,7 +358,7 @@ namespace SteamKit2
 
     private uint _client_os_type = default(uint);
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"client_os_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint client_os_type
     {
       get { return _client_os_type; }
@@ -367,7 +367,7 @@ namespace SteamKit2
 
     private bool _should_remember_password = (bool)false;
     [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"should_remember_password", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue((bool)false)]
+    [global::ProtoBuf.ProtoDefaultValue((bool)false)]
     public bool should_remember_password
     {
       get { return _should_remember_password; }
@@ -376,7 +376,7 @@ namespace SteamKit2
 
     private string _wine_version = "";
     [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"wine_version", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string wine_version
     {
       get { return _wine_version; }
@@ -385,7 +385,7 @@ namespace SteamKit2
 
     private uint _public_ip = default(uint);
     [global::ProtoBuf.ProtoMember(20, IsRequired = false, Name=@"public_ip", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint public_ip
     {
       get { return _public_ip; }
@@ -394,7 +394,7 @@ namespace SteamKit2
 
     private uint _qos_level = default(uint);
     [global::ProtoBuf.ProtoMember(21, IsRequired = false, Name=@"qos_level", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint qos_level
     {
       get { return _qos_level; }
@@ -403,7 +403,7 @@ namespace SteamKit2
 
     private ulong _client_supplied_steam_id = default(ulong);
     [global::ProtoBuf.ProtoMember(22, IsRequired = false, Name=@"client_supplied_steam_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong client_supplied_steam_id
     {
       get { return _client_supplied_steam_id; }
@@ -412,7 +412,7 @@ namespace SteamKit2
 
     private byte[] _machine_id = null;
     [global::ProtoBuf.ProtoMember(30, IsRequired = false, Name=@"machine_id", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
     public byte[] machine_id
     {
       get { return _machine_id; }
@@ -421,7 +421,7 @@ namespace SteamKit2
 
     private byte[] _steam2_auth_ticket = null;
     [global::ProtoBuf.ProtoMember(41, IsRequired = false, Name=@"steam2_auth_ticket", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
     public byte[] steam2_auth_ticket
     {
       get { return _steam2_auth_ticket; }
@@ -430,7 +430,7 @@ namespace SteamKit2
 
     private string _email_address = "";
     [global::ProtoBuf.ProtoMember(42, IsRequired = false, Name=@"email_address", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string email_address
     {
       get { return _email_address; }
@@ -439,7 +439,7 @@ namespace SteamKit2
 
     private uint _rtime32_account_creation = default(uint);
     [global::ProtoBuf.ProtoMember(43, IsRequired = false, Name=@"rtime32_account_creation", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint rtime32_account_creation
     {
       get { return _rtime32_account_creation; }
@@ -448,7 +448,7 @@ namespace SteamKit2
 
     private string _account_name = "";
     [global::ProtoBuf.ProtoMember(50, IsRequired = false, Name=@"account_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string account_name
     {
       get { return _account_name; }
@@ -457,7 +457,7 @@ namespace SteamKit2
 
     private string _password = "";
     [global::ProtoBuf.ProtoMember(51, IsRequired = false, Name=@"password", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string password
     {
       get { return _password; }
@@ -466,7 +466,7 @@ namespace SteamKit2
 
     private string _login_key = "";
     [global::ProtoBuf.ProtoMember(60, IsRequired = false, Name=@"login_key", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string login_key
     {
       get { return _login_key; }
@@ -475,7 +475,7 @@ namespace SteamKit2
 
     private byte[] _sony_psn_ticket = null;
     [global::ProtoBuf.ProtoMember(90, IsRequired = false, Name=@"sony_psn_ticket", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
     public byte[] sony_psn_ticket
     {
       get { return _sony_psn_ticket; }
@@ -484,7 +484,7 @@ namespace SteamKit2
 
     private string _sony_psn_service_id = "";
     [global::ProtoBuf.ProtoMember(91, IsRequired = false, Name=@"sony_psn_service_id", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string sony_psn_service_id
     {
       get { return _sony_psn_service_id; }
@@ -493,7 +493,7 @@ namespace SteamKit2
 
     private bool _create_new_psn_linked_account_if_needed = (bool)false;
     [global::ProtoBuf.ProtoMember(92, IsRequired = false, Name=@"create_new_psn_linked_account_if_needed", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue((bool)false)]
+    [global::ProtoBuf.ProtoDefaultValue((bool)false)]
     public bool create_new_psn_linked_account_if_needed
     {
       get { return _create_new_psn_linked_account_if_needed; }
@@ -502,7 +502,7 @@ namespace SteamKit2
 
     private string _sony_psn_name = "";
     [global::ProtoBuf.ProtoMember(93, IsRequired = false, Name=@"sony_psn_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string sony_psn_name
     {
       get { return _sony_psn_name; }
@@ -511,7 +511,7 @@ namespace SteamKit2
 
     private bool _was_converted_deprecated_msg = (bool)false;
     [global::ProtoBuf.ProtoMember(70, IsRequired = false, Name=@"was_converted_deprecated_msg", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue((bool)false)]
+    [global::ProtoBuf.ProtoDefaultValue((bool)false)]
     public bool was_converted_deprecated_msg
     {
       get { return _was_converted_deprecated_msg; }
@@ -520,7 +520,7 @@ namespace SteamKit2
 
     private string _anon_user_target_account_name = "";
     [global::ProtoBuf.ProtoMember(80, IsRequired = false, Name=@"anon_user_target_account_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string anon_user_target_account_name
     {
       get { return _anon_user_target_account_name; }
@@ -529,7 +529,7 @@ namespace SteamKit2
 
     private ulong _resolved_user_steam_id = default(ulong);
     [global::ProtoBuf.ProtoMember(81, IsRequired = false, Name=@"resolved_user_steam_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong resolved_user_steam_id
     {
       get { return _resolved_user_steam_id; }
@@ -538,7 +538,7 @@ namespace SteamKit2
 
     private int _eresult_sentryfile = default(int);
     [global::ProtoBuf.ProtoMember(82, IsRequired = false, Name=@"eresult_sentryfile", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int eresult_sentryfile
     {
       get { return _eresult_sentryfile; }
@@ -547,7 +547,7 @@ namespace SteamKit2
 
     private byte[] _sha_sentryfile = null;
     [global::ProtoBuf.ProtoMember(83, IsRequired = false, Name=@"sha_sentryfile", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
     public byte[] sha_sentryfile
     {
       get { return _sha_sentryfile; }
@@ -556,7 +556,7 @@ namespace SteamKit2
 
     private string _auth_code = "";
     [global::ProtoBuf.ProtoMember(84, IsRequired = false, Name=@"auth_code", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string auth_code
     {
       get { return _auth_code; }
@@ -565,7 +565,7 @@ namespace SteamKit2
 
     private int _otp_type = default(int);
     [global::ProtoBuf.ProtoMember(85, IsRequired = false, Name=@"otp_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int otp_type
     {
       get { return _otp_type; }
@@ -574,7 +574,7 @@ namespace SteamKit2
 
     private uint _otp_value = default(uint);
     [global::ProtoBuf.ProtoMember(86, IsRequired = false, Name=@"otp_value", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint otp_value
     {
       get { return _otp_value; }
@@ -583,7 +583,7 @@ namespace SteamKit2
 
     private string _otp_identifier = "";
     [global::ProtoBuf.ProtoMember(87, IsRequired = false, Name=@"otp_identifier", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string otp_identifier
     {
       get { return _otp_identifier; }
@@ -602,7 +602,7 @@ namespace SteamKit2
 
     private int _eresult = (int)2;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"eresult", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue((int)2)]
+    [global::ProtoBuf.ProtoDefaultValue((int)2)]
     public int eresult
     {
       get { return _eresult; }
@@ -611,7 +611,7 @@ namespace SteamKit2
 
     private int _out_of_game_heartbeat_seconds = default(int);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"out_of_game_heartbeat_seconds", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int out_of_game_heartbeat_seconds
     {
       get { return _out_of_game_heartbeat_seconds; }
@@ -620,7 +620,7 @@ namespace SteamKit2
 
     private int _in_game_heartbeat_seconds = default(int);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"in_game_heartbeat_seconds", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int in_game_heartbeat_seconds
     {
       get { return _in_game_heartbeat_seconds; }
@@ -629,7 +629,7 @@ namespace SteamKit2
 
     private uint _public_ip = default(uint);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"public_ip", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint public_ip
     {
       get { return _public_ip; }
@@ -638,7 +638,7 @@ namespace SteamKit2
 
     private uint _rtime32_server_time = default(uint);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"rtime32_server_time", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint rtime32_server_time
     {
       get { return _rtime32_server_time; }
@@ -647,7 +647,7 @@ namespace SteamKit2
 
     private uint _account_flags = default(uint);
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"account_flags", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint account_flags
     {
       get { return _account_flags; }
@@ -656,7 +656,7 @@ namespace SteamKit2
 
     private string _email_domain = "";
     [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"email_domain", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string email_domain
     {
       get { return _email_domain; }
@@ -665,7 +665,7 @@ namespace SteamKit2
 
     private ulong _client_supplied_steamid = default(ulong);
     [global::ProtoBuf.ProtoMember(20, IsRequired = false, Name=@"client_supplied_steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong client_supplied_steamid
     {
       get { return _client_supplied_steamid; }
@@ -694,7 +694,7 @@ namespace SteamKit2
 
     private int _eresult = (int)2;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"eresult", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue((int)2)]
+    [global::ProtoBuf.ProtoDefaultValue((int)2)]
     public int eresult
     {
       get { return _eresult; }
@@ -737,7 +737,7 @@ namespace SteamKit2
 
     private ulong _steam_id_dest = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steam_id_dest", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong steam_id_dest
     {
       get { return _steam_id_dest; }
@@ -746,7 +746,7 @@ namespace SteamKit2
 
     private ulong _steam_id_src = default(ulong);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"steam_id_src", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong steam_id_src
     {
       get { return _steam_id_src; }
@@ -755,7 +755,7 @@ namespace SteamKit2
 
     private uint _app_id = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"app_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint app_id
     {
       get { return _app_id; }
@@ -764,7 +764,7 @@ namespace SteamKit2
 
     private byte[] _candidate = null;
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"candidate", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
     public byte[] candidate
     {
       get { return _candidate; }
@@ -783,7 +783,7 @@ namespace SteamKit2
 
     private ulong _steam_id_dest = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steam_id_dest", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong steam_id_dest
     {
       get { return _steam_id_dest; }
@@ -792,7 +792,7 @@ namespace SteamKit2
 
     private ulong _steam_id_src = default(ulong);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"steam_id_src", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong steam_id_src
     {
       get { return _steam_id_src; }
@@ -801,7 +801,7 @@ namespace SteamKit2
 
     private uint _app_id = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"app_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint app_id
     {
       get { return _app_id; }
@@ -810,7 +810,7 @@ namespace SteamKit2
 
     private uint _ep2p_session_error = default(uint);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"ep2p_session_error", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint ep2p_session_error
     {
       get { return _ep2p_session_error; }
@@ -829,7 +829,7 @@ namespace SteamKit2
 
     private uint _app_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"app_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint app_id
     {
       get { return _app_id; }
@@ -848,7 +848,7 @@ namespace SteamKit2
 
     private uint _eresult = (uint)2;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"eresult", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue((uint)2)]
+    [global::ProtoBuf.ProtoDefaultValue((uint)2)]
     public uint eresult
     {
       get { return _eresult; }
@@ -857,7 +857,7 @@ namespace SteamKit2
 
     private uint _app_id = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"app_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint app_id
     {
       get { return _app_id; }
@@ -866,7 +866,7 @@ namespace SteamKit2
 
     private byte[] _ticket = null;
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"ticket", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
     public byte[] ticket
     {
       get { return _ticket; }
@@ -885,7 +885,7 @@ namespace SteamKit2
 
     private ulong _token = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"token", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong token
     {
       get { return _token; }
@@ -904,7 +904,7 @@ namespace SteamKit2
 
     private uint _max_tokens_to_keep = (uint)10;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"max_tokens_to_keep", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue((uint)10)]
+    [global::ProtoBuf.ProtoDefaultValue((uint)10)]
     public uint max_tokens_to_keep
     {
       get { return _max_tokens_to_keep; }
@@ -930,7 +930,7 @@ namespace SteamKit2
 
     private uint _app_id_served = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"app_id_served", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint app_id_served
     {
       get { return _app_id_served; }
@@ -939,7 +939,7 @@ namespace SteamKit2
 
     private uint _flags = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"flags", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint flags
     {
       get { return _flags; }
@@ -948,7 +948,7 @@ namespace SteamKit2
 
     private uint _game_ip_address = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"game_ip_address", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint game_ip_address
     {
       get { return _game_ip_address; }
@@ -957,7 +957,7 @@ namespace SteamKit2
 
     private uint _game_port = default(uint);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"game_port", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint game_port
     {
       get { return _game_port; }
@@ -966,7 +966,7 @@ namespace SteamKit2
 
     private string _game_dir = "";
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"game_dir", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string game_dir
     {
       get { return _game_dir; }
@@ -975,7 +975,7 @@ namespace SteamKit2
 
     private string _game_version = "";
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"game_version", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string game_version
     {
       get { return _game_version; }
@@ -984,7 +984,7 @@ namespace SteamKit2
 
     private uint _game_query_port = default(uint);
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"game_query_port", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint game_query_port
     {
       get { return _game_query_port; }
@@ -1003,7 +1003,7 @@ namespace SteamKit2
 
     private bool _is_secure = default(bool);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"is_secure", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
+    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
     public bool is_secure
     {
       get { return _is_secure; }
@@ -1034,7 +1034,7 @@ namespace SteamKit2
 
     private ulong _steam_id = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steam_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong steam_id
     {
       get { return _steam_id; }
@@ -1043,7 +1043,7 @@ namespace SteamKit2
 
     private uint _public_ip = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"public_ip", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint public_ip
     {
       get { return _public_ip; }
@@ -1052,7 +1052,7 @@ namespace SteamKit2
 
     private byte[] _token = null;
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"token", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
     public byte[] token
     {
       get { return _token; }
@@ -1076,7 +1076,7 @@ namespace SteamKit2
 
     private ulong _steam_id = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steam_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong steam_id
     {
       get { return _steam_id; }
@@ -1085,7 +1085,7 @@ namespace SteamKit2
 
     private uint _public_ip = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"public_ip", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint public_ip
     {
       get { return _public_ip; }
@@ -1094,7 +1094,7 @@ namespace SteamKit2
 
     private byte[] _token = null;
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"token", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
     public byte[] token
     {
       get { return _token; }
@@ -1113,7 +1113,7 @@ namespace SteamKit2
 
     private ulong _steam_id = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steam_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong steam_id
     {
       get { return _steam_id; }
@@ -1144,7 +1144,7 @@ namespace SteamKit2
 
     private ulong _steam_id_gs = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steam_id_gs", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong steam_id_gs
     {
       get { return _steam_id_gs; }
@@ -1153,7 +1153,7 @@ namespace SteamKit2
 
     private ulong _game_id = default(ulong);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"game_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong game_id
     {
       get { return _game_id; }
@@ -1162,7 +1162,7 @@ namespace SteamKit2
 
     private uint _game_ip_address = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"game_ip_address", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint game_ip_address
     {
       get { return _game_ip_address; }
@@ -1171,7 +1171,7 @@ namespace SteamKit2
 
     private uint _game_port = default(uint);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"game_port", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint game_port
     {
       get { return _game_port; }
@@ -1180,7 +1180,7 @@ namespace SteamKit2
 
     private bool _is_secure = default(bool);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"is_secure", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
+    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
     public bool is_secure
     {
       get { return _is_secure; }
@@ -1189,7 +1189,7 @@ namespace SteamKit2
 
     private byte[] _token = null;
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"token", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
     public byte[] token
     {
       get { return _token; }
@@ -1198,7 +1198,7 @@ namespace SteamKit2
 
     private string _game_extra_info = "";
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"game_extra_info", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string game_extra_info
     {
       get { return _game_extra_info; }
@@ -1207,7 +1207,7 @@ namespace SteamKit2
 
     private byte[] _game_data_blob = null;
     [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"game_data_blob", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
     public byte[] game_data_blob
     {
       get { return _game_data_blob; }
@@ -1216,7 +1216,7 @@ namespace SteamKit2
 
     private uint _process_id = default(uint);
     [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"process_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint process_id
     {
       get { return _process_id; }
@@ -1240,7 +1240,7 @@ namespace SteamKit2
 
     private ulong _steam_id = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steam_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong steam_id
     {
       get { return _steam_id; }
@@ -1259,7 +1259,7 @@ namespace SteamKit2
 
     private ulong _steam_id = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steam_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong steam_id
     {
       get { return _steam_id; }
@@ -1268,7 +1268,7 @@ namespace SteamKit2
 
     private int _edeny_reason = default(int);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"edeny_reason", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int edeny_reason
     {
       get { return _edeny_reason; }
@@ -1277,7 +1277,7 @@ namespace SteamKit2
 
     private string _deny_string = "";
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"deny_string", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string deny_string
     {
       get { return _deny_string; }
@@ -1296,7 +1296,7 @@ namespace SteamKit2
 
     private ulong _steam_id = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steam_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong steam_id
     {
       get { return _steam_id; }
@@ -1305,7 +1305,7 @@ namespace SteamKit2
 
     private int _edeny_reason = default(int);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"edeny_reason", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int edeny_reason
     {
       get { return _edeny_reason; }
@@ -1324,7 +1324,7 @@ namespace SteamKit2
 
     private uint _tokens_left = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"tokens_left", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint tokens_left
     {
       get { return _tokens_left; }
@@ -1333,7 +1333,7 @@ namespace SteamKit2
 
     private uint _last_request_seq = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"last_request_seq", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint last_request_seq
     {
       get { return _last_request_seq; }
@@ -1342,7 +1342,7 @@ namespace SteamKit2
 
     private uint _last_request_seq_from_server = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"last_request_seq_from_server", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint last_request_seq_from_server
     {
       get { return _last_request_seq_from_server; }
@@ -1368,7 +1368,7 @@ namespace SteamKit2
 
     private bool _bincremental = default(bool);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"bincremental", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
+    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
     public bool bincremental
     {
       get { return _bincremental; }
@@ -1389,7 +1389,7 @@ namespace SteamKit2
 
     private ulong _ulfriendid = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"ulfriendid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong ulfriendid
     {
       get { return _ulfriendid; }
@@ -1398,7 +1398,7 @@ namespace SteamKit2
 
     private uint _efriendrelationship = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"efriendrelationship", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint efriendrelationship
     {
       get { return _efriendrelationship; }
@@ -1422,7 +1422,7 @@ namespace SteamKit2
 
     private int _eresult = (int)2;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"eresult", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue((int)2)]
+    [global::ProtoBuf.ProtoDefaultValue((int)2)]
     public int eresult
     {
       get { return _eresult; }
@@ -1443,7 +1443,7 @@ namespace SteamKit2
 
     private uint _package_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"package_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint package_id
     {
       get { return _package_id; }
@@ -1452,7 +1452,7 @@ namespace SteamKit2
 
     private uint _time_created = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"time_created", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint time_created
     {
       get { return _time_created; }
@@ -1461,7 +1461,7 @@ namespace SteamKit2
 
     private uint _time_next_process = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"time_next_process", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint time_next_process
     {
       get { return _time_next_process; }
@@ -1470,7 +1470,7 @@ namespace SteamKit2
 
     private int _minute_limit = default(int);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"minute_limit", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int minute_limit
     {
       get { return _minute_limit; }
@@ -1479,7 +1479,7 @@ namespace SteamKit2
 
     private int _minutes_used = default(int);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"minutes_used", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int minutes_used
     {
       get { return _minutes_used; }
@@ -1488,7 +1488,7 @@ namespace SteamKit2
 
     private uint _payment_method = default(uint);
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"payment_method", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint payment_method
     {
       get { return _payment_method; }
@@ -1497,7 +1497,7 @@ namespace SteamKit2
 
     private uint _flags = default(uint);
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"flags", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint flags
     {
       get { return _flags; }
@@ -1506,7 +1506,7 @@ namespace SteamKit2
 
     private string _purchase_country_code = "";
     [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"purchase_country_code", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string purchase_country_code
     {
       get { return _purchase_country_code; }
@@ -1515,7 +1515,7 @@ namespace SteamKit2
 
     private uint _license_type = default(uint);
     [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"license_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint license_type
     {
       get { return _license_type; }
@@ -1524,7 +1524,7 @@ namespace SteamKit2
 
     private int _territory_code = default(int);
     [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"territory_code", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int territory_code
     {
       get { return _territory_code; }
@@ -1548,7 +1548,7 @@ namespace SteamKit2
 
     private uint _app_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"app_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint app_id
     {
       get { return _app_id; }
@@ -1557,7 +1557,7 @@ namespace SteamKit2
 
     private int _leaderboard_id = default(int);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"leaderboard_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int leaderboard_id
     {
       get { return _leaderboard_id; }
@@ -1566,7 +1566,7 @@ namespace SteamKit2
 
     private int _score = default(int);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"score", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int score
     {
       get { return _score; }
@@ -1575,7 +1575,7 @@ namespace SteamKit2
 
     private byte[] _details = null;
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"details", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
     public byte[] details
     {
       get { return _details; }
@@ -1584,7 +1584,7 @@ namespace SteamKit2
 
     private int _upload_score_method = default(int);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"upload_score_method", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int upload_score_method
     {
       get { return _upload_score_method; }
@@ -1603,7 +1603,7 @@ namespace SteamKit2
 
     private int _eresult = (int)2;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"eresult", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue((int)2)]
+    [global::ProtoBuf.ProtoDefaultValue((int)2)]
     public int eresult
     {
       get { return _eresult; }
@@ -1612,7 +1612,7 @@ namespace SteamKit2
 
     private int _leaderboard_entry_count = default(int);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"leaderboard_entry_count", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int leaderboard_entry_count
     {
       get { return _leaderboard_entry_count; }
@@ -1621,7 +1621,7 @@ namespace SteamKit2
 
     private bool _score_changed = default(bool);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"score_changed", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
+    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
     public bool score_changed
     {
       get { return _score_changed; }
@@ -1630,7 +1630,7 @@ namespace SteamKit2
 
     private int _global_rank_previous = default(int);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"global_rank_previous", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int global_rank_previous
     {
       get { return _global_rank_previous; }
@@ -1639,7 +1639,7 @@ namespace SteamKit2
 
     private int _global_rank_new = default(int);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"global_rank_new", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int global_rank_new
     {
       get { return _global_rank_new; }
@@ -1658,7 +1658,7 @@ namespace SteamKit2
 
     private uint _app_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"app_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint app_id
     {
       get { return _app_id; }
@@ -1667,7 +1667,7 @@ namespace SteamKit2
 
     private int _leaderboard_id = default(int);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"leaderboard_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int leaderboard_id
     {
       get { return _leaderboard_id; }
@@ -1676,7 +1676,7 @@ namespace SteamKit2
 
     private ulong _ugc_id = default(ulong);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"ugc_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong ugc_id
     {
       get { return _ugc_id; }
@@ -1695,7 +1695,7 @@ namespace SteamKit2
 
     private int _eresult = (int)2;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"eresult", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue((int)2)]
+    [global::ProtoBuf.ProtoDefaultValue((int)2)]
     public int eresult
     {
       get { return _eresult; }
@@ -1714,7 +1714,7 @@ namespace SteamKit2
 
     private uint _app_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"app_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint app_id
     {
       get { return _app_id; }
@@ -1723,7 +1723,7 @@ namespace SteamKit2
 
     private int _leaderboard_sort_method = default(int);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"leaderboard_sort_method", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int leaderboard_sort_method
     {
       get { return _leaderboard_sort_method; }
@@ -1732,7 +1732,7 @@ namespace SteamKit2
 
     private int _leaderboard_display_type = default(int);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"leaderboard_display_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int leaderboard_display_type
     {
       get { return _leaderboard_display_type; }
@@ -1741,7 +1741,7 @@ namespace SteamKit2
 
     private bool _create_if_not_found = default(bool);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"create_if_not_found", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
+    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
     public bool create_if_not_found
     {
       get { return _create_if_not_found; }
@@ -1750,7 +1750,7 @@ namespace SteamKit2
 
     private string _leaderboard_name = "";
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"leaderboard_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string leaderboard_name
     {
       get { return _leaderboard_name; }
@@ -1769,7 +1769,7 @@ namespace SteamKit2
 
     private int _eresult = (int)2;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"eresult", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue((int)2)]
+    [global::ProtoBuf.ProtoDefaultValue((int)2)]
     public int eresult
     {
       get { return _eresult; }
@@ -1778,7 +1778,7 @@ namespace SteamKit2
 
     private int _leaderboard_id = default(int);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"leaderboard_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int leaderboard_id
     {
       get { return _leaderboard_id; }
@@ -1787,7 +1787,7 @@ namespace SteamKit2
 
     private int _leaderboard_entry_count = default(int);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"leaderboard_entry_count", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int leaderboard_entry_count
     {
       get { return _leaderboard_entry_count; }
@@ -1796,7 +1796,7 @@ namespace SteamKit2
 
     private int _leaderboard_sort_method = (int)0;
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"leaderboard_sort_method", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue((int)0)]
+    [global::ProtoBuf.ProtoDefaultValue((int)0)]
     public int leaderboard_sort_method
     {
       get { return _leaderboard_sort_method; }
@@ -1805,7 +1805,7 @@ namespace SteamKit2
 
     private int _leaderboard_display_type = (int)0;
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"leaderboard_display_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue((int)0)]
+    [global::ProtoBuf.ProtoDefaultValue((int)0)]
     public int leaderboard_display_type
     {
       get { return _leaderboard_display_type; }
@@ -1814,7 +1814,7 @@ namespace SteamKit2
 
     private string _leaderboard_name = "";
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"leaderboard_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string leaderboard_name
     {
       get { return _leaderboard_name; }
@@ -1833,7 +1833,7 @@ namespace SteamKit2
 
     private int _app_id = default(int);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"app_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int app_id
     {
       get { return _app_id; }
@@ -1842,7 +1842,7 @@ namespace SteamKit2
 
     private int _leaderboard_id = default(int);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"leaderboard_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int leaderboard_id
     {
       get { return _leaderboard_id; }
@@ -1851,7 +1851,7 @@ namespace SteamKit2
 
     private int _range_start = default(int);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"range_start", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int range_start
     {
       get { return _range_start; }
@@ -1860,7 +1860,7 @@ namespace SteamKit2
 
     private int _range_end = default(int);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"range_end", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int range_end
     {
       get { return _range_end; }
@@ -1869,7 +1869,7 @@ namespace SteamKit2
 
     private int _leaderboard_data_request = default(int);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"leaderboard_data_request", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int leaderboard_data_request
     {
       get { return _leaderboard_data_request; }
@@ -1895,7 +1895,7 @@ namespace SteamKit2
 
     private int _eresult = (int)2;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"eresult", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue((int)2)]
+    [global::ProtoBuf.ProtoDefaultValue((int)2)]
     public int eresult
     {
       get { return _eresult; }
@@ -1904,7 +1904,7 @@ namespace SteamKit2
 
     private int _leaderboard_entry_count = default(int);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"leaderboard_entry_count", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int leaderboard_entry_count
     {
       get { return _leaderboard_entry_count; }
@@ -1925,7 +1925,7 @@ namespace SteamKit2
 
     private ulong _steam_id_user = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steam_id_user", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong steam_id_user
     {
       get { return _steam_id_user; }
@@ -1934,7 +1934,7 @@ namespace SteamKit2
 
     private int _global_rank = default(int);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"global_rank", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int global_rank
     {
       get { return _global_rank; }
@@ -1943,7 +1943,7 @@ namespace SteamKit2
 
     private int _score = default(int);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"score", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int score
     {
       get { return _score; }
@@ -1952,7 +1952,7 @@ namespace SteamKit2
 
     private byte[] _details = null;
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"details", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
     public byte[] details
     {
       get { return _details; }
@@ -1961,7 +1961,7 @@ namespace SteamKit2
 
     private ulong _ugc_id = default(ulong);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"ugc_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong ugc_id
     {
       get { return _ugc_id; }
@@ -1985,7 +1985,7 @@ namespace SteamKit2
 
     private string _persona_name = "";
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"persona_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string persona_name
     {
       get { return _persona_name; }
@@ -1994,7 +1994,7 @@ namespace SteamKit2
 
     private string _ip_country = "";
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"ip_country", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string ip_country
     {
       get { return _ip_country; }
@@ -2003,7 +2003,7 @@ namespace SteamKit2
 
     private byte[] _salt_password = null;
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"salt_password", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
     public byte[] salt_password
     {
       get { return _salt_password; }
@@ -2012,7 +2012,7 @@ namespace SteamKit2
 
     private byte[] _sha_digest_Password = null;
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"sha_digest_Password", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
     public byte[] sha_digest_Password
     {
       get { return _sha_digest_Password; }
@@ -2021,7 +2021,7 @@ namespace SteamKit2
 
     private int _count_authed_computers = default(int);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"count_authed_computers", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int count_authed_computers
     {
       get { return _count_authed_computers; }
@@ -2030,7 +2030,7 @@ namespace SteamKit2
 
     private bool _locked_with_ipt = default(bool);
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"locked_with_ipt", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
+    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
     public bool locked_with_ipt
     {
       get { return _locked_with_ipt; }
@@ -2039,7 +2039,7 @@ namespace SteamKit2
 
     private uint _account_flags = default(uint);
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"account_flags", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint account_flags
     {
       get { return _account_flags; }
@@ -2070,7 +2070,7 @@ namespace SteamKit2
 
     private uint _app_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"app_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint app_id
     {
       get { return _app_id; }
@@ -2079,7 +2079,7 @@ namespace SteamKit2
 
     private int _forever = default(int);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"forever", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int forever
     {
       get { return _forever; }
@@ -2088,7 +2088,7 @@ namespace SteamKit2
 
     private int _last_two_weeks = default(int);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"last_two_weeks", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int last_two_weeks
     {
       get { return _last_two_weeks; }
@@ -2112,7 +2112,7 @@ namespace SteamKit2
 
     private bool _bis_limited_account = default(bool);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"bis_limited_account", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
+    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
     public bool bis_limited_account
     {
       get { return _bis_limited_account; }
@@ -2131,7 +2131,7 @@ namespace SteamKit2
 
     private uint _persona_state_requested = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"persona_state_requested", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint persona_state_requested
     {
       get { return _persona_state_requested; }
@@ -2157,7 +2157,7 @@ namespace SteamKit2
 
     private uint _persona_state = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"persona_state", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint persona_state
     {
       get { return _persona_state; }
@@ -2166,7 +2166,7 @@ namespace SteamKit2
 
     private string _player_name = "";
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"player_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string player_name
     {
       get { return _player_name; }
@@ -2175,7 +2175,7 @@ namespace SteamKit2
 
     private bool _is_auto_generated_name = default(bool);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"is_auto_generated_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
+    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
     public bool is_auto_generated_name
     {
       get { return _is_auto_generated_name; }
@@ -2184,7 +2184,7 @@ namespace SteamKit2
 
     private bool _high_priority = default(bool);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"high_priority", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
+    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
     public bool high_priority
     {
       get { return _high_priority; }
@@ -2203,7 +2203,7 @@ namespace SteamKit2
 
     private uint _status_flags = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"status_flags", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint status_flags
     {
       get { return _status_flags; }
@@ -2224,7 +2224,7 @@ namespace SteamKit2
 
     private ulong _friendid = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"friendid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong friendid
     {
       get { return _friendid; }
@@ -2233,7 +2233,7 @@ namespace SteamKit2
 
     private uint _persona_state = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"persona_state", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint persona_state
     {
       get { return _persona_state; }
@@ -2242,7 +2242,7 @@ namespace SteamKit2
 
     private uint _game_played_app_id = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"game_played_app_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint game_played_app_id
     {
       get { return _game_played_app_id; }
@@ -2251,7 +2251,7 @@ namespace SteamKit2
 
     private uint _game_server_ip = default(uint);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"game_server_ip", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint game_server_ip
     {
       get { return _game_server_ip; }
@@ -2260,7 +2260,7 @@ namespace SteamKit2
 
     private uint _game_server_port = default(uint);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"game_server_port", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint game_server_port
     {
       get { return _game_server_port; }
@@ -2269,7 +2269,7 @@ namespace SteamKit2
 
     private uint _persona_state_flags = default(uint);
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"persona_state_flags", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint persona_state_flags
     {
       get { return _persona_state_flags; }
@@ -2278,7 +2278,7 @@ namespace SteamKit2
 
     private uint _online_session_instances = default(uint);
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"online_session_instances", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint online_session_instances
     {
       get { return _online_session_instances; }
@@ -2287,7 +2287,7 @@ namespace SteamKit2
 
     private uint _published_instance_id = default(uint);
     [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"published_instance_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint published_instance_id
     {
       get { return _published_instance_id; }
@@ -2296,7 +2296,7 @@ namespace SteamKit2
 
     private string _player_name = "";
     [global::ProtoBuf.ProtoMember(15, IsRequired = false, Name=@"player_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string player_name
     {
       get { return _player_name; }
@@ -2305,7 +2305,7 @@ namespace SteamKit2
 
     private uint _query_port = default(uint);
     [global::ProtoBuf.ProtoMember(20, IsRequired = false, Name=@"query_port", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint query_port
     {
       get { return _query_port; }
@@ -2314,7 +2314,7 @@ namespace SteamKit2
 
     private ulong _steamid_source = default(ulong);
     [global::ProtoBuf.ProtoMember(25, IsRequired = false, Name=@"steamid_source", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong steamid_source
     {
       get { return _steamid_source; }
@@ -2323,7 +2323,7 @@ namespace SteamKit2
 
     private byte[] _avatar_hash = null;
     [global::ProtoBuf.ProtoMember(31, IsRequired = false, Name=@"avatar_hash", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
     public byte[] avatar_hash
     {
       get { return _avatar_hash; }
@@ -2332,7 +2332,7 @@ namespace SteamKit2
 
     private byte[] _chat_metadata = null;
     [global::ProtoBuf.ProtoMember(40, IsRequired = false, Name=@"chat_metadata", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
     public byte[] chat_metadata
     {
       get { return _chat_metadata; }
@@ -2341,7 +2341,7 @@ namespace SteamKit2
 
     private uint _last_logoff = default(uint);
     [global::ProtoBuf.ProtoMember(45, IsRequired = false, Name=@"last_logoff", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint last_logoff
     {
       get { return _last_logoff; }
@@ -2350,7 +2350,7 @@ namespace SteamKit2
 
     private uint _last_logon = default(uint);
     [global::ProtoBuf.ProtoMember(46, IsRequired = false, Name=@"last_logon", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint last_logon
     {
       get { return _last_logon; }
@@ -2359,7 +2359,7 @@ namespace SteamKit2
 
     private uint _clan_rank = default(uint);
     [global::ProtoBuf.ProtoMember(50, IsRequired = false, Name=@"clan_rank", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint clan_rank
     {
       get { return _clan_rank; }
@@ -2368,7 +2368,7 @@ namespace SteamKit2
 
     private string _game_name = "";
     [global::ProtoBuf.ProtoMember(55, IsRequired = false, Name=@"game_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string game_name
     {
       get { return _game_name; }
@@ -2377,7 +2377,7 @@ namespace SteamKit2
 
     private ulong _gameid = default(ulong);
     [global::ProtoBuf.ProtoMember(56, IsRequired = false, Name=@"gameid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong gameid
     {
       get { return _gameid; }
@@ -2386,7 +2386,7 @@ namespace SteamKit2
 
     private byte[] _game_data_blob = null;
     [global::ProtoBuf.ProtoMember(60, IsRequired = false, Name=@"game_data_blob", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
     public byte[] game_data_blob
     {
       get { return _game_data_blob; }
@@ -2395,7 +2395,7 @@ namespace SteamKit2
 
     private string _clan_tag = "";
     [global::ProtoBuf.ProtoMember(65, IsRequired = false, Name=@"clan_tag", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string clan_tag
     {
       get { return _clan_tag; }
@@ -2419,7 +2419,7 @@ namespace SteamKit2
 
     private ulong _steamid_friend = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steamid_friend", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong steamid_friend
     {
       get { return _steamid_friend; }
@@ -2438,7 +2438,7 @@ namespace SteamKit2
 
     private int _eresult = (int)2;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"eresult", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue((int)2)]
+    [global::ProtoBuf.ProtoDefaultValue((int)2)]
     public int eresult
     {
       get { return _eresult; }
@@ -2447,7 +2447,7 @@ namespace SteamKit2
 
     private ulong _steamid_friend = default(ulong);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"steamid_friend", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong steamid_friend
     {
       get { return _steamid_friend; }
@@ -2456,7 +2456,7 @@ namespace SteamKit2
 
     private uint _time_created = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"time_created", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint time_created
     {
       get { return _time_created; }
@@ -2465,7 +2465,7 @@ namespace SteamKit2
 
     private string _real_name = "";
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"real_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string real_name
     {
       get { return _real_name; }
@@ -2474,7 +2474,7 @@ namespace SteamKit2
 
     private string _city_name = "";
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"city_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string city_name
     {
       get { return _city_name; }
@@ -2483,7 +2483,7 @@ namespace SteamKit2
 
     private string _state_name = "";
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"state_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string state_name
     {
       get { return _state_name; }
@@ -2492,7 +2492,7 @@ namespace SteamKit2
 
     private string _country_name = "";
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"country_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string country_name
     {
       get { return _country_name; }
@@ -2501,7 +2501,7 @@ namespace SteamKit2
 
     private string _headline = "";
     [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"headline", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string headline
     {
       get { return _headline; }
@@ -2510,7 +2510,7 @@ namespace SteamKit2
 
     private string _summary = "";
     [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"summary", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string summary
     {
       get { return _summary; }
@@ -2519,7 +2519,7 @@ namespace SteamKit2
 
     private uint _recent_playtime = default(uint);
     [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"recent_playtime", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint recent_playtime
     {
       get { return _recent_playtime; }
@@ -2550,7 +2550,7 @@ namespace SteamKit2
 
     private uint _server_type = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"server_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint server_type
     {
       get { return _server_type; }
@@ -2559,7 +2559,7 @@ namespace SteamKit2
 
     private uint _server_ip = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"server_ip", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint server_ip
     {
       get { return _server_ip; }
@@ -2568,7 +2568,7 @@ namespace SteamKit2
 
     private uint _server_port = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"server_port", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint server_port
     {
       get { return _server_port; }
@@ -2604,7 +2604,7 @@ namespace SteamKit2
 
     private uint _client_stat = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"client_stat", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint client_stat
     {
       get { return _client_stat; }
@@ -2613,7 +2613,7 @@ namespace SteamKit2
 
     private uint _stat_aggregate_method = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"stat_aggregate_method", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint stat_aggregate_method
     {
       get { return _stat_aggregate_method; }
@@ -2649,7 +2649,7 @@ namespace SteamKit2
 
     private uint _client_stat = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"client_stat", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint client_stat
     {
       get { return _client_stat; }
@@ -2658,7 +2658,7 @@ namespace SteamKit2
 
     private long _ll_value = default(long);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"ll_value", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(long))]
+    [global::ProtoBuf.ProtoDefaultValue(default(long))]
     public long ll_value
     {
       get { return _ll_value; }
@@ -2667,7 +2667,7 @@ namespace SteamKit2
 
     private uint _time_of_day = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"time_of_day", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint time_of_day
     {
       get { return _time_of_day; }
@@ -2676,7 +2676,7 @@ namespace SteamKit2
 
     private uint _cell_id = default(uint);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"cell_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint cell_id
     {
       get { return _cell_id; }
@@ -2685,7 +2685,7 @@ namespace SteamKit2
 
     private uint _depot_id = default(uint);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"depot_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint depot_id
     {
       get { return _depot_id; }
@@ -2694,7 +2694,7 @@ namespace SteamKit2
 
     private uint _app_id = default(uint);
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"app_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint app_id
     {
       get { return _app_id; }
@@ -2718,7 +2718,7 @@ namespace SteamKit2
 
     private uint _app_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"app_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint app_id
     {
       get { return _app_id; }
@@ -2727,7 +2727,7 @@ namespace SteamKit2
 
     private int _max_members = default(int);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"max_members", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int max_members
     {
       get { return _max_members; }
@@ -2736,7 +2736,7 @@ namespace SteamKit2
 
     private int _lobby_type = default(int);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"lobby_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int lobby_type
     {
       get { return _lobby_type; }
@@ -2745,7 +2745,7 @@ namespace SteamKit2
 
     private int _lobby_flags = default(int);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"lobby_flags", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int lobby_flags
     {
       get { return _lobby_flags; }
@@ -2754,7 +2754,7 @@ namespace SteamKit2
 
     private uint _cell_id = default(uint);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"cell_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint cell_id
     {
       get { return _cell_id; }
@@ -2763,7 +2763,7 @@ namespace SteamKit2
 
     private uint _public_ip = default(uint);
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"public_ip", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint public_ip
     {
       get { return _public_ip; }
@@ -2772,7 +2772,7 @@ namespace SteamKit2
 
     private byte[] _metadata = null;
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"metadata", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
     public byte[] metadata
     {
       get { return _metadata; }
@@ -2781,7 +2781,7 @@ namespace SteamKit2
 
     private string _persona_name_owner = "";
     [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"persona_name_owner", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string persona_name_owner
     {
       get { return _persona_name_owner; }
@@ -2800,7 +2800,7 @@ namespace SteamKit2
 
     private uint _app_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"app_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint app_id
     {
       get { return _app_id; }
@@ -2809,7 +2809,7 @@ namespace SteamKit2
 
     private ulong _steam_id_lobby = default(ulong);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"steam_id_lobby", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong steam_id_lobby
     {
       get { return _steam_id_lobby; }
@@ -2818,7 +2818,7 @@ namespace SteamKit2
 
     private int _eresult = (int)2;
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"eresult", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue((int)2)]
+    [global::ProtoBuf.ProtoDefaultValue((int)2)]
     public int eresult
     {
       get { return _eresult; }
@@ -2837,7 +2837,7 @@ namespace SteamKit2
 
     private uint _app_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"app_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint app_id
     {
       get { return _app_id; }
@@ -2846,7 +2846,7 @@ namespace SteamKit2
 
     private ulong _steam_id_lobby = default(ulong);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"steam_id_lobby", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong steam_id_lobby
     {
       get { return _steam_id_lobby; }
@@ -2855,7 +2855,7 @@ namespace SteamKit2
 
     private string _persona_name = "";
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"persona_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string persona_name
     {
       get { return _persona_name; }
@@ -2874,7 +2874,7 @@ namespace SteamKit2
 
     private uint _app_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"app_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint app_id
     {
       get { return _app_id; }
@@ -2883,7 +2883,7 @@ namespace SteamKit2
 
     private ulong _steam_id_lobby = default(ulong);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"steam_id_lobby", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong steam_id_lobby
     {
       get { return _steam_id_lobby; }
@@ -2892,7 +2892,7 @@ namespace SteamKit2
 
     private int _chat_room_enter_response = default(int);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"chat_room_enter_response", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int chat_room_enter_response
     {
       get { return _chat_room_enter_response; }
@@ -2901,7 +2901,7 @@ namespace SteamKit2
 
     private int _max_members = default(int);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"max_members", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int max_members
     {
       get { return _max_members; }
@@ -2910,7 +2910,7 @@ namespace SteamKit2
 
     private int _lobby_type = default(int);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"lobby_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int lobby_type
     {
       get { return _lobby_type; }
@@ -2919,7 +2919,7 @@ namespace SteamKit2
 
     private int _lobby_flags = default(int);
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"lobby_flags", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int lobby_flags
     {
       get { return _lobby_flags; }
@@ -2928,7 +2928,7 @@ namespace SteamKit2
 
     private ulong _steam_id_owner = default(ulong);
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"steam_id_owner", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong steam_id_owner
     {
       get { return _steam_id_owner; }
@@ -2937,7 +2937,7 @@ namespace SteamKit2
 
     private byte[] _metadata = null;
     [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"metadata", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
     public byte[] metadata
     {
       get { return _metadata; }
@@ -2958,7 +2958,7 @@ namespace SteamKit2
 
     private ulong _steam_id = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steam_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong steam_id
     {
       get { return _steam_id; }
@@ -2967,7 +2967,7 @@ namespace SteamKit2
 
     private string _persona_name = "";
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"persona_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string persona_name
     {
       get { return _persona_name; }
@@ -2976,7 +2976,7 @@ namespace SteamKit2
 
     private byte[] _metadata = null;
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"metadata", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
     public byte[] metadata
     {
       get { return _metadata; }
@@ -3000,7 +3000,7 @@ namespace SteamKit2
 
     private uint _app_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"app_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint app_id
     {
       get { return _app_id; }
@@ -3009,7 +3009,7 @@ namespace SteamKit2
 
     private ulong _steam_id_lobby = default(ulong);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"steam_id_lobby", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong steam_id_lobby
     {
       get { return _steam_id_lobby; }
@@ -3028,7 +3028,7 @@ namespace SteamKit2
 
     private uint _app_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"app_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint app_id
     {
       get { return _app_id; }
@@ -3037,7 +3037,7 @@ namespace SteamKit2
 
     private ulong _steam_id_lobby = default(ulong);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"steam_id_lobby", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong steam_id_lobby
     {
       get { return _steam_id_lobby; }
@@ -3046,7 +3046,7 @@ namespace SteamKit2
 
     private int _eresult = (int)2;
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"eresult", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue((int)2)]
+    [global::ProtoBuf.ProtoDefaultValue((int)2)]
     public int eresult
     {
       get { return _eresult; }
@@ -3065,7 +3065,7 @@ namespace SteamKit2
 
     private uint _app_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"app_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint app_id
     {
       get { return _app_id; }
@@ -3074,7 +3074,7 @@ namespace SteamKit2
 
     private int _num_lobbies_requested = default(int);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"num_lobbies_requested", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int num_lobbies_requested
     {
       get { return _num_lobbies_requested; }
@@ -3083,7 +3083,7 @@ namespace SteamKit2
 
     private uint _cell_id = default(uint);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"cell_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint cell_id
     {
       get { return _cell_id; }
@@ -3092,7 +3092,7 @@ namespace SteamKit2
 
     private uint _public_ip = default(uint);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"public_ip", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint public_ip
     {
       get { return _public_ip; }
@@ -3113,7 +3113,7 @@ namespace SteamKit2
 
     private string _key = "";
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"key", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string key
     {
       get { return _key; }
@@ -3122,7 +3122,7 @@ namespace SteamKit2
 
     private string _value = "";
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"value", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string value
     {
       get { return _value; }
@@ -3131,7 +3131,7 @@ namespace SteamKit2
 
     private int _comparision = default(int);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"comparision", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int comparision
     {
       get { return _comparision; }
@@ -3140,7 +3140,7 @@ namespace SteamKit2
 
     private int _filter_type = default(int);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"filter_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int filter_type
     {
       get { return _filter_type; }
@@ -3164,7 +3164,7 @@ namespace SteamKit2
 
     private uint _app_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"app_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint app_id
     {
       get { return _app_id; }
@@ -3173,7 +3173,7 @@ namespace SteamKit2
 
     private int _eresult = (int)2;
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"eresult", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue((int)2)]
+    [global::ProtoBuf.ProtoDefaultValue((int)2)]
     public int eresult
     {
       get { return _eresult; }
@@ -3194,7 +3194,7 @@ namespace SteamKit2
 
     private ulong _steam_id = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steam_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong steam_id
     {
       get { return _steam_id; }
@@ -3203,7 +3203,7 @@ namespace SteamKit2
 
     private int _max_members = default(int);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"max_members", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int max_members
     {
       get { return _max_members; }
@@ -3212,7 +3212,7 @@ namespace SteamKit2
 
     private int _lobby_type = default(int);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"lobby_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int lobby_type
     {
       get { return _lobby_type; }
@@ -3221,7 +3221,7 @@ namespace SteamKit2
 
     private int _lobby_flags = default(int);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"lobby_flags", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int lobby_flags
     {
       get { return _lobby_flags; }
@@ -3230,7 +3230,7 @@ namespace SteamKit2
 
     private byte[] _metadata = null;
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"metadata", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
     public byte[] metadata
     {
       get { return _metadata; }
@@ -3239,7 +3239,7 @@ namespace SteamKit2
 
     private int _num_members = default(int);
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"num_members", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int num_members
     {
       get { return _num_members; }
@@ -3248,7 +3248,7 @@ namespace SteamKit2
 
     private float _distance = default(float);
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"distance", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(float))]
+    [global::ProtoBuf.ProtoDefaultValue(default(float))]
     public float distance
     {
       get { return _distance; }
@@ -3257,7 +3257,7 @@ namespace SteamKit2
 
     private long _weight = default(long);
     [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"weight", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(long))]
+    [global::ProtoBuf.ProtoDefaultValue(default(long))]
     public long weight
     {
       get { return _weight; }
@@ -3281,7 +3281,7 @@ namespace SteamKit2
 
     private uint _app_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"app_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint app_id
     {
       get { return _app_id; }
@@ -3290,7 +3290,7 @@ namespace SteamKit2
 
     private ulong _steam_id_lobby = default(ulong);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"steam_id_lobby", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong steam_id_lobby
     {
       get { return _steam_id_lobby; }
@@ -3299,7 +3299,7 @@ namespace SteamKit2
 
     private ulong _steam_id_member = default(ulong);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"steam_id_member", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong steam_id_member
     {
       get { return _steam_id_member; }
@@ -3308,7 +3308,7 @@ namespace SteamKit2
 
     private int _max_members = default(int);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"max_members", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int max_members
     {
       get { return _max_members; }
@@ -3317,7 +3317,7 @@ namespace SteamKit2
 
     private int _lobby_type = default(int);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"lobby_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int lobby_type
     {
       get { return _lobby_type; }
@@ -3326,7 +3326,7 @@ namespace SteamKit2
 
     private int _lobby_flags = default(int);
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"lobby_flags", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int lobby_flags
     {
       get { return _lobby_flags; }
@@ -3335,7 +3335,7 @@ namespace SteamKit2
 
     private byte[] _metadata = null;
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"metadata", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
     public byte[] metadata
     {
       get { return _metadata; }
@@ -3354,7 +3354,7 @@ namespace SteamKit2
 
     private uint _app_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"app_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint app_id
     {
       get { return _app_id; }
@@ -3363,7 +3363,7 @@ namespace SteamKit2
 
     private ulong _steam_id_lobby = default(ulong);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"steam_id_lobby", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong steam_id_lobby
     {
       get { return _steam_id_lobby; }
@@ -3372,7 +3372,7 @@ namespace SteamKit2
 
     private int _eresult = (int)2;
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"eresult", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue((int)2)]
+    [global::ProtoBuf.ProtoDefaultValue((int)2)]
     public int eresult
     {
       get { return _eresult; }
@@ -3391,7 +3391,7 @@ namespace SteamKit2
 
     private uint _app_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"app_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint app_id
     {
       get { return _app_id; }
@@ -3400,7 +3400,7 @@ namespace SteamKit2
 
     private ulong _steam_id_lobby = default(ulong);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"steam_id_lobby", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong steam_id_lobby
     {
       get { return _steam_id_lobby; }
@@ -3419,7 +3419,7 @@ namespace SteamKit2
 
     private uint _app_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"app_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint app_id
     {
       get { return _app_id; }
@@ -3428,7 +3428,7 @@ namespace SteamKit2
 
     private ulong _steam_id_lobby = default(ulong);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"steam_id_lobby", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong steam_id_lobby
     {
       get { return _steam_id_lobby; }
@@ -3437,7 +3437,7 @@ namespace SteamKit2
 
     private int _num_members = default(int);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"num_members", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int num_members
     {
       get { return _num_members; }
@@ -3446,7 +3446,7 @@ namespace SteamKit2
 
     private int _max_members = default(int);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"max_members", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int max_members
     {
       get { return _max_members; }
@@ -3455,7 +3455,7 @@ namespace SteamKit2
 
     private int _lobby_type = default(int);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"lobby_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int lobby_type
     {
       get { return _lobby_type; }
@@ -3464,7 +3464,7 @@ namespace SteamKit2
 
     private int _lobby_flags = default(int);
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"lobby_flags", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int lobby_flags
     {
       get { return _lobby_flags; }
@@ -3473,7 +3473,7 @@ namespace SteamKit2
 
     private ulong _steam_id_owner = default(ulong);
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"steam_id_owner", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong steam_id_owner
     {
       get { return _steam_id_owner; }
@@ -3482,7 +3482,7 @@ namespace SteamKit2
 
     private byte[] _metadata = null;
     [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"metadata", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
     public byte[] metadata
     {
       get { return _metadata; }
@@ -3503,7 +3503,7 @@ namespace SteamKit2
 
     private ulong _steam_id = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steam_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong steam_id
     {
       get { return _steam_id; }
@@ -3512,7 +3512,7 @@ namespace SteamKit2
 
     private string _persona_name = "";
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"persona_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string persona_name
     {
       get { return _persona_name; }
@@ -3521,7 +3521,7 @@ namespace SteamKit2
 
     private byte[] _metadata = null;
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"metadata", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
     public byte[] metadata
     {
       get { return _metadata; }
@@ -3545,7 +3545,7 @@ namespace SteamKit2
 
     private uint _app_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"app_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint app_id
     {
       get { return _app_id; }
@@ -3554,7 +3554,7 @@ namespace SteamKit2
 
     private ulong _steam_id_lobby = default(ulong);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"steam_id_lobby", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong steam_id_lobby
     {
       get { return _steam_id_lobby; }
@@ -3563,7 +3563,7 @@ namespace SteamKit2
 
     private ulong _steam_id_target = default(ulong);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"steam_id_target", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong steam_id_target
     {
       get { return _steam_id_target; }
@@ -3572,7 +3572,7 @@ namespace SteamKit2
 
     private byte[] _lobby_message = null;
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"lobby_message", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
     public byte[] lobby_message
     {
       get { return _lobby_message; }
@@ -3591,7 +3591,7 @@ namespace SteamKit2
 
     private uint _app_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"app_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint app_id
     {
       get { return _app_id; }
@@ -3600,7 +3600,7 @@ namespace SteamKit2
 
     private ulong _steam_id_lobby = default(ulong);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"steam_id_lobby", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong steam_id_lobby
     {
       get { return _steam_id_lobby; }
@@ -3609,7 +3609,7 @@ namespace SteamKit2
 
     private ulong _steam_id_sender = default(ulong);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"steam_id_sender", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong steam_id_sender
     {
       get { return _steam_id_sender; }
@@ -3618,7 +3618,7 @@ namespace SteamKit2
 
     private byte[] _lobby_message = null;
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"lobby_message", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
     public byte[] lobby_message
     {
       get { return _lobby_message; }
@@ -3637,7 +3637,7 @@ namespace SteamKit2
 
     private uint _app_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"app_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint app_id
     {
       get { return _app_id; }
@@ -3646,7 +3646,7 @@ namespace SteamKit2
 
     private ulong _steam_id_lobby = default(ulong);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"steam_id_lobby", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong steam_id_lobby
     {
       get { return _steam_id_lobby; }
@@ -3655,7 +3655,7 @@ namespace SteamKit2
 
     private ulong _steam_id_new_owner = default(ulong);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"steam_id_new_owner", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong steam_id_new_owner
     {
       get { return _steam_id_new_owner; }
@@ -3674,7 +3674,7 @@ namespace SteamKit2
 
     private uint _app_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"app_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint app_id
     {
       get { return _app_id; }
@@ -3683,7 +3683,7 @@ namespace SteamKit2
 
     private ulong _steam_id_lobby = default(ulong);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"steam_id_lobby", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong steam_id_lobby
     {
       get { return _steam_id_lobby; }
@@ -3692,7 +3692,7 @@ namespace SteamKit2
 
     private int _eresult = (int)2;
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"eresult", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue((int)2)]
+    [global::ProtoBuf.ProtoDefaultValue((int)2)]
     public int eresult
     {
       get { return _eresult; }
@@ -3711,7 +3711,7 @@ namespace SteamKit2
 
     private uint _app_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"app_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint app_id
     {
       get { return _app_id; }
@@ -3720,7 +3720,7 @@ namespace SteamKit2
 
     private ulong _steam_id_lobby = default(ulong);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"steam_id_lobby", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong steam_id_lobby
     {
       get { return _steam_id_lobby; }
@@ -3729,7 +3729,7 @@ namespace SteamKit2
 
     private uint _game_server_ip = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"game_server_ip", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint game_server_ip
     {
       get { return _game_server_ip; }
@@ -3738,7 +3738,7 @@ namespace SteamKit2
 
     private uint _game_server_port = default(uint);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"game_server_port", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint game_server_port
     {
       get { return _game_server_port; }
@@ -3747,7 +3747,7 @@ namespace SteamKit2
 
     private ulong _game_server_steam_id = default(ulong);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"game_server_steam_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong game_server_steam_id
     {
       get { return _game_server_steam_id; }
@@ -3766,7 +3766,7 @@ namespace SteamKit2
 
     private uint _app_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"app_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint app_id
     {
       get { return _app_id; }
@@ -3775,7 +3775,7 @@ namespace SteamKit2
 
     private ulong _steam_id_lobby = default(ulong);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"steam_id_lobby", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong steam_id_lobby
     {
       get { return _steam_id_lobby; }
@@ -3784,7 +3784,7 @@ namespace SteamKit2
 
     private uint _game_server_ip = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"game_server_ip", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint game_server_ip
     {
       get { return _game_server_ip; }
@@ -3793,7 +3793,7 @@ namespace SteamKit2
 
     private uint _game_server_port = default(uint);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"game_server_port", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint game_server_port
     {
       get { return _game_server_port; }
@@ -3802,7 +3802,7 @@ namespace SteamKit2
 
     private ulong _game_server_steam_id = default(ulong);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"game_server_steam_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong game_server_steam_id
     {
       get { return _game_server_steam_id; }
@@ -3821,7 +3821,7 @@ namespace SteamKit2
 
     private uint _app_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"app_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint app_id
     {
       get { return _app_id; }
@@ -3830,7 +3830,7 @@ namespace SteamKit2
 
     private ulong _steam_id_lobby = default(ulong);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"steam_id_lobby", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong steam_id_lobby
     {
       get { return _steam_id_lobby; }
@@ -3839,7 +3839,7 @@ namespace SteamKit2
 
     private ulong _steam_id_user = default(ulong);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"steam_id_user", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong steam_id_user
     {
       get { return _steam_id_user; }
@@ -3848,7 +3848,7 @@ namespace SteamKit2
 
     private string _persona_name = "";
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"persona_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string persona_name
     {
       get { return _persona_name; }
@@ -3867,7 +3867,7 @@ namespace SteamKit2
 
     private uint _app_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"app_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint app_id
     {
       get { return _app_id; }
@@ -3876,7 +3876,7 @@ namespace SteamKit2
 
     private ulong _steam_id_lobby = default(ulong);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"steam_id_lobby", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong steam_id_lobby
     {
       get { return _steam_id_lobby; }
@@ -3885,7 +3885,7 @@ namespace SteamKit2
 
     private ulong _steam_id_user = default(ulong);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"steam_id_user", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong steam_id_user
     {
       get { return _steam_id_user; }
@@ -3894,7 +3894,7 @@ namespace SteamKit2
 
     private string _persona_name = "";
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"persona_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string persona_name
     {
       get { return _persona_name; }
@@ -3913,7 +3913,7 @@ namespace SteamKit2
 
     private uint _app_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"app_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint app_id
     {
       get { return _app_id; }
@@ -3922,7 +3922,7 @@ namespace SteamKit2
 
     private ulong _steam_id_lobby = default(ulong);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"steam_id_lobby", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong steam_id_lobby
     {
       get { return _steam_id_lobby; }
@@ -3931,7 +3931,7 @@ namespace SteamKit2
 
     private ulong _steam_id_user_invited = default(ulong);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"steam_id_user_invited", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong steam_id_user_invited
     {
       get { return _steam_id_user_invited; }
@@ -3950,7 +3950,7 @@ namespace SteamKit2
 
     private ulong _steam_id_dest = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steam_id_dest", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong steam_id_dest
     {
       get { return _steam_id_dest; }
@@ -3959,7 +3959,7 @@ namespace SteamKit2
 
     private ulong _steam_id_src = default(ulong);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"steam_id_src", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong steam_id_src
     {
       get { return _steam_id_src; }
@@ -3968,7 +3968,7 @@ namespace SteamKit2
 
     private string _connect_string = "";
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"connect_string", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string connect_string
     {
       get { return _connect_string; }
@@ -3987,7 +3987,7 @@ namespace SteamKit2
 
     private ulong _steam_id_invited = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steam_id_invited", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong steam_id_invited
     {
       get { return _steam_id_invited; }
@@ -3996,7 +3996,7 @@ namespace SteamKit2
 
     private ulong _steam_id_chat = default(ulong);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"steam_id_chat", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong steam_id_chat
     {
       get { return _steam_id_chat; }
@@ -4005,7 +4005,7 @@ namespace SteamKit2
 
     private ulong _steam_id_patron = default(ulong);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"steam_id_patron", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong steam_id_patron
     {
       get { return _steam_id_patron; }
@@ -4014,7 +4014,7 @@ namespace SteamKit2
 
     private int _chatroom_type = default(int);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"chatroom_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int chatroom_type
     {
       get { return _chatroom_type; }
@@ -4023,7 +4023,7 @@ namespace SteamKit2
 
     private ulong _steam_id_friend_chat = default(ulong);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"steam_id_friend_chat", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong steam_id_friend_chat
     {
       get { return _steam_id_friend_chat; }
@@ -4032,7 +4032,7 @@ namespace SteamKit2
 
     private string _chat_name = "";
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"chat_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string chat_name
     {
       get { return _chat_name; }
@@ -4041,7 +4041,7 @@ namespace SteamKit2
 
     private ulong _game_id = default(ulong);
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"game_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong game_id
     {
       get { return _game_id; }
@@ -4060,7 +4060,7 @@ namespace SteamKit2
 
     private CMsgClientConnectionStats.Stats_Logon _stats_logon = null;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"stats_logon", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
     public CMsgClientConnectionStats.Stats_Logon stats_logon
     {
       get { return _stats_logon; }
@@ -4069,7 +4069,7 @@ namespace SteamKit2
 
     private CMsgClientConnectionStats.Stats_VConn _stats_vconn = null;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"stats_vconn", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
     public CMsgClientConnectionStats.Stats_VConn stats_vconn
     {
       get { return _stats_vconn; }
@@ -4083,7 +4083,7 @@ namespace SteamKit2
 
     private int _connect_attempts = default(int);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"connect_attempts", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int connect_attempts
     {
       get { return _connect_attempts; }
@@ -4092,7 +4092,7 @@ namespace SteamKit2
 
     private int _connect_successes = default(int);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"connect_successes", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int connect_successes
     {
       get { return _connect_successes; }
@@ -4101,7 +4101,7 @@ namespace SteamKit2
 
     private int _connect_failures = default(int);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"connect_failures", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int connect_failures
     {
       get { return _connect_failures; }
@@ -4110,7 +4110,7 @@ namespace SteamKit2
 
     private int _connections_dropped = default(int);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"connections_dropped", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int connections_dropped
     {
       get { return _connections_dropped; }
@@ -4129,7 +4129,7 @@ namespace SteamKit2
 
     private ulong _pkts_sent = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"pkts_sent", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong pkts_sent
     {
       get { return _pkts_sent; }
@@ -4138,7 +4138,7 @@ namespace SteamKit2
 
     private ulong _bytes_sent = default(ulong);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"bytes_sent", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong bytes_sent
     {
       get { return _bytes_sent; }
@@ -4147,7 +4147,7 @@ namespace SteamKit2
 
     private ulong _pkts_recv = default(ulong);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"pkts_recv", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong pkts_recv
     {
       get { return _pkts_recv; }
@@ -4156,7 +4156,7 @@ namespace SteamKit2
 
     private ulong _pkts_processed = default(ulong);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"pkts_processed", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong pkts_processed
     {
       get { return _pkts_processed; }
@@ -4165,7 +4165,7 @@ namespace SteamKit2
 
     private ulong _bytes_recv = default(ulong);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"bytes_recv", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong bytes_recv
     {
       get { return _bytes_recv; }
@@ -4184,7 +4184,7 @@ namespace SteamKit2
 
     private uint _connections_udp = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"connections_udp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint connections_udp
     {
       get { return _connections_udp; }
@@ -4193,7 +4193,7 @@ namespace SteamKit2
 
     private uint _connections_tcp = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"connections_tcp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint connections_tcp
     {
       get { return _connections_tcp; }
@@ -4202,7 +4202,7 @@ namespace SteamKit2
 
     private CMsgClientConnectionStats.Stats_UDP _stats_udp = null;
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"stats_udp", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
     public CMsgClientConnectionStats.Stats_UDP stats_udp
     {
       get { return _stats_udp; }
@@ -4211,7 +4211,7 @@ namespace SteamKit2
 
     private ulong _pkts_abandoned = default(ulong);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"pkts_abandoned", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong pkts_abandoned
     {
       get { return _pkts_abandoned; }
@@ -4220,7 +4220,7 @@ namespace SteamKit2
 
     private ulong _conn_req_received = default(ulong);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"conn_req_received", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong conn_req_received
     {
       get { return _conn_req_received; }
@@ -4229,7 +4229,7 @@ namespace SteamKit2
 
     private ulong _pkts_resent = default(ulong);
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"pkts_resent", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong pkts_resent
     {
       get { return _pkts_resent; }
@@ -4238,7 +4238,7 @@ namespace SteamKit2
 
     private ulong _msgs_sent = default(ulong);
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"msgs_sent", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong msgs_sent
     {
       get { return _msgs_sent; }
@@ -4247,7 +4247,7 @@ namespace SteamKit2
 
     private ulong _msgs_sent_failed = default(ulong);
     [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"msgs_sent_failed", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong msgs_sent_failed
     {
       get { return _msgs_sent_failed; }
@@ -4256,7 +4256,7 @@ namespace SteamKit2
 
     private ulong _msgs_recv = default(ulong);
     [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"msgs_recv", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong msgs_recv
     {
       get { return _msgs_recv; }
@@ -4265,7 +4265,7 @@ namespace SteamKit2
 
     private ulong _datagrams_sent = default(ulong);
     [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"datagrams_sent", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong datagrams_sent
     {
       get { return _datagrams_sent; }
@@ -4274,7 +4274,7 @@ namespace SteamKit2
 
     private ulong _datagrams_recv = default(ulong);
     [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"datagrams_recv", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong datagrams_recv
     {
       get { return _datagrams_recv; }
@@ -4283,7 +4283,7 @@ namespace SteamKit2
 
     private ulong _bad_pkts_recv = default(ulong);
     [global::ProtoBuf.ProtoMember(12, IsRequired = false, Name=@"bad_pkts_recv", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong bad_pkts_recv
     {
       get { return _bad_pkts_recv; }
@@ -4292,7 +4292,7 @@ namespace SteamKit2
 
     private ulong _unknown_conn_pkts_recv = default(ulong);
     [global::ProtoBuf.ProtoMember(13, IsRequired = false, Name=@"unknown_conn_pkts_recv", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong unknown_conn_pkts_recv
     {
       get { return _unknown_conn_pkts_recv; }
@@ -4301,7 +4301,7 @@ namespace SteamKit2
 
     private ulong _missed_pkts_recv = default(ulong);
     [global::ProtoBuf.ProtoMember(14, IsRequired = false, Name=@"missed_pkts_recv", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong missed_pkts_recv
     {
       get { return _missed_pkts_recv; }
@@ -4310,7 +4310,7 @@ namespace SteamKit2
 
     private ulong _dup_pkts_recv = default(ulong);
     [global::ProtoBuf.ProtoMember(15, IsRequired = false, Name=@"dup_pkts_recv", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong dup_pkts_recv
     {
       get { return _dup_pkts_recv; }
@@ -4319,7 +4319,7 @@ namespace SteamKit2
 
     private ulong _failed_connect_challenges = default(ulong);
     [global::ProtoBuf.ProtoMember(16, IsRequired = false, Name=@"failed_connect_challenges", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong failed_connect_challenges
     {
       get { return _failed_connect_challenges; }
@@ -4328,7 +4328,7 @@ namespace SteamKit2
 
     private uint _micro_sec_avg_latency = default(uint);
     [global::ProtoBuf.ProtoMember(17, IsRequired = false, Name=@"micro_sec_avg_latency", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint micro_sec_avg_latency
     {
       get { return _micro_sec_avg_latency; }
@@ -4337,7 +4337,7 @@ namespace SteamKit2
 
     private uint _micro_sec_min_latency = default(uint);
     [global::ProtoBuf.ProtoMember(18, IsRequired = false, Name=@"micro_sec_min_latency", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint micro_sec_min_latency
     {
       get { return _micro_sec_min_latency; }
@@ -4346,7 +4346,7 @@ namespace SteamKit2
 
     private uint _micro_sec_max_latency = default(uint);
     [global::ProtoBuf.ProtoMember(19, IsRequired = false, Name=@"micro_sec_max_latency", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint micro_sec_max_latency
     {
       get { return _micro_sec_max_latency; }
@@ -4355,7 +4355,7 @@ namespace SteamKit2
 
     private uint _mem_pool_msg_in_use = default(uint);
     [global::ProtoBuf.ProtoMember(20, IsRequired = false, Name=@"mem_pool_msg_in_use", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint mem_pool_msg_in_use
     {
       get { return _mem_pool_msg_in_use; }
@@ -4391,7 +4391,7 @@ namespace SteamKit2
 
     private uint _server = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"server", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint server
     {
       get { return _server; }
@@ -4415,7 +4415,7 @@ namespace SteamKit2
 
     private ulong _game_id = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"game_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong game_id
     {
       get { return _game_id; }
@@ -4424,7 +4424,7 @@ namespace SteamKit2
 
     private uint _crc_stats = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"crc_stats", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint crc_stats
     {
       get { return _crc_stats; }
@@ -4433,7 +4433,7 @@ namespace SteamKit2
 
     private int _schema_local_version = default(int);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"schema_local_version", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int schema_local_version
     {
       get { return _schema_local_version; }
@@ -4442,7 +4442,7 @@ namespace SteamKit2
 
     private ulong _steam_id_for_user = default(ulong);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"steam_id_for_user", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong steam_id_for_user
     {
       get { return _steam_id_for_user; }
@@ -4461,7 +4461,7 @@ namespace SteamKit2
 
     private ulong _game_id = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"game_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong game_id
     {
       get { return _game_id; }
@@ -4470,7 +4470,7 @@ namespace SteamKit2
 
     private int _eresult = (int)2;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"eresult", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue((int)2)]
+    [global::ProtoBuf.ProtoDefaultValue((int)2)]
     public int eresult
     {
       get { return _eresult; }
@@ -4479,7 +4479,7 @@ namespace SteamKit2
 
     private uint _crc_stats = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"crc_stats", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint crc_stats
     {
       get { return _crc_stats; }
@@ -4488,7 +4488,7 @@ namespace SteamKit2
 
     private byte[] _schema = null;
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"schema", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
     public byte[] schema
     {
       get { return _schema; }
@@ -4516,7 +4516,7 @@ namespace SteamKit2
 
     private uint _stat_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"stat_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint stat_id
     {
       get { return _stat_id; }
@@ -4525,7 +4525,7 @@ namespace SteamKit2
 
     private uint _stat_value = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"stat_value", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint stat_value
     {
       get { return _stat_value; }
@@ -4544,7 +4544,7 @@ namespace SteamKit2
 
     private uint _achievement_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"achievement_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint achievement_id
     {
       get { return _achievement_id; }
@@ -4575,7 +4575,7 @@ namespace SteamKit2
 
     private ulong _game_id = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"game_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong game_id
     {
       get { return _game_id; }
@@ -4584,7 +4584,7 @@ namespace SteamKit2
 
     private int _eresult = (int)2;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"eresult", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue((int)2)]
+    [global::ProtoBuf.ProtoDefaultValue((int)2)]
     public int eresult
     {
       get { return _eresult; }
@@ -4593,7 +4593,7 @@ namespace SteamKit2
 
     private uint _crc_stats = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"crc_stats", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint crc_stats
     {
       get { return _crc_stats; }
@@ -4609,7 +4609,7 @@ namespace SteamKit2
 
     private bool _stats_out_of_date = default(bool);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"stats_out_of_date", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
+    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
     public bool stats_out_of_date
     {
       get { return _stats_out_of_date; }
@@ -4623,7 +4623,7 @@ namespace SteamKit2
 
     private uint _stat_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"stat_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint stat_id
     {
       get { return _stat_id; }
@@ -4632,7 +4632,7 @@ namespace SteamKit2
 
     private uint _reverted_stat_value = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"reverted_stat_value", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint reverted_stat_value
     {
       get { return _reverted_stat_value; }
@@ -4656,7 +4656,7 @@ namespace SteamKit2
 
     private ulong _game_id = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"game_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong game_id
     {
       get { return _game_id; }
@@ -4665,7 +4665,7 @@ namespace SteamKit2
 
     private ulong _settor_steam_id = default(ulong);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"settor_steam_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong settor_steam_id
     {
       get { return _settor_steam_id; }
@@ -4674,7 +4674,7 @@ namespace SteamKit2
 
     private ulong _settee_steam_id = default(ulong);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"settee_steam_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong settee_steam_id
     {
       get { return _settee_steam_id; }
@@ -4683,7 +4683,7 @@ namespace SteamKit2
 
     private uint _crc_stats = default(uint);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"crc_stats", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint crc_stats
     {
       get { return _crc_stats; }
@@ -4692,7 +4692,7 @@ namespace SteamKit2
 
     private bool _explicit_reset = default(bool);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"explicit_reset", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
+    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
     public bool explicit_reset
     {
       get { return _explicit_reset; }
@@ -4713,7 +4713,7 @@ namespace SteamKit2
 
     private uint _stat_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"stat_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint stat_id
     {
       get { return _stat_id; }
@@ -4722,7 +4722,7 @@ namespace SteamKit2
 
     private uint _stat_value = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"stat_value", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint stat_value
     {
       get { return _stat_value; }
@@ -4746,7 +4746,7 @@ namespace SteamKit2
 
     private ulong _steam_id = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steam_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong steam_id
     {
       get { return _steam_id; }
@@ -4755,7 +4755,7 @@ namespace SteamKit2
 
     private ulong _game_id = default(ulong);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"game_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong game_id
     {
       get { return _game_id; }
@@ -4764,7 +4764,7 @@ namespace SteamKit2
 
     private uint _crc_stats = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"crc_stats", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint crc_stats
     {
       get { return _crc_stats; }
@@ -4785,7 +4785,7 @@ namespace SteamKit2
 
     private uint _stat_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"stat_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint stat_id
     {
       get { return _stat_id; }
@@ -4794,7 +4794,7 @@ namespace SteamKit2
 
     private uint _stat_value = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"stat_value", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint stat_value
     {
       get { return _stat_value; }
@@ -4818,7 +4818,7 @@ namespace SteamKit2
 
     private ulong _game_id = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"game_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong game_id
     {
       get { return _game_id; }
@@ -4827,7 +4827,7 @@ namespace SteamKit2
 
     private bool _explicit_reset = default(bool);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"explicit_reset", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
+    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
     public bool explicit_reset
     {
       get { return _explicit_reset; }
@@ -4848,7 +4848,7 @@ namespace SteamKit2
 
     private uint _stat_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"stat_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint stat_id
     {
       get { return _stat_id; }
@@ -4857,7 +4857,7 @@ namespace SteamKit2
 
     private uint _stat_value = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"stat_value", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint stat_value
     {
       get { return _stat_value; }
@@ -4908,7 +4908,7 @@ namespace SteamKit2
 
     private uint _package_version = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"package_version", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint package_version
     {
       get { return _package_version; }
@@ -4917,7 +4917,7 @@ namespace SteamKit2
 
     private string _os = "";
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"os", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string os
     {
       get { return _os; }
@@ -4926,7 +4926,7 @@ namespace SteamKit2
 
     private string _machine_name = "";
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"machine_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string machine_name
     {
       get { return _machine_name; }
@@ -4935,7 +4935,7 @@ namespace SteamKit2
 
     private string _ip_public = "";
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"ip_public", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string ip_public
     {
       get { return _ip_public; }
@@ -4944,7 +4944,7 @@ namespace SteamKit2
 
     private string _ip_private = "";
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"ip_private", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string ip_private
     {
       get { return _ip_private; }
@@ -4965,7 +4965,7 @@ namespace SteamKit2
 
     private uint _appid = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"appid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint appid
     {
       get { return _appid; }
@@ -4974,7 +4974,7 @@ namespace SteamKit2
 
     private string _extra_info = "";
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"extra_info", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string extra_info
     {
       get { return _extra_info; }
@@ -4983,7 +4983,7 @@ namespace SteamKit2
 
     private uint _time_running_sec = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"time_running_sec", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint time_running_sec
     {
       get { return _time_running_sec; }
@@ -5007,7 +5007,7 @@ namespace SteamKit2
 
     private bool _media = default(bool);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"media", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
+    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
     public bool media
     {
       get { return _media; }
@@ -5016,7 +5016,7 @@ namespace SteamKit2
 
     private bool _tools = default(bool);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"tools", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
+    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
     public bool tools
     {
       get { return _tools; }
@@ -5025,7 +5025,7 @@ namespace SteamKit2
 
     private bool _games = default(bool);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"games", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
+    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
     public bool games
     {
       get { return _games; }
@@ -5034,7 +5034,7 @@ namespace SteamKit2
 
     private bool _installed = default(bool);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"installed", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
+    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
     public bool installed
     {
       get { return _installed; }
@@ -5060,7 +5060,7 @@ namespace SteamKit2
 
     private ulong _bytes_available = default(ulong);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"bytes_available", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong bytes_available
     {
       get { return _bytes_available; }
@@ -5074,7 +5074,7 @@ namespace SteamKit2
 
     private uint _appid = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"appid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint appid
     {
       get { return _appid; }
@@ -5083,7 +5083,7 @@ namespace SteamKit2
 
     private string _category = "";
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"category", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string category
     {
       get { return _category; }
@@ -5092,7 +5092,7 @@ namespace SteamKit2
 
     private bool _favorite = default(bool);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"favorite", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
+    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
     public bool favorite
     {
       get { return _favorite; }
@@ -5101,7 +5101,7 @@ namespace SteamKit2
 
     private bool _installed = default(bool);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"installed", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
+    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
     public bool installed
     {
       get { return _installed; }
@@ -5110,7 +5110,7 @@ namespace SteamKit2
 
     private bool _auto_update = default(bool);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"auto_update", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
+    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
     public bool auto_update
     {
       get { return _auto_update; }
@@ -5119,7 +5119,7 @@ namespace SteamKit2
 
     private ulong _bytes_downloaded = default(ulong);
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"bytes_downloaded", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong bytes_downloaded
     {
       get { return _bytes_downloaded; }
@@ -5128,7 +5128,7 @@ namespace SteamKit2
 
     private ulong _bytes_needed = default(ulong);
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"bytes_needed", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong bytes_needed
     {
       get { return _bytes_needed; }
@@ -5137,7 +5137,7 @@ namespace SteamKit2
 
     private uint _bytes_download_rate = default(uint);
     [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"bytes_download_rate", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint bytes_download_rate
     {
       get { return _bytes_download_rate; }
@@ -5158,7 +5158,7 @@ namespace SteamKit2
 
     private uint _appid = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"appid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint appid
     {
       get { return _appid; }
@@ -5167,7 +5167,7 @@ namespace SteamKit2
 
     private bool _installed = default(bool);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"installed", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
+    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
     public bool installed
     {
       get { return _installed; }
@@ -5196,7 +5196,7 @@ namespace SteamKit2
 
     private uint _appid = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"appid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint appid
     {
       get { return _appid; }
@@ -5215,7 +5215,7 @@ namespace SteamKit2
 
     private uint _result = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"result", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint result
     {
       get { return _result; }
@@ -5234,7 +5234,7 @@ namespace SteamKit2
 
     private uint _appid = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"appid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint appid
     {
       get { return _appid; }
@@ -5253,7 +5253,7 @@ namespace SteamKit2
 
     private uint _result = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"result", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint result
     {
       get { return _result; }
@@ -5272,7 +5272,7 @@ namespace SteamKit2
 
     private uint _appid = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"appid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint appid
     {
       get { return _appid; }
@@ -5281,7 +5281,7 @@ namespace SteamKit2
 
     private bool _update = default(bool);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"update", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
+    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
     public bool update
     {
       get { return _update; }
@@ -5300,7 +5300,7 @@ namespace SteamKit2
 
     private uint _result = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"result", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint result
     {
       get { return _result; }
@@ -5319,7 +5319,7 @@ namespace SteamKit2
 
     private uint _app_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"app_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint app_id
     {
       get { return _app_id; }
@@ -5328,7 +5328,7 @@ namespace SteamKit2
 
     private uint _file_size = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"file_size", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint file_size
     {
       get { return _file_size; }
@@ -5337,7 +5337,7 @@ namespace SteamKit2
 
     private uint _raw_file_size = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"raw_file_size", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint raw_file_size
     {
       get { return _raw_file_size; }
@@ -5346,7 +5346,7 @@ namespace SteamKit2
 
     private byte[] _sha_file = null;
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"sha_file", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
     public byte[] sha_file
     {
       get { return _sha_file; }
@@ -5355,7 +5355,7 @@ namespace SteamKit2
 
     private ulong _time_stamp = default(ulong);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"time_stamp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong time_stamp
     {
       get { return _time_stamp; }
@@ -5364,7 +5364,7 @@ namespace SteamKit2
 
     private string _file_name = "";
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"file_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string file_name
     {
       get { return _file_name; }
@@ -5373,7 +5373,7 @@ namespace SteamKit2
 
     private uint _platforms_to_sync_deprecated = default(uint);
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"platforms_to_sync_deprecated", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint platforms_to_sync_deprecated
     {
       get { return _platforms_to_sync_deprecated; }
@@ -5382,7 +5382,7 @@ namespace SteamKit2
 
     private uint _platforms_to_sync = (uint)4294967295;
     [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"platforms_to_sync", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue((uint)4294967295)]
+    [global::ProtoBuf.ProtoDefaultValue((uint)4294967295)]
     public uint platforms_to_sync
     {
       get { return _platforms_to_sync; }
@@ -5401,7 +5401,7 @@ namespace SteamKit2
 
     private int _eresult = (int)2;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"eresult", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue((int)2)]
+    [global::ProtoBuf.ProtoDefaultValue((int)2)]
     public int eresult
     {
       get { return _eresult; }
@@ -5410,7 +5410,7 @@ namespace SteamKit2
 
     private byte[] _sha_file = null;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"sha_file", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
     public byte[] sha_file
     {
       get { return _sha_file; }
@@ -5429,7 +5429,7 @@ namespace SteamKit2
 
     private byte[] _sha_file = null;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"sha_file", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
     public byte[] sha_file
     {
       get { return _sha_file; }
@@ -5438,7 +5438,7 @@ namespace SteamKit2
 
     private uint _file_start = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"file_start", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint file_start
     {
       get { return _file_start; }
@@ -5447,7 +5447,7 @@ namespace SteamKit2
 
     private byte[] _data = null;
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"data", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
     public byte[] data
     {
       get { return _data; }
@@ -5476,7 +5476,7 @@ namespace SteamKit2
 
     private int _eresult = (int)2;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"eresult", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue((int)2)]
+    [global::ProtoBuf.ProtoDefaultValue((int)2)]
     public int eresult
     {
       get { return _eresult; }
@@ -5485,7 +5485,7 @@ namespace SteamKit2
 
     private byte[] _sha_file = null;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"sha_file", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
     public byte[] sha_file
     {
       get { return _sha_file; }
@@ -5504,7 +5504,7 @@ namespace SteamKit2
 
     private uint _app_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"app_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint app_id
     {
       get { return _app_id; }
@@ -5513,7 +5513,7 @@ namespace SteamKit2
 
     private string _file_name = "";
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"file_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string file_name
     {
       get { return _file_name; }
@@ -5522,7 +5522,7 @@ namespace SteamKit2
 
     private bool _is_explicit_delete = default(bool);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"is_explicit_delete", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
+    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
     public bool is_explicit_delete
     {
       get { return _is_explicit_delete; }
@@ -5541,7 +5541,7 @@ namespace SteamKit2
 
     private int _eresult = (int)2;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"eresult", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue((int)2)]
+    [global::ProtoBuf.ProtoDefaultValue((int)2)]
     public int eresult
     {
       get { return _eresult; }
@@ -5550,7 +5550,7 @@ namespace SteamKit2
 
     private string _file_name = "";
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"file_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string file_name
     {
       get { return _file_name; }
@@ -5598,7 +5598,7 @@ namespace SteamKit2
 
     private uint _app_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"app_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint app_id
     {
       get { return _app_id; }
@@ -5607,7 +5607,7 @@ namespace SteamKit2
 
     private string _file_name = "";
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"file_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string file_name
     {
       get { return _file_name; }
@@ -5616,7 +5616,7 @@ namespace SteamKit2
 
     private byte[] _sha_file = null;
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"sha_file", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
     public byte[] sha_file
     {
       get { return _sha_file; }
@@ -5625,7 +5625,7 @@ namespace SteamKit2
 
     private ulong _time_stamp = default(ulong);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"time_stamp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong time_stamp
     {
       get { return _time_stamp; }
@@ -5634,7 +5634,7 @@ namespace SteamKit2
 
     private uint _raw_file_size = default(uint);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"raw_file_size", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint raw_file_size
     {
       get { return _raw_file_size; }
@@ -5643,7 +5643,7 @@ namespace SteamKit2
 
     private bool _is_explicit_delete = default(bool);
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"is_explicit_delete", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
+    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
     public bool is_explicit_delete
     {
       get { return _is_explicit_delete; }
@@ -5652,7 +5652,7 @@ namespace SteamKit2
 
     private uint _platforms_to_sync = default(uint);
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"platforms_to_sync", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint platforms_to_sync
     {
       get { return _platforms_to_sync; }
@@ -5676,7 +5676,7 @@ namespace SteamKit2
 
     private uint _app_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"app_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint app_id
     {
       get { return _app_id; }
@@ -5685,7 +5685,7 @@ namespace SteamKit2
 
     private string _file_name = "";
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"file_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string file_name
     {
       get { return _file_name; }
@@ -5704,7 +5704,7 @@ namespace SteamKit2
 
     private int _eresult = (int)2;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"eresult", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue((int)2)]
+    [global::ProtoBuf.ProtoDefaultValue((int)2)]
     public int eresult
     {
       get { return _eresult; }
@@ -5713,7 +5713,7 @@ namespace SteamKit2
 
     private uint _app_id = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"app_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint app_id
     {
       get { return _app_id; }
@@ -5722,7 +5722,7 @@ namespace SteamKit2
 
     private uint _file_size = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"file_size", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint file_size
     {
       get { return _file_size; }
@@ -5731,7 +5731,7 @@ namespace SteamKit2
 
     private uint _raw_file_size = default(uint);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"raw_file_size", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint raw_file_size
     {
       get { return _raw_file_size; }
@@ -5740,7 +5740,7 @@ namespace SteamKit2
 
     private byte[] _sha_file = null;
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"sha_file", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
     public byte[] sha_file
     {
       get { return _sha_file; }
@@ -5749,7 +5749,7 @@ namespace SteamKit2
 
     private ulong _time_stamp = default(ulong);
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"time_stamp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong time_stamp
     {
       get { return _time_stamp; }
@@ -5758,7 +5758,7 @@ namespace SteamKit2
 
     private bool _is_explicit_delete = default(bool);
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"is_explicit_delete", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
+    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
     public bool is_explicit_delete
     {
       get { return _is_explicit_delete; }
@@ -5777,7 +5777,7 @@ namespace SteamKit2
 
     private uint _protocol_version = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"protocol_version", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint protocol_version
     {
       get { return _protocol_version; }
@@ -5786,7 +5786,7 @@ namespace SteamKit2
 
     private ulong _am_session_token = default(ulong);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"am_session_token", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong am_session_token
     {
       get { return _am_session_token; }
@@ -5812,7 +5812,7 @@ namespace SteamKit2
 
     private int _eresult = (int)2;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"eresult", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue((int)2)]
+    [global::ProtoBuf.ProtoDefaultValue((int)2)]
     public int eresult
     {
       get { return _eresult; }
@@ -5831,7 +5831,7 @@ namespace SteamKit2
 
     private uint _app_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"app_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint app_id
     {
       get { return _app_id; }
@@ -5840,7 +5840,7 @@ namespace SteamKit2
 
     private byte[] _userdata = null;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"userdata", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
     public byte[] userdata
     {
       get { return _userdata; }
@@ -5859,7 +5859,7 @@ namespace SteamKit2
 
     private uint _app_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"app_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint app_id
     {
       get { return _app_id; }
@@ -5868,7 +5868,7 @@ namespace SteamKit2
 
     private int _eresult = (int)2;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"eresult", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue((int)2)]
+    [global::ProtoBuf.ProtoDefaultValue((int)2)]
     public int eresult
     {
       get { return _eresult; }
@@ -5877,7 +5877,7 @@ namespace SteamKit2
 
     private EncryptedAppTicket _encrypted_app_ticket = null;
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"encrypted_app_ticket", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
     public EncryptedAppTicket encrypted_app_ticket
     {
       get { return _encrypted_app_ticket; }
@@ -5896,7 +5896,7 @@ namespace SteamKit2
 
     private bool _has_wallet = default(bool);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"has_wallet", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
+    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
     public bool has_wallet
     {
       get { return _has_wallet; }
@@ -5905,7 +5905,7 @@ namespace SteamKit2
 
     private int _balance = default(int);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"balance", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int balance
     {
       get { return _balance; }
@@ -5914,7 +5914,7 @@ namespace SteamKit2
 
     private int _currency = default(int);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"currency", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int currency
     {
       get { return _currency; }
@@ -5933,7 +5933,7 @@ namespace SteamKit2
 
     private uint _last_changenumber = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"last_changenumber", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint last_changenumber
     {
       get { return _last_changenumber; }
@@ -5942,7 +5942,7 @@ namespace SteamKit2
 
     private bool _send_changelist = default(bool);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"send_changelist", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
+    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
     public bool send_changelist
     {
       get { return _send_changelist; }
@@ -5961,7 +5961,7 @@ namespace SteamKit2
 
     private uint _current_change_number = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"current_change_number", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint current_change_number
     {
       get { return _current_change_number; }
@@ -5970,7 +5970,7 @@ namespace SteamKit2
 
     private bool _force_full_update = default(bool);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"force_full_update", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
+    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
     public bool force_full_update
     {
       get { return _force_full_update; }
@@ -6008,7 +6008,7 @@ namespace SteamKit2
 
     private uint _app_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"app_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint app_id
     {
       get { return _app_id; }
@@ -6017,7 +6017,7 @@ namespace SteamKit2
 
     private uint _section_flags = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"section_flags", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint section_flags
     {
       get { return _section_flags; }
@@ -6060,7 +6060,7 @@ namespace SteamKit2
 
     private uint _app_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"app_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint app_id
     {
       get { return _app_id; }
@@ -6069,7 +6069,7 @@ namespace SteamKit2
 
     private uint _change_number = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"change_number", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint change_number
     {
       get { return _change_number; }
@@ -6090,7 +6090,7 @@ namespace SteamKit2
 
     private uint _section_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"section_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint section_id
     {
       get { return _section_id; }
@@ -6099,7 +6099,7 @@ namespace SteamKit2
 
     private byte[] _section_kv = null;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"section_kv", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
     public byte[] section_kv
     {
       get { return _section_kv; }
@@ -6128,7 +6128,7 @@ namespace SteamKit2
 
     private ulong _hcontent = (ulong)18446744073709551615;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"hcontent", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue((ulong)18446744073709551615)]
+    [global::ProtoBuf.ProtoDefaultValue((ulong)18446744073709551615)]
     public ulong hcontent
     {
       get { return _hcontent; }
@@ -6147,7 +6147,7 @@ namespace SteamKit2
 
     private int _eresult = (int)2;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"eresult", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue((int)2)]
+    [global::ProtoBuf.ProtoDefaultValue((int)2)]
     public int eresult
     {
       get { return _eresult; }
@@ -6156,7 +6156,7 @@ namespace SteamKit2
 
     private string _url = "";
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"url", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string url
     {
       get { return _url; }
@@ -6165,7 +6165,7 @@ namespace SteamKit2
 
     private uint _app_id = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"app_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint app_id
     {
       get { return _app_id; }
@@ -6174,7 +6174,7 @@ namespace SteamKit2
 
     private string _filename = "";
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"filename", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string filename
     {
       get { return _filename; }
@@ -6183,7 +6183,7 @@ namespace SteamKit2
 
     private ulong _steamid_creator = default(ulong);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"steamid_creator", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong steamid_creator
     {
       get { return _steamid_creator; }
@@ -6202,7 +6202,7 @@ namespace SteamKit2
 
     private uint _app_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"app_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint app_id
     {
       get { return _app_id; }
@@ -6211,7 +6211,7 @@ namespace SteamKit2
 
     private string _file_name = "";
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"file_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string file_name
     {
       get { return _file_name; }
@@ -6230,7 +6230,7 @@ namespace SteamKit2
 
     private int _eresult = (int)2;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"eresult", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue((int)2)]
+    [global::ProtoBuf.ProtoDefaultValue((int)2)]
     public int eresult
     {
       get { return _eresult; }
@@ -6239,7 +6239,7 @@ namespace SteamKit2
 
     private uint _app_id = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"app_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint app_id
     {
       get { return _app_id; }
@@ -6248,7 +6248,7 @@ namespace SteamKit2
 
     private string _file_name = "";
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"file_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string file_name
     {
       get { return _file_name; }
@@ -6257,7 +6257,7 @@ namespace SteamKit2
 
     private byte[] _sha_file = null;
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"sha_file", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
     public byte[] sha_file
     {
       get { return _sha_file; }
@@ -6266,7 +6266,7 @@ namespace SteamKit2
 
     private ulong _time_stamp = default(ulong);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"time_stamp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong time_stamp
     {
       get { return _time_stamp; }
@@ -6275,7 +6275,7 @@ namespace SteamKit2
 
     private uint _raw_file_size = default(uint);
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"raw_file_size", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint raw_file_size
     {
       get { return _raw_file_size; }
@@ -6284,7 +6284,7 @@ namespace SteamKit2
 
     private bool _is_explicit_delete = default(bool);
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"is_explicit_delete", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
+    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
     public bool is_explicit_delete
     {
       get { return _is_explicit_delete; }
@@ -6303,7 +6303,7 @@ namespace SteamKit2
 
     private uint _app_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"app_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint app_id
     {
       get { return _app_id; }
@@ -6312,7 +6312,7 @@ namespace SteamKit2
 
     private string _file_name = "";
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"file_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string file_name
     {
       get { return _file_name; }
@@ -6331,7 +6331,7 @@ namespace SteamKit2
 
     private int _eresult = (int)2;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"eresult", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue((int)2)]
+    [global::ProtoBuf.ProtoDefaultValue((int)2)]
     public int eresult
     {
       get { return _eresult; }
@@ -6340,7 +6340,7 @@ namespace SteamKit2
 
     private ulong _hcontent = (ulong)18446744073709551615;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"hcontent", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue((ulong)18446744073709551615)]
+    [global::ProtoBuf.ProtoDefaultValue((ulong)18446744073709551615)]
     public ulong hcontent
     {
       get { return _hcontent; }
@@ -6359,7 +6359,7 @@ namespace SteamKit2
 
     private uint _unique_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"unique_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint unique_id
     {
       get { return _unique_id; }
@@ -6368,7 +6368,7 @@ namespace SteamKit2
 
     private string _login_key = "";
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"login_key", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string login_key
     {
       get { return _login_key; }
@@ -6387,7 +6387,7 @@ namespace SteamKit2
 
     private uint _unique_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"unique_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint unique_id
     {
       get { return _unique_id; }
@@ -6406,7 +6406,7 @@ namespace SteamKit2
 
     private ulong _steamid_clan = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steamid_clan", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong steamid_clan
     {
       get { return _steamid_clan; }
@@ -6425,7 +6425,7 @@ namespace SteamKit2
 
     private int _eresult = (int)2;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"eresult", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue((int)2)]
+    [global::ProtoBuf.ProtoDefaultValue((int)2)]
     public int eresult
     {
       get { return _eresult; }
@@ -6434,7 +6434,7 @@ namespace SteamKit2
 
     private ulong _steamid_clan = default(ulong);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"steamid_clan", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong steamid_clan
     {
       get { return _steamid_clan; }
@@ -6443,7 +6443,7 @@ namespace SteamKit2
 
     private int _officer_count = default(int);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"officer_count", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int officer_count
     {
       get { return _officer_count; }
@@ -6462,7 +6462,7 @@ namespace SteamKit2
 
     private uint _eservertype = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"eservertype", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint eservertype
     {
       get { return _eservertype; }
@@ -6471,7 +6471,7 @@ namespace SteamKit2
 
     private uint _app_id = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"app_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint app_id
     {
       get { return _app_id; }
@@ -6490,7 +6490,7 @@ namespace SteamKit2
 
     private ulong _steamid_clan = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steamid_clan", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong steamid_clan
     {
       get { return _steamid_clan; }
@@ -6499,7 +6499,7 @@ namespace SteamKit2
 
     private uint _m_unStatusFlags = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"m_unStatusFlags", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint m_unStatusFlags
     {
       get { return _m_unStatusFlags; }
@@ -6508,7 +6508,7 @@ namespace SteamKit2
 
     private uint _clan_account_flags = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"clan_account_flags", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint clan_account_flags
     {
       get { return _clan_account_flags; }
@@ -6517,7 +6517,7 @@ namespace SteamKit2
 
     private CMsgClientClanState.NameInfo _name_info = null;
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"name_info", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
     public CMsgClientClanState.NameInfo name_info
     {
       get { return _name_info; }
@@ -6526,7 +6526,7 @@ namespace SteamKit2
 
     private CMsgClientClanState.UserCounts _user_counts = null;
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"user_counts", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
     public CMsgClientClanState.UserCounts user_counts
     {
       get { return _user_counts; }
@@ -6554,7 +6554,7 @@ namespace SteamKit2
 
     private string _clan_name = "";
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"clan_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string clan_name
     {
       get { return _clan_name; }
@@ -6563,7 +6563,7 @@ namespace SteamKit2
 
     private byte[] _sha_avatar = null;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"sha_avatar", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
     public byte[] sha_avatar
     {
       get { return _sha_avatar; }
@@ -6582,7 +6582,7 @@ namespace SteamKit2
 
     private uint _members = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"members", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint members
     {
       get { return _members; }
@@ -6591,7 +6591,7 @@ namespace SteamKit2
 
     private uint _online = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"online", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint online
     {
       get { return _online; }
@@ -6600,7 +6600,7 @@ namespace SteamKit2
 
     private uint _chatting = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"chatting", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint chatting
     {
       get { return _chatting; }
@@ -6609,7 +6609,7 @@ namespace SteamKit2
 
     private uint _in_game = default(uint);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"in_game", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint in_game
     {
       get { return _in_game; }
@@ -6628,7 +6628,7 @@ namespace SteamKit2
 
     private ulong _gid = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"gid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong gid
     {
       get { return _gid; }
@@ -6637,7 +6637,7 @@ namespace SteamKit2
 
     private uint _event_time = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"event_time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint event_time
     {
       get { return _event_time; }
@@ -6646,7 +6646,7 @@ namespace SteamKit2
 
     private string _headline = "";
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"headline", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string headline
     {
       get { return _headline; }
@@ -6655,7 +6655,7 @@ namespace SteamKit2
 
     private ulong _game_id = default(ulong);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"game_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong game_id
     {
       get { return _game_id; }
@@ -6664,7 +6664,7 @@ namespace SteamKit2
 
     private bool _just_posted = default(bool);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"just_posted", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
+    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
     public bool just_posted
     {
       get { return _just_posted; }
@@ -6688,7 +6688,7 @@ namespace SteamKit2
 
     private ulong _steamid = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong steamid
     {
       get { return _steamid; }
@@ -6697,7 +6697,7 @@ namespace SteamKit2
 
     private int _chat_entry_type = default(int);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"chat_entry_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int chat_entry_type
     {
       get { return _chat_entry_type; }
@@ -6706,7 +6706,7 @@ namespace SteamKit2
 
     private byte[] _message = null;
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"message", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
     public byte[] message
     {
       get { return _message; }
@@ -6725,7 +6725,7 @@ namespace SteamKit2
 
     private ulong _steamid_from = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steamid_from", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong steamid_from
     {
       get { return _steamid_from; }
@@ -6734,7 +6734,7 @@ namespace SteamKit2
 
     private int _chat_entry_type = default(int);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"chat_entry_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int chat_entry_type
     {
       get { return _chat_entry_type; }
@@ -6743,7 +6743,7 @@ namespace SteamKit2
 
     private bool _from_limited_account = default(bool);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"from_limited_account", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
+    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
     public bool from_limited_account
     {
       get { return _from_limited_account; }
@@ -6752,7 +6752,7 @@ namespace SteamKit2
 
     private byte[] _message = null;
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"message", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
     public byte[] message
     {
       get { return _message; }
@@ -6771,7 +6771,7 @@ namespace SteamKit2
 
     private ulong _steamid_to_add = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steamid_to_add", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong steamid_to_add
     {
       get { return _steamid_to_add; }
@@ -6780,7 +6780,7 @@ namespace SteamKit2
 
     private string _accountname_or_email_to_add = "";
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"accountname_or_email_to_add", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string accountname_or_email_to_add
     {
       get { return _accountname_or_email_to_add; }
@@ -6799,7 +6799,7 @@ namespace SteamKit2
 
     private int _eresult = (int)2;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"eresult", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue((int)2)]
+    [global::ProtoBuf.ProtoDefaultValue((int)2)]
     public int eresult
     {
       get { return _eresult; }
@@ -6808,7 +6808,7 @@ namespace SteamKit2
 
     private ulong _steam_id_added = default(ulong);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"steam_id_added", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong steam_id_added
     {
       get { return _steam_id_added; }
@@ -6817,7 +6817,7 @@ namespace SteamKit2
 
     private string _persona_name_added = "";
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"persona_name_added", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string persona_name_added
     {
       get { return _persona_name_added; }
@@ -6836,7 +6836,7 @@ namespace SteamKit2
 
     private ulong _friendid = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"friendid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong friendid
     {
       get { return _friendid; }
@@ -6855,7 +6855,7 @@ namespace SteamKit2
 
     private uint _appid = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"appid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint appid
     {
       get { return _appid; }
@@ -6864,7 +6864,7 @@ namespace SteamKit2
 
     private string _filename = "";
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"filename", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string filename
     {
       get { return _filename; }
@@ -6873,7 +6873,7 @@ namespace SteamKit2
 
     private string _thumbname = "";
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"thumbname", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string thumbname
     {
       get { return _thumbname; }
@@ -6882,7 +6882,7 @@ namespace SteamKit2
 
     private uint _rtime32_created = default(uint);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"rtime32_created", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint rtime32_created
     {
       get { return _rtime32_created; }
@@ -6891,7 +6891,7 @@ namespace SteamKit2
 
     private uint _width = default(uint);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"width", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint width
     {
       get { return _width; }
@@ -6900,7 +6900,7 @@ namespace SteamKit2
 
     private uint _height = default(uint);
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"height", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint height
     {
       get { return _height; }
@@ -6909,7 +6909,7 @@ namespace SteamKit2
 
     private uint _permissions = default(uint);
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"permissions", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint permissions
     {
       get { return _permissions; }
@@ -6918,7 +6918,7 @@ namespace SteamKit2
 
     private string _caption = "";
     [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"caption", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string caption
     {
       get { return _caption; }
@@ -6927,7 +6927,7 @@ namespace SteamKit2
 
     private string _shortcut_name = "";
     [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"shortcut_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string shortcut_name
     {
       get { return _shortcut_name; }
@@ -6946,7 +6946,7 @@ namespace SteamKit2
 
     private int _eresult = (int)2;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"eresult", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue((int)2)]
+    [global::ProtoBuf.ProtoDefaultValue((int)2)]
     public int eresult
     {
       get { return _eresult; }
@@ -6955,7 +6955,7 @@ namespace SteamKit2
 
     private ulong _screenshotid = (ulong)18446744073709551615;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"screenshotid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue((ulong)18446744073709551615)]
+    [global::ProtoBuf.ProtoDefaultValue((ulong)18446744073709551615)]
     public ulong screenshotid
     {
       get { return _screenshotid; }
@@ -6974,7 +6974,7 @@ namespace SteamKit2
 
     private ulong _screenshotid = (ulong)18446744073709551615;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"screenshotid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue((ulong)18446744073709551615)]
+    [global::ProtoBuf.ProtoDefaultValue((ulong)18446744073709551615)]
     public ulong screenshotid
     {
       get { return _screenshotid; }
@@ -6993,7 +6993,7 @@ namespace SteamKit2
 
     private int _eresult = (int)2;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"eresult", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue((int)2)]
+    [global::ProtoBuf.ProtoDefaultValue((int)2)]
     public int eresult
     {
       get { return _eresult; }
@@ -7022,7 +7022,7 @@ namespace SteamKit2
 
     private ulong _steamid_idgs = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steamid_idgs", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong steamid_idgs
     {
       get { return _steamid_idgs; }
@@ -7031,7 +7031,7 @@ namespace SteamKit2
 
     private ulong _gameid = default(ulong);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"gameid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong gameid
     {
       get { return _gameid; }
@@ -7040,7 +7040,7 @@ namespace SteamKit2
 
     private uint _game_ip = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"game_ip", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint game_ip
     {
       get { return _game_ip; }
@@ -7049,7 +7049,7 @@ namespace SteamKit2
 
     private uint _game_port = default(uint);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"game_port", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint game_port
     {
       get { return _game_port; }
@@ -7058,7 +7058,7 @@ namespace SteamKit2
 
     private byte[] _token = null;
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"token", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
     public byte[] token
     {
       get { return _token; }
@@ -7077,7 +7077,7 @@ namespace SteamKit2
 
     private byte[] _rich_presence_kv = null;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"rich_presence_kv", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
     public byte[] rich_presence_kv
     {
       get { return _rich_presence_kv; }
@@ -7132,7 +7132,7 @@ namespace SteamKit2
 
     private ulong _steamid_user = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steamid_user", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong steamid_user
     {
       get { return _steamid_user; }
@@ -7141,7 +7141,7 @@ namespace SteamKit2
 
     private byte[] _rich_presence_kv = null;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"rich_presence_kv", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
     public byte[] rich_presence_kv
     {
       get { return _rich_presence_kv; }
@@ -7165,7 +7165,7 @@ namespace SteamKit2
 
     private uint _app_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"app_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint app_id
     {
       get { return _app_id; }
@@ -7184,7 +7184,7 @@ namespace SteamKit2
 
     private uint _app_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"app_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint app_id
     {
       get { return _app_id; }
@@ -7193,7 +7193,7 @@ namespace SteamKit2
 
     private uint _pid = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"pid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint pid
     {
       get { return _pid; }
@@ -7202,7 +7202,7 @@ namespace SteamKit2
 
     private uint _eresult = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"eresult", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint eresult
     {
       get { return _eresult; }
@@ -7211,7 +7211,7 @@ namespace SteamKit2
 
     private string _filename = "";
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"filename", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string filename
     {
       get { return _filename; }
@@ -7220,7 +7220,7 @@ namespace SteamKit2
 
     private uint _esignatureresult = default(uint);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"esignatureresult", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint esignatureresult
     {
       get { return _esignatureresult; }
@@ -7229,7 +7229,7 @@ namespace SteamKit2
 
     private byte[] _sha_file = null;
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"sha_file", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
     public byte[] sha_file
     {
       get { return _sha_file; }
@@ -7238,7 +7238,7 @@ namespace SteamKit2
 
     private byte[] _signatureheader = null;
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"signatureheader", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
     public byte[] signatureheader
     {
       get { return _signatureheader; }
@@ -7247,7 +7247,7 @@ namespace SteamKit2
 
     private uint _filesize = default(uint);
     [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"filesize", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint filesize
     {
       get { return _filesize; }
@@ -7256,7 +7256,7 @@ namespace SteamKit2
 
     private uint _getlasterror = default(uint);
     [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"getlasterror", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint getlasterror
     {
       get { return _getlasterror; }
@@ -7265,7 +7265,7 @@ namespace SteamKit2
 
     private uint _evalvesignaturecheckdetail = default(uint);
     [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"evalvesignaturecheckdetail", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint evalvesignaturecheckdetail
     {
       get { return _evalvesignaturecheckdetail; }
@@ -7284,7 +7284,7 @@ namespace SteamKit2
 
     private uint _permissions = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"permissions", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint permissions
     {
       get { return _permissions; }
@@ -7293,7 +7293,7 @@ namespace SteamKit2
 
     private uint _appid = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"appid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint appid
     {
       get { return _appid; }
@@ -7302,7 +7302,7 @@ namespace SteamKit2
 
     private uint _start = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"start", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint start
     {
       get { return _start; }
@@ -7311,7 +7311,7 @@ namespace SteamKit2
 
     private uint _max_results = default(uint);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"max_results", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint max_results
     {
       get { return _max_results; }
@@ -7320,7 +7320,7 @@ namespace SteamKit2
 
     private string _shortcut_name = "";
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"shortcut_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string shortcut_name
     {
       get { return _shortcut_name; }
@@ -7339,7 +7339,7 @@ namespace SteamKit2
 
     private int _eresult = (int)2;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"eresult", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue((int)2)]
+    [global::ProtoBuf.ProtoDefaultValue((int)2)]
     public int eresult
     {
       get { return _eresult; }
@@ -7348,7 +7348,7 @@ namespace SteamKit2
 
     private uint _results_available = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"results_available", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint results_available
     {
       get { return _results_available; }
@@ -7369,7 +7369,7 @@ namespace SteamKit2
 
     private ulong _file_id = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"file_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong file_id
     {
       get { return _file_id; }
@@ -7378,7 +7378,7 @@ namespace SteamKit2
 
     private uint _width = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"width", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint width
     {
       get { return _width; }
@@ -7387,7 +7387,7 @@ namespace SteamKit2
 
     private uint _height = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"height", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint height
     {
       get { return _height; }
@@ -7396,7 +7396,7 @@ namespace SteamKit2
 
     private uint _appid = default(uint);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"appid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint appid
     {
       get { return _appid; }
@@ -7405,7 +7405,7 @@ namespace SteamKit2
 
     private uint _time_created = default(uint);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"time_created", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint time_created
     {
       get { return _time_created; }
@@ -7414,7 +7414,7 @@ namespace SteamKit2
 
     private uint _comment_count = default(uint);
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"comment_count", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint comment_count
     {
       get { return _comment_count; }
@@ -7423,7 +7423,7 @@ namespace SteamKit2
 
     private string _caption = "";
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"caption", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string caption
     {
       get { return _caption; }
@@ -7432,7 +7432,7 @@ namespace SteamKit2
 
     private uint _permission = default(uint);
     [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"permission", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint permission
     {
       get { return _permission; }
@@ -7441,7 +7441,7 @@ namespace SteamKit2
 
     private string _url = "";
     [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"url", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string url
     {
       get { return _url; }
@@ -7450,7 +7450,7 @@ namespace SteamKit2
 
     private string _thumb_url = "";
     [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"thumb_url", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string thumb_url
     {
       get { return _thumb_url; }
@@ -7459,7 +7459,7 @@ namespace SteamKit2
 
     private string _shortcut_name = "";
     [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"shortcut_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string shortcut_name
     {
       get { return _shortcut_name; }
@@ -7483,7 +7483,7 @@ namespace SteamKit2
 
     private string _filename = "";
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"filename", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string filename
     {
       get { return _filename; }
@@ -7492,7 +7492,7 @@ namespace SteamKit2
 
     private uint _offset = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"offset", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint offset
     {
       get { return _offset; }
@@ -7501,7 +7501,7 @@ namespace SteamKit2
 
     private uint _cubtoread = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"cubtoread", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint cubtoread
     {
       get { return _cubtoread; }
@@ -7520,7 +7520,7 @@ namespace SteamKit2
 
     private string _filename = "";
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"filename", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string filename
     {
       get { return _filename; }
@@ -7529,7 +7529,7 @@ namespace SteamKit2
 
     private uint _eresult = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"eresult", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint eresult
     {
       get { return _eresult; }
@@ -7538,7 +7538,7 @@ namespace SteamKit2
 
     private uint _filesize = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"filesize", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint filesize
     {
       get { return _filesize; }
@@ -7547,7 +7547,7 @@ namespace SteamKit2
 
     private byte[] _sha_file = null;
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"sha_file", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
     public byte[] sha_file
     {
       get { return _sha_file; }
@@ -7556,7 +7556,7 @@ namespace SteamKit2
 
     private uint _getlasterror = default(uint);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"getlasterror", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint getlasterror
     {
       get { return _getlasterror; }
@@ -7565,7 +7565,7 @@ namespace SteamKit2
 
     private uint _offset = default(uint);
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"offset", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint offset
     {
       get { return _offset; }
@@ -7574,7 +7574,7 @@ namespace SteamKit2
 
     private uint _cubread = default(uint);
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"cubread", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint cubread
     {
       get { return _cubread; }
@@ -7583,7 +7583,7 @@ namespace SteamKit2
 
     private byte[] _bytes_read = null;
     [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"bytes_read", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
     public byte[] bytes_read
     {
       get { return _bytes_read; }
@@ -7592,7 +7592,7 @@ namespace SteamKit2
 
     private string _filename_sentry = "";
     [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"filename_sentry", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string filename_sentry
     {
       get { return _filename_sentry; }
@@ -7611,7 +7611,7 @@ namespace SteamKit2
 
     private string _filename = "";
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"filename", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string filename
     {
       get { return _filename; }
@@ -7620,7 +7620,7 @@ namespace SteamKit2
 
     private uint _offset = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"offset", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint offset
     {
       get { return _offset; }
@@ -7629,7 +7629,7 @@ namespace SteamKit2
 
     private uint _cubtowrite = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"cubtowrite", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint cubtowrite
     {
       get { return _cubtowrite; }
@@ -7638,7 +7638,7 @@ namespace SteamKit2
 
     private byte[] _bytes = null;
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"bytes", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
     public byte[] bytes
     {
       get { return _bytes; }
@@ -7647,7 +7647,7 @@ namespace SteamKit2
 
     private uint _otp_type = default(uint);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"otp_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint otp_type
     {
       get { return _otp_type; }
@@ -7656,7 +7656,7 @@ namespace SteamKit2
 
     private string _otp_identifier = "";
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"otp_identifier", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string otp_identifier
     {
       get { return _otp_identifier; }
@@ -7665,7 +7665,7 @@ namespace SteamKit2
 
     private byte[] _otp_sharedsecret = null;
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"otp_sharedsecret", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
     public byte[] otp_sharedsecret
     {
       get { return _otp_sharedsecret; }
@@ -7674,7 +7674,7 @@ namespace SteamKit2
 
     private uint _otp_timedrift = default(uint);
     [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"otp_timedrift", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint otp_timedrift
     {
       get { return _otp_timedrift; }
@@ -7693,7 +7693,7 @@ namespace SteamKit2
 
     private string _filename = "";
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"filename", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string filename
     {
       get { return _filename; }
@@ -7702,7 +7702,7 @@ namespace SteamKit2
 
     private uint _eresult = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"eresult", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint eresult
     {
       get { return _eresult; }
@@ -7711,7 +7711,7 @@ namespace SteamKit2
 
     private uint _filesize = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"filesize", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint filesize
     {
       get { return _filesize; }
@@ -7720,7 +7720,7 @@ namespace SteamKit2
 
     private byte[] _sha_file = null;
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"sha_file", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
     public byte[] sha_file
     {
       get { return _sha_file; }
@@ -7729,7 +7729,7 @@ namespace SteamKit2
 
     private uint _getlasterror = default(uint);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"getlasterror", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint getlasterror
     {
       get { return _getlasterror; }
@@ -7738,7 +7738,7 @@ namespace SteamKit2
 
     private uint _offset = default(uint);
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"offset", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint offset
     {
       get { return _offset; }
@@ -7747,7 +7747,7 @@ namespace SteamKit2
 
     private uint _cubwrote = default(uint);
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"cubwrote", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint cubwrote
     {
       get { return _cubwrote; }
@@ -7756,7 +7756,7 @@ namespace SteamKit2
 
     private int _otp_type = default(int);
     [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"otp_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int otp_type
     {
       get { return _otp_type; }
@@ -7765,7 +7765,7 @@ namespace SteamKit2
 
     private uint _otp_value = default(uint);
     [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"otp_value", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint otp_value
     {
       get { return _otp_value; }
@@ -7774,7 +7774,7 @@ namespace SteamKit2
 
     private string _otp_identifier = "";
     [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"otp_identifier", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string otp_identifier
     {
       get { return _otp_identifier; }
@@ -7793,7 +7793,7 @@ namespace SteamKit2
 
     private string _filename = "";
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"filename", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string filename
     {
       get { return _filename; }
@@ -7802,7 +7802,7 @@ namespace SteamKit2
 
     private uint _eresult_sentryfile = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"eresult_sentryfile", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint eresult_sentryfile
     {
       get { return _eresult_sentryfile; }
@@ -7811,7 +7811,7 @@ namespace SteamKit2
 
     private uint _filesize = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"filesize", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint filesize
     {
       get { return _filesize; }
@@ -7820,7 +7820,7 @@ namespace SteamKit2
 
     private byte[] _sha_sentryfile = null;
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"sha_sentryfile", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
     public byte[] sha_sentryfile
     {
       get { return _sha_sentryfile; }
@@ -7829,7 +7829,7 @@ namespace SteamKit2
 
     private int _lock_account_action = default(int);
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"lock_account_action", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int lock_account_action
     {
       get { return _lock_account_action; }
@@ -7838,7 +7838,7 @@ namespace SteamKit2
 
     private uint _otp_type = default(uint);
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"otp_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint otp_type
     {
       get { return _otp_type; }
@@ -7847,7 +7847,7 @@ namespace SteamKit2
 
     private string _otp_identifier = "";
     [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"otp_identifier", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string otp_identifier
     {
       get { return _otp_identifier; }
@@ -7856,7 +7856,7 @@ namespace SteamKit2
 
     private byte[] _otp_sharedsecret = null;
     [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"otp_sharedsecret", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
     public byte[] otp_sharedsecret
     {
       get { return _otp_sharedsecret; }
@@ -7865,7 +7865,7 @@ namespace SteamKit2
 
     private uint _otp_value = default(uint);
     [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"otp_value", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint otp_value
     {
       get { return _otp_value; }
@@ -7884,7 +7884,7 @@ namespace SteamKit2
 
     private uint _eresult = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"eresult", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint eresult
     {
       get { return _eresult; }
@@ -7903,7 +7903,7 @@ namespace SteamKit2
 
     private string _key = "";
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"key", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string key
     {
       get { return _key; }
@@ -7922,7 +7922,7 @@ namespace SteamKit2
 
     private int _eresult = (int)2;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"eresult", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue((int)2)]
+    [global::ProtoBuf.ProtoDefaultValue((int)2)]
     public int eresult
     {
       get { return _eresult; }
@@ -7931,7 +7931,7 @@ namespace SteamKit2
 
     private int _purchase_result_details = default(int);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"purchase_result_details", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int purchase_result_details
     {
       get { return _purchase_result_details; }
@@ -7940,7 +7940,7 @@ namespace SteamKit2
 
     private byte[] _purchase_receipt_info = null;
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"purchase_receipt_info", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
     public byte[] purchase_receipt_info
     {
       get { return _purchase_receipt_info; }
@@ -7959,7 +7959,7 @@ namespace SteamKit2
 
     private string _bios_manufacturer = "";
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"bios_manufacturer", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string bios_manufacturer
     {
       get { return _bios_manufacturer; }
@@ -7968,7 +7968,7 @@ namespace SteamKit2
 
     private string _bios_serialnumber = "";
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"bios_serialnumber", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string bios_serialnumber
     {
       get { return _bios_serialnumber; }
@@ -7977,7 +7977,7 @@ namespace SteamKit2
 
     private byte[] _license_file = null;
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"license_file", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
     public byte[] license_file
     {
       get { return _license_file; }
@@ -7996,7 +7996,7 @@ namespace SteamKit2
 
     private uint _package_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"package_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint package_id
     {
       get { return _package_id; }
@@ -8005,7 +8005,7 @@ namespace SteamKit2
 
     private byte[] _machine_info = null;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"machine_info", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
     public byte[] machine_info
     {
       get { return _machine_info; }
@@ -8024,7 +8024,7 @@ namespace SteamKit2
 
     private uint _trade_request_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"trade_request_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint trade_request_id
     {
       get { return _trade_request_id; }
@@ -8033,7 +8033,7 @@ namespace SteamKit2
 
     private ulong _other_steamid = default(ulong);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"other_steamid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong other_steamid
     {
       get { return _other_steamid; }
@@ -8042,7 +8042,7 @@ namespace SteamKit2
 
     private string _other_name = "";
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"other_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string other_name
     {
       get { return _other_name; }
@@ -8061,7 +8061,7 @@ namespace SteamKit2
 
     private uint _response = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"response", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint response
     {
       get { return _response; }
@@ -8070,7 +8070,7 @@ namespace SteamKit2
 
     private uint _trade_request_id = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"trade_request_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
     public uint trade_request_id
     {
       get { return _trade_request_id; }
@@ -8099,7 +8099,7 @@ namespace SteamKit2
 
     private string _password = "";
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"password", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string password
     {
       get { return _password; }
@@ -8108,7 +8108,7 @@ namespace SteamKit2
 
     private string _email = "";
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"email", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string email
     {
       get { return _email; }
@@ -8117,7 +8117,7 @@ namespace SteamKit2
 
     private string _code = "";
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"code", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string code
     {
       get { return _code; }
@@ -8126,7 +8126,7 @@ namespace SteamKit2
 
     private bool _final = default(bool);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"final", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
+    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
     public bool final
     {
       get { return _final; }
@@ -8145,7 +8145,7 @@ namespace SteamKit2
 
     private int _eresult = (int)2;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"eresult", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue((int)2)]
+    [global::ProtoBuf.ProtoDefaultValue((int)2)]
     public int eresult
     {
       get { return _eresult; }
