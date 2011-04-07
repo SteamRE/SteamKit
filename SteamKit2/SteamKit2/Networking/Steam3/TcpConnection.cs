@@ -115,7 +115,7 @@ namespace SteamKit2
                     OnNetMsgReceived( new NetMsgEventArgs( packData, sock.RemoteEndPoint as IPEndPoint ) );
                 }
             }
-            catch ( SocketException e )
+            catch ( IOException e )
             {
                 DebugLog.WriteLine( "TcpConnection SocketException", e.ToString() );
                 OnDisconnected( EventArgs.Empty );
