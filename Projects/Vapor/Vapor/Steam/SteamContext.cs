@@ -124,12 +124,14 @@ namespace Vapor
 
         static List<ICallbackHandler> callbackHandlers;
 
-        static string userName;
-        static string password;
+        public static string UserName { get; set; }
+        public static string Password { get; set; }
 
-        static ClientTGT clientTgt;
-        static byte[] serverTgt;
-        static Blob accountRecord;
+        public static ClientTGT ClientTGT { get; set; }
+        public static byte[] ServerTGT { get; set; }
+        public static Blob AccountRecord { get; set; }
+
+        public static string AuthCode { get; set; }
 
 
         static Steam3()
@@ -138,21 +140,18 @@ namespace Vapor
         }
 
 
-        public static void Initialize( string userName, string password, ClientTGT clientTgt, byte[] serverTgt, Blob accRecord )
+        public static void Initialize()
         {
-
-            Steam3.userName = userName;
-            Steam3.password = password;
-
-            Steam3.clientTgt = clientTgt;
-            Steam3.serverTgt = serverTgt;
-            Steam3.accountRecord = accRecord;
-
             SteamClient = new SteamClient();
 
             SteamFriends = SteamClient.GetHandler<SteamFriends>( SteamFriends.NAME );
             SteamUser = SteamClient.GetHandler<SteamUser>( SteamUser.NAME );
 
+            ChatManager = new ChatManager();
+        }
+
+        public static void Connect()
+        {
             try
             {
                 SteamClient.Connect();
@@ -161,8 +160,6 @@ namespace Vapor
             {
                 throw new Steam3Exception( "Unable to connect to CM server.", ex );
             }
-
-            ChatManager = new ChatManager();
         }
 
         public static void Shutdown()
@@ -193,12 +190,14 @@ namespace Vapor
             {
                 SteamUser.LogOn( new SteamUser.LogOnDetails()
                     {
-                        Username = Steam3.userName,
-                        Password = Steam3.password,
+                        Username = Steam3.UserName,
+                        Password = Steam3.Password,
 
-                        ClientTGT = Steam3.clientTgt,
-                        ServerTGT = Steam3.serverTgt,
-                        AccRecord = Steam3.accountRecord,
+                        ClientTGT = Steam3.ClientTGT,
+                        ServerTGT = Steam3.ServerTGT,
+                        AccRecord = Steam3.AccountRecord,
+
+                        AuthCode = Steam3.AuthCode,
                     } );
             }
 

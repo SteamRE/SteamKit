@@ -12,7 +12,10 @@ namespace Vapor
 {
     partial class MainForm : Form, ICallbackHandler
     {
+        public bool Relog { get; private set; }
+
         Timer sortTimer;
+
 
         public MainForm()
         {
@@ -54,6 +57,18 @@ namespace Vapor
                 }
             }
 
+            if ( msg.IsType<SteamUser.LoggedOffCallback>() )
+            {
+                var callback = (SteamUser.LoggedOffCallback )msg;
+
+                Util.MsgBox( this, string.Format( "Logged off from Steam3: {0}", callback.Result ) );
+
+                this.Relog = true;
+                this.Close();
+
+                return;
+            }
+
             if ( msg.IsType<SteamFriends.FriendsListCallback>() )
             {
                 selfControl.SetSteamID( new Friend( Steam3.SteamUser.GetSteamID() ) );
@@ -64,9 +79,30 @@ namespace Vapor
             {
                 var logOnResp = ( SteamUser.LogOnCallback )msg;
 
-                if ( logOnResp.Result != EResult.OK )
+                if ( logOnResp.Result == ( EResult )63 ) // temporary eresult for steamguard enabled
+                {
+                    SteamGuardDialog sgDialog = new SteamGuardDialog();
+
+                    if ( sgDialog.ShowDialog( this ) != DialogResult.OK )
+                    {
+                        this.Relog = true;
+                        this.Close();
+
+                        return;
+                    }
+
+                    Steam3.AuthCode = sgDialog.AuthCode;
+
+                    // if we got this logon response, we got disconnected, so lets reconnect
+                    Steam3.Connect();
+                }
+                else if ( logOnResp.Result != EResult.OK )
                 {
                     Util.MsgBox( this, string.Format( "Unable to login to Steam3. Result code: {0}", logOnResp.Result ) );
+
+                    this.Relog = true;
+                    this.Close();
+
                     return;
                 }
             }
@@ -91,6 +127,8 @@ namespace Vapor
         void sortTimer_Tick( object sender, EventArgs e )
         {
             sortTimer.Stop();
+            sortTimer.Dispose();
+
             this.ReloadFriends();
         }
 
@@ -100,6 +138,9 @@ namespace Vapor
 
             friendsList.Sort( ( a, b ) =>
             {
+                if ( a == b )
+                    return 0;
+
                 // always show requesters on top
                 if ( a.IsRequestingFriendship() )
                     return -1;

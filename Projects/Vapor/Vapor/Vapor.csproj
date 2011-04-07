@@ -56,6 +56,12 @@
     <Compile Include="UI\Base\VaporContextMenu.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="UI\SteamGuardDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\SteamGuardDialog.Designer.cs">
+      <DependentUpon>SteamGuardDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\TraceDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -152,6 +158,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\SteamGuardDialog.resx">
+      <DependentUpon>SteamGuardDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\TraceDialog.resx">
       <DependentUpon>TraceDialog.cs</DependentUpon>
