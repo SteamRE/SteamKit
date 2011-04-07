@@ -230,3 +230,18 @@ class MsgClientToGC<EMsg::ClientToGC>
 	uint appId;
 	uint GCEMsg;
 };
+
+class MsgClientUpdateMachineAuth<EMsg::ClientUpdateMachineAuth>
+{
+	proto CMsgClientUpdateMachineAuth proto;
+};
+
+class MsgClientUpdateMachineAuthResponse<EMsg::ClientUpdateMachineAuthResponse>
+{
+	proto CMsgClientUpdateMachineAuthResponse proto;
+};
+
+class MsgClientLoggedOff<EMsg::ClientLoggedOff>
+{
+	proto CMsgClientLoggedOff proto;
+};
