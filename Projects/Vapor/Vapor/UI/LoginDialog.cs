@@ -39,7 +39,16 @@ namespace Vapor
 
             try
             {
-                Steam3.Initialize( txtUser.Text, txtPass.Text, clientTgt, serverTgt, accRecord );
+                Steam3.UserName = txtUser.Text;
+                Steam3.Password = txtPass.Text;
+
+                Steam3.ClientTGT = clientTgt;
+                Steam3.ServerTGT = serverTgt;
+                Steam3.AccountRecord = accRecord;
+
+                Steam3.Initialize();
+
+                Steam3.Connect();
             }
             catch ( Steam3Exception ex )
             {

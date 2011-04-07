@@ -17,6 +17,12 @@ namespace Vapor
                 td.Show();
             }
 
+            Start();
+        }
+
+        static void Start()
+        {
+
             LoginDialog ld = new LoginDialog();
 
             if ( ld.ShowDialog() != DialogResult.OK )
@@ -38,6 +44,9 @@ namespace Vapor
             Steam3.Shutdown();
 
             CDNCache.Shutdown();
+
+            if ( mf.Relog )
+                Start();
         }
 
         static bool FindArg( string[] args, string arg )
