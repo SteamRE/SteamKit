@@ -81,7 +81,7 @@ namespace SteamKit2
         /// <summary>
         /// This callback is returned in response to a log off attempt, or when the client is told to log off by the server.
         /// </summary>
-        public sealed class LogOffCallback : CallbackMsg
+        public sealed class LoggedOffCallback : CallbackMsg
         {
             /// <summary>
             /// Gets the result of the log off.
@@ -89,11 +89,7 @@ namespace SteamKit2
             /// <value>The result.</value>
             public EResult Result { get; private set; }
 
-            internal LogOffCallback()
-            {
-            }
-
-            internal LogOffCallback( CMsgClientLoggedOff resp )
+            internal LoggedOffCallback( CMsgClientLoggedOff resp )
             {
                 this.Result = ( EResult )resp.eresult;
             }
@@ -122,6 +118,9 @@ namespace SteamKit2
             }
         }
 
+        /// <summary>
+        /// This callback is fired when the client recieves it's unique Steam3 session token. This token is used for authenticated content downloading in Steam2.
+        /// </summary>
         public sealed class SessionTokenCallback : CallbackMsg
         {
             public ulong SessionToken { get; private set; }

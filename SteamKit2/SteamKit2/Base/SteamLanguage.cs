@@ -2064,4 +2064,73 @@ namespace SteamKit2
 		}
 	}
 
+	public class MsgClientUpdateMachineAuth : ISteamSerializableMessage
+	{
+		public EMsg GetEMsg() { return EMsg.ClientUpdateMachineAuth; }
+
+		// Static size: 0
+		public CMsgClientUpdateMachineAuth Proto { get; set; }
+
+		public MsgClientUpdateMachineAuth()
+		{
+			Proto = new CMsgClientUpdateMachineAuth();
+		}
+
+		public void Serialize(Stream stream)
+		{
+			ProtoBuf.Serializer.Serialize<CMsgClientUpdateMachineAuth>(stream, Proto);
+		}
+
+		public void Deserialize( Stream stream )
+		{
+			Proto = ProtoBuf.Serializer.Deserialize<CMsgClientUpdateMachineAuth>( stream );
+		}
+	}
+
+	public class MsgClientUpdateMachineAuthResponse : ISteamSerializableMessage
+	{
+		public EMsg GetEMsg() { return EMsg.ClientUpdateMachineAuthResponse; }
+
+		// Static size: 0
+		public CMsgClientUpdateMachineAuthResponse Proto { get; set; }
+
+		public MsgClientUpdateMachineAuthResponse()
+		{
+			Proto = new CMsgClientUpdateMachineAuthResponse();
+		}
+
+		public void Serialize(Stream stream)
+		{
+			ProtoBuf.Serializer.Serialize<CMsgClientUpdateMachineAuthResponse>(stream, Proto);
+		}
+
+		public void Deserialize( Stream stream )
+		{
+			Proto = ProtoBuf.Serializer.Deserialize<CMsgClientUpdateMachineAuthResponse>( stream );
+		}
+	}
+
+	public class MsgClientLoggedOff : ISteamSerializableMessage
+	{
+		public EMsg GetEMsg() { return EMsg.ClientLoggedOff; }
+
+		// Static size: 0
+		public CMsgClientLoggedOff Proto { get; set; }
+
+		public MsgClientLoggedOff()
+		{
+			Proto = new CMsgClientLoggedOff();
+		}
+
+		public void Serialize(Stream stream)
+		{
+			ProtoBuf.Serializer.Serialize<CMsgClientLoggedOff>(stream, Proto);
+		}
+
+		public void Deserialize( Stream stream )
+		{
+			Proto = ProtoBuf.Serializer.Deserialize<CMsgClientLoggedOff>( stream );
+		}
+	}
+
 }

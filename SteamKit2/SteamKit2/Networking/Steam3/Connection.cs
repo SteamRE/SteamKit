@@ -90,6 +90,13 @@ namespace SteamKit2
                 NetMsgReceived( this, e );
         }
 
+        public event EventHandler Disconnected;
+        protected void OnDisconnected( EventArgs e )
+        {
+            if ( Disconnected != null )
+                Disconnected( this, e );
+        }
+
         public abstract void Connect( IPEndPoint endPoint );
         public abstract void Disconnect();
 

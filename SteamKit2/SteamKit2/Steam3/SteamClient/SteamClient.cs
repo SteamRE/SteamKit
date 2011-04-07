@@ -216,8 +216,6 @@ namespace SteamKit2
 
         protected override void OnClientMsgReceived( ClientMsgEventArgs e )
         {
-            base.OnClientMsgReceived( e );
-
             if ( e.EMsg == EMsg.ChannelEncryptResult )
                 HandleEncryptResult( e );
 
@@ -226,6 +224,10 @@ namespace SteamKit2
             {
                 kvp.Value.HandleMsg( e );
             }
+        }
+        protected override void OnClientDisconnected()
+        {
+            this.PostCallback( new SteamClient.DisconnectCallback() );
         }
 
 

@@ -66,7 +66,7 @@ namespace SteamKit2
 
         public override void Send( IClientMsg clientMsg )
         {
-            if ( !sock.Connected )
+            if ( sock == null || !sock.Connected )
                 return;
 
             //TODO: Change this
@@ -115,9 +115,14 @@ namespace SteamKit2
                     OnNetMsgReceived( new NetMsgEventArgs( packData, sock.RemoteEndPoint as IPEndPoint ) );
                 }
             }
-            catch ( Exception e )
+            catch ( SocketException e )
             {
-                DebugLog.WriteLine( "TcpConnection", e.ToString() );
+                DebugLog.WriteLine( "TcpConnection SocketException", e.ToString() );
+                OnDisconnected( EventArgs.Empty );
+            }
+            catch ( Exception ex )
+            {
+                DebugLog.WriteLine( "TcpConnection Exception", ex.ToString() );
             }
         }
 
