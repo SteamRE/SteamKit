@@ -92,6 +92,7 @@ namespace SteamKit2
             // todo: UdpConnection needs an implementation
             Connection = new TcpConnection();
             Connection.NetMsgReceived += NetMsgReceived;
+            Connection.Disconnected += Disconnected;
         }
 
 
@@ -182,15 +183,12 @@ namespace SteamKit2
         }
 
 
-        protected virtual void OnClientMsgReceived( ClientMsgEventArgs e )
-        {
-            // nop, SteamClient handles this
-        }
+        protected abstract void OnClientMsgReceived( ClientMsgEventArgs e );
+        protected abstract void OnClientDisconnected();
 
 
         void NetMsgReceived( object sender, NetMsgEventArgs e )
         {
-
             byte[] data = e.Data;
 
             uint rawEMsg = BitConverter.ToUInt32( data, 0 );
@@ -221,6 +219,12 @@ namespace SteamKit2
 
             OnClientMsgReceived( cliEvent );
         }
+        void Disconnected( object sender, EventArgs e )
+        {
+            Connection.NetFilter = null;
+
+            OnClientDisconnected();
+        }
 
 
         void SendHeartbeat()
@@ -230,6 +234,7 @@ namespace SteamKit2
         }
 
 
+        #region ClientMsg Handlers
         void HandleMulti( ClientMsgEventArgs e )
         {
             if ( !e.IsProto )
@@ -335,5 +340,6 @@ namespace SteamKit2
             if ( encResult.Msg.Result == EResult.OK )
                 Connection.NetFilter = new NetFilterEncryption( tempSessionKey );
         }
+        #endregion
     }
 }

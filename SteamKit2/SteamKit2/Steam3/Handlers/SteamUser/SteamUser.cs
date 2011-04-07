@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Net;
+using System.IO;
 
 namespace SteamKit2
 {
@@ -22,6 +23,9 @@ namespace SteamKit2
         /// The unique name of this hadler.
         /// </summary>
         public const string NAME = "SteamUser";
+
+
+        LogOnDetails logonDetails;
 
 
         internal SteamUser()
@@ -61,6 +65,13 @@ namespace SteamKit2
             /// </summary>
             /// <value>The account record.</value>
             public Blob AccRecord { get; set; }
+
+
+            /// <summary>
+            /// Gets or sets the Steam Guard auth code used to login. This is the code sent to the user's email.
+            /// </summary>
+            /// <value>The auth code.</value>
+            public string AuthCode { get; set; }
         }
         /// <summary>
         /// Logs the client into the Steam3 network. The client should already have been connected at this point.
@@ -69,6 +80,8 @@ namespace SteamKit2
         /// <param name="details">The details.</param>
         public void LogOn( LogOnDetails details )
         {
+            this.logonDetails = details;
+
             var logon = new ClientMsgProtobuf<MsgClientLogon>();
 
             SteamID steamId = new SteamID();
@@ -96,8 +109,8 @@ namespace SteamKit2
             // this is really only relevant for steam2, so it's a mystery as to why steam3 wants to know
             logon.Msg.Proto.cell_id = 0;
 
-            // this is not a proper client package version that Steam will allow
-            logon.Msg.Proto.client_package_version = 10 /* our version, we'll increase it whenever */ | 0xFF000000; // steamkit's version mask
+            // we're now using the latest steamclient package version, this is required to get a proper sentry file for steam guard
+            logon.Msg.Proto.client_package_version = 1515;
 
             // this is not a proper machine id that Steam accepts
             // but it's good enough for identifying a machine
@@ -112,6 +125,32 @@ namespace SteamKit2
 
             logon.Msg.Proto.steam2_auth_ticket = serverTgt;
 
+
+            // steam guard
+            logon.Msg.Proto.auth_code = details.AuthCode;
+
+            string sentryFile = ClientConfig.GetSentryFile( logonDetails.Username );
+            byte[] sentryData = null;
+
+            if ( sentryFile != null )
+            {
+                try
+                {
+                    sentryData = File.ReadAllBytes( sentryFile );
+                }
+                catch { }
+            }
+
+            if ( sentryData != null )
+            {
+                logon.Msg.Proto.sha_sentryfile = CryptoHelper.SHAHash( sentryData );
+                logon.Msg.Proto.eresult_sentryfile = ( int )EResult.OK;
+            }
+            else
+            {
+                logon.Msg.Proto.eresult_sentryfile = ( int )EResult.FileNotFound;
+            }
+
             this.Client.Send( logon );
         }
 
@@ -123,8 +162,6 @@ namespace SteamKit2
         {
             var logOff = new ClientMsgProtobuf<MsgClientLogOff>();
             this.Client.Send( logOff );
-
-            this.Client.PostCallback( new LogOffCallback() );
         }
 
         /// <summary>
@@ -156,11 +193,77 @@ namespace SteamKit2
                 case EMsg.ClientSessionToken:
                     HandleSessionToken( e );
                     break;
+
+                case EMsg.ClientLoggedOff:
+                    HandleLoggedOff( e );
+                    break;
+
+                case EMsg.ClientUpdateMachineAuth:
+                    HandleUpdateMachineAuth( e );
+                    break;
             }
         }
 
 
+
         #region ClientMsg Handlers
+        void HandleLoggedOff( ClientMsgEventArgs e )
+        {
+            var loggedOff = new ClientMsgProtobuf<MsgClientLoggedOff>();
+
+            try
+            {
+                loggedOff.SetData( e.Data );
+            }
+            catch ( Exception ex )
+            {
+                DebugLog.WriteLine( "SteamUser", "HandleLoggedOff encountered an exception while reading client msg.\n{0}", ex.ToString() );
+                return;
+            }
+
+            this.Client.PostCallback( new LoggedOffCallback( loggedOff.Msg.Proto ) );
+        }
+        void HandleUpdateMachineAuth( ClientMsgEventArgs e )
+        {
+            var machineAuth = new ClientMsgProtobuf<MsgClientUpdateMachineAuth>();
+
+            try
+            {
+                machineAuth.SetData( e.Data );
+            }
+            catch ( Exception ex )
+            {
+                DebugLog.WriteLine( "SteamUser", "HandleUpdateMachineAuth encountered an exception while reading client msg.\n{0}", ex.ToString() );
+                return;
+            }
+
+            var response = new ClientMsgProtobuf<MsgClientUpdateMachineAuthResponse>();
+
+            try
+            {
+                using ( FileStream fs = File.Open( machineAuth.Msg.Proto.filename, FileMode.Create, FileAccess.ReadWrite, FileShare.None ) )
+                {
+                    fs.Write( machineAuth.Msg.Proto.bytes, ( int )machineAuth.Msg.Proto.offset, ( int )machineAuth.Msg.Proto.cubtowrite );
+                }
+
+                ClientConfig.AddSentryFile( logonDetails.Username, machineAuth.Msg.Proto.filename );
+
+                response.ProtoHeader.job_id_target = machineAuth.ProtoHeader.job_id_source;
+
+                response.Msg.Proto.eresult = ( uint )EResult.InvalidParam;
+                //response.Msg.Proto.filename = machineAuth.Msg.Proto.filename;
+                response.Msg.Proto.sha_file = CryptoHelper.SHAHash( machineAuth.Msg.Proto.bytes );
+                response.Msg.Proto.offset = machineAuth.Msg.Proto.offset;
+                response.Msg.Proto.cubwrote = machineAuth.Msg.Proto.cubtowrite;
+            }
+            catch
+            {
+                // note: i'm unsure if this is the proper response
+                response.Msg.Proto.eresult = ( uint )EResult.Fail;
+            }
+
+            this.Client.Send( response );
+        }
         void HandleSessionToken( ClientMsgEventArgs e )
         {
             var sessToken = new ClientMsgProtobuf<MsgClientSessionToken>();

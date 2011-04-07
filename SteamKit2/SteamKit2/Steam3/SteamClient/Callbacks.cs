@@ -34,5 +34,13 @@ namespace SteamKit2
                 this.Result = result;
             }
         }
+
+
+        /// <summary>
+        /// This callback is received when the steamclient is physically disconnected from the Steam network.
+        /// </summary>
+        public sealed class DisconnectCallback : CallbackMsg
+        {
+        }
     }
 }

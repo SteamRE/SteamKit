@@ -62,6 +62,7 @@
     <Compile Include="Blob\Fields\CDRFields.cs" />
     <Compile Include="Steam2\ContentServerClient.cs" />
     <Compile Include="Steam2\ContentServerDSClient.cs" />
+    <Compile Include="Steam3\ClientConfig.cs" />
     <Compile Include="Steam3\Handlers\SteamApps\Callbacks.cs" />
     <Compile Include="Steam3\Handlers\SteamApps\SteamApps.cs" />
     <Compile Include="Steam3\Handlers\SteamFriends\Callbacks.cs" />
