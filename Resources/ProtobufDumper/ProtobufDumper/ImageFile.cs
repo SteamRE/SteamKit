@@ -87,7 +87,7 @@ namespace ProtobufDumper
 
         unsafe void ScanSection( Native.IMAGE_SECTION_HEADER sectionHdr )
         {
-            uint sectionDataAddr = loadAddr + sectionHdr.VirtualAddress;
+            uint sectionDataAddr = loadAddr + sectionHdr.PointerToRawData;
 
             Console.WriteLine( "\n\nScanning section '{0}' at 0x{1:X2}...", sectionHdr.Name, sectionDataAddr );
 
