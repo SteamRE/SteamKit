@@ -17,6 +17,7 @@ struct EMsg_s
 	uint8 serverType;
 };
 
+#if 0
 bool HasEMsg( std::vector<EMsg_s> eMsgList, EMsg eMsg )
 {
 	for ( int x = 0; x < eMsgList.size(); ++x )
@@ -26,6 +27,7 @@ bool HasEMsg( std::vector<EMsg_s> eMsgList, EMsg eMsg )
 	}
 	return false;
 }
+#endif
 
 CCrypto::CCrypto()
 {
@@ -57,31 +59,30 @@ CCrypto::CCrypto()
 	g_pLogger->LogConsole( "CMessageList::GetMessage = 0x%x\n", GetMessageFn );
 
 
-	#define MAX_EMSGS 7599 // rough guess, don't really have a way of getting an exact number
+	#define MAX_EMSGS 7699 // rough guess, don't really have a way of getting an exact number
 
 	std::vector<EMsg_s> eMsgList;
 	std::vector<EMsg_s>::iterator eMsgIter;
 
-	g_pLogger->DeleteFile( "emsg_list.txt", false );
-
-	for ( uint8 serverType = 0; serverType < 0xFF; ++serverType )
+	for ( int x = 0; x < MAX_EMSGS; ++x )
 	{
-		for ( int x = 0; x < MAX_EMSGS; ++x )
+		EMsg eMsg = (EMsg)x;
+		const char *szMsg = this->GetMessage( eMsg, 0xFF );
+
+		if ( szMsg == NULL )
+			continue;
+
+#if 0
+		if ( !HasEMsg( eMsgList, eMsg ) )
+#endif
 		{
-			EMsg eMsg = (EMsg)x;
-			const char *szMsg = this->GetMessage( eMsg, serverType );
-
-			if ( szMsg == NULL )
-				continue;
-
-			if ( !HasEMsg( eMsgList, eMsg ) )
-			{
-				EMsg_s eMsgInfo = { eMsg, serverType };
-				eMsgList.push_back( eMsgInfo );
-			}
-
+			EMsg_s eMsgInfo = { eMsg, 0xFF };
+			eMsgList.push_back( eMsgInfo );
 		}
+
 	}
+
+		g_pLogger->DeleteFile( "emsg_list.txt", false );
 
 	for ( int x = 0; x < eMsgList.size(); ++x )
 	{
@@ -172,7 +173,7 @@ const char* CCrypto::GetMessage( EMsg eMsg, uint8 serverType )
 {
 	static char *szMsg = new char[ 200 ];
 
-	int ieMsg = (int)eMsg;
+	int ieMsg = ( int )eMsg;
 	uint32 iServerType = serverType;
 
 	bool bRet = false;
