@@ -245,3 +245,23 @@ class MsgClientLoggedOff<EMsg::ClientLoggedOff>
 {
 	proto CMsgClientLoggedOff proto;
 };
+
+class MsgClientGetUserStats<EMsg::ClientGetUserStats>
+{
+	proto CMsgClientGetUserStats proto;
+};
+
+class MsgClientGetUserStatsResponse<EMsg::ClientGetUserStatsResponse>
+{
+	proto CMsgClientGetUserStatsResponse proto;
+};
+
+class MsgClientStoreUserStats2<EMsg::ClientStoreUserStats2>
+{
+	proto CMsgClientStoreUserStats2 proto;
+};
+
+class MsgClientStoreUserStatsResponse<EMsg::ClientStoreUserStatsResponse>
+{
+	proto CMsgClientStoreUserStatsResponse proto;
+};
