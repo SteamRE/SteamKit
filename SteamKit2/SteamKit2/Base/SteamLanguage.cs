@@ -430,7 +430,20 @@ namespace SteamKit2
 		DataCorruption = 53,
 		DiskFull = 54,
 		RemoteCallFailed = 55,
-		Max = 56,
+		PasswordNotSet = 56,
+		PSNAccountNotLinked = 57,
+		InvalidPSNTicket = 58,
+		PSNAccountAlreadyLinked = 59,
+		RemoteFileConflict = 60,
+		IllegalPassword = 61,
+		SameAsPreviousValue = 62,
+		AccountLogonDenied = 63,
+		CannotUseOldPassword = 64,
+		InvalidLoginAuthCode = 65,
+		AccountLogonDeniedNoMailSent = 66,
+		HardwareNotCapableOfIPT = 67,
+		IPTInitError = 68,
+		Max = 69,
 	}
 	public enum EUniverse
 	{
