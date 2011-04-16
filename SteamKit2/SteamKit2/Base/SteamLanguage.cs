@@ -2133,4 +2133,96 @@ namespace SteamKit2
 		}
 	}
 
+	public class MsgClientGetUserStats : ISteamSerializableMessage
+	{
+		public EMsg GetEMsg() { return EMsg.ClientGetUserStats; }
+
+		// Static size: 0
+		public CMsgClientGetUserStats Proto { get; set; }
+
+		public MsgClientGetUserStats()
+		{
+			Proto = new CMsgClientGetUserStats();
+		}
+
+		public void Serialize(Stream stream)
+		{
+			ProtoBuf.Serializer.Serialize<CMsgClientGetUserStats>(stream, Proto);
+		}
+
+		public void Deserialize( Stream stream )
+		{
+			Proto = ProtoBuf.Serializer.Deserialize<CMsgClientGetUserStats>( stream );
+		}
+	}
+
+	public class MsgClientGetUserStatsResponse : ISteamSerializableMessage
+	{
+		public EMsg GetEMsg() { return EMsg.ClientGetUserStatsResponse; }
+
+		// Static size: 0
+		public CMsgClientGetUserStatsResponse Proto { get; set; }
+
+		public MsgClientGetUserStatsResponse()
+		{
+			Proto = new CMsgClientGetUserStatsResponse();
+		}
+
+		public void Serialize(Stream stream)
+		{
+			ProtoBuf.Serializer.Serialize<CMsgClientGetUserStatsResponse>(stream, Proto);
+		}
+
+		public void Deserialize( Stream stream )
+		{
+			Proto = ProtoBuf.Serializer.Deserialize<CMsgClientGetUserStatsResponse>( stream );
+		}
+	}
+
+	public class MsgClientStoreUserStats2 : ISteamSerializableMessage
+	{
+		public EMsg GetEMsg() { return EMsg.ClientStoreUserStats2; }
+
+		// Static size: 0
+		public CMsgClientStoreUserStats2 Proto { get; set; }
+
+		public MsgClientStoreUserStats2()
+		{
+			Proto = new CMsgClientStoreUserStats2();
+		}
+
+		public void Serialize(Stream stream)
+		{
+			ProtoBuf.Serializer.Serialize<CMsgClientStoreUserStats2>(stream, Proto);
+		}
+
+		public void Deserialize( Stream stream )
+		{
+			Proto = ProtoBuf.Serializer.Deserialize<CMsgClientStoreUserStats2>( stream );
+		}
+	}
+
+	public class MsgClientStoreUserStatsResponse : ISteamSerializableMessage
+	{
+		public EMsg GetEMsg() { return EMsg.ClientStoreUserStatsResponse; }
+
+		// Static size: 0
+		public CMsgClientStoreUserStatsResponse Proto { get; set; }
+
+		public MsgClientStoreUserStatsResponse()
+		{
+			Proto = new CMsgClientStoreUserStatsResponse();
+		}
+
+		public void Serialize(Stream stream)
+		{
+			ProtoBuf.Serializer.Serialize<CMsgClientStoreUserStatsResponse>(stream, Proto);
+		}
+
+		public void Deserialize( Stream stream )
+		{
+			Proto = ProtoBuf.Serializer.Deserialize<CMsgClientStoreUserStatsResponse>( stream );
+		}
+	}
+
 }

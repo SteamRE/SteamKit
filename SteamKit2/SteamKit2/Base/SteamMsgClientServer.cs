@@ -7983,6 +7983,33 @@ namespace SteamKit2
       get { return _license_file; }
       set { _license_file = value; }
     }
+
+    private string _mainboard_manufacturer = "";
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"mainboard_manufacturer", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoDefaultValue("")]
+    public string mainboard_manufacturer
+    {
+      get { return _mainboard_manufacturer; }
+      set { _mainboard_manufacturer = value; }
+    }
+
+    private string _mainboard_product = "";
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"mainboard_product", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoDefaultValue("")]
+    public string mainboard_product
+    {
+      get { return _mainboard_product; }
+      set { _mainboard_product = value; }
+    }
+
+    private string _mainboard_serialnumber = "";
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"mainboard_serialnumber", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoDefaultValue("")]
+    public string mainboard_serialnumber
+    {
+      get { return _mainboard_serialnumber; }
+      set { _mainboard_serialnumber = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -8076,6 +8103,34 @@ namespace SteamKit2
       get { return _trade_request_id; }
       set { _trade_request_id = value; }
     }
+
+    private ulong _other_steamid = default(ulong);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"other_steamid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    public ulong other_steamid
+    {
+      get { return _other_steamid; }
+      set { _other_steamid = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgTrading_CancelTradeRequest")]
+  public partial class CMsgTrading_CancelTradeRequest : global::ProtoBuf.IExtensible
+  {
+    public CMsgTrading_CancelTradeRequest() {}
+    
+
+    private ulong _other_steamid = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"other_steamid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    public ulong other_steamid
+    {
+      get { return _other_steamid; }
+      set { _other_steamid = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -8086,6 +8141,15 @@ namespace SteamKit2
   {
     public CMsgTrading_StartSession() {}
     
+
+    private ulong _other_steamid = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"other_steamid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    public ulong other_steamid
+    {
+      get { return _other_steamid; }
+      set { _other_steamid = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
