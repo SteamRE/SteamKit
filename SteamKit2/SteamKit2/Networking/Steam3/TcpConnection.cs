@@ -120,10 +120,6 @@ namespace SteamKit2
                 DebugLog.WriteLine( "TcpConnection SocketException", e.ToString() );
                 OnDisconnected( EventArgs.Empty );
             }
-            catch ( Exception ex )
-            {
-                DebugLog.WriteLine( "TcpConnection Exception", ex.ToString() );
-            }
         }
 
         public override IPAddress GetLocalIP()
