@@ -60,6 +60,12 @@ namespace SteamKit2
             /// <value>The client steam ID.</value>
             public SteamID ClientSteamID { get; private set; }
 
+            /// <summary>
+            /// Gets the email domain.
+            /// </summary>
+            /// <value>The email domain.</value>
+            public string EmailDomain { get; private set; }
+
 
             internal LogOnCallback( CMsgClientLogonResponse resp )
             {
@@ -75,6 +81,8 @@ namespace SteamKit2
                 this.AccountFlags = ( EAccountFlags )resp.account_flags;
 
                 this.ClientSteamID = new SteamID( resp.client_supplied_steamid );
+
+                this.EmailDomain = resp.email_domain;
             }
         }
 

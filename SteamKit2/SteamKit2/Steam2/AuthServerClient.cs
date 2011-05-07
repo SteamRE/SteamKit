@@ -123,6 +123,8 @@ namespace SteamKit2
 
         bool RequestIP( string user )
         {
+            user = user.ToLower();
+
             try
             {
                 internalIp = NetHelpers.GetIPAddress( Socket.GetLocalIP() );

@@ -39,6 +39,8 @@ namespace SteamKit2
         /// <returns>A list of servers on success; otherwise, <c>null</c>.</returns>
         public IPEndPoint[] GetAuthServerList( string userName )
         {
+            userName = userName.ToLower();
+
             byte[] userHash = CryptoHelper.JenkinsHash( Encoding.ASCII.GetBytes( userName ) );
             uint userData = BitConverter.ToUInt32( userHash, 0 ) & 1;
 

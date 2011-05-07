@@ -154,6 +154,21 @@ namespace SteamKit2
             this.Client.Send( logon );
         }
 
+        public void LogOnGameServer()
+        {
+            var logon = new ClientMsgProtobuf<MsgClientLogon>();
+
+            SteamID gsId = new SteamID( 0, 0, Client.ConnectedUniverse, EAccountType.AnonGameServer );
+
+            logon.ProtoHeader.client_session_id = 0;
+            logon.ProtoHeader.client_steam_id = gsId.ConvertToUint64();
+
+            logon.Msg.Proto.protocol_version = MsgClientLogon.CurrentProtocol;
+
+            this.Client.Send( logon );
+
+        }
+
         /// <summary>
         /// Logs the client off of the Steam3 network. This method does not disconnect the client.
         /// Results are returned in a <see cref="LogOffCallback"/>.
