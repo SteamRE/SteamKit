@@ -165,7 +165,7 @@ namespace SteamKit2
         }
         bool GetSalt( string user )
         {
-            ushort userLen = ( ushort )user.Length;
+            ushort userLen = ( ushort )Encoding.ASCII.GetByteCount( user );
             user = user.ToLower();
 
             if ( !this.SendCommand( 2, userLen, user, userLen, user ) )
