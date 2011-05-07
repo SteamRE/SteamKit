@@ -79,7 +79,7 @@ namespace Vapor
             {
                 var logOnResp = ( SteamUser.LogOnCallback )msg;
 
-                if ( logOnResp.Result == ( EResult )63 ) // temporary eresult for steamguard enabled
+                if ( logOnResp.Result == EResult.AccountLogonDenied )
                 {
                     SteamGuardDialog sgDialog = new SteamGuardDialog();
 

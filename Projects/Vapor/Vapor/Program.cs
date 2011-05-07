@@ -15,6 +15,9 @@ namespace Vapor
             {
                 TraceDialog td = new TraceDialog();
                 td.Show();
+
+                FileTrace ft = new FileTrace();
+
             }
 
             Start();
