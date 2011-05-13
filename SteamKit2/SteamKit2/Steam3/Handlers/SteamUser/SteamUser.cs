@@ -72,7 +72,20 @@ namespace SteamKit2
             /// </summary>
             /// <value>The auth code.</value>
             public string AuthCode { get; set; }
+
+            /// <summary>
+            /// Gets or sets the account instance.
+            /// </summary>
+            /// <value>The account instance.</value>
+            public uint AccountInstance { get; set; }
+
+
+            public LogOnDetails()
+            {
+                AccountInstance = 1;
+            }
         }
+
         /// <summary>
         /// Logs the client into the Steam3 network. The client should already have been connected at this point.
         /// Results are returned in a <see cref="LogOnCallback"/>.
@@ -86,6 +99,8 @@ namespace SteamKit2
 
             SteamID steamId = new SteamID();
             steamId.SetFromSteam2( details.ClientTGT.UserID, this.Client.ConnectedUniverse );
+
+            steamId.AccountInstance = details.AccountInstance;
 
             uint localIp = NetHelpers.GetIPAddress( this.Client.GetLocalIP() );
 
