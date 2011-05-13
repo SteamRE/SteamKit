@@ -46,6 +46,8 @@ namespace Vapor
                 Steam3.ServerTGT = serverTgt;
                 Steam3.AccountRecord = accRecord;
 
+                Steam3.AlternateLogon = chkBoxAltLogon.Checked;
+
                 Steam3.Initialize();
 
                 Steam3.Connect();

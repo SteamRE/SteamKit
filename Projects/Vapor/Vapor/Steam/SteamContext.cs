@@ -133,6 +133,8 @@ namespace Vapor
 
         public static string AuthCode { get; set; }
 
+        public static bool AlternateLogon { get; set; }
+
 
         static Steam3()
         {
@@ -198,6 +200,8 @@ namespace Vapor
                         AccRecord = Steam3.AccountRecord,
 
                         AuthCode = Steam3.AuthCode,
+
+                        AccountInstance = (uint)( Steam3.AlternateLogon ? 2 : 1 ),
                     } );
             }
 
