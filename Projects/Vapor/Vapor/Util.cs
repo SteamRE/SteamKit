@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
+using System.Runtime.InteropServices;
 
 namespace Vapor
 {
@@ -57,6 +58,50 @@ namespace Vapor
                     return false;
             }
             return true;
+        }
+
+        public const UInt32 FLASHW_STOP = 0;
+        public const UInt32 FLASHW_CAPTION = 1;
+        public const UInt32 FLASHW_TRAY = 2;
+        public const UInt32 FLASHW_ALL = 3;
+        public const UInt32 FLASHW_TIMER = 4;
+        public const UInt32 FLASHW_TIMERNOFG = 12; 
+
+        [StructLayout( LayoutKind.Sequential )]
+        public struct FLASHWINFO
+        {
+            public UInt32 cbSize;
+            public IntPtr hwnd;
+            public UInt32 dwFlags;
+            public UInt32 uCount;
+            public UInt32 dwTimeout;
+        }
+
+        [DllImport( "user32.dll" )]
+        [return: MarshalAs( UnmanagedType.Bool )]
+        static extern bool FlashWindowEx( ref FLASHWINFO pwfi );
+
+
+        public static void FlashWindow( Form wnd )
+        {
+            if ( IsMono() )
+            {
+                // welp, sorry folks!
+                return;
+            }
+
+            FLASHWINFO flashInfo = new FLASHWINFO();
+
+            flashInfo.cbSize = ( uint )Marshal.SizeOf( flashInfo );
+            flashInfo.dwFlags = FLASHW_TIMERNOFG | FLASHW_TRAY;
+            flashInfo.hwnd = wnd.Handle;
+
+            FlashWindowEx( ref flashInfo );
+        }
+
+        public static bool IsMono()
+        {
+            return ( Type.GetType( "Mono.Runtime" ) != null );
         }
 
     }

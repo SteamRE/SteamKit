@@ -51,14 +51,24 @@ namespace Vapor
             switch ( type )
             {
                 case EChatEntryType.ChatMsg:
+
                     this.AppendText( Util.GetStatusColor( new Friend( sender ) ), string.Format( "{0} - {1}", time, friendName ) );
                     this.AppendText( Color.White, ": " + msg );
+
+                    if ( sender != Steam3.SteamClient.SteamID )
+                        Util.FlashWindow( this );
+
                     break;
 
                 case EChatEntryType.Emote:
+
                     this.AppendText( Color.White, "* " );
                     this.AppendText( Util.GetStatusColor( new Friend( sender ) ), string.Format( "{0} - {1}", time, friendName ) );
                     this.AppendText( Color.White, " " + msg );
+
+                    if ( sender != Steam3.SteamClient.SteamID )
+                        Util.FlashWindow( this );
+
                     break;
 
                 default:
