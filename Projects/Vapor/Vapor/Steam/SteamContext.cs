@@ -201,7 +201,7 @@ namespace Vapor
 
                         AuthCode = Steam3.AuthCode,
 
-                        AccountInstance = (uint)( Steam3.AlternateLogon ? 2 : 1 ),
+                        AccountInstance = ( uint )( Steam3.AlternateLogon ? 2 : 1 ),
                     } );
             }
 
