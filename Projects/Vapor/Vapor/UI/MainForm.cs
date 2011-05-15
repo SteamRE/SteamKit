@@ -14,6 +14,7 @@ namespace Vapor
     {
         public bool Relog { get; private set; }
 
+        bool shouldClose;
         Timer sortTimer;
 
 
@@ -257,6 +258,40 @@ namespace Vapor
         private void addFriendToolStripMenuItem_Click( object sender, EventArgs e )
         {
             this.AddFriend();
+        }
+
+        private void MainForm_FormClosing( object sender, FormClosingEventArgs e )
+        {
+            if ( shouldClose )
+            {
+                return;
+            }
+
+            e.Cancel = true;
+            this.Hide();
+        }
+
+        private void vaporContextMenu2_Opening( object sender, CancelEventArgs e )
+        {
+            showHideToolStripMenuItem.Text = ( this.Visible ? "Hide" : "Show" );
+        }
+
+        private void showHideToolStripMenuItem_Click( object sender, EventArgs e )
+        {
+            if ( this.Visible )
+            {
+                this.Hide();
+            }
+            else
+            {
+                this.Show();
+            }
+        }
+
+        private void exitToolStripMenuItem_Click( object sender, EventArgs e )
+        {
+            shouldClose = true;
+            this.Close();
         }
     }
 }
