@@ -27,6 +27,8 @@ namespace Vapor
 
             selfControl.IsHighlighted = false;
             selfControl.BorderStyle = BorderStyle.None;
+            selfControl.CanOpenProfile = true;
+
             selfControl.DisableContextMenu();
             selfControl.DisableDoubleClick();
         }

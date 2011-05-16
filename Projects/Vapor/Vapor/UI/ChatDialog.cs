@@ -18,7 +18,10 @@ namespace Vapor
             InitializeComponent();
 
             chatFriend.SetSteamID( new Friend( steamId ) );
+
+            chatFriend.CanOpenProfile = true;
             chatFriend.BorderStyle = BorderStyle.None;
+
             chatFriend.DisableContextMenu();
             chatFriend.DisableDoubleClick();
 
