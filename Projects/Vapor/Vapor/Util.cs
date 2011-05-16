@@ -5,6 +5,8 @@ using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
 using System.Runtime.InteropServices;
+using SteamKit2;
+using System.Diagnostics;
 
 namespace Vapor
 {
@@ -58,6 +60,20 @@ namespace Vapor
                     return false;
             }
             return true;
+        }
+
+        public static void OpenProfile( SteamID steamId )
+        {
+            string friendUrl = string.Format( "http://www.steamcommunity.com/profiles/{0}", steamId.ConvertToUint64() );
+
+            if ( Util.IsMono() )
+            {
+                Process.Start( string.Format( "xdg-open {0:s}", friendUrl ) );
+            }
+            else
+            {
+                Process.Start( friendUrl );
+            }
         }
 
         public const UInt32 FLASHW_STOP = 0;

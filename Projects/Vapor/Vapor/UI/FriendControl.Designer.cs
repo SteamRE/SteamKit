@@ -35,8 +35,9 @@
             this.btnDeny = new Vapor.VaporButton();
             this.btnAccept = new Vapor.VaporButton();
             this.vaporContextMenu1 = new Vapor.VaporContextMenu();
-            this.removeFriendToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewProfileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.removeFriendToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addFriendToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.refreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -51,6 +52,7 @@
             this.avatarBox.Size = new System.Drawing.Size( 40, 40 );
             this.avatarBox.TabIndex = 0;
             this.avatarBox.TabStop = false;
+            this.avatarBox.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler( this.avatarBox_MouseDoubleClick );
             // 
             // nameLbl
             // 
@@ -118,46 +120,55 @@
             // 
             this.vaporContextMenu1.BackColor = System.Drawing.Color.FromArgb( ( ( int )( ( ( byte )( 38 ) ) ) ), ( ( int )( ( ( byte )( 38 ) ) ) ), ( ( int )( ( ( byte )( 39 ) ) ) ) );
             this.vaporContextMenu1.Items.AddRange( new System.Windows.Forms.ToolStripItem[] {
-            this.removeFriendToolStripMenuItem,
+            this.viewProfileToolStripMenuItem,
             this.toolStripMenuItem1,
+            this.removeFriendToolStripMenuItem,
             this.addFriendToolStripMenuItem,
             this.toolStripMenuItem2,
             this.refreshToolStripMenuItem} );
             this.vaporContextMenu1.Name = "vaporContextMenu1";
             this.vaporContextMenu1.ShowImageMargin = false;
-            this.vaporContextMenu1.Size = new System.Drawing.Size( 129, 82 );
+            this.vaporContextMenu1.Size = new System.Drawing.Size( 138, 126 );
+            // 
+            // viewProfileToolStripMenuItem
+            // 
+            this.viewProfileToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.viewProfileToolStripMenuItem.Name = "viewProfileToolStripMenuItem";
+            this.viewProfileToolStripMenuItem.Size = new System.Drawing.Size( 137, 22 );
+            this.viewProfileToolStripMenuItem.Text = "View Profile";
+            this.viewProfileToolStripMenuItem.Click += new System.EventHandler( this.viewProfileToolStripMenuItem_Click );
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size( 134, 6 );
             // 
             // removeFriendToolStripMenuItem
             // 
             this.removeFriendToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.removeFriendToolStripMenuItem.Name = "removeFriendToolStripMenuItem";
-            this.removeFriendToolStripMenuItem.Size = new System.Drawing.Size( 128, 22 );
-            this.removeFriendToolStripMenuItem.Text = "Remove Friend";
+            this.removeFriendToolStripMenuItem.Size = new System.Drawing.Size( 137, 22 );
+            this.removeFriendToolStripMenuItem.Text = "Remove Friend...";
             this.removeFriendToolStripMenuItem.Click += new System.EventHandler( this.removeFriendToolStripMenuItem_Click );
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size( 125, 6 );
             // 
             // addFriendToolStripMenuItem
             // 
             this.addFriendToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.addFriendToolStripMenuItem.Name = "addFriendToolStripMenuItem";
-            this.addFriendToolStripMenuItem.Size = new System.Drawing.Size( 128, 22 );
-            this.addFriendToolStripMenuItem.Text = "Add Friend";
+            this.addFriendToolStripMenuItem.Size = new System.Drawing.Size( 137, 22 );
+            this.addFriendToolStripMenuItem.Text = "Add Friend...";
             this.addFriendToolStripMenuItem.Click += new System.EventHandler( this.addFriendToolStripMenuItem_Click );
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size( 125, 6 );
+            this.toolStripMenuItem2.Size = new System.Drawing.Size( 134, 6 );
             // 
             // refreshToolStripMenuItem
             // 
             this.refreshToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
-            this.refreshToolStripMenuItem.Size = new System.Drawing.Size( 128, 22 );
+            this.refreshToolStripMenuItem.Size = new System.Drawing.Size( 137, 22 );
             this.refreshToolStripMenuItem.Text = "Refresh";
             this.refreshToolStripMenuItem.Click += new System.EventHandler( this.refreshToolStripMenuItem_Click );
             // 
@@ -197,5 +208,6 @@
         private System.Windows.Forms.ToolStripMenuItem addFriendToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem refreshToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem viewProfileToolStripMenuItem;
     }
 }

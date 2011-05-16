@@ -18,6 +18,7 @@ namespace Vapor
 
         public Friend Friend { get; private set; }
         public bool IsHighlighted { get; set; }
+        public bool CanOpenProfile { get; set; }
 
         bool highlighted;
 
@@ -249,5 +250,20 @@ namespace Vapor
             MainForm mf = this.ParentForm as MainForm;
             mf.ReloadFriends();
         }
+
+        private void avatarBox_MouseDoubleClick( object sender, MouseEventArgs e )
+        {
+            if ( this.CanOpenProfile )
+            {
+                Util.OpenProfile( this.Friend.SteamID );
+            }
+        }
+
+        private void viewProfileToolStripMenuItem_Click( object sender, EventArgs e )
+        {
+            Util.OpenProfile( this.Friend.SteamID );
+        }
+
+        
     }
 }
