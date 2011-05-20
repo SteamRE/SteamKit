@@ -74,7 +74,7 @@ namespace SteamKit2
             public string AuthCode { get; set; }
 
             /// <summary>
-            /// Gets or sets the account instance.
+            /// Gets or sets the account instance. 1 for the PC instance or 2 for the Console (PS3) instance.
             /// </summary>
             /// <value>The account instance.</value>
             public uint AccountInstance { get; set; }
@@ -82,7 +82,7 @@ namespace SteamKit2
 
             public LogOnDetails()
             {
-                AccountInstance = 1;
+                AccountInstance = 1; // use the default pc steam instance
             }
         }
 
