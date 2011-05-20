@@ -59,7 +59,7 @@ namespace Vapor
                     this.AppendText( Color.White, ": " + msg );
 
                     if ( sender != Steam3.SteamClient.SteamID )
-                        Util.FlashWindow( this );
+                        Util.FlashWindow( this, true );
 
                     break;
 
@@ -70,7 +70,7 @@ namespace Vapor
                     this.AppendText( Color.White, " " + msg );
 
                     if ( sender != Steam3.SteamClient.SteamID )
-                        Util.FlashWindow( this );
+                        Util.FlashWindow( this, true );
 
                     break;
 
@@ -135,6 +135,16 @@ namespace Vapor
         private void txtLog_LinkClicked( object sender, LinkClickedEventArgs e )
         {
             Process.Start( e.LinkText );
+        }
+
+        private void ChatDialog_Load( object sender, EventArgs e )
+        {
+            Util.FlashWindow( this, false );
+        }
+
+        private void ChatDialog_Activated( object sender, EventArgs e )
+        {
+            Util.FlashWindow( this, false );
         }
     }
 }
