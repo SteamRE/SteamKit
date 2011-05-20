@@ -98,7 +98,7 @@ namespace Vapor
         static extern bool FlashWindowEx( ref FLASHWINFO pwfi );
 
 
-        public static void FlashWindow( Form wnd )
+        public static void FlashWindow( Form wnd, bool flash )
         {
             if ( IsMono() )
             {
@@ -109,7 +109,7 @@ namespace Vapor
             FLASHWINFO flashInfo = new FLASHWINFO();
 
             flashInfo.cbSize = ( uint )Marshal.SizeOf( flashInfo );
-            flashInfo.dwFlags = FLASHW_TIMERNOFG | FLASHW_TRAY;
+            flashInfo.dwFlags = ( flash ? ( FLASHW_TIMER | FLASHW_TRAY ) : FLASHW_STOP );
             flashInfo.hwnd = wnd.Handle;
 
             FlashWindowEx( ref flashInfo );

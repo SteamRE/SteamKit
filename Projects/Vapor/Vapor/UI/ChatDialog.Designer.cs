@@ -54,6 +54,8 @@
             // chatFriend
             // 
             this.chatFriend.BackColor = System.Drawing.Color.FromArgb( ( ( int )( ( ( byte )( 38 ) ) ) ), ( ( int )( ( ( byte )( 38 ) ) ) ), ( ( int )( ( ( byte )( 39 ) ) ) ) );
+            this.chatFriend.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.chatFriend.CanOpenProfile = false;
             this.chatFriend.IsHighlighted = true;
             this.chatFriend.Location = new System.Drawing.Point( 3, 3 );
             this.chatFriend.Name = "chatFriend";
@@ -129,6 +131,8 @@
             this.Icon = ( ( System.Drawing.Icon )( resources.GetObject( "$this.Icon" ) ) );
             this.Name = "ChatDialog";
             this.Text = "Chat";
+            this.Load += new System.EventHandler( this.ChatDialog_Load );
+            this.Activated += new System.EventHandler( this.ChatDialog_Activated );
             this.panel1.ResumeLayout( false );
             this.splitContainer1.Panel1.ResumeLayout( false );
             this.splitContainer1.Panel2.ResumeLayout( false );
