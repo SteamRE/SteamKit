@@ -356,7 +356,7 @@ namespace SteamKit2
             SendPacket(new UdpPacket(EUdpPacketType.ChallengeReq));
             state = UdpConnectionState.ChallengeReqSent;
 
-            while ( true )
+            while ( state != UdpConnectionState.Disconnected )
             {
                 // Wait up to 150ms for data, if none is found and the
                 // timeout is exceeded, we're done here.
@@ -365,8 +365,8 @@ namespace SteamKit2
                 {
                     DebugLog.WriteLine("UdpConnection", "Connection timed out");
 
-                    OnDisconnected(EventArgs.Empty);
-                    return;
+                    state = UdpConnectionState.Disconnected;
+                    break;
                 }
 
                 // By using a 10ms wait, we allow for multiple packets
@@ -389,23 +389,17 @@ namespace SteamKit2
                     UdpPacket packet = new UdpPacket(ms);
 
                     ReceivePacket(packet);
-
-                    // If we were given a disconnect packet, terminate
-                    if ( state == UdpConnectionState.Disconnected )
-                    {
-                        DebugLog.WriteLine("UdpConnection", "Disconnected by server");
-
-                        OnDisconnected(EventArgs.Empty);
-                        return;
-                    }
                 }
 
-                // Send or resend any sequenced packets
-                SendPendingMessages();
+                // Send or resend any sequenced packets; a call
+                // to ReceivePacket can set our state to disconnected
+                // so don't send anything we have queued in that case
+                if ( state != UdpConnectionState.Disconnected )
+                    SendPendingMessages();
 
                 // If we received data but had no data to send back,
                 // we need to manually Ack (usually tags along with
-                // outgoing data)
+                // outgoing data); also acks disconnections
                 if ( inSeq != inSeqAcked )
                     SendAck();
 
@@ -415,10 +409,12 @@ namespace SteamKit2
                 {
                     DebugLog.WriteLine("UdpConnection", "Graceful disconnect completed");
 
-                    OnDisconnected(EventArgs.Empty);
-                    return;
+                    state = UdpConnectionState.Disconnected;
                 }
             }
+
+            DebugLog.WriteLine("UdpConnection", "Calling OnDisconnected");
+            OnDisconnected(EventArgs.Empty);
         }
 
         /// <summary>
@@ -480,6 +476,7 @@ namespace SteamKit2
                     break;
 
                 case EUdpPacketType.Disconnect:
+                    DebugLog.WriteLine("UdpConnection", "Disconnected by server");
                     state = UdpConnectionState.Disconnected;
                     return;
 
