@@ -54,8 +54,8 @@ namespace SteamKit2
         private Socket sock;
         private IPEndPoint remoteEndPoint;
 
-        DateTime timeOut;
-        DateTime nextResend;
+        private DateTime timeOut;
+        private DateTime nextResend;
 
         private uint remoteConnId;
 
@@ -356,7 +356,7 @@ namespace SteamKit2
                 if ( !sock.Poll(150000, SelectMode.SelectRead) 
                     && DateTime.Now > timeOut )
                 {
-                    Console.WriteLine("UdpConnection: Connection timed out");
+                    DebugLog.WriteLine("UdpConnection", "Connection timed out");
 
                     OnDisconnected(EventArgs.Empty);
                     return;
@@ -381,66 +381,13 @@ namespace SteamKit2
                     MemoryStream ms = new MemoryStream(buf, 0, length);
                     UdpPacket packet = new UdpPacket(ms);
 
-                    // Check for a malformed packet
-                    if ( !packet.IsValid )
-                        continue;
-                    else if ( remoteConnId > 0 && packet.Header.SourceConnID != remoteConnId )
-                        continue;
+                    ReceivePacket(packet);
 
-                    // Throw away any duplicate messages we've already received, making sure to
-                    // re-ack it in case it got lost.
-                    if ( packet.Header.PacketType == EUdpPacketType.Data && packet.Header.SeqThis < inSeq )
+                    // If we were given a disconnect packet, terminate
+                    if ( state == UdpConnectionState.Disconnected )
                     {
-                        SendAck();
-                        continue;
-                    }
-
-                    // When we get a SeqAck, all packets with sequence
-                    // numbers below that have been safely received by
-                    // the server; we are now free to remove our copies
-                    if ( outSeqAcked < packet.Header.SeqAck )
-                    {
-                        outSeqAcked = packet.Header.SeqAck;
-                        outPackets.RemoveAll(delegate(UdpPacket x) { return x.Header.SeqThis <= outSeqAcked; });
-
-                        nextResend = DateTime.Now.AddSeconds(RESEND_DELAY);
-                    }
-
-                    // inSeq should always be the latest value
-                    // that we can ack, so advance it as far
-                    // as is possible.
-                    if ( packet.Header.SeqThis == inSeq + 1 )
-                    {
-                        inSeq++;
-
-                        while ( inPackets.ContainsKey(inSeq + 1) )
-                            inSeq++;
-                    }
-
-                    switch ( packet.Header.PacketType )
-                    {
-                        case EUdpPacketType.Challenge:
-                            ReceiveChallenge(packet);
-                            break;
-
-                        case EUdpPacketType.Accept:
-                            ReceiveAccept(packet);
-                            break;
-
-                        case EUdpPacketType.Data:
-                            ReceiveData(packet);
-                            break;
-
-                        case EUdpPacketType.Disconnect:
-                            OnDisconnected(EventArgs.Empty);
-                            return;
-
-                        case EUdpPacketType.Datagram:
-                            break;
-
-                        default:
-                            Console.WriteLine("UdpConnection: Received unexpected packet type " + packet.Header.PacketType);
-                            continue;
+                        OnDisconnected(EventArgs.Empty);
+                        return;
                     }
                 }
 
@@ -457,11 +404,78 @@ namespace SteamKit2
                 // outgoing queue is discarded. Once it's empty, we exit.
                 if ( state == UdpConnectionState.Disconnecting && outPackets.Count == 0 )
                 {
-                    Console.WriteLine("UdpConnection: Graceful disconnect completed");
+                    DebugLog.WriteLine("UdpConnection", "Graceful disconnect completed");
 
                     OnDisconnected(EventArgs.Empty);
                     return;
                 }
+            }
+        }
+
+        /// <summary>
+        /// Receives the packet, performs all sanity checks and
+        /// then passes it along as necessary.
+        /// </summary>
+        /// <param name="packet">The packet.</param>
+        private void ReceivePacket(UdpPacket packet)
+        {
+            // Check for a malformed packet
+            if ( !packet.IsValid )
+                return;
+            else if ( remoteConnId > 0 && packet.Header.SourceConnID != remoteConnId )
+                return;
+
+            // Throw away any duplicate messages we've already received, making sure to
+            // re-ack it in case it got lost.
+            if ( packet.Header.PacketType == EUdpPacketType.Data && packet.Header.SeqThis < inSeq )
+            {
+                SendAck();
+                return;
+            }
+
+            // When we get a SeqAck, all packets with sequence
+            // numbers below that have been safely received by
+            // the server; we are now free to remove our copies
+            if ( outSeqAcked < packet.Header.SeqAck )
+            {
+                outSeqAcked = packet.Header.SeqAck;
+                outPackets.RemoveAll(delegate(UdpPacket x) { return x.Header.SeqThis <= outSeqAcked; });
+
+                nextResend = DateTime.Now.AddSeconds(RESEND_DELAY);
+            }
+
+            // inSeq should always be the latest value
+            // that we can ack, so advance it as far
+            // as is possible.
+            if ( packet.Header.SeqThis == inSeq + 1 )
+                do
+                    inSeq++;
+                while ( inPackets.ContainsKey(inSeq + 1) );
+
+            switch ( packet.Header.PacketType )
+            {
+                case EUdpPacketType.Challenge:
+                    ReceiveChallenge(packet);
+                    break;
+
+                case EUdpPacketType.Accept:
+                    ReceiveAccept(packet);
+                    break;
+
+                case EUdpPacketType.Data:
+                    ReceiveData(packet);
+                    break;
+
+                case EUdpPacketType.Disconnect:
+                    state = UdpConnectionState.Disconnected;
+                    return;
+
+                case EUdpPacketType.Datagram:
+                    break;
+
+                default:
+                    DebugLog.WriteLine("UdpConnection", "Received unexpected packet type " + packet.Header.PacketType);
+                    break;
             }
         }
 
@@ -500,7 +514,7 @@ namespace SteamKit2
             if ( state != UdpConnectionState.ConnectSent )
                 return;
 
-            Console.WriteLine("UdpConnection: Connection established");
+            DebugLog.WriteLine("UdpConnection", "Connection established");
             
             state = UdpConnectionState.Connected;
             remoteConnId = packet.Header.SourceConnID;
@@ -514,8 +528,9 @@ namespace SteamKit2
         /// <param name="packet">The packet.</param>
         private void ReceiveData(UdpPacket packet)
         {
-            if ( state != UdpConnectionState.Connected && state != UdpConnectionState.Disconnecting
-               || inPackets.ContainsKey(packet.Header.SeqThis) )
+            if ( state != UdpConnectionState.Connected && state != UdpConnectionState.Disconnecting )
+                return;
+            else if ( inPackets.ContainsKey(packet.Header.SeqThis) )
                 return;
 
             inPackets.Add(packet.Header.SeqThis, packet);
