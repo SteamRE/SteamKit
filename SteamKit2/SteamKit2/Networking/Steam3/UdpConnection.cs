@@ -221,6 +221,10 @@ namespace SteamKit2
             packet.Header.DestConnID = remoteConnId;
             packet.Header.SeqAck = inSeqAcked = inSeq;
 
+            DebugLog.WriteLine("UdpConnection", "Sent -> {0} Seq {1} Ack {2}; {3} bytes; Message: {4} bytes {5} packets",
+                packet.Header.PacketType, packet.Header.SeqThis, packet.Header.SeqAck,
+                packet.Header.PayloadSize, packet.Header.MsgSize, packet.Header.PacketsInMsg);
+
             MemoryStream ms = packet.GetData();
 
             sock.SendTo(ms.ToArray(), remoteEndPoint);
@@ -253,7 +257,7 @@ namespace SteamKit2
         {
             if ( DateTime.Now > nextResend && outSeqSent > outSeqAcked )
             {
-                nextResend = DateTime.Now.AddSeconds(RESEND_DELAY);
+                DebugLog.WriteLine("UdpConnection", "Sequenced packet resend required");
 
                 // Don't send more than 3 (Steam behavior?), go ahead
                 // and roll-back outSeqSent so if we need to resent more
@@ -263,6 +267,8 @@ namespace SteamKit2
                     SendPacket(outPackets[i]);
                     outSeqSent = outPackets[i].Header.SeqThis;
                 }
+
+                nextResend = DateTime.Now.AddSeconds(RESEND_DELAY);
             }
             else if ( outSeqSent < outSeqAcked + AHEAD_COUNT )
             {
@@ -310,7 +316,6 @@ namespace SteamKit2
                 return false;
             
             MemoryStream payload = new MemoryStream();
-
             for ( uint i = 0; i < numPackets; i++ )
             {
                 UdpPacket packet;
@@ -325,6 +330,8 @@ namespace SteamKit2
 
             if ( NetFilter != null )
                 data = NetFilter.ProcessIncoming(data);
+
+            DebugLog.WriteLine("UdpConnection", "Dispatching message; {0} bytes", data.Length);
 
             OnNetMsgReceived(new NetMsgEventArgs(data, remoteEndPoint));
 
@@ -386,6 +393,8 @@ namespace SteamKit2
                     // If we were given a disconnect packet, terminate
                     if ( state == UdpConnectionState.Disconnected )
                     {
+                        DebugLog.WriteLine("UdpConnection", "Disconnected by server");
+
                         OnDisconnected(EventArgs.Empty);
                         return;
                     }
@@ -424,6 +433,10 @@ namespace SteamKit2
                 return;
             else if ( remoteConnId > 0 && packet.Header.SourceConnID != remoteConnId )
                 return;
+
+            DebugLog.WriteLine("UdpConnection", "<- Recv'd {0} Seq {1} Ack {2}; {3} bytes; Message: {4} bytes {5} packets",
+                packet.Header.PacketType, packet.Header.SeqThis, packet.Header.SeqAck,
+                packet.Header.PayloadSize, packet.Header.MsgSize, packet.Header.PacketsInMsg);
 
             // Throw away any duplicate messages we've already received, making sure to
             // re-ack it in case it got lost.

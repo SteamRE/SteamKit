@@ -60,6 +60,7 @@
     <Compile Include="Blob\CachedBinaryReader.cs" />
     <Compile Include="Blob\Fields\AuthFields.cs" />
     <Compile Include="Blob\Fields\CDRFields.cs" />
+    <Compile Include="Networking\Steam3\UdpPacket.cs" />
     <Compile Include="Steam2\ContentServerClient.cs" />
     <Compile Include="Steam2\ContentServerDSClient.cs" />
     <Compile Include="Steam3\ClientConfig.cs" />

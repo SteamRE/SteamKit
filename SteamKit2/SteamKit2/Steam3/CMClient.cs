@@ -89,8 +89,7 @@ namespace SteamKit2
             SessionID = default( int );
             SteamID = default( ulong );
 
-            // todo: UdpConnection needs an implementation
-            Connection = new TcpConnection();
+            Connection = new UdpConnection();
             Connection.NetMsgReceived += NetMsgReceived;
             Connection.Disconnected += Disconnected;
         }
