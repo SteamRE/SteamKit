@@ -17,6 +17,9 @@ namespace Vapor
         bool shouldClose;
         Timer sortTimer;
 
+        bool suppressStateMsg;
+        bool expectDisconnect;
+
 
         public MainForm()
         {
@@ -48,6 +51,11 @@ namespace Vapor
                 if ( perState.FriendID == selfControl.Friend.SteamID )
                 {
                     selfControl.SetSteamID( selfControl.Friend );
+
+                    suppressStateMsg = true;
+                    stateComboBox.SelectedIndex = GetIndexFromState( perState.State );
+                    suppressStateMsg = false;
+
                     return;
                 }
 
@@ -84,6 +92,8 @@ namespace Vapor
 
                 if ( logOnResp.Result == EResult.AccountLogonDenied )
                 {
+                    expectDisconnect = true;
+
                     SteamGuardDialog sgDialog = new SteamGuardDialog();
 
                     if ( sgDialog.ShowDialog( this ) != DialogResult.OK )
@@ -140,6 +150,13 @@ namespace Vapor
 
             msg.Handle<SteamClient.DisconnectCallback>( ( callback ) =>
                 {
+                    // if we expected this disconnection (cause of steamguard), we do nothing
+                    if ( expectDisconnect )
+                    {
+                        expectDisconnect = false;
+                        return;
+                    }
+
                     Util.MsgBox( this, "Disconnected from Steam3!" );
 
                     this.Relog = true;
@@ -316,6 +333,62 @@ namespace Vapor
         {
             shouldClose = true;
             this.Close();
+        }
+
+
+        // translates a state combo box selection index to persona state
+        EPersonaState GetStateFromIndex( int idx )
+        {
+            // note: this _MUST_ match the UI items
+            EPersonaState[] states =
+            {
+                EPersonaState.Online,
+                EPersonaState.Away,
+                EPersonaState.Busy,
+                EPersonaState.Snooze,
+                EPersonaState.Offline,
+            };
+
+            if ( idx < 0 || idx >= states.Length )
+            {
+                return EPersonaState.Online;
+            }
+
+            return states[ idx ];
+        }
+
+        // translates persona state to state combo box selection index
+        int GetIndexFromState( EPersonaState state )
+        {
+            switch ( state )
+            {
+                case EPersonaState.Online:
+                    return 0;
+
+                case EPersonaState.Away:
+                    return 1;
+
+                case EPersonaState.Busy:
+                    return 2;
+
+                case EPersonaState.Snooze:
+                    return 3;
+
+                case EPersonaState.Offline:
+                    return 4;
+            }
+
+            return 0;
+        }
+
+        private void stateComboBox_SelectedIndexChanged( object sender, EventArgs e )
+        {
+            if ( suppressStateMsg )
+            {
+                return;
+            }
+
+            Steam3.SteamFriends.SetPersonaState( GetStateFromIndex( stateComboBox.SelectedIndex ) );
         }
     }
 }

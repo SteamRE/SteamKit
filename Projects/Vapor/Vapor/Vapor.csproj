@@ -57,6 +57,9 @@
     <Compile Include="UI\Base\VaporCheckBox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="UI\Base\VaporComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="UI\Base\VaporContextMenu.cs">
       <SubType>Component</SubType>
     </Compile>
