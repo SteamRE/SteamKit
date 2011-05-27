@@ -144,7 +144,7 @@ namespace SteamKit2
             return null;
         }
 
-        public void Write(string data)
+        public new void Write(string data)
         {
             Write(data, Encoding.Default);
         }
