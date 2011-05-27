@@ -55,17 +55,7 @@ namespace SteamKit2
             if ( this.Header.Magic != UdpHeader.MAGIC )
                 return;
 
-            Payload = new MemoryStream(Header.PayloadSize);
-
-            if ( Header.PayloadSize > 0 )
-            {
-                byte[] buf = new byte[Header.PayloadSize];
-
-                ms.Read(buf, 0, buf.Length);
-
-                Payload.Write(buf, 0, buf.Length);
-                Payload.Seek(0, SeekOrigin.Begin);
-            }
+            SetPayload(ms, Header.PayloadSize);
         }
 
         /// <summary>
@@ -92,8 +82,9 @@ namespace SteamKit2
         /// <param name="type">The type.</param>
         /// <param name="payload">The payload.</param>
         public UdpPacket(EUdpPacketType type, MemoryStream payload)
-            : this(type, payload, payload.Length)
+            : this(type)
         {
+            SetPayload(payload);
         }
 
         /// <summary>
@@ -112,12 +103,12 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// Sets the payload.
+        /// Sets the payload
         /// </summary>
         /// <param name="ms">The payload to copy.</param>
         public void SetPayload(MemoryStream ms)
         {
-            SetPayload(ms, ms.Length);
+            SetPayload(ms, ms.Length - ms.Position);
         }
 
         /// <summary>
@@ -131,12 +122,9 @@ namespace SteamKit2
                 throw new ArgumentException("Payload length exceeds 0x4DC maximum");
 
             byte[] buf = new byte[length];
-
-            ms.Seek(0, SeekOrigin.Begin);
             ms.Read(buf, 0, buf.Length);
 
             Payload = new MemoryStream(buf);
-
             Header.PayloadSize = (ushort) Payload.Length;
             Header.MsgSize = (uint) Payload.Length;
         }

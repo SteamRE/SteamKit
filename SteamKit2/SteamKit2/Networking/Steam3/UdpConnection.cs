@@ -14,17 +14,19 @@ using System.IO;
 
 namespace SteamKit2
 {
-    enum UdpConnectionState
-    {
-        Disconnected,
-        ChallengeReqSent,
-        ConnectSent,
-        Connected,
-        Disconnecting
-    }
+    
 
     class UdpConnection : Connection
     {
+        private enum UdpConnectionState
+        {
+            Disconnected,
+            ChallengeReqSent,
+            ConnectSent,
+            Connected,
+            Disconnecting
+        }
+
         /// <summary>
         /// Seconds to wait before sending packets.
         /// </summary>
@@ -507,6 +509,7 @@ namespace SteamKit2
             MemoryStream ms = new MemoryStream();
             cd.Serialize(ms);
 
+            ms.Seek(0, SeekOrigin.Begin);
             SendSequenced(new UdpPacket(EUdpPacketType.Connect, ms));
 
             state = UdpConnectionState.ConnectSent;
