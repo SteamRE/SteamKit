@@ -66,7 +66,7 @@ namespace SteamKit2
         /// </summary>
         private uint outSeq;
         /// <summary>
-        /// The highest sequence number of outgoing packets.
+        /// The highest sequence number of an outbound packet that has been sent.
         /// </summary>
         private uint outSeqSent;
         /// <summary>
@@ -76,7 +76,8 @@ namespace SteamKit2
 
         /// <summary>
         /// The sequence number we plan on acknowledging receiving with the next Ack.
-        /// All packets below or equal to inSeq *must* have been received.
+        /// All packets below or equal to inSeq *must* have been received, but not
+        /// necessarily handled.
         /// </summary>
         private uint inSeq;
         /// <summary>
@@ -137,6 +138,11 @@ namespace SteamKit2
         {
             if ( netThread == null )
                 return;
+            
+            // Play nicely and let the server know that we're done.
+            // Other party is expected to Ack this, so it needs to be
+            // sent sequenced.
+            SendSequenced(new UdpPacket(EUdpPacketType.Disconnect));
 
             state = State.Disconnecting;
 
@@ -163,19 +169,25 @@ namespace SteamKit2
             if ( NetFilter != null )
                 data = NetFilter.ProcessOutgoing(data);
 
-            ms = new MemoryStream(data);
+            SendData(new MemoryStream(data));            
+        }
 
-            UdpPacket[] packets = new UdpPacket[( (uint) data.Length / UdpPacket.MAX_PAYLOAD ) + 1];
+        /// <summary>
+        /// Sends the data sequenced as a single message,
+        /// splitting it into multiple parts if necessary.
+        /// </summary>
+        /// <param name="ms">The data to send.</param>
+        private void SendData(MemoryStream ms)
+        {
+            UdpPacket[] packets = new UdpPacket[( ms.Length / UdpPacket.MAX_PAYLOAD ) + 1];
 
             for ( int i = 0; i < packets.Length; i++ )
             {
-                int index = i * (int) UdpPacket.MAX_PAYLOAD;
-                int length = Math.Min((int) UdpPacket.MAX_PAYLOAD, data.Length - index);
+                long index = i * UdpPacket.MAX_PAYLOAD;
+                long length = Math.Min(UdpPacket.MAX_PAYLOAD, ms.Length - index);
 
-                UdpPacket packet = new UdpPacket(EUdpPacketType.Data, ms, length);
-                packet.Header.MsgSize = (uint) data.Length;
-
-                packets[i] = packet;
+                packets[i] = new UdpPacket(EUdpPacketType.Data, ms, length);
+                packets[i].Header.MsgSize = (uint) ms.Length;
             }
 
             SendSequenced(packets);
@@ -406,7 +418,8 @@ namespace SteamKit2
                     SendAck();
 
                 // If a graceful shutdown has been requested, nothing in the
-                // outgoing queue is discarded. Once it's empty, we exit.
+                // outgoing queue is discarded. Once it's empty, we exit,
+                // since the last packet was our disconnect notification.
                 if ( state == State.Disconnecting && outPackets.Count == 0 )
                 {
                     DebugLog.WriteLine("UdpConnection", "Graceful disconnect completed");
@@ -508,8 +521,8 @@ namespace SteamKit2
 
             MemoryStream ms = new MemoryStream();
             cd.Serialize(ms);
-
             ms.Seek(0, SeekOrigin.Begin);
+
             SendSequenced(new UdpPacket(EUdpPacketType.Connect, ms));
 
             state = State.ConnectSent;
