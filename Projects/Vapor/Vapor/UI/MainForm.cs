@@ -97,7 +97,19 @@ namespace Vapor
                     Steam3.AuthCode = sgDialog.AuthCode;
 
                     // if we got this logon response, we got disconnected, so lets reconnect
-                    Steam3.Connect();
+                    try
+                    {
+                        Steam3.Connect();
+                    }
+                    catch ( Steam3Exception ex )
+                    {
+                        Util.MsgBox( this, string.Format( "Unable to connect to Steam3: {0}", ex.Message ) );
+
+                        this.Relog = true;
+                        this.Close();
+
+                        return;
+                    }
                 }
                 else if ( logOnResp.Result != EResult.OK )
                 {
@@ -125,6 +137,16 @@ namespace Vapor
                     Util.MsgBox( this, "Unable to add friend! Result: " + friendAdded.Result );
                 }
             }
+
+            msg.Handle<SteamClient.DisconnectCallback>( ( callback ) =>
+                {
+                    Util.MsgBox( this, "Disconnected from Steam3!" );
+
+                    this.Relog = true;
+                    this.Close();
+
+                    return;
+                } );
         }
 
         void sortTimer_Tick( object sender, EventArgs e )
