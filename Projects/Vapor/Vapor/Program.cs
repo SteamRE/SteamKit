@@ -20,13 +20,14 @@ namespace Vapor
 
             }
 
-            Start();
+            Start( args );
         }
 
-        static void Start()
+        static void Start( string[] args )
         {
 
-            LoginDialog ld = new LoginDialog();
+
+            LoginDialog ld = new LoginDialog( FindArg( args, "-udp" ) );
 
             if ( ld.ShowDialog() != DialogResult.OK )
                 return;
@@ -49,7 +50,7 @@ namespace Vapor
             CDNCache.Shutdown();
 
             if ( mf.Relog )
-                Start();
+                Start( args );
         }
 
         static bool FindArg( string[] args, string arg )

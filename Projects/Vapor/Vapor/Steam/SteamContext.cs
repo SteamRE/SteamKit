@@ -142,9 +142,9 @@ namespace Vapor
         }
 
 
-        public static void Initialize()
+        public static void Initialize( bool useUdp )
         {
-            SteamClient = new SteamClient();
+            SteamClient = new SteamClient( useUdp ? CMClient.ConnectionType.Udp : CMClient.ConnectionType.Tcp );
 
             SteamFriends = SteamClient.GetHandler<SteamFriends>( SteamFriends.NAME );
             SteamUser = SteamClient.GetHandler<SteamUser>( SteamUser.NAME );
