@@ -113,6 +113,15 @@ message CMsgAMGetUserGameStatsResponse {
 	repeated .CMsgAMGetUserGameStatsResponse.Achievement_Blocks achievement_blocks = 5;
 }
 
+message CMsgGCGetCommandList {
+	optional uint32 app_id = 1;
+	optional string command_prefix = 2;
+}
+
+message CMsgGCGetCommandListResponse {
+	repeated string command_name = 1;
+}
+
 message CGCMsgMemCachedGet {
 	repeated string keys = 1;
 }
