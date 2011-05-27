@@ -940,6 +940,7 @@ message CMsgClientAppInfoRequest {
 	}
 
 	repeated .CMsgClientAppInfoRequest.App apps = 1;
+	optional bool supports_batches = 2 [default = false];
 }
 
 message CMsgClientAppInfoResponse {
@@ -955,6 +956,8 @@ message CMsgClientAppInfoResponse {
 	}
 
 	repeated .CMsgClientAppInfoResponse.App apps = 1;
+	repeated uint32 apps_unknown = 2;
+	optional uint32 apps_pending = 3;
 }
 
 message CMsgClientUFSGetUGCDetails {
@@ -1286,5 +1289,30 @@ message CMsgClientEmailChange {
 
 message CMsgClientEmailChangeResponse {
 	optional int32 eresult = 1 [default = 2];
+}
+
+message CMsgClientUGSGetGlobalStats {
+	optional uint64 gameid = 1;
+	optional uint32 history_days_requested = 2;
+	optional fixed32 time_last_requested = 3;
+	optional uint32 first_day_cached = 4;
+	optional uint32 days_cached = 5;
+}
+
+message CMsgClientUGSGetGlobalStatsResponse {
+	message Day {
+		message Stat {
+			optional int32 stat_id = 1;
+			optional int64 data = 2;
+		}
+
+		optional uint32 day_id = 1;
+		repeated .CMsgClientUGSGetGlobalStatsResponse.Day.Stat stats = 2;
+	}
+
+	optional int32 eresult = 1 [default = 2];
+	optional fixed32 timestamp = 2;
+	optional int32 day_current = 3;
+	repeated .CMsgClientUGSGetGlobalStatsResponse.Day days = 4;
 }
 
