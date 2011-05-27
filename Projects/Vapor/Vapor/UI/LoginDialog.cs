@@ -13,9 +13,13 @@ namespace Vapor
 {
     partial class LoginDialog : VaporForm
     {
-        public LoginDialog()
+        bool useUdp;
+
+        public LoginDialog( bool useUdp )
         {
             InitializeComponent();
+
+            this.useUdp = useUdp;
         }
 
         private void btnLogin_Click( object sender, EventArgs e )
@@ -48,7 +52,7 @@ namespace Vapor
 
                 Steam3.AlternateLogon = chkBoxAltLogon.Checked;
 
-                Steam3.Initialize();
+                Steam3.Initialize( useUdp );
 
                 Steam3.Connect();
             }
