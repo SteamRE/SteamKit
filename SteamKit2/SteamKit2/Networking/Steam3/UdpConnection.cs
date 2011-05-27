@@ -14,8 +14,6 @@ using System.IO;
 
 namespace SteamKit2
 {
-    
-
     class UdpConnection : Connection
     {
         private enum State
@@ -250,7 +248,10 @@ namespace SteamKit2
             if ( outSeqSent == outSeqAcked )
                 nextResend = DateTime.Now.AddSeconds(RESEND_DELAY);
 
-            if ( packet.Header.SeqThis > outSeqSent )
+            // Sending should generally carry on from the
+            // packet most recently sent, even if it was a
+            // resend (who knows what else was lost).
+            if ( packet.Header.SeqThis > 0 )
                 outSeqSent = packet.Header.SeqThis;
         }
 
@@ -265,7 +266,7 @@ namespace SteamKit2
 
         /// <summary>
         /// Sends or resends sequenced messages, if necessary. Also
-        /// resonsible for throttling the rate at which they are sent.
+        /// responsible for throttling the rate at which they are sent.
         /// </summary>
         private void SendPendingMessages()
         {
@@ -273,14 +274,9 @@ namespace SteamKit2
             {
                 DebugLog.WriteLine("UdpConnection", "Sequenced packet resend required");
 
-                // Don't send more than 3 (Steam behavior?), go ahead
-                // and roll-back outSeqSent so if we need to resent more
-                // it doesn't cause us much trouble
+                // Don't send more than 3 (Steam behavior?)
                 for ( int i = 0; i < RESEND_COUNT && i < outPackets.Count; i++ )
-                {
                     SendPacket(outPackets[i]);
-                    outSeqSent = outPackets[i].Header.SeqThis;
-                }
 
                 nextResend = DateTime.Now.AddSeconds(RESEND_DELAY);
             }
@@ -290,10 +286,7 @@ namespace SteamKit2
                 // it gets an Ack, so this limits the number of sequenced
                 // packets that can be sent out at one time.
                 for ( int i = (int) ( outSeqSent - outSeqAcked ); i < AHEAD_COUNT && i < outPackets.Count; i++ )
-                {
                     SendPacket(outPackets[i]);
-                    outSeqSent = outPackets[i].Header.SeqThis;
-                }
             }
         }
 
@@ -463,8 +456,13 @@ namespace SteamKit2
             if ( outSeqAcked < packet.Header.SeqAck )
             {
                 outSeqAcked = packet.Header.SeqAck;
-                outPackets.RemoveAll(delegate(UdpPacket x) { return x.Header.SeqThis <= outSeqAcked; });
 
+                // outSeqSent can be less than this in a very
+                // rare case involving resent packets.
+                if ( outSeqSent < outSeqAcked )
+                    outSeqSent = outSeqAcked;
+
+                outPackets.RemoveAll(delegate(UdpPacket x) { return x.Header.SeqThis <= outSeqAcked; });
                 nextResend = DateTime.Now.AddSeconds(RESEND_DELAY);
             }
 
@@ -530,7 +528,7 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// Receives the notification of connection acception
+        /// Receives the notification of an accepted connection
         /// and sets the connection id that will be used for the
         /// connection's duration.
         /// </summary>
