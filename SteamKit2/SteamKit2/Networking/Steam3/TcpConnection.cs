@@ -29,6 +29,10 @@ namespace SteamKit2
         BinaryReader reader;
         BinaryWriter writer;
 
+        /// <summary>
+        /// Connects to the specified end point.
+        /// </summary>
+        /// <param name="endPoint">The end point.</param>
         public override void Connect( IPEndPoint endPoint )
         {
             Disconnect();
@@ -45,6 +49,9 @@ namespace SteamKit2
             netThread.Start();
         }
 
+        /// <summary>
+        /// Disconnects this instance.
+        /// </summary>
         public override void Disconnect()
         {
             if ( sock == null || !sock.Connected )
@@ -64,6 +71,10 @@ namespace SteamKit2
             }
         }
 
+        /// <summary>
+        /// Sends the specified client net message.
+        /// </summary>
+        /// <param name="clientMsg">The client net message.</param>
         public override void Send( IClientMsg clientMsg )
         {
             if ( sock == null || !sock.Connected )
@@ -87,12 +98,18 @@ namespace SteamKit2
             writer.Write( bb.ToArray() );
         }
 
+        // this is now a steamkit meme
+        /// <summary>
+        /// Nets the loop.
+        /// </summary>
         void NetLoop()
         {
             try
             {
                 while ( sock.Connected )
                 {
+                    // the tcp packet header is considerably less complex than the udp one
+                    // it only consists of the packet length, followed by the "VT01" magic
                     byte[] packetHeader = reader.ReadBytes( 8 );
 
                     if ( packetHeader.Length != 8 )
@@ -105,6 +122,7 @@ namespace SteamKit2
                     if ( packetMagic != TcpConnection.MAGIC )
                         throw new IOException( "RecvCompleted got a packet with invalid magic!" );
 
+                    // rest of the packet is the physical data
                     byte[] packData = reader.ReadBytes( ( int )packetLen );
                     if ( packData.Length != packetLen )
                         throw new IOException( "Connection lost while reading packet payload" );
@@ -122,6 +140,10 @@ namespace SteamKit2
             }
         }
 
+        /// <summary>
+        /// Gets the local IP.
+        /// </summary>
+        /// <returns>The local IP.</returns>
         public override IPAddress GetLocalIP()
         {
             return NetHelpers.GetLocalIP( sock );

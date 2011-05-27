@@ -18,7 +18,7 @@ namespace SteamKit2
 
     class UdpConnection : Connection
     {
-        private enum UdpConnectionState
+        private enum State
         {
             Disconnected,
             ChallengeReqSent,
@@ -50,7 +50,7 @@ namespace SteamKit2
         /// to filter out packets that are unexpected or not valid given
         /// the state of the connection.
         /// </summary>
-        private UdpConnectionState state;
+        private State state;
 
         private Thread netThread;
         private Socket sock;
@@ -98,7 +98,7 @@ namespace SteamKit2
             sock = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
             sock.Bind(localEndPoint);
 
-            state = UdpConnectionState.Disconnected;
+            state = State.Disconnected;
         }
 
         /// <summary>
@@ -138,7 +138,7 @@ namespace SteamKit2
             if ( netThread == null )
                 return;
 
-            state = UdpConnectionState.Disconnecting;
+            state = State.Disconnecting;
 
             // Graceful shutdown allows for the
             // connection to empty its queue of
@@ -153,7 +153,7 @@ namespace SteamKit2
         /// <param name="clientMsg">The ClientMsg</param>
         public override void Send(IClientMsg clientMsg)
         {
-            if ( state != UdpConnectionState.Connected )
+            if ( state != State.Connected )
                 return;
 
             MemoryStream ms = new MemoryStream();
@@ -356,9 +356,9 @@ namespace SteamKit2
 
             // Begin by sending off the challenge request
             SendPacket(new UdpPacket(EUdpPacketType.ChallengeReq));
-            state = UdpConnectionState.ChallengeReqSent;
+            state = State.ChallengeReqSent;
 
-            while ( state != UdpConnectionState.Disconnected )
+            while ( state != State.Disconnected )
             {
                 // Wait up to 150ms for data, if none is found and the
                 // timeout is exceeded, we're done here.
@@ -367,7 +367,7 @@ namespace SteamKit2
                 {
                     DebugLog.WriteLine("UdpConnection", "Connection timed out");
 
-                    state = UdpConnectionState.Disconnected;
+                    state = State.Disconnected;
                     break;
                 }
 
@@ -396,7 +396,7 @@ namespace SteamKit2
                 // Send or resend any sequenced packets; a call
                 // to ReceivePacket can set our state to disconnected
                 // so don't send anything we have queued in that case
-                if ( state != UdpConnectionState.Disconnected )
+                if ( state != State.Disconnected )
                     SendPendingMessages();
 
                 // If we received data but had no data to send back,
@@ -407,11 +407,11 @@ namespace SteamKit2
 
                 // If a graceful shutdown has been requested, nothing in the
                 // outgoing queue is discarded. Once it's empty, we exit.
-                if ( state == UdpConnectionState.Disconnecting && outPackets.Count == 0 )
+                if ( state == State.Disconnecting && outPackets.Count == 0 )
                 {
                     DebugLog.WriteLine("UdpConnection", "Graceful disconnect completed");
 
-                    state = UdpConnectionState.Disconnected;
+                    state = State.Disconnected;
                 }
             }
 
@@ -479,7 +479,7 @@ namespace SteamKit2
 
                 case EUdpPacketType.Disconnect:
                     DebugLog.WriteLine("UdpConnection", "Disconnected by server");
-                    state = UdpConnectionState.Disconnected;
+                    state = State.Disconnected;
                     return;
 
                 case EUdpPacketType.Datagram:
@@ -497,7 +497,7 @@ namespace SteamKit2
         /// <param name="packet">The packet.</param>
         private void ReceiveChallenge(UdpPacket packet)
         {
-            if ( state != UdpConnectionState.ChallengeReqSent )
+            if ( state != State.ChallengeReqSent )
                 return;
 
             ChallengeData cr = new ChallengeData();
@@ -512,7 +512,7 @@ namespace SteamKit2
             ms.Seek(0, SeekOrigin.Begin);
             SendSequenced(new UdpPacket(EUdpPacketType.Connect, ms));
 
-            state = UdpConnectionState.ConnectSent;
+            state = State.ConnectSent;
             inSeqHandled = packet.Header.SeqThis;
         }
 
@@ -524,12 +524,12 @@ namespace SteamKit2
         /// <param name="packet">The packet.</param>
         private void ReceiveAccept(UdpPacket packet)
         {
-            if ( state != UdpConnectionState.ConnectSent )
+            if ( state != State.ConnectSent )
                 return;
 
             DebugLog.WriteLine("UdpConnection", "Connection established");
             
-            state = UdpConnectionState.Connected;
+            state = State.Connected;
             remoteConnId = packet.Header.SourceConnID;
             inSeqHandled = packet.Header.SeqThis;
         }
@@ -541,7 +541,7 @@ namespace SteamKit2
         /// <param name="packet">The packet.</param>
         private void ReceiveData(UdpPacket packet)
         {
-            if ( state != UdpConnectionState.Connected && state != UdpConnectionState.Disconnecting )
+            if ( state != State.Connected && state != State.Disconnecting )
                 return;
             else if ( inPackets.ContainsKey(packet.Header.SeqThis) )
                 return;
