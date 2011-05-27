@@ -26,9 +26,19 @@ namespace SteamKit2
 
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SteamClient"/> class.
+        /// Initializes a new instance of the <see cref="SteamClient"/> class using the Tcp connection type.
         /// </summary>
         public SteamClient()
+            : this( ConnectionType.Tcp )
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SteamClient"/> class with a specific connection type.
+        /// </summary>
+        /// <param name="type">The connection type to use.</param>
+        public SteamClient( CMClient.ConnectionType type )
+            : base( type )
         {
             this.handlers = new Dictionary<string, ClientMsgHandler>( StringComparer.OrdinalIgnoreCase );
             this.callbackQueue = new Queue<CallbackMsg>();
@@ -214,6 +224,10 @@ namespace SteamKit2
         #endregion
 
 
+        /// <summary>
+        /// Raises the <see cref="E:ClientMsgReceived"/> event.
+        /// </summary>
+        /// <param name="e">The <see cref="SteamKit2.ClientMsgEventArgs"/> instance containing the event data.</param>
         protected override void OnClientMsgReceived( ClientMsgEventArgs e )
         {
             if ( e.EMsg == EMsg.ChannelEncryptResult )
@@ -225,13 +239,16 @@ namespace SteamKit2
                 kvp.Value.HandleMsg( e );
             }
         }
+        /// <summary>
+        /// Called when the client is physically disconnected from Steam3.
+        /// </summary>
         protected override void OnClientDisconnected()
         {
             this.PostCallback( new SteamClient.DisconnectCallback() );
         }
 
 
-        // we're interested in handling the encryption result callback to see if we've properly connected or not
+        // we're interested in handling the encryption result net message to see if we've properly connected or not
         void HandleEncryptResult( ClientMsgEventArgs e )
         {
             // if the EResult is OK, we've finished the crypto handshake and can send commands (such as LogOn)

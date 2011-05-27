@@ -82,14 +82,49 @@ namespace SteamKit2
 
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CMClient"/> class.
+        /// The connection type to use when connecting to the Steam3 network.
+        /// </summary>
+        public enum ConnectionType
+        {
+            /// <summary>
+            /// Tcp.
+            /// </summary>
+            Tcp,
+            /// <summary>
+            /// Udp.
+            /// </summary>
+            Udp,
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CMClient"/> class using Tcp as the default connection type.
         /// </summary>
         public CMClient()
+            : this( ConnectionType.Tcp )
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CMClient"/> class with a specific connection type.
+        /// </summary>
+        /// <param name="type">The connection type to use.</param>
+        public CMClient( ConnectionType type )
         {
             SessionID = default( int );
             SteamID = default( ulong );
 
-            Connection = new UdpConnection();
+            switch ( type )
+            {
+                case ConnectionType.Tcp:
+                    Connection = new TcpConnection();
+                    break;
+                    
+                case ConnectionType.Udp:
+                    Connection = new UdpConnection();
+                    break;
+            }
+
             Connection.NetMsgReceived += NetMsgReceived;
             Connection.Disconnected += Disconnected;
         }
@@ -182,7 +217,14 @@ namespace SteamKit2
         }
 
 
+        /// <summary>
+        /// Raises the <see cref="E:ClientMsgReceived"/> event.
+        /// </summary>
+        /// <param name="e">The <see cref="SteamKit2.ClientMsgEventArgs"/> instance containing the event data.</param>
         protected abstract void OnClientMsgReceived( ClientMsgEventArgs e );
+        /// <summary>
+        /// Called when the client is physically disconnected from Steam3.
+        /// </summary>
         protected abstract void OnClientDisconnected();
 
 
