@@ -80,16 +80,30 @@ namespace SteamKit2
             new IPEndPoint( IPAddress.Parse( "208.111.171.83" ), 27017 ),
         };
 
+        /// <summary>
+        /// Gets or sets the net filter for this connection.
+        /// </summary>
+        /// <value>The net filter.</value>
         public NetFilterEncryption NetFilter { get; set; }
 
 
+        /// <summary>
+        /// Occurs when a net message is recieved over the network.
+        /// </summary>
         public event EventHandler<NetMsgEventArgs> NetMsgReceived;
+        /// <summary>
+        /// Raises the <see cref="E:NetMsgReceived"/> event.
+        /// </summary>
+        /// <param name="e">The <see cref="SteamKit2.NetMsgEventArgs"/> instance containing the event data.</param>
         protected void OnNetMsgReceived( NetMsgEventArgs e )
         {
             if ( NetMsgReceived != null )
                 NetMsgReceived( this, e );
         }
 
+        /// <summary>
+        /// Occurs when the physical connection is broken.
+        /// </summary>
         public event EventHandler Disconnected;
         protected void OnDisconnected( EventArgs e )
         {
@@ -97,11 +111,26 @@ namespace SteamKit2
                 Disconnected( this, e );
         }
 
+        /// <summary>
+        /// Connects to the specified end point.
+        /// </summary>
+        /// <param name="endPoint">The end point.</param>
         public abstract void Connect( IPEndPoint endPoint );
+        /// <summary>
+        /// Disconnects this instance.
+        /// </summary>
         public abstract void Disconnect();
 
+        /// <summary>
+        /// Sends the specified client net message.
+        /// </summary>
+        /// <param name="clientMsg">The client net message.</param>
         public abstract void Send( IClientMsg clientMsg );
 
+        /// <summary>
+        /// Gets the local IP.
+        /// </summary>
+        /// <returns>The local IP.</returns>
         public abstract IPAddress GetLocalIP();
     }
 
