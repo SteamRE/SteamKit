@@ -34,7 +34,7 @@ namespace SteamKit2
         /// <summary>
         /// Seconds to wait before considering the connection dead.
         /// </summary>
-        private const uint TIMEOUT_DELAY = 20;
+        private const uint TIMEOUT_DELAY = 60;
 
         /// <summary>
         /// Maximum number of packets to resend when RESEND_DELAY is exceeded.
