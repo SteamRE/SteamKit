@@ -6000,6 +6000,15 @@ namespace SteamKit2
       get { return _apps; }
     }
   
+
+    private bool _supports_batches = (bool)false;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"supports_batches", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoDefaultValue((bool)false)]
+    public bool supports_batches
+    {
+      get { return _supports_batches; }
+      set { _supports_batches = value; }
+    }
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"App")]
   public partial class App : global::ProtoBuf.IExtensible
   {
@@ -6052,6 +6061,22 @@ namespace SteamKit2
       get { return _apps; }
     }
   
+    private readonly global::System.Collections.Generic.List<uint> _apps_unknown = new global::System.Collections.Generic.List<uint>();
+    [global::ProtoBuf.ProtoMember(2, Name=@"apps_unknown", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public global::System.Collections.Generic.List<uint> apps_unknown
+    {
+      get { return _apps_unknown; }
+    }
+  
+
+    private uint _apps_pending = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"apps_pending", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    public uint apps_pending
+    {
+      get { return _apps_pending; }
+      set { _apps_pending = value; }
+    }
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"App")]
   public partial class App : global::ProtoBuf.IExtensible
   {
@@ -8215,6 +8240,159 @@ namespace SteamKit2
       get { return _eresult; }
       set { _eresult = value; }
     }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientUGSGetGlobalStats")]
+  public partial class CMsgClientUGSGetGlobalStats : global::ProtoBuf.IExtensible
+  {
+    public CMsgClientUGSGetGlobalStats() {}
+    
+
+    private ulong _gameid = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"gameid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    public ulong gameid
+    {
+      get { return _gameid; }
+      set { _gameid = value; }
+    }
+
+    private uint _history_days_requested = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"history_days_requested", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    public uint history_days_requested
+    {
+      get { return _history_days_requested; }
+      set { _history_days_requested = value; }
+    }
+
+    private uint _time_last_requested = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"time_last_requested", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    public uint time_last_requested
+    {
+      get { return _time_last_requested; }
+      set { _time_last_requested = value; }
+    }
+
+    private uint _first_day_cached = default(uint);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"first_day_cached", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    public uint first_day_cached
+    {
+      get { return _first_day_cached; }
+      set { _first_day_cached = value; }
+    }
+
+    private uint _days_cached = default(uint);
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"days_cached", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    public uint days_cached
+    {
+      get { return _days_cached; }
+      set { _days_cached = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientUGSGetGlobalStatsResponse")]
+  public partial class CMsgClientUGSGetGlobalStatsResponse : global::ProtoBuf.IExtensible
+  {
+    public CMsgClientUGSGetGlobalStatsResponse() {}
+    
+
+    private int _eresult = (int)2;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"eresult", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoDefaultValue((int)2)]
+    public int eresult
+    {
+      get { return _eresult; }
+      set { _eresult = value; }
+    }
+
+    private uint _timestamp = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"timestamp", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    public uint timestamp
+    {
+      get { return _timestamp; }
+      set { _timestamp = value; }
+    }
+
+    private int _day_current = default(int);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"day_current", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
+    public int day_current
+    {
+      get { return _day_current; }
+      set { _day_current = value; }
+    }
+    private readonly global::System.Collections.Generic.List<CMsgClientUGSGetGlobalStatsResponse.Day> _days = new global::System.Collections.Generic.List<CMsgClientUGSGetGlobalStatsResponse.Day>();
+    [global::ProtoBuf.ProtoMember(4, Name=@"days", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CMsgClientUGSGetGlobalStatsResponse.Day> days
+    {
+      get { return _days; }
+    }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Day")]
+  public partial class Day : global::ProtoBuf.IExtensible
+  {
+    public Day() {}
+    
+
+    private uint _day_id = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"day_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    public uint day_id
+    {
+      get { return _day_id; }
+      set { _day_id = value; }
+    }
+    private readonly global::System.Collections.Generic.List<CMsgClientUGSGetGlobalStatsResponse.Day.Stat> _stats = new global::System.Collections.Generic.List<CMsgClientUGSGetGlobalStatsResponse.Day.Stat>();
+    [global::ProtoBuf.ProtoMember(2, Name=@"stats", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CMsgClientUGSGetGlobalStatsResponse.Day.Stat> stats
+    {
+      get { return _stats; }
+    }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Stat")]
+  public partial class Stat : global::ProtoBuf.IExtensible
+  {
+    public Stat() {}
+    
+
+    private int _stat_id = default(int);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"stat_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
+    public int stat_id
+    {
+      get { return _stat_id; }
+      set { _stat_id = value; }
+    }
+
+    private long _data = default(long);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"data", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoDefaultValue(default(long))]
+    public long data
+    {
+      get { return _data; }
+      set { _data = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
