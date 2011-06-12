@@ -79,6 +79,7 @@ message CMsgClientLogon {
 	optional int32 otp_type = 85;
 	optional uint32 otp_value = 86;
 	optional string otp_identifier = 87;
+	optional bool steam2_ticket_request = 88;
 }
 
 message CMsgClientLogonResponse {
@@ -88,7 +89,10 @@ message CMsgClientLogonResponse {
 	optional uint32 public_ip = 4;
 	optional fixed32 rtime32_server_time = 5;
 	optional uint32 account_flags = 6;
+	optional uint32 cell_id = 7;
 	optional string email_domain = 8;
+	optional bytes steam2_ticket = 9;
+	optional int32 eresult_extended = 10;
 	optional fixed64 client_supplied_steamid = 20;
 }
 
@@ -219,6 +223,23 @@ message CMsgClientFriendsList {
 	repeated .CMsgClientFriendsList.Friend friends = 2;
 }
 
+message CMsgClientFriendsGroupsList {
+	message FriendGroup {
+		optional int32 nGroupID = 1;
+		optional string strGroupName = 2;
+	}
+
+	message FriendGroupsMembership {
+		optional fixed64 ulSteamID = 1;
+		optional int32 nGroupID = 2;
+	}
+
+	optional bool bremoval = 1;
+	optional bool bincremental = 2;
+	repeated .CMsgClientFriendsGroupsList.FriendGroup friendGroups = 3;
+	repeated .CMsgClientFriendsGroupsList.FriendGroupsMembership memberships = 4;
+}
+
 message CMsgClientLicenseList {
 	message License {
 		optional uint32 package_id = 1;
@@ -231,6 +252,7 @@ message CMsgClientLicenseList {
 		optional string purchase_country_code = 8;
 		optional uint32 license_type = 9;
 		optional int32 territory_code = 10;
+		optional int32 change_number = 11;
 	}
 
 	optional int32 eresult = 1 [default = 2];
@@ -311,6 +333,8 @@ message CMsgClientAccountInfo {
 	optional int32 count_authed_computers = 5;
 	optional bool locked_with_ipt = 6;
 	optional uint32 account_flags = 7;
+	optional uint64 facebook_id = 8;
+	optional string facebook_name = 9;
 }
 
 message CMsgClientAppMinutesPlayedData {
@@ -361,6 +385,8 @@ message CMsgClientPersonaState {
 		optional fixed64 gameid = 56;
 		optional bytes game_data_blob = 60;
 		optional string clan_tag = 65;
+		optional string facebook_name = 66;
+		optional uint64 facebook_id = 67;
 	}
 
 	optional uint32 status_flags = 1;
@@ -960,6 +986,24 @@ message CMsgClientAppInfoResponse {
 	optional uint32 apps_pending = 3;
 }
 
+message CMsgClientPackageInfoRequest {
+	repeated uint32 package_ids = 1;
+	optional bool meta_data_only = 2;
+}
+
+message CMsgClientPackageInfoResponse {
+	message Package {
+		optional uint32 package_id = 1;
+		optional uint32 change_number = 2;
+		optional bytes sha = 3;
+		optional bytes buffer = 4;
+	}
+
+	repeated .CMsgClientPackageInfoResponse.Package packages = 1;
+	repeated uint32 packages_unknown = 2;
+	optional uint32 packages_pending = 3;
+}
+
 message CMsgClientUFSGetUGCDetails {
 	optional fixed64 hcontent = 1 [default = 18446744073709551615];
 }
@@ -1014,6 +1058,30 @@ message CMsgClientAMGetClanOfficersResponse {
 	optional int32 eresult = 1 [default = 2];
 	optional fixed64 steamid_clan = 2;
 	optional int32 officer_count = 3;
+}
+
+message CMsgClientAMGetPersonaNameHistory {
+	message IdInstance {
+		optional fixed64 steamid = 1;
+	}
+
+	optional int32 id_count = 1;
+	repeated .CMsgClientAMGetPersonaNameHistory.IdInstance Ids = 2;
+}
+
+message CMsgClientAMGetPersonaNameHistoryResponse {
+	message NameTableInstance {
+		message NameInstance {
+			optional fixed32 name_since = 1;
+			optional string name = 2;
+		}
+
+		optional int32 eresult = 1 [default = 2];
+		optional fixed64 steamid = 2;
+		repeated .CMsgClientAMGetPersonaNameHistoryResponse.NameTableInstance.NameInstance names = 3;
+	}
+
+	repeated .CMsgClientAMGetPersonaNameHistoryResponse.NameTableInstance responses = 2;
 }
 
 message CMsgClientDeregisterWithServer {
@@ -1079,7 +1147,17 @@ message CMsgClientRemoveFriend {
 	optional fixed64 friendid = 1;
 }
 
+message CMsgClientHideFriend {
+	optional fixed64 friendid = 1;
+	optional bool hide = 2;
+}
+
 message CMsgClientUCMAddScreenshot {
+	message Tag {
+		optional string tag_name = 1;
+		optional string tag_value = 2;
+	}
+
 	optional uint32 appid = 1;
 	optional string filename = 2;
 	optional string thumbname = 3;
@@ -1089,6 +1167,8 @@ message CMsgClientUCMAddScreenshot {
 	optional uint32 permissions = 7;
 	optional string caption = 8;
 	optional string shortcut_name = 9;
+	repeated .CMsgClientUCMAddScreenshot.Tag tag = 10;
+	repeated fixed64 tagged_steamid = 11;
 }
 
 message CMsgClientUCMAddScreenshotResponse {
@@ -1150,34 +1230,6 @@ message CMsgClientCheckFileSignatureResponse {
 	optional uint32 evalvesignaturecheckdetail = 10;
 }
 
-message CMsgClientUCMGetScreenshotList {
-	optional uint32 permissions = 1;
-	optional uint32 appid = 2;
-	optional uint32 start = 3;
-	optional uint32 max_results = 4;
-	optional string shortcut_name = 5;
-}
-
-message CMsgClientUCMGetScreenshotListResponse {
-	message ScreenshotInfo {
-		optional fixed64 file_id = 1;
-		optional uint32 width = 2;
-		optional uint32 height = 3;
-		optional uint32 appid = 4;
-		optional uint32 time_created = 5;
-		optional uint32 comment_count = 6;
-		optional string caption = 7;
-		optional uint32 permission = 8;
-		optional string url = 9;
-		optional string thumb_url = 10;
-		optional string shortcut_name = 11;
-	}
-
-	optional int32 eresult = 1 [default = 2];
-	optional uint32 results_available = 2;
-	repeated .CMsgClientUCMGetScreenshotListResponse.ScreenshotInfo screenshots = 3;
-}
-
 message CMsgClientReadMachineAuth {
 	optional string filename = 1;
 	optional uint32 offset = 2;
@@ -1236,6 +1288,52 @@ message CMsgClientRequestMachineAuthResponse {
 	optional uint32 eresult = 1;
 }
 
+message CMsgClientCreateFriendGroup {
+	optional fixed64 steamid = 1;
+	optional string groupname = 2;
+}
+
+message CMsgClientCreateFriendGroupResponse {
+	optional uint32 eresult = 1;
+	optional int32 groupid = 2;
+}
+
+message CMsgClientDeleteFriendGroup {
+	optional fixed64 steamid = 1;
+	optional int32 groupid = 2;
+}
+
+message CMsgClientDeleteFriendGroupResponse {
+	optional uint32 eresult = 1;
+}
+
+message CMsgClientRenameFriendGroup {
+	optional int32 groupid = 1;
+	optional string groupname = 2;
+}
+
+message CMsgClientRenameFriendGroupResponse {
+	optional uint32 eresult = 1;
+}
+
+message CMsgClientAddFriendToGroup {
+	optional int32 groupid = 1;
+	optional fixed64 steamiduser = 2;
+}
+
+message CMsgClientAddFriendToGroupResponse {
+	optional uint32 eresult = 1;
+}
+
+message CMsgClientRemoveFriendFromGroup {
+	optional int32 groupid = 1;
+	optional fixed64 steamiduser = 2;
+}
+
+message CMsgClientRemoveFriendFromGroupResponse {
+	optional uint32 eresult = 1;
+}
+
 message CMsgClientRegisterKey {
 	optional string key = 1;
 }
@@ -1280,6 +1378,80 @@ message CMsgTrading_StartSession {
 	optional uint64 other_steamid = 1;
 }
 
+message CMsgClientMDSInitDepotBuildRequest {
+	optional uint32 depot_id = 1;
+	optional bytes encrypted_aes_key = 2;
+}
+
+message CMsgClientMDSInitDepotBuildResponse {
+	optional int32 eresult = 1 [default = 2];
+	optional uint32 default_chunk_size = 2;
+	optional fixed64 base_manifest = 3;
+	optional bytes encrypted_depot_key = 4;
+}
+
+message CMsgClientMDSLoginRequest {
+	optional bytes encrypted_session_key = 1;
+}
+
+message CMsgClientMDSLoginResponse {
+	optional int32 eresult = 1 [default = 2];
+}
+
+message CMsgClientMDSUploadDepotChunks {
+	message ChunkUploadData {
+		optional bytes sha = 1;
+		optional uint32 rolling_crc = 2;
+		optional uint32 original_chunk_size = 3;
+		optional bytes data = 4;
+	}
+
+	optional uint32 depot_id = 1;
+	repeated .CMsgClientMDSUploadDepotChunks.ChunkUploadData chunks = 2;
+}
+
+message CMsgClientMDSUploadDepotChunksResponse {
+	optional int32 eresult = 1 [default = 2];
+}
+
+message CMsgClientMDSTransmitManifestDataChunk {
+	optional int32 offset = 1;
+	optional bytes data = 2;
+}
+
+message CMsgClientMDSUploadManifestRequest {
+	optional uint32 depot_id = 1;
+	optional uint32 manifest_size_compressed = 2;
+	optional uint32 manifest_size_uncompressed = 3;
+	optional bool make_public = 4;
+	optional string beta_key = 5;
+}
+
+message CMsgClientMDSUploadManifestResponse {
+	optional int32 eresult = 1 [default = 2];
+	optional fixed64 new_manifest = 2;
+	optional uint32 unique_chunks = 3;
+	optional uint32 missing_chunks = 4;
+	optional uint32 bitstring_size_uncompressed = 5;
+	optional bytes bitstring = 6;
+}
+
+message CMsgClientMDSGetDepotManifest {
+	optional uint32 depot_id = 1;
+	optional fixed64 manifest_id = 2;
+}
+
+message CMsgClientMDSGetDepotManifestResponse {
+	optional int32 eresult = 1 [default = 2];
+	optional uint32 manifest_size_uncompressed = 2;
+	optional uint32 manifest_size_compressed = 3;
+}
+
+message CMsgClientMDSGetDepotManifestChunk {
+	optional uint32 offset = 1;
+	optional bytes data = 3;
+}
+
 message CMsgClientEmailChange {
 	optional string password = 1;
 	optional string email = 2;
@@ -1289,6 +1461,44 @@ message CMsgClientEmailChange {
 
 message CMsgClientEmailChangeResponse {
 	optional int32 eresult = 1 [default = 2];
+}
+
+message CMsgClientGetCDNAuthToken {
+	optional uint32 app_id = 1;
+	optional string host_name = 2;
+}
+
+message CMsgClientGetCDNAuthTokenResponse {
+	optional uint32 eresult = 1 [default = 2];
+	optional string token = 2;
+	optional uint32 expiration_time = 3;
+}
+
+message CMsgDownloadRateStatistics {
+	message StatsInfo {
+		optional uint32 source_type = 1;
+		optional uint32 source_id = 2;
+		optional uint32 seconds = 3;
+		optional uint64 bytes = 4;
+	}
+
+	optional uint32 cell_id = 1;
+	repeated .CMsgDownloadRateStatistics.StatsInfo stats = 2;
+}
+
+message CMsgClientRequestAccountData {
+	optional string account_or_email = 1;
+	optional uint32 action = 2;
+}
+
+message CMsgClientRequestAccountDataResponse {
+	optional uint32 action = 1;
+	optional uint32 eresult = 2;
+	optional string account_name = 3;
+	optional uint32 ct_matches = 4;
+	optional string account_name_suggestion1 = 5;
+	optional string account_name_suggestion2 = 6;
+	optional string account_name_suggestion3 = 7;
 }
 
 message CMsgClientUGSGetGlobalStats {
@@ -1314,5 +1524,23 @@ message CMsgClientUGSGetGlobalStatsResponse {
 	optional fixed32 timestamp = 2;
 	optional int32 day_current = 3;
 	repeated .CMsgClientUGSGetGlobalStatsResponse.Day days = 4;
+}
+
+message CMsgClientGMSServerQuery {
+	optional uint32 app_id = 1;
+	optional uint32 geo_location_ip = 2;
+	optional uint32 region_code = 3;
+	optional string filter_text = 4;
+	optional uint32 max_servers = 5;
+}
+
+message CMsgGMSClientServerQueryResponse {
+	message Server {
+		optional uint32 server_ip = 1;
+		optional uint32 server_port = 2;
+		optional uint32 auth_players = 3;
+	}
+
+	repeated .CMsgGMSClientServerQueryResponse.Server servers = 1;
 }
 
