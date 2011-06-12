@@ -6,6 +6,11 @@ message CMsgTFGoldenWrenchBroadcast {
 	optional string user_name = 3;
 }
 
+message CMsgTFSaxxyBroadcast {
+	optional int32 category_number = 1;
+	optional string user_name = 2;
+}
+
 message CSOTFDuelSummary {
 	optional uint32 account_id = 1;
 	optional uint32 duel_wins = 2;
@@ -61,8 +66,31 @@ message CSOTFPlayerInfo {
 	optional bool trial_account = 2 [default = false];
 }
 
+message CMsgSaxxyAwarded {
+	optional uint32 category = 1;
+	repeated string winner_names = 2;
+}
+
 message CMsgReplayUploadedToYouTube {
 	optional string youtube_url = 1;
+	optional string youtube_account_name = 2;
+	optional uint64 session_id = 3;
+}
+
+message CMsgReplaySubmitContestEntry {
+	optional string youtube_url = 1;
+	optional uint32 category = 2;
+}
+
+message CMsgReplaySubmitContestEntryResponse {
+	optional bool success = 1;
+}
+
+message CReplayCachedContestData {
+	optional fixed32 timestamp = 1;
+	optional uint32 num_votes_last_day = 2;
+	repeated uint32 video_entry_ids = 3;
+	optional uint32 num_flags_last_day = 4;
 }
 
 message CMsgTFCoaching_AddToCoaches {
@@ -178,5 +206,15 @@ message CMsgGC_GameServer_ListResponse {
 	}
 
 	repeated .CMsgGC_GameServer_ListResponse.GameServerIdentity owned_game_servers = 1;
+}
+
+message CMsgGC_GameServer_ResetIdentity {
+	optional uint32 game_server_account_id = 1;
+}
+
+message CMsgGC_GameServer_ResetIdentityResponse {
+	optional bool game_server_identity_token_reset = 1;
+	optional uint32 game_server_account_id = 2;
+	optional string game_server_identity_token = 3;
 }
 
