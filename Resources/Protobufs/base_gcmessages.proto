@@ -47,6 +47,7 @@ message CSOEconGameAccountClient {
 	optional bool eligible_for_online_play = 3 [default = true];
 	optional bool need_to_choose_most_helpful_friend = 4;
 	optional bool in_coaches_list = 5;
+	optional fixed32 trade_ban_expiration = 6;
 }
 
 message CSOItemCriteriaCondition {
@@ -162,6 +163,8 @@ message CMsgStartupCheckResponse {
 
 message CMsgUpdateItemSchema {
 	optional bytes items_game = 1;
+	optional fixed32 item_schema_version = 2;
+	optional string items_game_url = 3;
 }
 
 message CMsgRequestInventoryRefresh {
