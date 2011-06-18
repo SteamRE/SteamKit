@@ -1,44 +1,5 @@
-import "steammessages.proto";
-
-message CSOPartyInvite {
-	optional uint32 party_id = 1;
-	optional fixed64 sender_id = 2;
-}
-
 message CMsgSystemBroadcast {
 	optional string message = 1;
-}
-
-message CMsgInviteToParty {
-	optional fixed64 steam_id = 1;
-}
-
-message CMsgInvitationCreated {
-	optional uint32 group_id = 1;
-	optional fixed64 steam_id = 2;
-}
-
-message CMsgPartyInviteResponse {
-	optional uint32 party_id = 1;
-	optional bool accept = 2;
-}
-
-message CMsgKickFromParty {
-	optional fixed64 steam_id = 1;
-}
-
-message CMsgLeaveParty {
-}
-
-message CMsgServerAddresses {
-	optional fixed32 server_public_ip_addr = 1;
-	optional fixed32 server_private_ip_addr = 2;
-	optional uint32 server_port = 3;
-	optional uint32 server_tv_port = 4;
-	optional string server_key = 5;
-}
-
-message CMsgServerAvailable {
 }
 
 message CSOEconGameAccountClient {
