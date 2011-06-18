@@ -1,0 +1,30 @@
+message CMsgSOSingleObject {
+	optional fixed64 owner = 1;
+	optional int32 type_id = 2;
+	optional bytes object_data = 3;
+}
+
+message CMsgSOMultipleObjects {
+	message SingleObject {
+		optional int32 type_id = 1;
+		optional bytes object_data = 2;
+	}
+
+	optional fixed64 owner = 1;
+	repeated .CMsgSOMultipleObjects.SingleObject objects = 2;
+}
+
+message CMsgSOCacheSubscribed {
+	message SubscribedType {
+		optional int32 type_id = 1;
+		repeated bytes object_data = 2;
+	}
+
+	optional fixed64 owner = 1;
+	repeated .CMsgSOCacheSubscribed.SubscribedType objects = 2;
+}
+
+message CMsgSOCacheUnsubscribed {
+	optional fixed64 owner = 1;
+}
+
