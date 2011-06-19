@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using System.IO.Compression;
 
 namespace SteamKit2
 {
@@ -176,17 +177,12 @@ namespace SteamKit2
                 High = 2,
             }
 
-            public sealed class File
+            public enum FileMode
             {
-                public enum FileMode
-                {
-                    Compressed = 1,
-                    EncryptedAndCompressed = 2,
-                    Encrypted = 3,
-                }
-
-                public byte[] Data { get; set; }
-                public FileMode Mode { get; set; }
+                None = 0,
+                Compressed = 1,
+                EncryptedAndCompressed = 2,
+                Encrypted = 3,
             }
 
 
@@ -355,7 +351,7 @@ namespace SteamKit2
                 return fileIdList;
             }
 
-            public File DownloadFileParts( Manifest.Node file, uint filePart, uint numParts, DownloadPriority priority )
+            public byte[] DownloadFileParts( Manifest.Node file, uint filePart, uint numParts, DownloadPriority priority )
             {
                 this.SendCommand(
                     7, // download file
@@ -373,8 +369,10 @@ namespace SteamKit2
                 byte hasFile = this.Socket.Reader.ReadByte();
 
                 uint numChunks = NetHelpers.EndianSwap( this.Socket.Reader.ReadUInt32() );
-                uint fileMode = NetHelpers.EndianSwap( this.Socket.Reader.ReadUInt32() );
+                uint fileModeValue = NetHelpers.EndianSwap( this.Socket.Reader.ReadUInt32() );
 
+                FileMode fileMode = ( FileMode )fileModeValue;
+ 
                 MemoryStream ms = new MemoryStream();
                 for ( int x = 0 ; x < numChunks ; ++x )
                 {
@@ -391,27 +389,47 @@ namespace SteamKit2
                         continue;
 
                     byte[] chunk = this.Socket.Reader.ReadBytes( ( int )chunkLen );
-                    ms.Write( chunk, 0, chunk.Length );
+                    int len = 0;
+
+                    if ( fileMode == FileMode.Compressed )
+                    {
+                        using ( MemoryStream chunkStream = new MemoryStream( chunk ) )
+                        using ( DeflateStream ds = new DeflateStream( chunkStream, CompressionMode.Decompress ) )
+                        {
+                            // skip zlib header
+                            chunkStream.Seek( 2, SeekOrigin.Begin );
+
+                            byte[] decomp = new byte[ file.Parent.BlockSize ];
+                            len = ds.Read( decomp, 0, decomp.Length );
+
+                            chunk = decomp;
+
+                        }
+                    }
+                    else if ( fileMode == FileMode.None )
+                    {
+                        len = chunk.Length;
+                    }
+                    else
+                    {
+                        throw new NotImplementedException( "ContentServerClient does not support encrypted or encrypted and compressed files!" );
+                    }
+
+                    ms.Write( chunk, 0, len );
                 }
 
                 byte[] data = ms.ToArray();
 
                 this.MessageID++;
 
-                File outputFile = new File()
-                {
-                    Mode = ( File.FileMode )fileMode,
-                    Data = data,
-                };
-
-                return outputFile;
+                return data;
             }
-            public File DownloadFileParts( Manifest.Node file, uint filePart, uint numParts )
+            public byte[] DownloadFileParts( Manifest.Node file, uint filePart, uint numParts )
             {
                 return DownloadFileParts( file, filePart, numParts, DownloadPriority.Low );
             }
 
-            public File DownloadFile( Manifest.Node file, DownloadPriority priority )
+            public byte[] DownloadFile( Manifest.Node file, DownloadPriority priority )
             {
                 const uint MaxParts = 16;
 
@@ -419,23 +437,17 @@ namespace SteamKit2
                 uint numChunks = ( uint )Math.Ceiling( ( float )numFileparts / ( float )MaxParts );
 
                 MemoryStream ms = new MemoryStream();
-                File.FileMode mode = File.FileMode.Compressed;
 
                 for ( uint x = 0 ; x < numChunks ; ++x )
                 {
-                    File filePart = DownloadFileParts( file, x * MaxParts, MaxParts, priority );
-                    mode = filePart.Mode;
+                    byte[] filePart = DownloadFileParts( file, x * MaxParts, MaxParts, priority );
 
-                    ms.Write( filePart.Data, 0, filePart.Data.Length );
+                    ms.Write( filePart, 0, filePart.Length );
                 }
 
-                return new File()
-                {
-                    Data = ms.ToArray(),
-                    Mode = mode,
-                };
+                return ms.ToArray();
             }
-            public File DownloadFile( Manifest.Node file )
+            public byte[] DownloadFile( Manifest.Node file )
             {
                 return DownloadFile( file, DownloadPriority.Low );
             }
