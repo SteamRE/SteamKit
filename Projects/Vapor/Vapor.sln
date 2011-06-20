@@ -1,10 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vapor", "Vapor\Vapor.csproj", "{D5D926AB-4C3F-43A7-A513-A4BF4157E6CC}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SteamKit2", "..\..\SteamKit2\SteamKit2\SteamKit2.csproj", "{BEB5BF07-BB56-402A-97A3-A41C6444C6A5}"
-EndProject
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Steam Language", "Steam Language", "{EAC64F7E-3982-4279-A657-317CF35B0255}"
 	ProjectSection(SolutionItems) = preProject
 		..\..\Resources\SteamLanguage\emsg.steamd = ..\..\Resources\SteamLanguage\emsg.steamd
@@ -14,6 +10,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Steam Language", "Steam Lan
 		..\..\Resources\SteamLanguage\netheader.steamd = ..\..\Resources\SteamLanguage\netheader.steamd
 		..\..\Resources\SteamLanguage\steammsg.steamd = ..\..\Resources\SteamLanguage\steammsg.steamd
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vapor", "Vapor\Vapor.csproj", "{D5D926AB-4C3F-43A7-A513-A4BF4157E6CC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SteamKit2", "..\..\SteamKit2\SteamKit2\SteamKit2.csproj", "{BEB5BF07-BB56-402A-97A3-A41C6444C6A5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
