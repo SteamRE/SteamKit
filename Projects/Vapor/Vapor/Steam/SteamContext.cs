@@ -142,9 +142,9 @@ namespace Vapor
         }
 
 
-        public static void Initialize( bool useUdp )
+        public static void Initialize( bool useTcp )
         {
-            SteamClient = new SteamClient( useUdp ? CMClient.ConnectionType.Udp : CMClient.ConnectionType.Tcp );
+            SteamClient = new SteamClient( useTcp ? CMClient.ConnectionType.Tcp : CMClient.ConnectionType.Udp );
 
             SteamFriends = SteamClient.GetHandler<SteamFriends>( SteamFriends.NAME );
             SteamUser = SteamClient.GetHandler<SteamUser>( SteamUser.NAME );
@@ -201,7 +201,7 @@ namespace Vapor
 
                         AuthCode = Steam3.AuthCode,
 
-                        AccountInstance = ( uint )( Steam3.AlternateLogon ? 2 : 1 ),
+                        AccountInstance = ( Steam3.AlternateLogon ? 2u : 1u ),
                     } );
             }
 
