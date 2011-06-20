@@ -27,7 +27,7 @@ namespace Vapor
         {
 
 
-            LoginDialog ld = new LoginDialog( FindArg( args, "-udp" ) );
+            LoginDialog ld = new LoginDialog( FindArg( args, "-tcp" ) );
 
             if ( ld.ShowDialog() != DialogResult.OK )
                 return;
