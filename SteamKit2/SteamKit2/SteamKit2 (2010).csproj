@@ -72,19 +72,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Base\MsgBase.cs" />
-    <Compile Include="Blob\BlobReader.cs" />
-    <Compile Include="Blob\BlobType.cs" />
-    <Compile Include="Blob\BlobUtil.cs" />
-    <Compile Include="Blob\Caching\CacheUtil.cs" />
-    <Compile Include="Blob\Caching\DynamicMethodHandler.cs" />
-    <Compile Include="Blob\Caching\FastPropertyInfo.cs" />
+    <Compile Include="Blob\Blob.cs" />
+    <Compile Include="Blob\BlobField.cs" />
+    <Compile Include="Blob\BlobParser.cs" />
+    <Compile Include="Blob\BlobTypes.cs" />
+    <Compile Include="Blob\CachedBinaryReader.cs" />
     <Compile Include="Blob\Fields\AuthFields.cs" />
     <Compile Include="Blob\Fields\CDRFields.cs" />
-    <Compile Include="Blob\FramingStream.cs" />
-    <Compile Include="Blob\Parsers\BlobTypedReader.cs" />
-    <Compile Include="Blob\Parsers\BlobXmlReader.cs" />
-    <Compile Include="Blob\PeekableStream.cs" />
-    <Compile Include="Blob\StreamHelpers.cs" />
     <Compile Include="Networking\Steam3\UdpPacket.cs" />
     <Compile Include="Steam2\ContentServerClient.cs" />
     <Compile Include="Steam2\ContentServerDSClient.cs" />
@@ -97,7 +91,6 @@
     <Compile Include="Steam3\SteamClient\CallbackMsg.cs" />
     <Compile Include="Steam3\SteamClient\Callbacks.cs" />
     <Compile Include="Steam3\SteamClient\ClientMsgHandler.cs" />
-    <Compile Include="Types\AuthBlob.cs" />
     <Compile Include="Types\GameID.cs" />
     <Compile Include="Types\Manifest.cs" />
     <Compile Include="Util\DebugLog.cs" />
