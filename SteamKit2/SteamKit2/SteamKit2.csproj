@@ -110,6 +110,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="gpl.txt" />
+    <Content Include="lgpl.txt" />
     <Content Include="license.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
