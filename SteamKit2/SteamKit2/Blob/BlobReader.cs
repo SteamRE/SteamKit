@@ -164,7 +164,8 @@ namespace SteamKit2
                 input = HandleProcessCode(process, ref serialized, out extendedData);
                 bool result = TryReadBlob();
 
-                // todo: deal with extra HMAC data, since it's now expected
+                input.ReadBytes( 40 ); // read and dispose HMACs
+                // todo: validate them?
 
                 input.Close();
                 input = originalStream;

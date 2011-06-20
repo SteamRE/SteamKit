@@ -7,13 +7,13 @@ namespace SteamKit2
 {
     public class AuthBlob
     {
-        [BlobField(FieldKey = AuthFields.eFieldAccount)]
+        [BlobField(FieldKey = AuthFields.eFieldAccount, Depth = 1)]
         public string AccountName { get; set; }
 
-        [BlobField(FieldKey = AuthFields.eFieldEmail)]
+        [BlobField(FieldKey = AuthFields.eFieldEmail, Depth = 1)]
         public string Email { get; set; }
 
-        [BlobField(FieldKey = AuthFields.eFieldTimestampCreation)]
+        [BlobField(FieldKey = AuthFields.eFieldTimestampCreation, Depth = 1)]
         public MicroTime CreationTime { get; set; }
     }
 }
