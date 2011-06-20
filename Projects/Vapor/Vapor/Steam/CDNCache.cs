@@ -14,6 +14,7 @@ namespace Vapor
     {
         public bool Success;
         public string Filename;
+        public Exception Exception;
     }
 
     class AvatarData
@@ -77,11 +78,12 @@ namespace Vapor
                 try
                 {
                     Directory.CreateDirectory( localPath ); // try making the cache directory
+                    DebugLog.WriteLine( "CDNCache", "Creating cache directory for avatars." );
                 }
                 catch ( Exception ex )
                 {
-                    DebugLog.WriteLine( "CDNCache", "Unableto create cache directory.\n{0}", ex.ToString() );
-                    callBack( new AvatarDownloadDetails() { Success = false, } );
+                    DebugLog.WriteLine( "CDNCache", "Unable to create cache directory.\n{0}", ex.ToString() );
+                    callBack( new AvatarDownloadDetails() { Success = false, Exception = ex } );
                     return;
                 }
             }
@@ -145,9 +147,10 @@ namespace Vapor
                     {
                         client.DownloadFile( downloadUri, localFile );
                     }
-                    catch
+                    catch ( Exception ex )
                     {
-                        callBack( new AvatarDownloadDetails() { Success = false } );
+                        DebugLog.WriteLine( "CDNCache", "Unable to download avatar.\n{0}", ex.ToString() );
+                        callBack( new AvatarDownloadDetails() { Success = false, Exception = ex } );
                         continue;
                     }
                 }
