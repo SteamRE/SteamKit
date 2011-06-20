@@ -1,0 +1,14 @@
+syntax: glob
+
+*.suo
+*.user
+*.ncb
+
+bin/
+obj/
+[Dd]ebug/
+
+# begone, foul third party libs
+boost/
+google/
+zlib/
