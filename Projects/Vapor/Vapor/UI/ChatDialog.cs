@@ -59,18 +59,17 @@ namespace Vapor
                     this.AppendText( Color.White, ": " + msg );
 
                     if ( sender != Steam3.SteamClient.SteamID )
-                        Util.FlashWindow( this, true );
+                        FlashWindw();
 
                     break;
 
                 case EChatEntryType.Emote:
 
-                    this.AppendText( Color.White, "* " );
                     this.AppendText( Util.GetStatusColor( new Friend( sender ) ), string.Format( "{0} - {1}", time, friendName ) );
-                    this.AppendText( Color.White, " " + msg );
+                    this.AppendText( Util.GetStatusColor( new Friend( sender ) ), " " + msg );
 
                     if ( sender != Steam3.SteamClient.SteamID )
-                        Util.FlashWindow( this, true );
+                        FlashWindw();
 
                     break;
 
@@ -81,6 +80,17 @@ namespace Vapor
 
             this.AppendText( Environment.NewLine );
             this.ScrollLog();
+        }
+
+        private void FlashWindw()
+        {
+            if ( this.Focused || txtChat.Focused )
+            {
+                // don't flash if we already have focus, because that would be silly!
+                return;
+            }
+
+            Util.FlashWindow( this, true );
         }
         public void HandleChat( SteamFriends.FriendMsgCallback friendMsg )
         {
