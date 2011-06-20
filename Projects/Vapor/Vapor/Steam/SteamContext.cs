@@ -25,7 +25,7 @@ namespace Vapor
 
     static class Steam2
     {
-        public static void Initialize( string userName, string password, out ClientTGT clientTgt, out byte[] serverTgt, out Blob accRecord )
+        public static void Initialize( string userName, string password, out ClientTGT clientTgt, out byte[] serverTgt, out AuthBlob accRecord )
         {
             IPEndPoint[] authServerList = GetAuthServerList( userName );
 
@@ -71,7 +71,7 @@ namespace Vapor
             return null;
         }
 
-        static bool ConnectToAuthServer( IPEndPoint[] authServerList, string userName, string password, out ClientTGT clientTgt, out byte[] serverTgt, out Blob accRecord )
+        static bool ConnectToAuthServer( IPEndPoint[] authServerList, string userName, string password, out ClientTGT clientTgt, out byte[] serverTgt, out AuthBlob accRecord )
         {
             clientTgt = null;
             serverTgt = null;
@@ -129,7 +129,7 @@ namespace Vapor
 
         public static ClientTGT ClientTGT { get; set; }
         public static byte[] ServerTGT { get; set; }
-        public static Blob AccountRecord { get; set; }
+        public static AuthBlob AccountRecord { get; set; }
 
         public static string AuthCode { get; set; }
 

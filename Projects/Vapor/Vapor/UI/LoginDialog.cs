@@ -28,7 +28,7 @@ namespace Vapor
 
             ClientTGT clientTgt;
             byte[] serverTgt;
-            Blob accRecord;
+            AuthBlob accRecord;
 
             try
             {

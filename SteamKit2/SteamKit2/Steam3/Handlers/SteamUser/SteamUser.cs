@@ -64,7 +64,7 @@ namespace SteamKit2
             /// Gets or sets the account record.
             /// </summary>
             /// <value>The account record.</value>
-            public Blob AccRecord { get; set; }
+            public AuthBlob AccRecord { get; set; }
 
 
             /// <summary>
@@ -104,7 +104,7 @@ namespace SteamKit2
 
             uint localIp = NetHelpers.GetIPAddress( this.Client.GetLocalIP() );
 
-            MicroTime creationTime = MicroTime.Deserialize( details.AccRecord.GetDescriptor( AuthFields.eFieldTimestampCreation ) );
+            MicroTime creationTime = details.AccRecord.CreationTime;
 
             logon.ProtoHeader.client_session_id = 0;
             logon.ProtoHeader.client_steam_id = steamId.ConvertToUint64();
@@ -131,7 +131,7 @@ namespace SteamKit2
             // but it's good enough for identifying a machine
             logon.Msg.Proto.machine_id = Utils.GenerateMachineID();
 
-            logon.Msg.Proto.email_address = details.AccRecord.GetStringDescriptor( AuthFields.eFieldEmail );
+            logon.Msg.Proto.email_address = details.AccRecord.Email;
 
             byte[] serverTgt = new byte[ details.ServerTGT.Length + 4 ];
 
