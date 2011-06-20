@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Diagnostics;
+using System.IO;
 
 namespace SteamKit2
 {
@@ -80,7 +81,7 @@ namespace SteamKit2
         /// <param name="serverTgt">The server TGT.</param>
         /// <param name="accRecord">The client account record.</param>
         /// <returns>A LoginResult value describing what result.</returns>
-        public LoginResult Login( string user, string pass, out ClientTGT clientTgt, out byte[] serverTgt, out Blob accRecord )
+        public LoginResult Login( string user, string pass, out ClientTGT clientTgt, out byte[] serverTgt, out AuthBlob accRecord )
         {
             clientTgt = null;
             serverTgt = null;
@@ -224,7 +225,7 @@ namespace SteamKit2
 
             return true;
         }
-        sbyte GetAccountInfo( out ClientTGT clientTgt, out byte[] serverTgt, out Blob accRecord )
+        sbyte GetAccountInfo( out ClientTGT clientTgt, out byte[] serverTgt, out AuthBlob accRecord )
         {
             clientTgt = null;
             serverTgt = null;
@@ -267,9 +268,13 @@ namespace SteamKit2
                 uint accRecordSize = ds.ReadUInt32();
                 byte[] accData = ds.ReadBytes( ds.SizeRemaining() - 40 );
 
-                BlobParser.SetKey( clientTgt.AccountRecordKey );
-                accRecord = BlobParser.ParseBlob( accData );
+                using (BlobTypedReader<AuthBlob> blobParser = BlobTypedReader<AuthBlob>.Create(new MemoryStream(accData)))
+                {
+                    blobParser.SetKey(clientTgt.AccountRecordKey);
+                    blobParser.Process();
 
+                    accRecord = blobParser.Target;
+                }
             }
             catch ( Exception ex )
             {
