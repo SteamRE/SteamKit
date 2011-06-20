@@ -30,10 +30,11 @@ bool HasEMsg( std::vector<EMsg_s> eMsgList, EMsg eMsg )
 #endif
 
 CCrypto::CCrypto()
+	: Encrypt_Detour( NULL ), Decrypt_Detour( NULL )
 {
 	CSimpleScan steamClientScan( "steamclient.dll" );
 
-	bool bRet = steamClientScan.FindFunction( 
+	bool bEncrypt = steamClientScan.FindFunction( 
 		"\x55\x8B\xEC\x6A\xFF\x68\x01\x47\x32\x38\x64\xA1\x00\x00\x00\x00\x50\x64\x89\x25\x00\x00\x00\x00\x81\xEC\x04\x09\x00\x00",
 		"xxxxxx????xxxxxxxxxxxxxxxxxxxx",
 		(void **)&Encrypt_Orig
@@ -42,7 +43,7 @@ CCrypto::CCrypto()
 	g_pLogger->LogConsole( "CCrypto::SymmetricEncrypt = 0x%x \n", Encrypt_Orig );
 
 
-	bRet = steamClientScan.FindFunction(
+	bool bDecrypt = steamClientScan.FindFunction(
 		"\x55\x8B\xEC\x6A\xFF\x68\x21\x74\x28\x38\x64\xA1\x00\x00\x00\x00\x50\x64\x89\x25\x00\x00\x00\x00\x81\xEC\xE8\x04\x00\x00",
 		"xxxxxx????xxxxxxxxxxxxxxxxxxx",
 		(void **)&Decrypt_Orig
@@ -50,7 +51,7 @@ CCrypto::CCrypto()
 
 	g_pLogger->LogConsole( "CCrypto::SymmetricDecrypt = 0x%x\n", Decrypt_Orig );
 
-	bRet = steamClientScan.FindFunction(
+	bool bGetMessage = steamClientScan.FindFunction(
 		"\x51\xA1\x00\x95\x32\x38\x8B\x08\x85\xC9\x75\x05\x89\x0C\x24\xEB\x28\xE8",
 		"xx????xxxxxxxxxxxx",
 		(void **)&GetMessageFn
@@ -61,57 +62,95 @@ CCrypto::CCrypto()
 
 	#define MAX_EMSGS 7699 // rough guess, don't really have a way of getting an exact number
 
-	std::vector<EMsg_s> eMsgList;
-	std::vector<EMsg_s>::iterator eMsgIter;
-
-	for ( int x = 0; x < MAX_EMSGS; ++x )
+	if ( bGetMessage )
 	{
-		EMsg eMsg = (EMsg)x;
-		const char *szMsg = this->GetMessage( eMsg, 0xFF );
 
-		if ( szMsg == NULL )
-			continue;
+		std::vector<EMsg_s> eMsgList;
+		std::vector<EMsg_s>::iterator eMsgIter;
+
+		for ( int x = 0; x < MAX_EMSGS; ++x )
+		{
+			EMsg eMsg = (EMsg)x;
+			const char *szMsg = this->GetMessage( eMsg, 0xFF );
+
+			if ( szMsg == NULL )
+				continue;
 
 #if 0
-		if ( !HasEMsg( eMsgList, eMsg ) )
+			if ( !HasEMsg( eMsgList, eMsg ) )
 #endif
-		{
-			EMsg_s eMsgInfo = { eMsg, 0xFF };
-			eMsgList.push_back( eMsgInfo );
-		}
+			{
+				EMsg_s eMsgInfo = { eMsg, 0xFF };
+				eMsgList.push_back( eMsgInfo );
+			}
 
-	}
+		}
 
 		g_pLogger->DeleteFile( "emsg_list.txt", false );
 
-	for ( int x = 0; x < eMsgList.size(); ++x )
+		for ( int x = 0; x < eMsgList.size(); ++x )
+		{
+			EMsg_s info = eMsgList[ x ];
+
+			const char *szMsg = this->GetMessage( info.eMsg, info.serverType );
+
+			g_pLogger->LogFile( "emsg_list.txt", false, "\t%s = %d,\r\n", szMsg, info.eMsg );
+		}
+
+		g_pLogger->LogConsole( "Dumped EMsg list!\n" );
+
+	}
+	else
 	{
-		EMsg_s info = eMsgList[ x ];
-
-		const char *szMsg = this->GetMessage( info.eMsg, info.serverType );
-
-		g_pLogger->LogFile( "emsg_list.txt", false, "\t%s = %d,\r\n", szMsg, info.eMsg );
+		g_pLogger->LogConsole( "Unable to dump EMsg list: Func scan failed.\n" );
 	}
 
 	
 
+	/*
 	static bool (__cdecl *encrypt)(const uint8*, uint32, uint8*, uint32*, uint32) = &CCrypto::SymmetricEncrypt;
 	static bool (__cdecl *decrypt)(const uint8*, uint32, uint8*, uint32*, const uint8*, uint32) = &CCrypto::SymmetricDecrypt;
+	*/
 
-	Encrypt_Detour = new CSimpleDetour((void **) &Encrypt_Orig, *(void**) &encrypt);
-	Decrypt_Detour = new CSimpleDetour((void **) &Decrypt_Orig, *(void**) &decrypt);
 
-	Encrypt_Detour->Attach();
-	Decrypt_Detour->Attach();
+	if ( bEncrypt )
+	{
+		Encrypt_Detour = new CSimpleDetour((void **) &Encrypt_Orig, *(void**) &CCrypto::SymmetricEncrypt);
+		Encrypt_Detour->Attach();
+
+		g_pLogger->LogConsole( "Detoured SymmetricEncrypt!\n" );
+	}
+	else
+	{
+		g_pLogger->LogConsole( "Unable to hook SymmetricEncrypt: Func scan failed.\n" );
+	}
+
+	if ( bDecrypt )
+	{
+		Decrypt_Detour = new CSimpleDetour((void **) &Decrypt_Orig, *(void**) &CCrypto::SymmetricDecrypt);
+		Decrypt_Detour->Attach();
+
+		g_pLogger->LogConsole( "Detoured SymmetricDecrypt!\n" );
+	}
+	else
+	{
+		g_pLogger->LogConsole( "Unable to hook SymmetricDecrypt: Func scan failed.\n" );
+	}
 }
 
 CCrypto::~CCrypto()
 {
-	Encrypt_Detour->Detach();
-	Decrypt_Detour->Detach();
+	if ( Encrypt_Detour )
+	{
+		Encrypt_Detour->Detach();
+		delete Encrypt_Detour;
+	}
 
-	delete Encrypt_Detour;
-	delete Decrypt_Detour;
+	if ( Decrypt_Detour )
+	{
+		Decrypt_Detour->Detach();
+		delete Decrypt_Detour;
+	}
 }
 
 
