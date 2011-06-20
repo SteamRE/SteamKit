@@ -23,5 +23,14 @@ namespace SteamKit2
                stream.ReadByte() << 32 | stream.ReadByte() << 40 |
                stream.ReadByte() << 48 | stream.ReadByte() << 56);
         }
+
+        internal static byte[] ReadBytes( this Stream stream, int len )
+        {
+            byte[] data = new byte[ len ];
+
+            stream.Read( data, 0, len );
+
+            return data;
+        }
     }
 }

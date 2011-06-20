@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Diagnostics;
 using System.IO;
+using System.Xml;
 
 namespace SteamKit2
 {
@@ -266,7 +267,7 @@ namespace SteamKit2
                 serverTgt = ds.ReadBytes( serverTgtSize );
 
                 uint accRecordSize = ds.ReadUInt32();
-                byte[] accData = ds.ReadBytes( ds.SizeRemaining() - 40 );
+                byte[] accData = ds.ReadBytes( ds.SizeRemaining() );
 
                 using (BlobTypedReader<AuthBlob> blobParser = BlobTypedReader<AuthBlob>.Create(new MemoryStream(accData)))
                 {

@@ -3,6 +3,7 @@ using System.Text;
 using System.IO;
 using System.IO.Compression;
 using System.Diagnostics;
+using System.Security.Cryptography;
 
 namespace SteamKit2
 {
@@ -23,6 +24,8 @@ namespace SteamKit2
 
         private long length;
         private long mark;
+
+        private byte[] aesKey;
 
 
         public delegate void BlobDelegate(EAutoPreprocessCode processCode, ECacheState cacheState);
@@ -77,9 +80,9 @@ namespace SteamKit2
         }
 
 
-        public void SetKey(byte[] aeskey)
+        public void SetKey(byte[] key)
         {
-            throw new NotImplementedException();
+            this.aesKey = key;
         }
 
         public bool Process()
@@ -160,6 +163,8 @@ namespace SteamKit2
 
                 input = HandleProcessCode(process, ref serialized, out extendedData);
                 bool result = TryReadBlob();
+
+                // todo: deal with extra HMAC data, since it's now expected
 
                 input.Close();
                 input = originalStream;
@@ -262,18 +267,41 @@ namespace SteamKit2
                             unknown = input.ReadInt32();
                             level = input.ReadInt16();
 
-                            input.ReadInt16();
-                            serialized -= CompressedHeaderLength + 2;
+                            input.ReadInt16(); // skip zlib header
+                            serialized -= CompressedHeaderLength + 2 /* for zlib header */;
 
                             extended = level;
 
-                            DeflateStream deflate = new DeflateStream(new FramingStream(input, serialized), System.IO.Compression.CompressionMode.Decompress, true);
+                            DeflateStream deflate = new DeflateStream(new FramingStream(input, serialized), CompressionMode.Decompress, true);
 
                             return new PeekableStream(new BufferedStream(deflate, 0x1000));
                         }
                     case EAutoPreprocessCode.eAutoPreprocessCodeEncrypted:
                         {
-                            break;
+                            Mark( EncryptedHeaderLength );
+
+                            int decryptedSize;
+                            byte[] aesIv;
+
+                            decryptedSize = input.ReadInt32();
+                            aesIv = input.ReadBytes( 16 );
+
+                            serialized -= EncryptedHeaderLength;
+                            // account for one hmac
+                            // (but there's actually two!)
+                            // how does this work? blatently lucky code!!
+                            serialized -= 20;
+
+                            extended = aesIv;
+
+                            RijndaelManaged aes = new RijndaelManaged();
+                            aes.BlockSize = aes.KeySize = 128;
+                            aes.Mode = CipherMode.CBC;
+
+                            ICryptoTransform aesTransform = aes.CreateDecryptor( aesKey, aesIv );
+                            CryptoStream decryptStream = new CryptoStream( new FramingStream( input, serialized ), aesTransform, CryptoStreamMode.Read );
+
+                            return new PeekableStream( new BufferedStream( decryptStream, 0x1000 ) );
                         }
                 }
             }
