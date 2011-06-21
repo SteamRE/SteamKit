@@ -5,37 +5,48 @@
 #include "logger.h"
 #include "csimplescan.h"
 
-#include <vector>
+#include <map>
 
-bool (__cdecl *Encrypt_Orig)(const uint8*, uint32, uint8*, uint32*, uint32) = 0;
+
+
+bool (__cdecl *Encrypt_Orig)(const uint8*, uint32, uint8*, uint32*, const uint8*, uint32) = 0;
 bool (__cdecl *Decrypt_Orig)(const uint8*, uint32, uint8*, uint32*, const uint8*, uint32) = 0;
 bool (__cdecl *GetMessageFn)( int * ) = 0;
 
-struct EMsg_s
-{
-	EMsg eMsg;
-	uint8 serverType;
-};
 
-#if 0
-bool HasEMsg( std::vector<EMsg_s> eMsgList, EMsg eMsg )
+
+#pragma pack( push, 1 )
+struct MsgInfo_t
 {
-	for ( int x = 0; x < eMsgList.size(); ++x )
-	{
-		if ( eMsgList[ x ].eMsg == eMsg )
-			return true;
-	}
-	return false;
-}
-#endif
+	EMsg emsg;
+	const char *name;
+	uint32 flags;
+	uint32 serverType;
+
+	uint64 unk;
+	uint32 unk2;
+	uint32 unk3;
+
+	uint64 unk4;
+	uint32 unk5;
+	uint32 unk6;
+};
+#pragma pack( pop )
+
+typedef std::map<EMsg, MsgInfo_t *> MsgList;
+typedef std::pair<EMsg, MsgInfo_t *> MsgPair;
+
+MsgList eMsgList;
+
+
 
 CCrypto::CCrypto()
 	: Encrypt_Detour( NULL ), Decrypt_Detour( NULL )
 {
 	CSimpleScan steamClientScan( "steamclient.dll" );
 
-	bool bEncrypt = steamClientScan.FindFunction( 
-		"\x55\x8B\xEC\x6A\xFF\x68\x01\x47\x32\x38\x64\xA1\x00\x00\x00\x00\x50\x64\x89\x25\x00\x00\x00\x00\x81\xEC\x04\x09\x00\x00",
+	bool bEncrypt = steamClientScan.FindFunction(
+		"\x55\x8B\xEC\x6A\xFF\x68\x01\x47\x32\x38\x64\xA1\x00\x00\x00\x00\x50\x64\x89\x25\x00\x00\x00\x00\x81\xEC\xD4\x08\x00\x00",
 		"xxxxxx????xxxxxxxxxxxxxxxxxxxx",
 		(void **)&Encrypt_Orig
 	);
@@ -44,78 +55,41 @@ CCrypto::CCrypto()
 
 
 	bool bDecrypt = steamClientScan.FindFunction(
-		"\x55\x8B\xEC\x6A\xFF\x68\x21\x74\x28\x38\x64\xA1\x00\x00\x00\x00\x50\x64\x89\x25\x00\x00\x00\x00\x81\xEC\xE8\x04\x00\x00",
+		"\x55\x8B\xEC\x6A\xFF\x68\x21\x74\x28\x38\x64\xA1\x00\x00\x00\x00\x50\x64\x89\x25\x00\x00\x00\x00\x81\xEC\xDC\x04\x00\x00",
 		"xxxxxx????xxxxxxxxxxxxxxxxxxx",
 		(void **)&Decrypt_Orig
 	);
 
 	g_pLogger->LogConsole( "CCrypto::SymmetricDecrypt = 0x%x\n", Decrypt_Orig );
 
-	bool bGetMessage = steamClientScan.FindFunction(
-		"\x51\xA1\x00\x95\x32\x38\x8B\x08\x85\xC9\x75\x05\x89\x0C\x24\xEB\x28\xE8",
-		"xx????xxxxxxxxxxxx",
-		(void **)&GetMessageFn
-	);
 
-	g_pLogger->LogConsole( "CMessageList::GetMessage = 0x%x\n", GetMessageFn );
+	MsgInfo_t *pInfos = (MsgInfo_t *)0x38550B48; // hard coded for now, we'll scan later
 
+	g_pLogger->DeleteFile( "emsg_list.txt", false );
+	g_pLogger->DeleteFile( "emsg_list_detailed.txt", false );
 
-	#define MAX_EMSGS 7699 // rough guess, don't really have a way of getting an exact number
-
-	if ( bGetMessage )
+	while ( true )
 	{
+		if ( pInfos->unk != 0 ) // seems all the entries have flags set to 2
+			break;
 
-		std::vector<EMsg_s> eMsgList;
-		std::vector<EMsg_s>::iterator eMsgIter;
+		eMsgList.insert( MsgPair( pInfos->emsg, pInfos ) );
 
-		for ( int x = 0; x < MAX_EMSGS; ++x )
-		{
-			EMsg eMsg = (EMsg)x;
-			const char *szMsg = this->GetMessage( eMsg, 0xFF );
+		g_pLogger->LogFile( "emsg_list.txt", false, "\t%s = %d,\r\n", pInfos->name, pInfos->emsg );
+		g_pLogger->LogFile( "emsg_list_detailed.txt", false, "\t%s = %d, // flags: %d, server type: %d\r\n", pInfos->name, pInfos->emsg, pInfos->flags, pInfos->serverType );
 
-			if ( szMsg == NULL )
-				continue;
-
-#if 0
-			if ( !HasEMsg( eMsgList, eMsg ) )
-#endif
-			{
-				EMsg_s eMsgInfo = { eMsg, 0xFF };
-				eMsgList.push_back( eMsgInfo );
-			}
-
-		}
-
-		g_pLogger->DeleteFile( "emsg_list.txt", false );
-
-		for ( int x = 0; x < eMsgList.size(); ++x )
-		{
-			EMsg_s info = eMsgList[ x ];
-
-			const char *szMsg = this->GetMessage( info.eMsg, info.serverType );
-
-			g_pLogger->LogFile( "emsg_list.txt", false, "\t%s = %d,\r\n", szMsg, info.eMsg );
-		}
-
-		g_pLogger->LogConsole( "Dumped EMsg list!\n" );
-
-	}
-	else
-	{
-		g_pLogger->LogConsole( "Unable to dump EMsg list: Func scan failed.\n" );
+		pInfos++;
 	}
 
-	
+	g_pLogger->LogConsole( "Dumped emsg list!\n" );
 
-	/*
-	static bool (__cdecl *encrypt)(const uint8*, uint32, uint8*, uint32*, uint32) = &CCrypto::SymmetricEncrypt;
+
+	static bool (__cdecl *encrypt)(const uint8*, uint32, uint8*, uint32*, const uint8*, uint32) = &CCrypto::SymmetricEncrypt;
 	static bool (__cdecl *decrypt)(const uint8*, uint32, uint8*, uint32*, const uint8*, uint32) = &CCrypto::SymmetricDecrypt;
-	*/
-
 
 	if ( bEncrypt )
 	{
-		Encrypt_Detour = new CSimpleDetour((void **) &Encrypt_Orig, *(void**) &CCrypto::SymmetricEncrypt);
+		Encrypt_Detour = new CSimpleDetour((void **) &Encrypt_Orig, *(void**) &encrypt);
 		Encrypt_Detour->Attach();
 
 		g_pLogger->LogConsole( "Detoured SymmetricEncrypt!\n" );
@@ -127,7 +101,7 @@ CCrypto::CCrypto()
 
 	if ( bDecrypt )
 	{
-		Decrypt_Detour = new CSimpleDetour((void **) &Decrypt_Orig, *(void**) &CCrypto::SymmetricDecrypt);
+		Decrypt_Detour = new CSimpleDetour((void **) &Decrypt_Orig, *(void**) &decrypt);
 		Decrypt_Detour->Attach();
 
 		g_pLogger->LogConsole( "Detoured SymmetricDecrypt!\n" );
@@ -140,6 +114,9 @@ CCrypto::CCrypto()
 
 CCrypto::~CCrypto()
 {
+
+	eMsgList.clear();
+
 	if ( Encrypt_Detour )
 	{
 		Encrypt_Detour->Detach();
@@ -155,49 +132,13 @@ CCrypto::~CCrypto()
 
 
 
-// This call got strangely optimized. Don't clobber ECX.
-__declspec(naked) bool __cdecl CCrypto::SymmetricEncrypt( const uint8 *pubPlaintextData, uint32 cubPlaintextData, uint8 *pubEncryptedData, uint32 *pcubEncryptedData, uint32 cubKey )
+bool __cdecl CCrypto::SymmetricEncrypt( const uint8 *pubPlaintextData, uint32 cubPlaintextData, uint8 *pubEncryptedData, uint32 *pcubEncryptedData, const uint8 *pubKey, uint32 cubKey )
 {
-	__asm {
-		// prologue
-		push ebp;
-		mov ebp, esp;
-		sub esp, __LOCAL_SIZE;
-
-		// this needs to be saved (aes key)
-		push ecx;
-	}
-
 	g_pLogger->LogNetMessage( k_eNetOutgoing, (uint8 *)pubPlaintextData, cubPlaintextData );
 
-	__asm {
-		// call it manually here, prevent
-		// it from 'helpfully' using ECX
-
-		// prep aes key in register
-		pop ecx;
-
-		// push args
-		push cubKey;
-		push pcubEncryptedData;
-		push pubEncryptedData;
-		push cubPlaintextData;
-		push pubPlaintextData;
-
-		// call!
-		call Encrypt_Orig;
-
-		// cleanup
-		add esp, 0x14;
-
-		// epilogue
-		mov esp, ebp;
-		pop ebp;
-		ret;
-	}
+	return (*Encrypt_Orig)( pubPlaintextData, cubPlaintextData, pubEncryptedData, pcubEncryptedData, pubKey, cubKey );
 }
 
-// This function is considerably less retarded
 bool __cdecl CCrypto::SymmetricDecrypt( const uint8 *pubEncryptedData, uint32 cubEncryptedData, uint8 *pubPlaintextData, uint32 *pcubPlaintextData, const uint8 *pubKey, uint32 cubKey )
 {
 	bool ret = (*Decrypt_Orig)(pubEncryptedData, cubEncryptedData, pubPlaintextData, pcubPlaintextData, pubKey, cubKey);
@@ -210,31 +151,13 @@ bool __cdecl CCrypto::SymmetricDecrypt( const uint8 *pubEncryptedData, uint32 cu
 
 const char* CCrypto::GetMessage( EMsg eMsg, uint8 serverType )
 {
-	static char *szMsg = new char[ 200 ];
-
-	int ieMsg = ( int )eMsg;
-	uint32 iServerType = serverType;
-
-	bool bRet = false;
-
-	__asm
+	for ( MsgList::iterator iter = eMsgList.begin() ; iter != eMsgList.end() ; iter++ )
 	{
-		pushad
-
-		lea esi, [ szMsg ]
-		mov ecx, 200
-		mov edi, ieMsg
-
-		push iServerType
-
-		call GetMessageFn
-		mov bRet, al
-
-		popad
+		if ( iter->first == eMsg )
+		{
+			return iter->second->name;
+		}
 	}
-
-	if ( bRet )
-		return szMsg;
 
 	return NULL;
 }
