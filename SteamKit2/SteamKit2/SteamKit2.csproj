@@ -89,6 +89,7 @@
     <Compile Include="Steam2\ContentServerClient.cs" />
     <Compile Include="Steam2\ContentServerDSClient.cs" />
     <Compile Include="Steam3\ClientConfig.cs" />
+    <Compile Include="Steam3\Handlers\HandlerAttribute.cs" />
     <Compile Include="Steam3\Handlers\SteamApps\Callbacks.cs" />
     <Compile Include="Steam3\Handlers\SteamApps\SteamApps.cs" />
     <Compile Include="Steam3\Handlers\SteamFriends\Callbacks.cs" />
@@ -96,7 +97,7 @@
     <Compile Include="Steam3\Handlers\SteamUser\Callbacks.cs" />
     <Compile Include="Steam3\SteamClient\CallbackMsg.cs" />
     <Compile Include="Steam3\SteamClient\Callbacks.cs" />
-    <Compile Include="Steam3\SteamClient\ClientMsgHandler.cs" />
+    <Compile Include="Steam3\Handlers\ClientMsgHandler.cs" />
     <Compile Include="Types\AuthBlob.cs" />
     <Compile Include="Types\GameID.cs" />
     <Compile Include="Types\Manifest.cs" />

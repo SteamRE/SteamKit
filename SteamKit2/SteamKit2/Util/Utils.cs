@@ -83,6 +83,14 @@ namespace SteamKit2
                 return null;
             }
         }
+
+        public static T GetAttribute<T>( this Type type )
+            where T : Attribute
+        {
+            T[] attribs = ( T[] )type.GetCustomAttributes( typeof( T ), false );
+
+            return attribs[ 0 ];
+        }
     }
 
     public static class MsgUtil

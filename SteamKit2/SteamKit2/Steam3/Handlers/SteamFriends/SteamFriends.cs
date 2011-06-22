@@ -17,19 +17,15 @@ namespace SteamKit2
     /// <summary>
     /// This handler handles all interaction with other users on the Steam3 network.
     /// </summary>
+    [Handler( "SteamFriends" )]
     public sealed partial class SteamFriends : ClientMsgHandler
     {
-        /// <summary>
-        /// The unique name of this hadler.
-        /// </summary>
-        public const string NAME = "SteamFriends";
 
         Friend localUser;
         FriendCache cache;
 
 
         internal SteamFriends()
-            : base( SteamFriends.NAME )
         {
             localUser = new Friend( 0 );
             cache = new FriendCache();
