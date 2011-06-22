@@ -265,3 +265,12 @@ class MsgClientStoreUserStatsResponse<EMsg::ClientStoreUserStatsResponse>
 {
 	proto CMsgClientStoreUserStatsResponse proto;
 };
+
+class MsgClientCreateAccountResponse<EMsg::ClientCreateAccountResponse>
+{
+	EResult result;
+};
+
+class MsgClientCreateAccount3<EMsg::ClientCreateAccount3>
+{
+};
