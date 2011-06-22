@@ -146,8 +146,8 @@ namespace Vapor
         {
             SteamClient = new SteamClient( useTcp ? CMClient.ConnectionType.Tcp : CMClient.ConnectionType.Udp );
 
-            SteamFriends = SteamClient.GetHandler<SteamFriends>( SteamFriends.NAME );
-            SteamUser = SteamClient.GetHandler<SteamUser>( SteamUser.NAME );
+            SteamFriends = SteamClient.GetHandler<SteamFriends>();
+            SteamUser = SteamClient.GetHandler<SteamUser>();
 
             ChatManager = new ChatManager();
         }
