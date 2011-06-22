@@ -17,19 +17,15 @@ namespace SteamKit2
     /// <summary>
     /// This handler handles all user log on/log off related actions and callbacks.
     /// </summary>
+    [Handler( "SteamUser" )]
     public sealed partial class SteamUser : ClientMsgHandler
     {
-        /// <summary>
-        /// The unique name of this hadler.
-        /// </summary>
-        public const string NAME = "SteamUser";
 
 
         LogOnDetails logonDetails;
 
 
         internal SteamUser()
-            : base( SteamUser.NAME )
         {
         }
 
@@ -51,6 +47,14 @@ namespace SteamKit2
             public string Password { get; set; }
 
             /// <summary>
+            /// Gets or sets the SteamID used for logging into Steam3.
+            /// </summary>
+            /// <value>
+            /// The SteamID.
+            /// </value>
+            public SteamID SteamID { get; set; }
+
+            /// <summary>
             /// Gets or sets the client Ticket Granting Ticket.
             /// </summary>
             /// <value>The client TGT.</value>
@@ -65,6 +69,7 @@ namespace SteamKit2
             /// </summary>
             /// <value>The account record.</value>
             public AuthBlob AccRecord { get; set; }
+
 
 
             /// <summary>
@@ -98,13 +103,23 @@ namespace SteamKit2
             var logon = new ClientMsgProtobuf<MsgClientLogon>();
 
             SteamID steamId = new SteamID();
-            steamId.SetFromSteam2( details.ClientTGT.UserID, this.Client.ConnectedUniverse );
+
+            if ( details.ClientTGT != null )
+            {
+                steamId.SetFromSteam2( details.ClientTGT.UserID, this.Client.ConnectedUniverse );
+            }
+            else if ( details.SteamID != null )
+            {
+                steamId = details.SteamID;
+            }
+            else
+            {
+                throw new ArgumentException( "LogOn requires a SteamID or ClientTGT to be set in the LogOnDetails." );
+            }
 
             steamId.AccountInstance = details.AccountInstance;
 
             uint localIp = NetHelpers.GetIPAddress( this.Client.GetLocalIP() );
-
-            MicroTime creationTime = details.AccRecord.CreationTime;
 
             logon.ProtoHeader.client_session_id = 0;
             logon.ProtoHeader.client_steam_id = steamId.ConvertToUint64();
@@ -117,7 +132,14 @@ namespace SteamKit2
             logon.Msg.Proto.protocol_version = MsgClientLogon.CurrentProtocol;
             logon.Msg.Proto.client_os_type = 10; // windows
             logon.Msg.Proto.client_language = "english";
-            logon.Msg.Proto.rtime32_account_creation = creationTime.ToUnixTime();
+
+            if ( details.AccRecord != null )
+            {
+                MicroTime creationTime = details.AccRecord.CreationTime;
+
+                logon.Msg.Proto.rtime32_account_creation = creationTime.ToUnixTime();
+                logon.Msg.Proto.email_address = details.AccRecord.Email;
+            }
 
             // because steamkit doesn't attempt to find the best cellid
             // we'll just use the default one
@@ -131,14 +153,16 @@ namespace SteamKit2
             // but it's good enough for identifying a machine
             logon.Msg.Proto.machine_id = Utils.GenerateMachineID();
 
-            logon.Msg.Proto.email_address = details.AccRecord.Email;
 
-            byte[] serverTgt = new byte[ details.ServerTGT.Length + 4 ];
+            if ( details.ServerTGT != null )
+            {
+                byte[] serverTgt = new byte[ details.ServerTGT.Length + 4 ];
 
-            Array.Copy( BitConverter.GetBytes( localIp ), serverTgt, 4 );
-            Array.Copy( details.ServerTGT, 0, serverTgt, 4, details.ServerTGT.Length );
+                Array.Copy( BitConverter.GetBytes( localIp ), serverTgt, 4 );
+                Array.Copy( details.ServerTGT, 0, serverTgt, 4, details.ServerTGT.Length );
 
-            logon.Msg.Proto.steam2_auth_ticket = serverTgt;
+                logon.Msg.Proto.steam2_auth_ticket = serverTgt;
+            }
 
 
             // steam guard
@@ -182,6 +206,20 @@ namespace SteamKit2
 
             this.Client.Send( logon );
 
+        }
+
+        public void LogOnAnonUser()
+        {
+            var logon = new ClientMsgProtobuf<MsgClientLogon>();
+
+            SteamID auId = new SteamID( 00, 0, Client.ConnectedUniverse, EAccountType.AnonUser );
+
+            logon.ProtoHeader.client_session_id = 0;
+            logon.ProtoHeader.client_steam_id = auId.ConvertToUint64();
+
+            logon.Msg.Proto.protocol_version = MsgClientLogon.CurrentProtocol;
+
+            this.Client.Send( logon );
         }
 
         /// <summary>

@@ -13,16 +13,11 @@ using System.Net;
 
 namespace SteamKit2
 {
+    [Handler( "SteamApps" )]
     public sealed partial class SteamApps : ClientMsgHandler
     {
-        /// <summary>
-        /// The unique name of this hadler.
-        /// </summary>
-        public const string NAME = "SteamApps";
-
 
         internal SteamApps()
-            : base( SteamApps.NAME )
         {
         }
 

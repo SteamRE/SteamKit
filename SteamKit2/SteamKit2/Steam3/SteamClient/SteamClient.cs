@@ -88,15 +88,19 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// Returns a registered handler by name.
+        /// Returns a registered handler.
         /// </summary>
         /// <typeparam name="T">The type of the handler to cast to. Must derive from ClientMsgHandler.</typeparam>
-        /// <param name="name">The name of the handler to get.</param>
-        /// <returns>A registered handler on success, or null if the handler could not be found.</returns>
-        public T GetHandler<T>( string name ) where T : ClientMsgHandler
+        /// <returns>
+        /// A registered handler on success, or null if the handler could not be found.
+        /// </returns>
+        public T GetHandler<T>()
+            where T : ClientMsgHandler
         {
+            string name = typeof( T ).GetAttribute<HandlerAttribute>().Name;
+
             if ( handlers.ContainsKey( name ) )
-                return ( T )handlers[ name ];
+                return handlers[ name ] as T;
 
             return null;
         }
