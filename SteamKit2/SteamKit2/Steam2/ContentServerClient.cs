@@ -277,13 +277,27 @@ namespace SteamKit2
                 // name is a guess
                 byte hasManifest = this.Socket.Reader.ReadByte();
 
-                uint manifestLen = NetHelpers.EndianSwap( this.Socket.Reader.ReadUInt32() );
+                uint manifestLength = NetHelpers.EndianSwap(this.Socket.Reader.ReadUInt32());
+                byte[] manifest = new byte[manifestLength];
 
-                uint storId2 = NetHelpers.EndianSwap( this.Socket.Reader.ReadUInt32() );
-                uint msgId2 = NetHelpers.EndianSwap( this.Socket.Reader.ReadUInt32() );
-                uint manifestLen2 = NetHelpers.EndianSwap( this.Socket.Reader.ReadUInt32() );
+                uint manifestChunksToRead = manifestLength;
+                do
+                {
+                    uint chunkStorID = NetHelpers.EndianSwap(this.Socket.Reader.ReadUInt32());
+                    uint chunkMsgID = NetHelpers.EndianSwap(this.Socket.Reader.ReadUInt32());
+                    uint chunkLen = NetHelpers.EndianSwap(this.Socket.Reader.ReadUInt32());
 
-                byte[] manifest = this.Socket.Reader.ReadBytes( ( int )manifestLen );
+                    chunkLen = Math.Min(chunkLen, manifestChunksToRead);
+                    uint toRead = chunkLen;
+
+                    while (toRead > 0)
+                    {
+                        uint socketRead = (uint)this.Socket.Reader.Read(manifest, (int)((manifestLength - manifestChunksToRead) + (chunkLen - toRead)), (int)toRead);
+                        toRead = toRead - socketRead;
+                    }
+
+                    manifestChunksToRead = manifestChunksToRead - chunkLen; 
+                } while (manifestChunksToRead > 0);
 
                 this.MessageID++;
 
