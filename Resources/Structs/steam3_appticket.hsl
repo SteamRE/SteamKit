@@ -24,7 +24,7 @@ struct SESSIONHEADER
 	DWORD externalIP;
 	DWORD filler;
 	DWORD someToken; // not sure
-	DWORD unk4; // 4
+	DWORD unk4; // 4, 12
 };
 
 typedef struct tOWNERSHIPTICKET
@@ -38,9 +38,13 @@ typedef struct tOWNERSHIPTICKET
 	DWORD ownershipFlags;
 	time_t ticketGeneration;
 	time_t ticketExpiration;
-	WORD licenseCount;
+	WORD licenseCount; // subs
 	DWORD license[licenseCount];
-	DWORD filler;
+	WORD dlcCount; // apps
+	DWORD dlc[dlcCount];
+	WORD subCount; // subs  -> paid for??
+	DWORD sub[subCount];
+	WORD reserved;
 } OWNERSHIPTICKET;
 
 struct OWNERSHIPSECTIONWITHSIGNATURE
