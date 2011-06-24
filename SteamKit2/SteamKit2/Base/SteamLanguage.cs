@@ -2267,4 +2267,53 @@ namespace SteamKit2
 		}
 	}
 
+	public class MsgClientCreateAccountResponse : ISteamSerializableMessage
+	{
+		public EMsg GetEMsg() { return EMsg.ClientCreateAccountResponse; }
+
+		// Static size: 4
+		public EResult Result { get; set; }
+
+		public MsgClientCreateAccountResponse()
+		{
+			Result = 0;
+		}
+
+		public void Serialize(Stream stream)
+		{
+			BinaryWriterEx bw = new BinaryWriterEx( stream );
+
+			bw.Write( (int)Result );
+
+		}
+
+		public void Deserialize( Stream stream )
+		{
+			BinaryReaderEx br = new BinaryReaderEx( stream );
+
+			Result = (EResult)br.ReadInt32();
+		}
+	}
+
+	public class MsgClientCreateAccount3 : ISteamSerializableMessage
+	{
+		public EMsg GetEMsg() { return EMsg.ClientCreateAccount3; }
+
+
+		public MsgClientCreateAccount3()
+		{
+		}
+
+		public void Serialize(Stream stream)
+		{
+			BinaryWriterEx bw = new BinaryWriterEx( stream );
+
+
+		}
+
+		public void Deserialize( Stream stream )
+		{
+		}
+	}
+
 }
