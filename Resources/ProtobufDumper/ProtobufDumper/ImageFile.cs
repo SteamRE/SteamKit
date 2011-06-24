@@ -76,10 +76,16 @@ namespace ProtobufDumper
                     Native.IMAGE_SECTION_HEADER.CharacteristicFlags.IMAGE_SCN_MEM_DISCARDABLE;
 
                 if ( ( sectionHdr.Characteristics & searchFlags ) != searchFlags )
+                {
+                    Console.WriteLine( "\nSection '{0}' skipped: not an initialized read section.", sectionHdr.Name );
                     continue;
+                }
 
                 if ( ( sectionHdr.Characteristics & excludeFlags ) != 0 )
+                {
+                    Console.WriteLine( "\nSection '{0}' skipped: not a non-discardable readonly section.", sectionHdr.Name );
                     continue;
+                }
 
                 ScanSection( sectionHdr );
             }
@@ -89,7 +95,7 @@ namespace ProtobufDumper
         {
             uint sectionDataAddr = loadAddr + sectionHdr.PointerToRawData;
 
-            Console.WriteLine( "\n\nScanning section '{0}' at 0x{1:X2}...", sectionHdr.Name, sectionDataAddr );
+            Console.WriteLine( "\nScanning section '{0}' at 0x{1:X2}...\n", sectionHdr.Name, sectionDataAddr );
 
             byte* dataPtr = ( byte* )( sectionDataAddr );
             byte* endPtr = ( byte* )( dataPtr + sectionHdr.SizeOfRawData );
@@ -104,7 +110,7 @@ namespace ProtobufDumper
                     using ( var ms = new MemoryStream() )
                     using ( var bw = new BinaryWriter( ms ) )
                     {
-                        for ( ; *dataPtr != 0 ; dataPtr++ )
+                        for ( ; *( short* )dataPtr != 0 ; dataPtr++ )
                         {
                             bw.Write( *dataPtr );
                         }
@@ -113,6 +119,7 @@ namespace ProtobufDumper
 
                         data = ms.ToArray();
                     }
+
 
                     dataPtr++;
 
@@ -153,6 +160,24 @@ namespace ProtobufDumper
 
             FileDescriptorProto set = null;
 
+            if ( Environment.GetCommandLineArgs().Contains( "-dump", StringComparer.OrdinalIgnoreCase ) )
+            {
+                string fileName = Path.Combine( outputDir, name + ".dump" );
+                Directory.CreateDirectory( fileName );
+
+                Console.WriteLine( "  ! Dumping to '{0}'!", fileName );
+
+                try
+                {
+                    File.WriteAllBytes( fileName, data );
+                }
+                catch ( Exception ex )
+                {
+                    Console.WriteLine( "Unable to dump: {0}", ex.Message );
+                }
+
+            }
+
             try
             {
                 using ( MemoryStream ms = new MemoryStream( data ) )
@@ -185,6 +210,7 @@ namespace ProtobufDumper
             string outputFile = Path.Combine( outputDir, set.name );
 
             Console.WriteLine( "  ! Outputting proto to '{0}'\n", outputFile );
+            Directory.CreateDirectory( Path.GetDirectoryName( outputFile ) );
             File.WriteAllText( outputFile, sb.ToString() );
         }
 
