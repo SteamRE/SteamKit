@@ -7,6 +7,7 @@ using System.Runtime.InteropServices;
 using System.IO;
 using google.protobuf;
 using ProtoBuf;
+using System.Reflection;
 
 namespace ProtobufDumper
 {
@@ -163,7 +164,7 @@ namespace ProtobufDumper
             if ( Environment.GetCommandLineArgs().Contains( "-dump", StringComparer.OrdinalIgnoreCase ) )
             {
                 string fileName = Path.Combine( outputDir, name + ".dump" );
-                Directory.CreateDirectory( fileName );
+                Directory.CreateDirectory( Path.GetDirectoryName( fileName ) );
 
                 Console.WriteLine( "  ! Dumping to '{0}'!", fileName );
 
@@ -191,6 +192,14 @@ namespace ProtobufDumper
 
             StringBuilder sb = new StringBuilder();
 
+            if ( !string.IsNullOrEmpty( set.package ) )
+            {
+                sb.AppendLine( "package " + set.package + ";" );
+                sb.AppendLine();
+            }
+
+            DumpOptions( set.options, sb );
+
             foreach ( string dependency in set.dependency )
             {
                 sb.AppendLine( "import \"" + dependency + "\";" );
@@ -214,7 +223,9 @@ namespace ProtobufDumper
             File.WriteAllText( outputFile, sb.ToString() );
         }
 
-        public static String GetLabel( FieldDescriptorProto.Label label )
+
+
+        private static String GetLabel( FieldDescriptorProto.Label label )
         {
             switch ( label )
             {
@@ -228,7 +239,7 @@ namespace ProtobufDumper
             }
         }
 
-        public static String GetType( FieldDescriptorProto.Type type )
+        private static String GetType( FieldDescriptorProto.Type type )
         {
             switch ( type )
             {
@@ -269,7 +280,59 @@ namespace ProtobufDumper
             }
         }
 
-        public static void DumpDescriptor( DescriptorProto proto, StringBuilder sb, int level )
+        private static void DumpOptions( google.protobuf.FileOptions fileOptions, StringBuilder sb )
+        {
+            foreach ( PropertyInfo propInfo in fileOptions.GetType().GetProperties( BindingFlags.Public | BindingFlags.Instance ) )
+            {
+                string name = propInfo.Name;
+                object value = null;
+
+                DefaultValueAttribute[] defaultValueList = ( DefaultValueAttribute[] )propInfo.GetCustomAttributes( typeof( DefaultValueAttribute ), false );
+
+                if ( defaultValueList.Length == 0 || propInfo.GetCustomAttributes( typeof( ProtoMemberAttribute ), false ).Length == 0 )
+                {
+                    continue;
+                }
+
+                var defValue = defaultValueList[ 0 ];
+
+                try
+                {
+                    value = propInfo.GetValue( fileOptions, null );
+                }
+                catch ( Exception ex )
+                {
+                    Console.WriteLine( "Unable to dump option '{0}': {1}", name, ex.Message );
+                    continue;
+                }
+
+                if ( defValue.Value != null && defValue.Value.Equals( value ) )
+                {
+                    continue;
+                }
+
+                if ( value is string )
+                {
+                    if ( string.IsNullOrEmpty( ( string )value ) )
+                    {
+                        continue;
+                    }
+
+                    value = string.Format( "\"{0}\"", value );
+                }
+
+                if ( value is bool )
+                {
+                    value = value.ToString().ToLower();
+                }
+
+                sb.AppendLine( "option " + name + " = " + value + ";" );
+            }
+
+            sb.AppendLine();
+        }
+
+        private static void DumpDescriptor( DescriptorProto proto, StringBuilder sb, int level )
         {
             string levelspace = new String( '\t', level );
 
@@ -287,14 +350,21 @@ namespace ProtobufDumper
 
             foreach ( EnumDescriptorProto field in proto.enum_type )
             {
-                sb.AppendLine( levelspace + "\tENUM " + field.name );
+                sb.AppendLine( levelspace + "\tenum " + field.name + " {" );
+
+                foreach ( EnumValueDescriptorProto enumValue in field.value )
+                {
+                    sb.AppendLine( levelspace + "\t\t" + enumValue.name + " = " + enumValue.number + ";" );
+                }
+        
+                sb.AppendLine( levelspace + "\t}" );
             }
 
             foreach ( FieldDescriptorProto field in proto.field )
             {
                 string type = GetType( field.type );
 
-                if ( type.Equals( "message" ) )
+                if ( type.Equals( "message" ) || type.Equals( "enum" ) )
                 {
                     type = field.type_name;
                 }
