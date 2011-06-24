@@ -6,7 +6,7 @@ using System.Text;
 namespace SteamKit2
 {
     [AttributeUsage( AttributeTargets.Class, Inherited = false, AllowMultiple =false )]
-    sealed class HandlerAttribute : Attribute
+    public sealed class HandlerAttribute : Attribute
     {
         public string Name { get; set; }
 
