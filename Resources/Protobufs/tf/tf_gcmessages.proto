@@ -1,3 +1,5 @@
+option cc_generic_services = false;
+
 import "steammessages.proto";
 
 message CMsgTFGoldenWrenchBroadcast {
@@ -9,6 +11,13 @@ message CMsgTFGoldenWrenchBroadcast {
 message CMsgTFSaxxyBroadcast {
 	optional int32 category_number = 1;
 	optional string user_name = 2;
+}
+
+message CMsgTFIncrementKillCountResponse {
+	optional uint32 killer_account_id = 1;
+	optional uint32 num_kills = 2;
+	optional uint32 item_def = 3;
+	optional uint32 new_rank = 4;
 }
 
 message CSOTFDuelSummary {
@@ -64,6 +73,16 @@ message CMsgTFRequestTF2FriendsResponse {
 message CSOTFPlayerInfo {
 	optional uint32 num_new_users_helped = 1;
 	optional bool trial_account = 2 [default = false];
+}
+
+message CMsgTFThankedBySomeone {
+	optional uint64 thanker_steam_id = 1;
+}
+
+message CMsgTFThankedSomeone {
+}
+
+message CMsgTFFreeTrialConvertedToPremium {
 }
 
 message CMsgSaxxyAwarded {
@@ -147,20 +166,19 @@ message CMsgTFQuickplay_ScoreServers {
 		optional uint32 server_address = 1;
 		optional uint32 server_port = 2;
 		optional uint32 num_users = 3;
-		optional uint32 ping = 4;
-		optional uint64 steam_id = 5;
+		optional uint64 steam_id = 4;
+		optional uint32 max_users = 5;
+		optional float user_score = 6;
 	}
 
 	repeated .CMsgTFQuickplay_ScoreServers.ServerInfo servers = 1;
-	optional uint32 server_info_updated_timestamp = 2;
 }
 
 message CMsgTFQuickplay_ScoreServersResponse {
 	message ServerInfo {
 		optional uint32 server_address = 1;
 		optional uint32 server_port = 2;
-		optional int32 score = 3;
-		optional bool should_blacklist = 4;
+		optional float total_score = 3;
 	}
 
 	repeated .CMsgTFQuickplay_ScoreServersResponse.ServerInfo servers = 1;
@@ -177,6 +195,9 @@ message CMsgGC_GameServer_AuthChallenge {
 
 message CMsgGC_GameServer_AuthResult {
 	optional bool authenticated = 1;
+	optional int32 game_server_standing = 2;
+	optional int32 game_server_standing_trend = 3;
+	optional bool is_valve_server = 4;
 }
 
 message CMsgGC_GameServer_AuthChallengeResponse {
@@ -189,9 +210,16 @@ message CMsgGC_GameServer_CreateIdentity {
 }
 
 message CMsgGC_GameServer_CreateIdentityResponse {
+	enum EStatus {
+		kStatus_GenericFailure = 0;
+		kStatus_TooMany = -1;
+		kStatus_NoPrivs = -2;
+		kStatus_Created = 1;
+	}
 	optional bool account_created = 1;
 	optional uint32 game_server_account_id = 2;
 	optional string game_server_identity_token = 3;
+	optional .CMsgGC_GameServer_CreateIdentityResponse.EStatus status = 4;
 }
 
 message CMsgGC_GameServer_List {
@@ -203,6 +231,7 @@ message CMsgGC_GameServer_ListResponse {
 		optional uint32 game_server_account_id = 1;
 		optional string game_server_identity_token = 2;
 		optional int32 game_server_standing = 3;
+		optional int32 game_server_standing_trend = 4;
 	}
 
 	repeated .CMsgGC_GameServer_ListResponse.GameServerIdentity owned_game_servers = 1;
