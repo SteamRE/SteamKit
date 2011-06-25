@@ -262,7 +262,7 @@ namespace SteamKit2
             }
 
 
-            public Manifest DownloadManifest()
+            public Steam2Manifest DownloadManifest()
             {
                 bool bRet = this.SendCommand(
                     4, // download manifest
@@ -301,7 +301,7 @@ namespace SteamKit2
 
                 this.MessageID++;
 
-                return new Manifest( manifest );
+                return new Steam2Manifest( manifest );
             }
             public byte[] DownloadChecksums()
             {
@@ -365,7 +365,7 @@ namespace SteamKit2
                 return fileIdList;
             }
 
-            public byte[] DownloadFileParts( Manifest.Node file, uint filePart, uint numParts, DownloadPriority priority )
+            public byte[] DownloadFileParts( Steam2Manifest.Node file, uint filePart, uint numParts, DownloadPriority priority )
             {
                 this.SendCommand(
                     7, // download file
@@ -438,12 +438,12 @@ namespace SteamKit2
 
                 return data;
             }
-            public byte[] DownloadFileParts( Manifest.Node file, uint filePart, uint numParts )
+            public byte[] DownloadFileParts( Steam2Manifest.Node file, uint filePart, uint numParts )
             {
                 return DownloadFileParts( file, filePart, numParts, DownloadPriority.Low );
             }
 
-            public byte[] DownloadFile( Manifest.Node file, DownloadPriority priority )
+            public byte[] DownloadFile( Steam2Manifest.Node file, DownloadPriority priority )
             {
                 const uint MaxParts = 16;
 
@@ -461,7 +461,7 @@ namespace SteamKit2
 
                 return ms.ToArray();
             }
-            public byte[] DownloadFile( Manifest.Node file )
+            public byte[] DownloadFile( Steam2Manifest.Node file )
             {
                 return DownloadFile( file, DownloadPriority.Low );
             }

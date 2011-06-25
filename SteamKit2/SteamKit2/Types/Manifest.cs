@@ -6,7 +6,159 @@ using System.IO;
 
 namespace SteamKit2
 {
-    public sealed class Manifest
+    public sealed class Steam3Manifest
+    {
+        public sealed class FileMapping
+        {
+            public sealed class Chunk
+            {
+                public byte[] ChunkGID { get; set; } // sha1 hash for this chunk
+
+                // 4 bytes of unknown data, (d)serialized as a blob
+                public byte[] Unknown1 { get; set; }
+
+                public ulong Unknown2 { get; set; }
+
+                // these look similar to some kind of flag
+                public uint Unknown3 { get; set; }
+                public uint Unknown4 { get; set; }
+
+
+                internal void Deserialize( DataStream ds )
+                {
+                    ChunkGID = ds.ReadBytes( 20 );
+
+                    Unknown1 = ds.ReadBytes( 4 );
+
+                    Unknown2 = ds.ReadUInt64();
+
+                    Unknown3 = ds.ReadUInt32();
+                    Unknown4 = ds.ReadUInt32();
+                }
+            }
+
+            public string FileName { get; set; }
+
+            public ulong MaxSize { get; set; }
+
+            public uint Unknown1 { get; set; }
+
+            // these two most likely represent hashes of encrypted and decrypted data
+            // much like the crc's in the manifest
+            // the data that is hashed is unknown
+            public byte[] UnknownHash1 { get; set; }
+            public byte[] UnknownHash2 { get; set; }
+
+            public uint NumChunks { get; set; }
+
+            public Chunk[] Chunks { get; private set; }
+
+            public FileMapping()
+            {
+            }
+
+
+            internal void Deserialize( DataStream ds )
+            {
+                FileName = ds.ReadNullTermString( Encoding.ASCII );
+
+                MaxSize = ds.ReadUInt64();
+
+                Unknown1 = ds.ReadUInt32();
+
+                UnknownHash1 = ds.ReadBytes( 20 );
+                UnknownHash2 = ds.ReadBytes( 20 );
+
+                NumChunks = ds.ReadUInt32();
+
+                Chunks = new Chunk[ NumChunks ];
+
+                for ( int x = 0 ; x < Chunks.Length ; ++x )
+                {
+                    Chunks[ x ].Deserialize( ds );
+                }
+            }
+        }
+
+        const uint MAGIC = 372545409;
+        const uint CURRENT_VERSION = 4;
+
+
+        public uint Magic { get; set; }
+        public uint Version { get; set; } 
+
+        public uint DepotID { get; set; }
+
+        public ulong ManifestGID { get; set; } // sha1 hash for this manifest
+        public DateTime CreationTime { get; set; } // unsure
+
+        public bool IsEncrypted { get; set; }
+
+        public ulong MaxSize { get; set; }
+        public ulong Unknown1 { get; set; }
+
+        public uint NumChunks { get; set; }
+        public uint Unknown2 { get; set; }
+
+        public uint FileMappingSize { get; set; }
+
+        public uint EncryptedCRC { get; set; }
+        public uint DecryptedCRC { get; set; }
+
+        public uint UltimateAnswerToTheUltimateQuestionOfLifeTheUniverseAndEverything { get; set; }
+
+        public FileMapping Mapping { get; private set; }
+
+
+        public Steam3Manifest()
+        {
+            Mapping = new FileMapping();
+        }
+
+
+        void Deserialize( byte[] data )
+        {
+            using (DataStream ds = new DataStream( data ) )
+            {
+
+                Magic = ds.ReadUInt32();
+
+                if ( Magic != MAGIC )
+                {
+                    throw new InvalidDataException( "data is not a valid steam3 manifest: incorrect magic." );
+                }
+
+                Version = ds.ReadUInt32();
+
+                DepotID = ds.ReadUInt32();
+
+                ManifestGID = ds.ReadUInt64();
+                CreationTime = Utils.DateTimeFromUnixTime( ds.ReadUInt32() );
+
+                IsEncrypted = ds.ReadUInt32() != 0;
+
+                MaxSize = ds.ReadUInt64();
+                Unknown1 = ds.ReadUInt64();
+
+                NumChunks = ds.ReadUInt32();
+                Unknown2 = ds.ReadUInt32();
+
+                FileMappingSize = ds.ReadUInt32();
+
+                EncryptedCRC = ds.ReadUInt32();
+                DecryptedCRC = ds.ReadUInt32();
+                
+                // i'm sorry to say that we'll be breaking from canon and we shall not be taking 7 and a half million years to read this value
+                UltimateAnswerToTheUltimateQuestionOfLifeTheUniverseAndEverything = ds.ReadUInt32();
+
+                Mapping.Deserialize( ds );
+                
+            }
+        }
+
+    }
+
+    public sealed class Steam2Manifest
     {
 
         public sealed class Node
@@ -36,7 +188,7 @@ namespace SteamKit2
             public string Name { get; set; }
             public string FullName { get; set; }
 
-            internal Manifest Parent { get; set; }
+            internal Steam2Manifest Parent { get; set; }
         }
 
         public byte[] RawData { get; set; }
@@ -58,7 +210,7 @@ namespace SteamKit2
         const uint ENTRY_SIZE = 28;
 
 
-        public Manifest( byte[] manifestBlob )
+        public Steam2Manifest( byte[] manifestBlob )
         {
             this.RawData = manifestBlob;
 
@@ -125,5 +277,6 @@ namespace SteamKit2
             }
         }
     }
+
 
 }
