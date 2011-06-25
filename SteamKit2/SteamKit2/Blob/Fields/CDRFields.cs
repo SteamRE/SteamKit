@@ -59,6 +59,7 @@ namespace SteamKit2
         public const string eFieldNoDesktopShortcut = "4"; // Boolean (U8)
         public const string eFieldNoStartMenuShortcut = "5"; // Boolean (U8)
         public const string eFieldLongRunningUnattended = "6"; // Boolean (U8)
+        public const string eFieldPlatform = "7"; // String
     }
 
     public static class CDRAppFilesystemFields
@@ -66,6 +67,7 @@ namespace SteamKit2
         public const string eFieldAppId = "1"; // U32
         public const string eFieldMountName = "2"; // String
         public const string eFieldIsOptional = "3"; // Boolean (U8)
+        public const string eFieldPlatform = "4"; // String
     }
 
 

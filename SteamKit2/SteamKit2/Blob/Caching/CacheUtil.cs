@@ -34,11 +34,6 @@ namespace SteamKit2
 
             foreach (var prop in t.GetProperties(BindingFlags.Public | BindingFlags.Instance))
             {
-                BlobFieldAttribute pattrib = prop.GetAttribute<BlobFieldAttribute>(context);
-
-                if (pattrib == null)
-                    continue;
-
                 propGen.Add(new FastPropertyInfo(prop));
             }
 
