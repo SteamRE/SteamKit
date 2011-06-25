@@ -89,7 +89,7 @@ namespace SteamKit2
 
         public uint DepotID { get; set; }
 
-        public ulong ManifestGID { get; set; } // sha1 hash for this manifest
+        public ulong ManifestGID { get; set; }
         public DateTime CreationTime { get; set; } // unsure
 
         public bool IsEncrypted { get; set; }
