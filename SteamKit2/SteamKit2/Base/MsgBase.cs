@@ -21,7 +21,7 @@ namespace SteamKit2
         where Hdr : IGCSerializableHeader, new()
         where MsgType : IGCSerializableMessage, new()
     {
-                public Hdr Header { get; private set; }
+        public Hdr Header { get; private set; }
         public MsgType Msg { get; private set; }
 
         public BinaryWriterEx Payload { get; private set; }
