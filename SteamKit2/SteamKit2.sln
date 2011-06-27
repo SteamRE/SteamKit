@@ -6,6 +6,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Steam Language", "Steam Lan
 		..\Resources\SteamLanguage\emsg.steamd = ..\Resources\SteamLanguage\emsg.steamd
 		..\Resources\SteamLanguage\enums.steamd = ..\Resources\SteamLanguage\enums.steamd
 		..\Resources\SteamLanguage\eresult.steamd = ..\Resources\SteamLanguage\eresult.steamd
+		..\Resources\SteamLanguage\gamecoordinator.steamd = ..\Resources\SteamLanguage\gamecoordinator.steamd
 		..\Resources\SteamLanguage\header.steamd = ..\Resources\SteamLanguage\header.steamd
 		..\Resources\SteamLanguage\netheader.steamd = ..\Resources\SteamLanguage\netheader.steamd
 		..\Resources\SteamLanguage\steammsg.steamd = ..\Resources\SteamLanguage\steammsg.steamd
