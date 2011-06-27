@@ -22,6 +22,14 @@ namespace NetHookAnalyzer
 
             fbd.Description = "Please select a nethook dump directory to load...";
             fbd.ShowNewFolderButton = false;
+            fbd.RootFolder = Environment.SpecialFolder.MyComputer;
+
+            string steamDir = Utils.GetSteamDir();
+
+            if ( steamDir != null )
+            {
+                fbd.SelectedPath = Path.Combine( steamDir, "nethook" );
+            }
 
             if ( fbd.ShowDialog() != DialogResult.OK )
                 return;
