@@ -434,7 +434,10 @@ namespace SteamLanguageParser
 
                 if (prop.Flags == "protomask")
                 {
-                    propName = "MsgUtil.MakeMsg( " + propName + ", true )";
+                    if ( prop.Default is StrongSymbol && ( prop.Default as StrongSymbol ).Class.Name == "EGCMsg" )
+                        propName = "MsgUtil.MakeGCMsg( " + propName + ", true )";
+                    else
+                        propName = "MsgUtil.MakeMsg( " + propName + ", true )";
                 }
 
                 sb.AppendLine(padding + "\tbw.Write( " + typecast + propName + " );");
@@ -529,7 +532,10 @@ namespace SteamLanguageParser
 
                     if (prop.Flags == "protomask")
                     {
-                        call = "MsgUtil.GetMsg( (uint)" + call + " )";
+                        if ( prop.Default is StrongSymbol && ( prop.Default as StrongSymbol ).Class.Name == "EGCMsg" )
+                            call = "MsgUtil.GetGCMsg( (uint)" + call + " )";
+                        else
+                            call = "MsgUtil.GetMsg( (uint)" + call + " )";
                     }
 
                     sb.AppendLine(padding + "\t" + symname + " = " + typecast + call + ";");
