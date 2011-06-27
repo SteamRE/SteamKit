@@ -1,0 +1,23 @@
+
+
+enum EGCMsg
+{
+	Invalid = 0;
+
+	StartupCheck = 1047;
+	StartupCheckResponse = 1048;
+
+}
+
+class MsgGCHdrProtoBuf
+{
+	EGCMsg msg = EGCMsg::Invalid;
+	int headerLength;
+
+	proto<headerLength> SteamKit2.GC.CMsgProtoBufHeader protoHeader;
+}
+
+class MsgGCStartupCheck<EGCMsg::StartupCheck>
+{
+	proto SteamKit2.GC.CMsgStartupCheck proto;
+}

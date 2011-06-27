@@ -1,5 +1,7 @@
 #import "header.steamd"
 
+#import "gamecoordinator.steamd"
+
 class MsgChannelEncryptRequest<EMsg::ChannelEncryptRequest>
 {
 	const uint PROTOCOL_VERSION = 1;
