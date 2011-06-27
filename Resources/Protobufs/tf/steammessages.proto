@@ -1,7 +1,3 @@
-option cc_generic_services = false;
-
-import "google/protobuf/descriptor.proto";
-
 message CMsgProtoBufHeader {
 	optional fixed64 client_steam_id = 1;
 	optional int32 client_session_id = 2;
