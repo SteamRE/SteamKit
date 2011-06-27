@@ -7,7 +7,7 @@ enum EGCMsg
 	StartupCheck = 1047;
 	StartupCheckResponse = 1048;
 
-}
+};
 
 class MsgGCHdrProtoBuf
 {
@@ -15,14 +15,14 @@ class MsgGCHdrProtoBuf
 	int headerLength;
 
 	proto<headerLength> SteamKit2.GC.CMsgProtoBufHeader protoHeader;
-}
+};
 
 class MsgGCStartupCheck<EGCMsg::StartupCheck>
 {
 	proto SteamKit2.GC.CMsgStartupCheck proto;
-}
+};
 
 class MsgGCStartupCheckResponse<EGCMsg::StartupCheckResponse>
 {
 	proto SteamKit2.GC.CMsgStartupCheckResponse proto;
-}
+};

@@ -8,7 +8,7 @@ class MsgHdr
 	EMsg msg = EMsg::Invalid;
 	long targetJobID = -1;
 	long sourceJobID = -1;
-}
+};
 
 class ExtendedClientMsgHdr
 {
@@ -20,7 +20,7 @@ class ExtendedClientMsgHdr
 	byte headerCanary = 239;
 	steamidmarshal ulong steamID;
 	int sessionID;
-}
+};
 
 class MsgHdrProtoBuf
 {
@@ -28,4 +28,4 @@ class MsgHdrProtoBuf
 	int headerLength;
 	
 	proto<headerLength> SteamKit2.CMsgProtoBufHeader protoHeader;
-}
+};
