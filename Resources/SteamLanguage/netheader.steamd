@@ -9,7 +9,7 @@ enum EUdpPacketType<byte>
 	Disconnect = 5;
 	Data = 6;
 	Datagram = 7;
-}
+};
 
 class UdpHeader
 {
@@ -31,7 +31,7 @@ class UdpHeader
 	uint msgStartSeq;
 	
 	uint msgSize;
-}
+};
 
 class ChallengeData
 {
@@ -39,23 +39,23 @@ class ChallengeData
 	
 	uint challengeValue;
 	uint serverLoad;
-}
+};
 
 class ConnectData
 {
 	const uint CHALLENGE_MASK = ChallengeData::CHALLENGE_MASK;
 	
 	uint challengeValue;
-}
+};
 
 class Accept
 {
-}
+};
 
 class Datagram
 {
-}
+};
 
 class Disconnect
 {
-}
+};

@@ -8,7 +8,7 @@ enum EUniverse
 	Internal = 3;
 	Dev = 4;
 	RC = 5;
-}
+};
 
 enum EChatEntryType
 {
@@ -20,7 +20,7 @@ enum EChatEntryType
 	Emote = 4;
 	LobbyGameStart = 5;
 	LeftConversation = 6;
-}
+};
 
 enum EPersonaState
 {
@@ -29,7 +29,7 @@ enum EPersonaState
 	Busy = 2;
 	Away = 3;
 	Snooze = 4;
-}
+};
 
 enum EAccountType
 {
@@ -45,7 +45,7 @@ enum EAccountType
 	Chat = 8;
 	P2PSuperSeeder = 9;
 	AnonUser = 10;
-}
+};
 
 enum EFriendRelationship
 {
@@ -57,7 +57,7 @@ enum EFriendRelationship
 	RequestInitiator = 4;
 	Ignored = 5;
 	IgnoredFriend = 6;
-}
+};
 
 enum EAccountFlags
 {
@@ -79,7 +79,7 @@ enum EAccountFlags
 	LimitedUserForce = 8192;
 	EmailValidated = 16384;
 	MarketingTreatment = 32768;
-}
+};
 
 enum EFriendFlags
 {
@@ -94,7 +94,7 @@ enum EFriendFlags
 	Ignored = 512;
 	IgnoredFriend = 1024;
 	FlagAll = 65535;
-}
+};
 
 enum EClientPersonaStateFlag
 {
@@ -108,7 +108,7 @@ enum EClientPersonaStateFlag
 	ClanInfo = 128;
 	GameExtraInfo = 256;
 	GameDataBlob = 512;
-}
+};
 
 enum EAppUsageEvent
 {
@@ -120,7 +120,7 @@ enum EAppUsageEvent
 	MarketingMessageView = 6;
 	InGameAdViewed = 7;
 	GameLaunchFreeWeekend = 8;
-}
+};
 
 enum ELicenseFlags
 {
@@ -130,7 +130,7 @@ enum ELicenseFlags
 	Expired = 0x08;
 	CancelledByUser = 0x10;
 	CancelledByAdmin = 0x20;
-}
+};
 
 enum ELicenseType
 {
@@ -140,7 +140,7 @@ enum ELicenseType
 	RecurringCharge = 3;
 	RecurringChargeLimitedUse = 4;
 	RecurringChargeLimitedUseWithOverages = 5;
-}
+};
 
 enum EPaymentMethod
 {
@@ -155,11 +155,11 @@ enum EPaymentMethod
 	Wallet = 128;
 	OEMTicket = 256;
 	Split = 512;
-}
+};
 
 enum EIntroducerRouting
 {
 	FileShare = 0;
 	P2PVoiceChat = 1;
 	P2PNetworking = 2;
-}
+};

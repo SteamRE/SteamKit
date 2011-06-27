@@ -382,4 +382,4 @@ enum EMsg
 	ClientDownloadRateStatistics = 5548;
 	ClientUGSGetGlobalStats = 7901;
 	ClientUGSGetGlobalStatsResponse = 7902;
-}
+};

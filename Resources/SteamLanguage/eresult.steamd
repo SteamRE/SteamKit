@@ -69,5 +69,4 @@ enum EResult
 	AccountLogonDeniedNoMailSent = 66;
 	HardwareNotCapableOfIPT = 67;
 	IPTInitError = 68;
-	
-}
+};
