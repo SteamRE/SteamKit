@@ -2421,4 +2421,260 @@ namespace SteamKit2
 		}
 	}
 
+	public class MsgClientOGSBeginSession : ISteamSerializableMessage
+	{
+		public EMsg GetEMsg() { return EMsg.ClientOGSBeginSession; }
+
+		// Static size: 1
+		public byte AccountType { get; set; }
+		// Static size: 8
+		public ulong AccountId { get; set; }
+		// Static size: 4
+		public uint AppId { get; set; }
+		// Static size: 4
+		public uint TimeStarted { get; set; }
+
+		public MsgClientOGSBeginSession()
+		{
+			AccountType = 0;
+			AccountId = 0;
+			AppId = 0;
+			TimeStarted = 0;
+		}
+
+		public void Serialize(Stream stream)
+		{
+			BinaryWriterEx bw = new BinaryWriterEx( stream );
+
+			bw.Write( AccountType );
+			bw.Write( AccountId );
+			bw.Write( AppId );
+			bw.Write( TimeStarted );
+
+		}
+
+		public void Deserialize( Stream stream )
+		{
+			BinaryReaderEx br = new BinaryReaderEx( stream );
+
+			AccountType = br.ReadByte();
+			AccountId = br.ReadUInt64();
+			AppId = br.ReadUInt32();
+			TimeStarted = br.ReadUInt32();
+		}
+	}
+
+	public class MsgClientOGSBeginSessionResponse : ISteamSerializableMessage
+	{
+		public EMsg GetEMsg() { return EMsg.ClientOGSBeginSessionResponse; }
+
+		// Static size: 4
+		public EResult Result { get; set; }
+		// Static size: 1
+		public byte CollectingAny { get; set; }
+		// Static size: 1
+		public byte CollectingDetails { get; set; }
+		// Static size: 8
+		public ulong SessionId { get; set; }
+
+		public MsgClientOGSBeginSessionResponse()
+		{
+			Result = 0;
+			CollectingAny = 0;
+			CollectingDetails = 0;
+			SessionId = 0;
+		}
+
+		public void Serialize(Stream stream)
+		{
+			BinaryWriterEx bw = new BinaryWriterEx( stream );
+
+			bw.Write( (int)Result );
+			bw.Write( CollectingAny );
+			bw.Write( CollectingDetails );
+			bw.Write( SessionId );
+
+		}
+
+		public void Deserialize( Stream stream )
+		{
+			BinaryReaderEx br = new BinaryReaderEx( stream );
+
+			Result = (EResult)br.ReadInt32();
+			CollectingAny = br.ReadByte();
+			CollectingDetails = br.ReadByte();
+			SessionId = br.ReadUInt64();
+		}
+	}
+
+	public class MsgClientOGSEndSession : ISteamSerializableMessage
+	{
+		public EMsg GetEMsg() { return EMsg.ClientOGSEndSession; }
+
+		// Static size: 8
+		public ulong SessionId { get; set; }
+		// Static size: 4
+		public uint TimeEnded { get; set; }
+		// Static size: 4
+		public int ReasonCode { get; set; }
+		// Static size: 4
+		public int CountAttributes { get; set; }
+
+		public MsgClientOGSEndSession()
+		{
+			SessionId = 0;
+			TimeEnded = 0;
+			ReasonCode = 0;
+			CountAttributes = 0;
+		}
+
+		public void Serialize(Stream stream)
+		{
+			BinaryWriterEx bw = new BinaryWriterEx( stream );
+
+			bw.Write( SessionId );
+			bw.Write( TimeEnded );
+			bw.Write( ReasonCode );
+			bw.Write( CountAttributes );
+
+		}
+
+		public void Deserialize( Stream stream )
+		{
+			BinaryReaderEx br = new BinaryReaderEx( stream );
+
+			SessionId = br.ReadUInt64();
+			TimeEnded = br.ReadUInt32();
+			ReasonCode = br.ReadInt32();
+			CountAttributes = br.ReadInt32();
+		}
+	}
+
+	public class MsgClientOGSEndSessionResponse : ISteamSerializableMessage
+	{
+		public EMsg GetEMsg() { return EMsg.ClientOGSEndSessionResponse; }
+
+		// Static size: 4
+		public EResult Result { get; set; }
+
+		public MsgClientOGSEndSessionResponse()
+		{
+			Result = 0;
+		}
+
+		public void Serialize(Stream stream)
+		{
+			BinaryWriterEx bw = new BinaryWriterEx( stream );
+
+			bw.Write( (int)Result );
+
+		}
+
+		public void Deserialize( Stream stream )
+		{
+			BinaryReaderEx br = new BinaryReaderEx( stream );
+
+			Result = (EResult)br.ReadInt32();
+		}
+	}
+
+	public class MsgClientOGSWriteRow : ISteamSerializableMessage
+	{
+		public EMsg GetEMsg() { return EMsg.ClientOGSWriteRow; }
+
+		// Static size: 8
+		public ulong SessionId { get; set; }
+		// Static size: 4
+		public int CountAttributes { get; set; }
+
+		public MsgClientOGSWriteRow()
+		{
+			SessionId = 0;
+			CountAttributes = 0;
+		}
+
+		public void Serialize(Stream stream)
+		{
+			BinaryWriterEx bw = new BinaryWriterEx( stream );
+
+			bw.Write( SessionId );
+			bw.Write( CountAttributes );
+
+		}
+
+		public void Deserialize( Stream stream )
+		{
+			BinaryReaderEx br = new BinaryReaderEx( stream );
+
+			SessionId = br.ReadUInt64();
+			CountAttributes = br.ReadInt32();
+		}
+	}
+
+	public class MsgClientGetFriendsWhoPlayGame : ISteamSerializableMessage
+	{
+		public EMsg GetEMsg() { return EMsg.ClientGetFriendsWhoPlayGame; }
+
+		// Static size: 8
+		public ulong GameId { get; set; }
+
+		public MsgClientGetFriendsWhoPlayGame()
+		{
+			GameId = 0;
+		}
+
+		public void Serialize(Stream stream)
+		{
+			BinaryWriterEx bw = new BinaryWriterEx( stream );
+
+			bw.Write( GameId );
+
+		}
+
+		public void Deserialize( Stream stream )
+		{
+			BinaryReaderEx br = new BinaryReaderEx( stream );
+
+			GameId = br.ReadUInt64();
+		}
+	}
+
+	public class MsgClientGetFriendsWhoPlayGameResponse : ISteamSerializableMessage
+	{
+		public EMsg GetEMsg() { return EMsg.ClientGetFriendsWhoPlayGameResponse; }
+
+		// Static size: 4
+		public EResult Result { get; set; }
+		// Static size: 8
+		public ulong GameId { get; set; }
+		// Static size: 4
+		public uint CountFriends { get; set; }
+
+		public MsgClientGetFriendsWhoPlayGameResponse()
+		{
+			Result = 0;
+			GameId = 0;
+			CountFriends = 0;
+		}
+
+		public void Serialize(Stream stream)
+		{
+			BinaryWriterEx bw = new BinaryWriterEx( stream );
+
+			bw.Write( (int)Result );
+			bw.Write( GameId );
+			bw.Write( CountFriends );
+
+		}
+
+		public void Deserialize( Stream stream )
+		{
+			BinaryReaderEx br = new BinaryReaderEx( stream );
+
+			Result = (EResult)br.ReadInt32();
+			GameId = br.ReadUInt64();
+			CountFriends = br.ReadUInt32();
+		}
+	}
+
 }
