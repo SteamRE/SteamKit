@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using System.IO.Compression;
+using System.Security.Cryptography;
 
 namespace SteamKit2
 {
@@ -198,6 +199,7 @@ namespace SteamKit2
             ContentServerClient client;
             TcpSocket Socket { get { return client.Socket; } }
 
+            static readonly byte[] aesIV = new byte[ 16 ];
 
             internal StorageSession( ContentServerClient cli, uint depotId, uint depotVersion, Credentials credentials )
             {
@@ -365,7 +367,7 @@ namespace SteamKit2
                 return fileIdList;
             }
 
-            public byte[] DownloadFileParts( Steam2Manifest.Node file, uint filePart, uint numParts, DownloadPriority priority )
+            public byte[] DownloadFileParts( Steam2Manifest.Node file, uint filePart, uint numParts, DownloadPriority priority, byte[] cryptKey )
             {
                 this.SendCommand(
                     7, // download file
@@ -390,7 +392,6 @@ namespace SteamKit2
                 MemoryStream ms = new MemoryStream();
                 for ( int x = 0 ; x < numChunks ; ++x )
                 {
-
                     uint storId2 = NetHelpers.EndianSwap( this.Socket.Reader.ReadUInt32() );
                     uint msgId2 = NetHelpers.EndianSwap( this.Socket.Reader.ReadUInt32() );
                     uint chunkLen = NetHelpers.EndianSwap( this.Socket.Reader.ReadUInt32() );
@@ -402,32 +403,36 @@ namespace SteamKit2
                     if ( chunkLen == 0 )
                         continue;
 
-                    byte[] chunk = this.Socket.Reader.ReadBytes( ( int )chunkLen );
+                    byte[] chunk = null;
                     int len = 0;
 
                     if ( fileMode == FileMode.Compressed )
                     {
-                        using ( MemoryStream chunkStream = new MemoryStream( chunk ) )
-                        using ( DeflateStream ds = new DeflateStream( chunkStream, CompressionMode.Decompress ) )
-                        {
-                            // skip zlib header
-                            chunkStream.Seek( 2, SeekOrigin.Begin );
-
-                            byte[] decomp = new byte[ file.Parent.BlockSize ];
-                            len = ds.Read( decomp, 0, decomp.Length );
-
-                            chunk = decomp;
-
-                        }
+                        chunk = this.Socket.Reader.ReadBytes( ( int )chunkLen );
+                        len = DecompressFileChunk( ref chunk, ( int )file.Parent.BlockSize );
                     }
-                    else if ( fileMode == FileMode.None )
+                    else if ( fileMode == FileMode.Encrypted )
                     {
-                        len = chunk.Length;
+                        len = DecryptFileChunk( out chunk, ( int )chunkLen, cryptKey );         
                     }
-                    else
+                    else if ( fileMode == FileMode.EncryptedAndCompressed )
                     {
-                        throw new NotImplementedException( "ContentServerClient does not support encrypted or encrypted and compressed files!" );
-                    }
+                        // Account for 2 integers before the encrypted data
+                        chunkLen -= 8;
+
+                        // Skip first integer (length of the encrypted data)
+                        this.Socket.Reader.ReadInt32();
+                        // Length of decrypted and decompressed data
+                        int plainLen = this.Socket.Reader.ReadInt32();
+
+                        DecryptFileChunk( out chunk, ( int )chunkLen, cryptKey );
+                        len = DecompressFileChunk( ref chunk, plainLen );
+                     }
+                     else if ( fileMode == FileMode.None )
+                     {
+                         chunk = this.Socket.Reader.ReadBytes( ( int )chunkLen );
+                         len = chunk.Length;
+                     }
 
                     ms.Write( chunk, 0, len );
                 }
@@ -438,13 +443,22 @@ namespace SteamKit2
 
                 return data;
             }
+            public byte[] DownloadFileParts( Steam2Manifest.Node file, uint filePart, uint numParts, DownloadPriority priority )
+            {
+                return DownloadFileParts( file, filePart, numParts, priority, null );
+            }
             public byte[] DownloadFileParts( Steam2Manifest.Node file, uint filePart, uint numParts )
             {
                 return DownloadFileParts( file, filePart, numParts, DownloadPriority.Low );
             }
 
-            public byte[] DownloadFile( Steam2Manifest.Node file, DownloadPriority priority )
+            public byte[] DownloadFile( Steam2Manifest.Node file, DownloadPriority priority, byte[] cryptKey )
             {
+                if ( ( file.Attributes & Steam2Manifest.Node.Attribs.EncryptedFile ) != 0 && cryptKey == null )
+                {
+                    throw new Steam2Exception( string.Format( "AES encryption key required for file: {0}", file.FullName ) );
+                }
+
                 const uint MaxParts = 16;
 
                 uint numFileparts = ( uint )Math.Ceiling( ( float )file.SizeOrCount / ( float )file.Parent.BlockSize );
@@ -454,13 +468,17 @@ namespace SteamKit2
 
                 for ( uint x = 0 ; x < numChunks ; ++x )
                 {
-                    byte[] filePart = DownloadFileParts( file, x * MaxParts, MaxParts, priority );
+                    byte[] filePart = DownloadFileParts( file, x * MaxParts, MaxParts, priority, cryptKey );
 
                     ms.Write( filePart, 0, filePart.Length );
                 }
 
                 return ms.ToArray();
             }
+            public byte[] DownloadFile( Steam2Manifest.Node file, DownloadPriority priority )
+            {
+                return DownloadFile( file, priority, null );
+            }         
             public byte[] DownloadFile( Steam2Manifest.Node file )
             {
                 return DownloadFile( file, DownloadPriority.Low );
@@ -470,6 +488,52 @@ namespace SteamKit2
             bool SendCommand( byte cmd, params object[] args )
             {
                 return this.client.SendCommand( cmd, args );
+            }
+
+            int DecompressFileChunk( ref byte[] chunk, int blockSize )
+            {
+                using ( MemoryStream chunkStream = new MemoryStream( chunk ) )
+                using ( DeflateStream ds = new DeflateStream( chunkStream, CompressionMode.Decompress ) )
+                {
+                    // skip zlib header
+                    chunkStream.Seek( 2, SeekOrigin.Begin );
+
+                    byte[] decomp = new byte[ blockSize ];
+                    int len = ds.Read( decomp, 0, decomp.Length );
+
+                    chunk = decomp;
+                    return len;
+                }
+            }
+            int DecryptFileChunk( out byte[] chunk, int chunkLen, byte[] cryptKey )
+            {
+                // Round up to nearest AES block size (16 bytes)
+                int decryptLen = ( chunkLen + 15 ) & ~15;
+                chunk = new byte[ decryptLen ];
+
+                int toRead = chunkLen;
+                while ( toRead > 0 )
+                {
+                    toRead -= this.Socket.Reader.Read( chunk, chunkLen - toRead, toRead );
+                }
+
+                using ( MemoryStream chunkStream = new MemoryStream( chunk ) )
+                {
+                    RijndaelManaged aes = new RijndaelManaged();
+                    aes.Mode = CipherMode.CFB;
+                    aes.BlockSize = aes.KeySize = 128;
+                    aes.Padding = PaddingMode.None;
+
+                    using ( ICryptoTransform aesTransform = aes.CreateDecryptor( cryptKey, aesIV ) )
+                    using ( CryptoStream ds = new CryptoStream( chunkStream, aesTransform, CryptoStreamMode.Read ) )
+                    {
+                        byte[] decrypt = new byte[ chunkLen ];
+                        int len = ds.Read( decrypt, 0, decrypt.Length );
+
+                        chunk = decrypt;
+                        return len;
+                    }
+                }
             }
         }
 
