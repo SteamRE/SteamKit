@@ -11,7 +11,7 @@ enum EGCMsg
 
 class MsgGCHdrProtoBuf
 {
-	EGCMsg msg = EGCMsg::Invalid;
+	protomask EGCMsg msg = EGCMsg::Invalid;
 	int headerLength;
 
 	proto<headerLength> SteamKit2.GC.CMsgProtoBufHeader protoHeader;
@@ -20,4 +20,9 @@ class MsgGCHdrProtoBuf
 class MsgGCStartupCheck<EGCMsg::StartupCheck>
 {
 	proto SteamKit2.GC.CMsgStartupCheck proto;
+}
+
+class MsgGCStartupCheckResponse<EGCMsg::StartupCheckResponse>
+{
+	proto SteamKit2.GC.CMsgStartupCheckResponse proto;
 }
