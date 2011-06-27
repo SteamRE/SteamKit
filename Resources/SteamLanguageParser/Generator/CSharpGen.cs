@@ -55,6 +55,17 @@ namespace SteamLanguageParser
             sb.AppendLine(padding + "\tEMsg GetEMsg();");
             sb.AppendLine(padding + "}");
 
+
+            sb.AppendLine( padding + "public interface IGCSerializableHeader : ISteamSerializable" );
+            sb.AppendLine( padding + "{" );
+            sb.AppendLine( padding + "\tvoid SetEMsg( EGCMsg msg );" );
+            sb.AppendLine( padding + "}" );
+
+            sb.AppendLine( padding + "public interface IGCSerializableMessage : ISteamSerializable" );
+            sb.AppendLine( padding + "{" );
+            sb.AppendLine( padding + "\tEGCMsg GetEMsg();" );
+            sb.AppendLine( padding + "}" );
+
             sb.AppendLine();
         }
 
@@ -161,11 +172,21 @@ namespace SteamLanguageParser
 
             if (cnode.Ident != null)
             {
-                parent = "ISteamSerializableMessage";
+                if ( cnode.Name.Contains( "MsgGC" ) )
+                {
+                    parent = "IGCSerializableMessage";
+                }
+                else
+                {
+                    parent = "ISteamSerializableMessage";
+                }
             }
             else if (cnode.Name.Contains("Hdr"))
             {
-                parent = "ISteamSerializableHeader";
+                if ( cnode.Name.Contains( "MsgGC" ) )
+                    parent = "IGCSerializableHeader";
+                else
+                    parent = "ISteamSerializableHeader";
             }
 
             if ( cnode.Name.Contains( "Hdr" ) )
@@ -183,13 +204,29 @@ namespace SteamLanguageParser
 
             if (cnode.Ident != null)
             {
-                sb.AppendLine(padding + "public EMsg GetEMsg() { return " + EmitType(cnode.Ident) + "; }");
-                sb.AppendLine();
+                if ( cnode.Name.Contains( "MsgGC" ) )
+                {
+                    sb.AppendLine( padding + "public EGCMsg GetEMsg() { return " + EmitType( cnode.Ident ) + "; }" );
+                    sb.AppendLine();
+                }
+                else
+                {
+                    sb.AppendLine( padding + "public EMsg GetEMsg() { return " + EmitType( cnode.Ident ) + "; }" );
+                    sb.AppendLine();
+                }
             }
             else if (cnode.Name.Contains("Hdr"))
             {
-                sb.AppendLine(padding + "public void SetEMsg( EMsg msg ) { this.Msg = msg; }");
-                sb.AppendLine();
+                if ( cnode.Name.Contains( "MsgGC" ) )
+                {
+                    sb.AppendLine( padding + "public void SetEMsg( EGCMsg msg ) { this.Msg = msg; }" );
+                    sb.AppendLine();
+                }
+                else
+                {
+                    sb.AppendLine( padding + "public void SetEMsg( EMsg msg ) { this.Msg = msg; }" );
+                    sb.AppendLine();
+                }
             }
         }
 

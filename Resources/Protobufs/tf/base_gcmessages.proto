@@ -1,5 +1,3 @@
-option cc_generic_services = false;
-
 import "steammessages.proto";
 
 message CSOPartyInvite {
