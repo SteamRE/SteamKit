@@ -17,6 +17,14 @@ namespace SteamKit2
 	{
 		EMsg GetEMsg();
 	}
+	public interface IGCSerializableHeader : ISteamSerializable
+	{
+		void SetEMsg( EGCMsg msg );
+	}
+	public interface IGCSerializableMessage : ISteamSerializable
+	{
+		EGCMsg GetEMsg();
+	}
 
 	public enum EMsg
 	{
@@ -957,19 +965,19 @@ namespace SteamKit2
 		// Static size: 4
 		public int HeaderLength { get; set; }
 		// Static size: 0
-		public CMsgProtoBufHeader ProtoHeader { get; set; }
+		public SteamKit2.CMsgProtoBufHeader ProtoHeader { get; set; }
 
 		public MsgHdrProtoBuf()
 		{
 			Msg = EMsg.Invalid;
 			HeaderLength = 0;
-			ProtoHeader = new CMsgProtoBufHeader();
+			ProtoHeader = new SteamKit2.CMsgProtoBufHeader();
 		}
 
 		public void Serialize(Stream stream)
 		{
 			MemoryStream msProtoHeader = new MemoryStream();
-			ProtoBuf.Serializer.Serialize<CMsgProtoBufHeader>(msProtoHeader, ProtoHeader);
+			ProtoBuf.Serializer.Serialize<SteamKit2.CMsgProtoBufHeader>(msProtoHeader, ProtoHeader);
 			HeaderLength = (int)msProtoHeader.Length;
 			BinaryWriterEx bw = new BinaryWriterEx( stream );
 
@@ -987,7 +995,81 @@ namespace SteamKit2
 			Msg = (EMsg)MsgUtil.GetMsg( (uint)br.ReadInt32() );
 			HeaderLength = br.ReadInt32();
 			using( MemoryStream msProtoHeader = new MemoryStream( br.ReadBytes( HeaderLength ) ) )
-				ProtoHeader = ProtoBuf.Serializer.Deserialize<CMsgProtoBufHeader>( msProtoHeader );
+				ProtoHeader = ProtoBuf.Serializer.Deserialize<SteamKit2.CMsgProtoBufHeader>( msProtoHeader );
+		}
+	}
+
+	public enum EGCMsg
+	{
+		Invalid = 0,
+		StartupCheck = 1047,
+		StartupCheckResponse = 1048,
+		Max = 1049,
+	}
+	[StructLayout( LayoutKind.Sequential )]
+	public class MsgGCHdrProtoBuf : IGCSerializableHeader
+	{
+		public void SetEMsg( EGCMsg msg ) { this.Msg = msg; }
+
+		// Static size: 4
+		public EGCMsg Msg { get; set; }
+		// Static size: 4
+		public int HeaderLength { get; set; }
+		// Static size: 0
+		public SteamKit2.GC.CMsgProtoBufHeader ProtoHeader { get; set; }
+
+		public MsgGCHdrProtoBuf()
+		{
+			Msg = EGCMsg.Invalid;
+			HeaderLength = 0;
+			ProtoHeader = new SteamKit2.GC.CMsgProtoBufHeader();
+		}
+
+		public void Serialize(Stream stream)
+		{
+			MemoryStream msProtoHeader = new MemoryStream();
+			ProtoBuf.Serializer.Serialize<SteamKit2.GC.CMsgProtoBufHeader>(msProtoHeader, ProtoHeader);
+			HeaderLength = (int)msProtoHeader.Length;
+			BinaryWriterEx bw = new BinaryWriterEx( stream );
+
+			bw.Write( (int)Msg );
+			bw.Write( HeaderLength );
+			bw.Write( msProtoHeader.ToArray() );
+
+			msProtoHeader.Close();
+		}
+
+		public void Deserialize( Stream stream )
+		{
+			BinaryReaderEx br = new BinaryReaderEx( stream );
+
+			Msg = (EGCMsg)br.ReadInt32();
+			HeaderLength = br.ReadInt32();
+			using( MemoryStream msProtoHeader = new MemoryStream( br.ReadBytes( HeaderLength ) ) )
+				ProtoHeader = ProtoBuf.Serializer.Deserialize<SteamKit2.GC.CMsgProtoBufHeader>( msProtoHeader );
+		}
+	}
+
+	public class MsgGCStartupCheck : IGCSerializableMessage
+	{
+		public EGCMsg GetEMsg() { return EGCMsg.StartupCheck; }
+
+		// Static size: 0
+		public SteamKit2.GC.CMsgStartupCheck Proto { get; set; }
+
+		public MsgGCStartupCheck()
+		{
+			Proto = new SteamKit2.GC.CMsgStartupCheck();
+		}
+
+		public void Serialize(Stream stream)
+		{
+			ProtoBuf.Serializer.Serialize<SteamKit2.GC.CMsgStartupCheck>(stream, Proto);
+		}
+
+		public void Deserialize( Stream stream )
+		{
+			Proto = ProtoBuf.Serializer.Deserialize<SteamKit2.GC.CMsgStartupCheck>( stream );
 		}
 	}
 
