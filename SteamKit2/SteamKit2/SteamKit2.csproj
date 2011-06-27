@@ -71,6 +71,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Base\GC\SteamMsgBase.cs" />
+    <Compile Include="Base\GC\SteamMsgGC.cs" />
+    <Compile Include="Base\GC\SteamMsgGCSK.cs" />
     <Compile Include="Base\MsgBase.cs" />
     <Compile Include="Blob\BlobReader.cs" />
     <Compile Include="Blob\BlobType.cs" />
