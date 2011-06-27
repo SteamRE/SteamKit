@@ -63,25 +63,38 @@ CCrypto::CCrypto()
 	g_pLogger->LogConsole( "CCrypto::SymmetricDecrypt = 0x%x\n", Decrypt_Orig );
 
 
-	MsgInfo_t *pInfos = (MsgInfo_t *)0x38550B48; // hard coded for now, we'll scan later
-
-	g_pLogger->DeleteFile( "emsg_list.txt", false );
-	g_pLogger->DeleteFile( "emsg_list_detailed.txt", false );
+	MsgInfo_t *pInfos = (MsgInfo_t *)0x38552138; // hard coded for now, we'll scan later
 
 	while ( true )
 	{
-		if ( pInfos->unk != 0 ) // seems all the entries have flags set to 2
+		if ( pInfos->unk != 0 )
 			break;
 
 		eMsgList.insert( MsgPair( pInfos->emsg, pInfos ) );
 
-		g_pLogger->LogFile( "emsg_list.txt", false, "\t%s = %d,\r\n", pInfos->name, pInfos->emsg );
-		g_pLogger->LogFile( "emsg_list_detailed.txt", false, "\t%s = %d, // flags: %d, server type: %d\r\n", pInfos->name, pInfos->emsg, pInfos->flags, pInfos->serverType );
-
 		pInfos++;
 	}
 
-	g_pLogger->LogConsole( "Dumped emsg list!\n" );
+	if ( eMsgList.size() != 0 )
+	{
+		// should only delete our existing files if we have somehting new to dump
+		g_pLogger->DeleteFile( "emsg_list.txt", false );
+		g_pLogger->DeleteFile( "emsg_list_detailed.txt", false );
+
+		for ( MsgList::iterator iter = eMsgList.begin() ; iter != eMsgList.end() ; iter++ )
+		{
+			MsgInfo_t *pInfo = iter->second;
+
+			g_pLogger->LogFile( "emsg_list.txt", false, "\t%s = %d,\r\n", pInfo->name, pInfo->emsg );
+			g_pLogger->LogFile( "emsg_list_detailed.txt", false, "\t%s = %d, // flags: %d, server type: %d\r\n", pInfo->name, pInfo->emsg, pInfo->flags, pInfo->serverType );
+		}
+
+		g_pLogger->LogConsole( "Dumped emsg list! (%d messages)\n", eMsgList.size() );
+	}
+	else
+	{
+		g_pLogger->LogConsole( "Unable to dump emsg list: No messages! (Offset changed?)\n" );
+	}
 
 
 	static bool (__cdecl *encrypt)(const uint8*, uint32, uint8*, uint32*, const uint8*, uint32) = &CCrypto::SymmetricEncrypt;
