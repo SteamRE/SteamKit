@@ -276,3 +276,51 @@ class MsgClientCreateAccountResponse<EMsg::ClientCreateAccountResponse>
 class MsgClientCreateAccount3<EMsg::ClientCreateAccount3>
 {
 };
+
+class MsgClientOGSBeginSession<EMsg::ClientOGSBeginSession>
+{
+	byte accountType;
+	ulong accountId;
+	uint appId;
+	uint timeStarted;
+};
+
+class MsgClientOGSBeginSessionResponse<EMsg::ClientOGSBeginSessionResponse>
+{
+	EResult result;
+	byte collectingAny;
+	byte collectingDetails;
+	ulong sessionId;
+};
+
+class MsgClientOGSEndSession<EMsg::ClientOGSEndSession>
+{
+	ulong sessionId;
+	uint timeEnded;
+	int reasonCode;
+	int countAttributes;
+};
+
+class MsgClientOGSEndSessionResponse<EMsg::ClientOGSEndSessionResponse>
+{
+	EResult result;
+};
+
+
+class MsgClientOGSWriteRow<EMsg::ClientOGSWriteRow>
+{
+	ulong sessionId;
+	int countAttributes;
+};
+
+class MsgClientGetFriendsWhoPlayGame<EMsg::ClientGetFriendsWhoPlayGame>
+{
+	ulong gameId;
+};
+
+class MsgClientGetFriendsWhoPlayGameResponse<EMsg::ClientGetFriendsWhoPlayGameResponse>
+{
+	EResult result;
+	ulong gameId;
+	uint countFriends;
+};
