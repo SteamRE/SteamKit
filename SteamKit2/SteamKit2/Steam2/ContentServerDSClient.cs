@@ -14,6 +14,7 @@ namespace SteamKit2
 {
     public sealed class ContentServer
     {
+        public UInt32 Load { get; set; }
         public IPEndPoint PackageServer { get; set; } // this server supports querying cellid (handshake 3)
         public IPEndPoint StorageServer { get; set; } // this server is used for heavy content bandwidth? (handshake 7)
     }
@@ -109,16 +110,14 @@ namespace SteamKit2
             ContentServer[] serverList = new ContentServer[ numAddrs ];
             for ( int x = 0 ; x < numAddrs ; ++x )
             {
-
-                // this may or may not be a content server id
-                // mystery value for all we know
-                uint contentServerId = ds.ReadUInt32();
+                uint weighedLoad = ds.ReadUInt32();
 
                 IPAddrPort ipAddr = IPAddrPort.Deserialize( ds.ReadBytes( 6 ) );
                 IPAddrPort ipAddr2 = IPAddrPort.Deserialize( ds.ReadBytes( 6 ) );
 
                 serverList[ x ] = new ContentServer()
                 {
+                    Load = weighedLoad,
                     PackageServer = ipAddr,
                     StorageServer = ipAddr2,
                 };
