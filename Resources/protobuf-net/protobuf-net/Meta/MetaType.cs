@@ -633,10 +633,14 @@ namespace ProtoBuf.Meta
                     if (effectiveType == typeof(Guid)) defaultValue = Guid.Empty;
                     break;
             }
-            
-            if ((attrib = GetAttribute(attribs, "System.ComponentModel.DefaultValueAttribute")) != null)
+
+            if ( ( attrib = GetAttribute( attribs, "System.ComponentModel.DefaultValueAttribute" ) ) != null )
             {
-                defaultValue = GetMemberValue(attrib, "Value");
+                defaultValue = GetMemberValue( attrib, "Value" );
+            }
+            else if ( ( attrib = GetAttribute( attribs, "ProtoBuf.ProtoDefaultValueAttribute" ) ) != null )
+            {
+                defaultValue = GetMemberValue( attrib, "Value" );
             }
             ValueMember vm = ((isEnum || normalizedAttribute.Tag > 0))
                 ? new ValueMember(model, type, normalizedAttribute.Tag, member, effectiveType, itemType, defaultType, normalizedAttribute.DataFormat, defaultValue)
