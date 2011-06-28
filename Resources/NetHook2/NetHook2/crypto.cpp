@@ -62,8 +62,15 @@ CCrypto::CCrypto()
 
 	g_pLogger->LogConsole( "CCrypto::SymmetricDecrypt = 0x%x\n", Decrypt_Orig );
 
+	char *pGhettoFunction;
+	steamClientScan.FindFunction(
+		"\x68\x79\x01\x00\x00\x68\x00\x00\x00\x00\xB9\x00\x00\x00\x00\xE8\x00\x00\x00\x00\x68\x00\x00\x00\x00\xE8\x00\x00\x00\x00\x59\xC3",
+		"xxxxxx????x????x????x????x????xx",
+		(void **)&pGhettoFunction
+	);
 
-	MsgInfo_t *pInfos = (MsgInfo_t *)0x38554328; // hard coded for now, we'll scan later
+	MsgInfo_t* pInfos = *(MsgInfo_t **)(pGhettoFunction + 6);
+	g_pLogger->LogConsole( "pGhettoFunction = 0x%x\npInfos = 0x%x\n", pGhettoFunction, pInfos );
 
 	while ( true )
 	{
