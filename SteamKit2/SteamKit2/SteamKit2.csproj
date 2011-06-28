@@ -93,6 +93,8 @@
     <Compile Include="Steam3\Handlers\SteamApps\SteamApps.cs" />
     <Compile Include="Steam3\Handlers\SteamFriends\Callbacks.cs" />
     <Compile Include="Steam3\Handlers\SteamFriends\FriendCache.cs" />
+    <Compile Include="Steam3\Handlers\SteamGameCoordinator\Callbacks.cs" />
+    <Compile Include="Steam3\Handlers\SteamGameCoordinator\SteamGameCoordinator.cs" />
     <Compile Include="Steam3\Handlers\SteamUser\Callbacks.cs" />
     <Compile Include="Steam3\SteamClient\CallbackMsg.cs" />
     <Compile Include="Steam3\SteamClient\Callbacks.cs" />
