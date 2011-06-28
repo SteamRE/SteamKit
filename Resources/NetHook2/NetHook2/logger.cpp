@@ -3,8 +3,7 @@
 
 #include <cstdio>
 #include <ctime>
-
-#include "boost/lexical_cast.hpp"
+#include <sstream>
 
 #include "crypto.h"
 #include "zip.h"
@@ -29,10 +28,9 @@ CLogger::CLogger()
 	time_t currentTime;
 	time( &currentTime );
 
-	m_LogDir = m_RootDir;
-
-	m_LogDir += boost::lexical_cast<std::string>( currentTime );
-	m_LogDir += "\\";
+	std::ostringstream ss;
+	ss << m_RootDir << currentTime << "\\";
+	m_LogDir = ss.str();
 
 	// create the session log directory
 	CreateDirectoryA( m_LogDir.c_str(), NULL );
