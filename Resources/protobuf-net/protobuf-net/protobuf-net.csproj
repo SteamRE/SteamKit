@@ -171,6 +171,7 @@
     <Compile Include="PrefixStyle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProtoContractAttribute.cs" />
+    <Compile Include="ProtoDefaultValueAttribute.cs" />
     <Compile Include="ProtoEnumAttribute.cs" />
     <Compile Include="ProtoException.cs" />
     <Compile Include="ProtoIgnoreAttribute.cs" />
