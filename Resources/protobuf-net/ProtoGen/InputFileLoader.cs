@@ -185,7 +185,7 @@ namespace ProtoBuf.CodeGenerator
                 using (FileStream stream = File.OpenRead(path))
                 {
                     FileDescriptorSet file = Serializer.Deserialize<FileDescriptorSet>(stream);
-                    return file != null;
+                    return file != null && file.file.Count > 0;
                 }
             }
             catch
