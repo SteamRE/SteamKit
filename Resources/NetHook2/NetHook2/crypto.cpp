@@ -63,7 +63,7 @@ CCrypto::CCrypto()
 	g_pLogger->LogConsole( "CCrypto::SymmetricDecrypt = 0x%x\n", Decrypt_Orig );
 
 
-	MsgInfo_t *pInfos = (MsgInfo_t *)0x38552138; // hard coded for now, we'll scan later
+	MsgInfo_t *pInfos = (MsgInfo_t *)0x38554328; // hard coded for now, we'll scan later
 
 	while ( true )
 	{
