@@ -4,9 +4,198 @@ enum EGCMsg
 {
 	Invalid = 0;
 
+	GenericReply = 10;
+
+	SOMsg_Create = 21;
+	SOMsg_Update = 22;
+	SOMsg_Destroy = 23;
+	SOMsg_CacheSubscribed = 24;
+	SOMsg_CacheUnsubscribed = 25;
+	SOMsg_UpdateMultiple = 26;
+
+	AchievementAwarded = 51;
+	ConCommand = 52;
+	StartPlaying = 53;
+	StopPlaying = 54;
+	StartGameserver = 55;
+	StopGameserver = 56;
+	WGRequest = 57;
+	WGResponse = 58;
+	GetUserGameStatsSchema = 59;
+	GetUserGameStatsSchemaResponse = 60;
+	GetUserStatsDEPRECATED = 61;
+	GetUserStatsResponse = 62;
+	AppInfoUpdated = 63;
+	ValidateSession = 64;
+	ValidateSessionResponse = 65;
+	LookupAccountFromInput = 66;
+	SendHTTPRequest = 67;
+	SendHTTPRequestResponse = 68;
+	PreTestSetup = 69;
+	RecordSupportAction = 70;
+	GetAccountDetails = 71;
+	SendInterAppMessage = 72;
+	ReceiveInterAppMessage = 73;
+	FindAccounts = 74;
+	PostAlert = 75;
+	GetLicenses = 76;
+	GetUserStats = 77;
+	GetCommands = 78;
+	GetCommandsResponse = 79;
+	AddFreeLicense = 80;
+	AddFreeLicenseResponse = 81;
+
+	WebAPIRegisterInterfaces = 101;
+	WebAPIJobRequest = 102;
+	WebAPIRegistrationRequested = 103;
+
+	MemCachedGet = 200;
+	MemCachedGetResponse = 201;
+	MemCachedSet = 202;
+	MemCachedDelete = 203;
+
+	SetItemPosition = 1001;
+	Craft = 1002;
+	CraftResponse = 1003;
+	Delete = 1004;
+	VerifyCacheSubscription = 1005;
+	NameItem = 1006;
+	DecodeItem = 1007;
+	DecodeItemResponse = 1008;
+	PaintItem = 1009;
+	PaintItemResponse = 1010;
+	GoldenWrenchBroadcast = 1011;
+	MOTDRequest = 1012;
+	MOTDRequestResponse = 1013;
+	AddItemToSocket = 1014;
+	AddItemToSocketResponse = 1015;
+	AddSocketToBaseItem = 1016;
+	AddSocketToItem = 1017;
+	AddSocketToItemResponse = 1018;
+	NameBaseItem = 1019;
+	NameBaseItemResponse = 1020;
+	RemoveSocketItem = 1021;
+	RemoveSocketItemResponse = 1022;
+	CustomizeItemTexture = 1023;
+	CustomizeItemTextureResponse = 1024;
+	UseItemRequest = 1025;
+	UseItemResponse = 1026;
+	GiftedItems = 1027;
+	SpawnItem = 1028;
+	RespawnPostLoadoutChange = 1029;
+	RemoveItemName = 1030;
+	RemoveItemPaint = 1031;
+	GiftWrapItem = 1032;
+	GiftWrapItemResponse = 1033;
+	DeliverGift = 1034;
+	DeliverGiftResponseGiver = 1035;
+	DeliverGiftResponseReceiver = 1036;
+	UnwrapGiftRequest = 1037;
+	UnwrapGiftResponse = 1038;
+	SetItemStyle = 1039;
+	UsedClaimCodeItem = 1040;
+	SortItems = 1041;
+	RevolvingLootList = 1042;
+	LookupAccount = 1043;
+	LookupAccountResponse = 1044;
+	LookupAccountName = 1045;
+	LookupAccountNameResponse = 1046;
 	StartupCheck = 1047;
 	StartupCheckResponse = 1048;
+	UpdateItemSchema = 1049;
+	RequestInventoryRefresh = 1050;
 
+	Trading_InitiateTradeRequest = 1501;
+	Trading_InitiateTradeResponse = 1502;
+	Trading_StartSession = 1503;
+	Trading_SetItem = 1504;
+	Trading_RemoveItem = 1505;
+	Trading_UpdateTradeInfo = 1506;
+	Trading_SetReadiness = 1507;
+	Trading_ReadinessResponse = 1508;
+	Trading_SessionClosed = 1509;
+	Trading_CancelSession = 1510;
+	Trading_TradeChatMsg = 1511;
+	Trading_ConfirmOffer = 1512;
+	Trading_TradeTypingChatMsg = 1513;
+
+	ServerBrowser_FavoriteServer = 1601;
+	ServerBrowser_BlacklistServer = 1602;
+
+	Dev_NewItemRequest = 2001;
+	Dev_NewItemRequestResponse = 2002;
+
+	StoreGetUserData = 2500;
+	StoreGetUserDataResponse = 2501;
+	StorePurchaseInit = 2502;
+	StorePurchaseInitResponse = 2503;
+	StorePurchaseFinalize = 2504;
+	StorePurchaseFinalizeResponse = 2505;
+	StorePurchaseCancel = 2506;
+	StorePurchaseCancelResponse = 2507;
+	StorePurchaseQueryTxn = 2508;
+	StorePurchaseQueryTxnResponse = 2509;
+
+	SystemMessage = 3001;
+
+	ReportWarKill = 5001;
+
+	VoteKickBanPlayer = 5018;
+	VoteKickBanPlayerResult = 5019;
+	KickPlayer = 5020;
+	StartedTraining = 5021;
+	FreeTrial_ChooseMostHelpfulFriend = 5022;
+	RequestTF2Friends = 5023;
+	RequestTF2FriendsResponse = 5024;
+	Replay_UploadedToYouTube = 5025;
+	Replay_SubmitContestEntry = 5026;
+	Replay_SubmitContestEntryResponse = 5027;
+
+	Coaching_AddToCoaches = 5200;
+	Coaching_AddToCoachesResponse = 5201;
+	Coaching_RemoveFromCoaches = 5202;
+	Coaching_RemoveFromCoachesResponse = 5203;
+	Coaching_FindCoach = 5204;
+	Coaching_FindCoachResponse = 5205;
+	Coaching_AskCoach = 5206;
+	Coaching_AskCoachResponse = 5207;
+	Coaching_CoachJoinGame = 5208;
+	Coaching_CoachJoining = 5209;
+	Coaching_CoachJoined = 5210;
+	Coaching_LikeCurrentCoach = 5211;
+	Coaching_RemoveCurrentCoach = 5212;
+	Coaching_AlreadyRatedCoach = 5213;
+
+	Duel_Request = 5500;
+	Duel_Response = 5501;
+	Duel_Results = 5502;
+	Duel_Status = 5503;
+
+	Halloween_ReservedItem = 5600;
+	Halloween_GrantItem = 5601;
+	Halloween_GrantItemResponse = 5604;
+	Halloween_Cheat_QueryResponse = 5605;
+	Halloween_ItemClaimed = 5606;
+
+	GameServer_LevelInfo = 5700;
+	GameServer_AuthChallenge = 5701;
+	GameServer_AuthChallengeResponse = 5702;
+	GameServer_CreateIdentity = 5703;
+	GameServer_CreateIdentityResponse = 5704;
+	GameServer_List = 5705;
+	GameServer_ListResponse = 5706;
+	GameServer_AuthResult = 5707;
+	GameServer_ResetIdentity = 5708;
+	GameServer_ResetIdentityResponse = 5709;
+
+	QP_ScoreServers = 5800;
+	QP_ScoreServersResponse = 5701;
+
+	PickupItemEligibility_Query = 6000;
+	Dev_GrantWarKill = 6001;
+
+	IncrementKillCountAttribute = 6100;
+	IncrementKillCountResponse = 6101;
 };
 
 class MsgGCHdrProtoBuf
