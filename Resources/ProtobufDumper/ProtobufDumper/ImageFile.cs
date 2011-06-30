@@ -363,17 +363,35 @@ namespace ProtobufDumper
             foreach ( FieldDescriptorProto field in proto.field )
             {
                 string type = GetType( field.type );
+                bool isEnum = false;
 
-                if ( type.Equals( "message" ) || type.Equals( "enum" ) )
+                if ( type.Equals( "message" ) )
                 {
+                    type = field.type_name;
+                }
+                
+                if ( type.Equals( "enum" ) )
+                {
+                    isEnum = true;
                     type = field.type_name;
                 }
 
                 string parameters = "";
 
+
                 if ( !String.IsNullOrEmpty( field.default_value ) )
                 {
                     parameters += " [default = " + field.default_value + "]";
+                }
+
+                if ( isEnum )
+                {
+                    var potEnum = proto.enum_type.Find( protoEnum => type.EndsWith( protoEnum.name ));
+
+                    if ( potEnum != null )
+                    {
+                        parameters = " [default = " + potEnum.value[ 0 ].name + "]";
+                    }
                 }
 
                 sb.AppendLine( levelspace + "\t" + GetLabel( field.label ) + " " + type + " " + field.name + " = " + field.number + parameters + ";" );

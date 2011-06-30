@@ -41,10 +41,6 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="protobuf-net, Version=2.0.0.280, Culture=neutral, PublicKeyToken=257b51d87d2e4d67, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\SteamKit2\protobuf-net.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -64,6 +60,12 @@
     <Compile Include="output.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\protobuf-net\protobuf-net\protobuf-net.csproj">
+      <Project>{8374E4D7-2A91-48F1-9360-09B09CF27C3F}</Project>
+      <Name>protobuf-net</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
