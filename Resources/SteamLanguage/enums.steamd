@@ -163,3 +163,50 @@ enum EIntroducerRouting
 	P2PVoiceChat = 1;
 	P2PNetworking = 2;
 };
+
+enum EServerFlags
+{
+	None = 0;
+	Active = 1;
+	Secure = 2;
+	Dedicated = 4;
+	Linux = 8;
+	Pssworded = 16;
+	Private = 32;
+};
+
+enum EDenyReason
+{
+	InvalidVersion = 1;
+	Generic = 2;
+	NotLoggedOn = 3;
+	NoLicense = 4;
+	Cheater = 5;
+	LoggedInElseWhere = 6;
+	UnknownText = 7;
+	IncompatibleAnticheat = 8;
+	MemoryCorruption = 9;
+	IncompatibleSoftware = 10;
+	SteamConnectionLost = 11;
+	SteamConnectionError = 12;
+	SteamResponseTimedOut = 13;
+	SteamValidationStalled = 14;
+	SteamOwnerLeftGuestUser = 15;
+};
+
+enum EClanRank
+{
+	None = 0;
+	Owner = 1;
+	Officer = 2;
+	Member = 3;
+};
+
+enum EClanRelationship
+{
+	None = 0;
+	Blocked = 1;
+	Invited = 2;
+	Member = 3;
+	Kicked = 4;
+};
