@@ -12,14 +12,22 @@ namespace SteamKit2
         /// </summary>
         public class MessageCallback : CallbackMsg
         {
+            EGCMsg eMsg;
             /// <summary>
             /// Gets the game coordinator message type.
             /// </summary>
-            public EGCMsg EMsg { get; private set; }
+            public EGCMsg EMsg { get { return MsgUtil.GetGCMsg( eMsg ); } }
             /// <summary>
             /// Gets the AppID of the game coordinator the message is from.
             /// </summary>
             public uint AppID { get; private set; }
+            /// <summary>
+            /// Gets a value indicating whether this message is protobuf'd.
+            /// </summary>
+            /// <value>
+            ///   <c>true</c> if this instance is protobuf'd; otherwise, <c>false</c>.
+            /// </value>
+            public bool IsProto { get { return MsgUtil.IsProtoBuf( eMsg ); } }
 
             /// <summary>
             /// Gets the actual message.
@@ -28,7 +36,7 @@ namespace SteamKit2
 
             internal MessageCallback( MsgClientFromGC gcMsg, byte[] payload )
             {
-                this.EMsg = ( EGCMsg )gcMsg.GCEMsg;
+                this.eMsg = ( EGCMsg )gcMsg.GCEMsg;
                 this.AppID = gcMsg.AppId;
 
                 this.Payload = payload;
