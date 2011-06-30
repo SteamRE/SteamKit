@@ -280,7 +280,7 @@ class MsgClientCreateAccount3<EMsg::ClientCreateAccount3>
 class MsgClientOGSBeginSession<EMsg::ClientOGSBeginSession>
 {
 	byte accountType;
-	ulong accountId;
+	steamidmarshal ulong accountId;
 	uint appId;
 	uint timeStarted;
 };
@@ -323,4 +323,65 @@ class MsgClientGetFriendsWhoPlayGameResponse<EMsg::ClientGetFriendsWhoPlayGameRe
 	EResult result;
 	ulong gameId;
 	uint countFriends;
+};
+
+class MsgGSPerformHardwareSurvey<EMsg::GSPerformHardwareSurvey>
+{
+	uint flags;
+};
+
+class MsgClientTicketAuthComplete<EMsg::ClientTicketAuthComplete>
+{
+	proto CMsgClientTicketAuthComplete proto;
+};
+
+class MsgGSGetPlayStatsResponse<EMsg::GSGetPlayStatsResponse>
+{
+	EResult result;
+	int rank;
+	uint lifetimeConnects;
+	uint lifetimeMinutesPlayed;
+};
+
+class MsgGSGetReputationResponse<EMsg::GSGetReputationResponse>
+{
+	EResult result;
+	uint reputationScore;
+	byte banned;
+	uint bannedIp;
+	ushort bannedPort;
+	ulong bannedGameId;
+	uint timeBanExpires;
+};
+
+class MsgGSDeny<EMsg::GSDeny>
+{
+	steamidmarshal ulong steamId;
+	EDenyReason denyReason;
+};
+
+class MsgGSApprove<EMsg::GSApprove>
+{
+	steamidmarshal ulong steamId;
+};
+
+class MsgGSKick<EMsg::GSKick>
+{
+	steamidmarshal ulong steamId;
+	EDenyReason denyReason;
+	int waitTilMapChange;
+};
+
+class MsgGSGetUserGroupStatus<EMsg::GSGetUserGroupStatus>
+{
+	steamidmarshal ulong steamIdUser;
+	steamidmarshal ulong steamIdGroup;
+};
+
+class MsgGSGetUserGroupStatusResponse<EMsg::GSGetUserGroupStatusResponse>
+{
+	steamidmarshal ulong steamIdUser;
+	steamidmarshal ulong steamIdGroup;
+	EClanRelationship clanRelationship;
+	EClanRank clanRank;
 };
