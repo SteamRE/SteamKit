@@ -3,16 +3,42 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProtobufDumper", "ProtobufDumper\ProtobufDumper.csproj", "{8BFDE24C-E1D5-436B-8C2D-25700491F82B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "protobuf-net", "..\protobuf-net\protobuf-net\protobuf-net.csproj", "{8374E4D7-2A91-48F1-9360-09B09CF27C3F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		iOS|Any CPU = iOS|Any CPU
+		Net20|Any CPU = Net20|Any CPU
+		Profile|Any CPU = Profile|Any CPU
 		Release|Any CPU = Release|Any CPU
+		Silverlight2|Any CPU = Silverlight2|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{8BFDE24C-E1D5-436B-8C2D-25700491F82B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8BFDE24C-E1D5-436B-8C2D-25700491F82B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BFDE24C-E1D5-436B-8C2D-25700491F82B}.iOS|Any CPU.ActiveCfg = Release|Any CPU
+		{8BFDE24C-E1D5-436B-8C2D-25700491F82B}.iOS|Any CPU.Build.0 = Release|Any CPU
+		{8BFDE24C-E1D5-436B-8C2D-25700491F82B}.Net20|Any CPU.ActiveCfg = Release|Any CPU
+		{8BFDE24C-E1D5-436B-8C2D-25700491F82B}.Net20|Any CPU.Build.0 = Release|Any CPU
+		{8BFDE24C-E1D5-436B-8C2D-25700491F82B}.Profile|Any CPU.ActiveCfg = Release|Any CPU
+		{8BFDE24C-E1D5-436B-8C2D-25700491F82B}.Profile|Any CPU.Build.0 = Release|Any CPU
 		{8BFDE24C-E1D5-436B-8C2D-25700491F82B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8BFDE24C-E1D5-436B-8C2D-25700491F82B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BFDE24C-E1D5-436B-8C2D-25700491F82B}.Silverlight2|Any CPU.ActiveCfg = Release|Any CPU
+		{8BFDE24C-E1D5-436B-8C2D-25700491F82B}.Silverlight2|Any CPU.Build.0 = Release|Any CPU
+		{8374E4D7-2A91-48F1-9360-09B09CF27C3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8374E4D7-2A91-48F1-9360-09B09CF27C3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8374E4D7-2A91-48F1-9360-09B09CF27C3F}.iOS|Any CPU.ActiveCfg = iOS|Any CPU
+		{8374E4D7-2A91-48F1-9360-09B09CF27C3F}.iOS|Any CPU.Build.0 = iOS|Any CPU
+		{8374E4D7-2A91-48F1-9360-09B09CF27C3F}.Net20|Any CPU.ActiveCfg = Net20|Any CPU
+		{8374E4D7-2A91-48F1-9360-09B09CF27C3F}.Net20|Any CPU.Build.0 = Net20|Any CPU
+		{8374E4D7-2A91-48F1-9360-09B09CF27C3F}.Profile|Any CPU.ActiveCfg = Profile|Any CPU
+		{8374E4D7-2A91-48F1-9360-09B09CF27C3F}.Profile|Any CPU.Build.0 = Profile|Any CPU
+		{8374E4D7-2A91-48F1-9360-09B09CF27C3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8374E4D7-2A91-48F1-9360-09B09CF27C3F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8374E4D7-2A91-48F1-9360-09B09CF27C3F}.Silverlight2|Any CPU.ActiveCfg = Silverlight2|Any CPU
+		{8374E4D7-2A91-48F1-9360-09B09CF27C3F}.Silverlight2|Any CPU.Build.0 = Silverlight2|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
