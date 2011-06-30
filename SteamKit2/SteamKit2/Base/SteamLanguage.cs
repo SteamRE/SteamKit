@@ -646,6 +646,54 @@ namespace SteamKit2
 		P2PNetworking = 2,
 		Max = 3,
 	}
+	[Flags]
+	public enum EServerFlags
+	{
+		None = 0,
+		Active = 1,
+		Secure = 2,
+		Dedicated = 4,
+		Linux = 8,
+		Pssworded = 16,
+		Private = 32,
+		Max = 33,
+	}
+	public enum EDenyReason
+	{
+		InvalidVersion = 1,
+		Generic = 2,
+		NotLoggedOn = 3,
+		NoLicense = 4,
+		Cheater = 5,
+		LoggedInElseWhere = 6,
+		UnknownText = 7,
+		IncompatibleAnticheat = 8,
+		MemoryCorruption = 9,
+		IncompatibleSoftware = 10,
+		SteamConnectionLost = 11,
+		SteamConnectionError = 12,
+		SteamResponseTimedOut = 13,
+		SteamValidationStalled = 14,
+		SteamOwnerLeftGuestUser = 15,
+		Max = 16,
+	}
+	public enum EClanRank
+	{
+		None = 0,
+		Owner = 1,
+		Officer = 2,
+		Member = 3,
+		Max = 4,
+	}
+	public enum EClanRelationship
+	{
+		None = 0,
+		Blocked = 1,
+		Invited = 2,
+		Member = 3,
+		Kicked = 4,
+		Max = 5,
+	}
 	public enum EUdpPacketType
 	{
 		Invalid = 0,
@@ -1264,6 +1312,52 @@ namespace SteamKit2
 		public void Deserialize( Stream stream )
 		{
 			Proto = ProtoBuf.Serializer.Deserialize<SteamKit2.GC.CMsgStartupCheckResponse>( stream );
+		}
+	}
+
+	public class MsgGCGetCommandList : IGCSerializableMessage
+	{
+		public EGCMsg GetEMsg() { return EGCMsg.GetCommands; }
+
+		// Static size: 0
+		public SteamKit2.GC.CMsgGCGetCommandList Proto { get; set; }
+
+		public MsgGCGetCommandList()
+		{
+			Proto = new SteamKit2.GC.CMsgGCGetCommandList();
+		}
+
+		public void Serialize(Stream stream)
+		{
+			ProtoBuf.Serializer.Serialize<SteamKit2.GC.CMsgGCGetCommandList>(stream, Proto);
+		}
+
+		public void Deserialize( Stream stream )
+		{
+			Proto = ProtoBuf.Serializer.Deserialize<SteamKit2.GC.CMsgGCGetCommandList>( stream );
+		}
+	}
+
+	public class MsgGCGetCommandListResponse : IGCSerializableMessage
+	{
+		public EGCMsg GetEMsg() { return EGCMsg.GetCommandsResponse; }
+
+		// Static size: 0
+		public SteamKit2.GC.CMsgGCGetCommandListResponse Proto { get; set; }
+
+		public MsgGCGetCommandListResponse()
+		{
+			Proto = new SteamKit2.GC.CMsgGCGetCommandListResponse();
+		}
+
+		public void Serialize(Stream stream)
+		{
+			ProtoBuf.Serializer.Serialize<SteamKit2.GC.CMsgGCGetCommandListResponse>(stream, Proto);
+		}
+
+		public void Deserialize( Stream stream )
+		{
+			Proto = ProtoBuf.Serializer.Deserialize<SteamKit2.GC.CMsgGCGetCommandListResponse>( stream );
 		}
 	}
 
@@ -2599,7 +2693,8 @@ namespace SteamKit2
 		// Static size: 1
 		public byte AccountType { get; set; }
 		// Static size: 8
-		public ulong AccountId { get; set; }
+		private ulong accountId;
+		public SteamID AccountId { get { return new SteamID( accountId ); } set { accountId = value.ConvertToUint64(); } }
 		// Static size: 4
 		public uint AppId { get; set; }
 		// Static size: 4
@@ -2608,7 +2703,7 @@ namespace SteamKit2
 		public MsgClientOGSBeginSession()
 		{
 			AccountType = 0;
-			AccountId = 0;
+			accountId = 0;
 			AppId = 0;
 			TimeStarted = 0;
 		}
@@ -2618,7 +2713,7 @@ namespace SteamKit2
 			BinaryWriterEx bw = new BinaryWriterEx( stream );
 
 			bw.Write( AccountType );
-			bw.Write( AccountId );
+			bw.Write( accountId );
 			bw.Write( AppId );
 			bw.Write( TimeStarted );
 
@@ -2629,7 +2724,7 @@ namespace SteamKit2
 			BinaryReaderEx br = new BinaryReaderEx( stream );
 
 			AccountType = br.ReadByte();
-			AccountId = br.ReadUInt64();
+			accountId = br.ReadUInt64();
 			AppId = br.ReadUInt32();
 			TimeStarted = br.ReadUInt32();
 		}
@@ -2845,6 +2940,340 @@ namespace SteamKit2
 			Result = (EResult)br.ReadInt32();
 			GameId = br.ReadUInt64();
 			CountFriends = br.ReadUInt32();
+		}
+	}
+
+	public class MsgGSPerformHardwareSurvey : ISteamSerializableMessage
+	{
+		public EMsg GetEMsg() { return EMsg.GSPerformHardwareSurvey; }
+
+		// Static size: 4
+		public uint Flags { get; set; }
+
+		public MsgGSPerformHardwareSurvey()
+		{
+			Flags = 0;
+		}
+
+		public void Serialize(Stream stream)
+		{
+			BinaryWriterEx bw = new BinaryWriterEx( stream );
+
+			bw.Write( Flags );
+
+		}
+
+		public void Deserialize( Stream stream )
+		{
+			BinaryReaderEx br = new BinaryReaderEx( stream );
+
+			Flags = br.ReadUInt32();
+		}
+	}
+
+	public class MsgClientTicketAuthComplete : ISteamSerializableMessage
+	{
+		public EMsg GetEMsg() { return EMsg.ClientTicketAuthComplete; }
+
+		// Static size: 0
+		public CMsgClientTicketAuthComplete Proto { get; set; }
+
+		public MsgClientTicketAuthComplete()
+		{
+			Proto = new CMsgClientTicketAuthComplete();
+		}
+
+		public void Serialize(Stream stream)
+		{
+			ProtoBuf.Serializer.Serialize<CMsgClientTicketAuthComplete>(stream, Proto);
+		}
+
+		public void Deserialize( Stream stream )
+		{
+			Proto = ProtoBuf.Serializer.Deserialize<CMsgClientTicketAuthComplete>( stream );
+		}
+	}
+
+	public class MsgGSGetPlayStatsResponse : ISteamSerializableMessage
+	{
+		public EMsg GetEMsg() { return EMsg.GSGetPlayStatsResponse; }
+
+		// Static size: 4
+		public EResult Result { get; set; }
+		// Static size: 4
+		public int Rank { get; set; }
+		// Static size: 4
+		public uint LifetimeConnects { get; set; }
+		// Static size: 4
+		public uint LifetimeMinutesPlayed { get; set; }
+
+		public MsgGSGetPlayStatsResponse()
+		{
+			Result = 0;
+			Rank = 0;
+			LifetimeConnects = 0;
+			LifetimeMinutesPlayed = 0;
+		}
+
+		public void Serialize(Stream stream)
+		{
+			BinaryWriterEx bw = new BinaryWriterEx( stream );
+
+			bw.Write( (int)Result );
+			bw.Write( Rank );
+			bw.Write( LifetimeConnects );
+			bw.Write( LifetimeMinutesPlayed );
+
+		}
+
+		public void Deserialize( Stream stream )
+		{
+			BinaryReaderEx br = new BinaryReaderEx( stream );
+
+			Result = (EResult)br.ReadInt32();
+			Rank = br.ReadInt32();
+			LifetimeConnects = br.ReadUInt32();
+			LifetimeMinutesPlayed = br.ReadUInt32();
+		}
+	}
+
+	public class MsgGSGetReputationResponse : ISteamSerializableMessage
+	{
+		public EMsg GetEMsg() { return EMsg.GSGetReputationResponse; }
+
+		// Static size: 4
+		public EResult Result { get; set; }
+		// Static size: 4
+		public uint ReputationScore { get; set; }
+		// Static size: 1
+		public byte Banned { get; set; }
+		// Static size: 4
+		public uint BannedIp { get; set; }
+		// Static size: 2
+		public ushort BannedPort { get; set; }
+		// Static size: 8
+		public ulong BannedGameId { get; set; }
+		// Static size: 4
+		public uint TimeBanExpires { get; set; }
+
+		public MsgGSGetReputationResponse()
+		{
+			Result = 0;
+			ReputationScore = 0;
+			Banned = 0;
+			BannedIp = 0;
+			BannedPort = 0;
+			BannedGameId = 0;
+			TimeBanExpires = 0;
+		}
+
+		public void Serialize(Stream stream)
+		{
+			BinaryWriterEx bw = new BinaryWriterEx( stream );
+
+			bw.Write( (int)Result );
+			bw.Write( ReputationScore );
+			bw.Write( Banned );
+			bw.Write( BannedIp );
+			bw.Write( BannedPort );
+			bw.Write( BannedGameId );
+			bw.Write( TimeBanExpires );
+
+		}
+
+		public void Deserialize( Stream stream )
+		{
+			BinaryReaderEx br = new BinaryReaderEx( stream );
+
+			Result = (EResult)br.ReadInt32();
+			ReputationScore = br.ReadUInt32();
+			Banned = br.ReadByte();
+			BannedIp = br.ReadUInt32();
+			BannedPort = br.ReadUInt16();
+			BannedGameId = br.ReadUInt64();
+			TimeBanExpires = br.ReadUInt32();
+		}
+	}
+
+	public class MsgGSDeny : ISteamSerializableMessage
+	{
+		public EMsg GetEMsg() { return EMsg.GSDeny; }
+
+		// Static size: 8
+		private ulong steamId;
+		public SteamID SteamId { get { return new SteamID( steamId ); } set { steamId = value.ConvertToUint64(); } }
+		// Static size: 4
+		public EDenyReason DenyReason { get; set; }
+
+		public MsgGSDeny()
+		{
+			steamId = 0;
+			DenyReason = 0;
+		}
+
+		public void Serialize(Stream stream)
+		{
+			BinaryWriterEx bw = new BinaryWriterEx( stream );
+
+			bw.Write( steamId );
+			bw.Write( (int)DenyReason );
+
+		}
+
+		public void Deserialize( Stream stream )
+		{
+			BinaryReaderEx br = new BinaryReaderEx( stream );
+
+			steamId = br.ReadUInt64();
+			DenyReason = (EDenyReason)br.ReadInt32();
+		}
+	}
+
+	public class MsgGSApprove : ISteamSerializableMessage
+	{
+		public EMsg GetEMsg() { return EMsg.GSApprove; }
+
+		// Static size: 8
+		private ulong steamId;
+		public SteamID SteamId { get { return new SteamID( steamId ); } set { steamId = value.ConvertToUint64(); } }
+
+		public MsgGSApprove()
+		{
+			steamId = 0;
+		}
+
+		public void Serialize(Stream stream)
+		{
+			BinaryWriterEx bw = new BinaryWriterEx( stream );
+
+			bw.Write( steamId );
+
+		}
+
+		public void Deserialize( Stream stream )
+		{
+			BinaryReaderEx br = new BinaryReaderEx( stream );
+
+			steamId = br.ReadUInt64();
+		}
+	}
+
+	public class MsgGSKick : ISteamSerializableMessage
+	{
+		public EMsg GetEMsg() { return EMsg.GSKick; }
+
+		// Static size: 8
+		private ulong steamId;
+		public SteamID SteamId { get { return new SteamID( steamId ); } set { steamId = value.ConvertToUint64(); } }
+		// Static size: 4
+		public EDenyReason DenyReason { get; set; }
+		// Static size: 4
+		public int WaitTilMapChange { get; set; }
+
+		public MsgGSKick()
+		{
+			steamId = 0;
+			DenyReason = 0;
+			WaitTilMapChange = 0;
+		}
+
+		public void Serialize(Stream stream)
+		{
+			BinaryWriterEx bw = new BinaryWriterEx( stream );
+
+			bw.Write( steamId );
+			bw.Write( (int)DenyReason );
+			bw.Write( WaitTilMapChange );
+
+		}
+
+		public void Deserialize( Stream stream )
+		{
+			BinaryReaderEx br = new BinaryReaderEx( stream );
+
+			steamId = br.ReadUInt64();
+			DenyReason = (EDenyReason)br.ReadInt32();
+			WaitTilMapChange = br.ReadInt32();
+		}
+	}
+
+	public class MsgGSGetUserGroupStatus : ISteamSerializableMessage
+	{
+		public EMsg GetEMsg() { return EMsg.GSGetUserGroupStatus; }
+
+		// Static size: 8
+		private ulong steamIdUser;
+		public SteamID SteamIdUser { get { return new SteamID( steamIdUser ); } set { steamIdUser = value.ConvertToUint64(); } }
+		// Static size: 8
+		private ulong steamIdGroup;
+		public SteamID SteamIdGroup { get { return new SteamID( steamIdGroup ); } set { steamIdGroup = value.ConvertToUint64(); } }
+
+		public MsgGSGetUserGroupStatus()
+		{
+			steamIdUser = 0;
+			steamIdGroup = 0;
+		}
+
+		public void Serialize(Stream stream)
+		{
+			BinaryWriterEx bw = new BinaryWriterEx( stream );
+
+			bw.Write( steamIdUser );
+			bw.Write( steamIdGroup );
+
+		}
+
+		public void Deserialize( Stream stream )
+		{
+			BinaryReaderEx br = new BinaryReaderEx( stream );
+
+			steamIdUser = br.ReadUInt64();
+			steamIdGroup = br.ReadUInt64();
+		}
+	}
+
+	public class MsgGSGetUserGroupStatusResponse : ISteamSerializableMessage
+	{
+		public EMsg GetEMsg() { return EMsg.GSGetUserGroupStatusResponse; }
+
+		// Static size: 8
+		private ulong steamIdUser;
+		public SteamID SteamIdUser { get { return new SteamID( steamIdUser ); } set { steamIdUser = value.ConvertToUint64(); } }
+		// Static size: 8
+		private ulong steamIdGroup;
+		public SteamID SteamIdGroup { get { return new SteamID( steamIdGroup ); } set { steamIdGroup = value.ConvertToUint64(); } }
+		// Static size: 4
+		public EClanRelationship ClanRelationship { get; set; }
+		// Static size: 4
+		public EClanRank ClanRank { get; set; }
+
+		public MsgGSGetUserGroupStatusResponse()
+		{
+			steamIdUser = 0;
+			steamIdGroup = 0;
+			ClanRelationship = 0;
+			ClanRank = 0;
+		}
+
+		public void Serialize(Stream stream)
+		{
+			BinaryWriterEx bw = new BinaryWriterEx( stream );
+
+			bw.Write( steamIdUser );
+			bw.Write( steamIdGroup );
+			bw.Write( (int)ClanRelationship );
+			bw.Write( (int)ClanRank );
+
+		}
+
+		public void Deserialize( Stream stream )
+		{
+			BinaryReaderEx br = new BinaryReaderEx( stream );
+
+			steamIdUser = br.ReadUInt64();
+			steamIdGroup = br.ReadUInt64();
+			ClanRelationship = (EClanRelationship)br.ReadInt32();
+			ClanRank = (EClanRank)br.ReadInt32();
 		}
 	}
 
