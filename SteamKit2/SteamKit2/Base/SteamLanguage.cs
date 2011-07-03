@@ -694,6 +694,19 @@ namespace SteamKit2
 		Kicked = 4,
 		Max = 5,
 	}
+	public enum EAuthSessionResponse
+	{
+		OK = 0,
+		UserNotConnectedToSteam = 1,
+		NoLicenseOrExpired = 2,
+		VACBanned = 3,
+		LoggedInElseWhere = 4,
+		VACCheckTimedOut = 5,
+		AuthTicketCanceled = 6,
+		AuthTicketInvalidAlreadyUsed = 7,
+		AuthTicketInvalid = 8,
+		Max = 9,
+	}
 	public enum EUdpPacketType
 	{
 		Invalid = 0,
