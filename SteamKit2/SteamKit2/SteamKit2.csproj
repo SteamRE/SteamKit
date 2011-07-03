@@ -83,7 +83,7 @@
     <Compile Include="Blob\Parsers\BlobTypedReader.cs" />
     <Compile Include="Blob\Parsers\BlobXmlReader.cs" />
     <Compile Include="Blob\PeekableStream.cs" />
-    <Compile Include="Blob\StreamHelpers.cs" />
+    <Compile Include="Util\StreamHelpers.cs" />
     <Compile Include="Networking\Steam3\UdpPacket.cs" />
     <Compile Include="Steam2\ContentServerClient.cs" />
     <Compile Include="Steam2\ContentServerDSClient.cs" />
@@ -101,6 +101,7 @@
     <Compile Include="Steam3\Handlers\ClientMsgHandler.cs" />
     <Compile Include="Types\AuthBlob.cs" />
     <Compile Include="Types\GameID.cs" />
+    <Compile Include="Types\KeyValue.cs" />
     <Compile Include="Types\Manifest.cs" />
     <Compile Include="Util\DebugLog.cs" />
     <Compile Include="Steam2\ConfigServerClient.cs" />
