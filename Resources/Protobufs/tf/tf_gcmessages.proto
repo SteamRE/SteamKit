@@ -1,5 +1,3 @@
-option cc_generic_services = false;
-
 import "steammessages.proto";
 
 message CMsgTFGoldenWrenchBroadcast {
@@ -184,6 +182,10 @@ message CMsgTFQuickplay_ScoreServersResponse {
 	repeated .CMsgTFQuickplay_ScoreServersResponse.ServerInfo servers = 1;
 }
 
+message CMsgTFQuickplay_PlayerJoining {
+	optional uint32 account_id = 1;
+}
+
 message CMsgGC_GameServer_LevelInfo {
 	optional bool level_loaded = 1;
 	optional string level_name = 2;
@@ -219,7 +221,7 @@ message CMsgGC_GameServer_CreateIdentityResponse {
 	optional bool account_created = 1;
 	optional uint32 game_server_account_id = 2;
 	optional string game_server_identity_token = 3;
-	optional .CMsgGC_GameServer_CreateIdentityResponse.EStatus status = 4;
+	optional .CMsgGC_GameServer_CreateIdentityResponse.EStatus status = 4 [default = kStatus_GenericFailure];
 }
 
 message CMsgGC_GameServer_List {
