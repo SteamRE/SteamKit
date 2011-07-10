@@ -14,6 +14,7 @@ namespace DepotDownloader
     static class ContentDownloader
     {
         const string DEFAULT_DIR = "depots";
+        const int MAX_STORAGE_RETRIES = 500;
 
         static Steam3Session steam3;
 
@@ -108,6 +109,20 @@ namespace DepotDownloader
             return false;
         }
 
+        static bool AccountHasAccess( int depotId )
+        {
+            if ( steam3 == null || steam3.Licenses == null )
+                return CDRManager.SubHasDepot( 0, depotId );
+
+            foreach ( var license in steam3.Licenses )
+            {
+                if ( CDRManager.SubHasDepot( ( int )license.PackageID, depotId ) )
+                    return true;
+            }
+
+            return false;
+        }
+
         public static void Download( int depotId, int depotVersion, int cellId, string username, string password, bool onlyManifest, bool gameServer, bool exclude, string installDir, string[] fileList )
         {
             if ( !CreateDirectories( depotId, depotVersion, ref installDir ) )
@@ -135,27 +150,46 @@ namespace DepotDownloader
                 credentials = GetCredentials( ( uint )depotId, username, password );
             }
 
-            string manifestFile = Path.Combine( installDir, "manifest.bin" );
-            string txtManifest = Path.Combine( installDir, "manifest.txt" );
-
-            ContentServerClient csClient = new ContentServerClient();
-
-            csClient.Connect( contentServer );
-
-
-            ContentServerClient.StorageSession session = null;
-            try
+            if ( !AccountHasAccess( depotId ) )
             {
-                session = csClient.OpenStorage( ( uint )depotId, ( uint )depotVersion, ( uint )cellId, credentials );
-            }
-            catch ( Steam2Exception ex )
-            {
-                Console.WriteLine( "Unable to open storage: " + ex.Message );
+                string contentName = CDRManager.GetDepotName( depotId );
+                Console.WriteLine( "Depot {0} ({1}) is not available from this account.", depotId, contentName );
 
                 if ( steam3 != null )
                     steam3.Disconnect();
 
                 return;
+            }
+
+            string manifestFile = Path.Combine( installDir, "manifest.bin" );
+            string txtManifest = Path.Combine( installDir, "manifest.txt" );
+
+            ContentServerClient csClient = new ContentServerClient();
+
+            ContentServerClient.StorageSession session = null;
+            int retryCount = 0;
+
+            while ( session == null )
+            {
+                try
+                {
+                    csClient.Connect( contentServer );
+                    session = csClient.OpenStorage( ( uint )depotId, ( uint )depotVersion, ( uint )cellId, credentials );
+                }
+                catch ( Steam2Exception ex )
+                {
+                    csClient.Disconnect();
+                    retryCount++;
+
+                    if ( retryCount > MAX_STORAGE_RETRIES )
+                    {
+                        Console.WriteLine( "Unable to open storage: " + ex.Message );
+
+                        if (steam3 != null)
+                            steam3.Disconnect();
+                        return;
+                    }
+                }
             }
 
             using ( session )

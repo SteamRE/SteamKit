@@ -12,6 +12,9 @@ namespace DepotDownloader
     {
         [BlobField( FieldKey = CDRFields.eFieldApplicationsRecord, Depth = 1, Complex = true )]
         public List<App> Apps { get; set; }
+
+        [BlobField( FieldKey = CDRFields.eFieldSubscriptionsRecord, Depth = 1, Complex = true )]
+        public List<Sub> Subs { get; set; }
     }
 
     class App
@@ -33,6 +36,18 @@ namespace DepotDownloader
 
         [BlobField( FieldKey = CDRAppRecordFields.eFieldUserDefinedRecord, Depth = 1 )]
         public Dictionary<string, string> UserDefined { get; private set; }
+
+        [BlobField( FieldKey = CDRAppRecordFields.eFieldBetaVersionId, Depth = 1 )]
+        public int BetaVersion { get; set; }
+    }
+
+    class Sub
+    {
+        [BlobField( FieldKey = CDRSubRecordFields.eFieldSubId, Depth = 1 )]
+        public int SubID { get; set; }
+
+        [BlobField( FieldKey = CDRSubRecordFields.eFieldAppIdsRecord, Depth = 1 )]
+        public List<int> AppIDs { get; private set; }
     }
 
     class AppVersion
@@ -121,6 +136,11 @@ namespace DepotDownloader
             return cdrObj.Apps.Find( ( app ) => app.AppID == appID );
         }
 
+        static Sub GetSubBlob( int subID )
+        {
+            return cdrObj.Subs.Find( ( sub ) => sub.SubID == subID );
+        }
+
         public static string GetDepotName( int depotId )
         {
             // Match hardcoded names from hldsupdatetool for certain HL1 depots
@@ -141,7 +161,7 @@ namespace DepotDownloader
             return app.Name;
         }
 
-        public static int GetLatestDepotVersion( int depotId )
+        public static int GetLatestDepotVersion( int depotId, bool beta )
         {
             App app = GetAppBlob( depotId );
 
@@ -149,6 +169,9 @@ namespace DepotDownloader
             {
                 return -1;
             }
+
+            if ( beta && app.BetaVersion > app.CurrentVersion )
+                return app.BetaVersion;
 
             return app.CurrentVersion;
         }
@@ -350,6 +373,16 @@ namespace DepotDownloader
             Console.WriteLine( "\n** 'game' options for Third-Party game servers:\n" );
             foreach ( string game in thirdPartyGames )
                 Console.WriteLine( "\t\"{0}\"", game );
+        }
+
+        public static bool SubHasDepot( int subId, int depotId )
+        {
+            Sub sub = GetSubBlob( subId );
+
+            if ( sub == null )
+                return false;
+
+            return sub.AppIDs.Contains( depotId );
         }
 
         static byte[] GetCdr()
