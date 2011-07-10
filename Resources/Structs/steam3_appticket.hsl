@@ -19,12 +19,12 @@ struct GCTOKEN
 // this is only seen in GetAuthSession tickets
 struct SESSIONHEADER
 {
-	DWORD unk1; // 1
-	DWORD unk2; // 2
+	DWORD unk1; // always 1?
+	DWORD unk2; // always 2?
 	DWORD externalIP;
-	DWORD filler;
-	DWORD someToken; // not sure
-	DWORD unk4; // 4, 12
+	DWORD filler; // always 0?
+	DWORD timeStamp; // seems to be milliseconds since steam launched/connected to steam3
+	DWORD connectionCount; // number of times the client has connected to a server
 };
 
 typedef struct tOWNERSHIPTICKET
