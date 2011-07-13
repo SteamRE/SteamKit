@@ -1282,6 +1282,45 @@ namespace SteamKit2
 		}
 	}
 
+	[StructLayout( LayoutKind.Sequential )]
+	public class MsgGCHdr : IGCSerializableHeader
+	{
+		public void SetEMsg( EGCMsg msg ) { }
+
+		// Static size: 2
+		public ushort HeaderVersion { get; set; }
+		// Static size: 8
+		public long TargetJobID { get; set; }
+		// Static size: 8
+		public long SourceJobID { get; set; }
+
+		public MsgGCHdr()
+		{
+			HeaderVersion = 1;
+			TargetJobID = -1;
+			SourceJobID = -1;
+		}
+
+		public void Serialize(Stream stream)
+		{
+			BinaryWriterEx bw = new BinaryWriterEx( stream );
+
+			bw.Write( HeaderVersion );
+			bw.Write( TargetJobID );
+			bw.Write( SourceJobID );
+
+		}
+
+		public void Deserialize( Stream stream )
+		{
+			BinaryReaderEx br = new BinaryReaderEx( stream );
+
+			HeaderVersion = br.ReadUInt16();
+			TargetJobID = br.ReadInt64();
+			SourceJobID = br.ReadInt64();
+		}
+	}
+
 	public class MsgGCStartupCheck : IGCSerializableMessage
 	{
 		public EGCMsg GetEMsg() { return EGCMsg.StartupCheck; }
@@ -1325,52 +1364,6 @@ namespace SteamKit2
 		public void Deserialize( Stream stream )
 		{
 			Proto = ProtoBuf.Serializer.Deserialize<SteamKit2.GC.CMsgStartupCheckResponse>( stream );
-		}
-	}
-
-	public class MsgGCGetCommandList : IGCSerializableMessage
-	{
-		public EGCMsg GetEMsg() { return EGCMsg.GetCommands; }
-
-		// Static size: 0
-		public SteamKit2.GC.CMsgGCGetCommandList Proto { get; set; }
-
-		public MsgGCGetCommandList()
-		{
-			Proto = new SteamKit2.GC.CMsgGCGetCommandList();
-		}
-
-		public void Serialize(Stream stream)
-		{
-			ProtoBuf.Serializer.Serialize<SteamKit2.GC.CMsgGCGetCommandList>(stream, Proto);
-		}
-
-		public void Deserialize( Stream stream )
-		{
-			Proto = ProtoBuf.Serializer.Deserialize<SteamKit2.GC.CMsgGCGetCommandList>( stream );
-		}
-	}
-
-	public class MsgGCGetCommandListResponse : IGCSerializableMessage
-	{
-		public EGCMsg GetEMsg() { return EGCMsg.GetCommandsResponse; }
-
-		// Static size: 0
-		public SteamKit2.GC.CMsgGCGetCommandListResponse Proto { get; set; }
-
-		public MsgGCGetCommandListResponse()
-		{
-			Proto = new SteamKit2.GC.CMsgGCGetCommandListResponse();
-		}
-
-		public void Serialize(Stream stream)
-		{
-			ProtoBuf.Serializer.Serialize<SteamKit2.GC.CMsgGCGetCommandListResponse>(stream, Proto);
-		}
-
-		public void Deserialize( Stream stream )
-		{
-			Proto = ProtoBuf.Serializer.Deserialize<SteamKit2.GC.CMsgGCGetCommandListResponse>( stream );
 		}
 	}
 
@@ -2032,14 +2025,15 @@ namespace SteamKit2
 		// Static size: 4
 		public EAppUsageEvent AppUsageEvent { get; set; }
 		// Static size: 8
-		public ulong GameID { get; set; }
+		private ulong gameID;
+		public GameID GameID { get { return new GameID( gameID ); } set { gameID = value.ToUint64(); } }
 		// Static size: 2
 		public ushort Offline { get; set; }
 
 		public MsgClientAppUsageEvent()
 		{
 			AppUsageEvent = 0;
-			GameID = 0;
+			gameID = 0;
 			Offline = 0;
 		}
 
@@ -2048,7 +2042,7 @@ namespace SteamKit2
 			BinaryWriterEx bw = new BinaryWriterEx( stream );
 
 			bw.Write( (int)AppUsageEvent );
-			bw.Write( GameID );
+			bw.Write( gameID );
 			bw.Write( Offline );
 
 		}
@@ -2058,7 +2052,7 @@ namespace SteamKit2
 			BinaryReaderEx br = new BinaryReaderEx( stream );
 
 			AppUsageEvent = (EAppUsageEvent)br.ReadInt32();
-			GameID = br.ReadUInt64();
+			gameID = br.ReadUInt64();
 			Offline = br.ReadUInt16();
 		}
 	}
@@ -2187,13 +2181,14 @@ namespace SteamKit2
 		// Static size: 4
 		public uint FlagsAccountSecurityPolicy { get; set; }
 		// Static size: 1
-		public byte Validated { get; set; }
+		private byte validated;
+		public bool Validated { get { return ( validated == 1 ); } set { validated = ( byte )( value ? 1 : 0 ); } }
 
 		public MsgClientEmailAddrInfo()
 		{
 			PasswordStrength = 0;
 			FlagsAccountSecurityPolicy = 0;
-			Validated = 0;
+			validated = 0;
 		}
 
 		public void Serialize(Stream stream)
@@ -2202,7 +2197,7 @@ namespace SteamKit2
 
 			bw.Write( PasswordStrength );
 			bw.Write( FlagsAccountSecurityPolicy );
-			bw.Write( Validated );
+			bw.Write( validated );
 
 		}
 
@@ -2212,7 +2207,7 @@ namespace SteamKit2
 
 			PasswordStrength = br.ReadUInt32();
 			FlagsAccountSecurityPolicy = br.ReadUInt32();
-			Validated = br.ReadByte();
+			validated = br.ReadByte();
 		}
 	}
 
@@ -2750,17 +2745,19 @@ namespace SteamKit2
 		// Static size: 4
 		public EResult Result { get; set; }
 		// Static size: 1
-		public byte CollectingAny { get; set; }
+		private byte collectingAny;
+		public bool CollectingAny { get { return ( collectingAny == 1 ); } set { collectingAny = ( byte )( value ? 1 : 0 ); } }
 		// Static size: 1
-		public byte CollectingDetails { get; set; }
+		private byte collectingDetails;
+		public bool CollectingDetails { get { return ( collectingDetails == 1 ); } set { collectingDetails = ( byte )( value ? 1 : 0 ); } }
 		// Static size: 8
 		public ulong SessionId { get; set; }
 
 		public MsgClientOGSBeginSessionResponse()
 		{
 			Result = 0;
-			CollectingAny = 0;
-			CollectingDetails = 0;
+			collectingAny = 0;
+			collectingDetails = 0;
 			SessionId = 0;
 		}
 
@@ -2769,8 +2766,8 @@ namespace SteamKit2
 			BinaryWriterEx bw = new BinaryWriterEx( stream );
 
 			bw.Write( (int)Result );
-			bw.Write( CollectingAny );
-			bw.Write( CollectingDetails );
+			bw.Write( collectingAny );
+			bw.Write( collectingDetails );
 			bw.Write( SessionId );
 
 		}
@@ -2780,8 +2777,8 @@ namespace SteamKit2
 			BinaryReaderEx br = new BinaryReaderEx( stream );
 
 			Result = (EResult)br.ReadInt32();
-			CollectingAny = br.ReadByte();
-			CollectingDetails = br.ReadByte();
+			collectingAny = br.ReadByte();
+			collectingDetails = br.ReadByte();
 			SessionId = br.ReadUInt64();
 		}
 	}
@@ -2895,18 +2892,19 @@ namespace SteamKit2
 		public EMsg GetEMsg() { return EMsg.ClientGetFriendsWhoPlayGame; }
 
 		// Static size: 8
-		public ulong GameId { get; set; }
+		private ulong gameId;
+		public GameID GameId { get { return new GameID( gameId ); } set { gameId = value.ToUint64(); } }
 
 		public MsgClientGetFriendsWhoPlayGame()
 		{
-			GameId = 0;
+			gameId = 0;
 		}
 
 		public void Serialize(Stream stream)
 		{
 			BinaryWriterEx bw = new BinaryWriterEx( stream );
 
-			bw.Write( GameId );
+			bw.Write( gameId );
 
 		}
 
@@ -2914,7 +2912,7 @@ namespace SteamKit2
 		{
 			BinaryReaderEx br = new BinaryReaderEx( stream );
 
-			GameId = br.ReadUInt64();
+			gameId = br.ReadUInt64();
 		}
 	}
 
@@ -2925,14 +2923,15 @@ namespace SteamKit2
 		// Static size: 4
 		public EResult Result { get; set; }
 		// Static size: 8
-		public ulong GameId { get; set; }
+		private ulong gameId;
+		public GameID GameId { get { return new GameID( gameId ); } set { gameId = value.ToUint64(); } }
 		// Static size: 4
 		public uint CountFriends { get; set; }
 
 		public MsgClientGetFriendsWhoPlayGameResponse()
 		{
 			Result = 0;
-			GameId = 0;
+			gameId = 0;
 			CountFriends = 0;
 		}
 
@@ -2941,7 +2940,7 @@ namespace SteamKit2
 			BinaryWriterEx bw = new BinaryWriterEx( stream );
 
 			bw.Write( (int)Result );
-			bw.Write( GameId );
+			bw.Write( gameId );
 			bw.Write( CountFriends );
 
 		}
@@ -2951,7 +2950,7 @@ namespace SteamKit2
 			BinaryReaderEx br = new BinaryReaderEx( stream );
 
 			Result = (EResult)br.ReadInt32();
-			GameId = br.ReadUInt64();
+			gameId = br.ReadUInt64();
 			CountFriends = br.ReadUInt32();
 		}
 	}
@@ -3059,7 +3058,8 @@ namespace SteamKit2
 		// Static size: 4
 		public uint ReputationScore { get; set; }
 		// Static size: 1
-		public byte Banned { get; set; }
+		private byte banned;
+		public bool Banned { get { return ( banned == 1 ); } set { banned = ( byte )( value ? 1 : 0 ); } }
 		// Static size: 4
 		public uint BannedIp { get; set; }
 		// Static size: 2
@@ -3073,7 +3073,7 @@ namespace SteamKit2
 		{
 			Result = 0;
 			ReputationScore = 0;
-			Banned = 0;
+			banned = 0;
 			BannedIp = 0;
 			BannedPort = 0;
 			BannedGameId = 0;
@@ -3086,7 +3086,7 @@ namespace SteamKit2
 
 			bw.Write( (int)Result );
 			bw.Write( ReputationScore );
-			bw.Write( Banned );
+			bw.Write( banned );
 			bw.Write( BannedIp );
 			bw.Write( BannedPort );
 			bw.Write( BannedGameId );
@@ -3100,7 +3100,7 @@ namespace SteamKit2
 
 			Result = (EResult)br.ReadInt32();
 			ReputationScore = br.ReadUInt32();
-			Banned = br.ReadByte();
+			banned = br.ReadByte();
 			BannedIp = br.ReadUInt32();
 			BannedPort = br.ReadUInt16();
 			BannedGameId = br.ReadUInt64();
