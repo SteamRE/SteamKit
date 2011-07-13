@@ -34,6 +34,15 @@ namespace SteamKit2
         {
         }
 
+        public void Set( ulong gameId )
+        {
+            gameid.Data = gameId;
+        }
+        public ulong ToUint64()
+        {
+            return gameid.Data;
+        }
+
         // provide this as implicit to make them decide what they want
         public static implicit operator string( GameID gid )
         {
@@ -82,6 +91,23 @@ namespace SteamKit2
             {
                 gameid[ 32, 0xFFFFFFFF ] = ( UInt64 )value;
             }
+        }
+
+        public bool IsMod()
+        {
+            return ( this.AppType == EGameID.GameMod );
+        }
+        public bool IsShortcut()
+        {
+            return ( this.AppType == EGameID.Shortcut );
+        }
+        public bool IsP2PFile()
+        {
+            return ( this.AppType == EGameID.P2P );
+        }
+        public bool IsSteamApp()
+        {
+            return ( this.AppType == EGameID.App );
         }
 
 
