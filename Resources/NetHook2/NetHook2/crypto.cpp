@@ -69,12 +69,12 @@ CCrypto::CCrypto()
 		(void **)&pGhettoFunction
 	);
 
-	MsgInfo_t* pInfos = *(MsgInfo_t **)(pGhettoFunction + 6);
+	MsgInfo_t* pInfos = *(MsgInfo_t **)( pGhettoFunction + 6 );
 	g_pLogger->LogConsole( "pGhettoFunction = 0x%x\npInfos = 0x%x\n", pGhettoFunction, pInfos );
 
 	while ( true )
 	{
-		if ( pInfos->unk != 0 )
+		if ( !pInfos->name )
 			break;
 
 		eMsgList.insert( MsgPair( pInfos->emsg, pInfos ) );
