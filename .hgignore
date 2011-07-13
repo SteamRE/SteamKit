@@ -7,6 +7,7 @@ syntax: glob
 bin/
 obj/
 [Dd]ebug/
+[Rr]elease/
 
 # begone, foul third party libs
 boost/
