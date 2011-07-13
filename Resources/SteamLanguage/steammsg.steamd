@@ -142,9 +142,9 @@ class MsgClientVACBanStatus<EMsg::ClientVACBanStatus>
 
 class MsgClientAppUsageEvent<EMsg::ClientAppUsageEvent>
 {
-	EAppUsageEvent AppUsageEvent;
-	ulong GameID;
-	ushort Offline;
+	EAppUsageEvent appUsageEvent;
+	gameidmarshal ulong gameID;
+	ushort offline;
 };
 
 class MsgClientAccountInfo<EMsg::ClientAccountInfo>
@@ -176,7 +176,7 @@ class MsgClientEmailAddrInfo<EMsg::ClientEmailAddrInfo>
 {
 	uint passwordStrength;
 	uint flagsAccountSecurityPolicy;
-	byte validated;
+	boolmarshal byte validated;
 }; 
 
 class MsgClientUpdateGuestPassesList<EMsg::ClientUpdateGuestPassesList>
@@ -288,8 +288,8 @@ class MsgClientOGSBeginSession<EMsg::ClientOGSBeginSession>
 class MsgClientOGSBeginSessionResponse<EMsg::ClientOGSBeginSessionResponse>
 {
 	EResult result;
-	byte collectingAny;
-	byte collectingDetails;
+	boolmarshal byte collectingAny;
+	boolmarshal byte collectingDetails;
 	ulong sessionId;
 };
 
@@ -315,13 +315,13 @@ class MsgClientOGSWriteRow<EMsg::ClientOGSWriteRow>
 
 class MsgClientGetFriendsWhoPlayGame<EMsg::ClientGetFriendsWhoPlayGame>
 {
-	ulong gameId;
+	gameidmarshal ulong gameId;
 };
 
 class MsgClientGetFriendsWhoPlayGameResponse<EMsg::ClientGetFriendsWhoPlayGameResponse>
 {
 	EResult result;
-	ulong gameId;
+	gameidmarshal ulong gameId;
 	uint countFriends;
 };
 
@@ -347,7 +347,7 @@ class MsgGSGetReputationResponse<EMsg::GSGetReputationResponse>
 {
 	EResult result;
 	uint reputationScore;
-	byte banned;
+	boolmarshal byte banned;
 	uint bannedIp;
 	ushort bannedPort;
 	ulong bannedGameId;
