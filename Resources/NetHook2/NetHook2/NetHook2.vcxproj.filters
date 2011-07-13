@@ -71,6 +71,5 @@
   <ItemGroup>
     <Library Include="detours.lib" />
     <Library Include="zlib.lib" />
-    <Library Include="libprotobuf.lib" />
   </ItemGroup>
 </Project>
