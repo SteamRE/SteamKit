@@ -256,7 +256,7 @@ namespace NetHookAnalyzer
             }
             else
             {
-                hdr = new MsgGCHdrEx();
+                hdr = new MsgGCHdr();
             }
 
             hdr.Deserialize( str );
