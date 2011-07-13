@@ -219,8 +219,17 @@ namespace SteamLanguageParser
             {
                 if ( cnode.Name.Contains( "MsgGC" ) )
                 {
-                    sb.AppendLine( padding + "public void SetEMsg( EGCMsg msg ) { this.Msg = msg; }" );
-                    sb.AppendLine();
+                    if ( cnode.childNodes.Find( node => node.Name == "msg" ) != null )
+                    {
+                        sb.AppendLine( padding + "public void SetEMsg( EGCMsg msg ) { this.Msg = msg; }" );
+                        sb.AppendLine();
+                    }
+                    else
+                    {
+                        // this is required for a gc header which doesn't have an emsg
+                        sb.AppendLine( padding + "public void SetEMsg( EGCMsg msg ) { }" );
+                        sb.AppendLine();
+                    }
                 }
                 else
                 {
@@ -258,18 +267,28 @@ namespace SteamLanguageParser
 
                 if (prop.Flags != null && prop.Flags == "steamidmarshal" && typestr == "ulong")
                 {
-                    sb.AppendLine( padding + "private " + typestr + " " + prop.Name + ";");
+                    sb.AppendLine( padding + string.Format( "private {0} {1};", typestr, prop.Name ) );
                     sb.AppendLine( padding + "public SteamID " + propName + " { get { return new SteamID( " + prop.Name + " ); } set { " + prop.Name + " = value.ConvertToUint64(); } }");
+                }
+                else if ( prop.Flags != null && prop.Flags == "boolmarshal" && typestr == "byte" )
+                {
+                    sb.AppendLine( padding + string.Format( "private {0} {1};", typestr, prop.Name ) );
+                    sb.AppendLine( padding + "public bool " + propName + " { get { return ( " + prop.Name + " == 1 ); } set { " + prop.Name + " = ( byte )( value ? 1 : 0 ); } }" );
+                }
+                else if ( prop.Flags != null && prop.Flags == "gameidmarshal" && typestr == "ulong" )
+                {
+                    sb.AppendLine( padding + string.Format( "private {0} {1};", typestr, prop.Name ) );
+                    sb.AppendLine( padding + "public GameID " + propName + " { get { return new GameID( " + prop.Name + " ); } set { " + prop.Name + " = value.ToUint64(); } }" );
                 }
                 else
                 {
                     int temp;
-                    if (!String.IsNullOrEmpty(prop.FlagsOpt) && Int32.TryParse(prop.FlagsOpt, out temp))
+                    if ( !String.IsNullOrEmpty( prop.FlagsOpt ) && Int32.TryParse( prop.FlagsOpt, out temp ) )
                     {
                         typestr += "[]";
                     }
 
-                    sb.AppendLine( padding + "public " + typestr + " " + propName + " { get; set; }");
+                    sb.AppendLine( padding + "public " + typestr + " " + propName + " { get; set; }" );
                 }
             }
 
@@ -305,20 +324,21 @@ namespace SteamLanguageParser
                 }
                 else if (defsym == null)
                 {
-                    if (!String.IsNullOrEmpty(prop.FlagsOpt))
+                    if ( !String.IsNullOrEmpty( prop.FlagsOpt ) )
                     {
-                        ctor = "new " + EmitType(prop.Type) + "[" + CodeGenerator.GetTypeSize(prop) + "]";
+                        ctor = "new " + EmitType( prop.Type ) + "[" + CodeGenerator.GetTypeSize( prop ) + "]";
                     }
                     else
                     {
                         ctor = "0";
                     }
                 }
-                if (defflags != null && defflags == "steamidmarshal")
+                if (defflags != null && ( defflags == "steamidmarshal" || defflags == "gameidmarshal" || defflags == "boolmarshal" ))
                 {
                     symname = prop.Name;
                 }
-                else if (defflags != null && defflags == "const")
+
+                else if ( defflags != null && defflags == "const" )
                 {
                     continue;
                 }
@@ -417,16 +437,16 @@ namespace SteamLanguageParser
 
                 if (prop.Flags != null)
                 {
-                    if (prop.Flags == "steamidmarshal")
+                    if ( prop.Flags == "steamidmarshal" || prop.Flags == "gameidmarshal" || prop.Flags == "boolmarshal" )
                     {
                         propName = prop.Name;
                     }
-                    else if (prop.Flags == "proto")
+                    else if ( prop.Flags == "proto" )
                     {
-                        sb.AppendLine(padding + "\tbw.Write( ms" + propName + ".ToArray() );");
+                        sb.AppendLine( padding + "\tbw.Write( ms" + propName + ".ToArray() );" );
                         continue;
                     }
-                    else if (prop.Flags == "const")
+                    else if ( prop.Flags == "const" )
                     {
                         continue;
                     }
@@ -486,11 +506,11 @@ namespace SteamLanguageParser
                 string defflags = prop.Flags;
                 string symname = GetUpperName(prop.Name);
 
-                if (defflags != null && defflags == "steamidmarshal")
+                if ( defflags != null && ( defflags == "steamidmarshal" || defflags == "gameidmarshal" || defflags == "boolmarshal" ) )
                 {
                     symname = prop.Name;
                 }
-                else if (defflags != null && defflags == "const")
+                else if ( defflags != null && defflags == "const" )
                 {
                     continue;
                 }
