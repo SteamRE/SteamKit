@@ -256,10 +256,16 @@ namespace SteamKit2
                 case EMsg.ClientLogOnResponse: // we handle this to get the SteamID/SessionID and to setup heartbeating
                     HandleLogOnResponse( cliEvent );
                     break;
+
+                case EMsg.ClientLoggedOff: // to stop heartbeating when we get logged off
+                    HandleLoggedOff( cliEvent );
+                    break;
             }
 
             OnClientMsgReceived( cliEvent );
         }
+
+
         void Disconnected( object sender, EventArgs e )
         {
             Connection.NetFilter = null;
@@ -380,6 +386,13 @@ namespace SteamKit2
 
             if ( encResult.Msg.Result == EResult.OK )
                 Connection.NetFilter = new NetFilterEncryption( tempSessionKey );
+        }
+        void HandleLoggedOff( ClientMsgEventArgs cliEvent )
+        {
+            if ( heartBeatFunc != null )
+            {
+                heartBeatFunc.Stop();
+            }
         }
         #endregion
     }
