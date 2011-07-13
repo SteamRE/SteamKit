@@ -44,8 +44,8 @@ namespace NetHookAnalyzer
                 return;
             }
 
-            DumpForm df = new DumpForm( this, fileList, fbd.SelectedPath );
-            df.Show();
+            SessionForm sf = new SessionForm( this, fileList, fbd.SelectedPath );
+            sf.Show();
         }
 
         private void exitToolStripMenuItem_Click( object sender, EventArgs e )
