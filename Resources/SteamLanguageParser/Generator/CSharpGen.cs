@@ -16,6 +16,7 @@ namespace SteamLanguageParser
             {"uint", "UInt32"},
             {"long", "Int64"},
             {"ulong", "UInt64"},
+            {"char", "Char"},
         };
 
         public void EmitNamespace(StringBuilder sb, bool end)
