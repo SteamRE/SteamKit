@@ -1367,6 +1367,29 @@ namespace SteamKit2
 		}
 	}
 
+	public class MsgGCSOSingleObject : IGCSerializableMessage
+	{
+		public EGCMsg GetEMsg() { return EGCMsg.Invalid; }
+
+		// Static size: 0
+		public SteamKit2.GC.CMsgSOSingleObject Proto { get; set; }
+
+		public MsgGCSOSingleObject()
+		{
+			Proto = new SteamKit2.GC.CMsgSOSingleObject();
+		}
+
+		public void Serialize(Stream stream)
+		{
+			ProtoBuf.Serializer.Serialize<SteamKit2.GC.CMsgSOSingleObject>(stream, Proto);
+		}
+
+		public void Deserialize( Stream stream )
+		{
+			Proto = ProtoBuf.Serializer.Deserialize<SteamKit2.GC.CMsgSOSingleObject>( stream );
+		}
+	}
+
 	public class MsgChannelEncryptRequest : ISteamSerializableMessage
 	{
 		public EMsg GetEMsg() { return EMsg.ChannelEncryptRequest; }

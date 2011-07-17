@@ -223,3 +223,8 @@ class MsgGCStartupCheckResponse<EGCMsg::StartupCheckResponse>
 {
 	proto SteamKit2.GC.CMsgStartupCheckResponse proto;
 };
+
+class MsgGCSOSingleObject<EGCMsg::Invalid>
+{
+	proto SteamKit2.GC.CMsgSOSingleObject proto;
+};

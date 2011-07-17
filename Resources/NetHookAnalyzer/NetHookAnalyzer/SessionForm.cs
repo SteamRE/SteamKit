@@ -277,6 +277,11 @@ namespace NetHookAnalyzer
                     return gcMsg.GetEMsg() == eGCMsg;
                 } );
 
+            if ( eGCMsg == EGCMsg.SOMsg_Create || eGCMsg == EGCMsg.SOMsg_Destroy || eGCMsg == EGCMsg.SOMsg_Update )
+            {
+                msgType = typeof( SteamKit2.MsgGCSOSingleObject );
+            }
+
             // if the emsg didn't match, maybe we can get lucky with the name
             if ( msgType == null )
                 msgType = GetSteamKitType( string.Format( "SteamKit2.MsgGC{0}", eGCMsg ) );
