@@ -56,6 +56,7 @@ namespace SteamKit2
         private DateTime timeOut;
         private DateTime nextResend;
 
+        private uint sourceConnId = 512;
         private uint remoteConnId;
 
         /// <summary>
@@ -133,7 +134,7 @@ namespace SteamKit2
         {
             if ( netThread == null )
                 return;
-            
+
             // Play nicely and let the server know that we're done. Other party is expected to Ack this,
             // so it needs to be sent sequenced.
             SendSequenced(new UdpPacket(EUdpPacketType.Disconnect));
@@ -142,6 +143,9 @@ namespace SteamKit2
 
             // Graceful shutdown allows for the connection to empty its queue of messages to send
             netThread.Join();
+
+            // Advance this the same way that steam does, when a socket gets reused.
+            sourceConnId += 256;
         }
 
         /// <summary>
@@ -160,7 +164,7 @@ namespace SteamKit2
             if ( NetFilter != null )
                 data = NetFilter.ProcessOutgoing(data);
 
-            SendData(new MemoryStream(data));            
+            SendData(new MemoryStream(data));
         }
 
         /// <summary>
@@ -189,12 +193,13 @@ namespace SteamKit2
         /// <param name="packet">The packet.</param>
         private void SendSequenced(UdpPacket packet)
         {
-            packet.Header.SeqThis = outSeq++;
+            packet.Header.SeqThis = outSeq;
             packet.Header.MsgStartSeq = outSeq;
-
             packet.Header.PacketsInMsg = 1;
 
             outPackets.Add(packet);
+
+            outSeq++;
         }
 
         /// <summary>
@@ -221,6 +226,7 @@ namespace SteamKit2
         /// <param name="packet">The packet.</param>
         private void SendPacket(UdpPacket packet)
         {
+            packet.Header.SourceConnID = sourceConnId;
             packet.Header.DestConnID = remoteConnId;
             packet.Header.SeqAck = inSeqAcked = inSeq;
 
@@ -230,7 +236,17 @@ namespace SteamKit2
 
             MemoryStream ms = packet.GetData();
 
-            sock.SendTo(ms.ToArray(), remoteEndPoint);
+            try
+            {
+                sock.SendTo(ms.ToArray(), remoteEndPoint);
+            }
+            catch ( SocketException e )
+            {
+                DebugLog.WriteLine("UdpConnection", "Critical socket failure: " + e.ErrorCode);
+
+                state = State.Disconnected;
+                return;
+            }
 
             // If we've been idle but completely acked for more than two seconds, the next sent
             // packet will trip the resend detection. This fixes that.
@@ -306,7 +322,7 @@ namespace SteamKit2
 
             if ( numPackets == 0 )
                 return false;
-            
+
             MemoryStream payload = new MemoryStream();
             for ( uint i = 0; i < numPackets; i++ )
             {
@@ -341,7 +357,7 @@ namespace SteamKit2
             byte[] buf = new byte[2048];
 
             timeOut = DateTime.Now.AddSeconds(TIMEOUT_DELAY);
-            nextResend = DateTime.Now.AddSeconds(RESEND_DELAY);            
+            nextResend = DateTime.Now.AddSeconds(RESEND_DELAY);
 
             // Begin by sending off the challenge request
             SendPacket(new UdpPacket(EUdpPacketType.ChallengeReq));
@@ -349,33 +365,43 @@ namespace SteamKit2
 
             while ( state != State.Disconnected )
             {
-                // Wait up to 150ms for data, if none is found and the timeout is exceeded, we're done here.
-                if ( !sock.Poll(150000, SelectMode.SelectRead) 
-                    && DateTime.Now > timeOut )
+                try
                 {
-                    DebugLog.WriteLine("UdpConnection", "Connection timed out");
+                    // Wait up to 150ms for data, if none is found and the timeout is exceeded, we're done here.
+                    if ( !sock.Poll(150000, SelectMode.SelectRead)
+                        && DateTime.Now > timeOut )
+                    {
+                        DebugLog.WriteLine("UdpConnection", "Connection timed out");
+
+                        state = State.Disconnected;
+                        break;
+                    }
+
+                    // By using a 10ms wait, we allow for multiple packets sent at the time to all be processed before moving on
+                    // to processing output and therefore Acks (the more we process at the same time, the fewer acks we have to send)
+                    while ( sock.Poll(10000, SelectMode.SelectRead) )
+                    {
+                        int length = sock.ReceiveFrom(buf, ref packetSender);
+
+                        // Ignore packets that aren't sent by the server we're connected to.
+                        if ( !packetSender.Equals(remoteEndPoint) )
+                            continue;
+
+                        // Data from the desired server was received; delay timeout
+                        timeOut = DateTime.Now.AddSeconds(TIMEOUT_DELAY);
+
+                        MemoryStream ms = new MemoryStream(buf, 0, length);
+                        UdpPacket packet = new UdpPacket(ms);
+
+                        ReceivePacket(packet);
+                    }
+                }
+                catch ( SocketException e )
+                {
+                    DebugLog.WriteLine("UdpConnection", "Critical socket failure: " + e.ErrorCode);
 
                     state = State.Disconnected;
                     break;
-                }
-
-                // By using a 10ms wait, we allow for multiple packets sent at the time to all be processed before moving on
-                // to processing output and therefore Acks (the more we process at the same time, the fewer acks we have to send)
-                while ( sock.Poll(10000, SelectMode.SelectRead) )
-                {
-                    int length = sock.ReceiveFrom(buf, ref packetSender);                    
-
-                    // Ignore packets that aren't sent by the server we're connected to.
-                    if ( !packetSender.Equals(remoteEndPoint) )
-                        continue;
-
-                    // Data from the desired server was received; delay timeout
-                    timeOut = DateTime.Now.AddSeconds(TIMEOUT_DELAY);
-
-                    MemoryStream ms = new MemoryStream(buf, 0, length);
-                    UdpPacket packet = new UdpPacket(ms);
-
-                    ReceivePacket(packet);
                 }
 
                 // Send or resend any sequenced packets; a call to ReceivePacket can set our state to disconnected
@@ -510,7 +536,7 @@ namespace SteamKit2
                 return;
 
             DebugLog.WriteLine("UdpConnection", "Connection established");
-            
+
             state = State.Connected;
             remoteConnId = packet.Header.SourceConnID;
             inSeqHandled = packet.Header.SeqThis;
@@ -525,7 +551,7 @@ namespace SteamKit2
             // Data packets are unexpected if a valid connection has not been established
             if ( state != State.Connected && state != State.Disconnecting )
                 return;
-            
+
             // If we receive a packet that we've already processed (e.g. it got resent due to a lost ack)
             // or that is already waiting to be processed, do nothing.
             if ( packet.Header.SeqThis <= inSeqHandled || inPackets.ContainsKey(packet.Header.SeqThis) )
