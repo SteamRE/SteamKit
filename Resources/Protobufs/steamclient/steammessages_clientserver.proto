@@ -1553,4 +1553,3 @@ message CMsgClientRedeemGuestPassResponse {
 	optional uint32 package_id = 2;
 	optional uint32 must_own_appid = 3;
 }
-

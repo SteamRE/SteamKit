@@ -177,6 +177,7 @@ message CMsgTFQuickplay_ScoreServersResponse {
 		optional uint32 server_address = 1;
 		optional uint32 server_port = 2;
 		optional float total_score = 3;
+		optional uint64 steam_id = 4;
 	}
 
 	repeated .CMsgTFQuickplay_ScoreServersResponse.ServerInfo servers = 1;
@@ -248,4 +249,3 @@ message CMsgGC_GameServer_ResetIdentityResponse {
 	optional uint32 game_server_account_id = 2;
 	optional string game_server_identity_token = 3;
 }
-
