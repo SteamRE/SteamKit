@@ -73,6 +73,10 @@ namespace SteamKit2
         /// Unknown.
         /// </summary>
         SlaveASClientAuthentication = 28,
+        /// <summary>
+        /// Rag doll kung fu master server.
+        /// </summary>
+        RDKFMasterServer = 30
     }
 
     /// <summary>
