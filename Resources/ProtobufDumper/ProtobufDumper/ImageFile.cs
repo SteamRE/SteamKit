@@ -20,10 +20,10 @@ namespace ProtobufDumper
         uint loadAddr;
 
 
-        public ImageFile( string fileName )
+        public ImageFile( string fileName, string output = null )
         {
             this.fileName = fileName;
-            this.outputDir = Path.GetFileNameWithoutExtension( this.fileName );
+            this.outputDir = output ?? Path.GetFileNameWithoutExtension( this.fileName );
         }
 
         public void Process()
@@ -198,17 +198,18 @@ namespace ProtobufDumper
                 sb.AppendLine();
             }
 
-            DumpOptions( set.options, sb );
+            // disabling this because our protobuf compiler doesn't support it
+            // DumpOptions( set.options, sb );
 
             foreach ( string dependency in set.dependency )
             {
+                if ( dependency == "google/protobuf/descriptor.proto" )
+                    continue; // not sure where this dependency comes from, but we don't want it
+
                 sb.AppendLine( "import \"" + dependency + "\";" );
             }
 
-            if ( set.dependency.Count > 0 )
-            {
-                sb.AppendLine();
-            }
+            sb.AppendLine();
 
             foreach ( DescriptorProto proto in set.message_type )
             {
@@ -325,6 +326,7 @@ namespace ProtobufDumper
                 {
                     value = value.ToString().ToLower();
                 }
+
 
                 sb.AppendLine( "option " + name + " = " + value + ";" );
             }
