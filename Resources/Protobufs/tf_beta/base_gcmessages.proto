@@ -184,3 +184,12 @@ message CMsgGCError {
 message CMsgRequestInventoryRefresh {
 }
 
+message CMsgConVarValue {
+	optional string name = 1;
+	optional string value = 2;
+}
+
+message CMsgReplicateConVars {
+	repeated .CMsgConVarValue convars = 1;
+}
+

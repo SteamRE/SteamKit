@@ -187,3 +187,4 @@ message CMsgConVarValue {
 message CMsgReplicateConVars {
 	repeated .CMsgConVarValue convars = 1;
 }
+

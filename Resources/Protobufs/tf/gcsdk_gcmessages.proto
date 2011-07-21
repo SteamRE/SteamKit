@@ -1,3 +1,4 @@
+
 message CMsgSOSingleObject {
 	optional fixed64 owner = 1;
 	optional int32 type_id = 2;
@@ -43,3 +44,4 @@ message CMsgSOCacheSubscriptionRefresh {
 message CMsgSOCacheVersion {
 	optional fixed64 version = 1;
 }
+

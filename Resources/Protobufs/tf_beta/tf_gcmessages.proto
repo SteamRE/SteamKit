@@ -11,6 +11,13 @@ message CMsgTFSaxxyBroadcast {
 	optional string user_name = 2;
 }
 
+message CMsgTFIncrementKillCountResponse {
+	optional uint32 killer_account_id = 1;
+	optional uint32 num_kills = 2;
+	optional uint32 item_def = 3;
+	optional uint32 new_rank = 4;
+}
+
 message CSOTFDuelSummary {
 	optional uint32 account_id = 1;
 	optional uint32 duel_wins = 2;
@@ -175,6 +182,10 @@ message CMsgTFQuickplay_ScoreServersResponse {
 	repeated .CMsgTFQuickplay_ScoreServersResponse.ServerInfo servers = 1;
 }
 
+message CMsgTFQuickplay_PlayerJoining {
+	optional uint32 account_id = 1;
+}
+
 message CMsgGC_GameServer_LevelInfo {
 	optional bool level_loaded = 1;
 	optional string level_name = 2;
@@ -188,6 +199,7 @@ message CMsgGC_GameServer_AuthResult {
 	optional bool authenticated = 1;
 	optional int32 game_server_standing = 2;
 	optional int32 game_server_standing_trend = 3;
+	optional bool is_valve_server = 4;
 }
 
 message CMsgGC_GameServer_AuthChallengeResponse {
@@ -200,9 +212,16 @@ message CMsgGC_GameServer_CreateIdentity {
 }
 
 message CMsgGC_GameServer_CreateIdentityResponse {
+	enum EStatus {
+		kStatus_GenericFailure = 0;
+		kStatus_TooMany = -1;
+		kStatus_NoPrivs = -2;
+		kStatus_Created = 1;
+	}
 	optional bool account_created = 1;
 	optional uint32 game_server_account_id = 2;
 	optional string game_server_identity_token = 3;
+	optional .CMsgGC_GameServer_CreateIdentityResponse.EStatus status = 4 [default = kStatus_GenericFailure];
 }
 
 message CMsgGC_GameServer_List {
