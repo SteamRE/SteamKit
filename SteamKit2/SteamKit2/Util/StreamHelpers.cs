@@ -8,26 +8,34 @@ namespace SteamKit2
     {
         internal static Int16 ReadInt16(this Stream stream)
         {
-            return (Int16)(stream.ReadByte() | stream.ReadByte() << 8);
+            byte[] data = new byte[ 2 ];
+            stream.Read( data, 0, data.Length );
+
+            return BitConverter.ToInt16( data, 0 );
         }
 
         internal static Int32 ReadInt32(this Stream stream)
         {
-            return (Int32)(stream.ReadByte() | stream.ReadByte() << 8 | 
-                           stream.ReadByte() << 16 | stream.ReadByte() << 24);
+            byte[] data = new byte[ 4 ];
+            stream.Read( data, 0, data.Length );
+
+            return BitConverter.ToInt32( data, 0 );
         }
 
         internal static UInt64 ReadUInt64(this Stream stream)
         {
-            return (UInt64)(stream.ReadByte() | stream.ReadByte() << 8 |
-               stream.ReadByte() << 16 | stream.ReadByte() << 24 |
-               stream.ReadByte() << 32 | stream.ReadByte() << 40 |
-               stream.ReadByte() << 48 | stream.ReadByte() << 56);
+            byte[] data = new byte[ 8 ];
+            stream.Read( data, 0, data.Length );
+
+            return BitConverter.ToUInt64( data, 0 );
         }
 
         internal static float ReadFloat( this Stream stream )
         {
-            return ( float )stream.ReadInt32();
+            byte[] data = new byte[ 4 ];
+            stream.Read( data, 0, data.Length );
+
+            return BitConverter.ToSingle( data, 0 );
         }
 
         internal static string ReadNullTermString( this Stream stream, Encoding encoding )
