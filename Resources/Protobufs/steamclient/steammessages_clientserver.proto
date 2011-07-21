@@ -1526,6 +1526,40 @@ message CMsgClientUGSGetGlobalStatsResponse {
 	repeated .CMsgClientUGSGetGlobalStatsResponse.Day days = 4;
 }
 
+message CMsgGameServerData {
+	message Player {
+		optional fixed64 steam_id = 1;
+	}
+
+	optional fixed64 steam_id_gs = 1;
+	optional uint32 ip = 2;
+	optional uint32 query_port = 3;
+	optional uint32 game_port = 4;
+	optional uint32 sourcetv_port = 5;
+	optional uint32 app_id = 6;
+	optional string gamedir = 7;
+	optional string version = 8;
+	optional string product = 9;
+	optional string region = 10;
+	repeated .CMsgGameServerData.Player players = 11;
+	optional uint32 max_players = 12;
+	optional uint32 bot_count = 13;
+	optional bool password = 14;
+	optional bool secure = 15;
+	optional bool dedicated = 16;
+	optional string os = 17;
+	optional string game_data = 18;
+	optional uint32 game_data_version = 19;
+	optional string game_type = 20;
+	optional string map = 21;
+}
+
+message CMsgGameServerRemove {
+	optional fixed64 steam_id = 1;
+	optional uint32 ip = 2;
+	optional uint32 query_port = 3;
+}
+
 message CMsgClientGMSServerQuery {
 	optional uint32 app_id = 1;
 	optional uint32 geo_location_ip = 2;
@@ -1553,3 +1587,4 @@ message CMsgClientRedeemGuestPassResponse {
 	optional uint32 package_id = 2;
 	optional uint32 must_own_appid = 3;
 }
+
