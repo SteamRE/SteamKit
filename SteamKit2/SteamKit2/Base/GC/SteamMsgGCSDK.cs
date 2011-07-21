@@ -42,6 +42,15 @@ namespace SteamKit2.GC
       get { return _object_data; }
       set { _object_data = value; }
     }
+
+    private ulong _version = default(ulong);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"version", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    public ulong version
+    {
+      get { return _version; }
+      set { _version = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -68,6 +77,15 @@ namespace SteamKit2.GC
       get { return _objects; }
     }
   
+
+    private ulong _version = default(ulong);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"version", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    public ulong version
+    {
+      get { return _version; }
+      set { _version = value; }
+    }
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"SingleObject")]
   public partial class SingleObject : global::ProtoBuf.IExtensible
   {
@@ -122,6 +140,15 @@ namespace SteamKit2.GC
       get { return _objects; }
     }
   
+
+    private ulong _version = default(ulong);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"version", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    public ulong version
+    {
+      get { return _version; }
+      set { _version = value; }
+    }
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"SubscribedType")]
   public partial class SubscribedType : global::ProtoBuf.IExtensible
   {
@@ -166,6 +193,72 @@ namespace SteamKit2.GC
     {
       get { return _owner; }
       set { _owner = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgSOCacheSubscriptionCheck")]
+  public partial class CMsgSOCacheSubscriptionCheck : global::ProtoBuf.IExtensible
+  {
+    public CMsgSOCacheSubscriptionCheck() {}
+    
+
+    private ulong _owner = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"owner", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    public ulong owner
+    {
+      get { return _owner; }
+      set { _owner = value; }
+    }
+
+    private ulong _version = default(ulong);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"version", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    public ulong version
+    {
+      get { return _version; }
+      set { _version = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgSOCacheSubscriptionRefresh")]
+  public partial class CMsgSOCacheSubscriptionRefresh : global::ProtoBuf.IExtensible
+  {
+    public CMsgSOCacheSubscriptionRefresh() {}
+    
+
+    private ulong _owner = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"owner", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    public ulong owner
+    {
+      get { return _owner; }
+      set { _owner = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgSOCacheVersion")]
+  public partial class CMsgSOCacheVersion : global::ProtoBuf.IExtensible
+  {
+    public CMsgSOCacheVersion() {}
+    
+
+    private ulong _version = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"version", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    public ulong version
+    {
+      get { return _version; }
+      set { _version = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

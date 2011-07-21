@@ -9603,6 +9603,259 @@ namespace SteamKit2
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGameServerData")]
+  public partial class CMsgGameServerData : global::ProtoBuf.IExtensible
+  {
+    public CMsgGameServerData() {}
+    
+
+    private ulong _steam_id_gs = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steam_id_gs", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    public ulong steam_id_gs
+    {
+      get { return _steam_id_gs; }
+      set { _steam_id_gs = value; }
+    }
+
+    private uint _ip = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"ip", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    public uint ip
+    {
+      get { return _ip; }
+      set { _ip = value; }
+    }
+
+    private uint _query_port = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"query_port", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    public uint query_port
+    {
+      get { return _query_port; }
+      set { _query_port = value; }
+    }
+
+    private uint _game_port = default(uint);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"game_port", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    public uint game_port
+    {
+      get { return _game_port; }
+      set { _game_port = value; }
+    }
+
+    private uint _sourcetv_port = default(uint);
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"sourcetv_port", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    public uint sourcetv_port
+    {
+      get { return _sourcetv_port; }
+      set { _sourcetv_port = value; }
+    }
+
+    private uint _app_id = default(uint);
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"app_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    public uint app_id
+    {
+      get { return _app_id; }
+      set { _app_id = value; }
+    }
+
+    private string _gamedir = "";
+    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"gamedir", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoDefaultValue("")]
+    public string gamedir
+    {
+      get { return _gamedir; }
+      set { _gamedir = value; }
+    }
+
+    private string _version = "";
+    [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"version", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoDefaultValue("")]
+    public string version
+    {
+      get { return _version; }
+      set { _version = value; }
+    }
+
+    private string _product = "";
+    [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"product", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoDefaultValue("")]
+    public string product
+    {
+      get { return _product; }
+      set { _product = value; }
+    }
+
+    private string _region = "";
+    [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"region", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoDefaultValue("")]
+    public string region
+    {
+      get { return _region; }
+      set { _region = value; }
+    }
+    private readonly global::System.Collections.Generic.List<CMsgGameServerData.Player> _players = new global::System.Collections.Generic.List<CMsgGameServerData.Player>();
+    [global::ProtoBuf.ProtoMember(11, Name=@"players", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CMsgGameServerData.Player> players
+    {
+      get { return _players; }
+    }
+  
+
+    private uint _max_players = default(uint);
+    [global::ProtoBuf.ProtoMember(12, IsRequired = false, Name=@"max_players", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    public uint max_players
+    {
+      get { return _max_players; }
+      set { _max_players = value; }
+    }
+
+    private uint _bot_count = default(uint);
+    [global::ProtoBuf.ProtoMember(13, IsRequired = false, Name=@"bot_count", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    public uint bot_count
+    {
+      get { return _bot_count; }
+      set { _bot_count = value; }
+    }
+
+    private bool _password = default(bool);
+    [global::ProtoBuf.ProtoMember(14, IsRequired = false, Name=@"password", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    public bool password
+    {
+      get { return _password; }
+      set { _password = value; }
+    }
+
+    private bool _secure = default(bool);
+    [global::ProtoBuf.ProtoMember(15, IsRequired = false, Name=@"secure", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    public bool secure
+    {
+      get { return _secure; }
+      set { _secure = value; }
+    }
+
+    private bool _dedicated = default(bool);
+    [global::ProtoBuf.ProtoMember(16, IsRequired = false, Name=@"dedicated", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    public bool dedicated
+    {
+      get { return _dedicated; }
+      set { _dedicated = value; }
+    }
+
+    private string _os = "";
+    [global::ProtoBuf.ProtoMember(17, IsRequired = false, Name=@"os", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoDefaultValue("")]
+    public string os
+    {
+      get { return _os; }
+      set { _os = value; }
+    }
+
+    private string _game_data = "";
+    [global::ProtoBuf.ProtoMember(18, IsRequired = false, Name=@"game_data", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoDefaultValue("")]
+    public string game_data
+    {
+      get { return _game_data; }
+      set { _game_data = value; }
+    }
+
+    private uint _game_data_version = default(uint);
+    [global::ProtoBuf.ProtoMember(19, IsRequired = false, Name=@"game_data_version", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    public uint game_data_version
+    {
+      get { return _game_data_version; }
+      set { _game_data_version = value; }
+    }
+
+    private string _game_type = "";
+    [global::ProtoBuf.ProtoMember(20, IsRequired = false, Name=@"game_type", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoDefaultValue("")]
+    public string game_type
+    {
+      get { return _game_type; }
+      set { _game_type = value; }
+    }
+
+    private string _map = "";
+    [global::ProtoBuf.ProtoMember(21, IsRequired = false, Name=@"map", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoDefaultValue("")]
+    public string map
+    {
+      get { return _map; }
+      set { _map = value; }
+    }
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Player")]
+  public partial class Player : global::ProtoBuf.IExtensible
+  {
+    public Player() {}
+    
+
+    private ulong _steam_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steam_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    public ulong steam_id
+    {
+      get { return _steam_id; }
+      set { _steam_id = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGameServerRemove")]
+  public partial class CMsgGameServerRemove : global::ProtoBuf.IExtensible
+  {
+    public CMsgGameServerRemove() {}
+    
+
+    private ulong _steam_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steam_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    public ulong steam_id
+    {
+      get { return _steam_id; }
+      set { _steam_id = value; }
+    }
+
+    private uint _ip = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"ip", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    public uint ip
+    {
+      get { return _ip; }
+      set { _ip = value; }
+    }
+
+    private uint _query_port = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"query_port", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    public uint query_port
+    {
+      get { return _query_port; }
+      set { _query_port = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientGMSServerQuery")]
   public partial class CMsgClientGMSServerQuery : global::ProtoBuf.IExtensible
   {
