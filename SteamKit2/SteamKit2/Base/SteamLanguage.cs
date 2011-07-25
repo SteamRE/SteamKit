@@ -1321,52 +1321,6 @@ namespace SteamKit2
 		}
 	}
 
-	public class MsgGCStartupCheck : IGCSerializableMessage
-	{
-		public EGCMsg GetEMsg() { return EGCMsg.StartupCheck; }
-
-		// Static size: 0
-		public SteamKit2.GC.CMsgStartupCheck Proto { get; set; }
-
-		public MsgGCStartupCheck()
-		{
-			Proto = new SteamKit2.GC.CMsgStartupCheck();
-		}
-
-		public void Serialize(Stream stream)
-		{
-			ProtoBuf.Serializer.Serialize<SteamKit2.GC.CMsgStartupCheck>(stream, Proto);
-		}
-
-		public void Deserialize( Stream stream )
-		{
-			Proto = ProtoBuf.Serializer.Deserialize<SteamKit2.GC.CMsgStartupCheck>( stream );
-		}
-	}
-
-	public class MsgGCStartupCheckResponse : IGCSerializableMessage
-	{
-		public EGCMsg GetEMsg() { return EGCMsg.StartupCheckResponse; }
-
-		// Static size: 0
-		public SteamKit2.GC.CMsgStartupCheckResponse Proto { get; set; }
-
-		public MsgGCStartupCheckResponse()
-		{
-			Proto = new SteamKit2.GC.CMsgStartupCheckResponse();
-		}
-
-		public void Serialize(Stream stream)
-		{
-			ProtoBuf.Serializer.Serialize<SteamKit2.GC.CMsgStartupCheckResponse>(stream, Proto);
-		}
-
-		public void Deserialize( Stream stream )
-		{
-			Proto = ProtoBuf.Serializer.Deserialize<SteamKit2.GC.CMsgStartupCheckResponse>( stream );
-		}
-	}
-
 	public class MsgGCSOSingleObject : IGCSerializableMessage
 	{
 		public EGCMsg GetEMsg() { return EGCMsg.Invalid; }
