@@ -157,6 +157,9 @@ namespace ProtobufDumper
 
         void HandleProto( string name, byte[] data )
         {
+            if ( name == "google/protobuf/descriptor.proto" )
+                return;
+
             Console.WriteLine( "Found protobuf candidate '{0}'!", name );
 
             FileDescriptorProto set = null;
