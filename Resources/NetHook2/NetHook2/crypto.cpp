@@ -62,21 +62,24 @@ CCrypto::CCrypto()
 
 	g_pLogger->LogConsole( "CCrypto::SymmetricDecrypt = 0x%x\n", Decrypt_Orig );
 
+/*
+.text:3843D2C0 68 7B 01 00 00                          push    379 ; num messages, this is ~probably~ guaranteed to be a short
+.text:3843D2C5 68 E8 A4 55 38                          push    offset g_pMessageList ; offset of the actual message list
+*/
 	char *pGhettoFunction;
 	steamClientScan.FindFunction(
 		"\x68\x79\x01\x00\x00\x68\x00\x00\x00\x00\xB9\x00\x00\x00\x00\xE8\x00\x00\x00\x00\x68\x00\x00\x00\x00\xE8\x00\x00\x00\x00\x59\xC3",
-		"xxxxxx????x????x????x????x????xx",
+		"x??xxx????x????x????x????x????xx",
 		(void **)&pGhettoFunction
 	);
 
 	MsgInfo_t* pInfos = *(MsgInfo_t **)( pGhettoFunction + 6 );
-	g_pLogger->LogConsole( "pGhettoFunction = 0x%x\npInfos = 0x%x\n", pGhettoFunction, pInfos );
+	uint16 numMessages = *(uint16 *)( pGhettoFunction + 1 );
 
-	while ( true )
+	g_pLogger->LogConsole( "pGhettoFunction = 0x%x\npInfos = 0x%x\nnumMessages = %d\n", pGhettoFunction, pInfos, numMessages );
+
+	for ( uint16 x = 0 ; x < numMessages; x++ )
 	{
-		if ( !pInfos->name )
-			break;
-
 		eMsgList.insert( MsgPair( pInfos->emsg, pInfos ) );
 
 		pInfos++;
