@@ -46,19 +46,25 @@ namespace SteamKit2
         }
 
 
-        public DateTime ToDateTime()
+        public DateTime ToDateTimeUTC()
         {
-            return ( DateTime.MinValue + TimeSpan.FromTicks( ( long )Time * 10 ) );
+            return new DateTime( (long)Time * 10, DateTimeKind.Utc );
         }
-        public uint ToUnixTime()
+
+        public DateTime ToDateTimeLocal()
         {
-            return MicroTime.GetUnixTime( this.ToDateTime() );
+            return new DateTime((long)Time * 10, DateTimeKind.Local);
+        }
+
+        public uint ToUnixTime() 
+        {
+            return MicroTime.GetUnixTime( this.ToDateTimeUTC() );
         }
 
 
         public override string ToString()
         {
-            return ToDateTime().ToString();
+            return ToDateTimeUTC().ToString();
         }
 
 
