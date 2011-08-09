@@ -56,6 +56,7 @@ message CSOEconGameAccountClient {
 	optional bool need_to_choose_most_helpful_friend = 4;
 	optional bool in_coaches_list = 5;
 	optional fixed32 trade_ban_expiration = 6;
+	optional fixed32 duel_ban_expiration = 7;
 }
 
 message CSOItemCriteriaCondition {
@@ -162,19 +163,13 @@ message CMsgStoreGetUserDataResponse {
 	optional int32 default_item_sort = 9 [default = 0];
 }
 
-message CMsgStartupCheck {
-	optional uint32 send_count = 1;
-}
-
-message CMsgStartupCheckResponse {
-	optional fixed32 item_schema_version = 1;
-	optional uint32 send_count_response = 2;
-}
-
 message CMsgUpdateItemSchema {
 	optional bytes items_game = 1;
 	optional fixed32 item_schema_version = 2;
 	optional string items_game_url = 3;
+}
+
+message CMsgRequestItemSchemaData {
 }
 
 message CMsgGCError {
