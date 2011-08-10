@@ -377,7 +377,6 @@ message CMsgClientPersonaState {
 		optional uint32 query_port = 20;
 		optional fixed64 steamid_source = 25;
 		optional bytes avatar_hash = 31;
-		optional bytes chat_metadata = 40;
 		optional uint32 last_logoff = 45;
 		optional uint32 last_logon = 46;
 		optional uint32 clan_rank = 50;
@@ -1288,31 +1287,31 @@ message CMsgClientRequestMachineAuthResponse {
 	optional uint32 eresult = 1;
 }
 
-message CMsgClientCreateFriendGroup {
+message CMsgClientCreateFriendsGroup {
 	optional fixed64 steamid = 1;
 	optional string groupname = 2;
 }
 
-message CMsgClientCreateFriendGroupResponse {
+message CMsgClientCreateFriendsGroupResponse {
 	optional uint32 eresult = 1;
 	optional int32 groupid = 2;
 }
 
-message CMsgClientDeleteFriendGroup {
+message CMsgClientDeleteFriendsGroup {
 	optional fixed64 steamid = 1;
 	optional int32 groupid = 2;
 }
 
-message CMsgClientDeleteFriendGroupResponse {
+message CMsgClientDeleteFriendsGroupResponse {
 	optional uint32 eresult = 1;
 }
 
-message CMsgClientRenameFriendGroup {
+message CMsgClientRenameFriendsGroup {
 	optional int32 groupid = 1;
 	optional string groupname = 2;
 }
 
-message CMsgClientRenameFriendGroupResponse {
+message CMsgClientRenameFriendsGroupResponse {
 	optional uint32 eresult = 1;
 }
 
@@ -1425,6 +1424,7 @@ message CMsgClientMDSUploadManifestRequest {
 	optional uint32 manifest_size_uncompressed = 3;
 	optional bool make_public = 4;
 	optional string beta_key = 5;
+	optional uint32 build_id = 6;
 }
 
 message CMsgClientMDSUploadManifestResponse {
@@ -1450,6 +1450,26 @@ message CMsgClientMDSGetDepotManifestResponse {
 message CMsgClientMDSGetDepotManifestChunk {
 	optional uint32 offset = 1;
 	optional bytes data = 3;
+}
+
+message CMsgClientMDSRegisterAppBuild {
+	optional int32 app_id = 1;
+	optional string description = 2;
+}
+
+message CMsgClientMDSRegisterAppBuildResponse {
+	optional int32 eresult = 1 [default = 2];
+	optional uint32 build_id = 2;
+}
+
+message CMsgMDSSetAppBuildLive {
+	optional uint32 build_id = 1;
+	optional uint32 app_id = 2;
+	optional string beta_key = 3;
+}
+
+message CMsgMDSSetAppBuildLiveResponse {
+	optional int32 eresult = 1 [default = 2];
 }
 
 message CMsgClientEmailChange {
@@ -1586,5 +1606,49 @@ message CMsgClientRedeemGuestPassResponse {
 	optional uint32 eresult = 1 [default = 2];
 	optional uint32 package_id = 2;
 	optional uint32 must_own_appid = 3;
+}
+
+message CMsgClientGetClanActivityCounts {
+	repeated uint64 steamid_clans = 1;
+}
+
+message CMsgClientGetClanActivityCountsResponse {
+	optional uint32 eresult = 1 [default = 2];
+}
+
+message CMsgClientOGSReportString {
+	optional bool accumulated = 1;
+	optional uint64 sessionid = 2;
+	optional int32 severity = 3;
+	optional string formatter = 4;
+	optional bytes varargs = 5;
+}
+
+message CMsgClientOGSReportBug {
+	optional uint64 sessionid = 1;
+	optional string bugtext = 2;
+	optional bytes screenshot = 3;
+}
+
+message CMsgGSAssociateWithClan {
+	optional fixed64 steam_id_clan = 1;
+}
+
+message CMsgGSAssociateWithClanResponse {
+	optional fixed64 steam_id_clan = 1;
+	optional uint32 eresult = 2 [default = 2];
+}
+
+message CMsgGSComputeNewPlayerCompatibility {
+	optional fixed64 steam_id_candidate = 1;
+}
+
+message CMsgGSComputeNewPlayerCompatibilityResponse {
+	optional fixed64 steam_id_candidate = 1;
+	optional uint32 eresult = 2 [default = 2];
+	optional bool is_clan_member = 3;
+	optional int32 ct_dont_like_you = 4;
+	optional int32 ct_you_dont_like = 5;
+	optional int32 ct_clanmembers_dont_like_you = 6;
 }
 
