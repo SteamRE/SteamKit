@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Net;
 using System.Collections.ObjectModel;
+using System.IO;
 
 namespace SteamKit2
 {
@@ -93,11 +94,6 @@ namespace SteamKit2
             /// </summary>
             /// <value>The avatar hash.</value>
             public byte[] AvatarHash { get; private set; }
-            /// <summary>
-            /// Gets the chat meta data.
-            /// </summary>
-            /// <value>The chat meta data.</value>
-            public byte[] ChatMetaData { get; private set; }
 
             /// <summary>
             /// Gets the last log off.
@@ -154,7 +150,6 @@ namespace SteamKit2
                 this.Name = friend.player_name;
 
                 this.AvatarHash = friend.avatar_hash;
-                this.ChatMetaData = friend.chat_metadata;
 
                 this.LastLogOff = Utils.DateTimeFromUnixTime( friend.last_logoff );
                 this.LastLogOn = Utils.DateTimeFromUnixTime( friend.last_logon );
