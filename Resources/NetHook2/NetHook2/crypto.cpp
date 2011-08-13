@@ -73,13 +73,31 @@ CCrypto::CCrypto()
 		(void **)&pGhettoFunction
 	);
 
+
+#define STEAMCLIENT_BETA
+
+
+#ifdef STEAMCLIENT_BETA
+	MsgInfo_t* pInfos = (MsgInfo_t *)0x3857EFB0;
+	uint16 numMessages = 0;
+#else
 	MsgInfo_t* pInfos = *(MsgInfo_t **)( pGhettoFunction + 6 );
 	uint16 numMessages = *(uint16 *)( pGhettoFunction + 1 );
+#endif
 
 	g_pLogger->LogConsole( "pGhettoFunction = 0x%x\npInfos = 0x%x\nnumMessages = %d\n", pGhettoFunction, pInfos, numMessages );
 
+#ifdef STEAMCLIENT_BETA
+	while ( true )
+#else
 	for ( uint16 x = 0 ; x < numMessages; x++ )
+#endif
 	{
+#ifdef STEAMCLIENT_BETA
+		if ( pInfos->unk2 != 0 )
+			break;
+#endif
+
 		eMsgList.insert( MsgPair( pInfos->emsg, pInfos ) );
 
 		pInfos++;
