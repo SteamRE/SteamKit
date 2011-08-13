@@ -123,10 +123,13 @@ namespace SteamKit2
 
             if (peekBuffer != null)
             {
-                for (; peekPos < peekBuffer.Length && read < inCount; read++, peekPos++, count--)
-                {
-                    buffer[offset+read] = peekBuffer[peekPos];
-                }
+                int toRead = Math.Min(peekBuffer.Length - peekPos, inCount - read);
+
+                Array.Copy(peekBuffer, peekPos, buffer, offset, toRead);
+
+                read += toRead;
+                peekPos += toRead;
+                count -= toRead;
             }
 
             if (count > 0)
