@@ -119,11 +119,10 @@ namespace SteamKit2
         public override int Read(byte[] buffer, int offset, int count)
         {
             int read = 0;
-            int inCount = count;
 
             if (peekBuffer != null)
             {
-                int toRead = Math.Min(peekBuffer.Length - peekPos, inCount - read);
+                int toRead = Math.Min(peekBuffer.Length - peekPos, count);
 
                 Array.Copy(peekBuffer, peekPos, buffer, offset, toRead);
 
