@@ -62,42 +62,66 @@ CCrypto::CCrypto()
 
 	g_pLogger->LogConsole( "CCrypto::SymmetricDecrypt = 0x%x\n", Decrypt_Orig );
 
-/*
-.text:3843D2C0 68 7B 01 00 00                          push    379 ; num messages, this is ~probably~ guaranteed to be a short
-.text:3843D2C5 68 E8 A4 55 38                          push    offset g_pMessageList ; offset of the actual message list
-*/
+#define STEAMCLIENT_BETA
+
 	char *pGhettoFunction;
+
+#ifdef STEAMCLIENT_BETA
+	/*
+	.text:3826F3D0 B8 01 00 00 00                          mov     eax, 1
+	.text:3826F3D5 84 05 F0 6B 5A 38                       test    byte ptr dword_385A6BF0, al
+	.text:3826F3DB 75 47                                   jnz     short loc_3826F424
+	.text:3826F3DD 09 05 F0 6B 5A 38                       or      dword_385A6BF0, eax
+	.text:3826F3E3 56                                      push    esi
+	.text:3826F3E4 B9 A0 6B 5A 38                          mov     ecx, offset unk_385A6BA0
+
+
+	.text:3826F3E9 E8 E2 B5 EE FF                          call    sub_3815A9D0
+	.text:3826F3EE C6 05 EC 6B 5A 38 00                    mov     byte_385A6BEC, 0
+	.text:3826F3F5 BE B8 03 58 38                          mov     esi, offset g_pStartMessageList
+	.text:3826F3FA 8D 9B 00 00 00 00                       lea     ebx, [ebx+0]
+	.text:3826F400
+	.text:3826F400                         loc_3826F400:                           ; CODE XREF: sub_3826F3D0+44j
+	.text:3826F400 56                                      push    esi
+	.text:3826F401 B9 A0 6B 5A 38                          mov     ecx, offset unk_385A6BA0
+	.text:3826F406 E8 F5 FB FF FF                          call    sub_3826F000
+	.text:3826F40B 83 C6 30                                add     esi, 48
+	.text:3826F40E 81 FE 78 4C 58 38                       cmp     esi, offset g_pEndMessageList
+	*/
+
+	steamClientScan.FindFunction(
+		"\xB8\x01\x00\x00\x00\x84\x05\xF0\x6B\x5A\x38\x75\x47\x09\x05\xF0\x6B\x5A\x38\x56\xB9\xA0\x6B\x5A\x38",
+		"xxxxxxx????x?xx????xx????",
+		(void **)&pGhettoFunction
+	);
+#else
+	/*
+	.text:3843D2C0 68 7B 01 00 00                          push    379 ; num messages, this is ~probably~ guaranteed to be a short
+	.text:3843D2C5 68 E8 A4 55 38                          push    offset g_pMessageList ; offset of the actual message list
+	*/
 	steamClientScan.FindFunction(
 		"\x68\x79\x01\x00\x00\x68\x00\x00\x00\x00\xB9\x00\x00\x00\x00\xE8\x00\x00\x00\x00\x68\x00\x00\x00\x00\xE8\x00\x00\x00\x00\x59\xC3",
 		"x??xxx????x????x????x????x????xx",
 		(void **)&pGhettoFunction
 	);
+#endif
 
-
-#define STEAMCLIENT_BETA
 
 
 #ifdef STEAMCLIENT_BETA
-	MsgInfo_t* pInfos = (MsgInfo_t *)0x3857EFB0;
-	uint16 numMessages = 0;
+	MsgInfo_t *pInfos = *(MsgInfo_t **)( pGhettoFunction + 38 );
+	MsgInfo_t *pEndInfos = *(MsgInfo_t **)( pGhettoFunction + 64 );
+	uint16 numMessages = ( ( int )pEndInfos - ( int )pInfos ) / 48;
 #else
-	MsgInfo_t* pInfos = *(MsgInfo_t **)( pGhettoFunction + 6 );
+	MsgInfo_t *pInfos = *(MsgInfo_t **)( pGhettoFunction + 6 );
 	uint16 numMessages = *(uint16 *)( pGhettoFunction + 1 );
 #endif
 
 	g_pLogger->LogConsole( "pGhettoFunction = 0x%x\npInfos = 0x%x\nnumMessages = %d\n", pGhettoFunction, pInfos, numMessages );
 
-#ifdef STEAMCLIENT_BETA
-	while ( true )
-#else
-	for ( uint16 x = 0 ; x < numMessages; x++ )
-#endif
-	{
-#ifdef STEAMCLIENT_BETA
-		if ( pInfos->unk2 != 0 )
-			break;
-#endif
 
+	for ( uint16 x = 0 ; x < numMessages; x++ )
+	{
 		eMsgList.insert( MsgPair( pInfos->emsg, pInfos ) );
 
 		pInfos++;
