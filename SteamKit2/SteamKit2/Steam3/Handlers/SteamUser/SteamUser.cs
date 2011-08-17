@@ -17,7 +17,6 @@ namespace SteamKit2
     /// <summary>
     /// This handler handles all user log on/log off related actions and callbacks.
     /// </summary>
-    [Handler( "SteamUser" )]
     public sealed partial class SteamUser : ClientMsgHandler
     {
 
@@ -102,7 +101,7 @@ namespace SteamKit2
 
             var logon = new ClientMsgProtobuf<MsgClientLogon>();
 
-            SteamID steamId = new SteamID();
+            SteamID steamId = new SteamID( 0, details.AccountInstance, Client.ConnectedUniverse, EAccountType.Individual );
 
             if ( details.ClientTGT != null )
             {
@@ -111,6 +110,10 @@ namespace SteamKit2
             else if ( details.SteamID != null )
             {
                 steamId = details.SteamID;
+            }
+            else if ( details.Password != null )
+            {
+                // this condition exists for steam3 logon without any steam2 details
             }
             else
             {
@@ -147,7 +150,7 @@ namespace SteamKit2
             logon.Msg.Proto.cell_id = 0;
 
             // we're now using the latest steamclient package version, this is required to get a proper sentry file for steam guard
-            logon.Msg.Proto.client_package_version = 1515;
+            logon.Msg.Proto.client_package_version = 1634;
 
             // this is not a proper machine id that Steam accepts
             // but it's good enough for identifying a machine
@@ -191,21 +194,6 @@ namespace SteamKit2
             }
 
             this.Client.Send( logon );
-        }
-
-        public void LogOnGameServer()
-        {
-            var logon = new ClientMsgProtobuf<MsgClientLogon>();
-
-            SteamID gsId = new SteamID( 0, 0, Client.ConnectedUniverse, EAccountType.AnonGameServer );
-
-            logon.ProtoHeader.client_session_id = 0;
-            logon.ProtoHeader.client_steam_id = gsId.ConvertToUint64();
-
-            logon.Msg.Proto.protocol_version = MsgClientLogon.CurrentProtocol;
-
-            this.Client.Send( logon );
-
         }
 
         public void LogOnAnonUser()

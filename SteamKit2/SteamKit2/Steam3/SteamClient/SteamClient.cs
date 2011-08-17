@@ -19,11 +19,23 @@ namespace SteamKit2
     /// </summary>
     public sealed partial class SteamClient : CMClient
     {
-        Dictionary<string, ClientMsgHandler> handlers;
+        Dictionary<Type, ClientMsgHandler> handlers;
 
+#if STATIC_CALLBACKS
+        static object callbackLock = new object();
+        static Queue<CallbackMsg> callbackQueue;
+#else
         object callbackLock = new object();
         Queue<CallbackMsg> callbackQueue;
+#endif
 
+
+#if STATIC_CALLBACKS
+        static SteamClient()
+        {
+            callbackQueue = new Queue<CallbackMsg>();
+        }
+#endif
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SteamClient"/> class using the Tcp connection type.
@@ -40,14 +52,17 @@ namespace SteamKit2
         public SteamClient( CMClient.ConnectionType type )
             : base( type )
         {
-            this.handlers = new Dictionary<string, ClientMsgHandler>( StringComparer.OrdinalIgnoreCase );
-            this.callbackQueue = new Queue<CallbackMsg>();
+#if !STATIC_CALLBACKS
+            callbackQueue = new Queue<CallbackMsg>();
+#endif
+            this.handlers = new Dictionary<Type, ClientMsgHandler>();
 
             // add this library's handlers
             this.AddHandler( new SteamUser() );
             this.AddHandler( new SteamFriends() );
             this.AddHandler( new SteamApps() );
             this.AddHandler( new SteamGameCoordinator() );
+            this.AddHandler( new SteamGameServer() );
         }
 
 
@@ -61,10 +76,10 @@ namespace SteamKit2
         /// </exception>
         public void AddHandler( ClientMsgHandler handler )
         {
-            if ( handlers.ContainsKey( handler.Name ) )
-                throw new InvalidOperationException( string.Format( "A handler with name \"{0}\" is already registered.", handler.Name ) );
+            if ( handlers.ContainsKey( handler.GetType() ) )
+                throw new InvalidOperationException( string.Format( "A handler of type \"{0}\" is already registered.", handler.GetType() ) );
 
-            handlers[ handler.Name ] = handler;
+            handlers[ handler.GetType() ] = handler;
             handler.Setup( this );
         }
 
@@ -72,7 +87,7 @@ namespace SteamKit2
         /// Removes a registered handler by name.
         /// </summary>
         /// <param name="handler">The handler name to remove.</param>
-        public void RemoveHandler( string handler )
+        public void RemoveHandler( Type handler )
         {
             if ( !handlers.ContainsKey( handler ) )
                 return;
@@ -85,7 +100,7 @@ namespace SteamKit2
         /// <param name="handler">The handler to remove.</param>
         public void RemoveHandler( ClientMsgHandler handler )
         {
-            this.RemoveHandler( handler.Name );
+            this.RemoveHandler( handler.GetType() );
         }
 
         /// <summary>
@@ -98,10 +113,10 @@ namespace SteamKit2
         public T GetHandler<T>()
             where T : ClientMsgHandler
         {
-            string name = typeof( T ).GetAttribute<HandlerAttribute>().Name;
+            Type type = typeof( T );
 
-            if ( handlers.ContainsKey( name ) )
-                return handlers[ name ] as T;
+            if ( handlers.ContainsKey( type ) )
+                return handlers[ type ] as T;
 
             return null;
         }
@@ -114,7 +129,11 @@ namespace SteamKit2
         /// This function does not dequeue the callback, you must call FreeLastCallback after processing it.
         /// </summary>
         /// <returns>The next callback in the queue, or null if no callback is waiting.</returns>
+#if STATIC_CALLBACKS
+        public static CallbackMsg GetCallback()
+#else
         public CallbackMsg GetCallback()
+#endif
         {
             return GetCallback( false );
         }
@@ -123,7 +142,11 @@ namespace SteamKit2
         /// </summary>
         /// <param name="freeLast">if set to <c>true</c> this function also frees the last callback if one existed.</param>
         /// <returns>The next callback in the queue, or null if no callback is waiting.</returns>
+#if STATIC_CALLBACKS
+        public static CallbackMsg GetCallback( bool freeLast )
+#else
         public CallbackMsg GetCallback( bool freeLast )
+#endif
         {
             lock ( callbackLock )
             {
@@ -139,7 +162,11 @@ namespace SteamKit2
         /// This function does not dequeue the callback, you must call FreeLastCallback after processing it.
         /// </summary>
         /// <returns>The callback object from the queue.</returns>
+#if STATIC_CALLBACKS
+        public static CallbackMsg WaitForCallback()
+#else
         public CallbackMsg WaitForCallback()
+#endif
         {
             return WaitForCallback( false );
         }
@@ -149,7 +176,11 @@ namespace SteamKit2
         /// </summary>
         /// <param name="timeout">The length of time to block.</param>
         /// <returns>A callback object from the queue if a callback has been posted, or null if the timeout has elapsed.</returns>
+#if STATIC_CALLBACKS
+        public static CallbackMsg WaitForCallback( TimeSpan timeout )
+#else
         public CallbackMsg WaitForCallback( TimeSpan timeout )
+#endif
         {
             lock ( callbackLock )
             {
@@ -167,7 +198,11 @@ namespace SteamKit2
         /// </summary>
         /// <param name="freeLast">if set to <c>true</c> this function also frees the last callback.</param>
         /// <returns>The callback object from the queue.</returns>
+#if STATIC_CALLBACKS
+        public static CallbackMsg WaitForCallback( bool freeLast )
+#else
         public CallbackMsg WaitForCallback( bool freeLast )
+#endif
         {
             lock ( callbackLock )
             {
@@ -183,7 +218,11 @@ namespace SteamKit2
         /// <param name="freeLast">if set to <c>true</c> this function also frees the last callback.</param>
         /// <param name="timeout">The length of time to block.</param>
         /// <returns>A callback object from the queue if a callback has been posted, or null if the timeout has elapsed.</returns>
+#if STATIC_CALLBACKS
+        public static CallbackMsg WaitForCallback( bool freeLast, TimeSpan timeout )
+#else
         public CallbackMsg WaitForCallback( bool freeLast, TimeSpan timeout )
+#endif
         {
             lock ( callbackLock )
             {
@@ -200,7 +239,11 @@ namespace SteamKit2
         /// <summary>
         /// Frees the last callback in the queue.
         /// </summary>
+#if STATIC_CALLBACKS
+        public static void FreeLastCallback()
+#else
         public void FreeLastCallback()
+#endif
         {
             lock ( callbackLock )
             {
@@ -215,7 +258,11 @@ namespace SteamKit2
         /// Posts a callback to the queue. This is normally used directly by client message handlers.
         /// </summary>
         /// <param name="msg">The message.</param>
+#if STATIC_CALLBACKS
+        public static void PostCallback( CallbackMsg msg )
+#else
         public void PostCallback( CallbackMsg msg )
+#endif
         {
             if ( msg == null )
                 return;
@@ -249,7 +296,11 @@ namespace SteamKit2
         /// </summary>
         protected override void OnClientDisconnected()
         {
-            this.PostCallback( new SteamClient.DisconnectCallback() );
+#if STATIC_CALLBACKS
+            SteamClient.PostCallback( new DisconnectCallback( this ) );
+#else
+            this.PostCallback( new DisconnectCallback() );
+#endif
         }
 
 
@@ -267,11 +318,19 @@ namespace SteamKit2
             {
                 DebugLog.WriteLine( "SteamClient", "HandleEncryptResult encountered an exception while reading client msg.\n{0}", ex.ToString() );
 
+#if STATIC_CALLBACKS
+                SteamClient.PostCallback( new ConnectCallback( this, EResult.Fail ) );
+#else
                 PostCallback( new ConnectCallback( EResult.Fail ) );
+#endif
                 return;
             }
 
+#if STATIC_CALLBACKS
+            SteamClient.PostCallback( new ConnectCallback( this, encResult.Msg ) );
+#else
             PostCallback( new ConnectCallback( encResult.Msg ) );
+#endif
         }
 
     }
