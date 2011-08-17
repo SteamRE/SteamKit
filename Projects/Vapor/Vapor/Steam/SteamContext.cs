@@ -23,90 +23,6 @@ namespace Vapor
         }
     }
 
-    static class Steam2
-    {
-        public static void Initialize( string userName, string password, out ClientTGT clientTgt, out byte[] serverTgt, out AuthBlob accRecord )
-        {
-            IPEndPoint[] authServerList = GetAuthServerList( userName );
-
-            if ( authServerList == null )
-                throw new Steam2Exception( "Unable to get a list of Steam2 authentication servers." );
-
-            ConnectToAuthServer( authServerList, userName, password, out clientTgt, out serverTgt, out accRecord );
-
-        }
-
-        static IPEndPoint[] GetAuthServerList( string userName )
-        {
-            GeneralDSClient gdsClient = new GeneralDSClient();
-
-            foreach ( IPEndPoint gdsServer in GeneralDSClient.GDServers )
-            {
-                gdsClient.Disconnect();
-
-                try
-                {
-                    DebugLog.WriteLine( "Vapor Steam2", "Connecting to GDS Server {0}...", gdsServer );
-                    gdsClient.Connect( gdsServer );
-                }
-                catch ( Exception ex )
-                {
-                    DebugLog.WriteLine( "Vapor Steam2", "Unable to connect to server.\n{0}", ex.ToString() );
-                    continue;
-                }
-
-                DebugLog.WriteLine( "Vapor Steam2", "Getting auth server list from {0} using username '{1}'...", gdsServer, userName );
-                IPEndPoint[] authServerList = gdsClient.GetAuthServerList( userName );
-
-                if ( authServerList == null || authServerList.Length == 0 )
-                {
-                    DebugLog.WriteLine( "Vapor Steam2", "Unable to get auth server list. Trying next GDS server..." );
-                    continue;
-                }
-
-                gdsClient.Disconnect();
-                return authServerList;
-            }
-
-            return null;
-        }
-
-        static bool ConnectToAuthServer( IPEndPoint[] authServerList, string userName, string password, out ClientTGT clientTgt, out byte[] serverTgt, out AuthBlob accRecord )
-        {
-            clientTgt = null;
-            serverTgt = null;
-            accRecord = null;
-
-            AuthServerClient asClient = new AuthServerClient();
-
-            foreach ( IPEndPoint authServer in authServerList )
-            {
-                asClient.Disconnect();
-
-                try
-                {
-                    DebugLog.WriteLine( "Vapor Steam2", "Connecting to auth server {0}...", authServer );
-                    asClient.Connect( authServer );
-                }
-                catch ( Exception ex )
-                {
-                    DebugLog.WriteLine( "Vapor Steam2", "Unable to connect to auth server.\n{0}", ex.ToString() );
-                    continue;
-                }
-
-                AuthServerClient.LoginResult loginResult = asClient.Login( userName, password, out clientTgt, out serverTgt, out accRecord );
-
-                if ( loginResult != AuthServerClient.LoginResult.LoggedIn )
-                    throw new Steam2Exception( "Result: " + loginResult );
-
-                asClient.Disconnect();
-                return true;
-            }
-
-            return false;
-        }
-    }
-
     interface ICallbackHandler
     {
         void HandleCallback( CallbackMsg msg );
@@ -126,10 +42,6 @@ namespace Vapor
 
         public static string UserName { get; set; }
         public static string Password { get; set; }
-
-        public static ClientTGT ClientTGT { get; set; }
-        public static byte[] ServerTGT { get; set; }
-        public static AuthBlob AccountRecord { get; set; }
 
         public static string AuthCode { get; set; }
 
@@ -194,10 +106,6 @@ namespace Vapor
                     {
                         Username = Steam3.UserName,
                         Password = Steam3.Password,
-
-                        ClientTGT = Steam3.ClientTGT,
-                        ServerTGT = Steam3.ServerTGT,
-                        AccRecord = Steam3.AccountRecord,
 
                         AuthCode = Steam3.AuthCode,
 

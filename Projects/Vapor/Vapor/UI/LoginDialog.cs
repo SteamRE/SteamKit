@@ -26,29 +26,10 @@ namespace Vapor
         {
             this.Enabled = false;
 
-            ClientTGT clientTgt;
-            byte[] serverTgt;
-            AuthBlob accRecord;
-
-            try
-            {
-                Steam2.Initialize( txtUser.Text, txtPass.Text, out clientTgt, out serverTgt, out accRecord );
-            }
-            catch ( Steam2Exception ex )
-            {
-                Util.MsgBox( this, "Unable to login to Steam2: " + ex.Message );
-                this.Enabled = true;
-                return;
-            }
-
             try
             {
                 Steam3.UserName = txtUser.Text;
                 Steam3.Password = txtPass.Text;
-
-                Steam3.ClientTGT = clientTgt;
-                Steam3.ServerTGT = serverTgt;
-                Steam3.AccountRecord = accRecord;
 
                 Steam3.AlternateLogon = chkBoxAltLogon.Checked;
 
