@@ -8,7 +8,6 @@ namespace SteamKit2
     /// <summary>
     /// This handler handles all game coordinator messaging.
     /// </summary>
-    [Handler( "SteamGameCoordinator" )]
     public sealed partial class SteamGameCoordinator : ClientMsgHandler
     {
 

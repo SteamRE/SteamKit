@@ -13,7 +13,6 @@ using System.Net;
 
 namespace SteamKit2
 {
-    [Handler( "SteamApps" )]
     public sealed partial class SteamApps : ClientMsgHandler
     {
 

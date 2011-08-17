@@ -16,11 +16,6 @@ namespace SteamKit2
     public abstract class ClientMsgHandler
     {
 
-        public string Name
-        {
-            get { return this.GetType().GetAttribute<HandlerAttribute>().Name; }
-        }
-
         protected SteamClient Client { get; private set; }
 
 
