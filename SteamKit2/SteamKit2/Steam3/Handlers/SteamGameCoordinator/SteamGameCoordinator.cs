@@ -73,8 +73,13 @@ namespace SteamKit2
                     return;
                 }
 
+#if STATIC_CALLBACKS
+                var callback = new MessageCallback( Client, msg.Msg, msg.Payload.ToArray() );
+                SteamClient.PostCallback( callback );
+#else
                 var callback = new MessageCallback( msg.Msg, msg.Payload.ToArray() );
                 this.Client.PostCallback( callback );
+#endif
             }
         }
     }

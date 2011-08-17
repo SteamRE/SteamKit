@@ -277,7 +277,11 @@ namespace SteamKit2
                 return;
             }
 
+#if STATIC_CALLBACKS
+            SteamClient.PostCallback( new LoggedOffCallback( Client, loggedOff.Msg.Proto ) );
+#else
             this.Client.PostCallback( new LoggedOffCallback( loggedOff.Msg.Proto ) );
+#endif
         }
         void HandleUpdateMachineAuth( ClientMsgEventArgs e )
         {
@@ -334,10 +338,14 @@ namespace SteamKit2
                 return;
             }
 
+#if STATIC_CALLBACKS
+            var callback = new SessionTokenCallback( Client, sessToken.Msg.Proto );
+            SteamClient.PostCallback( callback );
+#else
             var callback = new SessionTokenCallback( sessToken.Msg.Proto );
             this.Client.PostCallback( callback );
+#endif
         }
-
         void HandleLoginKey( ClientMsgEventArgs e )
         {
             var loginKey = new ClientMsg<MsgClientNewLoginKey, ExtendedClientMsgHdr>();
@@ -357,10 +365,14 @@ namespace SteamKit2
 
             this.Client.Send( resp );
 
+#if STATIC_CALLBACKS
+            var callback = new LoginKeyCallback( Client, loginKey.Msg );
+            SteamClient.PostCallback( callback );
+#else
             var callback = new LoginKeyCallback( loginKey.Msg );
             this.Client.PostCallback( callback );
+#endif
         }
-
         void HandleLogOnResponse( ClientMsgEventArgs e )
         {
             if ( e.IsProto )
@@ -377,8 +389,13 @@ namespace SteamKit2
                     return;
                 }
 
+#if STATIC_CALLBACKS
+                var callback = new LogOnCallback( Client, logonResp.Msg.Proto );
+                SteamClient.PostCallback( callback );
+#else
                 var callback = new LogOnCallback( logonResp.Msg.Proto );
                 this.Client.PostCallback( callback );
+#endif
             }
         }
         #endregion

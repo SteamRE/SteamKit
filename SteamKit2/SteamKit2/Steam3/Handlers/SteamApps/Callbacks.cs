@@ -114,7 +114,13 @@ namespace SteamKit2
             /// <value>The license list.</value>
             public ReadOnlyCollection<License> LicenseList { get; private set; }
 
+
+#if STATIC_CALLBACKS
+            internal LicenseListCallback( SteamClient client, CMsgClientLicenseList msg )
+                : base( client )
+#else
             internal LicenseListCallback( CMsgClientLicenseList msg )
+#endif
             {
                 this.Result = ( EResult )msg.eresult;
 
@@ -136,11 +142,35 @@ namespace SteamKit2
             public uint AppID { get; private set; }
             public byte[] Ticket { get; private set; }
 
+
+#if STATIC_CALLBACKS
+            internal AppOwnershipTicketCallback( SteamClient client, CMsgClientGetAppOwnershipTicketResponse msg )
+                : base( client )
+#else
             internal AppOwnershipTicketCallback( CMsgClientGetAppOwnershipTicketResponse msg )
+#endif
             {
                 this.Result = ( EResult )msg.eresult;
                 this.AppID = msg.app_id;
                 this.Ticket = msg.ticket;
+            }
+        }
+
+        public sealed class GameConnectTokensCallback : CallbackMsg
+        {
+            public uint TokensToKeep { get; private set; }
+            public ReadOnlyCollection<byte[]> Tokens { get; private set; }
+
+
+#if STATIC_CALLBACKS
+            internal GameConnectTokensCallback( SteamClient client, CMsgClientGameConnectTokens msg )
+                : base( client )
+#else
+                internal GameConnectTokensCallback( CMsgClientGameConnectTokens msg )
+#endif
+            {
+                TokensToKeep = msg.max_tokens_to_keep;
+                Tokens = new ReadOnlyCollection<byte[]>( msg.tokens ); 
             }
         }
 

@@ -34,7 +34,13 @@ namespace SteamKit2
             /// </summary>
             public byte[] Payload { get; private set; }
 
+
+#if STATIC_CALLBACKS
+            internal MessageCallback( SteamClient client, MsgClientFromGC gcMsg, byte[] payload )
+                : base( client )
+#else
             internal MessageCallback( MsgClientFromGC gcMsg, byte[] payload )
+#endif
             {
                 this.eMsg = ( EGCMsg )gcMsg.GCEMsg;
                 this.AppID = gcMsg.AppId;

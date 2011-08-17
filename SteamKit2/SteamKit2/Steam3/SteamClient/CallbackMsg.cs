@@ -20,6 +20,18 @@ namespace SteamKit2
         /// </summary>
         public delegate void HandleDelegate<T>( T callMsg );
 
+
+#if STATIC_CALLBACKS
+        public SteamClient Client { get; private set; }
+
+
+        public CallbackMsg( SteamClient client )
+        {
+            this.Client = client;
+        }
+#endif
+
+
         /// <summary>
         /// Determines whether this callback is a certain type.
         /// </summary>

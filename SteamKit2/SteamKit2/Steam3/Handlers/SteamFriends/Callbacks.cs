@@ -128,7 +128,12 @@ namespace SteamKit2
             /// <value>The published session ID.</value>
             public uint PublishedSessionID { get; private set; }
 
+#if STATIC_CALLBACKS
+            internal PersonaStateCallback( SteamClient client, CMsgClientPersonaState.Friend friend )
+                : base( client )
+#else
             internal PersonaStateCallback( CMsgClientPersonaState.Friend friend )
+#endif
             {
                 this.StatusFlags = ( EClientPersonaStateFlag )friend.persona_state_flags;
 
@@ -201,7 +206,12 @@ namespace SteamKit2
             /// <value>The friend list.</value>
             public ReadOnlyCollection<Friend> FriendList { get; private set; }
 
+#if STATIC_CALLBACKS
+            internal FriendsListCallback( SteamClient client, CMsgClientFriendsList msg )
+                : base( client )
+#else
             internal FriendsListCallback( CMsgClientFriendsList msg )
+#endif
             {
                 this.Incremental = msg.bincremental;
 
@@ -245,7 +255,12 @@ namespace SteamKit2
             public string Message { get; private set; }
 
 
+#if STATIC_CALLBACKS
+            internal FriendMsgCallback( SteamClient client, CMsgClientFriendMsgIncoming msg )
+                : base( client )
+#else
             internal FriendMsgCallback( CMsgClientFriendMsgIncoming msg )
+#endif
             {
                 this.Sender = msg.steamid_from;
                 this.EntryType = ( EChatEntryType )msg.chat_entry_type;
@@ -279,7 +294,12 @@ namespace SteamKit2
             public string PersonaName { get; private set; }
 
 
+#if STATIC_CALLBACKS
+            internal FriendAddedCallback( SteamClient client, CMsgClientAddFriendResponse msg )
+                : base( client )
+#else
             internal FriendAddedCallback( CMsgClientAddFriendResponse msg )
+#endif
             {
                 this.Result = ( EResult )msg.eresult;
 
