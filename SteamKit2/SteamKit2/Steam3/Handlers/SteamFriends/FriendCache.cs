@@ -128,7 +128,15 @@ namespace SteamKit2
 
             public Friend GetFriend( SteamID steamId )
             {
-                return friendList.GetByID( steamId );
+                var friend = friendList.GetByID( steamId );
+
+                if ( friend == null )
+                {
+                    friend = new Friend( steamId );
+                    AddFriend( friend );
+                }
+
+                return friend;
             }
             public Friend GetFriendByIndex( int index )
             {

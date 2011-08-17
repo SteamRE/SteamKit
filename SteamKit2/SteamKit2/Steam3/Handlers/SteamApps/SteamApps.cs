@@ -42,6 +42,10 @@ namespace SteamKit2
                     HandleLicenseList( e );
                     break;
 
+                case EMsg.ClientGameConnectTokens:
+                    HandleGameConnectTokens( e );
+                    break;
+
                 case EMsg.ClientGetAppOwnershipTicketResponse:
                     HandleAppOwnershipTicketResponse( e );
                     break;
@@ -66,10 +70,26 @@ namespace SteamKit2
                 return;
             }
 
+#if STATIC_CALLBACKS
+            var callback = new AppOwnershipTicketCallback( Client, ticketResponse.Msg.Proto );
+            SteamClient.PostCallback( callback );
+#else
             var callback = new AppOwnershipTicketCallback( ticketResponse.Msg.Proto );
             this.Client.PostCallback( callback );
+#endif
         }
+        void HandleGameConnectTokens( ClientMsgEventArgs e )
+        {
+            var gcTokens = new ClientMsgProtobuf<MsgClientGameConnectTokens>( e.Data );
 
+#if STATIC_CALLBACKS
+            var callback = new GameConnectTokensCallback( Client, gcTokens.Msg.Proto );
+            SteamClient.PostCallback( callback );
+#else
+            var callback = new GameConnectTokensCallback( gcTokens.Msg.Proto );
+            this.Client.PostCallback( callback );
+#endif
+        }
         void HandleLicenseList( ClientMsgEventArgs e )
         {
             var licenseList = new ClientMsgProtobuf<MsgClientLicenseList>();
@@ -84,8 +104,14 @@ namespace SteamKit2
                 return;
             }
 
+#if STATIC_CALLBACKS
+            var callback = new LicenseListCallback( Client, licenseList.Msg.Proto );
+            SteamClient.PostCallback( callback );
+#else
             var callback = new LicenseListCallback( licenseList.Msg.Proto );
             this.Client.PostCallback( callback );
+#endif
+
         }
         #endregion
 

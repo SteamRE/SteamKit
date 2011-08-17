@@ -23,13 +23,22 @@ namespace SteamKit2
             /// <value>The result.</value>
             public EResult Result { get; private set; }
 
-
+#if STATIC_CALLBACKS
+            internal ConnectCallback( SteamClient client, MsgChannelEncryptResult result )
+                : this( client, result.Result )
+#else
             internal ConnectCallback( MsgChannelEncryptResult result )
                 : this( result.Result )
+#endif
             {
             }
 
+#if STATIC_CALLBACKS
+            internal ConnectCallback( SteamClient client, EResult result )
+                : base( client )
+#else
             internal ConnectCallback( EResult result )
+#endif
             {
                 this.Result = result;
             }
@@ -41,6 +50,12 @@ namespace SteamKit2
         /// </summary>
         public sealed class DisconnectCallback : CallbackMsg
         {
+#if STATIC_CALLBACKS
+            public DisconnectCallback( SteamClient client )
+                : base( client )
+            {
+            }
+#endif
         }
     }
 }

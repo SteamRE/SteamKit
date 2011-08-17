@@ -67,7 +67,12 @@ namespace SteamKit2
             public string EmailDomain { get; private set; }
 
 
+#if STATIC_CALLBACKS
+            internal LogOnCallback( SteamClient client, CMsgClientLogonResponse resp )
+                : base( client )
+#else
             internal LogOnCallback( CMsgClientLogonResponse resp )
+#endif
             {
                 this.Result = ( EResult )resp.eresult;
 
@@ -97,7 +102,12 @@ namespace SteamKit2
             /// <value>The result.</value>
             public EResult Result { get; private set; }
 
+#if STATIC_CALLBACKS
+            internal LoggedOffCallback( SteamClient client, CMsgClientLoggedOff resp )
+                : base( client )
+#else
             internal LoggedOffCallback( CMsgClientLoggedOff resp )
+#endif
             {
                 this.Result = ( EResult )resp.eresult;
             }
@@ -119,7 +129,12 @@ namespace SteamKit2
             /// <value>The unique ID.</value>
             public uint UniqueID { get; private set; }
 
+#if STATIC_CALLBACKS
+            internal LoginKeyCallback( SteamClient client, MsgClientNewLoginKey logKey )
+                : base( client )
+#else
             internal LoginKeyCallback( MsgClientNewLoginKey logKey )
+#endif
             {
                 this.LoginKey = logKey.LoginKey;
                 this.UniqueID = logKey.UniqueID;
@@ -133,7 +148,12 @@ namespace SteamKit2
         {
             public ulong SessionToken { get; private set; }
 
+#if STATIC_CALLBACKS
+            internal SessionTokenCallback( SteamClient client, CMsgClientSessionToken msg )
+                : base( client )
+#else
             internal SessionTokenCallback( CMsgClientSessionToken msg )
+#endif
             {
                 this.SessionToken = msg.token;
             }
