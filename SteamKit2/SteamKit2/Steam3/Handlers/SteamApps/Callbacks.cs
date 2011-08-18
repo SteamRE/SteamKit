@@ -174,5 +174,30 @@ namespace SteamKit2
             }
         }
 
+        public sealed class VACStatusCallback : CallbackMsg
+        {
+            public ReadOnlyCollection<uint> BannedApps { get; set; }
+
+
+#if STATIC_CALLBACKS
+            internal VACStatusCallback( SteamClient client, MsgClientVACBanStatus msg, byte[] payload )
+                : base( client )
+#else
+            internal VACStatusCallback( MsgClientVACBanStatus msg, byte[] payload )
+#endif
+            {
+                List<uint> tempList = new List<uint>();
+
+                DataStream ds = new DataStream( payload );
+
+                for ( int x = 0 ; x < msg.NumBans ; x++ )
+                {
+                    tempList.Add( ds.ReadUInt32() );
+                }
+
+                BannedApps = new ReadOnlyCollection<uint>( tempList );
+            }
+        }
+
     }
 }

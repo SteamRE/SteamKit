@@ -46,12 +46,17 @@ namespace SteamKit2
                     HandleGameConnectTokens( e );
                     break;
 
+                case EMsg.ClientVACBanStatus:
+                    HandleVACBanStatus( e );
+                    break;
+
                 case EMsg.ClientGetAppOwnershipTicketResponse:
                     HandleAppOwnershipTicketResponse( e );
                     break;
 
             }
         }
+
 
 
 
@@ -111,7 +116,18 @@ namespace SteamKit2
             var callback = new LicenseListCallback( licenseList.Msg.Proto );
             this.Client.PostCallback( callback );
 #endif
+        }
+        void HandleVACBanStatus( ClientMsgEventArgs e )
+        {
+            var vacStatus = new ClientMsg<MsgClientVACBanStatus, ExtendedClientMsgHdr>( e.Data );
 
+#if STATIC_CALLBACKS
+            var callback = new VACStatusCallback( Client, vacStatus.Msg, vacStatus.Payload.ToArray() );
+            SteamClient.PostCallback( callback );
+#else
+            var callback = new VACStatusCallback( vacStatus.Msg, vacStatus.Payload.ToArray() );
+            this.Client.PostCallback( callback );
+#endif
         }
         #endregion
 
