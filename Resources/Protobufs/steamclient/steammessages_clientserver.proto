@@ -1652,3 +1652,6 @@ message CMsgGSComputeNewPlayerCompatibilityResponse {
 	optional int32 ct_clanmembers_dont_like_you = 6;
 }
 
+message CMsgClientSentLogs {
+}
+
