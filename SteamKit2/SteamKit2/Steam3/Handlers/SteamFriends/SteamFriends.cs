@@ -261,8 +261,6 @@ namespace SteamKit2
 
 
 
-
-
         #region ClientMsg Handlers
         void HandleAccountInfo( ClientMsgEventArgs e )
         {
@@ -294,10 +292,13 @@ namespace SteamKit2
                 return;
             }
 
-            byte[] msgData = friendMsg.Payload.ToArray();
-
+#if STATIC_CALLBACKS
+            var callback = new FriendMsgCallback( Client, friendMsg.Msg.Proto );
+            SteamClient.PostCallback( callback );
+#else
             var callback = new FriendMsgCallback( friendMsg.Msg.Proto );
             this.Client.PostCallback( callback );
+#endif
         }
         void HandleFriendsList( ClientMsgEventArgs e )
         {
@@ -349,8 +350,13 @@ namespace SteamKit2
 
             this.Client.Send( reqLocalData );
 
+#if STATIC_CALLBACKS
+            var callback = new FriendsListCallback( Client, list.Msg.Proto );
+            SteamClient.PostCallback( callback );
+#else
             var callback = new FriendsListCallback( list.Msg.Proto );
             this.Client.PostCallback( callback );
+#endif
         }
         void HandlePersonaState( ClientMsgEventArgs e )
         {
@@ -372,9 +378,6 @@ namespace SteamKit2
             {
                 Friend cacheFriend = ( friend.friendid == localUser.SteamID ? localUser : cache.GetFriend( friend.friendid ) );
 
-                if ( cacheFriend == null )
-                    continue; // persona info was for someone not in our cache
-
                 if ( ( flags & EClientPersonaStateFlag.PlayerName ) == EClientPersonaStateFlag.PlayerName )
                     cacheFriend.Name = friend.player_name;
 
@@ -388,8 +391,13 @@ namespace SteamKit2
                     cacheFriend.GameAppID = friend.game_played_app_id;
                 }
 
+#if STATIC_CALLBACKS
+                var callback = new PersonaStateCallback( Client, friend );
+                SteamClient.PostCallback( callback );
+#else
                 var callback = new PersonaStateCallback( friend );
                 this.Client.PostCallback( callback );
+#endif
             }
         }
         void HandleFriendResponse( ClientMsgEventArgs e )
@@ -406,8 +414,13 @@ namespace SteamKit2
                 return;
             }
 
+#if STATIC_CALLBACKS
+            var callback = new FriendAddedCallback( Client, friendResponse.Msg.Proto );
+            SteamClient.PostCallback( callback );
+#else
             var callback = new FriendAddedCallback( friendResponse.Msg.Proto );
             this.Client.PostCallback( callback );
+#endif
         }
         #endregion
     }
