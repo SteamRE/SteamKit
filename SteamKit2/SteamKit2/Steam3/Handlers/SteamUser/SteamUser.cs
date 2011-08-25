@@ -257,8 +257,18 @@ namespace SteamKit2
                 case EMsg.ClientUpdateMachineAuth:
                     HandleUpdateMachineAuth( e );
                     break;
+
+                case EMsg.ClientAccountInfo:
+                    HandleAccountInfo( e );
+                    break;
+
+                case EMsg.ClientWalletInfoUpdate:
+                    HandleWalletInfo( e );
+                    break;
             }
         }
+
+
 
 
 
@@ -397,6 +407,30 @@ namespace SteamKit2
                 this.Client.PostCallback( callback );
 #endif
             }
+        }
+        void HandleAccountInfo( ClientMsgEventArgs e )
+        {
+            var accInfo = new ClientMsgProtobuf<MsgClientAccountInfo>( e.Data );
+
+#if STATIC_CALLBACKS
+            var callback = new AccountInfoCallback( Client, accInfo.Msg.Proto );
+            SteamClient.PostCallback( callback );
+#else
+            var callback = new AccountInfoCallback( accInfo.Msg.Proto );
+            this.Client.PostCallback( callback );
+#endif
+        }
+        void HandleWalletInfo( ClientMsgEventArgs e )
+        {
+            var walletInfo = new ClientMsgProtobuf<MsgClientWalletInfoUpdate>( e.Data );
+
+#if STATIC_CALLBACKS
+            var callback = new WalletInfoCallback( Client, walletInfo.Msg.Proto );
+            SteamClient.PostCallback( callback );
+#else
+            var callback = new WalletInfoCallback( walletInfo.Msg.Proto );
+            this.Client.PostCallback( callback );
+#endif
         }
         #endregion
     }

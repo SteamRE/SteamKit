@@ -158,5 +158,66 @@ namespace SteamKit2
                 this.SessionToken = msg.token;
             }
         }
+
+        public sealed class AccountInfoCallback : CallbackMsg
+        {
+            public string PersonaName { get; private set; }
+            public string Country { get; private set; }
+
+            public byte[] PasswordSalt { get; private set; }
+            public byte[] PasswordSHADisgest { get; private set; }
+
+            public int CountAuthedComputers { get; private set; }
+            public bool LockedWithIPT { get; private set; }
+
+            public EAccountFlags AccountFlags { get; private set; }
+
+            public ulong FacebookID { get; private set; }
+            public string FacebookName { get; private set ;}
+
+#if STATIC_CALLBACKS
+            internal AccountInfoCallback( SteamClient client, CMsgClientAccountInfo msg )
+                : base( client )
+#else
+            internal AccountInfoCallback( CMsgClientAccountInfo msg )
+#endif
+            {
+                PersonaName = msg.persona_name;
+                Country = msg.ip_country;
+
+                PasswordSalt = msg.salt_password;
+                PasswordSHADisgest = msg.sha_digest_Password;
+
+                CountAuthedComputers = msg.count_authed_computers;
+                LockedWithIPT = msg.locked_with_ipt;
+
+                AccountFlags = ( EAccountFlags )msg.account_flags;
+
+                FacebookID = msg.facebook_id;
+                FacebookName = msg.facebook_name;
+            }
+        }
+
+        public sealed class WalletInfoCallback : CallbackMsg
+        {
+            public bool HasWallet { get; private set; }
+
+            public int Currency { get; private set; }
+            public int Balance { get; private set; }
+
+
+#if STATIC_CALLBACKS
+            internal WalletInfoCallback( SteamClient client, CMsgClientWalletInfoUpdate wallet )
+                : base( client )
+#else
+            internal WalletInfoCallback( CMsgClientWalletInfoUpdate wallet )
+#endif
+            {
+                HasWallet = wallet.has_wallet;
+
+                Currency = wallet.currency;
+                Balance = wallet.balance;
+            }
+        }
     }
 }
