@@ -303,6 +303,7 @@ namespace Vapor
 
         private void MainForm_FormClosing( object sender, FormClosingEventArgs e )
         {
+#if TRAY_BUILD
             if ( shouldClose )
             {
                 return;
@@ -310,6 +311,7 @@ namespace Vapor
 
             e.Cancel = true;
             this.Hide();
+#endif
         }
 
         private void vaporContextMenu2_Opening( object sender, CancelEventArgs e )
