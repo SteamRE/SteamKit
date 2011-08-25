@@ -94,7 +94,6 @@ enum EMsg
 	ClientFriendRemovedFromSource = 808;
 	ClientCreateChat = 809;
 	ClientCreateChatResponse = 810;
-	ClientUpdateChatMetadata = 811;
 	ClientP2PIntroducerMessage = 813;
 	ClientChatActionResult = 814;
 	ClientRequestFriendData = 815;
@@ -122,8 +121,6 @@ enum EMsg
 	ClientSetIgnoreFriendResponse = 856;
 	ClientGetAppOwnershipTicket = 857;
 	ClientGetAppOwnershipTicketResponse = 858;
-	ClientGetLobbyMetadata = 861;
-	ClientGetLobbyMetadataResponse = 862;
 	ClientVTTCert = 863;
 	ClientAppInfoUpdate = 866;
 	ClientAppInfoChanges = 867;
@@ -149,6 +146,10 @@ enum EMsg
 	GSGetUserGroupStatusResponse = 923;
 	GSGetReputation = 936;
 	GSGetReputationResponse = 937;
+	GSAssociateWithClan = 938;
+	GSAssociateWithClanResponse = 939;
+	GSComputeNewPlayerCompatibility = 940;
+	GSComputeNewPlayerCompatibilityResponse = 941;
 	FileXferRequest = 1200;
 	FileXferResponse = 1201;
 	FileXferData = 1202;
@@ -157,6 +158,8 @@ enum EMsg
 	ChannelEncryptRequest = 1303;
 	ChannelEncryptResponse = 1304;
 	ClientChatRoomInfo = 4026;
+	AMGameServerUpdate = 4331;
+	AMGameServerRemove = 4332;
 	ClientUFSUploadFileRequest = 5202;
 	ClientUFSUploadFileResponse = 5203;
 	ClientUFSUploadFileChunk = 5204;
@@ -304,12 +307,16 @@ enum EMsg
 	ClientResetForgottenPassword4 = 5551;
 	ClientHideFriend = 5552;
 	ClientFriendsGroupsList = 5553;
-	AMClientCreateFriendGroup = 5560;
-	AMClientCreateFriendGroupResponse = 5561;
-	AMClientDeleteFriendGroup = 5562;
-	AMClientDeleteFriendGroupResponse = 5563;
-	AMClientRenameFriendGroup = 5564;
-	AMClientRenameFriendGroupResponse = 5565;
+	ClientGetClanActivityCounts = 5554;
+	ClientGetClanActivityCountsResponse = 5555;
+	ClientOGSReportString = 5556;
+	ClientOGSReportBug = 5557;
+	AMClientCreateFriendsGroup = 5560;
+	AMClientCreateFriendsGroupResponse = 5561;
+	AMClientDeleteFriendsGroup = 5562;
+	AMClientDeleteFriendsGroupResponse = 5563;
+	AMClientRenameFriendsGroup = 5564;
+	AMClientRenameFriendsGroupResponse = 5565;
 	AMClientAddFriendToGroup = 5566;
 	AMClientAddFriendToGroupResponse = 5567;
 	AMClientRemoveFriendFromGroup = 5568;
@@ -333,6 +340,10 @@ enum EMsg
 	ClientMDSGetDepotManifest = 5818;
 	ClientMDSGetDepotManifestResponse = 5819;
 	ClientMDSGetDepotManifestChunk = 5820;
+	ClientMDSRegisterAppBuild = 5838;
+	ClientMDSRegisterAppBuildResponse = 5839;
+	ClientMDSSetAppBuildLive = 5840;
+	ClientMDSSetAppBuildLiveResponse = 5841;
 	ClientGMSServerQuery = 6403;
 	GMSClientServerQueryResponse = 6404;
 	ClientMMSCreateLobby = 6601;
@@ -382,4 +393,5 @@ enum EMsg
 	EconTrading_CancelTradeRequest = 7706;
 	ClientUGSGetGlobalStats = 7901;
 	ClientUGSGetGlobalStatsResponse = 7902;
+
 };
