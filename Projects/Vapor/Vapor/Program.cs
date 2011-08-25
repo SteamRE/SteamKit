@@ -4,15 +4,30 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Threading;
+using SteamKit2;
+using System.Diagnostics;
 
 namespace Vapor
 {
+    class ConsoleDebugListener : IDebugListener
+    {
+        public void WriteLine( string msg )
+        {
+            Console.WriteLine( msg );
+            Trace.WriteLine( msg );
+        }
+
+    }
+
+
     class Program
     {
         public static void Main( string[] args )
         {
             if ( FindArg( args, "-debug" ) )
             {
+                DebugLog.AddListener( new ConsoleDebugListener() );
+
                 TraceDialog td = new TraceDialog();
                 td.Show();
 
