@@ -82,6 +82,8 @@ namespace Vapor
             {
                 var perState = ( SteamFriends.PersonaStateCallback )msg;
 
+                if ( this.Friend == null )
+                    return;
 
                 if ( perState.FriendID != this.Friend.SteamID )
                     return;
