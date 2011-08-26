@@ -145,10 +145,7 @@ namespace SteamKit2
         /// <returns>The game name of a friend playing a game, or null if they haven't been cached yet.</returns>
         public string GetFriendGamePlayedName( SteamID steamId )
         {
-            Friend friend = cache.GetFriend( steamId );
-
-            if ( steamId == localUser.SteamID )
-                friend = localUser;
+            Friend friend = ( steamId == localUser.SteamID ? localUser : cache.GetFriend( steamId ) );
 
             if ( friend == null )
                 return null;
@@ -162,10 +159,7 @@ namespace SteamKit2
         /// <returns>The gameid of a friend playing a game, or 0 if they haven't been cached yet.</returns>
         public GameID GetFriendGamePlayed( SteamID steamId )
         {
-            Friend friend = cache.GetFriend( steamId );
-
-            if ( steamId == localUser.SteamID )
-                friend = localUser;
+            Friend friend = ( steamId == localUser.SteamID ? localUser : cache.GetFriend( steamId ) );
 
             if ( friend == null )
                 return 0;
@@ -391,6 +385,10 @@ namespace SteamKit2
                     cacheFriend.GameAppID = friend.game_played_app_id;
                 }
 
+            }
+
+            foreach ( var friend in perState.Msg.Proto.friends )
+            {
 #if STATIC_CALLBACKS
                 var callback = new PersonaStateCallback( Client, friend );
                 SteamClient.PostCallback( callback );
