@@ -5,20 +5,9 @@ using System.Text;
 using System.Windows.Forms;
 using System.Threading;
 using SteamKit2;
-using System.Diagnostics;
 
 namespace Vapor
 {
-    class ConsoleDebugListener : IDebugListener
-    {
-        public void WriteLine( string msg )
-        {
-            Console.WriteLine( msg );
-            Trace.WriteLine( msg );
-        }
-
-    }
-
 
     class Program
     {
@@ -35,13 +24,18 @@ namespace Vapor
 
             }
 
-            Start( args );
+            try
+            {
+                Start( args );
+            }
+            catch ( Exception ex )
+            {
+                new ErrorDialog( ex ).ShowDialog();
+            }
         }
 
         static void Start( string[] args )
         {
-
-
             LoginDialog ld = new LoginDialog( FindArg( args, "-tcp" ) );
 
             if ( ld.ShowDialog() != DialogResult.OK )
@@ -65,7 +59,16 @@ namespace Vapor
             CDNCache.Shutdown();
 
             if ( mf.Relog )
-                Start( args );
+            {
+                try
+                {
+                    Start( args );
+                }
+                catch ( Exception ex )
+                {
+                    new ErrorDialog( ex ).ShowDialog();
+                }
+            }
         }
 
         static bool FindArg( string[] args, string arg )

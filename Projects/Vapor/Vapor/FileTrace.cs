@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using SteamKit2;
 using System.IO;
+using System.Diagnostics;
 
 namespace Vapor
 {
@@ -31,5 +32,15 @@ namespace Vapor
             }
             catch { }
         }
+    }
+
+    class ConsoleDebugListener : IDebugListener
+    {
+        public void WriteLine( string msg )
+        {
+            Console.WriteLine( msg );
+            Trace.WriteLine( msg );
+        }
+
     }
 }
