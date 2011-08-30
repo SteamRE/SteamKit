@@ -162,3 +162,27 @@ message CMsgAMAddFreeLicenseResponse {
 	optional fixed64 transid = 3;
 }
 
+message CGCMsgSystemStatsSchema {
+	optional uint32 gc_app_id = 1;
+	optional bytes schema_kv = 2;
+}
+
+message CGCMsgGetSystemStats {
+}
+
+message CGCMsgGetSystemStatsResponse {
+	optional uint32 gc_app_id = 1;
+	optional bytes stats_kv = 2;
+	optional uint32 active_jobs = 3;
+	optional uint32 yielding_jobs = 4;
+	optional uint32 user_sessions = 5;
+	optional uint32 game_server_sessions = 6;
+	optional uint32 socaches = 7;
+	optional uint32 socaches_to_unload = 8;
+	optional uint32 socaches_loading = 9;
+	optional uint32 writeback_queue = 10;
+	optional uint32 steamid_locks = 11;
+	optional uint32 logon_queue = 12;
+	optional uint32 logon_jobs = 13;
+}
+
