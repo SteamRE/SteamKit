@@ -171,7 +171,10 @@ namespace Vapor
             sortTimer.Stop();
             sortTimer.Dispose();
 
-            this.ReloadFriends();
+            this.Invoke( new MethodInvoker( () =>
+                {
+                    this.ReloadFriends();
+                } ) );
         }
 
         public void ReloadFriends()
