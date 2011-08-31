@@ -189,3 +189,10 @@ message CMsgReplicateConVars {
 	repeated .CMsgConVarValue convars = 1;
 }
 
+message CMsgItemAcknowledged {
+	optional uint32 account_id = 1;
+	optional uint32 inventory = 2;
+	optional uint32 def_index = 3;
+	optional uint32 quality = 4;
+}
+

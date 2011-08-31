@@ -1,8 +1,15 @@
 import "steammessages.proto";
 
 message CSOPartyInvite {
-	optional uint32 party_id = 1;
+	optional uint64 group_id = 1;
 	optional fixed64 sender_id = 2;
+	optional string sender_name = 3;
+}
+
+message CSOLobbyInvite {
+	optional uint64 group_id = 1;
+	optional fixed64 sender_id = 2;
+	optional string sender_name = 3;
 }
 
 message CMsgSystemBroadcast {
@@ -14,12 +21,12 @@ message CMsgInviteToParty {
 }
 
 message CMsgInvitationCreated {
-	optional uint32 group_id = 1;
+	optional uint64 group_id = 1;
 	optional fixed64 steam_id = 2;
 }
 
 message CMsgPartyInviteResponse {
-	optional uint32 party_id = 1;
+	optional uint64 party_id = 1;
 	optional bool accept = 2;
 }
 
@@ -36,6 +43,7 @@ message CMsgServerAddresses {
 	optional uint32 server_port = 3;
 	optional uint32 server_tv_port = 4;
 	optional string server_key = 5;
+	optional bool server_hibernation = 6;
 }
 
 message CMsgServerAvailable {
@@ -47,6 +55,7 @@ message CSOEconGameAccountClient {
 	optional bool eligible_for_online_play = 3 [default = true];
 	optional bool need_to_choose_most_helpful_friend = 4;
 	optional bool in_coaches_list = 5;
+	optional fixed32 trade_ban_expiration = 6;
 }
 
 message CSOItemCriteriaCondition {
@@ -154,14 +163,22 @@ message CMsgStoreGetUserDataResponse {
 }
 
 message CMsgStartupCheck {
+	optional uint32 send_count = 1;
 }
 
 message CMsgStartupCheckResponse {
 	optional fixed32 item_schema_version = 1;
+	optional uint32 send_count_response = 2;
 }
 
 message CMsgUpdateItemSchema {
 	optional bytes items_game = 1;
+	optional fixed32 item_schema_version = 2;
+	optional string items_game_url = 3;
+}
+
+message CMsgGCError {
+	optional string error_text = 1;
 }
 
 message CMsgRequestInventoryRefresh {

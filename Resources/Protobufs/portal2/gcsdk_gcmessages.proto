@@ -3,6 +3,7 @@ message CMsgSOSingleObject {
 	optional fixed64 owner = 1;
 	optional int32 type_id = 2;
 	optional bytes object_data = 3;
+	optional fixed64 version = 4;
 }
 
 message CMsgSOMultipleObjects {
@@ -13,6 +14,7 @@ message CMsgSOMultipleObjects {
 
 	optional fixed64 owner = 1;
 	repeated .CMsgSOMultipleObjects.SingleObject objects = 2;
+	optional fixed64 version = 3;
 }
 
 message CMsgSOCacheSubscribed {
@@ -23,9 +25,23 @@ message CMsgSOCacheSubscribed {
 
 	optional fixed64 owner = 1;
 	repeated .CMsgSOCacheSubscribed.SubscribedType objects = 2;
+	optional fixed64 version = 3;
 }
 
 message CMsgSOCacheUnsubscribed {
 	optional fixed64 owner = 1;
+}
+
+message CMsgSOCacheSubscriptionCheck {
+	optional fixed64 owner = 1;
+	optional fixed64 version = 2;
+}
+
+message CMsgSOCacheSubscriptionRefresh {
+	optional fixed64 owner = 1;
+}
+
+message CMsgSOCacheVersion {
+	optional fixed64 version = 1;
 }
 
