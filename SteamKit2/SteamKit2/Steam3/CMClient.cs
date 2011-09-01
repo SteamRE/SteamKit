@@ -366,10 +366,12 @@ namespace SteamKit2
                 DebugLog.WriteLine( "CMClient", "HandleEncryptionRequest got request for invalid universe! Universe: {0} Protocol ver: {1}", eUniv, protoVersion );
                 return;
             }
-
+			
+            CryptoHelper.InitializeRSA( pubKey );
+			
             var encResp = new ClientMsg<MsgChannelEncryptResponse, MsgHdr>();
 
-            byte[] cryptedSessKey = CryptoHelper.RSAEncrypt( tempSessionKey, pubKey );
+            byte[] cryptedSessKey = CryptoHelper.RSAEncrypt( tempSessionKey );
             byte[] keyCrc = CryptoHelper.CRCHash( cryptedSessKey );
 
             encResp.Payload.Write( cryptedSessKey );

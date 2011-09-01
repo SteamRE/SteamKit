@@ -16,23 +16,21 @@ namespace SteamKit2
 {
     public static class CryptoHelper
     {
-        public static byte[] RSAEncrypt( byte[] input, byte[] key )
+        private static RSACryptoServiceProvider rsaProvider;
+		
+        public static void InitializeRSA( byte[] key )
+        {			
+		    AsnKeyParser keyParser = new AsnKeyParser( key );
+		    RSAParameters rsaParam = keyParser.ParseRSAPublicKey();
+			
+		    rsaProvider = new RSACryptoServiceProvider();
+		    rsaProvider.ImportParameters(rsaParam);
+        }
+		
+        public static byte[] RSAEncrypt( byte[] input )
         {
-            RSACryptoServiceProvider rsa = new RSACryptoServiceProvider( 1024 );
-
-            RSAParameters rsaParams = new RSAParameters();
-            rsaParams.Modulus = new byte[ rsa.KeySize / 8 ];
-            rsaParams.Exponent = new byte[ 1 ]; // valve keys have a 1 byte exponent
-
-            Array.Copy( key, 29, rsaParams.Modulus, 0, rsaParams.Modulus.Length );
-            Array.Copy( key, 29 + rsaParams.Modulus.Length + 2, rsaParams.Exponent, 0, rsaParams.Exponent.Length );
-
-            rsa.ImportParameters( rsaParams );
-
-            byte[] output = rsa.Encrypt( input, true );
-
-            rsa.Clear();
-
+            byte[] output = rsaProvider.Encrypt( input, true );
+			
             return output;
         }
 
