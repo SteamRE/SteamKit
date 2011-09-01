@@ -120,7 +120,6 @@ namespace SteamKit2
 		ClientFriendRemovedFromSource = 808,
 		ClientCreateChat = 809,
 		ClientCreateChatResponse = 810,
-		ClientUpdateChatMetadata = 811,
 		ClientP2PIntroducerMessage = 813,
 		ClientChatActionResult = 814,
 		ClientRequestFriendData = 815,
@@ -148,8 +147,6 @@ namespace SteamKit2
 		ClientSetIgnoreFriendResponse = 856,
 		ClientGetAppOwnershipTicket = 857,
 		ClientGetAppOwnershipTicketResponse = 858,
-		ClientGetLobbyMetadata = 861,
-		ClientGetLobbyMetadataResponse = 862,
 		ClientVTTCert = 863,
 		ClientAppInfoUpdate = 866,
 		ClientAppInfoChanges = 867,
@@ -175,6 +172,10 @@ namespace SteamKit2
 		GSGetUserGroupStatusResponse = 923,
 		GSGetReputation = 936,
 		GSGetReputationResponse = 937,
+		GSAssociateWithClan = 938,
+		GSAssociateWithClanResponse = 939,
+		GSComputeNewPlayerCompatibility = 940,
+		GSComputeNewPlayerCompatibilityResponse = 941,
 		FileXferRequest = 1200,
 		FileXferResponse = 1201,
 		FileXferData = 1202,
@@ -183,6 +184,8 @@ namespace SteamKit2
 		ChannelEncryptRequest = 1303,
 		ChannelEncryptResponse = 1304,
 		ClientChatRoomInfo = 4026,
+		AMGameServerUpdate = 4331,
+		AMGameServerRemove = 4332,
 		ClientUFSUploadFileRequest = 5202,
 		ClientUFSUploadFileResponse = 5203,
 		ClientUFSUploadFileChunk = 5204,
@@ -330,12 +333,16 @@ namespace SteamKit2
 		ClientResetForgottenPassword4 = 5551,
 		ClientHideFriend = 5552,
 		ClientFriendsGroupsList = 5553,
-		AMClientCreateFriendGroup = 5560,
-		AMClientCreateFriendGroupResponse = 5561,
-		AMClientDeleteFriendGroup = 5562,
-		AMClientDeleteFriendGroupResponse = 5563,
-		AMClientRenameFriendGroup = 5564,
-		AMClientRenameFriendGroupResponse = 5565,
+		ClientGetClanActivityCounts = 5554,
+		ClientGetClanActivityCountsResponse = 5555,
+		ClientOGSReportString = 5556,
+		ClientOGSReportBug = 5557,
+		AMClientCreateFriendsGroup = 5560,
+		AMClientCreateFriendsGroupResponse = 5561,
+		AMClientDeleteFriendsGroup = 5562,
+		AMClientDeleteFriendsGroupResponse = 5563,
+		AMClientRenameFriendsGroup = 5564,
+		AMClientRenameFriendsGroupResponse = 5565,
 		AMClientAddFriendToGroup = 5566,
 		AMClientAddFriendToGroupResponse = 5567,
 		AMClientRemoveFriendFromGroup = 5568,
@@ -359,6 +366,10 @@ namespace SteamKit2
 		ClientMDSGetDepotManifest = 5818,
 		ClientMDSGetDepotManifestResponse = 5819,
 		ClientMDSGetDepotManifestChunk = 5820,
+		ClientMDSRegisterAppBuild = 5838,
+		ClientMDSRegisterAppBuildResponse = 5839,
+		ClientMDSSetAppBuildLive = 5840,
+		ClientMDSSetAppBuildLiveResponse = 5841,
 		ClientGMSServerQuery = 6403,
 		GMSClientServerQueryResponse = 6404,
 		ClientMMSCreateLobby = 6601,
@@ -1551,7 +1562,7 @@ namespace SteamKit2
 		public EMsg GetEMsg() { return EMsg.ClientLogon; }
 
 		public static readonly uint ObfuscationMask = 0xBAADF00D;
-		public static readonly uint CurrentProtocol = 65569;
+		public static readonly uint CurrentProtocol = 65571;
 		// Static size: 0
 		public CMsgClientLogon Proto { get; set; }
 
@@ -2077,6 +2088,98 @@ namespace SteamKit2
 		public void Deserialize( Stream stream )
 		{
 			Proto = ProtoBuf.Serializer.Deserialize<CMsgClientLicenseList>( stream );
+		}
+	}
+
+	public class MsgClientAppInfoUpdate : ISteamSerializableMessage
+	{
+		public EMsg GetEMsg() { return EMsg.ClientAppInfoUpdate; }
+
+		// Static size: 0
+		public CMsgClientAppInfoUpdate Proto { get; set; }
+
+		public MsgClientAppInfoUpdate()
+		{
+			Proto = new CMsgClientAppInfoUpdate();
+		}
+
+		public void Serialize(Stream stream)
+		{
+			ProtoBuf.Serializer.Serialize<CMsgClientAppInfoUpdate>(stream, Proto);
+		}
+
+		public void Deserialize( Stream stream )
+		{
+			Proto = ProtoBuf.Serializer.Deserialize<CMsgClientAppInfoUpdate>( stream );
+		}
+	}
+
+	public class MsgClientAppInfoChanges : ISteamSerializableMessage
+	{
+		public EMsg GetEMsg() { return EMsg.ClientAppInfoChanges; }
+
+		// Static size: 0
+		public CMsgClientAppInfoChanges Proto { get; set; }
+
+		public MsgClientAppInfoChanges()
+		{
+			Proto = new CMsgClientAppInfoChanges();
+		}
+
+		public void Serialize(Stream stream)
+		{
+			ProtoBuf.Serializer.Serialize<CMsgClientAppInfoChanges>(stream, Proto);
+		}
+
+		public void Deserialize( Stream stream )
+		{
+			Proto = ProtoBuf.Serializer.Deserialize<CMsgClientAppInfoChanges>( stream );
+		}
+	}
+
+	public class MsgClientAppInfoRequest : ISteamSerializableMessage
+	{
+		public EMsg GetEMsg() { return EMsg.ClientAppInfoRequest; }
+
+		// Static size: 0
+		public CMsgClientAppInfoRequest Proto { get; set; }
+
+		public MsgClientAppInfoRequest()
+		{
+			Proto = new CMsgClientAppInfoRequest();
+		}
+
+		public void Serialize(Stream stream)
+		{
+			ProtoBuf.Serializer.Serialize<CMsgClientAppInfoRequest>(stream, Proto);
+		}
+
+		public void Deserialize( Stream stream )
+		{
+			Proto = ProtoBuf.Serializer.Deserialize<CMsgClientAppInfoRequest>( stream );
+		}
+	}
+
+	public class MsgClientAppInfoResponse : ISteamSerializableMessage
+	{
+		public EMsg GetEMsg() { return EMsg.ClientAppInfoResponse; }
+
+		// Static size: 0
+		public CMsgClientAppInfoResponse Proto { get; set; }
+
+		public MsgClientAppInfoResponse()
+		{
+			Proto = new CMsgClientAppInfoResponse();
+		}
+
+		public void Serialize(Stream stream)
+		{
+			ProtoBuf.Serializer.Serialize<CMsgClientAppInfoResponse>(stream, Proto);
+		}
+
+		public void Deserialize( Stream stream )
+		{
+			Proto = ProtoBuf.Serializer.Deserialize<CMsgClientAppInfoResponse>( stream );
 		}
 	}
 

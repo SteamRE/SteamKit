@@ -157,6 +157,26 @@ class MsgClientLicenseList<EMsg::ClientLicenseList>
 	proto CMsgClientLicenseList proto;
 };
 
+class MsgClientAppInfoUpdate<EMsg::ClientAppInfoUpdate>
+{
+	proto CMsgClientAppInfoUpdate proto;
+};
+
+class MsgClientAppInfoChanges<EMsg::ClientAppInfoChanges>
+{
+	proto CMsgClientAppInfoChanges proto;
+};
+
+class MsgClientAppInfoRequest<EMsg::ClientAppInfoRequest>
+{
+	proto CMsgClientAppInfoRequest proto;
+};
+
+class MsgClientAppInfoResponse<EMsg::ClientAppInfoResponse>
+{
+	proto CMsgClientAppInfoResponse proto;
+};
+
 class MsgClientAppMinutesPlayedData<EMsg::ClientAppMinutesPlayedData>
 {
 	proto CMsgClientAppMinutesPlayedData proto;
