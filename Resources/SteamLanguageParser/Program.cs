@@ -11,7 +11,17 @@ namespace SteamLanguageParser
     {
         static void Main(string[] args)
         {
-            Queue<Token> tokenList = LanguageParser.TokenizeString( File.ReadAllText( @"G:\dev\SteamRE\Resources\SteamLanguage\steammsg.steamd" ) );
+            string projectPath = Environment.GetEnvironmentVariable("SteamRE");
+
+            if (!Directory.Exists(projectPath))
+            {
+                throw new Exception("Unable to find SteamRE project path, please specify the `SteamRE` environment variable");
+            }
+
+            string languagePath = Path.Combine(projectPath, @"Resources\SteamLanguage");
+
+            Environment.CurrentDirectory = languagePath;
+            Queue<Token> tokenList = LanguageParser.TokenizeString(File.ReadAllText(Path.Combine(languagePath, "steammsg.steamd")));
 
             Node root = TokenAnalyzer.Analyze( tokenList );
 
@@ -20,7 +30,7 @@ namespace SteamLanguageParser
             CSharpGen cgen = new CSharpGen();
 
             CodeGenerator.EmitCode(root, cgen, sb);
-            File.WriteAllText( @"G:\dev\SteamRE\SteamKit2\SteamKit2\Base\SteamLanguage.cs", sb.ToString() );
+            File.WriteAllText(Path.Combine(projectPath, @"SteamKit2\SteamKit2\Base\SteamLanguage.cs"), sb.ToString());
         }
     }
 }
