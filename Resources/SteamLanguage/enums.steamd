@@ -223,3 +223,64 @@ enum EAuthSessionResponse
 	AuthTicketInvalidAlreadyUsed = 7;
 	AuthTicketInvalid = 8;
 };
+
+enum EChatRoomEnterResponse
+{
+	Success = 1;
+	DoesntExist = 2;
+	NotAllowed = 3;
+	Full = 4;
+	Error = 5;
+	Banned = 6;
+	Limited = 7;
+	ClanDisabled = 8;
+	CommunityBan = 9;
+};
+
+enum EChatRoomType
+{
+	Friend = 1;
+	MUC = 2;
+	Lobby = 3;
+};
+
+enum EChatInfoType
+{
+	StateChange = 1;
+	InfoUpdate = 2;
+	MemberLimitChange = 3;
+};
+
+enum EChatAction
+{
+	InviteChat = 1;
+	Kick = 2;
+	Ban = 3;
+	UnBan = 4;
+	StartVoiceSpeak = 5;
+	EndVoiceSpeak = 6;
+	LockChat = 7;
+	UnlockChat = 8;
+	CloseChat = 9;
+	SetJoinable = 10;
+	SetUnjoinable = 11;
+	SetOwner = 12;
+	SetInvisibleToFriends = 13;
+	SetVisibleToFriends = 14;
+	SetModerated = 15;
+	SetUnmoderated = 16;
+};
+
+enum EChatActionResult
+{
+	Success = 1;
+	Error = 2;
+	NotPermitted = 3;
+	NotAllowedOnClanMember = 4;
+	NotAllowedOnBannedUser = 5;
+	NotAllowedOnChatOwner = 6;
+	NotAllowedOnSelf = 7;
+	ChatDoesntExist = 8;
+	ChatFull = 9;
+	VoiceSlotsFull = 10;
+};
