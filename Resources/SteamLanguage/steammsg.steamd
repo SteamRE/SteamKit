@@ -405,3 +405,55 @@ class MsgGSGetUserGroupStatusResponse<EMsg::GSGetUserGroupStatusResponse>
 	EClanRelationship clanRelationship;
 	EClanRank clanRank;
 };
+
+class MsgClientJoinChat<EMsg::ClientJoinChat>
+{
+	steamidmarshal ulong steamIdChat;
+	boolmarshal byte isVoiceSpeaker;
+};
+
+class MsgClientChatEnter<EMsg::ClientChatEnter>
+{
+	steamidmarshal ulong steamIdChat;
+	steamidmarshal ulong steamIdFriend;
+
+	EChatRoomType chatRoomType;
+
+	steamidmarshal ulong steamIdOwner;
+	steamidmarshal ulong steamIdClan;
+
+	byte chatFlags;
+
+	EChatRoomEnterResponse enterResponse;
+};
+
+class MsgClientChatMsg<EMsg::ClientChatMsg>
+{
+	steamidmarshal ulong steamIdChatter;
+	steamidmarshal ulong steamIdChatRoom;
+	EChatEntryType chatMsgType;
+};
+
+class MsgClientChatMemberInfo<EMsg::ClientChatMemberInfo>
+{
+	steamidmarshal ulong steamIdChat;
+	EChatInfoType type;
+};
+
+class MsgClientChatActionResult<EMsg::ClientChatActionResult>
+{
+	steamidmarshal ulong steamIdChat;
+	steamidmarshal ulong steamIdUserActedOn;
+	EChatAction chatAction;
+	EChatActionResult actionResult;
+};
+
+class MsgClientRequestMachineAuth<EMsg::ClientRequestMachineAuth>
+{
+	proto CMsgClientRequestMachineAuth proto;
+};
+
+class MsgClientRequestMachineAuthResponse<EMsg::ClientRequestMachineAuthResponse>
+{
+	proto CMsgClientRequestMachineAuthResponse proto;
+};
