@@ -39,14 +39,13 @@ namespace Vapor
         static readonly object lockObj = new object();
         static Queue<AvatarData> jobQueue;
 
-        static Dictionary<SteamID, byte[]> avatarMap;
 
         public static void Initialize()
         {
-            avatarMap = new Dictionary<SteamID, byte[]>();
             jobQueue = new Queue<AvatarData>();
 
             cdnThread = new Thread( JobFunc );
+            cdnThread.Name = "CDNCache Thread";
             cdnThread.Start();
         }
 
@@ -56,20 +55,17 @@ namespace Vapor
             cdnThread.Join();
         }
 
-        public static byte[] GetAvatarHash( SteamID steamId )
-        {
-            if ( avatarMap.ContainsKey( steamId ) )
-                return avatarMap[ steamId ];
-
-            return null;
-        }
 
         public static void DownloadAvatar( SteamID steamId, byte[] avatarHash, Action<AvatarDownloadDetails> callBack )
         {
-            avatarMap[ steamId ] = avatarHash;
-
             string hashStr = BitConverter.ToString( avatarHash ).Replace( "-", "" ).ToLower();
             string hashPrefix = hashStr.Substring( 0, 2 );
+
+            if ( IsJobQueued( hashStr ) )
+            {
+                DebugLog.WriteLine( "CDNCache", "Download job for {0} already queued.", hashStr );
+                return;
+            }
 
             string localPath = Path.Combine( Application.StartupPath, "cache" );
 
@@ -91,6 +87,8 @@ namespace Vapor
             string localFile = Path.Combine( localPath, hashStr + ".jpg" );
             if ( File.Exists( localFile ) )
             {
+                DebugLog.WriteLine( "CDNCache", "Avatar download {0} finished from cache.", hashStr );
+
                 callBack( new AvatarDownloadDetails() { Success = true, Filename = localFile } );
                 return;
             }
@@ -102,6 +100,7 @@ namespace Vapor
                 hashstr = hashStr,
             };
 
+            DebugLog.WriteLine( "CDNCache", "Queuing job to download {0}", hashStr );
             AddJob( ad );
         }
 
@@ -112,6 +111,11 @@ namespace Vapor
                 jobQueue.Enqueue( data );
                 Monitor.Pulse( lockObj );
             }
+        }
+
+        static bool IsJobQueued( string hashStr )
+        {
+            return jobQueue.Any( data => data.hashstr.Equals( hashStr, StringComparison.OrdinalIgnoreCase ) );
         }
 
         static void JobFunc()
@@ -132,14 +136,28 @@ namespace Vapor
                 if ( data == null )
                     return; // exit signal
 
+                // delay a while before starting a new download job
+                Thread.Sleep( 1000 );
+
                 string hashStr = data.hashstr;
                 string hashPrefix = hashStr.Substring( 0, 2 );
                 string localPath = Path.Combine( Application.StartupPath, "cache" );
                 var callBack = data.callback;
 
 
+
                 string downloadUri = string.Format( AvatarRoot + AvatarSmall, hashPrefix, hashStr );
                 string localFile = Path.Combine( localPath, hashStr + ".jpg" );
+
+                if ( File.Exists( localFile ) )
+                {
+                    DebugLog.WriteLine( "CDNCache", "Download job for {0} finished from cache.", hashStr );
+
+                    callBack( new AvatarDownloadDetails() { Success = true, Filename = localFile } );
+                    return;
+                }
+
+                DebugLog.WriteLine( "CDNCache", "Downloading avatar: {0}", hashStr );
 
                 using ( WebClient client = new WebClient() )
                 {
