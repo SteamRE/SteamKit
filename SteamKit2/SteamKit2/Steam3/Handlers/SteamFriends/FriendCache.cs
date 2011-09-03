@@ -14,162 +14,129 @@ namespace SteamKit2
 {
     public partial class SteamFriends
     {
-        class FriendsObj
+        abstract class Account
         {
-            public SteamID SteamID;
+            public SteamID SteamID { get; set; }
 
-            public FriendsObj( SteamID steamId )
+
+            public Account()
             {
-                this.SteamID = steamId;
+                SteamID = new SteamID();
             }
         }
 
-        class Friend : FriendsObj
+        sealed class Friend : Account
         {
-            public string Name;
-            public EPersonaState PersonaState;
-            public EFriendRelationship Relationship;
+            public string Name { get; set; }
 
-            public string GameName;
-            public uint GameAppID;
-            public GameID GameID;
+            public EPersonaState PersonaState { get; set; }
+            public EFriendRelationship Relationship { get; set; }
 
-            public Friend( SteamID steamId )
-                : base( steamId )
+            public uint GameAppID { get; set; }
+            public GameID GameID { get; set; }
+            public string GameName { get; set; }
+
+
+            public Friend()
             {
-            }
+                Name = "[unknown]";
 
-        }
-        class Clan : FriendsObj
-        {
-            public string Name;
-
-            public Clan( SteamID steamId )
-                : base( steamId )
-            {
+                GameID = new GameID();
             }
         }
 
-
-        class FriendsObjList<T>
-            where T : FriendsObj
+        sealed class Clan : Account
         {
-            List<T> list;
+            public string Name { get; set; }
 
-            public int Count { get { return list.Count; } }
 
-            public FriendsObjList()
+            public Clan()
             {
-                list = new List<T>();
+                Name = "[unknown]";
             }
+        }
 
-            public T GetByID( SteamID steamId )
+
+        class AccountList<T> : List<T>
+            where T : Account, new()
+        {
+            object accessLock = new object();
+
+
+            public new T this[ int index ]
             {
-                foreach ( T obj in list )
+                get
                 {
-                    if ( obj.SteamID == steamId )
-                        return obj;
+                    lock ( accessLock )
+                    {
+                        return base[ index ];
+                    }
                 }
-
-                return null;
             }
-            public int GetIndexOf( SteamID steamId )
+
+
+            public T GetAccount( SteamID steamId )
             {
-                for ( int x = 0 ; x < list.Count ; ++x )
+                lock ( accessLock )
                 {
-                    if ( list[ x ].SteamID == steamId )
-                        return x;
+                    EnsureAccount( steamId );
+
+                    return this.Find( accObj => accObj.SteamID == steamId );
                 }
-                return -1;
-            }
-            public T GetByIndex( int index )
-            {
-                if ( index >= list.Count )
-                    return null;
-
-                return list[ index ];
             }
 
-            public void Add( T obj )
-            {
-                int index = GetIndexOf( obj.SteamID );
 
-                if ( index == -1 )
+            void EnsureAccount( SteamID steamId )
+            {
+                if ( !this.Contains( steamId ) )
                 {
-                    list.Add( obj );
-                    return;
-                }
+                    T accObj = new T()
+                    {
+                        SteamID = steamId,
+                    };
 
-                // the object already exists, so we'll just update it
-                list[ index ] = obj;
+                    this.Add( accObj );
+                }
             }
 
-            public void Remove( Friend friend )
+            public bool Contains( SteamID steamId )
             {
-                int index = GetIndexOf( friend.SteamID );
-
-                if ( index == -1 )
-                    return; // nothing to remove
-
-                list.RemoveAt( index );
+                return this.Any( accObj => accObj.SteamID == steamId );
             }
         }
 
-        class FriendCache
+        class AccountCache
         {
-            FriendsObjList<Friend> friendList;
-            FriendsObjList<Clan> clanList;
+            public Friend LocalFriend { get; private set; }
 
-            public FriendCache()
+            public AccountList<Friend> Friends { get; private set; }
+            public AccountList<Clan> Clans { get; private set; }
+
+
+            public AccountCache()
             {
-                friendList = new FriendsObjList<Friend>();
-                clanList = new FriendsObjList<Clan>();
+                LocalFriend = new Friend();
+
+                Friends = new AccountList<Friend>();
+                Clans = new AccountList<Clan>();
             }
+
 
             public Friend GetFriend( SteamID steamId )
             {
-                var friend = friendList.GetByID( steamId );
-
-                if ( friend == null )
+                if ( IsLocalUser( steamId ) )
                 {
-                    friend = new Friend( steamId );
-                    AddFriend( friend );
+                    return LocalFriend;
                 }
-
-                return friend;
-            }
-            public Friend GetFriendByIndex( int index )
-            {
-                return friendList.GetByIndex( index );
-            }
-            public int GetFriendCount()
-            {
-                return friendList.Count;
-            }
-            public void AddFriend( Friend friend )
-            {
-                friendList.Add( friend );
-            }
-            public void RemoveFriend( Friend friend )
-            {
-                friendList.Remove( friend );
+                else
+                {
+                    return Friends.GetAccount( steamId );
+                }
             }
 
-            public Clan GetClan( SteamID steamId )
+            public bool IsLocalUser( SteamID steamId )
             {
-                return clanList.GetByID( steamId );
-            }
-            public Clan GetClanByIndex( int index )
-            {
-                return clanList.GetByIndex( index );
-            }
-            public int GetClanCount()
-            {
-                return clanList.Count;
-            }
-            public void AddClan( Clan clan )
-            {
-                clanList.Add( clan );
+                return LocalFriend.SteamID == steamId;
             }
         }
     }

@@ -19,15 +19,12 @@ namespace SteamKit2
     /// </summary>
     public sealed partial class SteamFriends : ClientMsgHandler
     {
-
-        Friend localUser;
-        FriendCache cache;
+        AccountCache cache;
 
 
         internal SteamFriends()
         {
-            localUser = new Friend( 0 );
-            cache = new FriendCache();
+            cache = new AccountCache();
         }
 
 
@@ -37,7 +34,7 @@ namespace SteamKit2
         /// <returns>The name.</returns>
         public string GetPersonaName()
         {
-            return localUser.Name;
+            return cache.LocalFriend.Name;
         }
         /// <summary>
         /// Sets the local user's persona name and broadcasts it over the network.
@@ -55,7 +52,7 @@ namespace SteamKit2
         /// <returns>The persona state.</returns>
         public EPersonaState GetPersonaState()
         {
-            return localUser.PersonaState;
+            return cache.LocalFriend.PersonaState;
         }
         /// <summary>
         /// Sets the local user's persona state and broadcasts it over the network.
@@ -69,7 +66,7 @@ namespace SteamKit2
             this.Client.Send( stateMsg );
 
             // todo: figure out if we get persona state changes for our own actions
-            localUser.PersonaState = state;
+            cache.LocalFriend.PersonaState = state;
         }
 
         /// <summary>
@@ -78,7 +75,7 @@ namespace SteamKit2
         /// <returns>The number of friends.</returns>
         public int GetFriendCount()
         {
-            return cache.GetFriendCount();
+            return cache.Friends.Count;
         }
         /// <summary>
         /// Gets a friend by index.
@@ -87,12 +84,7 @@ namespace SteamKit2
         /// <returns>A valid steamid of a friend if the index is in range; otherwise a steamid representing 0.</returns>
         public SteamID GetFriendByIndex( int index )
         {
-            Friend friend = cache.GetFriendByIndex( index );
-
-            if ( friend == null )
-                return 0;
-
-            return friend.SteamID;
+            return cache.Friends[ index ].SteamID;
         }
 
         /// <summary>
@@ -102,12 +94,7 @@ namespace SteamKit2
         /// <returns>The name.</returns>
         public string GetFriendPersonaName( SteamID steamId )
         {
-            Friend friend = ( steamId == localUser.SteamID ? localUser : cache.GetFriend( steamId ) );
-
-            if ( friend == null || string.IsNullOrEmpty( friend.Name ) )
-                return "[unknown]";
-
-            return friend.Name;
+            return cache.GetFriend( steamId ).Name;
         }
         /// <summary>
         /// Gets the persona state of a friend.
@@ -116,12 +103,7 @@ namespace SteamKit2
         /// <returns>The persona state</returns>
         public EPersonaState GetFriendPersonaState( SteamID steamId )
         {
-            Friend friend = ( steamId == localUser.SteamID ? localUser : cache.GetFriend( steamId ) );
-
-            if ( friend == null )
-                return EPersonaState.Offline;
-
-            return friend.PersonaState;
+            return cache.GetFriend( steamId ).PersonaState;
         }
         /// <summary>
         /// Gets the relationship of a friend.
@@ -130,12 +112,7 @@ namespace SteamKit2
         /// <returns></returns>
         public EFriendRelationship GetFriendRelationship( SteamID steamId )
         {
-            Friend friend = ( steamId == localUser.SteamID ? localUser : cache.GetFriend( steamId ) );
-
-            if ( friend == null )
-                return EFriendRelationship.None;
-
-            return friend.Relationship;
+            return cache.GetFriend( steamId ).Relationship;
         }
 
         /// <summary>
@@ -145,26 +122,16 @@ namespace SteamKit2
         /// <returns>The game name of a friend playing a game, or null if they haven't been cached yet.</returns>
         public string GetFriendGamePlayedName( SteamID steamId )
         {
-            Friend friend = ( steamId == localUser.SteamID ? localUser : cache.GetFriend( steamId ) );
-
-            if ( friend == null )
-                return null;
-
-            return friend.GameName;
+            return cache.GetFriend( steamId ).GameName;
         }
         /// <summary>
-        /// Gets the gameid of a friend playing a game.
+        /// Gets the GameID of a friend playing a game.
         /// </summary>
         /// <param name="steamId">The steam id.</param>
         /// <returns>The gameid of a friend playing a game, or 0 if they haven't been cached yet.</returns>
         public GameID GetFriendGamePlayed( SteamID steamId )
         {
-            Friend friend = ( steamId == localUser.SteamID ? localUser : cache.GetFriend( steamId ) );
-
-            if ( friend == null )
-                return 0;
-
-            return friend.GameID;
+            return cache.GetFriend( steamId ).GameID;
         }
 
         /// <summary>
@@ -224,6 +191,39 @@ namespace SteamKit2
 
 
         /// <summary>
+        /// Attempts to join a chat room.
+        /// </summary>
+        /// <param name="steamId">The SteamID of the chat room.</param>
+        public void JoinChat( SteamID steamId )
+        {
+            var joinChat = new ClientMsg<MsgClientJoinChat, ExtendedClientMsgHdr>();
+
+            joinChat.Msg.SteamIdChat = steamId;
+
+            Client.Send( joinChat );
+        }
+
+        /// <summary>
+        /// Sends a message to a chat room.
+        /// </summary>
+        /// <param name="steamIdChat">The SteamID of the chat room.</param>
+        /// <param name="type">The message type.</param>
+        /// <param name="message">The message.</param>
+        public void SendChatRoomMessage( SteamID steamIdChat, EChatEntryType type, string message )
+        {
+            var chatMsg = new ClientMsg<MsgClientChatMsg, ExtendedClientMsgHdr>();
+
+            chatMsg.Msg.ChatMsgType = type;
+            chatMsg.Msg.SteamIdChatRoom = steamIdChat;
+            chatMsg.Msg.SteamIdChatter = Client.SteamID;
+
+            chatMsg.Payload.WriteNullTermString( message, Encoding.UTF8 );
+
+            this.Client.Send( chatMsg );
+        }
+
+
+        /// <summary>
         /// Handles a client message. This should not be called directly.
         /// </summary>
         /// <param name="e">The <see cref="SteamKit2.ClientMsgEventArgs"/> instance containing the event data.</param>
@@ -250,6 +250,18 @@ namespace SteamKit2
                 case EMsg.ClientAddFriendResponse:
                     HandleFriendResponse( e );
                     break;
+
+                case EMsg.ClientChatEnter:
+                    HandleChatEnter( e );
+                    break;
+
+                case EMsg.ClientChatMsg:
+                    HandleChatMsg( e );
+                    break;
+
+                case EMsg.ClientChatMemberInfo:
+                    HandleChatMemberInfo( e );
+                    break;
             }
         }
 
@@ -258,33 +270,13 @@ namespace SteamKit2
         #region ClientMsg Handlers
         void HandleAccountInfo( ClientMsgEventArgs e )
         {
-            var accInfo = new ClientMsgProtobuf<MsgClientAccountInfo>();
+            var accInfo = new ClientMsgProtobuf<MsgClientAccountInfo>( e.Data );
 
-            try
-            {
-                accInfo.SetData( e.Data );
-            }
-            catch ( Exception ex )
-            {
-                DebugLog.WriteLine( "SteamFriends", "HandleAccountInfo encountered an exception when trying to read clientmsg.\n{0}", ex.ToString() );
-                return;
-            }
-
-            localUser.Name = accInfo.Msg.Proto.persona_name;
+            cache.LocalFriend.Name = accInfo.Msg.Proto.persona_name;
         }
         void HandleFriendMsg( ClientMsgEventArgs e )
         {
-            ClientMsgProtobuf<MsgClientFriendMsgIncoming> friendMsg = null;
-
-            try
-            {
-                friendMsg = new ClientMsgProtobuf<MsgClientFriendMsgIncoming>( e.Data );
-            }
-            catch ( Exception ex )
-            {
-                DebugLog.WriteLine( "SteamFriends", "HandleFriendsMsg encountered an exception when trying to read clientmsg.\n{0}", ex.ToString() );
-                return;
-            }
+            var friendMsg = new ClientMsgProtobuf<MsgClientFriendMsgIncoming>( e.Data );
 
 #if STATIC_CALLBACKS
             var callback = new FriendMsgCallback( Client, friendMsg.Msg.Proto );
@@ -296,53 +288,25 @@ namespace SteamKit2
         }
         void HandleFriendsList( ClientMsgEventArgs e )
         {
-            ClientMsgProtobuf<MsgClientFriendsList> list = null;
+            var list = new ClientMsgProtobuf<MsgClientFriendsList>( e.Data );
 
-            try
+            cache.LocalFriend.SteamID = this.Client.SteamID;
+
+            var reqInfo = new ClientMsgProtobuf<MsgClientRequestFriendData>();
+
+            reqInfo.Msg.Proto.persona_state_requested = ( uint )( EClientPersonaStateFlag.PlayerName );
+
+            foreach ( var friendObj in list.Msg.Proto.friends )
             {
-                list = new ClientMsgProtobuf<MsgClientFriendsList>( e.Data );
-            }
-            catch ( Exception ex )
-            {
-                DebugLog.WriteLine( "SteamFriends", "HandleFriendsList encountered an exception when trying to read clientmsg.\n{0}", ex.ToString() );
-                return;
-            }
+                SteamID friendId = friendObj.ulfriendid;
 
-            localUser.SteamID = this.Client.SteamID;
+                if ( !friendId.BIndividualAccount() )
+                    continue; // don't want to request clan information
 
-            var reqLocalData = new ClientMsgProtobuf<MsgClientRequestFriendData>();
-            reqLocalData.Msg.Proto.persona_state_requested = ( uint )( EClientPersonaStateFlag.PlayerName );
-
-            foreach ( var friend in list.Msg.Proto.friends )
-            {
-                SteamID friendId = new SteamID( friend.ulfriendid );
-
-
-                if ( friendId.BIndividualAccount() )
-                {
-                    Friend cacheFriend = new Friend( friendId );
-                    cacheFriend.Relationship = ( EFriendRelationship )friend.efriendrelationship;
-
-                    if ( cacheFriend.Relationship == EFriendRelationship.None || cacheFriend.Relationship == EFriendRelationship.Blocked )
-                    {
-                        cache.RemoveFriend( cacheFriend );
-                    }
-                    else
-                    {
-                        cache.AddFriend( cacheFriend );
-                    }
-
-                    reqLocalData.Msg.Proto.friends.Add( friend.ulfriendid );
-                }
-
-                if ( friendId.BClanAccount() )
-                {
-                    Clan cacheClan = new Clan( friendId );
-                    cache.AddClan( cacheClan );
-                }
+                reqInfo.Msg.Proto.friends.Add( friendId );
             }
 
-            this.Client.Send( reqLocalData );
+            this.Client.Send( reqInfo );
 
 #if STATIC_CALLBACKS
             var callback = new FriendsListCallback( Client, list.Msg.Proto );
@@ -354,23 +318,23 @@ namespace SteamKit2
         }
         void HandlePersonaState( ClientMsgEventArgs e )
         {
-            ClientMsgProtobuf<MsgClientPersonaState> perState = null;
-
-            try
-            {
-                perState = new ClientMsgProtobuf<MsgClientPersonaState>( e.Data );
-            }
-            catch ( Exception ex )
-            {
-                DebugLog.WriteLine( "SteamFriends", "HandlePersonaState encountered an exception when trying to read clientmsg.\n{0}", ex.ToString() );
-                return;
-            }
+            var perState = new ClientMsgProtobuf<MsgClientPersonaState>( e.Data );
 
             EClientPersonaStateFlag flags = ( EClientPersonaStateFlag )perState.Msg.Proto.status_flags;
 
             foreach ( var friend in perState.Msg.Proto.friends )
             {
-                Friend cacheFriend = ( friend.friendid == localUser.SteamID ? localUser : cache.GetFriend( friend.friendid ) );
+                SteamID friendId = friend.friendid;
+
+                SteamID sourceId = friend.steamid_source;
+
+                if ( sourceId.IsValid() )
+                    continue; // HACK: we're ignoring friends from groups/clans for now
+
+                if ( !friendId.BIndividualAccount() )
+                    continue;
+
+                Friend cacheFriend = cache.GetFriend( friendId );
 
                 if ( ( flags & EClientPersonaStateFlag.PlayerName ) == EClientPersonaStateFlag.PlayerName )
                     cacheFriend.Name = friend.player_name;
@@ -385,6 +349,7 @@ namespace SteamKit2
                     cacheFriend.GameAppID = friend.game_played_app_id;
                 }
 
+                // todo: cache other details?
             }
 
             foreach ( var friend in perState.Msg.Proto.friends )
@@ -400,23 +365,53 @@ namespace SteamKit2
         }
         void HandleFriendResponse( ClientMsgEventArgs e )
         {
-            var friendResponse = new ClientMsgProtobuf<MsgClientAddFriendResponse>();
-
-            try
-            {
-                friendResponse.SetData( e.Data );
-            }
-            catch ( Exception ex )
-            {
-                DebugLog.WriteLine( "SteamFriends", "HandleFriendResponse encounted an exception when trying to read clientmsg.\n{0}", ex.ToString() );
-                return;
-            }
+            var friendResponse = new ClientMsgProtobuf<MsgClientAddFriendResponse>( e.Data );
 
 #if STATIC_CALLBACKS
             var callback = new FriendAddedCallback( Client, friendResponse.Msg.Proto );
             SteamClient.PostCallback( callback );
 #else
             var callback = new FriendAddedCallback( friendResponse.Msg.Proto );
+            this.Client.PostCallback( callback );
+#endif
+        }
+        void HandleChatEnter( ClientMsgEventArgs e )
+        {
+            var chatEnter = new ClientMsg<MsgClientChatEnter, ExtendedClientMsgHdr>( e.Data );
+
+#if STATIC_CALLBACKS
+            var callback = new ChatEnterCallback( Client, chatEnter.Msg );
+            SteamClient.PostCallback( callback );
+#else
+            var callback = new ChatEnterCallback( chatEnter.Msg );
+            this.Client.PostCallback( callback );
+#endif
+        }
+        void HandleChatMsg( ClientMsgEventArgs e )
+        {
+            var chatMsg = new ClientMsg<MsgClientChatMsg, ExtendedClientMsgHdr>( e.Data );
+
+            byte[] msgData = chatMsg.Payload.ToArray();
+
+#if STATIC_CALLBACKS
+            var callback = new ChatMsgCallback( Client, chatMsg.Msg, msgData );
+            SteamClient.PostCallback( callback );
+#else
+            var callback = new ChatMsgCallback( chatMsg.Msg, msgData );
+            this.Client.PostCallback( callback );
+#endif
+        }
+        void HandleChatMemberInfo( ClientMsgEventArgs e )
+        {
+            var membInfo = new ClientMsg<MsgClientChatMemberInfo, ExtendedClientMsgHdr>( e.Data );
+
+            byte[] payload = membInfo.Payload.ToArray();
+
+#if STATIC_CALLBACKS
+            var callback = new ChatMemberInfoCallback( Client, membInfo.Msg, payload );
+            SteamClient.PostCallback( callback );
+#else
+            var callback = new ChatMemberInfoCallback( membInfo.Msg, payload );
             this.Client.PostCallback( callback );
 #endif
         }

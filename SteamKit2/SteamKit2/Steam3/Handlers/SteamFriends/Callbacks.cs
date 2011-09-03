@@ -308,5 +308,145 @@ namespace SteamKit2
                 this.PersonaName = msg.persona_name_added;
             }
         }
+
+        /// <summary>
+        /// This callback is fired in response to attempting to join a chat.
+        /// </summary>
+        public class ChatEnterCallback : CallbackMsg
+        {
+            /// <summary>
+            /// Gets SteamID of the chat room.
+            /// </summary>
+            public SteamID ChatID { get; private set; }
+            public SteamID FriendID { get; private set; }
+
+            /// <summary>
+            /// Gets the type of the chat room.
+            /// </summary>
+            /// <value>
+            /// The type of the chat room.
+            /// </value>
+            public EChatRoomType ChatRoomType { get; private set; }
+
+
+            public SteamID OwnerID { get; private set; }
+            /// <summary>
+            /// Gets clan SteamID that owns this chat room.
+            /// </summary>
+            public SteamID ClanID { get; private set; }
+
+            public byte ChatFlags { get; private set; }
+
+            /// <summary>
+            /// Gets the chat enter response.
+            /// </summary>
+            public EChatRoomEnterResponse EnterResponse { get; private set; }
+
+
+#if STATIC_CALLBACKS
+            internal ChatEnterCallback( SteamClient client, MsgClientChatEnter msg )
+                : base( client )
+#else
+            internal ChatEnterCallback( MsgClientChatEnter msg )
+#endif
+            {
+                ChatID = msg.SteamIdChat;
+                FriendID = msg.SteamIdFriend;
+
+                ChatRoomType = msg.ChatRoomType;
+
+                OwnerID = msg.SteamIdOwner;
+                ClanID = msg.SteamIdClan;
+
+                ChatFlags = msg.ChatFlags;
+
+                EnterResponse = msg.EnterResponse;
+            }
+        }
+
+        /// <summary>
+        /// This callback is fired when a chat room message arrives.
+        /// </summary>
+        public class ChatMsgCallback : CallbackMsg
+        {
+            /// <summary>
+            /// Gets the SteamID of the chatter.
+            /// </summary>
+            public SteamID ChatterID { get; private set; }
+            /// <summary>
+            /// Gets the SteamID of the chat room.
+            /// </summary>
+            public SteamID ChatRoomID { get; private set; }
+
+            /// <summary>
+            /// Gets chat entry type.
+            /// </summary>
+            /// <value>
+            /// The chat entry type.
+            /// </value>
+            public EChatEntryType ChatMsgType { get; private set; }
+
+            /// <summary>
+            /// Gets the message.
+            /// </summary>
+            public string Message { get; private set; }
+
+
+#if STATIC_CALLBACKS
+            internal ChatMsgCallback( SteamClient client, MsgClientChatMsg msg, byte[] payload )
+                : base( client )
+#else
+            internal ChatMsgCallback( MsgClientChatMsg msg, byte[] payload )
+#endif
+            {
+                ChatterID = msg.SteamIdChatter;
+                ChatRoomID = msg.SteamIdChatRoom;
+
+                ChatMsgType = msg.ChatMsgType;
+
+                Message = Encoding.UTF8.GetString( payload, 0, payload.Length - 1 );
+            }
+        }
+
+        /// <summary>
+        /// This callback is fired in response to chat member info being recieved.
+        /// </summary>
+        public class ChatMemberInfoCallback : CallbackMsg
+        {
+            /// <summary>
+            /// Gets SteamId of the chat room.
+            /// </summary>
+            public SteamID ChatRoomID { get; private set; }
+            /// <summary>
+            /// Gets the info type.
+            /// </summary>
+            public EChatInfoType Type { get; private set; }
+
+            /// <summary>
+            /// Gets SteamID of the chatter.
+            /// </summary>
+            public SteamID ChatterID { get; private set; }
+
+            public int Action { get; private set; }
+
+
+#if STATIC_CALLBACKS
+            internal ChatMemberInfoCallback( SteamClient client, MsgClientChatMemberInfo msg, byte[] payload )
+                : base( client )
+#else
+            internal ChatMemberInfoCallback( MsgClientChatMemberInfo msg, byte[] payload )
+#endif
+            {
+                ChatRoomID = msg.SteamIdChat;
+                Type = msg.Type;
+
+                using ( MemoryStream ms = new MemoryStream( payload ) )
+                using ( BinaryReader br = new BinaryReader( ms ) )
+                {
+                    ChatterID = br.ReadUInt64();
+                    Action = br.ReadInt32();
+                }
+            }
+        }
     }
 }
