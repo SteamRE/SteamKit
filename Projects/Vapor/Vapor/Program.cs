@@ -21,7 +21,6 @@ namespace Vapor
                 td.Show();
 
                 FileTrace ft = new FileTrace();
-
             }
 
             try
