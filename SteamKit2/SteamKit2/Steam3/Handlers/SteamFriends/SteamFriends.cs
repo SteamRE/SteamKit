@@ -135,6 +135,16 @@ namespace SteamKit2
         }
 
         /// <summary>
+        /// Gets a SHA-1 hash representing the friend's avatar.
+        /// </summary>
+        /// <param name="steamId">The SteamID of the friend to get the avatar of.</param>
+        /// <returns>A byte array representing a SHA-1 hash of the friend's avatar.</returns>
+        public byte[] GetFriendAvatar( SteamID steamId )
+        {
+            return cache.GetFriend( steamId ).AvatarHash;
+        }
+
+        /// <summary>
         /// Sends a chat message to a friend.
         /// </summary>
         /// <param name="target">The target to send to.</param>
@@ -292,6 +302,7 @@ namespace SteamKit2
 
             cache.LocalFriend.SteamID = this.Client.SteamID;
 
+            // we have to request information for all of our friends because steam only sends persona information for online friends
             var reqInfo = new ClientMsgProtobuf<MsgClientRequestFriendData>();
 
             reqInfo.Msg.Proto.persona_state_requested = ( uint )( EClientPersonaStateFlag.PlayerName );
@@ -340,7 +351,10 @@ namespace SteamKit2
                     cacheFriend.Name = friend.player_name;
 
                 if ( ( flags & EClientPersonaStateFlag.Presence ) == EClientPersonaStateFlag.Presence )
+                {
+                    cacheFriend.AvatarHash = friend.avatar_hash;
                     cacheFriend.PersonaState = ( EPersonaState )friend.persona_state;
+                }
 
                 if ( ( flags & EClientPersonaStateFlag.GameExtraInfo ) == EClientPersonaStateFlag.GameExtraInfo )
                 {
