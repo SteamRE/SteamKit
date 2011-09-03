@@ -266,7 +266,7 @@ namespace Vapor
             int friendCount = Steam3.SteamFriends.GetFriendCount();
             for ( int x = 0 ; x < friendCount ; ++x )
             {
-                ulong friendId = Steam3.SteamFriends.GetFriendByIndex( x );
+                SteamID friendId = Steam3.SteamFriends.GetFriendByIndex( x );
 
                 Friend friend = new Friend( friendId );
                 friends.Add( friend );
@@ -282,14 +282,6 @@ namespace Vapor
             friendDialog.ShowDialog( this );
         }
 
-        private void MainForm_Resize( object sender, EventArgs e )
-        {
-            friendsFlow.SuspendLayout();
-
-            ResizeFriends();
-
-            friendsFlow.ResumeLayout();
-        }
 
         private void refreshListToolStripMenuItem_Click( object sender, EventArgs e )
         {
@@ -394,6 +386,15 @@ namespace Vapor
             }
 
             Steam3.SteamFriends.SetPersonaState( GetStateFromIndex( stateComboBox.SelectedIndex ) );
+        }
+
+        private void MainForm_ResizeEnd( object sender, EventArgs e )
+        {
+            friendsFlow.SuspendLayout();
+
+            ResizeFriends();
+
+            friendsFlow.ResumeLayout();
         }
     }
 }
