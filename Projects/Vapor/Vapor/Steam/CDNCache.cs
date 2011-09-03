@@ -136,14 +136,10 @@ namespace Vapor
                 if ( data == null )
                     return; // exit signal
 
-                // delay a while before starting a new download job
-                Thread.Sleep( 1000 );
-
                 string hashStr = data.hashstr;
                 string hashPrefix = hashStr.Substring( 0, 2 );
                 string localPath = Path.Combine( Application.StartupPath, "cache" );
                 var callBack = data.callback;
-
 
 
                 string downloadUri = string.Format( AvatarRoot + AvatarSmall, hashPrefix, hashStr );
@@ -154,8 +150,11 @@ namespace Vapor
                     DebugLog.WriteLine( "CDNCache", "Download job for {0} finished from cache.", hashStr );
 
                     callBack( new AvatarDownloadDetails() { Success = true, Filename = localFile } );
-                    return;
+                    continue;
                 }
+
+                // delay a while before starting a new download job
+                Thread.Sleep( 500 );
 
                 DebugLog.WriteLine( "CDNCache", "Downloading avatar: {0}", hashStr );
 
