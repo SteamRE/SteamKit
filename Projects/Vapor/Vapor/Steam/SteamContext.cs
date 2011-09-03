@@ -45,8 +45,6 @@ namespace Vapor
 
         public static string AuthCode { get; set; }
 
-        public static bool AlternateLogon { get; set; }
-
 
         static Steam3()
         {
@@ -108,8 +106,6 @@ namespace Vapor
                         Password = Steam3.Password,
 
                         AuthCode = Steam3.AuthCode,
-
-                        AccountInstance = ( Steam3.AlternateLogon ? 2u : 1u ),
                     } );
             }
 
