@@ -29,6 +29,8 @@ namespace SteamKit2
         {
             public string Name { get; set; }
 
+            public byte[] AvatarHash { get; set; }
+
             public EPersonaState PersonaState { get; set; }
             public EFriendRelationship Relationship { get; set; }
 
