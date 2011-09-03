@@ -103,7 +103,10 @@ namespace Vapor
             {
                 avatarBox.Image = ComposeAvatar( this.Friend, ( details.Success ? details.Filename : null ) );
             }
-            catch { }
+            catch ( Exception ex )
+            {
+                DebugLog.WriteLine( "FriendControl", "Unable to compose avatar: {0}", ex.Message );
+            }
         }
 
         public void SetSteamID( Friend steamid )
@@ -122,7 +125,7 @@ namespace Vapor
 
             nameLbl.ForeColor = statusLbl.ForeColor = gameLbl.ForeColor = Util.GetStatusColor( steamid );
 
-            byte[] avatarHash = CDNCache.GetAvatarHash( steamid.SteamID );
+            byte[] avatarHash = Steam3.SteamFriends.GetFriendAvatar( steamid.SteamID );
 
             if ( avatarHash == null )
             {
