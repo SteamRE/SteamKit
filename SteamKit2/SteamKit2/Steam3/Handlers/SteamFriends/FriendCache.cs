@@ -25,21 +25,20 @@ namespace SteamKit2
             }
         }
 
-        sealed class Friend : Account
+        sealed class User : Account
         {
             public string Name { get; set; }
 
             public byte[] AvatarHash { get; set; }
 
             public EPersonaState PersonaState { get; set; }
-            public EFriendRelationship Relationship { get; set; }
 
             public uint GameAppID { get; set; }
             public GameID GameID { get; set; }
             public string GameName { get; set; }
 
 
-            public Friend()
+            public User()
             {
                 Name = "[unknown]";
 
@@ -109,36 +108,36 @@ namespace SteamKit2
 
         class AccountCache
         {
-            public Friend LocalFriend { get; private set; }
+            public User LocalUser { get; private set; }
 
-            public AccountList<Friend> Friends { get; private set; }
+            public AccountList<User> Users { get; private set; }
             public AccountList<Clan> Clans { get; private set; }
 
 
             public AccountCache()
             {
-                LocalFriend = new Friend();
+                LocalUser = new User();
 
-                Friends = new AccountList<Friend>();
+                Users = new AccountList<User>();
                 Clans = new AccountList<Clan>();
             }
 
 
-            public Friend GetFriend( SteamID steamId )
+            public User GetUser( SteamID steamId )
             {
                 if ( IsLocalUser( steamId ) )
                 {
-                    return LocalFriend;
+                    return LocalUser;
                 }
                 else
                 {
-                    return Friends.GetAccount( steamId );
+                    return Users.GetAccount( steamId );
                 }
             }
 
             public bool IsLocalUser( SteamID steamId )
             {
-                return LocalFriend.SteamID == steamId;
+                return LocalUser.SteamID == steamId;
             }
         }
     }
