@@ -7,7 +7,13 @@ using System.Runtime.InteropServices;
 // associated with an assembly.
 [assembly: AssemblyTitle( "Vapor" )]
 [assembly: AssemblyDescription( "Cross-platform Steam Client" )]
-[assembly: AssemblyConfiguration( "" )]
+
+#if TRAY_BUILD
+[assembly: AssemblyConfiguration( "TRAY BUILD" )]
+#else
+[assembly: AssemblyConfiguration( "NO TRAY BUILD" )]
+#endif
+
 [assembly: AssemblyCompany( "VoiDeD" )]
 [assembly: AssemblyProduct( "Vapor" )]
 [assembly: AssemblyCopyright( "Copyright © Ryan Stecker 2011" )]
@@ -31,4 +37,4 @@ using System.Runtime.InteropServices;
 //
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
-[assembly: AssemblyVersion( "1.4.*" )]
+[assembly: AssemblyVersion( "1.4.1.*" )]
