@@ -19,11 +19,19 @@ namespace SteamKit2
     /// </summary>
     public sealed partial class SteamFriends : ClientMsgHandler
     {
+        sealed class Friend
+        {
+            public SteamID FriendID { get; set; }
+            public EFriendRelationship Relationship { get; set; }
+        }
+
+        List<Friend> friendList;
         AccountCache cache;
 
 
         internal SteamFriends()
         {
+            friendList = new List<Friend>();
             cache = new AccountCache();
         }
 
@@ -34,7 +42,7 @@ namespace SteamKit2
         /// <returns>The name.</returns>
         public string GetPersonaName()
         {
-            return cache.LocalFriend.Name;
+            return cache.LocalUser.Name;
         }
         /// <summary>
         /// Sets the local user's persona name and broadcasts it over the network.
@@ -52,7 +60,7 @@ namespace SteamKit2
         /// <returns>The persona state.</returns>
         public EPersonaState GetPersonaState()
         {
-            return cache.LocalFriend.PersonaState;
+            return cache.LocalUser.PersonaState;
         }
         /// <summary>
         /// Sets the local user's persona state and broadcasts it over the network.
@@ -66,7 +74,7 @@ namespace SteamKit2
             this.Client.Send( stateMsg );
 
             // todo: figure out if we get persona state changes for our own actions
-            cache.LocalFriend.PersonaState = state;
+            cache.LocalUser.PersonaState = state;
         }
 
         /// <summary>
@@ -75,7 +83,10 @@ namespace SteamKit2
         /// <returns>The number of friends.</returns>
         public int GetFriendCount()
         {
-            return cache.Friends.Count;
+            lock ( friendList )
+            {
+                return friendList.Count;
+            }
         }
         /// <summary>
         /// Gets a friend by index.
@@ -84,7 +95,10 @@ namespace SteamKit2
         /// <returns>A valid steamid of a friend if the index is in range; otherwise a steamid representing 0.</returns>
         public SteamID GetFriendByIndex( int index )
         {
-            return cache.Friends[ index ].SteamID;
+            lock ( friendList )
+            {
+                return friendList[ index ].FriendID;
+            }
         }
 
         /// <summary>
@@ -94,7 +108,7 @@ namespace SteamKit2
         /// <returns>The name.</returns>
         public string GetFriendPersonaName( SteamID steamId )
         {
-            return cache.GetFriend( steamId ).Name;
+            return cache.GetUser( steamId ).Name;
         }
         /// <summary>
         /// Gets the persona state of a friend.
@@ -103,7 +117,7 @@ namespace SteamKit2
         /// <returns>The persona state</returns>
         public EPersonaState GetFriendPersonaState( SteamID steamId )
         {
-            return cache.GetFriend( steamId ).PersonaState;
+            return cache.GetUser( steamId ).PersonaState;
         }
         /// <summary>
         /// Gets the relationship of a friend.
@@ -112,7 +126,15 @@ namespace SteamKit2
         /// <returns></returns>
         public EFriendRelationship GetFriendRelationship( SteamID steamId )
         {
-            return cache.GetFriend( steamId ).Relationship;
+            lock ( friendList )
+            {
+                var friend = friendList.Find( friendObj => friendObj.FriendID == steamId );
+
+                if ( friend == null )
+                    return EFriendRelationship.None;
+
+                return friend.Relationship;
+            }
         }
 
         /// <summary>
@@ -122,7 +144,7 @@ namespace SteamKit2
         /// <returns>The game name of a friend playing a game, or null if they haven't been cached yet.</returns>
         public string GetFriendGamePlayedName( SteamID steamId )
         {
-            return cache.GetFriend( steamId ).GameName;
+            return cache.GetUser( steamId ).GameName;
         }
         /// <summary>
         /// Gets the GameID of a friend playing a game.
@@ -131,7 +153,7 @@ namespace SteamKit2
         /// <returns>The gameid of a friend playing a game, or 0 if they haven't been cached yet.</returns>
         public GameID GetFriendGamePlayed( SteamID steamId )
         {
-            return cache.GetFriend( steamId ).GameID;
+            return cache.GetUser( steamId ).GameID;
         }
 
         /// <summary>
@@ -141,7 +163,7 @@ namespace SteamKit2
         /// <returns>A byte array representing a SHA-1 hash of the friend's avatar.</returns>
         public byte[] GetFriendAvatar( SteamID steamId )
         {
-            return cache.GetFriend( steamId ).AvatarHash;
+            return cache.GetUser( steamId ).AvatarHash;
         }
 
         /// <summary>
@@ -282,7 +304,7 @@ namespace SteamKit2
         {
             var accInfo = new ClientMsgProtobuf<MsgClientAccountInfo>( e.Data );
 
-            cache.LocalFriend.Name = accInfo.Msg.Proto.persona_name;
+            cache.LocalUser.Name = accInfo.Msg.Proto.persona_name;
         }
         void HandleFriendMsg( ClientMsgEventArgs e )
         {
@@ -300,12 +322,22 @@ namespace SteamKit2
         {
             var list = new ClientMsgProtobuf<MsgClientFriendsList>( e.Data );
 
-            cache.LocalFriend.SteamID = this.Client.SteamID;
+            cache.LocalUser.SteamID = this.Client.SteamID;
+
+            if ( !list.Msg.Proto.bincremental )
+            {
+                // if we're not an incremental update, the message contains all friends, so we should clear our current list
+                lock ( friendList )
+                {
+                    friendList.Clear();
+                }
+            }
 
             // we have to request information for all of our friends because steam only sends persona information for online friends
             var reqInfo = new ClientMsgProtobuf<MsgClientRequestFriendData>();
 
-            reqInfo.Msg.Proto.persona_state_requested = ( uint )( EClientPersonaStateFlag.PlayerName );
+            reqInfo.Msg.Proto.persona_state_requested = ( uint )( EClientPersonaStateFlag.PlayerName | EClientPersonaStateFlag.Presence );
+
 
             foreach ( var friendObj in list.Msg.Proto.friends )
             {
@@ -313,6 +345,15 @@ namespace SteamKit2
 
                 if ( !friendId.BIndividualAccount() )
                     continue; // don't want to request clan information
+
+                lock ( friendList )
+                {
+                    friendList.Add( new Friend()
+                    {
+                        FriendID = friendId,
+                        Relationship = ( EFriendRelationship )friendObj.efriendrelationship,
+                    } );
+                }
 
                 reqInfo.Msg.Proto.friends.Add( friendId );
             }
@@ -339,31 +380,33 @@ namespace SteamKit2
 
                 SteamID sourceId = friend.steamid_source;
 
-                if ( sourceId.IsValid() )
-                    continue; // HACK: we're ignoring friends from groups/clans for now
-
-                if ( !friendId.BIndividualAccount() )
-                    continue;
-
-                Friend cacheFriend = cache.GetFriend( friendId );
-
-                if ( ( flags & EClientPersonaStateFlag.PlayerName ) == EClientPersonaStateFlag.PlayerName )
-                    cacheFriend.Name = friend.player_name;
-
-                if ( ( flags & EClientPersonaStateFlag.Presence ) == EClientPersonaStateFlag.Presence )
+                if ( friendId.BIndividualAccount() )
                 {
-                    cacheFriend.AvatarHash = friend.avatar_hash;
-                    cacheFriend.PersonaState = ( EPersonaState )friend.persona_state;
+                    User cacheFriend = cache.GetUser( friendId );
+
+                    if ( ( flags & EClientPersonaStateFlag.PlayerName ) == EClientPersonaStateFlag.PlayerName )
+                        cacheFriend.Name = friend.player_name;
+
+                    if ( ( flags & EClientPersonaStateFlag.Presence ) == EClientPersonaStateFlag.Presence )
+                    {
+                        cacheFriend.AvatarHash = friend.avatar_hash;
+                        cacheFriend.PersonaState = ( EPersonaState )friend.persona_state;
+                    }
+
+                    if ( ( flags & EClientPersonaStateFlag.GameExtraInfo ) == EClientPersonaStateFlag.GameExtraInfo )
+                    {
+                        cacheFriend.GameName = friend.game_name;
+                        cacheFriend.GameID = friend.gameid;
+                        cacheFriend.GameAppID = friend.game_played_app_id;
+                    }
+                }
+                else if ( friendId.BClanAccount() )
+                {
+                    Clan cacheClan = cache.Clans.GetAccount( friendId );
+
                 }
 
-                if ( ( flags & EClientPersonaStateFlag.GameExtraInfo ) == EClientPersonaStateFlag.GameExtraInfo )
-                {
-                    cacheFriend.GameName = friend.game_name;
-                    cacheFriend.GameID = friend.gameid;
-                    cacheFriend.GameAppID = friend.game_played_app_id;
-                }
-
-                // todo: cache other details?
+                // todo: cache other details/account types?
             }
 
             foreach ( var friend in perState.Msg.Proto.friends )
