@@ -269,6 +269,11 @@ namespace Vapor
             Util.OpenProfile( this.Friend.SteamID );
         }
 
+        private void vaporContextMenu1_Opening( object sender, CancelEventArgs e )
+        {
+            viewProfileToolStripMenuItem.Text = string.Format( "View {0}'s Profile", this.Friend.GetName() );
+        }
+
         
     }
 }

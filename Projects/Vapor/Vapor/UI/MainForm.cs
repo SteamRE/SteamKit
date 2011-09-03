@@ -316,6 +316,11 @@ namespace Vapor
 
         private void showHideToolStripMenuItem_Click( object sender, EventArgs e )
         {
+            ToggleFormVisibility();
+        }
+
+        private void ToggleFormVisibility()
+        {
             if ( this.Visible )
             {
                 this.Hide();
@@ -323,6 +328,7 @@ namespace Vapor
             else
             {
                 this.Show();
+                this.Focus();
             }
         }
 
@@ -395,6 +401,11 @@ namespace Vapor
             ResizeFriends();
 
             friendsFlow.ResumeLayout();
+        }
+
+        private void notifyIcon1_MouseDoubleClick( object sender, MouseEventArgs e )
+        {
+            ToggleFormVisibility();
         }
     }
 }
