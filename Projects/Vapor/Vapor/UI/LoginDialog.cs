@@ -31,8 +31,6 @@ namespace Vapor
                 Steam3.UserName = txtUser.Text;
                 Steam3.Password = txtPass.Text;
 
-                Steam3.AlternateLogon = chkBoxAltLogon.Checked;
-
                 Steam3.Initialize( useTcp );
 
                 Steam3.Connect();
