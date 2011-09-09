@@ -80,6 +80,7 @@ message CMsgClientLogon {
 	optional uint32 otp_value = 86;
 	optional string otp_identifier = 87;
 	optional bool steam2_ticket_request = 88;
+	optional int32 game_server_app_id = 94;
 }
 
 message CMsgClientLogonResponse {
