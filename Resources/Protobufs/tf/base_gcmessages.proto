@@ -162,6 +162,7 @@ message CMsgStoreGetUserDataResponse {
 	optional bool show_hat_descriptions = 7 [default = true];
 	optional bytes price_sheet = 8;
 	optional int32 default_item_sort = 9 [default = 0];
+	repeated uint32 popular_items = 10;
 }
 
 message CMsgUpdateItemSchema {
