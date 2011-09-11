@@ -14,16 +14,18 @@ namespace ProtobufDumper
     class ImageFile
     {
         string fileName;
-        string outputDir;
 
         IntPtr hModule;
         uint loadAddr;
 
+        public string OutputDir { get; private set; }
+        public List<string> ProtoList { get; private set; }
 
         public ImageFile( string fileName, string output = null )
         {
             this.fileName = fileName;
-            this.outputDir = output ?? Path.GetFileNameWithoutExtension( this.fileName );
+            this.OutputDir = output ?? Path.GetFileNameWithoutExtension( this.fileName );
+            this.ProtoList = new List<string>();
         }
 
         public void Process()
@@ -106,17 +108,24 @@ namespace ProtobufDumper
 
                 if ( *dataPtr == 0x0A )
                 {
+                    byte* originalPtr = dataPtr;
+                    int nullskiplevel = 0;
+
+                rescan:
+                    int t = nullskiplevel;
+                    dataPtr = originalPtr;
+
                     byte[] data = null;
 
                     using ( var ms = new MemoryStream() )
                     using ( var bw = new BinaryWriter( ms ) )
                     {
-                        for ( ; *( short* )dataPtr != 0 ; dataPtr++ )
+                        for ( ; *( short* )dataPtr != 0 || t-- > 0 ; dataPtr++ )
                         {
                             bw.Write( *dataPtr );
                         }
 
-                        bw.Write( ( byte )0 );
+                        bw.Write( (byte)0 );
 
                         data = ms.ToArray();
                     }
@@ -125,20 +134,33 @@ namespace ProtobufDumper
                     dataPtr++;
 
                     if ( data.Length < 2 )
+                    {
+                        dataPtr = originalPtr + 1;
                         continue;
+                    }
 
                     byte strLen = data[ 1 ];
 
                     if ( data.Length - 2 < strLen )
+                    {
+                        dataPtr = originalPtr + 1;
                         continue;
+                    }
 
                     string protoName = Encoding.ASCII.GetString( data, 2, strLen );
 
-                    if ( !protoName.Contains( ".proto" ) )
+                    if ( !protoName.EndsWith( ".proto" ) )
+                    {
+                        dataPtr = originalPtr + 1;
                         continue;
+                    }
 
-                    HandleProto( protoName, data );
+                    if ( !HandleProto( protoName, data ) )
+                    {
+                        nullskiplevel++;
 
+                        goto rescan;
+                    }
                 }
                 else
                 {
@@ -155,10 +177,10 @@ namespace ProtobufDumper
             Native.FreeLibrary( hModule );
         }
 
-        void HandleProto( string name, byte[] data )
+        private bool HandleProto( string name, byte[] data )
         {
             if ( name == "google/protobuf/descriptor.proto" )
-                return;
+                return true;
 
             Console.WriteLine( "Found protobuf candidate '{0}'!", name );
 
@@ -166,7 +188,7 @@ namespace ProtobufDumper
 
             if ( Environment.GetCommandLineArgs().Contains( "-dump", StringComparer.OrdinalIgnoreCase ) )
             {
-                string fileName = Path.Combine( outputDir, name + ".dump" );
+                string fileName = Path.Combine( OutputDir, name + ".dump" );
                 Directory.CreateDirectory( Path.GetDirectoryName( fileName ) );
 
                 Console.WriteLine( "  ! Dumping to '{0}'!", fileName );
@@ -178,6 +200,7 @@ namespace ProtobufDumper
                 catch ( Exception ex )
                 {
                     Console.WriteLine( "Unable to dump: {0}", ex.Message );
+                    return true;
                 }
 
             }
@@ -189,8 +212,14 @@ namespace ProtobufDumper
             }
             catch ( Exception ex )
             {
-                Console.WriteLine( "'{0}' was invalid: {1}\n", name, ex.Message );
-                return;
+                if (ex.GetType() == typeof(EndOfStreamException))
+                {
+                    Console.WriteLine("'{0}' needs rescan: {1}\n", name, ex.Message);
+                    return false;
+                }
+
+                Console.WriteLine("'{0}' was invalid: {1}\n", name, ex.Message);
+                return true;
             }
 
             StringBuilder sb = new StringBuilder();
@@ -206,25 +235,40 @@ namespace ProtobufDumper
 
             foreach ( string dependency in set.dependency )
             {
-                if ( dependency == "google/protobuf/descriptor.proto" )
-                    continue; // not sure where this dependency comes from, but we don't want it
-
                 sb.AppendLine( "import \"" + dependency + "\";" );
             }
 
             sb.AppendLine();
 
+            DumpExtensionDescriptor(set.extension, sb, String.Empty);
+
             foreach ( DescriptorProto proto in set.message_type )
             {
-                DumpDescriptor( proto, sb, 0 );
+                DumpDescriptor(proto, sb, 0);
             }
 
-            Directory.CreateDirectory( outputDir );
-            string outputFile = Path.Combine( outputDir, set.name );
+            foreach ( ServiceDescriptorProto service in set.service )
+            {
+                sb.AppendLine( "service " + service.name + " {" );
+
+                foreach ( MethodDescriptorProto method in service.method )
+                {
+                    sb.AppendLine( "\trpc " + method.name + " (" + method.input_type + ") returns (" + method.output_type + ");" );
+                }
+
+                sb.AppendLine( "}" );
+            }
+
+            Directory.CreateDirectory( OutputDir );
+            string outputFile = Path.Combine( OutputDir, set.name );
 
             Console.WriteLine( "  ! Outputting proto to '{0}'\n", outputFile );
             Directory.CreateDirectory( Path.GetDirectoryName( outputFile ) );
             File.WriteAllText( outputFile, sb.ToString() );
+
+            ProtoList.Add( outputFile );
+
+            return true;
         }
 
 
@@ -281,7 +325,25 @@ namespace ProtobufDumper
                     return "fixed32";
                 case FieldDescriptorProto.Type.TYPE_FIXED64:
                     return "fixed64";
+                case FieldDescriptorProto.Type.TYPE_SFIXED32:
+                    return "sfixed32";
+                case FieldDescriptorProto.Type.TYPE_SFIXED64:
+                    return "sfixed64";
             }
+        }
+
+        private static String ResolveType( FieldDescriptorProto field )
+        {
+            if (field.type == FieldDescriptorProto.Type.TYPE_MESSAGE)
+            {
+                return field.type_name;
+            }
+            else if (field.type == FieldDescriptorProto.Type.TYPE_ENUM)
+            {
+                return field.type_name;
+            }
+
+            return GetType(field.type);
         }
 
         private static void DumpOptions( google.protobuf.FileOptions fileOptions, StringBuilder sb )
@@ -337,6 +399,47 @@ namespace ProtobufDumper
             sb.AppendLine();
         }
 
+        private static string BuildDescriptorDeclaration( FieldDescriptorProto field, List<EnumDescriptorProto> enum_lookup )
+        {
+            string type = ResolveType(field);
+            string parameters = "";
+
+            if ( !String.IsNullOrEmpty(field.default_value) )
+            {
+                parameters = " [default = " + field.default_value + "]";
+            }
+            else if ( field.type == FieldDescriptorProto.Type.TYPE_ENUM && enum_lookup != null )
+            {
+                var potEnum = enum_lookup.Find(protoEnum => type.EndsWith(protoEnum.name));
+
+                if (potEnum != null)
+                {
+                    parameters = " [default = " + potEnum.value[0].name + "]";
+                }
+            }
+
+            return GetLabel(field.label) + " " + type + " " + field.name + " = " + field.number + parameters + ";";
+        }
+
+        private static void DumpExtensionDescriptor( List<FieldDescriptorProto> fields, StringBuilder sb, string levelspace )
+        {
+            foreach (var mapping in fields.GroupBy(x => { return x.extendee; }))
+            {
+                if (String.IsNullOrEmpty(mapping.Key))
+                    throw new Exception("Empty extendee in extension, this should not be possible");
+
+                sb.AppendLine(levelspace + "extend " + mapping.Key + " {");
+
+                foreach (FieldDescriptorProto field in mapping)
+                {
+                    sb.AppendLine(levelspace + "\t" + BuildDescriptorDeclaration(field, null));
+                }
+
+                sb.AppendLine(levelspace + "}");
+                sb.AppendLine();
+            }
+        }
+
         private static void DumpDescriptor( DescriptorProto proto, StringBuilder sb, int level )
         {
             string levelspace = new String( '\t', level );
@@ -348,10 +451,7 @@ namespace ProtobufDumper
                 DumpDescriptor( field, sb, level + 1 );
             }
 
-            foreach ( FieldDescriptorProto field in proto.extension )
-            {
-                sb.AppendLine( levelspace + "\t" + GetLabel( field.label ) + " " + GetType( field.type ) + " " + field.name );
-            }
+            DumpExtensionDescriptor( proto.extension, sb, levelspace + '\t' );
 
             foreach ( EnumDescriptorProto field in proto.enum_type )
             {
@@ -363,45 +463,21 @@ namespace ProtobufDumper
                 }
         
                 sb.AppendLine( levelspace + "\t}" );
+                sb.AppendLine();
             }
 
             foreach ( FieldDescriptorProto field in proto.field )
             {
-                string type = GetType( field.type );
-                bool isEnum = false;
-
-                if ( type.Equals( "message" ) )
-                {
-                    type = field.type_name;
-                }
-                
-                if ( type.Equals( "enum" ) )
-                {
-                    isEnum = true;
-                    type = field.type_name;
-                }
-
-                string parameters = "";
-
-
-                if ( !String.IsNullOrEmpty( field.default_value ) )
-                {
-                    parameters += " [default = " + field.default_value + "]";
-                }
-
-                if ( isEnum )
-                {
-                    var potEnum = proto.enum_type.Find( protoEnum => type.EndsWith( protoEnum.name ));
-
-                    if ( potEnum != null )
-                    {
-                        parameters = " [default = " + potEnum.value[ 0 ].name + "]";
-                    }
-                }
-
-                sb.AppendLine( levelspace + "\t" + GetLabel( field.label ) + " " + type + " " + field.name + " = " + field.number + parameters + ";" );
+                sb.AppendLine( levelspace + "\t" + BuildDescriptorDeclaration(field, proto.enum_type) );
             }
 
+            if (proto.extension_range.Count > 0)
+                sb.AppendLine();
+
+            foreach ( DescriptorProto.ExtensionRange range in proto.extension_range )
+            {
+                sb.AppendLine(levelspace + "\textensions " + range.start + " to " + range.end + ";" );
+            }
 
             sb.AppendLine( levelspace + "}" );
             sb.AppendLine();
