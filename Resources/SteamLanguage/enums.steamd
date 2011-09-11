@@ -43,7 +43,7 @@ enum EAccountType
 	ContentServer = 6;
 	Clan = 7;
 	Chat = 8;
-	P2PSuperSeeder = 9;
+	ConsoleUser = 9;
 	AnonUser = 10;
 };
 
