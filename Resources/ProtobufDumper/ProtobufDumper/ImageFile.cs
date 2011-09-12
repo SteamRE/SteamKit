@@ -549,7 +549,7 @@ namespace ProtobufDumper
             string parameters = String.Empty;
             if (options.Count > 0)
             {
-                parameters = "[" + String.Join(", ", options.Select(kvp => String.Format("{0} = {1}", kvp.Key, kvp.Value))) + "]";
+                parameters = " [" + String.Join(", ", options.Select(kvp => String.Format("{0} = {1}", kvp.Key, kvp.Value))) + "]";
             }
 
             return GetLabel(field.label) + " " + type + " " + field.name + " = " + field.number + parameters + ";";
@@ -589,8 +589,10 @@ namespace ProtobufDumper
             if (!string.IsNullOrEmpty(set.package))
             {
                 sb.AppendLine("package " + set.package + ";");
-                sb.AppendLine();
             }
+
+            if (set.dependency.Count > 0 || !string.IsNullOrEmpty(set.package))
+                sb.AppendLine();
 
             foreach (var option in DumpOptions(set.options))
             {
@@ -677,7 +679,7 @@ namespace ProtobufDumper
                     string parameters = String.Empty;
                     if (options.Count > 0)
                     {
-                        parameters = "[" + String.Join(", ", options.Select(kvp => String.Format("{0} = {1}", kvp.Key, kvp.Value))) + "]";
+                        parameters = " [" + String.Join(", ", options.Select(kvp => String.Format("{0} = {1}", kvp.Key, kvp.Value))) + "]";
                     }
 
                     sb.AppendLine(levelspace + "\t\t" + enumValue.name + " = " + enumValue.number + parameters + ";");
