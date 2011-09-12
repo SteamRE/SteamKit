@@ -113,6 +113,16 @@ namespace ProtobufDumper
 
                 ScanSection(sectionHdr);
             }
+
+            if (deferredProtos.Count > 0)
+            {
+                Console.WriteLine("WARNING: Some protobufs were left unresolved: ");
+
+                foreach (var proto in deferredProtos)
+                {
+                    DoParseFile(proto);
+                }
+            }
         }
 
         unsafe void ScanSection(Native.IMAGE_SECTION_HEADER sectionHdr)
@@ -581,25 +591,43 @@ namespace ProtobufDumper
 
         private void DumpFileDescriptor(FileDescriptorProto set, StringBuilder sb)
         {
+            bool marker = false;
+
             foreach (string dependency in set.dependency)
             {
                 sb.AppendLine("import \"" + dependency + "\";");
+                marker = true;
+            }
+
+            if (marker)
+            {
+                sb.AppendLine();
+                marker = false;
             }
 
             if (!string.IsNullOrEmpty(set.package))
             {
                 sb.AppendLine("package " + set.package + ";");
+                marker = true;
             }
 
-            if (set.dependency.Count > 0 || !string.IsNullOrEmpty(set.package))
+            if (marker)
+            {
                 sb.AppendLine();
+                marker = false;
+            }
 
             foreach (var option in DumpOptions(set.options))
             {
                 sb.AppendLine("option " + option.Key + " = " + option.Value + ";");
+                marker = true;
             }
 
-            sb.AppendLine();
+            if (marker)
+            {
+                sb.AppendLine();
+                marker = false;
+            }
 
             DumpExtensionDescriptor(set.extension, sb, String.Empty);
 
