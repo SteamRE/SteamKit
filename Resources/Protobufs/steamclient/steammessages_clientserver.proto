@@ -1,6 +1,8 @@
 import "steammessages_base.proto";
 import "encrypted_app_ticket.proto";
 
+option cc_generic_services = false;
+
 message CMsgClientHeartBeat {
 }
 
