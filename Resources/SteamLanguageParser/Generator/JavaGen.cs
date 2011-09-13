@@ -15,7 +15,7 @@ namespace SteamLanguageParser
             {"long", "Long"},
         };
 
-        public void EmitNamespace(StringBuilder sb, bool end)
+        public void EmitNamespace(StringBuilder sb, bool end, string nspace)
         {
             if (end)
             {
@@ -35,7 +35,7 @@ namespace SteamLanguageParser
             }
         }
 
-        public void EmitSerialBase(StringBuilder sb, int level)
+        public void EmitSerialBase(StringBuilder sb, int level, bool supportsGC)
         {
             string padding = new String('\t', level);
 

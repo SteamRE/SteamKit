@@ -19,7 +19,7 @@ namespace SteamLanguageParser
             {"char", "Char"},
         };
 
-        public void EmitNamespace(StringBuilder sb, bool end)
+        public void EmitNamespace(StringBuilder sb, bool end, string nspace)
         {
             if (end)
             {
@@ -31,12 +31,12 @@ namespace SteamLanguageParser
                 sb.AppendLine("using System.IO;");
                 sb.AppendLine( "using System.Runtime.InteropServices;" );
                 sb.AppendLine();
-                sb.AppendLine("namespace SteamKit2");
+                sb.AppendLine( string.Format( "namespace {0}", nspace ) );
                 sb.AppendLine("{");
             }
         }
 
-        public void EmitSerialBase(StringBuilder sb, int level)
+        public void EmitSerialBase(StringBuilder sb, int level, bool supportsGC)
         {
             string padding = new String('\t', level);
 
@@ -56,16 +56,18 @@ namespace SteamLanguageParser
             sb.AppendLine(padding + "\tEMsg GetEMsg();");
             sb.AppendLine(padding + "}");
 
+            if ( supportsGC )
+            {
+                sb.AppendLine( padding + "public interface IGCSerializableHeader : ISteamSerializable" );
+                sb.AppendLine( padding + "{" );
+                sb.AppendLine( padding + "\tvoid SetEMsg( EGCMsg msg );" );
+                sb.AppendLine( padding + "}" );
 
-            sb.AppendLine( padding + "public interface IGCSerializableHeader : ISteamSerializable" );
-            sb.AppendLine( padding + "{" );
-            sb.AppendLine( padding + "\tvoid SetEMsg( EGCMsg msg );" );
-            sb.AppendLine( padding + "}" );
-
-            sb.AppendLine( padding + "public interface IGCSerializableMessage : ISteamSerializable" );
-            sb.AppendLine( padding + "{" );
-            sb.AppendLine( padding + "\tEGCMsg GetEMsg();" );
-            sb.AppendLine( padding + "}" );
+                sb.AppendLine( padding + "public interface IGCSerializableMessage : ISteamSerializable" );
+                sb.AppendLine( padding + "{" );
+                sb.AppendLine( padding + "\tEGCMsg GetEMsg();" );
+                sb.AppendLine( padding + "}" );
+            }
 
             sb.AppendLine();
         }
@@ -410,10 +412,10 @@ namespace SteamLanguageParser
                 }
             }
 
-            sb.AppendLine(padding + "\tBinaryWriterEx bw = new BinaryWriterEx( stream );");
-            sb.AppendLine();
-            //sb.AppendLine(padding + "\tBinaryWriter writer = new BinaryWriter( msBuffer );");
+            //sb.AppendLine(padding + "\tBinaryWriterEx bw = new BinaryWriterEx( stream );");
             //sb.AppendLine();
+            sb.AppendLine(padding + "\tBinaryWriter bw = new BinaryWriter( stream );");
+            sb.AppendLine();
 
             if (cnode.Parent != null)
             {
@@ -490,7 +492,7 @@ namespace SteamLanguageParser
 
             if (baseSize > 0)
             {
-                sb.AppendLine(padding + "\tBinaryReaderEx br = new BinaryReaderEx( stream );");
+                sb.AppendLine(padding + "\tBinaryReader br = new BinaryReader( stream );");
                 sb.AppendLine();
             }
 
