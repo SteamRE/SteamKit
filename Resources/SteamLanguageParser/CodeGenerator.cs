@@ -7,8 +7,8 @@ namespace SteamLanguageParser
 {
     interface ICodeGen
     {
-        void EmitNamespace(StringBuilder sb, bool end);
-        void EmitSerialBase(StringBuilder sb, int level);
+        void EmitNamespace(StringBuilder sb, bool end, string nspace);
+        void EmitSerialBase(StringBuilder sb, int level, bool supportsGC);
         void EmitNode(Node n, StringBuilder sb, int level);
 
         bool SupportsNamespace();
@@ -120,22 +120,22 @@ namespace SteamLanguageParser
             return 0;
         }
 
-        public static void EmitCode(Node root, ICodeGen gen, StringBuilder sb)
+        public static void EmitCode(Node root, ICodeGen gen, StringBuilder sb, string nspace, bool supportsGC)
         {
-            gen.EmitNamespace(sb, false);
+            gen.EmitNamespace(sb, false, nspace);
 
             int level = 0;
             if (gen.SupportsNamespace())
                 level = 1;
 
-            gen.EmitSerialBase(sb, level);
+            gen.EmitSerialBase(sb, level, supportsGC);
 
             foreach (Node n in root.childNodes)
             {
                 gen.EmitNode(n, sb, level);
             }
 
-            gen.EmitNamespace(sb, true);
+            gen.EmitNamespace(sb, true, nspace);
         }
 
     }
