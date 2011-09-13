@@ -1,0 +1,286 @@
+
+enum EUniverse
+{
+	Invalid = 0;
+	
+	Public = 1;
+	Beta = 2;
+	Internal = 3;
+	Dev = 4;
+	RC = 5;
+};
+
+enum EChatEntryType
+{
+	Invalid = 0;
+	
+	ChatMsg = 1;
+	Typing = 2;
+	InviteGame = 3;
+	Emote = 4;
+	LobbyGameStart = 5;
+	LeftConversation = 6;
+};
+
+enum EPersonaState
+{
+	Offline = 0;
+	Online = 1;
+	Busy = 2;
+	Away = 3;
+	Snooze = 4;
+};
+
+enum EAccountType
+{
+	Invalid = 0;
+
+	Individual = 1;
+	Multiseat = 2;
+	GameServer = 3;
+	AnonGameServer = 4;
+	Pending = 5;
+	ContentServer = 6;
+	Clan = 7;
+	Chat = 8;
+	ConsoleUser = 9;
+	AnonUser = 10;
+};
+
+enum EFriendRelationship
+{
+	None = 0;
+	
+	Blocked = 1;
+	RequestRecipient = 2;
+	Friend = 3;
+	RequestInitiator = 4;
+	Ignored = 5;
+	IgnoredFriend = 6;
+};
+
+enum EAccountFlags
+{
+	NormalUser = 0;
+	
+	PersonaNameSet = 1;
+	Unbannable = 2;
+	PasswordSet = 4;
+	Support = 8;
+	Admin = 16;
+	Supervisor = 32;
+	AppEditor = 64;
+	HWIDSet = 128;
+	PersonalQASet = 256;
+	VacBeta = 512;
+	Debug = 1024;
+	Disabled = 2048;
+	LimitedUser = 4096;
+	LimitedUserForce = 8192;
+	EmailValidated = 16384;
+	MarketingTreatment = 32768;
+};
+
+enum EFriendFlags
+{
+	None = 0;
+	Blocked = 1;
+	FriendshipRequested = 2;
+	Immediate = 4;
+	ClanMember = 8;
+	GameServer = 16;
+	RequestingFriendship = 128;
+	RequestingInfo = 256;
+	Ignored = 512;
+	IgnoredFriend = 1024;
+	FlagAll = 65535;
+};
+
+enum EClientPersonaStateFlag
+{
+	Status = 1;
+	PlayerName = 2;
+	QueryPort = 4;
+	SourceID = 8;
+	Presence = 16;
+	Metadata = 32;
+	LastSeen = 64;
+	ClanInfo = 128;
+	GameExtraInfo = 256;
+	GameDataBlob = 512;
+};
+
+enum EAppUsageEvent
+{
+	GameLaunch = 1;
+	GameLaunchTrial = 2;
+	Media = 3;
+	PreloadStart = 4;
+	PreloadFinish = 5;
+	MarketingMessageView = 6;
+	InGameAdViewed = 7;
+	GameLaunchFreeWeekend = 8;
+};
+
+enum ELicenseFlags
+{
+	Renew = 0x01;
+	RenewalFailed = 0x02;
+	Pending = 0x04;
+	Expired = 0x08;
+	CancelledByUser = 0x10;
+	CancelledByAdmin = 0x20;
+};
+
+enum ELicenseType
+{
+	NoLicense = 0;
+	SinglePurchase = 1;
+	SinglePurchaseLimitedUse = 2;
+	RecurringCharge = 3;
+	RecurringChargeLimitedUse = 4;
+	RecurringChargeLimitedUseWithOverages = 5;
+};
+
+enum EPaymentMethod
+{
+	None = 0;
+	ActivationCode = 1;
+	CreditCard = 2;
+	PayPal = 4;
+	GuestPass = 8;
+	HardwarePromo = 16;
+	ClickAndBuy = 32;
+	AutoGrant = 64;
+	Wallet = 128;
+	OEMTicket = 256;
+	Split = 512;
+};
+
+enum EIntroducerRouting
+{
+	FileShare = 0;
+	P2PVoiceChat = 1;
+	P2PNetworking = 2;
+};
+
+enum EServerFlags
+{
+	None = 0;
+	Active = 1;
+	Secure = 2;
+	Dedicated = 4;
+	Linux = 8;
+	Pssworded = 16;
+	Private = 32;
+};
+
+enum EDenyReason
+{
+	InvalidVersion = 1;
+	Generic = 2;
+	NotLoggedOn = 3;
+	NoLicense = 4;
+	Cheater = 5;
+	LoggedInElseWhere = 6;
+	UnknownText = 7;
+	IncompatibleAnticheat = 8;
+	MemoryCorruption = 9;
+	IncompatibleSoftware = 10;
+	SteamConnectionLost = 11;
+	SteamConnectionError = 12;
+	SteamResponseTimedOut = 13;
+	SteamValidationStalled = 14;
+	SteamOwnerLeftGuestUser = 15;
+};
+
+enum EClanRank
+{
+	None = 0;
+	Owner = 1;
+	Officer = 2;
+	Member = 3;
+};
+
+enum EClanRelationship
+{
+	None = 0;
+	Blocked = 1;
+	Invited = 2;
+	Member = 3;
+	Kicked = 4;
+};
+
+enum EAuthSessionResponse
+{
+	OK = 0;
+	UserNotConnectedToSteam = 1;
+	NoLicenseOrExpired = 2;
+	VACBanned = 3;
+	LoggedInElseWhere = 4;
+	VACCheckTimedOut = 5;
+	AuthTicketCanceled = 6;
+	AuthTicketInvalidAlreadyUsed = 7;
+	AuthTicketInvalid = 8;
+};
+
+enum EChatRoomEnterResponse
+{
+	Success = 1;
+	DoesntExist = 2;
+	NotAllowed = 3;
+	Full = 4;
+	Error = 5;
+	Banned = 6;
+	Limited = 7;
+	ClanDisabled = 8;
+	CommunityBan = 9;
+};
+
+enum EChatRoomType
+{
+	Friend = 1;
+	MUC = 2;
+	Lobby = 3;
+};
+
+enum EChatInfoType
+{
+	StateChange = 1;
+	InfoUpdate = 2;
+	MemberLimitChange = 3;
+};
+
+enum EChatAction
+{
+	InviteChat = 1;
+	Kick = 2;
+	Ban = 3;
+	UnBan = 4;
+	StartVoiceSpeak = 5;
+	EndVoiceSpeak = 6;
+	LockChat = 7;
+	UnlockChat = 8;
+	CloseChat = 9;
+	SetJoinable = 10;
+	SetUnjoinable = 11;
+	SetOwner = 12;
+	SetInvisibleToFriends = 13;
+	SetVisibleToFriends = 14;
+	SetModerated = 15;
+	SetUnmoderated = 16;
+};
+
+enum EChatActionResult
+{
+	Success = 1;
+	Error = 2;
+	NotPermitted = 3;
+	NotAllowedOnClanMember = 4;
+	NotAllowedOnBannedUser = 5;
+	NotAllowedOnChatOwner = 6;
+	NotAllowedOnSelf = 7;
+	ChatDoesntExist = 8;
+	ChatFull = 9;
+	VoiceSlotsFull = 10;
+};
