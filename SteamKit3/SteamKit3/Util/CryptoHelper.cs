@@ -12,24 +12,37 @@ using Classless.Hasher;
 
 namespace SteamKit3
 {
+    public class RSAHelper : IDisposable
+    {
+        RSACryptoServiceProvider rsaProvider;
+
+
+        internal RSAHelper( byte[] key )
+        {
+            AsnKeyParser keyParser = new AsnKeyParser( key );
+            RSAParameters rsaParams = keyParser.ParseRSAPublicKey();
+
+            rsaProvider = new RSACryptoServiceProvider();
+            rsaProvider.ImportParameters( rsaParams );
+        }
+
+        public byte[] Encrypt( byte[] input )
+        {
+            return rsaProvider.Encrypt( input, true );
+        }
+        public void Dispose()
+        {
+            rsaProvider.Dispose();
+        }
+
+    }
+
     public static class CryptoHelper
     {
-        private static RSACryptoServiceProvider rsaProvider;
-		
-        public static void InitializeRSA( byte[] key )
-        {			
-		    AsnKeyParser keyParser = new AsnKeyParser( key );
-		    RSAParameters rsaParam = keyParser.ParseRSAPublicKey();
-			
-		    rsaProvider = new RSACryptoServiceProvider();
-		    rsaProvider.ImportParameters(rsaParam);
-        }
-		
-        public static byte[] RSAEncrypt( byte[] input )
+
+        public static RSAHelper CreateRSA( byte[] key )
         {
-            byte[] output = rsaProvider.Encrypt( input, true );
-			
-            return output;
+            return new RSAHelper( key );
         }
 
         public static byte[] SHAHash( byte[] input )
