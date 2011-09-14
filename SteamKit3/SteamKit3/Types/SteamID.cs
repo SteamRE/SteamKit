@@ -87,6 +87,7 @@ namespace SteamKit3
         }
 
         public SteamID( ulong id )
+            : this()
         {
             SetFromUint64( id );
         }
