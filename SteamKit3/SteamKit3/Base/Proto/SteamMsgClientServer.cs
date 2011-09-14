@@ -6,6 +6,7 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
+#pragma warning disable 1591
 
 // Generated from: steammessages_clientserver.proto
 // Note: requires additional types generated from: steammessages_base.proto
@@ -10411,3 +10412,4 @@ namespace SteamKit3
   }
   
 }
+#pragma warning restore 1591
