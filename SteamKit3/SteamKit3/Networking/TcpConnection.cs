@@ -25,7 +25,6 @@ namespace SteamKit3
 
         NetworkStream stream;
         BinaryReader reader;
-        BinaryWriter writer;
 
         /// <summary>
         /// Connects to the specified end point.
@@ -46,7 +45,6 @@ namespace SteamKit3
                     {
                         stream = new NetworkStream( sock, true );
                         reader = new BinaryReader( stream );
-                        writer = new BinaryWriter( stream );
 
                         netThread = new Thread( NetLoop );
                         netThread.Name = "TcpConnection Thread";
@@ -102,9 +100,28 @@ namespace SteamKit3
                 data = NetFilter.ProcessOutgoing( data );
             }
 
-            writer.Write( data.Length );
-            writer.Write( TcpConnection.MAGIC );
-            writer.Write( data );
+            using ( MemoryStream ms = new MemoryStream() )
+            using ( BinaryWriter bw = new BinaryWriter( ms ) )
+            {
+                bw.Write( data.Length );
+                bw.Write( TcpConnection.MAGIC );
+                bw.Write( data );
+
+                data = ms.ToArray();
+            }
+
+            var sockSend = new SocketAsyncEventArgs();
+
+            sockSend.SetBuffer( data, 0, data.Length );
+            sockSend.Completed += ( sender, e ) =>
+            {
+                if ( e.SocketError == SocketError.Success )
+                    return;
+
+                // report send failure?
+            };
+
+            sock.SendAsync( sockSend );
         }
 
         // this is now a steamkit meme
@@ -147,7 +164,8 @@ namespace SteamKit3
             }
             catch ( IOException e )
             {
-                DebugLog.WriteLine( "TcpConnection SocketException", e.ToString() );
+                Log.Error( "Socket exception", e );
+
                 OnDisconnected( EventArgs.Empty );
             }
         }
