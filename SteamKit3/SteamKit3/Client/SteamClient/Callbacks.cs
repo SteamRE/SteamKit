@@ -12,16 +12,31 @@ namespace SteamKit3
 {
     partial class SteamClient
     {
+        /// <summary>
+        /// This callback is received when the steamclient is physically disconnected from the Steam network.
+        /// </summary>
         public sealed class DisconnectedCallback : CallbackMsg
         {
         }
 
+        /// <summary>
+        /// This callback is received after attempting to connect to the Steam network.
+        /// </summary>
         public sealed class ConnectedCallback : CallbackMsg
         {
+            /// <summary>
+            /// Gets the universe we've connected to.
+            /// </summary>
+            public EUniverse Universe { get; private set; }
+            /// <summary>
+            /// Gets the result of the connection attempt.
+            /// </summary>
             public EResult Result { get; private set; }
 
-            internal ConnectedCallback( MsgChannelEncryptResult msg )
+
+            internal ConnectedCallback( MsgChannelEncryptResult msg, EUniverse eUniverse )
             {
+                Universe = eUniverse;
                 Result = msg.Result;
             }
         }
