@@ -6,6 +6,7 @@
 class MsgHdr
 {
 	EMsg msg = EMsg::Invalid;
+
 	ulong targetJobID = ulong.MaxValue;
 	ulong sourceJobID = ulong.MaxValue;
 };
@@ -13,11 +14,16 @@ class MsgHdr
 class ExtendedClientMsgHdr
 {
 	EMsg msg = EMsg::Invalid;
+
 	byte headerSize = 36;
+
 	ushort headerVersion = 2;
+
 	ulong targetJobID = ulong.MaxValue;
 	ulong sourceJobID = ulong.MaxValue;
+
 	byte headerCanary = 239;
+
 	steamidmarshal ulong steamID;
 	int sessionID;
 };
