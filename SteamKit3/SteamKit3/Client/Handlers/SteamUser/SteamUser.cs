@@ -7,9 +7,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Diagnostics.Contracts;
 
 namespace SteamKit3
 {
+    /// <summary>
+    /// This handler handles all user log on/log off related actions and callbacks.
+    /// </summary>
     [Handler]
     public sealed partial class SteamUser : ClientHandler
     {
@@ -35,26 +39,24 @@ namespace SteamKit3
             /// </summary>
             /// <value>The auth code.</value>
             public string AuthCode { get; set; }
-
-            /// <summary>
-            /// Gets or sets the account instance. 1 for the PC instance or 2 for the Console (PS3) instance.
-            /// </summary>
-            /// <value>The account instance.</value>
-            public uint AccountInstance { get; set; }
-
-
-            public LogOnDetails()
-            {
-                AccountInstance = 1; // use the default pc steam instance
-            }
         }
+
 
         internal SteamUser()
         {
         }
 
+        /// <summary>
+        /// Logs the client into the Steam3 network. The client should already have been connected at this point.
+        /// Results are returned in a <see cref="SteamUser.LoggedOnCallback"/>.
+        /// </summary>
+        /// <param name="logonDetails">The details.</param>
         public void Logon( LogOnDetails logonDetails )
         {
+            Contract.Requires( logonDetails != null );
+            Contract.Requires( !string.IsNullOrEmpty( logonDetails.Username ), "logon details must have a username." );
+            Contract.Requires( !string.IsNullOrEmpty( logonDetails.Password ), "logon details must have a password." );
+
             JobMgr.LaunchJob( new LogonJob( Client, logonDetails ) );
         }
     }
