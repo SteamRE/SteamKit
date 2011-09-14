@@ -28,7 +28,9 @@ namespace SteamKit3
         {
             var logonMsg = new ClientMsgProtobuf<CMsgClientLogon>( EMsg.ClientLogon );
 
-            SteamID steamId = new SteamID( 0, logonDetails.AccountInstance, Client.ConnectedUniverse, EAccountType.Individual );
+            SteamID steamId = new SteamID();
+
+            steamId.CreateBlankUserLogon( Client.ConnectedUniverse );
 
             logonMsg.ProtoHeader.client_steam_id = steamId.ConvertToUint64();
 
@@ -39,11 +41,20 @@ namespace SteamKit3
 
             SendMessage( logonMsg );
 
-            IPacketMsg msg = await YieldingWaitForMsg( EMsg.ClientLogOnResponse );
+
+            var msg = await YieldingWaitForMsg( EMsg.ClientLogOnResponse );
+
+            if ( msg == null )
+                return;
+
             var logonResponse = new ClientMsgProtobuf<CMsgClientLogonResponse>( msg );
 
-            // todo: post callback, etc
-            Console.WriteLine( "Logon response: {0}", ( EResult )logonResponse.Body.eresult );
+
+            var callback = new SteamUser.LoggedOnCallback( logonResponse.Body );
+
+            Log.InfoFormat( "ClientLogonResponse: {0} {1}", callback.Result, callback.ExtendedResult );
+
+            Client.PostCallback( callback );
         }
     }
 }
