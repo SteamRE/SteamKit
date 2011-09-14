@@ -135,6 +135,7 @@ enum ELicenseFlags
 enum ELicenseType
 {
 	NoLicense = 0;
+
 	SinglePurchase = 1;
 	SinglePurchaseLimitedUse = 2;
 	RecurringCharge = 3;
@@ -145,6 +146,7 @@ enum ELicenseType
 enum EPaymentMethod
 {
 	None = 0;
+
 	ActivationCode = 1;
 	CreditCard = 2;
 	PayPal = 4;
@@ -167,6 +169,7 @@ enum EIntroducerRouting
 enum EServerFlags
 {
 	None = 0;
+
 	Active = 1;
 	Secure = 2;
 	Dedicated = 4;
@@ -214,6 +217,7 @@ enum EClanRelationship
 enum EAuthSessionResponse
 {
 	OK = 0;
+
 	UserNotConnectedToSteam = 1;
 	NoLicenseOrExpired = 2;
 	VACBanned = 3;
@@ -227,6 +231,7 @@ enum EAuthSessionResponse
 enum EChatRoomEnterResponse
 {
 	Success = 1;
+
 	DoesntExist = 2;
 	NotAllowed = 3;
 	Full = 4;
@@ -274,6 +279,7 @@ enum EChatAction
 enum EChatActionResult
 {
 	Success = 1;
+
 	Error = 2;
 	NotPermitted = 3;
 	NotAllowedOnClanMember = 4;
