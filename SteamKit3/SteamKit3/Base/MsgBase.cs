@@ -8,149 +8,144 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
-using ProtoBuf;
+using System.Diagnostics.Contracts;
 
 namespace SteamKit3
 {
+    /// <summary>
+    /// Represents a unified interface into client messages.
+    /// </summary>
     public interface IClientMsg
     {
+        /// <summary>
+        /// Gets a value indicating whether this client message is protobuf backed.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if this instance is protobuf backed; otherwise, <c>false</c>.
+        /// </value>
+        bool IsProto { get; }
+        /// <summary>
+        /// Gets the network message type of this client message.
+        /// </summary>
+        /// <value>
+        /// The message type.
+        /// </value>
+        EMsg MsgType { get; }
+
+        /// <summary>
+        /// Gets or sets the session id for this client message.
+        /// </summary>
+        /// <value>
+        /// The session id.
+        /// </value>
+        int SessionID { get; set; }
+        /// <summary>
+        /// Gets or sets the <see cref="SteamID"/> for this client message.
+        /// </summary>
+        /// <value>
+        /// The <see cref="SteamID"/>.
+        /// </value>
+        SteamID SteamID { get; set; }
+
+        /// <summary>
+        /// Gets or sets the target job id for this client message.
+        /// </summary>
+        /// <value>
+        /// The target job id.
+        /// </value>
         ulong TargetJobID { get; set; }
+        /// <summary>
+        /// Gets or sets the source job id for this client message.
+        /// </summary>
+        /// <value>
+        /// The source job id.
+        /// </value>
         ulong SourceJobID { get; set; }
 
+        /// <summary>
+        /// Serializes this client message instance to a byte array.
+        /// </summary>
+        /// <returns>Data representing a client message.</returns>
         byte[] Serialize();
+        /// <summary>
+        /// Initializes this client message by deserializing the specified data.
+        /// </summary>
+        /// <param name="data">The data representing a client message.</param>
         void Deserialize( byte[] data );
     }
 
-    public interface IPacketMsg
-    {
-        bool IsProto { get; }
-
-        EMsg MsgType { get; }
-
-        ulong TargetJobID { get; }
-        ulong SourceJobID { get; }
-
-        byte[] GetData();
-    }
-
-
-    public sealed class PacketClientMsgProtobuf : IPacketMsg
-    {
-        public bool IsProto { get { return true; } }
-
-        public EMsg MsgType { get; private set; }
-
-        public ulong TargetJobID { get; private set; }
-        public ulong SourceJobID { get; private set; }
-
-        byte[] payload;
-
-
-        public PacketClientMsgProtobuf( EMsg eMsg, byte[] data )
-        {
-            MsgType = eMsg;
-            payload = data;
-
-            MsgHdrProtoBuf protobufHeader = new MsgHdrProtoBuf();
-
-            using ( MemoryStream ms = new MemoryStream( data ) )
-            {
-                protobufHeader.Deserialize( ms );
-            }
-
-            TargetJobID = protobufHeader.ProtoHeader.job_id_target;
-            SourceJobID = protobufHeader.ProtoHeader.job_id_source;
-        }
-
-
-        public byte[] GetData()
-        {
-            return payload;
-        }
-    }
-
-    public sealed class PacketClientMsg : IPacketMsg
-    {
-        public bool IsProto { get { return false; } }
-
-        public EMsg MsgType { get; private set; }
-
-        public ulong TargetJobID { get; private set; }
-        public ulong SourceJobID { get; private set; }
-
-        byte[] payload;
-
-
-        public PacketClientMsg( EMsg eMsg, byte[] data )
-        {
-            MsgType = eMsg;
-            payload = data;
-
-            ExtendedClientMsgHdr extendedHdr = new ExtendedClientMsgHdr();
-
-            using ( MemoryStream ms = new MemoryStream( data ) )
-            {
-                extendedHdr.Deserialize( ms );
-            }
-
-            TargetJobID = extendedHdr.TargetJobID;
-            SourceJobID = extendedHdr.SourceJobID;
-        }
-
-
-        public byte[] GetData()
-        {
-            return payload;
-        }
-    }
-
-    public sealed class PacketMsg : IPacketMsg
-    {
-        public bool IsProto { get { return false; } }
-
-        public EMsg MsgType { get; private set; }
-
-        public ulong TargetJobID { get; private set; }
-        public ulong SourceJobID { get; private set; }
-
-        byte[] payload;
-
-
-        public PacketMsg( EMsg eMsg, byte[] data )
-        {
-            MsgType = eMsg;
-            payload = data;
-
-            MsgHdr msgHdr = new MsgHdr();
-
-            using ( MemoryStream ms = new MemoryStream( data ) )
-            {
-                msgHdr.Deserialize( ms );
-            }
-
-            TargetJobID = msgHdr.TargetJobID;
-            SourceJobID = msgHdr.SourceJobID;
-        }
-
-
-        public byte[] GetData()
-        {
-            return payload;
-        }
-    }
-
-
-    public abstract class MsgBase<HdrType>
+    /// <summary>
+    /// This is the abstract base class for all available client messages.
+    /// It's used to maintain packet payloads and provide a header for all client messages.
+    /// </summary>
+    /// <typeparam name="HdrType">The header type for this client message.</typeparam>
+    public abstract class MsgBase<HdrType> : IClientMsg
         where HdrType : ISteamSerializableHeader, new()
     {
-        public const ulong GIDNil = ulong.MaxValue;
+        /// <summary>
+        /// Gets a value indicating whether this client message is protobuf backed.
+        /// </summary>
+        /// <value>
+        /// 	<c>true</c> if this instance is protobuf backed; otherwise, <c>false</c>.
+        /// </value>
+        public abstract bool IsProto { get; }
+        /// <summary>
+        /// Gets the network message type of this client message.
+        /// </summary>
+        /// <value>
+        /// The network message type.
+        /// </value>
+        public abstract EMsg MsgType { get; }
 
+        /// <summary>
+        /// Gets or sets the session id for this client message.
+        /// </summary>
+        /// <value>
+        /// The session id.
+        /// </value>
+        public abstract int SessionID { get; set; }
+        /// <summary>
+        /// Gets or sets the <see cref="SteamID"/> for this client message.
+        /// </summary>
+        /// <value>
+        /// The <see cref="SteamID"/>.
+        /// </value>
+        public abstract SteamID SteamID { get; set; }
+
+        /// <summary>
+        /// Gets or sets the target job id for this client message.
+        /// </summary>
+        /// <value>
+        /// The target job id.
+        /// </value>
+        public abstract ulong TargetJobID { get; set; }
+        /// <summary>
+        /// Gets or sets the source job id for this client message.
+        /// </summary>
+        /// <value>
+        /// The source job id.
+        /// </value>
+        public abstract ulong SourceJobID { get; set; }
+
+
+        /// <summary>
+        /// Gets the header for this message type. 
+        /// </summary>
         public HdrType Header { get; private set; }
 
+        /// <summary>
+        /// Returns a <see cref="System.IO.MemoryStream"/> which is the backing stream for client message payload data.
+        /// </summary>
         public MemoryStream Payload { get; private set; }
+
+
         BinaryReader reader;
         BinaryWriter writer;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MsgBase&lt;HdrType&gt;"/> class.
+        /// </summary>
+        /// <param name="payloadReserve">The number of bytes to initialize the payload capacity to.</param>
         public MsgBase( int payloadReserve = 0 )
         {
             Header = new HdrType();
@@ -160,248 +155,286 @@ namespace SteamKit3
             writer = new BinaryWriter( Payload );
         }
 
+
+        /// <summary>
+        /// Serializes this client message instance to a byte array.
+        /// </summary>
+        /// <returns>
+        /// Data representing a client message.
+        /// </returns>
+        public abstract byte[] Serialize();
+        /// <summary>
+        /// Initializes this client message by deserializing the specified data.
+        /// </summary>
+        /// <param name="data">The data representing a client message.</param>
+        public abstract void Deserialize( byte[] data );
+
+
+
+        /// <summary>
+        /// Seeks within the payload to the specified offset.
+        /// </summary>
+        /// <param name="offset">The offset in the payload to seek to.</param>
+        /// <param name="loc">The origin to seek from.</param>
+        /// <returns>The new position within the stream, calculated by combining the initial reference point and the offset.</returns>
+        public long Seek( long offset, SeekOrigin loc )
+        {
+            return Payload.Seek( offset, loc );
+        }
+
+        /// <summary>
+        /// Writes a single unsigned byte to the message payload.
+        /// </summary>
+        /// <param name="data">The unsigned byte.</param>
         public void Write( byte data )
         {
             writer.Write( data );
         }
+        /// <summary>
+        /// Writes a single signed byte to the message payload.
+        /// </summary>
+        /// <param name="data">The signed byte.</param>
         public void Write( sbyte data )
         {
             writer.Write( data );
         }
+        /// <summary>
+        /// Writes the specified byte array to the message payload.
+        /// </summary>
+        /// <param name="data">The byte array.</param>
         public void Write( byte[] data )
         {
             writer.Write( data );
         }
+        /// <summary>
+        /// Writes a single 16bit short to the message payload.
+        /// </summary>
+        /// <param name="data">The short.</param>
         public void Write( short data )
         {
             writer.Write( data );
         }
+        /// <summary>
+        /// Writes a single unsigned 16bit short to the message payload.
+        /// </summary>
+        /// <param name="data">The unsigned short.</param>
         public void Write( ushort data )
         {
             writer.Write( data );
         }
+        /// <summary>
+        /// Writes a single 32bit integer to the message payload.
+        /// </summary>
+        /// <param name="data">The integer.</param>
         public void Write( int data )
         {
             writer.Write( data );
         }
+        /// <summary>
+        /// Writes a single unsigned 32bit integer to the message payload.
+        /// </summary>
+        /// <param name="data">The unsigned integer.</param>
         public void Write( uint data )
         {
             writer.Write( data );
         }
+        /// <summary>
+        /// Writes a single 64bit long to the message payload.
+        /// </summary>
+        /// <param name="data">The long.</param>
         public void Write( long data )
         {
             writer.Write( data );
         }
+        /// <summary>
+        /// Writes a single unsigned 64bit long to the message payload.
+        /// </summary>
+        /// <param name="data">The unsigned long.</param>
         public void Write( ulong data )
         {
             writer.Write( data );
         }
-
-    }
-
-
-    public sealed class ClientMsgProtobuf<MsgType> : MsgBase<MsgHdrProtoBuf>, IClientMsg
-        where MsgType : IExtensible, new()
-    {
-        public ulong TargetJobID
+        /// <summary>
+        /// Writes a single 32bit float to the message payload.
+        /// </summary>
+        /// <param name="data">The float.</param>
+        public void Write( float data )
         {
-            get { return ProtoHeader.job_id_target; }
-            set { ProtoHeader.job_id_target = value; }
+            writer.Write( data );
         }
-        public ulong SourceJobID
+        /// <summary>
+        /// Writes a single 64bit double to the message payload.
+        /// </summary>
+        /// <param name="data">The double.</param>
+        public void Write( double data )
         {
-            get { return ProtoHeader.job_id_source; }
-            set { ProtoHeader.job_id_source = value; }
-        }
-
-        public CMsgProtoBufHeader ProtoHeader { get { return Header.ProtoHeader; } }
-
-        public MsgType Body { get; private set; }
-
-
-        // client send constructor
-        public ClientMsgProtobuf( EMsg eMsg, int payloadReserve = 64 )
-            : base( payloadReserve )
-        {
-            Body = new MsgType();
-
-            Header.Msg = eMsg;
+            writer.Write( data );
         }
 
-        // reply constructor
-        public ClientMsgProtobuf( EMsg eMsg, MsgBase<MsgHdrProtoBuf> msg, int payloadReserve = 64 )
-            : this( eMsg, payloadReserve )
+        /// <summary>
+        /// Reads a single signed byte from the message payload.
+        /// </summary>
+        /// <returns>The signed byte.</returns>
+        public sbyte ReadInt8()
         {
-            Header.ProtoHeader.client_steam_id = msg.Header.ProtoHeader.client_steam_id;
-            Header.ProtoHeader.job_id_target = msg.Header.ProtoHeader.job_id_source;
+            return reader.ReadSByte();
+        }
+        /// <summary>
+        /// Reads a single signed byte from the message payload.
+        /// </summary>
+        /// <returns>The signed byte.</returns>
+        public sbyte ReadSByte()
+        {
+            return reader.ReadSByte();
+        }
+        /// <summary>
+        /// Reads a single unsigned byte from the message payload.
+        /// </summary>
+        /// <returns>The unsigned byte.</returns>
+        public byte ReadUInt8()
+        {
+            return reader.ReadByte();
+        }
+        /// <summary>
+        /// Reads a single unsigned byte from the message payload.
+        /// </summary>
+        /// <returns>The unsigned byte.</returns>
+        public byte ReadByte()
+        {
+            return reader.ReadByte();
+        }
+        /// <summary>
+        /// Reads a number of bytes from the message payload.
+        /// </summary>
+        /// <param name="numBytes">The number of bytes to read.</param>
+        /// <returns>The data.</returns>
+        public byte[] ReadBytes( int numBytes )
+        {
+            Contract.Requires( numBytes >= 0 );
+
+            return reader.ReadBytes( numBytes );
+        }
+        /// <summary>
+        /// Reads a single 16bit short from the message payload.
+        /// </summary>
+        /// <returns>The short.</returns>
+        public short ReadInt16()
+        {
+            return reader.ReadInt16();
+        }
+        /// <summary>
+        /// Reads a single 16bit short from the message payload.
+        /// </summary>
+        /// <returns>The short.</returns>
+        public short ReadShort()
+        {
+            return reader.ReadInt16();
+        }
+        /// <summary>
+        /// Reads a single unsigned 16bit short from the message payload.
+        /// </summary>
+        /// <returns>The unsigned short.</returns>
+        public ushort ReadUInt16()
+        {
+            return reader.ReadUInt16();
+        }
+        /// <summary>
+        /// Reads a single unsigned 16bit short from the message payload.
+        /// </summary>
+        /// <returns>The unsigned short.</returns>
+        public ushort ReadUShort()
+        {
+            return reader.ReadUInt16();
+        }
+        /// <summary>
+        /// Reads a single 32bit integer from the message payload.
+        /// </summary>
+        /// <returns>The integer.</returns>
+        public int ReadInt32()
+        {
+            return reader.ReadInt32();
+        }
+        /// <summary>
+        /// Reads a single 32bit integer from the message payload.
+        /// </summary>
+        /// <returns>The integer.</returns>
+        public int ReadInt()
+        {
+            return reader.ReadInt32();
+        }
+        /// <summary>
+        /// Reads a single unsigned 32bit integer from the message payload.
+        /// </summary>
+        /// <returns>The unsigned integer.</returns>
+        public uint ReadUInt32()
+        {
+            return reader.ReadUInt32();
+        }
+        /// <summary>
+        /// Reads a single unsigned 32bit integer from the message payload.
+        /// </summary>
+        /// <returns>The unsigned integer.</returns>
+        public uint ReadUInt()
+        {
+            return reader.ReadUInt32();
+        }
+        /// <summary>
+        /// Reads a single 64bit long from the message payload.
+        /// </summary>
+        /// <returns>The long.</returns>
+        public long ReadInt64()
+        {
+            return reader.ReadInt64();
+        }
+        /// <summary>
+        /// Reads a single 64bit long from the message payload.
+        /// </summary>
+        /// <returns>The long.</returns>
+        public long ReadLong()
+        {
+            return reader.ReadInt64();
+        }
+        /// <summary>
+        /// Reads a single unsigned 64bit long from the message payload.
+        /// </summary>
+        /// <returns>The unsigned long.</returns>
+        public ulong ReadUInt64()
+        {
+            return reader.ReadUInt64();
+        }
+        /// <summary>
+        /// Reads a single unsigned 64bit long from the message payload.
+        /// </summary>
+        /// <returns>The unsigned long.</returns>
+        public ulong ReadULong()
+        {
+            return reader.ReadUInt64();
+        }
+        /// <summary>
+        /// Reads a single 32bit float from the message payload.
+        /// </summary>
+        /// <returns>The float.</returns>
+        public float ReadSingle()
+        {
+            return reader.ReadSingle();
+        }
+        /// <summary>
+        /// Reads a single 32bit float from the message payload.
+        /// </summary>
+        /// <returns>The float.</returns>
+        public float ReadFloat()
+        {
+            return reader.ReadSingle();
+        }
+        /// <summary>
+        /// Reads a single 64bit double from the message payload.
+        /// </summary>
+        /// <returns>The double.</returns>
+        public double ReadDouble()
+        {
+            return reader.ReadDouble();
         }
 
-        // recieve constructor
-        public ClientMsgProtobuf( IPacketMsg msg )
-            : this( msg.MsgType )
-        {
-            Deserialize( msg.GetData() );
-        }
-
-        public byte[] Serialize()
-        {
-            using ( MemoryStream ms = new MemoryStream() )
-            {
-                Header.Serialize( ms );
-                Serializer.Serialize( ms, Body );
-                Payload.WriteTo( ms );
-
-                return ms.ToArray();
-            }
-        }
-
-        public void Deserialize( byte[] data )
-        {
-            using ( MemoryStream ms = new MemoryStream( data ) )
-            {
-                Header.Deserialize( ms );
-                Body = Serializer.Deserialize<MsgType>( ms );
-
-                int payloadOffset = ( int )ms.Position;
-                int payloadLen = ( int )( ms.Position - ms.Length );
-
-                Payload.Write( data, payloadOffset, payloadLen );
-            }
-        }
-    }
-
-    public sealed class ClientMsg<MsgType> : MsgBase<ExtendedClientMsgHdr>, IClientMsg
-        where MsgType : ISteamSerializableMessage, new()
-    {
-        public ulong TargetJobID
-        {
-            get { return Header.TargetJobID; }
-            set { Header.TargetJobID = value; }
-        }
-        public ulong SourceJobID
-        {
-            get { return Header.SourceJobID; }
-            set { Header.SourceJobID = value; }
-        }
-
-        public MsgType Body { get; private set; }
-
-
-        // client send constructor
-        public ClientMsg( int payloadReserve = 64 )
-            : base( payloadReserve )
-        {
-            Body = new MsgType();
-
-            Header.SetEMsg( Body.GetEMsg() );
-        }
-
-        // reply constructor
-        public ClientMsg( MsgBase<ExtendedClientMsgHdr> msg, int payloadReserve = 64 )
-            : this( payloadReserve )
-        {
-            Header.SteamID = msg.Header.SteamID;
-            Header.TargetJobID = msg.Header.SourceJobID;
-        }
-
-        // recieve constructor
-        public ClientMsg( byte[] data )
-        {
-            Deserialize( data );
-        }
-
-        public byte[] Serialize()
-        {
-            using ( MemoryStream ms = new MemoryStream() )
-            {
-                Header.Serialize( ms );
-                Body.Serialize( ms );
-                Payload.WriteTo( ms );
-
-                return ms.ToArray();
-            }
-        }
-
-        public void Deserialize( byte[] data )
-        {
-            using ( MemoryStream ms = new MemoryStream( data ) )
-            {
-                Header.Deserialize( ms );
-                Body.Deserialize( ms );
-
-                int payloadOffset = ( int )ms.Position;
-                int payloadLen = ( int )( ms.Position - ms.Length );
-
-                Payload.Write( data, payloadOffset, payloadLen );
-            }
-        }
-    }
-
-    public sealed class Msg<MsgType> : MsgBase<MsgHdr>, IClientMsg
-        where MsgType : ISteamSerializableMessage, new()
-    {
-        public ulong TargetJobID
-        {
-            get { return Header.TargetJobID; }
-            set { Header.TargetJobID = value; }
-        }
-        public ulong SourceJobID
-        {
-            get { return Header.SourceJobID; }
-            set { Header.SourceJobID = value; }
-        }
-        public MsgType Body { get; private set; }
-
-
-        // client send constructor
-        public Msg( int payloadReserve = 0 )
-            : base( payloadReserve )
-        {
-            Body = new MsgType();
-
-            Header.SetEMsg( Body.GetEMsg() );
-        }
-
-        // reply constructor
-        public Msg( MsgBase<MsgHdr> msg, int payloadReserve = 0 )
-            : this( payloadReserve )
-        {
-            Header.TargetJobID = msg.Header.SourceJobID;
-        }
-
-        // recieve constructor
-        public Msg( IPacketMsg msg )
-            : this()
-        {
-            Deserialize( msg.GetData() );
-        }
-
-
-        public byte[] Serialize()
-        {
-            using ( MemoryStream ms = new MemoryStream() )
-            {
-                Header.Serialize( ms );
-                Body.Serialize( ms );
-                Payload.WriteTo( ms );
-
-                return ms.ToArray();
-            }
-        }
-
-        public void Deserialize( byte[] data )
-        {
-            using ( MemoryStream ms = new MemoryStream( data ) )
-            {
-                Header.Deserialize( ms );
-                Body.Deserialize( ms );
-
-                int payloadOffset = ( int )ms.Position;
-                int payloadLen = ( int )( ms.Position - ms.Length );
-
-                Payload.Write( data, payloadOffset, payloadLen );
-            }
-        }
 
     }
 }
