@@ -41,7 +41,7 @@ using System.Text;
 namespace SteamKit3
 {
     [Serializable]
-    public sealed class BerDecodeException : Exception
+    sealed class BerDecodeException : Exception
     {
         readonly int _position;
 
@@ -104,7 +104,7 @@ namespace SteamKit3
     }
 	
 	
-    public class AsnKeyParser
+    class AsnKeyParser
     {
             readonly AsnParser _parser;
 
