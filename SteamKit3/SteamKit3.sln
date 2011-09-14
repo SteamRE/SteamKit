@@ -9,10 +9,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SteamLanguageParser", "..\R
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Steam Language", "Steam Language", "{460D1E67-0DC3-4AA7-937D-1D251BF4E333}"
 	ProjectSection(SolutionItems) = preProject
-		..\Resources\SteamLanguage\emsg.steamd = ..\Resources\SteamLanguage\emsg.steamd
-		..\Resources\SteamLanguage\enums.steamd = ..\Resources\SteamLanguage\enums.steamd
-		..\Resources\SteamLanguage\eresult.steamd = ..\Resources\SteamLanguage\eresult.steamd
-		..\Resources\SteamLanguage\netheader.steamd = ..\Resources\SteamLanguage\netheader.steamd
+		..\Resources\SteamLanguage2\emsg.steamd = ..\Resources\SteamLanguage2\emsg.steamd
+		..\Resources\SteamLanguage2\enums.steamd = ..\Resources\SteamLanguage2\enums.steamd
+		..\Resources\SteamLanguage2\eresult.steamd = ..\Resources\SteamLanguage2\eresult.steamd
+		..\Resources\SteamLanguage2\header.steamd = ..\Resources\SteamLanguage2\header.steamd
+		..\Resources\SteamLanguage2\netheader.steamd = ..\Resources\SteamLanguage2\netheader.steamd
+		..\Resources\SteamLanguage2\steammsg.steamd = ..\Resources\SteamLanguage2\steammsg.steamd
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "protobuf-net", "..\Resources\protobuf-net\protobuf-net\protobuf-net.csproj", "{8374E4D7-2A91-48F1-9360-09B09CF27C3F}"
