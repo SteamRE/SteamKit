@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
 using System.IO;
+using log4net;
 
 namespace SteamKit3
 {
@@ -27,33 +28,58 @@ namespace SteamKit3
 
             EUniverse eUniv = msg.Body.Universe;
 
-            Client.ConnectedUniverse = eUniv;
-            
+            // generate a session key for this connection
             byte[] sessionKey = CryptoHelper.GenerateRandomBlock( 32 );
             byte[] pubKey = KeyDictionary.GetPublicKey( eUniv );
 
-            Debug.Assert( pubKey != null, string.Format( "Unable to get public key for universe {0}", eUniv ) );
+            if ( pubKey == null )
+            {
+                Log.ErrorFormat( "Unable to get public key for universe: {0}", eUniv );
 
-            CryptoHelper.InitializeRSA( pubKey );
+                Client.Disconnect();
+                return;
+            }
 
-            byte[] cryptedSessionKey = CryptoHelper.RSAEncrypt( sessionKey );
+            byte[] cryptedSessionKey = null;
+
+            using ( var rsa = CryptoHelper.CreateRSA( pubKey ) )
+            {
+                // the key is encrypted with the universe's public key
+                cryptedSessionKey = rsa.Encrypt( sessionKey );
+            }
+
             byte[] keyCrc = CryptoHelper.CRCHash( cryptedSessionKey );
 
-            var reply = new Msg<MsgChannelEncryptResponse>( msg );
 
-            reply.Write( cryptedSessionKey );
-            reply.Write( keyCrc );
-            reply.Write( ( uint )0 );
+            var response = new Msg<MsgChannelEncryptResponse>( msg );
 
-            SendMessage( reply );
+            response.Write( cryptedSessionKey );
+            response.Write( keyCrc );
+            response.Write( ( uint )0 );
 
-            IPacketMsg resultPacket = await YieldingWaitForMsg( EMsg.ChannelEncryptResult );
+            SendMessage( response );
+
+
+            var resultPacket = await YieldingWaitForMsg( EMsg.ChannelEncryptResult );
+
+            if ( resultPacket == null )
+            {
+                Log.Error( "Timed out while waiting for ChannelEncryptResult!" );
+
+                Client.Disconnect();
+                return;
+            }
+
             var result = new Msg<MsgChannelEncryptResult>( resultPacket );
+
+            Log.InfoFormat( "ChannelEncryptResult: {0}", result.Body.Result );
 
             if ( result.Body.Result == EResult.OK )
             {
+                Client.ConnectedUniverse = eUniv;
                 Client.Connection.NetFilter = new NetFilterEncryption( sessionKey );
-                Client.PostCallback( new SteamClient.ConnectedCallback( result.Body ) );
+
+                Client.PostCallback( new SteamClient.ConnectedCallback( result.Body, eUniv ) );
             }
         }
     }
@@ -68,7 +94,11 @@ namespace SteamKit3
 
         protected async override Task YieldingRunJobFromMsg( IPacketMsg clientMsg )
         {
-            Debug.Assert( clientMsg.IsProto, "Got non-proto MsgMulti!" );
+            if ( !clientMsg.IsProto )
+            {
+                Log.Error( "Got non-proto MsgMulti!" );
+                return;
+            }
 
             var msg = new ClientMsgProtobuf<CMsgMulti>( clientMsg );
 
@@ -77,17 +107,29 @@ namespace SteamKit3
             if ( msg.Body.size_unzipped > 0 )
             {
                 // unzip our payload
-                payload = ZipUtil.Decompress( payload );
+                try
+                {
+                    payload = ZipUtil.Decompress( payload );
+                }
+                catch ( Exception ex )
+                {
+                    Log.Error( "Unable to decompress MsgMulti payload.", ex );
+                    return;
+                }
             }
 
             using ( MemoryStream ms = new MemoryStream( payload ) )
             using ( BinaryReader br = new BinaryReader( ms ) )
             {
-                int subSize = br.ReadInt32();
-                byte[] subData = br.ReadBytes( subSize );
+                while ( ms.Position != ms.Length )
+                {
+                    int subSize = br.ReadInt32();
+                    byte[] subData = br.ReadBytes( subSize );
 
-                Client.OnMulti( subData );
+                    Client.OnMulti( subData );
+                }
             }
+
         }
     }
 }
