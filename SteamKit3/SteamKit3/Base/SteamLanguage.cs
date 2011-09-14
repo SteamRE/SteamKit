@@ -1,3 +1,4 @@
+#pragma warning disable 1591
 using System;
 using System.IO;
 using System.Runtime.InteropServices;
@@ -1090,27 +1091,27 @@ namespace SteamKit3
 		// Static size: 4
 		public int HeaderLength { get; set; }
 		// Static size: 0
-		public SteamKit3.CMsgProtoBufHeader ProtoHeader { get; set; }
+		public SteamKit3.CMsgProtoBufHeader Proto { get; set; }
 
 		public MsgHdrProtoBuf()
 		{
 			Msg = EMsg.Invalid;
 			HeaderLength = 0;
-			ProtoHeader = new SteamKit3.CMsgProtoBufHeader();
+			Proto = new SteamKit3.CMsgProtoBufHeader();
 		}
 
 		public void Serialize(Stream stream)
 		{
-			MemoryStream msProtoHeader = new MemoryStream();
-			ProtoBuf.Serializer.Serialize<SteamKit3.CMsgProtoBufHeader>(msProtoHeader, ProtoHeader);
-			HeaderLength = (int)msProtoHeader.Length;
+			MemoryStream msProto = new MemoryStream();
+			ProtoBuf.Serializer.Serialize<SteamKit3.CMsgProtoBufHeader>(msProto, Proto);
+			HeaderLength = (int)msProto.Length;
 			BinaryWriter bw = new BinaryWriter( stream );
 
 			bw.Write( (int)MsgUtil.MakeMsg( Msg, true ) );
 			bw.Write( HeaderLength );
-			bw.Write( msProtoHeader.ToArray() );
+			bw.Write( msProto.ToArray() );
 
-			msProtoHeader.Close();
+			msProto.Close();
 		}
 
 		public void Deserialize( Stream stream )
@@ -1119,8 +1120,8 @@ namespace SteamKit3
 
 			Msg = (EMsg)MsgUtil.GetMsg( (uint)br.ReadInt32() );
 			HeaderLength = br.ReadInt32();
-			using( MemoryStream msProtoHeader = new MemoryStream( br.ReadBytes( HeaderLength ) ) )
-				ProtoHeader = ProtoBuf.Serializer.Deserialize<SteamKit3.CMsgProtoBufHeader>( msProtoHeader );
+			using( MemoryStream msProto = new MemoryStream( br.ReadBytes( HeaderLength ) ) )
+				Proto = ProtoBuf.Serializer.Deserialize<SteamKit3.CMsgProtoBufHeader>( msProto );
 		}
 	}
 
@@ -2429,3 +2430,4 @@ namespace SteamKit3
 	}
 
 }
+#pragma warning restore 1591
