@@ -10,6 +10,7 @@ using System.Net.Sockets;
 using System.Net;
 using System.Diagnostics;
 using System.IO;
+using log4net;
 
 namespace SteamKit3
 {
@@ -18,9 +19,20 @@ namespace SteamKit3
     /// </summary>
     public class NetMsgEventArgs : EventArgs
     {
+        /// <summary>
+        /// Gets the data for this network message.
+        /// </summary>
         public byte[] Data { get; private set; }
+        /// <summary>
+        /// Gets the remote endpoint of this message.
+        /// </summary>
         public IPEndPoint EndPoint { get; private set; }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NetMsgEventArgs"/> class.
+        /// </summary>
+        /// <param name="data">The data.</param>
+        /// <param name="endPoint">The remote endpoint.</param>
         public NetMsgEventArgs( byte[] data, IPEndPoint endPoint )
         {
             this.Data = data;
@@ -84,6 +96,20 @@ namespace SteamKit3
         /// <value>The net filter.</value>
         public NetFilterEncryption NetFilter { get; set; }
 
+        /// <summary>
+        /// Gets the log4net log context for this connection.
+        /// </summary>
+        protected ILog Log { get; private set; }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Connection"/> class.
+        /// </summary>
+        public Connection()
+        {
+            Log = LogManager.GetLogger( this.GetType() );
+        }
+
 
         /// <summary>
         /// Occurs when a net message is recieved over the network.
@@ -92,7 +118,7 @@ namespace SteamKit3
         /// <summary>
         /// Raises the <see cref="E:NetMsgReceived"/> event.
         /// </summary>
-        /// <param name="e">The <see cref="SteamKit2.NetMsgEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="NetMsgEventArgs"/> instance containing the event data.</param>
         protected void OnNetMsgReceived( NetMsgEventArgs e )
         {
             if ( NetMsgReceived != null )

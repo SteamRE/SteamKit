@@ -226,9 +226,10 @@ namespace SteamKit3
             packet.Header.DestConnID = remoteConnId;
             packet.Header.SeqAck = inSeqAcked = inSeq;
 
-            DebugLog.WriteLine("UdpConnection", "Sent -> {0} Seq {1} Ack {2}; {3} bytes; Message: {4} bytes {5} packets",
+            Log.DebugFormat( "Sent -> {0} Seq {1} Ack {2}; {3} bytes; Message: {4} bytes {5} packets",
                 packet.Header.PacketType, packet.Header.SeqThis, packet.Header.SeqAck,
-                packet.Header.PayloadSize, packet.Header.MsgSize, packet.Header.PacketsInMsg);
+                packet.Header.PayloadSize, packet.Header.MsgSize, packet.Header.PacketsInMsg
+            );
 
             MemoryStream ms = packet.GetData();
 
@@ -238,7 +239,7 @@ namespace SteamKit3
             }
             catch ( SocketException e )
             {
-                DebugLog.WriteLine("UdpConnection", "Critical socket failure: " + e.ErrorCode);
+                Log.Error( "Critical socket failure", e );
 
                 state = State.Disconnected;
                 return;
@@ -271,7 +272,7 @@ namespace SteamKit3
         {
             if ( DateTime.Now > nextResend && outSeqSent > outSeqAcked )
             {
-                DebugLog.WriteLine("UdpConnection", "Sequenced packet resend required");
+                Log.Debug( "Sequenced packet resend required" );
 
                 // Don't send more than 3 (Steam behavior?)
                 for ( int i = 0; i < RESEND_COUNT && i < outPackets.Count; i++ )
@@ -335,7 +336,7 @@ namespace SteamKit3
             if ( NetFilter != null )
                 data = NetFilter.ProcessIncoming(data);
 
-            DebugLog.WriteLine("UdpConnection", "Dispatching message; {0} bytes", data.Length);
+            Log.DebugFormat( "Dispatching message: {0} bytes", data.Length );
 
             OnNetMsgReceived(new NetMsgEventArgs(data, remoteEndPoint));
 
@@ -367,7 +368,7 @@ namespace SteamKit3
                     if ( !sock.Poll(150000, SelectMode.SelectRead)
                         && DateTime.Now > timeOut )
                     {
-                        DebugLog.WriteLine("UdpConnection", "Connection timed out");
+                        Log.Error( "Connection timed out" );
 
                         state = State.Disconnected;
                         break;
@@ -394,7 +395,7 @@ namespace SteamKit3
                 }
                 catch ( SocketException e )
                 {
-                    DebugLog.WriteLine("UdpConnection", "Critical socket failure: " + e.ErrorCode);
+                    Log.Error( "Critical socket failure", e );
 
                     state = State.Disconnected;
                     break;
@@ -414,13 +415,13 @@ namespace SteamKit3
                 // Once it's empty, we exit, since the last packet was our disconnect notification.
                 if ( state == State.Disconnecting && outPackets.Count == 0 )
                 {
-                    DebugLog.WriteLine("UdpConnection", "Graceful disconnect completed");
+                    Log.Debug( "Graceful disconnect completed" );
 
                     state = State.Disconnected;
                 }
             }
 
-            DebugLog.WriteLine("UdpConnection", "Calling OnDisconnected");
+            Log.Debug( "Calling OnDisconnected" );
             OnDisconnected(EventArgs.Empty);
         }
 
@@ -436,9 +437,10 @@ namespace SteamKit3
             else if ( remoteConnId > 0 && packet.Header.SourceConnID != remoteConnId )
                 return;
 
-            DebugLog.WriteLine("UdpConnection", "<- Recv'd {0} Seq {1} Ack {2}; {3} bytes; Message: {4} bytes {5} packets",
+            Log.DebugFormat( "<- Recv'd {0} Seq {1} Ack {2}; {3} bytes; Message: {4} bytes {5} packets",
                 packet.Header.PacketType, packet.Header.SeqThis, packet.Header.SeqAck,
-                packet.Header.PayloadSize, packet.Header.MsgSize, packet.Header.PacketsInMsg);
+                packet.Header.PayloadSize, packet.Header.MsgSize, packet.Header.PacketsInMsg
+            );
 
             // Throw away any duplicate messages we've already received, making sure to
             // re-ack it in case it got lost.
@@ -483,7 +485,7 @@ namespace SteamKit3
                     break;
 
                 case EUdpPacketType.Disconnect:
-                    DebugLog.WriteLine("UdpConnection", "Disconnected by server");
+                    Log.Debug( "Disconnected by server" );
                     state = State.Disconnected;
                     return;
 
@@ -491,7 +493,7 @@ namespace SteamKit3
                     break;
 
                 default:
-                    DebugLog.WriteLine("UdpConnection", "Received unexpected packet type " + packet.Header.PacketType);
+                    Log.WarnFormat( "Received unexpected packet type {0}", packet.Header.PacketType );
                     break;
             }
         }
@@ -531,7 +533,7 @@ namespace SteamKit3
             if ( state != State.ConnectSent )
                 return;
 
-            DebugLog.WriteLine("UdpConnection", "Connection established");
+            Log.Debug( "Connection established" );
 
             state = State.Connected;
             remoteConnId = packet.Header.SourceConnID;
