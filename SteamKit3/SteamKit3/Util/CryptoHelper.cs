@@ -12,7 +12,7 @@ using Classless.Hasher;
 
 namespace SteamKit3
 {
-    public class RSAHelper : IDisposable
+    class RSAHelper : IDisposable
     {
         RSACryptoServiceProvider rsaProvider;
 
@@ -37,7 +37,7 @@ namespace SteamKit3
 
     }
 
-    public static class CryptoHelper
+    static class CryptoHelper
     {
 
         public static RSAHelper CreateRSA( byte[] key )

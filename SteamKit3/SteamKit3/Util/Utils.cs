@@ -12,7 +12,17 @@ using System.Net.Sockets;
 
 namespace SteamKit3
 {
-    public static class MsgUtil
+
+    static class Utils
+    {
+        public static DateTime DateTimeFromUnix( uint unixTime )
+        {
+            DateTime origin = new DateTime( 1970, 1, 1, 0, 0, 0, 0 );
+            return origin.AddSeconds( unixTime );
+        }
+    }
+
+    static class MsgUtil
     {
         private static readonly uint ProtoMask = 0x80000000;
         private static readonly uint EMsgMask = ~ProtoMask;
