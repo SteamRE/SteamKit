@@ -12,6 +12,8 @@
     <AssemblyName>SteamKit3</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -21,6 +23,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\SteamKit3.xml</DocumentationFile>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -29,13 +33,18 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\SteamKit3.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AsyncCtpLibrary">
+    <Reference Include="AsyncCtpLibrary, Version=1.0.4107.18181, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Users\VoiDeD\Documents\Microsoft Visual Studio Async CTP\Samples\AsyncCtpLibrary.dll</HintPath>
     </Reference>
     <Reference Include="Classless.Hasher">
       <HintPath>..\Classless.Hasher.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\log4net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -46,13 +55,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Base\ClientMsg.cs" />
     <Compile Include="Base\MsgBase.cs" />
+    <Compile Include="Base\PacketBase.cs" />
     <Compile Include="Base\Proto\SteamMsgAppTicket.cs" />
     <Compile Include="Base\Proto\SteamMsgBase.cs" />
     <Compile Include="Base\Proto\SteamMsgClientServer.cs" />
     <Compile Include="Base\SteamLanguage.cs" />
     <Compile Include="Client\CMClient.cs" />
     <Compile Include="Client\Handlers\ClientHandler.cs" />
+    <Compile Include="Client\Handlers\SteamUser\Callbacks.cs" />
     <Compile Include="Client\Handlers\SteamUser\SteamUser.cs" />
     <Compile Include="Client\SteamClient\CallbackMsg.cs" />
     <Compile Include="Client\SteamClient\Callbacks.cs" />
@@ -70,7 +82,6 @@
     <Compile Include="Types\SteamID.cs" />
     <Compile Include="Util\AsnKeyParser.cs" />
     <Compile Include="Util\CryptoHelper.cs" />
-    <Compile Include="Util\DebugLog.cs" />
     <Compile Include="Util\KeyDictionary.cs" />
     <Compile Include="Util\Utils.cs" />
     <Compile Include="Util\ZipUtil.cs" />
