@@ -3,13 +3,13 @@ import "steammessages.proto";
 option cc_generic_services = false;
 
 message CSOPartyInvite {
-	optional uint64 group_id = 1;
+	optional uint64 group_id = 1 [(key_field) = true];
 	optional fixed64 sender_id = 2;
 	optional string sender_name = 3;
 }
 
 message CSOLobbyInvite {
-	optional uint64 group_id = 1;
+	optional uint64 group_id = 1 [(key_field) = true];
 	optional fixed64 sender_id = 2;
 	optional string sender_name = 3;
 }
