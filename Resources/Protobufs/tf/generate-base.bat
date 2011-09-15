@@ -1,3 +1,3 @@
-..\..\Protogen\protogen -i:"steammessages.proto" -o:"..\..\..\SteamKit2\SteamKit2\Base\GC\SteamMsgBase.cs" -t:csharp -ns:"SteamKit2.GC"
-..\..\Protogen\protogen -i:"base_gcmessages.proto" -o:"..\..\..\SteamKit2\SteamKit2\Base\GC\SteamMsgGC.cs" -t:csharp -ns:"SteamKit2.GC"
-..\..\Protogen\protogen -i:"gcsdk_gcmessages.proto" -o:"..\..\..\SteamKit2\SteamKit2\Base\GC\SteamMsgGCSDK.cs" -t:csharp -ns:"SteamKit2.GC"
+..\..\Protogen\protogen -s:..\ -i:"steammessages.proto" -o:"..\..\..\SteamKit2\SteamKit2\Base\GC\SteamMsgBase.cs" -t:csharp -ns:"SteamKit2.GC"
+..\..\Protogen\protogen -s:..\ -i:"base_gcmessages.proto" -o:"..\..\..\SteamKit2\SteamKit2\Base\GC\SteamMsgGC.cs" -t:csharp -ns:"SteamKit2.GC"
+..\..\Protogen\protogen -s:..\ -i:"gcsdk_gcmessages.proto" -o:"..\..\..\SteamKit2\SteamKit2\Base\GC\SteamMsgGCSDK.cs" -t:csharp -ns:"SteamKit2.GC"

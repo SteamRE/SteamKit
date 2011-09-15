@@ -43,6 +43,7 @@
 //     the code is regenerated.
 // &lt;/auto-generated&gt;
 //------------------------------------------------------------------------------
+#pragma warning disable 1591
 </xsl:text><!--
     --><xsl:apply-templates select="*"/><!--
   --></xsl:template>
@@ -130,7 +131,9 @@ namespace <xsl:value-of select="translate($namespace,':-/\','__..')"/>
 {</xsl:if>
     <xsl:apply-templates select="message_type | enum_type | service"/>
     <xsl:if test="string($namespace) != ''">
-}</xsl:if></xsl:template>
+}
+#pragma warning restore 1591
+</xsl:if></xsl:template>
   
   <xsl:template match="FileDescriptorProto/dependency/string">
 // Note: requires additional types generated from: <xsl:value-of select="."/></xsl:template>
