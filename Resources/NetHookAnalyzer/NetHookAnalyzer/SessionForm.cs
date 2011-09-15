@@ -317,9 +317,13 @@ namespace NetHookAnalyzer
                 return gcMsg.GetEMsg() == eMsg;
             } );
 
+            string eMsgName = eMsg.ToString();
+
+            eMsgName = eMsgName.Replace( "Econ", "" ).Replace( "AM", "" );
+
             // check name
             if ( msgType == null )
-                msgType = GetSteamKitType( string.Format( "SteamKit2.Msg{0}", eMsg ) );
+                msgType = GetSteamKitType( string.Format( "SteamKit2.Msg{0}", eMsgName ) );
 
 
             if ( msgType != null )
@@ -330,7 +334,7 @@ namespace NetHookAnalyzer
                 return body;
             }
 
-            msgType = GetSteamKitType( string.Format( "SteamKit2.CMsg{0}", eMsg ) );
+            msgType = GetSteamKitType( string.Format( "SteamKit2.CMsg{0}", eMsgName ) );
             if ( msgType != null )
             {
                 return Deserialize( msgType, str );
