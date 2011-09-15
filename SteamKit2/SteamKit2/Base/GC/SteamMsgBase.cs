@@ -6,6 +6,7 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
+#pragma warning disable 1591
 
 // Generated from: steammessages.proto
 namespace SteamKit2.GC
@@ -973,4 +974,170 @@ namespace SteamKit2.GC
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGCMsgSystemStatsSchema")]
+  public partial class CGCMsgSystemStatsSchema : global::ProtoBuf.IExtensible
+  {
+    public CGCMsgSystemStatsSchema() {}
+    
+
+    private uint _gc_app_id = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"gc_app_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    public uint gc_app_id
+    {
+      get { return _gc_app_id; }
+      set { _gc_app_id = value; }
+    }
+
+    private byte[] _schema_kv = null;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"schema_kv", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
+    public byte[] schema_kv
+    {
+      get { return _schema_kv; }
+      set { _schema_kv = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGCMsgGetSystemStats")]
+  public partial class CGCMsgGetSystemStats : global::ProtoBuf.IExtensible
+  {
+    public CGCMsgGetSystemStats() {}
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGCMsgGetSystemStatsResponse")]
+  public partial class CGCMsgGetSystemStatsResponse : global::ProtoBuf.IExtensible
+  {
+    public CGCMsgGetSystemStatsResponse() {}
+    
+
+    private uint _gc_app_id = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"gc_app_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    public uint gc_app_id
+    {
+      get { return _gc_app_id; }
+      set { _gc_app_id = value; }
+    }
+
+    private byte[] _stats_kv = null;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"stats_kv", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
+    public byte[] stats_kv
+    {
+      get { return _stats_kv; }
+      set { _stats_kv = value; }
+    }
+
+    private uint _active_jobs = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"active_jobs", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    public uint active_jobs
+    {
+      get { return _active_jobs; }
+      set { _active_jobs = value; }
+    }
+
+    private uint _yielding_jobs = default(uint);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"yielding_jobs", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    public uint yielding_jobs
+    {
+      get { return _yielding_jobs; }
+      set { _yielding_jobs = value; }
+    }
+
+    private uint _user_sessions = default(uint);
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"user_sessions", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    public uint user_sessions
+    {
+      get { return _user_sessions; }
+      set { _user_sessions = value; }
+    }
+
+    private uint _game_server_sessions = default(uint);
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"game_server_sessions", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    public uint game_server_sessions
+    {
+      get { return _game_server_sessions; }
+      set { _game_server_sessions = value; }
+    }
+
+    private uint _socaches = default(uint);
+    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"socaches", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    public uint socaches
+    {
+      get { return _socaches; }
+      set { _socaches = value; }
+    }
+
+    private uint _socaches_to_unload = default(uint);
+    [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"socaches_to_unload", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    public uint socaches_to_unload
+    {
+      get { return _socaches_to_unload; }
+      set { _socaches_to_unload = value; }
+    }
+
+    private uint _socaches_loading = default(uint);
+    [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"socaches_loading", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    public uint socaches_loading
+    {
+      get { return _socaches_loading; }
+      set { _socaches_loading = value; }
+    }
+
+    private uint _writeback_queue = default(uint);
+    [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"writeback_queue", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    public uint writeback_queue
+    {
+      get { return _writeback_queue; }
+      set { _writeback_queue = value; }
+    }
+
+    private uint _steamid_locks = default(uint);
+    [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"steamid_locks", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    public uint steamid_locks
+    {
+      get { return _steamid_locks; }
+      set { _steamid_locks = value; }
+    }
+
+    private uint _logon_queue = default(uint);
+    [global::ProtoBuf.ProtoMember(12, IsRequired = false, Name=@"logon_queue", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    public uint logon_queue
+    {
+      get { return _logon_queue; }
+      set { _logon_queue = value; }
+    }
+
+    private uint _logon_jobs = default(uint);
+    [global::ProtoBuf.ProtoMember(13, IsRequired = false, Name=@"logon_jobs", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    public uint logon_jobs
+    {
+      get { return _logon_jobs; }
+      set { _logon_jobs = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
 }
+#pragma warning restore 1591
