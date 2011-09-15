@@ -1,5 +1,7 @@
 import "steammessages.proto";
 
+option cc_generic_services = false;
+
 message CSOPartyInvite {
 	optional uint64 group_id = 1;
 	optional fixed64 sender_id = 2;
