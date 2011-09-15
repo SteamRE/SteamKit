@@ -6,6 +6,7 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
+#pragma warning disable 1591
 
 // Generated from: base_gcmessages.proto
 // Note: requires additional types generated from: steammessages.proto
@@ -734,6 +735,15 @@ namespace SteamKit2.GC
       get { return _item_id; }
       set { _item_id = value; }
     }
+
+    private uint _event_type = default(uint);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"event_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    public uint event_type
+    {
+      get { return _event_type; }
+      set { _event_type = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -1089,6 +1099,13 @@ namespace SteamKit2.GC
       get { return _default_item_sort; }
       set { _default_item_sort = value; }
     }
+    private readonly global::System.Collections.Generic.List<uint> _popular_items = new global::System.Collections.Generic.List<uint>();
+    [global::ProtoBuf.ProtoMember(10, Name=@"popular_items", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public global::System.Collections.Generic.List<uint> popular_items
+    {
+      get { return _popular_items; }
+    }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -1215,4 +1232,51 @@ namespace SteamKit2.GC
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgItemAcknowledged")]
+  public partial class CMsgItemAcknowledged : global::ProtoBuf.IExtensible
+  {
+    public CMsgItemAcknowledged() {}
+    
+
+    private uint _account_id = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    public uint account_id
+    {
+      get { return _account_id; }
+      set { _account_id = value; }
+    }
+
+    private uint _inventory = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"inventory", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    public uint inventory
+    {
+      get { return _inventory; }
+      set { _inventory = value; }
+    }
+
+    private uint _def_index = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"def_index", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    public uint def_index
+    {
+      get { return _def_index; }
+      set { _def_index = value; }
+    }
+
+    private uint _quality = default(uint);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"quality", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    public uint quality
+    {
+      get { return _quality; }
+      set { _quality = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
 }
+#pragma warning restore 1591

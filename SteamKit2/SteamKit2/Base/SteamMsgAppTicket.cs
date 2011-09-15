@@ -6,6 +6,7 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
+#pragma warning disable 1591
 
 // Generated from: encrypted_app_ticket.proto
 namespace SteamKit2
@@ -66,3 +67,4 @@ namespace SteamKit2
   }
   
 }
+#pragma warning restore 1591

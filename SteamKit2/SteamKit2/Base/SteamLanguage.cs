@@ -1,3 +1,4 @@
+#pragma warning disable 1591
 using System;
 using System.IO;
 using System.Runtime.InteropServices;
@@ -534,7 +535,7 @@ namespace SteamKit2
 		ContentServer = 6,
 		Clan = 7,
 		Chat = 8,
-		P2PSuperSeeder = 9,
+		ConsoleUser = 9,
 		AnonUser = 10,
 		Max = 11,
 	}
@@ -834,7 +835,7 @@ namespace SteamKit2
 
 		public void Serialize(Stream stream)
 		{
-			BinaryWriterEx bw = new BinaryWriterEx( stream );
+			BinaryWriter bw = new BinaryWriter( stream );
 
 			bw.Write( Magic );
 			bw.Write( PayloadSize );
@@ -852,7 +853,7 @@ namespace SteamKit2
 
 		public void Deserialize( Stream stream )
 		{
-			BinaryReaderEx br = new BinaryReaderEx( stream );
+			BinaryReader br = new BinaryReader( stream );
 
 			Magic = br.ReadUInt32();
 			PayloadSize = br.ReadUInt16();
@@ -884,7 +885,7 @@ namespace SteamKit2
 
 		public void Serialize(Stream stream)
 		{
-			BinaryWriterEx bw = new BinaryWriterEx( stream );
+			BinaryWriter bw = new BinaryWriter( stream );
 
 			bw.Write( ChallengeValue );
 			bw.Write( ServerLoad );
@@ -893,7 +894,7 @@ namespace SteamKit2
 
 		public void Deserialize( Stream stream )
 		{
-			BinaryReaderEx br = new BinaryReaderEx( stream );
+			BinaryReader br = new BinaryReader( stream );
 
 			ChallengeValue = br.ReadUInt32();
 			ServerLoad = br.ReadUInt32();
@@ -913,7 +914,7 @@ namespace SteamKit2
 
 		public void Serialize(Stream stream)
 		{
-			BinaryWriterEx bw = new BinaryWriterEx( stream );
+			BinaryWriter bw = new BinaryWriter( stream );
 
 			bw.Write( ChallengeValue );
 
@@ -921,7 +922,7 @@ namespace SteamKit2
 
 		public void Deserialize( Stream stream )
 		{
-			BinaryReaderEx br = new BinaryReaderEx( stream );
+			BinaryReader br = new BinaryReader( stream );
 
 			ChallengeValue = br.ReadUInt32();
 		}
@@ -936,7 +937,7 @@ namespace SteamKit2
 
 		public void Serialize(Stream stream)
 		{
-			BinaryWriterEx bw = new BinaryWriterEx( stream );
+			BinaryWriter bw = new BinaryWriter( stream );
 
 
 		}
@@ -955,7 +956,7 @@ namespace SteamKit2
 
 		public void Serialize(Stream stream)
 		{
-			BinaryWriterEx bw = new BinaryWriterEx( stream );
+			BinaryWriter bw = new BinaryWriter( stream );
 
 
 		}
@@ -974,7 +975,7 @@ namespace SteamKit2
 
 		public void Serialize(Stream stream)
 		{
-			BinaryWriterEx bw = new BinaryWriterEx( stream );
+			BinaryWriter bw = new BinaryWriter( stream );
 
 
 		}
@@ -1005,7 +1006,7 @@ namespace SteamKit2
 
 		public void Serialize(Stream stream)
 		{
-			BinaryWriterEx bw = new BinaryWriterEx( stream );
+			BinaryWriter bw = new BinaryWriter( stream );
 
 			bw.Write( (int)Msg );
 			bw.Write( TargetJobID );
@@ -1015,7 +1016,7 @@ namespace SteamKit2
 
 		public void Deserialize( Stream stream )
 		{
-			BinaryReaderEx br = new BinaryReaderEx( stream );
+			BinaryReader br = new BinaryReader( stream );
 
 			Msg = (EMsg)br.ReadInt32();
 			TargetJobID = br.ReadInt64();
@@ -1060,7 +1061,7 @@ namespace SteamKit2
 
 		public void Serialize(Stream stream)
 		{
-			BinaryWriterEx bw = new BinaryWriterEx( stream );
+			BinaryWriter bw = new BinaryWriter( stream );
 
 			bw.Write( (int)Msg );
 			bw.Write( HeaderSize );
@@ -1075,7 +1076,7 @@ namespace SteamKit2
 
 		public void Deserialize( Stream stream )
 		{
-			BinaryReaderEx br = new BinaryReaderEx( stream );
+			BinaryReader br = new BinaryReader( stream );
 
 			Msg = (EMsg)br.ReadInt32();
 			HeaderSize = br.ReadByte();
@@ -1112,7 +1113,7 @@ namespace SteamKit2
 			MemoryStream msProtoHeader = new MemoryStream();
 			ProtoBuf.Serializer.Serialize<SteamKit2.CMsgProtoBufHeader>(msProtoHeader, ProtoHeader);
 			HeaderLength = (int)msProtoHeader.Length;
-			BinaryWriterEx bw = new BinaryWriterEx( stream );
+			BinaryWriter bw = new BinaryWriter( stream );
 
 			bw.Write( (int)MsgUtil.MakeMsg( Msg, true ) );
 			bw.Write( HeaderLength );
@@ -1123,7 +1124,7 @@ namespace SteamKit2
 
 		public void Deserialize( Stream stream )
 		{
-			BinaryReaderEx br = new BinaryReaderEx( stream );
+			BinaryReader br = new BinaryReader( stream );
 
 			Msg = (EMsg)MsgUtil.GetMsg( (uint)br.ReadInt32() );
 			HeaderLength = br.ReadInt32();
@@ -1334,7 +1335,7 @@ namespace SteamKit2
 			MemoryStream msProtoHeader = new MemoryStream();
 			ProtoBuf.Serializer.Serialize<SteamKit2.GC.CMsgProtoBufHeader>(msProtoHeader, ProtoHeader);
 			HeaderLength = (int)msProtoHeader.Length;
-			BinaryWriterEx bw = new BinaryWriterEx( stream );
+			BinaryWriter bw = new BinaryWriter( stream );
 
 			bw.Write( (int)MsgUtil.MakeGCMsg( Msg, true ) );
 			bw.Write( HeaderLength );
@@ -1345,7 +1346,7 @@ namespace SteamKit2
 
 		public void Deserialize( Stream stream )
 		{
-			BinaryReaderEx br = new BinaryReaderEx( stream );
+			BinaryReader br = new BinaryReader( stream );
 
 			Msg = (EGCMsg)MsgUtil.GetGCMsg( (uint)br.ReadInt32() );
 			HeaderLength = br.ReadInt32();
@@ -1375,7 +1376,7 @@ namespace SteamKit2
 
 		public void Serialize(Stream stream)
 		{
-			BinaryWriterEx bw = new BinaryWriterEx( stream );
+			BinaryWriter bw = new BinaryWriter( stream );
 
 			bw.Write( HeaderVersion );
 			bw.Write( TargetJobID );
@@ -1385,7 +1386,7 @@ namespace SteamKit2
 
 		public void Deserialize( Stream stream )
 		{
-			BinaryReaderEx br = new BinaryReaderEx( stream );
+			BinaryReader br = new BinaryReader( stream );
 
 			HeaderVersion = br.ReadUInt16();
 			TargetJobID = br.ReadInt64();
@@ -1434,7 +1435,7 @@ namespace SteamKit2
 
 		public void Serialize(Stream stream)
 		{
-			BinaryWriterEx bw = new BinaryWriterEx( stream );
+			BinaryWriter bw = new BinaryWriter( stream );
 
 			bw.Write( ProtocolVersion );
 			bw.Write( (int)Universe );
@@ -1443,7 +1444,7 @@ namespace SteamKit2
 
 		public void Deserialize( Stream stream )
 		{
-			BinaryReaderEx br = new BinaryReaderEx( stream );
+			BinaryReader br = new BinaryReader( stream );
 
 			ProtocolVersion = br.ReadUInt32();
 			Universe = (EUniverse)br.ReadInt32();
@@ -1467,7 +1468,7 @@ namespace SteamKit2
 
 		public void Serialize(Stream stream)
 		{
-			BinaryWriterEx bw = new BinaryWriterEx( stream );
+			BinaryWriter bw = new BinaryWriter( stream );
 
 			bw.Write( ProtocolVersion );
 			bw.Write( KeySize );
@@ -1476,7 +1477,7 @@ namespace SteamKit2
 
 		public void Deserialize( Stream stream )
 		{
-			BinaryReaderEx br = new BinaryReaderEx( stream );
+			BinaryReader br = new BinaryReader( stream );
 
 			ProtocolVersion = br.ReadUInt32();
 			KeySize = br.ReadUInt32();
@@ -1497,7 +1498,7 @@ namespace SteamKit2
 
 		public void Serialize(Stream stream)
 		{
-			BinaryWriterEx bw = new BinaryWriterEx( stream );
+			BinaryWriter bw = new BinaryWriter( stream );
 
 			bw.Write( (int)Result );
 
@@ -1505,7 +1506,7 @@ namespace SteamKit2
 
 		public void Deserialize( Stream stream )
 		{
-			BinaryReaderEx br = new BinaryReaderEx( stream );
+			BinaryReader br = new BinaryReader( stream );
 
 			Result = (EResult)br.ReadInt32();
 		}
@@ -1551,7 +1552,7 @@ namespace SteamKit2
 
 		public void Serialize(Stream stream)
 		{
-			BinaryWriterEx bw = new BinaryWriterEx( stream );
+			BinaryWriter bw = new BinaryWriter( stream );
 
 			bw.Write( UniqueID );
 			bw.Write( LoginKey );
@@ -1560,7 +1561,7 @@ namespace SteamKit2
 
 		public void Deserialize( Stream stream )
 		{
-			BinaryReaderEx br = new BinaryReaderEx( stream );
+			BinaryReader br = new BinaryReader( stream );
 
 			UniqueID = br.ReadUInt32();
 			LoginKey = br.ReadBytes( 20 );
@@ -1581,7 +1582,7 @@ namespace SteamKit2
 
 		public void Serialize(Stream stream)
 		{
-			BinaryWriterEx bw = new BinaryWriterEx( stream );
+			BinaryWriter bw = new BinaryWriter( stream );
 
 			bw.Write( UniqueID );
 
@@ -1589,7 +1590,7 @@ namespace SteamKit2
 
 		public void Deserialize( Stream stream )
 		{
-			BinaryReaderEx br = new BinaryReaderEx( stream );
+			BinaryReader br = new BinaryReader( stream );
 
 			UniqueID = br.ReadUInt32();
 		}
@@ -1864,7 +1865,7 @@ namespace SteamKit2
 
 		public void Serialize(Stream stream)
 		{
-			BinaryWriterEx bw = new BinaryWriterEx( stream );
+			BinaryWriter bw = new BinaryWriter( stream );
 
 			bw.Write( PersonaState );
 
@@ -1872,7 +1873,7 @@ namespace SteamKit2
 
 		public void Deserialize( Stream stream )
 		{
-			BinaryReaderEx br = new BinaryReaderEx( stream );
+			BinaryReader br = new BinaryReader( stream );
 
 			PersonaState = br.ReadByte();
 		}
@@ -2053,7 +2054,7 @@ namespace SteamKit2
 
 		public void Serialize(Stream stream)
 		{
-			BinaryWriterEx bw = new BinaryWriterEx( stream );
+			BinaryWriter bw = new BinaryWriter( stream );
 
 			bw.Write( NumBans );
 
@@ -2061,7 +2062,7 @@ namespace SteamKit2
 
 		public void Deserialize( Stream stream )
 		{
-			BinaryReaderEx br = new BinaryReaderEx( stream );
+			BinaryReader br = new BinaryReader( stream );
 
 			NumBans = br.ReadUInt32();
 		}
@@ -2088,7 +2089,7 @@ namespace SteamKit2
 
 		public void Serialize(Stream stream)
 		{
-			BinaryWriterEx bw = new BinaryWriterEx( stream );
+			BinaryWriter bw = new BinaryWriter( stream );
 
 			bw.Write( (int)AppUsageEvent );
 			bw.Write( gameID );
@@ -2098,7 +2099,7 @@ namespace SteamKit2
 
 		public void Deserialize( Stream stream )
 		{
-			BinaryReaderEx br = new BinaryReaderEx( stream );
+			BinaryReader br = new BinaryReader( stream );
 
 			AppUsageEvent = (EAppUsageEvent)br.ReadInt32();
 			gameID = br.ReadUInt64();
@@ -2334,7 +2335,7 @@ namespace SteamKit2
 
 		public void Serialize(Stream stream)
 		{
-			BinaryWriterEx bw = new BinaryWriterEx( stream );
+			BinaryWriter bw = new BinaryWriter( stream );
 
 			bw.Write( PasswordStrength );
 			bw.Write( FlagsAccountSecurityPolicy );
@@ -2344,7 +2345,7 @@ namespace SteamKit2
 
 		public void Deserialize( Stream stream )
 		{
-			BinaryReaderEx br = new BinaryReaderEx( stream );
+			BinaryReader br = new BinaryReader( stream );
 
 			PasswordStrength = br.ReadUInt32();
 			FlagsAccountSecurityPolicy = br.ReadUInt32();
@@ -2372,7 +2373,7 @@ namespace SteamKit2
 
 		public void Serialize(Stream stream)
 		{
-			BinaryWriterEx bw = new BinaryWriterEx( stream );
+			BinaryWriter bw = new BinaryWriter( stream );
 
 			bw.Write( (int)Result );
 			bw.Write( CountGuestPassesToGive );
@@ -2382,7 +2383,7 @@ namespace SteamKit2
 
 		public void Deserialize( Stream stream )
 		{
-			BinaryReaderEx br = new BinaryReaderEx( stream );
+			BinaryReader br = new BinaryReader( stream );
 
 			Result = (EResult)br.ReadInt32();
 			CountGuestPassesToGive = br.ReadInt32();
@@ -2404,7 +2405,7 @@ namespace SteamKit2
 
 		public void Serialize(Stream stream)
 		{
-			BinaryWriterEx bw = new BinaryWriterEx( stream );
+			BinaryWriter bw = new BinaryWriter( stream );
 
 			bw.Write( CountServers );
 
@@ -2412,7 +2413,7 @@ namespace SteamKit2
 
 		public void Deserialize( Stream stream )
 		{
-			BinaryReaderEx br = new BinaryReaderEx( stream );
+			BinaryReader br = new BinaryReader( stream );
 
 			CountServers = br.ReadInt32();
 		}
@@ -2432,7 +2433,7 @@ namespace SteamKit2
 
 		public void Serialize(Stream stream)
 		{
-			BinaryWriterEx bw = new BinaryWriterEx( stream );
+			BinaryWriter bw = new BinaryWriter( stream );
 
 			bw.Write( CountStats );
 
@@ -2440,7 +2441,7 @@ namespace SteamKit2
 
 		public void Deserialize( Stream stream )
 		{
-			BinaryReaderEx br = new BinaryReaderEx( stream );
+			BinaryReader br = new BinaryReader( stream );
 
 			CountStats = br.ReadInt32();
 		}
@@ -2539,7 +2540,7 @@ namespace SteamKit2
 
 		public void Serialize(Stream stream)
 		{
-			BinaryWriterEx bw = new BinaryWriterEx( stream );
+			BinaryWriter bw = new BinaryWriter( stream );
 
 			bw.Write( steamID );
 			bw.Write( (int)RoutingType );
@@ -2550,7 +2551,7 @@ namespace SteamKit2
 
 		public void Deserialize( Stream stream )
 		{
-			BinaryReaderEx br = new BinaryReaderEx( stream );
+			BinaryReader br = new BinaryReader( stream );
 
 			steamID = br.ReadUInt64();
 			RoutingType = (EIntroducerRouting)br.ReadInt32();
@@ -2576,7 +2577,7 @@ namespace SteamKit2
 
 		public void Serialize(Stream stream)
 		{
-			BinaryWriterEx bw = new BinaryWriterEx( stream );
+			BinaryWriter bw = new BinaryWriter( stream );
 
 			bw.Write( AppId );
 			bw.Write( GCEMsg );
@@ -2585,7 +2586,7 @@ namespace SteamKit2
 
 		public void Deserialize( Stream stream )
 		{
-			BinaryReaderEx br = new BinaryReaderEx( stream );
+			BinaryReader br = new BinaryReader( stream );
 
 			AppId = br.ReadUInt32();
 			GCEMsg = br.ReadUInt32();
@@ -2609,7 +2610,7 @@ namespace SteamKit2
 
 		public void Serialize(Stream stream)
 		{
-			BinaryWriterEx bw = new BinaryWriterEx( stream );
+			BinaryWriter bw = new BinaryWriter( stream );
 
 			bw.Write( AppId );
 			bw.Write( GCEMsg );
@@ -2618,7 +2619,7 @@ namespace SteamKit2
 
 		public void Deserialize( Stream stream )
 		{
-			BinaryReaderEx br = new BinaryReaderEx( stream );
+			BinaryReader br = new BinaryReader( stream );
 
 			AppId = br.ReadUInt32();
 			GCEMsg = br.ReadUInt32();
@@ -2800,7 +2801,7 @@ namespace SteamKit2
 
 		public void Serialize(Stream stream)
 		{
-			BinaryWriterEx bw = new BinaryWriterEx( stream );
+			BinaryWriter bw = new BinaryWriter( stream );
 
 			bw.Write( (int)Result );
 
@@ -2808,7 +2809,7 @@ namespace SteamKit2
 
 		public void Deserialize( Stream stream )
 		{
-			BinaryReaderEx br = new BinaryReaderEx( stream );
+			BinaryReader br = new BinaryReader( stream );
 
 			Result = (EResult)br.ReadInt32();
 		}
@@ -2825,7 +2826,7 @@ namespace SteamKit2
 
 		public void Serialize(Stream stream)
 		{
-			BinaryWriterEx bw = new BinaryWriterEx( stream );
+			BinaryWriter bw = new BinaryWriter( stream );
 
 
 		}
@@ -2859,7 +2860,7 @@ namespace SteamKit2
 
 		public void Serialize(Stream stream)
 		{
-			BinaryWriterEx bw = new BinaryWriterEx( stream );
+			BinaryWriter bw = new BinaryWriter( stream );
 
 			bw.Write( AccountType );
 			bw.Write( accountId );
@@ -2870,7 +2871,7 @@ namespace SteamKit2
 
 		public void Deserialize( Stream stream )
 		{
-			BinaryReaderEx br = new BinaryReaderEx( stream );
+			BinaryReader br = new BinaryReader( stream );
 
 			AccountType = br.ReadByte();
 			accountId = br.ReadUInt64();
@@ -2904,7 +2905,7 @@ namespace SteamKit2
 
 		public void Serialize(Stream stream)
 		{
-			BinaryWriterEx bw = new BinaryWriterEx( stream );
+			BinaryWriter bw = new BinaryWriter( stream );
 
 			bw.Write( (int)Result );
 			bw.Write( collectingAny );
@@ -2915,7 +2916,7 @@ namespace SteamKit2
 
 		public void Deserialize( Stream stream )
 		{
-			BinaryReaderEx br = new BinaryReaderEx( stream );
+			BinaryReader br = new BinaryReader( stream );
 
 			Result = (EResult)br.ReadInt32();
 			collectingAny = br.ReadByte();
@@ -2947,7 +2948,7 @@ namespace SteamKit2
 
 		public void Serialize(Stream stream)
 		{
-			BinaryWriterEx bw = new BinaryWriterEx( stream );
+			BinaryWriter bw = new BinaryWriter( stream );
 
 			bw.Write( SessionId );
 			bw.Write( TimeEnded );
@@ -2958,7 +2959,7 @@ namespace SteamKit2
 
 		public void Deserialize( Stream stream )
 		{
-			BinaryReaderEx br = new BinaryReaderEx( stream );
+			BinaryReader br = new BinaryReader( stream );
 
 			SessionId = br.ReadUInt64();
 			TimeEnded = br.ReadUInt32();
@@ -2981,7 +2982,7 @@ namespace SteamKit2
 
 		public void Serialize(Stream stream)
 		{
-			BinaryWriterEx bw = new BinaryWriterEx( stream );
+			BinaryWriter bw = new BinaryWriter( stream );
 
 			bw.Write( (int)Result );
 
@@ -2989,7 +2990,7 @@ namespace SteamKit2
 
 		public void Deserialize( Stream stream )
 		{
-			BinaryReaderEx br = new BinaryReaderEx( stream );
+			BinaryReader br = new BinaryReader( stream );
 
 			Result = (EResult)br.ReadInt32();
 		}
@@ -3012,7 +3013,7 @@ namespace SteamKit2
 
 		public void Serialize(Stream stream)
 		{
-			BinaryWriterEx bw = new BinaryWriterEx( stream );
+			BinaryWriter bw = new BinaryWriter( stream );
 
 			bw.Write( SessionId );
 			bw.Write( CountAttributes );
@@ -3021,7 +3022,7 @@ namespace SteamKit2
 
 		public void Deserialize( Stream stream )
 		{
-			BinaryReaderEx br = new BinaryReaderEx( stream );
+			BinaryReader br = new BinaryReader( stream );
 
 			SessionId = br.ReadUInt64();
 			CountAttributes = br.ReadInt32();
@@ -3043,7 +3044,7 @@ namespace SteamKit2
 
 		public void Serialize(Stream stream)
 		{
-			BinaryWriterEx bw = new BinaryWriterEx( stream );
+			BinaryWriter bw = new BinaryWriter( stream );
 
 			bw.Write( gameId );
 
@@ -3051,7 +3052,7 @@ namespace SteamKit2
 
 		public void Deserialize( Stream stream )
 		{
-			BinaryReaderEx br = new BinaryReaderEx( stream );
+			BinaryReader br = new BinaryReader( stream );
 
 			gameId = br.ReadUInt64();
 		}
@@ -3078,7 +3079,7 @@ namespace SteamKit2
 
 		public void Serialize(Stream stream)
 		{
-			BinaryWriterEx bw = new BinaryWriterEx( stream );
+			BinaryWriter bw = new BinaryWriter( stream );
 
 			bw.Write( (int)Result );
 			bw.Write( gameId );
@@ -3088,7 +3089,7 @@ namespace SteamKit2
 
 		public void Deserialize( Stream stream )
 		{
-			BinaryReaderEx br = new BinaryReaderEx( stream );
+			BinaryReader br = new BinaryReader( stream );
 
 			Result = (EResult)br.ReadInt32();
 			gameId = br.ReadUInt64();
@@ -3110,7 +3111,7 @@ namespace SteamKit2
 
 		public void Serialize(Stream stream)
 		{
-			BinaryWriterEx bw = new BinaryWriterEx( stream );
+			BinaryWriter bw = new BinaryWriter( stream );
 
 			bw.Write( Flags );
 
@@ -3118,7 +3119,7 @@ namespace SteamKit2
 
 		public void Deserialize( Stream stream )
 		{
-			BinaryReaderEx br = new BinaryReaderEx( stream );
+			BinaryReader br = new BinaryReader( stream );
 
 			Flags = br.ReadUInt32();
 		}
@@ -3170,7 +3171,7 @@ namespace SteamKit2
 
 		public void Serialize(Stream stream)
 		{
-			BinaryWriterEx bw = new BinaryWriterEx( stream );
+			BinaryWriter bw = new BinaryWriter( stream );
 
 			bw.Write( (int)Result );
 			bw.Write( Rank );
@@ -3181,7 +3182,7 @@ namespace SteamKit2
 
 		public void Deserialize( Stream stream )
 		{
-			BinaryReaderEx br = new BinaryReaderEx( stream );
+			BinaryReader br = new BinaryReader( stream );
 
 			Result = (EResult)br.ReadInt32();
 			Rank = br.ReadInt32();
@@ -3223,7 +3224,7 @@ namespace SteamKit2
 
 		public void Serialize(Stream stream)
 		{
-			BinaryWriterEx bw = new BinaryWriterEx( stream );
+			BinaryWriter bw = new BinaryWriter( stream );
 
 			bw.Write( (int)Result );
 			bw.Write( ReputationScore );
@@ -3237,7 +3238,7 @@ namespace SteamKit2
 
 		public void Deserialize( Stream stream )
 		{
-			BinaryReaderEx br = new BinaryReaderEx( stream );
+			BinaryReader br = new BinaryReader( stream );
 
 			Result = (EResult)br.ReadInt32();
 			ReputationScore = br.ReadUInt32();
@@ -3267,7 +3268,7 @@ namespace SteamKit2
 
 		public void Serialize(Stream stream)
 		{
-			BinaryWriterEx bw = new BinaryWriterEx( stream );
+			BinaryWriter bw = new BinaryWriter( stream );
 
 			bw.Write( steamId );
 			bw.Write( (int)DenyReason );
@@ -3276,7 +3277,7 @@ namespace SteamKit2
 
 		public void Deserialize( Stream stream )
 		{
-			BinaryReaderEx br = new BinaryReaderEx( stream );
+			BinaryReader br = new BinaryReader( stream );
 
 			steamId = br.ReadUInt64();
 			DenyReason = (EDenyReason)br.ReadInt32();
@@ -3298,7 +3299,7 @@ namespace SteamKit2
 
 		public void Serialize(Stream stream)
 		{
-			BinaryWriterEx bw = new BinaryWriterEx( stream );
+			BinaryWriter bw = new BinaryWriter( stream );
 
 			bw.Write( steamId );
 
@@ -3306,7 +3307,7 @@ namespace SteamKit2
 
 		public void Deserialize( Stream stream )
 		{
-			BinaryReaderEx br = new BinaryReaderEx( stream );
+			BinaryReader br = new BinaryReader( stream );
 
 			steamId = br.ReadUInt64();
 		}
@@ -3333,7 +3334,7 @@ namespace SteamKit2
 
 		public void Serialize(Stream stream)
 		{
-			BinaryWriterEx bw = new BinaryWriterEx( stream );
+			BinaryWriter bw = new BinaryWriter( stream );
 
 			bw.Write( steamId );
 			bw.Write( (int)DenyReason );
@@ -3343,7 +3344,7 @@ namespace SteamKit2
 
 		public void Deserialize( Stream stream )
 		{
-			BinaryReaderEx br = new BinaryReaderEx( stream );
+			BinaryReader br = new BinaryReader( stream );
 
 			steamId = br.ReadUInt64();
 			DenyReason = (EDenyReason)br.ReadInt32();
@@ -3370,7 +3371,7 @@ namespace SteamKit2
 
 		public void Serialize(Stream stream)
 		{
-			BinaryWriterEx bw = new BinaryWriterEx( stream );
+			BinaryWriter bw = new BinaryWriter( stream );
 
 			bw.Write( steamIdUser );
 			bw.Write( steamIdGroup );
@@ -3379,7 +3380,7 @@ namespace SteamKit2
 
 		public void Deserialize( Stream stream )
 		{
-			BinaryReaderEx br = new BinaryReaderEx( stream );
+			BinaryReader br = new BinaryReader( stream );
 
 			steamIdUser = br.ReadUInt64();
 			steamIdGroup = br.ReadUInt64();
@@ -3411,7 +3412,7 @@ namespace SteamKit2
 
 		public void Serialize(Stream stream)
 		{
-			BinaryWriterEx bw = new BinaryWriterEx( stream );
+			BinaryWriter bw = new BinaryWriter( stream );
 
 			bw.Write( steamIdUser );
 			bw.Write( steamIdGroup );
@@ -3422,7 +3423,7 @@ namespace SteamKit2
 
 		public void Deserialize( Stream stream )
 		{
-			BinaryReaderEx br = new BinaryReaderEx( stream );
+			BinaryReader br = new BinaryReader( stream );
 
 			steamIdUser = br.ReadUInt64();
 			steamIdGroup = br.ReadUInt64();
@@ -3450,7 +3451,7 @@ namespace SteamKit2
 
 		public void Serialize(Stream stream)
 		{
-			BinaryWriterEx bw = new BinaryWriterEx( stream );
+			BinaryWriter bw = new BinaryWriter( stream );
 
 			bw.Write( steamIdChat );
 			bw.Write( isVoiceSpeaker );
@@ -3459,7 +3460,7 @@ namespace SteamKit2
 
 		public void Deserialize( Stream stream )
 		{
-			BinaryReaderEx br = new BinaryReaderEx( stream );
+			BinaryReader br = new BinaryReader( stream );
 
 			steamIdChat = br.ReadUInt64();
 			isVoiceSpeaker = br.ReadByte();
@@ -3502,7 +3503,7 @@ namespace SteamKit2
 
 		public void Serialize(Stream stream)
 		{
-			BinaryWriterEx bw = new BinaryWriterEx( stream );
+			BinaryWriter bw = new BinaryWriter( stream );
 
 			bw.Write( steamIdChat );
 			bw.Write( steamIdFriend );
@@ -3516,7 +3517,7 @@ namespace SteamKit2
 
 		public void Deserialize( Stream stream )
 		{
-			BinaryReaderEx br = new BinaryReaderEx( stream );
+			BinaryReader br = new BinaryReader( stream );
 
 			steamIdChat = br.ReadUInt64();
 			steamIdFriend = br.ReadUInt64();
@@ -3550,7 +3551,7 @@ namespace SteamKit2
 
 		public void Serialize(Stream stream)
 		{
-			BinaryWriterEx bw = new BinaryWriterEx( stream );
+			BinaryWriter bw = new BinaryWriter( stream );
 
 			bw.Write( steamIdChatter );
 			bw.Write( steamIdChatRoom );
@@ -3560,7 +3561,7 @@ namespace SteamKit2
 
 		public void Deserialize( Stream stream )
 		{
-			BinaryReaderEx br = new BinaryReaderEx( stream );
+			BinaryReader br = new BinaryReader( stream );
 
 			steamIdChatter = br.ReadUInt64();
 			steamIdChatRoom = br.ReadUInt64();
@@ -3586,7 +3587,7 @@ namespace SteamKit2
 
 		public void Serialize(Stream stream)
 		{
-			BinaryWriterEx bw = new BinaryWriterEx( stream );
+			BinaryWriter bw = new BinaryWriter( stream );
 
 			bw.Write( steamIdChat );
 			bw.Write( (int)Type );
@@ -3595,7 +3596,7 @@ namespace SteamKit2
 
 		public void Deserialize( Stream stream )
 		{
-			BinaryReaderEx br = new BinaryReaderEx( stream );
+			BinaryReader br = new BinaryReader( stream );
 
 			steamIdChat = br.ReadUInt64();
 			Type = (EChatInfoType)br.ReadInt32();
@@ -3627,7 +3628,7 @@ namespace SteamKit2
 
 		public void Serialize(Stream stream)
 		{
-			BinaryWriterEx bw = new BinaryWriterEx( stream );
+			BinaryWriter bw = new BinaryWriter( stream );
 
 			bw.Write( steamIdChat );
 			bw.Write( steamIdUserActedOn );
@@ -3638,7 +3639,7 @@ namespace SteamKit2
 
 		public void Deserialize( Stream stream )
 		{
-			BinaryReaderEx br = new BinaryReaderEx( stream );
+			BinaryReader br = new BinaryReader( stream );
 
 			steamIdChat = br.ReadUInt64();
 			steamIdUserActedOn = br.ReadUInt64();
@@ -3694,3 +3695,4 @@ namespace SteamKit2
 	}
 
 }
+#pragma warning restore 1591

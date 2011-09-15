@@ -6,6 +6,7 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
+#pragma warning disable 1591
 
 // Generated from: gcsdk_gcmessages.proto
 namespace SteamKit2.GC
@@ -266,3 +267,4 @@ namespace SteamKit2.GC
   }
   
 }
+#pragma warning restore 1591
