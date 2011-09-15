@@ -593,6 +593,12 @@ message CMsgClientMMSSetLobbyOwnerResponse {
 	optional int32 eresult = 3 [default = 2];
 }
 
+message CMsgClientMMSSetLobbyLinked {
+	optional uint32 app_id = 1;
+	optional fixed64 steam_id_lobby = 2;
+	optional fixed64 steam_id_lobby2 = 3;
+}
+
 message CMsgClientMMSSetLobbyGameServer {
 	optional uint32 app_id = 1;
 	optional fixed64 steam_id_lobby = 2;
@@ -1186,6 +1192,121 @@ message CMsgClientUCMDeleteScreenshotResponse {
 	optional int32 eresult = 1 [default = 2];
 }
 
+message CMsgClientUCMPublishFile {
+	optional uint32 app_id = 1;
+	optional string file_name = 2;
+	optional string preview_file_name = 3;
+	optional uint32 consumer_app_id = 4;
+	optional string title = 5;
+	optional string description = 6;
+	optional bool overwrite = 7;
+	repeated string tags = 8;
+	optional bool workshop_file = 9;
+	optional int32 visibility = 10;
+}
+
+message CMsgClientUCMPublishFileResponse {
+	optional int32 eresult = 1 [default = 2];
+	optional fixed64 published_file_id = 2 [default = 18446744073709551615];
+}
+
+message CMsgClientUCMUpdatePublishedFile {
+	optional uint32 app_id = 1;
+	optional fixed64 published_file_id = 2;
+	optional string file_name = 3;
+	optional string preview_file_name = 4;
+	optional string title = 5;
+	optional string description = 6;
+	repeated string tags = 7;
+	optional int32 visibility = 8;
+	optional bool update_file = 9;
+	optional bool update_preview_file = 10;
+	optional bool update_title = 11;
+	optional bool update_description = 12;
+	optional bool update_tags = 13;
+	optional bool update_visibility = 14;
+}
+
+message CMsgClientUCMUpdatePublishedFileResponse {
+	optional int32 eresult = 1 [default = 2];
+}
+
+message CMsgClientUCMGetPublishedFileDetails {
+	optional fixed64 published_file_id = 1;
+}
+
+message CMsgClientUCMGetPublishedFileDetailsResponse {
+	optional int32 eresult = 1 [default = 2];
+	optional fixed64 published_file_id = 2 [default = 18446744073709551615];
+	optional fixed64 creator_steam_id = 3;
+	optional uint32 creator_app_id = 4;
+	optional uint32 consumer_app_id = 5;
+	optional fixed64 file_hcontent = 6 [default = 18446744073709551615];
+	optional fixed64 preview_hcontent = 7 [default = 18446744073709551615];
+	optional string title = 8;
+	optional string description = 9;
+	optional fixed32 rtime32_created = 10;
+	optional fixed32 rtime32_updated = 11;
+	optional int32 visibility = 12;
+}
+
+message CMsgClientUCMDeletePublishedFile {
+	optional fixed64 published_file_id = 1;
+}
+
+message CMsgClientUCMDeletePublishedFileResponse {
+	optional int32 eresult = 1 [default = 2];
+}
+
+message CMsgClientUCMEnumerateUserPublishedFiles {
+	optional uint32 app_id = 1;
+	optional uint32 start_index = 2;
+}
+
+message CMsgClientUCMEnumerateUserPublishedFilesResponse {
+	message PublishedFileId {
+		optional fixed64 published_file_id = 1;
+	}
+
+	optional int32 eresult = 1 [default = 2];
+	repeated .CMsgClientUCMEnumerateUserPublishedFilesResponse.PublishedFileId published_files = 2;
+	optional uint32 total_results = 3;
+}
+
+message CMsgClientUCMSubscribePublishedFile {
+	optional uint32 app_id = 1;
+	optional fixed64 published_file_id = 2;
+}
+
+message CMsgClientUCMSubscribePublishedFileResponse {
+	optional int32 eresult = 1 [default = 2];
+}
+
+message CMsgClientUCMEnumerateUserSubscribedFiles {
+	optional uint32 app_id = 1;
+	optional uint32 start_index = 2;
+}
+
+message CMsgClientUCMEnumerateUserSubscribedFilesResponse {
+	message PublishedFileId {
+		optional fixed64 published_file_id = 1;
+		optional fixed32 rtime32_subscribed = 2 [default = 0];
+	}
+
+	optional int32 eresult = 1 [default = 2];
+	repeated .CMsgClientUCMEnumerateUserSubscribedFilesResponse.PublishedFileId subscribed_files = 2;
+	optional uint32 total_results = 3;
+}
+
+message CMsgClientUCMUnsubscribePublishedFile {
+	optional uint32 app_id = 1;
+	optional fixed64 published_file_id = 2;
+}
+
+message CMsgClientUCMUnsubscribePublishedFileResponse {
+	optional int32 eresult = 1 [default = 2];
+}
+
 message CMsgClientScreenshotsChanged {
 }
 
@@ -1656,5 +1777,11 @@ message CMsgGSComputeNewPlayerCompatibilityResponse {
 }
 
 message CMsgClientSentLogs {
+}
+
+message CMsgAMGCClientRelay {
+	optional uint32 appid = 1;
+	optional uint32 msgtype = 2;
+	optional bytes payload = 3;
 }
 
