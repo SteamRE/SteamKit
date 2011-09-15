@@ -42,17 +42,25 @@ namespace SteamKit3
             SendMessage( logonMsg );
 
 
-            var msg = await YieldingWaitForMsg( EMsg.ClientLogOnResponse );
+            var msg = await YieldingSendMsgAndWaitForMsg( logonMsg, EMsg.ClientLogOnResponse );
 
             if ( msg == null )
+            {
+                Client.Disconnect();
                 return;
+            }
 
             var logonResponse = new ClientMsgProtobuf<CMsgClientLogonResponse>( msg );
-
 
             var callback = new SteamUser.LoggedOnCallback( logonResponse.Body );
 
             Log.InfoFormat( "ClientLogonResponse: {0} {1}", callback.Result, callback.ExtendedResult );
+
+            if ( callback.Result == EResult.OK )
+            {
+                Client.SessionID = logonResponse.ProtoHeader.client_session_id;
+                Client.SteamID = logonResponse.Body.client_supplied_steamid;
+            }
 
             Client.PostCallback( callback );
         }

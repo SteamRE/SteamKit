@@ -57,15 +57,12 @@ namespace SteamKit3
             response.Write( keyCrc );
             response.Write( ( uint )0 );
 
-            SendMessage( response );
 
-
-            var resultPacket = await YieldingWaitForMsg( EMsg.ChannelEncryptResult );
+            // send off our response and wait for the result
+            var resultPacket = await YieldingSendMsgAndWaitForMsg( response, EMsg.ChannelEncryptResult );
 
             if ( resultPacket == null )
             {
-                Log.Error( "Timed out while waiting for ChannelEncryptResult!" );
-
                 Client.Disconnect();
                 return;
             }
@@ -78,9 +75,9 @@ namespace SteamKit3
             {
                 Client.ConnectedUniverse = eUniv;
                 Client.Connection.NetFilter = new NetFilterEncryption( sessionKey );
-
-                Client.PostCallback( new SteamClient.ConnectedCallback( result.Body, eUniv ) );
             }
+
+            Client.PostCallback( new SteamClient.ConnectedCallback( result.Body, eUniv ) );
         }
     }
 
