@@ -122,6 +122,10 @@ namespace ProtoBuf.CodeGenerator
                 {
                     options.WorkingDirectory = arg.Substring(3).Trim();
                 }
+                else if(arg.StartsWith("-s:"))
+                {
+                    options.Arguments.Add(string.Format("--proto_path={0}", arg.Substring(3).Trim()));
+                }
                 else
                 {
                     options.ShowHelp = true;

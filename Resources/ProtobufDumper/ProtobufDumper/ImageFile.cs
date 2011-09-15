@@ -554,7 +554,11 @@ namespace ProtobufDumper
                     options.Add("default", potEnum.value[0].name);
             }
 
-            options.Concat(DumpOptions(field.options));
+            Dictionary<string, string> fieldOptions = DumpOptions(field.options);
+            foreach (var pair in fieldOptions)
+            {
+                options[pair.Key] = pair.Value;
+            }
 
             string parameters = String.Empty;
             if (options.Count > 0)
