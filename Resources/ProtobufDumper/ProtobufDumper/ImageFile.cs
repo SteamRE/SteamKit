@@ -595,9 +595,6 @@ namespace ProtobufDumper
 
             foreach (string dependency in set.dependency)
             {
-                if ( dependency == "google/protobuf/descriptor.proto" )
-                    continue;
-
                 sb.AppendLine("import \"" + dependency + "\";");
                 marker = true;
             }
@@ -632,7 +629,7 @@ namespace ProtobufDumper
                 marker = false;
             }
 
-            //DumpExtensionDescriptor(set.extension, sb, String.Empty);
+            DumpExtensionDescriptor(set.extension, sb, String.Empty);
 
             foreach (DescriptorProto proto in set.message_type)
             {
@@ -692,7 +689,7 @@ namespace ProtobufDumper
                 DumpDescriptor(field, sb, level + 1);
             }
 
-            //DumpExtensionDescriptor(proto.extension, sb, levelspace + '\t');
+            DumpExtensionDescriptor(proto.extension, sb, levelspace + '\t');
 
             foreach (EnumDescriptorProto field in proto.enum_type)
             {
