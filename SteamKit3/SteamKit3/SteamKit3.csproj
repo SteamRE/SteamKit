@@ -69,7 +69,7 @@
     <Compile Include="Client\SteamClient\CallbackMsg.cs" />
     <Compile Include="Client\SteamClient\Callbacks.cs" />
     <Compile Include="Client\SteamClient\SteamClient.cs" />
-    <Compile Include="Client\Jobs\Types\BaseJobs.cs" />
+    <Compile Include="Client\Jobs\Types\ClientJobs.cs" />
     <Compile Include="Client\Jobs\Job.cs" />
     <Compile Include="Client\Jobs\JobMgr.cs" />
     <Compile Include="Client\Jobs\Types\UserJobs.cs" />

@@ -112,19 +112,29 @@ namespace SteamKit3
         /// If the timeout elapses without the message coming in, this function returns <c>null</c>.
         /// </summary>
         /// <remarks>
+        /// <para>
         /// This function will cause the <see cref="JobMgr"/> to pass all responses with this message type to this job,
         /// and any other job that is waiting on the same message type.
-        /// This function is used for client messages that don't respect job ids and always use -1.
+        /// This function is used for client messages that don't respect job ids.
+        /// The <see cref="JobMgr"/> respects incoming messages with job ids first, and will not route a message of
+        /// the requested type to this function if a job id is assigned.
+        /// </para>
+        /// <para>
+        /// If possible, job code should attempt to use the <see cref="ClientJob.YieldingSendMsgAndGetReply"/> or 
+        /// <see cref="ClientJob.YieldingSendMsgAndWaitForMsg"/> functions instead of calling
+        /// <see cref="ClientJob.SendMessage"/> and then calling this function, because otherwise the response packet
+        /// may come in before the job is assigned to wait for it.
+        /// </para>
         /// </remarks>
         /// <param name="eMsg">The message type to wait for.</param>
         /// <param name="timeout">A <see cref="TimeSpan"/> value indicating how long this job should wait for a response to come in.</param>
         /// <returns>An <see cref="IPacketMsg"/> when the waited for message comes in, or null if the timeout elapses.</returns>
-        protected async Task<IPacketMsg> YieldingWaitForMsg( EMsg eMsg, TimeSpan? timeout = null )
+        protected Task<IPacketMsg> YieldingWaitForMsg( EMsg eMsg, TimeSpan? timeout = null )
         {
             // flag what kind of message we're waiting for
             this.WaitedMsgType = eMsg;
 
-            return await Task.Factory.StartNew( () =>
+            return Task.Factory.StartNew( () =>
             {
                 TimeSpan waitTime = timeout.GetValueOrDefault( NetworkTimeout );
 
@@ -240,16 +250,45 @@ namespace SteamKit3
         /// </summary>
         /// <remarks>
         /// This function will wait on a message that has this job as it's target. The <see cref="JobMgr"/> will assure that only messages
-        /// meant for this job are sent to this job.
+        /// meant for this job are sent to this job. Messages that don't respect job ids will not be correctly received.
         /// </remarks>
+        /// <seealso cref="Job.YieldingWaitForMsg"/>
         /// <param name="msg">The client message to send.</param>
         /// <param name="timeout">A <see cref="TimeSpan"/> value indicating how long this job should wait for a response to come in.</param>
-        /// <returns>An <see cref="IPacketMsg"/> when the waited for message comes in, or null if the timeout elapses.</returns>
+        /// <returns>An <see cref="IPacketMsg"/> when the waited for message comes in, or <c>null</c> if the timeout elapses.</returns>
         protected async Task<IPacketMsg> YieldingSendMsgAndGetReply( IClientMsg msg, TimeSpan? timeout = null )
         {
+            // we wait for invalid, because the response is expected to have a jobid, and the jobmgr's route logic will hand us the message
+            var waitMsgTask = YieldingWaitForMsg( EMsg.Invalid, timeout );
+
             SendMessage( msg );
 
-            return await YieldingWaitForMsg( EMsg.Invalid, timeout ); // we wait for invalid, because the response will have a target jobid
+            return await waitMsgTask;
+        }
+        /// <summary>
+        /// Causes this job to wait for a network message of a specific message type with a specific timeout.
+        /// This function will yield execution to other jobs.
+        /// If the timeout elapses without the message coming in, this function returns <c>null</c>.
+        /// </summary>
+        /// <remarks>
+        /// This function will wait on a message of a specific type. The <see cref="JobMgr"/> will assure that only messages of
+        /// the specified message type are sent to this job.
+        /// This function is used for client messages that don't respect job ids.
+        /// The <see cref="JobMgr"/> respects incoming messages with job ids first, and will not route a message of
+        /// the requested type to this function if a job id is assigned.
+        /// </remarks>
+        /// <seealso cref="Job.YieldingWaitForMsg"/>
+        /// <param name="msg">The client message to send.</param>
+        /// <param name="eMsg">The message type to wait for.</param>
+        /// <param name="timeout">A <see cref="TimeSpan"/> value indicating how long this job should wait for a response to come in.</param>
+        /// <returns>An <see cref="IPacketMsg"/> when the waited for message comes in, or <c>null</c> if the timeout elapses.</returns>
+        protected async Task<IPacketMsg> YieldingSendMsgAndWaitForMsg( IClientMsg msg, EMsg eMsg, TimeSpan? timeout = null )
+        {
+            var waitMsgTask = YieldingWaitForMsg( eMsg, timeout );
+
+            SendMessage( msg );
+
+            return await waitMsgTask;
         }
     }
 }
