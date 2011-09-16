@@ -306,6 +306,9 @@ namespace NetHookAnalyzer
         {
             EMsg eMsg = MsgUtil.GetMsg( realEMsg );
 
+            if ( eMsg == EMsg.ClientLogonGameServer )
+                eMsg = EMsg.ClientLogon; // temp hack for now
+
             // lets first find the type by checking all EMsgs we have
             var msgType = typeof( CMClient ).Assembly.GetTypes().ToList().Find( type =>
             {
