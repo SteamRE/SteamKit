@@ -68,9 +68,30 @@ namespace DepotDownloader2
             }
         }
 
+        enum UpdateType
+        {
+            Full,
+            Partial,
+            Reaquire,
+        }
+
         public static bool Download( int depotId, int fromVersion, int toVersion )
         {
             App depotInfo = CDRManager.GetApp( depotId );
+
+            UpdateType updateType = UpdateType.Partial;
+
+            if ( fromVersion == 0 )
+            {
+                // version 0 means we have no previous install record, so we do a full installation
+                updateType = UpdateType.Full;
+            }
+            else if ( fromVersion == toVersion )
+            {
+                // if we have the latest version, then we're just checking any missing files
+                updateType = UpdateType.Reaquire;
+            }
+
 
             string installDir = Options.Directory;
 
@@ -80,33 +101,41 @@ namespace DepotDownloader2
                 installDir = Path.Combine( installDir, serverFolder );
             }
 
-            bool bFullUpdate = false;
 
-            // version 0 means we have no install record
-            if ( fromVersion == 0 )
-                bFullUpdate = true;
+            if ( updateType == UpdateType.Reaquire )
+                Log.WriteLine( "Checking \"{0}\"...", depotInfo.Name );
+            else
+                Log.WriteLine( "Updating \"{0}\" from version {1} to {2}...", depotInfo.Name, fromVersion, toVersion );
 
-            Log.WriteLine( "Updating \"{0}\" from version {1} to {2}...", depotInfo.Name, fromVersion, toVersion );
+            Steam2Manifest fromManifest = null;
 
-            Log.WriteVerbose( "Downloading manifest for {0}...", fromVersion );
-            var fromManifest = DownloadManifest( depotId, fromVersion );
+            if ( updateType == UpdateType.Partial )
+            {
+                // only download the older manifest if we're doing partial update
 
-            // if we couldn't get a manifest for the local installed version, we can't perform a diff
-            if ( fromManifest == null )
-                bFullUpdate = true;
+                Log.WriteVerbose( "Downloading manifest for {0}...", fromVersion );
+                fromManifest = DownloadManifest( depotId, fromVersion );
+
+                if ( fromManifest == null )
+                {
+                    // if we couldn't get a manifest for the local installed version, we can't perform a partial update
+                    Log.WriteVerbose( "Warning: Unable to download manifest for local version, performing full update." );
+                    updateType = UpdateType.Full;
+                }
+            }
 
             Log.WriteVerbose( "Downloading manifest for {0}...", toVersion );
             var toManifest = DownloadManifest( depotId, toVersion );
 
             if ( toManifest == null )
             {
-                Log.WriteLine( "Unable to download. Install cancelled." );
+                Log.WriteLine( "Unable to download manifest. Install cancelled." );
                 return false;
             }
 
             List<Steam2Manifest.Node> allFiles = new List<Steam2Manifest.Node>();
 
-            if ( bFullUpdate )
+            if ( updateType == UpdateType.Full )
             {
                 Log.WriteVerbose( "Performing full update!" );
 
@@ -120,53 +149,57 @@ namespace DepotDownloader2
             {
                 // otherwise lets perform a diff and see what we need
 
-                Log.WriteVerbose( "Performing diff from {0} to {1}...", fromVersion, toVersion );
-                uint[] updates = DownloadUpdates( depotId, fromVersion, toVersion );
-
-                if ( updates == null )
+                if ( updateType == UpdateType.Partial )
                 {
-                    Log.WriteLine( "Error: Unable to perform diff. Cancelling." );
-                    return false;
-                    
-                    // TODO: perhaps attempt a full update?
-                    // this can be costly, but i've yet to see any depot that doesn't have a diff
-                }
+                    // diffs are only relevant to partial updates
 
-                // find the nodes that updated in the old manifest
-                var oldUpdatedNodes = updates.Select( id => fromManifest.Nodes.Find( node => node.FileID == id ) );
+                    Log.WriteVerbose( "Performing diff from {0} to {1}...", fromVersion, toVersion );
+                    uint[] updates = DownloadUpdates( depotId, fromVersion, toVersion );
 
-                // get the list of new nodes the old ones correspond to
-                var newUpdatedNodes = oldUpdatedNodes.Select( oldNode => toManifest.Nodes.Find( node => oldNode.FullName == node.FullName ) ).ToList();
+                    if ( updates == null )
+                    {
+                        Log.WriteLine( "Error: Unable to perform diff. Cancelling." );
+                        return false;
 
-                // find all new files between the two manifest versions, and exclude directories
-                var newFileNodes = toManifest.Nodes
-                    .Except( fromManifest.Nodes, ( left, right ) => StringComparer.OrdinalIgnoreCase.Equals( left.FullName, right.FullName ) )
-                    .Where( node => node.FileID != -1 )
-                    .ToList();
+                        // TODO: perhaps attempt a full update?
+                        // this can be costly, but i've yet to see any depot that doesn't have a diff
+                    }
 
-                if ( fromVersion == toVersion )
-                {
-                    // if we're not performing an update, clear the new/update lists, and only use the reaquire list
-                    newUpdatedNodes.Clear();
-                    newFileNodes.Clear();
+                    var newUpdatedNodes = updates
+                        // find the nodes that updated in the old manifest
+                        .Select( id => fromManifest.Nodes.Find( node => node.FileID == id ) )
+                        // get the list of new nodes the old ones correspond to, using teir full filename
+                        .Select( oldNode => toManifest.Nodes.Find( node => string.Equals( oldNode.FullName, node.FullName, StringComparison.OrdinalIgnoreCase ) ) )
+                        .ToList();
+
+                    var newFileNodes = toManifest.Nodes
+                        // find all new files between the two manifest versions
+                        .Except( fromManifest.Nodes, ( left, right ) => string.Equals( left.FullName, right.FullName, StringComparison.OrdinalIgnoreCase ) )
+                        // exclude directories
+                        .Where( node => node.FileID != -1 )
+                        .ToList();
+
+                    allFiles.AddRange( newUpdatedNodes );
+                    allFiles.AddRange( newFileNodes );
+
+                    Log.WriteVerbose( "{0} updated files, {1} new files.", newUpdatedNodes.Count, newFileNodes.Count );
                 }
 
                 // find missing files we need to redownload
-                var requireNodes = toManifest.Nodes.Where( node =>
+                var reaquireNodes = toManifest.Nodes.Where( node =>
                 {
                     if ( node.FileID == -1 )
-                        return false;
+                        return false; // directories are ignored
 
                     string filePath = Path.Combine( installDir, node.FullName );
 
                     return !File.Exists( filePath );
-                } );
+                } ).ToList();
 
-                Log.WriteVerbose( "{0} updated files, {1} new files, {2} to reaquire.", newUpdatedNodes.Count, newFileNodes.Count, requireNodes.Count() );
+                Log.WriteVerbose( "{0} files to reaquire.", reaquireNodes.Count );
 
-                allFiles.AddRange( newUpdatedNodes );
-                allFiles.AddRange( newFileNodes );
-                allFiles.AddRange( requireNodes );
+                allFiles.AddRange( reaquireNodes );
+
             }
 
             // grab all the directory nodes from the latest manifest
@@ -209,13 +242,16 @@ namespace DepotDownloader2
 
                 using ( var storageSession = csClient.OpenStorage( ( uint )depotId, ( uint )toVersion ) )
                 {
-                    for ( int x = 0 ; x < allFiles.Count ; ++x )
-                    {
-                        var node = allFiles[ x ];
+                    long totalData = allFiles.Sum( node => node.SizeOrCount );
+                    long currentData = 0;
 
-                        float perc = ( ( float )x / ( float )allFiles.Count ) * 100.0f;
+                    foreach ( var node in allFiles )
+                    {
+                        float perc = ( ( float )currentData / ( float )totalData ) * 100.0f;
 
                         DownloadFile( storageSession, node, perc, installDir );
+
+                        currentData += node.SizeOrCount;
                     }
 
                 }
