@@ -41,6 +41,8 @@ namespace DepotDownloader2
         public static string Username { get; private set; }
         public static string Password { get; private set; }
 
+        public static bool DidAction { get; private set; }
+
 
         public static List<string> Parse( IEnumerable<string> args )
         {
@@ -57,6 +59,8 @@ namespace DepotDownloader2
 
         public static void ShowHelp()
         {
+            DidAction = true;
+
             Log.WriteLine( "Usage:" );
             Log.WriteLine( "  dd2 <options>" );
             Log.WriteLine();
@@ -69,7 +73,7 @@ namespace DepotDownloader2
 
         static void SetGame( string game )
         {
-            List<string> games = CDRManager.GetGamesInRange( 0, int.MaxValue );
+            var games = CDRManager.GetGamesInRange( 0, int.MaxValue );
 
             if ( !games.Contains( game ) )
             {
@@ -83,10 +87,12 @@ namespace DepotDownloader2
 
         static void ShowGames()
         {
+            DidAction = true;
+
             App serverInfo = CDRManager.GetApp( 4 );
 
-            List<string> sourceGames = CDRManager.GetGamesInRange( 200, 999 ); // source range
-            List<string> thirdPartyGames = CDRManager.GetGamesInRange( 1000, int.MaxValue );
+            var sourceGames = CDRManager.GetGamesInRange( 200, 999 ).ToList(); // source range
+            var thirdPartyGames = CDRManager.GetGamesInRange( 1000, int.MaxValue ).ToList();
 
             sourceGames.Sort( StringComparer.OrdinalIgnoreCase );
             thirdPartyGames.Sort( StringComparer.OrdinalIgnoreCase );

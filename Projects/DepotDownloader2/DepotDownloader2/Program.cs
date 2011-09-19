@@ -28,6 +28,9 @@ namespace DepotDownloader2
 
             Options.Parse( args );
 
+            if ( Options.DidAction )
+                return; // if we performed something already, such as --list, or --help, we're done.
+
             if ( string.IsNullOrEmpty( Options.Game ) )
             {
                 Log.WriteLine( "Error: Missing `game` parameter. Try --help." );
