@@ -135,6 +135,7 @@ namespace SteamKit2
             logon.Msg.Proto.protocol_version = MsgClientLogon.CurrentProtocol;
             logon.Msg.Proto.client_os_type = 10; // windows
             logon.Msg.Proto.client_language = "english";
+            logon.Msg.Proto.steam2_ticket_request = true;
 
             if ( details.AccRecord != null )
             {
