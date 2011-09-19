@@ -45,6 +45,8 @@ namespace DepotDownloader2
 
             var gameList = CDRManager.GetDepotsForGame( Options.Game );
 
+            Log.WriteVerbose( "{0} depots to check/install.", gameList.Count );
+
             foreach ( var depotId in gameList )
             {
                 ContentDownloader.Install( depotId );
