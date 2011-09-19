@@ -185,7 +185,7 @@ namespace DepotDownloader2
             return cdrObj.Subs.Find( sub => sub.SubID == subId );
         }
 
-        public static List<string> GetGamesInRange( int minRange, int maxRange )
+        public static IEnumerable<string> GetGamesInRange( int minRange, int maxRange )
         {
             App serverInfo = CDRManager.GetApp( 4 );
 
@@ -209,7 +209,7 @@ namespace DepotDownloader2
 
             }
 
-            return games;
+            return games.Distinct();
         }
 
         public static List<int> GetDepotsForGame( string gameName )
