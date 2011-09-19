@@ -26,6 +26,12 @@ namespace SteamKit2
             public EResult Result { get; private set; }
 
             /// <summary>
+            /// Gets the extended result of the logon.
+            /// </summary>
+            /// <vlaue>The result.</vlaue>
+            public EResult ExtendedResult { get; private set; }
+
+            /// <summary>
             /// Gets the out of game secs per heartbeat value. This is used internally.
             /// </summary>
             /// <value>The out of game secs per heartbeat.</value>
@@ -66,6 +72,16 @@ namespace SteamKit2
             /// <value>The email domain.</value>
             public string EmailDomain { get; private set; }
 
+            /// <summary>
+            /// Gets the Steam2 CellID.
+            /// </summary>
+            public uint CellID { get; private set; }
+
+            /// <summary>
+            /// Gets the Steam2 ticket.
+            /// </summary>
+            public byte[] Steam2Ticket { get; private set; }
+
 
 #if STATIC_CALLBACKS
             internal LogOnCallback( SteamClient client, CMsgClientLogonResponse resp )
@@ -75,6 +91,7 @@ namespace SteamKit2
 #endif
             {
                 this.Result = ( EResult )resp.eresult;
+                this.ExtendedResult =(EResult)resp.eresult_extended;
 
                 this.OutOfGameSecsPerHeartbeat = resp.out_of_game_heartbeat_seconds;
                 this.InGameSecsPerHeartbeat = resp.in_game_heartbeat_seconds;
@@ -88,6 +105,10 @@ namespace SteamKit2
                 this.ClientSteamID = new SteamID( resp.client_supplied_steamid );
 
                 this.EmailDomain = resp.email_domain;
+
+                this.CellID = resp.cell_id;
+
+                this.Steam2Ticket = resp.steam2_ticket;
             }
         }
 
