@@ -13,6 +13,22 @@ using SteamKit2;
 
 namespace DepotDownloader2
 {
+    class NodeComparer : IEqualityComparer<Steam2Manifest.Node>
+    {
+        public bool Equals( Steam2Manifest.Node x, Steam2Manifest.Node y )
+        {
+            return string.Equals( x.FullName, y.FullName, StringComparison.OrdinalIgnoreCase );
+        }
+
+        public int GetHashCode( Steam2Manifest.Node obj )
+        {
+            if ( Object.ReferenceEquals( obj, null ) )
+                return 0;
+
+            return obj.FullName == null ? 0 : obj.FullName.GetHashCode();
+        }
+
+    }
     class ContentDownloader
     {
         public static void Install( int depotId )
@@ -168,13 +184,13 @@ namespace DepotDownloader2
                     var newUpdatedNodes = updates
                         // find the nodes that updated in the old manifest
                         .Select( id => fromManifest.Nodes.Find( node => node.FileID == id ) )
-                        // get the list of new nodes the old ones correspond to, using teir full filename
+                        // get the list of new nodes the old ones correspond to, using their full filename
                         .Select( oldNode => toManifest.Nodes.Find( node => string.Equals( oldNode.FullName, node.FullName, StringComparison.OrdinalIgnoreCase ) ) )
                         .ToList();
 
                     var newFileNodes = toManifest.Nodes
                         // find all new files between the two manifest versions
-                        .Except( fromManifest.Nodes, ( left, right ) => string.Equals( left.FullName, right.FullName, StringComparison.OrdinalIgnoreCase ) )
+                        .Except( fromManifest.Nodes, new NodeComparer() )
                         // exclude directories
                         .Where( node => node.FileID != -1 )
                         .ToList();
@@ -236,9 +252,23 @@ namespace DepotDownloader2
 
             ContentServerClient csClient = new ContentServerClient();
 
+            do
+            {
+                try
+                {
+                    csClient.Connect( server );
+                }
+                catch
+                {
+                    Log.WriteVerbose( "Unable to connect to content server, retrying..." );
+                    continue;
+                }
+
+                break;
+            } while ( true );
+
             try
             {
-                csClient.Connect( server );
 
                 using ( var storageSession = csClient.OpenStorage( ( uint )depotId, ( uint )toVersion ) )
                 {
