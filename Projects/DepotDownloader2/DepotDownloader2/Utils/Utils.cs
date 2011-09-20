@@ -28,37 +28,4 @@ namespace DepotDownloader2
             return false;
         }
     }
-
-    static class LinqExtensions
-    {
-        public static IEnumerable<TSource> Except<TSource>( this IEnumerable<TSource> first, IEnumerable<TSource> second, Func<TSource, TSource, bool> comparer )
-        {
-            return first.Except( second, new LambdaComparer<TSource>( comparer ) );
-        }
-    }
-
-    class LambdaComparer<T> : IEqualityComparer<T>
-    {
-        Func<T, T, bool> equalFunc;
-        Func<T, int> hashFunc;
-
-        public LambdaComparer( Func<T, T, bool> comparerFunc, Func<T, int> hashCodeFunc = null )
-        {
-            equalFunc = comparerFunc;
-            hashFunc = hashCodeFunc;
-
-            if ( hashFunc == null )
-                hashFunc = obj => obj.GetHashCode();
-        }
-
-        public bool Equals( T x, T y )
-        {
-            return equalFunc( x, y );
-        }
-
-        public int GetHashCode( T obj )
-        {
-            return obj.GetHashCode();
-        }
-    }
 }
