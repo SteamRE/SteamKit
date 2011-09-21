@@ -816,6 +816,7 @@ message CMsgClientGetClientAppListResponse {
 
 		optional uint32 appid = 1;
 		optional string category = 2;
+		optional string app_type = 10;
 		optional bool favorite = 3;
 		optional bool installed = 4;
 		optional bool auto_update = 5;
