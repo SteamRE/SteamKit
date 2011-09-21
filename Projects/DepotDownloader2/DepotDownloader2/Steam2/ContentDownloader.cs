@@ -13,22 +13,6 @@ using SteamKit2;
 
 namespace DepotDownloader2
 {
-    class NodeComparer : IEqualityComparer<Steam2Manifest.Node>
-    {
-        public bool Equals( Steam2Manifest.Node x, Steam2Manifest.Node y )
-        {
-            return string.Equals( x.FullName, y.FullName, StringComparison.OrdinalIgnoreCase );
-        }
-
-        public int GetHashCode( Steam2Manifest.Node obj )
-        {
-            if ( Object.ReferenceEquals( obj, null ) )
-                return 0;
-
-            return obj.FullName == null ? 0 : obj.FullName.GetHashCode();
-        }
-
-    }
     class ContentDownloader
     {
         public static void Install( int depotId )
@@ -91,7 +75,7 @@ namespace DepotDownloader2
             Reaquire,
         }
 
-        public static bool Download( int depotId, int fromVersion, int toVersion )
+        static bool Download( int depotId, int fromVersion, int toVersion )
         {
             App depotInfo = CDRManager.GetApp( depotId );
 
@@ -201,6 +185,8 @@ namespace DepotDownloader2
                     Log.WriteVerbose( "{0} updated files, {1} new files.", newUpdatedNodes.Count, newFileNodes.Count );
                 }
 
+                Log.WriteVerbose( "Checking for missing files..." );
+
                 // find missing files we need to redownload
                 var reaquireNodes = toManifest.Nodes.Where( node =>
                 {
@@ -252,20 +238,23 @@ namespace DepotDownloader2
 
             ContentServerClient csClient = new ContentServerClient();
 
-            do
+            var tryConnect = Utils.RepeatAction( 10, () =>
             {
                 try
                 {
                     csClient.Connect( server );
+                    return ""; // return non-null to signal completion
                 }
-                catch
-                {
-                    Log.WriteVerbose( "Unable to connect to content server, retrying..." );
-                    continue;
-                }
+                catch { }
 
-                break;
-            } while ( true );
+                return null;
+            } );
+
+            if ( tryConnect == null )
+            {
+                Log.WriteLine( "Error: Unable to connect to content server." );
+                return false;
+            }
 
             try
             {
@@ -326,7 +315,7 @@ namespace DepotDownloader2
                 return;
             }
 
-            Log.WriteLine( " {0:00.00}%\t{1}", perc, downloadPath );
+            Log.WriteLine( " {0,6:00.00}%\t{1}", perc, downloadPath );
 
             var file = storageSession.DownloadFile( node, ContentServerClient.StorageSession.DownloadPriority.High );
             File.WriteAllBytes( downloadPath, file );
@@ -342,10 +331,20 @@ namespace DepotDownloader2
             Steam2Manifest manifest = null;
             ContentServerClient csClient = new ContentServerClient();
 
+            Utils.RepeatAction( 10, () =>
+            {
+                try
+                {
+                    csClient.Connect( server );
+                    return ""; // return non-null to signal completion
+                }
+                catch { }
+
+                return null;
+            } );
+
             try
             {
-                csClient.Connect( server );
-
                 using ( var storageSession = csClient.OpenStorage( ( uint )depotId, ( uint )depotVersion, Options.CellID ) )
                 {
                     manifest = storageSession.DownloadManifest();
@@ -370,11 +369,20 @@ namespace DepotDownloader2
             uint[] updates = null;
             ContentServerClient csClient = new ContentServerClient();
 
+            Utils.RepeatAction( 10, () =>
+            {
+                try
+                {
+                    csClient.Connect( server );
+                    return ""; // return non-null to signal completion
+                }
+                catch { }
+
+                return null;
+            } );
+
             try
             {
-                csClient.Connect( server );
-
-
                 using ( var storageSession = csClient.OpenStorage( ( uint )depotId, ( uint )toVersion, Options.CellID ) )
                 {
                     updates = storageSession.DownloadUpdates( ( uint )fromVersion );
@@ -399,11 +407,20 @@ namespace DepotDownloader2
             byte[] checksums = null;
             ContentServerClient csClient = new ContentServerClient();
 
+            Utils.RepeatAction( 10, () =>
+            {
+                try
+                {
+                    csClient.Connect( server );
+                    return ""; // return non-null to signal completion
+                }
+                catch { }
+
+                return null;
+            } );
+
             try
             {
-                csClient.Connect( server );
-
-
                 using ( var storageSession = csClient.OpenStorage( ( uint )depotId, ( uint )toVersion, Options.CellID ) )
                 {
                     checksums = storageSession.DownloadChecksums();
@@ -427,29 +444,41 @@ namespace DepotDownloader2
                 return null;
             }
 
-            foreach ( var csdsServer in ServerCache.CSDSServers )
+            return Utils.RepeatAction<IPEndPoint>( 10, () =>
             {
-                ContentServerDSClient csdsClient = new ContentServerDSClient();
-                csdsClient.Connect( csdsServer );
-
-                var contentServers = csdsClient.GetContentServerList( ( uint )depotId, ( uint )depotVersion, ( uint )Options.CellID );
-
-                if ( contentServers == null )
+                foreach ( var csdsServer in ServerCache.CSDSServers )
                 {
-                    Log.WriteVerbose( "Warning: CSDS {0} rejected depot {1}, version {2}", csdsServer, depotId, depotVersion );
-                    continue;
+                    ContentServerDSClient csdsClient = new ContentServerDSClient();
+
+                    try
+                    {
+                        csdsClient.Connect( csdsServer );
+                    }
+                    catch ( Exception ex )
+                    {
+                        Log.WriteVerbose( "Warning: Unable to find storage server: {0}", ex.Message );
+                        continue;
+                    }
+
+                    var contentServers = csdsClient.GetContentServerList( ( uint )depotId, ( uint )depotVersion, ( uint )Options.CellID );
+
+                    if ( contentServers == null )
+                    {
+                        Log.WriteVerbose( "Warning: CSDS {0} rejected depot {1}, version {2}", csdsServer, depotId, depotVersion );
+                        continue;
+                    }
+
+                    if ( contentServers.Length == 0 )
+                    {
+                        Log.WriteVerbose( "Warning: CSDS {0} had no servers for depot {1}, version {2}", csdsServer, depotId, depotVersion );
+                        continue;
+                    }
+
+                    return contentServers.Aggregate( ( bestMin, x ) => ( bestMin == null || ( x.Load <= bestMin.Load ) ) ? x : bestMin ).StorageServer;
                 }
 
-                if ( contentServers.Length == 0 )
-                {
-                    Log.WriteVerbose( "Warning: CSDS {0} had no servers for depot {1}, version {2}", csdsServer, depotId, depotVersion );
-                    continue;
-                }
-
-                return contentServers.Aggregate( ( bestMin, x ) => ( bestMin == null || ( x.Load <= bestMin.Load ) ) ? x : bestMin ).StorageServer;
-            }
-
-            return null;
+                return null;
+            } );
         }
     }
 }
