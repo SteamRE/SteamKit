@@ -5307,6 +5307,15 @@ namespace SteamKit2
       set { _category = value; }
     }
 
+    private string _app_type = "";
+    [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"app_type", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoDefaultValue("")]
+    public string app_type
+    {
+      get { return _app_type; }
+      set { _app_type = value; }
+    }
+
     private bool _favorite = default(bool);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"favorite", DataFormat = global::ProtoBuf.DataFormat.Default)]
     [global::ProtoBuf.ProtoDefaultValue(default(bool))]
