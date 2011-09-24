@@ -1550,6 +1550,7 @@ message CMsgClientMDSUploadManifestRequest {
 	optional bool make_public = 4;
 	optional string beta_key = 5;
 	optional uint32 build_id = 6;
+	optional uint32 manifest_version = 7;
 }
 
 message CMsgClientMDSUploadManifestResponse {
@@ -1564,6 +1565,7 @@ message CMsgClientMDSUploadManifestResponse {
 message CMsgClientMDSGetDepotManifest {
 	optional uint32 depot_id = 1;
 	optional fixed64 manifest_id = 2;
+	optional uint32 manifest_version = 3;
 }
 
 message CMsgClientMDSGetDepotManifestResponse {

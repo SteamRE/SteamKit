@@ -1,0 +1,39 @@
+option cc_generic_services = false;
+
+message ContentManifestPayload {
+	message FileMapping {
+		message ChunkData {
+			optional bytes sha = 1;
+			optional fixed32 crc = 2;
+			optional uint64 offset = 3;
+			optional uint32 cb_original = 4;
+			optional uint32 cb_compressed = 5;
+		}
+
+		optional string filename = 1;
+		optional uint64 size = 2;
+		optional uint32 flags = 3;
+		optional bytes sha_filename = 4;
+		optional bytes sha_content = 5;
+		repeated .ContentManifestPayload.FileMapping.ChunkData chunks = 6;
+	}
+
+	repeated .ContentManifestPayload.FileMapping mappings = 1;
+}
+
+message ContentManifestMetadata {
+	optional uint32 depot_id = 1;
+	optional uint64 gid_manifest = 2;
+	optional uint32 creation_time = 3;
+	optional bool filenames_encrypted = 4;
+	optional uint64 cb_disk_original = 5;
+	optional uint64 cb_disk_compressed = 6;
+	optional uint32 unique_chunks = 7;
+	optional uint32 crc_encrypted = 8;
+	optional uint32 crc_clear = 9;
+}
+
+message ContentManifestSignature {
+	optional bytes signature = 1;
+}
+
