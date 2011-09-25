@@ -1,7 +1,5 @@
 import "google/protobuf/descriptor.proto";
 
-option cc_generic_services = false;
-
 extend .google.protobuf.FieldOptions {
 	optional bool key_field = 50000 [default = false];
 	optional bool hidden = 50001 [default = false];

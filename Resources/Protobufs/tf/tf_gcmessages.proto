@@ -1,7 +1,5 @@
 import "steammessages.proto";
 
-option cc_generic_services = false;
-
 message CMsgTFGoldenWrenchBroadcast {
 	optional int32 wrench_number = 1;
 	optional bool deleted = 2;
