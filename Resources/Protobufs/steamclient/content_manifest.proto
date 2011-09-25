@@ -1,5 +1,3 @@
-option cc_generic_services = false;
-
 message ContentManifestPayload {
 	message FileMapping {
 		message ChunkData {
