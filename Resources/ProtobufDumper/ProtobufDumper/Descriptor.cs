@@ -6,6 +6,7 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
+#pragma warning disable 1591
 
 // Generated from: descriptor.proto
 namespace google.protobuf
@@ -35,7 +36,7 @@ namespace google.protobuf
 
     private string _name = "";
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string name
     {
       get { return _name; }
@@ -44,7 +45,7 @@ namespace google.protobuf
 
     private string _package = "";
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"package", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string package
     {
       get { return _package; }
@@ -88,11 +89,20 @@ namespace google.protobuf
 
     private google.protobuf.FileOptions _options = null;
     [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"options", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
     public google.protobuf.FileOptions options
     {
       get { return _options; }
       set { _options = value; }
+    }
+
+    private google.protobuf.SourceCodeInfo _source_code_info = null;
+    [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"source_code_info", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
+    public google.protobuf.SourceCodeInfo source_code_info
+    {
+      get { return _source_code_info; }
+      set { _source_code_info = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -107,7 +117,7 @@ namespace google.protobuf
 
     private string _name = "";
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string name
     {
       get { return _name; }
@@ -151,7 +161,7 @@ namespace google.protobuf
 
     private google.protobuf.MessageOptions _options = null;
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"options", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
     public google.protobuf.MessageOptions options
     {
       get { return _options; }
@@ -165,7 +175,7 @@ namespace google.protobuf
 
     private int _start = default(int);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"start", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int start
     {
       get { return _start; }
@@ -174,7 +184,7 @@ namespace google.protobuf
 
     private int _end = default(int);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"end", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int end
     {
       get { return _end; }
@@ -198,7 +208,7 @@ namespace google.protobuf
 
     private string _name = "";
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string name
     {
       get { return _name; }
@@ -207,7 +217,7 @@ namespace google.protobuf
 
     private int _number = default(int);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"number", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int number
     {
       get { return _number; }
@@ -216,7 +226,7 @@ namespace google.protobuf
 
     private google.protobuf.FieldDescriptorProto.Label _label = google.protobuf.FieldDescriptorProto.Label.LABEL_OPTIONAL;
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"label", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(google.protobuf.FieldDescriptorProto.Label.LABEL_OPTIONAL)]
+    [global::ProtoBuf.ProtoDefaultValue(google.protobuf.FieldDescriptorProto.Label.LABEL_OPTIONAL)]
     public google.protobuf.FieldDescriptorProto.Label label
     {
       get { return _label; }
@@ -225,7 +235,7 @@ namespace google.protobuf
 
     private google.protobuf.FieldDescriptorProto.Type _type = google.protobuf.FieldDescriptorProto.Type.TYPE_DOUBLE;
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(google.protobuf.FieldDescriptorProto.Type.TYPE_DOUBLE)]
+    [global::ProtoBuf.ProtoDefaultValue(google.protobuf.FieldDescriptorProto.Type.TYPE_DOUBLE)]
     public google.protobuf.FieldDescriptorProto.Type type
     {
       get { return _type; }
@@ -234,7 +244,7 @@ namespace google.protobuf
 
     private string _type_name = "";
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"type_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string type_name
     {
       get { return _type_name; }
@@ -243,7 +253,7 @@ namespace google.protobuf
 
     private string _extendee = "";
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"extendee", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string extendee
     {
       get { return _extendee; }
@@ -252,7 +262,7 @@ namespace google.protobuf
 
     private string _default_value = "";
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"default_value", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string default_value
     {
       get { return _default_value; }
@@ -261,7 +271,7 @@ namespace google.protobuf
 
     private google.protobuf.FieldOptions _options = null;
     [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"options", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
     public google.protobuf.FieldOptions options
     {
       get { return _options; }
@@ -353,7 +363,7 @@ namespace google.protobuf
 
     private string _name = "";
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string name
     {
       get { return _name; }
@@ -369,7 +379,7 @@ namespace google.protobuf
 
     private google.protobuf.EnumOptions _options = null;
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"options", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
     public google.protobuf.EnumOptions options
     {
       get { return _options; }
@@ -388,7 +398,7 @@ namespace google.protobuf
 
     private string _name = "";
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string name
     {
       get { return _name; }
@@ -397,7 +407,7 @@ namespace google.protobuf
 
     private int _number = default(int);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"number", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
     public int number
     {
       get { return _number; }
@@ -406,7 +416,7 @@ namespace google.protobuf
 
     private google.protobuf.EnumValueOptions _options = null;
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"options", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
     public google.protobuf.EnumValueOptions options
     {
       get { return _options; }
@@ -425,7 +435,7 @@ namespace google.protobuf
 
     private string _name = "";
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string name
     {
       get { return _name; }
@@ -441,7 +451,7 @@ namespace google.protobuf
 
     private google.protobuf.ServiceOptions _options = null;
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"options", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
     public google.protobuf.ServiceOptions options
     {
       get { return _options; }
@@ -460,7 +470,7 @@ namespace google.protobuf
 
     private string _name = "";
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string name
     {
       get { return _name; }
@@ -469,7 +479,7 @@ namespace google.protobuf
 
     private string _input_type = "";
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"input_type", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string input_type
     {
       get { return _input_type; }
@@ -478,7 +488,7 @@ namespace google.protobuf
 
     private string _output_type = "";
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"output_type", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string output_type
     {
       get { return _output_type; }
@@ -487,7 +497,7 @@ namespace google.protobuf
 
     private google.protobuf.MethodOptions _options = null;
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"options", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
     public google.protobuf.MethodOptions options
     {
       get { return _options; }
@@ -506,7 +516,7 @@ namespace google.protobuf
 
     private string _java_package = "";
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"java_package", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string java_package
     {
       get { return _java_package; }
@@ -515,7 +525,7 @@ namespace google.protobuf
 
     private string _java_outer_classname = "";
     [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"java_outer_classname", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string java_outer_classname
     {
       get { return _java_outer_classname; }
@@ -524,43 +534,52 @@ namespace google.protobuf
 
     private bool _java_multiple_files = (bool)false;
     [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"java_multiple_files", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue((bool)false)]
+    [global::ProtoBuf.ProtoDefaultValue((bool)false)]
     public bool java_multiple_files
     {
       get { return _java_multiple_files; }
       set { _java_multiple_files = value; }
     }
 
+    private bool _java_generate_equals_and_hash = (bool)false;
+    [global::ProtoBuf.ProtoMember(20, IsRequired = false, Name=@"java_generate_equals_and_hash", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoDefaultValue((bool)false)]
+    public bool java_generate_equals_and_hash
+    {
+      get { return _java_generate_equals_and_hash; }
+      set { _java_generate_equals_and_hash = value; }
+    }
+
     private google.protobuf.FileOptions.OptimizeMode _optimize_for = google.protobuf.FileOptions.OptimizeMode.SPEED;
     [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"optimize_for", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(google.protobuf.FileOptions.OptimizeMode.SPEED)]
+    [global::ProtoBuf.ProtoDefaultValue(google.protobuf.FileOptions.OptimizeMode.SPEED)]
     public google.protobuf.FileOptions.OptimizeMode optimize_for
     {
       get { return _optimize_for; }
       set { _optimize_for = value; }
     }
 
-    private bool _cc_generic_services = (bool)true;
+    private bool _cc_generic_services = (bool)false;
     [global::ProtoBuf.ProtoMember(16, IsRequired = false, Name=@"cc_generic_services", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue((bool)true)]
+    [global::ProtoBuf.ProtoDefaultValue((bool)false)]
     public bool cc_generic_services
     {
       get { return _cc_generic_services; }
       set { _cc_generic_services = value; }
     }
 
-    private bool _java_generic_services = (bool)true;
+    private bool _java_generic_services = (bool)false;
     [global::ProtoBuf.ProtoMember(17, IsRequired = false, Name=@"java_generic_services", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue((bool)true)]
+    [global::ProtoBuf.ProtoDefaultValue((bool)false)]
     public bool java_generic_services
     {
       get { return _java_generic_services; }
       set { _java_generic_services = value; }
     }
 
-    private bool _py_generic_services = (bool)true;
+    private bool _py_generic_services = (bool)false;
     [global::ProtoBuf.ProtoMember(18, IsRequired = false, Name=@"py_generic_services", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue((bool)true)]
+    [global::ProtoBuf.ProtoDefaultValue((bool)false)]
     public bool py_generic_services
     {
       get { return _py_generic_services; }
@@ -600,7 +619,7 @@ namespace google.protobuf
 
     private bool _message_set_wire_format = (bool)false;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"message_set_wire_format", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue((bool)false)]
+    [global::ProtoBuf.ProtoDefaultValue((bool)false)]
     public bool message_set_wire_format
     {
       get { return _message_set_wire_format; }
@@ -609,7 +628,7 @@ namespace google.protobuf
 
     private bool _no_standard_descriptor_accessor = (bool)false;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"no_standard_descriptor_accessor", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue((bool)false)]
+    [global::ProtoBuf.ProtoDefaultValue((bool)false)]
     public bool no_standard_descriptor_accessor
     {
       get { return _no_standard_descriptor_accessor; }
@@ -635,7 +654,7 @@ namespace google.protobuf
 
     private google.protobuf.FieldOptions.CType _ctype = google.protobuf.FieldOptions.CType.STRING;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"ctype", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(google.protobuf.FieldOptions.CType.STRING)]
+    [global::ProtoBuf.ProtoDefaultValue(google.protobuf.FieldOptions.CType.STRING)]
     public google.protobuf.FieldOptions.CType ctype
     {
       get { return _ctype; }
@@ -644,7 +663,7 @@ namespace google.protobuf
 
     private bool _packed = default(bool);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"packed", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
+    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
     public bool packed
     {
       get { return _packed; }
@@ -653,7 +672,7 @@ namespace google.protobuf
 
     private bool _deprecated = (bool)false;
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"deprecated", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue((bool)false)]
+    [global::ProtoBuf.ProtoDefaultValue((bool)false)]
     public bool deprecated
     {
       get { return _deprecated; }
@@ -662,7 +681,7 @@ namespace google.protobuf
 
     private string _experimental_map_key = "";
     [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"experimental_map_key", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string experimental_map_key
     {
       get { return _experimental_map_key; }
@@ -777,7 +796,7 @@ namespace google.protobuf
 
     private string _identifier_value = "";
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"identifier_value", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
+    [global::ProtoBuf.ProtoDefaultValue("")]
     public string identifier_value
     {
       get { return _identifier_value; }
@@ -786,7 +805,7 @@ namespace google.protobuf
 
     private ulong _positive_int_value = default(ulong);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"positive_int_value", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
     public ulong positive_int_value
     {
       get { return _positive_int_value; }
@@ -795,7 +814,7 @@ namespace google.protobuf
 
     private long _negative_int_value = default(long);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"negative_int_value", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(long))]
+    [global::ProtoBuf.ProtoDefaultValue(default(long))]
     public long negative_int_value
     {
       get { return _negative_int_value; }
@@ -804,7 +823,7 @@ namespace google.protobuf
 
     private double _double_value = default(double);
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"double_value", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(double))]
+    [global::ProtoBuf.ProtoDefaultValue(default(double))]
     public double double_value
     {
       get { return _double_value; }
@@ -813,11 +832,20 @@ namespace google.protobuf
 
     private byte[] _string_value = null;
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"string_value", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
     public byte[] string_value
     {
       get { return _string_value; }
       set { _string_value = value; }
+    }
+
+    private string _aggregate_value = "";
+    [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"aggregate_value", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoDefaultValue("")]
+    public string aggregate_value
+    {
+      get { return _aggregate_value; }
+      set { _aggregate_value = value; }
     }
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"NamePart")]
   public partial class NamePart : global::ProtoBuf.IExtensible
@@ -848,4 +876,46 @@ namespace google.protobuf
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"SourceCodeInfo")]
+  public partial class SourceCodeInfo : global::ProtoBuf.IExtensible
+  {
+    public SourceCodeInfo() {}
+    
+    private readonly global::System.Collections.Generic.List<google.protobuf.SourceCodeInfo.Location> _location = new global::System.Collections.Generic.List<google.protobuf.SourceCodeInfo.Location>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"location", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<google.protobuf.SourceCodeInfo.Location> location
+    {
+      get { return _location; }
+    }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Location")]
+  public partial class Location : global::ProtoBuf.IExtensible
+  {
+    public Location() {}
+    
+    private readonly global::System.Collections.Generic.List<int> _path = new global::System.Collections.Generic.List<int>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"path", DataFormat = global::ProtoBuf.DataFormat.TwosComplement, Options = global::ProtoBuf.MemberSerializationOptions.Packed)]
+    public global::System.Collections.Generic.List<int> path
+    {
+      get { return _path; }
+    }
+  
+    private readonly global::System.Collections.Generic.List<int> _span = new global::System.Collections.Generic.List<int>();
+    [global::ProtoBuf.ProtoMember(2, Name=@"span", DataFormat = global::ProtoBuf.DataFormat.TwosComplement, Options = global::ProtoBuf.MemberSerializationOptions.Packed)]
+    public global::System.Collections.Generic.List<int> span
+    {
+      get { return _span; }
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
 }
+#pragma warning restore 1591
