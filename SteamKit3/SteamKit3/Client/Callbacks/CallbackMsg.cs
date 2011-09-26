@@ -22,9 +22,16 @@ namespace SteamKit3
 
 
 #if STATIC_CALLBACKS
+        /// <summary>
+        /// Gets <see cref="SteamClient"/> instance associated with this callback.
+        /// </summary>
         public SteamClient Client { get; private set; }
 
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CallbackMsg"/> class.
+        /// </summary>
+        /// <param name="client">The <see cref="SteamClient"/> to associate with this callback.</param>
         public CallbackMsg( SteamClient client )
         {
             this.Client = client;
