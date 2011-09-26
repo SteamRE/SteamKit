@@ -23,7 +23,12 @@ namespace SteamKit3
         static List<Type> registeredHandlers = new List<Type>();
 
         Dictionary<Type, ClientHandler> handlers;
+
+#if STATIC_CALLBACKS
+        static Queue<CallbackMsg> callbackQueue;
+#else 
         Queue<CallbackMsg> callbackQueue;
+#endif
 
         static readonly ILog log = LogManager.GetLogger( typeof( SteamClient ) );
 
@@ -33,6 +38,21 @@ namespace SteamKit3
         /// </summary>
         public JobMgr JobMgr { get; private set; }
 
+#if !STATIC_CALLBACKS
+        internal CallbackMgr CallbackMgr { get; private set; }
+#endif
+
+
+        static SteamClient()
+        {
+            registeredHandlers = new List<Type>();
+
+#if STATIC_CALLBACKS
+            callbackQueue = new Queue<CallbackMsg>();
+#endif
+
+            RegisterHandlers( Assembly.GetExecutingAssembly() );
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SteamClient"/> class using a specific connection type.
@@ -42,18 +62,16 @@ namespace SteamKit3
             : base( connType )
         {
             handlers = new Dictionary<Type, ClientHandler>();
+
+#if !STATIC_CALLBACKS
             callbackQueue = new Queue<CallbackMsg>();
+
+            CallbackMgr = new CallbackMgr( this );
+#endif
 
             JobMgr = new JobMgr( this );
 
             SetupHandlers();
-        }
-
-        static SteamClient()
-        {
-            registeredHandlers = new List<Type>();
-
-            RegisterHandlers( Assembly.GetExecutingAssembly() );
         }
 
 
@@ -70,7 +88,11 @@ namespace SteamKit3
         /// </summary>
         protected override void OnClientDisconnected()
         {
+#if STATIC_CALLBACKS
+            PostCallback( new DisconnectedCallback( this ) );
+#else
             this.PostCallback( new DisconnectedCallback() );
+#endif
         }
         /// <summary>
         /// Called when the client receieves a network message.
@@ -94,7 +116,11 @@ namespace SteamKit3
         /// Posts a callback to the queue. This is normally used directly by client jobs.
         /// </summary>
         /// <param name="msg">The message.</param>
+#if STATIC_CALLBACKS
+        public static void PostCallback( CallbackMsg msg )
+#else
         public void PostCallback( CallbackMsg msg )
+#endif
         {
             lock ( callbackQueue )
             {
@@ -107,7 +133,11 @@ namespace SteamKit3
         /// Gets the next callback object in the queue.
         /// </summary>
         /// <returns>The next callback in the queue, or null if no callback is waiting.</returns>
+#if STATIC_CALLBACKS
+        public static CallbackMsg GetCallback()
+#else
         public CallbackMsg GetCallback()
+#endif
         {
             lock ( callbackQueue )
             {
@@ -122,7 +152,11 @@ namespace SteamKit3
         /// </summary>
         /// <param name="timeout">The length of time to block, or null to block until a callback is posted.</param>
         /// <returns>A callback object from the queue if a callback has been posted, or null if the timeout has elapsed.</returns>
+#if STATIC_CALLBACKS
+        public static CallbackMsg WaitForCallback( TimeSpan? timeout = null )
+#else
         public CallbackMsg WaitForCallback( TimeSpan? timeout = null )
+#endif
         {
             lock ( callbackQueue )
             {
@@ -137,6 +171,25 @@ namespace SteamKit3
                 return callbackQueue.Dequeue();
             }
         }
+
+#if !STATIC_CALLBACKS
+        /// <summary>
+        /// Handles all currently queued callbacks with the callback manager, and then returns.
+        /// </summary>
+        public void RunCallbacks()
+        {
+            CallbackMgr.RunCallbacks();
+        }
+
+        /// <summary>
+        /// Blocks the current thread to handle a callback with the callback manager.
+        /// </summary>
+        /// <param name="timeout">The length of time to block, or null to block until a callback is posted.</param>
+        public void RunWaitCallbacks( TimeSpan? timeout = null )
+        {
+            CallbackMgr.WaitForCallbacks( timeout );
+        }
+#endif
         #endregion
 
         #region Handlers
