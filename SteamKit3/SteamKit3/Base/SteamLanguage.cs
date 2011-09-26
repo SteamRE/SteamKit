@@ -503,7 +503,11 @@ namespace SteamKit3
 		AccountLogonDeniedNoMailSent = 66,
 		HardwareNotCapableOfIPT = 67,
 		IPTInitError = 68,
-		Max = 69,
+		ParentControlRestrictions = 69,
+		FacebookQueryError = 70,
+		ExpiredAuthCode = 71,
+		IPLoginRestrictionFailed = 72,
+		Max = 73,
 	}
 	public enum EUniverse
 	{
