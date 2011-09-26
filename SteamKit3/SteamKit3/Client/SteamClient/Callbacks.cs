@@ -17,6 +17,12 @@ namespace SteamKit3
         /// </summary>
         public sealed class DisconnectedCallback : CallbackMsg
         {
+#if STATIC_CALLBACKS
+            internal DisconnectedCallback( SteamClient client )
+                : base( client )
+            {
+            }
+#endif
         }
 
         /// <summary>
@@ -34,7 +40,12 @@ namespace SteamKit3
             public EResult Result { get; private set; }
 
 
+#if STATIC_CALLBACKS
+            internal ConnectedCallback( SteamClient client, MsgChannelEncryptResult msg, EUniverse eUniverse )
+                : base( client )
+#else
             internal ConnectedCallback( MsgChannelEncryptResult msg, EUniverse eUniverse )
+#endif
             {
                 Universe = eUniverse;
                 Result = msg.Result;
