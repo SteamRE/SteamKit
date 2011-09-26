@@ -20,7 +20,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Debug\SteamKit3.xml</DocumentationFile>
@@ -62,17 +62,20 @@
     <Compile Include="Base\Proto\SteamMsgBase.cs" />
     <Compile Include="Base\Proto\SteamMsgClientServer.cs" />
     <Compile Include="Base\SteamLanguage.cs" />
+    <Compile Include="Client\Callbacks\Callback.cs" />
+    <Compile Include="Client\Callbacks\CallbackDispatcher.cs" />
+    <Compile Include="Client\Callbacks\CallbackMgr.cs" />
     <Compile Include="Client\CMClient.cs" />
     <Compile Include="Client\Handlers\ClientHandler.cs" />
     <Compile Include="Client\Handlers\SteamUser\Callbacks.cs" />
+    <Compile Include="Client\Handlers\SteamUser\Jobs.cs" />
     <Compile Include="Client\Handlers\SteamUser\SteamUser.cs" />
-    <Compile Include="Client\SteamClient\CallbackMsg.cs" />
+    <Compile Include="Client\Callbacks\CallbackMsg.cs" />
     <Compile Include="Client\SteamClient\Callbacks.cs" />
+    <Compile Include="Client\SteamClient\Jobs.cs" />
     <Compile Include="Client\SteamClient\SteamClient.cs" />
-    <Compile Include="Client\Jobs\Types\ClientJobs.cs" />
     <Compile Include="Client\Jobs\Job.cs" />
     <Compile Include="Client\Jobs\JobMgr.cs" />
-    <Compile Include="Client\Jobs\Types\UserJobs.cs" />
     <Compile Include="Networking\Connection.cs" />
     <Compile Include="Networking\TcpConnection.cs" />
     <Compile Include="Networking\UdpConnection.cs" />
@@ -96,6 +99,9 @@
       <Project>{8374E4D7-2A91-48F1-9360-09B09CF27C3F}</Project>
       <Name>protobuf-net</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Client\Handlers\SteamFriends\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
