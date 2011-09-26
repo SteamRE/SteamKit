@@ -130,15 +130,21 @@ namespace SteamKit3
         {
             Contract.Requires( clientMsg != null );
 
-            var waitingJob = FindJobByID( clientMsg.TargetJobID );
-
-            if ( waitingJob != null )
+            if ( clientMsg.TargetJobID != ulong.MaxValue )
             {
-                // the job is waiting for this message, lets pass it along
-                PassMsgToJob( waitingJob, clientMsg );
+                // if the job has a jobid, lets see if we have a job waiting for it
+                var waitingJob = FindJobByID( clientMsg.TargetJobID );
+
+                if ( waitingJob != null )
+                {
+                    // the job is waiting for this message, lets pass it along
+                    PassMsgToJob( waitingJob, clientMsg );
+                    return;
+                }
+
+                Contract.Assert( false, string.Format( "No job waiting for clientmsg {0}", clientMsg.MsgType ) );
                 return;
             }
-
 
             // maybe some jobs are waiting on a specific EMsg
             var waitingJobs = FindJobsWaitingForMsg( clientMsg.MsgType );
