@@ -72,11 +72,12 @@ namespace SteamKit3
             public byte[] Steam2Ticket { get; private set; }
 
 
-            /// <summary>
-            /// Initializes a new instance of the <see cref="LoggedOnCallback"/> callback.
-            /// </summary>
-            /// <param name="msg">The logon response to initialize this callback with.</param>
+#if STATIC_CALLBACKS
+            internal LoggedOnCallback( SteamClient client, CMsgClientLogonResponse msg )
+                : base( client )
+#else
             internal LoggedOnCallback( CMsgClientLogonResponse msg )
+#endif
             {
                 this.Result = ( EResult )msg.eresult;
 
