@@ -112,7 +112,12 @@ namespace SteamKit3
             public EResult Result { get; private set; }
 
 
+#if STATIC_CALLBACKS
+            internal LoggedOffCallback( SteamClient client, CMsgClientLoggedOff msg )
+                : base( client )
+#else
             internal LoggedOffCallback( CMsgClientLoggedOff msg )
+#endif
             {
                 this.Result = ( EResult )msg.eresult;
             }
