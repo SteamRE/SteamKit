@@ -59,5 +59,14 @@ namespace SteamKit3
 
             JobMgr.LaunchJob( new LogonJob( Client, logonDetails ) );
         }
+
+        /// <summary>
+        /// Logs the currently logged on client off of the Steam3 network.
+        /// Results are returned in a <see cref="SteamUser.LoggedOffCallback"/>.
+        /// </summary>
+        public void LogOff()
+        {
+            JobMgr.LaunchJob( new LogOffJob( Client ) );
+        }
     }
 }

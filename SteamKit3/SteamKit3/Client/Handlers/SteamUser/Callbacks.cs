@@ -100,5 +100,22 @@ namespace SteamKit3
                 this.Steam2Ticket = msg.steam2_ticket;
             }
         }
+
+        /// <summary>
+        /// This callback is returned when the currently logged on user is logged off.
+        /// </summary>
+        public sealed class LoggedOffCallback : CallbackMsg
+        {
+            /// <summary>
+            /// Gets the reason for the log off.
+            /// </summary>
+            public EResult Result { get; private set; }
+
+
+            internal LoggedOffCallback( CMsgClientLoggedOff msg )
+            {
+                this.Result = ( EResult )msg.eresult;
+            }
+        }
     }
 }

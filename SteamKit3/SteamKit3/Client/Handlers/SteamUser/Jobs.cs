@@ -11,6 +11,9 @@ namespace SteamKit3
         [Job( JobType = JobType.ClientJob )]
         class LogonJob : ClientJob
         {
+            const int PROTOCOL_VERSION = 65573;
+
+
             SteamUser.LogOnDetails logonDetails;
 
 
@@ -34,10 +37,7 @@ namespace SteamKit3
                 logonMsg.Body.account_name = logonDetails.Username;
                 logonMsg.Body.password = logonDetails.Password;
 
-                logonMsg.Body.protocol_version = 65571; // todo: move this out to a constant somewhere
-
-                SendMessage( logonMsg );
-
+                logonMsg.Body.protocol_version = PROTOCOL_VERSION;
 
                 var msg = await YieldingSendMsgAndWaitForMsg( logonMsg, EMsg.ClientLogOnResponse );
 
@@ -61,7 +61,58 @@ namespace SteamKit3
                 {
                     Client.SessionID = logonResponse.ProtoHeader.client_session_id;
                     Client.SteamID = logonResponse.Body.client_supplied_steamid;
+
+                    Client.StartHeartbeat( logonResponse.Body.out_of_game_heartbeat_seconds );
                 }
+
+#if STATIC_CALLBACKS
+                SteamClient.PostCallback( callback );
+#else
+                Client.PostCallback( callback );
+#endif
+            }
+        }
+
+        [Job( JobType = JobType.ClientJob )]
+        class LogOffJob : ClientJob
+        {
+            public LogOffJob( SteamClient client )
+                : base( client )
+            {
+            }
+
+            protected override async Task YieldingRunJob( object param )
+            {
+                var logOff = new ClientMsgProtobuf<CMsgClientLogOff>( EMsg.ClientLogOff );
+
+                SendMessage( logOff );
+            }
+        }
+
+        [Job( MsgType = EMsg.ClientLoggedOff, JobType = JobType.ClientJob )]
+        class LoggedOffJob : ClientJob
+        {
+
+            public LoggedOffJob( SteamClient client )
+                : base( client )
+            {
+            }
+
+
+            protected override async Task YieldingRunJobFromMsg( IPacketMsg clientMsg )
+            {
+                var logoffMsg = new ClientMsgProtobuf<CMsgClientLoggedOff>( clientMsg );
+
+                Client.StopHeartbeat();
+
+#if STATIC_CALLBACKS
+                var callback = new SteamUser.LoggedOffCallback( Client, logoffMsg.Body );
+#else
+                var callback = new SteamUser.LoggedOffCallback( logoffMsg.Body );
+#endif
+
+                Log.InfoFormat( "ClientLoggedOff: {0}", callback.Result );
+
 #if STATIC_CALLBACKS
                 SteamClient.PostCallback( callback );
 #else
