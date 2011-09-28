@@ -537,7 +537,9 @@ namespace SteamKit3
 		Busy = 2,
 		Away = 3,
 		Snooze = 4,
-		Max = 5,
+		LookingToTrade = 5,
+		LookingToPlay = 6,
+		Max = 7,
 	}
 	public enum EAccountType
 	{
@@ -554,6 +556,35 @@ namespace SteamKit3
 		AnonUser = 10,
 		Max = 11,
 	}
+	public enum EAppInfoSection
+	{
+		Unknown = 0,
+		All = 1,
+		Common = 2,
+		Extended = 3,
+		Config = 4,
+		Stats = 5,
+		Install = 6,
+		Depots = 7,
+		Vac = 8,
+		Drm = 9,
+		Ufs = 10,
+		Ogg = 11,
+		Items = 12,
+		Policies = 13,
+		Sysreqs = 14,
+		Max = 15,
+	}
+	public enum ECurrencyCode
+	{
+		Invalid = 0,
+		USD = 1,
+		GBP = 2,
+		EUR = 3,
+		CHF = 4,
+		RUB = 5,
+		Max = 6,
+	}
 	public enum EFriendRelationship
 	{
 		None = 0,
@@ -563,7 +594,39 @@ namespace SteamKit3
 		RequestInitiator = 4,
 		Ignored = 5,
 		IgnoredFriend = 6,
-		Max = 7,
+		SuggestedFriend = 7,
+		Max = 8,
+	}
+	public enum EOSType
+	{
+		Unknown = -1,
+		Macos = -102,
+		Macos104 = -101,
+		Macos105 = -100,
+		Macos1058 = -99,
+		Macos106 = -95,
+		Macos1063 = -94,
+		Macos1064_slgu = -93,
+		Macos1067 = -92,
+		Macos107 = -90,
+		Linux = -203,
+		Linux22 = -202,
+		Linux24 = -201,
+		Linux26 = -200,
+		Windows = 0,
+		Win311 = 1,
+		Win95 = 2,
+		Win98 = 3,
+		WinME = 4,
+		WinNT = 5,
+		Win200 = 6,
+		WinXP = 7,
+		Win2003 = 8,
+		WinVista = 9,
+		Win7 = 10,
+		Win2008 = 11,
+		Win8 = 12,
+		Max = 13,
 	}
 	[Flags]
 	public enum EAccountFlags
