@@ -43,13 +43,16 @@ namespace SteamKit3
         /// </summary>
         public JobAttribute()
         {
+            MsgType = EMsg.Invalid;
         }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="JobAttribute"/> class.
         /// </summary>
         /// <param name="eMsg">The network message this job will handle. The job will be launched when this message arrives.</param>
         /// <param name="jobType">The job type.</param>
         public JobAttribute( EMsg eMsg, JobType jobType )
+            : this()
         {
             this.MsgType = eMsg;
             this.JobType = jobType;

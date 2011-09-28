@@ -93,12 +93,17 @@ namespace SteamKit3
 
                 EMsg msgType = attribs[ 0 ].MsgType;
 
+                if ( msgType == EMsg.Invalid )
+                    continue;
+
                 JobInfo jobInfo = new JobInfo()
                 {
                     MsgType = msgType,
                     Type = type,
                     JobType = attribs[ 0 ].JobType,
                 };
+
+                Contract.Assert( !registeredJobs.ContainsKey( msgType ), "Registered a job with a duplicate message type!" );
 
                 registeredJobs.Add( msgType, jobInfo );
             }
@@ -167,7 +172,7 @@ namespace SteamKit3
         {
             Contract.Requires( job != null );
 
-            log.DebugFormat( "Ending job {0} with id {1}", job.GetType(), job.JobID );
+            log.DebugFormat( "Ending job {0}", job );
 
             jobMap.Remove( job.JobID );
         }
@@ -204,7 +209,7 @@ namespace SteamKit3
             Contract.Requires( job != null );
             Contract.Requires( clientMsg != null );
 
-            log.DebugFormat( "Passing msg {0} (id: {1}) to job {2} (id: {3})", clientMsg.MsgType, clientMsg.TargetJobID, job.GetType(), job.JobID );
+            log.DebugFormat( "Passing msg {0} (id: {1}) to job {2}", clientMsg.MsgType, clientMsg.TargetJobID, job );
 
             // give the job the message it's waiting for
             job.WaitedPacket = clientMsg;
@@ -226,7 +231,7 @@ namespace SteamKit3
                 return;
             }
 
-            log.DebugFormat( "Launching job {0} (id: {1}) from msg {2}", newJob.GetType(), newJob.JobID, clientMsg.MsgType );
+            log.DebugFormat( "Launching job {0} from msg {1}", newJob, clientMsg.MsgType );
 
             jobMap.Add( newJob.JobID, newJob );
 
