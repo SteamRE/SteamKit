@@ -39,6 +39,8 @@ namespace SteamKit3
 
                 logonMsg.Body.protocol_version = PROTOCOL_VERSION;
 
+                logonMsg.Body.client_os_type = ( uint )Utils.GetOSType();
+
                 var msg = await YieldingSendMsgAndWaitForMsg( logonMsg, EMsg.ClientLogOnResponse );
 
                 if ( msg == null )
