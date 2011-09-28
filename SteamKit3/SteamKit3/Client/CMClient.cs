@@ -11,6 +11,8 @@ using System.Net;
 using log4net.Config;
 using log4net;
 using ProtoBuf;
+using System.Threading.Tasks;
+using System.Threading;
 
 namespace SteamKit3
 {
@@ -59,6 +61,8 @@ namespace SteamKit3
         /// </summary>
         protected ILog Log = LogManager.GetLogger( typeof( CMClient ) );
 
+        Timer heartbeatTimer;
+
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CMClient"/> class.
@@ -84,6 +88,8 @@ namespace SteamKit3
             Connection.Connected += Connected;
             Connection.Disconnected += Disconnected;
             Connection.NetMsgReceived += NetMsgReceived;
+
+            heartbeatTimer = new Timer( HeartbeatFunc );
         }
 
 
@@ -158,8 +164,14 @@ namespace SteamKit3
             OnClientConnected();
         }
 
+        void HeartbeatFunc( object state )
+        {
+            Send( new ClientMsgProtobuf<CMsgClientHeartBeat>( EMsg.ClientHeartBeat ) );
+        }
+
+
         /// <summary>
-        /// Gets a <see cref="IPacketMsg"/> implementation for the data.
+        /// Gets a <see cref="IPacketMsg"/> implementation for the data that represents a client message from the server.
         /// </summary>
         /// <param name="data">Data representing a client message received from the server.</param>
         /// <returns>A <see cref="IPacketMsg"/> that can be used to create a client message.</returns>
@@ -187,6 +199,18 @@ namespace SteamKit3
                 // otherwise we're a struct message
                 return new PacketClientMsg( eMsg, data );
             }
+        }
+
+
+        internal void StartHeartbeat( int seconds )
+        {
+            int delayMs = ( int )TimeSpan.FromSeconds( seconds ).TotalMilliseconds;
+
+            heartbeatTimer.Change( delayMs, delayMs );
+        }
+        internal void StopHeartbeat()
+        {
+            heartbeatTimer.Change( Timeout.Infinite, Timeout.Infinite );
         }
     }
 }
