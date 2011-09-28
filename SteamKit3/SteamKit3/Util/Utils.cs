@@ -20,6 +20,69 @@ namespace SteamKit3
             DateTime origin = new DateTime( 1970, 1, 1, 0, 0, 0, 0 );
             return origin.AddSeconds( unixTime );
         }
+
+        public static EOSType GetOSType()
+        {
+            var osVer = Environment.OSVersion;
+            var ver = osVer.Version;
+
+            switch ( osVer.Platform )
+            {
+                case PlatformID.Win32Windows:
+                    {
+                        switch ( ver.Minor )
+                        {
+                            case 0:
+                                return EOSType.Win95;
+
+                            case 10:
+                                return EOSType.Win98;
+
+                            case 90:
+                                return EOSType.WinME;
+
+                            default:
+                                return EOSType.Windows;
+                        }
+                    }
+
+                case PlatformID.Win32NT:
+                    {
+                        switch ( ver.Major )
+                        {
+                            case 4:
+                                return EOSType.WinNT;
+
+                            case 5: // XP family
+                                if ( ver.Minor == 0 )
+                                    return EOSType.Win200;
+
+                                if ( ver.Minor == 1 || ver.Minor == 2 )
+                                    return EOSType.WinXP;
+
+                                goto default;
+
+                            case 6: // Vista & 7
+                                if ( ver.Minor == 0 )
+                                    return EOSType.WinVista;
+
+                                if ( ver.Minor == 1 )
+                                    return EOSType.Win7;
+
+                                goto default;
+
+                            default:
+                                return EOSType.Windows;
+                        }
+                    }
+
+                case PlatformID.Unix:
+                    return EOSType.Linux; // this _could_ be mac, but we're gonna just go with linux for now
+
+                default:
+                    return EOSType.Unknown;
+            }
+        }
     }
 
     static class MsgUtil
