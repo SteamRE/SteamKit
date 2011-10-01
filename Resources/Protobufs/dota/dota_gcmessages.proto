@@ -1,0 +1,608 @@
+import "steammessages.proto";
+
+message CSODOTAGameAccountClient {
+	optional uint32 account_id = 1 [(key_field) = true];
+	optional string persona_name = 2;
+	optional uint32 wins = 3;
+	optional uint32 losses = 4;
+	optional uint32 rank = 5;
+	optional uint32 karma = 6;
+	optional uint32 avatar = 7;
+	optional uint32 achievement_showcase_0 = 8;
+	optional uint32 achievement_showcase_1 = 9;
+	optional uint32 achievement_showcase_2 = 10;
+	optional string tag_line = 11;
+	optional uint32 xp = 12;
+	optional uint32 level = 13;
+	optional uint32 initial_skill = 14;
+	optional uint32 leaver_count = 15;
+	optional bool left_last_game = 16;
+}
+
+message CSODOTABetaParticipation {
+	optional uint32 account_id = 1 [(key_field) = true];
+	optional uint32 access_rights = 2;
+	optional fixed32 beta_join_time = 3;
+}
+
+message CSODOTAGameHeroStandings {
+	optional uint32 account_id = 1 [(key_field) = true];
+	optional uint32 hero_id = 2 [(key_field) = true];
+	optional uint32 wins = 3;
+	optional uint32 losses = 4;
+}
+
+message CSODOTAPartyMemberMatchmakingInfo {
+	optional uint32 rank = 1;
+	optional uint32 initial_skill = 2;
+	optional uint32 wins = 3;
+	optional float latitude = 4;
+	optional float longitude = 5;
+}
+
+message CSODOTAParty {
+	enum State {
+		UI = 0;
+		FINDING_MATCH = 1;
+		IN_MATCH = 2;
+	}
+
+	optional uint64 party_id = 1 [(key_field) = true];
+	optional fixed64 leader_id = 2;
+	repeated fixed64 member_ids = 3;
+	repeated .CSODOTAPartyMemberMatchmakingInfo member_matchmaking_info = 13;
+	optional uint32 game_mode = 4;
+	repeated fixed64 pending_invites = 5;
+	optional .CSODOTAParty.State state = 6 [default = UI];
+	optional uint32 started_matchmaking_time = 7;
+	optional string search_key = 9 [(hidden) = true];
+	repeated uint32 searching_players_by_group = 10;
+	optional uint32 matchgroups = 11;
+	optional uint32 matching_players = 14;
+	optional float search_fraction = 15;
+}
+
+message CSODOTAPartyInvite {
+	message PartyMember {
+		optional string name = 1;
+		optional fixed64 steam_id = 2;
+		optional uint32 avatar = 3;
+	}
+
+	optional uint64 group_id = 1 [(key_field) = true];
+	optional fixed64 sender_id = 2;
+	optional string sender_name = 3;
+	repeated .CSODOTAPartyInvite.PartyMember members = 4;
+}
+
+message CDOTALobbyMember {
+	optional fixed64 id = 1 [(key_field) = true];
+	optional uint32 hero_id = 2;
+	optional .DOTA_GC_TEAM team = 3;
+	optional bool connected_to_game_server = 4;
+	optional uint32 rank = 5;
+	optional string name = 6;
+	optional uint32 slot = 7;
+	optional float latitude = 8;
+	optional float longitude = 9;
+	optional .DOTALobbyReadyState ready_state = 11;
+}
+
+message CDOTALobbyGCPrivate {
+	optional string search_key = 1;
+	optional string pass_key = 2;
+}
+
+message CLobbyTeamDetails {
+	optional string team_name = 1;
+	optional string team_logo = 2;
+}
+
+message CSODOTALobby {
+	enum State {
+		UI = 0;
+		READYUP = 4;
+		SERVERSETUP = 1;
+		RUN = 2;
+		POSTGAME = 3;
+		NOTREADY = 5;
+	}
+
+	enum LobbyType {
+		MATCH = 0;
+		PRACTICE = 1;
+		TOURNAMENT = 2;
+		TUTORIAL = 3;
+	}
+
+	optional uint64 lobby_id = 1 [(key_field) = true];
+	repeated .CDOTALobbyMember members = 2;
+	repeated .CDOTALobbyMember left_members = 7;
+	optional fixed64 leader_id = 11;
+	optional fixed64 server_id = 6 [default = 0];
+	optional uint32 game_mode = 3;
+	repeated fixed64 pending_invites = 10;
+	optional .CSODOTALobby.State state = 4 [default = UI];
+	optional string connect = 5;
+	optional .CDOTALobbyGCPrivate gc_private = 9 [(hidden) = true];
+	optional .CSODOTALobby.LobbyType lobby_type = 12 [default = MATCH];
+	optional bool allow_cheats = 13;
+	optional bool fill_with_bots = 14;
+	optional bool intro_mode = 15;
+	optional string game_name = 16;
+	repeated .CLobbyTeamDetails team_details = 17;
+	optional uint32 tutorial_lesson = 18;
+	optional uint32 tournament_id = 19;
+	optional uint32 tournament_game_id = 20;
+	optional uint32 server_region = 21 [default = 0];
+	optional .DOTA_GameState game_state = 22 [default = UI, (hidden) = true];
+	optional uint32 num_spectators = 23;
+	optional uint32 tower_state = 24;
+	optional uint32 matchgroup = 25;
+	optional float readyup_remaining_time = 26;
+}
+
+message CMsgConnectedPlayers {
+	message Player {
+		optional fixed64 steam_id = 1;
+		optional uint32 hero_id = 2;
+	}
+
+	repeated .CMsgConnectedPlayers.Player players = 1;
+	optional .DOTA_GameState game_state = 2;
+	optional uint32 num_spectators = 3;
+	optional uint32 tower_state = 4;
+}
+
+message CMsgStartFindingMatch {
+	optional string key = 1;
+	optional uint32 matchgroups = 2 [default = 4294967295];
+}
+
+message CMsgStopFindingMatch {
+}
+
+message CMsgReadyUp {
+	optional .DOTALobbyReadyState state = 1;
+}
+
+message CMsgMatchmakingSearchCountRequest {
+}
+
+message CMsgMatchmakingSearchCountResponse {
+	repeated uint32 searching_players_by_group = 1;
+}
+
+message CSourceTVGame {
+	message Player {
+		optional fixed64 steam_id = 1;
+		optional string name = 2;
+		optional uint32 hero_id = 3;
+	}
+
+	optional uint32 source_tv_public_addr = 1;
+	optional uint32 source_tv_private_addr = 2;
+	optional uint32 source_tv_port = 3;
+	repeated .CSourceTVGame.Player good_players = 14;
+	repeated .CSourceTVGame.Player bad_players = 15;
+	repeated .CSourceTVGame.Player other_players = 16;
+	optional string game_name = 7;
+	optional string date = 8;
+	repeated .CLobbyTeamDetails team_details = 9;
+	optional uint32 num_spectators = 10;
+	optional uint32 tournament_id = 11;
+	optional uint32 tournament_game_id = 12;
+	optional uint32 tower_state = 13;
+}
+
+message CMsgSourceTVGamesResponse {
+	repeated .CSourceTVGame games = 1;
+	optional uint32 num_total_games = 2;
+}
+
+message CMsgFindSourceTVGames {
+	optional string search_key = 1;
+	optional uint32 start = 2;
+	optional uint32 num_games = 3;
+}
+
+message CMsgAbandonCurrentGame {
+}
+
+message CMsgForceSOCacheResend {
+}
+
+message CMsgPracticeLobbyCreate {
+	optional string search_key = 1;
+	optional bool tournament_game = 2;
+	optional uint32 tournament_game_id = 3;
+	optional uint32 tournament_id = 4;
+	optional string pass_key = 5;
+}
+
+message CMsgPracticeLobbySetTeamSlot {
+	optional .DOTA_GC_TEAM team = 1;
+	optional uint32 slot = 2;
+}
+
+message CMsgPracticeLobbyLeave {
+}
+
+message CMsgPracticeLobbyLaunch {
+	optional bool allow_cheats = 1;
+	optional bool fill_with_bots = 2;
+	optional bool intro_mode = 3;
+}
+
+message CMsgPracticeLobbySetDetails {
+	optional uint64 lobby_id = 1;
+	optional string game_name = 2;
+	repeated .CLobbyTeamDetails team_details = 3;
+	optional uint32 server_region = 4;
+}
+
+message CMsgPracticeLobbyList {
+	optional bool tournament_games = 1;
+	optional string pass_key = 2;
+}
+
+message CMsgPracticeLobbyListResponseEntry {
+	optional uint64 id = 1 [(key_field) = true];
+	optional string players = 2;
+	optional uint32 tournament_id = 3;
+	optional uint32 tournament_game_id = 4;
+}
+
+message CMsgPracticeLobbyListResponse {
+	optional bool tournament_games = 1;
+	repeated .CMsgPracticeLobbyListResponseEntry lobbies = 2;
+}
+
+message CMsgPracticeLobbyJoin {
+	optional uint64 lobby_id = 1;
+}
+
+message CMsgSetAvatar {
+	optional uint32 avatar = 1;
+}
+
+message CMsgTrackedEvent {
+	optional uint64 submitter_id = 1 [(key_field) = true];
+	optional uint32 event_id = 2 [(key_field) = true];
+	optional fixed64 time_submitted = 3 [(key_field) = true];
+	optional uint32 event_type = 4 [(key_field) = true];
+	repeated uint32 vars_uint32 = 5;
+	repeated uint64 vars_uint64 = 6;
+	repeated int32 vars_int32 = 7;
+	repeated int64 vars_int64 = 8;
+	repeated float vars_float = 9;
+	repeated double vars_double = 10;
+}
+
+message CMsgSendTrackedEvents {
+	repeated .CMsgTrackedEvent events = 1;
+}
+
+message CMsgGameMatchSignOut {
+	message CTeam {
+		message CPlayer {
+			optional fixed64 account_id = 1;
+			optional uint32 fake_client_id = 2;
+			optional uint32 hero_id = 3;
+			repeated uint32 items = 4;
+			optional uint32 gold = 5;
+			optional uint32 kills = 6;
+			optional uint32 deaths = 7;
+			optional uint32 assists = 8;
+			optional uint32 leaver_status = 9;
+			optional uint32 last_hits = 10;
+			optional uint32 denies = 11;
+			optional uint32 gold_per_min = 12;
+			optional uint32 xp_per_minute = 13;
+			optional uint32 gold_spent = 14;
+			optional uint32 level = 15;
+			optional uint32 hero_damage = 16;
+			optional uint32 tower_damage = 17;
+			optional uint32 hero_healing = 18;
+			optional uint32 time_last_seen = 19;
+			optional uint32 support_ability_value = 20;
+		}
+
+		repeated .CMsgGameMatchSignOut.CTeam.CPlayer players = 1;
+	}
+
+	optional uint32 match_id = 1 [(key_field) = true];
+	optional uint32 duration = 2;
+	optional bool good_guys_win = 3;
+	optional fixed32 date = 4;
+	repeated uint32 num_players = 5;
+	repeated .CMsgGameMatchSignOut.CTeam teams = 6;
+	optional string computer_name = 7;
+	repeated uint32 tower_status = 8;
+	repeated uint32 barracks_status = 9;
+}
+
+message CMsgGameMatchSignoutResponse {
+	optional uint32 match_id = 1;
+	optional fixed32 replay_salt = 2;
+}
+
+message CMsgTutorialLobbyCreate {
+	optional string search_key = 1;
+	optional uint32 tutorial_lesson = 2;
+}
+
+message CMsgInitialQuestionnaireResponse {
+	optional uint32 initial_skill = 1;
+}
+
+message CMsgInterGCSurgeTest {
+}
+
+message CMsgInterGCProfile {
+	optional bool start = 1;
+}
+
+message CMsgDOTATournament {
+	message Team {
+		optional uint32 team_id = 1;
+		optional string team_name = 2;
+		optional string team_abbrev = 3;
+		repeated uint32 players = 4;
+		optional uint32 seed = 5;
+	}
+
+	message Game {
+		message ReplayURL {
+			optional uint32 provider_id = 1;
+			optional uint32 stream_id = 2;
+			optional string url = 3;
+		}
+
+		optional uint32 game_id = 1;
+		optional uint32 good_team_id = 2;
+		optional uint32 bad_team_id = 3;
+		optional fixed64 lobby_id = 4;
+		optional uint32 match_id = 5;
+		optional string game_name = 6;
+		optional bool live_stream = 7;
+		optional string message = 9;
+		optional bool results_final = 10;
+		repeated .CMsgDOTATournament.Game.ReplayURL replay_urls = 11;
+	}
+
+	repeated .CMsgDOTATournament.Team teams = 1;
+	repeated .CMsgDOTATournament.Game games = 2;
+}
+
+message CMsgDOTATournamentRequest {
+	optional uint32 tournament_id = 1;
+}
+
+message CMsgDOTATournamentResponse {
+	optional uint32 result = 1 [default = 2];
+	optional .CMsgDOTATournament tournament = 2;
+}
+
+message CMsgDOTAMatch {
+	message Player {
+		optional uint32 account_id = 1;
+		optional uint32 player_slot = 2;
+		optional uint32 hero_id = 3;
+		optional uint32 item_0 = 4;
+		optional uint32 item_1 = 5;
+		optional uint32 item_2 = 6;
+		optional uint32 item_3 = 7;
+		optional uint32 item_4 = 8;
+		optional uint32 item_5 = 9;
+		optional float expected_team_contribution = 10;
+		optional float scaled_metric = 11;
+		optional uint32 previous_rank = 12;
+		optional uint32 rank_change = 13;
+		optional uint32 kills = 14;
+		optional uint32 deaths = 15;
+		optional uint32 assists = 16;
+		optional uint32 leaver_status = 17;
+		optional uint32 gold = 18;
+		optional uint32 last_hits = 19;
+		optional uint32 denies = 20;
+		optional uint32 gold_per_min = 21;
+		optional uint32 XP_per_min = 22;
+		optional uint32 gold_spent = 23;
+		optional uint32 hero_damage = 24;
+		optional uint32 tower_damage = 25;
+		optional uint32 hero_healing = 26;
+		optional uint32 level = 27;
+		optional uint32 time_last_seen = 28;
+		optional string player_name = 29;
+		optional uint32 support_ability_value = 30;
+	}
+
+	optional uint32 season = 1;
+	optional bool good_guys_win = 2;
+	optional uint32 duration = 3;
+	optional fixed32 startTime = 4;
+	repeated .CMsgDOTAMatch.Player players = 5;
+	optional uint32 match_id = 6;
+	repeated uint32 tower_status = 8;
+	repeated uint32 barracks_status = 9;
+}
+
+message CMsgDOTAPlayerMatchHistory {
+	repeated uint32 match_ids = 1;
+}
+
+message CMsgDOTAMatchHistoryFilter {
+	repeated uint32 match_ids = 1;
+	optional uint32 newest_match_evaluated = 2;
+	optional uint32 oldest_match_evaluated = 3;
+}
+
+message CMsgDOTARequestMatches {
+	optional string player_name = 1;
+	optional uint32 hero_id = 2;
+	optional uint32 game_mode = 3;
+	optional uint32 skill_min = 4;
+	optional uint32 skill_max = 5;
+	optional fixed32 date_min = 6;
+	optional fixed32 date_max = 7;
+	optional bool friends_only = 8;
+	optional bool recently_played_only = 9;
+	optional uint32 matches_requested = 10;
+	optional uint32 start_at_match_id = 11;
+	optional fixed32 min_players = 12;
+	optional uint32 request_id = 13;
+	optional bool tournament_games_only = 14;
+}
+
+message CMsgDOTARequestMatchesResponse {
+	repeated .CMsgDOTAMatch matches = 1;
+	optional uint32 request_id = 2;
+}
+
+message CMsgDOTABetaParticipationRequest {
+}
+
+message CMsgDOTABetaParticipation {
+	optional uint32 access_rights = 1;
+	optional fixed32 beta_join_time = 2;
+}
+
+message CMsgDOTAGenericResult {
+	optional uint32 eresult = 1 [default = 2];
+}
+
+message CMsgDOTABroadcastNotification {
+	optional string message = 1;
+}
+
+message CMsgDOTALiveScoreboardUpdate {
+	message Team {
+		message Player {
+			enum DOTAUltimateState {
+				k_EDOTAUltimateStateNotLearned = 0;
+				k_EDOTAUltimateStateCooldown = 1;
+				k_EDOTAUltimateStateNeedsMana = 2;
+				k_EDOTAUltimateStateReady = 3;
+			}
+
+			optional uint32 player_slot = 1;
+			optional string player_name = 2;
+			optional string hero_name = 3;
+			optional uint32 hero_id = 4;
+			optional uint32 kills = 5;
+			optional uint32 deaths = 6;
+			optional uint32 assists = 7;
+			optional uint32 last_hits = 8;
+			optional uint32 denies = 9;
+			optional uint32 gold = 10;
+			optional uint32 level = 11;
+			optional float gold_per_min = 12;
+			optional float xp_per_min = 13;
+			optional .CMsgDOTALiveScoreboardUpdate.Team.Player.DOTAUltimateState ultimate_state = 14 [default = k_EDOTAUltimateStateNotLearned];
+			optional float ultimate_cooldown = 15;
+			optional uint32 item0 = 16;
+			optional uint32 item1 = 17;
+			optional uint32 item2 = 18;
+			optional uint32 item3 = 19;
+			optional uint32 item4 = 20;
+			optional uint32 item5 = 21;
+		}
+
+		repeated .CMsgDOTALiveScoreboardUpdate.Team.Player players = 1;
+		optional uint32 score = 2;
+	}
+
+	optional uint32 tournament_id = 1;
+	optional uint32 tournament_game_id = 2;
+	optional float duration = 3;
+	optional int32 hltv_delay = 4;
+	optional .CMsgDOTALiveScoreboardUpdate.Team team_good = 5;
+	optional .CMsgDOTALiveScoreboardUpdate.Team team_bad = 6;
+}
+
+message CMsgDOTAJoinChatChannel {
+	optional string persona_name = 1;
+	optional string channel_name = 2;
+	optional string password = 3;
+}
+
+message CMsgDOTALeaveChatChannel {
+	optional string channel_name = 1;
+}
+
+message CMsgDOTAJoinChatChannelResponse {
+	message ChatMember {
+		optional fixed64 steam_id = 1;
+		optional string persona_name = 2;
+	}
+
+	optional uint32 response = 1;
+	optional string channel_name = 2;
+	optional fixed64 channel_id = 3;
+	optional uint32 max_members = 4;
+	repeated .CMsgDOTAJoinChatChannelResponse.ChatMember members = 5;
+}
+
+message CMsgDOTAOtherJoinedChatChannel {
+	optional fixed64 channel_id = 1;
+	optional string persona_name = 2;
+	optional fixed64 steam_id = 3;
+}
+
+message CMsgDOTAOtherLeftChatChannel {
+	optional fixed64 channel_id = 1;
+	optional fixed64 steam_id = 2;
+}
+
+message CMsgDOTARequestDefaultChatChannel {
+}
+
+message CMsgDOTARequestDefaultChatChannelResponse {
+	optional string channel_name = 1;
+	optional fixed64 channel_id = 2;
+}
+
+message CMsgDOTARequestChatChannelList {
+}
+
+message CMsgDOTARequestChatChannelListResponse {
+	message ChatChannel {
+		optional string channel_name = 1;
+		optional uint32 num_members = 2;
+	}
+
+	repeated .CMsgDOTARequestChatChannelListResponse.ChatChannel channels = 1;
+}
+
+message CMsgDOTATodayMessages {
+	message TodayMessage {
+		optional uint32 message_id = 1;
+		optional string image_url = 2;
+		optional string title = 3;
+		optional string sub_title = 4;
+		optional string web_page_url = 5;
+		optional bool active = 6;
+		optional fixed32 date = 7;
+	}
+
+	repeated .CMsgDOTATodayMessages.TodayMessage messages = 1;
+}
+
+message CMsgDOTARequestTodayMessages {
+}
+
+message CMsgDOTARequestPlayerResources {
+	optional fixed64 steam_id = 1;
+	optional uint32 player_id = 2;
+}
+
+message CMsgDOTARequestPlayerResourcesResponse {
+	optional fixed64 steam_id = 1;
+	optional uint32 rank = 2;
+	optional uint32 player_id = 3;
+}
+
+message CMsgDOTAKickedFromMatchmakingQueue {
+}
+
