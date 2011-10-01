@@ -1,7 +1,5 @@
 import "steammessages.proto";
 
-option cc_generic_services = false;
-
 message CMsgTFGoldenWrenchBroadcast {
 	optional int32 wrench_number = 1;
 	optional bool deleted = 2;
@@ -88,12 +86,6 @@ message CMsgTFFreeTrialConvertedToPremium {
 message CMsgSaxxyAwarded {
 	optional uint32 category = 1;
 	repeated string winner_names = 2;
-}
-
-message CMsgReplayUploadedToYouTube {
-	optional string youtube_url = 1;
-	optional string youtube_account_name = 2;
-	optional uint64 session_id = 3;
 }
 
 message CMsgReplaySubmitContestEntry {
