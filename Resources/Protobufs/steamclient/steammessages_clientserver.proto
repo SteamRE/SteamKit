@@ -1247,6 +1247,7 @@ message CMsgClientUCMGetPublishedFileDetailsResponse {
 	optional fixed32 rtime32_created = 10;
 	optional fixed32 rtime32_updated = 11;
 	optional int32 visibility = 12;
+	optional bool banned = 13;
 }
 
 message CMsgClientUCMDeletePublishedFile {
@@ -1784,5 +1785,38 @@ message CMsgAMGCClientRelay {
 	optional uint32 appid = 1;
 	optional uint32 msgtype = 2;
 	optional bytes payload = 3;
+}
+
+message CMsgDRMDownloadRequestWithCrashData {
+	optional uint32 download_flags = 1;
+	optional uint32 download_types_known = 2;
+	optional bytes guid_drm = 3;
+	optional bytes guid_split = 4;
+	optional bytes guid_merge = 5;
+	optional string module_name = 6;
+	optional string module_path = 7;
+	optional bytes crash_data = 8;
+}
+
+message CMsgDRMDownloadResponse {
+	optional uint32 eresult = 1 [default = 2];
+	optional uint32 app_id = 2;
+	optional uint32 blob_download_type = 3;
+	optional bytes merge_guid = 4;
+	optional uint32 download_file_dfs_ip = 5;
+	optional uint32 download_file_dfs_port = 6;
+	optional string download_file_url = 7;
+	optional string module_path = 8;
+}
+
+message CMsgDRMFinalResult {
+	optional uint32 eResult = 1 [default = 2];
+	optional uint32 app_id = 2;
+	optional uint32 blob_download_type = 3;
+	optional uint32 error_detail = 4;
+	optional bytes merge_guid = 5;
+	optional uint32 download_file_dfs_ip = 6;
+	optional uint32 download_file_dfs_port = 7;
+	optional string download_file_url = 8;
 }
 
