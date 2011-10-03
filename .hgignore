@@ -14,3 +14,5 @@ boost/
 google/
 zlib/
 
+*.svn-base
+.svn
