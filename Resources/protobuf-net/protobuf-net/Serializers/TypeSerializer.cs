@@ -220,13 +220,9 @@ namespace ProtoBuf.Serializers
                 }
                 if (!handled)
                 {
-                    throw CreateInvalidCallbackSignature(method);
+                    throw Meta.CallbackSet.CreateInvalidCallbackSignature(method);
                 }
             }
-        }
-        static Exception CreateInvalidCallbackSignature(MethodInfo method)
-        {
-            return new NotSupportedException("Invalid callback signature in " + method.DeclaringType.Name + "." + method.Name);
         }
         object CreateInstance(ProtoReader source)
         {
@@ -263,7 +259,6 @@ namespace ProtoBuf.Serializers
             Type expected = ExpectedType;
             using (Compiler.Local loc = ctx.GetLocalWithValue(expected, valueFrom))
             {
-                if (forType.IsEnum) return;
                 // pre-callbacks
                 EmitCallbackIfNeeded(ctx, loc, TypeModel.CallbackType.BeforeSerialize);
 
@@ -377,7 +372,7 @@ namespace ProtoBuf.Serializers
                 }
                 if (!handled)
                 {
-                    throw CreateInvalidCallbackSignature(method);
+                    throw Meta.CallbackSet.CreateInvalidCallbackSignature(method);
                 }
                 
                 ctx.EmitCall(method);
@@ -431,7 +426,6 @@ namespace ProtoBuf.Serializers
             using (Compiler.Local loc = ctx.GetLocalWithValue(expected, valueFrom))
             using (Compiler.Local fieldNumber = new Compiler.Local(ctx, typeof(int)))
             {
-                if (forType.IsEnum) return;
                 // pre-callbacks
                 if (HasCallbacks(TypeModel.CallbackType.BeforeDeserialize))
                 {

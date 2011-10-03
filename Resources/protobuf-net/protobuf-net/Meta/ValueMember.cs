@@ -64,6 +64,9 @@ namespace ProtoBuf.Meta
                 defaultValue = ParseDefaultValue(memberType, defaultValue);
             }
             this.defaultValue = defaultValue;
+
+            MetaType type = model.FindWithoutAdd(memberType);
+            if (type != null) this.asReference = type.AsReferenceDefault;
         }
         /// <summary>
         /// Creates a new ValueMember instance
@@ -352,7 +355,7 @@ namespace ProtoBuf.Meta
                     defaultWireType = WireType.String;
                     if (asReference)
                     {
-                        return new NetObjectSerializer(typeof(string), 0, true, false);
+                        return new NetObjectSerializer(typeof(string), 0, BclHelpers.NetObjectOptions.AsReference);
                     }
                     return new StringSerializer();
                 case TypeCode.Single:
@@ -418,7 +421,14 @@ namespace ProtoBuf.Meta
                 if (asReference || dynamicType)
                 {
                     defaultWireType = WireType.String;
-                    return new NetObjectSerializer(type, key, asReference, dynamicType);
+                    BclHelpers.NetObjectOptions options = BclHelpers.NetObjectOptions.None;
+                    if (asReference) options |= BclHelpers.NetObjectOptions.AsReference;
+                    if (dynamicType) options |= BclHelpers.NetObjectOptions.DynamicType;
+                    if (key >= 0)
+                    { // exists
+                        if (model[type].UseConstructor) options |= BclHelpers.NetObjectOptions.UseConstructor;
+                    }
+                    return new NetObjectSerializer(type, key, options);
                 }
                 if (key >= 0)
                 {

@@ -553,6 +553,15 @@ namespace ProtoBuf.Compiler
         {
             EmitCtor(type, Helpers.EmptyTypes);
         }
+        public void EmitCtor(ConstructorInfo ctor)
+        {
+            if (ctor == null) throw new ArgumentNullException("ctor");
+            il.Emit(OpCodes.Newobj, ctor);
+#if DEBUG_COMPILE
+            Helpers.DebugWriteLine(OpCodes.Newobj + ": " + ctor.DeclaringType);
+#endif
+        }
+
         public void EmitCtor(Type type, params Type[] parameterTypes)
         {
             Helpers.DebugAssert(type != null);
@@ -950,6 +959,7 @@ namespace ProtoBuf.Compiler
             Type type = arr.Type;
             Helpers.DebugAssert(type.IsArray && arr.Type.GetArrayRank() == 1);
             type = type.GetElementType();
+            Helpers.DebugAssert(type != null, "Not an array: " + arr.Type.FullName);
             LoadValue(arr);
             LoadValue(i);
             switch(Type.GetTypeCode(type)) {
@@ -979,6 +989,7 @@ namespace ProtoBuf.Compiler
                     {
                         Emit(OpCodes.Ldelem_Ref);
                     }
+             
                     break;
             }
             
