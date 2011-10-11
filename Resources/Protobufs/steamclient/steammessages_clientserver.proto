@@ -1248,6 +1248,7 @@ message CMsgClientUCMGetPublishedFileDetailsResponse {
 	optional fixed32 rtime32_updated = 11;
 	optional int32 visibility = 12;
 	optional bool banned = 13;
+	repeated string tag = 14;
 }
 
 message CMsgClientUCMDeletePublishedFile {
@@ -1261,6 +1262,7 @@ message CMsgClientUCMDeletePublishedFileResponse {
 message CMsgClientUCMEnumerateUserPublishedFiles {
 	optional uint32 app_id = 1;
 	optional uint32 start_index = 2;
+	optional uint32 sort_order = 3;
 }
 
 message CMsgClientUCMEnumerateUserPublishedFilesResponse {
@@ -1527,10 +1529,13 @@ message CMsgClientMDSUploadDepotChunks {
 		optional uint32 rolling_crc = 2;
 		optional uint32 original_chunk_size = 3;
 		optional bytes data = 4;
+		optional uint32 compressed_chunk_size = 5;
+		optional uint32 compressed_crc = 6;
 	}
 
 	optional uint32 depot_id = 1;
 	repeated .CMsgClientMDSUploadDepotChunks.ChunkUploadData chunks = 2;
+	optional bool only_meta_data = 3;
 }
 
 message CMsgClientMDSUploadDepotChunksResponse {
