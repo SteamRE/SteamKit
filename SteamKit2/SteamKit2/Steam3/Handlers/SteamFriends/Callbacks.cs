@@ -267,7 +267,8 @@ namespace SteamKit2
 
                 this.FromLimitedAccount = msg.from_limited_account;
 
-                this.Message = Encoding.UTF8.GetString( msg.message, 0, msg.message.Length - 1 );
+                if ( msg.message != null && msg.message.Length > 0 )
+                    this.Message = Encoding.UTF8.GetString( msg.message, 0, msg.message.Length - 1 );
             }
         }
 
@@ -404,7 +405,8 @@ namespace SteamKit2
 
                 ChatMsgType = msg.ChatMsgType;
 
-                Message = Encoding.UTF8.GetString( payload, 0, payload.Length - 1 );
+                if ( payload != null && payload.Length > 0 )
+                    Message = Encoding.UTF8.GetString( payload, 0, payload.Length - 1 );
             }
         }
 
