@@ -184,3 +184,20 @@ message CMsgGCError {
 message CMsgRequestInventoryRefresh {
 }
 
+message CSOItemCommunityMap {
+	optional uint32 mapID = 1;
+	optional uint32 mapAuthorID = 2;
+	optional string mapName = 3;
+	optional string mapFilename = 4;
+	optional fixed64 mapUGCHandle = 5;
+	optional fixed64 mapUGCThumbHandle = 6;
+	optional uint32 mapVersion = 7;
+	optional fixed32 mapCreateDate = 8;
+	optional uint32 mapVoteUp = 9;
+	optional uint32 mapVoteDown = 10;
+	optional uint32 mapDownloads = 11;
+	optional uint32 userVoteStatus = 12;
+	optional bool userCompleted = 13;
+	optional fixed32 userDownloadTimestamp = 14;
+}
+

@@ -140,6 +140,7 @@ message CSODOTALobby {
 	optional uint32 tower_state = 24;
 	optional uint32 matchgroup = 25;
 	optional float readyup_remaining_time = 26;
+	optional bool leaver_detected = 27;
 }
 
 message CMsgConnectedPlayers {
@@ -209,6 +210,11 @@ message CMsgFindSourceTVGames {
 message CMsgAbandonCurrentGame {
 }
 
+message CMsgLeaverDetected {
+	optional fixed64 steam_id = 1;
+	optional uint32 leaver_status = 2;
+}
+
 message CMsgForceSOCacheResend {
 }
 
@@ -239,6 +245,7 @@ message CMsgPracticeLobbySetDetails {
 	optional string game_name = 2;
 	repeated .CLobbyTeamDetails team_details = 3;
 	optional uint32 server_region = 4;
+	optional uint32 game_mode = 5;
 }
 
 message CMsgPracticeLobbyList {

@@ -16,6 +16,22 @@ message CMsgSystemBroadcast {
 	optional string message = 1;
 }
 
+message CMsgClientHello {
+	optional uint32 version = 1;
+}
+
+message CMsgServerHello {
+	optional uint32 version = 1;
+}
+
+message CMsgClientWelcome {
+	optional uint32 version = 1;
+}
+
+message CMsgServerWelcome {
+	optional uint32 version = 1;
+}
+
 message CMsgInviteToParty {
 	optional fixed64 steam_id = 1;
 }
