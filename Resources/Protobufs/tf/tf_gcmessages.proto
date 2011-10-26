@@ -88,12 +88,6 @@ message CMsgSaxxyAwarded {
 	repeated string winner_names = 2;
 }
 
-message CMsgReplayUploadedToYouTube {
-	optional string youtube_url = 1;
-	optional string youtube_account_name = 2;
-	optional uint64 session_id = 3;
-}
-
 message CMsgReplaySubmitContestEntry {
 	optional string youtube_url = 1;
 	optional uint32 category = 2;
@@ -249,5 +243,35 @@ message CMsgGC_GameServer_ResetIdentityResponse {
 	optional bool game_server_identity_token_reset = 1;
 	optional uint32 game_server_account_id = 2;
 	optional string game_server_identity_token = 3;
+}
+
+message CMsgGC_Halloween_ReservedItem {
+	repeated float x = 1;
+	repeated float y = 2;
+	repeated float z = 3;
+	optional uint32 spawn_meta_info = 7;
+}
+
+message CMsgGC_Halloween_GrantItem {
+	optional uint32 recipient_account_id = 1;
+	optional uint32 level_id = 2;
+}
+
+message CMsgGC_Halloween_GrantItemResponse {
+	optional uint32 recipient_account_id = 1;
+}
+
+message CMsgGC_Halloween_ItemClaimed {
+}
+
+message CMsgGC_PickupItemEligibility_Query {
+	optional uint32 account_id = 1;
+	optional uint32 seconds_ago = 2;
+}
+
+message CMsgGC_PickupItemEligibility_QueryResponse {
+	optional uint32 account_id = 1;
+	optional bool was_eligible = 2;
+	optional uint32 level_id = 3;
 }
 

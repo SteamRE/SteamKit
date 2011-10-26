@@ -21,6 +21,22 @@ enum DOTA_GC_TEAM {
 	DOTA_GC_TEAM_NOTEAM = 5;
 }
 
+enum DOTA_CM_PICK {
+	DOTA_CM_RANDOM = 0;
+	DOTA_CM_GOOD_GUYS = 1;
+	DOTA_CM_BAD_GUYS = 2;
+}
+
+enum DOTALeaverStatus_t {
+	DOTA_LEAVER_NONE = 0;
+	DOTA_LEAVER_DISCONNECTED = 1;
+	DOTA_LEAVER_DISCONNECTED_TOO_LONG = 2;
+	DOTA_LEAVER_ABANDONED = 3;
+	DOTA_LEAVER_AFK = 4;
+	DOTA_LEAVER_NEVER_CONNECTED = 5;
+	DOTA_LEAVER_NEVER_CONNECTED_TOO_LONG = 6;
+}
+
 enum DOTALobbyReadyState {
 	DOTALobbyReadyState_UNDECLARED = 0;
 	DOTALobbyReadyState_ACCEPTED = 1;
@@ -44,6 +60,7 @@ message CSODOTAGameAccountClient {
 	optional uint32 initial_skill = 14;
 	optional uint32 leaver_count = 15;
 	optional bool left_last_game = 16;
+	optional uint32 rank_uncertainty = 17;
 }
 
 message CSODOTABetaParticipation {
@@ -59,14 +76,6 @@ message CSODOTAGameHeroStandings {
 	optional uint32 losses = 4;
 }
 
-message CSODOTAPartyMemberMatchmakingInfo {
-	optional uint32 rank = 1;
-	optional uint32 initial_skill = 2;
-	optional uint32 wins = 3;
-	optional float latitude = 4;
-	optional float longitude = 5;
-}
-
 message CSODOTAParty {
 	enum State {
 		UI = 0;
@@ -77,7 +86,6 @@ message CSODOTAParty {
 	optional uint64 party_id = 1 [(key_field) = true];
 	optional fixed64 leader_id = 2;
 	repeated fixed64 member_ids = 3;
-	repeated .CSODOTAPartyMemberMatchmakingInfo member_matchmaking_info = 13;
 	optional uint32 game_mode = 4;
 	repeated fixed64 pending_invites = 5;
 	optional .CSODOTAParty.State state = 6 [default = UI];
@@ -113,6 +121,7 @@ message CDOTALobbyMember {
 	optional float latitude = 8;
 	optional float longitude = 9;
 	optional .DOTALobbyReadyState ready_state = 11;
+	optional uint64 party_id = 12;
 }
 
 message CDOTALobbyGCPrivate {
@@ -168,6 +177,7 @@ message CSODOTALobby {
 	optional uint32 matchgroup = 25;
 	optional float readyup_remaining_time = 26;
 	optional bool leaver_detected = 27;
+	optional .DOTA_CM_PICK cm_pick = 28 [default = DOTA_CM_RANDOM];
 }
 
 message CMsgConnectedPlayers {
@@ -215,12 +225,13 @@ message CSourceTVGame {
 	repeated .CSourceTVGame.Player bad_players = 15;
 	repeated .CSourceTVGame.Player other_players = 16;
 	optional string game_name = 7;
-	optional string date = 8;
 	repeated .CLobbyTeamDetails team_details = 9;
 	optional uint32 num_spectators = 10;
 	optional uint32 tournament_id = 11;
 	optional uint32 tournament_game_id = 12;
 	optional uint32 tower_state = 13;
+	optional float tv_broadcast_time = 17;
+	optional float game_time = 18;
 }
 
 message CMsgSourceTVGamesResponse {
@@ -232,6 +243,16 @@ message CMsgFindSourceTVGames {
 	optional string search_key = 1;
 	optional uint32 start = 2;
 	optional uint32 num_games = 3;
+}
+
+message CMsgSpectateFriendGame {
+	optional fixed64 steam_id = 1;
+}
+
+message CMsgSpectateFriendGameResponse {
+	optional uint32 source_tv_public_addr = 1;
+	optional uint32 source_tv_private_addr = 2;
+	optional uint32 source_tv_port = 3;
 }
 
 message CMsgAbandonCurrentGame {
@@ -273,6 +294,7 @@ message CMsgPracticeLobbySetDetails {
 	repeated .CLobbyTeamDetails team_details = 3;
 	optional uint32 server_region = 4;
 	optional uint32 game_mode = 5;
+	optional .DOTA_CM_PICK cm_pick = 6 [default = DOTA_CM_RANDOM];
 }
 
 message CMsgPracticeLobbyList {
@@ -340,6 +362,7 @@ message CMsgGameMatchSignOut {
 			optional uint32 hero_healing = 18;
 			optional uint32 time_last_seen = 19;
 			optional uint32 support_ability_value = 20;
+			optional uint64 party_id = 21;
 		}
 
 		repeated .CMsgGameMatchSignOut.CTeam.CPlayer players = 1;

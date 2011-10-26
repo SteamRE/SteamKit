@@ -8,6 +8,7 @@ extend .google.protobuf.FieldOptions {
 message CMsgProtoBufHeader {
 	optional fixed64 client_steam_id = 1;
 	optional int32 client_session_id = 2;
+	optional uint32 source_app_id = 3;
 	optional fixed64 job_id_source = 10 [default = 18446744073709551615];
 	optional fixed64 job_id_target = 11 [default = 18446744073709551615];
 	optional string target_job_name = 12;
@@ -166,6 +167,23 @@ message CMsgAMAddFreeLicenseResponse {
 	optional int32 eresult = 1 [default = 2];
 	optional int32 purchase_result_detail = 2;
 	optional fixed64 transid = 3;
+}
+
+message CGCMsgGetIPLocation {
+	repeated fixed32 ips = 1;
+}
+
+message CIPLocationInfo {
+	optional uint32 ip = 1;
+	optional float latitude = 2;
+	optional float longitude = 3;
+	optional string country = 4;
+	optional string state = 5;
+	optional string city = 6;
+}
+
+message CGCMsgGetIPLocationResponse {
+	repeated .CIPLocationInfo infos = 1;
 }
 
 message CGCMsgSystemStatsSchema {
