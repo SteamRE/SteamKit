@@ -212,6 +212,14 @@ message CMsgClientAuthList {
 	optional uint32 last_request_seq = 2;
 	optional uint32 last_request_seq_from_server = 3;
 	repeated .CMsgAuthTicket tickets = 4;
+	repeated uint32 app_ids = 5;
+	optional uint32 message_sequence = 6;
+}
+
+message CMsgClientAuthListAck {
+	repeated uint32 ticket_crc = 1;
+	repeated uint32 app_ids = 2;
+	optional uint32 message_sequence = 3;
 }
 
 message CMsgClientFriendsList {
@@ -795,6 +803,7 @@ message CMsgClientGetClientDetailsResponse {
 	optional string machine_name = 3;
 	optional string ip_public = 4;
 	optional string ip_private = 5;
+	optional uint64 bytes_available = 7;
 	repeated .CMsgClientGetClientDetailsResponse.Game games_running = 6;
 }
 
@@ -821,6 +830,7 @@ message CMsgClientGetClientAppListResponse {
 		optional uint64 bytes_downloaded = 6;
 		optional uint64 bytes_needed = 7;
 		optional uint32 bytes_download_rate = 8;
+		optional bool download_paused = 11;
 		repeated .CMsgClientGetClientAppListResponse.App.DLC dlcs = 9;
 	}
 
@@ -1506,6 +1516,7 @@ message CMsgTrading_StartSession {
 message CMsgClientMDSInitDepotBuildRequest {
 	optional uint32 depot_id = 1;
 	optional bytes encrypted_aes_key = 2;
+	optional string beta_key = 3;
 }
 
 message CMsgClientMDSInitDepotBuildResponse {
@@ -1550,7 +1561,6 @@ message CMsgClientMDSTransmitManifestDataChunk {
 message CMsgClientMDSUploadManifestRequest {
 	optional uint32 depot_id = 1;
 	optional uint32 manifest_size_compressed = 2;
-	optional uint32 manifest_size_uncompressed = 3;
 	optional bool make_public = 4;
 	optional string beta_key = 5;
 	optional uint32 build_id = 6;
@@ -1574,7 +1584,6 @@ message CMsgClientMDSGetDepotManifest {
 
 message CMsgClientMDSGetDepotManifestResponse {
 	optional int32 eresult = 1 [default = 2];
-	optional uint32 manifest_size_uncompressed = 2;
 	optional uint32 manifest_size_compressed = 3;
 }
 
@@ -1792,6 +1801,15 @@ message CMsgAMGCClientRelay {
 	optional bytes payload = 3;
 }
 
+message CMsgClientRequestFreeLicense {
+	optional uint32 app_id = 1;
+}
+
+message CMsgClientRequestFreeLicenseResponse {
+	optional uint32 eresult = 1 [default = 2];
+	optional uint32 package_id = 2;
+}
+
 message CMsgDRMDownloadRequestWithCrashData {
 	optional uint32 download_flags = 1;
 	optional uint32 download_types_known = 2;
@@ -1823,5 +1841,28 @@ message CMsgDRMFinalResult {
 	optional uint32 download_file_dfs_ip = 6;
 	optional uint32 download_file_dfs_port = 7;
 	optional string download_file_url = 8;
+}
+
+message CMsgClientDPCheckSpecialSurvey {
+	optional uint32 survey_id = 1;
+}
+
+message CMsgClientDPCheckSpecialSurveyResponse {
+	optional uint32 eResult = 1 [default = 2];
+	optional uint32 state = 2;
+	optional string name = 3;
+	optional string custom_url = 4;
+	optional bool include_software = 5;
+	optional bytes token = 6;
+}
+
+message CMsgClientDPSendSpecialSurveyResponse {
+	optional uint32 survey_id = 1;
+	optional bytes data = 2;
+}
+
+message CMsgClientDPSendSpecialSurveyResponseReply {
+	optional uint32 eResult = 1 [default = 2];
+	optional bytes token = 2;
 }
 

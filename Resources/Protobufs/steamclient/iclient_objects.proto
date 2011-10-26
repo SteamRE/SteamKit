@@ -1,0 +1,14 @@
+message ClientAppInfo {
+	optional uint32 appid = 1;
+	optional bool favorite = 2;
+	optional bool installed = 3;
+	optional bool auto_update = 4;
+	optional string category = 5;
+	optional string app_type = 6;
+	optional bool downloading = 7;
+	optional bool download_paused = 8;
+	optional uint32 bytes_download_rate = 9;
+	optional uint64 bytes_downloaded = 10;
+	optional uint64 bytes_needed = 11;
+}
+
