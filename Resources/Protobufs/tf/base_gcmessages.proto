@@ -37,13 +37,22 @@ message CMsgKickFromParty {
 message CMsgLeaveParty {
 }
 
-message CMsgServerAddresses {
+message CMsgGameServerInfo {
+	enum ServerType {
+		UNSPECIFIED = 0;
+		GAME = 1;
+		PROXY = 2;
+		CONTROLLER = 3;
+	}
+
 	optional fixed32 server_public_ip_addr = 1;
 	optional fixed32 server_private_ip_addr = 2;
 	optional uint32 server_port = 3;
 	optional uint32 server_tv_port = 4;
 	optional string server_key = 5;
 	optional bool server_hibernation = 6;
+	optional .CMsgGameServerInfo.ServerType server_type = 7 [default = UNSPECIFIED];
+	optional uint32 server_region = 8;
 }
 
 message CMsgServerAvailable {
@@ -57,6 +66,7 @@ message CSOEconGameAccountClient {
 	optional bool in_coaches_list = 5;
 	optional fixed32 trade_ban_expiration = 6;
 	optional fixed32 duel_ban_expiration = 7;
+	optional uint32 preview_item_def = 8 [default = 0];
 }
 
 message CSOItemCriteriaCondition {
@@ -118,6 +128,11 @@ message CSOEconItemAttribute {
 	optional uint32 value = 2;
 }
 
+message CSOEconItemEquipped {
+	optional uint32 new_class = 1;
+	optional uint32 new_slot = 2;
+}
+
 message CSOEconItem {
 	optional uint64 id = 1;
 	optional uint32 account_id = 2;
@@ -135,6 +150,14 @@ message CSOEconItem {
 	optional bool in_use = 14 [default = false];
 	optional uint32 style = 15 [default = 0];
 	optional uint64 original_id = 16 [default = 0];
+	optional bool contains_equipped_state = 17;
+	repeated .CSOEconItemEquipped equipped_state = 18;
+}
+
+message CMsgAdjustItemEquippedState {
+	optional uint64 item_id = 1;
+	optional uint32 new_class = 2;
+	optional uint32 new_slot = 3;
 }
 
 message CMsgSortItems {
@@ -190,10 +213,66 @@ message CMsgReplicateConVars {
 	repeated .CMsgConVarValue convars = 1;
 }
 
+message CMsgUseItem {
+	optional uint64 item_id = 1;
+	optional fixed64 target_steam_id = 2;
+	repeated uint32 gift__potential_targets = 3;
+	optional uint32 duel__class_lock = 4;
+}
+
+message CMsgReplayUploadedToYouTube {
+	optional string youtube_url = 1;
+	optional string youtube_account_name = 2;
+	optional uint64 session_id = 3;
+}
+
 message CMsgItemAcknowledged {
 	optional uint32 account_id = 1;
 	optional uint32 inventory = 2;
 	optional uint32 def_index = 3;
 	optional uint32 quality = 4;
+}
+
+message CMsgSetPresetItemPosition {
+	optional uint32 class_id = 1;
+	optional uint32 preset_id = 2;
+	optional uint32 slot_id = 3;
+	optional uint64 item_id = 4;
+}
+
+message CSOEconItemPresetInstance {
+	optional uint32 class_id = 2 [(key_field) = true];
+	optional uint32 preset_id = 3 [(key_field) = true];
+	optional uint32 slot_id = 4 [(key_field) = true];
+	optional uint64 item_id = 5;
+}
+
+message CMsgSelectItemPresetForClass {
+	optional uint32 class_id = 1;
+	optional uint32 preset_id = 2;
+}
+
+message CMsgSelectItemPresetForClassReply {
+	optional bool success = 1;
+}
+
+message CSOSelectedItemPreset {
+	optional uint32 account_id = 1 [(key_field) = true];
+	optional uint32 class_id = 2 [(key_field) = true];
+	optional uint32 preset_id = 3;
+}
+
+message CMsgGCReportAbuse {
+	optional fixed64 target_steam_id = 1;
+	optional uint32 abuse_type = 2;
+	optional uint32 content_type = 3;
+	optional string description = 4;
+	optional uint64 gid = 5;
+}
+
+message CMsgGCReportAbuseResponse {
+	optional fixed64 target_steam_id = 1;
+	optional uint32 result = 2;
+	optional string error_message = 3;
 }
 

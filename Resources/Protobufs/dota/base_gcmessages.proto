@@ -70,6 +70,8 @@ message CMsgGameServerInfo {
 	optional .CMsgGameServerInfo.ServerType server_type = 7 [default = UNSPECIFIED];
 	optional uint32 server_region = 8;
 	optional float server_loadavg = 9;
+	optional float server_tv_broadcast_time = 10;
+	optional float server_game_time = 11;
 }
 
 message CMsgServerAvailable {
