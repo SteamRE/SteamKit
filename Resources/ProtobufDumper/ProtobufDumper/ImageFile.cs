@@ -635,6 +635,11 @@ namespace ProtobufDumper
 
             DumpExtensionDescriptor(set.extension, sb, String.Empty);
 
+            foreach (EnumDescriptorProto field in set.enum_type)
+            {
+                DumpEnumDescriptor(field, sb, 0);
+            }
+
             foreach (DescriptorProto proto in set.message_type)
             {
                 DumpDescriptor(proto, sb, 0);
@@ -697,28 +702,7 @@ namespace ProtobufDumper
 
             foreach (EnumDescriptorProto field in proto.enum_type)
             {
-                sb.AppendLine(levelspace + "\tenum " + field.name + " {");
-
-                foreach (var option in DumpOptions(field.options))
-                {
-                    sb.AppendLine(levelspace + "\t\toption " + option.Key + " = " + option.Value + ";");
-                }
-
-                foreach (EnumValueDescriptorProto enumValue in field.value)
-                {
-                    Dictionary<string, string> options = DumpOptions(enumValue.options);
-
-                    string parameters = String.Empty;
-                    if (options.Count > 0)
-                    {
-                        parameters = " [" + String.Join(", ", options.Select(kvp => String.Format("{0} = {1}", kvp.Key, kvp.Value))) + "]";
-                    }
-
-                    sb.AppendLine(levelspace + "\t\t" + enumValue.name + " = " + enumValue.number + parameters + ";");
-                }
-
-                sb.AppendLine(levelspace + "\t}");
-                sb.AppendLine();
+                DumpEnumDescriptor(field, sb, level + 1);
             }
 
             foreach (FieldDescriptorProto field in proto.field)
@@ -732,6 +716,34 @@ namespace ProtobufDumper
             foreach (DescriptorProto.ExtensionRange range in proto.extension_range)
             {
                 sb.AppendLine(levelspace + "\textensions " + range.start + " to " + range.end + ";");
+            }
+
+            sb.AppendLine(levelspace + "}");
+            sb.AppendLine();
+        }
+
+        private void DumpEnumDescriptor(EnumDescriptorProto field, StringBuilder sb, int level)
+        {
+            string levelspace = new String('\t', level);
+
+            sb.AppendLine(levelspace + "enum " + field.name + " {");
+
+            foreach (var option in DumpOptions(field.options))
+            {
+                sb.AppendLine(levelspace + "\toption " + option.Key + " = " + option.Value + ";");
+            }
+
+            foreach (EnumValueDescriptorProto enumValue in field.value)
+            {
+                Dictionary<string, string> options = DumpOptions(enumValue.options);
+
+                string parameters = String.Empty;
+                if (options.Count > 0)
+                {
+                    parameters = " [" + String.Join(", ", options.Select(kvp => String.Format("{0} = {1}", kvp.Key, kvp.Value))) + "]";
+                }
+
+                sb.AppendLine(levelspace + "\t" + enumValue.name + " = " + enumValue.number + parameters + ";");
             }
 
             sb.AppendLine(levelspace + "}");
