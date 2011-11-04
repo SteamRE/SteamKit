@@ -61,6 +61,7 @@ message CSODOTAGameAccountClient {
 	optional uint32 leaver_count = 15;
 	optional bool left_last_game = 16;
 	optional uint32 rank_uncertainty = 17;
+	optional uint32 prevent_match_until_date = 18;
 }
 
 message CSODOTABetaParticipation {
@@ -95,6 +96,8 @@ message CSODOTAParty {
 	optional uint32 matchgroups = 11;
 	optional uint32 matching_players = 14;
 	optional float search_fraction = 15;
+	optional uint32 prevent_match_until_date = 18;
+	optional uint32 prevent_match_account_id = 19;
 }
 
 message CSODOTAPartyInvite {
@@ -134,6 +137,11 @@ message CLobbyTeamDetails {
 	optional string team_logo = 2;
 }
 
+message CLobbyPendingPlayerReport {
+	optional uint32 account_id = 1;
+	optional fixed32 date = 2;
+}
+
 message CSODOTALobby {
 	enum State {
 		UI = 0;
@@ -142,6 +150,7 @@ message CSODOTALobby {
 		RUN = 2;
 		POSTGAME = 3;
 		NOTREADY = 5;
+		SERVERASSIGN = 6;
 	}
 
 	enum LobbyType {
@@ -178,6 +187,8 @@ message CSODOTALobby {
 	optional float readyup_remaining_time = 26;
 	optional bool leaver_detected = 27;
 	optional .DOTA_CM_PICK cm_pick = 28 [default = DOTA_CM_RANDOM];
+	repeated .CLobbyPendingPlayerReport pending_player_reports = 29 [(hidden) = true];
+	optional uint32 match_id = 30 [(hidden) = true];
 }
 
 message CMsgConnectedPlayers {
@@ -275,6 +286,11 @@ message CMsgPracticeLobbyCreate {
 }
 
 message CMsgPracticeLobbySetTeamSlot {
+	optional .DOTA_GC_TEAM team = 1;
+	optional uint32 slot = 2;
+}
+
+message CMsgPracticeLobbyKick {
 	optional .DOTA_GC_TEAM team = 1;
 	optional uint32 slot = 2;
 }
@@ -377,11 +393,24 @@ message CMsgGameMatchSignOut {
 	optional string computer_name = 7;
 	repeated uint32 tower_status = 8;
 	repeated uint32 barracks_status = 9;
+	optional uint32 cluster = 10;
+	optional string server_addr = 11;
 }
 
 message CMsgGameMatchSignoutResponse {
 	optional uint32 match_id = 1;
 	optional fixed32 replay_salt = 2;
+}
+
+message CMsgGameChatLog {
+	message CChatLine {
+		optional uint32 account_id = 1;
+		optional uint32 team_only = 2;
+		optional string text = 3;
+	}
+
+	optional uint32 match_id = 1;
+	repeated .CMsgGameChatLog.CChatLine lines = 2;
 }
 
 message CMsgTutorialLobbyCreate {
@@ -483,6 +512,8 @@ message CMsgDOTAMatch {
 	optional uint32 match_id = 6;
 	repeated uint32 tower_status = 8;
 	repeated uint32 barracks_status = 9;
+	optional uint32 cluster = 10;
+	optional string server_addr = 11;
 }
 
 message CMsgDOTAPlayerMatchHistory {
@@ -647,6 +678,44 @@ message CMsgDOTATodayMessages {
 }
 
 message CMsgDOTARequestTodayMessages {
+}
+
+message CMsgDOTAPlayerReports {
+	message PlayerReport {
+		optional uint32 report_id = 1;
+		optional uint32 reporter_account_id = 2;
+		optional uint32 target_account_id = 3;
+		optional uint32 report_flags = 4;
+		optional uint32 match_id = 5;
+		optional fixed32 date = 6;
+		optional string comment = 7;
+	}
+
+	repeated .CMsgDOTAPlayerReports.PlayerReport reports = 1;
+}
+
+message CMsgDOTAReportsRemainingRequest {
+}
+
+message CMsgDOTAReportsRemainingResponse {
+	optional uint32 num_positive_reports_remaining = 1;
+	optional uint32 num_negative_reports_remaining = 2;
+	optional uint32 num_positive_reports_total = 3;
+	optional uint32 num_negative_reports_total = 4;
+}
+
+message CMsgDOTASubmitPlayerReport {
+	optional uint32 target_account_id = 1;
+	optional uint32 report_flags = 2;
+	optional uint32 match_id = 3;
+	optional uint64 lobby_id = 4;
+	optional string comment = 5;
+}
+
+message CMsgDOTASubmitPlayerReportResponse {
+	optional uint32 target_account_id = 1;
+	optional uint32 report_flags = 2;
+	optional uint32 result = 3;
 }
 
 message CMsgDOTARequestPlayerResources {

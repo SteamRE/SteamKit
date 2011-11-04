@@ -264,10 +264,12 @@ message CSOSelectedItemPreset {
 
 message CMsgGCReportAbuse {
 	optional fixed64 target_steam_id = 1;
-	optional uint32 abuse_type = 2;
-	optional uint32 content_type = 3;
 	optional string description = 4;
 	optional uint64 gid = 5;
+	optional uint32 abuse_type = 2;
+	optional uint32 content_type = 3;
+	optional fixed32 target_game_server_ip = 6;
+	optional uint32 target_game_server_port = 7;
 }
 
 message CMsgGCReportAbuseResponse {
