@@ -195,6 +195,7 @@ message CMsgGC_GameServer_AuthResult {
 	optional int32 game_server_standing = 2;
 	optional int32 game_server_standing_trend = 3;
 	optional bool is_valve_server = 4;
+	optional string message = 5;
 }
 
 message CMsgGC_GameServer_AuthChallengeResponse {
@@ -255,6 +256,7 @@ message CMsgGC_Halloween_ReservedItem {
 message CMsgGC_Halloween_GrantItem {
 	optional uint32 recipient_account_id = 1;
 	optional uint32 level_id = 2;
+	optional bool flagged = 3;
 }
 
 message CMsgGC_Halloween_GrantItemResponse {
