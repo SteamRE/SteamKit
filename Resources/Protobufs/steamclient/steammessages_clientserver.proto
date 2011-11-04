@@ -1259,6 +1259,7 @@ message CMsgClientUCMGetPublishedFileDetailsResponse {
 	optional int32 visibility = 12;
 	optional bool banned = 13;
 	repeated string tag = 14;
+	optional string filename = 15;
 }
 
 message CMsgClientUCMDeletePublishedFile {
