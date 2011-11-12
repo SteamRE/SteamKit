@@ -1,5 +1,23 @@
 import "steammessages.proto";
 
+message CGCStorePurchaseInit_LineItem {
+	optional uint32 item_def_id = 1;
+	optional uint32 quantity = 2;
+	optional uint32 cost_in_local_currency = 3;
+}
+
+message CMsgGCStorePurchaseInit {
+	optional string country = 1;
+	optional int32 language = 2;
+	optional int32 currency = 3;
+	repeated .CGCStorePurchaseInit_LineItem line_items = 4;
+}
+
+message CMsgGCStorePurchaseInitResponse {
+	optional int32 result = 1;
+	optional uint64 txn_id = 2;
+}
+
 message CSOPartyInvite {
 	optional uint64 group_id = 1 [(key_field) = true];
 	optional fixed64 sender_id = 2;

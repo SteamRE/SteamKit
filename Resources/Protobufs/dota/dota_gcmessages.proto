@@ -48,7 +48,7 @@ message CSODOTAGameAccountClient {
 	optional string persona_name = 2;
 	optional uint32 wins = 3;
 	optional uint32 losses = 4;
-	optional uint32 rank = 5;
+	optional uint32 rank = 5 [(hidden) = true];
 	optional uint32 karma = 6;
 	optional uint32 avatar = 7;
 	optional uint32 achievement_showcase_0 = 8;
@@ -60,8 +60,11 @@ message CSODOTAGameAccountClient {
 	optional uint32 initial_skill = 14;
 	optional uint32 leaver_count = 15;
 	optional bool left_last_game = 16;
-	optional uint32 rank_uncertainty = 17;
+	optional uint32 rank_uncertainty = 17 [(hidden) = true];
 	optional uint32 prevent_match_until_date = 18;
+	optional int32 win_loss_streak = 19 [(hidden) = true];
+	optional uint32 prevent_text_chat_until_date = 20;
+	optional uint32 prevent_voice_until_date = 21;
 }
 
 message CSODOTABetaParticipation {
@@ -118,7 +121,6 @@ message CDOTALobbyMember {
 	optional uint32 hero_id = 2;
 	optional .DOTA_GC_TEAM team = 3;
 	optional bool connected_to_game_server = 4;
-	optional uint32 rank = 5;
 	optional string name = 6;
 	optional uint32 slot = 7;
 	optional float latitude = 8;
@@ -189,6 +191,8 @@ message CSODOTALobby {
 	optional .DOTA_CM_PICK cm_pick = 28 [default = DOTA_CM_RANDOM];
 	repeated .CLobbyPendingPlayerReport pending_player_reports = 29 [(hidden) = true];
 	optional uint32 match_id = 30 [(hidden) = true];
+	optional bool allow_spectating = 31;
+	optional uint32 average_rank = 32 [(hidden) = true];
 }
 
 message CMsgConnectedPlayers {
@@ -302,6 +306,7 @@ message CMsgPracticeLobbyLaunch {
 	optional bool allow_cheats = 1;
 	optional bool fill_with_bots = 2;
 	optional bool intro_mode = 3;
+	optional bool allow_spectating = 4;
 }
 
 message CMsgPracticeLobbySetDetails {
@@ -407,6 +412,7 @@ message CMsgGameChatLog {
 		optional uint32 account_id = 1;
 		optional uint32 team_only = 2;
 		optional string text = 3;
+		optional uint32 game_time = 4;
 	}
 
 	optional uint32 match_id = 1;
@@ -718,6 +724,18 @@ message CMsgDOTASubmitPlayerReportResponse {
 	optional uint32 result = 3;
 }
 
+message CMsgDOTAReportCountsRequest {
+	optional uint32 target_account_id = 1;
+}
+
+message CMsgDOTAReportCountsResponse {
+	optional uint32 target_account_id = 1;
+	optional uint32 leadership_count = 2;
+	optional uint32 teaching_count = 3;
+	optional uint32 friendly_count = 4;
+	optional uint32 forgiving_count = 5;
+}
+
 message CMsgDOTARequestPlayerResources {
 	optional fixed64 steam_id = 1;
 	optional uint32 player_id = 2;
@@ -727,6 +745,8 @@ message CMsgDOTARequestPlayerResourcesResponse {
 	optional fixed64 steam_id = 1;
 	optional uint32 rank = 2;
 	optional uint32 player_id = 3;
+	optional bool prevent_text_chat = 4;
+	optional bool prevent_voice_chat = 5;
 }
 
 message CMsgDOTAKickedFromMatchmakingQueue {
