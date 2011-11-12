@@ -1031,6 +1031,7 @@ message CMsgClientUFSGetUGCDetailsResponse {
 	optional uint32 app_id = 3;
 	optional string filename = 4;
 	optional fixed64 steamid_creator = 5;
+	optional uint32 file_size = 6;
 }
 
 message CMsgClientUFSGetSingleFileInfo {
@@ -1865,5 +1866,15 @@ message CMsgClientDPSendSpecialSurveyResponse {
 message CMsgClientDPSendSpecialSurveyResponseReply {
 	optional uint32 eResult = 1 [default = 2];
 	optional bytes token = 2;
+}
+
+message CMsgClientRequestForgottenPasswordEmail {
+	optional string account_name = 1;
+	optional string password_tried = 2;
+}
+
+message CMsgClientRequestForgottenPasswordEmailResponse {
+	optional uint32 eResult = 1;
+	optional bool use_secret_question = 2;
 }
 
