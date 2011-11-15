@@ -23,6 +23,16 @@ namespace SteamKit2
         {
             public SteamID FriendID { get; set; }
             public EFriendRelationship Relationship { get; set; }
+
+            public override bool Equals(object obj)
+            {
+                return (obj as Friend).FriendID == this.FriendID;
+            }
+
+            public override int GetHashCode()
+            {
+                return FriendID.GetHashCode();
+            }
         }
 
         List<Friend> friendList;
@@ -338,27 +348,58 @@ namespace SteamKit2
 
             reqInfo.Msg.Proto.persona_state_requested = ( uint )( EClientPersonaStateFlag.PlayerName | EClientPersonaStateFlag.Presence );
 
-
-            foreach ( var friendObj in list.Msg.Proto.friends )
+            lock (friendList)
             {
-                SteamID friendId = friendObj.ulfriendid;
+                List<Friend> friendsToRemove = new List<Friend>();
 
-                if ( !friendId.BIndividualAccount() )
-                    continue; // don't want to request clan information
-
-                lock ( friendList )
+                foreach (var friendObj in list.Msg.Proto.friends)
                 {
-                    friendList.Add( new Friend()
+                    SteamID friendId = friendObj.ulfriendid;
+
+                    if (!friendId.BIndividualAccount())
+                        continue; // don't want to request clan information
+
+                    Friend existingFriend = null;
+
+                    foreach (Friend friend in friendList)
                     {
-                        FriendID = friendId,
-                        Relationship = ( EFriendRelationship )friendObj.efriendrelationship,
-                    } );
+                        if (friend.FriendID == friendId)
+                        {
+                            existingFriend = friend;
+                            break;
+                        }
+                    }
+
+                    if (existingFriend != null)
+                    {
+                        existingFriend.Relationship = (EFriendRelationship)friendObj.efriendrelationship;
+
+                        if (existingFriend.Relationship == EFriendRelationship.None)
+                            friendsToRemove.Add(existingFriend);
+                    }
+                    else
+                    {
+                        friendList.Add(new Friend()
+                        {
+                            FriendID = friendId,
+                            Relationship = (EFriendRelationship)friendObj.efriendrelationship,
+                        });
+                    }
+
+                    if (!list.Msg.Proto.bincremental)
+                    {
+                        reqInfo.Msg.Proto.friends.Add(friendId);
+                    }
                 }
 
-                reqInfo.Msg.Proto.friends.Add( friendId );
+                foreach (Friend f in friendsToRemove)
+                    friendList.Remove(f);
             }
 
-            this.Client.Send( reqInfo );
+            if (reqInfo.Msg.Proto.friends.Count > 0)
+            {
+                this.Client.Send(reqInfo);
+            }
 
 #if STATIC_CALLBACKS
             var callback = new FriendsListCallback( Client, list.Msg.Proto );

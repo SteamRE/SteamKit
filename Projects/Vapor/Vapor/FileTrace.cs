@@ -11,6 +11,7 @@ namespace Vapor
     class FileTrace : IDebugListener
     {
         const string LogFile = "debug.log";
+        private object logLock = new object();
 
         public FileTrace()
         {
@@ -18,8 +19,11 @@ namespace Vapor
 
             try
             {
-                File.AppendAllText( LogFile, Environment.NewLine + Environment.NewLine );
-                File.AppendAllText( LogFile, string.Format( "New log started on {0} at {1}" + Environment.NewLine, DateTime.Now.ToLongDateString(), DateTime.Now.ToLongTimeString() ) );
+                lock (logLock)
+                {
+                    File.AppendAllText(LogFile, Environment.NewLine + Environment.NewLine);
+                    File.AppendAllText(LogFile, string.Format("New log started on {0} at {1}" + Environment.NewLine, DateTime.Now.ToLongDateString(), DateTime.Now.ToLongTimeString()));
+                }
             }
             catch { }
         }
@@ -28,7 +32,10 @@ namespace Vapor
         {
             try
             {
-                File.AppendAllText( LogFile, string.Format( "{0}" + Environment.NewLine, msg ) );
+                lock (logLock)
+                {
+                    File.AppendAllText(LogFile, string.Format("{0}" + Environment.NewLine, msg));
+                }
             }
             catch { }
         }

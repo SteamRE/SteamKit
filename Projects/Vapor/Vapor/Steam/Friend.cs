@@ -9,13 +9,22 @@ namespace Vapor
     {
         public ulong SteamID { get; set; }
 
-
         public Friend()
         {
         }
         public Friend( ulong steamid )
         {
             this.SteamID = steamid;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return (obj as Friend).SteamID == this.SteamID;
+        }
+
+        public override int GetHashCode()
+        {
+            return SteamID.GetHashCode();
         }
 
         public string GetGameName()

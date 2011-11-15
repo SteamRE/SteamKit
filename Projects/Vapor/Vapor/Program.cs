@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using System.Threading;
 using SteamKit2;
 
+
 namespace Vapor
 {
 
@@ -35,7 +36,7 @@ namespace Vapor
 
         static void Start( string[] args )
         {
-            LoginDialog ld = new LoginDialog( FindArg( args, "-tcp" ) );
+            LoginDialog ld = new LoginDialog( FindArg( args, "-udp" ) );
 
             if ( ld.ShowDialog() != DialogResult.OK )
                 return;
