@@ -15,7 +15,6 @@ namespace Vapor
         public bool Relog { get; private set; }
 
         bool shouldClose;
-        Timer sortTimer;
 
         bool suppressStateMsg;
         bool expectDisconnect;
@@ -50,21 +49,13 @@ namespace Vapor
 
                 if ( perState.FriendID == selfControl.Friend.SteamID )
                 {
-                    selfControl.SetSteamID( selfControl.Friend );
+                    selfControl.UpdateFriend( selfControl.Friend );
 
                     suppressStateMsg = true;
                     stateComboBox.SelectedIndex = GetIndexFromState( perState.State );
                     suppressStateMsg = false;
 
                     return;
-                }
-
-                if ( sortTimer == null )
-                {
-                    sortTimer = new Timer();
-                    sortTimer.Tick += new EventHandler( sortTimer_Tick );
-                    sortTimer.Interval = 10000;
-                    sortTimer.Start();
                 }
             }
 
@@ -82,8 +73,8 @@ namespace Vapor
 
             if ( msg.IsType<SteamFriends.FriendsListCallback>() )
             {
-                selfControl.SetSteamID( new Friend( Steam3.SteamUser.GetSteamID() ) );
-                this.ReloadFriends();
+                selfControl.UpdateFriend( new Friend( Steam3.SteamUser.GetSteamID() ) );
+                this.UpdateFriends();
             }
 
             if ( msg.IsType<SteamUser.LogOnCallback>() )
@@ -166,78 +157,101 @@ namespace Vapor
                 } );
         }
 
-        void sortTimer_Tick( object sender, EventArgs e )
+        private static int compareFriends(Friend a, Friend b)
         {
-            sortTimer.Stop();
-            sortTimer.Dispose();
-
-            this.Invoke( new MethodInvoker( () =>
-                {
-                    this.ReloadFriends();
-                } ) );
-        }
-
-        public void ReloadFriends()
-        {
-            List<Friend> friendsList = GetFriends();
-
-            friendsList.Sort( ( a, b ) =>
-            {
-                if ( a == b )
-                    return 0;
-
-                // always show requesters on top
-                if ( a.IsRequestingFriendship() )
-                    return -1;
-
-                if ( b.IsRequestingFriendship() )
-                    return 1;
-
-
-                // show people we've added at the bottom
-                if ( a.IsAcceptingFriendship() )
-                    return 1;
-
-                if ( b.IsAcceptingFriendship() )
-                    return -1;
-
-
-                if ( a.IsInGame() && b.IsInGame() )
-                    return StringComparer.OrdinalIgnoreCase.Compare( a.GetName(), b.GetName() );
-
-                if ( !a.IsOnline() && !b.IsOnline() )
-                    return StringComparer.OrdinalIgnoreCase.Compare( a.GetName(), b.GetName() );
-
-                if ( a.IsOnline() && !a.IsInGame() && b.IsOnline() && !b.IsInGame() )
-                    return StringComparer.OrdinalIgnoreCase.Compare( a.GetName(), b.GetName() );
-
-                if ( a.IsInGame() && !b.IsInGame() )
-                    return -1;
-
-                if ( a.IsOnline() && !b.IsOnline() )
-                    return -1;
-
-                if ( !a.IsInGame() && b.IsInGame() )
-                    return 1;
-
-                if ( !a.IsOnline() && b.IsOnline() )
-                    return 1;
-
+            if (a == b)
                 return 0;
 
-            } );
+            // always show requesters on top
+            if (a.IsRequestingFriendship())
+                return -1;
+
+            if (b.IsRequestingFriendship())
+                return 1;
+
+
+            // show people we've added at the bottom
+            if (a.IsAcceptingFriendship())
+                return 1;
+
+            if (b.IsAcceptingFriendship())
+                return -1;
+
+
+            if (a.IsInGame() && b.IsInGame())
+                return StringComparer.OrdinalIgnoreCase.Compare(a.GetName(), b.GetName());
+
+            if (!a.IsOnline() && !b.IsOnline())
+                return StringComparer.OrdinalIgnoreCase.Compare(a.GetName(), b.GetName());
+
+            if (a.IsOnline() && !a.IsInGame() && b.IsOnline() && !b.IsInGame())
+                return StringComparer.OrdinalIgnoreCase.Compare(a.GetName(), b.GetName());
+
+            if (a.IsInGame() && !b.IsInGame())
+                return -1;
+
+            if (a.IsOnline() && !b.IsOnline())
+                return -1;
+
+            if (!a.IsInGame() && b.IsInGame())
+                return 1;
+
+            if (!a.IsOnline() && b.IsOnline())
+                return 1;
+
+            return 0;
+        }
+
+        // sort and reflow controls
+        public void UpdateFriends()
+        {
+            List<Friend> friendsList = GetFriends();
+            friendsList.Sort(compareFriends);
 
             int scroll = friendsFlow.VerticalScroll.Value;
 
             friendsFlow.SuspendLayout();
-            friendsFlow.Controls.Clear();
+
+            int clientIndex = 0;
 
             foreach ( Friend friend in friendsList )
             {
-                FriendControl fc = new FriendControl( friend );
+                FriendControl friendControl = null;
+                
+                foreach( FriendControl fc in friendsFlow.Controls )
+                {
+                    if( fc.Friend.Equals(friend) )
+                    {
+                        friendControl = fc;
+                        break;
+                    }
+                }
 
-                friendsFlow.Controls.Add( fc );
+                if ( friendControl == null )
+                {
+                    friendControl = new FriendControl( friend );
+                    friendsFlow.Controls.Add( friendControl );
+                }
+                else
+                {
+                    friendControl.UpdateFriend( friend );
+                }
+
+                friendsFlow.Controls.SetChildIndex( friendControl, clientIndex );
+                clientIndex++;
             }
+
+            List<FriendControl> controlsToRemove = new List<FriendControl>();
+            foreach (FriendControl fc in friendsFlow.Controls)
+            {
+                if (!friendsList.Contains(fc.Friend))
+                {
+                    controlsToRemove.Add(fc);
+                }
+            }
+
+            foreach (FriendControl fc in controlsToRemove)
+                friendsFlow.Controls.Remove(fc);
 
             ResizeFriends();
 
@@ -285,7 +299,7 @@ namespace Vapor
 
         private void refreshListToolStripMenuItem_Click( object sender, EventArgs e )
         {
-            this.ReloadFriends();
+            this.UpdateFriends();
         }
         private void btnAddFriend_Click( object sender, EventArgs e )
         {

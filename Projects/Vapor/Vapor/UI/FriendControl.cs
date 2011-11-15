@@ -17,6 +17,7 @@ namespace Vapor
     {
 
         public Friend Friend { get; private set; }
+        public byte[] AvatarHash { get; set; } // checking if update is necessary
         public bool IsHighlighted { get; set; }
         public bool CanOpenProfile { get; set; }
 
@@ -44,14 +45,8 @@ namespace Vapor
                 ctrl.MouseEnter += FriendControl_MouseEnter;
                 ctrl.MouseLeave += FriendControl_MouseLeave;
             }
-
-
-            if ( Friend == null )
-                return;
-
-            avatarBox.Image = ComposeAvatar( this.Friend, null );
-
         }
+
         ~FriendControl()
         {
             Steam3.RemoveHandler( this );
@@ -60,7 +55,7 @@ namespace Vapor
         public FriendControl( Friend steamid )
             : this()
         {
-            SetSteamID( steamid );
+            UpdateFriend( steamid );
         }
 
         public void DisableContextMenu()
@@ -88,12 +83,7 @@ namespace Vapor
                 if ( perState.FriendID != this.Friend.SteamID )
                     return;
 
-                this.SetSteamID( this.Friend );
-
-                if ( perState.AvatarHash != null && !Util.IsZeros( perState.AvatarHash ) )
-                {
-                    CDNCache.DownloadAvatar( perState.FriendID, perState.AvatarHash, AvatarDownloaded );
-                }
+                this.UpdateFriend( this.Friend );
             }
         }
 
@@ -101,7 +91,18 @@ namespace Vapor
         {
             try
             {
-                avatarBox.Image = ComposeAvatar( this.Friend, ( details.Success ? details.Filename : null ) );
+                if (avatarBox.InvokeRequired)
+                {
+                    avatarBox.Invoke(new MethodInvoker(() =>
+                        {
+                            AvatarDownloaded(details);
+                        }
+                    ));
+                }
+                else
+                {
+                    avatarBox.Image = ComposeAvatar(this.Friend, (details.Success ? details.Filename : null));
+                }
             }
             catch ( Exception ex )
             {
@@ -109,7 +110,7 @@ namespace Vapor
             }
         }
 
-        public void SetSteamID( Friend steamid )
+        public void UpdateFriend( Friend steamid )
         {
             Friend = steamid;
 
@@ -122,18 +123,31 @@ namespace Vapor
                 btnAccept.Visible = true;
                 btnDeny.Visible = true;
             }
+            else
+            {
+                btnAccept.Visible = false;
+                btnDeny.Visible = false;
+            }
 
             nameLbl.ForeColor = statusLbl.ForeColor = gameLbl.ForeColor = Util.GetStatusColor( steamid );
 
             byte[] avatarHash = Steam3.SteamFriends.GetFriendAvatar( steamid.SteamID );
+            bool validHash = avatarHash != null && !Util.IsZeros( avatarHash );
 
-            if ( avatarHash == null )
+            if ((AvatarHash == null && !validHash && avatarBox.Image != null) || (AvatarHash != null && AvatarHash.SequenceEqual(avatarHash)))
             {
-                avatarBox.Image = ComposeAvatar( this.Friend, null );
-                return;
+                // avatar is already up to date, no operations necessary
             }
-
-            CDNCache.DownloadAvatar( steamid.SteamID, avatarHash, AvatarDownloaded );
+            else if ( validHash )
+            {
+                AvatarHash = avatarHash;
+                CDNCache.DownloadAvatar(steamid.SteamID, avatarHash, AvatarDownloaded);
+            }
+            else
+            {
+                AvatarHash = null;
+                avatarBox.Image = ComposeAvatar( this.Friend, null );
+            }
         }
 
 
@@ -253,7 +267,7 @@ namespace Vapor
         private void refreshToolStripMenuItem_Click( object sender, EventArgs e )
         {
             MainForm mf = this.ParentForm as MainForm;
-            mf.ReloadFriends();
+            //mf.ReloadFriends();
         }
 
         private void avatarBox_MouseDoubleClick( object sender, MouseEventArgs e )
@@ -273,7 +287,6 @@ namespace Vapor
         {
             viewProfileToolStripMenuItem.Text = string.Format( "View {0}'s Profile", this.Friend.GetName() );
         }
-
         
     }
 }
