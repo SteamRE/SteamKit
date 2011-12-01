@@ -65,6 +65,8 @@ message CSODOTAGameAccountClient {
 	optional int32 win_loss_streak = 19 [(hidden) = true];
 	optional uint32 prevent_text_chat_until_date = 20;
 	optional uint32 prevent_voice_until_date = 21;
+	optional uint32 last_abandoned_game_date = 22;
+	optional uint32 leaver_penalty_count = 23;
 }
 
 message CSODOTABetaParticipation {
@@ -193,6 +195,8 @@ message CSODOTALobby {
 	optional uint32 match_id = 30 [(hidden) = true];
 	optional bool allow_spectating = 31;
 	optional uint32 average_rank = 32 [(hidden) = true];
+	optional fixed64 load_game_lobby_id = 33;
+	optional uint32 load_game_save_number = 34;
 }
 
 message CMsgConnectedPlayers {
@@ -316,6 +320,8 @@ message CMsgPracticeLobbySetDetails {
 	optional uint32 server_region = 4;
 	optional uint32 game_mode = 5;
 	optional .DOTA_CM_PICK cm_pick = 6 [default = DOTA_CM_RANDOM];
+	optional fixed64 load_game_lobby_id = 7;
+	optional uint32 load_game_save_number = 8;
 }
 
 message CMsgPracticeLobbyList {
@@ -750,5 +756,44 @@ message CMsgDOTARequestPlayerResourcesResponse {
 }
 
 message CMsgDOTAKickedFromMatchmakingQueue {
+}
+
+message CMsgDOTARequestSaveGames {
+	optional uint32 server_region = 1;
+}
+
+message CMsgDOTARequestSaveGamesServer {
+	optional fixed64 steam_id = 1;
+}
+
+message CMsgDOTARequestSaveGamesResponse {
+	message SaveGame {
+		message Player {
+			optional .DOTA_GC_TEAM team = 1;
+			optional string name = 2;
+			optional string hero = 3;
+		}
+
+		message SaveInstance {
+			message PlayerPositions {
+				optional float x = 1;
+				optional float y = 2;
+			}
+
+			optional uint32 save_number = 1;
+			optional uint32 game_time = 2;
+			optional uint32 team1_score = 3;
+			optional uint32 team2_score = 4;
+			repeated .CMsgDOTARequestSaveGamesResponse.SaveGame.SaveInstance.PlayerPositions player_positions = 5;
+		}
+
+		optional fixed64 lobby_id = 1;
+		optional uint32 file_time = 2;
+		repeated .CMsgDOTARequestSaveGamesResponse.SaveGame.Player players = 3;
+		repeated .CMsgDOTARequestSaveGamesResponse.SaveGame.SaveInstance save_instances = 4;
+	}
+
+	optional fixed64 steam_id = 1;
+	repeated .CMsgDOTARequestSaveGamesResponse.SaveGame save_games = 2;
 }
 
