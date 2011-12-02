@@ -24,11 +24,11 @@ namespace SteamKit2
         {
             new IPEndPoint( IPAddress.Parse( "72.165.61.189" ), 27030 ), // gds1.steampowered.com
             new IPEndPoint( IPAddress.Parse( "72.165.61.190" ), 27030 ), // gds2.steampowered.com
-
+            /*
             new IPEndPoint( IPAddress.Parse( "69.28.151.178" ), 27038 ),
             new IPEndPoint( IPAddress.Parse( "69.28.153.82" ), 27038 ),
             new IPEndPoint( IPAddress.Parse( "87.248.196.194" ), 27038 ),
-            new IPEndPoint( IPAddress.Parse( "68.142.72.250" ), 27038 ),
+            new IPEndPoint( IPAddress.Parse( "68.142.72.250" ), 27038 ),*/
         };
 
 
