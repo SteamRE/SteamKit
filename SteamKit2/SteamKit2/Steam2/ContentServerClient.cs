@@ -55,7 +55,7 @@ namespace SteamKit2
             /// Gets or sets the Steam2 ServerTGT.
             /// </summary>
             /// <value>The ServerTGT.</value>
-            public byte[] ServerTGT { get; set; }
+            public Steam2Ticket Steam2Ticket { get; set; }
 
             // steam3 details
             /// <summary>
@@ -223,14 +223,16 @@ namespace SteamKit2
                 }
                 else
                 {
+                    byte[] serverTgt = credentials.Steam2Ticket.Entries[ 14 ].Data; // god help this never change
+
                     bRet = this.SendCommand(
                         10, // open storage with login
                         ConnectionID,
                         MessageID,
                         depotId,
                         depotVersion,
-                        ( ushort )credentials.ServerTGT.Length,
-                        credentials.ServerTGT,
+                        ( ushort )serverTgt.Length,
+                        serverTgt,
                         NetHelpers.EndianSwap( credentials.SessionToken ),
                         ( byte )credentials.AppTicket.Length,
                         credentials.AppTicket
