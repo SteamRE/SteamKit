@@ -64,6 +64,7 @@
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Management" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -83,6 +84,7 @@
     <Compile Include="Blob\Parsers\BlobTypedReader.cs" />
     <Compile Include="Blob\Parsers\BlobXmlReader.cs" />
     <Compile Include="Blob\PeekableStream.cs" />
+    <Compile Include="Networking\Steam3\CDNClient.cs" />
     <Compile Include="Steam3\Handlers\SteamGameServer\Callbacks.cs" />
     <Compile Include="Steam3\Handlers\SteamGameServer\SteamGameServer.cs" />
     <Compile Include="Types\Steam2Ticket.cs" />

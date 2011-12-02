@@ -30,6 +30,16 @@ namespace SteamKit2
             this.Client.Send( request );
         }
 
+        public void GetAppInfo( uint appid )
+        {
+            var request = new ClientMsgProtobuf<MsgClientAppInfoRequest>();
+
+            // this info should be cached.
+            request.Msg.Proto.apps.Add(new CMsgClientAppInfoRequest.App() { app_id = appid, section_flags = (uint)EAppInfoSection.AppInfoSectionDepots } );
+
+            this.Client.Send( request );
+        }
+
         /// <summary>
         /// Handles a client message. This should not be called directly.
         /// </summary>
@@ -54,6 +64,9 @@ namespace SteamKit2
                     HandleAppOwnershipTicketResponse( e );
                     break;
 
+                case EMsg.ClientAppInfoResponse:
+                    HandleAppInfoResponse( e );
+                    break;
             }
         }
 
@@ -81,6 +94,28 @@ namespace SteamKit2
 #else
             var callback = new AppOwnershipTicketCallback( ticketResponse.Msg.Proto );
             this.Client.PostCallback( callback );
+#endif
+        }
+        void HandleAppInfoResponse(ClientMsgEventArgs e)
+        {
+            var infoResponse = new ClientMsgProtobuf<MsgClientAppInfoResponse>();
+
+            try
+            {
+                infoResponse.SetData(e.Data);
+            }
+            catch (Exception ex)
+            {
+                DebugLog.WriteLine("SteamApps", "HandleAppInfoResponse encountered an exception while reading client msg.\n{0}", ex.ToString());
+                return;
+            }
+
+#if STATIC_CALLBACKS
+            var callback = new AppInfoCallback( Client, ticketResponse.Msg.Proto );
+            SteamClient.PostCallback( callback );
+#else
+            var callback = new AppInfoCallback(infoResponse.Msg.Proto);
+            this.Client.PostCallback(callback);
 #endif
         }
         void HandleGameConnectTokens( ClientMsgEventArgs e )
