@@ -284,3 +284,62 @@ enum EChatActionResult
 	ChatFull = 9;
 	VoiceSlotsFull = 10;
 };
+
+enum EAppInfoSection
+{
+		AppInfoSectionUnknown = 0;
+		AppInfoSectionAll = 1;
+		AppInfoSectionCommon = 2;
+		AppInfoSectionExtended = 3;
+		AppInfoSectionConfig = 4;
+		AppInfoSectionStats = 5;
+		AppInfoSectionInstall = 6;
+		AppInfoSectionDepots = 7;
+		AppInfoSectionVac = 8;
+		AppInfoSectionDrm = 9;
+		AppInfoSectionUfs = 10;
+		AppInfoSectionOgg = 11;
+		AppInfoSectionItems = 12;
+		AppInfoSectionPolicies = 13;
+		AppInfoSectionSysreqs = 14;
+};
+
+enum EContentDownloadSourceType
+{
+		ContentDownloadSourceTypeInvalid = 0;
+		ContentDownloadSourceTypeCS = 1;
+		ContentDownloadSourceTypeCDN = 2;
+		ContentDownloadSourceTypeLCS = 3;
+		ContentDownloadSourceTypeProxy = 4;
+};
+ 
+ enum EOSType
+{
+		OSTypeUnknown = -1;
+		OSTypeMacos = -102;
+		OSTypeMacos104 = -101;
+		OSTypeMacos105 = -100;
+		OSTypeMacos1058 = -99;
+		OSTypeMacos106 = -95;
+		OSTypeMacos1063 = -94;
+		OSTypeMacos1064_slgu = -93;
+		OSTypeMacos1067 = -92;
+		OSTypeMacos107 = -90;
+		OSTypeLinux = -203;
+		OSTypeLinux22 = -202;
+		OSTypeLinux24 = -201;
+		OSTypeLinux26 = -200;
+		OSTypeWindows = 0;
+		OSTypeWin311 = 1;
+		OSTypeWin95 = 2;
+		OSTypeWin98 = 3;
+		OSTypeWinME = 4;
+		OSTypeWinNT = 5;
+		OSTypeWin200 = 6;
+		OSTypeWinXP = 7;
+		OSTypeWin2003 = 8;
+		OSTypeWinVista = 9;
+		OSTypeWin7 = 10;
+		OSTypeWin2008 = 11;
+};
+ 

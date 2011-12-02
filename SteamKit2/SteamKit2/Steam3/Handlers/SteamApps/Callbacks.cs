@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Collections.ObjectModel;
+using System.IO;
 
 namespace SteamKit2
 {
@@ -153,6 +154,82 @@ namespace SteamKit2
                 this.Result = ( EResult )msg.eresult;
                 this.AppID = msg.app_id;
                 this.Ticket = msg.ticket;
+            }
+        }
+
+        public sealed class AppInfoCallback : CallbackMsg
+        {
+            public sealed class AppInfo
+            {
+                public enum AppInfoStatus
+                {
+                    OK,
+                    Unknown
+                }
+
+                public AppInfoStatus Status { get; private set; }
+                public uint AppID { get; private set; }
+                public uint ChangeNumber { get; private set; }
+                public Dictionary<int, KeyValue> Sections { get; private set; }
+
+                internal AppInfo(CMsgClientAppInfoResponse.App app, AppInfoStatus status)
+                {
+                    Status = status;
+                    AppID = app.app_id;
+                    ChangeNumber = app.change_number;
+                    Sections = new Dictionary<int, KeyValue>();
+
+                    foreach(var section in app.sections)
+                    {
+                        KeyValue kv = new KeyValue();
+                        using(MemoryStream ms = new MemoryStream(section.section_kv))
+                            kv.ReadAsBinary(ms);
+
+                        Sections.Add((int)section.section_id, kv);
+                    }
+                }
+
+                internal AppInfo(uint appid, AppInfoStatus status)
+                {
+                    Status = status;
+                    AppID = appid;
+                }
+            }
+
+            public ReadOnlyCollection<AppInfo> Apps { get; private set; }
+            public uint AppsPending { get; private set; }
+
+#if STATIC_CALLBACKS
+            internal AppInfoCallback( SteamClient client, CMsgClientAppInfoResponse msg )
+                : base( client )
+#else
+            internal AppInfoCallback(CMsgClientAppInfoResponse msg)
+#endif
+            {
+                List<AppInfo> list = new List<AppInfo>();
+
+                BuildList(msg.apps, AppInfo.AppInfoStatus.OK, ref list);
+                BuildList(msg.apps_unknown, AppInfo.AppInfoStatus.Unknown, ref list);
+
+                AppsPending = msg.apps_pending;
+
+                Apps = new ReadOnlyCollection<AppInfo>(list);
+            }
+
+            internal void BuildList(List<CMsgClientAppInfoResponse.App> apps, AppInfo.AppInfoStatus status, ref List<AppInfo> list)
+            {
+                foreach (var app in apps)
+                {
+                    list.Add(new AppInfo(app, status));
+                }
+            }
+
+            internal void BuildList(List<uint> apps, AppInfo.AppInfoStatus status, ref List<AppInfo> list)
+            {
+                foreach (var app in apps)
+                {
+                    list.Add(new AppInfo(app, status));
+                }
             }
         }
 

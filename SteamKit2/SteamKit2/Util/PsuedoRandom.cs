@@ -12,7 +12,7 @@ using System.Security.Cryptography;
 
 namespace SteamKit2
 {
-    static class PsuedoRandom
+    public static class PsuedoRandom
     {
         static RandomNumberGenerator rng;
 
