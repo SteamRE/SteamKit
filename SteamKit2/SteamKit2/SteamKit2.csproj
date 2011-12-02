@@ -85,6 +85,7 @@
     <Compile Include="Blob\PeekableStream.cs" />
     <Compile Include="Steam3\Handlers\SteamGameServer\Callbacks.cs" />
     <Compile Include="Steam3\Handlers\SteamGameServer\SteamGameServer.cs" />
+    <Compile Include="Types\Steam2Ticket.cs" />
     <Compile Include="Util\AsnKeyParser.cs" />
     <Compile Include="Util\StreamHelpers.cs" />
     <Compile Include="Networking\Steam3\UdpPacket.cs" />
