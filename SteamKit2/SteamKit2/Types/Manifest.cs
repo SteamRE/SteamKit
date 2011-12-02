@@ -14,43 +14,36 @@ namespace SteamKit2
             {
                 public byte[] ChunkGID { get; set; } // sha1 hash for this chunk
 
-                // 4 bytes of unknown data, (d)serialized as a blob
-                public byte[] Unknown1 { get; set; }
-
-                public ulong Unknown2 { get; set; }
+                public byte[] CRC { get; set; }
+                public ulong Offset { get; set; }
 
                 // these look similar to some kind of flag
-                public uint Unknown3 { get; set; }
-                public uint Unknown4 { get; set; }
+                public uint DecompressedSize { get; set; }
+                public uint CompressedSize { get; set; }
 
 
                 internal void Deserialize( DataStream ds )
                 {
                     ChunkGID = ds.ReadBytes( 20 );
 
-                    Unknown1 = ds.ReadBytes( 4 );
+                    CRC = ds.ReadBytes( 4 );
 
-                    Unknown2 = ds.ReadUInt64();
+                    Offset = ds.ReadUInt64();
 
-                    Unknown3 = ds.ReadUInt32();
-                    Unknown4 = ds.ReadUInt32();
+                    DecompressedSize = ds.ReadUInt32();
+                    CompressedSize = ds.ReadUInt32();
                 }
             }
 
             public string FileName { get; set; }
 
-            public ulong MaxSize { get; set; }
+            public ulong TotalSize { get; set; }
+            public uint Flags { get; set; }
 
-            public uint Unknown1 { get; set; }
-
-            // these two most likely represent hashes of encrypted and decrypted data
-            // much like the crc's in the manifest
-            // the data that is hashed is unknown
-            public byte[] UnknownHash1 { get; set; }
-            public byte[] UnknownHash2 { get; set; }
+            public byte[] HashFileName { get; set; }
+            public byte[] HashContent { get; set; }
 
             public uint NumChunks { get; set; }
-
             public Chunk[] Chunks { get; private set; }
 
             public FileMapping()
@@ -62,12 +55,12 @@ namespace SteamKit2
             {
                 FileName = ds.ReadNullTermString( Encoding.ASCII );
 
-                MaxSize = ds.ReadUInt64();
+                TotalSize = ds.ReadUInt64();
 
-                Unknown1 = ds.ReadUInt32();
+                Flags = ds.ReadUInt32();
 
-                UnknownHash1 = ds.ReadBytes( 20 );
-                UnknownHash2 = ds.ReadBytes( 20 );
+                HashFileName = ds.ReadBytes( 20 );
+                HashContent = ds.ReadBytes( 20 );
 
                 NumChunks = ds.ReadUInt32();
 
@@ -80,9 +73,8 @@ namespace SteamKit2
             }
         }
 
-        const uint MAGIC = 372545409;
+        const uint MAGIC = 0x16349781;
         const uint CURRENT_VERSION = 4;
-
 
         public uint Magic { get; set; }
         public uint Version { get; set; } 
@@ -90,22 +82,22 @@ namespace SteamKit2
         public uint DepotID { get; set; }
 
         public ulong ManifestGID { get; set; }
-        public DateTime CreationTime { get; set; } // unsure
+        public DateTime CreationTime { get; set; }
 
-        public bool IsEncrypted { get; set; }
+        public bool AreFileNamesEncrypted { get; set; }
 
-        public ulong MaxSize { get; set; }
-        public ulong Unknown1 { get; set; }
+        public ulong TotalUncompressedSize { get; set; }
+        public ulong TotalCompressedSize { get; set; }
 
-        public uint NumChunks { get; set; }
-        public uint Unknown2 { get; set; }
+        public uint ChunkCount { get; set; }
 
+        public uint FileEntryCount { get; set; }
         public uint FileMappingSize { get; set; }
 
         public uint EncryptedCRC { get; set; }
         public uint DecryptedCRC { get; set; }
 
-        public uint UltimateAnswerToTheUltimateQuestionOfLifeTheUniverseAndEverything { get; set; }
+        public uint Flags { get; set; }
 
         public FileMapping Mapping { get; private set; }
 
@@ -135,21 +127,21 @@ namespace SteamKit2
                 ManifestGID = ds.ReadUInt64();
                 CreationTime = Utils.DateTimeFromUnixTime( ds.ReadUInt32() );
 
-                IsEncrypted = ds.ReadUInt32() != 0;
+                AreFileNamesEncrypted = ds.ReadUInt32() != 0;
 
-                MaxSize = ds.ReadUInt64();
-                Unknown1 = ds.ReadUInt64();
+                TotalUncompressedSize = ds.ReadUInt64();
+                TotalCompressedSize = ds.ReadUInt64();
 
-                NumChunks = ds.ReadUInt32();
-                Unknown2 = ds.ReadUInt32();
+                ChunkCount = ds.ReadUInt32();
 
+                FileEntryCount = ds.ReadUInt32();
                 FileMappingSize = ds.ReadUInt32();
 
                 EncryptedCRC = ds.ReadUInt32();
                 DecryptedCRC = ds.ReadUInt32();
                 
                 // i'm sorry to say that we'll be breaking from canon and we shall not be taking 7 and a half million years to read this value
-                UltimateAnswerToTheUltimateQuestionOfLifeTheUniverseAndEverything = ds.ReadUInt32();
+                Flags = ds.ReadUInt32();
 
                 Mapping.Deserialize( ds );
                 

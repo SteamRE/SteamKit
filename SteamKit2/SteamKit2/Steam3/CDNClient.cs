@@ -86,14 +86,41 @@ namespace SteamKit2
             return true;
         }
 
+        public byte[] DownloadDepotManifest(int depotid, ulong manifestid)
+        {
+            Uri manifestURI = new Uri(BuildCommand(endPoint, "depot"), String.Format("{0}/manifest/{1}", depotid, manifestid));
+
+            PrepareAuthHeader(ref webClient, manifestURI);
+
+            byte[] compressedManifest;
+            byte[] manifest;
+            try
+            {
+                compressedManifest = webClient.DownloadData(manifestURI);
+            }
+            catch (WebException)
+            {
+                return null;
+            }
+
+            try
+            {
+                manifest = ZipUtil.Decompress(compressedManifest);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+
+            return manifest;
+        }
+
         private void AuthDepot()
         {
             Uri authURI = BuildCommand(endPoint, "authdepot");
 
-            webClient.Headers.Clear();
-            webClient.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
-
             PrepareAuthHeader(ref webClient, authURI);
+            webClient.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
 
             byte[] encryptedTicket = CryptoHelper.SymmetricEncrypt(appTicket, sessionKey);
             string payload = String.Format("appticket={0}", EncodeFull(encryptedTicket));
@@ -107,20 +134,14 @@ namespace SteamKit2
 
             byte[] sha_hash;
 
-            using(System.IO.MemoryStream ms = new System.IO.MemoryStream())
-            {
-                byte[] buf_sid = Encoding.ASCII.GetBytes(sessionID.ToString());
-                byte[] buf_req = Encoding.ASCII.GetBytes(reqcounter.ToString());
-                byte[] buf_url = Encoding.ASCII.GetBytes(uri.AbsoluteUri);
+            BinaryWriterEx bb = new BinaryWriterEx();
 
-                
-                ms.Write(buf_sid, 0, buf_sid.Length);
-                ms.Write(buf_req, 0, buf_req.Length);
-                ms.Write(sessionKey, 0, sessionKey.Length);
-                ms.Write(buf_url, 0, buf_url.Length);
+            bb.Write( sessionID );
+            bb.Write( reqcounter );
+            bb.Write( sessionKey );
+            bb.Write( Encoding.ASCII.GetBytes( uri.AbsolutePath ) );
 
-                sha_hash = CryptoHelper.SHAHash(ms.ToArray());
-            }
+            sha_hash = CryptoHelper.SHAHash(bb.ToArray());
 
             string hex_hash = sha_hash.Aggregate(new StringBuilder(),
                        (sb, v) => sb.Append(v.ToString("x2"))
@@ -128,6 +149,7 @@ namespace SteamKit2
 
             string authheader = String.Format("sessionid={0};req-counter={1};hash={2};", sessionID, reqcounter, hex_hash);
 
+            webClient.Headers.Clear();
             webClient.Headers.Add("x-steam-auth", authheader);
         }
 

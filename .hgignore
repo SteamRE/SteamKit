@@ -13,6 +13,16 @@ obj/
 boost/
 google/
 zlib/
+protobuf/
+cryptopp/
 
 *.svn-base
 .svn
+
+# vs 2013
+_UpgradeReport_Files/
+UpgradeLog.XML
+
+# backups and stuff
+*.orig
+Backup/
