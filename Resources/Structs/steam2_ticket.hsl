@@ -1,0 +1,25 @@
+
+#include "standard-types.hsl"
+
+typedef long int32;
+typedef unsigned long uint32;
+
+#pragma maxarray( 0xFFFF )
+#pragma displayname( "Steam2 Ticket" )
+#pragma byteorder( little_endian )
+
+struct Steam2Ticket_Header
+{
+
+	WORD	header;				// 0x0150
+	int32		ticket_length;
+	int32		unknown;			// 0
+};
+
+struct Steam2Ticket_Entry
+{
+	WORD	header;				// 0x0400
+	int32		length;
+	int32		index;
+	blob		data[length];
+};
