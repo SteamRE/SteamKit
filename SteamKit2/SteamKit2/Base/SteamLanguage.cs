@@ -511,7 +511,11 @@ namespace SteamKit2
 		AccountLogonDeniedNoMailSent = 66,
 		HardwareNotCapableOfIPT = 67,
 		IPTInitError = 68,
-		Max = 69,
+		ParentalControlRestricted = 69,
+		FacebookQueryError = 70,
+		ExpiredLoginAuthCode = 71,
+		IPLoginRestrictionFailed = 72,
+		Max = 73,
 	}
 	public enum EUniverse
 	{
@@ -1471,29 +1475,6 @@ namespace SteamKit2
 		}
 	}
 
-	public class MsgGCSOSingleObject : IGCSerializableMessage
-	{
-		public EGCMsg GetEMsg() { return EGCMsg.Invalid; }
-
-		// Static size: 0
-		public SteamKit2.GC.CMsgSOSingleObject Proto { get; set; }
-
-		public MsgGCSOSingleObject()
-		{
-			Proto = new SteamKit2.GC.CMsgSOSingleObject();
-		}
-
-		public void Serialize(Stream stream)
-		{
-			ProtoBuf.Serializer.Serialize<SteamKit2.GC.CMsgSOSingleObject>(stream, Proto);
-		}
-
-		public void Deserialize( Stream stream )
-		{
-			Proto = ProtoBuf.Serializer.Deserialize<SteamKit2.GC.CMsgSOSingleObject>( stream );
-		}
-	}
-
 	public class MsgChannelEncryptRequest : ISteamSerializableMessage
 	{
 		public EMsg GetEMsg() { return EMsg.ChannelEncryptRequest; }
@@ -1701,7 +1682,7 @@ namespace SteamKit2
 		public EMsg GetEMsg() { return EMsg.ClientLogon; }
 
 		public static readonly uint ObfuscationMask = 0xBAADF00D;
-		public static readonly uint CurrentProtocol = 65571;
+		public static readonly uint CurrentProtocol = 65573;
 		// Static size: 0
 		public CMsgClientLogon Proto { get; set; }
 
@@ -2641,32 +2622,22 @@ namespace SteamKit2
 	{
 		public EMsg GetEMsg() { return EMsg.ClientFromGC; }
 
-		// Static size: 4
-		public uint AppId { get; set; }
-		// Static size: 4
-		public uint GCEMsg { get; set; }
+		// Static size: 0
+		public CMsgAMGCClientRelay Proto { get; set; }
 
 		public MsgClientFromGC()
 		{
-			AppId = 0;
-			GCEMsg = 0;
+			Proto = new CMsgAMGCClientRelay();
 		}
 
 		public void Serialize(Stream stream)
 		{
-			BinaryWriter bw = new BinaryWriter( stream );
-
-			bw.Write( AppId );
-			bw.Write( GCEMsg );
-
+			ProtoBuf.Serializer.Serialize<CMsgAMGCClientRelay>(stream, Proto);
 		}
 
 		public void Deserialize( Stream stream )
 		{
-			BinaryReader br = new BinaryReader( stream );
-
-			AppId = br.ReadUInt32();
-			GCEMsg = br.ReadUInt32();
+			Proto = ProtoBuf.Serializer.Deserialize<CMsgAMGCClientRelay>( stream );
 		}
 	}
 
@@ -2674,32 +2645,22 @@ namespace SteamKit2
 	{
 		public EMsg GetEMsg() { return EMsg.ClientToGC; }
 
-		// Static size: 4
-		public uint AppId { get; set; }
-		// Static size: 4
-		public uint GCEMsg { get; set; }
+		// Static size: 0
+		public CMsgAMGCClientRelay Proto { get; set; }
 
 		public MsgClientToGC()
 		{
-			AppId = 0;
-			GCEMsg = 0;
+			Proto = new CMsgAMGCClientRelay();
 		}
 
 		public void Serialize(Stream stream)
 		{
-			BinaryWriter bw = new BinaryWriter( stream );
-
-			bw.Write( AppId );
-			bw.Write( GCEMsg );
-
+			ProtoBuf.Serializer.Serialize<CMsgAMGCClientRelay>(stream, Proto);
 		}
 
 		public void Deserialize( Stream stream )
 		{
-			BinaryReader br = new BinaryReader( stream );
-
-			AppId = br.ReadUInt32();
-			GCEMsg = br.ReadUInt32();
+			Proto = ProtoBuf.Serializer.Deserialize<CMsgAMGCClientRelay>( stream );
 		}
 	}
 

@@ -9,6 +9,7 @@
 #pragma warning disable 1591
 
 // Generated from: steammessages.proto
+// Note: requires additional types generated from: google/protobuf/descriptor.proto
 namespace SteamKit2.GC
 {
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgProtoBufHeader")]
@@ -33,6 +34,15 @@ namespace SteamKit2.GC
     {
       get { return _client_session_id; }
       set { _client_session_id = value; }
+    }
+
+    private uint _source_app_id = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"source_app_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    public uint source_app_id
+    {
+      get { return _source_app_id; }
+      set { _source_app_id = value; }
     }
 
     private ulong _job_id_source = (ulong)18446744073709551615;
@@ -969,6 +979,104 @@ namespace SteamKit2.GC
       get { return _transid; }
       set { _transid = value; }
     }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGCMsgGetIPLocation")]
+  public partial class CGCMsgGetIPLocation : global::ProtoBuf.IExtensible
+  {
+    public CGCMsgGetIPLocation() {}
+    
+    private readonly global::System.Collections.Generic.List<uint> _ips = new global::System.Collections.Generic.List<uint>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"ips", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public global::System.Collections.Generic.List<uint> ips
+    {
+      get { return _ips; }
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CIPLocationInfo")]
+  public partial class CIPLocationInfo : global::ProtoBuf.IExtensible
+  {
+    public CIPLocationInfo() {}
+    
+
+    private uint _ip = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"ip", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    public uint ip
+    {
+      get { return _ip; }
+      set { _ip = value; }
+    }
+
+    private float _latitude = default(float);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"latitude", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::ProtoBuf.ProtoDefaultValue(default(float))]
+    public float latitude
+    {
+      get { return _latitude; }
+      set { _latitude = value; }
+    }
+
+    private float _longitude = default(float);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"longitude", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::ProtoBuf.ProtoDefaultValue(default(float))]
+    public float longitude
+    {
+      get { return _longitude; }
+      set { _longitude = value; }
+    }
+
+    private string _country = "";
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"country", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoDefaultValue("")]
+    public string country
+    {
+      get { return _country; }
+      set { _country = value; }
+    }
+
+    private string _state = "";
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"state", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoDefaultValue("")]
+    public string state
+    {
+      get { return _state; }
+      set { _state = value; }
+    }
+
+    private string _city = "";
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"city", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoDefaultValue("")]
+    public string city
+    {
+      get { return _city; }
+      set { _city = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGCMsgGetIPLocationResponse")]
+  public partial class CGCMsgGetIPLocationResponse : global::ProtoBuf.IExtensible
+  {
+    public CGCMsgGetIPLocationResponse() {}
+    
+    private readonly global::System.Collections.Generic.List<CIPLocationInfo> _infos = new global::System.Collections.Generic.List<CIPLocationInfo>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"infos", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CIPLocationInfo> infos
+    {
+      get { return _infos; }
+    }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
