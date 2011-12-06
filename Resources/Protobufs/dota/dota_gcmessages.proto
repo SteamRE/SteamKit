@@ -282,6 +282,10 @@ message CMsgLeaverDetected {
 	optional uint32 leaver_status = 2;
 }
 
+message CMsgLeaverDetectedResponse {
+	optional uint32 result = 1;
+}
+
 message CMsgForceSOCacheResend {
 }
 
@@ -406,6 +410,7 @@ message CMsgGameMatchSignOut {
 	repeated uint32 barracks_status = 9;
 	optional uint32 cluster = 10;
 	optional string server_addr = 11;
+	optional uint32 first_blood_time = 12;
 }
 
 message CMsgGameMatchSignoutResponse {
@@ -526,6 +531,7 @@ message CMsgDOTAMatch {
 	repeated uint32 barracks_status = 9;
 	optional uint32 cluster = 10;
 	optional string server_addr = 11;
+	optional uint32 first_blood_time = 12;
 }
 
 message CMsgDOTAPlayerMatchHistory {
