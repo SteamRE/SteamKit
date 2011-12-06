@@ -211,6 +211,17 @@ namespace SteamKit2
             }
         }
 
+        public static byte[] AdlerHash(byte[] input)
+        {
+            using ( Adler32 adler = new Adler32() )
+            {
+                byte[] hash = adler.ComputeHash( input );
+                Array.Reverse( hash );
+
+                return hash;
+            }
+        }
+
         public static byte[] GenerateRandomBlock( int size )
         {
             return PsuedoRandom.GenerateRandomBlock( size );

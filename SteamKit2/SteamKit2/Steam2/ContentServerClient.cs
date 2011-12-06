@@ -281,33 +281,33 @@ namespace SteamKit2
                 // name is a guess
                 byte hasManifest = this.Socket.Reader.ReadByte();
 
-                uint manifestLength = NetHelpers.EndianSwap(this.Socket.Reader.ReadUInt32());
-                byte[] manifest = new byte[manifestLength];
+                uint manifestLength = NetHelpers.EndianSwap( this.Socket.Reader.ReadUInt32() );
+                byte[] manifest = new byte[ manifestLength ];
 
                 uint manifestChunksToRead = manifestLength;
                 do
                 {
-                    uint chunkStorID = NetHelpers.EndianSwap(this.Socket.Reader.ReadUInt32());
-                    uint chunkMsgID = NetHelpers.EndianSwap(this.Socket.Reader.ReadUInt32());
-                    uint chunkLen = NetHelpers.EndianSwap(this.Socket.Reader.ReadUInt32());
+                    uint chunkStorID = NetHelpers.EndianSwap( this.Socket.Reader.ReadUInt32() );
+                    uint chunkMsgID = NetHelpers.EndianSwap( this.Socket.Reader.ReadUInt32() );
+                    uint chunkLen = NetHelpers.EndianSwap( this.Socket.Reader.ReadUInt32() );
 
-                    chunkLen = Math.Min(chunkLen, manifestChunksToRead);
+                    chunkLen = Math.Min( chunkLen, manifestChunksToRead );
                     uint toRead = chunkLen;
 
-                    while (toRead > 0)
+                    while ( toRead > 0 )
                     {
-                        uint socketRead = (uint)this.Socket.Reader.Read(manifest, (int)((manifestLength - manifestChunksToRead) + (chunkLen - toRead)), (int)toRead);
+                        uint socketRead = ( uint )this.Socket.Reader.Read( manifest, ( int )( ( manifestLength - manifestChunksToRead ) + ( chunkLen - toRead ) ), ( int )toRead );
                         toRead = toRead - socketRead;
                     }
 
-                    manifestChunksToRead = manifestChunksToRead - chunkLen; 
-                } while (manifestChunksToRead > 0);
+                    manifestChunksToRead = manifestChunksToRead - chunkLen;
+                } while ( manifestChunksToRead > 0 );
 
                 this.MessageID++;
 
                 return new Steam2Manifest( manifest );
             }
-            public byte[] DownloadChecksums()
+            public Steam2ChecksumData DownloadChecksums()
             {
                 bool bRet = this.SendCommand(
                     6, // download checksums
@@ -318,21 +318,35 @@ namespace SteamKit2
                 uint storId = NetHelpers.EndianSwap( this.Socket.Reader.ReadUInt32() );
                 uint msgId = NetHelpers.EndianSwap( this.Socket.Reader.ReadUInt32() );
 
-                // name is a guess
+                // name is a(n incorrect) guess
                 byte hasChecksums = this.Socket.Reader.ReadByte();
 
-                uint checksumsLen = NetHelpers.EndianSwap( this.Socket.Reader.ReadUInt32() );
+                uint checksumsLength = NetHelpers.EndianSwap( this.Socket.Reader.ReadUInt32() );
 
+                byte[] checksumData = new byte[ checksumsLength ];
 
-                uint storId2 = NetHelpers.EndianSwap( this.Socket.Reader.ReadUInt32() );
-                uint msgId2 = NetHelpers.EndianSwap( this.Socket.Reader.ReadUInt32() );
-                uint checksumsLen2 = NetHelpers.EndianSwap( this.Socket.Reader.ReadUInt32() );
+                uint checksumChunksToRead = checksumsLength;
+                do
+                {
+                    uint chunkStorID = NetHelpers.EndianSwap( this.Socket.Reader.ReadUInt32() );
+                    uint chunkMsgID = NetHelpers.EndianSwap( this.Socket.Reader.ReadUInt32() );
+                    uint chunkLen = NetHelpers.EndianSwap( this.Socket.Reader.ReadUInt32() );
 
-                byte[] checksums = this.Socket.Reader.ReadBytes( ( int )checksumsLen );
+                    chunkLen = Math.Min( chunkLen, checksumChunksToRead );
+                    uint toRead = chunkLen;
+
+                    while ( toRead > 0 )
+                    {
+                        uint socketRead = ( uint )this.Socket.Reader.Read( checksumData, ( int )( ( checksumsLength - checksumChunksToRead ) + ( chunkLen - toRead ) ), ( int )toRead );
+                        toRead = toRead - socketRead;
+                    }
+
+                    checksumChunksToRead = checksumChunksToRead - chunkLen;
+                } while ( checksumChunksToRead > 0 );
 
                 this.MessageID++;
 
-                return checksums;
+                return new Steam2ChecksumData( checksumData );
             }
             public uint[] DownloadUpdates( uint oldVersion )
             {
@@ -390,7 +404,7 @@ namespace SteamKit2
                 uint fileModeValue = NetHelpers.EndianSwap( this.Socket.Reader.ReadUInt32() );
 
                 FileMode fileMode = ( FileMode )fileModeValue;
- 
+
                 MemoryStream ms = new MemoryStream();
                 for ( int x = 0 ; x < numChunks ; ++x )
                 {
@@ -415,7 +429,7 @@ namespace SteamKit2
                     }
                     else if ( fileMode == FileMode.Encrypted )
                     {
-                        len = DecryptFileChunk( out chunk, ( int )chunkLen, cryptKey );         
+                        len = DecryptFileChunk( out chunk, ( int )chunkLen, cryptKey );
                     }
                     else if ( fileMode == FileMode.EncryptedAndCompressed )
                     {
@@ -429,12 +443,12 @@ namespace SteamKit2
 
                         DecryptFileChunk( out chunk, ( int )chunkLen, cryptKey );
                         len = DecompressFileChunk( ref chunk, plainLen );
-                     }
-                     else if ( fileMode == FileMode.None )
-                     {
-                         chunk = this.Socket.Reader.ReadBytes( ( int )chunkLen );
-                         len = chunk.Length;
-                     }
+                    }
+                    else if ( fileMode == FileMode.None )
+                    {
+                        chunk = this.Socket.Reader.ReadBytes( ( int )chunkLen );
+                        len = chunk.Length;
+                    }
 
                     ms.Write( chunk, 0, len );
                 }
@@ -480,7 +494,7 @@ namespace SteamKit2
             public byte[] DownloadFile( Steam2Manifest.Node file, DownloadPriority priority )
             {
                 return DownloadFile( file, priority, null );
-            }         
+            }
             public byte[] DownloadFile( Steam2Manifest.Node file )
             {
                 return DownloadFile( file, DownloadPriority.Low );
