@@ -45,7 +45,7 @@ class MsgClientHeartBeat<EMsg::ClientHeartBeat>
 class MsgClientLogon<EMsg::ClientLogon>
 {
 	const uint ObfuscationMask = 0xBAADF00D;
-	const uint CurrentProtocol = 65571;
+	const uint CurrentProtocol = 65573;
 
 	proto CMsgClientLogon proto;
 };
@@ -243,14 +243,12 @@ class MsgClientP2PIntroducerMessage<EMsg::ClientP2PIntroducerMessage>
 
 class MsgClientFromGC<EMsg::ClientFromGC>
 {
-	uint appId;
-	uint GCEMsg;
+	proto CMsgAMGCClientRelay proto;
 };
 
 class MsgClientToGC<EMsg::ClientToGC>
 {
-	uint appId;
-	uint GCEMsg;
+	proto CMsgAMGCClientRelay proto;
 };
 
 class MsgClientUpdateMachineAuth<EMsg::ClientUpdateMachineAuth>
