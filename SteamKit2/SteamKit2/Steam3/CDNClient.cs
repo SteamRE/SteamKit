@@ -11,10 +11,6 @@ using System.Net;
 using System.Web;
 using System.Text.RegularExpressions;
 
-#if wehadakeyvalueparser
-using KeyValueParser;
-#endif
-
 namespace SteamKit2
 {
     public class CDNClient
@@ -64,15 +60,12 @@ namespace SteamKit2
                 return false;
             }
 
-#if wehadakeyvalueparser
-            KVItem responsekv = KVParser.Read(response);
+            var responsekv = KeyValue.LoadFromString(response);
+            var sessionidn = responsekv.Children.Where(c => c.Name == "sessionid").First();
+            var reqcountern = responsekv.Children.Where(c => c.Name == "req-counter").First();
 
-            var sessionidn = responsekv.subItems.Where(c => c.key == "sessionid").First();
-            var reqcountern = responsekv.subItems.Where(c => c.key == "req-counter").First();
-
-            sessionID = (ulong)long.Parse(sessionidn.value);
-            reqcounter = long.Parse(reqcountern.value);
-#endif
+            sessionID = (ulong)(sessionidn.AsInteger(0));
+            reqcounter = reqcountern.AsInteger(0);
 
             try
             {
@@ -186,13 +179,13 @@ namespace SteamKit2
                 }
 
                 List<IPEndPoint> endpoints = new List<IPEndPoint>();
-#if wehadakeyvalueparser
-                KVItem serverkv = KVParser.Read(serverList);
 
-                foreach (var entry in serverkv.subItems)
+                KeyValue serverkv = KeyValue.LoadFromString(serverList);
+
+                foreach (var child in serverkv.Children)
                 {
-                    var node = entry.subItems.Where(x => x.key == "host").First();
-                    var endpoint_string = node.value.Split(':');
+                    var node = child.Children.Where(x => x.Name == "host").First();
+                    var endpoint_string = node.AsString("").Split(':');
 
                     IPAddress ipaddr;
                     int port = 80;
@@ -212,7 +205,7 @@ namespace SteamKit2
                         }
                     }
                 }
-#endif
+
                 return endpoints;
             }
         }

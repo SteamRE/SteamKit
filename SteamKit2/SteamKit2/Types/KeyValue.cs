@@ -431,6 +431,27 @@ namespace SteamKit2
             }
         }
 
+        public static KeyValue LoadFromString( string input )
+        {
+            byte[] bytes = Encoding.UTF8.GetBytes( input );
+            using (MemoryStream stream = new MemoryStream(bytes))
+            {
+                var kv = new KeyValue();
+
+                try
+                {
+                    if (kv.ReadAsText(stream) == false)
+                        return null;
+
+                    return kv;
+                }
+                catch (Exception)
+                {
+                    return null;
+                }
+            }
+        }
+
         public bool ReadAsText( Stream input )
         {
             this.Children = new List<KeyValue>();
