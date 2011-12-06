@@ -213,8 +213,3 @@ class MsgGCHdr
 	long targetJobID = -1;
 	long sourceJobID = -1;
 };
-
-class MsgGCSOSingleObject<EGCMsg::Invalid>
-{
-	proto SteamKit2.GC.CMsgSOSingleObject proto;
-};

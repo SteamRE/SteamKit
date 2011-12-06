@@ -69,4 +69,8 @@ enum EResult
 	AccountLogonDeniedNoMailSent = 66;
 	HardwareNotCapableOfIPT = 67;
 	IPTInitError = 68;
+	ParentalControlRestricted = 69;
+	FacebookQueryError = 70;
+	ExpiredLoginAuthCode = 71;
+	IPLoginRestrictionFailed = 72;
 };
