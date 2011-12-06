@@ -1,0 +1,33 @@
+
+#include "standard-types.hsl"
+
+typedef long int32;
+typedef unsigned long uint32;
+
+#pragma maxarray( 0xFFFF )
+#pragma displayname( "Steam2 Checksum data" )
+#pragma byteorder( little_endian )
+
+struct ChecksumMapEntry
+{
+	uint32 ChecksumCount;
+	uint32 FirstChecksumIndex;
+} ChecksumMapEntry;
+
+struct ChecksumEntry
+{
+	uint32 Checksum;
+} ChecksumEntry;
+
+struct ChecksumData
+{
+	uint32 uiDummy0;
+	uint32 uiDummy1;
+	uint32 uiItemCount;			// Number of items.
+	uint32 uiChecksumCount;		// Number of checksums.
+	ChecksumMapEntry MapEntries[uiItemCount];
+	ChecksumEntry ChecksumEntries[uiChecksumCount];
+} ChecksumData;
+
+
+
