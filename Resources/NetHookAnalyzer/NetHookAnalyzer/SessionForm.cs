@@ -76,17 +76,7 @@ namespace NetHookAnalyzer
                 var header = BuildHeader( realEMsg, packetStream );
                 var body = BuildBody( realEMsg, packetStream );
                 object payload = null;
-                if ( body != null && eMsg == EMsg.ClientToGC )
-                {
-                    var gcBody = body as MsgClientToGC;
-                    payload = BuildGCMsg( gcBody.GCEMsg, packetStream );
-                }
-                else if ( body != null && eMsg == EMsg.ClientFromGC )
-                {
-                    var gcBody = body as MsgClientFromGC;
-                    payload = BuildGCMsg( gcBody.GCEMsg, packetStream );
-                }
-                else if ( body == null )
+                if ( body == null )
                 {
                     body = "Unable to find body message!";
                     payload = "Unable to get payload: Body message missing!";
@@ -246,62 +236,6 @@ namespace NetHookAnalyzer
             hdr.Deserialize( str );
             return hdr;
         }
-        IGCSerializableHeader BuildGCHeader( uint realGCEMsg, Stream str )
-        {
-            IGCSerializableHeader hdr = null;
-
-            if ( MsgUtil.IsProtoBuf( realGCEMsg ) )
-            {
-                hdr = new MsgGCHdrProtoBuf();
-            }
-            else
-            {
-                hdr = new MsgGCHdr();
-            }
-
-            hdr.Deserialize( str );
-            return hdr;
-        }
-        object BuildGCBody( uint realGCEMsg, Stream str )
-        {
-            EGCMsg eGCMsg = MsgUtil.GetGCMsg( realGCEMsg );
-
-            // lets first find the type by checking all EMsgs we have
-            var msgType = typeof( CMClient ).Assembly.GetTypes().ToList().Find( type =>
-                {
-                    if ( type.GetInterfaces().ToList().Find( inter => inter == typeof( IGCSerializableMessage ) ) == null )
-                        return false;
-
-                    var gcMsg = Activator.CreateInstance( type ) as IGCSerializableMessage;
-
-                    return gcMsg.GetEMsg() == eGCMsg;
-                } );
-
-            if ( eGCMsg == EGCMsg.SOMsg_Create || eGCMsg == EGCMsg.SOMsg_Destroy || eGCMsg == EGCMsg.SOMsg_Update )
-            {
-                msgType = typeof( SteamKit2.MsgGCSOSingleObject );
-            }
-
-            // if the emsg didn't match, maybe we can get lucky with the name
-            if ( msgType == null )
-                msgType = GetSteamKitType( string.Format( "SteamKit2.MsgGC{0}", eGCMsg ) );
-
-            if ( msgType != null )
-            {
-                var body = Activator.CreateInstance( msgType ) as IGCSerializableMessage;
-                body.Deserialize( str );
-
-                return body;
-            }
-
-            msgType = GetSteamKitType( string.Format( "SteamKit2.GC.CMsg{0}", eGCMsg ) );
-            if ( msgType != null )
-            {
-                return Deserialize( msgType, str );
-            }
-
-            return null;
-        }
         object BuildBody( uint realEMsg, Stream str )
         {
             EMsg eMsg = MsgUtil.GetMsg( realEMsg );
@@ -353,35 +287,6 @@ namespace NetHookAnalyzer
             str.Read( data, 0, data.Length );
 
             return data;
-        }
-        object BuildGCMsg( uint realGCEMsg, Stream str )
-        {
-            var info = new
-            {
-                EMsg = MsgUtil.GetGCMsg( realGCEMsg ),
-                IsProto = MsgUtil.IsProtoBuf( realGCEMsg ),
-            };
-            var header = BuildGCHeader( realGCEMsg, str );
-            var body = BuildGCBody( realGCEMsg, str );
-            object payload = null;
-
-            if ( body == null )
-            {
-                body = "Unable to find body message!";
-                payload = "Unable to get payload: Body message missing!";
-            }
-            else
-            {
-                payload = BuildPayload( str );
-            }
-
-            return new
-            {
-                Info = info,
-                Header = header,
-                Body = body,
-                Payload = payload,
-            };
         }
 
         Type GetSteamKitType( string name )
