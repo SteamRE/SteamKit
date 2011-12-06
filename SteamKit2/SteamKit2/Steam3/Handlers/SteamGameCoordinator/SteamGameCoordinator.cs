@@ -90,6 +90,10 @@ namespace SteamKit2
                 this.Client.PostCallback( callback );
 #endif
             }
+            else
+            {
+                DebugLog.WriteLine( "SteamGameCoordinator", "HandleMsg encountered unexpected non-proto GC relay message!" );
+            }
         }
     }
 }
