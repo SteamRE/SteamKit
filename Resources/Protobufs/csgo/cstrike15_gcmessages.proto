@@ -1,0 +1,25 @@
+import "steammessages.proto";
+
+message CMsgCStrike15StartMatchmaking {
+	optional uint32 account_id = 1;
+	optional uint32 game_type = 2;
+	optional uint32 input_device = 3;
+}
+
+message CMsgCStrike15StartMatchmakingResponse {
+	optional bool success = 1;
+}
+
+message CMsgCStrike15ReportRoundEnd {
+	message Player {
+		optional uint32 account_id = 1;
+		optional uint32 bot_difficulty = 2;
+		optional uint32 input_device = 3;
+		optional uint32 contribution_score = 4;
+	}
+
+	optional uint32 game_type = 1;
+	repeated .CMsgCStrike15ReportRoundEnd.Player winners = 2;
+	repeated .CMsgCStrike15ReportRoundEnd.Player losers = 3;
+}
+
