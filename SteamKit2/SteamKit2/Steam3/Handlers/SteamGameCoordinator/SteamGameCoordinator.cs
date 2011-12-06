@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.IO;
 
 namespace SteamKit2
 {
@@ -23,12 +24,16 @@ namespace SteamKit2
             where Hdr : IGCSerializableHeader, new()
             where MsgType : IGCSerializableMessage, new()
         {
-            var clientMsg = new ClientMsg<MsgClientToGC, ExtendedClientMsgHdr>();
+            var clientMsg = new ClientMsgProtobuf<MsgClientToGC>();
 
-            clientMsg.Msg.GCEMsg = ( uint )msg.GetEMsg();
-            clientMsg.Msg.AppId = appId;
+            clientMsg.Msg.Proto.msgtype = ( uint )msg.GetEMsg();
+            clientMsg.Msg.Proto.appid = appId;
 
-            msg.Serialize( clientMsg.Payload.BaseStream );
+            using ( var ms = new MemoryStream() )
+            {
+                msg.Serialize( ms );
+                clientMsg.Msg.Proto.payload = ms.ToArray();
+            }
 
             this.Client.Send( clientMsg );
         }
@@ -42,12 +47,16 @@ namespace SteamKit2
         public void Send<MsgType>( GCMsgProtobuf<MsgType> msg, uint appId )
             where MsgType : IGCSerializableMessage, new()
         {
-            var clientMsg = new ClientMsg<MsgClientToGC, ExtendedClientMsgHdr>();
+            var clientMsg = new ClientMsgProtobuf<MsgClientToGC>();
 
-            clientMsg.Msg.GCEMsg = ( uint )MsgUtil.MakeGCMsg( msg.GetEMsg(), true );
-            clientMsg.Msg.AppId = appId;
+            clientMsg.Msg.Proto.msgtype = ( uint )MsgUtil.MakeGCMsg( msg.GetEMsg(), true );
+            clientMsg.Msg.Proto.appid = appId;
 
-            msg.Serialize( clientMsg.Payload.BaseStream );
+            using ( var ms = new MemoryStream() )
+            {
+                msg.Serialize( ms );
+                clientMsg.Msg.Proto.payload = ms.ToArray();
+            }
 
             this.Client.Send( clientMsg );
         }
@@ -59,9 +68,9 @@ namespace SteamKit2
         /// <param name="e">The <see cref="SteamKit2.ClientMsgEventArgs"/> instance containing the event data.</param>
         public override void HandleMsg( ClientMsgEventArgs e )
         {
-            if ( e.EMsg == EMsg.ClientFromGC )
+            if ( e.EMsg == EMsg.ClientFromGC && e.IsProto )
             {
-                var msg = new ClientMsg<MsgClientFromGC, ExtendedClientMsgHdr>();
+                var msg = new ClientMsgProtobuf<MsgClientFromGC>();
 
                 try
                 {
@@ -69,15 +78,15 @@ namespace SteamKit2
                 }
                 catch ( Exception ex )
                 {
-                    DebugLog.WriteLine( "SteamGameCoordinator", "HandleMsg encountered an exception while reading client msg.\n{0}", ex.ToString() );
+                    DebugLog.WriteLine( "SteamGameCoordinator", "HandleMsg encountered an exception while reading protobuf client msg.\n{0}", ex.ToString() );
                     return;
                 }
 
 #if STATIC_CALLBACKS
-                var callback = new MessageCallback( Client, msg.Msg, msg.Payload.ToArray() );
+                var callback = new MessageCallback( Client, msg.Msg );
                 SteamClient.PostCallback( callback );
 #else
-                var callback = new MessageCallback( msg.Msg, msg.Payload.ToArray() );
+                var callback = new MessageCallback( msg.Msg );
                 this.Client.PostCallback( callback );
 #endif
             }
