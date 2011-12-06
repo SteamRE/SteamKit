@@ -36,16 +36,16 @@ namespace SteamKit2
 
 
 #if STATIC_CALLBACKS
-            internal MessageCallback( SteamClient client, MsgClientFromGC gcMsg, byte[] payload )
+            internal MessageCallback( SteamClient client, MsgClientFromGC gcMsg )
                 : base( client )
 #else
-            internal MessageCallback( MsgClientFromGC gcMsg, byte[] payload )
+            internal MessageCallback( MsgClientFromGC gcMsg )
 #endif
             {
-                this.eMsg = ( EGCMsg )gcMsg.GCEMsg;
-                this.AppID = gcMsg.AppId;
+                this.eMsg = ( EGCMsg )gcMsg.Proto.msgtype;
+                this.AppID = gcMsg.Proto.appid;
 
-                this.Payload = payload;
+                this.Payload = gcMsg.Proto.payload;
             }
         }
     }
