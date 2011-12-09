@@ -81,7 +81,7 @@ namespace SteamKit2
         /// <returns>A new StorageSession object for the session.</returns>
         public StorageSession OpenStorage( uint depotId, uint depotVersion, uint cellId, Credentials credentials )
         {
-            bool bRet = this.HandshakeServer( ( EServerType )7 );
+            bool bRet = this.HandshakeServer( ( ESteam2ServerType )7 );
 
             if ( !bRet )
                 throw new Steam2Exception( "Storage handshake with content server failed" );
@@ -130,7 +130,7 @@ namespace SteamKit2
         /// <returns>A new PackageSession object for the session.</returns>
         public PackageSession OpenPackage( uint cellId )
         {
-            bool bRet = this.HandshakeServer( ( EServerType )3 );
+            bool bRet = this.HandshakeServer( ( ESteam2ServerType )3 );
 
             if ( !bRet )
                 throw new Steam2Exception( "Package handshake with content server failed" );
@@ -144,7 +144,7 @@ namespace SteamKit2
         /// <returns>The cell ID of the server.</returns>
         public uint GetCellID()
         {
-            if ( !this.HandshakeServer( ( EServerType )3 ) )
+            if ( !this.HandshakeServer( ( ESteam2ServerType )3 ) )
                 throw new Steam2Exception( "Package handshake with content server failed" );
 
             TcpPacket packet = new TcpPacket();

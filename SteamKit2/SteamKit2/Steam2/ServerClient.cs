@@ -18,7 +18,7 @@ namespace SteamKit2
     /// <summary>
     /// This is a list of known Steam2 server types.
     /// </summary>
-    public enum EServerType : uint
+    public enum ESteam2ServerType : uint
     {
         /// <summary>
         /// This is the auth server that all clients should connect to.
@@ -170,7 +170,7 @@ namespace SteamKit2
         /// </summary>
         /// <param name="type">The expected server type the client is handshaking with.</param>
         /// <returns>True if the handshake succeeded; otherwise false.</returns>
-        protected bool HandshakeServer( EServerType type )
+        protected bool HandshakeServer( ESteam2ServerType type )
         {
             try
             {
