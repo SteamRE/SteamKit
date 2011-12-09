@@ -3732,5 +3732,71 @@ namespace SteamKit2
 		}
 	}
 
+	public class MsgClientGetDepotDecryptionKey : ISteamSerializableMessage
+	{
+		public EMsg GetEMsg() { return EMsg.ClientGetDepotDecryptionKey; }
+
+		// Static size: 4
+		public uint DepotID { get; set; }
+
+		public MsgClientGetDepotDecryptionKey()
+		{
+			DepotID = 0;
+		}
+
+		public void Serialize(Stream stream)
+		{
+			BinaryWriter bw = new BinaryWriter( stream );
+
+			bw.Write( DepotID );
+
+		}
+
+		public void Deserialize( Stream stream )
+		{
+			BinaryReader br = new BinaryReader( stream );
+
+			DepotID = br.ReadUInt32();
+		}
+	}
+
+	public class MsgClientGetDepotDecryptionKeyResponse : ISteamSerializableMessage
+	{
+		public EMsg GetEMsg() { return EMsg.ClientGetDepotDecryptionKeyResponse; }
+
+		// Static size: 4
+		public EResult Result { get; set; }
+		// Static size: 4
+		public uint DepotID { get; set; }
+		// Static size: 32
+		public byte[] DepotEncryptionKey { get; set; }
+
+		public MsgClientGetDepotDecryptionKeyResponse()
+		{
+			Result = 0;
+			DepotID = 0;
+			DepotEncryptionKey = new byte[32];
+		}
+
+		public void Serialize(Stream stream)
+		{
+			BinaryWriter bw = new BinaryWriter( stream );
+
+			bw.Write( (int)Result );
+			bw.Write( DepotID );
+			bw.Write( DepotEncryptionKey );
+
+		}
+
+		public void Deserialize( Stream stream )
+		{
+			BinaryReader br = new BinaryReader( stream );
+
+			Result = (EResult)br.ReadInt32();
+			DepotID = br.ReadUInt32();
+			DepotEncryptionKey = br.ReadBytes( 32 );
+		}
+	}
+
 }
 #pragma warning restore 1591
