@@ -15,6 +15,8 @@ namespace SteamKit2
     {
         public sealed class FileMapping
         {
+            public const int MappingSize = 0x36B2;
+
             public sealed class Chunk
             {
                 public byte[] ChunkGID { get; set; } // sha1 hash for this chunk
@@ -73,12 +75,13 @@ namespace SteamKit2
 
                 for ( int x = 0 ; x < Chunks.Length ; ++x )
                 {
+                    Chunks[ x ] = new Chunk();
                     Chunks[ x ].Deserialize( ds );
                 }
             }
         }
 
-        const uint MAGIC = 0x16349781;
+        public const uint MAGIC = 0x16349781;
         const uint CURRENT_VERSION = 4;
 
         public uint Magic { get; set; }
@@ -104,52 +107,71 @@ namespace SteamKit2
 
         public uint Flags { get; set; }
 
-        public FileMapping Mapping { get; private set; }
+        public List<FileMapping> Mapping { get; private set; }
 
 
-        public Steam3Manifest()
+        private Steam3Manifest()
         {
-            Mapping = new FileMapping();
         }
 
-
-        void Deserialize( byte[] data )
+        public Steam3Manifest(byte[] data)
         {
-            using (DataStream ds = new DataStream( data ) )
+            Deserialize(data);
+        }
+
+        public Steam3Manifest(DataStream data)
+        {
+            Deserialize(data);
+        }
+
+        void Deserialize(byte[] data)
+        {
+            using (DataStream ds = new DataStream(data))
             {
+                Deserialize(ds);
+            }
+        }
 
-                Magic = ds.ReadUInt32();
+        void Deserialize( DataStream ds )
+        {
+            Mapping = new List<FileMapping>();
 
-                if ( Magic != MAGIC )
-                {
-                    throw new InvalidDataException( "data is not a valid steam3 manifest: incorrect magic." );
-                }
+            Magic = ds.ReadUInt32();
 
-                Version = ds.ReadUInt32();
+            if (Magic != MAGIC)
+            {
+                throw new InvalidDataException("data is not a valid steam3 manifest: incorrect magic.");
+            }
 
-                DepotID = ds.ReadUInt32();
+            Version = ds.ReadUInt32();
 
-                ManifestGID = ds.ReadUInt64();
-                CreationTime = Utils.DateTimeFromUnixTime( ds.ReadUInt32() );
+            DepotID = ds.ReadUInt32();
 
-                AreFileNamesEncrypted = ds.ReadUInt32() != 0;
+            ManifestGID = ds.ReadUInt64();
+            CreationTime = Utils.DateTimeFromUnixTime(ds.ReadUInt32());
 
-                TotalUncompressedSize = ds.ReadUInt64();
-                TotalCompressedSize = ds.ReadUInt64();
+            AreFileNamesEncrypted = ds.ReadUInt32() != 0;
 
-                ChunkCount = ds.ReadUInt32();
+            TotalUncompressedSize = ds.ReadUInt64();
+            TotalCompressedSize = ds.ReadUInt64();
 
-                FileEntryCount = ds.ReadUInt32();
-                FileMappingSize = ds.ReadUInt32();
+            ChunkCount = ds.ReadUInt32();
 
-                EncryptedCRC = ds.ReadUInt32();
-                DecryptedCRC = ds.ReadUInt32();
-                
-                // i'm sorry to say that we'll be breaking from canon and we shall not be taking 7 and a half million years to read this value
-                Flags = ds.ReadUInt32();
+            FileEntryCount = ds.ReadUInt32();
+            FileMappingSize = ds.ReadUInt32();
 
-                Mapping.Deserialize( ds );
-                
+            EncryptedCRC = ds.ReadUInt32();
+            DecryptedCRC = ds.ReadUInt32();
+
+            // i'm sorry to say that we'll be breaking from canon and we shall not be taking 7 and a half million years to read this value
+            Flags = ds.ReadUInt32();
+
+            for (int i = 0; i < FileMappingSize; i += FileMapping.MappingSize)
+            {
+                FileMapping mapping = new FileMapping();
+                mapping.Deserialize(ds);
+
+                Mapping.Add(mapping);
             }
         }
 

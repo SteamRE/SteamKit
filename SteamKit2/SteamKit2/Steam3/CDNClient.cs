@@ -107,6 +107,25 @@ namespace SteamKit2
             return manifest;
         }
 
+        public byte[] DownloadDepotChunk(int depotid, ulong chunkid)
+        {
+            Uri chunkURI = new Uri(BuildCommand(endPoint, "depot"), String.Format("{0}/chunk/{1}", depotid, chunkid));
+
+            PrepareAuthHeader(ref webClient, chunkURI);
+
+            byte[] chunk;
+            try
+            {
+                chunk = webClient.DownloadData(chunkURI);
+            }
+            catch (WebException)
+            {
+                return null;
+            }
+
+            return chunk;
+        }
+
         private void AuthDepot()
         {
             Uri authURI = BuildCommand(endPoint, "authdepot");
