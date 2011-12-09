@@ -455,3 +455,15 @@ class MsgClientRequestMachineAuthResponse<EMsg::ClientRequestMachineAuthResponse
 {
 	proto CMsgClientRequestMachineAuthResponse proto;
 };
+
+class MsgClientGetDepotDecryptionKey<EMsg::ClientGetDepotDecryptionKey>
+{
+	uint depotID;
+};
+
+class MsgClientGetDepotDecryptionKeyResponse<EMsg::ClientGetDepotDecryptionKeyResponse>
+{
+	EResult result;
+	uint depotID;
+	byte<32> depotEncryptionKey;
+};
