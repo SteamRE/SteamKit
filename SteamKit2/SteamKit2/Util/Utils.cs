@@ -24,6 +24,13 @@ namespace SteamKit2
             return origin.AddSeconds( unixTime );
         }
 
+        public static string BinToHex(byte[] input)
+        {
+            return input.Aggregate(new StringBuilder(),
+                       (sb, v) => sb.Append(v.ToString("x2"))
+                      ).ToString();
+        }
+
         public static byte[] GenerateMachineID()
         {
             // this is steamkit's own implementation, it doesn't match what steamclient does

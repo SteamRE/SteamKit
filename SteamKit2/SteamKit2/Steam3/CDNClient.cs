@@ -119,7 +119,7 @@ namespace SteamKit2
             return manifest;
         }
 
-        public byte[] DownloadDepotChunk(int depotid, ulong chunkid)
+        public byte[] DownloadDepotChunk(int depotid, string chunkid)
         {
             Uri chunkURI = new Uri(BuildCommand(endPoint, "depot"), String.Format("{0}/chunk/{1}", depotid, chunkid));
 
@@ -136,6 +136,14 @@ namespace SteamKit2
             }
 
             return chunk;
+        }
+
+        public byte[] ProcessChunk(byte[] chunk, byte[] depotkey)
+        {
+            byte[] decrypted_chunk = CryptoHelper.SymmetricDecrypt(chunk, depotkey);
+            byte[] decompressed_chunk = ZipUtil.Decompress(decrypted_chunk);
+
+            return decompressed_chunk;
         }
 
         private void AuthDepot()
@@ -166,9 +174,7 @@ namespace SteamKit2
 
             sha_hash = CryptoHelper.SHAHash(bb.ToArray());
 
-            string hex_hash = sha_hash.Aggregate(new StringBuilder(),
-                       (sb, v) => sb.Append(v.ToString("x2"))
-                      ).ToString();
+            string hex_hash = Utils.BinToHex(sha_hash);
 
             string authheader = String.Format("sessionid={0};req-counter={1};hash={2};", sessionID, reqcounter, hex_hash);
 
