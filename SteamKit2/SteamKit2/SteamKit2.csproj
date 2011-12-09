@@ -64,7 +64,6 @@
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Management" />
-    <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -89,6 +88,7 @@
     <Compile Include="Steam3\Handlers\SteamGameServer\Callbacks.cs" />
     <Compile Include="Steam3\Handlers\SteamGameServer\SteamGameServer.cs" />
     <Compile Include="Types\ChecksumData.cs" />
+    <Compile Include="Types\DepotManifest.cs" />
     <Compile Include="Types\Steam2Ticket.cs" />
     <Compile Include="Util\AsnKeyParser.cs" />
     <Compile Include="Util\StreamHelpers.cs" />

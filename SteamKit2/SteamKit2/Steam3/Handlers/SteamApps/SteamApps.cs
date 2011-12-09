@@ -35,7 +35,7 @@ namespace SteamKit2
             var request = new ClientMsgProtobuf<MsgClientAppInfoRequest>();
 
             // this info should be cached.
-            request.Msg.Proto.apps.Add(new CMsgClientAppInfoRequest.App() { app_id = appid, section_flags = (uint)EAppInfoSection.AppInfoSectionDepots } );
+            request.Msg.Proto.apps.Add(new CMsgClientAppInfoRequest.App() { app_id = appid, section_flags = 0xFFFF } );
 
             this.Client.Send( request );
         }
