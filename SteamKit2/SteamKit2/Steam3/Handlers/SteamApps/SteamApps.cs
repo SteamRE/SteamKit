@@ -40,6 +40,15 @@ namespace SteamKit2
             this.Client.Send( request );
         }
 
+        public void GetDepotDecryptionKey( uint depotid )
+        {
+            var request = new ClientMsg<MsgClientGetDepotDecryptionKey, ExtendedClientMsgHdr>();
+
+            request.Msg.DepotID = depotid;
+
+            this.Client.Send(request);
+        }
+
         /// <summary>
         /// Handles a client message. This should not be called directly.
         /// </summary>
@@ -66,6 +75,10 @@ namespace SteamKit2
 
                 case EMsg.ClientAppInfoResponse:
                     HandleAppInfoResponse( e );
+                    break;
+
+                case EMsg.ClientGetDepotDecryptionKeyResponse:
+                    HandleDepotKeyResponse(e);
                     break;
             }
         }
@@ -111,10 +124,22 @@ namespace SteamKit2
             }
 
 #if STATIC_CALLBACKS
-            var callback = new AppInfoCallback( Client, ticketResponse.Msg.Proto );
+            var callback = new AppInfoCallback( Client, infoResponse.Msg.Proto );
             SteamClient.PostCallback( callback );
 #else
             var callback = new AppInfoCallback(infoResponse.Msg.Proto);
+            this.Client.PostCallback(callback);
+#endif
+        }
+        void HandleDepotKeyResponse(ClientMsgEventArgs e)
+        {
+            var keyResponse = new ClientMsg<MsgClientGetDepotDecryptionKeyResponse, ExtendedClientMsgHdr>(e.Data);
+
+#if STATIC_CALLBACKS
+            var callback = new DepotKeyCallback( Client, keyResponse.Msg );
+            SteamClient.PostCallback( callback );
+#else
+            var callback = new DepotKeyCallback(keyResponse.Msg);
             this.Client.PostCallback(callback);
 #endif
         }

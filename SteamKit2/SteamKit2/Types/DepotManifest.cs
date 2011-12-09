@@ -43,6 +43,11 @@ namespace SteamKit2
             {
                 this.Chunks.Add(chunk);
             }
+
+            internal void SetName(string name)
+            {
+                this.FileName = name;
+            }
         }
 
         public List<FileData> Files { get; private set; }
@@ -55,6 +60,31 @@ namespace SteamKit2
         public DepotManifest(byte[] data)
         {
             Deserialize(data);
+        }
+
+        public bool DecryptFilenames(byte[] encryptionKey)
+        {
+            if (!FilenamesEncrypted)
+                return true;
+
+            foreach (var file in Files)
+            {
+                byte[] enc_filename = Convert.FromBase64String(file.FileName);
+                byte[] filename;
+                try
+                {
+                    filename = CryptoHelper.SymmetricDecrypt(enc_filename, encryptionKey);
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+
+                file.SetName(Encoding.ASCII.GetString(filename).TrimEnd(new char[] { '\0' }));
+            }
+
+            FilenamesEncrypted = false;
+            return true;
         }
 
         void Deserialize(byte[] data)

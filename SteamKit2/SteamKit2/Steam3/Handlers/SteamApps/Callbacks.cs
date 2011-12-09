@@ -233,6 +233,25 @@ namespace SteamKit2
             }
         }
 
+        public sealed class DepotKeyCallback : CallbackMsg
+        {
+            public EResult Result { get; set; }
+            public uint DepotID { get; set; }
+            public byte[] DepotKey { get; set; }
+
+#if STATIC_CALLBACKS
+            internal DepotKeyCallback( SteamClient client, MsgClientGetDepotDecryptionKeyResponse msg )
+                : base( client )
+#else
+            internal DepotKeyCallback( MsgClientGetDepotDecryptionKeyResponse msg )
+#endif
+            {
+                Result = (EResult)msg.Result;
+                DepotID = msg.DepotID;
+                DepotKey = msg.DepotEncryptionKey;
+            }
+        }
+
         public sealed class GameConnectTokensCallback : CallbackMsg
         {
             public uint TokensToKeep { get; private set; }
