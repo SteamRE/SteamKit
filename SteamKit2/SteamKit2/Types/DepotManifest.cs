@@ -20,11 +20,17 @@ namespace SteamKit2
             public byte[] CRC { get; private set; }
             public ulong Offset { get; private set; }
 
-            internal ChunkData(byte[] id, byte[] crc, ulong offset)
+            public uint CompressedLength { get; private set; }
+            public uint UncompressedLength { get; private set; }
+
+            internal ChunkData(byte[] id, byte[] crc, ulong offset, uint comp_length, uint uncomp_length)
             {
                 this.ChunkID = id;
                 this.CRC = crc;
                 this.Offset = offset;
+
+                this.CompressedLength = comp_length;
+                this.UncompressedLength = uncomp_length;
             }
         }
 
@@ -33,9 +39,12 @@ namespace SteamKit2
             public string FileName { get; private set; }
             public List<ChunkData> Chunks { get; private set; }
 
-            internal FileData(string filename)
+            public ulong TotalSize { get; private set; }
+
+            internal FileData(string filename, ulong size)
             {
                 this.FileName = filename;
+                this.TotalSize = size;
                 this.Chunks = new List<ChunkData>();
             }
 
@@ -120,11 +129,11 @@ namespace SteamKit2
 
             foreach (var file_mapping in manifest.Mapping)
             {
-                FileData filedata = new FileData(file_mapping.FileName);
+                FileData filedata = new FileData(file_mapping.FileName, file_mapping.TotalSize);
 
                 foreach (var chunk in file_mapping.Chunks)
                 {
-                    filedata.AddChunk(new ChunkData(chunk.ChunkGID, chunk.CRC, chunk.Offset));
+                    filedata.AddChunk(new ChunkData(chunk.ChunkGID, chunk.CRC, chunk.Offset, chunk.CompressedSize, chunk.DecompressedSize));
                 }
 
                 Files.Add(filedata);
