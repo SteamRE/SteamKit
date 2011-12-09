@@ -8,7 +8,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Net;
-using System.Web;
 using System.Text.RegularExpressions;
 
 namespace SteamKit2
@@ -45,7 +44,7 @@ namespace SteamKit2
             byte[] encryptedKey = CryptoHelper.RSAEncrypt(sessionKey);
             byte[] encryptedTicket = CryptoHelper.SymmetricEncrypt(appTicket, sessionKey);
 
-            string payload = String.Format("sessionkey={0}&appticket={1}", EncodeFull(encryptedKey), EncodeFull(encryptedTicket));
+            string payload = String.Format("sessionkey={0}&appticket={1}", EncodeBuffer(encryptedKey), EncodeBuffer(encryptedTicket));
 
             webClient.Headers.Clear();
             webClient.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
@@ -64,8 +63,8 @@ namespace SteamKit2
             var sessionidn = responsekv.Children.Where(c => c.Name == "sessionid").First();
             var reqcountern = responsekv.Children.Where(c => c.Name == "req-counter").First();
 
-            sessionID = (ulong)(sessionidn.AsInteger(0));
-            reqcounter = reqcountern.AsInteger(0);
+            sessionID = (ulong)(sessionidn.AsLong(0));
+            reqcounter = reqcountern.AsLong(0);
 
             try
             {
@@ -116,7 +115,7 @@ namespace SteamKit2
             webClient.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
 
             byte[] encryptedTicket = CryptoHelper.SymmetricEncrypt(appTicket, sessionKey);
-            string payload = String.Format("appticket={0}", EncodeFull(encryptedTicket));
+            string payload = String.Format("appticket={0}", EncodeBuffer(encryptedTicket));
 
             string response = webClient.UploadString(authURI, payload);
         }
@@ -144,15 +143,6 @@ namespace SteamKit2
 
             webClient.Headers.Clear();
             webClient.Headers.Add("x-steam-auth", authheader);
-        }
-
-        private static string EncodeFull(byte[] input)
-        {
-            return Regex.Replace(
-              HttpUtility.UrlEncode(input),
-              @"[()\.\-*]",
-              m => "%" + Convert.ToString((int)m.Captures[0].Value[0], 16).ToUpperInvariant()
-            );
         }
 
         private static Uri BuildCommand(IPEndPoint csServer, string command)
@@ -185,7 +175,7 @@ namespace SteamKit2
                 foreach (var child in serverkv.Children)
                 {
                     var node = child.Children.Where(x => x.Name == "host").First();
-                    var endpoint_string = node.AsString("").Split(':');
+                    var endpoint_string = node.Value.Split(':');
 
                     IPAddress ipaddr;
                     int port = 80;
@@ -208,6 +198,51 @@ namespace SteamKit2
 
                 return endpoints;
             }
+        }
+
+        internal static bool IsUrlSafeChar(char ch)
+        {
+            if ((((ch >= 'a') && (ch <= 'z')) || ((ch >= 'A') && (ch <= 'Z'))) || ((ch >= '0') && (ch <= '9')))
+            {
+                return true;
+            }
+
+            switch (ch)
+            {
+                case '(':
+                case ')':
+                case '*':
+                case '-':
+                case '.':
+                case '_':
+                case '!':
+                    return true;
+            }
+
+            return false;
+        }
+
+        internal static string EncodeBuffer(byte[] input)
+        {
+            StringBuilder encoded = new StringBuilder(input.Length * 2);
+
+            for (int i = 0; i < input.Length; i++)
+            {
+                if (IsUrlSafeChar((char)input[i]))
+                {
+                    encoded.Append((char)input[i]);
+                }
+                else if (input[i] == ' ')
+                {
+                    encoded.Append('+');
+                }
+                else
+                {
+                    encoded.AppendFormat("%{0:X2}", input[i]);
+                }
+            }
+
+            return encoded.ToString();
         }
     }
 }
