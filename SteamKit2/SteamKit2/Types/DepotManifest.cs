@@ -108,17 +108,16 @@ namespace SteamKit2
                     {
                         case Steam3Manifest.MAGIC:
                             Steam3Manifest binaryManifest = new Steam3Manifest(ds);
-
-                            uint marker = ds.ReadUInt32();
-                            if (marker != magic)
-                                Console.WriteLine("Unable to find end of message marker for Steam3Manifest");
-                            else
-                                ParseBinaryManifest(binaryManifest);
+                            ParseBinaryManifest(binaryManifest);
                             break;
                         default:
                             Console.WriteLine("Unrecognized magic value {0:X} in depot manifest.", magic);
-                            break;
+                            return;
                     }
+
+                    uint marker = ds.ReadUInt32();
+                    if (marker != magic)
+                        Console.WriteLine("Unable to find end of message marker for depot manifest");
                 }
         }
 

@@ -15,8 +15,6 @@ namespace SteamKit2
     {
         public sealed class FileMapping
         {
-            public const int MappingSize = 0x36B2;
-
             public sealed class Chunk
             {
                 public byte[] ChunkGID { get; set; } // sha1 hash for this chunk
@@ -166,12 +164,15 @@ namespace SteamKit2
             // i'm sorry to say that we'll be breaking from canon and we shall not be taking 7 and a half million years to read this value
             Flags = ds.ReadUInt32();
 
-            for (int i = 0; i < FileMappingSize; i += FileMapping.MappingSize)
+            for (uint i = FileMappingSize; i > 0; )
             {
+                long start = ds.Position;
+
                 FileMapping mapping = new FileMapping();
                 mapping.Deserialize(ds);
-
                 Mapping.Add(mapping);
+
+                i -= (uint)(ds.Position - start);
             }
         }
 
