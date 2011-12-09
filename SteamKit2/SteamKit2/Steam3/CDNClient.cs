@@ -14,16 +14,28 @@ namespace SteamKit2
 {
     public class CDNClient
     {
+        public class ClientEndPoint
+        {
+            public string Host;
+            public int Port;
+
+            public ClientEndPoint(string host, int port)
+            {
+                Host = host;
+                Port = port;
+            }
+        }
+
         private WebClient webClient;
         private byte[] sessionKey;
 
         private ulong sessionID;
         private long reqcounter;
 
-        private IPEndPoint endPoint;
+        private ClientEndPoint endPoint;
         private byte[] appTicket;
 
-        public CDNClient(IPEndPoint cdnServer, byte[] appticket)
+        public CDNClient(ClientEndPoint cdnServer, byte[] appticket)
         {
             sessionKey = CryptoHelper.GenerateRandomBlock(32);
 
@@ -164,12 +176,12 @@ namespace SteamKit2
             webClient.Headers.Add("x-steam-auth", authheader);
         }
 
-        private static Uri BuildCommand(IPEndPoint csServer, string command)
+        private static Uri BuildCommand(ClientEndPoint csServer, string command)
         {
-            return new Uri(String.Format("http://{0}:{1}/{2}/", csServer.Address.ToString(), csServer.Port.ToString(), command));
+            return new Uri(String.Format("http://{0}:{1}/{2}/", csServer.Host, csServer.Port.ToString(), command));
         }
 
-        public static List<IPEndPoint> FetchServerList(IPEndPoint csServer, int cellID)
+        public static List<ClientEndPoint> FetchServerList(ClientEndPoint csServer, int cellID)
         {
             int serversToRequest = 20;
 
@@ -187,32 +199,26 @@ namespace SteamKit2
                     return null;
                 }
 
-                List<IPEndPoint> endpoints = new List<IPEndPoint>();
+                List<ClientEndPoint> endpoints = new List<ClientEndPoint>();
 
                 KeyValue serverkv = KeyValue.LoadFromString(serverList);
 
                 foreach (var child in serverkv.Children)
                 {
                     var node = child.Children.Where(x => x.Name == "host").First();
+                    var typeNode = child.Children.Where(x => x.Name == "type").First();
+
+                    if (typeNode.Value == "CDN") // not sure what to do with these
+                        continue;
+
                     var endpoint_string = node.Value.Split(':');
 
-                    IPAddress ipaddr;
                     int port = 80;
                     
                     if(endpoint_string.Length > 1)
                         port = int.Parse(endpoint_string[1]);
 
-                    if (IPAddress.TryParse(endpoint_string[0], out ipaddr))
-                    {
-                        endpoints.Add(new IPEndPoint(ipaddr, port));
-                    }
-                    else
-                    {
-                        foreach (IPAddress addr in Dns.GetHostEntry(endpoint_string[0]).AddressList)
-                        {
-                            endpoints.Add(new IPEndPoint(addr, port));
-                        }
-                    }
+                    endpoints.Add(new ClientEndPoint(endpoint_string[0], port));
                 }
 
                 return endpoints;
@@ -228,13 +234,9 @@ namespace SteamKit2
 
             switch (ch)
             {
-                case '(':
-                case ')':
-                case '*':
                 case '-':
                 case '.':
                 case '_':
-                case '!':
                     return true;
             }
 
@@ -247,11 +249,13 @@ namespace SteamKit2
 
             for (int i = 0; i < input.Length; i++)
             {
-                if (IsUrlSafeChar((char)input[i]))
+                char inch = (char)input[i];
+
+                if (IsUrlSafeChar(inch))
                 {
-                    encoded.Append((char)input[i]);
+                    encoded.Append(inch);
                 }
-                else if (input[i] == ' ')
+                else if (inch == ' ')
                 {
                     encoded.Append('+');
                 }
