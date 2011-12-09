@@ -188,7 +188,7 @@ namespace SteamKit2
 
     public class KeyValue
     {
-        public enum Type : byte
+        private enum Type : byte
         {
             None = 0,
             String = 1,
@@ -203,18 +203,18 @@ namespace SteamKit2
 
         public KeyValue()
         {
+            Value = null;
+            Children = new List<KeyValue>();
         }
 
-        public KeyValue( string name )
+        public KeyValue( string name ) : this()
         {
             Name = name;
         }
 
         private static KeyValue Invalid = new KeyValue();
         public string Name = "<root>";
-        public Type ValueType = Type.None;
-        public object Value;
-        public bool Valid;
+        public string Value;
 
         public List<KeyValue> Children = null;
 
@@ -222,11 +222,6 @@ namespace SteamKit2
         {
             get
             {
-                if ( this.Children == null )
-                {
-                    return Invalid;
-                }
-
                 var child = this.Children.SingleOrDefault(
                     c => c.Name.ToLowerInvariant() == key.ToLowerInvariant() );
 
@@ -239,149 +234,61 @@ namespace SteamKit2
             }
         }
 
-        public string AsString( string defaultValue )
+        public string AsString()
         {
-            if ( this.Valid == false )
-            {
-                return defaultValue;
-            }
-            else if ( this.Value == null )
-            {
-                return defaultValue;
-            }
-
-            return this.Value.ToString();
+            return this.Value;
         }
 
         public int AsInteger( int defaultValue )
         {
-            if ( this.Valid == false )
+            int value;
+
+            if (int.TryParse((string)this.Value, out value) == false)
             {
                 return defaultValue;
             }
 
-            switch ( this.ValueType )
+            return value;
+        }
+
+        public long AsLong( long defaultValue )
+        {
+            long value;
+
+            if (long.TryParse((string)this.Value, out value) == false)
             {
-                case Type.String:
-                case Type.WideString:
-                    {
-                        int value;
-                        if ( int.TryParse( ( string )this.Value, out value ) == false )
-                        {
-                            return defaultValue;
-                        }
-                        return value;
-                    }
-
-                case Type.Int32:
-                    {
-                        return ( int )this.Value;
-                    }
-
-                case Type.Float32:
-                    {
-                        return ( int )( ( float )this.Value );
-                    }
-
-                case Type.UInt64:
-                    {
-                        return ( int )( ( ulong )this.Value & 0xFFFFFFFF );
-                    }
+                return defaultValue;
             }
 
-            return defaultValue;
+            return value;
         }
 
         public float AsFloat( float defaultValue )
         {
-            if ( this.Valid == false )
+            float value;
+            
+            if (float.TryParse((string)this.Value, out value) == false)
             {
                 return defaultValue;
             }
 
-            switch ( this.ValueType )
-            {
-                case Type.String:
-                case Type.WideString:
-                    {
-                        float value;
-                        if ( float.TryParse( ( string )this.Value, out value ) == false )
-                        {
-                            return defaultValue;
-                        }
-                        return value;
-                    }
-
-                case Type.Int32:
-                    {
-                        return ( float )( ( int )this.Value );
-                    }
-
-                case Type.Float32:
-                    {
-                        return ( float )this.Value;
-                    }
-
-                case Type.UInt64:
-                    {
-                        return ( float )( ( ulong )this.Value & 0xFFFFFFFF );
-                    }
-            }
-
-            return defaultValue;
+            return value;
         }
 
         public bool AsBoolean( bool defaultValue )
         {
-            if ( this.Valid == false )
+            int value;
+            
+            if (int.TryParse((string)this.Value, out value) == false)
             {
                 return defaultValue;
             }
 
-            switch ( this.ValueType )
-            {
-                case Type.String:
-                case Type.WideString:
-                    {
-                        int value;
-                        if ( int.TryParse( ( string )this.Value, out value ) == false )
-                        {
-                            return defaultValue;
-                        }
-                        return value != 0 ? true : false;
-                    }
-
-                case Type.Int32:
-                    {
-                        return ( ( int )this.Value ) != 0 ? true : false;
-                    }
-
-                case Type.Float32:
-                    {
-                        return ( ( int )( ( float )this.Value ) ) != 0.0f ? true : false;
-                    }
-
-                case Type.UInt64:
-                    {
-                        return ( ( ulong )this.Value ) != 0 ? true : false;
-                    }
-            }
-
-            return defaultValue;
+            return value != 0 ? true : false;
         }
 
         public override string ToString()
         {
-            if ( this.Valid == false )
-            {
-                return "<invalid>";
-            }
-
-            if ( this.ValueType == Type.None )
-            {
-                return this.Name;
-            }
-
             return string.Format( "{0} = {1}", this.Name, this.Value );
         }
 
@@ -516,45 +423,7 @@ namespace SteamKit2
                         throw new Exception( "RecursiveLoadFromBuffer:  got conditional between key and value" );
                     }
 
-                    int len = value.Length;
-
-                    int ival = 0;
-                    float fval = 0.0f;
-
-                    if ( len == 0 )
-                    {
-                        dat.ValueType = KeyValue.Type.String;
-                        dat.Value = value;
-                        dat.Valid = true;
-                    }
-                    else if ( 18 == len && value.Substring( 0, 1 ) == "0" && value.Substring( 1, 1 ) == "x" )
-                    {
-                        dat.ValueType = KeyValue.Type.UInt64;
-                        UInt64 retVal = 0;
-                        if ( UInt64.TryParse( value, NumberStyles.AllowHexSpecifier, CultureInfo.InvariantCulture, out retVal ) )
-                        {
-                            dat.Valid = true;
-                        }
-                    }
-                    else if ( Int32.TryParse( value, out ival ) )
-                    {
-                        dat.ValueType = KeyValue.Type.Int32;
-                        dat.Value = ival;
-                        dat.Valid = true;
-                    }
-                    else if ( float.TryParse( value, out fval ) )
-                    {
-                        dat.ValueType = KeyValue.Type.Float32;
-                        dat.Value = fval;
-                        dat.Valid = true;
-                    }
-                    else
-                    {
-                        dat.ValueType = KeyValue.Type.String;
-                        dat.Value = value;
-                        dat.Valid = true;
-                    }
-
+                    dat.Value = value;
                     // blahconditionalsdontcare
                 }
             }
@@ -589,7 +458,7 @@ namespace SteamKit2
             // loop through all our keys writing them to disk
             foreach ( KeyValue child in Children )
             {
-                if ( child.ValueType == KeyValue.Type.None )
+                if ( child.Value == null )
                 {
                     child.RecursiveSaveToFile( f, indentLevel + 1 );
                 }
@@ -598,7 +467,7 @@ namespace SteamKit2
                     WriteIndents( f, indentLevel + 1 );
                     WriteString( f, child.Name, true );
                     WriteString( f, "\t\t" );
-                    WriteString( f, child.AsString( "" ), true );
+                    WriteString( f, child.AsString(), true );
                     WriteString( f, "\n" );
                 }
             }
@@ -638,7 +507,6 @@ namespace SteamKit2
                     }
 
                     var current = new KeyValue();
-                    current.ValueType = type;
                     current.Name = input.ReadNullTermString( Encoding.UTF8 );
 
                     switch ( type )
@@ -651,7 +519,6 @@ namespace SteamKit2
 
                         case Type.String:
                             {
-                                current.Valid = true;
                                 current.Value = input.ReadNullTermString( Encoding.UTF8 );
                                 break;
                             }
@@ -662,37 +529,22 @@ namespace SteamKit2
                             }
 
                         case Type.Int32:
+                        case Type.Color:
+                        case Type.Pointer:
                             {
-                                current.Valid = true;
-                                current.Value = input.ReadInt32();
+                                current.Value = Convert.ToString(input.ReadInt32());
                                 break;
                             }
 
                         case Type.UInt64:
                             {
-                                current.Valid = true;
-                                current.Value = input.ReadUInt64();
+                                current.Value = Convert.ToString(input.ReadUInt64());
                                 break;
                             }
 
                         case Type.Float32:
                             {
-                                current.Valid = true;
-                                current.Value = input.ReadFloat();
-                                break;
-                            }
-
-                        case Type.Color:
-                            {
-                                current.Valid = true;
-                                current.Value = ( uint )input.ReadInt32();
-                                break;
-                            }
-
-                        case Type.Pointer:
-                            {
-                                current.Valid = true;
-                                current.Value = ( uint )input.ReadInt32();
+                                current.Value = Convert.ToString(input.ReadFloat());
                                 break;
                             }
 
@@ -710,7 +562,6 @@ namespace SteamKit2
                     this.Children.Add( current );
                 }
 
-                this.Valid = true;
                 return input.Position == input.Length;
             }
             catch ( Exception )
