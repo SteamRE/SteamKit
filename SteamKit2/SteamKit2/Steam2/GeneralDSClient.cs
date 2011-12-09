@@ -44,7 +44,7 @@ namespace SteamKit2
             byte[] userHash = CryptoHelper.JenkinsHash( Encoding.ASCII.GetBytes( userName ) );
             uint userData = BitConverter.ToUInt32( userHash, 0 ) & 1;
 
-            TcpPacket packet = base.GetRawServerList( EServerType.ProxyASClientAuthentication, NetHelpers.EndianSwap( userData ) );
+            TcpPacket packet = base.GetRawServerList( ESteam2ServerType.ProxyASClientAuthentication, NetHelpers.EndianSwap( userData ) );
 
             if ( packet == null )
                 return null;

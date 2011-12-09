@@ -208,7 +208,7 @@ class MsgClientUpdateGuestPassesList<EMsg::ClientUpdateGuestPassesList>
 
 class MsgClientServerList<EMsg::ClientServerList>
 {
-	int countServers;
+	proto CMsgClientServerList proto;
 };
 
 class MsgClientRequestedClientStats<EMsg::ClientRequestedClientStats>

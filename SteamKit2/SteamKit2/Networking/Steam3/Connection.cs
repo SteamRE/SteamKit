@@ -52,6 +52,7 @@ namespace SteamKit2
 
     abstract class Connection
     {
+        // bootstrap CM list
         public static readonly IPEndPoint[] CMServers =
         {
             new IPEndPoint( IPAddress.Parse( "68.142.64.164" ), 27017 ),

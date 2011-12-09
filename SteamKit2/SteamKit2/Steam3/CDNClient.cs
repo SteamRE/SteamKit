@@ -200,8 +200,9 @@ namespace SteamKit2
                 {
                     serverList = webClient.DownloadString(request);
                 }
-                catch (WebException)
+                catch (WebException e)
                 {
+                    Console.WriteLine("FetchServerList returned: {0}", e.Message);
                     return null;
                 }
 
@@ -211,7 +212,7 @@ namespace SteamKit2
 
                 foreach (var child in serverkv.Children)
                 {
-                    var node = child.Children.Where(x => x.Name == "host").First();
+                    var node = child.Children.Where(x => x.Name == "host" || x.Name == "Host").First();
                     var typeNode = child.Children.Where(x => x.Name == "type").First();
 
                     if (typeNode.Value == "CDN") // not sure what to do with these

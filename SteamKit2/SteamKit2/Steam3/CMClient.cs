@@ -80,6 +80,7 @@ namespace SteamKit2
 
         ScheduledFunction heartBeatFunc;
 
+        private Dictionary<EServerType, List<IPEndPoint>> serverMap;
 
         /// <summary>
         /// The connection type to use when connecting to the Steam3 network.
@@ -111,6 +112,7 @@ namespace SteamKit2
         /// <param name="type">The connection type to use.</param>
         public CMClient( ConnectionType type )
         {
+            serverMap = new Dictionary<EServerType, List<IPEndPoint>>();
             SessionID = default( int );
             SteamID = default( ulong );
 
@@ -216,6 +218,19 @@ namespace SteamKit2
             return Connection.GetLocalIP();
         }
 
+        /// <summary>
+        /// Returns the list of servers matching the given type
+        /// </summary>
+        /// <param name="type">Server type requested</param>
+        /// <returns>List of server endpoints</returns>
+        public List<IPEndPoint> GetServersOfType(EServerType type)
+        {
+            List<IPEndPoint> list;
+            if (!serverMap.TryGetValue(type, out list))
+                return new List<IPEndPoint>();
+
+            return list;
+        }
 
         /// <summary>
         /// Raises the <see cref="E:ClientMsgReceived"/> event.
@@ -259,6 +274,10 @@ namespace SteamKit2
 
                 case EMsg.ClientLoggedOff: // to stop heartbeating when we get logged off
                     HandleLoggedOff( cliEvent );
+                    break;
+
+                case EMsg.ClientServerList: // Steam server list
+                    HandleServerList(cliEvent);
                     break;
             }
 
@@ -394,6 +413,23 @@ namespace SteamKit2
             if ( heartBeatFunc != null )
             {
                 heartBeatFunc.Stop();
+            }
+        }
+        void HandleServerList(ClientMsgEventArgs cliEvent)
+        {
+            var listMsg = new ClientMsgProtobuf<MsgClientServerList>(cliEvent.Data);
+
+            foreach (var server in listMsg.Msg.Proto.servers)
+            {
+                EServerType type = (EServerType)server.server_type;
+
+                List<IPEndPoint> endpointList;
+                if (!serverMap.TryGetValue(type, out endpointList))
+                {
+                    serverMap[type] = endpointList = new List<IPEndPoint>();
+                }
+
+                endpointList.Add(new IPEndPoint(NetHelpers.GetIPAddress(NetHelpers.EndianSwap(server.server_ip)), (int)server.server_port));
             }
         }
         #endregion

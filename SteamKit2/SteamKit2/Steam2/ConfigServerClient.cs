@@ -44,7 +44,7 @@ namespace SteamKit2
 
         public byte[] GetNetworkKey()
         {
-            if ( !this.HandshakeServer( EServerType.ConfigServer ) )
+            if ( !this.HandshakeServer( ESteam2ServerType.ConfigServer ) )
                 return null;
 
             uint externalIp = this.Socket.Reader.ReadUInt32();
@@ -77,7 +77,7 @@ namespace SteamKit2
         {
             try
             {
-                if ( !this.HandshakeServer( EServerType.ConfigServer ) )
+                if ( !this.HandshakeServer( ESteam2ServerType.ConfigServer ) )
                     return null;
 
                 uint externalIp = Socket.Reader.ReadUInt32();
@@ -113,7 +113,7 @@ namespace SteamKit2
         public byte[] GetClientConfigRecord()
         {
 
-            if ( !this.HandshakeServer( EServerType.ConfigServer ) )
+            if ( !this.HandshakeServer( ESteam2ServerType.ConfigServer ) )
             {
                 this.Disconnect();
                 return null;

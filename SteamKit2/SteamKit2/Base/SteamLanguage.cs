@@ -861,6 +861,59 @@ namespace SteamKit2
 		OSTypeWin2008 = 11,
 		Max = 12,
 	}
+	public enum EServerType
+	{
+		ServerTypeInvalid = -1,
+		ServerTypeShell = 0,
+		ServerTypeGM = 1,
+		ServerTypeBUM = 2,
+		ServerTypeAM = 3,
+		ServerTypeBS = 4,
+		ServerTypeVS = 5,
+		ServerTypeATS = 6,
+		ServerTypeCM = 7,
+		ServerTypeFBS = 8,
+		ServerTypeFG = 9,
+		ServerTypeSS = 10,
+		ServerTypeDRMS = 11,
+		ServerTypeHubOBSOLETE = 12,
+		ServerTypeConsole = 13,
+		ServerTypeASBOBSOLETE = 14,
+		ServerTypeClient = 15,
+		ServerTypeBootstrapOBSOLETE = 16,
+		ServerTypeDP = 17,
+		ServerTypeWG = 18,
+		ServerTypeSM = 19,
+		ServerTypeUFS = 21,
+		ServerTypeUtil = 23,
+		ServerTypeDSS = 24,
+		ServerTypeP2PRelayOBSOLETE = 25,
+		ServerTypeAppInformation = 26,
+		ServerTypeSpare = 27,
+		ServerTypeFTS = 28,
+		ServerTypeEPM = 29,
+		ServerTypePS = 30,
+		ServerTypeIS = 31,
+		ServerTypeCCS = 32,
+		ServerTypeDFS = 33,
+		ServerTypeLBS = 34,
+		ServerTypeMDS = 35,
+		ServerTypeCS = 36,
+		ServerTypeGC = 37,
+		ServerTypeNS = 38,
+		ServerTypeOGS = 39,
+		ServerTypeWebAPI = 40,
+		ServerTypeUDS = 41,
+		ServerTypeMMS = 42,
+		ServerTypeGMS = 43,
+		ServerTypeKGS = 44,
+		ServerTypeUCM = 45,
+		ServerTypeRM = 46,
+		ServerTypeFS = 47,
+		ServerTypeEcon = 48,
+		ServerTypeBackpack = 49,
+		Max = 50,
+	}
 	public enum EUdpPacketType
 	{
 		Invalid = 0,
@@ -2453,27 +2506,22 @@ namespace SteamKit2
 	{
 		public EMsg GetEMsg() { return EMsg.ClientServerList; }
 
-		// Static size: 4
-		public int CountServers { get; set; }
+		// Static size: 0
+		public CMsgClientServerList Proto { get; set; }
 
 		public MsgClientServerList()
 		{
-			CountServers = 0;
+			Proto = new CMsgClientServerList();
 		}
 
 		public void Serialize(Stream stream)
 		{
-			BinaryWriter bw = new BinaryWriter( stream );
-
-			bw.Write( CountServers );
-
+			ProtoBuf.Serializer.Serialize<CMsgClientServerList>(stream, Proto);
 		}
 
 		public void Deserialize( Stream stream )
 		{
-			BinaryReader br = new BinaryReader( stream );
-
-			CountServers = br.ReadInt32();
+			Proto = ProtoBuf.Serializer.Deserialize<CMsgClientServerList>( stream );
 		}
 	}
 

@@ -23,7 +23,7 @@ namespace SteamKit2
         /// </summary>
         /// <param name="type">The server type.</param>
         /// <returns>A list of servers on success; otherwise, <c>null</c>.</returns>
-        public IPEndPoint[] GetServerList( EServerType type )
+        public IPEndPoint[] GetServerList( ESteam2ServerType type )
         {
             TcpPacket packet = this.GetRawServerList( ( byte )type );
 
@@ -47,7 +47,7 @@ namespace SteamKit2
         }
 
 
-        protected TcpPacket GetRawServerList( EServerType type, params object[] args )
+        protected TcpPacket GetRawServerList( ESteam2ServerType type, params object[] args )
         {
             return this.GetRawServerList( ( byte )type, args );
         }
@@ -58,7 +58,7 @@ namespace SteamKit2
             try
             {
 
-                if ( !this.HandshakeServer( EServerType.GeneralDirectoryServer ) )
+                if ( !this.HandshakeServer( ESteam2ServerType.GeneralDirectoryServer ) )
                 {
                     DebugLog.WriteLine( "DSClient", "GetServerList failed handshake." );
 
