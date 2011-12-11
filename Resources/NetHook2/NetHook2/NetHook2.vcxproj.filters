@@ -9,6 +9,9 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
+    <Filter Include="Header Files\steam">
+      <UniqueIdentifier>{e95b36bd-83b8-43cd-95a6-24c0e3c59fa8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="binaryreader.cpp">
@@ -66,6 +69,21 @@
     </ClInclude>
     <ClInclude Include="zip.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steam\clientmsgs.h">
+      <Filter>Header Files\steam</Filter>
+    </ClInclude>
+    <ClInclude Include="steam\csteamid.h">
+      <Filter>Header Files\steam</Filter>
+    </ClInclude>
+    <ClInclude Include="steam\emsg.h">
+      <Filter>Header Files\steam</Filter>
+    </ClInclude>
+    <ClInclude Include="steam\steamtypes.h">
+      <Filter>Header Files\steam</Filter>
+    </ClInclude>
+    <ClInclude Include="steam\udppkt.h">
+      <Filter>Header Files\steam</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -5,6 +5,8 @@
 #include "logger.h"
 #include "csimplescan.h"
 
+#include <cassert>
+
 #include <map>
 
 
@@ -15,23 +17,19 @@ bool (__cdecl *GetMessageFn)( int * ) = 0;
 
 
 
-#pragma pack( push, 1 )
 struct MsgInfo_t
 {
-	EMsg emsg;
-	const char *name;
-	uint32 flags;
-	uint32 serverType;
+	EMsg eMsg;
+	const char *pchMsgName;
+	int nFlags;
+	EServerType k_EServerTarget;
 
-	uint64 unk;
-	uint32 unk2;
-	uint32 unk3;
-
-	uint64 unk4;
-	uint32 unk5;
-	uint32 unk6;
+	uint32 nTimesSent;
+	uint64 uBytesSent;
+	
+	uint32 nTimesSentProfile;
+	uint64 uBytesSentProfile;
 };
-#pragma pack( pop )
 
 typedef std::map<EMsg, MsgInfo_t *> MsgList;
 typedef std::pair<EMsg, MsgInfo_t *> MsgPair;
@@ -43,6 +41,9 @@ MsgList eMsgList;
 CCrypto::CCrypto()
 	: Encrypt_Detour( NULL ), Decrypt_Detour( NULL )
 {
+
+	assert( sizeof( MsgInfo_t ) == 48 ); // god help the padding never change
+
 	CSimpleScan steamClientScan( "steamclient.dll" );
 
 	bool bEncrypt = steamClientScan.FindFunction(
@@ -62,11 +63,9 @@ CCrypto::CCrypto()
 
 	g_pLogger->LogConsole( "CCrypto::SymmetricDecrypt = 0x%x\n", Decrypt_Orig );
 
-#define STEAMCLIENT_BETA
 
 	char *pGhettoFunction;
 
-#ifdef STEAMCLIENT_BETA
 	/*
 	.text:3826F3D0 B8 01 00 00 00                          mov     eax, 1
 	.text:3826F3D5 84 05 F0 6B 5A 38                       test    byte ptr dword_385A6BF0, al
@@ -94,35 +93,20 @@ CCrypto::CCrypto()
 		"xxxxxxx????x?xx????xx????",
 		(void **)&pGhettoFunction
 	);
-#else
-	/*
-	.text:3843D2C0 68 7B 01 00 00                          push    379 ; num messages, this is ~probably~ guaranteed to be a short
-	.text:3843D2C5 68 E8 A4 55 38                          push    offset g_pMessageList ; offset of the actual message list
-	*/
-	steamClientScan.FindFunction(
-		"\x68\x79\x01\x00\x00\x68\x00\x00\x00\x00\xB9\x00\x00\x00\x00\xE8\x00\x00\x00\x00\x68\x00\x00\x00\x00\xE8\x00\x00\x00\x00\x59\xC3",
-		"x??xxx????x????x????x????x????xx",
-		(void **)&pGhettoFunction
-	);
-#endif
+
+	
 
 
-
-#ifdef STEAMCLIENT_BETA
 	MsgInfo_t *pInfos = *(MsgInfo_t **)( pGhettoFunction + 38 );
 	MsgInfo_t *pEndInfos = *(MsgInfo_t **)( pGhettoFunction + 64 );
-	uint16 numMessages = ( ( int )pEndInfos - ( int )pInfos ) / 48;
-#else
-	MsgInfo_t *pInfos = *(MsgInfo_t **)( pGhettoFunction + 6 );
-	uint16 numMessages = *(uint16 *)( pGhettoFunction + 1 );
-#endif
+	uint16 numMessages = ( ( int )pEndInfos - ( int )pInfos ) / sizeof( MsgInfo_t );
 
 	g_pLogger->LogConsole( "pGhettoFunction = 0x%x\npInfos = 0x%x\nnumMessages = %d\n", pGhettoFunction, pInfos, numMessages );
 
 
 	for ( uint16 x = 0 ; x < numMessages; x++ )
 	{
-		eMsgList.insert( MsgPair( pInfos->emsg, pInfos ) );
+		eMsgList.insert( MsgPair( pInfos->eMsg, pInfos ) );
 
 		pInfos++;
 	}
@@ -137,8 +121,8 @@ CCrypto::CCrypto()
 		{
 			MsgInfo_t *pInfo = iter->second;
 
-			g_pLogger->LogFile( "emsg_list.txt", false, "\t%s = %d,\r\n", pInfo->name, pInfo->emsg );
-			g_pLogger->LogFile( "emsg_list_detailed.txt", false, "\t%s = %d, // flags: %d, server type: %d\r\n", pInfo->name, pInfo->emsg, pInfo->flags, pInfo->serverType );
+			g_pLogger->LogFile( "emsg_list.txt", false, "\t%s = %d,\r\n", pInfo->pchMsgName, pInfo->eMsg );
+			g_pLogger->LogFile( "emsg_list_detailed.txt", false, "\t%s = %d, // flags: %d, server type: %d\r\n", pInfo->pchMsgName, pInfo->eMsg, pInfo->nFlags, pInfo->k_EServerTarget );
 		}
 
 		g_pLogger->LogConsole( "Dumped emsg list! (%d messages)\n", eMsgList.size() );
@@ -220,7 +204,7 @@ const char* CCrypto::GetMessage( EMsg eMsg, uint8 serverType )
 	{
 		if ( iter->first == eMsg )
 		{
-			return iter->second->name;
+			return iter->second->pchMsgName;
 		}
 	}
 
