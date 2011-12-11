@@ -233,6 +233,27 @@ namespace SteamKit2
             }
         }
 
+        public sealed class AppChangesCallback : CallbackMsg
+        {
+            public ReadOnlyCollection<uint> AppIDs { get; private set; }
+            public uint CurrentChangeNumber { get; private set; }
+
+            public bool ForceFullUpdate { get; set; }
+
+#if STATIC_CALLBACKS
+            internal AppChangesCallback( SteamClient client, CMsgClientAppInfoChanges msg )
+                : base( client )
+#else
+            internal AppChangesCallback( CMsgClientAppInfoChanges msg )
+#endif
+            {
+                AppIDs = new ReadOnlyCollection<uint>( msg.appIDs );
+                CurrentChangeNumber = msg.current_change_number;
+
+                ForceFullUpdate = msg.force_full_update;
+            }
+        }
+
         public sealed class DepotKeyCallback : CallbackMsg
         {
             public EResult Result { get; set; }

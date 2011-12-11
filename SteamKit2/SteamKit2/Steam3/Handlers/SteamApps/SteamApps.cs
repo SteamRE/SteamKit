@@ -40,6 +40,16 @@ namespace SteamKit2
             this.Client.Send( request );
         }
 
+        public void GetAppChanges( uint lastChangeList )
+        {
+            var request = new ClientMsgProtobuf<MsgClientAppInfoUpdate>();
+
+            request.Msg.Proto.last_changenumber = lastChangeList;
+            request.Msg.Proto.send_changelist = true;
+
+            this.Client.Send( request );
+        }
+
         public void GetDepotDecryptionKey( uint depotid )
         {
             var request = new ClientMsg<MsgClientGetDepotDecryptionKey, ExtendedClientMsgHdr>();
@@ -75,6 +85,10 @@ namespace SteamKit2
 
                 case EMsg.ClientAppInfoResponse:
                     HandleAppInfoResponse( e );
+                    break;
+
+                case EMsg.ClientAppInfoChanges:
+                    HandleAppInfoChanges( e );
                     break;
 
                 case EMsg.ClientGetDepotDecryptionKeyResponse:
@@ -129,6 +143,19 @@ namespace SteamKit2
 #else
             var callback = new AppInfoCallback(infoResponse.Msg.Proto);
             this.Client.PostCallback(callback);
+#endif
+        }
+
+        void HandleAppInfoChanges( ClientMsgEventArgs e )
+        {
+            var changes = new ClientMsgProtobuf<MsgClientAppInfoChanges>( e.Data );
+
+#if STATIC_CALLBACKS
+            var callback = new AppChangesCallback( Client, changes.Msg.Proto );
+            SteamClient.PostCallback( callback );
+#else
+            var callback = new AppChangesCallback( changes.Msg.Proto );
+            this.Client.PostCallback( callback );
 #endif
         }
         void HandleDepotKeyResponse(ClientMsgEventArgs e)
