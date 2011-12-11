@@ -264,6 +264,19 @@ namespace SteamKit2
             this.Client.Send( chatMsg );
         }
 
+        public void RequestFriendInfo( SteamID steamIdUser )
+        {
+            var request = new ClientMsgProtobuf<MsgClientRequestFriendData>();
+
+            request.Msg.Proto.friends.Add( steamIdUser );
+            request.Msg.Proto.persona_state_requested = ( uint )(
+                EClientPersonaStateFlag.PlayerName | EClientPersonaStateFlag.Presence |
+                EClientPersonaStateFlag.SourceID | EClientPersonaStateFlag.GameExtraInfo
+            );
+
+            this.Client.Send( request );
+        }
+
 
         /// <summary>
         /// Handles a client message. This should not be called directly.
