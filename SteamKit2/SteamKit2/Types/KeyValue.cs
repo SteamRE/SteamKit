@@ -212,7 +212,7 @@ namespace SteamKit2
             Name = name;
         }
 
-        private static KeyValue Invalid = new KeyValue();
+        public readonly static KeyValue Invalid = new KeyValue();
         public string Name = "<root>";
         public string Value;
 
