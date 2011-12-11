@@ -104,6 +104,11 @@
     <ClInclude Include="logger.h" />
     <ClInclude Include="sigscan.h" />
     <ClInclude Include="steammessages_base.pb.h" />
+    <ClInclude Include="steam\clientmsgs.h" />
+    <ClInclude Include="steam\csteamid.h" />
+    <ClInclude Include="steam\emsg.h" />
+    <ClInclude Include="steam\steamtypes.h" />
+    <ClInclude Include="steam\udppkt.h" />
     <ClInclude Include="zip.h" />
   </ItemGroup>
   <ItemGroup>
