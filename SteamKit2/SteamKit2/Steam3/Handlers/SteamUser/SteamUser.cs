@@ -45,31 +45,6 @@ namespace SteamKit2
             /// <value>The password.</value>
             public string Password { get; set; }
 
-            /// <summary>
-            /// Gets or sets the SteamID used for logging into Steam3.
-            /// </summary>
-            /// <value>
-            /// The SteamID.
-            /// </value>
-            public SteamID SteamID { get; set; }
-
-            /// <summary>
-            /// Gets or sets the client Ticket Granting Ticket.
-            /// </summary>
-            /// <value>The client TGT.</value>
-            public ClientTGT ClientTGT { get; set; }
-            /// <summary>
-            /// Gets or sets the server Ticket Granting Ticket.
-            /// </summary>
-            /// <value>The server TGT.</value>
-            public byte[] ServerTGT { get; set; }
-            /// <summary>
-            /// Gets or sets the account record.
-            /// </summary>
-            /// <value>The account record.</value>
-            public AuthBlob AccRecord { get; set; }
-
-
 
             /// <summary>
             /// Gets or sets the Steam Guard auth code used to login. This is the code sent to the user's email.
@@ -103,24 +78,10 @@ namespace SteamKit2
 
             SteamID steamId = new SteamID( 0, details.AccountInstance, Client.ConnectedUniverse, EAccountType.Individual );
 
-            if ( details.ClientTGT != null )
+            if ( string.IsNullOrEmpty( details.Username ) || string.IsNullOrEmpty( details.Password ) )
             {
-                steamId.SetFromSteam2( details.ClientTGT.UserID, this.Client.ConnectedUniverse );
+                throw new ArgumentException( "LogOn requires a username and password to be set in LogOnDetails." );
             }
-            else if ( details.SteamID != null )
-            {
-                steamId = details.SteamID;
-            }
-            else if ( details.Password != null )
-            {
-                // this condition exists for steam3 logon without any steam2 details
-            }
-            else
-            {
-                throw new ArgumentException( "LogOn requires a SteamID or ClientTGT to be set in the LogOnDetails." );
-            }
-
-            steamId.AccountInstance = details.AccountInstance;
 
             uint localIp = NetHelpers.GetIPAddress( this.Client.GetLocalIP() );
 
@@ -137,13 +98,6 @@ namespace SteamKit2
             logon.Msg.Proto.client_language = "english";
             logon.Msg.Proto.steam2_ticket_request = true;
 
-            if ( details.AccRecord != null )
-            {
-                MicroTime creationTime = details.AccRecord.CreationTime;
-
-                logon.Msg.Proto.rtime32_account_creation = creationTime.ToUnixTime();
-                logon.Msg.Proto.email_address = details.AccRecord.Email;
-            }
 
             // because steamkit doesn't attempt to find the best cellid
             // we'll just use the default one
@@ -156,17 +110,6 @@ namespace SteamKit2
             // this is not a proper machine id that Steam accepts
             // but it's good enough for identifying a machine
             logon.Msg.Proto.machine_id = Utils.GenerateMachineID();
-
-
-            if ( details.ServerTGT != null )
-            {
-                byte[] serverTgt = new byte[ details.ServerTGT.Length + 4 ];
-
-                Array.Copy( BitConverter.GetBytes( localIp ), serverTgt, 4 );
-                Array.Copy( details.ServerTGT, 0, serverTgt, 4, details.ServerTGT.Length );
-
-                logon.Msg.Proto.steam2_auth_ticket = serverTgt;
-            }
 
 
             // steam guard
