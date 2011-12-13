@@ -85,6 +85,7 @@
             // 
             // selfControl
             // 
+            this.selfControl.AvatarHash = null;
             this.selfControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(39)))));
             this.selfControl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.selfControl.CanOpenProfile = false;
@@ -180,27 +181,26 @@
             this.exitToolStripMenuItem});
             this.vaporContextMenu2.Name = "vaporContextMenu2";
             this.vaporContextMenu2.ShowImageMargin = false;
-            this.vaporContextMenu2.Size = new System.Drawing.Size(117, 54);
-            this.vaporContextMenu2.Opening += new System.ComponentModel.CancelEventHandler(this.vaporContextMenu2_Opening);
+            this.vaporContextMenu2.Size = new System.Drawing.Size(128, 76);
             // 
             // showHideToolStripMenuItem
             // 
             this.showHideToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.showHideToolStripMenuItem.Name = "showHideToolStripMenuItem";
-            this.showHideToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.showHideToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.showHideToolStripMenuItem.Text = "[Show/Hide]";
             this.showHideToolStripMenuItem.Click += new System.EventHandler(this.showHideToolStripMenuItem_Click);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(113, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(124, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -219,6 +219,7 @@
             this.Text = "Vapor";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.ResizeEnd += new System.EventHandler(this.MainForm_ResizeEnd);
+            this.VisibleChanged += new System.EventHandler(this.MainForm_VisibleChanged);
             this.panel1.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.vaporContextMenu1.ResumeLayout(false);

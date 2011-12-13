@@ -57,6 +57,8 @@ namespace Vapor
 
                     return;
                 }
+
+                this.UpdateFriends();
             }
 
             if ( msg.IsType<SteamUser.LoggedOffCallback>() )
@@ -157,49 +159,39 @@ namespace Vapor
                 } );
         }
 
+        private static int rankFriend(Friend x)
+        {
+            if (x.IsRequestingFriendship())
+                return 0;
+            else if (x.IsAcceptingFriendship())
+                return 99;
+            else if (x.IsInGame())
+                return 1;
+            else if (x.IsOnline())
+                return 2;
+            else if (x.GetState() == EPersonaState.Busy)
+                return 3;
+            else if (x.GetState() == EPersonaState.Away)
+                return 4;
+            else if (x.GetState() == EPersonaState.Snooze)
+                return 5;
+
+            return 10;
+        }
         private static int compareFriends(Friend a, Friend b)
         {
             if (a == b)
                 return 0;
 
-            // always show requesters on top
-            if (a.IsRequestingFriendship())
+            int rankA = rankFriend(a);
+            int rankB = rankFriend(b);
+
+            if (rankA < rankB)
                 return -1;
-
-            if (b.IsRequestingFriendship())
+            else if (rankA > rankB)
                 return 1;
-
-
-            // show people we've added at the bottom
-            if (a.IsAcceptingFriendship())
-                return 1;
-
-            if (b.IsAcceptingFriendship())
-                return -1;
-
-
-            if (a.IsInGame() && b.IsInGame())
-                return StringComparer.OrdinalIgnoreCase.Compare(a.GetName(), b.GetName());
-
-            if (!a.IsOnline() && !b.IsOnline())
-                return StringComparer.OrdinalIgnoreCase.Compare(a.GetName(), b.GetName());
-
-            if (a.IsOnline() && !a.IsInGame() && b.IsOnline() && !b.IsInGame())
-                return StringComparer.OrdinalIgnoreCase.Compare(a.GetName(), b.GetName());
-
-            if (a.IsInGame() && !b.IsInGame())
-                return -1;
-
-            if (a.IsOnline() && !b.IsOnline())
-                return -1;
-
-            if (!a.IsInGame() && b.IsInGame())
-                return 1;
-
-            if (!a.IsOnline() && b.IsOnline())
-                return 1;
-
-            return 0;
+            else
+                return a.GetName().CompareTo(b.GetName());
         }
 
         // sort and reflow controls
@@ -323,14 +315,14 @@ namespace Vapor
 #endif
         }
 
-        private void vaporContextMenu2_Opening( object sender, CancelEventArgs e )
-        {
-            showHideToolStripMenuItem.Text = ( this.Visible ? "Hide" : "Show" );
-        }
-
         private void showHideToolStripMenuItem_Click( object sender, EventArgs e )
         {
             ToggleFormVisibility();
+        }
+
+        private void UpdateContextState()
+        {
+            showHideToolStripMenuItem.Text = (this.Visible ? "Hide" : "Show");
         }
 
         private void ToggleFormVisibility()
@@ -420,6 +412,11 @@ namespace Vapor
         private void notifyIcon1_MouseDoubleClick( object sender, MouseEventArgs e )
         {
             ToggleFormVisibility();
+        }
+
+        private void MainForm_VisibleChanged(object sender, EventArgs e)
+        {
+            UpdateContextState();
         }
     }
 }
