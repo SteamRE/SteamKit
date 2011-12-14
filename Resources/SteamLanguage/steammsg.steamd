@@ -97,7 +97,7 @@ class MsgClientRequestFriendData<EMsg::ClientRequestFriendData>
 
 class MsgClientChangeStatus<EMsg::ClientChangeStatus>
 {
-	byte personaState;
+	proto CMsgClientChangeStatus proto;
 };
 
 class MsgClientPersonaState<EMsg::ClientPersonaState>

@@ -2769,27 +2769,22 @@ namespace SteamKit2
 	{
 		public EMsg GetEMsg() { return EMsg.ClientChangeStatus; }
 
-		// Static size: 1
-		public byte PersonaState { get; set; }
+		// Static size: 0
+		public CMsgClientChangeStatus Proto { get; set; }
 
 		public MsgClientChangeStatus()
 		{
-			PersonaState = 0;
+			Proto = new CMsgClientChangeStatus();
 		}
 
 		public void Serialize(Stream stream)
 		{
-			BinaryWriter bw = new BinaryWriter( stream );
-
-			bw.Write( PersonaState );
-
+			ProtoBuf.Serializer.Serialize<CMsgClientChangeStatus>(stream, Proto);
 		}
 
 		public void Deserialize( Stream stream )
 		{
-			BinaryReader br = new BinaryReader( stream );
-
-			PersonaState = br.ReadByte();
+			Proto = ProtoBuf.Serializer.Deserialize<CMsgClientChangeStatus>( stream );
 		}
 	}
 

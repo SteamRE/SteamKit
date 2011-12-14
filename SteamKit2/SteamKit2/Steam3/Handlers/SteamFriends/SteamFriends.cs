@@ -60,8 +60,11 @@ namespace SteamKit2
         /// <param name="name">The name.</param>
         public void SetPersonaName( string name )
         {
-            // todo: figure out the structure of this message
-            throw new NotImplementedException();
+            var stateMsg = new ClientMsgProtobuf<MsgClientChangeStatus>();
+            stateMsg.Msg.Proto.persona_state = ( uint )cache.LocalUser.PersonaState;
+            stateMsg.Msg.Proto.player_name = name;
+
+            this.Client.Send( stateMsg );
         }
 
         /// <summary>
@@ -78,13 +81,11 @@ namespace SteamKit2
         /// <param name="state">The state.</param>
         public void SetPersonaState( EPersonaState state )
         {
-            var stateMsg = new ClientMsg<MsgClientChangeStatus, ExtendedClientMsgHdr>();
-            stateMsg.Msg.PersonaState = ( byte )state;
+            var stateMsg = new ClientMsgProtobuf<MsgClientChangeStatus>();
+            stateMsg.Msg.Proto.persona_state = ( uint )state;
+            stateMsg.Msg.Proto.player_name = cache.LocalUser.Name;
 
             this.Client.Send( stateMsg );
-
-            // todo: figure out if we get persona state changes for our own actions
-            cache.LocalUser.PersonaState = state;
         }
 
         /// <summary>
