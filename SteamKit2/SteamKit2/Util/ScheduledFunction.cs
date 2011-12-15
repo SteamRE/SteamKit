@@ -17,29 +17,24 @@ namespace SteamKit2
 
     class ScheduledFunction
     {
-        TimeSpan delay;
+        public TimeSpan Delay { get; set; }
+
         ScheduledFunc func;
 
-        DateTime lastRun;
+        bool bStarted;
+        Timer timer;
 
-        Thread funcThread;
-        bool running;
+        public ScheduledFunction( ScheduledFunc func )
+            : this( func, TimeSpan.FromMilliseconds( -1 ) )
+        {
+        }
 
-        object lockObj = new object();
-
-        public ScheduledFunction( ScheduledFunc func, TimeSpan delay, string name )
+        public ScheduledFunction( ScheduledFunc func, TimeSpan delay )
         {
             this.func = func;
-            this.delay = delay;
+            this.Delay = delay;
 
-            lastRun = DateTime.MinValue;
-
-            funcThread = new Thread( ThreadFunc );
-            funcThread.Name = name;
-
-            running = true;
-
-            funcThread.Start();
+            timer = new Timer( Tick, null, TimeSpan.FromMilliseconds( -1 ), delay );
         }
         ~ScheduledFunction()
         {
@@ -47,46 +42,27 @@ namespace SteamKit2
         }
 
 
+        public void Start()
+        {
+            if ( bStarted )
+                return;
+
+            bStarted = timer.Change( TimeSpan.Zero, Delay );
+        }
+
         public void Stop()
         {
-            lock ( lockObj )
-            {
-                running = false;
-            }
+            if ( !bStarted )
+                return;
 
-            funcThread.Join();
+            bStarted = !timer.Change( TimeSpan.FromMilliseconds( -1 ), Delay );
         }
 
-        void ThreadFunc()
-        {
-            while ( true )
-            {
-                lock ( lockObj )
-                {
-                    if ( !running )
-                        return;
-                }
 
-                Thread.Sleep( 100 );
-
-                this.CheckAndRun();
-            }
-        }
-
-        void CheckAndRun()
-        {
-            TimeSpan diff = DateTime.Now - this.lastRun;
-
-            if ( diff >= this.delay )
-                this.Run();
-        }
-
-        void Run()
+        void Tick( object state )
         {
             if ( func != null )
                 func();
-
-            this.lastRun = DateTime.Now;
         }
     }
 }
