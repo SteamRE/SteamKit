@@ -129,6 +129,8 @@ namespace SteamKit2
 
             Connection.NetMsgReceived += NetMsgReceived;
             Connection.Disconnected += Disconnected;
+
+            heartBeatFunc = new ScheduledFunction( SendHeartbeat, TimeSpan.FromMilliseconds( -1 ) );
         }
 
 
@@ -151,10 +153,7 @@ namespace SteamKit2
         /// </summary>
         public void Disconnect()
         {
-            if ( heartBeatFunc != null )
-            {
-                heartBeatFunc.Stop();
-            }
+            heartBeatFunc.Stop();
 
             Connection.Disconnect();
         }
@@ -287,6 +286,8 @@ namespace SteamKit2
 
         void Disconnected( object sender, EventArgs e )
         {
+            heartBeatFunc.Stop();
+
             Connection.NetFilter = null;
 
             OnClientDisconnected();
@@ -354,16 +355,10 @@ namespace SteamKit2
 
                 int hbDelay = logonResp.Msg.Proto.out_of_game_heartbeat_seconds;
 
-                if ( heartBeatFunc != null )
-                {
-                    heartBeatFunc.Stop();
-                }
-
-                heartBeatFunc = new ScheduledFunction(
-                    SendHeartbeat,
-                    TimeSpan.FromSeconds( hbDelay ),
-                    "HeartBeatFunc"
-                );
+                // restart heartbeat
+                heartBeatFunc.Stop();
+                heartBeatFunc.Delay = TimeSpan.FromSeconds( hbDelay );
+                heartBeatFunc.Start();
             }
         }
         void HandleEncryptRequest( ClientMsgEventArgs e )
@@ -410,10 +405,7 @@ namespace SteamKit2
         }
         void HandleLoggedOff( ClientMsgEventArgs cliEvent )
         {
-            if ( heartBeatFunc != null )
-            {
-                heartBeatFunc.Stop();
-            }
+            heartBeatFunc.Stop();
         }
         void HandleServerList(ClientMsgEventArgs cliEvent)
         {
