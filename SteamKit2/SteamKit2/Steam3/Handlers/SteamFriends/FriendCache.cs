@@ -18,19 +18,18 @@ namespace SteamKit2
         {
             public SteamID SteamID { get; set; }
 
+            public string Name { get; set; }
+            public byte[] AvatarHash { get; set; }
 
             public Account()
             {
+                Name = "[unknown]";
                 SteamID = new SteamID();
             }
         }
 
         sealed class User : Account
         {
-            public string Name { get; set; }
-
-            public byte[] AvatarHash { get; set; }
-
             public EPersonaState PersonaState { get; set; }
 
             public uint GameAppID { get; set; }
@@ -40,21 +39,12 @@ namespace SteamKit2
 
             public User()
             {
-                Name = "[unknown]";
-
                 GameID = new GameID();
             }
         }
 
         sealed class Clan : Account
         {
-            public string Name { get; set; }
-
-
-            public Clan()
-            {
-                Name = "[unknown]";
-            }
         }
 
 
