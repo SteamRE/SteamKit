@@ -201,15 +201,19 @@ namespace SteamKit2
             End = 8,
         }
 
-        public KeyValue()
+        public KeyValue(string name, string value)
         {
-            Value = null;
+            this.Name = name;
+            this.Value = value;
             Children = new List<KeyValue>();
         }
 
-        public KeyValue( string name ) : this()
+        public KeyValue( string name ) : this(name, null)
         {
-            Name = name;
+        }
+
+        public KeyValue() : this(null, null)
+        {
         }
 
         public readonly static KeyValue Invalid = new KeyValue();
@@ -366,6 +370,14 @@ namespace SteamKit2
             KVTextReader kvr = new KVTextReader( this, input );
 
             return true;
+        }
+
+        public bool ReadFileAsText(string filename)
+        {
+            using (FileStream fs = new FileStream(filename, FileMode.Open))
+            {
+                return ReadAsText(fs);
+            }
         }
 
         public void RecursiveLoadFromBuffer( KVTextReader kvr )

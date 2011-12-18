@@ -174,7 +174,7 @@ namespace SteamKit2
 
             sha_hash = CryptoHelper.SHAHash(bb.ToArray());
 
-            string hex_hash = Utils.BinToHex(sha_hash);
+            string hex_hash = Utils.EncodeHexString(sha_hash);
 
             string authheader = String.Format("sessionid={0};req-counter={1};hash={2};", sessionID, reqcounter, hex_hash);
 
