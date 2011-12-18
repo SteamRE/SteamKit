@@ -86,8 +86,8 @@
             // 
             // btnDeny
             // 
-            this.btnDeny.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDeny.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnDeny.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(39)))));
             this.btnDeny.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.btnDeny.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -102,8 +102,8 @@
             // 
             // btnAccept
             // 
-            this.btnAccept.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAccept.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAccept.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(39)))));
             this.btnAccept.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.btnAccept.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -142,13 +142,13 @@
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(134, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(177, 6);
             // 
             // removeFriendToolStripMenuItem
             // 
             this.removeFriendToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.removeFriendToolStripMenuItem.Name = "removeFriendToolStripMenuItem";
-            this.removeFriendToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+            this.removeFriendToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.removeFriendToolStripMenuItem.Text = "Remove Friend...";
             this.removeFriendToolStripMenuItem.Click += new System.EventHandler(this.removeFriendToolStripMenuItem_Click);
             // 
@@ -156,20 +156,20 @@
             // 
             this.addFriendToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.addFriendToolStripMenuItem.Name = "addFriendToolStripMenuItem";
-            this.addFriendToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+            this.addFriendToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.addFriendToolStripMenuItem.Text = "Add Friend...";
             this.addFriendToolStripMenuItem.Click += new System.EventHandler(this.addFriendToolStripMenuItem_Click);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(134, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(177, 6);
             // 
             // refreshToolStripMenuItem
             // 
             this.refreshToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
-            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.refreshToolStripMenuItem.Text = "Refresh";
             this.refreshToolStripMenuItem.Click += new System.EventHandler(this.refreshToolStripMenuItem_Click);
             // 

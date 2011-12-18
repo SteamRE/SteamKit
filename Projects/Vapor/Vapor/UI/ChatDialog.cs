@@ -47,29 +47,40 @@ namespace Vapor
 
         public void HandleChat( SteamID sender, EChatEntryType type, string msg )
         {
-
             string friendName = Steam3.SteamFriends.GetFriendPersonaName( sender );
             string time = DateTime.Now.ToString( "h:mm tt" );
+
+            var friend = new Friend( sender );
+            var statusColor = Util.GetStatusColor( friend );
 
             switch ( type )
             {
                 case EChatEntryType.ChatMsg:
 
-                    this.AppendText( Util.GetStatusColor( new Friend( sender ) ), string.Format( "{0} - {1}", time, friendName ) );
+                    this.AppendText( statusColor, string.Format( "{0} - {1}", time, friendName ) );
                     this.AppendText( Color.White, ": " + msg );
 
                     if ( sender != Steam3.SteamClient.SteamID )
-                        FlashWindw();
+                        FlashWindow();
 
                     break;
 
                 case EChatEntryType.Emote:
 
-                    this.AppendText( Util.GetStatusColor( new Friend( sender ) ), string.Format( "{0} - {1}", time, friendName ) );
-                    this.AppendText( Util.GetStatusColor( new Friend( sender ) ), " " + msg );
+                    this.AppendText( statusColor, string.Format( "{0} - {1}", time, friendName ) );
+                    this.AppendText( statusColor, " " + msg );
 
                     if ( sender != Steam3.SteamClient.SteamID )
-                        FlashWindw();
+                        FlashWindow();
+
+                    break;
+
+                case EChatEntryType.InviteGame:
+                    this.AppendText( statusColor, string.Format( "{0} - {1}", time, friendName ) );
+                    this.AppendText( statusColor, " has invited you to play a game." );
+
+                    if ( sender != Steam3.SteamClient.SteamID )
+                        FlashWindow();
 
                     break;
 
@@ -82,7 +93,7 @@ namespace Vapor
             this.ScrollLog();
         }
 
-        private void FlashWindw()
+        private void FlashWindow()
         {
             if ( this.Focused || txtChat.Focused )
             {
@@ -95,6 +106,10 @@ namespace Vapor
         public void HandleChat( SteamFriends.FriendMsgCallback friendMsg )
         {
             HandleChat( friendMsg.Sender, friendMsg.EntryType, friendMsg.Message );
+        }
+        public void HandleState( SteamFriends.PersonaStateCallback personaState )
+        {
+            // todo: show name changes and update window title
         }
 
         void AppendText( string text )
@@ -156,5 +171,6 @@ namespace Vapor
         {
             Util.FlashWindow( this, false );
         }
+
     }
 }

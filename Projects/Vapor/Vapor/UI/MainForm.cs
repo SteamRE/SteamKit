@@ -31,7 +31,7 @@ namespace Vapor
             selfControl.BorderStyle = BorderStyle.None;
             selfControl.CanOpenProfile = true;
 
-            selfControl.DisableContextMenu();
+            //selfControl.DisableContextMenu();
             selfControl.DisableDoubleClick();
         }
 
@@ -417,6 +417,12 @@ namespace Vapor
         private void MainForm_VisibleChanged(object sender, EventArgs e)
         {
             UpdateContextState();
+        }
+
+        private void changeNameToolStripMenuItem_Click( object sender, EventArgs e )
+        {
+            ChangeNameDialog cnd = new ChangeNameDialog();
+            cnd.ShowDialog( this );
         }
     }
 }
