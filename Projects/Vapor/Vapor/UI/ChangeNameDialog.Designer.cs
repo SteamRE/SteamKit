@@ -1,6 +1,6 @@
 ﻿namespace Vapor
 {
-    partial class AddFriendDialog
+    partial class ChangeNameDialog
     {
         /// <summary>
         /// Required designer variable.
@@ -28,22 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddFriendDialog));
-            this.txtFriend = new Vapor.VaporTextBox();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ChangeNameDialog));
+            this.txtName = new Vapor.VaporTextBox();
             this.vaporLabel1 = new Vapor.VaporLabel();
             this.btnOK = new Vapor.VaporButton();
             this.btnCancel = new Vapor.VaporButton();
             this.SuspendLayout();
             // 
-            // txtFriend
+            // txtName
             // 
-            this.txtFriend.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(58)))), ((int)(((byte)(58)))));
-            this.txtFriend.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtFriend.ForeColor = System.Drawing.Color.White;
-            this.txtFriend.Location = new System.Drawing.Point(12, 43);
-            this.txtFriend.Name = "txtFriend";
-            this.txtFriend.Size = new System.Drawing.Size(303, 20);
-            this.txtFriend.TabIndex = 0;
+            this.txtName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(58)))), ((int)(((byte)(58)))));
+            this.txtName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtName.ForeColor = System.Drawing.Color.White;
+            this.txtName.Location = new System.Drawing.Point(12, 43);
+            this.txtName.Name = "txtName";
+            this.txtName.Size = new System.Drawing.Size(303, 20);
+            this.txtName.TabIndex = 0;
             // 
             // vaporLabel1
             // 
@@ -52,7 +52,7 @@
             this.vaporLabel1.Name = "vaporLabel1";
             this.vaporLabel1.Size = new System.Drawing.Size(303, 31);
             this.vaporLabel1.TabIndex = 1;
-            this.vaporLabel1.Text = "Please enter the account name or SteamID of the friend you wish to add";
+            this.vaporLabel1.Text = "Please enter the new name you wish to use";
             this.vaporLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnOK
@@ -83,7 +83,7 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // AddFriendDialog
+            // ChangeNameDialog
             // 
             this.AcceptButton = this.btnOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -92,13 +92,13 @@
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.vaporLabel1);
-            this.Controls.Add(this.txtFriend);
+            this.Controls.Add(this.txtName);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.Name = "AddFriendDialog";
+            this.Name = "ChangeNameDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Add Friend";
+            this.Text = "Change Name";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -106,7 +106,7 @@
 
         #endregion
 
-        private VaporTextBox txtFriend;
+        private VaporTextBox txtName;
         private VaporLabel vaporLabel1;
         private VaporButton btnOK;
         private VaporButton btnCancel;

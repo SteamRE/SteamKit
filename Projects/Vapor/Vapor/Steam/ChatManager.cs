@@ -43,15 +43,25 @@ namespace Vapor
             if ( !msg.IsType<SteamFriends.FriendMsgCallback>() )
                 return;
 
-            var friendMsg = ( SteamFriends.FriendMsgCallback )msg;
-
-            EChatEntryType type = friendMsg.EntryType;
-
-            if ( type == EChatEntryType.ChatMsg || type == EChatEntryType.Emote )
+            msg.Handle<SteamFriends.FriendMsgCallback>( friendMsg =>
             {
-                ChatDialog cd = GetChat( friendMsg.Sender );
-                cd.HandleChat( friendMsg );
-            }
+                EChatEntryType type = friendMsg.EntryType;
+
+                if ( type == EChatEntryType.ChatMsg || type == EChatEntryType.Emote || type == EChatEntryType.InviteGame )
+                {
+                    ChatDialog cd = GetChat( friendMsg.Sender );
+                    cd.HandleChat( friendMsg );
+                }
+            } );
+
+            msg.Handle<SteamFriends.PersonaStateCallback>( personaState =>
+            {
+                if ( personaState.FriendID == Steam3.SteamClient.SteamID )
+                    return;
+
+                ChatDialog cd = GetChat( personaState.FriendID );
+                cd.HandleState( personaState );
+            } );
         }
 
     }
