@@ -206,9 +206,12 @@ namespace SteamKit2
                     return null;
                 }
 
-                List<ClientEndPoint> endpoints = new List<ClientEndPoint>();
-
                 KeyValue serverkv = KeyValue.LoadFromString(serverList);
+
+                if (serverkv["deferred"].AsString() == "1")
+                    return null;
+
+                List<ClientEndPoint> endpoints = new List<ClientEndPoint>();
 
                 foreach (var child in serverkv.Children)
                 {
