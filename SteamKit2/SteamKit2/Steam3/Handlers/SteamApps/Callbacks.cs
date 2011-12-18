@@ -125,12 +125,7 @@ namespace SteamKit2
             {
                 this.Result = ( EResult )msg.eresult;
 
-                var list = msg.licenses.ConvertAll<License>(
-                    ( input ) =>
-                    {
-                        return new License( input );
-                    }
-                );
+                var list = msg.licenses.ConvertAll<License>( input => new License( input ) );
 
                 this.LicenseList = new ReadOnlyCollection<License>( list );
             }
