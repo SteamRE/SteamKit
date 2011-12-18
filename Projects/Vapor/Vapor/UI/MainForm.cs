@@ -19,6 +19,8 @@ namespace Vapor
         bool suppressStateMsg;
         bool expectDisconnect;
 
+        DateTime nextSort;
+        Timer sortTimer;
 
         public MainForm()
         {
@@ -31,9 +33,27 @@ namespace Vapor
             selfControl.BorderStyle = BorderStyle.None;
             selfControl.CanOpenProfile = true;
 
-            //selfControl.DisableContextMenu();
             selfControl.DisableDoubleClick();
+
+            sortTimer = new Timer();
+            sortTimer.Interval = 100;
+            sortTimer.Tick += new EventHandler( sortTimer_Tick );
         }
+
+        void sortTimer_Tick( object sender, EventArgs e )
+        {
+            if ( DateTime.Now < nextSort )
+                return;
+
+            this.Invoke( new MethodInvoker( () =>
+            {
+                this.UpdateFriends();
+            } ) );
+
+            sortTimer.Stop();
+        }
+
+
 
         protected override void OnFormClosing( FormClosingEventArgs e )
         {
@@ -58,12 +78,13 @@ namespace Vapor
                     return;
                 }
 
-                this.UpdateFriends();
+                nextSort = DateTime.Now + TimeSpan.FromSeconds( 0.1 );
+                sortTimer.Start();
             }
 
             if ( msg.IsType<SteamUser.LoggedOffCallback>() )
             {
-                var callback = (SteamUser.LoggedOffCallback )msg;
+                var callback = ( SteamUser.LoggedOffCallback )msg;
 
                 Util.MsgBox( this, string.Format( "Logged off from Steam3: {0}", callback.Result ) );
 
@@ -77,6 +98,12 @@ namespace Vapor
             {
                 selfControl.UpdateFriend( new Friend( Steam3.SteamUser.GetSteamID() ) );
                 this.UpdateFriends();
+            }
+
+            if ( msg.IsType<SteamUser.LoginKeyCallback>() )
+            {
+                Steam3.SteamFriends.SetPersonaState( EPersonaState.Online );
+                this.Enabled = true;
             }
 
             if ( msg.IsType<SteamUser.LogOnCallback>() )
@@ -123,12 +150,6 @@ namespace Vapor
 
                     return;
                 }
-            }
-
-            if ( msg.IsType<SteamUser.LoginKeyCallback>() )
-            {
-                Steam3.SteamFriends.SetPersonaState( EPersonaState.Online );
-                this.Enabled = true;
             }
 
             if ( msg.IsType<SteamFriends.FriendAddedCallback>() )
@@ -198,7 +219,7 @@ namespace Vapor
         public void UpdateFriends()
         {
             List<Friend> friendsList = GetFriends();
-            friendsList.Sort(compareFriends);
+            friendsList.Sort( compareFriends );
 
             int scroll = friendsFlow.VerticalScroll.Value;
 
@@ -212,7 +233,7 @@ namespace Vapor
                 
                 foreach( FriendControl fc in friendsFlow.Controls )
                 {
-                    if( fc.Friend.Equals(friend) )
+                    if ( fc.Friend.Equals( friend ) )
                     {
                         friendControl = fc;
                         break;
@@ -242,8 +263,7 @@ namespace Vapor
                 }
             }
 
-            foreach (FriendControl fc in controlsToRemove)
-                friendsFlow.Controls.Remove(fc);
+            controlsToRemove.ForEach( fc => friendsFlow.Controls.Remove( fc ) );
 
             ResizeFriends();
 
@@ -305,7 +325,7 @@ namespace Vapor
         private void MainForm_FormClosing( object sender, FormClosingEventArgs e )
         {
 #if TRAY_BUILD
-            if ( shouldClose )
+            if ( shouldClose || Relog )
             {
                 return;
             }

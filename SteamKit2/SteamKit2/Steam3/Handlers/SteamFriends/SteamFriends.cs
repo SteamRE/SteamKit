@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Net;
 using System.IO;
+using System.Threading;
 
 namespace SteamKit2
 {
@@ -19,29 +20,19 @@ namespace SteamKit2
     /// </summary>
     public sealed partial class SteamFriends : ClientMsgHandler
     {
-        sealed class Friend
-        {
-            public SteamID FriendID { get; set; }
-            public EFriendRelationship Relationship { get; set; }
 
-            public override bool Equals(object obj)
-            {
-                return (obj as Friend).FriendID == this.FriendID;
-            }
+        object listLock = new object();
+        List<SteamID> friendList;
+        List<SteamID> clanList;
 
-            public override int GetHashCode()
-            {
-                return FriendID.GetHashCode();
-            }
-        }
-
-        List<Friend> friendList;
         AccountCache cache;
 
 
         internal SteamFriends()
         {
-            friendList = new List<Friend>();
+            friendList = new List<SteamID>();
+            clanList = new List<SteamID>();
+
             cache = new AccountCache();
         }
 
@@ -94,7 +85,7 @@ namespace SteamKit2
         /// <returns>The number of friends.</returns>
         public int GetFriendCount()
         {
-            lock ( friendList )
+            lock ( listLock )
             {
                 return friendList.Count;
             }
@@ -106,9 +97,40 @@ namespace SteamKit2
         /// <returns>A valid steamid of a friend if the index is in range; otherwise a steamid representing 0.</returns>
         public SteamID GetFriendByIndex( int index )
         {
-            lock ( friendList )
+            lock ( listLock )
             {
-                return friendList[ index ].FriendID;
+                if ( index < 0 || index >= friendList.Count )
+                    return 0;
+
+                return friendList[ index ];
+            }
+        }
+
+        /// <summary>
+        /// Gets the count of clans the local user is a member of.
+        /// </summary>
+        /// <returns>The number of clans this user is a member of.</returns>
+        public int GetClanCount()
+        {
+            lock ( listLock )
+            {
+                return clanList.Count;
+            }
+        }
+
+        /// <summary>
+        /// Gets a clan SteamID by index.
+        /// </summary>
+        /// <param name="index">The index.</param>
+        /// <returns>A valid steamid of a clan if the index is in range; otherwise a steamid representing 0.</returns>
+        public SteamID GetClanByIndex( int index )
+        {
+            lock ( listLock )
+            {
+                if ( index < 0 || index >= clanList.Count )
+                    return 0;
+
+                return clanList[ index ];
             }
         }
 
@@ -125,7 +147,7 @@ namespace SteamKit2
         /// Gets the persona state of a friend.
         /// </summary>
         /// <param name="steamId">The steam id.</param>
-        /// <returns>The persona state</returns>
+        /// <returns>The persona state.</returns>
         public EPersonaState GetFriendPersonaState( SteamID steamId )
         {
             return cache.GetUser( steamId ).PersonaState;
@@ -134,18 +156,10 @@ namespace SteamKit2
         /// Gets the relationship of a friend.
         /// </summary>
         /// <param name="steamId">The steam id.</param>
-        /// <returns></returns>
+        /// <returns>The relationship of the friend to the local user.</returns>
         public EFriendRelationship GetFriendRelationship( SteamID steamId )
         {
-            lock ( friendList )
-            {
-                var friend = friendList.Find( friendObj => friendObj.FriendID == steamId );
-
-                if ( friend == null )
-                    return EFriendRelationship.None;
-
-                return friend.Relationship;
-            }
+            return cache.GetUser( steamId ).Relationship;
         }
 
         /// <summary>
@@ -175,6 +189,36 @@ namespace SteamKit2
         public byte[] GetFriendAvatar( SteamID steamId )
         {
             return cache.GetUser( steamId ).AvatarHash;
+        }
+
+        /// <summary>
+        /// Gets the name of a clan.
+        /// </summary>
+        /// <param name="steamId">The clan SteamID.</param>
+        /// <returns>The name.</returns>
+        public string GetClanName( SteamID steamId )
+        {
+            return cache.Clans.GetAccount( steamId ).Name;
+        }
+
+        /// <summary>
+        /// Gets the relationship of a clan.
+        /// </summary>
+        /// <param name="steamId">The clan steamid.</param>
+        /// <returns>The relationship of the clan to the local user.</returns>
+        public EClanRelationship GetClanRelationship( SteamID steamId )
+        {
+            return cache.Clans.GetAccount( steamId ).Relationship;
+        }
+
+        /// <summary>
+        /// Gets a SHA-1 hash representing the clan's avatar.
+        /// </summary>
+        /// <param name="steamId">The SteamID of the clan to get the avatar of.</param>
+        /// <returns>A byte array representing a SHA-1 hash of the clan's avatar.</returns>
+        public byte[] GetClanAvatar( SteamID steamId )
+        {
+            return cache.Clans.GetAccount( steamId ).AvatarHash;
         }
 
         /// <summary>
@@ -265,6 +309,11 @@ namespace SteamKit2
             this.Client.Send( chatMsg );
         }
 
+        /// <summary>
+        /// Requests persona state for a specified SteamID.
+        /// Results are returned in <see cref="SteamFriends.PersonaStateCallback"/>.
+        /// </summary>
+        /// <param name="steamIdUser">The SteamID .</param>
         public void RequestFriendInfo( SteamID steamIdUser )
         {
             var request = new ClientMsgProtobuf<MsgClientRequestFriendData>();
@@ -351,9 +400,10 @@ namespace SteamKit2
             if ( !list.Msg.Proto.bincremental )
             {
                 // if we're not an incremental update, the message contains all friends, so we should clear our current list
-                lock ( friendList )
+                lock ( listLock )
                 {
                     friendList.Clear();
+                    clanList.Clear();
                 }
             }
 
@@ -362,57 +412,70 @@ namespace SteamKit2
 
             reqInfo.Msg.Proto.persona_state_requested = ( uint )( EClientPersonaStateFlag.PlayerName | EClientPersonaStateFlag.Presence );
 
-            lock (friendList)
+            lock ( listLock )
             {
-                List<Friend> friendsToRemove = new List<Friend>();
+                List<SteamID> friendsToRemove = new List<SteamID>();
+                List<SteamID> clansToRemove = new List<SteamID>();
 
-                foreach (var friendObj in list.Msg.Proto.friends)
+                foreach ( var friendObj in list.Msg.Proto.friends )
                 {
                     SteamID friendId = friendObj.ulfriendid;
 
-                    if (!friendId.BIndividualAccount())
-                        continue; // don't want to request clan information
-
-                    Friend existingFriend = null;
-
-                    foreach (Friend friend in friendList)
+                    if ( friendId.BIndividualAccount() )
                     {
-                        if (friend.FriendID == friendId)
+                        var user = cache.GetUser( friendId );
+
+                        user.Relationship = ( EFriendRelationship )friendObj.efriendrelationship;
+
+                        if ( friendList.Contains( friendId ) )
                         {
-                            existingFriend = friend;
-                            break;
+                            // if this is a friend on our list, and they removed us, mark them for removal
+                            if ( user.Relationship == EFriendRelationship.None )
+                                friendsToRemove.Add( friendId );
+                        }
+                        else
+                        {
+                            // we don't know about this friend yet, lets add them
+                            friendList.Add( friendId );
+                        }
+
+                    }
+                    else if ( friendId.BClanAccount() )
+                    {
+                        var clan = cache.Clans.GetAccount( friendId );
+
+                        clan.Relationship = ( EClanRelationship )friendObj.efriendrelationship;
+
+                        if ( clanList.Contains( friendId ) )
+                        {
+                            // mark clans we were removed/kicked from
+                            // note: not actually sure about the kicked relationship, but i'm using it for good measure
+                            if ( clan.Relationship == EClanRelationship.None || clan.Relationship == EClanRelationship.Kicked )
+                                clansToRemove.Add( friendId );
+                        }
+                        else
+                        {
+                            // don't know about this clan, add it
+                            clanList.Add( friendId );
                         }
                     }
 
-                    if (existingFriend != null)
+                    if ( !list.Msg.Proto.bincremental )
                     {
-                        existingFriend.Relationship = (EFriendRelationship)friendObj.efriendrelationship;
-
-                        if (existingFriend.Relationship == EFriendRelationship.None)
-                            friendsToRemove.Add(existingFriend);
-                    }
-                    else
-                    {
-                        friendList.Add(new Friend()
-                        {
-                            FriendID = friendId,
-                            Relationship = (EFriendRelationship)friendObj.efriendrelationship,
-                        });
-                    }
-
-                    if (!list.Msg.Proto.bincremental)
-                    {
-                        reqInfo.Msg.Proto.friends.Add(friendId);
+                        // request persona state for our friend & clan list when it's a non-incremental update
+                        reqInfo.Msg.Proto.friends.Add( friendId );
                     }
                 }
 
-                foreach (Friend f in friendsToRemove)
-                    friendList.Remove(f);
+                // remove anything we marked for removal
+                friendsToRemove.ForEach( f => friendList.Remove( f ) );
+                clansToRemove.ForEach( c => clanList.Remove( c ) );
+
             }
 
-            if (reqInfo.Msg.Proto.friends.Count > 0)
+            if ( reqInfo.Msg.Proto.friends.Count > 0 )
             {
-                this.Client.Send(reqInfo);
+                this.Client.Send( reqInfo );
             }
 
 #if STATIC_CALLBACKS
@@ -459,6 +522,10 @@ namespace SteamKit2
                 {
                     Clan cacheClan = cache.Clans.GetAccount( friendId );
 
+                    if ( ( flags & EClientPersonaStateFlag.PlayerName ) == EClientPersonaStateFlag.PlayerName )
+                    {
+                        cacheClan.Name = friend.player_name;
+                    }
                 }
 
                 // todo: cache other details/account types?
