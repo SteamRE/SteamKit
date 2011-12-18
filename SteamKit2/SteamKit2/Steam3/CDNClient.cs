@@ -35,12 +35,16 @@ namespace SteamKit2
         private ClientEndPoint endPoint;
         private byte[] appTicket;
 
+        static CDNClient()
+        {
+            ServicePointManager.Expect100Continue = false;
+        }
+
         public CDNClient(ClientEndPoint cdnServer, byte[] appticket)
         {
             sessionKey = CryptoHelper.GenerateRandomBlock(32);
 
             webClient = new WebClient();
-            ServicePointManager.Expect100Continue = false;
 
             endPoint = cdnServer;
             appTicket = appticket;
