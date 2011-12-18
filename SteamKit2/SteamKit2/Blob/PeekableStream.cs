@@ -58,7 +58,7 @@ namespace SteamKit2
                 byte[] newBuffer = new byte[peekSize];
                 peekSize = peekSize - unpeekedSize;
 
-                Array.Copy(peekBuffer, peekPos, newBuffer, 0, unpeekedSize);
+                Buffer.BlockCopy(peekBuffer, peekPos, newBuffer, 0, unpeekedSize);
                 input.Read(newBuffer, unpeekedSize, peekSize);
 
                 peekBuffer = newBuffer;
@@ -124,15 +124,17 @@ namespace SteamKit2
             {
                 int toRead = Math.Min(peekBuffer.Length - peekPos, count);
 
-                Array.Copy(peekBuffer, peekPos, buffer, offset, toRead);
+                Buffer.BlockCopy(peekBuffer, peekPos, buffer, offset, toRead);
 
                 read += toRead;
                 peekPos += toRead;
                 count -= toRead;
-            }
 
-            if (count > 0)
-                Wipe();
+                if (count > 0)
+                    Wipe();
+                else
+                    return read;
+            }
 
             read += input.Read(buffer, offset+read, count);
             return read;
