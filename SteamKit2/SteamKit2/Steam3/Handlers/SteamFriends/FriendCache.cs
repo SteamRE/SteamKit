@@ -30,6 +30,8 @@ namespace SteamKit2
 
         sealed class User : Account
         {
+            public EFriendRelationship Relationship { get; set; }
+
             public EPersonaState PersonaState { get; set; }
 
             public uint GameAppID { get; set; }
@@ -45,54 +47,33 @@ namespace SteamKit2
 
         sealed class Clan : Account
         {
+            public EClanRelationship Relationship { get; set; }
         }
 
 
-        class AccountList<T> : List<T>
+        class AccountList<T> : Dictionary<SteamID, T>
             where T : Account, new()
         {
             object accessLock = new object();
-
-
-            public new T this[ int index ]
-            {
-                get
-                {
-                    lock ( accessLock )
-                    {
-                        return base[ index ];
-                    }
-                }
-            }
-
 
             public T GetAccount( SteamID steamId )
             {
                 lock ( accessLock )
                 {
-                    EnsureAccount( steamId );
-
-                    return this.Find( accObj => accObj.SteamID == steamId );
-                }
-            }
-
-
-            void EnsureAccount( SteamID steamId )
-            {
-                if ( !this.Contains( steamId ) )
-                {
-                    T accObj = new T()
+                    if ( !this.ContainsKey( steamId ) )
                     {
-                        SteamID = steamId,
-                    };
+                        T accObj = new T()
+                        {
+                            SteamID = steamId,
+                        };
 
-                    this.Add( accObj );
+                        this.Add( steamId, accObj );
+
+                        return accObj;
+                    }
+
+                    return this[ steamId ];
                 }
-            }
-
-            public bool Contains( SteamID steamId )
-            {
-                return this.Any( accObj => accObj.SteamID == steamId );
             }
         }
 
@@ -102,7 +83,6 @@ namespace SteamKit2
 
             public AccountList<User> Users { get; private set; }
             public AccountList<Clan> Clans { get; private set; }
-
 
             public AccountCache()
             {

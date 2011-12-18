@@ -20,41 +20,18 @@ namespace SteamKit2
     /// </summary>
     public sealed partial class SteamFriends : ClientMsgHandler
     {
-        class ListAccount
-        {
-            public SteamID FriendID { get; set; }
-
-            public override bool Equals( object obj )
-            {
-                return ( obj as ListAccount ).FriendID == this.FriendID;
-            }
-
-            public override int GetHashCode()
-            {
-                return FriendID.GetHashCode();
-            }
-        }
-
-        sealed class Friend : ListAccount
-        {
-            public EFriendRelationship Relationship { get; set; }
-        }
-        sealed class Group : ListAccount
-        {
-            public EClanRelationship Relationship { get; set; }
-        }
 
         object listLock = new object();
-        List<Friend> friendList;
-        List<Group> clanList;
+        List<SteamID> friendList;
+        List<SteamID> clanList;
 
         AccountCache cache;
 
 
         internal SteamFriends()
         {
-            friendList = new List<Friend>();
-            clanList = new List<Group>();
+            friendList = new List<SteamID>();
+            clanList = new List<SteamID>();
 
             cache = new AccountCache();
         }
@@ -122,7 +99,38 @@ namespace SteamKit2
         {
             lock ( listLock )
             {
-                return friendList[ index ].FriendID;
+                if ( index < 0 || index >= friendList.Count )
+                    return 0;
+
+                return friendList[ index ];
+            }
+        }
+
+        /// <summary>
+        /// Gets the count of clans the local user is a member of.
+        /// </summary>
+        /// <returns>The number of clans this user is a member of.</returns>
+        public int GetClanCount()
+        {
+            lock ( listLock )
+            {
+                return clanList.Count;
+            }
+        }
+
+        /// <summary>
+        /// Gets a clan SteamID by index.
+        /// </summary>
+        /// <param name="index">The index.</param>
+        /// <returns>A valid steamid of a clan if the index is in range; otherwise a steamid representing 0.</returns>
+        public SteamID GetClanByIndex( int index )
+        {
+            lock ( listLock )
+            {
+                if ( index < 0 || index >= clanList.Count )
+                    return 0;
+
+                return clanList[ index ];
             }
         }
 
@@ -139,7 +147,7 @@ namespace SteamKit2
         /// Gets the persona state of a friend.
         /// </summary>
         /// <param name="steamId">The steam id.</param>
-        /// <returns>The persona state</returns>
+        /// <returns>The persona state.</returns>
         public EPersonaState GetFriendPersonaState( SteamID steamId )
         {
             return cache.GetUser( steamId ).PersonaState;
@@ -148,18 +156,10 @@ namespace SteamKit2
         /// Gets the relationship of a friend.
         /// </summary>
         /// <param name="steamId">The steam id.</param>
-        /// <returns></returns>
+        /// <returns>The relationship of the friend to the local user.</returns>
         public EFriendRelationship GetFriendRelationship( SteamID steamId )
         {
-            lock ( listLock )
-            {
-                var friend = friendList.Find( friendObj => friendObj.FriendID == steamId );
-
-                if ( friend == null )
-                    return EFriendRelationship.None;
-
-                return friend.Relationship;
-            }
+            return cache.GetUser( steamId ).Relationship;
         }
 
         /// <summary>
@@ -199,6 +199,16 @@ namespace SteamKit2
         public string GetClanName( SteamID steamId )
         {
             return cache.Clans.GetAccount( steamId ).Name;
+        }
+
+        /// <summary>
+        /// Gets the relationship of a clan.
+        /// </summary>
+        /// <param name="steamId">The clan steamid.</param>
+        /// <returns>The relationship of the clan to the local user.</returns>
+        public EClanRelationship GetClanRelationship( SteamID steamId )
+        {
+            return cache.Clans.GetAccount( steamId ).Relationship;
         }
 
         /// <summary>
@@ -404,8 +414,8 @@ namespace SteamKit2
 
             lock ( listLock )
             {
-                List<Friend> friendsToRemove = new List<Friend>();
-                List<Group> clansToRemove = new List<Group>();
+                List<SteamID> friendsToRemove = new List<SteamID>();
+                List<SteamID> clansToRemove = new List<SteamID>();
 
                 foreach ( var friendObj in list.Msg.Proto.friends )
                 {
@@ -413,47 +423,40 @@ namespace SteamKit2
 
                     if ( friendId.BIndividualAccount() )
                     {
+                        var user = cache.GetUser( friendId );
 
-                        Friend existingFriend = friendList.Find( friend => friend.FriendID == friendId );
+                        user.Relationship = ( EFriendRelationship )friendObj.efriendrelationship;
 
-                        if ( existingFriend != null )
+                        if ( friendList.Contains( friendId ) )
                         {
-                            // if this is a friend we already have, update the relationship
-                            existingFriend.Relationship = ( EFriendRelationship )friendObj.efriendrelationship;
-
-                            if ( existingFriend.Relationship == EFriendRelationship.None )
-                                friendsToRemove.Add( existingFriend ); // they removed us, mark them for removal
+                            // if this is a friend on our list, and they removed us, mark them for removal
+                            if ( user.Relationship == EFriendRelationship.None )
+                                friendsToRemove.Add( friendId );
                         }
                         else
                         {
-                            // couldn't find this friend, so they added us
-                            friendList.Add( new Friend()
-                            {
-                                FriendID = friendId,
-                                Relationship = ( EFriendRelationship )friendObj.efriendrelationship,
-                            } );
+                            // we don't know about this friend yet, lets add them
+                            friendList.Add( friendId );
                         }
+
                     }
                     else if ( friendId.BClanAccount() )
                     {
-                        Group existingClan = clanList.Find( clan => clan.FriendID == friendId );
+                        var clan = cache.Clans.GetAccount( friendId );
 
-                        if ( existingClan != null )
+                        clan.Relationship = ( EClanRelationship )friendObj.efriendrelationship;
+
+                        if ( clanList.Contains( friendId ) )
                         {
-                            // update the relationship of an existing clan
-                            existingClan.Relationship = ( EClanRelationship )friendObj.efriendrelationship;
-
-                            if ( existingClan.Relationship == EClanRelationship.None || existingClan.Relationship == EClanRelationship.Kicked )
-                                clansToRemove.Add( existingClan ); // we got kicked out? mark for removal
+                            // mark clans we were removed/kicked from
+                            // note: not actually sure about the kicked relationship, but i'm using it for good measure
+                            if ( clan.Relationship == EClanRelationship.None || clan.Relationship == EClanRelationship.Kicked )
+                                clansToRemove.Add( friendId );
                         }
                         else
                         {
-                            // we got invited to a clan, probably
-                            clanList.Add( new Group()
-                            {
-                                FriendID = friendId,
-                                Relationship = ( EClanRelationship )friendObj.efriendrelationship,
-                            } );
+                            // don't know about this clan, add it
+                            clanList.Add( friendId );
                         }
                     }
 
