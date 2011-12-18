@@ -40,11 +40,13 @@ namespace SteamKit2
             public List<ChunkData> Chunks { get; private set; }
 
             public ulong TotalSize { get; private set; }
+            public byte[] FileHash { get; private set; }
 
-            internal FileData(string filename, ulong size)
+            internal FileData(string filename, ulong size, byte[] hash)
             {
                 this.FileName = filename;
                 this.TotalSize = size;
+                this.FileHash = hash;
                 this.Chunks = new List<ChunkData>();
             }
 
@@ -128,7 +130,7 @@ namespace SteamKit2
 
             foreach (var file_mapping in manifest.Mapping)
             {
-                FileData filedata = new FileData(file_mapping.FileName, file_mapping.TotalSize);
+                FileData filedata = new FileData(file_mapping.FileName, file_mapping.TotalSize, file_mapping.HashContent);
 
                 foreach (var chunk in file_mapping.Chunks)
                 {

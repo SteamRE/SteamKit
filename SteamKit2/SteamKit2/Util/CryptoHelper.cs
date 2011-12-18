@@ -191,7 +191,7 @@ namespace SteamKit2
 
         public static byte[] JenkinsHash( byte[] input )
         {
-            using ( JHash jHash = new JHash() )
+            using ( JenkinsHash jHash = new JenkinsHash() )
             {
                 byte[] hash = jHash.ComputeHash( input );
                 Array.Reverse( hash );
@@ -202,7 +202,7 @@ namespace SteamKit2
 
         public static byte[] CRCHash( byte[] input )
         {
-            using ( CRC crc = new CRC( CRCParameters.GetParameters( CRCStandard.CRC32 ) ) )
+            using ( Crc crc = new Crc( CrcParameters.GetParameters( CrcStandard.Crc32Bit ) ) )
             {
                 byte[] hash = crc.ComputeHash( input );
                 Array.Reverse( hash );
