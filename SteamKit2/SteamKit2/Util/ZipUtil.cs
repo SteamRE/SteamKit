@@ -68,8 +68,7 @@ namespace SteamKit2
             using ( MemoryStream ms = new MemoryStream() )
             using ( BinaryWriter writer = new BinaryWriter( ms ) )
             {
-                CRC crc = new CRC( CRCParameters.GetParameters( CRCStandard.CRC32 ) );
-                //Crc crc = new Crc();
+                Crc crc = new Crc( CrcParameters.GetParameters( CrcStandard.Crc32Bit ) );
                 UInt32 checkSum = BitConverter.ToUInt32( crc.ComputeHash( buffer ), 0 );
                 crc.Clear();
 

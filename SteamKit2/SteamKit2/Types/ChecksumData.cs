@@ -85,11 +85,6 @@ namespace SteamKit2
             return ret;
         }
 
-        private string ByteArrayToHexString( byte[] bytes )
-        {
-            return BitConverter.ToString( bytes ).Replace( '-', ' ' );
-        }
-
         public void DumpToFile( string filename )
         {
             using ( var file = File.CreateText( filename ) )
@@ -98,26 +93,26 @@ namespace SteamKit2
                 {
                     using ( BinaryReaderEx br = new BinaryReaderEx( ms ) )
                     {
-                        file.WriteLine( "Dummy0:\t" + ByteArrayToHexString( br.ReadBytes( 4 ) ) );
-                        file.WriteLine( "Always1:\t" + ByteArrayToHexString( br.ReadBytes( 4 ) ) );
+                        file.WriteLine( "Dummy0:\t" + Utils.EncodeHexString( br.ReadBytes( 4 ) ) );
+                        file.WriteLine("Always1:\t" + Utils.EncodeHexString(br.ReadBytes(4)));
                         uint icount = br.ReadUInt32();
-                        file.WriteLine( "ItemCount:\t" + ByteArrayToHexString( BitConverter.GetBytes( icount ) ) + " (" + icount.ToString() + ")" );
+                        file.WriteLine("ItemCount:\t" + Utils.EncodeHexString(BitConverter.GetBytes(icount)) + " (" + icount.ToString() + ")");
                         uint ccount = br.ReadUInt32();
-                        file.WriteLine( "ChecksumCount:\t" + ByteArrayToHexString( BitConverter.GetBytes( ccount ) ) + " (" + ccount.ToString() + ")" );
+                        file.WriteLine("ChecksumCount:\t" + Utils.EncodeHexString(BitConverter.GetBytes(ccount)) + " (" + ccount.ToString() + ")");
                         file.WriteLine();
                         for ( int i = 0 ; i < icount ; i++ )
                         {
                             file.WriteLine( "File " + i.ToString() );
                             uint cscount = br.ReadUInt32();
                             uint csstart = br.ReadUInt32();
-                            file.WriteLine( "\t- ChecksumCount:\t" + ByteArrayToHexString( BitConverter.GetBytes( cscount ) ) + " (" + cscount.ToString() + ")" );
-                            file.WriteLine( "\t- FirstChecksum:\t" + ByteArrayToHexString( BitConverter.GetBytes( csstart ) ) + " (" + csstart.ToString() + ")" );
+                            file.WriteLine("\t- ChecksumCount:\t" + Utils.EncodeHexString(BitConverter.GetBytes(cscount)) + " (" + cscount.ToString() + ")");
+                            file.WriteLine("\t- FirstChecksum:\t" + Utils.EncodeHexString(BitConverter.GetBytes(csstart)) + " (" + csstart.ToString() + ")");
                             file.WriteLine();
                         }
 
                         for ( uint i = 0 ; i < ccount ; i++ )
                         {
-                            file.WriteLine( "Checksum " + i.ToString() + ":\t" + ByteArrayToHexString( br.ReadBytes( 4 ) ) );
+                            file.WriteLine("Checksum " + i.ToString() + ":\t" + Utils.EncodeHexString(br.ReadBytes(4)));
                         }
                     }
                 }
