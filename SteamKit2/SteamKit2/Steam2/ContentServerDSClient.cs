@@ -89,7 +89,7 @@ namespace SteamKit2
                 ( ushort )1, // cellid is specified
                 depotId,
                 depotVersion,
-                ( ushort )10, // num servers, 10 should be a good enough amount
+                ( ushort )20, // num servers, 20 should be a good enough amount
                 cellId,
                 UInt64.MaxValue
             );
