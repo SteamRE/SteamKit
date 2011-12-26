@@ -19,7 +19,6 @@ namespace SteamLanguageParser
             }
 
             ParseFile( projectPath, @"Resources\SteamLanguage", "steammsg.steamd", "SteamKit2", @"SteamKit2\SteamKit2\Base\SteamLanguage.cs", true );
-            ParseFile( projectPath, @"Resources\SteamLanguage2", "steammsg.steamd", "SteamKit3", @"SteamKit3\SteamKit3\Base\SteamLanguage.cs", false );
 
         }
 

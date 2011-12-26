@@ -467,3 +467,14 @@ class MsgClientGetDepotDecryptionKeyResponse<EMsg::ClientGetDepotDecryptionKeyRe
 	uint depotID;
 	byte<32> depotEncryptionKey;
 };
+
+class MsgClientGetNumberOfCurrentPlayers<EMsg::ClientGetNumberOfCurrentPlayers>
+{
+	gameidmarshal ulong gameID;
+};
+
+class MsgClientGetNumberOfCurrentPlayersResponse<EMsg::ClientGetNumberOfCurrentPlayersResponse>
+{
+	EResult result;
+	uint numPlayers;
+};
