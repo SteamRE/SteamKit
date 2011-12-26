@@ -4644,5 +4644,67 @@ namespace SteamKit2
 		}
 	}
 
+	public class MsgClientGetNumberOfCurrentPlayers : ISteamSerializableMessage
+	{
+		public EMsg GetEMsg() { return EMsg.ClientGetNumberOfCurrentPlayers; }
+
+		// Static size: 8
+		private ulong gameID;
+		public GameID GameID { get { return new GameID( gameID ); } set { gameID = value.ToUint64(); } }
+
+		public MsgClientGetNumberOfCurrentPlayers()
+		{
+			gameID = 0;
+		}
+
+		public void Serialize(Stream stream)
+		{
+			BinaryWriter bw = new BinaryWriter( stream );
+
+			bw.Write( gameID );
+
+		}
+
+		public void Deserialize( Stream stream )
+		{
+			BinaryReader br = new BinaryReader( stream );
+
+			gameID = br.ReadUInt64();
+		}
+	}
+
+	public class MsgClientGetNumberOfCurrentPlayersResponse : ISteamSerializableMessage
+	{
+		public EMsg GetEMsg() { return EMsg.ClientGetNumberOfCurrentPlayersResponse; }
+
+		// Static size: 4
+		public EResult Result { get; set; }
+		// Static size: 4
+		public uint NumPlayers { get; set; }
+
+		public MsgClientGetNumberOfCurrentPlayersResponse()
+		{
+			Result = 0;
+			NumPlayers = 0;
+		}
+
+		public void Serialize(Stream stream)
+		{
+			BinaryWriter bw = new BinaryWriter( stream );
+
+			bw.Write( (int)Result );
+			bw.Write( NumPlayers );
+
+		}
+
+		public void Deserialize( Stream stream )
+		{
+			BinaryReader br = new BinaryReader( stream );
+
+			Result = (EResult)br.ReadInt32();
+			NumPlayers = br.ReadUInt32();
+		}
+	}
+
 }
 #pragma warning restore 1591
