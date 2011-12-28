@@ -40,6 +40,16 @@ namespace SteamKit2
             this.Client.Send( request );
         }
 
+        public void GetPackageInfo( uint packageId )
+        {
+            var request = new ClientMsgProtobuf<MsgClientPackageInfoRequest>();
+
+            request.Msg.Proto.package_ids.Add( packageId );
+            request.Msg.Proto.meta_data_only = false;
+
+            this.Client.Send( request );
+        }
+
         public void GetAppChanges( uint lastChangeList )
         {
             var request = new ClientMsgProtobuf<MsgClientAppInfoUpdate>();
@@ -85,6 +95,10 @@ namespace SteamKit2
 
                 case EMsg.ClientAppInfoResponse:
                     HandleAppInfoResponse( e );
+                    break;
+
+                case EMsg.ClientPackageInfoResponse:
+                    HandlePackageInfoResponse( e );
                     break;
 
                 case EMsg.ClientAppInfoChanges:
@@ -143,6 +157,19 @@ namespace SteamKit2
 #else
             var callback = new AppInfoCallback(infoResponse.Msg.Proto);
             this.Client.PostCallback(callback);
+#endif
+        }
+
+        void HandlePackageInfoResponse( ClientMsgEventArgs e )
+        {
+            var response = new ClientMsgProtobuf<MsgClientPackageInfoResponse>( e.Data );
+
+#if STATIC_CALLBACKS
+            var callback = new PackageInfoCallback( Client, response.Msg.Proto );
+            SteamClient.PostCallback( callback );
+#else
+            var callback = new PackageInfoCallback( response.Msg.Proto );
+            this.Client.PostCallback( callback );
 #endif
         }
 

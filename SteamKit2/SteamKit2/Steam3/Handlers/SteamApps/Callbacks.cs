@@ -228,6 +228,74 @@ namespace SteamKit2
             }
         }
 
+        public sealed class PackageInfoCallback : CallbackMsg
+        {
+            public sealed class Package
+            {
+                public enum PackageStatus
+                {
+                    OK,
+                    Unknown,
+                }
+
+                public PackageStatus Status { get; private set; }
+                public uint PackageID { get; private set; }
+                public uint ChangeNumber { get; private set; }
+                public byte[] Hash { get; private set; }
+                public KeyValue Data { get; private set; }
+
+                public Package( CMsgClientPackageInfoResponse.Package pack, Package.PackageStatus status )
+                {
+                    Status = status;
+
+                    PackageID = pack.package_id;
+                    ChangeNumber = pack.change_number;
+                    Hash = pack.sha;
+
+                    Data = new KeyValue();
+
+                    using ( var ms = new MemoryStream( pack.buffer ) )
+                        Data.ReadAsBinary( ms );
+                }
+
+                public Package( uint packageId, Package.PackageStatus status )
+                {
+                    Status = status;
+                    PackageID = packageId;
+                }
+            }
+
+
+            public ReadOnlyCollection<Package> Packages { get; private set; }
+            public uint PackagesPending { get; private set; }
+
+#if STATIC_CALLBACKS
+            internal PackageInfoCallback( SteamClient client, CMsgClientPackageInfoResponse msg )
+#else
+            internal PackageInfoCallback( CMsgClientPackageInfoResponse msg )
+#endif
+            {
+                var packages = new List<Package>();
+
+                BuildList( msg.packages, Package.PackageStatus.OK, packages );
+                BuildList( msg.packages_unknown, Package.PackageStatus.Unknown, packages );
+
+                PackagesPending = msg.packages_pending;
+
+                Packages = new ReadOnlyCollection<Package>( packages );
+            }
+
+
+            void BuildList( List<CMsgClientPackageInfoResponse.Package> packages, Package.PackageStatus status, List<Package> list )
+            {
+                packages.ForEach( pack => list.Add( new Package( pack, status ) ) );
+            }
+            void BuildList( List<uint> packages, Package.PackageStatus status, List<Package> list )
+            {
+                packages.ForEach( id  => list.Add( new Package( id, status ) ) );
+            }
+        }
+
         public sealed class AppChangesCallback : CallbackMsg
         {
             public ReadOnlyCollection<uint> AppIDs { get; private set; }
