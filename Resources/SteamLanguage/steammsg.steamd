@@ -478,3 +478,13 @@ class MsgClientGetNumberOfCurrentPlayersResponse<EMsg::ClientGetNumberOfCurrentP
 	EResult result;
 	uint numPlayers;
 };
+
+class MsgClientPackageInfoRequest<EMsg::ClientPackageInfoRequest>
+{
+	proto CMsgClientPackageInfoRequest proto;
+};
+
+class MsgClientPackageInfoResponse<EMsg::ClientPackageInfoResponse>
+{
+	proto CMsgClientPackageInfoResponse proto;
+};
