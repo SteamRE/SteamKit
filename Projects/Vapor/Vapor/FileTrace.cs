@@ -19,22 +19,22 @@ namespace Vapor
 
             try
             {
-                lock (logLock)
+                lock ( logLock )
                 {
-                    File.AppendAllText(LogFile, Environment.NewLine + Environment.NewLine);
-                    File.AppendAllText(LogFile, string.Format("New log started on {0} at {1}" + Environment.NewLine, DateTime.Now.ToLongDateString(), DateTime.Now.ToLongTimeString()));
+                    File.AppendAllText( LogFile, Environment.NewLine + Environment.NewLine );
+                    File.AppendAllText( LogFile, string.Format( "New log started on {0} at {1}" + Environment.NewLine, DateTime.Now.ToLongDateString(), DateTime.Now.ToLongTimeString() ) );
                 }
             }
             catch { }
         }
 
-        public void WriteLine( string msg )
+        public void WriteLine( string category, string msg )
         {
             try
             {
-                lock (logLock)
+                lock ( logLock )
                 {
-                    File.AppendAllText(LogFile, string.Format("{0}" + Environment.NewLine, msg));
+                    File.AppendAllText( LogFile, string.Format( "{0}: {1}" + Environment.NewLine, category, msg ) );
                 }
             }
             catch { }
@@ -43,10 +43,12 @@ namespace Vapor
 
     class ConsoleDebugListener : IDebugListener
     {
-        public void WriteLine( string msg )
+        public void WriteLine( string category, string msg )
         {
-            Console.WriteLine( msg );
-            Trace.WriteLine( msg );
+            string output = string.Format( "{0}: {1}", category, msg );
+
+            Console.WriteLine( output );
+            Trace.WriteLine( output );
         }
 
     }

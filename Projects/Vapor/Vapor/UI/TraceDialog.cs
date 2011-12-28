@@ -28,7 +28,7 @@ namespace Vapor
             base.OnFormClosed( e );
         }
 
-        public void WriteLine( string msg )
+        public void WriteLine( string category, string msg )
         {
             this.BeginInvoke( new MethodInvoker( () =>
             {
@@ -36,13 +36,12 @@ namespace Vapor
                 {
                     try
                     {
-                        txtTrace.AppendText( msg + Environment.NewLine );
+                        txtTrace.AppendText( string.Format( "{0}: {1}{2}", category, msg, Environment.NewLine ) );
                         txtTrace.ScrollToCaret();
                     }
                     catch { }
                 }
             } ) );
         }
-
     }
 }
