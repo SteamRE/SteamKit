@@ -22,7 +22,23 @@ namespace SteamKit2
         /// Called when the DebugLog wishes to inform listeners of debug spew.
         /// </summary>
         /// <param name="msg">The message to log.</param>
-        void WriteLine( string msg );
+        void WriteLine( string category, string msg );
+    }
+
+    class ActionListener : IDebugListener
+    {
+        public Action<string, string> Action;
+
+        public ActionListener( Action<string, string> action )
+        {
+            this.Action = action;
+        }
+
+        public void WriteLine( string category, string msg )
+        {
+            Action( category, msg );
+        }
+
     }
 
     /// <summary>
@@ -63,12 +79,46 @@ namespace SteamKit2
             listeners.Add( listener );
         }
         /// <summary>
+        /// Adds an action listener.
+        /// </summary>
+        /// <param name="listenerAction">The listener action.</param>
+        public static void AddListener( Action<string, string> listenerAction )
+        {
+            if ( listenerAction == null )
+                return;
+
+            AddListener( new ActionListener( listenerAction ) );
+        }
+        /// <summary>
         /// Removes a listener.
         /// </summary>
         /// <param name="listener">The listener.</param>
         public static void RemoveListener( IDebugListener listener )
         {
             listeners.Remove( listener );
+        }
+        /// <summary>
+        /// Removes a listener.
+        /// </summary>
+        /// <param name="listenerAction">The previously registered listener action.</param>
+        public static void RemoveListener( Action<string, string> listenerAction )
+        {
+            // probably don't need this function at all, since actions are designed to be anonymous methods
+            // Just In Case
+
+            if ( listenerAction == null )
+                return;
+
+            var removals = listeners
+                 .Where( list => list is ActionListener )
+                 .Cast<ActionListener>()
+                 .Where( actList => actList.Action == listenerAction )
+                 .ToArray();
+
+            if ( removals.Length == 0 )
+                return;
+
+            listeners.Remove( removals[ 0 ] );
         }
 
         /// <summary>
@@ -86,7 +136,7 @@ namespace SteamKit2
 
             foreach ( IDebugListener debugListener in listeners )
             {
-                debugListener.WriteLine( string.Format( "{0}: {1}", category, strMsg ) );
+                debugListener.WriteLine( category, strMsg );
             }
         }
     }
