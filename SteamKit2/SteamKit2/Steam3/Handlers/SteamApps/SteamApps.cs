@@ -16,6 +16,18 @@ namespace SteamKit2
     public sealed partial class SteamApps : ClientMsgHandler
     {
 
+        public sealed class App
+        {
+            public uint AppID { get; set; }
+            public uint SectionFlags { get; set; }
+
+            public App( uint appId, uint sectionFlags = 0xFFFF )
+            {
+                this.AppID = appId;
+                this.SectionFlags = sectionFlags;
+            }
+        }
+
         internal SteamApps()
         {
         }
@@ -30,21 +42,23 @@ namespace SteamKit2
             this.Client.Send( request );
         }
 
-        public void GetAppInfo( uint appid )
+        public void GetAppInfo( IEnumerable<App> apps )
         {
             var request = new ClientMsgProtobuf<MsgClientAppInfoRequest>();
 
-            // this info should be cached.
-            request.Msg.Proto.apps.Add(new CMsgClientAppInfoRequest.App() { app_id = appid, section_flags = 0xFFFF } );
+            foreach ( var app in apps )
+            {
+                request.Msg.Proto.apps.Add( new CMsgClientAppInfoRequest.App() { app_id = app.AppID, section_flags = app.SectionFlags } );
+            }
 
             this.Client.Send( request );
         }
 
-        public void GetPackageInfo( uint packageId )
+        public void GetPackageInfo( IEnumerable<uint> packageId )
         {
             var request = new ClientMsgProtobuf<MsgClientPackageInfoRequest>();
 
-            request.Msg.Proto.package_ids.Add( packageId );
+            request.Msg.Proto.package_ids.AddRange( packageId );
             request.Msg.Proto.meta_data_only = false;
 
             this.Client.Send( request );
