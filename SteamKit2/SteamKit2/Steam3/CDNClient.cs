@@ -60,7 +60,7 @@ namespace SteamKit2
             byte[] encryptedKey = CryptoHelper.RSAEncrypt(sessionKey);
             byte[] encryptedTicket = CryptoHelper.SymmetricEncrypt(appTicket, sessionKey);
 
-            string payload = String.Format("sessionkey={0}&appticket={1}", EncodeBuffer(encryptedKey), EncodeBuffer(encryptedTicket));
+            string payload = String.Format("sessionkey={0}&appticket={1}", WebHelpers.UrlEncode(encryptedKey), WebHelpers.UrlEncode(encryptedTicket));
 
             webClient.Headers.Clear();
             webClient.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
@@ -158,7 +158,7 @@ namespace SteamKit2
             webClient.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
 
             byte[] encryptedTicket = CryptoHelper.SymmetricEncrypt(appTicket, sessionKey);
-            string payload = String.Format("appticket={0}", EncodeBuffer(encryptedTicket));
+            string payload = String.Format("appticket={0}", WebHelpers.UrlEncode(encryptedTicket));
 
             string response = webClient.UploadString(authURI, payload);
         }
@@ -237,49 +237,6 @@ namespace SteamKit2
 
                 return endpoints;
             }
-        }
-
-        internal static bool IsUrlSafeChar(char ch)
-        {
-            if ((((ch >= 'a') && (ch <= 'z')) || ((ch >= 'A') && (ch <= 'Z'))) || ((ch >= '0') && (ch <= '9')))
-            {
-                return true;
-            }
-
-            switch (ch)
-            {
-                case '-':
-                case '.':
-                case '_':
-                    return true;
-            }
-
-            return false;
-        }
-
-        internal static string EncodeBuffer(byte[] input)
-        {
-            StringBuilder encoded = new StringBuilder(input.Length * 2);
-
-            for (int i = 0; i < input.Length; i++)
-            {
-                char inch = (char)input[i];
-
-                if (IsUrlSafeChar(inch))
-                {
-                    encoded.Append(inch);
-                }
-                else if (inch == ' ')
-                {
-                    encoded.Append('+');
-                }
-                else
-                {
-                    encoded.AppendFormat("%{0:X2}", input[i]);
-                }
-            }
-
-            return encoded.ToString();
         }
     }
 }
