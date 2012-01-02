@@ -37,19 +37,12 @@ namespace SteamKit2
         }
 #endif
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SteamClient"/> class using the Tcp connection type.
-        /// </summary>
-        public SteamClient()
-            : this( ConnectionType.Tcp )
-        {
-        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SteamClient"/> class with a specific connection type.
         /// </summary>
         /// <param name="type">The connection type to use.</param>
-        public SteamClient( CMClient.ConnectionType type )
+        public SteamClient( CMClient.ConnectionType type = ConnectionType.Tcp )
             : base( type )
         {
 #if !STATIC_CALLBACKS

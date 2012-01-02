@@ -144,7 +144,7 @@ namespace SteamKit2
         {
             var logon = new ClientMsgProtobuf<MsgClientLogon>();
 
-            SteamID auId = new SteamID( 00, 0, Client.ConnectedUniverse, EAccountType.AnonUser );
+            SteamID auId = new SteamID( 0, 0, Client.ConnectedUniverse, EAccountType.AnonUser );
 
             logon.ProtoHeader.client_session_id = 0;
             logon.ProtoHeader.client_steam_id = auId.ConvertToUint64();
