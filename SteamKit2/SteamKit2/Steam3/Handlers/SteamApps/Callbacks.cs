@@ -271,6 +271,7 @@ namespace SteamKit2
 
 #if STATIC_CALLBACKS
             internal PackageInfoCallback( SteamClient client, CMsgClientPackageInfoResponse msg )
+                : base( client )
 #else
             internal PackageInfoCallback( CMsgClientPackageInfoResponse msg )
 #endif
