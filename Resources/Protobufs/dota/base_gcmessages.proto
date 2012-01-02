@@ -34,6 +34,7 @@ message CMsgServerWelcome {
 
 message CMsgInviteToParty {
 	optional fixed64 steam_id = 1;
+	optional uint32 client_version = 2;
 }
 
 message CMsgInvitationCreated {
@@ -44,6 +45,7 @@ message CMsgInvitationCreated {
 message CMsgPartyInviteResponse {
 	optional uint64 party_id = 1;
 	optional bool accept = 2;
+	optional uint32 client_version = 3;
 }
 
 message CMsgKickFromParty {
@@ -58,7 +60,6 @@ message CMsgGameServerInfo {
 		UNSPECIFIED = 0;
 		GAME = 1;
 		PROXY = 2;
-		CONTROLLER = 3;
 	}
 
 	optional fixed32 server_public_ip_addr = 1;
@@ -72,6 +73,10 @@ message CMsgGameServerInfo {
 	optional float server_loadavg = 9;
 	optional float server_tv_broadcast_time = 10;
 	optional float server_game_time = 11;
+	optional fixed64 server_relay_connected_steam_id = 12;
+	optional uint32 relay_slots_max = 13;
+	optional uint32 relays_connected = 14;
+	optional uint32 relay_clients_connected = 15;
 }
 
 message CMsgServerAvailable {
