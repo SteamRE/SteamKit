@@ -12,6 +12,24 @@ namespace SteamKit2
 {
     public partial class SteamClient
     {
+        public sealed class JobCallback<T> : CallbackMsg
+            where T : CallbackMsg
+        {
+            public long JobID { get; private set; }
+            public T Callback { get; private set; }
+
+#if STATIC_CALLBACKS
+            internal JobCallback( SteamClient client, long jobId, T callback )
+                : base( client )
+#else
+            internal JobCallback( long jobId, T callback )
+#endif
+            {
+                JobID = jobId;
+                Callback = callback;
+            }
+        }
+
         /// <summary>
         /// This callback is received after attempting to connect to the Steam network.
         /// </summary>

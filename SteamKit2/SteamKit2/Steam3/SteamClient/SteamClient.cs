@@ -21,6 +21,8 @@ namespace SteamKit2
     {
         Dictionary<Type, ClientMsgHandler> handlers;
 
+        long currentJobId = 0;
+
 #if STATIC_CALLBACKS
         static object callbackLock = new object();
         static Queue<CallbackMsg> callbackQueue;
@@ -268,6 +270,12 @@ namespace SteamKit2
             }
         }
         #endregion
+
+
+        public long GetNextJobID()
+        {
+            return Interlocked.Increment( ref currentJobId );
+        }
 
 
         /// <summary>

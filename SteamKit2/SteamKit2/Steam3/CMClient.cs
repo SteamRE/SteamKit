@@ -11,6 +11,7 @@ using System.Text;
 using System.IO;
 using System.Diagnostics;
 using System.Net;
+using System.Threading;
 
 namespace SteamKit2
 {
@@ -80,7 +81,8 @@ namespace SteamKit2
 
         ScheduledFunction heartBeatFunc;
 
-        private Dictionary<EServerType, List<IPEndPoint>> serverMap;
+
+        Dictionary<EServerType, List<IPEndPoint>> serverMap;
 
         /// <summary>
         /// The connection type to use when connecting to the Steam3 network.
@@ -99,18 +101,10 @@ namespace SteamKit2
 
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CMClient"/> class using Tcp as the default connection type.
-        /// </summary>
-        public CMClient()
-            : this( ConnectionType.Tcp )
-        {
-        }
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="CMClient"/> class with a specific connection type.
         /// </summary>
         /// <param name="type">The connection type to use.</param>
-        public CMClient( ConnectionType type )
+        public CMClient( ConnectionType type = ConnectionType.Tcp )
         {
             serverMap = new Dictionary<EServerType, List<IPEndPoint>>();
             SessionID = default( int );
