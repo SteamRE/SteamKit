@@ -703,9 +703,11 @@ message CMsgClientConnectionStats {
 message CMsgClientServersAvailable {
 	message Server_Types_Available {
 		optional uint32 server = 1;
+		optional bool changed = 2;
 	}
 
 	repeated .CMsgClientServersAvailable.Server_Types_Available server_types_available = 1;
+	optional uint32 server_type_for_auth_services = 2;
 }
 
 message CMsgClientGetUserStats {
@@ -1261,6 +1263,8 @@ message CMsgClientUCMGetPublishedFileDetailsResponse {
 	optional bool banned = 13;
 	repeated string tag = 14;
 	optional string filename = 15;
+	optional uint32 file_size = 16;
+	optional uint32 preview_file_size = 17;
 }
 
 message CMsgClientUCMDeletePublishedFile {
@@ -1567,6 +1571,7 @@ message CMsgClientMDSUploadManifestRequest {
 	optional string beta_key = 5;
 	optional uint32 build_id = 6;
 	optional uint32 manifest_version = 7;
+	optional string beta_password = 8;
 }
 
 message CMsgClientMDSUploadManifestResponse {
@@ -1608,6 +1613,7 @@ message CMsgMDSSetAppBuildLive {
 	optional uint32 build_id = 1;
 	optional uint32 app_id = 2;
 	optional string beta_key = 3;
+	optional string beta_password = 5;
 }
 
 message CMsgMDSSetAppBuildLiveResponse {
@@ -1628,6 +1634,17 @@ message CMsgClientEmailChangeResponse {
 message CMsgClientGetCDNAuthToken {
 	optional uint32 app_id = 1;
 	optional string host_name = 2;
+}
+
+message CMsgClientGetDepotDecryptionKey {
+	optional uint32 depot_id = 1;
+	optional uint32 app_id = 2;
+}
+
+message CMsgClientGetDepotDecryptionKeyResponse {
+	optional int32 eresult = 1 [default = 2];
+	optional uint32 depot_id = 2;
+	optional bytes depot_encryption_key = 3;
 }
 
 message CMsgClientGetCDNAuthTokenResponse {
@@ -1876,5 +1893,21 @@ message CMsgClientRequestForgottenPasswordEmail {
 message CMsgClientRequestForgottenPasswordEmailResponse {
 	optional uint32 eResult = 1;
 	optional bool use_secret_question = 2;
+}
+
+message CMsgClientItemAnnouncements {
+	optional uint32 count_new_items = 1;
+}
+
+message CMsgClientRequestItemAnnouncements {
+}
+
+message CMsgClientEmailAddrInfo {
+	optional string email_address = 1;
+	optional bool email_is_validated = 2;
+	optional bool email_validation_changed = 3;
+	optional bool credential_change_requires_code = 4;
+	optional bool password_or_secretqa_change_requires_code = 5;
+	optional bool remind_user_about_email = 6;
 }
 
