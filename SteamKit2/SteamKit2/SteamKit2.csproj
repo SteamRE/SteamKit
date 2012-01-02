@@ -89,6 +89,8 @@
     <Compile Include="Steam3\Handlers\SteamGameServer\SteamGameServer.cs" />
     <Compile Include="Steam3\Handlers\SteamGameCoordinator\Callbacks.cs" />
     <Compile Include="Steam3\Handlers\SteamUserStats\SteamUserStats.cs" />
+    <Compile Include="Steam3\SteamClient\CallbackMgr\CallbackMgr.cs" />
+    <Compile Include="Steam3\WebAPI\WebAPI.cs" />
     <Compile Include="Types\ChecksumData.cs" />
     <Compile Include="Types\DepotManifest.cs" />
     <Compile Include="Types\Steam2Ticket.cs" />
@@ -105,7 +107,7 @@
     <Compile Include="Steam3\Handlers\SteamUserStats\Callbacks.cs" />
     <Compile Include="Steam3\Handlers\SteamGameCoordinator\SteamGameCoordinator.cs" />
     <Compile Include="Steam3\Handlers\SteamUser\Callbacks.cs" />
-    <Compile Include="Steam3\SteamClient\CallbackMsg.cs" />
+    <Compile Include="Steam3\SteamClient\CallbackMgr\CallbackMsg.cs" />
     <Compile Include="Steam3\SteamClient\Callbacks.cs" />
     <Compile Include="Steam3\Handlers\ClientMsgHandler.cs" />
     <Compile Include="Types\AuthBlob.cs" />
