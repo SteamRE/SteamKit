@@ -43,6 +43,13 @@ enum DOTALobbyReadyState {
 	DOTALobbyReadyState_DECLINED = 2;
 }
 
+enum DOTAChatChannelType_t {
+	DOTAChannelType_Regional = 0;
+	DOTAChannelType_Custom = 1;
+	DOTAChannelType_Party = 2;
+	DOTAChannelType_Lobby = 3;
+}
+
 message CSODOTAGameAccountClient {
 	optional uint32 account_id = 1 [(key_field) = true];
 	optional string persona_name = 2;
@@ -67,6 +74,10 @@ message CSODOTAGameAccountClient {
 	optional uint32 prevent_voice_until_date = 21;
 	optional uint32 last_abandoned_game_date = 22;
 	optional uint32 leaver_penalty_count = 23;
+	optional uint32 completed_game_streak = 24;
+	optional uint32 idle_in_fountain_count = 25 [(hidden) = true];
+	optional uint32 feeding_count = 26 [(hidden) = true];
+	optional uint32 logged_in_elsewhere_count = 27 [(hidden) = true];
 }
 
 message CSODOTABetaParticipation {
@@ -197,6 +208,7 @@ message CSODOTALobby {
 	optional uint32 average_rank = 32 [(hidden) = true];
 	optional fixed64 load_game_lobby_id = 33;
 	optional uint32 load_game_save_number = 34;
+	optional fixed32 replay_salt = 35 [(hidden) = true];
 }
 
 message CMsgConnectedPlayers {
@@ -214,6 +226,7 @@ message CMsgConnectedPlayers {
 message CMsgStartFindingMatch {
 	optional string key = 1;
 	optional uint32 matchgroups = 2 [default = 4294967295];
+	optional uint32 client_version = 3;
 }
 
 message CMsgStopFindingMatch {
@@ -251,6 +264,7 @@ message CSourceTVGame {
 	optional uint32 tower_state = 13;
 	optional float tv_broadcast_time = 17;
 	optional float game_time = 18;
+	optional fixed64 server_steamid = 19;
 }
 
 message CMsgSourceTVGamesResponse {
@@ -272,6 +286,7 @@ message CMsgSpectateFriendGameResponse {
 	optional uint32 source_tv_public_addr = 1;
 	optional uint32 source_tv_private_addr = 2;
 	optional uint32 source_tv_port = 3;
+	optional fixed64 server_steamid = 4;
 }
 
 message CMsgAbandonCurrentGame {
@@ -295,6 +310,7 @@ message CMsgPracticeLobbyCreate {
 	optional uint32 tournament_game_id = 3;
 	optional uint32 tournament_id = 4;
 	optional string pass_key = 5;
+	optional uint32 client_version = 6;
 }
 
 message CMsgPracticeLobbySetTeamSlot {
@@ -315,6 +331,7 @@ message CMsgPracticeLobbyLaunch {
 	optional bool fill_with_bots = 2;
 	optional bool intro_mode = 3;
 	optional bool allow_spectating = 4;
+	optional uint32 client_version = 5;
 }
 
 message CMsgPracticeLobbySetDetails {
@@ -347,6 +364,7 @@ message CMsgPracticeLobbyListResponse {
 
 message CMsgPracticeLobbyJoin {
 	optional uint64 lobby_id = 1;
+	optional uint32 client_version = 2;
 }
 
 message CMsgSetAvatar {
@@ -394,6 +412,8 @@ message CMsgGameMatchSignOut {
 			optional uint32 time_last_seen = 19;
 			optional uint32 support_ability_value = 20;
 			optional uint64 party_id = 21;
+			optional bool idle_in_fountain = 22;
+			optional bool logged_in_elsewhere = 23;
 		}
 
 		repeated .CMsgGameMatchSignOut.CTeam.CPlayer players = 1;
@@ -433,6 +453,7 @@ message CMsgGameChatLog {
 message CMsgTutorialLobbyCreate {
 	optional string search_key = 1;
 	optional uint32 tutorial_lesson = 2;
+	optional uint32 client_version = 3;
 }
 
 message CMsgInitialQuestionnaireResponse {
@@ -519,6 +540,9 @@ message CMsgDOTAMatch {
 		optional uint32 time_last_seen = 28;
 		optional string player_name = 29;
 		optional uint32 support_ability_value = 30;
+		optional bool idle_in_fountain = 31;
+		optional bool feeding_detected = 32;
+		optional bool logged_in_elsewhere = 33;
 	}
 
 	optional uint32 season = 1;
@@ -631,6 +655,7 @@ message CMsgDOTAJoinChatChannel {
 	optional string persona_name = 1;
 	optional string channel_name = 2;
 	optional string password = 3;
+	optional .DOTAChatChannelType_t channel_type = 4;
 }
 
 message CMsgDOTALeaveChatChannel {
@@ -676,6 +701,7 @@ message CMsgDOTARequestChatChannelListResponse {
 	message ChatChannel {
 		optional string channel_name = 1;
 		optional uint32 num_members = 2;
+		optional .DOTAChatChannelType_t channel_type = 3;
 	}
 
 	repeated .CMsgDOTARequestChatChannelListResponse.ChatChannel channels = 1;
@@ -801,5 +827,48 @@ message CMsgDOTARequestSaveGamesResponse {
 
 	optional fixed64 steam_id = 1;
 	repeated .CMsgDOTARequestSaveGamesResponse.SaveGame save_games = 2;
+}
+
+message CMsgDOTAPlayerFailedToConnect {
+	repeated fixed64 failed_loaders = 1;
+}
+
+message CMsgGCToRelayConnect {
+	optional uint32 source_tv_public_addr = 1;
+	optional uint32 source_tv_private_addr = 2;
+	optional uint32 source_tv_port = 3;
+}
+
+message CMsgGCToRelayConnectResponse {
+}
+
+message CMsgWatchGame {
+	optional fixed64 server_steamid = 1;
+	optional uint32 client_version = 2;
+}
+
+message CMsgWatchGameResponse {
+	enum WatchGameResult {
+		PENDING = 0;
+		READY = 1;
+		GAMESERVERNOTFOUND = 2;
+		NORELAYS = 3;
+	}
+
+	optional .CMsgWatchGameResponse.WatchGameResult watch_game_result = 1 [default = PENDING];
+	optional uint32 source_tv_public_addr = 2;
+	optional uint32 source_tv_private_addr = 3;
+	optional uint32 source_tv_port = 4;
+}
+
+message CMsgGCBanStatusRequest {
+	optional uint32 account_id = 1;
+}
+
+message CMsgGCBanStatusResponse {
+	optional uint32 result = 1;
+	optional bool match_banned = 2;
+	optional bool text_chat_banned = 3;
+	optional bool voice_chat_banned = 4;
 }
 
