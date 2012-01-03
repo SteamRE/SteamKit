@@ -75,15 +75,22 @@ namespace SteamKit2
 
             Handle( call );
         }
-        public void RunWaitCallbacks()
+        public void RunWaitCallbacks( TimeSpan timeout )
         {
 #if STATIC_CALLBACKS
-            var call = SteamClient.WaitForCallback( true );
+            var call = SteamClient.WaitForCallback( true, timeout );
 #else
-            var call = client.WaitForCallback( true );
+            var call = client.WaitForCallback( true, timeout );
 #endif
 
+            if ( call == null )
+                return;
+
             Handle( call );
+        }
+        public void RunWaitCallbacks()
+        {
+            RunWaitCallbacks( TimeSpan.FromMilliseconds( -1 ) );
         }
 
 
