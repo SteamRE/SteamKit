@@ -12,6 +12,7 @@ using System.IO;
 using System.Diagnostics;
 using System.Net;
 using System.Threading;
+using System.Net.Sockets;
 
 namespace SteamKit2
 {
@@ -140,7 +141,15 @@ namespace SteamKit2
             // we'll just connect to the first CM server for now
             // not sure how the client challenges servers when using tcp
             // todo: determine if we should try other servers
-            this.Connection.Connect( Connection.CMServers[ 0 ] );
+            try
+            {
+                this.Connection.Connect( Connection.CMServers[ 0 ] );
+            }
+            catch ( SocketException )
+            {
+                // post disconnection callback
+                OnClientDisconnected();
+            }
         }
         /// <summary>
         /// Disconnects this client.
@@ -395,7 +404,9 @@ namespace SteamKit2
             DebugLog.WriteLine( "CMClient", "Encryption result: {0}", encResult.Msg.Result );
 
             if ( encResult.Msg.Result == EResult.OK )
+            {
                 Connection.NetFilter = new NetFilterEncryption( tempSessionKey );
+            }
         }
         void HandleLoggedOff( ClientMsgEventArgs cliEvent )
         {
