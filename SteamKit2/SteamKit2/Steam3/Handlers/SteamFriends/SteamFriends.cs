@@ -324,7 +324,7 @@ namespace SteamKit2
         {
             var request = new ClientMsgProtobuf<MsgClientRequestFriendData>();
 
-            request.Msg.Proto.friends.AddRange( steamIdList.Cast<ulong>() );
+            request.Msg.Proto.friends.AddRange( steamIdList.Select( sID => sID.ConvertToUint64() ) );
             request.Msg.Proto.persona_state_requested = ( uint )requestedInfo;
 
             this.Client.Send( request );
