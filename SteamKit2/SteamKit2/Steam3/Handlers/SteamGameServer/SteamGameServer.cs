@@ -1,19 +1,29 @@
-﻿using System;
+﻿/*
+ * This file is subject to the terms and conditions defined in
+ * file 'license.txt', which is part of this source code package.
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace SteamKit2
 {
+    /// <summary>
+    /// This handler is used for interacting with the Steam network as a game server.
+    /// </summary>
     public sealed partial class SteamGameServer : ClientMsgHandler
     {
-
         internal SteamGameServer()
         {
         }
 
 
-        public void LogOn()
+        /// <summary>
+        /// Logs onto the Steam network as a game server.
+        /// </summary>
+        public void LogOn( uint appId = 0 )
         {
             var logon = new ClientMsgProtobuf<MsgClientLogon>();
 
@@ -22,10 +32,16 @@ namespace SteamKit2
             logon.ProtoHeader.client_session_id = 0;
             logon.ProtoHeader.client_steam_id = gsId.ConvertToUint64();
 
+            uint localIp = NetHelpers.GetIPAddress( this.Client.GetLocalIP() );
+            logon.Msg.Proto.obfustucated_private_ip = localIp ^ MsgClientLogon.ObfuscationMask;
+
             logon.Msg.Proto.protocol_version = MsgClientLogon.CurrentProtocol;
 
-            this.Client.Send( logon );
+            logon.Msg.Proto.client_os_type = ( uint )Utils.GetOSType();
+            logon.Msg.Proto.game_server_app_id = ( int )appId;
+            logon.Msg.Proto.machine_id = Utils.GenerateMachineID();
 
+            this.Client.Send( logon );
         }
 
 
