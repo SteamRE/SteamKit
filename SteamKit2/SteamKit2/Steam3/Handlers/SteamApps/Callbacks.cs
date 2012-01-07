@@ -3,6 +3,7 @@
  * file 'license.txt', which is part of this source code package.
  */
 
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +31,11 @@ namespace SteamKit2
                 /// </summary>
                 /// <value>The package ID.</value>
                 public uint PackageID { get; private set; }
+
+                /// <summary>
+                /// Gets the last change number for this license.
+                /// </summary>
+                public int LastChangeNumber { get; private set; }
 
                 /// <summary>
                 /// Gets the time the license was created.
@@ -86,6 +92,8 @@ namespace SteamKit2
                 {
                     this.PackageID = license.package_id;
 
+                    this.LastChangeNumber = license.change_number;
+
                     this.TimeCreated = Utils.DateTimeFromUnixTime( license.time_created );
                     this.TimeNextProcess = Utils.DateTimeFromUnixTime( license.time_next_process );
 
@@ -125,17 +133,31 @@ namespace SteamKit2
             {
                 this.Result = ( EResult )msg.eresult;
 
-                var list = msg.licenses.ConvertAll<License>( input => new License( input ) );
+                var list = msg.licenses
+                    .Select( l => new License( l ) )
+                    .ToList();
 
                 this.LicenseList = new ReadOnlyCollection<License>( list );
             }
         }
 
+        /// <summary>
+        /// This callback is received in response to calling <see cref="SteamApps.GetAppOwnershipTicket"/>.
+        /// </summary>
         public sealed class AppOwnershipTicketCallback : CallbackMsg
         {
+            /// <summary>
+            /// Gets the result of requesting the ticket.
+            /// </summary>
             public EResult Result { get; private set; }
 
+            /// <summary>
+            /// Gets the AppID this ticket is for.
+            /// </summary>
             public uint AppID { get; private set; }
+            /// <summary>
+            /// Gets the ticket data.
+            /// </summary>
             public byte[] Ticket { get; private set; }
 
 
@@ -152,99 +174,150 @@ namespace SteamKit2
             }
         }
 
+        /// <summary>
+        /// This callback is received in response to calling <see cref="SteamApps.GetAppInfo"/>.
+        /// </summary>
         public sealed class AppInfoCallback : CallbackMsg
         {
-            public sealed class AppInfo
+            /// <summary>
+            /// Represents a single app in the info response.
+            /// </summary>
+            public sealed class App
             {
+                /// <summary>
+                /// The status of a requested app.
+                /// </summary>
                 public enum AppInfoStatus
                 {
+                    /// <summary>
+                    /// The information for this app was requested successfully.
+                    /// </summary>
                     OK,
+                    /// <summary>
+                    /// This app is unknown.
+                    /// </summary>
                     Unknown
                 }
 
-                public AppInfoStatus Status { get; private set; }
-                public uint AppID { get; private set; }
-                public uint ChangeNumber { get; private set; }
-                public Dictionary<int, KeyValue> Sections { get; private set; }
 
-                internal AppInfo(CMsgClientAppInfoResponse.App app, AppInfoStatus status)
+                /// <summary>
+                /// Gets the status of the app.
+                /// </summary>
+                public AppInfoStatus Status { get; private set; }
+                /// <summary>
+                /// Gets the AppID for this app.
+                /// </summary>
+                public uint AppID { get; private set; }
+                /// <summary>
+                /// Gets the last change number for this app.
+                /// </summary>
+                public uint ChangeNumber { get; private set; }
+                /// <summary>
+                /// Gets a section data for this app.
+                /// </summary>
+                public Dictionary<EAppInfoSection, KeyValue> Sections { get; private set; }
+
+
+                internal App( CMsgClientAppInfoResponse.App app, AppInfoStatus status )
                 {
                     Status = status;
                     AppID = app.app_id;
                     ChangeNumber = app.change_number;
-                    Sections = new Dictionary<int, KeyValue>();
+                    Sections = new Dictionary<EAppInfoSection, KeyValue>();
 
-                    foreach(var section in app.sections)
+                    foreach ( var section in app.sections )
                     {
                         KeyValue kv = new KeyValue();
-                        using(MemoryStream ms = new MemoryStream(section.section_kv))
-                            kv.ReadAsBinary(ms);
+                        using ( MemoryStream ms = new MemoryStream( section.section_kv ) )
+                            kv.ReadAsBinary( ms );
 
-                        Sections.Add((int)section.section_id, kv);
+                        Sections.Add( ( EAppInfoSection )section.section_id, kv );
                     }
                 }
 
-                internal AppInfo(uint appid, AppInfoStatus status)
+                internal App( uint appid, AppInfoStatus status )
                 {
                     Status = status;
                     AppID = appid;
                 }
             }
 
-            public ReadOnlyCollection<AppInfo> Apps { get; private set; }
+            /// <summary>
+            /// Gets the list of apps this response contains.
+            /// </summary>
+            public ReadOnlyCollection<App> Apps { get; private set; }
+            /// <summary>
+            /// Gets the number of apps pending in this response.
+            /// </summary>
             public uint AppsPending { get; private set; }
+
 
 #if STATIC_CALLBACKS
             internal AppInfoCallback( SteamClient client, CMsgClientAppInfoResponse msg )
                 : base( client )
 #else
-            internal AppInfoCallback(CMsgClientAppInfoResponse msg)
+            internal AppInfoCallback( CMsgClientAppInfoResponse msg )
 #endif
             {
-                List<AppInfo> list = new List<AppInfo>();
+                var list = new List<App>();
 
-                BuildList(msg.apps, AppInfo.AppInfoStatus.OK, ref list);
-                BuildList(msg.apps_unknown, AppInfo.AppInfoStatus.Unknown, ref list);
+                list.AddRange( msg.apps.Select( a => new App( a, App.AppInfoStatus.OK ) ) );
+                list.AddRange( msg.apps_unknown.Select( a => new App( a, App.AppInfoStatus.Unknown ) ) );
 
                 AppsPending = msg.apps_pending;
 
-                Apps = new ReadOnlyCollection<AppInfo>(list);
-            }
-
-            internal void BuildList(List<CMsgClientAppInfoResponse.App> apps, AppInfo.AppInfoStatus status, ref List<AppInfo> list)
-            {
-                foreach (var app in apps)
-                {
-                    list.Add(new AppInfo(app, status));
-                }
-            }
-
-            internal void BuildList(List<uint> apps, AppInfo.AppInfoStatus status, ref List<AppInfo> list)
-            {
-                foreach (var app in apps)
-                {
-                    list.Add(new AppInfo(app, status));
-                }
+                Apps = new ReadOnlyCollection<App>( list );
             }
         }
 
+        /// <summary>
+        /// This callback is received in response to calling <see cref="SteamApps.GetPackageInfo"/>.
+        /// </summary>
         public sealed class PackageInfoCallback : CallbackMsg
         {
+            /// <summary>
+            /// Represents a single package in this response.
+            /// </summary>
             public sealed class Package
             {
+                /// <summary>
+                /// The status of a package.
+                /// </summary>
                 public enum PackageStatus
                 {
+                    /// <summary>
+                    /// The information for this package was requested successfully.
+                    /// </summary>
                     OK,
+                    /// <summary>
+                    /// This package is unknown.
+                    /// </summary>
                     Unknown,
                 }
 
+                /// <summary>
+                /// Gets the status of this package.
+                /// </summary>
                 public PackageStatus Status { get; private set; }
+                /// <summary>
+                /// Gets the PackageID for this package.
+                /// </summary>
                 public uint PackageID { get; private set; }
+                /// <summary>
+                /// Gets the last change number for this package.
+                /// </summary>
                 public uint ChangeNumber { get; private set; }
+                /// <summary>
+                /// Gets a hash of the package data for caching purposes.
+                /// </summary>
                 public byte[] Hash { get; private set; }
+                /// <summary>
+                /// Gets the data for this package.
+                /// </summary>
                 public KeyValue Data { get; private set; }
 
-                public Package( CMsgClientPackageInfoResponse.Package pack, Package.PackageStatus status )
+
+                internal Package( CMsgClientPackageInfoResponse.Package pack, Package.PackageStatus status )
                 {
                     Status = status;
 
@@ -258,7 +331,7 @@ namespace SteamKit2
                         Data.ReadAsBinary( ms );
                 }
 
-                public Package( uint packageId, Package.PackageStatus status )
+                internal Package( uint packageId, Package.PackageStatus status )
                 {
                     Status = status;
                     PackageID = packageId;
@@ -266,7 +339,13 @@ namespace SteamKit2
             }
 
 
+            /// <summary>
+            /// Gets the list of packages this response contains.
+            /// </summary>
             public ReadOnlyCollection<Package> Packages { get; private set; }
+            /// <summary>
+            /// Gets a count of packages pending in this response.
+            /// </summary>
             public uint PackagesPending { get; private set; }
 
 #if STATIC_CALLBACKS
@@ -278,31 +357,37 @@ namespace SteamKit2
             {
                 var packages = new List<Package>();
 
-                BuildList( msg.packages, Package.PackageStatus.OK, packages );
-                BuildList( msg.packages_unknown, Package.PackageStatus.Unknown, packages );
+                packages.AddRange( msg.packages.Select( p => new Package( p, Package.PackageStatus.OK ) ) );
+                packages.AddRange( msg.packages_unknown.Select( p => new Package( p, Package.PackageStatus.Unknown ) ) );
 
                 PackagesPending = msg.packages_pending;
 
                 Packages = new ReadOnlyCollection<Package>( packages );
             }
-
-
-            void BuildList( List<CMsgClientPackageInfoResponse.Package> packages, Package.PackageStatus status, List<Package> list )
-            {
-                packages.ForEach( pack => list.Add( new Package( pack, status ) ) );
-            }
-            void BuildList( List<uint> packages, Package.PackageStatus status, List<Package> list )
-            {
-                packages.ForEach( id  => list.Add( new Package( id, status ) ) );
-            }
         }
 
+        /// <summary>
+        /// This callback is received in response to calling <see cref="SteamApps.GetAppChanges"/>.
+        /// </summary>
         public sealed class AppChangesCallback : CallbackMsg
         {
+            /// <summary>
+            /// Gets the list of AppIDs that have changed since the last change number request.
+            /// </summary>
             public ReadOnlyCollection<uint> AppIDs { get; private set; }
+            /// <summary>
+            /// Gets the current change number.
+            /// </summary>
             public uint CurrentChangeNumber { get; private set; }
 
-            public bool ForceFullUpdate { get; set; }
+            /// <summary>
+            /// Gets a value indicating whether the backend wishes for the client to perform a full update.
+            /// </summary>
+            /// <value>
+            /// 	<c>true</c> if the client should perform a full update; otherwise, <c>false</c>.
+            /// </value>
+            public bool ForceFullUpdate { get; private set; }
+
 
 #if STATIC_CALLBACKS
             internal AppChangesCallback( SteamClient client, CMsgClientAppInfoChanges msg )
@@ -318,11 +403,24 @@ namespace SteamKit2
             }
         }
 
+        /// <summary>
+        /// This callback is recieved in response to calling <see cref="SteamApps.GetDepotDecryptionKey"/>.
+        /// </summary>
         public sealed class DepotKeyCallback : CallbackMsg
         {
-            public EResult Result { get; set; }
-            public uint DepotID { get; set; }
-            public byte[] DepotKey { get; set; }
+            /// <summary>
+            /// Gets the result of requesting this encryption key.
+            /// </summary>
+            public EResult Result { get; private set; }
+            /// <summary>
+            /// Gets the DepotID this encryption key is for.
+            /// </summary>
+            public uint DepotID { get; private set; }
+
+            /// <summary>
+            /// Gets the encryption key for this depot.
+            /// </summary>
+            public byte[] DepotKey { get; private set; }
 
 #if STATIC_CALLBACKS
             internal DepotKeyCallback( SteamClient client, MsgClientGetDepotDecryptionKeyResponse msg )
@@ -331,15 +429,24 @@ namespace SteamKit2
             internal DepotKeyCallback( MsgClientGetDepotDecryptionKeyResponse msg )
 #endif
             {
-                Result = (EResult)msg.Result;
+                Result = ( EResult )msg.Result;
                 DepotID = msg.DepotID;
                 DepotKey = msg.DepotEncryptionKey;
             }
         }
 
+        /// <summary>
+        /// This callback is fired when the client receives a list of game connect tokens.
+        /// </summary>
         public sealed class GameConnectTokensCallback : CallbackMsg
         {
+            /// <summary>
+            /// Gets a count of tokens to keep.
+            /// </summary>
             public uint TokensToKeep { get; private set; }
+            /// <summary>
+            /// Gets the list of tokens.
+            /// </summary>
             public ReadOnlyCollection<byte[]> Tokens { get; private set; }
 
 
@@ -347,17 +454,23 @@ namespace SteamKit2
             internal GameConnectTokensCallback( SteamClient client, CMsgClientGameConnectTokens msg )
                 : base( client )
 #else
-                internal GameConnectTokensCallback( CMsgClientGameConnectTokens msg )
+            internal GameConnectTokensCallback( CMsgClientGameConnectTokens msg )
 #endif
             {
                 TokensToKeep = msg.max_tokens_to_keep;
-                Tokens = new ReadOnlyCollection<byte[]>( msg.tokens ); 
+                Tokens = new ReadOnlyCollection<byte[]>( msg.tokens );
             }
         }
 
+        /// <summary>
+        /// This callback is fired when the client receives it's VAC banned status.
+        /// </summary>
         public sealed class VACStatusCallback : CallbackMsg
         {
-            public ReadOnlyCollection<uint> BannedApps { get; set; }
+            /// <summary>
+            /// Gets a list of VAC banned apps the client is banned from.
+            /// </summary>
+            public ReadOnlyCollection<uint> BannedApps { get; private set; }
 
 
 #if STATIC_CALLBACKS
@@ -367,7 +480,7 @@ namespace SteamKit2
             internal VACStatusCallback( MsgClientVACBanStatus msg, byte[] payload )
 #endif
             {
-                List<uint> tempList = new List<uint>();
+                var tempList = new List<uint>();
 
                 DataStream ds = new DataStream( payload );
 
