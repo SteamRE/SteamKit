@@ -3,8 +3,6 @@
  * file 'license.txt', which is part of this source code package.
  */
 
-
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,19 +18,10 @@ namespace SteamKit2
     public sealed partial class SteamUser : ClientMsgHandler
     {
 
-
-        LogOnDetails logonDetails;
-
-
-        internal SteamUser()
-        {
-        }
-
-
         /// <summary>
         /// Represents the details required to log into Steam3.
         /// </summary>
-        public class LogOnDetails
+        public sealed class LogOnDetails
         {
             /// <summary>
             /// Gets or sets the username.
@@ -51,12 +40,26 @@ namespace SteamKit2
             /// </summary>
             /// <value>The auth code.</value>
             public string AuthCode { get; set; }
+            /// <summary>
+            /// Gets or sets the sentry file hash for this logon attempt, or null if no sentry file is available.
+            /// </summary>
+            /// <value>The sentry file hash.</value>
+            public byte[] SentryFileHash { get; set; }
 
             /// <summary>
             /// Gets or sets the account instance. 1 for the PC instance or 2 for the Console (PS3) instance.
             /// </summary>
             /// <value>The account instance.</value>
             public uint AccountInstance { get; set; }
+
+            /// <summary>
+            /// Gets or sets a value indicating whether to request the Steam2 ticket.
+            /// This is an optional request only needed for Steam2 content downloads.
+            /// </summary>
+            /// <value>
+            ///   <c>true</c> if the Steam2 ticket should be requested; otherwise, <c>false</c>.
+            /// </value>
+            public bool RequestSteam2Ticket { get; set; }
 
 
             public LogOnDetails()
@@ -66,14 +69,106 @@ namespace SteamKit2
         }
 
         /// <summary>
+        /// Represents details required to complete a machine auth request.
+        /// </summary>
+        public sealed class MachineAuthDetails
+        {
+            /// <summary>
+            /// The One-Time-Password details for this response.
+            /// </summary>
+            public sealed class OTPDetails
+            {
+                public uint Type { get; set; }
+                public string Identifier { get; set; }
+                public uint Value { get; set; }
+            }
+
+            /// <summary>
+            /// Gets or sets the target Job ID for the request.
+            /// This is provided in the <see cref="JobCallback"/> for a <see cref="UpdateMachineAuthCallback"/>.
+            /// </summary>
+            /// <value>The Job ID.</value>
+            public long JobID { get; set; }
+
+            /// <summary>
+            /// Gets or sets the result of updating the machine auth.
+            /// </summary>
+            /// <value>The result.</value>
+            public EResult Result { get; set; }
+
+            /// <summary>
+            /// Gets or sets the number of bytes written for the sentry file.
+            /// </summary>
+            /// <value>The number of bytes written.</value>
+            public int BytesWritten { get; set; }
+            /// <summary>
+            /// Gets or sets the offset within the sentry file that was written.
+            /// </summary>
+            /// <value>The offset.</value>
+            public int Offset { get; set; }
+
+            /// <summary>
+            /// Gets or sets the filename of the sentry file that was written.
+            /// </summary>
+            /// <value>The name of the sentry file.</value>
+            public string FileName { get; set; }
+            /// <summary>
+            /// Gets or sets the size of the sentry file.
+            /// </summary>
+            /// <value>/ The size of the sentry file.</value>
+            public int FileSize { get; set; }
+
+            /// <summary>
+            /// Gets or sets the last error that occurred while writing the sentry file, or 0 if no error occurred.
+            /// </summary>
+            /// <value>The last error.</value>
+            public int LastError { get; set; }
+
+            /// <summary>
+            /// Gets or sets the SHA-1 hash of the sentry file.
+            /// </summary>
+            /// <value>The sentry file hash.</value>
+            public byte[] SentryFileHash { get; set; }
+
+            /// <summary>
+            /// Gets or sets the one-time-password details.
+            /// </summary>
+            /// <value>The one time password details.</value>
+            public OTPDetails OneTimePassword { get; set; }
+
+
+            /// <summary>
+            /// Initializes a new instance of the <see cref="MachineAuthDetails"/> class.
+            /// </summary>
+            public MachineAuthDetails()
+            {
+                OneTimePassword = new OTPDetails();
+            }
+        }
+
+
+        /// <summary>
+        /// Gets the SteamID of this client. This value is assigned after a logon attempt has succeeded.
+        /// </summary>
+        /// <value>The SteamID.</value>
+        public SteamID SteamID
+        {
+            get { return this.Client.SteamID; }
+        }
+
+
+        internal SteamUser()
+        {
+        }
+
+
+        /// <summary>
         /// Logs the client into the Steam3 network. The client should already have been connected at this point.
-        /// Results are returned in a <see cref="LogOnCallback"/>.
+        /// Results are returned in a <see cref="LoggedOnCallback"/>.
         /// </summary>
         /// <param name="details">The details.</param>
         public void LogOn( LogOnDetails details )
         {
-            this.logonDetails = details;
-
             var logon = new ClientMsgProtobuf<MsgClientLogon>();
 
             SteamID steamId = new SteamID( 0, details.AccountInstance, Client.ConnectedUniverse, EAccountType.Individual );
@@ -94,15 +189,16 @@ namespace SteamKit2
             logon.Msg.Proto.password = details.Password;
 
             logon.Msg.Proto.protocol_version = MsgClientLogon.CurrentProtocol;
-            logon.Msg.Proto.client_os_type = 10; // windows
+            logon.Msg.Proto.client_os_type = ( uint )Utils.GetOSType();
             logon.Msg.Proto.client_language = "english";
-            logon.Msg.Proto.steam2_ticket_request = true;
+
+            logon.Msg.Proto.steam2_ticket_request = details.RequestSteam2Ticket;
 
 
             // because steamkit doesn't attempt to find the best cellid
             // we'll just use the default one
             // this is really only relevant for steam2, so it's a mystery as to why steam3 wants to know
-            logon.Msg.Proto.cell_id = 0;
+            // logon.Msg.Proto.cell_id = 0;
 
             // we're now using the latest steamclient package version, this is required to get a proper sentry file for steam guard
             logon.Msg.Proto.client_package_version = 1634;
@@ -112,34 +208,19 @@ namespace SteamKit2
             logon.Msg.Proto.machine_id = Utils.GenerateMachineID();
 
 
-            // steam guard
+            // steam guard 
             logon.Msg.Proto.auth_code = details.AuthCode;
 
-            string sentryFile = ClientConfig.GetSentryFile( logonDetails.Username );
-            byte[] sentryData = null;
+            logon.Msg.Proto.sha_sentryfile = details.SentryFileHash;
+            logon.Msg.Proto.eresult_sentryfile = ( int )( details.SentryFileHash != null ? EResult.OK : EResult.FileNotFound );
 
-            if ( sentryFile != null )
-            {
-                try
-                {
-                    sentryData = File.ReadAllBytes( sentryFile );
-                }
-                catch { }
-            }
-
-            if ( sentryData != null )
-            {
-                logon.Msg.Proto.sha_sentryfile = CryptoHelper.SHAHash( sentryData );
-                logon.Msg.Proto.eresult_sentryfile = ( int )EResult.OK;
-            }
-            else
-            {
-                logon.Msg.Proto.eresult_sentryfile = ( int )EResult.FileNotFound;
-            }
 
             this.Client.Send( logon );
         }
-
+        /// <summary>
+        /// Logs the client into the Steam3 network as an anonymous user. The client should already have been connected at this point.
+        /// Results are returned in a <see cref="LoggedOnCallback"/>.
+        /// </summary>
         public void LogOnAnonUser()
         {
             var logon = new ClientMsgProtobuf<MsgClientLogon>();
@@ -150,6 +231,11 @@ namespace SteamKit2
             logon.ProtoHeader.client_steam_id = auId.ConvertToUint64();
 
             logon.Msg.Proto.protocol_version = MsgClientLogon.CurrentProtocol;
+            logon.Msg.Proto.client_os_type = ( uint )Utils.GetOSType();
+
+            // this is not a proper machine id that Steam accepts
+            // but it's good enough for identifying a machine
+            logon.Msg.Proto.machine_id = Utils.GenerateMachineID();
 
             this.Client.Send( logon );
         }
@@ -165,12 +251,34 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// Gets the SteamID of this client. This value is assigned after a logon attempt has succeeded.
+        /// Sends a machine auth response.
+        /// This should normally be used in response to a <see cref="UpdateMachineAuthCallback"/>.
         /// </summary>
-        /// <value>The SteamID.</value>
-        public SteamID GetSteamID()
+        /// <param name="details">The details pertaining to the response.</param>
+        public void SendMachineAuthResponse( MachineAuthDetails details )
         {
-            return this.Client.SteamID;
+            var response = new ClientMsgProtobuf<MsgClientUpdateMachineAuthResponse>();
+
+            // so we respond to the correct message
+            response.ProtoHeader.job_id_target = ( ulong )details.JobID;
+
+            response.Msg.Proto.cubwrote = ( uint )details.BytesWritten;
+            response.Msg.Proto.eresult = ( uint )details.Result;
+
+            response.Msg.Proto.filename = details.FileName;
+            response.Msg.Proto.filesize = ( uint )details.FileSize;
+
+            response.Msg.Proto.getlasterror = ( uint )details.LastError;
+            response.Msg.Proto.offset = ( uint )details.Offset;
+
+            response.Msg.Proto.sha_file = details.SentryFileHash;
+
+            response.Msg.Proto.otp_identifier = details.OneTimePassword.Identifier;
+            response.Msg.Proto.otp_type = ( int )details.OneTimePassword.Type;
+            response.Msg.Proto.otp_value = details.OneTimePassword.Value;
+
+            this.Client.Send( response );
+
         }
 
 
@@ -212,10 +320,7 @@ namespace SteamKit2
             }
         }
 
-
-
-
-
+        
         #region ClientMsg Handlers
         void HandleLoggedOff( ClientMsgEventArgs e )
         {
@@ -251,32 +356,15 @@ namespace SteamKit2
                 return;
             }
 
-            var response = new ClientMsgProtobuf<MsgClientUpdateMachineAuthResponse>();
-
-            try
-            {
-                using ( FileStream fs = File.Open( machineAuth.Msg.Proto.filename, FileMode.Create, FileAccess.ReadWrite, FileShare.None ) )
-                {
-                    fs.Write( machineAuth.Msg.Proto.bytes, ( int )machineAuth.Msg.Proto.offset, ( int )machineAuth.Msg.Proto.cubtowrite );
-                }
-
-                ClientConfig.AddSentryFile( logonDetails.Username, machineAuth.Msg.Proto.filename );
-
-                response.ProtoHeader.job_id_target = machineAuth.ProtoHeader.job_id_source;
-
-                response.Msg.Proto.eresult = ( uint )EResult.InvalidParam;
-                //response.Msg.Proto.filename = machineAuth.Msg.Proto.filename;
-                response.Msg.Proto.sha_file = CryptoHelper.SHAHash( machineAuth.Msg.Proto.bytes );
-                response.Msg.Proto.offset = machineAuth.Msg.Proto.offset;
-                response.Msg.Proto.cubwrote = machineAuth.Msg.Proto.cubtowrite;
-            }
-            catch
-            {
-                // note: i'm unsure if this is the proper response
-                response.Msg.Proto.eresult = ( uint )EResult.Fail;
-            }
-
-            this.Client.Send( response );
+#if STATIC_CALLBACKS
+            var innerCallback = new UpdateMachineAuthCallback( Client, machineAuth.Msg.Proto );
+            var callback = new SteamClient.JobCallback<UpdateMachineAuthCallback>( Client, innerCallback );
+            SteamClient.PostCallback( callback );
+#else
+            var innerCallback = new UpdateMachineAuthCallback( machineAuth.Msg.Proto );
+            var callback = new SteamClient.JobCallback<UpdateMachineAuthCallback>( ( long )machineAuth.ProtoHeader.job_id_source, innerCallback );
+            Client.PostCallback( callback );
+#endif
         }
         void HandleSessionToken( ClientMsgEventArgs e )
         {
@@ -347,7 +435,7 @@ namespace SteamKit2
                 var callback = new LogOnCallback( Client, logonResp.Msg.Proto );
                 SteamClient.PostCallback( callback );
 #else
-                var callback = new LogOnCallback( logonResp.Msg.Proto );
+                var callback = new LoggedOnCallback( logonResp.Msg.Proto );
                 this.Client.PostCallback( callback );
 #endif
             }
