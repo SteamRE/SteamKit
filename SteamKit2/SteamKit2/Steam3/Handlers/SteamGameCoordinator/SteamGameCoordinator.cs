@@ -68,7 +68,7 @@ namespace SteamKit2
         /// <param name="e">The <see cref="SteamKit2.ClientMsgEventArgs"/> instance containing the event data.</param>
         public override void HandleMsg( ClientMsgEventArgs e )
         {
-            if ( e.EMsg == EMsg.ClientFromGC && e.IsProto )
+            if ( e.EMsg == EMsg.ClientFromGC )
             {
                 var msg = new ClientMsgProtobuf<MsgClientFromGC>();
 
@@ -86,13 +86,9 @@ namespace SteamKit2
                 var callback = new MessageCallback( Client, msg.Msg );
                 SteamClient.PostCallback( callback );
 #else
-                var callback = new MessageCallback( msg.Msg );
+                var callback = new MessageCallback( msg.Msg.Proto );
                 this.Client.PostCallback( callback );
 #endif
-            }
-            else if ( e.EMsg == EMsg.ClientFromGC )
-            {
-                DebugLog.WriteLine( "SteamGameCoordinator", "HandleMsg encountered unexpected non-proto GC relay message!" );
             }
         }
     }
