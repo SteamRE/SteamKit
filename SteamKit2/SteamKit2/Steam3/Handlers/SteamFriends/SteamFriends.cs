@@ -20,7 +20,6 @@ namespace SteamKit2
     /// </summary>
     public sealed partial class SteamFriends : ClientMsgHandler
     {
-
         object listLock = new object();
         List<SteamID> friendList;
         List<SteamID> clanList;
@@ -107,34 +106,6 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// Gets the count of clans the local user is a member of.
-        /// </summary>
-        /// <returns>The number of clans this user is a member of.</returns>
-        public int GetClanCount()
-        {
-            lock ( listLock )
-            {
-                return clanList.Count;
-            }
-        }
-
-        /// <summary>
-        /// Gets a clan SteamID by index.
-        /// </summary>
-        /// <param name="index">The index.</param>
-        /// <returns>A valid steamid of a clan if the index is in range; otherwise a steamid representing 0.</returns>
-        public SteamID GetClanByIndex( int index )
-        {
-            lock ( listLock )
-            {
-                if ( index < 0 || index >= clanList.Count )
-                    return 0;
-
-                return clanList[ index ];
-            }
-        }
-
-        /// <summary>
         /// Gets the persona name of a friend.
         /// </summary>
         /// <param name="steamId">The steam id.</param>
@@ -161,7 +132,6 @@ namespace SteamKit2
         {
             return cache.GetUser( steamId ).Relationship;
         }
-
         /// <summary>
         /// Gets the game name of a friend playing a game.
         /// </summary>
@@ -180,7 +150,6 @@ namespace SteamKit2
         {
             return cache.GetUser( steamId ).GameID;
         }
-
         /// <summary>
         /// Gets a SHA-1 hash representing the friend's avatar.
         /// </summary>
@@ -192,6 +161,33 @@ namespace SteamKit2
         }
 
         /// <summary>
+        /// Gets the count of clans the local user is a member of.
+        /// </summary>
+        /// <returns>The number of clans this user is a member of.</returns>
+        public int GetClanCount()
+        {
+            lock ( listLock )
+            {
+                return clanList.Count;
+            }
+        }
+        /// <summary>
+        /// Gets a clan SteamID by index.
+        /// </summary>
+        /// <param name="index">The index.</param>
+        /// <returns>A valid steamid of a clan if the index is in range; otherwise a steamid representing 0.</returns>
+        public SteamID GetClanByIndex( int index )
+        {
+            lock ( listLock )
+            {
+                if ( index < 0 || index >= clanList.Count )
+                    return 0;
+
+                return clanList[ index ];
+            }
+        }
+
+        /// <summary>
         /// Gets the name of a clan.
         /// </summary>
         /// <param name="steamId">The clan SteamID.</param>
@@ -200,7 +196,6 @@ namespace SteamKit2
         {
             return cache.Clans.GetAccount( steamId ).Name;
         }
-
         /// <summary>
         /// Gets the relationship of a clan.
         /// </summary>
@@ -210,7 +205,6 @@ namespace SteamKit2
         {
             return cache.Clans.GetAccount( steamId ).Relationship;
         }
-
         /// <summary>
         /// Gets a SHA-1 hash representing the clan's avatar.
         /// </summary>
@@ -262,7 +256,6 @@ namespace SteamKit2
 
             this.Client.Send( addFriend );
         }
-
         /// <summary>
         /// Removes a friend from your friends list.
         /// </summary>
@@ -315,7 +308,7 @@ namespace SteamKit2
             EClientPersonaStateFlag.SourceID | EClientPersonaStateFlag.GameExtraInfo;
 
         /// <summary>
-        /// Requests persona state for a specified SteamID.
+        /// Requests persona state for a list of specified SteamID.
         /// Results are returned in <see cref="SteamFriends.PersonaStateCallback"/>.
         /// </summary>
         /// <param name="steamIdList">A list of SteamIDs to request the info of.</param>
@@ -328,6 +321,16 @@ namespace SteamKit2
             request.Msg.Proto.persona_state_requested = ( uint )requestedInfo;
 
             this.Client.Send( request );
+        }
+        /// <summary>
+        /// Requests persona state for a specified SteamID.
+        /// Results are returned in <see cref="SteamFriends.PersonaStateCallback"/>.
+        /// </summary>
+        /// <param name="steamId">A SteamID to request the info of.</param>
+        /// <param name="requestedInfo">The requested info flags.</param>
+        public void RequestFriendInfo( SteamID steamId, EClientPersonaStateFlag requestedInfo = defaultInfoRequest )
+        {
+            RequestFriendInfo( new SteamID[] { steamId }, requestedInfo );
         }
 
 
@@ -374,7 +377,6 @@ namespace SteamKit2
         }
 
 
-
         #region ClientMsg Handlers
         void HandleAccountInfo( ClientMsgEventArgs e )
         {
@@ -413,7 +415,7 @@ namespace SteamKit2
             // we have to request information for all of our friends because steam only sends persona information for online friends
             var reqInfo = new ClientMsgProtobuf<MsgClientRequestFriendData>();
 
-            reqInfo.Msg.Proto.persona_state_requested = ( uint )( EClientPersonaStateFlag.PlayerName | EClientPersonaStateFlag.Presence );
+            reqInfo.Msg.Proto.persona_state_requested = ( uint )defaultInfoRequest;
 
             lock ( listLock )
             {
