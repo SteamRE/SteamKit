@@ -153,7 +153,7 @@ namespace Vapor
                 type = EChatEntryType.Emote;
             }
 
-            this.HandleChat( Steam3.SteamUser.GetSteamID(), type, msg );
+            this.HandleChat( Steam3.SteamUser.SteamID, type, msg );
             Steam3.SteamFriends.SendChatMessage( chatFriend.Friend.SteamID, type, msg );
         }
 

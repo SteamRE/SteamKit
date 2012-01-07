@@ -96,7 +96,7 @@ namespace Vapor
 
             if ( msg.IsType<SteamFriends.FriendsListCallback>() )
             {
-                selfControl.UpdateFriend( new Friend( Steam3.SteamUser.GetSteamID() ) );
+                selfControl.UpdateFriend( new Friend( Steam3.SteamUser.SteamID ) );
                 this.UpdateFriends();
             }
 
@@ -106,9 +106,9 @@ namespace Vapor
                 this.Enabled = true;
             }
 
-            if ( msg.IsType<SteamUser.LogOnCallback>() )
+            if ( msg.IsType<SteamUser.LoggedOnCallback>() )
             {
-                var logOnResp = ( SteamUser.LogOnCallback )msg;
+                var logOnResp = ( SteamUser.LoggedOnCallback )msg;
 
                 if ( logOnResp.Result == EResult.AccountLogonDenied )
                 {
@@ -162,7 +162,7 @@ namespace Vapor
                 }
             }
 
-            msg.Handle<SteamClient.DisconnectCallback>( ( callback ) =>
+            msg.Handle<SteamClient.DisconnectedCallback>( ( callback ) =>
                 {
                     // if we expected this disconnection (cause of steamguard), we do nothing
                     if ( expectDisconnect )
