@@ -1,4 +1,11 @@
-﻿using System;
+﻿/*
+ * This file is subject to the terms and conditions defined in
+ * file 'license.txt', which is part of this source code package.
+ */
+
+
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +19,12 @@ namespace SteamKit2
     public sealed partial class SteamUserStats : ClientMsgHandler
     {
 
+        /// <summary>
+        /// Retrieves the number of current players or a given <see cref="GameID"/>.
+        /// Results are returned in a <see cref="NumberOfPlayersCallback"/> from a <see cref="JobCallback"/>.
+        /// </summary>
+        /// <param name="gameId">The GameID to request the number of players for.</param>
+        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="JobCallback"/>.</returns>
         public long GetNumberOfCurrentPlayers( GameID gameId )
         {
             long jobId = Client.GetNextJobID();
