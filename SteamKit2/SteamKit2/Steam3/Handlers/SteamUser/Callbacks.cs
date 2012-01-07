@@ -17,7 +17,7 @@ namespace SteamKit2
         /// <summary>
         /// This callback is returned in response to an attempt to log on to the Steam3 network through <see cref="SteamUser"/>.
         /// </summary>
-        public sealed class LogOnCallback : CallbackMsg
+        public sealed class LoggedOnCallback : CallbackMsg
         {
             /// <summary>
             /// Gets the result of the logon.
@@ -87,7 +87,7 @@ namespace SteamKit2
             internal LogOnCallback( SteamClient client, CMsgClientLogonResponse resp )
                 : base( client )
 #else
-            internal LogOnCallback( CMsgClientLogonResponse resp )
+            internal LoggedOnCallback( CMsgClientLogonResponse resp )
 #endif
             {
                 this.Result = ( EResult )resp.eresult;
@@ -238,6 +238,50 @@ namespace SteamKit2
 
                 Currency = wallet.currency;
                 Balance = wallet.balance;
+            }
+        }
+
+        public sealed class UpdateMachineAuthCallback : CallbackMsg
+        {
+            public sealed class OTPDetails
+            {
+                public uint Type { get; internal set; }
+                public string Identifier { get; internal set; }
+                public byte[] SharedSecret { get; internal set; }
+                public uint TimeDrift { get; internal set; }
+            }
+
+            public byte[] Data { get; private set; }
+
+            public int BytesToWrite { get; private set; }
+            public int Offset { get; private set; }
+
+            public string FileName { get; private set; }
+
+            public OTPDetails OneTimePassword { get; private set; }
+
+
+#if STATIC_CALLBACKS
+            internal UpdateMachineAuthCallback( SteamClient client, CMsgClientUpdateMachineAuth msg )
+                : base( client )
+#else
+            internal UpdateMachineAuthCallback( CMsgClientUpdateMachineAuth msg )
+#endif
+            {
+                Data = msg.bytes;
+
+                BytesToWrite = ( int )msg.cubtowrite;
+                Offset = ( int )msg.offset;
+
+                FileName = msg.filename;
+
+                OneTimePassword = new OTPDetails
+                {
+                    Type = msg.otp_type,
+                    Identifier = msg.otp_identifier,
+                    SharedSecret = msg.otp_sharedsecret,
+                    TimeDrift = msg.otp_timedrift,
+                };
             }
         }
     }
