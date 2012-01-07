@@ -301,7 +301,7 @@ namespace SteamKit2
 #if STATIC_CALLBACKS
             SteamClient.PostCallback( new DisconnectCallback( this ) );
 #else
-            this.PostCallback( new DisconnectCallback() );
+            this.PostCallback( new DisconnectedCallback() );
 #endif
         }
 
@@ -323,7 +323,7 @@ namespace SteamKit2
 #if STATIC_CALLBACKS
                 SteamClient.PostCallback( new ConnectCallback( this, EResult.Fail ) );
 #else
-                PostCallback( new ConnectCallback( EResult.Fail ) );
+                PostCallback( new ConnectedCallback( EResult.Fail ) );
 #endif
                 return;
             }
@@ -331,7 +331,7 @@ namespace SteamKit2
 #if STATIC_CALLBACKS
             SteamClient.PostCallback( new ConnectCallback( this, encResult.Msg ) );
 #else
-            PostCallback( new ConnectCallback( encResult.Msg ) );
+            PostCallback( new ConnectedCallback( encResult.Msg ) );
 #endif
         }
 

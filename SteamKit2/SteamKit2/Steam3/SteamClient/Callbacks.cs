@@ -12,10 +12,23 @@ namespace SteamKit2
 {
     public partial class SteamClient
     {
+        /// <summary>
+        /// This callback is received when a job related operation on the backend has completed, or a client operation should begin.
+        /// </summary>
+        /// <typeparam name="T">The inner callback this job represents.</typeparam>
         public sealed class JobCallback<T> : CallbackMsg
             where T : CallbackMsg
         {
+            /// <summary>
+            /// Gets the Job ID of this callback. For client based jobs, this will match the Job ID of a function call.
+            /// For server based jobs, this is provided to respond to the correct job.
+            /// </summary>
             public long JobID { get; private set; }
+
+
+            /// <summary>
+            /// Gets the inner callback message for this job.
+            /// </summary>
             public T Callback { get; private set; }
 
 #if STATIC_CALLBACKS
@@ -33,7 +46,7 @@ namespace SteamKit2
         /// <summary>
         /// This callback is received after attempting to connect to the Steam network.
         /// </summary>
-        public sealed class ConnectCallback : CallbackMsg
+        public sealed class ConnectedCallback : CallbackMsg
         {
             /// <summary>
             /// Gets the result of the connection attempt.
@@ -45,7 +58,7 @@ namespace SteamKit2
             internal ConnectCallback( SteamClient client, MsgChannelEncryptResult result )
                 : this( client, result.Result )
 #else
-            internal ConnectCallback( MsgChannelEncryptResult result )
+            internal ConnectedCallback( MsgChannelEncryptResult result )
                 : this( result.Result )
 #endif
             {
@@ -55,7 +68,7 @@ namespace SteamKit2
             internal ConnectCallback( SteamClient client, EResult result )
                 : base( client )
 #else
-            internal ConnectCallback( EResult result )
+            internal ConnectedCallback( EResult result )
 #endif
             {
                 this.Result = result;
@@ -66,7 +79,7 @@ namespace SteamKit2
         /// <summary>
         /// This callback is received when the steamclient is physically disconnected from the Steam network.
         /// </summary>
-        public sealed class DisconnectCallback : CallbackMsg
+        public sealed class DisconnectedCallback : CallbackMsg
         {
 #if STATIC_CALLBACKS
             public DisconnectCallback( SteamClient client )
