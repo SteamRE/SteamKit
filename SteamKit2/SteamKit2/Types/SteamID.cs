@@ -115,15 +115,6 @@ namespace SteamKit2
             this.steamid.Data = ulSteamID;
         }
 
-        public void SetFromSteam2( SteamGlobalUserID steam2id, EUniverse universe )
-        {
-            BitVector64 usersplit = new BitVector64( steam2id.AccountID );
-
-            this.AccountType = EAccountType.Individual;
-            this.AccountInstance = 1;
-            this.AccountUniverse = universe;
-            this.AccountID = ( uint )usersplit[ 0, 0xFFFFFFFF ] * 2 + ( uint )usersplit[ 32, 0xFFFFFFFF ];
-        }
         public void SetFromString( string steamId, EUniverse eUniverse )
         {
             Match m = SteamIDRegex.Match( steamId );

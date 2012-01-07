@@ -43,6 +43,8 @@
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -100,7 +102,6 @@
     <Compile Include="Networking\Steam3\UdpPacket.cs" />
     <Compile Include="Steam2\ContentServerClient.cs" />
     <Compile Include="Steam2\ContentServerDSClient.cs" />
-    <Compile Include="Steam3\ClientConfig.cs" />
     <Compile Include="Steam3\Handlers\SteamApps\Callbacks.cs" />
     <Compile Include="Steam3\Handlers\SteamApps\SteamApps.cs" />
     <Compile Include="Steam3\Handlers\SteamFriends\Callbacks.cs" />
@@ -111,7 +112,6 @@
     <Compile Include="Steam3\SteamClient\CallbackMgr\CallbackMsg.cs" />
     <Compile Include="Steam3\SteamClient\Callbacks.cs" />
     <Compile Include="Steam3\Handlers\ClientMsgHandler.cs" />
-    <Compile Include="Types\AuthBlob.cs" />
     <Compile Include="Types\GameID.cs" />
     <Compile Include="Types\KeyValue.cs" />
     <Compile Include="Types\Manifest.cs" />
@@ -126,11 +126,8 @@
     <Compile Include="Steam3\CMClient.cs" />
     <Compile Include="Steam2\GeneralDSClient.cs" />
     <Compile Include="Steam2\DSClient.cs" />
-    <Compile Include="Steam2\AuthServerClient.cs" />
     <Compile Include="Networking\Steam3\TcpConnection.cs" />
     <Compile Include="Types\IPAddrPort.cs" />
-    <Compile Include="Types\MicroTime.cs" />
-    <Compile Include="Types\ClientTGT.cs" />
     <Compile Include="Networking\Steam3\UdpConnection.cs" />
     <Compile Include="Util\DataStream.cs" />
     <Compile Include="Steam2\ServerClient.cs" />
@@ -141,7 +138,6 @@
     <Compile Include="Util\CryptoHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\PsuedoRandom.cs" />
-    <Compile Include="Types\SteamGlobalUserID.cs" />
     <Compile Include="Types\SteamID.cs" />
     <Compile Include="Base\SteamLanguage.cs" />
     <Compile Include="Base\SteamMsgAppTicket.cs" />
