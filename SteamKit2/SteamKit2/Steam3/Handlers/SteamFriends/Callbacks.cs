@@ -128,6 +128,7 @@ namespace SteamKit2
             /// <value>The published session ID.</value>
             public uint PublishedSessionID { get; private set; }
 
+
 #if STATIC_CALLBACKS
             internal PersonaStateCallback( SteamClient client, CMsgClientPersonaState.Friend friend )
                 : base( client )
@@ -188,6 +189,7 @@ namespace SteamKit2
                 /// <value>The relationship.</value>
                 public EFriendRelationship Relationship { get; private set; }
 
+
                 internal Friend( CMsgClientFriendsList.Friend friend )
                 {
                     this.SteamID = friend.ulfriendid;
@@ -206,6 +208,7 @@ namespace SteamKit2
             /// <value>The friend list.</value>
             public ReadOnlyCollection<Friend> FriendList { get; private set; }
 
+
 #if STATIC_CALLBACKS
             internal FriendsListCallback( SteamClient client, CMsgClientFriendsList msg )
                 : base( client )
@@ -215,12 +218,9 @@ namespace SteamKit2
             {
                 this.Incremental = msg.bincremental;
 
-                var list = msg.friends.ConvertAll<Friend>(
-                    ( input ) =>
-                    {
-                        return new Friend( input );
-                    }
-                );
+                var list = msg.friends
+                    .Select( f => new Friend( f ) )
+                    .ToList();
 
                 this.FriendList = new ReadOnlyCollection<Friend>( list );
             }
@@ -382,9 +382,6 @@ namespace SteamKit2
             /// <summary>
             /// Gets chat entry type.
             /// </summary>
-            /// <value>
-            /// The chat entry type.
-            /// </value>
             public EChatEntryType ChatMsgType { get; private set; }
 
             /// <summary>
