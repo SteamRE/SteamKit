@@ -411,10 +411,6 @@ namespace SteamKit2
             {
                 data = Convert.ToInt64(integerData);
             }
-            else if (propType == typeof(MicroTime))
-            {
-                data = new MicroTime(Convert.ToUInt64(integerData));
-            }
             else
             {
                 throw new NotImplementedException("Missing handler in GetDataForProp of type " + propType.ToString());
