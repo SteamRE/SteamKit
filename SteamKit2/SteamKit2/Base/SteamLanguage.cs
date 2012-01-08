@@ -1492,7 +1492,7 @@ namespace SteamKit2
 		Secure = 2,
 		Dedicated = 4,
 		Linux = 8,
-		Pssworded = 16,
+		Passworded = 16,
 		Private = 32,
 		Max = 33,
 	}
@@ -1730,7 +1730,27 @@ namespace SteamKit2
 		OEMTicket = 8,
 		Max = 9,
 	}
-	public enum EUdpPacketType
+	public enum EActivationCodeClass : uint
+	{
+		WonCDKey = 0,
+		ValveCDKey = 1,
+		Doom3CDKey = 2,
+		DBLookup = 3,
+		Steam2010Key = 4,
+		Max = 5,
+		Test = 2147483647,
+		Invalid = 4294967295,
+	}
+	public enum EChatMemberStateChange
+	{
+		Entered = 0x01,
+		Left = 0x02,
+		Disconnected = 0x04,
+		Kicked = 0x08,
+		Banned = 0x10,
+		Max = 17,
+	}
+	public enum EUdpPacketType : byte
 	{
 		Invalid = 0,
 		ChallengeReq = 1,
