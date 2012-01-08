@@ -409,7 +409,7 @@ enum EBillingType
 	OEMTicket = 8;
 };
 
-enum EActivationCodeClass
+enum EActivationCodeClass<uint>
 {
 	WonCDKey = 0;
 	ValveCDKey = 1;
@@ -419,4 +419,13 @@ enum EActivationCodeClass
 	Max = 5;
 	Test = 2147483647;
 	Invalid = 4294967295;
-}
+};
+
+enum EChatMemberStateChange
+{
+	Entered = 0x01;
+	Left = 0x02;
+	Disconnected = 0x04;
+	Kicked = 0x08;
+	Banned = 0x10;
+};
