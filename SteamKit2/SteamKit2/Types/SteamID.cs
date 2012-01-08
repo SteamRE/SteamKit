@@ -51,6 +51,48 @@ namespace SteamKit2
             @"STEAM_(?<universe>[0-5]):(?<authserver>[0-1]):(?<accountid>\d+)",
             RegexOptions.Compiled | RegexOptions.IgnoreCase );
 
+        /// <summary>
+        /// The account instance value when representing all instanced <see cref="SteamID">SteamIDs</see>.
+        /// </summary>
+        public const uint AllInstances = 0;
+        /// <summary>
+        /// The account instance value for a desktop <see cref="SteamID"/>.
+        /// </summary>
+        public const uint DesktopInstance = 1;
+        /// <summary>
+        /// The account instance value for a console <see cref="SteamID"/>.
+        /// </summary>
+        public const uint ConsoleInstance = 2;
+
+        /// <summary>
+        /// Masking vlaue used for the account id.
+        /// </summary>
+        public const uint AccountIDMask = 0xFFFFFFFF;
+        /// <summary>
+        /// Masking value used for packing chat instance flags into a <see cref="SteamID"/>.
+        /// </summary>
+        public const uint AccountInstanceMask = 0x000FFFFF;
+
+
+        /// <summary>
+        /// Represents various flags a chat <see cref="SteamID"/> may have, packed into its instance.
+        /// </summary>
+        [Flags]
+        public enum ChatInstanceFlags : uint
+        {
+            /// <summary>
+            /// This flag is set for clan based chat <see cref="SteamID">SteamIDs</see>.
+            /// </summary>
+            Clan = ( AccountInstanceMask + 1 ) >> 1,
+            /// <summary>
+            /// This flag is set for lobby based chat <see cref="SteamID">SteamIDs</see>.
+            /// </summary>
+            Lobby = ( AccountInstanceMask + 1 ) >> 2,
+            /// <summary>
+            /// This flag is set for matchmaking lobby based chat <see cref="SteamID">SteamIDs</see>.
+            /// </summary>
+            MMSLobby = ( AccountInstanceMask + 1 ) >> 3,
+        }
 
         public SteamID()
             : this( 0 )
