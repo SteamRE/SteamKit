@@ -20,7 +20,7 @@ namespace SteamKit2
         /// <summary>
         /// This callback is fired in response to someone changing their friend details over the network.
         /// </summary>
-        public class PersonaStateCallback : CallbackMsg
+        public sealed class PersonaStateCallback : CallbackMsg
         {
             /// <summary>
             /// Gets the status flags. This shows what has changed.
@@ -171,7 +171,7 @@ namespace SteamKit2
         /// <summary>
         /// This callback is fired when the client receives a list of friends.
         /// </summary>
-        public class FriendsListCallback : CallbackMsg
+        public sealed class FriendsListCallback : CallbackMsg
         {
             /// <summary>
             /// Represents a single friend entry in a client's friendlist.
@@ -229,7 +229,7 @@ namespace SteamKit2
         /// <summary>
         /// This callback is fired in response to receiving a message from a friend.
         /// </summary>
-        public class FriendMsgCallback : CallbackMsg
+        public sealed class FriendMsgCallback : CallbackMsg
         {
             /// <summary>
             /// Gets or sets the sender.
@@ -275,7 +275,7 @@ namespace SteamKit2
         /// <summary>
         /// This callback is fired in response to adding a user to your friends list.
         /// </summary>
-        public class FriendAddedCallback : CallbackMsg
+        public sealed class FriendAddedCallback : CallbackMsg
         {
             /// <summary>
             /// Gets the result of the request.
@@ -313,7 +313,7 @@ namespace SteamKit2
         /// <summary>
         /// This callback is fired in response to attempting to join a chat.
         /// </summary>
-        public class ChatEnterCallback : CallbackMsg
+        public sealed class ChatEnterCallback : CallbackMsg
         {
             /// <summary>
             /// Gets SteamID of the chat room.
@@ -368,7 +368,7 @@ namespace SteamKit2
         /// <summary>
         /// This callback is fired when a chat room message arrives.
         /// </summary>
-        public class ChatMsgCallback : CallbackMsg
+        public sealed class ChatMsgCallback : CallbackMsg
         {
             /// <summary>
             /// Gets the SteamID of the chatter.
@@ -410,8 +410,42 @@ namespace SteamKit2
         /// <summary>
         /// This callback is fired in response to chat member info being recieved.
         /// </summary>
-        public class ChatMemberInfoCallback : CallbackMsg
+        public sealed class ChatMemberInfoCallback : CallbackMsg
         {
+            /// <summary>
+            /// Represents state change information.
+            /// </summary>
+            public sealed class StateChangeDetails
+            {
+                /// <summary>
+                /// Gets the SteamID of the chatter that was acted on.
+                /// </summary>
+                public SteamID ChatterActedOn { get; private set; }
+                /// <summary>
+                /// Gets the state change for the acted on SteamID.
+                /// </summary>
+                public EChatMemberStateChange StateChange { get; private set; }
+                /// <summary>
+                /// Gets the SteamID of the chatter that acted on <see cref="ChatterActedOn"/>.
+                /// </summary>
+                public SteamID ChatterActedBy { get; private set; }
+
+
+                internal StateChangeDetails( byte[] data )
+                {
+                    using ( MemoryStream ms = new MemoryStream( data ) )
+                    using ( BinaryReader br = new BinaryReader( ms ) )
+                    {
+                        ChatterActedOn = br.ReadUInt64();
+                        StateChange = ( EChatMemberStateChange )br.ReadInt32();
+                        ChatterActedBy = br.ReadUInt64();
+                        
+                        // todo: for EChatMemberStateChange.Entered, the following data is a binary kv MessageObject
+                        // that includes permission and details that may be useful
+                    }
+                }
+            }
+
             /// <summary>
             /// Gets SteamId of the chat room.
             /// </summary>
@@ -421,12 +455,11 @@ namespace SteamKit2
             /// </summary>
             public EChatInfoType Type { get; private set; }
 
-            /// <summary>
-            /// Gets SteamID of the chatter.
-            /// </summary>
-            public SteamID ChatterID { get; private set; }
 
-            public int Action { get; private set; }
+            /// <summary>
+            /// Gets the state change info for <see cref="EChatInfoType.StateChange"/> member info updates.
+            /// </summary>
+            public StateChangeDetails StateChangeInfo { get; private set; }
 
 
 #if STATIC_CALLBACKS
@@ -439,11 +472,13 @@ namespace SteamKit2
                 ChatRoomID = msg.SteamIdChat;
                 Type = msg.Type;
 
-                using ( MemoryStream ms = new MemoryStream( payload ) )
-                using ( BinaryReader br = new BinaryReader( ms ) )
+                switch ( Type )
                 {
-                    ChatterID = br.ReadUInt64();
-                    Action = br.ReadInt32();
+                    case EChatInfoType.StateChange:
+                        StateChangeInfo = new StateChangeDetails( payload );
+                        break;
+
+                        // todo: handle more types
                 }
             }
         }

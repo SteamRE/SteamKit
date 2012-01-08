@@ -276,9 +276,18 @@ namespace SteamKit2
         /// <param name="steamId">The SteamID of the chat room.</param>
         public void JoinChat( SteamID steamId )
         {
+            SteamID chatId = steamId.ConvertToUint64(); // copy the steamid so we don't modify it
+
             var joinChat = new ClientMsg<MsgClientJoinChat, ExtendedClientMsgHdr>();
 
-            joinChat.Msg.SteamIdChat = steamId;
+            if ( chatId.BClanAccount() )
+            {
+                // this steamid is incorrect, so we'll fix it up
+                chatId.AccountInstance = ( uint )SteamID.ChatInstanceFlags.Clan;
+                chatId.AccountType = EAccountType.Chat;
+            }
+
+            joinChat.Msg.SteamIdChat = chatId;
 
             Client.Send( joinChat );
         }
@@ -291,10 +300,19 @@ namespace SteamKit2
         /// <param name="message">The message.</param>
         public void SendChatRoomMessage( SteamID steamIdChat, EChatEntryType type, string message )
         {
+            SteamID chatId = steamIdChat.ConvertToUint64(); // copy the steamid so we don't modify it
+
+            if ( chatId.BClanAccount() )
+            {
+                // this steamid is incorrect, so we'll fix it up
+                chatId.AccountInstance = ( uint )SteamID.ChatInstanceFlags.Clan;
+                chatId.AccountType = EAccountType.Chat;
+            }
+
             var chatMsg = new ClientMsg<MsgClientChatMsg, ExtendedClientMsgHdr>();
 
             chatMsg.Msg.ChatMsgType = type;
-            chatMsg.Msg.SteamIdChatRoom = steamIdChat;
+            chatMsg.Msg.SteamIdChatRoom = chatId;
             chatMsg.Msg.SteamIdChatter = Client.SteamID;
 
             chatMsg.Payload.WriteNullTermString( message, Encoding.UTF8 );
