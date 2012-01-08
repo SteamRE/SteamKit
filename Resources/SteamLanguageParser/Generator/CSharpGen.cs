@@ -123,8 +123,16 @@ namespace SteamLanguageParser
             if ( enode.Name.Contains( "Flag" ) )
                 sb.AppendLine( padding + "[Flags]" );
 
-            sb.AppendLine(padding + "public enum " + enode.Name);
-            sb.AppendLine(padding + "{");
+            if ( enode.Type != null )
+            {
+                sb.AppendLine( padding + "public enum " + enode.Name + " : " + EmitType( enode.Type ) );
+            }
+            else
+            {
+                sb.AppendLine( padding + "public enum " + enode.Name );
+            }
+
+            sb.AppendLine( padding + "{" );
 
             string lastValue = "0";
 
@@ -134,16 +142,20 @@ namespace SteamLanguageParser
                 sb.AppendLine(padding + "\t" + prop.Name + " = " + lastValue + ",");
             }
 
-            int maxint = 0;
+            long maxint = 0;
 
             if ( lastValue.StartsWith( "0x" ) )
-                maxint = Convert.ToInt32( lastValue.Substring( 2, lastValue.Length - 2 ), 16 );
+                maxint = Convert.ToInt64( lastValue.Substring( 2, lastValue.Length - 2 ), 16 );
             else
-                maxint = Int32.Parse( lastValue );
+                maxint = long.Parse( lastValue );
 
-            maxint++;
+            if ( maxint < UInt32.MaxValue )
+            {
+                maxint++;
 
-            sb.AppendLine(padding + "\tMax = " + maxint + ",");
+                sb.AppendLine( padding + "\tMax = " + maxint + "," );
+            }
+
             sb.AppendLine(padding + "}");
         }
 
