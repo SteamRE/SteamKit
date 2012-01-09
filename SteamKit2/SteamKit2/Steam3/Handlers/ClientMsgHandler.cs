@@ -36,7 +36,7 @@ namespace SteamKit2
         /// <summary>
         /// Handles a client message. This should not be called directly.
         /// </summary>
-        /// <param name="e">The <see cref="SteamKit2.ClientMsgEventArgs"/> instance containing the event data.</param>
+        /// <param name="packetMsg">The packet message that contains the data.</param>
         public abstract void HandleMsg( IPacketMsg packetMsg );
     }
 }
