@@ -93,6 +93,8 @@
     <Compile Include="Steam3\Handlers\SteamGameServer\Callbacks.cs" />
     <Compile Include="Steam3\Handlers\SteamGameServer\SteamGameServer.cs" />
     <Compile Include="Steam3\Handlers\SteamGameCoordinator\Callbacks.cs" />
+    <Compile Include="Steam3\Handlers\SteamMasterServer\Callbacks.cs" />
+    <Compile Include="Steam3\Handlers\SteamMasterServer\SteamMasterServer.cs" />
     <Compile Include="Steam3\Handlers\SteamUserStats\SteamUserStats.cs" />
     <Compile Include="Steam3\SteamClient\CallbackMgr\CallbackMgr.cs" />
     <Compile Include="Steam3\WebAPI\WebAPI.cs" />

@@ -27,16 +27,14 @@ namespace SteamKit2
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="JobCallback"/>.</returns>
         public ulong GetNumberOfCurrentPlayers( GameID gameId )
         {
-            ulong jobId = Client.GetNextJobID();
-
             var msg = new ClientMsg<MsgClientGetNumberOfCurrentPlayers>();
-            msg.Header.SourceJobID = jobId;
+            msg.SourceJobID = Client.GetNextJobID();
 
             msg.Body.GameID = gameId;
 
             Client.Send( msg );
 
-            return jobId;
+            return msg.SourceJobID;
         }
 
 
