@@ -142,20 +142,6 @@ namespace SteamLanguageParser
                 sb.AppendLine(padding + "\t" + prop.Name + " = " + lastValue + ",");
             }
 
-            long maxint = 0;
-
-            if ( lastValue.StartsWith( "0x" ) )
-                maxint = Convert.ToInt64( lastValue.Substring( 2, lastValue.Length - 2 ), 16 );
-            else
-                maxint = long.Parse( lastValue );
-
-            if ( maxint < UInt32.MaxValue )
-            {
-                maxint++;
-
-                sb.AppendLine( padding + "\tMax = " + maxint + "," );
-            }
-
             sb.AppendLine(padding + "}");
         }
 
