@@ -8,6 +8,8 @@ enum EUniverse
 	Internal = 3;
 	Dev = 4;
 	RC = 5;
+
+	Max = 6;
 };
 
 enum EChatEntryType
@@ -45,6 +47,8 @@ enum EAccountType
 	Chat = 8;
 	ConsoleUser = 9;
 	AnonUser = 10;
+
+	Max = 11;
 };
 
 enum EFriendRelationship
@@ -428,4 +432,17 @@ enum EChatMemberStateChange
 	Disconnected = 0x04;
 	Kicked = 0x08;
 	Banned = 0x10;
+};
+
+enum ERegionCode<byte>
+{
+	USEast = 0x00;
+	USWest = 0x01;
+	SouthAmerica = 0x02;
+	Europe = 0x03;
+	Asia = 0x04;
+	Australia = 0x05;
+	MiddleEast = 0x06;
+	Africa = 0x07;
+	World = 0xFF;
 };
