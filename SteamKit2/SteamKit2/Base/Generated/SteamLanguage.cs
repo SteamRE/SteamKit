@@ -1242,7 +1242,6 @@ namespace SteamKit2
 		RMDeleteMemcachedKeys = 7803,
 		ClientUGSGetGlobalStats = 7901,
 		ClientUGSGetGlobalStatsResponse = 7902,
-		Max = 7903,
 	}
 	public enum EResult
 	{
@@ -1318,7 +1317,6 @@ namespace SteamKit2
 		FacebookQueryError = 70,
 		ExpiredLoginAuthCode = 71,
 		IPLoginRestrictionFailed = 72,
-		Max = 73,
 	}
 	public enum EUniverse
 	{
@@ -1339,7 +1337,6 @@ namespace SteamKit2
 		Emote = 4,
 		LobbyGameStart = 5,
 		LeftConversation = 6,
-		Max = 7,
 	}
 	public enum EPersonaState
 	{
@@ -1348,7 +1345,6 @@ namespace SteamKit2
 		Busy = 2,
 		Away = 3,
 		Snooze = 4,
-		Max = 5,
 	}
 	public enum EAccountType
 	{
@@ -1374,7 +1370,6 @@ namespace SteamKit2
 		RequestInitiator = 4,
 		Ignored = 5,
 		IgnoredFriend = 6,
-		Max = 7,
 	}
 	[Flags]
 	public enum EAccountFlags
@@ -1396,7 +1391,6 @@ namespace SteamKit2
 		LimitedUserForce = 8192,
 		EmailValidated = 16384,
 		MarketingTreatment = 32768,
-		Max = 32769,
 	}
 	[Flags]
 	public enum EFriendFlags
@@ -1412,7 +1406,6 @@ namespace SteamKit2
 		Ignored = 512,
 		IgnoredFriend = 1024,
 		FlagAll = 65535,
-		Max = 65536,
 	}
 	[Flags]
 	public enum EClientPersonaStateFlag
@@ -1427,7 +1420,6 @@ namespace SteamKit2
 		ClanInfo = 128,
 		GameExtraInfo = 256,
 		GameDataBlob = 512,
-		Max = 513,
 	}
 	public enum EAppUsageEvent
 	{
@@ -1439,7 +1431,6 @@ namespace SteamKit2
 		MarketingMessageView = 6,
 		InGameAdViewed = 7,
 		GameLaunchFreeWeekend = 8,
-		Max = 9,
 	}
 	[Flags]
 	public enum ELicenseFlags
@@ -1450,7 +1441,6 @@ namespace SteamKit2
 		Expired = 0x08,
 		CancelledByUser = 0x10,
 		CancelledByAdmin = 0x20,
-		Max = 33,
 	}
 	public enum ELicenseType
 	{
@@ -1460,7 +1450,6 @@ namespace SteamKit2
 		RecurringCharge = 3,
 		RecurringChargeLimitedUse = 4,
 		RecurringChargeLimitedUseWithOverages = 5,
-		Max = 6,
 	}
 	public enum EPaymentMethod
 	{
@@ -1475,14 +1464,12 @@ namespace SteamKit2
 		Wallet = 128,
 		OEMTicket = 256,
 		Split = 512,
-		Max = 513,
 	}
 	public enum EIntroducerRouting
 	{
 		FileShare = 0,
 		P2PVoiceChat = 1,
 		P2PNetworking = 2,
-		Max = 3,
 	}
 	[Flags]
 	public enum EServerFlags
@@ -1494,7 +1481,6 @@ namespace SteamKit2
 		Linux = 8,
 		Passworded = 16,
 		Private = 32,
-		Max = 33,
 	}
 	public enum EDenyReason
 	{
@@ -1513,7 +1499,6 @@ namespace SteamKit2
 		SteamResponseTimedOut = 13,
 		SteamValidationStalled = 14,
 		SteamOwnerLeftGuestUser = 15,
-		Max = 16,
 	}
 	public enum EClanRank
 	{
@@ -1521,7 +1506,6 @@ namespace SteamKit2
 		Owner = 1,
 		Officer = 2,
 		Member = 3,
-		Max = 4,
 	}
 	public enum EClanRelationship
 	{
@@ -1530,7 +1514,6 @@ namespace SteamKit2
 		Invited = 2,
 		Member = 3,
 		Kicked = 4,
-		Max = 5,
 	}
 	public enum EAuthSessionResponse
 	{
@@ -1543,7 +1526,6 @@ namespace SteamKit2
 		AuthTicketCanceled = 6,
 		AuthTicketInvalidAlreadyUsed = 7,
 		AuthTicketInvalid = 8,
-		Max = 9,
 	}
 	public enum EChatRoomEnterResponse
 	{
@@ -1556,21 +1538,18 @@ namespace SteamKit2
 		Limited = 7,
 		ClanDisabled = 8,
 		CommunityBan = 9,
-		Max = 10,
 	}
 	public enum EChatRoomType
 	{
 		Friend = 1,
 		MUC = 2,
 		Lobby = 3,
-		Max = 4,
 	}
 	public enum EChatInfoType
 	{
 		StateChange = 1,
 		InfoUpdate = 2,
 		MemberLimitChange = 3,
-		Max = 4,
 	}
 	public enum EChatAction
 	{
@@ -1590,7 +1569,6 @@ namespace SteamKit2
 		SetVisibleToFriends = 14,
 		SetModerated = 15,
 		SetUnmoderated = 16,
-		Max = 17,
 	}
 	public enum EChatActionResult
 	{
@@ -1604,7 +1582,6 @@ namespace SteamKit2
 		ChatDoesntExist = 8,
 		ChatFull = 9,
 		VoiceSlotsFull = 10,
-		Max = 11,
 	}
 	public enum EAppInfoSection
 	{
@@ -1623,7 +1600,6 @@ namespace SteamKit2
 		Items = 12,
 		Policies = 13,
 		Sysreqs = 14,
-		Max = 15,
 	}
 	public enum EContentDownloadSourceType
 	{
@@ -1632,7 +1608,6 @@ namespace SteamKit2
 		CDN = 2,
 		LCS = 3,
 		Proxy = 4,
-		Max = 5,
 	}
 	public enum EOSType
 	{
@@ -1662,7 +1637,6 @@ namespace SteamKit2
 		WinVista = 9,
 		Win7 = 10,
 		Win2008 = 11,
-		Max = 12,
 	}
 	public enum EServerType
 	{
@@ -1715,7 +1689,6 @@ namespace SteamKit2
 		FS = 47,
 		Econ = 48,
 		Backpack = 49,
-		Max = 50,
 	}
 	public enum EBillingType
 	{
@@ -1728,7 +1701,6 @@ namespace SteamKit2
 		Gift = 6,
 		AutoGrant = 7,
 		OEMTicket = 8,
-		Max = 9,
 	}
 	public enum EActivationCodeClass : uint
 	{
@@ -1748,7 +1720,18 @@ namespace SteamKit2
 		Disconnected = 0x04,
 		Kicked = 0x08,
 		Banned = 0x10,
-		Max = 17,
+	}
+	public enum ERegionCode : byte
+	{
+		USEast = 0x00,
+		USWest = 0x01,
+		SouthAmerica = 0x02,
+		Europe = 0x03,
+		Asia = 0x04,
+		Australia = 0x05,
+		MiddleEast = 0x06,
+		Africa = 0x07,
+		World = 0xFF,
 	}
 	public enum EUdpPacketType : byte
 	{
@@ -1760,7 +1743,6 @@ namespace SteamKit2
 		Disconnect = 5,
 		Data = 6,
 		Datagram = 7,
-		Max = 8,
 	}
 	public class UdpHeader : ISteamSerializable
 	{
@@ -2106,7 +2088,6 @@ namespace SteamKit2
 	public enum EGCMsg
 	{
 		Invalid = 0,
-		Max = 1,
 	}
 	[StructLayout( LayoutKind.Sequential )]
 	public class MsgGCHdrProtoBuf : IGCSerializableHeader
