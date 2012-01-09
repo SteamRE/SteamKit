@@ -1,3 +1,0 @@
-..\..\Protogen\protogen -i:"steammessages_base.proto" -o:"..\..\..\SteamKit3\SteamKit3\Base\Proto\SteamMsgBase.cs" -t:csharp -ns:"SteamKit3"
-..\..\Protogen\protogen -i:"encrypted_app_ticket.proto" -o:"..\..\..\SteamKit3\SteamKit3\Base\Proto\SteamMsgAppTicket.cs" -t:csharp -ns:"SteamKit3"
-..\..\Protogen\protogen -i:"steammessages_clientserver.proto" -o:"..\..\..\SteamKit3\SteamKit3\Base\Proto\SteamMsgClientServer.cs" -t:csharp -ns:"SteamKit3"
