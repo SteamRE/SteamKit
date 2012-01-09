@@ -59,6 +59,7 @@ namespace SteamKit2
             this.AddHandler( new SteamGameCoordinator() );
             this.AddHandler( new SteamGameServer() );
             this.AddHandler( new SteamUserStats() );
+            this.AddHandler( new SteamMasterServer() );
         }
 
 
