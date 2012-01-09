@@ -25,63 +25,63 @@ namespace SteamKit2
         /// </summary>
         public void LogOn( uint appId = 0 )
         {
-            var logon = new ClientMsgProtobuf<MsgClientLogon>();
+            var logon = new ClientMsgProtobuf<CMsgClientLogon>( EMsg.ClientLogon );
 
             SteamID gsId = new SteamID( 0, 0, Client.ConnectedUniverse, EAccountType.AnonGameServer );
 
             logon.ProtoHeader.client_session_id = 0;
             logon.ProtoHeader.client_steam_id = gsId.ConvertToUint64();
 
-            uint localIp = NetHelpers.GetIPAddress( this.Client.GetLocalIP() );
-            logon.Msg.Proto.obfustucated_private_ip = localIp ^ MsgClientLogon.ObfuscationMask;
+            uint localIp = NetHelpers.GetIPAddress( this.Client.LocalIP );
+            logon.Body.obfustucated_private_ip = localIp ^ MsgClientLogon.ObfuscationMask;
 
-            logon.Msg.Proto.protocol_version = MsgClientLogon.CurrentProtocol;
+            logon.Body.protocol_version = MsgClientLogon.CurrentProtocol;
 
-            logon.Msg.Proto.client_os_type = ( uint )Utils.GetOSType();
-            logon.Msg.Proto.game_server_app_id = ( int )appId;
-            logon.Msg.Proto.machine_id = Utils.GenerateMachineID();
+            logon.Body.client_os_type = ( uint )Utils.GetOSType();
+            logon.Body.game_server_app_id = ( int )appId;
+            logon.Body.machine_id = Utils.GenerateMachineID();
 
             this.Client.Send( logon );
         }
 
 
-        public override void HandleMsg( ClientMsgEventArgs e )
+        public override void HandleMsg( IPacketMsg packetMsg )
         {
-            switch ( e.EMsg )
+            switch ( packetMsg.MsgType )
             {
                 case EMsg.GSStatusReply:
-                    HandleStatusReply( e );
+                    HandleStatusReply( packetMsg );
                     break;
 
                 case EMsg.ClientTicketAuthComplete:
-                    HandleAuthComplete( e );
+                    HandleAuthComplete( packetMsg );
                     break;
             }
         }
 
 
         #region Handlers
-        void HandleStatusReply( ClientMsgEventArgs e )
+        void HandleStatusReply( IPacketMsg packetMsg )
         {
-            var statusReply = new ClientMsgProtobuf<MsgGSStatusReply>( e.Data );
+            var statusReply = new ClientMsgProtobuf<CMsgGSStatusReply>( packetMsg );
 
 #if STATIC_CALLBACKS
-            var callback = new StatusReplyCallback( Client, statusReply.Msg.Proto );
+            var callback = new StatusReplyCallback( Client, statusReply.Body );
             SteamClient.PostCallback( callback );
 #else
-            var callback = new StatusReplyCallback( statusReply.Msg.Proto );
+            var callback = new StatusReplyCallback( statusReply.Body );
             this.Client.PostCallback( callback );
 #endif
         }
-        void HandleAuthComplete( ClientMsgEventArgs e )
+        void HandleAuthComplete( IPacketMsg packetMsg )
         {
-            var authComplete = new ClientMsgProtobuf<MsgClientTicketAuthComplete>( e.Data );
+            var authComplete = new ClientMsgProtobuf<CMsgClientTicketAuthComplete>( packetMsg );
 
 #if STATIC_CALLBACKS
-            var callback = new TicketAuthCallback( Client, authComplete.Msg.Proto );
+            var callback = new TicketAuthCallback( Client, authComplete.Body );
             SteamClient.PostCallback( callback );
 #else
-            var callback = new TicketAuthCallback( authComplete.Msg.Proto );
+            var callback = new TicketAuthCallback( authComplete.Body );
             this.Client.PostCallback( callback );
 #endif
         }

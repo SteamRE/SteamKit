@@ -13,7 +13,6 @@ namespace SteamKit2
 {
     public sealed class WebAPI
     {
-
         public sealed class Interface : DynamicObject, IDisposable
         {
             WebClient webClient;

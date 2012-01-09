@@ -169,7 +169,7 @@ namespace SteamKit2
         /// <param name="details">The details.</param>
         public void LogOn( LogOnDetails details )
         {
-            var logon = new ClientMsgProtobuf<MsgClientLogon>();
+            var logon = new ClientMsgProtobuf<CMsgClientLogon>( EMsg.ClientLogon );
 
             SteamID steamId = new SteamID( 0, details.AccountInstance, Client.ConnectedUniverse, EAccountType.Individual );
 
@@ -178,41 +178,35 @@ namespace SteamKit2
                 throw new ArgumentException( "LogOn requires a username and password to be set in LogOnDetails." );
             }
 
-            uint localIp = NetHelpers.GetIPAddress( this.Client.GetLocalIP() );
+            uint localIp = NetHelpers.GetIPAddress( this.Client.LocalIP );
 
             logon.ProtoHeader.client_session_id = 0;
             logon.ProtoHeader.client_steam_id = steamId.ConvertToUint64();
 
-            logon.Msg.Proto.obfustucated_private_ip = localIp ^ MsgClientLogon.ObfuscationMask;
+            logon.Body.obfustucated_private_ip = localIp ^ MsgClientLogon.ObfuscationMask;
 
-            logon.Msg.Proto.account_name = details.Username;
-            logon.Msg.Proto.password = details.Password;
+            logon.Body.account_name = details.Username;
+            logon.Body.password = details.Password;
 
-            logon.Msg.Proto.protocol_version = MsgClientLogon.CurrentProtocol;
-            logon.Msg.Proto.client_os_type = ( uint )Utils.GetOSType();
-            logon.Msg.Proto.client_language = "english";
+            logon.Body.protocol_version = MsgClientLogon.CurrentProtocol;
+            logon.Body.client_os_type = ( uint )Utils.GetOSType();
+            logon.Body.client_language = "english";
 
-            logon.Msg.Proto.steam2_ticket_request = details.RequestSteam2Ticket;
-
-
-            // because steamkit doesn't attempt to find the best cellid
-            // we'll just use the default one
-            // this is really only relevant for steam2, so it's a mystery as to why steam3 wants to know
-            // logon.Msg.Proto.cell_id = 0;
+            logon.Body.steam2_ticket_request = details.RequestSteam2Ticket;
 
             // we're now using the latest steamclient package version, this is required to get a proper sentry file for steam guard
-            logon.Msg.Proto.client_package_version = 1634;
+            logon.Body.client_package_version = 1634; // todo: determine if this is still required
 
             // this is not a proper machine id that Steam accepts
             // but it's good enough for identifying a machine
-            logon.Msg.Proto.machine_id = Utils.GenerateMachineID();
+            logon.Body.machine_id = Utils.GenerateMachineID();
 
 
             // steam guard 
-            logon.Msg.Proto.auth_code = details.AuthCode;
+            logon.Body.auth_code = details.AuthCode;
 
-            logon.Msg.Proto.sha_sentryfile = details.SentryFileHash;
-            logon.Msg.Proto.eresult_sentryfile = ( int )( details.SentryFileHash != null ? EResult.OK : EResult.FileNotFound );
+            logon.Body.sha_sentryfile = details.SentryFileHash;
+            logon.Body.eresult_sentryfile = ( int )( details.SentryFileHash != null ? EResult.OK : EResult.FileNotFound );
 
 
             this.Client.Send( logon );
@@ -223,19 +217,19 @@ namespace SteamKit2
         /// </summary>
         public void LogOnAnonUser()
         {
-            var logon = new ClientMsgProtobuf<MsgClientLogon>();
+            var logon = new ClientMsgProtobuf<CMsgClientLogon>( EMsg.ClientLogon );
 
             SteamID auId = new SteamID( 0, 0, Client.ConnectedUniverse, EAccountType.AnonUser );
 
             logon.ProtoHeader.client_session_id = 0;
             logon.ProtoHeader.client_steam_id = auId.ConvertToUint64();
 
-            logon.Msg.Proto.protocol_version = MsgClientLogon.CurrentProtocol;
-            logon.Msg.Proto.client_os_type = ( uint )Utils.GetOSType();
+            logon.Body.protocol_version = MsgClientLogon.CurrentProtocol;
+            logon.Body.client_os_type = ( uint )Utils.GetOSType();
 
             // this is not a proper machine id that Steam accepts
             // but it's good enough for identifying a machine
-            logon.Msg.Proto.machine_id = Utils.GenerateMachineID();
+            logon.Body.machine_id = Utils.GenerateMachineID();
 
             this.Client.Send( logon );
         }
@@ -246,7 +240,7 @@ namespace SteamKit2
         /// </summary>
         public void LogOff()
         {
-            var logOff = new ClientMsgProtobuf<MsgClientLogOff>();
+            var logOff = new ClientMsgProtobuf<CMsgClientLogOff>( EMsg.ClientLogOff );
             this.Client.Send( logOff );
         }
 
@@ -257,25 +251,25 @@ namespace SteamKit2
         /// <param name="details">The details pertaining to the response.</param>
         public void SendMachineAuthResponse( MachineAuthDetails details )
         {
-            var response = new ClientMsgProtobuf<MsgClientUpdateMachineAuthResponse>();
+            var response = new ClientMsgProtobuf<CMsgClientUpdateMachineAuthResponse>( EMsg.ClientUpdateMachineAuthResponse );
 
             // so we respond to the correct message
             response.ProtoHeader.job_id_target = ( ulong )details.JobID;
 
-            response.Msg.Proto.cubwrote = ( uint )details.BytesWritten;
-            response.Msg.Proto.eresult = ( uint )details.Result;
+            response.Body.cubwrote = ( uint )details.BytesWritten;
+            response.Body.eresult = ( uint )details.Result;
 
-            response.Msg.Proto.filename = details.FileName;
-            response.Msg.Proto.filesize = ( uint )details.FileSize;
+            response.Body.filename = details.FileName;
+            response.Body.filesize = ( uint )details.FileSize;
 
-            response.Msg.Proto.getlasterror = ( uint )details.LastError;
-            response.Msg.Proto.offset = ( uint )details.Offset;
+            response.Body.getlasterror = ( uint )details.LastError;
+            response.Body.offset = ( uint )details.Offset;
 
-            response.Msg.Proto.sha_file = details.SentryFileHash;
+            response.Body.sha_file = details.SentryFileHash;
 
-            response.Msg.Proto.otp_identifier = details.OneTimePassword.Identifier;
-            response.Msg.Proto.otp_type = ( int )details.OneTimePassword.Type;
-            response.Msg.Proto.otp_value = details.OneTimePassword.Value;
+            response.Body.otp_identifier = details.OneTimePassword.Identifier;
+            response.Body.otp_type = ( int )details.OneTimePassword.Type;
+            response.Body.otp_value = details.OneTimePassword.Value;
 
             this.Client.Send( response );
 
@@ -286,181 +280,131 @@ namespace SteamKit2
         /// Handles a client message. This should not be called directly.
         /// </summary>
         /// <param name="e">The <see cref="SteamKit2.ClientMsgEventArgs"/> instance containing the event data.</param>
-        public override void HandleMsg( ClientMsgEventArgs e )
+        public override void HandleMsg( IPacketMsg packetMsg )
         {
-            switch ( e.EMsg )
+            switch ( packetMsg.MsgType )
             {
                 case EMsg.ClientLogOnResponse:
-                    HandleLogOnResponse( e );
+                    HandleLogOnResponse( packetMsg );
                     break;
 
                 case EMsg.ClientNewLoginKey:
-                    HandleLoginKey( e );
+                    HandleLoginKey( packetMsg );
                     break;
 
                 case EMsg.ClientSessionToken:
-                    HandleSessionToken( e );
+                    HandleSessionToken( packetMsg );
                     break;
 
                 case EMsg.ClientLoggedOff:
-                    HandleLoggedOff( e );
+                    HandleLoggedOff( packetMsg );
                     break;
 
                 case EMsg.ClientUpdateMachineAuth:
-                    HandleUpdateMachineAuth( e );
+                    HandleUpdateMachineAuth( packetMsg );
                     break;
 
                 case EMsg.ClientAccountInfo:
-                    HandleAccountInfo( e );
+                    HandleAccountInfo( packetMsg );
                     break;
 
                 case EMsg.ClientWalletInfoUpdate:
-                    HandleWalletInfo( e );
+                    HandleWalletInfo( packetMsg );
                     break;
             }
         }
 
         
         #region ClientMsg Handlers
-        void HandleLoggedOff( ClientMsgEventArgs e )
+        void HandleLoggedOff( IPacketMsg packetMsg )
         {
-            var loggedOff = new ClientMsgProtobuf<MsgClientLoggedOff>();
-
-            try
-            {
-                loggedOff.SetData( e.Data );
-            }
-            catch ( Exception ex )
-            {
-                DebugLog.WriteLine( "SteamUser", "HandleLoggedOff encountered an exception while reading client msg.\n{0}", ex.ToString() );
-                return;
-            }
+            var loggedOff = new ClientMsgProtobuf<CMsgClientLoggedOff>( packetMsg );
 
 #if STATIC_CALLBACKS
-            SteamClient.PostCallback( new LoggedOffCallback( Client, loggedOff.Msg.Proto ) );
+            SteamClient.PostCallback( new LoggedOffCallback( Client, loggedOff.Body ) );
 #else
-            this.Client.PostCallback( new LoggedOffCallback( loggedOff.Msg.Proto ) );
+            this.Client.PostCallback( new LoggedOffCallback( loggedOff.Body ) );
 #endif
         }
-        void HandleUpdateMachineAuth( ClientMsgEventArgs e )
+        void HandleUpdateMachineAuth( IPacketMsg packetMsg )
         {
-            var machineAuth = new ClientMsgProtobuf<MsgClientUpdateMachineAuth>();
-
-            try
-            {
-                machineAuth.SetData( e.Data );
-            }
-            catch ( Exception ex )
-            {
-                DebugLog.WriteLine( "SteamUser", "HandleUpdateMachineAuth encountered an exception while reading client msg.\n{0}", ex.ToString() );
-                return;
-            }
+            var machineAuth = new ClientMsgProtobuf<CMsgClientUpdateMachineAuth>( packetMsg );
 
 #if STATIC_CALLBACKS
-            var innerCallback = new UpdateMachineAuthCallback( Client, machineAuth.Msg.Proto );
-            var callback = new SteamClient.JobCallback<UpdateMachineAuthCallback>( Client, innerCallback );
+            var innerCallback = new UpdateMachineAuthCallback( Client, machineAuth.Body );
+            var callback = new SteamClient.JobCallback<UpdateMachineAuthCallback>( Client, packetMsg.SourceJobID, innerCallback );
             SteamClient.PostCallback( callback );
 #else
-            var innerCallback = new UpdateMachineAuthCallback( machineAuth.Msg.Proto );
-            var callback = new SteamClient.JobCallback<UpdateMachineAuthCallback>( ( long )machineAuth.ProtoHeader.job_id_source, innerCallback );
+            var innerCallback = new UpdateMachineAuthCallback( machineAuth.Body );
+            var callback = new SteamClient.JobCallback<UpdateMachineAuthCallback>( packetMsg.SourceJobID, innerCallback );
             Client.PostCallback( callback );
 #endif
         }
-        void HandleSessionToken( ClientMsgEventArgs e )
+        void HandleSessionToken( IPacketMsg packetMsg )
         {
-            var sessToken = new ClientMsgProtobuf<MsgClientSessionToken>();
-
-            try
-            {
-                sessToken.SetData( e.Data );
-            }
-            catch ( Exception ex )
-            {
-                DebugLog.WriteLine( "SteamUser", "HandleSessionToken encountered an exception while reading client msg.\n{0}", ex.ToString() );
-                return;
-            }
+            var sessToken = new ClientMsgProtobuf<CMsgClientSessionToken>( packetMsg );
 
 #if STATIC_CALLBACKS
-            var callback = new SessionTokenCallback( Client, sessToken.Msg.Proto );
+            var callback = new SessionTokenCallback( Client, sessToken.Body );
             SteamClient.PostCallback( callback );
 #else
-            var callback = new SessionTokenCallback( sessToken.Msg.Proto );
+            var callback = new SessionTokenCallback( sessToken.Body );
             this.Client.PostCallback( callback );
 #endif
         }
-        void HandleLoginKey( ClientMsgEventArgs e )
+        void HandleLoginKey( IPacketMsg packetMsg )
         {
-            var loginKey = new ClientMsg<MsgClientNewLoginKey, ExtendedClientMsgHdr>();
+            var loginKey = new ClientMsg<MsgClientNewLoginKey>( packetMsg );
 
-            try
-            {
-                loginKey.SetData( e.Data );
-            }
-            catch ( Exception ex )
-            {
-                DebugLog.WriteLine( "SteamUser", "HandleLoginKey encountered an exception while reading client msg.\n{0}", ex.ToString() );
-                return;
-            }
-
-            var resp = new ClientMsg<MsgClientNewLoginKeyAccepted, ExtendedClientMsgHdr>();
-            resp.Msg.UniqueID = loginKey.Msg.UniqueID;
+            var resp = new ClientMsg<MsgClientNewLoginKeyAccepted>();
+            resp.Body.UniqueID = loginKey.Body.UniqueID;
 
             this.Client.Send( resp );
 
 #if STATIC_CALLBACKS
-            var callback = new LoginKeyCallback( Client, loginKey.Msg );
+            var callback = new LoginKeyCallback( Client, loginKey.Body );
             SteamClient.PostCallback( callback );
 #else
-            var callback = new LoginKeyCallback( loginKey.Msg );
+            var callback = new LoginKeyCallback( loginKey.Body );
             this.Client.PostCallback( callback );
 #endif
         }
-        void HandleLogOnResponse( ClientMsgEventArgs e )
+        void HandleLogOnResponse( IPacketMsg packetMsg )
         {
-            if ( e.IsProto )
+            if ( packetMsg.IsProto )
             {
-                var logonResp = new ClientMsgProtobuf<MsgClientLogOnResponse>();
-
-                try
-                {
-                    logonResp.SetData( e.Data );
-                }
-                catch ( Exception ex )
-                {
-                    DebugLog.WriteLine( "SteamUser", "HandleLogOnResponse encountered an exception while reading client msg.\n{0}", ex.ToString() );
-                    return;
-                }
+                var logonResp = new ClientMsgProtobuf<CMsgClientLogonResponse>( packetMsg );
 
 #if STATIC_CALLBACKS
-                var callback = new LogOnCallback( Client, logonResp.Msg.Proto );
+                var callback = new LoggedOnCallback( Client, logonResp.Body );
                 SteamClient.PostCallback( callback );
 #else
-                var callback = new LoggedOnCallback( logonResp.Msg.Proto );
+                var callback = new LoggedOnCallback( logonResp.Body );
                 this.Client.PostCallback( callback );
 #endif
             }
         }
-        void HandleAccountInfo( ClientMsgEventArgs e )
+        void HandleAccountInfo( IPacketMsg packetMsg )
         {
-            var accInfo = new ClientMsgProtobuf<MsgClientAccountInfo>( e.Data );
+            var accInfo = new ClientMsgProtobuf<CMsgClientAccountInfo>( packetMsg );
 
 #if STATIC_CALLBACKS
-            var callback = new AccountInfoCallback( Client, accInfo.Msg.Proto );
+            var callback = new AccountInfoCallback( Client, accInfo.Body );
             SteamClient.PostCallback( callback );
 #else
-            var callback = new AccountInfoCallback( accInfo.Msg.Proto );
+            var callback = new AccountInfoCallback( accInfo.Body );
             this.Client.PostCallback( callback );
 #endif
         }
-        void HandleWalletInfo( ClientMsgEventArgs e )
+        void HandleWalletInfo( IPacketMsg packetMsg )
         {
-            var walletInfo = new ClientMsgProtobuf<MsgClientWalletInfoUpdate>( e.Data );
+            var walletInfo = new ClientMsgProtobuf<CMsgClientWalletInfoUpdate>( packetMsg );
 
 #if STATIC_CALLBACKS
-            var callback = new WalletInfoCallback( Client, walletInfo.Msg.Proto );
+            var callback = new WalletInfoCallback( Client, walletInfo.Body );
             SteamClient.PostCallback( callback );
 #else
-            var callback = new WalletInfoCallback( walletInfo.Msg.Proto );
+            var callback = new WalletInfoCallback( walletInfo.Body );
             this.Client.PostCallback( callback );
 #endif
         }

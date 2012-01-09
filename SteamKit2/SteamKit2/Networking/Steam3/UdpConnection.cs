@@ -157,34 +157,32 @@ namespace SteamKit2
             if ( state != State.Connected )
                 return;
 
-            MemoryStream ms = new MemoryStream();
-            clientMsg.Serialize(ms);
-            byte[] data = ms.ToArray();
+            byte[] data = clientMsg.Serialize();
 
             if ( NetFilter != null )
-                data = NetFilter.ProcessOutgoing(data);
+                data = NetFilter.ProcessOutgoing( data );
 
-            SendData(new MemoryStream(data));
+            SendData( new MemoryStream( data ) );
         }
 
         /// <summary>
         /// Sends the data sequenced as a single message, splitting it into multiple parts if necessary.
         /// </summary>
         /// <param name="ms">The data to send.</param>
-        private void SendData(MemoryStream ms)
+        private void SendData( MemoryStream ms )
         {
-            UdpPacket[] packets = new UdpPacket[( ms.Length / UdpPacket.MAX_PAYLOAD ) + 1];
+            UdpPacket[] packets = new UdpPacket[ ( ms.Length / UdpPacket.MAX_PAYLOAD ) + 1 ];
 
-            for ( int i = 0; i < packets.Length; i++ )
+            for ( int i = 0 ; i < packets.Length ; i++ )
             {
                 long index = i * UdpPacket.MAX_PAYLOAD;
-                long length = Math.Min(UdpPacket.MAX_PAYLOAD, ms.Length - index);
+                long length = Math.Min( UdpPacket.MAX_PAYLOAD, ms.Length - index );
 
-                packets[i] = new UdpPacket(EUdpPacketType.Data, ms, length);
-                packets[i].Header.MsgSize = (uint) ms.Length;
+                packets[ i ] = new UdpPacket( EUdpPacketType.Data, ms, length );
+                packets[ i ].Header.MsgSize = ( uint )ms.Length;
             }
 
-            SendSequenced(packets);
+            SendSequenced( packets );
         }
 
         /// <summary>

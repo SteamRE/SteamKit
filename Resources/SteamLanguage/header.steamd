@@ -6,18 +6,24 @@
 class MsgHdr
 {
 	EMsg msg = EMsg::Invalid;
-	long targetJobID = -1;
-	long sourceJobID = -1;
+
+	ulong targetJobID = ulong.MaxValue;
+	ulong sourceJobID = ulong.MaxValue;
 };
 
 class ExtendedClientMsgHdr
 {
 	EMsg msg = EMsg::Invalid;
+
 	byte headerSize = 36;
+
 	ushort headerVersion = 2;
-	long targetJobID = -1;
-	long sourceJobID = -1;
+
+	ulong targetJobID = ulong.MaxValue;
+	ulong sourceJobID = ulong.MaxValue;
+
 	byte headerCanary = 239;
+
 	steamidmarshal ulong steamID;
 	int sessionID;
 };
@@ -27,5 +33,5 @@ class MsgHdrProtoBuf
 	protomask EMsg msg = EMsg::Invalid;
 	int headerLength;
 	
-	proto<headerLength> SteamKit2.CMsgProtoBufHeader protoHeader;
+	proto<headerLength> SteamKit2.CMsgProtoBufHeader proto;
 };

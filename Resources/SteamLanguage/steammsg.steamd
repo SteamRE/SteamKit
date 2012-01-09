@@ -21,11 +21,6 @@ class MsgChannelEncryptResult<EMsg::ChannelEncryptResult>
 	EResult result = EResult::Invalid;
 };
 
-class MsgMulti<EMsg::Multi>
-{
-	proto CMsgMulti proto;
-};
-
 class MsgClientNewLoginKey<EMsg::ClientNewLoginKey>
 {
 	uint uniqueID;
@@ -36,103 +31,11 @@ class MsgClientNewLoginKeyAccepted<EMsg::ClientNewLoginKeyAccepted>
 {
 	uint uniqueID;
 };
- 
-class MsgClientHeartBeat<EMsg::ClientHeartBeat>
-{
-	proto CMsgClientHeartBeat proto;
-};
 
 class MsgClientLogon<EMsg::ClientLogon>
 {
 	const uint ObfuscationMask = 0xBAADF00D;
 	const uint CurrentProtocol = 65573;
-
-	proto CMsgClientLogon proto;
-};
-
-class MsgClientLogOff<EMsg::ClientLogOff>
-{
-	proto CMsgClientLogOff proto;
-};
-
-class MsgClientLogOnResponse<EMsg::ClientLogOnResponse>
-{
-	proto CMsgClientLogonResponse proto;
-};
-
-class MsgGSServerType<EMsg::GSServerType>
-{
-	proto CMsgGSServerType proto;
-};
-
-class MsgGSStatusReply<EMsg::GSStatusReply>
-{
-	proto CMsgGSStatusReply proto;
-};
-
-class MsgClientRegisterAuthTicketWithCM<EMsg::ClientRegisterAuthTicketWithCM>
-{
-	proto CMsgClientRegisterAuthTicketWithCM proto;
-};
-
-class MsgClientGetAppOwnershipTicket<EMsg::ClientGetAppOwnershipTicket>
-{
-	proto CMsgClientGetAppOwnershipTicket proto;
-};
-
-class MsgClientGetAppOwnershipTicketResponse<EMsg::ClientGetAppOwnershipTicketResponse>
-{
-	proto CMsgClientGetAppOwnershipTicketResponse proto;
-};
-
-class MsgClientAuthList<EMsg::ClientAuthList>
-{
-	proto CMsgClientAuthList proto;
-};
-
-class MsgClientRequestFriendData<EMsg::ClientRequestFriendData>
-{
-	proto CMsgClientRequestFriendData proto;
-};
-
-class MsgClientChangeStatus<EMsg::ClientChangeStatus>
-{
-	proto CMsgClientChangeStatus proto;
-};
-
-class MsgClientPersonaState<EMsg::ClientPersonaState>
-{
-	proto CMsgClientPersonaState proto;
-};
-
-class MsgClientSessionToken<EMsg::ClientSessionToken>
-{
-	proto CMsgClientSessionToken proto;
-};
-
-class MsgClientGameConnectTokens<EMsg::ClientGameConnectTokens>
-{
-	proto CMsgClientGameConnectTokens proto;
-};
-
-class MsgClientGamesPlayedWithDataBlob<EMsg::ClientGamesPlayedWithDataBlob>
-{
-	proto CMsgClientGamesPlayed proto;
-};
-
-class MsgClientFriendsList<EMsg::ClientFriendsList>
-{
-	proto CMsgClientFriendsList proto;
-};
-
-class MsgClientFriendMsg<EMsg::ClientFriendMsg>
-{
-	proto CMsgClientFriendMsg proto;
-};
-
-class MsgClientFriendMsgIncoming<EMsg::ClientFriendMsgIncoming>
-{
-	proto CMsgClientFriendMsgIncoming proto;
 };
 
 class MsgClientVACBanStatus<EMsg::ClientVACBanStatus>
@@ -145,51 +48,6 @@ class MsgClientAppUsageEvent<EMsg::ClientAppUsageEvent>
 	EAppUsageEvent appUsageEvent;
 	gameidmarshal ulong gameID;
 	ushort offline;
-};
-
-class MsgClientAccountInfo<EMsg::ClientAccountInfo>
-{
-	proto CMsgClientAccountInfo proto;
-};
-
-class MsgClientLicenseList<EMsg::ClientLicenseList>
-{
-	proto CMsgClientLicenseList proto;
-};
-
-class MsgClientAppInfoUpdate<EMsg::ClientAppInfoUpdate>
-{
-	proto CMsgClientAppInfoUpdate proto;
-};
-
-class MsgClientAppInfoChanges<EMsg::ClientAppInfoChanges>
-{
-	proto CMsgClientAppInfoChanges proto;
-};
-
-class MsgClientAppInfoRequest<EMsg::ClientAppInfoRequest>
-{
-	proto CMsgClientAppInfoRequest proto;
-};
-
-class MsgClientAppInfoResponse<EMsg::ClientAppInfoResponse>
-{
-	proto CMsgClientAppInfoResponse proto;
-};
-
-class MsgClientAppMinutesPlayedData<EMsg::ClientAppMinutesPlayedData>
-{
-	proto CMsgClientAppMinutesPlayedData proto;
-};
-
-class MsgClientWalletInfoUpdate<EMsg::ClientWalletInfoUpdate>
-{
-	proto CMsgClientWalletInfoUpdate proto;
-};
-
-class MsgClientCMList<EMsg::ClientCMList>
-{
-	proto CMsgClientCMList proto;
 };
 
 class MsgClientEmailAddrInfo<EMsg::ClientEmailAddrInfo>
@@ -206,30 +64,9 @@ class MsgClientUpdateGuestPassesList<EMsg::ClientUpdateGuestPassesList>
 	int countGuestPassesToRedeem;
 };
 
-class MsgClientServerList<EMsg::ClientServerList>
-{
-	proto CMsgClientServerList proto;
-};
-
 class MsgClientRequestedClientStats<EMsg::ClientRequestedClientStats>
 {	
 	int countStats;
-};
-
-class MsgClientAddFriend<EMsg::ClientAddFriend>
-{
-	proto CMsgClientAddFriend proto;
-};
-
-
-class MsgClientAddFriendResponse<EMsg::ClientAddFriendResponse>
-{
-	proto CMsgClientAddFriendResponse proto;
-};
-
-class MsgClientRemoveFriend<EMsg::ClientRemoveFriend>
-{
-	proto CMsgClientRemoveFriend proto;
 };
 
 
@@ -239,51 +76,6 @@ class MsgClientP2PIntroducerMessage<EMsg::ClientP2PIntroducerMessage>
 	EIntroducerRouting routingType;
 	byte<1450> data;
 	uint dataLen;
-};
-
-class MsgClientFromGC<EMsg::ClientFromGC>
-{
-	proto CMsgAMGCClientRelay proto;
-};
-
-class MsgClientToGC<EMsg::ClientToGC>
-{
-	proto CMsgAMGCClientRelay proto;
-};
-
-class MsgClientUpdateMachineAuth<EMsg::ClientUpdateMachineAuth>
-{
-	proto CMsgClientUpdateMachineAuth proto;
-};
-
-class MsgClientUpdateMachineAuthResponse<EMsg::ClientUpdateMachineAuthResponse>
-{
-	proto CMsgClientUpdateMachineAuthResponse proto;
-};
-
-class MsgClientLoggedOff<EMsg::ClientLoggedOff>
-{
-	proto CMsgClientLoggedOff proto;
-};
-
-class MsgClientGetUserStats<EMsg::ClientGetUserStats>
-{
-	proto CMsgClientGetUserStats proto;
-};
-
-class MsgClientGetUserStatsResponse<EMsg::ClientGetUserStatsResponse>
-{
-	proto CMsgClientGetUserStatsResponse proto;
-};
-
-class MsgClientStoreUserStats2<EMsg::ClientStoreUserStats2>
-{
-	proto CMsgClientStoreUserStats2 proto;
-};
-
-class MsgClientStoreUserStatsResponse<EMsg::ClientStoreUserStatsResponse>
-{
-	proto CMsgClientStoreUserStatsResponse proto;
 };
 
 class MsgClientCreateAccountResponse<EMsg::ClientCreateAccountResponse>
@@ -346,11 +138,6 @@ class MsgClientGetFriendsWhoPlayGameResponse<EMsg::ClientGetFriendsWhoPlayGameRe
 class MsgGSPerformHardwareSurvey<EMsg::GSPerformHardwareSurvey>
 {
 	uint flags;
-};
-
-class MsgClientTicketAuthComplete<EMsg::ClientTicketAuthComplete>
-{
-	proto CMsgClientTicketAuthComplete proto;
 };
 
 class MsgGSGetPlayStatsResponse<EMsg::GSGetPlayStatsResponse>
@@ -446,16 +233,6 @@ class MsgClientChatActionResult<EMsg::ClientChatActionResult>
 	EChatActionResult actionResult;
 };
 
-class MsgClientRequestMachineAuth<EMsg::ClientRequestMachineAuth>
-{
-	proto CMsgClientRequestMachineAuth proto;
-};
-
-class MsgClientRequestMachineAuthResponse<EMsg::ClientRequestMachineAuthResponse>
-{
-	proto CMsgClientRequestMachineAuthResponse proto;
-};
-
 class MsgClientGetDepotDecryptionKey<EMsg::ClientGetDepotDecryptionKey>
 {
 	uint depotID;
@@ -477,14 +254,4 @@ class MsgClientGetNumberOfCurrentPlayersResponse<EMsg::ClientGetNumberOfCurrentP
 {
 	EResult result;
 	uint numPlayers;
-};
-
-class MsgClientPackageInfoRequest<EMsg::ClientPackageInfoRequest>
-{
-	proto CMsgClientPackageInfoRequest proto;
-};
-
-class MsgClientPackageInfoResponse<EMsg::ClientPackageInfoResponse>
-{
-	proto CMsgClientPackageInfoResponse proto;
 };

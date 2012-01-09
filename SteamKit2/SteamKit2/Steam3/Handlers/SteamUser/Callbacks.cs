@@ -84,7 +84,7 @@ namespace SteamKit2
 
 
 #if STATIC_CALLBACKS
-            internal LogOnCallback( SteamClient client, CMsgClientLogonResponse resp )
+            internal LoggedOnCallback( SteamClient client, CMsgClientLogonResponse resp )
                 : base( client )
 #else
             internal LoggedOnCallback( CMsgClientLogonResponse resp )
@@ -135,7 +135,7 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// This callback is returned in response to a log on attempt. After this callback it is safe to change the client persona state to online.
+        /// This callback is returned after logging onto the network.
         /// </summary>
         public sealed class LoginKeyCallback : CallbackMsg
         {
