@@ -50,9 +50,9 @@ namespace SteamKit2
         /// <param name="name">The name.</param>
         public void SetPersonaName( string name )
         {
-            var stateMsg = new ClientMsgProtobuf<MsgClientChangeStatus>();
-            stateMsg.Msg.Proto.persona_state = ( uint )cache.LocalUser.PersonaState;
-            stateMsg.Msg.Proto.player_name = name;
+            var stateMsg = new ClientMsgProtobuf<CMsgClientChangeStatus>( EMsg.ClientChangeStatus );
+            stateMsg.Body.persona_state = ( uint )cache.LocalUser.PersonaState;
+            stateMsg.Body.player_name = name;
 
             this.Client.Send( stateMsg );
         }
@@ -71,9 +71,9 @@ namespace SteamKit2
         /// <param name="state">The state.</param>
         public void SetPersonaState( EPersonaState state )
         {
-            var stateMsg = new ClientMsgProtobuf<MsgClientChangeStatus>();
-            stateMsg.Msg.Proto.persona_state = ( uint )state;
-            stateMsg.Msg.Proto.player_name = cache.LocalUser.Name;
+            var stateMsg = new ClientMsgProtobuf<CMsgClientChangeStatus>( EMsg.ClientChangeStatus );
+            stateMsg.Body.persona_state = ( uint )state;
+            stateMsg.Body.player_name = cache.LocalUser.Name;
 
             this.Client.Send( stateMsg );
         }
@@ -223,11 +223,11 @@ namespace SteamKit2
         /// <param name="message">The message to send.</param>
         public void SendChatMessage( SteamID target, EChatEntryType type, string message )
         {
-            var chatMsg = new ClientMsgProtobuf<MsgClientFriendMsg>();
+            var chatMsg = new ClientMsgProtobuf<CMsgClientFriendMsg>( EMsg.ClientFriendMsg );
 
-            chatMsg.Msg.Proto.steamid = target;
-            chatMsg.Msg.Proto.chat_entry_type = ( int )type;
-            chatMsg.Msg.Proto.message = Encoding.UTF8.GetBytes( message );
+            chatMsg.Body.steamid = target;
+            chatMsg.Body.chat_entry_type = ( int )type;
+            chatMsg.Body.message = Encoding.UTF8.GetBytes( message );
 
             this.Client.Send( chatMsg );
         }
@@ -238,9 +238,9 @@ namespace SteamKit2
         /// <param name="accountNameOrEmail">The account name or email of the user.</param>
         public void AddFriend( string accountNameOrEmail )
         {
-            var addFriend = new ClientMsgProtobuf<MsgClientAddFriend>();
+            var addFriend = new ClientMsgProtobuf<CMsgClientAddFriend>( EMsg.ClientAddFriend );
 
-            addFriend.Msg.Proto.accountname_or_email_to_add = accountNameOrEmail;
+            addFriend.Body.accountname_or_email_to_add = accountNameOrEmail;
 
             this.Client.Send( addFriend );
         }
@@ -250,9 +250,9 @@ namespace SteamKit2
         /// <param name="steamId">The SteamID of the friend to add.</param>
         public void AddFriend( SteamID steamId )
         {
-            var addFriend = new ClientMsgProtobuf<MsgClientAddFriend>();
+            var addFriend = new ClientMsgProtobuf<CMsgClientAddFriend>( EMsg.ClientAddFriend );
 
-            addFriend.Msg.Proto.steamid_to_add = steamId;
+            addFriend.Body.steamid_to_add = steamId;
 
             this.Client.Send( addFriend );
         }
@@ -262,9 +262,9 @@ namespace SteamKit2
         /// <param name="steamId">The SteamID of the friend to remove.</param>
         public void RemoveFriend( SteamID steamId )
         {
-            var removeFriend = new ClientMsgProtobuf<MsgClientRemoveFriend>();
+            var removeFriend = new ClientMsgProtobuf<CMsgClientRemoveFriend>( EMsg.ClientRemoveFriend );
 
-            removeFriend.Msg.Proto.friendid = steamId;
+            removeFriend.Body.friendid = steamId;
 
             this.Client.Send( removeFriend );
         }
@@ -278,7 +278,7 @@ namespace SteamKit2
         {
             SteamID chatId = steamId.ConvertToUint64(); // copy the steamid so we don't modify it
 
-            var joinChat = new ClientMsg<MsgClientJoinChat, ExtendedClientMsgHdr>();
+            var joinChat = new ClientMsg<MsgClientJoinChat>();
 
             if ( chatId.BClanAccount() )
             {
@@ -287,7 +287,7 @@ namespace SteamKit2
                 chatId.AccountType = EAccountType.Chat;
             }
 
-            joinChat.Msg.SteamIdChat = chatId;
+            joinChat.Body.SteamIdChat = chatId;
 
             Client.Send( joinChat );
         }
@@ -309,13 +309,13 @@ namespace SteamKit2
                 chatId.AccountType = EAccountType.Chat;
             }
 
-            var chatMsg = new ClientMsg<MsgClientChatMsg, ExtendedClientMsgHdr>();
+            var chatMsg = new ClientMsg<MsgClientChatMsg>();
 
-            chatMsg.Msg.ChatMsgType = type;
-            chatMsg.Msg.SteamIdChatRoom = chatId;
-            chatMsg.Msg.SteamIdChatter = Client.SteamID;
+            chatMsg.Body.ChatMsgType = type;
+            chatMsg.Body.SteamIdChatRoom = chatId;
+            chatMsg.Body.SteamIdChatter = Client.SteamID;
 
-            chatMsg.Payload.WriteNullTermString( message, Encoding.UTF8 );
+            chatMsg.WriteNullTermString( message, Encoding.UTF8 );
 
             this.Client.Send( chatMsg );
         }
@@ -333,10 +333,10 @@ namespace SteamKit2
         /// <param name="requestedInfo">The requested info flags.</param>
         public void RequestFriendInfo( IEnumerable<SteamID> steamIdList, EClientPersonaStateFlag requestedInfo = defaultInfoRequest )
         {
-            var request = new ClientMsgProtobuf<MsgClientRequestFriendData>();
+            var request = new ClientMsgProtobuf<CMsgClientRequestFriendData>( EMsg.ClientRequestFriendData );
 
-            request.Msg.Proto.friends.AddRange( steamIdList.Select( sID => sID.ConvertToUint64() ) );
-            request.Msg.Proto.persona_state_requested = ( uint )requestedInfo;
+            request.Body.friends.AddRange( steamIdList.Select( sID => sID.ConvertToUint64() ) );
+            request.Body.persona_state_requested = ( uint )requestedInfo;
 
             this.Client.Send( request );
         }
@@ -356,71 +356,71 @@ namespace SteamKit2
         /// Handles a client message. This should not be called directly.
         /// </summary>
         /// <param name="e">The <see cref="SteamKit2.ClientMsgEventArgs"/> instance containing the event data.</param>
-        public override void HandleMsg( ClientMsgEventArgs e )
+        public override void HandleMsg( IPacketMsg packetMsg )
         {
-            switch ( e.EMsg )
+            switch ( packetMsg.MsgType )
             {
                 case EMsg.ClientPersonaState:
-                    HandlePersonaState( e );
+                    HandlePersonaState( packetMsg );
                     break;
 
                 case EMsg.ClientFriendsList:
-                    HandleFriendsList( e );
+                    HandleFriendsList( packetMsg );
                     break;
 
                 case EMsg.ClientFriendMsgIncoming:
-                    HandleFriendMsg( e );
+                    HandleFriendMsg( packetMsg );
                     break;
 
                 case EMsg.ClientAccountInfo:
-                    HandleAccountInfo( e );
+                    HandleAccountInfo( packetMsg );
                     break;
 
                 case EMsg.ClientAddFriendResponse:
-                    HandleFriendResponse( e );
+                    HandleFriendResponse( packetMsg );
                     break;
 
                 case EMsg.ClientChatEnter:
-                    HandleChatEnter( e );
+                    HandleChatEnter( packetMsg );
                     break;
 
                 case EMsg.ClientChatMsg:
-                    HandleChatMsg( e );
+                    HandleChatMsg( packetMsg );
                     break;
 
                 case EMsg.ClientChatMemberInfo:
-                    HandleChatMemberInfo( e );
+                    HandleChatMemberInfo( packetMsg );
                     break;
             }
         }
 
 
         #region ClientMsg Handlers
-        void HandleAccountInfo( ClientMsgEventArgs e )
+        void HandleAccountInfo( IPacketMsg packetMsg )
         {
-            var accInfo = new ClientMsgProtobuf<MsgClientAccountInfo>( e.Data );
+            var accInfo = new ClientMsgProtobuf<CMsgClientAccountInfo>( packetMsg );
 
-            cache.LocalUser.Name = accInfo.Msg.Proto.persona_name;
+            cache.LocalUser.Name = accInfo.Body.persona_name;
         }
-        void HandleFriendMsg( ClientMsgEventArgs e )
+        void HandleFriendMsg( IPacketMsg packetMsg )
         {
-            var friendMsg = new ClientMsgProtobuf<MsgClientFriendMsgIncoming>( e.Data );
+            var friendMsg = new ClientMsgProtobuf<CMsgClientFriendMsgIncoming>( packetMsg );
 
 #if STATIC_CALLBACKS
-            var callback = new FriendMsgCallback( Client, friendMsg.Msg.Proto );
+            var callback = new FriendMsgCallback( Client, friendMsg.Body );
             SteamClient.PostCallback( callback );
 #else
-            var callback = new FriendMsgCallback( friendMsg.Msg.Proto );
+            var callback = new FriendMsgCallback( friendMsg.Body );
             this.Client.PostCallback( callback );
 #endif
         }
-        void HandleFriendsList( ClientMsgEventArgs e )
+        void HandleFriendsList( IPacketMsg packetMsg )
         {
-            var list = new ClientMsgProtobuf<MsgClientFriendsList>( e.Data );
+            var list = new ClientMsgProtobuf<CMsgClientFriendsList>( packetMsg );
 
             cache.LocalUser.SteamID = this.Client.SteamID;
 
-            if ( !list.Msg.Proto.bincremental )
+            if ( !list.Body.bincremental )
             {
                 // if we're not an incremental update, the message contains all friends, so we should clear our current list
                 lock ( listLock )
@@ -431,16 +431,16 @@ namespace SteamKit2
             }
 
             // we have to request information for all of our friends because steam only sends persona information for online friends
-            var reqInfo = new ClientMsgProtobuf<MsgClientRequestFriendData>();
+            var reqInfo = new ClientMsgProtobuf<CMsgClientRequestFriendData>( EMsg.ClientRequestFriendData );
 
-            reqInfo.Msg.Proto.persona_state_requested = ( uint )defaultInfoRequest;
+            reqInfo.Body.persona_state_requested = ( uint )defaultInfoRequest;
 
             lock ( listLock )
             {
                 List<SteamID> friendsToRemove = new List<SteamID>();
                 List<SteamID> clansToRemove = new List<SteamID>();
 
-                foreach ( var friendObj in list.Msg.Proto.friends )
+                foreach ( var friendObj in list.Body.friends )
                 {
                     SteamID friendId = friendObj.ulfriendid;
 
@@ -483,10 +483,10 @@ namespace SteamKit2
                         }
                     }
 
-                    if ( !list.Msg.Proto.bincremental )
+                    if ( !list.Body.bincremental )
                     {
                         // request persona state for our friend & clan list when it's a non-incremental update
-                        reqInfo.Msg.Proto.friends.Add( friendId );
+                        reqInfo.Body.friends.Add( friendId );
                     }
                 }
 
@@ -496,26 +496,26 @@ namespace SteamKit2
 
             }
 
-            if ( reqInfo.Msg.Proto.friends.Count > 0 )
+            if ( reqInfo.Body.friends.Count > 0 )
             {
                 this.Client.Send( reqInfo );
             }
 
 #if STATIC_CALLBACKS
-            var callback = new FriendsListCallback( Client, list.Msg.Proto );
+            var callback = new FriendsListCallback( Client, list.Body );
             SteamClient.PostCallback( callback );
 #else
-            var callback = new FriendsListCallback( list.Msg.Proto );
+            var callback = new FriendsListCallback( list.Body );
             this.Client.PostCallback( callback );
 #endif
         }
-        void HandlePersonaState( ClientMsgEventArgs e )
+        void HandlePersonaState( IPacketMsg packetMsg )
         {
-            var perState = new ClientMsgProtobuf<MsgClientPersonaState>( e.Data );
+            var perState = new ClientMsgProtobuf<CMsgClientPersonaState>( packetMsg );
 
-            EClientPersonaStateFlag flags = ( EClientPersonaStateFlag )perState.Msg.Proto.status_flags;
+            EClientPersonaStateFlag flags = ( EClientPersonaStateFlag )perState.Body.status_flags;
 
-            foreach ( var friend in perState.Msg.Proto.friends )
+            foreach ( var friend in perState.Body.friends )
             {
                 SteamID friendId = friend.friendid;
 
@@ -554,7 +554,7 @@ namespace SteamKit2
                 // todo: cache other details/account types?
             }
 
-            foreach ( var friend in perState.Msg.Proto.friends )
+            foreach ( var friend in perState.Body.friends )
             {
 #if STATIC_CALLBACKS
                 var callback = new PersonaStateCallback( Client, friend );
@@ -565,55 +565,55 @@ namespace SteamKit2
 #endif
             }
         }
-        void HandleFriendResponse( ClientMsgEventArgs e )
+        void HandleFriendResponse( IPacketMsg packetMsg )
         {
-            var friendResponse = new ClientMsgProtobuf<MsgClientAddFriendResponse>( e.Data );
+            var friendResponse = new ClientMsgProtobuf<CMsgClientAddFriendResponse>( packetMsg );
 
 #if STATIC_CALLBACKS
-            var callback = new FriendAddedCallback( Client, friendResponse.Msg.Proto );
+            var callback = new FriendAddedCallback( Client, friendResponse.Body );
             SteamClient.PostCallback( callback );
 #else
-            var callback = new FriendAddedCallback( friendResponse.Msg.Proto );
+            var callback = new FriendAddedCallback( friendResponse.Body );
             this.Client.PostCallback( callback );
 #endif
         }
-        void HandleChatEnter( ClientMsgEventArgs e )
+        void HandleChatEnter( IPacketMsg packetMsg )
         {
-            var chatEnter = new ClientMsg<MsgClientChatEnter, ExtendedClientMsgHdr>( e.Data );
+            var chatEnter = new ClientMsg<MsgClientChatEnter>( packetMsg );
 
 #if STATIC_CALLBACKS
-            var callback = new ChatEnterCallback( Client, chatEnter.Msg );
+            var callback = new ChatEnterCallback( Client, chatEnter.Body );
             SteamClient.PostCallback( callback );
 #else
-            var callback = new ChatEnterCallback( chatEnter.Msg );
+            var callback = new ChatEnterCallback( chatEnter.Body );
             this.Client.PostCallback( callback );
 #endif
         }
-        void HandleChatMsg( ClientMsgEventArgs e )
+        void HandleChatMsg( IPacketMsg packetMsg )
         {
-            var chatMsg = new ClientMsg<MsgClientChatMsg, ExtendedClientMsgHdr>( e.Data );
+            var chatMsg = new ClientMsg<MsgClientChatMsg>( packetMsg );
 
             byte[] msgData = chatMsg.Payload.ToArray();
 
 #if STATIC_CALLBACKS
-            var callback = new ChatMsgCallback( Client, chatMsg.Msg, msgData );
+            var callback = new ChatMsgCallback( Client, chatMsg.Body, msgData );
             SteamClient.PostCallback( callback );
 #else
-            var callback = new ChatMsgCallback( chatMsg.Msg, msgData );
+            var callback = new ChatMsgCallback( chatMsg.Body, msgData );
             this.Client.PostCallback( callback );
 #endif
         }
-        void HandleChatMemberInfo( ClientMsgEventArgs e )
+        void HandleChatMemberInfo( IPacketMsg packetMsg )
         {
-            var membInfo = new ClientMsg<MsgClientChatMemberInfo, ExtendedClientMsgHdr>( e.Data );
+            var membInfo = new ClientMsg<MsgClientChatMemberInfo>( packetMsg );
 
             byte[] payload = membInfo.Payload.ToArray();
 
 #if STATIC_CALLBACKS
-            var callback = new ChatMemberInfoCallback( Client, membInfo.Msg, payload );
+            var callback = new ChatMemberInfoCallback( Client, membInfo.Body, payload );
             SteamClient.PostCallback( callback );
 #else
-            var callback = new ChatMemberInfoCallback( membInfo.Msg, payload );
+            var callback = new ChatMemberInfoCallback( membInfo.Body, payload );
             this.Client.PostCallback( callback );
 #endif
         }

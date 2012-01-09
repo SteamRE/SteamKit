@@ -61,9 +61,9 @@ namespace SteamKit2
         /// <param name="appid">The appid.</param>
         public void GetAppOwnershipTicket( uint appid )
         {
-            var request = new ClientMsgProtobuf<MsgClientGetAppOwnershipTicket>();
+            var request = new ClientMsgProtobuf<CMsgClientGetAppOwnershipTicket>( EMsg.ClientGetAppOwnershipTicket );
 
-            request.Msg.Proto.app_id = appid;
+            request.Body.app_id = appid;
 
             this.Client.Send( request );
         }
@@ -96,9 +96,9 @@ namespace SteamKit2
         /// <param name="supportsBatches">if set to <c>true</c>, the request supports batches.</param>
         public void GetAppInfo( IEnumerable<AppDetails> apps, bool supportsBatches = false )
         {
-            var request = new ClientMsgProtobuf<MsgClientAppInfoRequest>();
+            var request = new ClientMsgProtobuf<CMsgClientAppInfoRequest>( EMsg.ClientAppInfoRequest );
 
-            request.Msg.Proto.apps.AddRange( apps.Select( a =>
+            request.Body.apps.AddRange( apps.Select( a =>
             {
                 var app = new CMsgClientAppInfoRequest.App
                 {
@@ -111,7 +111,7 @@ namespace SteamKit2
                 return app;
             } ) );
 
-            request.Msg.Proto.supports_batches = supportsBatches;
+            request.Body.supports_batches = supportsBatches;
 
             this.Client.Send( request );
         }
@@ -134,10 +134,10 @@ namespace SteamKit2
         /// <param name="metaDataOnly">if set to <c>true</c> to request metadata only.</param>
         public void GetPackageInfo( IEnumerable<uint> packageId, bool metaDataOnly = false )
         {
-            var request = new ClientMsgProtobuf<MsgClientPackageInfoRequest>();
+            var request = new ClientMsgProtobuf<CMsgClientPackageInfoRequest>( EMsg.ClientPackageInfoRequest );
 
-            request.Msg.Proto.package_ids.AddRange( packageId );
-            request.Msg.Proto.meta_data_only = metaDataOnly;
+            request.Body.package_ids.AddRange( packageId );
+            request.Body.meta_data_only = metaDataOnly;
 
             this.Client.Send( request );
         }
@@ -150,10 +150,10 @@ namespace SteamKit2
         /// <param name="sendChangelist">if set to <c>true</c>, request a change list.</param>
         public void GetAppChanges( uint lastChangeNumber = 0, bool sendChangelist = false  )
         {
-            var request = new ClientMsgProtobuf<MsgClientAppInfoUpdate>();
+            var request = new ClientMsgProtobuf<CMsgClientAppInfoUpdate>( EMsg.ClientAppInfoUpdate );
 
-            request.Msg.Proto.last_changenumber = lastChangeNumber;
-            request.Msg.Proto.send_changelist = sendChangelist;
+            request.Body.last_changenumber = lastChangeNumber;
+            request.Body.send_changelist = sendChangelist;
 
             this.Client.Send( request );
         }
@@ -165,9 +165,9 @@ namespace SteamKit2
         /// <param name="depotid">The DepotID to request a decryption key for.</param>
         public void GetDepotDecryptionKey( uint depotid )
         {
-            var request = new ClientMsg<MsgClientGetDepotDecryptionKey, ExtendedClientMsgHdr>();
+            var request = new ClientMsg<MsgClientGetDepotDecryptionKey>();
 
-            request.Msg.DepotID = depotid;
+            request.Body.DepotID = depotid;
 
             this.Client.Send( request );
         }
@@ -177,169 +177,139 @@ namespace SteamKit2
         /// Handles a client message. This should not be called directly.
         /// </summary>
         /// <param name="e">The <see cref="SteamKit2.ClientMsgEventArgs"/> instance containing the event data.</param>
-        public override void HandleMsg( ClientMsgEventArgs e )
+        public override void HandleMsg( IPacketMsg packetMsg )
         {
-            switch ( e.EMsg )
+            switch ( packetMsg.MsgType )
             {
                 case EMsg.ClientLicenseList:
-                    HandleLicenseList( e );
+                    HandleLicenseList( packetMsg );
                     break;
 
                 case EMsg.ClientGameConnectTokens:
-                    HandleGameConnectTokens( e );
+                    HandleGameConnectTokens( packetMsg );
                     break;
 
                 case EMsg.ClientVACBanStatus:
-                    HandleVACBanStatus( e );
+                    HandleVACBanStatus( packetMsg );
                     break;
 
                 case EMsg.ClientGetAppOwnershipTicketResponse:
-                    HandleAppOwnershipTicketResponse( e );
+                    HandleAppOwnershipTicketResponse( packetMsg );
                     break;
 
                 case EMsg.ClientAppInfoResponse:
-                    HandleAppInfoResponse( e );
+                    HandleAppInfoResponse( packetMsg );
                     break;
 
                 case EMsg.ClientPackageInfoResponse:
-                    HandlePackageInfoResponse( e );
+                    HandlePackageInfoResponse( packetMsg );
                     break;
 
                 case EMsg.ClientAppInfoChanges:
-                    HandleAppInfoChanges( e );
+                    HandleAppInfoChanges( packetMsg );
                     break;
 
                 case EMsg.ClientGetDepotDecryptionKeyResponse:
-                    HandleDepotKeyResponse(e);
+                    HandleDepotKeyResponse( packetMsg );
                     break;
             }
         }
 
 
         #region ClientMsg Handlers
-        void HandleAppOwnershipTicketResponse( ClientMsgEventArgs e )
+        void HandleAppOwnershipTicketResponse( IPacketMsg packetMsg )
         {
-            var ticketResponse = new ClientMsgProtobuf<MsgClientGetAppOwnershipTicketResponse>();
-
-            try
-            {
-                ticketResponse.SetData( e.Data );
-            }
-            catch ( Exception ex )
-            {
-                DebugLog.WriteLine( "SteamApps", "HandleAppOwnershipTicketResponse encountered an exception while reading client msg.\n{0}", ex.ToString() );
-                return;
-            }
+            var ticketResponse = new ClientMsgProtobuf<CMsgClientGetAppOwnershipTicketResponse>( packetMsg );
 
 #if STATIC_CALLBACKS
-            var callback = new AppOwnershipTicketCallback( Client, ticketResponse.Msg.Proto );
+            var callback = new AppOwnershipTicketCallback( Client, ticketResponse.Body );
             SteamClient.PostCallback( callback );
 #else
-            var callback = new AppOwnershipTicketCallback( ticketResponse.Msg.Proto );
+            var callback = new AppOwnershipTicketCallback( ticketResponse.Body );
             this.Client.PostCallback( callback );
 #endif
         }
-        void HandleAppInfoResponse( ClientMsgEventArgs e )
+        void HandleAppInfoResponse( IPacketMsg packetMsg )
         {
-            var infoResponse = new ClientMsgProtobuf<MsgClientAppInfoResponse>();
-
-            try
-            {
-                infoResponse.SetData( e.Data );
-            }
-            catch ( Exception ex )
-            {
-                DebugLog.WriteLine( "SteamApps", "HandleAppInfoResponse encountered an exception while reading client msg.\n{0}", ex.ToString() );
-                return;
-            }
+            var infoResponse = new ClientMsgProtobuf<CMsgClientAppInfoResponse>( packetMsg );
 
 #if STATIC_CALLBACKS
-            var callback = new AppInfoCallback( Client, infoResponse.Msg.Proto );
+            var callback = new AppInfoCallback( Client, infoResponse.Body );
             SteamClient.PostCallback( callback );
 #else
-            var callback = new AppInfoCallback( infoResponse.Msg.Proto );
+            var callback = new AppInfoCallback( infoResponse.Body );
             this.Client.PostCallback( callback );
 #endif
         }
-        void HandlePackageInfoResponse( ClientMsgEventArgs e )
+        void HandlePackageInfoResponse( IPacketMsg packetMsg )
         {
-            var response = new ClientMsgProtobuf<MsgClientPackageInfoResponse>( e.Data );
+            var response = new ClientMsgProtobuf<CMsgClientPackageInfoResponse>( packetMsg );
 
 #if STATIC_CALLBACKS
-            var callback = new PackageInfoCallback( Client, response.Msg.Proto );
+            var callback = new PackageInfoCallback( Client, response.Body );
             SteamClient.PostCallback( callback );
 #else
-            var callback = new PackageInfoCallback( response.Msg.Proto );
+            var callback = new PackageInfoCallback( response.Body );
             this.Client.PostCallback( callback );
 #endif
         }
-        void HandleAppInfoChanges( ClientMsgEventArgs e )
+        void HandleAppInfoChanges( IPacketMsg packetMsg )
         {
-            var changes = new ClientMsgProtobuf<MsgClientAppInfoChanges>( e.Data );
+            var changes = new ClientMsgProtobuf<CMsgClientAppInfoChanges>( packetMsg );
 
 #if STATIC_CALLBACKS
-            var callback = new AppChangesCallback( Client, changes.Msg.Proto );
+            var callback = new AppChangesCallback( Client, changes.Body );
             SteamClient.PostCallback( callback );
 #else
-            var callback = new AppChangesCallback( changes.Msg.Proto );
+            var callback = new AppChangesCallback( changes.Body );
             this.Client.PostCallback( callback );
 #endif
         }
-        void HandleDepotKeyResponse(ClientMsgEventArgs e)
+        void HandleDepotKeyResponse( IPacketMsg packetMsg )
         {
-            var keyResponse = new ClientMsg<MsgClientGetDepotDecryptionKeyResponse, ExtendedClientMsgHdr>(e.Data);
+            var keyResponse = new ClientMsg<MsgClientGetDepotDecryptionKeyResponse>( packetMsg );
 
 #if STATIC_CALLBACKS
-            var callback = new DepotKeyCallback( Client, keyResponse.Msg );
+            var callback = new DepotKeyCallback( Client, keyResponse.Body );
             SteamClient.PostCallback( callback );
 #else
-            var callback = new DepotKeyCallback(keyResponse.Msg);
-            this.Client.PostCallback(callback);
-#endif
-        }
-        void HandleGameConnectTokens( ClientMsgEventArgs e )
-        {
-            var gcTokens = new ClientMsgProtobuf<MsgClientGameConnectTokens>( e.Data );
-
-#if STATIC_CALLBACKS
-            var callback = new GameConnectTokensCallback( Client, gcTokens.Msg.Proto );
-            SteamClient.PostCallback( callback );
-#else
-            var callback = new GameConnectTokensCallback( gcTokens.Msg.Proto );
+            var callback = new DepotKeyCallback( keyResponse.Body );
             this.Client.PostCallback( callback );
 #endif
         }
-        void HandleLicenseList( ClientMsgEventArgs e )
+        void HandleGameConnectTokens( IPacketMsg packetMsg )
         {
-            var licenseList = new ClientMsgProtobuf<MsgClientLicenseList>();
-
-            try
-            {
-                licenseList.SetData( e.Data );
-            }
-            catch ( Exception ex )
-            {
-                DebugLog.WriteLine( "SteamApps", "HandleLicenseList encountered an exception while reading client msg.\n{0}", ex.ToString() );
-                return;
-            }
+            var gcTokens = new ClientMsgProtobuf<CMsgClientGameConnectTokens>( packetMsg );
 
 #if STATIC_CALLBACKS
-            var callback = new LicenseListCallback( Client, licenseList.Msg.Proto );
+            var callback = new GameConnectTokensCallback( Client, gcTokens.Body );
             SteamClient.PostCallback( callback );
 #else
-            var callback = new LicenseListCallback( licenseList.Msg.Proto );
+            var callback = new GameConnectTokensCallback( gcTokens.Body );
             this.Client.PostCallback( callback );
 #endif
         }
-        void HandleVACBanStatus( ClientMsgEventArgs e )
+        void HandleLicenseList( IPacketMsg packetMsg )
         {
-            var vacStatus = new ClientMsg<MsgClientVACBanStatus, ExtendedClientMsgHdr>( e.Data );
+            var licenseList = new ClientMsgProtobuf<CMsgClientLicenseList>( packetMsg );
 
 #if STATIC_CALLBACKS
-            var callback = new VACStatusCallback( Client, vacStatus.Msg, vacStatus.Payload.ToArray() );
+            var callback = new LicenseListCallback( Client, licenseList.Body );
             SteamClient.PostCallback( callback );
 #else
-            var callback = new VACStatusCallback( vacStatus.Msg, vacStatus.Payload.ToArray() );
+            var callback = new LicenseListCallback( licenseList.Body );
+            this.Client.PostCallback( callback );
+#endif
+        }
+        void HandleVACBanStatus( IPacketMsg packetMsg )
+        {
+            var vacStatus = new ClientMsg<MsgClientVACBanStatus>( packetMsg );
+
+#if STATIC_CALLBACKS
+            var callback = new VACStatusCallback( Client, vacStatus.Body, vacStatus.Payload.ToArray() );
+            SteamClient.PostCallback( callback );
+#else
+            var callback = new VACStatusCallback( vacStatus.Body, vacStatus.Payload.ToArray() );
             this.Client.PostCallback( callback );
 #endif
         }

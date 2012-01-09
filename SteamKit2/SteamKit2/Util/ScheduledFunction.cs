@@ -13,23 +13,21 @@ using System.Threading;
 
 namespace SteamKit2
 {
-    delegate void ScheduledFunc();
-
     class ScheduledFunction
     {
         public TimeSpan Delay { get; set; }
 
-        ScheduledFunc func;
+        Action func;
 
         bool bStarted;
         Timer timer;
 
-        public ScheduledFunction( ScheduledFunc func )
+        public ScheduledFunction( Action func )
             : this( func, TimeSpan.FromMilliseconds( -1 ) )
         {
         }
 
-        public ScheduledFunction( ScheduledFunc func, TimeSpan delay )
+        public ScheduledFunction( Action func, TimeSpan delay )
         {
             this.func = func;
             this.Delay = delay;

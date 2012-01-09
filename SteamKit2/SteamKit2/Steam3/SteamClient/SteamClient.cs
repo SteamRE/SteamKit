@@ -272,25 +272,33 @@ namespace SteamKit2
         #endregion
 
 
-        public long GetNextJobID()
+        /// <summary>
+        /// Returns the next available JobID for job based messages.
+        /// This function is thread-safe.
+        /// </summary>
+        /// <returns>The next available JobID.</returns>
+        public ulong GetNextJobID()
         {
-            return Interlocked.Increment( ref currentJobId );
+            return ( ulong )Interlocked.Increment( ref currentJobId );
         }
 
 
         /// <summary>
-        /// Raises the <see cref="E:ClientMsgReceived"/> event.
+        /// Called when a client message is received from the network.
         /// </summary>
-        /// <param name="e">The <see cref="SteamKit2.ClientMsgEventArgs"/> instance containing the event data.</param>
-        protected override void OnClientMsgReceived( ClientMsgEventArgs e )
+        /// <param name="packetMsg">The packet message.</param>
+        protected override void OnClientMsgReceived( IPacketMsg packetMsg )
         {
-            if ( e.EMsg == EMsg.ChannelEncryptResult )
-                HandleEncryptResult( e );
+            // let the underlying CMClient handle this message first
+            base.OnClientMsgReceived( packetMsg );
+
+            if ( packetMsg.MsgType == EMsg.ChannelEncryptResult )
+                HandleEncryptResult( packetMsg ); // we're interested in this client message to post the connected callback
 
             // pass along the clientmsg to all registered handlers
             foreach ( var kvp in handlers )
             {
-                kvp.Value.HandleMsg( e );
+                kvp.Value.HandleMsg( packetMsg );
             }
         }
         /// <summary>
@@ -299,39 +307,21 @@ namespace SteamKit2
         protected override void OnClientDisconnected()
         {
 #if STATIC_CALLBACKS
-            SteamClient.PostCallback( new DisconnectCallback( this ) );
+            SteamClient.PostCallback( new DisconnectedCallback( this ) );
 #else
             this.PostCallback( new DisconnectedCallback() );
 #endif
         }
 
 
-        // we're interested in handling the encryption result net message to see if we've properly connected or not
-        void HandleEncryptResult( ClientMsgEventArgs e )
+        void HandleEncryptResult( IPacketMsg packetMsg )
         {
-            // if the EResult is OK, we've finished the crypto handshake and can send commands (such as LogOn)
-            ClientMsg<MsgChannelEncryptResult, MsgHdr> encResult = null;
-
-            try
-            {
-                encResult = new ClientMsg<MsgChannelEncryptResult, MsgHdr>( e.Data );
-            }
-            catch ( Exception ex )
-            {
-                DebugLog.WriteLine( "SteamClient", "HandleEncryptResult encountered an exception while reading client msg.\n{0}", ex.ToString() );
+            var encResult = new Msg<MsgChannelEncryptResult>( packetMsg );
 
 #if STATIC_CALLBACKS
-                SteamClient.PostCallback( new ConnectCallback( this, EResult.Fail ) );
+            SteamClient.PostCallback( new ConnectedCallback( this, encResult.Body ) );
 #else
-                PostCallback( new ConnectedCallback( EResult.Fail ) );
-#endif
-                return;
-            }
-
-#if STATIC_CALLBACKS
-            SteamClient.PostCallback( new ConnectCallback( this, encResult.Msg ) );
-#else
-            PostCallback( new ConnectedCallback( encResult.Msg ) );
+            PostCallback( new ConnectedCallback( encResult.Body ) );
 #endif
         }
 

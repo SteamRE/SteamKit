@@ -23,7 +23,7 @@ namespace SteamKit2
             /// Gets the Job ID of this callback. For client based jobs, this will match the Job ID of a function call.
             /// For server based jobs, this is provided to respond to the correct job.
             /// </summary>
-            public long JobID { get; private set; }
+            public ulong JobID { get; private set; }
 
 
             /// <summary>
@@ -32,10 +32,10 @@ namespace SteamKit2
             public T Callback { get; private set; }
 
 #if STATIC_CALLBACKS
-            internal JobCallback( SteamClient client, long jobId, T callback )
+            internal JobCallback( SteamClient client, ulong jobId, T callback )
                 : base( client )
 #else
-            internal JobCallback( long jobId, T callback )
+            internal JobCallback( ulong jobId, T callback )
 #endif
             {
                 JobID = jobId;
@@ -55,7 +55,7 @@ namespace SteamKit2
             public EResult Result { get; private set; }
 
 #if STATIC_CALLBACKS
-            internal ConnectCallback( SteamClient client, MsgChannelEncryptResult result )
+            internal ConnectedCallback( SteamClient client, MsgChannelEncryptResult result )
                 : this( client, result.Result )
 #else
             internal ConnectedCallback( MsgChannelEncryptResult result )
@@ -65,7 +65,7 @@ namespace SteamKit2
             }
 
 #if STATIC_CALLBACKS
-            internal ConnectCallback( SteamClient client, EResult result )
+            internal ConnectedCallback( SteamClient client, EResult result )
                 : base( client )
 #else
             internal ConnectedCallback( EResult result )
@@ -82,7 +82,7 @@ namespace SteamKit2
         public sealed class DisconnectedCallback : CallbackMsg
         {
 #if STATIC_CALLBACKS
-            public DisconnectCallback( SteamClient client )
+            public DisconnectedCallback( SteamClient client )
                 : base( client )
             {
             }

@@ -16,49 +16,19 @@ using System.Net.Sockets;
 
 namespace SteamKit2
 {
-
-    /// <summary>
-    /// Represents a client message that has been received over the network.
-    /// </summary>
-    public class ClientMsgEventArgs : NetMsgEventArgs
-    {
-        EMsg _eMsg;
-        /// <summary>
-        /// Gets EMsg type of the data.
-        /// </summary>
-        /// <value>The EMsg the data represents.</value>
-        public EMsg EMsg
-        {
-            get { return MsgUtil.GetMsg( _eMsg ); }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether this data is a protobuf message.
-        /// </summary>
-        /// <value><c>true</c> if the data is protobuf'd; otherwise, <c>false</c>.</value>
-        public bool IsProto
-        {
-            get { return MsgUtil.IsProtoBuf( _eMsg ); }
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ClientMsgEventArgs"/> class.
-        /// </summary>
-        /// <param name="eMsg">The EMsg the data represents.</param>
-        /// <param name="data">The data.</param>
-        /// <param name="endPoint">The end point the data was received from.</param>
-        public ClientMsgEventArgs( EMsg eMsg, byte[] data, IPEndPoint endPoint )
-            : base( data, endPoint )
-        {
-            _eMsg = eMsg;
-        }
-    }
-
     /// <summary>
     /// This base client handles the underlying connection to a CM server. This class should not be use directly, but through the <see cref="SteamClient"/> class.
     /// </summary>
     public abstract class CMClient
     {
+        /// <summary>
+        /// Returns the the local IP of this client.
+        /// </summary>
+        /// <returns>The local IP.</returns>
+        public IPAddress LocalIP
+        {
+            get { return Connection.GetLocalIP(); }
+        }
 
         /// <summary>
         /// Gets the connected universe of this client.
@@ -69,7 +39,7 @@ namespace SteamKit2
         /// Gets the session ID of this client. This value is assigned after a logon attempt has succeeded.
         /// </summary>
         /// <value>The session ID.</value>
-        public int SessionID { get; private set; }
+        public int? SessionID { get; private set; }
         /// <summary>
         /// Gets the SteamID of this client. This value is assigned after a logon attempt has succeeded.
         /// </summary>
@@ -81,7 +51,6 @@ namespace SteamKit2
         byte[] tempSessionKey;
 
         ScheduledFunction heartBeatFunc;
-
 
         Dictionary<EServerType, List<IPEndPoint>> serverMap;
 
@@ -108,8 +77,6 @@ namespace SteamKit2
         public CMClient( ConnectionType type = ConnectionType.Tcp )
         {
             serverMap = new Dictionary<EServerType, List<IPEndPoint>>();
-            SessionID = default( int );
-            SteamID = default( ulong );
 
             switch ( type )
             {
@@ -125,7 +92,10 @@ namespace SteamKit2
             Connection.NetMsgReceived += NetMsgReceived;
             Connection.Disconnected += Disconnected;
 
-            heartBeatFunc = new ScheduledFunction( SendHeartbeat, TimeSpan.FromMilliseconds( -1 ) );
+            heartBeatFunc = new ScheduledFunction( () =>
+            {
+                Send( new ClientMsgProtobuf<CMsgClientHeartBeat>( EMsg.ClientHeartBeat ) );
+            } );
         }
 
 
@@ -161,64 +131,24 @@ namespace SteamKit2
             Connection.Disconnect();
         }
 
-
         /// <summary>
-        /// Sends the specified client message to the server. This method automatically sets the SessionID and SteamID of the message.
+        /// Sends the specified client message to the server.
+        /// This method automatically assigns the correct SessionID and SteamID of the message.
         /// </summary>
-        /// <typeparam name="MsgType">The MsgType of the client message.</typeparam>
-        /// <param name="clientMsg">The client message to send.</param>
-        public void Send<MsgType>( ClientMsgProtobuf<MsgType> clientMsg )
-            where MsgType : ISteamSerializableMessage, new()
+        /// <param name="msg">The client message to send.</param>
+        public void Send( IClientMsg msg )
         {
-            if ( this.SessionID != default( int ) )
-                clientMsg.ProtoHeader.client_session_id = this.SessionID;
+            if ( this.SessionID.HasValue )
+                msg.SessionID = this.SessionID.Value;
 
-            if ( this.SteamID != default( ulong ) )
-                clientMsg.ProtoHeader.client_steam_id = this.SteamID;
+            if ( this.SteamID != null )
+                msg.SteamID = this.SteamID;
 
-            DebugLog.WriteLine( "CMClient", "Sent -> EMsg: {0} (Proto: True)", clientMsg.GetEMsg() );
+            DebugLog.WriteLine( "CMClient", "Sent -> EMsg: {0} (Proto: {1})", msg.MsgType, msg.IsProto );
 
-            this.Connection.Send( clientMsg );
-        }
-        /// <summary>
-        /// Sends the specified client message to the server. This method automatically sets the SessionID and SteamID of the message.
-        /// </summary>
-        /// <typeparam name="MsgType">The MsgType of the client message.</typeparam>
-        /// <param name="clientMsg">The client message to send.</param>
-        public void Send<MsgType>( ClientMsg<MsgType, ExtendedClientMsgHdr> clientMsg )
-            where MsgType : ISteamSerializableMessage, new()
-        {
-            if ( this.SessionID != default( int ) )
-                clientMsg.Header.SessionID = this.SessionID;
-
-            if ( this.SteamID != default( ulong ) )
-                clientMsg.Header.SteamID = this.SteamID;
-
-            DebugLog.WriteLine( "CMClient", "Sent -> EMsg: {0} (Proto: False)", clientMsg.GetEMsg() );
-
-            this.Connection.Send( clientMsg );
-        }
-        /// <summary>
-        /// Sends the specified client message to the server. This method automatically sets the SessionID and SteamID of the message.
-        /// </summary>
-        /// <typeparam name="MsgType">The MsgType of the client message.</typeparam>
-        /// <param name="clientMsg">The client message to send.</param>
-        public void Send<MsgType>( ClientMsg<MsgType, MsgHdr> clientMsg )
-            where MsgType : ISteamSerializableMessage, new()
-        {
-            DebugLog.WriteLine( "CMClient", "Sent -> EMsg: {0} (Proto: False)", clientMsg.GetEMsg() );
-
-            Connection.Send( clientMsg );
+            Connection.Send( msg );
         }
 
-        /// <summary>
-        /// Returns the the local IP of this client.
-        /// </summary>
-        /// <returns>The local IP.</returns>
-        public IPAddress GetLocalIP()
-        {
-            return Connection.GetLocalIP();
-        }
 
         /// <summary>
         /// Returns the list of servers matching the given type
@@ -234,11 +164,42 @@ namespace SteamKit2
             return list;
         }
 
+
         /// <summary>
-        /// Raises the <see cref="E:ClientMsgReceived"/> event.
+        /// Called when a client message is received from the network.
         /// </summary>
-        /// <param name="e">The <see cref="SteamKit2.ClientMsgEventArgs"/> instance containing the event data.</param>
-        protected abstract void OnClientMsgReceived( ClientMsgEventArgs e );
+        /// <param name="packetMsg">The packet message.</param>
+        protected virtual void OnClientMsgReceived( IPacketMsg packetMsg )
+        {
+            DebugLog.WriteLine( "CMClient", "<- Recv'd EMsg: {0} ({1}) (Proto: {2})", packetMsg.MsgType, ( int )packetMsg.MsgType, packetMsg.IsProto );
+
+            switch ( packetMsg.MsgType )
+            {
+                case EMsg.ChannelEncryptRequest:
+                    HandleEncryptRequest( packetMsg );
+                    break;
+
+                case EMsg.ChannelEncryptResult:
+                    HandleEncryptResult( packetMsg );
+                    break;
+
+                case EMsg.Multi:
+                    HandleMulti( packetMsg );
+                    break;
+
+                case EMsg.ClientLogOnResponse: // we handle this to get the SteamID/SessionID and to setup heartbeating
+                    HandleLogOnResponse( packetMsg );
+                    break;
+
+                case EMsg.ClientLoggedOff: // to stop heartbeating when we get logged off
+                    HandleLoggedOff( packetMsg );
+                    break;
+
+                case EMsg.ClientServerList: // Steam server list
+                    HandleServerList( packetMsg );
+                    break;
+            }
+        }
         /// <summary>
         /// Called when the client is physically disconnected from Steam3.
         /// </summary>
@@ -247,77 +208,57 @@ namespace SteamKit2
 
         void NetMsgReceived( object sender, NetMsgEventArgs e )
         {
-            byte[] data = e.Data;
-
-            uint rawEMsg = BitConverter.ToUInt32( data, 0 );
-            EMsg eMsg = MsgUtil.GetMsg( rawEMsg );
-
-            ClientMsgEventArgs cliEvent = new ClientMsgEventArgs( ( EMsg )rawEMsg, e.Data, e.EndPoint );
-
-            DebugLog.WriteLine( "CMClient", "<- Recv'd EMsg: {0} ({1}) (Proto: {2})", cliEvent.EMsg, (int)eMsg, cliEvent.IsProto );
-
-            switch ( eMsg )
-            {
-                case EMsg.ChannelEncryptRequest:
-                    HandleEncryptRequest( cliEvent );
-                    break;
-
-                case EMsg.ChannelEncryptResult:
-                    HandleEncryptResult( cliEvent );
-                    break;
-
-                case EMsg.Multi:
-                    HandleMulti( cliEvent );
-                    break;
-
-                case EMsg.ClientLogOnResponse: // we handle this to get the SteamID/SessionID and to setup heartbeating
-                    HandleLogOnResponse( cliEvent );
-                    break;
-
-                case EMsg.ClientLoggedOff: // to stop heartbeating when we get logged off
-                    HandleLoggedOff( cliEvent );
-                    break;
-
-                case EMsg.ClientServerList: // Steam server list
-                    HandleServerList(cliEvent);
-                    break;
-            }
-
-            OnClientMsgReceived( cliEvent );
+            OnClientMsgReceived( GetPacketMsg( e.Data ) );
         }
-
-
         void Disconnected( object sender, EventArgs e )
         {
             heartBeatFunc.Stop();
-
             Connection.NetFilter = null;
 
             OnClientDisconnected();
         }
 
-
-        void SendHeartbeat()
+        IPacketMsg GetPacketMsg( byte[] data )
         {
-            var beat = new ClientMsgProtobuf<MsgClientHeartBeat>();
-            Send( beat );
+            uint rawEMsg = BitConverter.ToUInt32( data, 0 );
+            EMsg eMsg = MsgUtil.GetMsg( rawEMsg );
+
+            switch ( eMsg )
+            {
+                // certain message types are always MsgHdr
+                case EMsg.ChannelEncryptRequest:
+                case EMsg.ChannelEncryptResponse:
+                case EMsg.ChannelEncryptResult:
+                    return new PacketMsg( eMsg, data );
+            }
+
+            if ( MsgUtil.IsProtoBuf( rawEMsg ) )
+            {
+                // if the emsg is flagged, we're a proto message
+                return new PacketClientMsgProtobuf( eMsg, data );
+            }
+            else
+            {
+                // otherwise we're a struct message
+                return new PacketClientMsg( eMsg, data );
+            }
         }
 
 
         #region ClientMsg Handlers
-        void HandleMulti( ClientMsgEventArgs e )
+        void HandleMulti( IPacketMsg packetMsg )
         {
-            if ( !e.IsProto )
+            if ( !packetMsg.IsProto )
             {
                 DebugLog.WriteLine( "CMClient", "HandleMulti got non-proto MsgMulti!!" );
                 return;
             }
 
-            var msgMulti = new ClientMsgProtobuf<MsgMulti>( e.Data );
+            var msgMulti = new ClientMsgProtobuf<CMsgMulti>( packetMsg );
 
-            byte[] payload = msgMulti.Msg.Proto.message_body;
+            byte[] payload = msgMulti.Body.message_body;
 
-            if ( msgMulti.Msg.Proto.size_unzipped > 0 )
+            if ( msgMulti.Body.size_unzipped > 0 )
             {
                 try
                 {
@@ -337,26 +278,27 @@ namespace SteamKit2
                 uint subSize = ds.ReadUInt32();
                 byte[] subData = ds.ReadBytes( subSize );
 
-                NetMsgReceived( this, new NetMsgEventArgs( subData, e.EndPoint ) );
+                OnClientMsgReceived( GetPacketMsg( subData ) );
             }
 
         }
-        void HandleLogOnResponse( ClientMsgEventArgs e )
+        void HandleLogOnResponse( IPacketMsg packetMsg )
         {
-            if ( !e.IsProto )
+            if ( !packetMsg.IsProto )
             {
                 DebugLog.WriteLine( "CMClient", "HandleLogOnResponse got non-proto MsgClientLogonResponse!!" );
                 return;
             }
 
-            var logonResp = new ClientMsgProtobuf<MsgClientLogOnResponse>( e.Data );
 
-            if ( logonResp.Msg.Proto.eresult == ( int )EResult.OK )
+            var logonResp = new ClientMsgProtobuf<CMsgClientLogonResponse>( packetMsg );
+
+            if ( logonResp.Body.eresult == ( int )EResult.OK )
             {
                 SessionID = logonResp.ProtoHeader.client_session_id;
                 SteamID = logonResp.ProtoHeader.client_steam_id;
 
-                int hbDelay = logonResp.Msg.Proto.out_of_game_heartbeat_seconds;
+                int hbDelay = logonResp.Body.out_of_game_heartbeat_seconds;
 
                 // restart heartbeat
                 heartBeatFunc.Stop();
@@ -364,12 +306,12 @@ namespace SteamKit2
                 heartBeatFunc.Start();
             }
         }
-        void HandleEncryptRequest( ClientMsgEventArgs e )
+        void HandleEncryptRequest( IPacketMsg packetMsg )
         {
-            var encRequest = new ClientMsg<MsgChannelEncryptRequest, MsgHdr>( e.Data );
+            var encRequest = new Msg<MsgChannelEncryptRequest>( packetMsg );
 
-            EUniverse eUniv = encRequest.Msg.Universe;
-            uint protoVersion = encRequest.Msg.ProtocolVersion;
+            EUniverse eUniv = encRequest.Body.Universe;
+            uint protoVersion = encRequest.Body.ProtocolVersion;
 
             DebugLog.WriteLine( "CMClient", "Got encryption request. Universe: {0} Protocol ver: {1}", eUniv, protoVersion );
 
@@ -385,48 +327,48 @@ namespace SteamKit2
             }
 			
             CryptoHelper.InitializeRSA( pubKey );
-			
-            var encResp = new ClientMsg<MsgChannelEncryptResponse, MsgHdr>();
+
+            var encResp = new Msg<MsgChannelEncryptResponse>();
 
             byte[] cryptedSessKey = CryptoHelper.RSAEncrypt( tempSessionKey );
             byte[] keyCrc = CryptoHelper.CRCHash( cryptedSessKey );
 
-            encResp.Payload.Write( cryptedSessKey );
-            encResp.Payload.Write( keyCrc );
-            encResp.Payload.WriteType<uint>( 0 );
+            encResp.Write( cryptedSessKey );
+            encResp.Write( keyCrc );
+            encResp.Write( ( uint )0 );
 
             Connection.Send( encResp );
         }
-        void HandleEncryptResult( ClientMsgEventArgs e )
+        void HandleEncryptResult( IPacketMsg packetMsg )
         {
-            var encResult = new ClientMsg<MsgChannelEncryptResult, MsgHdr>( e.Data );
+            var encResult = new Msg<MsgChannelEncryptResult>( packetMsg );
 
-            DebugLog.WriteLine( "CMClient", "Encryption result: {0}", encResult.Msg.Result );
+            DebugLog.WriteLine( "CMClient", "Encryption result: {0}", encResult.Body.Result );
 
-            if ( encResult.Msg.Result == EResult.OK )
+            if ( encResult.Body.Result == EResult.OK )
             {
                 Connection.NetFilter = new NetFilterEncryption( tempSessionKey );
             }
         }
-        void HandleLoggedOff( ClientMsgEventArgs cliEvent )
+        void HandleLoggedOff( IPacketMsg packetMsg )
         {
             heartBeatFunc.Stop();
         }
-        void HandleServerList(ClientMsgEventArgs cliEvent)
+        void HandleServerList( IPacketMsg packetMsg )
         {
-            var listMsg = new ClientMsgProtobuf<MsgClientServerList>(cliEvent.Data);
+            var listMsg = new ClientMsgProtobuf<CMsgClientServerList>( packetMsg );
 
-            foreach (var server in listMsg.Msg.Proto.servers)
+            foreach (var server in listMsg.Body.servers)
             {
-                EServerType type = (EServerType)server.server_type;
+                EServerType type = ( EServerType )server.server_type;
 
                 List<IPEndPoint> endpointList;
-                if (!serverMap.TryGetValue(type, out endpointList))
+                if ( !serverMap.TryGetValue( type, out endpointList ) )
                 {
-                    serverMap[type] = endpointList = new List<IPEndPoint>();
+                    serverMap[ type ] = endpointList = new List<IPEndPoint>();
                 }
 
-                endpointList.Add(new IPEndPoint(NetHelpers.GetIPAddress(NetHelpers.EndianSwap(server.server_ip)), (int)server.server_port));
+                endpointList.Add( new IPEndPoint( NetHelpers.GetIPAddress( NetHelpers.EndianSwap( server.server_ip ) ), ( int )server.server_port ) );
             }
         }
         #endregion

@@ -81,9 +81,7 @@ namespace SteamKit2
                 return;
 
             //TODO: Change this
-            MemoryStream ms = new MemoryStream();
-            clientMsg.Serialize( ms );
-            byte[] data = ms.ToArray();
+            byte[] data = clientMsg.Serialize();
 
             if ( NetFilter != null )
             {
@@ -115,9 +113,15 @@ namespace SteamKit2
                     if ( packetHeader.Length != 8 )
                         throw new IOException( "Connection lost while reading packet header" );
 
-                    DataStream ds = new DataStream( packetHeader );
-                    uint packetLen = ds.ReadUInt32();
-                    uint packetMagic = ds.ReadUInt32();
+                    uint packetLen = 0;
+                    uint packetMagic = 0;
+
+                    using ( var ms = new MemoryStream( packetHeader ))
+                    using ( var br = new BinaryReader( ms ) )
+                    {
+                        packetLen = br.ReadUInt32();
+                        packetMagic = br.ReadUInt32();
+                    }
 
                     if ( packetMagic != TcpConnection.MAGIC )
                         throw new IOException( "RecvCompleted got a packet with invalid magic!" );
