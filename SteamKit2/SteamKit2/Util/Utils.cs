@@ -308,11 +308,17 @@ namespace SteamKit2
 
         public static IPAddress GetIPAddress( uint ipAddr )
         {
-            return new IPAddress( BitConverter.GetBytes( ipAddr ) );
+            byte[] addrBytes = BitConverter.GetBytes( ipAddr );
+            Array.Reverse( addrBytes );
+
+            return new IPAddress( addrBytes );
         }
         public static uint GetIPAddress( IPAddress ipAddr )
         {
-            return BitConverter.ToUInt32( ipAddr.GetAddressBytes(), 0 );
+            byte[] addrBytes = ipAddr.GetAddressBytes();
+            Array.Reverse( addrBytes );
+
+            return BitConverter.ToUInt32( addrBytes, 0 );
         }
 
 
