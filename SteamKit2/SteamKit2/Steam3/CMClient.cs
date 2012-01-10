@@ -368,7 +368,7 @@ namespace SteamKit2
                     serverMap[ type ] = endpointList = new List<IPEndPoint>();
                 }
 
-                endpointList.Add( new IPEndPoint( NetHelpers.GetIPAddress( NetHelpers.EndianSwap( server.server_ip ) ), ( int )server.server_port ) );
+                endpointList.Add( new IPEndPoint( NetHelpers.GetIPAddress( server.server_ip ), ( int )server.server_port ) );
             }
         }
         #endregion
