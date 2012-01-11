@@ -29,7 +29,7 @@ namespace SteamKit2
 
         public IPAddress ToIPAddress()
         {
-            return NetHelpers.GetIPAddress( IPAddress );
+            return NetHelpers.GetIPAddress( NetHelpers.EndianSwap( IPAddress ) );
         }
 
         public IPEndPoint ToEndPoint()
