@@ -50,6 +50,9 @@ namespace SteamKit2
         /// <param name="name">The name.</param>
         public void SetPersonaName( string name )
         {
+            // cache the local name right away, so that early calls to SetPersonaState don't reset the set name
+            cache.LocalUser.Name = name;
+
             var stateMsg = new ClientMsgProtobuf<CMsgClientChangeStatus>( EMsg.ClientChangeStatus );
             stateMsg.Body.persona_state = ( uint )cache.LocalUser.PersonaState;
             stateMsg.Body.player_name = name;
@@ -71,6 +74,8 @@ namespace SteamKit2
         /// <param name="state">The state.</param>
         public void SetPersonaState( EPersonaState state )
         {
+            cache.LocalUser.PersonaState = state;
+
             var stateMsg = new ClientMsgProtobuf<CMsgClientChangeStatus>( EMsg.ClientChangeStatus );
             stateMsg.Body.persona_state = ( uint )state;
             stateMsg.Body.player_name = cache.LocalUser.Name;
