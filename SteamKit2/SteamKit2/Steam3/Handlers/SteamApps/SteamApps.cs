@@ -74,9 +74,21 @@ namespace SteamKit2
         /// </summary>
         /// <param name="app">The app to request information for.</param>
         /// <param name="supportsBatches">if set to <c>true</c>, the request supports batches.</param>
-        public void GetAppInfo( AppDetails app, bool supportsBatches = false )
+        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="JobCallback"/>.</returns>
+        public ulong GetAppInfo( AppDetails app, bool supportsBatches = false )
         {
-            GetAppInfo( new AppDetails[] { app }, supportsBatches );
+            return GetAppInfo( new AppDetails[] { app }, supportsBatches );
+        }
+        /// <summary>
+        /// Requests app information for a single app. Use the overload for requesting information on a batch of apps.
+        /// Results are returned in a <see cref="AppInfoCallback"/> callback.
+        /// </summary>
+        /// <param name="app">The app to request information for.</param>
+        /// <param name="supportsBatches">if set to <c>true</c>, the request supports batches.</param>
+        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="JobCallback"/>.</returns>
+        public ulong GetAppInfo( uint app, bool supportsBatches = false )
+        {
+            return GetAppInfo( new uint[] { app }, supportsBatches );
         }
         /// <summary>
         /// Requests app information for a list of apps.
@@ -84,9 +96,10 @@ namespace SteamKit2
         /// </summary>
         /// <param name="apps">The apps to request information for.</param>
         /// <param name="supportsBatches">if set to <c>true</c>, the request supports batches.</param>
-        public void GetAppInfo( IEnumerable<uint> apps, bool supportsBatches = false )
+        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="JobCallback"/>.</returns>
+        public ulong GetAppInfo( IEnumerable<uint> apps, bool supportsBatches = false )
         {
-            GetAppInfo( apps.Select( a => new AppDetails { AppID = a } ), supportsBatches );
+            return GetAppInfo( apps.Select( a => new AppDetails { AppID = a } ), supportsBatches );
         }
         /// <summary>
         /// Requests app information for a list of apps.
@@ -94,9 +107,11 @@ namespace SteamKit2
         /// </summary>
         /// <param name="apps">The apps to request information for.</param>
         /// <param name="supportsBatches">if set to <c>true</c>, the request supports batches.</param>
-        public void GetAppInfo( IEnumerable<AppDetails> apps, bool supportsBatches = false )
+        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="JobCallback"/>.</returns>
+        public ulong GetAppInfo( IEnumerable<AppDetails> apps, bool supportsBatches = false )
         {
             var request = new ClientMsgProtobuf<CMsgClientAppInfoRequest>( EMsg.ClientAppInfoRequest );
+            request.SourceJobID = Client.GetNextJobID();
 
             request.Body.apps.AddRange( apps.Select( a =>
             {
@@ -114,6 +129,8 @@ namespace SteamKit2
             request.Body.supports_batches = supportsBatches;
 
             this.Client.Send( request );
+
+            return request.SourceJobID;
         }
 
         /// <summary>
@@ -122,9 +139,10 @@ namespace SteamKit2
         /// </summary>
         /// <param name="packageId">The package id to request information for.</param>
         /// <param name="metaDataOnly">if set to <c>true</c>, request metadata only.</param>
-        public void GetPackageInfo( uint packageId, bool metaDataOnly = false )
+        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="JobCallback"/>.</returns>
+        public ulong GetPackageInfo( uint packageId, bool metaDataOnly = false )
         {
-            GetPackageInfo( new uint[] { packageId }, metaDataOnly );
+            return GetPackageInfo( new uint[] { packageId }, metaDataOnly );
         }
         /// <summary>
         /// Requests package information for a list of packages.
@@ -132,14 +150,19 @@ namespace SteamKit2
         /// </summary>
         /// <param name="packageId">The packages to request information for.</param>
         /// <param name="metaDataOnly">if set to <c>true</c> to request metadata only.</param>
-        public void GetPackageInfo( IEnumerable<uint> packageId, bool metaDataOnly = false )
+        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="JobCallback"/>.</returns>
+        public ulong GetPackageInfo( IEnumerable<uint> packageId, bool metaDataOnly = false )
         {
             var request = new ClientMsgProtobuf<CMsgClientPackageInfoRequest>( EMsg.ClientPackageInfoRequest );
+
+            request.SourceJobID = Client.GetNextJobID();
 
             request.Body.package_ids.AddRange( packageId );
             request.Body.meta_data_only = metaDataOnly;
 
             this.Client.Send( request );
+
+            return request.SourceJobID;
         }
 
         /// <summary>
@@ -234,10 +257,12 @@ namespace SteamKit2
             var infoResponse = new ClientMsgProtobuf<CMsgClientAppInfoResponse>( packetMsg );
 
 #if STATIC_CALLBACKS
-            var callback = new AppInfoCallback( Client, infoResponse.Body );
+            var innerCallback = new AppInfoCallback( Client, infoResponse.Body );
+            var callback = new SteamClient.JobCallback<AppInfoCallback>( Client, infoResponse.TargetJobID, innerCallback );
             SteamClient.PostCallback( callback );
 #else
-            var callback = new AppInfoCallback( infoResponse.Body );
+            var innerCallback = new AppInfoCallback( infoResponse.Body );
+            var callback = new SteamClient.JobCallback<AppInfoCallback>( infoResponse.TargetJobID, innerCallback );
             this.Client.PostCallback( callback );
 #endif
         }
@@ -246,10 +271,12 @@ namespace SteamKit2
             var response = new ClientMsgProtobuf<CMsgClientPackageInfoResponse>( packetMsg );
 
 #if STATIC_CALLBACKS
-            var callback = new PackageInfoCallback( Client, response.Body );
+            var innerCallback = new PackageInfoCallback( Client, response.Body );
+            var callback = new SteamClient.JobCallback<PackageInfoCallback>( Client, response.TargetJobID, innerCallback );
             SteamClient.PostCallback( callback );
 #else
-            var callback = new PackageInfoCallback( response.Body );
+            var innerCallback = new PackageInfoCallback( response.Body );
+            var callback = new SteamClient.JobCallback<PackageInfoCallback>( response.TargetJobID, innerCallback );
             this.Client.PostCallback( callback );
 #endif
         }

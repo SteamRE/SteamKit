@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Diagnostics;
 
 namespace SteamKit2
 {
@@ -38,6 +39,8 @@ namespace SteamKit2
             internal JobCallback( ulong jobId, T callback )
 #endif
             {
+                Debug.Assert( jobId != ulong.MaxValue, "JobCallback used for non job based callback!" );
+
                 JobID = jobId;
                 Callback = callback;
             }
