@@ -164,7 +164,7 @@ namespace SteamKit2
 
                 // the rest of the data is the payload
                 int payloadOffset = ( int )ms.Position;
-                int payloadLen = ( int )( ms.Position - ms.Length );
+                int payloadLen = ( int )( ms.Length - ms.Position );
 
                 Payload.Write( data, payloadOffset, payloadLen );
             }
