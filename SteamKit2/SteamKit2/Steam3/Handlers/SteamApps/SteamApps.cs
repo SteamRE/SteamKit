@@ -171,7 +171,7 @@ namespace SteamKit2
         /// </summary>
         /// <param name="lastChangeNumber">The last change number value.</param>
         /// <param name="sendChangelist">if set to <c>true</c>, request a change list.</param>
-        public void GetAppChanges( uint lastChangeNumber = 0, bool sendChangelist = false  )
+        public void GetAppChanges( uint lastChangeNumber = 0, bool sendChangelist = true  )
         {
             var request = new ClientMsgProtobuf<CMsgClientAppInfoUpdate>( EMsg.ClientAppInfoUpdate );
 
