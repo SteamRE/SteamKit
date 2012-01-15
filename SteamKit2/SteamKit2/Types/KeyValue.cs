@@ -14,6 +14,14 @@ namespace SteamKit2
 {
     public class KVTextReader : StreamReader
     {
+        static Dictionary<char, char> escapedMapping = new Dictionary<char, char>
+        {
+            { 'n', '\n' },
+            { 'r', '\r' },
+            { 't', '\t' },
+            // todo: any others?
+        };
+
         public KVTextReader( KeyValue kv, Stream input )
             : base( input )
         {
@@ -134,8 +142,26 @@ namespace SteamKit2
                 Read();
 
                 var sb = new StringBuilder();
-                while ( !EndOfStream && ( char )Peek() != '"' )
+                while ( !EndOfStream )
                 {
+                    if ( Peek() == '\\' )
+                    {
+                        Read();
+
+                        char escapedChar = ( char )Read();
+                        char replacedChar;
+
+                        if ( escapedMapping.TryGetValue( escapedChar, out replacedChar ) )
+                            sb.Append( replacedChar );
+                        else
+                            sb.Append( escapedChar );
+
+                        continue;
+                    }
+
+                    if ( Peek() == '"' )
+                        break;
+
                     sb.Append( ( char )Read() );
                 }
 
