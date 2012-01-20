@@ -11,7 +11,7 @@
 
 
 
-bool (__cdecl *Encrypt_Orig)(const uint8*, uint32, uint8*, uint32*, const uint8*, uint32) = 0;
+bool (__cdecl *Encrypt_Orig)(const uint8*, uint32, const uint8*, uint32, uint8*, uint32*, const uint8*, uint32) = 0;
 bool (__cdecl *Decrypt_Orig)(const uint8*, uint32, uint8*, uint32*, const uint8*, uint32) = 0;
 bool (__cdecl *GetMessageFn)( int * ) = 0;
 
@@ -113,7 +113,7 @@ CCrypto::CCrypto()
 
 	if ( eMsgList.size() != 0 )
 	{
-		// should only delete our existing files if we have somehting new to dump
+		// should only delete our existing files if we have something new to dump
 		g_pLogger->DeleteFile( "emsg_list.txt", false );
 		g_pLogger->DeleteFile( "emsg_list_detailed.txt", false );
 
@@ -133,7 +133,7 @@ CCrypto::CCrypto()
 	}
 
 
-	static bool (__cdecl *encrypt)(const uint8*, uint32, uint8*, uint32*, const uint8*, uint32) = &CCrypto::SymmetricEncrypt;
+	static bool (__cdecl *encrypt)(const uint8*, uint32, const uint8*, uint32, uint8*, uint32*, const uint8*, uint32) = &CCrypto::SymmetricEncrypt;
 	static bool (__cdecl *decrypt)(const uint8*, uint32, uint8*, uint32*, const uint8*, uint32) = &CCrypto::SymmetricDecrypt;
 
 	if ( bEncrypt )
@@ -181,11 +181,11 @@ CCrypto::~CCrypto()
 
 
 
-bool __cdecl CCrypto::SymmetricEncrypt( const uint8 *pubPlaintextData, uint32 cubPlaintextData, uint8 *pubEncryptedData, uint32 *pcubEncryptedData, const uint8 *pubKey, uint32 cubKey )
+bool __cdecl CCrypto::SymmetricEncrypt( const uint8 *pubPlaintextData, uint32 cubPlaintextData, const uint8 *pIV, uint32 cubIV, uint8 *pubEncryptedData, uint32 *pcubEncryptedData, const uint8 *pubKey, uint32 cubKey )
 {
 	g_pLogger->LogNetMessage( k_eNetOutgoing, (uint8 *)pubPlaintextData, cubPlaintextData );
 
-	return (*Encrypt_Orig)( pubPlaintextData, cubPlaintextData, pubEncryptedData, pcubEncryptedData, pubKey, cubKey );
+	return (*Encrypt_Orig)( pubPlaintextData, cubPlaintextData, pIV, cubIV, pubEncryptedData, pcubEncryptedData, pubKey, cubKey );
 }
 
 bool __cdecl CCrypto::SymmetricDecrypt( const uint8 *pubEncryptedData, uint32 cubEncryptedData, uint8 *pubPlaintextData, uint32 *pcubPlaintextData, const uint8 *pubKey, uint32 cubKey )
