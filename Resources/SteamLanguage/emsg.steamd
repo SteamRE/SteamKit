@@ -1087,6 +1087,7 @@ enum EMsg
 	AMClientRemoveFriendFromGroupResponse = 5569;
 	ClientAMGetPersonaNameHistory = 5570;
 	ClientAMGetPersonaNameHistoryResponse = 5571;
+	ClientFriendMsgEchoToSender = 5578;
 	
 	BaseDFS = 5600;
 	DFSGetFile = 5601;
@@ -1146,6 +1147,8 @@ enum EMsg
 	ClientMDSRegisterAppBuildResponse = 5839;
 	ClientMDSSetAppBuildLive = 5840;
 	ClientMDSSetAppBuildLiveResponse = 5841;
+	ClientMDSGetPrevDepotBuild = 5842;
+	ClientMDSGetPrevDepotBuildResponse = 5843;
 	
 	CSBase = 6200;
 	
@@ -1153,6 +1156,7 @@ enum EMsg
 	GMSGameServerReplicate = 6401;
 	ClientGMSServerQuery = 6403;
 	GMSClientServerQueryResponse = 6404;
+	GameServerOutOfDate = 6407;
 	
 	MMSBase = 6600;
 	ClientMMSCreateLobby = 6601;
@@ -1187,6 +1191,7 @@ enum EMsg
 	NonStdMsgChase = 6806;
 	NonStdMsgDFSTransfer = 6807;
 	NonStdMsgTests = 6808;
+	NonStdMsgUMQpipeAAPL = 6809;
 	
 	UDSBase = 7000;
 	ClientUDSP2PSessionStarted = 7001;
