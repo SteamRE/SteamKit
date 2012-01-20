@@ -224,7 +224,7 @@ message CSODOTALobby {
 	optional bool leaver_detected = 27;
 	optional .DOTA_CM_PICK cm_pick = 28 [default = DOTA_CM_RANDOM];
 	repeated .CLobbyPendingPlayerReport pending_player_reports = 29 [(hidden) = true];
-	optional uint32 match_id = 30 [(hidden) = true];
+	optional uint32 match_id = 30;
 	optional bool allow_spectating = 31 [default = true];
 	optional uint32 average_rank = 32 [(hidden) = true];
 	optional fixed64 load_game_lobby_id = 33;
@@ -936,11 +936,19 @@ message CMsgGCMatchDetailsResponse {
 
 message CMsgDOTAProfileRequest {
 	optional uint32 account_id = 1;
+	optional bool request_name = 2;
 }
 
 message CMsgDOTAProfileResponse {
+	message PlayedHero {
+		optional uint32 hero_id = 1;
+		optional uint32 wins = 2;
+	}
+
 	optional uint32 result = 1;
 	optional .CSODOTAGameAccountClient game_account_client = 2;
 	repeated .CMsgDOTAMatch latest_matches = 3;
+	repeated .CMsgDOTAProfileResponse.PlayedHero heroes = 4;
+	optional string player_name = 5;
 }
 
