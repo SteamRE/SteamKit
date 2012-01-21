@@ -46,20 +46,27 @@ CCrypto::CCrypto()
 
 	CSimpleScan steamClientScan( "steamclient.dll" );
 
+
+	char *pEncrypt;
 	bool bEncrypt = steamClientScan.FindFunction(
-		"\x55\x8B\xEC\x6A\xFF\x68\x01\x47\x32\x38\x64\xA1\x00\x00\x00\x00\x50\x64\x89\x25\x00\x00\x00\x00\x81\xEC\xD4\x08\x00\x00",
-		"xxxxxx????xxxxxxxxxxxxxxxxxxxx",
-		(void **)&Encrypt_Orig
+		"\x8b\x4b\x1c\x8b\x31\x32\xc0\x88\x45\xe6\x88\x45\xe7\x8b\x43\x08\x8d\x14\x3e\x3b\xd0\x89\x7d\xe0\x72\x00\x8b\x4b\x0c\x03\xc1\x3b\xc7\x72\x00\x56\xe8\x00\x00\x00\x00\x83\xc4\x04\x89\x45\xe0\xc6\x45\xe7\x01",
+		"xxxxxxxxxxxxxxxxxxxxxxxxx?xxxxxxxx?xx????xxxxxxxxxx",
+		(void **)&pEncrypt
 	);
+
+	Encrypt_Orig = (bool (__cdecl *)(const uint8*, uint32, const uint8*, uint32, uint8*, uint32*, const uint8*, uint32))( pEncrypt - 0x14D ); // god help this survive
 
 	g_pLogger->LogConsole( "CCrypto::SymmetricEncrypt = 0x%x \n", Encrypt_Orig );
 
 
+	char *pDecrypt;
 	bool bDecrypt = steamClientScan.FindFunction(
-		"\x55\x8B\xEC\x6A\xFF\x68\x21\x74\x28\x38\x64\xA1\x00\x00\x00\x00\x50\x64\x89\x25\x00\x00\x00\x00\x81\xEC\xDC\x04\x00\x00",
-		"xxxxxx????xxxxxxxxxxxxxxxxxxx",
-		(void **)&Decrypt_Orig
+		"\x8b\x4b\x14\x8b\x53\x0c\x8b\x31\x32\xc0\x88\x45\xe6\x88\x45\xe7\x8b\x43\x08\x8d\x0c\x10\x3b\xcf\x89\x7d\xe0\x72\x00\x8d\x14\x3e\x3b\xd0\x72\x00\x56\xe8\x00\x00\x00\x00\x83\xc4\x04\x89\x45\xe0\xc6\x45\xe7\x01",
+		"xxxxxxxxxxxxxxxxxxxxxxxxxxxx?xxxxxx?xx????xxxxxxxxxx",
+		(void **)&pDecrypt
 	);
+
+	Decrypt_Orig = (bool (__cdecl *)(const uint8*, uint32, uint8*, uint32*, const uint8*, uint32))( pDecrypt - 0x14D ); // begin praying
 
 	g_pLogger->LogConsole( "CCrypto::SymmetricDecrypt = 0x%x\n", Decrypt_Orig );
 
