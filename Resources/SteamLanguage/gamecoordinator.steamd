@@ -10,7 +10,7 @@ class MsgGCHdrProtoBuf
 	protomask EGCMsg msg = EGCMsg::Invalid;
 	int headerLength;
 
-	proto<headerLength> SteamKit2.GC.CMsgProtoBufHeader protoHeader;
+	proto<headerLength> SteamKit2.Internal.GC.CMsgProtoBufHeader protoHeader;
 };
 
 class MsgGCHdr
