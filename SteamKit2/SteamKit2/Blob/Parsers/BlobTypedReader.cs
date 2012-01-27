@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Reflection.Emit;
 using SteamKit2;
 
-namespace SteamKit2
+namespace SteamKit2.Blob
 {
     [AttributeUsage(AttributeTargets.Property | 
                     AttributeTargets.Class |

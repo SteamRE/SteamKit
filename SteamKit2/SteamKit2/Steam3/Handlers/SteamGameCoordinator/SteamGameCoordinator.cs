@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using SteamKit2.Internal;
 
 namespace SteamKit2
 {
@@ -11,6 +12,19 @@ namespace SteamKit2
     /// </summary>
     public sealed partial class SteamGameCoordinator : ClientMsgHandler
     {
+
+
+        public void Send( byte[] data, uint appId )
+        {
+            var clientMsg = new ClientMsgProtobuf<CMsgAMGCClientRelay>( EMsg.ClientToGC );
+
+            clientMsg.Body.msgtype = BitConverter.ToUInt32( data, 0 );
+            clientMsg.Body.appid = appId;
+
+            clientMsg.Body.payload = data;
+
+            this.Client.Send( clientMsg );
+        }
 
         /*
         /// <summary>
@@ -66,7 +80,7 @@ namespace SteamKit2
         /// <summary>
         /// Handles a client message. This should not be called directly.
         /// </summary>
-        /// <param name="e">The <see cref="SteamKit2.ClientMsgEventArgs"/> instance containing the event data.</param>
+        /// <param name="packetMsg">The packet message that contains the data.</param>
         public override void HandleMsg( IPacketMsg packetMsg )
         {
             if ( packetMsg.MsgType == EMsg.ClientFromGC )

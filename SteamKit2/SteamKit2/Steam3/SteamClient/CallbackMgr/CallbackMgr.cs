@@ -29,7 +29,7 @@ namespace SteamKit2
         public Type CallbackType { get { return typeof( TCall ); } }
 
 
-        public Callback( CallbackFunc func, CallbackMgr mgr )
+        public Callback( CallbackFunc func, CallbackManager mgr )
         {
             this.func = func;
             mgr.Register( this );
@@ -42,7 +42,7 @@ namespace SteamKit2
         }
     }
 
-    public sealed class CallbackMgr
+    public sealed class CallbackManager
     {
 #if !STATIC_CALLBACKS
         SteamClient client;
@@ -52,13 +52,13 @@ namespace SteamKit2
 
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CallbackMgr"/> class.
+        /// Initializes a new instance of the <see cref="CallbackManager"/> class.
         /// </summary>
         /// <param name="client">The client.</param>
 #if STATIC_CALLBACKS
-        public CallbackMgr()
+        public CallbackManager()
 #else
-        public CallbackMgr( SteamClient client )
+        public CallbackManager( SteamClient client )
 #endif
         {
             registeredCallbacks = new List<ICallback>();

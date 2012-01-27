@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using SteamKit2.Internal;
 
 namespace SteamKit2
 {
@@ -60,6 +61,7 @@ namespace SteamKit2
             this.AddHandler( new SteamGameServer() );
             this.AddHandler( new SteamUserStats() );
             this.AddHandler( new SteamMasterServer() );
+            this.AddHandler( new SteamCloud() );
         }
 
 

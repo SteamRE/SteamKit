@@ -16,7 +16,7 @@ using System.Management;
 
 namespace SteamKit2
 {
-    public static class Utils
+    static class Utils
     {
         public static DateTime DateTimeFromUnixTime( uint unixTime )
         {
@@ -176,7 +176,7 @@ namespace SteamKit2
         }
     }
 
-    public static class MsgUtil
+    static class MsgUtil
     {
         private static readonly uint ProtoMask = 0x80000000;
         private static readonly uint EMsgMask = ~ProtoMask;

@@ -12,6 +12,7 @@ using System.Text;
 using System.Net;
 using System.IO;
 using System.Threading;
+using SteamKit2.Internal;
 
 namespace SteamKit2
 {
@@ -281,11 +282,11 @@ namespace SteamKit2
         /// <param name="steamId">The SteamID of the chat room.</param>
         public void JoinChat( SteamID steamId )
         {
-            SteamID chatId = steamId.ConvertToUint64(); // copy the steamid so we don't modify it
+            SteamID chatId = steamId.ConvertToUInt64(); // copy the steamid so we don't modify it
 
             var joinChat = new ClientMsg<MsgClientJoinChat>();
 
-            if ( chatId.BClanAccount() )
+            if ( chatId.IsClanAccount )
             {
                 // this steamid is incorrect, so we'll fix it up
                 chatId.AccountInstance = ( uint )SteamID.ChatInstanceFlags.Clan;
@@ -305,9 +306,9 @@ namespace SteamKit2
         /// <param name="message">The message.</param>
         public void SendChatRoomMessage( SteamID steamIdChat, EChatEntryType type, string message )
         {
-            SteamID chatId = steamIdChat.ConvertToUint64(); // copy the steamid so we don't modify it
+            SteamID chatId = steamIdChat.ConvertToUInt64(); // copy the steamid so we don't modify it
 
-            if ( chatId.BClanAccount() )
+            if ( chatId.IsClanAccount )
             {
                 // this steamid is incorrect, so we'll fix it up
                 chatId.AccountInstance = ( uint )SteamID.ChatInstanceFlags.Clan;
@@ -340,7 +341,7 @@ namespace SteamKit2
         {
             var request = new ClientMsgProtobuf<CMsgClientRequestFriendData>( EMsg.ClientRequestFriendData );
 
-            request.Body.friends.AddRange( steamIdList.Select( sID => sID.ConvertToUint64() ) );
+            request.Body.friends.AddRange( steamIdList.Select( sID => sID.ConvertToUInt64() ) );
             request.Body.persona_state_requested = ( uint )requestedInfo;
 
             this.Client.Send( request );
@@ -360,7 +361,7 @@ namespace SteamKit2
         /// <summary>
         /// Handles a client message. This should not be called directly.
         /// </summary>
-        /// <param name="e">The <see cref="SteamKit2.ClientMsgEventArgs"/> instance containing the event data.</param>
+        /// <param name="packetMsg">The packet message that contains the data.</param>
         public override void HandleMsg( IPacketMsg packetMsg )
         {
             switch ( packetMsg.MsgType )
@@ -449,7 +450,7 @@ namespace SteamKit2
                 {
                     SteamID friendId = friendObj.ulfriendid;
 
-                    if ( friendId.BIndividualAccount() )
+                    if ( friendId.IsIndividualAccount )
                     {
                         var user = cache.GetUser( friendId );
 
@@ -468,7 +469,7 @@ namespace SteamKit2
                         }
 
                     }
-                    else if ( friendId.BClanAccount() )
+                    else if ( friendId.IsClanAccount )
                     {
                         var clan = cache.Clans.GetAccount( friendId );
 
@@ -526,7 +527,7 @@ namespace SteamKit2
 
                 SteamID sourceId = friend.steamid_source;
 
-                if ( friendId.BIndividualAccount() )
+                if ( friendId.IsIndividualAccount )
                 {
                     User cacheFriend = cache.GetUser( friendId );
 
@@ -546,7 +547,7 @@ namespace SteamKit2
                         cacheFriend.GameAppID = friend.game_played_app_id;
                     }
                 }
-                else if ( friendId.BClanAccount() )
+                else if ( friendId.IsClanAccount )
                 {
                     Clan cacheClan = cache.Clans.GetAccount( friendId );
 

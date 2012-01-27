@@ -17,7 +17,7 @@ namespace SteamKit2
     /// <summary>
     /// Represents a Tcp socket.
     /// </summary>
-    public class TcpSocket
+    class TcpSocket
     {
         Socket sock;
         bool bConnected;

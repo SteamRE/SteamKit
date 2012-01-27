@@ -6,6 +6,7 @@
 
 using System;
 using System.IO;
+using SteamKit2.Internal;
 
 namespace SteamKit2
 {

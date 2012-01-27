@@ -14,7 +14,7 @@ using Classless.Hasher;
 
 namespace SteamKit2
 {
-    public static class CryptoHelper
+    static class CryptoHelper
     {
         private static RSACryptoServiceProvider rsaProvider;
 		

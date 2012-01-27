@@ -5,9 +5,9 @@ using System.Text;
 using System.Reflection;
 using System.Reflection.Emit;
 
-namespace SteamKit2
+namespace SteamKit2.Blob
 {
-    public class CacheContext
+    class CacheContext
     {
         public Dictionary<Type, FastPropertyInfo[]> FastPropCache { get; set; }
         public Dictionary<MemberInfo, object[]> MemberAttribMap { get; set; }
@@ -21,7 +21,7 @@ namespace SteamKit2
         }
     }
 
-    public static class CacheUtil
+    static class CacheUtil
     {
         public static FastPropertyInfo[] GetCachedPropertyInfo(this Type t, CacheContext context)
         {

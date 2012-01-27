@@ -12,7 +12,7 @@ using System.Globalization;
 
 namespace SteamKit2
 {
-    public class KVTextReader : StreamReader
+    class KVTextReader : StreamReader
     {
         static Dictionary<char, char> escapedMapping = new Dictionary<char, char>
         {
@@ -406,7 +406,7 @@ namespace SteamKit2
             }
         }
 
-        public void RecursiveLoadFromBuffer( KVTextReader kvr )
+        internal void RecursiveLoadFromBuffer( KVTextReader kvr )
         {
             bool wasQuoted;
             bool wasConditional;

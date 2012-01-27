@@ -10,7 +10,7 @@
 
 // Generated from: steammessages.proto
 // Note: requires additional types generated from: google/protobuf/descriptor.proto
-namespace SteamKit2.GC
+namespace SteamKit2.Internal.GC
 {
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgProtoBufHeader")]
   public partial class CMsgProtoBufHeader : global::ProtoBuf.IExtensible

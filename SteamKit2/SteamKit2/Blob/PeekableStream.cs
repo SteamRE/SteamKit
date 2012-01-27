@@ -1,9 +1,9 @@
 ﻿using System;
 using System.IO;
 
-namespace SteamKit2
+namespace SteamKit2.Blob
 {
-    public class PeekableStream : Stream
+    class PeekableStream : Stream
     {
         private Stream input;
 

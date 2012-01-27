@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Collections.ObjectModel;
 using System.IO;
+using SteamKit2.Internal;
 
 namespace SteamKit2
 {

@@ -16,7 +16,7 @@ namespace SteamKit2
     /// <summary>
     /// Helper data manip class that allows reading binary data from a byte array.
     /// </summary>
-    public class DataStream : Stream
+    class DataStream : Stream
     {
 
         /// <summary>

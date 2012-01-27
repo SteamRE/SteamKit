@@ -7,13 +7,13 @@ using System.Reflection.Emit;
 
 // http://www.codeproject.com/KB/cs/Dynamic_Code_Generation.aspx
 
-namespace SteamKit2
+namespace SteamKit2.Blob
 {
-    public delegate object GetHandler(object source);
-    public delegate void SetHandler(object source, object value);
-    public delegate object InstantiateObjectHandler();
+    delegate object GetHandler(object source);
+    delegate void SetHandler(object source, object value);
+    delegate object InstantiateObjectHandler();
 
-    public sealed class DynamicMethodCompiler
+    sealed class DynamicMethodCompiler
     {
         // DynamicMethodCompiler
         private DynamicMethodCompiler() { }

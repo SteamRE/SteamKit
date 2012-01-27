@@ -13,6 +13,11 @@ namespace SteamKit2
 {
     public sealed class WebAPI
     {
+        static WebAPI()
+        {
+            ServicePointManager.Expect100Continue = false;
+        }
+
         public sealed class Interface : DynamicObject, IDisposable
         {
             WebClient webClient;
@@ -20,7 +25,7 @@ namespace SteamKit2
             string iface;
             string apiKey;
 
-            const string API_ROOT = "http://api.steampowered.com/";
+            const string API_ROOT = "api.steampowered.com";
 
             static Regex funcNameRegex = new Regex(
                 @"(?<name>[a-zA-Z]+)(?<version>\d*)",
@@ -37,30 +42,57 @@ namespace SteamKit2
             }
 
 
-            public KeyValue Call( string func, int version = 1, Dictionary<string, string> args = null )
+            public KeyValue Call( string func, int version = 1, Dictionary<string, string> args = null, string method = WebRequestMethods.Http.Get, bool secure = false )
             {
-                StringBuilder urlBuilder = new StringBuilder();
+                if ( args == null )
+                    args = new Dictionary<string, string>();
 
+                StringBuilder urlBuilder = new StringBuilder();
+                StringBuilder paramBuilder = new StringBuilder();
+
+                urlBuilder.Append( secure ? "https://" : "http://" );
                 urlBuilder.Append( API_ROOT );
-                urlBuilder.AppendFormat( "{0}/{1}/v{2}/?format=vdf", iface, func, version );
+                urlBuilder.AppendFormat( "/{0}/{1}/v{2}", iface, func, version );
+
+                bool isGet = method.Equals( WebRequestMethods.Http.Get, StringComparison.OrdinalIgnoreCase );
+
+                if ( isGet )
+                {
+                    // if we're doing a GET request, we'll build the params onto the url
+                    paramBuilder = urlBuilder;
+                    paramBuilder.Append( "/?" ); // start our GET params
+                }
+
+                args.Add( "format", "vdf" );
 
                 if ( !string.IsNullOrEmpty( apiKey ) )
                 {
-                    urlBuilder.AppendFormat( "&key={0}", apiKey );
+                    args.Add( "key", apiKey );
                 }
 
-                if ( args != null )
+                // append any args
+                paramBuilder.Append( string.Join( "&", args.Select( kvp =>
                 {
-                    foreach ( var kvp in args )
-                    {
-                        string key = WebHelpers.UrlEncode( kvp.Key );
-                        string value = WebHelpers.UrlEncode( kvp.Value );
+                    string key = WebHelpers.UrlEncode( kvp.Key );
+                    string value = kvp.Value; // WebHelpers.UrlEncode( kvp.Value );
 
-                        urlBuilder.AppendFormat( "&{0}={1}", key, value );
-                    }
+                    return string.Format( "{0}={1}", key, value );
+                } ) ) );
+
+
+                byte[] data = null;
+
+                if ( isGet )
+                {
+                    data = webClient.DownloadData( urlBuilder.ToString() );
                 }
+                else
+                {
+                    byte[] postData = Encoding.Default.GetBytes( paramBuilder.ToString() );
 
-                byte[] data = webClient.DownloadData( urlBuilder.ToString() );
+                    webClient.Headers.Add( HttpRequestHeader.ContentType, "application/x-www-form-urlencoded" );
+                    data = webClient.UploadData( urlBuilder.ToString(), postData );
+                }
                 
                 KeyValue kv = new KeyValue();
 
@@ -84,10 +116,36 @@ namespace SteamKit2
 
                 var apiArgs = new Dictionary<string, string>();
 
+                string requestMethod = WebRequestMethods.Http.Get;
+                bool secure = false;
+
                 // convert named arguments into key value pairs
                 for ( int x = 0 ; x < args.Length ; x++ )
                 {
-                    apiArgs.Add( binder.CallInfo.ArgumentNames[ x ], args[ x ].ToString() );
+                    string argName = binder.CallInfo.ArgumentNames[ x ];
+                    object argValue = args[ x ];
+
+                    if ( argName.Equals( "method", StringComparison.OrdinalIgnoreCase ) )
+                    {
+                        requestMethod = argValue.ToString();
+                        continue;
+                    }
+
+                    if ( argName.Equals( "secure", StringComparison.OrdinalIgnoreCase ) )
+                    {
+                        try
+                        {
+                            secure = ( bool )argValue;
+                        }
+                        catch ( InvalidCastException )
+                        {
+                            throw new ArgumentException( "The parameter 'secure' is a reserved parameter that must be of type bool." );
+                        }
+
+                        continue;
+                    }
+
+                    apiArgs.Add( argName, argValue.ToString() );
                 }
 
                 Match match = funcNameRegex.Match( binder.Name );
@@ -110,7 +168,7 @@ namespace SteamKit2
                 }
 
 
-                result = Call( functionName, version, apiArgs );
+                result = Call( functionName, version, apiArgs, requestMethod, secure );
 
                 return true;
             }
