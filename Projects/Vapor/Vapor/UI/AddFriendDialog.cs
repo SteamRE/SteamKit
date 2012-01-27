@@ -22,7 +22,7 @@ namespace Vapor
             SteamID steamId = new SteamID();
             steamId.SetFromString( txtFriend.Text, Steam3.SteamClient.ConnectedUniverse );
 
-            if ( steamId.IsValid() )
+            if ( steamId.IsValid )
             {
                 Steam3.SteamFriends.AddFriend( steamId );
             }

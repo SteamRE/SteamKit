@@ -64,7 +64,7 @@ namespace Vapor
 
         public static void OpenProfile( SteamID steamId )
         {
-            string friendUrl = string.Format( "http://www.steamcommunity.com/profiles/{0}", steamId.ConvertToUint64() );
+            string friendUrl = string.Format( "http://www.steamcommunity.com/profiles/{0}", steamId.ConvertToUInt64() );
 
             if ( Util.IsMono() )
             {
