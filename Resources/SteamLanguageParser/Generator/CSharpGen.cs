@@ -271,7 +271,7 @@ namespace SteamLanguageParser
                 if (prop.Flags != null && prop.Flags == "steamidmarshal" && typestr == "ulong")
                 {
                     sb.AppendLine( padding + string.Format( "private {0} {1};", typestr, prop.Name ) );
-                    sb.AppendLine( padding + "public SteamID " + propName + " { get { return new SteamID( " + prop.Name + " ); } set { " + prop.Name + " = value.ConvertToUint64(); } }");
+                    sb.AppendLine( padding + "public SteamID " + propName + " { get { return new SteamID( " + prop.Name + " ); } set { " + prop.Name + " = value.ConvertToUInt64(); } }");
                 }
                 else if ( prop.Flags != null && prop.Flags == "boolmarshal" && typestr == "byte" )
                 {
@@ -281,7 +281,7 @@ namespace SteamLanguageParser
                 else if ( prop.Flags != null && prop.Flags == "gameidmarshal" && typestr == "ulong" )
                 {
                     sb.AppendLine( padding + string.Format( "private {0} {1};", typestr, prop.Name ) );
-                    sb.AppendLine( padding + "public GameID " + propName + " { get { return new GameID( " + prop.Name + " ); } set { " + prop.Name + " = value.ToUint64(); } }" );
+                    sb.AppendLine( padding + "public GameID " + propName + " { get { return new GameID( " + prop.Name + " ); } set { " + prop.Name + " = value.ToUInt64(); } }" );
                 }
                 else
                 {
