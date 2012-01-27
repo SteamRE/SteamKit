@@ -33,5 +33,5 @@ class MsgHdrProtoBuf
 	protomask EMsg msg = EMsg::Invalid;
 	int headerLength;
 	
-	proto<headerLength> SteamKit2.CMsgProtoBufHeader proto;
+	proto<headerLength> SteamKit2.Internal.CMsgProtoBufHeader proto;
 };
