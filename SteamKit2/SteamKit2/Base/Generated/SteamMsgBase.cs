@@ -9,7 +9,7 @@
 #pragma warning disable 1591
 
 // Generated from: steammessages_base.proto
-namespace SteamKit2
+namespace SteamKit2.Internal
 {
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgProtoBufHeader")]
   public partial class CMsgProtoBufHeader : global::ProtoBuf.IExtensible

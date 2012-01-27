@@ -3,7 +3,7 @@ using System.Text;
 using System.IO;
 using System.Xml;
 
-namespace SteamKit2
+namespace SteamKit2.Blob
 {
     public class BlobXmlReader : BlobReader
     {

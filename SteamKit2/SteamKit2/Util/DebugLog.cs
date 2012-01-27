@@ -21,6 +21,7 @@ namespace SteamKit2
         /// <summary>
         /// Called when the DebugLog wishes to inform listeners of debug spew.
         /// </summary>
+        /// <param name="category">The category of the message.</param>
         /// <param name="msg">The message to log.</param>
         void WriteLine( string category, string msg );
     }

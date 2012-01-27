@@ -14,7 +14,7 @@ namespace SteamKit2
     /// <summary>
     /// Represents a data packet sent over tcp. Contains a length and payload.
     /// </summary>
-    public class TcpPacket : BinaryWriterEx
+    class TcpPacket : BinaryWriterEx
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="TcpPacket"/> class.

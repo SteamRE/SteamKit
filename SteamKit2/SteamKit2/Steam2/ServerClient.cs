@@ -88,7 +88,7 @@ namespace SteamKit2
         /// Gets the socket of the client.
         /// </summary>
         /// <value>The socket.</value>
-        protected TcpSocket Socket { get; private set; }
+        internal TcpSocket Socket { get; private set; }
         /// <summary>
         /// Gets the remote endpoint of the client.
         /// </summary>

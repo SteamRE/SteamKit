@@ -4,9 +4,9 @@ using System.Reflection;
 using System.Collections.Generic;
 using System.Reflection.Emit;
 
-namespace SteamKit2
+namespace SteamKit2.Blob
 {
-    public enum SuggestedType
+    enum SuggestedType
     {
         StringType,
         Int8Type,
@@ -16,7 +16,7 @@ namespace SteamKit2
         ByteArrayType
     }
 
-    public static class BlobUtil
+    static class BlobUtil
     {
         public static bool IsIntDescriptor(byte[] input)
         {

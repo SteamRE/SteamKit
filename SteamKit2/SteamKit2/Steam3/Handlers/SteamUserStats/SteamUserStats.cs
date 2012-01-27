@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using SteamKit2.Internal;
 
 namespace SteamKit2
 {
@@ -21,10 +22,10 @@ namespace SteamKit2
 
         /// <summary>
         /// Retrieves the number of current players or a given <see cref="GameID"/>.
-        /// Results are returned in a <see cref="NumberOfPlayersCallback"/> from a <see cref="JobCallback"/>.
+        /// Results are returned in a <see cref="NumberOfPlayersCallback"/> from a <see cref="SteamClient.JobCallback&lt;T&gt;"/>.
         /// </summary>
         /// <param name="gameId">The GameID to request the number of players for.</param>
-        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="JobCallback"/>.</returns>
+        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="SteamClient.JobCallback&lt;T&gt;"/>.</returns>
         public ulong GetNumberOfCurrentPlayers( GameID gameId )
         {
             var msg = new ClientMsg<MsgClientGetNumberOfCurrentPlayers>();
@@ -41,7 +42,7 @@ namespace SteamKit2
         /// <summary>
         /// Handles a client message. This should not be called directly.
         /// </summary>
-        /// <param name="e">The <see cref="SteamKit2.ClientMsgEventArgs"/> instance containing the event data.</param>
+        /// <param name="packetMsg">The <see cref="SteamKit2.IPacketMsg"/> instance containing the event data.</param>
         public override void HandleMsg( IPacketMsg packetMsg )
         {
             switch ( packetMsg.MsgType )

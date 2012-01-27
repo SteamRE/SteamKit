@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using SteamKit2.Internal;
 
 namespace SteamKit2
 {
@@ -30,7 +31,7 @@ namespace SteamKit2
             SteamID gsId = new SteamID( 0, 0, Client.ConnectedUniverse, EAccountType.AnonGameServer );
 
             logon.ProtoHeader.client_session_id = 0;
-            logon.ProtoHeader.client_steam_id = gsId.ConvertToUint64();
+            logon.ProtoHeader.client_steam_id = gsId.ConvertToUInt64();
 
             uint localIp = NetHelpers.GetIPAddress( this.Client.LocalIP );
             logon.Body.obfustucated_private_ip = localIp ^ MsgClientLogon.ObfuscationMask;

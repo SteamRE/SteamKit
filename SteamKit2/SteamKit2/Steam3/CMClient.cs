@@ -13,6 +13,7 @@ using System.Diagnostics;
 using System.Net;
 using System.Threading;
 using System.Net.Sockets;
+using SteamKit2.Internal;
 
 namespace SteamKit2
 {
@@ -102,7 +103,7 @@ namespace SteamKit2
         /// <summary>
         /// Connects this client to a Steam3 server.
         /// This begins the process of connecting and encrypting the data channel between the client and the server.
-        /// Results are returned in a <see cref="ConnectCallback"/>.
+        /// Results are returned in a <see cref="SteamClient.ConnectedCallback"/>.
         /// </summary>
         public void Connect()
         {

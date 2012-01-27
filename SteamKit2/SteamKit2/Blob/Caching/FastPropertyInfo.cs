@@ -6,7 +6,7 @@ using System.Globalization;
 // Microsoft Patterns and Practice
 // http://objectbuilder.codeplex.com/
 
-namespace SteamKit2
+namespace SteamKit2.Blob
 {
     /// <summary>
     /// Custom <see cref="PropertyInfo"/> that wraps an existing property and provides 
@@ -14,7 +14,7 @@ namespace SteamKit2
     /// implementations for drastically improved performance over default late-bind 
     /// invoke.
     /// </summary>
-    public class FastPropertyInfo : PropertyInfo
+    class FastPropertyInfo : PropertyInfo
     {
         PropertyInfo property;
         SetHandler setValueImpl = null;

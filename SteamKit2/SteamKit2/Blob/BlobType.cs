@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SteamKit2
+namespace SteamKit2.Blob
 {
     public enum EAutoPreprocessCode
     {

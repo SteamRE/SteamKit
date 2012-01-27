@@ -9,7 +9,7 @@
 #pragma warning disable 1591
 
 // Generated from: content_manifest.proto
-namespace SteamKit2
+namespace SteamKit2.Internal
 {
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ContentManifestPayload")]
   public partial class ContentManifestPayload : global::ProtoBuf.IExtensible

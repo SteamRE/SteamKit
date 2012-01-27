@@ -5,16 +5,17 @@ using System.IO.Compression;
 using System.Diagnostics;
 using System.Security.Cryptography;
 
-namespace SteamKit2
+namespace SteamKit2.Blob
 {
-    public enum FieldKeyType
-    {
-        StringType,
-        IntType
-    }
 
     public class BlobReader : IDisposable
     {
+        public enum FieldKeyType
+        {
+            StringType,
+            IntType
+        }
+
         private const int BlobHeaderLength = 10;
         private const int FieldHeaderLength = 6;
         private const int CompressedHeaderLength = 10;

@@ -47,12 +47,12 @@ namespace SteamKit2
         }
 
 
-        protected TcpPacket GetRawServerList( ESteam2ServerType type, params object[] args )
+        internal TcpPacket GetRawServerList( ESteam2ServerType type, params object[] args )
         {
             return this.GetRawServerList( ( byte )type, args );
         }
 
-        protected TcpPacket GetRawServerList( byte commandOrType, params object[] args )
+        internal TcpPacket GetRawServerList( byte commandOrType, params object[] args )
         {
 
             try

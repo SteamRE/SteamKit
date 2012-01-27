@@ -9,7 +9,7 @@
 #pragma warning disable 1591
 
 // Generated from: encrypted_app_ticket.proto
-namespace SteamKit2
+namespace SteamKit2.Internal
 {
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"EncryptedAppTicket")]
   public partial class EncryptedAppTicket : global::ProtoBuf.IExtensible

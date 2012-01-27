@@ -117,7 +117,7 @@ namespace SteamKit2
             Deserialize(data);
         }
 
-        public Steam3Manifest(DataStream data)
+        internal Steam3Manifest(DataStream data)
         {
             Deserialize(data);
         }

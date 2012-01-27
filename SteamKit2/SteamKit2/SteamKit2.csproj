@@ -75,6 +75,7 @@
     <Compile Include="Base\Generated\GC\SteamMsgBase.cs" />
     <Compile Include="Base\Generated\GC\SteamMsgGC.cs" />
     <Compile Include="Base\Generated\GC\SteamMsgGCSDK.cs" />
+    <Compile Include="Base\Generated\SteamLanguageInternal.cs" />
     <Compile Include="Base\MsgBase.cs" />
     <Compile Include="Base\PacketBase.cs" />
     <Compile Include="Blob\BlobReader.cs" />
@@ -90,6 +91,8 @@
     <Compile Include="Blob\Parsers\BlobXmlReader.cs" />
     <Compile Include="Blob\PeekableStream.cs" />
     <Compile Include="Steam3\CDNClient.cs" />
+    <Compile Include="Steam3\Handlers\SteamCloud\Callbacks.cs" />
+    <Compile Include="Steam3\Handlers\SteamCloud\SteamCloud.cs" />
     <Compile Include="Steam3\Handlers\SteamGameServer\Callbacks.cs" />
     <Compile Include="Steam3\Handlers\SteamGameServer\SteamGameServer.cs" />
     <Compile Include="Steam3\Handlers\SteamGameCoordinator\Callbacks.cs" />
@@ -102,6 +105,7 @@
     <Compile Include="Types\DepotManifest.cs" />
     <Compile Include="Types\Steam2Ticket.cs" />
     <Compile Include="Util\AsnKeyParser.cs" />
+    <Compile Include="Util\BinaryEx.cs" />
     <Compile Include="Util\StreamHelpers.cs" />
     <Compile Include="Networking\Steam3\UdpPacket.cs" />
     <Compile Include="Steam2\ContentServerClient.cs" />
@@ -147,7 +151,6 @@
     <Compile Include="Base\Generated\SteamMsgAppTicket.cs" />
     <Compile Include="Base\Generated\SteamMsgBase.cs" />
     <Compile Include="Base\Generated\SteamMsgClientServer.cs" />
-    <Compile Include="Util\BinaryEx.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="gpl.txt" />

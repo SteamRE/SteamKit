@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Net;
 using System.IO;
+using SteamKit2.Internal;
 
 namespace SteamKit2
 {
@@ -85,7 +86,7 @@ namespace SteamKit2
 
             /// <summary>
             /// Gets or sets the target Job ID for the request.
-            /// This is provided in the <see cref="JobCallback"/> for a <see cref="UpdateMachineAuthCallback"/>.
+            /// This is provided in the <see cref="SteamClient.JobCallback&lt;T&gt;"/> for a <see cref="UpdateMachineAuthCallback"/>.
             /// </summary>
             /// <value>The Job ID.</value>
             public long JobID { get; set; }
@@ -181,7 +182,7 @@ namespace SteamKit2
             uint localIp = NetHelpers.GetIPAddress( this.Client.LocalIP );
 
             logon.ProtoHeader.client_session_id = 0;
-            logon.ProtoHeader.client_steam_id = steamId.ConvertToUint64();
+            logon.ProtoHeader.client_steam_id = steamId.ConvertToUInt64();
 
             logon.Body.obfustucated_private_ip = localIp ^ MsgClientLogon.ObfuscationMask;
 
@@ -195,7 +196,7 @@ namespace SteamKit2
             logon.Body.steam2_ticket_request = details.RequestSteam2Ticket;
 
             // we're now using the latest steamclient package version, this is required to get a proper sentry file for steam guard
-            logon.Body.client_package_version = 1634; // todo: determine if this is still required
+            logon.Body.client_package_version = 1771; // todo: determine if this is still required
 
             // this is not a proper machine id that Steam accepts
             // but it's good enough for identifying a machine
@@ -222,7 +223,7 @@ namespace SteamKit2
             SteamID auId = new SteamID( 0, 0, Client.ConnectedUniverse, EAccountType.AnonUser );
 
             logon.ProtoHeader.client_session_id = 0;
-            logon.ProtoHeader.client_steam_id = auId.ConvertToUint64();
+            logon.ProtoHeader.client_steam_id = auId.ConvertToUInt64();
 
             logon.Body.protocol_version = MsgClientLogon.CurrentProtocol;
             logon.Body.client_os_type = ( uint )Utils.GetOSType();
@@ -236,7 +237,7 @@ namespace SteamKit2
 
         /// <summary>
         /// Logs the client off of the Steam3 network. This method does not disconnect the client.
-        /// Results are returned in a <see cref="LogOffCallback"/>.
+        /// Results are returned in a <see cref="LoggedOffCallback"/>.
         /// </summary>
         public void LogOff()
         {
@@ -279,7 +280,7 @@ namespace SteamKit2
         /// <summary>
         /// Handles a client message. This should not be called directly.
         /// </summary>
-        /// <param name="e">The <see cref="SteamKit2.ClientMsgEventArgs"/> instance containing the event data.</param>
+        /// <param name="packetMsg">The packet message that contains the data.</param>
         public override void HandleMsg( IPacketMsg packetMsg )
         {
             switch ( packetMsg.MsgType )
