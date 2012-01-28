@@ -25,6 +25,12 @@ namespace SteamKit2
         }
 
 
+        /// <summary>
+        /// Requests details for a specific item of user generated content from the Steam servers.
+        /// Results are returned in a <see cref="UGCDetailsCallback"/> from a <see cref="SteamClient.JobCallback&lt;T&gt;"/>.
+        /// </summary>
+        /// <param name="ugcId">The unique user generated content id.</param>
+        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="SteamClient.JobCallback&lt;T&gt;"/>.</returns>
         public ulong RequestUGCDetails( ulong ugcId )
         {
             var request = new ClientMsgProtobuf<CMsgClientUFSGetUGCDetails>( EMsg.ClientUFSGetUGCDetails );

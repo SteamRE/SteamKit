@@ -15,25 +15,40 @@ namespace SteamKit2
 {
     public sealed partial class SteamMasterServer
     {
+        /// <summary>
+        /// This callback is received in response to calling <see cref="ServerQuery"/>.
+        /// </summary>
         public sealed class QueryCallback : CallbackMsg
         {
+            /// <summary>
+            /// Represents a single server.
+            /// </summary>
             public sealed class Server
             {
-                public IPAddress Address { get; private set; }
-                public ushort Port { get; private set; }
+                /// <summary>
+                /// Gets the IP endpoint of the server.
+                /// </summary>
+                public IPEndPoint EndPoint { get; private set; }
 
+                /// <summary>
+                /// Gets the number of Steam authenticated players on this server.
+                /// </summary>
                 public uint AuthedPlayers { get; private set; }
 
 
                 internal Server( CMsgGMSClientServerQueryResponse.Server server )
                 {
-                    Address = NetHelpers.GetIPAddress( server.server_ip );
-                    Port = ( ushort )server.server_port;
+                    EndPoint = new IPEndPoint(
+                        NetHelpers.GetIPAddress( server.server_ip ),
+                        ( int )server.server_port );
 
                     AuthedPlayers = server.auth_players;
                 }
             }
 
+            /// <summary>
+            /// Gets the list of servers.
+            /// </summary>
             public ReadOnlyCollection<Server> Servers { get; private set; }
 
 #if STATIC_CALLBACKS

@@ -16,11 +16,17 @@ namespace SteamKit2
     public partial class SteamUserStats
     {
         /// <summary>
-        /// This callback is fired in response to SteamUserStats.GetNumberOfCurrentPlayers
+        /// This callback is fired in response to <see cref="GetNumberOfCurrentPlayers" />.
         /// </summary>
         public class NumberOfPlayersCallback : CallbackMsg
         {
+            /// <summary>
+            /// Gets the result of the request.
+            /// </summary>
             public EResult Result { get; private set; }
+            /// <summary>
+            /// Gets the current number of players according to Steam.
+            /// </summary>
             public uint NumPlayers { get; private set; }
 
 
