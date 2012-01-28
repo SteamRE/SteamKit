@@ -15,7 +15,7 @@ using SteamKit2.Internal;
 namespace SteamKit2
 {
     /// <summary>
-    /// This handler handles user stat related actions.
+    /// This handler handles Steam user statistic related actions.
     /// </summary>
     public sealed partial class SteamUserStats : ClientMsgHandler
     {

@@ -12,17 +12,40 @@ using SteamKit2.Internal;
 
 namespace SteamKit2
 {
+    /// <summary>
+    /// This handler is used for requesting server list details from Steam.
+    /// </summary>
     public sealed partial class SteamMasterServer : ClientMsgHandler
     {
+        /// <summary>
+        /// Details used when performing a server list query.
+        /// </summary>
         public sealed class QueryDetails
         {
+            /// <summary>
+            /// Gets or sets the AppID used when querying servers.
+            /// </summary>
             public uint AppID { get; set; }
 
+            /// <summary>
+            /// Gets or sets the filter used for querying the master server.
+            /// Check https://developer.valvesoftware.com/wiki/Master_Server_Query_Protocol for details on how the filter is structured.
+            /// </summary>
             public string Filter { get; set; }
+            /// <summary>
+            /// Gets or sets the region that servers will be returned from.
+            /// </summary>
             public ERegionCode Region { get; set; }
 
+            /// <summary>
+            /// Gets or sets the IP address that will be GeoIP located.
+            /// This is done to return servers closer to this location.
+            /// </summary>
             public IPAddress GeoLocatedIP { get; set; }
 
+            /// <summary>
+            /// Gets or sets the maximum number of servers to return.
+            /// </summary>
             public uint MaxServers { get; set; }
         }
 
@@ -32,6 +55,12 @@ namespace SteamKit2
         }
 
 
+        /// <summary>
+        /// Requests a list of servers from the Steam game master server.
+        /// Results are returned in a <see cref="QueryCallback"/> from a <see cref="SteamClient.JobCallback&lt;T&gt;"/>.
+        /// </summary>
+        /// <param name="details">The details for the request.</param>
+        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="SteamClient.JobCallback&lt;T&gt;"/>.</returns>
         public ulong ServerQuery( QueryDetails details )
         {
             var query = new ClientMsgProtobuf<CMsgClientGMSServerQuery>( EMsg.ClientGMSServerQuery );

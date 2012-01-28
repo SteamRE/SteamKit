@@ -14,6 +14,11 @@ namespace SteamKit2
     {
 
 
+        /// <summary>
+        /// Sends a game coordinator message for a specific appid.
+        /// </summary>
+        /// <param name="data">The data to send. This should be a serialized GC message.</param>
+        /// <param name="appId">The app id of the game coordinator to send to.</param>
         public void Send( byte[] data, uint appId )
         {
             var clientMsg = new ClientMsgProtobuf<CMsgAMGCClientRelay>( EMsg.ClientToGC );
@@ -25,56 +30,6 @@ namespace SteamKit2
 
             this.Client.Send( clientMsg );
         }
-
-        /*
-        /// <summary>
-        /// Sends the specified game coordinator message.
-        /// The message header should not be a protobuf header, use the overload function.
-        /// </summary>
-        /// <typeparam name="MsgType">The message body type of the message.</typeparam>
-        /// <typeparam name="Hdr">The message header type of the message.</typeparam>
-        /// <param name="msg">The message to send.</param>
-        /// <param name="appId">The AppID of the game coordinator to send to.</param>
-        public void Send<MsgType, Hdr>( GCMsg<MsgType, Hdr> msg, uint appId )
-            where Hdr : IGCSerializableHeader, new()
-            where MsgType : IGCSerializableMessage, new()
-        {
-            var clientMsg = new ClientMsgProtobuf<CMsgAMGCClientRelay>( EMsg.ClientToGC );
-
-            clientMsg.Body.msgtype = ( uint )msg.GetEMsg();
-            clientMsg.Body.appid = appId;
-
-            using ( var ms = new MemoryStream() )
-            {
-                msg.Serialize( ms );
-                clientMsg.Body.payload = ms.ToArray();
-            }
-
-            this.Client.Send( clientMsg );
-        }
-
-        /// <summary>
-        /// Sends the specific game coordinator message. This function is for protobuf messages.
-        /// </summary>
-        /// <typeparam name="MsgType">The message body type of the message.</typeparam>
-        /// <param name="msg">The message to send.</param>
-        /// <param name="appId">The AppID of the game coordinator to send to.</param>
-        public void Send<MsgType>( GCMsgProtobuf<MsgType> msg, uint appId )
-            where MsgType : IGCSerializableMessage, new()
-        {
-            var clientMsg = new ClientMsgProtobuf<CMsgAMGCClientRelay>( EMsg.ClientToGC );
-
-            clientMsg.Body.msgtype = ( uint )MsgUtil.MakeGCMsg( msg.GetEMsg(), true );
-            clientMsg.Body.appid = appId;
-
-            using ( var ms = new MemoryStream() )
-            {
-                msg.Serialize( ms );
-                clientMsg.Body.payload = ms.ToArray();
-            }
-
-            this.Client.Send( clientMsg );
-        }*/
 
 
         /// <summary>

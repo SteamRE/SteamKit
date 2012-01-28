@@ -136,7 +136,7 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// This callback is returned after logging onto the network.
+        /// This callback is returned some time after logging onto the network.
         /// </summary>
         public sealed class LoginKeyCallback : CallbackMsg
         {
