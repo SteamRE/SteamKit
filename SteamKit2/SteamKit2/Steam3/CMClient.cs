@@ -13,9 +13,8 @@ using System.Diagnostics;
 using System.Net;
 using System.Threading;
 using System.Net.Sockets;
-using SteamKit2.Internal;
 
-namespace SteamKit2
+namespace SteamKit2.Internal
 {
     /// <summary>
     /// This base client handles the underlying connection to a CM server. This class should not be use directly, but through the <see cref="SteamClient"/> class.
