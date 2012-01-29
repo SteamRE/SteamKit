@@ -53,9 +53,11 @@ namespace SteamKit2
         public void Handle<T>( HandleDelegate<T> handler )
             where T : CallbackMsg
         {
-            if ( IsType<T>() )
+            var callback = this as T;
+
+            if ( callback != null )
             {
-                handler( ( T )this );
+                handler( callback );
             }
         }
     }

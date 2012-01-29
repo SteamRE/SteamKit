@@ -12,43 +12,80 @@ using System.Text;
 
 namespace SteamKit2
 {
-    public interface ICallback
+    namespace Internal
     {
-        Type CallbackType { get; }
-        void Run( object callback );
+        /// <summary>
+        /// This is the base class for the utility <see cref="Callback&lt;TCall&gt;" /> class.
+        /// This is for internal use only, and shouldn't be used directly.
+        /// </summary>
+        public abstract class CallbackBase
+        {
+            internal abstract Type CallbackType { get; }
+            internal abstract void Run( object callback );
+        }
     }
 
-    public sealed class Callback<TCall> : ICallback
+    /// <summary>
+    /// This utility class is used for binding a callback to a function.
+    /// </summary>
+    /// <typeparam name="TCall">The callback type this instance will handle.</typeparam>
+    public sealed class Callback<TCall> : Internal.CallbackBase, IDisposable
         where TCall : CallbackMsg
     {
-        public delegate void CallbackFunc( TCall callback );
+        CallbackManager mgr;
+        Action<TCall> func;
+
+        internal override Type CallbackType { get { return typeof( TCall ); } }
 
 
-        CallbackFunc func;
-
-        public Type CallbackType { get { return typeof( TCall ); } }
-
-
-        public Callback( CallbackFunc func, CallbackManager mgr )
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Callback&lt;TCall&gt;"/> class.
+        /// </summary>
+        /// <param name="func">The function to call when a callback of type TCall arrives.</param>
+        /// <param name="mgr">The callback manager that is responsible for the routing of callbacks.</param>
+        public Callback( Action<TCall> func, CallbackManager mgr )
         {
             this.func = func;
+            this.mgr = mgr;
+
             mgr.Register( this );
         }
 
+        ~Callback()
+        {
+            Dispose();
+        }
 
-        public void Run( object callback )
+
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// This function will unregister the callback.
+        /// </summary>
+        public void Dispose()
+        {
+            mgr.Unregister( this );
+            GC.SuppressFinalize( this );
+        }
+
+
+        internal override void Run( object callback )
         {
             func( callback as TCall );
         }
     }
 
+    /// <summary>
+    /// This class is a utility for routing callbacks to function calls.
+    /// In order to bind callbacks to functions, an instance of this class must be created for the
+    /// <see cref="SteamClient"/> instance that will be posting callbacks.
+    /// </summary>
     public sealed class CallbackManager
     {
 #if !STATIC_CALLBACKS
         SteamClient client;
 #endif
 
-        List<ICallback> registeredCallbacks;
+        List<Internal.CallbackBase> registeredCallbacks;
 
 
         /// <summary>
@@ -61,7 +98,7 @@ namespace SteamKit2
         public CallbackManager( SteamClient client )
 #endif
         {
-            registeredCallbacks = new List<ICallback>();
+            registeredCallbacks = new List<Internal.CallbackBase>();
 
 #if !STATIC_CALLBACKS
             this.client = client;
@@ -69,6 +106,10 @@ namespace SteamKit2
         }
 
 
+        /// <summary>
+        /// Runs a single queued callback.
+        /// If no callback is queued, this method will instantly return.
+        /// </summary>
         public void RunCallbacks()
         {
 #if STATIC_CALLBACKS
@@ -82,6 +123,11 @@ namespace SteamKit2
 
             Handle( call );
         }
+        /// <summary>
+        /// Blocks the current thread to run a single queued callback.
+        /// If no callback is queued, the method will block for the given timeout.
+        /// </summary>
+        /// <param name="timeout">The length of time to block.</param>
         public void RunWaitCallbacks( TimeSpan timeout )
         {
 #if STATIC_CALLBACKS
@@ -95,15 +141,38 @@ namespace SteamKit2
 
             Handle( call );
         }
+        /// <summary>
+        /// Blocks the current thread to run a single queued callback.
+        /// If no callback is queued, the method will block until one is posted.
+        /// </summary>
         public void RunWaitCallbacks()
         {
             RunWaitCallbacks( TimeSpan.FromMilliseconds( -1 ) );
         }
 
 
-        internal void Register( ICallback call )
+        /// <summary>
+        /// Manually registers the specified callback handler.
+        /// This is generally not required, as a handler will register itself when it is created.
+        /// If the specified callback is already registered, no exception is thrown.
+        /// </summary>
+        /// <param name="call">The callback handler to register.</param>
+        public void Register( Internal.CallbackBase call )
         {
+            if ( registeredCallbacks.Contains( call ) )
+                return;
+
             registeredCallbacks.Add( call );
+        }
+        /// <summary>
+        /// Unregisters the specified callback handler.
+        /// This is generally not required, as a handler will unregister itself when disposed or finalized.
+        /// If the specified callback isn't registered, no exception is thrown.
+        /// </summary>
+        /// <param name="call">The callback handler to unregister.</param>
+        public void Unregister( Internal.CallbackBase call )
+        {
+            registeredCallbacks.Remove( call );
         }
 
         void Handle( CallbackMsg call )
