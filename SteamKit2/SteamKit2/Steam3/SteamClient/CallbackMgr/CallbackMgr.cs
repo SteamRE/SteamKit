@@ -51,6 +51,10 @@ namespace SteamKit2
             mgr.Register( this );
         }
 
+        /// <summary>
+        /// Releases unmanaged resources and performs other cleanup operations before the
+        /// <see cref="Callback&lt;TCall&gt;"/> is reclaimed by garbage collection.
+        /// </summary>
         ~Callback()
         {
             Dispose();

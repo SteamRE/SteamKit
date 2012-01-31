@@ -271,10 +271,21 @@ namespace SteamKit2
             writer.Write( data );
         }
 
+        /// <summary>
+        /// Writes the specified string to the message payload using default encoding.
+        /// This function does not write a terminating null character.
+        /// </summary>
+        /// <param name="data">The string to write.</param>
         public void Write( string data )
         {
             Write( data, Encoding.Default );
         }
+        /// <summary>
+        /// Writes the specified string to the message payload using the specified encoding.
+        /// This function does not write a terminating null character.
+        /// </summary>
+        /// <param name="data">The string to write.</param>
+        /// <param name="encoding">The encoding to use.</param>
         public void Write( string data, Encoding encoding )
         {
             if ( data == null )
@@ -283,14 +294,23 @@ namespace SteamKit2
             Write( encoding.GetBytes( data ) );
         }
 
+        /// <summary>
+        /// Writes the secified string and a null terminator to the message payload using default encoding.
+        /// </summary>
+        /// <param name="data">The string to write.</param>
         public void WriteNullTermString( string data )
         {
             WriteNullTermString( data, Encoding.Default );
         }
+        /// <summary>
+        /// Writes the specified string and a null terminator to the message payload using the specified encoding.
+        /// </summary>
+        /// <param name="data">The string to write.</param>
+        /// <param name="encoding">The encoding to use.</param>
         public void WriteNullTermString( string data, Encoding encoding )
         {
             Write( data, encoding );
-            Write( ( byte )0 );
+            Write( encoding.GetBytes( "\0" ) );
         }
 
         /// <summary>
