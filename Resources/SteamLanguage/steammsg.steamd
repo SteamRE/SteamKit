@@ -36,6 +36,26 @@ class MsgClientLogon<EMsg::ClientLogon>
 {
 	const uint ObfuscationMask = 0xBAADF00D;
 	const uint CurrentProtocol = 65573;
+
+	const uint ProtocolVerMajorMask = 0xFFFF0000;
+	const uint ProtocolVerMinorMask = 0xFFFF;
+
+	const ushort ProtocolVerMinorMinGameServers = 4;
+	const ushort ProtocolVerMinorMinForSupportingEMsgMulti = 12;
+	const ushort ProtocolVerMinorMinForSupportingEMsgClientEncryptPct = 14;
+	const ushort ProtocolVerMinorMinForExtendedMsgHdr = 17;
+	const ushort ProtocolVerMinorMinForCellId = 18;
+	const ushort ProtocolVerMinorMinForSessionIDLast = 19;
+	const ushort ProtocolVerMinorMinForServerAvailablityMsgs = 24;
+	const ushort ProtocolVerMinorMinClients = 25;
+	const ushort ProtocolVerMinorMinForOSType = 26;
+	const ushort ProtocolVerMinorMinForCegApplyPESig = 27;
+	const ushort ProtocolVerMinorMinForMarketingMessages2 = 27;
+	const ushort ProtocolVerMinorMinForAnyProtoBufMessages = 28;
+	const ushort ProtocolVerMinorMinForProtoBufLoggedOffMessage = 28;
+	const ushort ProtocolVerMinorMinForProtoBufMultiMessages = 28;
+	const ushort ProtocolVerMinorMinForSendingProtocolToUFS = 30;
+	const ushort ProtocolVerMinorMinForMachineAuth = 33;
 };
 
 class MsgClientVACBanStatus<EMsg::ClientVACBanStatus>
