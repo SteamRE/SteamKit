@@ -613,6 +613,24 @@ namespace SteamKit2.Internal
 
 		public static readonly uint ObfuscationMask = 0xBAADF00D;
 		public static readonly uint CurrentProtocol = 65573;
+		public static readonly uint ProtocolVerMajorMask = 0xFFFF0000;
+		public static readonly uint ProtocolVerMinorMask = 0xFFFF;
+		public static readonly ushort ProtocolVerMinorMinGameServers = 4;
+		public static readonly ushort ProtocolVerMinorMinForSupportingEMsgMulti = 12;
+		public static readonly ushort ProtocolVerMinorMinForSupportingEMsgClientEncryptPct = 14;
+		public static readonly ushort ProtocolVerMinorMinForExtendedMsgHdr = 17;
+		public static readonly ushort ProtocolVerMinorMinForCellId = 18;
+		public static readonly ushort ProtocolVerMinorMinForSessionIDLast = 19;
+		public static readonly ushort ProtocolVerMinorMinForServerAvailablityMsgs = 24;
+		public static readonly ushort ProtocolVerMinorMinClients = 25;
+		public static readonly ushort ProtocolVerMinorMinForOSType = 26;
+		public static readonly ushort ProtocolVerMinorMinForCegApplyPESig = 27;
+		public static readonly ushort ProtocolVerMinorMinForMarketingMessages2 = 27;
+		public static readonly ushort ProtocolVerMinorMinForAnyProtoBufMessages = 28;
+		public static readonly ushort ProtocolVerMinorMinForProtoBufLoggedOffMessage = 28;
+		public static readonly ushort ProtocolVerMinorMinForProtoBufMultiMessages = 28;
+		public static readonly ushort ProtocolVerMinorMinForSendingProtocolToUFS = 30;
+		public static readonly ushort ProtocolVerMinorMinForMachineAuth = 33;
 
 		public MsgClientLogon()
 		{
