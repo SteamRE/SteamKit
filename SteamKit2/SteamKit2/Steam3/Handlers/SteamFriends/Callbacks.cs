@@ -320,6 +320,9 @@ namespace SteamKit2
             /// Gets SteamID of the chat room.
             /// </summary>
             public SteamID ChatID { get; private set; }
+            /// <summary>
+            /// Gets the friend ID.
+            /// </summary>
             public SteamID FriendID { get; private set; }
 
             /// <summary>
@@ -331,12 +334,18 @@ namespace SteamKit2
             public EChatRoomType ChatRoomType { get; private set; }
 
 
+            /// <summary>
+            /// Gets the SteamID of the chat room owner.
+            /// </summary>
             public SteamID OwnerID { get; private set; }
             /// <summary>
             /// Gets clan SteamID that owns this chat room.
             /// </summary>
             public SteamID ClanID { get; private set; }
 
+            /// <summary>
+            /// Gets the chat flags.
+            /// </summary>
             public byte ChatFlags { get; private set; }
 
             /// <summary>

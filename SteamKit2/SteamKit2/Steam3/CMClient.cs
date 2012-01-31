@@ -21,6 +21,40 @@ namespace SteamKit2.Internal
     /// </summary>
     public abstract class CMClient
     {
+        const ushort PortCM_PublicEncrypted = 27017;
+        const ushort PortCM_Public = 27014;
+
+        /// <summary>
+        /// Bootstrap list of CM servers.
+        /// </summary>
+        public static readonly IPEndPoint[] Servers =
+        {
+            new IPEndPoint( IPAddress.Parse( "68.142.64.164" ), PortCM_PublicEncrypted ),
+            new IPEndPoint( IPAddress.Parse( "68.142.64.165" ), PortCM_PublicEncrypted ),
+            new IPEndPoint( IPAddress.Parse( "68.142.91.34" ), PortCM_PublicEncrypted ),
+            new IPEndPoint( IPAddress.Parse( "68.142.91.35" ), PortCM_PublicEncrypted ),
+            new IPEndPoint( IPAddress.Parse( "68.142.91.36" ), PortCM_PublicEncrypted ),
+            new IPEndPoint( IPAddress.Parse( "68.142.116.178" ), PortCM_PublicEncrypted ),
+            new IPEndPoint( IPAddress.Parse( "68.142.116.179" ), PortCM_PublicEncrypted ),
+
+            new IPEndPoint( IPAddress.Parse( "69.28.145.170" ), PortCM_PublicEncrypted ),
+            new IPEndPoint( IPAddress.Parse( "69.28.145.171" ), PortCM_PublicEncrypted ),
+            new IPEndPoint( IPAddress.Parse( "69.28.145.172" ), PortCM_PublicEncrypted ),
+            new IPEndPoint( IPAddress.Parse( "69.28.156.250" ), PortCM_PublicEncrypted ),
+
+            new IPEndPoint( IPAddress.Parse( "72.165.61.185" ), PortCM_PublicEncrypted ),
+            new IPEndPoint( IPAddress.Parse( "72.165.61.186" ), PortCM_PublicEncrypted ),
+            new IPEndPoint( IPAddress.Parse( "72.165.61.187" ), PortCM_PublicEncrypted ),
+            new IPEndPoint( IPAddress.Parse( "72.165.61.188" ), PortCM_PublicEncrypted ),
+
+            new IPEndPoint( IPAddress.Parse( "208.111.133.84" ), PortCM_PublicEncrypted ),
+            new IPEndPoint( IPAddress.Parse( "208.111.133.85" ), PortCM_PublicEncrypted ),
+            new IPEndPoint( IPAddress.Parse( "208.111.158.52" ), PortCM_PublicEncrypted ),
+            new IPEndPoint( IPAddress.Parse( "208.111.158.53" ), PortCM_PublicEncrypted ),
+            new IPEndPoint( IPAddress.Parse( "208.111.171.82" ), PortCM_PublicEncrypted ),
+            new IPEndPoint( IPAddress.Parse( "208.111.171.83" ), PortCM_PublicEncrypted ),
+        };
+
         /// <summary>
         /// Returns the the local IP of this client.
         /// </summary>
@@ -113,7 +147,7 @@ namespace SteamKit2.Internal
             // todo: determine if we should try other servers
             try
             {
-                this.Connection.Connect( Connection.CMServers[ 0 ] );
+                this.Connection.Connect( Servers[ 0 ] );
             }
             catch ( SocketException )
             {

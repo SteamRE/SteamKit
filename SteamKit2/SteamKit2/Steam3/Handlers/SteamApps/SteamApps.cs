@@ -20,6 +20,10 @@ namespace SteamKit2
     public sealed partial class SteamApps : ClientMsgHandler
     {
 
+// Ambiguous reference in cref attribute: 'SteamApps.GetPackageInfo'. Assuming 'SteamKit2.SteamApps.GetPackageInfo(uint, bool)',
+// but could have also matched other overloads including 'SteamKit2.SteamApps.GetPackageInfo(System.Collections.Generic.IEnumerable<uint>, bool)'.
+#pragma warning disable 0419
+
         /// <summary>
         /// Represents app request details when calling <see cref="SteamApps.GetAppInfo"/>.
         /// </summary>
@@ -41,6 +45,10 @@ namespace SteamKit2
             /// </summary>
             public List<uint> SectionCRC { get; private set; }
 
+
+            /// <summary>
+            /// Initializes a new instance of the <see cref="AppDetails"/> class.
+            /// </summary>
             public AppDetails()
             {
                 // request all sections by default
@@ -48,6 +56,8 @@ namespace SteamKit2
                 SectionCRC = new List<uint>();
             }
         }
+
+#pragma warning restore 0419
 
 
         internal SteamApps()

@@ -168,6 +168,9 @@ namespace SteamKit2
         /// </summary>
         public sealed class SessionTokenCallback : CallbackMsg
         {
+            /// <summary>
+            /// Gets the Steam3 session token used for authenticating to various other services.
+            /// </summary>
             public ulong SessionToken { get; private set; }
 
 #if STATIC_CALLBACKS
@@ -181,20 +184,54 @@ namespace SteamKit2
             }
         }
 
+        /// <summary>
+        /// This callback is recieved when account information is recieved from the network.
+        /// This generally happens after logon.
+        /// </summary>
         public sealed class AccountInfoCallback : CallbackMsg
         {
+            /// <summary>
+            /// Gets the last recorded persona name used by this account.
+            /// </summary>
             public string PersonaName { get; private set; }
+            /// <summary>
+            /// Gets the country this account is connected from.
+            /// </summary>
             public string Country { get; private set; }
 
+            /// <summary>
+            /// Gets the salt used for the password.
+            /// </summary>
             public byte[] PasswordSalt { get; private set; }
+            /// <summary>
+            /// Gets the SHA-1 disgest of the password.
+            /// </summary>
             public byte[] PasswordSHADisgest { get; private set; }
 
+            /// <summary>
+            /// Gets the count of SteamGuard authenticated computers.
+            /// </summary>
             public int CountAuthedComputers { get; private set; }
+            /// <summary>
+            /// Gets a value indicating whether this account is locked with IPT.
+            /// </summary>
+            /// <value>
+            ///   <c>true</c> if this account is locked with IPT; otherwise, <c>false</c>.
+            /// </value>
             public bool LockedWithIPT { get; private set; }
 
+            /// <summary>
+            /// Gets the account flags for this account.
+            /// </summary>
             public EAccountFlags AccountFlags { get; private set; }
 
+            /// <summary>
+            /// Gets the facebook ID of this account if it is linked with facebook.
+            /// </summary>
             public ulong FacebookID { get; private set; }
+            /// <summary>
+            /// Gets the facebook name if this account is linked with facebook.
+            /// </summary>
             public string FacebookName { get; private set ;}
 
 #if STATIC_CALLBACKS
@@ -220,11 +257,26 @@ namespace SteamKit2
             }
         }
 
+        /// <summary>
+        /// This callback is recieved when wallet info is recieved from the network.
+        /// </summary>
         public sealed class WalletInfoCallback : CallbackMsg
         {
+            /// <summary>
+            /// Gets a value indicating whether this instance has wallet data.
+            /// </summary>
+            /// <value>
+            /// 	<c>true</c> if this instance has wallet data; otherwise, <c>false</c>.
+            /// </value>
             public bool HasWallet { get; private set; }
 
-            public int Currency { get; private set; }
+            /// <summary>
+            /// Gets the currency code for this wallet.
+            /// </summary>
+            public ECurrencyCode Currency { get; private set; }
+            /// <summary>
+            /// Gets the balance of the wallet, in cents.
+            /// </summary>
             public int Balance { get; private set; }
 
 
@@ -237,28 +289,61 @@ namespace SteamKit2
             {
                 HasWallet = wallet.has_wallet;
 
-                Currency = wallet.currency;
+                Currency = ( ECurrencyCode )wallet.currency;
                 Balance = wallet.balance;
             }
         }
 
+        /// <summary>
+        /// This callback is recieved when the backend wants the client to update it's local machine authentication data.
+        /// </summary>
         public sealed class UpdateMachineAuthCallback : CallbackMsg
         {
+            /// <summary>
+            /// Represents various one-time-password details.
+            /// </summary>
             public sealed class OTPDetails
             {
+                /// <summary>
+                /// Gets the OTP type.
+                /// </summary>
                 public uint Type { get; internal set; }
+                /// <summary>
+                /// Gets the OTP identifier.
+                /// </summary>
                 public string Identifier { get; internal set; }
+                /// <summary>
+                /// Gets the OTP shared secret.
+                /// </summary>
                 public byte[] SharedSecret { get; internal set; }
+                /// <summary>
+                /// Gets the OTP time drift.
+                /// </summary>
                 public uint TimeDrift { get; internal set; }
             }
 
+            /// <summary>
+            /// Gets the sentry file data that should be written.
+            /// </summary>
             public byte[] Data { get; private set; }
 
+            /// <summary>
+            /// Gets the number of bytes to write.
+            /// </summary>
             public int BytesToWrite { get; private set; }
+            /// <summary>
+            /// Gets the offset to write to.
+            /// </summary>
             public int Offset { get; private set; }
 
+            /// <summary>
+            /// Gets the name of the sentry file to write.
+            /// </summary>
             public string FileName { get; private set; }
 
+            /// <summary>
+            /// Gets the one-time-password details.
+            /// </summary>
             public OTPDetails OneTimePassword { get; private set; }
 
 

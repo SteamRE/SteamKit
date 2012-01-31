@@ -63,6 +63,9 @@ namespace SteamKit2
             public bool RequestSteam2Ticket { get; set; }
 
 
+            /// <summary>
+            /// Initializes a new instance of the <see cref="LogOnDetails"/> class.
+            /// </summary>
             public LogOnDetails()
             {
                 AccountInstance = 1; // use the default pc steam instance
@@ -79,8 +82,17 @@ namespace SteamKit2
             /// </summary>
             public sealed class OTPDetails
             {
+                /// <summary>
+                /// Gets or sets the one-time-password type.
+                /// </summary>
                 public uint Type { get; set; }
+                /// <summary>
+                /// Gets or sets the one-time-password identifier.
+                /// </summary>
                 public string Identifier { get; set; }
+                /// <summary>
+                /// Gets or sets the one-time-password value.
+                /// </summary>
                 public uint Value { get; set; }
             }
 

@@ -66,7 +66,7 @@ namespace SteamKit2
                                 return EOSType.WinME;
 
                             default:
-                                return EOSType.Windows;
+                                return EOSType.WinUnknown;
                         }
                     }
 
@@ -96,12 +96,12 @@ namespace SteamKit2
                                 goto default;
 
                             default:
-                                return EOSType.Windows;
+                                return EOSType.WinUnknown;
                         }
                     }
 
                 case PlatformID.Unix:
-                    return EOSType.Linux; // this _could_ be mac, but we're gonna just go with linux for now
+                    return EOSType.LinuxUnknown; // this _could_ be mac, but we're gonna just go with linux for now
 
                 default:
                     return EOSType.Unknown;

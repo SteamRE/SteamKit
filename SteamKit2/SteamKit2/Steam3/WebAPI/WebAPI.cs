@@ -11,13 +11,24 @@ using System.Text.RegularExpressions;
 
 namespace SteamKit2
 {
+    /// <summary>
+    /// Utility class for interacting with the Steam Web API.
+    /// </summary>
     public sealed class WebAPI
     {
         static WebAPI()
         {
+            // stop WebClient from inserting this header into requests
+            // the backend doesn't like it
             ServicePointManager.Expect100Continue = false;
+
+            // todo: perhaps toggle this per request instead of globally disabling it?
         }
 
+        /// <summary>
+        /// Represents a single interface that exists within the Web API.
+        /// This is a dynamic object that allows function calls to interfaces with minimal code.
+        /// </summary>
         public sealed class Interface : DynamicObject, IDisposable
         {
             WebClient webClient;
@@ -42,6 +53,15 @@ namespace SteamKit2
             }
 
 
+            /// <summary>
+            /// Manually calls the specified Web API function with the provided details.
+            /// </summary>
+            /// <param name="func">The function name to call.</param>
+            /// <param name="version">The version of the function to call.</param>
+            /// <param name="args">A dictionary of string key value pairs representing arguments to be passed to the API.</param>
+            /// <param name="method">The http request method. Either "POST" or "GET".</param>
+            /// <param name="secure">if set to <c>true</c> this method will be called through the secure API.</param>
+            /// <returns>A <see cref="KeyValue"/> object representing the results of the Web API call.</returns>
             public KeyValue Call( string func, int version = 1, Dictionary<string, string> args = null, string method = WebRequestMethods.Http.Get, bool secure = false )
             {
                 if ( args == null )
@@ -102,11 +122,37 @@ namespace SteamKit2
                 return kv;
             }
 
+            /// <summary>
+            /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            /// </summary>
             public void Dispose()
             {
                 webClient.Dispose();
             }
 
+            /// <summary>
+            /// Provides the implementation for operations that invoke a member.
+            /// Classes derived from the <see cref="T:System.Dynamic.DynamicObject"/> class can
+            /// override this method to specify dynamic behavior for operations such as calling a method.
+            /// This method should not be called directly, it is  called through dynamic method calls.
+            /// </summary>
+            /// <param name="binder">
+            /// Provides information about the dynamic operation.
+            /// The binder.Name property provides the name of the member on which the dynamic operation is performed.
+            /// For example, for the statement sampleObject.SampleMethod(100), where sampleObject is an instance of the
+            /// class derived from the <see cref="T:System.Dynamic.DynamicObject"/> class, binder.Name returns "SampleMethod".
+            /// The binder.IgnoreCase property specifies whether the member name is case-sensitive.
+            /// </param>
+            /// <param name="args">
+            /// The arguments that are passed to the object member during the invoke operation. For example,
+            /// for the statement sampleObject.SampleMethod(100), where sampleObject is derived from the
+            /// <see cref="T:System.Dynamic.DynamicObject"/> class, the first argument to <paramref name="args"/> is equal to 100.
+            /// </param>
+            /// <param name="result">The result of the member invocation.</param>
+            /// <returns>
+            /// true if the operation is successful; otherwise, false. If this method returns false, the run-time
+            /// binder of the language determines the behavior. (In most cases, a language-specific run-time exception is thrown.)
+            /// </returns>
             public override bool TryInvokeMember( InvokeMemberBinder binder, object[] args, out object result )
             {
                 if ( binder.CallInfo.ArgumentNames.Count != args.Length )
@@ -125,12 +171,14 @@ namespace SteamKit2
                     string argName = binder.CallInfo.ArgumentNames[ x ];
                     object argValue = args[ x ];
 
+                    // method is a reserved param for selecting the http request method
                     if ( argName.Equals( "method", StringComparison.OrdinalIgnoreCase ) )
                     {
                         requestMethod = argValue.ToString();
                         continue;
                     }
 
+                    // secure is another reserved param for selecting the http or https apis
                     if ( argName.Equals( "secure", StringComparison.OrdinalIgnoreCase ) )
                     {
                         try
@@ -164,9 +212,12 @@ namespace SteamKit2
 
                 if ( !string.IsNullOrEmpty( versionString ) )
                 {
-                    version = int.Parse( versionString );
+                    // the regex matches digits, but we should check for absurdly large numbers
+                    if ( !int.TryParse( versionString, out version ) )
+                    {
+                        throw new ArgumentException( "The function version number supplied was invalid." );
+                    }
                 }
-
 
                 result = Call( functionName, version, apiArgs, requestMethod, secure );
 
@@ -174,6 +225,12 @@ namespace SteamKit2
             }
         }
 
+        /// <summary>
+        /// Retreives a dynamic handler capable of interacting with the specified interface on the Web API.
+        /// </summary>
+        /// <param name="iface">The interface to retrieve a handler for.</param>
+        /// <param name="apiKey">An optional API key to be used for authorized requests.</param>
+        /// <returns>A dynamic <see cref="Interface"/> object to interact with the Web API.</returns>
         public static Interface GetInterface( string iface, string apiKey = "" )
         {
             return new Interface( iface, apiKey );

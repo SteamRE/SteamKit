@@ -46,6 +46,10 @@ namespace SteamKit2
         }
 
 
+        /// <summary>
+        /// Handles a client message. This should not be called directly.
+        /// </summary>
+        /// <param name="packetMsg">The packet message that contains the data.</param>
         public override void HandleMsg( IPacketMsg packetMsg )
         {
             switch ( packetMsg.MsgType )
