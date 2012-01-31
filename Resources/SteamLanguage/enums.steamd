@@ -83,6 +83,11 @@ enum EAccountFlags
 	LimitedUserForce = 8192;
 	EmailValidated = 16384;
 	MarketingTreatment = 32768;
+	OGGInviteOptOut = 65536;
+	ForcePasswordChange = 131072;
+	ForceEmailVerification = 262144;
+	LogonExtraSecurity = 524288;
+	LogonExtraSecurityDisabled = 1048576;
 };
 
 enum EFriendFlags
@@ -112,6 +117,7 @@ enum EClientPersonaStateFlag
 	ClanInfo = 128;
 	GameExtraInfo = 256;
 	GameDataBlob = 512;
+	ClanTag = 1024;
 };
 
 enum EAppUsageEvent
@@ -128,12 +134,14 @@ enum EAppUsageEvent
 
 enum ELicenseFlags
 {
+	None = 0;
 	Renew = 0x01;
 	RenewalFailed = 0x02;
 	Pending = 0x04;
 	Expired = 0x08;
 	CancelledByUser = 0x10;
 	CancelledByAdmin = 0x20;
+	LowViolenceContent = 0x40;
 };
 
 enum ELicenseType
@@ -151,14 +159,20 @@ enum EPaymentMethod
 	None = 0;
 	ActivationCode = 1;
 	CreditCard = 2;
+	Giropay = 3;
 	PayPal = 4;
+	Ideal = 5;
+	PaySafeCard = 6;
+	Sofort = 7;
 	GuestPass = 8;
+	WebMoney = 9;
 	HardwarePromo = 16;
 	ClickAndBuy = 32;
 	AutoGrant = 64;
 	Wallet = 128;
 	OEMTicket = 256;
 	Split = 512;
+	Complimentary = 1024;
 };
 
 enum EIntroducerRouting
@@ -294,18 +308,19 @@ enum EAppInfoSection
 	Unknown = 0;
 	All = 1;
 	Common = 2;
+	First = 2;
 	Extended = 3;
 	Config = 4;
 	Stats = 5;
 	Install = 6;
 	Depots = 7;
-	Vac = 8;
-	Drm = 9;
-	Ufs = 10;
-	Ogg = 11;
-	Items = 12;
+	VAC = 8;
+	DRM = 9;
+	UFS = 10;
+	OGG = 11;
+	ItemsUNUSED = 12;
 	Policies = 13;
-	Sysreqs = 14;
+	SysReqs = 14;
 };
 
 enum EContentDownloadSourceType
@@ -316,24 +331,40 @@ enum EContentDownloadSourceType
 	LCS = 3;
 	Proxy = 4;
 };
- 
- enum EOSType
+
+enum EPlatformType
+{
+	Unknown = 0;
+	Win32 = 1;
+	Win64 = 2;
+	Linux = 3;
+	OSX = 4;
+	PS3 = 5;
+	Max = 6;
+};
+
+enum EOSType
 {
 	Unknown = -1;
-	Macos = -102;
-	Macos104 = -101;
-	Macos105 = -100;
-	Macos1058 = -99;
-	Macos106 = -95;
-	Macos1063 = -94;
-	Macos1064_slgu = -93;
-	Macos1067 = -92;
-	Macos107 = -90;
-	Linux = -203;
+
+	PS3 = -300;
+
+	MacOSUnknown = -102;
+	MacOS104 = -101;
+	MacOS105 = -100;
+	MacOS1058 = -99;
+	MacOS106 = -95;
+	MacOS1063 = -94;
+	MacOS1064_slgu = -93;
+	MacOS1067 = -92;
+	MacOS107 = -90;
+
+	LinuxUnknown = -203;
 	Linux22 = -202;
 	Linux24 = -201;
 	Linux26 = -200;
-	Windows = 0;
+
+	WinUnknown = 0;
 	Win311 = 1;
 	Win95 = 2;
 	Win98 = 3;
@@ -345,11 +376,17 @@ enum EContentDownloadSourceType
 	WinVista = 9;
 	Win7 = 10;
 	Win2008 = 11;
+	WinMAX = 12;
+
+	Max = 23;
 };
 
 enum EServerType
 {
 	Invalid = -1;
+
+	First = 0;
+
 	Shell = 0;
 	GM = 1;
 	BUM = 2;
@@ -411,6 +448,7 @@ enum EBillingType
 	Gift = 6;
 	AutoGrant = 7;
 	OEMTicket = 8;
+	NumBillingTypes = 9;
 };
 
 enum EActivationCodeClass<uint>
@@ -445,4 +483,15 @@ enum ERegionCode<byte>
 	MiddleEast = 0x06;
 	Africa = 0x07;
 	World = 0xFF;
+};
+
+enum ECurrencyCode
+{
+	Invalid = 0;
+	USD = 1;
+	GBP = 2;
+	EUR = 3;
+	CHF = 4;
+	RUB = 5;
+	Max = 6;
 };

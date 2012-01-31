@@ -9,6 +9,7 @@ enum EUdpPacketType<byte>
 	Disconnect = 5;
 	Data = 6;
 	Datagram = 7;
+	Max = 8;
 };
 
 class UdpHeader
