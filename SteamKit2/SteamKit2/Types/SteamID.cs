@@ -183,7 +183,7 @@ namespace SteamKit2
             }
             else
             {
-                this.AccountInstance = 1;
+                this.AccountInstance = DesktopInstance;
             }
         }
 
@@ -245,6 +245,16 @@ namespace SteamKit2
             return this.steamid.Data;
         }
 
+        /// <summary>
+        /// Returns a static account key used for grouping accounts with differing instances.
+        /// </summary>
+        /// <returns>A 64bit static account key.</returns>
+        public ulong GetStaticAccountKey()
+        {
+            return ( ( ulong )AccountUniverse << 56 ) + ( ( ulong )AccountType << 52 ) + AccountID;
+        }
+
+
 
 
         /// <summary>
@@ -267,6 +277,29 @@ namespace SteamKit2
         {
             get { return this.AccountType == EAccountType.GameServer || this.AccountType == EAccountType.AnonGameServer; }
         }
+
+        /// <summary>
+        /// Gets a value indicating whether this instance is a persistent game server account.
+        /// </summary>
+        /// <value>
+        /// 	<c>true</c> if this instance is a persistent game server account; otherwise, <c>false</c>.
+        /// </value>
+        public bool IsPersistentGameServerAccount
+        {
+            get { return this.AccountType == EAccountType.GameServer; }
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether this instance is an anonymous game server account.
+        /// </summary>
+        /// <value>
+        /// 	<c>true</c> if this instance is an anon game server account; otherwise, <c>false</c>.
+        /// </value>
+        public bool IsAnonGameServerAccount
+        {
+            get { return this.AccountType == EAccountType.AnonGameServer; }
+        }
+
         /// <summary>
         /// Gets a value indicating whether this instance is a content server account.
         /// </summary>
@@ -305,7 +338,10 @@ namespace SteamKit2
         /// </value>
         public bool IsLobby
         {
-            get { return ( this.AccountType == EAccountType.Chat ) && ( ( this.AccountInstance & ( 0x000FFFFF + 1 ) >> 2 ) != 0 ); }
+            get {
+                return ( this.AccountType == EAccountType.Chat ) &&
+                    ( ( this.AccountInstance & ( uint )ChatInstanceFlags.Lobby ) > 0 );
+            }
         }
         /// <summary>
         /// Gets a value indicating whether this instance is an individual account.
@@ -315,7 +351,7 @@ namespace SteamKit2
         /// </value>
         public bool IsIndividualAccount
         {
-            get { return this.AccountType == EAccountType.Individual; }
+            get { return this.AccountType == EAccountType.Individual || this.AccountType == EAccountType.ConsoleUser; }
         }
         /// <summary>
         /// Gets a value indicating whether this instance is an anonymous account.
@@ -339,6 +375,17 @@ namespace SteamKit2
         }
 
         /// <summary>
+        /// Gets a value indicating whether this instance is a console user account.
+        /// </summary>
+        /// <value>
+        /// 	<c>true</c> if this instance is a console user account; otherwise, <c>false</c>.
+        /// </value>
+        public bool IsConsoleUserAccount
+        {
+            get { return this.AccountType == EAccountType.ConsoleUser; }
+        }
+
+        /// <summary>
         /// Gets a value indicating whether this instance is valid.
         /// </summary>
         /// <value>
@@ -356,13 +403,19 @@ namespace SteamKit2
 
                 if ( this.AccountType == EAccountType.Individual )
                 {
-                    if ( this.AccountID == 0 || this.AccountInstance != 1 )
+                    if ( this.AccountID == 0 || this.AccountInstance > WebInstance )
                         return false;
                 }
 
                 if ( this.AccountType == EAccountType.Clan )
                 {
                     if ( this.AccountID == 0 || this.AccountInstance != 0 )
+                        return false;
+                }
+
+                if ( this.AccountType == EAccountType.GameServer )
+                {
+                    if ( this.AccountID == 0 )
                         return false;
                 }
 
