@@ -70,13 +70,16 @@ namespace SteamKit2
         /// Results are returned in a <see cref="AppOwnershipTicketCallback"/> callback.
         /// </summary>
         /// <param name="appid">The appid.</param>
-        public void GetAppOwnershipTicket( uint appid )
+        public ulong GetAppOwnershipTicket( uint appid )
         {
             var request = new ClientMsgProtobuf<CMsgClientGetAppOwnershipTicket>( EMsg.ClientGetAppOwnershipTicket );
+            request.SourceJobID = Client.GetNextJobID();
 
             request.Body.app_id = appid;
 
             this.Client.Send( request );
+
+            return request.SourceJobID;
         }
 
         /// <summary>
@@ -197,13 +200,16 @@ namespace SteamKit2
         /// Results are returned in a <see cref="DepotKeyCallback"/> callback.
         /// </summary>
         /// <param name="depotid">The DepotID to request a decryption key for.</param>
-        public void GetDepotDecryptionKey( uint depotid )
+        public ulong GetDepotDecryptionKey( uint depotid )
         {
             var request = new ClientMsg<MsgClientGetDepotDecryptionKey>();
+            request.SourceJobID = Client.GetNextJobID();
 
             request.Body.DepotID = depotid;
 
             this.Client.Send( request );
+
+            return request.SourceJobID;
         }
 
 
@@ -256,10 +262,12 @@ namespace SteamKit2
             var ticketResponse = new ClientMsgProtobuf<CMsgClientGetAppOwnershipTicketResponse>( packetMsg );
 
 #if STATIC_CALLBACKS
-            var callback = new AppOwnershipTicketCallback( Client, ticketResponse.Body );
+            var innerCallback = new AppOwnershipTicketCallback( Client, ticketResponse.Body );
+            var callback = new SteamClient.JobCallback<AppOwnershipTicketCallback>( Client, ticketResponse.TargetJobID, innerCallback );
             SteamClient.PostCallback( callback );
 #else
-            var callback = new AppOwnershipTicketCallback( ticketResponse.Body );
+            var innerCallback = new AppOwnershipTicketCallback( ticketResponse.Body );
+            var callback = new SteamClient.JobCallback<AppOwnershipTicketCallback>(ticketResponse.TargetJobID, innerCallback);
             this.Client.PostCallback( callback );
 #endif
         }
@@ -308,10 +316,12 @@ namespace SteamKit2
             var keyResponse = new ClientMsg<MsgClientGetDepotDecryptionKeyResponse>( packetMsg );
 
 #if STATIC_CALLBACKS
-            var callback = new DepotKeyCallback( Client, keyResponse.Body );
+            var innerCallback = new DepotKeyCallback( Client, keyResponse.Body );
+            var callback = new SteamClient.JobCallback<DepotKeyCallback>( Client, keyResponse.TargetJobID, innerCallback );
             SteamClient.PostCallback( callback );
 #else
-            var callback = new DepotKeyCallback( keyResponse.Body );
+            var innerCallback = new DepotKeyCallback( keyResponse.Body );
+            var callback = new SteamClient.JobCallback<DepotKeyCallback>( keyResponse.TargetJobID, innerCallback );
             this.Client.PostCallback( callback );
 #endif
         }
