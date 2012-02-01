@@ -18,11 +18,17 @@ namespace SteamKit2
         {
             public string Host;
             public int Port;
+            public string Type;
 
             public ClientEndPoint(string host, int port)
             {
                 Host = host;
                 Port = port;
+            }
+
+            public ClientEndPoint(string host, int port, string type) : this(host, port)
+            {
+                Type = type;
             }
         }
 
@@ -53,6 +59,11 @@ namespace SteamKit2
         ~CDNClient()
         {
             webClient.Dispose();
+        }
+
+        public void PointTo(ClientEndPoint ep)
+        {
+            endPoint = ep;
         }
 
         public bool Connect()
@@ -222,9 +233,6 @@ namespace SteamKit2
                     var node = child.Children.Where(x => x.Name == "host" || x.Name == "Host").First();
                     var typeNode = child.Children.Where(x => x.Name == "type").First();
 
-                    if (typeNode.Value == "CDN") // not sure what to do with these
-                        continue;
-
                     var endpoint_string = node.Value.Split(':');
 
                     int port = 80;
@@ -232,7 +240,7 @@ namespace SteamKit2
                     if(endpoint_string.Length > 1)
                         port = int.Parse(endpoint_string[1]);
 
-                    endpoints.Add(new ClientEndPoint(endpoint_string[0], port));
+                    endpoints.Add(new ClientEndPoint(endpoint_string[0], port, typeNode.AsString()));
                 }
 
                 return endpoints;
