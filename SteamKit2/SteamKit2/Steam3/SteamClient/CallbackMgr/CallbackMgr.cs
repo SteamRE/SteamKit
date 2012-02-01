@@ -33,6 +33,10 @@ namespace SteamKit2
         where TCall : CallbackMsg
     {
         CallbackManager mgr;
+
+        /// <summary>
+        /// Gets or sets the function to call when a callback of type TCall arrives.
+        /// </summary>
         public Action<TCall> OnRun { get; set; }
 
         internal override Type CallbackType { get { return typeof( TCall ); } }
@@ -47,7 +51,8 @@ namespace SteamKit2
         /// Initializes a new instance of the <see cref="Callback&lt;TCall&gt;"/> class.
         /// </summary>
         /// <param name="func">The function to call when a callback of type TCall arrives.</param>
-        public Callback( Action<TCall> func ) : this()
+        public Callback( Action<TCall> func )
+            : this()
         {
             this.OnRun = func;
         }
@@ -56,14 +61,18 @@ namespace SteamKit2
         /// Initializes a new instance of the <see cref="Callback&lt;TCall&gt;"/> class.
         /// </summary>
         /// <param name="func">The function to call when a callback of type TCall arrives.</param>
-        /// <param name="mgr">The callback manager that is responsible for the routing of callbacks.</param>
+        /// <param name="mgr">The <see cref="CallbackManager"/> that is responsible for the routing of callbacks to this handler.</param>
         public Callback( Action<TCall> func, CallbackManager mgr )
         {
             this.OnRun = func;
             AttachTo( mgr );
         }
 
-        protected void AttachTo(CallbackManager mgr)
+        /// <summary>
+        /// Attaches the specified <see cref="CallbackManager"/> to this handler.
+        /// </summary>
+        /// <param name="mgr">The manager to attach.</param>
+        protected void AttachTo( CallbackManager mgr )
         {
             this.mgr = mgr;
             mgr.Register( this );
@@ -85,7 +94,7 @@ namespace SteamKit2
         /// </summary>
         public void Dispose()
         {
-            if( mgr != null )
+            if ( mgr != null )
                 mgr.Unregister( this );
 
             GC.SuppressFinalize( this );
@@ -98,14 +107,36 @@ namespace SteamKit2
         }
     }
 
-    public sealed class JobCallback<TCall> : Callback<SteamClient.JobCallback<TCall>>, IDisposable
+    /// <summary>
+    /// This utility class is used for binding job callbacks to functions.
+    /// </summary>
+    /// <typeparam name="TCall">The callback type this instance will handle.</typeparam>
+    public sealed class JobCallback<TCall> : Callback<SteamClient.JobCallback<TCall>>
         where TCall : CallbackMsg
     {
+
         private ulong jobID;
+
+        /// <summary>
+        /// Gets or sets the function to call when a job based callback of type TCall arrives.
+        /// </summary>
         public new Action<TCall> OnRun { get; set; }
+        /// <summary>
+        /// Gets a value indicating whether this <see cref="JobCallback&lt;TCall&gt;"/> is completed.
+        /// Completion is defined as the callback for the given job id being received and handled.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if completed; otherwise, <c>false</c>.
+        /// </value>
         public bool Completed { get; private set; }
 
-        public JobCallback(ulong jobID, Action<TCall> func)
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="JobCallback&lt;TCall&gt;"/> class.
+        /// </summary>
+        /// <param name="jobID">The Job ID this callback will handle.</param>
+        /// <param name="func">The function to call when a job based callback of type TCall arrives.</param>
+        public JobCallback( ulong jobID, Action<TCall> func )
         {
             this.jobID = jobID;
             base.OnRun = HandleCallback;
@@ -114,13 +145,20 @@ namespace SteamKit2
             this.Completed = false;
         }
 
-        public JobCallback(ulong jobID, Action<TCall> func, CallbackManager mgr) : this(jobID, func)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="JobCallback&lt;TCall&gt;"/> class.
+        /// </summary>
+        /// <param name="jobID">The Job ID this callback will handle.</param>
+        /// <param name="func">The function to call when a job based callback of type TCall arrives.</param>
+        /// <param name="mgr">The <see cref="CallbackManager"/> that is responsible for the routing of callbacks to this handler.</param>
+        public JobCallback( ulong jobID, Action<TCall> func, CallbackManager mgr )
+            : this( jobID, func )
         {
             AttachTo( mgr );
         }
 
 
-        void HandleCallback(SteamClient.JobCallback<TCall> callback)
+        void HandleCallback( SteamClient.JobCallback<TCall> callback )
         {
             if ( callback.JobID == jobID )
             {

@@ -69,7 +69,8 @@ namespace SteamKit2
         /// Requests an app ownership ticket for the specified AppID.
         /// Results are returned in a <see cref="AppOwnershipTicketCallback"/> callback.
         /// </summary>
-        /// <param name="appid">The appid.</param>
+        /// <param name="appid">The appid to request the ownership ticket of.</param>
+        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="SteamClient.JobCallback&lt;T&gt;"/>.</returns>
         public ulong GetAppOwnershipTicket( uint appid )
         {
             var request = new ClientMsgProtobuf<CMsgClientGetAppOwnershipTicket>( EMsg.ClientGetAppOwnershipTicket );
@@ -200,6 +201,7 @@ namespace SteamKit2
         /// Results are returned in a <see cref="DepotKeyCallback"/> callback.
         /// </summary>
         /// <param name="depotid">The DepotID to request a decryption key for.</param>
+        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="SteamClient.JobCallback&lt;T&gt;"/>.</returns>
         public ulong GetDepotDecryptionKey( uint depotid )
         {
             var request = new ClientMsg<MsgClientGetDepotDecryptionKey>();
