@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Collections.Concurrent;
 
 namespace SteamKit2
 {
@@ -51,29 +52,12 @@ namespace SteamKit2
         }
 
 
-        class AccountList<T> : Dictionary<SteamID, T>
+        sealed class AccountList<T> : ConcurrentDictionary<SteamID, T>
             where T : Account, new()
         {
-            object accessLock = new object();
-
             public T GetAccount( SteamID steamId )
             {
-                lock ( accessLock )
-                {
-                    if ( !this.ContainsKey( steamId ) )
-                    {
-                        T accObj = new T()
-                        {
-                            SteamID = steamId,
-                        };
-
-                        this.Add( steamId, accObj );
-
-                        return accObj;
-                    }
-
-                    return this[ steamId ];
-                }
+                return this.GetOrAdd( steamId, new T { SteamID = steamId } );
             }
         }
 
