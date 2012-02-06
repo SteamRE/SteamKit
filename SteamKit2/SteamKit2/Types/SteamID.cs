@@ -211,6 +211,9 @@ namespace SteamKit2
         /// <returns>True if this instance was successfully assigned, or false if the given string was in an invalid format.</returns>
         public bool SetFromString( string steamId, EUniverse eUniverse )
         {
+            if ( string.IsNullOrEmpty( steamId ) )
+                return false;
+
             Match m = SteamIDRegex.Match( steamId );
 
             if ( !m.Success )
