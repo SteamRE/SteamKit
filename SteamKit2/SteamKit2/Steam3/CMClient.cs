@@ -81,6 +81,8 @@ namespace SteamKit2.Internal
         public SteamID SteamID { get; private set; }
 
 
+        int serverNum = 0;
+
         Connection Connection { get; set; }
         byte[] tempSessionKey;
 
@@ -142,15 +144,19 @@ namespace SteamKit2.Internal
         {
             this.Disconnect();
 
-            // we'll just connect to the first CM server for now
-            // not sure how the client challenges servers when using tcp
-            // todo: determine if we should try other servers
+            // for now we'll cycle through bootstrap CM servers
+            // todo: cache off CM servers given by the CM
+            // and add logic to determine "bad" servers
+            int serverToTry = ( serverNum++ % Servers.Length );
+
             try
             {
-                this.Connection.Connect( Servers[ 0 ] );
+                Connection.Connect( Servers[ serverToTry ] );
             }
-            catch ( SocketException )
+            catch ( SocketException ex )
             {
+                DebugLog.WriteLine( "CMClient", "Unable to connect to CM, will try next in list: {0}", ex.ToString() );
+
                 // post disconnection callback
                 OnClientDisconnected();
             }
