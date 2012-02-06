@@ -213,13 +213,13 @@ namespace SteamKit2
 
         public static byte[] AdlerHash(byte[] input)
         {
-            using ( Adler32 adler = new Adler32() )
+            uint a = 0, b = 0;
+            for (int i = 0; i < input.Length; i++)
             {
-                byte[] hash = adler.ComputeHash( input );
-                Array.Reverse( hash );
-
-                return hash;
+                a = (a + input[i]) % 65521;
+                b = (b + a) % 65521;
             }
+            return BitConverter.GetBytes(a | (b << 16));
         }
 
         public static byte[] GenerateRandomBlock( int size )
