@@ -320,6 +320,21 @@ namespace SteamKit2
                 /// Gets the OTP time drift.
                 /// </summary>
                 public uint TimeDrift { get; internal set; }
+
+
+                /// <summary>
+                /// Implicitly converts <see cref="UpdateMachineAuthCallback.OTPDetails"/> into <see cref="MachineAuthDetails.OTPDetails"/>.
+                /// </summary>
+                /// <param name="otp">The details to convert.</param>
+                /// <returns></returns>
+                public static implicit operator MachineAuthDetails.OTPDetails( OTPDetails otp )
+                {
+                    return new MachineAuthDetails.OTPDetails
+                    {
+                        Identifier = otp.Identifier,
+                        Type = otp.Type,
+                    };
+                }
             }
 
             /// <summary>
