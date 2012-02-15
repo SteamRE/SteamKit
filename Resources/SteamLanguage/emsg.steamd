@@ -1233,6 +1233,8 @@ enum EMsg
 	ClientUCMUnsubscribePublishedFileResponse = 7324;
 	ClientUCMUpdatePublishedFile = 7325;
 	ClientUCMUpdatePublishedFileResponse = 7326;
+	ClientUCMPublishedFileSubscribed = 7347;
+	ClientUCMPublishedFileUnsubscribed = 7348;
 	
 	FSBase = 7500;
 	ClientRichPresenceUpload = 7501;
@@ -1264,4 +1266,12 @@ enum EMsg
 	
 	ClientUGSGetGlobalStats = 7901;
 	ClientUGSGetGlobalStatsResponse = 7902;
+
+	CREBase = 8500;
+	CRERankByTrend = 8501;
+	CRERankByTrendResponse = 8502;
+	CREItemVoteSummary = 8503;
+	CREItemVoteSummaryResponse = 8504;
+	CRERankByVote = 8505;
+	CRERankByVoteResponse = 8506;
 };
