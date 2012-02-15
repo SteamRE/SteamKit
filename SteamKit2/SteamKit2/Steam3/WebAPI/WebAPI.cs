@@ -62,10 +62,19 @@ namespace SteamKit2
             /// <param name="method">The http request method. Either "POST" or "GET".</param>
             /// <param name="secure">if set to <c>true</c> this method will be called through the secure API.</param>
             /// <returns>A <see cref="KeyValue"/> object representing the results of the Web API call.</returns>
+            /// <exception cref="ArgumentNullException">The function name or request method provided were <c>null</c>.</exception>
+            /// <exception cref="WebException">An network error occurred when performing the request.</exception>
+            /// <exception cref="InvalidDataException">An error occured when parsing the response from the WebAPI.</exception>
             public KeyValue Call( string func, int version = 1, Dictionary<string, string> args = null, string method = WebRequestMethods.Http.Get, bool secure = false )
             {
+                if ( func == null )
+                    throw new ArgumentNullException( "func" );
+
                 if ( args == null )
                     args = new Dictionary<string, string>();
+
+                if ( method == null )
+                    throw new ArgumentNullException( "method" );
 
                 StringBuilder urlBuilder = new StringBuilder();
                 StringBuilder paramBuilder = new StringBuilder();
@@ -93,6 +102,9 @@ namespace SteamKit2
                 // append any args
                 paramBuilder.Append( string.Join( "&", args.Select( kvp =>
                 {
+                    // TODO: the WebAPI is a special snowflake that needs to appropriately handle url encoding
+                    // this is in contrast to the steam3 content server APIs which use an entirely different scheme of encoding
+
                     string key = WebHelpers.UrlEncode( kvp.Key );
                     string value = kvp.Value; // WebHelpers.UrlEncode( kvp.Value );
 
@@ -117,7 +129,19 @@ namespace SteamKit2
                 KeyValue kv = new KeyValue();
 
                 using ( var ms = new MemoryStream( data ) )
-                    kv.ReadAsText( ms );
+                {
+                    try
+                    {
+                        kv.ReadAsText( ms );
+                    }
+                    catch ( Exception ex )
+                    {
+                        throw new InvalidDataException(
+                            "An internal error occurred when attempting to parse the response from the WebAPI server. This can indicate a change in the VDF format.",
+                            ex
+                        );
+                    }
+                }
 
                 return kv;
             }
@@ -153,6 +177,20 @@ namespace SteamKit2
             /// true if the operation is successful; otherwise, false. If this method returns false, the run-time
             /// binder of the language determines the behavior. (In most cases, a language-specific run-time exception is thrown.)
             /// </returns>
+            /// <exception cref="InvalidOperationException">
+            /// Dynamic method is called with non-named argument.
+            /// All parameters must be passed as name arguments to API calls.
+            /// - or -
+            /// The dynamic method name was not in the correct format.
+            /// All API function calls must be in the format 'FunctionName###' where the optional ###'s represent a version number.
+            /// </exception>
+            /// <exception cref="ArgumentException">
+            /// The reserved named parameter 'secure' was not a boolean value.
+            /// This parameter is used when requests must go through the secure API.
+            /// </exception>
+            /// <exception cref="ArgumentOutOfRangeException">
+            /// The function version number specified was out of range.
+            /// </exception>
             public override bool TryInvokeMember( InvokeMemberBinder binder, object[] args, out object result )
             {
                 if ( binder.CallInfo.ArgumentNames.Count != args.Length )
@@ -215,7 +253,7 @@ namespace SteamKit2
                     // the regex matches digits, but we should check for absurdly large numbers
                     if ( !int.TryParse( versionString, out version ) )
                     {
-                        throw new ArgumentException( "The function version number supplied was invalid." );
+                        throw new ArgumentOutOfRangeException( "version", "The function version number supplied was invalid or out of range." );
                     }
                 }
 
