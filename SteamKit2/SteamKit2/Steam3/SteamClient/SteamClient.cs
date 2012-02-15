@@ -70,9 +70,7 @@ namespace SteamKit2
         /// Adds a new handler to the internal list of message handlers.
         /// </summary>
         /// <param name="handler">The handler to add.</param>
-        /// <exception cref="InvalidOperationException">
-        /// A handler with that name is already registered.
-        /// </exception>
+        /// <exception cref="InvalidOperationException">A handler of that type is already registered.</exception>
         public void AddHandler( ClientMsgHandler handler )
         {
             if ( handlers.ContainsKey( handler.GetType() ) )

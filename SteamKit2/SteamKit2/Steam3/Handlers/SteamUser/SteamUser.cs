@@ -20,7 +20,7 @@ namespace SteamKit2
     {
 
         /// <summary>
-        /// Represents the details required to log into Steam3.
+        /// Represents the details required to log into Steam3 as a user.
         /// </summary>
         public sealed class LogOnDetails
         {
@@ -176,20 +176,27 @@ namespace SteamKit2
 
 
         /// <summary>
-        /// Logs the client into the Steam3 network. The client should already have been connected at this point.
+        /// Logs the client into the Steam3 network.
+        /// The client should already have been connected at this point.
         /// Results are returned in a <see cref="LoggedOnCallback"/>.
         /// </summary>
-        /// <param name="details">The details.</param>
+        /// <param name="details">The details to use for logging on.</param>
+        /// <exception cref="ArgumentNullException">No logon details were provided.</exception>
+        /// <exception cref="ArgumentException">Username or password are not set within <paramref name="details"/>.</exception>
         public void LogOn( LogOnDetails details )
         {
+            if ( details == null )
+            {
+                throw new ArgumentNullException( "details" );
+            }
+            if ( string.IsNullOrEmpty( details.Username ) || string.IsNullOrEmpty( details.Password ) )
+            {
+                throw new ArgumentException( "LogOn requires a username and password to be set in 'details'." );
+            }
+
             var logon = new ClientMsgProtobuf<CMsgClientLogon>( EMsg.ClientLogon );
 
             SteamID steamId = new SteamID( 0, details.AccountInstance, Client.ConnectedUniverse, EAccountType.Individual );
-
-            if ( string.IsNullOrEmpty( details.Username ) || string.IsNullOrEmpty( details.Password ) )
-            {
-                throw new ArgumentException( "LogOn requires a username and password to be set in LogOnDetails." );
-            }
 
             uint localIp = NetHelpers.GetIPAddress( this.Client.LocalIP );
 
@@ -225,10 +232,11 @@ namespace SteamKit2
             this.Client.Send( logon );
         }
         /// <summary>
-        /// Logs the client into the Steam3 network as an anonymous user. The client should already have been connected at this point.
+        /// Logs the client into the Steam3 network as an anonymous user.
+        /// The client should already have been connected at this point.
         /// Results are returned in a <see cref="LoggedOnCallback"/>.
         /// </summary>
-        public void LogOnAnonUser()
+        public void LogOnAnonymous()
         {
             var logon = new ClientMsgProtobuf<CMsgClientLogon>( EMsg.ClientLogon );
 
@@ -248,7 +256,8 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// Logs the client off of the Steam3 network. This method does not disconnect the client.
+        /// Logs the user off of the Steam3 network.
+        /// This method does not disconnect the client.
         /// Results are returned in a <see cref="LoggedOffCallback"/>.
         /// </summary>
         public void LogOff()
@@ -267,7 +276,7 @@ namespace SteamKit2
             var response = new ClientMsgProtobuf<CMsgClientUpdateMachineAuthResponse>( EMsg.ClientUpdateMachineAuthResponse );
 
             // so we respond to the correct message
-            response.ProtoHeader.job_id_target = ( ulong )details.JobID;
+            response.ProtoHeader.job_id_target = details.JobID;
 
             response.Body.cubwrote = ( uint )details.BytesWritten;
             response.Body.eresult = ( uint )details.Result;
