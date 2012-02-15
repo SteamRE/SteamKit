@@ -2,8 +2,8 @@ import "steammessages.proto";
 
 message CMsgCStrike15StartMatchmaking {
 	optional uint32 account_id = 1;
-	optional uint32 game_type = 2;
-	optional uint32 input_device = 3;
+	optional int32 game_type = 2;
+	optional int32 input_device = 3;
 }
 
 message CMsgCStrike15StartMatchmakingResponse {
@@ -12,6 +12,40 @@ message CMsgCStrike15StartMatchmakingResponse {
 
 message CMsgCStrike15ReportRoundEnd {
 	message Player {
+		optional bool is_bot = 1;
+		optional uint32 elo_flags = 2;
+		optional uint32 elo_team = 3;
+		optional int32 input_device = 4;
+		optional uint32 account_id = 5;
+		optional int32 elo_value = 6;
+	}
+
+	optional int32 elo_game_mode = 1;
+	optional int32 elo_calc_type = 2;
+	optional float elo_calc_exp_base = 3;
+	optional float elo_calc_exp_denom = 4;
+	optional float elo_calc_k_scalar = 5;
+	optional int32 winning_team = 6;
+	repeated .CMsgCStrike15ReportRoundEnd.Player elo_players = 7;
+	optional bool request_log = 8;
+}
+
+message CMsgCStrike15ReportRoundEndLog {
+	optional string log = 1;
+}
+
+message CMsgCStrike15StartMatchmakingDeprecated {
+	optional uint32 account_id = 1;
+	optional uint32 game_type = 2;
+	optional uint32 input_device = 3;
+}
+
+message CMsgCStrike15StartMatchmakingResponseDeprecated {
+	optional bool success = 1;
+}
+
+message CMsgCStrike15ReportRoundEndDeprecated {
+	message Player {
 		optional uint32 account_id = 1;
 		optional uint32 bot_difficulty = 2;
 		optional uint32 input_device = 3;
@@ -19,7 +53,7 @@ message CMsgCStrike15ReportRoundEnd {
 	}
 
 	optional uint32 game_type = 1;
-	repeated .CMsgCStrike15ReportRoundEnd.Player winners = 2;
-	repeated .CMsgCStrike15ReportRoundEnd.Player losers = 3;
+	repeated .CMsgCStrike15ReportRoundEndDeprecated.Player winners = 2;
+	repeated .CMsgCStrike15ReportRoundEndDeprecated.Player losers = 3;
 }
 
