@@ -2,6 +2,15 @@
 
 #import "gamecoordinator.steamd"
 
+class MsgClientJustStrings<EMsg::Invalid>
+{
+};
+
+class MsgClientGenericResponse<EMsg::Invalid>
+{
+	EResult result;
+};
+
 class MsgChannelEncryptRequest<EMsg::ChannelEncryptRequest>
 {
 	const uint PROTOCOL_VERSION = 1;
@@ -96,15 +105,6 @@ class MsgClientP2PIntroducerMessage<EMsg::ClientP2PIntroducerMessage>
 	EIntroducerRouting routingType;
 	byte<1450> data;
 	uint dataLen;
-};
-
-class MsgClientCreateAccountResponse<EMsg::ClientCreateAccountResponse>
-{
-	EResult result;
-};
-
-class MsgClientCreateAccount3<EMsg::ClientCreateAccount3>
-{
 };
 
 class MsgClientOGSBeginSession<EMsg::ClientOGSBeginSession>

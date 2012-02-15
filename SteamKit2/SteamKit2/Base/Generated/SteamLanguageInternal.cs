@@ -451,6 +451,55 @@ namespace SteamKit2.Internal
 		}
 	}
 
+	public class MsgClientJustStrings : ISteamSerializableMessage
+	{
+		public EMsg GetEMsg() { return EMsg.Invalid; }
+
+
+		public MsgClientJustStrings()
+		{
+		}
+
+		public void Serialize(Stream stream)
+		{
+			BinaryWriter bw = new BinaryWriter( stream );
+
+
+		}
+
+		public void Deserialize( Stream stream )
+		{
+		}
+	}
+
+	public class MsgClientGenericResponse : ISteamSerializableMessage
+	{
+		public EMsg GetEMsg() { return EMsg.Invalid; }
+
+		// Static size: 4
+		public EResult Result { get; set; }
+
+		public MsgClientGenericResponse()
+		{
+			Result = 0;
+		}
+
+		public void Serialize(Stream stream)
+		{
+			BinaryWriter bw = new BinaryWriter( stream );
+
+			bw.Write( (int)Result );
+
+		}
+
+		public void Deserialize( Stream stream )
+		{
+			BinaryReader br = new BinaryReader( stream );
+
+			Result = (EResult)br.ReadInt32();
+		}
+	}
+
 	public class MsgChannelEncryptRequest : ISteamSerializableMessage
 	{
 		public EMsg GetEMsg() { return EMsg.ChannelEncryptRequest; }
@@ -861,55 +910,6 @@ namespace SteamKit2.Internal
 			RoutingType = (EIntroducerRouting)br.ReadInt32();
 			Data = br.ReadBytes( 1450 );
 			DataLen = br.ReadUInt32();
-		}
-	}
-
-	public class MsgClientCreateAccountResponse : ISteamSerializableMessage
-	{
-		public EMsg GetEMsg() { return EMsg.ClientCreateAccountResponse; }
-
-		// Static size: 4
-		public EResult Result { get; set; }
-
-		public MsgClientCreateAccountResponse()
-		{
-			Result = 0;
-		}
-
-		public void Serialize(Stream stream)
-		{
-			BinaryWriter bw = new BinaryWriter( stream );
-
-			bw.Write( (int)Result );
-
-		}
-
-		public void Deserialize( Stream stream )
-		{
-			BinaryReader br = new BinaryReader( stream );
-
-			Result = (EResult)br.ReadInt32();
-		}
-	}
-
-	public class MsgClientCreateAccount3 : ISteamSerializableMessage
-	{
-		public EMsg GetEMsg() { return EMsg.ClientCreateAccount3; }
-
-
-		public MsgClientCreateAccount3()
-		{
-		}
-
-		public void Serialize(Stream stream)
-		{
-			BinaryWriter bw = new BinaryWriter( stream );
-
-
-		}
-
-		public void Deserialize( Stream stream )
-		{
 		}
 	}
 

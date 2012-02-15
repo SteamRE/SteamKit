@@ -407,6 +407,8 @@
 	k_EMsgClientUCMUnsubscribePublishedFileResponse = 7324, // flags: 2, server type: 45
 	k_EMsgClientUCMUpdatePublishedFile = 7325, // flags: 2, server type: 45
 	k_EMsgClientUCMUpdatePublishedFileResponse = 7326, // flags: 2, server type: 45
+	k_EMsgClientUCMPublishedFileSubscribed = 7347, // flags: 2, server type: 45
+	k_EMsgClientUCMPublishedFileUnsubscribed = 7348, // flags: 2, server type: 45
 	k_EMsgClientRichPresenceUpload = 7501, // flags: 2, server type: 47
 	k_EMsgClientRichPresenceRequest = 7502, // flags: 2, server type: 47
 	k_EMsgClientRichPresenceInfo = 7503, // flags: 2, server type: 47
@@ -418,3 +420,9 @@
 	k_EMsgEconTrading_CancelTradeRequest = 7706, // flags: 2, server type: 59
 	k_EMsgClientUGSGetGlobalStats = 7901, // flags: 2, server type: 50
 	k_EMsgClientUGSGetGlobalStatsResponse = 7902, // flags: 2, server type: 50
+	k_EMsgCRERankByTrend = 8501, // flags: 2, server type: 53
+	k_EMsgCRERankByTrendResponse = 8502, // flags: 2, server type: 53
+	k_EMsgCREItemVoteSummary = 8503, // flags: 2, server type: 53
+	k_EMsgCREItemVoteSummaryResponse = 8504, // flags: 2, server type: 53
+	k_EMsgCRERankByVote = 8505, // flags: 2, server type: 53
+	k_EMsgCRERankByVoteResponse = 8506, // flags: 2, server type: 53
