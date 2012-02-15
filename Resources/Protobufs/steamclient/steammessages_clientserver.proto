@@ -1327,6 +1327,16 @@ message CMsgClientUCMUnsubscribePublishedFileResponse {
 	optional int32 eresult = 1 [default = 2];
 }
 
+message CMsgClientUCMPublishedFileSubscribed {
+	optional fixed64 published_file_id = 1;
+	optional uint32 app_id = 2;
+}
+
+message CMsgClientUCMPublishedFileUnsubscribed {
+	optional fixed64 published_file_id = 1;
+	optional uint32 app_id = 2;
+}
+
 message CMsgClientScreenshotsChanged {
 }
 
@@ -1934,5 +1944,71 @@ message CMsgClientEmailAddrInfo {
 	optional bool credential_change_requires_code = 4;
 	optional bool password_or_secretqa_change_requires_code = 5;
 	optional bool remind_user_about_email = 6;
+}
+
+message CMsgCRERankByVote {
+	optional uint32 app_id = 1;
+	optional uint32 start_index = 2;
+	optional uint32 count = 3;
+	repeated string tags = 4;
+	repeated string user_tags = 5;
+}
+
+message CMsgCRERankByVoteResponse {
+	message PublishedFileId {
+		optional fixed64 published_file_id = 1;
+		optional int32 votes_for = 2;
+		optional int32 votes_against = 3;
+		optional int32 reports = 4;
+		optional float score = 5;
+	}
+
+	optional int32 eresult = 1 [default = 2];
+	repeated .CMsgCRERankByVoteResponse.PublishedFileId published_files = 2;
+	optional uint32 total_results = 3;
+}
+
+message CMsgCRERankByTrend {
+	optional uint32 app_id = 1;
+	optional uint32 start_index = 2;
+	optional uint32 days = 3;
+	optional uint32 count = 4;
+	repeated string tags = 5;
+	repeated string user_tags = 6;
+}
+
+message CMsgCRERankByTrendResponse {
+	message PublishedFileId {
+		optional fixed64 published_file_id = 1;
+		optional int32 votes_for = 2;
+		optional int32 votes_against = 3;
+		optional int32 reports = 4;
+		optional float score = 5;
+	}
+
+	optional int32 eresult = 1 [default = 2];
+	repeated .CMsgCRERankByTrendResponse.PublishedFileId published_files = 2;
+	optional uint32 total_results = 3;
+}
+
+message CMsgCREItemVoteSummary {
+	message PublishedFileId {
+		optional fixed64 published_file_id = 1;
+	}
+
+	repeated .CMsgCREItemVoteSummary.PublishedFileId published_file_ids = 1;
+}
+
+message CMsgCREItemVoteSummaryResponse {
+	message ItemVoteSummary {
+		optional fixed64 published_file_id = 1;
+		optional int32 votes_for = 2;
+		optional int32 votes_against = 3;
+		optional int32 reports = 4;
+		optional float score = 5;
+	}
+
+	optional int32 eresult = 1 [default = 2];
+	repeated .CMsgCREItemVoteSummaryResponse.ItemVoteSummary item_vote_summaries = 2;
 }
 
