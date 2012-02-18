@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using SteamKit2;
 using System.Net;
+using System.Net.Sockets;
 
 namespace Vapor
 {
@@ -54,7 +55,7 @@ namespace Vapor
 
         public static void Initialize( bool useUdp )
         {
-            SteamClient = new SteamClient( useUdp ? SteamKit2.Internal.CMClient.ConnectionType.Udp : SteamKit2.Internal.CMClient.ConnectionType.Tcp );
+            SteamClient = new SteamClient( useUdp ? ProtocolType.Udp : ProtocolType.Tcp );
 
             SteamFriends = SteamClient.GetHandler<SteamFriends>();
             SteamUser = SteamClient.GetHandler<SteamUser>();
