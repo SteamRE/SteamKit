@@ -90,39 +90,31 @@ namespace SteamKit2.Internal
 
         Dictionary<EServerType, List<IPEndPoint>> serverMap;
 
-        /// <summary>
-        /// The connection type to use when connecting to the Steam3 network.
-        /// </summary>
-        public enum ConnectionType
-        {
-            /// <summary>
-            /// Tcp.
-            /// </summary>
-            Tcp,
-            /// <summary>
-            /// Udp.
-            /// </summary>
-            Udp,
-        }
-
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CMClient"/> class with a specific connection type.
         /// </summary>
         /// <param name="type">The connection type to use.</param>
-        public CMClient( ConnectionType type = ConnectionType.Tcp )
+        /// <exception cref="NotSupportedException">
+        /// The provided <see cref=">ProtocolType"/> is not supported.
+        /// Only Tcp and Udp are available.
+        /// </exception>
+        public CMClient( ProtocolType type = ProtocolType.Tcp )
         {
             serverMap = new Dictionary<EServerType, List<IPEndPoint>>();
 
             switch ( type )
             {
-                case ConnectionType.Tcp:
+                case ProtocolType.Tcp:
                     Connection = new TcpConnection();
                     break;
-                    
-                case ConnectionType.Udp:
+
+                case ProtocolType.Udp:
                     Connection = new UdpConnection();
                     break;
+
+                default:
+                    throw new NotSupportedException( "The provided protocol type is not supported. Only Tcp and Udp are available." );
             }
 
             Connection.NetMsgReceived += NetMsgReceived;
@@ -186,7 +178,21 @@ namespace SteamKit2.Internal
 
             DebugLog.WriteLine( "CMClient", "Sent -> EMsg: {0} (Proto: {1})", msg.MsgType, msg.IsProto );
 
-            Connection.Send( msg );
+
+            // we'll swallow any network failures here because they will be thrown later
+            // on the network thread, and that will lead to a disconnect callback
+            // down the line
+
+            try
+            {
+                Connection.Send( msg );
+            }
+            catch ( IOException )
+            {
+            }
+            catch ( SocketException )
+            {
+            }
         }
 
 
@@ -195,10 +201,10 @@ namespace SteamKit2.Internal
         /// </summary>
         /// <param name="type">Server type requested</param>
         /// <returns>List of server endpoints</returns>
-        public List<IPEndPoint> GetServersOfType(EServerType type)
+        public List<IPEndPoint> GetServersOfType( EServerType type )
         {
             List<IPEndPoint> list;
-            if (!serverMap.TryGetValue(type, out list))
+            if ( !serverMap.TryGetValue( type, out list ) )
                 return new List<IPEndPoint>();
 
             return list;
@@ -365,12 +371,16 @@ namespace SteamKit2.Internal
                 DebugLog.WriteLine( "CMClient", "HandleEncryptionRequest got request for invalid universe! Universe: {0} Protocol ver: {1}", eUniv, protoVersion );
                 return;
             }
-			
-            CryptoHelper.InitializeRSA( pubKey );
 
             var encResp = new Msg<MsgChannelEncryptResponse>();
 
-            byte[] cryptedSessKey = CryptoHelper.RSAEncrypt( tempSessionKey );
+            byte[] cryptedSessKey = null;
+
+            using ( var rsa = new RSACrypto( pubKey ) )
+            {
+                cryptedSessKey = rsa.Encrypt( tempSessionKey );
+            }
+
             byte[] keyCrc = CryptoHelper.CRCHash( cryptedSessKey );
 
             encResp.Write( cryptedSessKey );
@@ -398,7 +408,7 @@ namespace SteamKit2.Internal
         {
             var listMsg = new ClientMsgProtobuf<CMsgClientServerList>( packetMsg );
 
-            foreach (var server in listMsg.Body.servers)
+            foreach ( var server in listMsg.Body.servers )
             {
                 EServerType type = ( EServerType )server.server_type;
 

@@ -36,6 +36,8 @@ namespace SteamKit2
 
         public NetFilterEncryption( byte[] sessionKey )
         {
+            Debug.Assert( sessionKey.Length == 32 );
+
             this.sessionKey = sessionKey;
         }
 

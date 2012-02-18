@@ -88,12 +88,9 @@ namespace SteamKit2
                 data = NetFilter.ProcessOutgoing( data );
             }
 
-            BinaryWriterEx bb = new BinaryWriterEx();
-            bb.Write( ( uint )data.Length );
-            bb.Write( TcpConnection.MAGIC );
-            bb.Write( data );
-
-            writer.Write( bb.ToArray() );
+            writer.Write( ( uint )data.Length );
+            writer.Write( TcpConnection.MAGIC );
+            writer.Write( data );
         }
 
         // this is now a steamkit meme
@@ -105,34 +102,39 @@ namespace SteamKit2
             try
             {
                 while ( sock.Connected )
-                {
+                {                    
                     // the tcp packet header is considerably less complex than the udp one
                     // it only consists of the packet length, followed by the "VT01" magic
-                    byte[] packetHeader = reader.ReadBytes( 8 );
-
-                    if ( packetHeader.Length != 8 )
-                        throw new IOException( "Connection lost while reading packet header" );
-
                     uint packetLen = 0;
                     uint packetMagic = 0;
 
-                    using ( var ms = new MemoryStream( packetHeader ))
-                    using ( var br = new BinaryReader( ms ) )
+                    try
                     {
-                        packetLen = br.ReadUInt32();
-                        packetMagic = br.ReadUInt32();
+                        packetLen = reader.ReadUInt32();
+                        packetMagic = reader.ReadUInt32();
+                    }
+                    catch ( IOException ex )
+                    {
+                        throw new IOException( "Connection lost while reading packet header.", ex );
                     }
 
                     if ( packetMagic != TcpConnection.MAGIC )
-                        throw new IOException( "RecvCompleted got a packet with invalid magic!" );
+                    {
+                        throw new IOException( "Got a packet with invalid magic!" );
+                    }
 
                     // rest of the packet is the physical data
                     byte[] packData = reader.ReadBytes( ( int )packetLen );
+
                     if ( packData.Length != packetLen )
+                    {
                         throw new IOException( "Connection lost while reading packet payload" );
+                    }
 
                     if ( NetFilter != null )
+                    {
                         packData = NetFilter.ProcessIncoming( packData );
+                    }
 
                     OnNetMsgReceived( new NetMsgEventArgs( packData, sock.RemoteEndPoint as IPEndPoint ) );
                 }
