@@ -68,7 +68,16 @@ namespace SteamKit2
 
         public bool Connect()
         {
-            byte[] encryptedKey = CryptoHelper.RSAEncrypt(sessionKey);
+
+            byte[] encryptedKey = null;
+
+            // TODO: handle other universes?
+            byte[] universeKey = KeyDictionary.GetPublicKey( EUniverse.Public );
+            using ( var rsa = new RSACrypto( universeKey ) )
+            {
+                encryptedKey = rsa.Encrypt( sessionKey );
+            }
+
             byte[] encryptedTicket = CryptoHelper.SymmetricEncrypt(appTicket, sessionKey);
 
             string payload = String.Format("sessionkey={0}&appticket={1}", WebHelpers.UrlEncode(encryptedKey), WebHelpers.UrlEncode(encryptedTicket));

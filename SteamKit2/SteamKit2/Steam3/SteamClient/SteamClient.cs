@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using SteamKit2.Internal;
+using System.Net.Sockets;
 
 namespace SteamKit2
 {
@@ -45,7 +46,7 @@ namespace SteamKit2
         /// Initializes a new instance of the <see cref="SteamClient"/> class with a specific connection type.
         /// </summary>
         /// <param name="type">The connection type to use.</param>
-        public SteamClient( CMClient.ConnectionType type = ConnectionType.Tcp )
+        public SteamClient( ProtocolType type = ProtocolType.Tcp )
             : base( type )
         {
 #if !STATIC_CALLBACKS

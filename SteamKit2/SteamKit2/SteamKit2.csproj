@@ -145,7 +145,6 @@
     <Compile Include="Util\KeyDictionary.cs" />
     <Compile Include="Util\CryptoHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Util\PsuedoRandom.cs" />
     <Compile Include="Types\SteamID.cs" />
     <Compile Include="Base\Generated\SteamLanguage.cs" />
     <Compile Include="Base\Generated\SteamMsgAppTicket.cs" />
