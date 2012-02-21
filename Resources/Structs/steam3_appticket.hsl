@@ -27,6 +27,13 @@ struct SESSIONHEADER
 	DWORD connectionCount; // number of times the client has connected to a server
 };
 
+typedef struct tDLCINFO
+{
+	DWORD appid;
+	WORD subCount; // subs  -> paid for??
+	DWORD sub[subCount];
+} DLCINFO;
+
 typedef struct tOWNERSHIPTICKET
 {
 	DWORD length;
@@ -41,9 +48,7 @@ typedef struct tOWNERSHIPTICKET
 	WORD licenseCount; // subs
 	DWORD license[licenseCount];
 	WORD dlcCount; // apps
-	DWORD dlc[dlcCount];
-	WORD subCount; // subs  -> paid for??
-	DWORD sub[subCount];
+	DLCINFO dlc[dlcCount];
 	WORD reserved;
 } OWNERSHIPTICKET;
 
