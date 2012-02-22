@@ -27,32 +27,32 @@ namespace SteamKit2.Internal
         /// <summary>
         /// Bootstrap list of CM servers.
         /// </summary>
-        public static readonly IPEndPoint[] Servers =
+        public static readonly IPAddress[] Servers =
         {
-            new IPEndPoint( IPAddress.Parse( "68.142.64.164" ), PortCM_PublicEncrypted ),
-            new IPEndPoint( IPAddress.Parse( "68.142.64.165" ), PortCM_PublicEncrypted ),
-            new IPEndPoint( IPAddress.Parse( "68.142.91.34" ), PortCM_PublicEncrypted ),
-            new IPEndPoint( IPAddress.Parse( "68.142.91.35" ), PortCM_PublicEncrypted ),
-            new IPEndPoint( IPAddress.Parse( "68.142.91.36" ), PortCM_PublicEncrypted ),
-            new IPEndPoint( IPAddress.Parse( "68.142.116.178" ), PortCM_PublicEncrypted ),
-            new IPEndPoint( IPAddress.Parse( "68.142.116.179" ), PortCM_PublicEncrypted ),
+            IPAddress.Parse( "68.142.64.164" ),
+            IPAddress.Parse( "68.142.64.165" ),
+            IPAddress.Parse( "68.142.91.34" ),
+            IPAddress.Parse( "68.142.91.35" ),
+            IPAddress.Parse( "68.142.91.36" ),
+            IPAddress.Parse( "68.142.116.178" ),
+            IPAddress.Parse( "68.142.116.179" ),
 
-            new IPEndPoint( IPAddress.Parse( "69.28.145.170" ), PortCM_PublicEncrypted ),
-            new IPEndPoint( IPAddress.Parse( "69.28.145.171" ), PortCM_PublicEncrypted ),
-            new IPEndPoint( IPAddress.Parse( "69.28.145.172" ), PortCM_PublicEncrypted ),
-            new IPEndPoint( IPAddress.Parse( "69.28.156.250" ), PortCM_PublicEncrypted ),
+            IPAddress.Parse( "69.28.145.170" ),
+            IPAddress.Parse( "69.28.145.171" ),
+            IPAddress.Parse( "69.28.145.172" ),
+            IPAddress.Parse( "69.28.156.250" ),
 
-            new IPEndPoint( IPAddress.Parse( "72.165.61.185" ), PortCM_PublicEncrypted ),
-            new IPEndPoint( IPAddress.Parse( "72.165.61.186" ), PortCM_PublicEncrypted ),
-            new IPEndPoint( IPAddress.Parse( "72.165.61.187" ), PortCM_PublicEncrypted ),
-            new IPEndPoint( IPAddress.Parse( "72.165.61.188" ), PortCM_PublicEncrypted ),
+            IPAddress.Parse( "72.165.61.185" ),
+            IPAddress.Parse( "72.165.61.186" ),
+            IPAddress.Parse( "72.165.61.187" ),
+            IPAddress.Parse( "72.165.61.188" ),
 
-            new IPEndPoint( IPAddress.Parse( "208.111.133.84" ), PortCM_PublicEncrypted ),
-            new IPEndPoint( IPAddress.Parse( "208.111.133.85" ), PortCM_PublicEncrypted ),
-            new IPEndPoint( IPAddress.Parse( "208.111.158.52" ), PortCM_PublicEncrypted ),
-            new IPEndPoint( IPAddress.Parse( "208.111.158.53" ), PortCM_PublicEncrypted ),
-            new IPEndPoint( IPAddress.Parse( "208.111.171.82" ), PortCM_PublicEncrypted ),
-            new IPEndPoint( IPAddress.Parse( "208.111.171.83" ), PortCM_PublicEncrypted ),
+            IPAddress.Parse( "208.111.133.84" ),
+            IPAddress.Parse( "208.111.133.85" ),
+            IPAddress.Parse( "208.111.158.52" ),
+            IPAddress.Parse( "208.111.158.53" ),
+            IPAddress.Parse( "208.111.171.82" ),
+            IPAddress.Parse( "208.111.171.83" ),
         };
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace SteamKit2.Internal
         /// <returns>The local IP.</returns>
         public IPAddress LocalIP
         {
-            get { return Connection.GetLocalIP(); }
+            get { return connection.GetLocalIP(); }
         }
 
         /// <summary>
@@ -83,7 +83,7 @@ namespace SteamKit2.Internal
 
         int serverNum = 0;
 
-        Connection Connection { get; set; }
+        Connection connection;
         byte[] tempSessionKey;
 
         ScheduledFunction heartBeatFunc;
@@ -106,19 +106,19 @@ namespace SteamKit2.Internal
             switch ( type )
             {
                 case ProtocolType.Tcp:
-                    Connection = new TcpConnection();
+                    connection = new TcpConnection();
                     break;
 
                 case ProtocolType.Udp:
-                    Connection = new UdpConnection();
+                    connection = new UdpConnection();
                     break;
 
                 default:
                     throw new NotSupportedException( "The provided protocol type is not supported. Only Tcp and Udp are available." );
             }
 
-            Connection.NetMsgReceived += NetMsgReceived;
-            Connection.Disconnected += Disconnected;
+            connection.NetMsgReceived += NetMsgReceived;
+            connection.Disconnected += Disconnected;
 
             heartBeatFunc = new ScheduledFunction( () =>
             {
@@ -132,7 +132,11 @@ namespace SteamKit2.Internal
         /// This begins the process of connecting and encrypting the data channel between the client and the server.
         /// Results are returned in a <see cref="SteamClient.ConnectedCallback"/>.
         /// </summary>
-        public void Connect()
+        /// <param name="bEncrypted">
+        /// If set to <c>true</c> the underlying connection to Steam will be encrypted. This is the default mode of communication.
+        /// Previous versions of SteamKit always used encryption.
+        /// </param>
+        public void Connect( bool bEncrypted = true )
         {
             this.Disconnect();
 
@@ -140,10 +144,13 @@ namespace SteamKit2.Internal
             // todo: cache off CM servers given by the CM
             // and add logic to determine "bad" servers
             int serverToTry = ( serverNum++ % Servers.Length );
+            var server = Servers[ serverToTry ];
+
+            var endPoint = new IPEndPoint( server, bEncrypted ? PortCM_PublicEncrypted : PortCM_Public );
 
             try
             {
-                Connection.Connect( Servers[ serverToTry ] );
+                connection.Connect( endPoint );
             }
             catch ( SocketException ex )
             {
@@ -151,6 +158,15 @@ namespace SteamKit2.Internal
 
                 // post disconnection callback
                 OnClientDisconnected();
+            }
+
+            if ( !bEncrypted )
+            {
+                // since there is no encryption handshake, we're 'connected' after the underlying connection is established
+                OnClientConnected();
+
+                // we only connect to the public universe
+                ConnectedUniverse = EUniverse.Public;
             }
         }
         /// <summary>
@@ -160,7 +176,7 @@ namespace SteamKit2.Internal
         {
             heartBeatFunc.Stop();
 
-            Connection.Disconnect();
+            connection.Disconnect();
         }
 
         /// <summary>
@@ -185,7 +201,7 @@ namespace SteamKit2.Internal
 
             try
             {
-                Connection.Send( msg );
+                connection.Send( msg );
             }
             catch ( IOException )
             {
@@ -250,6 +266,10 @@ namespace SteamKit2.Internal
         /// Called when the client is physically disconnected from Steam3.
         /// </summary>
         protected abstract void OnClientDisconnected();
+        /// <summary>
+        /// Called when the client is connected to Steam3 and is ready to send messages.
+        /// </summary>
+        protected abstract void OnClientConnected();
 
 
         void NetMsgReceived( object sender, NetMsgEventArgs e )
@@ -258,8 +278,10 @@ namespace SteamKit2.Internal
         }
         void Disconnected( object sender, EventArgs e )
         {
+            ConnectedUniverse = EUniverse.Invalid;
+
             heartBeatFunc.Stop();
-            Connection.NetFilter = null;
+            connection.NetFilter = null;
 
             OnClientDisconnected();
         }
@@ -361,9 +383,6 @@ namespace SteamKit2.Internal
 
             DebugLog.WriteLine( "CMClient", "Got encryption request. Universe: {0} Protocol ver: {1}", eUniv, protoVersion );
 
-            ConnectedUniverse = eUniv;
-
-            tempSessionKey = CryptoHelper.GenerateRandomBlock( 32 );
             byte[] pubKey = KeyDictionary.GetPublicKey( eUniv );
 
             if ( pubKey == null )
@@ -372,8 +391,11 @@ namespace SteamKit2.Internal
                 return;
             }
 
+            ConnectedUniverse = eUniv;
+
             var encResp = new Msg<MsgChannelEncryptResponse>();
 
+            tempSessionKey = CryptoHelper.GenerateRandomBlock( 32 );
             byte[] cryptedSessKey = null;
 
             using ( var rsa = new RSACrypto( pubKey ) )
@@ -387,7 +409,7 @@ namespace SteamKit2.Internal
             encResp.Write( keyCrc );
             encResp.Write( ( uint )0 );
 
-            Connection.Send( encResp );
+            this.Send( encResp );
         }
         void HandleEncryptResult( IPacketMsg packetMsg )
         {
@@ -397,11 +419,14 @@ namespace SteamKit2.Internal
 
             if ( encResult.Body.Result == EResult.OK )
             {
-                Connection.NetFilter = new NetFilterEncryption( tempSessionKey );
+                connection.NetFilter = new NetFilterEncryption( tempSessionKey );
             }
         }
         void HandleLoggedOff( IPacketMsg packetMsg )
         {
+            SessionID = null;
+            SteamID = null;
+
             heartBeatFunc.Stop();
         }
         void HandleServerList( IPacketMsg packetMsg )

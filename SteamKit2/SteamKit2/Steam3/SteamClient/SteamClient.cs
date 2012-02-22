@@ -314,6 +314,14 @@ namespace SteamKit2
             this.PostCallback( new DisconnectedCallback() );
 #endif
         }
+        protected override void OnClientConnected()
+        {
+#if STATIC_CALLBACKS
+            SteamClient.PostCallback( new ConnectedCallback( this, EResult.OK ) );
+#else
+            PostCallback( new ConnectedCallback( EResult.OK ) );
+#endif
+        }
 
 
         void HandleEncryptResult( IPacketMsg packetMsg )
