@@ -9,19 +9,41 @@ using SteamKit2;
 
 namespace SteamKit2.Blob
 {
+    /// <summary>
+    /// This attribute is used to mark properties, classes, and structs for typed reading.
+    /// </summary>
     [AttributeUsage(AttributeTargets.Property | 
                     AttributeTargets.Class |
                     AttributeTargets.Struct,
                     Inherited = false, AllowMultiple = false)]
     public class BlobFieldAttribute : Attribute
     {
-        public int Depth; // depth from stack
-        public string FieldKey; // the key
-        public int SubFieldDepth; // depth to sub field for value
-        public string SubFieldKey; // value sub field to use for fields with blobs
-        public bool Complex; // if complex, the sub type will be searched for blobfields
+        /// <summary>
+        /// Depth from stack.
+        /// </summary>
+        public int Depth { get; set; }
+        /// <summary>
+        /// Field key.
+        /// </summary>
+        public string FieldKey { get; set; }
+        /// <summary>
+        /// Depth to sub field for value.
+        /// </summary>
+        public int SubFieldDepth { get; set; }
+        /// <summary>
+        /// Value sub field to use for fields with blobs.
+        /// </summary>
+        public string SubFieldKey { get; set; }
+        /// <summary>
+        /// If complex, the sub type will be searched for blob fields.
+        /// </summary>
+        public bool Complex { get; set; }
     }
 
+    /// <summary>
+    /// Utility blob reader which processes blob data into the given type.
+    /// </summary>
+    /// <typeparam name="T">The type to process the blob into.</typeparam>
     public class BlobTypedReader<T> : BlobReader
     {
         private enum EProcessingState
@@ -52,6 +74,9 @@ namespace SteamKit2.Blob
             }
         }
 
+        /// <summary>
+        /// Gets the completed type object available after processing.
+        /// </summary>
         public T Target { get; private set; }
 
         private int depth;
@@ -425,11 +450,21 @@ namespace SteamKit2.Blob
         }
 
 
+        /// <summary>
+        /// Creates a new instance of a <see cref="BlobTypedReader&lt;T&gt;"/> for the given input stream.
+        /// </summary>
+        /// <param name="inputStream">The input stream to process.</param>
+        /// <returns>A new <see cref="BlobReader"/> instance.</returns>
         public static new BlobTypedReader<T> Create(Stream inputStream)
         {
             return new BlobTypedReader<T>(inputStream);
         }
 
+        /// <summary>
+        /// Creates a new instance of a <see cref="BlobTypedReader&lt;T&gt;"/> for the given input file.
+        /// </summary>
+        /// <param name="fileName">The input file to process.</param>
+        /// <returns>A new <see cref="BlobReader"/> instance.</returns>
         public static new BlobTypedReader<T> Create(string fileName)
         {
             return Create(new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.None, 0x1000, FileOptions.SequentialScan));
