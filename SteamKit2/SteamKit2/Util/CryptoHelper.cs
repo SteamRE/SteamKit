@@ -38,7 +38,7 @@ namespace SteamKit2
 
         public void Dispose()
         {
-            rsa.Dispose();
+            ((IDisposable)rsa).Dispose();
         }
     }
 
