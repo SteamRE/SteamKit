@@ -10,14 +10,31 @@ using System.Text;
 
 namespace SteamKit2
 {
+    /// <summary>
+    /// Represents a Steam2 authentication ticket container used for downloading authenticated content from Steam2 servers.
+    /// </summary>
     public sealed class Steam2Ticket
     {
+        /// <summary>
+        /// Represents a single data entry within the ticket container.
+        /// </summary>
         public sealed class Entry
         {
-            public ushort Magic { get; set; } // 0x0400, probably entry magic? idk
-            // public uint Length { get; set; }
-            public uint Index { get; set; }
-            public byte[] Data { get; set; }
+            /// <summary>
+            /// Gets the magic.
+            /// </summary>
+            public ushort Magic { get; private set; } // 0x0400, probably entry magic? idk
+
+            /// <summary>
+            /// Gets the index of this entry.
+            /// </summary>
+            public uint Index { get; private set; }
+
+            /// <summary>
+            /// Gets the data of this entry.
+            /// </summary>
+            public byte[] Data { get; private set; }
+
 
             internal void Deserialize( DataStream ds )
             {
@@ -30,16 +47,26 @@ namespace SteamKit2
             }
         }
 
-        // header stuff
-        public ushort Magic { get; set; } // 0x0150, more crazy magic
 
-        public uint Length { get; set; }
-        public uint Unknown1 { get; set; } // who knows!
+        /// <summary>
+        /// Gets the magic of the container.
+        /// </summary>
+        public ushort Magic { get; private set; } // 0x0150, more crazy magic?
 
+        /// <summary>
+        /// Gets the length, in bytes, of the container.
+        /// </summary>
+        public uint Length { get; private set; }
+
+        uint unknown1;
+
+        /// <summary>
+        /// Gets the <see cref="Entry">entries</see> within this container.
+        /// </summary>
         public List<Entry> Entries { get; private set; }
 
 
-        public Steam2Ticket( byte[] blob )
+        internal Steam2Ticket( byte[] blob )
         {
             Entries = new List<Entry>();
 
@@ -48,7 +75,7 @@ namespace SteamKit2
                 Magic = ds.ReadUInt16();
 
                 Length = ds.ReadUInt32();
-                Unknown1 = ds.ReadUInt32();
+                unknown1 = ds.ReadUInt32();
 
                 while ( ds.SizeRemaining() > 0 )
                 {
@@ -59,7 +86,5 @@ namespace SteamKit2
                 }
             }
         }
-
-        
     }
 }
