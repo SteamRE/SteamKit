@@ -23,54 +23,47 @@ namespace SteamKit2
             /// <summary>
             /// Gets the result of the logon.
             /// </summary>
-            /// <value>The result.</value>
             public EResult Result { get; private set; }
 
             /// <summary>
             /// Gets the extended result of the logon.
             /// </summary>
-            /// <vlaue>The result.</vlaue>
             public EResult ExtendedResult { get; private set; }
 
             /// <summary>
-            /// Gets the out of game secs per heartbeat value. This is used internally.
+            /// Gets the out of game secs per heartbeat value.
+            /// This is used internally by SteamKit to initialize heartbeating.
             /// </summary>
-            /// <value>The out of game secs per heartbeat.</value>
             public int OutOfGameSecsPerHeartbeat { get; private set; }
             /// <summary>
-            /// Gets the in game secs per heartbeat value. This is used internally.
+            /// Gets the in game secs per heartbeat value.
+            /// This is used internally by SteamKit to initialize heartbeating.
             /// </summary>
-            /// <value>The in game secs per heartbeat.</value>
             public int InGameSecsPerHeartbeat { get; private set; }
 
             /// <summary>
             /// Gets or sets the public IP of the client
             /// </summary>
-            /// <value>The public IP.</value>
             public IPAddress PublicIP { get; private set; }
 
             /// <summary>
             /// Gets the Steam3 server time.
             /// </summary>
-            /// <value>The server time.</value>
             public DateTime ServerTime { get; private set; }
 
             /// <summary>
             /// Gets the account flags assigned by the server.
             /// </summary>
-            /// <value>The account flags.</value>
             public EAccountFlags AccountFlags { get; private set; }
 
             /// <summary>
             /// Gets the client steam ID.
             /// </summary>
-            /// <value>The client steam ID.</value>
             public SteamID ClientSteamID { get; private set; }
 
             /// <summary>
             /// Gets the email domain.
             /// </summary>
-            /// <value>The email domain.</value>
             public string EmailDomain { get; private set; }
 
             /// <summary>
@@ -80,8 +73,10 @@ namespace SteamKit2
 
             /// <summary>
             /// Gets the Steam2 ticket.
+            /// This is used for authenticated content downloads in Steam2.
+            /// This field will only be set when <see cref="LogOnDetails.RequestSteam2Ticket"/> has been set to <c>true</c>.
             /// </summary>
-            public byte[] Steam2Ticket { get; private set; }
+            public Steam2Ticket Steam2Ticket { get; private set; }
 
 
 #if STATIC_CALLBACKS
@@ -92,7 +87,7 @@ namespace SteamKit2
 #endif
             {
                 this.Result = ( EResult )resp.eresult;
-                this.ExtendedResult =(EResult)resp.eresult_extended;
+                this.ExtendedResult = ( EResult )resp.eresult_extended;
 
                 this.OutOfGameSecsPerHeartbeat = resp.out_of_game_heartbeat_seconds;
                 this.InGameSecsPerHeartbeat = resp.in_game_heartbeat_seconds;
@@ -109,7 +104,7 @@ namespace SteamKit2
 
                 this.CellID = resp.cell_id;
 
-                this.Steam2Ticket = resp.steam2_ticket;
+                this.Steam2Ticket = new Steam2Ticket( resp.steam2_ticket );
             }
         }
 
