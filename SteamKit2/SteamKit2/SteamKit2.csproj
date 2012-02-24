@@ -43,8 +43,7 @@
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <DocumentationFile>
-    </DocumentationFile>
+    <DocumentationFile>bin\Debug\SteamKit2.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -55,6 +54,7 @@
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>bin\Release\SteamKit2.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Classless.Hasher, Version=0.7.2247.36474, Culture=neutral, PublicKeyToken=bad6dfcf741043ca, processorArchitecture=MSIL">
@@ -84,7 +84,6 @@
     <Compile Include="Blob\Caching\CacheUtil.cs" />
     <Compile Include="Blob\Caching\DynamicMethodHandler.cs" />
     <Compile Include="Blob\Caching\FastPropertyInfo.cs" />
-    <Compile Include="Blob\Fields\AuthFields.cs" />
     <Compile Include="Blob\Fields\CDRFields.cs" />
     <Compile Include="Blob\FramingStream.cs" />
     <Compile Include="Blob\Parsers\BlobTypedReader.cs" />

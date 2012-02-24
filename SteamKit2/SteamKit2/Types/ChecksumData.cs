@@ -21,50 +21,60 @@ namespace SteamKit2
      * 
      * TODO: figure out what that doesn't seem to match up.
      */
+
+    /// <summary>
+    /// Represents file checksum data for Steam2 manifests.
+    /// </summary>
     public sealed class Steam2ChecksumData
     {
-        public byte[] RawData { get; private set; }
+        byte[] data;
 
-        uint ItemCount;
-        uint ChecksumCount;
+        uint itemCount;
+        uint checksumCount;
 
-        public sealed class ChecksumMapEntry
+        sealed class ChecksumMapEntry
         {
-            public ChecksumMapEntry( uint count, uint start )
+            internal ChecksumMapEntry( uint count, uint start )
             {
                 this.ChecksumCount = count;
                 this.FirstChecksumIndex = start;
             }
+
             public uint ChecksumCount { get; private set; }
             public uint FirstChecksumIndex { get; private set; }
         };
 
-        private List<ChecksumMapEntry> maps;
-        private Dictionary<uint, int> checksums;
+        List<ChecksumMapEntry> maps;
+        Dictionary<uint, int> checksums;
 
-        public Steam2ChecksumData( byte[] blob )
+
+        internal Steam2ChecksumData( byte[] blob )
         {
             maps = new List<ChecksumMapEntry>();
             checksums = new Dictionary<uint, int>();
-            RawData = blob;
-            using ( MemoryStream ms = new MemoryStream( RawData ) )
+
+            data = blob;
+
+            using ( MemoryStream ms = new MemoryStream( data ) )
             {
                 using ( BinaryReader br = new BinaryReader( ms ) )
                 {
                     // we don't care about the first two, always the same
                     br.ReadBytes( 8 );
-                    ItemCount = br.ReadUInt32();
-                    ChecksumCount = br.ReadUInt32();
+
+                    itemCount = br.ReadUInt32();
+                    checksumCount = br.ReadUInt32();
+
                     uint count;
                     uint start = 0;
-                    for ( int i = 0 ; i < ItemCount ; i++ )
+                    for ( int i = 0 ; i < itemCount ; i++ )
                     {
                         count = br.ReadUInt32();
                         start = br.ReadUInt32();
                         maps.Add( new ChecksumMapEntry( count, start ) );
                     }
 
-                    for ( uint i = 0 ; i < ChecksumCount ; i++ )
+                    for ( uint i = 0 ; i < checksumCount ; i++ )
                     {
                         long pos = br.BaseStream.Position;
                         checksums[ i ] = br.ReadInt32();
@@ -73,15 +83,23 @@ namespace SteamKit2
             }
         }
 
+        /// <summary>
+        /// Gets checksums for the given FileID.
+        /// </summary>
+        /// <param name="FileID">The FileID.</param>
+        /// <returns>A list of checksums for the given file.</returns>
         public int[] GetFileChecksums( int FileID )
         {
             ChecksumMapEntry map = maps[ FileID ];
+
             uint count = map.ChecksumCount;
             int[] ret = new int[ count ];
+
             for ( int i = 0 ; i < count ; i++ )
             {
                 ret[ i ] = checksums[ map.FirstChecksumIndex + ( uint )i ];
             }
+
             return ret;
         }
     }

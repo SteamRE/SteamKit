@@ -12,24 +12,43 @@ using System.Text.RegularExpressions;
 
 namespace SteamKit2
 {
-    public class CDNClient
+    /// <summary>
+    /// Represents a client able to connect to the Steam3 CDN and download games on the new content system.
+    /// </summary>
+    public sealed class CDNClient
     {
-        public class ClientEndPoint
+        /// <summary>
+        /// Represents the endpoint of a Steam3 content server.
+        /// </summary>
+        public sealed class ClientEndPoint
         {
-            public string Host;
-            public int Port;
-            public string Type;
+            /// <summary>
+            /// Gets the server host.
+            /// </summary>
+            public string Host { get; private set; }
+            /// <summary>
+            /// Gets the server port.
+            /// </summary>
+            public int Port { get; private set; }
+            /// <summary>
+            /// Gets the server type.
+            /// </summary>
+            public string Type { get; private set; }
 
-            public ClientEndPoint(string host, int port)
+
+            /// <summary>
+            /// Initializes a new instance of the <see cref="ClientEndPoint"/> class.
+            /// </summary>
+            /// <param name="host">The server host.</param>
+            /// <param name="port">The server port.</param>
+            /// <param name="type">The server type.</param>
+            public ClientEndPoint( string host, int port, string type = null )
             {
                 Host = host;
                 Port = port;
-            }
-
-            public ClientEndPoint(string host, int port, string type) : this(host, port)
-            {
                 Type = type;
             }
+
         }
 
         private WebClient webClient;
@@ -46,6 +65,11 @@ namespace SteamKit2
             ServicePointManager.Expect100Continue = false;
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CDNClient"/> class.
+        /// </summary>
+        /// <param name="cdnServer">The CDN server to connect to.</param>
+        /// <param name="appticket">The appticket of the app this instance is for.</param>
         public CDNClient(ClientEndPoint cdnServer, byte[] appticket)
         {
             sessionKey = CryptoHelper.GenerateRandomBlock(32);
@@ -56,16 +80,28 @@ namespace SteamKit2
             appTicket = appticket;
         }
 
+        /// <summary>
+        /// Releases unmanaged resources and performs other cleanup operations before the
+        /// <see cref="CDNClient"/> is reclaimed by garbage collection.
+        /// </summary>
         ~CDNClient()
         {
             webClient.Dispose();
         }
 
+        /// <summary>
+        /// Points this <see cref="CDNClient"/> instance to another server.
+        /// </summary>
+        /// <param name="ep">The endpoint.</param>
         public void PointTo(ClientEndPoint ep)
         {
             endPoint = ep;
         }
 
+        /// <summary>
+        /// Connects this instance to the server.
+        /// </summary>
+        /// <returns><c>true</c> if the connection was a success; otherwise, <c>false</c>.</returns>
         public bool Connect()
         {
 
@@ -114,7 +150,13 @@ namespace SteamKit2
             return true;
         }
 
-        public byte[] DownloadDepotManifest(int depotid, ulong manifestid)
+        /// <summary>
+        /// Downloads the depot manifest for the given depot and manifest.
+        /// </summary>
+        /// <param name="depotid">The depotid.</param>
+        /// <param name="manifestid">The manifestid.</param>
+        /// <returns>A <see cref="DepotManifest"/> instance on success; otherwise, <c>null</c>.</returns>
+        public DepotManifest DownloadDepotManifest(int depotid, ulong manifestid)
         {
             Uri manifestURI = new Uri(BuildCommand(endPoint, "depot"), String.Format("{0}/manifest/{1}", depotid, manifestid));
 
@@ -140,9 +182,15 @@ namespace SteamKit2
                 return null;
             }
 
-            return manifest;
+            return new DepotManifest( manifest );
         }
 
+        /// <summary>
+        /// Downloads the specified depot chunk from the content server.
+        /// </summary>
+        /// <param name="depotid">The DepotID of the chunk to download.</param>
+        /// <param name="chunkid">The the ID of the chunk to download.</param>
+        /// <returns></returns>
         public byte[] DownloadDepotChunk(int depotid, string chunkid)
         {
             Uri chunkURI = new Uri(BuildCommand(endPoint, "depot"), String.Format("{0}/chunk/{1}", depotid, chunkid));
@@ -162,6 +210,12 @@ namespace SteamKit2
             return chunk;
         }
 
+        /// <summary>
+        /// Processes a chunk by decrypting and decompressing it.
+        /// </summary>
+        /// <param name="chunk">The chunk to process.</param>
+        /// <param name="depotkey">The AES encryption key to use when decrypting the chunk.</param>
+        /// <returns>The processed chunk.</returns>
         public byte[] ProcessChunk(byte[] chunk, byte[] depotkey)
         {
             byte[] decrypted_chunk = CryptoHelper.SymmetricDecrypt(chunk, depotkey);
@@ -211,6 +265,12 @@ namespace SteamKit2
             return new Uri(String.Format("http://{0}:{1}/{2}/", csServer.Host, csServer.Port.ToString(), command));
         }
 
+        /// <summary>
+        /// Fetches a server list from the given content server for the provided CellID.
+        /// </summary>
+        /// <param name="csServer">The server to request a server list from.</param>
+        /// <param name="cellID">The CellID.</param>
+        /// <returns>A list of content servers.</returns>
         public static List<ClientEndPoint> FetchServerList(ClientEndPoint csServer, int cellID)
         {
             int serversToRequest = 20;

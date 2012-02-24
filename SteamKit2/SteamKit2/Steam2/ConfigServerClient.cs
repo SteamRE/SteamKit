@@ -24,24 +24,10 @@ namespace SteamKit2
         {
         }
 
-
-#if false
-        // v0v
-        public byte[] GetUnk()
-        {
-            if ( !this.HandshakeServer( EServerType.ConfigServer ) )
-                return null;
-
-            uint externalIp = this.Socket.Reader.ReadUInt32();
-
-            if ( !this.SendCommand( 7 ) ) // command: who knows!
-                return null;
-
-            return this.Socket.Reader.ReadBytes( 9 );
-
-        }
-#endif
-
+        /// <summary>
+        /// Requests the network key from the config server.
+        /// </summary>
+        /// <returns>The network key.</returns>
         public byte[] GetNetworkKey()
         {
             if ( !this.HandshakeServer( ESteam2ServerType.ConfigServer ) )
@@ -61,19 +47,14 @@ namespace SteamKit2
             return key;
         }
 
-
-        public byte[] GetContentDescriptionRecord()
-        {
-            return this.GetContentDescriptionRecord( null );
-        }
         /// <summary>
         /// Gets the current content description record (CDR) provided by the config server.
         /// Optionally accepts an old CDR hash in order to determine if a new CDR should be downloaded or not.
         /// The old CDR hash is a SHA-1 hash of the entire CDR payload.
         /// </summary>
         /// <param name="oldCDRHash">An optional CDR hash.</param>
-        /// <returns>A byte blob representing the CDR on success; otherwise, null.</returns>
-        public byte[] GetContentDescriptionRecord( byte[] oldCDRHash )
+        /// <returns>A byte blob representing the CDR on success; otherwise, <c>null</c>.</returns>
+        public byte[] GetContentDescriptionRecord( byte[] oldCDRHash = null )
         {
             try
             {
@@ -110,6 +91,10 @@ namespace SteamKit2
 
         }
 
+        /// <summary>
+        /// Requests the client config record from the server.
+        /// </summary>
+        /// <returns>A binary blob that represents the config record on success; otherwise <c>null</c>.</returns>
         public byte[] GetClientConfigRecord()
         {
 

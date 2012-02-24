@@ -16,6 +16,9 @@ namespace SteamKit2
     public abstract class ClientMsgHandler
     {
 
+        /// <summary>
+        /// Gets the underlying <see cref="SteamClient"/> for use in sending replies.
+        /// </summary>
         protected SteamClient Client { get; private set; }
 
 

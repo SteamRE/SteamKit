@@ -15,155 +15,256 @@ using System.Text;
 
 namespace SteamKit2
 {
-    public class BinaryReaderEx : BinaryReader
-    {
-        public BinaryReaderEx(Stream stream)
-            : base(stream)
-        {
-        }
-
-        public static implicit operator Stream(BinaryReaderEx br)
-        {
-            return br.BaseStream;
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            //Stop BinaryReader from closing the stream
-            base.Dispose(false);
-        }
-    }
+    /// <summary>
+    /// Helper class that allows writing binary data to a stream.
+    /// </summary>
     public class BinaryWriterEx : BinaryWriter
     {
+        /// <summary>
+        /// Gets or sets a value indicating whether to swap endianness when writing basic types.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if to swap endianness when writing basic types; otherwise, <c>false</c>.
+        /// </value>
         public bool SwapEndianness { get; set; }
+
+        /// <summary>
+        /// gets the length in bytes of the stream.
+        /// </summary>
         public long Length { get { return BaseStream.Length; } }
+        /// <summary>
+        /// Gets the position within the current stream.
+        /// </summary>
         public long Position { get { return BaseStream.Position; } }
 
-        public BinaryWriterEx()
-            : this(false)
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BinaryWriterEx"/> class.
+        /// </summary>
+        /// <param name="swapEndianness">if set to <c>true</c>, perform an endian swap when writing basic types.</param>
+        public BinaryWriterEx( bool swapEndianness = false)
+            : this( new MemoryStream(), swapEndianness )
         {
         }
-        public BinaryWriterEx(bool swapEndianness)
-            : this(new MemoryStream(), swapEndianness)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BinaryWriterEx"/> class.
+        /// </summary>
+        /// <param name="capacity">The initial size of the internal array in bytes.</param>
+        /// <param name="swapEndianness">if set to <c>true</c>, perform an endian swap when writing basic types.</param>
+        public BinaryWriterEx( int capacity, bool swapEndianness = false )
+            : this( new MemoryStream( capacity ), swapEndianness )
         {
         }
-        public BinaryWriterEx(int capacity)
-            : this(capacity, false)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BinaryWriterEx"/> class.
+        /// </summary>
+        /// <param name="stream">The output stream.</param>
+        /// <param name="swapEndianness">if set to <c>true</c>, perform an endian swap when writing basic types.</param>
+        public BinaryWriterEx( Stream stream, bool swapEndianness = false )
+            : base( stream )
         {
-        }
-        public BinaryWriterEx(int capacity, bool swapEndianness)
-            : this(new MemoryStream(capacity), swapEndianness)
-        {
-        }
-        public BinaryWriterEx(Stream stream)
-            : this(stream, false)
-        {
-        }
-        public BinaryWriterEx(Stream stream, bool swapEndianness)
-            : base(stream)
-        {
-            SwapEndianness = swapEndianness;
+            this.SwapEndianness = swapEndianness;
         }
 
-        public static implicit operator Stream(BinaryWriterEx bw)
+        /// <summary>
+        /// Performs an implicit conversion from <see cref="SteamKit2.BinaryWriterEx"/> to <see cref="System.IO.Stream"/>.
+        /// </summary>
+        /// <param name="bw">The <see cref="SteamKit2.BinaryWriterEx"/>.</param>
+        /// <returns>
+        /// The result of the conversion.
+        /// </returns>
+        public static implicit operator Stream( BinaryWriterEx bw )
         {
             return bw.BaseStream;
         }
 
-        protected override void Dispose(bool disposing)
+        /// <summary>
+        /// Releases the unmanaged resources used by the <see cref="T:System.IO.BinaryWriter"/> and optionally releases the managed resources.
+        /// </summary>
+        /// <param name="disposing">true to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
+        protected override void Dispose( bool disposing )
         {
             //Stop BinaryWriter from closing the stream
-            base.Dispose(false);
+            base.Dispose( false );
         }
 
+        /// <summary>
+        /// Clears this instance.
+        /// </summary>
         public void Clear()
         {
+            if ( OutStream != null )
+                OutStream.Dispose();
+
             OutStream = new MemoryStream();
         }
 
-        public override void Write(short value)
+        /// <summary>
+        /// Writes a two-byte signed integer to the current stream and advances the stream position by two bytes.
+        /// </summary>
+        /// <param name="value">The two-byte signed integer to write.</param>
+        /// <exception cref="T:System.IO.IOException">An I/O error occurs. </exception>
+        ///   
+        /// <exception cref="T:System.ObjectDisposedException">The stream is closed. </exception>
+        public override void Write( short value )
         {
-            if (SwapEndianness)
-                value = IPAddress.HostToNetworkOrder(value);
-            base.Write(value);
+            if ( SwapEndianness )
+                value = IPAddress.HostToNetworkOrder( value );
+
+            base.Write( value );
         }
-        public override void Write(int value)
+        /// <summary>
+        /// Writes a four-byte signed integer to the current stream and advances the stream position by four bytes.
+        /// </summary>
+        /// <param name="value">The four-byte signed integer to write.</param>
+        /// <exception cref="T:System.IO.IOException">An I/O error occurs. </exception>
+        ///   
+        /// <exception cref="T:System.ObjectDisposedException">The stream is closed. </exception>
+        public override void Write( int value )
         {
-            if (SwapEndianness)
-                value = IPAddress.HostToNetworkOrder(value);
-            base.Write(value);
+            if ( SwapEndianness )
+                value = IPAddress.HostToNetworkOrder( value );
+
+            base.Write( value );
         }
-        public override void Write(long value)
+        /// <summary>
+        /// Writes an eight-byte signed integer to the current stream and advances the stream position by eight bytes.
+        /// </summary>
+        /// <param name="value">The eight-byte signed integer to write.</param>
+        /// <exception cref="T:System.IO.IOException">An I/O error occurs. </exception>
+        ///   
+        /// <exception cref="T:System.ObjectDisposedException">The stream is closed. </exception>
+        public override void Write( long value )
         {
-            if (SwapEndianness)
-                value = IPAddress.HostToNetworkOrder(value);
-            base.Write(value);
+            if ( SwapEndianness )
+                value = IPAddress.HostToNetworkOrder( value );
+
+            base.Write( value );
         }
-        public override void Write(ushort value)
+        /// <summary>
+        /// Writes a two-byte unsigned integer to the current stream and advances the stream position by two bytes.
+        /// </summary>
+        /// <param name="value">The two-byte unsigned integer to write.</param>
+        /// <exception cref="T:System.IO.IOException">An I/O error occurs. </exception>
+        ///   
+        /// <exception cref="T:System.ObjectDisposedException">The stream is closed. </exception>
+        public override void Write( ushort value )
         {
-            Write((short)value);
+            Write( ( short )value );
         }
-        public override void Write(uint value)
+        /// <summary>
+        /// Writes a four-byte unsigned integer to the current stream and advances the stream position by four bytes.
+        /// </summary>
+        /// <param name="value">The four-byte unsigned integer to write.</param>
+        /// <exception cref="T:System.IO.IOException">An I/O error occurs. </exception>
+        ///   
+        /// <exception cref="T:System.ObjectDisposedException">The stream is closed. </exception>
+        public override void Write( uint value )
         {
-            Write((int)value);
+            Write( ( int )value );
         }
-        public override void Write(ulong value)
+        /// <summary>
+        /// Writes an eight-byte unsigned integer to the current stream and advances the stream position by eight bytes.
+        /// </summary>
+        /// <param name="value">The eight-byte unsigned integer to write.</param>
+        /// <exception cref="T:System.IO.IOException">An I/O error occurs. </exception>
+        ///   
+        /// <exception cref="T:System.ObjectDisposedException">The stream is closed. </exception>
+        public override void Write( ulong value )
         {
-            Write((long)value);
+            Write( ( long )value );
         }
 
 
-        public void Write(Type dataType, object data)
+        /// <summary>
+        /// Attempts to marshal the given type and data into a byte array, and write it to the stream.
+        /// </summary>
+        /// <param name="dataType">The <see cref="Type"/> of the data.</param>
+        /// <param name="data">The object that will be marshaled into the stream.</param>
+        public void Write( Type dataType, object data )
         {
-            int dataLen = Marshal.SizeOf(dataType);
-            IntPtr dataBlock = Marshal.AllocHGlobal(dataLen);
+            int dataLen = Marshal.SizeOf( dataType );
+            IntPtr dataBlock = Marshal.AllocHGlobal( dataLen );
 
-            Marshal.StructureToPtr(data, dataBlock, true);
+            Marshal.StructureToPtr( data, dataBlock, true );
 
-            byte[] byteData = new byte[dataLen];
+            byte[] byteData = new byte[ dataLen ];
 
-            Marshal.Copy(dataBlock, byteData, 0, dataLen);
+            Marshal.Copy( dataBlock, byteData, 0, dataLen );
 
-            Marshal.FreeHGlobal(dataBlock);
+            Marshal.FreeHGlobal( dataBlock );
 
-            if (SwapEndianness)
-                Array.Reverse(byteData);
+            if ( SwapEndianness )
+                Array.Reverse( byteData );
 
-            Write(byteData);
+            Write( byteData );
         }
-        //Not named 'Write' because when you would call Write(byte[]) it would try to call Write<byte[]>(byte[])
-        public void WriteType<T>(T data) where T : struct
+
+        /// <summary>
+        /// Attempts to marshal the given type and data into a byte array, and write it to the stream.
+        /// </summary>
+        /// <typeparam name="T">The <see cref="Type"/> of the data.</typeparam>
+        /// <param name="data">The object that will be marshaled into the stream.</param>
+        public void WriteType<T>( T data )
+            where T : struct
         {
-            Write(typeof(T), data);
+            Write( typeof( T ), data );
         }
 
+        /// <summary>
+        /// Writes the stream contents to a byte array, regardless of the <see cref="Position"/> property.
+        /// </summary>
+        /// <returns>A new byte array.</returns>
         public byte[] ToArray()
         {
-            if (BaseStream is MemoryStream)
-                return ((MemoryStream)BaseStream).ToArray();
+            var ms = BaseStream as MemoryStream;
+
+            if ( ms != null )
+                return ms.ToArray();
+
             return null;
         }
 
-        public new void Write(string data)
+        /// <summary>
+        /// Writes the specified string to the stream using default encoding.
+        /// This function does not write a terminating null character.
+        /// </summary>
+        /// <param name="data">The string to write.</param>
+        public new void Write( string data )
         {
-            Write(data, Encoding.Default);
+            Write( data, Encoding.Default );
         }
-        public void Write(string data, Encoding encoding)
+        /// <summary>
+        /// Writes the specified string to the stream using the specified encoding.
+        /// This function does not write a terminating null character.
+        /// </summary>
+        /// <param name="data">The string to write.</param>
+        /// <param name="encoding">The encoding to use when writing the string.</param>
+        public void Write( string data, Encoding encoding )
         {
-            if (data == null)
+            if ( data == null )
                 return;
-            Write(encoding.GetBytes(data));
+
+            Write( encoding.GetBytes( data ) );
         }
 
-        public void WriteNullTermString(string data)
+        /// <summary>
+        /// Writes the secified string and a null terminator to the stream using default encoding.
+        /// </summary>
+        /// <param name="data">The string to write.</param>
+        public void WriteNullTermString( string data )
         {
-            WriteNullTermString(data, Encoding.Default);
+            WriteNullTermString( data, Encoding.Default );
         }
-        public void WriteNullTermString(string data, Encoding encoding)
+        /// <summary>
+        /// Writes the specified string and a null terminator to the stream using the specified encoding.
+        /// </summary>
+        /// <param name="data">The string to write.</param>
+        /// <param name="encoding">The encoding to use when writing the string.</param>
+        public void WriteNullTermString( string data, Encoding encoding )
         {
-            Write(data, encoding);
-            WriteType<Byte>(0);
+            Write( data, encoding );
+            Write( encoding.GetBytes( "\0" ) );
         }
     }
-
 }

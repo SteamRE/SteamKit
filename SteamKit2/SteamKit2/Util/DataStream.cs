@@ -26,6 +26,12 @@ namespace SteamKit2
         public byte[] Data { get; set; }
 
 
+        /// <summary>
+        /// Gets or sets a value indicating whether to swap endianness when reading basic types.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if to swap endianness when reading basic types; otherwise, <c>false</c>.
+        /// </value>
         public bool SwapEndianness { get; set; }
 
 

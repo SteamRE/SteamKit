@@ -57,7 +57,6 @@ namespace SteamKit2
             /// <value>The ServerTGT.</value>
             public Steam2Ticket Steam2Ticket { get; set; }
 
-            // steam3 details
             /// <summary>
             /// Gets or sets the Steam3 session token.
             /// </summary>
@@ -171,29 +170,62 @@ namespace SteamKit2
         /// </summary>
         public sealed class StorageSession : IDisposable
         {
+            /// <summary>
+            /// The priority setting for a file download.
+            /// </summary>
             public enum DownloadPriority : byte
             {
+                /// <summary>
+                /// Low priority.
+                /// </summary>
                 Low = 0,
+                /// <summary>
+                /// Medium priority.
+                /// </summary>
                 Medium = 1,
+                /// <summary>
+                /// High priority.
+                /// </summary>
                 High = 2,
             }
 
+            /// <summary>
+            /// Represents the state of a file within a depot.
+            /// </summary>
             public enum FileMode
             {
+                /// <summary>
+                /// No special handling is required.
+                /// </summary>
                 None = 0,
+                /// <summary>
+                /// This file is compressed.
+                /// </summary>
                 Compressed = 1,
+                /// <summary>
+                /// This file is compressed and encrypted.
+                /// </summary>
                 EncryptedAndCompressed = 2,
+                /// <summary>
+                /// This file is encrypted.
+                /// </summary>
                 Encrypted = 3,
             }
 
 
+            /// <summary>
+            /// Gets the depot ID this session instance is for.
+            /// </summary>
             public uint DepotID { get; private set; }
+            /// <summary>
+            /// Gets the depot version this session instance is for.
+            /// </summary>
             public uint DepotVersion { get; private set; }
 
-            public uint ConnectionID { get; private set; }
-            public uint MessageID { get; private set; }
+            uint ConnectionID;
+            uint MessageID;
 
-            public uint StorageID { get; private set; }
+            uint StorageID;
 
 
             ContentServerClient client;
@@ -257,6 +289,9 @@ namespace SteamKit2
 
             }
 
+            /// <summary>
+            /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            /// </summary>
             public void Dispose()
             {
                 this.SendCommand( 3,
@@ -266,6 +301,10 @@ namespace SteamKit2
             }
 
 
+            /// <summary>
+            /// Downloads the <see cref="Steam2Manifest"/> which contains metadata representing the files within the depot.
+            /// </summary>
+            /// <returns></returns>
             public Steam2Manifest DownloadManifest()
             {
                 bool bRet = this.SendCommand(
@@ -307,6 +346,10 @@ namespace SteamKit2
 
                 return new Steam2Manifest( manifest );
             }
+            /// <summary>
+            /// Downloads the <see cref="Steam2ChecksumData"/> for this depot.
+            /// </summary>
+            /// <returns></returns>
             public Steam2ChecksumData DownloadChecksums()
             {
                 bool bRet = this.SendCommand(
@@ -348,6 +391,11 @@ namespace SteamKit2
 
                 return new Steam2ChecksumData( checksumData );
             }
+            /// <summary>
+            /// Downloads a list of updated FileIDs since the given version.
+            /// </summary>
+            /// <param name="oldVersion">The old version to compare to.</param>
+            /// <returns>A list of FileIDs that have been updated.</returns>
             public uint[] DownloadUpdates( uint oldVersion )
             {
                 bool bRet = this.SendCommand(
@@ -383,7 +431,38 @@ namespace SteamKit2
                 return fileIdList;
             }
 
-            public byte[] DownloadFileParts( Steam2Manifest.Node file, uint filePart, uint numParts, DownloadPriority priority, byte[] cryptKey )
+            /// <summary>
+            /// Downloads a specific file from the Steam servers.
+            /// </summary>
+            /// <param name="file">The file to download, given from the manifest.</param>
+            /// <param name="priority">The download priority.</param>
+            /// <param name="cryptKey">The AES encryption key used for any encrypted files.</param>
+            /// <returns>A byte array representing the file.</returns>
+            public byte[] DownloadFile( Steam2Manifest.Node file, DownloadPriority priority = DownloadPriority.Low, byte[] cryptKey = null )
+            {
+                if ( ( file.Attributes & Steam2Manifest.Node.Attribs.EncryptedFile ) != 0 && cryptKey == null )
+                {
+                    throw new Steam2Exception( string.Format( "AES encryption key required for file: {0}", file.FullName ) );
+                }
+
+                const uint MaxParts = 16;
+
+                uint numFileparts = ( uint )Math.Ceiling( ( float )file.SizeOrCount / ( float )file.Parent.BlockSize );
+                uint numChunks = ( uint )Math.Ceiling( ( float )numFileparts / ( float )MaxParts );
+
+                MemoryStream ms = new MemoryStream();
+
+                for ( uint x = 0 ; x < numChunks ; ++x )
+                {
+                    byte[] filePart = DownloadFileParts( file, x * MaxParts, MaxParts, priority, cryptKey );
+
+                    ms.Write( filePart, 0, filePart.Length );
+                }
+
+                return ms.ToArray();
+            }
+
+            byte[] DownloadFileParts( Steam2Manifest.Node file, uint filePart, uint numParts, DownloadPriority priority = DownloadPriority.Low, byte[] cryptKey = null )
             {
                 this.SendCommand(
                     7, // download file
@@ -459,46 +538,6 @@ namespace SteamKit2
 
                 return data;
             }
-            public byte[] DownloadFileParts( Steam2Manifest.Node file, uint filePart, uint numParts, DownloadPriority priority )
-            {
-                return DownloadFileParts( file, filePart, numParts, priority, null );
-            }
-            public byte[] DownloadFileParts( Steam2Manifest.Node file, uint filePart, uint numParts )
-            {
-                return DownloadFileParts( file, filePart, numParts, DownloadPriority.Low );
-            }
-
-            public byte[] DownloadFile( Steam2Manifest.Node file, DownloadPriority priority, byte[] cryptKey )
-            {
-                if ( ( file.Attributes & Steam2Manifest.Node.Attribs.EncryptedFile ) != 0 && cryptKey == null )
-                {
-                    throw new Steam2Exception( string.Format( "AES encryption key required for file: {0}", file.FullName ) );
-                }
-
-                const uint MaxParts = 16;
-
-                uint numFileparts = ( uint )Math.Ceiling( ( float )file.SizeOrCount / ( float )file.Parent.BlockSize );
-                uint numChunks = ( uint )Math.Ceiling( ( float )numFileparts / ( float )MaxParts );
-
-                MemoryStream ms = new MemoryStream();
-
-                for ( uint x = 0 ; x < numChunks ; ++x )
-                {
-                    byte[] filePart = DownloadFileParts( file, x * MaxParts, MaxParts, priority, cryptKey );
-
-                    ms.Write( filePart, 0, filePart.Length );
-                }
-
-                return ms.ToArray();
-            }
-            public byte[] DownloadFile( Steam2Manifest.Node file, DownloadPriority priority )
-            {
-                return DownloadFile( file, priority, null );
-            }
-            public byte[] DownloadFile( Steam2Manifest.Node file )
-            {
-                return DownloadFile( file, DownloadPriority.Low );
-            }
 
 
             bool SendCommand( byte cmd, params object[] args )
@@ -533,15 +572,15 @@ namespace SteamKit2
                     toRead -= this.Socket.Reader.Read( chunk, chunkLen - toRead, toRead );
                 }
 
-                using ( MemoryStream chunkStream = new MemoryStream( chunk ) )
+                using ( var chunkStream = new MemoryStream( chunk ) )
+                using ( var aes = new RijndaelManaged() )
                 {
-                    RijndaelManaged aes = new RijndaelManaged();
                     aes.Mode = CipherMode.CFB;
                     aes.BlockSize = aes.KeySize = 128;
                     aes.Padding = PaddingMode.None;
 
-                    using ( ICryptoTransform aesTransform = aes.CreateDecryptor( cryptKey, aesIV ) )
-                    using ( CryptoStream ds = new CryptoStream( chunkStream, aesTransform, CryptoStreamMode.Read ) )
+                    using ( var aesTransform = aes.CreateDecryptor( cryptKey, aesIV ) )
+                    using ( var ds = new CryptoStream( chunkStream, aesTransform, CryptoStreamMode.Read ) )
                     {
                         byte[] decrypt = new byte[ chunkLen ];
                         int len = ds.Read( decrypt, 0, decrypt.Length );
@@ -574,6 +613,9 @@ namespace SteamKit2
                 this.CellID = cellId;
             }
 
+            /// <summary>
+            /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            /// </summary>
             public void Dispose()
             {
                 TcpPacket packet = new TcpPacket();
@@ -584,6 +626,11 @@ namespace SteamKit2
             }
 
 
+            /// <summary>
+            /// Downloads the specified package file.
+            /// </summary>
+            /// <param name="fileName">Name of the file.</param>
+            /// <returns>A byte array representing the file.</returns>
             public byte[] DownloadPackage( string fileName )
             {
                 TcpPacket packet = new TcpPacket();
