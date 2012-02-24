@@ -158,15 +158,16 @@ namespace SteamKit2.Internal
 
                 // post disconnection callback
                 OnClientDisconnected();
+                return;
             }
 
             if ( !bEncrypted )
             {
-                // since there is no encryption handshake, we're 'connected' after the underlying connection is established
-                OnClientConnected();
-
                 // we only connect to the public universe
                 ConnectedUniverse = EUniverse.Public;
+
+                // since there is no encryption handshake, we're 'connected' after the underlying connection is established
+                OnClientConnected();
             }
         }
         /// <summary>
