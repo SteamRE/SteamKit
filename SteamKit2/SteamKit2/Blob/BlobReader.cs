@@ -8,11 +8,23 @@ using System.Security.Cryptography;
 namespace SteamKit2.Blob
 {
 
+    /// <summary>
+    /// Represents the base blob reader that can process a binary blob.
+    /// </summary>
     public class BlobReader : IDisposable
     {
+        /// <summary>
+        /// The field key type.
+        /// </summary>
         public enum FieldKeyType
         {
+            /// <summary>
+            /// String key type.
+            /// </summary>
             StringType,
+            /// <summary>
+            /// Int key type.
+            /// </summary>
             IntType
         }
 
@@ -29,40 +41,56 @@ namespace SteamKit2.Blob
         private byte[] aesKey;
 
 
-        public delegate void BlobDelegate(EAutoPreprocessCode processCode, ECacheState cacheState);
-        public event BlobDelegate Blob;
+        /// <summary>
+        /// Occurs when a blob begins.
+        /// </summary>
+        public event Action<EAutoPreprocessCode, ECacheState> Blob;
+        /// <summary>
+        /// Occurs when a blob ends.
+        /// </summary>
+        public event Action EndBlob;
 
-        public delegate void EndBlobDelegate();
-        public event EndBlobDelegate EndBlob;
+        /// <summary>
+        /// Occurs when a blob field begins.
+        /// </summary>
+        public event Action<FieldKeyType, byte[], int> Field;
+        /// <summary>
+        /// Occurs when a blob field ends.
+        /// </summary>
+        public event Action EndField;
 
-        public delegate void FieldDelegate(FieldKeyType type, byte[] key, int fieldSize);
-        public event FieldDelegate Field;
+        /// <summary>
+        /// Occurs when a blob field value is parsed.
+        /// </summary>
+        public event Action<byte[]> FieldValue;
 
-        public delegate void EndFiendDelegate();
-        public event EndFiendDelegate EndField;
-
-
-        public delegate void FieldValueDelegate(byte[] data);
-        public event FieldValueDelegate FieldValue;
-
-        public delegate void SpareDelegate(byte[] spare);
-        public event SpareDelegate Spare;
+        /// <summary>
+        /// Occurs when blob spare data is parsed.
+        /// </summary>
+        public event Action<byte[]> Spare;
 
 
         private BlobReader()
         {
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BlobReader"/> class.
+        /// </summary>
+        /// <param name="input">The input stream to process.</param>
         protected BlobReader(Stream input)
             : this()
         {
-            Debug.Assert(input.CanRead, "Stream must be readable");
-            Debug.Assert(input.CanSeek, "Stream must be seekable");
+            if ( !input.CanRead || !input.CanSeek )
+                throw new ArgumentException( "Input stream must be readable and seekable." );
 
             this.input = new PeekableStream(input);
             this.length = input.Length;
         }
 
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
         public virtual void Dispose()
         {
             input.Close();
@@ -70,22 +98,40 @@ namespace SteamKit2.Blob
         }
 
 
+        /// <summary>
+        /// Creates a new instance of a <see cref="BlobReader"/> for the given input stream.
+        /// </summary>
+        /// <param name="inputStream">The input stream to process.</param>
+        /// <returns>A new <see cref="BlobReader"/> instance.</returns>
         public static BlobReader Create(Stream inputStream)
         {
             return new BlobReader(inputStream);
         }
 
+        /// <summary>
+        /// Creates a new instance of a <see cref="BlobReader"/> for the given input file.
+        /// </summary>
+        /// <param name="fileName">The input file to process.</param>
+        /// <returns>A new <see cref="BlobReader"/> instance.</returns>
         public static BlobReader Create(string fileName)
         {
             return Create(new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.None, 0x1000, FileOptions.SequentialScan));
         }
 
 
+        /// <summary>
+        /// Sets the AES encryption key for this blob.
+        /// </summary>
+        /// <param name="key">The key.</param>
         public void SetKey(byte[] key)
         {
             this.aesKey = key;
         }
 
+        /// <summary>
+        /// Processes this instance.
+        /// </summary>
+        /// <returns><c>true</c> if this blob could be processed; otherwise, file.</returns>
         public bool Process()
         {
             return TryReadBlob();
@@ -144,7 +190,7 @@ namespace SteamKit2.Blob
             catch (Exception)
             {
                 Reset();
-                throw new Exception("Corrupted blob");
+                throw new InvalidDataException( "Corrupted blob" );
             }
 
             if (!BlobUtil.IsValidCacheState(cachestate) || !BlobUtil.IsValidProcess(process) ||

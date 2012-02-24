@@ -5,10 +5,16 @@ using System.Xml;
 
 namespace SteamKit2.Blob
 {
+    /// <summary>
+    /// A utility blob reader to process a blob into xml data.
+    /// </summary>
     public class BlobXmlReader : BlobReader
     {
         private XmlWriter xmlOut;
 
+        /// <summary>
+        /// Releases unmanaged and - optionally - managed resources
+        /// </summary>
         public override void Dispose()
         {
             base.Dispose();
@@ -88,25 +94,29 @@ namespace SteamKit2.Blob
         }
 
 
-        public static BlobXmlReader Create(Stream inputStream, Stream outputStream, XmlWriterSettings settings)
+        /// <summary>
+        /// Creates a new instance of a <see cref="BlobXmlReader"/> for the given input and output streams, along with the given settings.
+        /// </summary>
+        /// <param name="inputStream">The input stream to process.</param>
+        /// <param name="outputStream">The output stream to write to.</param>
+        /// <param name="settings">The settings to use.</param>
+        /// <returns>A new <see cref="BlobXmlReader"/> instance.</returns>
+        public static BlobXmlReader Create( Stream inputStream, Stream outputStream, XmlWriterSettings settings = null )
         {
-            return new BlobXmlReader(inputStream, outputStream, settings);
+            return new BlobXmlReader( inputStream, outputStream, settings );
         }
 
-        public static BlobXmlReader Create(Stream inputStream, Stream outputStream)
+        /// <summary>
+        /// Creates a new instance of a <see cref="BlobXmlReader"/> for the given input and output streams, along with the given settings.
+        /// </summary>
+        /// <param name="fileName">Name of the input file to process.</param>
+        /// <param name="outFileName">Name of the output file to write to.</param>
+        /// <param name="settings">The settings to use.</param>
+        /// <returns></returns>
+        public static BlobXmlReader Create( string fileName, string outFileName, XmlWriterSettings settings = null )
         {
-            return new BlobXmlReader(inputStream, outputStream, null);
-        }
-
-        public static BlobXmlReader Create(string fileName, string outFileName, XmlWriterSettings settings)
-        {
-            return Create(new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.None, 0x1000, FileOptions.SequentialScan),
-                            new FileStream(outFileName, FileMode.Create), settings);
-        }
-
-        public static BlobXmlReader Create(string fileName, string outFileName)
-        {
-            return Create(fileName, outFileName, null);
+            return Create( new FileStream( fileName, FileMode.Open, FileAccess.Read, FileShare.None, 0x1000, FileOptions.SequentialScan ),
+                            new FileStream( outFileName, FileMode.Create ), settings );
         }
     }
 }
