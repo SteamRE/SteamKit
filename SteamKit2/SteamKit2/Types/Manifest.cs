@@ -11,7 +11,10 @@ using System.IO;
 
 namespace SteamKit2
 {
-    public sealed class Steam3Manifest
+    /// <summary>
+    /// Represents the binary Steam3 manifest format.
+    /// </summary>
+    sealed class Steam3Manifest
     {
         public sealed class FileMapping
         {
@@ -22,7 +25,6 @@ namespace SteamKit2
                 public byte[] CRC { get; set; }
                 public ulong Offset { get; set; }
 
-                // these look similar to some kind of flag
                 public uint DecompressedSize { get; set; }
                 public uint CompressedSize { get; set; }
 
@@ -161,7 +163,6 @@ namespace SteamKit2
             EncryptedCRC = ds.ReadUInt32();
             DecryptedCRC = ds.ReadUInt32();
 
-            // i'm sorry to say that we'll be breaking from canon and we shall not be taking 7 and a half million years to read this value
             Flags = ds.ReadUInt32();
 
             for (uint i = FileMappingSize; i > 0; )
@@ -178,65 +179,142 @@ namespace SteamKit2
 
     }
 
+    /// <summary>
+    /// Represents the manifest describing every file within a Steam2 depot.
+    /// </summary>
     public sealed class Steam2Manifest
     {
 
+        /// <summary>
+        /// Represents a single file or folder within a manifest.
+        /// </summary>
         public sealed class Node
         {
+            /// <summary>
+            /// The various attributes of a manifest node.
+            /// </summary>
             [Flags]
             public enum Attribs
             {
+                /// <summary>
+                /// This node is a user configuration file.
+                /// </summary>
                 UserConfigurationFile = 0x1,
+                /// <summary>
+                /// This node is a launch file.
+                /// </summary>
                 LaunchFile = 0x2,
+                /// <summary>
+                /// This node is a locked file.
+                /// </summary>
                 LockedFile = 0x8,
+                /// <summary>
+                /// This node is a no-cache file.
+                /// </summary>
                 NoCacheFile = 0x20,
+                /// <summary>
+                /// This node is a versioned file.
+                /// </summary>
                 VersionedFile = 0x40,
+                /// <summary>
+                /// This node is a purge file.
+                /// </summary>
                 PurgeFile = 0x80,
+                /// <summary>
+                /// This node is an encrypted file.
+                /// </summary>
                 EncryptedFile = 0x100,
+                /// <summary>
+                /// This node is a read-only file.
+                /// </summary>
                 ReadOnly = 0x200,
+                /// <summary>
+                /// This node is a hidden file.
+                /// </summary>
                 HiddenFile = 0x400,
+                /// <summary>
+                /// This node is an executable file.
+                /// </summary>
                 ExecutableFile = 0x800,
+                /// <summary>
+                /// This node is a file, and not a folder.
+                /// </summary>
                 File = 0x4000,
             }
 
-            public uint SizeOrCount { get; set; }
+            /// <summary>
+            /// Gets the size (in bytes, if this node is a file) or count (of inner nodes, if this node is a directory).
+            /// </summary>
+            public uint SizeOrCount { get; internal set; }
 
-            public int FileID { get; set; }
-            public Attribs Attributes { get; set; }
-            public int ParentIndex { get; set; }
+            /// <summary>
+            /// Gets the FileID of this node.
+            /// </summary>
+            public int FileID { get; internal set; }
+            /// <summary>
+            /// Gets the attributes of this node.
+            /// </summary>
+            public Attribs Attributes { get; internal set; }
+            /// <summary>
+            /// Gets the index of the parent node.
+            /// </summary>
+            public int ParentIndex { get; internal set; }
 
-            public string Name { get; set; }
-            public string FullName { get; set; }
+            /// <summary>
+            /// Gets the name of the node.
+            /// </summary>
+            public string Name { get; internal set; }
+            /// <summary>
+            /// Gets the full name of the node, built from parent nodes.
+            /// </summary>
+            public string FullName { get; internal set; }
 
             internal Steam2Manifest Parent { get; set; }
         }
 
-        public byte[] RawData { get; set; }
+        /// <summary>
+        /// Gets the DepotID this manifest is for.
+        /// </summary>
+        public uint DepotID { get; private set; }
+        /// <summary>
+        /// Gets the depot version this manifest is for.
+        /// </summary>
+        public uint DepotVersion { get; private set; }
 
-        public uint DepotID { get; set; }
-        public uint DepotVersion { get; set; }
+        /// <summary>
+        /// Gets the count of nodes within this manifest.
+        /// </summary>
+        public uint NodeCount { get; private set; }
+        /// <summary>
+        /// Gets the count of files within this manifest.
+        /// </summary>
+        public uint FileCount { get; private set; }
 
-        public uint NodeCount { get; set; }
-        public uint FileCount { get; set; }
+        /// <summary>
+        /// Gets the block size for this depot, used when downloading files.
+        /// </summary>
+        public uint BlockSize { get; private set; }
 
-        public uint BlockSize { get; set; }
+        /// <summary>
+        /// Gets the depot checksum.
+        /// </summary>
+        public uint DepotChecksum { get; private set; }
 
-        public uint DepotChecksum { get; set; }
-
+        /// <summary>
+        /// Gets the nodes within this manifest.
+        /// </summary>
         public List<Node> Nodes { get; private set; }
 
 
-        const uint HEADER_SIZE = 56;
-        const uint ENTRY_SIZE = 28;
+        const uint HEADER_SIZE = 56; // the size of just the manifest header data
+        const uint ENTRY_SIZE = 28; // the size of a single node
 
 
-        public Steam2Manifest( byte[] manifestBlob )
+        internal Steam2Manifest( byte[] manifestBlob )
         {
-            this.RawData = manifestBlob;
-
             this.Nodes = new List<Node>();
 
-            using ( DataStream ds = new DataStream( manifestBlob ))
+            using ( DataStream ds = new DataStream( manifestBlob ) )
             {
                 uint headerVersion = ds.ReadUInt32();
 
@@ -253,13 +331,14 @@ namespace SteamKit2
 
                 this.DepotChecksum = ds.ReadUInt32();
 
+                // the start of the names section is after the header and every node
                 uint namesStart = HEADER_SIZE + ( this.NodeCount * ENTRY_SIZE );
-
 
                 for ( int x = 0 ; x < this.NodeCount ; ++x )
                 {
                     ds.Seek( HEADER_SIZE + ( x * ENTRY_SIZE ), SeekOrigin.Begin );
 
+                    // the first value within a node is the offset from the start of the names section
                     uint nameOffset = namesStart + ds.ReadUInt32();
 
                     Node entry = new Node

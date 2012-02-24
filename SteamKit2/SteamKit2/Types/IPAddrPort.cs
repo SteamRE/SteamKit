@@ -10,11 +10,11 @@ using System.Collections.Generic;
 using System.Text;
 using System.Runtime.InteropServices;
 using System.Net;
+using System.IO;
 
 namespace SteamKit2
 {
-    [StructLayout( LayoutKind.Sequential, Pack = 1 )]
-    public class IPAddrPort //: Serializable<IPAddrPort>
+    class IPAddrPort
     {
         public uint IPAddress;
         public ushort Port;
@@ -47,25 +47,15 @@ namespace SteamKit2
         
         public static IPAddrPort Deserialize( byte[] data )
         {
-            DataStream ds = new DataStream( data );
-
-            IPAddrPort ipAddr = new IPAddrPort();
-
-            ipAddr.IPAddress = ds.ReadUInt32();
-            ipAddr.Port = ds.ReadUInt16();
-
-            return ipAddr;
-        }
-
-        public byte[] Serialize()
-        {
-            using ( BinaryWriterEx bw = new BinaryWriterEx() )
+            using ( var ms = new MemoryStream( data ) )
+            using ( var br = new BinaryReader( ms ) )
             {
+                IPAddrPort ipAddr = new IPAddrPort();
 
-                bw.Write( this.IPAddress );
-                bw.Write( this.Port );
+                ipAddr.IPAddress = br.ReadUInt32();
+                ipAddr.Port = br.ReadUInt16();
 
-                return bw.ToArray();
+                return ipAddr;
             }
         }
     }

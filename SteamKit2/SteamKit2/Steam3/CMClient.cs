@@ -96,7 +96,7 @@ namespace SteamKit2.Internal
         /// </summary>
         /// <param name="type">The connection type to use.</param>
         /// <exception cref="NotSupportedException">
-        /// The provided <see cref=">ProtocolType"/> is not supported.
+        /// The provided <see cref="ProtocolType"/> is not supported.
         /// Only Tcp and Udp are available.
         /// </exception>
         public CMClient( ProtocolType type = ProtocolType.Tcp )

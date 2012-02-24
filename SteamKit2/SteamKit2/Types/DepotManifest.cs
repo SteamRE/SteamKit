@@ -11,19 +11,40 @@ using System.IO;
 
 namespace SteamKit2
 {
-    // Steam 3 Depot Manifest
-    public class DepotManifest
+    /// <summary>
+    /// Represents a Steam3 depot manifest.
+    /// </summary>
+    public sealed class DepotManifest
     {
+        /// <summary>
+        /// Represents a single chunk within a file.
+        /// </summary>
         public class ChunkData
         {
+            /// <summary>
+            /// Gets the SHA-1 hash chunk id.
+            /// </summary>
             public byte[] ChunkID { get; private set; }
+            /// <summary>
+            /// Gets the chunk CRC.
+            /// </summary>
             public byte[] CRC { get; private set; }
+            /// <summary>
+            /// Gets the chunk offset.
+            /// </summary>
             public ulong Offset { get; private set; }
 
+            /// <summary>
+            /// Gets the compressed length of this chunk.
+            /// </summary>
             public uint CompressedLength { get; private set; }
+            /// <summary>
+            /// Gets the decompressed length of this chunk.
+            /// </summary>
             public uint UncompressedLength { get; private set; }
 
-            internal ChunkData(byte[] id, byte[] crc, ulong offset, uint comp_length, uint uncomp_length)
+
+            internal ChunkData( byte[] id, byte[] crc, ulong offset, uint comp_length, uint uncomp_length )
             {
                 this.ChunkID = id;
                 this.CRC = crc;
@@ -34,13 +55,29 @@ namespace SteamKit2
             }
         }
 
+        /// <summary>
+        /// Represents a single file within a manifest.
+        /// </summary>
         public class FileData
         {
-            public string FileName { get; private set; }
+            /// <summary>
+            /// Gets the name of the file.
+            /// </summary>
+            public string FileName { get; internal set; }
+            /// <summary>
+            /// Gets the chunks that this file is composed of.
+            /// </summary>
             public List<ChunkData> Chunks { get; private set; }
 
+            /// <summary>
+            /// Gets the total size of this file.
+            /// </summary>
             public ulong TotalSize { get; private set; }
+            /// <summary>
+            /// Gets the hash of this file.
+            /// </summary>
             public byte[] FileHash { get; private set; }
+
 
             internal FileData(string filename, ulong size, byte[] hash)
             {
@@ -49,30 +86,32 @@ namespace SteamKit2
                 this.FileHash = hash;
                 this.Chunks = new List<ChunkData>();
             }
-
-            internal void AddChunk(ChunkData chunk)
-            {
-                this.Chunks.Add(chunk);
-            }
-
-            internal void SetName(string name)
-            {
-                this.FileName = name;
-            }
         }
 
+        /// <summary>
+        /// Gets the list of files within this manifest.
+        /// </summary>
         public List<FileData> Files { get; private set; }
+        /// <summary>
+        /// Gets a value indicating whether filenames within this depot are encrypted.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if the filenames are encrypted; otherwise, <c>false</c>.
+        /// </value>
         public bool FilenamesEncrypted { get; private set; }
 
-        private DepotManifest()
-        {
-        }
 
-        public DepotManifest(byte[] data)
+        internal DepotManifest(byte[] data)
         {
             Deserialize(data);
         }
 
+
+        /// <summary>
+        /// Attempts to decrypts file names with the given encryption key.
+        /// </summary>
+        /// <param name="encryptionKey">The encryption key.</param>
+        /// <returns><c>true</c> if the file names were successfully decrypted; otherwise, <c>false</c>.</returns>
         public bool DecryptFilenames(byte[] encryptionKey)
         {
             if (!FilenamesEncrypted)
@@ -91,7 +130,7 @@ namespace SteamKit2
                     return false;
                 }
 
-                file.SetName(Encoding.ASCII.GetString(filename).TrimEnd(new char[] { '\0' }));
+                file.FileName = Encoding.ASCII.GetString( filename ).TrimEnd( new char[] { '\0' } );
             }
 
             FilenamesEncrypted = false;
@@ -100,27 +139,31 @@ namespace SteamKit2
 
         void Deserialize(byte[] data)
         {
-            using (DataStream ds = new DataStream(data))
-                while (ds.SizeRemaining() > 0)
+            using ( DataStream ds = new DataStream( data ) )
+            {
+                while ( ds.SizeRemaining() > 0 )
                 {
                     uint magic = ds.ReadUInt32();
-                    ds.Seek(-4, SeekOrigin.Current);
+                    ds.Seek( -4, SeekOrigin.Current );
 
-                    switch (magic)
+                    switch ( magic )
                     {
                         case Steam3Manifest.MAGIC:
-                            Steam3Manifest binaryManifest = new Steam3Manifest(ds);
-                            ParseBinaryManifest(binaryManifest);
+                            Steam3Manifest binaryManifest = new Steam3Manifest( ds );
+                            ParseBinaryManifest( binaryManifest );
                             break;
+
+                            // todo: handle protobuf manifest?
+
                         default:
-                            Console.WriteLine("Unrecognized magic value {0:X} in depot manifest.", magic);
-                            return;
+                            throw new NotImplementedException( string.Format( "Unrecognized magic value {0:X} in depot manifest.", magic ) );
                     }
 
                     uint marker = ds.ReadUInt32();
-                    if (marker != magic)
-                        Console.WriteLine("Unable to find end of message marker for depot manifest");
+                    if ( marker != magic )
+                        throw new InvalidDataException( "Unable to find end of message marker for depot manifest" );
                 }
+            }
         }
 
         void ParseBinaryManifest(Steam3Manifest manifest)
@@ -134,7 +177,7 @@ namespace SteamKit2
 
                 foreach (var chunk in file_mapping.Chunks)
                 {
-                    filedata.AddChunk(new ChunkData(chunk.ChunkGID, chunk.CRC, chunk.Offset, chunk.CompressedSize, chunk.DecompressedSize));
+                    filedata.Chunks.Add( new ChunkData( chunk.ChunkGID, chunk.CRC, chunk.Offset, chunk.CompressedSize, chunk.DecompressedSize ) );
                 }
 
                 Files.Add(filedata);

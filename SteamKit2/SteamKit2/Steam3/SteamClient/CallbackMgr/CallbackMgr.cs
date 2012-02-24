@@ -180,10 +180,10 @@ namespace SteamKit2
         /// <summary>
         /// Initializes a new instance of the <see cref="CallbackManager"/> class.
         /// </summary>
+        /// <param name="client">The <see cref="SteamClient"/> instance to handle the callbacks of.</param>
 #if STATIC_CALLBACKS
         public CallbackManager()
 #else
-        /// <param name="client">The <see cref="SteamClient"/> instance to handle the callbacks of.</param>
         public CallbackManager( SteamClient client )
 #endif
         {
