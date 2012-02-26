@@ -151,9 +151,18 @@
     <Compile Include="Base\Generated\SteamMsgClientServer.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="gpl.txt" />
-    <Content Include="lgpl.txt" />
-    <Content Include="license.txt" />
+    <Content Include="3rd party.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="gpl.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="lgpl.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="license.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
