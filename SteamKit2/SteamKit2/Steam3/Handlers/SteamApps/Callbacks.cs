@@ -89,6 +89,7 @@ namespace SteamKit2
                 /// <value>The territory code.</value>
                 public int TerritoryCode { get; private set; }
 
+
                 internal License( CMsgClientLicenseList.License license )
                 {
                     this.PackageID = license.package_id;
@@ -430,15 +431,15 @@ namespace SteamKit2
             public byte[] DepotKey { get; private set; }
 
 #if STATIC_CALLBACKS
-            internal DepotKeyCallback( SteamClient client, MsgClientGetDepotDecryptionKeyResponse msg )
+            internal DepotKeyCallback( SteamClient client, CMsgClientGetDepotDecryptionKeyResponse msg )
                 : base( client )
 #else
-            internal DepotKeyCallback( MsgClientGetDepotDecryptionKeyResponse msg )
+            internal DepotKeyCallback( CMsgClientGetDepotDecryptionKeyResponse msg )
 #endif
             {
-                Result = ( EResult )msg.Result;
-                DepotID = msg.DepotID;
-                DepotKey = msg.DepotEncryptionKey;
+                Result = ( EResult )msg.eresult;
+                DepotID = msg.depot_id;
+                DepotKey = msg.depot_encryption_key;
             }
         }
 

@@ -201,13 +201,15 @@ namespace SteamKit2
         /// Results are returned in a <see cref="DepotKeyCallback"/> callback.
         /// </summary>
         /// <param name="depotid">The DepotID to request a decryption key for.</param>
+        /// <param name="appid">The AppID to request the decryption key for.</param>
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="SteamClient.JobCallback&lt;T&gt;"/>.</returns>
-        public ulong GetDepotDecryptionKey( uint depotid )
+        public ulong GetDepotDecryptionKey( uint depotid, uint appid = 0 )
         {
-            var request = new ClientMsg<MsgClientGetDepotDecryptionKey>();
+            var request = new ClientMsgProtobuf<CMsgClientGetDepotDecryptionKey>( EMsg.ClientGetDepotDecryptionKey );
             request.SourceJobID = Client.GetNextJobID();
 
-            request.Body.DepotID = depotid;
+            request.Body.depot_id = depotid;
+            request.Body.app_id = appid;
 
             this.Client.Send( request );
 
@@ -315,7 +317,7 @@ namespace SteamKit2
         }
         void HandleDepotKeyResponse( IPacketMsg packetMsg )
         {
-            var keyResponse = new ClientMsg<MsgClientGetDepotDecryptionKeyResponse>( packetMsg );
+            var keyResponse = new ClientMsgProtobuf<CMsgClientGetDepotDecryptionKeyResponse>( packetMsg );
 
 #if STATIC_CALLBACKS
             var innerCallback = new DepotKeyCallback( Client, keyResponse.Body );
