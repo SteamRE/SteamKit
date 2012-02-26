@@ -1,0 +1,51 @@
+import "google/protobuf/descriptor.proto";
+import "netmessages.proto";
+import "dota_commonmessages.proto";
+
+enum EDotaClientMessages {
+	DOTA_CM_MapLine = 1;
+	DOTA_CM_AspectRatio = 2;
+	DOTA_CM_MapPing = 3;
+	DOTA_CM_UnitsAutoAttack = 4;
+	DOTA_CM_AutoPurchaseItems = 5;
+	DOTA_CM_TestItems = 6;
+	DOTA_CM_SearchString = 7;
+	DOTA_CM_Pause = 8;
+	DOTA_CM_ShopViewMode = 9;
+}
+
+message CDOTAClientMsg_MapPing {
+	optional .CDOTAMsg_LocationPing location_ping = 1;
+}
+
+message CDOTAClientMsg_MapLine {
+	optional .CDOTAMsg_MapLine mapline = 1;
+}
+
+message CDOTAClientMsg_AspectRatio {
+	optional float ratio = 1;
+}
+
+message CDOTAClientMsg_UnitsAutoAttack {
+	optional bool enabled = 1;
+}
+
+message CDOTAClientMsg_AutoPurchaseItems {
+	optional bool enabled = 1;
+}
+
+message CDOTAClientMsg_TestItems {
+	optional string key_values = 1;
+}
+
+message CDOTAClientMsg_SearchString {
+	optional string search = 1;
+}
+
+message CDOTAClientMsg_Pause {
+}
+
+message CDOTAClientMsg_ShopViewMode {
+	optional uint32 mode = 1;
+}
+

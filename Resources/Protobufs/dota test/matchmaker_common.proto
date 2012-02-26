@@ -1,0 +1,6 @@
+enum MatchType {
+	MATCH_TYPE_RANKED = 0;
+	MATCH_TYPE_COOP_BOTS = 1;
+	MATCH_TYPE_TEAM = 2;
+}
+
