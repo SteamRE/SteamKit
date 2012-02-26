@@ -1,0 +1,406 @@
+import "google/protobuf/descriptor.proto";
+import "netmessages.proto";
+import "ai_activity.proto";
+import "dota_commonmessages.proto";
+
+enum EDotaUserMessages {
+	DOTA_UM_AddUnitToSelection = 64;
+	DOTA_UM_AIDebugLine = 65;
+	DOTA_UM_ChatEvent = 66;
+	DOTA_UM_CombatHeroPositions = 67;
+	DOTA_UM_CombatLogData = 68;
+	DOTA_UM_CombatLogName = 69;
+	DOTA_UM_CombatLogShowDeath = 70;
+	DOTA_UM_CreateLinearProjectile = 71;
+	DOTA_UM_DestroyLinearProjectile = 72;
+	DOTA_UM_DodgeTrackingProjectiles = 73;
+	DOTA_UM_GlobalLightColor = 74;
+	DOTA_UM_GlobalLightDirection = 75;
+	DOTA_UM_InvalidCommand = 76;
+	DOTA_UM_LocationPing = 77;
+	DOTA_UM_MapLine = 78;
+	DOTA_UM_MiniKillCamInfo = 79;
+	DOTA_UM_MinimapDebugPoint = 80;
+	DOTA_UM_MinimapEvent = 81;
+	DOTA_UM_NevermoreRequiem = 82;
+	DOTA_UM_OverheadEvent = 83;
+	DOTA_UM_SetNextAutobuyItem = 84;
+	DOTA_UM_SharedCooldown = 85;
+	DOTA_UM_SpectatorPlayerClick = 86;
+	DOTA_UM_TutorialTipInfo = 87;
+	DOTA_UM_UnitEvent = 88;
+	DOTA_UM_ParticleManager = 89;
+	DOTA_UM_BotChat = 90;
+	DOTA_UM_HudError = 91;
+	DOTA_UM_ItemPurchased = 92;
+	DOTA_UM_Ping = 93;
+}
+
+enum DOTA_CHAT_MESSAGE {
+	CHAT_MESSAGE_INVALID = -1;
+	CHAT_MESSAGE_HERO_KILL = 0;
+	CHAT_MESSAGE_HERO_DENY = 1;
+	CHAT_MESSAGE_BARRACKS_KILL = 2;
+	CHAT_MESSAGE_TOWER_KILL = 3;
+	CHAT_MESSAGE_TOWER_DENY = 4;
+	CHAT_MESSAGE_FIRSTBLOOD = 5;
+	CHAT_MESSAGE_STREAK_KILL = 6;
+	CHAT_MESSAGE_BUYBACK = 7;
+	CHAT_MESSAGE_AEGIS = 8;
+	CHAT_MESSAGE_ROSHAN_KILL = 9;
+	CHAT_MESSAGE_COURIER_LOST = 10;
+	CHAT_MESSAGE_COURIER_RESPAWNED = 11;
+	CHAT_MESSAGE_GLYPH_USED = 12;
+	CHAT_MESSAGE_ITEM_PURCHASE = 13;
+	CHAT_MESSAGE_CONNECT = 14;
+	CHAT_MESSAGE_DISCONNECT = 15;
+	CHAT_MESSAGE_DISCONNECT_WAIT_FOR_RECONNECT = 16;
+	CHAT_MESSAGE_DISCONNECT_TIME_REMAINING = 17;
+	CHAT_MESSAGE_DISCONNECT_TIME_REMAINING_PLURAL = 18;
+	CHAT_MESSAGE_RECONNECT = 19;
+	CHAT_MESSAGE_ABANDON = 20;
+	CHAT_MESSAGE_SAFE_TO_LEAVE = 21;
+	CHAT_MESSAGE_RUNE_PICKUP = 22;
+	CHAT_MESSAGE_RUNE_BOTTLE = 23;
+	CHAT_MESSAGE_INTHEBAG = 24;
+	CHAT_MESSAGE_SECRETSHOP = 25;
+	CHAT_MESSAGE_ITEM_AUTOPURCHASED = 26;
+	CHAT_MESSAGE_ITEMS_COMBINED = 27;
+	CHAT_MESSAGE_SUPER_CREEPS = 28;
+	CHAT_MESSAGE_CANT_USE_ACTION_ITEM = 29;
+	CHAT_MESSAGE_CHARGES_EXHAUSTED = 30;
+	CHAT_MESSAGE_CANTPAUSE = 31;
+	CHAT_MESSAGE_NOPAUSESLEFT = 32;
+	CHAT_MESSAGE_CANTPAUSEYET = 33;
+	CHAT_MESSAGE_PAUSED = 34;
+	CHAT_MESSAGE_UNPAUSED = 35;
+	CHAT_MESSAGE_YOUPAUSED = 36;
+	CHAT_MESSAGE_CANTUNPAUSETEAM = 37;
+	CHAT_MESSAGE_SAFE_TO_LEAVE_ABANDONER = 38;
+	CHAT_MESSAGE_VOICE_TEXT_BANNED = 39;
+	CHAT_MESSAGE_SPECTATORS_WATCHING_THIS_GAME = 40;
+	CHAT_MESSAGE_REPORT_REMINDER = 41;
+	CHAT_MESSAGE_ECON_ITEM = 42;
+}
+
+enum EDotaEntityMessages {
+	DOTA_UNIT_SPEECH = 0;
+	DOTA_UNIT_SPEECH_MUTE = 1;
+	DOTA_UNIT_ADD_GESTURE = 2;
+	DOTA_UNIT_REMOVE_GESTURE = 3;
+	DOTA_UNIT_REMOVE_ALL_GESTURES = 4;
+	DOTA_UNIT_FADE_GESTURE = 6;
+}
+
+enum DOTA_PARTICLE_MESSAGE {
+	DOTA_PARTICLE_MANAGER_EVENT_CREATE = 0;
+	DOTA_PARTICLE_MANAGER_EVENT_UPDATE = 1;
+	DOTA_PARTICLE_MANAGER_EVENT_UPDATE_FORWARD = 2;
+	DOTA_PARTICLE_MANAGER_EVENT_UPDATE_ORIENTATION = 3;
+	DOTA_PARTICLE_MANAGER_EVENT_UPDATE_FALLBACK = 4;
+	DOTA_PARTICLE_MANAGER_EVENT_UPDATE_ENT = 5;
+	DOTA_PARTICLE_MANAGER_EVENT_UPDATE_OFFSET = 6;
+	DOTA_PARTICLE_MANAGER_EVENT_DESTROY = 7;
+	DOTA_PARTICLE_MANAGER_EVENT_DESTROY_INVOLVING = 8;
+	DOTA_PARTICLE_MANAGER_EVENT_RELEASE = 9;
+	DOTA_PARTICLE_MANAGER_EVENT_LATENCY = 10;
+}
+
+enum DOTA_OVERHEAD_ALERT {
+	OVERHEAD_ALERT_GOLD = 0;
+	OVERHEAD_ALERT_DENY = 1;
+	OVERHEAD_ALERT_CRITICAL = 2;
+	OVERHEAD_ALERT_XP = 3;
+	OVERHEAD_ALERT_BONUS_SPELL_DAMAGE = 4;
+	OVERHEAD_ALERT_MISS = 5;
+	OVERHEAD_ALERT_DAMAGE = 6;
+	OVERHEAD_ALERT_EVADE = 7;
+	OVERHEAD_ALERT_BLOCK = 8;
+	OVERHEAD_ALERT_BONUS_POISON_DAMAGE = 9;
+}
+
+message CDOTAUserMsg_AIDebugLine {
+	optional string message = 1;
+}
+
+message CDOTAUserMsg_Ping {
+	optional string message = 1;
+}
+
+message CDOTAUserMsg_ChatEvent {
+	required .DOTA_CHAT_MESSAGE type = 1;
+	optional uint32 value = 2;
+	optional sint32 playerid_1 = 3 [default = -1];
+	optional sint32 playerid_2 = 4 [default = -1];
+	optional sint32 playerid_3 = 5 [default = -1];
+	optional sint32 playerid_4 = 6 [default = -1];
+	optional sint32 playerid_5 = 7 [default = -1];
+	optional sint32 playerid_6 = 8 [default = -1];
+}
+
+message CDOTAUserMsg_CombatLogName {
+	optional uint32 slot = 1;
+	optional string name = 2;
+}
+
+message CDOTAUserMsg_CombatLogData {
+	optional uint32 type = 1;
+	optional uint32 target_name = 2;
+	optional uint32 attacker_name = 3;
+	optional bool attacker_illusion = 4;
+	optional bool target_illusion = 5;
+	optional uint32 inflictor_name = 6;
+	optional int32 value = 7;
+	optional int32 health = 8;
+	optional float time = 9;
+}
+
+message CDOTAUserMsg_CombatLogShowDeath {
+}
+
+message CDOTAUserMsg_BotChat {
+	optional uint32 player_id = 1;
+	optional string format = 2;
+	optional string message = 3;
+	optional string target = 4;
+}
+
+message CDOTAUserMsg_CombatHeroPositions {
+	optional uint32 index = 1;
+	optional int32 time = 2;
+	optional .CMsgVector2D world_pos = 3;
+	optional int32 health = 4;
+}
+
+message CDOTAUserMsg_MiniKillCamInfo {
+	message Attacker {
+		message Ability {
+			optional uint32 ability = 1;
+			optional int32 damage = 2;
+		}
+
+		optional uint32 attacker = 1;
+		optional int32 total_damage = 2;
+		repeated .CDOTAUserMsg_MiniKillCamInfo.Attacker.Ability abilities = 3;
+	}
+
+	repeated .CDOTAUserMsg_MiniKillCamInfo.Attacker attackers = 1;
+}
+
+message CDOTAUserMsg_GlobalLightColor {
+	optional uint32 color = 1;
+	optional float duration = 2;
+}
+
+message CDOTAUserMsg_GlobalLightDirection {
+	optional .CMsgVector direction = 1;
+	optional float duration = 2;
+}
+
+message CDOTAUserMsg_LocationPing {
+	optional uint32 player_id = 1;
+	optional .CDOTAMsg_LocationPing location_ping = 2;
+}
+
+message CDOTAUserMsg_MinimapEvent {
+	optional int32 event_type = 1;
+	optional int32 entity_handle = 2;
+	optional int32 x = 3;
+	optional int32 y = 4;
+	optional int32 duration = 5;
+}
+
+message CDOTAUserMsg_MapLine {
+	optional int32 player_id = 1;
+	optional .CDOTAMsg_MapLine mapline = 2;
+}
+
+message CDOTAUserMsg_MinimapDebugPoint {
+	optional .CMsgVector location = 1;
+	optional uint32 color = 2;
+	optional int32 size = 3;
+	optional float duration = 4;
+}
+
+message CDOTAUserMsg_CreateLinearProjectile {
+	optional .CMsgVector origin = 1;
+	optional .CMsgVector2D velocity = 2;
+	optional int32 latency = 3;
+	optional int32 entindex = 4;
+	optional int32 particle_index = 5;
+	optional int32 handle = 6;
+}
+
+message CDOTAUserMsg_DestroyLinearProjectile {
+	optional int32 handle = 1;
+}
+
+message CDOTAUserMsg_DodgeTrackingProjectiles {
+	required int32 entindex = 1;
+}
+
+message CDOTAUserMsg_SpectatorPlayerClick {
+	required int32 entindex = 1;
+	optional int32 order_type = 2;
+	optional int32 target_index = 3;
+}
+
+message CDOTAUserMsg_NevermoreRequiem {
+	optional int32 entity_handle = 1;
+	optional int32 lines = 2;
+	optional .CMsgVector origin = 3;
+}
+
+message CDOTAUserMsg_InvalidCommand {
+	optional string message = 1;
+}
+
+message CDOTAUserMsg_HudError {
+	optional int32 order_id = 1;
+}
+
+message CDOTAUserMsg_SharedCooldown {
+	optional int32 entindex = 1;
+	optional string name = 2;
+	optional float cooldown = 3;
+	optional int32 name_index = 4;
+}
+
+message CDOTAUserMsg_SetNextAutobuyItem {
+	optional string name = 1;
+}
+
+message CDOTAUserMsg_UnitEvent {
+	message Speech {
+		optional int32 concept = 1;
+		optional string response = 2;
+		optional int32 recipient_type = 3;
+		optional int32 level = 4;
+	}
+
+	message SpeechMute {
+		optional float delay = 1 [default = 0.5];
+	}
+
+	message AddGesture {
+		optional .Activity activity = 1;
+		optional int32 slot = 2;
+		optional float fade_in = 3 [default = 0];
+		optional float fade_out = 4 [default = 0.1];
+	}
+
+	message RemoveGesture {
+		optional .Activity activity = 1;
+	}
+
+	message BloodImpact {
+		optional int32 scale = 1;
+		optional int32 x_normal = 2;
+		optional int32 y_normal = 3;
+	}
+
+	message FadeGesture {
+		optional .Activity activity = 1;
+	}
+
+	required .EDotaEntityMessages msg_type = 1;
+	required int32 entity_index = 2;
+	optional .CDOTAUserMsg_UnitEvent.Speech speech = 3;
+	optional .CDOTAUserMsg_UnitEvent.SpeechMute speech_mute = 4;
+	optional .CDOTAUserMsg_UnitEvent.AddGesture add_gesture = 5;
+	optional .CDOTAUserMsg_UnitEvent.RemoveGesture remove_gesture = 6;
+	optional .CDOTAUserMsg_UnitEvent.BloodImpact blood_impact = 7;
+	optional .CDOTAUserMsg_UnitEvent.FadeGesture fade_gesture = 8;
+}
+
+message CDOTAUserMsg_ItemPurchased {
+	optional int32 item_index = 1;
+}
+
+message CDOTAUserMsg_ParticleManager {
+	message ReleaseParticleIndex {
+	}
+
+	message CreateParticle {
+		optional int32 particle_name_index = 1;
+		optional int32 attach_type = 2;
+		optional int32 entity_handle = 3;
+	}
+
+	message DestroyParticle {
+		optional bool destroy_immediately = 1;
+	}
+
+	message DestroyParticleInvolving {
+		optional bool destroy_immediately = 1;
+		optional int32 entity_handle = 3;
+	}
+
+	message UpdateParticle {
+		optional int32 control_point = 1;
+		optional .CMsgVector position = 2;
+	}
+
+	message UpdateParticleFwd {
+		optional int32 control_point = 1;
+		optional .CMsgVector forward = 2;
+	}
+
+	message UpdateParticleOrient {
+		optional int32 control_point = 1;
+		optional .CMsgVector forward = 2;
+		optional .CMsgVector right = 3;
+		optional .CMsgVector up = 4;
+	}
+
+	message UpdateParticleFallback {
+		optional int32 control_point = 1;
+		optional .CMsgVector position = 2;
+	}
+
+	message UpdateParticleOffset {
+		optional int32 control_point = 1;
+		optional .CMsgVector origin_offset = 2;
+	}
+
+	message UpdateParticleEnt {
+		optional int32 control_point = 1;
+		optional int32 entity_handle = 2;
+		optional int32 attach_type = 3;
+		optional int32 attachment = 4;
+		optional .CMsgVector fallback_position = 5;
+	}
+
+	message UpdateParticleLatency {
+		optional int32 player_latency = 1;
+		optional int32 tick = 2;
+	}
+
+	required .DOTA_PARTICLE_MESSAGE type = 1;
+	required uint32 index = 2;
+	optional .CDOTAUserMsg_ParticleManager.ReleaseParticleIndex release_particle_index = 3;
+	optional .CDOTAUserMsg_ParticleManager.CreateParticle create_particle = 4;
+	optional .CDOTAUserMsg_ParticleManager.DestroyParticle destroy_particle = 5;
+	optional .CDOTAUserMsg_ParticleManager.DestroyParticleInvolving destroy_particle_involving = 6;
+	optional .CDOTAUserMsg_ParticleManager.UpdateParticle update_particle = 7;
+	optional .CDOTAUserMsg_ParticleManager.UpdateParticleFwd update_particle_fwd = 8;
+	optional .CDOTAUserMsg_ParticleManager.UpdateParticleOrient update_particle_orient = 9;
+	optional .CDOTAUserMsg_ParticleManager.UpdateParticleFallback update_particle_fallback = 10;
+	optional .CDOTAUserMsg_ParticleManager.UpdateParticleOffset update_particle_offset = 11;
+	optional .CDOTAUserMsg_ParticleManager.UpdateParticleEnt update_particle_ent = 12;
+	optional .CDOTAUserMsg_ParticleManager.UpdateParticleLatency update_particle_latency = 13;
+}
+
+message CDOTAUserMsg_OverheadEvent {
+	required .DOTA_OVERHEAD_ALERT message_type = 1;
+	optional int32 value = 2;
+	optional int32 target_player_entindex = 3;
+	optional int32 target_entindex = 4;
+	optional int32 source_player_entindex = 5;
+}
+
+message CDOTAUserMsg_TutorialTipInfo {
+	optional string name = 1;
+	optional int32 progress = 2;
+}
+

@@ -1,0 +1,16 @@
+import "google/protobuf/descriptor.proto";
+import "netmessages.proto";
+
+message CDOTAMsg_LocationPing {
+	optional int32 x = 1;
+	optional int32 y = 2;
+	optional int32 target = 3;
+	optional bool direct_ping = 4;
+}
+
+message CDOTAMsg_MapLine {
+	optional int32 x = 1;
+	optional int32 y = 2;
+	optional bool initial = 3;
+}
+
