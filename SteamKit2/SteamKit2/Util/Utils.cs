@@ -122,35 +122,41 @@ namespace SteamKit2
 
                 try
                 {
-                    ManagementClass procClass = new ManagementClass( "Win32_Processor" );
-                    foreach ( var procObj in procClass.GetInstances() )
+                    using ( ManagementClass procClass = new ManagementClass( "Win32_Processor" ) )
                     {
-                        hwString.AppendLine( procObj[ "ProcessorID" ].ToString() );
+                        foreach ( var procObj in procClass.GetInstances() )
+                        {
+                            hwString.AppendLine( procObj[ "ProcessorID" ].ToString() );
+                        }
                     }
                 }
                 catch { }
 
                 try
                 {
-                    ManagementClass hdClass = new ManagementClass( "Win32_LogicalDisk" );
-                    foreach ( var hdObj in hdClass.GetInstances() )
+                    using ( ManagementClass hdClass = new ManagementClass( "Win32_LogicalDisk" ) )
                     {
-                        string hdType = hdObj[ "DriveType" ].ToString();
+                        foreach ( var hdObj in hdClass.GetInstances() )
+                        {
+                            string hdType = hdObj[ "DriveType" ].ToString();
 
-                        if ( hdType != "3" )
-                            continue; // only want local disks
+                            if ( hdType != "3" )
+                                continue; // only want local disks
 
-                        hwString.AppendLine( hdObj[ "VolumeSerialNumber" ].ToString() );
+                            hwString.AppendLine( hdObj[ "VolumeSerialNumber" ].ToString() );
+                        }
                     }
                 }
                 catch { }
 
                 try
                 {
-                    ManagementClass moboClass = new ManagementClass( "Win32_BaseBoard" );
-                    foreach ( var moboObj in moboClass.GetInstances() )
+                    using ( ManagementClass moboClass = new ManagementClass( "Win32_BaseBoard" ) )
                     {
-                        hwString.AppendLine( moboObj[ "SerialNumber" ].ToString() );
+                        foreach ( var moboObj in moboClass.GetInstances() )
+                        {
+                            hwString.AppendLine( moboObj[ "SerialNumber" ].ToString() );
+                        }
                     }
                 }
                 catch { }
@@ -178,8 +184,8 @@ namespace SteamKit2
 
     static class MsgUtil
     {
-        private static readonly uint ProtoMask = 0x80000000;
-        private static readonly uint EMsgMask = ~ProtoMask;
+        private const uint ProtoMask = 0x80000000;
+        private const uint EMsgMask = ~ProtoMask;
 
         public static EMsg GetMsg( uint integer )
         {

@@ -366,7 +366,7 @@ namespace SteamKit2.Blob
         }
 
 
-        private object GetDataForProp(byte[] buffer, Type propType)
+        private static object GetDataForProp(byte[] buffer, Type propType)
         {
             object data = null;
             object integerData = null;

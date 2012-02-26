@@ -287,7 +287,7 @@ namespace SteamKit2.Internal
             OnClientDisconnected();
         }
 
-        IPacketMsg GetPacketMsg( byte[] data )
+        static IPacketMsg GetPacketMsg( byte[] data )
         {
             uint rawEMsg = BitConverter.ToUInt32( data, 0 );
             EMsg eMsg = MsgUtil.GetMsg( rawEMsg );

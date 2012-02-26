@@ -140,21 +140,22 @@ namespace SteamKit2
         {
             try
             {
-                TcpPacket packet = new TcpPacket();
-
-                packet.Write( command );
-
-                foreach ( object arg in args )
+                using ( TcpPacket packet = new TcpPacket() )
                 {
-                    if ( arg is byte[] )
-                        packet.Write( ( byte[] )arg );
-                    else if ( arg is string )
-                        packet.Write( ( string )arg, Encoding.ASCII );
-                    else
-                        packet.Write( arg.GetType(), arg );
-                }
+                    packet.Write( command );
 
-                Socket.Send( packet );
+                    foreach ( object arg in args )
+                    {
+                        if ( arg is byte[] )
+                            packet.Write( ( byte[] )arg );
+                        else if ( arg is string )
+                            packet.Write( ( string )arg, Encoding.ASCII );
+                        else
+                            packet.Write( arg.GetType(), arg );
+                    }
+
+                    Socket.Send( packet );
+                }
 
                 return true;
             }
