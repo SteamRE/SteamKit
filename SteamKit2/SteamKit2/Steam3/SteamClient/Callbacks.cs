@@ -113,7 +113,7 @@ namespace SteamKit2
         public sealed class DisconnectedCallback : CallbackMsg
         {
 #if STATIC_CALLBACKS
-            public DisconnectedCallback( SteamClient client )
+            internal DisconnectedCallback( SteamClient client )
                 : base( client )
             {
             }

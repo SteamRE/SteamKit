@@ -119,7 +119,7 @@ namespace SteamKit2
         /// <summary>
         /// Gets or sets the function to call when a job based callback of type TCall arrives.
         /// </summary>
-        public new Action<TCall,ulong> OnRun { get; set; }
+        public new Action<TCall, ulong> OnRun { get; set; }
 
         /// <summary>
         /// Gets a value indicating whether this <see cref="JobCallback&lt;TCall&gt;"/> is completed.
@@ -137,7 +137,7 @@ namespace SteamKit2
         /// <param name="func">The function to call when a job based callback of type TCall arrives.</param>
         /// <param name="mgr">The <see cref="CallbackManager"/> that is responsible for the routing of callbacks to this handler, or <c>null</c> if the callback will be manually registered.</param>
         /// <param name="jobID">The Job ID this callback will handle, or <c>ulong.MaxValue</c> to handle all job callbacks of type <c>TCall</c>.</param>
-        public JobCallback( Action<TCall,ulong> func, CallbackManager mgr = null, ulong jobID = ulong.MaxValue )
+        public JobCallback( Action<TCall, ulong> func, CallbackManager mgr = null, ulong jobID = ulong.MaxValue )
         {
             this.OnRun = func;
             this.JobID = jobID;
@@ -154,9 +154,7 @@ namespace SteamKit2
             if ( callback.JobID == JobID || JobID == ulong.MaxValue )
             {
                 if ( OnRun != null )
-                {
                     OnRun( callback.Callback, callback.JobID );
-                }
 
                 Completed = true;
             }
@@ -177,13 +175,17 @@ namespace SteamKit2
         List<Internal.CallbackBase> registeredCallbacks;
 
 
+
+#if STATIC_CALLBACKS
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CallbackManager"/> class.
+        /// </summary>
+        public CallbackManager()
+#else
         /// <summary>
         /// Initializes a new instance of the <see cref="CallbackManager"/> class.
         /// </summary>
         /// <param name="client">The <see cref="SteamClient"/> instance to handle the callbacks of.</param>
-#if STATIC_CALLBACKS
-        public CallbackManager()
-#else
         public CallbackManager( SteamClient client )
 #endif
         {

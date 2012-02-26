@@ -15,19 +15,28 @@ namespace SteamKit2
     /// </summary>
     public abstract class CallbackMsg
     {
-        /// <summary>
-        /// A handler delegate for callbacks when using CallbackMsg.Handle
-        /// </summary>
-        public delegate void HandleDelegate<T>( T callMsg );
-
 
 #if STATIC_CALLBACKS
+        /// <summary>
+        /// Gets the underlying <see cref="SteamClient"/> instance that posted this callback.
+        /// </summary>
         public SteamClient Client { get; private set; }
 
 
-        public CallbackMsg( SteamClient client )
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CallbackMsg"/> class.
+        /// </summary>
+        /// <param name="client">The <see cref="SteamClient"/> that is posting this callback.</param>
+        protected CallbackMsg( SteamClient client )
         {
             this.Client = client;
+        }
+#else
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CallbackMsg"/> class.
+        /// </summary>
+        protected CallbackMsg()
+        {
         }
 #endif
 
@@ -50,9 +59,15 @@ namespace SteamKit2
         /// </summary>
         /// <typeparam name="T">The type to check against.</typeparam>
         /// <param name="handler">The handler to invoke.</param>
-        public void Handle<T>( HandleDelegate<T> handler )
+        /// <exception cref="ArgumentNullException">
+        /// <c>handler</c> is null.
+        /// </exception>
+        public void Handle<T>( Action<T> handler )
             where T : CallbackMsg
         {
+            if ( handler == null )
+                throw new ArgumentNullException( "handler" );
+
             var callback = this as T;
 
             if ( callback != null )
