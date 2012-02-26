@@ -104,7 +104,8 @@ namespace SteamKit2
 
                 this.CellID = resp.cell_id;
 
-                this.Steam2Ticket = new Steam2Ticket( resp.steam2_ticket );
+                if ( resp.steam2_ticket != null )
+                    this.Steam2Ticket = new Steam2Ticket( resp.steam2_ticket );
             }
         }
 
