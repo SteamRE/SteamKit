@@ -44,7 +44,7 @@ class MsgClientNewLoginKeyAccepted<EMsg::ClientNewLoginKeyAccepted>
 class MsgClientLogon<EMsg::ClientLogon>
 {
 	const uint ObfuscationMask = 0xBAADF00D;
-	const uint CurrentProtocol = 65573;
+	const uint CurrentProtocol = 65575;
 
 	const uint ProtocolVerMajorMask = 0xFFFF0000;
 	const uint ProtocolVerMinorMask = 0xFFFF;
@@ -251,18 +251,6 @@ class MsgClientChatActionResult<EMsg::ClientChatActionResult>
 	steamidmarshal ulong steamIdUserActedOn;
 	EChatAction chatAction;
 	EChatActionResult actionResult;
-};
-
-class MsgClientGetDepotDecryptionKey<EMsg::ClientGetDepotDecryptionKey>
-{
-	uint depotID;
-};
-
-class MsgClientGetDepotDecryptionKeyResponse<EMsg::ClientGetDepotDecryptionKeyResponse>
-{
-	EResult result;
-	uint depotID;
-	byte<32> depotEncryptionKey;
 };
 
 class MsgClientGetNumberOfCurrentPlayers<EMsg::ClientGetNumberOfCurrentPlayers>
