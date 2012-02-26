@@ -68,9 +68,12 @@ namespace SteamKit2
             using ( MemoryStream ms = new MemoryStream() )
             using ( BinaryWriter writer = new BinaryWriter( ms ) )
             {
-                Crc crc = new Crc( CrcParameters.GetParameters( CrcStandard.Crc32Bit ) );
-                UInt32 checkSum = BitConverter.ToUInt32( crc.ComputeHash( buffer ), 0 );
-                crc.Clear();
+                uint checkSum = 0;
+
+                using ( Crc crc = new Crc( CrcParameters.GetParameters( CrcStandard.Crc32Bit ) ) )
+                {
+                    checkSum = BitConverter.ToUInt32( crc.ComputeHash( buffer ), 0 );
+                }
 
                 byte[] compressed = DeflateBuffer( buffer );
 
@@ -82,8 +85,6 @@ namespace SteamKit2
 
                 Int32 posEOD = WriteHeader( writer, EndOfDirectoryHeader );
                 WriteEndOfDirectory( writer, 1, CDRSize, posCDR );
-
-                writer.Close();
 
                 return ms.ToArray();
             }

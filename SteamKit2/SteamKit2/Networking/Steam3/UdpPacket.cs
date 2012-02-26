@@ -12,7 +12,7 @@ namespace SteamKit2
 {
     class UdpPacket
     {
-        public static readonly uint MAX_PAYLOAD = 0x4DC;
+        public const uint MAX_PAYLOAD = 0x4DC;
 
         public UdpHeader Header { get; private set; }
         public MemoryStream Payload { get; private set; }
@@ -131,20 +131,20 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// Serializes the UdpPacket
+        /// Serializes the UdpPacket.
         /// </summary>
-        /// <returns>The serialized packet</returns>
-        public MemoryStream GetData()
+        /// <returns>The serialized packet.</returns>
+        public byte[] GetData()
         {
-            MemoryStream ms = new MemoryStream();
+            using ( MemoryStream ms = new MemoryStream() )
+            {
+                Header.Serialize( ms );
 
-            Header.Serialize(ms);
+                Payload.Seek( 0, SeekOrigin.Begin );
+                Payload.WriteTo( ms );
 
-            Payload.Seek(0, SeekOrigin.Begin);
-            Payload.WriteTo(ms);
-
-            ms.Seek(0, SeekOrigin.Begin);
-            return ms;
+                return ms.ToArray();
+            }
         }
 
     }

@@ -233,11 +233,11 @@ namespace SteamKit2
                 packet.Header.PacketType, packet.Header.SeqThis, packet.Header.SeqAck,
                 packet.Header.PayloadSize, packet.Header.MsgSize, packet.Header.PacketsInMsg);
 
-            MemoryStream ms = packet.GetData();
+            byte[] data = packet.GetData();
 
             try
             {
-                sock.SendTo(ms.ToArray(), remoteEndPoint);
+                sock.SendTo(data, remoteEndPoint);
             }
             catch ( SocketException e )
             {

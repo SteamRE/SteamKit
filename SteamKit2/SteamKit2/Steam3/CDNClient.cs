@@ -216,7 +216,7 @@ namespace SteamKit2
         /// <param name="chunk">The chunk to process.</param>
         /// <param name="depotkey">The AES encryption key to use when decrypting the chunk.</param>
         /// <returns>The processed chunk.</returns>
-        public byte[] ProcessChunk(byte[] chunk, byte[] depotkey)
+        public static byte[] ProcessChunk(byte[] chunk, byte[] depotkey)
         {
             byte[] decrypted_chunk = CryptoHelper.SymmetricDecrypt(chunk, depotkey);
             byte[] decompressed_chunk = ZipUtil.Decompress(decrypted_chunk);

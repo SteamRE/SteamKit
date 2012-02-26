@@ -35,7 +35,8 @@ namespace SteamKit2
                 bool bAccepted = true;
 
                 string s = ReadToken( out wasQuoted, out wasConditional );
-                if ( s == null || s == "" )
+
+                if ( string.IsNullOrEmpty( s ) )
                     break;
 
                 if ( currentKey == null )
@@ -509,14 +510,9 @@ namespace SteamKit2
                 // get the key name
                 string name = kvr.ReadToken( out wasQuoted, out wasConditional );
 
-                if ( name == null )
+                if ( string.IsNullOrEmpty( name ) )
                 {
-                    throw new Exception( "RecursiveLoadFromBuffer:  got EOF instead of keyname" );
-                }
-
-                if ( name == "" )
-                {
-                    throw new Exception( "RecursiveLoadFromBuffer:  got empty keyname" );
+                    throw new Exception( "RecursiveLoadFromBuffer: got EOF or empty keyname" );
                 }
 
                 if ( name.StartsWith( "}" ) && !wasQuoted )	// top level closed, stop reading
@@ -614,7 +610,7 @@ namespace SteamKit2
             WriteString( f, new string( '\t', indentLevel ) );
         }
 
-        private void WriteString( FileStream f, string str, bool quote = false )
+        private static void WriteString( FileStream f, string str, bool quote = false )
         {
             byte[] bytes = Encoding.ASCII.GetBytes( ( quote ? "\"" : "" ) + str.Replace( "\"", "\\\"" ) + ( quote ? "\"" : "" ) );
             f.Write( bytes, 0, bytes.Length );

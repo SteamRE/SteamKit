@@ -11,6 +11,7 @@ namespace SteamKit2
     /// <summary>
     /// Represents an exception that can occur when doing Steam2 actions.
     /// </summary>
+    [Serializable]
     public class Steam2Exception : Exception
     {
         /// <summary>
@@ -545,7 +546,7 @@ namespace SteamKit2
                 return this.client.SendCommand( cmd, args );
             }
 
-            int DecompressFileChunk( ref byte[] chunk, int blockSize )
+            static int DecompressFileChunk( ref byte[] chunk, int blockSize )
             {
                 using ( MemoryStream chunkStream = new MemoryStream( chunk ) )
                 using ( DeflateStream ds = new DeflateStream( chunkStream, CompressionMode.Decompress ) )

@@ -55,7 +55,7 @@ namespace SteamKit2
         /// </value>
         public static bool Enabled { get; set; }
 
-        static List<IDebugListener> listeners;
+        static List<IDebugListener> listeners = new List<IDebugListener>();
 
 
         /// <summary>
@@ -63,7 +63,6 @@ namespace SteamKit2
         /// </summary>
         static DebugLog()
         {
-            listeners = new List<IDebugListener>();
 #if DEBUG
             Enabled = true;
 #else

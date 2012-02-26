@@ -490,14 +490,15 @@ namespace SteamKit2
             {
                 var tempList = new List<uint>();
 
-                DataStream ds = new DataStream( payload );
-
-                for ( int x = 0 ; x < msg.NumBans ; x++ )
+                using ( DataStream ds = new DataStream( payload ) )
                 {
-                    tempList.Add( ds.ReadUInt32() );
-                }
+                    for ( int x = 0 ; x < msg.NumBans ; x++ )
+                    {
+                        tempList.Add( ds.ReadUInt32() );
+                    }
 
-                BannedApps = new ReadOnlyCollection<uint>( tempList );
+                    BannedApps = new ReadOnlyCollection<uint>( tempList );
+                }
             }
         }
 
