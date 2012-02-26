@@ -461,7 +461,7 @@ namespace SteamKit2
                 if ( outSeqSent < outSeqAcked )
                     outSeqSent = outSeqAcked;
 
-                outPackets.RemoveAll(delegate(UdpPacket x) { return x.Header.SeqThis <= outSeqAcked; });
+                outPackets.RemoveAll( x => x.Header.SeqThis <= outSeqAcked );
                 nextResend = DateTime.Now.AddSeconds(RESEND_DELAY);
             }
 

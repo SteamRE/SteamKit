@@ -198,17 +198,33 @@ namespace SteamKit2
         void Cleanup()
         {
             // cleanup streams
-            netReader.Dispose();
-            netWriter.Dispose();
+            if ( netReader != null )
+            {
+                netReader.Dispose();
+                netReader = null;
+            }
 
-            netStream.Dispose();
+            if ( netWriter != null )
+            {
+                netWriter.Dispose();
+                netWriter = null;
+            }
 
-            // cleanup socket
-            sock.Shutdown( SocketShutdown.Both );
-            sock.Disconnect( true );
-            sock.Close();
+            if ( netStream != null )
+            {
+                netStream.Dispose();
+                netStream = null;
+            }
 
-            sock = null;
+            if ( sock != null )
+            {
+                // cleanup socket
+                sock.Shutdown( SocketShutdown.Both );
+                sock.Disconnect( true );
+                sock.Close();
+
+                sock = null;
+            }
         }
 
 
