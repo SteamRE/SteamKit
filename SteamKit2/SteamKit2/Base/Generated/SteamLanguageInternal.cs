@@ -661,7 +661,7 @@ namespace SteamKit2.Internal
 		public EMsg GetEMsg() { return EMsg.ClientLogon; }
 
 		public static readonly uint ObfuscationMask = 0xBAADF00D;
-		public static readonly uint CurrentProtocol = 65573;
+		public static readonly uint CurrentProtocol = 65575;
 		public static readonly uint ProtocolVerMajorMask = 0xFFFF0000;
 		public static readonly uint ProtocolVerMinorMask = 0xFFFF;
 		public static readonly ushort ProtocolVerMinorMinGameServers = 4;
@@ -1699,72 +1699,6 @@ namespace SteamKit2.Internal
 			steamIdUserActedOn = br.ReadUInt64();
 			ChatAction = (EChatAction)br.ReadInt32();
 			ActionResult = (EChatActionResult)br.ReadInt32();
-		}
-	}
-
-	public class MsgClientGetDepotDecryptionKey : ISteamSerializableMessage
-	{
-		public EMsg GetEMsg() { return EMsg.ClientGetDepotDecryptionKey; }
-
-		// Static size: 4
-		public uint DepotID { get; set; }
-
-		public MsgClientGetDepotDecryptionKey()
-		{
-			DepotID = 0;
-		}
-
-		public void Serialize(Stream stream)
-		{
-			BinaryWriter bw = new BinaryWriter( stream );
-
-			bw.Write( DepotID );
-
-		}
-
-		public void Deserialize( Stream stream )
-		{
-			BinaryReader br = new BinaryReader( stream );
-
-			DepotID = br.ReadUInt32();
-		}
-	}
-
-	public class MsgClientGetDepotDecryptionKeyResponse : ISteamSerializableMessage
-	{
-		public EMsg GetEMsg() { return EMsg.ClientGetDepotDecryptionKeyResponse; }
-
-		// Static size: 4
-		public EResult Result { get; set; }
-		// Static size: 4
-		public uint DepotID { get; set; }
-		// Static size: 32
-		public byte[] DepotEncryptionKey { get; set; }
-
-		public MsgClientGetDepotDecryptionKeyResponse()
-		{
-			Result = 0;
-			DepotID = 0;
-			DepotEncryptionKey = new byte[32];
-		}
-
-		public void Serialize(Stream stream)
-		{
-			BinaryWriter bw = new BinaryWriter( stream );
-
-			bw.Write( (int)Result );
-			bw.Write( DepotID );
-			bw.Write( DepotEncryptionKey );
-
-		}
-
-		public void Deserialize( Stream stream )
-		{
-			BinaryReader br = new BinaryReader( stream );
-
-			Result = (EResult)br.ReadInt32();
-			DepotID = br.ReadUInt32();
-			DepotEncryptionKey = br.ReadBytes( 32 );
 		}
 	}
 
