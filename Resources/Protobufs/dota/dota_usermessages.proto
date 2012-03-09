@@ -9,7 +9,6 @@ enum EDotaUserMessages {
 	DOTA_UM_ChatEvent = 66;
 	DOTA_UM_CombatHeroPositions = 67;
 	DOTA_UM_CombatLogData = 68;
-	DOTA_UM_CombatLogName = 69;
 	DOTA_UM_CombatLogShowDeath = 70;
 	DOTA_UM_CreateLinearProjectile = 71;
 	DOTA_UM_DestroyLinearProjectile = 72;
@@ -73,14 +72,16 @@ enum DOTA_CHAT_MESSAGE {
 	CHAT_MESSAGE_NOPAUSESLEFT = 32;
 	CHAT_MESSAGE_CANTPAUSEYET = 33;
 	CHAT_MESSAGE_PAUSED = 34;
-	CHAT_MESSAGE_UNPAUSED = 35;
-	CHAT_MESSAGE_YOUPAUSED = 36;
-	CHAT_MESSAGE_CANTUNPAUSETEAM = 37;
-	CHAT_MESSAGE_SAFE_TO_LEAVE_ABANDONER = 38;
-	CHAT_MESSAGE_VOICE_TEXT_BANNED = 39;
-	CHAT_MESSAGE_SPECTATORS_WATCHING_THIS_GAME = 40;
-	CHAT_MESSAGE_REPORT_REMINDER = 41;
-	CHAT_MESSAGE_ECON_ITEM = 42;
+	CHAT_MESSAGE_UNPAUSE_COUNTDOWN = 35;
+	CHAT_MESSAGE_UNPAUSED = 36;
+	CHAT_MESSAGE_AUTO_UNPAUSED = 37;
+	CHAT_MESSAGE_YOUPAUSED = 38;
+	CHAT_MESSAGE_CANTUNPAUSETEAM = 39;
+	CHAT_MESSAGE_SAFE_TO_LEAVE_ABANDONER = 40;
+	CHAT_MESSAGE_VOICE_TEXT_BANNED = 41;
+	CHAT_MESSAGE_SPECTATORS_WATCHING_THIS_GAME = 42;
+	CHAT_MESSAGE_REPORT_REMINDER = 43;
+	CHAT_MESSAGE_ECON_ITEM = 44;
 }
 
 enum EDotaEntityMessages {
@@ -136,11 +137,6 @@ message CDOTAUserMsg_ChatEvent {
 	optional sint32 playerid_4 = 6 [default = -1];
 	optional sint32 playerid_5 = 7 [default = -1];
 	optional sint32 playerid_6 = 8 [default = -1];
-}
-
-message CDOTAUserMsg_CombatLogName {
-	optional uint32 slot = 1;
-	optional string name = 2;
 }
 
 message CDOTAUserMsg_CombatLogData {

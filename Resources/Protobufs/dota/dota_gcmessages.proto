@@ -1,4 +1,5 @@
 import "steammessages.proto";
+import "matchmaker_common.proto";
 
 enum DOTA_GameState {
 	DOTA_GAMERULES_STATE_INIT = 0;
@@ -44,10 +45,11 @@ enum DOTALobbyReadyState {
 }
 
 enum DOTABotDifficulty {
-	BOT_DIFFICULTY_EASY = 0;
-	BOT_DIFFICULTY_MEDIUM = 1;
-	BOT_DIFFICULTY_HARD = 2;
-	BOT_DIFFICULTY_UNFAIR = 3;
+	BOT_DIFFICULTY_PASSIVE = 0;
+	BOT_DIFFICULTY_EASY = 1;
+	BOT_DIFFICULTY_MEDIUM = 2;
+	BOT_DIFFICULTY_HARD = 3;
+	BOT_DIFFICULTY_UNFAIR = 4;
 }
 
 enum DOTAGameVersion {
@@ -147,6 +149,7 @@ message CSODOTAParty {
 	optional uint32 prevent_match_until_date = 18;
 	optional uint32 prevent_match_account_id = 19;
 	optional uint32 search_wait_estimate = 20;
+	optional .MatchType match_type = 21;
 }
 
 message CSODOTAPartyInvite {
@@ -185,6 +188,8 @@ message CDOTALobbyGCPrivate {
 message CLobbyTeamDetails {
 	optional string team_name = 1;
 	optional string team_logo = 2;
+	optional string team_tag = 3;
+	optional uint32 team_id = 4;
 }
 
 message CLobbyPendingPlayerReport {
@@ -216,6 +221,8 @@ message CSODOTALobby {
 		PRACTICE = 1;
 		TOURNAMENT = 2;
 		TUTORIAL = 3;
+		COOP_BOT_MATCH = 4;
+		TEAM_MATCH = 5;
 	}
 
 	optional uint64 lobby_id = 1 [(key_field) = true];
@@ -252,7 +259,7 @@ message CSODOTALobby {
 	optional fixed64 load_game_lobby_id = 33;
 	optional uint32 load_game_save_number = 34;
 	optional fixed32 replay_salt = 35 [(hidden) = true];
-	optional .DOTABotDifficulty bot_difficulty = 36 [default = BOT_DIFFICULTY_MEDIUM];
+	optional .DOTABotDifficulty bot_difficulty = 36 [default = BOT_DIFFICULTY_HARD];
 	optional .DOTAGameVersion game_version = 37 [default = GAME_VERSION_CURRENT];
 	repeated .CLobbyTimedRewardDetails timed_reward_details = 38;
 	optional string pass_key = 39;
@@ -275,6 +282,7 @@ message CMsgStartFindingMatch {
 	optional uint32 matchgroups = 2 [default = 4294967295];
 	optional uint32 client_version = 3;
 	optional uint32 game_modes = 4 [default = 4294967295];
+	optional .MatchType match_type = 5;
 }
 
 message CMsgStopFindingMatch {
@@ -687,10 +695,174 @@ message CMsgDOTAPopup {
 	enum PopupID {
 		KICKED_FROM_LOBBY = 0;
 		KICKED_FROM_PARTY = 1;
+		KICKED_FROM_TEAM = 2;
+		TEAM_WAS_DISBANDED = 3;
 	}
 
 	optional .CMsgDOTAPopup.PopupID id = 1 [default = KICKED_FROM_LOBBY];
 	optional string custom_text = 2;
+}
+
+message CMsgDOTATeamMemberSDO {
+	optional uint32 account_id = 1;
+	optional uint32 team_id = 2;
+}
+
+message CMsgDOTATeamMember {
+	optional uint32 account_id = 1;
+	optional uint32 team_id = 2;
+	optional uint32 permissions = 3;
+	optional uint32 time_joined = 4;
+}
+
+message CMsgDOTATeam {
+	repeated .CMsgDOTATeamMember members = 1;
+	optional uint32 team_id = 2;
+	optional string name = 3;
+	optional string tag = 4;
+	optional uint32 admin_id = 5;
+	optional uint32 time_created = 6;
+	optional bool disbanded = 7;
+	optional uint32 wins = 8;
+	optional uint32 losses = 9;
+	optional uint32 rank = 10;
+}
+
+message CMsgDOTACreateTeam {
+	optional string name = 1;
+	optional string tag = 2;
+}
+
+message CMsgDOTACreateTeamResponse {
+	enum Result {
+		INVALID = -1;
+		SUCCESS = 0;
+		NAME_EMPTY = 1;
+		NAME_BAD_CHARACTERS = 2;
+		NAME_TAKEN = 3;
+		NAME_TOO_LONG = 4;
+		TAG_EMPTY = 5;
+		TAG_BAD_CHARACTERS = 6;
+		TAG_TAKEN = 7;
+		TAG_TOO_LONG = 8;
+		CREATOR_BUSY = 9;
+		UNSPECIFIED_ERROR = 10;
+		CREATOR_TEAM_LIMIT_REACHED = 11;
+	}
+
+	repeated .CMsgDOTACreateTeamResponse.Result results = 1 [default = INVALID];
+}
+
+message CMsgDOTADisbandTeam {
+}
+
+message CMsgDOTADisbandTeamResponse {
+	enum Result {
+		SUCCESS = 0;
+		FAILURE = 1;
+	}
+
+	optional .CMsgDOTADisbandTeamResponse.Result result = 1 [default = SUCCESS];
+	optional string team_name = 2;
+}
+
+message CMsgDOTARequestTeamData {
+}
+
+message CMsgDOTARequestTeamDataResponse {
+	enum Result {
+		SUCCESS = 0;
+		FAILURE = 1;
+	}
+
+	optional .CMsgDOTARequestTeamDataResponse.Result result = 1 [default = SUCCESS];
+	optional .CMsgDOTATeamData data = 2;
+}
+
+message CMsgDOTATeamData {
+	optional bool on_team = 1;
+	optional .CMsgDOTATeam team = 2;
+}
+
+message CMsgDOTAInitiateTeamInvite {
+	optional uint32 account_id = 1;
+}
+
+message CMsgDOTAInitiateTeamInviteResponse {
+	enum Result {
+		SUCCESS = 0;
+		MEMBER_LIMIT = 1;
+		INVITEE_NOT_AVAILABLE = 2;
+		INVITEE_BUSY = 3;
+		INVITEE_ALREADY_ON_A_TEAM = 4;
+		UNSPECIFIED_ERROR = 5;
+	}
+
+	optional .CMsgDOTAInitiateTeamInviteResponse.Result result = 1 [default = SUCCESS];
+	optional string invitee_name = 2;
+}
+
+message CMsgDOTATeamInvite {
+	optional uint32 inviter_account_id = 1;
+	optional string team_name = 2;
+}
+
+message CMsgDOTATeamInviteReply {
+	enum Reply {
+		JOIN = 0;
+		REJECT = 1;
+		TIMEOUT = 2;
+	}
+
+	optional .CMsgDOTATeamInviteReply.Reply reply = 1 [default = JOIN];
+}
+
+message CMsgDOTATeamInviteReplyResponse {
+	enum Result {
+		SUCCESS = 0;
+		FAILURE = 1;
+	}
+
+	optional .CMsgDOTATeamInviteReplyResponse.Result result = 1 [default = SUCCESS];
+	optional string team_name = 2;
+}
+
+message CMsgDOTATeamInviteComplete {
+	enum Result {
+		JOINED = 0;
+		REJECTION = 1;
+		TIMEOUT = 2;
+		UNSPECIFIED_ERROR = 3;
+	}
+
+	optional .CMsgDOTATeamInviteComplete.Result result = 1 [default = JOINED];
+	optional string invitee_name = 2;
+}
+
+message CMsgDOTAKickTeamMember {
+	optional uint32 account_id = 1;
+}
+
+message CMsgDOTAKickTeamMemberResponse {
+	enum Result {
+		SUCCESS = 0;
+		FAILURE = 1;
+	}
+
+	optional .CMsgDOTAKickTeamMemberResponse.Result result = 1 [default = SUCCESS];
+}
+
+message CMsgDOTALeaveTeam {
+}
+
+message CMsgDOTALeaveTeamResponse {
+	enum Result {
+		SUCCESS = 0;
+		FAILURE = 1;
+	}
+
+	optional .CMsgDOTALeaveTeamResponse.Result result = 1 [default = SUCCESS];
+	optional string team_name = 2;
 }
 
 message CMsgDOTABetaParticipationRequest {
