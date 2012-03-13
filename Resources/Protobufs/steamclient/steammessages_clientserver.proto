@@ -56,6 +56,7 @@ message CMsgClientLogon {
 	optional uint32 client_os_type = 7;
 	optional bool should_remember_password = 8 [default = false];
 	optional string wine_version = 9;
+	optional uint32 ping_ms_from_cell_search = 10;
 	optional uint32 public_ip = 20;
 	optional uint32 qos_level = 21;
 	optional fixed64 client_supplied_steam_id = 22;
@@ -81,6 +82,7 @@ message CMsgClientLogon {
 	optional string otp_identifier = 87;
 	optional bool steam2_ticket_request = 88;
 	optional int32 game_server_app_id = 94;
+	optional bool steamguard_dont_remember_computer = 95;
 }
 
 message CMsgClientLogonResponse {
@@ -344,6 +346,10 @@ message CMsgClientAccountInfo {
 	optional uint32 account_flags = 7;
 	optional uint64 facebook_id = 8;
 	optional string facebook_name = 9;
+	optional int32 steam_guard_provider = 10;
+	optional bool steamguard_require_code_default = 11;
+	optional bool steamguard_show_providers = 12;
+	optional bool steamguard_can_use_mobile_provider = 13;
 }
 
 message CMsgClientAppMinutesPlayedData {
@@ -913,6 +919,8 @@ message CMsgClientUFSGetFileListForApp {
 }
 
 message CMsgClientUFSGetFileListForAppResponse {
+	option (msgpool_soft_limit) = 8;
+	option (msgpool_hard_limit) = 16;
 	message File {
 		optional uint32 app_id = 1;
 		optional string file_name = 2;
@@ -1217,6 +1225,8 @@ message CMsgClientUCMPublishFile {
 	repeated string tags = 8;
 	optional bool workshop_file = 9;
 	optional int32 visibility = 10;
+	optional uint32 file_type = 11;
+	optional string url = 12;
 }
 
 message CMsgClientUCMPublishFileResponse {
@@ -1239,6 +1249,9 @@ message CMsgClientUCMUpdatePublishedFile {
 	optional bool update_description = 12;
 	optional bool update_tags = 13;
 	optional bool update_visibility = 14;
+	optional string change_description = 15;
+	optional bool update_url = 16;
+	optional string url = 17;
 }
 
 message CMsgClientUCMUpdatePublishedFileResponse {
@@ -1267,6 +1280,7 @@ message CMsgClientUCMGetPublishedFileDetailsResponse {
 	optional string filename = 15;
 	optional uint32 file_size = 16;
 	optional uint32 preview_file_size = 17;
+	optional string url = 18;
 }
 
 message CMsgClientUCMDeletePublishedFile {
@@ -1335,6 +1349,51 @@ message CMsgClientUCMPublishedFileSubscribed {
 message CMsgClientUCMPublishedFileUnsubscribed {
 	optional fixed64 published_file_id = 1;
 	optional uint32 app_id = 2;
+}
+
+message CMsgClientUCMGetPublishedFilesForUser {
+	optional uint32 app_id = 1;
+	optional fixed64 creator_steam_id = 2;
+	repeated string required_tags = 3;
+	repeated string excluded_tags = 4;
+	optional uint32 start_index = 5;
+}
+
+message CMsgClientUCMGetPublishedFilesForUserResponse {
+	message PublishedFileId {
+		optional fixed64 published_file_id = 1;
+	}
+
+	optional int32 eresult = 1 [default = 2];
+	repeated .CMsgClientUCMGetPublishedFilesForUserResponse.PublishedFileId published_files = 2;
+	optional uint32 total_results = 3;
+}
+
+message CMsgClientUCMSetUserPublishedFileAction {
+	optional fixed64 published_file_id = 1;
+	optional uint32 app_id = 2;
+	optional int32 action = 3;
+}
+
+message CMsgClientUCMSetUserPublishedFileActionResponse {
+	optional int32 eresult = 1 [default = 2];
+}
+
+message CMsgClientUCMEnumeratePublishedFilesByUserAction {
+	optional uint32 app_id = 1;
+	optional uint32 start_index = 2;
+	optional int32 action = 3;
+}
+
+message CMsgClientUCMEnumeratePublishedFilesByUserActionResponse {
+	message PublishedFileId {
+		optional fixed64 published_file_id = 1;
+		optional fixed32 rtime_time_stamp = 2 [default = 0];
+	}
+
+	optional int32 eresult = 1 [default = 2];
+	repeated .CMsgClientUCMEnumeratePublishedFilesByUserActionResponse.PublishedFileId published_files = 2;
+	optional uint32 total_results = 3;
 }
 
 message CMsgClientScreenshotsChanged {
@@ -1441,6 +1500,15 @@ message CMsgClientRequestMachineAuthResponse {
 	optional uint32 eresult = 1;
 }
 
+message CMsgClientChangeSteamGuardOptions {
+	optional uint32 steamguard_provider = 1;
+	optional uint32 steamguard_require_code_default = 2;
+}
+
+message CMsgClientChangeSteamGuardOptionsResponse {
+	optional uint32 eresult = 1;
+}
+
 message CMsgClientCreateFriendsGroup {
 	optional fixed64 steamid = 1;
 	optional string groupname = 2;
@@ -1534,8 +1602,8 @@ message CMsgTrading_StartSession {
 message CMsgClientMDSInitDepotBuildRequest {
 	optional uint32 depot_id = 1;
 	optional bytes encrypted_aes_key = 2;
-	optional string beta_key = 3;
 	optional uint32 build_id = 4;
+	optional bool for_local_cs = 5;
 }
 
 message CMsgClientMDSInitDepotBuildResponse {
@@ -1543,6 +1611,7 @@ message CMsgClientMDSInitDepotBuildResponse {
 	optional uint32 default_chunk_size = 2;
 	optional fixed64 base_manifest = 3;
 	optional bytes encrypted_depot_key = 4;
+	optional fixed64 prev_manifest = 5;
 }
 
 message CMsgClientMDSLoginRequest {
@@ -1581,10 +1650,8 @@ message CMsgClientMDSUploadManifestRequest {
 	optional uint32 depot_id = 1;
 	optional uint32 manifest_size_compressed = 2;
 	optional bool make_public = 4;
-	optional string beta_key = 5;
 	optional uint32 build_id = 6;
 	optional uint32 manifest_version = 7;
-	optional string beta_password = 8;
 }
 
 message CMsgClientMDSUploadManifestResponse {
@@ -1594,6 +1661,7 @@ message CMsgClientMDSUploadManifestResponse {
 	optional uint32 missing_chunks = 4;
 	optional uint32 bitstring_size_uncompressed = 5;
 	optional bytes bitstring = 6;
+	optional bool is_prev_manifest = 7;
 }
 
 message CMsgClientMDSGetDepotManifest {
@@ -1634,18 +1702,6 @@ message CMsgMDSSetAppBuildLive {
 
 message CMsgMDSSetAppBuildLiveResponse {
 	optional int32 eresult = 1 [default = 2];
-}
-
-message CMsgMDSGetPrevDepotBuild {
-	optional uint32 build_id = 1;
-	optional uint32 depot_id = 2;
-}
-
-message CMsgMDSGetPrevDepotBuildResponse {
-	optional int32 eresult = 1 [default = 2];
-	optional fixed64 prev_manifest_id = 2;
-	optional uint32 prev_build_id = 3;
-	optional uint64 prev_total_bytes = 4;
 }
 
 message CMsgClientEmailChange {
@@ -1849,10 +1905,11 @@ message CMsgGSComputeNewPlayerCompatibilityResponse {
 message CMsgClientSentLogs {
 }
 
-message CMsgAMGCClientRelay {
+message CMsgGCClient {
 	optional uint32 appid = 1;
 	optional uint32 msgtype = 2;
 	optional bytes payload = 3;
+	optional fixed64 steamid = 4;
 }
 
 message CMsgClientRequestFreeLicense {
@@ -2010,5 +2067,72 @@ message CMsgCREItemVoteSummaryResponse {
 
 	optional int32 eresult = 1 [default = 2];
 	repeated .CMsgCREItemVoteSummaryResponse.ItemVoteSummary item_vote_summaries = 2;
+}
+
+message CMsgCREUpdateUserPublishedItemVote {
+	optional fixed64 published_file_id = 1;
+	optional bool vote_up = 2;
+}
+
+message CMsgCREUpdateUserPublishedItemVoteResponse {
+	optional int32 eresult = 1 [default = 2];
+}
+
+message CMsgCREGetUserPublishedItemVoteDetails {
+	message PublishedFileId {
+		optional fixed64 published_file_id = 1;
+	}
+
+	repeated .CMsgCREGetUserPublishedItemVoteDetails.PublishedFileId published_file_ids = 1;
+}
+
+message CMsgCREGetUserPublishedItemVoteDetailsResponse {
+	message UserItemVoteDetail {
+		optional fixed64 published_file_id = 1;
+		optional int32 vote = 2 [default = 0];
+	}
+
+	optional int32 eresult = 1 [default = 2];
+	repeated .CMsgCREGetUserPublishedItemVoteDetailsResponse.UserItemVoteDetail user_item_vote_details = 2;
+}
+
+message CMsgGameServerPingSample {
+	message Sample {
+		optional fixed32 ip = 1;
+		optional uint32 avg_ping_ms = 2;
+		optional uint32 stddev_ping_ms_x10 = 3;
+	}
+
+	optional fixed32 my_ip = 1;
+	optional int32 gs_app_id = 2;
+	repeated .CMsgGameServerPingSample.Sample gs_samples = 3;
+}
+
+message CMsgFSGetFollowerCount {
+	optional fixed64 steam_id = 1;
+}
+
+message CMsgFSGetFollowerCountResponse {
+	optional int32 eresult = 1 [default = 2];
+	optional int32 count = 2 [default = 0];
+}
+
+message CMsgFSGetIsFollowing {
+	optional fixed64 steam_id = 1;
+}
+
+message CMsgFSGetIsFollowingResponse {
+	optional int32 eresult = 1 [default = 2];
+	optional bool is_following = 2 [default = false];
+}
+
+message CMsgFSEnumerateFollowingList {
+	optional uint32 start_index = 1;
+}
+
+message CMsgFSEnumerateFollowingListResponse {
+	optional int32 eresult = 1 [default = 2];
+	optional int32 total_results = 2;
+	repeated fixed64 steam_ids = 3;
 }
 

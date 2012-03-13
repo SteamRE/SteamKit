@@ -1,3 +1,10 @@
+import "google/protobuf/descriptor.proto";
+
+extend .google.protobuf.MessageOptions {
+	optional int32 msgpool_soft_limit = 50000 [default = 32];
+	optional int32 msgpool_hard_limit = 50001 [default = 384];
+}
+
 message CMsgProtoBufHeader {
 	optional fixed64 client_steam_id = 1;
 	optional int32 client_session_id = 2;
@@ -5,6 +12,10 @@ message CMsgProtoBufHeader {
 	optional fixed64 job_id_source = 10 [default = 18446744073709551615];
 	optional fixed64 job_id_target = 11 [default = 18446744073709551615];
 	optional string target_job_name = 12;
+	optional int32 eresult = 13 [default = 2];
+	optional string error_message = 14;
+	optional uint32 ip = 15;
+	optional uint32 auth_account_flags = 16;
 }
 
 message CMsgMulti {
