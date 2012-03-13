@@ -45,10 +45,11 @@ enum DOTALobbyReadyState {
 }
 
 enum DOTABotDifficulty {
-	BOT_DIFFICULTY_EASY = 0;
-	BOT_DIFFICULTY_MEDIUM = 1;
-	BOT_DIFFICULTY_HARD = 2;
-	BOT_DIFFICULTY_UNFAIR = 3;
+	BOT_DIFFICULTY_PASSIVE = 0;
+	BOT_DIFFICULTY_EASY = 1;
+	BOT_DIFFICULTY_MEDIUM = 2;
+	BOT_DIFFICULTY_HARD = 3;
+	BOT_DIFFICULTY_UNFAIR = 4;
 }
 
 enum DOTAGameVersion {
@@ -187,6 +188,8 @@ message CDOTALobbyGCPrivate {
 message CLobbyTeamDetails {
 	optional string team_name = 1;
 	optional string team_logo = 2;
+	optional string team_tag = 3;
+	optional uint32 team_id = 4;
 }
 
 message CLobbyPendingPlayerReport {
@@ -256,7 +259,7 @@ message CSODOTALobby {
 	optional fixed64 load_game_lobby_id = 33;
 	optional uint32 load_game_save_number = 34;
 	optional fixed32 replay_salt = 35 [(hidden) = true];
-	optional .DOTABotDifficulty bot_difficulty = 36 [default = BOT_DIFFICULTY_MEDIUM];
+	optional .DOTABotDifficulty bot_difficulty = 36 [default = BOT_DIFFICULTY_HARD];
 	optional .DOTAGameVersion game_version = 37 [default = GAME_VERSION_CURRENT];
 	repeated .CLobbyTimedRewardDetails timed_reward_details = 38;
 	optional string pass_key = 39;
@@ -744,6 +747,7 @@ message CMsgDOTACreateTeamResponse {
 		TAG_TOO_LONG = 8;
 		CREATOR_BUSY = 9;
 		UNSPECIFIED_ERROR = 10;
+		CREATOR_TEAM_LIMIT_REACHED = 11;
 	}
 
 	repeated .CMsgDOTACreateTeamResponse.Result results = 1 [default = INVALID];

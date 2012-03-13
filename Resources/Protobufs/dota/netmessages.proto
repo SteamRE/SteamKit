@@ -399,3 +399,21 @@ message CSVCMsg_VoiceData {
 	optional bytes voice_data = 5;
 }
 
+message CSVCMsgList_GameEvents {
+	message event_t {
+		optional int32 tick = 1;
+		optional .CSVCMsg_GameEvent event = 2;
+	}
+
+	repeated .CSVCMsgList_GameEvents.event_t events = 1;
+}
+
+message CSVCMsgList_UserMessages {
+	message usermsg_t {
+		optional int32 tick = 1;
+		optional .CSVCMsg_UserMessage msg = 2;
+	}
+
+	repeated .CSVCMsgList_UserMessages.usermsg_t usermsgs = 1;
+}
+
