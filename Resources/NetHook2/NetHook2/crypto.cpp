@@ -61,12 +61,12 @@ CCrypto::CCrypto()
 
 	char *pDecrypt;
 	bool bDecrypt = steamClientScan.FindFunction(
-		"\x8b\x4b\x14\x8b\x53\x0c\x8b\x31\x32\xc0\x88\x45\xe6\x88\x45\xe7\x8b\x43\x08\x8d\x0c\x10\x3b\xcf\x89\x7d\xe0\x72\x00\x8d\x14\x3e\x3b\xd0\x72\x00\x56\xe8\x00\x00\x00\x00\x83\xc4\x04\x89\x45\xe0\xc6\x45\xe7\x01",
-		"xxxxxxxxxxxxxxxxxxxxxxxxxxxx?xxxxxx?xx????xxxxxxxxxx",
+		"\x8b\x45\x08\x8b\x4d\x0c\x8b\x33\x8d\x14\x08\x3b\xd7\xc6\x45\x1f\x00\xc6\x45\x17\x00\x89\x7d\xec\x72\x00\x8d\x0c\x3e\x3b\xc8\x72\x00\x56\xe8\x00\x00\x00\x00\x83\xc4\x04\x89\x45\xec\xc6\x45\x17\x01",
+		"xxxxxxxxxxxxxxxxxxxxxxxxx?xxxxxx?xx????xxxxxxxxxx",
 		(void **)&pDecrypt
 	);
 
-	Decrypt_Orig = (bool (__cdecl *)(const uint8*, uint32, uint8*, uint32*, const uint8*, uint32))( pDecrypt - 0x14D ); // begin praying
+	Decrypt_Orig = (bool (__cdecl *)(const uint8*, uint32, uint8*, uint32*, const uint8*, uint32))( pDecrypt - 0x134 ); // begin praying
 
 	g_pLogger->LogConsole( "CCrypto::SymmetricDecrypt = 0x%x\n", Decrypt_Orig );
 
