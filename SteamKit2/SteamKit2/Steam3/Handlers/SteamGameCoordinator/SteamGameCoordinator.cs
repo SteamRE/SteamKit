@@ -21,7 +21,7 @@ namespace SteamKit2
         /// <param name="appId">The app id of the game coordinator to send to.</param>
         public void Send( byte[] data, uint appId )
         {
-            var clientMsg = new ClientMsgProtobuf<CMsgAMGCClientRelay>( EMsg.ClientToGC );
+            var clientMsg = new ClientMsgProtobuf<CMsgGCClient>( EMsg.ClientToGC );
 
             clientMsg.Body.msgtype = BitConverter.ToUInt32( data, 0 );
             clientMsg.Body.appid = appId;
@@ -40,7 +40,7 @@ namespace SteamKit2
         {
             if ( packetMsg.MsgType == EMsg.ClientFromGC )
             {
-                var msg = new ClientMsgProtobuf<CMsgAMGCClientRelay>( packetMsg );
+                var msg = new ClientMsgProtobuf<CMsgGCClient>( packetMsg );
 
 #if STATIC_CALLBACKS
                 var callback = new MessageCallback( Client, msg.Body );
