@@ -334,7 +334,11 @@ namespace SteamKit2
                     Data = new KeyValue();
 
                     using ( var ms = new MemoryStream( pack.buffer ) )
+                    using ( var br = new BinaryReader( ms ) )
+                    {
+                        br.ReadUInt32(); // unknown uint at the beginning of the buffer
                         Data.ReadAsBinary( ms );
+                    }
                 }
 
                 internal Package( uint packageId, Package.PackageStatus status )

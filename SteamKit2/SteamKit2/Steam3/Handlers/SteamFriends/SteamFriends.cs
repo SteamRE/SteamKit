@@ -215,7 +215,7 @@ namespace SteamKit2
         /// Gets a SHA-1 hash representing the clan's avatar.
         /// </summary>
         /// <param name="steamId">The SteamID of the clan to get the avatar of.</param>
-        /// <returns>A byte array representing a SHA-1 hash of the clan's avatar.</returns>
+        /// <returns>A byte array representing a SHA-1 hash of the clan's avatar, or null if the clan could not be found.</returns>
         public byte[] GetClanAvatar( SteamID steamId )
         {
             return cache.Clans.GetAccount( steamId ).AvatarHash;
@@ -296,6 +296,33 @@ namespace SteamKit2
             joinChat.Body.SteamIdChat = chatId;
 
             Client.Send( joinChat );
+
+        }
+        /// <summary>
+        /// Attempts to leave a chat room.
+        /// </summary>
+        /// <param name="steamId">The SteamID of the chat room.</param>
+        public void LeaveChat( SteamID steamId )
+        {
+            SteamID chatId = steamId.ConvertToUInt64(); // copy the steamid so we don't modify it
+
+            var leaveChat = new ClientMsg<MsgClientChatMemberInfo>();
+
+            if ( chatId.IsClanAccount )
+            {
+                // this steamid is incorrect, so we'll fix it up
+                chatId.AccountInstance = ( uint )SteamID.ChatInstanceFlags.Clan;
+                chatId.AccountType = EAccountType.Chat;
+            }
+
+            leaveChat.Body.SteamIdChat = chatId;
+            leaveChat.Body.Type = EChatInfoType.StateChange;
+
+            leaveChat.Write( Client.SteamID.ConvertToUInt64() ); // ChatterActedOn
+            leaveChat.Write( ( uint )EChatMemberStateChange.Left ); // StateChange
+            leaveChat.Write( Client.SteamID.ConvertToUInt64() ); // ChatterActedBy
+
+            Client.Send( leaveChat );
         }
 
         /// <summary>
@@ -555,6 +582,9 @@ namespace SteamKit2
                     {
                         cacheClan.Name = friend.player_name;
                     }
+                }
+                else
+                {
                 }
 
                 // todo: cache other details/account types?
