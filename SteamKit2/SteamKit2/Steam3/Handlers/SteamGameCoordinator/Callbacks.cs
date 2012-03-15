@@ -37,10 +37,10 @@ namespace SteamKit2
 
 
 #if STATIC_CALLBACKS
-            internal MessageCallback( SteamClient client, CMsgAMGCClientRelay gcMsg )
+            internal MessageCallback( SteamClient client, CMsgGCClient gcMsg )
                 : base( client )
 #else
-            internal MessageCallback( CMsgAMGCClientRelay gcMsg )
+            internal MessageCallback( CMsgGCClient gcMsg )
 #endif
             {
                 this.eMsg = ( EGCMsg )gcMsg.msgtype;
