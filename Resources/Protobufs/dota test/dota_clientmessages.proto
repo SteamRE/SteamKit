@@ -12,6 +12,7 @@ enum EDotaClientMessages {
 	DOTA_CM_SearchString = 7;
 	DOTA_CM_Pause = 8;
 	DOTA_CM_ShopViewMode = 9;
+	DOTA_CM_SetUnitShareFlag = 10;
 }
 
 message CDOTAClientMsg_MapPing {
@@ -47,5 +48,11 @@ message CDOTAClientMsg_Pause {
 
 message CDOTAClientMsg_ShopViewMode {
 	optional uint32 mode = 1;
+}
+
+message CDOTAClientMsg_SetUnitShareFlag {
+	optional uint32 playerID = 1;
+	optional uint32 flag = 2;
+	optional bool state = 3;
 }
 
