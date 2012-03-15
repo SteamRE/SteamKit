@@ -9,6 +9,7 @@
 #pragma warning disable 1591
 
 // Generated from: steammessages_base.proto
+// Note: requires additional types generated from: google/protobuf/descriptor.proto
 namespace SteamKit2.Internal
 {
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgProtoBufHeader")]
@@ -69,6 +70,42 @@ namespace SteamKit2.Internal
     {
       get { return _target_job_name; }
       set { _target_job_name = value; }
+    }
+
+    private int _eresult = (int)2;
+    [global::ProtoBuf.ProtoMember(13, IsRequired = false, Name=@"eresult", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoDefaultValue((int)2)]
+    public int eresult
+    {
+      get { return _eresult; }
+      set { _eresult = value; }
+    }
+
+    private string _error_message = "";
+    [global::ProtoBuf.ProtoMember(14, IsRequired = false, Name=@"error_message", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoDefaultValue("")]
+    public string error_message
+    {
+      get { return _error_message; }
+      set { _error_message = value; }
+    }
+
+    private uint _ip = default(uint);
+    [global::ProtoBuf.ProtoMember(15, IsRequired = false, Name=@"ip", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    public uint ip
+    {
+      get { return _ip; }
+      set { _ip = value; }
+    }
+
+    private uint _auth_account_flags = default(uint);
+    [global::ProtoBuf.ProtoMember(16, IsRequired = false, Name=@"auth_account_flags", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    public uint auth_account_flags
+    {
+      get { return _auth_account_flags; }
+      set { _auth_account_flags = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

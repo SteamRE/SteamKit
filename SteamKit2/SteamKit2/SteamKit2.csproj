@@ -75,6 +75,7 @@
     <Compile Include="Base\Generated\GC\SteamMsgBase.cs" />
     <Compile Include="Base\Generated\GC\SteamMsgGC.cs" />
     <Compile Include="Base\Generated\GC\SteamMsgGCSDK.cs" />
+    <Compile Include="Base\Generated\IClientObjects.cs" />
     <Compile Include="Base\Generated\SteamLanguageInternal.cs" />
     <Compile Include="Base\MsgBase.cs" />
     <Compile Include="Base\PacketBase.cs" />
