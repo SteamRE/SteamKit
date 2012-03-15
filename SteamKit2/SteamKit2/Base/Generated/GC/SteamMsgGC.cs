@@ -1879,5 +1879,47 @@ namespace SteamKit2.Internal.GC
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCClientDisplayNotification")]
+  public partial class CMsgGCClientDisplayNotification : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCClientDisplayNotification() {}
+    
+
+    private string _notification_title_localization_key = "";
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"notification_title_localization_key", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoDefaultValue("")]
+    public string notification_title_localization_key
+    {
+      get { return _notification_title_localization_key; }
+      set { _notification_title_localization_key = value; }
+    }
+
+    private string _notification_body_localization_key = "";
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"notification_body_localization_key", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoDefaultValue("")]
+    public string notification_body_localization_key
+    {
+      get { return _notification_body_localization_key; }
+      set { _notification_body_localization_key = value; }
+    }
+    private readonly global::System.Collections.Generic.List<string> _body_substring_keys = new global::System.Collections.Generic.List<string>();
+    [global::ProtoBuf.ProtoMember(3, Name=@"body_substring_keys", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<string> body_substring_keys
+    {
+      get { return _body_substring_keys; }
+    }
+  
+    private readonly global::System.Collections.Generic.List<string> _body_substring_values = new global::System.Collections.Generic.List<string>();
+    [global::ProtoBuf.ProtoMember(4, Name=@"body_substring_values", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<string> body_substring_values
+    {
+      get { return _body_substring_values; }
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
 }
 #pragma warning restore 1591
