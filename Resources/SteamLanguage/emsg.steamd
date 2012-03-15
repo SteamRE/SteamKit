@@ -27,6 +27,8 @@ enum EMsg
 	PingResponse = 140;
 	Stats = 141;
 	RequestFullStatsBlock = 142;
+	ServiceMethod = 146;
+	ServiceMethodResponse = 147;
 	
 	BaseShell = 200;
 	AssignSysID = 200;
@@ -1088,6 +1090,9 @@ enum EMsg
 	ClientAMGetPersonaNameHistory = 5570;
 	ClientAMGetPersonaNameHistoryResponse = 5571;
 	ClientFriendMsgEchoToSender = 5578;
+	ClientChangeSteamGuardOptions = 5579;
+	ClientChangeSteamGuardOptionsResponse = 5580;
+	ClientOGSGameServerPingSample = 5581;
 	
 	BaseDFS = 5600;
 	DFSGetFile = 5601;
@@ -1235,6 +1240,12 @@ enum EMsg
 	ClientUCMUpdatePublishedFileResponse = 7326;
 	ClientUCMPublishedFileSubscribed = 7347;
 	ClientUCMPublishedFileUnsubscribed = 7348;
+	ClientUCMGetPublishedFilesForUser = 7360;
+	ClientUCMGetPublishedFilesForUserResponse = 7361;
+	ClientUCMSetUserPublishedFileAction = 7364;
+	ClientUCMSetUserPublishedFileActionResponse = 7365;
+	ClientUCMEnumeratePublishedFilesByUserAction = 7366;
+	ClientUCMEnumeratePublishedFilesByUserActionResponse = 7367;
 	
 	FSBase = 7500;
 	ClientRichPresenceUpload = 7501;
@@ -1242,6 +1253,12 @@ enum EMsg
 	ClientRichPresenceInfo = 7503;
 	FSRichPresenceRequest = 7504;
 	FSRichPresenceResponse = 7505;
+	ClientFSGetFollowerCount = 7515;
+	ClientFSGetFollowerCountResponse = 7516;
+	ClientFSGetIsFollowing = 7517;
+	ClientFSGetIsFollowingResponse = 7518;
+	ClientFSEnumerateFollowingList = 7519;
+	ClientFSEnumerateFollowingListResponse = 7520;
 	
 	DRMRange2 = 7600;
 	CEGVersionSetEnableDisableRequest = 7600;
@@ -1274,4 +1291,8 @@ enum EMsg
 	CREItemVoteSummaryResponse = 8504;
 	CRERankByVote = 8505;
 	CRERankByVoteResponse = 8506;
+	CREUpdateUserPublishedItemVote = 8507;
+	CREUpdateUserPublishedItemVoteResponse = 8508;
+	CREGetUserPublishedItemVoteDetails = 8509;
+	CREGetUserPublishedItemVoteDetailsResponse = 8510;
 };
