@@ -210,8 +210,8 @@ namespace ProtobufDumper
 
         private bool HandleProto(string name, byte[] data)
         {
-            if (name == "google/protobuf/descriptor.proto")
-                return true;
+            //if (name == "google/protobuf/descriptor.proto")
+            //    return true;
 
             Console.WriteLine("Found protobuf candidate '{0}'!", name);
 
@@ -715,7 +715,18 @@ namespace ProtobufDumper
 
             foreach (DescriptorProto.ExtensionRange range in proto.extension_range)
             {
-                sb.AppendLine(levelspace + "\textensions " + range.start + " to " + range.end + ";");
+                string max = Convert.ToString( range.end );
+
+                // http://code.google.com/apis/protocolbuffers/docs/proto.html#extensions
+                // If your numbering convention might involve extensions having very large numbers as tags, you can specify
+                // that your extension range goes up to the maximum possible field number using the max keyword:
+                // max is 2^29 - 1, or 536,870,911. 
+                if ( range.end >= 536870911 )
+                {
+                    max = "max";
+                }
+
+                sb.AppendLine(levelspace + "\textensions " + range.start + " to " + max + ";");
             }
 
             sb.AppendLine(levelspace + "}");
