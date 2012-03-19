@@ -14,7 +14,7 @@ namespace SteamKit2.Blob
     /// implementations for drastically improved performance over default late-bind 
     /// invoke.
     /// </summary>
-    class FastPropertyInfo : PropertyInfo
+    public class FastPropertyInfo : PropertyInfo
     {
         PropertyInfo property;
         SetHandler setValueImpl = null;

@@ -7,12 +7,18 @@ using System.Reflection.Emit;
 
 namespace SteamKit2.Blob
 {
-    class CacheContext
+    /// <summary>
+    /// Provides caching for the fast construction of types
+    /// </summary>
+    public class CacheContext
     {
-        public Dictionary<Type, FastPropertyInfo[]> FastPropCache { get; set; }
-        public Dictionary<MemberInfo, object[]> MemberAttribMap { get; set; }
-        public Dictionary<Type, InstantiateObjectHandler> ConstructCache { get; set; }
+        internal Dictionary<Type, FastPropertyInfo[]> FastPropCache { get; set; }
+        internal Dictionary<MemberInfo, object[]> MemberAttribMap { get; set; }
+        internal Dictionary<Type, InstantiateObjectHandler> ConstructCache { get; set; }
 
+        /// <summary>
+        /// Initializes the default state of the CacheContext
+        /// </summary>
         public CacheContext()
         {
             FastPropCache = new Dictionary<Type, FastPropertyInfo[]>();
@@ -21,8 +27,14 @@ namespace SteamKit2.Blob
         }
     }
 
-    static class CacheUtil
+    /// <summary>
+    /// Cache utility functions to operate on a CacheContext
+    /// </summary>
+    public static class CacheUtil
     {
+        /// <summary>
+        /// Retrieve the cached property info for a class given the CacheContext
+        /// </summary>
         public static FastPropertyInfo[] GetCachedPropertyInfo(this Type t, CacheContext context)
         {
             FastPropertyInfo[] fpropinfo;
@@ -42,6 +54,9 @@ namespace SteamKit2.Blob
             return fpropinfo;
         }
 
+        /// <summary>
+        /// Retrieve the cached list of custom attributes for a member
+        /// </summary>
         public static object[] GetCachedCustomAttribs(CacheContext context, MemberInfo mi, Type x)
         {
             object[] attribs;
@@ -55,6 +70,9 @@ namespace SteamKit2.Blob
             return attribs;
         }
 
+        /// <summary>
+        /// Retrieve the cached attribute for a member 
+        /// </summary>
         public static T GetAttribute<T>(this MemberInfo mi, CacheContext context)
             where T : Attribute
         {
@@ -66,6 +84,10 @@ namespace SteamKit2.Blob
             return attribs[0];
         }
 
+        /// <summary>
+        /// Construct a type using the cached constructor
+        /// </summary>
+        /// todo: consider pooling
         public static object FastConstruct(CacheContext context, Type T)
         {
             InstantiateObjectHandler construct;
@@ -77,6 +99,36 @@ namespace SteamKit2.Blob
 
             context.ConstructCache.Add(T, construct);
             return construct();
+        }
+
+        /// <summary>
+        /// Helper method to test if a type is a list or dictionary
+        /// </summary>
+        public static bool IsTypeListOrDictionary(this Type type, out Type wantType, out int count)
+        {
+            if (!type.IsGenericType)
+            {
+                count = 0;
+                wantType = null;
+                return false;
+            }
+
+            if (type.GetGenericTypeDefinition() == typeof(List<>))
+            {
+                wantType = type.GetGenericArguments()[0];
+                count = 1;
+                return true;
+            }
+            else if (type.GetGenericTypeDefinition() == typeof(Dictionary<,>))
+            {
+                wantType = type.GetGenericArguments()[1];
+                count = 2;
+                return true;
+            }
+
+            count = 0;
+            wantType = null;
+            return false;
         }
 
 
