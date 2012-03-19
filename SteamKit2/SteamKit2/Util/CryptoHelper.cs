@@ -42,8 +42,14 @@ namespace SteamKit2
         }
     }
 
-    static class CryptoHelper
+    /// <summary>
+    /// Provides Crypto functions used in Steam protocols
+    /// </summary>
+    public static class CryptoHelper
     {
+        /// <summary>
+        /// Performs an SHA1 hash of an input byte array
+        /// </summary>
         public static byte[] SHAHash( byte[] input )
         {
             using ( var sha = new SHA1Managed() )
@@ -52,7 +58,9 @@ namespace SteamKit2
             }
         }
 
-
+        /// <summary>
+        /// Encrypts using AES/CBC/PKCS7 an input byte array with a given key and IV
+        /// </summary>
         public static byte[] AESEncrypt( byte[] input, byte[] key, byte[] iv )
         {
             using ( var aes = new RijndaelManaged() )
@@ -75,6 +83,9 @@ namespace SteamKit2
             }
         }
 
+        /// <summary>
+        /// Decrypts an input byte array using AES/CBC/PKCS7 with a given key and IV
+        /// </summary>
         public static byte[] AESDecrypt( byte[] input, byte[] key, byte[] iv )
         {
             using ( var aes = new RijndaelManaged() )
@@ -102,7 +113,9 @@ namespace SteamKit2
             }
         }
 
-
+        /// <summary>
+        /// Performs an encryption using AES/CBC/PKCS7 with an input byte array and key, with a random IV prepended using AES/ECB/None
+        /// </summary>
         public static byte[] SymmetricEncrypt( byte[] input, byte[] key )
         {
             Debug.Assert( key.Length == 32 );
@@ -150,6 +163,9 @@ namespace SteamKit2
             }
         }
 
+        /// <summary>
+        /// Decrypts using AES/CBC/PKCS7 with an input byte array and key, using the random IV prepended using AES/ECB/None
+        /// </summary>
         public static byte[] SymmetricDecrypt( byte[] input, byte[] key )
         {
             Debug.Assert( key.Length == 32 );
@@ -198,7 +214,9 @@ namespace SteamKit2
             }
         }
 
-
+        /// <summary>
+        /// Performs the Jenkins hash on an input byte array
+        /// </summary>
         public static byte[] JenkinsHash( byte[] input )
         {
             using ( JenkinsHash jHash = new JenkinsHash() )
@@ -210,6 +228,9 @@ namespace SteamKit2
             }
         }
 
+        /// <summary>
+        /// Performs CRC32 on an input byte array using the CrcStandard.Crc32Bit parameters
+        /// </summary>
         public static byte[] CRCHash( byte[] input )
         {
             using ( Crc crc = new Crc( CrcParameters.GetParameters( CrcStandard.Crc32Bit ) ) )
@@ -221,6 +242,9 @@ namespace SteamKit2
             }
         }
 
+        /// <summary>
+        /// Performs an Adler32 on the given input
+        /// </summary>
         public static byte[] AdlerHash( byte[] input )
         {
             uint a = 0, b = 0;
@@ -232,6 +256,9 @@ namespace SteamKit2
             return BitConverter.GetBytes( a | ( b << 16 ) );
         }
 
+        /// <summary>
+        /// Generate an array of random bytes given the input length
+        /// </summary>
         public static byte[] GenerateRandomBlock( int size )
         {
             using ( var rng = new RNGCryptoServiceProvider() )

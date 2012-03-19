@@ -76,33 +76,5 @@ namespace SteamKit2.Blob
                     process == EAutoPreprocessCode.eAutoPreprocessCodeCompressed ||
                     process == EAutoPreprocessCode.eAutoPreprocessCodeEncrypted);
         }
-
-
-        public static bool IsTypeListOrDictionary(this Type type, out Type wantType, out int count)
-        {
-            if (!type.IsGenericType)
-            {
-                count = 0;
-                wantType = null;
-                return false;
-            }
-
-            if(type.GetGenericTypeDefinition() == typeof(List<>))
-            {
-                wantType = type.GetGenericArguments()[0];
-                count = 1;
-                return true;
-            }
-            else if(type.GetGenericTypeDefinition() == typeof(Dictionary<,>))
-            {
-                wantType = type.GetGenericArguments()[1];
-                count = 2;
-                return true;
-            }
-
-            count = 0;
-            wantType = null;
-            return false;
-        }
     }
 }
