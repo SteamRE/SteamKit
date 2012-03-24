@@ -246,3 +246,16 @@ message CMsgGCGetEmailTemplateResponse {
 	optional string template = 3;
 }
 
+message CMsgAMGrantGuestPasses2 {
+	optional fixed64 steam_id = 1;
+	optional uint32 package_id = 2;
+	optional int32 passes_to_grant = 3;
+	optional int32 days_to_expiration = 4;
+	optional int32 action = 5;
+}
+
+message CMsgAMGrantGuestPasses2Response {
+	optional int32 eresult = 1 [default = 2];
+	optional int32 passes_granted = 2 [default = 0];
+}
+

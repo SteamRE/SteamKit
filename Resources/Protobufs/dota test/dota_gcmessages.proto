@@ -344,6 +344,32 @@ message CMsgSpectateFriendGameResponse {
 message CMsgAbandonCurrentGame {
 }
 
+message CMsgGameServerInfo {
+	enum ServerType {
+		UNSPECIFIED = 0;
+		GAME = 1;
+		PROXY = 2;
+	}
+
+	optional fixed32 server_public_ip_addr = 1;
+	optional fixed32 server_private_ip_addr = 2;
+	optional uint32 server_port = 3;
+	optional uint32 server_tv_port = 4;
+	optional string server_key = 5;
+	optional bool server_hibernation = 6;
+	optional .CMsgGameServerInfo.ServerType server_type = 7 [default = UNSPECIFIED];
+	optional uint32 server_region = 8;
+	optional float server_loadavg = 9;
+	optional float server_tv_broadcast_time = 10;
+	optional float server_game_time = 11;
+	optional fixed64 server_relay_connected_steam_id = 12;
+	optional uint32 relay_slots_max = 13;
+	optional uint32 relays_connected = 14;
+	optional uint32 relay_clients_connected = 15;
+	optional fixed64 relayed_game_server_steam_id = 16;
+	optional uint32 parent_relay_count = 17;
+}
+
 message CMsgLeaverDetected {
 	optional fixed64 steam_id = 1;
 	optional uint32 leaver_status = 2;
@@ -1233,5 +1259,9 @@ message CItemDropEvent {
 	optional uint32 current_score = 9;
 	optional uint32 next_drop_at = 10;
 	optional bool is_crate = 11;
+}
+
+message CMsgDOTAWelcome {
+	optional bool spectator_only = 1;
 }
 
