@@ -492,5 +492,44 @@ namespace SteamKit2
                 }
             }
         }
+
+        /// <summary>
+        /// This callback is fired when a chat action has completed.
+        /// </summary>
+        public sealed class ChatActionResultCallback : CallbackMsg
+        {
+            /// <summary>
+            /// Gets the SteamID of the chat room the action was performed in.
+            /// </summary>
+            public SteamID ChatRoomID { get; private set; }
+            /// <summary>
+            /// Gets the SteamID of the chat member the action was performed on.
+            /// </summary>
+            public SteamID ChatterID { get; private set; }
+
+            /// <summary>
+            /// Gets the chat action that was performed.
+            /// </summary>
+            public EChatAction Action { get; private set; }
+            /// <summary>
+            /// Gets the result of the chat action.
+            /// </summary>
+            public EChatActionResult Result { get; private set; }
+
+
+#if STATIC_CALLBACKS
+            internal ChatActionResultCallback( SteamClient client, MsgClientChatActionResult result )
+                : base( client )
+#else
+            internal ChatActionResultCallback( MsgClientChatActionResult result )
+#endif
+            {
+                ChatRoomID = result.SteamIdChat;
+                ChatterID = result.SteamIdUserActedOn;
+
+                Action = result.ChatAction;
+                Result = result.ActionResult;
+            }
+        }
     }
 }

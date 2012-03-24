@@ -353,6 +353,58 @@ namespace SteamKit2
             this.Client.Send( chatMsg );
         }
 
+        /// <summary>
+        /// Kicks the specified chat member from the given chat room.
+        /// </summary>
+        /// <param name="steamIdChat">The SteamID of chat room to kick the member from.</param>
+        /// <param name="steamIdMember">The SteamID of the member to kick from the chat.</param>
+        public void KickChatMember( SteamID steamIdChat, SteamID steamIdMember )
+        {
+            SteamID chatId = steamIdChat.ConvertToUInt64(); // copy the steamid so we don't modify it
+
+            var kickMember = new ClientMsg<MsgClientChatAction>();
+
+            if ( chatId.IsClanAccount )
+            {
+                // this steamid is incorrect, so we'll fix it up
+                chatId.AccountInstance = ( uint )SteamID.ChatInstanceFlags.Clan;
+                chatId.AccountType = EAccountType.Chat;
+            }
+
+            kickMember.Body.SteamIdChat = chatId;
+            kickMember.Body.SteamIdUserToActOn = steamIdMember;
+
+            kickMember.Body.ChatAction = EChatAction.Kick;
+
+            this.Client.Send( kickMember );
+        }
+        /// <summary>
+        /// Bans the specified chat member from the given chat room.
+        /// </summary>
+        /// <param name="steamIdChat">The SteamID of chat room to ban the member from.</param>
+        /// <param name="steamIdMember">The SteamID of the member to ban from the chat.</param>
+        public void BanChatMember( SteamID steamIdChat, SteamID steamIdMember )
+        {
+            SteamID chatId = steamIdChat.ConvertToUInt64(); // copy the steamid so we don't modify it
+
+            var banMember = new ClientMsg<MsgClientChatAction>();
+
+            if ( chatId.IsClanAccount )
+            {
+                // this steamid is incorrect, so we'll fix it up
+                chatId.AccountInstance = ( uint )SteamID.ChatInstanceFlags.Clan;
+                chatId.AccountType = EAccountType.Chat;
+            }
+
+            banMember.Body.SteamIdChat = chatId;
+            banMember.Body.SteamIdUserToActOn = steamIdMember;
+
+            banMember.Body.ChatAction = EChatAction.Ban;
+
+            this.Client.Send( banMember );
+        }
+
+
         // the default details to request in most situations
         const EClientPersonaStateFlag defaultInfoRequest =
             EClientPersonaStateFlag.PlayerName | EClientPersonaStateFlag.Presence |
@@ -423,6 +475,10 @@ namespace SteamKit2
 
                 case EMsg.ClientChatMemberInfo:
                     HandleChatMemberInfo( packetMsg );
+                    break;
+
+                case EMsg.ClientChatActionResult:
+                    HandleChatActionResult( packetMsg );
                     break;
             }
         }
@@ -650,6 +706,18 @@ namespace SteamKit2
             SteamClient.PostCallback( callback );
 #else
             var callback = new ChatMemberInfoCallback( membInfo.Body, payload );
+            this.Client.PostCallback( callback );
+#endif
+        }
+        void HandleChatActionResult( IPacketMsg packetMsg )
+        {
+            var actionResult = new ClientMsg<MsgClientChatActionResult>( packetMsg );
+
+#if STATIC_CALLBACKS
+            var callback = new ChatActionResultCallback( Client, actionResult.Body );
+            SteamClient.PostCallback( callback );
+#else
+            var callback = new ChatActionResultCallback( actionResult.Body );
             this.Client.PostCallback( callback );
 #endif
         }
