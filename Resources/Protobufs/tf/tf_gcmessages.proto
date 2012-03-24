@@ -11,14 +11,6 @@ message CMsgTFSaxxyBroadcast {
 	optional string user_name = 2;
 }
 
-message CMsgTFIncrementKillCountResponse {
-	optional uint32 killer_account_id = 1 [(key_field) = true];
-	optional uint32 num_kills = 2;
-	optional uint32 item_def = 3;
-	optional uint32 new_rank = 4;
-	optional uint32 level_type = 5;
-}
-
 message CSOTFDuelSummary {
 	optional uint32 account_id = 1 [(key_field) = true];
 	optional uint32 duel_wins = 2;
