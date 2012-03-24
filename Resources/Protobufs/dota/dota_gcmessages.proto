@@ -44,14 +44,6 @@ enum DOTALobbyReadyState {
 	DOTALobbyReadyState_DECLINED = 2;
 }
 
-enum DOTABotDifficulty {
-	BOT_DIFFICULTY_PASSIVE = 0;
-	BOT_DIFFICULTY_EASY = 1;
-	BOT_DIFFICULTY_MEDIUM = 2;
-	BOT_DIFFICULTY_HARD = 3;
-	BOT_DIFFICULTY_UNFAIR = 4;
-}
-
 enum DOTAGameVersion {
 	GAME_VERSION_CURRENT = 0;
 	GAME_VERSION_STABLE = 1;
@@ -125,6 +117,8 @@ message CSODOTAGameHeroStandings {
 	optional uint32 hero_id = 2 [(key_field) = true];
 	optional uint32 wins = 3;
 	optional uint32 losses = 4;
+	optional float hero_performance = 5;
+	optional float hero_variance = 6;
 }
 
 message CSODOTAParty {
@@ -150,6 +144,7 @@ message CSODOTAParty {
 	optional uint32 prevent_match_account_id = 19;
 	optional uint32 search_wait_estimate = 20;
 	optional .MatchType match_type = 21;
+	optional .DOTABotDifficulty bot_difficulty = 22;
 }
 
 message CSODOTAPartyInvite {
@@ -282,7 +277,8 @@ message CMsgStartFindingMatch {
 	optional uint32 matchgroups = 2 [default = 4294967295];
 	optional uint32 client_version = 3;
 	optional uint32 game_modes = 4 [default = 4294967295];
-	optional .MatchType match_type = 5;
+	optional .DOTABotDifficulty bot_difficulty = 5 [default = BOT_DIFFICULTY_HARD];
+	optional .MatchType match_type = 6;
 }
 
 message CMsgStopFindingMatch {
@@ -346,6 +342,32 @@ message CMsgSpectateFriendGameResponse {
 }
 
 message CMsgAbandonCurrentGame {
+}
+
+message CMsgGameServerInfo {
+	enum ServerType {
+		UNSPECIFIED = 0;
+		GAME = 1;
+		PROXY = 2;
+	}
+
+	optional fixed32 server_public_ip_addr = 1;
+	optional fixed32 server_private_ip_addr = 2;
+	optional uint32 server_port = 3;
+	optional uint32 server_tv_port = 4;
+	optional string server_key = 5;
+	optional bool server_hibernation = 6;
+	optional .CMsgGameServerInfo.ServerType server_type = 7 [default = UNSPECIFIED];
+	optional uint32 server_region = 8;
+	optional float server_loadavg = 9;
+	optional float server_tv_broadcast_time = 10;
+	optional float server_game_time = 11;
+	optional fixed64 server_relay_connected_steam_id = 12;
+	optional uint32 relay_slots_max = 13;
+	optional uint32 relays_connected = 14;
+	optional uint32 relay_clients_connected = 15;
+	optional fixed64 relayed_game_server_steam_id = 16;
+	optional uint32 parent_relay_count = 17;
 }
 
 message CMsgLeaverDetected {
@@ -1223,5 +1245,23 @@ message CMsgDOTAMatchGroupWaitTimesRequest {
 
 message CMsgDOTAMatchGroupWaitTimesResponse {
 	repeated uint32 wait_times_by_group = 1;
+}
+
+message CItemDropEvent {
+	optional uint32 account_id = 1;
+	optional uint32 time_stamp = 2;
+	optional uint32 def_index = 3;
+	optional uint64 item_id = 4;
+	optional uint32 games_played_since_last_drop = 5;
+	optional uint32 time_played_since_last_drop = 6;
+	optional float drop_bonus = 7;
+	optional uint32 rarity = 8;
+	optional uint32 current_score = 9;
+	optional uint32 next_drop_at = 10;
+	optional bool is_crate = 11;
+}
+
+message CMsgDOTAWelcome {
+	optional bool spectator_only = 1;
 }
 
