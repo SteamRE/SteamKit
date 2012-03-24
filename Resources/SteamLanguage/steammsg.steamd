@@ -245,6 +245,13 @@ class MsgClientChatMemberInfo<EMsg::ClientChatMemberInfo>
 	EChatInfoType type;
 };
 
+class MsgClientChatAction<EMsg::ClientChatAction>
+{
+	steamidmarshal ulong steamIdChat;
+	steamidmarshal ulong steamIdUserToActOn;
+	EChatAction chatAction;
+};
+
 class MsgClientChatActionResult<EMsg::ClientChatActionResult>
 {
 	steamidmarshal ulong steamIdChat;
