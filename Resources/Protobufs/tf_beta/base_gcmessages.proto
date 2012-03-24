@@ -296,3 +296,10 @@ message CMsgGCReportAbuseResponse {
 	optional string error_message = 3;
 }
 
+message CMsgGCClientDisplayNotification {
+	optional string notification_title_localization_key = 1;
+	optional string notification_body_localization_key = 2;
+	repeated string body_substring_keys = 3;
+	repeated string body_substring_values = 4;
+}
+

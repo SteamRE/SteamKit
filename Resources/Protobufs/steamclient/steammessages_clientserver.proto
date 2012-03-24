@@ -2003,6 +2003,30 @@ message CMsgClientEmailAddrInfo {
 	optional bool remind_user_about_email = 6;
 }
 
+message CMsgCREEnumeratePublishedFiles {
+	optional uint32 app_id = 1;
+	optional int32 query_type = 2;
+	optional uint32 start_index = 3;
+	optional uint32 days = 4;
+	optional uint32 count = 5;
+	repeated string tags = 6;
+	repeated string user_tags = 7;
+}
+
+message CMsgCREEnumeratePublishedFilesResponse {
+	message PublishedFileId {
+		optional fixed64 published_file_id = 1;
+		optional int32 votes_for = 2;
+		optional int32 votes_against = 3;
+		optional int32 reports = 4;
+		optional float score = 5;
+	}
+
+	optional int32 eresult = 1 [default = 2];
+	repeated .CMsgCREEnumeratePublishedFilesResponse.PublishedFileId published_files = 2;
+	optional uint32 total_results = 3;
+}
+
 message CMsgCRERankByVote {
 	optional uint32 app_id = 1;
 	optional uint32 start_index = 2;

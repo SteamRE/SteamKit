@@ -33,6 +33,7 @@ enum EDotaUserMessages {
 	DOTA_UM_HudError = 91;
 	DOTA_UM_ItemPurchased = 92;
 	DOTA_UM_Ping = 93;
+	DOTA_UM_ItemFound = 94;
 }
 
 enum DOTA_CHAT_MESSAGE {
@@ -82,6 +83,7 @@ enum DOTA_CHAT_MESSAGE {
 	CHAT_MESSAGE_SPECTATORS_WATCHING_THIS_GAME = 42;
 	CHAT_MESSAGE_REPORT_REMINDER = 43;
 	CHAT_MESSAGE_ECON_ITEM = 44;
+	CHAT_MESSAGE_TAUNT = 45;
 }
 
 enum EDotaEntityMessages {
@@ -311,6 +313,14 @@ message CDOTAUserMsg_UnitEvent {
 
 message CDOTAUserMsg_ItemPurchased {
 	optional int32 item_index = 1;
+}
+
+message CDOTAUserMsg_ItemFound {
+	optional int32 player = 1;
+	optional int32 quality = 2;
+	optional int32 rarity = 3;
+	optional int32 method = 4;
+	optional int32 itemdef = 5;
 }
 
 message CDOTAUserMsg_ParticleManager {

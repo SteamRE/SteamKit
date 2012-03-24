@@ -28,5 +28,6 @@ message CDOTAModifierBuffTableEntry {
 	optional string portal_loop_disappear = 19;
 	optional string hero_loop_appear = 20;
 	optional string hero_loop_disappear = 21;
+	optional int32 movement_speed = 22;
 }
 
