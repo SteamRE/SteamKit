@@ -480,6 +480,10 @@ namespace SteamKit2
                 case EMsg.ClientChatActionResult:
                     HandleChatActionResult( packetMsg );
                     break;
+
+                case EMsg.ClientChatInvite:
+                    HandleChatInvite( packetMsg );
+                    break;
             }
         }
 
@@ -718,6 +722,18 @@ namespace SteamKit2
             SteamClient.PostCallback( callback );
 #else
             var callback = new ChatActionResultCallback( actionResult.Body );
+            this.Client.PostCallback( callback );
+#endif
+        }
+        void HandleChatInvite( IPacketMsg packetMsg )
+        {
+            var chatInvite = new ClientMsgProtobuf<CMsgClientChatInvite>( packetMsg );
+
+#if STATIC_CALLBACKS
+            var callback = new ChatInviteCallback( Client, chatInvite.Body );
+            SteamClient.PostCallback( callback );
+#else
+            var callback = new ChatInviteCallback( chatInvite.Body );
             this.Client.PostCallback( callback );
 #endif
         }

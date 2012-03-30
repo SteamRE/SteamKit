@@ -449,7 +449,7 @@ namespace SteamKit2
                         ChatterActedOn = br.ReadUInt64();
                         StateChange = ( EChatMemberStateChange )br.ReadInt32();
                         ChatterActedBy = br.ReadUInt64();
-                        
+
                         // todo: for EChatMemberStateChange.Entered, the following data is a binary kv MessageObject
                         // that includes permission and details that may be useful
                     }
@@ -488,7 +488,7 @@ namespace SteamKit2
                         StateChangeInfo = new StateChangeDetails( payload );
                         break;
 
-                        // todo: handle more types
+                    // todo: handle more types
                 }
             }
         }
@@ -529,6 +529,66 @@ namespace SteamKit2
 
                 Action = result.ChatAction;
                 Result = result.ActionResult;
+            }
+        }
+
+        /// <summary>
+        /// This callback is fired when a chat invite is recieved.
+        /// </summary>
+        public sealed class ChatInviteCallback : CallbackMsg
+        {
+            /// <summary>
+            /// Gets the SteamID of the user who was invited to the chat.
+            /// </summary>
+            public SteamID InvitedID { get; private set; }
+            /// <summary>
+            /// Gets the chat room SteamID.
+            /// </summary>
+            public SteamID ChatRoomID { get; private set; }
+
+            /// <summary>
+            /// Gets the SteamID of the user who performed the invitation.
+            /// </summary>
+            public SteamID PatronID { get; private set; }
+
+            /// <summary>
+            /// Gets the chat room type.
+            /// </summary>
+            public EChatRoomType ChatRoomType { get; private set; }
+
+            /// <summary>
+            /// Gets the SteamID of the chat friend.
+            /// </summary>
+            public SteamID FriendChatID { get; private set; }
+
+            /// <summary>
+            /// Gets the name of the chat room.
+            /// </summary>
+            public string ChatRoomName { get; private set; }
+            /// <summary>
+            /// Gets the GameID associated with this chat room, if it's a game lobby.
+            /// </summary>
+            public GameID GameID { get; private set; }
+
+
+#if STATIC_CALLBACKS
+            internal ChatInviteCallback( SteamClient client, CMsgClientChatInvite invite )
+                : base( client )
+#else
+            internal ChatInviteCallback( CMsgClientChatInvite invite )
+#endif
+            {
+                this.InvitedID = invite.steam_id_invited;
+                this.ChatRoomID = invite.steam_id_chat;
+
+                this.PatronID = invite.steam_id_patron;
+
+                this.ChatRoomType = ( EChatRoomType )invite.chatroom_type;
+
+                this.FriendChatID = invite.steam_id_friend_chat;
+
+                this.ChatRoomName = invite.chat_name;
+                this.GameID = invite.game_id;
             }
         }
     }
