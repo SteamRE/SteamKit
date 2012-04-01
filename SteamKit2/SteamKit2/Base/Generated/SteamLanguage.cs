@@ -1786,6 +1786,17 @@ namespace SteamKit2
 		RUB = 5,
 		Max = 6,
 	}
+	[Flags]
+	public enum EDepotFileFlag
+	{
+		UserConfig = 1,
+		VersionedUserConfig = 2,
+		Encrypted = 4,
+		ReadOnly = 8,
+		Hidden = 16,
+		Executable = 32,
+		Directory = 64,
+	}
 	public enum EUdpPacketType : byte
 	{
 		Invalid = 0,
