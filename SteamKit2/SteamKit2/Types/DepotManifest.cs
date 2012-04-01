@@ -70,6 +70,11 @@ namespace SteamKit2
             public List<ChunkData> Chunks { get; private set; }
 
             /// <summary>
+            /// Gets the file flags
+            /// </summary>
+            public EDepotFileFlag Flags { get; private set; }
+
+            /// <summary>
             /// Gets the total size of this file.
             /// </summary>
             public ulong TotalSize { get; private set; }
@@ -79,9 +84,10 @@ namespace SteamKit2
             public byte[] FileHash { get; private set; }
 
 
-            internal FileData(string filename, ulong size, byte[] hash)
+            internal FileData(string filename, EDepotFileFlag flag, ulong size, byte[] hash)
             {
                 this.FileName = filename;
+                this.Flags = flag;
                 this.TotalSize = size;
                 this.FileHash = hash;
                 this.Chunks = new List<ChunkData>();
@@ -173,7 +179,7 @@ namespace SteamKit2
 
             foreach (var file_mapping in manifest.Mapping)
             {
-                FileData filedata = new FileData(file_mapping.FileName, file_mapping.TotalSize, file_mapping.HashContent);
+                FileData filedata = new FileData(file_mapping.FileName, file_mapping.Flags, file_mapping.TotalSize, file_mapping.HashContent);
 
                 foreach (var chunk in file_mapping.Chunks)
                 {

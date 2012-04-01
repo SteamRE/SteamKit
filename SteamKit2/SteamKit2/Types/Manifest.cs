@@ -45,7 +45,7 @@ namespace SteamKit2
             public string FileName { get; set; }
 
             public ulong TotalSize { get; set; }
-            public uint Flags { get; set; }
+            public EDepotFileFlag Flags { get; set; }
 
             public byte[] HashFileName { get; set; }
             public byte[] HashContent { get; set; }
@@ -64,7 +64,7 @@ namespace SteamKit2
 
                 TotalSize = ds.ReadUInt64();
 
-                Flags = ds.ReadUInt32();
+                Flags = (EDepotFileFlag)ds.ReadUInt32();
 
                 HashFileName = ds.ReadBytes( 20 );
                 HashContent = ds.ReadBytes( 20 );
