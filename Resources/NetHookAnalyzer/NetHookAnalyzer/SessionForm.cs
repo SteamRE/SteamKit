@@ -11,6 +11,7 @@ using SteamKit2;
 using ProtoBuf;
 using System.Reflection;
 using System.Collections;
+using SteamKit2.Internal;
 
 namespace NetHookAnalyzer
 {
@@ -59,6 +60,19 @@ namespace NetHookAnalyzer
 
             viewPacket.Sort();
         }
+
+        const uint ProtoMask = 0x80000000;
+        const uint EMsgMask = ~ProtoMask;
+
+        static EMsg GetMsg( uint integer )
+        {
+            return ( EMsg )( integer & EMsgMask );
+        }
+        static bool IsProtoBuf( uint integer )
+        {
+            return ( integer & ProtoMask ) > 0;
+        }
+
         void Dump( PacketItem packet )
         {
             treePacket.Nodes.Clear();
@@ -66,12 +80,12 @@ namespace NetHookAnalyzer
             using ( FileStream packetStream = File.OpenRead( packet.FileName ) )
             {
                 uint realEMsg = PeekUInt32( packetStream );
-                EMsg eMsg = MsgUtil.GetMsg( realEMsg );
+                EMsg eMsg = GetMsg( realEMsg );
 
                 var info = new
                 {
                     EMsg = eMsg,
-                    IsProto = MsgUtil.IsProtoBuf( realEMsg ),
+                    IsProto = IsProtoBuf( realEMsg ),
                 };
                 var header = BuildHeader( realEMsg, packetStream );
                 var body = BuildBody( realEMsg, packetStream );
@@ -131,7 +145,7 @@ namespace NetHookAnalyzer
                 else if ( propType == typeof( SteamID ) )
                 {
                     SteamID sId = obj as SteamID;
-                    node.Text += string.Format( "{0} ({1}) ", sId.ConvertToUint64(), sId.Render() );
+                    node.Text += string.Format( "{0} ({1}) ", sId.ConvertToUInt64(), sId.Render() );
                 }
                 else if ( obj is byte[] )
                 {
@@ -224,7 +238,7 @@ namespace NetHookAnalyzer
         {
             ISteamSerializableHeader hdr = null;
 
-            if ( MsgUtil.IsProtoBuf( realEMsg ) )
+            if ( IsProtoBuf( realEMsg ) )
             {
                 hdr = new MsgHdrProtoBuf();
             }
@@ -238,7 +252,7 @@ namespace NetHookAnalyzer
         }
         object BuildBody( uint realEMsg, Stream str )
         {
-            EMsg eMsg = MsgUtil.GetMsg( realEMsg );
+            EMsg eMsg = GetMsg( realEMsg );
 
             if ( eMsg == EMsg.ClientLogonGameServer )
                 eMsg = EMsg.ClientLogon; // temp hack for now
