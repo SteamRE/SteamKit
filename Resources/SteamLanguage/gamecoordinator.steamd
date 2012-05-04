@@ -5,13 +5,13 @@ class MsgGCHdrProtoBuf
 	protomaskgc uint msg = 0;
 	int headerLength;
 
-	proto<headerLength> SteamKit2.Internal.GC.CMsgProtoBufHeader protoHeader;
+	proto<headerLength> SteamKit2.Internal.GC.CMsgProtoBufHeader proto;
 };
 
 class MsgGCHdr
 {
 	ushort headerVersion = 1;
 
-	long targetJobID = -1;
-	long sourceJobID = -1;
+	ulong targetJobID = ulong.MaxValue;
+	ulong sourceJobID = ulong.MaxValue;
 };
