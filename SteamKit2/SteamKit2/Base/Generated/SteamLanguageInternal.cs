@@ -378,27 +378,27 @@ namespace SteamKit2.Internal
 		// Static size: 4
 		public int HeaderLength { get; set; }
 		// Static size: 0
-		public SteamKit2.Internal.GC.CMsgProtoBufHeader ProtoHeader { get; set; }
+		public SteamKit2.Internal.GC.CMsgProtoBufHeader Proto { get; set; }
 
 		public MsgGCHdrProtoBuf()
 		{
 			Msg = 0;
 			HeaderLength = 0;
-			ProtoHeader = new SteamKit2.Internal.GC.CMsgProtoBufHeader();
+			Proto = new SteamKit2.Internal.GC.CMsgProtoBufHeader();
 		}
 
 		public void Serialize(Stream stream)
 		{
-			MemoryStream msProtoHeader = new MemoryStream();
-			ProtoBuf.Serializer.Serialize<SteamKit2.Internal.GC.CMsgProtoBufHeader>(msProtoHeader, ProtoHeader);
-			HeaderLength = (int)msProtoHeader.Length;
+			MemoryStream msProto = new MemoryStream();
+			ProtoBuf.Serializer.Serialize<SteamKit2.Internal.GC.CMsgProtoBufHeader>(msProto, Proto);
+			HeaderLength = (int)msProto.Length;
 			BinaryWriter bw = new BinaryWriter( stream );
 
 			bw.Write( MsgUtil.MakeGCMsg( Msg, true ) );
 			bw.Write( HeaderLength );
-			bw.Write( msProtoHeader.ToArray() );
+			bw.Write( msProto.ToArray() );
 
-			msProtoHeader.Close();
+			msProto.Close();
 		}
 
 		public void Deserialize( Stream stream )
@@ -407,8 +407,8 @@ namespace SteamKit2.Internal
 
 			Msg = MsgUtil.GetGCMsg( (uint)br.ReadUInt32() );
 			HeaderLength = br.ReadInt32();
-			using( MemoryStream msProtoHeader = new MemoryStream( br.ReadBytes( HeaderLength ) ) )
-				ProtoHeader = ProtoBuf.Serializer.Deserialize<SteamKit2.Internal.GC.CMsgProtoBufHeader>( msProtoHeader );
+			using( MemoryStream msProto = new MemoryStream( br.ReadBytes( HeaderLength ) ) )
+				Proto = ProtoBuf.Serializer.Deserialize<SteamKit2.Internal.GC.CMsgProtoBufHeader>( msProto );
 		}
 	}
 
@@ -420,15 +420,15 @@ namespace SteamKit2.Internal
 		// Static size: 2
 		public ushort HeaderVersion { get; set; }
 		// Static size: 8
-		public long TargetJobID { get; set; }
+		public ulong TargetJobID { get; set; }
 		// Static size: 8
-		public long SourceJobID { get; set; }
+		public ulong SourceJobID { get; set; }
 
 		public MsgGCHdr()
 		{
 			HeaderVersion = 1;
-			TargetJobID = -1;
-			SourceJobID = -1;
+			TargetJobID = ulong.MaxValue;
+			SourceJobID = ulong.MaxValue;
 		}
 
 		public void Serialize(Stream stream)
@@ -446,8 +446,8 @@ namespace SteamKit2.Internal
 			BinaryReader br = new BinaryReader( stream );
 
 			HeaderVersion = br.ReadUInt16();
-			TargetJobID = br.ReadInt64();
-			SourceJobID = br.ReadInt64();
+			TargetJobID = br.ReadUInt64();
+			SourceJobID = br.ReadUInt64();
 		}
 	}
 
