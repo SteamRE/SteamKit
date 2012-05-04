@@ -12,6 +12,7 @@ using ProtoBuf;
 using System.Reflection;
 using System.Collections;
 using SteamKit2.Internal;
+using ProtoBuf.Meta;
 
 namespace NetHookAnalyzer
 {
@@ -256,6 +257,24 @@ namespace NetHookAnalyzer
 
             if ( eMsg == EMsg.ClientLogonGameServer )
                 eMsg = EMsg.ClientLogon; // temp hack for now
+            else if( eMsg == EMsg.ClientGamesPlayedWithDataBlob)
+                eMsg = EMsg.ClientGamesPlayed;
+
+            var protomsgType = typeof(CMClient).Assembly.GetTypes().ToList().Find(type =>
+            {
+                if (type.GetInterfaces().ToList().Find(inter => inter == typeof(IExtensible)) == null)
+                    return false;
+
+                if (type.Name.EndsWith(eMsg.ToString()))
+                    return true;
+
+                return false;
+            });
+
+            if (protomsgType != null)
+            {
+                return RuntimeTypeModel.Default.Deserialize(str, null, protomsgType);
+            }
 
             // lets first find the type by checking all EMsgs we have
             var msgType = typeof( CMClient ).Assembly.GetTypes().ToList().Find( type =>
