@@ -13,11 +13,11 @@ namespace SteamKit2
         /// </summary>
         public class MessageCallback : CallbackMsg
         {
-            EGCMsg eMsg;
+            uint eMsg;
             /// <summary>
             /// Gets the game coordinator message type.
             /// </summary>
-            public EGCMsg EMsg { get { return MsgUtil.GetGCMsg( eMsg ); } }
+            public uint EMsg { get { return MsgUtil.GetGCMsg( eMsg ); } }
             /// <summary>
             /// Gets the AppID of the game coordinator the message is from.
             /// </summary>
@@ -43,7 +43,7 @@ namespace SteamKit2
             internal MessageCallback( CMsgGCClient gcMsg )
 #endif
             {
-                this.eMsg = ( EGCMsg )gcMsg.msgtype;
+                this.eMsg = gcMsg.msgtype;
                 this.AppID = gcMsg.appid;
 
                 this.Payload = gcMsg.payload;

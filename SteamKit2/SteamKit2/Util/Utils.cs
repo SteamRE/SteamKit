@@ -192,18 +192,14 @@ namespace SteamKit2
             return ( EMsg )( integer & EMsgMask );
         }
 
-        public static EGCMsg GetGCMsg( uint integer )
+        public static uint GetGCMsg( uint integer )
         {
-            return ( EGCMsg )( integer & EMsgMask );
+            return ( integer & EMsgMask );
         }
 
         public static EMsg GetMsg( EMsg msg )
         {
             return GetMsg( ( uint )msg );
-        }
-        public static EGCMsg GetGCMsg( EGCMsg msg )
-        {
-            return GetGCMsg( ( uint )msg );
         }
 
         public static bool IsProtoBuf( uint integer )
@@ -216,17 +212,12 @@ namespace SteamKit2
             return IsProtoBuf( ( uint )msg );
         }
 
-        public static bool IsProtoBuf( EGCMsg msg )
-        {
-            return IsProtoBuf( ( uint )msg );
-        }
-
         public static EMsg MakeMsg( EMsg msg )
         {
             return msg;
         }
 
-        public static EGCMsg MakeGCMsg( EGCMsg msg )
+        public static uint MakeGCMsg( uint msg )
         {
             return msg;
         }
@@ -239,10 +230,10 @@ namespace SteamKit2
             return msg;
         }
 
-        public static EGCMsg MakeGCMsg( EGCMsg msg, bool protobuf )
+        public static uint MakeGCMsg( uint msg, bool protobuf )
         {
             if ( protobuf )
-                return ( EGCMsg )( ( uint )msg | ProtoMask );
+                return msg | ProtoMask;
 
             return msg;
         }

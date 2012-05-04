@@ -20,11 +20,11 @@ namespace SteamKit2.Internal
 	}
 	public interface IGCSerializableHeader : ISteamSerializable
 	{
-		void SetEMsg( EGCMsg msg );
+		void SetEMsg( uint msg );
 	}
 	public interface IGCSerializableMessage : ISteamSerializable
 	{
-		EGCMsg GetEMsg();
+		uint GetEMsg();
 	}
 
 	public class UdpHeader : ISteamSerializable
@@ -371,10 +371,10 @@ namespace SteamKit2.Internal
 	[StructLayout( LayoutKind.Sequential )]
 	public class MsgGCHdrProtoBuf : IGCSerializableHeader
 	{
-		public void SetEMsg( EGCMsg msg ) { this.Msg = msg; }
+		public void SetEMsg( uint msg ) { this.Msg = msg; }
 
 		// Static size: 4
-		public EGCMsg Msg { get; set; }
+		public uint Msg { get; set; }
 		// Static size: 4
 		public int HeaderLength { get; set; }
 		// Static size: 0
@@ -382,7 +382,7 @@ namespace SteamKit2.Internal
 
 		public MsgGCHdrProtoBuf()
 		{
-			Msg = EGCMsg.Invalid;
+			Msg = 0;
 			HeaderLength = 0;
 			ProtoHeader = new SteamKit2.Internal.GC.CMsgProtoBufHeader();
 		}
@@ -394,7 +394,7 @@ namespace SteamKit2.Internal
 			HeaderLength = (int)msProtoHeader.Length;
 			BinaryWriter bw = new BinaryWriter( stream );
 
-			bw.Write( (int)MsgUtil.MakeGCMsg( Msg, true ) );
+			bw.Write( MsgUtil.MakeGCMsg( Msg, true ) );
 			bw.Write( HeaderLength );
 			bw.Write( msProtoHeader.ToArray() );
 
@@ -405,7 +405,7 @@ namespace SteamKit2.Internal
 		{
 			BinaryReader br = new BinaryReader( stream );
 
-			Msg = (EGCMsg)MsgUtil.GetGCMsg( (uint)br.ReadInt32() );
+			Msg = MsgUtil.GetGCMsg( (uint)br.ReadUInt32() );
 			HeaderLength = br.ReadInt32();
 			using( MemoryStream msProtoHeader = new MemoryStream( br.ReadBytes( HeaderLength ) ) )
 				ProtoHeader = ProtoBuf.Serializer.Deserialize<SteamKit2.Internal.GC.CMsgProtoBufHeader>( msProtoHeader );
@@ -415,7 +415,7 @@ namespace SteamKit2.Internal
 	[StructLayout( LayoutKind.Sequential )]
 	public class MsgGCHdr : IGCSerializableHeader
 	{
-		public void SetEMsg( EGCMsg msg ) { }
+		public void SetEMsg( uint msg ) { }
 
 		// Static size: 2
 		public ushort HeaderVersion { get; set; }
