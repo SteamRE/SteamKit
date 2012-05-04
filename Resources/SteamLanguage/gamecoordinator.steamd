@@ -1,13 +1,8 @@
 
 
-enum EGCMsg
-{
-	Invalid = 0;
-};
-
 class MsgGCHdrProtoBuf
 {
-	protomask EGCMsg msg = EGCMsg::Invalid;
+	protomaskgc uint msg = 0;
 	int headerLength;
 
 	proto<headerLength> SteamKit2.Internal.GC.CMsgProtoBufHeader protoHeader;
