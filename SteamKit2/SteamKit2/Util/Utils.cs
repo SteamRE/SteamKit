@@ -182,7 +182,7 @@ namespace SteamKit2
         }
     }
 
-    static class MsgUtil
+    public static class MsgUtil
     {
         private const uint ProtoMask = 0x80000000;
         private const uint EMsgMask = ~ProtoMask;
