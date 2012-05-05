@@ -45,8 +45,8 @@ namespace SteamKit2
         /// </value>
         public override int SessionID
         {
-            get { return ProtoHeader.client_session_id; }
-            set { ProtoHeader.client_session_id = value; }
+            get { return ProtoHeader.client_sessionid; }
+            set { ProtoHeader.client_sessionid = value; }
         }
         /// <summary>
         /// Gets or sets the <see cref="SteamID"/> for this client message.
@@ -56,8 +56,8 @@ namespace SteamKit2
         /// </value>
         public override SteamID SteamID
         {
-            get { return ProtoHeader.client_steam_id; }
-            set { ProtoHeader.client_steam_id = value; }
+            get { return ProtoHeader.steamid; }
+            set { ProtoHeader.steamid = value; }
         }
 
         /// <summary>
@@ -68,8 +68,8 @@ namespace SteamKit2
         /// </value>
         public override ulong TargetJobID
         {
-            get { return ProtoHeader.job_id_target; }
-            set { ProtoHeader.job_id_target = value; }
+            get { return ProtoHeader.jobid_target; }
+            set { ProtoHeader.jobid_target = value; }
         }
         /// <summary>
         /// Gets or sets the source job id for this client message.
@@ -79,8 +79,8 @@ namespace SteamKit2
         /// </value>
         public override ulong SourceJobID
         {
-            get { return ProtoHeader.job_id_source; }
-            set { ProtoHeader.job_id_source = value; }
+            get { return ProtoHeader.jobid_source; }
+            set { ProtoHeader.jobid_source = value; }
         }
 
 
@@ -121,7 +121,7 @@ namespace SteamKit2
             : this( eMsg, payloadReserve )
         {
             // our target is where the message came from
-            Header.Proto.job_id_target = msg.Header.Proto.job_id_source;
+            Header.Proto.jobid_target = msg.Header.Proto.jobid_source;
         }
 
         /// <summary>

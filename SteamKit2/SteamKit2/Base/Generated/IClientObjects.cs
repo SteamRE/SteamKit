@@ -115,6 +115,24 @@ namespace SteamKit2.Internal
       get { return _bytes_needed; }
       set { _bytes_needed = value; }
     }
+
+    private bool _changing = default(bool);
+    [global::ProtoBuf.ProtoMember(12, IsRequired = false, Name=@"changing", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    public bool changing
+    {
+      get { return _changing; }
+      set { _changing = value; }
+    }
+
+    private bool _available_on_platform = default(bool);
+    [global::ProtoBuf.ProtoMember(13, IsRequired = false, Name=@"available_on_platform", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    public bool available_on_platform
+    {
+      get { return _available_on_platform; }
+      set { _available_on_platform = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
