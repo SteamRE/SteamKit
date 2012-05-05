@@ -18,22 +18,22 @@ namespace SteamKit2.Internal
     public CMsgProtoBufHeader() {}
     
 
-    private ulong _client_steam_id = default(ulong);
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"client_steam_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    private ulong _steamid = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
     [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
-    public ulong client_steam_id
+    public ulong steamid
     {
-      get { return _client_steam_id; }
-      set { _client_steam_id = value; }
+      get { return _steamid; }
+      set { _steamid = value; }
     }
 
-    private int _client_session_id = default(int);
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"client_session_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    private int _client_sessionid = default(int);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"client_sessionid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::ProtoBuf.ProtoDefaultValue(default(int))]
-    public int client_session_id
+    public int client_sessionid
     {
-      get { return _client_session_id; }
-      set { _client_session_id = value; }
+      get { return _client_sessionid; }
+      set { _client_sessionid = value; }
     }
 
     private uint _routing_appid = default(uint);
@@ -45,22 +45,22 @@ namespace SteamKit2.Internal
       set { _routing_appid = value; }
     }
 
-    private ulong _job_id_source = (ulong)18446744073709551615;
-    [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"job_id_source", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    private ulong _jobid_source = (ulong)18446744073709551615;
+    [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"jobid_source", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
     [global::ProtoBuf.ProtoDefaultValue((ulong)18446744073709551615)]
-    public ulong job_id_source
+    public ulong jobid_source
     {
-      get { return _job_id_source; }
-      set { _job_id_source = value; }
+      get { return _jobid_source; }
+      set { _jobid_source = value; }
     }
 
-    private ulong _job_id_target = (ulong)18446744073709551615;
-    [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"job_id_target", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    private ulong _jobid_target = (ulong)18446744073709551615;
+    [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"jobid_target", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
     [global::ProtoBuf.ProtoDefaultValue((ulong)18446744073709551615)]
-    public ulong job_id_target
+    public ulong jobid_target
     {
-      get { return _job_id_target; }
-      set { _job_id_target = value; }
+      get { return _jobid_target; }
+      set { _jobid_target = value; }
     }
 
     private string _target_job_name = "";
@@ -106,6 +106,15 @@ namespace SteamKit2.Internal
     {
       get { return _auth_account_flags; }
       set { _auth_account_flags = value; }
+    }
+
+    private int _transport_error = (int)1;
+    [global::ProtoBuf.ProtoMember(17, IsRequired = false, Name=@"transport_error", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoDefaultValue((int)1)]
+    public int transport_error
+    {
+      get { return _transport_error; }
+      set { _transport_error = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -164,22 +173,22 @@ namespace SteamKit2.Internal
       set { _eresult = value; }
     }
 
-    private ulong _steam_id = default(ulong);
-    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"steam_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    private ulong _steamid = default(ulong);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
     [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
-    public ulong steam_id
+    public ulong steamid
     {
-      get { return _steam_id; }
-      set { _steam_id = value; }
+      get { return _steamid; }
+      set { _steamid = value; }
     }
 
-    private ulong _game_id = default(ulong);
-    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"game_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    private ulong _gameid = default(ulong);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"gameid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
     [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
-    public ulong game_id
+    public ulong gameid
     {
-      get { return _game_id; }
-      set { _game_id = value; }
+      get { return _gameid; }
+      set { _gameid = value; }
     }
 
     private uint _h_steam_pipe = default(uint);
