@@ -145,8 +145,8 @@ message CSODOTAParty {
 	optional uint32 prevent_match_until_date = 18;
 	optional uint32 prevent_match_account_id = 19;
 	optional uint32 search_wait_estimate = 20;
-	optional .MatchType match_type = 21;
-	optional .DOTABotDifficulty bot_difficulty = 22;
+	optional .MatchType match_type = 21 [default = MATCH_TYPE_RANKED];
+	optional .DOTABotDifficulty bot_difficulty = 22 [default = BOT_DIFFICULTY_PASSIVE];
 	optional uint32 team_id = 23;
 }
 
@@ -282,7 +282,7 @@ message CMsgStartFindingMatch {
 	optional uint32 client_version = 3;
 	optional uint32 game_modes = 4 [default = 4294967295];
 	optional .DOTABotDifficulty bot_difficulty = 5 [default = BOT_DIFFICULTY_HARD];
-	optional .MatchType match_type = 6;
+	optional .MatchType match_type = 6 [default = MATCH_TYPE_RANKED];
 }
 
 message CMsgStopFindingMatch {
@@ -1127,7 +1127,7 @@ message CMsgDOTARequestPlayerResourcesResponse {
 }
 
 message CMsgDOTAKickedFromMatchmakingQueue {
-	optional .MatchType match_type = 1;
+	optional .MatchType match_type = 1 [default = MATCH_TYPE_RANKED];
 }
 
 message CMsgDOTARequestSaveGames {
