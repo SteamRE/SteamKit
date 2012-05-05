@@ -71,6 +71,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Base\ClientMsg.cs" />
+    <Compile Include="Base\GC\MsgBaseGC.cs" />
+    <Compile Include="Base\GC\ClientMsgGC.cs" />
+    <Compile Include="Base\GC\PacketBaseGC.cs" />
     <Compile Include="Base\Generated\ContentManifest.cs" />
     <Compile Include="Base\Generated\GC\SteamMsgBase.cs" />
     <Compile Include="Base\Generated\GC\SteamMsgGC.cs" />

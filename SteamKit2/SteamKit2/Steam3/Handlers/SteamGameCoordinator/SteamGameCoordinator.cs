@@ -13,20 +13,19 @@ namespace SteamKit2
     public sealed partial class SteamGameCoordinator : ClientMsgHandler
     {
 
-
         /// <summary>
         /// Sends a game coordinator message for a specific appid.
         /// </summary>
-        /// <param name="data">The data to send. This should be a serialized GC message.</param>
+        /// <param name="msg">The GC message to send.</param>
         /// <param name="appId">The app id of the game coordinator to send to.</param>
-        public void Send( byte[] data, uint appId )
+        public void Send( IClientGCMsg msg, uint appId )
         {
             var clientMsg = new ClientMsgProtobuf<CMsgGCClient>( EMsg.ClientToGC );
 
-            clientMsg.Body.msgtype = BitConverter.ToUInt32( data, 0 );
+            clientMsg.Body.msgtype = msg.MsgType;
             clientMsg.Body.appid = appId;
 
-            clientMsg.Body.payload = data;
+            clientMsg.Body.payload = msg.Serialize();
 
             this.Client.Send( clientMsg );
         }
