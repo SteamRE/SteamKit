@@ -60,7 +60,6 @@ message CMsgGameServerInfo {
 		UNSPECIFIED = 0;
 		GAME = 1;
 		PROXY = 2;
-		CONTROLLER = 3;
 	}
 
 	optional fixed32 server_public_ip_addr = 1;
@@ -71,6 +70,13 @@ message CMsgGameServerInfo {
 	optional bool server_hibernation = 6;
 	optional .CMsgGameServerInfo.ServerType server_type = 7 [default = UNSPECIFIED];
 	optional uint32 server_region = 8;
+	optional float server_loadavg = 9;
+	optional float server_tv_broadcast_time = 10;
+	optional float server_game_time = 11;
+	optional fixed64 server_relay_connected_steam_id = 12;
+	optional uint32 relay_slots_max = 13;
+	optional uint32 relays_connected = 14;
+	optional uint32 relay_clients_connected = 15;
 }
 
 message CMsgServerAvailable {
@@ -324,5 +330,18 @@ message CMsgGCIncrementKillCountResponse {
 	optional uint32 num_kills = 2;
 	optional uint32 item_def = 3;
 	optional uint32 level_type = 4;
+}
+
+message CMsgGCRemoveStrangePart {
+	optional uint64 item_id = 1;
+	optional uint32 strange_part_score_type = 2;
+}
+
+message CMsgGCRemoveCustomizationAttributeSimple {
+	optional uint64 item_id = 1;
+}
+
+message CMsgGCResetStrangeScores {
+	optional uint64 item_id = 1;
 }
 

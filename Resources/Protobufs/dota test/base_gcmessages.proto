@@ -51,6 +51,13 @@ message CMsgServerWelcome {
 	optional uint32 version = 1;
 }
 
+message CMsgInQueue {
+	optional int32 position = 1;
+	optional int32 queue_size = 2;
+	optional int32 wait_time = 3;
+	optional int32 estimated_time = 4;
+}
+
 message CMsgInviteToParty {
 	optional fixed64 steam_id = 1;
 	optional uint32 client_version = 2;
