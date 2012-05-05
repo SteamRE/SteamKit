@@ -33,10 +33,21 @@ namespace ProtobufDumper
         public string OutputDir { get; private set; }
         public List<string> ProtoList { get; private set; }
 
+        struct ProtoData
+        {
+            public FileDescriptorProto file;
+            public StringBuilder buffer;
+        }
+
+        private List<ProtoData> FinalProtoDefinition; 
+
         private List<FileDescriptorProto> deferredProtos;
 
         private Dictionary<string, List<Type>> protobufExtensions;
 
+        private Stack<string> messageNameStack;
+        private Dictionary<string, EnumDescriptorProto> enumLookup;
+        private List<string> deferredEnumTokens;
 
         public ImageFile(string fileName, string output = null)
         {
@@ -44,9 +55,15 @@ namespace ProtobufDumper
             this.OutputDir = output ?? Path.GetFileNameWithoutExtension(this.fileName);
             this.ProtoList = new List<string>();
 
+            this.FinalProtoDefinition = new List<ProtoData>();
+
             this.deferredProtos = new List<FileDescriptorProto>();
 
             this.protobufExtensions = new Dictionary<string, List<Type>>();
+
+            this.messageNameStack = new Stack<string>();
+            this.enumLookup = new Dictionary<string, EnumDescriptorProto>();
+            this.deferredEnumTokens = new List<string>();
         }
 
         public void Process()
@@ -123,6 +140,8 @@ namespace ProtobufDumper
                     DoParseFile(proto);
                 }
             }
+
+            FinalPassWriteFiles();
         }
 
         unsafe void ScanSection(Native.IMAGE_SECTION_HEADER sectionHdr)
@@ -208,6 +227,68 @@ namespace ProtobufDumper
             Native.FreeLibrary(hModule);
         }
 
+        private void PushDescriptorName(FileDescriptorProto file)
+        {
+            messageNameStack.Push(file.package);
+        }
+
+        private void PushDescriptorName(DescriptorProto proto)
+        {
+            messageNameStack.Push(proto.name);
+        }
+
+        private void PushDescriptorName(FieldDescriptorProto field)
+        {
+            messageNameStack.Push(field.name);
+        }
+
+        private string GetDescriptorName(string descriptor)
+        {
+            if (descriptor[0] == '.')
+            {
+                return descriptor.Substring(1);
+            }
+
+            messageNameStack.Push(descriptor);
+            string messageName = String.Join(".", messageNameStack.ToArray().Reverse());
+            messageNameStack.Pop();
+
+            return messageName;
+        }
+
+        private void AddEnumDescriptorLookup(EnumDescriptorProto enumdesc)
+        {
+            enumLookup[GetDescriptorName(enumdesc.name)] = enumdesc;
+        }
+
+        private void PopDescriptorName()
+        {
+            messageNameStack.Pop();
+        }
+
+        private string GetEnumDescriptorToken(string messageName)
+        {
+            return String.Format("${0}_DEFAULT_VALUE$", messageName);
+        }
+
+        private string ResolveOrDeferEnumDefaultValue(string type)
+        {
+            EnumDescriptorProto proto;
+            string descName = GetDescriptorName(type);
+
+            if (enumLookup.TryGetValue(descName, out proto))
+                return proto.value[0].name;
+            else
+            {
+                string absType = '.' + descName;
+
+                if(!deferredEnumTokens.Contains(absType))
+                    deferredEnumTokens.Add(absType);
+
+                return GetEnumDescriptorToken(absType);
+            }
+        }
+ 
         private bool HandleProto(string name, byte[] data)
         {
             //if (name == "google/protobuf/descriptor.proto")
@@ -287,13 +368,7 @@ namespace ProtobufDumper
 
             DumpFileDescriptor(set, sb);
 
-            Directory.CreateDirectory(OutputDir);
-            string outputFile = Path.Combine(OutputDir, set.name);
-
-            Console.WriteLine("  ! Outputting proto to '{0}'\n", outputFile);
-            Directory.CreateDirectory(Path.GetDirectoryName(outputFile));
-            File.WriteAllText(outputFile, sb.ToString());
-
+            FinalProtoDefinition.Add(new ProtoData { file = set, buffer = sb });
             ProtoList.Add(set.name);
 
             List<FileDescriptorProto> protosToRender = new List<FileDescriptorProto>();
@@ -314,6 +389,25 @@ namespace ProtobufDumper
                 }
             }
             while (protosToRender.Count != 0);
+        }
+
+        private void FinalPassWriteFiles()
+        {
+            foreach (var proto in FinalProtoDefinition)
+            {
+                Directory.CreateDirectory(OutputDir);
+                string outputFile = Path.Combine(OutputDir, proto.file.name);
+
+                Console.WriteLine("  ! Outputting proto to '{0}'\n", outputFile);
+                Directory.CreateDirectory(Path.GetDirectoryName(outputFile));
+
+                foreach(string type in deferredEnumTokens)
+                {
+                    proto.buffer.Replace(GetEnumDescriptorToken(type), ResolveOrDeferEnumDefaultValue(type));
+                }
+                
+                File.WriteAllText(outputFile, proto.buffer.ToString());
+            }
         }
 
         private static String GetLabel(FieldDescriptorProto.Label label)
@@ -532,8 +626,10 @@ namespace ProtobufDumper
             return options_kv;
         }
 
-        private string BuildDescriptorDeclaration(FieldDescriptorProto field, List<EnumDescriptorProto> enum_lookup)
+        private string BuildDescriptorDeclaration(FieldDescriptorProto field)
         {
+            PushDescriptorName(field);
+
             string type = ResolveType(field);
             Dictionary<string, string> options = new Dictionary<string, string>();
 
@@ -546,12 +642,9 @@ namespace ProtobufDumper
 
                 options.Add("default", default_value);
             }
-            else if (field.type == FieldDescriptorProto.Type.TYPE_ENUM && enum_lookup != null && field.label != FieldDescriptorProto.Label.LABEL_REPEATED)
+            else if (field.type == FieldDescriptorProto.Type.TYPE_ENUM && field.label != FieldDescriptorProto.Label.LABEL_REPEATED)
             {
-                var potEnum = enum_lookup.Find(protoEnum => type.EndsWith(protoEnum.name));
-
-                if (potEnum != null)
-                    options.Add("default", potEnum.value[0].name);
+                options.Add("default", ResolveOrDeferEnumDefaultValue(type));
             }
 
             Dictionary<string, string> fieldOptions = DumpOptions(field.options);
@@ -565,6 +658,8 @@ namespace ProtobufDumper
             {
                 parameters = " [" + String.Join(", ", options.Select(kvp => String.Format("{0} = {1}", kvp.Key, kvp.Value))) + "]";
             }
+
+            PopDescriptorName();
 
             return GetLabel(field.label) + " " + type + " " + field.name + " = " + field.number + parameters + ";";
         }
@@ -585,7 +680,7 @@ namespace ProtobufDumper
 
                 foreach (FieldDescriptorProto field in mapping)
                 {
-                    sb.AppendLine(levelspace + "\t" + BuildDescriptorDeclaration(field, null));
+                    sb.AppendLine(levelspace + "\t" + BuildDescriptorDeclaration(field));
                 }
 
                 sb.AppendLine(levelspace + "}");
@@ -595,6 +690,9 @@ namespace ProtobufDumper
 
         private void DumpFileDescriptor(FileDescriptorProto set, StringBuilder sb)
         {
+            if(!String.IsNullOrEmpty(set.package))
+                PushDescriptorName(set);
+
             bool marker = false;
 
             foreach (string dependency in set.dependency)
@@ -680,10 +778,15 @@ namespace ProtobufDumper
 
                 sb.AppendLine("}");
             }
+
+            if (!String.IsNullOrEmpty(set.package))
+                PopDescriptorName();
         }
 
         private void DumpDescriptor(DescriptorProto proto, FileDescriptorProto set, StringBuilder sb, int level)
         {
+            PushDescriptorName(proto);
+
             string levelspace = new String('\t', level);
 
             sb.AppendLine(levelspace + "message " + proto.name + " {");
@@ -712,7 +815,7 @@ namespace ProtobufDumper
                 enumLookup.AddRange( set.enum_type ); // add global enums
                 enumLookup.AddRange( proto.enum_type ); // add this message's nested enums
 
-                sb.AppendLine(levelspace + "\t" + BuildDescriptorDeclaration(field, enumLookup));
+                sb.AppendLine(levelspace + "\t" + BuildDescriptorDeclaration(field));
             }
 
             if (proto.extension_range.Count > 0)
@@ -736,10 +839,14 @@ namespace ProtobufDumper
 
             sb.AppendLine(levelspace + "}");
             sb.AppendLine();
+
+            PopDescriptorName();
         }
 
         private void DumpEnumDescriptor(EnumDescriptorProto field, StringBuilder sb, int level)
         {
+            AddEnumDescriptorLookup(field);
+
             string levelspace = new String('\t', level);
 
             sb.AppendLine(levelspace + "enum " + field.name + " {");
