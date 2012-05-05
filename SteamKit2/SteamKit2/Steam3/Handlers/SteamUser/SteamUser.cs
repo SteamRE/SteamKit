@@ -200,8 +200,8 @@ namespace SteamKit2
 
             uint localIp = NetHelpers.GetIPAddress( this.Client.LocalIP );
 
-            logon.ProtoHeader.client_session_id = 0;
-            logon.ProtoHeader.client_steam_id = steamId.ConvertToUInt64();
+            logon.ProtoHeader.client_sessionid = 0;
+            logon.ProtoHeader.steamid = steamId.ConvertToUInt64();
 
             logon.Body.obfustucated_private_ip = localIp ^ MsgClientLogon.ObfuscationMask;
 
@@ -242,8 +242,8 @@ namespace SteamKit2
 
             SteamID auId = new SteamID( 0, 0, Client.ConnectedUniverse, EAccountType.AnonUser );
 
-            logon.ProtoHeader.client_session_id = 0;
-            logon.ProtoHeader.client_steam_id = auId.ConvertToUInt64();
+            logon.ProtoHeader.client_sessionid = 0;
+            logon.ProtoHeader.steamid = auId.ConvertToUInt64();
 
             logon.Body.protocol_version = MsgClientLogon.CurrentProtocol;
             logon.Body.client_os_type = ( uint )Utils.GetOSType();
@@ -276,7 +276,7 @@ namespace SteamKit2
             var response = new ClientMsgProtobuf<CMsgClientUpdateMachineAuthResponse>( EMsg.ClientUpdateMachineAuthResponse );
 
             // so we respond to the correct message
-            response.ProtoHeader.job_id_target = details.JobID;
+            response.ProtoHeader.jobid_target = details.JobID;
 
             response.Body.cubwrote = ( uint )details.BytesWritten;
             response.Body.eresult = ( uint )details.Result;

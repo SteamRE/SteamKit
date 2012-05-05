@@ -287,7 +287,7 @@ message CSVCMsg_BSPDecal {
 }
 
 message CSVCMsg_SplitScreen {
-	optional .ESplitScreenMessageType type = 1;
+	optional .ESplitScreenMessageType type = 1 [default = MSG_SPLITSCREEN_ADDUSER];
 	optional int32 slot = 2;
 	optional int32 player_index = 3;
 }

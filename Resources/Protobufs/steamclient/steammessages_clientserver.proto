@@ -83,6 +83,7 @@ message CMsgClientLogon {
 	optional bool steam2_ticket_request = 88;
 	optional int32 game_server_app_id = 94;
 	optional bool steamguard_dont_remember_computer = 95;
+	optional string machine_name = 96;
 }
 
 message CMsgClientLogonResponse {
@@ -96,7 +97,16 @@ message CMsgClientLogonResponse {
 	optional string email_domain = 8;
 	optional bytes steam2_ticket = 9;
 	optional int32 eresult_extended = 10;
+	optional string webapi_authenticate_user_nonce = 11;
 	optional fixed64 client_supplied_steamid = 20;
+}
+
+message CMsgClientRequestWebAPIAuthenticateUserNonce {
+}
+
+message CMsgClientRequestWebAPIAuthenticateUserNonceResponse {
+	optional int32 eresult = 1 [default = 2];
+	optional string webapi_authenticate_user_nonce = 11;
 }
 
 message CMsgClientLogOff {
@@ -251,6 +261,26 @@ message CMsgClientFriendsGroupsList {
 	repeated .CMsgClientFriendsGroupsList.FriendGroupsMembership memberships = 4;
 }
 
+message CMsgClientPlayerNicknameList {
+	message PlayerNickname {
+		optional fixed64 steamid = 1;
+		optional string nickname = 3;
+	}
+
+	optional bool removal = 1;
+	optional bool incremental = 2;
+	repeated .CMsgClientPlayerNicknameList.PlayerNickname nicknames = 3;
+}
+
+message CMsgClientSetPlayerNickname {
+	optional fixed64 steamid = 1;
+	optional string nickname = 2;
+}
+
+message CMsgClientSetPlayerNicknameResponse {
+	optional uint32 eresult = 1;
+}
+
 message CMsgClientLicenseList {
 	message License {
 		optional uint32 package_id = 1;
@@ -378,6 +408,11 @@ message CMsgClientChangeStatus {
 	optional string player_name = 2;
 	optional bool is_auto_generated_name = 3;
 	optional bool high_priority = 4;
+}
+
+message CMsgPersonaChangeResponse {
+	optional uint32 result = 1;
+	optional string player_name = 2;
 }
 
 message CMsgClientPersonaState {
@@ -809,6 +844,7 @@ message CMsgClientGetClientDetailsResponse {
 	}
 
 	optional uint32 package_version = 1;
+	optional uint32 protocol_version = 8;
 	optional string os = 2;
 	optional string machine_name = 3;
 	optional string ip_public = 4;
@@ -821,7 +857,8 @@ message CMsgClientGetClientAppList {
 	optional bool media = 1;
 	optional bool tools = 2;
 	optional bool games = 3;
-	optional bool installed = 4;
+	optional bool only_installed = 4;
+	optional bool only_changing = 5;
 }
 
 message CMsgClientGetClientAppListResponse {
@@ -841,6 +878,10 @@ message CMsgClientGetClientAppListResponse {
 		optional uint64 bytes_needed = 7;
 		optional uint32 bytes_download_rate = 8;
 		optional bool download_paused = 11;
+		optional uint32 num_downloading = 12;
+		optional uint32 num_paused = 13;
+		optional bool changing = 14;
+		optional bool available_on_platform = 15;
 		repeated .CMsgClientGetClientAppListResponse.App.DLC dlcs = 9;
 	}
 
@@ -968,6 +1009,17 @@ message CMsgClientRequestEncryptedAppTicketResponse {
 	optional uint32 app_id = 1;
 	optional int32 eresult = 2 [default = 2];
 	optional .EncryptedAppTicket encrypted_app_ticket = 3;
+}
+
+message CMsgClientRequestOAuthTokenForApp {
+	optional uint32 app_id = 1;
+	optional string oauth_scope = 2;
+}
+
+message CMsgClientRequestOAuthTokenForAppResponse {
+	optional uint32 app_id = 1;
+	optional int32 eresult = 2 [default = 2];
+	optional string oauth_token = 3;
 }
 
 message CMsgClientWalletInfoUpdate {
@@ -1351,6 +1403,11 @@ message CMsgClientUCMPublishedFileUnsubscribed {
 	optional uint32 app_id = 2;
 }
 
+message CMsgClientUCMPublishedFileDeleted {
+	optional fixed64 published_file_id = 1;
+	optional uint32 app_id = 2;
+}
+
 message CMsgClientUCMGetPublishedFilesForUser {
 	optional uint32 app_id = 1;
 	optional fixed64 creator_steam_id = 2;
@@ -1611,7 +1668,6 @@ message CMsgClientMDSInitDepotBuildResponse {
 	optional uint32 default_chunk_size = 2;
 	optional fixed64 base_manifest = 3;
 	optional bytes encrypted_depot_key = 4;
-	optional fixed64 prev_manifest = 5;
 }
 
 message CMsgClientMDSLoginRequest {
@@ -1652,6 +1708,7 @@ message CMsgClientMDSUploadManifestRequest {
 	optional bool make_public = 4;
 	optional uint32 build_id = 6;
 	optional uint32 manifest_version = 7;
+	optional bool local_cs_build = 9;
 }
 
 message CMsgClientMDSUploadManifestResponse {
@@ -1683,7 +1740,7 @@ message CMsgClientMDSGetDepotManifestChunk {
 message CMsgClientMDSRegisterAppBuild {
 	optional int32 app_id = 1;
 	optional string description = 2;
-	optional string beta_key = 3;
+	optional bool for_local_cs = 5;
 }
 
 message CMsgClientMDSRegisterAppBuildResponse {
@@ -1729,6 +1786,20 @@ message CMsgClientGetDepotDecryptionKeyResponse {
 	optional int32 eresult = 1 [default = 2];
 	optional uint32 depot_id = 2;
 	optional bytes depot_encryption_key = 3;
+}
+
+message CMsgClientUpdateAppJobReport {
+	optional uint32 app_id = 1;
+	repeated uint32 depot_ids = 2;
+	optional uint32 app_state = 3;
+	optional uint32 job_app_error = 4;
+	optional string error_details = 5;
+	optional uint32 job_duration = 6;
+	optional uint32 files_validation_failed = 7;
+	optional uint64 bytes_downloaded = 8;
+	optional uint64 bytes_staged = 9;
+	optional uint64 bytes_comitted = 10;
+	optional uint32 start_app_state = 11;
 }
 
 message CMsgClientGetCDNAuthTokenResponse {
@@ -1992,6 +2063,15 @@ message CMsgClientItemAnnouncements {
 }
 
 message CMsgClientRequestItemAnnouncements {
+}
+
+message CMsgClientCommentNotifications {
+	optional uint32 count_new_comments = 1;
+	optional uint32 count_new_comments_owner = 2;
+	optional uint32 count_new_comments_subscriptions = 3;
+}
+
+message CMsgClientRequestCommentNotifications {
 }
 
 message CMsgClientEmailAddrInfo {

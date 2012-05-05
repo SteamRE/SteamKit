@@ -546,7 +546,7 @@ namespace ProtobufDumper
 
                 options.Add("default", default_value);
             }
-            else if (field.type == FieldDescriptorProto.Type.TYPE_ENUM && enum_lookup != null)
+            else if (field.type == FieldDescriptorProto.Type.TYPE_ENUM && enum_lookup != null && field.label != FieldDescriptorProto.Label.LABEL_REPEATED)
             {
                 var potEnum = enum_lookup.Find(protoEnum => type.EndsWith(protoEnum.name));
 
@@ -642,7 +642,7 @@ namespace ProtobufDumper
 
             foreach (DescriptorProto proto in set.message_type)
             {
-                DumpDescriptor(proto, sb, 0);
+                DumpDescriptor(proto, set, sb, 0);
             }
 
             foreach (ServiceDescriptorProto service in set.service)
@@ -682,7 +682,7 @@ namespace ProtobufDumper
             }
         }
 
-        private void DumpDescriptor(DescriptorProto proto, StringBuilder sb, int level)
+        private void DumpDescriptor(DescriptorProto proto, FileDescriptorProto set, StringBuilder sb, int level)
         {
             string levelspace = new String('\t', level);
 
@@ -695,7 +695,7 @@ namespace ProtobufDumper
 
             foreach (DescriptorProto field in proto.nested_type)
             {
-                DumpDescriptor(field, sb, level + 1);
+                DumpDescriptor(field, set, sb, level + 1);
             }
 
             DumpExtensionDescriptor(proto.extension, sb, levelspace + '\t');
@@ -707,7 +707,12 @@ namespace ProtobufDumper
 
             foreach (FieldDescriptorProto field in proto.field)
             {
-                sb.AppendLine(levelspace + "\t" + BuildDescriptorDeclaration(field, proto.enum_type));
+                var enumLookup = new List<EnumDescriptorProto>();
+
+                enumLookup.AddRange( set.enum_type ); // add global enums
+                enumLookup.AddRange( proto.enum_type ); // add this message's nested enums
+
+                sb.AppendLine(levelspace + "\t" + BuildDescriptorDeclaration(field, enumLookup));
             }
 
             if (proto.extension_range.Count > 0)

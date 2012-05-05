@@ -364,8 +364,8 @@ namespace SteamKit2.Internal
 
             if ( logonResp.Body.eresult == ( int )EResult.OK )
             {
-                SessionID = logonResp.ProtoHeader.client_session_id;
-                SteamID = logonResp.ProtoHeader.client_steam_id;
+                SessionID = logonResp.ProtoHeader.client_sessionid;
+                SteamID = logonResp.ProtoHeader.steamid;
 
                 int hbDelay = logonResp.Body.out_of_game_heartbeat_seconds;
 

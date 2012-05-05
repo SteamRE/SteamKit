@@ -84,6 +84,8 @@ enum DOTA_CHAT_MESSAGE {
 	CHAT_MESSAGE_REPORT_REMINDER = 43;
 	CHAT_MESSAGE_ECON_ITEM = 44;
 	CHAT_MESSAGE_TAUNT = 45;
+	CHAT_MESSAGE_RANDOM = 46;
+	CHAT_MESSAGE_RD_TURN = 47;
 }
 
 enum EDotaEntityMessages {
@@ -120,6 +122,7 @@ enum DOTA_OVERHEAD_ALERT {
 	OVERHEAD_ALERT_EVADE = 7;
 	OVERHEAD_ALERT_BLOCK = 8;
 	OVERHEAD_ALERT_BONUS_POISON_DAMAGE = 9;
+	OVERHEAD_ALERT_HEAL = 10;
 }
 
 message CDOTAUserMsg_AIDebugLine {
@@ -131,7 +134,7 @@ message CDOTAUserMsg_Ping {
 }
 
 message CDOTAUserMsg_ChatEvent {
-	required .DOTA_CHAT_MESSAGE type = 1;
+	required .DOTA_CHAT_MESSAGE type = 1 [default = CHAT_MESSAGE_INVALID];
 	optional uint32 value = 2;
 	optional sint32 playerid_1 = 3 [default = -1];
 	optional sint32 playerid_2 = 4 [default = -1];
@@ -301,7 +304,7 @@ message CDOTAUserMsg_UnitEvent {
 		optional .Activity activity = 1;
 	}
 
-	required .EDotaEntityMessages msg_type = 1;
+	required .EDotaEntityMessages msg_type = 1 [default = DOTA_UNIT_SPEECH];
 	required int32 entity_index = 2;
 	optional .CDOTAUserMsg_UnitEvent.Speech speech = 3;
 	optional .CDOTAUserMsg_UnitEvent.SpeechMute speech_mute = 4;
@@ -382,7 +385,7 @@ message CDOTAUserMsg_ParticleManager {
 		optional int32 tick = 2;
 	}
 
-	required .DOTA_PARTICLE_MESSAGE type = 1;
+	required .DOTA_PARTICLE_MESSAGE type = 1 [default = DOTA_PARTICLE_MANAGER_EVENT_CREATE];
 	required uint32 index = 2;
 	optional .CDOTAUserMsg_ParticleManager.ReleaseParticleIndex release_particle_index = 3;
 	optional .CDOTAUserMsg_ParticleManager.CreateParticle create_particle = 4;
@@ -398,7 +401,7 @@ message CDOTAUserMsg_ParticleManager {
 }
 
 message CDOTAUserMsg_OverheadEvent {
-	required .DOTA_OVERHEAD_ALERT message_type = 1;
+	required .DOTA_OVERHEAD_ALERT message_type = 1 [default = OVERHEAD_ALERT_GOLD];
 	optional int32 value = 2;
 	optional int32 target_player_entindex = 3;
 	optional int32 target_entindex = 4;
