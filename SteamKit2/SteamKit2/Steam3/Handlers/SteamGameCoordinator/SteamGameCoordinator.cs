@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using SteamKit2.Internal;
+using SteamKit2.GC;
 
 namespace SteamKit2
 {
