@@ -23,7 +23,7 @@ namespace SteamKit2
         {
             var clientMsg = new ClientMsgProtobuf<CMsgGCClient>( EMsg.ClientToGC );
 
-            clientMsg.Body.msgtype = msg.MsgType;
+            clientMsg.Body.msgtype = MsgUtil.MakeGCMsg( msg.MsgType, msg.IsProto );
             clientMsg.Body.appid = appId;
 
             clientMsg.Body.payload = msg.Serialize();
