@@ -1,5 +1,46 @@
 import "steammessages.proto";
 
+enum TF_GC_GameState {
+	TF_GC_GAMESTATE_STATE_INIT = 0;
+	TF_GC_GAMESTATE_WAIT_FOR_PLAYERS_TO_LOAD = 1;
+	TF_GC_GAMESTATE_STRATEGY_TIME = 3;
+	TF_GC_GAMESTATE_GAME_IN_PROGRESS = 5;
+	TF_GC_GAMESTATE_POST_GAME = 6;
+	TF_GC_GAMESTATE_DISCONNECT = 7;
+	TF_GC_GAMESTATE_LAST = 8;
+}
+
+enum TF_GC_TEAM {
+	TF_GC_TEAM_DEFENDERS = 0;
+	TF_GC_TEAM_BROADCASTER = 2;
+	TF_GC_TEAM_SPECTATOR = 3;
+	TF_GC_TEAM_PLAYER_POOL = 4;
+	TF_GC_TEAM_NOTEAM = 5;
+}
+
+enum TFLeaverStatus_t {
+	TF_LEAVER_NONE = 0;
+	TF_LEAVER_DISCONNECTED = 1;
+	TF_LEAVER_DISCONNECTED_TOO_LONG = 2;
+	TF_LEAVER_ABANDONED = 3;
+	TF_LEAVER_AFK = 4;
+	TF_LEAVER_NEVER_CONNECTED = 5;
+	TF_LEAVER_NEVER_CONNECTED_TOO_LONG = 6;
+}
+
+enum TFLobbyReadyState {
+	TFLobbyReadyState_UNDECLARED = 0;
+	TFLobbyReadyState_ACCEPTED = 1;
+	TFLobbyReadyState_DECLINED = 2;
+}
+
+enum ChatChannelType_t {
+	ChatChannelType_Regional = 0;
+	ChatChannelType_Custom = 1;
+	ChatChannelType_Party = 2;
+	ChatChannelType_Lobby = 3;
+}
+
 message CMsgTFGoldenWrenchBroadcast {
 	optional int32 wrench_number = 1;
 	optional bool deleted = 2;
@@ -9,14 +50,6 @@ message CMsgTFGoldenWrenchBroadcast {
 message CMsgTFSaxxyBroadcast {
 	optional int32 category_number = 1;
 	optional string user_name = 2;
-}
-
-message CMsgTFIncrementKillCountResponse {
-	optional uint32 killer_account_id = 1 [(key_field) = true];
-	optional uint32 num_kills = 2;
-	optional uint32 item_def = 3;
-	optional uint32 new_rank = 4;
-	optional uint32 level_type = 5;
 }
 
 message CSOTFDuelSummary {
@@ -276,5 +309,286 @@ message CMsgGC_PickupItemEligibility_QueryResponse {
 	optional uint32 account_id = 1;
 	optional bool was_eligible = 2;
 	optional uint32 level_id = 3;
+}
+
+message CSOTFPartyMember {
+	optional bool owns_ticket = 2;
+}
+
+message CMsgMatchSearchCriteria {
+	optional string key = 1;
+	optional uint32 matchgroups = 2 [default = 4294967295];
+	optional string map = 3;
+	optional string challenge = 4;
+	optional bool late_join_ok = 5;
+	optional bool play_for_bragging_rights = 6;
+}
+
+message CMsgCreateOrUpdateParty {
+	optional .CMsgMatchSearchCriteria search_criteria = 1;
+	optional bool search_active = 2;
+	optional fixed64 steam_lobby_id = 3;
+}
+
+message CSOTFParty {
+	enum State {
+		UI = 0;
+		FINDING_MATCH = 1;
+		IN_MATCH = 2;
+	}
+
+	optional uint64 party_id = 1 [(key_field) = true];
+	optional fixed64 leader_id = 2;
+	repeated fixed64 member_ids = 3;
+	repeated .CSOTFPartyMember members = 13;
+	repeated fixed64 pending_invites = 5;
+	optional .CSOTFParty.State state = 6 [default = UI];
+	optional uint32 started_matchmaking_time = 7;
+	repeated uint32 searching_players_by_group = 10;
+	optional fixed64 steam_lobby_id = 27;
+	optional string search_key = 20 [(hidden) = true];
+	optional uint32 matchgroups = 21;
+	optional string search_map = 22;
+	optional bool search_late_join_ok = 23;
+	optional string search_challenge = 25;
+	optional bool search_play_for_bragging_rights = 26;
+	optional uint32 matching_players = 14;
+	optional float search_fraction = 15;
+	optional uint32 prevent_match_until_date = 18;
+	optional uint32 prevent_match_account_id = 19;
+}
+
+message CSOTFPartyInvite {
+	message PartyMember {
+		optional string name = 1;
+		optional fixed64 steam_id = 2;
+		optional uint32 avatar = 3;
+	}
+
+	optional uint64 group_id = 1 [(key_field) = true];
+	optional fixed64 sender_id = 2;
+	optional string sender_name = 3;
+	repeated .CSOTFPartyInvite.PartyMember members = 4;
+}
+
+message CTFLobbyMember {
+	optional fixed64 id = 1 [(key_field) = true];
+	optional .TF_GC_TEAM team = 3;
+	optional bool connected_to_game_server = 4;
+	optional string name = 6;
+	optional float latitude = 8;
+	optional float longitude = 9;
+	optional .TFLobbyReadyState ready_state = 11;
+	optional uint64 party_id = 12;
+}
+
+message CTFLobbyGCPrivate {
+	optional string search_key = 1;
+	optional string pass_key = 2;
+}
+
+message CLobbyPendingPlayerReport {
+	optional uint32 account_id = 1;
+	optional fixed32 date = 2;
+}
+
+message CMsgGameMatchSignOut {
+}
+
+message CSOTFLobby {
+	enum State {
+		SERVERSETUP = 1;
+		RUN = 2;
+		POSTGAME = 3;
+		NOTREADY = 5;
+		SERVERASSIGN = 6;
+	}
+
+	enum LobbyType {
+		INVALID = -1;
+		MATCH = 0;
+		PRACTICE = 1;
+		TOURNAMENT = 2;
+		TUTORIAL = 3;
+	}
+
+	optional uint64 lobby_id = 1 [(key_field) = true];
+	repeated .CTFLobbyMember members = 2;
+	repeated .CTFLobbyMember left_members = 7;
+	optional fixed64 leader_id = 11;
+	optional fixed64 server_id = 6 [default = 0];
+	repeated fixed64 pending_invites = 10;
+	optional .CSOTFLobby.State state = 4 [default = SERVERSETUP];
+	optional string connect = 5;
+	optional .CTFLobbyGCPrivate gc_private = 9 [(hidden) = true];
+	optional .CSOTFLobby.LobbyType lobby_type = 12 [default = INVALID];
+	optional bool allow_cheats = 13;
+	optional string game_name = 16;
+	optional uint32 server_region = 21 [default = 0];
+	optional .TF_GC_GameState game_state = 22 [default = SERVERSETUP, (hidden) = true];
+	optional uint32 num_spectators = 23;
+	optional uint32 matchgroup = 25;
+	optional float readyup_remaining_time = 26;
+	optional bool leaver_detected = 27;
+	repeated .CLobbyPendingPlayerReport pending_player_reports = 29 [(hidden) = true];
+	optional uint32 match_id = 30 [(hidden) = true];
+	optional bool allow_spectating = 31 [default = true];
+	optional fixed64 load_game_lobby_id = 33;
+	optional uint32 load_game_save_number = 34;
+	optional fixed32 replay_salt = 35 [(hidden) = true];
+	optional string map_name = 38;
+	optional string challenge_name = 39;
+	optional bool playing_for_bragging_rights = 40;
+}
+
+message CMsgConnectedPlayers {
+	message Player {
+		optional fixed64 steam_id = 1;
+	}
+
+	enum Event {
+		None = 0;
+		MvMVictory = 1;
+		MvMDefeat = 2;
+	}
+
+	repeated .CMsgConnectedPlayers.Player players = 1;
+	optional .TF_GC_GameState game_state = 2;
+	optional uint32 num_spectators = 3;
+	optional .CMsgConnectedPlayers.Event event = 5 [default = None];
+}
+
+message CMsgExitMatchmaking {
+}
+
+message CMsgAcceptInvite {
+	optional uint64 party_id = 1;
+	optional fixed64 steamid_lobby = 2;
+}
+
+message CMsgAcceptInviteFailed {
+	optional int32 result_code = 1;
+}
+
+message CMsgReadyUp {
+	optional .TFLobbyReadyState state = 1;
+}
+
+message CMsgMatchmakingSearchCountRequest {
+}
+
+message CMsgMatchmakingSearchCountResponse {
+	repeated uint32 searching_players_by_group = 1;
+}
+
+message CMsgKickedFromMatchmakingQueue {
+}
+
+message CMsgTFPlayerFailedToConnect {
+	repeated fixed64 failed_loaders = 1;
+}
+
+message CMsgAbandonCurrentGame {
+}
+
+message CMsgLeaverDetected {
+	optional fixed64 steam_id = 1;
+	optional uint32 leaver_status = 2;
+}
+
+message CMsgLeaverDetectedResponse {
+	optional uint32 result = 1;
+}
+
+message CMsgTFJoinChatChannel {
+	optional string persona_name = 1;
+	optional string channel_name = 2;
+	optional string password = 3;
+	optional .ChatChannelType_t channel_type = 4;
+}
+
+message CMsgTFLeaveChatChannel {
+	optional string channel_name = 1;
+}
+
+message CMsgTFJoinChatChannelResponse {
+	message ChatMember {
+		optional fixed64 steam_id = 1;
+		optional string persona_name = 2;
+	}
+
+	optional uint32 response = 1;
+	optional string channel_name = 2;
+	optional fixed64 channel_id = 3;
+	optional uint32 max_members = 4;
+	repeated .CMsgTFJoinChatChannelResponse.ChatMember members = 5;
+}
+
+message CMsgTFOtherJoinedChatChannel {
+	optional fixed64 channel_id = 1;
+	optional string persona_name = 2;
+	optional fixed64 steam_id = 3;
+}
+
+message CMsgTFOtherLeftChatChannel {
+	optional fixed64 channel_id = 1;
+	optional fixed64 steam_id = 2;
+}
+
+message CMsgTFRequestDefaultChatChannel {
+}
+
+message CMsgTFRequestDefaultChatChannelResponse {
+	optional string channel_name = 1;
+	optional fixed64 channel_id = 2;
+}
+
+message CMsgTFRequestChatChannelList {
+}
+
+message CMsgTFRequestChatChannelListResponse {
+	message ChatChannel {
+		optional string channel_name = 1;
+		optional uint32 num_members = 2;
+		optional .ChatChannelType_t channel_type = 3;
+	}
+
+	repeated .CMsgTFRequestChatChannelListResponse.ChatChannel channels = 1;
+}
+
+message CMsgGameServerInfo {
+	enum MatchmakingState {
+		INVALID = 0;
+		NOT_PARTICIPATING = 1;
+		EMPTY_ALLOW_ADHOC = 2;
+		ACTIVE_ALLOW_ADHOC = 3;
+		EMPTY_STRICT = 4;
+		ACTIVE_STRICT = 5;
+	}
+
+	optional .CMsgGameServerInfo.MatchmakingState matchmaking_state = 1 [default = INVALID];
+	optional uint32 server_region = 2;
+	optional float server_loadavg = 3;
+}
+
+message CMsgPingListRequest {
+	message Address {
+		required fixed32 ip = 1;
+		required uint32 port = 2;
+	}
+
+	optional uint32 server_pool = 1;
+	repeated .CMsgPingListRequest.Address servers = 2;
+}
+
+message CMsgPingListResponse {
+	message Server {
+		required fixed32 ip = 1;
+		required uint32 port = 2;
+		required uint32 ping_ms = 3;
+	}
+
+	optional uint32 server_pool = 1;
+	repeated .CMsgPingListResponse.Server servers = 2;
 }
 
