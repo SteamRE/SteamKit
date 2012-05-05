@@ -166,13 +166,13 @@ message CSODOTAPartyInvite {
 message CDOTALobbyMember {
 	optional fixed64 id = 1 [(key_field) = true];
 	optional uint32 hero_id = 2;
-	optional .DOTA_GC_TEAM team = 3;
+	optional .DOTA_GC_TEAM team = 3 [default = DOTA_GC_TEAM_GOOD_GUYS];
 	optional bool connected_to_game_server = 4;
 	optional string name = 6;
 	optional uint32 slot = 7;
 	optional float latitude = 8;
 	optional float longitude = 9;
-	optional .DOTALobbyReadyState ready_state = 11;
+	optional .DOTALobbyReadyState ready_state = 11 [default = DOTALobbyReadyState_UNDECLARED];
 	optional uint64 party_id = 12;
 	optional uint32 meta_level = 13;
 	optional uint32 meta_xp = 14;
@@ -244,7 +244,7 @@ message CSODOTALobby {
 	optional uint32 tournament_id = 19;
 	optional uint32 tournament_game_id = 20;
 	optional uint32 server_region = 21 [default = 0];
-	optional .DOTA_GameState game_state = 22 [default = UI];
+	optional .DOTA_GameState game_state = 22 [default = DOTA_GAMERULES_STATE_INIT];
 	optional uint32 num_spectators = 23;
 	optional uint32 tower_state = 24;
 	optional uint32 matchgroup = 25;
@@ -271,7 +271,7 @@ message CMsgConnectedPlayers {
 	}
 
 	repeated .CMsgConnectedPlayers.Player players = 1;
-	optional .DOTA_GameState game_state = 2;
+	optional .DOTA_GameState game_state = 2 [default = DOTA_GAMERULES_STATE_INIT];
 	optional uint32 num_spectators = 3;
 	optional uint32 tower_state = 4;
 }
@@ -289,7 +289,7 @@ message CMsgStopFindingMatch {
 }
 
 message CMsgReadyUp {
-	optional .DOTALobbyReadyState state = 1;
+	optional .DOTALobbyReadyState state = 1 [default = DOTALobbyReadyState_UNDECLARED];
 }
 
 message CMsgMatchmakingSearchCountRequest {
@@ -396,12 +396,12 @@ message CMsgPracticeLobbyCreate {
 }
 
 message CMsgPracticeLobbySetTeamSlot {
-	optional .DOTA_GC_TEAM team = 1;
+	optional .DOTA_GC_TEAM team = 1 [default = DOTA_GC_TEAM_GOOD_GUYS];
 	optional uint32 slot = 2;
 }
 
 message CMsgPracticeLobbyKick {
-	optional .DOTA_GC_TEAM team = 1;
+	optional .DOTA_GC_TEAM team = 1 [default = DOTA_GC_TEAM_GOOD_GUYS];
 	optional uint32 slot = 2;
 }
 
@@ -426,7 +426,7 @@ message CMsgPracticeLobbySetDetails {
 	optional bool fill_with_bots = 11;
 	optional bool intro_mode = 12;
 	optional bool allow_spectating = 13;
-	optional .DOTAGameVersion game_version = 14;
+	optional .DOTAGameVersion game_version = 14 [default = GAME_VERSION_CURRENT];
 	optional string pass_key = 15;
 }
 
@@ -461,7 +461,7 @@ message CMsgPracticeLobbyJoin {
 }
 
 message CMsgPracticeLobbyJoinResponse {
-	optional .DOTAJoinLobbyResult result = 1;
+	optional .DOTAJoinLobbyResult result = 1 [default = DOTA_JOIN_RESULT_SUCCESS];
 }
 
 message CMsgFriendPracticeLobbyListRequest {
@@ -789,7 +789,7 @@ message CMsgDOTACreateTeamResponse {
 		NO_LOGO = 12;
 	}
 
-	repeated .CMsgDOTACreateTeamResponse.Result results = 1 [default = INVALID];
+	repeated .CMsgDOTACreateTeamResponse.Result results = 1;
 }
 
 message CMsgDOTADisbandTeam {
@@ -975,7 +975,7 @@ message CMsgDOTAJoinChatChannel {
 	optional string persona_name = 1;
 	optional string channel_name = 2;
 	optional string password = 3;
-	optional .DOTAChatChannelType_t channel_type = 4;
+	optional .DOTAChatChannelType_t channel_type = 4 [default = DOTAChannelType_Regional];
 }
 
 message CMsgDOTALeaveChatChannel {
@@ -1040,7 +1040,7 @@ message CMsgDOTARequestChatChannelListResponse {
 	message ChatChannel {
 		optional string channel_name = 1;
 		optional uint32 num_members = 2;
-		optional .DOTAChatChannelType_t channel_type = 3;
+		optional .DOTAChatChannelType_t channel_type = 3 [default = DOTAChannelType_Regional];
 	}
 
 	repeated .CMsgDOTARequestChatChannelListResponse.ChatChannel channels = 1;
@@ -1141,7 +1141,7 @@ message CMsgDOTARequestSaveGamesServer {
 message CMsgDOTARequestSaveGamesResponse {
 	message SaveGame {
 		message Player {
-			optional .DOTA_GC_TEAM team = 1;
+			optional .DOTA_GC_TEAM team = 1 [default = DOTA_GC_TEAM_GOOD_GUYS];
 			optional string name = 2;
 			optional string hero = 3;
 		}

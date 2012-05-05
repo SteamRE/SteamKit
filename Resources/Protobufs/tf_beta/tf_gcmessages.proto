@@ -373,12 +373,12 @@ message CSOTFPartyInvite {
 
 message CTFLobbyMember {
 	optional fixed64 id = 1 [(key_field) = true];
-	optional .TF_GC_TEAM team = 3;
+	optional .TF_GC_TEAM team = 3 [default = TF_GC_TEAM_DEFENDERS];
 	optional bool connected_to_game_server = 4;
 	optional string name = 6;
 	optional float latitude = 8;
 	optional float longitude = 9;
-	optional .TFLobbyReadyState ready_state = 11;
+	optional .TFLobbyReadyState ready_state = 11 [default = TFLobbyReadyState_UNDECLARED];
 	optional uint64 party_id = 12;
 }
 
@@ -425,7 +425,7 @@ message CSOTFLobby {
 	optional bool allow_cheats = 13;
 	optional string game_name = 16;
 	optional uint32 server_region = 21 [default = 0];
-	optional .TF_GC_GameState game_state = 22 [default = SERVERSETUP, (hidden) = true];
+	optional .TF_GC_GameState game_state = 22 [default = TF_GC_GAMESTATE_STATE_INIT, (hidden) = true];
 	optional uint32 num_spectators = 23;
 	optional uint32 matchgroup = 25;
 	optional float readyup_remaining_time = 26;
@@ -453,7 +453,7 @@ message CMsgConnectedPlayers {
 	}
 
 	repeated .CMsgConnectedPlayers.Player players = 1;
-	optional .TF_GC_GameState game_state = 2;
+	optional .TF_GC_GameState game_state = 2 [default = TF_GC_GAMESTATE_STATE_INIT];
 	optional uint32 num_spectators = 3;
 	optional .CMsgConnectedPlayers.Event event = 5 [default = None];
 }
@@ -471,7 +471,7 @@ message CMsgAcceptInviteFailed {
 }
 
 message CMsgReadyUp {
-	optional .TFLobbyReadyState state = 1;
+	optional .TFLobbyReadyState state = 1 [default = TFLobbyReadyState_UNDECLARED];
 }
 
 message CMsgMatchmakingSearchCountRequest {
@@ -504,7 +504,7 @@ message CMsgTFJoinChatChannel {
 	optional string persona_name = 1;
 	optional string channel_name = 2;
 	optional string password = 3;
-	optional .ChatChannelType_t channel_type = 4;
+	optional .ChatChannelType_t channel_type = 4 [default = ChatChannelType_Regional];
 }
 
 message CMsgTFLeaveChatChannel {
@@ -550,7 +550,7 @@ message CMsgTFRequestChatChannelListResponse {
 	message ChatChannel {
 		optional string channel_name = 1;
 		optional uint32 num_members = 2;
-		optional .ChatChannelType_t channel_type = 3;
+		optional .ChatChannelType_t channel_type = 3 [default = ChatChannelType_Regional];
 	}
 
 	repeated .CMsgTFRequestChatChannelListResponse.ChatChannel channels = 1;
