@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using SteamKit2.Internal;
+using SteamKit2.GC;
 
 namespace SteamKit2
 {
@@ -13,7 +14,9 @@ namespace SteamKit2
         /// </summary>
         public class MessageCallback : CallbackMsg
         {
+            // raw emsg (with protobuf flag, if present)
             uint eMsg;
+
             /// <summary>
             /// Gets the game coordinator message type.
             /// </summary>
@@ -33,7 +36,7 @@ namespace SteamKit2
             /// <summary>
             /// Gets the actual message.
             /// </summary>
-            public byte[] Payload { get; private set; }
+            public IPacketGCMsg Message { get; private set; }
 
 
 #if STATIC_CALLBACKS
@@ -46,7 +49,23 @@ namespace SteamKit2
                 this.eMsg = gcMsg.msgtype;
                 this.AppID = gcMsg.appid;
 
-                this.Payload = gcMsg.payload;
+                this.Message = GetPacketGCMsg( gcMsg.msgtype, gcMsg.payload );
+            }
+
+
+            static IPacketGCMsg GetPacketGCMsg( uint eMsg, byte[] data )
+            {
+                // strip off the protobuf flag
+                uint realEMsg = MsgUtil.GetGCMsg( eMsg );
+
+                if ( MsgUtil.IsProtoBuf( eMsg ) )
+                {
+                    return new PacketClientGCMsgProtobuf( realEMsg, data );
+                }
+                else
+                {
+                    return new PacketClientGCMsg( realEMsg, data );
+                }
             }
         }
     }
