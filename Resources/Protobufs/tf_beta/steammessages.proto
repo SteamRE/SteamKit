@@ -210,3 +210,39 @@ message CGCMsgGetSystemStatsResponse {
 	optional uint32 logon_jobs = 13;
 }
 
+message CMsgAMSendEmail {
+	message ReplacementToken {
+		optional string token_name = 1;
+		optional string token_value = 2;
+	}
+
+	message PersonaNameReplacementToken {
+		optional fixed64 steamid = 1;
+		optional string token_name = 2;
+	}
+
+	optional fixed64 steamid = 1;
+	optional uint32 email_msg_type = 2;
+	optional uint32 email_format = 3;
+	repeated .CMsgAMSendEmail.PersonaNameReplacementToken persona_name_tokens = 5;
+	optional uint32 source_gc = 6;
+	repeated .CMsgAMSendEmail.ReplacementToken tokens = 7;
+}
+
+message CMsgAMSendEmailResponse {
+	optional uint32 eresult = 1 [default = 2];
+}
+
+message CMsgGCGetEmailTemplate {
+	optional uint32 app_id = 1;
+	optional uint32 email_msg_type = 2;
+	optional int32 email_lang = 3;
+	optional int32 email_format = 4;
+}
+
+message CMsgGCGetEmailTemplateResponse {
+	optional uint32 eresult = 1 [default = 2];
+	optional bool template_exists = 2;
+	optional string template = 3;
+}
+

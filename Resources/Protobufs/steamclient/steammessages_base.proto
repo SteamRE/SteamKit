@@ -6,16 +6,17 @@ extend .google.protobuf.MessageOptions {
 }
 
 message CMsgProtoBufHeader {
-	optional fixed64 client_steam_id = 1;
-	optional int32 client_session_id = 2;
+	optional fixed64 steamid = 1;
+	optional int32 client_sessionid = 2;
 	optional uint32 routing_appid = 3;
-	optional fixed64 job_id_source = 10 [default = 18446744073709551615];
-	optional fixed64 job_id_target = 11 [default = 18446744073709551615];
+	optional fixed64 jobid_source = 10 [default = 18446744073709551615];
+	optional fixed64 jobid_target = 11 [default = 18446744073709551615];
 	optional string target_job_name = 12;
 	optional int32 eresult = 13 [default = 2];
 	optional string error_message = 14;
 	optional uint32 ip = 15;
 	optional uint32 auth_account_flags = 16;
+	optional int32 transport_error = 17 [default = 1];
 }
 
 message CMsgMulti {
@@ -26,8 +27,8 @@ message CMsgMulti {
 message CMsgAuthTicket {
 	optional uint32 estate = 1;
 	optional uint32 eresult = 2 [default = 2];
-	optional fixed64 steam_id = 3;
-	optional fixed64 game_id = 4;
+	optional fixed64 steamid = 3;
+	optional fixed64 gameid = 4;
 	optional uint32 h_steam_pipe = 5;
 	optional uint32 ticket_crc = 6;
 	optional bytes ticket = 7;

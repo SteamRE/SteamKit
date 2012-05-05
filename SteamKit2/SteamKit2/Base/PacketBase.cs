@@ -117,8 +117,8 @@ namespace SteamKit2
                 protobufHeader.Deserialize( ms );
             }
 
-            TargetJobID = protobufHeader.Proto.job_id_target;
-            SourceJobID = protobufHeader.Proto.job_id_source;
+            TargetJobID = protobufHeader.Proto.jobid_target;
+            SourceJobID = protobufHeader.Proto.jobid_source;
         }
 
 

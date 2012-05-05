@@ -20,6 +20,11 @@ message CMsgCStrike15ReportRoundEnd {
 		optional int32 elo_value = 6;
 	}
 
+	message PlayerStats {
+		optional int32 reason = 1;
+		optional int32 count = 2;
+	}
+
 	optional int32 elo_game_mode = 1;
 	optional int32 elo_calc_type = 2;
 	optional float elo_calc_exp_base = 3;
@@ -28,10 +33,42 @@ message CMsgCStrike15ReportRoundEnd {
 	optional int32 winning_team = 6;
 	repeated .CMsgCStrike15ReportRoundEnd.Player elo_players = 7;
 	optional bool request_log = 8;
+	optional string elo_map_name = 9;
+	optional int32 elo_lock_in_result = 10;
+	optional int32 elo_final_result = 11;
+	repeated .CMsgCStrike15ReportRoundEnd.PlayerStats player_stats = 12;
 }
 
 message CMsgCStrike15ReportRoundEndLog {
 	optional string log = 1;
+}
+
+message CMsgGCCStrike15ClientRequestEloBracket {
+	optional int32 game_mode = 1;
+	optional int32 input_device = 2;
+}
+
+message CMsgGCCStrike15ClientRequestEloBracketResponse {
+	optional int32 bracket = 1;
+}
+
+message CMsgGCCStrike15RequestEloBrackets {
+	message Player {
+		optional uint32 account_id = 1;
+		optional int32 input_device = 2;
+	}
+
+	optional int32 game_mode = 1;
+	repeated .CMsgGCCStrike15RequestEloBrackets.Player players = 2;
+}
+
+message CMsgGCCStrike15RequestEloBracketsResponse {
+	message PlayerBracket {
+		optional int32 bracket = 1;
+		optional uint32 account_id = 2;
+	}
+
+	repeated .CMsgGCCStrike15RequestEloBracketsResponse.PlayerBracket player_brackets = 1;
 }
 
 message CMsgCStrike15StartMatchmakingDeprecated {

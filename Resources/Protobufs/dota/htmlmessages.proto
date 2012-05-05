@@ -138,6 +138,7 @@ message CMsgHorizontalScrollBarSizeResponse {
 	optional uint32 scroll_max = 6;
 	optional uint32 scroll = 7;
 	optional float zoom = 8;
+	optional bool visible = 9;
 }
 
 message CMsgVerticalScrollBarSize {
@@ -153,6 +154,7 @@ message CMsgVerticalScrollBarSizeResponse {
 	optional uint32 scroll_max = 6;
 	optional uint32 scroll = 7;
 	optional float zoom = 8;
+	optional bool visible = 9;
 }
 
 message CMsgFind {
@@ -203,13 +205,13 @@ message CHTMLHeader {
 }
 
 message CHTMLPageSecurityInfo {
-	optional bool bIsSecure = 1;
-	optional bool bHasCertError = 2;
+	optional bool bIsSecure = 1 [default = false];
+	optional bool bHasCertError = 2 [default = false];
 	optional string issuerName = 3;
 	optional string certName = 4;
-	optional int32 certExpiry = 5;
-	optional int32 nCertBits = 6;
-	optional bool bIsEVCert = 7;
+	optional int32 certExpiry = 5 [default = 0];
+	optional int32 nCertBits = 6 [default = 0];
+	optional bool bIsEVCert = 7 [default = false];
 }
 
 message CMsgFinishedRequest {
@@ -282,6 +284,12 @@ message CMsgSetHTMLTitle {
 message CMsgLoadingResource {
 	optional uint32 browser_handle = 1;
 	optional string url = 2;
+}
+
+message CMsgResourceResponse {
+	optional uint32 browser_handle = 1;
+	optional string url = 2;
+	optional uint32 status = 3;
 }
 
 message CMsgStatusText {
@@ -433,5 +441,16 @@ message CMsgCanGoBackAndForward {
 message CMsgOpenSteamURL {
 	optional uint32 browser_handle = 1;
 	optional string url = 2;
+}
+
+message CMsgSetCookie {
+	optional string key = 1;
+	optional string value = 2;
+	optional string path = 3;
+	optional string host = 4;
+}
+
+message CMsgSetTargetFrameRate {
+	optional uint32 nTargetFrameRate = 1;
 }
 
