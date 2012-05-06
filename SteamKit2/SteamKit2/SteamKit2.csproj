@@ -71,11 +71,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Base\ClientMsg.cs" />
+    <Compile Include="Base\GC\CSGO\EMsg.cs" />
+    <Compile Include="Base\GC\EMsgBase.cs" />
     <Compile Include="Base\GC\MsgBaseGC.cs" />
     <Compile Include="Base\GC\ClientMsgGC.cs" />
     <Compile Include="Base\GC\PacketBaseGC.cs" />
+    <Compile Include="Base\GC\TF2\EMsg.cs" />
     <Compile Include="Base\Generated\ContentManifest.cs" />
     <Compile Include="Base\Generated\GC\CSGO\MsgGC.cs" />
+    <Compile Include="Base\GC\Dota\EMsg.cs" />
     <Compile Include="Base\Generated\GC\Dota\MatchmakerCommon.cs" />
     <Compile Include="Base\Generated\GC\Dota\MsgGC.cs" />
     <Compile Include="Base\Generated\GC\SteamMsgBase.cs" />
