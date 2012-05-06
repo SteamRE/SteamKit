@@ -75,22 +75,22 @@ namespace SteamKit2.GC
     }
 
     /// <summary>
-    /// This is the abstract base class for all available client messages.
-    /// It's used to maintain packet payloads and provide a header for all client messages.
+    /// This is the abstract base class for all available game coordinator messages.
+    /// It's used to maintain packet payloads and provide a header for all gc messages.
     /// </summary>
-    /// <typeparam name="HdrType">The header type for this client message.</typeparam>
+    /// <typeparam name="HdrType">The header type for this gc message.</typeparam>
     public abstract class GCMsgBase<HdrType> : MsgBase, IClientGCMsg
         where HdrType : IGCSerializableHeader, new()
     {
         /// <summary>
-        /// Gets a value indicating whether this client message is protobuf backed.
+        /// Gets a value indicating whether this gc message is protobuf backed.
         /// </summary>
         /// <value>
         /// 	<c>true</c> if this instance is protobuf backed; otherwise, <c>false</c>.
         /// </value>
         public abstract bool IsProto { get; }
         /// <summary>
-        /// Gets the network message type of this client message.
+        /// Gets the network message type of this gc message.
         /// </summary>
         /// <value>
         /// The network message type.
@@ -98,14 +98,14 @@ namespace SteamKit2.GC
         public abstract uint MsgType { get; }
 
         /// <summary>
-        /// Gets or sets the session id for this client message.
+        /// Gets or sets the session id for this gc message.
         /// </summary>
         /// <value>
         /// The session id.
         /// </value>
         public abstract int SessionID { get; set; }
         /// <summary>
-        /// Gets or sets the <see cref="SteamID"/> for this client message.
+        /// Gets or sets the <see cref="SteamID"/> for this gc message.
         /// </summary>
         /// <value>
         /// The <see cref="SteamID"/>.
@@ -113,14 +113,14 @@ namespace SteamKit2.GC
         public abstract SteamID SteamID { get; set; }
 
         /// <summary>
-        /// Gets or sets the target job id for this client message.
+        /// Gets or sets the target job id for this gc message.
         /// </summary>
         /// <value>
         /// The target job id.
         /// </value>
         public abstract ulong TargetJobID { get; set; }
         /// <summary>
-        /// Gets or sets the source job id for this client message.
+        /// Gets or sets the source job id for this gc message.
         /// </summary>
         /// <value>
         /// The source job id.
@@ -146,16 +146,16 @@ namespace SteamKit2.GC
 
 
         /// <summary>
-        /// Serializes this client message instance to a byte array.
+        /// Serializes this gc message instance to a byte array.
         /// </summary>
         /// <returns>
-        /// Data representing a client message.
+        /// Data representing a gc message.
         /// </returns>
         public abstract byte[] Serialize();
         /// <summary>
-        /// Initializes this client message by deserializing the specified data.
+        /// Initializes this gc message by deserializing the specified data.
         /// </summary>
-        /// <param name="data">The data representing a client message.</param>
+        /// <param name="data">The data representing a gc message.</param>
         public abstract void Deserialize( byte[] data );
 
     }

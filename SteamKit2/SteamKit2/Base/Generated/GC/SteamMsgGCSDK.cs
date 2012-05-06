@@ -9,7 +9,7 @@
 #pragma warning disable 1591
 
 // Generated from: gcsdk_gcmessages.proto
-namespace SteamKit2.Internal.GC
+namespace SteamKit2.GC.Internal
 {
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgSOSingleObject")]
   public partial class CMsgSOSingleObject : global::ProtoBuf.IExtensible

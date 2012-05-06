@@ -10,7 +10,7 @@
 
 // Generated from: tf_gcmessages.proto
 // Note: requires additional types generated from: steammessages.proto
-namespace SteamKit2.Internal.GC.TF2
+namespace SteamKit2.GC.TF2.Internal
 {
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgTFGoldenWrenchBroadcast")]
   public partial class CMsgTFGoldenWrenchBroadcast : global::ProtoBuf.IExtensible

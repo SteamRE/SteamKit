@@ -10,7 +10,7 @@
 
 // Generated from: cstrike15_gcmessages.proto
 // Note: requires additional types generated from: steammessages.proto
-namespace SteamKit2.Internal.GC.CSGO
+namespace SteamKit2.GC.CSGO.Internal
 {
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgCStrike15StartMatchmaking")]
   public partial class CMsgCStrike15StartMatchmaking : global::ProtoBuf.IExtensible

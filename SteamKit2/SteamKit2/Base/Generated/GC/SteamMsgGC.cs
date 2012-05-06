@@ -10,7 +10,7 @@
 
 // Generated from: base_gcmessages.proto
 // Note: requires additional types generated from: steammessages.proto
-namespace SteamKit2.Internal.GC
+namespace SteamKit2.GC.Internal
 {
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGCStorePurchaseInit_LineItem")]
   public partial class CGCStorePurchaseInit_LineItem : global::ProtoBuf.IExtensible
