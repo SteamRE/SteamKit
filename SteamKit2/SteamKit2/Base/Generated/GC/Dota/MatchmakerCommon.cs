@@ -9,7 +9,7 @@
 #pragma warning disable 1591
 
 // Generated from: matchmaker_common.proto
-namespace SteamKit2.Internal.GC.Dota
+namespace SteamKit2.GC.Dota.Internal
 {
     [global::ProtoBuf.ProtoContract(Name=@"MatchType")]
     public enum MatchType

@@ -378,19 +378,19 @@ namespace SteamKit2.Internal
 		// Static size: 4
 		public int HeaderLength { get; set; }
 		// Static size: 0
-		public SteamKit2.Internal.GC.CMsgProtoBufHeader Proto { get; set; }
+		public SteamKit2.GC.Internal.CMsgProtoBufHeader Proto { get; set; }
 
 		public MsgGCHdrProtoBuf()
 		{
 			Msg = 0;
 			HeaderLength = 0;
-			Proto = new SteamKit2.Internal.GC.CMsgProtoBufHeader();
+			Proto = new SteamKit2.GC.Internal.CMsgProtoBufHeader();
 		}
 
 		public void Serialize(Stream stream)
 		{
 			MemoryStream msProto = new MemoryStream();
-			ProtoBuf.Serializer.Serialize<SteamKit2.Internal.GC.CMsgProtoBufHeader>(msProto, Proto);
+			ProtoBuf.Serializer.Serialize<SteamKit2.GC.Internal.CMsgProtoBufHeader>(msProto, Proto);
 			HeaderLength = (int)msProto.Length;
 			BinaryWriter bw = new BinaryWriter( stream );
 
@@ -408,7 +408,7 @@ namespace SteamKit2.Internal
 			Msg = MsgUtil.GetGCMsg( (uint)br.ReadUInt32() );
 			HeaderLength = br.ReadInt32();
 			using( MemoryStream msProto = new MemoryStream( br.ReadBytes( HeaderLength ) ) )
-				Proto = ProtoBuf.Serializer.Deserialize<SteamKit2.Internal.GC.CMsgProtoBufHeader>( msProto );
+				Proto = ProtoBuf.Serializer.Deserialize<SteamKit2.GC.Internal.CMsgProtoBufHeader>( msProto );
 		}
 	}
 

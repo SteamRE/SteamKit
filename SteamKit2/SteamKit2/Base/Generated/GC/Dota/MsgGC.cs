@@ -11,7 +11,7 @@
 // Generated from: dota_gcmessages.proto
 // Note: requires additional types generated from: steammessages.proto
 // Note: requires additional types generated from: matchmaker_common.proto
-namespace SteamKit2.Internal.GC.Dota
+namespace SteamKit2.GC.Dota.Internal
 {
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CSODOTAGameAccountClient")]
   public partial class CSODOTAGameAccountClient : global::ProtoBuf.IExtensible

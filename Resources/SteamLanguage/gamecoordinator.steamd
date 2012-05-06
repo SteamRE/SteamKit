@@ -5,7 +5,7 @@ class MsgGCHdrProtoBuf
 	protomaskgc uint msg = 0;
 	int headerLength;
 
-	proto<headerLength> SteamKit2.Internal.GC.CMsgProtoBufHeader proto;
+	proto<headerLength> SteamKit2.GC.Internal.CMsgProtoBufHeader proto;
 };
 
 class MsgGCHdr
