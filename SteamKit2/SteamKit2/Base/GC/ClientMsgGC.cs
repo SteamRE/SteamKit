@@ -10,9 +10,11 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using ProtoBuf;
+using SteamKit2.Internal;
 using SteamKit2.GC.Internal;
 using MsgGCHdrProtoBuf = SteamKit2.Internal.MsgGCHdrProtoBuf;
 using MsgGCHdr = SteamKit2.Internal.MsgGCHdr;
+using CMsgProtoBufHeader = SteamKit2.GC.Internal.CMsgProtoBufHeader;
 
 namespace SteamKit2.GC
 {
@@ -38,29 +40,6 @@ namespace SteamKit2.GC
         /// The network message type.
         /// </value>
         public override uint MsgType { get { return Header.Msg; } }
-
-        /// <summary>
-        /// Gets or sets the session id for this gc message.
-        /// </summary>
-        /// <value>
-        /// The session id.
-        /// </value>
-        public override int SessionID
-        {
-            get { return ProtoHeader.client_session_id; }
-            set { ProtoHeader.client_session_id = value; }
-        }
-        /// <summary>
-        /// Gets or sets the <see cref="SteamID"/> for this gc message.
-        /// </summary>
-        /// <value>
-        /// The <see cref="SteamID"/>.
-        /// </value>
-        public override SteamID SteamID
-        {
-            get { return ProtoHeader.client_steam_id; }
-            set { ProtoHeader.client_steam_id = value; }
-        }
 
         /// <summary>
         /// Gets or sets the target job id for this gc message.
@@ -172,5 +151,6 @@ namespace SteamKit2.GC
                 Payload.Write( data, payloadOffset, payloadLen );
             }
         }
+    }
     }
 }

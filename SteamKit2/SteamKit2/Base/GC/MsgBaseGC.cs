@@ -33,21 +33,6 @@ namespace SteamKit2.GC
         uint MsgType { get; }
 
         /// <summary>
-        /// Gets or sets the session id for this client message.
-        /// </summary>
-        /// <value>
-        /// The session id.
-        /// </value>
-        int SessionID { get; set; }
-        /// <summary>
-        /// Gets or sets the <see cref="SteamID"/> for this client message.
-        /// </summary>
-        /// <value>
-        /// The <see cref="SteamID"/>.
-        /// </value>
-        SteamID SteamID { get; set; }
-
-        /// <summary>
         /// Gets or sets the target job id for this client message.
         /// </summary>
         /// <value>
@@ -96,21 +81,6 @@ namespace SteamKit2.GC
         /// The network message type.
         /// </value>
         public abstract uint MsgType { get; }
-
-        /// <summary>
-        /// Gets or sets the session id for this gc message.
-        /// </summary>
-        /// <value>
-        /// The session id.
-        /// </value>
-        public abstract int SessionID { get; set; }
-        /// <summary>
-        /// Gets or sets the <see cref="SteamID"/> for this gc message.
-        /// </summary>
-        /// <value>
-        /// The <see cref="SteamID"/>.
-        /// </value>
-        public abstract SteamID SteamID { get; set; }
 
         /// <summary>
         /// Gets or sets the target job id for this gc message.
