@@ -67,8 +67,8 @@ namespace SteamKit2.GC
         public const uint Delete = 1004;
         public const uint VerifyCacheSubscription = 1005;
         public const uint NameItem = 1006;
-        public const uint DecodeItem = 1007;
-        public const uint DecodeItemResponse = 1008;
+        public const uint UnlockCrate = 1007;
+        public const uint UnlockCrateResponse = 1008;
         public const uint PaintItem = 1009;
         public const uint PaintItemResponse = 1010;
         public const uint GoldenWrenchBroadcast = 1011;
@@ -111,8 +111,8 @@ namespace SteamKit2.GC
         public const uint RequestInventoryRefresh = 1050;
         public const uint RemoveCustomTexture = 1051;
         public const uint RemoveCustomTextureResponse = 1052;
-        public const uint RemoveMakersMark = 1053;
-        public const uint RemoveMakersMarkResponse = 1054;
+        public const uint RemoveItemMakersMark = 1053;
+        public const uint RemoveItemMakersMarkResponse = 1054;
         public const uint RemoveUniqueCraftIndex = 1055;
         public const uint RemoveUniqueCraftIndexResponse = 1056;
         public const uint SaxxyBroadcast = 1057;
@@ -120,7 +120,6 @@ namespace SteamKit2.GC
         public const uint AdjustItemEquippedState = 1059;
         public const uint RequestItemSchemaData = 1060;
         public const uint ApplyStrangePart = 1073;
-
 
         public const uint Trading_InitiateTradeRequest = 1501;
         public const uint Trading_InitiateTradeResponse = 1502;
@@ -138,6 +137,8 @@ namespace SteamKit2.GC
 
         public const uint ServerBrowser_FavoriteServer = 1601;
         public const uint ServerBrowser_BlacklistServer = 1602;
+
+        public const uint CheckItemPreviewStatus = 1701;
 
         public const uint Dev_NewItemRequest = 2001;
         public const uint Dev_NewItemReqeustResponse = 2002;

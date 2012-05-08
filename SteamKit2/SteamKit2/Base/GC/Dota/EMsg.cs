@@ -11,6 +11,16 @@ namespace SteamKit2.GC.Dota
     {
         public const uint JoinChatChannel = 7009;
         public const uint LeaveChatChannel = 7011;
+        public const uint ChatMessage = 7012;
+
+        public const uint RequestPersonaDetails = 7021;
+        public const uint PersonaDetails = 7022;
+
+        public const uint GetNews = 7024;
+        public const uint NewsResponse = 7025;
+
+        public const uint GetRecentMatches = 7027;
+        public const uint RecentMatchesResponse = 7028;
 
         public const uint FindSourceTVGames = 7031;
         public const uint SourceTVGamesResponse = 7032;
