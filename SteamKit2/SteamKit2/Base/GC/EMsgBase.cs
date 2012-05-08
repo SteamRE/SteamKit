@@ -119,6 +119,10 @@ namespace SteamKit2.GC
         public const uint BackpackSortFinished = 1058;
         public const uint AdjustItemEquippedState = 1059;
         public const uint RequestItemSchemaData = 1060;
+        public const uint ApplyConsumableEffects = 1069;
+        public const uint ConsumableExhausted = 1070;
+        public const uint ShowItemsPickedUp = 1071;
+        
         public const uint ApplyStrangePart = 1073;
 
         public const uint Trading_InitiateTradeRequest = 1501;
@@ -159,12 +163,17 @@ namespace SteamKit2.GC
         public const uint SystemMessage = 4001;
         public const uint ReplicateConVars = 4002;
         public const uint ConVarUpdated = 4003;
+        public const uint ClientWelcome = 4004;
         public const uint ClientHello = 4006;
+        public const uint InQueue = 4008;
 
         public const uint InviteToParty = 4501;
+        public const uint InvitationCreated = 4502;
         public const uint PartyInviteResponse = 4503;
         public const uint KickFromParty = 4504;
         public const uint LeaveParty = 4505;
+
+        public const uint GCError = 4509;
     }
 }
 
