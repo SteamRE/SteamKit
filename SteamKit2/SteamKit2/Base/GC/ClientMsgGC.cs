@@ -77,7 +77,7 @@ namespace SteamKit2.GC
 
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ClientMsgProtobuf&lt;BodyType&gt;"/> class.
+        /// Initializes a new instance of the <see cref="ClientGCMsgProtobuf&lt;BodyType&gt;"/> class.
         /// This is a client send constructor.
         /// </summary>
         /// <param name="eMsg">The network message type this gc message represents.</param>
@@ -92,7 +92,7 @@ namespace SteamKit2.GC
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ClientMsgProtobuf&lt;BodyType&gt;"/> class.
+        /// Initializes a new instance of the <see cref="ClientGCMsgProtobuf&lt;BodyType&gt;"/> class.
         /// This a reply constructor.
         /// </summary>
         /// <param name="eMsg">The network message type this gc message represents.</param>
@@ -106,7 +106,7 @@ namespace SteamKit2.GC
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ClientMsgProtobuf&lt;BodyType&gt;"/> class.
+        /// Initializes a new instance of the <see cref="ClientGCMsgProtobuf&lt;BodyType&gt;"/> class.
         /// This is a recieve constructor.
         /// </summary>
         /// <param name="msg">The packet message to build this gc message from.</param>
@@ -154,14 +154,14 @@ namespace SteamKit2.GC
     }
 
     /// <summary>
-    /// Represents a struct backed client message.
+    /// Represents a struct backed game coordinator message.
     /// </summary>
     /// <typeparam name="BodyType">The body type of this message.</typeparam>
     public sealed class ClientGCMsg<BodyType> : GCMsgBase<MsgGCHdr>
         where BodyType : IGCSerializableMessage, new()
     {
         /// <summary>
-        /// Gets a value indicating whether this client message is protobuf backed.
+        /// Gets a value indicating whether this gc message is protobuf backed.
         /// </summary>
         /// <value>
         /// 	<c>true</c> if this instance is protobuf backed; otherwise, <c>false</c>.
@@ -170,7 +170,7 @@ namespace SteamKit2.GC
 
         uint msgType;
         /// <summary>
-        /// Gets the network message type of this client message.
+        /// Gets the network message type of this gc message.
         /// </summary>
         /// <value>
         /// The network message type.
@@ -178,7 +178,7 @@ namespace SteamKit2.GC
         public override uint MsgType { get { return msgType; } }
 
         /// <summary>
-        /// Gets or sets the target job id for this client message.
+        /// Gets or sets the target job id for this gc message.
         /// </summary>
         /// <value>
         /// The target job id.
@@ -189,7 +189,7 @@ namespace SteamKit2.GC
             set { Header.TargetJobID = value; }
         }
         /// <summary>
-        /// Gets or sets the source job id for this client message.
+        /// Gets or sets the source job id for this gc message.
         /// </summary>
         /// <value>
         /// The source job id.
@@ -208,7 +208,7 @@ namespace SteamKit2.GC
 
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ClientMsg&lt;BodyType&gt;"/> class.
+        /// Initializes a new instance of the <see cref="ClientGCMsg&lt;BodyType&gt;"/> class.
         /// This is a client send constructor.
         /// </summary>
         /// <param name="payloadReserve">The number of bytes to initialize the payload capacity to.</param>
@@ -222,7 +222,7 @@ namespace SteamKit2.GC
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ClientMsg&lt;BodyType&gt;"/> class.
+        /// Initializes a new instance of the <see cref="ClientGCMsg&lt;BodyType&gt;"/> class.
         /// This a reply constructor.
         /// </summary>
         /// <param name="msg">The message that this instance is a reply for.</param>
@@ -235,10 +235,10 @@ namespace SteamKit2.GC
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ClientMsg&lt;BodyType&gt;"/> class.
+        /// Initializes a new instance of the <see cref="ClientGCMsg&lt;BodyType&gt;"/> class.
         /// This is a recieve constructor.
         /// </summary>
-        /// <param name="msg">The packet message to build this client message from.</param>
+        /// <param name="msg">The packet message to build this gc message from.</param>
         public ClientGCMsg( IPacketMsg msg )
             : this()
         {
@@ -246,7 +246,7 @@ namespace SteamKit2.GC
         }
 
         /// <summary>
-        /// Serializes this client message instance to a byte array.
+        /// Serializes this gc message instance to a byte array.
         /// </summary>
         /// <returns>
         /// Data representing a client message.
@@ -263,7 +263,7 @@ namespace SteamKit2.GC
             }
         }
         /// <summary>
-        /// Initializes this client message by deserializing the specified data.
+        /// Initializes this gc message by deserializing the specified data.
         /// </summary>
         /// <param name="data">The data representing a client message.</param>
         public override void Deserialize( byte[] data )
