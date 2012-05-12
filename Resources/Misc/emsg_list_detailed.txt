@@ -1,4 +1,4 @@
-	k_EMsgRemoteSysID = 128, // flags: 3, server type: -1
+	k_EMsgHubConnect = 124, // flags: 3, server type: -1
 	k_EMsgServiceMethod = 146, // flags: 0, server type: -1
 	k_EMsgServiceMethodResponse = 147, // flags: 0, server type: -1
 	k_EMsgClientChatAction = 597, // flags: 2, server type: -1
@@ -105,7 +105,7 @@
 	k_EMsgClientNatTraversalStatEvent = 839, // flags: 2, server type: -1
 	k_EMsgClientAppInfoRequest = 840, // flags: 2, server type: -1
 	k_EMsgClientAppInfoResponse = 841, // flags: 2, server type: -1
-	k_EMsgClientSteamUsageEvent = 842, // flags: 2, server type: -1
+	k_EMsgClientSteamUsageEvent = 842, // flags: 6, server type: 17
 	k_EMsgClientCheckPassword = 845, // flags: 2, server type: -1
 	k_EMsgClientResetPassword = 846, // flags: 2, server type: -1
 	k_EMsgClientCheckPasswordResponse = 848, // flags: 2, server type: -1
@@ -154,6 +154,7 @@
 	k_EMsgClientDPCheckSpecialSurveyResponse = 1621, // flags: 6, server type: 17
 	k_EMsgClientDPSendSpecialSurveyResponse = 1622, // flags: 6, server type: 17
 	k_EMsgClientDPSendSpecialSurveyResponseReply = 1623, // flags: 6, server type: 17
+	k_EMsgClientDPUpdateAppJobReport = 1625, // flags: 6, server type: 17
 	k_EMsgClientChatRoomInfo = 4026, // flags: 2, server type: -1
 	k_EMsgAMGameServerUpdate = 4331, // flags: 2, server type: -1
 	k_EMsgAMGameServerRemove = 4332, // flags: 2, server type: -1
@@ -332,6 +333,14 @@
 	k_EMsgClientChangeSteamGuardOptions = 5579, // flags: 2, server type: -1
 	k_EMsgClientChangeSteamGuardOptionsResponse = 5580, // flags: 2, server type: -1
 	k_EMsgClientOGSGameServerPingSample = 5581, // flags: 6, server type: 39
+	k_EMsgClientCommentNotifications = 5582, // flags: 6, server type: 47
+	k_EMsgClientRequestCommentNotifications = 5583, // flags: 6, server type: 47
+	k_EMsgClientPersonaChangeResponse = 5584, // flags: 2, server type: -1
+	k_EMsgClientPlayerNicknameList = 5587, // flags: 2, server type: -1
+	k_EMsgAMClientSetPlayerNickname = 5588, // flags: 2, server type: -1
+	k_EMsgAMClientSetPlayerNicknameResponse = 5589, // flags: 2, server type: -1
+	k_EMsgClientRequestOAuthTokenForApp = 5590, // flags: 6, server type: 40
+	k_EMsgClientRequestOAuthTokenForAppResponse = 5591, // flags: 6, server type: 40
 	k_EMsgClientDFSAuthenticateRequest = 5605, // flags: 2, server type: -1
 	k_EMsgClientDFSAuthenticateResponse = 5606, // flags: 2, server type: -1
 	k_EMsgClientDFSEndSession = 5607, // flags: 2, server type: -1
@@ -387,6 +396,8 @@
 	k_EMsgNonStdMsgDFSTransfer = 6807, // flags: 0, server type: -1
 	k_EMsgNonStdMsgTests = 6808, // flags: 0, server type: -1
 	k_EMsgNonStdMsgUMQpipeAAPL = 6809, // flags: 0, server type: -1
+	k_EMSgNonStdMsgSyslog = 6810, // flags: 0, server type: -1
+	k_EMsgNonStdMsgLogsink = 6811, // flags: 0, server type: -1
 	k_EMsgClientUDSP2PSessionStarted = 7001, // flags: 6, server type: 41
 	k_EMsgClientUDSP2PSessionEnded = 7002, // flags: 6, server type: 41
 	k_EMsgClientUDSInviteToGame = 7005, // flags: 6, server type: 41
@@ -445,3 +456,5 @@
 	k_EMsgCREUpdateUserPublishedItemVoteResponse = 8508, // flags: 6, server type: 53
 	k_EMsgCREGetUserPublishedItemVoteDetails = 8509, // flags: 6, server type: 53
 	k_EMsgCREGetUserPublishedItemVoteDetailsResponse = 8510, // flags: 6, server type: 53
+	k_EMsgCREEnumeratePublishedFiles = 8511, // flags: 6, server type: 53
+	k_EMsgCREEnumeratePublishedFilesResponse = 8512, // flags: 6, server type: 53

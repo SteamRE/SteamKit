@@ -10,6 +10,7 @@ enum EMsg
 	SCIDRequest = 120;
 	SCIDResponse = 121;
 	JobHeartbeat = 123;
+	HubConnect = 124;
 	Subscribe = 126;
 	RouteMessage = 127;
 	RemoteSysID = 128;
@@ -1093,6 +1094,14 @@ enum EMsg
 	ClientChangeSteamGuardOptions = 5579;
 	ClientChangeSteamGuardOptionsResponse = 5580;
 	ClientOGSGameServerPingSample = 5581;
+	ClientCommentNotifications = 5582;
+	ClientRequestCommentNotifications = 5583;
+	ClientPersonaChangeResponse = 5584;
+	ClientPlayerNicknameList = 5587;
+	AMClientSetPlayerNickname = 5588;
+	AMClientSetPlayerNicknameResponse = 5589;
+	ClientRequestOAuthTokenForApp = 5590;
+	ClientRequestOAuthTokenForAppResponse = 5591;
 	
 	BaseDFS = 5600;
 	DFSGetFile = 5601;
@@ -1197,6 +1206,8 @@ enum EMsg
 	NonStdMsgDFSTransfer = 6807;
 	NonStdMsgTests = 6808;
 	NonStdMsgUMQpipeAAPL = 6809;
+	NonStdMsgSyslog = 6810;
+	NonStdMsgLogsink = 6811;
 	
 	UDSBase = 7000;
 	ClientUDSP2PSessionStarted = 7001;
@@ -1295,4 +1306,6 @@ enum EMsg
 	CREUpdateUserPublishedItemVoteResponse = 8508;
 	CREGetUserPublishedItemVoteDetails = 8509;
 	CREGetUserPublishedItemVoteDetailsResponse = 8510;
+	CREEnumeratePublishedFiles = 8511;
+	CREEnumeratePublishedFilesResponse = 8512;
 };
