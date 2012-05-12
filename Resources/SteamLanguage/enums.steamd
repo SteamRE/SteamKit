@@ -56,11 +56,14 @@ enum EFriendRelationship
 	None = 0;
 	
 	Blocked = 1;
+	PendingInvitee = 2;
 	RequestRecipient = 2;
-	Friend = 3;
 	RequestInitiator = 4;
+	PendingInviter = 4;
+	Friend = 3;
 	Ignored = 5;
 	IgnoredFriend = 6;
+	SuggestedFriend = 7;
 };
 
 enum EAccountFlags
@@ -253,6 +256,11 @@ enum EChatRoomEnterResponse
 	Limited = 7;
 	ClanDisabled = 8;
 	CommunityBan = 9;
+	MemberBlockedYou = 10;
+	YouBlockedMember = 11;
+	NoRankingDataLobby = 12;
+	NoRankingDataUser = 13;
+	RankOutOfRange = 14;
 };
 
 enum EChatRoomType
@@ -307,8 +315,8 @@ enum EAppInfoSection
 {
 	Unknown = 0;
 	All = 1;
-	Common = 2;
 	First = 2;
+	Common = 2;
 	Extended = 3;
 	Config = 4;
 	Stats = 5;
@@ -321,6 +329,7 @@ enum EAppInfoSection
 	ItemsUNUSED = 12;
 	Policies = 13;
 	SysReqs = 14;
+	Community = 15;
 };
 
 enum EContentDownloadSourceType
@@ -493,7 +502,8 @@ enum ECurrencyCode
 	EUR = 3;
 	CHF = 4;
 	RUB = 5;
-	Max = 6;
+	PLN = 6;
+	BRL = 7;
 };
 
 enum EDepotFileFlag
@@ -505,4 +515,15 @@ enum EDepotFileFlag
 	Hidden = 16;
 	Executable = 32;
 	Directory = 64;
+};
+
+enum EWorkshopEnumerationType
+{
+	RankedByVote = 0;
+	Recent = 1;
+	Trending = 2;
+	FavoriteOfFriends = 3;
+	VotedByFriends = 4;
+	ContentByFriends = 5;
+	RecentFromFollowedUsers = 6;
 };

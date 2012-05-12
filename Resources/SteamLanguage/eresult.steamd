@@ -73,4 +73,6 @@ enum EResult
 	FacebookQueryError = 70;
 	ExpiredLoginAuthCode = 71;
 	IPLoginRestrictionFailed = 72;
+	AccountLocked = 73;
+	AccountLogonDeniedVerifiedEmailRequired = 74;
 };
