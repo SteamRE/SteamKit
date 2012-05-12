@@ -105,7 +105,7 @@ namespace SteamKit2.GC
 
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MsgBase&lt;HdrType&gt;"/> class.
+        /// Initializes a new instance of the <see cref="GCMsgBase&lt;HdrType&gt;"/> class.
         /// </summary>
         /// <param name="payloadReserve">The number of bytes to initialize the payload capacity to.</param>
         public GCMsgBase( int payloadReserve = 0 )

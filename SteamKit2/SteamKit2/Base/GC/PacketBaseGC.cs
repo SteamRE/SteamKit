@@ -14,8 +14,8 @@ using SteamKit2.Internal;
 namespace SteamKit2.GC
 {
     /// <summary>
-    /// Represents a simple unified interface into client messages recieved from the network.
-    /// This is contrasted with <see cref="IClientMsg"/> in that this interface is packet body agnostic
+    /// Represents a simple unified interface into game coordinator messages recieved from the network.
+    /// This is contrasted with <see cref="IClientGCMsg"/> in that this interface is packet body agnostic
     /// and only allows simple access into the header. This interface is also immutable, and the underlying
     /// data cannot be modified.
     /// </summary>
@@ -100,7 +100,7 @@ namespace SteamKit2.GC
 
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PacketClientMsgProtobuf"/> class.
+        /// Initializes a new instance of the <see cref="PacketClientGCMsgProtobuf"/> class.
         /// </summary>
         /// <param name="eMsg">The network message type for this packet message.</param>
         /// <param name="data">The data.</param>
@@ -172,7 +172,7 @@ namespace SteamKit2.GC
 
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PacketClientMsg"/> class.
+        /// Initializes a new instance of the <see cref="PacketClientGCMsg"/> class.
         /// </summary>
         /// <param name="eMsg">The network message type for this packet message.</param>
         /// <param name="data">The data.</param>
@@ -195,7 +195,7 @@ namespace SteamKit2.GC
 
 
         /// <summary>
-        /// Gets the underlying data that represents this client message.
+        /// Gets the underlying data that represents this packet message.
         /// </summary>
         /// <returns>The data.</returns>
         public byte[] GetData()
