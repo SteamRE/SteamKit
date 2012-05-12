@@ -1343,6 +1343,8 @@ namespace SteamKit2
 		FacebookQueryError = 70,
 		ExpiredLoginAuthCode = 71,
 		IPLoginRestrictionFailed = 72,
+		AccountLocked = 73,
+		AccountLogonDeniedVerifiedEmailRequired = 74,
 	}
 	public enum EUniverse
 	{
@@ -1391,11 +1393,14 @@ namespace SteamKit2
 	{
 		None = 0,
 		Blocked = 1,
+		PendingInvitee = 2,
 		RequestRecipient = 2,
-		Friend = 3,
 		RequestInitiator = 4,
+		PendingInviter = 4,
+		Friend = 3,
 		Ignored = 5,
 		IgnoredFriend = 6,
+		SuggestedFriend = 7,
 	}
 	[Flags]
 	public enum EAccountFlags
@@ -1578,6 +1583,11 @@ namespace SteamKit2
 		Limited = 7,
 		ClanDisabled = 8,
 		CommunityBan = 9,
+		MemberBlockedYou = 10,
+		YouBlockedMember = 11,
+		NoRankingDataLobby = 12,
+		NoRankingDataUser = 13,
+		RankOutOfRange = 14,
 	}
 	public enum EChatRoomType
 	{
@@ -1627,8 +1637,8 @@ namespace SteamKit2
 	{
 		Unknown = 0,
 		All = 1,
-		Common = 2,
 		First = 2,
+		Common = 2,
 		Extended = 3,
 		Config = 4,
 		Stats = 5,
@@ -1641,6 +1651,7 @@ namespace SteamKit2
 		ItemsUNUSED = 12,
 		Policies = 13,
 		SysReqs = 14,
+		Community = 15,
 	}
 	public enum EContentDownloadSourceType
 	{
@@ -1797,7 +1808,8 @@ namespace SteamKit2
 		EUR = 3,
 		CHF = 4,
 		RUB = 5,
-		Max = 6,
+		PLN = 6,
+		BRL = 7,
 	}
 	[Flags]
 	public enum EDepotFileFlag
@@ -1809,6 +1821,16 @@ namespace SteamKit2
 		Hidden = 16,
 		Executable = 32,
 		Directory = 64,
+	}
+	public enum EWorkshopEnumerationType
+	{
+		RankedByVote = 0,
+		Recent = 1,
+		Trending = 2,
+		FavoriteOfFriends = 3,
+		VotedByFriends = 4,
+		ContentByFriends = 5,
+		RecentFromFollowedUsers = 6,
 	}
 	public enum EUdpPacketType : byte
 	{
