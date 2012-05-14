@@ -1855,9 +1855,5 @@ namespace SteamKit2
 		Datagram = 7,
 		Max = 8,
 	}
-	public enum EGCMsg
-	{
-		Invalid = 0,
-	}
 }
 #pragma warning restore 1591

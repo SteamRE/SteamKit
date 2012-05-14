@@ -10,7 +10,7 @@
 
 // Generated from: steammessages.proto
 // Note: requires additional types generated from: google/protobuf/descriptor.proto
-namespace SteamKit2.Internal.GC
+namespace SteamKit2.GC.Internal
 {
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgProtoBufHeader")]
   public partial class CMsgProtoBufHeader : global::ProtoBuf.IExtensible
@@ -1241,6 +1241,224 @@ namespace SteamKit2.Internal.GC
     {
       get { return _logon_jobs; }
       set { _logon_jobs = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgAMSendEmail")]
+  public partial class CMsgAMSendEmail : global::ProtoBuf.IExtensible
+  {
+    public CMsgAMSendEmail() {}
+    
+
+    private ulong _steamid = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    public ulong steamid
+    {
+      get { return _steamid; }
+      set { _steamid = value; }
+    }
+
+    private uint _email_msg_type = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"email_msg_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    public uint email_msg_type
+    {
+      get { return _email_msg_type; }
+      set { _email_msg_type = value; }
+    }
+
+    private uint _email_format = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"email_format", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    public uint email_format
+    {
+      get { return _email_format; }
+      set { _email_format = value; }
+    }
+    private readonly global::System.Collections.Generic.List<CMsgAMSendEmail.PersonaNameReplacementToken> _persona_name_tokens = new global::System.Collections.Generic.List<CMsgAMSendEmail.PersonaNameReplacementToken>();
+    [global::ProtoBuf.ProtoMember(5, Name=@"persona_name_tokens", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CMsgAMSendEmail.PersonaNameReplacementToken> persona_name_tokens
+    {
+      get { return _persona_name_tokens; }
+    }
+  
+
+    private uint _source_gc = default(uint);
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"source_gc", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    public uint source_gc
+    {
+      get { return _source_gc; }
+      set { _source_gc = value; }
+    }
+    private readonly global::System.Collections.Generic.List<CMsgAMSendEmail.ReplacementToken> _tokens = new global::System.Collections.Generic.List<CMsgAMSendEmail.ReplacementToken>();
+    [global::ProtoBuf.ProtoMember(7, Name=@"tokens", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CMsgAMSendEmail.ReplacementToken> tokens
+    {
+      get { return _tokens; }
+    }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ReplacementToken")]
+  public partial class ReplacementToken : global::ProtoBuf.IExtensible
+  {
+    public ReplacementToken() {}
+    
+
+    private string _token_name = "";
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"token_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoDefaultValue("")]
+    public string token_name
+    {
+      get { return _token_name; }
+      set { _token_name = value; }
+    }
+
+    private string _token_value = "";
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"token_value", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoDefaultValue("")]
+    public string token_value
+    {
+      get { return _token_value; }
+      set { _token_value = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"PersonaNameReplacementToken")]
+  public partial class PersonaNameReplacementToken : global::ProtoBuf.IExtensible
+  {
+    public PersonaNameReplacementToken() {}
+    
+
+    private ulong _steamid = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    public ulong steamid
+    {
+      get { return _steamid; }
+      set { _steamid = value; }
+    }
+
+    private string _token_name = "";
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"token_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoDefaultValue("")]
+    public string token_name
+    {
+      get { return _token_name; }
+      set { _token_name = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgAMSendEmailResponse")]
+  public partial class CMsgAMSendEmailResponse : global::ProtoBuf.IExtensible
+  {
+    public CMsgAMSendEmailResponse() {}
+    
+
+    private uint _eresult = (uint)2;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"eresult", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoDefaultValue((uint)2)]
+    public uint eresult
+    {
+      get { return _eresult; }
+      set { _eresult = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCGetEmailTemplate")]
+  public partial class CMsgGCGetEmailTemplate : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCGetEmailTemplate() {}
+    
+
+    private uint _app_id = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"app_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    public uint app_id
+    {
+      get { return _app_id; }
+      set { _app_id = value; }
+    }
+
+    private uint _email_msg_type = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"email_msg_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    public uint email_msg_type
+    {
+      get { return _email_msg_type; }
+      set { _email_msg_type = value; }
+    }
+
+    private int _email_lang = default(int);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"email_lang", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
+    public int email_lang
+    {
+      get { return _email_lang; }
+      set { _email_lang = value; }
+    }
+
+    private int _email_format = default(int);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"email_format", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoDefaultValue(default(int))]
+    public int email_format
+    {
+      get { return _email_format; }
+      set { _email_format = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCGetEmailTemplateResponse")]
+  public partial class CMsgGCGetEmailTemplateResponse : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCGetEmailTemplateResponse() {}
+    
+
+    private uint _eresult = (uint)2;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"eresult", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoDefaultValue((uint)2)]
+    public uint eresult
+    {
+      get { return _eresult; }
+      set { _eresult = value; }
+    }
+
+    private bool _template_exists = default(bool);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"template_exists", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    public bool template_exists
+    {
+      get { return _template_exists; }
+      set { _template_exists = value; }
+    }
+
+    private string _template = "";
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"template", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoDefaultValue("")]
+    public string template
+    {
+      get { return _template; }
+      set { _template = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

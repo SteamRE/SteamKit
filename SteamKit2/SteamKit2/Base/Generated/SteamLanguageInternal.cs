@@ -20,11 +20,11 @@ namespace SteamKit2.Internal
 	}
 	public interface IGCSerializableHeader : ISteamSerializable
 	{
-		void SetEMsg( EGCMsg msg );
+		void SetEMsg( uint msg );
 	}
 	public interface IGCSerializableMessage : ISteamSerializable
 	{
-		EGCMsg GetEMsg();
+		uint GetEMsg();
 	}
 
 	public class UdpHeader : ISteamSerializable
@@ -371,64 +371,64 @@ namespace SteamKit2.Internal
 	[StructLayout( LayoutKind.Sequential )]
 	public class MsgGCHdrProtoBuf : IGCSerializableHeader
 	{
-		public void SetEMsg( EGCMsg msg ) { this.Msg = msg; }
+		public void SetEMsg( uint msg ) { this.Msg = msg; }
 
 		// Static size: 4
-		public EGCMsg Msg { get; set; }
+		public uint Msg { get; set; }
 		// Static size: 4
 		public int HeaderLength { get; set; }
 		// Static size: 0
-		public SteamKit2.Internal.GC.CMsgProtoBufHeader ProtoHeader { get; set; }
+		public SteamKit2.GC.Internal.CMsgProtoBufHeader Proto { get; set; }
 
 		public MsgGCHdrProtoBuf()
 		{
-			Msg = EGCMsg.Invalid;
+			Msg = 0;
 			HeaderLength = 0;
-			ProtoHeader = new SteamKit2.Internal.GC.CMsgProtoBufHeader();
+			Proto = new SteamKit2.GC.Internal.CMsgProtoBufHeader();
 		}
 
 		public void Serialize(Stream stream)
 		{
-			MemoryStream msProtoHeader = new MemoryStream();
-			ProtoBuf.Serializer.Serialize<SteamKit2.Internal.GC.CMsgProtoBufHeader>(msProtoHeader, ProtoHeader);
-			HeaderLength = (int)msProtoHeader.Length;
+			MemoryStream msProto = new MemoryStream();
+			ProtoBuf.Serializer.Serialize<SteamKit2.GC.Internal.CMsgProtoBufHeader>(msProto, Proto);
+			HeaderLength = (int)msProto.Length;
 			BinaryWriter bw = new BinaryWriter( stream );
 
-			bw.Write( (int)MsgUtil.MakeGCMsg( Msg, true ) );
+			bw.Write( MsgUtil.MakeGCMsg( Msg, true ) );
 			bw.Write( HeaderLength );
-			bw.Write( msProtoHeader.ToArray() );
+			bw.Write( msProto.ToArray() );
 
-			msProtoHeader.Close();
+			msProto.Close();
 		}
 
 		public void Deserialize( Stream stream )
 		{
 			BinaryReader br = new BinaryReader( stream );
 
-			Msg = (EGCMsg)MsgUtil.GetGCMsg( (uint)br.ReadInt32() );
+			Msg = MsgUtil.GetGCMsg( (uint)br.ReadUInt32() );
 			HeaderLength = br.ReadInt32();
-			using( MemoryStream msProtoHeader = new MemoryStream( br.ReadBytes( HeaderLength ) ) )
-				ProtoHeader = ProtoBuf.Serializer.Deserialize<SteamKit2.Internal.GC.CMsgProtoBufHeader>( msProtoHeader );
+			using( MemoryStream msProto = new MemoryStream( br.ReadBytes( HeaderLength ) ) )
+				Proto = ProtoBuf.Serializer.Deserialize<SteamKit2.GC.Internal.CMsgProtoBufHeader>( msProto );
 		}
 	}
 
 	[StructLayout( LayoutKind.Sequential )]
 	public class MsgGCHdr : IGCSerializableHeader
 	{
-		public void SetEMsg( EGCMsg msg ) { }
+		public void SetEMsg( uint msg ) { }
 
 		// Static size: 2
 		public ushort HeaderVersion { get; set; }
 		// Static size: 8
-		public long TargetJobID { get; set; }
+		public ulong TargetJobID { get; set; }
 		// Static size: 8
-		public long SourceJobID { get; set; }
+		public ulong SourceJobID { get; set; }
 
 		public MsgGCHdr()
 		{
 			HeaderVersion = 1;
-			TargetJobID = -1;
-			SourceJobID = -1;
+			TargetJobID = ulong.MaxValue;
+			SourceJobID = ulong.MaxValue;
 		}
 
 		public void Serialize(Stream stream)
@@ -446,8 +446,8 @@ namespace SteamKit2.Internal
 			BinaryReader br = new BinaryReader( stream );
 
 			HeaderVersion = br.ReadUInt16();
-			TargetJobID = br.ReadInt64();
-			SourceJobID = br.ReadInt64();
+			TargetJobID = br.ReadUInt64();
+			SourceJobID = br.ReadUInt64();
 		}
 	}
 
