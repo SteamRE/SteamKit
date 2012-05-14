@@ -63,6 +63,7 @@ namespace SteamKit2
             this.AddHandler( new SteamUserStats() );
             this.AddHandler( new SteamMasterServer() );
             this.AddHandler( new SteamCloud() );
+            this.AddHandler( new SteamWorkshop() );
         }
 
 
