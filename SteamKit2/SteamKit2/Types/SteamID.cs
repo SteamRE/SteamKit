@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Diagnostics;
 
 namespace SteamKit2
 {
@@ -46,6 +47,7 @@ namespace SteamKit2
     /// <summary>
     /// This 64bit structure is used for identifying various objects on the Steam network.
     /// </summary>
+    [DebuggerDisplay( "{Render()}, {ConvertToUInt64()}" )]
     public class SteamID
     {
         BitVector64 steamid;
