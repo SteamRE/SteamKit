@@ -71,10 +71,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Base\ClientMsg.cs" />
+    <Compile Include="Base\GC\CSGO\EMsg.cs" />
+    <Compile Include="Base\GC\EMsgBase.cs" />
+    <Compile Include="Base\GC\MsgBaseGC.cs" />
+    <Compile Include="Base\GC\ClientMsgGC.cs" />
+    <Compile Include="Base\GC\PacketBaseGC.cs" />
+    <Compile Include="Base\GC\TF2\EMsg.cs" />
     <Compile Include="Base\Generated\ContentManifest.cs" />
+    <Compile Include="Base\Generated\GC\CSGO\MsgGC.cs" />
+    <Compile Include="Base\GC\Dota\EMsg.cs" />
+    <Compile Include="Base\Generated\GC\Dota\MatchmakerCommon.cs" />
+    <Compile Include="Base\Generated\GC\Dota\MsgGC.cs" />
     <Compile Include="Base\Generated\GC\SteamMsgBase.cs" />
     <Compile Include="Base\Generated\GC\SteamMsgGC.cs" />
     <Compile Include="Base\Generated\GC\SteamMsgGCSDK.cs" />
+    <Compile Include="Base\Generated\GC\TF2\MsgGC.cs" />
     <Compile Include="Base\Generated\IClientObjects.cs" />
     <Compile Include="Base\Generated\SteamLanguageInternal.cs" />
     <Compile Include="Base\MsgBase.cs" />
@@ -192,6 +203,7 @@
       <Name>protobuf-net</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

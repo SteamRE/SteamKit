@@ -90,7 +90,7 @@ namespace SteamKit2
             if ( mgr != null )
                 mgr.Unregister( this );
 
-            GC.SuppressFinalize( this );
+            System.GC.SuppressFinalize( this );
         }
 
 

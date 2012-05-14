@@ -62,12 +62,12 @@ namespace SteamLanguageParser
             {
                 sb.AppendLine( padding + "public interface IGCSerializableHeader : ISteamSerializable" );
                 sb.AppendLine( padding + "{" );
-                sb.AppendLine( padding + "\tvoid SetEMsg( EGCMsg msg );" );
+                sb.AppendLine( padding + "\tvoid SetEMsg( uint msg );" );
                 sb.AppendLine( padding + "}" );
 
                 sb.AppendLine( padding + "public interface IGCSerializableMessage : ISteamSerializable" );
                 sb.AppendLine( padding + "{" );
-                sb.AppendLine( padding + "\tEGCMsg GetEMsg();" );
+                sb.AppendLine( padding + "\tuint GetEMsg();" );
                 sb.AppendLine( padding + "}" );
             }
 
@@ -209,7 +209,7 @@ namespace SteamLanguageParser
             {
                 if ( cnode.Name.Contains( "MsgGC" ) )
                 {
-                    sb.AppendLine( padding + "public EGCMsg GetEMsg() { return " + EmitType( cnode.Ident ) + "; }" );
+                    sb.AppendLine( padding + "public uint GetEMsg() { return " + EmitType( cnode.Ident ) + "; }" );
                     sb.AppendLine();
                 }
                 else
@@ -224,13 +224,13 @@ namespace SteamLanguageParser
                 {
                     if ( cnode.childNodes.Find( node => node.Name == "msg" ) != null )
                     {
-                        sb.AppendLine( padding + "public void SetEMsg( EGCMsg msg ) { this.Msg = msg; }" );
+                        sb.AppendLine( padding + "public void SetEMsg( uint msg ) { this.Msg = msg; }" );
                         sb.AppendLine();
                     }
                     else
                     {
                         // this is required for a gc header which doesn't have an emsg
-                        sb.AppendLine( padding + "public void SetEMsg( EGCMsg msg ) { }" );
+                        sb.AppendLine( padding + "public void SetEMsg( uint msg ) { }" );
                         sb.AppendLine();
                     }
                 }
@@ -457,10 +457,11 @@ namespace SteamLanguageParser
 
                 if (prop.Flags == "protomask")
                 {
-                    if ( prop.Default is StrongSymbol && ( prop.Default as StrongSymbol ).Class.Name == "EGCMsg" )
-                        propName = "MsgUtil.MakeGCMsg( " + propName + ", true )";
-                    else
-                        propName = "MsgUtil.MakeMsg( " + propName + ", true )";
+                    propName = "MsgUtil.MakeMsg( " + propName + ", true )";
+                }
+                else if ( prop.Flags == "protomaskgc" )
+                {
+                    propName = "MsgUtil.MakeGCMsg( " + propName + ", true )";
                 }
 
                 sb.AppendLine(padding + "\tbw.Write( " + typecast + propName + " );");
@@ -555,10 +556,11 @@ namespace SteamLanguageParser
 
                     if (prop.Flags == "protomask")
                     {
-                        if ( prop.Default is StrongSymbol && ( prop.Default as StrongSymbol ).Class.Name == "EGCMsg" )
-                            call = "MsgUtil.GetGCMsg( (uint)" + call + " )";
-                        else
-                            call = "MsgUtil.GetMsg( (uint)" + call + " )";
+                        call = "MsgUtil.GetMsg( (uint)" + call + " )";
+                    }
+                    else if ( prop.Flags == "protomaskgc" )
+                    {
+                        call = "MsgUtil.GetGCMsg( (uint)" + call + " )";
                     }
 
                     sb.AppendLine(padding + "\t" + symname + " = " + typecast + call + ";");
