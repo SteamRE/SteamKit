@@ -231,7 +231,7 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// This callback is received in response to calling <see cref="EnumerateUserPublishedFiles"/>
+        /// This callback is received in response to calling <see cref="EnumerateUserPublishedFiles"/>.
         /// </summary>
         public sealed class UserPublishedFilesCallback : CallbackMsg
         {
@@ -289,7 +289,7 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// This callback is received in response to calling <see cref="EnumerateUserPublishedFiles"/>
+        /// This callback is received in response to calling <see cref="EnumerateUserPublishedFiles"/>.
         /// </summary>
         public sealed class UserSubscribedFilesCallback : CallbackMsg
         {
@@ -344,6 +344,71 @@ namespace SteamKit2
                 this.Result = ( EResult )msg.eresult;
 
                 var fileList = msg.subscribed_files
+                    .Select( f => new File( f ) )
+                    .ToList();
+
+                this.Files = new ReadOnlyCollection<File>( fileList );
+
+                this.TotalResults = ( int )msg.total_results;
+            }
+        }
+
+        /// <summary>
+        /// This callback is received in response to calling <see cref="EnumeratePublishedFilesByUserAction"/>.
+        /// </summary>
+        public sealed class UserActionPublishedFilesCallback : CallbackMsg
+        {
+            /// <summary>
+            /// Represents the details of a single published file.
+            /// </summary>
+            public sealed class File
+            {
+                /// <summary>
+                /// Gets the file ID.
+                /// </summary>
+                public PublishedFileID FileID { get; private set; }
+
+                /// <summary>
+                /// Gets the timestamp of this file.
+                /// </summary>
+                public DateTime Timestamp { get; private set; }
+
+
+                internal File( CMsgClientUCMEnumeratePublishedFilesByUserActionResponse.PublishedFileId file )
+                {
+                    this.FileID = file.published_file_id;
+
+                    this.Timestamp = Utils.DateTimeFromUnixTime( file.rtime_time_stamp );
+                }
+            }
+
+
+            /// <summary>
+            /// Gets the result.
+            /// </summary>
+            public EResult Result { get; private set; }
+
+            /// <summary>
+            /// Gets the list of enumerated files.
+            /// </summary>
+            public ReadOnlyCollection<File> Files { get; private set; }
+
+            /// <summary>
+            /// Gets the count of total results.
+            /// </summary>
+            public int TotalResults { get; private set; }
+
+
+#if STATIC_CALLBACKS
+            internal UserActionPublishedFilesCallback( SteamClient client, CMsgClientUCMEnumeratePublishedFilesByUserActionResponse msg )
+                : base( client )
+#else
+            internal UserActionPublishedFilesCallback( CMsgClientUCMEnumeratePublishedFilesByUserActionResponse msg )
+#endif
+            {
+                this.Result = ( EResult )msg.eresult;
+
+                var fileList = msg.published_files
                     .Select( f => new File( f ) )
                     .ToList();
 
