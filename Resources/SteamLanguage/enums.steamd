@@ -527,3 +527,16 @@ enum EWorkshopEnumerationType
 	ContentByFriends = 5;
 	RecentFromFollowedUsers = 6;
 };
+
+enum EPublishedFileVisibility
+{
+	Public = 0;
+	FriendsOnly = 1;
+	Private = 2;
+};
+
+enum EWorkshopFileAction
+{
+	Played = 0;
+	Completed = 1;
+};
