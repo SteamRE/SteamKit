@@ -105,6 +105,7 @@
     <Compile Include="Types\DepotManifest.cs" />
     <Compile Include="Types\MicroTime.cs" />
     <Compile Include="Types\Steam2Ticket.cs" />
+    <Compile Include="Types\UGC.cs" />
     <Compile Include="Util\AsnKeyParser.cs" />
     <Compile Include="Util\BinaryEx.cs" />
     <Compile Include="Util\StreamHelpers.cs" />
