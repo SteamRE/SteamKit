@@ -182,55 +182,88 @@ namespace SteamKit2
         }
     }
 
+    /// <summary>
+    /// Contains various utility functions for handling EMsgs.
+    /// </summary>
     public static class MsgUtil
     {
         private const uint ProtoMask = 0x80000000;
         private const uint EMsgMask = ~ProtoMask;
 
-        public static EMsg GetMsg( uint integer )
+        /// <summary>
+        /// Strips off the protobuf message flag and returns an EMsg.
+        /// </summary>
+        /// <param name="msg">The message number.</param>
+        /// <returns>The underlying EMsg.</returns>
+        public static EMsg GetMsg( uint msg )
         {
-            return ( EMsg )( integer & EMsgMask );
+            return ( EMsg )( msg & EMsgMask );
         }
 
-        public static uint GetGCMsg( uint integer )
+        /// <summary>
+        /// Strips off the protobuf message flag and returns an EMsg.
+        /// </summary>
+        /// <param name="msg">The message number.</param>
+        /// <returns>The underlying EMsg.</returns>
+        public static uint GetGCMsg( uint msg )
         {
-            return ( integer & EMsgMask );
+            return ( msg & EMsgMask );
         }
 
+        /// <summary>
+        /// Strips off the protobuf message flag and returns an EMsg.
+        /// </summary>
+        /// <param name="msg">The message number.</param>
+        /// <returns>The underlying EMsg.</returns>
         public static EMsg GetMsg( EMsg msg )
         {
             return GetMsg( ( uint )msg );
         }
 
-        public static bool IsProtoBuf( uint integer )
+        /// <summary>
+        /// Determines whether message is protobuf flagged.
+        /// </summary>
+        /// <param name="msg">The message.</param>
+        /// <returns>
+        ///   <c>true</c> if this message is protobuf flagged; otherwise, <c>false</c>.
+        /// </returns>
+        public static bool IsProtoBuf( uint msg )
         {
-            return ( integer & ProtoMask ) > 0;
+            return ( msg & ProtoMask ) > 0;
         }
 
+        /// <summary>
+        /// Determines whether message is protobuf flagged.
+        /// </summary>
+        /// <param name="msg">The message.</param>
+        /// <returns>
+        ///   <c>true</c> if this message is protobuf flagged; otherwise, <c>false</c>.
+        /// </returns>
         public static bool IsProtoBuf( EMsg msg )
         {
             return IsProtoBuf( ( uint )msg );
         }
 
-        public static EMsg MakeMsg( EMsg msg )
-        {
-            return msg;
-        }
-
-        public static uint MakeGCMsg( uint msg )
-        {
-            return msg;
-        }
-
-        public static EMsg MakeMsg( EMsg msg, bool protobuf )
+        /// <summary>
+        /// Crafts an EMsg, flagging it if required.
+        /// </summary>
+        /// <param name="msg">The EMsg to flag.</param>
+        /// <param name="protobuf">if set to <c>true</c>, the message is protobuf flagged.</param>
+        /// <returns>A crafted EMsg, flagged if requested.</returns>
+        public static EMsg MakeMsg( EMsg msg, bool protobuf = false )
         {
             if ( protobuf )
                 return ( EMsg )( ( uint )msg | ProtoMask );
 
             return msg;
         }
-
-        public static uint MakeGCMsg( uint msg, bool protobuf )
+        /// <summary>
+        /// Crafts an EMsg, flagging it if required.
+        /// </summary>
+        /// <param name="msg">The EMsg to flag.</param>
+        /// <param name="protobuf">if set to <c>true</c>, the message is protobuf flagged.</param>
+        /// <returns>A crafted EMsg, flagged if requested.</returns>
+        public static uint MakeGCMsg( uint msg, bool protobuf = false )
         {
             if ( protobuf )
                 return msg | ProtoMask;
