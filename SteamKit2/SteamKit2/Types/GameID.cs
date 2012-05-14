@@ -6,12 +6,14 @@
 
 
 using System;
+using System.Diagnostics;
 
 namespace SteamKit2
 {
     /// <summary>
     /// This 64bit structure represents an app, mod, shortcut, or p2p file on the Steam network.
     /// </summary>
+    [DebuggerDisplay( "{ToUInt64()}" )]
     public class GameID
     {
         /// <summary>
