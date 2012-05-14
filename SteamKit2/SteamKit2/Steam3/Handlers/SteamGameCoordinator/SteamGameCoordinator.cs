@@ -31,6 +31,24 @@ namespace SteamKit2
             this.Client.Send( clientMsg );
         }
 
+        /// <summary>
+        /// Sends a game coordinator message for a specific appid.
+        /// </summary>
+        /// <param name="data">The data to send. This should be a serialized GC message.</param>
+        /// <param name="appId">The app id of the game coordinator to send to.</param>
+        [Obsolete( "This function is obsolete and the IClientGCMsg override should be used!" )]
+        public void Send( byte[] data, uint appId )
+        {
+            var clientMsg = new ClientMsgProtobuf<CMsgGCClient>( EMsg.ClientToGC );
+
+            clientMsg.Body.msgtype = BitConverter.ToUInt32( data, 0 );
+            clientMsg.Body.appid = appId;
+
+            clientMsg.Body.payload = data;
+
+            this.Client.Send( clientMsg );
+        }
+
 
         /// <summary>
         /// Handles a client message. This should not be called directly.
