@@ -1832,6 +1832,17 @@ namespace SteamKit2
 		ContentByFriends = 5,
 		RecentFromFollowedUsers = 6,
 	}
+	public enum EPublishedFileVisibility
+	{
+		Public = 0,
+		FriendsOnly = 1,
+		Private = 2,
+	}
+	public enum EWorkshopFileAction
+	{
+		Played = 0,
+		Completed = 1,
+	}
 	public enum EUdpPacketType : byte
 	{
 		Invalid = 0,
