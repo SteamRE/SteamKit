@@ -66,7 +66,7 @@ namespace SteamKit2
         /// <value>
         /// The target job id.
         /// </value>
-        public override ulong TargetJobID
+        public override JobID TargetJobID
         {
             get { return ProtoHeader.jobid_target; }
             set { ProtoHeader.jobid_target = value; }
@@ -77,7 +77,7 @@ namespace SteamKit2
         /// <value>
         /// The source job id.
         /// </value>
-        public override ulong SourceJobID
+        public override JobID SourceJobID
         {
             get { return ProtoHeader.jobid_source; }
             set { ProtoHeader.jobid_source = value; }
@@ -223,7 +223,7 @@ namespace SteamKit2
         /// <value>
         /// The target job id.
         /// </value>
-        public override ulong TargetJobID
+        public override JobID TargetJobID
         {
             get { return Header.TargetJobID; }
             set { Header.TargetJobID = value; }
@@ -234,7 +234,7 @@ namespace SteamKit2
         /// <value>
         /// The source job id.
         /// </value>
-        public override ulong SourceJobID
+        public override JobID SourceJobID
         {
             get { return Header.SourceJobID; }
             set { Header.SourceJobID = value; }
@@ -367,7 +367,7 @@ namespace SteamKit2
         /// <value>
         /// The target job id.
         /// </value>
-        public override ulong TargetJobID
+        public override JobID TargetJobID
         {
             get { return Header.TargetJobID; }
             set { Header.TargetJobID = value; }
@@ -378,7 +378,7 @@ namespace SteamKit2
         /// <value>
         /// The source job id.
         /// </value>
-        public override ulong SourceJobID
+        public override JobID SourceJobID
         {
             get { return Header.SourceJobID; }
             set { Header.SourceJobID = value; }

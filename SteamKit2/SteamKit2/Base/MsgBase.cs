@@ -53,14 +53,14 @@ namespace SteamKit2
         /// <value>
         /// The target job id.
         /// </value>
-        ulong TargetJobID { get; set; }
+        JobID TargetJobID { get; set; }
         /// <summary>
         /// Gets or sets the source job id for this client message.
         /// </summary>
         /// <value>
         /// The source job id.
         /// </value>
-        ulong SourceJobID { get; set; }
+        JobID SourceJobID { get; set; }
 
         /// <summary>
         /// Serializes this client message instance to a byte array.
@@ -451,14 +451,14 @@ namespace SteamKit2
         /// <value>
         /// The target job id.
         /// </value>
-        public abstract ulong TargetJobID { get; set; }
+        public abstract JobID TargetJobID { get; set; }
         /// <summary>
         /// Gets or sets the source job id for this client message.
         /// </summary>
         /// <value>
         /// The source job id.
         /// </value>
-        public abstract ulong SourceJobID { get; set; }
+        public abstract JobID SourceJobID { get; set; }
 
 
         /// <summary>

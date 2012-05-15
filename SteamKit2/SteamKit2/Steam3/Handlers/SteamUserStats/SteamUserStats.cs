@@ -26,7 +26,7 @@ namespace SteamKit2
         /// </summary>
         /// <param name="gameId">The GameID to request the number of players for.</param>
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="SteamClient.JobCallback&lt;T&gt;"/>.</returns>
-        public ulong GetNumberOfCurrentPlayers( GameID gameId )
+        public JobID GetNumberOfCurrentPlayers( GameID gameId )
         {
             var msg = new ClientMsg<MsgClientGetNumberOfCurrentPlayers>();
             msg.SourceJobID = Client.GetNextJobID();

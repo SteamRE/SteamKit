@@ -28,7 +28,7 @@ namespace SteamKit2
         /// </summary>
         /// <param name="publishedFileId">The file ID being requested.</param>
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="SteamClient.JobCallback&lt;T&gt;"/>.</returns>
-        public ulong RequestPublishedFileDetails( PublishedFileID publishedFileId )
+        public JobID RequestPublishedFileDetails( PublishedFileID publishedFileId )
         {
             var request = new ClientMsgProtobuf<CMsgClientUCMGetPublishedFileDetails>( EMsg.ClientUCMGetPublishedFileDetails );
             request.SourceJobID = Client.GetNextJobID();
@@ -87,7 +87,7 @@ namespace SteamKit2
         /// </summary>
         /// <param name="details">The specific details of the request.</param>
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="SteamClient.JobCallback&lt;T&gt;"/>.</returns>
-        public ulong EnumerateUserPublishedFiles( EnumerationUserDetails details )
+        public JobID EnumerateUserPublishedFiles( EnumerationUserDetails details )
         {
             var enumRequest = new ClientMsgProtobuf<CMsgClientUCMEnumerateUserPublishedFiles>( EMsg.ClientUCMEnumerateUserPublishedFiles );
             enumRequest.SourceJobID = Client.GetNextJobID();
@@ -106,7 +106,7 @@ namespace SteamKit2
         /// </summary>
         /// <param name="details">The specific details of the request.</param>
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="SteamClient.JobCallback&lt;T&gt;"/>.</returns>
-        public ulong EnumerateUserSubscribedFiles( EnumerationUserDetails details )
+        public JobID EnumerateUserSubscribedFiles( EnumerationUserDetails details )
         {
             var enumRequest = new ClientMsgProtobuf<CMsgClientUCMEnumerateUserSubscribedFiles>( EMsg.ClientUCMEnumerateUserSubscribedFiles );
             enumRequest.SourceJobID = Client.GetNextJobID();
@@ -125,7 +125,7 @@ namespace SteamKit2
         /// </summary>
         /// <param name="details">The specific details of the request.</param>
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="SteamClient.JobCallback&lt;T&gt;"/>.</returns>
-        public ulong EnumeratePublishedFilesByUserAction( EnumerationUserDetails details )
+        public JobID EnumeratePublishedFilesByUserAction( EnumerationUserDetails details )
         {
             var enumRequest = new ClientMsgProtobuf<CMsgClientUCMEnumeratePublishedFilesByUserAction>( EMsg.ClientUCMEnumeratePublishedFilesByUserAction );
             enumRequest.SourceJobID = Client.GetNextJobID();
@@ -210,7 +210,7 @@ namespace SteamKit2
         /// </summary>
         /// <param name="details">The specific details of the request.</param>
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="SteamClient.JobCallback&lt;T&gt;"/>.</returns>
-        public ulong EnumeratePublishedFiles( EnumerationDetails details )
+        public JobID EnumeratePublishedFiles( EnumerationDetails details )
         {
             var enumRequest = new ClientMsgProtobuf<CMsgCREEnumeratePublishedFiles>( EMsg.CREEnumeratePublishedFiles );
             enumRequest.SourceJobID = Client.GetNextJobID();

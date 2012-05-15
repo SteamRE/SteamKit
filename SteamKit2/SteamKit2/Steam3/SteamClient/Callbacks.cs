@@ -24,7 +24,7 @@ namespace SteamKit2
             /// Gets the Job ID of this callback. For client based jobs, this will match the Job ID of a function call.
             /// For server based jobs, this is provided to respond to the correct job.
             /// </summary>
-            public ulong JobID { get; protected set; }
+            public JobID JobID { get; protected set; }
 
             /// <summary>
             /// Gets the type of the callback.
@@ -41,6 +41,7 @@ namespace SteamKit2
                 this.JobID = jobId;
             }
         }
+
 
         /// <summary>
         /// This callback is received when a job related operation on the backend has completed, or a client operation should begin.
@@ -64,7 +65,7 @@ namespace SteamKit2
             internal JobCallback( SteamClient client, ulong jobId, T callback )
                 : base( client, jobId )
 #else
-            internal JobCallback( ulong jobId, T callback )
+            internal JobCallback( JobID jobId, T callback )
                 : base( jobId )
 #endif
             {
@@ -73,6 +74,7 @@ namespace SteamKit2
                 Callback = callback;
             }
         }
+
 
         /// <summary>
         /// This callback is received after attempting to connect to the Steam network.

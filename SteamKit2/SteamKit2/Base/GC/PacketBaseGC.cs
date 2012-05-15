@@ -42,14 +42,14 @@ namespace SteamKit2.GC
         /// <value>
         /// The target job id.
         /// </value>
-        ulong TargetJobID { get; }
+        JobID TargetJobID { get; }
         /// <summary>
         /// Gets the source job id for this packet message.
         /// </summary>
         /// <value>
         /// The source job id.
         /// </value>
-        ulong SourceJobID { get; }
+        JobID SourceJobID { get; }
 
         /// <summary>
         /// Gets the underlying data that represents this client message.
@@ -86,14 +86,14 @@ namespace SteamKit2.GC
         /// <value>
         /// The target job id.
         /// </value>
-        public ulong TargetJobID { get; private set; }
+        public JobID TargetJobID { get; private set; }
         /// <summary>
         /// Gets the source job id for this packet message.
         /// </summary>
         /// <value>
         /// The source job id.
         /// </value>
-        public ulong SourceJobID { get; private set; }
+        public JobID SourceJobID { get; private set; }
 
 
         byte[] payload;
@@ -159,14 +159,14 @@ namespace SteamKit2.GC
         /// <value>
         /// The target job id.
         /// </value>
-        public ulong TargetJobID { get; private set; }
+        public JobID TargetJobID { get; private set; }
         /// <summary>
         /// Gets the source job id for this packet message.
         /// </summary>
         /// <value>
         /// The source job id.
         /// </value>
-        public ulong SourceJobID { get; private set; }
+        public JobID SourceJobID { get; private set; }
 
         byte[] payload;
 

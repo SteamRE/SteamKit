@@ -114,12 +114,12 @@ namespace SteamKit2
         /// Setting this field to the maximum value of a ulong will unbind this handler,
         /// allowing all callbacks of type TCall to be handled.
         /// </summary>
-        public ulong JobID { get; set; }
+        public JobID JobID { get; set; }
 
         /// <summary>
         /// Gets or sets the function to call when a job based callback of type TCall arrives.
         /// </summary>
-        public new Action<TCall, ulong> OnRun { get; set; }
+        public new Action<TCall, JobID> OnRun { get; set; }
 
         /// <summary>
         /// Gets a value indicating whether this <see cref="JobCallback&lt;TCall&gt;"/> is completed.
@@ -136,8 +136,8 @@ namespace SteamKit2
         /// </summary>
         /// <param name="func">The function to call when a job based callback of type TCall arrives.</param>
         /// <param name="mgr">The <see cref="CallbackManager"/> that is responsible for the routing of callbacks to this handler, or <c>null</c> if the callback will be manually registered.</param>
-        /// <param name="jobID">The Job ID this callback will handle, or <c>ulong.MaxValue</c> to handle all job callbacks of type <c>TCall</c>.</param>
-        public JobCallback( Action<TCall, ulong> func, CallbackManager mgr = null, ulong jobID = ulong.MaxValue )
+        /// <param name="jobID">The Job ID this callback will handle, or <c>JobID.Invalid</c> to handle all job callbacks of type <c>TCall</c>.</param>
+        public JobCallback( Action<TCall, JobID> func, CallbackManager mgr, JobID jobID )
         {
             this.OnRun = func;
             this.JobID = jobID;
@@ -147,11 +147,21 @@ namespace SteamKit2
             base.OnRun = HandleCallback;
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="JobCallback&lt;TCall&gt;"/> class.
+        /// </summary>
+        /// <param name="func">The function to call when a job based callback of type TCall arrives.</param>
+        /// <param name="mgr">The <see cref="CallbackManager"/> that is responsible for the routing of callbacks to this handler, or <c>null</c> if the callback will be manually registered.</param>
+        public JobCallback( Action<TCall, JobID> func, CallbackManager mgr = null )
+            : this( func, mgr, JobID.Invalid )
+        {
+        }
+
 
         void HandleCallback( SteamClient.JobCallback<TCall> callback )
         {
             // handle the callback if it's our jobid, or if we haven't set one yet
-            if ( callback.JobID == JobID || JobID == ulong.MaxValue )
+            if ( callback.JobID == JobID || JobID == JobID.Invalid )
             {
                 if ( OnRun != null )
                     OnRun( callback.Callback, callback.JobID );

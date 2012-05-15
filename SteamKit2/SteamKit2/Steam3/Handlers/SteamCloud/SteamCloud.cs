@@ -31,7 +31,7 @@ namespace SteamKit2
         /// </summary>
         /// <param name="ugcId">The unique user generated content id.</param>
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="SteamClient.JobCallback&lt;T&gt;"/>.</returns>
-        public ulong RequestUGCDetails( UGCHandle ugcId )
+        public JobID RequestUGCDetails( UGCHandle ugcId )
         {
             var request = new ClientMsgProtobuf<CMsgClientUFSGetUGCDetails>( EMsg.ClientUFSGetUGCDetails );
             request.SourceJobID = Client.GetNextJobID();
@@ -60,7 +60,6 @@ namespace SteamKit2
 
 
         #region ClientMsg Handlers
-
         void HandleUGCDetailsResponse( IPacketMsg packetMsg )
         {
             var infoResponse = new ClientMsgProtobuf<CMsgClientUFSGetUGCDetailsResponse>( packetMsg );
