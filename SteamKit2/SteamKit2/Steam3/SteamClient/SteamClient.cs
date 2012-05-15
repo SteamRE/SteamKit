@@ -280,7 +280,7 @@ namespace SteamKit2
         /// This function is thread-safe.
         /// </summary>
         /// <returns>The next available JobID.</returns>
-        public ulong GetNextJobID()
+        public JobID GetNextJobID()
         {
             return ( ulong )Interlocked.Increment( ref currentJobId );
         }

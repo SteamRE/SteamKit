@@ -61,7 +61,7 @@ namespace SteamKit2
         /// </summary>
         /// <param name="details">The details for the request.</param>
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="SteamClient.JobCallback&lt;T&gt;"/>.</returns>
-        public ulong ServerQuery( QueryDetails details )
+        public JobID ServerQuery( QueryDetails details )
         {
             var query = new ClientMsgProtobuf<CMsgClientGMSServerQuery>( EMsg.ClientGMSServerQuery );
             query.SourceJobID = Client.GetNextJobID();

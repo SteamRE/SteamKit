@@ -71,7 +71,7 @@ namespace SteamKit2
         /// </summary>
         /// <param name="appid">The appid to request the ownership ticket of.</param>
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="SteamClient.JobCallback&lt;T&gt;"/>.</returns>
-        public ulong GetAppOwnershipTicket( uint appid )
+        public JobID GetAppOwnershipTicket( uint appid )
         {
             var request = new ClientMsgProtobuf<CMsgClientGetAppOwnershipTicket>( EMsg.ClientGetAppOwnershipTicket );
             request.SourceJobID = Client.GetNextJobID();
@@ -90,7 +90,7 @@ namespace SteamKit2
         /// <param name="app">The app to request information for.</param>
         /// <param name="supportsBatches">if set to <c>true</c>, the request supports batches.</param>
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="SteamClient.JobCallback&lt;T&gt;"/>.</returns>
-        public ulong GetAppInfo( AppDetails app, bool supportsBatches = false )
+        public JobID GetAppInfo( AppDetails app, bool supportsBatches = false )
         {
             return GetAppInfo( new AppDetails[] { app }, supportsBatches );
         }
@@ -101,7 +101,7 @@ namespace SteamKit2
         /// <param name="app">The app to request information for.</param>
         /// <param name="supportsBatches">if set to <c>true</c>, the request supports batches.</param>
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="SteamClient.JobCallback&lt;T&gt;"/>.</returns>
-        public ulong GetAppInfo( uint app, bool supportsBatches = false )
+        public JobID GetAppInfo( uint app, bool supportsBatches = false )
         {
             return GetAppInfo( new uint[] { app }, supportsBatches );
         }
@@ -112,7 +112,7 @@ namespace SteamKit2
         /// <param name="apps">The apps to request information for.</param>
         /// <param name="supportsBatches">if set to <c>true</c>, the request supports batches.</param>
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="SteamClient.JobCallback&lt;T&gt;"/>.</returns>
-        public ulong GetAppInfo( IEnumerable<uint> apps, bool supportsBatches = false )
+        public JobID GetAppInfo( IEnumerable<uint> apps, bool supportsBatches = false )
         {
             return GetAppInfo( apps.Select( a => new AppDetails { AppID = a } ), supportsBatches );
         }
@@ -123,7 +123,7 @@ namespace SteamKit2
         /// <param name="apps">The apps to request information for.</param>
         /// <param name="supportsBatches">if set to <c>true</c>, the request supports batches.</param>
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="SteamClient.JobCallback&lt;T&gt;"/>.</returns>
-        public ulong GetAppInfo( IEnumerable<AppDetails> apps, bool supportsBatches = false )
+        public JobID GetAppInfo( IEnumerable<AppDetails> apps, bool supportsBatches = false )
         {
             var request = new ClientMsgProtobuf<CMsgClientAppInfoRequest>( EMsg.ClientAppInfoRequest );
             request.SourceJobID = Client.GetNextJobID();
@@ -155,7 +155,7 @@ namespace SteamKit2
         /// <param name="packageId">The package id to request information for.</param>
         /// <param name="metaDataOnly">if set to <c>true</c>, request metadata only.</param>
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="SteamClient.JobCallback&lt;T&gt;"/>.</returns>
-        public ulong GetPackageInfo( uint packageId, bool metaDataOnly = false )
+        public JobID GetPackageInfo( uint packageId, bool metaDataOnly = false )
         {
             return GetPackageInfo( new uint[] { packageId }, metaDataOnly );
         }
@@ -166,7 +166,7 @@ namespace SteamKit2
         /// <param name="packageId">The packages to request information for.</param>
         /// <param name="metaDataOnly">if set to <c>true</c> to request metadata only.</param>
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="SteamClient.JobCallback&lt;T&gt;"/>.</returns>
-        public ulong GetPackageInfo( IEnumerable<uint> packageId, bool metaDataOnly = false )
+        public JobID GetPackageInfo( IEnumerable<uint> packageId, bool metaDataOnly = false )
         {
             var request = new ClientMsgProtobuf<CMsgClientPackageInfoRequest>( EMsg.ClientPackageInfoRequest );
 
@@ -203,7 +203,7 @@ namespace SteamKit2
         /// <param name="depotid">The DepotID to request a decryption key for.</param>
         /// <param name="appid">The AppID to request the decryption key for.</param>
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="SteamClient.JobCallback&lt;T&gt;"/>.</returns>
-        public ulong GetDepotDecryptionKey( uint depotid, uint appid = 0 )
+        public JobID GetDepotDecryptionKey( uint depotid, uint appid = 0 )
         {
             var request = new ClientMsgProtobuf<CMsgClientGetDepotDecryptionKey>( EMsg.ClientGetDepotDecryptionKey );
             request.SourceJobID = Client.GetNextJobID();
