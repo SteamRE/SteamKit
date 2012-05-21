@@ -12,6 +12,7 @@ using System.Text;
 using System.Net;
 using System.IO;
 using System.Threading;
+using System.Diagnostics;
 using SteamKit2.Internal;
 
 namespace SteamKit2
@@ -675,6 +676,8 @@ namespace SteamKit2
         }
         void HandleChatEnter( IPacketMsg packetMsg )
         {
+            Debug.Assert( !packetMsg.IsProto );
+
             var chatEnter = new ClientMsg<MsgClientChatEnter>( packetMsg );
 
 #if STATIC_CALLBACKS
@@ -687,6 +690,8 @@ namespace SteamKit2
         }
         void HandleChatMsg( IPacketMsg packetMsg )
         {
+            Debug.Assert( !packetMsg.IsProto );
+
             var chatMsg = new ClientMsg<MsgClientChatMsg>( packetMsg );
 
             byte[] msgData = chatMsg.Payload.ToArray();
@@ -701,6 +706,8 @@ namespace SteamKit2
         }
         void HandleChatMemberInfo( IPacketMsg packetMsg )
         {
+            Debug.Assert( !packetMsg.IsProto );
+
             var membInfo = new ClientMsg<MsgClientChatMemberInfo>( packetMsg );
 
             byte[] payload = membInfo.Payload.ToArray();
@@ -715,6 +722,8 @@ namespace SteamKit2
         }
         void HandleChatActionResult( IPacketMsg packetMsg )
         {
+            Debug.Assert( !packetMsg.IsProto );
+
             var actionResult = new ClientMsg<MsgClientChatActionResult>( packetMsg );
 
 #if STATIC_CALLBACKS

@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using System.Diagnostics;
 using SteamKit2.Internal;
 
 namespace SteamKit2
@@ -57,6 +58,8 @@ namespace SteamKit2
         #region ClientMsg Handlers
         void HandleNumberOfPlayersResponse( IPacketMsg packetMsg )
         {
+            Debug.Assert( !packetMsg.IsProto );
+
             var msg = new ClientMsg<MsgClientGetNumberOfCurrentPlayersResponse>( packetMsg );
 #if STATIC_CALLBACKS
             var innerCallback = new NumberOfPlayersCallback( Client, msg.Body );
