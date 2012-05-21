@@ -376,10 +376,10 @@ namespace SteamKit2
         }
         void HandleLoginKey( IPacketMsg packetMsg )
         {
-            var loginKey = new ClientMsg<MsgClientNewLoginKey>( packetMsg );
+            var loginKey = new ClientMsgProtobuf<CMsgClientNewLoginKey>( packetMsg );
 
-            var resp = new ClientMsg<MsgClientNewLoginKeyAccepted>();
-            resp.Body.UniqueID = loginKey.Body.UniqueID;
+            var resp = new ClientMsgProtobuf<CMsgClientNewLoginKeyAccepted>( EMsg.ClientNewLoginKeyAccepted );
+            resp.Body.unique_id = loginKey.Body.unique_id;
 
             this.Client.Send( resp );
 

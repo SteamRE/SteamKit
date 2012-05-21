@@ -140,7 +140,7 @@ namespace SteamKit2
             /// Gets the login key.
             /// </summary>
             /// <value>The login key.</value>
-            public byte[] LoginKey { get; private set; }
+            public string LoginKey { get; private set; }
             /// <summary>
             /// Gets the unique ID.
             /// </summary>
@@ -148,14 +148,14 @@ namespace SteamKit2
             public uint UniqueID { get; private set; }
 
 #if STATIC_CALLBACKS
-            internal LoginKeyCallback( SteamClient client, MsgClientNewLoginKey logKey )
+            internal LoginKeyCallback( SteamClient client, CMsgClientNewLoginKey logKey )
                 : base( client )
 #else
-            internal LoginKeyCallback( MsgClientNewLoginKey logKey )
+            internal LoginKeyCallback( CMsgClientNewLoginKey logKey )
 #endif
             {
-                this.LoginKey = logKey.LoginKey;
-                this.UniqueID = logKey.UniqueID;
+                this.LoginKey = logKey.login_key;
+                this.UniqueID = logKey.unique_id;
             }
         }
 
