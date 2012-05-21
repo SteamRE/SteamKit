@@ -239,7 +239,7 @@ namespace SteamKit2.GC
         /// This is a recieve constructor.
         /// </summary>
         /// <param name="msg">The packet message to build this gc message from.</param>
-        public ClientGCMsg( IPacketMsg msg )
+        public ClientGCMsg( IPacketGCMsg msg )
             : this()
         {
             Deserialize( msg.GetData() );
