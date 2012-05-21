@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Net;
+using System.Diagnostics;
 using SteamKit2.Internal;
 
 namespace SteamKit2
@@ -355,6 +356,8 @@ namespace SteamKit2
         }
         void HandleVACBanStatus( IPacketMsg packetMsg )
         {
+            Debug.Assert( !packetMsg.IsProto );
+
             var vacStatus = new ClientMsg<MsgClientVACBanStatus>( packetMsg );
 
 #if STATIC_CALLBACKS
