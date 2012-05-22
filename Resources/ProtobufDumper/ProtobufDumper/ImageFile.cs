@@ -14,6 +14,17 @@ using google.protobuf;
 
 namespace ProtobufDumper
 {
+    [AttributeUsage(AttributeTargets.All)]
+    public class EnumProxyAttribute : Attribute
+    {
+        public EnumProxyAttribute(string type)
+        {
+            this.EnumType = type;
+        }
+
+        public String EnumType;
+    }
+
     class ImageFile
     {
         private static ModuleBuilder moduleBuilder;
@@ -47,6 +58,7 @@ namespace ProtobufDumper
 
         private Stack<string> messageNameStack;
         private Dictionary<string, EnumDescriptorProto> enumLookup;
+        private Dictionary<string, int> enumLookupCount;
         private List<string> deferredEnumTokens;
 
         public ImageFile(string fileName, string output = null)
@@ -63,6 +75,7 @@ namespace ProtobufDumper
 
             this.messageNameStack = new Stack<string>();
             this.enumLookup = new Dictionary<string, EnumDescriptorProto>();
+            this.enumLookupCount = new Dictionary<string, int>();
             this.deferredEnumTokens = new List<string>();
         }
 
@@ -259,6 +272,7 @@ namespace ProtobufDumper
         private void AddEnumDescriptorLookup(EnumDescriptorProto enumdesc)
         {
             enumLookup[GetDescriptorName(enumdesc.name)] = enumdesc;
+            enumLookupCount[GetDescriptorName(enumdesc.name)] = enumdesc.value.Count;
         }
 
         private void PopDescriptorName()
@@ -266,9 +280,14 @@ namespace ProtobufDumper
             messageNameStack.Pop();
         }
 
-        private string GetEnumDescriptorToken(string messageName)
+        private string GetEnumDescriptorTokenDefault(string messageName)
         {
             return String.Format("${0}_DEFAULT_VALUE$", messageName);
+        }
+
+        private string GetEnumDescriptorTokenAt(string messageName, int index)
+        {
+            return String.Format("${0}_{1}_VALUE$", messageName, index);
         }
 
         private string ResolveOrDeferEnumDefaultValue(string type)
@@ -285,7 +304,25 @@ namespace ProtobufDumper
                 if(!deferredEnumTokens.Contains(absType))
                     deferredEnumTokens.Add(absType);
 
-                return GetEnumDescriptorToken(absType);
+                return GetEnumDescriptorTokenDefault(absType);
+            }
+        }
+
+        private string ResolveOrDeferEnumValueAt(string type, int index)
+        {
+            EnumDescriptorProto proto;
+            string descName = GetDescriptorName(type);
+
+            if (enumLookup.TryGetValue(descName, out proto))
+                return proto.value[index].name;
+            else
+            {
+                string absType = '.' + descName;
+
+                if (!deferredEnumTokens.Contains(absType))
+                    deferredEnumTokens.Add(absType);
+
+                return GetEnumDescriptorTokenAt(absType, index);
             }
         }
  
@@ -403,7 +440,12 @@ namespace ProtobufDumper
 
                 foreach(string type in deferredEnumTokens)
                 {
-                    proto.buffer.Replace(GetEnumDescriptorToken(type), ResolveOrDeferEnumDefaultValue(type));
+                    proto.buffer.Replace(GetEnumDescriptorTokenDefault(type), ResolveOrDeferEnumDefaultValue(type));
+
+                    for (int i = 0; i < enumLookupCount[GetDescriptorName(type)]; i++)
+                    {
+                        proto.buffer.Replace(GetEnumDescriptorTokenAt(type, i), ResolveOrDeferEnumValueAt(type, i));
+                    }
                 }
                 
                 File.WriteAllText(outputFile, proto.buffer.ToString());
@@ -469,8 +511,9 @@ namespace ProtobufDumper
             }
         }
 
-        public static Type LookupBasicType(FieldDescriptorProto.Type type, out DataFormat format)
+        public static Type LookupBasicType(FieldDescriptorProto.Type type, out DataFormat format, out bool buildEnumProxy)
         {
+            buildEnumProxy = false;
             format = DataFormat.Default;
             switch (type)
             {
@@ -520,6 +563,11 @@ namespace ProtobufDumper
                         format = DataFormat.FixedSize;
                         return typeof(Int64);
                     }
+                case FieldDescriptorProto.Type.TYPE_ENUM:
+                    {
+                        buildEnumProxy = true;
+                        return typeof(Int32);
+                    }
             }
         }
 
@@ -541,6 +589,7 @@ namespace ProtobufDumper
         {
             ProtoMemberAttribute[] protoMember = (ProtoMemberAttribute[])propInfo.GetCustomAttributes(typeof(ProtoMemberAttribute), false);
             DefaultValueAttribute[] defaultValueList = (DefaultValueAttribute[])propInfo.GetCustomAttributes(typeof(DefaultValueAttribute), false);
+            EnumProxyAttribute[] enumProxyList = (EnumProxyAttribute[])propInfo.GetCustomAttributes(typeof(EnumProxyAttribute), false);
 
             name = null;
 
@@ -568,7 +617,12 @@ namespace ProtobufDumper
             if (defValue.Value != null && defValue.Value.Equals(value))
                 return null;
 
-            if (value is string)
+            if (enumProxyList.Length > 0)
+            {
+                EnumProxyAttribute enumProxy = enumProxyList[0];
+                value = ResolveOrDeferEnumValueAt(enumProxy.EnumType, (int)value - 1);
+            }
+            else if (value is string)
             {
                 if (string.IsNullOrEmpty((string)value))
                     return null;
@@ -887,7 +941,8 @@ namespace ProtobufDumper
             foreach (var field in fields)
             {
                 DataFormat format;
-                Type fieldType = ImageFile.LookupBasicType(field.type, out format);
+                bool buildEnumProxy;
+                Type fieldType = ImageFile.LookupBasicType(field.type, out format, out buildEnumProxy);
 
                 FieldBuilder fbuilder = extension.DefineField(field.name, fieldType, FieldAttributes.Public);
 
@@ -907,6 +962,16 @@ namespace ProtobufDumper
                         Console.WriteLine("Constructor for extension had bad format: {0}", key);
                         return;
                     }
+                }
+
+
+                if (buildEnumProxy)
+                {
+                    Type epType = typeof(EnumProxyAttribute);
+                    ConstructorInfo epCtor = epType.GetConstructor(new Type[] { typeof(string) });
+                    CustomAttributeBuilder epBuilder = new CustomAttributeBuilder(epCtor, new object[] { field.type_name });
+
+                    fbuilder.SetCustomAttribute(epBuilder);
                 }
 
                 Type dvType = typeof(ProtoDefaultValueAttribute);
