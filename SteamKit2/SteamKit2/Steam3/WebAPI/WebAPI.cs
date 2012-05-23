@@ -215,9 +215,8 @@ namespace SteamKit2
                         requestMethod = argValue.ToString();
                         continue;
                     }
-
                     // secure is another reserved param for selecting the http or https apis
-                    if ( argName.Equals( "secure", StringComparison.OrdinalIgnoreCase ) )
+                    else if ( argName.Equals( "secure", StringComparison.OrdinalIgnoreCase ) )
                     {
                         try
                         {
@@ -230,6 +229,20 @@ namespace SteamKit2
 
                         continue;
                     }
+                    // flatten lists
+                    else if ( argValue is IEnumerable )
+                    {
+                        int index = 0;
+                        IEnumerable enumerable = argValue as IEnumerable;
+
+                        foreach (object value in enumerable)
+                        {
+                            apiArgs.Add( String.Format( "{0}[{1}]", argName, index++ ), value.ToString() );
+                        }
+
+                        continue;
+                    }
+
 
                     apiArgs.Add( argName, argValue.ToString() );
                 }
