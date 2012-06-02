@@ -58,8 +58,6 @@ namespace SteamKit2
         #region ClientMsg Handlers
         void HandleNumberOfPlayersResponse( IPacketMsg packetMsg )
         {
-            Debug.Assert( !packetMsg.IsProto );
-
             var msg = new ClientMsg<MsgClientGetNumberOfCurrentPlayersResponse>( packetMsg );
 #if STATIC_CALLBACKS
             var innerCallback = new NumberOfPlayersCallback( Client, msg.Body );

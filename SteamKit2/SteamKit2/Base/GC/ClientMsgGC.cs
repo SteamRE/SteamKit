@@ -9,9 +9,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using System.Diagnostics;
 using ProtoBuf;
+
 using SteamKit2.Internal;
 using SteamKit2.GC.Internal;
+
 using MsgGCHdrProtoBuf = SteamKit2.Internal.MsgGCHdrProtoBuf;
 using MsgGCHdr = SteamKit2.Internal.MsgGCHdr;
 using CMsgProtoBufHeader = SteamKit2.GC.Internal.CMsgProtoBufHeader;
@@ -113,6 +116,8 @@ namespace SteamKit2.GC
         public ClientGCMsgProtobuf( IPacketGCMsg msg )
             : this( msg.MsgType )
         {
+            Debug.Assert( msg.IsProto, "ClientGCMsgProtobuf used for non-proto message!" );
+
             Deserialize( msg.GetData() );
         }
 
@@ -242,6 +247,8 @@ namespace SteamKit2.GC
         public ClientGCMsg( IPacketGCMsg msg )
             : this()
         {
+            Debug.Assert( !msg.IsProto, "ClientGCMsg used for proto message!" );
+
             Deserialize( msg.GetData() );
         }
 
