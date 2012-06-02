@@ -176,6 +176,20 @@ namespace NetHookAnalyzer
 
                     return;
                 }
+                else if ( TypeIsDictionary( propType ) )
+                {
+                    IDictionary dict = obj as IDictionary;
+                    foreach (DictionaryEntry pair in dict)
+                    {
+                        TreeNode subNode = new TreeNode(string.Format(
+                            "[ {0} ]: ", pair.Key.ToString() ));
+                        node.Nodes.Add(subNode);
+
+                        DumpType(pair.Value, subNode);
+                    }
+
+                    return;
+                }
                 else if ( TypeIsArray( propType ) )
                 {
                     Type innerType = null;
@@ -310,8 +324,65 @@ namespace NetHookAnalyzer
                 return Deserialize( msgType, str );
             }
 
+            // try reading it as a protobuf
+            using (ProtoReader reader = new ProtoReader(str, null, null))
+            {
+                Dictionary<int, object> fields = new Dictionary<int, object>();
+
+                while(true)
+                {
+                    int field = reader.ReadFieldHeader();
+
+                    if(field == 0)
+                        break;
+
+                    object fieldValue = null;
+
+                    switch (reader.WireType)
+                    {
+                        case WireType.Variant:
+                            {
+                                try
+                                {
+                                    fieldValue = reader.ReadInt64();
+                                }
+                                catch (Exception)
+                                {
+                                    fieldValue = "Unable to read Variant (debugme)";
+                                }
+
+                                break;
+                            }
+                        case WireType.String:
+                            {
+                                try
+                                {
+                                    fieldValue = reader.ReadString();
+                                }
+                                catch (Exception)
+                                {
+                                    fieldValue = "Unable to read String (debugme)";
+                                }
+
+                                break;
+                            }
+                        default:
+                            {
+                                fieldValue = "Not implemented";
+                                break;
+                            }
+                    }
+
+                    fields.Add(field, fieldValue);
+                }
+
+                if (fields.Count > 0)
+                    return fields;
+            }
+
             return null;
         }
+
         byte[] BuildPayload( Stream str )
         {
             int payloadLen = ( int )( str.Length - str.Position );
@@ -341,6 +412,16 @@ namespace NetHookAnalyzer
             }
             return false;
         }
+        bool TypeIsDictionary(Type type)
+        {
+            foreach (var iface in type.GetInterfaces())
+            {
+                if (iface == typeof(IDictionary))
+                    return true;
+            }
+            return false;
+        }
+
         uint PeekUInt32( Stream str )
         {
             byte[] eMsgData = new byte[ 4 ];
