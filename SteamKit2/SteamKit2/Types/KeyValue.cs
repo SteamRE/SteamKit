@@ -273,7 +273,7 @@ namespace SteamKit2
             get
             {
                 var child = this.Children
-                    .SingleOrDefault( c => string.Equals( c.Name, key, StringComparison.OrdinalIgnoreCase ) );
+                    .FirstOrDefault( c => string.Equals( c.Name, key, StringComparison.OrdinalIgnoreCase ) );
 
                 if ( child == null )
                 {
