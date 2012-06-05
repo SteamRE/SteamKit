@@ -134,7 +134,7 @@ namespace SteamKit2.Blob
         /// <returns><c>true</c> if this blob could be processed; otherwise, file.</returns>
         public bool Process()
         {
-            return TryReadBlob();
+            return TryReadBlob(UInt32.MaxValue);
         }
         
 
@@ -168,9 +168,9 @@ namespace SteamKit2.Blob
         }
 
 
-        private bool TryReadBlob()
+        private bool TryReadBlob(UInt32 lengthHint)
         {
-            if (!CanRead(BlobHeaderLength))
+            if (!CanRead(BlobHeaderLength) || lengthHint < BlobHeaderLength)
                 return false;
 
             ECacheState cachestate;
@@ -203,13 +203,15 @@ namespace SteamKit2.Blob
 
             serialized -= BlobHeaderLength;
 
+
             if (process != EAutoPreprocessCode.eAutoPreprocessCodePlaintext)
             {
                 PeekableStream originalStream = input;
                 object extendedData = null;
 
                 input = HandleProcessCode(process, ref serialized, out extendedData);
-                bool result = TryReadBlob();
+
+                bool result = TryReadBlob((uint)serialized);
 
                 input.ReadBytes( 40 ); // read and dispose HMACs
                 // todo: validate them?
@@ -279,7 +281,7 @@ namespace SteamKit2.Blob
                     Field((BlobUtil.IsIntDescriptor(descriptor) ? FieldKeyType.IntType : FieldKeyType.StringType),
                             descriptor, dataLength);
 
-                if (!TryReadBlob())
+                if (!TryReadBlob((uint)dataLength))
                 {
                     byte[] data = new byte[dataLength];
                     input.Read(data, 0, dataLength);
