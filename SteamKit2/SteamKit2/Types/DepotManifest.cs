@@ -16,6 +16,9 @@ namespace SteamKit2
     /// </summary>
     public sealed class DepotManifest
     {
+        // Mono is nuts and has '/' for both dirchar and altdirchar, going against the lore
+        private static char altDirChar = (Path.DirectorySeparatorChar == '\\') ? '/' : '\\';
+
         /// <summary>
         /// Represents a single chunk within a file.
         /// </summary>
@@ -84,9 +87,13 @@ namespace SteamKit2
             public byte[] FileHash { get; private set; }
 
 
-            internal FileData(string filename, EDepotFileFlag flag, ulong size, byte[] hash)
+            internal FileData(string filename, EDepotFileFlag flag, ulong size, byte[] hash, bool encrypted)
             {
-                this.FileName = filename;
+                if (encrypted)
+                    this.FileName = filename;
+                else
+                    this.FileName = filename.Replace(altDirChar, Path.DirectorySeparatorChar);
+
                 this.Flags = flag;
                 this.TotalSize = size;
                 this.FileHash = hash;
@@ -136,7 +143,7 @@ namespace SteamKit2
                     return false;
                 }
 
-                file.FileName = Encoding.ASCII.GetString( filename ).TrimEnd( new char[] { '\0' } );
+                file.FileName = Encoding.ASCII.GetString( filename ).TrimEnd( new char[] { '\0' } ).Replace(altDirChar, Path.DirectorySeparatorChar);
             }
 
             FilenamesEncrypted = false;
@@ -179,7 +186,7 @@ namespace SteamKit2
 
             foreach (var file_mapping in manifest.Mapping)
             {
-                FileData filedata = new FileData(file_mapping.FileName, file_mapping.Flags, file_mapping.TotalSize, file_mapping.HashContent);
+                FileData filedata = new FileData(file_mapping.FileName, file_mapping.Flags, file_mapping.TotalSize, file_mapping.HashContent, FilenamesEncrypted);
 
                 foreach (var chunk in file_mapping.Chunks)
                 {
