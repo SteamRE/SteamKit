@@ -51,6 +51,11 @@ namespace SteamKit2.GC
         public const uint GetCommandsResponse = 79;
         public const uint AddFreeLicense = 80;
         public const uint AddFreeLicenseResponse = 81;
+        public const uint GetIPLocation = 82;
+        public const uint GetIPLocationResponse = 83;
+        public const uint SystemStatsSchema = 84;
+        public const uint GetSystemStats = 85;
+        public const uint GetSystemStatsResponse = 86;
 
         public const uint WebAPIRegisterInterfaces = 101;
         public const uint WebAPIJobRequest = 102;
