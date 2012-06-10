@@ -324,6 +324,12 @@ message CMsgMatchSearchCriteria {
 	optional bool play_for_bragging_rights = 6;
 }
 
+message CMsgCreateOrUpdateParty {
+	optional .CMsgMatchSearchCriteria search_criteria = 1;
+	optional bool search_active = 2;
+	optional fixed64 steam_lobby_id = 3;
+}
+
 message CSOTFParty {
 	enum State {
 		UI = 0;
@@ -339,6 +345,7 @@ message CSOTFParty {
 	optional .CSOTFParty.State state = 6 [default = UI];
 	optional uint32 started_matchmaking_time = 7;
 	repeated uint32 searching_players_by_group = 10;
+	optional fixed64 steam_lobby_id = 27;
 	optional string search_key = 20 [(hidden) = true];
 	optional uint32 matchgroups = 21;
 	optional string search_map = 22;
@@ -383,6 +390,9 @@ message CTFLobbyGCPrivate {
 message CLobbyPendingPlayerReport {
 	optional uint32 account_id = 1;
 	optional fixed32 date = 2;
+}
+
+message CMsgGameMatchSignOut {
 }
 
 message CSOTFLobby {
@@ -448,15 +458,16 @@ message CMsgConnectedPlayers {
 	optional .CMsgConnectedPlayers.Event event = 5 [default = None];
 }
 
-message CMsgStartFindingMatch {
-	optional uint32 client_version = 1;
-	optional .CMsgMatchSearchCriteria search_criteria = 2;
-}
-
-message CMsgStopFindingMatch {
-}
-
 message CMsgExitMatchmaking {
+}
+
+message CMsgAcceptInvite {
+	optional uint64 party_id = 1;
+	optional fixed64 steamid_lobby = 2;
+}
+
+message CMsgAcceptInviteFailed {
+	optional int32 result_code = 1;
 }
 
 message CMsgReadyUp {
@@ -473,7 +484,7 @@ message CMsgMatchmakingSearchCountResponse {
 message CMsgKickedFromMatchmakingQueue {
 }
 
-message CMsgDOTAPlayerFailedToConnect {
+message CMsgTFPlayerFailedToConnect {
 	repeated fixed64 failed_loaders = 1;
 }
 
@@ -543,5 +554,41 @@ message CMsgTFRequestChatChannelListResponse {
 	}
 
 	repeated .CMsgTFRequestChatChannelListResponse.ChatChannel channels = 1;
+}
+
+message CMsgGameServerInfo {
+	enum MatchmakingState {
+		INVALID = 0;
+		NOT_PARTICIPATING = 1;
+		EMPTY_ALLOW_ADHOC = 2;
+		ACTIVE_ALLOW_ADHOC = 3;
+		EMPTY_STRICT = 4;
+		ACTIVE_STRICT = 5;
+	}
+
+	optional .CMsgGameServerInfo.MatchmakingState matchmaking_state = 1 [default = INVALID];
+	optional uint32 server_region = 2;
+	optional float server_loadavg = 3;
+}
+
+message CMsgPingListRequest {
+	message Address {
+		required fixed32 ip = 1;
+		required uint32 port = 2;
+	}
+
+	optional uint32 server_pool = 1;
+	repeated .CMsgPingListRequest.Address servers = 2;
+}
+
+message CMsgPingListResponse {
+	message Server {
+		required fixed32 ip = 1;
+		required uint32 port = 2;
+		required uint32 ping_ms = 3;
+	}
+
+	optional uint32 server_pool = 1;
+	repeated .CMsgPingListResponse.Server servers = 2;
 }
 

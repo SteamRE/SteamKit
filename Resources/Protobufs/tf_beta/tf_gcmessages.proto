@@ -1,5 +1,27 @@
 import "steammessages.proto";
 
+enum TF_MatchmakingMode {
+	TF_Matchmaking_QUICKPLAY = 1;
+	TF_Matchmaking_TOBOR = 2;
+	TF_Matchmaking_INDIVIDUAL_RANKED = 100;
+	TF_Matchmaking_TEAM_RANKED = 101;
+	TF_Matchmaking_INDIVIDUAL_CLASS_RESTRICTED = 102;
+	TF_Matchmaking_TEAM_CLASS_RESTRICTED = 103;
+	TF_Matchmaking_INDIVIDUAL_MARATHON = 104;
+	TF_Matchmaking_TEAM_MARATHON = 105;
+	TF_Matchmaking_COMMANDER = 106;
+}
+
+enum TF_Matchmaking_TOBOR_CRSK {
+	TF_Matchmaking_TOBOR_CRSK_GLaDOS = 1;
+	TF_Matchmaking_TOBOR_CRSK_Wheatly = 2;
+	TF_Matchmaking_TOBOR_CRSK_ATLAS = 3;
+	TF_Matchmaking_TOBOR_CRSK_PBody = 4;
+	TF_Matchmaking_TOBOR_CRSK_CCube = 5;
+	TF_Matchmaking_TOBOR_CRSK_DOG = 6;
+	TF_Matchmaking_TOBOR_CRSK_RZOEY = 7;
+}
+
 enum TF_GC_GameState {
 	TF_GC_GAMESTATE_STATE_INIT = 0;
 	TF_GC_GAMESTATE_WAIT_FOR_PLAYERS_TO_LOAD = 1;
@@ -313,21 +335,27 @@ message CMsgGC_PickupItemEligibility_QueryResponse {
 
 message CSOTFPartyMember {
 	optional bool owns_ticket = 2;
+	optional uint32 completed_challenges = 3;
+	optional uint32 badge_level = 4;
+	optional bool squad_surplus = 5;
+	optional float latitude = 6;
+	optional float longitude = 7;
 }
 
 message CMsgMatchSearchCriteria {
-	optional string key = 1;
-	optional uint32 matchgroups = 2 [default = 4294967295];
-	optional string map = 3;
-	optional string challenge = 4;
+	optional .TF_MatchmakingMode matchmaking_mode = 7 [default = TF_Matchmaking_QUICKPLAY];
 	optional bool late_join_ok = 5;
+	optional string challenge = 4;
 	optional bool play_for_bragging_rights = 6;
+	optional uint32 quickplay_mode = 8;
 }
 
 message CMsgCreateOrUpdateParty {
 	optional .CMsgMatchSearchCriteria search_criteria = 1;
 	optional bool search_active = 2;
 	optional fixed64 steam_lobby_id = 3;
+	optional bool squad_surplus = 4;
+	optional .TF_Matchmaking_TOBOR_CRSK tobor_crsk = 100 [default = TF_Matchmaking_TOBOR_CRSK_GLaDOS];
 }
 
 message CSOTFParty {
@@ -335,6 +363,7 @@ message CSOTFParty {
 		UI = 0;
 		FINDING_MATCH = 1;
 		IN_MATCH = 2;
+		AWAITING_RESERVATION_CONFIRMATION = 3;
 	}
 
 	optional uint64 party_id = 1 [(key_field) = true];
@@ -346,14 +375,12 @@ message CSOTFParty {
 	optional uint32 started_matchmaking_time = 7;
 	repeated uint32 searching_players_by_group = 10;
 	optional fixed64 steam_lobby_id = 27;
-	optional string search_key = 20 [(hidden) = true];
-	optional uint32 matchgroups = 21;
-	optional string search_map = 22;
+	optional .TF_MatchmakingMode matchmaking_mode = 30 [default = TF_Matchmaking_QUICKPLAY];
 	optional bool search_late_join_ok = 23;
 	optional string search_challenge = 25;
 	optional bool search_play_for_bragging_rights = 26;
-	optional uint32 matching_players = 14;
-	optional float search_fraction = 15;
+	optional .TF_Matchmaking_TOBOR_CRSK search_tobor_crsk = 9 [default = TF_Matchmaking_TOBOR_CRSK_GLaDOS];
+	optional uint32 search_quickplay_mode = 28;
 	optional uint32 prevent_match_until_date = 18;
 	optional uint32 prevent_match_account_id = 19;
 }
@@ -372,14 +399,23 @@ message CSOTFPartyInvite {
 }
 
 message CTFLobbyMember {
+	enum ConnectState {
+		INVALID = 0;
+		RESERVATION_PENDING = 1;
+		RESERVED = 2;
+		CONNECTED = 3;
+		CONNECTED_AD_HOC = 4;
+	}
+
 	optional fixed64 id = 1 [(key_field) = true];
 	optional .TF_GC_TEAM team = 3 [default = TF_GC_TEAM_DEFENDERS];
-	optional bool connected_to_game_server = 4;
+	optional .CTFLobbyMember.ConnectState connect_state = 13 [default = INVALID];
 	optional string name = 6;
 	optional float latitude = 8;
 	optional float longitude = 9;
 	optional .TFLobbyReadyState ready_state = 11 [default = TFLobbyReadyState_UNDECLARED];
 	optional uint64 party_id = 12;
+	optional bool squad_surplus = 14;
 }
 
 message CTFLobbyGCPrivate {
@@ -444,12 +480,21 @@ message CSOTFLobby {
 message CMsgConnectedPlayers {
 	message Player {
 		optional fixed64 steam_id = 1;
+		optional .CMsgConnectedPlayers.PlayerConnectState connect_state = 3 [default = INVALID];
+	}
+
+	enum PlayerConnectState {
+		INVALID = 0;
+		CONNECTED = 1;
+		CONNECTED_AD_HOC = 2;
+		RESERVED = 5;
 	}
 
 	enum Event {
 		None = 0;
 		MvMVictory = 1;
 		MvMDefeat = 2;
+		AcknowledgePlayers = 3;
 	}
 
 	repeated .CMsgConnectedPlayers.Player players = 1;
@@ -560,35 +605,49 @@ message CMsgGameServerInfo {
 	enum MatchmakingState {
 		INVALID = 0;
 		NOT_PARTICIPATING = 1;
-		EMPTY_ALLOW_ADHOC = 2;
-		ACTIVE_ALLOW_ADHOC = 3;
-		EMPTY_STRICT = 4;
-		ACTIVE_STRICT = 5;
+		EMPTY = 2;
+		ACTIVE_SLOTS_AVAILABLE = 3;
+		ACTIVE_FULL = 4;
 	}
 
 	optional .CMsgGameServerInfo.MatchmakingState matchmaking_state = 1 [default = INVALID];
 	optional uint32 server_region = 2;
 	optional float server_loadavg = 3;
+	optional bool server_trusted = 4;
+	optional bool server_dedicated = 5;
 }
 
-message CMsgPingListRequest {
-	message Address {
-		required fixed32 ip = 1;
-		required uint32 port = 2;
-	}
-
-	optional uint32 server_pool = 1;
-	repeated .CMsgPingListRequest.Address servers = 2;
+message CMsgMatchmakingProgress {
+	optional uint32 gameservers_total = 1;
+	optional uint32 gameservers_empty = 2;
+	optional uint32 gameservers_full = 3;
+	optional uint32 avg_wait_time_new = 4;
+	optional uint32 avg_wait_time_join_late = 5;
+	optional uint32 your_wait_time = 6;
 }
 
-message CMsgPingListResponse {
-	message Server {
-		required fixed32 ip = 1;
-		required uint32 port = 2;
-		required uint32 ping_ms = 3;
+message CMsgMvMVictoryInfo {
+	message Item {
+		optional .CMsgMvMVictoryInfo.GrantReason grant_reason = 1 [default = BADGE_LEVELED];
+		optional bytes item_data = 2;
+		optional fixed64 squad_surplus_claimer_steam_id = 3;
 	}
 
-	optional uint32 server_pool = 1;
-	repeated .CMsgPingListResponse.Server servers = 2;
+	message Player {
+		optional fixed64 steam_id = 1;
+		optional bool badge_granted = 3;
+		optional bool badge_progress_updated = 4;
+		optional bool badge_leveled = 5;
+		optional uint32 badge_level = 6;
+		optional uint32 badge_progress_bits = 7;
+		repeated .CMsgMvMVictoryInfo.Item items = 8;
+	}
+
+	enum GrantReason {
+		BADGE_LEVELED = 1;
+		SQUAD_SURPLUS = 2;
+	}
+
+	repeated .CMsgMvMVictoryInfo.Player players = 1;
 }
 

@@ -86,6 +86,24 @@ enum DOTA_CHAT_MESSAGE {
 	CHAT_MESSAGE_TAUNT = 45;
 	CHAT_MESSAGE_RANDOM = 46;
 	CHAT_MESSAGE_RD_TURN = 47;
+	CHAT_MESSAGE_SAFE_TO_LEAVE_ABANDONER_EARLY = 48;
+	CHAT_MESSAGE_DROP_RATE_BONUS = 49;
+	CHAT_MESSAGE_NO_BATTLE_POINTS = 50;
+}
+
+enum DOTA_NO_BATTLE_POINTS_REASONS {
+	NO_BATTLE_POINTS_WRONG_LOBBY_TYPE = 1;
+	NO_BATTLE_POINTS_PRACTICE_BOTS = 2;
+	NO_BATTLE_POINTS_CHEATS_ENABLED = 3;
+	NO_BATTLE_POINTS_LOW_PRIORITY = 4;
+}
+
+enum DOTA_COMBATLOG_TYPES {
+	DOTA_COMBATLOG_DAMAGE = 0;
+	DOTA_COMBATLOG_HEAL = 1;
+	DOTA_COMBATLOG_MODIFIER_ADD = 2;
+	DOTA_COMBATLOG_MODIFIER_REMOVE = 3;
+	DOTA_COMBATLOG_DEATH = 4;
 }
 
 enum EDotaEntityMessages {
@@ -145,7 +163,7 @@ message CDOTAUserMsg_ChatEvent {
 }
 
 message CDOTAUserMsg_CombatLogData {
-	optional uint32 type = 1;
+	optional .DOTA_COMBATLOG_TYPES type = 1 [default = DOTA_COMBATLOG_DAMAGE];
 	optional uint32 target_name = 2;
 	optional uint32 attacker_name = 3;
 	optional bool attacker_illusion = 4;
@@ -284,14 +302,14 @@ message CDOTAUserMsg_UnitEvent {
 	}
 
 	message AddGesture {
-		optional .Activity activity = 1;
+		optional .Activity activity = 1 [default = ACT_INVALID];
 		optional int32 slot = 2;
 		optional float fade_in = 3 [default = 0];
 		optional float fade_out = 4 [default = 0.1];
 	}
 
 	message RemoveGesture {
-		optional .Activity activity = 1;
+		optional .Activity activity = 1 [default = ACT_INVALID];
 	}
 
 	message BloodImpact {
@@ -301,7 +319,7 @@ message CDOTAUserMsg_UnitEvent {
 	}
 
 	message FadeGesture {
-		optional .Activity activity = 1;
+		optional .Activity activity = 1 [default = ACT_INVALID];
 	}
 
 	required .EDotaEntityMessages msg_type = 1 [default = DOTA_UNIT_SPEECH];

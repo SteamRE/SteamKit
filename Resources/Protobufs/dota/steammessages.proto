@@ -2,7 +2,6 @@ import "google/protobuf/descriptor.proto";
 
 extend .google.protobuf.FieldOptions {
 	optional bool key_field = 50000 [default = false];
-	optional bool hidden = 50001 [default = false];
 }
 
 message CMsgProtoBufHeader {
@@ -257,5 +256,42 @@ message CMsgAMGrantGuestPasses2 {
 message CMsgAMGrantGuestPasses2Response {
 	optional int32 eresult = 1 [default = 2];
 	optional int32 passes_granted = 2 [default = 0];
+}
+
+message CGCSystemMsg_GetAccountDetails {
+	optional fixed64 steamid = 1;
+	optional uint32 appid = 2;
+}
+
+message CGCSystemMsg_GetAccountDetails_Response {
+	optional uint32 eresult = 1 [default = 2];
+	optional string account_name = 2;
+	optional string persona_name = 3;
+	optional bool is_profile_public = 4;
+	optional bool is_inventory_public = 5;
+	optional bool is_trusted = 6;
+	optional bool is_vac_banned = 7;
+	optional bool is_cyber_cafe = 8;
+	optional bool is_school_account = 9;
+	optional bool is_limited = 10;
+	optional bool is_subscribed = 11;
+	optional uint32 package = 12;
+	optional bool is_free_trial_account = 13;
+	optional uint32 free_trial_expiration = 14;
+	optional bool is_low_violence = 15;
+}
+
+message CMsgGCGetPersonaNames {
+	repeated fixed64 steamids = 1;
+}
+
+message CMsgGCGetPersonaNames_Response {
+	message PersonaName {
+		optional fixed64 steamid = 1;
+		optional string persona_name = 2;
+	}
+
+	repeated .CMsgGCGetPersonaNames_Response.PersonaName succeeded_lookups = 1;
+	repeated fixed64 failed_lookup_steamids = 2;
 }
 

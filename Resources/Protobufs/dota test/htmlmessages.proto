@@ -171,16 +171,18 @@ message CMsgStopFind {
 message CMsgSetHorizontalScroll {
 	optional uint32 browser_handle = 1;
 	optional uint32 scroll = 2;
+	optional bool needs_response = 3;
 }
 
 message CMsgSetVerticalScroll {
 	optional uint32 browser_handle = 1;
 	optional uint32 scroll = 2;
+	optional bool needs_response = 3;
 }
 
 message CMsgSetZoomLevel {
 	optional uint32 browser_handle = 1;
-	optional uint32 zoom = 2;
+	optional float zoom = 2;
 }
 
 message CMsgViewSource {

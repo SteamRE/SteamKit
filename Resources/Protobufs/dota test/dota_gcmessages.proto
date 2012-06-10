@@ -73,7 +73,6 @@ message CSODOTAGameAccountClient {
 	optional string persona_name = 2;
 	optional uint32 wins = 3;
 	optional uint32 losses = 4;
-	optional uint32 rank = 5 [(hidden) = true];
 	optional uint32 karma = 6;
 	optional uint32 avatar = 7;
 	optional uint32 achievement_showcase_0 = 8;
@@ -85,33 +84,40 @@ message CSODOTAGameAccountClient {
 	optional uint32 initial_skill = 14;
 	optional uint32 leaver_count = 15;
 	optional bool left_last_game = 16;
-	optional uint32 rank_uncertainty = 17 [(hidden) = true];
 	optional uint32 prevent_match_until_date = 18;
-	optional int32 win_loss_streak = 19 [(hidden) = true];
 	optional uint32 prevent_text_chat_until_date = 20;
 	optional uint32 prevent_voice_until_date = 21;
 	optional uint32 last_abandoned_game_date = 22;
 	optional uint32 leaver_penalty_count = 23;
 	optional uint32 completed_game_streak = 24;
-	optional uint32 idle_in_fountain_count = 25 [(hidden) = true];
-	optional uint32 feeding_count = 26 [(hidden) = true];
-	optional uint32 logged_in_elsewhere_count = 27 [(hidden) = true];
 	optional uint32 teaching = 28;
 	optional uint32 leadership = 29;
 	optional uint32 friendly = 30;
 	optional uint32 forgiving = 31;
-	optional uint32 voice_reports = 32 [(hidden) = true];
-	optional uint32 text_reports = 33 [(hidden) = true];
-	optional uint32 ability_reports = 34 [(hidden) = true];
-	optional uint32 feeding_reports = 35 [(hidden) = true];
 	optional uint32 successful_report_count = 36;
 	optional uint32 notify_successful_report = 37;
+	optional uint32 account_disabled_until_date = 38;
+	optional uint32 account_disabled_count = 39;
 }
 
-message CSODOTABetaParticipation {
-	optional uint32 account_id = 1 [(key_field) = true];
-	optional uint32 access_rights = 2;
-	optional fixed32 beta_join_time = 3;
+message CSODOTAGameAccountClientInternal {
+	optional uint32 rank = 1;
+	optional uint32 rank_uncertainty = 2;
+	optional int32 win_loss_streak = 3;
+	optional uint32 idle_in_fountain_count = 4;
+	optional uint32 feeding_count = 5;
+	optional uint32 logged_in_elsewhere_count = 6;
+	optional uint32 voice_reports = 7;
+	optional uint32 text_reports = 8;
+	optional uint32 ability_reports = 9;
+	optional uint32 feeding_reports = 10;
+	optional uint32 automatic_report_penalty = 11;
+	optional uint32 games_since_report_penalty = 12;
+	optional uint32 report_penalty_count = 13;
+	optional uint32 pending_detected_reports = 14;
+	optional uint32 pending_in_game_reports = 15;
+	optional uint32 pending_out_of_game_reports = 16;
+	optional uint32 automated_penalty_date = 17;
 }
 
 message CSODOTAGameHeroStandings {
@@ -137,7 +143,6 @@ message CSODOTAParty {
 	repeated fixed64 pending_invites = 5;
 	optional .CSODOTAParty.State state = 6 [default = UI];
 	optional uint32 started_matchmaking_time = 7;
-	optional string search_key = 9 [(hidden) = true];
 	repeated uint32 searching_players_by_group = 10;
 	optional uint32 matchgroups = 11;
 	optional uint32 matching_players = 14;
@@ -145,9 +150,18 @@ message CSODOTAParty {
 	optional uint32 prevent_match_until_date = 18;
 	optional uint32 prevent_match_account_id = 19;
 	optional uint32 search_wait_estimate = 20;
-	optional .MatchType match_type = 21;
-	optional .DOTABotDifficulty bot_difficulty = 22;
+	optional .MatchType match_type = 21 [default = MATCH_TYPE_RANKED];
+	optional .DOTABotDifficulty bot_difficulty = 22 [default = BOT_DIFFICULTY_PASSIVE];
 	optional uint32 team_id = 23;
+}
+
+message CSODOTAPartyInternal {
+	optional string search_key = 1;
+}
+
+message CSODOTAPartyMemcached {
+	optional .CSODOTAParty party = 1;
+	optional .CSODOTAPartyInternal internal = 2;
 }
 
 message CSODOTAPartyInvite {
@@ -177,10 +191,7 @@ message CDOTALobbyMember {
 	optional uint32 meta_level = 13;
 	optional uint32 meta_xp = 14;
 	optional uint32 meta_xp_awarded = 15;
-}
-
-message CDOTALobbyGCPrivate {
-	optional string search_key = 1;
+	optional .DOTALeaverStatus_t leaver_status = 16 [default = DOTA_LEAVER_NONE];
 }
 
 message CLobbyTeamDetails {
@@ -233,7 +244,6 @@ message CSODOTALobby {
 	repeated fixed64 pending_invites = 10;
 	optional .CSODOTALobby.State state = 4 [default = UI];
 	optional string connect = 5;
-	optional .CDOTALobbyGCPrivate gc_private = 9 [(hidden) = true];
 	optional .CSODOTALobby.LobbyType lobby_type = 12 [default = INVALID];
 	optional bool allow_cheats = 13;
 	optional bool fill_with_bots = 14;
@@ -251,17 +261,29 @@ message CSODOTALobby {
 	optional float readyup_remaining_time = 26;
 	optional bool leaver_detected = 27;
 	optional .DOTA_CM_PICK cm_pick = 28 [default = DOTA_CM_RANDOM];
-	repeated .CLobbyPendingPlayerReport pending_player_reports = 29 [(hidden) = true];
 	optional uint32 match_id = 30;
 	optional bool allow_spectating = 31 [default = true];
-	optional uint32 average_rank = 32 [(hidden) = true];
 	optional fixed64 load_game_lobby_id = 33;
 	optional uint32 load_game_save_number = 34;
-	optional fixed32 replay_salt = 35 [(hidden) = true];
 	optional .DOTABotDifficulty bot_difficulty = 36 [default = BOT_DIFFICULTY_HARD];
 	optional .DOTAGameVersion game_version = 37 [default = GAME_VERSION_CURRENT];
 	repeated .CLobbyTimedRewardDetails timed_reward_details = 38;
 	optional string pass_key = 39;
+	optional float drop_rate_bonus = 40;
+	repeated .DOTABotDifficulty bot_slot_difficulty = 41;
+	optional uint32 leagueid = 42 [default = 1];
+}
+
+message CSODOTALobbyInternal {
+	optional string search_key = 1;
+	repeated .CLobbyPendingPlayerReport pending_player_reports = 2;
+	optional uint32 average_rank = 3;
+	optional fixed32 replay_salt = 4;
+}
+
+message CSODOTALobbyMemcached {
+	optional .CSODOTALobby lobby = 1;
+	optional .CSODOTALobbyInternal internal = 2;
 }
 
 message CMsgConnectedPlayers {
@@ -282,7 +304,7 @@ message CMsgStartFindingMatch {
 	optional uint32 client_version = 3;
 	optional uint32 game_modes = 4 [default = 4294967295];
 	optional .DOTABotDifficulty bot_difficulty = 5 [default = BOT_DIFFICULTY_HARD];
-	optional .MatchType match_type = 6;
+	optional .MatchType match_type = 6 [default = MATCH_TYPE_RANKED];
 }
 
 message CMsgStopFindingMatch {
@@ -321,6 +343,7 @@ message CSourceTVGame {
 	optional float tv_broadcast_time = 17;
 	optional float game_time = 18;
 	optional fixed64 server_steamid = 19;
+	optional uint32 leagueid = 20;
 }
 
 message CMsgSourceTVGamesResponse {
@@ -332,6 +355,7 @@ message CMsgFindSourceTVGames {
 	optional string search_key = 1;
 	optional uint32 start = 2;
 	optional uint32 num_games = 3;
+	optional uint32 leagueid = 4;
 }
 
 message CMsgSpectateFriendGame {
@@ -368,8 +392,8 @@ message CMsgGameServerInfo {
 	optional float server_game_time = 11;
 	optional fixed64 server_relay_connected_steam_id = 12;
 	optional uint32 relay_slots_max = 13;
-	optional uint32 relays_connected = 14;
-	optional uint32 relay_clients_connected = 15;
+	optional int32 relays_connected = 14;
+	optional int32 relay_clients_connected = 15;
 	optional fixed64 relayed_game_server_steam_id = 16;
 	optional uint32 parent_relay_count = 17;
 }
@@ -398,6 +422,7 @@ message CMsgPracticeLobbyCreate {
 message CMsgPracticeLobbySetTeamSlot {
 	optional .DOTA_GC_TEAM team = 1 [default = DOTA_GC_TEAM_GOOD_GUYS];
 	optional uint32 slot = 2;
+	optional .DOTABotDifficulty bot_difficulty = 3 [default = BOT_DIFFICULTY_INVALID];
 }
 
 message CMsgPracticeLobbyKick {
@@ -428,6 +453,7 @@ message CMsgPracticeLobbySetDetails {
 	optional bool allow_spectating = 13;
 	optional .DOTAGameVersion game_version = 14 [default = GAME_VERSION_CURRENT];
 	optional string pass_key = 15;
+	optional uint32 leagueid = 16;
 }
 
 message CMsgPracticeLobbyList {
@@ -681,6 +707,9 @@ message CMsgDOTAMatch {
 	optional uint32 human_players = 17;
 	optional uint32 average_skill = 18;
 	optional float game_balance = 19;
+	optional uint32 radiant_team_id = 20;
+	optional uint32 dire_team_id = 21;
+	optional uint32 leagueid = 22;
 }
 
 message CMsgDOTAPlayerMatchHistory {
@@ -709,6 +738,7 @@ message CMsgDOTARequestMatches {
 	optional uint32 request_id = 13;
 	optional bool tournament_games_only = 14;
 	optional uint32 account_id = 15;
+	optional uint32 league_id = 16;
 }
 
 message CMsgDOTARequestMatchesResponse {
@@ -733,6 +763,8 @@ message CMsgDOTAPopup {
 		TEAM_MATCHMAKE_ALREADY_GAME = 10;
 		TEAM_MATCHMAKE_FAIL_GET_PARTY = 11;
 		MATCHMAKING_DISABLED = 12;
+		INVITE_DENIED = 13;
+		PARTY_FULL = 14;
 	}
 
 	optional .CMsgDOTAPopup.PopupID id = 1 [default = KICKED_FROM_LOBBY];
@@ -790,6 +822,22 @@ message CMsgDOTACreateTeamResponse {
 	}
 
 	repeated .CMsgDOTACreateTeamResponse.Result results = 1;
+}
+
+message CMsgDOTAEditTeamLogo {
+	optional uint64 logo = 1;
+}
+
+message CMsgDOTAEditTeamLogoResponse {
+	enum Result {
+		INVALID = -1;
+		SUCCESS = 0;
+		CREATOR_BUSY = 9;
+		UNSPECIFIED_ERROR = 10;
+		NO_LOGO = 12;
+	}
+
+	repeated .CMsgDOTAEditTeamLogoResponse.Result results = 1;
 }
 
 message CMsgDOTADisbandTeam {
@@ -1124,10 +1172,11 @@ message CMsgDOTARequestPlayerResourcesResponse {
 	optional uint32 player_id = 3;
 	optional bool prevent_text_chat = 4;
 	optional bool prevent_voice_chat = 5;
+	optional bool match_making_ban = 6;
 }
 
 message CMsgDOTAKickedFromMatchmakingQueue {
-	optional .MatchType match_type = 1;
+	optional .MatchType match_type = 1 [default = MATCH_TYPE_RANKED];
 }
 
 message CMsgDOTARequestSaveGames {
@@ -1305,10 +1354,28 @@ message CItemDropEvent {
 	optional uint32 current_score = 9;
 	optional uint32 next_drop_at = 10;
 	optional bool is_crate = 11;
+	optional bool is_level_reward = 12;
+	optional uint32 xp = 13;
+	optional uint32 level = 14;
+	optional uint32 match_id = 15;
+}
+
+message CXPGainEvent {
+	optional uint32 match_id = 1;
+	optional uint32 account_id = 2;
+	optional uint32 time_stamp = 3;
+	optional uint32 duration = 4;
+	optional uint32 base_xp = 5;
+	optional uint32 time_reward_xp = 6;
+	optional uint32 drop_rate_bonus_xp = 7;
+	optional uint32 final_xp = 8;
+	optional float drop_rate_bonus = 9;
+	optional bool leveled_up = 10;
 }
 
 message CMsgDOTAWelcome {
 	optional bool spectator_only = 1;
+	optional bool allow_team_creation = 2;
 }
 
 message CSODOTAGameHeroFavorites {
