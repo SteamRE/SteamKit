@@ -230,7 +230,7 @@ namespace SteamKit2
                         continue;
                     }
                     // flatten lists
-                    else if ( argValue is IEnumerable )
+                    else if ( argValue is IEnumerable && !( argValue is string ) )
                     {
                         int index = 0;
                         IEnumerable enumerable = argValue as IEnumerable;
