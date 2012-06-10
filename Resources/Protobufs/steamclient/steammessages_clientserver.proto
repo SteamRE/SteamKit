@@ -1759,6 +1759,7 @@ message CMsgMDSSetAppBuildLive {
 
 message CMsgMDSSetAppBuildLiveResponse {
 	optional int32 eresult = 1 [default = 2];
+	optional string error_string = 2;
 }
 
 message CMsgClientEmailChange {
