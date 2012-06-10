@@ -4,6 +4,7 @@ message CGCStorePurchaseInit_LineItem {
 	optional uint32 item_def_id = 1;
 	optional uint32 quantity = 2;
 	optional uint32 cost_in_local_currency = 3;
+	optional uint32 purchase_type = 4;
 }
 
 message CMsgGCStorePurchaseInit {
@@ -32,6 +33,29 @@ message CSOLobbyInvite {
 
 message CMsgSystemBroadcast {
 	optional string message = 1;
+}
+
+message CMsgClientHello {
+	optional uint32 version = 1;
+}
+
+message CMsgServerHello {
+	optional uint32 version = 1;
+}
+
+message CMsgClientWelcome {
+	optional uint32 version = 1;
+	optional bytes game_data = 2;
+}
+
+message CMsgServerWelcome {
+	optional uint32 version = 1;
+}
+
+message CMsgClientGoodbye {
+}
+
+message CMsgServerGoodbye {
 }
 
 message CMsgInviteToParty {
@@ -319,5 +343,32 @@ message CMsgGCRemoveCustomizationAttributeSimple {
 
 message CMsgGCResetStrangeScores {
 	optional uint64 item_id = 1;
+}
+
+message CMsgGCItemPreviewItemBoughtNotification {
+	optional uint32 item_def_index = 1;
+}
+
+message CMsgGCStorePurchaseCancel {
+	optional uint64 txn_id = 1;
+}
+
+message CMsgGCStorePurchaseCancelResponse {
+	optional uint32 result = 1;
+}
+
+message CMsgGCStorePurchaseFinalize {
+	optional uint64 txn_id = 1;
+}
+
+message CMsgGCStorePurchaseFinalizeResponse {
+	optional uint32 result = 1;
+	repeated uint64 item_ids = 2;
+}
+
+message CMsgGCGiftedItems {
+	optional uint64 gifter_steam_id = 1;
+	optional bool was_random_person = 2;
+	repeated uint32 recipient_account_ids = 3;
 }
 
