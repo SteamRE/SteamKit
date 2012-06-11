@@ -1,8 +1,7 @@
-﻿using System;
-
+﻿
 namespace SteamKit2.Blob
 {
-    /// <summary>
+   /// <summary>
     /// Gets the preprocess code of the blob.
     /// </summary>
     public enum EAutoPreprocessCode
