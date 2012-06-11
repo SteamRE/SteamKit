@@ -44,6 +44,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <DocumentationFile>bin\Debug\SteamKit2.XML</DocumentationFile>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -55,11 +56,16 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <DocumentationFile>bin\Release\SteamKit2.xml</DocumentationFile>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Classless.Hasher, Version=0.7.2247.36474, Culture=neutral, PublicKeyToken=bad6dfcf741043ca, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Classless.Hasher.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.84.0.0, Culture=neutral, PublicKeyToken=1b03e6acf1164f73">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
@@ -90,17 +96,20 @@
     <Compile Include="Base\Generated\SteamLanguageInternal.cs" />
     <Compile Include="Base\MsgBase.cs" />
     <Compile Include="Base\PacketBase.cs" />
+    <Compile Include="Blob\BlobFieldAttribute.cs" />
     <Compile Include="Blob\BlobReader.cs" />
     <Compile Include="Blob\BlobType.cs" />
+    <Compile Include="Blob\BlobTypedReader.cs" />
     <Compile Include="Blob\BlobUtil.cs" />
-    <Compile Include="Blob\Caching\CacheUtil.cs" />
-    <Compile Include="Blob\Caching\DynamicMethodHandler.cs" />
-    <Compile Include="Blob\Caching\FastPropertyInfo.cs" />
-    <Compile Include="Blob\Fields\CDRFields.cs" />
-    <Compile Include="Blob\FramingStream.cs" />
-    <Compile Include="Blob\Parsers\BlobTypedReader.cs" />
-    <Compile Include="Blob\Parsers\BlobXmlReader.cs" />
-    <Compile Include="Blob\PeekableStream.cs" />
+    <Compile Include="Blob\JIT\JITContext.cs" />
+    <Compile Include="Blob\Serializers\BooleanSerializer.cs" />
+    <Compile Include="Blob\Serializers\DictionarySerializer.cs" />
+    <Compile Include="Blob\Serializers\FieldSerializer.cs" />
+    <Compile Include="Blob\Serializers\IBlobSerializer.cs" />
+    <Compile Include="Blob\Serializers\Int32Serializer.cs" />
+    <Compile Include="Blob\Serializers\ListSerializer.cs" />
+    <Compile Include="Blob\Serializers\StringSerializer.cs" />
+    <Compile Include="Blob\Serializers\TypeSerializer.cs" />
     <Compile Include="Steam3\CDNClient.cs" />
     <Compile Include="Steam3\Handlers\SteamCloud\Callbacks.cs" />
     <Compile Include="Steam3\Handlers\SteamCloud\SteamCloud.cs" />

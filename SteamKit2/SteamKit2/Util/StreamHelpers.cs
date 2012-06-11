@@ -6,39 +6,50 @@ namespace SteamKit2
 {
     internal static class StreamHelpers
     {
-        internal static Int16 ReadInt16(this Stream stream)
+        static byte[] data = new byte[8];
+        public static Int16 ReadInt16(this Stream stream)
         {
-            byte[] data = new byte[ 2 ];
-            stream.Read( data, 0, data.Length );
+            stream.Read( data, 0, 2 );
 
             return BitConverter.ToInt16( data, 0 );
         }
 
-        internal static Int32 ReadInt32(this Stream stream)
+        public static UInt16 ReadUInt16(this Stream stream)
         {
-            byte[] data = new byte[ 4 ];
-            stream.Read( data, 0, data.Length );
+            stream.Read(data, 0, 2);
+
+            return BitConverter.ToUInt16(data, 0);
+        }
+
+        public static Int32 ReadInt32(this Stream stream)
+        {
+            stream.Read( data, 0, 4 );
 
             return BitConverter.ToInt32( data, 0 );
         }
 
-        internal static UInt64 ReadUInt64(this Stream stream)
+        public static UInt32 ReadUInt32(this Stream stream)
         {
-            byte[] data = new byte[ 8 ];
-            stream.Read( data, 0, data.Length );
+            stream.Read(data, 0, 4);
+
+            return BitConverter.ToUInt32(data, 0);
+        }
+
+        public static UInt64 ReadUInt64(this Stream stream)
+        {
+            stream.Read( data, 0, 8 );
 
             return BitConverter.ToUInt64( data, 0 );
         }
 
-        internal static float ReadFloat( this Stream stream )
+        public static float ReadFloat( this Stream stream )
         {
-            byte[] data = new byte[ 4 ];
-            stream.Read( data, 0, data.Length );
+            stream.Read( data, 0, 4 );
 
             return BitConverter.ToSingle( data, 0 );
         }
 
-        internal static string ReadNullTermString( this Stream stream, Encoding encoding )
+        public static string ReadNullTermString( this Stream stream, Encoding encoding )
         {
             int characterSize = encoding.GetByteCount( "e" );
 
@@ -62,13 +73,29 @@ namespace SteamKit2
             }
         }
 
-        internal static byte[] ReadBytes( this Stream stream, int len )
+        private static byte[] bufferCache;
+
+        public static byte[] ReadBytesCached( this Stream stream, int len )
         {
-            byte[] data = new byte[ len ];
+            if (bufferCache == null || bufferCache.Length < len)
+                bufferCache = new byte[len];
 
-            stream.Read( data, 0, len );
+            stream.Read( bufferCache, 0, len );
 
-            return data;
+            return bufferCache;
+        }
+
+        static byte[] discardBuffer = new byte[2 << 12];
+
+        public static void ReadAndDiscard(this Stream stream, int len)
+        {
+            while (len > discardBuffer.Length)
+            {
+                stream.Read(discardBuffer, 0, discardBuffer.Length);
+                len -= discardBuffer.Length;
+            }
+
+            stream.Read(discardBuffer, 0, len);
         }
     }
 }
