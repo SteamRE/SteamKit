@@ -199,6 +199,8 @@ message CLobbyTeamDetails {
 	optional string team_tag = 3;
 	optional uint32 team_id = 4;
 	optional uint64 team_logo = 5;
+	optional uint64 team_base_logo = 6;
+	optional uint64 team_banner_logo = 7;
 }
 
 message CLobbyPendingPlayerReport {
@@ -710,6 +712,10 @@ message CMsgDOTAMatch {
 	optional uint32 radiant_team_id = 20;
 	optional uint32 dire_team_id = 21;
 	optional uint32 leagueid = 22;
+	optional string radiant_name = 23;
+	optional string dire_name = 24;
+	optional uint64 radiant_logo = 25;
+	optional uint64 dire_logo = 26;
 }
 
 message CMsgDOTAPlayerMatchHistory {
@@ -795,12 +801,16 @@ message CMsgDOTATeam {
 	optional uint32 losses = 9;
 	optional uint32 rank = 10;
 	optional uint64 logo = 11;
+	optional uint64 base_logo = 12;
+	optional uint64 banner_logo = 13;
 }
 
 message CMsgDOTACreateTeam {
 	optional string name = 1;
 	optional string tag = 2;
 	optional uint64 logo = 3;
+	optional uint64 base_logo = 4;
+	optional uint64 banner_logo = 5;
 }
 
 message CMsgDOTACreateTeamResponse {
@@ -826,6 +836,8 @@ message CMsgDOTACreateTeamResponse {
 
 message CMsgDOTAEditTeamLogo {
 	optional uint64 logo = 1;
+	optional uint64 base_logo = 2;
+	optional uint64 banner_logo = 3;
 }
 
 message CMsgDOTAEditTeamLogoResponse {
@@ -1250,6 +1262,7 @@ message CMsgWatchGameResponse {
 		UNAVAILABLE = 3;
 		CANCELLED = 4;
 		INCOMPATIBLEVERSION = 5;
+		MISSINGLEAGUESUBSCRIPTION = 6;
 	}
 
 	optional .CMsgWatchGameResponse.WatchGameResult watch_game_result = 1 [default = PENDING];
@@ -1371,6 +1384,24 @@ message CXPGainEvent {
 	optional uint32 final_xp = 8;
 	optional float drop_rate_bonus = 9;
 	optional bool leveled_up = 10;
+}
+
+message CLowPriPenalty {
+	optional uint32 match_id = 1;
+	optional uint32 account_id = 2;
+	optional uint32 time_stamp = 3;
+	optional uint32 games_since_report_penalty = 4;
+	optional uint32 pending_in_game_reports = 5;
+	optional uint32 pending_out_of_game_reports = 6;
+	optional uint32 pending_detected_reports = 7;
+	optional uint32 report_penalty_count = 8;
+	optional uint32 last_penalty_date = 9;
+	optional uint32 last_abandon_date = 10;
+	optional uint32 abandon_penalty_count = 11;
+	optional uint32 completed_game_streak = 12;
+	optional uint32 abandon_time_given = 13;
+	optional uint32 report_time_given = 14;
+	optional uint32 rank = 15;
 }
 
 message CMsgDOTAWelcome {

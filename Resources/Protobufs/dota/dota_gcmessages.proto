@@ -117,6 +117,7 @@ message CSODOTAGameAccountClientInternal {
 	optional uint32 pending_detected_reports = 14;
 	optional uint32 pending_in_game_reports = 15;
 	optional uint32 pending_out_of_game_reports = 16;
+	optional uint32 automated_penalty_date = 17;
 }
 
 message CSODOTAGameHeroStandings {
@@ -709,6 +710,8 @@ message CMsgDOTAMatch {
 	optional uint32 radiant_team_id = 20;
 	optional uint32 dire_team_id = 21;
 	optional uint32 leagueid = 22;
+	optional string radiant_name = 23;
+	optional string dire_name = 24;
 }
 
 message CMsgDOTAPlayerMatchHistory {
@@ -1171,6 +1174,7 @@ message CMsgDOTARequestPlayerResourcesResponse {
 	optional uint32 player_id = 3;
 	optional bool prevent_text_chat = 4;
 	optional bool prevent_voice_chat = 5;
+	optional bool match_making_ban = 6;
 }
 
 message CMsgDOTAKickedFromMatchmakingQueue {

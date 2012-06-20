@@ -35,6 +35,29 @@ message CMsgSystemBroadcast {
 	optional string message = 1;
 }
 
+message CMsgClientHello {
+	optional uint32 version = 1;
+}
+
+message CMsgServerHello {
+	optional uint32 version = 1;
+}
+
+message CMsgClientWelcome {
+	optional uint32 version = 1;
+	optional bytes game_data = 2;
+}
+
+message CMsgServerWelcome {
+	optional uint32 version = 1;
+}
+
+message CMsgClientGoodbye {
+}
+
+message CMsgServerGoodbye {
+}
+
 message CMsgInviteToParty {
 	optional fixed64 steam_id = 1;
 }
@@ -341,5 +364,11 @@ message CMsgGCStorePurchaseFinalize {
 message CMsgGCStorePurchaseFinalizeResponse {
 	optional uint32 result = 1;
 	repeated uint64 item_ids = 2;
+}
+
+message CMsgGCGiftedItems {
+	optional uint64 gifter_steam_id = 1;
+	optional bool was_random_person = 2;
+	repeated uint32 recipient_account_ids = 3;
 }
 
