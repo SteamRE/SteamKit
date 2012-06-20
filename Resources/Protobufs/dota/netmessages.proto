@@ -60,6 +60,7 @@ enum SVC_Messages {
 	svc_Menu = 29;
 	svc_GameEventList = 30;
 	svc_GetCvarValue = 31;
+	svc_PacketReliable = 32;
 }
 
 enum ESplitScreenMessageType {
@@ -415,5 +416,10 @@ message CSVCMsgList_UserMessages {
 	}
 
 	repeated .CSVCMsgList_UserMessages.usermsg_t usermsgs = 1;
+}
+
+message CSVCMsg_PacketReliable {
+	optional int32 tick = 1;
+	optional int32 messagessize = 2;
 }
 

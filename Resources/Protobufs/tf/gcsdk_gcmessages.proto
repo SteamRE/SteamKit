@@ -44,3 +44,21 @@ message CMsgSOCacheVersion {
 	optional fixed64 version = 1;
 }
 
+message CMsgAccountDetails {
+	optional bool valid = 1;
+	optional string account_name = 2;
+	optional string persona_name = 3;
+	optional bool public_profile = 4;
+	optional bool public_inventory = 5;
+	optional bool vac_banned = 6;
+	optional bool cyber_cafe = 7;
+	optional bool school_account = 8;
+	optional bool free_trial_account = 9;
+	optional bool subscribed = 10;
+	optional bool low_violence = 11;
+	optional bool limited = 12;
+	optional bool trusted = 13;
+	optional uint32 package = 14;
+	optional fixed32 time_cached = 15;
+}
+

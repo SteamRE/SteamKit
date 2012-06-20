@@ -127,6 +127,7 @@ enum DOTA_PARTICLE_MESSAGE {
 	DOTA_PARTICLE_MANAGER_EVENT_DESTROY_INVOLVING = 8;
 	DOTA_PARTICLE_MANAGER_EVENT_RELEASE = 9;
 	DOTA_PARTICLE_MANAGER_EVENT_LATENCY = 10;
+	DOTA_PARTICLE_MANAGER_EVENT_SHOULD_DRAW = 11;
 }
 
 enum DOTA_OVERHEAD_ALERT {
@@ -403,6 +404,10 @@ message CDOTAUserMsg_ParticleManager {
 		optional int32 tick = 2;
 	}
 
+	message UpdateParticleShouldDraw {
+		optional bool should_draw = 1;
+	}
+
 	required .DOTA_PARTICLE_MESSAGE type = 1 [default = DOTA_PARTICLE_MANAGER_EVENT_CREATE];
 	required uint32 index = 2;
 	optional .CDOTAUserMsg_ParticleManager.ReleaseParticleIndex release_particle_index = 3;
@@ -416,6 +421,7 @@ message CDOTAUserMsg_ParticleManager {
 	optional .CDOTAUserMsg_ParticleManager.UpdateParticleOffset update_particle_offset = 11;
 	optional .CDOTAUserMsg_ParticleManager.UpdateParticleEnt update_particle_ent = 12;
 	optional .CDOTAUserMsg_ParticleManager.UpdateParticleLatency update_particle_latency = 13;
+	optional .CDOTAUserMsg_ParticleManager.UpdateParticleShouldDraw update_particle_should_draw = 14;
 }
 
 message CDOTAUserMsg_OverheadEvent {
