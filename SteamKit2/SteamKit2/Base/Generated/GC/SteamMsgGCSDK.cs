@@ -266,5 +266,150 @@ namespace SteamKit2.GC.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgAccountDetails")]
+  public partial class CMsgAccountDetails : global::ProtoBuf.IExtensible
+  {
+    public CMsgAccountDetails() {}
+    
+
+    private bool _valid = default(bool);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"valid", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    public bool valid
+    {
+      get { return _valid; }
+      set { _valid = value; }
+    }
+
+    private string _account_name = "";
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"account_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoDefaultValue("")]
+    public string account_name
+    {
+      get { return _account_name; }
+      set { _account_name = value; }
+    }
+
+    private string _persona_name = "";
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"persona_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoDefaultValue("")]
+    public string persona_name
+    {
+      get { return _persona_name; }
+      set { _persona_name = value; }
+    }
+
+    private bool _public_profile = default(bool);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"public_profile", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    public bool public_profile
+    {
+      get { return _public_profile; }
+      set { _public_profile = value; }
+    }
+
+    private bool _public_inventory = default(bool);
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"public_inventory", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    public bool public_inventory
+    {
+      get { return _public_inventory; }
+      set { _public_inventory = value; }
+    }
+
+    private bool _vac_banned = default(bool);
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"vac_banned", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    public bool vac_banned
+    {
+      get { return _vac_banned; }
+      set { _vac_banned = value; }
+    }
+
+    private bool _cyber_cafe = default(bool);
+    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"cyber_cafe", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    public bool cyber_cafe
+    {
+      get { return _cyber_cafe; }
+      set { _cyber_cafe = value; }
+    }
+
+    private bool _school_account = default(bool);
+    [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"school_account", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    public bool school_account
+    {
+      get { return _school_account; }
+      set { _school_account = value; }
+    }
+
+    private bool _free_trial_account = default(bool);
+    [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"free_trial_account", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    public bool free_trial_account
+    {
+      get { return _free_trial_account; }
+      set { _free_trial_account = value; }
+    }
+
+    private bool _subscribed = default(bool);
+    [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"subscribed", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    public bool subscribed
+    {
+      get { return _subscribed; }
+      set { _subscribed = value; }
+    }
+
+    private bool _low_violence = default(bool);
+    [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"low_violence", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    public bool low_violence
+    {
+      get { return _low_violence; }
+      set { _low_violence = value; }
+    }
+
+    private bool _limited = default(bool);
+    [global::ProtoBuf.ProtoMember(12, IsRequired = false, Name=@"limited", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    public bool limited
+    {
+      get { return _limited; }
+      set { _limited = value; }
+    }
+
+    private bool _trusted = default(bool);
+    [global::ProtoBuf.ProtoMember(13, IsRequired = false, Name=@"trusted", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    public bool trusted
+    {
+      get { return _trusted; }
+      set { _trusted = value; }
+    }
+
+    private uint _package = default(uint);
+    [global::ProtoBuf.ProtoMember(14, IsRequired = false, Name=@"package", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    public uint package
+    {
+      get { return _package; }
+      set { _package = value; }
+    }
+
+    private uint _time_cached = default(uint);
+    [global::ProtoBuf.ProtoMember(15, IsRequired = false, Name=@"time_cached", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    public uint time_cached
+    {
+      get { return _time_cached; }
+      set { _time_cached = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
 }
 #pragma warning restore 1591
