@@ -11098,6 +11098,15 @@ namespace SteamKit2.Internal
       get { return _eresult; }
       set { _eresult = value; }
     }
+
+    private string _error_string = "";
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"error_string", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoDefaultValue("")]
+    public string error_string
+    {
+      get { return _error_string; }
+      set { _error_string = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

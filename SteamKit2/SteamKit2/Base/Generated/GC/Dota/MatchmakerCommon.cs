@@ -42,7 +42,10 @@ namespace SteamKit2.GC.Dota.Internal
       BOT_DIFFICULTY_HARD = 3,
             
       [global::ProtoBuf.ProtoEnum(Name=@"BOT_DIFFICULTY_UNFAIR", Value=4)]
-      BOT_DIFFICULTY_UNFAIR = 4
+      BOT_DIFFICULTY_UNFAIR = 4,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"BOT_DIFFICULTY_INVALID", Value=5)]
+      BOT_DIFFICULTY_INVALID = 5
     }
   
 }
