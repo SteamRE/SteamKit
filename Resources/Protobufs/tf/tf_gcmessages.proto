@@ -74,6 +74,13 @@ message CMsgTFSaxxyBroadcast {
 	optional string user_name = 2;
 }
 
+message CMsgTF_HelloPeopleLookingAtBinariesIWonderWhatThisDoes {
+	optional uint32 this_is_an_integer = 1;
+	optional uint32 this_is_a_string = 2;
+	optional uint32 this_is_a_useless_field_nothing_in_here_move_along_move_along = 3;
+	optional string this_is_an_integer_too = 4;
+}
+
 message CSOTFDuelSummary {
 	optional uint32 account_id = 1 [(key_field) = true];
 	optional uint32 duel_wins = 2;

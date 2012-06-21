@@ -1430,3 +1430,29 @@ message CMsgDOTAPlayerHeroesRecentResponse {
 	repeated uint32 hero_ids = 2;
 }
 
+message CDOTAOverwatch {
+	message PlayersByRegion {
+		optional int32 region = 1;
+		optional int32 total = 2;
+		optional int32 in_queue = 3;
+		optional int32 in_match = 4;
+		optional int32 in_practice = 5;
+		optional int32 in_tournament = 6;
+		optional int32 in_tutorial = 7;
+		optional int32 in_coop = 8;
+		optional int32 in_team_match = 9;
+		optional int32 spectating = 10;
+		optional int32 idle = 11;
+	}
+
+	message ServersByRegion {
+		optional int32 region = 1;
+		optional int32 in_use = 2;
+		optional int32 available = 3;
+	}
+
+	repeated .CDOTAOverwatch.PlayersByRegion players_by_region = 1;
+	repeated .CDOTAOverwatch.ServersByRegion game_servers_by_region = 2;
+	repeated .CDOTAOverwatch.ServersByRegion proxy_servers_by_region = 3;
+}
+
