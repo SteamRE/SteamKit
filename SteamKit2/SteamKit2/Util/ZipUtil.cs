@@ -39,14 +39,9 @@ namespace SteamKit2
                 UInt32 decompressedSize;
                 byte[] compressedBuffer = ReadLocalFile( reader, out fileName, out decompressedSize );
 
-                if ( !fileName.Equals( "zip" ) )
-                {
-                    throw new Exception( "Invalid stream, expecting \"zip\"" );
-                }
-
                 if ( !PeekHeader( reader, CentralDirectoryHeader ) )
                 {
-                    throw new Exception( "Expecting CentralDirectoryHeader following \"zip\"" );
+                    throw new Exception( "Expecting CentralDirectoryHeader following filename" );
                 }
 
                 string cdrFileName;
@@ -78,10 +73,10 @@ namespace SteamKit2
                 byte[] compressed = DeflateBuffer( buffer );
 
                 Int32 poslocal = WriteHeader( writer, LocalFileHeader );
-                WriteLocalFile( writer, "zip", checkSum, ( UInt32 )buffer.Length, compressed );
+                WriteLocalFile( writer, "z", checkSum, ( UInt32 )buffer.Length, compressed );
 
                 Int32 posCDR = WriteHeader( writer, CentralDirectoryHeader );
-                UInt32 CDRSize = WriteCentralDirectory( writer, "zip", checkSum, ( UInt32 )compressed.Length, ( UInt32 )buffer.Length, poslocal );
+                UInt32 CDRSize = WriteCentralDirectory( writer, "z", checkSum, ( UInt32 )compressed.Length, ( UInt32 )buffer.Length, poslocal );
 
                 Int32 posEOD = WriteHeader( writer, EndOfDirectoryHeader );
                 WriteEndOfDirectory( writer, 1, CDRSize, posCDR );
