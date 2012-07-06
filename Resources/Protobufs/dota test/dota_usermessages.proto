@@ -34,6 +34,7 @@ enum EDotaUserMessages {
 	DOTA_UM_ItemPurchased = 92;
 	DOTA_UM_Ping = 93;
 	DOTA_UM_ItemFound = 94;
+	DOTA_UM_CharacterSpeakConcept = 95;
 }
 
 enum DOTA_CHAT_MESSAGE {
@@ -113,6 +114,7 @@ enum EDotaEntityMessages {
 	DOTA_UNIT_REMOVE_GESTURE = 3;
 	DOTA_UNIT_REMOVE_ALL_GESTURES = 4;
 	DOTA_UNIT_FADE_GESTURE = 6;
+	DOTA_UNIT_SPEECH_CLIENTSIDE_RULES = 7;
 }
 
 enum DOTA_PARTICLE_MESSAGE {
@@ -142,6 +144,8 @@ enum DOTA_OVERHEAD_ALERT {
 	OVERHEAD_ALERT_BLOCK = 8;
 	OVERHEAD_ALERT_BONUS_POISON_DAMAGE = 9;
 	OVERHEAD_ALERT_HEAL = 10;
+	OVERHEAD_ALERT_MANA_ADD = 11;
+	OVERHEAD_ALERT_MANA_LOSS = 12;
 }
 
 message CDOTAUserMsg_AIDebugLine {
@@ -290,6 +294,28 @@ message CDOTAUserMsg_SetNextAutobuyItem {
 	optional string name = 1;
 }
 
+message CDOTAResponseQuerySerialized {
+	message Fact {
+		enum ValueType {
+			NUMERIC = 1;
+			STRING = 2;
+		}
+
+		required int32 key = 1;
+		required .CDOTAResponseQuerySerialized.Fact.ValueType valtype = 2 [default = NUMERIC];
+		optional float val_numeric = 3;
+		optional string val_string = 4;
+	}
+
+	repeated .CDOTAResponseQuerySerialized.Fact facts = 1;
+}
+
+message CDOTASpeechMatchOnClient {
+	optional int32 concept = 1;
+	optional int32 recipient_type = 2;
+	optional .CDOTAResponseQuerySerialized responsequery = 3;
+}
+
 message CDOTAUserMsg_UnitEvent {
 	message Speech {
 		optional int32 concept = 1;
@@ -331,6 +357,7 @@ message CDOTAUserMsg_UnitEvent {
 	optional .CDOTAUserMsg_UnitEvent.RemoveGesture remove_gesture = 6;
 	optional .CDOTAUserMsg_UnitEvent.BloodImpact blood_impact = 7;
 	optional .CDOTAUserMsg_UnitEvent.FadeGesture fade_gesture = 8;
+	optional .CDOTASpeechMatchOnClient speech_match_on_client = 9;
 }
 
 message CDOTAUserMsg_ItemPurchased {

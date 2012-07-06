@@ -372,3 +372,9 @@ message CMsgGCGiftedItems {
 	repeated uint32 recipient_account_ids = 3;
 }
 
+message CMsgGCNameItemNotification {
+	optional fixed64 player_steamid = 1;
+	optional uint32 item_def_index = 2;
+	optional string item_name_custom = 3;
+}
+

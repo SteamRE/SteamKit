@@ -357,8 +357,8 @@ message CSOEconItemDropRateBonus {
 }
 
 message CSOEconItemLeagueViewPass {
-	optional uint32 account_id = 1;
-	optional uint32 league_id = 2;
+	optional uint32 account_id = 1 [(key_field) = true];
+	optional uint32 league_id = 2 [(key_field) = true];
 	optional uint32 admin = 3;
 	optional uint32 itemindex = 4;
 }

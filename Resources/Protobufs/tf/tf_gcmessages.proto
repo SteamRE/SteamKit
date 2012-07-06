@@ -1,10 +1,10 @@
 import "steammessages.proto";
 
 enum TF_MatchmakingMode {
+	TF_Matchmaking_INVALID = 0;
 	TF_Matchmaking_QUICKPLAY = 1;
 	TF_Matchmaking_TOBOR = 2;
-	TF_Matchmaking_INDIVIDUAL_RANKED = 100;
-	TF_Matchmaking_TEAM_RANKED = 101;
+	TF_Matchmaking_MU_VU_MU = 3;
 	TF_Matchmaking_INDIVIDUAL_CLASS_RESTRICTED = 102;
 	TF_Matchmaking_TEAM_CLASS_RESTRICTED = 103;
 	TF_Matchmaking_INDIVIDUAL_MARATHON = 104;
@@ -13,13 +13,17 @@ enum TF_MatchmakingMode {
 }
 
 enum TF_Matchmaking_TOBOR_CRSK {
-	TF_Matchmaking_TOBOR_CRSK_GLaDOS = 1;
-	TF_Matchmaking_TOBOR_CRSK_Wheatly = 2;
-	TF_Matchmaking_TOBOR_CRSK_ATLAS = 3;
-	TF_Matchmaking_TOBOR_CRSK_PBody = 4;
-	TF_Matchmaking_TOBOR_CRSK_CCube = 5;
-	TF_Matchmaking_TOBOR_CRSK_DOG = 6;
-	TF_Matchmaking_TOBOR_CRSK_RZOEY = 7;
+	TF_Matchmaking_TOBOR_CRSK_EpsilonPyro = 1;
+	TF_Matchmaking_TOBOR_CRSK_EpsilonEngi = 2;
+	TF_Matchmaking_TOBOR_CRSK_GLaDOS = 3;
+	TF_Matchmaking_TOBOR_CRSK_Wheatly = 4;
+	TF_Matchmaking_TOBOR_CRSK_ATLAS = 5;
+	TF_Matchmaking_TOBOR_CRSK_PBody = 6;
+	TF_Matchmaking_TOBOR_CRSK_CCube = 7;
+	TF_Matchmaking_TOBOR_CRSK_DOG = 8;
+	TF_Matchmaking_TOBOR_CRSK_RZOEY = 9;
+	TF_Matchmaking_TOBOR_CRSK_VICI = 10;
+	TF_Matchmaking_TOBOR_CRSK_TFH = 11;
 }
 
 enum TF_GC_GameState {
@@ -72,13 +76,6 @@ message CMsgTFGoldenWrenchBroadcast {
 message CMsgTFSaxxyBroadcast {
 	optional int32 category_number = 1;
 	optional string user_name = 2;
-}
-
-message CMsgTF_HelloPeopleLookingAtBinariesIWonderWhatThisDoes {
-	optional uint32 this_is_an_integer = 1;
-	optional uint32 this_is_a_string = 2;
-	optional uint32 this_is_a_useless_field_nothing_in_here_move_along_move_along = 3;
-	optional string this_is_an_integer_too = 4;
 }
 
 message CSOTFDuelSummary {
@@ -350,7 +347,7 @@ message CSOTFPartyMember {
 }
 
 message CMsgMatchSearchCriteria {
-	optional .TF_MatchmakingMode matchmaking_mode = 7 [default = TF_Matchmaking_QUICKPLAY];
+	optional .TF_MatchmakingMode matchmaking_mode = 7 [default = TF_Matchmaking_INVALID];
 	optional bool late_join_ok = 5;
 	optional string challenge = 4;
 	optional bool play_for_bragging_rights = 6;
@@ -362,7 +359,7 @@ message CMsgCreateOrUpdateParty {
 	optional bool search_active = 2;
 	optional fixed64 steam_lobby_id = 3;
 	optional bool squad_surplus = 4;
-	optional .TF_Matchmaking_TOBOR_CRSK tobor_crsk = 100 [default = TF_Matchmaking_TOBOR_CRSK_GLaDOS];
+	optional .TF_Matchmaking_TOBOR_CRSK tobor_crsk = 100 [default = TF_Matchmaking_TOBOR_CRSK_EpsilonPyro];
 }
 
 message CSOTFParty {
@@ -382,11 +379,11 @@ message CSOTFParty {
 	optional uint32 started_matchmaking_time = 7;
 	repeated uint32 searching_players_by_group = 10;
 	optional fixed64 steam_lobby_id = 27;
-	optional .TF_MatchmakingMode matchmaking_mode = 30 [default = TF_Matchmaking_QUICKPLAY];
+	optional .TF_MatchmakingMode matchmaking_mode = 30 [default = TF_Matchmaking_INVALID];
 	optional bool search_late_join_ok = 23;
 	optional string search_challenge = 25;
 	optional bool search_play_for_bragging_rights = 26;
-	optional .TF_Matchmaking_TOBOR_CRSK search_tobor_crsk = 9 [default = TF_Matchmaking_TOBOR_CRSK_GLaDOS];
+	optional .TF_Matchmaking_TOBOR_CRSK search_tobor_crsk = 9 [default = TF_Matchmaking_TOBOR_CRSK_EpsilonPyro];
 	optional uint32 search_quickplay_mode = 28;
 	optional uint32 prevent_match_until_date = 18;
 	optional uint32 prevent_match_account_id = 19;
@@ -618,6 +615,9 @@ message CMsgGameServerInfo {
 	}
 
 	optional .CMsgGameServerInfo.MatchmakingState matchmaking_state = 1 [default = INVALID];
+	optional .TF_MatchmakingMode matchmaking_mode = 6 [default = TF_Matchmaking_INVALID];
+	optional string map = 7;
+	optional string tags = 8;
 	optional uint32 server_region = 2;
 	optional float server_loadavg = 3;
 	optional bool server_trusted = 4;
