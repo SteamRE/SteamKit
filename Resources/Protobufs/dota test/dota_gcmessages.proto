@@ -98,6 +98,7 @@ message CSODOTAGameAccountClient {
 	optional uint32 notify_successful_report = 37;
 	optional uint32 account_disabled_until_date = 38;
 	optional uint32 account_disabled_count = 39;
+	optional uint32 showcase_hero_id = 40;
 }
 
 message CSODOTAGameAccountClientInternal {
@@ -201,6 +202,7 @@ message CLobbyTeamDetails {
 	optional uint64 team_logo = 5;
 	optional uint64 team_base_logo = 6;
 	optional uint64 team_banner_logo = 7;
+	optional bool complete_team = 8;
 }
 
 message CLobbyPendingPlayerReport {
@@ -281,6 +283,8 @@ message CSODOTALobbyInternal {
 	repeated .CLobbyPendingPlayerReport pending_player_reports = 2;
 	optional uint32 average_rank = 3;
 	optional fixed32 replay_salt = 4;
+	optional bool disable_radiant_automatic_team_detection = 5;
+	optional bool disable_dire_automatic_team_detection = 6;
 }
 
 message CSODOTALobbyMemcached {
@@ -437,6 +441,9 @@ message CMsgPracticeLobbyLeave {
 
 message CMsgPracticeLobbyLaunch {
 	optional uint32 client_version = 5;
+}
+
+message CMsgApplyTeamToPracticeLobby {
 }
 
 message CMsgPracticeLobbySetDetails {
@@ -716,6 +723,8 @@ message CMsgDOTAMatch {
 	optional string dire_name = 24;
 	optional uint64 radiant_logo = 25;
 	optional uint64 dire_logo = 26;
+	optional uint32 radiant_team_complete = 27;
+	optional uint32 dire_team_complete = 28;
 }
 
 message CMsgDOTAPlayerMatchHistory {
@@ -1313,6 +1322,20 @@ message CMsgDOTAProfileResponse {
 		optional uint32 wins = 2;
 	}
 
+	message ShowcaseHero {
+		optional uint32 hero_id = 1;
+		repeated bytes object_data = 2;
+	}
+
+	message LeaguePass {
+		optional uint32 league_id = 1;
+		optional uint32 item_def = 2;
+	}
+
+	message EventTicket {
+		optional uint32 event_id = 1;
+	}
+
 	optional uint32 result = 1;
 	optional .CSODOTAGameAccountClient game_account_client = 2;
 	repeated .CMsgDOTAMatch latest_matches = 3;
@@ -1321,6 +1344,9 @@ message CMsgDOTAProfileResponse {
 	optional string team_name = 6;
 	optional string team_tag = 7;
 	optional uint64 team_logo = 8;
+	optional .CMsgDOTAProfileResponse.ShowcaseHero showcase_hero = 9;
+	repeated .CMsgDOTAProfileResponse.LeaguePass league_passes = 10;
+	repeated .CMsgDOTAProfileResponse.EventTicket event_tickets = 11;
 }
 
 message CMsgDOTAIntraGCRankRequest {
@@ -1430,7 +1456,7 @@ message CMsgDOTAPlayerHeroesRecentResponse {
 	repeated uint32 hero_ids = 2;
 }
 
-message CDOTAOverwatch {
+message CDOTAOverview {
 	message PlayersByRegion {
 		optional int32 region = 1;
 		optional int32 total = 2;
@@ -1451,8 +1477,12 @@ message CDOTAOverwatch {
 		optional int32 available = 3;
 	}
 
-	repeated .CDOTAOverwatch.PlayersByRegion players_by_region = 1;
-	repeated .CDOTAOverwatch.ServersByRegion game_servers_by_region = 2;
-	repeated .CDOTAOverwatch.ServersByRegion proxy_servers_by_region = 3;
+	repeated .CDOTAOverview.PlayersByRegion players_by_region = 1;
+	repeated .CDOTAOverview.ServersByRegion game_servers_by_region = 2;
+	repeated .CDOTAOverview.ServersByRegion proxy_servers_by_region = 3;
+}
+
+message CMsgSetShowcaseHero {
+	optional uint32 showcase_hero_id = 1;
 }
 
