@@ -25,6 +25,7 @@ namespace SteamKit2.Blob
             Type[] typeParams = { leftType, innerType };
             add = type.GetMethod("Add", typeParams);
 
+            this.dictType = type;
             this.leftType = leftType;
             this.from = BlobTypedReader.GetSerializerForType(innerType);
         }
