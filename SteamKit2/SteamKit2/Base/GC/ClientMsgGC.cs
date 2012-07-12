@@ -4,20 +4,13 @@
  */
 
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO;
 using System.Diagnostics;
+using System.IO;
 using ProtoBuf;
-
 using SteamKit2.Internal;
-using SteamKit2.GC.Internal;
-
-using MsgGCHdrProtoBuf = SteamKit2.Internal.MsgGCHdrProtoBuf;
-using MsgGCHdr = SteamKit2.Internal.MsgGCHdr;
 using CMsgProtoBufHeader = SteamKit2.GC.Internal.CMsgProtoBufHeader;
+using MsgGCHdr = SteamKit2.Internal.MsgGCHdr;
+using MsgGCHdrProtoBuf = SteamKit2.Internal.MsgGCHdrProtoBuf;
 
 namespace SteamKit2.GC
 {

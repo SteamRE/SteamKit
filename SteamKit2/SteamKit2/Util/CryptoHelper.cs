@@ -6,13 +6,10 @@
 
 
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Security.Cryptography;
-using System.IO;
-using Classless.Hasher;
-using System.Linq;
 using System.Diagnostics;
+using System.IO;
+using System.Security.Cryptography;
+using Classless.Hasher;
 
 namespace SteamKit2
 {

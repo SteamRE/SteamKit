@@ -7,11 +7,8 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.IO;
-using System.Diagnostics;
 using System.Net;
-using System.Threading;
 using System.Net.Sockets;
 
 namespace SteamKit2.Internal

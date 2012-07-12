@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using SteamKit2.Internal;
 using SteamKit2.GC;
+using SteamKit2.Internal;
 
 namespace SteamKit2
 {

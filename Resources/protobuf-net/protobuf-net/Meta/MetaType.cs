@@ -2,10 +2,7 @@
 using System;
 using System.Collections;
 using System.Reflection;
-using System.Runtime.InteropServices;
 using ProtoBuf.Serializers;
-using System.Text.RegularExpressions;
-using System.Threading;
 
 namespace ProtoBuf.Meta
 {
