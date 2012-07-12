@@ -5,13 +5,17 @@ using System.IO.Compression;
 
 namespace SteamKit2.Blob
 {
-    // BlobReader that reads sequentially
-    // ReadBlobHeader() from constructor, call while CanReadField() ReadFieldHeader() ...
+    /// <summary>
+    /// BlobReader that sequentially reads a blob
+    /// </summary>
     public class BlobReader : IDisposable
     {
+        /// <summary>
+        /// Exception for a Blob that cannot be parsed
+        /// </summary>
         public class InvalidBlobException : Exception
         {
-            public InvalidBlobException(string message) : base(message) { }
+            internal InvalidBlobException(string message) : base(message) { }
         }
 
         private bool ownsSource;
@@ -22,18 +26,39 @@ namespace SteamKit2.Blob
         private EAutoPreprocessCode processCode;
         private int bytesAvailable, spareAvailable;
 
+        /// <summary>
+        /// Cache state of the blob being read
+        /// </summary>
         public ECacheState CacheState { get { return cacheState; } }
+        /// <summary>
+        /// Process code of the blob being read
+        /// </summary>
         public EAutoPreprocessCode ProcessCode { get { return processCode; } }
 
+        /// <summary>
+        /// Current bytes available to be read
+        /// </summary>
         public int BytesAvailable { get { return bytesAvailable; } }
+        /// <summary>
+        /// Current spare bytes available to be read
+        /// </summary>
         public int SpareAvailable { get { return spareAvailable; } }
 
         private int keyBytes, dataBytes;
 
+        /// <summary>
+        /// Size of the Field Key currently being processed
+        /// </summary>
         public int FieldKeyBytes { get { return keyBytes; } }
+        /// <summary>
+        /// Size of the Field Data currently being processed
+        /// </summary>
         public int FieldDataBytes { get { return dataBytes; } }
 
         private byte[] keyBuffer;
+        /// <summary>
+        /// Byte buffer of the Field Key
+        /// </summary>
         public byte[] ByteKey { get { return keyBuffer; } }
 
         private const int BlobHeaderLength = 10;
@@ -41,12 +66,21 @@ namespace SteamKit2.Blob
         private const int CompressedHeaderLength = 10;
         private const int EncryptedHeaderLength = 20;
 
-
+        /// <summary>
+        /// Create a new BlobReader from a file path
+        /// </summary>
+        /// <param name="fileName">Path to blob</param>
+        /// <returns></returns>
         public static BlobReader CreateFrom(string fileName)
         {
             return new BlobReader(new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.None, 0x10000, FileOptions.SequentialScan), true);
         }
 
+        /// <summary>
+        /// Create a BlobReader from a Stream. Does not take ownership of the Stream.
+        /// </summary>
+        /// <param name="inputSteam">Source</param>
+        /// <returns></returns>
         public static BlobReader CreateFrom(Stream inputSteam)
         {
             return new BlobReader(inputSteam, false);
@@ -57,6 +91,7 @@ namespace SteamKit2.Blob
         {
             this.sourceStack = null;
             this.source = blobSource;
+            this.ownsSource = ownsSource;
             this.keyBuffer = new byte[4];
 
             ReadBlobHeader();
@@ -79,6 +114,9 @@ namespace SteamKit2.Blob
             UnpackBlobIfNeeded();
         }
 
+        /// <summary>
+        /// Dispose the BlobReader, releasing any Streams allocated.
+        /// </summary>
         public void Dispose()
         {
             if(ownsSource)
@@ -134,6 +172,9 @@ namespace SteamKit2.Blob
             return bytesAvailable >= size;
         }
 
+        /// <summary>
+        /// Read the next Field in the blob
+        /// </summary>
         public void ReadFieldHeader()
         {
             keyBytes = source.ReadUInt16();
@@ -156,7 +197,10 @@ namespace SteamKit2.Blob
             TakeBytes(keyBytes + dataBytes);
         }
 
-        // read a field containing a blob, return a BlobReader
+        /// <summary>
+        /// Reads a field as a Blob
+        /// </summary>
+        /// <returns>Blob Reader</returns>
         public BlobReader ReadFieldBlob()
         {
             return new BlobReader(source);
@@ -168,11 +212,17 @@ namespace SteamKit2.Blob
             return source;
         }
 
+        /// <summary>
+        /// Skip over a field, discarding the contents of a field
+        /// </summary>
         public void SkipField()
         {
             source.ReadAndDiscard(dataBytes);
         }
 
+        /// <summary>
+        /// Skip over the spare, discarding the contents
+        /// </summary>
         public void SkipSpare()
         {
 #if DEBUG

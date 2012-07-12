@@ -3,13 +3,25 @@ using System.Collections.Generic;
 
 namespace SteamKit2.Blob
 {
+    /// <summary>
+    /// Exception class for a type that can't be parsed
+    /// </summary>
     public class BlobUnhandledTypeException : Exception
     {
-        public BlobUnhandledTypeException(string msg) : base(msg) { }
+        internal BlobUnhandledTypeException(string msg) : base(msg) { }
     }
 
+    /// <summary>
+    /// Blob reader that builds a type model
+    /// </summary>
     public class BlobTypedReader
     {
+        /// <summary>
+        /// Deserialize a blob into a type. Does not JIT
+        /// </summary>
+        /// <param name="reader">Blob reader</param>
+        /// <param name="type">Target type</param>
+        /// <returns>Type model</returns>
         public static object DeserializeSlow(BlobReader reader, Type type)
         {
             TypeSerializer serializer = new TypeSerializer(type);
@@ -20,6 +32,12 @@ namespace SteamKit2.Blob
             }
         }
 
+        /// <summary>
+        /// Deserialize a blob into a type
+        /// </summary>
+        /// <param name="reader">Blob reader</param>
+        /// <param name="type">Target type</param>
+        /// <returns>Type model</returns>
         public static object Deserialize(BlobReader reader, Type type)
         {
             TypeSerializer serializer = new TypeSerializer(type);
@@ -63,8 +81,6 @@ namespace SteamKit2.Blob
                 default:
                     throw new BlobUnhandledTypeException("Unhandled type: " + type);
             }
-
-            return null;
         }
     }
 }
