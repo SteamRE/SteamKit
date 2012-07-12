@@ -6,7 +6,6 @@ using System.Reflection.Emit;
 using System.Threading;
 using ProtoBuf.Meta;
 using ProtoBuf.Serializers;
-using System.Text;
 
 namespace ProtoBuf.Compiler
 {

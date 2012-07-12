@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Net;
-using System.Collections.Specialized;
-using System.IO;
 using System.Collections;
+using System.Collections.Generic;
 using System.Dynamic;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace SteamKit2

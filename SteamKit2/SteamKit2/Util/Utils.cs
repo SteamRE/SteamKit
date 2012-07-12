@@ -6,13 +6,11 @@
 
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Management;
 using System.Net;
 using System.Net.Sockets;
-using System.Net.NetworkInformation;
-using System.Management;
+using System.Text;
 
 namespace SteamKit2
 {

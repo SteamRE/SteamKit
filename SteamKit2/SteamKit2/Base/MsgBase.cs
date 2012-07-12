@@ -3,11 +3,8 @@
  * file 'license.txt', which is part of this source code package.
  */
 
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.IO;
-using System.Runtime.InteropServices;
+using System.Text;
 using SteamKit2.Internal;
 
 namespace SteamKit2
