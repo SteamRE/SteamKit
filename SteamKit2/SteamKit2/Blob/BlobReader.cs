@@ -204,7 +204,7 @@ namespace SteamKit2.Blob
         /// <returns>Blob Reader</returns>
         public BlobReader ReadFieldBlob()
         {
-            return new BlobReader(source);
+            return new BlobReader(source, false);
         }
 
         // magic method to make serializers easier
