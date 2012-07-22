@@ -216,8 +216,11 @@ namespace SteamKit2
             if ( sock != null )
             {
                 // cleanup socket
-                sock.Shutdown( SocketShutdown.Both );
-                sock.Disconnect( true );
+                if ( sock.Connected )
+                {
+                    sock.Shutdown( SocketShutdown.Both );
+                    sock.Disconnect( true );
+                }
                 sock.Close();
 
                 sock = null;
