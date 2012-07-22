@@ -1843,6 +1843,20 @@ namespace SteamKit2
 		Played = 0,
 		Completed = 1,
 	}
+	public enum EEconTradeResponse
+	{
+		Accepted = 0,
+		Declined = 1,
+		VacBannedInitiator = 2,
+		VacBannedTarget = 3,
+		TargetAlreadyTrading = 4,
+		Disabled = 5,
+		NotLoggedIn = 6,
+		Cancel = 7,
+		TooSoon = 8,
+		TooSoonPenalty = 9,
+		ConnectionFailed = 10,
+	}
 	public enum EUdpPacketType : byte
 	{
 		Invalid = 0,
