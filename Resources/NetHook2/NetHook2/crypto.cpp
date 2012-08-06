@@ -49,24 +49,27 @@ CCrypto::CCrypto()
 
 	char *pEncrypt;
 	bool bEncrypt = steamClientScan.FindFunction(
-		"\x8b\x4b\x1c\x8b\x31\x32\xc0\x88\x45\xe6\x88\x45\xe7\x8b\x43\x08\x8d\x14\x3e\x89\x7d\xe0\x3b\xd0",
-		"xxxxxxxxxxxxxxxxxxxxxxxx",
+		"\x53\x8B\xDC\x83\xEC\x08\x83\xE4\xF8\x83\xC4\x04\x55\x8B\x6B\x04\x89\x6C\x24\x04\x8B\xEC\x6A\xFF\x68\x00\x00\x00\x00"
+		"\x64\xA1\x00\x00\x00\x00\x50\x64\x89\x25\x00\x00\x00\x00\x51\x53\x81\xEC\x00\x00\x00\x00\xA1\x00\x00\x00\x00\x8B\x08"
+		"\x53\x56\x57\x89\x65\xF0\x85\xC9\x75\x05\x89\x4D\xDC",
+		"xxxxxxxxxxxxxxxxxxxxxxxxx????xx????xxxx????xxxx????x????xxxxxxxxxxxxxxx",
 		(void **)&pEncrypt
 	);
 
-	Encrypt_Orig = (bool (__cdecl *)(const uint8*, uint32, const uint8*, uint32, uint8*, uint32*, const uint8*, uint32))( pEncrypt - 0x14D ); // god help this survive
+	Encrypt_Orig = (bool (__cdecl *)(const uint8*, uint32, const uint8*, uint32, uint8*, uint32*, const uint8*, uint32))( pEncrypt );
 
-	g_pLogger->LogConsole( "CCrypto::SymmetricEncrypt = 0x%x \n", Encrypt_Orig );
+	g_pLogger->LogConsole( "CCrypto::SymmetricEncrypt = 0x%x\n", Encrypt_Orig );
 
 
 	char *pDecrypt;
 	bool bDecrypt = steamClientScan.FindFunction(
-		"\x8b\x45\x08\x8b\x4d\x0c\x8b\x37\x8d\x14\x08\xc6\x45\xef\x00\xc6\x45\x17\x00\x89\x5d\xe8\x3b\xd3",
-		"xxxxxxxxxxxxxxxxxxxxxxxx",
+		"\x55\x8B\xEC\x6A\xFF\x68\x00\x00\x00\x00\x64\xA1\x00\x00\x00\x00\x50\x64\x89\x25\x00\x00\x00\x00\x81\xEC\x00\x00\x00"
+		"\x00\xA1\x00\x00\x00\x00\x8B\x08\x53\x56\x57\x89\x65\xF0\x85\xC9\x75\x05\x89\x4D\xE4",
+		"xxxxxx????xx????xxxx????xx????x????xxxxxxxxxxxxxxx",
 		(void **)&pDecrypt
 	);
 
-	Decrypt_Orig = (bool (__cdecl *)(const uint8*, uint32, const uint8*, uint32, uint8*, uint32*, const uint8*, uint32))( pDecrypt - 0x134 ); // begin praying
+	Decrypt_Orig = (bool (__cdecl *)(const uint8*, uint32, const uint8*, uint32, uint8*, uint32*, const uint8*, uint32))( pDecrypt );
 
 	g_pLogger->LogConsole( "CCrypto::SymmetricDecrypt = 0x%x\n", Decrypt_Orig );
 
