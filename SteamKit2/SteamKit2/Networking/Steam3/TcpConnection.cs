@@ -41,7 +41,16 @@ namespace SteamKit2
 
             sock = new Socket( AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp );
 
-            sock.Connect( endPoint );
+            IAsyncResult result = sock.BeginConnect(endPoint, null, null);
+            bool completed = result.AsyncWaitHandle.WaitOne(TimeSpan.FromSeconds(2), true);
+
+            if (!completed)
+            {
+                sock.Close();
+                throw new SocketException();
+            }
+
+            sock.EndConnect(result);
 
             isConnected = true;
 
