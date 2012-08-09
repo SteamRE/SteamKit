@@ -77,9 +77,6 @@ namespace SteamKit2.Internal
         /// <value>The SteamID.</value>
         public SteamID SteamID { get; private set; }
 
-
-        int serverNum = 0;
-
         Connection connection;
         byte[] tempSessionKey;
 
@@ -140,22 +137,27 @@ namespace SteamKit2.Internal
             // for now we'll cycle through bootstrap CM servers
             // todo: cache off CM servers given by the CM
             // and add logic to determine "bad" servers
-            int serverToTry = ( serverNum++ % Servers.Length );
-            var server = Servers[ serverToTry ];
-
-            var endPoint = new IPEndPoint( server, bEncrypted ? PortCM_PublicEncrypted : PortCM_Public );
-
-            try
+            for (int i = 0; i < Servers.Length; i++)
             {
-                connection.Connect( endPoint );
-            }
-            catch ( SocketException ex )
-            {
-                DebugLog.WriteLine( "CMClient", "Unable to connect to CM, will try next in list: {0}", ex.ToString() );
+                var server = Servers[i];
+                var endPoint = new IPEndPoint(server, bEncrypted ? PortCM_PublicEncrypted : PortCM_Public);
 
-                // post disconnection callback
-                OnClientDisconnected();
-                return;
+                try
+                {
+                    connection.Connect(endPoint);
+                    break;
+                }
+                catch (SocketException ex)
+                {
+                    DebugLog.WriteLine("CMClient", "Unable to connect to CM, will try next in list: {0}", ex.ToString());
+                }
+
+                if (i == Servers.Length - 1)
+                {
+                    // post disconnection callback
+                    OnClientDisconnected();
+                    return;
+                }
             }
 
             if ( !bEncrypted )
