@@ -39,18 +39,27 @@ namespace SteamKit2
             // if we're connected, disconnect
             Disconnect();
 
-            sock = new Socket( AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp );
+            Socket socket = new Socket( AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp );
 
-            IAsyncResult result = sock.BeginConnect(endPoint, null, null);
-            bool completed = result.AsyncWaitHandle.WaitOne(TimeSpan.FromSeconds(2), true);
+            SocketAsyncEventArgs e = new SocketAsyncEventArgs();
+            e.Completed += new EventHandler<SocketAsyncEventArgs>( ConnectCompleted );
+            e.RemoteEndPoint = endPoint;
 
-            if (!completed)
+            if ( !socket.ConnectAsync( e ) )
             {
-                sock.Close();
-                throw new SocketException();
+                ConnectCompleted( socket, e );
             }
+        }
 
-            sock.EndConnect(result);
+        void ConnectCompleted(object sender, SocketAsyncEventArgs e)
+        {
+            sock = e.ConnectSocket;
+
+            if ( sock == null )
+            {
+                OnDisconnected( EventArgs.Empty );
+                return;
+            }
 
             isConnected = true;
 
@@ -63,6 +72,8 @@ namespace SteamKit2
             netThread = new Thread( NetLoop );
             netThread.Name = "TcpConnection Thread";
             netThread.Start();
+
+            OnConnected( EventArgs.Empty );
         }
 
         /// <summary>
