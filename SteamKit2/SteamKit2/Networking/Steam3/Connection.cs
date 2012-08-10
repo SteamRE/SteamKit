@@ -72,6 +72,16 @@ namespace SteamKit2
         }
 
         /// <summary>
+        /// Occurs when the physical connection is established.
+        /// </summary>
+        public event EventHandler Connected;
+        protected void OnConnected(EventArgs e)
+        {
+            if (Connected != null)
+                Connected(this, e);
+        }
+
+        /// <summary>
         /// Occurs when the physical connection is broken.
         /// </summary>
         public event EventHandler Disconnected;
