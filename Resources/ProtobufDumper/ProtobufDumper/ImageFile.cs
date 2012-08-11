@@ -39,7 +39,7 @@ namespace ProtobufDumper
         string fileName;
 
         IntPtr hModule;
-        uint loadAddr;
+        long loadAddr;
 
         public string OutputDir { get; private set; }
         public List<string> ProtoList { get; private set; }
@@ -93,23 +93,36 @@ namespace ProtobufDumper
                 throw new Win32Exception(Marshal.GetLastWin32Error(), "Unable to load image!");
 
             // LOAD_LIBRARY_AS_IMAGE_RESOURCE returns ( HMODULE | 2 )
-            loadAddr = (uint)(hModule.ToInt32() & ~2);
+            loadAddr = (long)(hModule.ToInt64() & ~2);
 
             Console.WriteLine("Loaded at 0x{0:X2}!", loadAddr);
 
-            var dosHeader = Native.PtrToStruct<Native.IMAGE_DOS_HEADER>(loadAddr);
+            var dosHeader = Native.PtrToStruct<Native.IMAGE_DOS_HEADER>(new IntPtr(loadAddr));
 
             if (dosHeader.e_magic != Native.IMAGE_DOS_SIGNATURE)
                 throw new InvalidOperationException("Target image has invalid DOS signature!");
 
-            var peHeader = Native.PtrToStruct<Native.IMAGE_NT_HEADERS>((uint)(loadAddr + dosHeader.e_lfanew));
+            var peHeader = Native.PtrToStruct<Native.IMAGE_NT_HEADERS>(new IntPtr(this.loadAddr + dosHeader.e_lfanew));
 
             if (peHeader.Signature != Native.IMAGE_NT_SIGNATURE)
                 throw new InvalidOperationException("Target image has invalid PE signature!");
 
+            int sizeOfNtHeaders = 0;
+
+            switch (peHeader.FileHeader.Machine)
+            {
+                case 0x014c:
+                    sizeOfNtHeaders = Marshal.SizeOf(typeof(Native.IMAGE_NT_HEADERS32));
+                    break;
+                case 0x8664:
+                    sizeOfNtHeaders = Marshal.SizeOf(typeof(Native.IMAGE_NT_HEADERS64));
+                    break;
+                default:
+                    throw new InvalidOperationException("Unexpected architecture in PE header: " + peHeader.FileHeader.Machine);
+            }
+
             int numSections = peHeader.FileHeader.NumberOfSections;
-            int sizeOfNtHeaders = Marshal.SizeOf(peHeader);
-            uint baseSectionsAddr = (uint)(loadAddr + dosHeader.e_lfanew + sizeOfNtHeaders);
+            long baseSectionsAddr = loadAddr + dosHeader.e_lfanew + sizeOfNtHeaders;
 
             Console.WriteLine("# of sections: {0}", numSections);
 
@@ -117,9 +130,9 @@ namespace ProtobufDumper
 
             for (int x = 0; x < sectionHeaders.Length; ++x)
             {
-                uint baseAddr = (uint)(baseSectionsAddr + (x * Marshal.SizeOf(sectionHeaders[x])));
+                long baseAddr = baseSectionsAddr + (x * Marshal.SizeOf(sectionHeaders[x]));
 
-                var sectionHdr = Native.PtrToStruct<Native.IMAGE_SECTION_HEADER>(baseAddr);
+                var sectionHdr = Native.PtrToStruct<Native.IMAGE_SECTION_HEADER>(new IntPtr(baseAddr));
 
                 var searchFlags =
                     Native.IMAGE_SECTION_HEADER.CharacteristicFlags.IMAGE_SCN_MEM_READ |
@@ -159,7 +172,7 @@ namespace ProtobufDumper
 
         unsafe void ScanSection(Native.IMAGE_SECTION_HEADER sectionHdr)
         {
-            uint sectionDataAddr = loadAddr + sectionHdr.PointerToRawData;
+            long sectionDataAddr = loadAddr + sectionHdr.PointerToRawData;
 
             Console.WriteLine("\nScanning section '{0}' at 0x{1:X2}...\n", sectionHdr.Name, sectionDataAddr);
 
