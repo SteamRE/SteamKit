@@ -16,7 +16,9 @@ namespace SteamKit2.Blob
         /// <param name="key">Key string</param>
         public BlobFieldAttribute(string key)
             : this(Encoding.ASCII.GetBytes(key))
-        { }
+        {
+            intKey = -1;
+        }
 
         /// <summary>
         /// Constructs a field key with an integer
@@ -25,6 +27,7 @@ namespace SteamKit2.Blob
         public BlobFieldAttribute(int key)
             : this(BitConverter.GetBytes(key))
         {
+            intKey = key;
         }
 
         private BlobFieldAttribute(byte[] key)
@@ -36,7 +39,12 @@ namespace SteamKit2.Blob
         /// Byte Key represented by this field
         /// </summary>
         public byte[] ByteKey { get { return byteKey; } set { byteKey = value; } }
+        /// <summary>
+        /// Peekable int key for this field
+        /// </summary>
+        public int PeekIntKey { get { return intKey; } }
         private byte[] byteKey;
+        private int intKey;
 
         internal IBlobSerializer Serializer;
     }

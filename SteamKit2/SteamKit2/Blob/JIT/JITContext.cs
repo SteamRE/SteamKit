@@ -291,6 +291,13 @@ namespace SteamKit2.Blob
             GotoWhenFalse(failed);
         }
 
+        public void EmitKeyPeekTest(int key, Label failed)
+        {
+            LoadIntConstant(key);
+            LoadPeekKey();
+            ilgen.Emit(OpCodes.Bne_Un, failed);
+        }
+
         public void LoadIntConstant(int value)
         {
             switch (value)
@@ -362,6 +369,11 @@ namespace SteamKit2.Blob
             EmitCall(GetReaderMethod("get_FieldKeyBytes"));
         }
 
+        public void LoadPeekKey()
+        {
+            LoadBlobReader();
+            EmitCall(GetReaderMethod("get_PeekIntKey"));
+        }
 
         public void LoadByteKey()
         {
