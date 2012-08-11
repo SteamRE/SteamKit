@@ -29,9 +29,19 @@ namespace SteamKit2.Blob
                 if (attribs.Length == 0) continue;
 
                 BlobFieldAttribute attrib = attribs[0];
-                FieldInfo field = (FieldInfo)member;
 
-                attrib.Serializer = new FieldSerializer(field);
+                switch (member.MemberType)
+                {
+                    case MemberTypes.Field:
+                        attrib.Serializer = new FieldSerializer((FieldInfo)member);
+                        break;
+                    case MemberTypes.Property:
+                        attrib.Serializer = new PropertySerializer((PropertyInfo)member);
+                        break;
+                    default:
+                        throw new NotImplementedException();
+                }
+                
 
                 fields.Add(attrib);
             }

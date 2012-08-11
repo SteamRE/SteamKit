@@ -154,6 +154,11 @@ namespace SteamKit2.Blob
             ilgen.Emit(OpCodes.Stfld, field);
         }
 
+        public void StoreProp(PropertyInfo prop)
+        {
+            EmitCall(prop.GetSetMethod());
+        }
+
         public void EmitCall(MethodInfo method)
         {
             OpCode opcode = (method.IsStatic || method.DeclaringType.IsValueType) ? OpCodes.Call : OpCodes.Callvirt;
