@@ -160,7 +160,14 @@ namespace SteamKit2.Blob
             ilgen.EmitCall(opcode, method, null);
         }
 
+        static Type[] EmptyParams = new Type[] { };
+
         public void CreateType(Type newType)
+        {
+            CreateType(newType, EmptyParams);
+        }
+
+        public void CreateType(Type newType, Type[] paramType)
         {
             if (newType.IsValueType)
             {
@@ -170,7 +177,7 @@ namespace SteamKit2.Blob
             {
                 ConstructorInfo ctor = newType.GetConstructor(
                         BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic,
-                        null, new Type[] { }, null);
+                        null, paramType, null);
                 if (ctor == null) throw new InvalidOperationException("Cannot construct " + newType);
                 ilgen.Emit(OpCodes.Newobj, ctor);
             }
@@ -217,14 +224,6 @@ namespace SteamKit2.Blob
             if (method == null) throw new ArgumentException("methodName");
 
             return method;
-        }
-
-        public void TestKey()
-        {
-            MethodInfo testMethod = typeof(BlobUtil).GetMethod("TestKey", BindingFlags.Public | BindingFlags.Static);
-            if (testMethod == null) throw new ArgumentException("methodName");
-
-            EmitCall(testMethod);
         }
 
         public void BitConvertToInt32()

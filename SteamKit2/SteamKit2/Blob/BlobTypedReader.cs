@@ -65,6 +65,10 @@ namespace SteamKit2.Blob
 
                 throw new BlobUnhandledTypeException("Generic type that we couldn't parse: " + type);
             }
+            else if (type == typeof(MicroTime))
+            {
+                return new MicroTimeSerializer();
+            }
 
             switch (Type.GetTypeCode(type))
             {
@@ -76,6 +80,10 @@ namespace SteamKit2.Blob
                     return new Int32Serializer();
                 case TypeCode.UInt32:
                     return new UInt32Serializer();
+                case TypeCode.Int16:
+                    return new Int16Serializer();
+                case TypeCode.UInt16:
+                    return new UInt16Serializer();
                 case TypeCode.Boolean:
                     return new BooleanSerializer();
                 default:

@@ -99,6 +99,8 @@
     <Compile Include="Blob\BlobUtil.cs" />
     <Compile Include="Blob\JIT\JITContext.cs" />
     <Compile Include="Blob\Serializers\BooleanSerializer.cs" />
+    <Compile Include="Blob\Serializers\MicroTimeSerializer.cs" />
+    <Compile Include="Blob\Serializers\Int16Serializer.cs" />
     <Compile Include="Blob\Serializers\DictionarySerializer.cs" />
     <Compile Include="Blob\Serializers\FieldSerializer.cs" />
     <Compile Include="Blob\Serializers\IBlobSerializer.cs" />
