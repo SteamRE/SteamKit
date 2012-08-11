@@ -65,7 +65,8 @@ namespace SteamKit2.Blob
                 {
                     var field = fields[i];
 
-                    if (field.ByteKey.Length == reader.FieldKeyBytes && BlobUtil.UnsafeCompare(field.ByteKey, reader.ByteKey))
+                    if ((field.PeekIntKey != -1 && field.PeekIntKey == reader.PeekIntKey) || 
+                        (field.ByteKey.Length == reader.FieldKeyBytes && BlobUtil.UnsafeCompare(field.ByteKey, reader.ByteKey)))
                     {
                         field.Serializer.Read(result, reader);
                         goto read_field;
@@ -109,7 +110,14 @@ namespace SteamKit2.Blob
             {
                 Label nextField = context.CreateLabel();
 
-                context.EmitKeyTest(fields[i].ByteKey, nextField); //context.TestKey(); context.GotoWhenFalse(nextField);
+                if (fields[i].PeekIntKey != -1)
+                {
+                    context.EmitKeyPeekTest(fields[i].PeekIntKey, nextField);
+                }
+                else
+                {
+                    context.EmitKeyTest(fields[i].ByteKey, nextField);
+                }
 
                 fields[i].Serializer.EmitRead(context);
 

@@ -57,10 +57,15 @@ namespace SteamKit2.Blob
         public int FieldDataBytes { get { return dataBytes; } }
 
         private byte[] keyBuffer;
+        private int keyInt;
         /// <summary>
         /// Byte buffer of the Field Key
         /// </summary>
         public byte[] ByteKey { get { return keyBuffer; } }
+        /// <summary>
+        /// Peekable int of the Field Key
+        /// </summary>
+        public int PeekIntKey { get { return keyInt; } }
 
         private const int BlobHeaderLength = 10;
         internal const int FieldHeaderLength = 6;
@@ -194,6 +199,15 @@ namespace SteamKit2.Blob
             }
 
             source.Read(keyBuffer, 0, keyBytes);
+
+            if (keyBytes == 4)
+            {
+                keyInt = BitConverter.ToInt32(keyBuffer, 0);
+            }
+            else
+            {
+                keyInt = -1;
+            }
 
             TakeBytes(keyBytes + dataBytes);
         }
