@@ -14,3 +14,11 @@ message CDOTAMsg_MapLine {
 	optional bool initial = 3;
 }
 
+message CDOTAMsg_WorldLine {
+	optional int32 x = 1;
+	optional int32 y = 2;
+	optional int32 z = 3;
+	optional bool initial = 4;
+	optional bool end = 5;
+}
+

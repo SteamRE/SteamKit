@@ -99,6 +99,8 @@ message CSODOTAGameAccountClient {
 	optional uint32 account_disabled_until_date = 38;
 	optional uint32 account_disabled_count = 39;
 	optional uint32 showcase_hero_id = 40;
+	optional uint32 match_disabled_until_date = 41;
+	optional uint32 match_disabled_count = 42;
 }
 
 message CSODOTAGameAccountClientInternal {
@@ -154,6 +156,8 @@ message CSODOTAParty {
 	optional .MatchType match_type = 21 [default = MATCH_TYPE_RANKED];
 	optional .DOTABotDifficulty bot_difficulty = 22 [default = BOT_DIFFICULTY_PASSIVE];
 	optional uint32 team_id = 23;
+	optional uint32 match_disabled_until_date = 24;
+	optional uint32 match_disabled_account_id = 25;
 }
 
 message CSODOTAPartyInternal {
@@ -285,6 +289,7 @@ message CSODOTALobbyInternal {
 	optional fixed32 replay_salt = 4;
 	optional bool disable_radiant_automatic_team_detection = 5;
 	optional bool disable_dire_automatic_team_detection = 6;
+	optional uint32 final_match_duration = 7;
 }
 
 message CSODOTALobbyMemcached {
@@ -511,6 +516,9 @@ message CMsgSetAvatar {
 	optional uint32 avatar = 1;
 }
 
+message CMsgRequestInternationalTicket {
+}
+
 message CMsgTrackedEvent {
 	optional uint64 submitter_id = 1 [(key_field) = true];
 	optional uint32 event_id = 2 [(key_field) = true];
@@ -582,6 +590,7 @@ message CMsgGameMatchSignoutResponse {
 	optional fixed32 replay_salt = 2;
 	repeated .CLobbyTimedRewardDetails timed_reward_details = 3;
 	repeated .CDOTALobbyMember xp_reward_details = 4;
+	optional uint32 leagueid = 5;
 }
 
 message CMsgGameChatLog {
@@ -620,6 +629,7 @@ message CMsgDOTATournament {
 		optional string team_abbrev = 3;
 		repeated uint32 players = 4;
 		optional uint32 seed = 5;
+		optional uint64 team_logo = 6;
 	}
 
 	message Game {
@@ -643,15 +653,22 @@ message CMsgDOTATournament {
 
 	repeated .CMsgDOTATournament.Team teams = 1;
 	repeated .CMsgDOTATournament.Game games = 2;
+	optional uint64 gid = 3;
 }
 
 message CMsgDOTATournamentRequest {
 	optional uint32 tournament_id = 1;
+	optional uint64 client_tournament_gid = 2;
 }
 
 message CMsgDOTATournamentResponse {
 	optional uint32 result = 1 [default = 2];
 	optional .CMsgDOTATournament tournament = 2;
+}
+
+message CMsgDOTAClearTournamentGame {
+	optional uint32 tournament_id = 1;
+	optional uint32 game_id = 2;
 }
 
 message CMsgDOTAMatch {
@@ -738,11 +755,16 @@ message CMsgDOTAMatchHistoryFilter {
 }
 
 message CMsgDOTARequestMatches {
+	enum SkillLevel {
+		Any = 0;
+		Normal = 1;
+		High = 2;
+		VeryHigh = 3;
+	}
+
 	optional string player_name = 1;
 	optional uint32 hero_id = 2;
 	optional uint32 game_mode = 3;
-	optional uint32 skill_min = 4;
-	optional uint32 skill_max = 5;
 	optional fixed32 date_min = 6;
 	optional fixed32 date_max = 7;
 	optional bool friends_only = 8;
@@ -754,6 +776,7 @@ message CMsgDOTARequestMatches {
 	optional bool tournament_games_only = 14;
 	optional uint32 account_id = 15;
 	optional uint32 league_id = 16;
+	optional .CMsgDOTARequestMatches.SkillLevel skill = 17 [default = Any];
 }
 
 message CMsgDOTARequestMatchesResponse {
@@ -962,6 +985,10 @@ message CMsgDOTAKickTeamMemberResponse {
 	optional .CMsgDOTAKickTeamMemberResponse.Result result = 1 [default = SUCCESS];
 }
 
+message CMsgDOTATransferTeamAdmin {
+	optional uint32 new_admin_account_id = 1;
+}
+
 message CMsgDOTALeaveTeam {
 }
 
@@ -1051,6 +1078,16 @@ message CMsgDOTALeaveChatChannel {
 	optional string channel_name = 1;
 }
 
+message CMsgDOTAChatMessage {
+	optional uint32 account_id = 1;
+	optional string channel_name = 2;
+	optional string persona_name = 3;
+	optional string text = 4;
+	optional uint32 timestamp = 5;
+	optional uint32 suggest_invite_account_id = 6;
+	optional string suggest_invite_name = 7;
+}
+
 message CMsgDOTASetChatChannelVerbosity {
 	message ChannelVerbosity {
 		optional fixed64 channel_id = 1;
@@ -1115,23 +1152,6 @@ message CMsgDOTARequestChatChannelListResponse {
 	repeated .CMsgDOTARequestChatChannelListResponse.ChatChannel channels = 1;
 }
 
-message CMsgDOTATodayMessages {
-	message TodayMessage {
-		optional uint32 message_id = 1;
-		optional string image_url = 2;
-		optional string title = 3;
-		optional string sub_title = 4;
-		optional string web_page_url = 5;
-		optional bool active = 6;
-		optional fixed32 date = 7;
-	}
-
-	repeated .CMsgDOTATodayMessages.TodayMessage messages = 1;
-}
-
-message CMsgDOTARequestTodayMessages {
-}
-
 message CMsgDOTAPlayerReports {
 	message PlayerReport {
 		optional uint32 report_id = 1;
@@ -1159,8 +1179,6 @@ message CMsgDOTAReportsRemainingResponse {
 message CMsgDOTASubmitPlayerReport {
 	optional uint32 target_account_id = 1;
 	optional uint32 report_flags = 2;
-	optional uint32 match_id = 3;
-	optional uint64 lobby_id = 4;
 	optional string comment = 5;
 }
 
@@ -1433,6 +1451,8 @@ message CLowPriPenalty {
 message CMsgDOTAWelcome {
 	optional bool spectator_only = 1;
 	optional bool allow_team_creation = 2;
+	optional bool tournament_admin = 3;
+	optional bool tournament_broadcaster = 4;
 }
 
 message CSODOTAGameHeroFavorites {
@@ -1484,5 +1504,16 @@ message CDOTAOverview {
 
 message CMsgSetShowcaseHero {
 	optional uint32 showcase_hero_id = 1;
+}
+
+message CMsgRequestLiveLeagueGames {
+}
+
+message CLiveLeague {
+	optional uint32 leagueid = 1;
+}
+
+message CMsgResponseLiveLeagueGames {
+	repeated .CLiveLeague liveleagues = 1;
 }
 

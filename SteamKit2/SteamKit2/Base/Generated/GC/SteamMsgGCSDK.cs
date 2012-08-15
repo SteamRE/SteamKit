@@ -290,15 +290,6 @@ namespace SteamKit2.GC.Internal
       set { _account_name = value; }
     }
 
-    private string _persona_name = "";
-    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"persona_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
-    public string persona_name
-    {
-      get { return _persona_name; }
-      set { _persona_name = value; }
-    }
-
     private bool _public_profile = default(bool);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"public_profile", DataFormat = global::ProtoBuf.DataFormat.Default)]
     [global::ProtoBuf.ProtoDefaultValue(default(bool))]
@@ -405,6 +396,15 @@ namespace SteamKit2.GC.Internal
     {
       get { return _time_cached; }
       set { _time_cached = value; }
+    }
+
+    private bool _account_locked = default(bool);
+    [global::ProtoBuf.ProtoMember(16, IsRequired = false, Name=@"account_locked", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    public bool account_locked
+    {
+      get { return _account_locked; }
+      set { _account_locked = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
