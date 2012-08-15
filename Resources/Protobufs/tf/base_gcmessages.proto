@@ -1,5 +1,10 @@
 import "steammessages.proto";
 
+enum GCGoodbyeReason {
+	GCGoodbyeReason_GC_GOING_DOWN = 1;
+	GCGoodbyeReason_NO_SESSION = 2;
+}
+
 message CGCStorePurchaseInit_LineItem {
 	optional uint32 item_def_id = 1;
 	optional uint32 quantity = 2;
@@ -53,13 +58,16 @@ message CMsgServerWelcome {
 }
 
 message CMsgClientGoodbye {
+	optional .GCGoodbyeReason reason = 1 [default = GCGoodbyeReason_GC_GOING_DOWN];
 }
 
 message CMsgServerGoodbye {
+	optional .GCGoodbyeReason reason = 1 [default = GCGoodbyeReason_GC_GOING_DOWN];
 }
 
 message CMsgInviteToParty {
 	optional fixed64 steam_id = 1;
+	optional uint32 client_version = 2;
 }
 
 message CMsgInvitationCreated {
@@ -70,6 +78,7 @@ message CMsgInvitationCreated {
 message CMsgPartyInviteResponse {
 	optional uint64 party_id = 1;
 	optional bool accept = 2;
+	optional uint32 client_version = 3;
 }
 
 message CMsgKickFromParty {

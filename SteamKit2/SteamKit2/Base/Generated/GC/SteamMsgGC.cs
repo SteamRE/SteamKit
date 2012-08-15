@@ -313,6 +313,15 @@ namespace SteamKit2.GC.Internal
   {
     public CMsgClientGoodbye() {}
     
+
+    private GCGoodbyeReason _reason = GCGoodbyeReason.GCGoodbyeReason_GC_GOING_DOWN;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"reason", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoDefaultValue(GCGoodbyeReason.GCGoodbyeReason_GC_GOING_DOWN)]
+    public GCGoodbyeReason reason
+    {
+      get { return _reason; }
+      set { _reason = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -323,6 +332,15 @@ namespace SteamKit2.GC.Internal
   {
     public CMsgServerGoodbye() {}
     
+
+    private GCGoodbyeReason _reason = GCGoodbyeReason.GCGoodbyeReason_GC_GOING_DOWN;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"reason", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoDefaultValue(GCGoodbyeReason.GCGoodbyeReason_GC_GOING_DOWN)]
+    public GCGoodbyeReason reason
+    {
+      get { return _reason; }
+      set { _reason = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -341,6 +359,15 @@ namespace SteamKit2.GC.Internal
     {
       get { return _steam_id; }
       set { _steam_id = value; }
+    }
+
+    private uint _client_version = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"client_version", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    public uint client_version
+    {
+      get { return _client_version; }
+      set { _client_version = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -397,6 +424,15 @@ namespace SteamKit2.GC.Internal
     {
       get { return _accept; }
       set { _accept = value; }
+    }
+
+    private uint _client_version = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"client_version", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    public uint client_version
+    {
+      get { return _client_version; }
+      set { _client_version = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -2277,6 +2313,54 @@ namespace SteamKit2.GC.Internal
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCNameItemNotification")]
+  public partial class CMsgGCNameItemNotification : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCNameItemNotification() {}
+    
+
+    private ulong _player_steamid = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"player_steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    public ulong player_steamid
+    {
+      get { return _player_steamid; }
+      set { _player_steamid = value; }
+    }
+
+    private uint _item_def_index = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"item_def_index", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    public uint item_def_index
+    {
+      get { return _item_def_index; }
+      set { _item_def_index = value; }
+    }
+
+    private string _item_name_custom = "";
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"item_name_custom", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoDefaultValue("")]
+    public string item_name_custom
+    {
+      get { return _item_name_custom; }
+      set { _item_name_custom = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"GCGoodbyeReason")]
+    public enum GCGoodbyeReason
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"GCGoodbyeReason_GC_GOING_DOWN", Value=1)]
+      GCGoodbyeReason_GC_GOING_DOWN = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"GCGoodbyeReason_NO_SESSION", Value=2)]
+      GCGoodbyeReason_NO_SESSION = 2
+    }
   
 }
 #pragma warning restore 1591

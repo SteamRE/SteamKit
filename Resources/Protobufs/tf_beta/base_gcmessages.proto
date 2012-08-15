@@ -60,6 +60,7 @@ message CMsgServerGoodbye {
 
 message CMsgInviteToParty {
 	optional fixed64 steam_id = 1;
+	optional uint32 client_version = 2;
 }
 
 message CMsgInvitationCreated {
@@ -70,6 +71,7 @@ message CMsgInvitationCreated {
 message CMsgPartyInviteResponse {
 	optional uint64 party_id = 1;
 	optional bool accept = 2;
+	optional uint32 client_version = 3;
 }
 
 message CMsgKickFromParty {
@@ -370,5 +372,11 @@ message CMsgGCGiftedItems {
 	optional uint64 gifter_steam_id = 1;
 	optional bool was_random_person = 2;
 	repeated uint32 recipient_account_ids = 3;
+}
+
+message CMsgGCNameItemNotification {
+	optional fixed64 player_steamid = 1;
+	optional uint32 item_def_index = 2;
+	optional string item_name_custom = 3;
 }
 

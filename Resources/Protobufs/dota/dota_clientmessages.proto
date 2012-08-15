@@ -13,6 +13,9 @@ enum EDotaClientMessages {
 	DOTA_CM_Pause = 8;
 	DOTA_CM_ShopViewMode = 9;
 	DOTA_CM_SetUnitShareFlag = 10;
+	DOTA_CM_SwapRequest = 11;
+	DOTA_CM_SwapAccept = 12;
+	DOTA_CM_WorldLine = 13;
 }
 
 message CDOTAClientMsg_MapPing {
@@ -54,5 +57,19 @@ message CDOTAClientMsg_SetUnitShareFlag {
 	optional uint32 playerID = 1;
 	optional uint32 flag = 2;
 	optional bool state = 3;
+}
+
+message CDOTAClientMsg_SwapRequest {
+	optional uint32 playerid1 = 1;
+	optional uint32 playerid2 = 2;
+}
+
+message CDOTAClientMsg_SwapAccept {
+	optional uint32 playerid1 = 1;
+	optional uint32 playerid2 = 2;
+}
+
+message CDOTAClientMsg_WorldLine {
+	optional .CDOTAMsg_WorldLine worldline = 1;
 }
 

@@ -90,6 +90,8 @@ enum DOTA_CHAT_MESSAGE {
 	CHAT_MESSAGE_SAFE_TO_LEAVE_ABANDONER_EARLY = 48;
 	CHAT_MESSAGE_DROP_RATE_BONUS = 49;
 	CHAT_MESSAGE_NO_BATTLE_POINTS = 50;
+	CHAT_MESSAGE_DENIED_AEGIS = 51;
+	CHAT_MESSAGE_INFORMATIONAL = 52;
 }
 
 enum DOTA_NO_BATTLE_POINTS_REASONS {
@@ -97,6 +99,10 @@ enum DOTA_NO_BATTLE_POINTS_REASONS {
 	NO_BATTLE_POINTS_PRACTICE_BOTS = 2;
 	NO_BATTLE_POINTS_CHEATS_ENABLED = 3;
 	NO_BATTLE_POINTS_LOW_PRIORITY = 4;
+}
+
+enum DOTA_CHAT_INFORMATIONAL {
+	COOP_BATTLE_POINTS_RULES = 1;
 }
 
 enum DOTA_COMBATLOG_TYPES {
@@ -314,6 +320,7 @@ message CDOTASpeechMatchOnClient {
 	optional int32 concept = 1;
 	optional int32 recipient_type = 2;
 	optional .CDOTAResponseQuerySerialized responsequery = 3;
+	optional sfixed32 randomseed = 4 [default = 0];
 }
 
 message CDOTAUserMsg_UnitEvent {
@@ -322,6 +329,7 @@ message CDOTAUserMsg_UnitEvent {
 		optional string response = 2;
 		optional int32 recipient_type = 3;
 		optional int32 level = 4;
+		optional bool muteable = 5 [default = false];
 	}
 
 	message SpeechMute {

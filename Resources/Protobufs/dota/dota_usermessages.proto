@@ -35,6 +35,8 @@ enum EDotaUserMessages {
 	DOTA_UM_Ping = 93;
 	DOTA_UM_ItemFound = 94;
 	DOTA_UM_CharacterSpeakConcept = 95;
+	DOTA_UM_SwapVerify = 96;
+	DOTA_UM_WorldLine = 97;
 }
 
 enum DOTA_CHAT_MESSAGE {
@@ -90,6 +92,9 @@ enum DOTA_CHAT_MESSAGE {
 	CHAT_MESSAGE_SAFE_TO_LEAVE_ABANDONER_EARLY = 48;
 	CHAT_MESSAGE_DROP_RATE_BONUS = 49;
 	CHAT_MESSAGE_NO_BATTLE_POINTS = 50;
+	CHAT_MESSAGE_DENIED_AEGIS = 51;
+	CHAT_MESSAGE_INFORMATIONAL = 52;
+	CHAT_MESSAGE_AEGIS_STOLEN = 53;
 }
 
 enum DOTA_NO_BATTLE_POINTS_REASONS {
@@ -97,6 +102,10 @@ enum DOTA_NO_BATTLE_POINTS_REASONS {
 	NO_BATTLE_POINTS_PRACTICE_BOTS = 2;
 	NO_BATTLE_POINTS_CHEATS_ENABLED = 3;
 	NO_BATTLE_POINTS_LOW_PRIORITY = 4;
+}
+
+enum DOTA_CHAT_INFORMATIONAL {
+	COOP_BATTLE_POINTS_RULES = 1;
 }
 
 enum DOTA_COMBATLOG_TYPES {
@@ -154,6 +163,10 @@ message CDOTAUserMsg_AIDebugLine {
 
 message CDOTAUserMsg_Ping {
 	optional string message = 1;
+}
+
+message CDOTAUserMsg_SwapVerify {
+	optional uint32 player_id = 1;
 }
 
 message CDOTAUserMsg_ChatEvent {
@@ -314,6 +327,7 @@ message CDOTASpeechMatchOnClient {
 	optional int32 concept = 1;
 	optional int32 recipient_type = 2;
 	optional .CDOTAResponseQuerySerialized responsequery = 3;
+	optional sfixed32 randomseed = 4 [default = 0];
 }
 
 message CDOTAUserMsg_UnitEvent {
@@ -322,6 +336,7 @@ message CDOTAUserMsg_UnitEvent {
 		optional string response = 2;
 		optional int32 recipient_type = 3;
 		optional int32 level = 4;
+		optional bool muteable = 5 [default = false];
 	}
 
 	message SpeechMute {
@@ -462,5 +477,10 @@ message CDOTAUserMsg_OverheadEvent {
 message CDOTAUserMsg_TutorialTipInfo {
 	optional string name = 1;
 	optional int32 progress = 2;
+}
+
+message CDOTAUserMsg_WorldLine {
+	optional int32 player_id = 1;
+	optional .CDOTAMsg_WorldLine worldline = 2;
 }
 
