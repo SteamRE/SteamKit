@@ -1279,6 +1279,9 @@ message CMsgClientUCMPublishFile {
 	optional int32 visibility = 10;
 	optional uint32 file_type = 11;
 	optional string url = 12;
+	optional uint32 video_provider = 13;
+	optional string video_account_name = 14;
+	optional string video_identifier = 15;
 }
 
 message CMsgClientUCMPublishFileResponse {
@@ -1333,6 +1336,7 @@ message CMsgClientUCMGetPublishedFileDetailsResponse {
 	optional uint32 file_size = 16;
 	optional uint32 preview_file_size = 17;
 	optional string url = 18;
+	optional uint32 file_type = 19;
 }
 
 message CMsgClientUCMDeletePublishedFile {
@@ -1697,6 +1701,18 @@ message CMsgClientMDSUploadDepotChunksResponse {
 	optional int32 eresult = 1 [default = 2];
 }
 
+message CMsgClientMDSUploadRateTest {
+	optional uint32 serial_number = 1;
+	optional bytes test_data = 2;
+	optional uint32 test_data_size = 3;
+	optional uint32 test_data_crc = 4;
+}
+
+message CMsgClientMDSUploadRateTestResponse {
+	optional int32 eresult = 1 [default = 2];
+	optional uint32 serial_number = 2;
+}
+
 message CMsgClientMDSTransmitManifestDataChunk {
 	optional int32 offset = 1;
 	optional bytes data = 2;
@@ -1787,6 +1803,21 @@ message CMsgClientGetDepotDecryptionKeyResponse {
 	optional int32 eresult = 1 [default = 2];
 	optional uint32 depot_id = 2;
 	optional bytes depot_encryption_key = 3;
+}
+
+message CMsgClientGetAppBetaPasswords {
+	optional uint32 app_id = 1;
+}
+
+message CMsgClientGetAppBetaPasswordsResponse {
+	message BetaPassword {
+		optional string betaname = 1;
+		optional string betapassword = 2;
+	}
+
+	optional int32 eresult = 1 [default = 2];
+	optional uint32 app_id = 2;
+	repeated .CMsgClientGetAppBetaPasswordsResponse.BetaPassword betapasswords = 3;
 }
 
 message CMsgClientUpdateAppJobReport {
@@ -1982,6 +2013,7 @@ message CMsgGCClient {
 	optional uint32 msgtype = 2;
 	optional bytes payload = 3;
 	optional fixed64 steamid = 4;
+	optional string gcname = 5;
 }
 
 message CMsgClientRequestFreeLicense {
@@ -2239,5 +2271,31 @@ message CMsgFSEnumerateFollowingListResponse {
 	optional int32 eresult = 1 [default = 2];
 	optional int32 total_results = 2;
 	repeated fixed64 steam_ids = 3;
+}
+
+message CMsgDPGetNumberOfCurrentPlayers {
+	optional uint32 appid = 1;
+}
+
+message CMsgDPGetNumberOfCurrentPlayersResponse {
+	optional int32 eresult = 1 [default = 2];
+	optional int32 player_count = 2;
+}
+
+message CMsgClientFriendUserStatusPublished {
+	optional fixed64 friend_steamid = 1;
+	optional uint32 appid = 2;
+	optional string status_text = 3;
+}
+
+message CMsgClientServiceMethod {
+	optional string method_name = 1;
+	optional string serialized_method = 2;
+	optional bool one_way = 3;
+}
+
+message CMsgClientServiceMethodResponse {
+	optional string method_name = 1;
+	optional string serialized_method_response = 2;
 }
 
