@@ -212,6 +212,8 @@
 	k_EMsgClientGetDepotDecryptionKey = 5438, // flags: 2, server type: -1
 	k_EMsgClientGetDepotDecryptionKeyResponse = 5439, // flags: 2, server type: -1
 	k_EMsgGSPerformHardwareSurvey = 5440, // flags: 2, server type: -1
+	k_EMsgClientGetAppBetaPasswords = 5441, // flags: 2, server type: -1
+	k_EMsgClientGetAppBetaPasswordsResponse = 5442, // flags: 2, server type: -1
 	k_EMsgClientEnableTestLicense = 5443, // flags: 2, server type: -1
 	k_EMsgClientEnableTestLicenseResponse = 5444, // flags: 2, server type: -1
 	k_EMsgClientDisableTestLicense = 5445, // flags: 2, server type: -1
@@ -341,6 +343,7 @@
 	k_EMsgAMClientSetPlayerNicknameResponse = 5589, // flags: 2, server type: -1
 	k_EMsgClientRequestOAuthTokenForApp = 5590, // flags: 6, server type: 40
 	k_EMsgClientRequestOAuthTokenForAppResponse = 5591, // flags: 6, server type: 40
+	k_EMsgClientFriendUserStatusPublished = 5596, // flags: 2, server type: -1
 	k_EMsgClientDFSAuthenticateRequest = 5605, // flags: 2, server type: -1
 	k_EMsgClientDFSAuthenticateResponse = 5606, // flags: 2, server type: -1
 	k_EMsgClientDFSEndSession = 5607, // flags: 2, server type: -1
@@ -358,6 +361,8 @@
 	k_EMsgClientMDSGetDepotManifest = 5818, // flags: 2, server type: -1
 	k_EMsgClientMDSGetDepotManifestResponse = 5819, // flags: 2, server type: -1
 	k_EMsgClientMDSGetDepotManifestChunk = 5820, // flags: 2, server type: -1
+	k_EMsgClientMDSUploadRateTest = 5823, // flags: 2, server type: -1
+	k_EMsgClientMDSUploadRateTestResponse = 5824, // flags: 2, server type: -1
 	k_EMsgClientMDSRegisterAppBuild = 5838, // flags: 2, server type: -1
 	k_EMsgClientMDSRegisterAppBuildResponse = 5839, // flags: 2, server type: -1
 	k_EMsgClientMDSSetAppBuildLive = 5840, // flags: 2, server type: -1

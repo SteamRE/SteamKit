@@ -954,6 +954,8 @@ namespace SteamKit2
 		ClientGetDepotDecryptionKey = 5438,
 		ClientGetDepotDecryptionKeyResponse = 5439,
 		GSPerformHardwareSurvey = 5440,
+		ClientGetAppBetaPasswords = 5441,
+		ClientGetAppBetaPasswordsResponse = 5442,
 		ClientEnableTestLicense = 5443,
 		ClientEnableTestLicenseResponse = 5444,
 		ClientDisableTestLicense = 5445,
@@ -1077,6 +1079,7 @@ namespace SteamKit2
 		AMClientSetPlayerNicknameResponse = 5589,
 		ClientRequestOAuthTokenForApp = 5590,
 		ClientRequestOAuthTokenForAppResponse = 5591,
+		ClientFriendUserStatusPublished = 5596,
 		BaseDFS = 5600,
 		DFSGetFile = 5601,
 		DFSInstallLocalFile = 5602,
@@ -1115,8 +1118,8 @@ namespace SteamKit2
 		ClientMDSGetDepotManifest = 5818,
 		ClientMDSGetDepotManifestResponse = 5819,
 		ClientMDSGetDepotManifestChunk = 5820,
-		ClientMDSDownloadDepotChunksRequest = 5823,
-		MDSDownloadDepotChunksAsync = 5824,
+		ClientMDSUploadRateTest = 5823,
+		ClientMDSUploadRateTestResponse = 5824,
 		MDSDownloadDepotChunksAck = 5825,
 		MDSContentServerStatsBroadcast = 5826,
 		MDSContentServerConfigRequest = 5827,
@@ -1856,6 +1859,9 @@ namespace SteamKit2
 		TooSoon = 8,
 		TooSoonPenalty = 9,
 		ConnectionFailed = 10,
+		InitiatorAlreadyTrading = 11,
+		Error = 12,
+		Timeout = 13,
 	}
 	public enum EUdpPacketType : byte
 	{

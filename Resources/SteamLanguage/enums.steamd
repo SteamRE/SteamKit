@@ -554,4 +554,7 @@ enum EEconTradeResponse
 	TooSoon = 8;
 	TooSoonPenalty = 9;
 	ConnectionFailed = 10;
+	InitiatorAlreadyTrading = 11;
+	Error = 12;
+	Timeout = 13;
 };

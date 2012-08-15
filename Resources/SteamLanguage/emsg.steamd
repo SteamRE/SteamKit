@@ -979,6 +979,8 @@ enum EMsg
 	ClientGetDepotDecryptionKey = 5438;
 	ClientGetDepotDecryptionKeyResponse = 5439;
 	GSPerformHardwareSurvey = 5440;
+	ClientGetAppBetaPasswords = 5441;
+	ClientGetAppBetaPasswordsResponse = 5442;
 	ClientEnableTestLicense = 5443;
 	ClientEnableTestLicenseResponse = 5444;
 	ClientDisableTestLicense = 5445;
@@ -1102,6 +1104,7 @@ enum EMsg
 	AMClientSetPlayerNicknameResponse = 5589;
 	ClientRequestOAuthTokenForApp = 5590;
 	ClientRequestOAuthTokenForAppResponse = 5591;
+	ClientFriendUserStatusPublished = 5596;
 	
 	BaseDFS = 5600;
 	DFSGetFile = 5601;
@@ -1142,8 +1145,8 @@ enum EMsg
 	ClientMDSGetDepotManifest = 5818;
 	ClientMDSGetDepotManifestResponse = 5819;
 	ClientMDSGetDepotManifestChunk = 5820;
-	ClientMDSDownloadDepotChunksRequest = 5823;
-	MDSDownloadDepotChunksAsync = 5824;
+	ClientMDSUploadRateTest = 5823;
+	ClientMDSUploadRateTestResponse = 5824;
 	MDSDownloadDepotChunksAck = 5825;
 	MDSContentServerStatsBroadcast = 5826;
 	MDSContentServerConfigRequest = 5827;
