@@ -53,7 +53,7 @@ namespace SteamKit2
 
         void ConnectCompleted(object sender, SocketAsyncEventArgs e)
         {
-            sock = e.ConnectSocket;
+            sock = sender as Socket;
 
             if ( sock == null )
             {
