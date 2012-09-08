@@ -4,27 +4,6 @@ enum TF_MatchmakingMode {
 	TF_Matchmaking_INVALID = 0;
 	TF_Matchmaking_QUICKPLAY = 1;
 	TF_Matchmaking_TOBOR = 2;
-	TF_Matchmaking_MU_VU_MU = 3;
-	TF_Matchmaking_INDIVIDUAL_CLASS_RESTRICTED = 102;
-	TF_Matchmaking_TEAM_CLASS_RESTRICTED = 103;
-	TF_Matchmaking_INDIVIDUAL_MARATHON = 104;
-	TF_Matchmaking_TEAM_MARATHON = 105;
-	TF_Matchmaking_COMMANDER = 106;
-}
-
-enum TF_Matchmaking_TOBOR_CRSK {
-	TF_Matchmaking_TOBOR_CRSK_EpsilonPyro = 1;
-	TF_Matchmaking_TOBOR_CRSK_EpsilonEngi = 2;
-	TF_Matchmaking_TOBOR_CRSK_PJoe = 3;
-	TF_Matchmaking_TOBOR_CRSK_GLaDOS = 4;
-	TF_Matchmaking_TOBOR_CRSK_Wheatly = 5;
-	TF_Matchmaking_TOBOR_CRSK_ATLAS = 6;
-	TF_Matchmaking_TOBOR_CRSK_PBody = 7;
-	TF_Matchmaking_TOBOR_CRSK_CCube = 8;
-	TF_Matchmaking_TOBOR_CRSK_D0G = 9;
-	TF_Matchmaking_TOBOR_CRSK_RZOEY = 10;
-	TF_Matchmaking_TOBOR_CRSK_VICI = 11;
-	TF_Matchmaking_TOBOR_CRSK_TFH = 12;
 }
 
 enum TF_Matchmaking_WizardStep {
@@ -34,11 +13,6 @@ enum TF_Matchmaking_WizardStep {
 	TF_Matchmaking_WizardStep_TOBOR_CHALLENGE = 3;
 	TF_Matchmaking_WizardStep_QUICKPLAY = 4;
 	TF_Matchmaking_WizardStep_SEARCHING = 5;
-	TF_Matchmaking_WizardStep_TOBOR_SELECT_CRSK = 10;
-	TF_Matchmaking_WizardStep_MARATHON_LENGTH = 11;
-	TF_Matchmaking_WizardStep_MU_VU_MU_BONUS = 12;
-	TF_Matchmaking_WizardStep_COMMANDER_ALLIANCE = 13;
-	TF_Matchmaking_WizardStep_CLASS_RESTRICTIONS = 14;
 }
 
 enum TF_GC_GameState {
@@ -365,8 +339,6 @@ message CSOTFPartyMember {
 	optional uint32 completed_challenges = 3;
 	optional uint32 badge_level = 4;
 	optional bool squad_surplus = 5;
-	optional float latitude = 6;
-	optional float longitude = 7;
 }
 
 message CMsgMatchSearchCriteria {
@@ -382,7 +354,7 @@ message CMsgCreateOrUpdateParty {
 	optional fixed64 steam_lobby_id = 3;
 	optional bool squad_surplus = 4;
 	optional .TF_Matchmaking_WizardStep wizard_step = 5 [default = TF_Matchmaking_WizardStep_INVALID];
-	optional .TF_Matchmaking_TOBOR_CRSK tobor_crsk = 100 [default = TF_Matchmaking_TOBOR_CRSK_EpsilonPyro];
+	optional uint32 client_version = 6 [default = 1225];
 }
 
 message CMsgCreateOrUpdatePartyReply {
@@ -413,7 +385,6 @@ message CSOTFParty {
 	optional bool search_late_join_ok = 23;
 	optional string search_challenge = 25;
 	optional bool search_play_for_bragging_rights = 26;
-	optional .TF_Matchmaking_TOBOR_CRSK search_tobor_crsk = 9 [default = TF_Matchmaking_TOBOR_CRSK_EpsilonPyro];
 	optional uint32 search_quickplay_game_type = 28;
 	optional uint32 prevent_match_until_date = 18;
 	optional uint32 prevent_match_account_id = 19;
@@ -509,9 +480,10 @@ message CMsgExitMatchmaking {
 message CMsgAcceptInvite {
 	optional uint64 party_id = 1;
 	optional fixed64 steamid_lobby = 2;
+	optional uint32 client_version = 3 [default = 1225];
 }
 
-message CMsgAcceptInviteFailed {
+message CMsgAcceptInviteResponse {
 	optional int32 result_code = 1;
 }
 
@@ -620,6 +592,7 @@ message CMsgGameServerMatchmakingStatus {
 		AcknowledgePlayers = 3;
 	}
 
+	optional uint32 server_version = 16 [default = 1225];
 	optional .ServerMatchmakingState matchmaking_state = 1 [default = ServerMatchmakingState_INVALID];
 	optional .TF_MatchmakingMode matchmaking_mode = 2 [default = TF_Matchmaking_INVALID];
 	optional string map = 3;
@@ -632,9 +605,13 @@ message CMsgGameServerMatchmakingStatus {
 	optional float server_loadavg = 10;
 	optional bool server_trusted = 11;
 	optional bool server_dedicated = 12;
+	optional uint32 strict = 17;
 	repeated .CMsgGameServerMatchmakingStatus.Player players = 13;
 	optional .TF_GC_GameState game_state = 14 [default = TF_GC_GAMESTATE_STATE_INIT];
 	optional .CMsgGameServerMatchmakingStatus.Event event = 15 [default = None];
+	optional uint32 mvm_wave = 18;
+	optional uint32 mvm_credits_acquired = 19;
+	optional uint32 mvm_credits_dropped = 20;
 }
 
 message CMsgMatchmakingProgress {
@@ -653,7 +630,7 @@ message CMsgMatchmakingProgress {
 
 message CMsgMvMVictoryInfo {
 	message Item {
-		optional .CMsgMvMVictoryInfo.GrantReason grant_reason = 1 [default = BADGE_LEVELED];
+		optional .CMsgMvMVictoryInfo.GrantReason grant_reason = 1 [default = INVALID];
 		optional bytes item_data = 2;
 		optional fixed64 squad_surplus_claimer_steam_id = 3;
 	}
@@ -669,22 +646,12 @@ message CMsgMvMVictoryInfo {
 	}
 
 	enum GrantReason {
+		INVALID = 0;
 		BADGE_LEVELED = 1;
 		SQUAD_SURPLUS = 2;
+		MANN_UP = 3;
 	}
 
 	repeated .CMsgMvMVictoryInfo.Player players = 1;
-}
-
-message CMsgStandsForMonosodiumGlutamate {
-	optional fixed64 did_you_know_excitotoxicity_is_a_word = 1;
-	optional uint32 i_didnt_know_that = 2;
-	optional string seriously_why_are_you_looking_at_this = 3;
-}
-
-message CMsgStandsForMonosodiumGlutamateORDOESIT {
-	optional fixed64 did_you_know_excitotoxicity_is_a_word = 1;
-	optional uint32 i_didnt_know_that = 2;
-	optional uint32 but_then_i_dont_know_a_lot_of_things_i_guess = 3;
 }
 

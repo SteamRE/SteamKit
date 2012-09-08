@@ -162,6 +162,11 @@ message CMsgApplyStrangePart {
 	optional uint64 item_item_id = 2;
 }
 
+message CMsgApplyPennantUpgrade {
+	optional uint64 upgrade_item_id = 1;
+	optional uint64 pennant_item_id = 2;
+}
+
 message CSOEconItemAttribute {
 	optional uint32 def_index = 1;
 	optional uint32 value = 2;

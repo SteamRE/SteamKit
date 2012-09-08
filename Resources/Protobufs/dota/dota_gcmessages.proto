@@ -85,20 +85,13 @@ enum DOTA_TournamentEvents {
 
 message CSODOTAGameAccountClient {
 	optional uint32 account_id = 1 [(key_field) = true];
-	optional string persona_name = 2;
 	optional uint32 wins = 3;
 	optional uint32 losses = 4;
-	optional uint32 karma = 6;
 	optional uint32 avatar = 7;
-	optional uint32 achievement_showcase_0 = 8;
-	optional uint32 achievement_showcase_1 = 9;
-	optional uint32 achievement_showcase_2 = 10;
-	optional string tag_line = 11;
 	optional uint32 xp = 12;
 	optional uint32 level = 13;
 	optional uint32 initial_skill = 14;
 	optional uint32 leaver_count = 15;
-	optional bool left_last_game = 16;
 	optional uint32 prevent_match_until_date = 18;
 	optional uint32 prevent_text_chat_until_date = 20;
 	optional uint32 prevent_voice_until_date = 21;
@@ -122,9 +115,7 @@ message CSODOTAGameAccountClientInternal {
 	optional uint32 rank = 1;
 	optional uint32 rank_uncertainty = 2;
 	optional int32 win_loss_streak = 3;
-	optional uint32 idle_in_fountain_count = 4;
 	optional uint32 feeding_count = 5;
-	optional uint32 logged_in_elsewhere_count = 6;
 	optional uint32 voice_reports = 7;
 	optional uint32 text_reports = 8;
 	optional uint32 ability_reports = 9;
@@ -287,8 +278,6 @@ message CSODOTALobby {
 	optional .DOTA_CM_PICK cm_pick = 28 [default = DOTA_CM_RANDOM];
 	optional uint32 match_id = 30;
 	optional bool allow_spectating = 31 [default = true];
-	optional fixed64 load_game_lobby_id = 33;
-	optional uint32 load_game_save_number = 34;
 	optional .DOTABotDifficulty bot_difficulty = 36 [default = BOT_DIFFICULTY_HARD];
 	optional .DOTAGameVersion game_version = 37 [default = GAME_VERSION_CURRENT];
 	repeated .CLobbyTimedRewardDetails timed_reward_details = 38;
@@ -298,6 +287,10 @@ message CSODOTALobby {
 	optional uint32 leagueid = 42 [default = 1];
 	optional uint32 penalty_level_radiant = 43 [default = 0];
 	optional uint32 penalty_level_dire = 44 [default = 0];
+	optional uint32 load_game_id = 45;
+	optional uint32 series_type = 46;
+	optional uint32 radiant_series_wins = 47;
+	optional uint32 dire_series_wins = 48;
 }
 
 message CSODOTALobbyInternal {
@@ -482,8 +475,6 @@ message CMsgPracticeLobbySetDetails {
 	optional uint32 server_region = 4;
 	optional uint32 game_mode = 5;
 	optional .DOTA_CM_PICK cm_pick = 6 [default = DOTA_CM_RANDOM];
-	optional fixed64 load_game_lobby_id = 7;
-	optional uint32 load_game_save_number = 8;
 	optional .DOTABotDifficulty bot_difficulty = 9 [default = BOT_DIFFICULTY_MEDIUM];
 	optional bool allow_cheats = 10;
 	optional bool fill_with_bots = 11;
@@ -494,6 +485,10 @@ message CMsgPracticeLobbySetDetails {
 	optional uint32 leagueid = 16;
 	optional uint32 penalty_level_radiant = 17;
 	optional uint32 penalty_level_dire = 18;
+	optional uint32 load_game_id = 19;
+	optional uint32 series_type = 20;
+	optional uint32 radiant_series_wins = 21;
+	optional uint32 dire_series_wins = 22;
 }
 
 message CMsgPracticeLobbyList {
@@ -663,6 +658,7 @@ message CMsgDOTATournament {
 			optional uint32 provider_id = 1;
 			optional uint32 stream_id = 2;
 			optional string url = 3;
+			optional string description = 4;
 		}
 
 		optional uint32 game_id = 1;
@@ -1081,6 +1077,7 @@ message CMsgDOTALiveScoreboardUpdate {
 			optional uint32 item3 = 19;
 			optional uint32 item4 = 20;
 			optional uint32 item5 = 21;
+			optional uint32 respawn_timer = 22;
 		}
 
 		repeated .CMsgDOTALiveScoreboardUpdate.Team.Player players = 1;
@@ -1093,6 +1090,7 @@ message CMsgDOTALiveScoreboardUpdate {
 	optional int32 hltv_delay = 4;
 	optional .CMsgDOTALiveScoreboardUpdate.Team team_good = 5;
 	optional .CMsgDOTALiveScoreboardUpdate.Team team_bad = 6;
+	optional uint32 roshan_respawn_timer = 7;
 }
 
 message CMsgDOTAJoinChatChannel {
@@ -1273,10 +1271,11 @@ message CMsgDOTARequestSaveGamesResponse {
 			optional uint32 team1_score = 3;
 			optional uint32 team2_score = 4;
 			repeated .CMsgDOTARequestSaveGamesResponse.SaveGame.SaveInstance.PlayerPositions player_positions = 5;
+			optional uint32 save_id = 6;
 		}
 
 		optional fixed64 lobby_id = 1;
-		optional uint32 file_time = 2;
+		optional uint32 save_time = 2;
 		repeated .CMsgDOTARequestSaveGamesResponse.SaveGame.Player players = 3;
 		repeated .CMsgDOTARequestSaveGamesResponse.SaveGame.SaveInstance save_instances = 4;
 	}
@@ -1305,6 +1304,7 @@ message CMsgWatchGame {
 	optional fixed64 server_steamid = 1;
 	optional uint32 client_version = 2;
 	optional fixed64 watch_server_steamid = 3;
+	optional uint64 lobby_id = 4;
 }
 
 message CMsgCancelWatchGame {
@@ -1319,6 +1319,7 @@ message CMsgWatchGameResponse {
 		CANCELLED = 4;
 		INCOMPATIBLEVERSION = 5;
 		MISSINGLEAGUESUBSCRIPTION = 6;
+		LOBBYNOTFOUND = 7;
 	}
 
 	optional .CMsgWatchGameResponse.WatchGameResult watch_game_result = 1 [default = PENDING];
@@ -1595,5 +1596,56 @@ message CMsgMatchVoteResponse {
 	optional .DOTAMatchVote vote = 2 [default = DOTAMatchVote_INVALID];
 	optional uint32 positive_votes = 3;
 	optional uint32 negative_votes = 4;
+}
+
+message CMsgTeamFanfare {
+	optional uint32 match_id = 1;
+}
+
+message CMsgResponseTeamFanfare {
+	optional uint32 fanfare_goodguys = 1;
+	optional uint32 fanfare_badguys = 2;
+}
+
+message CMsgSpectatorConnect {
+	optional fixed64 spectator_id = 1;
+}
+
+message CMsgSpectatorDisconnect {
+	optional fixed64 spectator_id = 1;
+}
+
+message CMsgGameServerUploadSaveGame {
+	optional uint32 game_time = 1;
+	optional bytes save_game_data = 2;
+	optional uint64 lobby_id = 3;
+	repeated uint64 player_steam_ids = 4;
+}
+
+message CMsgGameServerSaveGameResult {
+	enum Result {
+		SaveSuccessful = 0;
+		SessionNotFound = 1;
+		DatabaseError = 2;
+		TooBig = 3;
+	}
+
+	optional .CMsgGameServerSaveGameResult.Result result = 1 [default = SaveSuccessful];
+}
+
+message CMsgGameServerGetLoadGame {
+	optional uint32 save_id = 1;
+}
+
+message CMsgGameServerGetLoadGameResult {
+	optional bytes save_game_data = 1;
+}
+
+message CMsgCheckSpectatorOnly {
+}
+
+message CMsgCheckSpectatorOnlyResponse {
+	optional uint32 eresult = 1 [default = 2];
+	optional bool spectator_only = 2;
 }
 

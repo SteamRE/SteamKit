@@ -37,6 +37,7 @@ enum EDotaUserMessages {
 	DOTA_UM_CharacterSpeakConcept = 95;
 	DOTA_UM_SwapVerify = 96;
 	DOTA_UM_WorldLine = 97;
+	DOTA_UM_TournamentDrop = 98;
 }
 
 enum DOTA_CHAT_MESSAGE {
@@ -482,5 +483,10 @@ message CDOTAUserMsg_TutorialTipInfo {
 message CDOTAUserMsg_WorldLine {
 	optional int32 player_id = 1;
 	optional .CDOTAMsg_WorldLine worldline = 2;
+}
+
+message CDOTAUserMsg_TournamentDrop {
+	optional string winner_name = 1;
+	optional int32 event_type = 2;
 }
 

@@ -47,7 +47,6 @@ message CMsgSOCacheVersion {
 message CMsgAccountDetails {
 	optional bool valid = 1;
 	optional string account_name = 2;
-	optional string persona_name = 3;
 	optional bool public_profile = 4;
 	optional bool public_inventory = 5;
 	optional bool vac_banned = 6;
@@ -60,5 +59,6 @@ message CMsgAccountDetails {
 	optional bool trusted = 13;
 	optional uint32 package = 14;
 	optional fixed32 time_cached = 15;
+	optional bool account_locked = 16;
 }
 
