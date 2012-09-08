@@ -59,5 +59,6 @@ message CMsgAccountDetails {
 	optional bool trusted = 13;
 	optional uint32 package = 14;
 	optional fixed32 time_cached = 15;
+	optional bool account_locked = 16;
 }
 

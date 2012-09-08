@@ -279,6 +279,8 @@ message CGCSystemMsg_GetAccountDetails_Response {
 	optional bool is_free_trial_account = 13;
 	optional uint32 free_trial_expiration = 14;
 	optional bool is_low_violence = 15;
+	optional bool is_account_locked_down = 16;
+	optional bool is_community_banned = 17;
 }
 
 message CMsgGCGetPersonaNames {
