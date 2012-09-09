@@ -45,6 +45,8 @@ namespace SteamKit2
             e.Completed += new EventHandler<SocketAsyncEventArgs>( ConnectCompleted );
             e.RemoteEndPoint = endPoint;
 
+            DebugLog.WriteLine( "TcpConnection", "Connecting to {0}...", endPoint );
+
             if ( !socket.ConnectAsync( e ) )
             {
                 ConnectCompleted( socket, e );
@@ -67,6 +69,8 @@ namespace SteamKit2
                 OnDisconnected( EventArgs.Empty );
                 return;
             }
+
+            DebugLog.WriteLine( "TcpConnection", "Connected!" );
 
             isConnected = true;
 
