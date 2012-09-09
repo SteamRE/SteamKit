@@ -51,12 +51,19 @@ namespace SteamKit2
             }
         }
 
-        void ConnectCompleted(object sender, SocketAsyncEventArgs e)
+        void ConnectCompleted( object sender, SocketAsyncEventArgs e )
         {
             sock = sender as Socket;
 
             if ( sock == null )
             {
+                OnDisconnected( EventArgs.Empty );
+                return;
+            }
+
+            if ( e.SocketError != SocketError.Success )
+            {
+                DebugLog.WriteLine( "TcpConnection", "Unable to connect: {0}", e.SocketError );
                 OnDisconnected( EventArgs.Empty );
                 return;
             }
