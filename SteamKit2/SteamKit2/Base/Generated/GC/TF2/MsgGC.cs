@@ -1533,24 +1533,6 @@ namespace SteamKit2.GC.TF2.Internal
       get { return _squad_surplus; }
       set { _squad_surplus = value; }
     }
-
-    private float _latitude = default(float);
-    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"latitude", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(float))]
-    public float latitude
-    {
-      get { return _latitude; }
-      set { _latitude = value; }
-    }
-
-    private float _longitude = default(float);
-    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"longitude", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(float))]
-    public float longitude
-    {
-      get { return _longitude; }
-      set { _longitude = value; }
-    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -1653,13 +1635,13 @@ namespace SteamKit2.GC.TF2.Internal
       set { _wizard_step = value; }
     }
 
-    private TF_Matchmaking_TOBOR_CRSK _tobor_crsk = TF_Matchmaking_TOBOR_CRSK.TF_Matchmaking_TOBOR_CRSK_EpsilonPyro;
-    [global::ProtoBuf.ProtoMember(100, IsRequired = false, Name=@"tobor_crsk", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(TF_Matchmaking_TOBOR_CRSK.TF_Matchmaking_TOBOR_CRSK_EpsilonPyro)]
-    public TF_Matchmaking_TOBOR_CRSK tobor_crsk
+    private uint _client_version = (uint)1225;
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"client_version", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoDefaultValue((uint)1225)]
+    public uint client_version
     {
-      get { return _tobor_crsk; }
-      set { _tobor_crsk = value; }
+      get { return _client_version; }
+      set { _client_version = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -1825,15 +1807,6 @@ namespace SteamKit2.GC.TF2.Internal
     {
       get { return _search_play_for_bragging_rights; }
       set { _search_play_for_bragging_rights = value; }
-    }
-
-    private TF_Matchmaking_TOBOR_CRSK _search_tobor_crsk = TF_Matchmaking_TOBOR_CRSK.TF_Matchmaking_TOBOR_CRSK_EpsilonPyro;
-    [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"search_tobor_crsk", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(TF_Matchmaking_TOBOR_CRSK.TF_Matchmaking_TOBOR_CRSK_EpsilonPyro)]
-    public TF_Matchmaking_TOBOR_CRSK search_tobor_crsk
-    {
-      get { return _search_tobor_crsk; }
-      set { _search_tobor_crsk = value; }
     }
 
     private uint _search_quickplay_game_type = default(uint);
@@ -2413,15 +2386,24 @@ namespace SteamKit2.GC.TF2.Internal
       get { return _steamid_lobby; }
       set { _steamid_lobby = value; }
     }
+
+    private uint _client_version = (uint)1225;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"client_version", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoDefaultValue((uint)1225)]
+    public uint client_version
+    {
+      get { return _client_version; }
+      set { _client_version = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgAcceptInviteFailed")]
-  public partial class CMsgAcceptInviteFailed : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgAcceptInviteResponse")]
+  public partial class CMsgAcceptInviteResponse : global::ProtoBuf.IExtensible
   {
-    public CMsgAcceptInviteFailed() {}
+    public CMsgAcceptInviteResponse() {}
     
 
     private int _result_code = default(int);
@@ -2886,6 +2868,15 @@ namespace SteamKit2.GC.TF2.Internal
     public CMsgGameServerMatchmakingStatus() {}
     
 
+    private uint _server_version = (uint)1225;
+    [global::ProtoBuf.ProtoMember(16, IsRequired = false, Name=@"server_version", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoDefaultValue((uint)1225)]
+    public uint server_version
+    {
+      get { return _server_version; }
+      set { _server_version = value; }
+    }
+
     private ServerMatchmakingState _matchmaking_state = ServerMatchmakingState.ServerMatchmakingState_INVALID;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"matchmaking_state", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::ProtoBuf.ProtoDefaultValue(ServerMatchmakingState.ServerMatchmakingState_INVALID)]
@@ -2993,6 +2984,15 @@ namespace SteamKit2.GC.TF2.Internal
       get { return _server_dedicated; }
       set { _server_dedicated = value; }
     }
+
+    private uint _strict = default(uint);
+    [global::ProtoBuf.ProtoMember(17, IsRequired = false, Name=@"strict", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    public uint strict
+    {
+      get { return _strict; }
+      set { _strict = value; }
+    }
     private readonly global::System.Collections.Generic.List<CMsgGameServerMatchmakingStatus.Player> _players = new global::System.Collections.Generic.List<CMsgGameServerMatchmakingStatus.Player>();
     [global::ProtoBuf.ProtoMember(13, Name=@"players", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public global::System.Collections.Generic.List<CMsgGameServerMatchmakingStatus.Player> players
@@ -3017,6 +3017,33 @@ namespace SteamKit2.GC.TF2.Internal
     {
       get { return _event; }
       set { _event = value; }
+    }
+
+    private uint _mvm_wave = default(uint);
+    [global::ProtoBuf.ProtoMember(18, IsRequired = false, Name=@"mvm_wave", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    public uint mvm_wave
+    {
+      get { return _mvm_wave; }
+      set { _mvm_wave = value; }
+    }
+
+    private uint _mvm_credits_acquired = default(uint);
+    [global::ProtoBuf.ProtoMember(19, IsRequired = false, Name=@"mvm_credits_acquired", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    public uint mvm_credits_acquired
+    {
+      get { return _mvm_credits_acquired; }
+      set { _mvm_credits_acquired = value; }
+    }
+
+    private uint _mvm_credits_dropped = default(uint);
+    [global::ProtoBuf.ProtoMember(20, IsRequired = false, Name=@"mvm_credits_dropped", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    public uint mvm_credits_dropped
+    {
+      get { return _mvm_credits_dropped; }
+      set { _mvm_credits_dropped = value; }
     }
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Player")]
   public partial class Player : global::ProtoBuf.IExtensible
@@ -3209,9 +3236,9 @@ namespace SteamKit2.GC.TF2.Internal
     public Item() {}
     
 
-    private CMsgMvMVictoryInfo.GrantReason _grant_reason = CMsgMvMVictoryInfo.GrantReason.BADGE_LEVELED;
+    private CMsgMvMVictoryInfo.GrantReason _grant_reason = CMsgMvMVictoryInfo.GrantReason.INVALID;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"grant_reason", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(CMsgMvMVictoryInfo.GrantReason.BADGE_LEVELED)]
+    [global::ProtoBuf.ProtoDefaultValue(CMsgMvMVictoryInfo.GrantReason.INVALID)]
     public CMsgMvMVictoryInfo.GrantReason grant_reason
     {
       get { return _grant_reason; }
@@ -3315,87 +3342,19 @@ namespace SteamKit2.GC.TF2.Internal
     public enum GrantReason
     {
             
+      [global::ProtoBuf.ProtoEnum(Name=@"INVALID", Value=0)]
+      INVALID = 0,
+            
       [global::ProtoBuf.ProtoEnum(Name=@"BADGE_LEVELED", Value=1)]
       BADGE_LEVELED = 1,
             
       [global::ProtoBuf.ProtoEnum(Name=@"SQUAD_SURPLUS", Value=2)]
-      SQUAD_SURPLUS = 2
+      SQUAD_SURPLUS = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"MANN_UP", Value=3)]
+      MANN_UP = 3
     }
   
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgStandsForMonosodiumGlutamate")]
-  public partial class CMsgStandsForMonosodiumGlutamate : global::ProtoBuf.IExtensible
-  {
-    public CMsgStandsForMonosodiumGlutamate() {}
-    
-
-    private ulong _did_you_know_excitotoxicity_is_a_word = default(ulong);
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"did_you_know_excitotoxicity_is_a_word", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
-    public ulong did_you_know_excitotoxicity_is_a_word
-    {
-      get { return _did_you_know_excitotoxicity_is_a_word; }
-      set { _did_you_know_excitotoxicity_is_a_word = value; }
-    }
-
-    private uint _i_didnt_know_that = default(uint);
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"i_didnt_know_that", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
-    public uint i_didnt_know_that
-    {
-      get { return _i_didnt_know_that; }
-      set { _i_didnt_know_that = value; }
-    }
-
-    private string _seriously_why_are_you_looking_at_this = "";
-    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"seriously_why_are_you_looking_at_this", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
-    public string seriously_why_are_you_looking_at_this
-    {
-      get { return _seriously_why_are_you_looking_at_this; }
-      set { _seriously_why_are_you_looking_at_this = value; }
-    }
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgStandsForMonosodiumGlutamateORDOESIT")]
-  public partial class CMsgStandsForMonosodiumGlutamateORDOESIT : global::ProtoBuf.IExtensible
-  {
-    public CMsgStandsForMonosodiumGlutamateORDOESIT() {}
-    
-
-    private ulong _did_you_know_excitotoxicity_is_a_word = default(ulong);
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"did_you_know_excitotoxicity_is_a_word", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
-    public ulong did_you_know_excitotoxicity_is_a_word
-    {
-      get { return _did_you_know_excitotoxicity_is_a_word; }
-      set { _did_you_know_excitotoxicity_is_a_word = value; }
-    }
-
-    private uint _i_didnt_know_that = default(uint);
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"i_didnt_know_that", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
-    public uint i_didnt_know_that
-    {
-      get { return _i_didnt_know_that; }
-      set { _i_didnt_know_that = value; }
-    }
-
-    private uint _but_then_i_dont_know_a_lot_of_things_i_guess = default(uint);
-    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"but_then_i_dont_know_a_lot_of_things_i_guess", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
-    public uint but_then_i_dont_know_a_lot_of_things_i_guess
-    {
-      get { return _but_then_i_dont_know_a_lot_of_things_i_guess; }
-      set { _but_then_i_dont_know_a_lot_of_things_i_guess = value; }
-    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -3412,66 +3371,7 @@ namespace SteamKit2.GC.TF2.Internal
       TF_Matchmaking_QUICKPLAY = 1,
             
       [global::ProtoBuf.ProtoEnum(Name=@"TF_Matchmaking_TOBOR", Value=2)]
-      TF_Matchmaking_TOBOR = 2,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"TF_Matchmaking_MU_VU_MU", Value=3)]
-      TF_Matchmaking_MU_VU_MU = 3,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"TF_Matchmaking_INDIVIDUAL_CLASS_RESTRICTED", Value=102)]
-      TF_Matchmaking_INDIVIDUAL_CLASS_RESTRICTED = 102,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"TF_Matchmaking_TEAM_CLASS_RESTRICTED", Value=103)]
-      TF_Matchmaking_TEAM_CLASS_RESTRICTED = 103,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"TF_Matchmaking_INDIVIDUAL_MARATHON", Value=104)]
-      TF_Matchmaking_INDIVIDUAL_MARATHON = 104,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"TF_Matchmaking_TEAM_MARATHON", Value=105)]
-      TF_Matchmaking_TEAM_MARATHON = 105,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"TF_Matchmaking_COMMANDER", Value=106)]
-      TF_Matchmaking_COMMANDER = 106
-    }
-  
-    [global::ProtoBuf.ProtoContract(Name=@"TF_Matchmaking_TOBOR_CRSK")]
-    public enum TF_Matchmaking_TOBOR_CRSK
-    {
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"TF_Matchmaking_TOBOR_CRSK_EpsilonPyro", Value=1)]
-      TF_Matchmaking_TOBOR_CRSK_EpsilonPyro = 1,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"TF_Matchmaking_TOBOR_CRSK_EpsilonEngi", Value=2)]
-      TF_Matchmaking_TOBOR_CRSK_EpsilonEngi = 2,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"TF_Matchmaking_TOBOR_CRSK_PJoe", Value=3)]
-      TF_Matchmaking_TOBOR_CRSK_PJoe = 3,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"TF_Matchmaking_TOBOR_CRSK_GLaDOS", Value=4)]
-      TF_Matchmaking_TOBOR_CRSK_GLaDOS = 4,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"TF_Matchmaking_TOBOR_CRSK_Wheatly", Value=5)]
-      TF_Matchmaking_TOBOR_CRSK_Wheatly = 5,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"TF_Matchmaking_TOBOR_CRSK_ATLAS", Value=6)]
-      TF_Matchmaking_TOBOR_CRSK_ATLAS = 6,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"TF_Matchmaking_TOBOR_CRSK_PBody", Value=7)]
-      TF_Matchmaking_TOBOR_CRSK_PBody = 7,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"TF_Matchmaking_TOBOR_CRSK_CCube", Value=8)]
-      TF_Matchmaking_TOBOR_CRSK_CCube = 8,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"TF_Matchmaking_TOBOR_CRSK_D0G", Value=9)]
-      TF_Matchmaking_TOBOR_CRSK_D0G = 9,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"TF_Matchmaking_TOBOR_CRSK_RZOEY", Value=10)]
-      TF_Matchmaking_TOBOR_CRSK_RZOEY = 10,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"TF_Matchmaking_TOBOR_CRSK_VICI", Value=11)]
-      TF_Matchmaking_TOBOR_CRSK_VICI = 11,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"TF_Matchmaking_TOBOR_CRSK_TFH", Value=12)]
-      TF_Matchmaking_TOBOR_CRSK_TFH = 12
+      TF_Matchmaking_TOBOR = 2
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"TF_Matchmaking_WizardStep")]
@@ -3494,22 +3394,7 @@ namespace SteamKit2.GC.TF2.Internal
       TF_Matchmaking_WizardStep_QUICKPLAY = 4,
             
       [global::ProtoBuf.ProtoEnum(Name=@"TF_Matchmaking_WizardStep_SEARCHING", Value=5)]
-      TF_Matchmaking_WizardStep_SEARCHING = 5,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"TF_Matchmaking_WizardStep_TOBOR_SELECT_CRSK", Value=10)]
-      TF_Matchmaking_WizardStep_TOBOR_SELECT_CRSK = 10,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"TF_Matchmaking_WizardStep_MARATHON_LENGTH", Value=11)]
-      TF_Matchmaking_WizardStep_MARATHON_LENGTH = 11,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"TF_Matchmaking_WizardStep_MU_VU_MU_BONUS", Value=12)]
-      TF_Matchmaking_WizardStep_MU_VU_MU_BONUS = 12,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"TF_Matchmaking_WizardStep_COMMANDER_ALLIANCE", Value=13)]
-      TF_Matchmaking_WizardStep_COMMANDER_ALLIANCE = 13,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"TF_Matchmaking_WizardStep_CLASS_RESTRICTIONS", Value=14)]
-      TF_Matchmaking_WizardStep_CLASS_RESTRICTIONS = 14
+      TF_Matchmaking_WizardStep_SEARCHING = 5
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"TF_GC_GameState")]

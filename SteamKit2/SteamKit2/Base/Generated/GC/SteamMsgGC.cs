@@ -2279,41 +2279,6 @@ namespace SteamKit2.GC.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCGiftedItems")]
-  public partial class CMsgGCGiftedItems : global::ProtoBuf.IExtensible
-  {
-    public CMsgGCGiftedItems() {}
-    
-
-    private ulong _gifter_steam_id = default(ulong);
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"gifter_steam_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
-    public ulong gifter_steam_id
-    {
-      get { return _gifter_steam_id; }
-      set { _gifter_steam_id = value; }
-    }
-
-    private bool _was_random_person = default(bool);
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"was_random_person", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
-    public bool was_random_person
-    {
-      get { return _was_random_person; }
-      set { _was_random_person = value; }
-    }
-    private readonly global::System.Collections.Generic.List<uint> _recipient_account_ids = new global::System.Collections.Generic.List<uint>();
-    [global::ProtoBuf.ProtoMember(3, Name=@"recipient_account_ids", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public global::System.Collections.Generic.List<uint> recipient_account_ids
-    {
-      get { return _recipient_account_ids; }
-    }
-  
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCNameItemNotification")]
   public partial class CMsgGCNameItemNotification : global::ProtoBuf.IExtensible
   {
@@ -2346,6 +2311,41 @@ namespace SteamKit2.GC.Internal
       get { return _item_name_custom; }
       set { _item_name_custom = value; }
     }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCGiftedItems")]
+  public partial class CMsgGCGiftedItems : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCGiftedItems() {}
+    
+
+    private ulong _gifter_steam_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"gifter_steam_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    public ulong gifter_steam_id
+    {
+      get { return _gifter_steam_id; }
+      set { _gifter_steam_id = value; }
+    }
+
+    private bool _was_random_person = default(bool);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"was_random_person", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    public bool was_random_person
+    {
+      get { return _was_random_person; }
+      set { _was_random_person = value; }
+    }
+    private readonly global::System.Collections.Generic.List<uint> _recipient_account_ids = new global::System.Collections.Generic.List<uint>();
+    [global::ProtoBuf.ProtoMember(3, Name=@"recipient_account_ids", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public global::System.Collections.Generic.List<uint> recipient_account_ids
+    {
+      get { return _recipient_account_ids; }
+    }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
