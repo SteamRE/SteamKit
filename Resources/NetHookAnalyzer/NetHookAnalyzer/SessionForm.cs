@@ -13,6 +13,7 @@ using System.Reflection;
 using System.Collections;
 using SteamKit2.Internal;
 using ProtoBuf.Meta;
+using SteamKit2.GC;
 
 namespace NetHookAnalyzer
 {
@@ -62,18 +63,6 @@ namespace NetHookAnalyzer
             viewPacket.Sort();
         }
 
-        const uint ProtoMask = 0x80000000;
-        const uint EMsgMask = ~ProtoMask;
-
-        static EMsg GetMsg( uint integer )
-        {
-            return ( EMsg )( integer & EMsgMask );
-        }
-        static bool IsProtoBuf( uint integer )
-        {
-            return ( integer & ProtoMask ) > 0;
-        }
-
         void Dump( PacketItem packet )
         {
             treePacket.Nodes.Clear();
@@ -81,12 +70,12 @@ namespace NetHookAnalyzer
             using ( FileStream packetStream = File.OpenRead( packet.FileName ) )
             {
                 uint realEMsg = PeekUInt32( packetStream );
-                EMsg eMsg = GetMsg( realEMsg );
+                EMsg eMsg = MsgUtil.GetMsg( realEMsg );
 
                 var info = new
                 {
                     EMsg = eMsg,
-                    IsProto = IsProtoBuf( realEMsg ),
+                    IsProto = MsgUtil.IsProtoBuf( realEMsg ),
                 };
                 var header = BuildHeader( realEMsg, packetStream );
                 var body = BuildBody( realEMsg, packetStream );
@@ -104,20 +93,61 @@ namespace NetHookAnalyzer
                 TreeNode infoNode = new TreeNode( "Info: " );
                 TreeNode headerNode = new TreeNode( "Header: " );
                 TreeNode bodyNode = new TreeNode( "Body: " );
+                TreeNode gcBodyNode = new TreeNode( "GC Body: " );
                 TreeNode payloadNode = new TreeNode( "Payload: " );
 
                 DumpType( info, infoNode );
                 DumpType( header, headerNode );
                 DumpType( body, bodyNode );
+                if ( body is CMsgGCClient )
+                {
+                    var gcBody = body as CMsgGCClient;
+
+                    using ( var ms = new MemoryStream( gcBody.payload ) )
+                    {
+                        var gc = new
+                        {
+                            emsg = BuildEMsg( gcBody.msgtype ),
+                            header = BuildGCHeader( gcBody.msgtype, ms ),
+                            body = BuildBody( gcBody.msgtype, ms ),
+                        };
+
+                        DumpType( gc, gcBodyNode );
+                    }
+                }
                 DumpType( payload, payloadNode );
 
                 treePacket.Nodes.Add( infoNode );
                 treePacket.Nodes.Add( headerNode );
                 treePacket.Nodes.Add( bodyNode );
+                treePacket.Nodes.Add( gcBodyNode );
                 treePacket.Nodes.Add( payloadNode );
             }
 
             treePacket.ExpandAll();
+        }
+
+        string BuildEMsg( uint eMsg )
+        {
+            eMsg = MsgUtil.GetGCMsg( eMsg );
+
+            List<FieldInfo> fields = new List<FieldInfo>();
+
+            fields.AddRange( typeof( SteamKit2.GC.TF2.EGCMsg ).GetFields( BindingFlags.Public | BindingFlags.Static ) );
+            fields.AddRange( typeof( SteamKit2.GC.Dota.EGCMsg ).GetFields( BindingFlags.Public | BindingFlags.Static ) );
+            fields.AddRange( typeof( SteamKit2.GC.CSGO.EGCMsg ).GetFields( BindingFlags.Public | BindingFlags.Static ) );
+            fields.AddRange( typeof( SteamKit2.GC.EGCMsgBase ).GetFields( BindingFlags.Public | BindingFlags.Static ) );
+
+            var field = fields.SingleOrDefault( f =>
+            {
+                uint value = ( uint )f.GetValue( null );
+                return value == eMsg;
+            } );
+
+            if ( field != null )
+                return string.Format( "{0} ({1})", field.Name, field.DeclaringType.FullName );
+
+            return eMsg.ToString();
         }
 
 
@@ -253,7 +283,7 @@ namespace NetHookAnalyzer
         {
             ISteamSerializableHeader hdr = null;
 
-            if ( IsProtoBuf( realEMsg ) )
+            if ( MsgUtil.IsProtoBuf( realEMsg ) )
             {
                 hdr = new MsgHdrProtoBuf();
             }
@@ -265,9 +295,26 @@ namespace NetHookAnalyzer
             hdr.Deserialize( str );
             return hdr;
         }
+        IGCSerializableHeader BuildGCHeader( uint realEMsg, Stream str )
+        {
+            IGCSerializableHeader hdr = null;
+
+            if ( MsgUtil.IsProtoBuf( realEMsg ) )
+            {
+                hdr = new MsgGCHdrProtoBuf();
+            }
+            else
+            {
+                hdr = new MsgGCHdr();
+            }
+
+            hdr.Deserialize( str );
+            return hdr;
+        }
+
         object BuildBody( uint realEMsg, Stream str )
         {
-            EMsg eMsg = GetMsg( realEMsg );
+            EMsg eMsg = MsgUtil.GetMsg( realEMsg );
 
             if ( eMsg == EMsg.ClientLogonGameServer )
                 eMsg = EMsg.ClientLogon; // temp hack for now
@@ -324,10 +371,15 @@ namespace NetHookAnalyzer
                 return Deserialize( msgType, str );
             }
 
+            if ( eMsg == EMsg.ClientToGC || eMsg == EMsg.ClientFromGC )
+            {
+                return Serializer.Deserialize<CMsgGCClient>( str );
+            }
+
             // try reading it as a protobuf
             using (ProtoReader reader = new ProtoReader(str, null, null))
             {
-                Dictionary<int, object> fields = new Dictionary<int, object>();
+                var fields = new Dictionary<int, List<object>>();
 
                 while(true)
                 {
@@ -341,6 +393,9 @@ namespace NetHookAnalyzer
                     switch (reader.WireType)
                     {
                         case WireType.Variant:
+                        case WireType.Fixed32:
+                        case WireType.Fixed64:
+                        case WireType.SignedVariant:
                             {
                                 try
                                 {
@@ -368,12 +423,17 @@ namespace NetHookAnalyzer
                             }
                         default:
                             {
-                                fieldValue = "Not implemented";
+                                fieldValue = string.Format( "{0} is not implemented", reader.WireType );
                                 break;
                             }
                     }
 
-                    fields.Add(field, fieldValue);
+                    if ( !fields.ContainsKey( field ) )
+                    {
+                        fields[ field ] = new List<object>();
+                    }
+
+                    fields[ field ].Add( fieldValue );
                 }
 
                 if (fields.Count > 0)
