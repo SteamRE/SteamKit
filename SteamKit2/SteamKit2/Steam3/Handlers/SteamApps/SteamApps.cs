@@ -269,7 +269,7 @@ namespace SteamKit2
             SteamClient.PostCallback( callback );
 #else
             var innerCallback = new AppOwnershipTicketCallback( ticketResponse.Body );
-            var callback = new SteamClient.JobCallback<AppOwnershipTicketCallback>(ticketResponse.TargetJobID, innerCallback);
+            var callback = new SteamClient.JobCallback<AppOwnershipTicketCallback>( ticketResponse.TargetJobID, innerCallback );
             this.Client.PostCallback( callback );
 #endif
         }
