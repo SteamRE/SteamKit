@@ -42,7 +42,11 @@ namespace SteamKit2.GC.Dota
 
         public const uint InitialQuestionnaireResponse = 7049;
 
+        public const uint TournamentRequest = 7051;
         public const uint TournamentResponse = 7052;
+
+        public const uint SetTeamSlot = 7054;
+        public const uint SetTeamSlotResponse = 7055;
 
         public const uint BroadcastNotification = 7056;
         public const uint RequestDefaultChatChannel = 7058;
@@ -87,6 +91,9 @@ namespace SteamKit2.GC.Dota
         public const uint NotifySuccessfulReport = 7103;
         public const uint ClearNotifySuccessfulReport = 7104;
 
+        public const uint TransferTeamAdmin = 7107; // this may be totally wrong
+        public const uint TransferTeamAdminResponse = 7108; // possibly DotaGenericResult?
+
         public const uint MatchGroupWaitTimesRequest = 7109;
         public const uint MatchGroupWaitTimesResponse = 7110;
 
@@ -119,6 +126,22 @@ namespace SteamKit2.GC.Dota
 
         public const uint SetChatChannelVerbosity = 7137;
         public const uint ChatChannelFullUpdate = 7138;
+
+        public const uint EditTeamLogo = 7139;
+        public const uint EditTeamLogoResponse = 7140;
+
+        public const uint RequestLeaguesWithLiveGames = 7147;
+        public const uint LeaguesWithLiveGamesResponse = 7148;
+
+        public const uint MatchVote = 7152;
+        public const uint MatchVoteResponse = 7153;
+
+        public const uint RetrieveMatchVote = 7154;
+        public const uint RetrieveMatchVoteResponse = 7155;
+
+        public const uint CheckSpectatorOnly = 7162;
+        public const uint CheckSpectatorOnlyResponse = 7163;
+
     }
 }
 
