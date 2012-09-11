@@ -1104,7 +1104,12 @@ enum EMsg
 	AMClientSetPlayerNicknameResponse = 5589;
 	ClientRequestOAuthTokenForApp = 5590;
 	ClientRequestOAuthTokenForAppResponse = 5591;
+	ClientGetNumberOfCurrentPlayersDP = 5592;
+	ClientGetNumberOfCurrentPlayersDPResponse = 5593;
+	ClientServiceMethod = 5594;
+	ClientServiceMethodResponse = 5595;
 	ClientFriendUserStatusPublished = 5596;
+	ClientCurrentUIMode = 5597;
 	
 	BaseDFS = 5600;
 	DFSGetFile = 5601;
