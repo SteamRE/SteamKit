@@ -98,6 +98,7 @@ message CMsgClientLogonResponse {
 	optional bytes steam2_ticket = 9;
 	optional int32 eresult_extended = 10;
 	optional string webapi_authenticate_user_nonce = 11;
+	optional uint32 cell_id_ping_threshold = 12;
 	optional fixed64 client_supplied_steamid = 20;
 }
 
@@ -614,6 +615,7 @@ message CMsgClientMMSLobbyData {
 	optional fixed64 steam_id_owner = 7;
 	optional bytes metadata = 8;
 	repeated .CMsgClientMMSLobbyData.Member members = 9;
+	optional uint32 lobby_cellid = 10;
 }
 
 message CMsgClientMMSSendLobbyChatMsg {
@@ -1273,7 +1275,6 @@ message CMsgClientUCMPublishFile {
 	optional uint32 consumer_app_id = 4;
 	optional string title = 5;
 	optional string description = 6;
-	optional bool overwrite = 7;
 	repeated string tags = 8;
 	optional bool workshop_file = 9;
 	optional int32 visibility = 10;
@@ -1381,6 +1382,10 @@ message CMsgClientUCMEnumerateUserSubscribedFilesResponse {
 	message PublishedFileId {
 		optional fixed64 published_file_id = 1;
 		optional fixed32 rtime32_subscribed = 2 [default = 0];
+		optional uint32 appid = 3;
+		optional fixed64 file_hcontent = 4;
+		optional uint32 file_size = 5;
+		optional fixed32 rtime32_last_updated = 6;
 	}
 
 	optional int32 eresult = 1 [default = 2];
@@ -1400,6 +1405,8 @@ message CMsgClientUCMUnsubscribePublishedFileResponse {
 message CMsgClientUCMPublishedFileSubscribed {
 	optional fixed64 published_file_id = 1;
 	optional uint32 app_id = 2;
+	optional fixed64 file_hcontent = 3;
+	optional uint32 file_size = 4;
 }
 
 message CMsgClientUCMPublishedFileUnsubscribed {
@@ -1665,6 +1672,7 @@ message CMsgClientMDSInitDepotBuildRequest {
 	optional bytes encrypted_aes_key = 2;
 	optional uint32 build_id = 4;
 	optional bool for_local_cs = 5;
+	optional bool no_baseline = 6;
 }
 
 message CMsgClientMDSInitDepotBuildResponse {
@@ -2297,5 +2305,9 @@ message CMsgClientServiceMethod {
 message CMsgClientServiceMethodResponse {
 	optional string method_name = 1;
 	optional string serialized_method_response = 2;
+}
+
+message CMsgClientUIMode {
+	optional uint32 uimode = 1;
 }
 

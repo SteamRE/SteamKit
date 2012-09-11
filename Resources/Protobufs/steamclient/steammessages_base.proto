@@ -17,6 +17,8 @@ message CMsgProtoBufHeader {
 	optional uint32 ip = 15;
 	optional uint32 auth_account_flags = 16;
 	optional int32 transport_error = 17 [default = 1];
+	optional uint64 messageid = 18 [default = 18446744073709551615];
+	optional uint32 publisherid = 19;
 }
 
 message CMsgMulti {
@@ -32,5 +34,19 @@ message CMsgAuthTicket {
 	optional uint32 h_steam_pipe = 5;
 	optional uint32 ticket_crc = 6;
 	optional bytes ticket = 7;
+}
+
+message CCDDBAppDetailCommon {
+	optional uint32 appid = 1;
+	optional string name = 2;
+	optional string icon = 3;
+	optional string logo = 4;
+	optional string logo_small = 5;
+	optional bool tool = 6;
+	optional bool demo = 7;
+	optional bool media = 8;
+	optional bool community_visible_stats = 9;
+	optional string friendly_name = 10;
+	optional string propagation = 11;
 }
 
