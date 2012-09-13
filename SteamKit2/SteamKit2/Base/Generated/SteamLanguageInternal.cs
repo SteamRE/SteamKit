@@ -1804,5 +1804,77 @@ namespace SteamKit2.Internal
 		}
 	}
 
+	public class MsgClientSetIgnoreFriend : ISteamSerializableMessage
+	{
+		public EMsg GetEMsg() { return EMsg.ClientSetIgnoreFriend; }
+
+		// Static size: 8
+		private ulong mySteamId;
+		public SteamID MySteamId { get { return new SteamID( mySteamId ); } set { mySteamId = value.ConvertToUInt64(); } }
+		// Static size: 8
+		public ulong SteamIdFriend { get; set; }
+		// Static size: 1
+		public byte Ignore { get; set; }
+
+		public MsgClientSetIgnoreFriend()
+		{
+			mySteamId = 0;
+			SteamIdFriend = 0;
+			Ignore = 0;
+		}
+
+		public void Serialize(Stream stream)
+		{
+			BinaryWriter bw = new BinaryWriter( stream );
+
+			bw.Write( mySteamId );
+			bw.Write( SteamIdFriend );
+			bw.Write( Ignore );
+
+		}
+
+		public void Deserialize( Stream stream )
+		{
+			BinaryReader br = new BinaryReader( stream );
+
+			mySteamId = br.ReadUInt64();
+			SteamIdFriend = br.ReadUInt64();
+			Ignore = br.ReadByte();
+		}
+	}
+
+	public class MsgClientSetIgnoreFriendResponse : ISteamSerializableMessage
+	{
+		public EMsg GetEMsg() { return EMsg.ClientSetIgnoreFriendResponse; }
+
+		// Static size: 8
+		public ulong Unknown { get; set; }
+		// Static size: 4
+		public EResult Result { get; set; }
+
+		public MsgClientSetIgnoreFriendResponse()
+		{
+			Unknown = 0;
+			Result = 0;
+		}
+
+		public void Serialize(Stream stream)
+		{
+			BinaryWriter bw = new BinaryWriter( stream );
+
+			bw.Write( Unknown );
+			bw.Write( (int)Result );
+
+		}
+
+		public void Deserialize( Stream stream )
+		{
+			BinaryReader br = new BinaryReader( stream );
+
+			Unknown = br.ReadUInt64();
+			Result = (EResult)br.ReadInt32();
+		}
+	}
+
 }
 #pragma warning restore 1591

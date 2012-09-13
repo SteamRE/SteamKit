@@ -270,3 +270,18 @@ class MsgClientGetNumberOfCurrentPlayersResponse<EMsg::ClientGetNumberOfCurrentP
 	EResult result;
 	uint numPlayers;
 };
+
+class MsgClientSetIgnoreFriend<EMsg::ClientSetIgnoreFriend>
+{
+	steamidmarshal ulong mySteamId;
+	steaidmarshal ulong steamIdFriend;
+
+	byte ignore;
+};
+
+class MsgClientSetIgnoreFriendResponse<EMsg::ClientSetIgnoreFriendResponse>
+{
+	ulong unknown;
+
+	EResult result;
+};

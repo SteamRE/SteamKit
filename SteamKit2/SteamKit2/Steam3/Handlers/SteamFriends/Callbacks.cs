@@ -590,5 +590,27 @@ namespace SteamKit2
                 this.GameID = invite.game_id;
             }
         }
+
+        /// <summary>
+        /// This callback is fired in response to an attempt at ignoring a friend.
+        /// </summary>
+        public sealed class IgnoreFriendCallback : CallbackMsg
+        {
+            /// <summary>
+            /// Gets the result of ignoring a friend.
+            /// </summary>
+            public EResult Result { get; private set; }
+
+
+#if STATIC_CALLBACKS
+            internal IgnoreFriendCallback( SteamClient client, MsgClientSetIgnoreFriendResponse response )
+                : base( client )
+#else
+            internal IgnoreFriendCallback( MsgClientSetIgnoreFriendResponse response )
+#endif
+            {
+                this.Result = response.Result;
+            }
+        }
     }
 }
