@@ -432,6 +432,27 @@ namespace SteamKit2
             RequestFriendInfo( new SteamID[] { steamId }, requestedInfo );
         }
 
+        /// <summary>
+        /// Ignores or unignores a friend on Steam.
+        /// Results are returned in a <see cref="IgnoreFriendCallback"/>.
+        /// </summary>
+        /// <param name="steamId">The SteamID of the friend to ignore or unignore.</param>
+        /// <param name="setIgnore">if set to <c>true</c>, the friend will be ignored; otherwise, they will be unignored.</param>
+        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="SteamClient.JobCallback&lt;T&gt;"/>.</returns>
+        public JobID IgnoreFriend( SteamID steamId, bool setIgnore = true )
+        {
+            var ignore = new ClientMsg<MsgClientSetIgnoreFriend>();
+            ignore.SourceJobID = Client.GetNextJobID();
+
+            ignore.Body.MySteamId = Client.SteamID;
+            ignore.Body.Ignore = ( byte )( setIgnore ? 1 : 0 );
+            ignore.Body.SteamIdFriend = steamId;
+
+            this.Client.Send( ignore );
+
+            return ignore.SourceJobID;
+        }
+
 
         /// <summary>
         /// Handles a client message. This should not be called directly.
@@ -479,6 +500,10 @@ namespace SteamKit2
 
                 case EMsg.ClientChatInvite:
                     HandleChatInvite( packetMsg );
+                    break;
+
+                case EMsg.ClientSetIgnoreFriendResponse:
+                    HandleIgnoreFriendResponse( packetMsg );
                     break;
             }
         }
@@ -730,6 +755,20 @@ namespace SteamKit2
             SteamClient.PostCallback( callback );
 #else
             var callback = new ChatInviteCallback( chatInvite.Body );
+            this.Client.PostCallback( callback );
+#endif
+        }
+        void HandleIgnoreFriendResponse( IPacketMsg packetMsg )
+        {
+            var response = new ClientMsg<MsgClientSetIgnoreFriendResponse>( packetMsg );
+
+#if STATIC_CALLBACKS
+            var innerCallback = new IgnoreFriendCallback( Client, response.Body );
+            var callback = new SteamClient.JobCallback<IgnoreFriendCallback>( Client, response.TargetJobID, innerCallback );
+            SteamClient.PostCallback( callback );
+#else
+            var innerCallback = new IgnoreFriendCallback( response.Body );
+            var callback = new SteamClient.JobCallback<IgnoreFriendCallback>( response.TargetJobID, innerCallback );
             this.Client.PostCallback( callback );
 #endif
         }
