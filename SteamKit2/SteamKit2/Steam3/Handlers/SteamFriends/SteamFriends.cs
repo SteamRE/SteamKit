@@ -514,6 +514,9 @@ namespace SteamKit2
         {
             var accInfo = new ClientMsgProtobuf<CMsgClientAccountInfo>( packetMsg );
 
+            if ( string.IsNullOrEmpty( accInfo.Body.persona_name ) )
+                return;
+
             cache.LocalUser.Name = accInfo.Body.persona_name;
         }
         void HandleFriendMsg( IPacketMsg packetMsg )
