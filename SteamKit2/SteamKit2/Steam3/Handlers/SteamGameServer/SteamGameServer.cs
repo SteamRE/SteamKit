@@ -95,7 +95,7 @@ namespace SteamKit2
             SteamID gsId = new SteamID( 0, 0, Client.ConnectedUniverse, EAccountType.AnonGameServer );
 
             logon.ProtoHeader.client_sessionid = 0;
-            logon.ProtoHeader.steamid = 0; gsId.ConvertToUInt64();
+            logon.ProtoHeader.steamid = gsId.ConvertToUInt64();
 
             uint localIp = NetHelpers.GetIPAddress( this.Client.LocalIP );
             logon.Body.obfustucated_private_ip = localIp ^ MsgClientLogon.ObfuscationMask;
