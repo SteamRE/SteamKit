@@ -67,6 +67,7 @@ namespace SteamKit2
             public AccountCache()
             {
                 LocalUser = new User();
+                LocalUser.Name = "[unassigned]";
 
                 Users = new AccountList<User>();
                 Clans = new AccountList<Clan>();
