@@ -16,6 +16,7 @@ enum EDotaClientMessages {
 	DOTA_CM_SwapRequest = 11;
 	DOTA_CM_SwapAccept = 12;
 	DOTA_CM_WorldLine = 13;
+	DOTA_CM_RequestGraphUpdate = 14;
 }
 
 message CDOTAClientMsg_MapPing {
@@ -71,5 +72,8 @@ message CDOTAClientMsg_SwapAccept {
 
 message CDOTAClientMsg_WorldLine {
 	optional .CDOTAMsg_WorldLine worldline = 1;
+}
+
+message CDOTAClientMsg_RequestGraphUpdate {
 }
 

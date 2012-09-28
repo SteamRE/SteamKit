@@ -4,7 +4,14 @@ extend .google.protobuf.FieldOptions {
 	optional bool key_field = 50000 [default = false];
 }
 
+extend .google.protobuf.MessageOptions {
+	optional int32 msgpool_soft_limit = 50000 [default = 32];
+	optional int32 msgpool_hard_limit = 50001 [default = 384];
+}
+
 message CMsgProtoBufHeader {
+	option (msgpool_soft_limit) = 1024;
+	option (msgpool_hard_limit) = 256;
 	optional fixed64 client_steam_id = 1;
 	optional int32 client_session_id = 2;
 	optional uint32 source_app_id = 3;
