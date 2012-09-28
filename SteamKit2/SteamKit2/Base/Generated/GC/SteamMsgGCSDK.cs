@@ -397,15 +397,41 @@ namespace SteamKit2.GC.Internal
       get { return _time_cached; }
       set { _time_cached = value; }
     }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCMultiplexMessage")]
+  public partial class CMsgGCMultiplexMessage : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCMultiplexMessage() {}
+    
 
-    private bool _account_locked = default(bool);
-    [global::ProtoBuf.ProtoMember(16, IsRequired = false, Name=@"account_locked", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
-    public bool account_locked
+    private uint _msgtype = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"msgtype", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    public uint msgtype
     {
-      get { return _account_locked; }
-      set { _account_locked = value; }
+      get { return _msgtype; }
+      set { _msgtype = value; }
     }
+
+    private byte[] _payload = null;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"payload", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoDefaultValue(null)]
+    public byte[] payload
+    {
+      get { return _payload; }
+      set { _payload = value; }
+    }
+    private readonly global::System.Collections.Generic.List<ulong> _steamids = new global::System.Collections.Generic.List<ulong>();
+    [global::ProtoBuf.ProtoMember(3, Name=@"steamids", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public global::System.Collections.Generic.List<ulong> steamids
+    {
+      get { return _steamids; }
+    }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
