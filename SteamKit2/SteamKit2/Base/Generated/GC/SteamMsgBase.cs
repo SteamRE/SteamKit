@@ -1716,24 +1716,6 @@ namespace SteamKit2.GC.Internal
       get { return _is_low_violence; }
       set { _is_low_violence = value; }
     }
-
-    private bool _is_account_locked_down = default(bool);
-    [global::ProtoBuf.ProtoMember(16, IsRequired = false, Name=@"is_account_locked_down", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
-    public bool is_account_locked_down
-    {
-      get { return _is_account_locked_down; }
-      set { _is_account_locked_down = value; }
-    }
-
-    private bool _is_community_banned = default(bool);
-    [global::ProtoBuf.ProtoMember(17, IsRequired = false, Name=@"is_community_banned", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
-    public bool is_community_banned
-    {
-      get { return _is_community_banned; }
-      set { _is_community_banned = value; }
-    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
