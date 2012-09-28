@@ -344,7 +344,7 @@ message CSOTFPartyMember {
 message CMsgMatchSearchCriteria {
 	optional .TF_MatchmakingMode matchmaking_mode = 7 [default = TF_Matchmaking_INVALID];
 	optional bool late_join_ok = 5;
-	optional string challenge = 4;
+	repeated string mvm_challenges = 9;
 	optional bool play_for_bragging_rights = 6;
 	optional uint32 quickplay_game_type = 8;
 }
@@ -383,7 +383,7 @@ message CSOTFParty {
 	optional fixed64 steam_lobby_id = 27;
 	optional .TF_MatchmakingMode matchmaking_mode = 30 [default = TF_Matchmaking_INVALID];
 	optional bool search_late_join_ok = 23;
-	optional string search_challenge = 25;
+	repeated string search_mvm_challenges = 31;
 	optional bool search_play_for_bragging_rights = 26;
 	optional uint32 search_quickplay_game_type = 28;
 	optional uint32 prevent_match_until_date = 18;
@@ -420,6 +420,7 @@ message CTFLobbyMember {
 	optional .TFLobbyReadyState ready_state = 11 [default = TFLobbyReadyState_UNDECLARED];
 	optional uint64 party_id = 12;
 	optional bool squad_surplus = 14;
+	optional uint32 badge_level = 15;
 }
 
 message CLobbyPendingPlayerReport {
@@ -643,6 +644,7 @@ message CMsgMvMVictoryInfo {
 		optional uint32 badge_level = 6;
 		optional uint32 badge_progress_bits = 7;
 		repeated .CMsgMvMVictoryInfo.Item items = 8;
+		optional bool voucher_missing = 9;
 	}
 
 	enum GrantReason {
@@ -653,5 +655,21 @@ message CMsgMvMVictoryInfo {
 	}
 
 	repeated .CMsgMvMVictoryInfo.Player players = 1;
+}
+
+message CMsgMvMMannUpVictory {
+	message Player {
+		optional fixed64 steam_id = 1;
+		optional bool squad_surplus = 2;
+	}
+
+	optional uint32 challenge_index = 1;
+	repeated .CMsgMvMMannUpVictory.Player players = 2;
+	optional uint64 lobby_id = 3;
+	optional fixed32 event_time = 4;
+}
+
+message CMsgMvMMannUpVictoryReply {
+	optional uint32 result = 1;
 }
 

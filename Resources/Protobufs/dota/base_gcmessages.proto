@@ -1,5 +1,42 @@
 import "steammessages.proto";
 
+enum EGCBaseMsg {
+	k_EMsgGCSystemMessage = 4001;
+	k_EMsgGCReplicateConVars = 4002;
+	k_EMsgGCConVarUpdated = 4003;
+	k_EMsgGCClientWelcome = 4004;
+	k_EMsgGCServerWelcome = 4005;
+	k_EMsgGCClientHello = 4006;
+	k_EMsgGCServerHello = 4007;
+	k_EMsgGCInQueue = 4008;
+	k_EMsgGCClientGoodbye = 4009;
+	k_EMsgGCServerGoodbye = 4010;
+	k_EMsgGCInviteToParty = 4501;
+	k_EMsgGCInvitationCreated = 4502;
+	k_EMsgGCPartyInviteResponse = 4503;
+	k_EMsgGCKickFromParty = 4504;
+	k_EMsgGCLeaveParty = 4505;
+	k_EMsgGCServerAvailable = 4506;
+	k_EMsgGCClientConnectToServer = 4507;
+	k_EMsgGCGameServerInfo = 4508;
+	k_EMsgGCError = 4509;
+	k_EMsgGCReplay_UploadedToYouTube = 4510;
+}
+
+enum EGCSharedMsg {
+	k_EMsgInterGCAchievementAwarded = 7001;
+	k_EMsgInterGCAchievementAwardedResponse = 7002;
+	k_EMsgInterGCLoadAchievements = 7003;
+	k_EMsgInterGCLoadAchievementResponse = 7004;
+	k_EMsgInterGCSurgeTest = 7005;
+	k_EMsgInterGCProfile = 7006;
+}
+
+enum EGCBaseProtoObjectTypes {
+	k_EProtoObjectPartyInvite = 1001;
+	k_EProtoObjectLobbyInvite = 1002;
+}
+
 message CGCStorePurchaseInit_LineItem {
 	optional uint32 item_def_id = 1;
 	optional uint32 quantity = 2;
@@ -289,6 +326,15 @@ message CMsgSetPresetItemPosition {
 	optional uint32 preset_id = 2;
 	optional uint32 slot_id = 3;
 	optional uint64 item_id = 4;
+}
+
+message CMsgSetItemPositions {
+	message ItemPosition {
+		optional uint32 item_id = 1;
+		optional uint32 position = 2;
+	}
+
+	repeated .CMsgSetItemPositions.ItemPosition item_positions = 1;
 }
 
 message CSOEconItemPresetInstance {

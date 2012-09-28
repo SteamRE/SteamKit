@@ -35,6 +35,9 @@ enum EDotaUserMessages {
 	DOTA_UM_Ping = 93;
 	DOTA_UM_ItemFound = 94;
 	DOTA_UM_CharacterSpeakConcept = 95;
+	DOTA_UM_SwapVerify = 96;
+	DOTA_UM_WorldLine = 97;
+	DOTA_UM_TournamentDrop = 98;
 }
 
 enum DOTA_CHAT_MESSAGE {
@@ -92,6 +95,7 @@ enum DOTA_CHAT_MESSAGE {
 	CHAT_MESSAGE_NO_BATTLE_POINTS = 50;
 	CHAT_MESSAGE_DENIED_AEGIS = 51;
 	CHAT_MESSAGE_INFORMATIONAL = 52;
+	CHAT_MESSAGE_AEGIS_STOLEN = 53;
 }
 
 enum DOTA_NO_BATTLE_POINTS_REASONS {
@@ -160,6 +164,10 @@ message CDOTAUserMsg_AIDebugLine {
 
 message CDOTAUserMsg_Ping {
 	optional string message = 1;
+}
+
+message CDOTAUserMsg_SwapVerify {
+	optional uint32 player_id = 1;
 }
 
 message CDOTAUserMsg_ChatEvent {
@@ -470,5 +478,15 @@ message CDOTAUserMsg_OverheadEvent {
 message CDOTAUserMsg_TutorialTipInfo {
 	optional string name = 1;
 	optional int32 progress = 2;
+}
+
+message CDOTAUserMsg_WorldLine {
+	optional int32 player_id = 1;
+	optional .CDOTAMsg_WorldLine worldline = 2;
+}
+
+message CDOTAUserMsg_TournamentDrop {
+	optional string winner_name = 1;
+	optional int32 event_type = 2;
 }
 
