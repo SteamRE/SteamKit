@@ -4,7 +4,7 @@
 
 namespace SteamKit2.GC.TF2
 {
-    public sealed class EGCMsg : EGCMsgBase
+    public sealed class EGCMsg
     {
         public const uint ReportWarKill = 5001;
 
