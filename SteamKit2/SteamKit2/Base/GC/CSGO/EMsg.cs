@@ -4,7 +4,7 @@
 
 namespace SteamKit2.GC.CSGO
 {
-    public sealed class EGCMsg : EGCMsgBase
+    public sealed class EGCMsg
     {
         public const uint RequestEloBracket = 9010;
         public const uint RequestEloBracketResponse = 9011;
