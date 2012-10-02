@@ -94,3 +94,123 @@ message CMsgCStrike15ReportRoundEndDeprecated {
 	repeated .CMsgCStrike15ReportRoundEndDeprecated.Player losers = 3;
 }
 
+message GameServerPing {
+	optional uint64 gameserver_id = 1;
+	optional int32 ping = 2;
+	optional uint32 ip = 3;
+	optional uint32 port = 4;
+	optional uint32 instances = 5;
+}
+
+message GlobalStatistics {
+	optional uint32 players_online = 1;
+	optional uint32 servers_online = 2;
+	optional uint32 players_searching = 3;
+	optional uint32 servers_available = 4;
+	optional uint32 ongoing_matches = 5;
+	optional uint32 search_time_avg = 6;
+}
+
+message CMsgGCCStrike15_v2_MatchmakingGC2ServerConfirm {
+	optional uint32 token = 1;
+	optional uint32 stamp = 2;
+	optional uint64 exchange = 3;
+}
+
+message CMsgGCCStrike15_v2_MatchmakingStart {
+	repeated uint32 account_ids = 1;
+	optional uint32 game_type = 2;
+	optional string ticket_data = 3;
+}
+
+message CMsgGCCStrike15_v2_MatchmakingStop {
+	optional int32 abandon = 1;
+}
+
+message CMsgGCCStrike15_v2_MatchmakingClient2ServerPing {
+	repeated .GameServerPing gameserverpings = 1;
+	optional int32 offset_index = 2;
+	optional int32 final_batch = 3;
+}
+
+message CMsgGCCStrike15_v2_MatchmakingGC2ClientUpdate {
+	optional int32 matchmaking = 1;
+	repeated uint32 waiting_account_id_sessions = 2;
+	optional string error = 3;
+	repeated uint32 ongoingmatch_account_id_sessions = 6;
+	optional .GlobalStatistics global_stats = 7;
+	repeated uint32 failping_account_id_sessions = 8;
+	repeated uint32 penalty_account_id_sessions = 9;
+}
+
+message CMsgGCCStrike15_v2_MatchmakingGC2ServerReserve {
+	repeated uint32 account_ids = 1;
+	optional uint32 game_type = 2;
+	optional uint64 match_id = 3;
+}
+
+message CMsgGCCStrike15_v2_MatchmakingServerReservationResponse {
+	optional uint64 reservationid = 1;
+	optional .CMsgGCCStrike15_v2_MatchmakingGC2ServerReserve reservation = 2;
+	optional string map = 3;
+	optional uint64 gc_reservation_sent = 4;
+}
+
+message CMsgGCCStrike15_v2_MatchmakingGC2ClientReserve {
+	optional uint64 serverid = 1;
+	optional uint32 serverip = 2;
+	optional uint32 serverport = 3;
+	optional uint64 reservationid = 4;
+	optional .CMsgGCCStrike15_v2_MatchmakingGC2ServerReserve reservation = 5;
+	optional string map = 6;
+}
+
+message CMsgGCCStrike15_v2_MatchmakingServerRoundStats {
+	optional uint64 reservationid = 1;
+	optional .CMsgGCCStrike15_v2_MatchmakingGC2ServerReserve reservation = 2;
+	optional string map = 3;
+	optional int32 round = 4;
+	repeated int32 kills = 5;
+	repeated int32 assists = 6;
+	repeated int32 deaths = 7;
+	repeated int32 scores = 8;
+	repeated int32 pings = 9;
+	optional int32 round_result = 10;
+	optional int32 match_result = 11;
+	repeated int32 team_scores = 12;
+	optional .CMsgGCCStrike15_v2_MatchmakingGC2ServerConfirm confirm = 13;
+}
+
+message CMsgGCCStrike15_v2_MatchmakingServerMatchEnd {
+	optional .CMsgGCCStrike15_v2_MatchmakingServerRoundStats stats = 1;
+	optional .CMsgGCCStrike15_v2_MatchmakingGC2ServerConfirm confirm = 3;
+	optional uint64 rematch = 4;
+}
+
+message CMsgGCCStrike15_v2_MatchmakingClient2GCHello {
+}
+
+message CMsgGCCStrike15_v2_MatchmakingGC2ClientHello {
+	optional uint32 account_id = 1;
+	optional .CMsgGCCStrike15_v2_MatchmakingGC2ClientReserve ongoingmatch = 2;
+	optional .GlobalStatistics global_stats = 3;
+	optional uint32 penalty_seconds = 4;
+}
+
+message CMsgGCCStrike15_v2_MatchmakingGC2ClientAbandon {
+	optional uint32 account_id = 1;
+	optional .CMsgGCCStrike15_v2_MatchmakingGC2ClientReserve abandoned_match = 2;
+	optional uint32 penalty_seconds = 3;
+}
+
+message CMsgGCCStrike15_v2_MatchmakingServer2GCKick {
+	optional uint32 account_id = 1;
+	optional .CMsgGCCStrike15_v2_MatchmakingGC2ServerReserve reservation = 2;
+	optional uint32 reason = 3;
+}
+
+message CDataGCCStrike15_v2_MatchmakingLockedInMatch {
+	optional .CMsgGCCStrike15_v2_MatchmakingGC2ClientReserve client_reservation = 1;
+	optional .CMsgGCCStrike15_v2_MatchmakingServerRoundStats server_stats = 2;
+}
+
