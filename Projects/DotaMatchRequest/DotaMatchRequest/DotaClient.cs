@@ -150,8 +150,8 @@ namespace DotaMatchRequest
             // this makes the code cleaner and easier to maintain
             var messageMap = new Dictionary<uint, Action<IPacketGCMsg>>
             {
-                { EGCMsg.ClientWelcome, OnClientWelcome },
-                { EGCMsg.MatchDetailsResponse, OnMatchDetails },
+                { ( uint )EGCBaseMsg.k_EMsgGCClientWelcome, OnClientWelcome },
+                { ( uint )EDOTAGCMsg.k_EMsgGCMatchDetailsResponse, OnMatchDetails },
             };
 
             Action<IPacketGCMsg> func;
@@ -182,7 +182,7 @@ namespace DotaMatchRequest
             // at this point, the GC is now ready to accept messages from us
             // so now we'll request the details of the match we're looking for
 
-            var requestMatch = new ClientGCMsgProtobuf<CMsgGCMatchDetailsRequest>( EGCMsg.MatchDetailsRequest );
+            var requestMatch = new ClientGCMsgProtobuf<CMsgGCMatchDetailsRequest>( ( uint )EDOTAGCMsg.k_EMsgGCMatchDetailsRequest );
             requestMatch.Body.match_id = matchId;
 
             gameCoordinator.Send( requestMatch, APPID );
@@ -210,18 +210,21 @@ namespace DotaMatchRequest
         // this is a utility function to transform a uint emsg into a string that can be used to display the name
         static string GetEMsgDisplayString( uint eMsg )
         {
-            var fields = typeof( EGCMsg ).GetFields( BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy );
-
-            var field = fields.SingleOrDefault( f =>
+            Type[] eMsgEnums =
             {
-                uint value = ( uint )f.GetValue( null );
-                return value == eMsg;
-            } );
+                typeof( EDOTAGCMsg ),
+                typeof( EGCBaseMsg ),
+                typeof( EGCSharedMsg )
+            };
 
-            if ( field == null )
-                return eMsg.ToString();
+            foreach ( var enumType in eMsgEnums )
+            {
+                if ( Enum.IsDefined( enumType, eMsg ) )
+                    return Enum.GetName( enumType, eMsg );
+                
+            }
 
-            return field.Name;
+            return eMsg.ToString();
         }
     }
 }
