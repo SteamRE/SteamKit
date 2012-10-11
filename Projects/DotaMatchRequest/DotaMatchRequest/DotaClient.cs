@@ -219,8 +219,8 @@ namespace DotaMatchRequest
 
             foreach ( var enumType in eMsgEnums )
             {
-                if ( Enum.IsDefined( enumType, eMsg ) )
-                    return Enum.GetName( enumType, eMsg );
+                if ( Enum.IsDefined( enumType, ( int )eMsg ) )
+                    return Enum.GetName( enumType, ( int )eMsg );
                 
             }
 
