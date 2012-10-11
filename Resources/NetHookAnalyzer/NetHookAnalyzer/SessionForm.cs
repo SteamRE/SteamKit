@@ -131,12 +131,24 @@ namespace NetHookAnalyzer
         {
             eMsg = MsgUtil.GetGCMsg( eMsg );
 
-            List<FieldInfo> fields = new List<FieldInfo>();
+            // first lets try the enum'd emsgs
+            Type[] eMsgEnums =
+            {
+                typeof( SteamKit2.GC.Dota.Internal.EDOTAGCMsg ),
+                typeof( SteamKit2.GC.Internal.EGCBaseMsg ),
+                typeof( SteamKit2.GC.Internal.EGCSharedMsg )
+            };
 
+            foreach ( var enumType in eMsgEnums )
+            {
+                if ( Enum.IsDefined( enumType, ( int )eMsg ) )
+                    return Enum.GetName( enumType, ( int )eMsg );
+            }
+
+            // no dice on those, back to the classes
+            List<FieldInfo> fields = new List<FieldInfo>();
             fields.AddRange( typeof( SteamKit2.GC.TF2.EGCMsg ).GetFields( BindingFlags.Public | BindingFlags.Static ) );
-            fields.AddRange( typeof( SteamKit2.GC.Dota.EGCMsg ).GetFields( BindingFlags.Public | BindingFlags.Static ) );
             fields.AddRange( typeof( SteamKit2.GC.CSGO.EGCMsg ).GetFields( BindingFlags.Public | BindingFlags.Static ) );
-            fields.AddRange( typeof( SteamKit2.GC.EGCMsgBase ).GetFields( BindingFlags.Public | BindingFlags.Static ) );
 
             var field = fields.SingleOrDefault( f =>
             {
