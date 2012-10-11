@@ -136,7 +136,9 @@ namespace NetHookAnalyzer
             {
                 typeof( SteamKit2.GC.Dota.Internal.EDOTAGCMsg ),
                 typeof( SteamKit2.GC.Internal.EGCBaseMsg ),
-                typeof( SteamKit2.GC.Internal.EGCSharedMsg )
+                typeof( SteamKit2.GC.Internal.EGCSharedMsg ),
+                typeof( SteamKit2.GC.Internal.ESOMsg ),
+                typeof( SteamKit2.GC.Internal.EGCSystemMsg ),
             };
 
             foreach ( var enumType in eMsgEnums )
