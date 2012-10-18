@@ -26,26 +26,44 @@ namespace SteamKit2.Internal
         /// </summary>
         public static readonly IPAddress[] Servers =
         {
-            IPAddress.Parse( "68.142.64.164" ),
-            IPAddress.Parse( "68.142.64.165" ),
+            // Limelight, New York
             IPAddress.Parse( "68.142.91.34" ),
             IPAddress.Parse( "68.142.91.35" ),
             IPAddress.Parse( "68.142.91.36" ),
+
+            // Limelight, San Jose
             IPAddress.Parse( "68.142.116.178" ),
             IPAddress.Parse( "68.142.116.179" ),
 
+            // Limelight, Los Angeles
             IPAddress.Parse( "69.28.145.170" ),
             IPAddress.Parse( "69.28.145.171" ),
             IPAddress.Parse( "69.28.145.172" ),
-            IPAddress.Parse( "69.28.156.250" ),
 
+            // CenturyLink/Qwest, Seattle
+            IPAddress.Parse( "72.165.61.174" ),
+            IPAddress.Parse( "72.165.61.175" ),
+            IPAddress.Parse( "72.165.61.176" ),
             IPAddress.Parse( "72.165.61.185" ),
             IPAddress.Parse( "72.165.61.186" ),
             IPAddress.Parse( "72.165.61.187" ),
             IPAddress.Parse( "72.165.61.188" ),
 
+            // Eweka, Netherlands
+            IPAddress.Parse( "81.171.115.5" ),
+            IPAddress.Parse( "81.171.115.6" ),
+            IPAddress.Parse( "81.171.115.7" ),
+            IPAddress.Parse( "81.171.115.8" ),
+
+            // Limelight, Japan
+            IPAddress.Parse( "203.77.185.4" ),
+            IPAddress.Parse( "203.77.185.5" ),
+
+            // Limelight, Seattle
             IPAddress.Parse( "208.111.133.84" ),
             IPAddress.Parse( "208.111.133.85" ),
+
+            // Limelight, Chicago
             IPAddress.Parse( "208.111.158.52" ),
             IPAddress.Parse( "208.111.158.53" ),
             IPAddress.Parse( "208.111.171.82" ),
