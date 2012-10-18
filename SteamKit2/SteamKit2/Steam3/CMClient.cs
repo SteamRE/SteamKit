@@ -124,7 +124,11 @@ namespace SteamKit2.Internal
         /// <summary>
         /// Connects this client to a Steam3 server.
         /// This begins the process of connecting and encrypting the data channel between the client and the server.
-        /// Results are returned in a <see cref="SteamClient.ConnectedCallback"/>.
+        /// Results are returned asynchronously in a <see cref="SteamClient.ConnectedCallback"/>.
+        /// If the server that SteamKit attempts to connect to is down, a <see cref="SteamClient.DisconnectedCallback"/>
+        /// will be posted instead.
+        /// SteamKit will not attempt to reconnect to Steam, you must handle this callback and call Connect again
+        /// preferrably after a short delay.
         /// </summary>
         /// <param name="bEncrypted">
         /// If set to <c>true</c> the underlying connection to Steam will be encrypted. This is the default mode of communication.
