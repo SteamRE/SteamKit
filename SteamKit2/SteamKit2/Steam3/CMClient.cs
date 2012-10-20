@@ -28,7 +28,7 @@ namespace SteamKit2.Internal
         {
             // Limelight, New York
             IPAddress.Parse( "68.142.91.34" ),
-            IPAddress.Parse( "68.142.91.35" ),
+            // IPAddress.Parse( "68.142.91.35" ),
             IPAddress.Parse( "68.142.91.36" ),
 
             // Limelight, San Jose
@@ -45,15 +45,15 @@ namespace SteamKit2.Internal
             IPAddress.Parse( "72.165.61.175" ),
             IPAddress.Parse( "72.165.61.176" ),
             IPAddress.Parse( "72.165.61.185" ),
-            IPAddress.Parse( "72.165.61.186" ),
+            // IPAddress.Parse( "72.165.61.186" ),
             IPAddress.Parse( "72.165.61.187" ),
             IPAddress.Parse( "72.165.61.188" ),
 
             // Eweka, Netherlands
-            IPAddress.Parse( "81.171.115.5" ),
-            IPAddress.Parse( "81.171.115.6" ),
-            IPAddress.Parse( "81.171.115.7" ),
-            IPAddress.Parse( "81.171.115.8" ),
+            // IPAddress.Parse( "81.171.115.5" ),
+            // IPAddress.Parse( "81.171.115.6" ),
+            // IPAddress.Parse( "81.171.115.7" ),
+            // IPAddress.Parse( "81.171.115.8" ),
 
             // Limelight, Japan
             IPAddress.Parse( "203.77.185.4" ),
@@ -64,10 +64,10 @@ namespace SteamKit2.Internal
             IPAddress.Parse( "208.111.133.85" ),
 
             // Limelight, Chicago
-            IPAddress.Parse( "208.111.158.52" ),
-            IPAddress.Parse( "208.111.158.53" ),
+            // IPAddress.Parse( "208.111.158.52" ),
+            // IPAddress.Parse( "208.111.158.53" ), 
             IPAddress.Parse( "208.111.171.82" ),
-            IPAddress.Parse( "208.111.171.83" ),
+            // IPAddress.Parse( "208.111.171.83" ),
         };
 
         /// <summary>
