@@ -41,6 +41,10 @@ message CMsgMouseMove {
 	optional int32 y = 3;
 }
 
+message CMsgMouseLeave {
+	optional uint32 browser_handle = 1;
+}
+
 message CMsgBrowserCreate {
 	optional uint32 request_id = 1;
 	optional bool popup = 2 [default = false];
@@ -83,6 +87,7 @@ message CMsgPostURL {
 	optional uint32 browser_handle = 1;
 	optional string url = 2;
 	optional string post = 3;
+	optional uint32 pageserial = 4;
 }
 
 message CMsgAddHeader {
@@ -286,12 +291,6 @@ message CMsgLoadingResource {
 	optional string url = 2;
 }
 
-message CMsgResourceResponse {
-	optional uint32 browser_handle = 1;
-	optional string url = 2;
-	optional uint32 status = 3;
-}
-
 message CMsgStatusText {
 	optional uint32 browser_handle = 1;
 	optional string text = 2;
@@ -357,6 +356,7 @@ message CMsgNeedsPaint {
 	optional uint64 combobox_rgba = 12 [default = 0];
 	optional uint32 combobox_wide = 13 [default = 0];
 	optional uint32 combobox_tall = 14 [default = 0];
+	optional uint32 pageserial = 15;
 }
 
 message CMsgNeedsPaintResponse {
@@ -384,16 +384,14 @@ message CMsgLinkAtPositionResponse {
 	optional uint32 x = 2;
 	optional uint32 y = 3;
 	optional string url = 4;
+	optional bool blivelink = 5;
+	optional bool binput = 6;
 }
 
 message CMsgZoomToElementAtPosition {
 	optional uint32 browser_handle = 1;
 	optional uint32 x = 2;
 	optional uint32 y = 3;
-	optional uint32 max_width = 4;
-	optional uint32 max_height = 5;
-	optional uint32 min_block_width = 6;
-	optional uint32 min_block_height = 7;
 }
 
 message CMsgZoomToElementAtPositionResponse {
@@ -409,12 +407,32 @@ message CMsgZoomToElementAtPositionResponse {
 	optional float zoom = 10;
 }
 
+message CMsgScalePageToValue {
+	optional uint32 browser_handle = 1;
+	optional float scale = 2;
+	optional float x = 3;
+	optional float y = 4;
+}
+
+message CMsgScalePageToValueResponse {
+	optional uint32 browser_handle = 1;
+	optional float zoom = 2;
+	optional int32 width_delta = 3;
+	optional int32 height_delta = 4;
+}
+
 message CMsgSavePageToJPEG {
 	optional uint32 browser_handle = 1;
 	optional string url = 2;
 	optional string filename = 3;
 	optional uint32 width = 4;
 	optional uint32 height = 5;
+}
+
+message CMsgSavePageToJPEGResponse {
+	optional uint32 browser_handle = 1;
+	optional string url = 2;
+	optional string filename = 3;
 }
 
 message CMsgJSAlert {
@@ -452,5 +470,64 @@ message CMsgSetCookie {
 
 message CMsgSetTargetFrameRate {
 	optional uint32 nTargetFrameRate = 1;
+}
+
+message CMsgFullRepaint {
+	optional uint32 browser_handle = 1;
+}
+
+message CMsgRequestFullScreen {
+	optional uint32 browser_handle = 1;
+}
+
+message CMsgRequestFullScreenResponse {
+	optional uint32 browser_handle = 1;
+	optional bool ballow = 2;
+}
+
+message CMsgExitFullScreen {
+	optional uint32 browser_handle = 1;
+}
+
+message CMsgGetCookiesForURL {
+	optional uint32 browser_handle = 1;
+	optional string url = 2;
+}
+
+message CCookie {
+	optional string name = 1;
+	optional string value = 2;
+	optional string domain = 3;
+	optional string path = 4;
+}
+
+message CMsgGetCookiesForURLResponse {
+	optional uint32 browser_handle = 1;
+	optional string url = 2;
+	repeated .CCookie cookies = 3;
+}
+
+message CMsgNodeHasFocus {
+	optional uint32 browser_handle = 1;
+	optional bool bInput = 2;
+	optional string name = 3;
+	optional string elementtagname = 4;
+	optional string searchbuttontext = 5;
+	optional bool bHasMultipleInputs = 6;
+	optional string input_type = 7;
+}
+
+message CMsgZoomToFocusedElement {
+	optional uint32 browser_handle = 1;
+	optional uint32 leftoffset = 2 [default = 0];
+	optional uint32 topoffset = 3 [default = 0];
+}
+
+message CMsgCloseFullScreenFlashIfOpen {
+	optional uint32 browser_handle = 1;
+}
+
+message CMsgPauseFullScreenFlashMovieIfOpen {
+	optional uint32 browser_handle = 1;
 }
 
