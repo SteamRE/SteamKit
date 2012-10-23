@@ -33,16 +33,6 @@ enum TF_GC_TEAM {
 	TF_GC_TEAM_NOTEAM = 5;
 }
 
-enum TFLeaverStatus_t {
-	TF_LEAVER_NONE = 0;
-	TF_LEAVER_DISCONNECTED = 1;
-	TF_LEAVER_DISCONNECTED_TOO_LONG = 2;
-	TF_LEAVER_ABANDONED = 3;
-	TF_LEAVER_AFK = 4;
-	TF_LEAVER_NEVER_CONNECTED = 5;
-	TF_LEAVER_NEVER_CONNECTED_TOO_LONG = 6;
-}
-
 enum TFLobbyReadyState {
 	TFLobbyReadyState_UNDECLARED = 0;
 	TFLobbyReadyState_ACCEPTED = 1;
@@ -336,15 +326,17 @@ message CMsgGC_PickupItemEligibility_QueryResponse {
 
 message CSOTFPartyMember {
 	optional bool owns_ticket = 2;
-	optional uint32 completed_challenges = 3;
+	optional uint32 completed_missions = 3;
 	optional uint32 badge_level = 4;
 	optional bool squad_surplus = 5;
+	optional bool is_banned = 8 [default = false];
 }
 
 message CMsgMatchSearchCriteria {
 	optional .TF_MatchmakingMode matchmaking_mode = 7 [default = TF_Matchmaking_INVALID];
 	optional bool late_join_ok = 5;
-	repeated string mvm_challenges = 9;
+	optional string mvm_mannup_tour = 10;
+	repeated string mvm_missions = 9;
 	optional bool play_for_bragging_rights = 6;
 	optional uint32 quickplay_game_type = 8;
 }
@@ -383,7 +375,8 @@ message CSOTFParty {
 	optional fixed64 steam_lobby_id = 27;
 	optional .TF_MatchmakingMode matchmaking_mode = 30 [default = TF_Matchmaking_INVALID];
 	optional bool search_late_join_ok = 23;
-	repeated string search_mvm_challenges = 31;
+	optional string search_mvm_mannup_tour = 32;
+	repeated string search_mvm_missions = 31;
 	optional bool search_play_for_bragging_rights = 26;
 	optional uint32 search_quickplay_game_type = 28;
 	optional uint32 prevent_match_until_date = 18;
@@ -409,6 +402,7 @@ message CTFLobbyMember {
 		RESERVATION_PENDING = 1;
 		RESERVED = 2;
 		CONNECTED = 3;
+		DISCONNECTED = 5;
 	}
 
 	optional fixed64 id = 1 [(key_field) = true];
@@ -421,6 +415,8 @@ message CTFLobbyMember {
 	optional uint64 party_id = 12;
 	optional bool squad_surplus = 14;
 	optional uint32 badge_level = 15;
+	optional uint32 safe_to_leave = 16 [default = 0];
+	optional uint32 last_connect_time = 17;
 }
 
 message CLobbyPendingPlayerReport {
@@ -468,8 +464,9 @@ message CSOTFLobby {
 	optional bool allow_spectating = 31 [default = true];
 	optional fixed64 load_game_lobby_id = 33;
 	optional uint32 load_game_save_number = 34;
+	optional string mannup_tour_name = 42;
 	optional string map_name = 38;
-	optional string challenge_name = 39;
+	optional string mission_name = 39;
 	optional uint32 match_group = 41;
 	optional uint32 match_id = 30;
 	optional fixed32 replay_salt = 35;
@@ -504,18 +501,6 @@ message CMsgKickedFromMatchmakingQueue {
 
 message CMsgTFPlayerFailedToConnect {
 	repeated fixed64 failed_loaders = 1;
-}
-
-message CMsgAbandonCurrentGame {
-}
-
-message CMsgLeaverDetected {
-	optional fixed64 steam_id = 1;
-	optional uint32 leaver_status = 2;
-}
-
-message CMsgLeaverDetectedResponse {
-	optional uint32 result = 1;
 }
 
 message CMsgTFJoinChatChannel {
@@ -616,17 +601,18 @@ message CMsgGameServerMatchmakingStatus {
 }
 
 message CMsgMatchmakingProgress {
-	optional uint32 gameservers_empty = 2;
-	optional uint32 gameservers_slots_avail = 7;
-	optional uint32 gameservers_full = 3;
 	optional uint32 avg_wait_time_new = 4;
 	optional uint32 avg_wait_time_join_late = 5;
 	optional uint32 your_wait_time = 6;
-	optional uint32 compatible_players = 8;
-	optional uint32 compatible_players_near_you = 9;
-	optional uint32 gameservers_empty_near_you = 10;
-	optional uint32 gameservers_slots_avail_near_you = 11;
-	optional uint32 gameservers_full_near_you = 12;
+	optional uint32 matching_worldwide_searching_players = 8;
+	optional uint32 matching_near_you_searching_players = 9;
+	optional uint32 total_worldwide_searching_players = 13;
+	optional uint32 total_near_you_searching_players = 14;
+	optional uint32 matching_worldwide_active_players = 15;
+	optional uint32 matching_near_you_active_players = 16;
+	optional uint32 total_worldwide_active_players = 17;
+	optional uint32 total_near_you_active_players = 18;
+	optional uint32 urgency_pct = 1;
 }
 
 message CMsgMvMVictoryInfo {
@@ -657,14 +643,26 @@ message CMsgMvMVictoryInfo {
 	repeated .CMsgMvMVictoryInfo.Player players = 1;
 }
 
-message CMsgMvMMannUpVictory {
+message CGCMsgTFHelloResponse {
+	optional uint32 version_check = 1;
+	repeated uint64 version_checksum = 2;
+}
+
+message CGCMsgTFSync {
+	optional bytes version_checksum = 1;
+	optional uint32 version_check = 2;
+}
+
+message CMsgMvMVictory {
 	message Player {
 		optional fixed64 steam_id = 1;
 		optional bool squad_surplus = 2;
 	}
 
-	optional uint32 challenge_index = 1;
-	repeated .CMsgMvMMannUpVictory.Player players = 2;
+	optional uint32 legacy_mission_index = 1;
+	optional string tour_name_mannup = 5;
+	optional string mission_name = 6;
+	repeated .CMsgMvMVictory.Player players = 2;
 	optional uint64 lobby_id = 3;
 	optional fixed32 event_time = 4;
 }
