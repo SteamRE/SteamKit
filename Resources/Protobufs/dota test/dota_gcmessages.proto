@@ -6,17 +6,13 @@ enum EDOTAGCMsg {
 	k_EMsgGCGeneralResponse = 7001;
 	k_EMsgGCGameMatchSignOut = 7004;
 	k_EMsgGCGameMatchSignOutResponse = 7005;
-	k_EMsgGCPlayerSummary = 7007;
 	k_EMsgGCJoinChatChannel = 7009;
 	k_EMsgGCJoinChatChannelResponse = 7010;
 	k_EMsgGCLeaveChatChannel = 7011;
-	k_EMsgGCChatMessageOld = 7012;
 	k_EMsgGCOtherJoinedChannel = 7013;
 	k_EMsgGCOtherLeftChannel = 7014;
 	k_EMsgGCRequestMatchHistoryList = 7016;
 	k_EMsgGCMatchHistoryList = 7017;
-	k_EMsgGCRequestPersonaDetails = 7021;
-	k_EMsgGCPersonaDetails = 7022;
 	k_EMsgGCGetNews = 7024;
 	k_EMsgGCNewsResponse = 7025;
 	k_EMsgGCStatus = 7026;
@@ -154,7 +150,30 @@ enum EDOTAGCMsg {
 	k_EMsgCheckSpectatorOnlyResponse = 7163;
 	k_EMsgGCTeamProfileRequest = 7164;
 	k_EMsgGCTeamProfileResponse = 7165;
+	k_EMsgGCEditTeamDetails = 7166;
+	k_EMsgGCEditTeamDetailsResponse = 7167;
+	k_EMsgGCProTeamListRequest = 7168;
+	k_EMsgGCProTeamListResponse = 7169;
+	k_EMsgGCReadyUpStatus = 7170;
+	k_EMsgGCHallOfFame = 7171;
+	k_EMsgGCHallOfFameRequest = 7172;
+	k_EMsgGCHallOfFameResponse = 7173;
+	k_EMsgGCGenerateDiretidePrizeList = 7174;
+	k_EMsgGCDiretidePrizeResponse = 7175;
+	k_EMsgGCRewardDiretidePrizes = 7176;
+	k_EMsgGCDiretidePrizesRewardedResponse = 7177;
 	k_EMsgGCDev_GrantWarKill = 8001;
+}
+
+enum DOTA_GameMode {
+	DOTA_GAMEMODE_NONE = 0;
+	DOTA_GAMEMODE_AP = 1;
+	DOTA_GAMEMODE_CM = 2;
+	DOTA_GAMEMODE_RD = 3;
+	DOTA_GAMEMODE_SD = 4;
+	DOTA_GAMEMODE_AR = 5;
+	DOTA_GAMEMODE_INTRO = 6;
+	DOTA_GAMEMODE_HW = 7;
 }
 
 enum DOTA_GameState {
@@ -265,6 +284,7 @@ message CSODOTAGameAccountClient {
 	optional uint32 showcase_hero_id = 40;
 	optional uint32 match_disabled_until_date = 41;
 	optional uint32 match_disabled_count = 42;
+	optional uint32 team_creation_disabled_until_date = 43;
 }
 
 message CSODOTAGameAccountClientInternal {
@@ -310,11 +330,9 @@ message CSODOTAParty {
 	optional uint32 started_matchmaking_time = 7;
 	repeated uint32 searching_players_by_group = 10;
 	optional uint32 matchgroups = 11;
-	optional uint32 matching_players = 14;
 	optional float search_fraction = 15;
 	optional uint32 prevent_match_until_date = 18;
 	optional uint32 prevent_match_account_id = 19;
-	optional uint32 search_wait_estimate = 20;
 	optional .MatchType match_type = 21 [default = MATCH_TYPE_RANKED];
 	optional .DOTABotDifficulty bot_difficulty = 22 [default = BOT_DIFFICULTY_PASSIVE];
 	optional uint32 team_id = 23;
@@ -360,6 +378,7 @@ message CDOTALobbyMember {
 	optional uint32 meta_xp_awarded = 15;
 	optional .DOTALeaverStatus_t leaver_status = 16 [default = DOTA_LEAVER_NONE];
 	optional uint32 channel = 17;
+	optional uint32 prize_def_index = 18;
 }
 
 message CLobbyTeamDetails {
@@ -429,7 +448,6 @@ message CSODOTALobby {
 	optional uint32 num_spectators = 23;
 	optional uint32 tower_state = 24;
 	optional uint32 matchgroup = 25;
-	optional float readyup_remaining_time = 26;
 	optional bool leaver_detected = 27;
 	optional .DOTA_CM_PICK cm_pick = 28 [default = DOTA_CM_RANDOM];
 	optional uint32 match_id = 30;
@@ -493,6 +511,12 @@ message CMsgReadyUp {
 	optional .DOTALobbyReadyState state = 1 [default = DOTALobbyReadyState_UNDECLARED];
 }
 
+message CMsgReadyUpStatus {
+	optional fixed64 lobby_id = 1;
+	repeated uint32 accepted_ids = 2;
+	repeated uint32 declined_ids = 3;
+}
+
 message CMsgMatchmakingSearchCountRequest {
 }
 
@@ -543,9 +567,6 @@ message CMsgSpectateFriendGame {
 }
 
 message CMsgSpectateFriendGameResponse {
-	optional uint32 source_tv_public_addr = 1;
-	optional uint32 source_tv_private_addr = 2;
-	optional uint32 source_tv_port = 3;
 	optional fixed64 server_steamid = 4;
 }
 
@@ -928,6 +949,7 @@ message CMsgDOTAMatch {
 	optional uint32 dire_team_complete = 28;
 	optional uint32 positive_votes = 29;
 	optional uint32 negative_votes = 30;
+	optional .DOTA_GameMode game_mode = 31 [default = DOTA_GAMEMODE_NONE];
 }
 
 message CMsgDOTAPlayerMatchHistory {
@@ -1021,6 +1043,11 @@ message CMsgDOTATeam {
 	optional uint64 logo = 11;
 	optional uint64 base_logo = 12;
 	optional uint64 banner_logo = 13;
+	optional uint64 sponsor_logo = 14;
+	optional string country_code = 15;
+	optional string url = 16;
+	optional uint32 fullgamesplayed = 17;
+	repeated uint32 leagues = 18;
 }
 
 message CMsgDOTACreateTeam {
@@ -1029,6 +1056,9 @@ message CMsgDOTACreateTeam {
 	optional uint64 logo = 3;
 	optional uint64 base_logo = 4;
 	optional uint64 banner_logo = 5;
+	optional uint64 sponsor_logo = 6;
+	optional string country_code = 7;
+	optional string url = 8;
 }
 
 message CMsgDOTACreateTeamResponse {
@@ -1047,6 +1077,7 @@ message CMsgDOTACreateTeamResponse {
 		UNSPECIFIED_ERROR = 10;
 		CREATOR_TEAM_LIMIT_REACHED = 11;
 		NO_LOGO = 12;
+		CREATOR_TEAM_CREATION_COOLDOWN = 13;
 	}
 
 	repeated .CMsgDOTACreateTeamResponse.Result results = 1;
@@ -1056,6 +1087,7 @@ message CMsgDOTAEditTeamLogo {
 	optional uint64 logo = 1;
 	optional uint64 base_logo = 2;
 	optional uint64 banner_logo = 3;
+	optional uint64 sponsor_logo = 4;
 }
 
 message CMsgDOTAEditTeamLogoResponse {
@@ -1068,6 +1100,22 @@ message CMsgDOTAEditTeamLogoResponse {
 	}
 
 	repeated .CMsgDOTAEditTeamLogoResponse.Result results = 1;
+}
+
+message CMsgDOTAEditTeamDetails {
+	optional string country_code = 1;
+	optional string url = 2;
+}
+
+message CMsgDOTAEditTeamDetailsResponse {
+	enum Result {
+		INVALID = -1;
+		SUCCESS = 0;
+		CREATOR_BUSY = 9;
+		UNSPECIFIED_ERROR = 10;
+	}
+
+	repeated .CMsgDOTAEditTeamDetailsResponse.Result results = 1;
 }
 
 message CMsgDOTADisbandTeam {
@@ -1108,6 +1156,22 @@ message CMsgDOTATeamProfileRequest {
 message CMsgDOTATeamProfileResponse {
 	optional uint32 eresult = 1;
 	optional .CMsgDOTATeam team = 2;
+}
+
+message CMsgDOTAProTeamListRequest {
+}
+
+message CMsgDOTAProTeamListResponse {
+	message TeamEntry {
+		optional uint32 team_id = 1;
+		optional string tag = 2;
+		optional uint32 time_created = 3;
+		optional uint64 logo = 4;
+		optional string country_code = 5;
+	}
+
+	repeated .CMsgDOTAProTeamListResponse.TeamEntry teams = 1;
+	optional uint32 eresult = 2;
 }
 
 message CMsgDOTAInitiateTeamInvite {
@@ -1819,5 +1883,52 @@ message CMsgCheckSpectatorOnly {
 message CMsgCheckSpectatorOnlyResponse {
 	optional uint32 eresult = 1 [default = 2];
 	optional bool spectator_only = 2;
+}
+
+message CMsgDOTAHallOfFame {
+	message FeaturedPlayer {
+		optional uint32 account_id = 1;
+		optional uint32 hero_id = 2;
+		optional float average_scaled_metric = 3;
+		optional uint32 num_games = 4;
+	}
+
+	message FeaturedFarmer {
+		optional uint32 account_id = 1;
+		optional uint32 hero_id = 2;
+		optional uint32 gold_per_min = 3;
+		optional uint32 match_id = 4;
+	}
+
+	optional uint32 week = 1;
+	repeated .CMsgDOTAHallOfFame.FeaturedPlayer featured_players = 2;
+	optional .CMsgDOTAHallOfFame.FeaturedFarmer featured_farmer = 3;
+}
+
+message CMsgDOTAHallOfFameRequest {
+	optional uint32 week = 1;
+}
+
+message CMsgDOTAHallOfFameResponse {
+	optional .CMsgDOTAHallOfFame hall_of_fame = 1;
+	optional uint32 eresult = 2 [default = 2];
+}
+
+message CMsgDOTAGenerateDiretidePrizeList {
+	optional uint32 prize_list = 1;
+}
+
+message CMsgDOTARewardDiretidePrizes {
+	optional uint32 team = 1;
+	optional uint32 prize_list = 2;
+}
+
+message CMsgDOTADiretidePrizesRewardedResponse {
+	optional uint32 prize_list = 1;
+}
+
+message CMsgDOTADiretidePrizeResponse {
+	optional uint32 item_def = 1;
+	optional uint32 prize_list = 2;
 }
 

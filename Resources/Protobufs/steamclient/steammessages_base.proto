@@ -50,3 +50,19 @@ message CCDDBAppDetailCommon {
 	optional string propagation = 11;
 }
 
+message CMsgAppRights {
+	optional bool edit_info = 1;
+	optional bool publish = 2;
+	optional bool view_error_data = 3;
+	optional bool download = 4;
+	optional bool upload_cdkeys = 5;
+	optional bool generate_cdkeys = 6;
+	optional bool view_financials = 7;
+	optional bool manage_ceg = 8;
+	optional bool manage_signing = 9;
+	optional bool manage_cdkeys = 10;
+	optional bool edit_marketing = 11;
+	optional bool economy_support = 12;
+	optional bool economy_support_supervisor = 13;
+}
+

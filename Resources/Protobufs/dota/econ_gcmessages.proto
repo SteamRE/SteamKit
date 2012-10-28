@@ -77,6 +77,8 @@ enum EGCItemMsg {
 	k_EMsgGC_IncrementKillCountResponse = 1075;
 	k_EMsgGCApplyPennantUpgrade = 1076;
 	k_EMsgGCSetItemPositions = 1077;
+	k_EMsgGCApplyEggEssence = 1078;
+	k_EMsgGCNameEggEssenceResponse = 1079;
 	k_EMsgGCTradingBase = 1500;
 	k_EMsgGCTrading_InitiateTradeRequest = 1501;
 	k_EMsgGCTrading_InitiateTradeResponse = 1502;
