@@ -12,8 +12,10 @@ message CMsgSOMultipleObjects {
 	}
 
 	optional fixed64 owner = 1;
-	repeated .CMsgSOMultipleObjects.SingleObject objects = 2;
+	repeated .CMsgSOMultipleObjects.SingleObject objects_modified = 2;
 	optional fixed64 version = 3;
+	repeated .CMsgSOMultipleObjects.SingleObject objects_added = 4;
+	repeated .CMsgSOMultipleObjects.SingleObject objects_removed = 5;
 }
 
 message CMsgSOCacheSubscribed {

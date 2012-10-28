@@ -17,10 +17,15 @@ enum EDotaClientMessages {
 	DOTA_CM_SwapAccept = 12;
 	DOTA_CM_WorldLine = 13;
 	DOTA_CM_RequestGraphUpdate = 14;
+	DOTA_CM_ItemAlert = 15;
 }
 
 message CDOTAClientMsg_MapPing {
 	optional .CDOTAMsg_LocationPing location_ping = 1;
+}
+
+message CDOTAClientMsg_ItemAlert {
+	optional .CDOTAMsg_ItemAlert item_alert = 1;
 }
 
 message CDOTAClientMsg_MapLine {
@@ -61,13 +66,11 @@ message CDOTAClientMsg_SetUnitShareFlag {
 }
 
 message CDOTAClientMsg_SwapRequest {
-	optional uint32 playerid1 = 1;
-	optional uint32 playerid2 = 2;
+	optional uint32 player_id = 1;
 }
 
 message CDOTAClientMsg_SwapAccept {
-	optional uint32 playerid1 = 1;
-	optional uint32 playerid2 = 2;
+	optional uint32 player_id = 1;
 }
 
 message CDOTAClientMsg_WorldLine {

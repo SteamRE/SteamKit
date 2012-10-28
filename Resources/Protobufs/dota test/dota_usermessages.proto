@@ -38,6 +38,7 @@ enum EDotaUserMessages {
 	DOTA_UM_SwapVerify = 96;
 	DOTA_UM_WorldLine = 97;
 	DOTA_UM_TournamentDrop = 98;
+	DOTA_UM_ItemAlert = 99;
 }
 
 enum DOTA_CHAT_MESSAGE {
@@ -96,6 +97,7 @@ enum DOTA_CHAT_MESSAGE {
 	CHAT_MESSAGE_DENIED_AEGIS = 51;
 	CHAT_MESSAGE_INFORMATIONAL = 52;
 	CHAT_MESSAGE_AEGIS_STOLEN = 53;
+	CHAT_MESSAGE_ROSHAN_CANDY = 54;
 }
 
 enum DOTA_NO_BATTLE_POINTS_REASONS {
@@ -238,6 +240,11 @@ message CDOTAUserMsg_GlobalLightDirection {
 message CDOTAUserMsg_LocationPing {
 	optional uint32 player_id = 1;
 	optional .CDOTAMsg_LocationPing location_ping = 2;
+}
+
+message CDOTAUserMsg_ItemAlert {
+	optional uint32 player_id = 1;
+	optional .CDOTAMsg_ItemAlert item_alert = 2;
 }
 
 message CDOTAUserMsg_MinimapEvent {

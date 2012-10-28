@@ -100,6 +100,7 @@ message CMsgClientLogonResponse {
 	optional string webapi_authenticate_user_nonce = 11;
 	optional uint32 cell_id_ping_threshold = 12;
 	optional fixed64 client_supplied_steamid = 20;
+	optional string ip_country_code = 21;
 }
 
 message CMsgClientRequestWebAPIAuthenticateUserNonce {
@@ -1053,6 +1054,8 @@ message CMsgClientAppInfoRequest {
 }
 
 message CMsgClientAppInfoResponse {
+	option (msgpool_soft_limit) = 0;
+	option (msgpool_hard_limit) = 0;
 	message App {
 		message Section {
 			optional uint32 section_id = 1;
@@ -1085,6 +1088,95 @@ message CMsgClientPackageInfoResponse {
 	repeated .CMsgClientPackageInfoResponse.Package packages = 1;
 	repeated uint32 packages_unknown = 2;
 	optional uint32 packages_pending = 3;
+}
+
+message CMsgPICSChangesSinceRequest {
+	optional uint32 since_change_number = 1;
+	optional bool send_app_info_changes = 2;
+	optional bool send_package_info_changes = 3;
+}
+
+message CMsgPICSChangesSinceResponse {
+	message PackageChange {
+		optional uint32 packageid = 1;
+		optional uint32 change_number = 2;
+		optional bool needs_token = 3;
+	}
+
+	message AppChange {
+		optional uint32 appid = 1;
+		optional uint32 change_number = 2;
+		optional bool needs_token = 3;
+	}
+
+	optional uint32 current_change_number = 1;
+	optional uint32 since_change_number = 2;
+	optional bool force_full_update = 3;
+	repeated .CMsgPICSChangesSinceResponse.PackageChange package_changes = 4;
+	repeated .CMsgPICSChangesSinceResponse.AppChange app_changes = 5;
+}
+
+message CMsgPICSProductInfoRequest {
+	message AppInfo {
+		optional uint32 appid = 1;
+		optional uint64 access_token = 2;
+	}
+
+	message PackageInfo {
+		optional uint32 packageid = 1;
+		optional uint64 access_token = 2;
+	}
+
+	repeated .CMsgPICSProductInfoRequest.PackageInfo packages = 1;
+	repeated .CMsgPICSProductInfoRequest.AppInfo apps = 2;
+	optional bool meta_data_only = 3;
+}
+
+message CMsgPICSProductInfoResponse {
+	message AppInfo {
+		optional uint32 appid = 1;
+		optional uint32 change_number = 2;
+		optional bool missing_token = 3;
+		optional bytes sha = 4;
+		optional bytes buffer = 5;
+	}
+
+	message PackageInfo {
+		optional uint32 packageid = 1;
+		optional uint32 change_number = 2;
+		optional bool missing_token = 3;
+		optional bytes sha = 4;
+		optional bytes buffer = 5;
+	}
+
+	repeated .CMsgPICSProductInfoResponse.AppInfo apps = 1;
+	repeated uint32 unknown_appids = 2;
+	repeated .CMsgPICSProductInfoResponse.PackageInfo packages = 3;
+	repeated uint32 unknown_packageids = 4;
+	optional bool meta_data_only = 5;
+	optional bool response_pending = 6;
+}
+
+message CMsgPICSAccessTokenRequest {
+	repeated uint32 packageids = 1;
+	repeated uint32 appids = 2;
+}
+
+message k_EMsgPICSAccessTokenResponse {
+	message PackageToken {
+		optional uint32 packageid = 1;
+		optional bytes access_token = 2;
+	}
+
+	message AppToken {
+		optional uint32 appid = 1;
+		optional bytes access_token = 2;
+	}
+
+	repeated .k_EMsgPICSAccessTokenResponse.PackageToken package_access_tokens = 1;
+	repeated uint32 package_denied_tokens = 2;
+	repeated .k_EMsgPICSAccessTokenResponse.AppToken app_access_tokens = 3;
+	repeated uint32 app_denied_tokens = 4;
 }
 
 message CMsgClientUFSGetUGCDetails {
@@ -1253,6 +1345,7 @@ message CMsgClientUCMAddScreenshot {
 	optional string shortcut_name = 9;
 	repeated .CMsgClientUCMAddScreenshot.Tag tag = 10;
 	repeated fixed64 tagged_steamid = 11;
+	optional bool spoiler_tag = 12;
 }
 
 message CMsgClientUCMAddScreenshotResponse {
@@ -1382,6 +1475,23 @@ message CMsgClientUCMEnumerateUserSubscribedFilesResponse {
 	message PublishedFileId {
 		optional fixed64 published_file_id = 1;
 		optional fixed32 rtime32_subscribed = 2 [default = 0];
+	}
+
+	optional int32 eresult = 1 [default = 2];
+	repeated .CMsgClientUCMEnumerateUserSubscribedFilesResponse.PublishedFileId subscribed_files = 2;
+	optional uint32 total_results = 3;
+}
+
+message CMsgClientUCMEnumerateUserSubscribedFilesWithUpdates {
+	optional uint32 app_id = 1;
+	optional uint32 start_index = 2;
+	optional fixed32 start_time = 3;
+}
+
+message CMsgClientUCMEnumerateUserSubscribedFilesWithUpdatesResponse {
+	message PublishedFileId {
+		optional fixed64 published_file_id = 1;
+		optional fixed32 rtime32_subscribed = 2 [default = 0];
 		optional uint32 appid = 3;
 		optional fixed64 file_hcontent = 4;
 		optional uint32 file_size = 5;
@@ -1389,7 +1499,7 @@ message CMsgClientUCMEnumerateUserSubscribedFilesResponse {
 	}
 
 	optional int32 eresult = 1 [default = 2];
-	repeated .CMsgClientUCMEnumerateUserSubscribedFilesResponse.PublishedFileId subscribed_files = 2;
+	repeated .CMsgClientUCMEnumerateUserSubscribedFilesWithUpdatesResponse.PublishedFileId subscribed_files = 2;
 	optional uint32 total_results = 3;
 }
 

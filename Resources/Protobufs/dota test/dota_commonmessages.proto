@@ -8,6 +8,12 @@ message CDOTAMsg_LocationPing {
 	optional bool direct_ping = 4;
 }
 
+message CDOTAMsg_ItemAlert {
+	optional int32 x = 1;
+	optional int32 y = 2;
+	optional int32 itemid = 3;
+}
+
 message CDOTAMsg_MapLine {
 	optional int32 x = 1;
 	optional int32 y = 2;
