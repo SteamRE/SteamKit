@@ -151,10 +151,6 @@ namespace SteamKit2.Blob
 
                 source.ReadInt16(); // skip zlib header
 
-                if (sourceStack == null)
-                    sourceStack = new Stack<Stream>(1);
-
-                sourceStack.Push(source);
                 source = new BufferedStream(new DeflateStream(source, CompressionMode.Decompress, true), 0x10000);
 
                 ReadBlobHeader();

@@ -77,7 +77,7 @@ namespace SteamKit2.Blob
             {
                 context.LoadByteKey();
                 context.LoadIntConstant(0);
-                context.BitConvertToInt32();
+                context.BitConvertTo("Int32");
                 context.EmitCall(add);
                 context.Goto(readField);
             }

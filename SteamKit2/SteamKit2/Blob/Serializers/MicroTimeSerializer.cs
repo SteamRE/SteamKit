@@ -21,6 +21,7 @@ namespace SteamKit2.Blob
 
         public void EmitRead(JITContext context)
         {
+            context.LoadBlobReader();
             context.ReadFieldStream();
             context.EmitStreamCall("ReadUInt64");
             context.CreateType(typeof(MicroTime), CtorParams);

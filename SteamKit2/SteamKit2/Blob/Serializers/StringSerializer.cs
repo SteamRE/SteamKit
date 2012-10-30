@@ -21,6 +21,7 @@ namespace SteamKit2.Blob
         public void EmitRead(JITContext context)
         {
             context.PushUTF8Encoding();
+            context.LoadBlobReader();
             context.ReadFieldStream();
             context.GetFieldDataBytes();
             context.EmitStreamCall("ReadBytesCached");
