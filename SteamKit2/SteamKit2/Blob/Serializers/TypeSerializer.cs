@@ -124,6 +124,7 @@ namespace SteamKit2.Blob
                 context.Goto(readField);
                 context.MarkLabel(nextField);
             }
+
             context.SkipField();
             context.Goto(readField);
 

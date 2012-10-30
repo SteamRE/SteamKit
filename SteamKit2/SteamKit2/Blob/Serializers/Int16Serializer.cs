@@ -19,8 +19,9 @@ namespace SteamKit2.Blob
 
         public void EmitRead(JITContext context)
         {
+            context.LoadBlobReader();
             context.ReadFieldStream();
-            context.EmitStreamCall("ReadInt16");
+            context.StreamRead(2, "Int16");
         }
     }
 
@@ -41,8 +42,9 @@ namespace SteamKit2.Blob
 
         public void EmitRead(JITContext context)
         {
+            context.LoadBlobReader();
             context.ReadFieldStream();
-            context.EmitStreamCall("ReadUInt16");
+            context.StreamRead(2, "UInt16");
         }
     }
 }

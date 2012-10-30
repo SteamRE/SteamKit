@@ -94,6 +94,11 @@ namespace SteamKit2.Blob
             StoreLocal(local);
         }
 
+        public void Pop()
+        {
+            ilgen.Emit(OpCodes.Pop);
+        }
+
         public void PopType(Type t)
         {
             typePool[t].Return();
@@ -147,6 +152,11 @@ namespace SteamKit2.Blob
         public LocalBuilder CreateLocal(Type t)
         {
             return ilgen.DeclareLocal(t);
+        }
+
+        public void CreateArray(Type t)
+        {
+            ilgen.Emit(OpCodes.Newarr, t);
         }
 
         public void StoreField(FieldInfo field)
@@ -203,6 +213,16 @@ namespace SteamKit2.Blob
             ilgen.Emit(OpCodes.Br, label);
         }
 
+        public void GotoNotEqual(Label label)
+        {
+            ilgen.Emit(OpCodes.Bne_Un, label);
+        }
+
+        public void GotoGtOrEqual(Label label)
+        {
+            ilgen.Emit(OpCodes.Bge_Un, label);
+        }
+
         public void GotoWhenFalse(Label label)
         {
             ilgen.Emit(OpCodes.Brfalse, label);
@@ -223,7 +243,7 @@ namespace SteamKit2.Blob
                 LoadLocal(top);
         }
 
-        private MethodInfo GetReaderMethod(string methodName)
+        public MethodInfo GetReaderMethod(string methodName)
         {
             MethodInfo method = typeof(BlobReader).GetMethod(methodName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
             if (method == null) throw new ArgumentException("methodName");
@@ -231,9 +251,9 @@ namespace SteamKit2.Blob
             return method;
         }
 
-        public void BitConvertToInt32()
+        public void BitConvertTo(String type)
         {
-            MethodInfo convMethod = typeof(BitConverter).GetMethod("ToInt32", BindingFlags.Public | BindingFlags.Static);
+            MethodInfo convMethod = typeof(BitConverter).GetMethod("To" + type, BindingFlags.Public | BindingFlags.Static);
             if (convMethod == null) throw new ArgumentException("methodName");
 
             EmitCall(convMethod);
@@ -278,6 +298,12 @@ namespace SteamKit2.Blob
             ilgen.Emit(OpCodes.Cgt);
         }
 
+        public void CompareEqualTo(int value)
+        {
+            ilgen.Emit(OpCodes.Ldc_I4, value);
+            ilgen.Emit(OpCodes.Ceq);
+        }
+
         public void EmitKeyTest(byte[] key, Label failed)
         {
             LoadByteKey(key);
@@ -302,19 +328,41 @@ namespace SteamKit2.Blob
         {
             switch (value)
             {
+                case -1: ilgen.Emit(OpCodes.Ldc_I4_M1); break;
                 case 0: ilgen.Emit(OpCodes.Ldc_I4_0); break;
                 case 1: ilgen.Emit(OpCodes.Ldc_I4_1); break;
                 case 2: ilgen.Emit(OpCodes.Ldc_I4_2); break;
                 case 3: ilgen.Emit(OpCodes.Ldc_I4_3); break;
+                case 4: ilgen.Emit(OpCodes.Ldc_I4_4); break;
+                case 5: ilgen.Emit(OpCodes.Ldc_I4_5); break;
+                case 6: ilgen.Emit(OpCodes.Ldc_I4_6); break;
+                case 7: ilgen.Emit(OpCodes.Ldc_I4_7); break;
+                case 8: ilgen.Emit(OpCodes.Ldc_I4_8); break;
                 default:
                     ilgen.Emit(OpCodes.Ldc_I4, value);
                     break;
             }
         }
 
+        public void Add()
+        {
+            ilgen.Emit(OpCodes.Add);
+        }
+
         public void Subtract()
         {
             ilgen.Emit(OpCodes.Sub);
+        }
+
+        public void Length()
+        {
+            ilgen.Emit(OpCodes.Ldlen);
+            ilgen.Emit(OpCodes.Conv_I4);
+        }
+
+        public void Switch(Label[] table)
+        {
+            ilgen.Emit(OpCodes.Switch, table);
         }
 
         public void LoadByteKey(byte[] key)
@@ -339,52 +387,48 @@ namespace SteamKit2.Blob
 
         public void ReadFieldStream()
         {
-            LoadBlobReader();
-            EmitCall(GetReaderMethod("ReadFieldStream"));
+            LoadBlobField("source");
         }
-
-        public void ReadFieldHeader()
-        {
-            LoadBlobReader();
-            EmitCall(GetReaderMethod("ReadFieldHeader"));
-        }
-
 
         public void CanReadBytes(int count)
         {
-            LoadBlobReader();
             ilgen.Emit(OpCodes.Ldc_I4, count);
-            EmitCall(GetReaderMethod("CanTakeBytes"));
+            LoadBlobReader();
+            LoadBlobField("bytesAvailable");
+            ilgen.Emit(OpCodes.Clt);
         }
 
         public void GetFieldDataBytes()
         {
             LoadBlobReader();
-            EmitCall(GetReaderMethod("get_FieldDataBytes"));
+            LoadBlobField("dataBytes");
         }
 
         public void GetFieldKeyBytes()
         {
             LoadBlobReader();
-            EmitCall(GetReaderMethod("get_FieldKeyBytes"));
+            LoadBlobField("keyBytes");
         }
 
         public void LoadPeekKey()
         {
             LoadBlobReader();
-            EmitCall(GetReaderMethod("get_PeekIntKey"));
+            LoadBlobField("keyInt");
         }
 
         public void LoadByteKey()
         {
             LoadBlobReader();
-            EmitCall(GetReaderMethod("get_ByteKey"));
+            LoadBlobField("keyBuffer");
         }
 
         public void SkipField()
         {
             LoadBlobReader();
-            EmitCall(GetReaderMethod("SkipField"));
+            LoadBlobField("source");
+            LoadBlobReader();
+            LoadBlobField("dataBytes");
+            EmitStreamCall("ReadAndDiscard");
         }
 
         public void SkipSpare()
@@ -405,6 +449,28 @@ namespace SteamKit2.Blob
             ilgen.Emit(OpCodes.Ret);
         }
 
+
+        public void LoadField(Type type, string field)
+        {
+            ilgen.Emit(OpCodes.Ldfld, type.GetField(field, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance));
+        }
+
+        public void LoadStaticField(Type type, string field)
+        {
+            ilgen.Emit(OpCodes.Ldsfld, type.GetField(field, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static));
+        }
+
+        public void LoadBlobField(string field)
+        {
+            LoadField(typeof(BlobReader), field);
+        }
+
+        public void StoreBlobField(string field)
+        {
+            ilgen.Emit(OpCodes.Stfld, typeof(BlobReader).GetField(field, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance));
+        }
+
+
         public static BlobDeserializer BuildDeserializer(IBlobSerializer source)
         {
             JITContext ctx = new JITContext(source.ExpectedType);
@@ -413,6 +479,109 @@ namespace SteamKit2.Blob
             ctx.Return();
 
             return (BlobDeserializer)ctx.method.CreateDelegate(typeof(BlobDeserializer));
+        }
+
+        public void StreamRead(int length, string type)
+        {
+            LoadStaticField(typeof(StreamHelpers), "data");
+            LoadIntConstant(0);
+            LoadIntConstant(length);
+            EmitStreamCall("Read");
+            Pop();
+            LoadStaticField(typeof(StreamHelpers), "data");
+            LoadIntConstant(0);
+            BitConvertTo(type);
+        }
+
+        public void ReadFieldHeader()
+        {
+            var totalBytes = CreateLocal(typeof(Int32));
+
+            LoadBlobReader();
+            LoadBlobReader();
+            LoadBlobReader();
+            LoadBlobReader();
+            LoadBlobReader();
+            LoadBlobReader();
+            LoadBlobReader();
+
+            LoadBlobField("source");
+            StreamRead(2, "UInt16");
+            StoreBlobField("keyBytes");
+
+            LoadBlobField("source");
+            StreamRead(4, "Int32");
+            StoreBlobField("dataBytes");
+
+            LoadBlobField("bytesAvailable");
+            LoadIntConstant(BlobReader.FieldHeaderLength);
+            Subtract();
+            StoreBlobField("bytesAvailable");
+
+            var continueRead = CreateLabel();
+
+            LoadBlobReader();
+            LoadBlobField("keyBuffer");
+            Length();
+            LoadBlobReader();
+            LoadBlobField("keyBytes");
+            GotoGtOrEqual(continueRead);
+
+            LoadBlobReader();
+            LoadBlobReader();
+            LoadBlobField("keyBytes");
+            CreateArray(typeof(byte));
+            StoreBlobField("keyBuffer");
+
+            MarkLabel(continueRead);
+
+            LoadBlobField("dataBytes");
+            LoadBlobReader();
+            LoadBlobField("keyBytes");
+            Add();
+            StoreLocal(totalBytes);
+
+            LoadBlobReader();
+            LoadBlobField("source");
+            LoadBlobReader();
+            LoadBlobField("keyBuffer");
+            LoadIntConstant(0);
+            LoadBlobReader();
+            LoadBlobField("keyBytes");
+            EmitStreamCall("Read");
+            Pop();
+
+
+            var cleanup = CreateLabel();
+            var neg1 = CreateLabel();
+
+            LoadBlobReader();
+            LoadBlobField("keyBytes");
+            LoadIntConstant(4);
+            GotoNotEqual(neg1);
+
+            LoadBlobReader();
+            LoadBlobReader();
+            LoadBlobField("keyBuffer");
+            LoadIntConstant(0);
+            BitConvertTo("Int32");
+            StoreBlobField("keyInt");
+
+            Goto(cleanup);
+
+            MarkLabel(neg1);
+            LoadBlobReader();
+            LoadIntConstant(-1);
+            StoreBlobField("keyInt");
+
+            MarkLabel(cleanup);
+
+            LoadBlobReader();
+            LoadBlobReader();
+            LoadBlobField("bytesAvailable");
+            LoadLocal(totalBytes);
+            Subtract();
+            StoreBlobField("bytesAvailable");
         }
     }
 }

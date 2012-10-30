@@ -84,7 +84,7 @@ namespace SteamKit2.Blob
                 case TypeCode.Int32:
                     context.LoadByteKey();
                     context.LoadIntConstant(0);
-                    context.BitConvertToInt32();
+                    context.BitConvertTo("Int32");
                     break;
                 case TypeCode.String:
                     context.PushUTF8Encoding();

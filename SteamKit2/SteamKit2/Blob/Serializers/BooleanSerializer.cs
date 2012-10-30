@@ -19,6 +19,7 @@ namespace SteamKit2.Blob
 
         public void EmitRead(JITContext context)
         {
+            context.LoadBlobReader();
             context.ReadFieldStream();
             context.EmitStreamCall("ReadByte");
             context.CompareGreaterThanZero();
