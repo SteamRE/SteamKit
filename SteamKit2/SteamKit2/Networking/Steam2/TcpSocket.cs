@@ -4,7 +4,7 @@
  */
 
 
-
+using System;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
@@ -32,12 +32,19 @@ namespace SteamKit2
         /// <value>The binary writer.</value>
         public BinaryWriter Writer { get; private set; }
 
+        /// <summary>
+        /// Gets the length of time a connection will attempt to establish before timing out. The default timeout is 30 seconds.
+        /// </summary>
+        /// <value>The connection timeout.</value>
+        public TimeSpan ConnectionTimeout { get; set; }
+
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TcpSocket"/> class.
         /// </summary>
         public TcpSocket()
         {
+            ConnectionTimeout = TimeSpan.FromSeconds( 30 );
         }
 
 
@@ -50,9 +57,17 @@ namespace SteamKit2
             Disconnect();
 
             sock = new Socket( AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp );
-            sock.Connect( endPoint );
+            var asyncResult = sock.BeginConnect( endPoint, null, null );
 
-            bConnected = true;
+            bConnected = asyncResult.AsyncWaitHandle.WaitOne( ConnectionTimeout );
+
+            if ( !bConnected )
+            {
+                sock.Close();
+                return;
+            }
+
+            sock.EndConnect( asyncResult );
 
             sockStream = new NetworkStream( sock, true );
 

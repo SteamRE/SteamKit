@@ -4,7 +4,7 @@
  */
 
 
-
+using System;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -92,12 +92,24 @@ namespace SteamKit2
         protected IPEndPoint EndPoint { get; private set; }
 
         /// <summary>
+        /// Gets the length of time a connection will attempt to establish before timing out. The default timeout is 30 seconds.
+        /// </summary>
+        /// <value>The connection timeout.</value>
+        public TimeSpan ConnectionTimeout
+        {
+            get { return Socket.ConnectionTimeout; }
+            set { Socket.ConnectionTimeout = value; }
+        }
+
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="ServerClient"/> class.
         /// </summary>
         public ServerClient()
         {
             Socket = new TcpSocket();
         }
+
 
         /// <summary>
         /// Connects to the specified end point.
