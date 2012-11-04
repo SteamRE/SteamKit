@@ -233,10 +233,14 @@ namespace SteamKit2
                     foreach ( var section in app.sections )
                     {
                         KeyValue kv = new KeyValue();
+
                         using ( MemoryStream ms = new MemoryStream( section.section_kv ) )
                             kv.ReadAsBinary( ms );
 
-                        Sections.Add( ( EAppInfoSection )section.section_id, kv );
+                        if ( kv.Children != null )
+                        {
+                            Sections.Add( ( EAppInfoSection )section.section_id, kv.Children.FirstOrDefault() );
+                        }
                     }
                 }
 
