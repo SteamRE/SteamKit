@@ -63,7 +63,7 @@ namespace SteamKit2
                 return;
             }
 
-            if ( e.SocketError != SocketError.Success )
+            if ( e.SocketError != SocketError.Success || !sock.Connected )
             {
                 DebugLog.WriteLine( "TcpConnection", "Unable to connect: {0}", e.SocketError );
                 OnDisconnected( EventArgs.Empty );
