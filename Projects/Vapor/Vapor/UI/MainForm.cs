@@ -14,7 +14,9 @@ namespace Vapor
     {
         public bool Relog { get; private set; }
 
+#if TRAY_BUILD
         bool shouldClose;
+#endif
 
         bool suppressStateMsg;
         bool expectDisconnect;
@@ -163,21 +165,21 @@ namespace Vapor
             }
 
             msg.Handle<SteamClient.DisconnectedCallback>( ( callback ) =>
+            {
+                // if we expected this disconnection (cause of steamguard), we do nothing
+                if ( expectDisconnect )
                 {
-                    // if we expected this disconnection (cause of steamguard), we do nothing
-                    if ( expectDisconnect )
-                    {
-                        expectDisconnect = false;
-                        return;
-                    }
-
-                    Util.MsgBox( this, "Disconnected from Steam3!" );
-
-                    this.Relog = true;
-                    this.Close();
-
+                    expectDisconnect = false;
                     return;
-                } );
+                }
+
+                Util.MsgBox( this, "Disconnected from Steam3!" );
+
+                this.Relog = true;
+                this.Close();
+
+                return;
+            } );
         }
 
         private static int rankFriend(Friend x)
@@ -360,7 +362,9 @@ namespace Vapor
 
         private void exitToolStripMenuItem_Click( object sender, EventArgs e )
         {
+#if TRAY_BUILD
             shouldClose = true;
+#endif
             this.Close();
         }
 
