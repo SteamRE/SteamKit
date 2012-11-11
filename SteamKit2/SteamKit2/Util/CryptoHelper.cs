@@ -9,7 +9,6 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Security.Cryptography;
-using Classless.Hasher;
 
 namespace SteamKit2
 {
@@ -35,7 +34,7 @@ namespace SteamKit2
 
         public void Dispose()
         {
-            ((IDisposable)rsa).Dispose();
+            ( ( IDisposable )rsa ).Dispose();
         }
     }
 
@@ -212,25 +211,11 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// Performs the Jenkins hash on an input byte array
-        /// </summary>
-        public static byte[] JenkinsHash( byte[] input )
-        {
-            using ( JenkinsHash jHash = new JenkinsHash() )
-            {
-                byte[] hash = jHash.ComputeHash( input );
-                Array.Reverse( hash );
-
-                return hash;
-            }
-        }
-
-        /// <summary>
         /// Performs CRC32 on an input byte array using the CrcStandard.Crc32Bit parameters
         /// </summary>
         public static byte[] CRCHash( byte[] input )
         {
-            using ( Crc crc = new Crc( CrcParameters.GetParameters( CrcStandard.Crc32Bit ) ) )
+            using ( var crc = new Crc32() )
             {
                 byte[] hash = crc.ComputeHash( input );
                 Array.Reverse( hash );
