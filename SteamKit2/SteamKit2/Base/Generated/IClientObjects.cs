@@ -19,7 +19,7 @@ namespace SteamKit2.Internal
 
     private uint _appid = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"appid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint appid
     {
       get { return _appid; }
@@ -28,7 +28,7 @@ namespace SteamKit2.Internal
 
     private bool _favorite = default(bool);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"favorite", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool favorite
     {
       get { return _favorite; }
@@ -37,7 +37,7 @@ namespace SteamKit2.Internal
 
     private bool _installed = default(bool);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"installed", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool installed
     {
       get { return _installed; }
@@ -46,7 +46,7 @@ namespace SteamKit2.Internal
 
     private bool _auto_update = default(bool);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"auto_update", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool auto_update
     {
       get { return _auto_update; }
@@ -55,7 +55,7 @@ namespace SteamKit2.Internal
 
     private string _category = "";
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"category", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string category
     {
       get { return _category; }
@@ -64,7 +64,7 @@ namespace SteamKit2.Internal
 
     private string _app_type = "";
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"app_type", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string app_type
     {
       get { return _app_type; }
@@ -73,7 +73,7 @@ namespace SteamKit2.Internal
 
     private bool _downloading = default(bool);
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"downloading", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool downloading
     {
       get { return _downloading; }
@@ -82,7 +82,7 @@ namespace SteamKit2.Internal
 
     private bool _download_paused = default(bool);
     [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"download_paused", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool download_paused
     {
       get { return _download_paused; }
@@ -91,7 +91,7 @@ namespace SteamKit2.Internal
 
     private uint _bytes_download_rate = default(uint);
     [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"bytes_download_rate", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint bytes_download_rate
     {
       get { return _bytes_download_rate; }
@@ -100,7 +100,7 @@ namespace SteamKit2.Internal
 
     private ulong _bytes_downloaded = default(ulong);
     [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"bytes_downloaded", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong bytes_downloaded
     {
       get { return _bytes_downloaded; }
@@ -109,7 +109,7 @@ namespace SteamKit2.Internal
 
     private ulong _bytes_needed = default(ulong);
     [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"bytes_needed", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong bytes_needed
     {
       get { return _bytes_needed; }
@@ -118,7 +118,7 @@ namespace SteamKit2.Internal
 
     private bool _changing = default(bool);
     [global::ProtoBuf.ProtoMember(12, IsRequired = false, Name=@"changing", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool changing
     {
       get { return _changing; }
@@ -127,7 +127,7 @@ namespace SteamKit2.Internal
 
     private bool _available_on_platform = default(bool);
     [global::ProtoBuf.ProtoMember(13, IsRequired = false, Name=@"available_on_platform", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool available_on_platform
     {
       get { return _available_on_platform; }

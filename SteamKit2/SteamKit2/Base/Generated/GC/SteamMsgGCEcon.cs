@@ -244,6 +244,12 @@ namespace SteamKit2.GC.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCSetItemPositions", Value=1077)]
       k_EMsgGCSetItemPositions = 1077,
             
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCApplyEggEssence", Value=1078)]
+      k_EMsgGCApplyEggEssence = 1078,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCNameEggEssenceResponse", Value=1079)]
+      k_EMsgGCNameEggEssenceResponse = 1079,
+            
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCTradingBase", Value=1500)]
       k_EMsgGCTradingBase = 1500,
             

@@ -20,7 +20,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private uint _account_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint account_id
     {
       get { return _account_id; }
@@ -29,7 +29,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private int _game_type = default(int);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"game_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(int))]
+    [global::System.ComponentModel.DefaultValue(default(int))]
     public int game_type
     {
       get { return _game_type; }
@@ -38,7 +38,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private int _input_device = default(int);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"input_device", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(int))]
+    [global::System.ComponentModel.DefaultValue(default(int))]
     public int input_device
     {
       get { return _input_device; }
@@ -57,7 +57,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private bool _success = default(bool);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"success", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool success
     {
       get { return _success; }
@@ -76,7 +76,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private int _elo_game_mode = default(int);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"elo_game_mode", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(int))]
+    [global::System.ComponentModel.DefaultValue(default(int))]
     public int elo_game_mode
     {
       get { return _elo_game_mode; }
@@ -85,7 +85,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private int _elo_calc_type = default(int);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"elo_calc_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(int))]
+    [global::System.ComponentModel.DefaultValue(default(int))]
     public int elo_calc_type
     {
       get { return _elo_calc_type; }
@@ -94,7 +94,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private float _elo_calc_exp_base = default(float);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"elo_calc_exp_base", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(float))]
+    [global::System.ComponentModel.DefaultValue(default(float))]
     public float elo_calc_exp_base
     {
       get { return _elo_calc_exp_base; }
@@ -103,7 +103,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private float _elo_calc_exp_denom = default(float);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"elo_calc_exp_denom", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(float))]
+    [global::System.ComponentModel.DefaultValue(default(float))]
     public float elo_calc_exp_denom
     {
       get { return _elo_calc_exp_denom; }
@@ -112,7 +112,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private float _elo_calc_k_scalar = default(float);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"elo_calc_k_scalar", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(float))]
+    [global::System.ComponentModel.DefaultValue(default(float))]
     public float elo_calc_k_scalar
     {
       get { return _elo_calc_k_scalar; }
@@ -121,7 +121,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private int _winning_team = default(int);
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"winning_team", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(int))]
+    [global::System.ComponentModel.DefaultValue(default(int))]
     public int winning_team
     {
       get { return _winning_team; }
@@ -137,7 +137,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private bool _request_log = default(bool);
     [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"request_log", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool request_log
     {
       get { return _request_log; }
@@ -146,7 +146,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private string _elo_map_name = "";
     [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"elo_map_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string elo_map_name
     {
       get { return _elo_map_name; }
@@ -155,7 +155,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private int _elo_lock_in_result = default(int);
     [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"elo_lock_in_result", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(int))]
+    [global::System.ComponentModel.DefaultValue(default(int))]
     public int elo_lock_in_result
     {
       get { return _elo_lock_in_result; }
@@ -164,7 +164,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private int _elo_final_result = default(int);
     [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"elo_final_result", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(int))]
+    [global::System.ComponentModel.DefaultValue(default(int))]
     public int elo_final_result
     {
       get { return _elo_final_result; }
@@ -185,7 +185,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private bool _is_bot = default(bool);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"is_bot", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool is_bot
     {
       get { return _is_bot; }
@@ -194,7 +194,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private uint _elo_flags = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"elo_flags", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint elo_flags
     {
       get { return _elo_flags; }
@@ -203,7 +203,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private uint _elo_team = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"elo_team", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint elo_team
     {
       get { return _elo_team; }
@@ -212,7 +212,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private int _input_device = default(int);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"input_device", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(int))]
+    [global::System.ComponentModel.DefaultValue(default(int))]
     public int input_device
     {
       get { return _input_device; }
@@ -221,7 +221,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private uint _account_id = default(uint);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint account_id
     {
       get { return _account_id; }
@@ -230,7 +230,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private int _elo_value = default(int);
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"elo_value", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(int))]
+    [global::System.ComponentModel.DefaultValue(default(int))]
     public int elo_value
     {
       get { return _elo_value; }
@@ -249,7 +249,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private int _reason = default(int);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"reason", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(int))]
+    [global::System.ComponentModel.DefaultValue(default(int))]
     public int reason
     {
       get { return _reason; }
@@ -258,7 +258,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private int _count = default(int);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"count", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(int))]
+    [global::System.ComponentModel.DefaultValue(default(int))]
     public int count
     {
       get { return _count; }
@@ -282,7 +282,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private string _log = "";
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"log", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string log
     {
       get { return _log; }
@@ -301,7 +301,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private int _game_mode = default(int);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"game_mode", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(int))]
+    [global::System.ComponentModel.DefaultValue(default(int))]
     public int game_mode
     {
       get { return _game_mode; }
@@ -310,7 +310,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private int _input_device = default(int);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"input_device", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(int))]
+    [global::System.ComponentModel.DefaultValue(default(int))]
     public int input_device
     {
       get { return _input_device; }
@@ -329,7 +329,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private int _bracket = default(int);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"bracket", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(int))]
+    [global::System.ComponentModel.DefaultValue(default(int))]
     public int bracket
     {
       get { return _bracket; }
@@ -348,7 +348,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private int _game_mode = default(int);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"game_mode", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(int))]
+    [global::System.ComponentModel.DefaultValue(default(int))]
     public int game_mode
     {
       get { return _game_mode; }
@@ -369,7 +369,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private uint _account_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint account_id
     {
       get { return _account_id; }
@@ -378,7 +378,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private int _input_device = default(int);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"input_device", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(int))]
+    [global::System.ComponentModel.DefaultValue(default(int))]
     public int input_device
     {
       get { return _input_device; }
@@ -414,7 +414,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private int _bracket = default(int);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"bracket", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(int))]
+    [global::System.ComponentModel.DefaultValue(default(int))]
     public int bracket
     {
       get { return _bracket; }
@@ -423,7 +423,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private uint _account_id = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint account_id
     {
       get { return _account_id; }
@@ -447,7 +447,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private uint _account_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint account_id
     {
       get { return _account_id; }
@@ -456,7 +456,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private uint _game_type = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"game_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint game_type
     {
       get { return _game_type; }
@@ -465,7 +465,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private uint _input_device = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"input_device", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint input_device
     {
       get { return _input_device; }
@@ -484,7 +484,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private bool _success = default(bool);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"success", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool success
     {
       get { return _success; }
@@ -503,7 +503,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private uint _game_type = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"game_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint game_type
     {
       get { return _game_type; }
@@ -531,7 +531,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private uint _account_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint account_id
     {
       get { return _account_id; }
@@ -540,7 +540,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private uint _bot_difficulty = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"bot_difficulty", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint bot_difficulty
     {
       get { return _bot_difficulty; }
@@ -549,7 +549,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private uint _input_device = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"input_device", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint input_device
     {
       get { return _input_device; }
@@ -558,7 +558,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private uint _contribution_score = default(uint);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"contribution_score", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint contribution_score
     {
       get { return _contribution_score; }
@@ -582,7 +582,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private ulong _gameserver_id = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"gameserver_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong gameserver_id
     {
       get { return _gameserver_id; }
@@ -591,7 +591,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private int _ping = default(int);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"ping", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(int))]
+    [global::System.ComponentModel.DefaultValue(default(int))]
     public int ping
     {
       get { return _ping; }
@@ -600,7 +600,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private uint _ip = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"ip", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint ip
     {
       get { return _ip; }
@@ -609,7 +609,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private uint _port = default(uint);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"port", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint port
     {
       get { return _port; }
@@ -618,7 +618,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private uint _instances = default(uint);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"instances", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint instances
     {
       get { return _instances; }
@@ -637,7 +637,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private uint _players_online = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"players_online", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint players_online
     {
       get { return _players_online; }
@@ -646,7 +646,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private uint _servers_online = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"servers_online", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint servers_online
     {
       get { return _servers_online; }
@@ -655,7 +655,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private uint _players_searching = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"players_searching", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint players_searching
     {
       get { return _players_searching; }
@@ -664,7 +664,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private uint _servers_available = default(uint);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"servers_available", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint servers_available
     {
       get { return _servers_available; }
@@ -673,7 +673,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private uint _ongoing_matches = default(uint);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"ongoing_matches", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint ongoing_matches
     {
       get { return _ongoing_matches; }
@@ -682,7 +682,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private uint _search_time_avg = default(uint);
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"search_time_avg", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint search_time_avg
     {
       get { return _search_time_avg; }
@@ -701,7 +701,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private uint _token = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"token", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint token
     {
       get { return _token; }
@@ -710,7 +710,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private uint _stamp = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"stamp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint stamp
     {
       get { return _stamp; }
@@ -719,7 +719,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private ulong _exchange = default(ulong);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"exchange", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong exchange
     {
       get { return _exchange; }
@@ -745,7 +745,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private uint _game_type = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"game_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint game_type
     {
       get { return _game_type; }
@@ -754,7 +754,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private string _ticket_data = "";
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"ticket_data", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string ticket_data
     {
       get { return _ticket_data; }
@@ -773,7 +773,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private int _abandon = default(int);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"abandon", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(int))]
+    [global::System.ComponentModel.DefaultValue(default(int))]
     public int abandon
     {
       get { return _abandon; }
@@ -799,7 +799,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private int _offset_index = default(int);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"offset_index", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(int))]
+    [global::System.ComponentModel.DefaultValue(default(int))]
     public int offset_index
     {
       get { return _offset_index; }
@@ -808,7 +808,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private int _final_batch = default(int);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"final_batch", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(int))]
+    [global::System.ComponentModel.DefaultValue(default(int))]
     public int final_batch
     {
       get { return _final_batch; }
@@ -827,7 +827,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private int _matchmaking = default(int);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"matchmaking", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(int))]
+    [global::System.ComponentModel.DefaultValue(default(int))]
     public int matchmaking
     {
       get { return _matchmaking; }
@@ -843,7 +843,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private string _error = "";
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"error", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string error
     {
       get { return _error; }
@@ -859,7 +859,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private GlobalStatistics _global_stats = null;
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"global_stats", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(null)]
+    [global::System.ComponentModel.DefaultValue(null)]
     public GlobalStatistics global_stats
     {
       get { return _global_stats; }
@@ -899,7 +899,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private uint _game_type = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"game_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint game_type
     {
       get { return _game_type; }
@@ -908,7 +908,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private ulong _match_id = default(ulong);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"match_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong match_id
     {
       get { return _match_id; }
@@ -927,7 +927,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private ulong _reservationid = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"reservationid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong reservationid
     {
       get { return _reservationid; }
@@ -936,7 +936,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private CMsgGCCStrike15_v2_MatchmakingGC2ServerReserve _reservation = null;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"reservation", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(null)]
+    [global::System.ComponentModel.DefaultValue(null)]
     public CMsgGCCStrike15_v2_MatchmakingGC2ServerReserve reservation
     {
       get { return _reservation; }
@@ -945,7 +945,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private string _map = "";
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"map", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string map
     {
       get { return _map; }
@@ -954,7 +954,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private ulong _gc_reservation_sent = default(ulong);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"gc_reservation_sent", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong gc_reservation_sent
     {
       get { return _gc_reservation_sent; }
@@ -973,7 +973,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private ulong _serverid = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"serverid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong serverid
     {
       get { return _serverid; }
@@ -982,7 +982,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private uint _serverip = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"serverip", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint serverip
     {
       get { return _serverip; }
@@ -991,7 +991,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private uint _serverport = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"serverport", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint serverport
     {
       get { return _serverport; }
@@ -1000,7 +1000,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private ulong _reservationid = default(ulong);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"reservationid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong reservationid
     {
       get { return _reservationid; }
@@ -1009,7 +1009,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private CMsgGCCStrike15_v2_MatchmakingGC2ServerReserve _reservation = null;
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"reservation", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(null)]
+    [global::System.ComponentModel.DefaultValue(null)]
     public CMsgGCCStrike15_v2_MatchmakingGC2ServerReserve reservation
     {
       get { return _reservation; }
@@ -1018,7 +1018,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private string _map = "";
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"map", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string map
     {
       get { return _map; }
@@ -1037,7 +1037,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private ulong _reservationid = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"reservationid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong reservationid
     {
       get { return _reservationid; }
@@ -1046,7 +1046,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private CMsgGCCStrike15_v2_MatchmakingGC2ServerReserve _reservation = null;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"reservation", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(null)]
+    [global::System.ComponentModel.DefaultValue(null)]
     public CMsgGCCStrike15_v2_MatchmakingGC2ServerReserve reservation
     {
       get { return _reservation; }
@@ -1055,7 +1055,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private string _map = "";
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"map", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string map
     {
       get { return _map; }
@@ -1064,7 +1064,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private int _round = default(int);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"round", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(int))]
+    [global::System.ComponentModel.DefaultValue(default(int))]
     public int round
     {
       get { return _round; }
@@ -1108,7 +1108,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private int _round_result = default(int);
     [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"round_result", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(int))]
+    [global::System.ComponentModel.DefaultValue(default(int))]
     public int round_result
     {
       get { return _round_result; }
@@ -1117,7 +1117,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private int _match_result = default(int);
     [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"match_result", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(int))]
+    [global::System.ComponentModel.DefaultValue(default(int))]
     public int match_result
     {
       get { return _match_result; }
@@ -1133,7 +1133,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private CMsgGCCStrike15_v2_MatchmakingGC2ServerConfirm _confirm = null;
     [global::ProtoBuf.ProtoMember(13, IsRequired = false, Name=@"confirm", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(null)]
+    [global::System.ComponentModel.DefaultValue(null)]
     public CMsgGCCStrike15_v2_MatchmakingGC2ServerConfirm confirm
     {
       get { return _confirm; }
@@ -1152,7 +1152,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private CMsgGCCStrike15_v2_MatchmakingServerRoundStats _stats = null;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"stats", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(null)]
+    [global::System.ComponentModel.DefaultValue(null)]
     public CMsgGCCStrike15_v2_MatchmakingServerRoundStats stats
     {
       get { return _stats; }
@@ -1161,7 +1161,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private CMsgGCCStrike15_v2_MatchmakingGC2ServerConfirm _confirm = null;
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"confirm", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(null)]
+    [global::System.ComponentModel.DefaultValue(null)]
     public CMsgGCCStrike15_v2_MatchmakingGC2ServerConfirm confirm
     {
       get { return _confirm; }
@@ -1170,7 +1170,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private ulong _rematch = default(ulong);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"rematch", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong rematch
     {
       get { return _rematch; }
@@ -1199,7 +1199,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private uint _account_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint account_id
     {
       get { return _account_id; }
@@ -1208,7 +1208,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private CMsgGCCStrike15_v2_MatchmakingGC2ClientReserve _ongoingmatch = null;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"ongoingmatch", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(null)]
+    [global::System.ComponentModel.DefaultValue(null)]
     public CMsgGCCStrike15_v2_MatchmakingGC2ClientReserve ongoingmatch
     {
       get { return _ongoingmatch; }
@@ -1217,7 +1217,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private GlobalStatistics _global_stats = null;
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"global_stats", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(null)]
+    [global::System.ComponentModel.DefaultValue(null)]
     public GlobalStatistics global_stats
     {
       get { return _global_stats; }
@@ -1226,7 +1226,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private uint _penalty_seconds = default(uint);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"penalty_seconds", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint penalty_seconds
     {
       get { return _penalty_seconds; }
@@ -1245,7 +1245,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private uint _account_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint account_id
     {
       get { return _account_id; }
@@ -1254,7 +1254,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private CMsgGCCStrike15_v2_MatchmakingGC2ClientReserve _abandoned_match = null;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"abandoned_match", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(null)]
+    [global::System.ComponentModel.DefaultValue(null)]
     public CMsgGCCStrike15_v2_MatchmakingGC2ClientReserve abandoned_match
     {
       get { return _abandoned_match; }
@@ -1263,7 +1263,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private uint _penalty_seconds = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"penalty_seconds", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint penalty_seconds
     {
       get { return _penalty_seconds; }
@@ -1282,7 +1282,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private uint _account_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint account_id
     {
       get { return _account_id; }
@@ -1291,7 +1291,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private CMsgGCCStrike15_v2_MatchmakingGC2ServerReserve _reservation = null;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"reservation", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(null)]
+    [global::System.ComponentModel.DefaultValue(null)]
     public CMsgGCCStrike15_v2_MatchmakingGC2ServerReserve reservation
     {
       get { return _reservation; }
@@ -1300,7 +1300,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private uint _reason = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"reason", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint reason
     {
       get { return _reason; }
@@ -1319,7 +1319,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private CMsgGCCStrike15_v2_MatchmakingGC2ClientReserve _client_reservation = null;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"client_reservation", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(null)]
+    [global::System.ComponentModel.DefaultValue(null)]
     public CMsgGCCStrike15_v2_MatchmakingGC2ClientReserve client_reservation
     {
       get { return _client_reservation; }
@@ -1328,7 +1328,7 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private CMsgGCCStrike15_v2_MatchmakingServerRoundStats _server_stats = null;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"server_stats", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(null)]
+    [global::System.ComponentModel.DefaultValue(null)]
     public CMsgGCCStrike15_v2_MatchmakingServerRoundStats server_stats
     {
       get { return _server_stats; }

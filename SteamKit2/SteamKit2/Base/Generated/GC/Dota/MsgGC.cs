@@ -21,7 +21,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _account_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint account_id
     {
       get { return _account_id; }
@@ -30,7 +30,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _wins = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"wins", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint wins
     {
       get { return _wins; }
@@ -39,7 +39,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _losses = default(uint);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"losses", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint losses
     {
       get { return _losses; }
@@ -48,7 +48,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _avatar = default(uint);
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"avatar", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint avatar
     {
       get { return _avatar; }
@@ -57,7 +57,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _xp = default(uint);
     [global::ProtoBuf.ProtoMember(12, IsRequired = false, Name=@"xp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint xp
     {
       get { return _xp; }
@@ -66,7 +66,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _level = default(uint);
     [global::ProtoBuf.ProtoMember(13, IsRequired = false, Name=@"level", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint level
     {
       get { return _level; }
@@ -75,7 +75,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _initial_skill = default(uint);
     [global::ProtoBuf.ProtoMember(14, IsRequired = false, Name=@"initial_skill", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint initial_skill
     {
       get { return _initial_skill; }
@@ -84,7 +84,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _leaver_count = default(uint);
     [global::ProtoBuf.ProtoMember(15, IsRequired = false, Name=@"leaver_count", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint leaver_count
     {
       get { return _leaver_count; }
@@ -93,7 +93,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _prevent_match_until_date = default(uint);
     [global::ProtoBuf.ProtoMember(18, IsRequired = false, Name=@"prevent_match_until_date", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint prevent_match_until_date
     {
       get { return _prevent_match_until_date; }
@@ -102,7 +102,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _prevent_text_chat_until_date = default(uint);
     [global::ProtoBuf.ProtoMember(20, IsRequired = false, Name=@"prevent_text_chat_until_date", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint prevent_text_chat_until_date
     {
       get { return _prevent_text_chat_until_date; }
@@ -111,7 +111,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _prevent_voice_until_date = default(uint);
     [global::ProtoBuf.ProtoMember(21, IsRequired = false, Name=@"prevent_voice_until_date", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint prevent_voice_until_date
     {
       get { return _prevent_voice_until_date; }
@@ -120,7 +120,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _last_abandoned_game_date = default(uint);
     [global::ProtoBuf.ProtoMember(22, IsRequired = false, Name=@"last_abandoned_game_date", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint last_abandoned_game_date
     {
       get { return _last_abandoned_game_date; }
@@ -129,7 +129,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _leaver_penalty_count = default(uint);
     [global::ProtoBuf.ProtoMember(23, IsRequired = false, Name=@"leaver_penalty_count", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint leaver_penalty_count
     {
       get { return _leaver_penalty_count; }
@@ -138,7 +138,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _completed_game_streak = default(uint);
     [global::ProtoBuf.ProtoMember(24, IsRequired = false, Name=@"completed_game_streak", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint completed_game_streak
     {
       get { return _completed_game_streak; }
@@ -147,7 +147,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _teaching = default(uint);
     [global::ProtoBuf.ProtoMember(28, IsRequired = false, Name=@"teaching", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint teaching
     {
       get { return _teaching; }
@@ -156,7 +156,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _leadership = default(uint);
     [global::ProtoBuf.ProtoMember(29, IsRequired = false, Name=@"leadership", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint leadership
     {
       get { return _leadership; }
@@ -165,7 +165,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _friendly = default(uint);
     [global::ProtoBuf.ProtoMember(30, IsRequired = false, Name=@"friendly", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint friendly
     {
       get { return _friendly; }
@@ -174,7 +174,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _forgiving = default(uint);
     [global::ProtoBuf.ProtoMember(31, IsRequired = false, Name=@"forgiving", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint forgiving
     {
       get { return _forgiving; }
@@ -183,7 +183,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _successful_report_count = default(uint);
     [global::ProtoBuf.ProtoMember(36, IsRequired = false, Name=@"successful_report_count", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint successful_report_count
     {
       get { return _successful_report_count; }
@@ -192,7 +192,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _notify_successful_report = default(uint);
     [global::ProtoBuf.ProtoMember(37, IsRequired = false, Name=@"notify_successful_report", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint notify_successful_report
     {
       get { return _notify_successful_report; }
@@ -201,7 +201,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _account_disabled_until_date = default(uint);
     [global::ProtoBuf.ProtoMember(38, IsRequired = false, Name=@"account_disabled_until_date", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint account_disabled_until_date
     {
       get { return _account_disabled_until_date; }
@@ -210,7 +210,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _account_disabled_count = default(uint);
     [global::ProtoBuf.ProtoMember(39, IsRequired = false, Name=@"account_disabled_count", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint account_disabled_count
     {
       get { return _account_disabled_count; }
@@ -219,7 +219,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _showcase_hero_id = default(uint);
     [global::ProtoBuf.ProtoMember(40, IsRequired = false, Name=@"showcase_hero_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint showcase_hero_id
     {
       get { return _showcase_hero_id; }
@@ -228,7 +228,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _match_disabled_until_date = default(uint);
     [global::ProtoBuf.ProtoMember(41, IsRequired = false, Name=@"match_disabled_until_date", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint match_disabled_until_date
     {
       get { return _match_disabled_until_date; }
@@ -237,11 +237,20 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _match_disabled_count = default(uint);
     [global::ProtoBuf.ProtoMember(42, IsRequired = false, Name=@"match_disabled_count", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint match_disabled_count
     {
       get { return _match_disabled_count; }
       set { _match_disabled_count = value; }
+    }
+
+    private uint _team_creation_disabled_until_date = default(uint);
+    [global::ProtoBuf.ProtoMember(43, IsRequired = false, Name=@"team_creation_disabled_until_date", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint team_creation_disabled_until_date
+    {
+      get { return _team_creation_disabled_until_date; }
+      set { _team_creation_disabled_until_date = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -256,7 +265,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _rank = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"rank", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint rank
     {
       get { return _rank; }
@@ -265,7 +274,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _rank_uncertainty = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"rank_uncertainty", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint rank_uncertainty
     {
       get { return _rank_uncertainty; }
@@ -274,7 +283,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private int _win_loss_streak = default(int);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"win_loss_streak", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(int))]
+    [global::System.ComponentModel.DefaultValue(default(int))]
     public int win_loss_streak
     {
       get { return _win_loss_streak; }
@@ -283,7 +292,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _feeding_count = default(uint);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"feeding_count", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint feeding_count
     {
       get { return _feeding_count; }
@@ -292,7 +301,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _voice_reports = default(uint);
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"voice_reports", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint voice_reports
     {
       get { return _voice_reports; }
@@ -301,7 +310,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _text_reports = default(uint);
     [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"text_reports", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint text_reports
     {
       get { return _text_reports; }
@@ -310,7 +319,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _ability_reports = default(uint);
     [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"ability_reports", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint ability_reports
     {
       get { return _ability_reports; }
@@ -319,7 +328,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _feeding_reports = default(uint);
     [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"feeding_reports", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint feeding_reports
     {
       get { return _feeding_reports; }
@@ -328,7 +337,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _automatic_report_penalty = default(uint);
     [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"automatic_report_penalty", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint automatic_report_penalty
     {
       get { return _automatic_report_penalty; }
@@ -337,7 +346,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _games_since_report_penalty = default(uint);
     [global::ProtoBuf.ProtoMember(12, IsRequired = false, Name=@"games_since_report_penalty", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint games_since_report_penalty
     {
       get { return _games_since_report_penalty; }
@@ -346,7 +355,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _report_penalty_count = default(uint);
     [global::ProtoBuf.ProtoMember(13, IsRequired = false, Name=@"report_penalty_count", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint report_penalty_count
     {
       get { return _report_penalty_count; }
@@ -355,7 +364,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _pending_detected_reports = default(uint);
     [global::ProtoBuf.ProtoMember(14, IsRequired = false, Name=@"pending_detected_reports", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint pending_detected_reports
     {
       get { return _pending_detected_reports; }
@@ -364,7 +373,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _pending_in_game_reports = default(uint);
     [global::ProtoBuf.ProtoMember(15, IsRequired = false, Name=@"pending_in_game_reports", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint pending_in_game_reports
     {
       get { return _pending_in_game_reports; }
@@ -373,7 +382,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _pending_out_of_game_reports = default(uint);
     [global::ProtoBuf.ProtoMember(16, IsRequired = false, Name=@"pending_out_of_game_reports", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint pending_out_of_game_reports
     {
       get { return _pending_out_of_game_reports; }
@@ -382,7 +391,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _automated_penalty_date = default(uint);
     [global::ProtoBuf.ProtoMember(17, IsRequired = false, Name=@"automated_penalty_date", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint automated_penalty_date
     {
       get { return _automated_penalty_date; }
@@ -401,7 +410,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _account_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint account_id
     {
       get { return _account_id; }
@@ -410,7 +419,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _hero_id = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"hero_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint hero_id
     {
       get { return _hero_id; }
@@ -419,7 +428,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _wins = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"wins", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint wins
     {
       get { return _wins; }
@@ -428,7 +437,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _losses = default(uint);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"losses", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint losses
     {
       get { return _losses; }
@@ -437,7 +446,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private float _hero_performance = default(float);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"hero_performance", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(float))]
+    [global::System.ComponentModel.DefaultValue(default(float))]
     public float hero_performance
     {
       get { return _hero_performance; }
@@ -446,7 +455,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private float _hero_variance = default(float);
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"hero_variance", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(float))]
+    [global::System.ComponentModel.DefaultValue(default(float))]
     public float hero_variance
     {
       get { return _hero_variance; }
@@ -465,7 +474,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private ulong _party_id = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"party_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong party_id
     {
       get { return _party_id; }
@@ -474,7 +483,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private ulong _leader_id = default(ulong);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"leader_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong leader_id
     {
       get { return _leader_id; }
@@ -490,7 +499,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _game_modes = default(uint);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"game_modes", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint game_modes
     {
       get { return _game_modes; }
@@ -506,7 +515,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private CSODOTAParty.State _state = CSODOTAParty.State.UI;
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"state", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(CSODOTAParty.State.UI)]
+    [global::System.ComponentModel.DefaultValue(CSODOTAParty.State.UI)]
     public CSODOTAParty.State state
     {
       get { return _state; }
@@ -515,7 +524,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _started_matchmaking_time = default(uint);
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"started_matchmaking_time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint started_matchmaking_time
     {
       get { return _started_matchmaking_time; }
@@ -531,25 +540,16 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _matchgroups = default(uint);
     [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"matchgroups", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint matchgroups
     {
       get { return _matchgroups; }
       set { _matchgroups = value; }
     }
 
-    private uint _matching_players = default(uint);
-    [global::ProtoBuf.ProtoMember(14, IsRequired = false, Name=@"matching_players", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
-    public uint matching_players
-    {
-      get { return _matching_players; }
-      set { _matching_players = value; }
-    }
-
     private float _search_fraction = default(float);
     [global::ProtoBuf.ProtoMember(15, IsRequired = false, Name=@"search_fraction", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(float))]
+    [global::System.ComponentModel.DefaultValue(default(float))]
     public float search_fraction
     {
       get { return _search_fraction; }
@@ -558,7 +558,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _prevent_match_until_date = default(uint);
     [global::ProtoBuf.ProtoMember(18, IsRequired = false, Name=@"prevent_match_until_date", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint prevent_match_until_date
     {
       get { return _prevent_match_until_date; }
@@ -567,25 +567,16 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _prevent_match_account_id = default(uint);
     [global::ProtoBuf.ProtoMember(19, IsRequired = false, Name=@"prevent_match_account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint prevent_match_account_id
     {
       get { return _prevent_match_account_id; }
       set { _prevent_match_account_id = value; }
     }
 
-    private uint _search_wait_estimate = default(uint);
-    [global::ProtoBuf.ProtoMember(20, IsRequired = false, Name=@"search_wait_estimate", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
-    public uint search_wait_estimate
-    {
-      get { return _search_wait_estimate; }
-      set { _search_wait_estimate = value; }
-    }
-
     private MatchType _match_type = MatchType.MATCH_TYPE_RANKED;
     [global::ProtoBuf.ProtoMember(21, IsRequired = false, Name=@"match_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(MatchType.MATCH_TYPE_RANKED)]
+    [global::System.ComponentModel.DefaultValue(MatchType.MATCH_TYPE_RANKED)]
     public MatchType match_type
     {
       get { return _match_type; }
@@ -594,7 +585,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private DOTABotDifficulty _bot_difficulty = DOTABotDifficulty.BOT_DIFFICULTY_PASSIVE;
     [global::ProtoBuf.ProtoMember(22, IsRequired = false, Name=@"bot_difficulty", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(DOTABotDifficulty.BOT_DIFFICULTY_PASSIVE)]
+    [global::System.ComponentModel.DefaultValue(DOTABotDifficulty.BOT_DIFFICULTY_PASSIVE)]
     public DOTABotDifficulty bot_difficulty
     {
       get { return _bot_difficulty; }
@@ -603,7 +594,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _team_id = default(uint);
     [global::ProtoBuf.ProtoMember(23, IsRequired = false, Name=@"team_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint team_id
     {
       get { return _team_id; }
@@ -612,7 +603,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _match_disabled_until_date = default(uint);
     [global::ProtoBuf.ProtoMember(24, IsRequired = false, Name=@"match_disabled_until_date", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint match_disabled_until_date
     {
       get { return _match_disabled_until_date; }
@@ -621,7 +612,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _match_disabled_account_id = default(uint);
     [global::ProtoBuf.ProtoMember(25, IsRequired = false, Name=@"match_disabled_account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint match_disabled_account_id
     {
       get { return _match_disabled_account_id; }
@@ -654,7 +645,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private string _search_key = "";
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"search_key", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string search_key
     {
       get { return _search_key; }
@@ -673,7 +664,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private CSODOTAParty _party = null;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"party", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(null)]
+    [global::System.ComponentModel.DefaultValue(null)]
     public CSODOTAParty party
     {
       get { return _party; }
@@ -682,7 +673,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private CSODOTAPartyInternal _internal = null;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"internal", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(null)]
+    [global::System.ComponentModel.DefaultValue(null)]
     public CSODOTAPartyInternal @internal
     {
       get { return _internal; }
@@ -701,7 +692,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private ulong _group_id = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"group_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong group_id
     {
       get { return _group_id; }
@@ -710,7 +701,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private ulong _sender_id = default(ulong);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"sender_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong sender_id
     {
       get { return _sender_id; }
@@ -719,7 +710,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private string _sender_name = "";
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"sender_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string sender_name
     {
       get { return _sender_name; }
@@ -740,7 +731,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private string _name = "";
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string name
     {
       get { return _name; }
@@ -749,7 +740,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private ulong _steam_id = default(ulong);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"steam_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong steam_id
     {
       get { return _steam_id; }
@@ -758,7 +749,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _avatar = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"avatar", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint avatar
     {
       get { return _avatar; }
@@ -782,7 +773,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private ulong _id = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong id
     {
       get { return _id; }
@@ -791,7 +782,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _hero_id = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"hero_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint hero_id
     {
       get { return _hero_id; }
@@ -800,7 +791,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private DOTA_GC_TEAM _team = DOTA_GC_TEAM.DOTA_GC_TEAM_GOOD_GUYS;
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"team", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(DOTA_GC_TEAM.DOTA_GC_TEAM_GOOD_GUYS)]
+    [global::System.ComponentModel.DefaultValue(DOTA_GC_TEAM.DOTA_GC_TEAM_GOOD_GUYS)]
     public DOTA_GC_TEAM team
     {
       get { return _team; }
@@ -809,7 +800,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private bool _connected_to_game_server = default(bool);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"connected_to_game_server", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool connected_to_game_server
     {
       get { return _connected_to_game_server; }
@@ -818,7 +809,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private string _name = "";
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string name
     {
       get { return _name; }
@@ -827,7 +818,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _slot = default(uint);
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"slot", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint slot
     {
       get { return _slot; }
@@ -836,7 +827,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private float _latitude = default(float);
     [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"latitude", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(float))]
+    [global::System.ComponentModel.DefaultValue(default(float))]
     public float latitude
     {
       get { return _latitude; }
@@ -845,7 +836,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private float _longitude = default(float);
     [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"longitude", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(float))]
+    [global::System.ComponentModel.DefaultValue(default(float))]
     public float longitude
     {
       get { return _longitude; }
@@ -854,7 +845,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private DOTALobbyReadyState _ready_state = DOTALobbyReadyState.DOTALobbyReadyState_UNDECLARED;
     [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"ready_state", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(DOTALobbyReadyState.DOTALobbyReadyState_UNDECLARED)]
+    [global::System.ComponentModel.DefaultValue(DOTALobbyReadyState.DOTALobbyReadyState_UNDECLARED)]
     public DOTALobbyReadyState ready_state
     {
       get { return _ready_state; }
@@ -863,7 +854,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private ulong _party_id = default(ulong);
     [global::ProtoBuf.ProtoMember(12, IsRequired = false, Name=@"party_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong party_id
     {
       get { return _party_id; }
@@ -872,7 +863,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _meta_level = default(uint);
     [global::ProtoBuf.ProtoMember(13, IsRequired = false, Name=@"meta_level", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint meta_level
     {
       get { return _meta_level; }
@@ -881,7 +872,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _meta_xp = default(uint);
     [global::ProtoBuf.ProtoMember(14, IsRequired = false, Name=@"meta_xp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint meta_xp
     {
       get { return _meta_xp; }
@@ -890,7 +881,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _meta_xp_awarded = default(uint);
     [global::ProtoBuf.ProtoMember(15, IsRequired = false, Name=@"meta_xp_awarded", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint meta_xp_awarded
     {
       get { return _meta_xp_awarded; }
@@ -899,7 +890,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private DOTALeaverStatus_t _leaver_status = DOTALeaverStatus_t.DOTA_LEAVER_NONE;
     [global::ProtoBuf.ProtoMember(16, IsRequired = false, Name=@"leaver_status", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(DOTALeaverStatus_t.DOTA_LEAVER_NONE)]
+    [global::System.ComponentModel.DefaultValue(DOTALeaverStatus_t.DOTA_LEAVER_NONE)]
     public DOTALeaverStatus_t leaver_status
     {
       get { return _leaver_status; }
@@ -908,11 +899,20 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _channel = default(uint);
     [global::ProtoBuf.ProtoMember(17, IsRequired = false, Name=@"channel", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint channel
     {
       get { return _channel; }
       set { _channel = value; }
+    }
+
+    private uint _prize_def_index = default(uint);
+    [global::ProtoBuf.ProtoMember(18, IsRequired = false, Name=@"prize_def_index", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint prize_def_index
+    {
+      get { return _prize_def_index; }
+      set { _prize_def_index = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -927,7 +927,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private string _team_name = "";
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"team_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string team_name
     {
       get { return _team_name; }
@@ -936,7 +936,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private string _team_tag = "";
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"team_tag", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string team_tag
     {
       get { return _team_tag; }
@@ -945,7 +945,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _team_id = default(uint);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"team_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint team_id
     {
       get { return _team_id; }
@@ -954,7 +954,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private ulong _team_logo = default(ulong);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"team_logo", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong team_logo
     {
       get { return _team_logo; }
@@ -963,7 +963,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private ulong _team_base_logo = default(ulong);
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"team_base_logo", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong team_base_logo
     {
       get { return _team_base_logo; }
@@ -972,7 +972,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private ulong _team_banner_logo = default(ulong);
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"team_banner_logo", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong team_banner_logo
     {
       get { return _team_banner_logo; }
@@ -981,7 +981,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private bool _complete_team = default(bool);
     [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"complete_team", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool complete_team
     {
       get { return _complete_team; }
@@ -1000,7 +1000,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _account_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint account_id
     {
       get { return _account_id; }
@@ -1009,7 +1009,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _date = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"date", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint date
     {
       get { return _date; }
@@ -1028,7 +1028,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private ulong _item_id = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"item_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong item_id
     {
       get { return _item_id; }
@@ -1037,7 +1037,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _item_def_index = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"item_def_index", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint item_def_index
     {
       get { return _item_def_index; }
@@ -1046,7 +1046,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private bool _is_supply_crate = default(bool);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"is_supply_crate", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool is_supply_crate
     {
       get { return _is_supply_crate; }
@@ -1055,7 +1055,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private bool _is_timed_drop = default(bool);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"is_timed_drop", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool is_timed_drop
     {
       get { return _is_timed_drop; }
@@ -1064,7 +1064,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _account_id = default(uint);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint account_id
     {
       get { return _account_id; }
@@ -1083,7 +1083,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private ulong _lobby_id = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"lobby_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong lobby_id
     {
       get { return _lobby_id; }
@@ -1106,7 +1106,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private ulong _leader_id = default(ulong);
     [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"leader_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong leader_id
     {
       get { return _leader_id; }
@@ -1115,7 +1115,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private ulong _server_id = (ulong)0;
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"server_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue((ulong)0)]
+    [global::System.ComponentModel.DefaultValue((ulong)0)]
     public ulong server_id
     {
       get { return _server_id; }
@@ -1124,7 +1124,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _game_mode = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"game_mode", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint game_mode
     {
       get { return _game_mode; }
@@ -1140,7 +1140,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private CSODOTALobby.State _state = CSODOTALobby.State.UI;
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"state", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(CSODOTALobby.State.UI)]
+    [global::System.ComponentModel.DefaultValue(CSODOTALobby.State.UI)]
     public CSODOTALobby.State state
     {
       get { return _state; }
@@ -1149,7 +1149,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private string _connect = "";
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"connect", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string connect
     {
       get { return _connect; }
@@ -1158,7 +1158,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private CSODOTALobby.LobbyType _lobby_type = CSODOTALobby.LobbyType.INVALID;
     [global::ProtoBuf.ProtoMember(12, IsRequired = false, Name=@"lobby_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(CSODOTALobby.LobbyType.INVALID)]
+    [global::System.ComponentModel.DefaultValue(CSODOTALobby.LobbyType.INVALID)]
     public CSODOTALobby.LobbyType lobby_type
     {
       get { return _lobby_type; }
@@ -1167,7 +1167,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private bool _allow_cheats = default(bool);
     [global::ProtoBuf.ProtoMember(13, IsRequired = false, Name=@"allow_cheats", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool allow_cheats
     {
       get { return _allow_cheats; }
@@ -1176,7 +1176,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private bool _fill_with_bots = default(bool);
     [global::ProtoBuf.ProtoMember(14, IsRequired = false, Name=@"fill_with_bots", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool fill_with_bots
     {
       get { return _fill_with_bots; }
@@ -1185,7 +1185,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private bool _intro_mode = default(bool);
     [global::ProtoBuf.ProtoMember(15, IsRequired = false, Name=@"intro_mode", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool intro_mode
     {
       get { return _intro_mode; }
@@ -1194,7 +1194,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private string _game_name = "";
     [global::ProtoBuf.ProtoMember(16, IsRequired = false, Name=@"game_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string game_name
     {
       get { return _game_name; }
@@ -1210,7 +1210,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _tutorial_lesson = default(uint);
     [global::ProtoBuf.ProtoMember(18, IsRequired = false, Name=@"tutorial_lesson", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint tutorial_lesson
     {
       get { return _tutorial_lesson; }
@@ -1219,7 +1219,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _tournament_id = default(uint);
     [global::ProtoBuf.ProtoMember(19, IsRequired = false, Name=@"tournament_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint tournament_id
     {
       get { return _tournament_id; }
@@ -1228,7 +1228,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _tournament_game_id = default(uint);
     [global::ProtoBuf.ProtoMember(20, IsRequired = false, Name=@"tournament_game_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint tournament_game_id
     {
       get { return _tournament_game_id; }
@@ -1237,7 +1237,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _server_region = (uint)0;
     [global::ProtoBuf.ProtoMember(21, IsRequired = false, Name=@"server_region", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue((uint)0)]
+    [global::System.ComponentModel.DefaultValue((uint)0)]
     public uint server_region
     {
       get { return _server_region; }
@@ -1246,7 +1246,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private DOTA_GameState _game_state = DOTA_GameState.DOTA_GAMERULES_STATE_INIT;
     [global::ProtoBuf.ProtoMember(22, IsRequired = false, Name=@"game_state", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(DOTA_GameState.DOTA_GAMERULES_STATE_INIT)]
+    [global::System.ComponentModel.DefaultValue(DOTA_GameState.DOTA_GAMERULES_STATE_INIT)]
     public DOTA_GameState game_state
     {
       get { return _game_state; }
@@ -1255,7 +1255,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _num_spectators = default(uint);
     [global::ProtoBuf.ProtoMember(23, IsRequired = false, Name=@"num_spectators", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint num_spectators
     {
       get { return _num_spectators; }
@@ -1264,7 +1264,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _tower_state = default(uint);
     [global::ProtoBuf.ProtoMember(24, IsRequired = false, Name=@"tower_state", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint tower_state
     {
       get { return _tower_state; }
@@ -1273,25 +1273,16 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _matchgroup = default(uint);
     [global::ProtoBuf.ProtoMember(25, IsRequired = false, Name=@"matchgroup", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint matchgroup
     {
       get { return _matchgroup; }
       set { _matchgroup = value; }
     }
 
-    private float _readyup_remaining_time = default(float);
-    [global::ProtoBuf.ProtoMember(26, IsRequired = false, Name=@"readyup_remaining_time", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(float))]
-    public float readyup_remaining_time
-    {
-      get { return _readyup_remaining_time; }
-      set { _readyup_remaining_time = value; }
-    }
-
     private bool _leaver_detected = default(bool);
     [global::ProtoBuf.ProtoMember(27, IsRequired = false, Name=@"leaver_detected", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool leaver_detected
     {
       get { return _leaver_detected; }
@@ -1300,7 +1291,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private DOTA_CM_PICK _cm_pick = DOTA_CM_PICK.DOTA_CM_RANDOM;
     [global::ProtoBuf.ProtoMember(28, IsRequired = false, Name=@"cm_pick", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(DOTA_CM_PICK.DOTA_CM_RANDOM)]
+    [global::System.ComponentModel.DefaultValue(DOTA_CM_PICK.DOTA_CM_RANDOM)]
     public DOTA_CM_PICK cm_pick
     {
       get { return _cm_pick; }
@@ -1309,7 +1300,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _match_id = default(uint);
     [global::ProtoBuf.ProtoMember(30, IsRequired = false, Name=@"match_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint match_id
     {
       get { return _match_id; }
@@ -1318,7 +1309,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private bool _allow_spectating = (bool)true;
     [global::ProtoBuf.ProtoMember(31, IsRequired = false, Name=@"allow_spectating", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue((bool)true)]
+    [global::System.ComponentModel.DefaultValue((bool)true)]
     public bool allow_spectating
     {
       get { return _allow_spectating; }
@@ -1327,7 +1318,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private DOTABotDifficulty _bot_difficulty = DOTABotDifficulty.BOT_DIFFICULTY_HARD;
     [global::ProtoBuf.ProtoMember(36, IsRequired = false, Name=@"bot_difficulty", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(DOTABotDifficulty.BOT_DIFFICULTY_HARD)]
+    [global::System.ComponentModel.DefaultValue(DOTABotDifficulty.BOT_DIFFICULTY_HARD)]
     public DOTABotDifficulty bot_difficulty
     {
       get { return _bot_difficulty; }
@@ -1336,7 +1327,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private DOTAGameVersion _game_version = DOTAGameVersion.GAME_VERSION_CURRENT;
     [global::ProtoBuf.ProtoMember(37, IsRequired = false, Name=@"game_version", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(DOTAGameVersion.GAME_VERSION_CURRENT)]
+    [global::System.ComponentModel.DefaultValue(DOTAGameVersion.GAME_VERSION_CURRENT)]
     public DOTAGameVersion game_version
     {
       get { return _game_version; }
@@ -1352,7 +1343,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private string _pass_key = "";
     [global::ProtoBuf.ProtoMember(39, IsRequired = false, Name=@"pass_key", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string pass_key
     {
       get { return _pass_key; }
@@ -1361,7 +1352,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private float _drop_rate_bonus = default(float);
     [global::ProtoBuf.ProtoMember(40, IsRequired = false, Name=@"drop_rate_bonus", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(float))]
+    [global::System.ComponentModel.DefaultValue(default(float))]
     public float drop_rate_bonus
     {
       get { return _drop_rate_bonus; }
@@ -1377,7 +1368,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _leagueid = default(uint);
     [global::ProtoBuf.ProtoMember(42, IsRequired = false, Name=@"leagueid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint leagueid
     {
       get { return _leagueid; }
@@ -1386,7 +1377,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _penalty_level_radiant = (uint)0;
     [global::ProtoBuf.ProtoMember(43, IsRequired = false, Name=@"penalty_level_radiant", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue((uint)0)]
+    [global::System.ComponentModel.DefaultValue((uint)0)]
     public uint penalty_level_radiant
     {
       get { return _penalty_level_radiant; }
@@ -1395,7 +1386,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _penalty_level_dire = (uint)0;
     [global::ProtoBuf.ProtoMember(44, IsRequired = false, Name=@"penalty_level_dire", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue((uint)0)]
+    [global::System.ComponentModel.DefaultValue((uint)0)]
     public uint penalty_level_dire
     {
       get { return _penalty_level_dire; }
@@ -1404,7 +1395,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _load_game_id = default(uint);
     [global::ProtoBuf.ProtoMember(45, IsRequired = false, Name=@"load_game_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint load_game_id
     {
       get { return _load_game_id; }
@@ -1413,7 +1404,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _series_type = default(uint);
     [global::ProtoBuf.ProtoMember(46, IsRequired = false, Name=@"series_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint series_type
     {
       get { return _series_type; }
@@ -1422,7 +1413,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _radiant_series_wins = default(uint);
     [global::ProtoBuf.ProtoMember(47, IsRequired = false, Name=@"radiant_series_wins", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint radiant_series_wins
     {
       get { return _radiant_series_wins; }
@@ -1431,7 +1422,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _dire_series_wins = default(uint);
     [global::ProtoBuf.ProtoMember(48, IsRequired = false, Name=@"dire_series_wins", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint dire_series_wins
     {
       get { return _dire_series_wins; }
@@ -1502,7 +1493,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private string _search_key = "";
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"search_key", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string search_key
     {
       get { return _search_key; }
@@ -1518,7 +1509,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _average_rank = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"average_rank", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint average_rank
     {
       get { return _average_rank; }
@@ -1527,7 +1518,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _replay_salt = default(uint);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"replay_salt", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint replay_salt
     {
       get { return _replay_salt; }
@@ -1536,7 +1527,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private bool _disable_radiant_automatic_team_detection = default(bool);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"disable_radiant_automatic_team_detection", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool disable_radiant_automatic_team_detection
     {
       get { return _disable_radiant_automatic_team_detection; }
@@ -1545,7 +1536,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private bool _disable_dire_automatic_team_detection = default(bool);
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"disable_dire_automatic_team_detection", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool disable_dire_automatic_team_detection
     {
       get { return _disable_dire_automatic_team_detection; }
@@ -1554,7 +1545,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _final_match_duration = default(uint);
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"final_match_duration", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint final_match_duration
     {
       get { return _final_match_duration; }
@@ -1563,7 +1554,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private bool _submitted_match_history = default(bool);
     [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"submitted_match_history", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool submitted_match_history
     {
       get { return _submitted_match_history; }
@@ -1582,7 +1573,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private CSODOTALobby _lobby = null;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"lobby", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(null)]
+    [global::System.ComponentModel.DefaultValue(null)]
     public CSODOTALobby lobby
     {
       get { return _lobby; }
@@ -1591,7 +1582,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private CSODOTALobbyInternal _internal = null;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"internal", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(null)]
+    [global::System.ComponentModel.DefaultValue(null)]
     public CSODOTALobbyInternal @internal
     {
       get { return _internal; }
@@ -1617,7 +1608,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private DOTA_GameState _game_state = DOTA_GameState.DOTA_GAMERULES_STATE_INIT;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"game_state", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(DOTA_GameState.DOTA_GAMERULES_STATE_INIT)]
+    [global::System.ComponentModel.DefaultValue(DOTA_GameState.DOTA_GAMERULES_STATE_INIT)]
     public DOTA_GameState game_state
     {
       get { return _game_state; }
@@ -1626,7 +1617,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _num_spectators = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"num_spectators", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint num_spectators
     {
       get { return _num_spectators; }
@@ -1635,7 +1626,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _tower_state = default(uint);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"tower_state", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint tower_state
     {
       get { return _tower_state; }
@@ -1649,7 +1640,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private ulong _steam_id = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steam_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong steam_id
     {
       get { return _steam_id; }
@@ -1658,7 +1649,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _hero_id = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"hero_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint hero_id
     {
       get { return _hero_id; }
@@ -1682,7 +1673,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private string _key = "";
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"key", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string key
     {
       get { return _key; }
@@ -1691,7 +1682,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _matchgroups = (uint)4294967295;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"matchgroups", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue((uint)4294967295)]
+    [global::System.ComponentModel.DefaultValue((uint)4294967295)]
     public uint matchgroups
     {
       get { return _matchgroups; }
@@ -1700,7 +1691,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _client_version = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"client_version", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint client_version
     {
       get { return _client_version; }
@@ -1709,7 +1700,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _game_modes = (uint)4294967295;
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"game_modes", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue((uint)4294967295)]
+    [global::System.ComponentModel.DefaultValue((uint)4294967295)]
     public uint game_modes
     {
       get { return _game_modes; }
@@ -1718,7 +1709,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private DOTABotDifficulty _bot_difficulty = DOTABotDifficulty.BOT_DIFFICULTY_HARD;
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"bot_difficulty", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(DOTABotDifficulty.BOT_DIFFICULTY_HARD)]
+    [global::System.ComponentModel.DefaultValue(DOTABotDifficulty.BOT_DIFFICULTY_HARD)]
     public DOTABotDifficulty bot_difficulty
     {
       get { return _bot_difficulty; }
@@ -1727,7 +1718,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private MatchType _match_type = MatchType.MATCH_TYPE_RANKED;
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"match_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(MatchType.MATCH_TYPE_RANKED)]
+    [global::System.ComponentModel.DefaultValue(MatchType.MATCH_TYPE_RANKED)]
     public MatchType match_type
     {
       get { return _match_type; }
@@ -1756,12 +1747,45 @@ namespace SteamKit2.GC.Dota.Internal
 
     private DOTALobbyReadyState _state = DOTALobbyReadyState.DOTALobbyReadyState_UNDECLARED;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"state", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(DOTALobbyReadyState.DOTALobbyReadyState_UNDECLARED)]
+    [global::System.ComponentModel.DefaultValue(DOTALobbyReadyState.DOTALobbyReadyState_UNDECLARED)]
     public DOTALobbyReadyState state
     {
       get { return _state; }
       set { _state = value; }
     }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgReadyUpStatus")]
+  public partial class CMsgReadyUpStatus : global::ProtoBuf.IExtensible
+  {
+    public CMsgReadyUpStatus() {}
+    
+
+    private ulong _lobby_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"lobby_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong lobby_id
+    {
+      get { return _lobby_id; }
+      set { _lobby_id = value; }
+    }
+    private readonly global::System.Collections.Generic.List<uint> _accepted_ids = new global::System.Collections.Generic.List<uint>();
+    [global::ProtoBuf.ProtoMember(2, Name=@"accepted_ids", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public global::System.Collections.Generic.List<uint> accepted_ids
+    {
+      get { return _accepted_ids; }
+    }
+  
+    private readonly global::System.Collections.Generic.List<uint> _declined_ids = new global::System.Collections.Generic.List<uint>();
+    [global::ProtoBuf.ProtoMember(3, Name=@"declined_ids", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public global::System.Collections.Generic.List<uint> declined_ids
+    {
+      get { return _declined_ids; }
+    }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -1802,7 +1826,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _source_tv_public_addr = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"source_tv_public_addr", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint source_tv_public_addr
     {
       get { return _source_tv_public_addr; }
@@ -1811,7 +1835,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _source_tv_private_addr = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"source_tv_private_addr", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint source_tv_private_addr
     {
       get { return _source_tv_private_addr; }
@@ -1820,7 +1844,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _source_tv_port = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"source_tv_port", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint source_tv_port
     {
       get { return _source_tv_port; }
@@ -1850,7 +1874,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private string _game_name = "";
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"game_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string game_name
     {
       get { return _game_name; }
@@ -1866,7 +1890,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _num_spectators = default(uint);
     [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"num_spectators", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint num_spectators
     {
       get { return _num_spectators; }
@@ -1875,7 +1899,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _tournament_id = default(uint);
     [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"tournament_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint tournament_id
     {
       get { return _tournament_id; }
@@ -1884,7 +1908,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _tournament_game_id = default(uint);
     [global::ProtoBuf.ProtoMember(12, IsRequired = false, Name=@"tournament_game_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint tournament_game_id
     {
       get { return _tournament_game_id; }
@@ -1893,7 +1917,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _tower_state = default(uint);
     [global::ProtoBuf.ProtoMember(13, IsRequired = false, Name=@"tower_state", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint tower_state
     {
       get { return _tower_state; }
@@ -1902,7 +1926,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private float _tv_broadcast_time = default(float);
     [global::ProtoBuf.ProtoMember(17, IsRequired = false, Name=@"tv_broadcast_time", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(float))]
+    [global::System.ComponentModel.DefaultValue(default(float))]
     public float tv_broadcast_time
     {
       get { return _tv_broadcast_time; }
@@ -1911,7 +1935,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private float _game_time = default(float);
     [global::ProtoBuf.ProtoMember(18, IsRequired = false, Name=@"game_time", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(float))]
+    [global::System.ComponentModel.DefaultValue(default(float))]
     public float game_time
     {
       get { return _game_time; }
@@ -1920,7 +1944,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private ulong _server_steamid = default(ulong);
     [global::ProtoBuf.ProtoMember(19, IsRequired = false, Name=@"server_steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong server_steamid
     {
       get { return _server_steamid; }
@@ -1929,7 +1953,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _leagueid = default(uint);
     [global::ProtoBuf.ProtoMember(20, IsRequired = false, Name=@"leagueid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint leagueid
     {
       get { return _leagueid; }
@@ -1943,7 +1967,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private ulong _steam_id = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steam_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong steam_id
     {
       get { return _steam_id; }
@@ -1952,7 +1976,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private string _name = "";
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string name
     {
       get { return _name; }
@@ -1961,7 +1985,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _hero_id = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"hero_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint hero_id
     {
       get { return _hero_id; }
@@ -1992,7 +2016,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _num_total_games = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"num_total_games", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint num_total_games
     {
       get { return _num_total_games; }
@@ -2011,7 +2035,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private string _search_key = "";
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"search_key", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string search_key
     {
       get { return _search_key; }
@@ -2020,7 +2044,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _start = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"start", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint start
     {
       get { return _start; }
@@ -2029,7 +2053,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _num_games = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"num_games", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint num_games
     {
       get { return _num_games; }
@@ -2038,7 +2062,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _leagueid = default(uint);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"leagueid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint leagueid
     {
       get { return _leagueid; }
@@ -2047,7 +2071,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _heroid = default(uint);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"heroid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint heroid
     {
       get { return _heroid; }
@@ -2066,7 +2090,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private ulong _steam_id = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steam_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong steam_id
     {
       get { return _steam_id; }
@@ -2083,36 +2107,9 @@ namespace SteamKit2.GC.Dota.Internal
     public CMsgSpectateFriendGameResponse() {}
     
 
-    private uint _source_tv_public_addr = default(uint);
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"source_tv_public_addr", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
-    public uint source_tv_public_addr
-    {
-      get { return _source_tv_public_addr; }
-      set { _source_tv_public_addr = value; }
-    }
-
-    private uint _source_tv_private_addr = default(uint);
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"source_tv_private_addr", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
-    public uint source_tv_private_addr
-    {
-      get { return _source_tv_private_addr; }
-      set { _source_tv_private_addr = value; }
-    }
-
-    private uint _source_tv_port = default(uint);
-    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"source_tv_port", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
-    public uint source_tv_port
-    {
-      get { return _source_tv_port; }
-      set { _source_tv_port = value; }
-    }
-
     private ulong _server_steamid = default(ulong);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"server_steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong server_steamid
     {
       get { return _server_steamid; }
@@ -2141,7 +2138,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _server_public_ip_addr = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"server_public_ip_addr", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint server_public_ip_addr
     {
       get { return _server_public_ip_addr; }
@@ -2150,7 +2147,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _server_private_ip_addr = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"server_private_ip_addr", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint server_private_ip_addr
     {
       get { return _server_private_ip_addr; }
@@ -2159,7 +2156,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _server_port = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"server_port", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint server_port
     {
       get { return _server_port; }
@@ -2168,7 +2165,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _server_tv_port = default(uint);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"server_tv_port", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint server_tv_port
     {
       get { return _server_tv_port; }
@@ -2177,7 +2174,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private string _server_key = "";
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"server_key", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string server_key
     {
       get { return _server_key; }
@@ -2186,7 +2183,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private bool _server_hibernation = default(bool);
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"server_hibernation", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool server_hibernation
     {
       get { return _server_hibernation; }
@@ -2195,7 +2192,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private CMsgGameServerInfo.ServerType _server_type = CMsgGameServerInfo.ServerType.UNSPECIFIED;
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"server_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(CMsgGameServerInfo.ServerType.UNSPECIFIED)]
+    [global::System.ComponentModel.DefaultValue(CMsgGameServerInfo.ServerType.UNSPECIFIED)]
     public CMsgGameServerInfo.ServerType server_type
     {
       get { return _server_type; }
@@ -2204,7 +2201,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _server_region = default(uint);
     [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"server_region", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint server_region
     {
       get { return _server_region; }
@@ -2213,7 +2210,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private float _server_loadavg = default(float);
     [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"server_loadavg", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(float))]
+    [global::System.ComponentModel.DefaultValue(default(float))]
     public float server_loadavg
     {
       get { return _server_loadavg; }
@@ -2222,7 +2219,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private float _server_tv_broadcast_time = default(float);
     [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"server_tv_broadcast_time", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(float))]
+    [global::System.ComponentModel.DefaultValue(default(float))]
     public float server_tv_broadcast_time
     {
       get { return _server_tv_broadcast_time; }
@@ -2231,7 +2228,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private float _server_game_time = default(float);
     [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"server_game_time", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(float))]
+    [global::System.ComponentModel.DefaultValue(default(float))]
     public float server_game_time
     {
       get { return _server_game_time; }
@@ -2240,7 +2237,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private ulong _server_relay_connected_steam_id = default(ulong);
     [global::ProtoBuf.ProtoMember(12, IsRequired = false, Name=@"server_relay_connected_steam_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong server_relay_connected_steam_id
     {
       get { return _server_relay_connected_steam_id; }
@@ -2249,7 +2246,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _relay_slots_max = default(uint);
     [global::ProtoBuf.ProtoMember(13, IsRequired = false, Name=@"relay_slots_max", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint relay_slots_max
     {
       get { return _relay_slots_max; }
@@ -2258,7 +2255,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private int _relays_connected = default(int);
     [global::ProtoBuf.ProtoMember(14, IsRequired = false, Name=@"relays_connected", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(int))]
+    [global::System.ComponentModel.DefaultValue(default(int))]
     public int relays_connected
     {
       get { return _relays_connected; }
@@ -2267,7 +2264,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private int _relay_clients_connected = default(int);
     [global::ProtoBuf.ProtoMember(15, IsRequired = false, Name=@"relay_clients_connected", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(int))]
+    [global::System.ComponentModel.DefaultValue(default(int))]
     public int relay_clients_connected
     {
       get { return _relay_clients_connected; }
@@ -2276,7 +2273,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private ulong _relayed_game_server_steam_id = default(ulong);
     [global::ProtoBuf.ProtoMember(16, IsRequired = false, Name=@"relayed_game_server_steam_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong relayed_game_server_steam_id
     {
       get { return _relayed_game_server_steam_id; }
@@ -2285,7 +2282,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _parent_relay_count = default(uint);
     [global::ProtoBuf.ProtoMember(17, IsRequired = false, Name=@"parent_relay_count", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint parent_relay_count
     {
       get { return _parent_relay_count; }
@@ -2294,7 +2291,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private ulong _tv_secret_code = default(ulong);
     [global::ProtoBuf.ProtoMember(18, IsRequired = false, Name=@"tv_secret_code", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong tv_secret_code
     {
       get { return _tv_secret_code; }
@@ -2327,7 +2324,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private ulong _steam_id = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steam_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong steam_id
     {
       get { return _steam_id; }
@@ -2336,7 +2333,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _leaver_status = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"leaver_status", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint leaver_status
     {
       get { return _leaver_status; }
@@ -2355,7 +2352,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _result = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"result", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint result
     {
       get { return _result; }
@@ -2384,7 +2381,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private string _search_key = "";
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"search_key", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string search_key
     {
       get { return _search_key; }
@@ -2393,7 +2390,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private bool _tournament_game = default(bool);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"tournament_game", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool tournament_game
     {
       get { return _tournament_game; }
@@ -2402,7 +2399,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _tournament_game_id = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"tournament_game_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint tournament_game_id
     {
       get { return _tournament_game_id; }
@@ -2411,7 +2408,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _tournament_id = default(uint);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"tournament_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint tournament_id
     {
       get { return _tournament_id; }
@@ -2420,7 +2417,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private string _pass_key = "";
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"pass_key", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string pass_key
     {
       get { return _pass_key; }
@@ -2429,7 +2426,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _client_version = default(uint);
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"client_version", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint client_version
     {
       get { return _client_version; }
@@ -2448,7 +2445,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private DOTA_GC_TEAM _team = DOTA_GC_TEAM.DOTA_GC_TEAM_GOOD_GUYS;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"team", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(DOTA_GC_TEAM.DOTA_GC_TEAM_GOOD_GUYS)]
+    [global::System.ComponentModel.DefaultValue(DOTA_GC_TEAM.DOTA_GC_TEAM_GOOD_GUYS)]
     public DOTA_GC_TEAM team
     {
       get { return _team; }
@@ -2457,7 +2454,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _slot = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"slot", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint slot
     {
       get { return _slot; }
@@ -2466,7 +2463,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private DOTABotDifficulty _bot_difficulty = DOTABotDifficulty.BOT_DIFFICULTY_INVALID;
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"bot_difficulty", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(DOTABotDifficulty.BOT_DIFFICULTY_INVALID)]
+    [global::System.ComponentModel.DefaultValue(DOTABotDifficulty.BOT_DIFFICULTY_INVALID)]
     public DOTABotDifficulty bot_difficulty
     {
       get { return _bot_difficulty; }
@@ -2485,7 +2482,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _channel = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"channel", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint channel
     {
       get { return _channel; }
@@ -2504,7 +2501,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _account_id = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint account_id
     {
       get { return _account_id; }
@@ -2533,7 +2530,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _client_version = default(uint);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"client_version", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint client_version
     {
       get { return _client_version; }
@@ -2562,7 +2559,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private ulong _lobby_id = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"lobby_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong lobby_id
     {
       get { return _lobby_id; }
@@ -2571,7 +2568,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private string _game_name = "";
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"game_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string game_name
     {
       get { return _game_name; }
@@ -2587,7 +2584,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _server_region = default(uint);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"server_region", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint server_region
     {
       get { return _server_region; }
@@ -2596,7 +2593,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _game_mode = default(uint);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"game_mode", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint game_mode
     {
       get { return _game_mode; }
@@ -2605,7 +2602,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private DOTA_CM_PICK _cm_pick = DOTA_CM_PICK.DOTA_CM_RANDOM;
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"cm_pick", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(DOTA_CM_PICK.DOTA_CM_RANDOM)]
+    [global::System.ComponentModel.DefaultValue(DOTA_CM_PICK.DOTA_CM_RANDOM)]
     public DOTA_CM_PICK cm_pick
     {
       get { return _cm_pick; }
@@ -2614,7 +2611,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private DOTABotDifficulty _bot_difficulty = DOTABotDifficulty.BOT_DIFFICULTY_MEDIUM;
     [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"bot_difficulty", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(DOTABotDifficulty.BOT_DIFFICULTY_MEDIUM)]
+    [global::System.ComponentModel.DefaultValue(DOTABotDifficulty.BOT_DIFFICULTY_MEDIUM)]
     public DOTABotDifficulty bot_difficulty
     {
       get { return _bot_difficulty; }
@@ -2623,7 +2620,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private bool _allow_cheats = default(bool);
     [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"allow_cheats", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool allow_cheats
     {
       get { return _allow_cheats; }
@@ -2632,7 +2629,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private bool _fill_with_bots = default(bool);
     [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"fill_with_bots", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool fill_with_bots
     {
       get { return _fill_with_bots; }
@@ -2641,7 +2638,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private bool _intro_mode = default(bool);
     [global::ProtoBuf.ProtoMember(12, IsRequired = false, Name=@"intro_mode", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool intro_mode
     {
       get { return _intro_mode; }
@@ -2650,7 +2647,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private bool _allow_spectating = default(bool);
     [global::ProtoBuf.ProtoMember(13, IsRequired = false, Name=@"allow_spectating", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool allow_spectating
     {
       get { return _allow_spectating; }
@@ -2659,7 +2656,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private DOTAGameVersion _game_version = DOTAGameVersion.GAME_VERSION_CURRENT;
     [global::ProtoBuf.ProtoMember(14, IsRequired = false, Name=@"game_version", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(DOTAGameVersion.GAME_VERSION_CURRENT)]
+    [global::System.ComponentModel.DefaultValue(DOTAGameVersion.GAME_VERSION_CURRENT)]
     public DOTAGameVersion game_version
     {
       get { return _game_version; }
@@ -2668,7 +2665,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private string _pass_key = "";
     [global::ProtoBuf.ProtoMember(15, IsRequired = false, Name=@"pass_key", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string pass_key
     {
       get { return _pass_key; }
@@ -2677,7 +2674,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _leagueid = default(uint);
     [global::ProtoBuf.ProtoMember(16, IsRequired = false, Name=@"leagueid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint leagueid
     {
       get { return _leagueid; }
@@ -2686,7 +2683,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _penalty_level_radiant = default(uint);
     [global::ProtoBuf.ProtoMember(17, IsRequired = false, Name=@"penalty_level_radiant", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint penalty_level_radiant
     {
       get { return _penalty_level_radiant; }
@@ -2695,7 +2692,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _penalty_level_dire = default(uint);
     [global::ProtoBuf.ProtoMember(18, IsRequired = false, Name=@"penalty_level_dire", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint penalty_level_dire
     {
       get { return _penalty_level_dire; }
@@ -2704,7 +2701,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _load_game_id = default(uint);
     [global::ProtoBuf.ProtoMember(19, IsRequired = false, Name=@"load_game_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint load_game_id
     {
       get { return _load_game_id; }
@@ -2713,7 +2710,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _series_type = default(uint);
     [global::ProtoBuf.ProtoMember(20, IsRequired = false, Name=@"series_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint series_type
     {
       get { return _series_type; }
@@ -2722,7 +2719,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _radiant_series_wins = default(uint);
     [global::ProtoBuf.ProtoMember(21, IsRequired = false, Name=@"radiant_series_wins", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint radiant_series_wins
     {
       get { return _radiant_series_wins; }
@@ -2731,7 +2728,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _dire_series_wins = default(uint);
     [global::ProtoBuf.ProtoMember(22, IsRequired = false, Name=@"dire_series_wins", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint dire_series_wins
     {
       get { return _dire_series_wins; }
@@ -2750,7 +2747,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private bool _tournament_games = default(bool);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"tournament_games", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool tournament_games
     {
       get { return _tournament_games; }
@@ -2759,7 +2756,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private string _pass_key = "";
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"pass_key", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string pass_key
     {
       get { return _pass_key; }
@@ -2778,7 +2775,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private ulong _id = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong id
     {
       get { return _id; }
@@ -2787,7 +2784,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _tournament_id = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"tournament_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint tournament_id
     {
       get { return _tournament_id; }
@@ -2796,7 +2793,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _tournament_game_id = default(uint);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"tournament_game_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint tournament_game_id
     {
       get { return _tournament_game_id; }
@@ -2812,7 +2809,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private bool _requires_pass_key = default(bool);
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"requires_pass_key", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool requires_pass_key
     {
       get { return _requires_pass_key; }
@@ -2821,7 +2818,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _leader_account_id = default(uint);
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"leader_account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint leader_account_id
     {
       get { return _leader_account_id; }
@@ -2835,7 +2832,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _account_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint account_id
     {
       get { return _account_id; }
@@ -2844,7 +2841,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private string _player_name = "";
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"player_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string player_name
     {
       get { return _player_name; }
@@ -2868,7 +2865,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private bool _tournament_games = default(bool);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"tournament_games", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool tournament_games
     {
       get { return _tournament_games; }
@@ -2894,7 +2891,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private ulong _lobby_id = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"lobby_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong lobby_id
     {
       get { return _lobby_id; }
@@ -2903,7 +2900,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _client_version = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"client_version", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint client_version
     {
       get { return _client_version; }
@@ -2912,7 +2909,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private string _pass_key = "";
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"pass_key", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string pass_key
     {
       get { return _pass_key; }
@@ -2931,7 +2928,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private DOTAJoinLobbyResult _result = DOTAJoinLobbyResult.DOTA_JOIN_RESULT_SUCCESS;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"result", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(DOTAJoinLobbyResult.DOTA_JOIN_RESULT_SUCCESS)]
+    [global::System.ComponentModel.DefaultValue(DOTAJoinLobbyResult.DOTA_JOIN_RESULT_SUCCESS)]
     public DOTAJoinLobbyResult result
     {
       get { return _result; }
@@ -2984,7 +2981,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _avatar = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"avatar", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint avatar
     {
       get { return _avatar; }
@@ -3013,7 +3010,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private ulong _submitter_id = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"submitter_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong submitter_id
     {
       get { return _submitter_id; }
@@ -3022,7 +3019,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _event_id = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"event_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint event_id
     {
       get { return _event_id; }
@@ -3031,7 +3028,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private ulong _time_submitted = default(ulong);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"time_submitted", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong time_submitted
     {
       get { return _time_submitted; }
@@ -3040,7 +3037,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _event_type = default(uint);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"event_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint event_type
     {
       get { return _event_type; }
@@ -3118,7 +3115,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _match_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"match_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint match_id
     {
       get { return _match_id; }
@@ -3127,7 +3124,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _duration = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"duration", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint duration
     {
       get { return _duration; }
@@ -3136,7 +3133,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private bool _good_guys_win = default(bool);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"good_guys_win", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool good_guys_win
     {
       get { return _good_guys_win; }
@@ -3145,7 +3142,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _date = default(uint);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"date", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint date
     {
       get { return _date; }
@@ -3168,7 +3165,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private string _computer_name = "";
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"computer_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string computer_name
     {
       get { return _computer_name; }
@@ -3191,7 +3188,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _cluster = default(uint);
     [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"cluster", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint cluster
     {
       get { return _cluster; }
@@ -3200,7 +3197,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private string _server_addr = "";
     [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"server_addr", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string server_addr
     {
       get { return _server_addr; }
@@ -3209,7 +3206,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _first_blood_time = default(uint);
     [global::ProtoBuf.ProtoMember(12, IsRequired = false, Name=@"first_blood_time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint first_blood_time
     {
       get { return _first_blood_time; }
@@ -3218,7 +3215,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private float _game_balance = default(float);
     [global::ProtoBuf.ProtoMember(13, IsRequired = false, Name=@"game_balance", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(float))]
+    [global::System.ComponentModel.DefaultValue(default(float))]
     public float game_balance
     {
       get { return _game_balance; }
@@ -3244,7 +3241,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private ulong _account_id = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong account_id
     {
       get { return _account_id; }
@@ -3253,7 +3250,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _fake_client_id = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"fake_client_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint fake_client_id
     {
       get { return _fake_client_id; }
@@ -3262,7 +3259,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _hero_id = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"hero_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint hero_id
     {
       get { return _hero_id; }
@@ -3278,7 +3275,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _gold = default(uint);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"gold", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint gold
     {
       get { return _gold; }
@@ -3287,7 +3284,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _kills = default(uint);
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"kills", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint kills
     {
       get { return _kills; }
@@ -3296,7 +3293,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _deaths = default(uint);
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"deaths", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint deaths
     {
       get { return _deaths; }
@@ -3305,7 +3302,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _assists = default(uint);
     [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"assists", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint assists
     {
       get { return _assists; }
@@ -3314,7 +3311,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _leaver_status = default(uint);
     [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"leaver_status", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint leaver_status
     {
       get { return _leaver_status; }
@@ -3323,7 +3320,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _last_hits = default(uint);
     [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"last_hits", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint last_hits
     {
       get { return _last_hits; }
@@ -3332,7 +3329,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _denies = default(uint);
     [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"denies", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint denies
     {
       get { return _denies; }
@@ -3341,7 +3338,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _gold_per_min = default(uint);
     [global::ProtoBuf.ProtoMember(12, IsRequired = false, Name=@"gold_per_min", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint gold_per_min
     {
       get { return _gold_per_min; }
@@ -3350,7 +3347,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _xp_per_minute = default(uint);
     [global::ProtoBuf.ProtoMember(13, IsRequired = false, Name=@"xp_per_minute", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint xp_per_minute
     {
       get { return _xp_per_minute; }
@@ -3359,7 +3356,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _gold_spent = default(uint);
     [global::ProtoBuf.ProtoMember(14, IsRequired = false, Name=@"gold_spent", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint gold_spent
     {
       get { return _gold_spent; }
@@ -3368,7 +3365,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _level = default(uint);
     [global::ProtoBuf.ProtoMember(15, IsRequired = false, Name=@"level", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint level
     {
       get { return _level; }
@@ -3377,7 +3374,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _hero_damage = default(uint);
     [global::ProtoBuf.ProtoMember(16, IsRequired = false, Name=@"hero_damage", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint hero_damage
     {
       get { return _hero_damage; }
@@ -3386,7 +3383,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _tower_damage = default(uint);
     [global::ProtoBuf.ProtoMember(17, IsRequired = false, Name=@"tower_damage", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint tower_damage
     {
       get { return _tower_damage; }
@@ -3395,7 +3392,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _hero_healing = default(uint);
     [global::ProtoBuf.ProtoMember(18, IsRequired = false, Name=@"hero_healing", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint hero_healing
     {
       get { return _hero_healing; }
@@ -3404,7 +3401,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _time_last_seen = default(uint);
     [global::ProtoBuf.ProtoMember(19, IsRequired = false, Name=@"time_last_seen", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint time_last_seen
     {
       get { return _time_last_seen; }
@@ -3413,7 +3410,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _support_ability_value = default(uint);
     [global::ProtoBuf.ProtoMember(20, IsRequired = false, Name=@"support_ability_value", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint support_ability_value
     {
       get { return _support_ability_value; }
@@ -3422,7 +3419,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private ulong _party_id = default(ulong);
     [global::ProtoBuf.ProtoMember(21, IsRequired = false, Name=@"party_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong party_id
     {
       get { return _party_id; }
@@ -3431,7 +3428,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private float _scaled_kills = default(float);
     [global::ProtoBuf.ProtoMember(24, IsRequired = false, Name=@"scaled_kills", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(float))]
+    [global::System.ComponentModel.DefaultValue(default(float))]
     public float scaled_kills
     {
       get { return _scaled_kills; }
@@ -3440,7 +3437,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private float _scaled_deaths = default(float);
     [global::ProtoBuf.ProtoMember(25, IsRequired = false, Name=@"scaled_deaths", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(float))]
+    [global::System.ComponentModel.DefaultValue(default(float))]
     public float scaled_deaths
     {
       get { return _scaled_deaths; }
@@ -3449,7 +3446,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private float _scaled_assists = default(float);
     [global::ProtoBuf.ProtoMember(26, IsRequired = false, Name=@"scaled_assists", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(float))]
+    [global::System.ComponentModel.DefaultValue(default(float))]
     public float scaled_assists
     {
       get { return _scaled_assists; }
@@ -3458,7 +3455,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _claimed_farm_gold = default(uint);
     [global::ProtoBuf.ProtoMember(27, IsRequired = false, Name=@"claimed_farm_gold", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint claimed_farm_gold
     {
       get { return _claimed_farm_gold; }
@@ -3467,7 +3464,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _support_gold = default(uint);
     [global::ProtoBuf.ProtoMember(28, IsRequired = false, Name=@"support_gold", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint support_gold
     {
       get { return _support_gold; }
@@ -3476,7 +3473,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _claimed_denies = default(uint);
     [global::ProtoBuf.ProtoMember(29, IsRequired = false, Name=@"claimed_denies", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint claimed_denies
     {
       get { return _claimed_denies; }
@@ -3485,7 +3482,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _claimed_misses = default(uint);
     [global::ProtoBuf.ProtoMember(30, IsRequired = false, Name=@"claimed_misses", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint claimed_misses
     {
       get { return _claimed_misses; }
@@ -3494,7 +3491,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _misses = default(uint);
     [global::ProtoBuf.ProtoMember(31, IsRequired = false, Name=@"misses", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint misses
     {
       get { return _misses; }
@@ -3523,7 +3520,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _match_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"match_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint match_id
     {
       get { return _match_id; }
@@ -3532,7 +3529,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _replay_salt = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"replay_salt", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint replay_salt
     {
       get { return _replay_salt; }
@@ -3555,7 +3552,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _leagueid = default(uint);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"leagueid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint leagueid
     {
       get { return _leagueid; }
@@ -3574,7 +3571,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _match_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"match_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint match_id
     {
       get { return _match_id; }
@@ -3595,7 +3592,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _account_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint account_id
     {
       get { return _account_id; }
@@ -3604,7 +3601,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _team_only = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"team_only", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint team_only
     {
       get { return _team_only; }
@@ -3613,7 +3610,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private string _text = "";
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"text", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string text
     {
       get { return _text; }
@@ -3622,7 +3619,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _game_time = default(uint);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"game_time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint game_time
     {
       get { return _game_time; }
@@ -3646,7 +3643,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private string _search_key = "";
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"search_key", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string search_key
     {
       get { return _search_key; }
@@ -3655,7 +3652,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _tutorial_lesson = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"tutorial_lesson", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint tutorial_lesson
     {
       get { return _tutorial_lesson; }
@@ -3664,7 +3661,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _client_version = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"client_version", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint client_version
     {
       get { return _client_version; }
@@ -3683,7 +3680,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _initial_skill = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"initial_skill", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint initial_skill
     {
       get { return _initial_skill; }
@@ -3712,7 +3709,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private bool _start = default(bool);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"start", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool start
     {
       get { return _start; }
@@ -3745,7 +3742,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private ulong _gid = default(ulong);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"gid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong gid
     {
       get { return _gid; }
@@ -3759,7 +3756,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _team_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"team_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint team_id
     {
       get { return _team_id; }
@@ -3768,7 +3765,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private string _team_name = "";
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"team_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string team_name
     {
       get { return _team_name; }
@@ -3777,7 +3774,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private string _team_abbrev = "";
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"team_abbrev", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string team_abbrev
     {
       get { return _team_abbrev; }
@@ -3793,7 +3790,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _seed = default(uint);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"seed", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint seed
     {
       get { return _seed; }
@@ -3802,7 +3799,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private ulong _team_logo = default(ulong);
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"team_logo", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong team_logo
     {
       get { return _team_logo; }
@@ -3821,7 +3818,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _game_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"game_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint game_id
     {
       get { return _game_id; }
@@ -3830,7 +3827,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _good_team_id = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"good_team_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint good_team_id
     {
       get { return _good_team_id; }
@@ -3839,7 +3836,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _bad_team_id = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"bad_team_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint bad_team_id
     {
       get { return _bad_team_id; }
@@ -3848,7 +3845,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private ulong _lobby_id = default(ulong);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"lobby_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong lobby_id
     {
       get { return _lobby_id; }
@@ -3857,7 +3854,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _match_id = default(uint);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"match_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint match_id
     {
       get { return _match_id; }
@@ -3866,7 +3863,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private string _game_name = "";
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"game_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string game_name
     {
       get { return _game_name; }
@@ -3875,7 +3872,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private bool _live_stream = default(bool);
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"live_stream", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool live_stream
     {
       get { return _live_stream; }
@@ -3884,7 +3881,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private string _message = "";
     [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"message", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string message
     {
       get { return _message; }
@@ -3893,7 +3890,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private bool _results_final = default(bool);
     [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"results_final", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool results_final
     {
       get { return _results_final; }
@@ -3914,7 +3911,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _provider_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"provider_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint provider_id
     {
       get { return _provider_id; }
@@ -3923,7 +3920,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _stream_id = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"stream_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint stream_id
     {
       get { return _stream_id; }
@@ -3932,7 +3929,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private string _url = "";
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"url", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string url
     {
       get { return _url; }
@@ -3941,7 +3938,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private string _description = "";
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"description", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string description
     {
       get { return _description; }
@@ -3970,7 +3967,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _tournament_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"tournament_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint tournament_id
     {
       get { return _tournament_id; }
@@ -3979,7 +3976,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private ulong _client_tournament_gid = default(ulong);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"client_tournament_gid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong client_tournament_gid
     {
       get { return _client_tournament_gid; }
@@ -3998,7 +3995,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _result = (uint)2;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"result", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue((uint)2)]
+    [global::System.ComponentModel.DefaultValue((uint)2)]
     public uint result
     {
       get { return _result; }
@@ -4007,7 +4004,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private CMsgDOTATournament _tournament = null;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"tournament", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(null)]
+    [global::System.ComponentModel.DefaultValue(null)]
     public CMsgDOTATournament tournament
     {
       get { return _tournament; }
@@ -4026,7 +4023,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _tournament_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"tournament_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint tournament_id
     {
       get { return _tournament_id; }
@@ -4035,7 +4032,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _game_id = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"game_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint game_id
     {
       get { return _game_id; }
@@ -4054,7 +4051,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _season = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"season", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint season
     {
       get { return _season; }
@@ -4063,7 +4060,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private bool _good_guys_win = default(bool);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"good_guys_win", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool good_guys_win
     {
       get { return _good_guys_win; }
@@ -4072,7 +4069,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _duration = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"duration", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint duration
     {
       get { return _duration; }
@@ -4081,7 +4078,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _startTime = default(uint);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"startTime", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint startTime
     {
       get { return _startTime; }
@@ -4097,7 +4094,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _match_id = default(uint);
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"match_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint match_id
     {
       get { return _match_id; }
@@ -4120,7 +4117,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _cluster = default(uint);
     [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"cluster", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint cluster
     {
       get { return _cluster; }
@@ -4129,7 +4126,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _first_blood_time = default(uint);
     [global::ProtoBuf.ProtoMember(12, IsRequired = false, Name=@"first_blood_time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint first_blood_time
     {
       get { return _first_blood_time; }
@@ -4138,7 +4135,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _replay_salt = default(uint);
     [global::ProtoBuf.ProtoMember(13, IsRequired = false, Name=@"replay_salt", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint replay_salt
     {
       get { return _replay_salt; }
@@ -4147,7 +4144,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _server_ip = default(uint);
     [global::ProtoBuf.ProtoMember(14, IsRequired = false, Name=@"server_ip", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint server_ip
     {
       get { return _server_ip; }
@@ -4156,7 +4153,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _server_port = default(uint);
     [global::ProtoBuf.ProtoMember(15, IsRequired = false, Name=@"server_port", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint server_port
     {
       get { return _server_port; }
@@ -4165,7 +4162,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _lobby_type = default(uint);
     [global::ProtoBuf.ProtoMember(16, IsRequired = false, Name=@"lobby_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint lobby_type
     {
       get { return _lobby_type; }
@@ -4174,7 +4171,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _human_players = default(uint);
     [global::ProtoBuf.ProtoMember(17, IsRequired = false, Name=@"human_players", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint human_players
     {
       get { return _human_players; }
@@ -4183,7 +4180,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _average_skill = default(uint);
     [global::ProtoBuf.ProtoMember(18, IsRequired = false, Name=@"average_skill", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint average_skill
     {
       get { return _average_skill; }
@@ -4192,7 +4189,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private float _game_balance = default(float);
     [global::ProtoBuf.ProtoMember(19, IsRequired = false, Name=@"game_balance", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(float))]
+    [global::System.ComponentModel.DefaultValue(default(float))]
     public float game_balance
     {
       get { return _game_balance; }
@@ -4201,7 +4198,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _radiant_team_id = default(uint);
     [global::ProtoBuf.ProtoMember(20, IsRequired = false, Name=@"radiant_team_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint radiant_team_id
     {
       get { return _radiant_team_id; }
@@ -4210,7 +4207,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _dire_team_id = default(uint);
     [global::ProtoBuf.ProtoMember(21, IsRequired = false, Name=@"dire_team_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint dire_team_id
     {
       get { return _dire_team_id; }
@@ -4219,7 +4216,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _leagueid = default(uint);
     [global::ProtoBuf.ProtoMember(22, IsRequired = false, Name=@"leagueid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint leagueid
     {
       get { return _leagueid; }
@@ -4228,7 +4225,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private string _radiant_name = "";
     [global::ProtoBuf.ProtoMember(23, IsRequired = false, Name=@"radiant_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string radiant_name
     {
       get { return _radiant_name; }
@@ -4237,7 +4234,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private string _dire_name = "";
     [global::ProtoBuf.ProtoMember(24, IsRequired = false, Name=@"dire_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string dire_name
     {
       get { return _dire_name; }
@@ -4246,7 +4243,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private ulong _radiant_logo = default(ulong);
     [global::ProtoBuf.ProtoMember(25, IsRequired = false, Name=@"radiant_logo", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong radiant_logo
     {
       get { return _radiant_logo; }
@@ -4255,7 +4252,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private ulong _dire_logo = default(ulong);
     [global::ProtoBuf.ProtoMember(26, IsRequired = false, Name=@"dire_logo", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong dire_logo
     {
       get { return _dire_logo; }
@@ -4264,7 +4261,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _radiant_team_complete = default(uint);
     [global::ProtoBuf.ProtoMember(27, IsRequired = false, Name=@"radiant_team_complete", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint radiant_team_complete
     {
       get { return _radiant_team_complete; }
@@ -4273,7 +4270,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _dire_team_complete = default(uint);
     [global::ProtoBuf.ProtoMember(28, IsRequired = false, Name=@"dire_team_complete", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint dire_team_complete
     {
       get { return _dire_team_complete; }
@@ -4282,7 +4279,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _positive_votes = default(uint);
     [global::ProtoBuf.ProtoMember(29, IsRequired = false, Name=@"positive_votes", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint positive_votes
     {
       get { return _positive_votes; }
@@ -4291,11 +4288,20 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _negative_votes = default(uint);
     [global::ProtoBuf.ProtoMember(30, IsRequired = false, Name=@"negative_votes", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint negative_votes
     {
       get { return _negative_votes; }
       set { _negative_votes = value; }
+    }
+
+    private DOTA_GameMode _game_mode = DOTA_GameMode.DOTA_GAMEMODE_NONE;
+    [global::ProtoBuf.ProtoMember(31, IsRequired = false, Name=@"game_mode", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(DOTA_GameMode.DOTA_GAMEMODE_NONE)]
+    public DOTA_GameMode game_mode
+    {
+      get { return _game_mode; }
+      set { _game_mode = value; }
     }
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Player")]
   public partial class Player : global::ProtoBuf.IExtensible
@@ -4305,7 +4311,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _account_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint account_id
     {
       get { return _account_id; }
@@ -4314,7 +4320,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _player_slot = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"player_slot", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint player_slot
     {
       get { return _player_slot; }
@@ -4323,7 +4329,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _hero_id = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"hero_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint hero_id
     {
       get { return _hero_id; }
@@ -4332,7 +4338,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _item_0 = default(uint);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"item_0", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint item_0
     {
       get { return _item_0; }
@@ -4341,7 +4347,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _item_1 = default(uint);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"item_1", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint item_1
     {
       get { return _item_1; }
@@ -4350,7 +4356,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _item_2 = default(uint);
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"item_2", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint item_2
     {
       get { return _item_2; }
@@ -4359,7 +4365,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _item_3 = default(uint);
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"item_3", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint item_3
     {
       get { return _item_3; }
@@ -4368,7 +4374,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _item_4 = default(uint);
     [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"item_4", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint item_4
     {
       get { return _item_4; }
@@ -4377,7 +4383,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _item_5 = default(uint);
     [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"item_5", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint item_5
     {
       get { return _item_5; }
@@ -4386,7 +4392,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private float _expected_team_contribution = default(float);
     [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"expected_team_contribution", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(float))]
+    [global::System.ComponentModel.DefaultValue(default(float))]
     public float expected_team_contribution
     {
       get { return _expected_team_contribution; }
@@ -4395,7 +4401,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private float _scaled_metric = default(float);
     [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"scaled_metric", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(float))]
+    [global::System.ComponentModel.DefaultValue(default(float))]
     public float scaled_metric
     {
       get { return _scaled_metric; }
@@ -4404,7 +4410,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _previous_rank = default(uint);
     [global::ProtoBuf.ProtoMember(12, IsRequired = false, Name=@"previous_rank", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint previous_rank
     {
       get { return _previous_rank; }
@@ -4413,7 +4419,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _rank_change = default(uint);
     [global::ProtoBuf.ProtoMember(13, IsRequired = false, Name=@"rank_change", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint rank_change
     {
       get { return _rank_change; }
@@ -4422,7 +4428,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _kills = default(uint);
     [global::ProtoBuf.ProtoMember(14, IsRequired = false, Name=@"kills", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint kills
     {
       get { return _kills; }
@@ -4431,7 +4437,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _deaths = default(uint);
     [global::ProtoBuf.ProtoMember(15, IsRequired = false, Name=@"deaths", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint deaths
     {
       get { return _deaths; }
@@ -4440,7 +4446,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _assists = default(uint);
     [global::ProtoBuf.ProtoMember(16, IsRequired = false, Name=@"assists", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint assists
     {
       get { return _assists; }
@@ -4449,7 +4455,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _leaver_status = default(uint);
     [global::ProtoBuf.ProtoMember(17, IsRequired = false, Name=@"leaver_status", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint leaver_status
     {
       get { return _leaver_status; }
@@ -4458,7 +4464,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _gold = default(uint);
     [global::ProtoBuf.ProtoMember(18, IsRequired = false, Name=@"gold", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint gold
     {
       get { return _gold; }
@@ -4467,7 +4473,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _last_hits = default(uint);
     [global::ProtoBuf.ProtoMember(19, IsRequired = false, Name=@"last_hits", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint last_hits
     {
       get { return _last_hits; }
@@ -4476,7 +4482,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _denies = default(uint);
     [global::ProtoBuf.ProtoMember(20, IsRequired = false, Name=@"denies", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint denies
     {
       get { return _denies; }
@@ -4485,7 +4491,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _gold_per_min = default(uint);
     [global::ProtoBuf.ProtoMember(21, IsRequired = false, Name=@"gold_per_min", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint gold_per_min
     {
       get { return _gold_per_min; }
@@ -4494,7 +4500,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _XP_per_min = default(uint);
     [global::ProtoBuf.ProtoMember(22, IsRequired = false, Name=@"XP_per_min", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint XP_per_min
     {
       get { return _XP_per_min; }
@@ -4503,7 +4509,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _gold_spent = default(uint);
     [global::ProtoBuf.ProtoMember(23, IsRequired = false, Name=@"gold_spent", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint gold_spent
     {
       get { return _gold_spent; }
@@ -4512,7 +4518,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _hero_damage = default(uint);
     [global::ProtoBuf.ProtoMember(24, IsRequired = false, Name=@"hero_damage", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint hero_damage
     {
       get { return _hero_damage; }
@@ -4521,7 +4527,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _tower_damage = default(uint);
     [global::ProtoBuf.ProtoMember(25, IsRequired = false, Name=@"tower_damage", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint tower_damage
     {
       get { return _tower_damage; }
@@ -4530,7 +4536,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _hero_healing = default(uint);
     [global::ProtoBuf.ProtoMember(26, IsRequired = false, Name=@"hero_healing", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint hero_healing
     {
       get { return _hero_healing; }
@@ -4539,7 +4545,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _level = default(uint);
     [global::ProtoBuf.ProtoMember(27, IsRequired = false, Name=@"level", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint level
     {
       get { return _level; }
@@ -4548,7 +4554,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _time_last_seen = default(uint);
     [global::ProtoBuf.ProtoMember(28, IsRequired = false, Name=@"time_last_seen", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint time_last_seen
     {
       get { return _time_last_seen; }
@@ -4557,7 +4563,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private string _player_name = "";
     [global::ProtoBuf.ProtoMember(29, IsRequired = false, Name=@"player_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string player_name
     {
       get { return _player_name; }
@@ -4566,7 +4572,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _support_ability_value = default(uint);
     [global::ProtoBuf.ProtoMember(30, IsRequired = false, Name=@"support_ability_value", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint support_ability_value
     {
       get { return _support_ability_value; }
@@ -4575,7 +4581,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private bool _feeding_detected = default(bool);
     [global::ProtoBuf.ProtoMember(32, IsRequired = false, Name=@"feeding_detected", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool feeding_detected
     {
       get { return _feeding_detected; }
@@ -4584,7 +4590,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _search_rank = default(uint);
     [global::ProtoBuf.ProtoMember(34, IsRequired = false, Name=@"search_rank", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint search_rank
     {
       get { return _search_rank; }
@@ -4593,7 +4599,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _search_rank_uncertainty = default(uint);
     [global::ProtoBuf.ProtoMember(35, IsRequired = false, Name=@"search_rank_uncertainty", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint search_rank_uncertainty
     {
       get { return _search_rank_uncertainty; }
@@ -4602,7 +4608,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _rank_uncertainty_change = default(uint);
     [global::ProtoBuf.ProtoMember(36, IsRequired = false, Name=@"rank_uncertainty_change", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint rank_uncertainty_change
     {
       get { return _rank_uncertainty_change; }
@@ -4611,7 +4617,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _hero_play_count = default(uint);
     [global::ProtoBuf.ProtoMember(37, IsRequired = false, Name=@"hero_play_count", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint hero_play_count
     {
       get { return _hero_play_count; }
@@ -4620,7 +4626,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private ulong _party_id = default(ulong);
     [global::ProtoBuf.ProtoMember(38, IsRequired = false, Name=@"party_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong party_id
     {
       get { return _party_id; }
@@ -4629,7 +4635,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private float _scaled_kills = default(float);
     [global::ProtoBuf.ProtoMember(39, IsRequired = false, Name=@"scaled_kills", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(float))]
+    [global::System.ComponentModel.DefaultValue(default(float))]
     public float scaled_kills
     {
       get { return _scaled_kills; }
@@ -4638,7 +4644,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private float _scaled_deaths = default(float);
     [global::ProtoBuf.ProtoMember(40, IsRequired = false, Name=@"scaled_deaths", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(float))]
+    [global::System.ComponentModel.DefaultValue(default(float))]
     public float scaled_deaths
     {
       get { return _scaled_deaths; }
@@ -4647,7 +4653,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private float _scaled_assists = default(float);
     [global::ProtoBuf.ProtoMember(41, IsRequired = false, Name=@"scaled_assists", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(float))]
+    [global::System.ComponentModel.DefaultValue(default(float))]
     public float scaled_assists
     {
       get { return _scaled_assists; }
@@ -4656,7 +4662,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _claimed_farm_gold = default(uint);
     [global::ProtoBuf.ProtoMember(42, IsRequired = false, Name=@"claimed_farm_gold", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint claimed_farm_gold
     {
       get { return _claimed_farm_gold; }
@@ -4665,7 +4671,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _support_gold = default(uint);
     [global::ProtoBuf.ProtoMember(43, IsRequired = false, Name=@"support_gold", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint support_gold
     {
       get { return _support_gold; }
@@ -4674,7 +4680,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _claimed_denies = default(uint);
     [global::ProtoBuf.ProtoMember(44, IsRequired = false, Name=@"claimed_denies", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint claimed_denies
     {
       get { return _claimed_denies; }
@@ -4683,7 +4689,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _claimed_misses = default(uint);
     [global::ProtoBuf.ProtoMember(45, IsRequired = false, Name=@"claimed_misses", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint claimed_misses
     {
       get { return _claimed_misses; }
@@ -4692,7 +4698,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _misses = default(uint);
     [global::ProtoBuf.ProtoMember(46, IsRequired = false, Name=@"misses", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint misses
     {
       get { return _misses; }
@@ -4740,7 +4746,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _newest_match_id_at_last_query = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"newest_match_id_at_last_query", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint newest_match_id_at_last_query
     {
       get { return _newest_match_id_at_last_query; }
@@ -4749,7 +4755,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _time_last_query = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"time_last_query", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint time_last_query
     {
       get { return _time_last_query; }
@@ -4768,7 +4774,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private string _player_name = "";
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"player_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string player_name
     {
       get { return _player_name; }
@@ -4777,7 +4783,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _hero_id = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"hero_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint hero_id
     {
       get { return _hero_id; }
@@ -4786,7 +4792,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _game_mode = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"game_mode", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint game_mode
     {
       get { return _game_mode; }
@@ -4795,7 +4801,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _date_min = default(uint);
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"date_min", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint date_min
     {
       get { return _date_min; }
@@ -4804,7 +4810,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _date_max = default(uint);
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"date_max", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint date_max
     {
       get { return _date_max; }
@@ -4813,7 +4819,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private bool _friends_only = default(bool);
     [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"friends_only", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool friends_only
     {
       get { return _friends_only; }
@@ -4822,7 +4828,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private bool _recently_played_only = default(bool);
     [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"recently_played_only", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool recently_played_only
     {
       get { return _recently_played_only; }
@@ -4831,7 +4837,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _matches_requested = default(uint);
     [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"matches_requested", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint matches_requested
     {
       get { return _matches_requested; }
@@ -4840,7 +4846,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _start_at_match_id = default(uint);
     [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"start_at_match_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint start_at_match_id
     {
       get { return _start_at_match_id; }
@@ -4849,7 +4855,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _min_players = default(uint);
     [global::ProtoBuf.ProtoMember(12, IsRequired = false, Name=@"min_players", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint min_players
     {
       get { return _min_players; }
@@ -4858,7 +4864,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _request_id = default(uint);
     [global::ProtoBuf.ProtoMember(13, IsRequired = false, Name=@"request_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint request_id
     {
       get { return _request_id; }
@@ -4867,7 +4873,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private bool _tournament_games_only = default(bool);
     [global::ProtoBuf.ProtoMember(14, IsRequired = false, Name=@"tournament_games_only", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool tournament_games_only
     {
       get { return _tournament_games_only; }
@@ -4876,7 +4882,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _account_id = default(uint);
     [global::ProtoBuf.ProtoMember(15, IsRequired = false, Name=@"account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint account_id
     {
       get { return _account_id; }
@@ -4885,7 +4891,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _league_id = default(uint);
     [global::ProtoBuf.ProtoMember(16, IsRequired = false, Name=@"league_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint league_id
     {
       get { return _league_id; }
@@ -4894,7 +4900,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private CMsgDOTARequestMatches.SkillLevel _skill = CMsgDOTARequestMatches.SkillLevel.Any;
     [global::ProtoBuf.ProtoMember(17, IsRequired = false, Name=@"skill", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(CMsgDOTARequestMatches.SkillLevel.Any)]
+    [global::System.ComponentModel.DefaultValue(CMsgDOTARequestMatches.SkillLevel.Any)]
     public CMsgDOTARequestMatches.SkillLevel skill
     {
       get { return _skill; }
@@ -4937,7 +4943,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _request_id = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"request_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint request_id
     {
       get { return _request_id; }
@@ -4946,7 +4952,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _total_results = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"total_results", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint total_results
     {
       get { return _total_results; }
@@ -4955,7 +4961,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _results_remaining = default(uint);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"results_remaining", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint results_remaining
     {
       get { return _results_remaining; }
@@ -4974,7 +4980,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private CMsgDOTAPopup.PopupID _id = CMsgDOTAPopup.PopupID.KICKED_FROM_LOBBY;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(CMsgDOTAPopup.PopupID.KICKED_FROM_LOBBY)]
+    [global::System.ComponentModel.DefaultValue(CMsgDOTAPopup.PopupID.KICKED_FROM_LOBBY)]
     public CMsgDOTAPopup.PopupID id
     {
       get { return _id; }
@@ -4983,7 +4989,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private string _custom_text = "";
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"custom_text", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string custom_text
     {
       get { return _custom_text; }
@@ -5052,7 +5058,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _account_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint account_id
     {
       get { return _account_id; }
@@ -5061,7 +5067,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _team_id = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"team_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint team_id
     {
       get { return _team_id; }
@@ -5080,7 +5086,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _account_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint account_id
     {
       get { return _account_id; }
@@ -5089,7 +5095,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _team_id = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"team_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint team_id
     {
       get { return _team_id; }
@@ -5098,7 +5104,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _permissions = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"permissions", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint permissions
     {
       get { return _permissions; }
@@ -5107,7 +5113,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _time_joined = default(uint);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"time_joined", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint time_joined
     {
       get { return _time_joined; }
@@ -5133,7 +5139,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _team_id = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"team_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint team_id
     {
       get { return _team_id; }
@@ -5142,7 +5148,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private string _name = "";
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string name
     {
       get { return _name; }
@@ -5151,7 +5157,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private string _tag = "";
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"tag", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string tag
     {
       get { return _tag; }
@@ -5160,7 +5166,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _admin_id = default(uint);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"admin_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint admin_id
     {
       get { return _admin_id; }
@@ -5169,7 +5175,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _time_created = default(uint);
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"time_created", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint time_created
     {
       get { return _time_created; }
@@ -5178,7 +5184,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private bool _disbanded = default(bool);
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"disbanded", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool disbanded
     {
       get { return _disbanded; }
@@ -5187,7 +5193,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _wins = default(uint);
     [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"wins", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint wins
     {
       get { return _wins; }
@@ -5196,7 +5202,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _losses = default(uint);
     [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"losses", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint losses
     {
       get { return _losses; }
@@ -5205,7 +5211,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _rank = default(uint);
     [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"rank", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint rank
     {
       get { return _rank; }
@@ -5214,7 +5220,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private ulong _logo = default(ulong);
     [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"logo", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong logo
     {
       get { return _logo; }
@@ -5223,7 +5229,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private ulong _base_logo = default(ulong);
     [global::ProtoBuf.ProtoMember(12, IsRequired = false, Name=@"base_logo", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong base_logo
     {
       get { return _base_logo; }
@@ -5232,12 +5238,55 @@ namespace SteamKit2.GC.Dota.Internal
 
     private ulong _banner_logo = default(ulong);
     [global::ProtoBuf.ProtoMember(13, IsRequired = false, Name=@"banner_logo", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong banner_logo
     {
       get { return _banner_logo; }
       set { _banner_logo = value; }
     }
+
+    private ulong _sponsor_logo = default(ulong);
+    [global::ProtoBuf.ProtoMember(14, IsRequired = false, Name=@"sponsor_logo", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong sponsor_logo
+    {
+      get { return _sponsor_logo; }
+      set { _sponsor_logo = value; }
+    }
+
+    private string _country_code = "";
+    [global::ProtoBuf.ProtoMember(15, IsRequired = false, Name=@"country_code", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string country_code
+    {
+      get { return _country_code; }
+      set { _country_code = value; }
+    }
+
+    private string _url = "";
+    [global::ProtoBuf.ProtoMember(16, IsRequired = false, Name=@"url", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string url
+    {
+      get { return _url; }
+      set { _url = value; }
+    }
+
+    private uint _fullgamesplayed = default(uint);
+    [global::ProtoBuf.ProtoMember(17, IsRequired = false, Name=@"fullgamesplayed", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint fullgamesplayed
+    {
+      get { return _fullgamesplayed; }
+      set { _fullgamesplayed = value; }
+    }
+    private readonly global::System.Collections.Generic.List<uint> _leagues = new global::System.Collections.Generic.List<uint>();
+    [global::ProtoBuf.ProtoMember(18, Name=@"leagues", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public global::System.Collections.Generic.List<uint> leagues
+    {
+      get { return _leagues; }
+    }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -5251,7 +5300,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private string _name = "";
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string name
     {
       get { return _name; }
@@ -5260,7 +5309,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private string _tag = "";
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"tag", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string tag
     {
       get { return _tag; }
@@ -5269,7 +5318,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private ulong _logo = default(ulong);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"logo", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong logo
     {
       get { return _logo; }
@@ -5278,7 +5327,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private ulong _base_logo = default(ulong);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"base_logo", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong base_logo
     {
       get { return _base_logo; }
@@ -5287,11 +5336,38 @@ namespace SteamKit2.GC.Dota.Internal
 
     private ulong _banner_logo = default(ulong);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"banner_logo", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong banner_logo
     {
       get { return _banner_logo; }
       set { _banner_logo = value; }
+    }
+
+    private ulong _sponsor_logo = default(ulong);
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"sponsor_logo", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong sponsor_logo
+    {
+      get { return _sponsor_logo; }
+      set { _sponsor_logo = value; }
+    }
+
+    private string _country_code = "";
+    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"country_code", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string country_code
+    {
+      get { return _country_code; }
+      set { _country_code = value; }
+    }
+
+    private string _url = "";
+    [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"url", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string url
+    {
+      get { return _url; }
+      set { _url = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -5354,7 +5430,10 @@ namespace SteamKit2.GC.Dota.Internal
       CREATOR_TEAM_LIMIT_REACHED = 11,
             
       [global::ProtoBuf.ProtoEnum(Name=@"NO_LOGO", Value=12)]
-      NO_LOGO = 12
+      NO_LOGO = 12,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"CREATOR_TEAM_CREATION_COOLDOWN", Value=13)]
+      CREATOR_TEAM_CREATION_COOLDOWN = 13
     }
   
     private global::ProtoBuf.IExtension extensionObject;
@@ -5370,7 +5449,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private ulong _logo = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"logo", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong logo
     {
       get { return _logo; }
@@ -5379,7 +5458,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private ulong _base_logo = default(ulong);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"base_logo", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong base_logo
     {
       get { return _base_logo; }
@@ -5388,11 +5467,20 @@ namespace SteamKit2.GC.Dota.Internal
 
     private ulong _banner_logo = default(ulong);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"banner_logo", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong banner_logo
     {
       get { return _banner_logo; }
       set { _banner_logo = value; }
+    }
+
+    private ulong _sponsor_logo = default(ulong);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"sponsor_logo", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong sponsor_logo
+    {
+      get { return _sponsor_logo; }
+      set { _sponsor_logo = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -5436,6 +5524,68 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAEditTeamDetails")]
+  public partial class CMsgDOTAEditTeamDetails : global::ProtoBuf.IExtensible
+  {
+    public CMsgDOTAEditTeamDetails() {}
+    
+
+    private string _country_code = "";
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"country_code", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string country_code
+    {
+      get { return _country_code; }
+      set { _country_code = value; }
+    }
+
+    private string _url = "";
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"url", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string url
+    {
+      get { return _url; }
+      set { _url = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAEditTeamDetailsResponse")]
+  public partial class CMsgDOTAEditTeamDetailsResponse : global::ProtoBuf.IExtensible
+  {
+    public CMsgDOTAEditTeamDetailsResponse() {}
+    
+    private readonly global::System.Collections.Generic.List<CMsgDOTAEditTeamDetailsResponse.Result> _results = new global::System.Collections.Generic.List<CMsgDOTAEditTeamDetailsResponse.Result>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"results", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public global::System.Collections.Generic.List<CMsgDOTAEditTeamDetailsResponse.Result> results
+    {
+      get { return _results; }
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"Result")]
+    public enum Result
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"INVALID", Value=-1)]
+      INVALID = -1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"SUCCESS", Value=0)]
+      SUCCESS = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"CREATOR_BUSY", Value=9)]
+      CREATOR_BUSY = 9,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"UNSPECIFIED_ERROR", Value=10)]
+      UNSPECIFIED_ERROR = 10
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTADisbandTeam")]
   public partial class CMsgDOTADisbandTeam : global::ProtoBuf.IExtensible
   {
@@ -5454,7 +5604,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private CMsgDOTADisbandTeamResponse.Result _result = CMsgDOTADisbandTeamResponse.Result.SUCCESS;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"result", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(CMsgDOTADisbandTeamResponse.Result.SUCCESS)]
+    [global::System.ComponentModel.DefaultValue(CMsgDOTADisbandTeamResponse.Result.SUCCESS)]
     public CMsgDOTADisbandTeamResponse.Result result
     {
       get { return _result; }
@@ -5463,7 +5613,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private string _team_name = "";
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"team_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string team_name
     {
       get { return _team_name; }
@@ -5503,7 +5653,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private CMsgDOTARequestTeamDataResponse.Result _result = CMsgDOTARequestTeamDataResponse.Result.SUCCESS;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"result", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(CMsgDOTARequestTeamDataResponse.Result.SUCCESS)]
+    [global::System.ComponentModel.DefaultValue(CMsgDOTARequestTeamDataResponse.Result.SUCCESS)]
     public CMsgDOTARequestTeamDataResponse.Result result
     {
       get { return _result; }
@@ -5512,7 +5662,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private CMsgDOTATeamData _data = null;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"data", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(null)]
+    [global::System.ComponentModel.DefaultValue(null)]
     public CMsgDOTATeamData data
     {
       get { return _data; }
@@ -5542,7 +5692,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private bool _on_team = default(bool);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"on_team", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool on_team
     {
       get { return _on_team; }
@@ -5551,7 +5701,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private CMsgDOTATeam _team = null;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"team", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(null)]
+    [global::System.ComponentModel.DefaultValue(null)]
     public CMsgDOTATeam team
     {
       get { return _team; }
@@ -5570,7 +5720,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _team_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"team_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint team_id
     {
       get { return _team_id; }
@@ -5589,7 +5739,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _eresult = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"eresult", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint eresult
     {
       get { return _eresult; }
@@ -5598,12 +5748,103 @@ namespace SteamKit2.GC.Dota.Internal
 
     private CMsgDOTATeam _team = null;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"team", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(null)]
+    [global::System.ComponentModel.DefaultValue(null)]
     public CMsgDOTATeam team
     {
       get { return _team; }
       set { _team = value; }
     }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAProTeamListRequest")]
+  public partial class CMsgDOTAProTeamListRequest : global::ProtoBuf.IExtensible
+  {
+    public CMsgDOTAProTeamListRequest() {}
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAProTeamListResponse")]
+  public partial class CMsgDOTAProTeamListResponse : global::ProtoBuf.IExtensible
+  {
+    public CMsgDOTAProTeamListResponse() {}
+    
+    private readonly global::System.Collections.Generic.List<CMsgDOTAProTeamListResponse.TeamEntry> _teams = new global::System.Collections.Generic.List<CMsgDOTAProTeamListResponse.TeamEntry>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"teams", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CMsgDOTAProTeamListResponse.TeamEntry> teams
+    {
+      get { return _teams; }
+    }
+  
+
+    private uint _eresult = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"eresult", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint eresult
+    {
+      get { return _eresult; }
+      set { _eresult = value; }
+    }
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"TeamEntry")]
+  public partial class TeamEntry : global::ProtoBuf.IExtensible
+  {
+    public TeamEntry() {}
+    
+
+    private uint _team_id = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"team_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint team_id
+    {
+      get { return _team_id; }
+      set { _team_id = value; }
+    }
+
+    private string _tag = "";
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"tag", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string tag
+    {
+      get { return _tag; }
+      set { _tag = value; }
+    }
+
+    private uint _time_created = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"time_created", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint time_created
+    {
+      get { return _time_created; }
+      set { _time_created = value; }
+    }
+
+    private ulong _logo = default(ulong);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"logo", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong logo
+    {
+      get { return _logo; }
+      set { _logo = value; }
+    }
+
+    private string _country_code = "";
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"country_code", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string country_code
+    {
+      get { return _country_code; }
+      set { _country_code = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -5617,7 +5858,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _account_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint account_id
     {
       get { return _account_id; }
@@ -5636,7 +5877,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private CMsgDOTAInitiateTeamInviteResponse.Result _result = CMsgDOTAInitiateTeamInviteResponse.Result.SUCCESS;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"result", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(CMsgDOTAInitiateTeamInviteResponse.Result.SUCCESS)]
+    [global::System.ComponentModel.DefaultValue(CMsgDOTAInitiateTeamInviteResponse.Result.SUCCESS)]
     public CMsgDOTAInitiateTeamInviteResponse.Result result
     {
       get { return _result; }
@@ -5645,7 +5886,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private string _invitee_name = "";
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"invitee_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string invitee_name
     {
       get { return _invitee_name; }
@@ -5687,7 +5928,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _inviter_account_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"inviter_account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint inviter_account_id
     {
       get { return _inviter_account_id; }
@@ -5696,7 +5937,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private string _team_name = "";
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"team_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string team_name
     {
       get { return _team_name; }
@@ -5705,7 +5946,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private string _team_tag = "";
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"team_tag", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string team_tag
     {
       get { return _team_tag; }
@@ -5714,7 +5955,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private ulong _logo = default(ulong);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"logo", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong logo
     {
       get { return _logo; }
@@ -5733,7 +5974,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private CMsgDOTATeamInviteReply.Reply _reply = CMsgDOTATeamInviteReply.Reply.JOIN;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"reply", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(CMsgDOTATeamInviteReply.Reply.JOIN)]
+    [global::System.ComponentModel.DefaultValue(CMsgDOTATeamInviteReply.Reply.JOIN)]
     public CMsgDOTATeamInviteReply.Reply reply
     {
       get { return _reply; }
@@ -5766,7 +6007,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private CMsgDOTATeamInviteReplyResponse.Result _result = CMsgDOTATeamInviteReplyResponse.Result.SUCCESS;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"result", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(CMsgDOTATeamInviteReplyResponse.Result.SUCCESS)]
+    [global::System.ComponentModel.DefaultValue(CMsgDOTATeamInviteReplyResponse.Result.SUCCESS)]
     public CMsgDOTATeamInviteReplyResponse.Result result
     {
       get { return _result; }
@@ -5775,7 +6016,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private string _team_name = "";
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"team_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string team_name
     {
       get { return _team_name; }
@@ -5805,7 +6046,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private CMsgDOTATeamInviteComplete.Result _result = CMsgDOTATeamInviteComplete.Result.JOINED;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"result", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(CMsgDOTATeamInviteComplete.Result.JOINED)]
+    [global::System.ComponentModel.DefaultValue(CMsgDOTATeamInviteComplete.Result.JOINED)]
     public CMsgDOTATeamInviteComplete.Result result
     {
       get { return _result; }
@@ -5814,7 +6055,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private string _invitee_name = "";
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"invitee_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string invitee_name
     {
       get { return _invitee_name; }
@@ -5850,7 +6091,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _account_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint account_id
     {
       get { return _account_id; }
@@ -5869,7 +6110,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private CMsgDOTAKickTeamMemberResponse.Result _result = CMsgDOTAKickTeamMemberResponse.Result.SUCCESS;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"result", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(CMsgDOTAKickTeamMemberResponse.Result.SUCCESS)]
+    [global::System.ComponentModel.DefaultValue(CMsgDOTAKickTeamMemberResponse.Result.SUCCESS)]
     public CMsgDOTAKickTeamMemberResponse.Result result
     {
       get { return _result; }
@@ -5899,7 +6140,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _new_admin_account_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"new_admin_account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint new_admin_account_id
     {
       get { return _new_admin_account_id; }
@@ -5928,7 +6169,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private CMsgDOTALeaveTeamResponse.Result _result = CMsgDOTALeaveTeamResponse.Result.SUCCESS;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"result", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(CMsgDOTALeaveTeamResponse.Result.SUCCESS)]
+    [global::System.ComponentModel.DefaultValue(CMsgDOTALeaveTeamResponse.Result.SUCCESS)]
     public CMsgDOTALeaveTeamResponse.Result result
     {
       get { return _result; }
@@ -5937,7 +6178,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private string _team_name = "";
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"team_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string team_name
     {
       get { return _team_name; }
@@ -5967,7 +6208,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private string _teammate_name = "";
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"teammate_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string teammate_name
     {
       get { return _teammate_name; }
@@ -5996,7 +6237,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _access_rights = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"access_rights", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint access_rights
     {
       get { return _access_rights; }
@@ -6005,7 +6246,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _beta_join_time = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"beta_join_time", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint beta_join_time
     {
       get { return _beta_join_time; }
@@ -6024,7 +6265,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _eresult = (uint)2;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"eresult", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue((uint)2)]
+    [global::System.ComponentModel.DefaultValue((uint)2)]
     public uint eresult
     {
       get { return _eresult; }
@@ -6043,7 +6284,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private string _message = "";
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"message", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string message
     {
       get { return _message; }
@@ -6062,7 +6303,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _tournament_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"tournament_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint tournament_id
     {
       get { return _tournament_id; }
@@ -6071,7 +6312,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _tournament_game_id = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"tournament_game_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint tournament_game_id
     {
       get { return _tournament_game_id; }
@@ -6080,7 +6321,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private float _duration = default(float);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"duration", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(float))]
+    [global::System.ComponentModel.DefaultValue(default(float))]
     public float duration
     {
       get { return _duration; }
@@ -6089,7 +6330,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private int _hltv_delay = default(int);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"hltv_delay", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(int))]
+    [global::System.ComponentModel.DefaultValue(default(int))]
     public int hltv_delay
     {
       get { return _hltv_delay; }
@@ -6098,7 +6339,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private CMsgDOTALiveScoreboardUpdate.Team _team_good = null;
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"team_good", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(null)]
+    [global::System.ComponentModel.DefaultValue(null)]
     public CMsgDOTALiveScoreboardUpdate.Team team_good
     {
       get { return _team_good; }
@@ -6107,7 +6348,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private CMsgDOTALiveScoreboardUpdate.Team _team_bad = null;
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"team_bad", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(null)]
+    [global::System.ComponentModel.DefaultValue(null)]
     public CMsgDOTALiveScoreboardUpdate.Team team_bad
     {
       get { return _team_bad; }
@@ -6116,7 +6357,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _roshan_respawn_timer = default(uint);
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"roshan_respawn_timer", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint roshan_respawn_timer
     {
       get { return _roshan_respawn_timer; }
@@ -6137,7 +6378,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _score = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"score", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint score
     {
       get { return _score; }
@@ -6151,7 +6392,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _player_slot = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"player_slot", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint player_slot
     {
       get { return _player_slot; }
@@ -6160,7 +6401,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private string _player_name = "";
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"player_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string player_name
     {
       get { return _player_name; }
@@ -6169,7 +6410,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private string _hero_name = "";
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"hero_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string hero_name
     {
       get { return _hero_name; }
@@ -6178,7 +6419,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _hero_id = default(uint);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"hero_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint hero_id
     {
       get { return _hero_id; }
@@ -6187,7 +6428,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _kills = default(uint);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"kills", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint kills
     {
       get { return _kills; }
@@ -6196,7 +6437,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _deaths = default(uint);
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"deaths", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint deaths
     {
       get { return _deaths; }
@@ -6205,7 +6446,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _assists = default(uint);
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"assists", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint assists
     {
       get { return _assists; }
@@ -6214,7 +6455,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _last_hits = default(uint);
     [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"last_hits", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint last_hits
     {
       get { return _last_hits; }
@@ -6223,7 +6464,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _denies = default(uint);
     [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"denies", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint denies
     {
       get { return _denies; }
@@ -6232,7 +6473,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _gold = default(uint);
     [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"gold", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint gold
     {
       get { return _gold; }
@@ -6241,7 +6482,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _level = default(uint);
     [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"level", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint level
     {
       get { return _level; }
@@ -6250,7 +6491,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private float _gold_per_min = default(float);
     [global::ProtoBuf.ProtoMember(12, IsRequired = false, Name=@"gold_per_min", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(float))]
+    [global::System.ComponentModel.DefaultValue(default(float))]
     public float gold_per_min
     {
       get { return _gold_per_min; }
@@ -6259,7 +6500,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private float _xp_per_min = default(float);
     [global::ProtoBuf.ProtoMember(13, IsRequired = false, Name=@"xp_per_min", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(float))]
+    [global::System.ComponentModel.DefaultValue(default(float))]
     public float xp_per_min
     {
       get { return _xp_per_min; }
@@ -6268,7 +6509,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private CMsgDOTALiveScoreboardUpdate.Team.Player.DOTAUltimateState _ultimate_state = CMsgDOTALiveScoreboardUpdate.Team.Player.DOTAUltimateState.k_EDOTAUltimateStateNotLearned;
     [global::ProtoBuf.ProtoMember(14, IsRequired = false, Name=@"ultimate_state", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(CMsgDOTALiveScoreboardUpdate.Team.Player.DOTAUltimateState.k_EDOTAUltimateStateNotLearned)]
+    [global::System.ComponentModel.DefaultValue(CMsgDOTALiveScoreboardUpdate.Team.Player.DOTAUltimateState.k_EDOTAUltimateStateNotLearned)]
     public CMsgDOTALiveScoreboardUpdate.Team.Player.DOTAUltimateState ultimate_state
     {
       get { return _ultimate_state; }
@@ -6277,7 +6518,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private float _ultimate_cooldown = default(float);
     [global::ProtoBuf.ProtoMember(15, IsRequired = false, Name=@"ultimate_cooldown", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(float))]
+    [global::System.ComponentModel.DefaultValue(default(float))]
     public float ultimate_cooldown
     {
       get { return _ultimate_cooldown; }
@@ -6286,7 +6527,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _item0 = default(uint);
     [global::ProtoBuf.ProtoMember(16, IsRequired = false, Name=@"item0", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint item0
     {
       get { return _item0; }
@@ -6295,7 +6536,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _item1 = default(uint);
     [global::ProtoBuf.ProtoMember(17, IsRequired = false, Name=@"item1", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint item1
     {
       get { return _item1; }
@@ -6304,7 +6545,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _item2 = default(uint);
     [global::ProtoBuf.ProtoMember(18, IsRequired = false, Name=@"item2", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint item2
     {
       get { return _item2; }
@@ -6313,7 +6554,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _item3 = default(uint);
     [global::ProtoBuf.ProtoMember(19, IsRequired = false, Name=@"item3", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint item3
     {
       get { return _item3; }
@@ -6322,7 +6563,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _item4 = default(uint);
     [global::ProtoBuf.ProtoMember(20, IsRequired = false, Name=@"item4", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint item4
     {
       get { return _item4; }
@@ -6331,7 +6572,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _item5 = default(uint);
     [global::ProtoBuf.ProtoMember(21, IsRequired = false, Name=@"item5", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint item5
     {
       get { return _item5; }
@@ -6340,7 +6581,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _respawn_timer = default(uint);
     [global::ProtoBuf.ProtoMember(22, IsRequired = false, Name=@"respawn_timer", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint respawn_timer
     {
       get { return _respawn_timer; }
@@ -6386,7 +6627,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private string _persona_name = "";
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"persona_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string persona_name
     {
       get { return _persona_name; }
@@ -6395,7 +6636,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private string _channel_name = "";
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"channel_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string channel_name
     {
       get { return _channel_name; }
@@ -6404,7 +6645,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private string _password = "";
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"password", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string password
     {
       get { return _password; }
@@ -6413,7 +6654,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private DOTAChatChannelType_t _channel_type = DOTAChatChannelType_t.DOTAChannelType_Regional;
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"channel_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(DOTAChatChannelType_t.DOTAChannelType_Regional)]
+    [global::System.ComponentModel.DefaultValue(DOTAChatChannelType_t.DOTAChannelType_Regional)]
     public DOTAChatChannelType_t channel_type
     {
       get { return _channel_type; }
@@ -6432,7 +6673,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private string _channel_name = "";
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"channel_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string channel_name
     {
       get { return _channel_name; }
@@ -6451,7 +6692,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _account_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint account_id
     {
       get { return _account_id; }
@@ -6460,7 +6701,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private string _channel_name = "";
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"channel_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string channel_name
     {
       get { return _channel_name; }
@@ -6469,7 +6710,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private string _persona_name = "";
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"persona_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string persona_name
     {
       get { return _persona_name; }
@@ -6478,7 +6719,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private string _text = "";
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"text", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string text
     {
       get { return _text; }
@@ -6487,7 +6728,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _timestamp = default(uint);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"timestamp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint timestamp
     {
       get { return _timestamp; }
@@ -6496,7 +6737,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _suggest_invite_account_id = default(uint);
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"suggest_invite_account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint suggest_invite_account_id
     {
       get { return _suggest_invite_account_id; }
@@ -6505,7 +6746,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private string _suggest_invite_name = "";
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"suggest_invite_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string suggest_invite_name
     {
       get { return _suggest_invite_name; }
@@ -6536,7 +6777,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private ulong _channel_id = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"channel_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong channel_id
     {
       get { return _channel_id; }
@@ -6545,7 +6786,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _suppression_flags = (uint)0;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"suppression_flags", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue((uint)0)]
+    [global::System.ComponentModel.DefaultValue((uint)0)]
     public uint suppression_flags
     {
       get { return _suppression_flags; }
@@ -6580,7 +6821,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private ulong _steam_id = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steam_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong steam_id
     {
       get { return _steam_id; }
@@ -6589,7 +6830,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private string _persona_name = "";
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"persona_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string persona_name
     {
       get { return _persona_name; }
@@ -6608,7 +6849,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _response = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"response", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint response
     {
       get { return _response; }
@@ -6617,7 +6858,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private string _channel_name = "";
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"channel_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string channel_name
     {
       get { return _channel_name; }
@@ -6626,7 +6867,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private ulong _channel_id = default(ulong);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"channel_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong channel_id
     {
       get { return _channel_id; }
@@ -6635,7 +6876,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _max_members = default(uint);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"max_members", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint max_members
     {
       get { return _max_members; }
@@ -6661,7 +6902,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private ulong _channel_id = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"channel_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong channel_id
     {
       get { return _channel_id; }
@@ -6687,7 +6928,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private ulong _channel_id = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"channel_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong channel_id
     {
       get { return _channel_id; }
@@ -6696,7 +6937,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private string _persona_name = "";
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"persona_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string persona_name
     {
       get { return _persona_name; }
@@ -6705,7 +6946,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private ulong _steam_id = default(ulong);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"steam_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong steam_id
     {
       get { return _steam_id; }
@@ -6724,7 +6965,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private ulong _channel_id = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"channel_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong channel_id
     {
       get { return _channel_id; }
@@ -6733,7 +6974,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private ulong _steam_id = default(ulong);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"steam_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong steam_id
     {
       get { return _steam_id; }
@@ -6762,7 +7003,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private string _channel_name = "";
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"channel_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string channel_name
     {
       get { return _channel_name; }
@@ -6771,7 +7012,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private ulong _channel_id = default(ulong);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"channel_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong channel_id
     {
       get { return _channel_id; }
@@ -6812,7 +7053,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private string _channel_name = "";
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"channel_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string channel_name
     {
       get { return _channel_name; }
@@ -6821,7 +7062,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _num_members = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"num_members", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint num_members
     {
       get { return _num_members; }
@@ -6830,7 +7071,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private DOTAChatChannelType_t _channel_type = DOTAChatChannelType_t.DOTAChannelType_Regional;
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"channel_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(DOTAChatChannelType_t.DOTAChannelType_Regional)]
+    [global::System.ComponentModel.DefaultValue(DOTAChatChannelType_t.DOTAChannelType_Regional)]
     public DOTAChatChannelType_t channel_type
     {
       get { return _channel_type; }
@@ -6866,7 +7107,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _report_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"report_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint report_id
     {
       get { return _report_id; }
@@ -6875,7 +7116,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _reporter_account_id = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"reporter_account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint reporter_account_id
     {
       get { return _reporter_account_id; }
@@ -6884,7 +7125,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _target_account_id = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"target_account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint target_account_id
     {
       get { return _target_account_id; }
@@ -6893,7 +7134,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _report_flags = default(uint);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"report_flags", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint report_flags
     {
       get { return _report_flags; }
@@ -6902,7 +7143,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _match_id = default(uint);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"match_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint match_id
     {
       get { return _match_id; }
@@ -6911,7 +7152,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _date = default(uint);
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"date", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint date
     {
       get { return _date; }
@@ -6920,7 +7161,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private string _comment = "";
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"comment", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string comment
     {
       get { return _comment; }
@@ -6954,7 +7195,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _num_positive_reports_remaining = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"num_positive_reports_remaining", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint num_positive_reports_remaining
     {
       get { return _num_positive_reports_remaining; }
@@ -6963,7 +7204,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _num_negative_reports_remaining = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"num_negative_reports_remaining", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint num_negative_reports_remaining
     {
       get { return _num_negative_reports_remaining; }
@@ -6972,7 +7213,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _num_positive_reports_total = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"num_positive_reports_total", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint num_positive_reports_total
     {
       get { return _num_positive_reports_total; }
@@ -6981,7 +7222,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _num_negative_reports_total = default(uint);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"num_negative_reports_total", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint num_negative_reports_total
     {
       get { return _num_negative_reports_total; }
@@ -7000,7 +7241,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _target_account_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"target_account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint target_account_id
     {
       get { return _target_account_id; }
@@ -7009,7 +7250,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _report_flags = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"report_flags", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint report_flags
     {
       get { return _report_flags; }
@@ -7018,7 +7259,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private string _comment = "";
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"comment", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string comment
     {
       get { return _comment; }
@@ -7037,7 +7278,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _target_account_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"target_account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint target_account_id
     {
       get { return _target_account_id; }
@@ -7046,7 +7287,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _report_flags = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"report_flags", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint report_flags
     {
       get { return _report_flags; }
@@ -7055,7 +7296,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _result = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"result", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint result
     {
       get { return _result; }
@@ -7074,7 +7315,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _target_account_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"target_account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint target_account_id
     {
       get { return _target_account_id; }
@@ -7093,7 +7334,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _target_account_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"target_account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint target_account_id
     {
       get { return _target_account_id; }
@@ -7102,7 +7343,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _leadership_count = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"leadership_count", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint leadership_count
     {
       get { return _leadership_count; }
@@ -7111,7 +7352,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _teaching_count = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"teaching_count", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint teaching_count
     {
       get { return _teaching_count; }
@@ -7120,7 +7361,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _friendly_count = default(uint);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"friendly_count", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint friendly_count
     {
       get { return _friendly_count; }
@@ -7129,7 +7370,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _forgiving_count = default(uint);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"forgiving_count", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint forgiving_count
     {
       get { return _forgiving_count; }
@@ -7148,7 +7389,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private ulong _steam_id = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steam_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong steam_id
     {
       get { return _steam_id; }
@@ -7157,7 +7398,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _player_id = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"player_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint player_id
     {
       get { return _player_id; }
@@ -7176,7 +7417,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private ulong _steam_id = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steam_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong steam_id
     {
       get { return _steam_id; }
@@ -7185,7 +7426,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _rank = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"rank", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint rank
     {
       get { return _rank; }
@@ -7194,7 +7435,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _player_id = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"player_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint player_id
     {
       get { return _player_id; }
@@ -7203,7 +7444,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private bool _prevent_text_chat = default(bool);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"prevent_text_chat", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool prevent_text_chat
     {
       get { return _prevent_text_chat; }
@@ -7212,7 +7453,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private bool _prevent_voice_chat = default(bool);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"prevent_voice_chat", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool prevent_voice_chat
     {
       get { return _prevent_voice_chat; }
@@ -7221,7 +7462,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private bool _match_making_ban = default(bool);
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"match_making_ban", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool match_making_ban
     {
       get { return _match_making_ban; }
@@ -7240,7 +7481,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private MatchType _match_type = MatchType.MATCH_TYPE_RANKED;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"match_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(MatchType.MATCH_TYPE_RANKED)]
+    [global::System.ComponentModel.DefaultValue(MatchType.MATCH_TYPE_RANKED)]
     public MatchType match_type
     {
       get { return _match_type; }
@@ -7259,7 +7500,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _server_region = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"server_region", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint server_region
     {
       get { return _server_region; }
@@ -7278,7 +7519,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private ulong _steam_id = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steam_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong steam_id
     {
       get { return _steam_id; }
@@ -7297,7 +7538,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private ulong _steam_id = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steam_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong steam_id
     {
       get { return _steam_id; }
@@ -7318,7 +7559,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private ulong _lobby_id = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"lobby_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong lobby_id
     {
       get { return _lobby_id; }
@@ -7327,7 +7568,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _save_time = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"save_time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint save_time
     {
       get { return _save_time; }
@@ -7355,7 +7596,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private DOTA_GC_TEAM _team = DOTA_GC_TEAM.DOTA_GC_TEAM_GOOD_GUYS;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"team", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(DOTA_GC_TEAM.DOTA_GC_TEAM_GOOD_GUYS)]
+    [global::System.ComponentModel.DefaultValue(DOTA_GC_TEAM.DOTA_GC_TEAM_GOOD_GUYS)]
     public DOTA_GC_TEAM team
     {
       get { return _team; }
@@ -7364,7 +7605,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private string _name = "";
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string name
     {
       get { return _name; }
@@ -7373,7 +7614,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private string _hero = "";
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"hero", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string hero
     {
       get { return _hero; }
@@ -7392,7 +7633,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _save_number = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"save_number", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint save_number
     {
       get { return _save_number; }
@@ -7401,7 +7642,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _game_time = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"game_time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint game_time
     {
       get { return _game_time; }
@@ -7410,7 +7651,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _team1_score = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"team1_score", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint team1_score
     {
       get { return _team1_score; }
@@ -7419,7 +7660,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _team2_score = default(uint);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"team2_score", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint team2_score
     {
       get { return _team2_score; }
@@ -7435,7 +7676,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _save_id = default(uint);
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"save_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint save_id
     {
       get { return _save_id; }
@@ -7449,7 +7690,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private float _x = default(float);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"x", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(float))]
+    [global::System.ComponentModel.DefaultValue(default(float))]
     public float x
     {
       get { return _x; }
@@ -7458,7 +7699,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private float _y = default(float);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"y", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(float))]
+    [global::System.ComponentModel.DefaultValue(default(float))]
     public float y
     {
       get { return _y; }
@@ -7509,7 +7750,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _source_tv_public_addr = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"source_tv_public_addr", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint source_tv_public_addr
     {
       get { return _source_tv_public_addr; }
@@ -7518,7 +7759,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _source_tv_private_addr = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"source_tv_private_addr", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint source_tv_private_addr
     {
       get { return _source_tv_private_addr; }
@@ -7527,7 +7768,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _source_tv_port = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"source_tv_port", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint source_tv_port
     {
       get { return _source_tv_port; }
@@ -7536,7 +7777,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private ulong _game_server_steam_id = default(ulong);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"game_server_steam_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong game_server_steam_id
     {
       get { return _game_server_steam_id; }
@@ -7545,7 +7786,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _parent_count = default(uint);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"parent_count", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint parent_count
     {
       get { return _parent_count; }
@@ -7554,7 +7795,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private ulong _tv_unique_secret_code = default(ulong);
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"tv_unique_secret_code", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong tv_unique_secret_code
     {
       get { return _tv_unique_secret_code; }
@@ -7583,7 +7824,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private ulong _server_steamid = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"server_steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong server_steamid
     {
       get { return _server_steamid; }
@@ -7592,7 +7833,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _client_version = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"client_version", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint client_version
     {
       get { return _client_version; }
@@ -7601,7 +7842,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private ulong _watch_server_steamid = default(ulong);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"watch_server_steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong watch_server_steamid
     {
       get { return _watch_server_steamid; }
@@ -7610,7 +7851,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private ulong _lobby_id = default(ulong);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"lobby_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong lobby_id
     {
       get { return _lobby_id; }
@@ -7639,7 +7880,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private CMsgWatchGameResponse.WatchGameResult _watch_game_result = CMsgWatchGameResponse.WatchGameResult.PENDING;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"watch_game_result", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(CMsgWatchGameResponse.WatchGameResult.PENDING)]
+    [global::System.ComponentModel.DefaultValue(CMsgWatchGameResponse.WatchGameResult.PENDING)]
     public CMsgWatchGameResponse.WatchGameResult watch_game_result
     {
       get { return _watch_game_result; }
@@ -7648,7 +7889,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _source_tv_public_addr = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"source_tv_public_addr", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint source_tv_public_addr
     {
       get { return _source_tv_public_addr; }
@@ -7657,7 +7898,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _source_tv_private_addr = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"source_tv_private_addr", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint source_tv_private_addr
     {
       get { return _source_tv_private_addr; }
@@ -7666,7 +7907,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _source_tv_port = default(uint);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"source_tv_port", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint source_tv_port
     {
       get { return _source_tv_port; }
@@ -7675,7 +7916,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private ulong _game_server_steamid = default(ulong);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"game_server_steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong game_server_steamid
     {
       get { return _game_server_steamid; }
@@ -7684,7 +7925,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private ulong _watch_server_steamid = default(ulong);
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"watch_server_steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong watch_server_steamid
     {
       get { return _watch_server_steamid; }
@@ -7693,7 +7934,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private ulong _watch_tv_unique_secret_code = default(ulong);
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"watch_tv_unique_secret_code", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong watch_tv_unique_secret_code
     {
       get { return _watch_tv_unique_secret_code; }
@@ -7741,7 +7982,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _account_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint account_id
     {
       get { return _account_id; }
@@ -7760,7 +8001,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _result = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"result", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint result
     {
       get { return _result; }
@@ -7769,7 +8010,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private bool _match_banned = default(bool);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"match_banned", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool match_banned
     {
       get { return _match_banned; }
@@ -7778,7 +8019,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private bool _text_chat_banned = default(bool);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"text_chat_banned", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool text_chat_banned
     {
       get { return _text_chat_banned; }
@@ -7787,7 +8028,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private bool _voice_chat_banned = default(bool);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"voice_chat_banned", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool voice_chat_banned
     {
       get { return _voice_chat_banned; }
@@ -7806,7 +8047,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _date = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"date", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint date
     {
       get { return _date; }
@@ -7815,7 +8056,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _hero_id = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"hero_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint hero_id
     {
       get { return _hero_id; }
@@ -7824,7 +8065,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _popularity = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"popularity", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint popularity
     {
       get { return _popularity; }
@@ -7853,7 +8094,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _match_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"match_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint match_id
     {
       get { return _match_id; }
@@ -7872,7 +8113,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _result = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"result", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint result
     {
       get { return _result; }
@@ -7881,7 +8122,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private CMsgDOTAMatch _match = null;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"match", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(null)]
+    [global::System.ComponentModel.DefaultValue(null)]
     public CMsgDOTAMatch match
     {
       get { return _match; }
@@ -7890,7 +8131,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private DOTAMatchVote _vote = DOTAMatchVote.DOTAMatchVote_INVALID;
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"vote", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(DOTAMatchVote.DOTAMatchVote_INVALID)]
+    [global::System.ComponentModel.DefaultValue(DOTAMatchVote.DOTAMatchVote_INVALID)]
     public DOTAMatchVote vote
     {
       get { return _vote; }
@@ -7909,7 +8150,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _account_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint account_id
     {
       get { return _account_id; }
@@ -7918,7 +8159,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private bool _request_name = default(bool);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"request_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool request_name
     {
       get { return _request_name; }
@@ -7937,7 +8178,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _result = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"result", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint result
     {
       get { return _result; }
@@ -7946,7 +8187,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private CSODOTAGameAccountClient _game_account_client = null;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"game_account_client", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(null)]
+    [global::System.ComponentModel.DefaultValue(null)]
     public CSODOTAGameAccountClient game_account_client
     {
       get { return _game_account_client; }
@@ -7969,7 +8210,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private string _player_name = "";
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"player_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string player_name
     {
       get { return _player_name; }
@@ -7978,7 +8219,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private string _team_name = "";
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"team_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string team_name
     {
       get { return _team_name; }
@@ -7987,7 +8228,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private string _team_tag = "";
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"team_tag", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string team_tag
     {
       get { return _team_tag; }
@@ -7996,7 +8237,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private ulong _team_logo = default(ulong);
     [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"team_logo", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong team_logo
     {
       get { return _team_logo; }
@@ -8005,7 +8246,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private CMsgDOTAProfileResponse.ShowcaseHero _showcase_hero = null;
     [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"showcase_hero", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(null)]
+    [global::System.ComponentModel.DefaultValue(null)]
     public CMsgDOTAProfileResponse.ShowcaseHero showcase_hero
     {
       get { return _showcase_hero; }
@@ -8028,7 +8269,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _team_id = default(uint);
     [global::ProtoBuf.ProtoMember(12, IsRequired = false, Name=@"team_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint team_id
     {
       get { return _team_id; }
@@ -8042,7 +8283,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _hero_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"hero_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint hero_id
     {
       get { return _hero_id; }
@@ -8051,7 +8292,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _wins = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"wins", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint wins
     {
       get { return _wins; }
@@ -8070,7 +8311,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _hero_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"hero_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint hero_id
     {
       get { return _hero_id; }
@@ -8096,7 +8337,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _league_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"league_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint league_id
     {
       get { return _league_id; }
@@ -8105,7 +8346,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _item_def = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"item_def", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint item_def
     {
       get { return _item_def; }
@@ -8124,7 +8365,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _event_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"event_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint event_id
     {
       get { return _event_id; }
@@ -8148,7 +8389,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _account_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint account_id
     {
       get { return _account_id; }
@@ -8167,7 +8408,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _rank = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"rank", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint rank
     {
       get { return _rank; }
@@ -8233,7 +8474,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _hero_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"hero_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint hero_id
     {
       get { return _hero_id; }
@@ -8279,7 +8520,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _account_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint account_id
     {
       get { return _account_id; }
@@ -8288,7 +8529,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _time_stamp = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"time_stamp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint time_stamp
     {
       get { return _time_stamp; }
@@ -8297,7 +8538,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _def_index = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"def_index", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint def_index
     {
       get { return _def_index; }
@@ -8306,7 +8547,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private ulong _item_id = default(ulong);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"item_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong item_id
     {
       get { return _item_id; }
@@ -8315,7 +8556,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _games_played_since_last_drop = default(uint);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"games_played_since_last_drop", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint games_played_since_last_drop
     {
       get { return _games_played_since_last_drop; }
@@ -8324,7 +8565,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _time_played_since_last_drop = default(uint);
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"time_played_since_last_drop", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint time_played_since_last_drop
     {
       get { return _time_played_since_last_drop; }
@@ -8333,7 +8574,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private float _drop_bonus = default(float);
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"drop_bonus", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(float))]
+    [global::System.ComponentModel.DefaultValue(default(float))]
     public float drop_bonus
     {
       get { return _drop_bonus; }
@@ -8342,7 +8583,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _rarity = default(uint);
     [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"rarity", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint rarity
     {
       get { return _rarity; }
@@ -8351,7 +8592,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _current_score = default(uint);
     [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"current_score", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint current_score
     {
       get { return _current_score; }
@@ -8360,7 +8601,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _next_drop_at = default(uint);
     [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"next_drop_at", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint next_drop_at
     {
       get { return _next_drop_at; }
@@ -8369,7 +8610,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private bool _is_crate = default(bool);
     [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"is_crate", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool is_crate
     {
       get { return _is_crate; }
@@ -8378,7 +8619,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private bool _is_level_reward = default(bool);
     [global::ProtoBuf.ProtoMember(12, IsRequired = false, Name=@"is_level_reward", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool is_level_reward
     {
       get { return _is_level_reward; }
@@ -8387,7 +8628,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _xp = default(uint);
     [global::ProtoBuf.ProtoMember(13, IsRequired = false, Name=@"xp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint xp
     {
       get { return _xp; }
@@ -8396,7 +8637,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _level = default(uint);
     [global::ProtoBuf.ProtoMember(14, IsRequired = false, Name=@"level", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint level
     {
       get { return _level; }
@@ -8405,7 +8646,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _match_id = default(uint);
     [global::ProtoBuf.ProtoMember(15, IsRequired = false, Name=@"match_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint match_id
     {
       get { return _match_id; }
@@ -8424,7 +8665,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _match_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"match_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint match_id
     {
       get { return _match_id; }
@@ -8433,7 +8674,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _account_id = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint account_id
     {
       get { return _account_id; }
@@ -8442,7 +8683,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _time_stamp = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"time_stamp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint time_stamp
     {
       get { return _time_stamp; }
@@ -8451,7 +8692,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _duration = default(uint);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"duration", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint duration
     {
       get { return _duration; }
@@ -8460,7 +8701,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _base_xp = default(uint);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"base_xp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint base_xp
     {
       get { return _base_xp; }
@@ -8469,7 +8710,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _time_reward_xp = default(uint);
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"time_reward_xp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint time_reward_xp
     {
       get { return _time_reward_xp; }
@@ -8478,7 +8719,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _drop_rate_bonus_xp = default(uint);
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"drop_rate_bonus_xp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint drop_rate_bonus_xp
     {
       get { return _drop_rate_bonus_xp; }
@@ -8487,7 +8728,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _final_xp = default(uint);
     [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"final_xp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint final_xp
     {
       get { return _final_xp; }
@@ -8496,7 +8737,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private float _drop_rate_bonus = default(float);
     [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"drop_rate_bonus", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(float))]
+    [global::System.ComponentModel.DefaultValue(default(float))]
     public float drop_rate_bonus
     {
       get { return _drop_rate_bonus; }
@@ -8505,7 +8746,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private bool _leveled_up = default(bool);
     [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"leveled_up", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool leveled_up
     {
       get { return _leveled_up; }
@@ -8524,7 +8765,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _match_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"match_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint match_id
     {
       get { return _match_id; }
@@ -8533,7 +8774,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _account_id = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint account_id
     {
       get { return _account_id; }
@@ -8542,7 +8783,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _time_stamp = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"time_stamp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint time_stamp
     {
       get { return _time_stamp; }
@@ -8551,7 +8792,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _games_since_report_penalty = default(uint);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"games_since_report_penalty", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint games_since_report_penalty
     {
       get { return _games_since_report_penalty; }
@@ -8560,7 +8801,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _pending_in_game_reports = default(uint);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"pending_in_game_reports", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint pending_in_game_reports
     {
       get { return _pending_in_game_reports; }
@@ -8569,7 +8810,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _pending_out_of_game_reports = default(uint);
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"pending_out_of_game_reports", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint pending_out_of_game_reports
     {
       get { return _pending_out_of_game_reports; }
@@ -8578,7 +8819,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _pending_detected_reports = default(uint);
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"pending_detected_reports", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint pending_detected_reports
     {
       get { return _pending_detected_reports; }
@@ -8587,7 +8828,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _report_penalty_count = default(uint);
     [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"report_penalty_count", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint report_penalty_count
     {
       get { return _report_penalty_count; }
@@ -8596,7 +8837,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _last_penalty_date = default(uint);
     [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"last_penalty_date", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint last_penalty_date
     {
       get { return _last_penalty_date; }
@@ -8605,7 +8846,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _last_abandon_date = default(uint);
     [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"last_abandon_date", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint last_abandon_date
     {
       get { return _last_abandon_date; }
@@ -8614,7 +8855,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _abandon_penalty_count = default(uint);
     [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"abandon_penalty_count", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint abandon_penalty_count
     {
       get { return _abandon_penalty_count; }
@@ -8623,7 +8864,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _completed_game_streak = default(uint);
     [global::ProtoBuf.ProtoMember(12, IsRequired = false, Name=@"completed_game_streak", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint completed_game_streak
     {
       get { return _completed_game_streak; }
@@ -8632,7 +8873,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _abandon_time_given = default(uint);
     [global::ProtoBuf.ProtoMember(13, IsRequired = false, Name=@"abandon_time_given", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint abandon_time_given
     {
       get { return _abandon_time_given; }
@@ -8641,7 +8882,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _report_time_given = default(uint);
     [global::ProtoBuf.ProtoMember(14, IsRequired = false, Name=@"report_time_given", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint report_time_given
     {
       get { return _report_time_given; }
@@ -8650,7 +8891,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _rank = default(uint);
     [global::ProtoBuf.ProtoMember(15, IsRequired = false, Name=@"rank", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint rank
     {
       get { return _rank; }
@@ -8669,7 +8910,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private bool _spectator_only = default(bool);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"spectator_only", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool spectator_only
     {
       get { return _spectator_only; }
@@ -8678,7 +8919,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private bool _allow_team_creation = default(bool);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"allow_team_creation", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool allow_team_creation
     {
       get { return _allow_team_creation; }
@@ -8687,7 +8928,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private bool _tournament_admin = default(bool);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"tournament_admin", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool tournament_admin
     {
       get { return _tournament_admin; }
@@ -8696,7 +8937,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private bool _tournament_broadcaster = default(bool);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"tournament_broadcaster", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool tournament_broadcaster
     {
       get { return _tournament_broadcaster; }
@@ -8705,7 +8946,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _store_item_hash = default(uint);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"store_item_hash", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint store_item_hash
     {
       get { return _store_item_hash; }
@@ -8724,7 +8965,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _account_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint account_id
     {
       get { return _account_id; }
@@ -8733,7 +8974,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _hero_id = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"hero_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint hero_id
     {
       get { return _hero_id; }
@@ -8752,7 +8993,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _hero_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"hero_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint hero_id
     {
       get { return _hero_id; }
@@ -8771,7 +9012,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _hero_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"hero_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint hero_id
     {
       get { return _hero_id; }
@@ -8800,7 +9041,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _result = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"result", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint result
     {
       get { return _result; }
@@ -8852,7 +9093,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private int _region = default(int);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"region", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(int))]
+    [global::System.ComponentModel.DefaultValue(default(int))]
     public int region
     {
       get { return _region; }
@@ -8861,7 +9102,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private int _total = default(int);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"total", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(int))]
+    [global::System.ComponentModel.DefaultValue(default(int))]
     public int total
     {
       get { return _total; }
@@ -8870,7 +9111,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private int _in_queue = default(int);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"in_queue", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(int))]
+    [global::System.ComponentModel.DefaultValue(default(int))]
     public int in_queue
     {
       get { return _in_queue; }
@@ -8879,7 +9120,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private int _in_match = default(int);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"in_match", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(int))]
+    [global::System.ComponentModel.DefaultValue(default(int))]
     public int in_match
     {
       get { return _in_match; }
@@ -8888,7 +9129,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private int _in_practice = default(int);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"in_practice", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(int))]
+    [global::System.ComponentModel.DefaultValue(default(int))]
     public int in_practice
     {
       get { return _in_practice; }
@@ -8897,7 +9138,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private int _in_tournament = default(int);
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"in_tournament", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(int))]
+    [global::System.ComponentModel.DefaultValue(default(int))]
     public int in_tournament
     {
       get { return _in_tournament; }
@@ -8906,7 +9147,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private int _in_tutorial = default(int);
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"in_tutorial", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(int))]
+    [global::System.ComponentModel.DefaultValue(default(int))]
     public int in_tutorial
     {
       get { return _in_tutorial; }
@@ -8915,7 +9156,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private int _in_coop = default(int);
     [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"in_coop", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(int))]
+    [global::System.ComponentModel.DefaultValue(default(int))]
     public int in_coop
     {
       get { return _in_coop; }
@@ -8924,7 +9165,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private int _in_team_match = default(int);
     [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"in_team_match", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(int))]
+    [global::System.ComponentModel.DefaultValue(default(int))]
     public int in_team_match
     {
       get { return _in_team_match; }
@@ -8933,7 +9174,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private int _spectating = default(int);
     [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"spectating", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(int))]
+    [global::System.ComponentModel.DefaultValue(default(int))]
     public int spectating
     {
       get { return _spectating; }
@@ -8942,7 +9183,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private int _idle = default(int);
     [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"idle", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(int))]
+    [global::System.ComponentModel.DefaultValue(default(int))]
     public int idle
     {
       get { return _idle; }
@@ -8961,7 +9202,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private int _region = default(int);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"region", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(int))]
+    [global::System.ComponentModel.DefaultValue(default(int))]
     public int region
     {
       get { return _region; }
@@ -8970,7 +9211,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private int _in_use = default(int);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"in_use", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(int))]
+    [global::System.ComponentModel.DefaultValue(default(int))]
     public int in_use
     {
       get { return _in_use; }
@@ -8979,7 +9220,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private int _available = default(int);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"available", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(int))]
+    [global::System.ComponentModel.DefaultValue(default(int))]
     public int available
     {
       get { return _available; }
@@ -9003,7 +9244,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _showcase_hero_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"showcase_hero_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint showcase_hero_id
     {
       get { return _showcase_hero_id; }
@@ -9032,7 +9273,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _leagueid = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"leagueid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint leagueid
     {
       get { return _leagueid; }
@@ -9041,7 +9282,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private bool _live = default(bool);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"live", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool live
     {
       get { return _live; }
@@ -9050,7 +9291,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private bool _freeleague = default(bool);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"freeleague", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool freeleague
     {
       get { return _freeleague; }
@@ -9086,7 +9327,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _killer_account_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"killer_account_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint killer_account_id
     {
       get { return _killer_account_id; }
@@ -9095,7 +9336,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _victim_account_id = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"victim_account_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint victim_account_id
     {
       get { return _victim_account_id; }
@@ -9104,7 +9345,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private DOTA_TournamentEvents _event_type = DOTA_TournamentEvents.TE_FIRST_BLOOD;
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"event_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(DOTA_TournamentEvents.TE_FIRST_BLOOD)]
+    [global::System.ComponentModel.DefaultValue(DOTA_TournamentEvents.TE_FIRST_BLOOD)]
     public DOTA_TournamentEvents event_type
     {
       get { return _event_type; }
@@ -9113,7 +9354,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private int _tv_delay = default(int);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"tv_delay", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(int))]
+    [global::System.ComponentModel.DefaultValue(default(int))]
     public int tv_delay
     {
       get { return _tv_delay; }
@@ -9122,7 +9363,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private int _dota_time = default(int);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"dota_time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(int))]
+    [global::System.ComponentModel.DefaultValue(default(int))]
     public int dota_time
     {
       get { return _dota_time; }
@@ -9131,7 +9372,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private float _replay_time = default(float);
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"replay_time", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(float))]
+    [global::System.ComponentModel.DefaultValue(default(float))]
     public float replay_time
     {
       get { return _replay_time; }
@@ -9140,7 +9381,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private string _loot_list = "";
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"loot_list", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string loot_list
     {
       get { return _loot_list; }
@@ -9149,7 +9390,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _event_team = default(uint);
     [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"event_team", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint event_team
     {
       get { return _event_team; }
@@ -9158,7 +9399,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _multi_kill_count = default(uint);
     [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"multi_kill_count", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint multi_kill_count
     {
       get { return _multi_kill_count; }
@@ -9167,7 +9408,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _winner_score = default(uint);
     [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"winner_score", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint winner_score
     {
       get { return _winner_score; }
@@ -9176,7 +9417,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _loser_score = default(uint);
     [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"loser_score", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint loser_score
     {
       get { return _loser_score; }
@@ -9195,7 +9436,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private DOTA_TournamentEvents _event_type = DOTA_TournamentEvents.TE_FIRST_BLOOD;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"event_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(DOTA_TournamentEvents.TE_FIRST_BLOOD)]
+    [global::System.ComponentModel.DefaultValue(DOTA_TournamentEvents.TE_FIRST_BLOOD)]
     public DOTA_TournamentEvents event_type
     {
       get { return _event_type; }
@@ -9204,7 +9445,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private string _winner_name = "";
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"winner_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string winner_name
     {
       get { return _winner_name; }
@@ -9223,7 +9464,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _match_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"match_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint match_id
     {
       get { return _match_id; }
@@ -9244,7 +9485,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _account_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint account_id
     {
       get { return _account_id; }
@@ -9253,7 +9494,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _vote = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"vote", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint vote
     {
       get { return _vote; }
@@ -9277,7 +9518,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _match_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"match_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint match_id
     {
       get { return _match_id; }
@@ -9286,7 +9527,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private DOTAMatchVote _vote = DOTAMatchVote.DOTAMatchVote_INVALID;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"vote", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(DOTAMatchVote.DOTAMatchVote_INVALID)]
+    [global::System.ComponentModel.DefaultValue(DOTAMatchVote.DOTAMatchVote_INVALID)]
     public DOTAMatchVote vote
     {
       get { return _vote; }
@@ -9305,7 +9546,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _match_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"match_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint match_id
     {
       get { return _match_id; }
@@ -9314,7 +9555,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _incremental = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"incremental", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint incremental
     {
       get { return _incremental; }
@@ -9333,7 +9574,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _eresult = (uint)2;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"eresult", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue((uint)2)]
+    [global::System.ComponentModel.DefaultValue((uint)2)]
     public uint eresult
     {
       get { return _eresult; }
@@ -9342,7 +9583,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private DOTAMatchVote _vote = DOTAMatchVote.DOTAMatchVote_INVALID;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"vote", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(DOTAMatchVote.DOTAMatchVote_INVALID)]
+    [global::System.ComponentModel.DefaultValue(DOTAMatchVote.DOTAMatchVote_INVALID)]
     public DOTAMatchVote vote
     {
       get { return _vote; }
@@ -9351,7 +9592,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _positive_votes = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"positive_votes", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint positive_votes
     {
       get { return _positive_votes; }
@@ -9360,7 +9601,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _negative_votes = default(uint);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"negative_votes", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint negative_votes
     {
       get { return _negative_votes; }
@@ -9379,7 +9620,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _match_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"match_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint match_id
     {
       get { return _match_id; }
@@ -9398,7 +9639,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _fanfare_goodguys = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"fanfare_goodguys", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint fanfare_goodguys
     {
       get { return _fanfare_goodguys; }
@@ -9407,7 +9648,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _fanfare_badguys = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"fanfare_badguys", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint fanfare_badguys
     {
       get { return _fanfare_badguys; }
@@ -9426,7 +9667,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private ulong _spectator_id = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"spectator_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong spectator_id
     {
       get { return _spectator_id; }
@@ -9445,7 +9686,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private ulong _spectator_id = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"spectator_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong spectator_id
     {
       get { return _spectator_id; }
@@ -9464,7 +9705,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _game_time = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"game_time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint game_time
     {
       get { return _game_time; }
@@ -9473,7 +9714,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private byte[] _save_game_data = null;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"save_game_data", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(null)]
+    [global::System.ComponentModel.DefaultValue(null)]
     public byte[] save_game_data
     {
       get { return _save_game_data; }
@@ -9482,7 +9723,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private ulong _lobby_id = default(ulong);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"lobby_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong lobby_id
     {
       get { return _lobby_id; }
@@ -9508,7 +9749,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private CMsgGameServerSaveGameResult.Result _result = CMsgGameServerSaveGameResult.Result.SaveSuccessful;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"result", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(CMsgGameServerSaveGameResult.Result.SaveSuccessful)]
+    [global::System.ComponentModel.DefaultValue(CMsgGameServerSaveGameResult.Result.SaveSuccessful)]
     public CMsgGameServerSaveGameResult.Result result
     {
       get { return _result; }
@@ -9544,7 +9785,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _save_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"save_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint save_id
     {
       get { return _save_id; }
@@ -9563,7 +9804,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private byte[] _save_game_data = null;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"save_game_data", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(null)]
+    [global::System.ComponentModel.DefaultValue(null)]
     public byte[] save_game_data
     {
       get { return _save_game_data; }
@@ -9592,7 +9833,7 @@ namespace SteamKit2.GC.Dota.Internal
 
     private uint _eresult = (uint)2;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"eresult", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue((uint)2)]
+    [global::System.ComponentModel.DefaultValue((uint)2)]
     public uint eresult
     {
       get { return _eresult; }
@@ -9601,11 +9842,279 @@ namespace SteamKit2.GC.Dota.Internal
 
     private bool _spectator_only = default(bool);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"spectator_only", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool spectator_only
     {
       get { return _spectator_only; }
       set { _spectator_only = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAHallOfFame")]
+  public partial class CMsgDOTAHallOfFame : global::ProtoBuf.IExtensible
+  {
+    public CMsgDOTAHallOfFame() {}
+    
+
+    private uint _week = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"week", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint week
+    {
+      get { return _week; }
+      set { _week = value; }
+    }
+    private readonly global::System.Collections.Generic.List<CMsgDOTAHallOfFame.FeaturedPlayer> _featured_players = new global::System.Collections.Generic.List<CMsgDOTAHallOfFame.FeaturedPlayer>();
+    [global::ProtoBuf.ProtoMember(2, Name=@"featured_players", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CMsgDOTAHallOfFame.FeaturedPlayer> featured_players
+    {
+      get { return _featured_players; }
+    }
+  
+
+    private CMsgDOTAHallOfFame.FeaturedFarmer _featured_farmer = null;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"featured_farmer", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public CMsgDOTAHallOfFame.FeaturedFarmer featured_farmer
+    {
+      get { return _featured_farmer; }
+      set { _featured_farmer = value; }
+    }
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"FeaturedPlayer")]
+  public partial class FeaturedPlayer : global::ProtoBuf.IExtensible
+  {
+    public FeaturedPlayer() {}
+    
+
+    private uint _account_id = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint account_id
+    {
+      get { return _account_id; }
+      set { _account_id = value; }
+    }
+
+    private uint _hero_id = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"hero_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint hero_id
+    {
+      get { return _hero_id; }
+      set { _hero_id = value; }
+    }
+
+    private float _average_scaled_metric = default(float);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"average_scaled_metric", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(float))]
+    public float average_scaled_metric
+    {
+      get { return _average_scaled_metric; }
+      set { _average_scaled_metric = value; }
+    }
+
+    private uint _num_games = default(uint);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"num_games", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint num_games
+    {
+      get { return _num_games; }
+      set { _num_games = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"FeaturedFarmer")]
+  public partial class FeaturedFarmer : global::ProtoBuf.IExtensible
+  {
+    public FeaturedFarmer() {}
+    
+
+    private uint _account_id = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint account_id
+    {
+      get { return _account_id; }
+      set { _account_id = value; }
+    }
+
+    private uint _hero_id = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"hero_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint hero_id
+    {
+      get { return _hero_id; }
+      set { _hero_id = value; }
+    }
+
+    private uint _gold_per_min = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"gold_per_min", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint gold_per_min
+    {
+      get { return _gold_per_min; }
+      set { _gold_per_min = value; }
+    }
+
+    private uint _match_id = default(uint);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"match_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint match_id
+    {
+      get { return _match_id; }
+      set { _match_id = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAHallOfFameRequest")]
+  public partial class CMsgDOTAHallOfFameRequest : global::ProtoBuf.IExtensible
+  {
+    public CMsgDOTAHallOfFameRequest() {}
+    
+
+    private uint _week = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"week", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint week
+    {
+      get { return _week; }
+      set { _week = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAHallOfFameResponse")]
+  public partial class CMsgDOTAHallOfFameResponse : global::ProtoBuf.IExtensible
+  {
+    public CMsgDOTAHallOfFameResponse() {}
+    
+
+    private CMsgDOTAHallOfFame _hall_of_fame = null;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"hall_of_fame", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public CMsgDOTAHallOfFame hall_of_fame
+    {
+      get { return _hall_of_fame; }
+      set { _hall_of_fame = value; }
+    }
+
+    private uint _eresult = (uint)2;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"eresult", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue((uint)2)]
+    public uint eresult
+    {
+      get { return _eresult; }
+      set { _eresult = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAGenerateDiretidePrizeList")]
+  public partial class CMsgDOTAGenerateDiretidePrizeList : global::ProtoBuf.IExtensible
+  {
+    public CMsgDOTAGenerateDiretidePrizeList() {}
+    
+
+    private uint _prize_list = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"prize_list", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint prize_list
+    {
+      get { return _prize_list; }
+      set { _prize_list = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTARewardDiretidePrizes")]
+  public partial class CMsgDOTARewardDiretidePrizes : global::ProtoBuf.IExtensible
+  {
+    public CMsgDOTARewardDiretidePrizes() {}
+    
+
+    private uint _team = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"team", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint team
+    {
+      get { return _team; }
+      set { _team = value; }
+    }
+
+    private uint _prize_list = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"prize_list", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint prize_list
+    {
+      get { return _prize_list; }
+      set { _prize_list = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTADiretidePrizesRewardedResponse")]
+  public partial class CMsgDOTADiretidePrizesRewardedResponse : global::ProtoBuf.IExtensible
+  {
+    public CMsgDOTADiretidePrizesRewardedResponse() {}
+    
+
+    private uint _prize_list = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"prize_list", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint prize_list
+    {
+      get { return _prize_list; }
+      set { _prize_list = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTADiretidePrizeResponse")]
+  public partial class CMsgDOTADiretidePrizeResponse : global::ProtoBuf.IExtensible
+  {
+    public CMsgDOTADiretidePrizeResponse() {}
+    
+
+    private uint _item_def = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"item_def", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint item_def
+    {
+      get { return _item_def; }
+      set { _item_def = value; }
+    }
+
+    private uint _prize_list = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"prize_list", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint prize_list
+    {
+      get { return _prize_list; }
+      set { _prize_list = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -9628,9 +10137,6 @@ namespace SteamKit2.GC.Dota.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCGameMatchSignOutResponse", Value=7005)]
       k_EMsgGCGameMatchSignOutResponse = 7005,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCPlayerSummary", Value=7007)]
-      k_EMsgGCPlayerSummary = 7007,
-            
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCJoinChatChannel", Value=7009)]
       k_EMsgGCJoinChatChannel = 7009,
             
@@ -9639,9 +10145,6 @@ namespace SteamKit2.GC.Dota.Internal
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCLeaveChatChannel", Value=7011)]
       k_EMsgGCLeaveChatChannel = 7011,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCChatMessageOld", Value=7012)]
-      k_EMsgGCChatMessageOld = 7012,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCOtherJoinedChannel", Value=7013)]
       k_EMsgGCOtherJoinedChannel = 7013,
@@ -9654,12 +10157,6 @@ namespace SteamKit2.GC.Dota.Internal
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCMatchHistoryList", Value=7017)]
       k_EMsgGCMatchHistoryList = 7017,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCRequestPersonaDetails", Value=7021)]
-      k_EMsgGCRequestPersonaDetails = 7021,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCPersonaDetails", Value=7022)]
-      k_EMsgGCPersonaDetails = 7022,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCGetNews", Value=7024)]
       k_EMsgGCGetNews = 7024,
@@ -10072,8 +10569,73 @@ namespace SteamKit2.GC.Dota.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCTeamProfileResponse", Value=7165)]
       k_EMsgGCTeamProfileResponse = 7165,
             
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCEditTeamDetails", Value=7166)]
+      k_EMsgGCEditTeamDetails = 7166,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCEditTeamDetailsResponse", Value=7167)]
+      k_EMsgGCEditTeamDetailsResponse = 7167,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCProTeamListRequest", Value=7168)]
+      k_EMsgGCProTeamListRequest = 7168,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCProTeamListResponse", Value=7169)]
+      k_EMsgGCProTeamListResponse = 7169,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCReadyUpStatus", Value=7170)]
+      k_EMsgGCReadyUpStatus = 7170,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCHallOfFame", Value=7171)]
+      k_EMsgGCHallOfFame = 7171,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCHallOfFameRequest", Value=7172)]
+      k_EMsgGCHallOfFameRequest = 7172,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCHallOfFameResponse", Value=7173)]
+      k_EMsgGCHallOfFameResponse = 7173,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCGenerateDiretidePrizeList", Value=7174)]
+      k_EMsgGCGenerateDiretidePrizeList = 7174,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCDiretidePrizeResponse", Value=7175)]
+      k_EMsgGCDiretidePrizeResponse = 7175,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCRewardDiretidePrizes", Value=7176)]
+      k_EMsgGCRewardDiretidePrizes = 7176,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCDiretidePrizesRewardedResponse", Value=7177)]
+      k_EMsgGCDiretidePrizesRewardedResponse = 7177,
+            
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCDev_GrantWarKill", Value=8001)]
       k_EMsgGCDev_GrantWarKill = 8001
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"DOTA_GameMode")]
+    public enum DOTA_GameMode
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_GAMEMODE_NONE", Value=0)]
+      DOTA_GAMEMODE_NONE = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_GAMEMODE_AP", Value=1)]
+      DOTA_GAMEMODE_AP = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_GAMEMODE_CM", Value=2)]
+      DOTA_GAMEMODE_CM = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_GAMEMODE_RD", Value=3)]
+      DOTA_GAMEMODE_RD = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_GAMEMODE_SD", Value=4)]
+      DOTA_GAMEMODE_SD = 4,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_GAMEMODE_AR", Value=5)]
+      DOTA_GAMEMODE_AR = 5,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_GAMEMODE_INTRO", Value=6)]
+      DOTA_GAMEMODE_INTRO = 6,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_GAMEMODE_HW", Value=7)]
+      DOTA_GAMEMODE_HW = 7
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"DOTA_GameState")]

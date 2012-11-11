@@ -31,7 +31,7 @@ namespace SteamKit2.Internal
 
     private string _filename = "";
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"filename", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string filename
     {
       get { return _filename; }
@@ -40,7 +40,7 @@ namespace SteamKit2.Internal
 
     private ulong _size = default(ulong);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"size", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong size
     {
       get { return _size; }
@@ -49,7 +49,7 @@ namespace SteamKit2.Internal
 
     private uint _flags = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"flags", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint flags
     {
       get { return _flags; }
@@ -58,7 +58,7 @@ namespace SteamKit2.Internal
 
     private byte[] _sha_filename = null;
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"sha_filename", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(null)]
+    [global::System.ComponentModel.DefaultValue(null)]
     public byte[] sha_filename
     {
       get { return _sha_filename; }
@@ -67,7 +67,7 @@ namespace SteamKit2.Internal
 
     private byte[] _sha_content = null;
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"sha_content", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(null)]
+    [global::System.ComponentModel.DefaultValue(null)]
     public byte[] sha_content
     {
       get { return _sha_content; }
@@ -88,7 +88,7 @@ namespace SteamKit2.Internal
 
     private byte[] _sha = null;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"sha", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(null)]
+    [global::System.ComponentModel.DefaultValue(null)]
     public byte[] sha
     {
       get { return _sha; }
@@ -97,7 +97,7 @@ namespace SteamKit2.Internal
 
     private uint _crc = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"crc", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint crc
     {
       get { return _crc; }
@@ -106,7 +106,7 @@ namespace SteamKit2.Internal
 
     private ulong _offset = default(ulong);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"offset", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong offset
     {
       get { return _offset; }
@@ -115,7 +115,7 @@ namespace SteamKit2.Internal
 
     private uint _cb_original = default(uint);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"cb_original", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint cb_original
     {
       get { return _cb_original; }
@@ -124,7 +124,7 @@ namespace SteamKit2.Internal
 
     private uint _cb_compressed = default(uint);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"cb_compressed", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint cb_compressed
     {
       get { return _cb_compressed; }
@@ -153,7 +153,7 @@ namespace SteamKit2.Internal
 
     private uint _depot_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"depot_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint depot_id
     {
       get { return _depot_id; }
@@ -162,7 +162,7 @@ namespace SteamKit2.Internal
 
     private ulong _gid_manifest = default(ulong);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"gid_manifest", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong gid_manifest
     {
       get { return _gid_manifest; }
@@ -171,7 +171,7 @@ namespace SteamKit2.Internal
 
     private uint _creation_time = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"creation_time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint creation_time
     {
       get { return _creation_time; }
@@ -180,7 +180,7 @@ namespace SteamKit2.Internal
 
     private bool _filenames_encrypted = default(bool);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"filenames_encrypted", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool filenames_encrypted
     {
       get { return _filenames_encrypted; }
@@ -189,7 +189,7 @@ namespace SteamKit2.Internal
 
     private ulong _cb_disk_original = default(ulong);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"cb_disk_original", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong cb_disk_original
     {
       get { return _cb_disk_original; }
@@ -198,7 +198,7 @@ namespace SteamKit2.Internal
 
     private ulong _cb_disk_compressed = default(ulong);
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"cb_disk_compressed", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong cb_disk_compressed
     {
       get { return _cb_disk_compressed; }
@@ -207,7 +207,7 @@ namespace SteamKit2.Internal
 
     private uint _unique_chunks = default(uint);
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"unique_chunks", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint unique_chunks
     {
       get { return _unique_chunks; }
@@ -216,7 +216,7 @@ namespace SteamKit2.Internal
 
     private uint _crc_encrypted = default(uint);
     [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"crc_encrypted", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint crc_encrypted
     {
       get { return _crc_encrypted; }
@@ -225,7 +225,7 @@ namespace SteamKit2.Internal
 
     private uint _crc_clear = default(uint);
     [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"crc_clear", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint crc_clear
     {
       get { return _crc_clear; }
@@ -244,7 +244,7 @@ namespace SteamKit2.Internal
 
     private byte[] _signature = null;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"signature", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(null)]
+    [global::System.ComponentModel.DefaultValue(null)]
     public byte[] signature
     {
       get { return _signature; }
