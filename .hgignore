@@ -1,9 +1,11 @@
 syntax: glob
 
+# user files
 *.suo
 *.user
 *.ncb
 
+# binaries
 bin/
 obj/
 [Dd]ebug/
@@ -16,9 +18,6 @@ zlib/
 protobuf/
 cryptopp/
 
-*.svn-base
-.svn
-
 # vs 2013
 _UpgradeReport_Files/
 UpgradeLog.XML
@@ -26,3 +25,6 @@ UpgradeLog.XML
 # backups and stuff
 *.orig
 Backup/
+
+# nuget packages
+packages/
