@@ -29,39 +29,5 @@ namespace SteamKit2
             new IPEndPoint( IPAddress.Parse( "87.248.196.194" ), 27038 ),
             new IPEndPoint( IPAddress.Parse( "68.142.72.250" ), 27038 ),*/
         };
-
-
-        /// <summary>
-        /// Gets an auth server list for a specific username.
-        /// </summary>
-        /// <param name="userName">The username.</param>
-        /// <returns>A list of servers on success; otherwise, <c>null</c>.</returns>
-        public IPEndPoint[] GetAuthServerList( string userName )
-        {
-            userName = userName.ToLower();
-
-            byte[] userHash = CryptoHelper.JenkinsHash( Encoding.ASCII.GetBytes( userName ) );
-            uint userData = BitConverter.ToUInt32( userHash, 0 ) & 1;
-
-            TcpPacket packet = base.GetRawServerList( ESteam2ServerType.ProxyASClientAuthentication, NetHelpers.EndianSwap( userData ) );
-
-            if ( packet == null )
-                return null;
-
-            DataStream ds = new DataStream( packet.GetPayload(), true );
-
-            ushort numAddrs = ds.ReadUInt16();
-
-            IPEndPoint[] serverList = new IPEndPoint[ numAddrs ];
-            for ( int x = 0 ; x < numAddrs ; ++x )
-            {
-                IPAddrPort ipAddr = IPAddrPort.Deserialize( ds.ReadBytes( 6 ) );
-
-                serverList[ x ] = ipAddr;
-            }
-
-            return serverList;
-        }
-        
     }
 }
