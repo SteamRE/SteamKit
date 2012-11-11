@@ -2,6 +2,3 @@ SteamKit2 makes use of the following libraries:
 
 protobuf-net by Marc Gravell (marc.gravell@gmail.com) licensed under Apache License 2.0
 	License and source code available at http://code.google.com/p/protobuf-net/
-
-Classless Hasher by Jason Simeone (jay@classless.net) licensed under Mozilla Public License 1.1
-	License and source code available at https://bitbucket.org/jayclassless/classless-hasher/
