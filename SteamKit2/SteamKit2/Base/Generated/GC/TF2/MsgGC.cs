@@ -20,7 +20,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private int _wrench_number = default(int);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"wrench_number", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(int))]
+    [global::System.ComponentModel.DefaultValue(default(int))]
     public int wrench_number
     {
       get { return _wrench_number; }
@@ -29,7 +29,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private bool _deleted = default(bool);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"deleted", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool deleted
     {
       get { return _deleted; }
@@ -38,7 +38,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private string _user_name = "";
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"user_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string user_name
     {
       get { return _user_name; }
@@ -57,7 +57,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private int _category_number = default(int);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"category_number", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(int))]
+    [global::System.ComponentModel.DefaultValue(default(int))]
     public int category_number
     {
       get { return _category_number; }
@@ -66,7 +66,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private string _user_name = "";
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"user_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string user_name
     {
       get { return _user_name; }
@@ -85,7 +85,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _account_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint account_id
     {
       get { return _account_id; }
@@ -94,7 +94,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _duel_wins = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"duel_wins", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint duel_wins
     {
       get { return _duel_wins; }
@@ -103,7 +103,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _duel_losses = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"duel_losses", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint duel_losses
     {
       get { return _duel_losses; }
@@ -112,7 +112,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _last_duel_account_id = default(uint);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"last_duel_account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint last_duel_account_id
     {
       get { return _last_duel_account_id; }
@@ -121,7 +121,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _last_duel_timestamp = default(uint);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"last_duel_timestamp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint last_duel_timestamp
     {
       get { return _last_duel_timestamp; }
@@ -130,7 +130,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _last_duel_status = default(uint);
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"last_duel_status", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint last_duel_status
     {
       get { return _last_duel_status; }
@@ -149,7 +149,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _account_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint account_id
     {
       get { return _account_id; }
@@ -158,7 +158,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _def_index = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"def_index", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint def_index
     {
       get { return _def_index; }
@@ -167,7 +167,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _contribution_level = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"contribution_level", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint contribution_level
     {
       get { return _contribution_level; }
@@ -186,7 +186,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _account_id_subject = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_id_subject", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint account_id_subject
     {
       get { return _account_id_subject; }
@@ -195,7 +195,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _kick_reason = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"kick_reason", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint kick_reason
     {
       get { return _kick_reason; }
@@ -214,7 +214,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _account_id_initiator = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_id_initiator", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint account_id_initiator
     {
       get { return _account_id_initiator; }
@@ -223,7 +223,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _account_id_subject = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"account_id_subject", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint account_id_subject
     {
       get { return _account_id_subject; }
@@ -232,7 +232,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _kick_reason = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"kick_reason", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint kick_reason
     {
       get { return _kick_reason; }
@@ -241,7 +241,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private bool _kick_successful = default(bool);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"kick_successful", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool kick_successful
     {
       get { return _kick_successful; }
@@ -250,7 +250,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _num_yes_votes = default(uint);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"num_yes_votes", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint num_yes_votes
     {
       get { return _num_yes_votes; }
@@ -259,7 +259,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _num_no_votes = default(uint);
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"num_no_votes", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint num_no_votes
     {
       get { return _num_no_votes; }
@@ -268,7 +268,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _num_possible_votes = default(uint);
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"num_possible_votes", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint num_possible_votes
     {
       get { return _num_possible_votes; }
@@ -287,7 +287,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _account_id_player = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_id_player", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint account_id_player
     {
       get { return _account_id_player; }
@@ -296,7 +296,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _kick_reason = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"kick_reason", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint kick_reason
     {
       get { return _kick_reason; }
@@ -325,7 +325,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _account_id_friend = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_id_friend", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint account_id_friend
     {
       get { return _account_id_friend; }
@@ -378,7 +378,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _num_new_users_helped = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"num_new_users_helped", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint num_new_users_helped
     {
       get { return _num_new_users_helped; }
@@ -387,7 +387,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private bool _trial_account = (bool)false;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"trial_account", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue((bool)false)]
+    [global::System.ComponentModel.DefaultValue((bool)false)]
     public bool trial_account
     {
       get { return _trial_account; }
@@ -406,7 +406,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private ulong _thanker_steam_id = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"thanker_steam_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong thanker_steam_id
     {
       get { return _thanker_steam_id; }
@@ -445,7 +445,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _category = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"category", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint category
     {
       get { return _category; }
@@ -471,7 +471,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private string _youtube_url = "";
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"youtube_url", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string youtube_url
     {
       get { return _youtube_url; }
@@ -480,7 +480,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _category = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"category", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint category
     {
       get { return _category; }
@@ -499,7 +499,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private bool _success = default(bool);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"success", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool success
     {
       get { return _success; }
@@ -518,7 +518,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _timestamp = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"timestamp", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint timestamp
     {
       get { return _timestamp; }
@@ -527,7 +527,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _num_votes_last_day = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"num_votes_last_day", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint num_votes_last_day
     {
       get { return _num_votes_last_day; }
@@ -543,7 +543,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _num_flags_last_day = default(uint);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"num_flags_last_day", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint num_flags_last_day
     {
       get { return _num_flags_last_day; }
@@ -582,7 +582,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _account_id_friend_as_coach = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_id_friend_as_coach", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint account_id_friend_as_coach
     {
       get { return _account_id_friend_as_coach; }
@@ -601,7 +601,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private bool _found_coach = default(bool);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"found_coach", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool found_coach
     {
       get { return _found_coach; }
@@ -610,7 +610,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _num_likes = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"num_likes", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint num_likes
     {
       get { return _num_likes; }
@@ -619,7 +619,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private string _coach_name = "";
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"coach_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string coach_name
     {
       get { return _coach_name; }
@@ -638,7 +638,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _account_id_student = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_id_student", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint account_id_student
     {
       get { return _account_id_student; }
@@ -647,7 +647,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private bool _student_is_friend = default(bool);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"student_is_friend", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool student_is_friend
     {
       get { return _student_is_friend; }
@@ -666,7 +666,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private bool _accept_coaching_assignment = default(bool);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"accept_coaching_assignment", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool accept_coaching_assignment
     {
       get { return _accept_coaching_assignment; }
@@ -685,7 +685,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private bool _join_game = default(bool);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"join_game", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool join_game
     {
       get { return _join_game; }
@@ -694,7 +694,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _server_address = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"server_address", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint server_address
     {
       get { return _server_address; }
@@ -703,7 +703,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _server_port = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"server_port", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint server_port
     {
       get { return _server_port; }
@@ -712,7 +712,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _account_id_student = default(uint);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"account_id_student", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint account_id_student
     {
       get { return _account_id_student; }
@@ -731,7 +731,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _account_id_coach = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_id_coach", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint account_id_coach
     {
       get { return _account_id_coach; }
@@ -740,7 +740,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _account_id_student = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"account_id_student", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint account_id_student
     {
       get { return _account_id_student; }
@@ -759,7 +759,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _account_id_coach = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_id_coach", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint account_id_coach
     {
       get { return _account_id_coach; }
@@ -778,7 +778,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private bool _like_coach = default(bool);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"like_coach", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool like_coach
     {
       get { return _like_coach; }
@@ -797,7 +797,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _account_id_coach = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_id_coach", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint account_id_coach
     {
       get { return _account_id_coach; }
@@ -828,7 +828,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _server_address = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"server_address", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint server_address
     {
       get { return _server_address; }
@@ -837,7 +837,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _server_port = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"server_port", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint server_port
     {
       get { return _server_port; }
@@ -846,7 +846,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _num_users = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"num_users", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint num_users
     {
       get { return _num_users; }
@@ -855,7 +855,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private ulong _steam_id = default(ulong);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"steam_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong steam_id
     {
       get { return _steam_id; }
@@ -864,7 +864,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _max_users = default(uint);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"max_users", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint max_users
     {
       get { return _max_users; }
@@ -873,7 +873,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private float _user_score = default(float);
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"user_score", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(float))]
+    [global::System.ComponentModel.DefaultValue(default(float))]
     public float user_score
     {
       get { return _user_score; }
@@ -909,7 +909,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _server_address = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"server_address", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint server_address
     {
       get { return _server_address; }
@@ -918,7 +918,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _server_port = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"server_port", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint server_port
     {
       get { return _server_port; }
@@ -927,7 +927,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private float _total_score = default(float);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"total_score", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(float))]
+    [global::System.ComponentModel.DefaultValue(default(float))]
     public float total_score
     {
       get { return _total_score; }
@@ -936,7 +936,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private ulong _steam_id = default(ulong);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"steam_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong steam_id
     {
       get { return _steam_id; }
@@ -960,7 +960,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _account_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint account_id
     {
       get { return _account_id; }
@@ -979,7 +979,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private bool _level_loaded = default(bool);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"level_loaded", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool level_loaded
     {
       get { return _level_loaded; }
@@ -988,7 +988,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private string _level_name = "";
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"level_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string level_name
     {
       get { return _level_name; }
@@ -1007,7 +1007,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private string _challenge_string = "";
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"challenge_string", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string challenge_string
     {
       get { return _challenge_string; }
@@ -1026,7 +1026,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private bool _authenticated = default(bool);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"authenticated", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool authenticated
     {
       get { return _authenticated; }
@@ -1035,7 +1035,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private int _game_server_standing = default(int);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"game_server_standing", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(int))]
+    [global::System.ComponentModel.DefaultValue(default(int))]
     public int game_server_standing
     {
       get { return _game_server_standing; }
@@ -1044,7 +1044,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private int _game_server_standing_trend = default(int);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"game_server_standing_trend", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(int))]
+    [global::System.ComponentModel.DefaultValue(default(int))]
     public int game_server_standing_trend
     {
       get { return _game_server_standing_trend; }
@@ -1053,7 +1053,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private bool _is_valve_server = default(bool);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"is_valve_server", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool is_valve_server
     {
       get { return _is_valve_server; }
@@ -1062,7 +1062,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private string _message = "";
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"message", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string message
     {
       get { return _message; }
@@ -1081,7 +1081,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _game_server_account_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"game_server_account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint game_server_account_id
     {
       get { return _game_server_account_id; }
@@ -1090,7 +1090,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private byte[] _hashed_challenge_string = null;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"hashed_challenge_string", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(null)]
+    [global::System.ComponentModel.DefaultValue(null)]
     public byte[] hashed_challenge_string
     {
       get { return _hashed_challenge_string; }
@@ -1109,7 +1109,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _account_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint account_id
     {
       get { return _account_id; }
@@ -1128,7 +1128,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private bool _account_created = default(bool);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_created", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool account_created
     {
       get { return _account_created; }
@@ -1137,7 +1137,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _game_server_account_id = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"game_server_account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint game_server_account_id
     {
       get { return _game_server_account_id; }
@@ -1146,7 +1146,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private string _game_server_identity_token = "";
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"game_server_identity_token", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string game_server_identity_token
     {
       get { return _game_server_identity_token; }
@@ -1155,7 +1155,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private CMsgGC_GameServer_CreateIdentityResponse.EStatus _status = CMsgGC_GameServer_CreateIdentityResponse.EStatus.kStatus_GenericFailure;
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"status", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(CMsgGC_GameServer_CreateIdentityResponse.EStatus.kStatus_GenericFailure)]
+    [global::System.ComponentModel.DefaultValue(CMsgGC_GameServer_CreateIdentityResponse.EStatus.kStatus_GenericFailure)]
     public CMsgGC_GameServer_CreateIdentityResponse.EStatus status
     {
       get { return _status; }
@@ -1191,7 +1191,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _account_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint account_id
     {
       get { return _account_id; }
@@ -1222,7 +1222,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _game_server_account_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"game_server_account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint game_server_account_id
     {
       get { return _game_server_account_id; }
@@ -1231,7 +1231,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private string _game_server_identity_token = "";
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"game_server_identity_token", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string game_server_identity_token
     {
       get { return _game_server_identity_token; }
@@ -1240,7 +1240,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private int _game_server_standing = default(int);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"game_server_standing", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(int))]
+    [global::System.ComponentModel.DefaultValue(default(int))]
     public int game_server_standing
     {
       get { return _game_server_standing; }
@@ -1249,7 +1249,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private int _game_server_standing_trend = default(int);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"game_server_standing_trend", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(int))]
+    [global::System.ComponentModel.DefaultValue(default(int))]
     public int game_server_standing_trend
     {
       get { return _game_server_standing_trend; }
@@ -1273,7 +1273,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _game_server_account_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"game_server_account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint game_server_account_id
     {
       get { return _game_server_account_id; }
@@ -1292,7 +1292,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private bool _game_server_identity_token_reset = default(bool);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"game_server_identity_token_reset", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool game_server_identity_token_reset
     {
       get { return _game_server_identity_token_reset; }
@@ -1301,7 +1301,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _game_server_account_id = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"game_server_account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint game_server_account_id
     {
       get { return _game_server_account_id; }
@@ -1310,7 +1310,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private string _game_server_identity_token = "";
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"game_server_identity_token", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string game_server_identity_token
     {
       get { return _game_server_identity_token; }
@@ -1350,7 +1350,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _spawn_meta_info = default(uint);
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"spawn_meta_info", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint spawn_meta_info
     {
       get { return _spawn_meta_info; }
@@ -1369,7 +1369,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _recipient_account_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"recipient_account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint recipient_account_id
     {
       get { return _recipient_account_id; }
@@ -1378,7 +1378,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _level_id = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"level_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint level_id
     {
       get { return _level_id; }
@@ -1387,7 +1387,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private bool _flagged = default(bool);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"flagged", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool flagged
     {
       get { return _flagged; }
@@ -1406,7 +1406,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _recipient_account_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"recipient_account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint recipient_account_id
     {
       get { return _recipient_account_id; }
@@ -1435,7 +1435,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _account_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint account_id
     {
       get { return _account_id; }
@@ -1444,7 +1444,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _seconds_ago = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"seconds_ago", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint seconds_ago
     {
       get { return _seconds_ago; }
@@ -1463,7 +1463,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _account_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint account_id
     {
       get { return _account_id; }
@@ -1472,7 +1472,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private bool _was_eligible = default(bool);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"was_eligible", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool was_eligible
     {
       get { return _was_eligible; }
@@ -1481,7 +1481,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _level_id = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"level_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint level_id
     {
       get { return _level_id; }
@@ -1500,25 +1500,25 @@ namespace SteamKit2.GC.TF2.Internal
 
     private bool _owns_ticket = default(bool);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"owns_ticket", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool owns_ticket
     {
       get { return _owns_ticket; }
       set { _owns_ticket = value; }
     }
 
-    private uint _completed_challenges = default(uint);
-    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"completed_challenges", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
-    public uint completed_challenges
+    private uint _completed_missions = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"completed_missions", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint completed_missions
     {
-      get { return _completed_challenges; }
-      set { _completed_challenges = value; }
+      get { return _completed_missions; }
+      set { _completed_missions = value; }
     }
 
     private uint _badge_level = default(uint);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"badge_level", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint badge_level
     {
       get { return _badge_level; }
@@ -1527,11 +1527,20 @@ namespace SteamKit2.GC.TF2.Internal
 
     private bool _squad_surplus = default(bool);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"squad_surplus", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool squad_surplus
     {
       get { return _squad_surplus; }
       set { _squad_surplus = value; }
+    }
+
+    private bool _is_banned = (bool)false;
+    [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"is_banned", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue((bool)false)]
+    public bool is_banned
+    {
+      get { return _is_banned; }
+      set { _is_banned = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -1546,7 +1555,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private TF_MatchmakingMode _matchmaking_mode = TF_MatchmakingMode.TF_Matchmaking_INVALID;
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"matchmaking_mode", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(TF_MatchmakingMode.TF_Matchmaking_INVALID)]
+    [global::System.ComponentModel.DefaultValue(TF_MatchmakingMode.TF_Matchmaking_INVALID)]
     public TF_MatchmakingMode matchmaking_mode
     {
       get { return _matchmaking_mode; }
@@ -1555,25 +1564,32 @@ namespace SteamKit2.GC.TF2.Internal
 
     private bool _late_join_ok = default(bool);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"late_join_ok", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool late_join_ok
     {
       get { return _late_join_ok; }
       set { _late_join_ok = value; }
     }
 
-    private string _challenge = "";
-    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"challenge", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
-    public string challenge
+    private string _mvm_mannup_tour = "";
+    [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"mvm_mannup_tour", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string mvm_mannup_tour
     {
-      get { return _challenge; }
-      set { _challenge = value; }
+      get { return _mvm_mannup_tour; }
+      set { _mvm_mannup_tour = value; }
     }
+    private readonly global::System.Collections.Generic.List<string> _mvm_missions = new global::System.Collections.Generic.List<string>();
+    [global::ProtoBuf.ProtoMember(9, Name=@"mvm_missions", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<string> mvm_missions
+    {
+      get { return _mvm_missions; }
+    }
+  
 
     private bool _play_for_bragging_rights = default(bool);
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"play_for_bragging_rights", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool play_for_bragging_rights
     {
       get { return _play_for_bragging_rights; }
@@ -1582,7 +1598,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _quickplay_game_type = default(uint);
     [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"quickplay_game_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint quickplay_game_type
     {
       get { return _quickplay_game_type; }
@@ -1601,7 +1617,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private CMsgMatchSearchCriteria _search_criteria = null;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"search_criteria", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(null)]
+    [global::System.ComponentModel.DefaultValue(null)]
     public CMsgMatchSearchCriteria search_criteria
     {
       get { return _search_criteria; }
@@ -1610,7 +1626,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private ulong _steam_lobby_id = default(ulong);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"steam_lobby_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong steam_lobby_id
     {
       get { return _steam_lobby_id; }
@@ -1619,7 +1635,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private bool _squad_surplus = default(bool);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"squad_surplus", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool squad_surplus
     {
       get { return _squad_surplus; }
@@ -1628,7 +1644,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private TF_Matchmaking_WizardStep _wizard_step = TF_Matchmaking_WizardStep.TF_Matchmaking_WizardStep_INVALID;
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"wizard_step", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(TF_Matchmaking_WizardStep.TF_Matchmaking_WizardStep_INVALID)]
+    [global::System.ComponentModel.DefaultValue(TF_Matchmaking_WizardStep.TF_Matchmaking_WizardStep_INVALID)]
     public TF_Matchmaking_WizardStep wizard_step
     {
       get { return _wizard_step; }
@@ -1637,7 +1653,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _client_version = (uint)1225;
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"client_version", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue((uint)1225)]
+    [global::System.ComponentModel.DefaultValue((uint)1225)]
     public uint client_version
     {
       get { return _client_version; }
@@ -1656,7 +1672,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _result = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"result", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint result
     {
       get { return _result; }
@@ -1665,7 +1681,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private string _message = "";
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"message", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string message
     {
       get { return _message; }
@@ -1674,7 +1690,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private TF_Matchmaking_WizardStep _wizard_step = TF_Matchmaking_WizardStep.TF_Matchmaking_WizardStep_INVALID;
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"wizard_step", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(TF_Matchmaking_WizardStep.TF_Matchmaking_WizardStep_INVALID)]
+    [global::System.ComponentModel.DefaultValue(TF_Matchmaking_WizardStep.TF_Matchmaking_WizardStep_INVALID)]
     public TF_Matchmaking_WizardStep wizard_step
     {
       get { return _wizard_step; }
@@ -1693,7 +1709,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private ulong _party_id = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"party_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong party_id
     {
       get { return _party_id; }
@@ -1702,7 +1718,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private ulong _leader_id = default(ulong);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"leader_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong leader_id
     {
       get { return _leader_id; }
@@ -1732,7 +1748,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private CSOTFParty.State _state = CSOTFParty.State.UI;
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"state", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(CSOTFParty.State.UI)]
+    [global::System.ComponentModel.DefaultValue(CSOTFParty.State.UI)]
     public CSOTFParty.State state
     {
       get { return _state; }
@@ -1741,7 +1757,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private TF_Matchmaking_WizardStep _wizard_step = TF_Matchmaking_WizardStep.TF_Matchmaking_WizardStep_INVALID;
     [global::ProtoBuf.ProtoMember(29, IsRequired = false, Name=@"wizard_step", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(TF_Matchmaking_WizardStep.TF_Matchmaking_WizardStep_INVALID)]
+    [global::System.ComponentModel.DefaultValue(TF_Matchmaking_WizardStep.TF_Matchmaking_WizardStep_INVALID)]
     public TF_Matchmaking_WizardStep wizard_step
     {
       get { return _wizard_step; }
@@ -1750,7 +1766,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _started_matchmaking_time = default(uint);
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"started_matchmaking_time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint started_matchmaking_time
     {
       get { return _started_matchmaking_time; }
@@ -1766,7 +1782,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private ulong _steam_lobby_id = default(ulong);
     [global::ProtoBuf.ProtoMember(27, IsRequired = false, Name=@"steam_lobby_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong steam_lobby_id
     {
       get { return _steam_lobby_id; }
@@ -1775,7 +1791,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private TF_MatchmakingMode _matchmaking_mode = TF_MatchmakingMode.TF_Matchmaking_INVALID;
     [global::ProtoBuf.ProtoMember(30, IsRequired = false, Name=@"matchmaking_mode", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(TF_MatchmakingMode.TF_Matchmaking_INVALID)]
+    [global::System.ComponentModel.DefaultValue(TF_MatchmakingMode.TF_Matchmaking_INVALID)]
     public TF_MatchmakingMode matchmaking_mode
     {
       get { return _matchmaking_mode; }
@@ -1784,25 +1800,32 @@ namespace SteamKit2.GC.TF2.Internal
 
     private bool _search_late_join_ok = default(bool);
     [global::ProtoBuf.ProtoMember(23, IsRequired = false, Name=@"search_late_join_ok", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool search_late_join_ok
     {
       get { return _search_late_join_ok; }
       set { _search_late_join_ok = value; }
     }
 
-    private string _search_challenge = "";
-    [global::ProtoBuf.ProtoMember(25, IsRequired = false, Name=@"search_challenge", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
-    public string search_challenge
+    private string _search_mvm_mannup_tour = "";
+    [global::ProtoBuf.ProtoMember(32, IsRequired = false, Name=@"search_mvm_mannup_tour", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string search_mvm_mannup_tour
     {
-      get { return _search_challenge; }
-      set { _search_challenge = value; }
+      get { return _search_mvm_mannup_tour; }
+      set { _search_mvm_mannup_tour = value; }
     }
+    private readonly global::System.Collections.Generic.List<string> _search_mvm_missions = new global::System.Collections.Generic.List<string>();
+    [global::ProtoBuf.ProtoMember(31, Name=@"search_mvm_missions", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<string> search_mvm_missions
+    {
+      get { return _search_mvm_missions; }
+    }
+  
 
     private bool _search_play_for_bragging_rights = default(bool);
     [global::ProtoBuf.ProtoMember(26, IsRequired = false, Name=@"search_play_for_bragging_rights", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool search_play_for_bragging_rights
     {
       get { return _search_play_for_bragging_rights; }
@@ -1811,7 +1834,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _search_quickplay_game_type = default(uint);
     [global::ProtoBuf.ProtoMember(28, IsRequired = false, Name=@"search_quickplay_game_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint search_quickplay_game_type
     {
       get { return _search_quickplay_game_type; }
@@ -1820,7 +1843,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _prevent_match_until_date = default(uint);
     [global::ProtoBuf.ProtoMember(18, IsRequired = false, Name=@"prevent_match_until_date", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint prevent_match_until_date
     {
       get { return _prevent_match_until_date; }
@@ -1829,7 +1852,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _prevent_match_account_id = default(uint);
     [global::ProtoBuf.ProtoMember(19, IsRequired = false, Name=@"prevent_match_account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint prevent_match_account_id
     {
       get { return _prevent_match_account_id; }
@@ -1865,7 +1888,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private ulong _group_id = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"group_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong group_id
     {
       get { return _group_id; }
@@ -1874,7 +1897,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private ulong _sender_id = default(ulong);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"sender_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong sender_id
     {
       get { return _sender_id; }
@@ -1883,7 +1906,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private string _sender_name = "";
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"sender_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string sender_name
     {
       get { return _sender_name; }
@@ -1904,7 +1927,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private string _name = "";
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string name
     {
       get { return _name; }
@@ -1913,7 +1936,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private ulong _steam_id = default(ulong);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"steam_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong steam_id
     {
       get { return _steam_id; }
@@ -1922,7 +1945,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _avatar = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"avatar", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint avatar
     {
       get { return _avatar; }
@@ -1946,7 +1969,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private ulong _id = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong id
     {
       get { return _id; }
@@ -1955,7 +1978,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private TF_GC_TEAM _team = TF_GC_TEAM.TF_GC_TEAM_DEFENDERS;
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"team", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(TF_GC_TEAM.TF_GC_TEAM_DEFENDERS)]
+    [global::System.ComponentModel.DefaultValue(TF_GC_TEAM.TF_GC_TEAM_DEFENDERS)]
     public TF_GC_TEAM team
     {
       get { return _team; }
@@ -1964,7 +1987,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private CTFLobbyMember.ConnectState _connect_state = CTFLobbyMember.ConnectState.INVALID;
     [global::ProtoBuf.ProtoMember(13, IsRequired = false, Name=@"connect_state", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(CTFLobbyMember.ConnectState.INVALID)]
+    [global::System.ComponentModel.DefaultValue(CTFLobbyMember.ConnectState.INVALID)]
     public CTFLobbyMember.ConnectState connect_state
     {
       get { return _connect_state; }
@@ -1973,7 +1996,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private string _name = "";
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string name
     {
       get { return _name; }
@@ -1982,7 +2005,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private float _latitude = default(float);
     [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"latitude", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(float))]
+    [global::System.ComponentModel.DefaultValue(default(float))]
     public float latitude
     {
       get { return _latitude; }
@@ -1991,7 +2014,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private float _longitude = default(float);
     [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"longitude", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(float))]
+    [global::System.ComponentModel.DefaultValue(default(float))]
     public float longitude
     {
       get { return _longitude; }
@@ -2000,7 +2023,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private TFLobbyReadyState _ready_state = TFLobbyReadyState.TFLobbyReadyState_UNDECLARED;
     [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"ready_state", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(TFLobbyReadyState.TFLobbyReadyState_UNDECLARED)]
+    [global::System.ComponentModel.DefaultValue(TFLobbyReadyState.TFLobbyReadyState_UNDECLARED)]
     public TFLobbyReadyState ready_state
     {
       get { return _ready_state; }
@@ -2009,7 +2032,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private ulong _party_id = default(ulong);
     [global::ProtoBuf.ProtoMember(12, IsRequired = false, Name=@"party_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong party_id
     {
       get { return _party_id; }
@@ -2018,11 +2041,47 @@ namespace SteamKit2.GC.TF2.Internal
 
     private bool _squad_surplus = default(bool);
     [global::ProtoBuf.ProtoMember(14, IsRequired = false, Name=@"squad_surplus", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool squad_surplus
     {
       get { return _squad_surplus; }
       set { _squad_surplus = value; }
+    }
+
+    private uint _badge_level = default(uint);
+    [global::ProtoBuf.ProtoMember(15, IsRequired = false, Name=@"badge_level", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint badge_level
+    {
+      get { return _badge_level; }
+      set { _badge_level = value; }
+    }
+
+    private uint _abandon_time = (uint)0;
+    [global::ProtoBuf.ProtoMember(16, IsRequired = false, Name=@"abandon_time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue((uint)0)]
+    public uint abandon_time
+    {
+      get { return _abandon_time; }
+      set { _abandon_time = value; }
+    }
+
+    private uint _last_connect_time = default(uint);
+    [global::ProtoBuf.ProtoMember(17, IsRequired = false, Name=@"last_connect_time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint last_connect_time
+    {
+      get { return _last_connect_time; }
+      set { _last_connect_time = value; }
+    }
+
+    private bool _quitting_results_in_penalty = default(bool);
+    [global::ProtoBuf.ProtoMember(18, IsRequired = false, Name=@"quitting_results_in_penalty", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool quitting_results_in_penalty
+    {
+      get { return _quitting_results_in_penalty; }
+      set { _quitting_results_in_penalty = value; }
     }
     [global::ProtoBuf.ProtoContract(Name=@"ConnectState")]
     public enum ConnectState
@@ -2038,7 +2097,10 @@ namespace SteamKit2.GC.TF2.Internal
       RESERVED = 2,
             
       [global::ProtoBuf.ProtoEnum(Name=@"CONNECTED", Value=3)]
-      CONNECTED = 3
+      CONNECTED = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DISCONNECTED", Value=5)]
+      DISCONNECTED = 5
     }
   
     private global::ProtoBuf.IExtension extensionObject;
@@ -2054,7 +2116,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _account_id = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint account_id
     {
       get { return _account_id; }
@@ -2063,7 +2125,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _date = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"date", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint date
     {
       get { return _date; }
@@ -2092,7 +2154,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private ulong _lobby_id = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"lobby_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong lobby_id
     {
       get { return _lobby_id; }
@@ -2115,7 +2177,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private ulong _leader_id = default(ulong);
     [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"leader_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong leader_id
     {
       get { return _leader_id; }
@@ -2124,7 +2186,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private ulong _server_id = (ulong)0;
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"server_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue((ulong)0)]
+    [global::System.ComponentModel.DefaultValue((ulong)0)]
     public ulong server_id
     {
       get { return _server_id; }
@@ -2140,7 +2202,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private CSOTFLobby.State _state = CSOTFLobby.State.SERVERSETUP;
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"state", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(CSOTFLobby.State.SERVERSETUP)]
+    [global::System.ComponentModel.DefaultValue(CSOTFLobby.State.SERVERSETUP)]
     public CSOTFLobby.State state
     {
       get { return _state; }
@@ -2149,7 +2211,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private string _connect = "";
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"connect", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string connect
     {
       get { return _connect; }
@@ -2158,7 +2220,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private CSOTFLobby.LobbyType _lobby_type = CSOTFLobby.LobbyType.INVALID;
     [global::ProtoBuf.ProtoMember(12, IsRequired = false, Name=@"lobby_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(CSOTFLobby.LobbyType.INVALID)]
+    [global::System.ComponentModel.DefaultValue(CSOTFLobby.LobbyType.INVALID)]
     public CSOTFLobby.LobbyType lobby_type
     {
       get { return _lobby_type; }
@@ -2167,7 +2229,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private bool _allow_cheats = default(bool);
     [global::ProtoBuf.ProtoMember(13, IsRequired = false, Name=@"allow_cheats", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool allow_cheats
     {
       get { return _allow_cheats; }
@@ -2176,7 +2238,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private string _game_name = "";
     [global::ProtoBuf.ProtoMember(16, IsRequired = false, Name=@"game_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string game_name
     {
       get { return _game_name; }
@@ -2185,7 +2247,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _server_region = (uint)0;
     [global::ProtoBuf.ProtoMember(21, IsRequired = false, Name=@"server_region", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue((uint)0)]
+    [global::System.ComponentModel.DefaultValue((uint)0)]
     public uint server_region
     {
       get { return _server_region; }
@@ -2194,7 +2256,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private TF_GC_GameState _game_state = TF_GC_GameState.TF_GC_GAMESTATE_STATE_INIT;
     [global::ProtoBuf.ProtoMember(22, IsRequired = false, Name=@"game_state", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(TF_GC_GameState.TF_GC_GAMESTATE_STATE_INIT)]
+    [global::System.ComponentModel.DefaultValue(TF_GC_GameState.TF_GC_GAMESTATE_STATE_INIT)]
     public TF_GC_GameState game_state
     {
       get { return _game_state; }
@@ -2203,7 +2265,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _num_spectators = default(uint);
     [global::ProtoBuf.ProtoMember(23, IsRequired = false, Name=@"num_spectators", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint num_spectators
     {
       get { return _num_spectators; }
@@ -2212,7 +2274,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _matchgroup = default(uint);
     [global::ProtoBuf.ProtoMember(25, IsRequired = false, Name=@"matchgroup", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint matchgroup
     {
       get { return _matchgroup; }
@@ -2221,7 +2283,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private float _readyup_remaining_time = default(float);
     [global::ProtoBuf.ProtoMember(26, IsRequired = false, Name=@"readyup_remaining_time", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(float))]
+    [global::System.ComponentModel.DefaultValue(default(float))]
     public float readyup_remaining_time
     {
       get { return _readyup_remaining_time; }
@@ -2230,7 +2292,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private bool _leaver_detected = default(bool);
     [global::ProtoBuf.ProtoMember(27, IsRequired = false, Name=@"leaver_detected", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool leaver_detected
     {
       get { return _leaver_detected; }
@@ -2239,7 +2301,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private bool _allow_spectating = (bool)true;
     [global::ProtoBuf.ProtoMember(31, IsRequired = false, Name=@"allow_spectating", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue((bool)true)]
+    [global::System.ComponentModel.DefaultValue((bool)true)]
     public bool allow_spectating
     {
       get { return _allow_spectating; }
@@ -2248,7 +2310,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private ulong _load_game_lobby_id = default(ulong);
     [global::ProtoBuf.ProtoMember(33, IsRequired = false, Name=@"load_game_lobby_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong load_game_lobby_id
     {
       get { return _load_game_lobby_id; }
@@ -2257,34 +2319,43 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _load_game_save_number = default(uint);
     [global::ProtoBuf.ProtoMember(34, IsRequired = false, Name=@"load_game_save_number", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint load_game_save_number
     {
       get { return _load_game_save_number; }
       set { _load_game_save_number = value; }
     }
 
+    private string _mannup_tour_name = "";
+    [global::ProtoBuf.ProtoMember(42, IsRequired = false, Name=@"mannup_tour_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string mannup_tour_name
+    {
+      get { return _mannup_tour_name; }
+      set { _mannup_tour_name = value; }
+    }
+
     private string _map_name = "";
     [global::ProtoBuf.ProtoMember(38, IsRequired = false, Name=@"map_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string map_name
     {
       get { return _map_name; }
       set { _map_name = value; }
     }
 
-    private string _challenge_name = "";
-    [global::ProtoBuf.ProtoMember(39, IsRequired = false, Name=@"challenge_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
-    public string challenge_name
+    private string _mission_name = "";
+    [global::ProtoBuf.ProtoMember(39, IsRequired = false, Name=@"mission_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string mission_name
     {
-      get { return _challenge_name; }
-      set { _challenge_name = value; }
+      get { return _mission_name; }
+      set { _mission_name = value; }
     }
 
     private uint _match_group = default(uint);
     [global::ProtoBuf.ProtoMember(41, IsRequired = false, Name=@"match_group", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint match_group
     {
       get { return _match_group; }
@@ -2293,7 +2364,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _match_id = default(uint);
     [global::ProtoBuf.ProtoMember(30, IsRequired = false, Name=@"match_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint match_id
     {
       get { return _match_id; }
@@ -2302,7 +2373,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _replay_salt = default(uint);
     [global::ProtoBuf.ProtoMember(35, IsRequired = false, Name=@"replay_salt", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint replay_salt
     {
       get { return _replay_salt; }
@@ -2371,7 +2442,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private ulong _party_id = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"party_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong party_id
     {
       get { return _party_id; }
@@ -2380,7 +2451,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private ulong _steamid_lobby = default(ulong);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"steamid_lobby", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong steamid_lobby
     {
       get { return _steamid_lobby; }
@@ -2389,7 +2460,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _client_version = (uint)1225;
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"client_version", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue((uint)1225)]
+    [global::System.ComponentModel.DefaultValue((uint)1225)]
     public uint client_version
     {
       get { return _client_version; }
@@ -2408,7 +2479,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private int _result_code = default(int);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"result_code", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(int))]
+    [global::System.ComponentModel.DefaultValue(default(int))]
     public int result_code
     {
       get { return _result_code; }
@@ -2427,7 +2498,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private TFLobbyReadyState _state = TFLobbyReadyState.TFLobbyReadyState_UNDECLARED;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"state", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(TFLobbyReadyState.TFLobbyReadyState_UNDECLARED)]
+    [global::System.ComponentModel.DefaultValue(TFLobbyReadyState.TFLobbyReadyState_UNDECLARED)]
     public TFLobbyReadyState state
     {
       get { return _state; }
@@ -2492,63 +2563,6 @@ namespace SteamKit2.GC.TF2.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgAbandonCurrentGame")]
-  public partial class CMsgAbandonCurrentGame : global::ProtoBuf.IExtensible
-  {
-    public CMsgAbandonCurrentGame() {}
-    
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgLeaverDetected")]
-  public partial class CMsgLeaverDetected : global::ProtoBuf.IExtensible
-  {
-    public CMsgLeaverDetected() {}
-    
-
-    private ulong _steam_id = default(ulong);
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steam_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
-    public ulong steam_id
-    {
-      get { return _steam_id; }
-      set { _steam_id = value; }
-    }
-
-    private uint _leaver_status = default(uint);
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"leaver_status", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
-    public uint leaver_status
-    {
-      get { return _leaver_status; }
-      set { _leaver_status = value; }
-    }
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgLeaverDetectedResponse")]
-  public partial class CMsgLeaverDetectedResponse : global::ProtoBuf.IExtensible
-  {
-    public CMsgLeaverDetectedResponse() {}
-    
-
-    private uint _result = default(uint);
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"result", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
-    public uint result
-    {
-      get { return _result; }
-      set { _result = value; }
-    }
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgTFJoinChatChannel")]
   public partial class CMsgTFJoinChatChannel : global::ProtoBuf.IExtensible
   {
@@ -2557,7 +2571,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private string _persona_name = "";
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"persona_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string persona_name
     {
       get { return _persona_name; }
@@ -2566,7 +2580,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private string _channel_name = "";
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"channel_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string channel_name
     {
       get { return _channel_name; }
@@ -2575,7 +2589,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private string _password = "";
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"password", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string password
     {
       get { return _password; }
@@ -2584,7 +2598,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private ChatChannelType_t _channel_type = ChatChannelType_t.ChatChannelType_Regional;
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"channel_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(ChatChannelType_t.ChatChannelType_Regional)]
+    [global::System.ComponentModel.DefaultValue(ChatChannelType_t.ChatChannelType_Regional)]
     public ChatChannelType_t channel_type
     {
       get { return _channel_type; }
@@ -2603,7 +2617,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private string _channel_name = "";
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"channel_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string channel_name
     {
       get { return _channel_name; }
@@ -2622,7 +2636,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _response = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"response", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint response
     {
       get { return _response; }
@@ -2631,7 +2645,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private string _channel_name = "";
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"channel_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string channel_name
     {
       get { return _channel_name; }
@@ -2640,7 +2654,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private ulong _channel_id = default(ulong);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"channel_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong channel_id
     {
       get { return _channel_id; }
@@ -2649,7 +2663,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _max_members = default(uint);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"max_members", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint max_members
     {
       get { return _max_members; }
@@ -2670,7 +2684,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private ulong _steam_id = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steam_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong steam_id
     {
       get { return _steam_id; }
@@ -2679,7 +2693,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private string _persona_name = "";
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"persona_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string persona_name
     {
       get { return _persona_name; }
@@ -2703,7 +2717,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private ulong _channel_id = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"channel_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong channel_id
     {
       get { return _channel_id; }
@@ -2712,7 +2726,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private string _persona_name = "";
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"persona_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string persona_name
     {
       get { return _persona_name; }
@@ -2721,7 +2735,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private ulong _steam_id = default(ulong);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"steam_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong steam_id
     {
       get { return _steam_id; }
@@ -2740,7 +2754,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private ulong _channel_id = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"channel_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong channel_id
     {
       get { return _channel_id; }
@@ -2749,7 +2763,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private ulong _steam_id = default(ulong);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"steam_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong steam_id
     {
       get { return _steam_id; }
@@ -2778,7 +2792,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private string _channel_name = "";
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"channel_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string channel_name
     {
       get { return _channel_name; }
@@ -2787,7 +2801,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private ulong _channel_id = default(ulong);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"channel_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong channel_id
     {
       get { return _channel_id; }
@@ -2828,7 +2842,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private string _channel_name = "";
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"channel_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string channel_name
     {
       get { return _channel_name; }
@@ -2837,7 +2851,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _num_members = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"num_members", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint num_members
     {
       get { return _num_members; }
@@ -2846,7 +2860,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private ChatChannelType_t _channel_type = ChatChannelType_t.ChatChannelType_Regional;
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"channel_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(ChatChannelType_t.ChatChannelType_Regional)]
+    [global::System.ComponentModel.DefaultValue(ChatChannelType_t.ChatChannelType_Regional)]
     public ChatChannelType_t channel_type
     {
       get { return _channel_type; }
@@ -2870,7 +2884,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _server_version = (uint)1225;
     [global::ProtoBuf.ProtoMember(16, IsRequired = false, Name=@"server_version", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue((uint)1225)]
+    [global::System.ComponentModel.DefaultValue((uint)1225)]
     public uint server_version
     {
       get { return _server_version; }
@@ -2879,7 +2893,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private ServerMatchmakingState _matchmaking_state = ServerMatchmakingState.ServerMatchmakingState_INVALID;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"matchmaking_state", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(ServerMatchmakingState.ServerMatchmakingState_INVALID)]
+    [global::System.ComponentModel.DefaultValue(ServerMatchmakingState.ServerMatchmakingState_INVALID)]
     public ServerMatchmakingState matchmaking_state
     {
       get { return _matchmaking_state; }
@@ -2888,7 +2902,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private TF_MatchmakingMode _matchmaking_mode = TF_MatchmakingMode.TF_Matchmaking_INVALID;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"matchmaking_mode", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(TF_MatchmakingMode.TF_Matchmaking_INVALID)]
+    [global::System.ComponentModel.DefaultValue(TF_MatchmakingMode.TF_Matchmaking_INVALID)]
     public TF_MatchmakingMode matchmaking_mode
     {
       get { return _matchmaking_mode; }
@@ -2897,7 +2911,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private string _map = "";
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"map", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string map
     {
       get { return _map; }
@@ -2906,7 +2920,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private string _tags = "";
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"tags", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue("")]
+    [global::System.ComponentModel.DefaultValue("")]
     public string tags
     {
       get { return _tags; }
@@ -2915,7 +2929,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _bot_count = default(uint);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"bot_count", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint bot_count
     {
       get { return _bot_count; }
@@ -2924,7 +2938,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _num_spectators = default(uint);
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"num_spectators", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint num_spectators
     {
       get { return _num_spectators; }
@@ -2933,7 +2947,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _max_players = default(uint);
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"max_players", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint max_players
     {
       get { return _max_players; }
@@ -2942,7 +2956,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _slots_free = default(uint);
     [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"slots_free", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint slots_free
     {
       get { return _slots_free; }
@@ -2951,7 +2965,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _server_region = default(uint);
     [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"server_region", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint server_region
     {
       get { return _server_region; }
@@ -2960,7 +2974,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private float _server_loadavg = default(float);
     [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"server_loadavg", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(float))]
+    [global::System.ComponentModel.DefaultValue(default(float))]
     public float server_loadavg
     {
       get { return _server_loadavg; }
@@ -2969,7 +2983,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private bool _server_trusted = default(bool);
     [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"server_trusted", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool server_trusted
     {
       get { return _server_trusted; }
@@ -2978,7 +2992,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private bool _server_dedicated = default(bool);
     [global::ProtoBuf.ProtoMember(12, IsRequired = false, Name=@"server_dedicated", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool server_dedicated
     {
       get { return _server_dedicated; }
@@ -2987,7 +3001,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _strict = default(uint);
     [global::ProtoBuf.ProtoMember(17, IsRequired = false, Name=@"strict", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint strict
     {
       get { return _strict; }
@@ -3003,7 +3017,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private TF_GC_GameState _game_state = TF_GC_GameState.TF_GC_GAMESTATE_STATE_INIT;
     [global::ProtoBuf.ProtoMember(14, IsRequired = false, Name=@"game_state", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(TF_GC_GameState.TF_GC_GAMESTATE_STATE_INIT)]
+    [global::System.ComponentModel.DefaultValue(TF_GC_GameState.TF_GC_GAMESTATE_STATE_INIT)]
     public TF_GC_GameState game_state
     {
       get { return _game_state; }
@@ -3012,7 +3026,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private CMsgGameServerMatchmakingStatus.Event _event = CMsgGameServerMatchmakingStatus.Event.None;
     [global::ProtoBuf.ProtoMember(15, IsRequired = false, Name=@"event", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(CMsgGameServerMatchmakingStatus.Event.None)]
+    [global::System.ComponentModel.DefaultValue(CMsgGameServerMatchmakingStatus.Event.None)]
     public CMsgGameServerMatchmakingStatus.Event @event
     {
       get { return _event; }
@@ -3021,7 +3035,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _mvm_wave = default(uint);
     [global::ProtoBuf.ProtoMember(18, IsRequired = false, Name=@"mvm_wave", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint mvm_wave
     {
       get { return _mvm_wave; }
@@ -3030,7 +3044,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _mvm_credits_acquired = default(uint);
     [global::ProtoBuf.ProtoMember(19, IsRequired = false, Name=@"mvm_credits_acquired", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint mvm_credits_acquired
     {
       get { return _mvm_credits_acquired; }
@@ -3039,7 +3053,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _mvm_credits_dropped = default(uint);
     [global::ProtoBuf.ProtoMember(20, IsRequired = false, Name=@"mvm_credits_dropped", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint mvm_credits_dropped
     {
       get { return _mvm_credits_dropped; }
@@ -3053,7 +3067,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private ulong _steam_id = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steam_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong steam_id
     {
       get { return _steam_id; }
@@ -3062,7 +3076,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private CMsgGameServerMatchmakingStatus.PlayerConnectState _connect_state = CMsgGameServerMatchmakingStatus.PlayerConnectState.INVALID;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"connect_state", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(CMsgGameServerMatchmakingStatus.PlayerConnectState.INVALID)]
+    [global::System.ComponentModel.DefaultValue(CMsgGameServerMatchmakingStatus.PlayerConnectState.INVALID)]
     public CMsgGameServerMatchmakingStatus.PlayerConnectState connect_state
     {
       get { return _connect_state; }
@@ -3115,36 +3129,9 @@ namespace SteamKit2.GC.TF2.Internal
     public CMsgMatchmakingProgress() {}
     
 
-    private uint _gameservers_empty = default(uint);
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"gameservers_empty", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
-    public uint gameservers_empty
-    {
-      get { return _gameservers_empty; }
-      set { _gameservers_empty = value; }
-    }
-
-    private uint _gameservers_slots_avail = default(uint);
-    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"gameservers_slots_avail", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
-    public uint gameservers_slots_avail
-    {
-      get { return _gameservers_slots_avail; }
-      set { _gameservers_slots_avail = value; }
-    }
-
-    private uint _gameservers_full = default(uint);
-    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"gameservers_full", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
-    public uint gameservers_full
-    {
-      get { return _gameservers_full; }
-      set { _gameservers_full = value; }
-    }
-
     private uint _avg_wait_time_new = default(uint);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"avg_wait_time_new", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint avg_wait_time_new
     {
       get { return _avg_wait_time_new; }
@@ -3153,7 +3140,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _avg_wait_time_join_late = default(uint);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"avg_wait_time_join_late", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint avg_wait_time_join_late
     {
       get { return _avg_wait_time_join_late; }
@@ -3162,56 +3149,92 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _your_wait_time = default(uint);
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"your_wait_time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint your_wait_time
     {
       get { return _your_wait_time; }
       set { _your_wait_time = value; }
     }
 
-    private uint _compatible_players = default(uint);
-    [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"compatible_players", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
-    public uint compatible_players
+    private uint _matching_worldwide_searching_players = default(uint);
+    [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"matching_worldwide_searching_players", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint matching_worldwide_searching_players
     {
-      get { return _compatible_players; }
-      set { _compatible_players = value; }
+      get { return _matching_worldwide_searching_players; }
+      set { _matching_worldwide_searching_players = value; }
     }
 
-    private uint _compatible_players_near_you = default(uint);
-    [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"compatible_players_near_you", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
-    public uint compatible_players_near_you
+    private uint _matching_near_you_searching_players = default(uint);
+    [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"matching_near_you_searching_players", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint matching_near_you_searching_players
     {
-      get { return _compatible_players_near_you; }
-      set { _compatible_players_near_you = value; }
+      get { return _matching_near_you_searching_players; }
+      set { _matching_near_you_searching_players = value; }
     }
 
-    private uint _gameservers_empty_near_you = default(uint);
-    [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"gameservers_empty_near_you", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
-    public uint gameservers_empty_near_you
+    private uint _total_worldwide_searching_players = default(uint);
+    [global::ProtoBuf.ProtoMember(13, IsRequired = false, Name=@"total_worldwide_searching_players", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint total_worldwide_searching_players
     {
-      get { return _gameservers_empty_near_you; }
-      set { _gameservers_empty_near_you = value; }
+      get { return _total_worldwide_searching_players; }
+      set { _total_worldwide_searching_players = value; }
     }
 
-    private uint _gameservers_slots_avail_near_you = default(uint);
-    [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"gameservers_slots_avail_near_you", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
-    public uint gameservers_slots_avail_near_you
+    private uint _total_near_you_searching_players = default(uint);
+    [global::ProtoBuf.ProtoMember(14, IsRequired = false, Name=@"total_near_you_searching_players", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint total_near_you_searching_players
     {
-      get { return _gameservers_slots_avail_near_you; }
-      set { _gameservers_slots_avail_near_you = value; }
+      get { return _total_near_you_searching_players; }
+      set { _total_near_you_searching_players = value; }
     }
 
-    private uint _gameservers_full_near_you = default(uint);
-    [global::ProtoBuf.ProtoMember(12, IsRequired = false, Name=@"gameservers_full_near_you", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
-    public uint gameservers_full_near_you
+    private uint _matching_worldwide_active_players = default(uint);
+    [global::ProtoBuf.ProtoMember(15, IsRequired = false, Name=@"matching_worldwide_active_players", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint matching_worldwide_active_players
     {
-      get { return _gameservers_full_near_you; }
-      set { _gameservers_full_near_you = value; }
+      get { return _matching_worldwide_active_players; }
+      set { _matching_worldwide_active_players = value; }
+    }
+
+    private uint _matching_near_you_active_players = default(uint);
+    [global::ProtoBuf.ProtoMember(16, IsRequired = false, Name=@"matching_near_you_active_players", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint matching_near_you_active_players
+    {
+      get { return _matching_near_you_active_players; }
+      set { _matching_near_you_active_players = value; }
+    }
+
+    private uint _total_worldwide_active_players = default(uint);
+    [global::ProtoBuf.ProtoMember(17, IsRequired = false, Name=@"total_worldwide_active_players", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint total_worldwide_active_players
+    {
+      get { return _total_worldwide_active_players; }
+      set { _total_worldwide_active_players = value; }
+    }
+
+    private uint _total_near_you_active_players = default(uint);
+    [global::ProtoBuf.ProtoMember(18, IsRequired = false, Name=@"total_near_you_active_players", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint total_near_you_active_players
+    {
+      get { return _total_near_you_active_players; }
+      set { _total_near_you_active_players = value; }
+    }
+
+    private uint _urgency_pct = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"urgency_pct", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint urgency_pct
+    {
+      get { return _urgency_pct; }
+      set { _urgency_pct = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -3230,6 +3253,24 @@ namespace SteamKit2.GC.TF2.Internal
       get { return _players; }
     }
   
+
+    private string _tour_name = "";
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"tour_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string tour_name
+    {
+      get { return _tour_name; }
+      set { _tour_name = value; }
+    }
+
+    private string _mission_name = "";
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"mission_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string mission_name
+    {
+      get { return _mission_name; }
+      set { _mission_name = value; }
+    }
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Item")]
   public partial class Item : global::ProtoBuf.IExtensible
   {
@@ -3238,7 +3279,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private CMsgMvMVictoryInfo.GrantReason _grant_reason = CMsgMvMVictoryInfo.GrantReason.INVALID;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"grant_reason", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(CMsgMvMVictoryInfo.GrantReason.INVALID)]
+    [global::System.ComponentModel.DefaultValue(CMsgMvMVictoryInfo.GrantReason.INVALID)]
     public CMsgMvMVictoryInfo.GrantReason grant_reason
     {
       get { return _grant_reason; }
@@ -3247,7 +3288,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private byte[] _item_data = null;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"item_data", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(null)]
+    [global::System.ComponentModel.DefaultValue(null)]
     public byte[] item_data
     {
       get { return _item_data; }
@@ -3256,7 +3297,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private ulong _squad_surplus_claimer_steam_id = default(ulong);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"squad_surplus_claimer_steam_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong squad_surplus_claimer_steam_id
     {
       get { return _squad_surplus_claimer_steam_id; }
@@ -3275,7 +3316,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private ulong _steam_id = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steam_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::ProtoBuf.ProtoDefaultValue(default(ulong))]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong steam_id
     {
       get { return _steam_id; }
@@ -3284,7 +3325,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private bool _badge_granted = default(bool);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"badge_granted", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool badge_granted
     {
       get { return _badge_granted; }
@@ -3293,7 +3334,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private bool _badge_progress_updated = default(bool);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"badge_progress_updated", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool badge_progress_updated
     {
       get { return _badge_progress_updated; }
@@ -3302,7 +3343,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private bool _badge_leveled = default(bool);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"badge_leveled", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::ProtoBuf.ProtoDefaultValue(default(bool))]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool badge_leveled
     {
       get { return _badge_leveled; }
@@ -3311,7 +3352,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _badge_level = default(uint);
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"badge_level", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint badge_level
     {
       get { return _badge_level; }
@@ -3320,7 +3361,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _badge_progress_bits = default(uint);
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"badge_progress_bits", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::ProtoBuf.ProtoDefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint badge_progress_bits
     {
       get { return _badge_progress_bits; }
@@ -3333,6 +3374,15 @@ namespace SteamKit2.GC.TF2.Internal
       get { return _items; }
     }
   
+
+    private bool _voucher_missing = default(bool);
+    [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"voucher_missing", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool voucher_missing
+    {
+      get { return _voucher_missing; }
+      set { _voucher_missing = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -3355,6 +3405,339 @@ namespace SteamKit2.GC.TF2.Internal
       MANN_UP = 3
     }
   
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGCMsgTFHelloResponse")]
+  public partial class CGCMsgTFHelloResponse : global::ProtoBuf.IExtensible
+  {
+    public CGCMsgTFHelloResponse() {}
+    
+
+    private uint _version_check = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"version_check", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint version_check
+    {
+      get { return _version_check; }
+      set { _version_check = value; }
+    }
+    private readonly global::System.Collections.Generic.List<ulong> _version_checksum = new global::System.Collections.Generic.List<ulong>();
+    [global::ProtoBuf.ProtoMember(2, Name=@"version_checksum", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public global::System.Collections.Generic.List<ulong> version_checksum
+    {
+      get { return _version_checksum; }
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGCMsgTFSync")]
+  public partial class CGCMsgTFSync : global::ProtoBuf.IExtensible
+  {
+    public CGCMsgTFSync() {}
+    
+
+    private byte[] _version_checksum = null;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"version_checksum", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public byte[] version_checksum
+    {
+      get { return _version_checksum; }
+      set { _version_checksum = value; }
+    }
+
+    private uint _version_check = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"version_check", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint version_check
+    {
+      get { return _version_check; }
+      set { _version_check = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgMvMVictory")]
+  public partial class CMsgMvMVictory : global::ProtoBuf.IExtensible
+  {
+    public CMsgMvMVictory() {}
+    
+
+    private uint _legacy_mission_index = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"legacy_mission_index", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint legacy_mission_index
+    {
+      get { return _legacy_mission_index; }
+      set { _legacy_mission_index = value; }
+    }
+
+    private string _tour_name_mannup = "";
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"tour_name_mannup", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string tour_name_mannup
+    {
+      get { return _tour_name_mannup; }
+      set { _tour_name_mannup = value; }
+    }
+
+    private string _mission_name = "";
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"mission_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string mission_name
+    {
+      get { return _mission_name; }
+      set { _mission_name = value; }
+    }
+    private readonly global::System.Collections.Generic.List<CMsgMvMVictory.Player> _players = new global::System.Collections.Generic.List<CMsgMvMVictory.Player>();
+    [global::ProtoBuf.ProtoMember(2, Name=@"players", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CMsgMvMVictory.Player> players
+    {
+      get { return _players; }
+    }
+  
+
+    private ulong _lobby_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"lobby_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong lobby_id
+    {
+      get { return _lobby_id; }
+      set { _lobby_id = value; }
+    }
+
+    private uint _event_time = default(uint);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"event_time", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint event_time
+    {
+      get { return _event_time; }
+      set { _event_time = value; }
+    }
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Player")]
+  public partial class Player : global::ProtoBuf.IExtensible
+  {
+    public Player() {}
+    
+
+    private ulong _steam_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steam_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong steam_id
+    {
+      get { return _steam_id; }
+      set { _steam_id = value; }
+    }
+
+    private bool _squad_surplus = default(bool);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"squad_surplus", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool squad_surplus
+    {
+      get { return _squad_surplus; }
+      set { _squad_surplus = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgMvMMannUpVictoryReply")]
+  public partial class CMsgMvMMannUpVictoryReply : global::ProtoBuf.IExtensible
+  {
+    public CMsgMvMMannUpVictoryReply() {}
+    
+
+    private uint _result = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"result", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint result
+    {
+      get { return _result; }
+      set { _result = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGameServerKickingLobby")]
+  public partial class CMsgGameServerKickingLobby : global::ProtoBuf.IExtensible
+  {
+    public CMsgGameServerKickingLobby() {}
+    
+    private readonly global::System.Collections.Generic.List<ulong> _connected_players = new global::System.Collections.Generic.List<ulong>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"connected_players", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public global::System.Collections.Generic.List<ulong> connected_players
+    {
+      get { return _connected_players; }
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgLeaveGameAndPrepareToJoinParty")]
+  public partial class CMsgLeaveGameAndPrepareToJoinParty : global::ProtoBuf.IExtensible
+  {
+    public CMsgLeaveGameAndPrepareToJoinParty() {}
+    
+
+    private ulong _party_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"party_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong party_id
+    {
+      get { return _party_id; }
+      set { _party_id = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgRemovePlayerFromLobby")]
+  public partial class CMsgRemovePlayerFromLobby : global::ProtoBuf.IExtensible
+  {
+    public CMsgRemovePlayerFromLobby() {}
+    
+
+    private ulong _steam_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steam_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong steam_id
+    {
+      get { return _steam_id; }
+      set { _steam_id = value; }
+    }
+
+    private CMsgRemovePlayerFromLobby.RemoveReason _remove_reason = CMsgRemovePlayerFromLobby.RemoveReason.VOTE_KICK;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"remove_reason", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(CMsgRemovePlayerFromLobby.RemoveReason.VOTE_KICK)]
+    public CMsgRemovePlayerFromLobby.RemoveReason remove_reason
+    {
+      get { return _remove_reason; }
+      set { _remove_reason = value; }
+    }
+    [global::ProtoBuf.ProtoContract(Name=@"RemoveReason")]
+    public enum RemoveReason
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"VOTE_KICK", Value=0)]
+      VOTE_KICK = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"IDLE_KICK", Value=1)]
+      IDLE_KICK = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"ADMIN_KICK", Value=2)]
+      ADMIN_KICK = 2
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgSetLobbySafeToLeave")]
+  public partial class CMsgSetLobbySafeToLeave : global::ProtoBuf.IExtensible
+  {
+    public CMsgSetLobbySafeToLeave() {}
+    
+
+    private ulong _lobby_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"lobby_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong lobby_id
+    {
+      get { return _lobby_id; }
+      set { _lobby_id = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgHalloween_ServerBossEvent")]
+  public partial class CMsgHalloween_ServerBossEvent : global::ProtoBuf.IExtensible
+  {
+    public CMsgHalloween_ServerBossEvent() {}
+    
+
+    private uint _event_counter = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"event_counter", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint event_counter
+    {
+      get { return _event_counter; }
+      set { _event_counter = value; }
+    }
+
+    private uint _timestamp = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"timestamp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint timestamp
+    {
+      get { return _timestamp; }
+      set { _timestamp = value; }
+    }
+
+    private uint _boss_type = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"boss_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint boss_type
+    {
+      get { return _boss_type; }
+      set { _boss_type = value; }
+    }
+
+    private uint _boss_level = default(uint);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"boss_level", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint boss_level
+    {
+      get { return _boss_level; }
+      set { _boss_level = value; }
+    }
+
+    private uint _event_type = default(uint);
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"event_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint event_type
+    {
+      get { return _event_type; }
+      set { _event_type = value; }
+    }
+
+    private uint _players_involved = default(uint);
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"players_involved", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint players_involved
+    {
+      get { return _players_involved; }
+      set { _players_involved = value; }
+    }
+
+    private float _elapsed_time = default(float);
+    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"elapsed_time", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(float))]
+    public float elapsed_time
+    {
+      get { return _elapsed_time; }
+      set { _elapsed_time = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -3441,32 +3824,6 @@ namespace SteamKit2.GC.TF2.Internal
             
       [global::ProtoBuf.ProtoEnum(Name=@"TF_GC_TEAM_NOTEAM", Value=5)]
       TF_GC_TEAM_NOTEAM = 5
-    }
-  
-    [global::ProtoBuf.ProtoContract(Name=@"TFLeaverStatus_t")]
-    public enum TFLeaverStatus_t
-    {
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"TF_LEAVER_NONE", Value=0)]
-      TF_LEAVER_NONE = 0,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"TF_LEAVER_DISCONNECTED", Value=1)]
-      TF_LEAVER_DISCONNECTED = 1,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"TF_LEAVER_DISCONNECTED_TOO_LONG", Value=2)]
-      TF_LEAVER_DISCONNECTED_TOO_LONG = 2,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"TF_LEAVER_ABANDONED", Value=3)]
-      TF_LEAVER_ABANDONED = 3,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"TF_LEAVER_AFK", Value=4)]
-      TF_LEAVER_AFK = 4,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"TF_LEAVER_NEVER_CONNECTED", Value=5)]
-      TF_LEAVER_NEVER_CONNECTED = 5,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"TF_LEAVER_NEVER_CONNECTED_TOO_LONG", Value=6)]
-      TF_LEAVER_NEVER_CONNECTED_TOO_LONG = 6
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"TFLobbyReadyState")]
