@@ -9,7 +9,6 @@ using System;
 using System.IO;
 using System.IO.Compression;
 using System.Text;
-using Classless.Hasher;
 
 namespace SteamKit2
 {
@@ -63,7 +62,7 @@ namespace SteamKit2
             {
                 uint checkSum = 0;
 
-                using ( Crc crc = new Crc( CrcParameters.GetParameters( CrcStandard.Crc32Bit ) ) )
+                using ( var crc = new Crc32() )
                 {
                     checkSum = BitConverter.ToUInt32( crc.ComputeHash( buffer ), 0 );
                 }

@@ -59,10 +59,6 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Classless.Hasher, Version=0.7.2247.36474, Culture=neutral, PublicKeyToken=bad6dfcf741043ca, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Classless.Hasher.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -132,6 +128,7 @@
     <Compile Include="Types\UGC.cs" />
     <Compile Include="Util\AsnKeyParser.cs" />
     <Compile Include="Util\BinaryEx.cs" />
+    <Compile Include="Util\Crc32.cs" />
     <Compile Include="Util\StreamHelpers.cs" />
     <Compile Include="Networking\Steam3\UdpPacket.cs" />
     <Compile Include="Steam2\ContentServerClient.cs" />
