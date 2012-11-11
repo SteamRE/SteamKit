@@ -374,6 +374,7 @@ namespace SteamKit2
 
             this.Client.Send( kickMember );
         }
+
         /// <summary>
         /// Bans the specified chat member from the given chat room.
         /// </summary>
@@ -398,6 +399,31 @@ namespace SteamKit2
             banMember.Body.ChatAction = EChatAction.Ban;
 
             this.Client.Send( banMember );
+        }
+        /// <summary>
+        /// Unbans the specified SteamID from the given chat room.
+        /// </summary>
+        /// <param name="steamIdChat">The SteamID of chat room to unban the member from.</param>
+        /// <param name="steamIdMember">The SteamID of the member to unban from the chat.</param>
+        public void UnbanChatMember( SteamID steamIdChat, SteamID steamIdMember )
+        {
+            SteamID chatId = steamIdChat.ConvertToUInt64(); // copy the steamid so we don't modify it
+
+            var unbanMember = new ClientMsg<MsgClientChatAction>();
+
+            if ( chatId.IsClanAccount )
+            {
+                // this steamid is incorrect, so we'll fix it up
+                chatId.AccountInstance = ( uint )SteamID.ChatInstanceFlags.Clan;
+                chatId.AccountType = EAccountType.Chat;
+            }
+
+            unbanMember.Body.SteamIdChat = chatId;
+            unbanMember.Body.SteamIdUserToActOn = steamIdMember;
+
+            unbanMember.Body.ChatAction = EChatAction.UnBan;
+
+            this.Client.Send( unbanMember );
         }
 
 
