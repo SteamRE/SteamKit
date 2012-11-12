@@ -28,3 +28,4 @@ Backup/
 
 # nuget packages
 packages/
+*.nupkg
