@@ -43,5 +43,5 @@ In order to compile and use SteamKit2, the following dependencies are required:
 ## Contact
 - - -
 
-IRC: [irc.gamesurge.org / #opensteamworks](irc://irc.gamesurge.net/opensteamworks)
+IRC: [irc.gamesurge.net / #opensteamworks](irc://irc.gamesurge.net/opensteamworks)
 
