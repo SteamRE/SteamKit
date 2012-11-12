@@ -1271,7 +1271,7 @@ namespace SteamKit2.GC.Internal
 
     private ulong _original_id = (ulong)0;
     [global::ProtoBuf.ProtoMember(16, IsRequired = false, Name=@"original_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue((ulong)0)]
+    [global::System.ComponentModel.DefaultValue(@"0")]
     public ulong original_id
     {
       get { return _original_id; }
@@ -1463,7 +1463,7 @@ namespace SteamKit2.GC.Internal
 
     private ulong _experiment_data = (ulong)0;
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"experiment_data", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue((ulong)0)]
+    [global::System.ComponentModel.DefaultValue(@"0")]
     public ulong experiment_data
     {
       get { return _experiment_data; }

@@ -7516,7 +7516,7 @@ namespace SteamKit2.Internal
 
     private ulong _hcontent = (ulong)18446744073709551615;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"hcontent", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue((ulong)18446744073709551615)]
+    [global::System.ComponentModel.DefaultValue(@"18446744073709551615")]
     public ulong hcontent
     {
       get { return _hcontent; }
@@ -7737,7 +7737,7 @@ namespace SteamKit2.Internal
 
     private ulong _hcontent = (ulong)18446744073709551615;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"hcontent", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue((ulong)18446744073709551615)]
+    [global::System.ComponentModel.DefaultValue(@"18446744073709551615")]
     public ulong hcontent
     {
       get { return _hcontent; }
@@ -8556,7 +8556,7 @@ namespace SteamKit2.Internal
 
     private ulong _screenshotid = (ulong)18446744073709551615;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"screenshotid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue((ulong)18446744073709551615)]
+    [global::System.ComponentModel.DefaultValue(@"18446744073709551615")]
     public ulong screenshotid
     {
       get { return _screenshotid; }
@@ -8575,7 +8575,7 @@ namespace SteamKit2.Internal
 
     private ulong _screenshotid = (ulong)18446744073709551615;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"screenshotid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue((ulong)18446744073709551615)]
+    [global::System.ComponentModel.DefaultValue(@"18446744073709551615")]
     public ulong screenshotid
     {
       get { return _screenshotid; }
@@ -8756,7 +8756,7 @@ namespace SteamKit2.Internal
 
     private ulong _published_file_id = (ulong)18446744073709551615;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"published_file_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue((ulong)18446744073709551615)]
+    [global::System.ComponentModel.DefaultValue(@"18446744073709551615")]
     public ulong published_file_id
     {
       get { return _published_file_id; }
@@ -8983,7 +8983,7 @@ namespace SteamKit2.Internal
 
     private ulong _published_file_id = (ulong)18446744073709551615;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"published_file_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue((ulong)18446744073709551615)]
+    [global::System.ComponentModel.DefaultValue(@"18446744073709551615")]
     public ulong published_file_id
     {
       get { return _published_file_id; }
@@ -9019,7 +9019,7 @@ namespace SteamKit2.Internal
 
     private ulong _file_hcontent = (ulong)18446744073709551615;
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"file_hcontent", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue((ulong)18446744073709551615)]
+    [global::System.ComponentModel.DefaultValue(@"18446744073709551615")]
     public ulong file_hcontent
     {
       get { return _file_hcontent; }
@@ -9028,7 +9028,7 @@ namespace SteamKit2.Internal
 
     private ulong _preview_hcontent = (ulong)18446744073709551615;
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"preview_hcontent", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue((ulong)18446744073709551615)]
+    [global::System.ComponentModel.DefaultValue(@"18446744073709551615")]
     public ulong preview_hcontent
     {
       get { return _preview_hcontent; }

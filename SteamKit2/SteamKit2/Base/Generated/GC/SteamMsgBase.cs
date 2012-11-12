@@ -47,7 +47,7 @@ namespace SteamKit2.GC.Internal
 
     private ulong _job_id_source = (ulong)18446744073709551615;
     [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"job_id_source", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue((ulong)18446744073709551615)]
+    [global::System.ComponentModel.DefaultValue(@"18446744073709551615")]
     public ulong job_id_source
     {
       get { return _job_id_source; }
@@ -56,7 +56,7 @@ namespace SteamKit2.GC.Internal
 
     private ulong _job_id_target = (ulong)18446744073709551615;
     [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"job_id_target", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue((ulong)18446744073709551615)]
+    [global::System.ComponentModel.DefaultValue(@"18446744073709551615")]
     public ulong job_id_target
     {
       get { return _job_id_target; }

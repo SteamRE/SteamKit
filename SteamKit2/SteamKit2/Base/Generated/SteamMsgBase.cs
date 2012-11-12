@@ -47,7 +47,7 @@ namespace SteamKit2.Internal
 
     private ulong _jobid_source = (ulong)18446744073709551615;
     [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"jobid_source", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue((ulong)18446744073709551615)]
+    [global::System.ComponentModel.DefaultValue(@"18446744073709551615")]
     public ulong jobid_source
     {
       get { return _jobid_source; }
@@ -56,7 +56,7 @@ namespace SteamKit2.Internal
 
     private ulong _jobid_target = (ulong)18446744073709551615;
     [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"jobid_target", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue((ulong)18446744073709551615)]
+    [global::System.ComponentModel.DefaultValue(@"18446744073709551615")]
     public ulong jobid_target
     {
       get { return _jobid_target; }
@@ -119,7 +119,7 @@ namespace SteamKit2.Internal
 
     private ulong _messageid = (ulong)18446744073709551615;
     [global::ProtoBuf.ProtoMember(18, IsRequired = false, Name=@"messageid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue((ulong)18446744073709551615)]
+    [global::System.ComponentModel.DefaultValue(@"18446744073709551615")]
     public ulong messageid
     {
       get { return _messageid; }
