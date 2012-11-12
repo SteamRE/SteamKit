@@ -1,4 +1,4 @@
-# SteamKit2
+﻿# SteamKit2
 - - -
 
 SteamKit2 is a .NET library designed to interoperate with Valve's Steam network. It aims to provide a simple, yet extensible, interface to perform various actions on the network.
@@ -35,7 +35,7 @@ SteamKit2 is released under the [LGPL-2.1 license](http://www.tldrlegal.com/lice
 
 In order to compile and use SteamKit2, the following dependencies are required:
 
-  - .NET 4.0, or [Mono =2.8](http://mono-project.com)
+  - .NET 4.0, or [Mono ≥2.8](http://mono-project.com)
   - [protobuf-net](http://code.google.com/p/protobuf-net/) ([NuGet package](http://nuget.org/packages/protobuf-net))
 
 
