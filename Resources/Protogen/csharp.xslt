@@ -328,6 +328,22 @@ namespace <xsl:value-of select="translate($namespace,':-/\','__..')"/>
       <xsl:otherwise>(<xsl:apply-templates select="." mode="type"/>)<xsl:value-of select="default_value"/></xsl:otherwise>
     </xsl:choose>
   </xsl:template>
+  
+  <xsl:template match="FieldDescriptorProto[default_value]" mode="attribDefaultValue">
+    <xsl:choose>
+      <xsl:when test="type='TYPE_STRING'">@"<xsl:value-of select="default_value"/>"</xsl:when>
+      <xsl:when test="type='TYPE_ENUM'"><xsl:apply-templates select="." mode="type"/>.<xsl:call-template name="pascal">
+        <xsl:with-param name="value" select="default_value"/>
+      </xsl:call-template></xsl:when>
+      <xsl:when test="type='TYPE_BYTES'"> /* 
+        <xsl:value-of select="default_value"/>
+        */ null </xsl:when>
+	  <xsl:when test="type='TYPE_UINT64'">@"<xsl:value-of select="default_value"/>"</xsl:when>
+	  <xsl:when test="type='TYPE_FIXED64'">@"<xsl:value-of select="default_value"/>"</xsl:when>
+      <xsl:otherwise>(<xsl:apply-templates select="." mode="type"/>)<xsl:value-of select="default_value"/></xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+  
 
   <!--
     We need to find the first enum value given .foo.bar.SomeEnum - but the enum itself
@@ -359,6 +375,16 @@ namespace <xsl:value-of select="translate($namespace,':-/\','__..')"/>
       <xsl:otherwise>default(<xsl:apply-templates select="." mode="type"/>)</xsl:otherwise>
     </xsl:choose>
   </xsl:template>
+  
+  <xsl:template match="FieldDescriptorProto[not(default_value)]" mode="attribDefaultValue">
+    <xsl:choose>
+      <xsl:when test="type='TYPE_STRING'">""</xsl:when>
+      <xsl:when test="type='TYPE_MESSAGE'">null</xsl:when>
+      <xsl:when test="type='TYPE_BYTES'">null</xsl:when>
+      <xsl:when test="type='TYPE_ENUM'"><xsl:apply-templates select="." mode="type"/>.<xsl:call-template name="GetFirstEnumValue"/></xsl:when>
+      <xsl:otherwise>default(<xsl:apply-templates select="." mode="type"/>)</xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
 
   <xsl:template match="FieldDescriptorProto" mode="checkDeprecated"><!--
     --><xsl:if test="options/deprecated='true'">global::System.Obsolete, </xsl:if><!--
@@ -368,6 +394,7 @@ namespace <xsl:value-of select="translate($namespace,':-/\','__..')"/>
     <xsl:variable name="format"><xsl:apply-templates select="." mode="format"/></xsl:variable>
     <xsl:variable name="primitiveType"><xsl:apply-templates select="." mode="primitiveType"/></xsl:variable>
     <xsl:variable name="defaultValue"><xsl:apply-templates select="." mode="defaultValue"/></xsl:variable>
+    <xsl:variable name="attribDefaultValue"><xsl:apply-templates select="." mode="attribDefaultValue"/></xsl:variable>
     <xsl:variable name="field"><xsl:apply-templates select="." mode="field"/></xsl:variable>
     <xsl:variable name="specified" select="$optionDetectMissing and ($primitiveType='struct' or $primitiveType='class')"/>
     <xsl:variable name="fieldType"><xsl:value-of select="$propType"/><xsl:if test="$specified and $primitiveType='struct'">?</xsl:if></xsl:variable>
@@ -375,7 +402,7 @@ namespace <xsl:value-of select="translate($namespace,':-/\','__..')"/>
     private <xsl:value-of select="concat($fieldType,' ',$field)"/><xsl:if test="not($specified)"> = <xsl:value-of select="$defaultValue"/></xsl:if>;
     [<xsl:apply-templates select="." mode="checkDeprecated"/>global::ProtoBuf.ProtoMember(<xsl:value-of select="number"/>, IsRequired = false, Name=@"<xsl:value-of select="name"/>", DataFormat = global::ProtoBuf.DataFormat.<xsl:value-of select="$format"/>)]<!--
     --><xsl:if test="not($specified)">
-    [global::System.ComponentModel.DefaultValue(<xsl:value-of select="$defaultValue"/>)]</xsl:if><!--
+    [global::System.ComponentModel.DefaultValue(<xsl:value-of select="$attribDefaultValue"/>)]</xsl:if><!--
     --><xsl:if test="$optionXml">
     [global::System.Xml.Serialization.XmlElement(@"<xsl:value-of select="name"/>", Order = <xsl:value-of select="number"/>)]
     </xsl:if><xsl:if test="$optionDataContract">
