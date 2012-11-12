@@ -1,0 +1,61 @@
+
+------------------------------------------------------------------------------
+v 1.2.1			Nov 11, 2012
+------------------------------------------------------------------------------
+
+*	Added EPersonaState.LookingToTrade and EPersonaState.LookingToPlay.
+*	Added SteamFriends.UnbanChatMember.
+*	Removed GeneralDSClient.GetAuthServerList as Steam2 auth servers no longer exist.
+*	Removed dependency on Classless.Hasher.
+*	Updated to latest protobuf-net.
+
+
+------------------------------------------------------------------------------
+v 1.2.0			Nov 04, 2012
+------------------------------------------------------------------------------
+
+*	Fixed issue where LoginKeyCallback was being passed incorrect data.
+*	Fixed ClientGCMsg PacketMessage constructor.
+*	WebAPI list and array parameters are now accepted and flattened to x[n]=y format.
+*	Fixed KeyValue issue when multiple duplicate children exist.
+*	Updated protobuf definitions for internal message classes to their latest definitions.
+*	Updated EMsgs.
+*	Fixed critical MsgMulti handling.
+*	Added EEconTradeResponse.
+*	Added SteamTrading client message handler.
+*	Modified Steam3 TCP socket shutdown to play well with Mono.
+*	Modified CMClient.Connect method to be properly async.
+*	Implemented friend blocking/unblocking with SteamFriends.IgnoreFriend and SteamFriends.IgnoreFriendCallback.
+*	Fixed gameserver logon.
+*	Local user is now given the persona name [unassigned] before SteamUser.AccountInfoCallback comes in.
+*	Updated SteamKit2's bootstrap CM list, this should reduce how often SK2 will connect to an offline/dead server.
+*	Steam2 ServerClient's now expose a ConnectionTimeout member.
+
+BREAKING CHANGES
+*	Dota GC EMsgs are now longer located in SteamKit2.GC.Dota.EGCMsg, they are now in SteamKit2.Gc.Dota.Internal.EDOTAGCMsg.
+*	Base GC EMsgs are now longer located in SyteamKit2.GC.EGCMsgBase, they are now in multiple enums in the SteamKit2.GC.Internal namespace:
+	EGCBaseMsg, EGCSystemMsg, EGCSharedMsg, ESOMsg, EGCItemMsg
+*	SteamApps.AppInfoCallback now exposes the immediate child KeyValue for every Section, instead of an empty root parent.
+
+
+------------------------------------------------------------------------------
+v 1.1.0			May 14, 2012
+------------------------------------------------------------------------------
+
+*	Added SteamWorkshop for enumerating and requesting details of published workshop files.
+*	Large overhaul of SteamGameCoordinator to support the sending and receiving of GC messages.
+*	Added SteamFriends ChatInviteCallback.
+*	Added SteamFriends KickChatMember and BanChatMember.
+*	Fixed invalid handling of PackageInfoCallback response.
+*	Updated protobuf definitions for internal message classes to their latest definitions.
+
+BREAKING CHANGES
+*	Consumers of SteamClient.JobCallback<T> will have to change their handler functions to take a "JobID" parameter instead of a "ulong".
+	These are functionally equivalent, and JobIDs can be implicitly casted to and from ulongs.
+
+
+------------------------------------------------------------------------------
+v 1.0.0			Feb 26, 2012
+------------------------------------------------------------------------------
+
+*	Initial release.
