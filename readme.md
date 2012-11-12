@@ -10,7 +10,7 @@ SteamKit2 is a .NET library designed to interoperate with Valve's Steam network.
 
 ### Visual Studio
 
-Starting with version 1.2.1, SteamKit2 is distributed as a [NuGet package](http://nuget.org/packages/steamkit2).
+Starting with version 1.2.2, SteamKit2 is distributed as a [NuGet package](http://nuget.org/packages/steamkit2).
 
 Simply install SteamKit2 using the package manager in Visual Studio, and NuGet will add all the required dependencies and references to your project.  
   
