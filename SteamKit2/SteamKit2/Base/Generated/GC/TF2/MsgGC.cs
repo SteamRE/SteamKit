@@ -2186,7 +2186,7 @@ namespace SteamKit2.GC.TF2.Internal
 
     private ulong _server_id = (ulong)0;
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"server_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue((ulong)0)]
+    [global::System.ComponentModel.DefaultValue(@"0")]
     public ulong server_id
     {
       get { return _server_id; }
