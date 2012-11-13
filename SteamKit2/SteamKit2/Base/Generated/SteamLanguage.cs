@@ -1074,6 +1074,8 @@ namespace SteamKit2
 		ClientCommentNotifications = 5582,
 		ClientRequestCommentNotifications = 5583,
 		ClientPersonaChangeResponse = 5584,
+		ClientRequestWebAPIAuthenticateUserNonce = 5585,
+		ClientRequestWebAPIAuthenticateUserNonceResponse = 5586,
 		ClientPlayerNicknameList = 5587,
 		AMClientSetPlayerNickname = 5588,
 		AMClientSetPlayerNicknameResponse = 5589,
@@ -1276,6 +1278,13 @@ namespace SteamKit2
 		CREGetUserPublishedItemVoteDetailsResponse = 8510,
 		CREEnumeratePublishedFiles = 8511,
 		CREEnumeratePublishedFilesResponse = 8512,
+		PICSBase = 8900,
+		PICSChangesSinceRequest = 8901,
+		PICSChangesSinceResponse = 8902,
+		PICSProductInfoRequest = 8903,
+		PICSProductInfoResponse = 8904,
+		PICSAccessTokenRequest = 8905,
+		PICSAccessTokenResponse = 8906,
 	}
 	public enum EResult
 	{
