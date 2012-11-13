@@ -172,12 +172,6 @@
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\SteamKit2\SteamKit2\SteamKit2.csproj">
-      <Project>{BEB5BF07-BB56-402A-97A3-A41C6444C6A5}</Project>
-      <Name>SteamKit2</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="UI\AddFriendDialog.resx">
       <DependentUpon>AddFriendDialog.cs</DependentUpon>
     </EmbeddedResource>
@@ -248,6 +242,12 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\SteamKit2\SteamKit2\SteamKit2.csproj">
+      <Project>{BEB5BF07-BB56-402A-97A3-A41C6444C6A5}</Project>
+      <Name>SteamKit2</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
