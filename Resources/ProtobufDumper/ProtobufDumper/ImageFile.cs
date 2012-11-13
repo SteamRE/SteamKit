@@ -987,7 +987,7 @@ namespace ProtobufDumper
                     fbuilder.SetCustomAttribute(epBuilder);
                 }
 
-                Type dvType = typeof(ProtoDefaultValueAttribute);
+                Type dvType = typeof(DefaultValueAttribute);
                 ConstructorInfo dvCtor = dvType.GetConstructor(new Type[] { typeof(object) });
                 CustomAttributeBuilder dvBuilder = new CustomAttributeBuilder(dvCtor, new object[] { defaultValue });
 
