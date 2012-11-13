@@ -2528,6 +2528,15 @@ namespace SteamKit2.GC.Internal
       get { return _black_power; }
       set { _black_power = value; }
     }
+
+    private uint _skin = default(uint);
+    [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"skin", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint skin
+    {
+      get { return _skin; }
+      set { _skin = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
