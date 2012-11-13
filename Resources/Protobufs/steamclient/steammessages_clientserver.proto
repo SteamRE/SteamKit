@@ -1120,6 +1120,7 @@ message CMsgPICSProductInfoRequest {
 	message AppInfo {
 		optional uint32 appid = 1;
 		optional uint64 access_token = 2;
+		optional bool only_public = 3;
 	}
 
 	message PackageInfo {
@@ -1139,6 +1140,7 @@ message CMsgPICSProductInfoResponse {
 		optional bool missing_token = 3;
 		optional bytes sha = 4;
 		optional bytes buffer = 5;
+		optional bool only_public = 6;
 	}
 
 	message PackageInfo {
