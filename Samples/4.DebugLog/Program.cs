@@ -6,7 +6,7 @@ using System.Text;
 using SteamKit2;
 
 //
-// Sample 4: Extending SteamKit2
+// Sample 4: DebugLog
 //
 // sometimes is may be necessary to peek under the hood of SteamKit2
 // to debug or diagnose some issues
