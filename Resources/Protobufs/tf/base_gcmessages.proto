@@ -54,7 +54,8 @@ message CMsgClientWelcome {
 }
 
 message CMsgServerWelcome {
-	optional uint32 version = 1;
+	optional uint32 min_allowed_version = 1;
+	optional uint32 active_version = 2;
 }
 
 message CMsgClientGoodbye {

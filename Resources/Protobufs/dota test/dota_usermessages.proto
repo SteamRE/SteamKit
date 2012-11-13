@@ -39,6 +39,7 @@ enum EDotaUserMessages {
 	DOTA_UM_WorldLine = 97;
 	DOTA_UM_TournamentDrop = 98;
 	DOTA_UM_ItemAlert = 99;
+	DOTA_UM_HalloweenDrops = 100;
 }
 
 enum DOTA_CHAT_MESSAGE {
@@ -313,6 +314,12 @@ message CDOTAUserMsg_SharedCooldown {
 
 message CDOTAUserMsg_SetNextAutobuyItem {
 	optional string name = 1;
+}
+
+message CDOTAUserMsg_HalloweenDrops {
+	repeated uint32 item_defs = 1;
+	repeated uint32 player_ids = 2;
+	optional uint32 prize_list = 3;
 }
 
 message CDOTAResponseQuerySerialized {

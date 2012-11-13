@@ -707,3 +707,45 @@ message CMsgHalloween_ServerBossEvent {
 	optional float elapsed_time = 7;
 }
 
+message CMsgHalloween_Merasmus2012 {
+	optional uint32 event_counter = 1;
+	optional fixed32 time_submitted = 2;
+	optional bool is_valve_server = 3;
+	optional uint32 boss_level = 4;
+	optional uint32 spawned_health = 5;
+	optional uint32 remaining_health = 6;
+	optional uint32 life_time = 7;
+	optional uint32 bomb_kills = 8;
+	optional uint32 staff_kills = 9;
+	optional uint32 pvp_kills = 10;
+	optional uint32 prophunt_time1 = 11;
+	optional uint32 prophunt_time2 = 12;
+	optional uint32 dmg_scout = 13;
+	optional uint32 dmg_sniper = 14;
+	optional uint32 dmg_soldier = 15;
+	optional uint32 dmg_demo = 16;
+	optional uint32 dmg_medic = 17;
+	optional uint32 dmg_heavy = 18;
+	optional uint32 dmg_pyro = 19;
+	optional uint32 dmg_spy = 20;
+	optional uint32 dmg_engineer = 21;
+	optional uint32 scout_count = 22;
+	optional uint32 sniper_count = 23;
+	optional uint32 solider_count = 24;
+	optional uint32 demo_count = 25;
+	optional uint32 medic_count = 26;
+	optional uint32 heavy_count = 27;
+	optional uint32 pyro_count = 28;
+	optional uint32 spy_count = 29;
+	optional uint32 engineer_count = 30;
+}
+
+message CMsgUpdateHalloweenMerasmusLootLevel {
+	message Player {
+		optional fixed64 steam_id = 1;
+	}
+
+	repeated .CMsgUpdateHalloweenMerasmusLootLevel.Player players = 1;
+	optional uint32 merasmus_level = 2;
+}
+
