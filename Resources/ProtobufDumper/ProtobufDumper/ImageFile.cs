@@ -201,7 +201,9 @@ namespace ProtobufDumper
                             bw.Write(*dataPtr);
                         }
 
-                        bw.Write((byte)0);
+                        // do we still need this?
+                        // the extra null byte on the descriptor proto is causing the deserializer to freak out
+                        // bw.Write((byte)0);
 
                         data = ms.ToArray();
                     }
