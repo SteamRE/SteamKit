@@ -5,6 +5,21 @@ using System.Text;
 
 using SteamKit2;
 
+//
+// Sample 1: Logon
+//
+// the first act of business before being able to use steamkit2's features is to
+// logon to the steam network
+//
+// interaction with steamkit is done through client message handlers and the results
+// come back through a callback queue controlled by a steamclient instance 
+//
+// this sample will introduce the 1st of two primary ways of handling callbacks: the inline loop
+// 
+// do note however, that this method isn't preferred, and the method introduced in
+// Sample 2 should be used
+//
+
 namespace Sample1_Logon
 {
     class Program
