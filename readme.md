@@ -1,8 +1,7 @@
-﻿
 # SteamKit2
 - - -
 
-SteamKit2 is a .NET library designed to interoperate with Valve's Steam network. It aims to provide a simple, yet extensible, interface to perform various actions on the network.
+SteamKit2 is a .NET library designed to interoperate with Valve's [Steam network](http://store.steampowered.com/about). It aims to provide a simple, yet extensible, interface to perform various actions on the network.
 
 
 ## Getting Binaries
@@ -18,11 +17,13 @@ Simply install SteamKit2 using the package manager in Visual Studio, and NuGet w
 
 We additionally distribute binaries on our [downloads page](https://bitbucket.org/VoiDeD/steamre/downloads).
 
+For more information on installing SteamKit2, please refer to the [Installation Guide](https://bitbucket.org/VoiDeD/steamre/wiki/Installation) on the wiki.
+
 
 ## Documentation
 - - -
 
-Documentation consists primarily of XML code documentation provided with the binaries, and our [wiki page](https://bitbucket.org/VoiDeD/steamre/wiki/Home).
+Documentation consists primarily of XML code documentation provided with the binaries, and our [wiki](https://bitbucket.org/VoiDeD/steamre/wiki/Home).
 
 
 ## License
@@ -38,6 +39,8 @@ In order to compile and use SteamKit2, the following dependencies are required:
 
   - .NET 4.0 or [Mono ≥2.8](http://mono-project.com)
   - [protobuf-net](http://code.google.com/p/protobuf-net/) ([NuGet package](http://nuget.org/packages/protobuf-net))
+
+Note: If you're using the NuGet package, the protobuf-net dependency _should_ be resolved for you. See the [Installation Guide](https://bitbucket.org/VoiDeD/steamre/wiki/Installation) for more information.
 
 
 ## Contact
