@@ -335,6 +335,8 @@
 	k_EMsgClientCommentNotifications = 5582, // flags: 6, server type: 47
 	k_EMsgClientRequestCommentNotifications = 5583, // flags: 6, server type: 47
 	k_EMsgClientPersonaChangeResponse = 5584, // flags: 2, server type: -1
+	k_EMsgClientRequestWebAPIAuthenticateUserNonce = 5585, // flags: 2, server type: -1
+	k_EMsgClientRequestWebAPIAuthenticateUserNonceResponse = 5586, // flags: 2, server type: -1
 	k_EMsgClientPlayerNicknameList = 5587, // flags: 2, server type: -1
 	k_EMsgAMClientSetPlayerNickname = 5588, // flags: 2, server type: -1
 	k_EMsgAMClientSetPlayerNicknameResponse = 5589, // flags: 2, server type: -1
@@ -436,6 +438,8 @@
 	k_EMsgClientUCMSetUserPublishedFileActionResponse = 7365, // flags: 6, server type: 45
 	k_EMsgClientUCMEnumeratePublishedFilesByUserAction = 7366, // flags: 6, server type: 45
 	k_EMsgClientUCMEnumeratePublishedFilesByUserActionResponse = 7367, // flags: 6, server type: 45
+	k_EMsgClientUCMEnumerateUserSubscribedFilesWithUpdates = 7378, // flags: 6, server type: 45
+	k_EMsgClientUCMEnumerateUserSubscribedFilesWithUpdatesResponse = 7379, // flags: 6, server type: 45
 	k_EMsgClientRichPresenceUpload = 7501, // flags: 6, server type: 47
 	k_EMsgClientRichPresenceRequest = 7502, // flags: 6, server type: 47
 	k_EMsgClientRichPresenceInfo = 7503, // flags: 6, server type: 47
@@ -465,3 +469,9 @@
 	k_EMsgCREGetUserPublishedItemVoteDetailsResponse = 8510, // flags: 6, server type: 53
 	k_EMsgCREEnumeratePublishedFiles = 8511, // flags: 6, server type: 53
 	k_EMsgCREEnumeratePublishedFilesResponse = 8512, // flags: 6, server type: 53
+	k_EMsgPICSChangesSinceRequest = 8901, // flags: 6, server type: 14
+	k_EMsgPICSChangesSinceResponse = 8902, // flags: 6, server type: 14
+	k_EMsgPICSProductInfoRequest = 8903, // flags: 6, server type: 14
+	k_EMsgPICSProductInfoResponse = 8904, // flags: 6, server type: 14
+	k_EMsgPICSAccessTokenRequest = 8905, // flags: 6, server type: 14
+	k_EMsgPICSAccessTokenResponse = 8906, // flags: 6, server type: 14
