@@ -7186,6 +7186,15 @@ namespace SteamKit2.Internal
       get { return _access_token; }
       set { _access_token = value; }
     }
+
+    private bool _only_public = default(bool);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"only_public", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool only_public
+    {
+      get { return _only_public; }
+      set { _only_public = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -7324,6 +7333,15 @@ namespace SteamKit2.Internal
     {
       get { return _buffer; }
       set { _buffer = value; }
+    }
+
+    private bool _only_public = default(bool);
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"only_public", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool only_public
+    {
+      get { return _only_public; }
+      set { _only_public = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
