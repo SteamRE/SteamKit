@@ -437,5 +437,6 @@ message CSOEconItemHalloweenEgg {
 	optional uint32 purple_power = 8;
 	optional uint32 green_power = 9;
 	optional uint32 black_power = 10;
+	optional uint32 skin = 11;
 }
 

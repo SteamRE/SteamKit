@@ -162,6 +162,9 @@ enum EDOTAGCMsg {
 	k_EMsgGCDiretidePrizeResponse = 7175;
 	k_EMsgGCRewardDiretidePrizes = 7176;
 	k_EMsgGCDiretidePrizesRewardedResponse = 7177;
+	k_EMsgGCHalloweenHighScoreRequest = 7178;
+	k_EMsgGCHalloweenHighScoreResponse = 7179;
+	k_EMsgGCGenerateDiretidePrizeListResponse = 7180;
 	k_EMsgGCDev_GrantWarKill = 8001;
 }
 
@@ -174,6 +177,7 @@ enum DOTA_GameMode {
 	DOTA_GAMEMODE_AR = 5;
 	DOTA_GAMEMODE_INTRO = 6;
 	DOTA_GAMEMODE_HW = 7;
+	DOTA_GAMEMODE_REVERSE_CM = 8;
 }
 
 enum DOTA_GameState {
@@ -328,9 +332,7 @@ message CSODOTAParty {
 	repeated fixed64 pending_invites = 5;
 	optional .CSODOTAParty.State state = 6 [default = UI];
 	optional uint32 started_matchmaking_time = 7;
-	repeated uint32 searching_players_by_group = 10;
 	optional uint32 matchgroups = 11;
-	optional float search_fraction = 15;
 	optional uint32 prevent_match_until_date = 18;
 	optional uint32 prevent_match_account_id = 19;
 	optional .MatchType match_type = 21 [default = MATCH_TYPE_RANKED];
@@ -338,6 +340,7 @@ message CSODOTAParty {
 	optional uint32 team_id = 23;
 	optional uint32 match_disabled_until_date = 24;
 	optional uint32 match_disabled_account_id = 25;
+	optional uint32 matchmaking_max_range_minutes = 26;
 }
 
 message CSODOTAPartyInternal {
@@ -465,6 +468,8 @@ message CSODOTALobby {
 	optional uint32 series_type = 46;
 	optional uint32 radiant_series_wins = 47;
 	optional uint32 dire_series_wins = 48;
+	optional uint32 loot_generated = 49;
+	optional uint32 loot_awarded = 50;
 }
 
 message CSODOTALobbyInternal {
@@ -560,6 +565,7 @@ message CMsgFindSourceTVGames {
 	optional uint32 num_games = 3;
 	optional uint32 leagueid = 4;
 	optional uint32 heroid = 5;
+	optional bool diretide = 6;
 }
 
 message CMsgSpectateFriendGame {
@@ -612,6 +618,29 @@ message CMsgLeaverDetectedResponse {
 message CMsgForceSOCacheResend {
 }
 
+message CMsgPracticeLobbySetDetails {
+	optional uint64 lobby_id = 1;
+	optional string game_name = 2;
+	repeated .CLobbyTeamDetails team_details = 3;
+	optional uint32 server_region = 4;
+	optional uint32 game_mode = 5;
+	optional .DOTA_CM_PICK cm_pick = 6 [default = DOTA_CM_RANDOM];
+	optional .DOTABotDifficulty bot_difficulty = 9 [default = BOT_DIFFICULTY_MEDIUM];
+	optional bool allow_cheats = 10;
+	optional bool fill_with_bots = 11;
+	optional bool intro_mode = 12;
+	optional bool allow_spectating = 13;
+	optional .DOTAGameVersion game_version = 14 [default = GAME_VERSION_CURRENT];
+	optional string pass_key = 15;
+	optional uint32 leagueid = 16;
+	optional uint32 penalty_level_radiant = 17;
+	optional uint32 penalty_level_dire = 18;
+	optional uint32 load_game_id = 19;
+	optional uint32 series_type = 20;
+	optional uint32 radiant_series_wins = 21;
+	optional uint32 dire_series_wins = 22;
+}
+
 message CMsgPracticeLobbyCreate {
 	optional string search_key = 1;
 	optional bool tournament_game = 2;
@@ -619,6 +648,7 @@ message CMsgPracticeLobbyCreate {
 	optional uint32 tournament_id = 4;
 	optional string pass_key = 5;
 	optional uint32 client_version = 6;
+	optional .CMsgPracticeLobbySetDetails lobby_details = 7;
 }
 
 message CMsgPracticeLobbySetTeamSlot {
@@ -643,29 +673,6 @@ message CMsgPracticeLobbyLaunch {
 }
 
 message CMsgApplyTeamToPracticeLobby {
-}
-
-message CMsgPracticeLobbySetDetails {
-	optional uint64 lobby_id = 1;
-	optional string game_name = 2;
-	repeated .CLobbyTeamDetails team_details = 3;
-	optional uint32 server_region = 4;
-	optional uint32 game_mode = 5;
-	optional .DOTA_CM_PICK cm_pick = 6 [default = DOTA_CM_RANDOM];
-	optional .DOTABotDifficulty bot_difficulty = 9 [default = BOT_DIFFICULTY_MEDIUM];
-	optional bool allow_cheats = 10;
-	optional bool fill_with_bots = 11;
-	optional bool intro_mode = 12;
-	optional bool allow_spectating = 13;
-	optional .DOTAGameVersion game_version = 14 [default = GAME_VERSION_CURRENT];
-	optional string pass_key = 15;
-	optional uint32 leagueid = 16;
-	optional uint32 penalty_level_radiant = 17;
-	optional uint32 penalty_level_dire = 18;
-	optional uint32 load_game_id = 19;
-	optional uint32 series_type = 20;
-	optional uint32 radiant_series_wins = 21;
-	optional uint32 dire_series_wins = 22;
 }
 
 message CMsgPracticeLobbyList {
@@ -784,6 +791,7 @@ message CMsgGameMatchSignOut {
 	optional string server_addr = 11;
 	optional uint32 first_blood_time = 12;
 	optional float game_balance = 13;
+	optional uint32 event_score = 14;
 }
 
 message CMsgGameMatchSignoutResponse {
@@ -1918,6 +1926,12 @@ message CMsgDOTAGenerateDiretidePrizeList {
 	optional uint32 prize_list = 1;
 }
 
+message CMsgDOTAGenerateDiretidePrizeListResponse {
+	repeated uint32 item_defs = 1;
+	repeated fixed64 steam_ids = 2;
+	optional uint32 prize_list = 3;
+}
+
 message CMsgDOTARewardDiretidePrizes {
 	optional uint32 team = 1;
 	optional uint32 prize_list = 2;
@@ -1930,5 +1944,16 @@ message CMsgDOTADiretidePrizesRewardedResponse {
 message CMsgDOTADiretidePrizeResponse {
 	optional uint32 item_def = 1;
 	optional uint32 prize_list = 2;
+}
+
+message CMsgDOTAHalloweenHighScoreRequest {
+	optional int32 round = 1 [default = -1];
+}
+
+message CMsgDOTAHalloweenHighScoreResponse {
+	optional uint32 score = 1;
+	optional .CMsgDOTAMatch match = 2;
+	optional uint32 eresult = 3;
+	optional int32 round = 4;
 }
 
