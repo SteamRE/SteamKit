@@ -28,9 +28,9 @@ namespace SteamKit2
             /// </summary>
             public byte[] ChunkID { get; private set; }
             /// <summary>
-            /// Gets the chunk CRC.
+            /// Gets the expected Adler32 checksum of this chunk.
             /// </summary>
-            public byte[] CRC { get; private set; }
+            public byte[] Checksum { get; private set; }
             /// <summary>
             /// Gets the chunk offset.
             /// </summary>
@@ -46,10 +46,10 @@ namespace SteamKit2
             public uint UncompressedLength { get; private set; }
 
 
-            internal ChunkData( byte[] id, byte[] crc, ulong offset, uint comp_length, uint uncomp_length )
+            internal ChunkData( byte[] id, byte[] checksum, ulong offset, uint comp_length, uint uncomp_length )
             {
                 this.ChunkID = id;
-                this.CRC = crc;
+                this.Checksum = checksum;
                 this.Offset = offset;
 
                 this.CompressedLength = comp_length;
@@ -189,7 +189,7 @@ namespace SteamKit2
 
                 foreach (var chunk in file_mapping.Chunks)
                 {
-                    filedata.Chunks.Add( new ChunkData( chunk.ChunkGID, chunk.CRC, chunk.Offset, chunk.CompressedSize, chunk.DecompressedSize ) );
+                    filedata.Chunks.Add( new ChunkData( chunk.ChunkGID, chunk.Checksum, chunk.Offset, chunk.CompressedSize, chunk.DecompressedSize ) );
                 }
 
                 Files.Add(filedata);
