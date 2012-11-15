@@ -81,19 +81,24 @@ namespace SteamKit2.Internal
 
         /// <summary>
         /// Gets the connected universe of this client.
+        /// This value will be <see cref="EUniverse.Invalid"/> if the client is logged off of Steam.
         /// </summary>
         /// <value>The universe.</value>
         public EUniverse ConnectedUniverse { get; private set; }
+
         /// <summary>
         /// Gets the session ID of this client. This value is assigned after a logon attempt has succeeded.
+        /// This value will be <c>null</c> if the client is logged off of Steam.
         /// </summary>
         /// <value>The session ID.</value>
         public int? SessionID { get; private set; }
         /// <summary>
         /// Gets the SteamID of this client. This value is assigned after a logon attempt has succeeded.
+        /// This value will be <c>null</c> if the client is logged off of Steam.
         /// </summary>
         /// <value>The SteamID.</value>
         public SteamID SteamID { get; private set; }
+
 
         Connection connection;
         byte[] tempSessionKey;
