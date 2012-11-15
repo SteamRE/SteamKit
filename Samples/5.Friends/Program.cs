@@ -62,6 +62,7 @@ namespace Sample5_CallbackManager
             new Callback<SteamUser.AccountInfoCallback>( OnAccountInfo, manager );
             new Callback<SteamFriends.FriendsListCallback>( OnFriendsList, manager );
             new Callback<SteamFriends.PersonaStateCallback>( OnPersonaState, manager );
+            new Callback<SteamFriends.FriendAddedCallback>( OnFriendAdded, manager );
 
             isRunning = true;
 
@@ -146,6 +147,23 @@ namespace Sample5_CallbackManager
                 // we'll just display the STEAM_ rendered version
                 Console.WriteLine( "Friend: {0}", steamIdFriend.Render() );
             }
+
+            // we can also iterate over our friendslist to accept or decline any pending invites
+
+            foreach ( var friend in callback.FriendList )
+            {
+                if (friend.Relationship == EFriendRelationship.PendingInvitee)
+                {
+                    // this user has added us, let's add him back
+                    steamFriends.AddFriend(friend.SteamID);
+                }
+            }
+        }
+
+        static void OnFriendAdded( SteamFriends.FriendAddedCallback callback)
+        {
+            // someone accepted our friend request, or we accepted one
+            Console.WriteLine( "{0} is now a friend", callback.PersonaName );
         }
 
         static void OnPersonaState( SteamFriends.PersonaStateCallback callback )
