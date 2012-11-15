@@ -29,3 +29,6 @@ Backup/
 # nuget packages
 packages/
 *.nupkg
+
+# misc
+Thumbs.db
