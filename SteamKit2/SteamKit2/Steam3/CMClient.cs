@@ -273,7 +273,7 @@ namespace SteamKit2.Internal
             OnClientMsgReceived( GetPacketMsg( e.Data ) );
         }
 
-        void Connected(object sender, EventArgs e)
+        void Connected( object sender, EventArgs e )
         {
             // If we're on an encrypted connection, we wait for the handshake to complete
             if ( encrypted )
@@ -364,10 +364,9 @@ namespace SteamKit2.Internal
         {
             if ( !packetMsg.IsProto )
             {
-                DebugLog.WriteLine( "CMClient", "HandleLogOnResponse got non-proto MsgClientLogonResponse!!" );
+                DebugLog.WriteLine( "CMClient", "Got non-proto logon response, this is indicative of no logon attempt after connecting." );
                 return;
             }
-
 
             var logonResp = new ClientMsgProtobuf<CMsgClientLogonResponse>( packetMsg );
 
