@@ -146,7 +146,6 @@ namespace Sample4_DebugLog
             Console.WriteLine( "Successfully logged on!" );
 
             // at this point, we'd be able to perform actions on Steam
-            // such as go online on friends, send chat messages, join chat rooms, request app info, etc
 
             // for this sample we'll just log off
             steamUser.LogOff();
