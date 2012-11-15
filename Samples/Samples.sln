@@ -13,6 +13,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample3_Extending", "3.Exte
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample4_DebugLog", "4.DebugLog\Sample4_DebugLog.csproj", "{5C673A32-A825-4715-BB96-BAACD450BEA5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample5_Friends", "5.Friends\Sample5_Friends.csproj", "{B3033DF8-97DB-4B10-8039-A118E016B5C5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{0CC78377-6BA1-43A5-8743-7ED12BB4192A}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -73,6 +82,16 @@ Global
 		{5C673A32-A825-4715-BB96-BAACD450BEA5}.Release|Mixed Platforms.Build.0 = Release|x86
 		{5C673A32-A825-4715-BB96-BAACD450BEA5}.Release|x86.ActiveCfg = Release|x86
 		{5C673A32-A825-4715-BB96-BAACD450BEA5}.Release|x86.Build.0 = Release|x86
+		{B3033DF8-97DB-4B10-8039-A118E016B5C5}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{B3033DF8-97DB-4B10-8039-A118E016B5C5}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{B3033DF8-97DB-4B10-8039-A118E016B5C5}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{B3033DF8-97DB-4B10-8039-A118E016B5C5}.Debug|x86.ActiveCfg = Debug|x86
+		{B3033DF8-97DB-4B10-8039-A118E016B5C5}.Debug|x86.Build.0 = Debug|x86
+		{B3033DF8-97DB-4B10-8039-A118E016B5C5}.Release|Any CPU.ActiveCfg = Release|x86
+		{B3033DF8-97DB-4B10-8039-A118E016B5C5}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{B3033DF8-97DB-4B10-8039-A118E016B5C5}.Release|Mixed Platforms.Build.0 = Release|x86
+		{B3033DF8-97DB-4B10-8039-A118E016B5C5}.Release|x86.ActiveCfg = Release|x86
+		{B3033DF8-97DB-4B10-8039-A118E016B5C5}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
