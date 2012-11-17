@@ -92,6 +92,6 @@ namespace SteamKit2
     }
 
 #pragma warning restore 0660
-#pragma warning disable 0661
+#pragma warning restore 0661
 
 }
