@@ -121,8 +121,6 @@ enum EDOTAGCMsg {
 	k_EMsgGCPlayerHeroesFavoritesRemove = 7134;
 	k_EMsgGCPlayerHeroesRecentRequest = 7135;
 	k_EMsgGCPlayerHeroesRecentResponse = 7136;
-	k_EMsgGCSetChatChannelVerbosity = 7137;
-	k_EMsgDOTAChatChannelFullUpdate = 7138;
 	k_EMsgGCEditTeamLogo = 7139;
 	k_EMsgGCEditTeamLogoResponse = 7140;
 	k_EMsgGCSetShowcaseHero = 7141;
@@ -165,6 +163,7 @@ enum EDOTAGCMsg {
 	k_EMsgGCHalloweenHighScoreRequest = 7178;
 	k_EMsgGCHalloweenHighScoreResponse = 7179;
 	k_EMsgGCGenerateDiretidePrizeListResponse = 7180;
+	k_EMsgGCNotifyResetKeybindings = 7181;
 	k_EMsgGCDev_GrantWarKill = 8001;
 }
 
@@ -178,6 +177,7 @@ enum DOTA_GameMode {
 	DOTA_GAMEMODE_INTRO = 6;
 	DOTA_GAMEMODE_HW = 7;
 	DOTA_GAMEMODE_REVERSE_CM = 8;
+	DOTA_GAMEMODE_XMAS = 9;
 }
 
 enum DOTA_GameState {
@@ -382,6 +382,7 @@ message CDOTALobbyMember {
 	optional .DOTALeaverStatus_t leaver_status = 16 [default = DOTA_LEAVER_NONE];
 	optional uint32 channel = 17;
 	optional uint32 prize_def_index = 18;
+	optional uint32 meta_xp_bonus_rate = 19;
 }
 
 message CLobbyTeamDetails {
@@ -566,6 +567,7 @@ message CMsgFindSourceTVGames {
 	optional uint32 leagueid = 4;
 	optional uint32 heroid = 5;
 	optional bool diretide = 6;
+	optional bool xmas = 7;
 }
 
 message CMsgSpectateFriendGame {
@@ -1955,5 +1957,9 @@ message CMsgDOTAHalloweenHighScoreResponse {
 	optional .CMsgDOTAMatch match = 2;
 	optional uint32 eresult = 3;
 	optional int32 round = 4;
+}
+
+message CMsgDOTANotifyResetKeybindings {
+	optional uint32 keybind_template = 1;
 }
 

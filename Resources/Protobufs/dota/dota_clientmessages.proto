@@ -18,6 +18,7 @@ enum EDotaClientMessages {
 	DOTA_CM_WorldLine = 13;
 	DOTA_CM_RequestGraphUpdate = 14;
 	DOTA_CM_ItemAlert = 15;
+	DOTA_CM_ChatWheel = 16;
 }
 
 message CDOTAClientMsg_MapPing {
@@ -78,5 +79,9 @@ message CDOTAClientMsg_WorldLine {
 }
 
 message CDOTAClientMsg_RequestGraphUpdate {
+}
+
+message CDOTAClientMsg_ChatWheel {
+	optional .EDOTAChatWheelMessage chat_message = 1 [default = k_EDOTA_CW_Ok];
 }
 
