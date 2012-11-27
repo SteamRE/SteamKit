@@ -75,27 +75,32 @@ namespace SteamKit2
         /// <param name="depotVersion">The depot version.</param>
         /// <param name="cellId">The cell id.</param>
         /// <param name="credentials">The credentials.</param>
+        /// <param name="doHandshake">Whether or not to send the handshake and reopen cell</param>
         /// <returns>A new StorageSession object for the session.</returns>
-        public StorageSession OpenStorage( uint depotId, uint depotVersion, uint cellId, Credentials credentials )
+        public StorageSession OpenStorage( uint depotId, uint depotVersion, uint cellId, Credentials credentials, bool doHandshake = true )
         {
-            bool bRet = this.HandshakeServer( ( ESteam2ServerType )7 );
+            if (doHandshake)
+            {
+                bool bRet = this.HandshakeServer((ESteam2ServerType)7);
 
-            if ( !bRet )
-                throw new Steam2Exception( "Storage handshake with content server failed" );
+                if (!bRet)
+                    throw new Steam2Exception("Storage handshake with content server failed");
 
-            bRet = this.SendCommand(
-                0, // open storage
-                cellId
-            );
+                bRet = this.SendCommand(
+                    0, // open storage
+                    cellId
+                );
 
-            byte success = this.Socket.Reader.ReadByte();
+                byte success = this.Socket.Reader.ReadByte();
 
-            if ( success == 0 )
-                throw new Steam2Exception( string.Format( "Unable to open storage depot for cellid {0}", cellId ) );
+                if (success == 0)
+                    throw new Steam2Exception(string.Format("Unable to open storage depot for cellid {0}", cellId));
 
-            ushort bannerLen = NetHelpers.EndianSwap( this.Socket.Reader.ReadUInt16() );
-            byte[] bannerData = this.Socket.Reader.ReadBytes( bannerLen );
 
+                ushort bannerLen = NetHelpers.EndianSwap(this.Socket.Reader.ReadUInt16());
+                byte[] bannerData = this.Socket.Reader.ReadBytes(bannerLen);
+            }
+			
             return new StorageSession( this, depotId, depotVersion, credentials );
         }
         /// <summary>
@@ -104,20 +109,22 @@ namespace SteamKit2
         /// <param name="depotId">The depot id.</param>
         /// <param name="depotVersion">The depot version.</param>
         /// <param name="cellId">The cell id.</param>
+		/// <param name="doHandshake">Whether or not to send the handshake and reopen cell</param>
         /// <returns>A new StorageSession object for the session.</returns>
-        public StorageSession OpenStorage( uint depotId, uint depotVersion, uint cellId )
+        public StorageSession OpenStorage( uint depotId, uint depotVersion, uint cellId, bool doHandshake = true )
         {
-            return OpenStorage( depotId, depotVersion, cellId, null );
+            return OpenStorage( depotId, depotVersion, cellId, null, doHandshake );
         }
         /// <summary>
         /// Opens a storage session with the storage server.
         /// </summary>
         /// <param name="depotId">The depot id.</param>
         /// <param name="depotVersion">The depot version.</param>
+        /// <param name="doHandshake">Whether or not to send the handshake and reopen cell</param>
         /// <returns>A new StorageSession object for the session.</returns>
-        public StorageSession OpenStorage( uint depotId, uint depotVersion )
+        public StorageSession OpenStorage( uint depotId, uint depotVersion, bool doHandshake = true )
         {
-            return OpenStorage( depotId, depotVersion, 0 );
+            return OpenStorage( depotId, depotVersion, 0, doHandshake );
         }
 
         /// <summary>

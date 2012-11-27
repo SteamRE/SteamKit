@@ -92,6 +92,15 @@ namespace SteamKit2
         protected IPEndPoint EndPoint { get; private set; }
 
         /// <summary>
+        /// Gets whether or not the client is connected.
+        /// </summary>
+        /// <value>True if connected, otherwise false.</value>
+        public bool IsConnected
+        {
+            get { return Socket.IsConnected; }
+        }
+
+        /// <summary>
         /// Gets the length of time a connection will attempt to establish before timing out. The default timeout is 30 seconds.
         /// </summary>
         /// <value>The connection timeout.</value>
