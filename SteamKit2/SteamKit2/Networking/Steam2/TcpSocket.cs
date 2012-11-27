@@ -17,8 +17,6 @@ namespace SteamKit2
     sealed class TcpSocket
     {
         Socket sock;
-        bool bConnected;
-
         NetworkStream sockStream;
 
         /// <summary>
@@ -31,6 +29,12 @@ namespace SteamKit2
         /// </summary>
         /// <value>The binary writer.</value>
         public BinaryWriter Writer { get; private set; }
+
+        /// <summary>
+        /// Gets whether or not the client is connected.
+        /// </summary>
+        /// <value>True if connected, otherwise false.</value>
+        public bool IsConnected { get; private set; }
 
         /// <summary>
         /// Gets the length of time a connection will attempt to establish before timing out. The default timeout is 30 seconds.
@@ -59,9 +63,9 @@ namespace SteamKit2
             sock = new Socket( AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp );
             var asyncResult = sock.BeginConnect( endPoint, null, null );
 
-            bConnected = asyncResult.AsyncWaitHandle.WaitOne( ConnectionTimeout );
+            IsConnected = asyncResult.AsyncWaitHandle.WaitOne( ConnectionTimeout );
 
-            if ( !bConnected )
+            if ( !IsConnected )
             {
                 sock.Close();
                 return;
@@ -84,7 +88,7 @@ namespace SteamKit2
             if ( sock == null || !sock.Connected )
                 return;
 
-            if ( !bConnected )
+            if ( !IsConnected )
                 return;
 
             if ( sock != null )
@@ -100,7 +104,7 @@ namespace SteamKit2
                 catch { }
             }
 
-            bConnected = false;
+            IsConnected = false;
         }
 
         /// <summary>
