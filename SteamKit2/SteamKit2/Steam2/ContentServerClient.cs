@@ -437,6 +437,34 @@ namespace SteamKit2
             }
 
             /// <summary>
+            /// Downloads a specific file from the Steam servers to the specified Stream.
+            /// </summary>
+            /// <param name="file">The file to download, given from the manifest.</param>
+            /// <param name="downloadStream">The stream to which file data should be written.</param>
+            /// <param name="priority">The download priority.</param>
+            /// <param name="cryptKey">The AES encryption key used for any encrypted files.</param>
+            /// <returns>A byte array representing the file.</returns>
+            public void DownloadFileToStream(Steam2Manifest.Node file, Stream downloadStream, DownloadPriority priority = DownloadPriority.Low, byte[] cryptKey = null)
+            {
+                if ((file.Attributes & Steam2Manifest.Node.Attribs.EncryptedFile) != 0 && cryptKey == null)
+                {
+                    throw new Steam2Exception(string.Format("AES encryption key required for file: {0}", file.FullName));
+                }
+
+                const uint MaxParts = 16;
+
+                uint numFileparts = (uint)Math.Ceiling((float)file.SizeOrCount / (float)file.Parent.BlockSize);
+                uint numChunks = (uint)Math.Ceiling((float)numFileparts / (float)MaxParts);
+
+                for (uint x = 0; x < numChunks; ++x)
+                {
+                    byte[] filePart = DownloadFileParts(file, x * MaxParts, MaxParts, priority, cryptKey);
+
+                    downloadStream.Write(filePart, 0, filePart.Length);
+                }
+            }
+
+            /// <summary>
             /// Downloads a specific file from the Steam servers.
             /// </summary>
             /// <param name="file">The file to download, given from the manifest.</param>
@@ -445,26 +473,11 @@ namespace SteamKit2
             /// <returns>A byte array representing the file.</returns>
             public byte[] DownloadFile( Steam2Manifest.Node file, DownloadPriority priority = DownloadPriority.Low, byte[] cryptKey = null )
             {
-                if ( ( file.Attributes & Steam2Manifest.Node.Attribs.EncryptedFile ) != 0 && cryptKey == null )
+                using (var ms = new MemoryStream())
                 {
-                    throw new Steam2Exception( string.Format( "AES encryption key required for file: {0}", file.FullName ) );
+                    DownloadFileToStream( file, ms, priority, cryptKey );
+                    return ms.ToArray();
                 }
-
-                const uint MaxParts = 16;
-
-                uint numFileparts = ( uint )Math.Ceiling( ( float )file.SizeOrCount / ( float )file.Parent.BlockSize );
-                uint numChunks = ( uint )Math.Ceiling( ( float )numFileparts / ( float )MaxParts );
-
-                MemoryStream ms = new MemoryStream();
-
-                for ( uint x = 0 ; x < numChunks ; ++x )
-                {
-                    byte[] filePart = DownloadFileParts( file, x * MaxParts, MaxParts, priority, cryptKey );
-
-                    ms.Write( filePart, 0, filePart.Length );
-                }
-
-                return ms.ToArray();
             }
 
             byte[] DownloadFileParts( Steam2Manifest.Node file, uint filePart, uint numParts, DownloadPriority priority = DownloadPriority.Low, byte[] cryptKey = null )
