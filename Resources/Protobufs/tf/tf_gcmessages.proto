@@ -613,6 +613,10 @@ message CMsgMatchmakingProgress {
 	optional uint32 matching_near_you_active_players = 16;
 	optional uint32 total_worldwide_active_players = 17;
 	optional uint32 total_near_you_active_players = 18;
+	optional uint32 matching_worldwide_empty_gameservers = 19;
+	optional uint32 matching_near_you_empty_gameservers = 20;
+	optional uint32 total_worldwide_empty_gameservers = 21;
+	optional uint32 total_near_you_empty_gameservers = 22;
 	optional uint32 urgency_pct = 1;
 }
 

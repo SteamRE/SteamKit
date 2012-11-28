@@ -415,8 +415,9 @@ message CTFLobbyMember {
 	optional uint64 party_id = 12;
 	optional bool squad_surplus = 14;
 	optional uint32 badge_level = 15;
-	optional uint32 safe_to_leave = 16 [default = 0];
+	optional uint32 abandon_time = 16 [default = 0];
 	optional uint32 last_connect_time = 17;
+	optional bool quitting_results_in_penalty = 18;
 }
 
 message CLobbyPendingPlayerReport {
@@ -641,6 +642,8 @@ message CMsgMvMVictoryInfo {
 	}
 
 	repeated .CMsgMvMVictoryInfo.Player players = 1;
+	optional string tour_name = 2;
+	optional string mission_name = 3;
 }
 
 message CGCMsgTFHelloResponse {
@@ -669,5 +672,17 @@ message CMsgMvMVictory {
 
 message CMsgMvMMannUpVictoryReply {
 	optional uint32 result = 1;
+}
+
+message CMsgGameServerKickingLobby {
+	repeated fixed64 connected_players = 1;
+}
+
+message CMsgLeaveGameAndPrepareToJoinParty {
+	optional fixed64 party_id = 1;
+}
+
+message CMsgRemovePlayerFromLobby {
+	optional fixed64 steam_id = 1;
 }
 
