@@ -1164,20 +1164,20 @@ message CMsgPICSAccessTokenRequest {
 	repeated uint32 appids = 2;
 }
 
-message k_EMsgPICSAccessTokenResponse {
+message CMsgPICSAccessTokenResponse {
 	message PackageToken {
 		optional uint32 packageid = 1;
-		optional bytes access_token = 2;
+		optional uint64 access_token = 2;
 	}
 
 	message AppToken {
 		optional uint32 appid = 1;
-		optional bytes access_token = 2;
+		optional uint64 access_token = 2;
 	}
 
-	repeated .k_EMsgPICSAccessTokenResponse.PackageToken package_access_tokens = 1;
+	repeated .CMsgPICSAccessTokenResponse.PackageToken package_access_tokens = 1;
 	repeated uint32 package_denied_tokens = 2;
-	repeated .k_EMsgPICSAccessTokenResponse.AppToken app_access_tokens = 3;
+	repeated .CMsgPICSAccessTokenResponse.AppToken app_access_tokens = 3;
 	repeated uint32 app_denied_tokens = 4;
 }
 
@@ -1769,6 +1769,7 @@ message CMsgTrading_InitiateTradeResponse {
 	optional uint32 response = 1;
 	optional uint32 trade_request_id = 2;
 	optional uint64 other_steamid = 3;
+	optional uint32 steamguard_required_days = 4;
 }
 
 message CMsgTrading_CancelTradeRequest {
@@ -1903,6 +1904,7 @@ message CMsgClientEmailChange {
 	optional string email = 2;
 	optional string code = 3;
 	optional bool final = 4;
+	optional bool newmethod = 5;
 }
 
 message CMsgClientEmailChangeResponse {
