@@ -3228,6 +3228,42 @@ namespace SteamKit2.GC.TF2.Internal
       set { _total_near_you_active_players = value; }
     }
 
+    private uint _matching_worldwide_empty_gameservers = default(uint);
+    [global::ProtoBuf.ProtoMember(19, IsRequired = false, Name=@"matching_worldwide_empty_gameservers", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint matching_worldwide_empty_gameservers
+    {
+      get { return _matching_worldwide_empty_gameservers; }
+      set { _matching_worldwide_empty_gameservers = value; }
+    }
+
+    private uint _matching_near_you_empty_gameservers = default(uint);
+    [global::ProtoBuf.ProtoMember(20, IsRequired = false, Name=@"matching_near_you_empty_gameservers", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint matching_near_you_empty_gameservers
+    {
+      get { return _matching_near_you_empty_gameservers; }
+      set { _matching_near_you_empty_gameservers = value; }
+    }
+
+    private uint _total_worldwide_empty_gameservers = default(uint);
+    [global::ProtoBuf.ProtoMember(21, IsRequired = false, Name=@"total_worldwide_empty_gameservers", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint total_worldwide_empty_gameservers
+    {
+      get { return _total_worldwide_empty_gameservers; }
+      set { _total_worldwide_empty_gameservers = value; }
+    }
+
+    private uint _total_near_you_empty_gameservers = default(uint);
+    [global::ProtoBuf.ProtoMember(22, IsRequired = false, Name=@"total_near_you_empty_gameservers", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint total_near_you_empty_gameservers
+    {
+      get { return _total_near_you_empty_gameservers; }
+      set { _total_near_you_empty_gameservers = value; }
+    }
+
     private uint _urgency_pct = default(uint);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"urgency_pct", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(default(uint))]
