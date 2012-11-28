@@ -907,6 +907,15 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _prize_def_index; }
       set { _prize_def_index = value; }
     }
+
+    private uint _meta_xp_bonus_rate = default(uint);
+    [global::ProtoBuf.ProtoMember(19, IsRequired = false, Name=@"meta_xp_bonus_rate", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint meta_xp_bonus_rate
+    {
+      get { return _meta_xp_bonus_rate; }
+      set { _meta_xp_bonus_rate = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -2096,6 +2105,15 @@ namespace SteamKit2.GC.Dota.Internal
     {
       get { return _diretide; }
       set { _diretide = value; }
+    }
+
+    private bool _xmas = default(bool);
+    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"xmas", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool xmas
+    {
+      get { return _xmas; }
+      set { _xmas = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -10257,6 +10275,25 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTANotifyResetKeybindings")]
+  public partial class CMsgDOTANotifyResetKeybindings : global::ProtoBuf.IExtensible
+  {
+    public CMsgDOTANotifyResetKeybindings() {}
+    
+
+    private uint _keybind_template = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"keybind_template", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint keybind_template
+    {
+      get { return _keybind_template; }
+      set { _keybind_template = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     [global::ProtoBuf.ProtoContract(Name=@"EDOTAGCMsg")]
     public enum EDOTAGCMsg
     {
@@ -10618,12 +10655,6 @@ namespace SteamKit2.GC.Dota.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCPlayerHeroesRecentResponse", Value=7136)]
       k_EMsgGCPlayerHeroesRecentResponse = 7136,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCSetChatChannelVerbosity", Value=7137)]
-      k_EMsgGCSetChatChannelVerbosity = 7137,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgDOTAChatChannelFullUpdate", Value=7138)]
-      k_EMsgDOTAChatChannelFullUpdate = 7138,
-            
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCEditTeamLogo", Value=7139)]
       k_EMsgGCEditTeamLogo = 7139,
             
@@ -10750,6 +10781,9 @@ namespace SteamKit2.GC.Dota.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCGenerateDiretidePrizeListResponse", Value=7180)]
       k_EMsgGCGenerateDiretidePrizeListResponse = 7180,
             
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCNotifyResetKeybindings", Value=7181)]
+      k_EMsgGCNotifyResetKeybindings = 7181,
+            
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCDev_GrantWarKill", Value=8001)]
       k_EMsgGCDev_GrantWarKill = 8001
     }
@@ -10783,7 +10817,10 @@ namespace SteamKit2.GC.Dota.Internal
       DOTA_GAMEMODE_HW = 7,
             
       [global::ProtoBuf.ProtoEnum(Name=@"DOTA_GAMEMODE_REVERSE_CM", Value=8)]
-      DOTA_GAMEMODE_REVERSE_CM = 8
+      DOTA_GAMEMODE_REVERSE_CM = 8,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_GAMEMODE_XMAS", Value=9)]
+      DOTA_GAMEMODE_XMAS = 9
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"DOTA_GameState")]
