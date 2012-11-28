@@ -7432,14 +7432,14 @@ namespace SteamKit2.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"k_EMsgPICSAccessTokenResponse")]
-  public partial class k_EMsgPICSAccessTokenResponse : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgPICSAccessTokenResponse")]
+  public partial class CMsgPICSAccessTokenResponse : global::ProtoBuf.IExtensible
   {
-    public k_EMsgPICSAccessTokenResponse() {}
+    public CMsgPICSAccessTokenResponse() {}
     
-    private readonly global::System.Collections.Generic.List<k_EMsgPICSAccessTokenResponse.PackageToken> _package_access_tokens = new global::System.Collections.Generic.List<k_EMsgPICSAccessTokenResponse.PackageToken>();
+    private readonly global::System.Collections.Generic.List<CMsgPICSAccessTokenResponse.PackageToken> _package_access_tokens = new global::System.Collections.Generic.List<CMsgPICSAccessTokenResponse.PackageToken>();
     [global::ProtoBuf.ProtoMember(1, Name=@"package_access_tokens", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public global::System.Collections.Generic.List<k_EMsgPICSAccessTokenResponse.PackageToken> package_access_tokens
+    public global::System.Collections.Generic.List<CMsgPICSAccessTokenResponse.PackageToken> package_access_tokens
     {
       get { return _package_access_tokens; }
     }
@@ -7451,9 +7451,9 @@ namespace SteamKit2.Internal
       get { return _package_denied_tokens; }
     }
   
-    private readonly global::System.Collections.Generic.List<k_EMsgPICSAccessTokenResponse.AppToken> _app_access_tokens = new global::System.Collections.Generic.List<k_EMsgPICSAccessTokenResponse.AppToken>();
+    private readonly global::System.Collections.Generic.List<CMsgPICSAccessTokenResponse.AppToken> _app_access_tokens = new global::System.Collections.Generic.List<CMsgPICSAccessTokenResponse.AppToken>();
     [global::ProtoBuf.ProtoMember(3, Name=@"app_access_tokens", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public global::System.Collections.Generic.List<k_EMsgPICSAccessTokenResponse.AppToken> app_access_tokens
+    public global::System.Collections.Generic.List<CMsgPICSAccessTokenResponse.AppToken> app_access_tokens
     {
       get { return _app_access_tokens; }
     }
@@ -7480,10 +7480,10 @@ namespace SteamKit2.Internal
       set { _packageid = value; }
     }
 
-    private byte[] _access_token = null;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"access_token", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
-    public byte[] access_token
+    private ulong _access_token = default(ulong);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"access_token", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong access_token
     {
       get { return _access_token; }
       set { _access_token = value; }
@@ -7508,10 +7508,10 @@ namespace SteamKit2.Internal
       set { _appid = value; }
     }
 
-    private byte[] _access_token = null;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"access_token", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
-    public byte[] access_token
+    private ulong _access_token = default(ulong);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"access_token", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong access_token
     {
       get { return _access_token; }
       set { _access_token = value; }
@@ -11176,6 +11176,15 @@ namespace SteamKit2.Internal
       get { return _other_steamid; }
       set { _other_steamid = value; }
     }
+
+    private uint _steamguard_required_days = default(uint);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"steamguard_required_days", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint steamguard_required_days
+    {
+      get { return _steamguard_required_days; }
+      set { _steamguard_required_days = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -12005,6 +12014,15 @@ namespace SteamKit2.Internal
     {
       get { return _final; }
       set { _final = value; }
+    }
+
+    private bool _newmethod = default(bool);
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"newmethod", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool newmethod
+    {
+      get { return _newmethod; }
+      set { _newmethod = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
