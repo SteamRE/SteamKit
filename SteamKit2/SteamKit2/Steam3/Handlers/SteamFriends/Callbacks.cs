@@ -267,8 +267,11 @@ namespace SteamKit2
 
                 this.FromLimitedAccount = msg.from_limited_account;
 
-                if ( msg.message != null && msg.message.Length > 0 )
-                    this.Message = Encoding.UTF8.GetString( msg.message, 0, msg.message.Length - 1 );
+                if ( msg.message != null )
+                {
+                    this.Message = Encoding.UTF8.GetString( msg.message );
+                    this.Message = this.Message.TrimEnd( new[] { '\0' } ); // trim any extra null chars from the end
+                }
             }
         }
 
@@ -406,13 +409,16 @@ namespace SteamKit2
             internal ChatMsgCallback( MsgClientChatMsg msg, byte[] payload )
 #endif
             {
-                ChatterID = msg.SteamIdChatter;
-                ChatRoomID = msg.SteamIdChatRoom;
+                this.ChatterID = msg.SteamIdChatter;
+                this.ChatRoomID = msg.SteamIdChatRoom;
 
-                ChatMsgType = msg.ChatMsgType;
+                this.ChatMsgType = msg.ChatMsgType;
 
-                if ( payload != null && payload.Length > 0 )
-                    Message = Encoding.UTF8.GetString( payload, 0, payload.Length - 1 );
+                if ( payload != null )
+                {
+                    this.Message = Encoding.UTF8.GetString( payload );
+                    this.Message = this.Message.TrimEnd( new[] { '\0' } ); // trim any extra null chars from the end
+                }
             }
         }
 
