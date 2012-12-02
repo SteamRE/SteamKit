@@ -1447,6 +1447,15 @@ namespace SteamKit2
 		LogonExtraSecurity = 524288,
 		LogonExtraSecurityDisabled = 1048576,
 	}
+	public enum EClanPermission
+	{
+		Nobody = 0,
+		Owner = 1,
+		Officer = 2,
+		OwnerAndOfficer = 3,
+		Member = 4,
+		Moderator = 8,
+	}
 	[Flags]
 	public enum EFriendFlags
 	{
@@ -1456,6 +1465,7 @@ namespace SteamKit2
 		Immediate = 4,
 		ClanMember = 8,
 		GameServer = 16,
+		OnGameServer = 16,
 		RequestingFriendship = 128,
 		RequestingInfo = 256,
 		Ignored = 512,
@@ -1878,6 +1888,126 @@ namespace SteamKit2
 		InitiatorAlreadyTrading = 11,
 		Error = 12,
 		Timeout = 13,
+	}
+	[Flags]
+	public enum EMarketingMessageFlags
+	{
+		None = 0,
+		HighPriority = 1,
+		PlatformWindows = 2,
+		PlatformMac = 4,
+		PlatformRestrictions = 6,
+	}
+	public enum ENewsUpdateType
+	{
+		AppNews = 0,
+		SteamAds = 1,
+		SteamNews = 2,
+		CDDBUpdate = 3,
+		ClientUpdate = 4,
+	}
+	public enum ESystemIMType
+	{
+		RawText = 0,
+		InvalidCard = 1,
+		RecurringPurchaseFailed = 2,
+		CardWillExpire = 3,
+		SubscriptionExpired = 4,
+		GuestPassReceived = 5,
+		GuestPassGranted = 6,
+		GiftRevoked = 7,
+		Max = 8,
+	}
+	[Flags]
+	public enum EChatFlags
+	{
+		Locked = 1,
+		InvisibleToFriends = 2,
+		Moderated = 4,
+		Unjoinable = 8,
+	}
+	public enum ERemoteStoragePlatform : uint
+	{
+		None = 0,
+		Windows = 1,
+		OSX = 2,
+		PS3 = 4,
+		Reserved1 = 8,
+		Reserved2 = 16,
+		All = 4294967295,
+	}
+	public enum EDRMBlobDownloadType
+	{
+		Error = 0,
+		File = 1,
+		Parts = 2,
+		Compressed = 4,
+		AllMask = 7,
+		IsJob = 8,
+		HighPriority = 16,
+		AddTimestamp = 32,
+		LowPriority = 64,
+	}
+	public enum EDRMBlobDownloadErrorDetail
+	{
+		None = 0,
+		DownloadFailed = 1,
+		TargetLocked = 2,
+		OpenZip = 3,
+		ReadZipDirectory = 4,
+		UnexpectedZipEntry = 5,
+		UnzipFullFile = 6,
+		UnknownBlobType = 7,
+		UnzipStrips = 8,
+		UnzipMergeGuid = 9,
+		UnzipSignature = 10,
+		ApplyStrips = 11,
+		ApplyMergeGuid = 12,
+		ApplySignature = 13,
+		AppIdMismatch = 14,
+		AppIdUnexpected = 15,
+		AppliedSignatureCorrupt = 16,
+		ApplyValveSignatureHeader = 17,
+		UnzipValveSignatureHeader = 18,
+		PathManipulationError = 19,
+		TargetLocked_Base = 65536,
+		TargetLocked_Max = 131071,
+		NextBase = 131072,
+	}
+	public enum EClientStat
+	{
+		P2PConnectionsUDP = 0,
+		P2PConnectionsRelay = 1,
+		P2PGameConnections = 2,
+		P2PVoiceConnections = 3,
+		BytesDownloaded = 4,
+		Max = 5,
+	}
+	public enum EClientStatAggregateMethod
+	{
+		LatestOnly = 0,
+		Sum = 1,
+		Event = 2,
+		Scalar = 3,
+	}
+	public enum ELeaderboardDataRequest
+	{
+		Global = 0,
+		GlobalAroundUser = 1,
+		Friends = 2,
+		Users = 3,
+	}
+	public enum ELeaderboardSortMethod
+	{
+		None = 0,
+		Ascending = 1,
+		Descending = 2,
+	}
+	public enum ELeaderboardUploadScoreMethod
+	{
+		None = 0,
+		KeepBest = 1,
+		ForceUpdate = 2,
 	}
 	public enum EUdpPacketType : byte
 	{
