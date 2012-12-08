@@ -1447,6 +1447,7 @@ namespace SteamKit2
 		LogonExtraSecurity = 524288,
 		LogonExtraSecurityDisabled = 1048576,
 	}
+	[Flags]
 	public enum EClanPermission
 	{
 		Nobody = 0,
@@ -1456,6 +1457,7 @@ namespace SteamKit2
 		Member = 4,
 		Moderator = 8,
 	}
+	[Flags]
 	public enum EChatPermission
 	{
 		Close = 1,
@@ -1827,6 +1829,7 @@ namespace SteamKit2
 		Test = 2147483647,
 		Invalid = 4294967295,
 	}
+	[Flags]
 	public enum EChatMemberStateChange
 	{
 		Entered = 0x01,
@@ -1944,6 +1947,7 @@ namespace SteamKit2
 		Moderated = 4,
 		Unjoinable = 8,
 	}
+	[Flags]
 	public enum ERemoteStoragePlatform : uint
 	{
 		None = 0,
@@ -1954,6 +1958,7 @@ namespace SteamKit2
 		Reserved2 = 16,
 		All = 4294967295,
 	}
+	[Flags]
 	public enum EDRMBlobDownloadType
 	{
 		Error = 0,
