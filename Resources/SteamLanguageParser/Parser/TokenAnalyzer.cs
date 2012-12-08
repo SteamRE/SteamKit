@@ -33,6 +33,7 @@ namespace SteamLanguageParser
 
     public class EnumNode : Node
     {
+        public string Flags { get; set; }
         public Symbol Type { get; set; }
     }
 
@@ -115,8 +116,15 @@ namespace SteamLanguageParser
                                         Token op2 = Expect(tokens, "operator", ">");
                                     }
 
+                                    Token flag = Optional( tokens, "identifier" );
+
                                     EnumNode enode = new EnumNode();
                                     enode.Name = name.Value;
+
+                                    if ( flag != null )
+                                    {
+                                        enode.Flags = flag.Value;
+                                    }
 
                                     if (datatype != null)
                                     {

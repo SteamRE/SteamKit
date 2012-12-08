@@ -120,7 +120,7 @@ namespace SteamLanguageParser
         {
             string padding = new String('\t', level);
 
-            if ( enode.Name.Contains( "Flag" ) )
+            if ( enode.Flags == "flags" )
                 sb.AppendLine( padding + "[Flags]" );
 
             if ( enode.Type != null )
