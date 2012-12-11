@@ -201,10 +201,7 @@ namespace ProtobufDumper
                             bw.Write(*dataPtr);
                         }
 
-                        // do we still need this?
-                        // the extra null byte on the descriptor proto is causing the deserializer to freak out
-                        // bw.Write((byte)0);
-
+                        bw.Write((byte)0);
                         data = ms.ToArray();
                     }
 
@@ -343,9 +340,6 @@ namespace ProtobufDumper
  
         private bool HandleProto(string name, byte[] data)
         {
-            //if (name == "google/protobuf/descriptor.proto")
-            //    return true;
-
             Console.WriteLine("Found protobuf candidate '{0}'!", name);
 
             FileDescriptorProto set = null;
@@ -373,14 +367,39 @@ namespace ProtobufDumper
                 using (MemoryStream ms = new MemoryStream(data))
                     set = Serializer.Deserialize<FileDescriptorProto>(ms);
             }
+            catch (EndOfStreamException ex)
+            {
+                Console.WriteLine("'{0}' needs rescan: {1}\n", name, ex.Message);
+                return false;
+            }
+            catch (ProtoException ex)
+            {
+                Console.WriteLine("'{0}' needs rescan: {1}\n", name, ex.Message);
+                // try scanning backwards for null terminators
+                for (int i = data.Length - 1; i > data.Length - 8; i--)
+                {
+                    if (data[i] == 0)
+                    {
+                        try
+                        {
+                            using (MemoryStream ms = new MemoryStream(data, 0, i))
+                                set = Serializer.Deserialize<FileDescriptorProto>(ms);
+                            break;
+                        }
+                        catch (Exception)
+                        {
+                        }
+                    }
+                }
+                
+                if(set == null)
+                {
+                    Console.WriteLine("'{0}' was invalid\n", name);
+                    return true;
+                }
+            }
             catch (Exception ex)
             {
-                if (ex.GetType() == typeof(EndOfStreamException))
-                {
-                    Console.WriteLine("'{0}' needs rescan: {1}\n", name, ex.Message);
-                    return false;
-                }
-
                 Console.WriteLine("'{0}' was invalid: {1}\n", name, ex.Message);
                 return true;
             }
