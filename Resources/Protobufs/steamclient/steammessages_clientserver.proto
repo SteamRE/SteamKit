@@ -99,6 +99,7 @@ message CMsgClientLogonResponse {
 	optional int32 eresult_extended = 10;
 	optional string webapi_authenticate_user_nonce = 11;
 	optional uint32 cell_id_ping_threshold = 12;
+	optional bool use_pics = 13;
 	optional fixed64 client_supplied_steamid = 20;
 	optional string ip_country_code = 21;
 }
