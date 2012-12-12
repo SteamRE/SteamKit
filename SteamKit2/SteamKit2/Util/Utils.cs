@@ -7,10 +7,10 @@
 
 using System;
 using System.Linq;
-using System.Management;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using Microsoft.Win32;
 
 namespace SteamKit2
 {
@@ -116,49 +116,18 @@ namespace SteamKit2
 
             if ( platform == PlatformID.Win32NT )
             {
-                StringBuilder hwString = new StringBuilder();
+                string hwString = "foobar";
 
                 try
                 {
-                    using ( ManagementClass procClass = new ManagementClass( "Win32_Processor" ) )
+                    RegistryKey localKey = RegistryKey.OpenBaseKey(Microsoft.Win32.RegistryHive.LocalMachine, RegistryView.Registry64);
+                    localKey = localKey.OpenSubKey(@"SOFTWARE\Microsoft\Cryptography");
+                    if (localKey != null)
                     {
-                        foreach ( var procObj in procClass.GetInstances() )
-                        {
-                            hwString.AppendLine( procObj[ "ProcessorID" ].ToString() );
-                        }
+                        hwString = localKey.GetValue("MachineGuid").ToString();
                     }
                 }
                 catch { }
-
-                try
-                {
-                    using ( ManagementClass hdClass = new ManagementClass( "Win32_LogicalDisk" ) )
-                    {
-                        foreach ( var hdObj in hdClass.GetInstances() )
-                        {
-                            string hdType = hdObj[ "DriveType" ].ToString();
-
-                            if ( hdType != "3" )
-                                continue; // only want local disks
-
-                            hwString.AppendLine( hdObj[ "VolumeSerialNumber" ].ToString() );
-                        }
-                    }
-                }
-                catch { }
-
-                try
-                {
-                    using ( ManagementClass moboClass = new ManagementClass( "Win32_BaseBoard" ) )
-                    {
-                        foreach ( var moboObj in moboClass.GetInstances() )
-                        {
-                            hwString.AppendLine( moboObj[ "SerialNumber" ].ToString() );
-                        }
-                    }
-                }
-                catch { }
-
 
                 try
                 {
