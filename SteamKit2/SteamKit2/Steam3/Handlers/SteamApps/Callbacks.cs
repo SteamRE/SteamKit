@@ -509,5 +509,252 @@ namespace SteamKit2
             }
         }
 
+        /// <summary>
+        /// This callback is fired when the PICS returns access tokens for a list of appids and packageids
+        /// </summary>
+        public sealed class PICSTokensCallback : CallbackMsg
+        {
+            /// <summary>
+            /// Gets a list of denied package tokens
+            /// </summary>
+            public ReadOnlyCollection<uint> PackageTokensDenied { get; private set; }
+            /// <summary>
+            /// Gets a list of denied app tokens
+            /// </summary>
+            public ReadOnlyCollection<uint> AppTokensDenied { get; private set; }
+            /// <summary>
+            /// Dictionary containing requested package tokens
+            /// </summary>
+            public Dictionary<uint, ulong> PackageTokens { get; private set; }
+            /// <summary>
+            /// Dictionary containing requested package tokens
+            /// </summary>
+            public Dictionary<uint, ulong> AppTokens { get; private set; }
+
+#if STATIC_CALLBACKS
+            internal PICSTokensCallback( SteamClient client, CMsgPICSAccessTokenResponse msg )
+                : base( client )
+#else
+            internal PICSTokensCallback( CMsgPICSAccessTokenResponse msg )
+#endif
+            {
+                PackageTokensDenied = new ReadOnlyCollection<uint>( msg.package_denied_tokens );
+                AppTokensDenied = new ReadOnlyCollection<uint>( msg.app_denied_tokens );
+                PackageTokens = new Dictionary<uint, ulong>();
+                AppTokens = new Dictionary<uint, ulong>();
+
+                foreach ( var package_token in msg.package_access_tokens )
+                {
+                    PackageTokens.Add( package_token.packageid, package_token.access_token );
+                }
+
+                foreach ( var app_token in msg.app_access_tokens )
+                {
+                    AppTokens.Add( app_token.appid, app_token.access_token );
+                }
+            }
+        }
+
+        /// <summary>
+        /// This callback is fired when the PICS returns the changes since the last change number
+        /// </summary>
+        public sealed class PICSChangesCallback : CallbackMsg
+        {
+            /// <summary>
+            /// Holds the change data for a single app or package
+            /// </summary>
+            public sealed class PICSChangeData
+            {
+                /// <summary>
+                /// App or package ID this change data represents
+                /// </summary>
+                public uint ID { get; private set; }
+                /// <summary>
+                /// Current change number of this app
+                /// </summary>
+                public uint ChangeNumber { get; private set; }
+                /// <summary>
+                /// Signals if an access token is needed for this request
+                /// </summary>
+                public bool NeedsToken { get; private set; }
+
+                internal PICSChangeData( CMsgPICSChangesSinceResponse.AppChange change )
+                {
+                    this.ID = change.appid;
+                    this.ChangeNumber = change.change_number;
+                    this.NeedsToken = change.needs_token;
+                }
+
+                internal PICSChangeData( CMsgPICSChangesSinceResponse.PackageChange change )
+                {
+                    this.ID = change.packageid;
+                    this.ChangeNumber = change.change_number;
+                    this.NeedsToken = change.needs_token;
+                }
+            }
+
+            /// <summary>
+            /// Supplied change number for the request
+            /// </summary>
+            public uint LastChangeNumber { get; private set; }
+            /// <summary>
+            /// Gets the current change number
+            /// </summary>
+            public uint CurrentChangeNumber { get; private set; }
+            /// <summary>
+            /// If this update requires a full update of the information
+            /// </summary>
+            public bool RequiresFullUpdate { get; private set; }
+            /// <summary>
+            /// Dictionary containing requested package tokens
+            /// </summary>
+            public Dictionary<uint, PICSChangeData> PackageChanges { get; private set; }
+            /// <summary>
+            /// Dictionary containing requested package tokens
+            /// </summary>
+            public Dictionary<uint, PICSChangeData> AppChanges { get; private set; }
+
+#if STATIC_CALLBACKS
+            internal PICSChangesCallback( SteamClient client, CMsgPICSChangesSinceResponse msg )
+                : base( client )
+#else
+            internal PICSChangesCallback( CMsgPICSChangesSinceResponse msg )
+#endif
+            {
+                LastChangeNumber = msg.since_change_number;
+                CurrentChangeNumber = msg.current_change_number;
+                RequiresFullUpdate = msg.force_full_update;
+                PackageChanges = new Dictionary<uint, PICSChangeData>();
+                AppChanges = new Dictionary<uint, PICSChangeData>();
+
+                foreach ( var package_change in msg.package_changes )
+                {
+                    PackageChanges.Add( package_change.packageid, new PICSChangeData( package_change ) );
+                }
+
+                foreach ( var app_change in msg.app_changes )
+                {
+                    AppChanges.Add( app_change.appid, new PICSChangeData( app_change ) );
+                }
+            }
+        }
+
+        /// <summary>
+        /// This callback is fired when the PICS returns the product information requested
+        /// </summary>
+        public sealed class PICSProductInfoCallback : CallbackMsg
+        {
+            /// <summary>
+            /// Represents the information for a single app or package
+            /// </summary>
+            public sealed class PICSProductInfo
+            {
+                /// <summary>
+                /// Gets the ID of the app or package
+                /// </summary>
+                public uint ID { get; private set; }
+                /// <summary>
+                /// Gets the current change number for the app or package
+                /// </summary>
+                public uint ChangeNumber { get; private set; }
+                /// <summary>
+                /// Gets if an access token was required for the request
+                /// </summary>
+                public bool MissingToken { get; private set; }
+                /// <summary>
+                /// Gets the hash of the content
+                /// </summary>
+                public byte[] SHAHash { get; private set; }
+                /// <summary>
+                /// Gets the KeyValue info
+                /// </summary>
+                public KeyValue KeyValues { get; private set; }
+                /// <summary>
+                /// For an app request, returns if only the public information was requested
+                /// </summary>
+                public bool OnlyPublic { get; private set; }
+
+                internal PICSProductInfo( CMsgPICSProductInfoResponse.AppInfo app_info )
+                {
+                    this.ID = app_info.appid;
+                    this.ChangeNumber = app_info.change_number;
+                    this.MissingToken = app_info.missing_token;
+                    this.SHAHash = app_info.sha;
+
+                    this.KeyValues = new KeyValue();
+                    using (MemoryStream ms = new MemoryStream(app_info.buffer))
+                        this.KeyValues.ReadAsText(ms);
+
+                    this.OnlyPublic = app_info.only_public;
+                }
+
+                internal PICSProductInfo( CMsgPICSProductInfoResponse.PackageInfo package_info )
+                {
+                    this.ID = package_info.packageid;
+                    this.ChangeNumber = package_info.change_number;
+                    this.MissingToken = package_info.missing_token;
+                    this.SHAHash = package_info.sha;
+
+                    this.KeyValues = new KeyValue();
+                    using ( MemoryStream ms = new MemoryStream( package_info.buffer ) )
+                    using ( var br = new BinaryReader( ms ) )
+                    {
+                        br.ReadUInt32();
+                        this.KeyValues.ReadAsBinary( ms );
+                    }
+                }
+            }
+
+            /// <summary>
+            /// Gets if this response contains only product metadata
+            /// </summary>
+            public bool MetaDataOnly { get; private set; }
+            /// <summary>
+            /// Gets if the are more product information responses pending
+            /// </summary>
+            public bool ResponsePending { get; private set; }
+            /// <summary>
+            /// Gets a list of unknown package ids
+            /// </summary>
+            public ReadOnlyCollection<uint> UnknownPackages { get; private set; }
+            /// <summary>
+            /// Gets a list of unknown app ids
+            /// </summary>
+            public ReadOnlyCollection<uint> UnknownApps { get; private set; }
+            /// <summary>
+            /// Dictionary containing requested app info
+            /// </summary>
+            public Dictionary<uint, PICSProductInfo> Apps { get; private set; }
+            /// <summary>
+            /// Dictionary containing requested package info
+            /// </summary>
+            public Dictionary<uint, PICSProductInfo> Packages { get; private set; }
+
+#if STATIC_CALLBACKS
+            internal PICSProductInfoCallback( SteamClient client, CMsgPICSProductInfoResponse msg )
+                : base( client )
+#else
+            internal PICSProductInfoCallback( CMsgPICSProductInfoResponse msg )
+#endif
+            {
+                MetaDataOnly = msg.meta_data_only;
+                ResponsePending = msg.response_pending;
+                UnknownPackages = new ReadOnlyCollection<uint>( msg.unknown_packageids );
+                UnknownApps = new ReadOnlyCollection<uint>( msg.unknown_appids );
+                Packages = new Dictionary<uint, PICSProductInfo>();
+                Apps = new Dictionary<uint, PICSProductInfo>();
+
+                foreach ( var package_info in msg.packages )
+                {
+                    Packages.Add( package_info.packageid, new PICSProductInfo( package_info ) );
+                }
+
+                foreach ( var app_info in msg.apps )
+                {
+                    Apps.Add( app_info.appid, new PICSProductInfo( app_info ) );
+                }
+            }
+        }
+
     }
 }

@@ -55,6 +55,55 @@ namespace SteamKit2
             }
         }
 
+        /// <summary>
+        /// Represents a PICS request used for <see cref="SteamApps.PICSGetProductInfo"/>
+        /// </summary>
+        public sealed class PICSRequest
+        {
+            /// <summary>
+            /// Gets or sets the ID of the app or package being requested
+            /// </summary>
+            /// <value>The ID</value>
+            public uint ID { get; set; }
+            /// <summary>
+            /// Gets or sets the access token associated with the request
+            /// </summary>
+            /// <value>The access token</value>
+            public ulong AccessToken { get; set; }
+            /// <summary>
+            /// Requests only public app info
+            /// </summary>
+            /// <value>The flag specifying if only public data is requested</value>
+            public bool Public { get; set; }
+
+            /// <summary>
+            /// Instantiate an empty PICS product info request
+            /// </summary>
+            public PICSRequest() : this( 0, 0, true )
+            {
+            }
+
+            /// <summary>
+            ///  Instantiate a PICS product info request for a given app or package id
+            /// </summary>
+            /// <param name="id">App or package ID</param>
+            public PICSRequest( uint id ) : this( id, 0, true )
+            {
+            }
+
+            /// <summary>
+            /// Instantiate a PICS product info request for a given app or package id and an access token
+            /// </summary>
+            /// <param name="id">App or package ID</param>
+            /// <param name="access_token">PICS access token</param>
+            /// <param name="only_public">Get only public info</param>
+            public PICSRequest( uint id, ulong access_token, bool only_public )
+            {
+                ID = id;
+                AccessToken = access_token;
+                Public = only_public;
+            }
+        }
 #pragma warning restore 0419
 
 
@@ -214,6 +263,120 @@ namespace SteamKit2
             return request.SourceJobID;
         }
 
+        /// <summary>
+        /// Request PICS access tokens for a list of app ids and package ids
+        /// Results are returned in a <see cref="PICSTokensCallback"/> callback.
+        /// </summary>
+        /// <param name="appIds">List of app ids to request access tokens for.</param>
+        /// <param name="packageIds">List of package ids to request access tokens for.</param>
+        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="SteamClient.JobCallback&lt;T&gt;"/>.</returns>
+        public JobID PICSGetAccessTokens( IEnumerable<uint> appIds, IEnumerable<uint> packageIds )
+        {
+            var request = new ClientMsgProtobuf<CMsgPICSAccessTokenRequest>( EMsg.PICSAccessTokenRequest );
+            request.SourceJobID = Client.GetNextJobID();
+
+            request.Body.packageids.AddRange( packageIds );
+            request.Body.appids.AddRange( appIds );
+
+            this.Client.Send( request );
+
+            return request.SourceJobID;
+        }
+
+        /// <summary>
+        /// Request changes for apps and packages since a given change number
+        /// Results are returned in a <see cref="PICSChangesCallback"/> callback.
+        /// </summary>
+        /// <param name="lastChangeNumber">Last change number seen.</param>
+        /// <param name="sendAppChangelist">Whether to send app changes.</param>
+        /// <param name="sendPackageChangelist">Whether to send package changes.</param>
+        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="SteamClient.JobCallback&lt;T&gt;"/>.</returns>
+        public JobID PICSGetChangesSince( uint lastChangeNumber = 0, bool sendAppChangelist = true, bool sendPackageChangelist = false )
+        {
+            var request = new ClientMsgProtobuf<CMsgPICSChangesSinceRequest>( EMsg.PICSChangesSinceRequest );
+            request.SourceJobID = Client.GetNextJobID();
+
+            request.Body.since_change_number = lastChangeNumber;
+            request.Body.send_app_info_changes = sendAppChangelist;
+            request.Body.send_package_info_changes = sendPackageChangelist;
+
+            this.Client.Send( request );
+
+            return request.SourceJobID;
+        }
+
+        /// <summary>
+        /// Request product information for an app or package
+        /// Results are returned in a <see cref="PICSProductInfoCallback"/> callback.
+        /// </summary>
+        /// <param name="app">App id requested.</param>
+        /// <param name="package">Package id requested.</param>
+        /// <param name="onlyPublic">Whether to send only public information.</param>
+        /// <param name="metaDataOnly">Whether to send only meta data.</param>
+        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="SteamClient.JobCallback&lt;T&gt;"/>.</returns>
+        public JobID PICSGetProductInfo(uint? app, uint? package, bool onlyPublic = true, bool metaDataOnly = false)
+        {
+            List<uint> apps = new List<uint>();
+            List<uint> packages = new List<uint>();
+
+            if ( app.HasValue ) apps.Add( app.Value );
+            if ( package.HasValue ) packages.Add( package.Value );
+
+            return PICSGetProductInfo( apps, packages, onlyPublic, metaDataOnly );
+        }
+
+        /// <summary>
+        /// Request product information for a list of apps or packages
+        /// Results are returned in a <see cref="PICSProductInfoCallback"/> callback.
+        /// </summary>
+        /// <param name="apps">List of app ids requested.</param>
+        /// <param name="packages">List of package ids requested.</param>
+        /// <param name="onlyPublic">Whether to send only public information.</param>
+        /// <param name="metaDataOnly">Whether to send only meta data.</param>
+        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="SteamClient.JobCallback&lt;T&gt;"/>.</returns>
+        public JobID PICSGetProductInfo( IEnumerable<uint> apps, IEnumerable<uint> packages, bool onlyPublic = true, bool metaDataOnly = false )
+        {
+            return PICSGetProductInfo( apps.Select( app => new PICSRequest( app, 0, onlyPublic ) ), packages.Select( package => new PICSRequest( package ) ), metaDataOnly );
+        }
+
+        /// <summary>
+        /// Request product information for a list of apps or packages
+        /// Results are returned in a <see cref="PICSProductInfoCallback"/> callback.
+        /// </summary>
+        /// <param name="apps">List of <see cref="PICSRequest"/> requests for apps.</param>
+        /// <param name="packages">List of <see cref="PICSRequest"/> requests for packages.</param>
+        /// <param name="metaDataOnly">Whether to send only meta data.</param>
+        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="SteamClient.JobCallback&lt;T&gt;"/>.</returns>
+        public JobID PICSGetProductInfo( IEnumerable<PICSRequest> apps, IEnumerable<PICSRequest> packages, bool metaDataOnly = false )
+        {
+            var request = new ClientMsgProtobuf<CMsgPICSProductInfoRequest>( EMsg.PICSProductInfoRequest );
+            request.SourceJobID = Client.GetNextJobID();
+
+            foreach ( var app_request in apps )
+            {
+                var appinfo = new CMsgPICSProductInfoRequest.AppInfo();
+                appinfo.access_token = app_request.AccessToken;
+                appinfo.appid = app_request.ID;
+                appinfo.only_public = app_request.Public;
+
+                request.Body.apps.Add( appinfo );
+            }
+
+            foreach ( var package_request in packages )
+            {
+                var packageinfo = new CMsgPICSProductInfoRequest.PackageInfo();
+                packageinfo.access_token = package_request.AccessToken;
+                packageinfo.packageid = package_request.ID;
+
+                request.Body.packages.Add( packageinfo );
+            }
+
+            request.Body.meta_data_only = metaDataOnly;
+
+            this.Client.Send( request );
+
+            return request.SourceJobID;
+        }
 
         /// <summary>
         /// Handles a client message. This should not be called directly.
@@ -253,6 +416,18 @@ namespace SteamKit2
 
                 case EMsg.ClientGetDepotDecryptionKeyResponse:
                     HandleDepotKeyResponse( packetMsg );
+                    break;
+
+                case EMsg.PICSAccessTokenResponse:
+                    HandlePICSAccessTokenResponse( packetMsg );
+                    break;
+
+                case EMsg.PICSChangesSinceResponse:
+                    HandlePICSChangesSinceResponse( packetMsg );
+                    break;
+
+                case EMsg.PICSProductInfoResponse:
+                    HandlePICSProductInfoResponse( packetMsg );
                     break;
             }
         }
@@ -362,6 +537,54 @@ namespace SteamKit2
             SteamClient.PostCallback( callback );
 #else
             var callback = new VACStatusCallback( vacStatus.Body, vacStatus.Payload.ToArray() );
+            this.Client.PostCallback( callback );
+#endif
+        }
+        void HandlePICSAccessTokenResponse( IPacketMsg packetMsg )
+        {
+            Debug.Assert( packetMsg.IsProto );
+
+            var tokensResponse = new ClientMsgProtobuf<CMsgPICSAccessTokenResponse>( packetMsg );
+
+#if STATIC_CALLBACKS
+            var innerCallback = new PICSTokensCallback( Client, tokensResponse.Body );
+            var callback = new SteamClient.JobCallback<PICSTokensCallback>( Client, tokensResponse.TargetJobID, innerCallback );
+            SteamClient.PostCallback( callback );
+#else
+            var innerCallback = new PICSTokensCallback( tokensResponse.Body );
+            var callback = new SteamClient.JobCallback<PICSTokensCallback>( tokensResponse.TargetJobID, innerCallback );
+            this.Client.PostCallback( callback );
+#endif
+        }
+        void HandlePICSChangesSinceResponse( IPacketMsg packetMsg )
+        {
+            Debug.Assert( packetMsg.IsProto );
+
+            var changesResponse = new ClientMsgProtobuf<CMsgPICSChangesSinceResponse>( packetMsg );
+
+#if STATIC_CALLBACKS
+            var innerCallback = new PICSChangesCallback( Client, changesResponse.Body );
+            var callback = new SteamClient.JobCallback<PICSChangesCallback>( Client, changesResponse.TargetJobID, innerCallback );
+            SteamClient.PostCallback( callback );
+#else
+            var innerCallback = new PICSChangesCallback( changesResponse.Body );
+            var callback = new SteamClient.JobCallback<PICSChangesCallback>( changesResponse.TargetJobID, innerCallback );
+            this.Client.PostCallback( callback );
+#endif
+        }
+        void HandlePICSProductInfoResponse( IPacketMsg packetMsg )
+        {
+            Debug.Assert( packetMsg.IsProto );
+
+            var productResponse = new ClientMsgProtobuf<CMsgPICSProductInfoResponse>( packetMsg );
+
+#if STATIC_CALLBACKS
+            var innerCallback = new PICSProductInfoCallback( Client, productResponse.Body );
+            var callback = new SteamClient.JobCallback<PICSProductInfoCallback>( Client, productResponse.TargetJobID, innerCallback );
+            SteamClient.PostCallback( callback );
+#else
+            var innerCallback = new PICSProductInfoCallback( productResponse.Body );
+            var callback = new SteamClient.JobCallback<PICSProductInfoCallback>( productResponse.TargetJobID, innerCallback );
             this.Client.PostCallback( callback );
 #endif
         }
