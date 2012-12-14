@@ -39,7 +39,7 @@ namespace SteamLanguageParser
 
     class TokenAnalyzer
     {
-        public static Node Analyze( Queue<Token> tokens )
+        public static Node Analyze(Queue<Token> tokens)
         {
             Node root = new Node();
 
@@ -56,9 +56,9 @@ namespace SteamLanguageParser
 
                         if (cur.Value == "import")
                         {
-                            Queue<Token> parentTokens = LanguageParser.TokenizeString( File.ReadAllText( text.Value ) );
+                            Queue<Token> parentTokens = LanguageParser.TokenizeString(File.ReadAllText(text.Value));
 
-                            Node newRoot = Analyze( parentTokens );
+                            Node newRoot = Analyze(parentTokens);
 
                             foreach (Node child in newRoot.childNodes)
                             {
@@ -116,12 +116,12 @@ namespace SteamLanguageParser
                                         Token op2 = Expect(tokens, "operator", ">");
                                     }
 
-                                    Token flag = Optional( tokens, "identifier" );
+                                    Token flag = Optional(tokens, "identifier");
 
                                     EnumNode enode = new EnumNode();
                                     enode.Name = name.Value;
 
-                                    if ( flag != null )
+                                    if (flag != null)
                                     {
                                         enode.Flags = flag.Value;
                                     }
@@ -210,7 +210,7 @@ namespace SteamLanguageParser
                 return new Token("EOF", "");
             }
 
-            if(peek.Name != name)
+            if (peek.Name != name)
             {
                 throw new Exception("Expecting " + name);
             }
