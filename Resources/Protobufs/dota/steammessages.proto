@@ -9,6 +9,14 @@ extend .google.protobuf.MessageOptions {
 	optional int32 msgpool_hard_limit = 50001 [default = 384];
 }
 
+enum GCProtoBufMsgSrc {
+	GCProtoBufMsgSrc_Unspecified = 0;
+	GCProtoBufMsgSrc_FromSystem = 1;
+	GCProtoBufMsgSrc_FromSteamID = 2;
+	GCProtoBufMsgSrc_FromGC = 3;
+	GCProtoBufMsgSrc_ReplySystem = 4;
+}
+
 message CMsgProtoBufHeader {
 	option (msgpool_soft_limit) = 1024;
 	option (msgpool_hard_limit) = 256;
@@ -18,6 +26,8 @@ message CMsgProtoBufHeader {
 	optional fixed64 job_id_source = 10 [default = 18446744073709551615];
 	optional fixed64 job_id_target = 11 [default = 18446744073709551615];
 	optional string target_job_name = 12;
+	optional .GCProtoBufMsgSrc gc_msg_src = 200 [default = GCProtoBufMsgSrc_Unspecified];
+	optional uint32 gc_dir_index_source = 201;
 }
 
 message CMsgWebAPIKey {
@@ -300,5 +310,20 @@ message CMsgGCGetPersonaNames_Response {
 
 	repeated .CMsgGCGetPersonaNames_Response.PersonaName succeeded_lookups = 1;
 	repeated fixed64 failed_lookup_steamids = 2;
+}
+
+message CMsgGCMsgMasterSetDirectory {
+	message SubGC {
+		optional uint32 dir_index = 1;
+		optional string name = 2;
+		optional string box = 3;
+	}
+
+	optional uint32 master_dir_index = 1;
+	repeated .CMsgGCMsgMasterSetDirectory.SubGC dir = 2;
+}
+
+message CMsgGCMsgMasterSetDirectory_Response {
+	optional int32 eresult = 1 [default = 2];
 }
 
