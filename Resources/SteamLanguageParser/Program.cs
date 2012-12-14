@@ -11,18 +11,21 @@ namespace SteamLanguageParser
     {
         static void Main( string[] args )
         {
-            string projectPath = Environment.GetEnvironmentVariable( "SteamRE" );
+            string projectPath = Environment.GetEnvironmentVariable( "SteamRE" ) ?? args.SingleOrDefault();
 
             if ( !Directory.Exists( projectPath ) )
             {
                 throw new Exception( "Unable to find SteamRE project path, please specify the `SteamRE` environment variable" );
             }
 
-            ParseFile( projectPath, @"Resources\SteamLanguage", "steammsg.steamd", "SteamKit2", @"SteamKit2\SteamKit2\Base\Generated\", "SteamLanguage", true );
+			ParseFile(projectPath, @"Resources\SteamLanguage", "steammsg.steamd", "SteamKit2", @"SteamKit2\SteamKit2\Base\Generated\", "SteamLanguage", true, new CSharpGen(), "cs");
+
+			//ParseFile(projectPath, @"Resources\SteamLanguage", "steammsg.steamd", "SteamKit2", @"SteamKit2\ObjC\", "SteamLanguage", true, new ObjCInterfaceGen(), "h");
+			//ParseFile(projectPath, @"Resources\SteamLanguage", "steammsg.steamd", "SteamKit2", @"SteamKit2\ObjC\", "SteamLanguage", true, new ObjCImplementationGen(), "m");
 
         }
 
-        private static void ParseFile( string projectPath, string path, string file, string nspace, string outputPath, string outFile, bool supportsGC )
+        private static void ParseFile( string projectPath, string path, string file, string nspace, string outputPath, string outFile, bool supportsGC, ICodeGen codeGen, string fileNameSuffix )
         {
             string languagePath = Path.Combine( projectPath, path );
 
@@ -30,10 +33,7 @@ namespace SteamLanguageParser
             Queue<Token> tokenList = LanguageParser.TokenizeString( File.ReadAllText( Path.Combine( languagePath, file ) ) );
 
             Node root = TokenAnalyzer.Analyze( tokenList );
-
-            //JavaGen cgen = new JavaGen();
-            CSharpGen cgen = new CSharpGen();
-
+			
             Node rootEnumNode = new Node();
             Node rootMessageNode = new Node();
 
@@ -46,11 +46,11 @@ namespace SteamLanguageParser
             StringBuilder enumBuilder = new StringBuilder();
             StringBuilder messageBuilder = new StringBuilder();
 
-            CodeGenerator.EmitCode( rootEnumNode, cgen, enumBuilder, nspace, supportsGC, false );
-            CodeGenerator.EmitCode( rootMessageNode, cgen, messageBuilder, nspace + ".Internal", supportsGC, true );
+            CodeGenerator.EmitCode( rootEnumNode, codeGen, enumBuilder, nspace, supportsGC, false );
+			CodeGenerator.EmitCode(rootMessageNode, codeGen, messageBuilder, nspace + ".Internal", supportsGC, true);
 
-            string outputEnumFile = Path.Combine( outputPath, outFile + ".cs" );
-            string outputMessageFile = Path.Combine( outputPath, outFile + "Internal.cs" );
+            string outputEnumFile = Path.Combine( outputPath, outFile + "." + fileNameSuffix );
+            string outputMessageFile = Path.Combine( outputPath, outFile + "Internal." + fileNameSuffix );
 
             File.WriteAllText( Path.Combine( projectPath, outputEnumFile ), enumBuilder.ToString() );
             File.WriteAllText( Path.Combine( projectPath, outputMessageFile ), messageBuilder.ToString() );
