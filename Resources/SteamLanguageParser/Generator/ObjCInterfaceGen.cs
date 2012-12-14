@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SteamLanguageParser {
-	class ObjCInterfaceGen : ObjCGenBase {
-
-		public override void EmitNamespace(StringBuilder sb, bool end, string nspace) {
+namespace SteamLanguageParser
+{
+	class ObjCInterfaceGen : ObjCGenBase
+	{
+		public override void EmitNamespace(StringBuilder sb, bool end, string nspace)
+		{
 			base.EmitNamespace(sb, end, nspace);
-			if (!end) {
+			if (!end)
+			{
 				if (nspace.EndsWith("Internal"))
 				{
 					sb.AppendLine("#import \"SteamLanguage.h\"");
@@ -19,7 +22,7 @@ namespace SteamLanguageParser {
 					sb.AppendLine("#import \"steammessages_base.pb.h\"");
 					sb.AppendLine("#import \"steammessages_clientserver.pb.h\"");
 				}
-				
+
 				sb.AppendLine();
 				sb.AppendLine("#ifndef _SK_EGCMSG");
 				sb.AppendLine("#define _SK_EGCMSG");
@@ -30,10 +33,11 @@ namespace SteamLanguageParser {
 			}
 		}
 
-		public override void EmitSerialBase(StringBuilder sb, int level, bool supportsGC) {
+		public override void EmitSerialBase(StringBuilder sb, int level, bool supportsGC)
+		{
 			string padding = new String('\t', level);
 
-			
+
 			sb.AppendLine(padding + "@protocol _SKSteamSerializable <NSObject>");
 			sb.AppendLine();
 			sb.AppendLine(padding + "- (void) serialize:(NSMutableData *)data;");
@@ -52,7 +56,7 @@ namespace SteamLanguageParser {
 			sb.AppendLine(padding + "- (EMsg) eMsg;");
 			sb.AppendLine();
 			sb.AppendLine(padding + "@end");
-			
+
 			sb.AppendLine();
 			sb.AppendLine(padding + "@protocol _SKGCSerializableHeader <_SKSteamSerializable>");
 			sb.AppendLine();
@@ -69,11 +73,13 @@ namespace SteamLanguageParser {
 			sb.AppendLine();
 		}
 
-		public string GetUpperName(string name) {
+		public string GetUpperName(string name)
+		{
 			return name.Substring(0, 1).ToUpper() + name.Remove(0, 1);
 		}
 
-		protected override void EmitEnumNode(EnumNode enode, StringBuilder sb, int level) {
+		protected override void EmitEnumNode(EnumNode enode, StringBuilder sb, int level)
+		{
 			string padding = new String('\t', level);
 
 			if (enode.Flags == "flags")
@@ -87,35 +93,37 @@ namespace SteamLanguageParser {
 
 			string lastValue = "0";
 
-            bool hasMax = false;
+			bool hasMax = false;
 
-			foreach (PropNode prop in enode.childNodes) {
+			foreach (PropNode prop in enode.childNodes)
+			{
 				lastValue = EmitType(prop.Default);
 				sb.AppendLine(padding + "\t" + enode.Name + prop.Name + " = " + lastValue + ",");
-                if (prop.Name.Equals("Max", StringComparison.OrdinalIgnoreCase))
-                {
-                    hasMax = true;
-                }
+				if (prop.Name.Equals("Max", StringComparison.OrdinalIgnoreCase))
+				{
+					hasMax = true;
+				}
 			}
 
-            long maxlong = 0;
+			long maxlong = 0;
 
 			if (lastValue.StartsWith("0x"))
-                maxlong = Convert.ToInt64(lastValue.Substring(2, lastValue.Length - 2), 16);
+				maxlong = Convert.ToInt64(lastValue.Substring(2, lastValue.Length - 2), 16);
 			else
 				maxlong = Int64.Parse(lastValue);
 
-            maxlong++;
+			maxlong++;
 
 			if (!hasMax && enode.Flags != "flags")
-            {
-                sb.AppendLine(padding + "\t" + enode.Name + "Max = " + maxlong + ",");
-            }
+			{
+				sb.AppendLine(padding + "\t" + enode.Name + "Max = " + maxlong + ",");
+			}
 			sb.AppendLine(padding + "};");
 			sb.AppendLine();
 		}
 
-		protected override void EmitClassNode(ClassNode cnode, StringBuilder sb, int level) {
+		protected override void EmitClassNode(ClassNode cnode, StringBuilder sb, int level)
+		{
 			EmitClassDef(cnode, sb, level, false);
 
 			EmitClassIdentity(cnode, sb, level + 1);
@@ -129,10 +137,12 @@ namespace SteamLanguageParser {
 			EmitClassDef(cnode, sb, level, true);
 		}
 
-		private void EmitClassDef(ClassNode cnode, StringBuilder sb, int level, bool end) {
+		private void EmitClassDef(ClassNode cnode, StringBuilder sb, int level, bool end)
+		{
 			string padding = new String('\t', level);
 
-			if (end) {
+			if (end)
+			{
 				sb.AppendLine(padding + "@end");
 				sb.AppendLine();
 				return;
@@ -140,20 +150,27 @@ namespace SteamLanguageParser {
 
 			string parent = "_SKSteamSerializable";
 
-			if (cnode.Ident != null) {
-				if (cnode.Name.Contains("MsgGC")) {
+			if (cnode.Ident != null)
+			{
+				if (cnode.Name.Contains("MsgGC"))
+				{
 					parent = "_SKGCSerializableMessage";
-				} else {
+				}
+				else
+				{
 					parent = "_SKSteamSerializableMessage";
 				}
-			} else if (cnode.Name.Contains("Hdr")) {
+			}
+			else if (cnode.Name.Contains("Hdr"))
+			{
 				if (cnode.Name.Contains("MsgGC"))
 					parent = "_SKGCSerializableHeader";
 				else
 					parent = "_SKSteamSerializableHeader";
 			}
 
-			if (cnode.Name.Contains("Hdr")) {
+			if (cnode.Name.Contains("Hdr"))
+			{
 				sb.AppendLine(padding + "//[StructLayout( LayoutKind.Sequential )]");
 			}
 
@@ -161,41 +178,55 @@ namespace SteamLanguageParser {
 			sb.AppendLine();
 		}
 
-		private void EmitClassIdentity(ClassNode cnode, StringBuilder sb, int level) {
+		private void EmitClassIdentity(ClassNode cnode, StringBuilder sb, int level)
+		{
 			string padding = new String('\t', level);
 
-			if (cnode.Ident != null) {
-				if (cnode.Name.Contains("MsgGC")) {
+			if (cnode.Ident != null)
+			{
+				if (cnode.Name.Contains("MsgGC"))
+				{
 					sb.AppendLine(padding + "- (EGCMsg) eMsg;");
 					sb.AppendLine();
-				} else {
+				}
+				else
+				{
 					sb.AppendLine(padding + "- (EMsg) eMsg;");
 					sb.AppendLine();
 				}
-			} else if (cnode.Name.Contains("Hdr")) {
-				if (cnode.Name.Contains("MsgGC")) {
+			}
+			else if (cnode.Name.Contains("Hdr"))
+			{
+				if (cnode.Name.Contains("MsgGC"))
+				{
 					sb.AppendLine(padding + "- (void) setEMsg:(EGCMsg)msg;");
 					sb.AppendLine();
-				} else {
+				}
+				else
+				{
 					sb.AppendLine(padding + "- (void) setEMsg:(EMsg)msg;");
 					sb.AppendLine();
 				}
 			}
 		}
 
-		private int EmitClassProperties(ClassNode cnode, StringBuilder sb, int level) {
+		private int EmitClassProperties(ClassNode cnode, StringBuilder sb, int level)
+		{
 			string padding = new String('\t', level);
 			int baseClassSize = 0;
 
-			if (cnode.Parent != null) {
+			if (cnode.Parent != null)
+			{
 				sb.AppendLine(padding + "@property (nonatomic, readwrite) " + EmitType(cnode.Parent) + " header;");
 			}
 
-			foreach (PropNode prop in cnode.childNodes) {
+			foreach (PropNode prop in cnode.childNodes)
+			{
 				string typestr = EmitType(prop.Type);
 				string propName = GetPropertyName(prop.Name);
 
-				if (prop.Flags != null && prop.Flags == "const") {
+				if (prop.Flags != null && prop.Flags == "const")
+				{
 					sb.AppendLine(padding + "+ (" + typestr + ") " + GetUpperName(prop.Name) + ";");
 					continue;
 				}
@@ -205,23 +236,36 @@ namespace SteamLanguageParser {
 
 				sb.AppendLine(padding + "// Static size: " + size);
 
-				if (prop.Flags != null && prop.Flags == "steamidmarshal" && typestr == "ulong") {
+				if (prop.Flags != null && prop.Flags == "steamidmarshal" && typestr == "ulong")
+				{
 					sb.AppendLine(padding + "@property (nonatomic, readwrite) SKSteamID * " + propName + ";");
-				} else if (prop.Flags != null && prop.Flags == "boolmarshal" && typestr == "byte") {
+				}
+				else if (prop.Flags != null && prop.Flags == "boolmarshal" && typestr == "byte")
+				{
 					sb.AppendLine(padding + "@property (nonatomic, readwrite) bool " + propName + ";");
-				} else if (prop.Flags != null && prop.Flags == "gameidmarshal" && typestr == "ulong") {
+				}
+				else if (prop.Flags != null && prop.Flags == "gameidmarshal" && typestr == "ulong")
+				{
 					sb.AppendLine(padding + "@property (nonatomic, readwrite) SKGameID * " + propName + ";");
-                } else if (prop.Flags != null && prop.Flags == "proto") {
-                    sb.AppendLine(padding + "@property (nonatomic, strong, readwrite) " + GetLastPartNameFromDottedType(typestr) + " * " + propName + ";");
-				} else {
+				}
+				else if (prop.Flags != null && prop.Flags == "proto")
+				{
+					sb.AppendLine(padding + "@property (nonatomic, strong, readwrite) " + GetLastPartNameFromDottedType(typestr) + " * " + propName + ";");
+				}
+				else
+				{
 					int temp;
-					if (!String.IsNullOrEmpty(prop.FlagsOpt) && Int32.TryParse(prop.FlagsOpt, out temp)) {
+					if (!String.IsNullOrEmpty(prop.FlagsOpt) && Int32.TryParse(prop.FlagsOpt, out temp))
+					{
 						typestr = "NSData *";
 					}
 
-					if (typestr.StartsWith("NS")) {
+					if (typestr.StartsWith("NS"))
+					{
 						sb.AppendLine(padding + "@property (nonatomic, strong, readwrite) " + typestr + " " + propName + ";");
-					} else {
+					}
+					else
+					{
 						sb.AppendLine(padding + "@property (nonatomic, readwrite) " + typestr + " " + propName + ";");
 					}
 				}
@@ -232,22 +276,26 @@ namespace SteamLanguageParser {
 			return baseClassSize;
 		}
 
-		private void EmitClassConstructor(ClassNode cnode, StringBuilder sb, int level) {
+		private void EmitClassConstructor(ClassNode cnode, StringBuilder sb, int level)
+		{
 			string padding = new String('\t', level);
 			sb.AppendLine(padding + "- (id) init;");
 		}
 
-		private void EmitClassSerializer(ClassNode cnode, StringBuilder sb, int level, int baseSize) {
+		private void EmitClassSerializer(ClassNode cnode, StringBuilder sb, int level, int baseSize)
+		{
 			string padding = new String('\t', level);
 
 			sb.AppendLine();
 			sb.AppendLine(padding + "- (void) serialize:(NSMutableData *)data;");
 		}
 
-		private void EmitClassSize(ClassNode cnode, StringBuilder sb, int level) {
+		private void EmitClassSize(ClassNode cnode, StringBuilder sb, int level)
+		{
 		}
 
-		private void EmitClassDeserializer(ClassNode cnode, StringBuilder sb, int level, int baseSize) {
+		private void EmitClassDeserializer(ClassNode cnode, StringBuilder sb, int level, int baseSize)
+		{
 			string padding = new String('\t', level);
 
 			sb.AppendLine();
