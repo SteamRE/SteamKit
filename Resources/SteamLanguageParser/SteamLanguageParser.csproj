@@ -56,6 +56,9 @@
     <Compile Include="CodeGenerator.cs" />
     <Compile Include="Generator\JavaGen.cs" />
     <Compile Include="Generator\CSharpGen.cs" />
+    <Compile Include="Generator\ObjCGenBase.cs" />
+    <Compile Include="Generator\ObjCImplementationGen.cs" />
+    <Compile Include="Generator\ObjCInterfaceGen.cs" />
     <Compile Include="Parser\LanguageParser.cs" />
     <Compile Include="Parser\SymbolLocator.cs" />
     <Compile Include="Parser\TokenAnalyzer.cs" />
