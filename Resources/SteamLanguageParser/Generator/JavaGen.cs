@@ -127,7 +127,7 @@ namespace SteamLanguageParser
             sb.AppendLine(padding + "\tpublic int getCode() {");
             sb.AppendLine(padding + "\t\treturn code;");
             sb.AppendLine(padding + "\t}");
-
+    
             sb.AppendLine(padding + "\tpublic static " + enode.Name + " lookup( int code ) {");
             sb.AppendLine(padding + "\t\tfor ( " + enode.Name + " x : values() ) {");
             sb.AppendLine(padding + "\t\t\tif( x.getCode() == code ) return x;");
@@ -221,7 +221,7 @@ namespace SteamLanguageParser
                 int size = CodeGenerator.GetTypeSize(prop);
                 baseClassSize += size;
 
-                sb.AppendLine(padding + "// Static size: " + size);
+                sb.AppendLine( padding + "// Static size: " + size);
 
                 int temp;
                 if (!String.IsNullOrEmpty(prop.FlagsOpt) && Int32.TryParse(prop.FlagsOpt, out temp))
@@ -285,7 +285,7 @@ namespace SteamLanguageParser
                 {
                     ctor = "(byte)" + ctor;
                 }
-
+                
                 if (defflags != null && defflags == "steamidmarshal")
                 {
                     symname = prop.Name;
@@ -352,7 +352,7 @@ namespace SteamLanguageParser
                         sb.AppendLine(padding + "\tByteBuffer buf" + GetUpperName(prop.Name) + " = " + GetUpperName(prop.Name) + ".serialize();");
                     }
 
-                    varLengthProps.Add("buf" + GetUpperName(prop.Name) + ".limit()");
+                    varLengthProps.Add( "buf" + GetUpperName(prop.Name) + ".limit()" );
                 }
             }
 
@@ -384,7 +384,7 @@ namespace SteamLanguageParser
 
                     propName = propName + ".getCode()";
                 }
-
+                
                 if (!readerTypeMap.ContainsKey(typestr))
                 {
                     typestr = CodeGenerator.GetTypeOfSize(size, SupportsUnsignedTypes());
