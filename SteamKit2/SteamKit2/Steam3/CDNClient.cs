@@ -59,6 +59,9 @@ namespace SteamKit2
         private ClientEndPoint endPoint;
         private byte[] appTicket;
 
+        private SteamID steamID;
+        private uint depotID;
+
         static CDNClient()
         {
             ServicePointManager.Expect100Continue = false;
@@ -77,6 +80,24 @@ namespace SteamKit2
 
             endPoint = cdnServer;
             appTicket = appticket;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CDNClient"/> class without an application ticket.
+        /// </summary>
+        /// <param name="cdnServer">The CDN server to connect to.</param>
+        /// <param name="steamID">The SteamID of the current user.</param>
+        /// <param name="depotID">Depot ID being requested.</param>
+        public CDNClient(ClientEndPoint cdnServer, uint depotID, SteamID steamID)
+        {
+            sessionKey = CryptoHelper.GenerateRandomBlock(32);
+
+            webClient = new WebClient();
+
+            endPoint = cdnServer;
+            appTicket = null;
+            this.steamID = steamID;
+            this.depotID = depotID;
         }
 
         /// <summary>
@@ -113,9 +134,17 @@ namespace SteamKit2
                 encryptedKey = rsa.Encrypt( sessionKey );
             }
 
-            byte[] encryptedTicket = CryptoHelper.SymmetricEncrypt(appTicket, sessionKey);
+            string payload;
 
-            string payload = String.Format("sessionkey={0}&appticket={1}", WebHelpers.UrlEncode(encryptedKey), WebHelpers.UrlEncode(encryptedTicket));
+            if (appTicket == null)
+            {
+                payload = String.Format("sessionkey={0}&anonymoususer=1&steamid={1}", WebHelpers.UrlEncode(encryptedKey), steamID.ConvertToUInt64());
+            }
+            else
+            {
+                byte[] encryptedTicket = CryptoHelper.SymmetricEncrypt(appTicket, sessionKey);
+                payload = String.Format("sessionkey={0}&appticket={1}", WebHelpers.UrlEncode(encryptedKey), WebHelpers.UrlEncode(encryptedTicket));
+            }
 
             webClient.Headers.Clear();
             webClient.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
@@ -230,8 +259,16 @@ namespace SteamKit2
             PrepareAuthHeader(ref webClient, authURI);
             webClient.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
 
-            byte[] encryptedTicket = CryptoHelper.SymmetricEncrypt(appTicket, sessionKey);
-            string payload = String.Format("appticket={0}", WebHelpers.UrlEncode(encryptedTicket));
+            string payload;
+            if (appTicket == null)
+            {
+                payload = String.Format("depotid={0}", depotID);
+            }
+            else
+            {
+                byte[] encryptedTicket = CryptoHelper.SymmetricEncrypt(appTicket, sessionKey);
+                payload = String.Format("appticket={0}", WebHelpers.UrlEncode(encryptedTicket));
+            }
 
             string response = webClient.UploadString(authURI, payload);
         }
