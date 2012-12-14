@@ -50,7 +50,7 @@ namespace SteamLanguageParser {
             }
         }
 
-        public virtual string EmitType(Symbol sym
+        public virtual string EmitType(Symbol sym)
         {
             if (sym is WeakSymbol)
             {

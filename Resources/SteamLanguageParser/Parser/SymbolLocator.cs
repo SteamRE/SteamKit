@@ -116,9 +116,9 @@ namespace SteamLanguageParser
 
                 return new StrongSymbol(classNode, propNode);
             }
-
+            
             throw new Exception("Invalid symbol");
         }
-
+ 
     }
 }

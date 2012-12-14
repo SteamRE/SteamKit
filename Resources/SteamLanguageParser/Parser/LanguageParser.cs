@@ -24,10 +24,10 @@ namespace SteamLanguageParser
         @"(?<whitespace>\s+)|" +
         @"(?<terminator>[;])|" +
 
-        "[\"](?<string>.+?)[\"]|" +
+        "[\"](?<string>.+?)[\"]|" + 
 
         @"(?<identifier>-?[a-zA-Z_0-9][a-zA-Z0-9_:.]*)|" +
-        @"[#](?<preprocess>[a-zA-Z]*)|" +
+        @"[#](?<preprocess>[a-zA-Z]*)|" + 
 
         @"(?<operator>[{}<>\]=])|" +
         @"(?<invalid>[^\s]+)";
@@ -36,21 +36,21 @@ namespace SteamLanguageParser
 
         public static Queue<Token> TokenizeString(string buffer)
         {
-            MatchCollection matches = regexPattern.Matches(buffer);
+            MatchCollection matches = regexPattern.Matches( buffer );
 
             Queue<Token> tokenList = new Queue<Token>();
-            foreach (Match match in matches)
+            foreach ( Match match in matches )
             {
                 int i = 0;
-                foreach (Group group in match.Groups)
+                foreach ( Group group in match.Groups )
                 {
                     string matchValue = group.Value;
                     bool success = group.Success;
 
-                    if (success && i > 1)
+                    if ( success && i > 1 )
                     {
-                        string groupName = regexPattern.GroupNameFromNumber(i);
-                        tokenList.Enqueue(new Token(groupName, matchValue));
+                        string groupName = regexPattern.GroupNameFromNumber( i );
+                        tokenList.Enqueue( new Token( groupName, matchValue ) );
                     }
                     i++;
                 }

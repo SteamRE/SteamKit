@@ -120,7 +120,7 @@ namespace SteamLanguageParser
             return 0;
         }
 
-        public static void EmitCode(Node root, ICodeGen gen, StringBuilder sb, string nspace, bool supportsGC, bool internalFile)
+        public static void EmitCode(Node root, ICodeGen gen, StringBuilder sb, string nspace, bool supportsGC, bool internalFile )
         {
             gen.EmitNamespace(sb, false, nspace);
 
@@ -128,8 +128,8 @@ namespace SteamLanguageParser
             if (gen.SupportsNamespace())
                 level = 1;
 
-            if (internalFile)
-                gen.EmitSerialBase(sb, level, supportsGC);
+            if ( internalFile )
+                gen.EmitSerialBase( sb, level, supportsGC );
 
             foreach (Node n in root.childNodes)
             {
