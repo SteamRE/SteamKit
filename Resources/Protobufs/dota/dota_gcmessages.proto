@@ -164,6 +164,9 @@ enum EDOTAGCMsg {
 	k_EMsgGCNotifyResetKeybindings = 7181;
 	k_EMsgGCStorePromoPagesRequest = 7182;
 	k_EMsgGCStorePromoPagesResponse = 7183;
+	k_EMsgGCSpawnLootGreevil = 7184;
+	k_EMsgGCDismissLootGreevil = 7185;
+	k_EMsgGCToGCMatchCompleted = 7186;
 	k_EMsgGCDev_GrantWarKill = 8001;
 }
 
@@ -178,6 +181,7 @@ enum DOTA_GameMode {
 	DOTA_GAMEMODE_HW = 7;
 	DOTA_GAMEMODE_REVERSE_CM = 8;
 	DOTA_GAMEMODE_XMAS = 9;
+	DOTA_GAMEMODE_TUTORIAL = 10;
 }
 
 enum DOTA_GameState {
@@ -521,6 +525,14 @@ message CMsgReadyUpStatus {
 	optional fixed64 lobby_id = 1;
 	repeated uint32 accepted_ids = 2;
 	repeated uint32 declined_ids = 3;
+}
+
+message CMsgSpawnLootGreevil {
+}
+
+message CMsgDismissLootGreevil {
+	optional fixed64 lobby_id = 1;
+	optional bool killed = 2;
 }
 
 message CMsgMatchmakingSearchCountRequest {
@@ -1532,6 +1544,7 @@ message CMsgDOTARequestSaveGamesResponse {
 
 message CMsgDOTAPlayerFailedToConnect {
 	repeated fixed64 failed_loaders = 1;
+	repeated fixed64 abandoned_loaders = 2;
 }
 
 message CMsgGCToRelayConnect {
@@ -1961,8 +1974,16 @@ message CMsgDOTAStorePromoPagesRequest {
 }
 
 message CMsgDOTAStorePromoPagesResponse {
-	optional uint32 version = 1;
-	optional string title = 2;
-	repeated string page_url = 3;
+	message PromoPage {
+		optional uint32 promo_id = 1;
+		optional string title = 2;
+		optional string url = 3;
+	}
+
+	repeated .CMsgDOTAStorePromoPagesResponse.PromoPage pages = 1;
+}
+
+message CMsgDOTAGCToGCMatchCompleted {
+	optional uint32 match_id = 1;
 }
 
