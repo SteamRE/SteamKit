@@ -5,7 +5,8 @@ using System.Text;
 
 namespace SteamLanguageParser {
 
-	public abstract class ObjCGenBase : ICodeGen {
+	public abstract class ObjCGenBase : ICodeGen
+	{
 		protected static Dictionary<String, String> readerTypeMap = new Dictionary<String, String>
         {
             {"byte", "UInt8"},
@@ -49,14 +50,19 @@ namespace SteamLanguageParser {
 			}
 		}
 
-		public virtual string EmitType(Symbol sym) {
-			if (sym is WeakSymbol) {
+		public virtual string EmitType(Symbol sym
+		{
+			if (sym is WeakSymbol)
+			{
 				WeakSymbol wsym = sym as WeakSymbol;
-
 				string identifier = wsym.Identifier;
-				if (weakTypeMap.ContainsKey(identifier)) {
+
+				if (weakTypeMap.ContainsKey(identifier))
+				{
 					return weakTypeMap[identifier];
-				} else if(identifier.StartsWith("CMsg")) {
+				}
+				else if(identifier.StartsWith("CMsg"))
+				{
 					return identifier + " *";
 				}
 				else if (identifier == "ulong.MaxValue")
@@ -67,15 +73,22 @@ namespace SteamLanguageParser {
 				{
 					return identifier;
 				}
-			} else if (sym is StrongSymbol) {
+			} else if (sym is StrongSymbol)
+			{
 				StrongSymbol ssym = sym as StrongSymbol;
 
-				if (ssym.Prop == null) {
+				if (ssym.Prop == null)
+				{
 					return ssym.Class.Name;
-				} else {
-					if (ssym.Class.Name.StartsWith("E")) {
+				}
+				else
+				{
+					if (ssym.Class.Name.StartsWith("E"))
+					{
 						return ssym.Class.Name + ssym.Prop.Name;
-					} else {
+					}
+					else
+					{
 						return "[_SK" + ssym.Class.Name + " " + ssym.Prop.Name + "]";
 					}
 				}
@@ -87,10 +100,14 @@ namespace SteamLanguageParser {
 
 		public virtual void EmitSerialBase(StringBuilder sb, int level, bool supportsGC) { }
 
-		public void EmitNode(Node n, StringBuilder sb, int level) {
-			if (n is ClassNode) {
+		public void EmitNode(Node n, StringBuilder sb, int level)
+		{
+			if (n is ClassNode)
+			{
 				EmitClassNode(n as ClassNode, sb, level);
-			} else if (n is EnumNode) {
+			}
+			else if (n is EnumNode)
+			{
 				EmitEnumNode(n as EnumNode, sb, level);
 			}
 		}
@@ -101,7 +118,8 @@ namespace SteamLanguageParser {
 		public bool SupportsNamespace() { return false; }
 		public bool SupportsUnsignedTypes() { return true;  }
 
-		protected string GetPropertyName(string varName) {
+		protected string GetPropertyName(string varName)
+		{
 			return varName.Substring(0, 1).ToLower() + varName.Substring(1);
 		}
 
