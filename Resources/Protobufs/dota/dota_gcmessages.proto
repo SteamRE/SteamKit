@@ -84,8 +84,6 @@ enum EDOTAGCMsg {
 	k_EMsgGCCancelWatchGame = 7097;
 	k_EMsgGCProfileRequest = 7098;
 	k_EMsgGCProfileResponse = 7099;
-	k_EMsgGCDOTAIntraGCRankRequest = 7100;
-	k_EMsgGCDOTAIntraGCRankResponse = 7101;
 	k_EMsgGCPopup = 7102;
 	k_EMsgGCDOTANotifySuccessfulReport = 7103;
 	k_EMsgGCDOTAClearNotifySuccessfulReport = 7104;
@@ -164,6 +162,8 @@ enum EDOTAGCMsg {
 	k_EMsgGCHalloweenHighScoreResponse = 7179;
 	k_EMsgGCGenerateDiretidePrizeListResponse = 7180;
 	k_EMsgGCNotifyResetKeybindings = 7181;
+	k_EMsgGCStorePromoPagesRequest = 7182;
+	k_EMsgGCStorePromoPagesResponse = 7183;
 	k_EMsgGCDev_GrantWarKill = 8001;
 }
 
@@ -1058,6 +1058,7 @@ message CMsgDOTATeam {
 	optional string url = 16;
 	optional uint32 fullgamesplayed = 17;
 	repeated uint32 leagues = 18;
+	optional uint32 gamesplayed = 19;
 }
 
 message CMsgDOTACreateTeam {
@@ -1645,14 +1646,6 @@ message CMsgDOTAProfileResponse {
 	optional uint32 team_id = 12;
 }
 
-message CMsgDOTAIntraGCRankRequest {
-	optional uint32 account_id = 1;
-}
-
-message CMsgDOTAIntraGCRankResponse {
-	optional uint32 rank = 1;
-}
-
 message CMsgDOTANotifySuccessfulReport {
 }
 
@@ -1961,5 +1954,15 @@ message CMsgDOTAHalloweenHighScoreResponse {
 
 message CMsgDOTANotifyResetKeybindings {
 	optional uint32 keybind_template = 1;
+}
+
+message CMsgDOTAStorePromoPagesRequest {
+	optional uint32 version_seen = 1;
+}
+
+message CMsgDOTAStorePromoPagesResponse {
+	optional uint32 version = 1;
+	optional string title = 2;
+	repeated string page_url = 3;
 }
 
