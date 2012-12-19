@@ -167,6 +167,7 @@ enum EDOTAGCMsg {
 	k_EMsgGCSpawnLootGreevil = 7184;
 	k_EMsgGCDismissLootGreevil = 7185;
 	k_EMsgGCToGCMatchCompleted = 7186;
+	k_EMsgGCDismissLootGreevilResponse = 7187;
 	k_EMsgGCDev_GrantWarKill = 8001;
 }
 
@@ -528,11 +529,15 @@ message CMsgReadyUpStatus {
 }
 
 message CMsgSpawnLootGreevil {
+	optional bool rare = 1;
 }
 
 message CMsgDismissLootGreevil {
-	optional fixed64 lobby_id = 1;
 	optional bool killed = 2;
+	optional bool rare = 3;
+}
+
+message CMsgDismissLootGreevilResponse {
 }
 
 message CMsgMatchmakingSearchCountRequest {
