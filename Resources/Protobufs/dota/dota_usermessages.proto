@@ -41,6 +41,7 @@ enum EDotaUserMessages {
 	DOTA_UM_ItemAlert = 99;
 	DOTA_UM_HalloweenDrops = 100;
 	DOTA_UM_ChatWheel = 101;
+	DOTA_UM_ReceivedXmasGift = 102;
 }
 
 enum DOTA_CHAT_MESSAGE {
@@ -511,5 +512,11 @@ message CDOTAUserMsg_ChatWheel {
 	optional .EDOTAChatWheelMessage chat_message = 1 [default = k_EDOTA_CW_Ok];
 	optional uint32 player_id = 2;
 	optional uint32 account_id = 3;
+}
+
+message CDOTAUserMsg_ReceivedXmasGift {
+	optional int32 player_id = 1;
+	optional string item_name = 2;
+	optional int32 inventory_slot = 3;
 }
 
