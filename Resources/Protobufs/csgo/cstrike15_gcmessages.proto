@@ -105,7 +105,8 @@ message GameServerPing {
 message DetailedSearchStatistic {
 	optional uint32 game_type = 1;
 	optional uint32 search_time_avg = 2;
-	optional uint32 players_searching = 3;
+	optional uint32 legacy___players_searching___obsolete = 3;
+	optional uint32 players_searching = 4;
 }
 
 message GlobalStatistics {
@@ -117,6 +118,7 @@ message GlobalStatistics {
 	optional uint32 search_time_avg = 6;
 	repeated .DetailedSearchStatistic search_statistics = 7;
 	optional string main_post_url = 8;
+	optional uint32 required_appid_version = 9;
 }
 
 message OperationalStatisticDescription {
@@ -140,6 +142,13 @@ message PlayerRankingInfo {
 	optional uint32 rank_id = 2;
 	optional uint32 wins = 3;
 	optional float rank_change = 4;
+}
+
+message PlayerCommendationInfo {
+	optional uint32 cmd_friendly = 1;
+	optional uint32 cmd_teaching = 2;
+	optional uint32 cmd_support = 3;
+	optional uint32 cmd_leader = 4;
 }
 
 message CMsgGCCStrike15_v2_MatchmakingGCOperationalStats {
@@ -242,6 +251,7 @@ message CMsgGCCStrike15_v2_MatchmakingGC2ClientHello {
 	optional uint32 penalty_reason = 5;
 	optional int32 vac_banned = 6;
 	optional .PlayerRankingInfo ranking = 7;
+	optional .PlayerCommendationInfo commendation = 8;
 }
 
 message CMsgGCCStrike15_v2_MatchmakingGC2ClientAbandon {
@@ -259,6 +269,7 @@ message CMsgGCCStrike15_v2_MatchmakingServer2GCKick {
 message CDataGCCStrike15_v2_MatchmakingLockedInMatch {
 	optional .CMsgGCCStrike15_v2_MatchmakingGC2ClientReserve client_reservation = 1;
 	optional .CMsgGCCStrike15_v2_MatchmakingServerRoundStats server_stats = 2;
+	optional uint32 rtime32_server_info = 3;
 }
 
 message CMsgGCCStrike15_v2_MatchmakingGC2ServerRankUpdate {
@@ -268,5 +279,44 @@ message CMsgGCCStrike15_v2_MatchmakingGC2ServerRankUpdate {
 
 message CMsgGCCStrike15_v2_MatchmakingOperator2GCBlogUpdate {
 	optional string main_post_url = 1;
+}
+
+message CMsgGCCStrike15_v2_ServerNotificationForUserPenalty {
+	optional uint32 account_id = 1;
+	optional uint32 reason = 2;
+	optional uint32 seconds = 3;
+}
+
+message CMsgGCCStrike15_v2_ClientReportPlayer {
+	optional uint32 account_id = 1;
+	optional uint32 rpt_aimbot = 2;
+	optional uint32 rpt_wallhack = 3;
+	optional uint32 rpt_speedhack = 4;
+	optional uint32 rpt_teamharm = 5;
+	optional uint32 rpt_textabuse = 6;
+	optional uint32 rpt_voiceabuse = 7;
+	optional uint64 match_id = 8;
+}
+
+message CMsgGCCStrike15_v2_ClientCommendPlayer {
+	optional uint32 account_id = 1;
+	optional uint64 match_id = 8;
+	optional .PlayerCommendationInfo commendation = 9;
+}
+
+message CMsgGCCStrike15_v2_ClientReportServer {
+	optional uint32 rpt_poorperf = 1;
+	optional uint32 rpt_abusivemodels = 2;
+	optional uint32 rpt_badmotd = 3;
+	optional uint32 rpt_listingabuse = 4;
+	optional uint64 match_id = 8;
+}
+
+message CMsgGCCStrike15_v2_ClientReportResponse {
+	optional uint64 confirmation_id = 1;
+	optional uint32 account_id = 2;
+	optional uint32 server_ip = 3;
+	optional uint32 response_type = 4;
+	optional uint32 response_result = 5;
 }
 
