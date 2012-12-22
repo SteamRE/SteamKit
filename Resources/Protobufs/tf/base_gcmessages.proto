@@ -168,6 +168,12 @@ message CMsgApplyStrangePart {
 	optional uint64 item_item_id = 2;
 }
 
+message CMsgApplyStrangeRestriction {
+	optional uint64 strange_part_item_id = 1;
+	optional uint64 item_item_id = 2;
+	optional uint32 strange_attr_index = 3;
+}
+
 message CMsgApplyUpgradeCard {
 	optional uint64 upgrade_card_item_id = 1;
 	optional uint64 subject_item_id = 2;
