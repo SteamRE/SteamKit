@@ -1,6 +1,21 @@
 import "google/protobuf/descriptor.proto";
 import "netmessages.proto";
 
+enum EDOTAChatWheelMessage {
+	k_EDOTA_CW_Ok = 0;
+	k_EDOTA_CW_Care = 1;
+	k_EDOTA_CW_GetBack = 2;
+	k_EDOTA_CW_NeedWards = 3;
+	k_EDOTA_CW_Stun = 4;
+	k_EDOTA_CW_Help = 5;
+	k_EDOTA_CW_Push = 6;
+	k_EDOTA_CW_GoodJob = 7;
+	k_EDOTA_CW_Missing = 8;
+	k_EDOTA_CW_Missing_Top = 9;
+	k_EDOTA_CW_Missing_Mid = 10;
+	k_EDOTA_CW_Missing_Bottom = 11;
+}
+
 message CDOTAMsg_LocationPing {
 	optional int32 x = 1;
 	optional int32 y = 2;

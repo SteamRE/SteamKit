@@ -23,15 +23,6 @@ enum EGCBaseMsg {
 	k_EMsgGCReplay_UploadedToYouTube = 4510;
 }
 
-enum EGCSharedMsg {
-	k_EMsgInterGCAchievementAwarded = 7001;
-	k_EMsgInterGCAchievementAwardedResponse = 7002;
-	k_EMsgInterGCLoadAchievements = 7003;
-	k_EMsgInterGCLoadAchievementResponse = 7004;
-	k_EMsgInterGCSurgeTest = 7005;
-	k_EMsgInterGCProfile = 7006;
-}
-
 enum EGCBaseProtoObjectTypes {
 	k_EProtoObjectPartyInvite = 1001;
 	k_EProtoObjectLobbyInvite = 1002;
