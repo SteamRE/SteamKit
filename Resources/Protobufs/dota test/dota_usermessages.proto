@@ -40,6 +40,7 @@ enum EDotaUserMessages {
 	DOTA_UM_TournamentDrop = 98;
 	DOTA_UM_ItemAlert = 99;
 	DOTA_UM_HalloweenDrops = 100;
+	DOTA_UM_ChatWheel = 101;
 }
 
 enum DOTA_CHAT_MESSAGE {
@@ -99,6 +100,8 @@ enum DOTA_CHAT_MESSAGE {
 	CHAT_MESSAGE_INFORMATIONAL = 52;
 	CHAT_MESSAGE_AEGIS_STOLEN = 53;
 	CHAT_MESSAGE_ROSHAN_CANDY = 54;
+	CHAT_MESSAGE_ITEM_GIFTED = 55;
+	CHAT_MESSAGE_HERO_KILL_WITH_GREEVIL = 56;
 }
 
 enum DOTA_NO_BATTLE_POINTS_REASONS {
@@ -502,5 +505,11 @@ message CDOTAUserMsg_WorldLine {
 message CDOTAUserMsg_TournamentDrop {
 	optional string winner_name = 1;
 	optional int32 event_type = 2;
+}
+
+message CDOTAUserMsg_ChatWheel {
+	optional .EDOTAChatWheelMessage chat_message = 1 [default = k_EDOTA_CW_Ok];
+	optional uint32 player_id = 2;
+	optional uint32 account_id = 3;
 }
 

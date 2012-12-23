@@ -69,3 +69,23 @@ message CMsgGCMultiplexMessage {
 	repeated fixed64 steamids = 3;
 }
 
+message CGCToGCMsgMasterAck {
+	optional uint32 dir_index = 1;
+	optional uint32 gc_type = 2;
+}
+
+message CGCToGCMsgMasterAck_Response {
+	optional int32 eresult = 1 [default = 2];
+}
+
+message CGCToGCMsgRouted {
+	optional uint32 msg_type = 1;
+	optional fixed64 sender_id = 2;
+	optional bytes net_message = 3;
+}
+
+message CGCToGCMsgRoutedReply {
+	optional uint32 msg_type = 1;
+	optional bytes net_message = 2;
+}
+

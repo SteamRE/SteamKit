@@ -41,11 +41,20 @@ message CGameInfo {
 			optional uint64 steamid = 4;
 		}
 
+		message CHeroSelectEvent {
+			optional bool is_pick = 1;
+			optional uint32 team = 2;
+			optional uint32 hero_id = 3;
+		}
+
 		optional uint32 match_id = 1;
 		optional int32 game_mode = 2;
 		optional int32 game_winner = 3;
 		repeated .CGameInfo.CDotaGameInfo.CPlayerInfo player_info = 4;
 		optional uint32 leagueid = 5;
+		repeated .CGameInfo.CDotaGameInfo.CHeroSelectEvent picks_bans = 6;
+		optional uint32 radiant_team_id = 7;
+		optional uint32 dire_team_id = 8;
 	}
 
 	optional .CGameInfo.CDotaGameInfo dota = 4;
