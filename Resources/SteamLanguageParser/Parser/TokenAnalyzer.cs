@@ -29,6 +29,7 @@ namespace SteamLanguageParser
         public string FlagsOpt { get; set; }
         public Symbol Type { get; set; }
         public Symbol Default { get; set; }
+        public string Obsolete { get; set; }
     }
 
     public class EnumNode : Node
@@ -194,6 +195,17 @@ namespace SteamLanguageParser
                 }
 
                 Expect(tokens, "terminator", ";");
+
+                Token obsolete = Optional( tokens, "identifier", "obsolete" );
+                if ( obsolete != null )
+                {
+                    pnode.Obsolete = "";
+
+                    Token obsoleteReason = Optional( tokens, "string" );
+
+                    if ( obsoleteReason != null )
+                        pnode.Obsolete = obsoleteReason.Value;
+                }
 
                 parent.childNodes.Add(pnode);
 
