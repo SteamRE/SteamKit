@@ -116,7 +116,7 @@ namespace SteamLanguageParser
                                         Token op2 = Expect(tokens, "operator", ">");
                                     }
 
-                                    Token flag = Optional( tokens, "identifier" );
+                                    Token flag = Optional( tokens, "identifier", "flags" );
 
                                     EnumNode enode = new EnumNode();
                                     enode.Name = name.Value;
@@ -229,7 +229,7 @@ namespace SteamLanguageParser
 
             if (peek.Name != name || peek.Value != value)
             {
-                throw new Exception("Expecting " + name);
+                throw new Exception("Expecting " + name + " '" + value + "', but got '" + peek.Value + "'");
             }
 
             return tokens.Dequeue();
