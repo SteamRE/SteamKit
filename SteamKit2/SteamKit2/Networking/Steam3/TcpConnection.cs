@@ -246,13 +246,22 @@ namespace SteamKit2
 
             if ( sock != null )
             {
-                // cleanup socket
-                if ( sock.Connected )
+                try
                 {
-                    sock.Shutdown( SocketShutdown.Both );
-                    sock.Disconnect( true );
+                    // cleanup socket
+                    if ( sock.Connected )
+                    {
+                        sock.Shutdown( SocketShutdown.Both );
+                        sock.Disconnect( true );
+                    }
+                    sock.Close();
                 }
-                sock.Close();
+                catch
+                {
+                    // Shutdown is throwing when the remote end closes the connection before SteamKit attempts to
+                    // so this should be safe as a no-op
+                    // see: https://bitbucket.org/VoiDeD/steamre/issue/41/socketexception-thrown-when-closing
+                }
 
                 sock = null;
             }
