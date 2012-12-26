@@ -2607,29 +2607,6 @@ namespace SteamKit2.GC.Internal
       k_EMsgGCReplay_UploadedToYouTube = 4510
     }
   
-    [global::ProtoBuf.ProtoContract(Name=@"EGCSharedMsg")]
-    public enum EGCSharedMsg
-    {
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgInterGCAchievementAwarded", Value=7001)]
-      k_EMsgInterGCAchievementAwarded = 7001,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgInterGCAchievementAwardedResponse", Value=7002)]
-      k_EMsgInterGCAchievementAwardedResponse = 7002,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgInterGCLoadAchievements", Value=7003)]
-      k_EMsgInterGCLoadAchievements = 7003,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgInterGCLoadAchievementResponse", Value=7004)]
-      k_EMsgInterGCLoadAchievementResponse = 7004,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgInterGCSurgeTest", Value=7005)]
-      k_EMsgInterGCSurgeTest = 7005,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgInterGCProfile", Value=7006)]
-      k_EMsgInterGCProfile = 7006
-    }
-  
     [global::ProtoBuf.ProtoContract(Name=@"EGCBaseProtoObjectTypes")]
     public enum EGCBaseProtoObjectTypes
     {
