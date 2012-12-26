@@ -451,5 +451,117 @@ namespace SteamKit2.GC.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGCToGCMsgMasterAck")]
+  public partial class CGCToGCMsgMasterAck : global::ProtoBuf.IExtensible
+  {
+    public CGCToGCMsgMasterAck() {}
+    
+
+    private uint _dir_index = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"dir_index", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint dir_index
+    {
+      get { return _dir_index; }
+      set { _dir_index = value; }
+    }
+
+    private uint _gc_type = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"gc_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint gc_type
+    {
+      get { return _gc_type; }
+      set { _gc_type = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGCToGCMsgMasterAck_Response")]
+  public partial class CGCToGCMsgMasterAck_Response : global::ProtoBuf.IExtensible
+  {
+    public CGCToGCMsgMasterAck_Response() {}
+    
+
+    private int _eresult = (int)2;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"eresult", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue((int)2)]
+    public int eresult
+    {
+      get { return _eresult; }
+      set { _eresult = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGCToGCMsgRouted")]
+  public partial class CGCToGCMsgRouted : global::ProtoBuf.IExtensible
+  {
+    public CGCToGCMsgRouted() {}
+    
+
+    private uint _msg_type = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"msg_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint msg_type
+    {
+      get { return _msg_type; }
+      set { _msg_type = value; }
+    }
+
+    private ulong _sender_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"sender_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong sender_id
+    {
+      get { return _sender_id; }
+      set { _sender_id = value; }
+    }
+
+    private byte[] _net_message = null;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"net_message", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public byte[] net_message
+    {
+      get { return _net_message; }
+      set { _net_message = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGCToGCMsgRoutedReply")]
+  public partial class CGCToGCMsgRoutedReply : global::ProtoBuf.IExtensible
+  {
+    public CGCToGCMsgRoutedReply() {}
+    
+
+    private uint _msg_type = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"msg_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint msg_type
+    {
+      get { return _msg_type; }
+      set { _msg_type = value; }
+    }
+
+    private byte[] _net_message = null;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"net_message", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public byte[] net_message
+    {
+      get { return _net_message; }
+      set { _net_message = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
 }
 #pragma warning restore 1591

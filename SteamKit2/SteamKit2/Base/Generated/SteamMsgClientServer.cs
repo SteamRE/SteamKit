@@ -754,6 +754,15 @@ namespace SteamKit2.Internal
       set { _cell_id_ping_threshold = value; }
     }
 
+    private bool _use_pics = default(bool);
+    [global::ProtoBuf.ProtoMember(13, IsRequired = false, Name=@"use_pics", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool use_pics
+    {
+      get { return _use_pics; }
+      set { _use_pics = value; }
+    }
+
     private ulong _client_supplied_steamid = default(ulong);
     [global::ProtoBuf.ProtoMember(20, IsRequired = false, Name=@"client_supplied_steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
     [global::System.ComponentModel.DefaultValue(default(ulong))]

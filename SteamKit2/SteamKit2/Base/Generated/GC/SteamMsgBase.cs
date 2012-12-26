@@ -71,6 +71,24 @@ namespace SteamKit2.GC.Internal
       get { return _target_job_name; }
       set { _target_job_name = value; }
     }
+
+    private GCProtoBufMsgSrc _gc_msg_src = GCProtoBufMsgSrc.GCProtoBufMsgSrc_Unspecified;
+    [global::ProtoBuf.ProtoMember(200, IsRequired = false, Name=@"gc_msg_src", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(GCProtoBufMsgSrc.GCProtoBufMsgSrc_Unspecified)]
+    public GCProtoBufMsgSrc gc_msg_src
+    {
+      get { return _gc_msg_src; }
+      set { _gc_msg_src = value; }
+    }
+
+    private uint _gc_dir_index_source = default(uint);
+    [global::ProtoBuf.ProtoMember(201, IsRequired = false, Name=@"gc_dir_index_source", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint gc_dir_index_source
+    {
+      get { return _gc_dir_index_source; }
+      set { _gc_dir_index_source = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -1789,6 +1807,108 @@ namespace SteamKit2.GC.Internal
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCMsgMasterSetDirectory")]
+  public partial class CMsgGCMsgMasterSetDirectory : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCMsgMasterSetDirectory() {}
+    
+
+    private uint _master_dir_index = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"master_dir_index", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint master_dir_index
+    {
+      get { return _master_dir_index; }
+      set { _master_dir_index = value; }
+    }
+    private readonly global::System.Collections.Generic.List<CMsgGCMsgMasterSetDirectory.SubGC> _dir = new global::System.Collections.Generic.List<CMsgGCMsgMasterSetDirectory.SubGC>();
+    [global::ProtoBuf.ProtoMember(2, Name=@"dir", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CMsgGCMsgMasterSetDirectory.SubGC> dir
+    {
+      get { return _dir; }
+    }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"SubGC")]
+  public partial class SubGC : global::ProtoBuf.IExtensible
+  {
+    public SubGC() {}
+    
+
+    private uint _dir_index = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"dir_index", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint dir_index
+    {
+      get { return _dir_index; }
+      set { _dir_index = value; }
+    }
+
+    private string _name = "";
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"name", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string name
+    {
+      get { return _name; }
+      set { _name = value; }
+    }
+
+    private string _box = "";
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"box", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string box
+    {
+      get { return _box; }
+      set { _box = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCMsgMasterSetDirectory_Response")]
+  public partial class CMsgGCMsgMasterSetDirectory_Response : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCMsgMasterSetDirectory_Response() {}
+    
+
+    private int _eresult = (int)2;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"eresult", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue((int)2)]
+    public int eresult
+    {
+      get { return _eresult; }
+      set { _eresult = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"GCProtoBufMsgSrc")]
+    public enum GCProtoBufMsgSrc
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"GCProtoBufMsgSrc_Unspecified", Value=0)]
+      GCProtoBufMsgSrc_Unspecified = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"GCProtoBufMsgSrc_FromSystem", Value=1)]
+      GCProtoBufMsgSrc_FromSystem = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"GCProtoBufMsgSrc_FromSteamID", Value=2)]
+      GCProtoBufMsgSrc_FromSteamID = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"GCProtoBufMsgSrc_FromGC", Value=3)]
+      GCProtoBufMsgSrc_FromGC = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"GCProtoBufMsgSrc_ReplySystem", Value=4)]
+      GCProtoBufMsgSrc_ReplySystem = 4
+    }
   
 }
 #pragma warning restore 1591
