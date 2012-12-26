@@ -139,6 +139,14 @@ namespace SteamLanguageParser
             foreach (PropNode prop in enode.childNodes)
             {
                 lastValue = EmitType(prop.Default);
+
+                if ( prop.Obsolete != null )
+                {
+                    if ( prop.Obsolete.Length > 0 )
+                        sb.AppendLine( padding + "\t[Obsolete( \"" + prop.Obsolete + "\" )]" );
+                    else
+                        sb.AppendLine( padding + "\t[Obsolete]" );
+                }
                 sb.AppendLine(padding + "\t" + prop.Name + " = " + lastValue + ",");
             }
 

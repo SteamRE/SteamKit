@@ -29,6 +29,7 @@ namespace SteamLanguageParser
         public string FlagsOpt { get; set; }
         public Symbol Type { get; set; }
         public Symbol Default { get; set; }
+        public string Obsolete { get; set; }
     }
 
     public class EnumNode : Node
@@ -116,7 +117,7 @@ namespace SteamLanguageParser
                                         Token op2 = Expect(tokens, "operator", ">");
                                     }
 
-                                    Token flag = Optional( tokens, "identifier" );
+                                    Token flag = Optional( tokens, "identifier", "flags" );
 
                                     EnumNode enode = new EnumNode();
                                     enode.Name = name.Value;
@@ -195,6 +196,17 @@ namespace SteamLanguageParser
 
                 Expect(tokens, "terminator", ";");
 
+                Token obsolete = Optional( tokens, "identifier", "obsolete" );
+                if ( obsolete != null )
+                {
+                    pnode.Obsolete = "";
+
+                    Token obsoleteReason = Optional( tokens, "string" );
+
+                    if ( obsoleteReason != null )
+                        pnode.Obsolete = obsoleteReason.Value;
+                }
+
                 parent.childNodes.Add(pnode);
 
                 scope2 = Optional(tokens, "operator", "}");
@@ -229,7 +241,7 @@ namespace SteamLanguageParser
 
             if (peek.Name != name || peek.Value != value)
             {
-                throw new Exception("Expecting " + name);
+                throw new Exception("Expecting " + name + " '" + value + "', but got '" + peek.Value + "'");
             }
 
             return tokens.Dequeue();

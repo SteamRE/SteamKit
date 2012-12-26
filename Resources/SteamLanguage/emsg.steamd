@@ -28,6 +28,9 @@ enum EMsg
 	PingResponse = 140;
 	Stats = 141;
 	RequestFullStatsBlock = 142;
+	LoadDBOCacheItem = 143;
+	LoadDBOCacheItemResponse = 144;
+	InvalidateDBOCacheItems = 145;
 	ServiceMethod = 146;
 	ServiceMethodResponse = 147;
 	
@@ -45,6 +48,14 @@ enum EMsg
 	ContentDescriptionUpdate = 227;
 	TestResetServer = 228;
 	UniverseChanged = 229;
+	ShellConfigInfoUpdate = 230;
+	RequestWindowsEventLogEntries = 233;
+	ProvideWindowsEventLogEntries = 234;
+	ShellSearchLogs = 235;
+	ShellSearchLogsResponse = 236;
+	ShellCheckWindowsUpdates = 237;
+	ShellCheckWindowsUpdatesResponse = 238;
+	ShellFlushUserLicenseCache = 239;
 	
 	BaseGM = 300;
 	Heartbeat = 300;
@@ -61,6 +72,12 @@ enum EMsg
 	PhysicalBoxInventory = 321;
 	UpdateConfigFile = 322;
 	TestInitDB = 323;
+	GMWriteConfigToSQL = 324;
+	GMLoadActivationCodes = 325;
+	GMQueueForFBS = 326;
+	GMSchemaConversionResults = 327;
+	GMSchemaConversionResultsResponse = 328;
+	GMWriteShellFailureToSQL = 329;
 	
 	BaseAIS = 400;
 	AISRefreshContentDescription = 401;
@@ -83,6 +100,14 @@ enum EMsg
 	AISGetMarketingTreatmentsResponse = 420;
 	AISRequestMarketingTreatmentUpdate = 421;
 	AISTestAddPackage = 422;
+	AIGetAppGCFlags = 423;
+	AIGetAppGCFlagsResponse = 424;
+	AIGetAppList = 425;
+	AIGetAppListResponse = 426;
+	AIGetAppInfo = 427;
+	AIGetAppInfoResponse = 428;
+	AISGetCouponDefinition = 429;
+	AISGetCouponDefinitionResponse = 430;
 	
 	BaseAM = 500;
 	AMUpdateUserBanRequest = 504;
@@ -176,6 +201,7 @@ enum EMsg
 	VSChallengeResultText = 608;
 	VSReportLingerer = 609;
 	VSRequestManagedChallenge = 610;
+	VSLoadDBFinished = 611;
 	
 	BaseDRMS = 625;
 	DRMBuildBlobRequest = 628;
@@ -205,7 +231,7 @@ enum EMsg
 	ClientAnonLogOn_Deprecated = 702;
 	ClientHeartBeat = 703;
 	ClientVACResponse = 704;
-	ClientGamesPlayed_obsolete = 705;
+	ClientGamesPlayed_obsolete = 705; obsolete
 	ClientLogOff = 706;
 	ClientNoUDPConnectivity = 707;
 	ClientInformOfCreateAccount = 708;
@@ -218,16 +244,16 @@ enum EMsg
 	ClientChangeStatus = 716;
 	ClientVacStatusResponse = 717;
 	ClientFriendMsg = 718;
-	ClientGameConnect_obsolete = 719;
-	ClientGamesPlayed2_obsolete = 720;
-	ClientGameEnded_obsolete = 721;
+	ClientGameConnect_obsolete = 719; obsolete
+	ClientGamesPlayed2_obsolete = 720; obsolete
+	ClientGameEnded_obsolete = 721; obsolete
 	ClientGetFinalPrice = 722;
 	ClientSystemIM = 726;
 	ClientSystemIMAck = 727;
 	ClientGetLicenses = 728;
 	ClientCancelLicense = 729;
 	ClientGetLegacyGameKey = 730;
-	ClientContentServerLogOn_Deprecated = 731;
+	ClientContentServerLogOn_Deprecated = 731; obsolete
 	ClientAckVACBan2 = 732;
 	ClientAckMessageByGID = 735;
 	ClientGetPurchaseReceipts = 736;
@@ -287,7 +313,7 @@ enum EMsg
 	ClientChatInvite = 800;
 	ClientJoinChat = 801;
 	ClientChatMemberInfo = 802;
-	ClientLogOnWithCredentials_Deprecated = 803;
+	ClientLogOnWithCredentials_Deprecated = 803; obsolete
 	ClientPasswordChangeResponse = 805;
 	ClientChatEnter = 807;
 	ClientFriendRemovedFromSource = 808;
@@ -377,6 +403,7 @@ enum EMsg
 	AdminGCCommand = 1024;
 	AdminGCGetCommandList = 1025;
 	AdminGCGetCommandListResponse = 1026;
+	FBSConnectionData = 1027;
 	
 	BaseFBS = 1100;
 	FBSReqVersion = 1100;
@@ -392,7 +419,7 @@ enum EMsg
 	FBSRebootBox = 1110;
 	FBSSetBigBrotherMode = 1111;
 	FBSMinidumpServer = 1112;
-	FBSSetShellCount = 1113;
+	FBSSetShellCount_obsolete = 1113; obsolete
 	FBSDeployHotFixPackage = 1114;
 	FBSDeployHotFixResponse = 1115;
 	FBSDownloadHotFix = 1116;
@@ -400,6 +427,19 @@ enum EMsg
 	FBSUpdateTargetConfigFile = 1118;
 	FBSApplyAccountCred = 1119;
 	FBSApplyAccountCredResponse = 1120;
+	FBSSetShellCount = 1121;
+	FBSTerminateShell = 1122;
+	FBSQueryGMForRequest = 1123;
+	FBSQueryGMResponse = 1124;
+	FBSTerminateZombies = 1125;
+	FBSInfoFromBootstrapper = 1126;
+	FBSRebootBoxResponse = 1127;
+	FBSBootstrapperPackageRequest = 1128;
+	FBSBootstrapperPackageResponse = 1129;
+	FBSBootstrapperGetPackageChunk = 1130;
+	FBSBootstrapperGetPackageChunkResponse = 1131;
+	FBSBootstrapperPackageTransferProgress = 1132;
+	FBSRestartBootstrapper = 1133;
 	
 	BaseFileXfer = 1200;
 	FileXferRequest = 1200;
@@ -419,7 +459,8 @@ enum EMsg
 	BaseBS = 1400;
 	BSPurchaseStart = 1401;
 	BSPurchaseResponse = 1402;
-	BSSettleStart = 1404;
+	BSSettleStart = 1404; obsolete "renamed to BSSettleNOVA"
+	BSSettleNOVA = 1404;
 	BSSettleComplete = 1406;
 	BSBannedRequest = 1407;
 	BSInitPayPalTxn = 1408;
@@ -439,8 +480,10 @@ enum EMsg
 	BSQueryGCBankXferTxn = 1423;
 	BSQueryGCBankXferTxnResponse = 1424;
 	BSCommitGCTxn = 1425;
-	BSQueryGCOrderStatus = 1426;
-	BSQueryGCOrderStatusResponse = 1427;
+	BSQueryGCOrderStatus = 1426; obsolete "renamed to BSQueryTransactionStatus"
+	BSQueryTransactionStatus = 1426;
+	BSQueryGCOrderStatusResponse = 1427; obsolete "renamed to BSQueryTransactionStatusResponse"
+	BSQueryTransactionStatusResponse = 1427;
 	BSQueryCBOrderStatus = 1428;
 	BSQueryCBOrderStatusResponse = 1429;
 	BSRunRedFlagReport = 1430;
@@ -450,9 +493,63 @@ enum EMsg
 	BSQueryTxnExtendedInfoResponse = 1434;
 	BSUpdateConversionRates = 1435;
 	BSProcessUSBankReports = 1436;
-	BSPurchaseMicroTxn = 1437;
-	BSPurchaseMicroTxnResponse = 1438;
+	BSPurchaseMicroTxn = 1437; obsolete "renamed to BSPurchaseRunFraudChecks"
+	BSPurchaseRunFraudChecks = 1437;
+	BSPurchaseMicroTxnResponse = 1438; obsolete "renamed to BSPurchaseRunFraudChecksResponse"
+	BSPurchaseRunFraudChecksResponse = 1438;
 	BSStartShippingJobs = 1439;
+	BSQueryBankInformation = 1440;
+	BSQueryBankInformationResponse = 1441;
+	BSValidateXsollaSignature = 1445;
+	BSValidateXsollaSignatureResponse = 1446;
+	BSQiwiWalletInvoice = 1448;
+	BSQiwiWalletInvoiceResponse = 1449;
+	BSUpdateInventoryFromProPack = 1450;
+	BSUpdateInventoryFromProPackResponse = 1451;
+	BSSendShippingRequest = 1452;
+	BSSendShippingRequestResponse = 1453;
+	BSGetProPackOrderStatus = 1454;
+	BSGetProPackOrderStatusResponse = 1455;
+	BSCheckJobRunning = 1456;
+	BSCheckJobRunningResponse = 1457;
+	BSResetPackagePurchaseRateLimit = 1458;
+	BSResetPackagePurchaseRateLimitResponse = 1459;
+	BSUpdatePaymentData = 1460;
+	BSUpdatePaymentDataResponse = 1461;
+	BSGetBillingAddress = 1462;
+	BSGetBillingAddressResponse = 1463;
+	BSGetCreditCardInfo = 1464;
+	BSGetCreditCardInfoResponse = 1465;
+	BSRemoveExpiredPaymentData = 1468;
+	BSRemoveExpiredPaymentDataResponse = 1469;
+	BSConvertToCurrentKeys = 1470;
+	BSConvertToCurrentKeysResponse = 1471;
+	BSInitPurchase = 1472;
+	BSInitPurchaseResponse = 1473;
+	BSCompletePurchase = 1474;
+	BSCompletePurchaseResponse = 1475;
+	BSPruneCardUsageStats = 1476;
+	BSPruneCardUsageStatsResponse = 1477;
+	BSStoreBankInformation = 1478;
+	BSStoreBankInformationResponse = 1479;
+	BSVerifyPOSAKey = 1480;
+	BSVerifyPOSAKeyResponse = 1481;
+	BSReverseRedeemPOSAKey = 1482;
+	BSReverseRedeemPOSAKeyResponse = 1483;
+	BSQueryFindCreditCard = 1484;
+	BSQueryFindCreditCardResponse = 1485;
+	BSStatusInquiryPOSAKey = 1486;
+	BSStatusInquiryPOSAKeyResponse = 1487;
+	BSValidateMoPaySignature = 1488;
+	BSValidateMoPaySignatureResponse = 1489;
+	BSMoPayConfirmProductDelivery = 1490;
+	BSMoPayConfirmProductDeliveryResponse = 1491;
+	BSGenerateMoPayMD5 = 1492;
+	BSGenerateMoPayMD5Response = 1493;
+	BSBoaCompraConfirmProductDelivery = 1494;
+	BSBoaCompraConfirmProductDeliveryResponse = 1495;
+	BSGenerateBoaCompraMD5 = 1496;
+	BSGenerateBoaCompraMD5Response = 1497;
 	
 	BaseATS = 1500;
 	ATSStartStressTest = 1501;
@@ -481,7 +578,8 @@ enum EMsg
 	DPUniquePlayersStat = 1603;
 	DPVacInfractionStats = 1605;
 	DPVacBanStats = 1606;
-	DPCoplayStats = 1607;
+	DPCoplayStats = 1607; obsolete "renamed to DPBlockingStats"
+	DPBlockingStats = 1607;
 	DPNatTraversalStats = 1608;
 	DPSteamUsageEvent = 1609;
 	DPVacCertBanStats = 1610;
@@ -493,6 +591,14 @@ enum EMsg
 	DPGetPlayerCountResponse = 1616;
 	DPGameServersPlayersStats = 1617;
 	DPDownloadRateStatistics = 1618;
+	DPFacebookStatistics = 1619;
+	ClientDPCheckSpecialSurvey = 1620;
+	ClientDPCheckSpecialSurveyResponse = 1621;
+	ClientDPSendSpecialSurveyResponse = 1622;
+	ClientDPSendSpecialSurveyResponseReply = 1623;
+	DPStoreSaleStatistics = 1624;
+	ClientDPUpdateAppJobReport = 1625;
+	DPUpdateContentEvent = 1626;
 	
 	BaseCM = 1700;
 	CMSetAllowState = 1701;
@@ -530,9 +636,19 @@ enum EMsg
 	GCValidateSession = 2214;
 	GCValidateSessionResponse = 2215;
 	GCCmdStatus = 2216;
-	GCRegisterWebInterfaces = 2217;
-	GCGetAccountDetails = 2218;
+	GCRegisterWebInterfaces = 2217; obsolete
+	GCRegisterWebInterfaces_Deprecated = 2217; obsolete
+	GCGetAccountDetails = 2218; obsolete
+	GCGetAccountDetails_DEPRECATED = 2218; obsolete
 	GCInterAppMessage = 2219;
+	GCGetEmailTemplate = 2220;
+	GCGetEmailTemplateResponse = 2221;
+	ISRelayToGCH = 2222;
+	GCHRelayClientToIS = 2223;
+	GCHUpdateSession = 2224;
+	GCHRequestUpdateSession = 2225;
+	GCHRequestStatus = 2226;
+	GCHRequestStatusResponse = 2227;
 	
 	BaseP2P = 2500;
 	P2PIntroducerMessage = 2502;
@@ -542,6 +658,9 @@ enum EMsg
 	SMHourlyReport = 2903;
 	SMFishingReport = 2904;
 	SMPartitionRenames = 2905;
+	SMMonitorSpace = 2906;
+	SMGetSchemaConversionResults = 2907;
+	SMGetSchemaConversionResultsResponse = 2908;
 	
 	BaseTest = 3000;
 	FailServer = 3000;
@@ -566,6 +685,7 @@ enum EMsg
 	FTSGetGSPlayStatsResponse = 3115;
 	FTSGetGSPlayStatsForServer = 3116;
 	FTSGetGSPlayStatsForServerResponse = 3117;
+	FTSReportIPUpdates = 3118;
 	
 	BaseCCSRange = 3150;
 	CCSGetComments = 3151;
@@ -578,8 +698,10 @@ enum EMsg
 	CCSNotifyCommentCount = 3158;
 	CCSGetCommentsForNews = 3159;
 	CCSGetCommentsForNewsResponse = 3160;
-	CCSDeleteAllComments = 3161;
-	CCSDeleteAllCommentsResponse = 3162;
+	CCSDeleteAllComments = 3161; obsolete "renamed to CCSDeleteAllCommentsByAuthor"
+	CCSDeleteAllCommentsByAuthor = 3161;
+	CCSDeleteAllCommentsResponse = 3162; obsolete "renamed to CCSDeleteAllCommentsByAuthorResponse"
+	CCSDeleteAllCommentsByAuthorResponse = 3162;
 	
 	BaseLBSRange = 3200;
 	LBSSetScore = 3201;
@@ -601,6 +723,28 @@ enum EMsg
 	OGSEndSession = 3403;
 	OGSEndSessionResponse = 3404;
 	OGSWriteAppSessionRow = 3406;
+
+	BaseBRP = 3600;
+	BRPStartShippingJobs = 3601;
+	BRPProcessUSBankReports = 3602;
+	BRPProcessGCReports = 3603;
+	BRPProcessPPReports = 3604;
+	BRPSettleNOVA = 3605;
+	BRPSettleCB = 3606;
+	BRPCommitGC = 3607;
+	BRPCommitGCResponse = 3608;
+	BRPFindHungTransactions = 3609;
+	BRPCheckFinanceCloseOutDate = 3610;
+	BRPProcessLicenses = 3611;
+	BRPProcessLicensesResponse = 3612;
+	BRPRemoveExpiredPaymentData = 3613;
+	BRPRemoveExpiredPaymentDataResponse = 3614;
+	BRPConvertToCurrentKeys = 3615;
+	BRPConvertToCurrentKeysResponse = 3616;
+	BRPPruneCardUsageStats = 3617;
+	BRPPruneCardUsageStatsResponse = 3618;
+	BRPCheckActivationCodes = 3619;
+	BRPCheckActivationCodesResponse = 3620;
 	
 	BaseAMRange2 = 4000;
 	AMCreateChat = 4001;
@@ -890,6 +1034,53 @@ enum EMsg
 	AMStoreUserStatsResponse = 4312;
 	AMGameServerUpdate = 4331;
 	AMGameServerRemove = 4332;
+	AMGetPaypalAgreements = 4333;
+	AMGetPaypalAgreementsResponse = 4334;
+	AMGameServerPlayerCompatibilityCheck = 4335;
+	AMGameServerPlayerCompatibilityCheckResponse = 4336;
+	AMRenewLicense = 4337;
+	AMGetAccountCommunityBanInfo = 4338;
+	AMGetAccountCommunityBanInfoResponse = 4339;
+	AMGameServerAccountChangePassword = 4340;
+	AMGameServerAccountDeleteAccount = 4341;
+	AMRenewLicenseResponse = 4342;
+	AMSendEmail = 4343;
+	AMXsollaPayment = 4344;
+	AMXsollaPaymentResponse = 4345;
+	AMAcctAllowedToPurchase = 4346;
+	AMAcctAllowedToPurchaseResponse = 4347;
+	AMSwapXsollaDeposit = 4348;
+	AMSwapXsollaDepositResponse = 4349;
+	AMSetUserGiftUnowned = 4350;
+	AMSetUserGiftUnownedResponse = 4351;
+	AMClaimUnownedUserGift = 4352;
+	AMClaimUnownedUserGiftResponse = 4353;
+	AMSetClanName = 4354;
+	AMSetClanNameResponse = 4355;
+	AMGrantCoupon = 4356;
+	AMGrantCouponResponse = 4357;
+	AMIsPackageRestrictedInUserCountry = 4358;
+	AMIsPackageRestrictedInUserCountryResponse = 4359;
+	AMHandlePendingTransactionResponse = 4360;
+	AMGrantGuestPasses2 = 4361;
+	AMGrantGuestPasses2Response = 4362;
+	AMSessionQuery = 4363;
+	AMSessionQueryResponse = 4364;
+	AMGetPlayerBanDetails = 4365;
+	AMGetPlayerBanDetailsResponse = 4366;
+	AMFinalizePurchase = 4367;
+	AMFinalizePurchaseResponse = 4368;
+	AMPersonaChangeResponse = 4372;
+	AMGetClanDetailsForForumCreation = 4373;
+	AMGetClanDetailsForForumCreationResponse = 4374;
+	AMGetPendingNotificationCount = 4375;
+	AMGetPendingNotificationCountResponse = 4376;
+	AMPasswordHashUpgrade = 4377;
+	AMMoPayPayment = 4378;
+	AMMoPayPaymentResponse = 4379;
+	AMBoaCompraPayment = 4380;
+	AMBoaCompraPaymentResponse = 4381;
+	AMExpireCaptchaByGID = 4382;
 	
 	BasePSRange = 5000;
 	PSCreateShoppingCart = 5001;
@@ -942,6 +1133,15 @@ enum EMsg
 	UFSMigrateFileResponse = 5239;
 	UFSGetUGCURLs = 5240;
 	UFSGetUGCURLsResponse = 5241;
+	UFSHttpUploadFileFinishRequest = 5242;
+	UFSHttpUploadFileFinishResponse = 5243;
+	UFSDownloadStartRequest = 5244;
+	UFSDownloadStartResponse = 5245;
+	UFSDownloadChunkRequest = 5246;
+	UFSDownloadChunkResponse = 5247;
+	UFSDownloadFinishRequest = 5248;
+	UFSDownloadFinishResponse = 5249;
+	UFSFlushURLCache = 5250;
 	
 	BaseClient2 = 5400;
 	ClientRequestForgottenPasswordEmail = 5401;
@@ -952,7 +1152,7 @@ enum EMsg
 	ClientCreateAccount2 = 5406;
 	ClientInformOfResetForgottenPassword = 5407;
 	ClientInformOfResetForgottenPasswordResponse = 5408;
-	ClientAnonUserLogOn_Deprecated = 5409;
+	ClientAnonUserLogOn_Deprecated = 5409; obsolete
 	ClientGamesPlayedWithDataBlob = 5410;
 	ClientUpdateUserGameInfo = 5411;
 	ClientFileToDownload = 5412;
@@ -1000,7 +1200,7 @@ enum EMsg
 	ClientCreateAccount3 = 5462;
 	ClientNewLoginKey = 5463;
 	ClientNewLoginKeyAccepted = 5464;
-	ClientLogOnWithHash_Deprecated = 5465;
+	ClientLogOnWithHash_Deprecated = 5465; obsolete
 	ClientStoreUserStats2 = 5466;
 	ClientStatsUpdated = 5467;
 	ClientActivateOEMLicense = 5468;
@@ -1092,6 +1292,12 @@ enum EMsg
 	AMClientRemoveFriendFromGroupResponse = 5569;
 	ClientAMGetPersonaNameHistory = 5570;
 	ClientAMGetPersonaNameHistoryResponse = 5571;
+	ClientRequestFreeLicense = 5572;
+	ClientRequestFreeLicenseResponse = 5573;
+	ClientDRMDownloadRequestWithCrashData = 5574;
+	ClientAuthListAck = 5575;
+	ClientItemAnnouncements = 5576;
+	ClientRequestItemAnnouncements = 5577;
 	ClientFriendMsgEchoToSender = 5578;
 	ClientChangeSteamGuardOptions = 5579;
 	ClientChangeSteamGuardOptionsResponse = 5580;
@@ -1131,6 +1337,8 @@ enum EMsg
 	DFSRequestPingback2 = 5615;
 	DFSResponsePingback2 = 5616;
 	ClientDFSDownloadStatus = 5617;
+	DFSStartTransfer = 5618;
+	DFSTransferComplete = 5619;
 	
 	BaseMDS = 5800;
 	ClientMDSLoginRequest = 5801;
@@ -1173,13 +1381,18 @@ enum EMsg
 	ClientMDSSetAppBuildLiveResponse = 5841;
 	ClientMDSGetPrevDepotBuild = 5842;
 	ClientMDSGetPrevDepotBuildResponse = 5843;
+	MDSToCSFlushChunk = 5844;
 	
 	CSBase = 6200;
+	CSPing = 6201;
+	CSPingResponse = 6202;
 	
 	GMSBase = 6400;
 	GMSGameServerReplicate = 6401;
 	ClientGMSServerQuery = 6403;
 	GMSClientServerQueryResponse = 6404;
+	AMGMSGameServerUpdate = 6405;
+	AMGMSGameServerRemove = 6406;
 	GameServerOutOfDate = 6407;
 	
 	MMSBase = 6600;
@@ -1204,6 +1417,8 @@ enum EMsg
 	ClientMMSUserJoinedLobby = 6619;
 	ClientMMSUserLeftLobby = 6620;
 	ClientMMSInviteToLobby = 6621;
+	ClientMMSFlushFrenemyListCache = 6622;
+	ClientMMSFlushFrenemyListCacheResponse = 6623;
 	ClientMMSSetLobbyLinked = 6624;
 	
 	NonStdMsgBase = 6800;
@@ -1227,12 +1442,19 @@ enum EMsg
 	ClientUDSInviteToGame = 7005;
 	UDSFindSession = 7006;
 	UDSFindSessionResponse = 7007;
+
+	MPASBase = 7100;
+	MPASVacBanReset = 7101;
 	
 	KGSBase = 7200;
 	KGSAllocateKeyRange = 7201;
 	KGSAllocateKeyRangeResponse = 7202;
 	KGSGenerateKeys = 7203;
 	KGSGenerateKeysResponse = 7204;
+	KGSRemapKeys = 7205;
+	KGSRemapKeysResponse = 7206;
+	KGSGenerateGameStopWCKeys = 7207;
+	KGSGenerateGameStopWCKeysResponse = 7208;
 	
 	UCMBase = 7300;
 	ClientUCMAddScreenshot = 7301;
@@ -1259,14 +1481,60 @@ enum EMsg
 	ClientUCMUnsubscribePublishedFileResponse = 7324;
 	ClientUCMUpdatePublishedFile = 7325;
 	ClientUCMUpdatePublishedFileResponse = 7326;
+	UCMUpdatePublishedFile = 7327;
+	UCMUpdatePublishedFileResponse = 7328;
+	UCMDeletePublishedFile = 7329;
+	UCMDeletePublishedFileResponse = 7330;
+	UCMUpdatePublishedFileStat = 7331;
+	UCMUpdatePublishedFileBan = 7332;
+	UCMUpdatePublishedFileBanResponse = 7333;
+	UCMUpdateTaggedScreenshot = 7334;
+	UCMAddTaggedScreenshot = 7335;
+	UCMRemoveTaggedScreenshot = 7336;
+	UCMReloadPublishedFile = 7337;
+	UCMReloadUserFileListCaches = 7338;
+	UCMPublishedFileReported = 7339;
+	UCMUpdatePublishedFileIncompatibleStatus = 7340;
+	UCMPublishedFilePreviewAdd = 7341;
+	UCMPublishedFilePreviewAddResponse = 7342;
+	UCMPublishedFilePreviewRemove = 7343;
+	UCMPublishedFilePreviewRemoveResponse = 7344;
+	UCMPublishedFilePreviewChangeSortOrder = 7345;
+	UCMPublishedFilePreviewChangeSortOrderResponse = 7346;
 	ClientUCMPublishedFileSubscribed = 7347;
 	ClientUCMPublishedFileUnsubscribed = 7348;
+	UCMPublishedFileSubscribed = 7349;
+	UCMPublishedFileUnsubscribed = 7350;
+	UCMPublishFile = 7351;
+	UCMPublishFileResponse = 7352;
+	UCMPublishedFileChildAdd = 7353;
+	UCMPublishedFileChildAddResponse = 7354;
+	UCMPublishedFileChildRemove = 7355;
+	UCMPublishedFileChildRemoveResponse = 7356;
+	UCMPublishedFileChildChangeSortOrder = 7357;
+	UCMPublishedFileChildChangeSortOrderResponse = 7358;
+	UCMPublishedFileParentChanged = 7359;
 	ClientUCMGetPublishedFilesForUser = 7360;
 	ClientUCMGetPublishedFilesForUserResponse = 7361;
+	UCMGetPublishedFilesForUser = 7362;
+	UCMGetPublishedFilesForUserResponse = 7363;
 	ClientUCMSetUserPublishedFileAction = 7364;
 	ClientUCMSetUserPublishedFileActionResponse = 7365;
 	ClientUCMEnumeratePublishedFilesByUserAction = 7366;
 	ClientUCMEnumeratePublishedFilesByUserActionResponse = 7367;
+	ClientUCMPublishedFileDeleted = 7368;
+	UCMGetUserSubscribedFiles = 7369;
+	UCMGetUserSubscribedFilesResponse = 7370;
+	UCMFixStatsPublishedFile = 7371;
+	UCMDeleteOldScreenshot = 7372;
+	UCMDeleteOldScreenshotResponse = 7373;
+	UCMDeleteOldVideo = 7374;
+	UCMDeleteOldVideoResponse = 7375;
+	UCMUpdateOldScreenshotPrivacy = 7376;
+	UCMUpdateOldScreenshotPrivacyResponse = 7377;
+	ClientUCMEnumerateUserSubscribedFilesWithUpdates = 7378;
+	ClientUCMEnumerateUserSubscribedFilesWithUpdatesResponse = 7379;
+	UCMPublishedFileContentUpdated = 7380;
 	
 	FSBase = 7500;
 	ClientRichPresenceUpload = 7501;
@@ -1274,12 +1542,23 @@ enum EMsg
 	ClientRichPresenceInfo = 7503;
 	FSRichPresenceRequest = 7504;
 	FSRichPresenceResponse = 7505;
+	FSComputeFrenematrix = 7506;
+	FSComputeFrenematrixResponse = 7507;
+	FSPlayStatusNotification = 7508;
+	FSPublishPersonaStatus = 7509;
+	FSAddOrRemoveFollower = 7510;
+	FSAddOrRemoveFollowerResponse = 7511;
+	FSUpdateFollowingList = 7512;
+	FSCommentNotification = 7513;
+	FSCommentNotificationViewed = 7514;
 	ClientFSGetFollowerCount = 7515;
 	ClientFSGetFollowerCountResponse = 7516;
 	ClientFSGetIsFollowing = 7517;
 	ClientFSGetIsFollowingResponse = 7518;
 	ClientFSEnumerateFollowingList = 7519;
 	ClientFSEnumerateFollowingListResponse = 7520;
+	FSGetPendingNotificationCount = 7521;
+	FSGetPendingNotificationCountResponse = 7522;
 	
 	DRMRange2 = 7600;
 	CEGVersionSetEnableDisableRequest = 7600;
@@ -1288,6 +1567,8 @@ enum EMsg
 	CEGPropStatusDRMSResponse = 7603;
 	CEGWhackFailureReportRequest = 7604;
 	CEGWhackFailureReportResponse = 7605;
+	DRMSFetchVersionSet = 7606;
+	DRMSFetchVersionSetResponse = 7607;
 	
 	EconBase = 7700;
 	EconTrading_InitiateTradeRequest = 7701;
@@ -1296,14 +1577,52 @@ enum EMsg
 	EconTrading_InitiateTradeResult = 7704;
 	EconTrading_StartSession = 7705;
 	EconTrading_CancelTradeRequest = 7706;
+	EconFlushInventoryCache = 7707;
+	EconFlushInventoryCacheResponse = 7708;
+	EconCDKeyProcessTransaction = 7711;
+	EconCDKeyProcessTransactionResponse = 7712;
+	EconGetErrorLogs = 7713;
+	EconGetErrorLogsResponse = 7714;
 	
 	RMRange = 7800;
 	RMTestVerisignOTP = 7800;
 	RMTestVerisignOTPResponse = 7801;
 	RMDeleteMemcachedKeys = 7803;
+	RMRemoteInvoke = 7804;
 	
+	UGSBase = 7900;
 	ClientUGSGetGlobalStats = 7901;
 	ClientUGSGetGlobalStatsResponse = 7902;
+
+	StoreBase = 8000;
+	StoreUpdateRecommendationCount = 8000;
+
+	UMQBase = 8100;
+	UMQLogonRequest = 8100;
+	UMQLogonResponse = 8101;
+	UMQLogoffRequest = 8102;
+	UMQLogoffResponse = 8103;
+	UMQSendChatMessage = 8104;
+	UMQIncomingChatMessage = 8105;
+	UMQPoll = 8106;
+	UMQPollResults = 8107;
+	UMQ2AM_ClientMsgBatch = 8108;
+	UMQEnqueueMobileSalePromotions = 8109;
+	UMQEnqueueMobileAnnouncements = 8110;
+
+	WorkshopBase = 8200;
+	WorkshopAcceptTOSRequest = 8200;
+	WorkshopAcceptTOSResponse = 8201;
+
+	WebAPIBase = 8300;
+	WebAPIValidateOAuth2Token = 8300;
+	WebAPIValidateOAuth2TokenResponse = 8301;
+	WebAPIInvalidateTokensForAccount = 8302;
+	WebAPIRegisterGCInterfaces = 8303;
+
+	BackpackBase = 8400;
+	BackpackAddToCurrency = 8401;
+	BackpackAddToCurrencyResponse = 8402;
 
 	CREBase = 8500;
 	CRERankByTrend = 8501;
@@ -1318,6 +1637,21 @@ enum EMsg
 	CREGetUserPublishedItemVoteDetailsResponse = 8510;
 	CREEnumeratePublishedFiles = 8511;
 	CREEnumeratePublishedFilesResponse = 8512;
+	CREPublishedFileVoteAdded = 8513;
+
+	SecretsBase = 8600;
+	SecretsRequestCredentialPair = 8600;
+	SecretsCredentialPairResponse = 8601;
+	SecretsRequestServerIdentity = 8602;
+	SecretsServerIdentityResponse = 8603;
+	SecretsUpdateServerIdentities = 8604;
+
+	BoxMonitorBase = 8700;
+	BoxMonitorReportRequest = 8700;
+	BoxMonitorReportResponse = 8701;
+
+	LogsinkBase = 8800;
+	LogsinkWriteReport = 8800;
 	
 	PICSBase = 8900;
 	PICSChangesSinceRequest = 8901;
@@ -1326,4 +1660,47 @@ enum EMsg
 	PICSProductInfoResponse = 8904;
 	PICSAccessTokenRequest = 8905;
 	PICSAccessTokenResponse = 8906;
+
+	WorkerProcess = 9000;
+	WorkerProcessPingRequest = 9000;
+	WorkerProcessPingResponse = 9001;
+	WorkerProcessShutdown = 9002;
+
+	DRMWorkerProcess = 9100;
+	DRMWorkerProcessDRMAndSign = 9100;
+	DRMWorkerProcessDRMAndSignResponse = 9101;
+	DRMWorkerProcessSteamworksInfoRequest = 9102;
+	DRMWorkerProcessSteamworksInfoResponse = 9103;
+	DRMWorkerProcessInstallDRMDLLRequest = 9104;
+	DRMWorkerProcessInstallDRMDLLResponse = 9105;
+	DRMWorkerProcessSecretIdStringRequest = 9106;
+	DRMWorkerProcessSecretIdStringResponse = 9107;
+	DRMWorkerProcessGetDRMGuidsFromFileRequest = 9108;
+	DRMWorkerProcessGetDRMGuidsFromFileResponse = 9109;
+	DRMWorkerProcessInstallProcessedFilesRequest = 9110;
+	DRMWorkerProcessInstallProcessedFilesResponse = 9111;
+	DRMWorkerProcessExamineBlobRequest = 9112;
+	DRMWorkerProcessExamineBlobResponse = 9113;
+	DRMWorkerProcessDescribeSecretRequest = 9114;
+	DRMWorkerProcessDescribeSecretResponse = 9115;
+	DRMWorkerProcessBackfillOriginalRequest = 9116;
+	DRMWorkerProcessBackfillOriginalResponse = 9117;
+	DRMWorkerProcessValidateDRMDLLRequest = 9118;
+	DRMWorkerProcessValidateDRMDLLResponse = 9119;
+	DRMWorkerProcessValidateFileRequest = 9120;
+	DRMWorkerProcessValidateFileResponse = 9121;
+	DRMWorkerProcessSplitAndInstallRequest = 9122;
+	DRMWorkerProcessSplitAndInstallResponse = 9123;
+	DRMWorkerProcessGetBlobRequest = 9124;
+	DRMWorkerProcessGetBlobResponse = 9125;
+	DRMWorkerProcessEvaluateCrashRequest = 9126;
+	DRMWorkerProcessEvaluateCrashResponse = 9127;
+	DRMWorkerProcessAnalyzeFileRequest = 9128;
+	DRMWorkerProcessAnalyzeFileResponse = 9129;
+
+	TestWorkerProcess = 9200;
+	TestWorkerProcessLoadUnloadModuleRequest = 9200;
+	TestWorkerProcessLoadUnloadModuleResponse = 9201;
+	TestWorkerProcessServiceModuleCallRequest = 9202;
+	TestWorkerProcessServiceModuleCallResponse = 9203;
 };
