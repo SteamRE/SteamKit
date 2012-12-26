@@ -69,11 +69,31 @@ namespace SteamKit2
             public uint CellID { get; private set; }
 
             /// <summary>
+            /// Gets the Steam2 CellID ping threshold.
+            /// </summary>
+            public uint CellIDPingThreshold { get; private set; }
+
+            /// <summary>
             /// Gets the Steam2 ticket.
             /// This is used for authenticated content downloads in Steam2.
             /// This field will only be set when <see cref="LogOnDetails.RequestSteam2Ticket"/> has been set to <c>true</c>.
             /// </summary>
             public Steam2Ticket Steam2Ticket { get; private set; }
+
+            /// <summary>
+            /// Gets a value indicating whether the client should use PICS.
+            /// </summary>
+            public bool UsePICS { get; private set; }
+
+            /// <summary>
+            /// Gets the WebAPI authentication user nonce.
+            /// </summary>
+            public string WebAPIUserNonce { get; private set; }
+
+            /// <summary>
+            /// Gets the IP country code.
+            /// </summary>
+            public string IPCountryCode { get; private set; }
 
 
 #if STATIC_CALLBACKS
@@ -100,9 +120,16 @@ namespace SteamKit2
                 this.EmailDomain = resp.email_domain;
 
                 this.CellID = resp.cell_id;
+                this.CellIDPingThreshold = resp.cell_id_ping_threshold;
 
                 if ( resp.steam2_ticket != null )
                     this.Steam2Ticket = new Steam2Ticket( resp.steam2_ticket );
+
+                this.IPCountryCode = resp.ip_country_code;
+
+                this.WebAPIUserNonce = resp.webapi_authenticate_user_nonce;
+
+                this.UsePICS = resp.use_pics;
             }
         }
 
