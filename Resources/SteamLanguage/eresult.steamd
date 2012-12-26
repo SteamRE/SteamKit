@@ -75,4 +75,7 @@ enum EResult
 	IPLoginRestrictionFailed = 72;
 	AccountLocked = 73;
 	AccountLogonDeniedVerifiedEmailRequired = 74;
+	NoMatchingURL = 75;
+	BadResponse = 76;
+	RequirePasswordReEntry = 77;
 };

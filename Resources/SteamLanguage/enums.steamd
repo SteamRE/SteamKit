@@ -7,9 +7,9 @@ enum EUniverse
 	Beta = 2;
 	Internal = 3;
 	Dev = 4;
-	RC = 5;
+	RC = 5; obsolete "Universe no longer exists"
 
-	Max = 6;
+	Max = 5;
 };
 
 enum EChatEntryType
@@ -22,6 +22,10 @@ enum EChatEntryType
 	Emote = 4;
 	LobbyGameStart = 5;
 	LeftConversation = 6;
+	Entered = 7;
+	WasKicked = 8;
+	WasBanned = 9;
+	Disconnected = 10;
 };
 
 enum EPersonaState
@@ -33,6 +37,7 @@ enum EPersonaState
 	Snooze = 4;
 	LookingToTrade = 5;
 	LookingToPlay = 6;
+	Max = 7;
 };
 
 enum EAccountType
@@ -58,14 +63,16 @@ enum EFriendRelationship
 	None = 0;
 	
 	Blocked = 1;
-	PendingInvitee = 2;
+	PendingInvitee = 2; obsolete "renamed to RequestRecipient"
 	RequestRecipient = 2;
-	RequestInitiator = 4;
-	PendingInviter = 4;
 	Friend = 3;
+	RequestInitiator = 4;
+	PendingInviter = 4;  obsolete "renamed to RequestInitiator"
 	Ignored = 5;
 	IgnoredFriend = 6;
 	SuggestedFriend = 7;
+
+	Max = 8;
 };
 
 enum EAccountFlags flags
@@ -135,12 +142,13 @@ enum EFriendFlags flags
 	FriendshipRequested = 2;
 	Immediate = 4;
 	ClanMember = 8;
-	GameServer = 16;
+	GameServer = 16; obsolete "renamed to OnGameServer"
 	OnGameServer = 16;
 	RequestingFriendship = 128;
 	RequestingInfo = 256;
 	Ignored = 512;
 	IgnoredFriend = 1024;
+
 	FlagAll = 65535;
 };
 
@@ -157,6 +165,7 @@ enum EClientPersonaStateFlag flags
 	GameExtraInfo = 256;
 	GameDataBlob = 512;
 	ClanTag = 1024;
+	Facebook = 2048;
 };
 
 enum EAppUsageEvent
@@ -181,6 +190,7 @@ enum ELicenseFlags flags
 	CancelledByUser = 0x10;
 	CancelledByAdmin = 0x20;
 	LowViolenceContent = 0x40;
+	ImportedFromSteam2 = 0x80;
 };
 
 enum ELicenseType
@@ -191,6 +201,7 @@ enum ELicenseType
 	RecurringCharge = 3;
 	RecurringChargeLimitedUse = 4;
 	RecurringChargeLimitedUseWithOverages = 5;
+	RecurringOption = 6;
 };
 
 enum EPaymentMethod
@@ -205,10 +216,30 @@ enum EPaymentMethod
 	Sofort = 7;
 	GuestPass = 8;
 	WebMoney = 9;
+	MoneyBookers = 10;
+	AliPay = 11;
+	Yandex = 12;
+	Kiosk = 13;
+	Qiwi = 14;
+	GameStop = 15;
 	HardwarePromo = 16;
+	MoPay = 17;
+	BoletoBancario = 18;
+	BoaCompraGold = 19;
+	BancoDoBrasilOnline = 20;
+	ItauOnline = 21;
+	BradescoOnline = 22;
+	Pagseguro = 23;
+	VisaBrazil = 24;
+	AmexBrazil = 25;
+	Aura = 26;
+	Hipercard = 27;
+	MastercardBrazil = 28;
+	DinersCardBrazil = 29;
 	ClickAndBuy = 32;
 	AutoGrant = 64;
 	Wallet = 128;
+	Valve = 129;
 	OEMTicket = 256;
 	Split = 512;
 	Complimentary = 1024;
@@ -216,7 +247,7 @@ enum EPaymentMethod
 
 enum EIntroducerRouting
 {
-	FileShare = 0;
+	FileShare = 0; obsolete
 	P2PVoiceChat = 1;
 	P2PNetworking = 2;
 };
@@ -257,6 +288,7 @@ enum EClanRank
 	Owner = 1;
 	Officer = 2;
 	Member = 3;
+	Moderator = 4;
 };
 
 enum EClanRelationship
@@ -266,6 +298,7 @@ enum EClanRelationship
 	Invited = 2;
 	Member = 3;
 	Kicked = 4;
+	KickAcknowledged = 5;
 };
 
 enum EAuthSessionResponse
@@ -351,6 +384,7 @@ enum EAppInfoSection
 {
 	Unknown = 0;
 	All = 1;
+
 	First = 2;
 	Common = 2;
 	Extended = 3;
@@ -366,6 +400,8 @@ enum EAppInfoSection
 	Policies = 13;
 	SysReqs = 14;
 	Community = 15;
+
+	Max = 16;
 };
 
 enum EContentDownloadSourceType
@@ -374,7 +410,10 @@ enum EContentDownloadSourceType
 	CS = 1;
 	CDN = 2;
 	LCS = 3;
-	Proxy = 4;
+	Proxy = 4; obsolete "renamed to ProxyCache"
+	ProxyCache = 4;
+
+	Max = 5;
 };
 
 enum EPlatformType
@@ -385,12 +424,15 @@ enum EPlatformType
 	Linux = 3;
 	OSX = 4;
 	PS3 = 5;
+
 	Max = 6;
 };
 
 enum EOSType
 {
 	Unknown = -1;
+
+	UMQ = -400;
 
 	PS3 = -300;
 
@@ -403,11 +445,14 @@ enum EOSType
 	MacOS1064_slgu = -93;
 	MacOS1067 = -92;
 	MacOS107 = -90;
+	MacOS108 = -89;
+	MacOS109 = -88;
 
 	LinuxUnknown = -203;
 	Linux22 = -202;
 	Linux24 = -201;
 	Linux26 = -200;
+	Linux32 = -199;
 
 	WinUnknown = 0;
 	Win311 = 1;
@@ -421,15 +466,15 @@ enum EOSType
 	WinVista = 9;
 	Win7 = 10;
 	Win2008 = 11;
-	WinMAX = 12;
+	Windows8 = 12;
+	WinMAX = 13;
 
-	Max = 23;
+	Max = 24;
 };
 
 enum EServerType
 {
 	Invalid = -1;
-
 	First = 0;
 
 	Shell = 0;
@@ -441,21 +486,24 @@ enum EServerType
 	ATS = 6;	
 	CM = 7;	
 	FBS = 8;	
-	FG = 9;	
+	FG = 9;	obsolete "renamed to BoxMonitor"
+	BoxMonitor = 9;
 	SS = 10;	
 	DRMS = 11;	
-	HubOBSOLETE = 12;	
+	HubOBSOLETE = 12; obsolete
 	Console = 13;	
-	ASBOBSOLETE = 14;	
+	ASBOBSOLETE = 14; obsolete
+	PICS = 14;
 	Client = 15;	
-	BootstrapOBSOLETE = 16;
+	BootstrapOBSOLETE = 16; obsolete;
 	DP = 17;
 	WG = 18;	
 	SM = 19;	
 	UFS = 21;	
 	Util = 23;	
-	DSS = 24;	
-	P2PRelayOBSOLETE = 25;	
+	DSS = 24; obsolete "renamed to Community"
+	Community = 24;
+	P2PRelayOBSOLETE = 25; obsolete
 	AppInformation = 26;	
 	Spare = 27;	
 	FTS = 28;	
@@ -480,6 +528,23 @@ enum EServerType
 	FS = 47;	
 	Econ = 48;
 	Backpack = 49;
+	UGS = 50;
+	Store = 51;
+	MoneyStats = 52;
+	CRE = 53;
+	UMQ = 54;
+	Workshop = 55;
+	BRP = 56;
+	GCH = 57;
+	MPAS = 58;
+	Trade = 59;
+	Secrets = 60;
+	Logsink = 61;
+	Market = 62;
+	Quest = 63;
+	WDS = 64;
+
+	Max = 65;
 };
  
 enum EBillingType
@@ -493,6 +558,7 @@ enum EBillingType
 	Gift = 6;
 	AutoGrant = 7;
 	OEMTicket = 8;
+
 	NumBillingTypes = 9;
 };
 
@@ -533,6 +599,7 @@ enum ERegionCode<byte>
 enum ECurrencyCode
 {
 	Invalid = 0;
+
 	USD = 1;
 	GBP = 2;
 	EUR = 3;
@@ -540,6 +607,9 @@ enum ECurrencyCode
 	RUB = 5;
 	PLN = 6;
 	BRL = 7;
+	NOK = 9;
+
+	Max = 10;
 };
 
 enum EDepotFileFlag flags
@@ -551,6 +621,7 @@ enum EDepotFileFlag flags
 	Hidden = 16;
 	Executable = 32;
 	Directory = 64;
+	CustomExecutable = 128;
 };
 
 enum EWorkshopEnumerationType
@@ -581,8 +652,10 @@ enum EEconTradeResponse
 {
 	Accepted = 0;
 	Declined = 1;
-	VacBannedInitiator = 2;
-	VacBannedTarget = 3;
+	VacBannedInitiator = 2; obsolete "renamed to TradeBannedInitiator"
+	TradeBannedInitiator = 2;
+	VacBannedTarget = 3; obsolete "renamed to TradeBannedTarget"
+	TradeBannedTarget = 3;
 	TargetAlreadyTrading = 4;
 	Disabled = 5;
 	NotLoggedIn = 6;
@@ -593,6 +666,11 @@ enum EEconTradeResponse
 	InitiatorAlreadyTrading = 11;
 	Error = 12;
 	Timeout = 13;
+	InitiatorBlockedTarget = 18;
+	InitiatorNeedsVerifiedEmail = 20;
+	InitiatorNeedsSteamGuard = 21;
+	TargetAccountCannotTrade = 22;
+	InitiatorSteamGuardDuration = 23;
 };
 
 enum EMarketingMessageFlags flags
@@ -624,8 +702,10 @@ enum ESystemIMType
 	GuestPassReceived = 5;
 	GuestPassGranted = 6;
 	GiftRevoked = 7;
+	SupportMessage = 8;
+	SupportMessageClearAlert = 9;
 
-	Max = 8;
+	Max = 10;
 };
 
 enum EChatFlags flags
@@ -636,7 +716,7 @@ enum EChatFlags flags
 	Unjoinable = 8;
 };
 
-enum ERemoteStoragePlatform<uint> flags
+enum ERemoteStoragePlatform flags
 {
 	None = 0;
 	
@@ -645,7 +725,8 @@ enum ERemoteStoragePlatform<uint> flags
 	PS3 = 4;
 	Reserved1 = 8;
 	Reserved2 = 16;
-	All = 4294967295;
+
+	All = -1;
 };
 
 enum EDRMBlobDownloadType flags
