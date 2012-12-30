@@ -390,7 +390,7 @@ namespace NetHookAnalyzer
                 return Serializer.Deserialize<CMsgGCClient>( str );
             }
 
-            var gcMsgName = BuildEMsg(MsgUtil.GetGCMsg(realEMsg));
+            var gcMsgName = BuildEMsg( realEMsg );
             var gcMsgPossibleTypePrefixes = new[]
             {
                 "SteamKit2.GC.Internal.CMsg",
