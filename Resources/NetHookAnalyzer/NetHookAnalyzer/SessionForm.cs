@@ -136,7 +136,6 @@ namespace NetHookAnalyzer
             {
                 typeof( SteamKit2.GC.Dota.Internal.EDOTAGCMsg ),
                 typeof( SteamKit2.GC.Internal.EGCBaseMsg ),
-                typeof( SteamKit2.GC.Internal.EGCSharedMsg ),
                 typeof( SteamKit2.GC.Internal.ESOMsg ),
                 typeof( SteamKit2.GC.Internal.EGCSystemMsg ),
                 typeof( SteamKit2.GC.Internal.EGCItemMsg ),
@@ -389,6 +388,32 @@ namespace NetHookAnalyzer
             if ( eMsg == EMsg.ClientToGC || eMsg == EMsg.ClientFromGC )
             {
                 return Serializer.Deserialize<CMsgGCClient>( str );
+            }
+
+            var gcMsgName = BuildEMsg(MsgUtil.GetGCMsg(realEMsg));
+            var gcMsgPossibleTypePrefixes = new[]
+            {
+                "SteamKit2.GC.Internal.CMsg",
+                "SteamKit2.GC.Dota.Internal.CMsg",
+                "SteamKit2.GC.CSGO.Internal.CMsg",
+                "SteamKit2.GC.TF.Internal.CMsg",
+            };
+
+            var typeMsgName = gcMsgName
+                .Replace("GC", string.Empty)
+                .Replace("k_", string.Empty)
+                .Replace("ESOMsg", string.Empty)
+                .TrimStart('_')
+                .Replace("EMsg", string.Empty);
+
+            var possibleTypes = from type in typeof( CMClient ).Assembly.GetTypes()
+                                from typePrefix in gcMsgPossibleTypePrefixes
+                                where type.FullName.StartsWith(typePrefix) && type.FullName.EndsWith(typeMsgName)
+                                select type;
+            msgType = possibleTypes.FirstOrDefault();
+            if ( msgType != null )
+            {
+                return Deserialize( msgType, str );
             }
 
             // try reading it as a protobuf
