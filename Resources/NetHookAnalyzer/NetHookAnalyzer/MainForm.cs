@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
@@ -28,7 +29,25 @@ namespace NetHookAnalyzer
 
             if ( steamDir != null )
             {
-                fbd.SelectedPath = Path.Combine( steamDir, "nethook" );
+                var nethookDir = Path.Combine( steamDir, "nethook" );
+
+                if ( nethookDir != null )
+                {
+                    var nethookDumpDirs = Directory.GetDirectories( nethookDir );
+                    var latestDump = nethookDumpDirs.LastOrDefault();
+                    if ( latestDump != null )
+                    {
+                        fbd.SelectedPath = Path.Combine( nethookDir, latestDump );
+                    }
+                    else
+                    {
+                        fbd.SelectedPath = nethookDir;
+                    }
+                }
+                else
+                {
+                    fbd.SelectedPath = steamDir;
+                }
             }
 
             if ( fbd.ShowDialog() != DialogResult.OK )
