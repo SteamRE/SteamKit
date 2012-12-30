@@ -408,7 +408,8 @@ namespace NetHookAnalyzer
 
             var possibleTypes = from type in typeof( CMClient ).Assembly.GetTypes()
                                 from typePrefix in gcMsgPossibleTypePrefixes
-                                where type.FullName.StartsWith(typePrefix) && type.FullName.EndsWith(typeMsgName)
+                                where type.GetInterfaces().Contains( typeof ( IExtensible ) )
+                                where type.FullName.StartsWith( typePrefix ) && type.FullName.EndsWith( typeMsgName )
                                 select type;
             msgType = possibleTypes.FirstOrDefault();
             if ( msgType != null )
