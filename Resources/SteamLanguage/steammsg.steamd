@@ -285,3 +285,20 @@ class MsgClientSetIgnoreFriendResponse<EMsg::ClientSetIgnoreFriendResponse>
 
 	EResult result;
 };
+
+class MsgClientLoggedOff<EMsg::ClientLoggedOff>
+{
+	EResult result;
+	int secMinReconnectHint;
+	int secMaxReconnectHint;
+};
+
+class MsgClientLogOnResponse<EMsg::ClientLogOnResponse>
+{
+	EResult result;
+	int outOfGameHeartbeatRateSec;
+	int inGameHeartbeatRateSec;
+	steamidmarshal ulong clientSuppliedSteamId;
+	uint ipPublic;
+	uint serverRealTime;
+};

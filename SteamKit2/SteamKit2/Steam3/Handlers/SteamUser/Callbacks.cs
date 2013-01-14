@@ -131,6 +131,26 @@ namespace SteamKit2
 
                 this.UsePICS = resp.use_pics;
             }
+
+
+#if STATIC_CALLBACKS
+            internal LoggedOnCallback( SteamClient client, MsgClientLogOnResponse resp )
+                : base( client )
+#else
+            internal LoggedOnCallback( MsgClientLogOnResponse resp )
+#endif
+            {
+                this.Result = resp.Result;
+
+                this.OutOfGameSecsPerHeartbeat = resp.OutOfGameHeartbeatRateSec;
+                this.InGameSecsPerHeartbeat = resp.InGameHeartbeatRateSec;
+
+                this.PublicIP = NetHelpers.GetIPAddress( resp.IpPublic );
+
+                this.ServerTime = Utils.DateTimeFromUnixTime( resp.ServerRealTime );
+
+                this.ClientSteamID = resp.ClientSuppliedSteamId;
+            }
         }
 
         /// <summary>
@@ -144,14 +164,15 @@ namespace SteamKit2
             /// <value>The result.</value>
             public EResult Result { get; private set; }
 
+
 #if STATIC_CALLBACKS
-            internal LoggedOffCallback( SteamClient client, CMsgClientLoggedOff resp )
+            internal LoggedOffCallback( SteamClient client, EResult result )
                 : base( client )
 #else
-            internal LoggedOffCallback( CMsgClientLoggedOff resp )
+            internal LoggedOffCallback( EResult result )
 #endif
             {
-                this.Result = ( EResult )resp.eresult;
+                this.Result = result;
             }
         }
 
