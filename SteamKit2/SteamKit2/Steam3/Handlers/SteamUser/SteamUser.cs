@@ -335,12 +335,23 @@ namespace SteamKit2
         #region ClientMsg Handlers
         void HandleLoggedOff( IPacketMsg packetMsg )
         {
-            var loggedOff = new ClientMsgProtobuf<CMsgClientLoggedOff>( packetMsg );
+            EResult result = EResult.Invalid;
+
+            if ( packetMsg.IsProto )
+            {
+                var loggedOff = new ClientMsgProtobuf<CMsgClientLoggedOff>( packetMsg );
+                result = ( EResult )loggedOff.Body.eresult;
+            }
+            else
+            {
+                var loggedOff = new ClientMsg<MsgClientLoggedOff>( packetMsg );
+                result = loggedOff.Body.Result;
+            }
 
 #if STATIC_CALLBACKS
-            SteamClient.PostCallback( new LoggedOffCallback( Client, loggedOff.Body ) );
+            SteamClient.PostCallback( new LoggedOffCallback( Client, result ) );
 #else
-            this.Client.PostCallback( new LoggedOffCallback( loggedOff.Body ) );
+            this.Client.PostCallback( new LoggedOffCallback( result ) );
 #endif
         }
         void HandleUpdateMachineAuth( IPacketMsg packetMsg )
@@ -391,6 +402,18 @@ namespace SteamKit2
             if ( packetMsg.IsProto )
             {
                 var logonResp = new ClientMsgProtobuf<CMsgClientLogonResponse>( packetMsg );
+
+#if STATIC_CALLBACKS
+                var callback = new LoggedOnCallback( Client, logonResp.Body );
+                SteamClient.PostCallback( callback );
+#else
+                var callback = new LoggedOnCallback( logonResp.Body );
+                this.Client.PostCallback( callback );
+#endif
+            }
+            else
+            {
+                var logonResp = new ClientMsg<MsgClientLogOnResponse>( packetMsg );
 
 #if STATIC_CALLBACKS
                 var callback = new LoggedOnCallback( Client, logonResp.Body );
