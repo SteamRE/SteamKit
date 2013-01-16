@@ -248,7 +248,7 @@ namespace SteamKit2
 
                 bool bRet = false;
 
-                if ( credentials == null )
+                if ( credentials == null || credentials.Steam2Ticket == null )
                 {
                     bRet = this.SendCommand(
                         9, // open storage
