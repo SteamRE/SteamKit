@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Diagnostics;
 
 namespace SteamKit2
 {
@@ -136,6 +137,24 @@ namespace SteamKit2
             {
                 debugListener.WriteLine( category, strMsg );
             }
+        }
+
+
+        /// <summary>
+        /// Checks for a condition; if the condition is <c>false</c>, outputs a specified message and displays a message box that shows the call stack.
+        /// This method is equivalent to System.Diagnostics.Debug.Assert, however, it is tailored to spew failed assertions into the SteamKit debug log.
+        /// </summary>
+        /// <param name="condition">The conditional expression to evaluate. If the condition is <c>true</c>, the specified message is not sent and the message box is not displayed.</param>
+        /// <param name="category">The category of the message.</param>
+        /// <param name="message">The message to display if the assertion fails.</param>
+        public static void Assert( bool condition, string category, string message )
+        {
+            // make use of .NET's assert facility first
+            Debug.Assert( condition, string.Format( "{0}: {1}", category, message ) );
+
+            // then spew to our debuglog, so we can get info in release builds
+            if ( !condition )
+                WriteLine( category, "Assertion Failed! " + message );
         }
     }
 }
