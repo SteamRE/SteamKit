@@ -4,7 +4,6 @@
  */
 
 
-using System.Diagnostics;
 using System.IO;
 using ProtoBuf;
 using SteamKit2.Internal;
@@ -109,7 +108,7 @@ namespace SteamKit2.GC
         public ClientGCMsgProtobuf( IPacketGCMsg msg )
             : this( msg.MsgType )
         {
-            Debug.Assert( msg.IsProto, "ClientGCMsgProtobuf used for non-proto message!" );
+            DebugLog.Assert( msg.IsProto, "ClientGCMsgProtobuf", "ClientGCMsgProtobuf used for non-proto message!" );
 
             Deserialize( msg.GetData() );
         }
@@ -240,7 +239,7 @@ namespace SteamKit2.GC
         public ClientGCMsg( IPacketGCMsg msg )
             : this()
         {
-            Debug.Assert( !msg.IsProto, "ClientGCMsg used for proto message!" );
+            DebugLog.Assert( !msg.IsProto, "ClientGCMsg", "ClientGCMsg used for proto message!" );
 
             Deserialize( msg.GetData() );
         }

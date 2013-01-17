@@ -4,7 +4,6 @@
  */
 
 using System;
-using System.Diagnostics;
 using SteamKit2.Internal;
 
 namespace SteamKit2
@@ -66,7 +65,7 @@ namespace SteamKit2
                 : base( jobId )
 #endif
             {
-                Debug.Assert( jobId != ulong.MaxValue, "JobCallback used for non job based callback!" );
+                DebugLog.Assert( jobId != ulong.MaxValue, "JobCallback", "JobCallback used for non job based callback!" );
 
                 Callback = callback;
             }
