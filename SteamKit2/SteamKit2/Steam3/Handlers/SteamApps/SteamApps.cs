@@ -6,7 +6,6 @@
 
 
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using SteamKit2.Internal;
 
@@ -528,8 +527,6 @@ namespace SteamKit2
         }
         void HandleVACBanStatus( IPacketMsg packetMsg )
         {
-            Debug.Assert( !packetMsg.IsProto );
-
             var vacStatus = new ClientMsg<MsgClientVACBanStatus>( packetMsg );
 
 #if STATIC_CALLBACKS
@@ -542,8 +539,6 @@ namespace SteamKit2
         }
         void HandlePICSAccessTokenResponse( IPacketMsg packetMsg )
         {
-            Debug.Assert( packetMsg.IsProto );
-
             var tokensResponse = new ClientMsgProtobuf<CMsgPICSAccessTokenResponse>( packetMsg );
 
 #if STATIC_CALLBACKS
@@ -558,8 +553,6 @@ namespace SteamKit2
         }
         void HandlePICSChangesSinceResponse( IPacketMsg packetMsg )
         {
-            Debug.Assert( packetMsg.IsProto );
-
             var changesResponse = new ClientMsgProtobuf<CMsgPICSChangesSinceResponse>( packetMsg );
 
 #if STATIC_CALLBACKS
@@ -574,8 +567,6 @@ namespace SteamKit2
         }
         void HandlePICSProductInfoResponse( IPacketMsg packetMsg )
         {
-            Debug.Assert( packetMsg.IsProto );
-
             var productResponse = new ClientMsgProtobuf<CMsgPICSProductInfoResponse>( packetMsg );
 
 #if STATIC_CALLBACKS

@@ -163,9 +163,8 @@ namespace SteamKit2.Blob
 
         private void TakeBytes(int size)
         {
-#if DEBUG
             Debug.Assert(CanTakeBytes(size));
-#endif
+
             bytesAvailable -= size;
         }
 
@@ -236,9 +235,8 @@ namespace SteamKit2.Blob
         /// </summary>
         public void SkipSpare()
         {
-#if DEBUG
             Debug.Assert(bytesAvailable == 0);
-#endif
+
             source.ReadAndDiscard(spareAvailable);
         }
     }

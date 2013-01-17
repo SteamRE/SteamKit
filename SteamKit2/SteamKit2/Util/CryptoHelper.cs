@@ -6,7 +6,6 @@
 
 
 using System;
-using System.Diagnostics;
 using System.IO;
 using System.Security.Cryptography;
 
@@ -114,7 +113,7 @@ namespace SteamKit2
         /// </summary>
         public static byte[] SymmetricEncrypt( byte[] input, byte[] key )
         {
-            Debug.Assert( key.Length == 32 );
+            DebugLog.Assert( key.Length == 32, "CryptoHelper", "SymmetricEncrypt used with non 32 byte key!" );
 
             using ( var aes = new RijndaelManaged() )
             {
@@ -164,7 +163,7 @@ namespace SteamKit2
         /// </summary>
         public static byte[] SymmetricDecrypt( byte[] input, byte[] key )
         {
-            Debug.Assert( key.Length == 32 );
+            DebugLog.Assert( key.Length == 32, "CryptoHelper", "SymmetricDecrypt used with non 32 byte key!" );
 
             using ( var aes = new RijndaelManaged() )
             {
