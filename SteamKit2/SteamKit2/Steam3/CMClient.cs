@@ -371,6 +371,7 @@ namespace SteamKit2.Internal
             {
                 // a non proto ClientLogonResponse can come in as a result of connecting but never sending a ClientLogon
                 // in this case, it always fails, so we don't need to do anything special here
+                DebugLog.WriteLine( "CMClient", "Got non-proto logon response, this is indicative of no logon attempt after connecting." );
                 return;
             }
 
