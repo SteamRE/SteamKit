@@ -6,7 +6,6 @@
 
 
 using System;
-using System.Diagnostics;
 using System.Net;
 
 namespace SteamKit2
@@ -32,7 +31,7 @@ namespace SteamKit2
 
         public NetFilterEncryption( byte[] sessionKey )
         {
-            Debug.Assert( sessionKey.Length == 32 );
+            DebugLog.Assert( sessionKey.Length == 32, "NetFilterEncryption", "AES session key was not 32 bytes!" );
 
             this.sessionKey = sessionKey;
         }
