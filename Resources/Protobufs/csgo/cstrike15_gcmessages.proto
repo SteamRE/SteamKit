@@ -147,7 +147,6 @@ message PlayerRankingInfo {
 message PlayerCommendationInfo {
 	optional uint32 cmd_friendly = 1;
 	optional uint32 cmd_teaching = 2;
-	optional uint32 cmd_support = 3;
 	optional uint32 cmd_leader = 4;
 }
 
@@ -238,6 +237,8 @@ message CMsgGCCStrike15_v2_MatchmakingServerMatchEnd {
 	optional .CMsgGCCStrike15_v2_MatchmakingServerRoundStats stats = 1;
 	optional .CMsgGCCStrike15_v2_MatchmakingGC2ServerConfirm confirm = 3;
 	optional uint64 rematch = 4;
+	optional uint32 replay_token = 5;
+	optional uint32 replay_cluster_id = 6;
 }
 
 message CMsgGCCStrike15_v2_MatchmakingClient2GCHello {
@@ -302,6 +303,7 @@ message CMsgGCCStrike15_v2_ClientCommendPlayer {
 	optional uint32 account_id = 1;
 	optional uint64 match_id = 8;
 	optional .PlayerCommendationInfo commendation = 9;
+	optional uint32 tokens = 10;
 }
 
 message CMsgGCCStrike15_v2_ClientReportServer {
@@ -318,5 +320,6 @@ message CMsgGCCStrike15_v2_ClientReportResponse {
 	optional uint32 server_ip = 3;
 	optional uint32 response_type = 4;
 	optional uint32 response_result = 5;
+	optional uint32 tokens = 6;
 }
 
