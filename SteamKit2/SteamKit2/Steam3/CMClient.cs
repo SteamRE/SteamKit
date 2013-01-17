@@ -54,10 +54,10 @@ namespace SteamKit2.Internal
             // IPAddress.Parse( "81.171.115.6" ),
             // IPAddress.Parse( "81.171.115.7" ),
             // IPAddress.Parse( "81.171.115.8" ),
-
+            
             // Limelight, Japan
-            IPAddress.Parse( "203.77.185.4" ),
-            IPAddress.Parse( "203.77.185.5" ),
+            // IPAddress.Parse( "203.77.185.4" ),
+            // IPAddress.Parse( "203.77.185.5" ),
 
             // Limelight, Seattle
             IPAddress.Parse( "208.111.133.84" ),
