@@ -1,5 +1,32 @@
 
 ------------------------------------------------------------------------------
+v 1.3.0			Jan 16, 2013
+------------------------------------------------------------------------------
+
+*	Fixed case where friend and chat messages were incorrectly trimming the last character.
+*	Steam2 ServerClient now exposes a IsConnected property.
+*	Steam2 ContentServerClient can now optionally not perform a server handshake when opening a storage session.
+*	Added various enums: EClanPermission, EMarketingMessageFlags, ENewsUpdateType, ESystemIMType, EChatFlags,
+	ERemoteStoragePlatform, EDRMBlobDownloadType, EDRMBlobDownloadErrorDetail, EClientStat, EClientStatAggregateMethod,
+	ELeaderboardDataRequest, ELeaderboardSortMethod, ELeaderboardUploadScoreMethod, and EChatPermission.
+*	Fixed case where SteamKit was throwing an unhandled exception during Steam3 tcp connection teardown.
+*	Added PICS support to the SteamApps handler: PICSGetAccessTokens, PICSGetChangesSince, and PICSGetProductInfo.
+*	Added anonymous download support to CDNClient.
+*	Updated the following enums: EMsg, EUniverse, EChatEntryType, EPersonaState, EFriendRelationship, EFriendFlags,
+	EClientPersonaStateFlag, ELicenseFlags, ELicenseType, EPaymentMethod, EIntroducerRouting, EClanRank, EClanRelationship,
+	EAppInfoSection, EContentDownloadSourceType, EOSType, EServerType, ECurrencyCode, EDepotFileFlag, EEconTradeResponse,
+	ESystemIMType, ERemoteStoragePlatform, and EResult.
+*	Exposed the following properties in SteamUser.LoggedOnCallback: CellIDPingThreshold, UsePICS, WebAPIUserNonce, and 
+	IPCountryCode.
+*	Fixed case where SteamKit was incorrectly handling certain logoff messages during Steam server unavailability.
+*	Fixed potential crash in Steam2 ContentServerClient when opening a storage session.
+*	Updated to latest protobuf-net.
+
+BREAKING CHANGES
+*	DepotManifest.ChunkData.CRC is now named DepotManifest.ChunkData.Checksum.
+
+
+------------------------------------------------------------------------------
 v 1.2.2			Nov 11, 2012
 ------------------------------------------------------------------------------
 
