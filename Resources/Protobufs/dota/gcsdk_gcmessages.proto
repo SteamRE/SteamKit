@@ -1,3 +1,5 @@
+import "steammessages.proto";
+
 message CMsgSOSingleObject {
 	optional fixed64 owner = 1;
 	optional int32 type_id = 2;
@@ -7,6 +9,8 @@ message CMsgSOSingleObject {
 
 message CMsgSOMultipleObjects {
 	message SingleObject {
+		option (msgpool_soft_limit) = 256;
+		option (msgpool_hard_limit) = 1024;
 		optional int32 type_id = 1;
 		optional bytes object_data = 2;
 	}

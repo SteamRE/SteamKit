@@ -1,0 +1,424 @@
+import "google/protobuf/descriptor.proto";
+
+enum NET_Messages {
+	net_NOP = 0;
+	net_Disconnect = 1;
+	net_File = 2;
+	net_LastControlMessage = 2;
+	net_SplitScreenUser = 3;
+	net_Tick = 4;
+	net_StringCmd = 5;
+	net_SetConVar = 6;
+	net_SignonState = 7;
+}
+
+enum CLC_Messages {
+	clc_ClientInfo = 8;
+	clc_Move = 9;
+	clc_VoiceData = 10;
+	clc_BaselineAck = 11;
+	clc_ListenEvents = 12;
+	clc_RespondCvarValue = 13;
+	clc_FileCRCCheck = 14;
+	clc_LoadingProgress = 15;
+	clc_SplitPlayerConnect = 16;
+	clc_ClientMessage = 17;
+	clc_CmdKeyValues = 18;
+}
+
+enum ESplitScreenMessageType {
+	MSG_SPLITSCREEN_ADDUSER = 0;
+	MSG_SPLITSCREEN_REMOVEUSER = 1;
+	MSG_SPLITSCREEN_TYPE_BITS = 1;
+}
+
+enum SVC_Messages {
+	svc_ServerInfo = 8;
+	svc_SendTable = 9;
+	svc_ClassInfo = 10;
+	svc_SetPause = 11;
+	svc_CreateStringTable = 12;
+	svc_UpdateStringTable = 13;
+	svc_VoiceInit = 14;
+	svc_VoiceData = 15;
+	svc_Print = 16;
+	svc_Sounds = 17;
+	svc_SetView = 18;
+	svc_FixAngle = 19;
+	svc_CrosshairAngle = 20;
+	svc_BSPDecal = 21;
+	svc_SplitScreen = 22;
+	svc_UserMessage = 23;
+	svc_EntityMessage = 24;
+	svc_GameEvent = 25;
+	svc_PacketEntities = 26;
+	svc_TempEntities = 27;
+	svc_Prefetch = 28;
+	svc_Menu = 29;
+	svc_GameEventList = 30;
+	svc_GetCvarValue = 31;
+	svc_PaintmapData = 33;
+	svc_CmdKeyValues = 34;
+}
+
+message CMsgVector {
+	optional float x = 1;
+	optional float y = 2;
+	optional float z = 3;
+}
+
+message CMsgVector2D {
+	optional float x = 1;
+	optional float y = 2;
+}
+
+message CMsgQAngle {
+	optional float x = 1;
+	optional float y = 2;
+	optional float z = 3;
+}
+
+message CMsgRGBA {
+	optional int32 r = 1;
+	optional int32 g = 2;
+	optional int32 b = 3;
+	optional int32 a = 4;
+}
+
+message CNETMsg_Tick {
+	optional uint32 tick = 1;
+	optional uint32 host_frametime = 2;
+	optional uint32 host_frametime_std_deviation = 3;
+}
+
+message CNETMsg_StringCmd {
+	optional string command = 1;
+}
+
+message CNETMsg_SignonState {
+	optional uint32 signon_state = 1;
+	optional uint32 spawn_count = 2;
+	optional uint32 num_server_players = 3;
+	repeated string players_networkids = 4;
+	optional string map_name = 5;
+}
+
+message CMsg_CVars {
+	message CVar {
+		optional string name = 1;
+		optional string value = 2;
+	}
+
+	repeated .CMsg_CVars.CVar cvars = 1;
+}
+
+message CNETMsg_SetConVar {
+	optional .CMsg_CVars convars = 1;
+}
+
+message CNETMsg_NOP {
+}
+
+message CNETMsg_Disconnect {
+	optional string text = 1;
+}
+
+message CNETMsg_File {
+	optional int32 transfer_id = 1;
+	optional string file_name = 2;
+	optional bool is_replay_demo_file = 3;
+	optional bool deny = 4;
+}
+
+message CNETMsg_SplitScreenUser {
+	optional int32 slot = 1;
+}
+
+message CCLCMsg_ClientInfo {
+	optional fixed32 send_table_crc = 1;
+	optional uint32 server_count = 2;
+	optional bool is_hltv = 3;
+	optional bool is_replay = 4;
+	optional uint32 friends_id = 5;
+	optional string friends_name = 6;
+	repeated fixed32 custom_files = 7;
+}
+
+message CCLCMsg_Move {
+	optional uint32 num_backup_commands = 1;
+	optional uint32 num_new_commands = 2;
+	optional bytes data = 3;
+}
+
+message CCLCMsg_VoiceData {
+	optional bytes data = 1;
+	optional fixed64 xuid = 2;
+}
+
+message CCLCMsg_BaselineAck {
+	optional int32 baseline_tick = 1;
+	optional int32 baseline_nr = 2;
+}
+
+message CCLCMsg_ListenEvents {
+	repeated fixed32 event_mask = 1;
+}
+
+message CCLCMsg_RespondCvarValue {
+	optional int32 cookie = 1;
+	optional int32 status_code = 2;
+	optional string name = 3;
+	optional string value = 4;
+}
+
+message CCLCMsg_FileCRCCheck {
+	optional int32 code_path = 1;
+	optional string path = 2;
+	optional int32 code_filename = 3;
+	optional string filename = 4;
+	optional int32 file_fraction = 5;
+	optional bytes md5 = 6;
+	optional uint32 crc = 7;
+	optional int32 file_hash_type = 8;
+	optional int32 file_len = 9;
+	optional int32 pack_file_id = 10;
+	optional int32 pack_file_number = 11;
+}
+
+message CCLCMsg_LoadingProgress {
+	optional int32 progress = 1;
+}
+
+message CCLCMsg_SplitPlayerConnect {
+	optional .CMsg_CVars convars = 1;
+}
+
+message CCLCMsg_CmdKeyValues {
+	optional bytes keyvalues = 1;
+}
+
+message CSVCMsg_ServerInfo {
+	optional int32 protocol = 1;
+	optional int32 server_count = 2;
+	optional bool is_dedicated = 3;
+	optional bool is_hltv = 5;
+	optional bool is_replay = 6;
+	optional bool is_redirecting_to_proxy_relay = 21;
+	optional int32 c_os = 7;
+	optional fixed32 map_crc = 8;
+	optional fixed32 client_crc = 9;
+	optional fixed32 string_table_crc = 10;
+	optional int32 max_clients = 11;
+	optional int32 max_classes = 12;
+	optional int32 player_slot = 13;
+	optional float tick_interval = 14;
+	optional string game_dir = 15;
+	optional string map_name = 16;
+	optional string map_group_name = 17;
+	optional string sky_name = 18;
+	optional string host_name = 19;
+	optional uint32 public_ip = 20;
+}
+
+message CSVCMsg_ClassInfo {
+	message class_t {
+		optional int32 class_id = 1;
+		optional string data_table_name = 2;
+		optional string class_name = 3;
+	}
+
+	optional bool create_on_client = 1;
+	repeated .CSVCMsg_ClassInfo.class_t classes = 2;
+}
+
+message CSVCMsg_SendTable {
+	message sendprop_t {
+		optional int32 type = 1;
+		optional string var_name = 2;
+		optional int32 flags = 3;
+		optional int32 priority = 4;
+		optional string dt_name = 5;
+		optional int32 num_elements = 6;
+		optional float low_value = 7;
+		optional float high_value = 8;
+		optional int32 num_bits = 9;
+	}
+
+	optional bool is_end = 1;
+	optional string net_table_name = 2;
+	optional bool needs_decoder = 3;
+	repeated .CSVCMsg_SendTable.sendprop_t props = 4;
+}
+
+message CSVCMsg_Print {
+	optional string text = 1;
+}
+
+message CSVCMsg_SetPause {
+	optional bool paused = 1;
+}
+
+message CSVCMsg_SetView {
+	optional int32 entity_index = 1;
+}
+
+message CSVCMsg_CreateStringTable {
+	optional string name = 1;
+	optional int32 max_entries = 2;
+	optional int32 num_entries = 3;
+	optional bool user_data_fixed_size = 4;
+	optional int32 user_data_size = 5;
+	optional int32 user_data_size_bits = 6;
+	optional int32 flags = 7;
+	optional bytes string_data = 8;
+}
+
+message CSVCMsg_UpdateStringTable {
+	optional int32 table_id = 1;
+	optional int32 num_changed_entries = 2;
+	optional bytes string_data = 3;
+}
+
+message CSVCMsg_VoiceInit {
+	optional int32 quality = 1;
+	optional string codec = 2;
+}
+
+message CSVCMsg_VoiceData {
+	optional int32 client = 1;
+	optional bool proximity = 2;
+	optional fixed64 xuid = 3;
+	optional int32 audible_mask = 4;
+	optional bytes voice_data = 5;
+}
+
+message CSVCMsg_FixAngle {
+	optional bool relative = 1;
+	optional .CMsgQAngle angle = 2;
+}
+
+message CSVCMsg_CrosshairAngle {
+	optional .CMsgQAngle angle = 1;
+}
+
+message CSVCMsg_Prefetch {
+	optional int32 sound_index = 1;
+}
+
+message CSVCMsg_BSPDecal {
+	optional .CMsgVector pos = 1;
+	optional int32 decal_texture_index = 2;
+	optional int32 entity_index = 3;
+	optional int32 model_index = 4;
+	optional bool low_priority = 5;
+}
+
+message CSVCMsg_SplitScreen {
+	optional .ESplitScreenMessageType type = 1 [default = MSG_SPLITSCREEN_ADDUSER];
+	optional int32 slot = 2;
+	optional int32 player_index = 3;
+}
+
+message CSVCMsg_GetCvarValue {
+	optional int32 cookie = 1;
+	optional string cvar_name = 2;
+}
+
+message CSVCMsg_Menu {
+	optional int32 dialog_type = 1;
+	optional bytes menu_key_values = 2;
+}
+
+message CSVCMsg_UserMessage {
+	optional int32 msg_type = 1;
+	optional bytes msg_data = 2;
+}
+
+message CSVCMsg_PaintmapData {
+	optional bytes paintmap = 1;
+}
+
+message CSVCMsg_GameEvent {
+	message key_t {
+		optional int32 type = 1;
+		optional string val_string = 2;
+		optional float val_float = 3;
+		optional int32 val_long = 4;
+		optional int32 val_short = 5;
+		optional int32 val_byte = 6;
+		optional bool val_bool = 7;
+		optional uint64 val_uint64 = 8;
+		optional bytes val_wstring = 9;
+	}
+
+	optional string event_name = 1;
+	optional int32 eventid = 2;
+	repeated .CSVCMsg_GameEvent.key_t keys = 3;
+}
+
+message CSVCMsg_GameEventList {
+	message key_t {
+		optional int32 type = 1;
+		optional string name = 2;
+	}
+
+	message descriptor_t {
+		optional int32 eventid = 1;
+		optional string name = 2;
+		repeated .CSVCMsg_GameEventList.key_t keys = 3;
+	}
+
+	repeated .CSVCMsg_GameEventList.descriptor_t descriptors = 1;
+}
+
+message CSVCMsg_TempEntities {
+	optional bool reliable = 1;
+	optional int32 num_entries = 2;
+	optional bytes entity_data = 3;
+}
+
+message CSVCMsg_PacketEntities {
+	optional int32 max_entries = 1;
+	optional int32 updated_entries = 2;
+	optional bool is_delta = 3;
+	optional bool update_baseline = 4;
+	optional int32 baseline = 5;
+	optional int32 delta_from = 6;
+	optional bytes entity_data = 7;
+}
+
+message CSVCMsg_Sounds {
+	message sounddata_t {
+		optional sint32 origin_x = 1;
+		optional sint32 origin_y = 2;
+		optional sint32 origin_z = 3;
+		optional uint32 volume = 4;
+		optional float delay_value = 5;
+		optional int32 sequence_number = 6;
+		optional int32 entity_index = 7;
+		optional int32 channel = 8;
+		optional int32 pitch = 9;
+		optional int32 flags = 10;
+		optional uint32 sound_num = 11;
+		optional fixed32 sound_num_handle = 12;
+		optional int32 speaker_entity = 13;
+		optional int32 random_seed = 14;
+		optional int32 sound_level = 15;
+		optional bool is_sentence = 16;
+		optional bool is_ambient = 17;
+	}
+
+	optional bool reliable_sound = 1;
+	repeated .CSVCMsg_Sounds.sounddata_t sounds = 2;
+}
+
+message CSVCMsg_EntityMsg {
+	optional int32 ent_index = 1;
+	optional int32 class_id = 2;
+	optional bytes ent_data = 3;
+}
+
+message CSVCMsg_CmdKeyValues {
+	optional bytes keyvalues = 1;
+}
+

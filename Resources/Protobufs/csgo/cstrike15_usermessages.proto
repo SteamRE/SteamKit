@@ -1,0 +1,363 @@
+import "google/protobuf/descriptor.proto";
+import "netmessages.proto";
+
+enum ECstrike15UserMessages {
+	CS_UM_VGUIMenu = 1;
+	CS_UM_Geiger = 2;
+	CS_UM_Train = 3;
+	CS_UM_HudText = 4;
+	CS_UM_SayText = 5;
+	CS_UM_SayText2 = 6;
+	CS_UM_TextMsg = 7;
+	CS_UM_HudMsg = 8;
+	CS_UM_ResetHud = 9;
+	CS_UM_GameTitle = 10;
+	CS_UM_Shake = 12;
+	CS_UM_Fade = 13;
+	CS_UM_Rumble = 14;
+	CS_UM_CloseCaption = 15;
+	CS_UM_CloseCaptionDirect = 16;
+	CS_UM_SendAudio = 17;
+	CS_UM_RawAudio = 18;
+	CS_UM_VoiceMask = 19;
+	CS_UM_RequestState = 20;
+	CS_UM_Damage = 21;
+	CS_UM_RadioText = 22;
+	CS_UM_HintText = 23;
+	CS_UM_KeyHintText = 24;
+	CS_UM_ProcessSpottedEntityUpdate = 25;
+	CS_UM_ReloadEffect = 26;
+	CS_UM_AdjustMoney = 27;
+	CS_UM_UpdateTeamMoney = 28;
+	CS_UM_StopSpectatorMode = 29;
+	CS_UM_KillCam = 30;
+	CS_UM_DesiredTimescale = 31;
+	CS_UM_CurrentTimescale = 32;
+	CS_UM_AchievementEvent = 33;
+	CS_UM_MatchEndConditions = 34;
+	CS_UM_DisconnectToLobby = 35;
+	CS_UM_PlayerStatsUpdate = 36;
+	CS_UM_DisplayInventory = 37;
+	CS_UM_WarmupHasEnded = 38;
+	CS_UM_ClientInfo = 39;
+	CS_UM_XRankGet = 40;
+	CS_UM_XRankUpd = 41;
+	CS_UM_SetPlayerEloDisplayBracket = 42;
+	CS_UM_RequestEloBracketInfo = 43;
+	CS_UM_SetEloBracketInfo = 44;
+	CS_UM_CallVoteFailed = 45;
+	CS_UM_VoteStart = 46;
+	CS_UM_VotePass = 47;
+	CS_UM_VoteFailed = 48;
+	CS_UM_VoteSetup = 49;
+	CS_UM_ServerRankRevealAll = 50;
+	CS_UM_SendLastKillerDamageToClient = 51;
+	CS_UM_ServerRankUpdate = 52;
+}
+
+message CCSUsrMsg_VGUIMenu {
+	message Subkey {
+		optional string name = 1;
+		optional string str = 2;
+	}
+
+	optional string name = 1;
+	optional bool show = 2;
+	repeated .CCSUsrMsg_VGUIMenu.Subkey subkeys = 3;
+}
+
+message CCSUsrMsg_Geiger {
+	optional int32 range = 1;
+}
+
+message CCSUsrMsg_Train {
+	optional int32 train = 1;
+}
+
+message CCSUsrMsg_HudText {
+	optional string text = 1;
+}
+
+message CCSUsrMsg_SayText {
+	optional int32 ent_idx = 1;
+	optional string text = 2;
+	optional bool chat = 3;
+}
+
+message CCSUsrMsg_SayText2 {
+	optional int32 ent_idx = 1;
+	optional bool chat = 2;
+	optional string msg_name = 3;
+	repeated string params = 4;
+}
+
+message CCSUsrMsg_TextMsg {
+	optional int32 msg_dst = 1;
+	repeated string params = 3;
+}
+
+message CCSUsrMsg_HudMsg {
+	optional int32 channel = 1;
+	optional .CMsgVector2D pos = 2;
+	optional .CMsgRGBA clr1 = 3;
+	optional .CMsgRGBA clr2 = 4;
+	optional int32 effect = 5;
+	optional float fade_in_time = 6;
+	optional float fade_out_time = 7;
+	optional float hold_time = 9;
+	optional float fx_time = 10;
+	optional string text = 11;
+}
+
+message CCSUsrMsg_Shake {
+	optional int32 command = 1;
+	optional float local_amplitude = 2;
+	optional float frequency = 3;
+	optional float duration = 4;
+}
+
+message CCSUsrMsg_Fade {
+	optional int32 duration = 1;
+	optional int32 hold_time = 2;
+	optional int32 flags = 3;
+	optional .CMsgRGBA clr = 4;
+}
+
+message CCSUsrMsg_Rumble {
+	optional int32 index = 1;
+	optional int32 data = 2;
+	optional int32 flags = 3;
+}
+
+message CCSUsrMsg_CloseCaption {
+	optional uint32 hash = 1;
+	optional int32 duration = 2;
+	optional bool from_player = 3;
+}
+
+message CCSUsrMsg_CloseCaptionDirect {
+	optional uint32 hash = 1;
+	optional int32 duration = 2;
+	optional bool from_player = 3;
+}
+
+message CCSUsrMsg_SendAudio {
+	optional string radio_sound = 1;
+}
+
+message CCSUsrMsg_RawAudio {
+	optional int32 pitch = 1;
+	optional int32 entidx = 2;
+	optional float duration = 3;
+	optional string voice_filename = 4;
+}
+
+message CCSUsrMsg_VoiceMask {
+	message PlayerMask {
+		optional int32 game_rules_mask = 1;
+		optional int32 ban_masks = 2;
+	}
+
+	repeated .CCSUsrMsg_VoiceMask.PlayerMask player_masks = 1;
+	optional bool player_mod_enable = 2;
+}
+
+message CCSUsrMsg_Damage {
+	optional int32 amount = 1;
+	optional .CMsgVector inflictor_world_pos = 2;
+}
+
+message CCSUsrMsg_RadioText {
+	optional int32 msg_dst = 1;
+	optional int32 client = 2;
+	optional string msg_name = 3;
+	repeated string params = 4;
+}
+
+message CCSUsrMsg_HintText {
+	optional string text = 1;
+}
+
+message CCSUsrMsg_KeyHintText {
+	repeated string hints = 1;
+}
+
+message CCSUsrMsg_ProcessSpottedEntityUpdate {
+	message SpottedEntityUpdate {
+		optional int32 entity_idx = 1;
+		optional int32 class_id = 2;
+		optional int32 origin_x = 3;
+		optional int32 origin_y = 4;
+		optional int32 origin_z = 5;
+		optional int32 angle_y = 6;
+		optional bool defuser = 7;
+		optional bool player_has_defuser = 8;
+		optional bool player_has_c4 = 9;
+	}
+
+	optional bool new_update = 1;
+	repeated .CCSUsrMsg_ProcessSpottedEntityUpdate.SpottedEntityUpdate entity_updates = 2;
+}
+
+message CCSUsrMsg_ReloadEffect {
+	optional int32 entidx = 1;
+}
+
+message CCSUsrMsg_AdjustMoney {
+	optional int32 amount = 1;
+}
+
+message CCSUsrMsg_KillCam {
+	optional int32 obs_mode = 1;
+	optional int32 first_target = 2;
+	optional int32 second_target = 3;
+}
+
+message CCSUsrMsg_DesiredTimescale {
+	optional float desired_timescale = 1;
+	optional float duration_realtime_sec = 2;
+	optional int32 interpolator_type = 3;
+	optional float start_blend_time = 4;
+}
+
+message CCSUsrMsg_CurrentTimescale {
+	optional float cur_timescale = 1;
+}
+
+message CCSUsrMsg_AchievementEvent {
+	optional int32 achievement = 1;
+	optional int32 count = 2;
+	optional int32 user_id = 3;
+}
+
+message CCSUsrMsg_MatchEndConditions {
+	optional int32 fraglimit = 1;
+	optional int32 mp_maxrounds = 2;
+	optional int32 mp_winlimit = 3;
+	optional int32 mp_timelimit = 4;
+}
+
+message CCSUsrMsg_PlayerStatsUpdate {
+	message Stat {
+		optional int32 idx = 1;
+		optional int32 delta = 2;
+	}
+
+	optional int32 version = 1;
+	repeated .CCSUsrMsg_PlayerStatsUpdate.Stat stats = 4;
+	optional int32 user_id = 5;
+	optional int32 crc = 6;
+}
+
+message CCSUsrMsg_DisplayInventory {
+	optional bool display = 1;
+}
+
+message CCSUsrMsg_XRankGet {
+	optional int32 mode_idx = 1;
+	optional int32 controller = 2;
+}
+
+message CCSUsrMsg_XRankUpd {
+	optional int32 mode_idx = 1;
+	optional int32 controller = 2;
+	optional int32 ranking = 3;
+}
+
+message CCSUsrMsg_SetPlayerEloDisplayBracket {
+	optional int32 bracket = 1;
+}
+
+message CCSUsrMsg_RequestEloBracketInfo {
+	optional int32 bracket = 1;
+}
+
+message CCSUsrMsg_SetEloBracketInfo {
+	optional int32 game_mode = 1;
+	optional int32 display_bracket = 2;
+	optional int32 prev_bracket = 3;
+	optional int32 num_games_in_bracket = 4;
+}
+
+message CCSUsrMsg_CallVoteFailed {
+	optional int32 reason = 1;
+	optional int32 time = 2;
+}
+
+message CCSUsrMsg_VoteStart {
+	optional int32 team = 1;
+	optional int32 ent_idx = 2;
+	optional int32 vote_type = 3;
+	optional string disp_str = 4;
+	optional string details_str = 5;
+	optional string other_team_str = 6;
+	optional bool is_yes_no_vote = 7;
+}
+
+message CCSUsrMsg_VotePass {
+	optional int32 team = 1;
+	optional int32 vote_type = 2;
+	optional string disp_str = 3;
+	optional string details_str = 4;
+}
+
+message CCSUsrMsg_VoteFailed {
+	optional int32 team = 1;
+	optional int32 reason = 2;
+}
+
+message CCSUsrMsg_VoteSetup {
+	repeated string potential_issues = 1;
+}
+
+message CCSUsrMsg_SendLastKillerDamageToClient {
+	optional int32 num_hits_given = 1;
+	optional int32 damage_given = 2;
+	optional int32 num_hits_taken = 3;
+	optional int32 damage_taken = 4;
+}
+
+message CCSUsrMsg_ServerRankUpdate {
+	message RankUpdate {
+		optional int32 account_id = 1;
+		optional int32 rank_old = 2;
+		optional int32 rank_new = 3;
+		optional int32 num_wins = 4;
+		optional float rank_change = 5;
+	}
+
+	repeated .CCSUsrMsg_ServerRankUpdate.RankUpdate rank_update = 1;
+}
+
+message CCSUsrMsg_ResetHud {
+	optional bool reset = 1;
+}
+
+message CCSUsrMsg_GameTitle {
+	optional int32 dummy = 1;
+}
+
+message CCSUsrMsg_RequestState {
+	optional int32 dummy = 1;
+}
+
+message CCSUsrMsg_StopSpectatorMode {
+	optional int32 dummy = 1;
+}
+
+message CCSUsrMsg_DisconnectToLobby {
+	optional int32 dummy = 1;
+}
+
+message CCSUsrMsg_WarmupHasEnded {
+	optional int32 dummy = 1;
+}
+
+message CCSUsrMsg_ClientInfo {
+	optional int32 dummy = 1;
+}
+
+message CCSUsrMsg_ServerRankRevealAll {
+	optional int32 dummy = 1;
+}
+
