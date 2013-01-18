@@ -690,6 +690,11 @@ namespace SteamKit2
                     {
                         cacheClan.Name = friend.player_name;
                     }
+
+                    if ( (flags & EClientPersonaStateFlag.Presence) == EClientPersonaStateFlag.Presence )
+                    {
+                        cacheClan.AvatarHash = friend.avatar_hash;
+                    }
                 }
                 else
                 {
