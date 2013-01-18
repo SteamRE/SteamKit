@@ -7,6 +7,8 @@
 
 using System;
 using System.Net;
+using System.Security.Cryptography;
+using System.IO;
 
 namespace SteamKit2
 {
@@ -38,7 +40,17 @@ namespace SteamKit2
 
         public byte[] ProcessIncoming( byte[] data )
         {
-            return CryptoHelper.SymmetricDecrypt( data, sessionKey );
+            try
+            {
+                return CryptoHelper.SymmetricDecrypt( data, sessionKey );
+            }
+            catch ( CryptographicException ex )
+            {
+                DebugLog.WriteLine( "NetFilterEncryption", "Unable to decrypt incoming packet: " + ex.Message );
+
+                // rethrow as an IO exception so it's handled in the network thread
+                throw new IOException( "Unable to decrypt incoming packet", ex );
+            }
         }
 
         public byte[] ProcessOutgoing( byte[] ms )
