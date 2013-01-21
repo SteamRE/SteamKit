@@ -1472,6 +1472,8 @@ message CMsgClientUCMSubscribePublishedFileResponse {
 message CMsgClientUCMEnumerateUserSubscribedFiles {
 	optional uint32 app_id = 1;
 	optional uint32 start_index = 2;
+	optional uint32 list_type = 3 [default = 1];
+	optional uint32 matching_file_type = 4 [default = 0];
 }
 
 message CMsgClientUCMEnumerateUserSubscribedFilesResponse {
