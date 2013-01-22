@@ -53,6 +53,13 @@ enum ECstrike15UserMessages {
 	CS_UM_ServerRankRevealAll = 50;
 	CS_UM_SendLastKillerDamageToClient = 51;
 	CS_UM_ServerRankUpdate = 52;
+	CS_UM_ItemPickup = 53;
+	CS_UM_ShowMenu = 54;
+	CS_UM_BarTime = 55;
+	CS_UM_AmmoDenied = 56;
+	CS_UM_MarkAchievement = 57;
+	CS_UM_MatchStatsUpdate = 58;
+	CS_UM_ItemDrop = 59;
 }
 
 message CCSUsrMsg_VGUIMenu {
@@ -244,6 +251,7 @@ message CCSUsrMsg_PlayerStatsUpdate {
 	}
 
 	optional int32 version = 1;
+	optional int32 official_server = 2;
 	repeated .CCSUsrMsg_PlayerStatsUpdate.Stat stats = 4;
 	optional int32 user_id = 5;
 	optional int32 crc = 6;
@@ -327,6 +335,37 @@ message CCSUsrMsg_ServerRankUpdate {
 	}
 
 	repeated .CCSUsrMsg_ServerRankUpdate.RankUpdate rank_update = 1;
+}
+
+message CCSUsrMsg_ItemPickup {
+	optional string item = 1;
+}
+
+message CCSUsrMsg_ShowMenu {
+	optional int32 bits_valid_slots = 1;
+	optional int32 display_time = 2;
+	optional string menu_string = 3;
+}
+
+message CCSUsrMsg_BarTime {
+	optional string time = 1;
+}
+
+message CCSUsrMsg_AmmoDenied {
+	optional int32 ammoIdx = 1;
+}
+
+message CCSUsrMsg_MarkAchievement {
+	optional string achievement = 1;
+}
+
+message CCSUsrMsg_MatchStatsUpdate {
+	optional string update = 1;
+}
+
+message CCSUsrMsg_ItemDrop {
+	optional int64 itemid = 1;
+	optional bool death = 2;
 }
 
 message CCSUsrMsg_ResetHud {
