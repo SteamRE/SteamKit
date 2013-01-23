@@ -682,7 +682,7 @@ namespace SteamKit2
                     this.SHAHash = app_info.sha;
 
                     this.KeyValues = new KeyValue();
-                    using (MemoryStream ms = new MemoryStream(app_info.buffer))
+                    using (MemoryStream ms = new MemoryStream(app_info.buffer, 0, app_info.buffer.Length - 1))
                         this.KeyValues.ReadAsText(ms);
 
                     this.OnlyPublic = app_info.only_public;
