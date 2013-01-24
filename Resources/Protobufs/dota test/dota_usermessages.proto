@@ -43,6 +43,7 @@ enum EDotaUserMessages {
 	DOTA_UM_ChatWheel = 101;
 	DOTA_UM_ReceivedXmasGift = 102;
 	DOTA_UM_UpdateSharedContent = 103;
+	DOTA_UM_TutorialRequestExp = 104;
 }
 
 enum DOTA_CHAT_MESSAGE {
@@ -523,5 +524,8 @@ message CDOTAUserMsg_ReceivedXmasGift {
 
 message CDOTAUserMsg_UpdateSharedContent {
 	optional int32 slot_type = 1;
+}
+
+message CDOTAUserMsg_TutorialRequestExp {
 }
 
