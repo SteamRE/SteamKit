@@ -837,7 +837,7 @@ message CMsgClientGetClientDetails {
 }
 
 message CMsgClientReportOverlayDetourFailure {
-	repeated string failure_string = 1;
+	repeated string failure_strings = 1;
 }
 
 message CMsgClientGetClientDetailsResponse {
@@ -1349,6 +1349,7 @@ message CMsgClientUCMAddScreenshot {
 	repeated .CMsgClientUCMAddScreenshot.Tag tag = 10;
 	repeated fixed64 tagged_steamid = 11;
 	optional bool spoiler_tag = 12;
+	repeated uint64 tagged_publishedfileid = 13;
 }
 
 message CMsgClientUCMAddScreenshotResponse {
@@ -1902,6 +1903,17 @@ message CMsgMDSSetAppBuildLiveResponse {
 	optional string error_string = 2;
 }
 
+message CMsgClientMDSSignInstallScript {
+	optional int32 depot_id = 1;
+	optional string data = 2;
+}
+
+message CMsgClientMDSSignInstallScriptResponse {
+	optional int32 eresult = 1 [default = 2];
+	optional string error_string = 2;
+	optional string data = 3;
+}
+
 message CMsgClientEmailChange {
 	optional string password = 1;
 	optional string email = 2;
@@ -2068,6 +2080,7 @@ message CMsgGMSClientServerQueryResponse {
 	}
 
 	repeated .CMsgGMSClientServerQueryResponse.Server servers = 1;
+	optional string error = 2;
 }
 
 message CMsgGameServerOutOfDate {
@@ -2230,6 +2243,46 @@ message CMsgClientCommentNotifications {
 }
 
 message CMsgClientRequestCommentNotifications {
+}
+
+message CMsgClientOfflineMessageNotification {
+	optional uint32 offline_messages = 1;
+}
+
+message CMsgClientRequestOfflineMessageCount {
+}
+
+message CMsgClientFSGetFriendMessageHistory {
+	optional fixed64 steamid = 1;
+}
+
+message CMsgClientFSGetFriendMessageHistoryResponse {
+	message FriendMessage {
+		optional uint32 accountid = 1;
+		optional uint32 timestamp = 2;
+		optional string message = 3;
+		optional bool unread = 4;
+	}
+
+	optional fixed64 steamid = 1;
+	optional uint32 success = 2;
+	repeated .CMsgClientFSGetFriendMessageHistoryResponse.FriendMessage messages = 3;
+}
+
+message CMsgClientFSGetFriendMessageHistoryForOfflineMessages {
+}
+
+message CMsgClientFSGetFriendsSteamLevels {
+	repeated uint32 accountids = 1;
+}
+
+message CMsgClientFSGetFriendsSteamLevelsResponse {
+	message Friend {
+		optional uint32 accountid = 1;
+		optional uint32 level = 2;
+	}
+
+	repeated .CMsgClientFSGetFriendsSteamLevelsResponse.Friend friends = 1;
 }
 
 message CMsgClientEmailAddrInfo {
@@ -2416,7 +2469,7 @@ message CMsgClientFriendUserStatusPublished {
 message CMsgClientServiceMethod {
 	optional string method_name = 1;
 	optional string serialized_method = 2;
-	optional bool one_way = 3;
+	optional bool is_notification = 3;
 }
 
 message CMsgClientServiceMethodResponse {
