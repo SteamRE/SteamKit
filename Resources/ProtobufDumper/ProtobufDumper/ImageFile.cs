@@ -650,6 +650,9 @@ namespace ProtobufDumper
                 return null;
             }
 
+            if (value == null)
+                return null;
+
             if (defValue != null && defValue.Equals(value))
                 return null;
 
@@ -987,9 +990,12 @@ namespace ProtobufDumper
                 {
                     defaultValue = 0;
                 }
-                else if (field.type != FieldDescriptorProto.Type.TYPE_STRING && String.IsNullOrEmpty(field.default_value))
+                else if (String.IsNullOrEmpty(field.default_value))
                 {
-                    defaultValue = Activator.CreateInstance(fieldType);
+                    if (field.type == FieldDescriptorProto.Type.TYPE_STRING)
+                        defaultValue = "";
+                    else
+                        defaultValue = Activator.CreateInstance(fieldType);
                 }
                 else
                 {
