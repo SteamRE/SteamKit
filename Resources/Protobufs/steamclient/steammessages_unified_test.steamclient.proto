@@ -29,7 +29,6 @@ message CMsgTest_NotifyServer_Notification {
 }
 
 service TestSteamClient {
-	option (service_description) = ;
 	option (service_execution_site) = k_EProtoExecutionSiteSteamClient;
 	rpc MessageToClient (.CMsgTest_MessageToClient_Request) returns (.CMsgTest_MessageToClient_Response) {
 		option (method_description) = "Some description - MessageToClient.";
