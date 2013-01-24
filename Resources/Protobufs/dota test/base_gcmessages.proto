@@ -271,9 +271,6 @@ message CMsgUpdateItemSchema {
 	optional string items_game_url = 3;
 }
 
-message CMsgRequestItemSchemaData {
-}
-
 message CMsgGCError {
 	optional string error_text = 1;
 }

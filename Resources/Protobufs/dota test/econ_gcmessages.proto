@@ -59,7 +59,6 @@ enum EGCItemMsg {
 	k_EMsgGCSaxxyBroadcast = 1057;
 	k_EMsgGCBackpackSortFinished = 1058;
 	k_EMsgGCAdjustItemEquippedState = 1059;
-	k_EMsgGCRequestItemSchemaData = 1060;
 	k_EMsgGCCollectItem = 1061;
 	k_EMsgGCItemAcknowledged = 1062;
 	k_EMsgGCPresets_SelectPresetForClass = 1063;
