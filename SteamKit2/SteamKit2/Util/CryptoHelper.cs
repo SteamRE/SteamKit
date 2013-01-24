@@ -8,6 +8,7 @@
 using System;
 using System.IO;
 using System.Security.Cryptography;
+using System.Text;
 
 namespace SteamKit2
 {
@@ -207,6 +208,32 @@ namespace SteamKit2
                     return output;
                 }
             }
+        }
+
+        /// <summary>
+        /// Verifies and performs a symmetricdecrypt on the input using the given password as a key
+        /// </summary>
+        public static byte[] VerifyAndDecryptPassword( byte[] input, string password )
+        {
+            byte[] key, hash;
+            using(SHA256 sha256 = SHA256Managed.Create())
+            {
+                byte[] password_bytes = Encoding.ASCII.GetBytes(password);
+                key = sha256.ComputeHash(password_bytes);
+            }
+            using(HMACSHA1 hmac = new HMACSHA1(key))
+            {
+                hash = hmac.ComputeHash(input, 0, 32);
+            }
+
+            for (int i = 32; i < input.Length; i++)
+                if (input[i] != hash[i % 32])
+                    return null;
+
+            byte[] encrypted = new byte[32];
+            Array.Copy(input, 0, encrypted, 0, 32);
+
+            return CryptoHelper.SymmetricDecrypt(encrypted, key);
         }
 
         /// <summary>
