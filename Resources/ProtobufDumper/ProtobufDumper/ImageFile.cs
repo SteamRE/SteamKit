@@ -17,13 +17,11 @@ namespace ProtobufDumper
     [AttributeUsage(AttributeTargets.All)]
     public class EnumProxyAttribute : Attribute
     {
-        public EnumProxyAttribute(object defaultValue, string type)
+        public EnumProxyAttribute(string type)
         {
-            this.DefaultValue = defaultValue;
             this.EnumType = type;
         }
 
-        public object DefaultValue;
         public String EnumType;
     }
 
@@ -378,7 +376,7 @@ namespace ProtobufDumper
             {
                 Console.WriteLine("'{0}' needs rescan: {1}\n", name, ex.Message);
                 // try scanning backwards for null terminators
-                for (int i = data.Length - 1; i > 0; i--)
+                for (int i = data.Length - 1; i > data.Length - 8; i--)
                 {
                     if (data[i] == 0)
                     {
@@ -635,7 +633,7 @@ namespace ProtobufDumper
             name = protoMember[0].Name;
             object value = null;
 
-            object defValue = defaultValueList[0].Value;
+            var defValue = defaultValueList[0];
 
             try
             {
@@ -650,10 +648,7 @@ namespace ProtobufDumper
                 return null;
             }
 
-            if (value == null)
-                return null;
-
-            if (defValue != null && defValue.Equals(value))
+            if (defValue.Value != null && defValue.Value.Equals(value))
                 return null;
 
             if (enumProxyList.Length > 0)
@@ -985,17 +980,10 @@ namespace ProtobufDumper
 
                 FieldBuilder fbuilder = extension.DefineField(field.name, fieldType, FieldAttributes.Public);
 
-                object defaultValue = field.default_value;
-                if (field.type == FieldDescriptorProto.Type.TYPE_ENUM)
+                object defaultValue;
+                if (String.IsNullOrEmpty(field.default_value))
                 {
-                    defaultValue = 0;
-                }
-                else if (String.IsNullOrEmpty(field.default_value))
-                {
-                    if (field.type == FieldDescriptorProto.Type.TYPE_STRING)
-                        defaultValue = "";
-                    else
-                        defaultValue = Activator.CreateInstance(fieldType);
+                    defaultValue = Activator.CreateInstance(fieldType);
                 }
                 else
                 {
@@ -1014,8 +1002,8 @@ namespace ProtobufDumper
                 if (buildEnumProxy)
                 {
                     Type epType = typeof(EnumProxyAttribute);
-                    ConstructorInfo epCtor = epType.GetConstructor(new Type[] { typeof(object), typeof(string) });
-                    CustomAttributeBuilder epBuilder = new CustomAttributeBuilder(epCtor, new object[] { field.default_value, field.type_name });
+                    ConstructorInfo epCtor = epType.GetConstructor(new Type[] { typeof(string) });
+                    CustomAttributeBuilder epBuilder = new CustomAttributeBuilder(epCtor, new object[] { field.type_name });
 
                     fbuilder.SetCustomAttribute(epBuilder);
                 }
