@@ -214,7 +214,9 @@ namespace DotaMatchRequest
             {
                 typeof( EDOTAGCMsg ),
                 typeof( EGCBaseMsg ),
-                typeof( EGCSharedMsg )
+                typeof( EGCItemMsg ),
+                typeof( ESOMsg ),
+                typeof( EGCSystemMsg ),
             };
 
             foreach ( var enumType in eMsgEnums )
