@@ -36,7 +36,6 @@ enum EDOTAGCMsg {
 	k_EMsgGCPracticeLobbySetTeamSlot = 7047;
 	k_EMsgGCTutorialLobbyCreate = 7048;
 	k_EMsgGCInitialQuestionnaireResponse = 7049;
-	k_EMsgGCGCTrackedEvent = 7050;
 	k_EMsgGCTournamentRequest = 7051;
 	k_EMsgGCTournamentResponse = 7052;
 	k_EMsgGCBetaParticiaptionRequest = 7053;
@@ -50,8 +49,6 @@ enum EDOTAGCMsg {
 	k_EMsgGCRequestChatChannelListResponse = 7061;
 	k_EMsgGCRequestMatches = 7064;
 	k_EMsgGCRequestMatchesResponse = 7065;
-	k_EMsgGCMatchmakingSearchCountRequest = 7066;
-	k_EMsgGCMatchmakingSearchCountResponse = 7067;
 	k_EMsgGCRequestPlayerResources = 7068;
 	k_EMsgGCRequestPlayerResourcesResponse = 7069;
 	k_EMsgGCReadyUp = 7070;
@@ -91,8 +88,6 @@ enum EDOTAGCMsg {
 	k_EMsgGCUnpickedHeroListResponse = 7106;
 	k_EMsgGCRemoveFromUnpickedHeroList = 7107;
 	k_EMsgGCGenericResult = 7108;
-	k_EMsgGCMatchGroupWaitTimesRequest = 7109;
-	k_EMsgGCMatchGroupWaitTimesResponse = 7110;
 	k_EMsgGCFriendPracticeLobbyListRequest = 7111;
 	k_EMsgGCFriendPracticeLobbyListResponse = 7112;
 	k_EMsgGCPracticeLobbyJoinResponse = 7113;
@@ -169,6 +164,20 @@ enum EDOTAGCMsg {
 	k_EMsgGCToGCMatchCompleted = 7186;
 	k_EMsgGCDismissLootGreevilResponse = 7187;
 	k_EMsgGCBalancedShuffleLobby = 7188;
+	k_EMsgGCToGCCheckLeaguePermission = 7189;
+	k_EMsgGCToGCCheckLeaguePermissionResponse = 7190;
+	k_EMsgGCLeagueScheduleRequest = 7191;
+	k_EMsgGCLeagueScheduleResponse = 7192;
+	k_EMsgGCLeagueScheduleEdit = 7193;
+	k_EMsgGCLeagueScheduleEditResponse = 7194;
+	k_EMsgGCLeaguesInMonthRequest = 7195;
+	k_EMsgGCLeaguesInMonthResponse = 7196;
+	k_EMsgGCMatchmakingStatsRequest = 7197;
+	k_EMsgGCMatchmakingStatsResponse = 7198;
+	k_EMsgGCBotGameCreate = 7199;
+	k_EMsgGCSetMatchHistoryAccess = 7200;
+	k_EMsgGCSetMatchHistoryAccessResponse = 7201;
+	k_EMsgGCNotifyMatchHistoryAccessChange = 7202;
 	k_EMsgGCDev_GrantWarKill = 8001;
 }
 
@@ -548,13 +557,6 @@ message CMsgDismissLootGreevil {
 message CMsgDismissLootGreevilResponse {
 }
 
-message CMsgMatchmakingSearchCountRequest {
-}
-
-message CMsgMatchmakingSearchCountResponse {
-	repeated uint32 searching_players_by_group = 1;
-}
-
 message CSourceTVGame {
 	message Player {
 		optional fixed64 steam_id = 1;
@@ -745,6 +747,13 @@ message CMsgFriendPracticeLobbyListResponse {
 	repeated .CMsgPracticeLobbyListResponseEntry lobbies = 1;
 }
 
+message CMsgBotGameCreate {
+	optional string search_key = 1;
+	optional uint32 client_version = 2;
+	optional .DOTABotDifficulty difficulty = 3 [default = BOT_DIFFICULTY_PASSIVE];
+	optional .DOTA_GC_TEAM team = 4 [default = DOTA_GC_TEAM_GOOD_GUYS];
+}
+
 message CMsgSetAvatar {
 	optional uint32 avatar = 1;
 }
@@ -753,23 +762,6 @@ message CMsgRequestInternationalTicket {
 }
 
 message CMsgBalancedShuffleLobby {
-}
-
-message CMsgTrackedEvent {
-	optional uint64 submitter_id = 1 [(key_field) = true];
-	optional uint32 event_id = 2 [(key_field) = true];
-	optional fixed64 time_submitted = 3 [(key_field) = true];
-	optional uint32 event_type = 4 [(key_field) = true];
-	repeated uint32 vars_uint32 = 5;
-	repeated uint64 vars_uint64 = 6;
-	repeated int32 vars_int32 = 7;
-	repeated int64 vars_int64 = 8;
-	repeated float vars_float = 9;
-	repeated double vars_double = 10;
-}
-
-message CMsgSendTrackedEvents {
-	repeated .CMsgTrackedEvent events = 1;
 }
 
 message CMsgGameMatchSignOut {
@@ -1693,13 +1685,6 @@ message CMsgRemoveFromUnpickedHeroList {
 	optional uint32 hero_id = 1;
 }
 
-message CMsgDOTAMatchGroupWaitTimesRequest {
-}
-
-message CMsgDOTAMatchGroupWaitTimesResponse {
-	repeated uint32 wait_times_by_group = 1;
-}
-
 message CItemDropEvent {
 	optional uint32 account_id = 1;
 	optional uint32 time_stamp = 2;
@@ -1755,6 +1740,8 @@ message CMsgDOTAWelcome {
 	optional bool tournament_admin = 3;
 	optional bool tournament_broadcaster = 4;
 	optional uint32 store_item_hash = 5;
+	optional uint32 timeplayedconsecutively = 6;
+	optional bool allow_3rd_party_match_history = 7;
 }
 
 message CSODOTAGameHeroFavorites {
@@ -2002,5 +1989,80 @@ message CMsgDOTAStorePromoPagesResponse {
 
 message CMsgDOTAGCToGCMatchCompleted {
 	optional uint32 match_id = 1;
+}
+
+message CMsgGCToGCCheckLeaguePermission {
+	optional fixed64 user_id = 1;
+	optional uint32 league_id = 2;
+}
+
+message CMsgGCToGCCheckLeaguePermissionResponse {
+	optional bool has_access = 1;
+}
+
+message CMsgLeagueScheduleBlock {
+	optional uint32 block_id = 1;
+	optional uint32 start_time = 2;
+	optional uint32 end_time = 3;
+	optional bool finals = 4;
+	optional string comment = 5;
+}
+
+message CMsgDOTALeague {
+	optional uint32 league_id = 1;
+	repeated .CMsgLeagueScheduleBlock schedule = 2;
+}
+
+message CMsgDOTALeagueScheduleRequest {
+	optional uint32 league_id = 1;
+}
+
+message CMsgDOTALeagueScheduleResponse {
+	optional .CMsgDOTALeague league = 1;
+	optional uint32 eresult = 2 [default = 2];
+}
+
+message CMsgDOTALeagueScheduleEdit {
+	optional uint32 league_id = 1;
+	optional .CMsgLeagueScheduleBlock schedule = 2;
+	optional bool delete_block = 3;
+}
+
+message CMsgDOTALeagueScheduleEditResponse {
+	optional .CMsgDOTALeague league = 1;
+	optional uint32 eresult = 2 [default = 2];
+}
+
+message CMsgDOTALeaguesInMonthRequest {
+	optional uint32 month = 1;
+	optional uint32 year = 2;
+}
+
+message CMsgDOTALeaguesInMonthResponse {
+	optional uint32 eresult = 1 [default = 2];
+	optional uint32 month = 2;
+	optional uint32 year = 3;
+	repeated .CMsgDOTALeague leagues = 4;
+}
+
+message CMsgDOTAMatchmakingStatsRequest {
+}
+
+message CMsgDOTAMatchmakingStatsResponse {
+	repeated uint32 wait_times_by_group = 1;
+	repeated uint32 searching_players_by_group = 2;
+}
+
+message CMsgDOTASetMatchHistoryAccess {
+	optional bool allow_3rd_party_match_history = 1;
+}
+
+message CMsgDOTASetMatchHistoryAccessResponse {
+	optional uint32 eresult = 1 [default = 2];
+}
+
+message CMsgDOTANotifyMatchHistoryAccessChange {
+	optional uint32 accountid = 1;
+	optional bool allow_3rd_party_match_history = 2;
 }
 
