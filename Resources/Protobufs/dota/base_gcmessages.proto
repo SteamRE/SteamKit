@@ -28,6 +28,11 @@ enum EGCBaseProtoObjectTypes {
 	k_EProtoObjectLobbyInvite = 1002;
 }
 
+enum GC_BannedWordType {
+	GC_BANNED_WORD_DISABLE_WORD = 0;
+	GC_BANNED_WORD_ENABLE_WORD = 1;
+}
+
 message CGCStorePurchaseInit_LineItem {
 	optional uint32 item_def_id = 1;
 	optional uint32 quantity = 2;
@@ -73,6 +78,8 @@ message CMsgServerHello {
 message CMsgClientWelcome {
 	optional uint32 version = 1;
 	optional bytes game_data = 2;
+	optional uint32 banned_word_set = 3;
+	optional uint32 word_id = 4;
 }
 
 message CMsgServerWelcome {
@@ -106,6 +113,7 @@ message CMsgPartyInviteResponse {
 	optional uint64 party_id = 1;
 	optional bool accept = 2;
 	optional uint32 client_version = 3;
+	optional bool team_invite = 4;
 }
 
 message CMsgKickFromParty {
@@ -426,5 +434,25 @@ message CSOEconItemHalloweenEgg {
 	optional uint32 green_power = 9;
 	optional uint32 black_power = 10;
 	optional uint32 skin = 11;
+}
+
+message CMsgGCBannedWordListRequest {
+	optional uint32 ban_list_group_id = 1;
+	optional uint32 word_id = 2;
+}
+
+message CMsgGCBannedWord {
+	optional uint32 word_id = 1;
+	optional .GC_BannedWordType word_type = 2 [default = GC_BANNED_WORD_DISABLE_WORD];
+	optional string word = 3;
+}
+
+message CMsgGCBannedWordListResponse {
+	optional uint32 ban_list_group_id = 1;
+	repeated .CMsgGCBannedWord word_list = 2;
+}
+
+message CMsgGCToGCBannedWordListBroadcast {
+	optional .CMsgGCBannedWordListResponse broadcast = 1;
 }
 

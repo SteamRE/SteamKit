@@ -116,6 +116,9 @@ enum EGCItemMsg {
 	k_EMsgGCStorePurchaseQueryTxnResponse = 2509;
 	k_EMsgGCStorePurchaseInit = 2510;
 	k_EMsgGCStorePurchaseInitResponse = 2511;
+	k_EMsgGCBannedWordListRequest = 2512;
+	k_EMsgGCBannedWordListResponse = 2513;
+	k_EMsgGCToGCBannedWordListBroadcast = 2514;
 }
 
 enum EGCMsgResponse {
