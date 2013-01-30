@@ -93,3 +93,16 @@ message CGCToGCMsgRoutedReply {
 	optional bytes net_message = 2;
 }
 
+message CMsgGCUpdateSessionIP {
+	optional fixed64 steamid = 1;
+	optional fixed32 ip = 2;
+}
+
+message CMsgGCRequestSessionIP {
+	optional fixed64 steamid = 1;
+}
+
+message CMsgGCRequestSessionIPResponse {
+	optional fixed32 ip = 1;
+}
+

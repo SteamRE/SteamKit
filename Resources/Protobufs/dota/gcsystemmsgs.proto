@@ -76,5 +76,8 @@ enum EGCToGCMsg {
 	k_EGCToGCMsgMasterAckResponse = 151;
 	k_EGCToGCMsgRouted = 152;
 	k_EGCToGCMsgRoutedReply = 153;
+	k_EMsgUpdateSessionIP = 154;
+	k_EMsgRequestSessionIP = 155;
+	k_EMsgRequestSessionIPResponse = 156;
 }
 

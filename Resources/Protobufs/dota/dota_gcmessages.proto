@@ -11,7 +11,6 @@ enum EDOTAGCMsg {
 	k_EMsgGCLeaveChatChannel = 7011;
 	k_EMsgGCOtherJoinedChannel = 7013;
 	k_EMsgGCOtherLeftChannel = 7014;
-	k_EMsgGCRequestMatchHistoryList = 7016;
 	k_EMsgGCMatchHistoryList = 7017;
 	k_EMsgGCGetNews = 7024;
 	k_EMsgGCNewsResponse = 7025;
@@ -178,6 +177,8 @@ enum EDOTAGCMsg {
 	k_EMsgGCSetMatchHistoryAccess = 7200;
 	k_EMsgGCSetMatchHistoryAccessResponse = 7201;
 	k_EMsgGCNotifyMatchHistoryAccessChange = 7202;
+	k_EMsgUpgradeLeagueItem = 7203;
+	k_EMsgUpgradeLeagueItemResponse = 7204;
 	k_EMsgGCDev_GrantWarKill = 8001;
 }
 
@@ -383,6 +384,7 @@ message CSODOTAPartyInvite {
 	optional fixed64 sender_id = 2;
 	optional string sender_name = 3;
 	repeated .CSODOTAPartyInvite.PartyMember members = 4;
+	optional bool team_invite = 5;
 }
 
 message CDOTALobbyMember {
@@ -493,6 +495,7 @@ message CSODOTALobby {
 	optional uint32 loot_generated = 49;
 	optional uint32 loot_awarded = 50;
 	optional bool allchat = 51 [default = false];
+	optional uint32 rank_change = 52;
 }
 
 message CSODOTALobbyInternal {
@@ -764,6 +767,22 @@ message CMsgRequestInternationalTicket {
 message CMsgBalancedShuffleLobby {
 }
 
+message CMatchHeroSelectEvent {
+	optional bool is_pick = 1;
+	optional uint32 team = 2;
+	optional uint32 hero_id = 3;
+}
+
+message CMatchPlayerAbilityUpgrade {
+	optional uint32 ability = 1;
+	optional uint32 time = 2;
+}
+
+message CMatchAdditionalUnitInventory {
+	optional string unit_name = 1;
+	repeated uint32 items = 2;
+}
+
 message CMsgGameMatchSignOut {
 	message CTeam {
 		message CPlayer {
@@ -796,6 +815,8 @@ message CMsgGameMatchSignOut {
 			optional uint32 claimed_denies = 29;
 			optional uint32 claimed_misses = 30;
 			optional uint32 misses = 31;
+			repeated .CMatchPlayerAbilityUpgrade ability_upgrades = 32;
+			repeated .CMatchAdditionalUnitInventory additional_units_inventory = 33;
 		}
 
 		repeated .CMsgGameMatchSignOut.CTeam.CPlayer players = 1;
@@ -815,6 +836,7 @@ message CMsgGameMatchSignOut {
 	optional uint32 first_blood_time = 12;
 	optional float game_balance = 13;
 	optional uint32 event_score = 14;
+	repeated .CMatchHeroSelectEvent picks_bans = 15;
 }
 
 message CMsgGameMatchSignoutResponse {
@@ -950,6 +972,8 @@ message CMsgDOTAMatch {
 		optional uint32 claimed_denies = 44;
 		optional uint32 claimed_misses = 45;
 		optional uint32 misses = 46;
+		repeated .CMatchPlayerAbilityUpgrade ability_upgrades = 47;
+		repeated .CMatchAdditionalUnitInventory additional_units_inventory = 48;
 	}
 
 	optional uint32 season = 1;
@@ -981,6 +1005,7 @@ message CMsgDOTAMatch {
 	optional uint32 positive_votes = 29;
 	optional uint32 negative_votes = 30;
 	optional .DOTA_GameMode game_mode = 31 [default = DOTA_GAMEMODE_NONE];
+	repeated .CMatchHeroSelectEvent picks_bans = 32;
 }
 
 message CMsgDOTAPlayerMatchHistory {
@@ -1058,6 +1083,7 @@ message CMsgDOTATeamMember {
 	optional uint32 team_id = 2;
 	optional uint32 permissions = 3;
 	optional uint32 time_joined = 4;
+	optional bool is_rank_factored_into_team = 5;
 }
 
 message CMsgDOTATeam {
@@ -1080,6 +1106,7 @@ message CMsgDOTATeam {
 	optional uint32 fullgamesplayed = 17;
 	repeated uint32 leagues = 18;
 	optional uint32 gamesplayed = 19;
+	optional uint32 gamesplayedwithcurrentroster = 20;
 }
 
 message CMsgDOTACreateTeam {
@@ -1200,6 +1227,7 @@ message CMsgDOTAProTeamListResponse {
 		optional uint32 time_created = 3;
 		optional uint64 logo = 4;
 		optional string country_code = 5;
+		optional uint32 member_count = 6;
 	}
 
 	repeated .CMsgDOTAProTeamListResponse.TeamEntry teams = 1;
@@ -1291,10 +1319,6 @@ message CMsgDOTALeaveTeamResponse {
 
 	optional .CMsgDOTALeaveTeamResponse.Result result = 1 [default = SUCCESS];
 	optional string team_name = 2;
-}
-
-message CMsgDOTASuggestTeamMatchmaking {
-	optional string teammate_name = 1;
 }
 
 message CMsgDOTABetaParticipationRequest {
@@ -2064,5 +2088,13 @@ message CMsgDOTASetMatchHistoryAccessResponse {
 message CMsgDOTANotifyMatchHistoryAccessChange {
 	optional uint32 accountid = 1;
 	optional bool allow_3rd_party_match_history = 2;
+}
+
+message CMsgUpgradeLeagueItem {
+	optional fixed64 steamid = 1;
+	optional uint64 item_id = 2;
+}
+
+message CMsgUpgradeLeagueItemResponse {
 }
 
