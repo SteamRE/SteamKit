@@ -275,6 +275,24 @@ namespace SteamKit2.GC.Internal
       get { return _game_data; }
       set { _game_data = value; }
     }
+
+    private uint _banned_word_set = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"banned_word_set", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint banned_word_set
+    {
+      get { return _banned_word_set; }
+      set { _banned_word_set = value; }
+    }
+
+    private uint _word_id = default(uint);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"word_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint word_id
+    {
+      get { return _word_id; }
+      set { _word_id = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -452,6 +470,15 @@ namespace SteamKit2.GC.Internal
     {
       get { return _client_version; }
       set { _client_version = value; }
+    }
+
+    private bool _team_invite = default(bool);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"team_invite", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool team_invite
+    {
+      get { return _team_invite; }
+      set { _team_invite = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -1554,16 +1581,6 @@ namespace SteamKit2.GC.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgRequestItemSchemaData")]
-  public partial class CMsgRequestItemSchemaData : global::ProtoBuf.IExtensible
-  {
-    public CMsgRequestItemSchemaData() {}
-    
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCError")]
   public partial class CMsgGCError : global::ProtoBuf.IExtensible
   {
@@ -2542,6 +2559,116 @@ namespace SteamKit2.GC.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCBannedWordListRequest")]
+  public partial class CMsgGCBannedWordListRequest : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCBannedWordListRequest() {}
+    
+
+    private uint _ban_list_group_id = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"ban_list_group_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint ban_list_group_id
+    {
+      get { return _ban_list_group_id; }
+      set { _ban_list_group_id = value; }
+    }
+
+    private uint _word_id = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"word_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint word_id
+    {
+      get { return _word_id; }
+      set { _word_id = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCBannedWord")]
+  public partial class CMsgGCBannedWord : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCBannedWord() {}
+    
+
+    private uint _word_id = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"word_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint word_id
+    {
+      get { return _word_id; }
+      set { _word_id = value; }
+    }
+
+    private GC_BannedWordType _word_type = GC_BannedWordType.GC_BANNED_WORD_DISABLE_WORD;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"word_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(GC_BannedWordType.GC_BANNED_WORD_DISABLE_WORD)]
+    public GC_BannedWordType word_type
+    {
+      get { return _word_type; }
+      set { _word_type = value; }
+    }
+
+    private string _word = "";
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"word", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string word
+    {
+      get { return _word; }
+      set { _word = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCBannedWordListResponse")]
+  public partial class CMsgGCBannedWordListResponse : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCBannedWordListResponse() {}
+    
+
+    private uint _ban_list_group_id = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"ban_list_group_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint ban_list_group_id
+    {
+      get { return _ban_list_group_id; }
+      set { _ban_list_group_id = value; }
+    }
+    private readonly global::System.Collections.Generic.List<CMsgGCBannedWord> _word_list = new global::System.Collections.Generic.List<CMsgGCBannedWord>();
+    [global::ProtoBuf.ProtoMember(2, Name=@"word_list", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CMsgGCBannedWord> word_list
+    {
+      get { return _word_list; }
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCToGCBannedWordListBroadcast")]
+  public partial class CMsgGCToGCBannedWordListBroadcast : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCToGCBannedWordListBroadcast() {}
+    
+
+    private CMsgGCBannedWordListResponse _broadcast = null;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"broadcast", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public CMsgGCBannedWordListResponse broadcast
+    {
+      get { return _broadcast; }
+      set { _broadcast = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     [global::ProtoBuf.ProtoContract(Name=@"EGCBaseMsg")]
     public enum EGCBaseMsg
     {
@@ -2616,6 +2743,17 @@ namespace SteamKit2.GC.Internal
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EProtoObjectLobbyInvite", Value=1002)]
       k_EProtoObjectLobbyInvite = 1002
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"GC_BannedWordType")]
+    public enum GC_BannedWordType
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"GC_BANNED_WORD_DISABLE_WORD", Value=0)]
+      GC_BANNED_WORD_DISABLE_WORD = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"GC_BANNED_WORD_ENABLE_WORD", Value=1)]
+      GC_BANNED_WORD_ENABLE_WORD = 1
     }
   
 }

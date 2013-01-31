@@ -9,6 +9,7 @@
 #pragma warning disable 1591
 
 // Generated from: gcsdk_gcmessages.proto
+// Note: requires additional types generated from: steammessages.proto
 namespace SteamKit2.GC.Internal
 {
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgSOSingleObject")]
@@ -557,6 +558,72 @@ namespace SteamKit2.GC.Internal
     {
       get { return _net_message; }
       set { _net_message = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCUpdateSessionIP")]
+  public partial class CMsgGCUpdateSessionIP : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCUpdateSessionIP() {}
+    
+
+    private ulong _steamid = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong steamid
+    {
+      get { return _steamid; }
+      set { _steamid = value; }
+    }
+
+    private uint _ip = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"ip", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint ip
+    {
+      get { return _ip; }
+      set { _ip = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCRequestSessionIP")]
+  public partial class CMsgGCRequestSessionIP : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCRequestSessionIP() {}
+    
+
+    private ulong _steamid = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong steamid
+    {
+      get { return _steamid; }
+      set { _steamid = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCRequestSessionIPResponse")]
+  public partial class CMsgGCRequestSessionIPResponse : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCRequestSessionIPResponse() {}
+    
+
+    private uint _ip = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"ip", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint ip
+    {
+      get { return _ip; }
+      set { _ip = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
