@@ -236,7 +236,16 @@ namespace SteamKit2.GC.Internal
       k_EGCToGCMsgRouted = 152,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EGCToGCMsgRoutedReply", Value=153)]
-      k_EGCToGCMsgRoutedReply = 153
+      k_EGCToGCMsgRoutedReply = 153,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgUpdateSessionIP", Value=154)]
+      k_EMsgUpdateSessionIP = 154,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgRequestSessionIP", Value=155)]
+      k_EMsgRequestSessionIP = 155,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgRequestSessionIPResponse", Value=156)]
+      k_EMsgRequestSessionIPResponse = 156
     }
   
 }
