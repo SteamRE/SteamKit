@@ -383,6 +383,7 @@ message CMsgClientAccountInfo {
 	optional bool steamguard_require_code_default = 11;
 	optional bool steamguard_show_providers = 12;
 	optional bool steamguard_can_use_mobile_provider = 13;
+	optional bool steamguard_notify_newmachines = 14;
 }
 
 message CMsgClientAppMinutesPlayedData {
@@ -1132,9 +1133,12 @@ message CMsgPICSProductInfoRequest {
 	repeated .CMsgPICSProductInfoRequest.PackageInfo packages = 1;
 	repeated .CMsgPICSProductInfoRequest.AppInfo apps = 2;
 	optional bool meta_data_only = 3;
+	optional uint32 num_prev_failed = 4;
 }
 
 message CMsgPICSProductInfoResponse {
+	option (msgpool_soft_limit) = 0;
+	option (msgpool_hard_limit) = 0;
 	message AppInfo {
 		optional uint32 appid = 1;
 		optional uint32 change_number = 2;
