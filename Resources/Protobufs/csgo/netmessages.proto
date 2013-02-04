@@ -59,6 +59,7 @@ enum SVC_Messages {
 	svc_GetCvarValue = 31;
 	svc_PaintmapData = 33;
 	svc_CmdKeyValues = 34;
+	svc_EncryptedData = 35;
 }
 
 message CMsgVector {
@@ -422,5 +423,10 @@ message CSVCMsg_EntityMsg {
 
 message CSVCMsg_CmdKeyValues {
 	optional bytes keyvalues = 1;
+}
+
+message CSVCMsg_EncryptedData {
+	optional bytes encrypted = 1;
+	optional int32 key_type = 2;
 }
 

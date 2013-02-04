@@ -150,6 +150,18 @@ message PlayerCommendationInfo {
 	optional uint32 cmd_leader = 4;
 }
 
+message ServerHltvInfo {
+	optional uint32 tv_udp_port = 1;
+	optional uint64 tv_watch_key = 2;
+	optional uint32 tv_slots = 3;
+	optional uint32 tv_clients = 4;
+	optional uint32 tv_proxies = 5;
+	optional uint32 tv_time = 6;
+	optional uint32 game_mode = 8;
+	optional string game_mapgroup = 9;
+	optional string game_map = 10;
+}
+
 message CMsgGCCStrike15_v2_MatchmakingGCOperationalStats {
 	optional int32 packetid = 1;
 	repeated .OperationalStatisticDescription namekeys = 2;
@@ -197,6 +209,8 @@ message CMsgGCCStrike15_v2_MatchmakingGC2ServerReserve {
 	optional uint64 match_id = 3;
 	optional uint32 server_version = 4;
 	repeated .PlayerRankingInfo rankings = 5;
+	optional uint64 encryption_key = 6;
+	optional uint64 encryption_key_pub = 7;
 }
 
 message CMsgGCCStrike15_v2_MatchmakingServerReservationResponse {
@@ -205,6 +219,7 @@ message CMsgGCCStrike15_v2_MatchmakingServerReservationResponse {
 	optional string map = 3;
 	optional uint64 gc_reservation_sent = 4;
 	optional uint32 server_version = 5;
+	optional .ServerHltvInfo tv_info = 6;
 }
 
 message CMsgGCCStrike15_v2_MatchmakingGC2ClientReserve {
@@ -321,5 +336,29 @@ message CMsgGCCStrike15_v2_ClientReportResponse {
 	optional uint32 response_type = 4;
 	optional uint32 response_result = 5;
 	optional uint32 tokens = 6;
+}
+
+message CMsgGCCStrike15_v2_ClientRequestWatchInfoFriends {
+	optional uint32 request_id = 1;
+	repeated uint32 account_ids = 2;
+}
+
+message WatchableMatchInfo {
+	optional uint32 server_ip = 1;
+	optional uint32 tv_port = 2;
+	optional uint32 tv_spectators = 3;
+	optional uint32 tv_time = 4;
+	optional bytes tv_watch_password = 5;
+	optional uint64 cl_decryptdata_key = 6;
+	optional uint64 cl_decryptdata_key_pub = 7;
+	optional uint32 game_mode = 8;
+	optional string game_mapgroup = 9;
+	optional string game_map = 10;
+}
+
+message CMsgGCCStrike15_v2_WatchInfoUsers {
+	optional uint32 request_id = 1;
+	repeated uint32 account_ids = 2;
+	repeated .WatchableMatchInfo watchable_match_infos = 3;
 }
 

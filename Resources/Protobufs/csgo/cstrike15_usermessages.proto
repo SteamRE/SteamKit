@@ -89,6 +89,7 @@ message CCSUsrMsg_SayText {
 	optional int32 ent_idx = 1;
 	optional string text = 2;
 	optional bool chat = 3;
+	optional bool textallchat = 4;
 }
 
 message CCSUsrMsg_SayText2 {
@@ -96,6 +97,7 @@ message CCSUsrMsg_SayText2 {
 	optional bool chat = 2;
 	optional string msg_name = 3;
 	repeated string params = 4;
+	optional bool textallchat = 5;
 }
 
 message CCSUsrMsg_TextMsg {
