@@ -1006,6 +1006,7 @@ message CMsgDOTAMatch {
 	optional uint32 negative_votes = 30;
 	optional .DOTA_GameMode game_mode = 31 [default = DOTA_GAMEMODE_NONE];
 	repeated .CMatchHeroSelectEvent picks_bans = 32;
+	optional uint64 match_seq_num = 33;
 }
 
 message CMsgDOTAPlayerMatchHistory {
