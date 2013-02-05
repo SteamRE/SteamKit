@@ -61,7 +61,7 @@ namespace SteamKit2
             internal JobCallback( SteamClient client, ulong jobId, T callback )
                 : base( client, jobId )
 #else
-            internal JobCallback( JobID jobId, T callback )
+            public JobCallback( JobID jobId, T callback )
                 : base( jobId )
 #endif
             {
