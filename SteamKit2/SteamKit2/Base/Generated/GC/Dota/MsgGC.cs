@@ -4520,6 +4520,15 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _picks_bans; }
     }
   
+
+    private ulong _match_seq_num = default(ulong);
+    [global::ProtoBuf.ProtoMember(33, IsRequired = false, Name=@"match_seq_num", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong match_seq_num
+    {
+      get { return _match_seq_num; }
+      set { _match_seq_num = value; }
+    }
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Player")]
   public partial class Player : global::ProtoBuf.IExtensible
   {
