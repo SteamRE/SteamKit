@@ -58,7 +58,7 @@ namespace SteamKit2
 
 
 #if STATIC_CALLBACKS
-            internal JobCallback( SteamClient client, ulong jobId, T callback )
+            public JobCallback( SteamClient client, ulong jobId, T callback )
                 : base( client, jobId )
 #else
             public JobCallback( JobID jobId, T callback )
