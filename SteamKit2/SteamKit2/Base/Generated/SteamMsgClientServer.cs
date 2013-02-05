@@ -2512,6 +2512,15 @@ namespace SteamKit2.Internal
       get { return _steamguard_can_use_mobile_provider; }
       set { _steamguard_can_use_mobile_provider = value; }
     }
+
+    private bool _steamguard_notify_newmachines = default(bool);
+    [global::ProtoBuf.ProtoMember(14, IsRequired = false, Name=@"steamguard_notify_newmachines", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool steamguard_notify_newmachines
+    {
+      get { return _steamguard_notify_newmachines; }
+      set { _steamguard_notify_newmachines = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -7171,6 +7180,15 @@ namespace SteamKit2.Internal
     {
       get { return _meta_data_only; }
       set { _meta_data_only = value; }
+    }
+
+    private uint _num_prev_failed = default(uint);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"num_prev_failed", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint num_prev_failed
+    {
+      get { return _num_prev_failed; }
+      set { _num_prev_failed = value; }
     }
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"AppInfo")]
   public partial class AppInfo : global::ProtoBuf.IExtensible
