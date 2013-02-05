@@ -1,7 +1,7 @@
 	k_EMsgDestJobFailed = 113, // flags: 59, server type: -1
 	k_EMsgHubConnect = 124, // flags: 59, server type: -1
-	k_EMsgServiceMethod = 146, // flags: 0, server type: -1
-	k_EMsgServiceMethodResponse = 147, // flags: 0, server type: -1
+	k_EMsgServiceMethod = 146, // flags: 59, server type: -1
+	k_EMsgServiceMethodResponse = 147, // flags: 59, server type: -1
 	k_EMsgClientChatAction = 597, // flags: 2, server type: -1
 	k_EMsgCSUserContentRequest = 652, // flags: 2, server type: -1
 	k_EMsgClientLogOn_Deprecated = 701, // flags: 2, server type: -1
@@ -371,6 +371,8 @@
 	k_EMsgClientMDSRegisterAppBuildResponse = 5839, // flags: 2, server type: -1
 	k_EMsgClientMDSSetAppBuildLive = 5840, // flags: 2, server type: -1
 	k_EMsgClientMDSSetAppBuildLiveResponse = 5841, // flags: 2, server type: -1
+	k_EMsgClientMDSSignInstallScript = 5845, // flags: 2, server type: -1
+	k_EMsgClientMDSSignInstallScriptResponse = 5846, // flags: 2, server type: -1
 	k_EMsgClientGMSServerQuery = 6403, // flags: 63, server type: 43
 	k_EMsgGMSClientServerQueryResponse = 6404, // flags: 59, server type: -1
 	k_EMsgGameServerOutOfDate = 6407, // flags: 59, server type: -1
@@ -449,6 +451,13 @@
 	k_EMsgClientFSGetIsFollowingResponse = 7518, // flags: 6, server type: 47
 	k_EMsgClientFSEnumerateFollowingList = 7519, // flags: 6, server type: 47
 	k_EMsgClientFSEnumerateFollowingListResponse = 7520, // flags: 6, server type: 47
+	k_EMsgClientFSOfflineMessageNotification = 7523, // flags: 6, server type: 47
+	k_EMsgClientFSRequestOfflineMessageCount = 7524, // flags: 6, server type: 47
+	k_EMsgClientFSGetFriendMessageHistory = 7525, // flags: 6, server type: 47
+	k_EMsgClientFSGetFriendMessageHistoryResponse = 7526, // flags: 6, server type: 47
+	k_EMsgClientFSGetFriendMessageHistoryForOfflineMessages = 7527, // flags: 6, server type: 47
+	k_EMsgClientFSGetFriendsSteamLevels = 7528, // flags: 6, server type: 47
+	k_EMsgClientFSGetFriendsSteamLevelsResponse = 7529, // flags: 6, server type: 47
 	k_EMsgEconTrading_InitiateTradeRequest = 7701, // flags: 6, server type: 59
 	k_EMsgEconTrading_InitiateTradeProposed = 7702, // flags: 6, server type: 59
 	k_EMsgEconTrading_InitiateTradeResponse = 7703, // flags: 6, server type: 59
