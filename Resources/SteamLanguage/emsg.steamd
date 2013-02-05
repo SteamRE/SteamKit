@@ -1382,6 +1382,8 @@ enum EMsg
 	ClientMDSGetPrevDepotBuild = 5842;
 	ClientMDSGetPrevDepotBuildResponse = 5843;
 	MDSToCSFlushChunk = 5844;
+	ClientMDSSignInstallScript = 5845;
+	ClientMDSSignInstallScriptResponse = 5846;
 	
 	CSBase = 6200;
 	CSPing = 6201;
@@ -1559,6 +1561,13 @@ enum EMsg
 	ClientFSEnumerateFollowingListResponse = 7520;
 	FSGetPendingNotificationCount = 7521;
 	FSGetPendingNotificationCountResponse = 7522;
+	ClientFSOfflineMessageNotification = 7523;
+	ClientFSRequestOfflineMessageCount = 7524;
+	ClientFSGetFriendMessageHistory = 7525;
+	ClientFSGetFriendMessageHistoryResponse = 7526;
+	ClientFSGetFriendMessageHistoryForOfflineMessages = 7527;
+	ClientFSGetFriendsSteamLevels = 7528;
+	ClientFSGetFriendsSteamLevelsResponse = 7529;
 	
 	DRMRange2 = 7600;
 	CEGVersionSetEnableDisableRequest = 7600;
