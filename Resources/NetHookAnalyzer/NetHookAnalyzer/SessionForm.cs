@@ -414,7 +414,16 @@ namespace NetHookAnalyzer
             msgType = possibleTypes.FirstOrDefault();
             if ( msgType != null )
             {
-                return Deserialize( msgType, str );
+                var streamPos = str.Position;
+                try
+                {
+                    return Deserialize( msgType, str );
+                }
+                catch ( TargetInvocationException )
+                {
+                    msgType = null;
+                    str.Position = streamPos;
+                }
             }
 
             // try reading it as a protobuf
