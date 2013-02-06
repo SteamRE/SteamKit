@@ -179,7 +179,15 @@ enum EDOTAGCMsg {
 	k_EMsgGCNotifyMatchHistoryAccessChange = 7202;
 	k_EMsgUpgradeLeagueItem = 7203;
 	k_EMsgUpgradeLeagueItemResponse = 7204;
+	k_EMsgGCTeamMemberProfileRequest = 7205;
+	k_EMsgGCWatchDownloadedReplay = 7206;
 	k_EMsgGCDev_GrantWarKill = 8001;
+}
+
+enum DOTA_PartnerAccountType {
+	DOTA_PARTNER_NONE = 0;
+	DOTA_PARTNER_PERFECT_WORLD = 1;
+	DOTA_PARTNER_NEXON = 2;
 }
 
 enum DOTA_GameMode {
@@ -281,6 +289,11 @@ enum DOTA_TournamentEvents {
 	TE_AEGIS_STOLEN = 5;
 }
 
+enum DOTA_WatchReplayType {
+	DOTA_WATCH_REPLAY_NORMAL = 0;
+	DOTA_WATCH_REPLAY_HIGHLIGHTS = 1;
+}
+
 message CSODOTAGameAccountClient {
 	optional uint32 account_id = 1 [(key_field) = true];
 	optional uint32 wins = 3;
@@ -308,6 +321,7 @@ message CSODOTAGameAccountClient {
 	optional uint32 match_disabled_until_date = 41;
 	optional uint32 match_disabled_count = 42;
 	optional uint32 team_creation_disabled_until_date = 43;
+	optional .DOTA_PartnerAccountType partner_account_type = 44 [default = DOTA_PARTNER_NONE];
 }
 
 message CSODOTAGameAccountClientInternal {
@@ -339,6 +353,10 @@ message CSODOTAGameHeroStandings {
 	optional float hero_variance = 6;
 }
 
+message CSODOTAPartyMember {
+	optional .DOTA_PartnerAccountType partner_type = 1 [default = DOTA_PARTNER_NONE];
+}
+
 message CSODOTAParty {
 	enum State {
 		UI = 0;
@@ -362,6 +380,8 @@ message CSODOTAParty {
 	optional uint32 match_disabled_until_date = 24;
 	optional uint32 match_disabled_account_id = 25;
 	optional uint32 matchmaking_max_range_minutes = 26;
+	optional uint32 matchlanguages = 27;
+	repeated .CSODOTAPartyMember members = 29;
 }
 
 message CSODOTAPartyInternal {
@@ -406,6 +426,7 @@ message CDOTALobbyMember {
 	optional uint32 prize_def_index = 18;
 	optional uint32 meta_xp_bonus_rate = 19;
 	repeated uint32 disabled_hero_id = 20;
+	optional .DOTA_PartnerAccountType partner_account_type = 21 [default = DOTA_PARTNER_NONE];
 }
 
 message CLobbyTeamDetails {
@@ -533,6 +554,7 @@ message CMsgStartFindingMatch {
 	optional uint32 game_modes = 4 [default = 4294967295];
 	optional .DOTABotDifficulty bot_difficulty = 5 [default = BOT_DIFFICULTY_HARD];
 	optional .MatchType match_type = 6 [default = MATCH_TYPE_RANKED];
+	optional uint32 matchlanguages = 7 [default = 4294967295];
 }
 
 message CMsgStopFindingMatch {
@@ -1068,6 +1090,7 @@ message CMsgDOTAPopup {
 		MATCHMAKING_DISABLED = 12;
 		INVITE_DENIED = 13;
 		PARTY_FULL = 14;
+		MADE_ADMIN = 15;
 	}
 
 	optional .CMsgDOTAPopup.PopupID id = 1 [default = KICKED_FROM_LOBBY];
@@ -1075,6 +1098,11 @@ message CMsgDOTAPopup {
 }
 
 message CMsgDOTATeamMemberSDO {
+	optional uint32 account_id = 1;
+	optional uint32 team_id = 2;
+}
+
+message CMsgDOTATeamAdminSDO {
 	optional uint32 account_id = 1;
 	optional uint32 team_id = 2;
 }
@@ -1185,6 +1213,7 @@ message CMsgDOTADisbandTeamResponse {
 	enum Result {
 		SUCCESS = 0;
 		FAILURE = 1;
+		FAILURE_NOT_EMPTY = 2;
 	}
 
 	optional .CMsgDOTADisbandTeamResponse.Result result = 1 [default = SUCCESS];
@@ -1211,6 +1240,10 @@ message CMsgDOTATeamData {
 
 message CMsgDOTATeamProfileRequest {
 	optional uint32 team_id = 1;
+}
+
+message CMsgDOTATeamMemberProfileRequest {
+	optional fixed64 steam_id = 1;
 }
 
 message CMsgDOTATeamProfileResponse {
@@ -1246,7 +1279,8 @@ message CMsgDOTAInitiateTeamInviteResponse {
 		INVITEE_NOT_AVAILABLE = 2;
 		INVITEE_BUSY = 3;
 		INVITEE_ALREADY_ON_A_TEAM = 4;
-		UNSPECIFIED_ERROR = 5;
+		INVITEE_ADMIN_OF_OTHER_TEAM = 5;
+		UNSPECIFIED_ERROR = 6;
 	}
 
 	optional .CMsgDOTAInitiateTeamInviteResponse.Result result = 1 [default = SUCCESS];
@@ -1307,6 +1341,19 @@ message CMsgDOTAKickTeamMemberResponse {
 
 message CMsgDOTATransferTeamAdmin {
 	optional uint32 new_admin_account_id = 1;
+}
+
+message CMsgDOTATransferTeamAdminResponse {
+	enum Result {
+		SUCCESS = 0;
+		NOT_ADMIN = 1;
+		ON_OTHER_TEAM = 2;
+		ADMIN_OF_OTHER_TEAM = 3;
+		UNSPECIFIED_ERROR = 4;
+	}
+
+	optional .CMsgDOTATransferTeamAdminResponse.Result result = 1 [default = SUCCESS];
+	optional string invitee_name = 2;
 }
 
 message CMsgDOTALeaveTeam {
@@ -1767,6 +1814,8 @@ message CMsgDOTAWelcome {
 	optional uint32 store_item_hash = 5;
 	optional uint32 timeplayedconsecutively = 6;
 	optional bool allow_3rd_party_match_history = 7;
+	optional .DOTA_PartnerAccountType partner_account_type = 8 [default = DOTA_PARTNER_NONE];
+	optional uint32 banned_word_list_word_id = 9;
 }
 
 message CSODOTAGameHeroFavorites {
@@ -2097,5 +2146,10 @@ message CMsgUpgradeLeagueItem {
 }
 
 message CMsgUpgradeLeagueItemResponse {
+}
+
+message CMsgGCWatchDownloadedReplay {
+	optional uint64 match_id = 1;
+	optional .DOTA_WatchReplayType watch_type = 2 [default = DOTA_WATCH_REPLAY_NORMAL];
 }
 

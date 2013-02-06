@@ -45,6 +45,7 @@ enum EDotaUserMessages {
 	DOTA_UM_UpdateSharedContent = 103;
 	DOTA_UM_TutorialRequestExp = 104;
 	DOTA_UM_TutorialPingMinimap = 105;
+	DOTA_UM_GamerulesStateChanged = 106;
 }
 
 enum DOTA_CHAT_MESSAGE {
@@ -536,5 +537,9 @@ message CDOTAUserMsg_TutorialPingMinimap {
 	optional float pos_y = 3;
 	optional float pos_z = 4;
 	optional int32 entity_index = 5;
+}
+
+message CDOTA_UM_GamerulesStateChanged {
+	optional uint32 state = 1;
 }
 
