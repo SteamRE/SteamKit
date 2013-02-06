@@ -406,22 +406,27 @@ namespace NetHookAnalyzer
                 .TrimStart('_')
                 .Replace("EMsg", string.Empty);
 
+            
+            if ( typeMsgName == "Create" || typeMsgName == "Destroy" || typeMsgName == "Update" )
+                typeMsgName = "SingleObject";
+            else if ( typeMsgName == "Multiple" )
+                typeMsgName = "MultipleObjects";
+
             var possibleTypes = from type in typeof( CMClient ).Assembly.GetTypes()
                                 from typePrefix in gcMsgPossibleTypePrefixes
                                 where type.GetInterfaces().Contains( typeof ( IExtensible ) )
                                 where type.FullName.StartsWith( typePrefix ) && type.FullName.EndsWith( typeMsgName )
                                 select type;
-            msgType = possibleTypes.FirstOrDefault();
-            if ( msgType != null )
+
+            foreach ( var type in possibleTypes )
             {
                 var streamPos = str.Position;
                 try
                 {
-                    return Deserialize( msgType, str );
+                    return Deserialize( type, str );
                 }
-                catch ( TargetInvocationException )
+                catch ( Exception )
                 {
-                    msgType = null;
                     str.Position = streamPos;
                 }
             }
