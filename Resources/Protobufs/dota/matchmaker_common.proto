@@ -13,3 +13,9 @@ enum DOTABotDifficulty {
 	BOT_DIFFICULTY_INVALID = 5;
 }
 
+enum MatchLanguages {
+	MATCH_LANGUAGE_ENGLISH = 1;
+	MATCH_LANGUAGE_RUSSIAN = 2;
+	MATCH_LANGUAGE_CHINESE = 3;
+}
+

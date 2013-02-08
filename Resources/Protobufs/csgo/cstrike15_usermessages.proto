@@ -60,6 +60,7 @@ enum ECstrike15UserMessages {
 	CS_UM_MarkAchievement = 57;
 	CS_UM_MatchStatsUpdate = 58;
 	CS_UM_ItemDrop = 59;
+	CS_UM_GlowPropTurnOff = 60;
 }
 
 message CCSUsrMsg_VGUIMenu {
@@ -368,6 +369,10 @@ message CCSUsrMsg_MatchStatsUpdate {
 message CCSUsrMsg_ItemDrop {
 	optional int64 itemid = 1;
 	optional bool death = 2;
+}
+
+message CCSUsrMsg_GlowPropTurnOff {
+	optional int32 entidx = 1;
 }
 
 message CCSUsrMsg_ResetHud {
