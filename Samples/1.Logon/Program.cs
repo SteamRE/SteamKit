@@ -50,6 +50,8 @@ namespace Sample1_Logon
 
             // get the steamuser handler, which is used for logging on after successfully connecting
             steamUser = steamClient.GetHandler<SteamUser>();
+            
+            isRunning = true;
 
             Console.WriteLine( "Connecting to Steam..." );
 
