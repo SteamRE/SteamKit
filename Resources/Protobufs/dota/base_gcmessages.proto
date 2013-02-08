@@ -102,6 +102,7 @@ message CMsgInQueue {
 message CMsgInviteToParty {
 	optional fixed64 steam_id = 1;
 	optional uint32 client_version = 2;
+	optional bool team_invite = 3;
 }
 
 message CMsgInvitationCreated {
@@ -454,5 +455,9 @@ message CMsgGCBannedWordListResponse {
 
 message CMsgGCToGCBannedWordListBroadcast {
 	optional .CMsgGCBannedWordListResponse broadcast = 1;
+}
+
+message CMsgGCToGCBannedWordListUpdated {
+	optional uint32 group_id = 1;
 }
 

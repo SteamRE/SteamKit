@@ -9,8 +9,8 @@ message CMsgSOSingleObject {
 
 message CMsgSOMultipleObjects {
 	message SingleObject {
-		option (msgpool_soft_limit) = 256;
-		option (msgpool_hard_limit) = 1024;
+		option (msgpool_soft_limit) = 0;
+		option (msgpool_hard_limit) = 0;
 		optional int32 type_id = 1;
 		optional bytes object_data = 2;
 	}

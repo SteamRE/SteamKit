@@ -1,12 +1,12 @@
 import "google/protobuf/descriptor.proto";
 
 extend .google.protobuf.FieldOptions {
-	optional bool key_field = 50000 [default = false];
+	optional bool key_field = 60000 [default = false];
 }
 
 extend .google.protobuf.MessageOptions {
-	optional int32 msgpool_soft_limit = 50000 [default = 32];
-	optional int32 msgpool_hard_limit = 50001 [default = 384];
+	optional int32 msgpool_soft_limit = 60000 [default = 32];
+	optional int32 msgpool_hard_limit = 60001 [default = 384];
 }
 
 enum GCProtoBufMsgSrc {
@@ -321,6 +321,8 @@ message CMsgGCMsgMasterSetDirectory {
 		optional uint32 dir_index = 1;
 		optional string name = 2;
 		optional string box = 3;
+		optional string command_line = 4;
+		optional string gc_binary = 5;
 	}
 
 	optional uint32 master_dir_index = 1;
