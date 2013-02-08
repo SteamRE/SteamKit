@@ -60,7 +60,7 @@ namespace SteamKit2
 #if STATIC_CALLBACKS
             /// <summary>
             /// Initializes a new instance of the <see cref="JobCallback&lt;T&gt;"/> class.
-            /// </summary
+            /// </summary>
             /// <param name="client">The <see cref="SteamClient"/> instance that is posting this callback.</param>
             /// <param name="jobId">The for this callback.</param>
             /// <param name="callback">The inner callback object.</param>
