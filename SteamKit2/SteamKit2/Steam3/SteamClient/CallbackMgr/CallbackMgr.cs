@@ -188,6 +188,7 @@ namespace SteamKit2
         /// <summary>
         /// Initializes a new instance of the <see cref="CallbackManager"/> class.
         /// </summary>
+        [Obsolete( "Static callback handling is deprecated and will be removed in a future version of SteamKit2" )]
         public CallbackManager()
 #else
         /// <summary>
@@ -212,7 +213,9 @@ namespace SteamKit2
         public void RunCallbacks()
         {
 #if STATIC_CALLBACKS
+#pragma warning disable 0618 // we're knowingly using an obsolete api
             var call = SteamClient.GetCallback( true );
+#pragma warning restore 0618
 #else
             var call = client.GetCallback( true );
 #endif
@@ -230,7 +233,9 @@ namespace SteamKit2
         public void RunWaitCallbacks( TimeSpan timeout )
         {
 #if STATIC_CALLBACKS
+#pragma warning disable 0618 // we're knowingly using an obsolete api
             var call = SteamClient.WaitForCallback( true, timeout );
+#pragma warning restore 0618
 #else
             var call = client.WaitForCallback( true, timeout );
 #endif

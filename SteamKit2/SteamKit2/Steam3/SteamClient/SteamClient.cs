@@ -128,6 +128,7 @@ namespace SteamKit2
         /// </summary>
         /// <returns>The next callback in the queue, or null if no callback is waiting.</returns>
 #if STATIC_CALLBACKS
+        [Obsolete( "Static callback handling is deprecated and will be removed in a future version of SteamKit2" )]
         public static CallbackMsg GetCallback()
 #else
         public CallbackMsg GetCallback()
@@ -141,6 +142,7 @@ namespace SteamKit2
         /// <param name="freeLast">if set to <c>true</c> this function also frees the last callback if one existed.</param>
         /// <returns>The next callback in the queue, or null if no callback is waiting.</returns>
 #if STATIC_CALLBACKS
+        [Obsolete( "Static callback handling is deprecated and will be removed in a future version of SteamKit2" )]
         public static CallbackMsg GetCallback( bool freeLast )
 #else
         public CallbackMsg GetCallback( bool freeLast )
@@ -161,6 +163,7 @@ namespace SteamKit2
         /// </summary>
         /// <returns>The callback object from the queue.</returns>
 #if STATIC_CALLBACKS
+        [Obsolete( "Static callback handling is deprecated and will be removed in a future version of SteamKit2" )]
         public static CallbackMsg WaitForCallback()
 #else
         public CallbackMsg WaitForCallback()
@@ -175,6 +178,7 @@ namespace SteamKit2
         /// <param name="timeout">The length of time to block.</param>
         /// <returns>A callback object from the queue if a callback has been posted, or null if the timeout has elapsed.</returns>
 #if STATIC_CALLBACKS
+        [Obsolete( "Static callback handling is deprecated and will be removed in a future version of SteamKit2" )]
         public static CallbackMsg WaitForCallback( TimeSpan timeout )
 #else
         public CallbackMsg WaitForCallback( TimeSpan timeout )
@@ -197,6 +201,7 @@ namespace SteamKit2
         /// <param name="freeLast">if set to <c>true</c> this function also frees the last callback.</param>
         /// <returns>The callback object from the queue.</returns>
 #if STATIC_CALLBACKS
+        [Obsolete( "Static callback handling is deprecated and will be removed in a future version of SteamKit2" )]
         public static CallbackMsg WaitForCallback( bool freeLast )
 #else
         public CallbackMsg WaitForCallback( bool freeLast )
@@ -217,6 +222,7 @@ namespace SteamKit2
         /// <param name="timeout">The length of time to block.</param>
         /// <returns>A callback object from the queue if a callback has been posted, or null if the timeout has elapsed.</returns>
 #if STATIC_CALLBACKS
+        [Obsolete( "Static callback handling is deprecated and will be removed in a future version of SteamKit2" )]
         public static CallbackMsg WaitForCallback( bool freeLast, TimeSpan timeout )
 #else
         public CallbackMsg WaitForCallback( bool freeLast, TimeSpan timeout )
@@ -238,6 +244,7 @@ namespace SteamKit2
         /// Frees the last callback in the queue.
         /// </summary>
 #if STATIC_CALLBACKS
+        [Obsolete( "Static callback handling is deprecated and will be removed in a future version of SteamKit2" )]
         public static void FreeLastCallback()
 #else
         public void FreeLastCallback()
