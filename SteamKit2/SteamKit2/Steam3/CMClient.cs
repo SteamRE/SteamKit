@@ -159,13 +159,32 @@ namespace SteamKit2.Internal
         /// </param>
         public void Connect( bool bEncrypted = true )
         {
+            Random random = new Random();
+            var server = Servers[ random.Next( Servers.Length ) ];
+
+            this.Connect( server, bEncrypted );
+        }
+
+        /// <summary>
+        /// Connects this client to the specified Steam3 server.
+        /// This begins the process of connecting and encrypting the data channel between the client and the server.
+        /// Results are returned asynchronously in a <see cref="SteamClient.ConnectedCallback"/>.
+        /// If the server that SteamKit attempts to connect to is down, a <see cref="SteamClient.DisconnectedCallback"/>
+        /// will be posted instead.
+        /// SteamKit will not attempt to reconnect to Steam, you must handle this callback and call Connect again
+        /// preferrably after a short delay.
+        /// </summary>
+        /// <param name="cmServer">The <see cref="IPAddress"/> of the CM server to connect to.</param>
+        /// <param name="bEncrypted">
+        /// If set to <c>true</c> the underlying connection to Steam will be encrypted. This is the default mode of communication.
+        /// Previous versions of SteamKit always used encryption.
+        /// </param>
+        public void Connect( IPAddress cmServer, bool bEncrypted = true )
+        {
             this.Disconnect();
             encrypted = bEncrypted;
 
-            Random random = new Random();
-
-            var server = Servers[ random.Next( Servers.Length ) ];
-            var endPoint = new IPEndPoint( server, bEncrypted ? PortCM_PublicEncrypted : PortCM_Public );
+            var endPoint = new IPEndPoint( cmServer, bEncrypted ? PortCM_PublicEncrypted : PortCM_Public );
 
             connection.Connect( endPoint );
         }
