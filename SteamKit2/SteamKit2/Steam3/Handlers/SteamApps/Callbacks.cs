@@ -756,5 +756,69 @@ namespace SteamKit2
             }
         }
 
+        /// <summary>
+        /// This callback is recieved when the list of guest passes is updated.
+        /// </summary>
+        public sealed class GuestPassListCallback : CallbackMsg
+        {
+            /// <summary>
+            /// Result of the operation
+            /// </summary>
+            public EResult Result { get; set; }
+            /// <summary>
+            /// Number of guest passes to be given out
+            /// </summary>
+            public int CountGuestPassesToGive { get; set; }
+            /// <summary>
+            /// Number of guest passes to be redeemed
+            /// </summary>
+            public int CountGuestPassesToRedeem { get; set; }
+            /// <summary>
+            /// Guest pass list
+            /// </summary>
+            public List<KeyValue> GuestPasses { get; set; }
+
+#if STATIC_CALLBACKS
+            internal GuestPassListCallback( SteamClient client, MsgClientUpdateGuestPassesList msg, Stream payload )
+                : base( client )
+#else
+            internal GuestPassListCallback( MsgClientUpdateGuestPassesList msg, Stream payload )
+#endif
+            {
+                Result = msg.Result;
+                CountGuestPassesToGive = msg.CountGuestPassesToGive;
+                CountGuestPassesToRedeem = msg.CountGuestPassesToRedeem;
+
+                GuestPasses = new List<KeyValue>();
+                for ( int i = 0; i < CountGuestPassesToGive + CountGuestPassesToRedeem; i++ )
+                {
+                    var kv = new KeyValue();
+                    kv.ReadAsBinary( payload );
+                    GuestPasses.Add( kv.Children[0] );
+                }
+            }
+        }
+
+        /// <summary>
+        /// This callback is recieved when a guest pass has been sent
+        /// </summary>
+        public sealed class SendGuestPassCallback : CallbackMsg
+        {
+            /// <summary>
+            /// Result of the operation
+            /// </summary>
+            public EResult Result { get; set; }
+
+#if STATIC_CALLBACKS
+            internal SendGuestPassCallback( SteamClient client, MsgClientSendGuestPassResponse msg )
+                : base( client )
+#else
+            internal SendGuestPassCallback( MsgClientSendGuestPassResponse msg )
+#endif
+            {
+                Result = msg.Result;
+            }
+        }
+
     }
 }

@@ -302,3 +302,15 @@ class MsgClientLogOnResponse<EMsg::ClientLogOnResponse>
 	uint ipPublic;
 	uint serverRealTime;
 };
+
+class MsgClientSendGuestPass<EMsg::ClientSendGuestPass>
+{
+	ulong giftId;
+	byte giftType;
+	uint accountId;
+};
+
+class MsgClientSendGuestPassResponse<EMsg::ClientSendGuestPassResponse>
+{
+	EResult result;
+};
