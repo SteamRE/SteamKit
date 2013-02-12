@@ -239,7 +239,7 @@ namespace SteamKit2
 
                         if ( kv.Children != null )
                         {
-                            Sections.Add( ( EAppInfoSection )section.section_id, kv.Children.FirstOrDefault() );
+                            Sections.Add( ( EAppInfoSection )section.section_id, kv.Children.FirstOrDefault() ?? KeyValue.Invalid );
                         }
                     }
                 }
@@ -341,6 +341,11 @@ namespace SteamKit2
                     {
                         br.ReadUInt32(); // unknown uint at the beginning of the buffer
                         Data.ReadAsBinary( ms );
+                    }
+
+                    if ( Data.Children != null )
+                    {
+                        Data = Data.Children.FirstOrDefault() ?? KeyValue.Invalid;
                     }
                 }
 
