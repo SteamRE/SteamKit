@@ -378,6 +378,34 @@ namespace SteamKit2
         }
 
         /// <summary>
+        /// Send a guest pass or gift to a target user, defined by their account id or email
+        /// </summary>
+        /// <param name="giftId">64-bit GID of the gift</param>
+        /// <param name="accountId">Account ID of the recipient</param>
+        /// <param name="email">Optional email of the recipient</param>
+        public void SendGuestPass( ulong giftId, uint accountId, string email = null )
+        {
+            var sendGift = new ClientMsg<MsgClientSendGuestPass>();
+
+            sendGift.Body.GiftId = giftId;
+
+            if ( string.IsNullOrEmpty( email ) )
+            {
+                sendGift.Body.GiftType = 1;
+                sendGift.Body.AccountId = accountId;
+                sendGift.WriteNullTermString( "" );
+            }
+            else
+            {
+                sendGift.Body.GiftType = 0;
+                sendGift.Body.AccountId = 0;
+                sendGift.WriteNullTermString( email );
+            }
+
+            this.Client.Send( sendGift );
+        }
+
+        /// <summary>
         /// Handles a client message. This should not be called directly.
         /// </summary>
         /// <param name="packetMsg">The packet message that contains the data.</param>
@@ -427,6 +455,14 @@ namespace SteamKit2
 
                 case EMsg.PICSProductInfoResponse:
                     HandlePICSProductInfoResponse( packetMsg );
+                    break;
+
+                case EMsg.ClientUpdateGuestPassesList:
+                    HandleGuestPassList( packetMsg );
+                    break;
+
+                case EMsg.ClientSendGuestPassResponse:
+                    HandleSendGuestPassResponse( packetMsg );
                     break;
             }
         }
@@ -576,6 +612,31 @@ namespace SteamKit2
 #else
             var innerCallback = new PICSProductInfoCallback( productResponse.Body );
             var callback = new SteamClient.JobCallback<PICSProductInfoCallback>( productResponse.TargetJobID, innerCallback );
+            this.Client.PostCallback( callback );
+#endif
+        }
+        void HandleGuestPassList( IPacketMsg packetMsg )
+        {
+            var guestPasses = new ClientMsg<MsgClientUpdateGuestPassesList>( packetMsg );
+
+#if STATIC_CALLBACKS
+            var callback = new GuestPassListCallback( Client, guestPasses.Body, guestPasses.Payload );
+            SteamClient.PostCallback( callback );
+#else
+            var callback = new GuestPassListCallback( guestPasses.Body, guestPasses.Payload );
+            this.Client.PostCallback( callback );
+#endif
+        }
+
+        void HandleSendGuestPassResponse(IPacketMsg packetMsg)
+        {
+            var response = new ClientMsg<MsgClientSendGuestPassResponse>(packetMsg);
+
+#if STATIC_CALLBACKS
+            var callback = new SendGuestPassCallback( Client, response.Body );
+            SteamClient.PostCallback( callback );
+#else
+            var callback = new SendGuestPassCallback( response.Body );
             this.Client.PostCallback( callback );
 #endif
         }

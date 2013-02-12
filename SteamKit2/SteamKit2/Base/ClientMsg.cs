@@ -318,6 +318,7 @@ namespace SteamKit2
                 int payloadLen = ( int )( ms.Length - ms.Position );
 
                 Payload.Write( data, payloadOffset, payloadLen );
+                Payload.Seek( 0, SeekOrigin.Begin );
             }
         }
     }
