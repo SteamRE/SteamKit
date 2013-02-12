@@ -757,7 +757,7 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// This callback is recieved when the list of guest passes is updated.
+        /// This callback is received when the list of guest passes is updated.
         /// </summary>
         public sealed class GuestPassListCallback : CallbackMsg
         {
@@ -800,7 +800,7 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// This callback is recieved when a guest pass has been sent
+        /// This callback is received when a guest pass has been sent
         /// </summary>
         public sealed class SendGuestPassCallback : CallbackMsg
         {
