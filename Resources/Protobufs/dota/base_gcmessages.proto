@@ -78,8 +78,6 @@ message CMsgServerHello {
 message CMsgClientWelcome {
 	optional uint32 version = 1;
 	optional bytes game_data = 2;
-	optional uint32 banned_word_set = 3;
-	optional uint32 word_id = 4;
 }
 
 message CMsgServerWelcome {

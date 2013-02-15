@@ -181,6 +181,10 @@ enum EDOTAGCMsg {
 	k_EMsgUpgradeLeagueItemResponse = 7204;
 	k_EMsgGCTeamMemberProfileRequest = 7205;
 	k_EMsgGCWatchDownloadedReplay = 7206;
+	k_EMsgGCSetMapLocationState = 7207;
+	k_EMsgGCSetMapLocationStateResponse = 7208;
+	k_EMsgGCResetMapLocations = 7209;
+	k_EMsgGCResetMapLocationsResponse = 7210;
 	k_EMsgGCDev_GrantWarKill = 8001;
 }
 
@@ -998,6 +1002,12 @@ message CMsgDOTAMatch {
 		repeated .CMatchAdditionalUnitInventory additional_units_inventory = 48;
 	}
 
+	enum ReplayState {
+		REPLAY_AVAILABLE = 0;
+		REPLAY_NOT_RECORDED = 1;
+		REPLAY_EXPIRED = 2;
+	}
+
 	optional uint32 season = 1;
 	optional bool good_guys_win = 2;
 	optional uint32 duration = 3;
@@ -1029,6 +1039,7 @@ message CMsgDOTAMatch {
 	optional .DOTA_GameMode game_mode = 31 [default = DOTA_GAMEMODE_NONE];
 	repeated .CMatchHeroSelectEvent picks_bans = 32;
 	optional uint64 match_seq_num = 33;
+	optional .CMsgDOTAMatch.ReplayState replay_state = 34 [default = REPLAY_AVAILABLE];
 }
 
 message CMsgDOTAPlayerMatchHistory {
@@ -2151,5 +2162,27 @@ message CMsgUpgradeLeagueItemResponse {
 message CMsgGCWatchDownloadedReplay {
 	optional uint64 match_id = 1;
 	optional .DOTA_WatchReplayType watch_type = 2 [default = DOTA_WATCH_REPLAY_NORMAL];
+}
+
+message CSODOTAMapLocationState {
+	optional uint32 account_id = 1 [(key_field) = true];
+	optional int32 location_id = 2 [(key_field) = true];
+	optional bool completed = 3;
+}
+
+message CMsgSetMapLocationState {
+	optional int32 location_id = 1;
+	optional bool completed = 2;
+}
+
+message CMsgSetMapLocationStateResponse {
+	optional uint32 eresult = 1 [default = 2];
+}
+
+message CMsgResetMapLocations {
+}
+
+message CMsgResetMapLocationsResponse {
+	optional uint32 eresult = 1 [default = 2];
 }
 
