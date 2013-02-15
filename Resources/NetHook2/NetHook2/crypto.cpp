@@ -47,12 +47,12 @@ CCrypto::CCrypto()
 	CSimpleScan steamClientScan( "steamclient.dll" );
 
 
-	char *pEncrypt;
+	char *pEncrypt = NULL;
 	bool bEncrypt = steamClientScan.FindFunction(
 		"\x53\x8B\xDC\x83\xEC\x08\x83\xE4\xF8\x83\xC4\x04\x55\x8B\x6B\x04\x89\x6C\x24\x04\x8B\xEC\x6A\xFF\x68\x00\x00\x00\x00"
 		"\x64\xA1\x00\x00\x00\x00\x50\x64\x89\x25\x00\x00\x00\x00\x51\x53\x81\xEC\x00\x00\x00\x00\xA1\x00\x00\x00\x00\x8B\x08"
-		"\x53\x56\x57\x89\x65\xF0\x85\xC9\x75\x05\x89\x4D\xDC",
-		"xxxxxxxxxxxxxxxxxxxxxxxxx????xx????xxxx????xxxx????x????xxxxxxxxxxxxxxx",
+		"\x53\x56\x57\x89\x65\xF0\x85\xC9\x75\x07\x33\xC0\x89\x45\xD8",
+		"xxxxxxxxxxxxxxxxxxxxxxxxx????xx????xxxx????xxxx????x????xxxxxxxxxxxxxxxxx",
 		(void **)&pEncrypt
 	);
 
@@ -61,10 +61,10 @@ CCrypto::CCrypto()
 	g_pLogger->LogConsole( "CCrypto::SymmetricEncrypt = 0x%x\n", Encrypt_Orig );
 
 
-	char *pDecrypt;
+	char *pDecrypt = NULL;
 	bool bDecrypt = steamClientScan.FindFunction(
 		"\x55\x8B\xEC\x6A\xFF\x68\x00\x00\x00\x00\x64\xA1\x00\x00\x00\x00\x50\x64\x89\x25\x00\x00\x00\x00\x81\xEC\x00\x00\x00"
-		"\x00\xA1\x00\x00\x00\x00\x8B\x08\x53\x56\x57\x89\x65\xF0\x85\xC9\x75\x05\x89\x4D\xE4",
+		"\x00\xA1\x00\x00\x00\x00\x8B\x08\x53\x56\x57\x89\x65\xF0\x85\xC9\x75\x08\x89\x4D\xE0",
 		"xxxxxx????xx????xxxx????xx????x????xxxxxxxxxxxxxxx",
 		(void **)&pDecrypt
 	);
@@ -74,44 +74,18 @@ CCrypto::CCrypto()
 	g_pLogger->LogConsole( "CCrypto::SymmetricDecrypt = 0x%x\n", Decrypt_Orig );
 
 
-	char *pGhettoFunction;
-
-	/*
-	.text:3826F3D0 B8 01 00 00 00                          mov     eax, 1
-	.text:3826F3D5 84 05 F0 6B 5A 38                       test    byte ptr dword_385A6BF0, al
-	.text:3826F3DB 75 47                                   jnz     short loc_3826F424
-	.text:3826F3DD 09 05 F0 6B 5A 38                       or      dword_385A6BF0, eax
-	.text:3826F3E3 56                                      push    esi
-	.text:3826F3E4 B9 A0 6B 5A 38                          mov     ecx, offset unk_385A6BA0
-
-
-	.text:3826F3E9 E8 E2 B5 EE FF                          call    sub_3815A9D0
-	.text:3826F3EE C6 05 EC 6B 5A 38 00                    mov     byte_385A6BEC, 0
-	.text:3826F3F5 BE B8 03 58 38                          mov     esi, offset g_pStartMessageList
-	.text:3826F3FA 8D 9B 00 00 00 00                       lea     ebx, [ebx+0]
-	.text:3826F400
-	.text:3826F400                         loc_3826F400:                           ; CODE XREF: sub_3826F3D0+44j
-	.text:3826F400 56                                      push    esi
-	.text:3826F401 B9 A0 6B 5A 38                          mov     ecx, offset unk_385A6BA0
-	.text:3826F406 E8 F5 FB FF FF                          call    sub_3826F000
-	.text:3826F40B 83 C6 30                                add     esi, 48
-	.text:3826F40E 81 FE 78 4C 58 38                       cmp     esi, offset g_pEndMessageList
-	*/
-
+	char *pGetMessageList = NULL;
 	steamClientScan.FindFunction(
-		"\xB8\x01\x00\x00\x00\x84\x05\xF0\x6B\x5A\x38\x75\x47\x09\x05\xF0\x6B\x5A\x38\x56\xB9\xA0\x6B\x5A\x38",
-		"xxxxxxx????x?xx????xx????",
-		(void **)&pGhettoFunction
+		"\xB8\x00\x00\x00\x00\x84\x05\x00\x00\x00\x00\x75\x47",
+		"x????xx????xx",
+		(void **)&pGetMessageList
 	);
 
-	
-
-
-	MsgInfo_t *pInfos = *(MsgInfo_t **)( pGhettoFunction + 38 );
-	MsgInfo_t *pEndInfos = *(MsgInfo_t **)( pGhettoFunction + 64 );
+	MsgInfo_t *pInfos = *(MsgInfo_t **)( pGetMessageList + 40 );
+	MsgInfo_t *pEndInfos = *(MsgInfo_t **)( pGetMessageList + 64 );
 	uint16 numMessages = ( ( int )pEndInfos - ( int )pInfos ) / sizeof( MsgInfo_t );
 
-	g_pLogger->LogConsole( "pGhettoFunction = 0x%x\npInfos = 0x%x\nnumMessages = %d\n", pGhettoFunction, pInfos, numMessages );
+	g_pLogger->LogConsole( "pGetMessageList = 0x%x\npInfos = 0x%x\nnumMessages = %d\n", pGetMessageList, pInfos, numMessages );
 
 
 	for ( uint16 x = 0 ; x < numMessages; x++ )
