@@ -262,6 +262,7 @@ message CCSUsrMsg_PlayerStatsUpdate {
 
 message CCSUsrMsg_DisplayInventory {
 	optional bool display = 1;
+	optional int32 user_id = 2;
 }
 
 message CCSUsrMsg_XRankGet {
