@@ -481,6 +481,25 @@ namespace SteamKit2
 
 
         /// <summary>
+        /// Requests profile information for the given <see cref="SteamID"/>.
+        /// Results are returned in a <see cref="ProfileInfoCallback"/>.
+        /// </summary>
+        /// <param name="steamId">The SteamID of the friend to request the details of.</param>
+        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="SteamClient.JobCallback&lt;T&gt;"/>.</returns>
+        public JobID RequestProfileInfo( SteamID steamId )
+        {
+            var request = new ClientMsgProtobuf<CMsgClientFriendProfileInfo>( EMsg.ClientFriendProfileInfo );
+            request.SourceJobID = Client.GetNextJobID();
+
+            request.Body.steamid_friend = steamId;
+
+            this.Client.Send( request );
+
+            return request.SourceJobID;
+        }
+
+
+        /// <summary>
         /// Handles a client message. This should not be called directly.
         /// </summary>
         /// <param name="packetMsg">The packet message that contains the data.</param>
@@ -530,6 +549,10 @@ namespace SteamKit2
 
                 case EMsg.ClientSetIgnoreFriendResponse:
                     HandleIgnoreFriendResponse( packetMsg );
+                    break;
+
+                case EMsg.ClientFriendProfileInfoResponse:
+                    HandleProfileInfoResponse( packetMsg );
                     break;
             }
         }
@@ -802,6 +825,20 @@ namespace SteamKit2
             var innerCallback = new IgnoreFriendCallback( response.Body );
             var callback = new SteamClient.JobCallback<IgnoreFriendCallback>( response.TargetJobID, innerCallback );
             this.Client.PostCallback( callback );
+#endif
+        }
+        void HandleProfileInfoResponse( IPacketMsg packetMsg )
+        {
+            var response = new ClientMsgProtobuf<CMsgClientFriendProfileInfoResponse>( packetMsg );
+
+#if STATIC_CALLBACKS
+            var innerCallback = new ProfileInfoCallback( Client, response.Body );
+            var callback = new SteamClient.JobCallback<ProfileInfoCallback>( Client, packetMsg.TargetJobID, innerCallback );
+            SteamClient.PostCallback( callback );
+#else
+            var innerCallback = new ProfileInfoCallback( response.Body );
+            var callback = new SteamClient.JobCallback<ProfileInfoCallback>( packetMsg.TargetJobID, innerCallback );
+            Client.PostCallback( callback );
 #endif
         }
         #endregion
