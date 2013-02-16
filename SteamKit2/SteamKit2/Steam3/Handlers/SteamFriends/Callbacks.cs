@@ -618,5 +618,86 @@ namespace SteamKit2
                 this.Result = response.Result;
             }
         }
+
+        /// <summary>
+        /// This callback is fired in response to requesting profile info for a user.
+        /// </summary>
+        public sealed class ProfileInfoCallback : CallbackMsg
+        {
+            /// <summary>
+            /// Gets the result of requesting profile info.
+            /// </summary>
+            public EResult Result { get; private set; }
+
+            /// <summary>
+            /// Gets the <see cref="SteamID"/> this info belongs to.
+            /// </summary>
+            public SteamID SteamID { get; private set; }
+
+            /// <summary>
+            /// Gets the time this account was created.
+            /// </summary>
+            public DateTime TimeCreated { get; private set; }
+
+            /// <summary>
+            /// Gets the real name.
+            /// </summary>
+            public string RealName { get; private set; }
+
+            /// <summary>
+            /// Gets the name of the city.
+            /// </summary>
+            public string CityName { get; private set; }
+            /// <summary>
+            /// Gets the name of the state.
+            /// </summary>
+            public string StateName { get; private set; }
+            /// <summary>
+            /// Gets the name of the country.
+            /// </summary>
+            public string CountryName { get; private set; }
+
+            /// <summary>
+            /// Gets the headline.
+            /// </summary>
+            public string Headline { get; private set; }
+
+            /// <summary>
+            /// Gets the summary.
+            /// </summary>
+            public string Summary { get; private set; }
+
+            /// <summary>
+            /// Gets the recent playtime.
+            /// </summary>
+            public TimeSpan RecentPlaytime { get; private set; }
+
+
+#if STATIC_CALLBACKS
+            internal ProfileInfoCallback( SteamClient client, CMsgClientFriendProfileInfoResponse response )
+                : base( client )
+#else
+            internal ProfileInfoCallback( CMsgClientFriendProfileInfoResponse response )
+#endif
+            {
+                Result = ( EResult )response.eresult;
+
+                SteamID = response.steamid_friend;
+
+                TimeCreated = Utils.DateTimeFromUnixTime( response.time_created );
+
+                RealName = response.real_name;
+
+                CityName = response.city_name;
+                StateName = response.state_name;
+                CountryName = response.country_name;
+
+                Headline = response.headline;
+
+                Summary = response.summary;
+
+                RecentPlaytime = TimeSpan.FromMinutes( ( uint )response.recent_playtime );
+            }
+        }
     }
 }
