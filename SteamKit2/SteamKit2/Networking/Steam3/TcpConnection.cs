@@ -34,38 +34,43 @@ namespace SteamKit2
         /// Connects to the specified end point.
         /// </summary>
         /// <param name="endPoint">The end point.</param>
-        public override void Connect( IPEndPoint endPoint )
+        /// <param name="timeout">Timeout in milliseconds</param>
+        public override void Connect( IPEndPoint endPoint, int timeout )
         {
             // if we're connected, disconnect
             Disconnect();
 
             Socket socket = new Socket( AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp );
-
-            SocketAsyncEventArgs e = new SocketAsyncEventArgs();
-            e.Completed += new EventHandler<SocketAsyncEventArgs>( ConnectCompleted );
-            e.RemoteEndPoint = endPoint;
-
             DebugLog.WriteLine( "TcpConnection", "Connecting to {0}...", endPoint );
 
-            if ( !socket.ConnectAsync( e ) )
+            ThreadPool.QueueUserWorkItem( sender =>
             {
-                ConnectCompleted( socket, e );
-            }
+                var asyncResult = socket.BeginConnect( endPoint, null, null );
+
+                if ( asyncResult.AsyncWaitHandle.WaitOne( timeout ) )
+                {
+                    sock = socket;
+                    ConnectCompleted( socket );
+                }
+                else
+                {
+                    socket.Close();
+                    ConnectCompleted( null );
+                }
+            });
         }
 
-        void ConnectCompleted( object sender, SocketAsyncEventArgs e )
+        void ConnectCompleted( Socket sock )
         {
-            sock = sender as Socket;
-
             if ( sock == null )
             {
                 OnDisconnected( EventArgs.Empty );
                 return;
             }
 
-            if ( e.SocketError != SocketError.Success || !sock.Connected )
+            if ( !sock.Connected )
             {
-                DebugLog.WriteLine( "TcpConnection", "Unable to connect: {0}", e.SocketError );
+                DebugLog.WriteLine( "TcpConnection", "Unable to connect" );
                 OnDisconnected( EventArgs.Empty );
                 return;
             }

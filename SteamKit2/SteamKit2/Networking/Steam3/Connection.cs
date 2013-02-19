@@ -61,6 +61,8 @@ namespace SteamKit2
 
     abstract class Connection
     {
+        const int DEFAULT_TIMEOUT = 5000;
+
         /// <summary>
         /// Gets or sets the net filter for this connection.
         /// </summary>
@@ -106,7 +108,8 @@ namespace SteamKit2
         /// Connects to the specified end point.
         /// </summary>
         /// <param name="endPoint">The end point.</param>
-        public abstract void Connect( IPEndPoint endPoint );
+        /// <param name="timeout">Timeout in milliseconds</param>
+        public abstract void Connect( IPEndPoint endPoint, int timeout = DEFAULT_TIMEOUT );
         /// <summary>
         /// Disconnects this instance.
         /// </summary>

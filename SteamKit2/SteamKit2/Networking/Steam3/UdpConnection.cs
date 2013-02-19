@@ -104,7 +104,8 @@ namespace SteamKit2
         /// Connects to the specified CM server.
         /// </summary>
         /// <param name="endPoint">The CM server.</param>
-        public override void Connect(IPEndPoint endPoint)
+        /// <param name="timeout">Timeout in milliseconds</param>
+        public override void Connect(IPEndPoint endPoint, int timeout)
         {
             Disconnect();
 
