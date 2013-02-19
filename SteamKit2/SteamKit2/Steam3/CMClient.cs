@@ -24,50 +24,53 @@ namespace SteamKit2.Internal
         /// <summary>
         /// Bootstrap list of CM servers.
         /// </summary>
-        public static readonly IPAddress[] Servers =
+        public static readonly IPEndPoint[] Servers =
         {
-            // Limelight, New York
-            IPAddress.Parse( "68.142.91.34" ),
-            // IPAddress.Parse( "68.142.91.35" ),
-            IPAddress.Parse( "68.142.91.36" ),
-
-            // Limelight, San Jose
-            IPAddress.Parse( "68.142.116.178" ),
-            IPAddress.Parse( "68.142.116.179" ),
-
-            // Limelight, Los Angeles
-            IPAddress.Parse( "69.28.145.170" ),
-            IPAddress.Parse( "69.28.145.171" ),
-            IPAddress.Parse( "69.28.145.172" ),
-
-            // CenturyLink/Qwest, Seattle
-            IPAddress.Parse( "72.165.61.174" ),
-            IPAddress.Parse( "72.165.61.175" ),
-            IPAddress.Parse( "72.165.61.176" ),
-            IPAddress.Parse( "72.165.61.185" ),
-            // IPAddress.Parse( "72.165.61.186" ),
-            IPAddress.Parse( "72.165.61.187" ),
-            IPAddress.Parse( "72.165.61.188" ),
-
-            // Eweka, Netherlands
-            // IPAddress.Parse( "81.171.115.5" ),
-            // IPAddress.Parse( "81.171.115.6" ),
-            // IPAddress.Parse( "81.171.115.7" ),
-            // IPAddress.Parse( "81.171.115.8" ),
-            
-            // Limelight, Japan
-            // IPAddress.Parse( "203.77.185.4" ),
-            // IPAddress.Parse( "203.77.185.5" ),
-
-            // Limelight, Seattle
-            IPAddress.Parse( "208.111.133.84" ),
-            IPAddress.Parse( "208.111.133.85" ),
-
-            // Limelight, Chicago
-            // IPAddress.Parse( "208.111.158.52" ),
-            // IPAddress.Parse( "208.111.158.53" ), 
-            IPAddress.Parse( "208.111.171.82" ),
-            // IPAddress.Parse( "208.111.171.83" ),
+            // Qwest, Seattle
+            new IPEndPoint( IPAddress.Parse( "72.165.61.174" ), 27017 ),
+            new IPEndPoint( IPAddress.Parse( "72.165.61.174" ), 27018 ),
+            new IPEndPoint( IPAddress.Parse( "72.165.61.175" ), 27017 ),
+            new IPEndPoint( IPAddress.Parse( "72.165.61.175" ), 27018 ),
+            new IPEndPoint( IPAddress.Parse( "72.165.61.176" ), 27017 ),
+            new IPEndPoint( IPAddress.Parse( "72.165.61.176" ), 27018 ),
+            new IPEndPoint( IPAddress.Parse( "72.165.61.185" ), 27017 ),
+            new IPEndPoint( IPAddress.Parse( "72.165.61.185" ), 27018 ),
+            new IPEndPoint( IPAddress.Parse( "72.165.61.187" ), 27017 ),
+            new IPEndPoint( IPAddress.Parse( "72.165.61.187" ), 27018 ),
+            new IPEndPoint( IPAddress.Parse( "72.165.61.188" ), 27017 ),
+            new IPEndPoint( IPAddress.Parse( "72.165.61.188" ), 27018 ),
+            // Inteliquent, Luxembourg, cm-[01-04].lux.valve.net
+            new IPEndPoint( IPAddress.Parse( "146.66.152.12" ), 27017 ),
+            new IPEndPoint( IPAddress.Parse( "146.66.152.12" ), 27018 ),
+            new IPEndPoint( IPAddress.Parse( "146.66.152.12" ), 27019 ),
+            new IPEndPoint( IPAddress.Parse( "146.66.152.13" ), 27017 ),
+            new IPEndPoint( IPAddress.Parse( "146.66.152.13" ), 27018 ),
+            new IPEndPoint( IPAddress.Parse( "146.66.152.13" ), 27019 ),
+            new IPEndPoint( IPAddress.Parse( "146.66.152.14" ), 27017 ),
+            new IPEndPoint( IPAddress.Parse( "146.66.152.14" ), 27018 ),
+            new IPEndPoint( IPAddress.Parse( "146.66.152.14" ), 27019 ),
+            new IPEndPoint( IPAddress.Parse( "146.66.152.15" ), 27017 ),
+            new IPEndPoint( IPAddress.Parse( "146.66.152.15" ), 27018 ),
+            new IPEndPoint( IPAddress.Parse( "146.66.152.15" ), 27019 ),
+            /* Highwinds, Netherlands (not live)
+            new IPEndPoint( IPAddress.Parse( "81.171.115.5" ), 27017 ),
+            new IPEndPoint( IPAddress.Parse( "81.171.115.5" ), 27018 ),
+            new IPEndPoint( IPAddress.Parse( "81.171.115.5" ), 27019 ),
+            new IPEndPoint( IPAddress.Parse( "81.171.115.6" ), 27017 ),
+            new IPEndPoint( IPAddress.Parse( "81.171.115.6" ), 27018 ),
+            new IPEndPoint( IPAddress.Parse( "81.171.115.6" ), 27019 ),
+            new IPEndPoint( IPAddress.Parse( "81.171.115.7" ), 27017 ),
+            new IPEndPoint( IPAddress.Parse( "81.171.115.7" ), 27018 ),
+            new IPEndPoint( IPAddress.Parse( "81.171.115.7" ), 27019 ),
+            new IPEndPoint( IPAddress.Parse( "81.171.115.8" ), 27017 ),
+            new IPEndPoint( IPAddress.Parse( "81.171.115.8" ), 27018 ),
+            new IPEndPoint( IPAddress.Parse( "81.171.115.8" ), 27019 ),*/
+            // Highwinds, Kaysville
+            new IPEndPoint( IPAddress.Parse( "209.197.29.196" ), 27017 ),
+            new IPEndPoint( IPAddress.Parse( "209.197.29.197" ), 27017 ),
+            /* Starhub, Singapore (non-optimal route)
+            new IPEndPoint( IPAddress.Parse( "103.28.54.10" ), 27017 ),
+            new IPEndPoint( IPAddress.Parse( "103.28.54.11" ), 27017 )*/
         };
 
         /// <summary>
@@ -153,16 +156,14 @@ namespace SteamKit2.Internal
         /// SteamKit will not attempt to reconnect to Steam, you must handle this callback and call Connect again
         /// preferrably after a short delay.
         /// </summary>
-        /// <param name="bEncrypted">
-        /// If set to <c>true</c> the underlying connection to Steam will be encrypted. This is the default mode of communication.
-        /// Previous versions of SteamKit always used encryption.
-        /// </param>
-        public void Connect( bool bEncrypted = true )
+        public void Connect()
         {
+            encrypted = true;
+
             Random random = new Random();
             var server = Servers[ random.Next( Servers.Length ) ];
 
-            this.Connect( server, bEncrypted );
+            connection.Connect( server );
         }
 
         /// <summary>
