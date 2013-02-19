@@ -1812,14 +1812,15 @@ namespace SteamKit2.Internal
 		private ulong mySteamId;
 		public SteamID MySteamId { get { return new SteamID( mySteamId ); } set { mySteamId = value.ConvertToUInt64(); } }
 		// Static size: 8
-		public ulong SteamIdFriend { get; set; }
+		private ulong steamIdFriend;
+		public SteamID SteamIdFriend { get { return new SteamID( steamIdFriend ); } set { steamIdFriend = value.ConvertToUInt64(); } }
 		// Static size: 1
 		public byte Ignore { get; set; }
 
 		public MsgClientSetIgnoreFriend()
 		{
 			mySteamId = 0;
-			SteamIdFriend = 0;
+			steamIdFriend = 0;
 			Ignore = 0;
 		}
 
@@ -1828,7 +1829,7 @@ namespace SteamKit2.Internal
 			BinaryWriter bw = new BinaryWriter( stream );
 
 			bw.Write( mySteamId );
-			bw.Write( SteamIdFriend );
+			bw.Write( steamIdFriend );
 			bw.Write( Ignore );
 
 		}
@@ -1838,7 +1839,7 @@ namespace SteamKit2.Internal
 			BinaryReader br = new BinaryReader( stream );
 
 			mySteamId = br.ReadUInt64();
-			SteamIdFriend = br.ReadUInt64();
+			steamIdFriend = br.ReadUInt64();
 			Ignore = br.ReadByte();
 		}
 	}

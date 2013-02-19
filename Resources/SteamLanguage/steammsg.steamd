@@ -274,7 +274,7 @@ class MsgClientGetNumberOfCurrentPlayersResponse<EMsg::ClientGetNumberOfCurrentP
 class MsgClientSetIgnoreFriend<EMsg::ClientSetIgnoreFriend>
 {
 	steamidmarshal ulong mySteamId;
-	steaidmarshal ulong steamIdFriend;
+	steamidmarshal ulong steamIdFriend;
 
 	byte ignore;
 };
