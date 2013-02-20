@@ -10,6 +10,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
+using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace SteamKit2.Internal
 {
@@ -18,60 +20,10 @@ namespace SteamKit2.Internal
     /// </summary>
     public abstract class CMClient
     {
-        const ushort PortCM_PublicEncrypted = 27017;
-        const ushort PortCM_Public = 27014;
-
         /// <summary>
         /// Bootstrap list of CM servers.
         /// </summary>
-        public static readonly IPEndPoint[] Servers =
-        {
-            // Qwest, Seattle
-            new IPEndPoint( IPAddress.Parse( "72.165.61.174" ), 27017 ),
-            new IPEndPoint( IPAddress.Parse( "72.165.61.174" ), 27018 ),
-            new IPEndPoint( IPAddress.Parse( "72.165.61.175" ), 27017 ),
-            new IPEndPoint( IPAddress.Parse( "72.165.61.175" ), 27018 ),
-            new IPEndPoint( IPAddress.Parse( "72.165.61.176" ), 27017 ),
-            new IPEndPoint( IPAddress.Parse( "72.165.61.176" ), 27018 ),
-            new IPEndPoint( IPAddress.Parse( "72.165.61.185" ), 27017 ),
-            new IPEndPoint( IPAddress.Parse( "72.165.61.185" ), 27018 ),
-            new IPEndPoint( IPAddress.Parse( "72.165.61.187" ), 27017 ),
-            new IPEndPoint( IPAddress.Parse( "72.165.61.187" ), 27018 ),
-            new IPEndPoint( IPAddress.Parse( "72.165.61.188" ), 27017 ),
-            new IPEndPoint( IPAddress.Parse( "72.165.61.188" ), 27018 ),
-            // Inteliquent, Luxembourg, cm-[01-04].lux.valve.net
-            new IPEndPoint( IPAddress.Parse( "146.66.152.12" ), 27017 ),
-            new IPEndPoint( IPAddress.Parse( "146.66.152.12" ), 27018 ),
-            new IPEndPoint( IPAddress.Parse( "146.66.152.12" ), 27019 ),
-            new IPEndPoint( IPAddress.Parse( "146.66.152.13" ), 27017 ),
-            new IPEndPoint( IPAddress.Parse( "146.66.152.13" ), 27018 ),
-            new IPEndPoint( IPAddress.Parse( "146.66.152.13" ), 27019 ),
-            new IPEndPoint( IPAddress.Parse( "146.66.152.14" ), 27017 ),
-            new IPEndPoint( IPAddress.Parse( "146.66.152.14" ), 27018 ),
-            new IPEndPoint( IPAddress.Parse( "146.66.152.14" ), 27019 ),
-            new IPEndPoint( IPAddress.Parse( "146.66.152.15" ), 27017 ),
-            new IPEndPoint( IPAddress.Parse( "146.66.152.15" ), 27018 ),
-            new IPEndPoint( IPAddress.Parse( "146.66.152.15" ), 27019 ),
-            /* Highwinds, Netherlands (not live)
-            new IPEndPoint( IPAddress.Parse( "81.171.115.5" ), 27017 ),
-            new IPEndPoint( IPAddress.Parse( "81.171.115.5" ), 27018 ),
-            new IPEndPoint( IPAddress.Parse( "81.171.115.5" ), 27019 ),
-            new IPEndPoint( IPAddress.Parse( "81.171.115.6" ), 27017 ),
-            new IPEndPoint( IPAddress.Parse( "81.171.115.6" ), 27018 ),
-            new IPEndPoint( IPAddress.Parse( "81.171.115.6" ), 27019 ),
-            new IPEndPoint( IPAddress.Parse( "81.171.115.7" ), 27017 ),
-            new IPEndPoint( IPAddress.Parse( "81.171.115.7" ), 27018 ),
-            new IPEndPoint( IPAddress.Parse( "81.171.115.7" ), 27019 ),
-            new IPEndPoint( IPAddress.Parse( "81.171.115.8" ), 27017 ),
-            new IPEndPoint( IPAddress.Parse( "81.171.115.8" ), 27018 ),
-            new IPEndPoint( IPAddress.Parse( "81.171.115.8" ), 27019 ),*/
-            // Highwinds, Kaysville
-            new IPEndPoint( IPAddress.Parse( "209.197.29.196" ), 27017 ),
-            new IPEndPoint( IPAddress.Parse( "209.197.29.197" ), 27017 ),
-            /* Starhub, Singapore (non-optimal route)
-            new IPEndPoint( IPAddress.Parse( "103.28.54.10" ), 27017 ),
-            new IPEndPoint( IPAddress.Parse( "103.28.54.11" ), 27017 )*/
-        };
+        public static ReadOnlyCollection<IPEndPoint> Servers { get; private set; }
 
         /// <summary>
         /// Returns the the local IP of this client.
@@ -105,12 +57,63 @@ namespace SteamKit2.Internal
 
         Connection connection;
         byte[] tempSessionKey;
-        bool encrypted;
 
         ScheduledFunction heartBeatFunc;
 
         Dictionary<EServerType, List<IPEndPoint>> serverMap;
 
+
+        static CMClient()
+        {
+            Servers = new ReadOnlyCollection<IPEndPoint>( new List<IPEndPoint>
+            {
+                // Qwest, Seattle
+                new IPEndPoint( IPAddress.Parse( "72.165.61.174" ), 27017 ),
+                new IPEndPoint( IPAddress.Parse( "72.165.61.174" ), 27018 ),
+                new IPEndPoint( IPAddress.Parse( "72.165.61.175" ), 27017 ),
+                new IPEndPoint( IPAddress.Parse( "72.165.61.175" ), 27018 ),
+                new IPEndPoint( IPAddress.Parse( "72.165.61.176" ), 27017 ),
+                new IPEndPoint( IPAddress.Parse( "72.165.61.176" ), 27018 ),
+                new IPEndPoint( IPAddress.Parse( "72.165.61.185" ), 27017 ),
+                new IPEndPoint( IPAddress.Parse( "72.165.61.185" ), 27018 ),
+                new IPEndPoint( IPAddress.Parse( "72.165.61.187" ), 27017 ),
+                new IPEndPoint( IPAddress.Parse( "72.165.61.187" ), 27018 ),
+                new IPEndPoint( IPAddress.Parse( "72.165.61.188" ), 27017 ),
+                new IPEndPoint( IPAddress.Parse( "72.165.61.188" ), 27018 ),
+                // Inteliquent, Luxembourg, cm-[01-04].lux.valve.net
+                new IPEndPoint( IPAddress.Parse( "146.66.152.12" ), 27017 ),
+                new IPEndPoint( IPAddress.Parse( "146.66.152.12" ), 27018 ),
+                new IPEndPoint( IPAddress.Parse( "146.66.152.12" ), 27019 ),
+                new IPEndPoint( IPAddress.Parse( "146.66.152.13" ), 27017 ),
+                new IPEndPoint( IPAddress.Parse( "146.66.152.13" ), 27018 ),
+                new IPEndPoint( IPAddress.Parse( "146.66.152.13" ), 27019 ),
+                new IPEndPoint( IPAddress.Parse( "146.66.152.14" ), 27017 ),
+                new IPEndPoint( IPAddress.Parse( "146.66.152.14" ), 27018 ),
+                new IPEndPoint( IPAddress.Parse( "146.66.152.14" ), 27019 ),
+                new IPEndPoint( IPAddress.Parse( "146.66.152.15" ), 27017 ),
+                new IPEndPoint( IPAddress.Parse( "146.66.152.15" ), 27018 ),
+                new IPEndPoint( IPAddress.Parse( "146.66.152.15" ), 27019 ),
+                /* Highwinds, Netherlands (not live)
+                new IPEndPoint( IPAddress.Parse( "81.171.115.5" ), 27017 ),
+                new IPEndPoint( IPAddress.Parse( "81.171.115.5" ), 27018 ),
+                new IPEndPoint( IPAddress.Parse( "81.171.115.5" ), 27019 ),
+                new IPEndPoint( IPAddress.Parse( "81.171.115.6" ), 27017 ),
+                new IPEndPoint( IPAddress.Parse( "81.171.115.6" ), 27018 ),
+                new IPEndPoint( IPAddress.Parse( "81.171.115.6" ), 27019 ),
+                new IPEndPoint( IPAddress.Parse( "81.171.115.7" ), 27017 ),
+                new IPEndPoint( IPAddress.Parse( "81.171.115.7" ), 27018 ),
+                new IPEndPoint( IPAddress.Parse( "81.171.115.7" ), 27019 ),
+                new IPEndPoint( IPAddress.Parse( "81.171.115.8" ), 27017 ),
+                new IPEndPoint( IPAddress.Parse( "81.171.115.8" ), 27018 ),
+                new IPEndPoint( IPAddress.Parse( "81.171.115.8" ), 27019 ),*/
+                // Highwinds, Kaysville
+                new IPEndPoint( IPAddress.Parse( "209.197.29.196" ), 27017 ),
+                new IPEndPoint( IPAddress.Parse( "209.197.29.197" ), 27017 ),
+                /* Starhub, Singapore (non-optimal route)
+                new IPEndPoint( IPAddress.Parse( "103.28.54.10" ), 27017 ),
+                new IPEndPoint( IPAddress.Parse( "103.28.54.11" ), 27017 )*/
+            } );
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CMClient"/> class with a specific connection type.
@@ -140,7 +143,7 @@ namespace SteamKit2.Internal
 
             connection.NetMsgReceived += NetMsgReceived;
             connection.Disconnected += Disconnected;
-            connection.Connected += Connected;
+
             heartBeatFunc = new ScheduledFunction( () =>
             {
                 Send( new ClientMsgProtobuf<CMsgClientHeartBeat>( EMsg.ClientHeartBeat ) );
@@ -156,38 +159,21 @@ namespace SteamKit2.Internal
         /// SteamKit will not attempt to reconnect to Steam, you must handle this callback and call Connect again
         /// preferrably after a short delay.
         /// </summary>
-        public void Connect()
-        {
-            encrypted = true;
-
-            Random random = new Random();
-            var server = Servers[ random.Next( Servers.Length ) ];
-
-            connection.Connect( server );
-        }
-
-        /// <summary>
-        /// Connects this client to the specified Steam3 server.
-        /// This begins the process of connecting and encrypting the data channel between the client and the server.
-        /// Results are returned asynchronously in a <see cref="SteamClient.ConnectedCallback"/>.
-        /// If the server that SteamKit attempts to connect to is down, a <see cref="SteamClient.DisconnectedCallback"/>
-        /// will be posted instead.
-        /// SteamKit will not attempt to reconnect to Steam, you must handle this callback and call Connect again
-        /// preferrably after a short delay.
-        /// </summary>
-        /// <param name="cmServer">The <see cref="IPAddress"/> of the CM server to connect to.</param>
-        /// <param name="bEncrypted">
-        /// If set to <c>true</c> the underlying connection to Steam will be encrypted. This is the default mode of communication.
-        /// Previous versions of SteamKit always used encryption.
+        /// <param name="cmServer">
+        /// The <see cref="IPEndPoint"/> of the CM server to connect to.
+        /// If <c>null</c>, SteamKit will randomly select a CM server from its internal list.
         /// </param>
-        public void Connect( IPAddress cmServer, bool bEncrypted = true )
+        public void Connect( IPEndPoint cmServer = null  )
         {
             this.Disconnect();
-            encrypted = bEncrypted;
 
-            var endPoint = new IPEndPoint( cmServer, bEncrypted ? PortCM_PublicEncrypted : PortCM_Public );
+            if ( cmServer == null )
+            {
+                Random random = new Random();
+                cmServer = Servers[ random.Next( Servers.Count ) ];
+            }
 
-            connection.Connect( endPoint );
+            connection.Connect( cmServer );
         }
 
         /// <summary>
@@ -281,6 +267,10 @@ namespace SteamKit2.Internal
                 case EMsg.ClientServerList: // Steam server list
                     HandleServerList( packetMsg );
                     break;
+
+                case EMsg.ClientCMList:
+                    HandleCMList( packetMsg );
+                    break;
             }
         }
         /// <summary>
@@ -296,19 +286,6 @@ namespace SteamKit2.Internal
         void NetMsgReceived( object sender, NetMsgEventArgs e )
         {
             OnClientMsgReceived( GetPacketMsg( e.Data ) );
-        }
-
-        void Connected( object sender, EventArgs e )
-        {
-            // If we're on an encrypted connection, we wait for the handshake to complete
-            if ( encrypted )
-                return;
-
-            // we only connect to the public universe
-            ConnectedUniverse = EUniverse.Public;
-
-            // since there is no encryption handshake, we're 'connected' after the underlying connection is established
-            OnClientConnected();
         }
 
         void Disconnected( object sender, EventArgs e )
@@ -481,6 +458,17 @@ namespace SteamKit2.Internal
 
                 endpointList.Add( new IPEndPoint( NetHelpers.GetIPAddress( server.server_ip ), ( int )server.server_port ) );
             }
+        }
+        void HandleCMList( IPacketMsg packetMsg )
+        {
+            var cmMsg = new ClientMsgProtobuf<CMsgClientCMList>( packetMsg );
+            DebugLog.Assert( cmMsg.Body.cm_addresses.Count == cmMsg.Body.cm_ports.Count, "CMClient", "HandleCMList received malformed message" );
+
+            var cmList = cmMsg.Body.cm_addresses
+                .Zip( cmMsg.Body.cm_ports, ( addr, port ) => new IPEndPoint( NetHelpers.GetIPAddress( addr ), ( int )port ) );
+
+            // update our bootstrap list with steam's list of CMs
+            Servers = new ReadOnlyCollection<IPEndPoint>( cmList.ToList() );
         }
         #endregion
     }
