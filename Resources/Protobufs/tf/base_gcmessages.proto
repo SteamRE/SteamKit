@@ -410,3 +410,18 @@ message CMsgGCCollectItem {
 	optional uint64 subject_item_id = 2;
 }
 
+message CMsgGCClientMarketDataRequest {
+	optional uint32 user_currency = 1;
+}
+
+message CMsgGCClientMarketDataEntry {
+	optional uint32 item_def_index = 1;
+	optional uint32 item_quality = 2;
+	optional uint32 item_sell_listings = 3;
+	optional uint32 price_in_local_currency = 4;
+}
+
+message CMsgGCClientMarketData {
+	repeated .CMsgGCClientMarketDataEntry entries = 1;
+}
+

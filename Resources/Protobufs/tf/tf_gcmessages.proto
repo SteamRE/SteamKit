@@ -658,6 +658,8 @@ message CGCMsgTFHelloResponse {
 message CGCMsgTFSync {
 	optional bytes version_checksum = 1;
 	optional uint32 version_check = 2;
+	optional uint32 version_check_ex = 3;
+	optional uint32 version_check_ex2 = 4;
 }
 
 message CMsgMvMVictory {
