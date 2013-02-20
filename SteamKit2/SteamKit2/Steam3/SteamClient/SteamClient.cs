@@ -329,17 +329,6 @@ namespace SteamKit2
             this.PostCallback( new DisconnectedCallback() );
 #endif
         }
-        /// <summary>
-        /// Called when the client is connected to Steam3 and is ready to send messages.
-        /// </summary>
-        protected override void OnClientConnected()
-        {
-#if STATIC_CALLBACKS
-            SteamClient.PostCallback( new ConnectedCallback( this, EResult.OK ) );
-#else
-            PostCallback( new ConnectedCallback( EResult.OK ) );
-#endif
-        }
 
 
         void HandleEncryptResult( IPacketMsg packetMsg )
