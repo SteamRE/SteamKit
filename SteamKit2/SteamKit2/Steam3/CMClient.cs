@@ -54,6 +54,15 @@ namespace SteamKit2.Internal
         /// <value>The SteamID.</value>
         public SteamID SteamID { get; private set; }
 
+        /// <summary>
+        /// Gets or sets the connection timeout used when connecting to the Steam server.
+        /// The default value is 5 seconds.
+        /// </summary>
+        /// <value>
+        /// The connection timeout.
+        /// </value>
+        public TimeSpan ConnectionTimeout { get; set; }
+
 
         Connection connection;
         byte[] tempSessionKey;
@@ -127,6 +136,9 @@ namespace SteamKit2.Internal
         {
             serverMap = new Dictionary<EServerType, List<IPEndPoint>>();
 
+            // our default timeout
+            ConnectionTimeout = TimeSpan.FromSeconds( 5 );
+
             switch ( type )
             {
                 case ProtocolType.Tcp:
@@ -173,7 +185,7 @@ namespace SteamKit2.Internal
                 cmServer = Servers[ random.Next( Servers.Count ) ];
             }
 
-            connection.Connect( cmServer );
+            connection.Connect( cmServer, ConnectionTimeout.Milliseconds );
         }
 
         /// <summary>
