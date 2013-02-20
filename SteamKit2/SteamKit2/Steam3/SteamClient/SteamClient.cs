@@ -301,8 +301,16 @@ namespace SteamKit2
             // let the underlying CMClient handle this message first
             base.OnClientMsgReceived( packetMsg );
 
-            if ( packetMsg.MsgType == EMsg.ChannelEncryptResult )
-                HandleEncryptResult( packetMsg ); // we're interested in this client message to post the connected callback
+            switch ( packetMsg.MsgType )
+            {
+                case EMsg.ChannelEncryptResult:
+                    HandleEncryptResult( packetMsg ); // we're interested in this client message to post the connected callback
+                    break;
+
+                case EMsg.ClientCMList:
+                    HandleCMList( packetMsg );
+                    break;
+            }
 
             // pass along the clientmsg to all registered handlers
             foreach ( var kvp in handlers )
@@ -342,6 +350,17 @@ namespace SteamKit2
             SteamClient.PostCallback( new ConnectedCallback( this, encResult.Body ) );
 #else
             PostCallback( new ConnectedCallback( encResult.Body ) );
+#endif
+        }
+
+        void HandleCMList( IPacketMsg packetMsg )
+        {
+            var cmMsg = new ClientMsgProtobuf<CMsgClientCMList>( packetMsg );
+
+#if STATIC_CALLBACKS
+            SteamClient.PostCallback( new CMListCallback( this, cmMsg.Body ) );
+#else
+            PostCallback( new CMListCallback( cmMsg.Body ) );
 #endif
         }
 
