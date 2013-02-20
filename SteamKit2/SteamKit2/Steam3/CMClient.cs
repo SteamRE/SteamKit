@@ -185,7 +185,7 @@ namespace SteamKit2.Internal
                 cmServer = Servers[ random.Next( Servers.Count ) ];
             }
 
-            connection.Connect( cmServer, ConnectionTimeout.Milliseconds );
+            connection.Connect( cmServer, ( int )ConnectionTimeout.TotalMilliseconds );
         }
 
         /// <summary>
