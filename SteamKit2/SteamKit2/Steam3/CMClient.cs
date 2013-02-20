@@ -289,10 +289,6 @@ namespace SteamKit2.Internal
         /// Called when the client is physically disconnected from Steam3.
         /// </summary>
         protected abstract void OnClientDisconnected();
-        /// <summary>
-        /// Called when the client is connected to Steam3 and is ready to send messages.
-        /// </summary>
-        protected abstract void OnClientConnected();
 
 
         void NetMsgReceived( object sender, NetMsgEventArgs e )
