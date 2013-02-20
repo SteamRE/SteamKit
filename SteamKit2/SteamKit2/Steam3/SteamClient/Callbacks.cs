@@ -4,6 +4,9 @@
  */
 
 using System;
+using System.Collections.ObjectModel;
+using System.Net;
+using System.Linq;
 using SteamKit2.Internal;
 
 namespace SteamKit2
@@ -127,6 +130,32 @@ namespace SteamKit2
             {
             }
 #endif
+        }
+
+
+        /// <summary>
+        /// This callback is received when the client has received the CM list from Steam.
+        /// </summary>
+        public sealed class CMListCallback : CallbackMsg
+        {
+            /// <summary>
+            /// Gets the CM server list.
+            /// </summary>
+            public ReadOnlyCollection<IPEndPoint> Servers { get; private set; }
+
+
+#if STATIC_CALLBACKS
+            internal CMListCallback( SteamClient client, CMsgClientCMList cmMsg )
+                : base( client )
+#else
+            internal CMListCallback( CMsgClientCMList cmMsg )
+#endif
+            {
+                var cmList = cmMsg.cm_addresses
+                    .Zip( cmMsg.cm_ports, ( addr, port ) => new IPEndPoint( NetHelpers.GetIPAddress( addr ), ( int )port ) );
+
+                Servers = new ReadOnlyCollection<IPEndPoint>( cmList.ToList() );
+            }
         }
     }
 }
