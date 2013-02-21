@@ -100,7 +100,7 @@ message CMsgInQueue {
 message CMsgInviteToParty {
 	optional fixed64 steam_id = 1;
 	optional uint32 client_version = 2;
-	optional bool team_invite = 3;
+	optional uint32 team_id = 3;
 }
 
 message CMsgInvitationCreated {
@@ -112,7 +112,7 @@ message CMsgPartyInviteResponse {
 	optional uint64 party_id = 1;
 	optional bool accept = 2;
 	optional uint32 client_version = 3;
-	optional bool team_invite = 4;
+	optional uint32 team_id = 4;
 }
 
 message CMsgKickFromParty {
