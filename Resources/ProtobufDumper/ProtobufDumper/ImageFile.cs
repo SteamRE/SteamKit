@@ -969,7 +969,8 @@ namespace ProtobufDumper
         // because of protobuf-net we're limited to parsing simple types at run-time as we can't parse the protobuf, but options shouldn't be too complex
         private void BuildExtension(string key, FieldDescriptorProto[] fields)
         {
-            TypeBuilder extension = moduleBuilder.DefineType(key + "Ext", TypeAttributes.Class);
+            string name = key + "Ext" + Guid.NewGuid().ToString();
+            TypeBuilder extension = moduleBuilder.DefineType(name, TypeAttributes.Class);
 
             Type pcType = typeof(ProtoContractAttribute);
             ConstructorInfo pcCtor = pcType.GetConstructor(Type.EmptyTypes);
