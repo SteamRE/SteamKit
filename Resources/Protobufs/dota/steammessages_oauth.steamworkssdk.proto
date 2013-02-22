@@ -1,0 +1,18 @@
+import "google/protobuf/descriptor.proto";
+import "steammessages_unified_base.steamworkssdk.proto";
+
+message COAuthToken_ImplicitGrantNoPrompt_Request {
+	optional string clientid = 1 [(description) = "Client ID for which to count the number of issued tokens"];
+}
+
+message COAuthToken_ImplicitGrantNoPrompt_Response {
+	optional string access_token = 1 [(description) = "OAuth Token, granted on success"];
+	optional string redirect_uri = 2 [(description) = "Redirection URI provided during client registration."];
+}
+
+service OAuthToken {
+	option (service_description) = "Service containing methods to manage OAuth tokens";
+	rpc ImplicitGrantNoPrompt (.COAuthToken_ImplicitGrantNoPrompt_Request) returns (.COAuthToken_ImplicitGrantNoPrompt_Response) {
+		option (method_description) = "Grants an implicit OAuth token (grant type 'token') for the specified client ID on behalf of a user without prompting";
+	}
+}
