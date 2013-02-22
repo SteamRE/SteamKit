@@ -2035,5 +2035,43 @@ namespace SteamKit2.Internal
 		}
 	}
 
+	public class MsgClientServerUnavailable : ISteamSerializableMessage
+	{
+		public EMsg GetEMsg() { return EMsg.ClientServerUnavailable; }
+
+		// Static size: 8
+		public ulong JobidSent { get; set; }
+		// Static size: 4
+		public uint EMsgSent { get; set; }
+		// Static size: 4
+		public EServerType EServerTypeUnavailable { get; set; }
+
+		public MsgClientServerUnavailable()
+		{
+			JobidSent = 0;
+			EMsgSent = 0;
+			EServerTypeUnavailable = 0;
+		}
+
+		public void Serialize(Stream stream)
+		{
+			BinaryWriter bw = new BinaryWriter( stream );
+
+			bw.Write( JobidSent );
+			bw.Write( EMsgSent );
+			bw.Write( (int)EServerTypeUnavailable );
+
+		}
+
+		public void Deserialize( Stream stream )
+		{
+			BinaryReader br = new BinaryReader( stream );
+
+			JobidSent = br.ReadUInt64();
+			EMsgSent = br.ReadUInt32();
+			EServerTypeUnavailable = (EServerType)br.ReadInt32();
+		}
+	}
+
 }
 #pragma warning restore 1591

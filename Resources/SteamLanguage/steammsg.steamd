@@ -314,3 +314,10 @@ class MsgClientSendGuestPassResponse<EMsg::ClientSendGuestPassResponse>
 {
 	EResult result;
 };
+
+class MsgClientServerUnavailable<EMsg::ClientServerUnavailable>
+{
+	ulong jobidSent;
+	uint eMsgSent;
+	EServerType eServerTypeUnavailable;
+};
