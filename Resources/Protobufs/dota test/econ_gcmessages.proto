@@ -29,8 +29,6 @@ enum EGCItemMsg {
 	k_EMsgGCUseItemRequest = 1025;
 	k_EMsgGCUseItemResponse = 1026;
 	k_EMsgGCGiftedItems = 1027;
-	k_EMsgGCSpawnItem_DEPRECATED = 1028;
-	k_EMsgGCRespawnPostLoadoutChange = 1029;
 	k_EMsgGCRemoveItemName = 1030;
 	k_EMsgGCRemoveItemPaint = 1031;
 	k_EMsgGCGiftWrapItem = 1032;

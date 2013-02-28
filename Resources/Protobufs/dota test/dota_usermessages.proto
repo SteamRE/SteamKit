@@ -46,6 +46,8 @@ enum EDotaUserMessages {
 	DOTA_UM_TutorialRequestExp = 104;
 	DOTA_UM_TutorialPingMinimap = 105;
 	DOTA_UM_GamerulesStateChanged = 106;
+	DOTA_UM_ShowSurvey = 107;
+	DOTA_UM_TutorialFade = 108;
 }
 
 enum DOTA_CHAT_MESSAGE {
@@ -524,11 +526,19 @@ message CDOTAUserMsg_ReceivedXmasGift {
 	optional int32 inventory_slot = 3;
 }
 
+message CDOTAUserMsg_ShowSurvey {
+	optional int32 survey_id = 1;
+}
+
 message CDOTAUserMsg_UpdateSharedContent {
 	optional int32 slot_type = 1;
 }
 
 message CDOTAUserMsg_TutorialRequestExp {
+}
+
+message CDOTAUserMsg_TutorialFade {
+	optional int32 tgt_alpha = 1;
 }
 
 message CDOTAUserMsg_TutorialPingMinimap {
