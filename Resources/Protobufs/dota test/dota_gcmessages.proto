@@ -547,6 +547,7 @@ message CMsgConnectedPlayers {
 	optional .DOTA_GameState game_state = 2 [default = DOTA_GAMERULES_STATE_INIT];
 	optional uint32 num_spectators = 3;
 	optional uint32 tower_state = 4;
+	optional bool skip_player_validation = 5;
 }
 
 message CMsgStartFindingMatch {
@@ -621,8 +622,9 @@ message CMsgFindSourceTVGames {
 	optional uint32 num_games = 3;
 	optional uint32 leagueid = 4;
 	optional uint32 heroid = 5;
-	optional bool diretide = 6;
-	optional bool xmas = 7;
+	optional bool team_game = 6;
+	optional bool diretide = 7;
+	optional bool xmas = 8;
 }
 
 message CMsgSpectateFriendGame {
@@ -1075,6 +1077,7 @@ message CMsgDOTARequestMatches {
 	optional uint32 account_id = 15;
 	optional uint32 league_id = 16;
 	optional .CMsgDOTARequestMatches.SkillLevel skill = 17 [default = Any];
+	optional uint32 team_id = 18;
 }
 
 message CMsgDOTARequestMatchesResponse {
