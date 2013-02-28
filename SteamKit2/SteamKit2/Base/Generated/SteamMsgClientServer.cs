@@ -763,6 +763,15 @@ namespace SteamKit2.Internal
       set { _use_pics = value; }
     }
 
+    private string _vanity_url = "";
+    [global::ProtoBuf.ProtoMember(14, IsRequired = false, Name=@"vanity_url", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string vanity_url
+    {
+      get { return _vanity_url; }
+      set { _vanity_url = value; }
+    }
+
     private ulong _client_supplied_steamid = default(ulong);
     [global::ProtoBuf.ProtoMember(20, IsRequired = false, Name=@"client_supplied_steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
     [global::System.ComponentModel.DefaultValue(default(ulong))]
@@ -6064,6 +6073,15 @@ namespace SteamKit2.Internal
       get { return _platforms_to_sync; }
       set { _platforms_to_sync = value; }
     }
+
+    private uint _cell_id = default(uint);
+    [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"cell_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint cell_id
+    {
+      get { return _cell_id; }
+      set { _cell_id = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -6092,6 +6110,159 @@ namespace SteamKit2.Internal
       get { return _sha_file; }
       set { _sha_file = value; }
     }
+
+    private bool _use_http = default(bool);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"use_http", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool use_http
+    {
+      get { return _use_http; }
+      set { _use_http = value; }
+    }
+
+    private string _http_host = "";
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"http_host", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string http_host
+    {
+      get { return _http_host; }
+      set { _http_host = value; }
+    }
+
+    private string _http_url = "";
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"http_url", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string http_url
+    {
+      get { return _http_url; }
+      set { _http_url = value; }
+    }
+
+    private byte[] _kv_headers = null;
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"kv_headers", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public byte[] kv_headers
+    {
+      get { return _kv_headers; }
+      set { _kv_headers = value; }
+    }
+
+    private bool _use_https = default(bool);
+    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"use_https", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool use_https
+    {
+      get { return _use_https; }
+      set { _use_https = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientUFSUploadCommit")]
+  public partial class CMsgClientUFSUploadCommit : global::ProtoBuf.IExtensible
+  {
+    public CMsgClientUFSUploadCommit() {}
+    
+    private readonly global::System.Collections.Generic.List<CMsgClientUFSUploadCommit.File> _files = new global::System.Collections.Generic.List<CMsgClientUFSUploadCommit.File>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"files", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CMsgClientUFSUploadCommit.File> files
+    {
+      get { return _files; }
+    }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"File")]
+  public partial class File : global::ProtoBuf.IExtensible
+  {
+    public File() {}
+    
+
+    private int _eresult = (int)2;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"eresult", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue((int)2)]
+    public int eresult
+    {
+      get { return _eresult; }
+      set { _eresult = value; }
+    }
+
+    private uint _app_id = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"app_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint app_id
+    {
+      get { return _app_id; }
+      set { _app_id = value; }
+    }
+
+    private byte[] _sha_file = null;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"sha_file", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public byte[] sha_file
+    {
+      get { return _sha_file; }
+      set { _sha_file = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientUFSUploadCommitResponse")]
+  public partial class CMsgClientUFSUploadCommitResponse : global::ProtoBuf.IExtensible
+  {
+    public CMsgClientUFSUploadCommitResponse() {}
+    
+    private readonly global::System.Collections.Generic.List<CMsgClientUFSUploadCommitResponse.File> _files = new global::System.Collections.Generic.List<CMsgClientUFSUploadCommitResponse.File>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"files", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CMsgClientUFSUploadCommitResponse.File> files
+    {
+      get { return _files; }
+    }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"File")]
+  public partial class File : global::ProtoBuf.IExtensible
+  {
+    public File() {}
+    
+
+    private int _eresult = (int)2;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"eresult", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue((int)2)]
+    public int eresult
+    {
+      get { return _eresult; }
+      set { _eresult = value; }
+    }
+
+    private uint _app_id = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"app_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint app_id
+    {
+      get { return _app_id; }
+      set { _app_id = value; }
+    }
+
+    private byte[] _sha_file = null;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"sha_file", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public byte[] sha_file
+    {
+      get { return _sha_file; }
+      set { _sha_file = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -6367,6 +6538,15 @@ namespace SteamKit2.Internal
       get { return _file_name; }
       set { _file_name = value; }
     }
+
+    private bool _can_handle_http = default(bool);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"can_handle_http", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool can_handle_http
+    {
+      get { return _can_handle_http; }
+      set { _can_handle_http = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -6439,6 +6619,51 @@ namespace SteamKit2.Internal
     {
       get { return _is_explicit_delete; }
       set { _is_explicit_delete = value; }
+    }
+
+    private bool _use_http = default(bool);
+    [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"use_http", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool use_http
+    {
+      get { return _use_http; }
+      set { _use_http = value; }
+    }
+
+    private string _http_host = "";
+    [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"http_host", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string http_host
+    {
+      get { return _http_host; }
+      set { _http_host = value; }
+    }
+
+    private string _http_url = "";
+    [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"http_url", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string http_url
+    {
+      get { return _http_url; }
+      set { _http_url = value; }
+    }
+
+    private byte[] _kv_headers = null;
+    [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"kv_headers", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public byte[] kv_headers
+    {
+      get { return _kv_headers; }
+      set { _kv_headers = value; }
+    }
+
+    private bool _use_https = default(bool);
+    [global::ProtoBuf.ProtoMember(12, IsRequired = false, Name=@"use_https", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool use_https
+    {
+      get { return _use_https; }
+      set { _use_https = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -15521,6 +15746,25 @@ namespace SteamKit2.Internal
     {
       get { return _uimode; }
       set { _uimode = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientVanityURLChangedNotification")]
+  public partial class CMsgClientVanityURLChangedNotification : global::ProtoBuf.IExtensible
+  {
+    public CMsgClientVanityURLChangedNotification() {}
+    
+
+    private string _vanity_url = "";
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"vanity_url", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string vanity_url
+    {
+      get { return _vanity_url; }
+      set { _vanity_url = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
