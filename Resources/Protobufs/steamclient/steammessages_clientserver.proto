@@ -100,6 +100,7 @@ message CMsgClientLogonResponse {
 	optional string webapi_authenticate_user_nonce = 11;
 	optional uint32 cell_id_ping_threshold = 12;
 	optional bool use_pics = 13;
+	optional string vanity_url = 14;
 	optional fixed64 client_supplied_steamid = 20;
 	optional string ip_country_code = 21;
 }
@@ -928,11 +929,37 @@ message CMsgClientUFSUploadFileRequest {
 	optional string file_name = 6;
 	optional uint32 platforms_to_sync_deprecated = 7;
 	optional uint32 platforms_to_sync = 8 [default = 4294967295];
+	optional uint32 cell_id = 9;
 }
 
 message CMsgClientUFSUploadFileResponse {
 	optional int32 eresult = 1 [default = 2];
 	optional bytes sha_file = 2;
+	optional bool use_http = 3;
+	optional string http_host = 4;
+	optional string http_url = 5;
+	optional bytes kv_headers = 6;
+	optional bool use_https = 7;
+}
+
+message CMsgClientUFSUploadCommit {
+	message File {
+		optional int32 eresult = 1 [default = 2];
+		optional uint32 app_id = 2;
+		optional bytes sha_file = 3;
+	}
+
+	repeated .CMsgClientUFSUploadCommit.File files = 1;
+}
+
+message CMsgClientUFSUploadCommitResponse {
+	message File {
+		optional int32 eresult = 1 [default = 2];
+		optional uint32 app_id = 2;
+		optional bytes sha_file = 3;
+	}
+
+	repeated .CMsgClientUFSUploadCommitResponse.File files = 1;
 }
 
 message CMsgClientUFSFileChunk {
@@ -983,6 +1010,7 @@ message CMsgClientUFSGetFileListForAppResponse {
 message CMsgClientUFSDownloadRequest {
 	optional uint32 app_id = 1;
 	optional string file_name = 2;
+	optional bool can_handle_http = 3;
 }
 
 message CMsgClientUFSDownloadResponse {
@@ -993,6 +1021,11 @@ message CMsgClientUFSDownloadResponse {
 	optional bytes sha_file = 5;
 	optional uint64 time_stamp = 6;
 	optional bool is_explicit_delete = 7;
+	optional bool use_http = 8;
+	optional string http_host = 9;
+	optional string http_url = 10;
+	optional bytes kv_headers = 11;
+	optional bool use_https = 12;
 }
 
 message CMsgClientUFSLoginRequest {
@@ -2483,5 +2516,9 @@ message CMsgClientServiceMethodResponse {
 
 message CMsgClientUIMode {
 	optional uint32 uimode = 1;
+}
+
+message CMsgClientVanityURLChangedNotification {
+	optional string vanity_url = 1;
 }
 
