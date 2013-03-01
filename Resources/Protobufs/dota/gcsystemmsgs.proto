@@ -51,7 +51,8 @@ enum EGCSystemMsg {
 	k_EGCMsgMultiplexMsg = 97;
 	k_EGCMsgWebAPIRegisterInterfaces = 101;
 	k_EGCMsgWebAPIJobRequest = 102;
-	k_EGCMsgWebAPIRegistrationRequested = 103;
+	k_EGCMsgWebAPIJobRequestHttpResponse = 104;
+	k_EGCMsgWebAPIJobRequestForwardResponse = 105;
 	k_EGCMsgMemCachedGet = 200;
 	k_EGCMsgMemCachedGetResponse = 201;
 	k_EGCMsgMemCachedSet = 202;

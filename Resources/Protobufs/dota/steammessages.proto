@@ -333,3 +333,7 @@ message CMsgGCMsgMasterSetDirectory_Response {
 	optional int32 eresult = 1 [default = 2];
 }
 
+message CMsgGCMsgWebAPIJobRequestForwardResponse {
+	optional uint32 dir_index = 1;
+}
+
