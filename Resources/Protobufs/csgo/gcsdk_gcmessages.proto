@@ -1,3 +1,5 @@
+import "steammessages.proto";
+
 message CMsgSOSingleObject {
 	optional fixed64 owner = 1;
 	optional int32 type_id = 2;
@@ -7,13 +9,17 @@ message CMsgSOSingleObject {
 
 message CMsgSOMultipleObjects {
 	message SingleObject {
+		option (msgpool_soft_limit) = 256;
+		option (msgpool_hard_limit) = 1024;
 		optional int32 type_id = 1;
 		optional bytes object_data = 2;
 	}
 
 	optional fixed64 owner = 1;
-	repeated .CMsgSOMultipleObjects.SingleObject objects = 2;
+	repeated .CMsgSOMultipleObjects.SingleObject objects_modified = 2;
 	optional fixed64 version = 3;
+	repeated .CMsgSOMultipleObjects.SingleObject objects_added = 4;
+	repeated .CMsgSOMultipleObjects.SingleObject objects_removed = 5;
 }
 
 message CMsgSOCacheSubscribed {
@@ -42,5 +48,61 @@ message CMsgSOCacheSubscriptionRefresh {
 
 message CMsgSOCacheVersion {
 	optional fixed64 version = 1;
+}
+
+message CMsgAccountDetails {
+	optional bool valid = 1;
+	optional string account_name = 2;
+	optional bool public_profile = 4;
+	optional bool public_inventory = 5;
+	optional bool vac_banned = 6;
+	optional bool cyber_cafe = 7;
+	optional bool school_account = 8;
+	optional bool free_trial_account = 9;
+	optional bool subscribed = 10;
+	optional bool low_violence = 11;
+	optional bool limited = 12;
+	optional bool trusted = 13;
+	optional uint32 package = 14;
+	optional fixed32 time_cached = 15;
+}
+
+message CMsgGCMultiplexMessage {
+	optional uint32 msgtype = 1;
+	optional bytes payload = 2;
+	repeated fixed64 steamids = 3;
+}
+
+message CGCToGCMsgMasterAck {
+	optional uint32 dir_index = 1;
+	optional uint32 gc_type = 2;
+}
+
+message CGCToGCMsgMasterAck_Response {
+	optional int32 eresult = 1 [default = 2];
+}
+
+message CGCToGCMsgRouted {
+	optional uint32 msg_type = 1;
+	optional fixed64 sender_id = 2;
+	optional bytes net_message = 3;
+}
+
+message CGCToGCMsgRoutedReply {
+	optional uint32 msg_type = 1;
+	optional bytes net_message = 2;
+}
+
+message CMsgGCUpdateSessionIP {
+	optional fixed64 steamid = 1;
+	optional fixed32 ip = 2;
+}
+
+message CMsgGCRequestSessionIP {
+	optional fixed64 steamid = 1;
+}
+
+message CMsgGCRequestSessionIPResponse {
+	optional fixed32 ip = 1;
 }
 

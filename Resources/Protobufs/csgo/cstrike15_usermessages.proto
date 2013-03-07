@@ -42,9 +42,6 @@ enum ECstrike15UserMessages {
 	CS_UM_ClientInfo = 39;
 	CS_UM_XRankGet = 40;
 	CS_UM_XRankUpd = 41;
-	CS_UM_SetPlayerEloDisplayBracket = 42;
-	CS_UM_RequestEloBracketInfo = 43;
-	CS_UM_SetEloBracketInfo = 44;
 	CS_UM_CallVoteFailed = 45;
 	CS_UM_VoteStart = 46;
 	CS_UM_VotePass = 47;
@@ -274,21 +271,6 @@ message CCSUsrMsg_XRankUpd {
 	optional int32 mode_idx = 1;
 	optional int32 controller = 2;
 	optional int32 ranking = 3;
-}
-
-message CCSUsrMsg_SetPlayerEloDisplayBracket {
-	optional int32 bracket = 1;
-}
-
-message CCSUsrMsg_RequestEloBracketInfo {
-	optional int32 bracket = 1;
-}
-
-message CCSUsrMsg_SetEloBracketInfo {
-	optional int32 game_mode = 1;
-	optional int32 display_bracket = 2;
-	optional int32 prev_bracket = 3;
-	optional int32 num_games_in_bracket = 4;
 }
 
 message CCSUsrMsg_CallVoteFailed {
