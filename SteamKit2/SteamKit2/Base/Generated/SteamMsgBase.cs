@@ -134,6 +134,15 @@ namespace SteamKit2.Internal
       get { return _publisherid; }
       set { _publisherid = value; }
     }
+
+    private uint _sysid = default(uint);
+    [global::ProtoBuf.ProtoMember(20, IsRequired = false, Name=@"sysid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint sysid
+    {
+      get { return _sysid; }
+      set { _sysid = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
