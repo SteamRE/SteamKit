@@ -31,5 +31,6 @@ message CDOTAModifierBuffTableEntry {
 	optional int32 movement_speed = 22;
 	optional bool aura = 23;
 	optional int32 activity = 24;
+	optional int32 damage = 25;
 }
 

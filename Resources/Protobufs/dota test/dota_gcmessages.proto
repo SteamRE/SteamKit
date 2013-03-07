@@ -183,6 +183,10 @@ enum EDOTAGCMsg {
 	k_EMsgGCResetMapLocations = 7209;
 	k_EMsgGCResetMapLocationsResponse = 7210;
 	k_EMsgGCTeamOnProfile = 7211;
+	k_EMsgGCSetFeaturedItems = 7212;
+	k_EMsgGCFeaturedItemsRequest = 7213;
+	k_EMsgGCFeaturedItemsResponse = 7214;
+	k_EMsgGCFeaturedItems = 7215;
 	k_EMsgGCDev_GrantWarKill = 8001;
 }
 
@@ -1615,10 +1619,6 @@ message CMsgDOTARequestSaveGames {
 	optional uint32 server_region = 1;
 }
 
-message CMsgDOTARequestSaveGamesServer {
-	optional fixed64 steam_id = 1;
-}
-
 message CMsgDOTARequestSaveGamesResponse {
 	message SaveGame {
 		message Player {
@@ -1885,6 +1885,25 @@ message CDOTAOverview {
 
 message CMsgSetShowcaseHero {
 	optional uint32 showcase_hero_id = 1;
+}
+
+message CMsgSetFeaturedItems {
+	repeated uint64 featured_item_id = 1;
+}
+
+message CMsgDOTAFeaturedItems {
+	optional uint32 account_id = 1;
+	repeated uint64 featured_item_id = 2;
+	repeated bytes object_data = 3;
+}
+
+message CMsgDOTAFeaturedItemsRequest {
+	optional uint32 account_id = 1;
+}
+
+message CMsgDOTAFeaturedItemsResponse {
+	optional .CMsgDOTAFeaturedItems featured_items = 1;
+	optional uint32 result = 2 [default = 2];
 }
 
 message CMsgRequestLeagueInfo {
@@ -2159,7 +2178,6 @@ message CMsgDOTANotifyMatchHistoryAccessChange {
 }
 
 message CMsgUpgradeLeagueItem {
-	optional fixed64 steamid = 1;
 	optional uint64 item_id = 2;
 }
 
