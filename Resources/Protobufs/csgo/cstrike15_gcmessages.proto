@@ -1,97 +1,33 @@
 import "steammessages.proto";
 
-message CMsgCStrike15StartMatchmaking {
-	optional uint32 account_id = 1;
-	optional int32 game_type = 2;
-	optional int32 input_device = 3;
-}
-
-message CMsgCStrike15StartMatchmakingResponse {
-	optional bool success = 1;
-}
-
-message CMsgCStrike15ReportRoundEnd {
-	message Player {
-		optional bool is_bot = 1;
-		optional uint32 elo_flags = 2;
-		optional uint32 elo_team = 3;
-		optional int32 input_device = 4;
-		optional uint32 account_id = 5;
-		optional int32 elo_value = 6;
-	}
-
-	message PlayerStats {
-		optional int32 reason = 1;
-		optional int32 count = 2;
-	}
-
-	optional int32 elo_game_mode = 1;
-	optional int32 elo_calc_type = 2;
-	optional float elo_calc_exp_base = 3;
-	optional float elo_calc_exp_denom = 4;
-	optional float elo_calc_k_scalar = 5;
-	optional int32 winning_team = 6;
-	repeated .CMsgCStrike15ReportRoundEnd.Player elo_players = 7;
-	optional bool request_log = 8;
-	optional string elo_map_name = 9;
-	optional int32 elo_lock_in_result = 10;
-	optional int32 elo_final_result = 11;
-	repeated .CMsgCStrike15ReportRoundEnd.PlayerStats player_stats = 12;
-}
-
-message CMsgCStrike15ReportRoundEndLog {
-	optional string log = 1;
-}
-
-message CMsgGCCStrike15ClientRequestEloBracket {
-	optional int32 game_mode = 1;
-	optional int32 input_device = 2;
-}
-
-message CMsgGCCStrike15ClientRequestEloBracketResponse {
-	optional int32 bracket = 1;
-}
-
-message CMsgGCCStrike15RequestEloBrackets {
-	message Player {
-		optional uint32 account_id = 1;
-		optional int32 input_device = 2;
-	}
-
-	optional int32 game_mode = 1;
-	repeated .CMsgGCCStrike15RequestEloBrackets.Player players = 2;
-}
-
-message CMsgGCCStrike15RequestEloBracketsResponse {
-	message PlayerBracket {
-		optional int32 bracket = 1;
-		optional uint32 account_id = 2;
-	}
-
-	repeated .CMsgGCCStrike15RequestEloBracketsResponse.PlayerBracket player_brackets = 1;
-}
-
-message CMsgCStrike15StartMatchmakingDeprecated {
-	optional uint32 account_id = 1;
-	optional uint32 game_type = 2;
-	optional uint32 input_device = 3;
-}
-
-message CMsgCStrike15StartMatchmakingResponseDeprecated {
-	optional bool success = 1;
-}
-
-message CMsgCStrike15ReportRoundEndDeprecated {
-	message Player {
-		optional uint32 account_id = 1;
-		optional uint32 bot_difficulty = 2;
-		optional uint32 input_device = 3;
-		optional uint32 contribution_score = 4;
-	}
-
-	optional uint32 game_type = 1;
-	repeated .CMsgCStrike15ReportRoundEndDeprecated.Player winners = 2;
-	repeated .CMsgCStrike15ReportRoundEndDeprecated.Player losers = 3;
+enum ECsgoGCMsg {
+	k_EMsgGCCStrike15_v2_Base = 9100;
+	k_EMsgGCCStrike15_v2_MatchmakingStart = 9101;
+	k_EMsgGCCStrike15_v2_MatchmakingStop = 9102;
+	k_EMsgGCCStrike15_v2_MatchmakingClient2ServerPing = 9103;
+	k_EMsgGCCStrike15_v2_MatchmakingGC2ClientUpdate = 9104;
+	k_EMsgGCCStrike15_v2_MatchmakingGC2ServerReserve = 9105;
+	k_EMsgGCCStrike15_v2_MatchmakingServerReservationResponse = 9106;
+	k_EMsgGCCStrike15_v2_MatchmakingGC2ClientReserve = 9107;
+	k_EMsgGCCStrike15_v2_MatchmakingServerRoundStats = 9108;
+	k_EMsgGCCStrike15_v2_MatchmakingClient2GCHello = 9109;
+	k_EMsgGCCStrike15_v2_MatchmakingGC2ClientHello = 9110;
+	k_EMsgGCCStrike15_v2_MatchmakingServerMatchEnd = 9111;
+	k_EMsgGCCStrike15_v2_MatchmakingGC2ClientAbandon = 9112;
+	k_EMsgGCCStrike15_v2_MatchmakingServer2GCKick = 9113;
+	k_EMsgGCCStrike15_v2_MatchmakingGC2ServerConfirm = 9114;
+	k_EMsgGCCStrike15_v2_MatchmakingGCOperationalStats = 9115;
+	k_EMsgGCCStrike15_v2_MatchmakingGC2ServerRankUpdate = 9116;
+	k_EMsgGCCStrike15_v2_MatchmakingOperator2GCBlogUpdate = 9117;
+	k_EMsgGCCStrike15_v2_ServerNotificationForUserPenalty = 9118;
+	k_EMsgGCCStrike15_v2_ClientReportPlayer = 9119;
+	k_EMsgGCCStrike15_v2_ClientReportServer = 9120;
+	k_EMsgGCCStrike15_v2_ClientCommendPlayer = 9121;
+	k_EMsgGCCStrike15_v2_ClientReportResponse = 9122;
+	k_EMsgGCCStrike15_v2_ClientCommendPlayerQuery = 9123;
+	k_EMsgGCCStrike15_v2_ClientCommendPlayerQueryResponse = 9124;
+	k_EMsgGCCStrike15_v2_ClientRequestWatchInfoFriends = 9125;
+	k_EMsgGCCStrike15_v2_WatchInfoUsers = 9126;
 }
 
 message GameServerPing {
