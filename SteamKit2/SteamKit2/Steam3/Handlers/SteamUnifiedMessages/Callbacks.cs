@@ -6,6 +6,7 @@
 using ProtoBuf;
 using System.IO;
 using System.Linq;
+using SteamKit2.Internal;
 
 namespace SteamKit2
 {
@@ -45,14 +46,18 @@ namespace SteamKit2
             }
 
 
-            internal ServiceMethodResponse( EResult res, string methodName, byte[] response )
+            internal ServiceMethodResponse( EResult result, CMsgClientServiceMethodResponse resp )
             {
-                Result = res;
-                ResponseRaw = response;
+                Result = result;
+                ResponseRaw = resp.serialized_method_response;
 
-                var methodParts = methodName.Split( '.' );
-                ServiceName = methodParts.FirstOrDefault();
-                RpcName = string.Join( ".", methodParts.Skip( 1 ) );
+                if ( resp.method_name != null )
+                {
+                    var methodParts = resp.method_name.Split( '.' );
+
+                    ServiceName = methodParts.FirstOrDefault();
+                    RpcName = string.Join( ".", methodParts.Skip( 1 ) );
+                }
             }
 
 

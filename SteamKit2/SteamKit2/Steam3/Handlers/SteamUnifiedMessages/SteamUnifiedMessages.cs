@@ -65,10 +65,7 @@ namespace SteamKit2
         {
             var response = new ClientMsgProtobuf<CMsgClientServiceMethodResponse>( packetMsg );
 
-            var methodName = response.Body.method_name;
-            var serializedMessage = response.Body.serialized_method_response;
-
-            var responseCallback = new ServiceMethodResponse( ( EResult )response.ProtoHeader.eresult, methodName, serializedMessage );
+            var responseCallback = new ServiceMethodResponse( ( EResult )response.ProtoHeader.eresult, response.Body );
             var jobCallback = new SteamClient.JobCallback<ServiceMethodResponse>( response.TargetJobID, responseCallback );
 
             Client.PostCallback( jobCallback );
