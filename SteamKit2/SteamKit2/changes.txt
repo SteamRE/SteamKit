@@ -1,5 +1,31 @@
 
 ------------------------------------------------------------------------------
+v 1.3.1			Mar 10, 2013
+------------------------------------------------------------------------------
+
+*	Fixed issue where the avatar hash of a clan was always null.
+*	Introduced better handling of networking related cryptographic exceptions.
+*	Updated EMsg list.
+*	Exposed SteamClient.JobCallback<T> for external consumers.
+*	STATIC_CALLBACK builds of SteamKit and related code has been obsoleted and will be removed in the next version.
+*	Implemented GameID.ToString().
+*	Implemented game pass sending and recieving with SteamApps.SendGuestPass(), SteamApps.GuestPassListCallback, and
+	SteamApps.SendGuestPassCallback.
+*	Implemented requesting Steam community profile info with SteamFriends.RequestProfileInfo(), and SteamFriends.ProfileInfoCallback
+*	CMClient now exposes a ConnectionTimeout field to control the timeout when connecting to Steam. The default timeout is 5 seconds.
+*	Updated the internal list of CM servers to help alleviate some issues with connecting to dead servers.
+*	Implemented SteamClient.CMListCallback to retrieve the current list of CM servers.
+*	Implemented initial support for unified messages through the SteamUnifiedMessages handler.
+
+BREAKING CHANGES
+*	CMClient.Connect has been refactored significantly. It is no longer possible to use unencrypted connections. The Connect function
+	now accepts an IPEndPoint to allow consumers to specify which Steam server they wish to connect to. Along with this,
+	CMClient.Servers is now exposed as a collection of IPEndPoints, instead of IPAddresses.
+*	SteamApps.PackageInfoCallback now exposes the immediate child KeyValue for the data, to be more consistent with
+	SteamApps.AppInfoCallback.
+
+
+------------------------------------------------------------------------------
 v 1.3.0			Jan 16, 2013
 ------------------------------------------------------------------------------
 
