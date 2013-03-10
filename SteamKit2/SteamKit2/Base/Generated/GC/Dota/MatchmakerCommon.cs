@@ -48,5 +48,19 @@ namespace SteamKit2.GC.Dota.Internal
       BOT_DIFFICULTY_INVALID = 5
     }
   
+    [global::ProtoBuf.ProtoContract(Name=@"MatchLanguages")]
+    public enum MatchLanguages
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"MATCH_LANGUAGE_ENGLISH", Value=1)]
+      MATCH_LANGUAGE_ENGLISH = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"MATCH_LANGUAGE_RUSSIAN", Value=2)]
+      MATCH_LANGUAGE_RUSSIAN = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"MATCH_LANGUAGE_CHINESE", Value=3)]
+      MATCH_LANGUAGE_CHINESE = 3
+    }
+  
 }
 #pragma warning restore 1591

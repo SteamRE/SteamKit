@@ -171,8 +171,11 @@ namespace SteamKit2.GC.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgWebAPIJobRequest", Value=102)]
       k_EGCMsgWebAPIJobRequest = 102,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgWebAPIRegistrationRequested", Value=103)]
-      k_EGCMsgWebAPIRegistrationRequested = 103,
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgWebAPIJobRequestHttpResponse", Value=104)]
+      k_EGCMsgWebAPIJobRequestHttpResponse = 104,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgWebAPIJobRequestForwardResponse", Value=105)]
+      k_EGCMsgWebAPIJobRequestForwardResponse = 105,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgMemCachedGet", Value=200)]
       k_EGCMsgMemCachedGet = 200,
