@@ -17,33 +17,21 @@ namespace SteamKit2
     /// </summary>
     public partial class SteamUnifiedMessages : ClientMsgHandler
     {
-        /// <summary>
-        /// Handles a client message. This should not be called directly.
-        /// </summary>
-        /// <param name="packetMsg">The packet message that contains the data.</param>
-        public override void HandleMsg( IPacketMsg packetMsg )
-        {
-            switch ( packetMsg.MsgType )
-            {
-                case EMsg.ClientServiceMethodResponse:
-                    HandleClientServiceMethodResponse( packetMsg );
-                    break;
-            }
-        }
 
         /// <summary>
-        /// Sends a message
+        /// Sends a message.
         /// </summary>
-        /// <typeparam name="T">A protobuf type</typeparam>
+        /// <typeparam name="T">The type of a protobuf object.</typeparam>
         /// <param name="name">Name of the RPC endpoint. Takes the format ServiceName.RpcName</param>
-        /// <param name="message">The message to send</param>
+        /// <param name="message">The message to send.</param>
         /// <param name="isNotification">Whether this message is a notification or not.</param>
-        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="SteamClient.JobCallback&lt;T&gt;"/>.</returns>
-        public JobID SendMessage<T>( string name, T message, bool isNotification = false)
+        /// <returns>The JobID of the request. This can be used to find the appropriate <see cref="SteamClient.JobCallback&lt;T&gt;"/>.</returns>
+        public JobID SendMessage<T>( string name, T message, bool isNotification = false )
+            where T : IExtensible
         {
             var msg = new ClientMsgProtobuf<CMsgClientServiceMethod>( EMsg.ClientServiceMethod );
             msg.SourceJobID = Client.GetNextJobID();
-            
+
             using ( var ms = new MemoryStream() )
             {
                 Serializer.Serialize( ms, message );
@@ -58,6 +46,21 @@ namespace SteamKit2
             return msg.SourceJobID;
         }
 
+
+        /// <summary>
+        /// Handles a client message. This should not be called directly.
+        /// </summary>
+        /// <param name="packetMsg">The packet message that contains the data.</param>
+        public override void HandleMsg( IPacketMsg packetMsg )
+        {
+            switch ( packetMsg.MsgType )
+            {
+                case EMsg.ClientServiceMethodResponse:
+                    HandleClientServiceMethodResponse( packetMsg );
+                    break;
+            }
+        }
+
         void HandleClientServiceMethodResponse( IPacketMsg packetMsg )
         {
             var response = new ClientMsgProtobuf<CMsgClientServiceMethodResponse>( packetMsg );
@@ -65,10 +68,11 @@ namespace SteamKit2
             var methodName = response.Body.method_name;
             var serializedMessage = response.Body.serialized_method_response;
 
-            var responseCallback = new ServiceMethodResponse( (EResult)response.ProtoHeader.eresult, methodName, serializedMessage );
+            var responseCallback = new ServiceMethodResponse( ( EResult )response.ProtoHeader.eresult, methodName, serializedMessage );
             var jobCallback = new SteamClient.JobCallback<ServiceMethodResponse>( response.TargetJobID, responseCallback );
 
             Client.PostCallback( jobCallback );
         }
+
     }
 }
