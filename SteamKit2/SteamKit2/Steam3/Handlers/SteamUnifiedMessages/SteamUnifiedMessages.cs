@@ -47,7 +47,7 @@ namespace SteamKit2
             using ( var ms = new MemoryStream() )
             {
                 Serializer.Serialize( ms, message );
-                msg.Body.serialized_method = BuildStringRaw( ms.ToArray() );
+                msg.Body.serialized_method = ms.ToArray();
             }
 
             msg.Body.method_name = name;
@@ -63,27 +63,12 @@ namespace SteamKit2
             var response = new ClientMsgProtobuf<CMsgClientServiceMethodResponse>( packetMsg );
 
             var methodName = response.Body.method_name;
-            var dataAsString = response.Body.serialized_method_response;
+            var serializedMessage = response.Body.serialized_method_response;
 
-            var responseCallback = new ServiceMethodResponse( (EResult)response.ProtoHeader.eresult, methodName, BuildDataRaw( dataAsString ) );
+            var responseCallback = new ServiceMethodResponse( (EResult)response.ProtoHeader.eresult, methodName, serializedMessage );
             var jobCallback = new SteamClient.JobCallback<ServiceMethodResponse>( response.TargetJobID, responseCallback );
 
             Client.PostCallback( jobCallback );
-        }
-
-        static string BuildStringRaw( byte[] data )
-        {
-            var sb = new StringBuilder( data.Length );
-            foreach ( var @byte in data )
-            {
-                sb.Append( (char)@byte );
-            }
-            return sb.ToString();
-        }
-
-        static byte[] BuildDataRaw( string dataAsString )
-        {
-            return dataAsString.Select( x => (byte)x ).ToArray();
         }
     }
 }

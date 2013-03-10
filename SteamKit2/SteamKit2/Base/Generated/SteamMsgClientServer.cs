@@ -8,7 +8,7 @@
 //------------------------------------------------------------------------------
 #pragma warning disable 1591
 
-// Generated from: steammessages_clientserver.proto
+// Generated from: steammessages_clientserver_asbytes.proto
 // Note: requires additional types generated from: steammessages_base.proto
 // Note: requires additional types generated from: encrypted_app_ticket.proto
 namespace SteamKit2.Internal
@@ -15683,10 +15683,10 @@ namespace SteamKit2.Internal
       set { _method_name = value; }
     }
 
-    private string _serialized_method = "";
+    private byte[] _serialized_method = null;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"serialized_method", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
-    public string serialized_method
+    [global::System.ComponentModel.DefaultValue(null)]
+    public byte[] serialized_method
     {
       get { return _serialized_method; }
       set { _serialized_method = value; }
@@ -15720,10 +15720,10 @@ namespace SteamKit2.Internal
       set { _method_name = value; }
     }
 
-    private string _serialized_method_response = "";
+    private byte[] _serialized_method_response = null;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"serialized_method_response", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
-    public string serialized_method_response
+    [global::System.ComponentModel.DefaultValue(null)]
+    public byte[] serialized_method_response
     {
       get { return _serialized_method_response; }
       set { _serialized_method_response = value; }
