@@ -92,6 +92,10 @@
     <Compile Include="Base\Generated\GC\TF2\MsgGC.cs" />
     <Compile Include="Base\Generated\IClientObjects.cs" />
     <Compile Include="Base\Generated\SteamLanguageInternal.cs" />
+    <Compile Include="Base\Generated\Steamworks\SteamworksMsgCloud.cs" />
+    <Compile Include="Base\Generated\Steamworks\SteamworksMsgOAuth.cs" />
+    <Compile Include="Base\Generated\Steamworks\SteamworksMsgPublishedFile.cs" />
+    <Compile Include="Base\Generated\Steamworks\SteamworksMsgUnifiedBase.cs" />
     <Compile Include="Base\MsgBase.cs" />
     <Compile Include="Base\PacketBase.cs" />
     <Compile Include="Blob\BlobFieldAttribute.cs" />
@@ -121,6 +125,8 @@
     <Compile Include="Steam3\Handlers\SteamMasterServer\SteamMasterServer.cs" />
     <Compile Include="Steam3\Handlers\SteamTrading\Callbacks.cs" />
     <Compile Include="Steam3\Handlers\SteamTrading\SteamTrading.cs" />
+    <Compile Include="Steam3\Handlers\SteamUnifiedMessages\Callbacks.cs" />
+    <Compile Include="Steam3\Handlers\SteamUnifiedMessages\SteamUnifiedMessages.cs" />
     <Compile Include="Steam3\Handlers\SteamWorkshop\Callbacks.cs" />
     <Compile Include="Steam3\Handlers\SteamWorkshop\SteamWorkshop.cs" />
     <Compile Include="Steam3\Handlers\SteamUserStats\SteamUserStats.cs" />
