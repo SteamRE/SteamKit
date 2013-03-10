@@ -275,24 +275,6 @@ namespace SteamKit2.GC.Internal
       get { return _game_data; }
       set { _game_data = value; }
     }
-
-    private uint _banned_word_set = default(uint);
-    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"banned_word_set", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint banned_word_set
-    {
-      get { return _banned_word_set; }
-      set { _banned_word_set = value; }
-    }
-
-    private uint _word_id = default(uint);
-    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"word_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint word_id
-    {
-      get { return _word_id; }
-      set { _word_id = value; }
-    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -406,6 +388,15 @@ namespace SteamKit2.GC.Internal
       get { return _client_version; }
       set { _client_version = value; }
     }
+
+    private uint _team_id = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"team_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint team_id
+    {
+      get { return _team_id; }
+      set { _team_id = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -472,13 +463,13 @@ namespace SteamKit2.GC.Internal
       set { _client_version = value; }
     }
 
-    private bool _team_invite = default(bool);
-    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"team_invite", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
-    public bool team_invite
+    private uint _team_id = default(uint);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"team_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint team_id
     {
-      get { return _team_invite; }
-      set { _team_invite = value; }
+      get { return _team_id; }
+      set { _team_id = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -2663,6 +2654,25 @@ namespace SteamKit2.GC.Internal
     {
       get { return _broadcast; }
       set { _broadcast = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCToGCBannedWordListUpdated")]
+  public partial class CMsgGCToGCBannedWordListUpdated : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCToGCBannedWordListUpdated() {}
+    
+
+    private uint _group_id = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"group_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint group_id
+    {
+      get { return _group_id; }
+      set { _group_id = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

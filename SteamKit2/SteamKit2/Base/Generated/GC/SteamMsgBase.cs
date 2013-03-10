@@ -1861,6 +1861,24 @@ namespace SteamKit2.GC.Internal
       get { return _box; }
       set { _box = value; }
     }
+
+    private string _command_line = "";
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"command_line", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string command_line
+    {
+      get { return _command_line; }
+      set { _command_line = value; }
+    }
+
+    private string _gc_binary = "";
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"gc_binary", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string gc_binary
+    {
+      get { return _gc_binary; }
+      set { _gc_binary = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -1884,6 +1902,25 @@ namespace SteamKit2.GC.Internal
     {
       get { return _eresult; }
       set { _eresult = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCMsgWebAPIJobRequestForwardResponse")]
+  public partial class CMsgGCMsgWebAPIJobRequestForwardResponse : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCMsgWebAPIJobRequestForwardResponse() {}
+    
+
+    private uint _dir_index = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"dir_index", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint dir_index
+    {
+      get { return _dir_index; }
+      set { _dir_index = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
