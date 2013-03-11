@@ -12,7 +12,7 @@
 
 
 bool (__cdecl *Encrypt_Orig)(const uint8*, uint32, const uint8*, uint32, uint8*, uint32*, const uint8*, uint32) = 0;
-bool (__cdecl *Decrypt_Orig)(const uint8*, uint32, const uint8*, uint32, uint8*, uint32*, const uint8*, uint32) = 0;
+bool (__cdecl *Decrypt_Orig)(const uint8*, uint32, uint8*, uint32*, const uint8*, uint32) = 0;
 bool (__cdecl *GetMessageFn)( int * ) = 0;
 
 
@@ -63,13 +63,13 @@ CCrypto::CCrypto()
 
 	char *pDecrypt = NULL;
 	bool bDecrypt = steamClientScan.FindFunction(
-		"\x55\x8B\xEC\x6A\xFF\x68\x00\x00\x00\x00\x64\xA1\x00\x00\x00\x00\x50\x64\x89\x25\x00\x00\x00\x00\x81\xEC\x00\x00\x00"
-		"\x00\xA1\x00\x00\x00\x00\x8B\x08\x53\x56\x57\x89\x65\xF0\x85\xC9\x75\x08\x89\x4D\xE0",
-		"xxxxxx????xx????xxxx????xx????x????xxxxxxxxxxxxxxx",
+		"\x55\x8b\xec\x81\xec\x00\x00\x00\x00\x83\x7d\x08\x00\x53\x56\x8b\x35\x00\x00\x00\x00\x57\x75\x00\x6a\x00\x68\x00\x00"
+		"\x00\x00\x68\x00\x00\x00\x00\x6a\x00\x68\x00\x00\x00\x00\xff\xd6\x83\xc4\x14\x83\x7d\x0c\x00",
+		"xxxxx????xxxxxxxx????xx?xxx????x????xxx????xxxxxxxxx",
 		(void **)&pDecrypt
 	);
 
-	Decrypt_Orig = (bool (__cdecl *)(const uint8*, uint32, const uint8*, uint32, uint8*, uint32*, const uint8*, uint32))( pDecrypt );
+	Decrypt_Orig = (bool (__cdecl *)(const uint8*, uint32, uint8*, uint32*, const uint8*, uint32))( pDecrypt );
 
 	g_pLogger->LogConsole( "CCrypto::SymmetricDecrypt = 0x%x\n", Decrypt_Orig );
 
@@ -118,7 +118,7 @@ CCrypto::CCrypto()
 
 
 	static bool (__cdecl *encrypt)(const uint8*, uint32, const uint8*, uint32, uint8*, uint32*, const uint8*, uint32) = &CCrypto::SymmetricEncrypt;
-	static bool (__cdecl *decrypt)(const uint8*, uint32, const uint8*, uint32, uint8*, uint32*, const uint8*, uint32) = &CCrypto::SymmetricDecrypt;
+	static bool (__cdecl *decrypt)(const uint8*, uint32, uint8*, uint32*, const uint8*, uint32) = &CCrypto::SymmetricDecrypt;
 
 	if ( bEncrypt )
 	{
@@ -172,9 +172,9 @@ bool __cdecl CCrypto::SymmetricEncrypt( const uint8 *pubPlaintextData, uint32 cu
 	return (*Encrypt_Orig)( pubPlaintextData, cubPlaintextData, pIV, cubIV, pubEncryptedData, pcubEncryptedData, pubKey, cubKey );
 }
 
-bool __cdecl CCrypto::SymmetricDecrypt( const uint8 *pubEncryptedData, uint32 cubEncryptedData, const uint8 *pIV, uint32 cubIV, uint8 *pubPlaintextData, uint32 *pcubPlaintextData, const uint8 *pubKey, uint32 cubKey )
+bool __cdecl CCrypto::SymmetricDecrypt( const uint8 *pubEncryptedData, uint32 cubEncryptedData, uint8 *pubPlaintextData, uint32 *pcubPlaintextData, const uint8 *pubKey, uint32 cubKey )
 {
-	bool ret = (*Decrypt_Orig)(pubEncryptedData, cubEncryptedData, pIV, cubIV, pubPlaintextData, pcubPlaintextData, pubKey, cubKey);
+	bool ret = (*Decrypt_Orig)(pubEncryptedData, cubEncryptedData, pubPlaintextData, pcubPlaintextData, pubKey, cubKey);
 
 	g_pLogger->LogNetMessage( k_eNetIncoming, pubPlaintextData, *pcubPlaintextData );
 
