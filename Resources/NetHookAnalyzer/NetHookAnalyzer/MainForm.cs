@@ -31,7 +31,7 @@ namespace NetHookAnalyzer
             {
                 var nethookDir = Path.Combine( steamDir, "nethook" );
 
-                if ( nethookDir != null )
+                if ( Directory.Exists( nethookDir ) )
                 {
                     var nethookDumpDirs = Directory.GetDirectories( nethookDir );
                     var latestDump = nethookDumpDirs.LastOrDefault();
