@@ -1118,6 +1118,7 @@ message CMsgDOTAPopup {
 message CMsgDOTATeamMemberSDO {
 	optional uint32 account_id = 1;
 	repeated uint32 team_ids = 2;
+	optional uint32 profile_team_id = 3;
 }
 
 message CMsgDOTATeamAdminSDO {
