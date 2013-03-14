@@ -12,8 +12,6 @@ enum EDOTAGCMsg {
 	k_EMsgGCOtherJoinedChannel = 7013;
 	k_EMsgGCOtherLeftChannel = 7014;
 	k_EMsgGCMatchHistoryList = 7017;
-	k_EMsgGCGetNews = 7024;
-	k_EMsgGCNewsResponse = 7025;
 	k_EMsgGCStatus = 7026;
 	k_EMsgGCGetRecentMatches = 7027;
 	k_EMsgGCRecentMatchesResponse = 7028;
@@ -108,8 +106,6 @@ enum EDOTAGCMsg {
 	k_EMsgGCSuggestTeamMatchmaking = 7132;
 	k_EMsgGCPlayerHeroesFavoritesAdd = 7133;
 	k_EMsgGCPlayerHeroesFavoritesRemove = 7134;
-	k_EMsgGCPlayerHeroesRecentRequest = 7135;
-	k_EMsgGCPlayerHeroesRecentResponse = 7136;
 	k_EMsgGCEditTeamLogo = 7139;
 	k_EMsgGCEditTeamLogoResponse = 7140;
 	k_EMsgGCSetShowcaseHero = 7141;
@@ -613,6 +609,7 @@ message CSourceTVGame {
 	optional float game_time = 18;
 	optional fixed64 server_steamid = 19;
 	optional uint32 leagueid = 20;
+	optional .DOTA_GameMode game_mode = 21 [default = DOTA_GAMEMODE_NONE];
 }
 
 message CMsgSourceTVGamesResponse {
@@ -1154,6 +1151,8 @@ message CMsgDOTATeam {
 	repeated uint32 leagues = 18;
 	optional uint32 gamesplayed = 19;
 	optional uint32 gamesplayedwithcurrentroster = 20;
+	optional uint32 teammatchmakinggamesplayed = 21;
+	optional uint32 lastplayedgametime = 22;
 }
 
 message CMsgDOTACreateTeam {
@@ -1848,14 +1847,6 @@ message CMsgDOTAHeroFavoritesAdd {
 
 message CMsgDOTAHeroFavoritesRemove {
 	optional uint32 hero_id = 1;
-}
-
-message CMsgDOTAPlayerHeroesRecentRequest {
-}
-
-message CMsgDOTAPlayerHeroesRecentResponse {
-	optional uint32 result = 1;
-	repeated uint32 hero_ids = 2;
 }
 
 message CDOTAOverview {

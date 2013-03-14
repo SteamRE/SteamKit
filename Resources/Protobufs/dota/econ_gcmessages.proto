@@ -47,7 +47,6 @@ enum EGCItemMsg {
 	k_EMsgGCLookupAccountName = 1045;
 	k_EMsgGCLookupAccountNameResponse = 1046;
 	k_EMsgGCUpdateItemSchema = 1049;
-	k_EMsgGCRequestInventoryRefresh = 1050;
 	k_EMsgGCRemoveCustomTexture = 1051;
 	k_EMsgGCRemoveCustomTextureResponse = 1052;
 	k_EMsgGCRemoveMakersMark = 1053;
