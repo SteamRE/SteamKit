@@ -101,6 +101,7 @@ message CSOEconGameAccountClient {
 	optional fixed32 trade_ban_expiration = 6;
 	optional fixed32 duel_ban_expiration = 7;
 	optional uint32 preview_item_def = 8 [default = 0];
+	optional bool eligible_for_community_market = 9;
 	optional uint32 prevent_match_until_date = 18;
 }
 
@@ -119,7 +120,6 @@ message CSOItemCriteria {
 	optional bool item_quality_set = 4;
 	optional uint32 initial_inventory = 5;
 	optional uint32 initial_quantity = 6;
-	optional bool forced_quality_match = 7;
 	optional bool ignore_enabled_flag = 8;
 	repeated .CSOItemCriteriaCondition conditions = 9;
 }
@@ -161,6 +161,7 @@ message CMsgIncrementKillCountAttribute {
 	optional uint64 victim_steam_id = 2;
 	optional uint64 item_id = 3;
 	optional uint32 event_type = 4;
+	optional uint32 increment_value = 5;
 }
 
 message CMsgApplyStrangePart {
@@ -182,6 +183,7 @@ message CMsgApplyUpgradeCard {
 message CSOEconItemAttribute {
 	optional uint32 def_index = 1;
 	optional uint32 value = 2;
+	optional bytes value_bytes = 3;
 }
 
 message CSOEconItemEquipped {
@@ -423,5 +425,10 @@ message CMsgGCClientMarketDataEntry {
 
 message CMsgGCClientMarketData {
 	repeated .CMsgGCClientMarketDataEntry entries = 1;
+}
+
+message CMsgApplyStrangifier {
+	optional uint64 tool_item_id = 1;
+	optional uint64 subject_item_id = 2;
 }
 

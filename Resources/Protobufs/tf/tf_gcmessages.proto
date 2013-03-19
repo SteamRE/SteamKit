@@ -755,3 +755,10 @@ message CMsgUpdateHalloweenMerasmusLootLevel {
 	optional uint32 merasmus_level = 2;
 }
 
+message CAttribute_StrangeScore {
+	optional uint32 score_type = 1;
+	optional uint32 score_value = 2;
+	optional uint32 restriction_type = 3;
+	optional uint32 restriction_value = 4;
+}
+

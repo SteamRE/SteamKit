@@ -60,5 +60,8 @@ message CMsgAccountDetails {
 	optional uint32 package = 14;
 	optional fixed32 time_cached = 15;
 	optional bool account_locked = 16;
+	optional bool community_banned = 17;
+	optional bool trade_banned = 18;
+	optional bool eligible_for_community_market = 19;
 }
 
