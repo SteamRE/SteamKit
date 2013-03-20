@@ -611,7 +611,7 @@ namespace SteamKit2
 
         private static void WriteString( FileStream f, string str, bool quote = false )
         {
-            byte[] bytes = Encoding.ASCII.GetBytes( ( quote ? "\"" : "" ) + str.Replace( "\"", "\\\"" ) + ( quote ? "\"" : "" ) );
+            byte[] bytes = Encoding.UTF8.GetBytes( ( quote ? "\"" : "" ) + str.Replace( "\"", "\\\"" ) + ( quote ? "\"" : "" ) );
             f.Write( bytes, 0, bytes.Length );
         }
 
