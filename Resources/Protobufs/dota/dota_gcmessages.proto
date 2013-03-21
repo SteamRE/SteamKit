@@ -183,6 +183,7 @@ enum EDOTAGCMsg {
 	k_EMsgGCFeaturedItemsRequest = 7213;
 	k_EMsgGCFeaturedItemsResponse = 7214;
 	k_EMsgGCFeaturedItems = 7215;
+	k_EMsgRefreshPartnerAccountLink = 7216;
 	k_EMsgGCDev_GrantWarKill = 8001;
 }
 
@@ -399,7 +400,6 @@ message CSODOTAPartyInvite {
 	message PartyMember {
 		optional string name = 1;
 		optional fixed64 steam_id = 2;
-		optional uint32 avatar = 3;
 	}
 
 	optional uint64 group_id = 1 [(key_field) = true];
@@ -1106,6 +1106,7 @@ message CMsgDOTAPopup {
 		INVITE_DENIED = 13;
 		PARTY_FULL = 14;
 		MADE_ADMIN = 15;
+		NEED_TO_PURCHASE = 16;
 	}
 
 	optional .CMsgDOTAPopup.PopupID id = 1 [default = KICKED_FROM_LOBBY];
@@ -2201,5 +2202,9 @@ message CMsgResetMapLocations {
 
 message CMsgResetMapLocationsResponse {
 	optional uint32 eresult = 1 [default = 2];
+}
+
+message CMsgRefreshPartnerAccountLink {
+	optional int32 partner_type = 1;
 }
 
