@@ -1,0 +1,83 @@
+enum EGCSystemMsg {
+	k_EGCMsgInvalid = 0;
+	k_EGCMsgMulti = 1;
+	k_EGCMsgGenericReply = 10;
+	k_EGCMsgSystemBase = 50;
+	k_EGCMsgAchievementAwarded = 51;
+	k_EGCMsgConCommand = 52;
+	k_EGCMsgStartPlaying = 53;
+	k_EGCMsgStopPlaying = 54;
+	k_EGCMsgStartGameserver = 55;
+	k_EGCMsgStopGameserver = 56;
+	k_EGCMsgWGRequest = 57;
+	k_EGCMsgWGResponse = 58;
+	k_EGCMsgGetUserGameStatsSchema = 59;
+	k_EGCMsgGetUserGameStatsSchemaResponse = 60;
+	k_EGCMsgGetUserStatsDEPRECATED = 61;
+	k_EGCMsgGetUserStatsResponse = 62;
+	k_EGCMsgAppInfoUpdated = 63;
+	k_EGCMsgValidateSession = 64;
+	k_EGCMsgValidateSessionResponse = 65;
+	k_EGCMsgLookupAccountFromInput = 66;
+	k_EGCMsgSendHTTPRequest = 67;
+	k_EGCMsgSendHTTPRequestResponse = 68;
+	k_EGCMsgPreTestSetup = 69;
+	k_EGCMsgRecordSupportAction = 70;
+	k_EGCMsgGetAccountDetails_DEPRECATED = 71;
+	k_EGCMsgReceiveInterAppMessage = 73;
+	k_EGCMsgFindAccounts = 74;
+	k_EGCMsgPostAlert = 75;
+	k_EGCMsgGetLicenses = 76;
+	k_EGCMsgGetUserStats = 77;
+	k_EGCMsgGetCommands = 78;
+	k_EGCMsgGetCommandsResponse = 79;
+	k_EGCMsgAddFreeLicense = 80;
+	k_EGCMsgAddFreeLicenseResponse = 81;
+	k_EGCMsgGetIPLocation = 82;
+	k_EGCMsgGetIPLocationResponse = 83;
+	k_EGCMsgSystemStatsSchema = 84;
+	k_EGCMsgGetSystemStats = 85;
+	k_EGCMsgGetSystemStatsResponse = 86;
+	k_EGCMsgSendEmail = 87;
+	k_EGCMsgSendEmailResponse = 88;
+	k_EGCMsgGetEmailTemplate = 89;
+	k_EGCMsgGetEmailTemplateResponse = 90;
+	k_EGCMsgGrantGuestPass = 91;
+	k_EGCMsgGrantGuestPassResponse = 92;
+	k_EGCMsgGetAccountDetails = 93;
+	k_EGCMsgGetAccountDetailsResponse = 94;
+	k_EGCMsgGetPersonaNames = 95;
+	k_EGCMsgGetPersonaNamesResponse = 96;
+	k_EGCMsgMultiplexMsg = 97;
+	k_EGCMsgWebAPIRegisterInterfaces = 101;
+	k_EGCMsgWebAPIJobRequest = 102;
+	k_EGCMsgWebAPIRegistrationRequested = 103;
+	k_EGCMsgMemCachedGet = 200;
+	k_EGCMsgMemCachedGetResponse = 201;
+	k_EGCMsgMemCachedSet = 202;
+	k_EGCMsgMemCachedDelete = 203;
+	k_EGCMsgMasterSetDirectory = 220;
+	k_EGCMsgMasterSetDirectoryResponse = 221;
+}
+
+enum ESOMsg {
+	k_ESOMsg_Create = 21;
+	k_ESOMsg_Update = 22;
+	k_ESOMsg_Destroy = 23;
+	k_ESOMsg_CacheSubscribed = 24;
+	k_ESOMsg_CacheUnsubscribed = 25;
+	k_ESOMsg_UpdateMultiple = 26;
+	k_ESOMsg_CacheSubscriptionCheck = 27;
+	k_ESOMsg_CacheSubscriptionRefresh = 28;
+}
+
+enum EGCToGCMsg {
+	k_EGCToGCMsgMasterAck = 150;
+	k_EGCToGCMsgMasterAckResponse = 151;
+	k_EGCToGCMsgRouted = 152;
+	k_EGCToGCMsgRoutedReply = 153;
+	k_EMsgUpdateSessionIP = 154;
+	k_EMsgRequestSessionIP = 155;
+	k_EMsgRequestSessionIPResponse = 156;
+}
+
