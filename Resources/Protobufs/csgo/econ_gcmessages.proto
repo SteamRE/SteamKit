@@ -78,6 +78,9 @@ enum EGCItemMsg {
 	k_EMsgGCSetItemPositions = 1077;
 	k_EMsgGCApplyEggEssence = 1078;
 	k_EMsgGCNameEggEssenceResponse = 1079;
+	k_EMsgGCPaintKitItem = 1080;
+	k_EMsgGCPaintKitBaseItem = 1081;
+	k_EMsgGCPaintKitItemResponse = 1082;
 	k_EMsgGCTradingBase = 1500;
 	k_EMsgGCTrading_InitiateTradeRequest = 1501;
 	k_EMsgGCTrading_InitiateTradeResponse = 1502;
@@ -104,6 +107,7 @@ enum EGCItemMsg {
 	k_EMsgGCItemPreviewItemBoughtNotification = 1707;
 	k_EMsgGCDev_NewItemRequest = 2001;
 	k_EMsgGCDev_NewItemRequestResponse = 2002;
+	k_EMsgGCDev_PaintKitDropItem = 2003;
 	k_EMsgGCStoreGetUserData = 2500;
 	k_EMsgGCStoreGetUserDataResponse = 2501;
 	k_EMsgGCStorePurchaseInit_DEPRECATED = 2502;
