@@ -184,6 +184,11 @@ enum EDOTAGCMsg {
 	k_EMsgGCFeaturedItemsResponse = 7214;
 	k_EMsgGCFeaturedItems = 7215;
 	k_EMsgRefreshPartnerAccountLink = 7216;
+	k_EMsgClientsRejoinChatChannels = 7217;
+	k_EMsgGCToGCGetUserChatInfo = 7218;
+	k_EMsgGCToGCGetUserChatInfoResponse = 7219;
+	k_EMsgGCToGCLeaveAllChatChannels = 7220;
+	k_EMsgGCToGCUpdateAccountChatBan = 7221;
 	k_EMsgGCDev_GrantWarKill = 8001;
 }
 
@@ -325,6 +330,7 @@ message CSODOTAGameAccountClient {
 	optional uint32 match_disabled_count = 42;
 	optional uint32 team_creation_disabled_until_date = 43;
 	optional .DOTA_PartnerAccountType partner_account_type = 44 [default = DOTA_PARTNER_NONE];
+	optional uint32 antiaddictionstate = 45;
 }
 
 message CSODOTAGameAccountClientInternal {
@@ -1534,7 +1540,6 @@ message CMsgDOTARequestDefaultChatChannel {
 
 message CMsgDOTARequestDefaultChatChannelResponse {
 	optional string channel_name = 1;
-	optional fixed64 channel_id = 2;
 }
 
 message CMsgDOTARequestChatChannelList {
@@ -1835,6 +1840,7 @@ message CMsgDOTAWelcome {
 	optional .DOTA_PartnerAccountType partner_account_type = 8 [default = DOTA_PARTNER_NONE];
 	optional uint32 banned_word_list_word_id = 9;
 	optional uint32 time_first_played = 10;
+	optional uint32 antiaddictionstate = 11;
 }
 
 message CSODOTAGameHeroFavorites {
@@ -2206,5 +2212,27 @@ message CMsgResetMapLocationsResponse {
 
 message CMsgRefreshPartnerAccountLink {
 	optional int32 partner_type = 1;
+}
+
+message CMsgClientsRejoinChatChannels {
+}
+
+message CMsgGCToGCGetUserChatInfo {
+	optional uint32 account_id = 1;
+}
+
+message CMsgGCToGCGetUserChatInfoResponse {
+	optional bool valid_session = 1;
+	optional .DOTA_PartnerAccountType partner_type = 2 [default = DOTA_PARTNER_NONE];
+	optional uint32 chat_ban_end = 3;
+}
+
+message CMsgGCToGCLeaveAllChatChannels {
+	optional uint32 account_id = 1;
+}
+
+message CMsgGCToGCUpdateAccountChatBan {
+	optional uint32 account_id = 1;
+	optional uint32 chat_ban_end = 2;
 }
 

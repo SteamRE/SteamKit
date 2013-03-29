@@ -4,7 +4,6 @@ enum NET_Messages {
 	net_NOP = 0;
 	net_Disconnect = 1;
 	net_File = 2;
-	net_LastControlMessage = 2;
 	net_SplitScreenUser = 3;
 	net_Tick = 4;
 	net_StringCmd = 5;
