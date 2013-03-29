@@ -28,6 +28,11 @@ enum EGCBaseProtoObjectTypes {
 	k_EProtoObjectLobbyInvite = 1002;
 }
 
+enum GCGoodbyeReason {
+	GCGoodbyeReason_GC_GOING_DOWN = 1;
+	GCGoodbyeReason_NO_SESSION = 2;
+}
+
 enum GC_BannedWordType {
 	GC_BANNED_WORD_DISABLE_WORD = 0;
 	GC_BANNED_WORD_ENABLE_WORD = 1;
@@ -85,9 +90,11 @@ message CMsgServerWelcome {
 }
 
 message CMsgClientGoodbye {
+	optional .GCGoodbyeReason reason = 1 [default = GCGoodbyeReason_GC_GOING_DOWN];
 }
 
 message CMsgServerGoodbye {
+	optional .GCGoodbyeReason reason = 1 [default = GCGoodbyeReason_GC_GOING_DOWN];
 }
 
 message CMsgInQueue {
@@ -156,6 +163,7 @@ message CSOItemCriteria {
 	optional bool forced_quality_match = 7;
 	optional bool ignore_enabled_flag = 8;
 	repeated .CSOItemCriteriaCondition conditions = 9;
+	optional bool recent_only = 10;
 }
 
 message CSOItemRecipe {
