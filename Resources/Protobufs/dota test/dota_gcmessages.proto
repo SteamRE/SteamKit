@@ -28,7 +28,6 @@ enum EDOTAGCMsg {
 	k_EMsgGCPracticeLobbyList = 7042;
 	k_EMsgGCPracticeLobbyListResponse = 7043;
 	k_EMsgGCPracticeLobbyJoin = 7044;
-	k_EMsgGCSetAvatar = 7045;
 	k_EMsgGCPracticeLobbySetDetails = 7046;
 	k_EMsgGCPracticeLobbySetTeamSlot = 7047;
 	k_EMsgGCTutorialLobbyCreate = 7048;
@@ -189,6 +188,16 @@ enum EDOTAGCMsg {
 	k_EMsgGCToGCGetUserChatInfoResponse = 7219;
 	k_EMsgGCToGCLeaveAllChatChannels = 7220;
 	k_EMsgGCToGCUpdateAccountChatBan = 7221;
+	k_EMsgGCGuildCreateRequest = 7222;
+	k_EMsgGCGuildCreateResponse = 7223;
+	k_EMsgGCGuildSetAccountRoleRequest = 7224;
+	k_EMsgGCGuildSetAccountRoleResponse = 7225;
+	k_EMsgGCRequestGuildData = 7226;
+	k_EMsgGCGuildData = 7227;
+	k_EMsgGCGuildInviteAccountRequest = 7228;
+	k_EMsgGCGuildInviteAccountResponse = 7229;
+	k_EMsgGCGuildCancelInviteRequest = 7230;
+	k_EMsgGCGuildCancelInviteResponse = 7231;
 	k_EMsgGCDev_GrantWarKill = 8001;
 }
 
@@ -286,6 +295,7 @@ enum DOTAChatChannelType_t {
 	DOTAChannelType_Party = 2;
 	DOTAChannelType_Lobby = 3;
 	DOTAChannelType_Team = 4;
+	DOTAChannelType_Guild = 5;
 }
 
 enum DOTA_TournamentEvents {
@@ -306,7 +316,6 @@ message CSODOTAGameAccountClient {
 	optional uint32 account_id = 1 [(key_field) = true];
 	optional uint32 wins = 3;
 	optional uint32 losses = 4;
-	optional uint32 avatar = 7;
 	optional uint32 xp = 12;
 	optional uint32 level = 13;
 	optional uint32 initial_skill = 14;
@@ -351,6 +360,8 @@ message CSODOTAGameAccountClientInternal {
 	optional uint32 automated_penalty_date = 17;
 	optional uint32 last_reported_match_id = 18;
 	optional uint32 pending_reported_games = 19;
+	optional fixed32 last_communication_report_time = 20;
+	optional uint32 communication_penalty_severity = 21;
 }
 
 message CSODOTAGameHeroStandings {
@@ -792,10 +803,6 @@ message CMsgBotGameCreate {
 	optional .DOTA_GC_TEAM team = 4 [default = DOTA_GC_TEAM_GOOD_GUYS];
 }
 
-message CMsgSetAvatar {
-	optional uint32 avatar = 1;
-}
-
 message CMsgRequestInternationalTicket {
 }
 
@@ -1113,6 +1120,7 @@ message CMsgDOTAPopup {
 		PARTY_FULL = 14;
 		MADE_ADMIN = 15;
 		NEED_TO_PURCHASE = 16;
+		SIGNON_MESSAGE = 17;
 	}
 
 	optional .CMsgDOTAPopup.PopupID id = 1 [default = KICKED_FROM_LOBBY];
@@ -1472,9 +1480,7 @@ message CMsgDOTALiveScoreboardUpdate {
 }
 
 message CMsgDOTAJoinChatChannel {
-	optional string persona_name = 1;
 	optional string channel_name = 2;
-	optional string password = 3;
 	optional .DOTAChatChannelType_t channel_type = 4 [default = DOTAChannelType_Regional];
 }
 
@@ -1553,6 +1559,150 @@ message CMsgDOTARequestChatChannelListResponse {
 	}
 
 	repeated .CMsgDOTARequestChatChannelListResponse.ChatChannel channels = 1;
+}
+
+message CMsgDOTAGuildSDO {
+	message Member {
+		optional uint32 account_id = 1;
+		optional uint32 time_joined = 2;
+		optional uint32 role = 3;
+	}
+
+	message Invitation {
+		optional uint32 account_id = 1;
+		optional uint32 time_sent = 2;
+		optional uint32 account_id_sender = 3;
+	}
+
+	optional uint32 guild_id = 1;
+	optional string name = 2;
+	optional string tag = 3;
+	optional uint32 time_created = 4;
+	optional uint32 time_disbanded = 5;
+	optional uint64 logo = 6;
+	optional uint64 base_logo = 7;
+	optional uint64 banner_logo = 8;
+	repeated .CMsgDOTAGuildSDO.Member members = 9;
+	repeated .CMsgDOTAGuildSDO.Invitation invitations = 10;
+}
+
+message CMsgDOTAGuildAuditSDO {
+	message Entry {
+		optional uint32 event_index = 1;
+		optional uint32 timestamp = 2;
+		optional uint32 action = 3;
+		optional uint32 account_id_requestor = 4;
+		optional uint32 account_id_target = 5;
+		optional uint32 reference_data_a = 6;
+		optional uint32 reference_data_b = 7;
+	}
+
+	optional uint32 guild_id = 1;
+	repeated .CMsgDOTAGuildAuditSDO.Entry entries = 2;
+}
+
+message CMsgDOTAAccountGuildMembershipsSDO {
+	message Membership {
+		optional uint32 guild_id = 1;
+		optional uint32 role = 2;
+	}
+
+	message Invitation {
+		optional uint32 guild_id = 1;
+		optional uint32 time_sent = 2;
+		optional uint32 account_id_sender = 3;
+	}
+
+	optional uint32 account_id = 1;
+	repeated .CMsgDOTAAccountGuildMembershipsSDO.Membership memberships = 2;
+	repeated .CMsgDOTAAccountGuildMembershipsSDO.Invitation invitations = 3;
+}
+
+message CMsgDOTAGuildCreateRequest {
+	optional string name = 1;
+	optional string tag = 2;
+	optional uint64 logo = 3;
+	optional uint64 base_logo = 4;
+	optional uint64 banner_logo = 5;
+}
+
+message CMsgDOTAGuildCreateResponse {
+	enum EError {
+		UNSPECIFIED = 0;
+		NAME_EMPTY = 1;
+		NAME_BAD_CHARACTERS = 2;
+		NAME_TOO_LONG = 3;
+		NAME_TAKEN = 4;
+		TAG_EMPTY = 5;
+		TAG_BAD_CHARACTERS = 6;
+		TAG_TOO_LONG = 7;
+		ACCOUNT_TOO_MANY_GUILDS = 8;
+	}
+
+	optional uint32 guild_id = 1;
+	repeated .CMsgDOTAGuildCreateResponse.EError errors = 2;
+}
+
+message CMsgDOTAGuildSetAccountRoleRequest {
+	optional uint32 guild_id = 1;
+	optional uint32 target_account_id = 2;
+	optional uint32 target_role = 3;
+}
+
+message CMsgDOTAGuildSetAccountRoleResponse {
+	enum EResult {
+		SUCCESS = 0;
+		ERROR_UNSPECIFIED = 1;
+		ERROR_NO_PERMISSION = 2;
+		ERROR_NO_OTHER_LEADER = 3;
+		ERROR_ACCOUNT_TOO_MANY_GUILDS = 4;
+		ERROR_GUILD_TOO_MANY_MEMBERS = 5;
+	}
+
+	optional .CMsgDOTAGuildSetAccountRoleResponse.EResult result = 1 [default = SUCCESS];
+}
+
+message CMsgDOTAGuildInviteAccountRequest {
+	optional uint32 guild_id = 1;
+	optional uint32 target_account_id = 2;
+}
+
+message CMsgDOTAGuildInviteAccountResponse {
+	enum EResult {
+		SUCCESS = 0;
+		ERROR_UNSPECIFIED = 1;
+		ERROR_NO_PERMISSION = 2;
+		ERROR_ACCOUNT_ALREADY_INVITED = 3;
+		ERROR_ACCOUNT_ALREADY_IN_GUILD = 4;
+		ERROR_ACCOUNT_TOO_MANY_INVITES = 5;
+		ERROR_GUILD_TOO_MANY_INVITES = 6;
+	}
+
+	optional .CMsgDOTAGuildInviteAccountResponse.EResult result = 1 [default = SUCCESS];
+}
+
+message CMsgDOTAGuildCancelInviteRequest {
+	optional uint32 guild_id = 1;
+	optional uint32 target_account_id = 2;
+}
+
+message CMsgDOTAGuildCancelInviteResponse {
+	enum EResult {
+		SUCCESS = 0;
+		ERROR_UNSPECIFIED = 1;
+		ERROR_NO_PERMISSION = 2;
+	}
+
+	optional .CMsgDOTAGuildCancelInviteResponse.EResult result = 1 [default = SUCCESS];
+}
+
+message CMsgDOTARequestGuildData {
+}
+
+message CMsgDOTAGuildData {
+	optional bool in_guild = 1;
+	optional uint32 guild_id = 2;
+	optional .CMsgDOTAGuildSDO guild_data = 3;
 }
 
 message CMsgDOTAPlayerReports {

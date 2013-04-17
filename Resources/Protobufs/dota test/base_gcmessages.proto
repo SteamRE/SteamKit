@@ -4,13 +4,7 @@ enum EGCBaseMsg {
 	k_EMsgGCSystemMessage = 4001;
 	k_EMsgGCReplicateConVars = 4002;
 	k_EMsgGCConVarUpdated = 4003;
-	k_EMsgGCClientWelcome = 4004;
-	k_EMsgGCServerWelcome = 4005;
-	k_EMsgGCClientHello = 4006;
-	k_EMsgGCServerHello = 4007;
 	k_EMsgGCInQueue = 4008;
-	k_EMsgGCClientGoodbye = 4009;
-	k_EMsgGCServerGoodbye = 4010;
 	k_EMsgGCInviteToParty = 4501;
 	k_EMsgGCInvitationCreated = 4502;
 	k_EMsgGCPartyInviteResponse = 4503;
@@ -26,11 +20,6 @@ enum EGCBaseMsg {
 enum EGCBaseProtoObjectTypes {
 	k_EProtoObjectPartyInvite = 1001;
 	k_EProtoObjectLobbyInvite = 1002;
-}
-
-enum GCGoodbyeReason {
-	GCGoodbyeReason_GC_GOING_DOWN = 1;
-	GCGoodbyeReason_NO_SESSION = 2;
 }
 
 enum GC_BannedWordType {
@@ -70,31 +59,6 @@ message CSOLobbyInvite {
 
 message CMsgSystemBroadcast {
 	optional string message = 1;
-}
-
-message CMsgClientHello {
-	optional uint32 version = 1;
-}
-
-message CMsgServerHello {
-	optional uint32 version = 1;
-}
-
-message CMsgClientWelcome {
-	optional uint32 version = 1;
-	optional bytes game_data = 2;
-}
-
-message CMsgServerWelcome {
-	optional uint32 version = 1;
-}
-
-message CMsgClientGoodbye {
-	optional .GCGoodbyeReason reason = 1 [default = GCGoodbyeReason_GC_GOING_DOWN];
-}
-
-message CMsgServerGoodbye {
-	optional .GCGoodbyeReason reason = 1 [default = GCGoodbyeReason_GC_GOING_DOWN];
 }
 
 message CMsgInQueue {
