@@ -75,6 +75,15 @@ enum ESOMsg {
 	k_ESOMsg_CacheSubscriptionRefresh = 28;
 }
 
+enum EGCBaseClientMsg {
+	k_EMsgGCClientWelcome = 4004;
+	k_EMsgGCServerWelcome = 4005;
+	k_EMsgGCClientHello = 4006;
+	k_EMsgGCServerHello = 4007;
+	k_EMsgGCClientConnectionStatus = 4009;
+	k_EMsgGCServerConnectionStatus = 4010;
+}
+
 enum EGCToGCMsg {
 	k_EGCToGCMsgMasterAck = 150;
 	k_EGCToGCMsgMasterAckResponse = 151;
