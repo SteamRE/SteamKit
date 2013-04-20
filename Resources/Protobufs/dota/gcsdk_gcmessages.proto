@@ -1,5 +1,12 @@
 import "steammessages.proto";
 
+enum GCConnectionStatus {
+	GCConnectionStatus_HAVE_SESSION = 0;
+	GCConnectionStatus_GC_GOING_DOWN = 1;
+	GCConnectionStatus_NO_SESSION = 2;
+	GCConnectionStatus_NO_SESSION_IN_LOGON_QUEUE = 3;
+}
+
 message CMsgSOSingleObject {
 	optional fixed64 owner = 1;
 	optional int32 type_id = 2;
@@ -108,5 +115,34 @@ message CMsgGCRequestSessionIP {
 
 message CMsgGCRequestSessionIPResponse {
 	optional fixed32 ip = 1;
+}
+
+message CMsgSOCacheHaveVersion {
+	optional fixed64 soid = 1;
+	optional int32 type_id = 2;
+	optional fixed64 version = 3;
+}
+
+message CMsgClientHello {
+	optional uint32 version = 1;
+	repeated .CMsgSOCacheHaveVersion socache_have_versions = 2;
+}
+
+message CMsgServerHello {
+	optional uint32 version = 1;
+	repeated .CMsgSOCacheHaveVersion socache_have_versions = 2;
+}
+
+message CMsgClientWelcome {
+	optional uint32 version = 1;
+	optional bytes game_data = 2;
+}
+
+message CMsgServerWelcome {
+	optional uint32 version = 1;
+}
+
+message CMsgConnectionStatus {
+	optional .GCConnectionStatus status = 1 [default = GCConnectionStatus_HAVE_SESSION];
 }
 
