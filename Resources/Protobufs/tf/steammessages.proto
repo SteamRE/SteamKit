@@ -311,5 +311,6 @@ message CGCSystemMsg_GetPurchaseTrust_Response {
 	optional bool has_prior_purchase_history = 1;
 	optional bool has_no_recent_password_resets = 2;
 	optional bool is_wallet_cash_trusted = 3;
+	optional uint32 time_all_trusted = 4;
 }
 
