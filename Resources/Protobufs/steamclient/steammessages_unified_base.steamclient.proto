@@ -26,3 +26,6 @@ enum EProtoExecutionSite {
 	k_EProtoExecutionSiteSteamClient = 2;
 }
 
+message NoResponse {
+}
+
