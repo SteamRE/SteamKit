@@ -61,6 +61,8 @@ message CMsgClientLogon {
 	optional uint32 qos_level = 21;
 	optional fixed64 client_supplied_steam_id = 22;
 	optional bytes machine_id = 30;
+	optional uint32 launcher_type = 31 [default = 0];
+	optional uint32 ui_mode = 32 [default = 0];
 	optional bytes steam2_auth_ticket = 41;
 	optional string email_address = 42;
 	optional fixed32 rtime32_account_creation = 43;
@@ -203,6 +205,8 @@ message CMsgClientGamesPlayed {
 		optional string game_extra_info = 7;
 		optional bytes game_data_blob = 8;
 		optional uint32 process_id = 9;
+		optional uint32 streaming_provider_id = 10;
+		optional uint32 game_flags = 11;
 	}
 
 	repeated .CMsgClientGamesPlayed.GamePlayed games_played = 1;
@@ -246,6 +250,9 @@ message CMsgClientFriendsList {
 
 	optional bool bincremental = 1;
 	repeated .CMsgClientFriendsList.Friend friends = 2;
+	optional uint32 max_friend_count = 3;
+	optional uint32 active_friend_count = 4;
+	optional bool friends_limit_hit = 5;
 }
 
 message CMsgClientFriendsGroupsList {
@@ -930,6 +937,7 @@ message CMsgClientUFSUploadFileRequest {
 	optional uint32 platforms_to_sync_deprecated = 7;
 	optional uint32 platforms_to_sync = 8 [default = 4294967295];
 	optional uint32 cell_id = 9;
+	optional bool can_encrypt = 10;
 }
 
 message CMsgClientUFSUploadFileResponse {
@@ -940,6 +948,7 @@ message CMsgClientUFSUploadFileResponse {
 	optional string http_url = 5;
 	optional bytes kv_headers = 6;
 	optional bool use_https = 7;
+	optional bool encrypt_file = 8;
 }
 
 message CMsgClientUFSUploadCommit {
@@ -1026,6 +1035,7 @@ message CMsgClientUFSDownloadResponse {
 	optional string http_url = 10;
 	optional bytes kv_headers = 11;
 	optional bool use_https = 12;
+	optional bool encrypted = 13;
 }
 
 message CMsgClientUFSLoginRequest {
@@ -1422,6 +1432,7 @@ message CMsgClientUCMPublishFile {
 message CMsgClientUCMPublishFileResponse {
 	optional int32 eresult = 1 [default = 2];
 	optional fixed64 published_file_id = 2 [default = 18446744073709551615];
+	optional bool needs_workshop_legal_agreement_acceptance = 3 [default = false];
 }
 
 message CMsgClientUCMUpdatePublishedFile {
@@ -1446,6 +1457,7 @@ message CMsgClientUCMUpdatePublishedFile {
 
 message CMsgClientUCMUpdatePublishedFileResponse {
 	optional int32 eresult = 1 [default = 2];
+	optional bool needs_workshop_legal_agreement_acceptance = 2 [default = false];
 }
 
 message CMsgClientUCMGetPublishedFileDetails {
@@ -2520,5 +2532,41 @@ message CMsgClientUIMode {
 
 message CMsgClientVanityURLChangedNotification {
 	optional string vanity_url = 1;
+}
+
+message CMsgClientAuthorizeLocalDeviceRequest {
+	optional string device_description = 1;
+	optional uint32 owner_account_id = 2;
+}
+
+message CMsgClientAuthorizeLocalDevice {
+	optional int32 eresult = 1 [default = 2];
+	optional uint32 owner_account_id = 2;
+	optional uint64 authed_device_token = 3;
+}
+
+message CMsgClientDeauthorizeLocalDeviceRequest {
+	optional uint32 deauthorization_account_id = 1;
+}
+
+message CMsgClientDeauthorizeLocalDevice {
+	optional int32 eresult = 1 [default = 2];
+	optional uint32 deauthorization_account_id = 2;
+}
+
+message CMsgClientUseLocalDeviceAuthorizations {
+	repeated uint32 authorization_account_id = 1;
+}
+
+message CMsgClientGetEmoticonList {
+}
+
+message CMsgClientEmoticonList {
+	message Emoticon {
+		optional string name = 1;
+		optional int32 count = 2;
+	}
+
+	repeated .CMsgClientEmoticonList.Emoticon emoticons = 1;
 }
 

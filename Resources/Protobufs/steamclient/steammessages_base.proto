@@ -18,7 +18,7 @@ message CMsgProtoBufHeader {
 	optional uint32 auth_account_flags = 16;
 	optional int32 transport_error = 17 [default = 1];
 	optional uint64 messageid = 18 [default = 18446744073709551615];
-	optional uint32 publisherid = 19;
+	optional uint32 publisher_group_id = 19;
 	optional uint32 sysid = 20;
 }
 
