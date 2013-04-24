@@ -202,6 +202,7 @@ message CMsgURLChanged {
 	optional string postData = 3;
 	optional bool bIsRedirect = 4;
 	optional string pagetitle = 5;
+	optional bool bNewNavigation = 6;
 }
 
 message CHTMLHeader {
@@ -466,6 +467,7 @@ message CMsgSetCookie {
 	optional string value = 2;
 	optional string path = 3;
 	optional string host = 4;
+	optional uint32 expires = 5;
 }
 
 message CMsgSetTargetFrameRate {
@@ -529,5 +531,14 @@ message CMsgCloseFullScreenFlashIfOpen {
 
 message CMsgPauseFullScreenFlashMovieIfOpen {
 	optional uint32 browser_handle = 1;
+}
+
+message CMsgFocusedNodeText {
+	optional uint32 browser_handle = 1;
+}
+
+message CMsgFocusedNodeTextResponse {
+	optional uint32 browser_handle = 1;
+	optional string value = 2;
 }
 
