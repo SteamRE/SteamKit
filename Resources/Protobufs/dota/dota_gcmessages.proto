@@ -1991,6 +1991,8 @@ message CMsgDOTAWelcome {
 	optional uint32 banned_word_list_word_id = 9;
 	optional uint32 time_first_played = 10;
 	optional uint32 antiaddictionstate = 11;
+	optional uint32 last_time_played = 12;
+	optional uint32 last_ip_address = 13;
 }
 
 message CSODOTAGameHeroFavorites {
