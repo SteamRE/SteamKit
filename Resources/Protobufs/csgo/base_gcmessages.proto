@@ -135,6 +135,7 @@ message CSOEconGameAccountClient {
 	optional fixed32 duel_ban_expiration = 7;
 	optional uint32 preview_item_def = 8 [default = 0];
 	optional bool made_first_purchase = 9 [default = false];
+	optional uint32 seasons_activated = 10 [default = 0];
 }
 
 message CSOItemCriteriaCondition {
