@@ -28,6 +28,10 @@ enum ECsgoGCMsg {
 	k_EMsgGCCStrike15_v2_ClientCommendPlayerQueryResponse = 9124;
 	k_EMsgGCCStrike15_v2_ClientRequestWatchInfoFriends = 9125;
 	k_EMsgGCCStrike15_v2_WatchInfoUsers = 9126;
+	k_EMsgGCCStrike15_v2_ClientRequestPlayersProfile = 9127;
+	k_EMsgGCCStrike15_v2_PlayersProfile = 9128;
+	k_EMsgGCCStrike15_v2_SetMyMedalsInfo = 9129;
+	k_EMsgGCCStrike15_v2_PlayerEarnedRewardNotification = 9130;
 }
 
 message GameServerPing {
@@ -84,6 +88,15 @@ message PlayerCommendationInfo {
 	optional uint32 cmd_friendly = 1;
 	optional uint32 cmd_teaching = 2;
 	optional uint32 cmd_leader = 4;
+}
+
+message PlayerMedalsInfo {
+	optional uint32 medal_team = 1;
+	optional uint32 medal_combat = 2;
+	optional uint32 medal_weapon = 3;
+	optional uint32 medal_global = 4;
+	optional uint32 medal_arms = 5;
+	optional uint32 coin_op_payback = 6;
 }
 
 message ServerHltvInfo {
@@ -156,6 +169,11 @@ message CMsgGCCStrike15_v2_MatchmakingServerReservationResponse {
 	optional uint64 gc_reservation_sent = 4;
 	optional uint32 server_version = 5;
 	optional .ServerHltvInfo tv_info = 6;
+	repeated uint32 reward_player_accounts = 7;
+	repeated uint32 idle_player_accounts = 8;
+	optional uint32 reward_item_attr_def_idx = 9;
+	optional uint32 reward_item_attr_value = 10;
+	optional uint32 reward_item_attr_reward_idx = 11;
 }
 
 message CMsgGCCStrike15_v2_MatchmakingGC2ClientReserve {
@@ -204,6 +222,7 @@ message CMsgGCCStrike15_v2_MatchmakingGC2ClientHello {
 	optional int32 vac_banned = 6;
 	optional .PlayerRankingInfo ranking = 7;
 	optional .PlayerCommendationInfo commendation = 8;
+	optional .PlayerMedalsInfo medals = 9;
 }
 
 message CMsgGCCStrike15_v2_MatchmakingGC2ClientAbandon {
@@ -222,6 +241,7 @@ message CDataGCCStrike15_v2_MatchmakingLockedInMatch {
 	optional .CMsgGCCStrike15_v2_MatchmakingGC2ClientReserve client_reservation = 1;
 	optional .CMsgGCCStrike15_v2_MatchmakingServerRoundStats server_stats = 2;
 	optional uint32 rtime32_server_info = 3;
+	optional .CMsgGCCStrike15_v2_MatchmakingServerRoundStats last_round_stats_temp = 4;
 }
 
 message CMsgGCCStrike15_v2_MatchmakingGC2ServerRankUpdate {
@@ -296,5 +316,22 @@ message CMsgGCCStrike15_v2_WatchInfoUsers {
 	optional uint32 request_id = 1;
 	repeated uint32 account_ids = 2;
 	repeated .WatchableMatchInfo watchable_match_infos = 3;
+}
+
+message CMsgGCCStrike15_v2_ClientRequestPlayersProfile {
+	optional uint32 request_id = 1;
+	repeated uint32 account_ids = 2;
+}
+
+message CMsgGCCStrike15_v2_PlayersProfile {
+	optional uint32 request_id = 1;
+	repeated .CMsgGCCStrike15_v2_MatchmakingGC2ClientHello account_profiles = 2;
+}
+
+message CMsgGCCStrike15_v2_PlayerEarnedRewardNotification {
+	optional uint32 account_id = 1;
+	optional uint32 item_def_index = 2;
+	optional uint32 attr_def_index = 3;
+	optional uint32 attr_value = 4;
 }
 
