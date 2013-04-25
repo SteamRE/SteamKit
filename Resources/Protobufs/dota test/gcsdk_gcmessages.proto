@@ -7,6 +7,11 @@ enum GCConnectionStatus {
 	GCConnectionStatus_NO_SESSION_IN_LOGON_QUEUE = 3;
 }
 
+message CMsgSOIDOwner {
+	optional uint32 type = 1;
+	optional uint64 id = 2;
+}
+
 message CMsgSOSingleObject {
 	optional fixed64 owner = 1;
 	optional int32 type_id = 2;
