@@ -59,6 +59,10 @@ enum EGCSystemMsg {
 	k_EGCMsgMemCachedDelete = 203;
 	k_EGCMsgMasterSetDirectory = 220;
 	k_EGCMsgMasterSetDirectoryResponse = 221;
+	k_EGCMsgMasterSetWebAPIRouting = 222;
+	k_EGCMsgMasterSetWebAPIRoutingResponse = 223;
+	k_EGCMsgMasterSetClientMsgRouting = 224;
+	k_EGCMsgMasterSetClientMsgRoutingResponse = 225;
 	k_EGCMsgSystemBase2 = 500;
 	k_EGCMsgGetPurchaseTrustStatus = 501;
 	k_EGCMsgGetPurchaseTrustStatusResponse = 502;

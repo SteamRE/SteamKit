@@ -362,6 +362,8 @@ message CSODOTAGameAccountClientInternal {
 	optional uint32 pending_reported_games = 19;
 	optional fixed32 last_communication_report_time = 20;
 	optional uint32 communication_penalty_severity = 21;
+	optional uint32 solo_rank = 22;
+	optional uint32 solo_rank_uncertainty = 23;
 }
 
 message CSODOTAGameHeroStandings {
@@ -490,6 +492,7 @@ message CSODOTALobby {
 		TUTORIAL = 3;
 		COOP_BOT_MATCH = 4;
 		TEAM_MATCH = 5;
+		SOLO_QUEUE_MATCH = 6;
 	}
 
 	optional uint64 lobby_id = 1 [(key_field) = true];
@@ -1765,6 +1768,7 @@ message CMsgDOTARequestPlayerResourcesResponse {
 	optional bool prevent_text_chat = 4;
 	optional bool prevent_voice_chat = 5;
 	optional bool match_making_ban = 6;
+	optional uint32 solo_rank = 7;
 }
 
 message CMsgDOTAKickedFromMatchmakingQueue {
