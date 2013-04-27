@@ -157,6 +157,12 @@ message CMsgVerticalScrollBarSizeResponse {
 	optional bool visible = 9;
 }
 
+message CMsgResizeResponse {
+	optional uint32 browser_handle = 1;
+	optional uint32 wide = 2;
+	optional uint32 tall = 3;
+}
+
 message CMsgFind {
 	optional uint32 browser_handle = 1;
 	optional string find = 2;

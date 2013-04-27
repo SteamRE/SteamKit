@@ -2,6 +2,7 @@ enum MatchType {
 	MATCH_TYPE_RANKED = 0;
 	MATCH_TYPE_COOP_BOTS = 1;
 	MATCH_TYPE_TEAM_RANKED = 2;
+	MATCH_TYPE_SOLO_QUEUE = 3;
 }
 
 enum DOTABotDifficulty {
