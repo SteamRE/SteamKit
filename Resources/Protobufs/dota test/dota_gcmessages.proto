@@ -198,6 +198,28 @@ enum EDOTAGCMsg {
 	k_EMsgGCGuildInviteAccountResponse = 7229;
 	k_EMsgGCGuildCancelInviteRequest = 7230;
 	k_EMsgGCGuildCancelInviteResponse = 7231;
+	k_EMsgGCGuildUpdateDetailsRequest = 7232;
+	k_EMsgGCGuildUpdateDetailsResponse = 7233;
+	k_EMsgGCToGCCanInviteUser = 7234;
+	k_EMsgGCToGCCanInviteUserResponse = 7235;
+	k_EMsgGCToGCGetUserRank = 7236;
+	k_EMsgGCToGCGetUserRankResponse = 7237;
+	k_EMsgGCToGCGetTeamRankChange = 7238;
+	k_EMsgGCToGCGetTeamRankChangeResponse = 7239;
+	k_EMsgGCToGCUpdateTeamStats = 7240;
+	k_EMsgGCToGCGetTeamRank = 7241;
+	k_EMsgGCToGCGetTeamRankResponse = 7242;
+	k_EMsgGCToGCDirtyTeamSDO = 7243;
+	k_EMsgGCToGCDirtyTeamMemberSDO = 7244;
+	k_EMsgGCTeamIDByNameRequest = 7245;
+	k_EMsgGCTeamIDByNameResponse = 7246;
+	k_EMsgGCEditTeam = 7247;
+	k_EMsgGCPassportDataRequest = 7248;
+	k_EMsgGCPassportDataResponse = 7249;
+	k_EMsgGCToGCDirtyGuildSDO = 7250;
+	k_EMsgGCNotInGuildData = 7251;
+	k_EMsgGCToGCDirtyAccountGuildMembershipsSDO = 7252;
+	k_EMsgGCPassportVote = 7253;
 	k_EMsgGCDev_GrantWarKill = 8001;
 }
 
@@ -337,7 +359,6 @@ message CSODOTAGameAccountClient {
 	optional uint32 showcase_hero_id = 40;
 	optional uint32 match_disabled_until_date = 41;
 	optional uint32 match_disabled_count = 42;
-	optional uint32 team_creation_disabled_until_date = 43;
 	optional .DOTA_PartnerAccountType partner_account_type = 44 [default = DOTA_PARTNER_NONE];
 	optional uint32 antiaddictionstate = 45;
 }
@@ -457,7 +478,13 @@ message CLobbyTeamDetails {
 	optional uint64 team_logo = 5;
 	optional uint64 team_base_logo = 6;
 	optional uint64 team_banner_logo = 7;
-	optional bool complete_team = 8;
+	optional bool team_complete = 8;
+	optional string guild_name = 9;
+	optional string guild_tag = 10;
+	optional uint32 guild_id = 11;
+	optional uint64 guild_logo = 12;
+	optional uint64 guild_base_logo = 13;
+	optional uint64 guild_banner_logo = 14;
 }
 
 message CLobbyPendingPlayerReport {
@@ -1047,10 +1074,10 @@ message CMsgDOTAMatch {
 	optional uint32 radiant_team_id = 20;
 	optional uint32 dire_team_id = 21;
 	optional uint32 leagueid = 22;
-	optional string radiant_name = 23;
-	optional string dire_name = 24;
-	optional uint64 radiant_logo = 25;
-	optional uint64 dire_logo = 26;
+	optional string radiant_team_name = 23;
+	optional string dire_team_name = 24;
+	optional uint64 radiant_team_logo = 25;
+	optional uint64 dire_team_logo = 26;
 	optional uint32 radiant_team_complete = 27;
 	optional uint32 dire_team_complete = 28;
 	optional uint32 positive_votes = 29;
@@ -1059,6 +1086,8 @@ message CMsgDOTAMatch {
 	repeated .CMatchHeroSelectEvent picks_bans = 32;
 	optional uint64 match_seq_num = 33;
 	optional .CMsgDOTAMatch.ReplayState replay_state = 34 [default = REPLAY_AVAILABLE];
+	optional uint32 radiant_guild_id = 35;
+	optional uint32 dire_guild_id = 36;
 }
 
 message CMsgDOTAPlayerMatchHistory {
@@ -1171,6 +1200,7 @@ message CMsgDOTATeam {
 	optional uint32 gamesplayedwithcurrentroster = 20;
 	optional uint32 teammatchmakinggamesplayed = 21;
 	optional uint32 lastplayedgametime = 22;
+	optional uint32 lastrenametime = 23;
 }
 
 message CMsgDOTACreateTeam {
@@ -1201,11 +1231,25 @@ message CMsgDOTACreateTeamResponse {
 		CREATOR_TEAM_LIMIT_REACHED = 11;
 		NO_LOGO = 12;
 		CREATOR_TEAM_CREATION_COOLDOWN = 13;
+		LOGO_UPLOAD_FAILED = 14;
+		NAME_CHANGED_TOO_RECENTLY = 15;
 	}
 
 	repeated .CMsgDOTACreateTeamResponse.Result results = 1;
 	optional uint32 team_id = 2;
 	optional uint32 seconds_remaining = 3;
+}
+
+message CMsgDOTAEditTeam {
+	optional string name = 1;
+	optional string tag = 2;
+	optional uint64 logo = 3;
+	optional uint64 base_logo = 4;
+	optional uint64 banner_logo = 5;
+	optional uint64 sponsor_logo = 6;
+	optional string country_code = 7;
+	optional string url = 8;
+	optional uint32 team_id = 9;
 }
 
 message CMsgDOTAEditTeamLogo {
@@ -1285,6 +1329,15 @@ message CMsgDOTATeamProfileRequest {
 
 message CMsgDOTATeamMemberProfileRequest {
 	optional fixed64 steam_id = 1;
+}
+
+message CMsgDOTATeamIDByNameRequest {
+	optional string name = 1;
+}
+
+message CMsgDOTATeamIDByNameResponse {
+	optional uint32 eresult = 1;
+	optional uint32 team_id = 2;
 }
 
 message CMsgDOTATeamProfileResponse {
@@ -1640,6 +1693,7 @@ message CMsgDOTAGuildCreateResponse {
 		TAG_BAD_CHARACTERS = 6;
 		TAG_TOO_LONG = 7;
 		ACCOUNT_TOO_MANY_GUILDS = 8;
+		LOGO_UPLOAD_FAILED = 9;
 	}
 
 	optional uint32 guild_id = 1;
@@ -1699,13 +1753,33 @@ message CMsgDOTAGuildCancelInviteResponse {
 	optional .CMsgDOTAGuildCancelInviteResponse.EResult result = 1 [default = SUCCESS];
 }
 
+message CMsgDOTAGuildUpdateDetailsRequest {
+	optional uint32 guild_id = 1;
+	optional uint64 logo = 2;
+	optional uint64 base_logo = 3;
+	optional uint64 banner_logo = 4;
+}
+
+message CMsgDOTAGuildUpdateDetailsResponse {
+	enum EResult {
+		SUCCESS = 0;
+		ERROR_UNSPECIFIED = 1;
+		ERROR_NO_PERMISSION = 2;
+	}
+
+	optional .CMsgDOTAGuildUpdateDetailsResponse.EResult result = 1 [default = SUCCESS];
+}
+
 message CMsgDOTARequestGuildData {
 }
 
 message CMsgDOTAGuildData {
-	optional bool in_guild = 1;
-	optional uint32 guild_id = 2;
-	optional .CMsgDOTAGuildSDO guild_data = 3;
+	optional .CMsgDOTAGuildSDO guild_data = 4;
+}
+
+message CMsgDOTANotInGuildData {
+	optional bool invited_to_guild = 2;
+	optional uint32 guild_id = 3;
 }
 
 message CMsgDOTAPlayerReports {
@@ -2068,6 +2142,7 @@ message CLeague {
 	optional uint32 leagueid = 1;
 	optional bool live = 2;
 	optional bool freeleague = 3;
+	optional fixed32 lastgametime = 4;
 }
 
 message CMsgResponseLeagueInfo {
@@ -2266,12 +2341,19 @@ message CMsgGCToGCCheckLeaguePermissionResponse {
 	optional bool has_access = 1;
 }
 
+message CMsgLeagueScheduleBlockTeamInfo {
+	optional uint32 team_id = 1;
+	optional string name = 2;
+	optional string tag = 3;
+	optional uint64 logo = 4;
+}
+
 message CMsgLeagueScheduleBlock {
 	optional uint32 block_id = 1;
 	optional uint32 start_time = 2;
-	optional uint32 end_time = 3;
 	optional bool finals = 4;
 	optional string comment = 5;
+	repeated .CMsgLeagueScheduleBlockTeamInfo teams = 6;
 }
 
 message CMsgDOTALeague {
@@ -2390,5 +2472,90 @@ message CMsgGCToGCLeaveAllChatChannels {
 message CMsgGCToGCUpdateAccountChatBan {
 	optional uint32 account_id = 1;
 	optional uint32 chat_ban_end = 2;
+}
+
+message CMsgGCToGCCanInviteUser {
+	optional uint32 account_id = 1;
+}
+
+message CMsgGCToGCCanInviteUserResponse {
+	optional bool can_invite = 1;
+}
+
+message CMsgGCToGCGetUserRank {
+	optional uint32 account_id = 1;
+}
+
+message CMsgGCToGCGetUserRankResponse {
+	optional uint32 rank = 1;
+}
+
+message CMsgGCToGCGetTeamRankChange {
+	optional uint32 winner_team_id = 1;
+	optional uint32 loser_team_id = 2;
+}
+
+message CMsgGCToGCGetTeamRankChangeResponse {
+	optional uint32 rank_change = 1;
+}
+
+message CMsgGCToGCGetTeamRank {
+	optional uint32 team_id = 1;
+	repeated uint32 team_members = 2;
+}
+
+message CMsgGCToGCGetTeamRankResponse {
+	optional bool valid_team = 1;
+	optional uint32 rank = 2;
+	optional uint32 games_won = 3;
+}
+
+message CMsgGCToGCDirtyTeamSDO {
+	optional uint32 team_id = 1;
+}
+
+message CMsgGCToGCDirtyTeamMemberSDO {
+	optional uint32 account_id = 1;
+}
+
+message CMsgGCToGCDirtyGuildSDO {
+	optional uint32 guild_id = 1;
+}
+
+message CMsgGCToGCDirtyAccountGuildMembershipsSDO {
+	optional uint32 account_id = 1;
+}
+
+message CMsgGCToGCUpdateTeamStats {
+	optional uint32 radiant_team = 1;
+	optional bool radiant_team_complete = 2;
+	optional uint32 dire_team = 3;
+	optional bool dire_team_complete = 4;
+	optional uint32 lobby_type = 5;
+	optional uint32 league_id = 6;
+	optional bool radiant_team_won = 7;
+}
+
+message CMsgDOTAPassportVoteTeamGuess {
+	optional uint32 league_id = 1;
+	optional uint64 winner_id = 2;
+	optional uint64 runnerup_id = 3;
+}
+
+message CMsgDOTAPassportVote {
+	repeated .CMsgDOTAPassportVoteTeamGuess team_votes = 1;
+}
+
+message CMsgPassportDataRequest {
+	optional uint32 account_id = 1;
+}
+
+message CMsgPassportDataResponse {
+	optional uint32 account_id = 1;
+	optional uint32 result = 2 [default = 2];
+	optional .CMsgDOTATournament east_qualifiers = 3;
+	optional .CMsgDOTATournament west_qualifiers = 4;
+	optional .CMsgDOTATournament international = 5;
+	optional .CMsgDOTAPassportVote league_guesses = 6;
 }
 

@@ -31,6 +31,7 @@ message CGCStorePurchaseInit_LineItem {
 	optional uint32 item_def_id = 1;
 	optional uint32 quantity = 2;
 	optional uint32 cost_in_local_currency = 3;
+	optional uint32 purchase_type = 4;
 }
 
 message CMsgGCStorePurchaseInit {
@@ -406,6 +407,27 @@ message CSOEconItemHalloweenEgg {
 	optional uint32 green_power = 9;
 	optional uint32 black_power = 10;
 	optional uint32 skin = 11;
+}
+
+message CMsgGCItemPreviewItemBoughtNotification {
+	optional uint32 item_def_index = 1;
+}
+
+message CMsgGCStorePurchaseCancel {
+	optional uint64 txn_id = 1;
+}
+
+message CMsgGCStorePurchaseCancelResponse {
+	optional uint32 result = 1;
+}
+
+message CMsgGCStorePurchaseFinalize {
+	optional uint64 txn_id = 1;
+}
+
+message CMsgGCStorePurchaseFinalizeResponse {
+	optional uint32 result = 1;
+	repeated uint64 item_ids = 2;
 }
 
 message CMsgGCBannedWordListRequest {

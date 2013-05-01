@@ -399,3 +399,20 @@ message CMsgGCMsgMasterSetClientMsgRouting_Response {
 	optional int32 eresult = 1 [default = 2];
 }
 
+message CMsgGCHUpdateSession {
+	message ExtraField {
+		optional string name = 1;
+		optional string value = 2;
+	}
+
+	optional fixed64 steam_id = 1;
+	optional uint32 app_id = 2;
+	optional bool online = 3;
+	optional fixed64 server_steam_id = 4;
+	optional uint32 server_addr = 5;
+	optional uint32 server_port = 6;
+	optional uint32 os_type = 7;
+	optional uint32 client_addr = 8;
+	repeated .CMsgGCHUpdateSession.ExtraField extra_fields = 9;
+}
+
