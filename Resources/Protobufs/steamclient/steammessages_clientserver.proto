@@ -956,6 +956,7 @@ message CMsgClientUFSUploadCommit {
 		optional int32 eresult = 1 [default = 2];
 		optional uint32 app_id = 2;
 		optional bytes sha_file = 3;
+		optional uint32 cub_file = 4;
 	}
 
 	repeated .CMsgClientUFSUploadCommit.File files = 1;
