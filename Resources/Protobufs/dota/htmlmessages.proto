@@ -398,10 +398,6 @@ message CMsgZoomToElementAtPosition {
 	optional uint32 browser_handle = 1;
 	optional uint32 x = 2;
 	optional uint32 y = 3;
-	optional uint32 max_width = 4;
-	optional uint32 max_height = 5;
-	optional uint32 min_block_width = 6;
-	optional uint32 min_block_height = 7;
 }
 
 message CMsgZoomToElementAtPositionResponse {
