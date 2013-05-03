@@ -66,6 +66,7 @@ enum EGCSystemMsg {
 	k_EGCMsgSystemBase2 = 500;
 	k_EGCMsgGetPurchaseTrustStatus = 501;
 	k_EGCMsgGetPurchaseTrustStatusResponse = 502;
+	k_EGCMsgUpdateSession = 503;
 }
 
 enum ESOMsg {
