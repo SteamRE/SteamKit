@@ -220,11 +220,13 @@ enum EDOTAGCMsg {
 	k_EMsgGCNotInGuildData = 7251;
 	k_EMsgGCToGCDirtyAccountGuildMembershipsSDO = 7252;
 	k_EMsgGCPassportVote = 7253;
+	k_EMsgGCGuildInviteData = 7254;
 	k_EMsgGCToGCGetLeagueAdmin = 7255;
 	k_EMsgGCToGCGetLeagueAdminResponse = 7256;
 	k_EMsgGCPassportVoteSelection = 7257;
 	k_EMsgGCRequestLeaguePrizePool = 7258;
 	k_EMsgGCRequestLeaguePrizePoolResponse = 7259;
+	k_EMsgGCToGCUpdateMatchmakingStats = 7260;
 	k_EMsgGCDev_GrantWarKill = 8001;
 }
 
@@ -1202,6 +1204,7 @@ message CMsgDOTAPopup {
 		MADE_ADMIN = 15;
 		NEED_TO_PURCHASE = 16;
 		SIGNON_MESSAGE = 17;
+		GUILD_KICKED = 18;
 	}
 
 	optional .CMsgDOTAPopup.PopupID id = 1 [default = KICKED_FROM_LOBBY];
@@ -1823,12 +1826,17 @@ message CMsgDOTARequestGuildData {
 }
 
 message CMsgDOTAGuildData {
-	optional .CMsgDOTAGuildSDO guild_data = 4;
+	optional bool in_guild = 1;
+	optional uint32 guild_id = 2;
+	optional .CMsgDOTAGuildSDO guild_data = 3;
 }
 
-message CMsgDOTANotInGuildData {
-	optional bool invited_to_guild = 2;
-	optional uint32 guild_id = 3;
+message CMsgDOTAGuildInviteData {
+	optional bool invited_to_guild = 1;
+	optional uint32 guild_id = 2;
+	optional string guild_name = 3;
+	optional string guild_tag = 4;
+	optional uint64 logo = 5;
 }
 
 message CMsgDOTAPlayerReports {
@@ -2152,9 +2160,17 @@ message CDOTAOverview {
 	}
 
 	message ServersByRegion {
+		message Server {
+			optional uint32 ip = 1;
+			optional int32 in_use = 2;
+			optional int32 available = 3;
+			repeated uint32 ports = 4;
+		}
+
 		optional int32 region = 1;
 		optional int32 in_use = 2;
 		optional int32 available = 3;
+		repeated .CDOTAOverview.ServersByRegion.Server servers = 4;
 	}
 
 	repeated .CDOTAOverview.PlayersByRegion players_by_region = 1;
@@ -2634,5 +2650,9 @@ message CMsgRequestLeaguePrizePool {
 message CMsgRequestLeaguePrizePoolResponse {
 	optional uint32 league_id = 1;
 	optional uint32 prize_pool = 2;
+}
+
+message CMsgGCToGCUpdateMatchmakingStats {
+	optional bytes msg_body = 1;
 }
 
