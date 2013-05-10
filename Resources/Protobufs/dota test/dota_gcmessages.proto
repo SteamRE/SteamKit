@@ -220,6 +220,13 @@ enum EDOTAGCMsg {
 	k_EMsgGCNotInGuildData = 7251;
 	k_EMsgGCToGCDirtyAccountGuildMembershipsSDO = 7252;
 	k_EMsgGCPassportVote = 7253;
+	k_EMsgGCGuildInviteData = 7254;
+	k_EMsgGCToGCGetLeagueAdmin = 7255;
+	k_EMsgGCToGCGetLeagueAdminResponse = 7256;
+	k_EMsgGCPassportVoteSelection = 7257;
+	k_EMsgGCRequestLeaguePrizePool = 7258;
+	k_EMsgGCRequestLeaguePrizePoolResponse = 7259;
+	k_EMsgGCToGCUpdateMatchmakingStats = 7260;
 	k_EMsgGCDev_GrantWarKill = 8001;
 }
 
@@ -332,6 +339,49 @@ enum DOTA_TournamentEvents {
 enum DOTA_WatchReplayType {
 	DOTA_WATCH_REPLAY_NORMAL = 0;
 	DOTA_WATCH_REPLAY_HIGHLIGHTS = 1;
+}
+
+enum DOTA_2013PassportSelectionIndices {
+	PP13_SEL_ALLSTAR_PLAYER_0 = 0;
+	PP13_SEL_ALLSTAR_PLAYER_1 = 1;
+	PP13_SEL_ALLSTAR_PLAYER_2 = 2;
+	PP13_SEL_ALLSTAR_PLAYER_3 = 3;
+	PP13_SEL_ALLSTAR_PLAYER_4 = 4;
+	PP13_SEL_ALLSTAR_PLAYER_5 = 5;
+	PP13_SEL_ALLSTAR_PLAYER_6 = 6;
+	PP13_SEL_ALLSTAR_PLAYER_7 = 7;
+	PP13_SEL_ALLSTAR_PLAYER_8 = 8;
+	PP13_SEL_ALLSTAR_PLAYER_9 = 9;
+	PP13_SEL_QUALPRED_WEST_0 = 10;
+	PP13_SEL_QUALPRED_WEST_1 = 11;
+	PP13_SEL_QUALPRED_WEST_2 = 12;
+	PP13_SEL_QUALPRED_WEST_3 = 13;
+	PP13_SEL_QUALPRED_WEST_4 = 14;
+	PP13_SEL_QUALPRED_WEST_5 = 15;
+	PP13_SEL_QUALPRED_WEST_6 = 16;
+	PP13_SEL_QUALPRED_WEST_7 = 17;
+	PP13_SEL_QUALPRED_WEST_8 = 18;
+	PP13_SEL_QUALPRED_WEST_9 = 19;
+	PP13_SEL_QUALPRED_WEST_10 = 20;
+	PP13_SEL_QUALPRED_WEST_11 = 21;
+	PP13_SEL_QUALPRED_WEST_12 = 22;
+	PP13_SEL_QUALPRED_WEST_13 = 23;
+	PP13_SEL_QUALPRED_WEST_14 = 24;
+	PP13_SEL_QUALPRED_EAST_0 = 25;
+	PP13_SEL_QUALPRED_EAST_1 = 26;
+	PP13_SEL_QUALPRED_EAST_2 = 27;
+	PP13_SEL_QUALPRED_EAST_3 = 28;
+	PP13_SEL_QUALPRED_EAST_4 = 29;
+	PP13_SEL_QUALPRED_EAST_5 = 30;
+	PP13_SEL_QUALPRED_EAST_6 = 31;
+	PP13_SEL_QUALPRED_EAST_7 = 32;
+	PP13_SEL_QUALPRED_EAST_8 = 33;
+	PP13_SEL_QUALPRED_EAST_9 = 34;
+	PP13_SEL_QUALPRED_EAST_10 = 35;
+	PP13_SEL_QUALPRED_EAST_11 = 36;
+	PP13_SEL_QUALPRED_EAST_12 = 37;
+	PP13_SEL_QUALPRED_EAST_13 = 38;
+	PP13_SEL_QUALPRED_EAST_14 = 39;
 }
 
 message CSODOTAGameAccountClient {
@@ -956,6 +1006,7 @@ message CMsgDOTATournament {
 		repeated uint32 players = 4;
 		optional uint32 seed = 5;
 		optional uint64 team_logo = 6;
+		optional string country_code = 7;
 	}
 
 	message Game {
@@ -1153,6 +1204,7 @@ message CMsgDOTAPopup {
 		MADE_ADMIN = 15;
 		NEED_TO_PURCHASE = 16;
 		SIGNON_MESSAGE = 17;
+		GUILD_KICKED = 18;
 	}
 
 	optional .CMsgDOTAPopup.PopupID id = 1 [default = KICKED_FROM_LOBBY];
@@ -1774,12 +1826,17 @@ message CMsgDOTARequestGuildData {
 }
 
 message CMsgDOTAGuildData {
-	optional .CMsgDOTAGuildSDO guild_data = 4;
+	optional bool in_guild = 1;
+	optional uint32 guild_id = 2;
+	optional .CMsgDOTAGuildSDO guild_data = 3;
 }
 
-message CMsgDOTANotInGuildData {
-	optional bool invited_to_guild = 2;
-	optional uint32 guild_id = 3;
+message CMsgDOTAGuildInviteData {
+	optional bool invited_to_guild = 1;
+	optional uint32 guild_id = 2;
+	optional string guild_name = 3;
+	optional string guild_tag = 4;
+	optional uint64 logo = 5;
 }
 
 message CMsgDOTAPlayerReports {
@@ -2000,6 +2057,7 @@ message CMsgDOTAProfileResponse {
 	repeated .CMsgDOTAProfileResponse.LeaguePass league_passes = 10;
 	repeated .CMsgDOTAProfileResponse.EventTicket event_tickets = 11;
 	optional uint32 team_id = 12;
+	optional bool has_passport = 13;
 }
 
 message CMsgDOTANotifySuccessfulReport {
@@ -2102,9 +2160,17 @@ message CDOTAOverview {
 	}
 
 	message ServersByRegion {
+		message Server {
+			optional uint32 ip = 1;
+			optional int32 in_use = 2;
+			optional int32 available = 3;
+			repeated uint32 ports = 4;
+		}
+
 		optional int32 region = 1;
 		optional int32 in_use = 2;
 		optional int32 available = 3;
+		repeated .CDOTAOverview.ServersByRegion.Server servers = 4;
 	}
 
 	repeated .CDOTAOverview.PlayersByRegion players_by_region = 1;
@@ -2538,12 +2604,18 @@ message CMsgGCToGCUpdateTeamStats {
 
 message CMsgDOTAPassportVoteTeamGuess {
 	optional uint32 league_id = 1;
-	optional uint64 winner_id = 2;
-	optional uint64 runnerup_id = 3;
+	optional uint32 winner_id = 2;
+	optional uint32 runnerup_id = 3;
+}
+
+message CMsgDOTAPassportVoteGenericSelection {
+	optional .DOTA_2013PassportSelectionIndices selection_index = 1 [default = PP13_SEL_ALLSTAR_PLAYER_0];
+	optional uint32 selection = 2;
 }
 
 message CMsgDOTAPassportVote {
 	repeated .CMsgDOTAPassportVoteTeamGuess team_votes = 1;
+	repeated .CMsgDOTAPassportVoteGenericSelection generic_selections = 2;
 }
 
 message CMsgPassportDataRequest {
@@ -2556,6 +2628,31 @@ message CMsgPassportDataResponse {
 	optional .CMsgDOTATournament east_qualifiers = 3;
 	optional .CMsgDOTATournament west_qualifiers = 4;
 	optional .CMsgDOTATournament international = 5;
+	optional uint32 east_qualifiers_predict_end_time = 7;
+	optional uint32 west_qualifiers_predict_end_time = 8;
+	optional uint32 allstar_match_end_time = 9;
 	optional .CMsgDOTAPassportVote league_guesses = 6;
+}
+
+message CMsgGCToGCGetLeagueAdmin {
+	optional uint32 account_id = 1;
+	optional uint32 league_id = 2;
+}
+
+message CMsgGCToGCGetLeagueAdminResponse {
+	optional bool has_admin_access = 1;
+}
+
+message CMsgRequestLeaguePrizePool {
+	optional uint32 league_id = 1;
+}
+
+message CMsgRequestLeaguePrizePoolResponse {
+	optional uint32 league_id = 1;
+	optional uint32 prize_pool = 2;
+}
+
+message CMsgGCToGCUpdateMatchmakingStats {
+	optional bytes msg_body = 1;
 }
 
