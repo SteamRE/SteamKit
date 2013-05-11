@@ -1573,6 +1573,7 @@ message CMsgClientUCMPublishedFileSubscribed {
 	optional uint32 app_id = 2;
 	optional fixed64 file_hcontent = 3;
 	optional uint32 file_size = 4;
+	optional uint32 rtime_subscribed = 5;
 }
 
 message CMsgClientUCMPublishedFileUnsubscribed {
@@ -1806,6 +1807,14 @@ message CMsgClientActivateOEMLicense {
 	optional string mainboard_manufacturer = 4;
 	optional string mainboard_product = 5;
 	optional string mainboard_serialnumber = 6;
+}
+
+message CMsgClientRegisterOEMMachine {
+	optional bytes oem_register_file = 1;
+}
+
+message CMsgClientRegisterOEMMachineResponse {
+	optional uint32 eresult = 1;
 }
 
 message CMsgClientPurchaseWithMachineID {
