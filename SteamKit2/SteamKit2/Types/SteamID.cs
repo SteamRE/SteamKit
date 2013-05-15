@@ -219,8 +219,10 @@ namespace SteamKit2
             if ( !m.Success )
                 return false;
 
-            uint accId = uint.Parse( m.Groups[ "accountid" ].Value );
-            uint authServer = uint.Parse( m.Groups[ "authserver" ].Value );
+            uint accId, authServer;
+            if ( !uint.TryParse( m.Groups[ "accountid" ].Value, out accId ) || 
+                 !uint.TryParse( m.Groups[ "authserver" ].Value, out authServer ) )
+                return false;
 
             this.AccountUniverse = eUniverse;
             this.AccountInstance = 1;
