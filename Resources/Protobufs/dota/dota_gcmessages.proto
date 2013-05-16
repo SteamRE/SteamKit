@@ -2632,6 +2632,12 @@ message CMsgPassportDataResponse {
 	optional uint32 west_qualifiers_predict_end_time = 8;
 	optional uint32 allstar_match_end_time = 9;
 	optional .CMsgDOTAPassportVote league_guesses = 6;
+	optional uint32 east_qualifiers_winner_team_id = 10;
+	optional uint32 east_qualifiers_runner_up_team_id = 11;
+	optional uint32 west_qualifiers_winner_team_id = 12;
+	optional uint32 west_qualifiers_runner_up_team_id = 13;
+	optional uint32 passports_bought = 14;
+	optional uint32 original_purchaser_id = 15;
 }
 
 message CMsgGCToGCGetLeagueAdmin {
