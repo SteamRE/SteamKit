@@ -653,6 +653,7 @@ message CMsgMvMVictoryInfo {
 message CGCMsgTFHelloResponse {
 	optional uint32 version_check = 1;
 	repeated uint64 version_checksum = 2;
+	optional uint32 version_verbose = 3;
 }
 
 message CGCMsgTFSync {
@@ -661,6 +662,12 @@ message CGCMsgTFSync {
 	optional uint32 version_check_ex = 3;
 	optional uint32 version_check_ex2 = 4;
 	optional bytes version_checksum_ex = 5;
+}
+
+message CGCMsgTFSyncEx {
+	optional string version_checksum = 1;
+	optional bytes version_checksum_ex = 2;
+	optional uint32 version_check = 3;
 }
 
 message CMsgMvMVictory {
