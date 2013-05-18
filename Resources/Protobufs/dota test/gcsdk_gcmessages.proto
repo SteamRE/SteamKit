@@ -13,7 +13,6 @@ message CMsgSOIDOwner {
 }
 
 message CMsgSOSingleObject {
-	optional fixed64 owner_steamid = 1;
 	optional int32 type_id = 2;
 	optional bytes object_data = 3;
 	optional fixed64 version = 4;
@@ -28,7 +27,6 @@ message CMsgSOMultipleObjects {
 		optional bytes object_data = 2;
 	}
 
-	optional fixed64 owner_steamid = 1;
 	repeated .CMsgSOMultipleObjects.SingleObject objects_modified = 2;
 	optional fixed64 version = 3;
 	repeated .CMsgSOMultipleObjects.SingleObject objects_added = 4;
@@ -42,25 +40,21 @@ message CMsgSOCacheSubscribed {
 		repeated bytes object_data = 2;
 	}
 
-	optional fixed64 owner_steamid = 1;
 	repeated .CMsgSOCacheSubscribed.SubscribedType objects = 2;
 	optional fixed64 version = 3;
 	optional .CMsgSOIDOwner owner_soid = 4;
 }
 
 message CMsgSOCacheUnsubscribed {
-	optional fixed64 owner_steamid = 1;
 	optional .CMsgSOIDOwner owner_soid = 2;
 }
 
 message CMsgSOCacheSubscriptionCheck {
-	optional fixed64 owner_steamid = 1;
 	optional fixed64 version = 2;
 	optional .CMsgSOIDOwner owner_soid = 3;
 }
 
 message CMsgSOCacheSubscriptionRefresh {
-	optional fixed64 owner_steamid = 1;
 	optional .CMsgSOIDOwner owner_soid = 2;
 }
 
@@ -129,9 +123,8 @@ message CMsgGCRequestSessionIPResponse {
 }
 
 message CMsgSOCacheHaveVersion {
-	optional fixed64 soid = 1;
-	optional int32 type_id = 2;
-	optional fixed64 version = 3;
+	optional .CMsgSOIDOwner soid = 1;
+	optional fixed64 version = 2;
 }
 
 message CMsgClientHello {
@@ -139,18 +132,11 @@ message CMsgClientHello {
 	repeated .CMsgSOCacheHaveVersion socache_have_versions = 2;
 }
 
-message CMsgServerHello {
-	optional uint32 version = 1;
-	repeated .CMsgSOCacheHaveVersion socache_have_versions = 2;
-}
-
 message CMsgClientWelcome {
 	optional uint32 version = 1;
 	optional bytes game_data = 2;
-}
-
-message CMsgServerWelcome {
-	optional uint32 version = 1;
+	repeated .CMsgSOCacheSubscribed outofdate_subscribed_caches = 3;
+	repeated .CMsgSOCacheSubscriptionCheck uptodate_subscribed_caches = 4;
 }
 
 message CMsgConnectionStatus {

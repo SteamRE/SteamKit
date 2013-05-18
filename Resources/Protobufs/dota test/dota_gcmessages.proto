@@ -227,6 +227,10 @@ enum EDOTAGCMsg {
 	k_EMsgGCRequestLeaguePrizePool = 7258;
 	k_EMsgGCRequestLeaguePrizePoolResponse = 7259;
 	k_EMsgGCToGCUpdateMatchmakingStats = 7260;
+	k_EMsgGCToGCUpdateOpenGuildPartyRequest = 7261;
+	k_EMsgGCToGCUpdateOpenGuildPartyResponse = 7262;
+	k_EMsgGCToGCDestroyOpenGuildPartyRequest = 7263;
+	k_EMsgGCToGCDestroyOpenGuildPartyResponse = 7264;
 	k_EMsgGCDev_GrantWarKill = 8001;
 }
 
@@ -475,6 +479,7 @@ message CSODOTAParty {
 	optional uint32 matchmaking_max_range_minutes = 26;
 	optional uint32 matchlanguages = 27;
 	repeated .CSODOTAPartyMember members = 29;
+	optional uint32 open_guild_id = 30;
 }
 
 message CSODOTAPartyInternal {
@@ -1822,6 +1827,24 @@ message CMsgDOTAGuildUpdateDetailsResponse {
 	optional .CMsgDOTAGuildUpdateDetailsResponse.EResult result = 1 [default = SUCCESS];
 }
 
+message CMsgDOTAGCToGCUpdateOpenGuildPartyRequest {
+	optional uint64 party_id = 1;
+	optional uint32 guild_id = 2;
+	repeated uint32 member_account_ids = 3;
+}
+
+message CMsgDOTAGCToGCUpdateOpenGuildPartyResponse {
+	optional bool maintain_association = 1;
+}
+
+message CMsgDOTAGCToGCDestroyOpenGuildPartyRequest {
+	optional uint64 party_id = 1;
+	optional uint32 guild_id = 2;
+}
+
+message CMsgDOTAGCToGCDestroyOpenGuildPartyResponse {
+}
+
 message CMsgDOTARequestGuildData {
 }
 
@@ -2632,6 +2655,12 @@ message CMsgPassportDataResponse {
 	optional uint32 west_qualifiers_predict_end_time = 8;
 	optional uint32 allstar_match_end_time = 9;
 	optional .CMsgDOTAPassportVote league_guesses = 6;
+	optional uint32 east_qualifiers_winner_team_id = 10;
+	optional uint32 east_qualifiers_runner_up_team_id = 11;
+	optional uint32 west_qualifiers_winner_team_id = 12;
+	optional uint32 west_qualifiers_runner_up_team_id = 13;
+	optional uint32 passports_bought = 14;
+	optional uint32 original_purchaser_id = 15;
 }
 
 message CMsgGCToGCGetLeagueAdmin {
