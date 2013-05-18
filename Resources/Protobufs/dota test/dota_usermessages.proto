@@ -48,6 +48,7 @@ enum EDotaUserMessages {
 	DOTA_UM_GamerulesStateChanged = 106;
 	DOTA_UM_ShowSurvey = 107;
 	DOTA_UM_TutorialFade = 108;
+	DOTA_UM_AddQuestLogEntry = 109;
 }
 
 enum DOTA_CHAT_MESSAGE {
@@ -551,5 +552,12 @@ message CDOTAUserMsg_TutorialPingMinimap {
 
 message CDOTA_UM_GamerulesStateChanged {
 	optional uint32 state = 1;
+}
+
+message CDOTAUserMsg_AddQuestLogEntry {
+	optional string npc_name = 1;
+	optional string npc_dialog = 2;
+	optional bool quest = 3;
+	optional int32 quest_type = 4;
 }
 

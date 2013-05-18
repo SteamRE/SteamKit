@@ -227,6 +227,7 @@ enum EDOTAGCMsg {
 	k_EMsgGCRequestLeaguePrizePool = 7258;
 	k_EMsgGCRequestLeaguePrizePoolResponse = 7259;
 	k_EMsgGCToGCUpdateMatchmakingStats = 7260;
+	k_EMsgGCToGCDirtyTeamAdminSDO = 7271;
 	k_EMsgGCDev_GrantWarKill = 8001;
 }
 
@@ -2581,6 +2582,10 @@ message CMsgGCToGCDirtyTeamSDO {
 }
 
 message CMsgGCToGCDirtyTeamMemberSDO {
+	optional uint32 account_id = 1;
+}
+
+message CMsgGCToGCDirtyTeamAdminSDO {
 	optional uint32 account_id = 1;
 }
 

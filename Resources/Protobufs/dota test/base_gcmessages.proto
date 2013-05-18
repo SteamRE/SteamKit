@@ -208,7 +208,6 @@ message CSOEconItem {
 	optional bool in_use = 14 [default = false];
 	optional uint32 style = 15 [default = 0];
 	optional uint64 original_id = 16 [default = 0];
-	optional bool contains_equipped_state = 17;
 	repeated .CSOEconItemEquipped equipped_state = 18;
 }
 
@@ -399,6 +398,10 @@ message CSOEconItemTournamentPassport {
 	optional uint32 account_id = 1;
 	optional uint32 league_id = 2;
 	optional uint64 item_id = 3;
+	optional uint32 original_purchaser_id = 4;
+	optional uint32 passports_bought = 5;
+	optional uint32 version = 6;
+	optional uint32 def_index = 7;
 }
 
 message CSOEconItemHalloweenEgg {
