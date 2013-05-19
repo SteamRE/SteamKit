@@ -36,12 +36,7 @@ namespace SteamKit2
             public string OtherName { get; private set; }
 
 
-#if STATIC_CALLBACKS
-            internal TradeProposedCallback( SteamClient client, CMsgTrading_InitiateTradeRequest msg )
-                : base( client )
-#else
             internal TradeProposedCallback( CMsgTrading_InitiateTradeRequest msg )
-#endif
             {
                 this.TradeID = msg.trade_request_id;
 
@@ -73,12 +68,7 @@ namespace SteamKit2
             public SteamID OtherClient { get; private set; }
 
 
-#if STATIC_CALLBACKS
-            internal TradeResultCallback( SteamClient client, CMsgTrading_InitiateTradeResponse msg )
-                : base( client )
-#else
             internal TradeResultCallback( CMsgTrading_InitiateTradeResponse msg )
-#endif
             {
                 this.TradeID = msg.trade_request_id;
 
@@ -100,12 +90,7 @@ namespace SteamKit2
             public SteamID OtherClient { get; private set; }
 
 
-#if STATIC_CALLBACKS
-            internal SessionStartCallback( SteamClient client, CMsgTrading_StartSession msg )
-                : base( client )
-#else
             internal SessionStartCallback( CMsgTrading_StartSession msg )
-#endif
             {
                 this.OtherClient = msg.other_steamid;
             }

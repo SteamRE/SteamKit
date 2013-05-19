@@ -56,13 +56,8 @@ namespace SteamKit2
             {
                 var msg = new ClientMsgProtobuf<CMsgGCClient>( packetMsg );
 
-#if STATIC_CALLBACKS
-                var callback = new MessageCallback( Client, msg.Body );
-                SteamClient.PostCallback( callback );
-#else
                 var callback = new MessageCallback( msg.Body );
                 this.Client.PostCallback( callback );
-#endif
             }
         }
     }

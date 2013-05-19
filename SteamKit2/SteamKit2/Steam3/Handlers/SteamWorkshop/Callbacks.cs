@@ -104,12 +104,7 @@ namespace SteamKit2
             public string URL { get; private set; }
 
 
-#if STATIC_CALLBACKS
-            internal PublishedFileDetailsCallback( SteamClient client, CMsgClientUCMGetPublishedFileDetailsResponse msg )
-                : base( client )
-#else
             internal PublishedFileDetailsCallback( CMsgClientUCMGetPublishedFileDetailsResponse msg )
-#endif
             {
                 this.Result = ( EResult )msg.eresult;
 
@@ -209,12 +204,7 @@ namespace SteamKit2
             public int TotalResults { get; private set; }
 
 
-#if STATIC_CALLBACKS
-            internal PublishedFilesCallback( SteamClient client, CMsgCREEnumeratePublishedFilesResponse msg )
-                : base( client )
-#else
             internal PublishedFilesCallback( CMsgCREEnumeratePublishedFilesResponse msg )
-#endif
             {
                 this.Result = ( EResult )msg.eresult;
 
@@ -267,12 +257,7 @@ namespace SteamKit2
             public int TotalResults { get; private set; }
 
 
-#if STATIC_CALLBACKS
-            internal UserPublishedFilesCallback( SteamClient client, CMsgClientUCMEnumerateUserPublishedFilesResponse msg )
-                : base( client )
-#else
             internal UserPublishedFilesCallback( CMsgClientUCMEnumerateUserPublishedFilesResponse msg )
-#endif
             {
                 this.Result = ( EResult )msg.eresult;
 
@@ -332,12 +317,7 @@ namespace SteamKit2
             public int TotalResults { get; private set; }
 
 
-#if STATIC_CALLBACKS
-            internal UserSubscribedFilesCallback( SteamClient client, CMsgClientUCMEnumerateUserSubscribedFilesResponse msg )
-                : base( client )
-#else
             internal UserSubscribedFilesCallback( CMsgClientUCMEnumerateUserSubscribedFilesResponse msg )
-#endif
             {
                 this.Result = ( EResult )msg.eresult;
 
@@ -397,12 +377,7 @@ namespace SteamKit2
             public int TotalResults { get; private set; }
 
 
-#if STATIC_CALLBACKS
-            internal UserActionPublishedFilesCallback( SteamClient client, CMsgClientUCMEnumeratePublishedFilesByUserActionResponse msg )
-                : base( client )
-#else
             internal UserActionPublishedFilesCallback( CMsgClientUCMEnumeratePublishedFilesByUserActionResponse msg )
-#endif
             {
                 this.Result = ( EResult )msg.eresult;
 

@@ -145,25 +145,15 @@ namespace SteamKit2
         {
             var statusReply = new ClientMsgProtobuf<CMsgGSStatusReply>( packetMsg );
 
-#if STATIC_CALLBACKS
-            var callback = new StatusReplyCallback( Client, statusReply.Body );
-            SteamClient.PostCallback( callback );
-#else
             var callback = new StatusReplyCallback( statusReply.Body );
             this.Client.PostCallback( callback );
-#endif
         }
         void HandleAuthComplete( IPacketMsg packetMsg )
         {
             var authComplete = new ClientMsgProtobuf<CMsgClientTicketAuthComplete>( packetMsg );
 
-#if STATIC_CALLBACKS
-            var callback = new TicketAuthCallback( Client, authComplete.Body );
-            SteamClient.PostCallback( callback );
-#else
             var callback = new TicketAuthCallback( authComplete.Body );
             this.Client.PostCallback( callback );
-#endif
         }
         #endregion
     }

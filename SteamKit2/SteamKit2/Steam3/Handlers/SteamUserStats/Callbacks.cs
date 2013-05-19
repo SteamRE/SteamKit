@@ -26,12 +26,7 @@ namespace SteamKit2
             public uint NumPlayers { get; private set; }
 
 
-#if STATIC_CALLBACKS
-            internal NumberOfPlayersCallback( SteamClient client, MsgClientGetNumberOfCurrentPlayersResponse resp )
-                : base( client )
-#else
             internal NumberOfPlayersCallback( MsgClientGetNumberOfCurrentPlayersResponse resp )
-#endif
             {
                 this.Result = resp.Result;
                 this.NumPlayers = resp.NumPlayers;

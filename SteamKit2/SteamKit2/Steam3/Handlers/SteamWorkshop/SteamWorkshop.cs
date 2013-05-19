@@ -266,71 +266,41 @@ namespace SteamKit2
         {
             var response = new ClientMsgProtobuf<CMsgCREEnumeratePublishedFilesResponse>( packetMsg );
 
-#if STATIC_CALLBACKS
-            var innerCallback = new PublishedFilesCallback( Client, response.Body );
-            var callback = new SteamClient.JobCallback<PublishedFilesCallback>( Client, response.TargetJobID, innerCallback );
-            SteamClient.PostCallback( callback );
-#else
             var innerCallback = new PublishedFilesCallback( response.Body );
             var callback = new SteamClient.JobCallback<PublishedFilesCallback>( response.TargetJobID, innerCallback );
             Client.PostCallback( callback );
-#endif
         }
         void HandleEnumUserPublishedFiles( IPacketMsg packetMsg )
         {
             var response = new ClientMsgProtobuf<CMsgClientUCMEnumerateUserPublishedFilesResponse>( packetMsg );
 
-#if STATIC_CALLBACKS
-            var innerCallback = new UserPublishedFilesCallback( Client, response.Body );
-            var callback = new SteamClient.JobCallback<UserPublishedFilesCallback>( Client, response.TargetJobID, innerCallback );
-            SteamClient.PostCallback( callback );
-#else
             var innerCallback = new UserPublishedFilesCallback( response.Body );
             var callback = new SteamClient.JobCallback<UserPublishedFilesCallback>( response.TargetJobID, innerCallback );
             Client.PostCallback( callback );
-#endif
         }
         void HandleEnumUserSubscribedFiles( IPacketMsg packetMsg )
         {
             var response = new ClientMsgProtobuf<CMsgClientUCMEnumerateUserSubscribedFilesResponse>( packetMsg );
 
-#if STATIC_CALLBACKS
-            var innerCallback = new UserSubscribedFilesCallback( Client, response.Body );
-            var callback = new SteamClient.JobCallback<UserSubscribedFilesCallback>( Client, response.TargetJobID, innerCallback );
-            SteamClient.PostCallback( callback );
-#else
             var innerCallback = new UserSubscribedFilesCallback( response.Body );
             var callback = new SteamClient.JobCallback<UserSubscribedFilesCallback>( response.TargetJobID, innerCallback );
             Client.PostCallback( callback );
-#endif
         }
         void HandleEnumPublishedFilesByAction( IPacketMsg packetMsg )
         {
             var response = new ClientMsgProtobuf<CMsgClientUCMEnumeratePublishedFilesByUserActionResponse>( packetMsg );
 
-#if STATIC_CALLBACKS
-            var innerCallback = new UserActionPublishedFilesCallback( Client, response.Body );
-            var callback = new SteamClient.JobCallback<UserActionPublishedFilesCallback>( Client, response.TargetJobID, innerCallback );
-            SteamClient.PostCallback( callback );
-#else
             var innerCallback = new UserActionPublishedFilesCallback( response.Body );
             var callback = new SteamClient.JobCallback<UserActionPublishedFilesCallback>( response.TargetJobID, innerCallback );
             Client.PostCallback( callback );
-#endif
         }
         void HandlePublishedFileDetails( IPacketMsg packetMsg )
         {
             var details = new ClientMsgProtobuf<CMsgClientUCMGetPublishedFileDetailsResponse>( packetMsg );
 
-#if STATIC_CALLBACKS
-            var innerCallback = new PublishedFileDetailsCallback( Client, details.Body );
-            var callback = new SteamClient.JobCallback<PublishedFileDetailsCallback>( Client, details.TargetJobID, innerCallback );
-            SteamClient.PostCallback( callback );
-#else
             var innerCallback = new PublishedFileDetailsCallback( details.Body );
             var callback = new SteamClient.JobCallback<PublishedFileDetailsCallback>( packetMsg.TargetJobID, innerCallback );
             Client.PostCallback( callback );
-#endif
         }
         #endregion
 

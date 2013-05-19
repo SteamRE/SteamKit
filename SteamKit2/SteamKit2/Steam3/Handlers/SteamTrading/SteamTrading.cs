@@ -91,37 +91,22 @@ namespace SteamKit2
         {
             var tradeProp = new ClientMsgProtobuf<CMsgTrading_InitiateTradeRequest>( packetMsg );
 
-#if STATIC_CALLBACKS
-            var callback = new TradeProposedCallback( Client, tradeProp.Body );
-            SteamClient.PostCallback( callback );
-#else
             var callback = new TradeProposedCallback( tradeProp.Body );
             Client.PostCallback( callback );
-#endif
         }
         void HandleTradeResult( IPacketMsg packetMsg )
         {
             var tradeResult = new ClientMsgProtobuf<CMsgTrading_InitiateTradeResponse>( packetMsg );
 
-#if STATIC_CALLBACKS
-            var callback = new TradeResultCallback( Client, tradeResult.Body );
-            SteamClient.PostCallback( callback );
-#else
             var callback = new TradeResultCallback( tradeResult.Body );
             Client.PostCallback( callback );
-#endif
         }
         void HandleStartSession( IPacketMsg packetMsg )
         {
             var startSess = new ClientMsgProtobuf<CMsgTrading_StartSession>( packetMsg );
 
-#if STATIC_CALLBACKS
-            var callback = new SessionStartCallback( Client, startSess.Body );
-            SteamClient.PostCallback( callback );
-#else
             var callback = new SessionStartCallback( startSess.Body );
             Client.PostCallback( callback );
-#endif
         }
         #endregion
 

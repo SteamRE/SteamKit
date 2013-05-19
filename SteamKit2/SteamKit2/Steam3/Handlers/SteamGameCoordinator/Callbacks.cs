@@ -42,12 +42,7 @@ namespace SteamKit2
             public byte[] Payload { get; private set; }
 
 
-#if STATIC_CALLBACKS
-            internal MessageCallback( SteamClient client, CMsgGCClient gcMsg )
-                : base( client )
-#else
             internal MessageCallback( CMsgGCClient gcMsg )
-#endif
             {
                 this.eMsg = gcMsg.msgtype;
                 this.AppID = gcMsg.appid;

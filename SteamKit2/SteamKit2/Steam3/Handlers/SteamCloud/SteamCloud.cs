@@ -59,15 +59,9 @@ namespace SteamKit2
         {
             var infoResponse = new ClientMsgProtobuf<CMsgClientUFSGetUGCDetailsResponse>( packetMsg );
 
-#if STATIC_CALLBACKS
-            var innerCallback = new UGCDetailsCallback( Client, infoResponse.Body );
-            var callback = new SteamClient.JobCallback<UGCDetailsCallback>( Client, infoResponse.TargetJobID, innerCallback );
-            SteamClient.PostCallback( callback );
-#else
             var innerCallback = new UGCDetailsCallback( infoResponse.Body );
             var callback = new SteamClient.JobCallback<UGCDetailsCallback>( infoResponse.TargetJobID, innerCallback );
             this.Client.PostCallback( callback );
-#endif
         }
         #endregion
 

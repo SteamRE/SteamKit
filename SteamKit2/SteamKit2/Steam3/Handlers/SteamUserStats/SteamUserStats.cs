@@ -53,15 +53,10 @@ namespace SteamKit2
         void HandleNumberOfPlayersResponse( IPacketMsg packetMsg )
         {
             var msg = new ClientMsg<MsgClientGetNumberOfCurrentPlayersResponse>( packetMsg );
-#if STATIC_CALLBACKS
-            var innerCallback = new NumberOfPlayersCallback( Client, msg.Body );
-            var callback = new SteamClient.JobCallback<NumberOfPlayersCallback>( Client, msg.Header.TargetJobID, innerCallback );
-            SteamClient.PostCallback( callback );
-#else
+
             var innerCallback = new NumberOfPlayersCallback( msg.Body );
             var callback = new SteamClient.JobCallback<NumberOfPlayersCallback>( msg.Header.TargetJobID, innerCallback );
             Client.PostCallback( callback );
-#endif
         }
         #endregion
     }

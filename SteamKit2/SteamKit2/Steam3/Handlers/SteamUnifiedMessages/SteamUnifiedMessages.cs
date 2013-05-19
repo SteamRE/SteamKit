@@ -65,17 +65,10 @@ namespace SteamKit2
         {
             var response = new ClientMsgProtobuf<CMsgClientServiceMethodResponse>( packetMsg );
 
-#if STATIC_CALLBACKS
-            var responseCallback = new ServiceMethodResponse( Client, ( EResult )response.ProtoHeader.eresult, response.Body );
-            var jobCallback = new SteamClient.JobCallback<ServiceMethodResponse>( Client, response.TargetJobID, responseCallback );
-
-            SteamClient.PostCallback( jobCallback );
-#else
             var responseCallback = new ServiceMethodResponse( ( EResult )response.ProtoHeader.eresult, response.Body );
             var jobCallback = new SteamClient.JobCallback<ServiceMethodResponse>( response.TargetJobID, responseCallback );
 
             Client.PostCallback( jobCallback );
-#endif
 
         }
 

@@ -23,12 +23,7 @@ namespace SteamKit2
             public bool IsSecure { get; private set; }
 
 
-#if STATIC_CALLBACKS
-            internal StatusReplyCallback( SteamClient client, CMsgGSStatusReply reply )
-                : base( client )
-#else
             internal StatusReplyCallback( CMsgGSStatusReply reply )
-#endif
             {
                 IsSecure = reply.is_secure;
             }
@@ -68,12 +63,7 @@ namespace SteamKit2
             public uint TicketSequence { get; private set; }
 
 
-#if STATIC_CALLBACKS
-            internal TicketAuthCallback( SteamClient client, CMsgClientTicketAuthComplete tickAuth )
-                : base( client )
-#else
             internal TicketAuthCallback( CMsgClientTicketAuthComplete tickAuth )
-#endif
             {
                 SteamID = tickAuth.steam_id;
                 GameID = tickAuth.game_id;
