@@ -129,12 +129,7 @@ namespace SteamKit2
             public uint PublishedSessionID { get; private set; }
 
 
-#if STATIC_CALLBACKS
-            internal PersonaStateCallback( SteamClient client, CMsgClientPersonaState.Friend friend )
-                : base( client )
-#else
             internal PersonaStateCallback( CMsgClientPersonaState.Friend friend )
-#endif
             {
                 this.StatusFlags = ( EClientPersonaStateFlag )friend.persona_state_flags;
 
@@ -209,12 +204,7 @@ namespace SteamKit2
             public ReadOnlyCollection<Friend> FriendList { get; private set; }
 
 
-#if STATIC_CALLBACKS
-            internal FriendsListCallback( SteamClient client, CMsgClientFriendsList msg )
-                : base( client )
-#else
             internal FriendsListCallback( CMsgClientFriendsList msg )
-#endif
             {
                 this.Incremental = msg.bincremental;
 
@@ -255,12 +245,7 @@ namespace SteamKit2
             public string Message { get; private set; }
 
 
-#if STATIC_CALLBACKS
-            internal FriendMsgCallback( SteamClient client, CMsgClientFriendMsgIncoming msg )
-                : base( client )
-#else
             internal FriendMsgCallback( CMsgClientFriendMsgIncoming msg )
-#endif
             {
                 this.Sender = msg.steamid_from;
                 this.EntryType = ( EChatEntryType )msg.chat_entry_type;
@@ -298,12 +283,7 @@ namespace SteamKit2
             public string PersonaName { get; private set; }
 
 
-#if STATIC_CALLBACKS
-            internal FriendAddedCallback( SteamClient client, CMsgClientAddFriendResponse msg )
-                : base( client )
-#else
             internal FriendAddedCallback( CMsgClientAddFriendResponse msg )
-#endif
             {
                 this.Result = ( EResult )msg.eresult;
 
@@ -356,12 +336,7 @@ namespace SteamKit2
             public EChatRoomEnterResponse EnterResponse { get; private set; }
 
 
-#if STATIC_CALLBACKS
-            internal ChatEnterCallback( SteamClient client, MsgClientChatEnter msg )
-                : base( client )
-#else
             internal ChatEnterCallback( MsgClientChatEnter msg )
-#endif
             {
                 ChatID = msg.SteamIdChat;
                 FriendID = msg.SteamIdFriend;
@@ -402,12 +377,7 @@ namespace SteamKit2
             public string Message { get; private set; }
 
 
-#if STATIC_CALLBACKS
-            internal ChatMsgCallback( SteamClient client, MsgClientChatMsg msg, byte[] payload )
-                : base( client )
-#else
             internal ChatMsgCallback( MsgClientChatMsg msg, byte[] payload )
-#endif
             {
                 this.ChatterID = msg.SteamIdChatter;
                 this.ChatRoomID = msg.SteamIdChatRoom;
@@ -477,12 +447,7 @@ namespace SteamKit2
             public StateChangeDetails StateChangeInfo { get; private set; }
 
 
-#if STATIC_CALLBACKS
-            internal ChatMemberInfoCallback( SteamClient client, MsgClientChatMemberInfo msg, byte[] payload )
-                : base( client )
-#else
             internal ChatMemberInfoCallback( MsgClientChatMemberInfo msg, byte[] payload )
-#endif
             {
                 ChatRoomID = msg.SteamIdChat;
                 Type = msg.Type;
@@ -522,12 +487,7 @@ namespace SteamKit2
             public EChatActionResult Result { get; private set; }
 
 
-#if STATIC_CALLBACKS
-            internal ChatActionResultCallback( SteamClient client, MsgClientChatActionResult result )
-                : base( client )
-#else
             internal ChatActionResultCallback( MsgClientChatActionResult result )
-#endif
             {
                 ChatRoomID = result.SteamIdChat;
                 ChatterID = result.SteamIdUserActedOn;
@@ -576,12 +536,7 @@ namespace SteamKit2
             public GameID GameID { get; private set; }
 
 
-#if STATIC_CALLBACKS
-            internal ChatInviteCallback( SteamClient client, CMsgClientChatInvite invite )
-                : base( client )
-#else
             internal ChatInviteCallback( CMsgClientChatInvite invite )
-#endif
             {
                 this.InvitedID = invite.steam_id_invited;
                 this.ChatRoomID = invite.steam_id_chat;
@@ -608,12 +563,7 @@ namespace SteamKit2
             public EResult Result { get; private set; }
 
 
-#if STATIC_CALLBACKS
-            internal IgnoreFriendCallback( SteamClient client, MsgClientSetIgnoreFriendResponse response )
-                : base( client )
-#else
             internal IgnoreFriendCallback( MsgClientSetIgnoreFriendResponse response )
-#endif
             {
                 this.Result = response.Result;
             }
@@ -673,12 +623,7 @@ namespace SteamKit2
             public TimeSpan RecentPlaytime { get; private set; }
 
 
-#if STATIC_CALLBACKS
-            internal ProfileInfoCallback( SteamClient client, CMsgClientFriendProfileInfoResponse response )
-                : base( client )
-#else
             internal ProfileInfoCallback( CMsgClientFriendProfileInfoResponse response )
-#endif
             {
                 Result = ( EResult )response.eresult;
 

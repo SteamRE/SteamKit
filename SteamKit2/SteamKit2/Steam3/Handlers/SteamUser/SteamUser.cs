@@ -348,37 +348,22 @@ namespace SteamKit2
                 result = loggedOff.Body.Result;
             }
 
-#if STATIC_CALLBACKS
-            SteamClient.PostCallback( new LoggedOffCallback( Client, result ) );
-#else
             this.Client.PostCallback( new LoggedOffCallback( result ) );
-#endif
         }
         void HandleUpdateMachineAuth( IPacketMsg packetMsg )
         {
             var machineAuth = new ClientMsgProtobuf<CMsgClientUpdateMachineAuth>( packetMsg );
 
-#if STATIC_CALLBACKS
-            var innerCallback = new UpdateMachineAuthCallback( Client, machineAuth.Body );
-            var callback = new SteamClient.JobCallback<UpdateMachineAuthCallback>( Client, packetMsg.SourceJobID, innerCallback );
-            SteamClient.PostCallback( callback );
-#else
             var innerCallback = new UpdateMachineAuthCallback( machineAuth.Body );
             var callback = new SteamClient.JobCallback<UpdateMachineAuthCallback>( packetMsg.SourceJobID, innerCallback );
             Client.PostCallback( callback );
-#endif
         }
         void HandleSessionToken( IPacketMsg packetMsg )
         {
             var sessToken = new ClientMsgProtobuf<CMsgClientSessionToken>( packetMsg );
 
-#if STATIC_CALLBACKS
-            var callback = new SessionTokenCallback( Client, sessToken.Body );
-            SteamClient.PostCallback( callback );
-#else
             var callback = new SessionTokenCallback( sessToken.Body );
             this.Client.PostCallback( callback );
-#endif
         }
         void HandleLoginKey( IPacketMsg packetMsg )
         {
@@ -389,13 +374,8 @@ namespace SteamKit2
 
             this.Client.Send( resp );
 
-#if STATIC_CALLBACKS
-            var callback = new LoginKeyCallback( Client, loginKey.Body );
-            SteamClient.PostCallback( callback );
-#else
             var callback = new LoginKeyCallback( loginKey.Body );
             this.Client.PostCallback( callback );
-#endif
         }
         void HandleLogOnResponse( IPacketMsg packetMsg )
         {
@@ -403,50 +383,30 @@ namespace SteamKit2
             {
                 var logonResp = new ClientMsgProtobuf<CMsgClientLogonResponse>( packetMsg );
 
-#if STATIC_CALLBACKS
-                var callback = new LoggedOnCallback( Client, logonResp.Body );
-                SteamClient.PostCallback( callback );
-#else
                 var callback = new LoggedOnCallback( logonResp.Body );
                 this.Client.PostCallback( callback );
-#endif
             }
             else
             {
                 var logonResp = new ClientMsg<MsgClientLogOnResponse>( packetMsg );
 
-#if STATIC_CALLBACKS
-                var callback = new LoggedOnCallback( Client, logonResp.Body );
-                SteamClient.PostCallback( callback );
-#else
                 var callback = new LoggedOnCallback( logonResp.Body );
                 this.Client.PostCallback( callback );
-#endif
             }
         }
         void HandleAccountInfo( IPacketMsg packetMsg )
         {
             var accInfo = new ClientMsgProtobuf<CMsgClientAccountInfo>( packetMsg );
 
-#if STATIC_CALLBACKS
-            var callback = new AccountInfoCallback( Client, accInfo.Body );
-            SteamClient.PostCallback( callback );
-#else
             var callback = new AccountInfoCallback( accInfo.Body );
             this.Client.PostCallback( callback );
-#endif
         }
         void HandleWalletInfo( IPacketMsg packetMsg )
         {
             var walletInfo = new ClientMsgProtobuf<CMsgClientWalletInfoUpdate>( packetMsg );
 
-#if STATIC_CALLBACKS
-            var callback = new WalletInfoCallback( Client, walletInfo.Body );
-            SteamClient.PostCallback( callback );
-#else
             var callback = new WalletInfoCallback( walletInfo.Body );
             this.Client.PostCallback( callback );
-#endif
         }
         #endregion
     }

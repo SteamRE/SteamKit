@@ -46,12 +46,7 @@ namespace SteamKit2
             }
 
 
-#if STATIC_CALLBACKS
-            internal ServiceMethodResponse( SteamClient client, EResult result, CMsgClientServiceMethodResponse resp )
-                : base( client )
-#else
             internal ServiceMethodResponse( EResult result, CMsgClientServiceMethodResponse resp )
-#endif
             {
                 Result = result;
                 ResponseRaw = resp.serialized_method_response;

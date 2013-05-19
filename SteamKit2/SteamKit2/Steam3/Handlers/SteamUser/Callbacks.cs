@@ -96,12 +96,7 @@ namespace SteamKit2
             public string IPCountryCode { get; private set; }
 
 
-#if STATIC_CALLBACKS
-            internal LoggedOnCallback( SteamClient client, CMsgClientLogonResponse resp )
-                : base( client )
-#else
             internal LoggedOnCallback( CMsgClientLogonResponse resp )
-#endif
             {
                 this.Result = ( EResult )resp.eresult;
                 this.ExtendedResult = ( EResult )resp.eresult_extended;
@@ -133,12 +128,7 @@ namespace SteamKit2
             }
 
 
-#if STATIC_CALLBACKS
-            internal LoggedOnCallback( SteamClient client, MsgClientLogOnResponse resp )
-                : base( client )
-#else
             internal LoggedOnCallback( MsgClientLogOnResponse resp )
-#endif
             {
                 this.Result = resp.Result;
 
@@ -165,12 +155,7 @@ namespace SteamKit2
             public EResult Result { get; private set; }
 
 
-#if STATIC_CALLBACKS
-            internal LoggedOffCallback( SteamClient client, EResult result )
-                : base( client )
-#else
             internal LoggedOffCallback( EResult result )
-#endif
             {
                 this.Result = result;
             }
@@ -192,12 +177,8 @@ namespace SteamKit2
             /// <value>The unique ID.</value>
             public uint UniqueID { get; private set; }
 
-#if STATIC_CALLBACKS
-            internal LoginKeyCallback( SteamClient client, CMsgClientNewLoginKey logKey )
-                : base( client )
-#else
+
             internal LoginKeyCallback( CMsgClientNewLoginKey logKey )
-#endif
             {
                 this.LoginKey = logKey.login_key;
                 this.UniqueID = logKey.unique_id;
@@ -214,12 +195,8 @@ namespace SteamKit2
             /// </summary>
             public ulong SessionToken { get; private set; }
 
-#if STATIC_CALLBACKS
-            internal SessionTokenCallback( SteamClient client, CMsgClientSessionToken msg )
-                : base( client )
-#else
+
             internal SessionTokenCallback( CMsgClientSessionToken msg )
-#endif
             {
                 this.SessionToken = msg.token;
             }
@@ -275,12 +252,8 @@ namespace SteamKit2
             /// </summary>
             public string FacebookName { get; private set ;}
 
-#if STATIC_CALLBACKS
-            internal AccountInfoCallback( SteamClient client, CMsgClientAccountInfo msg )
-                : base( client )
-#else
+
             internal AccountInfoCallback( CMsgClientAccountInfo msg )
-#endif
             {
                 PersonaName = msg.persona_name;
                 Country = msg.ip_country;
@@ -321,12 +294,7 @@ namespace SteamKit2
             public int Balance { get; private set; }
 
 
-#if STATIC_CALLBACKS
-            internal WalletInfoCallback( SteamClient client, CMsgClientWalletInfoUpdate wallet )
-                : base( client )
-#else
             internal WalletInfoCallback( CMsgClientWalletInfoUpdate wallet )
-#endif
             {
                 HasWallet = wallet.has_wallet;
 
@@ -403,12 +371,7 @@ namespace SteamKit2
             public OTPDetails OneTimePassword { get; private set; }
 
 
-#if STATIC_CALLBACKS
-            internal UpdateMachineAuthCallback( SteamClient client, CMsgClientUpdateMachineAuth msg )
-                : base( client )
-#else
             internal UpdateMachineAuthCallback( CMsgClientUpdateMachineAuth msg )
-#endif
             {
                 Data = msg.bytes;
 

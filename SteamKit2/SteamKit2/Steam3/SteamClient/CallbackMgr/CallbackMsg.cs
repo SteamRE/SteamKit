@@ -13,29 +13,12 @@ namespace SteamKit2
     public abstract class CallbackMsg
     {
 
-#if STATIC_CALLBACKS
-        /// <summary>
-        /// Gets the underlying <see cref="SteamClient"/> instance that posted this callback.
-        /// </summary>
-        public SteamClient Client { get; private set; }
-
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CallbackMsg"/> class.
-        /// </summary>
-        /// <param name="client">The <see cref="SteamClient"/> that is posting this callback.</param>
-        protected CallbackMsg( SteamClient client )
-        {
-            this.Client = client;
-        }
-#else
         /// <summary>
         /// Initializes a new instance of the <see cref="CallbackMsg"/> class.
         /// </summary>
         protected CallbackMsg()
         {
         }
-#endif
 
 
         /// <summary>

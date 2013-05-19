@@ -44,12 +44,7 @@ namespace SteamKit2
             public uint FileSize { get; private set; }
 
 
-#if STATIC_CALLBACKS
-            internal UGCDetailsCallback( SteamClient client, CMsgClientUFSGetUGCDetailsResponse msg )
-                : base( client )
-#else
             internal UGCDetailsCallback( CMsgClientUFSGetUGCDetailsResponse msg )
-#endif
             {
                 Result = ( EResult )msg.eresult;
 

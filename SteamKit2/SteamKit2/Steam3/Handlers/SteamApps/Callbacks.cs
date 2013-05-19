@@ -125,12 +125,7 @@ namespace SteamKit2
             public ReadOnlyCollection<License> LicenseList { get; private set; }
 
 
-#if STATIC_CALLBACKS
-            internal LicenseListCallback( SteamClient client, CMsgClientLicenseList msg )
-                : base( client )
-#else
             internal LicenseListCallback( CMsgClientLicenseList msg )
-#endif
             {
                 this.Result = ( EResult )msg.eresult;
 
@@ -162,12 +157,7 @@ namespace SteamKit2
             public byte[] Ticket { get; private set; }
 
 
-#if STATIC_CALLBACKS
-            internal AppOwnershipTicketCallback( SteamClient client, CMsgClientGetAppOwnershipTicketResponse msg )
-                : base( client )
-#else
             internal AppOwnershipTicketCallback( CMsgClientGetAppOwnershipTicketResponse msg )
-#endif
             {
                 this.Result = ( EResult )msg.eresult;
                 this.AppID = msg.app_id;
@@ -261,12 +251,7 @@ namespace SteamKit2
             public uint AppsPending { get; private set; }
 
 
-#if STATIC_CALLBACKS
-            internal AppInfoCallback( SteamClient client, CMsgClientAppInfoResponse msg )
-                : base( client )
-#else
             internal AppInfoCallback( CMsgClientAppInfoResponse msg )
-#endif
             {
                 var list = new List<App>();
 
@@ -366,12 +351,8 @@ namespace SteamKit2
             /// </summary>
             public uint PackagesPending { get; private set; }
 
-#if STATIC_CALLBACKS
-            internal PackageInfoCallback( SteamClient client, CMsgClientPackageInfoResponse msg )
-                : base( client )
-#else
+
             internal PackageInfoCallback( CMsgClientPackageInfoResponse msg )
-#endif
             {
                 var packages = new List<Package>();
 
@@ -409,12 +390,7 @@ namespace SteamKit2
             public bool ForceFullUpdate { get; private set; }
 
 
-#if STATIC_CALLBACKS
-            internal AppChangesCallback( SteamClient client, CMsgClientAppInfoChanges msg )
-                : base( client )
-#else
             internal AppChangesCallback( CMsgClientAppInfoChanges msg )
-#endif
             {
                 AppIDs = new ReadOnlyCollection<uint>( msg.appIDs );
                 CurrentChangeNumber = msg.current_change_number;
@@ -442,12 +418,8 @@ namespace SteamKit2
             /// </summary>
             public byte[] DepotKey { get; private set; }
 
-#if STATIC_CALLBACKS
-            internal DepotKeyCallback( SteamClient client, CMsgClientGetDepotDecryptionKeyResponse msg )
-                : base( client )
-#else
+
             internal DepotKeyCallback( CMsgClientGetDepotDecryptionKeyResponse msg )
-#endif
             {
                 Result = ( EResult )msg.eresult;
                 DepotID = msg.depot_id;
@@ -470,12 +442,7 @@ namespace SteamKit2
             public ReadOnlyCollection<byte[]> Tokens { get; private set; }
 
 
-#if STATIC_CALLBACKS
-            internal GameConnectTokensCallback( SteamClient client, CMsgClientGameConnectTokens msg )
-                : base( client )
-#else
             internal GameConnectTokensCallback( CMsgClientGameConnectTokens msg )
-#endif
             {
                 TokensToKeep = msg.max_tokens_to_keep;
                 Tokens = new ReadOnlyCollection<byte[]>( msg.tokens );
@@ -493,12 +460,7 @@ namespace SteamKit2
             public ReadOnlyCollection<uint> BannedApps { get; private set; }
 
 
-#if STATIC_CALLBACKS
-            internal VACStatusCallback( SteamClient client, MsgClientVACBanStatus msg, byte[] payload )
-                : base( client )
-#else
             internal VACStatusCallback( MsgClientVACBanStatus msg, byte[] payload )
-#endif
             {
                 var tempList = new List<uint>();
 
@@ -536,12 +498,8 @@ namespace SteamKit2
             /// </summary>
             public Dictionary<uint, ulong> AppTokens { get; private set; }
 
-#if STATIC_CALLBACKS
-            internal PICSTokensCallback( SteamClient client, CMsgPICSAccessTokenResponse msg )
-                : base( client )
-#else
+
             internal PICSTokensCallback( CMsgPICSAccessTokenResponse msg )
-#endif
             {
                 PackageTokensDenied = new ReadOnlyCollection<uint>( msg.package_denied_tokens );
                 AppTokensDenied = new ReadOnlyCollection<uint>( msg.app_denied_tokens );
@@ -619,12 +577,8 @@ namespace SteamKit2
             /// </summary>
             public Dictionary<uint, PICSChangeData> AppChanges { get; private set; }
 
-#if STATIC_CALLBACKS
-            internal PICSChangesCallback( SteamClient client, CMsgPICSChangesSinceResponse msg )
-                : base( client )
-#else
+
             internal PICSChangesCallback( CMsgPICSChangesSinceResponse msg )
-#endif
             {
                 LastChangeNumber = msg.since_change_number;
                 CurrentChangeNumber = msg.current_change_number;
@@ -678,6 +632,7 @@ namespace SteamKit2
                 /// For an app request, returns if only the public information was requested
                 /// </summary>
                 public bool OnlyPublic { get; private set; }
+
 
                 internal PICSProductInfo( CMsgPICSProductInfoResponse.AppInfo app_info )
                 {
@@ -735,12 +690,8 @@ namespace SteamKit2
             /// </summary>
             public Dictionary<uint, PICSProductInfo> Packages { get; private set; }
 
-#if STATIC_CALLBACKS
-            internal PICSProductInfoCallback( SteamClient client, CMsgPICSProductInfoResponse msg )
-                : base( client )
-#else
+
             internal PICSProductInfoCallback( CMsgPICSProductInfoResponse msg )
-#endif
             {
                 MetaDataOnly = msg.meta_data_only;
                 ResponsePending = msg.response_pending;
@@ -783,12 +734,8 @@ namespace SteamKit2
             /// </summary>
             public List<KeyValue> GuestPasses { get; set; }
 
-#if STATIC_CALLBACKS
-            internal GuestPassListCallback( SteamClient client, MsgClientUpdateGuestPassesList msg, Stream payload )
-                : base( client )
-#else
+
             internal GuestPassListCallback( MsgClientUpdateGuestPassesList msg, Stream payload )
-#endif
             {
                 Result = msg.Result;
                 CountGuestPassesToGive = msg.CountGuestPassesToGive;
@@ -814,12 +761,8 @@ namespace SteamKit2
             /// </summary>
             public EResult Result { get; set; }
 
-#if STATIC_CALLBACKS
-            internal SendGuestPassCallback( SteamClient client, MsgClientSendGuestPassResponse msg )
-                : base( client )
-#else
+
             internal SendGuestPassCallback( MsgClientSendGuestPassResponse msg )
-#endif
             {
                 Result = msg.Result;
             }

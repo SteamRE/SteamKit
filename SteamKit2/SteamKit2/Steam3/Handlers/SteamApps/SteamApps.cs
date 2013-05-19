@@ -473,172 +473,100 @@ namespace SteamKit2
         {
             var ticketResponse = new ClientMsgProtobuf<CMsgClientGetAppOwnershipTicketResponse>( packetMsg );
 
-#if STATIC_CALLBACKS
-            var innerCallback = new AppOwnershipTicketCallback( Client, ticketResponse.Body );
-            var callback = new SteamClient.JobCallback<AppOwnershipTicketCallback>( Client, ticketResponse.TargetJobID, innerCallback );
-            SteamClient.PostCallback( callback );
-#else
             var innerCallback = new AppOwnershipTicketCallback( ticketResponse.Body );
             var callback = new SteamClient.JobCallback<AppOwnershipTicketCallback>( ticketResponse.TargetJobID, innerCallback );
             this.Client.PostCallback( callback );
-#endif
         }
         void HandleAppInfoResponse( IPacketMsg packetMsg )
         {
             var infoResponse = new ClientMsgProtobuf<CMsgClientAppInfoResponse>( packetMsg );
 
-#if STATIC_CALLBACKS
-            var innerCallback = new AppInfoCallback( Client, infoResponse.Body );
-            var callback = new SteamClient.JobCallback<AppInfoCallback>( Client, infoResponse.TargetJobID, innerCallback );
-            SteamClient.PostCallback( callback );
-#else
             var innerCallback = new AppInfoCallback( infoResponse.Body );
             var callback = new SteamClient.JobCallback<AppInfoCallback>( infoResponse.TargetJobID, innerCallback );
             this.Client.PostCallback( callback );
-#endif
         }
         void HandlePackageInfoResponse( IPacketMsg packetMsg )
         {
             var response = new ClientMsgProtobuf<CMsgClientPackageInfoResponse>( packetMsg );
 
-#if STATIC_CALLBACKS
-            var innerCallback = new PackageInfoCallback( Client, response.Body );
-            var callback = new SteamClient.JobCallback<PackageInfoCallback>( Client, response.TargetJobID, innerCallback );
-            SteamClient.PostCallback( callback );
-#else
             var innerCallback = new PackageInfoCallback( response.Body );
             var callback = new SteamClient.JobCallback<PackageInfoCallback>( response.TargetJobID, innerCallback );
             this.Client.PostCallback( callback );
-#endif
         }
         void HandleAppInfoChanges( IPacketMsg packetMsg )
         {
             var changes = new ClientMsgProtobuf<CMsgClientAppInfoChanges>( packetMsg );
 
-#if STATIC_CALLBACKS
-            var callback = new AppChangesCallback( Client, changes.Body );
-            SteamClient.PostCallback( callback );
-#else
             var callback = new AppChangesCallback( changes.Body );
             this.Client.PostCallback( callback );
-#endif
         }
         void HandleDepotKeyResponse( IPacketMsg packetMsg )
         {
             var keyResponse = new ClientMsgProtobuf<CMsgClientGetDepotDecryptionKeyResponse>( packetMsg );
 
-#if STATIC_CALLBACKS
-            var innerCallback = new DepotKeyCallback( Client, keyResponse.Body );
-            var callback = new SteamClient.JobCallback<DepotKeyCallback>( Client, keyResponse.TargetJobID, innerCallback );
-            SteamClient.PostCallback( callback );
-#else
             var innerCallback = new DepotKeyCallback( keyResponse.Body );
             var callback = new SteamClient.JobCallback<DepotKeyCallback>( keyResponse.TargetJobID, innerCallback );
             this.Client.PostCallback( callback );
-#endif
         }
         void HandleGameConnectTokens( IPacketMsg packetMsg )
         {
             var gcTokens = new ClientMsgProtobuf<CMsgClientGameConnectTokens>( packetMsg );
 
-#if STATIC_CALLBACKS
-            var callback = new GameConnectTokensCallback( Client, gcTokens.Body );
-            SteamClient.PostCallback( callback );
-#else
             var callback = new GameConnectTokensCallback( gcTokens.Body );
             this.Client.PostCallback( callback );
-#endif
         }
         void HandleLicenseList( IPacketMsg packetMsg )
         {
             var licenseList = new ClientMsgProtobuf<CMsgClientLicenseList>( packetMsg );
 
-#if STATIC_CALLBACKS
-            var callback = new LicenseListCallback( Client, licenseList.Body );
-            SteamClient.PostCallback( callback );
-#else
             var callback = new LicenseListCallback( licenseList.Body );
             this.Client.PostCallback( callback );
-#endif
         }
         void HandleVACBanStatus( IPacketMsg packetMsg )
         {
             var vacStatus = new ClientMsg<MsgClientVACBanStatus>( packetMsg );
 
-#if STATIC_CALLBACKS
-            var callback = new VACStatusCallback( Client, vacStatus.Body, vacStatus.Payload.ToArray() );
-            SteamClient.PostCallback( callback );
-#else
             var callback = new VACStatusCallback( vacStatus.Body, vacStatus.Payload.ToArray() );
             this.Client.PostCallback( callback );
-#endif
         }
         void HandlePICSAccessTokenResponse( IPacketMsg packetMsg )
         {
             var tokensResponse = new ClientMsgProtobuf<CMsgPICSAccessTokenResponse>( packetMsg );
 
-#if STATIC_CALLBACKS
-            var innerCallback = new PICSTokensCallback( Client, tokensResponse.Body );
-            var callback = new SteamClient.JobCallback<PICSTokensCallback>( Client, tokensResponse.TargetJobID, innerCallback );
-            SteamClient.PostCallback( callback );
-#else
             var innerCallback = new PICSTokensCallback( tokensResponse.Body );
             var callback = new SteamClient.JobCallback<PICSTokensCallback>( tokensResponse.TargetJobID, innerCallback );
             this.Client.PostCallback( callback );
-#endif
         }
         void HandlePICSChangesSinceResponse( IPacketMsg packetMsg )
         {
             var changesResponse = new ClientMsgProtobuf<CMsgPICSChangesSinceResponse>( packetMsg );
 
-#if STATIC_CALLBACKS
-            var innerCallback = new PICSChangesCallback( Client, changesResponse.Body );
-            var callback = new SteamClient.JobCallback<PICSChangesCallback>( Client, changesResponse.TargetJobID, innerCallback );
-            SteamClient.PostCallback( callback );
-#else
             var innerCallback = new PICSChangesCallback( changesResponse.Body );
             var callback = new SteamClient.JobCallback<PICSChangesCallback>( changesResponse.TargetJobID, innerCallback );
             this.Client.PostCallback( callback );
-#endif
         }
         void HandlePICSProductInfoResponse( IPacketMsg packetMsg )
         {
             var productResponse = new ClientMsgProtobuf<CMsgPICSProductInfoResponse>( packetMsg );
 
-#if STATIC_CALLBACKS
-            var innerCallback = new PICSProductInfoCallback( Client, productResponse.Body );
-            var callback = new SteamClient.JobCallback<PICSProductInfoCallback>( Client, productResponse.TargetJobID, innerCallback );
-            SteamClient.PostCallback( callback );
-#else
             var innerCallback = new PICSProductInfoCallback( productResponse.Body );
             var callback = new SteamClient.JobCallback<PICSProductInfoCallback>( productResponse.TargetJobID, innerCallback );
             this.Client.PostCallback( callback );
-#endif
         }
         void HandleGuestPassList( IPacketMsg packetMsg )
         {
             var guestPasses = new ClientMsg<MsgClientUpdateGuestPassesList>( packetMsg );
 
-#if STATIC_CALLBACKS
-            var callback = new GuestPassListCallback( Client, guestPasses.Body, guestPasses.Payload );
-            SteamClient.PostCallback( callback );
-#else
             var callback = new GuestPassListCallback( guestPasses.Body, guestPasses.Payload );
             this.Client.PostCallback( callback );
-#endif
         }
 
         void HandleSendGuestPassResponse(IPacketMsg packetMsg)
         {
             var response = new ClientMsg<MsgClientSendGuestPassResponse>(packetMsg);
 
-#if STATIC_CALLBACKS
-            var callback = new SendGuestPassCallback( Client, response.Body );
-            SteamClient.PostCallback( callback );
-#else
             var callback = new SendGuestPassCallback( response.Body );
             this.Client.PostCallback( callback );
-#endif
         }
         #endregion
 

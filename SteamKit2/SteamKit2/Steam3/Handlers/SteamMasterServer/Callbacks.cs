@@ -48,12 +48,8 @@ namespace SteamKit2
             /// </summary>
             public ReadOnlyCollection<Server> Servers { get; private set; }
 
-#if STATIC_CALLBACKS
-            internal QueryCallback( SteamClient client, CMsgGMSClientServerQueryResponse msg )
-                : base( client )
-#else
+
             internal QueryCallback( CMsgGMSClientServerQueryResponse msg )
-#endif
             {
                 var serverList = msg.servers
                     .Select( s => new Server( s ) )
