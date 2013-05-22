@@ -189,11 +189,41 @@ namespace SteamKit2.GC.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgMemCachedDelete", Value=203)]
       k_EGCMsgMemCachedDelete = 203,
             
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgMemCachedStats", Value=204)]
+      k_EGCMsgMemCachedStats = 204,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgMemCachedStatsResponse", Value=205)]
+      k_EGCMsgMemCachedStatsResponse = 205,
+            
       [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgMasterSetDirectory", Value=220)]
       k_EGCMsgMasterSetDirectory = 220,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgMasterSetDirectoryResponse", Value=221)]
-      k_EGCMsgMasterSetDirectoryResponse = 221
+      k_EGCMsgMasterSetDirectoryResponse = 221,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgMasterSetWebAPIRouting", Value=222)]
+      k_EGCMsgMasterSetWebAPIRouting = 222,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgMasterSetWebAPIRoutingResponse", Value=223)]
+      k_EGCMsgMasterSetWebAPIRoutingResponse = 223,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgMasterSetClientMsgRouting", Value=224)]
+      k_EGCMsgMasterSetClientMsgRouting = 224,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgMasterSetClientMsgRoutingResponse", Value=225)]
+      k_EGCMsgMasterSetClientMsgRoutingResponse = 225,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgSystemBase2", Value=500)]
+      k_EGCMsgSystemBase2 = 500,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgGetPurchaseTrustStatus", Value=501)]
+      k_EGCMsgGetPurchaseTrustStatus = 501,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgGetPurchaseTrustStatusResponse", Value=502)]
+      k_EGCMsgGetPurchaseTrustStatusResponse = 502,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgUpdateSession", Value=503)]
+      k_EGCMsgUpdateSession = 503
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"ESOMsg")]
@@ -223,6 +253,29 @@ namespace SteamKit2.GC.Internal
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_ESOMsg_CacheSubscriptionRefresh", Value=28)]
       k_ESOMsg_CacheSubscriptionRefresh = 28
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"EGCBaseClientMsg")]
+    public enum EGCBaseClientMsg
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCClientWelcome", Value=4004)]
+      k_EMsgGCClientWelcome = 4004,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCServerWelcome", Value=4005)]
+      k_EMsgGCServerWelcome = 4005,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCClientHello", Value=4006)]
+      k_EMsgGCClientHello = 4006,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCServerHello", Value=4007)]
+      k_EMsgGCServerHello = 4007,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCClientConnectionStatus", Value=4009)]
+      k_EMsgGCClientConnectionStatus = 4009,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCServerConnectionStatus", Value=4010)]
+      k_EMsgGCServerConnectionStatus = 4010
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"EGCToGCMsg")]

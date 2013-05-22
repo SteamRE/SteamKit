@@ -12,20 +12,39 @@
 // Note: requires additional types generated from: steammessages.proto
 namespace SteamKit2.GC.Internal
 {
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgSOIDOwner")]
+  public partial class CMsgSOIDOwner : global::ProtoBuf.IExtensible
+  {
+    public CMsgSOIDOwner() {}
+    
+
+    private uint _type = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint type
+    {
+      get { return _type; }
+      set { _type = value; }
+    }
+
+    private ulong _id = default(ulong);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong id
+    {
+      get { return _id; }
+      set { _id = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgSOSingleObject")]
   public partial class CMsgSOSingleObject : global::ProtoBuf.IExtensible
   {
     public CMsgSOSingleObject() {}
     
-
-    private ulong _owner = default(ulong);
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"owner", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
-    public ulong owner
-    {
-      get { return _owner; }
-      set { _owner = value; }
-    }
 
     private int _type_id = default(int);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"type_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
@@ -53,6 +72,15 @@ namespace SteamKit2.GC.Internal
       get { return _version; }
       set { _version = value; }
     }
+
+    private CMsgSOIDOwner _owner_soid = null;
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"owner_soid", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public CMsgSOIDOwner owner_soid
+    {
+      get { return _owner_soid; }
+      set { _owner_soid = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -63,15 +91,6 @@ namespace SteamKit2.GC.Internal
   {
     public CMsgSOMultipleObjects() {}
     
-
-    private ulong _owner = default(ulong);
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"owner", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
-    public ulong owner
-    {
-      get { return _owner; }
-      set { _owner = value; }
-    }
     private readonly global::System.Collections.Generic.List<CMsgSOMultipleObjects.SingleObject> _objects_modified = new global::System.Collections.Generic.List<CMsgSOMultipleObjects.SingleObject>();
     [global::ProtoBuf.ProtoMember(2, Name=@"objects_modified", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public global::System.Collections.Generic.List<CMsgSOMultipleObjects.SingleObject> objects_modified
@@ -102,6 +121,15 @@ namespace SteamKit2.GC.Internal
       get { return _objects_removed; }
     }
   
+
+    private CMsgSOIDOwner _owner_soid = null;
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"owner_soid", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public CMsgSOIDOwner owner_soid
+    {
+      get { return _owner_soid; }
+      set { _owner_soid = value; }
+    }
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"SingleObject")]
   public partial class SingleObject : global::ProtoBuf.IExtensible
   {
@@ -140,15 +168,6 @@ namespace SteamKit2.GC.Internal
   {
     public CMsgSOCacheSubscribed() {}
     
-
-    private ulong _owner = default(ulong);
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"owner", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
-    public ulong owner
-    {
-      get { return _owner; }
-      set { _owner = value; }
-    }
     private readonly global::System.Collections.Generic.List<CMsgSOCacheSubscribed.SubscribedType> _objects = new global::System.Collections.Generic.List<CMsgSOCacheSubscribed.SubscribedType>();
     [global::ProtoBuf.ProtoMember(2, Name=@"objects", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public global::System.Collections.Generic.List<CMsgSOCacheSubscribed.SubscribedType> objects
@@ -164,6 +183,15 @@ namespace SteamKit2.GC.Internal
     {
       get { return _version; }
       set { _version = value; }
+    }
+
+    private CMsgSOIDOwner _owner_soid = null;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"owner_soid", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public CMsgSOIDOwner owner_soid
+    {
+      get { return _owner_soid; }
+      set { _owner_soid = value; }
     }
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"SubscribedType")]
   public partial class SubscribedType : global::ProtoBuf.IExtensible
@@ -202,13 +230,13 @@ namespace SteamKit2.GC.Internal
     public CMsgSOCacheUnsubscribed() {}
     
 
-    private ulong _owner = default(ulong);
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"owner", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
-    public ulong owner
+    private CMsgSOIDOwner _owner_soid = null;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"owner_soid", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public CMsgSOIDOwner owner_soid
     {
-      get { return _owner; }
-      set { _owner = value; }
+      get { return _owner_soid; }
+      set { _owner_soid = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -221,15 +249,6 @@ namespace SteamKit2.GC.Internal
     public CMsgSOCacheSubscriptionCheck() {}
     
 
-    private ulong _owner = default(ulong);
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"owner", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
-    public ulong owner
-    {
-      get { return _owner; }
-      set { _owner = value; }
-    }
-
     private ulong _version = default(ulong);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"version", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
     [global::System.ComponentModel.DefaultValue(default(ulong))]
@@ -237,6 +256,15 @@ namespace SteamKit2.GC.Internal
     {
       get { return _version; }
       set { _version = value; }
+    }
+
+    private CMsgSOIDOwner _owner_soid = null;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"owner_soid", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public CMsgSOIDOwner owner_soid
+    {
+      get { return _owner_soid; }
+      set { _owner_soid = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -249,13 +277,13 @@ namespace SteamKit2.GC.Internal
     public CMsgSOCacheSubscriptionRefresh() {}
     
 
-    private ulong _owner = default(ulong);
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"owner", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
-    public ulong owner
+    private CMsgSOIDOwner _owner_soid = null;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"owner_soid", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public CMsgSOIDOwner owner_soid
     {
-      get { return _owner; }
-      set { _owner = value; }
+      get { return _owner_soid; }
+      set { _owner_soid = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -411,6 +439,42 @@ namespace SteamKit2.GC.Internal
     {
       get { return _time_cached; }
       set { _time_cached = value; }
+    }
+
+    private bool _account_locked = default(bool);
+    [global::ProtoBuf.ProtoMember(16, IsRequired = false, Name=@"account_locked", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool account_locked
+    {
+      get { return _account_locked; }
+      set { _account_locked = value; }
+    }
+
+    private bool _community_banned = default(bool);
+    [global::ProtoBuf.ProtoMember(17, IsRequired = false, Name=@"community_banned", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool community_banned
+    {
+      get { return _community_banned; }
+      set { _community_banned = value; }
+    }
+
+    private bool _trade_banned = default(bool);
+    [global::ProtoBuf.ProtoMember(18, IsRequired = false, Name=@"trade_banned", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool trade_banned
+    {
+      get { return _trade_banned; }
+      set { _trade_banned = value; }
+    }
+
+    private bool _eligible_for_community_market = default(bool);
+    [global::ProtoBuf.ProtoMember(19, IsRequired = false, Name=@"eligible_for_community_market", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool eligible_for_community_market
+    {
+      get { return _eligible_for_community_market; }
+      set { _eligible_for_community_market = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -629,6 +693,138 @@ namespace SteamKit2.GC.Internal
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgSOCacheHaveVersion")]
+  public partial class CMsgSOCacheHaveVersion : global::ProtoBuf.IExtensible
+  {
+    public CMsgSOCacheHaveVersion() {}
+    
+
+    private CMsgSOIDOwner _soid = null;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"soid", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public CMsgSOIDOwner soid
+    {
+      get { return _soid; }
+      set { _soid = value; }
+    }
+
+    private ulong _version = default(ulong);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"version", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong version
+    {
+      get { return _version; }
+      set { _version = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientHello")]
+  public partial class CMsgClientHello : global::ProtoBuf.IExtensible
+  {
+    public CMsgClientHello() {}
+    
+
+    private uint _version = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"version", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint version
+    {
+      get { return _version; }
+      set { _version = value; }
+    }
+    private readonly global::System.Collections.Generic.List<CMsgSOCacheHaveVersion> _socache_have_versions = new global::System.Collections.Generic.List<CMsgSOCacheHaveVersion>();
+    [global::ProtoBuf.ProtoMember(2, Name=@"socache_have_versions", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CMsgSOCacheHaveVersion> socache_have_versions
+    {
+      get { return _socache_have_versions; }
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientWelcome")]
+  public partial class CMsgClientWelcome : global::ProtoBuf.IExtensible
+  {
+    public CMsgClientWelcome() {}
+    
+
+    private uint _version = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"version", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint version
+    {
+      get { return _version; }
+      set { _version = value; }
+    }
+
+    private byte[] _game_data = null;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"game_data", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public byte[] game_data
+    {
+      get { return _game_data; }
+      set { _game_data = value; }
+    }
+    private readonly global::System.Collections.Generic.List<CMsgSOCacheSubscribed> _outofdate_subscribed_caches = new global::System.Collections.Generic.List<CMsgSOCacheSubscribed>();
+    [global::ProtoBuf.ProtoMember(3, Name=@"outofdate_subscribed_caches", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CMsgSOCacheSubscribed> outofdate_subscribed_caches
+    {
+      get { return _outofdate_subscribed_caches; }
+    }
+  
+    private readonly global::System.Collections.Generic.List<CMsgSOCacheSubscriptionCheck> _uptodate_subscribed_caches = new global::System.Collections.Generic.List<CMsgSOCacheSubscriptionCheck>();
+    [global::ProtoBuf.ProtoMember(4, Name=@"uptodate_subscribed_caches", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CMsgSOCacheSubscriptionCheck> uptodate_subscribed_caches
+    {
+      get { return _uptodate_subscribed_caches; }
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgConnectionStatus")]
+  public partial class CMsgConnectionStatus : global::ProtoBuf.IExtensible
+  {
+    public CMsgConnectionStatus() {}
+    
+
+    private GCConnectionStatus _status = GCConnectionStatus.GCConnectionStatus_HAVE_SESSION;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"status", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(GCConnectionStatus.GCConnectionStatus_HAVE_SESSION)]
+    public GCConnectionStatus status
+    {
+      get { return _status; }
+      set { _status = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"GCConnectionStatus")]
+    public enum GCConnectionStatus
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"GCConnectionStatus_HAVE_SESSION", Value=0)]
+      GCConnectionStatus_HAVE_SESSION = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"GCConnectionStatus_GC_GOING_DOWN", Value=1)]
+      GCConnectionStatus_GC_GOING_DOWN = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"GCConnectionStatus_NO_SESSION", Value=2)]
+      GCConnectionStatus_NO_SESSION = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"GCConnectionStatus_NO_SESSION_IN_LOGON_QUEUE", Value=3)]
+      GCConnectionStatus_NO_SESSION_IN_LOGON_QUEUE = 3
+    }
   
 }
 #pragma warning restore 1591
