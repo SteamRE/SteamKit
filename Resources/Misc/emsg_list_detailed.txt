@@ -236,6 +236,8 @@
 	k_EMsgClientStoreUserStats2 = 5466, // flags: 2, server type: -1
 	k_EMsgClientStatsUpdated = 5467, // flags: 2, server type: -1
 	k_EMsgClientActivateOEMLicense = 5468, // flags: 2, server type: -1
+	k_EMsgClientRegisterOEMMachine = 5469, // flags: 2, server type: -1
+	k_EMsgClientRegisterOEMMachineResponse = 5470, // flags: 2, server type: -1
 	k_EMsgClientRequestedClientStats = 5480, // flags: 2, server type: -1
 	k_EMsgClientStat2Int32 = 5481, // flags: 2, server type: -1
 	k_EMsgClientStat2 = 5482, // flags: 2, server type: -1
@@ -448,6 +450,7 @@
 	k_EMsgClientUCMSetUserPublishedFileActionResponse = 7365, // flags: 6, server type: 45
 	k_EMsgClientUCMEnumeratePublishedFilesByUserAction = 7366, // flags: 6, server type: 45
 	k_EMsgClientUCMEnumeratePublishedFilesByUserActionResponse = 7367, // flags: 6, server type: 45
+	k_EMsgClientUCMPublishedFileDeleted = 7368, // flags: 6, server type: 45
 	k_EMsgClientUCMEnumerateUserSubscribedFilesWithUpdates = 7378, // flags: 6, server type: 45
 	k_EMsgClientUCMEnumerateUserSubscribedFilesWithUpdatesResponse = 7379, // flags: 6, server type: 45
 	k_EMsgClientRichPresenceUpload = 7501, // flags: 6, server type: 47

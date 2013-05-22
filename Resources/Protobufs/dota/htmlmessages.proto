@@ -392,6 +392,8 @@ message CMsgLinkAtPositionResponse {
 	optional uint32 x = 2;
 	optional uint32 y = 3;
 	optional string url = 4;
+	optional bool blivelink = 5;
+	optional bool binput = 6;
 }
 
 message CMsgZoomToElementAtPosition {
