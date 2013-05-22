@@ -1,0 +1,137 @@
+import "google/protobuf/descriptor.proto";
+import "steammessages_unified_base.steamclient.proto";
+
+message CPlayer_GetRecentlyPlayedGames_Request {
+	optional uint64 steamid = 1 [(description) = "The player we're asking about"];
+	optional uint32 count = 2 [(description) = "The number of games to return (0/unset: all)"];
+}
+
+message CPlayer_GetRecentlyPlayedGames_Response {
+	message Game {
+		optional int32 appid = 1;
+		optional string name = 2;
+		optional int32 playtime_2weeks = 3;
+		optional int32 playtime_forever = 4;
+		optional string img_icon_url = 5;
+		optional string img_logo_url = 6;
+		optional string friendly_name = 7;
+	}
+
+	optional int32 total_count = 1;
+	repeated .CPlayer_GetRecentlyPlayedGames_Response.Game games = 2;
+}
+
+message CPlayer_GetOwnedGames_Request {
+	optional uint64 steamid = 1 [(description) = "The player we're asking about"];
+	optional bool include_appinfo = 2 [(description) = "true if we want additional details (name, icon) about each game"];
+	optional bool include_played_free_games = 3 [(description) = "Free games are excluded by default.  If this is set, free games the user has played will be returned."];
+	repeated uint32 appids_filter = 4 [(description) = "if set, restricts result set to the passed in apps"];
+}
+
+message CPlayer_GetOwnedGames_Response {
+	message Game {
+		optional int32 appid = 1;
+		optional string name = 2;
+		optional int32 playtime_2weeks = 3;
+		optional int32 playtime_forever = 4;
+		optional string img_icon_url = 5;
+		optional string img_logo_url = 6;
+		optional bool has_community_visible_stats = 7;
+	}
+
+	optional uint32 game_count = 1;
+	repeated .CPlayer_GetOwnedGames_Response.Game games = 2;
+}
+
+message CPlayer_GetSteamLevel_Request {
+	optional uint64 steamid = 1 [(description) = "The player we're asking about"];
+}
+
+message CPlayer_GetSteamLevel_Response {
+	optional uint32 player_level = 1;
+}
+
+message CPlayer_GetSteamLevelDistribution_Request {
+	optional uint32 player_level = 1;
+}
+
+message CPlayer_GetSteamLevelDistribution_Response {
+	optional float player_level_percentile = 1;
+	optional uint32 top_100_ranking = 2 [(description) = "where in the top 100 this level falls, if at all"];
+}
+
+message CPlayer_GetBadges_Request {
+	optional uint64 steamid = 1 [(description) = "The player we're asking about"];
+}
+
+message CPlayer_GetBadges_Response {
+	message Badge {
+		optional int32 badgeid = 1;
+		optional uint32 appid = 2;
+		optional int32 level = 3;
+		optional uint32 completion_time = 4;
+		optional uint32 xp = 5;
+		optional uint64 communityitemid = 6;
+		optional uint32 border_color = 7;
+		optional uint32 scarcity = 8;
+	}
+
+	repeated .CPlayer_GetBadges_Response.Badge badges = 1;
+	optional uint32 player_xp = 2;
+	optional uint32 player_level = 3;
+	optional uint32 player_level_potential = 4;
+	optional uint32 player_xp_needed_to_level_up = 5;
+	optional uint32 player_xp_needed_current_level = 6;
+}
+
+message CPlayer_GetCommunityBadgeProgress_Request {
+	optional uint64 steamid = 1 [(description) = "The player we're asking about"];
+	optional int32 badgeid = 2 [(description) = "The badge we're asking about"];
+}
+
+message CPlayer_GetCommunityBadgeProgress_Response {
+	message Quest {
+		optional uint32 questid = 1;
+		optional bool completed = 2;
+	}
+
+	repeated .CPlayer_GetCommunityBadgeProgress_Response.Quest quests = 1;
+}
+
+message CPlayer_GetLastPlayedTimes_Request {
+	optional uint32 min_last_played = 1 [(description) = "The most recent last-played time the client already knows about"];
+}
+
+message CPlayer_GetLastPlayedTimes_Response {
+	message Game {
+		optional int32 appid = 1;
+		optional uint32 last_playtime = 2;
+	}
+
+	repeated .CPlayer_GetLastPlayedTimes_Response.Game games = 1;
+}
+
+service Player {
+	option (service_description) = "A service for accessing Steam player data";
+	rpc GetRecentlyPlayedGames (.CPlayer_GetRecentlyPlayedGames_Request) returns (.CPlayer_GetRecentlyPlayedGames_Response) {
+		option (method_description) = "Gets information about a player's recently played games";
+	}
+	rpc GetOwnedGames (.CPlayer_GetOwnedGames_Request) returns (.CPlayer_GetOwnedGames_Response) {
+		option (method_description) = "Similar to GetOwnedApps, but designed for WebAPI users";
+	}
+	rpc GetSteamLevel (.CPlayer_GetSteamLevel_Request) returns (.CPlayer_GetSteamLevel_Response) {
+		option (method_description) = "Returns the Steam Level of a user";
+	}
+	rpc GetSteamLevelDistribution (.CPlayer_GetSteamLevelDistribution_Request) returns (.CPlayer_GetSteamLevelDistribution_Response) {
+		option (method_description) = "Returns how a given Steam Level compares the user base at large";
+	}
+	rpc GetBadges (.CPlayer_GetBadges_Request) returns (.CPlayer_GetBadges_Response) {
+		option (method_description) = "Gets badges that are owned by a specific user";
+	}
+	rpc GetCommunityBadgeProgress (.CPlayer_GetCommunityBadgeProgress_Request) returns (.CPlayer_GetCommunityBadgeProgress_Response) {
+		option (method_description) = "Gets all the quests needed to get the specified badge, and which are completed";
+	}
+	rpc ClientGetLastPlayedTimes (.CPlayer_GetLastPlayedTimes_Request) returns (.CPlayer_GetLastPlayedTimes_Response) {
+		option (method_description) = "Gets the last-played times for the account";
+	}
+}

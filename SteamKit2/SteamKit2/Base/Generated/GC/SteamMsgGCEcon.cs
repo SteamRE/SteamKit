@@ -154,9 +154,6 @@ namespace SteamKit2.GC.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCUpdateItemSchema", Value=1049)]
       k_EMsgGCUpdateItemSchema = 1049,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCRequestInventoryRefresh", Value=1050)]
-      k_EMsgGCRequestInventoryRefresh = 1050,
-            
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCRemoveCustomTexture", Value=1051)]
       k_EMsgGCRemoveCustomTexture = 1051,
             

@@ -22,7 +22,10 @@ namespace SteamKit2.GC.Dota.Internal
       MATCH_TYPE_COOP_BOTS = 1,
             
       [global::ProtoBuf.ProtoEnum(Name=@"MATCH_TYPE_TEAM_RANKED", Value=2)]
-      MATCH_TYPE_TEAM_RANKED = 2
+      MATCH_TYPE_TEAM_RANKED = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"MATCH_TYPE_SOLO_QUEUE", Value=3)]
+      MATCH_TYPE_SOLO_QUEUE = 3
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"DOTABotDifficulty")]
