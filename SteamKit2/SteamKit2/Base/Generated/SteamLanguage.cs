@@ -1201,6 +1201,8 @@ namespace SteamKit2
 		ClientStoreUserStats2 = 5466,
 		ClientStatsUpdated = 5467,
 		ClientActivateOEMLicense = 5468,
+		ClientRegisterOEMMachine = 5469,
+		ClientRegisterOEMMachineResponse = 5470,
 		ClientRequestedClientStats = 5480,
 		ClientStat2Int32 = 5481,
 		ClientStat2 = 5482,
