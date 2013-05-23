@@ -32,6 +32,9 @@ enum ECsgoGCMsg {
 	k_EMsgGCCStrike15_v2_PlayersProfile = 9128;
 	k_EMsgGCCStrike15_v2_SetMyMedalsInfo = 9129;
 	k_EMsgGCCStrike15_v2_PlayerEarnedRewardNotification = 9130;
+	k_EMsgGCCStrike15_v2_PlayerOverwatchCaseUpdate = 9131;
+	k_EMsgGCCStrike15_v2_PlayerOverwatchCaseAssignment = 9132;
+	k_EMsgGCCStrike15_v2_PlayerOverwatchCaseStatus = 9133;
 }
 
 message GameServerPing {
@@ -59,6 +62,7 @@ message GlobalStatistics {
 	repeated .DetailedSearchStatistic search_statistics = 7;
 	optional string main_post_url = 8;
 	optional uint32 required_appid_version = 9;
+	optional uint32 pricesheet_version = 10;
 }
 
 message OperationalStatisticDescription {
@@ -333,5 +337,34 @@ message CMsgGCCStrike15_v2_PlayerEarnedRewardNotification {
 	optional uint32 item_def_index = 2;
 	optional uint32 attr_def_index = 3;
 	optional uint32 attr_value = 4;
+}
+
+message CMsgGCCStrike15_v2_PlayerOverwatchCaseUpdate {
+	optional uint64 caseid = 1;
+	optional uint32 verdict = 2;
+	optional uint32 suspectid = 3;
+	optional uint32 fractionid = 4;
+}
+
+message CMsgGCCStrike15_v2_PlayerOverwatchCaseAssignment {
+	optional uint64 caseid = 1;
+	optional string caseurl = 2;
+	optional uint32 verdict = 3;
+	optional uint32 timestamp = 4;
+	optional uint32 throttleseconds = 5;
+	optional uint32 suspectid = 6;
+	optional uint32 fractionid = 7;
+	optional uint32 numrounds = 8;
+	optional uint32 fractionrounds = 9;
+}
+
+message CMsgGCCStrike15_v2_PlayerOverwatchCaseStatus {
+	optional uint64 caseid = 1;
+	optional uint32 statusid = 2;
+}
+
+message CClientHeaderOverwatchEvidence {
+	optional uint32 accountid = 1;
+	optional uint64 caseid = 2;
 }
 
