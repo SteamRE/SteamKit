@@ -8,7 +8,6 @@ enum EDOTAGCMsg {
 	k_EMsgGCGameMatchSignOutResponse = 7005;
 	k_EMsgGCJoinChatChannel = 7009;
 	k_EMsgGCJoinChatChannelResponse = 7010;
-	k_EMsgGCLeaveChatChannel = 7011;
 	k_EMsgGCOtherJoinedChannel = 7013;
 	k_EMsgGCOtherLeftChannel = 7014;
 	k_EMsgGCMatchHistoryList = 7017;
@@ -30,7 +29,6 @@ enum EDOTAGCMsg {
 	k_EMsgGCPracticeLobbyJoin = 7044;
 	k_EMsgGCPracticeLobbySetDetails = 7046;
 	k_EMsgGCPracticeLobbySetTeamSlot = 7047;
-	k_EMsgGCTutorialLobbyCreate = 7048;
 	k_EMsgGCInitialQuestionnaireResponse = 7049;
 	k_EMsgGCTournamentRequest = 7051;
 	k_EMsgGCTournamentResponse = 7052;
@@ -112,7 +110,6 @@ enum EDOTAGCMsg {
 	k_EMsgGCRequestInternatinalTicketEmail = 7143;
 	k_EMsgGCTransferTeamAdmin = 7144;
 	k_EMsgGCClearTournamentGame = 7145;
-	k_EMsgGCChatMessage = 7146;
 	k_EMsgRequestLeagueInfo = 7147;
 	k_EMsgResponseLeagueInfo = 7148;
 	k_EMsgGCPracticeLobbyJoinBroadcastChannel = 7149;
@@ -209,16 +206,12 @@ enum EDOTAGCMsg {
 	k_EMsgGCToGCUpdateTeamStats = 7240;
 	k_EMsgGCToGCGetTeamRank = 7241;
 	k_EMsgGCToGCGetTeamRankResponse = 7242;
-	k_EMsgGCToGCDirtyTeamSDO = 7243;
-	k_EMsgGCToGCDirtyTeamMemberSDO = 7244;
 	k_EMsgGCTeamIDByNameRequest = 7245;
 	k_EMsgGCTeamIDByNameResponse = 7246;
 	k_EMsgGCEditTeam = 7247;
 	k_EMsgGCPassportDataRequest = 7248;
 	k_EMsgGCPassportDataResponse = 7249;
-	k_EMsgGCToGCDirtyGuildSDO = 7250;
 	k_EMsgGCNotInGuildData = 7251;
-	k_EMsgGCToGCDirtyAccountGuildMembershipsSDO = 7252;
 	k_EMsgGCPassportVote = 7253;
 	k_EMsgGCGuildInviteData = 7254;
 	k_EMsgGCToGCGetLeagueAdmin = 7255;
@@ -231,6 +224,14 @@ enum EDOTAGCMsg {
 	k_EMsgGCToGCUpdateOpenGuildPartyResponse = 7262;
 	k_EMsgGCToGCDestroyOpenGuildPartyRequest = 7263;
 	k_EMsgGCToGCDestroyOpenGuildPartyResponse = 7264;
+	k_EMsgGCGuildUpdateMessage = 7265;
+	k_EMsgGCPartySetOpenGuildRequest = 7266;
+	k_EMsgGCPartySetOpenGuildResponse = 7267;
+	k_EMsgGCGuildOpenPartyRefresh = 7268;
+	k_EMsgGCJoinOpenGuildPartyRequest = 7269;
+	k_EMsgGCJoinOpenGuildPartyResponse = 7270;
+	k_EMsgGCLeaveChatChannel = 7272;
+	k_EMsgGCChatMessage = 7273;
 	k_EMsgGCDev_GrantWarKill = 8001;
 }
 
@@ -571,7 +572,6 @@ message CSODOTALobby {
 		MATCH = 0;
 		PRACTICE = 1;
 		TOURNAMENT = 2;
-		TUTORIAL = 3;
 		COOP_BOT_MATCH = 4;
 		TEAM_MATCH = 5;
 		SOLO_QUEUE_MATCH = 6;
@@ -986,12 +986,6 @@ message CMsgGameChatLog {
 	repeated .CMsgGameChatLog.CChatLine lines = 2;
 }
 
-message CMsgTutorialLobbyCreate {
-	optional string search_key = 1;
-	optional uint32 tutorial_lesson = 2;
-	optional uint32 client_version = 3;
-}
-
 message CMsgInitialQuestionnaireResponse {
 	optional uint32 initial_skill = 1;
 }
@@ -1110,7 +1104,6 @@ message CMsgDOTAMatch {
 		REPLAY_EXPIRED = 2;
 	}
 
-	optional uint32 season = 1;
 	optional bool good_guys_win = 2;
 	optional uint32 duration = 3;
 	optional fixed32 startTime = 4;
@@ -1598,12 +1591,12 @@ message CMsgDOTAJoinChatChannel {
 }
 
 message CMsgDOTALeaveChatChannel {
-	optional string channel_name = 1;
+	optional uint64 channel_id = 1;
 }
 
 message CMsgDOTAChatMessage {
 	optional uint32 account_id = 1;
-	optional string channel_name = 2;
+	optional uint64 channel_id = 2;
 	optional string persona_name = 3;
 	optional string text = 4;
 	optional uint32 timestamp = 5;
@@ -1697,6 +1690,7 @@ message CMsgDOTAGuildSDO {
 	optional uint64 banner_logo = 8;
 	repeated .CMsgDOTAGuildSDO.Member members = 9;
 	repeated .CMsgDOTAGuildSDO.Invitation invitations = 10;
+	optional string message = 11;
 }
 
 message CMsgDOTAGuildAuditSDO {
@@ -1845,6 +1839,42 @@ message CMsgDOTAGCToGCDestroyOpenGuildPartyRequest {
 message CMsgDOTAGCToGCDestroyOpenGuildPartyResponse {
 }
 
+message CMsgDOTAPartySetOpenGuildRequest {
+	optional uint32 guild_id = 1;
+}
+
+message CMsgDOTAPartySetOpenGuildResponse {
+	enum EResult {
+		SUCCESS = 0;
+		ERROR_UNSPECIFIED = 1;
+	}
+
+	optional .CMsgDOTAPartySetOpenGuildResponse.EResult result = 1 [default = SUCCESS];
+}
+
+message CMsgDOTAJoinOpenGuildPartyRequest {
+	optional uint64 party_id = 1;
+}
+
+message CMsgDOTAJoinOpenGuildPartyResponse {
+	enum EResult {
+		SUCCESS = 0;
+		ERROR_UNSPECIFIED = 1;
+	}
+
+	optional .CMsgDOTAJoinOpenGuildPartyResponse.EResult result = 1 [default = SUCCESS];
+}
+
+message CMsgDOTAGuildOpenPartyRefresh {
+	message OpenParty {
+		optional uint64 party_id = 1;
+		repeated uint32 member_account_ids = 2;
+	}
+
+	optional uint32 guild_id = 1;
+	repeated .CMsgDOTAGuildOpenPartyRefresh.OpenParty open_parties = 2;
+}
+
 message CMsgDOTARequestGuildData {
 }
 
@@ -1860,6 +1890,11 @@ message CMsgDOTAGuildInviteData {
 	optional string guild_name = 3;
 	optional string guild_tag = 4;
 	optional uint64 logo = 5;
+}
+
+message CMsgDOTAGuildUpdateMessage {
+	optional string message = 1;
+	optional uint32 guild_id = 2;
 }
 
 message CMsgDOTAPlayerReports {
@@ -2175,11 +2210,11 @@ message CDOTAOverview {
 		optional int32 in_match = 4;
 		optional int32 in_practice = 5;
 		optional int32 in_tournament = 6;
-		optional int32 in_tutorial = 7;
 		optional int32 in_coop = 8;
 		optional int32 in_team_match = 9;
 		optional int32 spectating = 10;
 		optional int32 idle = 11;
+		optional int32 in_solo_queue_match = 12;
 	}
 
 	message ServersByRegion {
@@ -2597,22 +2632,6 @@ message CMsgGCToGCGetTeamRankResponse {
 	optional bool valid_team = 1;
 	optional uint32 rank = 2;
 	optional uint32 games_won = 3;
-}
-
-message CMsgGCToGCDirtyTeamSDO {
-	optional uint32 team_id = 1;
-}
-
-message CMsgGCToGCDirtyTeamMemberSDO {
-	optional uint32 account_id = 1;
-}
-
-message CMsgGCToGCDirtyGuildSDO {
-	optional uint32 guild_id = 1;
-}
-
-message CMsgGCToGCDirtyAccountGuildMembershipsSDO {
-	optional uint32 account_id = 1;
 }
 
 message CMsgGCToGCUpdateTeamStats {
