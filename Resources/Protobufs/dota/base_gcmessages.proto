@@ -184,6 +184,7 @@ message CMsgApplyEggEssence {
 message CSOEconItemAttribute {
 	optional uint32 def_index = 1;
 	optional uint32 value = 2;
+	optional bytes value_bytes = 3;
 }
 
 message CSOEconItemEquipped {
@@ -462,5 +463,10 @@ message CMsgGCToGCBannedWordListBroadcast {
 
 message CMsgGCToGCBannedWordListUpdated {
 	optional uint32 group_id = 1;
+}
+
+message CMsgGCToGCDirtySDOCache {
+	optional uint32 sdo_type = 1;
+	optional uint64 key_uint64 = 2;
 }
 
