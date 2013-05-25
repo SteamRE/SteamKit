@@ -117,6 +117,7 @@ enum EGCItemMsg {
 	k_EMsgGCBannedWordListResponse = 2513;
 	k_EMsgGCToGCBannedWordListBroadcast = 2514;
 	k_EMsgGCToGCBannedWordListUpdated = 2515;
+	k_EMsgGCToGCDirtySDOCache = 2516;
 }
 
 enum EGCMsgResponse {
