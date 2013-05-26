@@ -69,7 +69,7 @@ namespace Sample5_CallbackManager
             Console.WriteLine( "Connecting to Steam..." );
 
             // initiate the connection
-            steamClient.Connect( false );
+            steamClient.Connect();
 
             // create our callback handling loop
             while ( isRunning )
@@ -152,7 +152,7 @@ namespace Sample5_CallbackManager
 
             foreach ( var friend in callback.FriendList )
             {
-                if (friend.Relationship == EFriendRelationship.PendingInvitee)
+                if (friend.Relationship == EFriendRelationship.RequestRecipient)
                 {
                     // this user has added us, let's add him back
                     steamFriends.AddFriend(friend.SteamID);
