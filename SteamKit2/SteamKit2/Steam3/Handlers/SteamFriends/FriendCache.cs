@@ -30,6 +30,7 @@ namespace SteamKit2
             public EFriendRelationship Relationship { get; set; }
 
             public EPersonaState PersonaState { get; set; }
+            public EPersonaStateFlag PersonaStateFlags { get; set; }
 
             public uint GameAppID { get; set; }
             public GameID GameID { get; set; }

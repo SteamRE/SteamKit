@@ -1912,6 +1912,15 @@ namespace SteamKit2
 		FlagAll = 65535,
 	}
 	[Flags]
+	public enum EPersonaStateFlag
+	{
+		HasRichPresence = 1,
+		InJoinableGame = 2,
+		OnlineUsingWeb = 256,
+		OnlineUsingMobile = 512,
+		OnlineUsingBigPicture = 1024,
+	}
+	[Flags]
 	public enum EClientPersonaStateFlag
 	{
 		Status = 1,

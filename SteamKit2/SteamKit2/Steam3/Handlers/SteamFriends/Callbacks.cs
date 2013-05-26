@@ -38,6 +38,11 @@ namespace SteamKit2
             /// </summary>
             /// <value>The state.</value>
             public EPersonaState State { get; private set; }
+            /// <summary>
+            /// Gets the state flags.
+            /// </summary>
+            /// <value>The state flags.</value>
+            public EPersonaStateFlag StateFlags { get; private set; }
 
             /// <summary>
             /// Gets the game app ID.
@@ -135,6 +140,7 @@ namespace SteamKit2
 
                 this.FriendID = friend.friendid;
                 this.State = ( EPersonaState )friend.persona_state;
+                this.StateFlags = ( EPersonaStateFlag )friend.persona_state_flags;
 
                 this.GameAppID = friend.game_played_app_id;
                 this.GameID = friend.gameid;
