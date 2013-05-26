@@ -686,6 +686,7 @@ namespace SteamKit2
                     {
                         cacheFriend.AvatarHash = friend.avatar_hash;
                         cacheFriend.PersonaState = ( EPersonaState )friend.persona_state;
+                        cacheFriend.PersonaStateFlags = ( EPersonaStateFlag )friend.persona_state_flags;
                     }
 
                     if ( ( flags & EClientPersonaStateFlag.GameExtraInfo ) == EClientPersonaStateFlag.GameExtraInfo )

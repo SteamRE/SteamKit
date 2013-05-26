@@ -152,6 +152,16 @@ enum EFriendFlags flags
 	FlagAll = 65535;
 };
 
+enum EPersonaStateFlag flags
+{
+	HasRichPresence = 1;
+	InJoinableGame = 2;
+	
+	OnlineUsingWeb = 256;
+	OnlineUsingMobile = 512;
+	OnlineUsingBigPicture = 1024;
+};
+
 enum EClientPersonaStateFlag flags
 {
 	Status = 1;
