@@ -609,7 +609,7 @@ namespace SteamKit2
         /// Implements the operator !=.
         /// </summary>
         /// <param name="a">The left side SteamID.</param>
-        /// <param name="b">The right side SteamID..</param>
+        /// <param name="b">The right side SteamID.</param>
         /// <returns>
         /// The result of the operator.
         /// </returns>
