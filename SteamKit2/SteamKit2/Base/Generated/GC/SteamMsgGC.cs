@@ -1037,6 +1037,15 @@ namespace SteamKit2.GC.Internal
       get { return _value; }
       set { _value = value; }
     }
+
+    private byte[] _value_bytes = null;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"value_bytes", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public byte[] value_bytes
+    {
+      get { return _value_bytes; }
+      set { _value_bytes = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -2770,6 +2779,34 @@ namespace SteamKit2.GC.Internal
     {
       get { return _group_id; }
       set { _group_id = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCToGCDirtySDOCache")]
+  public partial class CMsgGCToGCDirtySDOCache : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCToGCDirtySDOCache() {}
+    
+
+    private uint _sdo_type = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"sdo_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint sdo_type
+    {
+      get { return _sdo_type; }
+      set { _sdo_type = value; }
+    }
+
+    private ulong _key_uint64 = default(ulong);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"key_uint64", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong key_uint64
+    {
+      get { return _key_uint64; }
+      set { _key_uint64 = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

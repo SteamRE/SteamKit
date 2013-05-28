@@ -3467,6 +3467,15 @@ namespace SteamKit2.GC.TF2.Internal
       get { return _version_checksum; }
     }
   
+
+    private uint _version_verbose = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"version_verbose", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint version_verbose
+    {
+      get { return _version_verbose; }
+      set { _version_verbose = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -3489,6 +3498,70 @@ namespace SteamKit2.GC.TF2.Internal
 
     private uint _version_check = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"version_check", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint version_check
+    {
+      get { return _version_check; }
+      set { _version_check = value; }
+    }
+
+    private uint _version_check_ex = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"version_check_ex", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint version_check_ex
+    {
+      get { return _version_check_ex; }
+      set { _version_check_ex = value; }
+    }
+
+    private uint _version_check_ex2 = default(uint);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"version_check_ex2", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint version_check_ex2
+    {
+      get { return _version_check_ex2; }
+      set { _version_check_ex2 = value; }
+    }
+
+    private byte[] _version_checksum_ex = null;
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"version_checksum_ex", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public byte[] version_checksum_ex
+    {
+      get { return _version_checksum_ex; }
+      set { _version_checksum_ex = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGCMsgTFSyncEx")]
+  public partial class CGCMsgTFSyncEx : global::ProtoBuf.IExtensible
+  {
+    public CGCMsgTFSyncEx() {}
+    
+
+    private string _version_checksum = "";
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"version_checksum", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string version_checksum
+    {
+      get { return _version_checksum; }
+      set { _version_checksum = value; }
+    }
+
+    private byte[] _version_checksum_ex = null;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"version_checksum_ex", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public byte[] version_checksum_ex
+    {
+      get { return _version_checksum_ex; }
+      set { _version_checksum_ex = value; }
+    }
+
+    private uint _version_check = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"version_check", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint version_check
     {
@@ -4099,6 +4172,52 @@ namespace SteamKit2.GC.TF2.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CAttribute_StrangeScore")]
+  public partial class CAttribute_StrangeScore : global::ProtoBuf.IExtensible
+  {
+    public CAttribute_StrangeScore() {}
+    
+
+    private uint _score_type = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"score_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint score_type
+    {
+      get { return _score_type; }
+      set { _score_type = value; }
+    }
+
+    private uint _score_value = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"score_value", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint score_value
+    {
+      get { return _score_value; }
+      set { _score_value = value; }
+    }
+
+    private uint _restriction_type = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"restriction_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint restriction_type
+    {
+      get { return _restriction_type; }
+      set { _restriction_type = value; }
+    }
+
+    private uint _restriction_value = default(uint);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"restriction_value", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint restriction_value
+    {
+      get { return _restriction_value; }
+      set { _restriction_value = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
