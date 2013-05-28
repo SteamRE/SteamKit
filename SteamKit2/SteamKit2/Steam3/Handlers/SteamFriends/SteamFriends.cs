@@ -511,6 +511,10 @@ namespace SteamKit2
                     HandlePersonaState( packetMsg );
                     break;
 
+                case EMsg.ClientClanState:
+                    HandleClanState( packetMsg );
+                    break;
+
                 case EMsg.ClientFriendsList:
                     HandleFriendsList( packetMsg );
                     break;
@@ -722,6 +726,13 @@ namespace SteamKit2
                 var callback = new PersonaStateCallback( friend );
                 this.Client.PostCallback( callback );
             }
+        }
+        void HandleClanState( IPacketMsg packetMsg )
+        {
+            var clanState = new ClientMsgProtobuf<CMsgClientClanState>( packetMsg );
+
+            var callback = new ClanStateCallback( clanState.Body );
+            this.Client.PostCallback( callback );
         }
         void HandleFriendResponse( IPacketMsg packetMsg )
         {

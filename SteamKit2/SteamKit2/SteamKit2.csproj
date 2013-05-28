@@ -133,11 +133,11 @@
     <Compile Include="Steam3\SteamClient\CallbackMgr\CallbackMgr.cs" />
     <Compile Include="Steam3\WebAPI\WebAPI.cs" />
     <Compile Include="Types\ChecksumData.cs" />
-    <Compile Include="Types\JobID.cs" />
+    <Compile Include="Types\GlobalID.cs" />
     <Compile Include="Types\DepotManifest.cs" />
     <Compile Include="Types\MicroTime.cs" />
     <Compile Include="Types\Steam2Ticket.cs" />
-    <Compile Include="Types\UGC.cs" />
+    <Compile Include="Types\PubFile.cs" />
     <Compile Include="Util\AsnKeyParser.cs" />
     <Compile Include="Util\BinaryEx.cs" />
     <Compile Include="Util\Crc32.cs" />
