@@ -164,6 +164,141 @@ namespace SteamKit2
         }
 
         /// <summary>
+        /// This callback is posted when a clan's state has been changed.
+        /// </summary>
+        public sealed class ClanStateCallback : CallbackMsg
+        {
+            /// <summary>
+            /// Represents an event or announcement that was posted by a clan.
+            /// </summary>
+            public sealed class Event
+            {
+                /// <summary>
+                /// Gets the globally unique ID for this specific event.
+                /// </summary>
+                public GlobalID ID { get; private set; }
+
+                /// <summary>
+                /// Gets the event time.
+                /// </summary>
+                public DateTime EventTime { get; private set; }
+                /// <summary>
+                /// Gets the headline of the event.
+                /// </summary>
+                public string Headline { get; private set; }
+                /// <summary>
+                /// Gets the <see cref="GameID"/> associated with this event, if any.
+                /// </summary>
+                public GameID GameID { get; private set; }
+
+                /// <summary>
+                /// Gets a value indicating whether this event was just posted.
+                /// </summary>
+                /// <value>
+                ///   <c>true</c> if the event was just posted; otherwise, <c>false</c>.
+                /// </value>
+                public bool JustPosted { get; private set; }
+
+
+                internal Event( CMsgClientClanState.Event clanEvent )
+                {
+                    ID = clanEvent.gid;
+
+                    EventTime = Utils.DateTimeFromUnixTime( clanEvent.event_time );
+                    Headline = clanEvent.headline;
+                    GameID = clanEvent.game_id;
+
+                    JustPosted = clanEvent.just_posted;
+                }
+            }
+
+            /// <summary>
+            /// Gets the <see cref="SteamID"/> of the clan that posted this state update.
+            /// </summary>
+            public SteamID ClanID { get; private set; }
+
+            /// <summary>
+            /// Gets the status flags.
+            /// </summary>
+            public EClientPersonaStateFlag StatusFlags { get; private set; }
+            /// <summary>
+            /// Gets the account flags.
+            /// </summary>
+            public EAccountFlags AccountFlags { get; private set; }
+
+            /// <summary>
+            /// Gets the name of the clan.
+            /// </summary>
+            /// <value>
+            /// The name of the clan.
+            /// </value>
+            public string ClanName { get; private set; }
+            /// <summary>
+            /// Gets the SHA-1 avatar hash.
+            /// </summary>
+            public byte[] AvatarHash { get; private set; }
+
+            /// <summary>
+            /// Gets the total number of members in this clan.
+            /// </summary>
+            public uint MemberTotalCount { get; private set; }
+            /// <summary>
+            /// Gets the number of members in this clan that are currently online.
+            /// </summary>
+            public uint MemberOnlineCount { get; private set; }
+            /// <summary>
+            /// Gets the number of members in this clan that are currently chatting.
+            /// </summary>
+            public uint MemberChattingCount { get; private set; }
+            /// <summary>
+            /// Gets the number of members in this clan that are currently in-game.
+            /// </summary>
+            public uint MemberInGameCount { get; private set; }
+
+            /// <summary>
+            /// Gets any events associated with this clan state update.
+            /// </summary>
+            public ReadOnlyCollection<Event> Events { get; private set; }
+            /// <summary>
+            /// Gets any announcements associated with this clan state update.
+            /// </summary>
+            public ReadOnlyCollection<Event> Announcements { get; private set; }
+
+
+            internal ClanStateCallback( CMsgClientClanState msg )
+            {
+                ClanID = msg.steamid_clan;
+
+                StatusFlags = ( EClientPersonaStateFlag )msg.m_unStatusFlags;
+                AccountFlags = ( EAccountFlags )msg.clan_account_flags;
+
+                if ( msg.name_info != null )
+                {
+                    ClanName = msg.name_info.clan_name;
+                    AvatarHash = msg.name_info.sha_avatar;
+                }
+
+                if ( msg.user_counts != null )
+                {
+                    MemberTotalCount = msg.user_counts.members;
+                    MemberOnlineCount = msg.user_counts.online;
+                    MemberChattingCount = msg.user_counts.chatting;
+                    MemberInGameCount = msg.user_counts.in_game;
+                }
+
+                var events = msg.events
+                    .Select( e => new Event( e ) )
+                    .ToList();
+                Events = new ReadOnlyCollection<Event>( events );
+
+                var announcements = msg.announcements
+                    .Select( a => new Event( a ) )
+                    .ToList();
+                Announcements = new ReadOnlyCollection<Event>( announcements );
+            }
+        }
+
+        /// <summary>
         /// This callback is fired when the client receives a list of friends.
         /// </summary>
         public sealed class FriendsListCallback : CallbackMsg
