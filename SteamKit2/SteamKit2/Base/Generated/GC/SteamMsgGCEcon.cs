@@ -362,7 +362,10 @@ namespace SteamKit2.GC.Internal
       k_EMsgGCToGCBannedWordListBroadcast = 2514,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCBannedWordListUpdated", Value=2515)]
-      k_EMsgGCToGCBannedWordListUpdated = 2515
+      k_EMsgGCToGCBannedWordListUpdated = 2515,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCDirtySDOCache", Value=2516)]
+      k_EMsgGCToGCDirtySDOCache = 2516
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"EGCMsgResponse")]
