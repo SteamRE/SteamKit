@@ -51,6 +51,21 @@ message CPlayer_GetSteamLevel_Response {
 	optional uint32 player_level = 1;
 }
 
+message CPlayer_GetGameBadgeLevels_Request {
+	optional uint32 appid = 1;
+}
+
+message CPlayer_GetGameBadgeLevels_Response {
+	message Badge {
+		optional int32 level = 1;
+		optional int32 series = 2;
+		optional uint32 border_color = 3;
+	}
+
+	optional uint32 player_level = 1;
+	repeated .CPlayer_GetGameBadgeLevels_Response.Badge badges = 2;
+}
+
 message CPlayer_GetSteamLevelDistribution_Request {
 	optional uint32 player_level = 1;
 }
@@ -121,6 +136,9 @@ service Player {
 	}
 	rpc GetSteamLevel (.CPlayer_GetSteamLevel_Request) returns (.CPlayer_GetSteamLevel_Response) {
 		option (method_description) = "Returns the Steam Level of a user";
+	}
+	rpc GetGameBadgeLevels (.CPlayer_GetGameBadgeLevels_Request) returns (.CPlayer_GetGameBadgeLevels_Response) {
+		option (method_description) = "Returns the Steam Level of a user, the Badge level for the game, and if it's foil";
 	}
 	rpc GetSteamLevelDistribution (.CPlayer_GetSteamLevelDistribution_Request) returns (.CPlayer_GetSteamLevelDistribution_Response) {
 		option (method_description) = "Returns how a given Steam Level compares the user base at large";
