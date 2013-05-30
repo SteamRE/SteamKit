@@ -321,3 +321,31 @@ class MsgClientServerUnavailable<EMsg::ClientServerUnavailable>
 	uint eMsgSent;
 	EServerType eServerTypeUnavailable;
 };
+
+class MsgClientCreateChat<EMsg::ClientCreateChat>
+{
+	EChatRoomType chatRoomType;
+
+	gameidmarshal ulong gameId;
+
+	steamidmarshal ulong steamIdClan;
+
+	EChatPermission permissionOfficer;
+	EChatPermission permissionMember;
+	EChatPermission permissionAll;
+
+	uint membersMax;
+
+	byte chatFlags;
+
+	steamidmarshal ulong steamIdFriendChat;
+	steamidmarshal ulong steamIdInvited;
+};
+
+class MsgClientCreateChatResponse<EMsg::ClientCreateChatResponse>
+{
+	EResult result;
+	steamidmarshal ulong steamIdChat;
+	EChatRoomType chatRoomType;
+	steamidmarshal ulong steamIdFriendChat;
+};
