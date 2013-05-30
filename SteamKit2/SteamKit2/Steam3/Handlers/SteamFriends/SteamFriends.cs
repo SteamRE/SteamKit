@@ -693,7 +693,7 @@ namespace SteamKit2
                         cacheFriend.PersonaStateFlags = ( EPersonaStateFlag )friend.persona_state_flags;
                     }
 
-                    if ( ( flags & EClientPersonaStateFlag.GameExtraInfo ) == EClientPersonaStateFlag.GameExtraInfo )
+                    if ( ( flags & EClientPersonaStateFlag.GameDataBlob ) == EClientPersonaStateFlag.GameDataBlob )
                     {
                         cacheFriend.GameName = friend.game_name;
                         cacheFriend.GameID = friend.gameid;
