@@ -49,6 +49,7 @@ enum EDotaUserMessages {
 	DOTA_UM_ShowSurvey = 107;
 	DOTA_UM_TutorialFade = 108;
 	DOTA_UM_AddQuestLogEntry = 109;
+	DOTA_UM_SendStatPopup = 110;
 }
 
 enum DOTA_CHAT_MESSAGE {
@@ -559,5 +560,10 @@ message CDOTAUserMsg_AddQuestLogEntry {
 	optional string npc_dialog = 2;
 	optional bool quest = 3;
 	optional int32 quest_type = 4;
+}
+
+message CDOTAUserMsg_SendStatPopup {
+	optional int32 player_id = 1;
+	optional .CDOTAMsg_SendStatPopup statpopup = 2;
 }
 

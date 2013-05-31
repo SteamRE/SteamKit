@@ -19,6 +19,7 @@ enum EDotaClientMessages {
 	DOTA_CM_RequestGraphUpdate = 14;
 	DOTA_CM_ItemAlert = 15;
 	DOTA_CM_ChatWheel = 16;
+	DOTA_CM_SendStatPopup = 17;
 }
 
 message CDOTAClientMsg_MapPing {
@@ -83,5 +84,9 @@ message CDOTAClientMsg_RequestGraphUpdate {
 
 message CDOTAClientMsg_ChatWheel {
 	optional .EDOTAChatWheelMessage chat_message = 1 [default = k_EDOTA_CW_Ok];
+}
+
+message CDOTAClientMsg_SendStatPopup {
+	optional .CDOTAMsg_SendStatPopup statpopup = 1;
 }
 

@@ -232,6 +232,8 @@ enum EDOTAGCMsg {
 	k_EMsgGCJoinOpenGuildPartyResponse = 7270;
 	k_EMsgGCLeaveChatChannel = 7272;
 	k_EMsgGCChatMessage = 7273;
+	k_EMsgGCGetHeroStandings = 7274;
+	k_EMsgGCGetHeroStandingsResponse = 7275;
 	k_EMsgGCDev_GrantWarKill = 8001;
 }
 
@@ -393,6 +395,19 @@ enum DOTA_2013PassportSelectionIndices {
 	PP13_SEL_TEAMCUP_PLAYER_LOCK = 43;
 }
 
+enum EDOTAGCSessionNeed {
+	k_EDOTAGCSessionNeed_Unknown = 0;
+	k_EDOTAGCSessionNeed_UserNoSessionNeeded = 100;
+	k_EDOTAGCSessionNeed_UserInOnlineGame = 101;
+	k_EDOTAGCSessionNeed_UserInLocalGame = 102;
+	k_EDOTAGCSessionNeed_UserInUIWasConnected = 103;
+	k_EDOTAGCSessionNeed_UserInUINeverConnected = 104;
+	k_EDOTAGCSessionNeed_GameServerOnline = 200;
+	k_EDOTAGCSessionNeed_GameServerLocal = 201;
+	k_EDOTAGCSessionNeed_GameServerIdle = 202;
+	k_EDOTAGCSessionNeed_GameServerRelay = 203;
+}
+
 message CSODOTAGameAccountClient {
 	optional uint32 account_id = 1 [(key_field) = true];
 	optional uint32 wins = 3;
@@ -444,15 +459,6 @@ message CSODOTAGameAccountClientInternal {
 	optional uint32 communication_penalty_severity = 21;
 	optional uint32 solo_rank = 22;
 	optional uint32 solo_rank_uncertainty = 23;
-}
-
-message CSODOTAGameHeroStandings {
-	optional uint32 account_id = 1 [(key_field) = true];
-	optional uint32 hero_id = 2 [(key_field) = true];
-	optional uint32 wins = 3;
-	optional uint32 losses = 4;
-	optional float hero_performance = 5;
-	optional float hero_variance = 6;
 }
 
 message CSODOTAPartyMember {
@@ -2659,9 +2665,14 @@ message CMsgDOTAPassportVoteGenericSelection {
 	optional uint32 selection = 2;
 }
 
+message CMsgDOTAPassportStampedPlayer {
+	optional uint32 account_id = 1;
+}
+
 message CMsgDOTAPassportVote {
 	repeated .CMsgDOTAPassportVoteTeamGuess team_votes = 1;
 	repeated .CMsgDOTAPassportVoteGenericSelection generic_selections = 2;
+	repeated .CMsgDOTAPassportStampedPlayer stamped_players = 3;
 }
 
 message CMsgPassportDataRequest {
@@ -2706,5 +2717,18 @@ message CMsgRequestLeaguePrizePoolResponse {
 
 message CMsgGCToGCUpdateMatchmakingStats {
 	optional bytes msg_body = 1;
+}
+
+message CMsgGCGetHeroStandings {
+}
+
+message CMsgGCGetHeroStandingsResponse {
+	message Hero {
+		optional uint32 hero_id = 1;
+		optional uint32 wins = 2;
+		optional uint32 losses = 3;
+	}
+
+	repeated .CMsgGCGetHeroStandingsResponse.Hero standings = 1;
 }
 
