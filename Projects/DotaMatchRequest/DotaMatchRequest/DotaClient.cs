@@ -139,6 +139,13 @@ namespace DotaMatchRequest
             // send it off
             // notice here we're sending this message directly using the SteamClient
             client.Send( playGame );
+
+            // delay a little to give steam some time to establish a GC connection to us
+            Thread.Sleep( 5000 );
+
+            // inform the dota GC that we want a session
+            var clientHello = new ClientGCMsgProtobuf<CMsgClientHello>( ( uint )EGCBaseClientMsg.k_EMsgGCClientHello );
+            gameCoordinator.Send( clientHello, APPID );
         }
 
         // called when a gamecoordinator (GC) message arrives
@@ -150,7 +157,7 @@ namespace DotaMatchRequest
             // this makes the code cleaner and easier to maintain
             var messageMap = new Dictionary<uint, Action<IPacketGCMsg>>
             {
-                { ( uint )EGCBaseMsg.k_EMsgGCClientWelcome, OnClientWelcome },
+                { ( uint )EGCBaseClientMsg.k_EMsgGCClientWelcome, OnClientWelcome },
                 { ( uint )EDOTAGCMsg.k_EMsgGCMatchDetailsResponse, OnMatchDetails },
             };
 
@@ -212,6 +219,7 @@ namespace DotaMatchRequest
         {
             Type[] eMsgEnums =
             {
+                typeof( EGCBaseClientMsg ),
                 typeof( EDOTAGCMsg ),
                 typeof( EGCBaseMsg ),
                 typeof( EGCItemMsg ),
