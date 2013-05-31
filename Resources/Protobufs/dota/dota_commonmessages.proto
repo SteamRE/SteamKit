@@ -16,6 +16,12 @@ enum EDOTAChatWheelMessage {
 	k_EDOTA_CW_Missing_Bottom = 11;
 }
 
+enum EDOTAStatPopupTypes {
+	k_EDOTA_SPT_Textline = 0;
+	k_EDOTA_SPT_Basic = 1;
+	k_EDOTA_SPT_Poll = 2;
+}
+
 message CDOTAMsg_LocationPing {
 	optional int32 x = 1;
 	optional int32 y = 2;
@@ -41,5 +47,11 @@ message CDOTAMsg_WorldLine {
 	optional int32 z = 3;
 	optional bool initial = 4;
 	optional bool end = 5;
+}
+
+message CDOTAMsg_SendStatPopup {
+	optional .EDOTAStatPopupTypes style = 1 [default = k_EDOTA_SPT_Textline];
+	repeated string stat_strings = 2;
+	repeated int32 stat_images = 3;
 }
 

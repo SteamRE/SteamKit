@@ -130,6 +130,7 @@ message CMsgSOCacheHaveVersion {
 message CMsgClientHello {
 	optional uint32 version = 1;
 	repeated .CMsgSOCacheHaveVersion socache_have_versions = 2;
+	optional uint32 client_session_need = 3;
 }
 
 message CMsgClientWelcome {
@@ -141,5 +142,6 @@ message CMsgClientWelcome {
 
 message CMsgConnectionStatus {
 	optional .GCConnectionStatus status = 1 [default = GCConnectionStatus_HAVE_SESSION];
+	optional uint32 client_session_need = 2;
 }
 
