@@ -743,6 +743,15 @@ namespace SteamKit2.GC.Internal
       get { return _socache_have_versions; }
     }
   
+
+    private uint _client_session_need = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"client_session_need", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint client_session_need
+    {
+      get { return _client_session_need; }
+      set { _client_session_need = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -803,6 +812,15 @@ namespace SteamKit2.GC.Internal
     {
       get { return _status; }
       set { _status = value; }
+    }
+
+    private uint _client_session_need = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"client_session_need", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint client_session_need
+    {
+      get { return _client_session_need; }
+      set { _client_session_need = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

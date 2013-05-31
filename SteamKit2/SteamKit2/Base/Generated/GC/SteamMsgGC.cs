@@ -1226,15 +1226,6 @@ namespace SteamKit2.GC.Internal
       get { return _original_id; }
       set { _original_id = value; }
     }
-
-    private bool _contains_equipped_state = default(bool);
-    [global::ProtoBuf.ProtoMember(17, IsRequired = false, Name=@"contains_equipped_state", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
-    public bool contains_equipped_state
-    {
-      get { return _contains_equipped_state; }
-      set { _contains_equipped_state = value; }
-    }
     private readonly global::System.Collections.Generic.List<CSOEconItemEquipped> _equipped_state = new global::System.Collections.Generic.List<CSOEconItemEquipped>();
     [global::ProtoBuf.ProtoMember(18, Name=@"equipped_state", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public global::System.Collections.Generic.List<CSOEconItemEquipped> equipped_state
@@ -2808,6 +2799,32 @@ namespace SteamKit2.GC.Internal
       get { return _key_uint64; }
       set { _key_uint64 = value; }
     }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCToGCDirtyMultipleSDOCache")]
+  public partial class CMsgGCToGCDirtyMultipleSDOCache : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCToGCDirtyMultipleSDOCache() {}
+    
+
+    private uint _sdo_type = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"sdo_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint sdo_type
+    {
+      get { return _sdo_type; }
+      set { _sdo_type = value; }
+    }
+    private readonly global::System.Collections.Generic.List<ulong> _key_uint64 = new global::System.Collections.Generic.List<ulong>();
+    [global::ProtoBuf.ProtoMember(2, Name=@"key_uint64", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public global::System.Collections.Generic.List<ulong> key_uint64
+    {
+      get { return _key_uint64; }
+    }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
