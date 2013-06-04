@@ -50,6 +50,7 @@ enum EDotaUserMessages {
 	DOTA_UM_TutorialFade = 108;
 	DOTA_UM_AddQuestLogEntry = 109;
 	DOTA_UM_SendStatPopup = 110;
+	DOTA_UM_TutorialFinish = 111;
 }
 
 enum DOTA_CHAT_MESSAGE {
@@ -504,6 +505,12 @@ message CDOTAUserMsg_OverheadEvent {
 message CDOTAUserMsg_TutorialTipInfo {
 	optional string name = 1;
 	optional int32 progress = 2;
+}
+
+message CDOTAUserMsg_TutorialFinish {
+	optional string heading = 1;
+	optional string emblem = 2;
+	optional string body = 3;
 }
 
 message CDOTAUserMsg_WorldLine {
