@@ -8,10 +8,10 @@
 //------------------------------------------------------------------------------
 #pragma warning disable 1591
 
-// Generated from: steammessages_cloud.steamworkssdk.proto
+// Generated from: steammessages_cloud.steamclient.proto
 // Note: requires additional types generated from: google/protobuf/descriptor.proto
-// Note: requires additional types generated from: steammessages_unified_base.steamworkssdk.proto
-namespace SteamKit2.Steamworks
+// Note: requires additional types generated from: steammessages_unified_base.steamclient.proto
+namespace SteamKit2.Unified.Internal
 {
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCloud_GetUploadServerInfo_Request")]
   public partial class CCloud_GetUploadServerInfo_Request : global::ProtoBuf.IExtensible
@@ -281,12 +281,51 @@ namespace SteamKit2.Steamworks
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCloud_GetClientEncryptionKey_Request")]
+  public partial class CCloud_GetClientEncryptionKey_Request : global::ProtoBuf.IExtensible
+  {
+    public CCloud_GetClientEncryptionKey_Request() {}
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCloud_GetClientEncryptionKey_Response")]
+  public partial class CCloud_GetClientEncryptionKey_Response : global::ProtoBuf.IExtensible
+  {
+    public CCloud_GetClientEncryptionKey_Response() {}
+    
+
+    private byte[] _key = null;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"key", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public byte[] key
+    {
+      get { return _key; }
+      set { _key = value; }
+    }
+
+    private int _crc = default(int);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"crc", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int crc
+    {
+      get { return _crc; }
+      set { _crc = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     public interface ICloud
     {
       CCloud_GetUploadServerInfo_Response GetUploadServerInfo(CCloud_GetUploadServerInfo_Request request);
     CCloud_GetFileDetails_Response GetFileDetails(CCloud_GetFileDetails_Request request);
     CCloud_EnumerateUserFiles_Response EnumerateUserFiles(CCloud_EnumerateUserFiles_Request request);
     CCloud_Delete_Response Delete(CCloud_Delete_Request request);
+    CCloud_GetClientEncryptionKey_Response GetClientEncryptionKey(CCloud_GetClientEncryptionKey_Request request);
     
     }
     
