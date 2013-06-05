@@ -353,6 +353,7 @@
 	k_EMsgClientFriendUserStatusPublished = 5596, // flags: 2, server type: -1
 	k_EMsgClientCurrentUIMode = 5597, // flags: 2, server type: -1
 	k_EMsgClientVanityURLChangedNotification = 5598, // flags: 2, server type: -1
+	k_EMsgClientUserNotifications = 5599, // flags: 2, server type: -1
 	k_EMsgClientDFSAuthenticateRequest = 5605, // flags: 2, server type: -1
 	k_EMsgClientDFSAuthenticateResponse = 5606, // flags: 2, server type: -1
 	k_EMsgClientDFSEndSession = 5607, // flags: 2, server type: -1

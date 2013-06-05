@@ -1318,6 +1318,7 @@ namespace SteamKit2
 		ClientFriendUserStatusPublished = 5596,
 		ClientCurrentUIMode = 5597,
 		ClientVanityURLChangedNotification = 5598,
+		ClientUserNotifications = 5599,
 		BaseDFS = 5600,
 		DFSGetFile = 5601,
 		DFSInstallLocalFile = 5602,
