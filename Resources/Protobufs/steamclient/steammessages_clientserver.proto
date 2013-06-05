@@ -2295,6 +2295,15 @@ message CMsgClientItemAnnouncements {
 message CMsgClientRequestItemAnnouncements {
 }
 
+message CMsgClientUserNotifications {
+	message Notification {
+		optional uint32 user_notification_type = 1;
+		optional uint32 count = 2;
+	}
+
+	repeated .CMsgClientUserNotifications.Notification notifications = 1;
+}
+
 message CMsgClientCommentNotifications {
 	optional uint32 count_new_comments = 1;
 	optional uint32 count_new_comments_owner = 2;
