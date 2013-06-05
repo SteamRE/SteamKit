@@ -234,6 +234,7 @@ enum EDOTAGCMsg {
 	k_EMsgGCChatMessage = 7273;
 	k_EMsgGCGetHeroStandings = 7274;
 	k_EMsgGCGetHeroStandingsResponse = 7275;
+	k_EMsgGCMatchmakingLanguagePreference = 7276;
 	k_EMsgGCDev_GrantWarKill = 8001;
 }
 
@@ -258,6 +259,7 @@ enum DOTA_GameMode {
 	DOTA_GAMEMODE_MO = 11;
 	DOTA_GAMEMODE_LP = 12;
 	DOTA_GAMEMODE_POOL1 = 13;
+	DOTA_GAMEMODE_FH = 14;
 }
 
 enum DOTA_GameState {
@@ -435,6 +437,7 @@ message CSODOTAGameAccountClient {
 	optional uint32 match_disabled_count = 42;
 	optional .DOTA_PartnerAccountType partner_account_type = 44 [default = DOTA_PARTNER_NONE];
 	optional uint32 antiaddictionstate = 45;
+	optional uint32 matchmaking_language_preference = 46;
 }
 
 message CSODOTAGameAccountClientInternal {
@@ -535,6 +538,7 @@ message CDOTALobbyMember {
 	optional uint32 meta_xp_bonus_rate = 19;
 	repeated uint32 disabled_hero_id = 20;
 	optional .DOTA_PartnerAccountType partner_account_type = 21 [default = DOTA_PARTNER_NONE];
+	repeated uint32 enabled_hero_id = 22;
 }
 
 message CLobbyTeamDetails {
@@ -660,6 +664,10 @@ message CMsgConnectedPlayers {
 	optional uint32 num_spectators = 3;
 	optional uint32 tower_state = 4;
 	optional bool skip_player_validation = 5;
+}
+
+message CMsgMatchmakingLanguagePreference {
+	optional uint32 matchmaking_language_preference = 1;
 }
 
 message CMsgStartFindingMatch {
@@ -1915,7 +1923,6 @@ message CMsgDOTAPlayerReports {
 		optional uint32 report_flags = 4;
 		optional uint32 match_id = 5;
 		optional fixed32 date = 6;
-		optional string comment = 7;
 	}
 
 	repeated .CMsgDOTAPlayerReports.PlayerReport reports = 1;
@@ -2695,6 +2702,9 @@ message CMsgPassportDataResponse {
 	optional uint32 west_qualifiers_runner_up_team_id = 13;
 	optional uint32 passports_bought = 14;
 	optional uint32 original_purchaser_id = 15;
+	optional uint32 featured_match_id = 16;
+	repeated uint32 radiant_featured_match_heroes = 17;
+	repeated uint32 dire_featured_match_heroes = 18;
 }
 
 message CMsgGCToGCGetLeagueAdmin {
