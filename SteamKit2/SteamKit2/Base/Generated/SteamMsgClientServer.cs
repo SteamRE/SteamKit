@@ -14512,6 +14512,51 @@ namespace SteamKit2.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientUserNotifications")]
+  public partial class CMsgClientUserNotifications : global::ProtoBuf.IExtensible
+  {
+    public CMsgClientUserNotifications() {}
+    
+    private readonly global::System.Collections.Generic.List<CMsgClientUserNotifications.Notification> _notifications = new global::System.Collections.Generic.List<CMsgClientUserNotifications.Notification>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"notifications", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CMsgClientUserNotifications.Notification> notifications
+    {
+      get { return _notifications; }
+    }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Notification")]
+  public partial class Notification : global::ProtoBuf.IExtensible
+  {
+    public Notification() {}
+    
+
+    private uint _user_notification_type = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"user_notification_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint user_notification_type
+    {
+      get { return _user_notification_type; }
+      set { _user_notification_type = value; }
+    }
+
+    private uint _count = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"count", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint count
+    {
+      get { return _count; }
+      set { _count = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientCommentNotifications")]
   public partial class CMsgClientCommentNotifications : global::ProtoBuf.IExtensible
   {

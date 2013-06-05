@@ -841,7 +841,10 @@ namespace SteamKit2.GC.Internal
       GCConnectionStatus_NO_SESSION = 2,
             
       [global::ProtoBuf.ProtoEnum(Name=@"GCConnectionStatus_NO_SESSION_IN_LOGON_QUEUE", Value=3)]
-      GCConnectionStatus_NO_SESSION_IN_LOGON_QUEUE = 3
+      GCConnectionStatus_NO_SESSION_IN_LOGON_QUEUE = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"GCConnectionStatus_NO_STEAM", Value=4)]
+      GCConnectionStatus_NO_STEAM = 4
     }
   
 }
