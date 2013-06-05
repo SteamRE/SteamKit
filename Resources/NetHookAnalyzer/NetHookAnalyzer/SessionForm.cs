@@ -432,7 +432,7 @@ namespace NetHookAnalyzer
             }
 
             if (!MsgUtil.IsProtoBuf(realEMsg))
-                return false;
+                return null;
 
             // try reading it as a protobuf
             using (ProtoReader reader = new ProtoReader(str, null, null))
