@@ -131,6 +131,8 @@
     <Compile Include="Steam3\Handlers\SteamWorkshop\SteamWorkshop.cs" />
     <Compile Include="Steam3\Handlers\SteamUserStats\SteamUserStats.cs" />
     <Compile Include="Steam3\SteamClient\CallbackMgr\CallbackMgr.cs" />
+    <Compile Include="Steam3\UFSClient\Callbacks.cs" />
+    <Compile Include="Steam3\UFSClient\UFSClient.cs" />
     <Compile Include="Steam3\WebAPI\WebAPI.cs" />
     <Compile Include="Types\ChecksumData.cs" />
     <Compile Include="Types\GlobalID.cs" />

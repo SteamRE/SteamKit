@@ -42,6 +42,19 @@ namespace SteamKit2.Internal
         public EUniverse ConnectedUniverse { get; private set; }
 
         /// <summary>
+        /// Gets a value indicating whether this instance is connected to the remote CM server.
+        /// </summary>
+        /// <value>
+        /// 	<c>true</c> if this instance is connected; otherwise, <c>false</c>.
+        /// </value>
+        public bool IsConnected { get { return ConnectedUniverse != EUniverse.Invalid; } }
+
+        /// <summary>
+        /// Gets the session token assigned to this client from the AM.
+        /// </summary>
+        public ulong SessionToken { get; private set; }
+
+        /// <summary>
         /// Gets the session ID of this client. This value is assigned after a logon attempt has succeeded.
         /// This value will be <c>null</c> if the client is logged off of Steam.
         /// </summary>
@@ -285,6 +298,10 @@ namespace SteamKit2.Internal
                 case EMsg.ClientCMList:
                     HandleCMList( packetMsg );
                     break;
+
+                case EMsg.ClientSessionToken: // am session token
+                    HandleSessionToken( packetMsg );
+                    break;
             }
         }
         /// <summary>
@@ -308,7 +325,7 @@ namespace SteamKit2.Internal
             OnClientDisconnected();
         }
 
-        static IPacketMsg GetPacketMsg( byte[] data )
+        internal static IPacketMsg GetPacketMsg( byte[] data )
         {
             uint rawEMsg = BitConverter.ToUInt32( data, 0 );
             EMsg eMsg = MsgUtil.GetMsg( rawEMsg );
@@ -405,6 +422,7 @@ namespace SteamKit2.Internal
             uint protoVersion = encRequest.Body.ProtocolVersion;
 
             DebugLog.WriteLine( "CMClient", "Got encryption request. Universe: {0} Protocol ver: {1}", eUniv, protoVersion );
+            DebugLog.Assert( protoVersion == 1, "CMClient", "Encryption handshake protocol version mismatch!" );
 
             byte[] pubKey = KeyDictionary.GetPublicKey( eUniv );
 
@@ -479,6 +497,12 @@ namespace SteamKit2.Internal
 
             // update our bootstrap list with steam's list of CMs
             Servers = new ReadOnlyCollection<IPEndPoint>( cmList.ToList() );
+        }
+        void HandleSessionToken( IPacketMsg packetMsg )
+        {
+            var sessToken = new ClientMsgProtobuf<CMsgClientSessionToken>( packetMsg );
+
+            SessionToken = sessToken.Body.token;
         }
         #endregion
     }
