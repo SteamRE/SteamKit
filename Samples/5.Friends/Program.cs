@@ -12,7 +12,7 @@ using SteamKit2;
 // with the client's persona state and friends list
 //
 
-namespace Sample5_CallbackManager
+namespace Sample5_Friends
 {
     class Program
     {
