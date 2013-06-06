@@ -340,7 +340,7 @@ namespace NetHookAnalyzer
                 if (type.GetInterfaces().ToList().Find(inter => inter == typeof(IExtensible)) == null)
                     return false;
 
-                if (type.Name.EndsWith(eMsg.ToString()))
+                if (type.Name.EndsWith(eMsg.ToString(), StringComparison.OrdinalIgnoreCase))
                     return true;
 
                 return false;
