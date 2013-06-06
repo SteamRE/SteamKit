@@ -97,6 +97,18 @@ namespace Sample1_Logon
                 {
                     if ( c.Result != EResult.OK )
                     {
+                        if ( c.Result == EResult.AccountLogonDenied )
+                        {
+                            // if we recieve AccountLogonDenied or one of it's flavors (AccountLogonDeniedNoMailSent, etc)
+                            // then the account we're logging into is SteamGuard protected
+                            // see sample 6 for how SteamGuard can be handled
+
+                            Console.WriteLine( "Unable to logon to Steam: This account is SteamGuard protected." );
+
+                            isRunning = false;
+                            return;
+                        }
+
                         Console.WriteLine( "Unable to logon to Steam: {0} / {1}", c.Result, c.ExtendedResult );
 
                         isRunning = false;
