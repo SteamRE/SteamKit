@@ -35,6 +35,8 @@ enum ECsgoGCMsg {
 	k_EMsgGCCStrike15_v2_PlayerOverwatchCaseUpdate = 9131;
 	k_EMsgGCCStrike15_v2_PlayerOverwatchCaseAssignment = 9132;
 	k_EMsgGCCStrike15_v2_PlayerOverwatchCaseStatus = 9133;
+	k_EMsgGCCStrike15_v2_GC2ClientTextMsg = 9134;
+	k_EMsgGCCStrike15_v2_Client2GCTextMsg = 9135;
 }
 
 message GameServerPing {
@@ -366,5 +368,16 @@ message CMsgGCCStrike15_v2_PlayerOverwatchCaseStatus {
 message CClientHeaderOverwatchEvidence {
 	optional uint32 accountid = 1;
 	optional uint64 caseid = 2;
+}
+
+message CMsgGCCStrike15_v2_GC2ClientTextMsg {
+	optional uint32 id = 1;
+	optional uint32 type = 2;
+	optional bytes payload = 3;
+}
+
+message CMsgGCCStrike15_v2_Client2GCTextMsg {
+	optional uint32 id = 1;
+	repeated bytes args = 2;
 }
 

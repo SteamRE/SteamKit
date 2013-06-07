@@ -432,3 +432,13 @@ message CMsgApplyStrangifier {
 	optional uint64 subject_item_id = 2;
 }
 
+message CMsgSetItemEffectVerticalOffset {
+	optional uint64 item_id = 1;
+	optional float offset = 2;
+}
+
+message CMsgSetHatEffectUseHeadOrigin {
+	optional uint64 item_id = 1;
+	optional bool use_head = 2;
+}
+
