@@ -111,6 +111,9 @@ namespace SteamKit2
             connection.Disconnect();
         }
 
+        /// <summary>
+        /// Represents all the information required to upload a file to the UFS server.
+        /// </summary>
         public sealed class UploadDetails
         {
             /// <summary>
@@ -279,7 +282,7 @@ namespace SteamKit2
         {
             var packetMsg = CMClient.GetPacketMsg( e.Data );
 
-            DebugLog.WriteLine( "UFSClient", "<- Recv'd EMsg: {0} ({1}) {2}", packetMsg.MsgType, (int)packetMsg.MsgType, packetMsg.IsProto ? "(Proto)" : "" );
+            DebugLog.WriteLine( "UFSClient", "<- Recv'd EMsg: {0} ({1}) {2}", packetMsg.MsgType, ( int )packetMsg.MsgType, packetMsg.IsProto ? "(Proto)" : "" );
 
             var msgDispatch = new Dictionary<EMsg, Action<IPacketMsg>>
             {
