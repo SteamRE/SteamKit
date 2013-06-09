@@ -111,6 +111,40 @@ namespace SteamKit2
             connection.Disconnect();
         }
 
+        public sealed class UploadDetails
+        {
+            /// <summary>
+            /// Gets or sets the AppID this upload request is for.
+            /// </summary>
+            /// <value>
+            /// The AppID.
+            /// </value>
+            public uint AppID { get; set; }
+
+            /// <summary>
+            /// Gets or sets the remote name of the file that is being uploaded.
+            /// </summary>
+            /// <value>
+            /// The name of the file.
+            /// </value>
+            public string FileName { get; set; }
+
+            /// <summary>
+            /// Gets or sets the physical file data for this upload.
+            /// </summary>
+            /// <value>
+            /// The file data.
+            /// </value>
+            public byte[] FileData { get; set; }
+
+            /// <summary>
+            /// Gets or sets the JobID of this file upload. This value should be assigned from <see cref="UploadFileResponseCallback.JobID"/>.
+            /// </summary>
+            /// <value>
+            /// The job ID.
+            /// </value>
+            public JobID JobID { get; set; }
+        }
 
         /// <summary>
         /// Attempt to logon to the UFS and authorize the client for the given AppIDs.
@@ -138,24 +172,22 @@ namespace SteamKit2
         /// The <see cref="UFSClient"/> should be logged on before this point.
         /// Results are returned in a <see cref="UploadFileResponseCallback"/>.
         /// </summary>
-        /// <param name="gameID">The game to upload this file to</param>
-        /// <param name="fileName">The filepath of the file as it exists in Steam Cloud</param>
-        /// <param name="fileData">The binary data of the file</param>
+        /// <param name="details">The details to use for uploading the file.</param>
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="SteamClient.JobCallback&lt;T&gt;"/>.</returns>
-        public JobID UploadFile( GameID gameID, string fileName, byte[] fileData )
+        public JobID RequestFileUpload( UploadDetails details )
         {
-            var compressedData = ZipUtil.Compress( fileData );
+            byte[] compressedData = ZipUtil.Compress( details.FileData );
 
             var msg = new ClientMsgProtobuf<CMsgClientUFSUploadFileRequest>( EMsg.ClientUFSUploadFileRequest );
             msg.SourceJobID = steamClient.GetNextJobID();
 
-            msg.Body.app_id = gameID.AppID;
+            msg.Body.app_id = details.AppID;
             msg.Body.can_encrypt = false;
-            msg.Body.file_name = fileName;
-            msg.Body.file_size = (uint)compressedData.Length;
-            msg.Body.raw_file_size = (uint)fileData.Length;
-            msg.Body.sha_file = CryptoHelper.SHAHash( fileData );
-            msg.Body.time_stamp = MicroTime.UtcNow.ToUnixTime();
+            msg.Body.file_name = details.FileName;
+            msg.Body.file_size = ( uint )compressedData.Length;
+            msg.Body.raw_file_size = ( uint )details.FileData.Length;
+            msg.Body.sha_file = CryptoHelper.SHAHash( details.FileData );
+            msg.Body.time_stamp = Utils.DateTimeToUnixTime( DateTime.UtcNow );
 
             Send( msg );
 
@@ -164,23 +196,26 @@ namespace SteamKit2
 
         /// <summary>
         /// Uploads the actual contents of a file to the UFS.
-        /// The <see cref="UFSClient"/> should be logged on before this point.
+        /// The <see cref="UFSClient"/> should be logged on before this point, and the previous request to upload a file must have completed successfully.
         /// Results are returned in a <see cref="UploadFileFinishedCallback"/>.
         /// </summary>
-        /// <param name="response">The response callback as a result of calling 'UploadFile'</param>
-        /// <param name="fileData">The binary data of the file</param>
+        /// <param name="details">The details to use for uploading the file.</param>
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="SteamClient.JobCallback&lt;T&gt;"/>.</returns>
-        public void UploadFileChunks( UploadFileResponseCallback response, byte[] fileData )
+        public void UploadFile( UploadDetails details )
         {
-            var pkzippedData = ZipUtil.Compress( fileData );
-            var buffer = new byte[10240];
+            const uint MaxBytesPerChunk = 10240;
 
-            using (var ms = new MemoryStream( pkzippedData ))
+            byte[] compressedData = ZipUtil.Compress( details.FileData );
+            byte[] fileHash = CryptoHelper.SHAHash( details.FileData );
+
+            var buffer = new byte[ MaxBytesPerChunk ];
+
+            using ( var ms = new MemoryStream( compressedData ) )
             {
-                for ( long i = 0; i < ms.Length; i += buffer.Length )
+                for ( long readIndex = 0; readIndex < ms.Length; readIndex += buffer.Length )
                 {
                     var msg = new ClientMsgProtobuf<CMsgClientUFSFileChunk>( EMsg.ClientUFSUploadFileChunk );
-                    msg.TargetJobID = response.FileUploadJobID;
+                    msg.TargetJobID = details.JobID;
 
                     var bytesRead = ms.Read( buffer, 0, buffer.Length );
 
@@ -193,8 +228,8 @@ namespace SteamKit2
                         msg.Body.data = buffer;
                     }
 
-                    msg.Body.file_start = (uint)i;
-                    msg.Body.sha_file = response.ShaHash;
+                    msg.Body.file_start = ( uint )readIndex;
+                    msg.Body.sha_file = fileHash;
 
                     Send( msg );
                 }
@@ -335,7 +370,7 @@ namespace SteamKit2
         void HandleUploadFileFinished( IPacketMsg packetMsg )
         {
             var uploadFin = new ClientMsgProtobuf<CMsgClientUFSUploadFileFinished>( packetMsg );
-
+            
             var innerCallback = new UploadFileFinishedCallback(uploadFin.Body);
             var callback = new SteamClient.JobCallback<UploadFileFinishedCallback>( uploadFin.TargetJobID, innerCallback );
             steamClient.PostCallback( callback );

@@ -21,6 +21,11 @@ namespace SteamKit2
             DateTime origin = new DateTime( 1970, 1, 1, 0, 0, 0, 0 );
             return origin.AddSeconds( unixTime );
         }
+        public static uint DateTimeToUnixTime( DateTime time )
+        {
+            DateTime origin = new DateTime( 1970, 1, 1, 0, 0, 0, 0 );
+            return ( uint )( time - origin ).TotalSeconds;
+        }
 
         public static string EncodeHexString(byte[] input)
         {

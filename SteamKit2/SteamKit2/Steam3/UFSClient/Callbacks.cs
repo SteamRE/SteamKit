@@ -90,18 +90,21 @@ namespace SteamKit2
             /// </summary>
             public byte[] ShaHash { get; private set; }
 
-            internal JobID FileUploadJobID { get; private set; }
+            /// <summary>
+            /// Gets the JobID for this upload session. This is used for <see cref="UploadDetails.JobID"/>.
+            /// </summary>
+            public JobID JobID { get; private set; }
 
 
             internal UploadFileResponseCallback( CMsgClientUFSUploadFileResponse body, JobID remoteJobID )
             {
-                Result = (EResult)body.eresult;
+                Result = ( EResult )body.eresult;
                 UseHttp = body.use_http;
                 UseHttps = body.use_https;
                 EncryptFile = body.encrypt_file;
                 ShaHash = body.sha_file;
 
-                FileUploadJobID = remoteJobID;
+                JobID = remoteJobID;
             }
         }
 
