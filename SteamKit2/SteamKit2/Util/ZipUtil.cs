@@ -65,12 +65,7 @@ namespace SteamKit2
             using ( MemoryStream ms = new MemoryStream() )
             using ( BinaryWriter writer = new BinaryWriter( ms ) )
             {
-                uint checkSum = 0;
-
-                using ( var crc = new Crc32() )
-                {
-                    checkSum = BitConverter.ToUInt32( crc.ComputeHash( buffer ), 0 );
-                }
+                uint checkSum = Crc32.Compute(buffer);
 
                 byte[] compressed = DeflateBuffer( buffer );
 
