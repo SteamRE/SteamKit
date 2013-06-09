@@ -337,7 +337,7 @@ namespace SteamKit2
             var uploadFin = new ClientMsgProtobuf<CMsgClientUFSUploadFileFinished>( packetMsg );
 
             var innerCallback = new UploadFileFinishedCallback(uploadFin.Body);
-            var callback = new SteamClient.JobCallback<UploadFileFinishedCallback>( ploadFin.TargetJobID, innerCallback );
+            var callback = new SteamClient.JobCallback<UploadFileFinishedCallback>( uploadFin.TargetJobID, innerCallback );
             steamClient.PostCallback( callback );
         }
         #endregion
