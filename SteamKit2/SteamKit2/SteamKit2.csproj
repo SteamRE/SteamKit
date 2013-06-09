@@ -123,6 +123,8 @@
     <Compile Include="Steam3\Handlers\SteamGameCoordinator\Callbacks.cs" />
     <Compile Include="Steam3\Handlers\SteamMasterServer\Callbacks.cs" />
     <Compile Include="Steam3\Handlers\SteamMasterServer\SteamMasterServer.cs" />
+    <Compile Include="Steam3\Handlers\SteamScreenshots\Callbacks.cs" />
+    <Compile Include="Steam3\Handlers\SteamScreenshots\SteamScreenshots.cs" />
     <Compile Include="Steam3\Handlers\SteamTrading\Callbacks.cs" />
     <Compile Include="Steam3\Handlers\SteamTrading\SteamTrading.cs" />
     <Compile Include="Steam3\Handlers\SteamUnifiedMessages\Callbacks.cs" />

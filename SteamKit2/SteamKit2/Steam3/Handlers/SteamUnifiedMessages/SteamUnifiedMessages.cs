@@ -17,9 +17,9 @@ namespace SteamKit2
     /// </summary>
     public partial class SteamUnifiedMessages : ClientMsgHandler
     {
-
         /// <summary>
         /// Sends a message.
+        /// Results are returned in a <see cref="ServiceMethodResponse"/> from a <see cref="SteamClient.JobCallback&lt;T&gt;"/>.
         /// </summary>
         /// <typeparam name="T">The type of a protobuf object.</typeparam>
         /// <param name="name">Name of the RPC endpoint. Takes the format ServiceName.RpcName</param>

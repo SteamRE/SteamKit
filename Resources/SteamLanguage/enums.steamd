@@ -825,3 +825,13 @@ enum ELeaderboardUploadScoreMethod
 	KeepBest = 1;
 	ForceUpdate = 2;
 };
+
+enum EUCMFilePrivacyState flags
+{
+	Invalid = -1;
+	Private = 2;
+	FriendsOnly = 4;
+	Public = 8;
+	
+	All = 14;
+};
