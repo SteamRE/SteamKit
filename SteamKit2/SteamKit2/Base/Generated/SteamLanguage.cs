@@ -2535,6 +2535,15 @@ namespace SteamKit2
 		KeepBest = 1,
 		ForceUpdate = 2,
 	}
+	[Flags]
+	public enum EUCMFilePrivacyState
+	{
+		Invalid = -1,
+		Private = 2,
+		FriendsOnly = 4,
+		Public = 8,
+		All = 14,
+	}
 	public enum EUdpPacketType : byte
 	{
 		Invalid = 0,
