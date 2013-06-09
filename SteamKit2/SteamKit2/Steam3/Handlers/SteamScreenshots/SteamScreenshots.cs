@@ -103,7 +103,7 @@ namespace SteamKit2
             msg.Body.thumbname = details.UFSThumbnailFilePath;
             msg.Body.width = details.Width;
             msg.Body.height = details.Height;
-            msg.Body.rtime32_created = new MicroTime( details.CreationTime ).ToUnixTime();
+            msg.Body.rtime32_created = Utils.DateTimeToUnixTime( details.CreationTime );
             msg.Body.spoiler_tag = details.ContainsSpoilers;
 
             Client.Send( msg );
