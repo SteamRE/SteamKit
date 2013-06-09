@@ -96,7 +96,7 @@ namespace SteamKit2
             /// This is provided in the <see cref="SteamClient.JobCallback&lt;T&gt;"/> for a <see cref="UpdateMachineAuthCallback"/>.
             /// </summary>
             /// <value>The Job ID.</value>
-            public ulong JobID { get; set; }
+            public JobID JobID { get; set; }
 
             /// <summary>
             /// Gets or sets the result of updating the machine auth.
