@@ -144,7 +144,7 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SteamID"/> class from a rendered form.
+        /// Initializes a new instance of the <see cref="SteamID"/> class from a Steam2 "STEAM_" rendered form.
         /// This constructor assumes the rendered SteamID is in the public universe.
         /// </summary>
         /// <param name="steamId">A "STEAM_" rendered form of the SteamID.</param>
@@ -154,7 +154,7 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SteamID"/> class from a rendered form and universe.
+        /// Initializes a new instance of the <see cref="SteamID"/> class from a Steam2 "STEAM_" rendered form and universe.
         /// </summary>
         /// <param name="steamId">A "STEAM_" rendered form of the SteamID.</param>
         /// <param name="eUniverse">The universe the SteamID belongs to.</param>
@@ -204,11 +204,11 @@ namespace SteamKit2
 
 
         /// <summary>
-        /// Sets the various components of this SteamID from a rendered form and universe.
+        /// Sets the various components of this SteamID from a Steam2 "STEAM_" rendered form and universe.
         /// </summary>
         /// <param name="steamId">A "STEAM_" rendered form of the SteamID.</param>
         /// <param name="eUniverse">The universe the SteamID belongs to.</param>
-        /// <returns>True if this instance was successfully assigned, or false if the given string was in an invalid format.</returns>
+        /// <returns><c>true</c> if this instance was successfully assigned; otherwise, <c>false</c> if the given string was in an invalid format.</returns>
         public bool SetFromString( string steamId, EUniverse eUniverse )
         {
             if ( string.IsNullOrEmpty( steamId ) )
@@ -498,10 +498,21 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// Renders this instance into it's "STEAM_" represenation.
+        /// Renders this instance into it's Steam2 "STEAM_" or Steam3 represenation.
         /// </summary>
-        /// <returns>A string "STEAM_" representation of this SteamID.</returns>
-        public string Render()
+        /// <param name="steam3">If set to <c>true</c>, the Steam3 rendering will be returned; otherwise, the Steam2 STEAM_ rendering.</param>
+        /// <returns>
+        /// A string Steam2 "STEAM_" representation of this SteamID, or a Steam3 representation.
+        /// </returns>
+        public string Render( bool steam3 = false )
+        {
+            if ( steam3 )
+                return RenderSteam3();
+
+            return RenderSteam2();
+        }
+
+        string RenderSteam2()
         {
             switch ( AccountType )
             {
@@ -515,6 +526,59 @@ namespace SteamKit2
                     return Convert.ToString( this );
             }
         }
+        string RenderSteam3()
+        {
+            switch ( AccountType )
+            {
+                case EAccountType.AnonGameServer:
+                    return string.Format( "[A:{0}:{1}:{2}]", ( uint )AccountUniverse, AccountID, AccountInstance );
+
+                case EAccountType.GameServer:
+                    return string.Format( "[G:{0}:{1}]", ( uint )AccountUniverse, AccountID );
+
+                case EAccountType.Multiseat:
+                    return string.Format( "[M:{0}:{1}:{2}]", ( uint )AccountUniverse, AccountID, AccountInstance );
+
+                case EAccountType.Pending:
+                    return string.Format( "[P:{0}:{1}]", ( uint )AccountUniverse, AccountID );
+
+                case EAccountType.ContentServer:
+                    return string.Format( "[C:{0}:{1}]", ( uint )AccountUniverse, AccountID );
+
+                case EAccountType.Clan:
+                    return string.Format( "[g:{0}:{1}]", ( uint )AccountUniverse, AccountID );
+
+                case EAccountType.Chat:
+                    {
+                        if ( ( ( ChatInstanceFlags )AccountInstance ).HasFlag( ChatInstanceFlags.Clan ) )
+                            return string.Format( "[c:{0}:{1}]", ( uint )AccountUniverse, AccountID );
+
+                        else if ( ( ( ChatInstanceFlags )AccountInstance ).HasFlag( ChatInstanceFlags.Lobby ) )
+                            return string.Format( "[L:{0}:{1}]", ( uint )AccountUniverse, AccountID );
+
+                        else
+                            return string.Format( "[T:{0}:{1}]", ( uint )AccountUniverse, AccountID );
+                    }
+
+                case EAccountType.Invalid:
+                    return string.Format( "[I:{0}:{1}]", ( uint )AccountUniverse, AccountID );
+
+                case EAccountType.Individual:
+                    {
+                        if ( AccountInstance == DesktopInstance )
+                            return string.Format( "[U:{0}:{1}]", ( uint )AccountUniverse, AccountID );
+
+                        else
+                            return string.Format( "[U:{0}:{1}:{2}]", ( uint )AccountUniverse, AccountID, AccountInstance );
+                    }
+
+                case EAccountType.AnonUser:
+                    return string.Format( "[a:{0}:{1}]", ( uint )AccountUniverse, AccountID );
+
+                default:
+                    return string.Format( "[i:{0}:{1}]", ( uint )AccountUniverse, AccountID );
+            }
+        }
 
         /// <summary>
         /// Returns a <see cref="System.String"/> that represents this instance.
@@ -524,7 +588,8 @@ namespace SteamKit2
         /// </returns>
         public override string ToString()
         {
-            return Render();
+            // for compatibility, we will always return a Steam2 rendering when ToString()'d
+            return Render( false );
         }
 
 
