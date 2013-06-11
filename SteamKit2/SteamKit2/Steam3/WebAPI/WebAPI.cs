@@ -30,7 +30,7 @@ namespace SteamKit2
         /// </summary>
         public sealed class Interface : DynamicObject, IDisposable
         {
-            WebClient webClient;
+            TimeoutableWebClient webClient;
 
             string iface;
             string apiKey;
@@ -43,9 +43,22 @@ namespace SteamKit2
             );
 
 
+            /// <summary>
+            /// Gets or sets the timeout value in milliseconds for any web requests made to the WebAPI.
+            /// </summary>
+            /// <value>
+            /// The timeout value in milliseconds. The default value is 100,000 milliseconds (100 seconds).
+            /// </value>
+            public int Timeout
+            {
+                get { return webClient.Timeout; }
+                set { webClient.Timeout = value; }
+            }
+
+
             internal Interface( string iface, string apiKey )
             {
-                webClient = new WebClient();
+                webClient = new TimeoutableWebClient();
 
                 this.iface = iface;
                 this.apiKey = apiKey;

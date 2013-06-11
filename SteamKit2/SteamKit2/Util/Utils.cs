@@ -337,4 +337,27 @@ namespace SteamKit2
             return ( ushort )IPAddress.NetworkToHostOrder( ( short )input );
         }
     }
+
+    class TimeoutableWebClient : WebClient
+    {
+        public int Timeout { get; set; }
+
+
+        public TimeoutableWebClient()
+        {
+            // msdn docs state that the default timeout of a HttpWebRequest is 100,000 milliseconds (100 sec)
+            Timeout = 100000;
+        }
+
+
+        protected override WebRequest GetWebRequest( Uri address )
+        {
+            var webReq = base.GetWebRequest( address );
+
+            if ( webReq != null )
+                webReq.Timeout = Timeout;
+
+            return webReq;
+        }
+    }
 }
