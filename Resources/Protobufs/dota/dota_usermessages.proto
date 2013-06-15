@@ -1,5 +1,5 @@
 import "google/protobuf/descriptor.proto";
-import "netmessages.proto";
+import "networkbasetypes.proto";
 import "ai_activity.proto";
 import "dota_commonmessages.proto";
 
@@ -51,6 +51,8 @@ enum EDotaUserMessages {
 	DOTA_UM_AddQuestLogEntry = 109;
 	DOTA_UM_SendStatPopup = 110;
 	DOTA_UM_TutorialFinish = 111;
+	DOTA_UM_SendRoshanPopup = 112;
+	DOTA_UM_SendGenericToolTip = 113;
 }
 
 enum DOTA_CHAT_MESSAGE {
@@ -154,6 +156,7 @@ enum DOTA_PARTICLE_MESSAGE {
 	DOTA_PARTICLE_MANAGER_EVENT_DESTROY = 7;
 	DOTA_PARTICLE_MANAGER_EVENT_DESTROY_INVOLVING = 8;
 	DOTA_PARTICLE_MANAGER_EVENT_RELEASE = 9;
+	DOTA_PARTICLE_MANAGER_EVENT_LATENCY = 10;
 	DOTA_PARTICLE_MANAGER_EVENT_SHOULD_DRAW = 11;
 	DOTA_PARTICLE_MANAGER_EVENT_FROZEN = 12;
 }
@@ -510,6 +513,14 @@ message CDOTAUserMsg_TutorialFinish {
 	optional string heading = 1;
 	optional string emblem = 2;
 	optional string body = 3;
+	optional bool success = 4;
+}
+
+message CDOTAUserMsg_SendGenericToolTip {
+	optional string title = 1;
+	optional string text = 2;
+	optional int32 entindex = 3;
+	optional bool close = 4;
 }
 
 message CDOTAUserMsg_WorldLine {
@@ -571,5 +582,10 @@ message CDOTAUserMsg_AddQuestLogEntry {
 message CDOTAUserMsg_SendStatPopup {
 	optional int32 player_id = 1;
 	optional .CDOTAMsg_SendStatPopup statpopup = 2;
+}
+
+message CDOTAUserMsg_SendRoshanPopup {
+	optional bool reclaimed = 1;
+	optional int32 gametime = 2;
 }
 

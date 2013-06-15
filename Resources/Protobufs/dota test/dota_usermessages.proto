@@ -1,5 +1,5 @@
 import "google/protobuf/descriptor.proto";
-import "netmessages.proto";
+import "networkbasetypes.proto";
 import "ai_activity.proto";
 import "dota_commonmessages.proto";
 
@@ -51,6 +51,8 @@ enum EDotaUserMessages {
 	DOTA_UM_AddQuestLogEntry = 109;
 	DOTA_UM_SendStatPopup = 110;
 	DOTA_UM_TutorialFinish = 111;
+	DOTA_UM_SendRoshanPopup = 112;
+	DOTA_UM_SendGenericToolTip = 113;
 }
 
 enum DOTA_CHAT_MESSAGE {
@@ -156,6 +158,7 @@ enum DOTA_PARTICLE_MESSAGE {
 	DOTA_PARTICLE_MANAGER_EVENT_RELEASE = 9;
 	DOTA_PARTICLE_MANAGER_EVENT_LATENCY = 10;
 	DOTA_PARTICLE_MANAGER_EVENT_SHOULD_DRAW = 11;
+	DOTA_PARTICLE_MANAGER_EVENT_FROZEN = 12;
 }
 
 enum DOTA_OVERHEAD_ALERT {
@@ -469,9 +472,8 @@ message CDOTAUserMsg_ParticleManager {
 		optional .CMsgVector fallback_position = 5;
 	}
 
-	message UpdateParticleLatency {
-		optional int32 player_latency = 1;
-		optional int32 tick = 2;
+	message UpdateParticleSetFrozen {
+		optional bool set_frozen = 1;
 	}
 
 	message UpdateParticleShouldDraw {
@@ -490,8 +492,8 @@ message CDOTAUserMsg_ParticleManager {
 	optional .CDOTAUserMsg_ParticleManager.UpdateParticleFallback update_particle_fallback = 10;
 	optional .CDOTAUserMsg_ParticleManager.UpdateParticleOffset update_particle_offset = 11;
 	optional .CDOTAUserMsg_ParticleManager.UpdateParticleEnt update_particle_ent = 12;
-	optional .CDOTAUserMsg_ParticleManager.UpdateParticleLatency update_particle_latency = 13;
 	optional .CDOTAUserMsg_ParticleManager.UpdateParticleShouldDraw update_particle_should_draw = 14;
+	optional .CDOTAUserMsg_ParticleManager.UpdateParticleSetFrozen update_particle_set_frozen = 15;
 }
 
 message CDOTAUserMsg_OverheadEvent {
@@ -511,6 +513,14 @@ message CDOTAUserMsg_TutorialFinish {
 	optional string heading = 1;
 	optional string emblem = 2;
 	optional string body = 3;
+	optional bool success = 4;
+}
+
+message CDOTAUserMsg_SendGenericToolTip {
+	optional string title = 1;
+	optional string text = 2;
+	optional int32 entindex = 3;
+	optional bool close = 4;
 }
 
 message CDOTAUserMsg_WorldLine {
@@ -572,5 +582,10 @@ message CDOTAUserMsg_AddQuestLogEntry {
 message CDOTAUserMsg_SendStatPopup {
 	optional int32 player_id = 1;
 	optional .CDOTAMsg_SendStatPopup statpopup = 2;
+}
+
+message CDOTAUserMsg_SendRoshanPopup {
+	optional bool reclaimed = 1;
+	optional int32 gametime = 2;
 }
 

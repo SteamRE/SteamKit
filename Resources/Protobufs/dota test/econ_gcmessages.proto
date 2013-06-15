@@ -75,6 +75,8 @@ enum EGCItemMsg {
 	k_EMsgGCSetItemPositions = 1077;
 	k_EMsgGCApplyEggEssence = 1078;
 	k_EMsgGCNameEggEssenceResponse = 1079;
+	k_EMsgGCUnlockItemStyle = 1080;
+	k_EMsgGCUnlockItemStyleResponse = 1081;
 	k_EMsgGCTradingBase = 1500;
 	k_EMsgGCTrading_InitiateTradeRequest = 1501;
 	k_EMsgGCTrading_InitiateTradeResponse = 1502;
@@ -131,5 +133,14 @@ enum EGCMsgResponse {
 	k_EGCMsgResponseUnknownError = 6;
 	k_EGCMsgResponseNotLoggedOn = 7;
 	k_EGCMsgFailedToCreate = 8;
+}
+
+enum EUnlockStyle {
+	k_UnlockStyle_Succeeded = 0;
+	k_UnlockStyle_Failed_PreReq = 1;
+	k_UnlockStyle_Failed_CantAfford = 2;
+	k_UnlockStyle_Failed_CantCommit = 3;
+	k_UnlockStyle_Failed_CantLockCache = 4;
+	k_UnlockStyle_Failed_CantAffordAttrib = 5;
 }
 

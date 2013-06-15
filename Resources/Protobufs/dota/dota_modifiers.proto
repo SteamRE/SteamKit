@@ -1,5 +1,5 @@
 import "google/protobuf/descriptor.proto";
-import "netmessages.proto";
+import "networkbasetypes.proto";
 
 enum DOTA_MODIFIER_ENTRY_TYPE {
 	DOTA_MODIFIER_ENTRY_TYPE_ACTIVE = 1;

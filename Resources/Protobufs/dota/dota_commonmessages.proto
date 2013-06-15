@@ -1,5 +1,5 @@
 import "google/protobuf/descriptor.proto";
-import "netmessages.proto";
+import "networkbasetypes.proto";
 
 enum EDOTAChatWheelMessage {
 	k_EDOTA_CW_Ok = 0;
@@ -27,6 +27,7 @@ message CDOTAMsg_LocationPing {
 	optional int32 y = 2;
 	optional int32 target = 3;
 	optional bool direct_ping = 4;
+	optional int32 type = 5;
 }
 
 message CDOTAMsg_ItemAlert {

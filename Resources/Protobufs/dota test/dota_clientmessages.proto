@@ -1,5 +1,5 @@
 import "google/protobuf/descriptor.proto";
-import "netmessages.proto";
+import "networkbasetypes.proto";
 import "dota_commonmessages.proto";
 
 enum EDotaClientMessages {

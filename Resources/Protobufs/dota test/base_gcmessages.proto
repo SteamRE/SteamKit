@@ -403,6 +403,7 @@ message CSOEconItemTournamentPassport {
 	optional uint32 passports_bought = 5;
 	optional uint32 version = 6;
 	optional uint32 def_index = 7;
+	optional uint32 reward_flags = 8;
 }
 
 message CSOEconItemHalloweenEgg {
@@ -472,5 +473,8 @@ message CMsgGCToGCDirtySDOCache {
 message CMsgGCToGCDirtyMultipleSDOCache {
 	optional uint32 sdo_type = 1;
 	repeated uint64 key_uint64 = 2;
+}
+
+message CMsgSDONoMemcached {
 }
 

@@ -65,6 +65,7 @@ message GlobalStatistics {
 	optional string main_post_url = 8;
 	optional uint32 required_appid_version = 9;
 	optional uint32 pricesheet_version = 10;
+	optional uint32 twitch_streams_version = 11;
 }
 
 message OperationalStatisticDescription {
@@ -343,9 +344,13 @@ message CMsgGCCStrike15_v2_PlayerEarnedRewardNotification {
 
 message CMsgGCCStrike15_v2_PlayerOverwatchCaseUpdate {
 	optional uint64 caseid = 1;
-	optional uint32 verdict = 2;
+	optional uint32 verdict_legacy = 2;
 	optional uint32 suspectid = 3;
 	optional uint32 fractionid = 4;
+	optional uint32 rpt_aimbot = 5;
+	optional uint32 rpt_wallhack = 6;
+	optional uint32 rpt_speedhack = 7;
+	optional uint32 rpt_teamharm = 8;
 }
 
 message CMsgGCCStrike15_v2_PlayerOverwatchCaseAssignment {

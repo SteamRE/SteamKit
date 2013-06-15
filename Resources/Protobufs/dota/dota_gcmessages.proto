@@ -20,7 +20,6 @@ enum EDOTAGCMsg {
 	k_EMsgGCConnectedPlayers = 7034;
 	k_EMsgGCAbandonCurrentGame = 7035;
 	k_EMsgGCStopFindingMatch = 7036;
-	k_EMsgForceSOCacheResend = 7037;
 	k_EMsgGCPracticeLobbyCreate = 7038;
 	k_EMsgGCPracticeLobbyLeave = 7040;
 	k_EMsgGCPracticeLobbyLaunch = 7041;
@@ -76,7 +75,6 @@ enum EDOTAGCMsg {
 	k_EMsgGCProfileRequest = 7098;
 	k_EMsgGCProfileResponse = 7099;
 	k_EMsgGCPopup = 7102;
-	k_EMsgGCDOTANotifySuccessfulReport = 7103;
 	k_EMsgGCDOTAClearNotifySuccessfulReport = 7104;
 	k_EMsgGCGenericResult = 7108;
 	k_EMsgGCFriendPracticeLobbyListRequest = 7111;
@@ -235,6 +233,10 @@ enum EDOTAGCMsg {
 	k_EMsgGCGetHeroStandings = 7274;
 	k_EMsgGCGetHeroStandingsResponse = 7275;
 	k_EMsgGCMatchmakingLanguagePreference = 7276;
+	k_EMsgGCPassportFeaturedMatchRequest = 7277;
+	k_EMsgGCPassportFeaturedMatchResponse = 7278;
+	k_EMsgGCGuildEditLogoRequest = 7279;
+	k_EMsgGCGuildEditLogoResponse = 7280;
 	k_EMsgGCDev_GrantWarKill = 8001;
 }
 
@@ -462,6 +464,7 @@ message CSODOTAGameAccountClientInternal {
 	optional uint32 communication_penalty_severity = 21;
 	optional uint32 solo_rank = 22;
 	optional uint32 solo_rank_uncertainty = 23;
+	optional uint32 bonus_reports_remaining = 24;
 }
 
 message CSODOTAPartyMember {
@@ -795,9 +798,6 @@ message CMsgLeaverDetectedResponse {
 	optional uint32 result = 1;
 }
 
-message CMsgForceSOCacheResend {
-}
-
 message CMsgPracticeLobbySetDetails {
 	optional uint64 lobby_id = 1;
 	optional string game_name = 2;
@@ -904,6 +904,7 @@ message CMsgBotGameCreate {
 	optional uint32 client_version = 2;
 	optional .DOTABotDifficulty difficulty = 3 [default = BOT_DIFFICULTY_PASSIVE];
 	optional .DOTA_GC_TEAM team = 4 [default = DOTA_GC_TEAM_GOOD_GUYS];
+	optional uint32 game_mode = 5;
 }
 
 message CMsgRequestInternationalTicket {
@@ -1915,13 +1916,29 @@ message CMsgDOTAGuildUpdateMessage {
 	optional uint32 guild_id = 2;
 }
 
+message CMsgDOTAGuildEditLogoRequest {
+	optional uint32 guild_id = 1;
+	optional uint64 logo = 2;
+}
+
+message CMsgDOTAGuildEditLogoResponse {
+	enum EResult {
+		SUCCESS = 0;
+		NO_PERMISSION = 1;
+		LOGO_UPLOAD_FAILED = 2;
+		UNSPECIFIED_ERROR = 3;
+	}
+
+	optional uint32 guild_id = 1;
+	optional .CMsgDOTAGuildEditLogoResponse.EResult result = 2 [default = SUCCESS];
+}
+
 message CMsgDOTAPlayerReports {
 	message PlayerReport {
 		optional uint32 report_id = 1;
 		optional uint32 reporter_account_id = 2;
 		optional uint32 target_account_id = 3;
 		optional uint32 report_flags = 4;
-		optional uint32 match_id = 5;
 		optional fixed32 date = 6;
 	}
 
@@ -2135,9 +2152,6 @@ message CMsgDOTAProfileResponse {
 	optional bool has_passport = 13;
 }
 
-message CMsgDOTANotifySuccessfulReport {
-}
-
 message CMsgDOTAClearNotifySuccessfulReport {
 }
 
@@ -2204,6 +2218,7 @@ message CMsgDOTAWelcome {
 	optional uint32 antiaddictionstate = 11;
 	optional uint32 last_time_played = 12;
 	optional uint32 last_ip_address = 13;
+	optional uint32 notify_successful_report = 14;
 }
 
 message CSODOTAGameHeroFavorites {
@@ -2674,6 +2689,7 @@ message CMsgDOTAPassportVoteGenericSelection {
 
 message CMsgDOTAPassportStampedPlayer {
 	optional uint32 account_id = 1;
+	optional uint32 stamp_level = 2;
 }
 
 message CMsgDOTAPassportVote {
@@ -2702,9 +2718,25 @@ message CMsgPassportDataResponse {
 	optional uint32 west_qualifiers_runner_up_team_id = 13;
 	optional uint32 passports_bought = 14;
 	optional uint32 original_purchaser_id = 15;
-	optional uint32 featured_match_id = 16;
-	repeated uint32 radiant_featured_match_heroes = 17;
-	repeated uint32 dire_featured_match_heroes = 18;
+}
+
+message CMsgPassportFeaturedMatchRequest {
+	optional uint32 league_id = 1;
+}
+
+message CMsgPassportFeaturedMatchResponse {
+	optional uint32 result = 1 [default = 2];
+	optional uint32 league_id = 2;
+	optional uint32 featured_match_id = 3;
+	optional uint32 radiant_team_id = 4;
+	optional uint64 radiant_team_logo = 5;
+	optional string radiant_team_name = 6;
+	repeated uint32 radiant_heroes = 7;
+	optional uint32 dire_team_id = 8;
+	optional uint64 dire_team_logo = 9;
+	optional string dire_team_name = 10;
+	repeated uint32 dire_heroes = 11;
+	optional bool has_passport = 12;
 }
 
 message CMsgGCToGCGetLeagueAdmin {
