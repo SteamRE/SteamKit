@@ -238,6 +238,12 @@ namespace SteamKit2.GC.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCNameEggEssenceResponse", Value=1079)]
       k_EMsgGCNameEggEssenceResponse = 1079,
             
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCUnlockItemStyle", Value=1080)]
+      k_EMsgGCUnlockItemStyle = 1080,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCUnlockItemStyleResponse", Value=1081)]
+      k_EMsgGCUnlockItemStyleResponse = 1081,
+            
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCTradingBase", Value=1500)]
       k_EMsgGCTradingBase = 1500,
             
@@ -401,6 +407,29 @@ namespace SteamKit2.GC.Internal
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgFailedToCreate", Value=8)]
       k_EGCMsgFailedToCreate = 8
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"EUnlockStyle")]
+    public enum EUnlockStyle
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_UnlockStyle_Succeeded", Value=0)]
+      k_UnlockStyle_Succeeded = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_UnlockStyle_Failed_PreReq", Value=1)]
+      k_UnlockStyle_Failed_PreReq = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_UnlockStyle_Failed_CantAfford", Value=2)]
+      k_UnlockStyle_Failed_CantAfford = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_UnlockStyle_Failed_CantCommit", Value=3)]
+      k_UnlockStyle_Failed_CantCommit = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_UnlockStyle_Failed_CantLockCache", Value=4)]
+      k_UnlockStyle_Failed_CantLockCache = 4,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_UnlockStyle_Failed_CantAffordAttrib", Value=5)]
+      k_UnlockStyle_Failed_CantAffordAttrib = 5
     }
   
 }

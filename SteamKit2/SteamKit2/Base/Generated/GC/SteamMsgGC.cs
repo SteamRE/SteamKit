@@ -2431,6 +2431,15 @@ namespace SteamKit2.GC.Internal
       get { return _def_index; }
       set { _def_index = value; }
     }
+
+    private uint _reward_flags = default(uint);
+    [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"reward_flags", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint reward_flags
+    {
+      get { return _reward_flags; }
+      set { _reward_flags = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -2825,6 +2834,16 @@ namespace SteamKit2.GC.Internal
       get { return _key_uint64; }
     }
   
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgSDONoMemcached")]
+  public partial class CMsgSDONoMemcached : global::ProtoBuf.IExtensible
+  {
+    public CMsgSDONoMemcached() {}
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
