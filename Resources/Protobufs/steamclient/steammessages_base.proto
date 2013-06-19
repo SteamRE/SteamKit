@@ -20,11 +20,16 @@ message CMsgProtoBufHeader {
 	optional uint64 messageid = 18 [default = 18446744073709551615];
 	optional uint32 publisher_group_id = 19;
 	optional uint32 sysid = 20;
+	optional uint64 trace_tag = 21;
 }
 
 message CMsgMulti {
 	optional uint32 size_unzipped = 1;
 	optional bytes message_body = 2;
+}
+
+message CMsgProtobufWrapped {
+	optional bytes message_body = 1;
 }
 
 message CMsgAuthTicket {

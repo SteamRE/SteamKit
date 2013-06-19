@@ -86,6 +86,7 @@ message CMsgClientLogon {
 	optional int32 game_server_app_id = 94;
 	optional bool steamguard_dont_remember_computer = 95;
 	optional string machine_name = 96;
+	optional string machine_name_userchosen = 97;
 }
 
 message CMsgClientLogonResponse {
@@ -105,6 +106,8 @@ message CMsgClientLogonResponse {
 	optional string vanity_url = 14;
 	optional fixed64 client_supplied_steamid = 20;
 	optional string ip_country_code = 21;
+	optional bytes parental_settings = 22;
+	optional bytes parental_setting_signature = 23;
 }
 
 message CMsgClientRequestWebAPIAuthenticateUserNonce {
@@ -392,6 +395,7 @@ message CMsgClientAccountInfo {
 	optional bool steamguard_show_providers = 12;
 	optional bool steamguard_can_use_mobile_provider = 13;
 	optional bool steamguard_notify_newmachines = 14;
+	optional string steamguard_machine_name_user_chosen = 15;
 }
 
 message CMsgClientAppMinutesPlayedData {
@@ -1586,6 +1590,14 @@ message CMsgClientUCMPublishedFileDeleted {
 	optional uint32 app_id = 2;
 }
 
+message CMsgClientUCMPublishedFileUpdated {
+	optional fixed64 published_file_id = 1;
+	optional uint32 app_id = 2;
+	optional uint32 time_updated = 3;
+	optional fixed64 hcontent = 4;
+	optional fixed32 file_size = 5;
+}
+
 message CMsgClientUCMGetPublishedFilesForUser {
 	optional uint32 app_id = 1;
 	optional fixed64 creator_steam_id = 2;
@@ -1729,6 +1741,8 @@ message CMsgClientRequestMachineAuth {
 	optional string otp_identifier = 8;
 	optional bytes otp_sharedsecret = 9;
 	optional uint32 otp_value = 10;
+	optional string machine_name = 11;
+	optional string machine_name_userchosen = 12;
 }
 
 message CMsgClientRequestMachineAuthResponse {
@@ -1738,6 +1752,8 @@ message CMsgClientRequestMachineAuthResponse {
 message CMsgClientChangeSteamGuardOptions {
 	optional uint32 steamguard_provider = 1;
 	optional uint32 steamguard_require_code_default = 2;
+	optional string machine_name = 3;
+	optional string machine_name_userchosen = 4;
 }
 
 message CMsgClientChangeSteamGuardOptionsResponse {
@@ -1833,6 +1849,7 @@ message CMsgTrading_InitiateTradeResponse {
 	optional uint32 trade_request_id = 2;
 	optional uint64 other_steamid = 3;
 	optional uint32 steamguard_required_days = 4;
+	optional uint32 new_device_cooldown_days = 5;
 }
 
 message CMsgTrading_CancelTradeRequest {
@@ -2315,6 +2332,7 @@ message CMsgClientRequestCommentNotifications {
 
 message CMsgClientOfflineMessageNotification {
 	optional uint32 offline_messages = 1;
+	repeated uint32 friends_with_offline_messages = 2;
 }
 
 message CMsgClientRequestOfflineMessageCount {
@@ -2587,5 +2605,20 @@ message CMsgClientEmoticonList {
 	}
 
 	repeated .CMsgClientEmoticonList.Emoticon emoticons = 1;
+}
+
+message CMsgClientSharedLicensesLockStatus {
+	repeated uint32 borrowed_licenses_locked = 1;
+	optional uint32 own_licenses_locked_by = 2;
+}
+
+message CMsgClientSharedLicensesStopPlaying {
+	message StopApp {
+		optional uint32 app_id = 1;
+		optional uint32 owner_id = 2;
+	}
+
+	optional uint32 seconds_left = 1;
+	repeated .CMsgClientSharedLicensesStopPlaying.StopApp stop_apps = 2;
 }
 

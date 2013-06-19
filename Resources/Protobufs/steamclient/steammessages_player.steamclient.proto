@@ -94,7 +94,6 @@ message CPlayer_GetBadges_Response {
 	repeated .CPlayer_GetBadges_Response.Badge badges = 1;
 	optional uint32 player_xp = 2;
 	optional uint32 player_level = 3;
-	optional uint32 player_level_potential = 4;
 	optional uint32 player_xp_needed_to_level_up = 5;
 	optional uint32 player_xp_needed_current_level = 6;
 }
