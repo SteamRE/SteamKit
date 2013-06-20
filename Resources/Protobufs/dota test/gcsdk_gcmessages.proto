@@ -135,14 +135,25 @@ message CMsgClientHello {
 }
 
 message CMsgClientWelcome {
+	message Location {
+		optional float latitude = 1;
+		optional float longitude = 2;
+		optional string country = 3;
+	}
+
 	optional uint32 version = 1;
 	optional bytes game_data = 2;
 	repeated .CMsgSOCacheSubscribed outofdate_subscribed_caches = 3;
 	repeated .CMsgSOCacheSubscriptionCheck uptodate_subscribed_caches = 4;
+	optional .CMsgClientWelcome.Location location = 5;
 }
 
 message CMsgConnectionStatus {
 	optional .GCConnectionStatus status = 1 [default = GCConnectionStatus_HAVE_SESSION];
 	optional uint32 client_session_need = 2;
+	optional int32 queue_position = 3;
+	optional int32 queue_size = 4;
+	optional int32 wait_seconds = 5;
+	optional int32 estimated_wait_seconds_remaining = 6;
 }
 
