@@ -132,6 +132,7 @@ message CMsgClientHello {
 	optional uint32 version = 1;
 	repeated .CMsgSOCacheHaveVersion socache_have_versions = 2;
 	optional uint32 client_session_need = 3;
+	optional uint32 client_launcher = 4;
 }
 
 message CMsgClientWelcome {

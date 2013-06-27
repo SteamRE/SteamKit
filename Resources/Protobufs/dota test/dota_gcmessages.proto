@@ -465,6 +465,7 @@ enum EDOTAGCSessionNeed {
 	k_EDOTAGCSessionNeed_UserInLocalGame = 102;
 	k_EDOTAGCSessionNeed_UserInUIWasConnected = 103;
 	k_EDOTAGCSessionNeed_UserInUINeverConnected = 104;
+	k_EDOTAGCSessionNeed_UserTutorials = 105;
 	k_EDOTAGCSessionNeed_GameServerOnline = 200;
 	k_EDOTAGCSessionNeed_GameServerLocal = 201;
 	k_EDOTAGCSessionNeed_GameServerIdle = 202;
@@ -504,8 +505,9 @@ message CSODOTAGameAccountClient {
 	optional uint32 match_disabled_until_date = 41;
 	optional uint32 match_disabled_count = 42;
 	optional .DOTA_PartnerAccountType partner_account_type = 44 [default = DOTA_PARTNER_NONE];
-	optional uint32 antiaddictionstate = 45;
+	optional uint32 partner_account_state = 45;
 	optional uint32 matchmaking_language_preference = 46;
+	optional uint32 shutdownlawterminatetime = 47;
 }
 
 message CSODOTAGameAccountClientInternal {
@@ -531,6 +533,7 @@ message CSODOTAGameAccountClientInternal {
 	optional uint32 solo_rank = 22;
 	optional uint32 solo_rank_uncertainty = 23;
 	optional uint32 bonus_reports_remaining = 24;
+	optional uint32 last_timed_player_card_drop = 25;
 }
 
 message CSODOTAPartyMember {
@@ -1925,6 +1928,7 @@ message CMsgDOTAGCToGCUpdateOpenGuildPartyRequest {
 	optional uint64 party_id = 1;
 	optional uint32 guild_id = 2;
 	repeated uint32 member_account_ids = 3;
+	optional string description = 4;
 }
 
 message CMsgDOTAGCToGCUpdateOpenGuildPartyResponse {
@@ -1941,6 +1945,7 @@ message CMsgDOTAGCToGCDestroyOpenGuildPartyResponse {
 
 message CMsgDOTAPartySetOpenGuildRequest {
 	optional uint32 guild_id = 1;
+	optional string description = 2;
 }
 
 message CMsgDOTAPartySetOpenGuildResponse {
@@ -1969,6 +1974,8 @@ message CMsgDOTAGuildOpenPartyRefresh {
 	message OpenParty {
 		optional uint64 party_id = 1;
 		repeated uint32 member_account_ids = 2;
+		optional uint32 time_created = 3;
+		optional string description = 4;
 	}
 
 	optional uint32 guild_id = 1;
@@ -2297,10 +2304,11 @@ message CMsgDOTAWelcome {
 	optional .DOTA_PartnerAccountType partner_account_type = 8 [default = DOTA_PARTNER_NONE];
 	optional uint32 banned_word_list_word_id = 9;
 	optional uint32 time_first_played = 10;
-	optional uint32 antiaddictionstate = 11;
+	optional uint32 partner_account_state = 11;
 	optional uint32 last_time_played = 12;
 	optional uint32 last_ip_address = 13;
 	optional uint32 notify_successful_report = 14;
+	optional uint32 shutdownlawterminatetime = 15;
 }
 
 message CSODOTAGameHeroFavorites {
@@ -2332,22 +2340,32 @@ message CDOTAOverview {
 	}
 
 	message ServersByRegion {
-		message Server {
+		message Host {
+			message Server {
+				optional fixed64 steam_id = 1;
+				optional bool is_relay = 2;
+				optional uint32 port = 3;
+				optional bool in_use = 4;
+				optional uint32 match_id = 5;
+				optional fixed64 lobby_id = 6;
+				optional fixed64 relayed_game_server_steam_id = 7;
+				repeated fixed64 user_steam_ids = 8;
+			}
+
 			optional uint32 ip = 1;
-			optional int32 in_use = 2;
-			optional int32 available = 3;
-			repeated uint32 ports = 4;
+			repeated .CDOTAOverview.ServersByRegion.Host.Server servers = 2;
 		}
 
 		optional int32 region = 1;
-		optional int32 in_use = 2;
-		optional int32 available = 3;
-		repeated .CDOTAOverview.ServersByRegion.Server servers = 4;
+		optional int32 game_servers_in_use = 2;
+		optional int32 game_servers_available = 3;
+		optional int32 proxy_servers_in_use = 4;
+		optional int32 proxy_servers_available = 5;
+		repeated .CDOTAOverview.ServersByRegion.Host hosts = 6;
 	}
 
 	repeated .CDOTAOverview.PlayersByRegion players_by_region = 1;
 	repeated .CDOTAOverview.ServersByRegion game_servers_by_region = 2;
-	repeated .CDOTAOverview.ServersByRegion proxy_servers_by_region = 3;
 }
 
 message CMsgSetShowcaseHero {
@@ -2771,7 +2789,7 @@ message CMsgDOTAPassportVoteGenericSelection {
 }
 
 message CMsgDOTAPassportStampedPlayer {
-	optional uint32 account_id = 1;
+	optional uint64 steam_id = 1;
 	optional uint32 stamp_level = 2;
 }
 

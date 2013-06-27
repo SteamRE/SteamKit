@@ -237,6 +237,15 @@ enum EDOTAGCMsg {
 	k_EMsgGCPassportFeaturedMatchResponse = 7278;
 	k_EMsgGCGuildEditLogoRequest = 7279;
 	k_EMsgGCGuildEditLogoResponse = 7280;
+	k_EMsgGCGuildmatePracticeLobbyListRequest = 7281;
+	k_EMsgGCGuildmatePracticeLobbyListResponse = 7282;
+	k_EMsgGCItemEditorReservationsRequest = 7283;
+	k_EMsgGCItemEditorReservationsResponse = 7284;
+	k_EMsgGCItemEditorReserveItemDef = 7285;
+	k_EMsgGCItemEditorReserveItemDefResponse = 7286;
+	k_EMsgGCItemEditorReleaseReservation = 7287;
+	k_EMsgGCItemEditorReleaseReservationResponse = 7288;
+	k_EMsgGCRewardTutorialPrizes = 7289;
 	k_EMsgGCDev_GrantWarKill = 8001;
 }
 
@@ -329,6 +338,12 @@ enum DOTAMatchVote {
 	DOTAMatchVote_NEGATIVE = 2;
 }
 
+enum LobbyDotaTVDelay {
+	LobbyDotaTV_10 = 0;
+	LobbyDotaTV_120 = 1;
+	LobbyDotaTV_300 = 2;
+}
+
 enum DOTAChatChannelType_t {
 	DOTAChannelType_Regional = 0;
 	DOTAChannelType_Custom = 1;
@@ -397,6 +412,50 @@ enum DOTA_2013PassportSelectionIndices {
 	PP13_SEL_TEAMCUP_PLAYER = 41;
 	PP13_SEL_TEAMCUP_TEAM_LOCK = 42;
 	PP13_SEL_TEAMCUP_PLAYER_LOCK = 43;
+	PP13_SEL_EVENTPRED_0 = 44;
+	PP13_SEL_EVENTPRED_1 = 45;
+	PP13_SEL_EVENTPRED_2 = 46;
+	PP13_SEL_EVENTPRED_3 = 47;
+	PP13_SEL_EVENTPRED_4 = 48;
+	PP13_SEL_EVENTPRED_5 = 49;
+	PP13_SEL_EVENTPRED_6 = 50;
+	PP13_SEL_EVENTPRED_7 = 51;
+	PP13_SEL_EVENTPRED_8 = 52;
+	PP13_SEL_EVENTPRED_9 = 53;
+	PP13_SEL_EVENTPRED_10 = 54;
+	PP13_SEL_EVENTPRED_11 = 55;
+	PP13_SEL_EVENTPRED_12 = 56;
+	PP13_SEL_EVENTPRED_13 = 57;
+	PP13_SEL_EVENTPRED_14 = 58;
+	PP13_SEL_EVENTPRED_15 = 59;
+	PP13_SEL_EVENTPRED_16 = 60;
+	PP13_SEL_EVENTPRED_17 = 61;
+	PP13_SEL_EVENTPRED_18 = 62;
+	PP13_SEL_EVENTPRED_19 = 63;
+	PP13_SEL_EVENTPRED_20 = 64;
+	PP13_SEL_EVENTPRED_21 = 65;
+	PP13_SEL_EVENTPRED_22 = 66;
+	PP13_SEL_EVENTPRED_23 = 67;
+	PP13_SEL_EVENTPRED_24 = 68;
+	PP13_SEL_EVENTPRED_25 = 69;
+	PP13_SEL_EVENTPRED_26 = 70;
+	PP13_SEL_EVENTPRED_27 = 71;
+	PP13_SEL_EVENTPRED_28 = 72;
+	PP13_SEL_EVENTPRED_29 = 73;
+	PP13_SEL_EVENTPRED_30 = 74;
+	PP13_SEL_EVENTPRED_31 = 75;
+	PP13_SEL_EVENTPRED_32 = 76;
+	PP13_SEL_EVENTPRED_33 = 77;
+	PP13_SEL_EVENTPRED_34 = 78;
+	PP13_SEL_EVENTPRED_35 = 79;
+	PP13_SEL_EVENTPRED_36 = 80;
+	PP13_SEL_EVENTPRED_37 = 81;
+	PP13_SEL_EVENTPRED_38 = 82;
+	PP13_SEL_EVENTPRED_39 = 83;
+	PP13_SEL_EVENTPRED_40 = 84;
+	PP13_SEL_EVENTPRED_41 = 85;
+	PP13_SEL_EVENTPRED_42 = 86;
+	PP13_SEL_EVENTPRED_43 = 87;
 }
 
 enum EDOTAGCSessionNeed {
@@ -410,6 +469,13 @@ enum EDOTAGCSessionNeed {
 	k_EDOTAGCSessionNeed_GameServerLocal = 201;
 	k_EDOTAGCSessionNeed_GameServerIdle = 202;
 	k_EDOTAGCSessionNeed_GameServerRelay = 203;
+}
+
+enum EItemEditorReservationResult {
+	k_EItemEditorReservationResult_OK = 1;
+	k_EItemEditorReservationResult_AlreadyExists = 2;
+	k_EItemEditorReservationResult_Reserved = 3;
+	k_EItemEditorReservationResult_TimedOut = 4;
 }
 
 message CSODOTAGameAccountClient {
@@ -497,6 +563,7 @@ message CSODOTAParty {
 	optional uint32 matchlanguages = 27;
 	repeated .CSODOTAPartyMember members = 29;
 	optional uint32 open_guild_id = 30;
+	repeated uint32 common_guilds = 31;
 }
 
 message CSODOTAPartyInternal {
@@ -638,6 +705,7 @@ message CSODOTALobby {
 	optional uint32 loot_awarded = 50;
 	optional bool allchat = 51 [default = false];
 	optional uint32 rank_change = 52;
+	optional .LobbyDotaTVDelay dota_tv_delay = 53 [default = LobbyDotaTV_10];
 }
 
 message CSODOTALobbyInternal {
@@ -820,6 +888,7 @@ message CMsgPracticeLobbySetDetails {
 	optional uint32 radiant_series_wins = 21;
 	optional uint32 dire_series_wins = 22;
 	optional bool allchat = 23 [default = false];
+	optional .LobbyDotaTVDelay dota_tv_delay = 24 [default = LobbyDotaTV_120];
 }
 
 message CMsgPracticeLobbyCreate {
@@ -874,6 +943,8 @@ message CMsgPracticeLobbyListResponseEntry {
 	repeated .CMsgPracticeLobbyListResponseEntry.CLobbyMember members = 5;
 	optional bool requires_pass_key = 6;
 	optional uint32 leader_account_id = 7;
+	optional uint32 guild_id = 8;
+	optional uint64 guild_logo = 9;
 }
 
 message CMsgPracticeLobbyListResponse {
@@ -896,6 +967,14 @@ message CMsgFriendPracticeLobbyListRequest {
 }
 
 message CMsgFriendPracticeLobbyListResponse {
+	repeated .CMsgPracticeLobbyListResponseEntry lobbies = 1;
+}
+
+message CMsgGuildmatePracticeLobbyListRequest {
+	repeated uint32 guilds = 1;
+}
+
+message CMsgGuildmatePracticeLobbyListResponse {
 	repeated .CMsgPracticeLobbyListResponseEntry lobbies = 1;
 }
 
@@ -1222,6 +1301,7 @@ message CMsgDOTAPopup {
 		NEED_TO_PURCHASE = 16;
 		SIGNON_MESSAGE = 17;
 		GUILD_KICKED = 18;
+		MATCHMAKING_REGION_OFFLINE = 19;
 	}
 
 	optional .CMsgDOTAPopup.PopupID id = 1 [default = KICKED_FROM_LOBBY];
@@ -1803,6 +1883,7 @@ message CMsgDOTAGuildInviteAccountResponse {
 		ERROR_ACCOUNT_ALREADY_IN_GUILD = 4;
 		ERROR_ACCOUNT_TOO_MANY_INVITES = 5;
 		ERROR_GUILD_TOO_MANY_INVITES = 6;
+		ERROR_ACCOUNT_TOO_MANY_GUILDS = 7;
 	}
 
 	optional .CMsgDOTAGuildInviteAccountResponse.EResult result = 1 [default = SUCCESS];
@@ -1909,6 +1990,7 @@ message CMsgDOTAGuildInviteData {
 	optional string guild_name = 3;
 	optional string guild_tag = 4;
 	optional uint64 logo = 5;
+	optional uint32 inviter = 6;
 }
 
 message CMsgDOTAGuildUpdateMessage {
@@ -2250,22 +2332,32 @@ message CDOTAOverview {
 	}
 
 	message ServersByRegion {
-		message Server {
+		message Host {
+			message Server {
+				optional fixed64 steam_id = 1;
+				optional bool is_relay = 2;
+				optional uint32 port = 3;
+				optional bool in_use = 4;
+				optional uint32 match_id = 5;
+				optional fixed64 lobby_id = 6;
+				optional fixed64 relayed_game_server_steam_id = 7;
+				repeated fixed64 user_steam_ids = 8;
+			}
+
 			optional uint32 ip = 1;
-			optional int32 in_use = 2;
-			optional int32 available = 3;
-			repeated uint32 ports = 4;
+			repeated .CDOTAOverview.ServersByRegion.Host.Server servers = 2;
 		}
 
 		optional int32 region = 1;
-		optional int32 in_use = 2;
-		optional int32 available = 3;
-		repeated .CDOTAOverview.ServersByRegion.Server servers = 4;
+		optional int32 game_servers_in_use = 2;
+		optional int32 game_servers_available = 3;
+		optional int32 proxy_servers_in_use = 4;
+		optional int32 proxy_servers_available = 5;
+		repeated .CDOTAOverview.ServersByRegion.Host hosts = 6;
 	}
 
 	repeated .CDOTAOverview.PlayersByRegion players_by_region = 1;
 	repeated .CDOTAOverview.ServersByRegion game_servers_by_region = 2;
-	repeated .CDOTAOverview.ServersByRegion proxy_servers_by_region = 3;
 }
 
 message CMsgSetShowcaseHero {
@@ -2555,6 +2647,7 @@ message CMsgDOTAMatchmakingStatsRequest {
 message CMsgDOTAMatchmakingStatsResponse {
 	repeated uint32 wait_times_by_group = 1;
 	repeated uint32 searching_players_by_group = 2;
+	optional uint32 disabled_groups = 3;
 }
 
 message CMsgDOTASetMatchHistoryAccess {
@@ -2772,5 +2865,42 @@ message CMsgGCGetHeroStandingsResponse {
 	}
 
 	repeated .CMsgGCGetHeroStandingsResponse.Hero standings = 1;
+}
+
+message CMsgGCItemEditorReservationsRequest {
+}
+
+message CMsgGCItemEditorReservation {
+	optional uint32 def_index = 1;
+	optional string name = 2;
+}
+
+message CMsgGCItemEditorReservationsResponse {
+	repeated .CMsgGCItemEditorReservation reservations = 1;
+}
+
+message CMsgGCItemEditorReserveItemDef {
+	optional uint32 def_index = 1;
+	optional string username = 2;
+}
+
+message CMsgGCItemEditorReserveItemDefResponse {
+	optional uint32 def_index = 1;
+	optional string username = 2;
+	optional uint32 result = 3;
+}
+
+message CMsgGCItemEditorReleaseReservation {
+	optional uint32 def_index = 1;
+	optional string username = 2;
+}
+
+message CMsgGCItemEditorReleaseReservationResponse {
+	optional uint32 def_index = 1;
+	optional bool released = 2;
+}
+
+message CMsgDOTARewardTutorialPrizes {
+	optional uint32 location_id = 1;
 }
 

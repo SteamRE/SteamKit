@@ -167,6 +167,7 @@ message CMsgGCCStrike15_v2_MatchmakingGC2ServerReserve {
 	repeated .PlayerRankingInfo rankings = 5;
 	optional uint64 encryption_key = 6;
 	optional uint64 encryption_key_pub = 7;
+	repeated uint32 party_ids = 8;
 }
 
 message CMsgGCCStrike15_v2_MatchmakingServerReservationResponse {
@@ -363,6 +364,7 @@ message CMsgGCCStrike15_v2_PlayerOverwatchCaseAssignment {
 	optional uint32 fractionid = 7;
 	optional uint32 numrounds = 8;
 	optional uint32 fractionrounds = 9;
+	optional int32 streakconvictions = 10;
 }
 
 message CMsgGCCStrike15_v2_PlayerOverwatchCaseStatus {
