@@ -246,6 +246,9 @@ enum EDOTAGCMsg {
 	k_EMsgGCItemEditorReleaseReservation = 7287;
 	k_EMsgGCItemEditorReleaseReservationResponse = 7288;
 	k_EMsgGCRewardTutorialPrizes = 7289;
+	k_EMsgGCLastHitChallengeHighScorePost = 7290;
+	k_EMsgGCLastHitChallengeHighScoreRequest = 7291;
+	k_EMsgGCLastHitChallengeHighScoreResponse = 7292;
 	k_EMsgGCDev_GrantWarKill = 8001;
 }
 
@@ -365,6 +368,20 @@ enum DOTA_TournamentEvents {
 enum DOTA_WatchReplayType {
 	DOTA_WATCH_REPLAY_NORMAL = 0;
 	DOTA_WATCH_REPLAY_HIGHLIGHTS = 1;
+}
+
+enum Fantasy_Roles {
+	FANTASY_ROLE_UNDEFINED = 0;
+	FANTASY_ROLE_CARRY = 1;
+	FANTASY_ROLE_SOLO = 2;
+	FANTASY_ROLE_SUPPORT = 3;
+}
+
+enum Fantasy_Team_Slots {
+	FANTASY_SLOT_CARRY = 1;
+	FANTASY_SLOT_SOLO = 2;
+	FANTASY_SLOT_SUPPORT = 4;
+	FANTASY_SLOT_ANY = 7;
 }
 
 enum DOTA_2013PassportSelectionIndices {
@@ -2422,6 +2439,7 @@ message CMsgTournamentItemEvent {
 message CMsgTournamentItemEventResponse {
 	optional .DOTA_TournamentEvents event_type = 1 [default = TE_FIRST_BLOOD];
 	optional string winner_name = 2;
+	optional bool tv_delayed = 3;
 }
 
 message CMsgDOTAMatchVotes {
@@ -2672,7 +2690,8 @@ message CMsgDOTANotifyMatchHistoryAccessChange {
 }
 
 message CMsgUpgradeLeagueItem {
-	optional uint64 item_id = 2;
+	optional uint32 match_id = 1;
+	optional uint32 league_id = 2;
 }
 
 message CMsgUpgradeLeagueItemResponse {
@@ -2910,5 +2929,19 @@ message CMsgGCItemEditorReleaseReservationResponse {
 
 message CMsgDOTARewardTutorialPrizes {
 	optional uint32 location_id = 1;
+}
+
+message CMsgDOTALastHitChallengeHighScorePost {
+	optional uint32 hero_id = 1;
+	optional uint32 high_score = 2;
+}
+
+message CMsgDOTALastHitChallengeHighScoreRequest {
+	optional uint32 hero_id = 1;
+}
+
+message CMsgDOTALastHitChallengeHighScoreResponse {
+	optional uint32 score = 1;
+	optional uint32 eresult = 2;
 }
 

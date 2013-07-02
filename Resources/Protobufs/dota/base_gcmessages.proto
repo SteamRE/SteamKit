@@ -476,3 +476,7 @@ message CMsgGCCollectItem {
 message CMsgSDONoMemcached {
 }
 
+message CMsgGCToGCUpdateSQLKeyValue {
+	optional string key_name = 1;
+}
+
