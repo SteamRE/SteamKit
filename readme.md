@@ -1,11 +1,11 @@
-# SteamKit2
-- - -
+SteamKit2
+---
 
 SteamKit2 is a .NET library designed to interoperate with Valve's [Steam network](http://store.steampowered.com/about). It aims to provide a simple, yet extensible, interface to perform various actions on the network.
 
 
 ## Getting Binaries
-- - -
+
 
 ### Visual Studio
 
@@ -21,19 +21,16 @@ For more information on installing SteamKit2, please refer to the [Installation 
 
 
 ## Documentation
-- - -
 
 Documentation consists primarily of XML code documentation provided with the binaries, and our [wiki](https://bitbucket.org/VoiDeD/steamre/wiki/Home).
 
 
 ## License
-- - -
 
 SteamKit2 is released under the [LGPL-2.1 license](http://www.tldrlegal.com/license/gnu-lesser-general-public-license-v2.1-%28lgpl-2.1%29).
 
 
 ## Dependencies
-- - -
 
 In order to compile and use SteamKit2, the following dependencies are required:
 
@@ -44,7 +41,6 @@ Note: If you're using the NuGet package, the protobuf-net dependency _should_ be
 
 
 ## Contact
-- - -
 
 IRC: [irc.gamesurge.net / #opensteamworks](irc://irc.gamesurge.net/opensteamworks)
 
