@@ -99,6 +99,9 @@ message CGCToGCMsgMasterAck_Response {
 	optional int32 eresult = 1 [default = 2];
 }
 
+message CGCToGCMsgMasterStartupComplete {
+}
+
 message CGCToGCMsgRouted {
 	optional uint32 msg_type = 1;
 	optional fixed64 sender_id = 2;

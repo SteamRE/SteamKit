@@ -164,6 +164,13 @@ message CMsgIncrementKillCountAttribute {
 	optional uint32 increment_value = 5;
 }
 
+message CMsgTrackUniquePlayerPairEvent {
+	optional uint64 killer_steam_id = 1;
+	optional uint64 victim_steam_id = 2;
+	optional uint64 item_id = 3;
+	optional uint32 event_type = 4;
+}
+
 message CMsgApplyStrangePart {
 	optional uint64 strange_part_item_id = 1;
 	optional uint64 item_item_id = 2;
@@ -430,6 +437,16 @@ message CMsgGCClientMarketData {
 message CMsgApplyStrangifier {
 	optional uint64 tool_item_id = 1;
 	optional uint64 subject_item_id = 2;
+}
+
+message CMsgRecipeComponent {
+	optional uint64 subject_item_id = 1;
+	optional uint64 attribute_index = 2;
+}
+
+message CMsgFulfillDynamicRecipeComponent {
+	optional uint64 tool_item_id = 1;
+	repeated .CMsgRecipeComponent consumption_components = 2;
 }
 
 message CMsgSetItemEffectVerticalOffset {

@@ -99,5 +99,6 @@ enum EGCToGCMsg {
 	k_EMsgUpdateSessionIP = 154;
 	k_EMsgRequestSessionIP = 155;
 	k_EMsgRequestSessionIPResponse = 156;
+	k_EGCToGCMsgMasterStartupComplete = 157;
 }
 

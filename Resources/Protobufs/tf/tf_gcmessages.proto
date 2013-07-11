@@ -763,10 +763,16 @@ message CMsgUpdateHalloweenMerasmusLootLevel {
 	optional uint32 merasmus_level = 2;
 }
 
-message CAttribute_StrangeScore {
-	optional uint32 score_type = 1;
-	optional uint32 score_value = 2;
-	optional uint32 restriction_type = 3;
-	optional uint32 restriction_value = 4;
+message CAttribute_String {
+	optional string value = 1;
+}
+
+message CAttribute_ItemDynamicRecipeComponentDefinedItem {
+	optional uint32 item_def = 1;
+	optional uint32 item_quality = 2;
+	optional uint32 item_flags = 3;
+	optional string attributes_string = 4;
+	optional uint32 item_count = 5;
+	optional uint32 items_fulfilled = 6;
 }
 

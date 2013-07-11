@@ -249,6 +249,21 @@ enum EDOTAGCMsg {
 	k_EMsgGCLastHitChallengeHighScorePost = 7290;
 	k_EMsgGCLastHitChallengeHighScoreRequest = 7291;
 	k_EMsgGCLastHitChallengeHighScoreResponse = 7292;
+	k_EMsgGCCreateFantasyLeagueRequest = 7293;
+	k_EMsgGCCreateFantasyLeagueResponse = 7294;
+	k_EMsgGCEditFantasyLeagueRequest = 7295;
+	k_EMsgGCEditFantasyLeagueResponse = 7296;
+	k_EMsgGCFantasyLeagueInfoRequest = 7297;
+	k_EMsgGCFantasyLeagueInfoResponse = 7298;
+	k_EMsgGCFantasyLeagueInfo = 7299;
+	k_EMsgGCCreateFantasyTeamRequest = 7300;
+	k_EMsgGCCreateFantasyTeamResponse = 7301;
+	k_EMsgGCEditFantasyTeamRequest = 7302;
+	k_EMsgGCEditFantasyTeamResponse = 7303;
+	k_EMsgGCFantasyTeamInfoRequestByFantasyLeagueID = 7304;
+	k_EMsgGCFantasyTeamInfoRequestByOwnerAccountID = 7305;
+	k_EMsgGCFantasyTeamInfoResponse = 7306;
+	k_EMsgGCFantasyTeamInfo = 7307;
 	k_EMsgGCDev_GrantWarKill = 8001;
 }
 
@@ -363,6 +378,10 @@ enum DOTA_TournamentEvents {
 	TE_HERO_DENY = 3;
 	TE_AEGIS_DENY = 4;
 	TE_AEGIS_STOLEN = 5;
+	TE_GODLIKE = 6;
+	TE_COURIER_KILL = 7;
+	TE_ECHOSLAM = 8;
+	TE_RAPIER = 9;
 }
 
 enum DOTA_WatchReplayType {
@@ -382,6 +401,12 @@ enum Fantasy_Team_Slots {
 	FANTASY_SLOT_SOLO = 2;
 	FANTASY_SLOT_SUPPORT = 4;
 	FANTASY_SLOT_ANY = 7;
+}
+
+enum Fantasy_Selection_Mode {
+	FANTASY_SELECTION_LOCKED = 1;
+	FANTASY_SELECTION_SHUFFLE = 2;
+	FANTASY_SELECTION_FREE_PICK = 3;
 }
 
 enum DOTA_2013PassportSelectionIndices {
@@ -473,6 +498,14 @@ enum DOTA_2013PassportSelectionIndices {
 	PP13_SEL_EVENTPRED_41 = 85;
 	PP13_SEL_EVENTPRED_42 = 86;
 	PP13_SEL_EVENTPRED_43 = 87;
+	PP13_SEL_SOLO_0 = 88;
+	PP13_SEL_SOLO_1 = 89;
+	PP13_SEL_SOLO_2 = 90;
+	PP13_SEL_SOLO_3 = 91;
+	PP13_SEL_SOLO_4 = 92;
+	PP13_SEL_SOLO_5 = 93;
+	PP13_SEL_SOLO_6 = 94;
+	PP13_SEL_SOLO_7 = 95;
 }
 
 enum EDOTAGCSessionNeed {
@@ -1255,6 +1288,8 @@ message CMsgDOTAMatch {
 	optional .CMsgDOTAMatch.ReplayState replay_state = 34 [default = REPLAY_AVAILABLE];
 	optional uint32 radiant_guild_id = 35;
 	optional uint32 dire_guild_id = 36;
+	optional string radiant_team_tag = 37;
+	optional string dire_team_tag = 38;
 }
 
 message CMsgDOTAPlayerMatchHistory {
@@ -1810,6 +1845,7 @@ message CMsgDOTAGuildSDO {
 	repeated .CMsgDOTAGuildSDO.Member members = 9;
 	repeated .CMsgDOTAGuildSDO.Invitation invitations = 10;
 	optional string message = 11;
+	optional bool incremental = 12;
 }
 
 message CMsgDOTAGuildAuditSDO {
@@ -2000,12 +2036,6 @@ message CMsgDOTAGuildOpenPartyRefresh {
 }
 
 message CMsgDOTARequestGuildData {
-}
-
-message CMsgDOTAGuildData {
-	optional bool in_guild = 1;
-	optional uint32 guild_id = 2;
-	optional .CMsgDOTAGuildSDO guild_data = 3;
 }
 
 message CMsgDOTAGuildInviteData {
@@ -2796,6 +2826,139 @@ message CMsgGCToGCUpdateTeamStats {
 	optional bool radiant_team_won = 7;
 }
 
+message CMsgDOTACreateFantasyLeagueRequest {
+	optional string league_name = 1;
+	optional uint64 league_logo = 2;
+	optional .Fantasy_Selection_Mode selection_mode = 3 [default = FANTASY_SELECTION_LOCKED];
+	optional uint32 team_count = 4;
+}
+
+message CMsgDOTACreateFantasyLeagueResponse {
+	enum EResult {
+		SUCCESS = 0;
+		ERROR_UNSPECIFIED = 1;
+		ERROR_TOO_MANY_LEAGUES = 2;
+		ERROR_INVALID_TEAM_COUNT = 3;
+		ERROR_CREATION_DISABLED = 4;
+	}
+
+	optional .CMsgDOTACreateFantasyLeagueResponse.EResult result = 1 [default = SUCCESS];
+}
+
+message CMsgDOTAEditFantasyLeagueRequest {
+	optional uint32 fantasy_league_id = 1;
+	optional string league_name = 2;
+	optional uint64 league_logo = 3;
+	optional .Fantasy_Selection_Mode selection_mode = 4 [default = FANTASY_SELECTION_LOCKED];
+	optional uint32 team_count = 5;
+}
+
+message CMsgDOTAEditFantasyLeagueResponse {
+	enum EResult {
+		SUCCESS = 0;
+		ERROR_UNSPECIFIED = 1;
+		ERROR_NO_PERMISSION = 2;
+		ERROR_UNKNOWN_LEAGUE = 3;
+		ERROR_CANNOT_SHRINK_LEAGUE = 4;
+	}
+
+	optional .CMsgDOTAEditFantasyLeagueResponse.EResult result = 1 [default = SUCCESS];
+}
+
+message CMsgDOTAFantasyLeagueInfoRequest {
+	optional uint32 fantasy_league_id = 1;
+	optional uint32 request_index = 2;
+}
+
+message CMsgDOTAFantasyLeagueInfoResponse {
+	enum EResult {
+		SUCCESS = 0;
+		ERROR_UNSPECIFIED = 1;
+		ERROR_BAD_LEAGUE_ID = 2;
+	}
+
+	optional .CMsgDOTAFantasyLeagueInfoResponse.EResult result = 1 [default = SUCCESS];
+	optional uint32 request_index = 2;
+	optional .CMsgDOTAFantasyLeagueInfo info = 3;
+}
+
+message CMsgDOTAFantasyLeagueInfo {
+	optional uint32 fantasy_league_id = 1;
+	optional uint32 commissioner_account_id = 2;
+	optional string fantasy_league_name = 3;
+	optional .Fantasy_Selection_Mode selection_mode = 4 [default = FANTASY_SELECTION_LOCKED];
+	optional uint32 team_count = 5;
+	optional uint64 logo = 6;
+}
+
+message CMsgDOTACreateFantasyTeamRequest {
+	optional uint32 fantasy_league_id = 1;
+	optional string team_name = 2;
+	optional uint64 team_logo = 3;
+	repeated uint32 team_members = 4;
+	optional uint32 owner_account_id = 5;
+}
+
+message CMsgDOTACreateFantasyTeamResponse {
+	enum EResult {
+		SUCCESS = 0;
+		ERROR_UNSPECIFIED = 1;
+		ERROR_NO_PERMISSION = 2;
+		ERROR_TOO_MANY_TEAMS = 3;
+		ERROR_NAME_ALREADY_TAKEN = 4;
+		ERROR_INVALID_LEAGUE = 5;
+	}
+
+	optional .CMsgDOTACreateFantasyTeamResponse.EResult result = 1 [default = SUCCESS];
+}
+
+message CMsgDOTAEditFantasyTeamRequest {
+	optional uint32 fantasy_league_id = 1;
+	optional uint32 team_index = 2;
+	optional string team_name = 3;
+	optional uint64 team_logo = 4;
+	repeated uint32 team_members = 5;
+}
+
+message CMsgDOTAEditFantasyTeamResponse {
+	enum EResult {
+		SUCCESS = 0;
+		ERROR_UNSPECIFIED = 1;
+		ERROR_INVALID_TEAM_INFO = 2;
+		ERROR_NOT_IN_LEAGUE = 3;
+		ERROR_NAME_ALREADY_TAKEN = 4;
+		ERROR_SELECTIONS_LOCKED = 5;
+		ERROR_NO_PERMISSION = 6;
+		ERROR_DUPLICATE_PLAYERS = 7;
+	}
+
+	optional .CMsgDOTAEditFantasyTeamResponse.EResult result = 1 [default = SUCCESS];
+}
+
+message CMsgDOTAFantasyTeamInfoRequestByFantasyLeagueID {
+	optional uint32 fantasy_league_id = 1;
+	optional uint32 request_index = 2;
+}
+
+message CMsgDOTAFantasyTeamInfoRequestByOwnerAccountID {
+	optional uint32 owner_account_id = 3;
+	optional uint32 request_index = 2;
+}
+
+message CMsgDOTAFantasyTeamInfoResponse {
+	repeated .CMsgDOTAFantasyTeamInfo results = 1;
+	optional uint32 request_index = 2;
+}
+
+message CMsgDOTAFantasyTeamInfo {
+	optional uint32 fantasy_league_id = 1;
+	optional uint32 owner_account_id = 2;
+	optional uint32 fantasy_team_index = 3;
+	optional string team_name = 4;
+	optional uint64 team_logo = 5;
+	repeated uint32 team_members = 6;
+}
+
 message CMsgDOTAPassportVoteTeamGuess {
 	optional uint32 league_id = 1;
 	optional uint32 winner_id = 2;
@@ -2812,10 +2975,15 @@ message CMsgDOTAPassportStampedPlayer {
 	optional uint32 stamp_level = 2;
 }
 
+message CMsgDOTAPassportPlayerCardChallenge {
+	optional uint32 challenge_id = 1;
+}
+
 message CMsgDOTAPassportVote {
 	repeated .CMsgDOTAPassportVoteTeamGuess team_votes = 1;
 	repeated .CMsgDOTAPassportVoteGenericSelection generic_selections = 2;
 	repeated .CMsgDOTAPassportStampedPlayer stamped_players = 3;
+	repeated .CMsgDOTAPassportPlayerCardChallenge player_card_challenges = 4;
 }
 
 message CMsgPassportDataRequest {
@@ -2838,6 +3006,7 @@ message CMsgPassportDataResponse {
 	optional uint32 west_qualifiers_runner_up_team_id = 13;
 	optional uint32 passports_bought = 14;
 	optional uint32 original_purchaser_id = 15;
+	optional uint32 fantasy_team_count = 16;
 }
 
 message CMsgPassportFeaturedMatchRequest {
