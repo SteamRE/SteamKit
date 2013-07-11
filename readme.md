@@ -15,14 +15,14 @@ Simply install SteamKit2 using the package manager in Visual Studio, and NuGet w
   
 ### Other
 
-We additionally distribute binaries on our [downloads page](https://bitbucket.org/VoiDeD/steamre/downloads).
+We additionally distribute binaries on our [releases page](https://github.com/SteamRE/SteamKit/releases).
 
-For more information on installing SteamKit2, please refer to the [Installation Guide](https://bitbucket.org/VoiDeD/steamre/wiki/Installation) on the wiki.
+For more information on installing SteamKit2, please refer to the [Installation Guide](https://github.com/SteamRE/SteamKit/wiki/Installation) on the wiki.
 
 
 ## Documentation
 
-Documentation consists primarily of XML code documentation provided with the binaries, and our [wiki](https://bitbucket.org/VoiDeD/steamre/wiki/Home).
+Documentation consists primarily of XML code documentation provided with the binaries, and our [wiki](https://github.com/SteamRE/SteamKit/wiki).
 
 
 ## License
@@ -37,7 +37,7 @@ In order to compile and use SteamKit2, the following dependencies are required:
   - .NET 4.0 or [Mono ≥2.8](http://mono-project.com)
   - [protobuf-net](http://code.google.com/p/protobuf-net/) ([NuGet package](http://nuget.org/packages/protobuf-net))
 
-Note: If you're using the NuGet package, the protobuf-net dependency _should_ be resolved for you. See the [Installation Guide](https://bitbucket.org/VoiDeD/steamre/wiki/Installation) for more information.
+Note: If you're using the NuGet package, the protobuf-net dependency _should_ be resolved for you. See the [Installation Guide](https://github.com/SteamRE/SteamKit/wiki/Installation) for more information.
 
 
 ## Contact
