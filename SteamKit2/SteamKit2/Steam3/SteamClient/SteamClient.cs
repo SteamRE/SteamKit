@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Threading;
 using SteamKit2.Internal;
+using System.Diagnostics;
 
 namespace SteamKit2
 {
@@ -22,6 +23,7 @@ namespace SteamKit2
         Dictionary<Type, ClientMsgHandler> handlers;
 
         long currentJobId = 0;
+        DateTime processStartTime;
 
         object callbackLock = new object();
         Queue<CallbackMsg> callbackQueue;
@@ -51,6 +53,11 @@ namespace SteamKit2
             this.AddHandler( new SteamTrading() );
             this.AddHandler( new SteamUnifiedMessages() );
             this.AddHandler( new SteamScreenshots() );
+
+            using ( var process = Process.GetCurrentProcess())
+            {
+                this.processStartTime = process.StartTime;
+            }
         }
 
 
@@ -237,7 +244,14 @@ namespace SteamKit2
         /// <returns>The next available JobID.</returns>
         public JobID GetNextJobID()
         {
-            return ( ulong )Interlocked.Increment( ref currentJobId );
+            var sequence = ( uint )Interlocked.Increment( ref currentJobId );
+            return new JobID
+            {
+                BoxID = 0,
+                ProcessID = 0,
+                SequentialCount = sequence,
+                StartTime = processStartTime
+            };
         }
 
 
