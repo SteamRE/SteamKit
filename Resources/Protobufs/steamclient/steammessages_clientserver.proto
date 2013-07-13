@@ -2047,6 +2047,10 @@ message CMsgClientUpdateAppJobReport {
 	optional uint32 start_app_state = 11;
 }
 
+message CMsgClientSteam2AppStarted {
+	optional uint32 app_id = 1;
+}
+
 message CMsgClientGetCDNAuthTokenResponse {
 	optional uint32 eresult = 1 [default = 2];
 	optional string token = 2;
