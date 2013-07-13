@@ -74,10 +74,7 @@ namespace Tests
 			var steamClient = new SteamClient();
 			var jobID = steamClient.GetNextJobID();
 
-			using (var process = Process.GetCurrentProcess())
-			{
-				Assert.Equal(0u, jobID.ProcessID);
-			}
+			Assert.Equal(0u, jobID.ProcessID);
 		}
 
 		[Fact]
