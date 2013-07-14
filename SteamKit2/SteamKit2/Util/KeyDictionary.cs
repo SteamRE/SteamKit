@@ -9,7 +9,7 @@ using System.Collections.Generic;
 
 namespace SteamKit2
 {
-    static class KeyDictionary
+    public static class KeyDictionary
     {
         static Dictionary<EUniverse, byte[]> keys = new Dictionary<EUniverse, byte[]>()
         {

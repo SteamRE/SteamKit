@@ -12,7 +12,7 @@ using System.Text;
 
 namespace SteamKit2
 {
-    class RSACrypto : IDisposable
+    public class RSACrypto : IDisposable
     {
         RSACryptoServiceProvider rsa;
 
