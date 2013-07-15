@@ -9,6 +9,10 @@ using System.Collections.Generic;
 
 namespace SteamKit2
 {
+    /// <summary>
+    /// Contains the public keys that Steam uses for each of the <see cref="EUniverse"/>
+    /// types.
+    /// </summary>
     public static class KeyDictionary
     {
         static Dictionary<EUniverse, byte[]> keys = new Dictionary<EUniverse, byte[]>()
@@ -61,7 +65,11 @@ namespace SteamKit2
            },
         };
 
-
+        /// <summary>
+        /// Gets the public key for the given universe.
+        /// </summary>
+        /// <returns>The public key.</returns>
+        /// <param name="eUniverse">The universe.</param>
         public static byte[] GetPublicKey( EUniverse eUniverse )
         {
             if ( keys.ContainsKey( eUniverse ) )
