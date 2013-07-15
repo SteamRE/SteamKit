@@ -12,11 +12,19 @@ using System.Text;
 
 namespace SteamKit2
 {
-    class RSACrypto : IDisposable
+
+    /// <summary>
+    /// Handles encrypting and decrypting using the RSA public key encryption
+    /// algorithm.
+    /// </summary>
+    public class RSACrypto : IDisposable
     {
         RSACryptoServiceProvider rsa;
 
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SteamKit2.RSACrypto"/> class.
+        /// </summary>
+        /// <param name="key">The public key to encrypt with.</param>
         public RSACrypto( byte[] key )
         {
             AsnKeyParser keyParser = new AsnKeyParser( key );
@@ -25,13 +33,19 @@ namespace SteamKit2
             rsa.ImportParameters( keyParser.ParseRSAPublicKey() );
         }
 
-
+        /// <summary>
+        /// Encrypt the specified input.
+        /// </summary>
+        /// <returns>The encrypted input.</returns>
+        /// <param name="input">The input to encrypt.</param>
         public byte[] Encrypt( byte[] input )
         {
             return rsa.Encrypt( input, true );
         }
 
-
+        /// <summary>
+        /// Disposes of this class.
+        /// </summary>
         public void Dispose()
         {
             ( ( IDisposable )rsa ).Dispose();
