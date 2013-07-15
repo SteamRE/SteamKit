@@ -601,6 +601,7 @@ namespace SteamKit2
 		ClientDPSendSpecialSurveyResponseReply = 1623,
 		DPStoreSaleStatistics = 1624,
 		ClientDPUpdateAppJobReport = 1625,
+		ClientDPSteam2AppStarted = 1627,
 		DPUpdateContentEvent = 1626,
 		BaseCM = 1700,
 		CMSetAllowState = 1701,
@@ -1692,6 +1693,9 @@ namespace SteamKit2
 		TestWorkerProcessServiceModuleCallResponse = 9203,
 		ClientGetEmoticonList = 9330,
 		ClientEmoticonList = 9331,
+		ClientSharedLicenses = 9400,
+		ClientSharedLicensesLockStatus = 9403,
+		ClientSharedLicensesStopPlaying = 9404,
 	}
 	public enum EResult
 	{

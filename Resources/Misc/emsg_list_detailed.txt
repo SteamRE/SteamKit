@@ -28,7 +28,6 @@
 	k_EMsgClientAckVACBan2 = 732, // flags: 2, server type: -1
 	k_EMsgClientAckMessageByGID = 735, // flags: 2, server type: -1
 	k_EMsgClientGetPurchaseReceipts = 736, // flags: 2, server type: -1
-	k_EMsgClientAckPurchaseReceipt = 737, // flags: 2, server type: -1
 	k_EMsgClientSendGuestPass = 739, // flags: 2, server type: -1
 	k_EMsgClientAckGuestPass = 740, // flags: 2, server type: -1
 	k_EMsgClientRedeemGuestPass = 741, // flags: 2, server type: -1
@@ -152,6 +151,7 @@
 	k_EMsgClientDPSendSpecialSurveyResponse = 1622, // flags: 6, server type: 17
 	k_EMsgClientDPSendSpecialSurveyResponseReply = 1623, // flags: 6, server type: 17
 	k_EMsgClientDPUpdateAppJobReport = 1625, // flags: 6, server type: 17
+	k_EMsgClientDPSteam2AppStarted = 1627, // flags: 6, server type: 17
 	k_EMsgClientChatRoomInfo = 4026, // flags: 2, server type: -1
 	k_EMsgAMGameServerUpdate = 4331, // flags: 2, server type: -1
 	k_EMsgAMGameServerRemove = 4332, // flags: 2, server type: -1
@@ -498,3 +498,5 @@
 	k_EMsgPICSAccessTokenResponse = 8906, // flags: 6, server type: 14
 	k_EMsgClientGetEmoticonList = 9330, // flags: 6, server type: 63
 	k_EMsgClientEmoticonList = 9331, // flags: 6, server type: 63
+	k_EMsgClientSharedLicensesLockStatus = 9403, // flags: 2, server type: -1
+	k_EMsgClientSharedLicensesStopPlaying = 9404, // flags: 2, server type: -1
