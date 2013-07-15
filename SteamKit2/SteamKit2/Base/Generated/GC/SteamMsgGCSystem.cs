@@ -301,7 +301,10 @@ namespace SteamKit2.GC.Internal
       k_EMsgRequestSessionIP = 155,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgRequestSessionIPResponse", Value=156)]
-      k_EMsgRequestSessionIPResponse = 156
+      k_EMsgRequestSessionIPResponse = 156,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EGCToGCMsgMasterStartupComplete", Value=157)]
+      k_EGCToGCMsgMasterStartupComplete = 157
     }
   
 }

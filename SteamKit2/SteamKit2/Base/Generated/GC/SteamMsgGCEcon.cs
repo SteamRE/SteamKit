@@ -374,7 +374,10 @@ namespace SteamKit2.GC.Internal
       k_EMsgGCToGCDirtySDOCache = 2516,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCDirtyMultipleSDOCache", Value=2517)]
-      k_EMsgGCToGCDirtyMultipleSDOCache = 2517
+      k_EMsgGCToGCDirtyMultipleSDOCache = 2517,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCUpdateSQLKeyValue", Value=2518)]
+      k_EMsgGCToGCUpdateSQLKeyValue = 2518
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"EGCMsgResponse")]

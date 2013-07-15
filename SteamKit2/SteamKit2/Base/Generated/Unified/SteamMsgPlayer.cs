@@ -500,15 +500,6 @@ namespace SteamKit2.Unified.Internal
       set { _player_level = value; }
     }
 
-    private uint _player_level_potential = default(uint);
-    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"player_level_potential", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint player_level_potential
-    {
-      get { return _player_level_potential; }
-      set { _player_level_potential = value; }
-    }
-
     private uint _player_xp_needed_to_level_up = default(uint);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"player_xp_needed_to_level_up", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(default(uint))]

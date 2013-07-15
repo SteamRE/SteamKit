@@ -36,6 +36,15 @@ namespace SteamKit2.Unified.Internal
       get { return _sha_digest_password; }
       set { _sha_digest_password = value; }
     }
+
+    private string _account_name = "";
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"account_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string account_name
+    {
+      get { return _account_name; }
+      set { _account_name = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -46,24 +55,6 @@ namespace SteamKit2.Unified.Internal
   {
     public CCredentials_TestAvailablePassword_Response() {}
     
-
-    private string _password = "";
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"password", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
-    public string password
-    {
-      get { return _password; }
-      set { _password = value; }
-    }
-
-    private byte[] _sha_digest_password = null;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"sha_digest_password", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
-    public byte[] sha_digest_password
-    {
-      get { return _sha_digest_password; }
-      set { _sha_digest_password = value; }
-    }
 
     private bool _is_valid = default(bool);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"is_valid", DataFormat = global::ProtoBuf.DataFormat.Default)]
@@ -118,6 +109,15 @@ namespace SteamKit2.Unified.Internal
       get { return _newauthentication; }
     }
   
+
+    private string _machine_name_userchosen = "";
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"machine_name_userchosen", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string machine_name_userchosen
+    {
+      get { return _machine_name_userchosen; }
+      set { _machine_name_userchosen = value; }
+    }
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"NewAuthentication")]
   public partial class NewAuthentication : global::ProtoBuf.IExtensible
   {
@@ -167,6 +167,15 @@ namespace SteamKit2.Unified.Internal
     {
       get { return _is_remembered; }
       set { _is_remembered = value; }
+    }
+
+    private string _machine_name_user_supplied = "";
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"machine_name_user_supplied", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string machine_name_user_supplied
+    {
+      get { return _machine_name_user_supplied; }
+      set { _machine_name_user_supplied = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

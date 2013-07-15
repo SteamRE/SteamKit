@@ -4177,46 +4177,83 @@ namespace SteamKit2.GC.TF2.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CAttribute_StrangeScore")]
-  public partial class CAttribute_StrangeScore : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CAttribute_String")]
+  public partial class CAttribute_String : global::ProtoBuf.IExtensible
   {
-    public CAttribute_StrangeScore() {}
+    public CAttribute_String() {}
     
 
-    private uint _score_type = default(uint);
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"score_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint score_type
+    private string _value = "";
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"value", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string value
     {
-      get { return _score_type; }
-      set { _score_type = value; }
+      get { return _value; }
+      set { _value = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CAttribute_ItemDynamicRecipeComponentDefinedItem")]
+  public partial class CAttribute_ItemDynamicRecipeComponentDefinedItem : global::ProtoBuf.IExtensible
+  {
+    public CAttribute_ItemDynamicRecipeComponentDefinedItem() {}
+    
+
+    private uint _item_def = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"item_def", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint item_def
+    {
+      get { return _item_def; }
+      set { _item_def = value; }
     }
 
-    private uint _score_value = default(uint);
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"score_value", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    private uint _item_quality = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"item_quality", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint score_value
+    public uint item_quality
     {
-      get { return _score_value; }
-      set { _score_value = value; }
+      get { return _item_quality; }
+      set { _item_quality = value; }
     }
 
-    private uint _restriction_type = default(uint);
-    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"restriction_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    private uint _item_flags = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"item_flags", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint restriction_type
+    public uint item_flags
     {
-      get { return _restriction_type; }
-      set { _restriction_type = value; }
+      get { return _item_flags; }
+      set { _item_flags = value; }
     }
 
-    private uint _restriction_value = default(uint);
-    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"restriction_value", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint restriction_value
+    private string _attributes_string = "";
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"attributes_string", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string attributes_string
     {
-      get { return _restriction_value; }
-      set { _restriction_value = value; }
+      get { return _attributes_string; }
+      set { _attributes_string = value; }
+    }
+
+    private uint _item_count = default(uint);
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"item_count", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint item_count
+    {
+      get { return _item_count; }
+      set { _item_count = value; }
+    }
+
+    private uint _items_fulfilled = default(uint);
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"items_fulfilled", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint items_fulfilled
+    {
+      get { return _items_fulfilled; }
+      set { _items_fulfilled = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

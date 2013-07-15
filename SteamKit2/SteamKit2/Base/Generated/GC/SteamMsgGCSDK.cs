@@ -563,6 +563,16 @@ namespace SteamKit2.GC.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGCToGCMsgMasterStartupComplete")]
+  public partial class CGCToGCMsgMasterStartupComplete : global::ProtoBuf.IExtensible
+  {
+    public CGCToGCMsgMasterStartupComplete() {}
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGCToGCMsgRouted")]
   public partial class CGCToGCMsgRouted : global::ProtoBuf.IExtensible
   {
@@ -752,6 +762,15 @@ namespace SteamKit2.GC.Internal
       get { return _client_session_need; }
       set { _client_session_need = value; }
     }
+
+    private uint _client_launcher = default(uint);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"client_launcher", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint client_launcher
+    {
+      get { return _client_launcher; }
+      set { _client_launcher = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -794,6 +813,52 @@ namespace SteamKit2.GC.Internal
       get { return _uptodate_subscribed_caches; }
     }
   
+
+    private CMsgClientWelcome.Location _location = null;
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"location", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public CMsgClientWelcome.Location location
+    {
+      get { return _location; }
+      set { _location = value; }
+    }
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Location")]
+  public partial class Location : global::ProtoBuf.IExtensible
+  {
+    public Location() {}
+    
+
+    private float _latitude = default(float);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"latitude", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(float))]
+    public float latitude
+    {
+      get { return _latitude; }
+      set { _latitude = value; }
+    }
+
+    private float _longitude = default(float);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"longitude", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(float))]
+    public float longitude
+    {
+      get { return _longitude; }
+      set { _longitude = value; }
+    }
+
+    private string _country = "";
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"country", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string country
+    {
+      get { return _country; }
+      set { _country = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -821,6 +886,42 @@ namespace SteamKit2.GC.Internal
     {
       get { return _client_session_need; }
       set { _client_session_need = value; }
+    }
+
+    private int _queue_position = default(int);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"queue_position", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int queue_position
+    {
+      get { return _queue_position; }
+      set { _queue_position = value; }
+    }
+
+    private int _queue_size = default(int);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"queue_size", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int queue_size
+    {
+      get { return _queue_size; }
+      set { _queue_size = value; }
+    }
+
+    private int _wait_seconds = default(int);
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"wait_seconds", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int wait_seconds
+    {
+      get { return _wait_seconds; }
+      set { _wait_seconds = value; }
+    }
+
+    private int _estimated_wait_seconds_remaining = default(int);
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"estimated_wait_seconds_remaining", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int estimated_wait_seconds_remaining
+    {
+      get { return _estimated_wait_seconds_remaining; }
+      set { _estimated_wait_seconds_remaining = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
