@@ -121,6 +121,14 @@ namespace SteamKit2
         }
 
         /// <summary>
+        /// Clears all registered listeners from the <see cref="DebugLog"/>.
+        /// </summary>
+        public static void ClearListeners()
+        {
+            listeners.Clear();
+        }
+
+        /// <summary>
         /// Writes a line to the debug log, informing all listeners.
         /// </summary>
         /// <param name="category">The category of the message.</param>
