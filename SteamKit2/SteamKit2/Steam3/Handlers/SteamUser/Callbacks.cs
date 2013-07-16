@@ -78,7 +78,7 @@ namespace SteamKit2
             /// This is used for authenticated content downloads in Steam2.
             /// This field will only be set when <see cref="LogOnDetails.RequestSteam2Ticket"/> has been set to <c>true</c>.
             /// </summary>
-            public Steam2Ticket Steam2Ticket { get; private set; }
+            public byte[] Steam2Ticket { get; private set; }
 
             /// <summary>
             /// Gets a value indicating whether the client should use PICS.
@@ -117,8 +117,7 @@ namespace SteamKit2
                 this.CellID = resp.cell_id;
                 this.CellIDPingThreshold = resp.cell_id_ping_threshold;
 
-                if ( resp.steam2_ticket != null )
-                    this.Steam2Ticket = new Steam2Ticket( resp.steam2_ticket );
+                this.Steam2Ticket = resp.steam2_ticket;
 
                 this.IPCountryCode = resp.ip_country_code;
 
