@@ -56,6 +56,16 @@ message CCloud_GetClientEncryptionKey_Response {
 	optional int32 crc = 2 [(description) = "CRC of key"];
 }
 
+message CCloud_CDNReport_Notification {
+	optional fixed64 steamid = 1;
+	optional string url = 2;
+	optional bool success = 3;
+	optional uint32 http_status_code = 4;
+	optional uint64 expected_bytes = 5;
+	optional uint64 received_bytes = 6;
+	optional uint32 duration = 7;
+}
+
 service Cloud {
 	option (service_description) = "A service for Steam Cloud operations.";
 	rpc GetUploadServerInfo (.CCloud_GetUploadServerInfo_Request) returns (.CCloud_GetUploadServerInfo_Response) {
@@ -72,5 +82,8 @@ service Cloud {
 	}
 	rpc GetClientEncryptionKey (.CCloud_GetClientEncryptionKey_Request) returns (.CCloud_GetClientEncryptionKey_Response) {
 		option (method_description) = "Gets the user's Cloud file encryption key.";
+	}
+	rpc CDNReport (.CCloud_CDNReport_Notification) returns (.NoResponse) {
+		option (method_description) = "Reports the result of a CDN transfer.";
 	}
 }

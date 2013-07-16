@@ -308,6 +308,7 @@ message CMsgClientLicenseList {
 		optional uint32 license_type = 9;
 		optional int32 territory_code = 10;
 		optional int32 change_number = 11;
+		optional uint32 owner_id = 12;
 	}
 
 	optional int32 eresult = 1 [default = 2];
@@ -2392,6 +2393,7 @@ message CMsgCREEnumeratePublishedFiles {
 	optional uint32 count = 5;
 	repeated string tags = 6;
 	repeated string user_tags = 7;
+	optional uint32 matching_file_type = 8 [default = 13];
 }
 
 message CMsgCREEnumeratePublishedFilesResponse {
@@ -2611,18 +2613,56 @@ message CMsgClientEmoticonList {
 	repeated .CMsgClientEmoticonList.Emoticon emoticons = 1;
 }
 
-message CMsgClientSharedLicensesLockStatus {
-	repeated uint32 borrowed_licenses_locked = 1;
-	optional uint32 own_licenses_locked_by = 2;
+message CMsgClientSharedLibraryLockStatus {
+	message LockedLibrary {
+		optional uint32 owner_id = 1;
+		optional uint32 locked_by = 2;
+	}
+
+	repeated .CMsgClientSharedLibraryLockStatus.LockedLibrary locked_library = 1;
+	optional uint32 own_library_locked_by = 2;
 }
 
-message CMsgClientSharedLicensesStopPlaying {
+message CMsgClientSharedLibraryStopPlaying {
 	message StopApp {
 		optional uint32 app_id = 1;
 		optional uint32 owner_id = 2;
 	}
 
 	optional uint32 seconds_left = 1;
-	repeated .CMsgClientSharedLicensesStopPlaying.StopApp stop_apps = 2;
+	repeated .CMsgClientSharedLibraryStopPlaying.StopApp stop_apps = 2;
+}
+
+message CMsgClientServiceCall {
+	optional bytes sysid_routing = 1;
+	optional uint32 call_handle = 2;
+	optional uint32 module_crc = 3;
+	optional bytes module_hash = 4;
+	optional uint32 function_id = 5;
+	optional uint32 cub_output_max = 6;
+	optional uint32 flags = 7;
+	optional bytes callparameter = 8;
+}
+
+message CMsgClientServiceModule {
+	optional uint32 module_crc = 1;
+	optional bytes module_hash = 2;
+	optional bytes module_content = 3;
+}
+
+message CMsgClientServiceCallResponse {
+	optional bytes sysid_routing = 1;
+	optional uint32 call_handle = 2;
+	optional uint32 module_crc = 3;
+	optional bytes module_hash = 4;
+	optional uint32 ecallresult = 5;
+	optional bytes result_content = 6;
+	optional bytes os_version_info = 7;
+	optional bytes system_info = 8;
+	optional fixed64 load_address = 9;
+	optional bytes exception_record = 10;
+	optional bytes portable_os_version_info = 11;
+	optional bytes portable_system_info = 12;
+	optional bool was_converted = 13;
 }
 
