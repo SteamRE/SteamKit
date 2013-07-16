@@ -1,5 +1,18 @@
 
 ------------------------------------------------------------------------------
+v 1.4.1			Jul 15, 2013
+------------------------------------------------------------------------------
+
+*	Added the ability to manipulate UFS (Steam cloud) files with UFSClient.
+*	Added SteamScreenshots handler for interacting with user screenshots.
+*	Added an optional parameter to SteamID.Render() to render SteamIDs to their Steam3 representations.
+*	Added the ability to specify the timeout of WebAPI requests with Interface.Timeout.
+*	The RSACrypto and KeyDictionary utility classes are now accessible to consumers.
+*	Updated EMsg list.
+*	Updated game related GC messages.
+
+
+------------------------------------------------------------------------------
 v 1.4.0			Jun 08, 2013
 ------------------------------------------------------------------------------
 
