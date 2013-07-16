@@ -378,14 +378,16 @@ namespace SteamKit2.Internal
                 }
             }
 
-            DataStream ds = new DataStream( payload );
-
-            while ( ds.SizeRemaining() != 0 )
+            using ( var ms = new MemoryStream( payload ) )
+            using ( var br = new BinaryReader( ms ) )
             {
-                uint subSize = ds.ReadUInt32();
-                byte[] subData = ds.ReadBytes( subSize );
+                while ( ( ms.Length - ms.Position ) != 0 )
+                {
+                    int subSize = br.ReadInt32();
+                    byte[] subData = br.ReadBytes( subSize );
 
-                OnClientMsgReceived( GetPacketMsg( subData ) );
+                    OnClientMsgReceived( GetPacketMsg( subData ) );
+                }
             }
 
         }

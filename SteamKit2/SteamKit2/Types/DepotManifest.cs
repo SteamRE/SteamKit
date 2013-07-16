@@ -151,17 +151,18 @@ namespace SteamKit2
 
         void Deserialize(byte[] data)
         {
-            using ( DataStream ds = new DataStream( data ) )
+            using ( var ms = new MemoryStream( data ) )
+            using ( var br = new BinaryReader( ms ) )
             {
-                while ( ds.SizeRemaining() > 0 )
+                while ( ( ms.Length - ms.Position ) > 0 )
                 {
-                    uint magic = ds.ReadUInt32();
-                    ds.Seek( -4, SeekOrigin.Current );
+                    uint magic = br.ReadUInt32();
+                    ms.Seek( -4, SeekOrigin.Current );
 
                     switch ( magic )
                     {
                         case Steam3Manifest.MAGIC:
-                            Steam3Manifest binaryManifest = new Steam3Manifest( ds );
+                            Steam3Manifest binaryManifest = new Steam3Manifest( br );
                             ParseBinaryManifest( binaryManifest );
                             break;
 
@@ -171,7 +172,7 @@ namespace SteamKit2
                             throw new NotImplementedException( string.Format( "Unrecognized magic value {0:X} in depot manifest.", magic ) );
                     }
 
-                    uint marker = ds.ReadUInt32();
+                    uint marker = br.ReadUInt32();
                     if ( marker != magic )
                         throw new InvalidDataException( "Unable to find end of message marker for depot manifest" );
                 }

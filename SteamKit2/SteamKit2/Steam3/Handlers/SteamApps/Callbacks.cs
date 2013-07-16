@@ -464,11 +464,12 @@ namespace SteamKit2
             {
                 var tempList = new List<uint>();
 
-                using ( DataStream ds = new DataStream( payload ) )
+                using ( var ms = new MemoryStream( payload ) )
+                using ( var br = new BinaryReader( ms ) )
                 {
                     for ( int x = 0 ; x < msg.NumBans ; x++ )
                     {
-                        tempList.Add( ds.ReadUInt32() );
+                        tempList.Add( br.ReadUInt32() );
                     }
 
                     BannedApps = new ReadOnlyCollection<uint>( tempList );

@@ -28,7 +28,7 @@ namespace SteamKit2
                 public uint CompressedSize { get; set; }
 
 
-                internal void Deserialize( DataStream ds )
+                internal void Deserialize( BinaryReader ds )
                 {
                     ChunkGID = ds.ReadBytes( 20 );
 
@@ -57,9 +57,9 @@ namespace SteamKit2
             }
 
 
-            internal void Deserialize( DataStream ds )
+            internal void Deserialize( BinaryReader ds )
             {
-                FileName = ds.ReadNullTermString( Encoding.ASCII );
+                FileName = ds.BaseStream.ReadNullTermString( Encoding.ASCII );
 
                 TotalSize = ds.ReadUInt64();
 
@@ -118,20 +118,21 @@ namespace SteamKit2
             Deserialize(data);
         }
 
-        internal Steam3Manifest(DataStream data)
+        internal Steam3Manifest(BinaryReader data)
         {
             Deserialize(data);
         }
 
         void Deserialize(byte[] data)
         {
-            using (DataStream ds = new DataStream(data))
+            using ( var ms = new MemoryStream( data ) )
+            using ( var br = new BinaryReader( ms ) )
             {
-                Deserialize(ds);
+                Deserialize( br );
             }
         }
 
-        void Deserialize( DataStream ds )
+        void Deserialize( BinaryReader ds )
         {
             Mapping = new List<FileMapping>();
 
@@ -166,13 +167,13 @@ namespace SteamKit2
 
             for (uint i = FileMappingSize; i > 0; )
             {
-                long start = ds.Position;
+                long start = ds.BaseStream.Position;
 
                 FileMapping mapping = new FileMapping();
                 mapping.Deserialize(ds);
                 Mapping.Add(mapping);
 
-                i -= (uint)(ds.Position - start);
+                i -= (uint)(ds.BaseStream.Position - start);
             }
         }
 

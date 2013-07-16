@@ -5,6 +5,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -279,14 +280,16 @@ namespace SteamKit2
 
             byte[] sha_hash;
 
-            BinaryWriterEx bb = new BinaryWriterEx();
+            using ( var ms = new MemoryStream() )
+            using ( var bw = new BinaryWriter( ms ) )
+            {
+                bw.Write( sessionID );
+                bw.Write( reqcounter );
+                bw.Write( sessionKey );
+                bw.Write( Encoding.ASCII.GetBytes( uri.AbsolutePath ) );
 
-            bb.Write( sessionID );
-            bb.Write( reqcounter );
-            bb.Write( sessionKey );
-            bb.Write( Encoding.ASCII.GetBytes( uri.AbsolutePath ) );
-
-            sha_hash = CryptoHelper.SHAHash(bb.ToArray());
+                sha_hash = CryptoHelper.SHAHash( ms.ToArray() );
+            }
 
             string hex_hash = Utils.EncodeHexString(sha_hash);
 
