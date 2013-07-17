@@ -1,0 +1,11 @@
+language: c
+
+before_install:
+  - sudo apt-get update
+  - sudo apt-get install mono-devel mono-gmcs
+
+script:
+  - xbuild SteamKit2/SteamKit2.sln
+  
+notifications:
+  irc: "irc.gamesurge.net#opensteamworks"
