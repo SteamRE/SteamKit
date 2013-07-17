@@ -41,4 +41,6 @@ using System.Runtime.InteropServices;
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion( "1.4.1.*" )]
 
-[assembly: InternalsVisibleTo("Tests")]
+#if DEBUG
+[assembly: InternalsVisibleTo( "Tests" )]
+#endif
