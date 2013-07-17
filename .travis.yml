@@ -1,11 +1,17 @@
 language: c
 
+env:
+  - EnableNuGetPackageRestore=true
+  
 before_install:
-  - sudo apt-get update
-  - sudo apt-get install mono-devel mono-gmcs
+  # Make sure mono is installed,
+  # pipe stdout to dev/null because qq is still too chatty
+  - sudo apt-get update -qq > /dev/null
+  - sudo apt-get install -qq mono-devel > /dev/null
+  - mozroots --import --sync
 
 script:
-  - xbuild SteamKit2/SteamKit2.sln
+  - xbuild SteamKit2/SteamKit2.sln /target:SteamKit2 /target:Tests
   
 notifications:
   irc: "irc.gamesurge.net#opensteamworks"
