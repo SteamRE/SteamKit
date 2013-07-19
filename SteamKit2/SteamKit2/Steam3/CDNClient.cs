@@ -172,7 +172,7 @@ namespace SteamKit2
             {
                 AuthDepot();
             }
-            catch (WebException)
+            catch (WebException e)
             {
                 LogWebException("AuthDepot", e);
                 return false;
