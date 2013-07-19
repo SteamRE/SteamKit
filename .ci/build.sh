@@ -1,4 +1,4 @@
-#!/bin/sh -x
+#!/bin/bash -x
 
 xbuild SteamKit2/SteamKit2.sln /target:SteamKit2 /target:Tests
 BUILDS[0]=$?
