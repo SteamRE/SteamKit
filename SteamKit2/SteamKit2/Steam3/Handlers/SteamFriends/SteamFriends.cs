@@ -677,8 +677,6 @@ namespace SteamKit2
             {
                 SteamID friendId = friend.friendid;
 
-                SteamID sourceId = friend.steamid_source;
-
                 if ( friendId.IsIndividualAccount )
                 {
                     User cacheFriend = cache.GetUser( friendId );
