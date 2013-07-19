@@ -155,8 +155,9 @@ namespace SteamKit2
             {
                 response = webClient.UploadString(BuildCommand(endPoint, "initsession"), payload);
             }
-            catch (WebException)
+            catch (WebException e)
             {
+                LogWebException("Connect", e);
                 return false;
             }
 
@@ -173,6 +174,7 @@ namespace SteamKit2
             }
             catch (WebException)
             {
+                LogWebException("AuthDepot", e);
                 return false;
             }
 
@@ -197,8 +199,9 @@ namespace SteamKit2
             {
                 compressedManifest = webClient.DownloadData(manifestURI);
             }
-            catch (WebException)
+            catch (WebException e)
             {
+                LogWebException("DownloadDepotManifest", e);
                 return null;
             }
 
@@ -231,8 +234,9 @@ namespace SteamKit2
             {
                 chunk = webClient.DownloadData(chunkURI);
             }
-            catch (WebException)
+            catch (WebException e)
             {
+                LogWebException("DownloadDepotChunk", e);
                 return null;
             }
 
@@ -325,7 +329,7 @@ namespace SteamKit2
                 }
                 catch (WebException e)
                 {
-                    Console.WriteLine("FetchServerList returned: {0}", e.Message);
+                    LogWebException("FetchServerList", e);
                     return null;
                 }
 
@@ -352,6 +356,19 @@ namespace SteamKit2
                 }
 
                 return endpoints;
+            }
+        }
+
+        private static void LogWebException(string function, WebException e)
+        {
+            HttpWebResponse response;
+            if (e.Status == WebExceptionStatus.ProtocolError && (response = e.Response as HttpWebResponse) != null)
+            {
+                DebugLog.WriteLine("CDNClient", "{0} received HTTP error: {1} - {2}", function, (int)response.StatusCode, response.StatusCode);
+            }
+            else
+            {
+                DebugLog.WriteLine("CDNClient", "{0} returned: {1}", function, e.Status);
             }
         }
     }
