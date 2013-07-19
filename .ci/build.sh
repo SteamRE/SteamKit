@@ -1,11 +1,13 @@
 #!/bin/bash -x
 
+function ExitIfNonZero {
+	if [ $1 -ne 0 ]; then
+		exit $1
+	fi
+}
+
 xbuild SteamKit2/SteamKit2.sln /target:SteamKit2 /target:Tests
-BUILDS[0]=$?
+ExitIfNonZero $?
 
-xbuild Samples/Samples.sln /target:Sample1_Logon /target:Sample2_CallbackManager /target:Sample3_Extending /target:Sample4_DebugLog /target:Sample5_Friends /target:Sample6_SteamGuard
-BUILDS[1]=$?
-
-# Test to see if string.Join(" ", builds) contains anything other than 0 and space
-[[ ${BUILDS[@]} =~ ^[0\ ]*$ ]];
-exit $?
+xbuild Samples/Samples.sln
+ExitIfNonZero $?
