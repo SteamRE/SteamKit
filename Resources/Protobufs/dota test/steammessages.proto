@@ -344,6 +344,16 @@ message CMsgGCGetPersonaNames_Response {
 	repeated fixed64 failed_lookup_steamids = 2;
 }
 
+message CMsgGCCheckFriendship {
+	optional fixed64 steamid_left = 1;
+	optional fixed64 steamid_right = 2;
+}
+
+message CMsgGCCheckFriendship_Response {
+	optional bool success = 1;
+	optional bool found_friendship = 2;
+}
+
 message CMsgGCMsgMasterSetDirectory {
 	message SubGC {
 		optional uint32 dir_index = 1;

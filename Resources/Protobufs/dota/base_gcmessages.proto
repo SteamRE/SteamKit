@@ -480,3 +480,11 @@ message CMsgGCToGCUpdateSQLKeyValue {
 	optional string key_name = 1;
 }
 
+message CMsgGCToGCIsTrustedServer {
+	optional fixed64 steam_id = 1;
+}
+
+message CMsgGCToGCIsTrustedServerResponse {
+	optional bool is_trusted = 1;
+}
+

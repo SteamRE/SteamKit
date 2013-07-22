@@ -264,6 +264,8 @@ enum EDOTAGCMsg {
 	k_EMsgGCFantasyTeamInfoRequestByOwnerAccountID = 7305;
 	k_EMsgGCFantasyTeamInfoResponse = 7306;
 	k_EMsgGCFantasyTeamInfo = 7307;
+	k_EMsgGCFantasyLivePlayerStats = 7308;
+	k_EMsgGCFantasyFinalPlayerStats = 7309;
 	k_EMsgGCDev_GrantWarKill = 8001;
 }
 
@@ -382,6 +384,7 @@ enum DOTA_TournamentEvents {
 	TE_COURIER_KILL = 7;
 	TE_ECHOSLAM = 8;
 	TE_RAPIER = 9;
+	TE_EARLY_ROSHAN = 10;
 }
 
 enum DOTA_WatchReplayType {
@@ -810,6 +813,7 @@ message CMsgStopFindingMatch {
 
 message CMsgReadyUp {
 	optional .DOTALobbyReadyState state = 1 [default = DOTALobbyReadyState_UNDECLARED];
+	optional fixed64 ready_up_key = 2;
 }
 
 message CMsgReadyUpStatus {
@@ -1115,6 +1119,7 @@ message CMsgGameMatchSignOut {
 	optional float game_balance = 13;
 	optional uint32 event_score = 14;
 	repeated .CMatchHeroSelectEvent picks_bans = 15;
+	repeated .CMsgDOTAFantasyPlayerStats fantasy_stats = 16;
 }
 
 message CMsgGameMatchSignoutResponse {
@@ -1315,8 +1320,6 @@ message CMsgDOTARequestMatches {
 	optional uint32 game_mode = 3;
 	optional fixed32 date_min = 6;
 	optional fixed32 date_max = 7;
-	optional bool friends_only = 8;
-	optional bool recently_played_only = 9;
 	optional uint32 matches_requested = 10;
 	optional uint32 start_at_match_id = 11;
 	optional fixed32 min_players = 12;
@@ -2045,6 +2048,8 @@ message CMsgDOTAGuildInviteData {
 	optional string guild_tag = 4;
 	optional uint64 logo = 5;
 	optional uint32 inviter = 6;
+	optional string inviter_name = 7;
+	optional uint32 member_count = 8;
 }
 
 message CMsgDOTAGuildUpdateMessage {
@@ -2356,6 +2361,7 @@ message CMsgDOTAWelcome {
 	optional uint32 last_ip_address = 13;
 	optional uint32 notify_successful_report = 14;
 	optional uint32 shutdownlawterminatetime = 15;
+	optional uint32 banned_word_list_version = 16;
 }
 
 message CSODOTAGameHeroFavorites {
@@ -2957,6 +2963,21 @@ message CMsgDOTAFantasyTeamInfo {
 	optional string team_name = 4;
 	optional uint64 team_logo = 5;
 	repeated uint32 team_members = 6;
+}
+
+message CMsgDOTAFantasyPlayerStats {
+	optional uint32 player_account_id = 1;
+	optional uint32 match_id = 2;
+	optional uint64 lobby_id = 3;
+	optional bool match_completed = 4;
+	optional uint32 level = 5;
+	optional uint32 kills = 6;
+	optional uint32 deaths = 7;
+	optional uint32 assists = 8;
+	optional uint32 last_hits = 9;
+	optional uint32 denies = 10;
+	optional float gpm = 11;
+	optional float xppm = 12;
 }
 
 message CMsgDOTAPassportVoteTeamGuess {

@@ -20,6 +20,7 @@ enum EDotaClientMessages {
 	DOTA_CM_ItemAlert = 15;
 	DOTA_CM_ChatWheel = 16;
 	DOTA_CM_SendStatPopup = 17;
+	DOTA_CM_BeginLastHitChallenge = 18;
 }
 
 message CDOTAClientMsg_MapPing {
@@ -88,5 +89,10 @@ message CDOTAClientMsg_ChatWheel {
 
 message CDOTAClientMsg_SendStatPopup {
 	optional .CDOTAMsg_SendStatPopup statpopup = 1;
+}
+
+message CDOTAClientMsg_BeginLastHitChallenge {
+	optional uint32 chosen_lane = 1;
+	optional bool helper_enabled = 2;
 }
 

@@ -122,6 +122,8 @@ enum EGCItemMsg {
 	k_EMsgGCToGCDirtySDOCache = 2516;
 	k_EMsgGCToGCDirtyMultipleSDOCache = 2517;
 	k_EMsgGCToGCUpdateSQLKeyValue = 2518;
+	k_EMsgGCToGCIsTrustedServer = 2519;
+	k_EMsgGCToGCIsTrustedServerResponse = 2520;
 }
 
 enum EGCMsgResponse {

@@ -69,6 +69,9 @@ enum EGCSystemMsg {
 	k_EGCMsgGetPurchaseTrustStatus = 501;
 	k_EGCMsgGetPurchaseTrustStatusResponse = 502;
 	k_EGCMsgUpdateSession = 503;
+	k_EGCMsgGCAccountVacStatusChange = 504;
+	k_EGCMsgCheckFriendship = 505;
+	k_EGCMsgCheckFriendshipResponse = 506;
 }
 
 enum ESOMsg {
