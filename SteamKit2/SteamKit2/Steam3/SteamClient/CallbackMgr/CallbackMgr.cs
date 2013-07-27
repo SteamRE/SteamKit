@@ -258,7 +258,7 @@ namespace SteamKit2
         void Handle( CallbackMsg call )
         {
             registeredCallbacks
-                .FindAll( callback => callback.CallbackType == call.GetType() ) // find handlers interested in this callback
+                .FindAll( callback => callback.CallbackType.IsAssignableFrom( call.GetType() ) ) // find handlers interested in this callback
                 .ForEach( callback => callback.Run( call ) ); // run them
         }
     }
