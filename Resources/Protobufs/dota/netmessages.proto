@@ -1,5 +1,4 @@
 import "google/protobuf/descriptor.proto";
-import "networkbasetypes.proto";
 
 enum NET_Messages {
 	net_NOP = 0;
@@ -10,6 +9,17 @@ enum NET_Messages {
 	net_StringCmd = 5;
 	net_SetConVar = 6;
 	net_SignonState = 7;
+}
+
+enum SIGNONSTATE {
+	SIGNONSTATE_NONE = 0;
+	SIGNONSTATE_CHALLENGE = 1;
+	SIGNONSTATE_CONNECTED = 2;
+	SIGNONSTATE_NEW = 3;
+	SIGNONSTATE_PRESPAWN = 4;
+	SIGNONSTATE_SPAWN = 5;
+	SIGNONSTATE_FULL = 6;
+	SIGNONSTATE_CHANGELEVEL = 7;
 }
 
 enum CLC_Messages {
@@ -61,6 +71,23 @@ enum SVC_Messages {
 enum ESplitScreenMessageType {
 	MSG_SPLITSCREEN_ADDUSER = 0;
 	MSG_SPLITSCREEN_REMOVEUSER = 1;
+}
+
+message CMsgVector {
+	optional float x = 1;
+	optional float y = 2;
+	optional float z = 3;
+}
+
+message CMsgVector2D {
+	optional float x = 1;
+	optional float y = 2;
+}
+
+message CMsgQAngle {
+	optional float x = 1;
+	optional float y = 2;
+	optional float z = 3;
 }
 
 message CMsg_CVars {
@@ -301,6 +328,23 @@ message CSVCMsg_SendTable {
 	repeated .CSVCMsg_SendTable.sendprop_t props = 4;
 }
 
+message CSVCMsg_GameEvent {
+	message key_t {
+		optional int32 type = 1;
+		optional string val_string = 2;
+		optional float val_float = 3;
+		optional int32 val_long = 4;
+		optional int32 val_short = 5;
+		optional int32 val_byte = 6;
+		optional bool val_bool = 7;
+		optional uint64 val_uint64 = 8;
+	}
+
+	optional string event_name = 1;
+	optional int32 eventid = 2;
+	repeated .CSVCMsg_GameEvent.key_t keys = 3;
+}
+
 message CSVCMsg_GameEventList {
 	message key_t {
 		optional int32 type = 1;
@@ -349,6 +393,11 @@ message CSVCMsg_UpdateStringTable {
 	optional bytes string_data = 3;
 }
 
+message CSVCMsg_UserMessage {
+	optional int32 msg_type = 1;
+	optional bytes msg_data = 2;
+}
+
 message CSVCMsg_VoiceData {
 	optional int32 client = 1;
 	optional bool proximity = 2;
@@ -356,6 +405,24 @@ message CSVCMsg_VoiceData {
 	optional int32 audible_mask = 4;
 	optional bytes voice_data = 5;
 	optional .VoiceDataFormat_t format = 6 [default = VOICEDATA_FORMAT_STEAM];
+}
+
+message CSVCMsgList_GameEvents {
+	message event_t {
+		optional int32 tick = 1;
+		optional .CSVCMsg_GameEvent event = 2;
+	}
+
+	repeated .CSVCMsgList_GameEvents.event_t events = 1;
+}
+
+message CSVCMsgList_UserMessages {
+	message usermsg_t {
+		optional int32 tick = 1;
+		optional .CSVCMsg_UserMessage msg = 2;
+	}
+
+	repeated .CSVCMsgList_UserMessages.usermsg_t usermsgs = 1;
 }
 
 message CSVCMsg_PacketReliable {

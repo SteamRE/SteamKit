@@ -1,0 +1,754 @@
+import "steammessages.proto";
+import "matchmaker_common.proto";
+
+enum EDOTAGCMsg {
+	k_EMsgGCDOTABase = 7000;
+	k_EMsgGCGeneralResponse = 7001;
+	k_EMsgGCGameMatchSignOut = 7004;
+	k_EMsgGCGameMatchSignOutResponse = 7005;
+	k_EMsgGCJoinChatChannel = 7009;
+	k_EMsgGCJoinChatChannelResponse = 7010;
+	k_EMsgGCOtherJoinedChannel = 7013;
+	k_EMsgGCOtherLeftChannel = 7014;
+	k_EMsgGCMatchHistoryList = 7017;
+	k_EMsgGCStatus = 7026;
+	k_EMsgGCGetRecentMatches = 7027;
+	k_EMsgGCRecentMatchesResponse = 7028;
+	k_EMsgGCFindSourceTVGames = 7031;
+	k_EMsgGCSourceTVGamesResponse = 7032;
+	k_EMsgGCStartFindingMatch = 7033;
+	k_EMsgGCConnectedPlayers = 7034;
+	k_EMsgGCAbandonCurrentGame = 7035;
+	k_EMsgGCStopFindingMatch = 7036;
+	k_EMsgGCPracticeLobbyCreate = 7038;
+	k_EMsgGCPracticeLobbyLeave = 7040;
+	k_EMsgGCPracticeLobbyLaunch = 7041;
+	k_EMsgGCPracticeLobbyList = 7042;
+	k_EMsgGCPracticeLobbyListResponse = 7043;
+	k_EMsgGCPracticeLobbyJoin = 7044;
+	k_EMsgGCPracticeLobbySetDetails = 7046;
+	k_EMsgGCPracticeLobbySetTeamSlot = 7047;
+	k_EMsgGCInitialQuestionnaireResponse = 7049;
+	k_EMsgGCTournamentRequest = 7051;
+	k_EMsgGCTournamentResponse = 7052;
+	k_EMsgGCBetaParticiaptionRequest = 7053;
+	k_EMsgGCBetaParticiaptionResponse = 7054;
+	k_EMsgGCPracticeLobbyResponse = 7055;
+	k_EMsgGCBroadcastNotification = 7056;
+	k_EMsgGCLiveScoreboardUpdate = 7057;
+	k_EMsgGCRequestDefaultChatChannel = 7058;
+	k_EMsgGCRequestDefaultChatChannelResponse = 7059;
+	k_EMsgGCRequestChatChannelList = 7060;
+	k_EMsgGCRequestChatChannelListResponse = 7061;
+	k_EMsgGCRequestMatches = 7064;
+	k_EMsgGCRequestMatchesResponse = 7065;
+	k_EMsgGCRequestPlayerResources = 7068;
+	k_EMsgGCRequestPlayerResourcesResponse = 7069;
+	k_EMsgGCReadyUp = 7070;
+	k_EMsgGCKickedFromMatchmakingQueue = 7071;
+	k_EMsgGCLeaverDetected = 7072;
+	k_EMsgGCSpectateFriendGame = 7073;
+	k_EMsgGCSpectateFriendGameResponse = 7074;
+	k_EMsgGCPlayerReports = 7075;
+	k_EMsgGCReportsRemainingRequest = 7076;
+	k_EMsgGCReportsRemainingResponse = 7077;
+	k_EMsgGCSubmitPlayerReport = 7078;
+	k_EMsgGCSubmitPlayerReportResponse = 7079;
+	k_EMsgGCGameChatLog = 7080;
+	k_EMsgGCPracticeLobbyKick = 7081;
+	k_EMsgGCReportCountsRequest = 7082;
+	k_EMsgGCReportCountsResponse = 7083;
+	k_EMsgGCRequestSaveGames = 7084;
+	k_EMsgGCRequestSaveGamesServer = 7085;
+	k_EMsgGCRequestSaveGamesResponse = 7086;
+	k_EMsgGCLeaverDetectedResponse = 7087;
+	k_EMsgGCPlayerFailedToConnect = 7088;
+	k_EMsgGCGCToRelayConnect = 7089;
+	k_EMsgGCGCToRelayConnectresponse = 7090;
+	k_EMsgGCWatchGame = 7091;
+	k_EMsgGCWatchGameResponse = 7092;
+	k_EMsgGCBanStatusRequest = 7093;
+	k_EMsgGCBanStatusResponse = 7094;
+	k_EMsgGCMatchDetailsRequest = 7095;
+	k_EMsgGCMatchDetailsResponse = 7096;
+	k_EMsgGCCancelWatchGame = 7097;
+	k_EMsgGCProfileRequest = 7098;
+	k_EMsgGCProfileResponse = 7099;
+	k_EMsgGCPopup = 7102;
+	k_EMsgGCDOTAClearNotifySuccessfulReport = 7104;
+	k_EMsgGCGenericResult = 7108;
+	k_EMsgGCFriendPracticeLobbyListRequest = 7111;
+	k_EMsgGCFriendPracticeLobbyListResponse = 7112;
+	k_EMsgGCPracticeLobbyJoinResponse = 7113;
+	k_EMsgClientEconNotification_Job = 7114;
+	k_EMsgGCCreateTeam = 7115;
+	k_EMsgGCCreateTeamResponse = 7116;
+	k_EMsgGCDisbandTeam = 7117;
+	k_EMsgGCDisbandTeamResponse = 7118;
+	k_EMsgGCRequestTeamData = 7119;
+	k_EMsgGCRequestTeamDataResponse = 7120;
+	k_EMsgGCTeamData = 7121;
+	k_EMsgGCTeamInvite_InviterToGC = 7122;
+	k_EMsgGCTeamInvite_GCImmediateResponseToInviter = 7123;
+	k_EMsgGCTeamInvite_GCRequestToInvitee = 7124;
+	k_EMsgGCTeamInvite_InviteeResponseToGC = 7125;
+	k_EMsgGCTeamInvite_GCResponseToInviter = 7126;
+	k_EMsgGCTeamInvite_GCResponseToInvitee = 7127;
+	k_EMsgGCKickTeamMember = 7128;
+	k_EMsgGCKickTeamMemberResponse = 7129;
+	k_EMsgGCLeaveTeam = 7130;
+	k_EMsgGCLeaveTeamResponse = 7131;
+	k_EMsgGCSuggestTeamMatchmaking = 7132;
+	k_EMsgGCPlayerHeroesFavoritesAdd = 7133;
+	k_EMsgGCPlayerHeroesFavoritesRemove = 7134;
+	k_EMsgGCEditTeamLogo = 7139;
+	k_EMsgGCEditTeamLogoResponse = 7140;
+	k_EMsgGCSetShowcaseHero = 7141;
+	k_EMsgGCApplyTeamToPracticeLobby = 7142;
+	k_EMsgGCRequestInternatinalTicketEmail = 7143;
+	k_EMsgGCTransferTeamAdmin = 7144;
+	k_EMsgGCClearTournamentGame = 7145;
+	k_EMsgRequestLeagueInfo = 7147;
+	k_EMsgResponseLeagueInfo = 7148;
+	k_EMsgGCPracticeLobbyJoinBroadcastChannel = 7149;
+	k_EMsgGC_TournamentItemEvent = 7150;
+	k_EMsgGC_TournamentItemEventResponse = 7151;
+	k_EMsgCastMatchVote = 7152;
+	k_EMsgCastMatchVoteResponse = 7153;
+	k_EMsgRetrieveMatchVote = 7154;
+	k_EMsgRetrieveMatchVoteResponse = 7155;
+	k_EMsgTeamFanfare = 7156;
+	k_EMsgResponseTeamFanfare = 7157;
+	k_EMsgGC_GameServerUploadSaveGame = 7158;
+	k_EMsgGC_GameServerSaveGameResult = 7159;
+	k_EMsgGC_GameServerGetLoadGame = 7160;
+	k_EMsgGC_GameServerGetLoadGameResult = 7161;
+	k_EMsgCheckSpectatorOnly = 7162;
+	k_EMsgCheckSpectatorOnlyResponse = 7163;
+	k_EMsgGCTeamProfileRequest = 7164;
+	k_EMsgGCTeamProfileResponse = 7165;
+	k_EMsgGCEditTeamDetails = 7166;
+	k_EMsgGCEditTeamDetailsResponse = 7167;
+	k_EMsgGCProTeamListRequest = 7168;
+	k_EMsgGCProTeamListResponse = 7169;
+	k_EMsgGCReadyUpStatus = 7170;
+	k_EMsgGCHallOfFame = 7171;
+	k_EMsgGCHallOfFameRequest = 7172;
+	k_EMsgGCHallOfFameResponse = 7173;
+	k_EMsgGCGenerateDiretidePrizeList = 7174;
+	k_EMsgGCDiretidePrizeResponse = 7175;
+	k_EMsgGCRewardDiretidePrizes = 7176;
+	k_EMsgGCDiretidePrizesRewardedResponse = 7177;
+	k_EMsgGCHalloweenHighScoreRequest = 7178;
+	k_EMsgGCHalloweenHighScoreResponse = 7179;
+	k_EMsgGCGenerateDiretidePrizeListResponse = 7180;
+	k_EMsgGCNotifyResetKeybindings = 7181;
+	k_EMsgGCStorePromoPagesRequest = 7182;
+	k_EMsgGCStorePromoPagesResponse = 7183;
+	k_EMsgGCSpawnLootGreevil = 7184;
+	k_EMsgGCDismissLootGreevil = 7185;
+	k_EMsgGCToGCMatchCompleted = 7186;
+	k_EMsgGCDismissLootGreevilResponse = 7187;
+	k_EMsgGCBalancedShuffleLobby = 7188;
+	k_EMsgGCToGCCheckLeaguePermission = 7189;
+	k_EMsgGCToGCCheckLeaguePermissionResponse = 7190;
+	k_EMsgGCLeagueScheduleRequest = 7191;
+	k_EMsgGCLeagueScheduleResponse = 7192;
+	k_EMsgGCLeagueScheduleEdit = 7193;
+	k_EMsgGCLeagueScheduleEditResponse = 7194;
+	k_EMsgGCLeaguesInMonthRequest = 7195;
+	k_EMsgGCLeaguesInMonthResponse = 7196;
+	k_EMsgGCMatchmakingStatsRequest = 7197;
+	k_EMsgGCMatchmakingStatsResponse = 7198;
+	k_EMsgGCBotGameCreate = 7199;
+	k_EMsgGCSetMatchHistoryAccess = 7200;
+	k_EMsgGCSetMatchHistoryAccessResponse = 7201;
+	k_EMsgGCNotifyMatchHistoryAccessChange = 7202;
+	k_EMsgUpgradeLeagueItem = 7203;
+	k_EMsgUpgradeLeagueItemResponse = 7204;
+	k_EMsgGCTeamMemberProfileRequest = 7205;
+	k_EMsgGCWatchDownloadedReplay = 7206;
+	k_EMsgGCSetMapLocationState = 7207;
+	k_EMsgGCSetMapLocationStateResponse = 7208;
+	k_EMsgGCResetMapLocations = 7209;
+	k_EMsgGCResetMapLocationsResponse = 7210;
+	k_EMsgGCTeamOnProfile = 7211;
+	k_EMsgGCSetFeaturedItems = 7212;
+	k_EMsgGCFeaturedItemsRequest = 7213;
+	k_EMsgGCFeaturedItemsResponse = 7214;
+	k_EMsgGCFeaturedItems = 7215;
+	k_EMsgRefreshPartnerAccountLink = 7216;
+	k_EMsgClientsRejoinChatChannels = 7217;
+	k_EMsgGCToGCGetUserChatInfo = 7218;
+	k_EMsgGCToGCGetUserChatInfoResponse = 7219;
+	k_EMsgGCToGCLeaveAllChatChannels = 7220;
+	k_EMsgGCToGCUpdateAccountChatBan = 7221;
+	k_EMsgGCGuildCreateRequest = 7222;
+	k_EMsgGCGuildCreateResponse = 7223;
+	k_EMsgGCGuildSetAccountRoleRequest = 7224;
+	k_EMsgGCGuildSetAccountRoleResponse = 7225;
+	k_EMsgGCRequestGuildData = 7226;
+	k_EMsgGCGuildData = 7227;
+	k_EMsgGCGuildInviteAccountRequest = 7228;
+	k_EMsgGCGuildInviteAccountResponse = 7229;
+	k_EMsgGCGuildCancelInviteRequest = 7230;
+	k_EMsgGCGuildCancelInviteResponse = 7231;
+	k_EMsgGCGuildUpdateDetailsRequest = 7232;
+	k_EMsgGCGuildUpdateDetailsResponse = 7233;
+	k_EMsgGCToGCCanInviteUser = 7234;
+	k_EMsgGCToGCCanInviteUserResponse = 7235;
+	k_EMsgGCToGCGetUserRank = 7236;
+	k_EMsgGCToGCGetUserRankResponse = 7237;
+	k_EMsgGCToGCGetTeamRankChange = 7238;
+	k_EMsgGCToGCGetTeamRankChangeResponse = 7239;
+	k_EMsgGCToGCUpdateTeamStats = 7240;
+	k_EMsgGCToGCGetTeamRank = 7241;
+	k_EMsgGCToGCGetTeamRankResponse = 7242;
+	k_EMsgGCTeamIDByNameRequest = 7245;
+	k_EMsgGCTeamIDByNameResponse = 7246;
+	k_EMsgGCEditTeam = 7247;
+	k_EMsgGCPassportDataRequest = 7248;
+	k_EMsgGCPassportDataResponse = 7249;
+	k_EMsgGCNotInGuildData = 7251;
+	k_EMsgGCPassportVote = 7253;
+	k_EMsgGCGuildInviteData = 7254;
+	k_EMsgGCToGCGetLeagueAdmin = 7255;
+	k_EMsgGCToGCGetLeagueAdminResponse = 7256;
+	k_EMsgGCPassportVoteSelection = 7257;
+	k_EMsgGCRequestLeaguePrizePool = 7258;
+	k_EMsgGCRequestLeaguePrizePoolResponse = 7259;
+	k_EMsgGCToGCUpdateMatchmakingStats = 7260;
+	k_EMsgGCToGCUpdateOpenGuildPartyRequest = 7261;
+	k_EMsgGCToGCUpdateOpenGuildPartyResponse = 7262;
+	k_EMsgGCToGCDestroyOpenGuildPartyRequest = 7263;
+	k_EMsgGCToGCDestroyOpenGuildPartyResponse = 7264;
+	k_EMsgGCGuildUpdateMessage = 7265;
+	k_EMsgGCPartySetOpenGuildRequest = 7266;
+	k_EMsgGCPartySetOpenGuildResponse = 7267;
+	k_EMsgGCGuildOpenPartyRefresh = 7268;
+	k_EMsgGCJoinOpenGuildPartyRequest = 7269;
+	k_EMsgGCJoinOpenGuildPartyResponse = 7270;
+	k_EMsgGCLeaveChatChannel = 7272;
+	k_EMsgGCChatMessage = 7273;
+	k_EMsgGCGetHeroStandings = 7274;
+	k_EMsgGCGetHeroStandingsResponse = 7275;
+	k_EMsgGCMatchmakingLanguagePreference = 7276;
+	k_EMsgGCPassportFeaturedMatchRequest = 7277;
+	k_EMsgGCPassportFeaturedMatchResponse = 7278;
+	k_EMsgGCGuildEditLogoRequest = 7279;
+	k_EMsgGCGuildEditLogoResponse = 7280;
+	k_EMsgGCGuildmatePracticeLobbyListRequest = 7281;
+	k_EMsgGCGuildmatePracticeLobbyListResponse = 7282;
+	k_EMsgGCItemEditorReservationsRequest = 7283;
+	k_EMsgGCItemEditorReservationsResponse = 7284;
+	k_EMsgGCItemEditorReserveItemDef = 7285;
+	k_EMsgGCItemEditorReserveItemDefResponse = 7286;
+	k_EMsgGCItemEditorReleaseReservation = 7287;
+	k_EMsgGCItemEditorReleaseReservationResponse = 7288;
+	k_EMsgGCRewardTutorialPrizes = 7289;
+	k_EMsgGCLastHitChallengeHighScorePost = 7290;
+	k_EMsgGCLastHitChallengeHighScoreRequest = 7291;
+	k_EMsgGCLastHitChallengeHighScoreResponse = 7292;
+	k_EMsgGCCreateFantasyLeagueRequest = 7293;
+	k_EMsgGCCreateFantasyLeagueResponse = 7294;
+	k_EMsgGCEditFantasyLeagueRequest = 7295;
+	k_EMsgGCEditFantasyLeagueResponse = 7296;
+	k_EMsgGCFantasyLeagueInfoRequest = 7297;
+	k_EMsgGCFantasyLeagueInfoResponse = 7298;
+	k_EMsgGCFantasyLeagueInfo = 7299;
+	k_EMsgGCCreateFantasyTeamRequest = 7300;
+	k_EMsgGCCreateFantasyTeamResponse = 7301;
+	k_EMsgGCEditFantasyTeamRequest = 7302;
+	k_EMsgGCEditFantasyTeamResponse = 7303;
+	k_EMsgGCFantasyTeamInfoRequestByFantasyLeagueID = 7304;
+	k_EMsgGCFantasyTeamInfoRequestByOwnerAccountID = 7305;
+	k_EMsgGCFantasyTeamInfoResponse = 7306;
+	k_EMsgGCFantasyTeamInfo = 7307;
+	k_EMsgGCFantasyLivePlayerStats = 7308;
+	k_EMsgGCFantasyFinalPlayerStats = 7309;
+	k_EMsgGCFantasyMatchFinished = 7310;
+	k_EMsgGCToGCReloadVersions = 7311;
+	k_EMsgGCFantasyTeamScoreRequest = 7312;
+	k_EMsgGCFantasyTeamScoreResponse = 7313;
+	k_EMsgGCFantasyTeamLeaderboardRequest = 7314;
+	k_EMsgGCFantasyTeamLeaderboardResponse = 7315;
+	k_EMsgGCFantasyPlayerScoreRequest = 7316;
+	k_EMsgGCFantasyPlayerScoreResponse = 7317;
+	k_EMsgGCFantasyPlayerLeaderboardRequest = 7318;
+	k_EMsgGCFantasyPlayerLeaderboardResponse = 7319;
+	k_EMsgGCFlipLobbyTeams = 7320;
+	k_EMsgGCDev_GrantWarKill = 8001;
+}
+
+enum DOTA_PartnerAccountType {
+	DOTA_PARTNER_NONE = 0;
+	DOTA_PARTNER_PERFECT_WORLD = 1;
+	DOTA_PARTNER_NEXON = 2;
+}
+
+enum DOTA_GameMode {
+	DOTA_GAMEMODE_NONE = 0;
+	DOTA_GAMEMODE_AP = 1;
+	DOTA_GAMEMODE_CM = 2;
+	DOTA_GAMEMODE_RD = 3;
+	DOTA_GAMEMODE_SD = 4;
+	DOTA_GAMEMODE_AR = 5;
+	DOTA_GAMEMODE_INTRO = 6;
+	DOTA_GAMEMODE_HW = 7;
+	DOTA_GAMEMODE_REVERSE_CM = 8;
+	DOTA_GAMEMODE_XMAS = 9;
+	DOTA_GAMEMODE_TUTORIAL = 10;
+	DOTA_GAMEMODE_MO = 11;
+	DOTA_GAMEMODE_LP = 12;
+	DOTA_GAMEMODE_POOL1 = 13;
+	DOTA_GAMEMODE_FH = 14;
+}
+
+enum DOTA_GameState {
+	DOTA_GAMERULES_STATE_INIT = 0;
+	DOTA_GAMERULES_STATE_WAIT_FOR_PLAYERS_TO_LOAD = 1;
+	DOTA_GAMERULES_STATE_HERO_SELECTION = 2;
+	DOTA_GAMERULES_STATE_STRATEGY_TIME = 3;
+	DOTA_GAMERULES_STATE_PRE_GAME = 4;
+	DOTA_GAMERULES_STATE_GAME_IN_PROGRESS = 5;
+	DOTA_GAMERULES_STATE_POST_GAME = 6;
+	DOTA_GAMERULES_STATE_DISCONNECT = 7;
+	DOTA_GAMERULES_STATE_LAST = 8;
+}
+
+enum DOTA_GC_TEAM {
+	DOTA_GC_TEAM_GOOD_GUYS = 0;
+	DOTA_GC_TEAM_BAD_GUYS = 1;
+	DOTA_GC_TEAM_BROADCASTER = 2;
+	DOTA_GC_TEAM_SPECTATOR = 3;
+	DOTA_GC_TEAM_PLAYER_POOL = 4;
+	DOTA_GC_TEAM_NOTEAM = 5;
+}
+
+enum DOTA_CM_PICK {
+	DOTA_CM_RANDOM = 0;
+	DOTA_CM_GOOD_GUYS = 1;
+	DOTA_CM_BAD_GUYS = 2;
+}
+
+enum DOTALeaverStatus_t {
+	DOTA_LEAVER_NONE = 0;
+	DOTA_LEAVER_DISCONNECTED = 1;
+	DOTA_LEAVER_DISCONNECTED_TOO_LONG = 2;
+	DOTA_LEAVER_ABANDONED = 3;
+	DOTA_LEAVER_AFK = 4;
+	DOTA_LEAVER_NEVER_CONNECTED = 5;
+	DOTA_LEAVER_NEVER_CONNECTED_TOO_LONG = 6;
+}
+
+enum DOTALobbyReadyState {
+	DOTALobbyReadyState_UNDECLARED = 0;
+	DOTALobbyReadyState_ACCEPTED = 1;
+	DOTALobbyReadyState_DECLINED = 2;
+}
+
+enum DOTAGameVersion {
+	GAME_VERSION_CURRENT = 0;
+	GAME_VERSION_STABLE = 1;
+}
+
+enum DOTAJoinLobbyResult {
+	DOTA_JOIN_RESULT_SUCCESS = 0;
+	DOTA_JOIN_RESULT_ALREADY_IN_GAME = 1;
+	DOTA_JOIN_RESULT_INVALID_LOBBY = 2;
+	DOTA_JOIN_RESULT_INCORRECT_PASSWORD = 3;
+	DOTA_JOIN_RESULT_ACCESS_DENIED = 4;
+	DOTA_JOIN_RESULT_GENERIC_ERROR = 5;
+	DOTA_JOIN_RESULT_INCORRECT_VERSION = 6;
+	DOTA_JOIN_RESULT_IN_TEAM_PARTY = 7;
+}
+
+enum DOTAMatchVote {
+	DOTAMatchVote_INVALID = 0;
+	DOTAMatchVote_POSITIVE = 1;
+	DOTAMatchVote_NEGATIVE = 2;
+}
+
+enum LobbyDotaTVDelay {
+	LobbyDotaTV_10 = 0;
+	LobbyDotaTV_120 = 1;
+	LobbyDotaTV_300 = 2;
+}
+
+enum EDOTAGCSessionNeed {
+	k_EDOTAGCSessionNeed_Unknown = 0;
+	k_EDOTAGCSessionNeed_UserNoSessionNeeded = 100;
+	k_EDOTAGCSessionNeed_UserInOnlineGame = 101;
+	k_EDOTAGCSessionNeed_UserInLocalGame = 102;
+	k_EDOTAGCSessionNeed_UserInUIWasConnected = 103;
+	k_EDOTAGCSessionNeed_UserInUINeverConnected = 104;
+	k_EDOTAGCSessionNeed_UserTutorials = 105;
+	k_EDOTAGCSessionNeed_GameServerOnline = 200;
+	k_EDOTAGCSessionNeed_GameServerLocal = 201;
+	k_EDOTAGCSessionNeed_GameServerIdle = 202;
+	k_EDOTAGCSessionNeed_GameServerRelay = 203;
+}
+
+enum Fantasy_Roles {
+	FANTASY_ROLE_UNDEFINED = 0;
+	FANTASY_ROLE_CARRY = 1;
+	FANTASY_ROLE_SOLO = 2;
+	FANTASY_ROLE_SUPPORT = 3;
+}
+
+enum Fantasy_Team_Slots {
+	FANTASY_SLOT_CARRY = 1;
+	FANTASY_SLOT_SOLO = 2;
+	FANTASY_SLOT_SUPPORT = 4;
+	FANTASY_SLOT_ANY = 7;
+}
+
+enum Fantasy_Selection_Mode {
+	FANTASY_SELECTION_LOCKED = 1;
+	FANTASY_SELECTION_SHUFFLE = 2;
+	FANTASY_SELECTION_FREE_PICK = 3;
+}
+
+enum DOTA_TournamentEvents {
+	TE_FIRST_BLOOD = 0;
+	TE_GAME_END = 1;
+	TE_MULTI_KILL = 2;
+	TE_HERO_DENY = 3;
+	TE_AEGIS_DENY = 4;
+	TE_AEGIS_STOLEN = 5;
+	TE_GODLIKE = 6;
+	TE_COURIER_KILL = 7;
+	TE_ECHOSLAM = 8;
+	TE_RAPIER = 9;
+	TE_EARLY_ROSHAN = 10;
+}
+
+message CSODOTAGameAccountClient {
+	optional uint32 account_id = 1 [(key_field) = true];
+	optional uint32 wins = 3;
+	optional uint32 losses = 4;
+	optional uint32 xp = 12;
+	optional uint32 level = 13;
+	optional uint32 initial_skill = 14;
+	optional uint32 leaver_count = 15;
+	optional uint32 prevent_match_until_date = 18;
+	optional uint32 prevent_text_chat_until_date = 20;
+	optional uint32 prevent_voice_until_date = 21;
+	optional uint32 last_abandoned_game_date = 22;
+	optional uint32 leaver_penalty_count = 23;
+	optional uint32 completed_game_streak = 24;
+	optional uint32 teaching = 28;
+	optional uint32 leadership = 29;
+	optional uint32 friendly = 30;
+	optional uint32 forgiving = 31;
+	optional uint32 successful_report_count = 36;
+	optional uint32 notify_successful_report = 37;
+	optional uint32 account_disabled_until_date = 38;
+	optional uint32 account_disabled_count = 39;
+	optional uint32 showcase_hero_id = 40;
+	optional uint32 match_disabled_until_date = 41;
+	optional uint32 match_disabled_count = 42;
+	optional .DOTA_PartnerAccountType partner_account_type = 44 [default = DOTA_PARTNER_NONE];
+	optional uint32 partner_account_state = 45;
+	optional uint32 matchmaking_language_preference = 46;
+	optional uint32 shutdownlawterminatetime = 47;
+}
+
+message CSODOTAPartyMember {
+	optional .DOTA_PartnerAccountType partner_type = 1 [default = DOTA_PARTNER_NONE];
+}
+
+message CSODOTAParty {
+	enum State {
+		UI = 0;
+		FINDING_MATCH = 1;
+		IN_MATCH = 2;
+	}
+
+	optional uint64 party_id = 1 [(key_field) = true];
+	optional fixed64 leader_id = 2;
+	repeated fixed64 member_ids = 3;
+	optional uint32 game_modes = 4;
+	repeated fixed64 pending_invites = 5;
+	optional .CSODOTAParty.State state = 6 [default = UI];
+	optional uint32 started_matchmaking_time = 7;
+	optional uint32 matchgroups = 11;
+	optional uint32 prevent_match_until_date = 18;
+	optional uint32 prevent_match_account_id = 19;
+	optional .MatchType match_type = 21 [default = MATCH_TYPE_RANKED];
+	optional .DOTABotDifficulty bot_difficulty = 22 [default = BOT_DIFFICULTY_PASSIVE];
+	optional uint32 team_id = 23;
+	optional uint32 match_disabled_until_date = 24;
+	optional uint32 match_disabled_account_id = 25;
+	optional uint32 matchmaking_max_range_minutes = 26;
+	optional uint32 matchlanguages = 27;
+	repeated .CSODOTAPartyMember members = 29;
+	optional uint32 open_guild_id = 30;
+	repeated uint32 common_guilds = 31;
+}
+
+message CSODOTAPartyInternal {
+	optional string search_key = 1;
+}
+
+message CSODOTAPartyInvite {
+	message PartyMember {
+		optional string name = 1;
+		optional fixed64 steam_id = 2;
+	}
+
+	optional uint64 group_id = 1 [(key_field) = true];
+	optional fixed64 sender_id = 2;
+	optional string sender_name = 3;
+	repeated .CSODOTAPartyInvite.PartyMember members = 4;
+	optional uint32 team_id = 5;
+}
+
+message CDOTALobbyMember {
+	optional fixed64 id = 1 [(key_field) = true];
+	optional uint32 hero_id = 2;
+	optional .DOTA_GC_TEAM team = 3 [default = DOTA_GC_TEAM_GOOD_GUYS];
+	optional bool connected_to_game_server = 4;
+	optional string name = 6;
+	optional uint32 slot = 7;
+	optional uint64 party_id = 12;
+	optional uint32 meta_level = 13;
+	optional uint32 meta_xp = 14;
+	optional uint32 meta_xp_awarded = 15;
+	optional .DOTALeaverStatus_t leaver_status = 16 [default = DOTA_LEAVER_NONE];
+	optional uint32 channel = 17;
+	optional uint32 prize_def_index = 18;
+	optional uint32 meta_xp_bonus_rate = 19;
+	repeated uint32 disabled_hero_id = 20;
+	optional .DOTA_PartnerAccountType partner_account_type = 21 [default = DOTA_PARTNER_NONE];
+	repeated uint32 enabled_hero_id = 22;
+}
+
+message CDOTALobbyMemberPrivate {
+	optional uint32 ip = 1;
+	optional .DOTALobbyReadyState ready_state = 2 [default = DOTALobbyReadyState_UNDECLARED];
+}
+
+message CLobbyTeamDetails {
+	optional string team_name = 1;
+	optional string team_tag = 3;
+	optional uint32 team_id = 4;
+	optional uint64 team_logo = 5;
+	optional uint64 team_base_logo = 6;
+	optional uint64 team_banner_logo = 7;
+	optional bool team_complete = 8;
+	optional string guild_name = 9;
+	optional string guild_tag = 10;
+	optional uint32 guild_id = 11;
+	optional uint64 guild_logo = 12;
+	optional uint64 guild_base_logo = 13;
+	optional uint64 guild_banner_logo = 14;
+}
+
+message CLobbyPendingPlayerReport {
+	optional uint32 account_id = 1;
+	optional fixed32 date = 2;
+}
+
+message CLobbyTimedRewardDetails {
+	optional uint64 item_id = 1;
+	optional uint32 item_def_index = 2;
+	optional bool is_supply_crate = 3;
+	optional bool is_timed_drop = 4;
+	optional uint32 account_id = 5;
+}
+
+message CSODOTALobby {
+	enum State {
+		UI = 0;
+		READYUP = 4;
+		SERVERSETUP = 1;
+		RUN = 2;
+		POSTGAME = 3;
+		NOTREADY = 5;
+		SERVERASSIGN = 6;
+	}
+
+	enum LobbyType {
+		INVALID = -1;
+		MATCH = 0;
+		PRACTICE = 1;
+		TOURNAMENT = 2;
+		COOP_BOT_MATCH = 4;
+		TEAM_MATCH = 5;
+		SOLO_QUEUE_MATCH = 6;
+	}
+
+	optional uint64 lobby_id = 1 [(key_field) = true];
+	repeated .CDOTALobbyMember members = 2;
+	repeated .CDOTALobbyMember left_members = 7;
+	optional fixed64 leader_id = 11;
+	optional fixed64 server_id = 6 [default = 0];
+	optional uint32 game_mode = 3;
+	repeated fixed64 pending_invites = 10;
+	optional .CSODOTALobby.State state = 4 [default = UI];
+	optional string connect = 5;
+	optional .CSODOTALobby.LobbyType lobby_type = 12 [default = INVALID];
+	optional bool allow_cheats = 13;
+	optional bool fill_with_bots = 14;
+	optional bool intro_mode = 15;
+	optional string game_name = 16;
+	repeated .CLobbyTeamDetails team_details = 17;
+	optional uint32 tutorial_lesson = 18;
+	optional uint32 tournament_id = 19;
+	optional uint32 tournament_game_id = 20;
+	optional uint32 server_region = 21 [default = 0];
+	optional .DOTA_GameState game_state = 22 [default = DOTA_GAMERULES_STATE_INIT];
+	optional uint32 num_spectators = 23;
+	optional uint32 tower_state = 24;
+	optional uint32 matchgroup = 25;
+	optional bool leaver_detected = 27;
+	optional .DOTA_CM_PICK cm_pick = 28 [default = DOTA_CM_RANDOM];
+	optional uint32 match_id = 30;
+	optional bool allow_spectating = 31 [default = true];
+	optional .DOTABotDifficulty bot_difficulty = 36 [default = BOT_DIFFICULTY_HARD];
+	optional .DOTAGameVersion game_version = 37 [default = GAME_VERSION_CURRENT];
+	repeated .CLobbyTimedRewardDetails timed_reward_details = 38;
+	optional string pass_key = 39;
+	optional float drop_rate_bonus = 40;
+	repeated .DOTABotDifficulty bot_slot_difficulty = 41;
+	optional uint32 leagueid = 42;
+	optional uint32 penalty_level_radiant = 43 [default = 0];
+	optional uint32 penalty_level_dire = 44 [default = 0];
+	optional uint32 load_game_id = 45;
+	optional uint32 series_type = 46;
+	optional uint32 radiant_series_wins = 47;
+	optional uint32 dire_series_wins = 48;
+	optional uint32 loot_generated = 49;
+	optional uint32 loot_awarded = 50;
+	optional bool allchat = 51 [default = false];
+	optional uint32 rank_change = 52;
+	optional .LobbyDotaTVDelay dota_tv_delay = 53 [default = LobbyDotaTV_10];
+}
+
+message CSODOTALobbyInternal {
+	optional string search_key = 1;
+	repeated .CLobbyPendingPlayerReport pending_player_reports = 2;
+	optional uint32 average_rank = 3;
+	optional fixed32 replay_salt = 4;
+	optional bool disable_radiant_automatic_team_detection = 5;
+	optional bool disable_dire_automatic_team_detection = 6;
+	optional uint32 final_match_duration = 7;
+	optional bool submitted_match_history = 8;
+	repeated .CDOTALobbyMemberPrivate members = 9;
+	repeated .CDOTALobbyMemberPrivate left_members = 10;
+}
+
+message CMsgDOTAGenericResult {
+	optional uint32 eresult = 1 [default = 2];
+}
+
+message CMsgDOTABroadcastNotification {
+	optional string message = 1;
+}
+
+message CAttribute_String {
+	optional string value = 1;
+}
+
+message CMatchPlayerAbilityUpgrade {
+	optional uint32 ability = 1;
+	optional uint32 time = 2;
+}
+
+message CMatchAdditionalUnitInventory {
+	optional string unit_name = 1;
+	repeated uint32 items = 2;
+}
+
+message CMatchHeroSelectEvent {
+	optional bool is_pick = 1;
+	optional uint32 team = 2;
+	optional uint32 hero_id = 3;
+}
+
+message CMsgFantasyLeagueRoleScoring {
+	optional float level = 1;
+	optional float kills = 2;
+	optional float deaths = 3;
+	optional float assists = 4;
+	optional float last_hits = 5;
+	optional float denies = 6;
+	optional float gpm = 7;
+	optional float xppm = 8;
+}
+
+message CMsgDOTAFantasyLeagueInfo {
+	optional uint32 fantasy_league_id = 1;
+	optional uint32 commissioner_account_id = 2;
+	optional string fantasy_league_name = 3;
+	optional .Fantasy_Selection_Mode selection_mode = 4 [default = FANTASY_SELECTION_LOCKED];
+	optional uint32 team_count = 5;
+	optional uint64 logo = 6;
+	optional .CMsgFantasyLeagueRoleScoring scoring_carry = 7;
+	optional .CMsgFantasyLeagueRoleScoring scoring_solo = 8;
+	optional .CMsgFantasyLeagueRoleScoring scoring_support = 9;
+}
+
+message CMsgDOTAFantasyTeamInfo {
+	optional uint32 fantasy_league_id = 1;
+	optional uint32 owner_account_id = 2;
+	optional uint32 fantasy_team_index = 3;
+	optional string team_name = 4;
+	optional uint64 team_logo = 5;
+	repeated uint32 team_members = 6;
+}
+
+message CMsgDOTAFantasyTeamScoreResponse {
+	message CMsgPlayerScore {
+		optional uint32 account_id = 1;
+		optional float score = 2;
+	}
+
+	optional uint32 result = 1;
+	optional float fantasy_team_score = 2;
+	repeated .CMsgDOTAFantasyTeamScoreResponse.CMsgPlayerScore fantasy_player_score = 3;
+}
+
+message CMsgDOTAFantasyTeamLeaderboardResponse {
+	message CMsgTeamScore {
+		optional uint32 fantasy_league_id = 1;
+		optional uint32 owner_account_id = 2;
+		optional uint32 fantasy_team_index = 3;
+		optional uint64 fantasy_team_logo = 4;
+		optional string owner_name = 5;
+		optional string fantasy_team_name = 6;
+		optional float score = 7;
+	}
+
+	optional uint32 result = 1;
+	repeated .CMsgDOTAFantasyTeamLeaderboardResponse.CMsgTeamScore team_scores = 3;
+}
+
+message CMsgDOTAFantasyPlayerScoreResponse {
+	optional uint32 result = 1;
+	optional uint32 fantasy_league_id = 2;
+	optional uint32 player_account_id = 3;
+	optional string player_name = 4;
+	optional float score = 5;
+}
+
+message CMsgDOTAFantasyPlayerLeaderboardResponse {
+	message CMsgPlayerScore {
+		optional uint32 player_account_id = 1;
+		optional string player_name = 2;
+		optional float score = 3;
+	}
+
+	optional uint32 result = 1;
+	optional uint32 fantasy_league_id = 2;
+	optional uint32 role = 3;
+	repeated .CMsgDOTAFantasyPlayerLeaderboardResponse.CMsgPlayerScore player_scores = 4;
+}
+
+message CSODOTAMapLocationState {
+	optional uint32 account_id = 1 [(key_field) = true];
+	optional int32 location_id = 2 [(key_field) = true];
+	optional bool completed = 3;
+}
+

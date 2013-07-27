@@ -439,6 +439,16 @@ message CMsgGCBannedWordListRequest {
 	optional uint32 word_id = 2;
 }
 
+message CMsgGCRequestAnnouncements {
+}
+
+message CMsgGCRequestAnnouncementsResponse {
+	optional string announcement_title = 1;
+	optional string announcement = 2;
+	optional string nextmatch_title = 3;
+	optional string nextmatch = 4;
+}
+
 message CMsgGCBannedWord {
 	optional uint32 word_id = 1;
 	optional .GC_BannedWordType word_type = 2 [default = GC_BANNED_WORD_DISABLE_WORD];
@@ -486,5 +496,22 @@ message CMsgGCToGCIsTrustedServer {
 
 message CMsgGCToGCIsTrustedServerResponse {
 	optional bool is_trusted = 1;
+}
+
+message CMsgGCToGCBroadcastConsoleCommand {
+	optional string con_command = 1;
+}
+
+message CMsgGCServerVersionUpdated {
+	optional uint32 server_version = 1;
+}
+
+message CMsgGCToGCWebAPIAccountChanged {
+}
+
+message CMsgGCToGCRequestPassportItemGrant {
+	optional fixed64 steam_id = 1;
+	optional uint32 league_id = 2;
+	optional int32 reward_flag = 3;
 }
 

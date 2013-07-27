@@ -1,0 +1,322 @@
+import "steammessages.proto";
+import "matchmaker_common.proto";
+import "dota_gcmessages_common.proto";
+
+message CMsgSpawnLootGreevil {
+	optional bool rare = 1;
+}
+
+message CMsgDismissLootGreevil {
+	optional bool killed = 2;
+	optional bool rare = 3;
+}
+
+message CMsgDismissLootGreevilResponse {
+}
+
+message CMsgConnectedPlayers {
+	message Player {
+		optional fixed64 steam_id = 1;
+		optional uint32 hero_id = 2;
+	}
+
+	repeated .CMsgConnectedPlayers.Player players = 1;
+	optional .DOTA_GameState game_state = 2 [default = DOTA_GAMERULES_STATE_INIT];
+	optional uint32 num_spectators = 3;
+	optional uint32 tower_state = 4;
+	optional bool skip_player_validation = 5;
+}
+
+message CMsgGameServerInfo {
+	enum ServerType {
+		UNSPECIFIED = 0;
+		GAME = 1;
+		PROXY = 2;
+	}
+
+	optional fixed32 server_public_ip_addr = 1;
+	optional fixed32 server_private_ip_addr = 2;
+	optional uint32 server_port = 3;
+	optional uint32 server_tv_port = 4;
+	optional string server_key = 5;
+	optional bool server_hibernation = 6;
+	optional .CMsgGameServerInfo.ServerType server_type = 7 [default = UNSPECIFIED];
+	optional uint32 server_region = 8;
+	optional float server_loadavg = 9;
+	optional float server_tv_broadcast_time = 10;
+	optional float server_game_time = 11;
+	optional fixed64 server_relay_connected_steam_id = 12;
+	optional uint32 relay_slots_max = 13;
+	optional int32 relays_connected = 14;
+	optional int32 relay_clients_connected = 15;
+	optional fixed64 relayed_game_server_steam_id = 16;
+	optional uint32 parent_relay_count = 17;
+	optional fixed64 tv_secret_code = 18;
+}
+
+message CMsgLeaverDetected {
+	optional fixed64 steam_id = 1;
+	optional uint32 leaver_status = 2;
+}
+
+message CMsgLeaverDetectedResponse {
+	optional uint32 result = 1;
+}
+
+message CMsgDOTAFantasyPlayerStats {
+	optional uint32 player_account_id = 1;
+	optional uint32 match_id = 2;
+	optional bool match_completed = 3;
+	optional uint32 level = 4;
+	optional uint32 kills = 5;
+	optional uint32 deaths = 6;
+	optional uint32 assists = 7;
+	optional uint32 last_hits = 8;
+	optional uint32 denies = 9;
+	optional float gpm = 10;
+	optional float xppm = 11;
+}
+
+message CMsgGameMatchSignOut {
+	message CTeam {
+		message CPlayer {
+			optional fixed64 account_id = 1;
+			optional uint32 fake_client_id = 2;
+			optional uint32 hero_id = 3;
+			repeated uint32 items = 4;
+			optional uint32 gold = 5;
+			optional uint32 kills = 6;
+			optional uint32 deaths = 7;
+			optional uint32 assists = 8;
+			optional uint32 leaver_status = 9;
+			optional uint32 last_hits = 10;
+			optional uint32 denies = 11;
+			optional uint32 gold_per_min = 12;
+			optional uint32 xp_per_minute = 13;
+			optional uint32 gold_spent = 14;
+			optional uint32 level = 15;
+			optional uint32 hero_damage = 16;
+			optional uint32 tower_damage = 17;
+			optional uint32 hero_healing = 18;
+			optional uint32 time_last_seen = 19;
+			optional uint32 support_ability_value = 20;
+			optional uint64 party_id = 21;
+			optional float scaled_kills = 24;
+			optional float scaled_deaths = 25;
+			optional float scaled_assists = 26;
+			optional uint32 claimed_farm_gold = 27;
+			optional uint32 support_gold = 28;
+			optional uint32 claimed_denies = 29;
+			optional uint32 claimed_misses = 30;
+			optional uint32 misses = 31;
+			repeated .CMatchPlayerAbilityUpgrade ability_upgrades = 32;
+			repeated .CMatchAdditionalUnitInventory additional_units_inventory = 33;
+		}
+
+		repeated .CMsgGameMatchSignOut.CTeam.CPlayer players = 1;
+	}
+
+	optional uint32 match_id = 1 [(key_field) = true];
+	optional uint32 duration = 2;
+	optional bool good_guys_win = 3;
+	optional fixed32 date = 4;
+	repeated uint32 num_players = 5;
+	repeated .CMsgGameMatchSignOut.CTeam teams = 6;
+	optional string computer_name = 7;
+	repeated uint32 tower_status = 8;
+	repeated uint32 barracks_status = 9;
+	optional uint32 cluster = 10;
+	optional string server_addr = 11;
+	optional uint32 first_blood_time = 12;
+	optional float game_balance = 13;
+	optional uint32 event_score = 14;
+	repeated .CMatchHeroSelectEvent picks_bans = 15;
+	repeated .CMsgDOTAFantasyPlayerStats fantasy_stats = 16;
+}
+
+message CMsgGameMatchSignoutResponse {
+	optional uint32 match_id = 1;
+	optional fixed32 replay_salt = 2;
+	repeated .CLobbyTimedRewardDetails timed_reward_details = 3;
+	repeated .CDOTALobbyMember xp_reward_details = 4;
+	optional uint32 leagueid = 5;
+}
+
+message CMsgGameChatLog {
+	message CChatLine {
+		optional uint32 account_id = 1;
+		optional uint32 team_only = 2;
+		optional string text = 3;
+		optional uint32 game_time = 4;
+	}
+
+	optional uint32 match_id = 1;
+	repeated .CMsgGameChatLog.CChatLine lines = 2;
+}
+
+message CMsgDOTALiveScoreboardUpdate {
+	message Team {
+		message Player {
+			enum DOTAUltimateState {
+				k_EDOTAUltimateStateNotLearned = 0;
+				k_EDOTAUltimateStateCooldown = 1;
+				k_EDOTAUltimateStateNeedsMana = 2;
+				k_EDOTAUltimateStateReady = 3;
+			}
+
+			optional uint32 player_slot = 1;
+			optional string player_name = 2;
+			optional string hero_name = 3;
+			optional uint32 hero_id = 4;
+			optional uint32 kills = 5;
+			optional uint32 deaths = 6;
+			optional uint32 assists = 7;
+			optional uint32 last_hits = 8;
+			optional uint32 denies = 9;
+			optional uint32 gold = 10;
+			optional uint32 level = 11;
+			optional float gold_per_min = 12;
+			optional float xp_per_min = 13;
+			optional .CMsgDOTALiveScoreboardUpdate.Team.Player.DOTAUltimateState ultimate_state = 14 [default = k_EDOTAUltimateStateNotLearned];
+			optional float ultimate_cooldown = 15;
+			optional uint32 item0 = 16;
+			optional uint32 item1 = 17;
+			optional uint32 item2 = 18;
+			optional uint32 item3 = 19;
+			optional uint32 item4 = 20;
+			optional uint32 item5 = 21;
+			optional uint32 respawn_timer = 22;
+		}
+
+		repeated .CMsgDOTALiveScoreboardUpdate.Team.Player players = 1;
+		optional uint32 score = 2;
+	}
+
+	optional uint32 tournament_id = 1;
+	optional uint32 tournament_game_id = 2;
+	optional float duration = 3;
+	optional int32 hltv_delay = 4;
+	optional .CMsgDOTALiveScoreboardUpdate.Team team_good = 5;
+	optional .CMsgDOTALiveScoreboardUpdate.Team team_bad = 6;
+	optional uint32 roshan_respawn_timer = 7;
+}
+
+message CMsgDOTARequestPlayerResources {
+	optional fixed64 steam_id = 1;
+	optional uint32 player_id = 2;
+}
+
+message CMsgDOTARequestPlayerResourcesResponse {
+	optional fixed64 steam_id = 1;
+	optional uint32 rank = 2;
+	optional uint32 player_id = 3;
+	optional bool prevent_text_chat = 4;
+	optional bool prevent_voice_chat = 5;
+	optional bool match_making_ban = 6;
+	optional uint32 solo_rank = 7;
+}
+
+message CMsgDOTAPlayerFailedToConnect {
+	repeated fixed64 failed_loaders = 1;
+	repeated fixed64 abandoned_loaders = 2;
+}
+
+message CMsgGCToRelayConnect {
+	optional uint32 source_tv_public_addr = 1;
+	optional uint32 source_tv_private_addr = 2;
+	optional uint32 source_tv_port = 3;
+	optional uint64 game_server_steam_id = 4;
+	optional uint32 parent_count = 5;
+	optional fixed64 tv_unique_secret_code = 6;
+}
+
+message CMsgGCToRelayConnectResponse {
+}
+
+message CMsgGCBanStatusRequest {
+	optional uint32 account_id = 1;
+}
+
+message CMsgGCBanStatusResponse {
+	optional uint32 result = 1;
+	optional bool match_banned = 2;
+	optional bool text_chat_banned = 3;
+	optional bool voice_chat_banned = 4;
+}
+
+message CMsgTournamentItemEvent {
+	optional fixed32 killer_account_id = 1;
+	optional fixed32 victim_account_id = 2;
+	optional .DOTA_TournamentEvents event_type = 3 [default = TE_FIRST_BLOOD];
+	optional int32 tv_delay = 4;
+	optional int32 dota_time = 5;
+	optional float replay_time = 6;
+	optional string loot_list = 7;
+	optional uint32 event_team = 8;
+	optional uint32 multi_kill_count = 9;
+	optional uint32 winner_score = 10;
+	optional uint32 loser_score = 11;
+}
+
+message CMsgTournamentItemEventResponse {
+	optional .DOTA_TournamentEvents event_type = 1 [default = TE_FIRST_BLOOD];
+	optional string winner_name = 2;
+	optional bool tv_delayed = 3;
+	optional bool inhall = 4;
+	optional uint32 itemdef = 5;
+}
+
+message CMsgTeamFanfare {
+	optional uint32 match_id = 1;
+}
+
+message CMsgResponseTeamFanfare {
+	optional uint32 fanfare_goodguys = 1;
+	optional uint32 fanfare_badguys = 2;
+}
+
+message CMsgGameServerUploadSaveGame {
+	optional uint32 game_time = 1;
+	optional bytes save_game_data = 2;
+	optional uint64 lobby_id = 3;
+	repeated uint64 player_steam_ids = 4;
+}
+
+message CMsgGameServerSaveGameResult {
+	enum Result {
+		SaveSuccessful = 0;
+		SessionNotFound = 1;
+		DatabaseError = 2;
+		TooBig = 3;
+	}
+
+	optional .CMsgGameServerSaveGameResult.Result result = 1 [default = SaveSuccessful];
+}
+
+message CMsgGameServerGetLoadGame {
+	optional uint32 save_id = 1;
+}
+
+message CMsgGameServerGetLoadGameResult {
+	optional bytes save_game_data = 1;
+}
+
+message CMsgDOTAGenerateDiretidePrizeList {
+	optional uint32 prize_list = 1;
+}
+
+message CMsgDOTAGenerateDiretidePrizeListResponse {
+	repeated uint32 item_defs = 1;
+	repeated fixed64 steam_ids = 2;
+	optional uint32 prize_list = 3;
+}
+
+message CMsgDOTARewardDiretidePrizes {
+	optional uint32 team = 1;
+	optional uint32 prize_list = 2;
+}
+
+message CMsgDOTADiretidePrizesRewardedResponse {
+	optional uint32 prize_list = 1;
+}
+

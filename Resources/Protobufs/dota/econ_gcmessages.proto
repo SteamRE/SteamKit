@@ -124,6 +124,13 @@ enum EGCItemMsg {
 	k_EMsgGCToGCUpdateSQLKeyValue = 2518;
 	k_EMsgGCToGCIsTrustedServer = 2519;
 	k_EMsgGCToGCIsTrustedServerResponse = 2520;
+	k_EMsgGCToGCBroadcastConsoleCommand = 2521;
+	k_EMsgGCServerVersionUpdated = 2522;
+	k_EMsgGCApplyAutograph = 2523;
+	k_EMsgGCToGCWebAPIAccountChanged = 2524;
+	k_EMsgGCRequestAnnouncements = 2525;
+	k_EMsgGCRequestAnnouncementsResponse = 2526;
+	k_EMsgGCRequestPassportItemGrant = 2527;
 }
 
 enum EGCMsgResponse {
@@ -145,5 +152,10 @@ enum EUnlockStyle {
 	k_UnlockStyle_Failed_CantCommit = 3;
 	k_UnlockStyle_Failed_CantLockCache = 4;
 	k_UnlockStyle_Failed_CantAffordAttrib = 5;
+}
+
+message CMsgApplyAutograph {
+	optional uint64 autograph_item_id = 1;
+	optional uint64 item_item_id = 2;
 }
 
