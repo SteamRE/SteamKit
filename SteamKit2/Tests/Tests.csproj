@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="CMClientFacts.cs" />
     <Compile Include="DebugLogFacts.cs" />
+    <Compile Include="KeyValueFacts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SteamClientFacts.cs" />
     <Compile Include="SteamIDFacts.cs" />
