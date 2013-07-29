@@ -51,7 +51,8 @@
 		
         <SolutionDirParsed Condition=" '$(OS)' == 'Windows_NT' ">$(SolutionDir) </SolutionDirParsed>
         <SolutionDirParsed Condition=" '$(OS)' != 'Windows_NT' ">$(SolutionDir)</SolutionDirParsed>
-        <RestoreCommand>$(NuGetCommand) install "$(PackagesConfig)" -source "$(PackageSources)"  $(RequireConsentSwitch) -solutionDir "$(SolutionDirParsed)"</RestoreCommand>
+        <RestoreCommand Condition=" '$(OS)' == 'Windows_NT' ">$(NuGetCommand) install "$(PackagesConfig)" -source "$(PackageSources)"  $(RequireConsentSwitch) -solutionDir "$(SolutionDirParsed)"</RestoreCommand>
+        <RestoreCommand Condition=" '$(OS)' != 'Windows_NT' ">bash $(NuGetToolsPath)\..\..\.ci\exec-with-retry.sh $(NuGetCommand) install "$(PackagesConfig)" -source "$(PackageSources)"  $(RequireConsentSwitch) -solutionDir "$(SolutionDirParsed)"</RestoreCommand>
 		
         <BuildCommand>$(NuGetCommand) pack "$(ProjectPath)" -p Configuration=$(Configuration) -o "$(PackageOutputDir)" -symbols</BuildCommand>
 
