@@ -1,4 +1,5 @@
 #pragma warning disable 1591
+#pragma warning disable 0219
 using System;
 using System.IO;
 using System.Runtime.InteropServices;
@@ -2197,3 +2198,4 @@ namespace SteamKit2.Internal
 
 }
 #pragma warning restore 1591
+#pragma warning restore 0219
