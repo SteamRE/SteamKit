@@ -28,8 +28,13 @@ namespace SteamLanguageParser
         public string Flags { get; set; }
         public string FlagsOpt { get; set; }
         public Symbol Type { get; set; }
-        public Symbol Default { get; set; }
+        public List<Symbol> Default { get; set; }
         public string Obsolete { get; set; }
+
+        public PropNode()
+        {
+            Default = new List<Symbol>();
+        }
     }
 
     public class EnumNode : Node
@@ -188,13 +193,24 @@ namespace SteamLanguageParser
 
                 Token defop = Optional(tokens, "operator", "=");
 
-                if (defop != null)
+                if ( defop != null )
                 {
-                    Token value = tokens.Dequeue();
-                    pnode.Default = SymbolLocator.LookupSymbol(root, value.Value, false);
-                }
+                    while ( true )
+                    {
+                        Token value = tokens.Dequeue();
+                        pnode.Default.Add( SymbolLocator.LookupSymbol( root, value.Value, false ) );
 
-                Expect(tokens, "terminator", ";");
+                        if ( Optional( tokens, "operator", "|" ) != null )
+                            continue;
+
+                        Expect( tokens, "terminator", ";" );
+                        break;
+                    }
+                }
+                else
+                {
+                    Expect( tokens, "terminator", ";" );
+                }
 
                 Token obsolete = Optional( tokens, "identifier", "obsolete" );
                 if ( obsolete != null )

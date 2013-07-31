@@ -97,7 +97,7 @@ namespace SteamLanguageParser
 
             foreach (PropNode prop in enode.childNodes)
             {
-                lastValue = EmitType(prop.Default);
+                lastValue = EmitType(prop.Default.FirstOrDefault());
                 sb.AppendLine(padding + "\t" + enode.Name + prop.Name + " = " + lastValue + ",");
                 if (prop.Name.Equals("Max", StringComparison.OrdinalIgnoreCase))
                 {

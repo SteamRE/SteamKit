@@ -132,7 +132,7 @@ namespace SteamLanguageParser
                 {
                     sb.AppendLine(padding + "+ (" + typestr + ") " + GetUpperName(propName));
                     sb.AppendLine(padding + "{");
-                    sb.AppendLine(padding + "\t return " + EmitType(prop.Default) + ";");
+                    sb.AppendLine(padding + "\t return " + EmitType(prop.Default.FirstOrDefault()) + ";");
                     sb.AppendLine(padding + "}");
                     continue;
                 }
@@ -191,7 +191,7 @@ namespace SteamLanguageParser
 
             foreach (PropNode prop in cnode.childNodes)
             {
-                Symbol defsym = prop.Default;
+                Symbol defsym = prop.Default.FirstOrDefault();
                 string defflags = prop.Flags;
 
                 string symname = GetUpperName(prop.Name);
@@ -242,7 +242,7 @@ namespace SteamLanguageParser
 
             foreach (PropNode prop in cnode.childNodes)
             {
-                Symbol defsym = prop.Default;
+                Symbol defsym = prop.Default.FirstOrDefault();
                 string defflags = prop.Flags;
 
                 string symname = GetUpperName(prop.Name);
@@ -330,7 +330,7 @@ namespace SteamLanguageParser
 
                 if (prop.Flags == "protomask")
                 {
-                    if (prop.Default is StrongSymbol && (prop.Default as StrongSymbol).Class.Name == "EGCMsg")
+                    if (prop.Default.FirstOrDefault() is StrongSymbol && (prop.Default.FirstOrDefault() as StrongSymbol).Class.Name == "EGCMsg")
                         propName = "[_SKMsgUtil makeGCMsg:" + GetPropertyName(propName) + " isProtobuf:YES]";
                     else
                         propName = "[_SKMsgUtil makeMsg:" + GetPropertyName(propName) + " isProtobuf:YES]";
@@ -433,7 +433,7 @@ namespace SteamLanguageParser
 
                     if (prop.Flags == "protomask")
                     {
-                        if (prop.Default is StrongSymbol && (prop.Default as StrongSymbol).Class.Name == "EGCMsg")
+                        if (prop.Default.FirstOrDefault() is StrongSymbol && (prop.Default.FirstOrDefault() as StrongSymbol).Class.Name == "EGCMsg")
                             call = "[_SKMsgUtil getGCMsg:(uint32_t)" + call + "]";
                         else
                             call = "[_SKMsgUtil getMsg:(uint32_t)" + call + "]";

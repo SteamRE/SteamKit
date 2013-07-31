@@ -31,7 +31,7 @@ namespace SteamLanguageParser
         @"(?<identifier>-?[a-zA-Z_0-9][a-zA-Z0-9_:.]*)|" +
         @"[#](?<preprocess>[a-zA-Z]*)|" + 
 
-        @"(?<operator>[{}<>\]=])|" +
+        @"(?<operator>[{}<>\]=|])|" +
         @"(?<invalid>[^\s]+)";
 
         private static Regex regexPattern = new Regex(LanguageParser.pattern, RegexOptions.Multiline | RegexOptions.Compiled);

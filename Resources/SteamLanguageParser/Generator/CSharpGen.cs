@@ -100,6 +100,11 @@ namespace SteamLanguageParser
 
             return "INVALID";
         }
+        public string EmitMultipleTypes( List<Symbol> syms, string operation = "|" )
+        {
+            var identList = syms.OfType<WeakSymbol>().Select( wsym => wsym.Identifier );
+            return string.Join( " " + operation + " ", identList );
+        }
 
         public string GetUpperName(string name)
         {
@@ -140,7 +145,7 @@ namespace SteamLanguageParser
 
             foreach (PropNode prop in enode.childNodes)
             {
-                lastValue = EmitType(prop.Default);
+                lastValue = EmitMultipleTypes(prop.Default);
 
                 if ( prop.Obsolete != null )
                 {
@@ -269,7 +274,7 @@ namespace SteamLanguageParser
 
                 if (prop.Flags != null && prop.Flags == "const")
                 {
-                    sb.AppendLine(padding + "public static readonly " + typestr + " " + propName + " = " + EmitType(prop.Default) + ";");
+                    sb.AppendLine(padding + "public static readonly " + typestr + " " + propName + " = " + EmitType(prop.Default.FirstOrDefault()) + ";");
                     continue;
                 }
 
@@ -325,7 +330,7 @@ namespace SteamLanguageParser
 
             foreach (PropNode prop in cnode.childNodes)
             {
-                Symbol defsym = prop.Default;
+                Symbol defsym = prop.Default.FirstOrDefault();
                 string defflags = prop.Flags;
 
                 string symname = GetUpperName(prop.Name);

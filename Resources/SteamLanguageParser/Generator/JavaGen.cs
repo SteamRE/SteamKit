@@ -111,7 +111,7 @@ namespace SteamLanguageParser
 
             foreach (PropNode prop in enode.childNodes)
             {
-                lastValue = EmitType(prop.Default);
+                lastValue = EmitType(prop.Default.FirstOrDefault());
                 sb.AppendLine(padding + "\t" + prop.Name + "(" + lastValue + "),");
             }
 
@@ -214,7 +214,7 @@ namespace SteamLanguageParser
 
                 if (prop.Flags != null && prop.Flags == "const")
                 {
-                    sb.AppendLine(padding + "public static final " + typestr + " " + propName + " = " + EmitType(prop.Default) + ";");
+                    sb.AppendLine(padding + "public static final " + typestr + " " + propName + " = " + EmitType(prop.Default.FirstOrDefault()) + ";");
                     continue;
                 }
 
@@ -259,7 +259,7 @@ namespace SteamLanguageParser
 
             foreach (PropNode prop in cnode.childNodes)
             {
-                Symbol defsym = prop.Default;
+                Symbol defsym = prop.Default.FirstOrDefault();
                 string defflags = prop.Flags;
 
                 string symname = prop.Name;
