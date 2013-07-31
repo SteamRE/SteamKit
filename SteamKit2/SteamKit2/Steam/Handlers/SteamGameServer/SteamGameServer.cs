@@ -46,8 +46,8 @@ namespace SteamKit2
         /// Results are return in a <see cref="SteamUser.LoggedOnCallback"/>.
         /// </summary>
         /// <param name="details">The details to use for logging on.</param>
-        /// <exception cref="ArgumentNullException">No logon details were provided.</exception>
-        /// <exception cref="ArgumentException">Username or password are not set within <paramref name="details"/>.</exception>
+        /// <exception cref="System.ArgumentNullException">No logon details were provided.</exception>
+        /// <exception cref="System.ArgumentException">Username or password are not set within <paramref name="details"/>.</exception>
         public void LogOn( LogOnDetails details )
         {
             if ( details == null )

@@ -82,7 +82,7 @@ namespace SteamKit2
         /// In order to connect to the UFS server, the parent <see cref="SteamClient"/> must be connected to the CM server.
         /// </summary>
         /// <param name="ufsServer">
-        /// The <see cref="IPEndPoint"/> of the UFS server to connect to.
+        /// The <see cref="System.Net.IPEndPoint"/> of the UFS server to connect to.
         /// If <c>null</c>, <see cref="UFSClient"/> will randomly select a UFS server from the <see cref="SteamClient"/>'s list of servers.
         /// </param>
         public void Connect( IPEndPoint ufsServer = null )

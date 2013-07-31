@@ -31,7 +31,7 @@ namespace SteamKit2
 
             do
             {
-                bool bAccepted = true;
+                // bool bAccepted = true;
 
                 string s = ReadToken( out wasQuoted, out wasConditional );
 
@@ -51,7 +51,7 @@ namespace SteamKit2
 
                 if ( wasConditional )
                 {
-                    bAccepted = ( s == "[$WIN32]" );
+                    // bAccepted = ( s == "[$WIN32]" );
 
                     // Now get the '{'
                     s = ReadToken( out wasQuoted, out wasConditional );
