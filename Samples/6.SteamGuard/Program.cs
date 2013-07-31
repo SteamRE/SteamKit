@@ -45,7 +45,6 @@ namespace Sample6_SteamGuard
         static CallbackManager manager;
 
         static SteamUser steamUser;
-        static SteamFriends steamFriends;
 
         static bool isRunning;
 
@@ -72,8 +71,6 @@ namespace Sample6_SteamGuard
 
             // get the steamuser handler, which is used for logging on after successfully connecting
             steamUser = steamClient.GetHandler<SteamUser>();
-            // get the steam friends handler, which is used for interacting with friends on the network after logging on
-            steamFriends = steamClient.GetHandler<SteamFriends>();
 
             // register a few callbacks we're interested in
             // these are registered upon creation to a callback manager, which will then route the callbacks
