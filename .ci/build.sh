@@ -6,7 +6,7 @@ function ExitIfNonZero {
 	fi
 }
 
-xbuild SteamKit2/SteamKit2.sln /target:SteamKit2 /target:Tests
+xbuild /p:NoWarn=1584 SteamKit2/SteamKit2.sln /target:SteamKit2 /target:Tests
 ExitIfNonZero $?
 
 xbuild Samples/Samples.sln
