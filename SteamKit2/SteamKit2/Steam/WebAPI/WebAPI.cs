@@ -228,7 +228,7 @@ namespace SteamKit2
             /// <param name="args">A dictionary of string key value pairs representing arguments to be passed to the API.</param>
             /// <param name="method">The http request method. Either "POST" or "GET".</param>
             /// <param name="secure">if set to <c>true</c> this method will be called through the secure API.</param>
-            /// <returns>A <see cref="KeyValue"/> object representing the results of the Web API call.</returns>
+            /// <returns>A <see cref="Task{T}"/> that contains a <see cref="KeyValue"/> object representing the results of the Web API call.</returns>
             /// <exception cref="ArgumentNullException">The function name or request method provided were <c>null</c>.</exception>
             /// <exception cref="WebException">An network error occurred when performing the request.</exception>
             /// <exception cref="InvalidDataException">An error occured when parsing the response from the WebAPI.</exception>
