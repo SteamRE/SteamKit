@@ -1,7 +1,7 @@
 #!/bin/bash -x
 
-# Try 3 times
-for iter in {1..3}
+# Try 10 times
+for iter in {1..10}
 do
 	("$@")
 	if [[ $? -eq 0 ]]
