@@ -275,7 +275,7 @@ namespace SteamKit2
                 payload = String.Format("appticket={0}", WebHelpers.UrlEncode(encryptedTicket));
             }
 
-            string response = webClient.UploadString(authURI, payload);
+            webClient.UploadString(authURI, payload);
         }
 
         private void PrepareAuthHeader(ref WebClient client, Uri uri)

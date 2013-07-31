@@ -44,14 +44,14 @@ namespace SteamKit2
                 }
 
                 string cdrFileName;
-                Int32 relativeOffset = ReadCentralDirectory( reader, out cdrFileName );
+                /*Int32 relativeOffset =*/ ReadCentralDirectory( reader, out cdrFileName );
 
                 if ( !PeekHeader( reader, EndOfDirectoryHeader ) )
                 {
                     throw new Exception( "Expecting EndOfDirectoryHeader following CentralDirectoryHeader" );
                 }
 
-                UInt32 count = ReadEndOfDirectory( reader );
+                /*UInt32 count =*/ ReadEndOfDirectory( reader );
 
                 if ( compressionMethod == DeflateCompression )
                     return InflateBuffer( compressedBuffer, decompressedSize );
@@ -75,7 +75,7 @@ namespace SteamKit2
                 Int32 posCDR = WriteHeader( writer, CentralDirectoryHeader );
                 UInt32 CDRSize = WriteCentralDirectory( writer, "z", checkSum, ( UInt32 )compressed.Length, ( UInt32 )buffer.Length, poslocal );
 
-                Int32 posEOD = WriteHeader( writer, EndOfDirectoryHeader );
+                /*Int32 posEOD =*/ WriteHeader( writer, EndOfDirectoryHeader );
                 WriteEndOfDirectory( writer, 1, CDRSize, posCDR );
 
                 return ms.ToArray();
@@ -166,25 +166,25 @@ namespace SteamKit2
 
         private static UInt32 ReadEndOfDirectory( BinaryReader reader )
         {
-            UInt16 diskNumber = reader.ReadUInt16();
-            UInt16 CDRDisk = reader.ReadUInt16();
+            /*UInt16 diskNumber =*/ reader.ReadUInt16();
+            /*UInt16 CDRDisk =*/ reader.ReadUInt16();
             UInt16 CDRCount = reader.ReadUInt16();
-            UInt16 CDRTotal = reader.ReadUInt16();
+            /*UInt16 CDRTotal =*/ reader.ReadUInt16();
 
-            UInt32 CDRSize = reader.ReadUInt32();
-            Int32 CDROffset = reader.ReadInt32();
+            /*UInt32 CDRSize =*/ reader.ReadUInt32();
+            /*Int32 CDROffset =*/ reader.ReadInt32();
 
             UInt16 commentLength = reader.ReadUInt16();
-            byte[] comment = reader.ReadBytes( commentLength );
+            /*byte[] comment =*/ reader.ReadBytes( commentLength );
 
             return CDRCount;
         }
 
         private static Int32 ReadCentralDirectory( BinaryReader reader, out String fileName )
         {
-            UInt16 versionGenerator = reader.ReadUInt16();
-            UInt16 versionExtract = reader.ReadUInt16();
-            UInt16 bitflags = reader.ReadUInt16();
+            /*UInt16 versionGenerator =*/ reader.ReadUInt16();
+            /*UInt16 versionExtract =*/ reader.ReadUInt16();
+            /*UInt16 bitflags =*/ reader.ReadUInt16();
             UInt16 compression = reader.ReadUInt16();
 
             if ( compression != DeflateCompression && compression != StoreCompression )
@@ -192,26 +192,26 @@ namespace SteamKit2
                 throw new Exception( "Invalid compression method " + compression );
             }
 
-            UInt16 modtime = reader.ReadUInt16();
-            UInt16 createtime = reader.ReadUInt16();
-            UInt32 crc = reader.ReadUInt32();
+            /*UInt16 modtime =*/ reader.ReadUInt16();
+            /*UInt16 createtime =*/ reader.ReadUInt16();
+            /*UInt32 crc =*/ reader.ReadUInt32();
 
-            UInt32 compressedSize = reader.ReadUInt32();
-            UInt32 decompressedSize = reader.ReadUInt32();
+            /*UInt32 compressedSize =*/ reader.ReadUInt32();
+            /*UInt32 decompressedSize =*/ reader.ReadUInt32();
 
             UInt16 nameLength = reader.ReadUInt16();
             UInt16 fieldLength = reader.ReadUInt16();
             UInt16 commentLength = reader.ReadUInt16();
 
-            UInt16 diskNumber = reader.ReadUInt16();
-            UInt16 internalAttributes = reader.ReadUInt16();
-            UInt32 externalAttributes = reader.ReadUInt32();
+            /*UInt16 diskNumber =*/ reader.ReadUInt16();
+            /*UInt16 internalAttributes =*/ reader.ReadUInt16();
+            /*UInt32 externalAttributes =*/ reader.ReadUInt32();
 
             Int32 relativeOffset = reader.ReadInt32();
 
             byte[] name = reader.ReadBytes( nameLength );
-            byte[] fields = reader.ReadBytes( fieldLength );
-            byte[] comment = reader.ReadBytes( commentLength );
+            /*byte[] fields =*/ reader.ReadBytes( fieldLength );
+            /*byte[] comment =*/ reader.ReadBytes( commentLength );
 
             fileName = Encoding.UTF8.GetString( name );
             return relativeOffset;
@@ -219,8 +219,8 @@ namespace SteamKit2
 
         private static byte[] ReadLocalFile( BinaryReader reader, out String fileName, out UInt32 decompressedSize, out UInt16 compressionMethod )
         {
-            UInt16 version = reader.ReadUInt16();
-            UInt16 bitflags = reader.ReadUInt16();
+            /*UInt16 version =*/ reader.ReadUInt16();
+            /*UInt16 bitflags =*/ reader.ReadUInt16();
             compressionMethod = reader.ReadUInt16();
 
             if ( compressionMethod != DeflateCompression && compressionMethod != StoreCompression )
@@ -228,9 +228,9 @@ namespace SteamKit2
                 throw new Exception( "Invalid compression method " + compressionMethod );
             }
 
-            UInt16 modtime = reader.ReadUInt16();
-            UInt16 createtime = reader.ReadUInt16();
-            UInt32 crc = reader.ReadUInt32();
+            /*UInt16 modtime =*/ reader.ReadUInt16();
+            /*UInt16 createtime =*/ reader.ReadUInt16();
+            /*UInt32 crc =*/ reader.ReadUInt32();
 
             UInt32 compressedSize = reader.ReadUInt32();
             decompressedSize = reader.ReadUInt32();
@@ -239,7 +239,7 @@ namespace SteamKit2
             UInt16 fieldLength = reader.ReadUInt16();
 
             byte[] name = reader.ReadBytes( nameLength );
-            byte[] fields = reader.ReadBytes( fieldLength );
+            /*byte[] fields =*/ reader.ReadBytes( fieldLength );
 
             fileName = Encoding.UTF8.GetString( name );
 

@@ -478,7 +478,7 @@ namespace SteamKit2
         {
             this.Children = new List<KeyValue>();
 
-            KVTextReader kvr = new KVTextReader( this, input );
+            new KVTextReader( this, input );
 
             return true;
         }
@@ -504,7 +504,7 @@ namespace SteamKit2
 
             while ( true )
             {
-                bool bAccepted = true;
+                // bool bAccepted = true;
 
                 // get the key name
                 string name = kvr.ReadToken( out wasQuoted, out wasConditional );
@@ -526,7 +526,7 @@ namespace SteamKit2
 
                 if ( wasConditional && value != null )
                 {
-                    bAccepted = ( value == "[$WIN32]" );
+                    // bAccepted = ( value == "[$WIN32]" );
                     value = kvr.ReadToken( out wasQuoted, out wasConditional );
                 }
 

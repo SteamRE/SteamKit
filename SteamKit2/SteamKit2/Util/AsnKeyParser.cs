@@ -402,7 +402,9 @@ namespace SteamKit2
                 try
                 {
 #pragma warning disable 168
+#pragma warning disable 219
                     byte b = GetNextOctet();
+#pragma warning restore 219
 #pragma warning restore 168
 
                     int length = GetLength();
