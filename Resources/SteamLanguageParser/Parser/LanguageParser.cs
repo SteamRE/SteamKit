@@ -26,13 +26,15 @@ namespace SteamLanguageParser
 
         "[\"](?<string>.+?)[\"]|" + 
 
+        @"\/\/(?<comment>.*)$|" +
+
         @"(?<identifier>-?[a-zA-Z_0-9][a-zA-Z0-9_:.]*)|" +
         @"[#](?<preprocess>[a-zA-Z]*)|" + 
 
         @"(?<operator>[{}<>\]=])|" +
         @"(?<invalid>[^\s]+)";
 
-        private static Regex regexPattern = new Regex(LanguageParser.pattern, RegexOptions.Singleline | RegexOptions.Compiled);
+        private static Regex regexPattern = new Regex(LanguageParser.pattern, RegexOptions.Multiline | RegexOptions.Compiled);
 
         public static Queue<Token> TokenizeString(string buffer)
         {
@@ -50,6 +52,10 @@ namespace SteamLanguageParser
                     if ( success && i > 1 )
                     {
                         string groupName = regexPattern.GroupNameFromNumber( i );
+
+                        if ( groupName == "comment" )
+                            continue; // don't create tokens for comments
+
                         tokenList.Enqueue( new Token( groupName, matchValue ) );
                     }
                     i++;
