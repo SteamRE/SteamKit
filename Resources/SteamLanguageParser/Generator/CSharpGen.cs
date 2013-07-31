@@ -25,10 +25,12 @@ namespace SteamLanguageParser
             {
                 sb.AppendLine("}");
                 sb.AppendLine( "#pragma warning restore 1591" );
+                sb.AppendLine( "#pragma warning restore 0219" );
             }
             else
             {
                 sb.AppendLine( "#pragma warning disable 1591" ); // this will hide "Missing XML comment for publicly visible type or member 'Type_or_Member'"
+                sb.AppendLine( "#pragma warning disable 0219" ); // Warning CS0219: The variable `(variable)' is assigned but its value is never used
                 sb.AppendLine("using System;");
                 sb.AppendLine("using System.IO;");
                 sb.AppendLine( "using System.Runtime.InteropServices;" );
