@@ -2496,7 +2496,7 @@ namespace SteamKit2
 		ConnectionFailed = 10,
 		[Obsolete( "renamed to AlreadyTrading" )]
 		InitiatorAlreadyTrading = 11,
-		AlreadyTradying = 11,
+		AlreadyTrading = 11,
 		[Obsolete( "renamed to AlreadyHasTradeRequest" )]
 		Error = 12,
 		AlreadyHasTradeRequest = 12,
