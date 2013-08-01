@@ -681,6 +681,8 @@ namespace SteamKit2.Internal
 		public static readonly ushort ProtocolVerMinorMinForProtoBufMultiMessages = 28;
 		public static readonly ushort ProtocolVerMinorMinForSendingProtocolToUFS = 30;
 		public static readonly ushort ProtocolVerMinorMinForMachineAuth = 33;
+		public static readonly ushort ProtocolVerMinorMinForSessionIDLastAnon = 36;
+		public static readonly ushort ProtocolVerMinorMinForEnhancedAppList = 40;
 
 		public MsgClientLogon()
 		{

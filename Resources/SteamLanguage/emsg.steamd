@@ -128,7 +128,8 @@ enum EMsg
 	AMCompletePurchase = 521;
 	AMCancelPurchase = 522;
 	AMNewChallenge = 523;
-	AMFixPendingPurchase = 526;
+	AMFixPendingPurchase = 526; obsolete "renamed to AMFixPendingPurchaseResponse"
+	AMFixPendingPurchaseResponse = 526;
 	AMIsUserBanned = 527;
 	AMRegisterKey = 528;
 	AMLoadActivationCodes = 529;
@@ -404,6 +405,7 @@ enum EMsg
 	AdminGCGetCommandList = 1025;
 	AdminGCGetCommandListResponse = 1026;
 	FBSConnectionData = 1027;
+	AdminMsgSpew = 1028;
 	
 	BaseFBS = 1100;
 	FBSReqVersion = 1100;
@@ -604,7 +606,8 @@ enum EMsg
 	BaseCM = 1700;
 	CMSetAllowState = 1701;
 	CMSpewAllowState = 1702;
-	CMAppInfoResponse = 1703;
+	CMAppInfoResponse = 1703; obsolete "deprecated and renamed to CMAppInfoResponseDeprecated"
+	CMAppInfoResponseDeprecated = 1703;
 	
 	BaseDSS = 1800;
 	DSSNewFile = 1801;
@@ -887,7 +890,8 @@ enum EMsg
 	AMGetLobbyListResponse = 4137;
 	AMGetLobbyMetadata = 4138;
 	AMGetLobbyMetadataResponse = 4139;
-	AMAddFriendNews = 4140;
+	AMAddFriendNews = 4140; obsolete "renamed to CommunityAddFriendNews"
+	CommunityAddFriendNews = 4140;
 	AMAddClanNews = 4141;
 	AMWriteNews = 4142;
 	AMFindClanUser = 4143;
@@ -902,18 +906,21 @@ enum EMsg
 	AMSendQueuedEmails = 4152;
 	AMSetLicenseFlags = 4153;
 	AMGetUserHistory = 4154;
-	AMDeleteUserNews = 4155;
+	AMDeleteUserNews = 4155; obsolete "renamed to CommunityDeleteUserNews"
+	CommunityDeleteUserNews = 4155;
 	AMAllowUserFilesRequest = 4156;
 	AMAllowUserFilesResponse = 4157;
 	AMGetAccountStatus = 4158;
 	AMGetAccountStatusResponse = 4159;
 	AMEditBanReason = 4160;
+	AMCheckClanMembershipResponse = 4161;
 	AMProbeClanMembershipList = 4162;
 	AMProbeClanMembershipListResponse = 4163;
 	AMGetFriendsLobbies = 4165;
 	AMGetFriendsLobbiesResponse = 4166;
 	AMGetUserFriendNewsResponse = 4172;
-	AMGetUserFriendNews = 4173;
+	AMGetUserFriendNews = 4173; obsolete "renamed to CommunityGetUserFriendNews"
+	CommunityGetUserFriendNews = 4173;
 	AMGetUserClansNewsResponse = 4174;
 	AMGetUserClansNews = 4175;
 	AMStoreInitPurchase = 4176;
@@ -992,6 +999,8 @@ enum EMsg
 	AMCreateDisputeResponse = 4263;
 	AMClearDispute = 4264;
 	AMClearDisputeResponse = 4265;
+	AMPlayerNicknameList = 4266;
+	AMPlayerNicknameListResponse = 4267;
 	AMSetDRMTestConfig = 4268;
 	AMGetUserCurrentGameInfo = 4269;
 	AMGetUserCurrentGameInfoResponse = 4270;
@@ -1033,6 +1042,22 @@ enum EMsg
 	AMAccountPS3Unlink = 4310;
 	AMAccountPS3UnlinkResponse = 4311;
 	AMStoreUserStatsResponse = 4312;
+	AMGetAccountPSNInfo = 4313;
+	AMGetAccountPSNInfoResponse = 4314;
+	AMAuthenticatedPlayerList = 4315;
+	AMGetUserGifts = 4316;
+	AMGetUserGiftsResponse = 4317;
+	AMTransferLockedGifts = 4320;
+	AMTransferLockedGiftsResponse = 4321;
+	AMPlayerHostedOnGameServer = 4322;
+	AMGetAccountBanInfo = 4323;
+	AMGetAccountBanInfoResponse = 4324;
+	AMRecordBanEnforcement = 4325;
+	AMRollbackGiftTransfer = 4326;
+	AMRollbackGiftTransferResponse = 4327;
+	AMHandlePendingTransaction = 4328;
+	AMRequestClanDetails = 4329;
+	AMDeleteStoredPaypalAgreement = 4330;
 	AMGameServerUpdate = 4331;
 	AMGameServerRemove = 4332;
 	AMGetPaypalAgreements = 4333;
@@ -1044,14 +1069,17 @@ enum EMsg
 	AMGetAccountCommunityBanInfoResponse = 4339;
 	AMGameServerAccountChangePassword = 4340;
 	AMGameServerAccountDeleteAccount = 4341;
-	AMRenewLicenseResponse = 4342;
+	AMRenewLicenseResponse = 4342; obsolete "renamed to AMRenewAgreement"
+	AMRenewAgreement = 4342;
 	AMSendEmail = 4343;
 	AMXsollaPayment = 4344;
 	AMXsollaPaymentResponse = 4345;
 	AMAcctAllowedToPurchase = 4346;
 	AMAcctAllowedToPurchaseResponse = 4347;
-	AMSwapXsollaDeposit = 4348;
-	AMSwapXsollaDepositResponse = 4349;
+	AMSwapXsollaDeposit = 4348; obsolete "renamed to AMSwapKioskDeposit"
+	AMSwapKioskDeposit = 4348;
+	AMSwapXsollaDepositResponse = 4349; obsolete "renamed to AMSwapKioskDepositResponse"
+	AMSwapKioskDepositResponse = 4349;
 	AMSetUserGiftUnowned = 4350;
 	AMSetUserGiftUnownedResponse = 4351;
 	AMClaimUnownedUserGift = 4352;
@@ -1082,6 +1110,14 @@ enum EMsg
 	AMBoaCompraPayment = 4380;
 	AMBoaCompraPaymentResponse = 4381;
 	AMExpireCaptchaByGID = 4382;
+	AMCompleteExternalPurchase = 4383;
+	AMCompleteExternalPurchaseResponse = 4384;
+	AMResolveNegativeWalletCredits = 4385;
+	AMResolveNegativeWalletCreditsResponse = 4386;
+	AMPayelpPayment = 4387;
+	AMPayelpPaymentResponse = 4388;
+	AMPlayerGetClanBasicDetails = 4389;
+	AMPlayerGetClanBasicDetailsResponse = 4390;
 	
 	BasePSRange = 5000;
 	PSCreateShoppingCart = 5001;
@@ -1611,8 +1647,10 @@ enum EMsg
 	RMTestVerisignOTPResponse = 7801;
 	RMDeleteMemcachedKeys = 7803;
 	RMRemoteInvoke = 7804;
+	BadLoginIPList = 7805;
 	
 	UGSBase = 7900;
+	UGSUpdateGlobalStats = 7900;
 	ClientUGSGetGlobalStats = 7901;
 	ClientUGSGetGlobalStatsResponse = 7902;
 
@@ -1641,6 +1679,8 @@ enum EMsg
 	WebAPIValidateOAuth2TokenResponse = 8301;
 	WebAPIInvalidateTokensForAccount = 8302;
 	WebAPIRegisterGCInterfaces = 8303;
+	WebAPIInvalidateOAuthClientCache = 8304;
+	WebAPIInvalidateOAuthTokenCache = 8305;
 
 	BackpackBase = 8400;
 	BackpackAddToCurrency = 8401;
@@ -1719,6 +1759,10 @@ enum EMsg
 	DRMWorkerProcessEvaluateCrashResponse = 9127;
 	DRMWorkerProcessAnalyzeFileRequest = 9128;
 	DRMWorkerProcessAnalyzeFileResponse = 9129;
+	DRMWorkerProcessUnpackBlobRequest = 9130;
+	DRMWorkerProcessUnpackBlobResponse = 9131;
+	DRMWorkerProcessInstallAllRequest = 9132;
+	DRMWorkerProcessInstallAllResponse = 9133;
 
 	TestWorkerProcess = 9200;
 	TestWorkerProcessLoadUnloadModuleRequest = 9200;

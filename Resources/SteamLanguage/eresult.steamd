@@ -78,4 +78,5 @@ enum EResult
 	NoMatchingURL = 75;
 	BadResponse = 76;
 	RequirePasswordReEntry = 77;
+	ValueOutOfRange = 78;
 };

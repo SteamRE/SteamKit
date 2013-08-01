@@ -26,17 +26,20 @@ enum EChatEntryType
 	WasKicked = 8;
 	WasBanned = 9;
 	Disconnected = 10;
+	HistoricalChat = 11;
 };
 
 enum EPersonaState
 {
 	Offline = 0;
+
 	Online = 1;
 	Busy = 2;
 	Away = 3;
 	Snooze = 4;
 	LookingToTrade = 5;
 	LookingToPlay = 6;
+
 	Max = 7;
 };
 
@@ -100,6 +103,13 @@ enum EAccountFlags flags
 	ForceEmailVerification = 262144;
 	LogonExtraSecurity = 524288;
 	LogonExtraSecurityDisabled = 1048576;
+	Steam2MigrationComplete = 2097152;
+	NeedLogs = 4194304;
+	Lockdown = 8388608;
+	MasterAppEditor = 16777216;
+	BannedFromWebAPI = 33554432;
+	ClansOnlyFromFriends = 67108864;
+	GlobalModerator = 134217728;
 };
 
 enum EClanPermission flags
@@ -111,6 +121,19 @@ enum EClanPermission flags
 	OwnerAndOfficer = 3;
 	Member = 4;
 	Moderator = 8;
+
+	OwnerOfficerModerator = Owner | Officer | Moderator; // 11
+	AllMembers = Owner | Officer | Moderator | Member ; // 15
+
+	OGGGameOwner = 16;
+
+	NonMember = 128;
+
+	MemberAllowed		= NonMember | Member; // 132
+	ModeratorAllowed	= NonMember | Member | Moderator; // 140
+	OfficerAllowed		= NonMember | Member | Moderator | Officer; // 142
+	OwnerAllowed		= NonMember | Member | Moderator | Officer | Owner; // 143
+	Anybody				= NonMember | Member | Moderator | Officer | Owner; // 143
 };
 
 enum EChatPermission flags
@@ -125,12 +148,14 @@ enum EChatPermission flags
 	Ban = 256;
 	ChangeAccess = 512;
 
-	EveryoneNotInClanDefault = 8;
-	EveryoneDefault = 10;
+	EveryoneNotInClanDefault = Talk; // 8
+	EveryoneDefault = Talk | Invite; // 10
 
-	MemberDefault = 282;
-	OfficerDefault = 282;
-	OwnerDefault = 891;
+	// todo: this doesn't seem correct...
+	MemberDefault = Ban | Kick | Talk | Invite; // 282
+
+	OfficerDefault = Ban | Kick | Talk | Invite; // 282
+	OwnerDefault = ChangeAccess | Ban | SetMetadata | Mute | Kick | Talk | Invite | Close; // 891
 
 	Mask = 1019;
 };
@@ -148,6 +173,7 @@ enum EFriendFlags flags
 	RequestingInfo = 256;
 	Ignored = 512;
 	IgnoredFriend = 1024;
+	Suggested = 2048;
 
 	FlagAll = 65535;
 };
@@ -337,9 +363,11 @@ enum EChatRoomEnterResponse
 	CommunityBan = 9;
 	MemberBlockedYou = 10;
 	YouBlockedMember = 11;
-	NoRankingDataLobby = 12;
-	NoRankingDataUser = 13;
-	RankOutOfRange = 14;
+
+	// these appear to have been removed
+	NoRankingDataLobby = 12; obsolete
+	NoRankingDataUser = 13; obsolete
+	RankOutOfRange = 14; obsolete
 };
 
 enum EChatRoomType
@@ -406,7 +434,8 @@ enum EAppInfoSection
 	DRM = 9;
 	UFS = 10;
 	OGG = 11;
-	ItemsUNUSED = 12;
+	Items = 12; obsolete
+	ItemsUNUSED = 12; obsolete
 	Policies = 13;
 	SysReqs = 14;
 	Community = 15;
@@ -417,6 +446,7 @@ enum EAppInfoSection
 enum EContentDownloadSourceType
 {
 	Invalid = 0;
+
 	CS = 1;
 	CDN = 2;
 	LCS = 3;
@@ -429,6 +459,7 @@ enum EContentDownloadSourceType
 enum EPlatformType
 {
 	Unknown = 0;
+
 	Win32 = 1;
 	Win64 = 2;
 	Linux = 3;
@@ -474,12 +505,16 @@ enum EOSType
 	WinXP = 7;
 	Win2003 = 8;
 	WinVista = 9;
-	Win7 = 10;
+	Win7 = 10; obsolete "renamed to Windows7"
+	Windows7 = 10;
 	Win2008 = 11;
-	Windows8 = 12;
-	WinMAX = 13;
+	Win2012 = 12;
+	Windows8 = 13;
+	Windows81 = 14;
 
-	Max = 24;
+	WinMAX = 15;
+
+	Max = 26;
 };
 
 enum EServerType
@@ -553,8 +588,10 @@ enum EServerType
 	Market = 62;
 	Quest = 63;
 	WDS = 64;
+	ACS = 65;
+	PNP = 66;
 
-	Max = 65;
+	Max = 67;
 };
  
 enum EBillingType
@@ -568,8 +605,9 @@ enum EBillingType
 	Gift = 6;
 	AutoGrant = 7;
 	OEMTicket = 8;
+	RecurringOption = 9;
 
-	NumBillingTypes = 9;
+	NumBillingTypes = 10;
 };
 
 enum EActivationCodeClass<uint>
@@ -584,6 +622,7 @@ enum EActivationCodeClass<uint>
 	Invalid = 4294967295;
 };
 
+
 enum EChatMemberStateChange flags
 {
 	Entered = 0x01;
@@ -591,6 +630,9 @@ enum EChatMemberStateChange flags
 	Disconnected = 0x04;
 	Kicked = 0x08;
 	Banned = 0x10;
+
+	VoiceSpeaking = 0x1000;
+	VoiceDoneSpeaking = 0x2000;
 };
 
 enum ERegionCode<byte>
@@ -632,6 +674,7 @@ enum EDepotFileFlag flags
 	Executable = 32;
 	Directory = 64;
 	CustomExecutable = 128;
+	InstallScript = 256;
 };
 
 enum EWorkshopEnumerationType
@@ -673,14 +716,22 @@ enum EEconTradeResponse
 	TooSoon = 8;
 	TooSoonPenalty = 9;
 	ConnectionFailed = 10;
-	InitiatorAlreadyTrading = 11;
-	Error = 12;
-	Timeout = 13;
+	InitiatorAlreadyTrading = 11; obsolete "renamed to AlreadyTrading"
+	AlreadyTradying = 11;
+	Error = 12; obsolete "renamed to AlreadyHasTradeRequest"
+	AlreadyHasTradeRequest = 12;
+	Timeout = 13; obsolete "renamed to NoResponse"
+	NoResponse = 13;
+	CyberCafeInitiator = 14;
+	CyberCafeTarget = 15;
+	SchoolLabInitiator = 16;
+	SchoolLabTarget = 16;
 	InitiatorBlockedTarget = 18;
 	InitiatorNeedsVerifiedEmail = 20;
 	InitiatorNeedsSteamGuard = 21;
 	TargetAccountCannotTrade = 22;
 	InitiatorSteamGuardDuration = 23;
+	OKToDeliver = 50;
 };
 
 enum EMarketingMessageFlags flags
@@ -833,5 +884,5 @@ enum EUCMFilePrivacyState flags
 	FriendsOnly = 4;
 	Public = 8;
 	
-	All = 14;
+	All = Public | FriendsOnly | Private; // 14
 };

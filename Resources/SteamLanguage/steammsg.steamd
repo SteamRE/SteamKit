@@ -65,6 +65,8 @@ class MsgClientLogon<EMsg::ClientLogon>
 	const ushort ProtocolVerMinorMinForProtoBufMultiMessages = 28;
 	const ushort ProtocolVerMinorMinForSendingProtocolToUFS = 30;
 	const ushort ProtocolVerMinorMinForMachineAuth = 33;
+	const ushort ProtocolVerMinorMinForSessionIDLastAnon = 36;
+	const ushort ProtocolVerMinorMinForEnhancedAppList = 40;
 };
 
 class MsgClientVACBanStatus<EMsg::ClientVACBanStatus>

@@ -131,7 +131,9 @@ namespace SteamKit2
 		AMCompletePurchase = 521,
 		AMCancelPurchase = 522,
 		AMNewChallenge = 523,
+		[Obsolete( "renamed to AMFixPendingPurchaseResponse" )]
 		AMFixPendingPurchase = 526,
+		AMFixPendingPurchaseResponse = 526,
 		AMIsUserBanned = 527,
 		AMRegisterKey = 528,
 		AMLoadActivationCodes = 529,
@@ -407,6 +409,7 @@ namespace SteamKit2
 		AdminGCGetCommandList = 1025,
 		AdminGCGetCommandListResponse = 1026,
 		FBSConnectionData = 1027,
+		AdminMsgSpew = 1028,
 		BaseFBS = 1100,
 		FBSReqVersion = 1100,
 		FBSVersionInfo = 1101,
@@ -607,7 +610,9 @@ namespace SteamKit2
 		BaseCM = 1700,
 		CMSetAllowState = 1701,
 		CMSpewAllowState = 1702,
+		[Obsolete( "deprecated and renamed to CMAppInfoResponseDeprecated" )]
 		CMAppInfoResponse = 1703,
+		CMAppInfoResponseDeprecated = 1703,
 		BaseDSS = 1800,
 		DSSNewFile = 1801,
 		DSSCurrentFileList = 1802,
@@ -884,7 +889,9 @@ namespace SteamKit2
 		AMGetLobbyListResponse = 4137,
 		AMGetLobbyMetadata = 4138,
 		AMGetLobbyMetadataResponse = 4139,
+		[Obsolete( "renamed to CommunityAddFriendNews" )]
 		AMAddFriendNews = 4140,
+		CommunityAddFriendNews = 4140,
 		AMAddClanNews = 4141,
 		AMWriteNews = 4142,
 		AMFindClanUser = 4143,
@@ -899,18 +906,23 @@ namespace SteamKit2
 		AMSendQueuedEmails = 4152,
 		AMSetLicenseFlags = 4153,
 		AMGetUserHistory = 4154,
+		[Obsolete( "renamed to CommunityDeleteUserNews" )]
 		AMDeleteUserNews = 4155,
+		CommunityDeleteUserNews = 4155,
 		AMAllowUserFilesRequest = 4156,
 		AMAllowUserFilesResponse = 4157,
 		AMGetAccountStatus = 4158,
 		AMGetAccountStatusResponse = 4159,
 		AMEditBanReason = 4160,
+		AMCheckClanMembershipResponse = 4161,
 		AMProbeClanMembershipList = 4162,
 		AMProbeClanMembershipListResponse = 4163,
 		AMGetFriendsLobbies = 4165,
 		AMGetFriendsLobbiesResponse = 4166,
 		AMGetUserFriendNewsResponse = 4172,
+		[Obsolete( "renamed to CommunityGetUserFriendNews" )]
 		AMGetUserFriendNews = 4173,
+		CommunityGetUserFriendNews = 4173,
 		AMGetUserClansNewsResponse = 4174,
 		AMGetUserClansNews = 4175,
 		AMStoreInitPurchase = 4176,
@@ -989,6 +1001,8 @@ namespace SteamKit2
 		AMCreateDisputeResponse = 4263,
 		AMClearDispute = 4264,
 		AMClearDisputeResponse = 4265,
+		AMPlayerNicknameList = 4266,
+		AMPlayerNicknameListResponse = 4267,
 		AMSetDRMTestConfig = 4268,
 		AMGetUserCurrentGameInfo = 4269,
 		AMGetUserCurrentGameInfoResponse = 4270,
@@ -1030,6 +1044,22 @@ namespace SteamKit2
 		AMAccountPS3Unlink = 4310,
 		AMAccountPS3UnlinkResponse = 4311,
 		AMStoreUserStatsResponse = 4312,
+		AMGetAccountPSNInfo = 4313,
+		AMGetAccountPSNInfoResponse = 4314,
+		AMAuthenticatedPlayerList = 4315,
+		AMGetUserGifts = 4316,
+		AMGetUserGiftsResponse = 4317,
+		AMTransferLockedGifts = 4320,
+		AMTransferLockedGiftsResponse = 4321,
+		AMPlayerHostedOnGameServer = 4322,
+		AMGetAccountBanInfo = 4323,
+		AMGetAccountBanInfoResponse = 4324,
+		AMRecordBanEnforcement = 4325,
+		AMRollbackGiftTransfer = 4326,
+		AMRollbackGiftTransferResponse = 4327,
+		AMHandlePendingTransaction = 4328,
+		AMRequestClanDetails = 4329,
+		AMDeleteStoredPaypalAgreement = 4330,
 		AMGameServerUpdate = 4331,
 		AMGameServerRemove = 4332,
 		AMGetPaypalAgreements = 4333,
@@ -1041,14 +1071,20 @@ namespace SteamKit2
 		AMGetAccountCommunityBanInfoResponse = 4339,
 		AMGameServerAccountChangePassword = 4340,
 		AMGameServerAccountDeleteAccount = 4341,
+		[Obsolete( "renamed to AMRenewAgreement" )]
 		AMRenewLicenseResponse = 4342,
+		AMRenewAgreement = 4342,
 		AMSendEmail = 4343,
 		AMXsollaPayment = 4344,
 		AMXsollaPaymentResponse = 4345,
 		AMAcctAllowedToPurchase = 4346,
 		AMAcctAllowedToPurchaseResponse = 4347,
+		[Obsolete( "renamed to AMSwapKioskDeposit" )]
 		AMSwapXsollaDeposit = 4348,
+		AMSwapKioskDeposit = 4348,
+		[Obsolete( "renamed to AMSwapKioskDepositResponse" )]
 		AMSwapXsollaDepositResponse = 4349,
+		AMSwapKioskDepositResponse = 4349,
 		AMSetUserGiftUnowned = 4350,
 		AMSetUserGiftUnownedResponse = 4351,
 		AMClaimUnownedUserGift = 4352,
@@ -1079,6 +1115,14 @@ namespace SteamKit2
 		AMBoaCompraPayment = 4380,
 		AMBoaCompraPaymentResponse = 4381,
 		AMExpireCaptchaByGID = 4382,
+		AMCompleteExternalPurchase = 4383,
+		AMCompleteExternalPurchaseResponse = 4384,
+		AMResolveNegativeWalletCredits = 4385,
+		AMResolveNegativeWalletCreditsResponse = 4386,
+		AMPayelpPayment = 4387,
+		AMPayelpPaymentResponse = 4388,
+		AMPlayerGetClanBasicDetails = 4389,
+		AMPlayerGetClanBasicDetailsResponse = 4390,
 		BasePSRange = 5000,
 		PSCreateShoppingCart = 5001,
 		PSCreateShoppingCartResponse = 5002,
@@ -1592,7 +1636,9 @@ namespace SteamKit2
 		RMTestVerisignOTPResponse = 7801,
 		RMDeleteMemcachedKeys = 7803,
 		RMRemoteInvoke = 7804,
+		BadLoginIPList = 7805,
 		UGSBase = 7900,
+		UGSUpdateGlobalStats = 7900,
 		ClientUGSGetGlobalStats = 7901,
 		ClientUGSGetGlobalStatsResponse = 7902,
 		StoreBase = 8000,
@@ -1617,6 +1663,8 @@ namespace SteamKit2
 		WebAPIValidateOAuth2TokenResponse = 8301,
 		WebAPIInvalidateTokensForAccount = 8302,
 		WebAPIRegisterGCInterfaces = 8303,
+		WebAPIInvalidateOAuthClientCache = 8304,
+		WebAPIInvalidateOAuthTokenCache = 8305,
 		BackpackBase = 8400,
 		BackpackAddToCurrency = 8401,
 		BackpackAddToCurrencyResponse = 8402,
@@ -1687,6 +1735,10 @@ namespace SteamKit2
 		DRMWorkerProcessEvaluateCrashResponse = 9127,
 		DRMWorkerProcessAnalyzeFileRequest = 9128,
 		DRMWorkerProcessAnalyzeFileResponse = 9129,
+		DRMWorkerProcessUnpackBlobRequest = 9130,
+		DRMWorkerProcessUnpackBlobResponse = 9131,
+		DRMWorkerProcessInstallAllRequest = 9132,
+		DRMWorkerProcessInstallAllResponse = 9133,
 		TestWorkerProcess = 9200,
 		TestWorkerProcessLoadUnloadModuleRequest = 9200,
 		TestWorkerProcessLoadUnloadModuleResponse = 9201,
@@ -1777,6 +1829,7 @@ namespace SteamKit2
 		NoMatchingURL = 75,
 		BadResponse = 76,
 		RequirePasswordReEntry = 77,
+		ValueOutOfRange = 78,
 	}
 	public enum EUniverse
 	{
@@ -1802,6 +1855,7 @@ namespace SteamKit2
 		WasKicked = 8,
 		WasBanned = 9,
 		Disconnected = 10,
+		HistoricalChat = 11,
 	}
 	public enum EPersonaState
 	{
@@ -1870,6 +1924,13 @@ namespace SteamKit2
 		ForceEmailVerification = 262144,
 		LogonExtraSecurity = 524288,
 		LogonExtraSecurityDisabled = 1048576,
+		Steam2MigrationComplete = 2097152,
+		NeedLogs = 4194304,
+		Lockdown = 8388608,
+		MasterAppEditor = 16777216,
+		BannedFromWebAPI = 33554432,
+		ClansOnlyFromFriends = 67108864,
+		GlobalModerator = 134217728,
 	}
 	[Flags]
 	public enum EClanPermission
@@ -1880,6 +1941,15 @@ namespace SteamKit2
 		OwnerAndOfficer = 3,
 		Member = 4,
 		Moderator = 8,
+		OwnerOfficerModerator = Owner | Officer | Moderator,
+		AllMembers = Owner | Officer | Moderator | Member,
+		OGGGameOwner = 16,
+		NonMember = 128,
+		MemberAllowed = NonMember | Member,
+		ModeratorAllowed = NonMember | Member | Moderator,
+		OfficerAllowed = NonMember | Member | Moderator | Officer,
+		OwnerAllowed = NonMember | Member | Moderator | Officer | Owner,
+		Anybody = NonMember | Member | Moderator | Officer | Owner,
 	}
 	[Flags]
 	public enum EChatPermission
@@ -1893,11 +1963,11 @@ namespace SteamKit2
 		ChangePermissions = 128,
 		Ban = 256,
 		ChangeAccess = 512,
-		EveryoneNotInClanDefault = 8,
-		EveryoneDefault = 10,
-		MemberDefault = 282,
-		OfficerDefault = 282,
-		OwnerDefault = 891,
+		EveryoneNotInClanDefault = Talk,
+		EveryoneDefault = Talk | Invite,
+		MemberDefault = Ban | Kick | Talk | Invite,
+		OfficerDefault = Ban | Kick | Talk | Invite,
+		OwnerDefault = ChangeAccess | Ban | SetMetadata | Mute | Kick | Talk | Invite | Close,
 		Mask = 1019,
 	}
 	[Flags]
@@ -1915,6 +1985,7 @@ namespace SteamKit2
 		RequestingInfo = 256,
 		Ignored = 512,
 		IgnoredFriend = 1024,
+		Suggested = 2048,
 		FlagAll = 65535,
 	}
 	[Flags]
@@ -2094,8 +2165,11 @@ namespace SteamKit2
 		CommunityBan = 9,
 		MemberBlockedYou = 10,
 		YouBlockedMember = 11,
+		[Obsolete]
 		NoRankingDataLobby = 12,
+		[Obsolete]
 		NoRankingDataUser = 13,
+		[Obsolete]
 		RankOutOfRange = 14,
 	}
 	public enum EChatRoomType
@@ -2157,6 +2231,9 @@ namespace SteamKit2
 		DRM = 9,
 		UFS = 10,
 		OGG = 11,
+		[Obsolete]
+		Items = 12,
+		[Obsolete]
 		ItemsUNUSED = 12,
 		Policies = 13,
 		SysReqs = 14,
@@ -2215,11 +2292,15 @@ namespace SteamKit2
 		WinXP = 7,
 		Win2003 = 8,
 		WinVista = 9,
+		[Obsolete( "renamed to Windows7" )]
 		Win7 = 10,
+		Windows7 = 10,
 		Win2008 = 11,
-		Windows8 = 12,
-		WinMAX = 13,
-		Max = 24,
+		Win2012 = 12,
+		Windows8 = 13,
+		Windows81 = 14,
+		WinMAX = 15,
+		Max = 26,
 	}
 	public enum EServerType
 	{
@@ -2297,7 +2378,9 @@ namespace SteamKit2
 		Market = 62,
 		Quest = 63,
 		WDS = 64,
-		Max = 65,
+		ACS = 65,
+		PNP = 66,
+		Max = 67,
 	}
 	public enum EBillingType
 	{
@@ -2310,7 +2393,8 @@ namespace SteamKit2
 		Gift = 6,
 		AutoGrant = 7,
 		OEMTicket = 8,
-		NumBillingTypes = 9,
+		RecurringOption = 9,
+		NumBillingTypes = 10,
 	}
 	public enum EActivationCodeClass : uint
 	{
@@ -2331,6 +2415,8 @@ namespace SteamKit2
 		Disconnected = 0x04,
 		Kicked = 0x08,
 		Banned = 0x10,
+		VoiceSpeaking = 0x1000,
+		VoiceDoneSpeaking = 0x2000,
 	}
 	public enum ERegionCode : byte
 	{
@@ -2368,6 +2454,7 @@ namespace SteamKit2
 		Executable = 32,
 		Directory = 64,
 		CustomExecutable = 128,
+		InstallScript = 256,
 	}
 	public enum EWorkshopEnumerationType
 	{
@@ -2407,14 +2494,25 @@ namespace SteamKit2
 		TooSoon = 8,
 		TooSoonPenalty = 9,
 		ConnectionFailed = 10,
+		[Obsolete( "renamed to AlreadyTrading" )]
 		InitiatorAlreadyTrading = 11,
+		AlreadyTradying = 11,
+		[Obsolete( "renamed to AlreadyHasTradeRequest" )]
 		Error = 12,
+		AlreadyHasTradeRequest = 12,
+		[Obsolete( "renamed to NoResponse" )]
 		Timeout = 13,
+		NoResponse = 13,
+		CyberCafeInitiator = 14,
+		CyberCafeTarget = 15,
+		SchoolLabInitiator = 16,
+		SchoolLabTarget = 16,
 		InitiatorBlockedTarget = 18,
 		InitiatorNeedsVerifiedEmail = 20,
 		InitiatorNeedsSteamGuard = 21,
 		TargetAccountCannotTrade = 22,
 		InitiatorSteamGuardDuration = 23,
+		OKToDeliver = 50,
 	}
 	[Flags]
 	public enum EMarketingMessageFlags
@@ -2547,7 +2645,7 @@ namespace SteamKit2
 		Private = 2,
 		FriendsOnly = 4,
 		Public = 8,
-		All = 14,
+		All = Public | FriendsOnly | Private,
 	}
 	public enum EUdpPacketType : byte
 	{
