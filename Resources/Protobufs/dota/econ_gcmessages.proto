@@ -131,6 +131,7 @@ enum EGCItemMsg {
 	k_EMsgGCRequestAnnouncements = 2525;
 	k_EMsgGCRequestAnnouncementsResponse = 2526;
 	k_EMsgGCRequestPassportItemGrant = 2527;
+	k_EMsgGCClientVersionUpdated = 2528;
 }
 
 enum EGCMsgResponse {

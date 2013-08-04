@@ -506,6 +506,10 @@ message CMsgGCServerVersionUpdated {
 	optional uint32 server_version = 1;
 }
 
+message CMsgGCClientVersionUpdated {
+	optional uint32 client_version = 1;
+}
+
 message CMsgGCToGCWebAPIAccountChanged {
 }
 
