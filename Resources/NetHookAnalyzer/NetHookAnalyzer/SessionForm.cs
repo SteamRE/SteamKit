@@ -139,6 +139,7 @@ namespace NetHookAnalyzer
                 typeof( SteamKit2.GC.Internal.ESOMsg ),
                 typeof( SteamKit2.GC.Internal.EGCSystemMsg ),
                 typeof( SteamKit2.GC.Internal.EGCItemMsg ),
+                typeof( SteamKit2.GC.Internal.EGCBaseClientMsg ),
             };
 
             foreach ( var enumType in eMsgEnums )
