@@ -69,10 +69,6 @@ message CMsgClientLogon {
 	optional string account_name = 50;
 	optional string password = 51;
 	optional string login_key = 60;
-	optional bytes sony_psn_ticket = 90;
-	optional string sony_psn_service_id = 91;
-	optional bool create_new_psn_linked_account_if_needed = 92 [default = false];
-	optional string sony_psn_name = 93;
 	optional bool was_converted_deprecated_msg = 70 [default = false];
 	optional string anon_user_target_account_name = 80;
 	optional fixed64 resolved_user_steam_id = 81;
@@ -83,10 +79,15 @@ message CMsgClientLogon {
 	optional uint32 otp_value = 86;
 	optional string otp_identifier = 87;
 	optional bool steam2_ticket_request = 88;
+	optional bytes sony_psn_ticket = 90;
+	optional string sony_psn_service_id = 91;
+	optional bool create_new_psn_linked_account_if_needed = 92 [default = false];
+	optional string sony_psn_name = 93;
 	optional int32 game_server_app_id = 94;
 	optional bool steamguard_dont_remember_computer = 95;
 	optional string machine_name = 96;
 	optional string machine_name_userchosen = 97;
+	optional string country_override = 98;
 }
 
 message CMsgClientLogonResponse {
@@ -1004,6 +1005,7 @@ message CMsgClientUFSDeleteFileResponse {
 
 message CMsgClientUFSGetFileListForApp {
 	repeated uint32 apps_to_query = 1;
+	optional bool send_path_prefixes = 2;
 }
 
 message CMsgClientUFSGetFileListForAppResponse {
@@ -1017,9 +1019,11 @@ message CMsgClientUFSGetFileListForAppResponse {
 		optional uint32 raw_file_size = 5;
 		optional bool is_explicit_delete = 6;
 		optional uint32 platforms_to_sync = 7;
+		optional uint32 path_prefix_index = 8;
 	}
 
 	repeated .CMsgClientUFSGetFileListForAppResponse.File files = 1;
+	repeated string path_prefixes = 2;
 }
 
 message CMsgClientUFSDownloadRequest {
@@ -1355,6 +1359,7 @@ message CMsgClientFriendMsg {
 	optional fixed64 steamid = 1;
 	optional int32 chat_entry_type = 2;
 	optional bytes message = 3;
+	optional fixed32 rtime32_server_timestamp = 4;
 }
 
 message CMsgClientFriendMsgIncoming {
@@ -1362,6 +1367,7 @@ message CMsgClientFriendMsgIncoming {
 	optional int32 chat_entry_type = 2;
 	optional bool from_limited_account = 3;
 	optional bytes message = 4;
+	optional fixed32 rtime32_server_timestamp = 5;
 }
 
 message CMsgClientAddFriend {
@@ -2601,6 +2607,22 @@ message CMsgClientUseLocalDeviceAuthorizations {
 	repeated uint32 authorization_account_id = 1;
 }
 
+message CMsgClientGetAuthorizedDevices {
+}
+
+message CMsgClientGetAuthorizedDevicesResponse {
+	message AuthorizedDevice {
+		optional uint64 auth_device_token = 1;
+		optional string device_name = 2;
+		optional uint32 last_access_time = 3;
+		optional uint32 borrower_id = 4;
+		optional bool is_pending = 5;
+	}
+
+	optional int32 eresult = 1 [default = 2];
+	repeated .CMsgClientGetAuthorizedDevicesResponse.AuthorizedDevice authorized_device = 2;
+}
+
 message CMsgClientGetEmoticonList {
 }
 
@@ -2629,7 +2651,7 @@ message CMsgClientSharedLibraryStopPlaying {
 		optional uint32 owner_id = 2;
 	}
 
-	optional uint32 seconds_left = 1;
+	optional int32 seconds_left = 1;
 	repeated .CMsgClientSharedLibraryStopPlaying.StopApp stop_apps = 2;
 }
 
