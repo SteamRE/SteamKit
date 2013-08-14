@@ -100,7 +100,7 @@ message CMsgInQueue {
 message CMsgInviteToParty {
 	optional fixed64 steam_id = 1;
 	optional uint32 client_version = 2;
-	optional bool team_invite = 3;
+	optional uint32 team_invite = 3;
 }
 
 message CMsgInvitationCreated {
@@ -112,7 +112,7 @@ message CMsgPartyInviteResponse {
 	optional uint64 party_id = 1;
 	optional bool accept = 2;
 	optional uint32 client_version = 3;
-	optional bool team_invite = 4;
+	optional uint32 team_invite = 4;
 }
 
 message CMsgKickFromParty {
@@ -155,6 +155,8 @@ message CSOItemCriteria {
 	optional bool forced_quality_match = 7;
 	optional bool ignore_enabled_flag = 8;
 	repeated .CSOItemCriteriaCondition conditions = 9;
+	optional int32 item_rarity = 10;
+	optional bool item_rarity_set = 11;
 }
 
 message CSOItemRecipe {
@@ -236,12 +238,14 @@ message CSOEconItem {
 	optional uint64 original_id = 16 [default = 0];
 	optional bool contains_equipped_state = 17;
 	repeated .CSOEconItemEquipped equipped_state = 18;
+	optional uint32 rarity = 19;
 }
 
 message CMsgAdjustItemEquippedState {
 	optional uint64 item_id = 1;
 	optional uint32 new_class = 2;
 	optional uint32 new_slot = 3;
+	optional bool swap = 4;
 }
 
 message CMsgSortItems {
@@ -319,6 +323,7 @@ message CMsgItemAcknowledged {
 	optional uint32 quality = 4;
 	optional uint32 rarity = 5;
 	optional uint32 origin = 6;
+	optional uint64 item_id = 7;
 }
 
 message CMsgSetPresetItemPosition {
@@ -457,5 +462,12 @@ message CMsgGCToGCBannedWordListBroadcast {
 
 message CMsgGCToGCBannedWordListUpdated {
 	optional uint32 group_id = 1;
+}
+
+message CSOEconDefaultEquippedDefinitionInstanceClient {
+	optional uint32 account_id = 1 [(key_field) = true];
+	optional uint32 item_definition = 2;
+	optional uint32 class_id = 3 [(key_field) = true];
+	optional uint32 slot_id = 4 [(key_field) = true];
 }
 

@@ -37,6 +37,8 @@ enum ECsgoGCMsg {
 	k_EMsgGCCStrike15_v2_PlayerOverwatchCaseStatus = 9133;
 	k_EMsgGCCStrike15_v2_GC2ClientTextMsg = 9134;
 	k_EMsgGCCStrike15_v2_Client2GCTextMsg = 9135;
+	k_EMsgGCCStrike15_v2_MatchEndRunRewardDrops = 9136;
+	k_EMsgGCCStrike15_v2_MatchEndRewardDropsNotification = 9137;
 }
 
 message GameServerPing {
@@ -66,6 +68,7 @@ message GlobalStatistics {
 	optional uint32 required_appid_version = 9;
 	optional uint32 pricesheet_version = 10;
 	optional uint32 twitch_streams_version = 11;
+	optional uint32 game_monthly_uniques = 12;
 }
 
 message OperationalStatisticDescription {
@@ -103,7 +106,9 @@ message PlayerMedalsInfo {
 	optional uint32 medal_weapon = 3;
 	optional uint32 medal_global = 4;
 	optional uint32 medal_arms = 5;
-	optional uint32 coin_op_payback = 6;
+	optional uint32 legacy__coin_op_payback = 6;
+	repeated uint32 display_items_defidx = 7;
+	optional uint32 featured_display_item_defidx = 8;
 }
 
 message ServerHltvInfo {
@@ -182,6 +187,7 @@ message CMsgGCCStrike15_v2_MatchmakingServerReservationResponse {
 	optional uint32 reward_item_attr_def_idx = 9;
 	optional uint32 reward_item_attr_value = 10;
 	optional uint32 reward_item_attr_reward_idx = 11;
+	optional uint32 reward_drop_list = 12;
 }
 
 message CMsgGCCStrike15_v2_MatchmakingGC2ClientReserve {
@@ -386,5 +392,26 @@ message CMsgGCCStrike15_v2_GC2ClientTextMsg {
 message CMsgGCCStrike15_v2_Client2GCTextMsg {
 	optional uint32 id = 1;
 	repeated bytes args = 2;
+}
+
+message CMsgGCCStrike15_v2_MatchEndRunRewardDrops {
+	optional .CMsgGCCStrike15_v2_MatchmakingServerReservationResponse serverinfo = 3;
+}
+
+message CEconItemPreviewDataBlock {
+	optional uint32 accountid = 1;
+	optional uint64 itemid = 2;
+	optional uint32 defindex = 3;
+	optional uint32 paintindex = 4;
+	optional uint32 rarity = 5;
+	optional uint32 quality = 6;
+	optional uint32 paintwear = 7;
+	optional uint32 paintseed = 8;
+	optional uint32 killeaterscoretype = 9;
+	optional uint32 killeatervalue = 10;
+}
+
+message CMsgGCCStrike15_v2_MatchEndRewardDropsNotification {
+	optional .CEconItemPreviewDataBlock iteminfo = 6;
 }
 

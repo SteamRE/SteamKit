@@ -1,5 +1,6 @@
 import "google/protobuf/descriptor.proto";
 import "netmessages.proto";
+import "cstrike15_gcmessages.proto";
 
 enum ECstrike15UserMessages {
 	CS_UM_VGUIMenu = 1;
@@ -58,6 +59,7 @@ enum ECstrike15UserMessages {
 	CS_UM_MatchStatsUpdate = 58;
 	CS_UM_ItemDrop = 59;
 	CS_UM_GlowPropTurnOff = 60;
+	CS_UM_SendPlayerItemDrops = 61;
 }
 
 message CCSUsrMsg_VGUIMenu {
@@ -206,8 +208,13 @@ message CCSUsrMsg_ProcessSpottedEntityUpdate {
 	repeated .CCSUsrMsg_ProcessSpottedEntityUpdate.SpottedEntityUpdate entity_updates = 2;
 }
 
+message CCSUsrMsg_SendPlayerItemDrops {
+	repeated .CEconItemPreviewDataBlock entity_updates = 1;
+}
+
 message CCSUsrMsg_ReloadEffect {
 	optional int32 entidx = 1;
+	optional int32 actanim = 2;
 }
 
 message CCSUsrMsg_AdjustMoney {
@@ -251,7 +258,6 @@ message CCSUsrMsg_PlayerStatsUpdate {
 	}
 
 	optional int32 version = 1;
-	optional int32 official_server = 2;
 	repeated .CCSUsrMsg_PlayerStatsUpdate.Stat stats = 4;
 	optional int32 user_id = 5;
 	optional int32 crc = 6;
