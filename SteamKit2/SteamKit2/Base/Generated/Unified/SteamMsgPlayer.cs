@@ -731,6 +731,24 @@ namespace SteamKit2.Unified.Internal
       get { return _last_playtime; }
       set { _last_playtime = value; }
     }
+
+    private int _playtime_2weeks = default(int);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"playtime_2weeks", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int playtime_2weeks
+    {
+      get { return _playtime_2weeks; }
+      set { _playtime_2weeks = value; }
+    }
+
+    private int _playtime_forever = default(int);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"playtime_forever", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int playtime_forever
+    {
+      get { return _playtime_forever; }
+      set { _playtime_forever = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

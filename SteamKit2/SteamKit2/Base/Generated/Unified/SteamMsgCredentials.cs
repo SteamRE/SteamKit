@@ -272,12 +272,123 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCredentials_SteamGuardPhishingReport_Request")]
+  public partial class CCredentials_SteamGuardPhishingReport_Request : global::ProtoBuf.IExtensible
+  {
+    public CCredentials_SteamGuardPhishingReport_Request() {}
+    
+
+    private string _param_string = "";
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"param_string", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string param_string
+    {
+      get { return _param_string; }
+      set { _param_string = value; }
+    }
+
+    private uint _ipaddress_actual = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"ipaddress_actual", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint ipaddress_actual
+    {
+      get { return _ipaddress_actual; }
+      set { _ipaddress_actual = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCredentials_SteamGuardPhishingReport_Response")]
+  public partial class CCredentials_SteamGuardPhishingReport_Response : global::ProtoBuf.IExtensible
+  {
+    public CCredentials_SteamGuardPhishingReport_Response() {}
+    
+
+    private uint _ipaddress_loginattempt = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"ipaddress_loginattempt", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint ipaddress_loginattempt
+    {
+      get { return _ipaddress_loginattempt; }
+      set { _ipaddress_loginattempt = value; }
+    }
+
+    private string _countryname_loginattempt = "";
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"countryname_loginattempt", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string countryname_loginattempt
+    {
+      get { return _countryname_loginattempt; }
+      set { _countryname_loginattempt = value; }
+    }
+
+    private string _statename_loginattempt = "";
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"statename_loginattempt", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string statename_loginattempt
+    {
+      get { return _statename_loginattempt; }
+      set { _statename_loginattempt = value; }
+    }
+
+    private string _cityname_loginattempt = "";
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"cityname_loginattempt", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string cityname_loginattempt
+    {
+      get { return _cityname_loginattempt; }
+      set { _cityname_loginattempt = value; }
+    }
+
+    private uint _ipaddress_actual = default(uint);
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"ipaddress_actual", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint ipaddress_actual
+    {
+      get { return _ipaddress_actual; }
+      set { _ipaddress_actual = value; }
+    }
+
+    private string _countryname_actual = "";
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"countryname_actual", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string countryname_actual
+    {
+      get { return _countryname_actual; }
+      set { _countryname_actual = value; }
+    }
+
+    private string _statename_actual = "";
+    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"statename_actual", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string statename_actual
+    {
+      get { return _statename_actual; }
+      set { _statename_actual = value; }
+    }
+
+    private string _cityname_actual = "";
+    [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"cityname_actual", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string cityname_actual
+    {
+      get { return _cityname_actual; }
+      set { _cityname_actual = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     public interface ICredentials
     {
       CCredentials_TestAvailablePassword_Response TestAvailablePassword(CCredentials_TestAvailablePassword_Request request);
     CCredentials_GetSteamGuardDetails_Response GetSteamGuardDetails(CCredentials_GetSteamGuardDetails_Request request);
     CCredentials_NewMachineNotificationDialog_Response NewMachineNotificationDialogResult(CCredentials_NewMachineNotificationDialog_Request request);
     CCredentials_ValidateEmailAddress_Response ValidateEmailAddress(CCredentials_ValidateEmailAddress_Request request);
+    CCredentials_SteamGuardPhishingReport_Response SteamGuardPhishingReport(CCredentials_SteamGuardPhishingReport_Request request);
     
     }
     

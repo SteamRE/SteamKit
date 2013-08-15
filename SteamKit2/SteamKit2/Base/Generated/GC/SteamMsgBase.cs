@@ -2026,6 +2026,62 @@ namespace SteamKit2.GC.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCCheckFriendship")]
+  public partial class CMsgGCCheckFriendship : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCCheckFriendship() {}
+    
+
+    private ulong _steamid_left = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steamid_left", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong steamid_left
+    {
+      get { return _steamid_left; }
+      set { _steamid_left = value; }
+    }
+
+    private ulong _steamid_right = default(ulong);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"steamid_right", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong steamid_right
+    {
+      get { return _steamid_right; }
+      set { _steamid_right = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCCheckFriendship_Response")]
+  public partial class CMsgGCCheckFriendship_Response : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCCheckFriendship_Response() {}
+    
+
+    private bool _success = default(bool);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"success", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool success
+    {
+      get { return _success; }
+      set { _success = value; }
+    }
+
+    private bool _found_friendship = default(bool);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"found_friendship", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool found_friendship
+    {
+      get { return _found_friendship; }
+      set { _found_friendship = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCMsgMasterSetDirectory")]
   public partial class CMsgGCMsgMasterSetDirectory : global::ProtoBuf.IExtensible
   {

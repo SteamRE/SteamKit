@@ -223,7 +223,16 @@ namespace SteamKit2.GC.Internal
       k_EGCMsgGetPurchaseTrustStatusResponse = 502,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgUpdateSession", Value=503)]
-      k_EGCMsgUpdateSession = 503
+      k_EGCMsgUpdateSession = 503,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgGCAccountVacStatusChange", Value=504)]
+      k_EGCMsgGCAccountVacStatusChange = 504,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgCheckFriendship", Value=505)]
+      k_EGCMsgCheckFriendship = 505,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgCheckFriendshipResponse", Value=506)]
+      k_EGCMsgCheckFriendshipResponse = 506
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"ESOMsg")]

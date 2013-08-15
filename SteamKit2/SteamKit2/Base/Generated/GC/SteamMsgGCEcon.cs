@@ -12,6 +12,34 @@
 // Note: requires additional types generated from: steammessages.proto
 namespace SteamKit2.GC.Internal
 {
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgApplyAutograph")]
+  public partial class CMsgApplyAutograph : global::ProtoBuf.IExtensible
+  {
+    public CMsgApplyAutograph() {}
+    
+
+    private ulong _autograph_item_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"autograph_item_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong autograph_item_id
+    {
+      get { return _autograph_item_id; }
+      set { _autograph_item_id = value; }
+    }
+
+    private ulong _item_item_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"item_item_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong item_item_id
+    {
+      get { return _item_item_id; }
+      set { _item_item_id = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     [global::ProtoBuf.ProtoContract(Name=@"EGCItemMsg")]
     public enum EGCItemMsg
     {
@@ -377,7 +405,37 @@ namespace SteamKit2.GC.Internal
       k_EMsgGCToGCDirtyMultipleSDOCache = 2517,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCUpdateSQLKeyValue", Value=2518)]
-      k_EMsgGCToGCUpdateSQLKeyValue = 2518
+      k_EMsgGCToGCUpdateSQLKeyValue = 2518,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCIsTrustedServer", Value=2519)]
+      k_EMsgGCToGCIsTrustedServer = 2519,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCIsTrustedServerResponse", Value=2520)]
+      k_EMsgGCToGCIsTrustedServerResponse = 2520,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCBroadcastConsoleCommand", Value=2521)]
+      k_EMsgGCToGCBroadcastConsoleCommand = 2521,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCServerVersionUpdated", Value=2522)]
+      k_EMsgGCServerVersionUpdated = 2522,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCApplyAutograph", Value=2523)]
+      k_EMsgGCApplyAutograph = 2523,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCWebAPIAccountChanged", Value=2524)]
+      k_EMsgGCToGCWebAPIAccountChanged = 2524,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCRequestAnnouncements", Value=2525)]
+      k_EMsgGCRequestAnnouncements = 2525,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCRequestAnnouncementsResponse", Value=2526)]
+      k_EMsgGCRequestAnnouncementsResponse = 2526,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCRequestPassportItemGrant", Value=2527)]
+      k_EMsgGCRequestPassportItemGrant = 2527,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCClientVersionUpdated", Value=2528)]
+      k_EMsgGCClientVersionUpdated = 2528
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"EGCMsgResponse")]

@@ -319,6 +319,79 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCloud_CDNReport_Notification")]
+  public partial class CCloud_CDNReport_Notification : global::ProtoBuf.IExtensible
+  {
+    public CCloud_CDNReport_Notification() {}
+    
+
+    private ulong _steamid = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong steamid
+    {
+      get { return _steamid; }
+      set { _steamid = value; }
+    }
+
+    private string _url = "";
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"url", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string url
+    {
+      get { return _url; }
+      set { _url = value; }
+    }
+
+    private bool _success = default(bool);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"success", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool success
+    {
+      get { return _success; }
+      set { _success = value; }
+    }
+
+    private uint _http_status_code = default(uint);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"http_status_code", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint http_status_code
+    {
+      get { return _http_status_code; }
+      set { _http_status_code = value; }
+    }
+
+    private ulong _expected_bytes = default(ulong);
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"expected_bytes", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong expected_bytes
+    {
+      get { return _expected_bytes; }
+      set { _expected_bytes = value; }
+    }
+
+    private ulong _received_bytes = default(ulong);
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"received_bytes", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong received_bytes
+    {
+      get { return _received_bytes; }
+      set { _received_bytes = value; }
+    }
+
+    private uint _duration = default(uint);
+    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"duration", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint duration
+    {
+      get { return _duration; }
+      set { _duration = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     public interface ICloud
     {
       CCloud_GetUploadServerInfo_Response GetUploadServerInfo(CCloud_GetUploadServerInfo_Request request);
@@ -326,6 +399,7 @@ namespace SteamKit2.Unified.Internal
     CCloud_EnumerateUserFiles_Response EnumerateUserFiles(CCloud_EnumerateUserFiles_Request request);
     CCloud_Delete_Response Delete(CCloud_Delete_Request request);
     CCloud_GetClientEncryptionKey_Response GetClientEncryptionKey(CCloud_GetClientEncryptionKey_Request request);
+    NoResponse CDNReport(CCloud_CDNReport_Notification request);
     
     }
     

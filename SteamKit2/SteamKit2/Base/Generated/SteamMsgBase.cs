@@ -143,6 +143,15 @@ namespace SteamKit2.Internal
       get { return _sysid; }
       set { _sysid = value; }
     }
+
+    private ulong _trace_tag = default(ulong);
+    [global::ProtoBuf.ProtoMember(21, IsRequired = false, Name=@"trace_tag", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong trace_tag
+    {
+      get { return _trace_tag; }
+      set { _trace_tag = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -165,6 +174,25 @@ namespace SteamKit2.Internal
 
     private byte[] _message_body = null;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"message_body", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public byte[] message_body
+    {
+      get { return _message_body; }
+      set { _message_body = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgProtobufWrapped")]
+  public partial class CMsgProtobufWrapped : global::ProtoBuf.IExtensible
+  {
+    public CMsgProtobufWrapped() {}
+    
+
+    private byte[] _message_body = null;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"message_body", DataFormat = global::ProtoBuf.DataFormat.Default)]
     [global::System.ComponentModel.DefaultValue(null)]
     public byte[] message_body
     {
