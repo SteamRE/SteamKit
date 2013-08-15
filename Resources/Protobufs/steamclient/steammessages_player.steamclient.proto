@@ -120,6 +120,8 @@ message CPlayer_GetLastPlayedTimes_Response {
 	message Game {
 		optional int32 appid = 1;
 		optional uint32 last_playtime = 2;
+		optional int32 playtime_2weeks = 3;
+		optional int32 playtime_forever = 4;
 	}
 
 	repeated .CPlayer_GetLastPlayedTimes_Response.Game games = 1;

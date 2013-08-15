@@ -180,7 +180,7 @@ message CMsgSetVerticalScroll {
 
 message CMsgSetZoomLevel {
 	optional uint32 browser_handle = 1;
-	optional uint32 zoom = 2;
+	optional float zoom = 2;
 }
 
 message CMsgViewSource {
