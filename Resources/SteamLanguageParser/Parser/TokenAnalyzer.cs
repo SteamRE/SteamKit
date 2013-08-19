@@ -43,7 +43,7 @@ namespace SteamLanguageParser
         public Symbol Type { get; set; }
     }
 
-    class TokenAnalyzer
+    public class TokenAnalyzer
     {
         public static Node Analyze( Queue<Token> tokens )
         {
