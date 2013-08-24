@@ -11,7 +11,7 @@ message CDOTAModifierBuffTableEntry {
 	required int32 parent = 2;
 	required int32 index = 3;
 	required int32 serial_num = 4;
-	optional int32 name = 5;
+	optional int32 modifier_class = 5;
 	optional int32 ability_level = 6;
 	optional int32 stack_count = 7;
 	optional float creation_time = 8;
@@ -32,5 +32,7 @@ message CDOTAModifierBuffTableEntry {
 	optional bool aura = 23;
 	optional int32 activity = 24;
 	optional int32 damage = 25;
+	optional int32 range = 26;
+	optional int32 dd_modifier_index = 27;
 }
 

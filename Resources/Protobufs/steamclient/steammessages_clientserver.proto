@@ -214,6 +214,7 @@ message CMsgClientGamesPlayed {
 	}
 
 	repeated .CMsgClientGamesPlayed.GamePlayed games_played = 1;
+	optional uint32 client_os_type = 2;
 }
 
 message CMsgGSApprove {
@@ -2056,6 +2057,7 @@ message CMsgClientUpdateAppJobReport {
 
 message CMsgClientSteam2AppStarted {
 	optional uint32 app_id = 1;
+	optional string command_line = 2;
 }
 
 message CMsgClientGetCDNAuthTokenResponse {

@@ -53,6 +53,7 @@ enum EDotaUserMessages {
 	DOTA_UM_TutorialFinish = 111;
 	DOTA_UM_SendRoshanPopup = 112;
 	DOTA_UM_SendGenericToolTip = 113;
+	DOTA_UM_SendFinalGold = 114;
 }
 
 enum DOTA_CHAT_MESSAGE {
@@ -175,6 +176,9 @@ enum DOTA_OVERHEAD_ALERT {
 	OVERHEAD_ALERT_HEAL = 10;
 	OVERHEAD_ALERT_MANA_ADD = 11;
 	OVERHEAD_ALERT_MANA_LOSS = 12;
+	OVERHEAD_ALERT_LAST_HIT_EARLY = 13;
+	OVERHEAD_ALERT_LAST_HIT_CLOSE = 14;
+	OVERHEAD_ALERT_LAST_HIT_MISS = 15;
 }
 
 message CDOTAUserMsg_AIDebugLine {
@@ -587,5 +591,10 @@ message CDOTAUserMsg_SendStatPopup {
 message CDOTAUserMsg_SendRoshanPopup {
 	optional bool reclaimed = 1;
 	optional int32 gametime = 2;
+}
+
+message CDOTAUserMsg_SendFinalGold {
+	repeated uint32 reliable_gold = 1;
+	repeated uint32 unreliable_gold = 2;
 }
 
