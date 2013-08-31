@@ -273,6 +273,10 @@ namespace SteamKit2
                 case EMsg.ClientCMList:
                     HandleCMList( packetMsg );
                     break;
+
+                case EMsg.ClientServerList:
+                    HandleServerList( packetMsg );
+                    break;
             }
 
             // pass along the clientmsg to all registered handlers
@@ -302,6 +306,13 @@ namespace SteamKit2
             var cmMsg = new ClientMsgProtobuf<CMsgClientCMList>( packetMsg );
 
             PostCallback( new CMListCallback( cmMsg.Body ) );
+        }
+
+        void HandleServerList( IPacketMsg packetMsg )
+        {
+            var listMsg = new ClientMsgProtobuf<CMsgClientServerList>( packetMsg );
+
+            PostCallback( new ServerListCallback( listMsg.Body ) );
         }
 
     }
