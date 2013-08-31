@@ -94,7 +94,7 @@ namespace SteamKit2
                                     return EOSType.WinVista;
 
                                 if ( ver.Minor == 1 )
-                                    return EOSType.Win7;
+                                    return EOSType.Windows7;
 
                                 goto default;
 
