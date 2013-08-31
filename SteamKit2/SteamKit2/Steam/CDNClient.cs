@@ -12,6 +12,135 @@ using System.Text;
 
 namespace SteamKit2
 {
+    public sealed class CDNClient : IDisposable
+    {
+        public sealed class Server
+        {
+            public string Host { get; internal set; }
+            public int Port { get; internal set; }
+
+            public string Type { get; internal set; }
+        }
+
+
+        SteamClient steamClient;
+
+        WebClient webClient;
+
+
+        static CDNClient()
+        {
+            ServicePointManager.Expect100Continue = false;
+        }
+
+
+        public CDNClient( SteamClient steamClient )
+        {
+            this.steamClient = steamClient;
+
+            webClient = new WebClient();
+        }
+
+
+        public List<Server> FetchServerList( IPEndPoint csServer = null, uint? cellId = null )
+        {
+            const int SERVERS_TO_REQUEST = 20;
+
+            DebugLog.Assert( steamClient.IsConnected, "CDNClient", "CMClient is not connected!" );
+            DebugLog.Assert( steamClient.CellID != null, "CDNClient", "CMClient is not logged on!" );
+
+            if ( csServer == null )
+            {
+                // if we're not specifying what CS server we want to fetch a server list from, randomly select a cached CS server
+                var csServers = steamClient.GetServersOfType( EServerType.CS );
+
+                if ( csServers.Count == 0 )
+                {
+                    // steamclient doesn't know about any CS servers yet
+                    throw new InvalidOperationException( "No CS servers available!" );
+                }
+
+                Random random = new Random();
+                csServer = csServers[ random.Next( csServers.Count ) ];
+            }
+
+            if ( cellId == null )
+            {
+                if ( steamClient.CellID == null )
+                    throw new InvalidOperationException( "Recommended CellID is not available. CMClient not logged on?" );
+
+                // fallback to recommended cellid
+                cellId = steamClient.CellID.Value;
+            }
+
+            string reqUrl = string.Format( "http://{0}:{1}/serverlist/{2}/{3}/", csServer.Address, csServer.Port, cellId, SERVERS_TO_REQUEST );
+
+            byte[] listData = webClient.DownloadData( reqUrl );
+
+            var serverKv = new KeyValue();
+
+            using ( MemoryStream ms = new MemoryStream( listData ) )
+            {
+                try
+                {
+                    serverKv.ReadAsText( ms );
+                }
+                catch ( Exception ex )
+                {
+                    throw new InvalidDataException( "An internal error occurred while attempting to parse the response from the CS server.", ex );
+                }
+            }
+
+            if ( serverKv[ "deferred" ].AsBoolean() )
+            {
+                // TODO: return null or an empty list?
+                return null;
+            }
+
+            var serverList = new List<Server>();
+
+            foreach ( var server in serverKv.Children )
+            {
+                string type = server[ "type" ].AsString();
+                string host = server[ "host" ].AsString();
+
+                string[] hostSplits = host.Split( ':' );
+
+                int port = 80;
+                if ( hostSplits.Length > 1 )
+                {
+                    int parsedPort;
+                    if ( int.TryParse( hostSplits[ 1 ], out parsedPort ) )
+                    {
+                        port = parsedPort;
+                    }
+                }
+
+                serverList.Add( new Server
+                {
+                    Host = host,
+                    Port = port,
+
+                    Type = type,
+                } );
+            }
+
+            return serverList;
+        }
+
+
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        public void Dispose()
+        {
+            webClient.Dispose();
+        }
+
+    }
+
+
+#if false
     /// <summary>
     /// Represents a client able to connect to the Steam3 CDN and download games on the new content system.
     /// </summary>
@@ -372,4 +501,5 @@ namespace SteamKit2
             }
         }
     }
+#endif
 }
