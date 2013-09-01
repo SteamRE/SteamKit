@@ -142,9 +142,7 @@
     <Compile Include="Types\KeyValue.cs" />
     <Compile Include="Types\Manifest.cs" />
     <Compile Include="Util\DebugLog.cs" />
-    <Compile Include="Util\Utils.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="Util\Utils.cs" />
     <Compile Include="Steam\Handlers\SteamFriends\SteamFriends.cs" />
     <Compile Include="Util\ScheduledFunction.cs" />
     <Compile Include="Steam\Handlers\SteamUser\SteamUser.cs" />

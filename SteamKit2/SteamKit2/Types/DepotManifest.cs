@@ -86,7 +86,7 @@ namespace SteamKit2
             public byte[] FileHash { get; private set; }
 
 
-            internal FileData(string filename, EDepotFileFlag flag, ulong size, byte[] hash, bool encrypted)
+            internal FileData(string filename, EDepotFileFlag flag, ulong size, byte[] hash, bool encrypted, int numChunks)
             {
                 if (encrypted)
                     this.FileName = filename;
@@ -96,7 +96,7 @@ namespace SteamKit2
                 this.Flags = flag;
                 this.TotalSize = size;
                 this.FileHash = hash;
-                this.Chunks = new List<ChunkData>();
+                this.Chunks = new List<ChunkData>( numChunks );
             }
         }
 
@@ -181,12 +181,12 @@ namespace SteamKit2
 
         void ParseBinaryManifest(Steam3Manifest manifest)
         {
-            Files = new List<FileData>();
+            Files = new List<FileData>( manifest.Mapping.Count );
             FilenamesEncrypted = manifest.AreFileNamesEncrypted;
 
             foreach (var file_mapping in manifest.Mapping)
             {
-                FileData filedata = new FileData(file_mapping.FileName, file_mapping.Flags, file_mapping.TotalSize, file_mapping.HashContent, FilenamesEncrypted);
+                FileData filedata = new FileData(file_mapping.FileName, file_mapping.Flags, file_mapping.TotalSize, file_mapping.HashContent, FilenamesEncrypted, file_mapping.Chunks.Length);
 
                 foreach (var chunk in file_mapping.Chunks)
                 {

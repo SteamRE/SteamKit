@@ -134,8 +134,6 @@ namespace SteamKit2
 
         void Deserialize( BinaryReader ds )
         {
-            Mapping = new List<FileMapping>();
-
             Magic = ds.ReadUInt32();
 
             if (Magic != MAGIC)
@@ -159,6 +157,8 @@ namespace SteamKit2
 
             FileEntryCount = ds.ReadUInt32();
             FileMappingSize = ds.ReadUInt32();
+
+            Mapping = new List<FileMapping>( ( int )FileMappingSize );
 
             EncryptedCRC = ds.ReadUInt32();
             DecryptedCRC = ds.ReadUInt32();
