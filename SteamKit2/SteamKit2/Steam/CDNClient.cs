@@ -20,12 +20,39 @@ namespace SteamKit2
             public int Port { get; internal set; }
 
             public string Type { get; internal set; }
+
+
+            /// <summary>
+            /// Performs an implicit conversion from <see cref="System.NetIPEndPoint"/> to <see cref="SteamKit2.CDNClient.Server"/>.
+            /// </summary>
+            /// <param name="endPoint">A IPEndPoint to convert into a <see cref="SteamKit2.CDNClient.Server"/>.</param>
+            /// <returns>
+            /// The result of the conversion.
+            /// </returns>
+            public static implicit operator Server( IPEndPoint endPoint )
+            {
+                return new Server
+                {
+                    Host = endPoint.Address.ToString(),
+                    Port = endPoint.Port,
+                };
+            }
         }
 
 
         SteamClient steamClient;
 
         WebClient webClient;
+
+        byte[] appTicket;
+        uint depotId;
+
+        byte[] sessionKey;
+
+        Server connectedServer;
+
+        ulong sessionId;
+        long reqCounter;
 
 
         static CDNClient()
@@ -34,9 +61,17 @@ namespace SteamKit2
         }
 
 
-        public CDNClient( SteamClient steamClient )
+        public CDNClient( SteamClient steamClient, byte[] appTicket = null )
         {
             this.steamClient = steamClient;
+            this.appTicket = appTicket;
+
+            webClient = new WebClient();
+        }
+        public CDNClient( SteamClient steamClient, uint depotId )
+        {
+            this.steamClient = steamClient;
+            this.depotId = depotId;
 
             webClient = new WebClient();
         }
@@ -73,31 +108,14 @@ namespace SteamKit2
                 cellId = steamClient.CellID.Value;
             }
 
-            string reqUrl = string.Format( "http://{0}:{1}/serverlist/{2}/{3}/", csServer.Address, csServer.Port, cellId, SERVERS_TO_REQUEST );
+            KeyValue serverKv = DoCommand( csServer, "serverlist", args: string.Format( "{0}/{1}/", cellId, SERVERS_TO_REQUEST ) );
 
-            byte[] listData = webClient.DownloadData( reqUrl );
-
-            var serverKv = new KeyValue();
-
-            using ( MemoryStream ms = new MemoryStream( listData ) )
-            {
-                try
-                {
-                    serverKv.ReadAsText( ms );
-                }
-                catch ( Exception ex )
-                {
-                    throw new InvalidDataException( "An internal error occurred while attempting to parse the response from the CS server.", ex );
-                }
-            }
+            var serverList = new List<Server>( SERVERS_TO_REQUEST );
 
             if ( serverKv[ "deferred" ].AsBoolean() )
             {
-                // TODO: return null or an empty list?
-                return null;
+                return serverList;
             }
-
-            var serverList = new List<Server>();
 
             foreach ( var server in serverKv.Children )
             {
@@ -129,12 +147,146 @@ namespace SteamKit2
         }
 
 
+        public void Connect( Server csServer )
+        {
+            DebugLog.Assert( steamClient.IsConnected, "CDNClient", "CMClient is not connected!" );
+
+            if ( csServer == null )
+                throw new ArgumentNullException( "csServer" );
+
+            byte[] pubKey = KeyDictionary.GetPublicKey( steamClient.ConnectedUniverse );
+
+            sessionKey = CryptoHelper.GenerateRandomBlock( 32 );
+
+            byte[] cryptedSessKey = null;
+            using ( var rsa = new RSACrypto( pubKey ) )
+            {
+                cryptedSessKey = rsa.Encrypt( sessionKey );
+            }
+
+            string data;
+
+            if ( appTicket == null )
+            {
+                // no appticket, doing anonymous connection
+                data = string.Format( "sessionkey={0}&anonymoususer=1&steamid={1}", WebHelpers.UrlEncode( cryptedSessKey ), steamClient.SteamID.ConvertToUInt64() );
+            }
+            else
+            {
+                byte[] encryptedAppTicket = CryptoHelper.SymmetricEncrypt( appTicket, sessionKey );
+                data = string.Format( "sessionkey={0}&appticket={1}", WebHelpers.UrlEncode( cryptedSessKey ), WebHelpers.UrlEncode( encryptedAppTicket ) );
+            }
+
+            KeyValue initKv = DoCommand( csServer, "initsession", data, WebRequestMethods.Http.Post );
+
+            sessionId = ( ulong )initKv[ "sessionid" ].AsLong();
+            reqCounter = initKv[ "req-counter" ].AsLong();
+
+            if ( appTicket == null )
+            {
+                data = string.Format( "depotid={0}", depotId );
+            }
+            else
+            {
+                byte[] encryptedAppTicket = CryptoHelper.SymmetricEncrypt( appTicket, sessionKey );
+                data = string.Format( "appticket={0}", WebHelpers.UrlEncode( encryptedAppTicket ) );
+            }
+
+            DoCommand( csServer, "authdepot", data, WebRequestMethods.Http.Post, true );
+
+            connectedServer = csServer;
+        }
+
+        public DepotManifest DownloadManifest( uint depotId, ulong manifestId )
+        {
+            byte[] compressedManifest = DoRawCommand( connectedServer, "depot", doAuth: true, args: string.Format( "{0}/manifest/{1}", depotId, manifestId ) );
+
+            byte[] depotManifest = ZipUtil.Decompress( compressedManifest );
+
+            return new DepotManifest( depotManifest );
+        }
+
+
+
         /// <summary>
         /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
         /// </summary>
         public void Dispose()
         {
             webClient.Dispose();
+        }
+
+
+        string BuildCommand( Server server, string command, string args )
+        {
+            return string.Format( "http://{0}:{1}/{2}/{3}", server.Host, server.Port, command, args );
+        }
+
+        byte[] DoRawCommand( Server server, string command, string data = null, string method = WebRequestMethods.Http.Get, bool doAuth = false, string args = "" )
+        {
+            string url = BuildCommand( server, command, args );
+
+            webClient.Headers.Clear();
+
+            if ( doAuth )
+            {
+                reqCounter++;
+
+                byte[] shaHash;
+
+                using ( var ms = new MemoryStream() )
+                using ( var bw = new BinaryWriter( ms ) )
+                {
+                    var uri = new Uri( url );
+
+                    bw.Write( sessionId );
+                    bw.Write( reqCounter );
+                    bw.Write( sessionKey );
+                    bw.Write( Encoding.ASCII.GetBytes( uri.AbsolutePath ) );
+
+                    shaHash = CryptoHelper.SHAHash( ms.ToArray() );
+                }
+
+                string hexHash = Utils.EncodeHexString( shaHash );
+                string authHeader = string.Format( "sessionid={0};req-counter={1};hash={2};", sessionId, reqCounter, hexHash );
+
+                webClient.Headers[ "x-steam-auth" ] = authHeader;
+            }
+
+            byte[] resultData = null;
+
+            if ( method == WebRequestMethods.Http.Get )
+            {
+                resultData = webClient.DownloadData( url );
+            }
+            else if ( method == WebRequestMethods.Http.Post )
+            {
+                webClient.Headers[ HttpRequestHeader.ContentType ] = "application/x-www-form-urlencoded";
+
+                resultData = webClient.UploadData( url, Encoding.ASCII.GetBytes( data ) );
+            }
+
+            return resultData;
+        }
+        KeyValue DoCommand( Server server, string command, string data = null, string method = WebRequestMethods.Http.Get, bool doAuth = false, string args = "" )
+        {
+            byte[] resultData = DoRawCommand( server, command, data, method, doAuth, args );
+
+            var dataKv = new KeyValue();
+
+            using ( MemoryStream ms = new MemoryStream( resultData ) )
+            {
+                try
+                {
+                    dataKv.ReadAsText( ms );
+                }
+                catch ( Exception ex )
+                {
+                    throw new InvalidDataException( "An internal error occurred while attempting to parse the response from the CS server.", ex );
+                }
+            }
+
+            return dataKv;
         }
 
     }
