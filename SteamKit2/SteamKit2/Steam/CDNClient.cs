@@ -12,18 +12,33 @@ using System.Text;
 
 namespace SteamKit2
 {
+    /// <summary>
+    /// The CDNClient class is used for downloading game content from the Steam servers.
+    /// </summary>
     public sealed class CDNClient : IDisposable
     {
+        /// <summary>
+        /// Represents a single Steam3 'Steampipe' content server.
+        /// </summary>
         public sealed class Server
         {
+            /// <summary>
+            /// Gets the hostname of the server.
+            /// </summary>
             public string Host { get; internal set; }
+            /// <summary>
+            /// Gets the port of the server.
+            /// </summary>
             public int Port { get; internal set; }
 
+            /// <summary>
+            /// Gets the type of the server.
+            /// </summary>
             public string Type { get; internal set; }
 
 
             /// <summary>
-            /// Performs an implicit conversion from <see cref="System.NetIPEndPoint"/> to <see cref="SteamKit2.CDNClient.Server"/>.
+            /// Performs an implicit conversion from <see cref="System.Net.IPEndPoint"/> to <see cref="SteamKit2.CDNClient.Server"/>.
             /// </summary>
             /// <param name="endPoint">A IPEndPoint to convert into a <see cref="SteamKit2.CDNClient.Server"/>.</param>
             /// <returns>
@@ -39,15 +54,36 @@ namespace SteamKit2
             }
         }
 
+        /// <summary>
+        /// Represents a single downloaded chunk from a file in a depot.
+        /// </summary>
         public sealed class DepotChunk
         {
+            /// <summary>
+            /// Gets the depot manifest chunk information associated with this chunk.
+            /// </summary>
             public DepotManifest.ChunkData ChunkInfo { get; internal set; }
 
+            /// <summary>
+            /// Gets a value indicating whether this chunk has been processed. A chunk is processed when the data has been decrypted and decompressed.
+            /// </summary>
+            /// <value>
+            ///   <c>true</c> if this chunk has been processed; otherwise, <c>false</c>.
+            /// </value>
             public bool IsProcessed { get; internal set; }
 
-            public byte[] Data { get; set; }
+            /// <summary>
+            /// Gets the underlying data for this chunk.
+            /// </summary>
+            public byte[] Data { get; internal set; }
 
 
+            /// <summary>
+            /// Processes the specified depot key by decrypting the data with the given depot encryption key, and then by decompressing the data.
+            /// If the chunk has already been processed, this function does nothing.
+            /// </summary>
+            /// <param name="depotKey">The depot decryption key.</param>
+            /// <exception cref="System.IO.InvalidDataException">Thrown if the processed data does not match the expected checksum given in it's chunk information.</exception>
             public void Process( byte[] depotKey )
             {
                 if ( IsProcessed )
@@ -89,6 +125,21 @@ namespace SteamKit2
         }
 
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CDNClient"/> class.
+        /// </summary>
+        /// <param name="steamClient">
+        /// The <see cref="SteamClient"/> this instance will be associated with.
+        /// The SteamClient instance must be connected and logged onto Steam.</param>
+        /// <param name="depotId">The DepotID of the depot that will be downloaded.</param>
+        /// <param name="appTicket">
+        /// The optional appticket for the depot that will be downloaded.
+        /// This must be present when connected to steam non-anonymously.
+        /// </param>
+        /// <param name="depotKey">
+        /// The optional depot decryption key for the depot that will be downloaded.
+        /// This is used for decrypting filenames (if neeed) in depot manifests, and processing depot chunks.
+        /// </param>
         public CDNClient( SteamClient steamClient, uint depotId, byte[] appTicket = null, byte[] depotKey = null )
         {
             this.steamClient = steamClient;
@@ -101,6 +152,21 @@ namespace SteamKit2
         }
 
 
+        /// <summary>
+        /// Fetches a list of content servers.
+        /// </summary>
+        /// <param name="csServer">
+        /// The optional Steam3 content server to fetch the list from.
+        /// If this parameter is not specified, a random CS server will be selected.
+        /// </param>
+        /// <param name="cellId">
+        /// The optional CellID used to specify which regional servers should be returned in the list.
+        /// If this parameter is not specified, Steam's GeoIP suggested CellID will be used instead.
+        /// </param>
+        /// <returns>A list of servers.</returns>
+        /// <exception cref="System.InvalidOperationException">No Steam CS servers available, or the suggested CellID is unavailable.
+        /// Check that the <see cref="SteamClient"/> associated with this <see cref="CDNClient"/> instance is logged onto Steam.
+        /// </exception>
         public List<Server> FetchServerList( IPEndPoint csServer = null, uint? cellId = null )
         {
             const int SERVERS_TO_REQUEST = 20;
@@ -171,6 +237,11 @@ namespace SteamKit2
         }
 
 
+        /// <summary>
+        /// Connects and authenticates to the specified content server.
+        /// </summary>
+        /// <param name="csServer">The content server to connect to.</param>
+        /// <exception cref="System.ArgumentNullException">csServer was null.</exception>
         public void Connect( Server csServer )
         {
             DebugLog.Assert( steamClient.IsConnected, "CDNClient", "CMClient is not connected!" );
@@ -221,6 +292,11 @@ namespace SteamKit2
             connectedServer = csServer;
         }
 
+        /// <summary>
+        /// Downloads the depot manifest specified by the given manifest ID, and optionally decrypts the manifest's filenames if the depot decryption key has been provided.
+        /// </summary>
+        /// <param name="manifestId">The unique identifier of the manifest to be downloaded.</param>
+        /// <returns>A <see cref="DepotManifest"/> instance that contains information about the files present within a depot.</returns>
         public DepotManifest DownloadManifest( ulong manifestId )
         {
             byte[] compressedManifest = DoRawCommand( connectedServer, "depot", doAuth: true, args: string.Format( "{0}/manifest/{1}", depotId, manifestId ) );
@@ -238,6 +314,14 @@ namespace SteamKit2
             return depotManifest;
         }
 
+        /// <summary>
+        /// Downloads the specified depot chunk, and optionally processes the chunk and verifies the checksum if the depot decryption key has been provided.
+        /// </summary>
+        /// <param name="chunk">
+        /// A <see cref="DepotManifest.ChunkData"/> instance that represents the chunk to download.
+        /// This value should come from a manifest downloaded with <see cref="CDNClient.DownloadManifest"/>.
+        /// </param>
+        /// <returns>A <see cref="DepotChunk"/> instance that contains the data for the given chunk.</returns>
         public DepotChunk DownloadDepotChunk( DepotManifest.ChunkData chunk )
         {
             string chunkId = Utils.EncodeHexString( chunk.ChunkID );
@@ -345,368 +429,4 @@ namespace SteamKit2
         }
 
     }
-
-
-#if false
-    /// <summary>
-    /// Represents a client able to connect to the Steam3 CDN and download games on the new content system.
-    /// </summary>
-    public sealed class CDNClient
-    {
-        /// <summary>
-        /// Represents the endpoint of a Steam3 content server.
-        /// </summary>
-        public sealed class ClientEndPoint
-        {
-            /// <summary>
-            /// Gets the server host.
-            /// </summary>
-            public string Host { get; private set; }
-            /// <summary>
-            /// Gets the server port.
-            /// </summary>
-            public int Port { get; private set; }
-            /// <summary>
-            /// Gets the server type.
-            /// </summary>
-            public string Type { get; private set; }
-
-
-            /// <summary>
-            /// Initializes a new instance of the <see cref="ClientEndPoint"/> class.
-            /// </summary>
-            /// <param name="host">The server host.</param>
-            /// <param name="port">The server port.</param>
-            /// <param name="type">The server type.</param>
-            public ClientEndPoint( string host, int port, string type = null )
-            {
-                Host = host;
-                Port = port;
-                Type = type;
-            }
-
-        }
-
-        private WebClient webClient;
-        private byte[] sessionKey;
-
-        private ulong sessionID;
-        private long reqcounter;
-
-        private ClientEndPoint endPoint;
-        private byte[] appTicket;
-
-        private SteamID steamID;
-        private uint depotID;
-
-        static CDNClient()
-        {
-            ServicePointManager.Expect100Continue = false;
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CDNClient"/> class.
-        /// </summary>
-        /// <param name="cdnServer">The CDN server to connect to.</param>
-        /// <param name="appticket">The appticket of the app this instance is for.</param>
-        public CDNClient(ClientEndPoint cdnServer, byte[] appticket)
-        {
-            sessionKey = CryptoHelper.GenerateRandomBlock(32);
-
-            webClient = new WebClient();
-
-            endPoint = cdnServer;
-            appTicket = appticket;
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CDNClient"/> class without an application ticket.
-        /// </summary>
-        /// <param name="cdnServer">The CDN server to connect to.</param>
-        /// <param name="steamID">The SteamID of the current user.</param>
-        /// <param name="depotID">Depot ID being requested.</param>
-        public CDNClient(ClientEndPoint cdnServer, uint depotID, SteamID steamID)
-        {
-            sessionKey = CryptoHelper.GenerateRandomBlock(32);
-
-            webClient = new WebClient();
-
-            endPoint = cdnServer;
-            appTicket = null;
-            this.steamID = steamID;
-            this.depotID = depotID;
-        }
-
-        /// <summary>
-        /// Releases unmanaged resources and performs other cleanup operations before the
-        /// <see cref="CDNClient"/> is reclaimed by garbage collection.
-        /// </summary>
-        ~CDNClient()
-        {
-            webClient.Dispose();
-        }
-
-        /// <summary>
-        /// Points this <see cref="CDNClient"/> instance to another server.
-        /// </summary>
-        /// <param name="ep">The endpoint.</param>
-        public void PointTo(ClientEndPoint ep)
-        {
-            endPoint = ep;
-        }
-
-        /// <summary>
-        /// Connects this instance to the server.
-        /// </summary>
-        /// <returns><c>true</c> if the connection was a success; otherwise, <c>false</c>.</returns>
-        public bool Connect()
-        {
-
-            byte[] encryptedKey = null;
-
-            // TODO: handle other universes?
-            byte[] universeKey = KeyDictionary.GetPublicKey( EUniverse.Public );
-            using ( var rsa = new RSACrypto( universeKey ) )
-            {
-                encryptedKey = rsa.Encrypt( sessionKey );
-            }
-
-            string payload;
-
-            if (appTicket == null)
-            {
-                payload = String.Format("sessionkey={0}&anonymoususer=1&steamid={1}", WebHelpers.UrlEncode(encryptedKey), steamID.ConvertToUInt64());
-            }
-            else
-            {
-                byte[] encryptedTicket = CryptoHelper.SymmetricEncrypt(appTicket, sessionKey);
-                payload = String.Format("sessionkey={0}&appticket={1}", WebHelpers.UrlEncode(encryptedKey), WebHelpers.UrlEncode(encryptedTicket));
-            }
-
-            webClient.Headers.Clear();
-            webClient.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
-
-            string response;
-            try
-            {
-                response = webClient.UploadString(BuildCommand(endPoint, "initsession"), payload);
-            }
-            catch (WebException e)
-            {
-                LogWebException("Connect", e);
-                return false;
-            }
-
-            var responsekv = KeyValue.LoadFromString(response);
-            var sessionidn = responsekv.Children.Where(c => c.Name == "sessionid").First();
-            var reqcountern = responsekv.Children.Where(c => c.Name == "req-counter").First();
-
-            sessionID = (ulong)(sessionidn.AsLong(0));
-            reqcounter = reqcountern.AsLong(0);
-
-            try
-            {
-                AuthDepot();
-            }
-            catch (WebException e)
-            {
-                LogWebException("AuthDepot", e);
-                return false;
-            }
-
-            return true;
-        }
-
-        /// <summary>
-        /// Downloads the depot manifest for the given depot and manifest.
-        /// </summary>
-        /// <param name="depotid">The depotid.</param>
-        /// <param name="manifestid">The manifestid.</param>
-        /// <returns>A <see cref="DepotManifest"/> instance on success; otherwise, <c>null</c>.</returns>
-        public DepotManifest DownloadDepotManifest(int depotid, ulong manifestid)
-        {
-            Uri manifestURI = new Uri(BuildCommand(endPoint, "depot"), String.Format("{0}/manifest/{1}", depotid, manifestid));
-
-            PrepareAuthHeader(ref webClient, manifestURI);
-
-            byte[] compressedManifest;
-            byte[] manifest;
-            try
-            {
-                compressedManifest = webClient.DownloadData(manifestURI);
-            }
-            catch (WebException e)
-            {
-                LogWebException("DownloadDepotManifest", e);
-                return null;
-            }
-
-            try
-            {
-                manifest = ZipUtil.Decompress(compressedManifest);
-            }
-            catch (Exception)
-            {
-                return null;
-            }
-
-            return new DepotManifest( manifest );
-        }
-
-        /// <summary>
-        /// Downloads the specified depot chunk from the content server.
-        /// </summary>
-        /// <param name="depotid">The DepotID of the chunk to download.</param>
-        /// <param name="chunkid">The the ID of the chunk to download.</param>
-        /// <returns></returns>
-        public byte[] DownloadDepotChunk(int depotid, string chunkid)
-        {
-            Uri chunkURI = new Uri(BuildCommand(endPoint, "depot"), String.Format("{0}/chunk/{1}", depotid, chunkid));
-
-            PrepareAuthHeader(ref webClient, chunkURI);
-
-            byte[] chunk;
-            try
-            {
-                chunk = webClient.DownloadData(chunkURI);
-            }
-            catch (WebException e)
-            {
-                LogWebException("DownloadDepotChunk", e);
-                return null;
-            }
-
-            return chunk;
-        }
-
-        /// <summary>
-        /// Processes a chunk by decrypting and decompressing it.
-        /// </summary>
-        /// <param name="chunk">The chunk to process.</param>
-        /// <param name="depotkey">The AES encryption key to use when decrypting the chunk.</param>
-        /// <returns>The processed chunk.</returns>
-        public static byte[] ProcessChunk(byte[] chunk, byte[] depotkey)
-        {
-            byte[] decrypted_chunk = CryptoHelper.SymmetricDecrypt(chunk, depotkey);
-            byte[] decompressed_chunk = ZipUtil.Decompress(decrypted_chunk);
-
-            return decompressed_chunk;
-        }
-
-        private void AuthDepot()
-        {
-            Uri authURI = BuildCommand(endPoint, "authdepot");
-
-            PrepareAuthHeader(ref webClient, authURI);
-            webClient.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
-
-            string payload;
-            if (appTicket == null)
-            {
-                payload = String.Format("depotid={0}", depotID);
-            }
-            else
-            {
-                byte[] encryptedTicket = CryptoHelper.SymmetricEncrypt(appTicket, sessionKey);
-                payload = String.Format("appticket={0}", WebHelpers.UrlEncode(encryptedTicket));
-            }
-
-            webClient.UploadString(authURI, payload);
-        }
-
-        private void PrepareAuthHeader(ref WebClient client, Uri uri)
-        {
-            reqcounter++;
-
-            byte[] sha_hash;
-
-            using ( var ms = new MemoryStream() )
-            using ( var bw = new BinaryWriter( ms ) )
-            {
-                bw.Write( sessionID );
-                bw.Write( reqcounter );
-                bw.Write( sessionKey );
-                bw.Write( Encoding.ASCII.GetBytes( uri.AbsolutePath ) );
-
-                sha_hash = CryptoHelper.SHAHash( ms.ToArray() );
-            }
-
-            string hex_hash = Utils.EncodeHexString(sha_hash);
-
-            string authheader = String.Format("sessionid={0};req-counter={1};hash={2};", sessionID, reqcounter, hex_hash);
-
-            webClient.Headers.Clear();
-            webClient.Headers.Add("x-steam-auth", authheader);
-        }
-
-        private static Uri BuildCommand(ClientEndPoint csServer, string command)
-        {
-            return new Uri(String.Format("http://{0}:{1}/{2}/", csServer.Host, csServer.Port.ToString(), command));
-        }
-
-        /// <summary>
-        /// Fetches a server list from the given content server for the provided CellID.
-        /// </summary>
-        /// <param name="csServer">The server to request a server list from.</param>
-        /// <param name="cellID">The CellID.</param>
-        /// <returns>A list of content servers.</returns>
-        public static List<ClientEndPoint> FetchServerList(ClientEndPoint csServer, int cellID)
-        {
-            int serversToRequest = 20;
-
-            using(WebClient webClient = new WebClient())
-            {
-                Uri request = new Uri(BuildCommand(csServer, "serverlist"), String.Format("{0}/{1}/", cellID, serversToRequest));
-
-                string serverList;
-                try
-                {
-                    serverList = webClient.DownloadString(request);
-                }
-                catch (WebException e)
-                {
-                    LogWebException("FetchServerList", e);
-                    return null;
-                }
-
-                KeyValue serverkv = KeyValue.LoadFromString(serverList);
-
-                if (serverkv["deferred"].AsString() == "1")
-                    return null;
-
-                List<ClientEndPoint> endpoints = new List<ClientEndPoint>();
-
-                foreach (var child in serverkv.Children)
-                {
-                    var node = child.Children.Where(x => x.Name == "host" || x.Name == "Host").First();
-                    var typeNode = child.Children.Where(x => x.Name == "type").First();
-
-                    var endpoint_string = node.Value.Split(':');
-
-                    int port = 80;
-                    
-                    if(endpoint_string.Length > 1)
-                        port = int.Parse(endpoint_string[1]);
-
-                    endpoints.Add(new ClientEndPoint(endpoint_string[0], port, typeNode.AsString()));
-                }
-
-                return endpoints;
-            }
-        }
-
-        private static void LogWebException(string function, WebException e)
-        {
-            HttpWebResponse response;
-            if (e.Status == WebExceptionStatus.ProtocolError && (response = e.Response as HttpWebResponse) != null)
-            {
-                DebugLog.WriteLine("CDNClient", "{0} received HTTP error: {1} - {2}", function, (int)response.StatusCode, response.StatusCode);
-            }
-            else
-            {
-                DebugLog.WriteLine("CDNClient", "{0} returned: {1}", function, e.Status);
-            }
-        }
-    }
-#endif
 }
