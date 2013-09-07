@@ -138,7 +138,7 @@ namespace SteamKit2
         /// </param>
         /// <param name="depotKey">
         /// The optional depot decryption key for the depot that will be downloaded.
-        /// This is used for decrypting filenames (if neeed) in depot manifests, and processing depot chunks.
+        /// This is used for decrypting filenames (if needed) in depot manifests, and processing depot chunks.
         /// </param>
         public CDNClient( SteamClient steamClient, uint depotId, byte[] appTicket = null, byte[] depotKey = null )
         {
