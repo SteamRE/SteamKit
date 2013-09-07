@@ -39,6 +39,33 @@ namespace SteamKit2
             }
         }
 
+        public sealed class DepotChunk
+        {
+            public DepotManifest.ChunkData ChunkInfo { get; internal set; }
+
+            public bool IsProcessed { get; internal set; }
+
+            public byte[] Data { get; set; }
+
+
+            public void Process( byte[] depotKey )
+            {
+                if ( IsProcessed )
+                    return;
+
+                byte[] processedData = CryptoHelper.SymmetricDecrypt( Data, depotKey );
+                processedData = ZipUtil.Decompress( processedData );
+
+                byte[] dataCrc = CryptoHelper.AdlerHash( processedData );
+
+                if ( !dataCrc.SequenceEqual( ChunkInfo.Checksum ) )
+                    throw new InvalidDataException( "Processed data checksum is incorrect! Downloaded depot chunk is corrupt or invalid/wrong depot key?" );
+
+                Data = processedData;
+                IsProcessed = true;
+            }
+        }
+
 
         SteamClient steamClient;
 
@@ -46,6 +73,7 @@ namespace SteamKit2
 
         byte[] appTicket;
         uint depotId;
+        byte[] depotKey;
 
         byte[] sessionKey;
 
@@ -61,17 +89,13 @@ namespace SteamKit2
         }
 
 
-        public CDNClient( SteamClient steamClient, byte[] appTicket = null )
+        public CDNClient( SteamClient steamClient, uint depotId, byte[] appTicket = null, byte[] depotKey = null )
         {
             this.steamClient = steamClient;
-            this.appTicket = appTicket;
 
-            webClient = new WebClient();
-        }
-        public CDNClient( SteamClient steamClient, uint depotId )
-        {
-            this.steamClient = steamClient;
             this.depotId = depotId;
+            this.appTicket = appTicket;
+            this.depotKey = depotKey;
 
             webClient = new WebClient();
         }
@@ -197,13 +221,44 @@ namespace SteamKit2
             connectedServer = csServer;
         }
 
-        public DepotManifest DownloadManifest( uint depotId, ulong manifestId )
+        public DepotManifest DownloadManifest( ulong manifestId )
         {
             byte[] compressedManifest = DoRawCommand( connectedServer, "depot", doAuth: true, args: string.Format( "{0}/manifest/{1}", depotId, manifestId ) );
 
-            byte[] depotManifest = ZipUtil.Decompress( compressedManifest );
+            byte[] manifestData = ZipUtil.Decompress( compressedManifest );
 
-            return new DepotManifest( depotManifest );
+            var depotManifest = new DepotManifest( manifestData );
+
+            if ( depotKey != null )
+            {
+                // if we have the depot key, decrypt the manifest filenames
+                depotManifest.DecryptFilenames( depotKey );
+            }
+
+            return depotManifest;
+        }
+
+        public DepotChunk DownloadDepotChunk( DepotManifest.ChunkData chunk )
+        {
+            string chunkId = Utils.EncodeHexString( chunk.ChunkID );
+
+            byte[] chunkData = DoRawCommand( connectedServer, "depot", doAuth: true, args: string.Format( "{0}/chunk/{1}", depotId, chunkId ) );
+
+            DebugLog.Assert( chunkData.Length == chunk.CompressedLength, "CDNClient", "Length mismatch after downloading depot chunk!" );
+
+            var depotChunk = new DepotChunk
+            {
+                ChunkInfo = chunk,
+                Data = chunkData,
+            };
+
+            if ( depotKey != null )
+            {
+                // if we have the depot key, we can process the chunk immediately
+                depotChunk.Process( depotKey );
+            }
+
+            return depotChunk;
         }
 
 
