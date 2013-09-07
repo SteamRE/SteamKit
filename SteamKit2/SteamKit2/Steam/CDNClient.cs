@@ -163,14 +163,14 @@ namespace SteamKit2
         /// The optional CellID used to specify which regional servers should be returned in the list.
         /// If this parameter is not specified, Steam's GeoIP suggested CellID will be used instead.
         /// </param>
+        /// <param name="maxServers">The maximum amount of servers to request.</param>
         /// <returns>A list of servers.</returns>
-        /// <exception cref="System.InvalidOperationException">No Steam CS servers available, or the suggested CellID is unavailable.
+        /// <exception cref="System.InvalidOperationException">
+        /// No Steam CS servers available, or the suggested CellID is unavailable.
         /// Check that the <see cref="SteamClient"/> associated with this <see cref="CDNClient"/> instance is logged onto Steam.
         /// </exception>
-        public List<Server> FetchServerList( IPEndPoint csServer = null, uint? cellId = null )
+        public List<Server> FetchServerList( IPEndPoint csServer = null, uint? cellId = null, int maxServers = 20 )
         {
-            const int SERVERS_TO_REQUEST = 20;
-
             DebugLog.Assert( steamClient.IsConnected, "CDNClient", "CMClient is not connected!" );
             DebugLog.Assert( steamClient.CellID != null, "CDNClient", "CMClient is not logged on!" );
 
@@ -198,9 +198,9 @@ namespace SteamKit2
                 cellId = steamClient.CellID.Value;
             }
 
-            KeyValue serverKv = DoCommand( csServer, "serverlist", args: string.Format( "{0}/{1}/", cellId, SERVERS_TO_REQUEST ) );
+            KeyValue serverKv = DoCommand( csServer, "serverlist", args: string.Format( "{0}/{1}/", cellId, maxServers ) );
 
-            var serverList = new List<Server>( SERVERS_TO_REQUEST );
+            var serverList = new List<Server>( maxServers );
 
             if ( serverKv[ "deferred" ].AsBoolean() )
             {
