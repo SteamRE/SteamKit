@@ -36,6 +36,20 @@ namespace SteamKit2
             /// </summary>
             public string Type { get; internal set; }
 
+            /// <summary>
+            /// Gets the CellID this server belongs to.
+            /// </summary>
+            public uint CellID { get; internal set; }
+
+            /// <summary>
+            /// Gets the load value associated with this server.
+            /// </summary>
+            public int Load { get; internal set; }
+            /// <summary>
+            /// Gets the weighted load.
+            /// </summary>
+            public int WeightedLoad { get; internal set; }
+
 
             /// <summary>
             /// Performs an implicit conversion from <see cref="System.Net.IPEndPoint"/> to <see cref="SteamKit2.CDNClient.Server"/>.
@@ -51,6 +65,18 @@ namespace SteamKit2
                     Host = endPoint.Address.ToString(),
                     Port = endPoint.Port,
                 };
+            }
+
+
+            /// <summary>
+            /// Returns a <see cref="System.String" /> that represents this server.
+            /// </summary>
+            /// <returns>
+            /// A <see cref="System.String" /> that represents this server.
+            /// </returns>
+            public override string ToString()
+            {
+                return string.Format( "{0}:{1} ({2})", Host, Port, Type );
             }
         }
 
@@ -224,12 +250,21 @@ namespace SteamKit2
                     }
                 }
 
+                uint serverCell = ( uint )server[ "cell" ].AsInteger();
+                int load = server[ "load" ].AsInteger();
+                int weightedLoad = server[ "weightedload" ].AsInteger();
+
                 serverList.Add( new Server
                 {
                     Host = host,
                     Port = port,
 
                     Type = type,
+
+                    CellID = serverCell,
+
+                    Load = load,
+                    WeightedLoad = weightedLoad,
                 } );
             }
 
