@@ -116,22 +116,22 @@ namespace NetHookAnalyzer
                         DumpType( gc, gcBodyNode );
                     }
                 }
-				else if ( body is CMsgClientServiceMethod )
-				{
-					var request = body as CMsgClientServiceMethod;
-					var name = request.method_name;
+                else if ( body is CMsgClientServiceMethod )
+                {
+                    var request = body as CMsgClientServiceMethod;
+                    var name = request.method_name;
 
-					var serviceBody = BuildServiceMethodBody( request.method_name, request.serialized_method, x => x.GetParameters().First().ParameterType );
-					DumpType( serviceBody, serviceMethodNode );
-				}
-				else if ( body is CMsgClientServiceMethodResponse )
-				{
-					var response = body as CMsgClientServiceMethodResponse;
-					var name = response.method_name;
+                    var serviceBody = BuildServiceMethodBody( request.method_name, request.serialized_method, x => x.GetParameters().First().ParameterType );
+                    DumpType( serviceBody, serviceMethodNode );
+                }
+                else if ( body is CMsgClientServiceMethodResponse )
+                {
+                    var response = body as CMsgClientServiceMethodResponse;
+                    var name = response.method_name;
 
-					var serviceBody = BuildServiceMethodBody( response.method_name, response.serialized_method_response, x => x.ReturnType );
-					DumpType( serviceBody, serviceMethodNode );
-				}
+                    var serviceBody = BuildServiceMethodBody( response.method_name, response.serialized_method_response, x => x.ReturnType );
+                    DumpType( serviceBody, serviceMethodNode );
+                }
 
                 DumpType( payload, payloadNode );
 
@@ -140,53 +140,53 @@ namespace NetHookAnalyzer
                 treePacket.Nodes.Add( bodyNode );
                 treePacket.Nodes.Add( gcBodyNode );
                 treePacket.Nodes.Add( payloadNode );
-				treePacket.Nodes.Add( serviceMethodNode );
+                treePacket.Nodes.Add( serviceMethodNode );
             }
 
             treePacket.ExpandAll();
         }
 
-		static object BuildServiceMethodBody( string methodName, byte[] methodData, Func<MethodInfo, Type> typeSelector )
-		{
-			var methodInfo = FindMethodInfo( methodName );
-			if ( methodInfo != null )
-			{
-				using ( var ms = new MemoryStream( methodData ) )
-				{
-					var requestType = typeSelector( methodInfo );
-					var request = RuntimeTypeModel.Default.Deserialize( ms, null, requestType );
-					return request;
-				}
-			}
+        static object BuildServiceMethodBody( string methodName, byte[] methodData, Func<MethodInfo, Type> typeSelector )
+        {
+            var methodInfo = FindMethodInfo( methodName );
+            if ( methodInfo != null )
+            {
+                using ( var ms = new MemoryStream( methodData ) )
+                {
+                    var requestType = typeSelector( methodInfo );
+                    var request = RuntimeTypeModel.Default.Deserialize( ms, null, requestType );
+                    return request;
+                }
+            }
 
-			return null;
-		}
+            return null;
+        }
 
-		static MethodInfo FindMethodInfo( string serviceMethodName )
-		{
-			var interfaceName = "I" + serviceMethodName.Split( '.' ).First();
-			var methodName = serviceMethodName.Split( '.' )[1].Split( '#' ).First();
+        static MethodInfo FindMethodInfo( string serviceMethodName )
+        {
+            var interfaceName = "I" + serviceMethodName.Split( '.' ).First();
+            var methodName = serviceMethodName.Split( '.' )[1].Split( '#' ).First();
 
-			var namespaces = new[]
-			{
-				"SteamKit2.Unified.Internal"
-			};
+            var namespaces = new[]
+            {
+                "SteamKit2.Unified.Internal"
+            };
 
-			foreach ( var ns in namespaces )
-			{
-				var interfaceType = Type.GetType( ns + "." + interfaceName + ", SteamKit2" );
-				if ( interfaceType != null )
-				{
-					var method = interfaceType.GetMethod( methodName );
-					if ( method != null )
-					{
-						return method;
-					}
-				}
-			}
+            foreach ( var ns in namespaces )
+            {
+                var interfaceType = Type.GetType( ns + "." + interfaceName + ", SteamKit2" );
+                if ( interfaceType != null )
+                {
+                    var method = interfaceType.GetMethod( methodName );
+                    if ( method != null )
+                    {
+                        return method;
+                    }
+                }
+            }
 
-			return null;
-		}
+            return null;
+        }
 
         string BuildEMsg( uint eMsg )
         {
