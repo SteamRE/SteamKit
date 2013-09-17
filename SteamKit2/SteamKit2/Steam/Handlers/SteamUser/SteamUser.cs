@@ -46,7 +46,17 @@ namespace SteamKit2
             /// Gets or sets the account instance. 1 for the PC instance or 2 for the Console (PS3) instance.
             /// </summary>
             /// <value>The account instance.</value>
+            /// <seealso cref="SteamKit2.SteamID.DesktopInstance"/>
+            /// <seealso cref="SteamKit2.SteamID.ConsoleInstance"/>
             public uint AccountInstance { get; set; }
+            /// <summary>
+            /// Gets or sets the account ID used for connecting clients when using the Console instance.
+            /// </summary>
+            /// <value>
+            /// The account ID.
+            /// </value>
+            /// <seealso cref="LogOnDetails.AccountInstance"/>
+            public uint AccountID { get; set; }
 
             /// <summary>
             /// Gets or sets a value indicating whether to request the Steam2 ticket.
@@ -63,7 +73,8 @@ namespace SteamKit2
             /// </summary>
             public LogOnDetails()
             {
-                AccountInstance = 1; // use the default pc steam instance
+                AccountInstance = SteamID.DesktopInstance; // use the default pc steam instance
+                AccountID = 0;
             }
         }
 
@@ -191,7 +202,7 @@ namespace SteamKit2
 
             var logon = new ClientMsgProtobuf<CMsgClientLogon>( EMsg.ClientLogon );
 
-            SteamID steamId = new SteamID( 0, details.AccountInstance, Client.ConnectedUniverse, EAccountType.Individual );
+            SteamID steamId = new SteamID( details.AccountID, details.AccountInstance, Client.ConnectedUniverse, EAccountType.Individual );
 
             uint localIp = NetHelpers.GetIPAddress( this.Client.LocalIP );
 
