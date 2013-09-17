@@ -15,7 +15,7 @@ namespace SteamKit2
     /// <summary>
     /// The CDNClient class is used for downloading game content from the Steam servers.
     /// </summary>
-    public sealed class CDNClient : IDisposable
+    public sealed class CDNClient
     {
         /// <summary>
         /// Represents a single Steam3 'Steampipe' content server.
@@ -131,8 +131,6 @@ namespace SteamKit2
 
         SteamClient steamClient;
 
-        WebClient webClient;
-
         byte[] appTicket;
         uint depotId;
         byte[] depotKey;
@@ -173,8 +171,6 @@ namespace SteamKit2
             this.depotId = depotId;
             this.appTicket = appTicket;
             this.depotKey = depotKey;
-
-            webClient = new WebClient();
         }
 
 
@@ -382,15 +378,6 @@ namespace SteamKit2
 
 
 
-        /// <summary>
-        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
-        /// </summary>
-        public void Dispose()
-        {
-            webClient.Dispose();
-        }
-
-
         string BuildCommand( Server server, string command, string args )
         {
             return string.Format( "http://{0}:{1}/{2}/{3}", server.Host, server.Port, command, args );
@@ -400,47 +387,50 @@ namespace SteamKit2
         {
             string url = BuildCommand( server, command, args );
 
-            webClient.Headers.Clear();
-
-            if ( doAuth )
+            using ( var webClient = new WebClient() )
             {
-                reqCounter++;
+                webClient.Headers.Clear();
 
-                byte[] shaHash;
-
-                using ( var ms = new MemoryStream() )
-                using ( var bw = new BinaryWriter( ms ) )
+                if ( doAuth )
                 {
-                    var uri = new Uri( url );
+                    reqCounter++;
 
-                    bw.Write( sessionId );
-                    bw.Write( reqCounter );
-                    bw.Write( sessionKey );
-                    bw.Write( Encoding.ASCII.GetBytes( uri.AbsolutePath ) );
+                    byte[] shaHash;
 
-                    shaHash = CryptoHelper.SHAHash( ms.ToArray() );
+                    using ( var ms = new MemoryStream() )
+                    using ( var bw = new BinaryWriter( ms ) )
+                    {
+                        var uri = new Uri( url );
+
+                        bw.Write( sessionId );
+                        bw.Write( reqCounter );
+                        bw.Write( sessionKey );
+                        bw.Write( Encoding.ASCII.GetBytes( uri.AbsolutePath ) );
+
+                        shaHash = CryptoHelper.SHAHash( ms.ToArray() );
+                    }
+
+                    string hexHash = Utils.EncodeHexString( shaHash );
+                    string authHeader = string.Format( "sessionid={0};req-counter={1};hash={2};", sessionId, reqCounter, hexHash );
+
+                    webClient.Headers[ "x-steam-auth" ] = authHeader;
                 }
 
-                string hexHash = Utils.EncodeHexString( shaHash );
-                string authHeader = string.Format( "sessionid={0};req-counter={1};hash={2};", sessionId, reqCounter, hexHash );
+                byte[] resultData = null;
 
-                webClient.Headers[ "x-steam-auth" ] = authHeader;
+                if ( method == WebRequestMethods.Http.Get )
+                {
+                    resultData = webClient.DownloadData( url );
+                }
+                else if ( method == WebRequestMethods.Http.Post )
+                {
+                    webClient.Headers[ HttpRequestHeader.ContentType ] = "application/x-www-form-urlencoded";
+
+                    resultData = webClient.UploadData( url, Encoding.ASCII.GetBytes( data ) );
+                }
+
+                return resultData;
             }
-
-            byte[] resultData = null;
-
-            if ( method == WebRequestMethods.Http.Get )
-            {
-                resultData = webClient.DownloadData( url );
-            }
-            else if ( method == WebRequestMethods.Http.Post )
-            {
-                webClient.Headers[ HttpRequestHeader.ContentType ] = "application/x-www-form-urlencoded";
-
-                resultData = webClient.UploadData( url, Encoding.ASCII.GetBytes( data ) );
-            }
-
-            return resultData;
         }
         KeyValue DoCommand( Server server, string command, string data = null, string method = WebRequestMethods.Http.Get, bool doAuth = false, string args = "" )
         {
