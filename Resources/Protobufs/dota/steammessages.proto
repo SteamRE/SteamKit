@@ -107,6 +107,7 @@ message CMsgAMGetLicenses {
 message CMsgPackageLicense {
 	optional uint32 package_id = 1;
 	optional uint32 time_created = 2;
+	optional uint32 owner_id = 3;
 }
 
 message CMsgAMGetLicensesResponse {

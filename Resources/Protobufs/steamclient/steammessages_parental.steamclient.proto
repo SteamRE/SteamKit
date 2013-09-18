@@ -16,6 +16,7 @@ message ParentalSettings {
 	optional bytes salt = 7;
 	optional bytes passwordhash = 8;
 	optional bool is_enabled = 9;
+	optional uint32 enabled_features = 10;
 }
 
 message CParental_EnableParentalSettings_Request {
