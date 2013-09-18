@@ -409,6 +409,7 @@ message CEconItemPreviewDataBlock {
 	optional uint32 paintseed = 8;
 	optional uint32 killeaterscoretype = 9;
 	optional uint32 killeatervalue = 10;
+	optional string customname = 11;
 }
 
 message CMsgGCCStrike15_v2_MatchEndRewardDropsNotification {

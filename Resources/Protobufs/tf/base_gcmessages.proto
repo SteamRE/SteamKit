@@ -459,3 +459,8 @@ message CMsgSetHatEffectUseHeadOrigin {
 	optional bool use_head = 2;
 }
 
+message CMsgUseItemEaterRecharger {
+	optional uint64 tool_item_id = 1;
+	optional uint64 subject_item_id = 2;
+}
+

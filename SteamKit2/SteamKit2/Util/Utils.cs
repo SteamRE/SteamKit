@@ -94,7 +94,7 @@ namespace SteamKit2
                                     return EOSType.WinVista;
 
                                 if ( ver.Minor == 1 )
-                                    return EOSType.Win7;
+                                    return EOSType.Windows7;
 
                                 goto default;
 
@@ -335,29 +335,6 @@ namespace SteamKit2
         public static ushort EndianSwap( ushort input )
         {
             return ( ushort )IPAddress.NetworkToHostOrder( ( short )input );
-        }
-    }
-
-    class TimeoutableWebClient : WebClient
-    {
-        public int Timeout { get; set; }
-
-
-        public TimeoutableWebClient()
-        {
-            // msdn docs state that the default timeout of a HttpWebRequest is 100,000 milliseconds (100 sec)
-            Timeout = 100000;
-        }
-
-
-        protected override WebRequest GetWebRequest( Uri address )
-        {
-            var webReq = base.GetWebRequest( address );
-
-            if ( webReq != null )
-                webReq.Timeout = Timeout;
-
-            return webReq;
         }
     }
 }

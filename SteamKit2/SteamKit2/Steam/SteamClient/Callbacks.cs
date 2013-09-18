@@ -7,6 +7,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Net;
 using System.Linq;
+using System.Collections.Generic;
 using SteamKit2.Internal;
 
 namespace SteamKit2
@@ -120,6 +121,27 @@ namespace SteamKit2
                     .Zip( cmMsg.cm_ports, ( addr, port ) => new IPEndPoint( NetHelpers.GetIPAddress( addr ), ( int )port ) );
 
                 Servers = new ReadOnlyCollection<IPEndPoint>( cmList.ToList() );
+            }
+        }
+
+        /// <summary>
+        /// This callback is fired when the client receives a list of all publically available Steam3 servers.
+        /// This callback may be fired multiple times for different server lists.
+        /// </summary>
+        public sealed class ServerListCallback : CallbackMsg
+        {
+            /// <summary>
+            /// Gets the server list.
+            /// </summary>
+            public Dictionary<EServerType, ReadOnlyCollection<IPEndPoint>> Servers { get; private set; }
+
+
+            internal ServerListCallback( CMsgClientServerList serverList )
+            {
+                Servers = serverList.servers
+                    .Select( s => new { Type = ( EServerType )s.server_type, EndPoint = new IPEndPoint( NetHelpers.GetIPAddress( s.server_ip ), ( int )s.server_port ) } )
+                    .GroupBy( s => s.Type )
+                    .ToDictionary( grp => grp.Key, grp => new ReadOnlyCollection<IPEndPoint>( grp.Select( s => s.EndPoint ).ToList() ) );
             }
         }
     }

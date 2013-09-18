@@ -55,6 +55,12 @@ namespace SteamKit2.Internal
         public ulong SessionToken { get; private set; }
 
         /// <summary>
+        /// Gets the Steam recommended Cell ID of this client. This value is assigned after a logon attempt has succeeded.
+        /// This value will be <c>null</c> if the client is logged off of Steam.
+        /// </summary>
+        public uint? CellID { get; private set; }
+
+        /// <summary>
         /// Gets the session ID of this client. This value is assigned after a logon attempt has succeeded.
         /// This value will be <c>null</c> if the client is logged off of Steam.
         /// </summary>
@@ -408,6 +414,8 @@ namespace SteamKit2.Internal
                 SessionID = logonResp.ProtoHeader.client_sessionid;
                 SteamID = logonResp.ProtoHeader.steamid;
 
+                CellID = logonResp.Body.cell_id;
+
                 int hbDelay = logonResp.Body.out_of_game_heartbeat_seconds;
 
                 // restart heartbeat
@@ -469,6 +477,8 @@ namespace SteamKit2.Internal
         {
             SessionID = null;
             SteamID = null;
+
+            CellID = null;
 
             heartBeatFunc.Stop();
         }

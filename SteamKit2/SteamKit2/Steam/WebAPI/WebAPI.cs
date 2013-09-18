@@ -23,8 +23,6 @@ namespace SteamKit2
             // stop WebClient from inserting this header into requests
             // the backend doesn't like it
             ServicePointManager.Expect100Continue = false;
-
-            // todo: perhaps toggle this per request instead of globally disabling it?
         }
 
         /// <summary>
