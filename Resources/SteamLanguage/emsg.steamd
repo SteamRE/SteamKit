@@ -1442,9 +1442,13 @@ enum EMsg
 	
 	ClientAuthorizeLocalDeviceRequest = 6501;
 	ClientAuthorizeLocalDevice = 6502;
-	ClientDeauthorizeLocalDeviceRequest = 6503;
-	ClientDeauthorizeLocalDevice = 6504;
+	ClientDeauthorizeLocalDeviceRequest = 6503; obsolete "renamed to ClientDeauthorizeDeviceRequest"
+	ClientDeauthorizeLocalDevice = 6504; obsolete "renamed to ClientDeauthorizeDevice"
+	ClientDeauthorizeDeviceRequest = 6503;
+	ClientDeauthorizeDevice = 6504;
 	ClientUseLocalDeviceAuthorizations = 6505;
+	ClientGetAuthorizedDevices = 6506;
+	ClientGetAuthorizedDevicesResponse = 6507;
 	
 	MMSBase = 6600;
 	ClientMMSCreateLobby = 6601;
@@ -1586,6 +1590,7 @@ enum EMsg
 	ClientUCMEnumerateUserSubscribedFilesWithUpdates = 7378;
 	ClientUCMEnumerateUserSubscribedFilesWithUpdatesResponse = 7379;
 	UCMPublishedFileContentUpdated = 7380;
+	UCMPublishedFileUpdated = 7381;
 	
 	FSBase = 7500;
 	ClientRichPresenceUpload = 7501;
@@ -1773,8 +1778,10 @@ enum EMsg
 	ClientGetEmoticonList = 9330;
 	ClientEmoticonList = 9331;
 	
-	ClientSharedLicenses = 9400;
-	ClientSharedLicensesLockStatus = 9403;
-	ClientSharedLicensesStopPlaying = 9404;
+	ClientSharedLibraryBase = 9400;
+	ClientSharedLicensesLockStatus = 9403; obsolete
+	ClientSharedLicensesStopPlaying = 9404; obsolete
+	ClientSharedLibraryLockStatus = 9405;
+	ClientSharedLibraryStopPlaying = 9406;
 
 };

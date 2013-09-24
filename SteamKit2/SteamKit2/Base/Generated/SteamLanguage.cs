@@ -1441,9 +1441,15 @@ namespace SteamKit2
 		GameServerOutOfDate = 6407,
 		ClientAuthorizeLocalDeviceRequest = 6501,
 		ClientAuthorizeLocalDevice = 6502,
+		[Obsolete( "renamed to ClientDeauthorizeDeviceRequest" )]
 		ClientDeauthorizeLocalDeviceRequest = 6503,
+		[Obsolete( "renamed to ClientDeauthorizeDevice" )]
 		ClientDeauthorizeLocalDevice = 6504,
+		ClientDeauthorizeDeviceRequest = 6503,
+		ClientDeauthorizeDevice = 6504,
 		ClientUseLocalDeviceAuthorizations = 6505,
+		ClientGetAuthorizedDevices = 6506,
+		ClientGetAuthorizedDevicesResponse = 6507,
 		MMSBase = 6600,
 		ClientMMSCreateLobby = 6601,
 		ClientMMSCreateLobbyResponse = 6602,
@@ -1579,6 +1585,7 @@ namespace SteamKit2
 		ClientUCMEnumerateUserSubscribedFilesWithUpdates = 7378,
 		ClientUCMEnumerateUserSubscribedFilesWithUpdatesResponse = 7379,
 		UCMPublishedFileContentUpdated = 7380,
+		UCMPublishedFileUpdated = 7381,
 		FSBase = 7500,
 		ClientRichPresenceUpload = 7501,
 		ClientRichPresenceRequest = 7502,
@@ -1746,9 +1753,13 @@ namespace SteamKit2
 		TestWorkerProcessServiceModuleCallResponse = 9203,
 		ClientGetEmoticonList = 9330,
 		ClientEmoticonList = 9331,
-		ClientSharedLicenses = 9400,
+		ClientSharedLibraryBase = 9400,
+		[Obsolete]
 		ClientSharedLicensesLockStatus = 9403,
+		[Obsolete]
 		ClientSharedLicensesStopPlaying = 9404,
+		ClientSharedLibraryLockStatus = 9405,
+		ClientSharedLibraryStopPlaying = 9406,
 	}
 	public enum EResult
 	{

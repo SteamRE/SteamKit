@@ -26,7 +26,7 @@ enum ECsgoGCMsg {
 	k_EMsgGCCStrike15_v2_ClientReportResponse = 9122;
 	k_EMsgGCCStrike15_v2_ClientCommendPlayerQuery = 9123;
 	k_EMsgGCCStrike15_v2_ClientCommendPlayerQueryResponse = 9124;
-	k_EMsgGCCStrike15_v2_ClientRequestWatchInfoFriends = 9125;
+	k_EMsgGCCStrike15_v2_ClientRequestWatchInfoFriends_Obsolete = 9125;
 	k_EMsgGCCStrike15_v2_WatchInfoUsers = 9126;
 	k_EMsgGCCStrike15_v2_ClientRequestPlayersProfile = 9127;
 	k_EMsgGCCStrike15_v2_PlayersProfile = 9128;
@@ -39,6 +39,7 @@ enum ECsgoGCMsg {
 	k_EMsgGCCStrike15_v2_Client2GCTextMsg = 9135;
 	k_EMsgGCCStrike15_v2_MatchEndRunRewardDrops = 9136;
 	k_EMsgGCCStrike15_v2_MatchEndRewardDropsNotification = 9137;
+	k_EMsgGCCStrike15_v2_ClientRequestWatchInfoFriends2 = 9138;
 }
 
 message GameServerPing {

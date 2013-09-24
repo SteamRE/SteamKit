@@ -477,7 +477,6 @@ message CMsgClientFriendProfileInfoResponse {
 	optional string country_name = 7;
 	optional string headline = 8;
 	optional string summary = 9;
-	optional uint32 recent_playtime = 10;
 }
 
 message CMsgClientServerList {
@@ -1497,6 +1496,7 @@ message CMsgClientUCMGetPublishedFileDetailsResponse {
 	optional uint32 preview_file_size = 17;
 	optional string url = 18;
 	optional uint32 file_type = 19;
+	optional bool accepted_for_use = 20;
 }
 
 message CMsgClientUCMDeletePublishedFile {
@@ -2596,11 +2596,12 @@ message CMsgClientAuthorizeLocalDevice {
 	optional uint64 authed_device_token = 3;
 }
 
-message CMsgClientDeauthorizeLocalDeviceRequest {
+message CMsgClientDeauthorizeDeviceRequest {
 	optional uint32 deauthorization_account_id = 1;
+	optional uint64 deauthorization_device_token = 2;
 }
 
-message CMsgClientDeauthorizeLocalDevice {
+message CMsgClientDeauthorizeDevice {
 	optional int32 eresult = 1 [default = 2];
 	optional uint32 deauthorization_account_id = 2;
 }

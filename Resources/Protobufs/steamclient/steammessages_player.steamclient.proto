@@ -133,7 +133,7 @@ service Player {
 		option (method_description) = "Gets information about a player's recently played games";
 	}
 	rpc GetOwnedGames (.CPlayer_GetOwnedGames_Request) returns (.CPlayer_GetOwnedGames_Response) {
-		option (method_description) = "Similar to GetOwnedApps, but designed for WebAPI users";
+		option (method_description) = "Return a list of games owned by the player";
 	}
 	rpc GetSteamLevel (.CPlayer_GetSteamLevel_Request) returns (.CPlayer_GetSteamLevel_Response) {
 		option (method_description) = "Returns the Steam Level of a user";
