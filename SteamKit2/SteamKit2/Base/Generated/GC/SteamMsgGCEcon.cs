@@ -284,35 +284,8 @@ namespace SteamKit2.GC.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCTrading_StartSession", Value=1503)]
       k_EMsgGCTrading_StartSession = 1503,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCTrading_SetItem", Value=1504)]
-      k_EMsgGCTrading_SetItem = 1504,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCTrading_RemoveItem", Value=1505)]
-      k_EMsgGCTrading_RemoveItem = 1505,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCTrading_UpdateTradeInfo", Value=1506)]
-      k_EMsgGCTrading_UpdateTradeInfo = 1506,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCTrading_SetReadiness", Value=1507)]
-      k_EMsgGCTrading_SetReadiness = 1507,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCTrading_ReadinessResponse", Value=1508)]
-      k_EMsgGCTrading_ReadinessResponse = 1508,
-            
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCTrading_SessionClosed", Value=1509)]
       k_EMsgGCTrading_SessionClosed = 1509,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCTrading_CancelSession", Value=1510)]
-      k_EMsgGCTrading_CancelSession = 1510,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCTrading_TradeChatMsg", Value=1511)]
-      k_EMsgGCTrading_TradeChatMsg = 1511,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCTrading_ConfirmOffer", Value=1512)]
-      k_EMsgGCTrading_ConfirmOffer = 1512,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCTrading_TradeTypingChatMsg", Value=1513)]
-      k_EMsgGCTrading_TradeTypingChatMsg = 1513,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCServerBrowser_FavoriteServer", Value=1601)]
       k_EMsgGCServerBrowser_FavoriteServer = 1601,

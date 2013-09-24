@@ -62,7 +62,16 @@ namespace SteamKit2.GC.Dota.Internal
       MATCH_LANGUAGE_RUSSIAN = 2,
             
       [global::ProtoBuf.ProtoEnum(Name=@"MATCH_LANGUAGE_CHINESE", Value=3)]
-      MATCH_LANGUAGE_CHINESE = 3
+      MATCH_LANGUAGE_CHINESE = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"MATCH_LANGUAGE_KOREAN", Value=4)]
+      MATCH_LANGUAGE_KOREAN = 4,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"MATCH_LANGUAGE_SPANISH", Value=5)]
+      MATCH_LANGUAGE_SPANISH = 5,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"MATCH_LANGUAGE_PORTUGUESE", Value=6)]
+      MATCH_LANGUAGE_PORTUGUESE = 6
     }
   
 }

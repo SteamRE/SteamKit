@@ -213,6 +213,12 @@ namespace SteamKit2.GC.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgMasterSetClientMsgRoutingResponse", Value=225)]
       k_EGCMsgMasterSetClientMsgRoutingResponse = 225,
             
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgSetOptions", Value=226)]
+      k_EGCMsgSetOptions = 226,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgSetOptionsResponse", Value=227)]
+      k_EGCMsgSetOptionsResponse = 227,
+            
       [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgSystemBase2", Value=500)]
       k_EGCMsgSystemBase2 = 500,
             
@@ -257,11 +263,11 @@ namespace SteamKit2.GC.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"k_ESOMsg_UpdateMultiple", Value=26)]
       k_ESOMsg_UpdateMultiple = 26,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"k_ESOMsg_CacheSubscriptionCheck", Value=27)]
-      k_ESOMsg_CacheSubscriptionCheck = 27,
-            
       [global::ProtoBuf.ProtoEnum(Name=@"k_ESOMsg_CacheSubscriptionRefresh", Value=28)]
-      k_ESOMsg_CacheSubscriptionRefresh = 28
+      k_ESOMsg_CacheSubscriptionRefresh = 28,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_ESOMsg_CacheSubscribedUpToDate", Value=29)]
+      k_ESOMsg_CacheSubscribedUpToDate = 29
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"EGCBaseClientMsg")]
@@ -313,7 +319,13 @@ namespace SteamKit2.GC.Internal
       k_EMsgRequestSessionIPResponse = 156,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EGCToGCMsgMasterStartupComplete", Value=157)]
-      k_EGCToGCMsgMasterStartupComplete = 157
+      k_EGCToGCMsgMasterStartupComplete = 157,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCSOCacheSubscribe", Value=158)]
+      k_EMsgGCToGCSOCacheSubscribe = 158,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCSOCacheUnsubscribe", Value=159)]
+      k_EMsgGCToGCSOCacheUnsubscribe = 159
     }
   
 }

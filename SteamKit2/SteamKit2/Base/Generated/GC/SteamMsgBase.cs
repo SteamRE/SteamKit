@@ -586,6 +586,15 @@ namespace SteamKit2.GC.Internal
       get { return _time_created; }
       set { _time_created = value; }
     }
+
+    private uint _owner_id = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"owner_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint owner_id
+    {
+      get { return _owner_id; }
+      set { _owner_id = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -2471,6 +2480,71 @@ namespace SteamKit2.GC.Internal
       get { return _eresult; }
       set { _eresult = value; }
     }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCMsgSetOptions")]
+  public partial class CMsgGCMsgSetOptions : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCMsgSetOptions() {}
+    
+    private readonly global::System.Collections.Generic.List<CMsgGCMsgSetOptions.Option> _options = new global::System.Collections.Generic.List<CMsgGCMsgSetOptions.Option>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"options", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public global::System.Collections.Generic.List<CMsgGCMsgSetOptions.Option> options
+    {
+      get { return _options; }
+    }
+  
+    private readonly global::System.Collections.Generic.List<CMsgGCMsgSetOptions.MessageRange> _client_msg_ranges = new global::System.Collections.Generic.List<CMsgGCMsgSetOptions.MessageRange>();
+    [global::ProtoBuf.ProtoMember(2, Name=@"client_msg_ranges", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CMsgGCMsgSetOptions.MessageRange> client_msg_ranges
+    {
+      get { return _client_msg_ranges; }
+    }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"MessageRange")]
+  public partial class MessageRange : global::ProtoBuf.IExtensible
+  {
+    public MessageRange() {}
+    
+    private uint _low;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"low", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint low
+    {
+      get { return _low; }
+      set { _low = value; }
+    }
+    private uint _high;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"high", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint high
+    {
+      get { return _high; }
+      set { _high = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"Option")]
+    public enum Option
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"NOTIFY_USER_SESSIONS", Value=0)]
+      NOTIFY_USER_SESSIONS = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"NOTIFY_SERVER_SESSIONS", Value=1)]
+      NOTIFY_SERVER_SESSIONS = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"NOTIFY_ACHIEVEMENTS", Value=2)]
+      NOTIFY_ACHIEVEMENTS = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"NOTIFY_VAC_ACTION", Value=3)]
+      NOTIFY_VAC_ACTION = 3
+    }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

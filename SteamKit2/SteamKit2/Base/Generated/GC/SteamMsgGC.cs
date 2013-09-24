@@ -373,6 +373,25 @@ namespace SteamKit2.GC.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgLANServerAvailable")]
+  public partial class CMsgLANServerAvailable : global::ProtoBuf.IExtensible
+  {
+    public CMsgLANServerAvailable() {}
+    
+
+    private ulong _lobby_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"lobby_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong lobby_id
+    {
+      get { return _lobby_id; }
+      set { _lobby_id = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CSOEconGameAccountClient")]
   public partial class CSOEconGameAccountClient : global::ProtoBuf.IExtensible
   {
@@ -586,15 +605,6 @@ namespace SteamKit2.GC.Internal
     {
       get { return _initial_quantity; }
       set { _initial_quantity = value; }
-    }
-
-    private bool _forced_quality_match = default(bool);
-    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"forced_quality_match", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
-    public bool forced_quality_match
-    {
-      get { return _forced_quality_match; }
-      set { _forced_quality_match = value; }
     }
 
     private bool _ignore_enabled_flag = default(bool);
@@ -2399,115 +2409,6 @@ namespace SteamKit2.GC.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CSOEconItemHalloweenEgg")]
-  public partial class CSOEconItemHalloweenEgg : global::ProtoBuf.IExtensible
-  {
-    public CSOEconItemHalloweenEgg() {}
-    
-
-    private uint _account_id = default(uint);
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint account_id
-    {
-      get { return _account_id; }
-      set { _account_id = value; }
-    }
-
-    private ulong _item_id = default(ulong);
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"item_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
-    public ulong item_id
-    {
-      get { return _item_id; }
-      set { _item_id = value; }
-    }
-
-    private uint _unusual_power = default(uint);
-    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"unusual_power", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint unusual_power
-    {
-      get { return _unusual_power; }
-      set { _unusual_power = value; }
-    }
-
-    private uint _red_power = default(uint);
-    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"red_power", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint red_power
-    {
-      get { return _red_power; }
-      set { _red_power = value; }
-    }
-
-    private uint _yellow_power = default(uint);
-    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"yellow_power", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint yellow_power
-    {
-      get { return _yellow_power; }
-      set { _yellow_power = value; }
-    }
-
-    private uint _blue_power = default(uint);
-    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"blue_power", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint blue_power
-    {
-      get { return _blue_power; }
-      set { _blue_power = value; }
-    }
-
-    private uint _orange_power = default(uint);
-    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"orange_power", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint orange_power
-    {
-      get { return _orange_power; }
-      set { _orange_power = value; }
-    }
-
-    private uint _purple_power = default(uint);
-    [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"purple_power", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint purple_power
-    {
-      get { return _purple_power; }
-      set { _purple_power = value; }
-    }
-
-    private uint _green_power = default(uint);
-    [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"green_power", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint green_power
-    {
-      get { return _green_power; }
-      set { _green_power = value; }
-    }
-
-    private uint _black_power = default(uint);
-    [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"black_power", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint black_power
-    {
-      get { return _black_power; }
-      set { _black_power = value; }
-    }
-
-    private uint _skin = default(uint);
-    [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"skin", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint skin
-    {
-      get { return _skin; }
-      set { _skin = value; }
-    }
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCItemPreviewItemBoughtNotification")]
   public partial class CMsgGCItemPreviewItemBoughtNotification : global::ProtoBuf.IExtensible
   {
@@ -3092,7 +2993,10 @@ namespace SteamKit2.GC.Internal
       k_EMsgGCError = 4509,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCReplay_UploadedToYouTube", Value=4510)]
-      k_EMsgGCReplay_UploadedToYouTube = 4510
+      k_EMsgGCReplay_UploadedToYouTube = 4510,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCLANServerAvailable", Value=4511)]
+      k_EMsgGCLANServerAvailable = 4511
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"EGCBaseProtoObjectTypes")]
