@@ -15,6 +15,7 @@ enum EGCBaseMsg {
 	k_EMsgGCGameServerInfo = 4508;
 	k_EMsgGCError = 4509;
 	k_EMsgGCReplay_UploadedToYouTube = 4510;
+	k_EMsgGCLANServerAvailable = 4511;
 }
 
 enum EGCBaseProtoObjectTypes {
@@ -90,6 +91,10 @@ message CMsgLeaveParty {
 message CMsgServerAvailable {
 }
 
+message CMsgLANServerAvailable {
+	optional fixed64 lobby_id = 1;
+}
+
 message CSOEconGameAccountClient {
 	optional uint32 additional_backpack_slots = 1 [default = 0];
 	optional bool trial_account = 2 [default = false];
@@ -118,7 +123,6 @@ message CSOItemCriteria {
 	optional bool item_quality_set = 4;
 	optional uint32 initial_inventory = 5;
 	optional uint32 initial_quantity = 6;
-	optional bool forced_quality_match = 7;
 	optional bool ignore_enabled_flag = 8;
 	repeated .CSOItemCriteriaCondition conditions = 9;
 	optional bool recent_only = 10;
@@ -397,20 +401,6 @@ message CSOEconItemTournamentPassport {
 	optional uint32 version = 6;
 	optional uint32 def_index = 7;
 	optional uint32 reward_flags = 8;
-}
-
-message CSOEconItemHalloweenEgg {
-	optional uint32 account_id = 1 [(key_field) = true];
-	optional uint64 item_id = 2 [(key_field) = true];
-	optional uint32 unusual_power = 3;
-	optional uint32 red_power = 4;
-	optional uint32 yellow_power = 5;
-	optional uint32 blue_power = 6;
-	optional uint32 orange_power = 7;
-	optional uint32 purple_power = 8;
-	optional uint32 green_power = 9;
-	optional uint32 black_power = 10;
-	optional uint32 skin = 11;
 }
 
 message CMsgGCItemPreviewItemBoughtNotification {

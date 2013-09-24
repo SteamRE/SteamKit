@@ -73,6 +73,7 @@ enum EDOTAChatWheelMessage {
 	k_EDOTA_CW_My_Bad = 68;
 	k_EDOTA_CW_Regret = 69;
 	k_EDOTA_CW_Relax = 70;
+	k_EDOTA_CW_MissingHero = 71;
 }
 
 enum EDOTAStatPopupTypes {

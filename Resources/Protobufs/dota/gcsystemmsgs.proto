@@ -65,6 +65,8 @@ enum EGCSystemMsg {
 	k_EGCMsgMasterSetWebAPIRoutingResponse = 223;
 	k_EGCMsgMasterSetClientMsgRouting = 224;
 	k_EGCMsgMasterSetClientMsgRoutingResponse = 225;
+	k_EGCMsgSetOptions = 226;
+	k_EGCMsgSetOptionsResponse = 227;
 	k_EGCMsgSystemBase2 = 500;
 	k_EGCMsgGetPurchaseTrustStatus = 501;
 	k_EGCMsgGetPurchaseTrustStatusResponse = 502;
@@ -81,8 +83,8 @@ enum ESOMsg {
 	k_ESOMsg_CacheSubscribed = 24;
 	k_ESOMsg_CacheUnsubscribed = 25;
 	k_ESOMsg_UpdateMultiple = 26;
-	k_ESOMsg_CacheSubscriptionCheck = 27;
 	k_ESOMsg_CacheSubscriptionRefresh = 28;
+	k_ESOMsg_CacheSubscribedUpToDate = 29;
 }
 
 enum EGCBaseClientMsg {
@@ -103,5 +105,7 @@ enum EGCToGCMsg {
 	k_EMsgRequestSessionIP = 155;
 	k_EMsgRequestSessionIPResponse = 156;
 	k_EGCToGCMsgMasterStartupComplete = 157;
+	k_EMsgGCToGCSOCacheSubscribe = 158;
+	k_EMsgGCToGCSOCacheUnsubscribe = 159;
 }
 

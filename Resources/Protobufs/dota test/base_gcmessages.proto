@@ -15,6 +15,7 @@ enum EGCBaseMsg {
 	k_EMsgGCGameServerInfo = 4508;
 	k_EMsgGCError = 4509;
 	k_EMsgGCReplay_UploadedToYouTube = 4510;
+	k_EMsgGCLANServerAvailable = 4511;
 }
 
 enum EGCBaseProtoObjectTypes {
@@ -90,6 +91,10 @@ message CMsgLeaveParty {
 message CMsgServerAvailable {
 }
 
+message CMsgLANServerAvailable {
+	optional fixed64 lobby_id = 1;
+}
+
 message CSOEconGameAccountClient {
 	optional uint32 additional_backpack_slots = 1 [default = 0];
 	optional bool trial_account = 2 [default = false];
@@ -118,7 +123,6 @@ message CSOItemCriteria {
 	optional bool item_quality_set = 4;
 	optional uint32 initial_inventory = 5;
 	optional uint32 initial_quantity = 6;
-	optional bool forced_quality_match = 7;
 	optional bool ignore_enabled_flag = 8;
 	repeated .CSOItemCriteriaCondition conditions = 9;
 	optional bool recent_only = 10;

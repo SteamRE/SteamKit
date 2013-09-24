@@ -1,5 +1,11 @@
 import "steammessages.proto";
 
+enum PartnerAccountType {
+	PARTNER_NONE = 0;
+	PARTNER_PERFECT_WORLD = 1;
+	PARTNER_NEXON = 2;
+}
+
 enum GCConnectionStatus {
 	GCConnectionStatus_HAVE_SESSION = 0;
 	GCConnectionStatus_GC_GOING_DOWN = 1;
@@ -18,6 +24,7 @@ message CMsgSOSingleObject {
 	optional bytes object_data = 3;
 	optional fixed64 version = 4;
 	optional .CMsgSOIDOwner owner_soid = 5;
+	optional uint32 service_id = 6;
 }
 
 message CMsgSOMultipleObjects {
@@ -33,6 +40,7 @@ message CMsgSOMultipleObjects {
 	repeated .CMsgSOMultipleObjects.SingleObject objects_added = 4;
 	repeated .CMsgSOMultipleObjects.SingleObject objects_removed = 5;
 	optional .CMsgSOIDOwner owner_soid = 6;
+	optional uint32 service_id = 7;
 }
 
 message CMsgSOCacheSubscribed {
@@ -44,6 +52,17 @@ message CMsgSOCacheSubscribed {
 	repeated .CMsgSOCacheSubscribed.SubscribedType objects = 2;
 	optional fixed64 version = 3;
 	optional .CMsgSOIDOwner owner_soid = 4;
+	optional uint32 service_id = 5;
+	repeated uint32 service_list = 6;
+	optional fixed64 sync_version = 7;
+}
+
+message CMsgSOCacheSubscribedUpToDate {
+	optional fixed64 version = 1;
+	optional .CMsgSOIDOwner owner_soid = 2;
+	optional uint32 service_id = 3;
+	repeated uint32 service_list = 4;
+	optional fixed64 sync_version = 5;
 }
 
 message CMsgSOCacheUnsubscribed {
@@ -53,6 +72,9 @@ message CMsgSOCacheUnsubscribed {
 message CMsgSOCacheSubscriptionCheck {
 	optional fixed64 version = 2;
 	optional .CMsgSOIDOwner owner_soid = 3;
+	optional uint32 service_id = 4;
+	repeated uint32 service_list = 5;
+	optional fixed64 sync_version = 6;
 }
 
 message CMsgSOCacheSubscriptionRefresh {
@@ -129,13 +151,15 @@ message CMsgGCRequestSessionIPResponse {
 message CMsgSOCacheHaveVersion {
 	optional .CMsgSOIDOwner soid = 1;
 	optional fixed64 version = 2;
+	optional uint32 service_id = 3;
 }
 
 message CMsgClientHello {
 	optional uint32 version = 1;
 	repeated .CMsgSOCacheHaveVersion socache_have_versions = 2;
 	optional uint32 client_session_need = 3;
-	optional uint32 client_launcher = 4;
+	optional .PartnerAccountType client_launcher = 4 [default = PARTNER_NONE];
+	optional string secret_key = 5;
 }
 
 message CMsgClientWelcome {
@@ -159,5 +183,22 @@ message CMsgConnectionStatus {
 	optional int32 queue_size = 4;
 	optional int32 wait_seconds = 5;
 	optional int32 estimated_wait_seconds_remaining = 6;
+}
+
+message CMsgGCToGCSOCacheSubscribe {
+	message CMsgHaveVersions {
+		optional uint32 service_id = 1;
+		optional uint64 version = 2;
+	}
+
+	optional fixed64 subscriber = 1;
+	optional fixed64 subscribe_to = 2;
+	optional fixed64 sync_version = 3;
+	repeated .CMsgGCToGCSOCacheSubscribe.CMsgHaveVersions have_versions = 4;
+}
+
+message CMsgGCToGCSOCacheUnsubscribe {
+	optional fixed64 subscriber = 1;
+	optional fixed64 unsubscribe_from = 2;
 }
 

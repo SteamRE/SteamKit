@@ -1,6 +1,7 @@
 import "steammessages.proto";
 import "matchmaker_common.proto";
 import "dota_gcmessages_common.proto";
+import "gcsdk_gcmessages.proto";
 
 enum DOTAChatChannelType_t {
 	DOTAChannelType_Regional = 0;
@@ -227,6 +228,7 @@ message CMsgPracticeLobbySetDetails {
 	optional uint32 dire_series_wins = 22;
 	optional bool allchat = 23 [default = false];
 	optional .LobbyDotaTVDelay dota_tv_delay = 24 [default = LobbyDotaTV_120];
+	optional bool lan = 25;
 }
 
 message CMsgPracticeLobbyCreate {
@@ -505,7 +507,6 @@ message CMsgDOTARequestMatches {
 		VeryHigh = 3;
 	}
 
-	optional string player_name = 1;
 	optional uint32 hero_id = 2;
 	optional uint32 game_mode = 3;
 	optional fixed32 date_min = 6;
@@ -877,9 +878,6 @@ message CMsgDOTALeaveTeamResponse {
 	optional string team_name = 2;
 }
 
-message CMsgDOTABetaParticipationRequest {
-}
-
 message CMsgDOTABetaParticipation {
 	optional uint32 access_rights = 1;
 }
@@ -891,6 +889,10 @@ message CMsgDOTAJoinChatChannel {
 
 message CMsgDOTALeaveChatChannel {
 	optional uint64 channel_id = 1;
+}
+
+message CMsgDOTAClientIgnoredUser {
+	optional uint32 ignored_account_id = 1;
 }
 
 message CMsgDOTAChatMessage {
@@ -1371,26 +1373,32 @@ message CMsgDOTAProfileResponse {
 	optional bool has_passport = 13;
 }
 
+message CMsgGCSteamProfileRequest {
+	optional uint32 account_id = 1;
+}
+
+message CMsgGCSteamProfileRequestResponse {
+	optional uint32 result = 1;
+}
+
 message CMsgDOTAClearNotifySuccessfulReport {
 }
 
 message CMsgDOTAWelcome {
-	optional bool spectator_only = 1;
-	optional bool allow_team_creation = 2;
 	optional bool tournament_admin = 3;
 	optional bool tournament_broadcaster = 4;
 	optional uint32 store_item_hash = 5;
 	optional uint32 timeplayedconsecutively = 6;
 	optional bool allow_3rd_party_match_history = 7;
-	optional .DOTA_PartnerAccountType partner_account_type = 8 [default = DOTA_PARTNER_NONE];
+	optional .PartnerAccountType partner_account_type = 8 [default = PARTNER_NONE];
 	optional uint32 banned_word_list_word_id = 9;
-	optional uint32 time_first_played = 10;
 	optional uint32 partner_account_state = 11;
 	optional uint32 last_time_played = 12;
 	optional uint32 last_ip_address = 13;
 	optional uint32 notify_successful_report = 14;
 	optional uint32 shutdownlawterminatetime = 15;
 	optional uint32 banned_word_list_version = 16;
+	optional bool profile_private = 17;
 }
 
 message CSODOTAGameHeroFavorites {
@@ -1468,14 +1476,6 @@ message CMsgMatchVoteResponse {
 	optional .DOTAMatchVote vote = 2 [default = DOTAMatchVote_INVALID];
 	optional uint32 positive_votes = 3;
 	optional uint32 negative_votes = 4;
-}
-
-message CMsgCheckSpectatorOnly {
-}
-
-message CMsgCheckSpectatorOnlyResponse {
-	optional uint32 eresult = 1 [default = 2];
-	optional bool spectator_only = 2;
 }
 
 message CMsgDOTAHallOfFame {
@@ -1605,9 +1605,17 @@ message CMsgDOTASetMatchHistoryAccessResponse {
 	optional uint32 eresult = 1 [default = 2];
 }
 
-message CMsgDOTANotifyMatchHistoryAccessChange {
+message CMsgDOTANotifyAccountFlagsChange {
 	optional uint32 accountid = 1;
-	optional bool allow_3rd_party_match_history = 2;
+	optional uint32 account_flags = 2;
+}
+
+message CMsgDOTASetProfilePrivacy {
+	optional bool profile_private = 1;
+}
+
+message CMsgDOTASetProfilePrivacyResponse {
+	optional uint32 eresult = 1;
 }
 
 message CMsgUpgradeLeagueItem {
@@ -1706,6 +1714,7 @@ message CMsgDOTAFantasyLeagueInfo {
 	optional .CMsgFantasyLeagueRoleScoring scoring_carry = 7;
 	optional .CMsgFantasyLeagueRoleScoring scoring_solo = 8;
 	optional .CMsgFantasyLeagueRoleScoring scoring_support = 9;
+	optional uint32 league_id = 10;
 }
 
 message CMsgDOTAFantasyLeagueInfoRequest {
@@ -1840,6 +1849,35 @@ message CMsgDOTAFantasyPlayerInfoResponse {
 
 	optional .CMsgDOTAFantasyPlayerInfoResponse.EResult result = 1 [default = SUCCESS];
 	repeated .CMsgDOTAFantasyPlayerInfoResponse.Player players = 2;
+}
+
+message CMsgDOTAFantasyLeagueCreateInfoRequest {
+}
+
+message CMsgDOTAFantasyLeagueCreateInfoResponse {
+	message FantasyLeagueCreateInfo {
+		optional uint32 league_id = 1;
+		optional string league_name = 2;
+	}
+
+	repeated .CMsgDOTAFantasyLeagueCreateInfoResponse.FantasyLeagueCreateInfo create_info = 1;
+}
+
+message CMsgDOTAFantasyLeagueJoinInfoRequest {
+}
+
+message CMsgDOTAFantasyLeagueJoinInfoResponse {
+	message FantasyLeagueInviteInfo {
+		optional string fantasy_league_name = 1;
+		optional uint32 fantasy_league_id = 2;
+		optional string league_name = 3;
+		optional uint32 commisioner_id = 4;
+		optional string commisioner = 5;
+		optional bool guild_invite = 6;
+		optional string invite_string = 7;
+	}
+
+	repeated .CMsgDOTAFantasyLeagueJoinInfoResponse.FantasyLeagueInviteInfo join_info = 1;
 }
 
 message CMsgDOTAPassportVoteTeamGuess {

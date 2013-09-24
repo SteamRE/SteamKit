@@ -1,5 +1,6 @@
 import "steammessages.proto";
 import "matchmaker_common.proto";
+import "gcsdk_gcmessages.proto";
 
 enum EDOTAGCMsg {
 	k_EMsgGCDOTABase = 7000;
@@ -31,8 +32,6 @@ enum EDOTAGCMsg {
 	k_EMsgGCInitialQuestionnaireResponse = 7049;
 	k_EMsgGCTournamentRequest = 7051;
 	k_EMsgGCTournamentResponse = 7052;
-	k_EMsgGCBetaParticiaptionRequest = 7053;
-	k_EMsgGCBetaParticiaptionResponse = 7054;
 	k_EMsgGCPracticeLobbyResponse = 7055;
 	k_EMsgGCBroadcastNotification = 7056;
 	k_EMsgGCLiveScoreboardUpdate = 7057;
@@ -123,8 +122,6 @@ enum EDOTAGCMsg {
 	k_EMsgGC_GameServerSaveGameResult = 7159;
 	k_EMsgGC_GameServerGetLoadGame = 7160;
 	k_EMsgGC_GameServerGetLoadGameResult = 7161;
-	k_EMsgCheckSpectatorOnly = 7162;
-	k_EMsgCheckSpectatorOnlyResponse = 7163;
 	k_EMsgGCTeamProfileRequest = 7164;
 	k_EMsgGCTeamProfileResponse = 7165;
 	k_EMsgGCEditTeamDetails = 7166;
@@ -163,7 +160,6 @@ enum EDOTAGCMsg {
 	k_EMsgGCBotGameCreate = 7199;
 	k_EMsgGCSetMatchHistoryAccess = 7200;
 	k_EMsgGCSetMatchHistoryAccessResponse = 7201;
-	k_EMsgGCNotifyMatchHistoryAccessChange = 7202;
 	k_EMsgUpgradeLeagueItem = 7203;
 	k_EMsgUpgradeLeagueItemResponse = 7204;
 	k_EMsgGCTeamMemberProfileRequest = 7205;
@@ -280,13 +276,20 @@ enum EDOTAGCMsg {
 	k_EMsgGCCustomGameCreate = 7321;
 	k_EMsgGCFantasyPlayerInfoRequest = 7322;
 	k_EMsgGCFantasyPlayerInfoResponse = 7323;
+	k_EMsgGCToGCProcessPlayerReportForTarget = 7324;
+	k_EMsgGCToGCProcessCommunicationReportSuccess = 7325;
+	k_EMsgGCNotifyAccountFlagsChange = 7326;
+	k_EMsgGCSetProfilePrivacy = 7327;
+	k_EMsgGCSetProfilePrivacyResponse = 7328;
+	k_EMsgGCSteamProfileRequest = 7329;
+	k_EMsgGCSteamProfileRequestResponse = 7330;
+	k_EMsgGCFantasyLeagueCreateInfoRequest = 7331;
+	k_EMsgGCFantasyLeagueCreateInfoResponse = 7332;
+	k_EMsgGCFantasyLeagueJoinInfoRequest = 7333;
+	k_EMsgGCFantasyLeagueJoinInfoResponse = 7334;
+	k_EMsgGCClientIgnoredUser = 7335;
+	k_EMsgGCClientSuspended = 7342;
 	k_EMsgGCDev_GrantWarKill = 8001;
-}
-
-enum DOTA_PartnerAccountType {
-	DOTA_PARTNER_NONE = 0;
-	DOTA_PARTNER_PERFECT_WORLD = 1;
-	DOTA_PARTNER_NEXON = 2;
 }
 
 enum DOTA_GameMode {
@@ -306,6 +309,8 @@ enum DOTA_GameMode {
 	DOTA_GAMEMODE_POOL1 = 13;
 	DOTA_GAMEMODE_FH = 14;
 	DOTA_GAMEMODE_CUSTOM = 15;
+	DOTA_GAMEMODE_CD = 16;
+	DOTA_GAMEMODE_AD = 17;
 }
 
 enum DOTA_GameState {
@@ -438,7 +443,7 @@ message CSODOTAGameAccountClient {
 	optional uint32 level = 13;
 	optional uint32 initial_skill = 14;
 	optional uint32 leaver_count = 15;
-	optional uint32 prevent_match_until_date = 18;
+	optional uint32 low_priority_until_date = 18;
 	optional uint32 prevent_text_chat_until_date = 20;
 	optional uint32 prevent_voice_until_date = 21;
 	optional uint32 last_abandoned_game_date = 22;
@@ -455,14 +460,14 @@ message CSODOTAGameAccountClient {
 	optional uint32 showcase_hero_id = 40;
 	optional uint32 match_disabled_until_date = 41;
 	optional uint32 match_disabled_count = 42;
-	optional .DOTA_PartnerAccountType partner_account_type = 44 [default = DOTA_PARTNER_NONE];
+	optional .PartnerAccountType partner_account_type = 44 [default = PARTNER_NONE];
 	optional uint32 partner_account_state = 45;
 	optional uint32 matchmaking_language_preference = 46;
 	optional uint32 shutdownlawterminatetime = 47;
 }
 
 message CSODOTAPartyMember {
-	optional .DOTA_PartnerAccountType partner_type = 1 [default = DOTA_PARTNER_NONE];
+	optional .PartnerAccountType partner_type = 1 [default = PARTNER_NONE];
 }
 
 message CSODOTAParty {
@@ -480,8 +485,8 @@ message CSODOTAParty {
 	optional .CSODOTAParty.State state = 6 [default = UI];
 	optional uint32 started_matchmaking_time = 7;
 	optional uint32 matchgroups = 11;
-	optional uint32 prevent_match_until_date = 18;
-	optional uint32 prevent_match_account_id = 19;
+	optional uint32 low_priority_until_date = 18;
+	optional uint32 low_priority_account_id = 19;
 	optional .MatchType match_type = 21 [default = MATCH_TYPE_RANKED];
 	optional .DOTABotDifficulty bot_difficulty = 22 [default = BOT_DIFFICULTY_PASSIVE];
 	optional uint32 team_id = 23;
@@ -527,7 +532,7 @@ message CDOTALobbyMember {
 	optional uint32 prize_def_index = 18;
 	optional uint32 meta_xp_bonus_rate = 19;
 	repeated uint32 disabled_hero_id = 20;
-	optional .DOTA_PartnerAccountType partner_account_type = 21 [default = DOTA_PARTNER_NONE];
+	optional .PartnerAccountType partner_account_type = 21 [default = PARTNER_NONE];
 	repeated uint32 enabled_hero_id = 22;
 }
 
@@ -550,11 +555,6 @@ message CLobbyTeamDetails {
 	optional uint64 guild_logo = 12;
 	optional uint64 guild_base_logo = 13;
 	optional uint64 guild_banner_logo = 14;
-}
-
-message CLobbyPendingPlayerReport {
-	optional uint32 account_id = 1;
-	optional fixed32 date = 2;
 }
 
 message CLobbyTimedRewardDetails {
@@ -634,11 +634,11 @@ message CSODOTALobby {
 	optional string custom_game_mode = 54;
 	optional string custom_map_name = 55;
 	optional uint32 custom_difficulty = 56;
+	optional bool lan = 57;
 }
 
 message CSODOTALobbyInternal {
 	optional string search_key = 1;
-	repeated .CLobbyPendingPlayerReport pending_player_reports = 2;
 	optional uint32 average_rank = 3;
 	optional fixed32 replay_salt = 4;
 	optional bool disable_radiant_automatic_team_detection = 5;

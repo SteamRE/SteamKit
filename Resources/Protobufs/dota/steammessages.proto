@@ -430,6 +430,23 @@ message CMsgGCMsgMasterSetClientMsgRouting_Response {
 	optional int32 eresult = 1 [default = 2];
 }
 
+message CMsgGCMsgSetOptions {
+	message MessageRange {
+		required uint32 low = 1;
+		required uint32 high = 2;
+	}
+
+	enum Option {
+		NOTIFY_USER_SESSIONS = 0;
+		NOTIFY_SERVER_SESSIONS = 1;
+		NOTIFY_ACHIEVEMENTS = 2;
+		NOTIFY_VAC_ACTION = 3;
+	}
+
+	repeated .CMsgGCMsgSetOptions.Option options = 1;
+	repeated .CMsgGCMsgSetOptions.MessageRange client_msg_ranges = 2;
+}
+
 message CMsgGCHUpdateSession {
 	message ExtraField {
 		optional string name = 1;

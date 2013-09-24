@@ -52,6 +52,8 @@ message CMsgGameServerInfo {
 	optional fixed64 relayed_game_server_steam_id = 16;
 	optional uint32 parent_relay_count = 17;
 	optional fixed64 tv_secret_code = 18;
+	optional uint32 server_version = 19;
+	optional uint32 server_cluster = 20;
 }
 
 message CMsgLeaverDetected {
@@ -81,7 +83,6 @@ message CMsgGameMatchSignOut {
 	message CTeam {
 		message CPlayer {
 			optional fixed64 account_id = 1;
-			optional uint32 fake_client_id = 2;
 			optional uint32 hero_id = 3;
 			repeated uint32 items = 4;
 			optional uint32 gold = 5;
@@ -212,7 +213,7 @@ message CMsgDOTARequestPlayerResourcesResponse {
 	optional uint32 player_id = 3;
 	optional bool prevent_text_chat = 4;
 	optional bool prevent_voice_chat = 5;
-	optional bool match_making_ban = 6;
+	optional bool low_priority = 6;
 	optional uint32 solo_rank = 7;
 }
 
@@ -239,7 +240,7 @@ message CMsgGCBanStatusRequest {
 
 message CMsgGCBanStatusResponse {
 	optional uint32 result = 1;
-	optional bool match_banned = 2;
+	optional bool low_priority = 2;
 	optional bool text_chat_banned = 3;
 	optional bool voice_chat_banned = 4;
 }

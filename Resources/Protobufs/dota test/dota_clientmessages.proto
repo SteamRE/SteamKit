@@ -85,6 +85,7 @@ message CDOTAClientMsg_RequestGraphUpdate {
 
 message CDOTAClientMsg_ChatWheel {
 	optional .EDOTAChatWheelMessage chat_message = 1 [default = k_EDOTA_CW_Ok];
+	optional uint32 param_hero_id = 2;
 }
 
 message CDOTAClientMsg_SendStatPopup {
