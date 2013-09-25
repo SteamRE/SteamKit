@@ -91,15 +91,6 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _search_time_avg = value; }
     }
 
-    private uint _legacy___players_searching___obsolete = default(uint);
-    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"legacy___players_searching___obsolete", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint legacy___players_searching___obsolete
-    {
-      get { return _legacy___players_searching___obsolete; }
-      set { _legacy___players_searching___obsolete = value; }
-    }
-
     private uint _players_searching = default(uint);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"players_searching", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(default(uint))]
@@ -1192,6 +1183,57 @@ namespace SteamKit2.GC.CSGO.Internal
       get { return _reservation_stage; }
       set { _reservation_stage = value; }
     }
+
+    private int _match_duration = default(int);
+    [global::ProtoBuf.ProtoMember(15, IsRequired = false, Name=@"match_duration", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int match_duration
+    {
+      get { return _match_duration; }
+      set { _match_duration = value; }
+    }
+    private readonly global::System.Collections.Generic.List<int> _enemy_kills = new global::System.Collections.Generic.List<int>();
+    [global::ProtoBuf.ProtoMember(16, Name=@"enemy_kills", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public global::System.Collections.Generic.List<int> enemy_kills
+    {
+      get { return _enemy_kills; }
+    }
+  
+    private readonly global::System.Collections.Generic.List<int> _enemy_headshots = new global::System.Collections.Generic.List<int>();
+    [global::ProtoBuf.ProtoMember(17, Name=@"enemy_headshots", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public global::System.Collections.Generic.List<int> enemy_headshots
+    {
+      get { return _enemy_headshots; }
+    }
+  
+    private readonly global::System.Collections.Generic.List<int> _enemy_3ks = new global::System.Collections.Generic.List<int>();
+    [global::ProtoBuf.ProtoMember(18, Name=@"enemy_3ks", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public global::System.Collections.Generic.List<int> enemy_3ks
+    {
+      get { return _enemy_3ks; }
+    }
+  
+    private readonly global::System.Collections.Generic.List<int> _enemy_4ks = new global::System.Collections.Generic.List<int>();
+    [global::ProtoBuf.ProtoMember(19, Name=@"enemy_4ks", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public global::System.Collections.Generic.List<int> enemy_4ks
+    {
+      get { return _enemy_4ks; }
+    }
+  
+    private readonly global::System.Collections.Generic.List<int> _enemy_5ks = new global::System.Collections.Generic.List<int>();
+    [global::ProtoBuf.ProtoMember(20, Name=@"enemy_5ks", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public global::System.Collections.Generic.List<int> enemy_5ks
+    {
+      get { return _enemy_5ks; }
+    }
+  
+    private readonly global::System.Collections.Generic.List<int> _mvps = new global::System.Collections.Generic.List<int>();
+    [global::ProtoBuf.ProtoMember(21, Name=@"mvps", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public global::System.Collections.Generic.List<int> mvps
+    {
+      get { return _mvps; }
+    }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -2474,6 +2516,15 @@ namespace SteamKit2.GC.CSGO.Internal
       get { return _killeatervalue; }
       set { _killeatervalue = value; }
     }
+
+    private string _customname = "";
+    [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"customname", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string customname
+    {
+      get { return _customname; }
+      set { _customname = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -2577,8 +2628,8 @@ namespace SteamKit2.GC.CSGO.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCCStrike15_v2_ClientCommendPlayerQueryResponse", Value=9124)]
       k_EMsgGCCStrike15_v2_ClientCommendPlayerQueryResponse = 9124,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCCStrike15_v2_ClientRequestWatchInfoFriends", Value=9125)]
-      k_EMsgGCCStrike15_v2_ClientRequestWatchInfoFriends = 9125,
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCCStrike15_v2_ClientRequestWatchInfoFriends_Obsolete", Value=9125)]
+      k_EMsgGCCStrike15_v2_ClientRequestWatchInfoFriends_Obsolete = 9125,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCCStrike15_v2_WatchInfoUsers", Value=9126)]
       k_EMsgGCCStrike15_v2_WatchInfoUsers = 9126,
@@ -2614,7 +2665,10 @@ namespace SteamKit2.GC.CSGO.Internal
       k_EMsgGCCStrike15_v2_MatchEndRunRewardDrops = 9136,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCCStrike15_v2_MatchEndRewardDropsNotification", Value=9137)]
-      k_EMsgGCCStrike15_v2_MatchEndRewardDropsNotification = 9137
+      k_EMsgGCCStrike15_v2_MatchEndRewardDropsNotification = 9137,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCCStrike15_v2_ClientRequestWatchInfoFriends2", Value=9138)]
+      k_EMsgGCCStrike15_v2_ClientRequestWatchInfoFriends2 = 9138
     }
   
 }
