@@ -78,7 +78,21 @@ namespace NetHookAnalyzer
                     IsProto = MsgUtil.IsProtoBuf( realEMsg ),
                 };
                 var header = BuildHeader( realEMsg, packetStream );
-                var body = BuildBody( realEMsg, packetStream );
+                object body = null;
+                
+                if ( MsgUtil.IsProtoBuf( realEMsg ) && eMsg == EMsg.ServiceMethod )
+                {
+                    var protoHdr = (MsgHdrProtoBuf)header;
+                    if ( !string.IsNullOrEmpty( protoHdr.Proto.target_job_name ) )
+                    {
+                        body = BuildServiceMethodBody( protoHdr.Proto.target_job_name,packetStream, x => x.GetParameters().First().ParameterType );
+                    }
+                }
+                if ( body == null )
+                {
+                    body = BuildBody( realEMsg, packetStream );
+                }
+
                 object payload = null;
                 if ( body == null )
                 {
@@ -148,15 +162,21 @@ namespace NetHookAnalyzer
 
         static object BuildServiceMethodBody( string methodName, byte[] methodData, Func<MethodInfo, Type> typeSelector )
         {
+            using ( var ms = new MemoryStream( methodData ) )
+            {
+                return BuildServiceMethodBody( methodName, ms, typeSelector );
+            }
+        }
+
+
+        static object BuildServiceMethodBody( string methodName, Stream methodStream, Func<MethodInfo, Type> typeSelector )
+        {
             var methodInfo = FindMethodInfo( methodName );
             if ( methodInfo != null )
             {
-                using ( var ms = new MemoryStream( methodData ) )
-                {
-                    var requestType = typeSelector( methodInfo );
-                    var request = RuntimeTypeModel.Default.Deserialize( ms, null, requestType );
-                    return request;
-                }
+                var requestType = typeSelector( methodInfo );
+                var request = RuntimeTypeModel.Default.Deserialize( methodStream, null, requestType );
+                return request;
             }
 
             return null;
