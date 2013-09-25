@@ -53,7 +53,6 @@ message GameServerPing {
 message DetailedSearchStatistic {
 	optional uint32 game_type = 1;
 	optional uint32 search_time_avg = 2;
-	optional uint32 legacy___players_searching___obsolete = 3;
 	optional uint32 players_searching = 4;
 }
 
@@ -215,6 +214,13 @@ message CMsgGCCStrike15_v2_MatchmakingServerRoundStats {
 	repeated int32 team_scores = 12;
 	optional .CMsgGCCStrike15_v2_MatchmakingGC2ServerConfirm confirm = 13;
 	optional int32 reservation_stage = 14;
+	optional int32 match_duration = 15;
+	repeated int32 enemy_kills = 16;
+	repeated int32 enemy_headshots = 17;
+	repeated int32 enemy_3ks = 18;
+	repeated int32 enemy_4ks = 19;
+	repeated int32 enemy_5ks = 20;
+	repeated int32 mvps = 21;
 }
 
 message CMsgGCCStrike15_v2_MatchmakingServerMatchEnd {
