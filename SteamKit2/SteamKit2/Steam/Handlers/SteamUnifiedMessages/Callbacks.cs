@@ -7,6 +7,8 @@ using ProtoBuf;
 using System.IO;
 using System.Linq;
 using SteamKit2.Internal;
+using System;
+using System.Reflection;
 
 namespace SteamKit2
 {
@@ -30,34 +32,30 @@ namespace SteamKit2
             /// <summary>
             /// Gets the name of the Service.
             /// </summary>
-            public string ServiceName { get; private set; }
+            public string ServiceName
+            {
+                get { return MethodName.Split( '.' )[0]; }
+            }
 
             /// <summary>
             /// Gets the name of the RPC method.
             /// </summary>
-            public string RpcName { get; private set; }
+            public string RpcName
+            {
+                get { return MethodName.Substring( ServiceName.Length ).Split( '#' )[0]; }
+            }
 
             /// <summary>
-            /// Gets the full name of the service method. This takes the form ServiceName.RpcName.
+            /// Gets the full name of the service method.
             /// </summary>
-            public string MethodName
-            {
-                get { return ServiceName + "." + RpcName; }
-            }
+            public string MethodName { get; private set; }
 
 
             internal ServiceMethodResponse( EResult result, CMsgClientServiceMethodResponse resp )
             {
                 Result = result;
                 ResponseRaw = resp.serialized_method_response;
-
-                if ( resp.method_name != null )
-                {
-                    var methodParts = resp.method_name.Split( '.' );
-
-                    ServiceName = methodParts.FirstOrDefault();
-                    RpcName = string.Join( ".", methodParts.Skip( 1 ) );
-                }
+                MethodName = resp.method_name ?? string.Empty;
             }
 
 
@@ -73,6 +71,55 @@ namespace SteamKit2
                 {
                     return Serializer.Deserialize<T>( ms );
                 }
+            }
+        }
+
+        /// <summary>
+        /// This callback represents a service notification recieved though <see cref="SteamUnifiedMessages"/>.
+        /// </summary>
+        public class ServiceMethodNotification : CallbackMsg
+        {
+            /// <summary>
+            /// Gets the name of the Service.
+            /// </summary>
+            public string ServiceName
+            {
+                get { return MethodName.Split( '.' )[0]; }
+            }
+
+            /// <summary>
+            /// Gets the name of the RPC method.
+            /// </summary>
+            public string RpcName
+            {
+                get { return MethodName.Substring( ServiceName.Length ).Split( '#' )[0]; }
+            }
+
+            /// <summary>
+            /// Gets the full name of the service method.
+            /// </summary>
+            public string MethodName { get; private set; }
+
+            /// <summary>
+            /// Gets the protobuf notification body.
+            /// </summary>
+            public object Body { get; private set; }
+
+
+            internal ServiceMethodNotification( Type messageType, IPacketMsg packetMsg )
+            {
+                // Bounce into generic-land.
+                var setupMethod = GetType().GetMethod( "Setup", BindingFlags.Instance | BindingFlags.NonPublic ).MakeGenericMethod( messageType );
+                setupMethod.Invoke( this, new[] { packetMsg } );
+            }
+
+            void Setup<T>( IPacketMsg packetMsg )
+                where T : IExtensible, new()
+            {
+                var clientMsg = new ClientMsgProtobuf<T>( packetMsg );
+
+                MethodName = clientMsg.Header.Proto.target_job_name;
+                Body = clientMsg.Body;
             }
         }
     }
