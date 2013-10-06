@@ -19,7 +19,7 @@ enum EChatEntryType
 	ChatMsg = 1;
 	Typing = 2;
 	InviteGame = 3;
-	Emote = 4;
+	Emote = 4; obsolete "No longer supported by clients"
 	LobbyGameStart = 5;
 	LeftConversation = 6;
 	Entered = 7;
@@ -741,7 +741,8 @@ enum EMarketingMessageFlags flags
 	HighPriority = 1;
 	PlatformWindows = 2;
 	PlatformMac = 4;
-	PlatformRestrictions = 6;
+	PlatformLinux = 8;
+	PlatformRestrictions = PlatformWindows | PlatformMac | PlatformLinux;
 };
 
 enum ENewsUpdateType
