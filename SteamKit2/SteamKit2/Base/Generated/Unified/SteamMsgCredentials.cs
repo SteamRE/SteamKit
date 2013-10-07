@@ -74,6 +74,42 @@ namespace SteamKit2.Unified.Internal
   {
     public CCredentials_GetSteamGuardDetails_Request() {}
     
+
+    private bool _include_new_authentications = (bool)true;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"include_new_authentications", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue((bool)true)]
+    public bool include_new_authentications
+    {
+      get { return _include_new_authentications; }
+      set { _include_new_authentications = value; }
+    }
+
+    private string _webcookie = "";
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"webcookie", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string webcookie
+    {
+      get { return _webcookie; }
+      set { _webcookie = value; }
+    }
+
+    private uint _timestamp_minimum_wanted = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"timestamp_minimum_wanted", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint timestamp_minimum_wanted
+    {
+      get { return _timestamp_minimum_wanted; }
+      set { _timestamp_minimum_wanted = value; }
+    }
+
+    private int _ipaddress = default(int);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"ipaddress", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int ipaddress
+    {
+      get { return _ipaddress; }
+      set { _ipaddress = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -117,6 +153,24 @@ namespace SteamKit2.Unified.Internal
     {
       get { return _machine_name_userchosen; }
       set { _machine_name_userchosen = value; }
+    }
+
+    private uint _timestamp_machine_steamguard_enabled = default(uint);
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"timestamp_machine_steamguard_enabled", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint timestamp_machine_steamguard_enabled
+    {
+      get { return _timestamp_machine_steamguard_enabled; }
+      set { _timestamp_machine_steamguard_enabled = value; }
+    }
+
+    private bool _authentication_exists_from_geoloc_before_mintime = default(bool);
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"authentication_exists_from_geoloc_before_mintime", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool authentication_exists_from_geoloc_before_mintime
+    {
+      get { return _authentication_exists_from_geoloc_before_mintime; }
+      set { _authentication_exists_from_geoloc_before_mintime = value; }
     }
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"NewAuthentication")]
   public partial class NewAuthentication : global::ProtoBuf.IExtensible
@@ -176,6 +230,15 @@ namespace SteamKit2.Unified.Internal
     {
       get { return _machine_name_user_supplied; }
       set { _machine_name_user_supplied = value; }
+    }
+
+    private int _status = default(int);
+    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"status", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int status
+    {
+      get { return _status; }
+      set { _status = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -382,6 +445,81 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCredentials_SteamGuardCode_Request")]
+  public partial class CCredentials_SteamGuardCode_Request : global::ProtoBuf.IExtensible
+  {
+    public CCredentials_SteamGuardCode_Request() {}
+    
+
+    private bool _panic_button = default(bool);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"panic_button", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool panic_button
+    {
+      get { return _panic_button; }
+      set { _panic_button = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCredentials_SteamGuardCode_Response")]
+  public partial class CCredentials_SteamGuardCode_Response : global::ProtoBuf.IExtensible
+  {
+    public CCredentials_SteamGuardCode_Response() {}
+    
+
+    private string _steamguard_code = "";
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steamguard_code", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string steamguard_code
+    {
+      get { return _steamguard_code; }
+      set { _steamguard_code = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCredentials_SteamGuardLoginAttempt_Notification")]
+  public partial class CCredentials_SteamGuardLoginAttempt_Notification : global::ProtoBuf.IExtensible
+  {
+    public CCredentials_SteamGuardLoginAttempt_Notification() {}
+    
+
+    private bool _is_web_cookie = default(bool);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"is_web_cookie", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool is_web_cookie
+    {
+      get { return _is_web_cookie; }
+      set { _is_web_cookie = value; }
+    }
+
+    private int _ipaddress = default(int);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"ipaddress", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int ipaddress
+    {
+      get { return _ipaddress; }
+      set { _ipaddress = value; }
+    }
+
+    private string _geoloc_info = "";
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"geoloc_info", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string geoloc_info
+    {
+      get { return _geoloc_info; }
+      set { _geoloc_info = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     public interface ICredentials
     {
       CCredentials_TestAvailablePassword_Response TestAvailablePassword(CCredentials_TestAvailablePassword_Request request);
@@ -389,6 +527,14 @@ namespace SteamKit2.Unified.Internal
     CCredentials_NewMachineNotificationDialog_Response NewMachineNotificationDialogResult(CCredentials_NewMachineNotificationDialog_Request request);
     CCredentials_ValidateEmailAddress_Response ValidateEmailAddress(CCredentials_ValidateEmailAddress_Request request);
     CCredentials_SteamGuardPhishingReport_Response SteamGuardPhishingReport(CCredentials_SteamGuardPhishingReport_Request request);
+    CCredentials_SteamGuardCode_Response SteamGuardCodeProcess(CCredentials_SteamGuardCode_Request request);
+    
+    }
+    
+    
+    public interface ICredentialsClient
+    {
+      NoResponse NotifySteamGuardLoginAttempt(CCredentials_SteamGuardLoginAttempt_Notification request);
     
     }
     

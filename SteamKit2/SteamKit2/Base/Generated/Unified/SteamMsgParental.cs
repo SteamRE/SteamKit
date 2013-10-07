@@ -123,6 +123,15 @@ namespace SteamKit2.Unified.Internal
       get { return _is_enabled; }
       set { _is_enabled = value; }
     }
+
+    private uint _enabled_features = default(uint);
+    [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"enabled_features", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint enabled_features
+    {
+      get { return _enabled_features; }
+      set { _enabled_features = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

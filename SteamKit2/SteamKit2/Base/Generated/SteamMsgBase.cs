@@ -108,6 +108,24 @@ namespace SteamKit2.Internal
       set { _auth_account_flags = value; }
     }
 
+    private uint _token_source = default(uint);
+    [global::ProtoBuf.ProtoMember(22, IsRequired = false, Name=@"token_source", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint token_source
+    {
+      get { return _token_source; }
+      set { _token_source = value; }
+    }
+
+    private bool _admin_spoofing_user = default(bool);
+    [global::ProtoBuf.ProtoMember(24, IsRequired = false, Name=@"admin_spoofing_user", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool admin_spoofing_user
+    {
+      get { return _admin_spoofing_user; }
+      set { _admin_spoofing_user = value; }
+    }
+
     private int _transport_error = (int)1;
     [global::ProtoBuf.ProtoMember(17, IsRequired = false, Name=@"transport_error", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue((int)1)]

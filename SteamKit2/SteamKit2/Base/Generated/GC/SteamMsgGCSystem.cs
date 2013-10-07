@@ -274,6 +274,12 @@ namespace SteamKit2.GC.Internal
     public enum EGCBaseClientMsg
     {
             
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCPingRequest", Value=3001)]
+      k_EMsgGCPingRequest = 3001,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCPingResponse", Value=3002)]
+      k_EMsgGCPingResponse = 3002,
+            
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCClientWelcome", Value=4004)]
       k_EMsgGCClientWelcome = 4004,
             

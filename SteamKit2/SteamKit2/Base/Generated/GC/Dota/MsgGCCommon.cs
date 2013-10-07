@@ -353,13 +353,40 @@ namespace SteamKit2.GC.Dota.Internal
       set { _state = value; }
     }
 
-    private uint _started_matchmaking_time = default(uint);
-    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"started_matchmaking_time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    private uint _effective_started_matchmaking_time = default(uint);
+    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"effective_started_matchmaking_time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint started_matchmaking_time
+    public uint effective_started_matchmaking_time
     {
-      get { return _started_matchmaking_time; }
-      set { _started_matchmaking_time = value; }
+      get { return _effective_started_matchmaking_time; }
+      set { _effective_started_matchmaking_time = value; }
+    }
+
+    private uint _raw_started_matchmaking_time = default(uint);
+    [global::ProtoBuf.ProtoMember(32, IsRequired = false, Name=@"raw_started_matchmaking_time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint raw_started_matchmaking_time
+    {
+      get { return _raw_started_matchmaking_time; }
+      set { _raw_started_matchmaking_time = value; }
+    }
+
+    private uint _attempt_start_time = default(uint);
+    [global::ProtoBuf.ProtoMember(33, IsRequired = false, Name=@"attempt_start_time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint attempt_start_time
+    {
+      get { return _attempt_start_time; }
+      set { _attempt_start_time = value; }
+    }
+
+    private uint _attempt_num = default(uint);
+    [global::ProtoBuf.ProtoMember(34, IsRequired = false, Name=@"attempt_num", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint attempt_num
+    {
+      get { return _attempt_num; }
+      set { _attempt_num = value; }
     }
 
     private uint _matchgroups = default(uint);

@@ -1953,13 +1953,13 @@ namespace SteamKit2.GC.Internal
       set { _accountid = value; }
     }
 
-    private bool _eligible_for_community_market = default(bool);
-    [global::ProtoBuf.ProtoMember(21, IsRequired = false, Name=@"eligible_for_community_market", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
-    public bool eligible_for_community_market
+    private uint _suspension_end_time = default(uint);
+    [global::ProtoBuf.ProtoMember(21, IsRequired = false, Name=@"suspension_end_time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint suspension_end_time
     {
-      get { return _eligible_for_community_market; }
-      set { _eligible_for_community_market = value; }
+      get { return _suspension_end_time; }
+      set { _suspension_end_time = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
