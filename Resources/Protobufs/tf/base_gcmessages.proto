@@ -217,6 +217,7 @@ message CSOEconItem {
 	optional uint64 original_id = 16 [default = 0];
 	optional bool contains_equipped_state = 17;
 	repeated .CSOEconItemEquipped equipped_state = 18;
+	optional bool contains_equipped_state_v2 = 19;
 }
 
 message CMsgAdjustItemEquippedState {
@@ -298,33 +299,15 @@ message CMsgItemAcknowledged {
 	optional uint32 quality = 4;
 }
 
-message CMsgSetPresetItemPosition {
-	optional uint32 class_id = 1;
-	optional uint32 preset_id = 2;
-	optional uint32 slot_id = 3;
-	optional uint64 item_id = 4;
-}
-
-message CSOEconItemPresetInstance {
-	optional uint32 class_id = 2 [(key_field) = true];
-	optional uint32 preset_id = 3 [(key_field) = true];
-	optional uint32 slot_id = 4 [(key_field) = true];
-	optional uint64 item_id = 5;
-}
-
-message CMsgSelectItemPresetForClass {
+message CMsgSelectPresetForClass {
 	optional uint32 class_id = 1;
 	optional uint32 preset_id = 2;
 }
 
-message CMsgSelectItemPresetForClassReply {
-	optional bool success = 1;
-}
-
-message CSOSelectedItemPreset {
-	optional uint32 account_id = 1 [(key_field) = true];
-	optional uint32 class_id = 2 [(key_field) = true];
-	optional uint32 preset_id = 3;
+message CSOClassPresetClientData {
+	optional uint32 account_id = 1;
+	optional uint32 class_id = 2;
+	optional uint32 active_preset_id = 3;
 }
 
 message CMsgGCReportAbuse {

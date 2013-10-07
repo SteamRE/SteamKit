@@ -483,7 +483,10 @@ message CSODOTAParty {
 	optional uint32 game_modes = 4;
 	repeated fixed64 pending_invites = 5;
 	optional .CSODOTAParty.State state = 6 [default = UI];
-	optional uint32 started_matchmaking_time = 7;
+	optional uint32 effective_started_matchmaking_time = 7;
+	optional uint32 raw_started_matchmaking_time = 32;
+	optional uint32 attempt_start_time = 33;
+	optional uint32 attempt_num = 34;
 	optional uint32 matchgroups = 11;
 	optional uint32 low_priority_until_date = 18;
 	optional uint32 low_priority_account_id = 19;

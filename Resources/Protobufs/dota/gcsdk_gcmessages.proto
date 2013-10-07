@@ -203,3 +203,6 @@ message CMsgGCToGCSOCacheUnsubscribe {
 	optional fixed64 unsubscribe_from = 2;
 }
 
+message CMsgGCClientPing {
+}
+

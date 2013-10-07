@@ -477,6 +477,7 @@ message CDOTAUserMsg_ParticleManager {
 		optional int32 attach_type = 3;
 		optional int32 attachment = 4;
 		optional .CMsgVector fallback_position = 5;
+		optional bool include_wearables = 6;
 	}
 
 	message UpdateParticleSetFrozen {

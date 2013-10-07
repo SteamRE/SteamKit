@@ -328,7 +328,7 @@ message CGCSystemMsg_GetAccountDetails_Response {
 	optional bool is_trade_banned = 18;
 	optional uint32 trade_ban_expiration = 19;
 	optional uint32 accountid = 20;
-	optional bool eligible_for_community_market = 21;
+	optional uint32 suspension_end_time = 21;
 }
 
 message CMsgGCGetPersonaNames {

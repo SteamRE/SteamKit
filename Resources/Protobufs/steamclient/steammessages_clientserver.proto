@@ -211,6 +211,7 @@ message CMsgClientGamesPlayed {
 		optional uint32 process_id = 9;
 		optional uint32 streaming_provider_id = 10;
 		optional uint32 game_flags = 11;
+		optional uint32 owner_id = 12;
 	}
 
 	repeated .CMsgClientGamesPlayed.GamePlayed games_played = 1;
@@ -2607,7 +2608,13 @@ message CMsgClientDeauthorizeDevice {
 }
 
 message CMsgClientUseLocalDeviceAuthorizations {
+	message DeviceToken {
+		optional uint32 owner_account_id = 1;
+		optional uint64 token_id = 2;
+	}
+
 	repeated uint32 authorization_account_id = 1;
+	repeated .CMsgClientUseLocalDeviceAuthorizations.DeviceToken device_tokens = 2;
 }
 
 message CMsgClientGetAuthorizedDevices {

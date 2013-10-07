@@ -88,6 +88,8 @@ enum ESOMsg {
 }
 
 enum EGCBaseClientMsg {
+	k_EMsgGCPingRequest = 3001;
+	k_EMsgGCPingResponse = 3002;
 	k_EMsgGCClientWelcome = 4004;
 	k_EMsgGCServerWelcome = 4005;
 	k_EMsgGCClientHello = 4006;
