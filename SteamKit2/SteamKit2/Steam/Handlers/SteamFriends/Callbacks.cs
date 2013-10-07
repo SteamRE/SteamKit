@@ -761,6 +761,7 @@ namespace SteamKit2
             /// <summary>
             /// Gets the recent playtime.
             /// </summary>
+            [Obsolete( "This property is obsolete as this value is no longer returned by Steam." )]
             public TimeSpan RecentPlaytime { get; private set; }
 
 
@@ -782,7 +783,9 @@ namespace SteamKit2
 
                 Summary = response.summary;
 
-                RecentPlaytime = TimeSpan.FromMinutes( ( uint )response.recent_playtime );
+#pragma warning disable 0618 // Knowingly set the value of a deprecated field
+                RecentPlaytime = TimeSpan.Zero;
+#pragma warning restore 0618
             }
         }
     }
