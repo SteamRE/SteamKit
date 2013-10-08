@@ -40,7 +40,7 @@ namespace SteamKit2.GC.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-    [global::ProtoBuf.ProtoContract(Name=@"EGCItemMsg")]
+    [global::ProtoBuf.ProtoContract(Name=@"EGCItemMsg", EnumPassthru=true)]
     public enum EGCItemMsg
     {
             
@@ -411,7 +411,7 @@ namespace SteamKit2.GC.Internal
       k_EMsgGCClientVersionUpdated = 2528
     }
   
-    [global::ProtoBuf.ProtoContract(Name=@"EGCMsgResponse")]
+    [global::ProtoBuf.ProtoContract(Name=@"EGCMsgResponse", EnumPassthru=true)]
     public enum EGCMsgResponse
     {
             
@@ -443,7 +443,7 @@ namespace SteamKit2.GC.Internal
       k_EGCMsgFailedToCreate = 8
     }
   
-    [global::ProtoBuf.ProtoContract(Name=@"EUnlockStyle")]
+    [global::ProtoBuf.ProtoContract(Name=@"EUnlockStyle", EnumPassthru=true)]
     public enum EUnlockStyle
     {
             

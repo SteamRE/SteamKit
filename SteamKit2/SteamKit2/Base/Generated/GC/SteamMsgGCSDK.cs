@@ -1177,7 +1177,7 @@ namespace SteamKit2.GC.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-    [global::ProtoBuf.ProtoContract(Name=@"PartnerAccountType")]
+    [global::ProtoBuf.ProtoContract(Name=@"PartnerAccountType", EnumPassthru=true)]
     public enum PartnerAccountType
     {
             
@@ -1191,7 +1191,7 @@ namespace SteamKit2.GC.Internal
       PARTNER_NEXON = 2
     }
   
-    [global::ProtoBuf.ProtoContract(Name=@"GCConnectionStatus")]
+    [global::ProtoBuf.ProtoContract(Name=@"GCConnectionStatus", EnumPassthru=true)]
     public enum GCConnectionStatus
     {
             

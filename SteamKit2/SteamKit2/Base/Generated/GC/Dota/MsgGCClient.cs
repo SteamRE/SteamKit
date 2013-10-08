@@ -2475,7 +2475,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-    [global::ProtoBuf.ProtoContract(Name=@"ReplayState")]
+    [global::ProtoBuf.ProtoContract(Name=@"ReplayState", EnumPassthru=true)]
     public enum ReplayState
     {
             
@@ -2668,7 +2668,7 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _team_id; }
       set { _team_id = value; }
     }
-    [global::ProtoBuf.ProtoContract(Name=@"SkillLevel")]
+    [global::ProtoBuf.ProtoContract(Name=@"SkillLevel", EnumPassthru=true)]
     public enum SkillLevel
     {
             
@@ -2757,7 +2757,7 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _custom_text; }
       set { _custom_text = value; }
     }
-    [global::ProtoBuf.ProtoContract(Name=@"PopupID")]
+    [global::ProtoBuf.ProtoContract(Name=@"PopupID", EnumPassthru=true)]
     public enum PopupID
     {
             
@@ -3283,7 +3283,7 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _seconds_remaining; }
       set { _seconds_remaining = value; }
     }
-    [global::ProtoBuf.ProtoContract(Name=@"Result")]
+    [global::ProtoBuf.ProtoContract(Name=@"Result", EnumPassthru=true)]
     public enum Result
     {
             
@@ -3502,7 +3502,7 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _results; }
     }
   
-    [global::ProtoBuf.ProtoContract(Name=@"Result")]
+    [global::ProtoBuf.ProtoContract(Name=@"Result", EnumPassthru=true)]
     public enum Result
     {
             
@@ -3576,7 +3576,7 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _results; }
     }
   
-    [global::ProtoBuf.ProtoContract(Name=@"Result")]
+    [global::ProtoBuf.ProtoContract(Name=@"Result", EnumPassthru=true)]
     public enum Result
     {
             
@@ -3640,7 +3640,7 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _team_name; }
       set { _team_name = value; }
     }
-    [global::ProtoBuf.ProtoContract(Name=@"Result")]
+    [global::ProtoBuf.ProtoContract(Name=@"Result", EnumPassthru=true)]
     public enum Result
     {
             
@@ -3690,7 +3690,7 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _data; }
     }
   
-    [global::ProtoBuf.ProtoContract(Name=@"Result")]
+    [global::ProtoBuf.ProtoContract(Name=@"Result", EnumPassthru=true)]
     public enum Result
     {
             
@@ -4007,7 +4007,7 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _invitee_name; }
       set { _invitee_name = value; }
     }
-    [global::ProtoBuf.ProtoContract(Name=@"Result")]
+    [global::ProtoBuf.ProtoContract(Name=@"Result", EnumPassthru=true)]
     public enum Result
     {
             
@@ -4098,7 +4098,7 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _result; }
       set { _result = value; }
     }
-    [global::ProtoBuf.ProtoContract(Name=@"Result")]
+    [global::ProtoBuf.ProtoContract(Name=@"Result", EnumPassthru=true)]
     public enum Result
     {
             
@@ -4140,7 +4140,7 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _invitee_name; }
       set { _invitee_name = value; }
     }
-    [global::ProtoBuf.ProtoContract(Name=@"Result")]
+    [global::ProtoBuf.ProtoContract(Name=@"Result", EnumPassthru=true)]
     public enum Result
     {
             
@@ -4185,7 +4185,7 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _team_name; }
       set { _team_name = value; }
     }
-    [global::ProtoBuf.ProtoContract(Name=@"Result")]
+    [global::ProtoBuf.ProtoContract(Name=@"Result", EnumPassthru=true)]
     public enum Result
     {
             
@@ -4271,7 +4271,7 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _result; }
       set { _result = value; }
     }
-    [global::ProtoBuf.ProtoContract(Name=@"Result")]
+    [global::ProtoBuf.ProtoContract(Name=@"Result", EnumPassthru=true)]
     public enum Result
     {
             
@@ -4338,7 +4338,7 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _invitee_name; }
       set { _invitee_name = value; }
     }
-    [global::ProtoBuf.ProtoContract(Name=@"Result")]
+    [global::ProtoBuf.ProtoContract(Name=@"Result", EnumPassthru=true)]
     public enum Result
     {
             
@@ -4405,7 +4405,7 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _team_name; }
       set { _team_name = value; }
     }
-    [global::ProtoBuf.ProtoContract(Name=@"Result")]
+    [global::ProtoBuf.ProtoContract(Name=@"Result", EnumPassthru=true)]
     public enum Result
     {
             
@@ -4619,7 +4619,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-    [global::ProtoBuf.ProtoContract(Name=@"DOTAChatChannelSuppressNotificationsFlags_t")]
+    [global::ProtoBuf.ProtoContract(Name=@"DOTAChatChannelSuppressNotificationsFlags_t", EnumPassthru=true)]
     public enum DOTAChatChannelSuppressNotificationsFlags_t
     {
             
@@ -5361,7 +5361,7 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _errors; }
     }
   
-    [global::ProtoBuf.ProtoContract(Name=@"EError")]
+    [global::ProtoBuf.ProtoContract(Name=@"EError", EnumPassthru=true)]
     public enum EError
     {
             
@@ -5452,7 +5452,7 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _result; }
       set { _result = value; }
     }
-    [global::ProtoBuf.ProtoContract(Name=@"EResult")]
+    [global::ProtoBuf.ProtoContract(Name=@"EResult", EnumPassthru=true)]
     public enum EResult
     {
             
@@ -5522,7 +5522,7 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _result; }
       set { _result = value; }
     }
-    [global::ProtoBuf.ProtoContract(Name=@"EResult")]
+    [global::ProtoBuf.ProtoContract(Name=@"EResult", EnumPassthru=true)]
     public enum EResult
     {
             
@@ -5598,7 +5598,7 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _result; }
       set { _result = value; }
     }
-    [global::ProtoBuf.ProtoContract(Name=@"EResult")]
+    [global::ProtoBuf.ProtoContract(Name=@"EResult", EnumPassthru=true)]
     public enum EResult
     {
             
@@ -5677,7 +5677,7 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _result; }
       set { _result = value; }
     }
-    [global::ProtoBuf.ProtoContract(Name=@"EResult")]
+    [global::ProtoBuf.ProtoContract(Name=@"EResult", EnumPassthru=true)]
     public enum EResult
     {
             
@@ -5839,7 +5839,7 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _result; }
       set { _result = value; }
     }
-    [global::ProtoBuf.ProtoContract(Name=@"EResult")]
+    [global::ProtoBuf.ProtoContract(Name=@"EResult", EnumPassthru=true)]
     public enum EResult
     {
             
@@ -5888,7 +5888,7 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _result; }
       set { _result = value; }
     }
-    [global::ProtoBuf.ProtoContract(Name=@"EResult")]
+    [global::ProtoBuf.ProtoContract(Name=@"EResult", EnumPassthru=true)]
     public enum EResult
     {
             
@@ -6145,7 +6145,7 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _result; }
       set { _result = value; }
     }
-    [global::ProtoBuf.ProtoContract(Name=@"EResult")]
+    [global::ProtoBuf.ProtoContract(Name=@"EResult", EnumPassthru=true)]
     public enum EResult
     {
             
@@ -6728,7 +6728,7 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _watch_tv_unique_secret_code; }
       set { _watch_tv_unique_secret_code = value; }
     }
-    [global::ProtoBuf.ProtoContract(Name=@"WatchGameResult")]
+    [global::ProtoBuf.ProtoContract(Name=@"WatchGameResult", EnumPassthru=true)]
     public enum WatchGameResult
     {
             
@@ -8679,7 +8679,7 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _result; }
       set { _result = value; }
     }
-    [global::ProtoBuf.ProtoContract(Name=@"EResult")]
+    [global::ProtoBuf.ProtoContract(Name=@"EResult", EnumPassthru=true)]
     public enum EResult
     {
             
@@ -8773,7 +8773,7 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _result; }
       set { _result = value; }
     }
-    [global::ProtoBuf.ProtoContract(Name=@"EResult")]
+    [global::ProtoBuf.ProtoContract(Name=@"EResult", EnumPassthru=true)]
     public enum EResult
     {
             
@@ -9022,7 +9022,7 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _info; }
       set { _info = value; }
     }
-    [global::ProtoBuf.ProtoContract(Name=@"EResult")]
+    [global::ProtoBuf.ProtoContract(Name=@"EResult", EnumPassthru=true)]
     public enum EResult
     {
             
@@ -9108,7 +9108,7 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _result; }
       set { _result = value; }
     }
-    [global::ProtoBuf.ProtoContract(Name=@"EResult")]
+    [global::ProtoBuf.ProtoContract(Name=@"EResult", EnumPassthru=true)]
     public enum EResult
     {
             
@@ -9203,7 +9203,7 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _result; }
       set { _result = value; }
     }
-    [global::ProtoBuf.ProtoContract(Name=@"EResult")]
+    [global::ProtoBuf.ProtoContract(Name=@"EResult", EnumPassthru=true)]
     public enum EResult
     {
             
@@ -9671,7 +9671,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-    [global::ProtoBuf.ProtoContract(Name=@"EResult")]
+    [global::ProtoBuf.ProtoContract(Name=@"EResult", EnumPassthru=true)]
     public enum EResult
     {
             
@@ -10717,7 +10717,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-    [global::ProtoBuf.ProtoContract(Name=@"DOTAChatChannelType_t")]
+    [global::ProtoBuf.ProtoContract(Name=@"DOTAChatChannelType_t", EnumPassthru=true)]
     public enum DOTAChatChannelType_t
     {
             
@@ -10740,7 +10740,7 @@ namespace SteamKit2.GC.Dota.Internal
       DOTAChannelType_Guild = 5
     }
   
-    [global::ProtoBuf.ProtoContract(Name=@"DOTA_WatchReplayType")]
+    [global::ProtoBuf.ProtoContract(Name=@"DOTA_WatchReplayType", EnumPassthru=true)]
     public enum DOTA_WatchReplayType
     {
             
@@ -10751,7 +10751,7 @@ namespace SteamKit2.GC.Dota.Internal
       DOTA_WATCH_REPLAY_HIGHLIGHTS = 1
     }
   
-    [global::ProtoBuf.ProtoContract(Name=@"DOTA_2013PassportSelectionIndices")]
+    [global::ProtoBuf.ProtoContract(Name=@"DOTA_2013PassportSelectionIndices", EnumPassthru=true)]
     public enum DOTA_2013PassportSelectionIndices
     {
             
@@ -11044,7 +11044,7 @@ namespace SteamKit2.GC.Dota.Internal
       PP13_SEL_SOLO_7 = 95
     }
   
-    [global::ProtoBuf.ProtoContract(Name=@"EItemEditorReservationResult")]
+    [global::ProtoBuf.ProtoContract(Name=@"EItemEditorReservationResult", EnumPassthru=true)]
     public enum EItemEditorReservationResult
     {
             

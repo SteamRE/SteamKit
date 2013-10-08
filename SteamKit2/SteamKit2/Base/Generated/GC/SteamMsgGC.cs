@@ -2949,7 +2949,7 @@ namespace SteamKit2.GC.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-    [global::ProtoBuf.ProtoContract(Name=@"EGCBaseMsg")]
+    [global::ProtoBuf.ProtoContract(Name=@"EGCBaseMsg", EnumPassthru=true)]
     public enum EGCBaseMsg
     {
             
@@ -2999,7 +2999,7 @@ namespace SteamKit2.GC.Internal
       k_EMsgGCLANServerAvailable = 4511
     }
   
-    [global::ProtoBuf.ProtoContract(Name=@"EGCBaseProtoObjectTypes")]
+    [global::ProtoBuf.ProtoContract(Name=@"EGCBaseProtoObjectTypes", EnumPassthru=true)]
     public enum EGCBaseProtoObjectTypes
     {
             
@@ -3010,7 +3010,7 @@ namespace SteamKit2.GC.Internal
       k_EProtoObjectLobbyInvite = 1002
     }
   
-    [global::ProtoBuf.ProtoContract(Name=@"GC_BannedWordType")]
+    [global::ProtoBuf.ProtoContract(Name=@"GC_BannedWordType", EnumPassthru=true)]
     public enum GC_BannedWordType
     {
             
