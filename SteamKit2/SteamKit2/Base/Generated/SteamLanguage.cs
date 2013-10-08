@@ -1859,6 +1859,7 @@ namespace SteamKit2
 		ChatMsg = 1,
 		Typing = 2,
 		InviteGame = 3,
+		[Obsolete( "No longer supported by clients" )]
 		Emote = 4,
 		LobbyGameStart = 5,
 		LeftConversation = 6,
@@ -2532,7 +2533,8 @@ namespace SteamKit2
 		HighPriority = 1,
 		PlatformWindows = 2,
 		PlatformMac = 4,
-		PlatformRestrictions = 6,
+		PlatformLinux = 8,
+		PlatformRestrictions = PlatformWindows | PlatformMac | PlatformLinux,
 	}
 	public enum ENewsUpdateType
 	{
