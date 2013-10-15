@@ -246,8 +246,8 @@
 	k_EMsgClientDRMDownloadRequest = 5485, // flags: 2, server type: -1
 	k_EMsgClientDRMDownloadResponse = 5486, // flags: 2, server type: -1
 	k_EMsgClientDRMFinalResult = 5487, // flags: 2, server type: -1
-	k_EMsgClientGetFriendsWhoPlayGame = 5488, // flags: 2, server type: -1
-	k_EMsgClientGetFriendsWhoPlayGameResponse = 5489, // flags: 2, server type: -1
+	k_EMsgClientGetFriendsWhoPlayGame = 5488, // flags: 6, server type: 47
+	k_EMsgClientGetFriendsWhoPlayGameResponse = 5489, // flags: 6, server type: 47
 	k_EMsgClientOGSBeginSession = 5490, // flags: 2, server type: -1
 	k_EMsgClientOGSBeginSessionResponse = 5491, // flags: 2, server type: -1
 	k_EMsgClientOGSEndSession = 5492, // flags: 2, server type: -1
@@ -503,3 +503,5 @@
 	k_EMsgClientEmoticonList = 9331, // flags: 6, server type: 63
 	k_EMsgClientSharedLibraryLockStatus = 9405, // flags: 2, server type: -1
 	k_EMsgClientSharedLibraryStopPlaying = 9406, // flags: 2, server type: -1
+	k_EMsgClientUnlockStreaming = 9507, // flags: 2, server type: -1
+	k_EMsgClientUnlockStreamingResponse = 9508, // flags: 2, server type: -1

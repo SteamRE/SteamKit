@@ -1783,5 +1783,8 @@ enum EMsg
 	ClientSharedLicensesStopPlaying = 9404; obsolete
 	ClientSharedLibraryLockStatus = 9405;
 	ClientSharedLibraryStopPlaying = 9406;
+	
+	ClientUnlockStreaming = 9507;
+	ClientUnlockStreamingResponse = 9508;
 
 };

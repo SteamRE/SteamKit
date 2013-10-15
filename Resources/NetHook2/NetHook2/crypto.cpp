@@ -29,6 +29,8 @@ struct MsgInfo_t
 	
 	uint32 nTimesSentProfile;
 	uint64 uBytesSentProfile;
+
+	uint64 uUnk1;
 };
 
 typedef std::map<EMsg, MsgInfo_t *> MsgList;
@@ -42,7 +44,7 @@ CCrypto::CCrypto()
 	: Encrypt_Detour( NULL ), Decrypt_Detour( NULL )
 {
 
-	assert( sizeof( MsgInfo_t ) == 48 ); // god help the padding never change
+	assert( sizeof( MsgInfo_t ) == 56); // god help the padding never change
 
 	CSimpleScan steamClientScan( "steamclient.dll" );
 
