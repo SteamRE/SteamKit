@@ -1859,6 +1859,8 @@ message CMsgTrading_InitiateTradeResponse {
 	optional uint64 other_steamid = 3;
 	optional uint32 steamguard_required_days = 4;
 	optional uint32 new_device_cooldown_days = 5;
+	optional uint32 default_password_reset_probation_days = 6;
+	optional uint32 password_reset_probation_days = 7;
 }
 
 message CMsgTrading_CancelTradeRequest {
@@ -2627,6 +2629,7 @@ message CMsgClientGetAuthorizedDevicesResponse {
 		optional uint32 last_access_time = 3;
 		optional uint32 borrower_id = 4;
 		optional bool is_pending = 5;
+		optional uint32 app_played = 6;
 	}
 
 	optional int32 eresult = 1 [default = 2];
@@ -2696,5 +2699,13 @@ message CMsgClientServiceCallResponse {
 	optional bytes portable_os_version_info = 11;
 	optional bytes portable_system_info = 12;
 	optional bool was_converted = 13;
+}
+
+message CMsgAMUnlockStreaming {
+}
+
+message CMsgAMUnlockStreamingResponse {
+	optional int32 eresult = 1 [default = 2];
+	optional bytes encryption_key = 2;
 }
 

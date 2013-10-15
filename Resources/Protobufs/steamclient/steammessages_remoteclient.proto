@@ -10,6 +10,11 @@ message CMsgRemoteClientBroadcastStatus {
 	optional int32 min_version = 2;
 	optional uint32 connect_port = 3;
 	optional string hostname = 4;
+	repeated fixed64 users = 5;
+}
+
+message CMsgRemoteClientBroadcastDiscovery {
+	optional uint32 seq_num = 1;
 }
 
 message CMsgRemoteClientAppStatus {
@@ -28,5 +33,21 @@ message CMsgRemoteClientAuth {
 
 message CMsgRemoteClientAuthResponse {
 	optional int32 eresult = 1 [default = 2];
+}
+
+message CMsgRemoteClientStartStream {
+	optional uint32 app_id = 1;
+	optional int32 environment = 2;
+}
+
+message CMsgRemoteClientStartStreamResponse {
+	optional int32 eresult = 1 [default = 2];
+	optional uint32 stream_port = 2;
+}
+
+message CMsgRemoteClientPing {
+}
+
+message CMsgRemoteClientPingResponse {
 }
 

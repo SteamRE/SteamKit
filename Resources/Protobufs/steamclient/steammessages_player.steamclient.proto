@@ -127,6 +127,18 @@ message CPlayer_GetLastPlayedTimes_Response {
 	repeated .CPlayer_GetLastPlayedTimes_Response.Game games = 1;
 }
 
+message CPlayer_GetNicknameList_Request {
+}
+
+message CPlayer_GetNicknameList_Response {
+	message PlayerNickname {
+		optional fixed32 accountid = 1;
+		optional string nickname = 2;
+	}
+
+	repeated .CPlayer_GetNicknameList_Response.PlayerNickname nicknames = 1;
+}
+
 service Player {
 	option (service_description) = "A service for accessing Steam player data";
 	rpc GetRecentlyPlayedGames (.CPlayer_GetRecentlyPlayedGames_Request) returns (.CPlayer_GetRecentlyPlayedGames_Response) {
@@ -152,5 +164,8 @@ service Player {
 	}
 	rpc ClientGetLastPlayedTimes (.CPlayer_GetLastPlayedTimes_Request) returns (.CPlayer_GetLastPlayedTimes_Response) {
 		option (method_description) = "Gets the last-played times for the account";
+	}
+	rpc GetNicknameList (.CPlayer_GetNicknameList_Request) returns (.CPlayer_GetNicknameList_Response) {
+		option (method_description) = "Gets the list of nicknames this user has for other users";
 	}
 }

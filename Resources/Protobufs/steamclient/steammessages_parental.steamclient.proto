@@ -22,6 +22,7 @@ message ParentalSettings {
 message CParental_EnableParentalSettings_Request {
 	optional string password = 1;
 	optional .ParentalSettings settings = 2;
+	optional fixed64 accountid = 10;
 }
 
 message CParental_EnableParentalSettings_Response {
@@ -29,12 +30,14 @@ message CParental_EnableParentalSettings_Response {
 
 message CParental_DisableParentalSettings_Request {
 	optional string password = 1;
+	optional fixed64 accountid = 10;
 }
 
 message CParental_DisableParentalSettings_Response {
 }
 
 message CParental_GetParentalSettings_Request {
+	optional fixed64 accountid = 10;
 }
 
 message CParental_GetParentalSettings_Response {
@@ -43,6 +46,7 @@ message CParental_GetParentalSettings_Response {
 
 message CParental_GetSignedParentalSettings_Request {
 	optional uint32 priority = 1;
+	optional fixed64 accountid = 10;
 }
 
 message CParental_GetSignedParentalSettings_Response {
@@ -53,9 +57,21 @@ message CParental_GetSignedParentalSettings_Response {
 message CParental_SetParentalSettings_Request {
 	optional string password = 1;
 	optional .ParentalSettings settings = 2;
+	optional string new_password = 3;
+	optional fixed64 accountid = 10;
 }
 
 message CParental_SetParentalSettings_Response {
+}
+
+message CParental_ValidatePassword_Request {
+	optional string password = 1;
+	optional string session = 2;
+	optional fixed64 accountid = 10;
+}
+
+message CParental_ValidatePassword_Response {
+	optional string token = 1;
 }
 
 message CParental_ParentalSettingsChange_Notification {
@@ -79,6 +95,9 @@ service Parental {
 	}
 	rpc SetParentalSettings (.CParental_SetParentalSettings_Request) returns (.CParental_SetParentalSettings_Response) {
 		option (method_description) = "Set the current parental settings for the logged in account";
+	}
+	rpc ValidatePassword (.CParental_ValidatePassword_Request) returns (.CParental_ValidatePassword_Response) {
+		option (method_description) = "Check if the given parental password is correct for the logged in account";
 	}
 }
 service ParentalClient {
