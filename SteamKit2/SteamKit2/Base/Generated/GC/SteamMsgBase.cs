@@ -2323,7 +2323,7 @@ namespace SteamKit2.GC.Internal
       get { return _webapi_param; }
       set { _webapi_param = value; }
     }
-    [global::ProtoBuf.ProtoContract(Name=@"RoutingMethod")]
+    [global::ProtoBuf.ProtoContract(Name=@"RoutingMethod", EnumPassthru=true)]
     public enum RoutingMethod
     {
             
@@ -2528,7 +2528,7 @@ namespace SteamKit2.GC.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-    [global::ProtoBuf.ProtoContract(Name=@"Option")]
+    [global::ProtoBuf.ProtoContract(Name=@"Option", EnumPassthru=true)]
     public enum Option
     {
             
@@ -2667,7 +2667,7 @@ namespace SteamKit2.GC.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-    [global::ProtoBuf.ProtoContract(Name=@"GCProtoBufMsgSrc")]
+    [global::ProtoBuf.ProtoContract(Name=@"GCProtoBufMsgSrc", EnumPassthru=true)]
     public enum GCProtoBufMsgSrc
     {
             

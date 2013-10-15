@@ -11,7 +11,7 @@
 // Generated from: gcsystemmsgs.proto
 namespace SteamKit2.GC.Internal
 {
-    [global::ProtoBuf.ProtoContract(Name=@"EGCSystemMsg")]
+    [global::ProtoBuf.ProtoContract(Name=@"EGCSystemMsg", EnumPassthru=true)]
     public enum EGCSystemMsg
     {
             
@@ -241,7 +241,7 @@ namespace SteamKit2.GC.Internal
       k_EGCMsgCheckFriendshipResponse = 506
     }
   
-    [global::ProtoBuf.ProtoContract(Name=@"ESOMsg")]
+    [global::ProtoBuf.ProtoContract(Name=@"ESOMsg", EnumPassthru=true)]
     public enum ESOMsg
     {
             
@@ -270,7 +270,7 @@ namespace SteamKit2.GC.Internal
       k_ESOMsg_CacheSubscribedUpToDate = 29
     }
   
-    [global::ProtoBuf.ProtoContract(Name=@"EGCBaseClientMsg")]
+    [global::ProtoBuf.ProtoContract(Name=@"EGCBaseClientMsg", EnumPassthru=true)]
     public enum EGCBaseClientMsg
     {
             
@@ -299,7 +299,7 @@ namespace SteamKit2.GC.Internal
       k_EMsgGCServerConnectionStatus = 4010
     }
   
-    [global::ProtoBuf.ProtoContract(Name=@"EGCToGCMsg")]
+    [global::ProtoBuf.ProtoContract(Name=@"EGCToGCMsg", EnumPassthru=true)]
     public enum EGCToGCMsg
     {
             

@@ -11,7 +11,7 @@
 // Generated from: matchmaker_common.proto
 namespace SteamKit2.GC.Dota.Internal
 {
-    [global::ProtoBuf.ProtoContract(Name=@"MatchType")]
+    [global::ProtoBuf.ProtoContract(Name=@"MatchType", EnumPassthru=true)]
     public enum MatchType
     {
             
@@ -28,7 +28,7 @@ namespace SteamKit2.GC.Dota.Internal
       MATCH_TYPE_SOLO_QUEUE = 3
     }
   
-    [global::ProtoBuf.ProtoContract(Name=@"DOTABotDifficulty")]
+    [global::ProtoBuf.ProtoContract(Name=@"DOTABotDifficulty", EnumPassthru=true)]
     public enum DOTABotDifficulty
     {
             
@@ -51,7 +51,7 @@ namespace SteamKit2.GC.Dota.Internal
       BOT_DIFFICULTY_INVALID = 5
     }
   
-    [global::ProtoBuf.ProtoContract(Name=@"MatchLanguages")]
+    [global::ProtoBuf.ProtoContract(Name=@"MatchLanguages", EnumPassthru=true)]
     public enum MatchLanguages
     {
             

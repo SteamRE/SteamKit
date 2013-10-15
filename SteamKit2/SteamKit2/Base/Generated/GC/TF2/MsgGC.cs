@@ -1161,7 +1161,7 @@ namespace SteamKit2.GC.TF2.Internal
       get { return _status; }
       set { _status = value; }
     }
-    [global::ProtoBuf.ProtoContract(Name=@"EStatus")]
+    [global::ProtoBuf.ProtoContract(Name=@"EStatus", EnumPassthru=true)]
     public enum EStatus
     {
             
@@ -1858,7 +1858,7 @@ namespace SteamKit2.GC.TF2.Internal
       get { return _prevent_match_account_id; }
       set { _prevent_match_account_id = value; }
     }
-    [global::ProtoBuf.ProtoContract(Name=@"State")]
+    [global::ProtoBuf.ProtoContract(Name=@"State", EnumPassthru=true)]
     public enum State
     {
             
@@ -2083,7 +2083,7 @@ namespace SteamKit2.GC.TF2.Internal
       get { return _quitting_results_in_penalty; }
       set { _quitting_results_in_penalty = value; }
     }
-    [global::ProtoBuf.ProtoContract(Name=@"ConnectState")]
+    [global::ProtoBuf.ProtoContract(Name=@"ConnectState", EnumPassthru=true)]
     public enum ConnectState
     {
             
@@ -2379,7 +2379,7 @@ namespace SteamKit2.GC.TF2.Internal
       get { return _replay_salt; }
       set { _replay_salt = value; }
     }
-    [global::ProtoBuf.ProtoContract(Name=@"State")]
+    [global::ProtoBuf.ProtoContract(Name=@"State", EnumPassthru=true)]
     public enum State
     {
             
@@ -2399,7 +2399,7 @@ namespace SteamKit2.GC.TF2.Internal
       SERVERASSIGN = 6
     }
   
-    [global::ProtoBuf.ProtoContract(Name=@"LobbyType")]
+    [global::ProtoBuf.ProtoContract(Name=@"LobbyType", EnumPassthru=true)]
     public enum LobbyType
     {
             
@@ -3087,7 +3087,7 @@ namespace SteamKit2.GC.TF2.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-    [global::ProtoBuf.ProtoContract(Name=@"PlayerConnectState")]
+    [global::ProtoBuf.ProtoContract(Name=@"PlayerConnectState", EnumPassthru=true)]
     public enum PlayerConnectState
     {
             
@@ -3101,7 +3101,7 @@ namespace SteamKit2.GC.TF2.Internal
       RESERVED = 2
     }
   
-    [global::ProtoBuf.ProtoContract(Name=@"Event")]
+    [global::ProtoBuf.ProtoContract(Name=@"Event", EnumPassthru=true)]
     public enum Event
     {
             
@@ -3424,7 +3424,7 @@ namespace SteamKit2.GC.TF2.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-    [global::ProtoBuf.ProtoContract(Name=@"GrantReason")]
+    [global::ProtoBuf.ProtoContract(Name=@"GrantReason", EnumPassthru=true)]
     public enum GrantReason
     {
             
@@ -3741,7 +3741,7 @@ namespace SteamKit2.GC.TF2.Internal
       get { return _remove_reason; }
       set { _remove_reason = value; }
     }
-    [global::ProtoBuf.ProtoContract(Name=@"RemoveReason")]
+    [global::ProtoBuf.ProtoContract(Name=@"RemoveReason", EnumPassthru=true)]
     public enum RemoveReason
     {
             
@@ -4260,7 +4260,7 @@ namespace SteamKit2.GC.TF2.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-    [global::ProtoBuf.ProtoContract(Name=@"TF_MatchmakingMode")]
+    [global::ProtoBuf.ProtoContract(Name=@"TF_MatchmakingMode", EnumPassthru=true)]
     public enum TF_MatchmakingMode
     {
             
@@ -4274,7 +4274,7 @@ namespace SteamKit2.GC.TF2.Internal
       TF_Matchmaking_TOBOR = 2
     }
   
-    [global::ProtoBuf.ProtoContract(Name=@"TF_Matchmaking_WizardStep")]
+    [global::ProtoBuf.ProtoContract(Name=@"TF_Matchmaking_WizardStep", EnumPassthru=true)]
     public enum TF_Matchmaking_WizardStep
     {
             
@@ -4297,7 +4297,7 @@ namespace SteamKit2.GC.TF2.Internal
       TF_Matchmaking_WizardStep_SEARCHING = 5
     }
   
-    [global::ProtoBuf.ProtoContract(Name=@"TF_GC_GameState")]
+    [global::ProtoBuf.ProtoContract(Name=@"TF_GC_GameState", EnumPassthru=true)]
     public enum TF_GC_GameState
     {
             
@@ -4323,7 +4323,7 @@ namespace SteamKit2.GC.TF2.Internal
       TF_GC_GAMESTATE_LAST = 8
     }
   
-    [global::ProtoBuf.ProtoContract(Name=@"TF_GC_TEAM")]
+    [global::ProtoBuf.ProtoContract(Name=@"TF_GC_TEAM", EnumPassthru=true)]
     public enum TF_GC_TEAM
     {
             
@@ -4343,7 +4343,7 @@ namespace SteamKit2.GC.TF2.Internal
       TF_GC_TEAM_NOTEAM = 5
     }
   
-    [global::ProtoBuf.ProtoContract(Name=@"TFLobbyReadyState")]
+    [global::ProtoBuf.ProtoContract(Name=@"TFLobbyReadyState", EnumPassthru=true)]
     public enum TFLobbyReadyState
     {
             
@@ -4357,7 +4357,7 @@ namespace SteamKit2.GC.TF2.Internal
       TFLobbyReadyState_DECLINED = 2
     }
   
-    [global::ProtoBuf.ProtoContract(Name=@"ChatChannelType_t")]
+    [global::ProtoBuf.ProtoContract(Name=@"ChatChannelType_t", EnumPassthru=true)]
     public enum ChatChannelType_t
     {
             
@@ -4374,7 +4374,7 @@ namespace SteamKit2.GC.TF2.Internal
       ChatChannelType_Lobby = 3
     }
   
-    [global::ProtoBuf.ProtoContract(Name=@"ServerMatchmakingState")]
+    [global::ProtoBuf.ProtoContract(Name=@"ServerMatchmakingState", EnumPassthru=true)]
     public enum ServerMatchmakingState
     {
             

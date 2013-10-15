@@ -339,7 +339,7 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _server_cluster; }
       set { _server_cluster = value; }
     }
-    [global::ProtoBuf.ProtoContract(Name=@"ServerType")]
+    [global::ProtoBuf.ProtoContract(Name=@"ServerType", EnumPassthru=true)]
     public enum ServerType
     {
             
@@ -1362,7 +1362,7 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _respawn_timer; }
       set { _respawn_timer = value; }
     }
-    [global::ProtoBuf.ProtoContract(Name=@"DOTAUltimateState")]
+    [global::ProtoBuf.ProtoContract(Name=@"DOTAUltimateState", EnumPassthru=true)]
     public enum DOTAUltimateState
     {
             
@@ -1927,7 +1927,7 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _result; }
       set { _result = value; }
     }
-    [global::ProtoBuf.ProtoContract(Name=@"Result")]
+    [global::ProtoBuf.ProtoContract(Name=@"Result", EnumPassthru=true)]
     public enum Result
     {
             

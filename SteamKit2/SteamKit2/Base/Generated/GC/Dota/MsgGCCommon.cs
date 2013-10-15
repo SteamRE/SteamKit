@@ -501,7 +501,7 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _common_guilds; }
     }
   
-    [global::ProtoBuf.ProtoContract(Name=@"State")]
+    [global::ProtoBuf.ProtoContract(Name=@"State", EnumPassthru=true)]
     public enum State
     {
             
@@ -1423,7 +1423,7 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _lan; }
       set { _lan = value; }
     }
-    [global::ProtoBuf.ProtoContract(Name=@"State")]
+    [global::ProtoBuf.ProtoContract(Name=@"State", EnumPassthru=true)]
     public enum State
     {
             
@@ -1449,7 +1449,7 @@ namespace SteamKit2.GC.Dota.Internal
       SERVERASSIGN = 6
     }
   
-    [global::ProtoBuf.ProtoContract(Name=@"LobbyType")]
+    [global::ProtoBuf.ProtoContract(Name=@"LobbyType", EnumPassthru=true)]
     public enum LobbyType
     {
             
@@ -2112,7 +2112,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-    [global::ProtoBuf.ProtoContract(Name=@"EDOTAGCMsg")]
+    [global::ProtoBuf.ProtoContract(Name=@"EDOTAGCMsg", EnumPassthru=true)]
     public enum EDOTAGCMsg
     {
             
@@ -2978,7 +2978,7 @@ namespace SteamKit2.GC.Dota.Internal
       k_EMsgGCDev_GrantWarKill = 8001
     }
   
-    [global::ProtoBuf.ProtoContract(Name=@"DOTA_GameMode")]
+    [global::ProtoBuf.ProtoContract(Name=@"DOTA_GameMode", EnumPassthru=true)]
     public enum DOTA_GameMode
     {
             
@@ -3037,7 +3037,7 @@ namespace SteamKit2.GC.Dota.Internal
       DOTA_GAMEMODE_AD = 17
     }
   
-    [global::ProtoBuf.ProtoContract(Name=@"DOTA_GameState")]
+    [global::ProtoBuf.ProtoContract(Name=@"DOTA_GameState", EnumPassthru=true)]
     public enum DOTA_GameState
     {
             
@@ -3069,7 +3069,7 @@ namespace SteamKit2.GC.Dota.Internal
       DOTA_GAMERULES_STATE_LAST = 8
     }
   
-    [global::ProtoBuf.ProtoContract(Name=@"DOTA_GC_TEAM")]
+    [global::ProtoBuf.ProtoContract(Name=@"DOTA_GC_TEAM", EnumPassthru=true)]
     public enum DOTA_GC_TEAM
     {
             
@@ -3092,7 +3092,7 @@ namespace SteamKit2.GC.Dota.Internal
       DOTA_GC_TEAM_NOTEAM = 5
     }
   
-    [global::ProtoBuf.ProtoContract(Name=@"DOTA_CM_PICK")]
+    [global::ProtoBuf.ProtoContract(Name=@"DOTA_CM_PICK", EnumPassthru=true)]
     public enum DOTA_CM_PICK
     {
             
@@ -3106,7 +3106,7 @@ namespace SteamKit2.GC.Dota.Internal
       DOTA_CM_BAD_GUYS = 2
     }
   
-    [global::ProtoBuf.ProtoContract(Name=@"DOTALeaverStatus_t")]
+    [global::ProtoBuf.ProtoContract(Name=@"DOTALeaverStatus_t", EnumPassthru=true)]
     public enum DOTALeaverStatus_t
     {
             
@@ -3138,7 +3138,7 @@ namespace SteamKit2.GC.Dota.Internal
       DOTA_LEAVER_DECLINED = 8
     }
   
-    [global::ProtoBuf.ProtoContract(Name=@"DOTALobbyReadyState")]
+    [global::ProtoBuf.ProtoContract(Name=@"DOTALobbyReadyState", EnumPassthru=true)]
     public enum DOTALobbyReadyState
     {
             
@@ -3152,7 +3152,7 @@ namespace SteamKit2.GC.Dota.Internal
       DOTALobbyReadyState_DECLINED = 2
     }
   
-    [global::ProtoBuf.ProtoContract(Name=@"DOTAGameVersion")]
+    [global::ProtoBuf.ProtoContract(Name=@"DOTAGameVersion", EnumPassthru=true)]
     public enum DOTAGameVersion
     {
             
@@ -3163,7 +3163,7 @@ namespace SteamKit2.GC.Dota.Internal
       GAME_VERSION_STABLE = 1
     }
   
-    [global::ProtoBuf.ProtoContract(Name=@"DOTAJoinLobbyResult")]
+    [global::ProtoBuf.ProtoContract(Name=@"DOTAJoinLobbyResult", EnumPassthru=true)]
     public enum DOTAJoinLobbyResult
     {
             
@@ -3192,7 +3192,7 @@ namespace SteamKit2.GC.Dota.Internal
       DOTA_JOIN_RESULT_IN_TEAM_PARTY = 7
     }
   
-    [global::ProtoBuf.ProtoContract(Name=@"DOTAMatchVote")]
+    [global::ProtoBuf.ProtoContract(Name=@"DOTAMatchVote", EnumPassthru=true)]
     public enum DOTAMatchVote
     {
             
@@ -3206,7 +3206,7 @@ namespace SteamKit2.GC.Dota.Internal
       DOTAMatchVote_NEGATIVE = 2
     }
   
-    [global::ProtoBuf.ProtoContract(Name=@"LobbyDotaTVDelay")]
+    [global::ProtoBuf.ProtoContract(Name=@"LobbyDotaTVDelay", EnumPassthru=true)]
     public enum LobbyDotaTVDelay
     {
             
@@ -3220,7 +3220,7 @@ namespace SteamKit2.GC.Dota.Internal
       LobbyDotaTV_300 = 2
     }
   
-    [global::ProtoBuf.ProtoContract(Name=@"EDOTAGCSessionNeed")]
+    [global::ProtoBuf.ProtoContract(Name=@"EDOTAGCSessionNeed", EnumPassthru=true)]
     public enum EDOTAGCSessionNeed
     {
             
@@ -3258,7 +3258,7 @@ namespace SteamKit2.GC.Dota.Internal
       k_EDOTAGCSessionNeed_GameServerRelay = 203
     }
   
-    [global::ProtoBuf.ProtoContract(Name=@"Fantasy_Roles")]
+    [global::ProtoBuf.ProtoContract(Name=@"Fantasy_Roles", EnumPassthru=true)]
     public enum Fantasy_Roles
     {
             
@@ -3275,7 +3275,7 @@ namespace SteamKit2.GC.Dota.Internal
       FANTASY_ROLE_SUPPORT = 3
     }
   
-    [global::ProtoBuf.ProtoContract(Name=@"Fantasy_Team_Slots")]
+    [global::ProtoBuf.ProtoContract(Name=@"Fantasy_Team_Slots", EnumPassthru=true)]
     public enum Fantasy_Team_Slots
     {
             
@@ -3292,7 +3292,7 @@ namespace SteamKit2.GC.Dota.Internal
       FANTASY_SLOT_ANY = 7
     }
   
-    [global::ProtoBuf.ProtoContract(Name=@"Fantasy_Selection_Mode")]
+    [global::ProtoBuf.ProtoContract(Name=@"Fantasy_Selection_Mode", EnumPassthru=true)]
     public enum Fantasy_Selection_Mode
     {
             
@@ -3309,7 +3309,7 @@ namespace SteamKit2.GC.Dota.Internal
       FANTASY_SELECTION_ENDED = 4
     }
   
-    [global::ProtoBuf.ProtoContract(Name=@"DOTA_TournamentEvents")]
+    [global::ProtoBuf.ProtoContract(Name=@"DOTA_TournamentEvents", EnumPassthru=true)]
     public enum DOTA_TournamentEvents
     {
             

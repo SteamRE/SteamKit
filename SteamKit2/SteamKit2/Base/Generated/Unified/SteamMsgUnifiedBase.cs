@@ -22,7 +22,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-    [global::ProtoBuf.ProtoContract(Name=@"EProtoExecutionSite")]
+    [global::ProtoBuf.ProtoContract(Name=@"EProtoExecutionSite", EnumPassthru=true)]
     public enum EProtoExecutionSite
     {
             
