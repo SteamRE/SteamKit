@@ -172,6 +172,15 @@ namespace SteamKit2.Unified.Internal
       get { return _authentication_exists_from_geoloc_before_mintime; }
       set { _authentication_exists_from_geoloc_before_mintime = value; }
     }
+
+    private ulong _machine_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"machine_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong machine_id
+    {
+      get { return _machine_id; }
+      set { _machine_id = value; }
+    }
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"NewAuthentication")]
   public partial class NewAuthentication : global::ProtoBuf.IExtensible
   {

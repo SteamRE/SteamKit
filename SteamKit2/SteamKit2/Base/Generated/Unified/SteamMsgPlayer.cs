@@ -759,6 +759,61 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPlayer_GetNicknameList_Request")]
+  public partial class CPlayer_GetNicknameList_Request : global::ProtoBuf.IExtensible
+  {
+    public CPlayer_GetNicknameList_Request() {}
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPlayer_GetNicknameList_Response")]
+  public partial class CPlayer_GetNicknameList_Response : global::ProtoBuf.IExtensible
+  {
+    public CPlayer_GetNicknameList_Response() {}
+    
+    private readonly global::System.Collections.Generic.List<CPlayer_GetNicknameList_Response.PlayerNickname> _nicknames = new global::System.Collections.Generic.List<CPlayer_GetNicknameList_Response.PlayerNickname>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"nicknames", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CPlayer_GetNicknameList_Response.PlayerNickname> nicknames
+    {
+      get { return _nicknames; }
+    }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"PlayerNickname")]
+  public partial class PlayerNickname : global::ProtoBuf.IExtensible
+  {
+    public PlayerNickname() {}
+    
+
+    private uint _accountid = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"accountid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint accountid
+    {
+      get { return _accountid; }
+      set { _accountid = value; }
+    }
+
+    private string _nickname = "";
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"nickname", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string nickname
+    {
+      get { return _nickname; }
+      set { _nickname = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     public interface IPlayer
     {
       CPlayer_GetRecentlyPlayedGames_Response GetRecentlyPlayedGames(CPlayer_GetRecentlyPlayedGames_Request request);
@@ -769,6 +824,7 @@ namespace SteamKit2.Unified.Internal
     CPlayer_GetBadges_Response GetBadges(CPlayer_GetBadges_Request request);
     CPlayer_GetCommunityBadgeProgress_Response GetCommunityBadgeProgress(CPlayer_GetCommunityBadgeProgress_Request request);
     CPlayer_GetLastPlayedTimes_Response ClientGetLastPlayedTimes(CPlayer_GetLastPlayedTimes_Request request);
+    CPlayer_GetNicknameList_Response GetNicknameList(CPlayer_GetNicknameList_Request request);
     
     }
     

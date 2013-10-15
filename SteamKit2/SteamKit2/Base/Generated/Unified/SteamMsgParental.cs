@@ -160,6 +160,15 @@ namespace SteamKit2.Unified.Internal
       get { return _settings; }
       set { _settings = value; }
     }
+
+    private ulong _accountid = default(ulong);
+    [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"accountid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong accountid
+    {
+      get { return _accountid; }
+      set { _accountid = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -189,6 +198,15 @@ namespace SteamKit2.Unified.Internal
       get { return _password; }
       set { _password = value; }
     }
+
+    private ulong _accountid = default(ulong);
+    [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"accountid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong accountid
+    {
+      get { return _accountid; }
+      set { _accountid = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -209,6 +227,15 @@ namespace SteamKit2.Unified.Internal
   {
     public CParental_GetParentalSettings_Request() {}
     
+
+    private ulong _accountid = default(ulong);
+    [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"accountid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong accountid
+    {
+      get { return _accountid; }
+      set { _accountid = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -246,6 +273,15 @@ namespace SteamKit2.Unified.Internal
     {
       get { return _priority; }
       set { _priority = value; }
+    }
+
+    private ulong _accountid = default(ulong);
+    [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"accountid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong accountid
+    {
+      get { return _accountid; }
+      set { _accountid = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -303,6 +339,24 @@ namespace SteamKit2.Unified.Internal
       get { return _settings; }
       set { _settings = value; }
     }
+
+    private string _new_password = "";
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"new_password", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string new_password
+    {
+      get { return _new_password; }
+      set { _new_password = value; }
+    }
+
+    private ulong _accountid = default(ulong);
+    [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"accountid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong accountid
+    {
+      get { return _accountid; }
+      set { _accountid = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -313,6 +367,62 @@ namespace SteamKit2.Unified.Internal
   {
     public CParental_SetParentalSettings_Response() {}
     
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CParental_ValidatePassword_Request")]
+  public partial class CParental_ValidatePassword_Request : global::ProtoBuf.IExtensible
+  {
+    public CParental_ValidatePassword_Request() {}
+    
+
+    private string _password = "";
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"password", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string password
+    {
+      get { return _password; }
+      set { _password = value; }
+    }
+
+    private string _session = "";
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"session", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string session
+    {
+      get { return _session; }
+      set { _session = value; }
+    }
+
+    private ulong _accountid = default(ulong);
+    [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"accountid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong accountid
+    {
+      get { return _accountid; }
+      set { _accountid = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CParental_ValidatePassword_Response")]
+  public partial class CParental_ValidatePassword_Response : global::ProtoBuf.IExtensible
+  {
+    public CParental_ValidatePassword_Response() {}
+    
+
+    private string _token = "";
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"token", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string token
+    {
+      get { return _token; }
+      set { _token = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -353,6 +463,7 @@ namespace SteamKit2.Unified.Internal
     CParental_GetParentalSettings_Response GetParentalSettings(CParental_GetParentalSettings_Request request);
     CParental_GetSignedParentalSettings_Response GetSignedParentalSettings(CParental_GetSignedParentalSettings_Request request);
     CParental_SetParentalSettings_Response SetParentalSettings(CParental_SetParentalSettings_Request request);
+    CParental_ValidatePassword_Response ValidatePassword(CParental_ValidatePassword_Request request);
     
     }
     

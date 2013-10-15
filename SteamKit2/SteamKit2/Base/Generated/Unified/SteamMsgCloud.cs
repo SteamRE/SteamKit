@@ -392,6 +392,97 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCloud_ExternalStorageTransferReport_Notification")]
+  public partial class CCloud_ExternalStorageTransferReport_Notification : global::ProtoBuf.IExtensible
+  {
+    public CCloud_ExternalStorageTransferReport_Notification() {}
+    
+
+    private string _host = "";
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"host", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string host
+    {
+      get { return _host; }
+      set { _host = value; }
+    }
+
+    private string _path = "";
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"path", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string path
+    {
+      get { return _path; }
+      set { _path = value; }
+    }
+
+    private bool _is_upload = default(bool);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"is_upload", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool is_upload
+    {
+      get { return _is_upload; }
+      set { _is_upload = value; }
+    }
+
+    private bool _success = default(bool);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"success", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool success
+    {
+      get { return _success; }
+      set { _success = value; }
+    }
+
+    private uint _http_status_code = default(uint);
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"http_status_code", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint http_status_code
+    {
+      get { return _http_status_code; }
+      set { _http_status_code = value; }
+    }
+
+    private ulong _bytes_expected = default(ulong);
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"bytes_expected", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong bytes_expected
+    {
+      get { return _bytes_expected; }
+      set { _bytes_expected = value; }
+    }
+
+    private ulong _bytes_actual = default(ulong);
+    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"bytes_actual", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong bytes_actual
+    {
+      get { return _bytes_actual; }
+      set { _bytes_actual = value; }
+    }
+
+    private uint _duration_ms = default(uint);
+    [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"duration_ms", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint duration_ms
+    {
+      get { return _duration_ms; }
+      set { _duration_ms = value; }
+    }
+
+    private uint _cellid = default(uint);
+    [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"cellid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint cellid
+    {
+      get { return _cellid; }
+      set { _cellid = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     public interface ICloud
     {
       CCloud_GetUploadServerInfo_Response GetUploadServerInfo(CCloud_GetUploadServerInfo_Request request);
@@ -400,6 +491,7 @@ namespace SteamKit2.Unified.Internal
     CCloud_Delete_Response Delete(CCloud_Delete_Request request);
     CCloud_GetClientEncryptionKey_Response GetClientEncryptionKey(CCloud_GetClientEncryptionKey_Request request);
     NoResponse CDNReport(CCloud_CDNReport_Notification request);
+    NoResponse ExternalStorageTransferReport(CCloud_ExternalStorageTransferReport_Notification request);
     
     }
     

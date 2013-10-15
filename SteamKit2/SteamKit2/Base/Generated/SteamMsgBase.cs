@@ -118,7 +118,7 @@ namespace SteamKit2.Internal
     }
 
     private bool _admin_spoofing_user = default(bool);
-    [global::ProtoBuf.ProtoMember(24, IsRequired = false, Name=@"admin_spoofing_user", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoMember(23, IsRequired = false, Name=@"admin_spoofing_user", DataFormat = global::ProtoBuf.DataFormat.Default)]
     [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool admin_spoofing_user
     {

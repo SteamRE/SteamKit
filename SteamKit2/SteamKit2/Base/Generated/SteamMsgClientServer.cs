@@ -11841,6 +11841,24 @@ namespace SteamKit2.Internal
       get { return _new_device_cooldown_days; }
       set { _new_device_cooldown_days = value; }
     }
+
+    private uint _default_password_reset_probation_days = default(uint);
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"default_password_reset_probation_days", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint default_password_reset_probation_days
+    {
+      get { return _default_password_reset_probation_days; }
+      set { _default_password_reset_probation_days = value; }
+    }
+
+    private uint _password_reset_probation_days = default(uint);
+    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"password_reset_probation_days", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint password_reset_probation_days
+    {
+      get { return _password_reset_probation_days; }
+      set { _password_reset_probation_days = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -16493,6 +16511,15 @@ namespace SteamKit2.Internal
       get { return _is_pending; }
       set { _is_pending = value; }
     }
+
+    private uint _app_played = default(uint);
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"app_played", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint app_played
+    {
+      get { return _app_played; }
+      set { _app_played = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -16906,6 +16933,44 @@ namespace SteamKit2.Internal
     {
       get { return _was_converted; }
       set { _was_converted = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgAMUnlockStreaming")]
+  public partial class CMsgAMUnlockStreaming : global::ProtoBuf.IExtensible
+  {
+    public CMsgAMUnlockStreaming() {}
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgAMUnlockStreamingResponse")]
+  public partial class CMsgAMUnlockStreamingResponse : global::ProtoBuf.IExtensible
+  {
+    public CMsgAMUnlockStreamingResponse() {}
+    
+
+    private int _eresult = (int)2;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"eresult", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue((int)2)]
+    public int eresult
+    {
+      get { return _eresult; }
+      set { _eresult = value; }
+    }
+
+    private byte[] _encryption_key = null;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"encryption_key", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public byte[] encryption_key
+    {
+      get { return _encryption_key; }
+      set { _encryption_key = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
