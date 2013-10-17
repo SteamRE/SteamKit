@@ -303,6 +303,20 @@ namespace SteamKit2
 
         }
 
+        /// <summary>
+        /// Requests a new WebAPI authentication user nonce. This is used if initial loginkey authentication fails.
+        /// </summary>
+        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="SteamClient.JobCallback&lt;T&gt;"/>.</returns>
+        public JobID RequestWebAPIUserNonce()
+        {
+            var reqMsg = new ClientMsgProtobuf<CMsgClientRequestWebAPIAuthenticateUserNonce>( EMsg.ClientRequestWebAPIAuthenticateUserNonce );
+            reqMsg.SourceJobID = Client.GetNextJobID();
+
+            this.Client.Send( reqMsg );
+
+            return reqMsg.SourceJobID;
+        }
+
 
         /// <summary>
         /// Handles a client message. This should not be called directly.
@@ -338,6 +352,10 @@ namespace SteamKit2
 
                 case EMsg.ClientWalletInfoUpdate:
                     HandleWalletInfo( packetMsg );
+                    break;
+
+                case EMsg.ClientRequestWebAPIAuthenticateUserNonceResponse:
+                    HandleWebAPIUserNonce( packetMsg );
                     break;
             }
         }
@@ -417,6 +435,14 @@ namespace SteamKit2
             var walletInfo = new ClientMsgProtobuf<CMsgClientWalletInfoUpdate>( packetMsg );
 
             var callback = new WalletInfoCallback( walletInfo.Body );
+            this.Client.PostCallback( callback );
+        }
+        void HandleWebAPIUserNonce( IPacketMsg packetMsg )
+        {
+            var userNonce = new ClientMsgProtobuf<CMsgClientRequestWebAPIAuthenticateUserNonceResponse>( packetMsg );
+
+            var innerCallback = new WebAPIUserNonceCallback( userNonce.Body );
+            var callback = new SteamClient.JobCallback<WebAPIUserNonceCallback>( userNonce.TargetJobID, innerCallback );
             this.Client.PostCallback( callback );
         }
         #endregion

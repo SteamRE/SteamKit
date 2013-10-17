@@ -388,5 +388,28 @@ namespace SteamKit2
                 };
             }
         }
+
+        /// <summary>
+        /// This cllback is recieved when requesting a new WebAPI authentication user nonce.
+        /// </summary>
+        public sealed class WebAPIUserNonceCallback : CallbackMsg
+        {
+            /// <summary>
+            /// Gets the result of the request.
+            /// </summary>
+            public EResult Result { get; private set; }
+
+            /// <summary>
+            /// Gets the authentication nonce.
+            /// </summary>
+            public string Nonce { get; private set; }
+
+
+            internal WebAPIUserNonceCallback( CMsgClientRequestWebAPIAuthenticateUserNonceResponse body )
+            {
+                this.Result = ( EResult )body.eresult;
+                this.Nonce = body.webapi_authenticate_user_nonce;
+            }
+        }
     }
 }
