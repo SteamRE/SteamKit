@@ -45,6 +45,8 @@ namespace SteamKit2
 
             internal Interface( string iface, string apiKey )
             {
+                Timeout = 1000 * 100; // 100 sec
+
                 asyncInterface = new AsyncInterface( iface, apiKey );
             }
 
