@@ -202,7 +202,7 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// This callback is recieved when account information is recieved from the network.
+        /// This callback is received when account information is recieved from the network.
         /// This generally happens after logon.
         /// </summary>
         public sealed class AccountInfoCallback : CallbackMsg
@@ -271,7 +271,7 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// This callback is recieved when wallet info is recieved from the network.
+        /// This callback is received when wallet info is recieved from the network.
         /// </summary>
         public sealed class WalletInfoCallback : CallbackMsg
         {
@@ -303,7 +303,7 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// This callback is recieved when the backend wants the client to update it's local machine authentication data.
+        /// This callback is received when the backend wants the client to update it's local machine authentication data.
         /// </summary>
         public sealed class UpdateMachineAuthCallback : CallbackMsg
         {
@@ -390,7 +390,7 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// This cllback is recieved when requesting a new WebAPI authentication user nonce.
+        /// This callback is received when requesting a new WebAPI authentication user nonce.
         /// </summary>
         public sealed class WebAPIUserNonceCallback : CallbackMsg
         {
