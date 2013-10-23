@@ -65,8 +65,8 @@ namespace SteamKit2
 
                 Flags = (EDepotFileFlag)ds.ReadUInt32();
 
-                HashFileName = ds.ReadBytes( 20 );
                 HashContent = ds.ReadBytes( 20 );
+                HashFileName = ds.ReadBytes( 20 );
 
                 NumChunks = ds.ReadUInt32();
 
