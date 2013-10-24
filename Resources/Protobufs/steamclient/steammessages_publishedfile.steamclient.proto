@@ -3,10 +3,9 @@ import "steammessages_unified_base.steamclient.proto";
 
 message CPublishedFile_Subscribe_Request {
 	optional uint64 publishedfileid = 1;
-	optional uint64 steamid = 2;
-	optional uint32 list_type = 3;
-	optional int32 appid = 4;
-	optional bool notify_client = 5;
+	optional uint32 list_type = 2;
+	optional int32 appid = 3;
+	optional bool notify_client = 4;
 }
 
 message CPublishedFile_Subscribe_Response {
@@ -14,10 +13,9 @@ message CPublishedFile_Subscribe_Response {
 
 message CPublishedFile_Unsubscribe_Request {
 	optional uint64 publishedfileid = 1;
-	optional uint64 steamid = 2;
-	optional uint32 list_type = 3;
-	optional int32 appid = 4;
-	optional bool notify_client = 5;
+	optional uint32 list_type = 2;
+	optional int32 appid = 3;
+	optional bool notify_client = 4;
 }
 
 message CPublishedFile_Unsubscribe_Response {

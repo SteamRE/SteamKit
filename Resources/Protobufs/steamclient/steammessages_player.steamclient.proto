@@ -139,6 +139,22 @@ message CPlayer_GetNicknameList_Response {
 	repeated .CPlayer_GetNicknameList_Response.PlayerNickname nicknames = 1;
 }
 
+message CPlayer_AcceptFriendInvites_Request {
+	optional uint32 action = 1 [(description) = "0 = decline, 1 = accept, 2 = ignore user"];
+	repeated fixed64 steamids = 2 [(description) = "List of steam IDs of users from which to accept/ignore/decline friend invitation"];
+}
+
+message CPlayer_AcceptFriendInvites_Response {
+}
+
+message CPlayer_AcceptGroupInvites_Request {
+	optional uint32 action = 1 [(description) = "0 = decline, 1 = accept"];
+	repeated fixed64 steamids = 2 [(description) = "List of steam IDs of groups from which to accept/ignore invitations"];
+}
+
+message CPlayer_AcceptGroupInvites_Response {
+}
+
 service Player {
 	option (service_description) = "A service for accessing Steam player data";
 	rpc GetRecentlyPlayedGames (.CPlayer_GetRecentlyPlayedGames_Request) returns (.CPlayer_GetRecentlyPlayedGames_Response) {
@@ -167,5 +183,11 @@ service Player {
 	}
 	rpc GetNicknameList (.CPlayer_GetNicknameList_Request) returns (.CPlayer_GetNicknameList_Response) {
 		option (method_description) = "Gets the list of nicknames this user has for other users";
+	}
+	rpc AcceptFriendInvites (.CPlayer_AcceptFriendInvites_Request) returns (.CPlayer_AcceptFriendInvites_Response) {
+		option (method_description) = "Accepts, declines, or ignores a batch of users";
+	}
+	rpc AcceptGroupInvites (.CPlayer_AcceptGroupInvites_Request) returns (.CPlayer_AcceptGroupInvites_Response) {
+		option (method_description) = "Accepts or declines invites to one or more groups";
 	}
 }

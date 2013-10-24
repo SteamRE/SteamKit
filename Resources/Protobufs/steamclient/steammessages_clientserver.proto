@@ -44,6 +44,7 @@ message CMsgClientTicketAuthComplete {
 	optional bytes DEPRECATED_ticket = 5;
 	optional uint32 ticket_crc = 6;
 	optional uint32 ticket_sequence = 7;
+	optional fixed64 owner_steam_id = 8;
 }
 
 message CMsgClientLogon {
@@ -428,6 +429,7 @@ message CMsgClientChangeStatus {
 	optional string player_name = 2;
 	optional bool is_auto_generated_name = 3;
 	optional bool high_priority = 4;
+	optional bool persona_set_by_user = 5;
 }
 
 message CMsgPersonaChangeResponse {
@@ -445,6 +447,7 @@ message CMsgClientPersonaState {
 		optional uint32 persona_state_flags = 6;
 		optional uint32 online_session_instances = 7;
 		optional uint32 published_instance_id = 8;
+		optional bool persona_set_by_user = 10;
 		optional string player_name = 15;
 		optional uint32 query_port = 20;
 		optional fixed64 steamid_source = 25;
@@ -1068,17 +1071,6 @@ message CMsgClientRequestEncryptedAppTicketResponse {
 	optional uint32 app_id = 1;
 	optional int32 eresult = 2 [default = 2];
 	optional .EncryptedAppTicket encrypted_app_ticket = 3;
-}
-
-message CMsgClientRequestOAuthTokenForApp {
-	optional uint32 app_id = 1;
-	optional string oauth_scope = 2;
-}
-
-message CMsgClientRequestOAuthTokenForAppResponse {
-	optional uint32 app_id = 1;
-	optional int32 eresult = 2 [default = 2];
-	optional string oauth_token = 3;
 }
 
 message CMsgClientWalletInfoUpdate {
