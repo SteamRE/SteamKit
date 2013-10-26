@@ -357,6 +357,10 @@ namespace SteamKit2
                 case EMsg.ClientRequestWebAPIAuthenticateUserNonceResponse:
                     HandleWebAPIUserNonce( packetMsg );
                     break;
+
+                case EMsg.ClientMarketingMessageUpdate2:
+                    HandleMarketingMessageUpdate( packetMsg );
+                    break;
             }
         }
 
@@ -443,6 +447,15 @@ namespace SteamKit2
 
             var innerCallback = new WebAPIUserNonceCallback( userNonce.Body );
             var callback = new SteamClient.JobCallback<WebAPIUserNonceCallback>( userNonce.TargetJobID, innerCallback );
+            this.Client.PostCallback( callback );
+        }
+        void HandleMarketingMessageUpdate( IPacketMsg packetMsg )
+        {
+            var marketingMessage = new ClientMsg<MsgClientMarketingMessageUpdate2>( packetMsg );
+
+            byte[] payload = marketingMessage.Payload.ToArray();
+
+            var callback = new MarketingMessageCallback( marketingMessage.Body, payload );
             this.Client.PostCallback( callback );
         }
         #endregion

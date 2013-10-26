@@ -2198,6 +2198,39 @@ namespace SteamKit2.Internal
 		}
 	}
 
+	public class MsgClientMarketingMessageUpdate2 : ISteamSerializableMessage
+	{
+		public EMsg GetEMsg() { return EMsg.ClientMarketingMessageUpdate2; }
+
+		// Static size: 4
+		public uint MarketingMessageUpdateTime { get; set; }
+		// Static size: 4
+		public uint Count { get; set; }
+
+		public MsgClientMarketingMessageUpdate2()
+		{
+			MarketingMessageUpdateTime = 0;
+			Count = 0;
+		}
+
+		public void Serialize(Stream stream)
+		{
+			BinaryWriter bw = new BinaryWriter( stream );
+
+			bw.Write( MarketingMessageUpdateTime );
+			bw.Write( Count );
+
+		}
+
+		public void Deserialize( Stream stream )
+		{
+			BinaryReader br = new BinaryReader( stream );
+
+			MarketingMessageUpdateTime = br.ReadUInt32();
+			Count = br.ReadUInt32();
+		}
+	}
+
 }
 #pragma warning restore 1591
 #pragma warning restore 0219

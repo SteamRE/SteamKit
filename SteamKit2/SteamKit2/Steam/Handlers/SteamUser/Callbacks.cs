@@ -6,6 +6,10 @@
 
 using System;
 using System.Net;
+using System.Collections.ObjectModel;
+using System.IO;
+using System.Collections.Generic;
+using System.Text;
 using SteamKit2.Internal;
 
 namespace SteamKit2
@@ -409,6 +413,78 @@ namespace SteamKit2
             {
                 this.Result = ( EResult )body.eresult;
                 this.Nonce = body.webapi_authenticate_user_nonce;
+            }
+        }
+
+        /// <summary>
+        /// This callback is fired when the client receives a marketing message update.
+        /// </summary>
+        public sealed class MarketingMessageCallback : CallbackMsg
+        {
+            /// <summary>
+            /// Represents a single marketing message.
+            /// </summary>
+            public sealed class Message
+            {
+                /// <summary>
+                /// Gets the unique identifier for this marketing message.
+                /// </summary>
+                public GlobalID ID { get; private set; }
+
+                /// <summary>
+                /// Gets the URL for this marketing message.
+                /// </summary>
+                public string URL { get; private set; }
+
+                /// <summary>
+                /// Gets the marketing message flags.
+                /// </summary>
+                public EMarketingMessageFlags Flags { get; private set; }
+
+
+                internal Message( byte[] data )
+                {
+                    using ( var ms = new MemoryStream( data ) )
+                    using ( var br = new BinaryReader( ms ) )
+                    {
+                        ID = br.ReadUInt64();
+                        URL = br.BaseStream.ReadNullTermString( Encoding.UTF8 );
+                        Flags = ( EMarketingMessageFlags )br.ReadUInt32();
+                    }
+                }
+            }
+
+
+            /// <summary>
+            /// Gets the time of this marketing message update.
+            /// </summary>
+            public DateTime UpdateTime { get; private set; }
+
+            /// <summary>
+            /// Gets the messages.
+            /// </summary>
+            public ReadOnlyCollection<Message> Messages { get; private set; }
+
+
+            internal MarketingMessageCallback( MsgClientMarketingMessageUpdate2 body, byte[] payload )
+            {
+                UpdateTime = Utils.DateTimeFromUnixTime( body.MarketingMessageUpdateTime );
+
+                var msgList = new List<Message>();
+
+                using ( var ms = new MemoryStream( payload ) )
+                using ( var br = new BinaryReader( ms ) )
+                {
+                    for ( int x = 0 ; x < body.Count ; ++x )
+                    {
+                        int dataLen = br.ReadInt32() - 4; // total length includes the 4 byte length
+                        byte[] messageData = br.ReadBytes( dataLen );
+
+                        msgList.Add( new Message( messageData ) );
+                    }
+                }
+
+                Messages = new ReadOnlyCollection<Message>( msgList );
             }
         }
     }
