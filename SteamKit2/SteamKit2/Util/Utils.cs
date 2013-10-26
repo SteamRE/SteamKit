@@ -18,12 +18,12 @@ namespace SteamKit2
     {
         public static DateTime DateTimeFromUnixTime( uint unixTime )
         {
-            DateTime origin = new DateTime( 1970, 1, 1, 0, 0, 0, 0 );
+            DateTime origin = new DateTime( 1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc );
             return origin.AddSeconds( unixTime );
         }
         public static uint DateTimeToUnixTime( DateTime time )
         {
-            DateTime origin = new DateTime( 1970, 1, 1, 0, 0, 0, 0 );
+            DateTime origin = new DateTime( 1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc );
             return ( uint )( time - origin ).TotalSeconds;
         }
 
