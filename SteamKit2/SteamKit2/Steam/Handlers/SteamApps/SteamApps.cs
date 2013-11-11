@@ -271,7 +271,7 @@ namespace SteamKit2
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="SteamClient.JobCallback&lt;T&gt;"/>.</returns>
         public JobID PICSGetAccessTokens( IEnumerable<uint> appIds, IEnumerable<uint> packageIds )
         {
-            var request = new ClientMsgProtobuf<CMsgClientPICSAccessTokenRequest>(EMsg.ClientPICSAccessTokenRequest);
+            var request = new ClientMsgProtobuf<CMsgClientPICSAccessTokenRequest>( EMsg.ClientPICSAccessTokenRequest );
             request.SourceJobID = Client.GetNextJobID();
 
             request.Body.packageids.AddRange( packageIds );
@@ -292,7 +292,7 @@ namespace SteamKit2
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="SteamClient.JobCallback&lt;T&gt;"/>.</returns>
         public JobID PICSGetChangesSince( uint lastChangeNumber = 0, bool sendAppChangelist = true, bool sendPackageChangelist = false )
         {
-            var request = new ClientMsgProtobuf<CMsgClientPICSChangesSinceRequest>(EMsg.ClientPICSChangesSinceRequest);
+            var request = new ClientMsgProtobuf<CMsgClientPICSChangesSinceRequest>( EMsg.ClientPICSChangesSinceRequest );
             request.SourceJobID = Client.GetNextJobID();
 
             request.Body.since_change_number = lastChangeNumber;
@@ -348,7 +348,7 @@ namespace SteamKit2
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="SteamClient.JobCallback&lt;T&gt;"/>.</returns>
         public JobID PICSGetProductInfo( IEnumerable<PICSRequest> apps, IEnumerable<PICSRequest> packages, bool metaDataOnly = false )
         {
-            var request = new ClientMsgProtobuf<CMsgClientPICSProductInfoRequest>(EMsg.ClientPICSProductInfoRequest);
+            var request = new ClientMsgProtobuf<CMsgClientPICSProductInfoRequest>( EMsg.ClientPICSProductInfoRequest );
             request.SourceJobID = Client.GetNextJobID();
 
             foreach ( var app_request in apps )
