@@ -351,3 +351,9 @@ class MsgClientCreateChatResponse<EMsg::ClientCreateChatResponse>
 	EChatRoomType chatRoomType;
 	steamidmarshal ulong steamIdFriendChat;
 };
+
+class MsgClientMarketingMessageUpdate2<EMsg::ClientMarketingMessageUpdate2>
+{
+	uint marketingMessageUpdateTime;
+	uint count;
+};

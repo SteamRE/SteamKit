@@ -1,5 +1,42 @@
 
 ------------------------------------------------------------------------------
+v 1.5.0			Oct 26, 2013
+------------------------------------------------------------------------------
+
+*	Added DebugLog.ClearListeners().
+*	Added WebAPI.AsyncInterface, a .NET TPL'd version of WebAPI.Interface.
+*	Added SteamClient.ServerListCallback.
+*	Added SteamUser.WebAPIUserNonceCallback, and a method to request it: SteamUser.RequestWebAPIUserNonce().
+*	Added SteamUser.MarketingMessageCallback.
+*	Added a new member to CMClient: CellID. This is the Steam server's recommended CellID.
+*	Added the ability to specify AccountID in SteamUser.LogOnDetails.
+*	Added a helper API to SteamUnifiedMessages for service messages.
+*	Fixed issue where CallbackManager was not triggering for JobCallback<T>.
+*	Fixed unhandled protobuf-net exception when (de)serializing messages with enums that are out of date.
+*	Fixed a bug where all WebAPI.Interface requests would instantly timeout.
+*	Fixed Manifest.HashFileName and Manifest.HashContent being swapped.
+*	Updated Emsg list.
+*	Updated game related GC messages.
+*	Updated the following enums: EResult, EChatEntryType, EAccountFlags, EClanPermission, EFriendFlags, EOSType, EServerType,
+	EBillingType, EChatMemberStateChange, EDepotFileFlag, EEconTradeResponse.
+*	The following members of EChatRoomEnterResponse have been obsoleted: NoRankingDataLobby, NoRankingDataUser, RankOutOfRange.
+*	EOSType.Win7 has been obsoleted and renamed to EOSType.Windows7.
+*	EEconTradeResponse.InitiatorAlreadyTrading has been obsoleted and renamed to EEconTradeResponse.AlreadyTrading.
+*	EEconTradeResponse.Error has been obsoleted and renamed to EEconTradeResponse.AlreadyHasTradeRequest.
+*	EEconTradeResponse.Timeout has been obsoleted and renamed to EEconTradeResponse.NoResponse.
+*	EChatEntryType.Emote has been obsoleted. Emotes are no longer supported by Steam.
+*	SteamFriends.ProfileInfoCallback.RecentPlaytime has been obsoleted. This data is no longer sent by the Steam servers.
+*	Updated to latest protobuf-net.
+
+BREAKING CHANGES
+*	SteamUser.LoggedOnCallback.Steam2Ticket is now exposed as a byte array, rather than a Steam2Ticket object.
+*	The SteamKit2.Blob namespace and all related classes have been removed.
+*	Support for Steam2 servers and the various classes within SteamKit have been removed.
+*	CDNClient has been heavily refactored to be more developer friendly.
+*	All DateTimes in callbacks are now DateTimeKind.Utc.
+
+
+------------------------------------------------------------------------------
 v 1.4.1			Jul 15, 2013
 ------------------------------------------------------------------------------
 
