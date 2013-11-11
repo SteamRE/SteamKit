@@ -44,6 +44,7 @@ message CMsgClientTicketAuthComplete {
 	optional bytes DEPRECATED_ticket = 5;
 	optional uint32 ticket_crc = 6;
 	optional uint32 ticket_sequence = 7;
+	optional fixed64 owner_steam_id = 8;
 }
 
 message CMsgClientLogon {
@@ -220,6 +221,7 @@ message CMsgClientGamesPlayed {
 
 message CMsgGSApprove {
 	optional fixed64 steam_id = 1;
+	optional fixed64 owner_steam_id = 2;
 }
 
 message CMsgGSDeny {
@@ -428,6 +430,7 @@ message CMsgClientChangeStatus {
 	optional string player_name = 2;
 	optional bool is_auto_generated_name = 3;
 	optional bool high_priority = 4;
+	optional bool persona_set_by_user = 5;
 }
 
 message CMsgPersonaChangeResponse {
@@ -445,6 +448,7 @@ message CMsgClientPersonaState {
 		optional uint32 persona_state_flags = 6;
 		optional uint32 online_session_instances = 7;
 		optional uint32 published_instance_id = 8;
+		optional bool persona_set_by_user = 10;
 		optional string player_name = 15;
 		optional uint32 query_port = 20;
 		optional fixed64 steamid_source = 25;
@@ -726,6 +730,8 @@ message CMsgClientConnectionStats {
 		optional int32 connect_successes = 2;
 		optional int32 connect_failures = 3;
 		optional int32 connections_dropped = 4;
+		optional uint32 seconds_running = 5;
+		optional uint32 msec_tologonthistime = 6;
 	}
 
 	message Stats_UDP {
@@ -1070,17 +1076,6 @@ message CMsgClientRequestEncryptedAppTicketResponse {
 	optional .EncryptedAppTicket encrypted_app_ticket = 3;
 }
 
-message CMsgClientRequestOAuthTokenForApp {
-	optional uint32 app_id = 1;
-	optional string oauth_scope = 2;
-}
-
-message CMsgClientRequestOAuthTokenForAppResponse {
-	optional uint32 app_id = 1;
-	optional int32 eresult = 2 [default = 2];
-	optional string oauth_token = 3;
-}
-
 message CMsgClientWalletInfoUpdate {
 	optional bool has_wallet = 1;
 	optional int32 balance = 2;
@@ -1146,13 +1141,13 @@ message CMsgClientPackageInfoResponse {
 	optional uint32 packages_pending = 3;
 }
 
-message CMsgPICSChangesSinceRequest {
+message CMsgClientPICSChangesSinceRequest {
 	optional uint32 since_change_number = 1;
 	optional bool send_app_info_changes = 2;
 	optional bool send_package_info_changes = 3;
 }
 
-message CMsgPICSChangesSinceResponse {
+message CMsgClientPICSChangesSinceResponse {
 	message PackageChange {
 		optional uint32 packageid = 1;
 		optional uint32 change_number = 2;
@@ -1168,11 +1163,11 @@ message CMsgPICSChangesSinceResponse {
 	optional uint32 current_change_number = 1;
 	optional uint32 since_change_number = 2;
 	optional bool force_full_update = 3;
-	repeated .CMsgPICSChangesSinceResponse.PackageChange package_changes = 4;
-	repeated .CMsgPICSChangesSinceResponse.AppChange app_changes = 5;
+	repeated .CMsgClientPICSChangesSinceResponse.PackageChange package_changes = 4;
+	repeated .CMsgClientPICSChangesSinceResponse.AppChange app_changes = 5;
 }
 
-message CMsgPICSProductInfoRequest {
+message CMsgClientPICSProductInfoRequest {
 	message AppInfo {
 		optional uint32 appid = 1;
 		optional uint64 access_token = 2;
@@ -1184,13 +1179,13 @@ message CMsgPICSProductInfoRequest {
 		optional uint64 access_token = 2;
 	}
 
-	repeated .CMsgPICSProductInfoRequest.PackageInfo packages = 1;
-	repeated .CMsgPICSProductInfoRequest.AppInfo apps = 2;
+	repeated .CMsgClientPICSProductInfoRequest.PackageInfo packages = 1;
+	repeated .CMsgClientPICSProductInfoRequest.AppInfo apps = 2;
 	optional bool meta_data_only = 3;
 	optional uint32 num_prev_failed = 4;
 }
 
-message CMsgPICSProductInfoResponse {
+message CMsgClientPICSProductInfoResponse {
 	option (msgpool_soft_limit) = 0;
 	option (msgpool_hard_limit) = 0;
 	message AppInfo {
@@ -1200,6 +1195,7 @@ message CMsgPICSProductInfoResponse {
 		optional bytes sha = 4;
 		optional bytes buffer = 5;
 		optional bool only_public = 6;
+		optional uint32 size = 7;
 	}
 
 	message PackageInfo {
@@ -1208,22 +1204,23 @@ message CMsgPICSProductInfoResponse {
 		optional bool missing_token = 3;
 		optional bytes sha = 4;
 		optional bytes buffer = 5;
+		optional uint32 size = 6;
 	}
 
-	repeated .CMsgPICSProductInfoResponse.AppInfo apps = 1;
+	repeated .CMsgClientPICSProductInfoResponse.AppInfo apps = 1;
 	repeated uint32 unknown_appids = 2;
-	repeated .CMsgPICSProductInfoResponse.PackageInfo packages = 3;
+	repeated .CMsgClientPICSProductInfoResponse.PackageInfo packages = 3;
 	repeated uint32 unknown_packageids = 4;
 	optional bool meta_data_only = 5;
 	optional bool response_pending = 6;
 }
 
-message CMsgPICSAccessTokenRequest {
+message CMsgClientPICSAccessTokenRequest {
 	repeated uint32 packageids = 1;
 	repeated uint32 appids = 2;
 }
 
-message CMsgPICSAccessTokenResponse {
+message CMsgClientPICSAccessTokenResponse {
 	message PackageToken {
 		optional uint32 packageid = 1;
 		optional uint64 access_token = 2;
@@ -1234,9 +1231,9 @@ message CMsgPICSAccessTokenResponse {
 		optional uint64 access_token = 2;
 	}
 
-	repeated .CMsgPICSAccessTokenResponse.PackageToken package_access_tokens = 1;
+	repeated .CMsgClientPICSAccessTokenResponse.PackageToken package_access_tokens = 1;
 	repeated uint32 package_denied_tokens = 2;
-	repeated .CMsgPICSAccessTokenResponse.AppToken app_access_tokens = 3;
+	repeated .CMsgClientPICSAccessTokenResponse.AppToken app_access_tokens = 3;
 	repeated uint32 app_denied_tokens = 4;
 }
 
@@ -2707,5 +2704,14 @@ message CMsgAMUnlockStreaming {
 message CMsgAMUnlockStreamingResponse {
 	optional int32 eresult = 1 [default = 2];
 	optional bytes encryption_key = 2;
+}
+
+message CMsgClientPlayingSessionState {
+	optional bool playing_blocked = 2;
+	optional uint32 playing_app = 3;
+}
+
+message CMsgClientPlayingSessionKick {
+	optional bool only_stop_game = 1;
 }
 

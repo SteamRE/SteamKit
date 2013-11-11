@@ -1400,9 +1400,11 @@ message CMsgDOTAWelcome {
 	optional uint32 last_time_played = 12;
 	optional uint32 last_ip_address = 13;
 	optional uint32 notify_successful_report = 14;
-	optional uint32 shutdownlawterminatetime = 15;
+	optional uint32 shutdownlawterminateminutes = 15;
 	optional uint32 banned_word_list_version = 16;
 	optional bool profile_private = 17;
+	optional uint32 currency = 18;
+	optional uint32 bang_no = 19;
 }
 
 message CSODOTAGameHeroFavorites {
@@ -1449,6 +1451,7 @@ message CLeague {
 	optional bool live = 2;
 	optional bool freeleague = 3;
 	optional fixed32 lastgametime = 4;
+	optional uint32 prize_pool_usd = 5;
 }
 
 message CMsgResponseLeagueInfo {
@@ -1520,10 +1523,6 @@ message CMsgDOTAHalloweenHighScoreResponse {
 	optional .CMsgDOTAMatch match = 2;
 	optional uint32 eresult = 3;
 	optional int32 round = 4;
-}
-
-message CMsgDOTANotifyResetKeybindings {
-	optional uint32 keybind_template = 1;
 }
 
 message CMsgDOTAStorePromoPagesRequest {
@@ -2032,5 +2031,8 @@ message CMsgDOTADiretidePrizeResponse {
 }
 
 message CMsgFlipLobbyTeams {
+}
+
+message CMsgPresentedClientTerminateDlg {
 }
 

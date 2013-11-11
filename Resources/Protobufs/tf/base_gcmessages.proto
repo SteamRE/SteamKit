@@ -417,9 +417,14 @@ message CMsgGCClientMarketData {
 	repeated .CMsgGCClientMarketDataEntry entries = 1;
 }
 
-message CMsgApplyStrangifier {
+message CMsgApplyToolToItem {
 	optional uint64 tool_item_id = 1;
 	optional uint64 subject_item_id = 2;
+}
+
+message CMsgApplyToolToBaseItem {
+	optional uint64 tool_item_id = 1;
+	optional uint32 baseitem_def_index = 2;
 }
 
 message CMsgRecipeComponent {
@@ -440,10 +445,5 @@ message CMsgSetItemEffectVerticalOffset {
 message CMsgSetHatEffectUseHeadOrigin {
 	optional uint64 item_id = 1;
 	optional bool use_head = 2;
-}
-
-message CMsgUseItemEaterRecharger {
-	optional uint64 tool_item_id = 1;
-	optional uint64 subject_item_id = 2;
 }
 

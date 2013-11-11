@@ -271,6 +271,7 @@ message CMsgUseItem {
 	repeated uint32 gift__potential_targets = 3;
 	optional uint32 duel__class_lock = 4;
 	optional fixed64 initiator_steam_id = 5;
+	optional bool itempack__ack_immediately = 6;
 }
 
 message CMsgReplayUploadedToYouTube {
@@ -504,8 +505,8 @@ message CMsgGCToGCWebAPIAccountChanged {
 }
 
 message CMsgGCToGCRequestPassportItemGrant {
-	optional fixed64 steam_id = 1;
 	optional uint32 league_id = 2;
 	optional int32 reward_flag = 3;
+	optional uint32 account_id = 4;
 }
 

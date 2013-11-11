@@ -328,7 +328,7 @@ message CGCSystemMsg_GetAccountDetails_Response {
 	optional bool is_trade_banned = 18;
 	optional uint32 trade_ban_expiration = 19;
 	optional uint32 accountid = 20;
-	optional bool eligible_for_community_market = 21;
+	optional uint32 suspension_end_time = 21;
 }
 
 message CMsgGCGetPersonaNames {
@@ -385,6 +385,15 @@ message CGCSystemMsg_GetPurchaseTrust_Response {
 	optional bool has_no_recent_password_resets = 2;
 	optional bool is_wallet_cash_trusted = 3;
 	optional uint32 time_all_trusted = 4;
+}
+
+message CMsgGCGetPartnerAccountLink {
+	optional fixed64 steamid = 1;
+}
+
+message CMsgGCGetPartnerAccountLink_Response {
+	optional uint32 pwid = 1;
+	optional uint32 nexonid = 2;
 }
 
 message CMsgGCRoutingInfo {

@@ -1,0 +1,170 @@
+import "google/protobuf/descriptor.proto";
+import "steammessages_unified_base.steamclient.proto";
+
+message CGameNotifications_Variable {
+	optional string key = 1 [(description) = "The name of the variable in the localized text -- anywhere that %variablename% is found within the text it will be substituded with the given value"];
+	optional string value = 2 [(description) = "The value of the variable to substitute in the localized text in place of the given variable.  Can itself be a localization token."];
+}
+
+message CGameNotifications_LocalizedText {
+	optional string token = 1 [(description) = "A localization token that maps to the desired string."];
+	repeated .CGameNotifications_Variable variables = 2 [(description) = "A list of variables values to substitute in any variables found in the localized string."];
+}
+
+message CGameNotifications_UserStatus {
+	optional fixed64 steamid = 1 [(description) = "The specific user's steamid."];
+	optional uint32 state = 2 [(description) = "The user's state. 0=Ready -- the user is ready to play.  1=Invited -- the user has been invited to the game but has not yet accepted/rejected.  2=Waiting -- The game is waiting on an action from the user. 3=Declined -- the user has declined or withdrawn from the game.  4=Completed, the game is over."];
+	optional .CGameNotifications_LocalizedText title = 3 [(description) = "Title of the session to display to this user in their list of active sessions."];
+	optional .CGameNotifications_LocalizedText message = 4 [(description) = "Subtitle of the session to display to this user user within their list of active sessions."];
+}
+
+message CGameNotifications_CreateSession_Request {
+	optional uint32 appid = 1 [(description) = "The appid to create the session for."];
+	optional uint64 context = 2 [(description) = "Game-specified context value the game can used to associate the session with some object on their backend."];
+	optional .CGameNotifications_LocalizedText title = 3 [(description) = "The title of the session to be displayed within each user's list of sessions."];
+	repeated .CGameNotifications_UserStatus users = 4 [(description) = "The initial state of all users in the session."];
+}
+
+message CGameNotifications_CreateSession_Response {
+	optional uint64 sessionid = 1 [(description) = "The sessionid of the created session."];
+}
+
+message CGameNotifications_DeleteSession_Request {
+	optional uint64 sessionid = 1 [(description) = "The sessionid to delete."];
+	optional uint32 appid = 2 [(description) = "The appid of the session to delete."];
+}
+
+message CGameNotifications_DeleteSession_Response {
+}
+
+message CGameNotifications_UpdateSession_Request {
+	optional uint64 sessionid = 1 [(description) = "The sessionid to update."];
+	optional uint32 appid = 2 [(description) = "The appid of the session to update."];
+	optional .CGameNotifications_LocalizedText title = 3 [(description) = "(Optional) The new title of the session.  If not specified, the title will not be changed."];
+	repeated uint64 remove_users = 4 [(description) = "(Optional) A list of users to remove from the session.  If not specified, no users will be removed."];
+	repeated .CGameNotifications_UserStatus update_users = 5 [(description) = "(Optional) A list of users whose state will be updated to reflect the given state. If the users are not already in the session, they will be added to it."];
+	optional .CGameNotifications_LocalizedText status_update = 6 [(description) = "(Optional) Text to be appended to the update feed for the game, which all users in the session will be able to browse.  If not specified, no text will be added."];
+}
+
+message CGameNotifications_UpdateSession_Response {
+}
+
+message CGameNotifications_EnumerateSessions_Request {
+	optional uint32 appid = 1 [(description) = "The sessionid to request details for. Optional. If not specified, all the user's sessions will be returned."];
+	optional bool include_status_updates = 2 [(description) = "(Optional) Boolean determining whether status updates should be included in the results. Defaults to false."];
+	optional bool include_all_user_messages = 3 [(description) = "(Optional) Boolean determining whether the message for all users should be included. Defaults to false."];
+	optional bool include_auth_user_message = 4 [(description) = "(Optional) Boolean determining whether the message for the authenticated user should be included. Defaults to false."];
+}
+
+message CGameNotifications_StatusUpdate {
+	optional .CGameNotifications_LocalizedText update_text = 1 [(description) = "The text associated with the update."];
+	optional uint64 time_updated = 2 [(description) = "The time the session was updated."];
+}
+
+message CGameNotifications_Session {
+	optional uint64 sessionid = 1 [(description) = "The sessionid for this session."];
+	optional uint64 appid = 2 [(description) = "The appid for the session."];
+	optional uint64 context = 3 [(description) = "Game-specified context value the game can used to associate the session with some object on their backend."];
+	optional .CGameNotifications_LocalizedText title = 4 [(description) = "The current title for the session."];
+	optional uint64 time_created = 5 [(description) = "The time the session was created."];
+	optional uint64 time_updated = 6 [(description) = "The last time the session was updated."];
+	repeated .CGameNotifications_UserStatus user_status = 7 [(description) = "The status of all the users in the session."];
+	repeated .CGameNotifications_StatusUpdate status_updates = 8 [(description) = "A historical list of all session updates where update_text was specified."];
+}
+
+message CGameNotifications_EnumerateSessions_Response {
+	repeated .CGameNotifications_Session sessions = 1 [(description) = "A list of the user's sessions."];
+}
+
+message CGameNotifications_EnumerateSessionsForApp_Request {
+	optional uint32 appid = 1 [(description) = "The sessionid to request details for. Optional. If not specified, all the user's sessions will be returned."];
+	optional fixed64 steamid = 2 [(description) = "The user whose sessions are to be enumerated."];
+	optional bool include_status_updates = 3 [(description) = "(Optional) Boolean determining whether status updates should be included in the results. Defaults to false."];
+	optional bool include_all_user_messages = 4 [(description) = "(Optional) Boolean determining whether the message for all users should be included. Defaults to false."];
+	optional bool include_auth_user_message = 5 [(description) = "(Optional) Boolean determining whether the message for the authenticated user should be included. Defaults to false."];
+}
+
+message CGameNotifications_EnumerateSessionsForApp_Response {
+	repeated .CGameNotifications_Session sessions = 1 [(description) = "A list of the user's sessions."];
+}
+
+message CGameNotifications_GetSessionDetailsForApp_Request {
+	message RequestedSession {
+		optional uint64 sessionid = 1 [(description) = "The sessionid to get details for."];
+		optional bool include_status_updates = 2 [(description) = "(Optional) Boolean determining whether status updates should be included in the results. Defaults to false."];
+		optional bool include_all_user_messages = 3 [(description) = "(Optional) Boolean determining whether the message for all users should be included. Defaults to false."];
+		optional bool include_auth_user_message = 4 [(description) = "(Optional) Boolean determining whether the message for the authenticated user should be included. Defaults to false."];
+	}
+
+	repeated .CGameNotifications_GetSessionDetailsForApp_Request.RequestedSession sessions = 1;
+	optional uint32 appid = 2 [(description) = "The appid for the sessions."];
+}
+
+message CGameNotifications_GetSessionDetailsForApp_Response {
+	repeated .CGameNotifications_Session sessions = 1 [(description) = "The details of the session."];
+}
+
+message CGameNotifications_RequestNotifications_Request {
+	optional uint64 steamid = 1 [(description) = "The steamid to request notifications for."];
+	optional uint32 appid = 2 [(description) = "The appid to request notifications for."];
+}
+
+message CGameNotifications_RequestNotifications_Response {
+	optional bool was_created = 1;
+	optional bool allow_notifications = 2;
+}
+
+message GameNotificationSettings {
+	optional uint32 appid = 1 [(description) = "The appid to create the session for."];
+	optional bool allow_notifications = 2 [(description) = "Whether the user allows notification for this app."];
+}
+
+message CGameNotifications_UpdateNotificationSettings_Request {
+	repeated .GameNotificationSettings game_notification_settings = 1;
+}
+
+message CGameNotifications_UpdateNotificationSettings_Response {
+}
+
+message CGameNotifications_OnNotificationsRequested_Request {
+	optional fixed64 steamid = 1 [(description) = "steamid of the user who notifications were requested for."];
+	optional uint32 appid = 2 [(description) = "The appid that requested notifications."];
+}
+
+message CGameNotifications_OnNotificationsRequested_Response {
+}
+
+service GameNotifications {
+	option (service_description) = "A service for functions related to the asyncronous game notification server.";
+	rpc CreateSession (.CGameNotifications_CreateSession_Request) returns (.CGameNotifications_CreateSession_Response) {
+		option (method_description) = "Creates an async game session";
+	}
+	rpc DeleteSession (.CGameNotifications_DeleteSession_Request) returns (.CGameNotifications_DeleteSession_Response) {
+		option (method_description) = "Deletes an async game session";
+	}
+	rpc UpdateSession (.CGameNotifications_UpdateSession_Request) returns (.CGameNotifications_UpdateSession_Response) {
+		option (method_description) = "Updates a game session";
+	}
+	rpc EnumerateSessions (.CGameNotifications_EnumerateSessions_Request) returns (.CGameNotifications_EnumerateSessions_Response) {
+		option (method_description) = "Enumerates a user's sessions";
+	}
+	rpc EnumerateSessionsForApp (.CGameNotifications_EnumerateSessionsForApp_Request) returns (.CGameNotifications_EnumerateSessionsForApp_Response) {
+		option (method_description) = "Enumerates a user's sessions";
+	}
+	rpc GetSessionDetailsForApp (.CGameNotifications_GetSessionDetailsForApp_Request) returns (.CGameNotifications_GetSessionDetailsForApp_Response) {
+		option (method_description) = "Get the details for a specific session";
+	}
+	rpc RequestNotifications (.CGameNotifications_RequestNotifications_Request) returns (.CGameNotifications_RequestNotifications_Response) {
+		option (method_description) = "Requests that a user receive game notifications for an app";
+	}
+	rpc UpdateNotificationSettings (.CGameNotifications_UpdateNotificationSettings_Request) returns (.CGameNotifications_UpdateNotificationSettings_Response) {
+		option (method_description) = "Updates whether a user allows game notifications for a specific app";
+	}
+}
+service GameNotificationsClient {
+	option (service_description) = "Client notifications";
+	option (service_execution_site) = k_EProtoExecutionSiteSteamClient;
+	rpc OnNotificationsRequested (.CGameNotifications_OnNotificationsRequested_Request) returns (.CGameNotifications_OnNotificationsRequested_Response) {
+		option (method_description) = "Requests that the user opt into notifications";
+	}
+}

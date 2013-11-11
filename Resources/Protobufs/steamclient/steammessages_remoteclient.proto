@@ -1,8 +1,19 @@
 import "steammessages_base.proto";
 
+enum ERemoteClientBroadcastMsg {
+	k_ERemoteClientBroadcastMsgDiscovery = 0;
+	k_ERemoteClientBroadcastMsgStatus = 1;
+	k_ERemoteClientBroadcastMsgOffline = 2;
+}
+
+enum ERemoteClientService {
+	k_ERemoteClientServiceNone = 0;
+	k_ERemoteClientServiceRemoteControl = 1;
+}
+
 message CMsgRemoteClientBroadcastHeader {
 	optional uint64 client_id = 1;
-	optional uint32 msg_type = 2;
+	optional .ERemoteClientBroadcastMsg msg_type = 2 [default = k_ERemoteClientBroadcastMsgDiscovery];
 }
 
 message CMsgRemoteClientBroadcastStatus {
@@ -11,6 +22,7 @@ message CMsgRemoteClientBroadcastStatus {
 	optional uint32 connect_port = 3;
 	optional string hostname = 4;
 	repeated fixed64 users = 5;
+	optional uint32 enabled_services = 6;
 }
 
 message CMsgRemoteClientBroadcastDiscovery {
@@ -38,11 +50,14 @@ message CMsgRemoteClientAuthResponse {
 message CMsgRemoteClientStartStream {
 	optional uint32 app_id = 1;
 	optional int32 environment = 2;
+	optional bool has_gamepad = 3;
+	optional int32 launch_option = 4 [default = -1];
 }
 
 message CMsgRemoteClientStartStreamResponse {
-	optional int32 eresult = 1 [default = 2];
+	optional int32 e_launch_result = 1 [default = 2];
 	optional uint32 stream_port = 2;
+	repeated int32 launch_options = 3;
 }
 
 message CMsgRemoteClientPing {

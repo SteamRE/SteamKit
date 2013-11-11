@@ -9,6 +9,38 @@ message CCloud_GetUploadServerInfo_Response {
 	optional string server_url = 1;
 }
 
+message CCloud_BeginHTTPUpload_Request {
+	optional uint32 appid = 1 [(description) = "App ID for which the file is being uploaded."];
+	optional uint32 file_size = 2 [(description) = "Original file size in bytes."];
+	optional string filename = 3 [(description) = "Name of the file to store in the cloud."];
+	optional string file_sha = 4 [(description) = "Hex string (40 digits) representing the SHA1 digest of the file."];
+	optional bool is_public = 5 [(description) = "True if the file should be marked public on the UFS, false otherwise."];
+	repeated string platforms_to_sync = 6 [(description) = "Array of string specifying which platforms to sync; value values: all, windows, osx, linux."];
+}
+
+message CCloud_BeginHTTPUpload_Response {
+	message HTTPHeaders {
+		optional string name = 1;
+		optional string value = 2;
+	}
+
+	optional fixed64 ugcid = 1 [(description) = "UGC ID of the uploaded file."];
+	optional fixed32 timestamp = 2 [(description) = "Server timestamp of file."];
+	optional string url_host = 3 [(description) = "Host name of server to which file should be uploaded via HTTP PUT."];
+	optional string url_path = 4 [(description) = "Relative path on server to which file should be uploaded."];
+	optional bool use_https = 5 [(description) = "If true, use https, otherwise use http."];
+	repeated .CCloud_BeginHTTPUpload_Response.HTTPHeaders request_headers = 6 [(description) = "Name-value pairs to be sent in HTTP PUT request."];
+}
+
+message CCloud_CommitHTTPUpload_Request {
+	optional bool transfer_succeeded = 1 [(description) = "True if the HTTP PUT to the upload URL succeeded (URL provided in response to Cloud.BeginHTTPUpload), false if a failure occurred."];
+	optional uint32 appid = 2 [(description) = "App ID for which the file is being uploaded. Must match the app ID provided to Cloud.BeginHTTPUpload."];
+	optional string file_sha = 3 [(description) = "Hex string (40 digits) representing the SHA1 digest of the file. Must match the SHA1 digest provided to Cloud.BeginHTTPUpload."];
+}
+
+message CCloud_CommitHTTPUpload_Response {
+}
+
 message CCloud_GetFileDetails_Request {
 	optional uint64 ugcid = 1 [(description) = "ID of the Cloud file to get details for."];
 	optional uint32 appid = 2 [(description) = "App ID the file belongs to."];
@@ -82,6 +114,12 @@ service Cloud {
 	option (service_description) = "A service for Steam Cloud operations.";
 	rpc GetUploadServerInfo (.CCloud_GetUploadServerInfo_Request) returns (.CCloud_GetUploadServerInfo_Response) {
 		option (method_description) = "Returns the URL of the proper cloud server for a user.";
+	}
+	rpc BeginHTTPUpload (.CCloud_BeginHTTPUpload_Request) returns (.CCloud_BeginHTTPUpload_Response) {
+		option (method_description) = "Begins the process of uploading a file to Steam external storage services. File should be uploaded via HTTP PUT to the returned URL, after which the upload must be finalized by a call to CommitHTTPUpload.";
+	}
+	rpc CommitHTTPUpload (.CCloud_CommitHTTPUpload_Request) returns (.CCloud_CommitHTTPUpload_Response) {
+		option (method_description) = "Commits a file upload initiated by BeginHTTPUpload and transferred via HTTP PUT.";
 	}
 	rpc GetFileDetails (.CCloud_GetFileDetails_Request) returns (.CCloud_GetFileDetails_Response) {
 		option (method_description) = "Returns details on a Cloud file.";

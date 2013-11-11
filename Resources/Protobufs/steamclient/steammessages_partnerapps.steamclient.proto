@@ -1,0 +1,91 @@
+import "google/protobuf/descriptor.proto";
+import "steammessages_unified_base.steamclient.proto";
+
+message CPartnerApps_RequestUploadToken_Request {
+	optional string filename = 1;
+	optional uint32 appid = 2;
+}
+
+message CPartnerApps_RequestUploadToken_Response {
+	optional uint64 upload_token = 1;
+	optional string location = 2;
+	optional uint64 routing_id = 3;
+}
+
+message CPartnerApps_FinishUpload_Request {
+	optional uint64 upload_token = 1;
+	optional uint64 routing_id = 2;
+	optional uint32 app_id = 3;
+}
+
+message CPartnerApps_FinishUploadKVSign_Response {
+	optional string signed_installscript = 1;
+}
+
+message CPartnerApps_FinishUploadLegacyDRM_Request {
+	optional uint64 upload_token = 1;
+	optional uint64 routing_id = 2;
+	optional uint32 app_id = 3;
+	optional uint32 flags = 4;
+	optional string tool_name = 5;
+}
+
+message CPartnerApps_FinishUploadLegacyDRM_Response {
+	optional string file_id = 1;
+}
+
+message CPartnerApps_FinishUpload_Response {
+}
+
+message CPartnerApps_FindDRMUploads_Request {
+	optional int32 app_id = 1;
+}
+
+message CPartnerApps_ExistingDRMUpload {
+	optional string file_id = 1;
+	optional uint32 app_id = 2;
+	optional int32 actor_id = 3;
+	optional string supplied_name = 5;
+	optional uint32 flags = 6;
+	optional string mod_type = 7;
+	optional fixed32 timestamp = 8;
+}
+
+message CPartnerApps_FindDRMUploads_Response {
+	repeated .CPartnerApps_ExistingDRMUpload uploads = 1;
+}
+
+message CPartnerApps_Download_Request {
+	optional string file_id = 1;
+}
+
+message CPartnerApps_Download_Response {
+	optional string download_url = 1;
+	optional int32 app_id = 2;
+}
+
+service PartnerApps {
+	option (service_description) = "Service methods for app management by partners";
+	rpc RequestKVSignUploadToken (.CPartnerApps_RequestUploadToken_Request) returns (.CPartnerApps_RequestUploadToken_Response) {
+		option (method_description) = "Request upload token for installscript file upload / signing";
+	}
+	rpc RequestDRMUploadToken (.CPartnerApps_RequestUploadToken_Request) returns (.CPartnerApps_RequestUploadToken_Response) {
+		option (method_description) = "Request upload token for executable file upload / processing";
+	}
+	rpc RequestCEGUploadToken (.CPartnerApps_RequestUploadToken_Request) returns (.CPartnerApps_RequestUploadToken_Response) {
+		option (method_description) = "Request upload token for custom executable file upload / processing";
+	}
+	rpc FinishUploadKVSign (.CPartnerApps_FinishUpload_Request) returns (.CPartnerApps_FinishUploadKVSign_Response) {
+		option (method_description) = "Commit method to sign an installscript after an upload is complete";
+	}
+	rpc FinishUploadDRMUpload (.CPartnerApps_FinishUploadLegacyDRM_Request) returns (.CPartnerApps_FinishUploadLegacyDRM_Response) {
+		option (method_description) = "Commit method for executable file processing";
+	}
+	rpc FinishUploadCEGUpload (.CPartnerApps_FinishUpload_Request) returns (.CPartnerApps_FinishUpload_Response) {
+		option (method_description) = "Commit method for custom executable file processing";
+	}
+	rpc FindDRMUploads (.CPartnerApps_FindDRMUploads_Request) returns (.CPartnerApps_FindDRMUploads_Response) {
+		option (method_description) = "Finds N most recent prior uploads by appid";
+	}
+	rpc Download (.CPartnerApps_Download_Request) returns (.CPartnerApps_Download_Response);
+}

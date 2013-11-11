@@ -205,6 +205,10 @@ message CMsgSpectateFriendGameResponse {
 message CMsgAbandonCurrentGame {
 }
 
+message CMsgClientSuspended {
+	optional uint32 time_end = 1;
+}
+
 message CMsgPracticeLobbySetDetails {
 	optional uint64 lobby_id = 1;
 	optional string game_name = 2;

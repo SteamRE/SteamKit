@@ -74,6 +74,8 @@ enum EGCSystemMsg {
 	k_EGCMsgGCAccountVacStatusChange = 504;
 	k_EGCMsgCheckFriendship = 505;
 	k_EGCMsgCheckFriendshipResponse = 506;
+	k_EGCMsgGetPartnerAccountLink = 507;
+	k_EGCMsgGetPartnerAccountLinkResponse = 508;
 }
 
 enum ESOMsg {

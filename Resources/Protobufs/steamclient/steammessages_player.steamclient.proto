@@ -139,6 +139,46 @@ message CPlayer_GetNicknameList_Response {
 	repeated .CPlayer_GetNicknameList_Response.PlayerNickname nicknames = 1;
 }
 
+message CPlayer_AcceptFriendInvites_Request {
+	optional uint32 action = 1 [(description) = "0 = decline, 1 = accept, 2 = ignore user"];
+	repeated fixed64 steamids = 2 [(description) = "List of steam IDs of users from which to accept/ignore/decline friend invitation"];
+}
+
+message CPlayer_AcceptFriendInvites_Response {
+}
+
+message CPlayer_AcceptGroupInvites_Request {
+	optional uint32 action = 1 [(description) = "0 = decline, 1 = accept"];
+	repeated fixed64 steamids = 2 [(description) = "List of steam IDs of groups from which to accept/ignore invitations"];
+}
+
+message CPlayer_AcceptGroupInvites_Response {
+}
+
+message CPlayer_AddFriend_Request {
+	optional fixed64 steamid = 1 [(description) = "Steam ID of user to whom to send a friend invite."];
+}
+
+message CPlayer_AddFriend_Response {
+	optional bool invite_sent = 1 [(description) = "True if the operation was successful, false otherwise."];
+}
+
+message CPlayer_RemoveFriend_Request {
+	optional fixed64 steamid = 1 [(description) = "Steam ID of friend to remove."];
+}
+
+message CPlayer_RemoveFriend_Response {
+}
+
+message CPlayer_IsPlayingSharedGame_Request {
+	optional uint64 steamid = 1 [(description) = "The player we're asking about"];
+	optional uint32 appid_playing = 2 [(description) = "The game player is currently playing"];
+}
+
+message CPlayer_IsPlayingSharedGame_Response {
+	optional uint64 lender_steamid = 1 [(description) = "Valid SteamID of lender if game is currently borrowed"];
+}
+
 service Player {
 	option (service_description) = "A service for accessing Steam player data";
 	rpc GetRecentlyPlayedGames (.CPlayer_GetRecentlyPlayedGames_Request) returns (.CPlayer_GetRecentlyPlayedGames_Response) {
@@ -167,5 +207,20 @@ service Player {
 	}
 	rpc GetNicknameList (.CPlayer_GetNicknameList_Request) returns (.CPlayer_GetNicknameList_Response) {
 		option (method_description) = "Gets the list of nicknames this user has for other users";
+	}
+	rpc AcceptFriendInvites (.CPlayer_AcceptFriendInvites_Request) returns (.CPlayer_AcceptFriendInvites_Response) {
+		option (method_description) = "Accepts, declines, or ignores a batch of users";
+	}
+	rpc AcceptGroupInvites (.CPlayer_AcceptGroupInvites_Request) returns (.CPlayer_AcceptGroupInvites_Response) {
+		option (method_description) = "Accepts or declines invites to one or more groups";
+	}
+	rpc AddFriend (.CPlayer_AddFriend_Request) returns (.CPlayer_AddFriend_Response) {
+		option (method_description) = "Invites another Steam user to be a friend";
+	}
+	rpc RemoveFriend (.CPlayer_RemoveFriend_Request) returns (.CPlayer_RemoveFriend_Response) {
+		option (method_description) = "Removes a friend or ignores a friend suggestion";
+	}
+	rpc IsPlayingSharedGame (.CPlayer_IsPlayingSharedGame_Request) returns (.CPlayer_IsPlayingSharedGame_Response) {
+		option (method_description) = "Returns valid lender SteamID if game currently played is borrowed";
 	}
 }

@@ -643,6 +643,7 @@ message CMsgMvMVictoryInfo {
 		BADGE_LEVELED = 1;
 		SQUAD_SURPLUS = 2;
 		MANN_UP = 3;
+		HELP_A_NOOB = 4;
 	}
 
 	repeated .CMsgMvMVictoryInfo.Player players = 1;

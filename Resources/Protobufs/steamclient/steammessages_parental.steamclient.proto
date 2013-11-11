@@ -22,7 +22,7 @@ message ParentalSettings {
 message CParental_EnableParentalSettings_Request {
 	optional string password = 1;
 	optional .ParentalSettings settings = 2;
-	optional fixed64 accountid = 10;
+	optional fixed64 steamid = 10;
 }
 
 message CParental_EnableParentalSettings_Response {
@@ -30,14 +30,14 @@ message CParental_EnableParentalSettings_Response {
 
 message CParental_DisableParentalSettings_Request {
 	optional string password = 1;
-	optional fixed64 accountid = 10;
+	optional fixed64 steamid = 10;
 }
 
 message CParental_DisableParentalSettings_Response {
 }
 
 message CParental_GetParentalSettings_Request {
-	optional fixed64 accountid = 10;
+	optional fixed64 steamid = 10;
 }
 
 message CParental_GetParentalSettings_Response {
@@ -46,7 +46,7 @@ message CParental_GetParentalSettings_Response {
 
 message CParental_GetSignedParentalSettings_Request {
 	optional uint32 priority = 1;
-	optional fixed64 accountid = 10;
+	optional fixed64 steamid = 10;
 }
 
 message CParental_GetSignedParentalSettings_Response {
@@ -58,7 +58,7 @@ message CParental_SetParentalSettings_Request {
 	optional string password = 1;
 	optional .ParentalSettings settings = 2;
 	optional string new_password = 3;
-	optional fixed64 accountid = 10;
+	optional fixed64 steamid = 10;
 }
 
 message CParental_SetParentalSettings_Response {
@@ -67,7 +67,7 @@ message CParental_SetParentalSettings_Response {
 message CParental_ValidatePassword_Request {
 	optional string password = 1;
 	optional string session = 2;
-	optional fixed64 accountid = 10;
+	optional fixed64 steamid = 10;
 }
 
 message CParental_ValidatePassword_Response {

@@ -123,6 +123,10 @@ enum EGCItemMsg {
 	k_EMsgGCRequestAnnouncementsResponse = 2526;
 	k_EMsgGCRequestPassportItemGrant = 2527;
 	k_EMsgGCClientVersionUpdated = 2528;
+	k_EMsgGCItemPurgatory_FinalizePurchase = 2531;
+	k_EMsgGCItemPurgatory_FinalizePurchaseResponse = 2532;
+	k_EMsgGCItemPurgatory_RefundPurchase = 2533;
+	k_EMsgGCItemPurgatory_RefundPurchaseResponse = 2534;
 }
 
 enum EGCMsgResponse {
@@ -146,8 +150,42 @@ enum EUnlockStyle {
 	k_UnlockStyle_Failed_CantAffordAttrib = 5;
 }
 
+enum EItemPurgatoryResponse_Finalize {
+	k_ItemPurgatoryResponse_Finalize_Succeeded = 0;
+	k_ItemPurgatoryResponse_Finalize_Failed_Incomplete = 1;
+	k_ItemPurgatoryResponse_Finalize_Failed_ItemsNotInPurgatory = 2;
+	k_ItemPurgatoryResponse_Finalize_Failed_CouldNotFindItems = 3;
+	k_ItemPurgatoryResponse_Finalize_Failed_NoSOCache = 4;
+	k_ItemPurgatoryResponse_Finalize_BackpackFull = 5;
+}
+
+enum EItemPurgatoryResponse_Refund {
+	k_ItemPurgatoryResponse_Refund_Succeeded = 0;
+	k_ItemPurgatoryResponse_Refund_Failed_ItemNotInPurgatory = 1;
+	k_ItemPurgatoryResponse_Refund_Failed_CouldNotFindItem = 2;
+	k_ItemPurgatoryResponse_Refund_Failed_NoSOCache = 3;
+	k_ItemPurgatoryResponse_Refund_Failed_NoDetail = 4;
+	k_ItemPurgatoryResponse_Refund_Failed_NexonWebAPI = 5;
+}
+
 message CMsgApplyAutograph {
 	optional uint64 autograph_item_id = 1;
 	optional uint64 item_item_id = 2;
+}
+
+message CMsgRequestItemPurgatory_FinalizePurchase {
+	repeated uint64 item_ids = 1;
+}
+
+message CMsgRequestItemPurgatory_FinalizePurchaseResponse {
+	optional uint32 result = 1;
+}
+
+message CMsgRequestItemPurgatory_RefundPurchase {
+	optional uint64 item_id = 1;
+}
+
+message CMsgRequestItemPurgatory_RefundPurchaseResponse {
+	optional uint32 result = 1;
 }
 

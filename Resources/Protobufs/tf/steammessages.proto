@@ -272,7 +272,6 @@ message CGCSystemMsg_GetAccountDetails_Response {
 	optional string persona_name = 3;
 	optional bool is_profile_public = 4;
 	optional bool is_inventory_public = 5;
-	optional bool is_trusted = 6;
 	optional bool is_vac_banned = 7;
 	optional bool is_cyber_cafe = 8;
 	optional bool is_school_account = 9;

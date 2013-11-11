@@ -1,0 +1,69 @@
+import "google/protobuf/descriptor.proto";
+import "steammessages_unified_base.steamclient.proto";
+
+message CDeviceAuth_GetOwnAuthorizedDevices_Request {
+	optional fixed64 steamid = 1;
+	optional bool include_canceled = 2;
+}
+
+message CDeviceAuth_GetOwnAuthorizedDevices_Response {
+	message Device {
+		optional fixed64 auth_device_token = 1;
+		optional string device_name = 2;
+		optional bool is_pending = 3;
+		optional bool is_canceled = 4;
+		optional uint32 last_time_used = 5;
+		optional fixed64 last_borrower_id = 6;
+		optional uint32 last_app_played = 7;
+	}
+
+	repeated .CDeviceAuth_GetOwnAuthorizedDevices_Response.Device devices = 1;
+}
+
+message CDeviceAuth_AuthorizeRemoteDevice_Request {
+	optional fixed64 steamid = 1;
+	optional fixed64 auth_device_token = 2;
+}
+
+message CDeviceAuth_AuthorizeRemoteDevice_Response {
+}
+
+message CDeviceAuth_DeauthorizeRemoteDevice_Request {
+	optional fixed64 steamid = 1;
+	optional fixed64 auth_device_token = 2;
+}
+
+message CDeviceAuth_DeauthorizeRemoteDevice_Response {
+}
+
+message CDeviceAuth_GetUsedAuthorizedDevices_Request {
+	optional fixed64 steamid = 1;
+}
+
+message CDeviceAuth_GetUsedAuthorizedDevices_Response {
+	message Device {
+		optional fixed64 auth_device_token = 1;
+		optional string device_name = 2;
+		optional fixed64 owner_steamid = 3;
+		optional uint32 last_time_used = 4;
+		optional uint32 last_app_played = 5;
+	}
+
+	repeated .CDeviceAuth_GetUsedAuthorizedDevices_Response.Device devices = 1;
+}
+
+service DeviceAuth {
+	option (service_description) = "Library Sharing settings service";
+	rpc GetOwnAuthorizedDevices (.CDeviceAuth_GetOwnAuthorizedDevices_Request) returns (.CDeviceAuth_GetOwnAuthorizedDevices_Response) {
+		option (method_description) = "Get list of authorized devices";
+	}
+	rpc AuthorizeRemoteDevice (.CDeviceAuth_AuthorizeRemoteDevice_Request) returns (.CDeviceAuth_AuthorizeRemoteDevice_Response) {
+		option (method_description) = "Authorizer a remote authorization";
+	}
+	rpc DeauthorizeRemoteDevice (.CDeviceAuth_DeauthorizeRemoteDevice_Request) returns (.CDeviceAuth_DeauthorizeRemoteDevice_Response) {
+		option (method_description) = "Revoke own device authorization";
+	}
+	rpc GetUsedAuthorizedDevices (.CDeviceAuth_GetUsedAuthorizedDevices_Request) returns (.CDeviceAuth_GetUsedAuthorizedDevices_Response) {
+		option (method_description) = "Get list of authorized devices user played borrowed games on";
+	}
+}
