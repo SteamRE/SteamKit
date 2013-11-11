@@ -271,7 +271,7 @@ namespace SteamKit2
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="SteamClient.JobCallback&lt;T&gt;"/>.</returns>
         public JobID PICSGetAccessTokens( IEnumerable<uint> appIds, IEnumerable<uint> packageIds )
         {
-            var request = new ClientMsgProtobuf<CMsgPICSAccessTokenRequest>( EMsg.PICSAccessTokenRequest );
+            var request = new ClientMsgProtobuf<CMsgClientPICSAccessTokenRequest>( EMsg.PICSAccessTokenRequest );
             request.SourceJobID = Client.GetNextJobID();
 
             request.Body.packageids.AddRange( packageIds );
@@ -292,7 +292,7 @@ namespace SteamKit2
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="SteamClient.JobCallback&lt;T&gt;"/>.</returns>
         public JobID PICSGetChangesSince( uint lastChangeNumber = 0, bool sendAppChangelist = true, bool sendPackageChangelist = false )
         {
-            var request = new ClientMsgProtobuf<CMsgPICSChangesSinceRequest>( EMsg.PICSChangesSinceRequest );
+            var request = new ClientMsgProtobuf<CMsgClientPICSChangesSinceRequest>( EMsg.PICSChangesSinceRequest );
             request.SourceJobID = Client.GetNextJobID();
 
             request.Body.since_change_number = lastChangeNumber;
@@ -348,12 +348,12 @@ namespace SteamKit2
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="SteamClient.JobCallback&lt;T&gt;"/>.</returns>
         public JobID PICSGetProductInfo( IEnumerable<PICSRequest> apps, IEnumerable<PICSRequest> packages, bool metaDataOnly = false )
         {
-            var request = new ClientMsgProtobuf<CMsgPICSProductInfoRequest>( EMsg.PICSProductInfoRequest );
+            var request = new ClientMsgProtobuf<CMsgClientPICSProductInfoRequest>( EMsg.PICSProductInfoRequest );
             request.SourceJobID = Client.GetNextJobID();
 
             foreach ( var app_request in apps )
             {
-                var appinfo = new CMsgPICSProductInfoRequest.AppInfo();
+                var appinfo = new CMsgClientPICSProductInfoRequest.AppInfo();
                 appinfo.access_token = app_request.AccessToken;
                 appinfo.appid = app_request.ID;
                 appinfo.only_public = app_request.Public;
@@ -363,7 +363,7 @@ namespace SteamKit2
 
             foreach ( var package_request in packages )
             {
-                var packageinfo = new CMsgPICSProductInfoRequest.PackageInfo();
+                var packageinfo = new CMsgClientPICSProductInfoRequest.PackageInfo();
                 packageinfo.access_token = package_request.AccessToken;
                 packageinfo.packageid = package_request.ID;
 
@@ -531,7 +531,7 @@ namespace SteamKit2
         }
         void HandlePICSAccessTokenResponse( IPacketMsg packetMsg )
         {
-            var tokensResponse = new ClientMsgProtobuf<CMsgPICSAccessTokenResponse>( packetMsg );
+            var tokensResponse = new ClientMsgProtobuf<CMsgClientPICSAccessTokenResponse>( packetMsg );
 
             var innerCallback = new PICSTokensCallback( tokensResponse.Body );
             var callback = new SteamClient.JobCallback<PICSTokensCallback>( tokensResponse.TargetJobID, innerCallback );
@@ -539,7 +539,7 @@ namespace SteamKit2
         }
         void HandlePICSChangesSinceResponse( IPacketMsg packetMsg )
         {
-            var changesResponse = new ClientMsgProtobuf<CMsgPICSChangesSinceResponse>( packetMsg );
+            var changesResponse = new ClientMsgProtobuf<CMsgClientPICSChangesSinceResponse>( packetMsg );
 
             var innerCallback = new PICSChangesCallback( changesResponse.Body );
             var callback = new SteamClient.JobCallback<PICSChangesCallback>( changesResponse.TargetJobID, innerCallback );
@@ -547,7 +547,7 @@ namespace SteamKit2
         }
         void HandlePICSProductInfoResponse( IPacketMsg packetMsg )
         {
-            var productResponse = new ClientMsgProtobuf<CMsgPICSProductInfoResponse>( packetMsg );
+            var productResponse = new ClientMsgProtobuf<CMsgClientPICSProductInfoResponse>( packetMsg );
 
             var innerCallback = new PICSProductInfoCallback( productResponse.Body );
             var callback = new SteamClient.JobCallback<PICSProductInfoCallback>( productResponse.TargetJobID, innerCallback );

@@ -3438,7 +3438,10 @@ namespace SteamKit2.GC.TF2.Internal
       SQUAD_SURPLUS = 2,
             
       [global::ProtoBuf.ProtoEnum(Name=@"MANN_UP", Value=3)]
-      MANN_UP = 3
+      MANN_UP = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"HELP_A_NOOB", Value=4)]
+      HELP_A_NOOB = 4
     }
   
     private global::ProtoBuf.IExtension extensionObject;

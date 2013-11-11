@@ -40,6 +40,80 @@ namespace SteamKit2.GC.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgRequestItemPurgatory_FinalizePurchase")]
+  public partial class CMsgRequestItemPurgatory_FinalizePurchase : global::ProtoBuf.IExtensible
+  {
+    public CMsgRequestItemPurgatory_FinalizePurchase() {}
+    
+    private readonly global::System.Collections.Generic.List<ulong> _item_ids = new global::System.Collections.Generic.List<ulong>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"item_ids", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public global::System.Collections.Generic.List<ulong> item_ids
+    {
+      get { return _item_ids; }
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgRequestItemPurgatory_FinalizePurchaseResponse")]
+  public partial class CMsgRequestItemPurgatory_FinalizePurchaseResponse : global::ProtoBuf.IExtensible
+  {
+    public CMsgRequestItemPurgatory_FinalizePurchaseResponse() {}
+    
+
+    private uint _result = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"result", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint result
+    {
+      get { return _result; }
+      set { _result = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgRequestItemPurgatory_RefundPurchase")]
+  public partial class CMsgRequestItemPurgatory_RefundPurchase : global::ProtoBuf.IExtensible
+  {
+    public CMsgRequestItemPurgatory_RefundPurchase() {}
+    
+
+    private ulong _item_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"item_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong item_id
+    {
+      get { return _item_id; }
+      set { _item_id = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgRequestItemPurgatory_RefundPurchaseResponse")]
+  public partial class CMsgRequestItemPurgatory_RefundPurchaseResponse : global::ProtoBuf.IExtensible
+  {
+    public CMsgRequestItemPurgatory_RefundPurchaseResponse() {}
+    
+
+    private uint _result = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"result", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint result
+    {
+      get { return _result; }
+      set { _result = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     [global::ProtoBuf.ProtoContract(Name=@"EGCItemMsg", EnumPassthru=true)]
     public enum EGCItemMsg
     {
@@ -408,7 +482,19 @@ namespace SteamKit2.GC.Internal
       k_EMsgGCRequestPassportItemGrant = 2527,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCClientVersionUpdated", Value=2528)]
-      k_EMsgGCClientVersionUpdated = 2528
+      k_EMsgGCClientVersionUpdated = 2528,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCItemPurgatory_FinalizePurchase", Value=2531)]
+      k_EMsgGCItemPurgatory_FinalizePurchase = 2531,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCItemPurgatory_FinalizePurchaseResponse", Value=2532)]
+      k_EMsgGCItemPurgatory_FinalizePurchaseResponse = 2532,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCItemPurgatory_RefundPurchase", Value=2533)]
+      k_EMsgGCItemPurgatory_RefundPurchase = 2533,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCItemPurgatory_RefundPurchaseResponse", Value=2534)]
+      k_EMsgGCItemPurgatory_RefundPurchaseResponse = 2534
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"EGCMsgResponse", EnumPassthru=true)]
@@ -464,6 +550,52 @@ namespace SteamKit2.GC.Internal
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_UnlockStyle_Failed_CantAffordAttrib", Value=5)]
       k_UnlockStyle_Failed_CantAffordAttrib = 5
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"EItemPurgatoryResponse_Finalize", EnumPassthru=true)]
+    public enum EItemPurgatoryResponse_Finalize
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_ItemPurgatoryResponse_Finalize_Succeeded", Value=0)]
+      k_ItemPurgatoryResponse_Finalize_Succeeded = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_ItemPurgatoryResponse_Finalize_Failed_Incomplete", Value=1)]
+      k_ItemPurgatoryResponse_Finalize_Failed_Incomplete = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_ItemPurgatoryResponse_Finalize_Failed_ItemsNotInPurgatory", Value=2)]
+      k_ItemPurgatoryResponse_Finalize_Failed_ItemsNotInPurgatory = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_ItemPurgatoryResponse_Finalize_Failed_CouldNotFindItems", Value=3)]
+      k_ItemPurgatoryResponse_Finalize_Failed_CouldNotFindItems = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_ItemPurgatoryResponse_Finalize_Failed_NoSOCache", Value=4)]
+      k_ItemPurgatoryResponse_Finalize_Failed_NoSOCache = 4,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_ItemPurgatoryResponse_Finalize_BackpackFull", Value=5)]
+      k_ItemPurgatoryResponse_Finalize_BackpackFull = 5
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"EItemPurgatoryResponse_Refund", EnumPassthru=true)]
+    public enum EItemPurgatoryResponse_Refund
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_ItemPurgatoryResponse_Refund_Succeeded", Value=0)]
+      k_ItemPurgatoryResponse_Refund_Succeeded = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_ItemPurgatoryResponse_Refund_Failed_ItemNotInPurgatory", Value=1)]
+      k_ItemPurgatoryResponse_Refund_Failed_ItemNotInPurgatory = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_ItemPurgatoryResponse_Refund_Failed_CouldNotFindItem", Value=2)]
+      k_ItemPurgatoryResponse_Refund_Failed_CouldNotFindItem = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_ItemPurgatoryResponse_Refund_Failed_NoSOCache", Value=3)]
+      k_ItemPurgatoryResponse_Refund_Failed_NoSOCache = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_ItemPurgatoryResponse_Refund_Failed_NoDetail", Value=4)]
+      k_ItemPurgatoryResponse_Refund_Failed_NoDetail = 4,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_ItemPurgatoryResponse_Refund_Failed_NexonWebAPI", Value=5)]
+      k_ItemPurgatoryResponse_Refund_Failed_NexonWebAPI = 5
     }
   
 }

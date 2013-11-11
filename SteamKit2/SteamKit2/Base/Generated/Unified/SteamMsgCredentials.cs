@@ -311,15 +311,6 @@ namespace SteamKit2.Unified.Internal
       get { return _stoken; }
       set { _stoken = value; }
     }
-
-    private int _appid = default(int);
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"appid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
-    public int appid
-    {
-      get { return _appid; }
-      set { _appid = value; }
-    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

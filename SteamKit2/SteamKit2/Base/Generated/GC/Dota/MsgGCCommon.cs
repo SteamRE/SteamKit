@@ -265,13 +265,13 @@ namespace SteamKit2.GC.Dota.Internal
       set { _matchmaking_language_preference = value; }
     }
 
-    private uint _shutdownlawterminatetime = default(uint);
-    [global::ProtoBuf.ProtoMember(47, IsRequired = false, Name=@"shutdownlawterminatetime", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    private uint _shutdownlawterminatetimestamp = default(uint);
+    [global::ProtoBuf.ProtoMember(47, IsRequired = false, Name=@"shutdownlawterminatetimestamp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint shutdownlawterminatetime
+    public uint shutdownlawterminatetimestamp
     {
-      get { return _shutdownlawterminatetime; }
-      set { _shutdownlawterminatetime = value; }
+      get { return _shutdownlawterminatetimestamp; }
+      set { _shutdownlawterminatetimestamp = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -774,6 +774,24 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _enabled_hero_id; }
     }
   
+
+    private uint _nexon_pc_bang_no = default(uint);
+    [global::ProtoBuf.ProtoMember(24, IsRequired = false, Name=@"nexon_pc_bang_no", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint nexon_pc_bang_no
+    {
+      get { return _nexon_pc_bang_no; }
+      set { _nexon_pc_bang_no = value; }
+    }
+
+    private string _nexon_pc_bang_name = "";
+    [global::ProtoBuf.ProtoMember(25, IsRequired = false, Name=@"nexon_pc_bang_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string nexon_pc_bang_name
+    {
+      get { return _nexon_pc_bang_name; }
+      set { _nexon_pc_bang_name = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -1605,6 +1623,43 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAPCBangTimedReward")]
+  public partial class CMsgDOTAPCBangTimedReward : global::ProtoBuf.IExtensible
+  {
+    public CMsgDOTAPCBangTimedReward() {}
+    
+
+    private string _persona = "";
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"persona", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string persona
+    {
+      get { return _persona; }
+      set { _persona = value; }
+    }
+
+    private uint _itemdef = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"itemdef", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint itemdef
+    {
+      get { return _itemdef; }
+      set { _itemdef = value; }
+    }
+
+    private string _pcbangname = "";
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"pcbangname", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string pcbangname
+    {
+      get { return _pcbangname; }
+      set { _pcbangname = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CAttribute_String")]
   public partial class CAttribute_String : global::ProtoBuf.IExtensible
   {
@@ -2112,6 +2167,34 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgNexonPartnerUpdate")]
+  public partial class CMsgNexonPartnerUpdate : global::ProtoBuf.IExtensible
+  {
+    public CMsgNexonPartnerUpdate() {}
+    
+
+    private uint _messagetype = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"messagetype", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint messagetype
+    {
+      get { return _messagetype; }
+      set { _messagetype = value; }
+    }
+
+    private uint _timeremaining = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"timeremaining", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint timeremaining
+    {
+      get { return _timeremaining; }
+      set { _timeremaining = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     [global::ProtoBuf.ProtoContract(Name=@"EDOTAGCMsg", EnumPassthru=true)]
     public enum EDOTAGCMsg
     {
@@ -2523,9 +2606,6 @@ namespace SteamKit2.GC.Dota.Internal
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCGenerateDiretidePrizeListResponse", Value=7180)]
       k_EMsgGCGenerateDiretidePrizeListResponse = 7180,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCNotifyResetKeybindings", Value=7181)]
-      k_EMsgGCNotifyResetKeybindings = 7181,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCStorePromoPagesRequest", Value=7182)]
       k_EMsgGCStorePromoPagesRequest = 7182,
@@ -2973,6 +3053,18 @@ namespace SteamKit2.GC.Dota.Internal
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCClientSuspended", Value=7342)]
       k_EMsgGCClientSuspended = 7342,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCNexonPartnerUpdate", Value=7359)]
+      k_EMsgGCNexonPartnerUpdate = 7359,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCProcessPCBangRewardPoints", Value=7360)]
+      k_EMsgGCToGCProcessPCBangRewardPoints = 7360,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgPresentedClientTerminateDlg", Value=7363)]
+      k_EMsgPresentedClientTerminateDlg = 7363,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCPCBangTimedRewardMessage", Value=7366)]
+      k_EMsgGCPCBangTimedRewardMessage = 7366,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCDev_GrantWarKill", Value=8001)]
       k_EMsgGCDev_GrantWarKill = 8001

@@ -500,7 +500,7 @@ namespace SteamKit2
             public Dictionary<uint, ulong> AppTokens { get; private set; }
 
 
-            internal PICSTokensCallback( CMsgPICSAccessTokenResponse msg )
+            internal PICSTokensCallback( CMsgClientPICSAccessTokenResponse msg )
             {
                 PackageTokensDenied = new ReadOnlyCollection<uint>( msg.package_denied_tokens );
                 AppTokensDenied = new ReadOnlyCollection<uint>( msg.app_denied_tokens );
@@ -542,14 +542,14 @@ namespace SteamKit2
                 /// </summary>
                 public bool NeedsToken { get; private set; }
 
-                internal PICSChangeData( CMsgPICSChangesSinceResponse.AppChange change )
+                internal PICSChangeData( CMsgClientPICSChangesSinceResponse.AppChange change )
                 {
                     this.ID = change.appid;
                     this.ChangeNumber = change.change_number;
                     this.NeedsToken = change.needs_token;
                 }
 
-                internal PICSChangeData( CMsgPICSChangesSinceResponse.PackageChange change )
+                internal PICSChangeData( CMsgClientPICSChangesSinceResponse.PackageChange change )
                 {
                     this.ID = change.packageid;
                     this.ChangeNumber = change.change_number;
@@ -579,7 +579,7 @@ namespace SteamKit2
             public Dictionary<uint, PICSChangeData> AppChanges { get; private set; }
 
 
-            internal PICSChangesCallback( CMsgPICSChangesSinceResponse msg )
+            internal PICSChangesCallback( CMsgClientPICSChangesSinceResponse msg )
             {
                 LastChangeNumber = msg.since_change_number;
                 CurrentChangeNumber = msg.current_change_number;
@@ -635,7 +635,7 @@ namespace SteamKit2
                 public bool OnlyPublic { get; private set; }
 
 
-                internal PICSProductInfo( CMsgPICSProductInfoResponse.AppInfo app_info )
+                internal PICSProductInfo( CMsgClientPICSProductInfoResponse.AppInfo app_info )
                 {
                     this.ID = app_info.appid;
                     this.ChangeNumber = app_info.change_number;
@@ -649,7 +649,7 @@ namespace SteamKit2
                     this.OnlyPublic = app_info.only_public;
                 }
 
-                internal PICSProductInfo( CMsgPICSProductInfoResponse.PackageInfo package_info )
+                internal PICSProductInfo( CMsgClientPICSProductInfoResponse.PackageInfo package_info )
                 {
                     this.ID = package_info.packageid;
                     this.ChangeNumber = package_info.change_number;
@@ -692,7 +692,7 @@ namespace SteamKit2
             public Dictionary<uint, PICSProductInfo> Packages { get; private set; }
 
 
-            internal PICSProductInfoCallback( CMsgPICSProductInfoResponse msg )
+            internal PICSProductInfoCallback( CMsgClientPICSProductInfoResponse msg )
             {
                 MetaDataOnly = msg.meta_data_only;
                 ResponsePending = msg.response_pending;

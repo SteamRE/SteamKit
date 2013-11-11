@@ -7219,13 +7219,13 @@ namespace SteamKit2.GC.Dota.Internal
       set { _notify_successful_report = value; }
     }
 
-    private uint _shutdownlawterminatetime = default(uint);
-    [global::ProtoBuf.ProtoMember(15, IsRequired = false, Name=@"shutdownlawterminatetime", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    private uint _shutdownlawterminateminutes = default(uint);
+    [global::ProtoBuf.ProtoMember(15, IsRequired = false, Name=@"shutdownlawterminateminutes", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint shutdownlawterminatetime
+    public uint shutdownlawterminateminutes
     {
-      get { return _shutdownlawterminatetime; }
-      set { _shutdownlawterminatetime = value; }
+      get { return _shutdownlawterminateminutes; }
+      set { _shutdownlawterminateminutes = value; }
     }
 
     private uint _banned_word_list_version = default(uint);
@@ -7244,6 +7244,24 @@ namespace SteamKit2.GC.Dota.Internal
     {
       get { return _profile_private; }
       set { _profile_private = value; }
+    }
+
+    private uint _currency = default(uint);
+    [global::ProtoBuf.ProtoMember(18, IsRequired = false, Name=@"currency", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint currency
+    {
+      get { return _currency; }
+      set { _currency = value; }
+    }
+
+    private uint _bang_no = default(uint);
+    [global::ProtoBuf.ProtoMember(19, IsRequired = false, Name=@"bang_no", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint bang_no
+    {
+      get { return _bang_no; }
+      set { _bang_no = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -7482,6 +7500,15 @@ namespace SteamKit2.GC.Dota.Internal
     {
       get { return _lastgametime; }
       set { _lastgametime = value; }
+    }
+
+    private uint _prize_pool_usd = default(uint);
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"prize_pool_usd", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint prize_pool_usd
+    {
+      get { return _prize_pool_usd; }
+      set { _prize_pool_usd = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -7894,25 +7921,6 @@ namespace SteamKit2.GC.Dota.Internal
     {
       get { return _round; }
       set { _round = value; }
-    }
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTANotifyResetKeybindings")]
-  public partial class CMsgDOTANotifyResetKeybindings : global::ProtoBuf.IExtensible
-  {
-    public CMsgDOTANotifyResetKeybindings() {}
-    
-
-    private uint _keybind_template = default(uint);
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"keybind_template", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint keybind_template
-    {
-      get { return _keybind_template; }
-      set { _keybind_template = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -10711,6 +10719,16 @@ namespace SteamKit2.GC.Dota.Internal
   public partial class CMsgFlipLobbyTeams : global::ProtoBuf.IExtensible
   {
     public CMsgFlipLobbyTeams() {}
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgPresentedClientTerminateDlg")]
+  public partial class CMsgPresentedClientTerminateDlg : global::ProtoBuf.IExtensible
+  {
+    public CMsgPresentedClientTerminateDlg() {}
     
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

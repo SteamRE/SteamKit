@@ -1961,6 +1961,15 @@ namespace SteamKit2.GC.Internal
       get { return _suspension_end_time; }
       set { _suspension_end_time = value; }
     }
+
+    private string _currency = "";
+    [global::ProtoBuf.ProtoMember(22, IsRequired = false, Name=@"currency", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string currency
+    {
+      get { return _currency; }
+      set { _currency = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -2269,6 +2278,53 @@ namespace SteamKit2.GC.Internal
     {
       get { return _time_all_trusted; }
       set { _time_all_trusted = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCGetPartnerAccountLink")]
+  public partial class CMsgGCGetPartnerAccountLink : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCGetPartnerAccountLink() {}
+    
+
+    private ulong _steamid = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong steamid
+    {
+      get { return _steamid; }
+      set { _steamid = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCGetPartnerAccountLink_Response")]
+  public partial class CMsgGCGetPartnerAccountLink_Response : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCGetPartnerAccountLink_Response() {}
+    
+
+    private uint _pwid = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"pwid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint pwid
+    {
+      get { return _pwid; }
+      set { _pwid = value; }
+    }
+
+    private uint _nexonid = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"nexonid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint nexonid
+    {
+      get { return _nexonid; }
+      set { _nexonid = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

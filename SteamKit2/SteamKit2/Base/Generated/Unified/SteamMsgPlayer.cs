@@ -814,6 +814,192 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPlayer_AcceptFriendInvites_Request")]
+  public partial class CPlayer_AcceptFriendInvites_Request : global::ProtoBuf.IExtensible
+  {
+    public CPlayer_AcceptFriendInvites_Request() {}
+    
+
+    private uint _action = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"action", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint action
+    {
+      get { return _action; }
+      set { _action = value; }
+    }
+    private readonly global::System.Collections.Generic.List<ulong> _steamids = new global::System.Collections.Generic.List<ulong>();
+    [global::ProtoBuf.ProtoMember(2, Name=@"steamids", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public global::System.Collections.Generic.List<ulong> steamids
+    {
+      get { return _steamids; }
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPlayer_AcceptFriendInvites_Response")]
+  public partial class CPlayer_AcceptFriendInvites_Response : global::ProtoBuf.IExtensible
+  {
+    public CPlayer_AcceptFriendInvites_Response() {}
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPlayer_AcceptGroupInvites_Request")]
+  public partial class CPlayer_AcceptGroupInvites_Request : global::ProtoBuf.IExtensible
+  {
+    public CPlayer_AcceptGroupInvites_Request() {}
+    
+
+    private uint _action = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"action", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint action
+    {
+      get { return _action; }
+      set { _action = value; }
+    }
+    private readonly global::System.Collections.Generic.List<ulong> _steamids = new global::System.Collections.Generic.List<ulong>();
+    [global::ProtoBuf.ProtoMember(2, Name=@"steamids", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public global::System.Collections.Generic.List<ulong> steamids
+    {
+      get { return _steamids; }
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPlayer_AcceptGroupInvites_Response")]
+  public partial class CPlayer_AcceptGroupInvites_Response : global::ProtoBuf.IExtensible
+  {
+    public CPlayer_AcceptGroupInvites_Response() {}
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPlayer_AddFriend_Request")]
+  public partial class CPlayer_AddFriend_Request : global::ProtoBuf.IExtensible
+  {
+    public CPlayer_AddFriend_Request() {}
+    
+
+    private ulong _steamid = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong steamid
+    {
+      get { return _steamid; }
+      set { _steamid = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPlayer_AddFriend_Response")]
+  public partial class CPlayer_AddFriend_Response : global::ProtoBuf.IExtensible
+  {
+    public CPlayer_AddFriend_Response() {}
+    
+
+    private bool _invite_sent = default(bool);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"invite_sent", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool invite_sent
+    {
+      get { return _invite_sent; }
+      set { _invite_sent = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPlayer_RemoveFriend_Request")]
+  public partial class CPlayer_RemoveFriend_Request : global::ProtoBuf.IExtensible
+  {
+    public CPlayer_RemoveFriend_Request() {}
+    
+
+    private ulong _steamid = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong steamid
+    {
+      get { return _steamid; }
+      set { _steamid = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPlayer_RemoveFriend_Response")]
+  public partial class CPlayer_RemoveFriend_Response : global::ProtoBuf.IExtensible
+  {
+    public CPlayer_RemoveFriend_Response() {}
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPlayer_IsPlayingSharedGame_Request")]
+  public partial class CPlayer_IsPlayingSharedGame_Request : global::ProtoBuf.IExtensible
+  {
+    public CPlayer_IsPlayingSharedGame_Request() {}
+    
+
+    private ulong _steamid = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steamid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong steamid
+    {
+      get { return _steamid; }
+      set { _steamid = value; }
+    }
+
+    private uint _appid_playing = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"appid_playing", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint appid_playing
+    {
+      get { return _appid_playing; }
+      set { _appid_playing = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPlayer_IsPlayingSharedGame_Response")]
+  public partial class CPlayer_IsPlayingSharedGame_Response : global::ProtoBuf.IExtensible
+  {
+    public CPlayer_IsPlayingSharedGame_Response() {}
+    
+
+    private ulong _lender_steamid = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"lender_steamid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong lender_steamid
+    {
+      get { return _lender_steamid; }
+      set { _lender_steamid = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     public interface IPlayer
     {
       CPlayer_GetRecentlyPlayedGames_Response GetRecentlyPlayedGames(CPlayer_GetRecentlyPlayedGames_Request request);
@@ -825,6 +1011,11 @@ namespace SteamKit2.Unified.Internal
     CPlayer_GetCommunityBadgeProgress_Response GetCommunityBadgeProgress(CPlayer_GetCommunityBadgeProgress_Request request);
     CPlayer_GetLastPlayedTimes_Response ClientGetLastPlayedTimes(CPlayer_GetLastPlayedTimes_Request request);
     CPlayer_GetNicknameList_Response GetNicknameList(CPlayer_GetNicknameList_Request request);
+    CPlayer_AcceptFriendInvites_Response AcceptFriendInvites(CPlayer_AcceptFriendInvites_Request request);
+    CPlayer_AcceptGroupInvites_Response AcceptGroupInvites(CPlayer_AcceptGroupInvites_Request request);
+    CPlayer_AddFriend_Response AddFriend(CPlayer_AddFriend_Request request);
+    CPlayer_RemoveFriend_Response RemoveFriend(CPlayer_RemoveFriend_Request request);
+    CPlayer_IsPlayingSharedGame_Response IsPlayingSharedGame(CPlayer_IsPlayingSharedGame_Request request);
     
     }
     

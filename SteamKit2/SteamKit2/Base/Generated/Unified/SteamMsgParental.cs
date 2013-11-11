@@ -161,13 +161,13 @@ namespace SteamKit2.Unified.Internal
       set { _settings = value; }
     }
 
-    private ulong _accountid = default(ulong);
-    [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"accountid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    private ulong _steamid = default(ulong);
+    [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
     [global::System.ComponentModel.DefaultValue(default(ulong))]
-    public ulong accountid
+    public ulong steamid
     {
-      get { return _accountid; }
-      set { _accountid = value; }
+      get { return _steamid; }
+      set { _steamid = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -199,13 +199,13 @@ namespace SteamKit2.Unified.Internal
       set { _password = value; }
     }
 
-    private ulong _accountid = default(ulong);
-    [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"accountid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    private ulong _steamid = default(ulong);
+    [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
     [global::System.ComponentModel.DefaultValue(default(ulong))]
-    public ulong accountid
+    public ulong steamid
     {
-      get { return _accountid; }
-      set { _accountid = value; }
+      get { return _steamid; }
+      set { _steamid = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -228,13 +228,13 @@ namespace SteamKit2.Unified.Internal
     public CParental_GetParentalSettings_Request() {}
     
 
-    private ulong _accountid = default(ulong);
-    [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"accountid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    private ulong _steamid = default(ulong);
+    [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
     [global::System.ComponentModel.DefaultValue(default(ulong))]
-    public ulong accountid
+    public ulong steamid
     {
-      get { return _accountid; }
-      set { _accountid = value; }
+      get { return _steamid; }
+      set { _steamid = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -275,13 +275,13 @@ namespace SteamKit2.Unified.Internal
       set { _priority = value; }
     }
 
-    private ulong _accountid = default(ulong);
-    [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"accountid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    private ulong _steamid = default(ulong);
+    [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
     [global::System.ComponentModel.DefaultValue(default(ulong))]
-    public ulong accountid
+    public ulong steamid
     {
-      get { return _accountid; }
-      set { _accountid = value; }
+      get { return _steamid; }
+      set { _steamid = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -349,13 +349,13 @@ namespace SteamKit2.Unified.Internal
       set { _new_password = value; }
     }
 
-    private ulong _accountid = default(ulong);
-    [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"accountid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    private ulong _steamid = default(ulong);
+    [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
     [global::System.ComponentModel.DefaultValue(default(ulong))]
-    public ulong accountid
+    public ulong steamid
     {
-      get { return _accountid; }
-      set { _accountid = value; }
+      get { return _steamid; }
+      set { _steamid = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -396,13 +396,13 @@ namespace SteamKit2.Unified.Internal
       set { _session = value; }
     }
 
-    private ulong _accountid = default(ulong);
-    [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"accountid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    private ulong _steamid = default(ulong);
+    [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
     [global::System.ComponentModel.DefaultValue(default(ulong))]
-    public ulong accountid
+    public ulong steamid
     {
-      get { return _accountid; }
-      set { _accountid = value; }
+      get { return _steamid; }
+      set { _steamid = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

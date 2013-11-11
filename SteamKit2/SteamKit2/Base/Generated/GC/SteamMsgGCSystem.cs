@@ -238,7 +238,13 @@ namespace SteamKit2.GC.Internal
       k_EGCMsgCheckFriendship = 505,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgCheckFriendshipResponse", Value=506)]
-      k_EGCMsgCheckFriendshipResponse = 506
+      k_EGCMsgCheckFriendshipResponse = 506,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgGetPartnerAccountLink", Value=507)]
+      k_EGCMsgGetPartnerAccountLink = 507,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgGetPartnerAccountLinkResponse", Value=508)]
+      k_EGCMsgGetPartnerAccountLinkResponse = 508
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"ESOMsg", EnumPassthru=true)]

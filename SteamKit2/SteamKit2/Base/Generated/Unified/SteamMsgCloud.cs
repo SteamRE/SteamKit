@@ -51,6 +51,205 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCloud_BeginHTTPUpload_Request")]
+  public partial class CCloud_BeginHTTPUpload_Request : global::ProtoBuf.IExtensible
+  {
+    public CCloud_BeginHTTPUpload_Request() {}
+    
+
+    private uint _appid = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"appid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint appid
+    {
+      get { return _appid; }
+      set { _appid = value; }
+    }
+
+    private uint _file_size = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"file_size", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint file_size
+    {
+      get { return _file_size; }
+      set { _file_size = value; }
+    }
+
+    private string _filename = "";
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"filename", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string filename
+    {
+      get { return _filename; }
+      set { _filename = value; }
+    }
+
+    private string _file_sha = "";
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"file_sha", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string file_sha
+    {
+      get { return _file_sha; }
+      set { _file_sha = value; }
+    }
+
+    private bool _is_public = default(bool);
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"is_public", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool is_public
+    {
+      get { return _is_public; }
+      set { _is_public = value; }
+    }
+    private readonly global::System.Collections.Generic.List<string> _platforms_to_sync = new global::System.Collections.Generic.List<string>();
+    [global::ProtoBuf.ProtoMember(6, Name=@"platforms_to_sync", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<string> platforms_to_sync
+    {
+      get { return _platforms_to_sync; }
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCloud_BeginHTTPUpload_Response")]
+  public partial class CCloud_BeginHTTPUpload_Response : global::ProtoBuf.IExtensible
+  {
+    public CCloud_BeginHTTPUpload_Response() {}
+    
+
+    private ulong _ugcid = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"ugcid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong ugcid
+    {
+      get { return _ugcid; }
+      set { _ugcid = value; }
+    }
+
+    private uint _timestamp = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"timestamp", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint timestamp
+    {
+      get { return _timestamp; }
+      set { _timestamp = value; }
+    }
+
+    private string _url_host = "";
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"url_host", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string url_host
+    {
+      get { return _url_host; }
+      set { _url_host = value; }
+    }
+
+    private string _url_path = "";
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"url_path", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string url_path
+    {
+      get { return _url_path; }
+      set { _url_path = value; }
+    }
+
+    private bool _use_https = default(bool);
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"use_https", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool use_https
+    {
+      get { return _use_https; }
+      set { _use_https = value; }
+    }
+    private readonly global::System.Collections.Generic.List<CCloud_BeginHTTPUpload_Response.HTTPHeaders> _request_headers = new global::System.Collections.Generic.List<CCloud_BeginHTTPUpload_Response.HTTPHeaders>();
+    [global::ProtoBuf.ProtoMember(6, Name=@"request_headers", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CCloud_BeginHTTPUpload_Response.HTTPHeaders> request_headers
+    {
+      get { return _request_headers; }
+    }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"HTTPHeaders")]
+  public partial class HTTPHeaders : global::ProtoBuf.IExtensible
+  {
+    public HTTPHeaders() {}
+    
+
+    private string _name = "";
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"name", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string name
+    {
+      get { return _name; }
+      set { _name = value; }
+    }
+
+    private string _value = "";
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"value", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string value
+    {
+      get { return _value; }
+      set { _value = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCloud_CommitHTTPUpload_Request")]
+  public partial class CCloud_CommitHTTPUpload_Request : global::ProtoBuf.IExtensible
+  {
+    public CCloud_CommitHTTPUpload_Request() {}
+    
+
+    private bool _transfer_succeeded = default(bool);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"transfer_succeeded", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool transfer_succeeded
+    {
+      get { return _transfer_succeeded; }
+      set { _transfer_succeeded = value; }
+    }
+
+    private uint _appid = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"appid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint appid
+    {
+      get { return _appid; }
+      set { _appid = value; }
+    }
+
+    private string _file_sha = "";
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"file_sha", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string file_sha
+    {
+      get { return _file_sha; }
+      set { _file_sha = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCloud_CommitHTTPUpload_Response")]
+  public partial class CCloud_CommitHTTPUpload_Response : global::ProtoBuf.IExtensible
+  {
+    public CCloud_CommitHTTPUpload_Response() {}
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCloud_GetFileDetails_Request")]
   public partial class CCloud_GetFileDetails_Request : global::ProtoBuf.IExtensible
   {
@@ -486,6 +685,8 @@ namespace SteamKit2.Unified.Internal
     public interface ICloud
     {
       CCloud_GetUploadServerInfo_Response GetUploadServerInfo(CCloud_GetUploadServerInfo_Request request);
+    CCloud_BeginHTTPUpload_Response BeginHTTPUpload(CCloud_BeginHTTPUpload_Request request);
+    CCloud_CommitHTTPUpload_Response CommitHTTPUpload(CCloud_CommitHTTPUpload_Request request);
     CCloud_GetFileDetails_Response GetFileDetails(CCloud_GetFileDetails_Request request);
     CCloud_EnumerateUserFiles_Response EnumerateUserFiles(CCloud_EnumerateUserFiles_Request request);
     CCloud_Delete_Response Delete(CCloud_Delete_Request request);

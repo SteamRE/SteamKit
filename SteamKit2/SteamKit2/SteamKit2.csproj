@@ -96,8 +96,11 @@
     <Compile Include="Base\Generated\SteamLanguageInternal.cs" />
     <Compile Include="Base\Generated\Unified\SteamMsgCloud.cs" />
     <Compile Include="Base\Generated\Unified\SteamMsgCredentials.cs" />
+    <Compile Include="Base\Generated\Unified\SteamMsgDeviceAuth.cs" />
+    <Compile Include="Base\Generated\Unified\SteamMsgGameNotifications.cs" />
     <Compile Include="Base\Generated\Unified\SteamMsgOffline.cs" />
     <Compile Include="Base\Generated\Unified\SteamMsgParental.cs" />
+    <Compile Include="Base\Generated\Unified\SteamMsgPartnerApps.cs" />
     <Compile Include="Base\Generated\Unified\SteamMsgPlayer.cs" />
     <Compile Include="Base\Generated\Unified\SteamMsgUnifiedBase.cs" />
     <Compile Include="Base\MsgBase.cs" />
