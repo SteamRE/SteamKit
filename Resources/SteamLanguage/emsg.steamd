@@ -1351,8 +1351,8 @@ enum EMsg
 	ClientPlayerNicknameList = 5587;
 	AMClientSetPlayerNickname = 5588;
 	AMClientSetPlayerNicknameResponse = 5589;
-	ClientRequestOAuthTokenForApp = 5590;
-	ClientRequestOAuthTokenForAppResponse = 5591;
+	ClientRequestOAuthTokenForApp = 5590; obsolete
+	ClientRequestOAuthTokenForAppResponse = 5591; obsolete
 	ClientGetNumberOfCurrentPlayersDP = 5592;
 	ClientGetNumberOfCurrentPlayersDPResponse = 5593;
 	ClientServiceMethod = 5594;
@@ -1721,12 +1721,18 @@ enum EMsg
 	LogsinkWriteReport = 8800;
 	
 	PICSBase = 8900;
-	PICSChangesSinceRequest = 8901;
-	PICSChangesSinceResponse = 8902;
-	PICSProductInfoRequest = 8903;
-	PICSProductInfoResponse = 8904;
-	PICSAccessTokenRequest = 8905;
-	PICSAccessTokenResponse = 8906;
+	PICSChangesSinceRequest = 8901; obsolete "renamed to ClientPICSChangesSinceRequest"
+	ClientPICSChangesSinceRequest = 8901;
+	PICSChangesSinceResponse = 8902; obsolete "renamed to ClientPICSChangesSinceResponse"
+	ClientPICSChangesSinceResponse = 8902;
+	PICSProductInfoRequest = 8903; obsolete "renamed to ClientPICSProductInfoRequest"
+	ClientPICSProductInfoRequest = 8903;
+	PICSProductInfoResponse = 8904; obsolete "renamed to ClientPICSProductInfoResponse"
+	ClientPICSProductInfoResponse = 8904;
+	PICSAccessTokenRequest = 8905; obsolete "renamed to ClientPICSAccessTokenRequest"
+	ClientPICSAccessTokenRequest = 8905;
+	PICSAccessTokenResponse = 8906; obsolete "renamed to ClientPICSAccessTokenResponse"
+	ClientPICSAccessTokenResponse = 8906;
 
 	WorkerProcess = 9000;
 	WorkerProcessPingRequest = 9000;
@@ -1786,5 +1792,8 @@ enum EMsg
 	
 	ClientUnlockStreaming = 9507;
 	ClientUnlockStreamingResponse = 9508;
+	
+	ClientPlayingSessionState = 9600;
+	ClientPlayingSessionKick = 9601;
 
 };

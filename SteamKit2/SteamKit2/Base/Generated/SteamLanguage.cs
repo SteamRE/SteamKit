@@ -1355,7 +1355,9 @@ namespace SteamKit2
 		ClientPlayerNicknameList = 5587,
 		AMClientSetPlayerNickname = 5588,
 		AMClientSetPlayerNicknameResponse = 5589,
+		[Obsolete]
 		ClientRequestOAuthTokenForApp = 5590,
+		[Obsolete]
 		ClientRequestOAuthTokenForAppResponse = 5591,
 		ClientGetNumberOfCurrentPlayersDP = 5592,
 		ClientGetNumberOfCurrentPlayersDPResponse = 5593,
@@ -1701,12 +1703,24 @@ namespace SteamKit2
 		LogsinkBase = 8800,
 		LogsinkWriteReport = 8800,
 		PICSBase = 8900,
+		[Obsolete( "renamed to ClientPICSChangesSinceRequest" )]
 		PICSChangesSinceRequest = 8901,
+		ClientPICSChangesSinceRequest = 8901,
+		[Obsolete( "renamed to ClientPICSChangesSinceResponse" )]
 		PICSChangesSinceResponse = 8902,
+		ClientPICSChangesSinceResponse = 8902,
+		[Obsolete( "renamed to ClientPICSProductInfoRequest" )]
 		PICSProductInfoRequest = 8903,
+		ClientPICSProductInfoRequest = 8903,
+		[Obsolete( "renamed to ClientPICSProductInfoResponse" )]
 		PICSProductInfoResponse = 8904,
+		ClientPICSProductInfoResponse = 8904,
+		[Obsolete( "renamed to ClientPICSAccessTokenRequest" )]
 		PICSAccessTokenRequest = 8905,
+		ClientPICSAccessTokenRequest = 8905,
+		[Obsolete( "renamed to ClientPICSAccessTokenResponse" )]
 		PICSAccessTokenResponse = 8906,
+		ClientPICSAccessTokenResponse = 8906,
 		WorkerProcess = 9000,
 		WorkerProcessPingRequest = 9000,
 		WorkerProcessPingResponse = 9001,
@@ -1760,6 +1774,10 @@ namespace SteamKit2
 		ClientSharedLicensesStopPlaying = 9404,
 		ClientSharedLibraryLockStatus = 9405,
 		ClientSharedLibraryStopPlaying = 9406,
+		ClientUnlockStreaming = 9507,
+		ClientUnlockStreamingResponse = 9508,
+		ClientPlayingSessionState = 9600,
+		ClientPlayingSessionKick = 9601,
 	}
 	public enum EResult
 	{
