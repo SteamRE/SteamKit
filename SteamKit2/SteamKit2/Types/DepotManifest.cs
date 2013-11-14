@@ -24,27 +24,34 @@ namespace SteamKit2
         public class ChunkData
         {
             /// <summary>
-            /// Gets the SHA-1 hash chunk id.
+            /// Gets or sets the SHA-1 hash chunk id.
             /// </summary>
-            public byte[] ChunkID { get; private set; }
+            public byte[] ChunkID { get; set; }
             /// <summary>
-            /// Gets the expected Adler32 checksum of this chunk.
+            /// Gets or sets the expected Adler32 checksum of this chunk.
             /// </summary>
-            public byte[] Checksum { get; private set; }
+            public byte[] Checksum { get; set; }
             /// <summary>
-            /// Gets the chunk offset.
+            /// Gets or sets the chunk offset.
             /// </summary>
-            public ulong Offset { get; private set; }
+            public ulong Offset { get; set; }
 
             /// <summary>
-            /// Gets the compressed length of this chunk.
+            /// Gets or sets the compressed length of this chunk.
             /// </summary>
-            public uint CompressedLength { get; private set; }
+            public uint CompressedLength { get; set; }
             /// <summary>
-            /// Gets the decompressed length of this chunk.
+            /// Gets or sets the decompressed length of this chunk.
             /// </summary>
-            public uint UncompressedLength { get; private set; }
+            public uint UncompressedLength { get; set; }
 
+
+            /// <summary>
+            /// Initializes a new instance of the <see cref="ChunkData"/> class.
+            /// </summary>
+            public ChunkData()
+            {
+            }
 
             internal ChunkData( byte[] id, byte[] checksum, ulong offset, uint comp_length, uint uncomp_length )
             {
