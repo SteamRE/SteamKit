@@ -54,6 +54,9 @@ enum EDotaUserMessages {
 	DOTA_UM_SendRoshanPopup = 112;
 	DOTA_UM_SendGenericToolTip = 113;
 	DOTA_UM_SendFinalGold = 114;
+	DOTA_UM_CustomMsg = 115;
+	DOTA_UM_CoachHUDPing = 116;
+	DOTA_UM_ClientLoadGridNav = 117;
 }
 
 enum DOTA_CHAT_MESSAGE {
@@ -118,6 +121,11 @@ enum DOTA_CHAT_MESSAGE {
 	CHAT_MESSAGE_HOLDOUT_TOWER_DESTROYED = 57;
 	CHAT_MESSAGE_HOLDOUT_WALL_DESTROYED = 58;
 	CHAT_MESSAGE_HOLDOUT_WALL_FINISHED = 59;
+	CHAT_MESSAGE_SAFE_TO_LEAVE_ABANDONER_AFK = 60;
+	CHAT_MESSAGE_SAFE_TO_LEAVE_ABANDONER_AFK_EARLY = 61;
+	CHAT_MESSAGE_ABANDON_LIMITED_HERO = 62;
+	CHAT_MESSAGE_ABANDON_LIMITED_HERO_EXPLANATION = 63;
+	CHAT_MESSAGE_DISCONNECT_LIMITED_HERO = 64;
 }
 
 enum DOTA_NO_BATTLE_POINTS_REASONS {
@@ -557,6 +565,7 @@ message CDOTAUserMsg_ReceivedXmasGift {
 message CDOTAUserMsg_ShowSurvey {
 	optional int32 survey_id = 1;
 	optional uint32 match_id = 2;
+	optional string response_style = 3;
 }
 
 message CDOTAUserMsg_UpdateSharedContent {
@@ -600,5 +609,19 @@ message CDOTAUserMsg_SendRoshanPopup {
 message CDOTAUserMsg_SendFinalGold {
 	repeated uint32 reliable_gold = 1;
 	repeated uint32 unreliable_gold = 2;
+}
+
+message CDOTAUserMsg_CustomMsg {
+	optional string message = 1;
+	optional int32 player_id = 2;
+	optional int32 value = 3;
+}
+
+message CDOTAUserMsg_CoachHUDPing {
+	optional uint32 player_id = 1;
+	optional .CDOTAMsg_CoachHUDPing hud_ping = 2;
+}
+
+message CDOTAUserMsg_ClientLoadGridNav {
 }
 

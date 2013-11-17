@@ -69,7 +69,6 @@ enum EGCItemMsg {
 	k_EMsgGCShowItemsPickedUp = 1071;
 	k_EMsgGCClientDisplayNotification = 1072;
 	k_EMsgGCApplyStrangePart = 1073;
-	k_EMsgGC_IncrementKillCountAttribute = 1074;
 	k_EMsgGC_IncrementKillCountResponse = 1075;
 	k_EMsgGCApplyPennantUpgrade = 1076;
 	k_EMsgGCSetItemPositions = 1077;
@@ -77,11 +76,21 @@ enum EGCItemMsg {
 	k_EMsgGCNameEggEssenceResponse = 1079;
 	k_EMsgGCUnlockItemStyle = 1080;
 	k_EMsgGCUnlockItemStyleResponse = 1081;
+	k_EMsgGCFulfillDynamicRecipeComponent = 1082;
+	k_EMsgGCFulfillDynamicRecipeComponentResponse = 1083;
+	k_EMsgGCClientRequestMarketData = 1084;
+	k_EMsgGCClientRequestMarketDataResponse = 1085;
+	k_EMsgGCExtractGems = 1086;
+	k_EMsgGCAddSocket = 1087;
+	k_EMsgGCAddItemToSocket = 1088;
+	k_EMsgGCAddItemToSocketResponse = 1089;
+	k_EMsgGCAddSocketResponse = 1090;
 	k_EMsgGCTradingBase = 1500;
 	k_EMsgGCTrading_InitiateTradeRequest = 1501;
 	k_EMsgGCTrading_InitiateTradeResponse = 1502;
 	k_EMsgGCTrading_StartSession = 1503;
 	k_EMsgGCTrading_SessionClosed = 1509;
+	k_EMsgGCTrading_InitiateTradeRequestResponse = 1514;
 	k_EMsgGCServerBrowser_FavoriteServer = 1601;
 	k_EMsgGCServerBrowser_BlacklistServer = 1602;
 	k_EMsgGCServerRentalsBase = 1700;
@@ -127,6 +136,7 @@ enum EGCItemMsg {
 	k_EMsgGCItemPurgatory_FinalizePurchaseResponse = 2532;
 	k_EMsgGCItemPurgatory_RefundPurchase = 2533;
 	k_EMsgGCItemPurgatory_RefundPurchaseResponse = 2534;
+	k_EMsgGCToGCPlayerStrangeCountAdjustments = 2535;
 }
 
 enum EGCMsgResponse {
@@ -148,6 +158,7 @@ enum EUnlockStyle {
 	k_UnlockStyle_Failed_CantCommit = 3;
 	k_UnlockStyle_Failed_CantLockCache = 4;
 	k_UnlockStyle_Failed_CantAffordAttrib = 5;
+	k_UnlockStyle_Failed_CantAffordGem = 6;
 }
 
 enum EItemPurgatoryResponse_Finalize {
@@ -173,6 +184,17 @@ message CMsgApplyAutograph {
 	optional uint64 item_item_id = 2;
 }
 
+message CMsgEconPlayerStrangeCountAdjustment {
+	message CStrangeCountAdjustment {
+		optional uint32 event_type = 1;
+		optional uint64 item_id = 2;
+		optional uint32 adjustment = 3;
+	}
+
+	optional uint32 account_id = 1;
+	repeated .CMsgEconPlayerStrangeCountAdjustment.CStrangeCountAdjustment strange_count_adjustments = 2;
+}
+
 message CMsgRequestItemPurgatory_FinalizePurchase {
 	repeated uint64 item_ids = 1;
 }
@@ -187,5 +209,9 @@ message CMsgRequestItemPurgatory_RefundPurchase {
 
 message CMsgRequestItemPurgatory_RefundPurchaseResponse {
 	optional uint32 result = 1;
+}
+
+message CMsgCraftingResponse {
+	repeated uint64 item_ids = 1;
 }
 

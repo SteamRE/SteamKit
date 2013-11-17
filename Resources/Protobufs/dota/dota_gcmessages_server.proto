@@ -1,6 +1,7 @@
 import "steammessages.proto";
 import "matchmaker_common.proto";
 import "dota_gcmessages_common.proto";
+import "econ_gcmessages.proto";
 
 message CMsgSpawnLootGreevil {
 	optional bool rare = 1;
@@ -133,6 +134,9 @@ message CMsgGameMatchSignOut {
 	optional uint32 event_score = 14;
 	repeated .CMatchHeroSelectEvent picks_bans = 15;
 	repeated .CMsgDOTAFantasyPlayerStats fantasy_stats = 16;
+	repeated .CMsgEconPlayerStrangeCountAdjustment player_strange_count_adjustments = 17;
+	optional bool automatic_surrender = 18;
+	optional uint32 server_version = 19;
 }
 
 message CMsgGameMatchSignoutResponse {
@@ -304,6 +308,7 @@ message CMsgGameServerGetLoadGameResult {
 
 message CMsgDOTAGenerateDiretidePrizeList {
 	optional uint32 prize_list = 1;
+	optional uint32 highest_roshan_level = 2;
 }
 
 message CMsgDOTAGenerateDiretidePrizeListResponse {

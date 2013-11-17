@@ -59,6 +59,8 @@ enum EGCSystemMsg {
 	k_EGCMsgMemCachedDelete = 203;
 	k_EGCMsgMemCachedStats = 204;
 	k_EGCMsgMemCachedStatsResponse = 205;
+	k_EGCMsgSQLStats = 210;
+	k_EGCMsgSQLStatsResponse = 211;
 	k_EGCMsgMasterSetDirectory = 220;
 	k_EGCMsgMasterSetDirectoryResponse = 221;
 	k_EGCMsgMasterSetWebAPIRouting = 222;
