@@ -1359,6 +1359,8 @@ namespace SteamKit2
 		ClientRequestOAuthTokenForApp = 5590,
 		[Obsolete]
 		ClientRequestOAuthTokenForAppResponse = 5591,
+		ClientCreateAccountProto = 5590,
+		ClientCreateAccountProtoResponse = 5591,
 		ClientGetNumberOfCurrentPlayersDP = 5592,
 		ClientGetNumberOfCurrentPlayersDPResponse = 5593,
 		ClientServiceMethod = 5594,
@@ -1519,7 +1521,9 @@ namespace SteamKit2
 		ClientUCMDeleteScreenshotResponse = 7310,
 		ClientUCMPublishFile = 7311,
 		ClientUCMPublishFileResponse = 7312,
+		[Obsolete]
 		ClientUCMGetPublishedFileDetails = 7313,
+		[Obsolete]
 		ClientUCMGetPublishedFileDetailsResponse = 7314,
 		ClientUCMDeletePublishedFile = 7315,
 		ClientUCMDeletePublishedFileResponse = 7316,
