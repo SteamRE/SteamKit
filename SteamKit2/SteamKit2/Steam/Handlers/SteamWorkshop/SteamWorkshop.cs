@@ -3,6 +3,7 @@
  * file 'license.txt', which is part of this source code package.
  */
 
+using System;
 using System.Collections.Generic;
 using SteamKit2.Internal;
 
@@ -24,16 +25,10 @@ namespace SteamKit2
         /// </summary>
         /// <param name="publishedFileId">The file ID being requested.</param>
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="SteamClient.JobCallback&lt;T&gt;"/>.</returns>
+        [Obsolete]
         public JobID RequestPublishedFileDetails( PublishedFileID publishedFileId )
         {
-            var request = new ClientMsgProtobuf<CMsgClientUCMGetPublishedFileDetails>( EMsg.ClientUCMGetPublishedFileDetails );
-            request.SourceJobID = Client.GetNextJobID();
-
-            request.Body.published_file_id = publishedFileId;
-
-            Client.Send( request );
-
-            return request.SourceJobID;
+            return JobID.Invalid;
         }
 
 
@@ -252,10 +247,6 @@ namespace SteamKit2
                 case EMsg.ClientUCMEnumeratePublishedFilesByUserActionResponse:
                     HandleEnumPublishedFilesByAction( packetMsg );
                     break;
-
-                case EMsg.ClientUCMGetPublishedFileDetailsResponse:
-                    HandlePublishedFileDetails( packetMsg );
-                    break;
             }
         }
 
@@ -292,14 +283,6 @@ namespace SteamKit2
 
             var innerCallback = new UserActionPublishedFilesCallback( response.Body );
             var callback = new SteamClient.JobCallback<UserActionPublishedFilesCallback>( response.TargetJobID, innerCallback );
-            Client.PostCallback( callback );
-        }
-        void HandlePublishedFileDetails( IPacketMsg packetMsg )
-        {
-            var details = new ClientMsgProtobuf<CMsgClientUCMGetPublishedFileDetailsResponse>( packetMsg );
-
-            var innerCallback = new PublishedFileDetailsCallback( details.Body );
-            var callback = new SteamClient.JobCallback<PublishedFileDetailsCallback>( packetMsg.TargetJobID, innerCallback );
             Client.PostCallback( callback );
         }
         #endregion

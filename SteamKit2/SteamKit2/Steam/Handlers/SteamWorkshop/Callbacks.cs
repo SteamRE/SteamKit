@@ -16,6 +16,7 @@ namespace SteamKit2
         /// <summary>
         /// This callback is received in response to calling <see cref="RequestPublishedFileDetails"/>.
         /// </summary>
+        [Obsolete]
         public sealed class PublishedFileDetailsCallback : CallbackMsg
         {
             /// <summary>
@@ -102,41 +103,6 @@ namespace SteamKit2
             /// Gets the URL.
             /// </summary>
             public string URL { get; private set; }
-
-
-            internal PublishedFileDetailsCallback( CMsgClientUCMGetPublishedFileDetailsResponse msg )
-            {
-                this.Result = ( EResult )msg.eresult;
-
-                this.FileID = msg.published_file_id;
-
-                this.Creator = msg.creator_steam_id;
-
-                this.CreatorAppID = msg.creator_app_id;
-                this.ConsumerAppID = msg.consumer_app_id;
-
-                this.FileUGC = msg.file_hcontent;
-                this.PreviewFileUGC = msg.preview_hcontent;
-
-                this.Title = msg.title;
-                this.Description = msg.description;
-
-                this.CreationTime = Utils.DateTimeFromUnixTime( msg.rtime32_created );
-                this.UpdateTime = Utils.DateTimeFromUnixTime( msg.rtime32_updated );
-
-                this.Visiblity = ( EPublishedFileVisibility )msg.visibility;
-
-                this.IsBanned = msg.banned;
-
-                this.Tags = new ReadOnlyCollection<string>( new List<string>( msg.tag ) );
-
-                this.FileName = msg.filename;
-
-                this.FileSize = msg.file_size;
-                this.PreviewFileSize = msg.preview_file_size;
-
-                this.URL = msg.url;
-            }
         }
 
         /// <summary>
