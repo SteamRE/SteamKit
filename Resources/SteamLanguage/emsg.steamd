@@ -1353,6 +1353,8 @@ enum EMsg
 	AMClientSetPlayerNicknameResponse = 5589;
 	ClientRequestOAuthTokenForApp = 5590; obsolete
 	ClientRequestOAuthTokenForAppResponse = 5591; obsolete
+	ClientCreateAccountProto = 5590;
+	ClientCreateAccountProtoResponse = 5591;
 	ClientGetNumberOfCurrentPlayersDP = 5592;
 	ClientGetNumberOfCurrentPlayersDPResponse = 5593;
 	ClientServiceMethod = 5594;
@@ -1522,8 +1524,8 @@ enum EMsg
 	ClientUCMDeleteScreenshotResponse = 7310;
 	ClientUCMPublishFile = 7311;
 	ClientUCMPublishFileResponse = 7312;
-	ClientUCMGetPublishedFileDetails = 7313;
-	ClientUCMGetPublishedFileDetailsResponse = 7314;
+	ClientUCMGetPublishedFileDetails = 7313; obsolete
+	ClientUCMGetPublishedFileDetailsResponse = 7314; obsolete
 	ClientUCMDeletePublishedFile = 7315;
 	ClientUCMDeletePublishedFileResponse = 7316;
 	ClientUCMEnumerateUserPublishedFiles = 7317;

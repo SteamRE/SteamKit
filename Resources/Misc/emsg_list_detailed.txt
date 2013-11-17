@@ -344,6 +344,8 @@
 	k_EMsgClientPlayerNicknameList = 5587, // flags: 2, server type: -1
 	k_EMsgAMClientSetPlayerNickname = 5588, // flags: 2, server type: -1
 	k_EMsgAMClientSetPlayerNicknameResponse = 5589, // flags: 2, server type: -1
+	k_EMsgClientCreateAccountProto = 5590, // flags: 2, server type: -1
+	k_EMsgClientCreateAccountProtoResponse = 5591, // flags: 2, server type: -1
 	k_EMsgClientGetNumberOfCurrentPlayersDP = 5592, // flags: 6, server type: 17
 	k_EMsgClientGetNumberOfCurrentPlayersDPResponse = 5593, // flags: 6, server type: 17
 	k_EMsgClientServiceMethod = 5594, // flags: 6, server type: 41
@@ -429,8 +431,6 @@
 	k_EMsgClientUCMDeleteScreenshotResponse = 7310, // flags: 6, server type: 45
 	k_EMsgClientUCMPublishFile = 7311, // flags: 6, server type: 45
 	k_EMsgClientUCMPublishFileResponse = 7312, // flags: 6, server type: 45
-	k_EMsgClientUCMGetPublishedFileDetails = 7313, // flags: 6, server type: 45
-	k_EMsgClientUCMGetPublishedFileDetailsResponse = 7314, // flags: 6, server type: 45
 	k_EMsgClientUCMDeletePublishedFile = 7315, // flags: 6, server type: 45
 	k_EMsgClientUCMDeletePublishedFileResponse = 7316, // flags: 6, server type: 45
 	k_EMsgClientUCMEnumerateUserPublishedFiles = 7317, // flags: 6, server type: 45
