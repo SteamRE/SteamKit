@@ -116,3 +116,9 @@ message CDOTAMsg_SendStatPopup {
 	repeated int32 stat_images = 3;
 }
 
+message CDOTAMsg_CoachHUDPing {
+	optional uint32 x = 1;
+	optional uint32 y = 2;
+	optional string tgtpath = 3;
+}
+

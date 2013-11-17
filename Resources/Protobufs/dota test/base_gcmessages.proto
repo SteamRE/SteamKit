@@ -67,6 +67,7 @@ message CMsgInviteToParty {
 	optional fixed64 steam_id = 1;
 	optional uint32 client_version = 2;
 	optional uint32 team_id = 3;
+	optional bool as_coach = 4;
 }
 
 message CMsgInvitationCreated {
@@ -79,6 +80,7 @@ message CMsgPartyInviteResponse {
 	optional bool accept = 2;
 	optional uint32 client_version = 3;
 	optional uint32 team_id = 4;
+	optional bool as_coach = 5;
 }
 
 message CMsgKickFromParty {
@@ -153,14 +155,6 @@ message CSOItemRecipe {
 message CMsgDevNewItemRequest {
 	optional fixed64 receiver = 1;
 	optional .CSOItemCriteria criteria = 2;
-}
-
-message CMsgIncrementKillCountAttribute {
-	optional fixed32 killer_account_id = 1;
-	optional fixed32 victim_account_id = 2;
-	optional uint64 item_id = 3;
-	optional uint32 event_type = 4;
-	optional uint32 amount = 5;
 }
 
 message CMsgApplyStrangePart {
@@ -271,6 +265,7 @@ message CMsgUseItem {
 	repeated uint32 gift__potential_targets = 3;
 	optional uint32 duel__class_lock = 4;
 	optional fixed64 initiator_steam_id = 5;
+	optional bool itempack__ack_immediately = 6;
 }
 
 message CMsgReplayUploadedToYouTube {
@@ -504,8 +499,64 @@ message CMsgGCToGCWebAPIAccountChanged {
 }
 
 message CMsgGCToGCRequestPassportItemGrant {
-	optional fixed64 steam_id = 1;
 	optional uint32 league_id = 2;
 	optional int32 reward_flag = 3;
+	optional uint32 account_id = 4;
+}
+
+message CMsgRecipeComponent {
+	optional uint64 subject_item_id = 1;
+	optional uint64 attribute_index = 2;
+}
+
+message CMsgFulfillDynamicRecipeComponent {
+	optional uint64 tool_item_id = 1;
+	repeated .CMsgRecipeComponent consumption_components = 2;
+}
+
+message CMsgGCClientMarketDataRequest {
+	optional uint32 user_currency = 1;
+}
+
+message CMsgGCClientMarketDataEntry {
+	optional uint32 item_def_index = 1;
+	optional uint32 item_quality = 2;
+	optional uint32 item_sell_listings = 3;
+	optional uint32 price_in_local_currency = 4;
+}
+
+message CMsgGCClientMarketData {
+	repeated .CMsgGCClientMarketDataEntry entries = 1;
+}
+
+message CMsgExtractGems {
+	optional uint64 tool_item_id = 1;
+	optional uint64 item_item_id = 2;
+}
+
+message CMsgAddSocket {
+	optional uint64 tool_item_id = 1;
+	optional uint64 item_item_id = 2;
+	optional bool unusual = 3;
+}
+
+message CMsgAddSocketResponse {
+	optional uint64 item_id = 1;
+	repeated uint32 updated_socket_index = 2;
+}
+
+message CMsgAddItemToSocketData {
+	optional uint64 gem_item_id = 1;
+	optional uint32 socket_index = 2;
+}
+
+message CMsgAddItemToSocket {
+	optional uint64 item_item_id = 1;
+	repeated .CMsgAddItemToSocketData gems_to_socket = 2;
+}
+
+message CMsgAddItemToSocketResponse {
+	optional uint64 item_item_id = 1;
+	repeated uint32 updated_socket_index = 2;
 }
 

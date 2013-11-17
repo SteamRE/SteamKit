@@ -21,6 +21,9 @@ enum EDotaClientMessages {
 	DOTA_CM_ChatWheel = 16;
 	DOTA_CM_SendStatPopup = 17;
 	DOTA_CM_BeginLastHitChallenge = 18;
+	DOTA_CM_UpdateQuickBuy = 19;
+	DOTA_CM_UpdateCoachListen = 20;
+	DOTA_CM_CoachHUDPing = 21;
 }
 
 message CDOTAClientMsg_MapPing {
@@ -95,5 +98,22 @@ message CDOTAClientMsg_SendStatPopup {
 message CDOTAClientMsg_BeginLastHitChallenge {
 	optional uint32 chosen_lane = 1;
 	optional bool helper_enabled = 2;
+}
+
+message CDOTAClientMsg_UpdateQuickBuyItem {
+	optional int32 item_type = 1;
+	optional bool purchasable = 2;
+}
+
+message CDOTAClientMsg_UpdateQuickBuy {
+	repeated .CDOTAClientMsg_UpdateQuickBuyItem items = 1;
+}
+
+message CDOTAClientMsg_UpdateCoachListen {
+	optional uint32 player_mask = 1;
+}
+
+message CDOTAClientMsg_CoachHUDPing {
+	optional .CDOTAMsg_CoachHUDPing hud_ping = 1;
 }
 

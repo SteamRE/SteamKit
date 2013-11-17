@@ -195,6 +195,22 @@ message CGCMsgMemCachedStatsResponse {
 	optional uint64 bytes = 14;
 }
 
+message CGCMsgSQLStats {
+	optional uint32 schema_catalog = 1;
+}
+
+message CGCMsgSQLStatsResponse {
+	optional uint32 threads = 1;
+	optional uint32 threads_connected = 2;
+	optional uint32 threads_active = 3;
+	optional uint32 operations_submitted = 4;
+	optional uint32 prepared_statements_executed = 5;
+	optional uint32 non_prepared_statements_executed = 6;
+	optional uint32 deadlock_retries = 7;
+	optional uint32 operations_timed_out_in_queue = 8;
+	optional uint32 errors = 9;
+}
+
 message CMsgAMAddFreeLicense {
 	optional fixed64 steamid = 1;
 	optional uint32 ip_public = 2;
@@ -313,7 +329,6 @@ message CGCSystemMsg_GetAccountDetails_Response {
 	optional string persona_name = 3;
 	optional bool is_profile_public = 4;
 	optional bool is_inventory_public = 5;
-	optional bool is_trusted = 6;
 	optional bool is_vac_banned = 7;
 	optional bool is_cyber_cafe = 8;
 	optional bool is_school_account = 9;
@@ -329,6 +344,7 @@ message CGCSystemMsg_GetAccountDetails_Response {
 	optional uint32 trade_ban_expiration = 19;
 	optional uint32 accountid = 20;
 	optional uint32 suspension_end_time = 21;
+	optional string currency = 22;
 }
 
 message CMsgGCGetPersonaNames {
@@ -452,8 +468,14 @@ message CMsgGCMsgSetOptions {
 		NOTIFY_VAC_ACTION = 3;
 	}
 
+	enum GCSQLVersion {
+		GCSQL_VERSION_BASELINE = 1;
+		GCSQL_VERSION_BOOLTYPE = 2;
+	}
+
 	repeated .CMsgGCMsgSetOptions.Option options = 1;
 	repeated .CMsgGCMsgSetOptions.MessageRange client_msg_ranges = 2;
+	optional .CMsgGCMsgSetOptions.GCSQLVersion gcsql_version = 3 [default = GCSQL_VERSION_BASELINE];
 }
 
 message CMsgGCHUpdateSession {
