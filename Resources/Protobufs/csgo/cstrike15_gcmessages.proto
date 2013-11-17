@@ -44,6 +44,7 @@ enum ECsgoGCMsg {
 	k_EMsgGCCStrike15_v2_MatchListRequestRecentUserGames = 9141;
 	k_EMsgGCCStrike15_v2_GC2ServerReservationUpdate = 9142;
 	k_EMsgGCCStrike15_v2_ClientVarValueNotificationInfo = 9144;
+	k_EMsgGCCStrike15_v2_TournamentMatchRewardDropsNotification = 9145;
 }
 
 message GameServerPing {
@@ -128,12 +129,16 @@ message TournamentEvent {
 	optional string event_name = 3;
 	optional uint32 event_time_start = 4;
 	optional uint32 event_time_end = 5;
+	optional int32 event_public = 6;
+	optional int32 event_stage_id = 7;
+	optional string event_stage_name = 8;
 }
 
 message TournamentMatchSetup {
 	optional int32 event_id = 1;
 	optional int32 team_id_ct = 2;
 	optional int32 team_id_t = 3;
+	optional int32 event_stage_id = 4;
 }
 
 message ServerHltvInfo {
@@ -295,6 +300,7 @@ message CMsgGCCStrike15_v2_MatchmakingGC2ClientHello {
 	optional .TournamentEvent my_current_event = 10;
 	repeated .TournamentTeam my_current_event_teams = 11;
 	optional .TournamentTeam my_current_team = 12;
+	repeated .TournamentEvent my_current_event_stages = 13;
 }
 
 message CMsgGCCStrike15_v2_MatchmakingGC2ClientAbandon {
@@ -386,6 +392,7 @@ message WatchableMatchInfo {
 	optional string game_map = 10;
 	optional uint64 server_id = 11;
 	optional uint64 match_id = 12;
+	optional uint64 reservation_id = 13;
 }
 
 message CMsgGCCStrike15_v2_WatchInfoUsers {
@@ -462,6 +469,14 @@ message CMsgGCCStrike15_v2_MatchEndRunRewardDrops {
 }
 
 message CEconItemPreviewDataBlock {
+	message Sticker {
+		optional uint32 slot = 1;
+		optional uint32 sticker_id = 2;
+		optional float wear = 3;
+		optional float scale = 4;
+		optional float rotation = 5;
+	}
+
 	optional uint32 accountid = 1;
 	optional uint64 itemid = 2;
 	optional uint32 defindex = 3;
@@ -473,10 +488,17 @@ message CEconItemPreviewDataBlock {
 	optional uint32 killeaterscoretype = 9;
 	optional uint32 killeatervalue = 10;
 	optional string customname = 11;
+	repeated .CEconItemPreviewDataBlock.Sticker stickers = 12;
 }
 
 message CMsgGCCStrike15_v2_MatchEndRewardDropsNotification {
 	optional .CEconItemPreviewDataBlock iteminfo = 6;
+}
+
+message CMsgGCCStrike15_v2_TournamentMatchRewardDropsNotification {
+	optional uint64 match_id = 1;
+	optional uint32 defindex = 2;
+	repeated uint32 accountids = 3;
 }
 
 message CMsgGCCStrike15_v2_MatchListRequestCurrentLiveGames {

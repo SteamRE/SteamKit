@@ -110,6 +110,8 @@ message CMsgClientLogonResponse {
 	optional string ip_country_code = 21;
 	optional bytes parental_settings = 22;
 	optional bytes parental_setting_signature = 23;
+	optional int32 count_loginfailures_to_migrate = 24;
+	optional int32 count_disconnects_to_migrate = 25;
 }
 
 message CMsgClientRequestWebAPIAuthenticateUserNonce {
@@ -732,6 +734,7 @@ message CMsgClientConnectionStats {
 		optional int32 connections_dropped = 4;
 		optional uint32 seconds_running = 5;
 		optional uint32 msec_tologonthistime = 6;
+		optional uint32 count_bad_cms = 7;
 	}
 
 	message Stats_UDP {
@@ -970,6 +973,7 @@ message CMsgClientUFSUploadCommit {
 		optional uint32 app_id = 2;
 		optional bytes sha_file = 3;
 		optional uint32 cub_file = 4;
+		optional string file_name = 5;
 	}
 
 	repeated .CMsgClientUFSUploadCommit.File files = 1;
@@ -1213,6 +1217,8 @@ message CMsgClientPICSProductInfoResponse {
 	repeated uint32 unknown_packageids = 4;
 	optional bool meta_data_only = 5;
 	optional bool response_pending = 6;
+	optional uint32 http_min_size = 7;
+	optional string http_host = 8;
 }
 
 message CMsgClientPICSAccessTokenRequest {
@@ -1468,33 +1474,6 @@ message CMsgClientUCMUpdatePublishedFile {
 message CMsgClientUCMUpdatePublishedFileResponse {
 	optional int32 eresult = 1 [default = 2];
 	optional bool needs_workshop_legal_agreement_acceptance = 2 [default = false];
-}
-
-message CMsgClientUCMGetPublishedFileDetails {
-	optional fixed64 published_file_id = 1;
-}
-
-message CMsgClientUCMGetPublishedFileDetailsResponse {
-	optional int32 eresult = 1 [default = 2];
-	optional fixed64 published_file_id = 2 [default = 18446744073709551615];
-	optional fixed64 creator_steam_id = 3;
-	optional uint32 creator_app_id = 4;
-	optional uint32 consumer_app_id = 5;
-	optional fixed64 file_hcontent = 6 [default = 18446744073709551615];
-	optional fixed64 preview_hcontent = 7 [default = 18446744073709551615];
-	optional string title = 8;
-	optional string description = 9;
-	optional fixed32 rtime32_created = 10;
-	optional fixed32 rtime32_updated = 11;
-	optional int32 visibility = 12;
-	optional bool banned = 13;
-	repeated string tag = 14;
-	optional string filename = 15;
-	optional uint32 file_size = 16;
-	optional uint32 preview_file_size = 17;
-	optional string url = 18;
-	optional uint32 file_type = 19;
-	optional bool accepted_for_use = 20;
 }
 
 message CMsgClientUCMDeletePublishedFile {
@@ -2713,5 +2692,19 @@ message CMsgClientPlayingSessionState {
 
 message CMsgClientPlayingSessionKick {
 	optional bool only_stop_game = 1;
+}
+
+message CMsgClientCreateAccount {
+	optional string account_name = 1;
+	optional string password = 2;
+	optional string email = 3;
+	optional string question = 4;
+	optional string answer = 5;
+	optional uint32 launcher = 6;
+}
+
+message CMsgClientCreateAccountResponse {
+	optional int32 eresult = 1 [default = 2];
+	optional fixed64 steamid = 2;
 }
 

@@ -1,5 +1,9 @@
 import "steammessages.proto";
 
+enum EServerModificationItemType {
+	kGameServerModificationItem_Halloween = 1;
+}
+
 enum TF_MatchmakingMode {
 	TF_Matchmaking_INVALID = 0;
 	TF_Matchmaking_QUICKPLAY = 1;
@@ -291,6 +295,46 @@ message CMsgGC_GameServer_ResetIdentityResponse {
 	optional bool game_server_identity_token_reset = 1;
 	optional uint32 game_server_account_id = 2;
 	optional string game_server_identity_token = 3;
+}
+
+message CMsgGC_Client_UseServerModificationItem {
+	optional uint64 item_id = 1;
+}
+
+message CMsgGC_Client_UseServerModificationItem_Response {
+	enum EServerModificationItemResponse {
+		kServerModificationItemResponse_AlreadyInUse = 1;
+		kServerModificationItemResponse_NotOnAuthenticatedServer = 2;
+		kServerModificationItemResponse_ServerReject = 3;
+		kServerModificationItemResponse_InternalError = 4;
+		kServerModificationItemResponse_EventAlreadyActive = 5;
+	}
+
+	optional .CMsgGC_Client_UseServerModificationItem_Response.EServerModificationItemResponse response_code = 1 [default = kServerModificationItemResponse_AlreadyInUse];
+}
+
+message CMsgGC_GameServer_UseServerModificationItem {
+	optional .EServerModificationItemType modification_type = 1 [default = kGameServerModificationItem_Halloween];
+}
+
+message CMsgGC_GameServer_UseServerModificationItem_Response {
+	enum EServerModificationItemServerResponse {
+		kServerModificationItemServerResponse_Accepted = 1;
+		kServerModificationItemServerResponse_NoVoteCalled = 2;
+		kServerModificationItemServerResponse_VoteFailed = 3;
+	}
+
+	optional .EServerModificationItemType modification_type = 1 [default = kGameServerModificationItem_Halloween];
+	optional .CMsgGC_GameServer_UseServerModificationItem_Response.EServerModificationItemServerResponse server_response_code = 2 [default = kServerModificationItemServerResponse_Accepted];
+}
+
+message CMsgGC_GameServer_ServerModificationItemExpired {
+	optional .EServerModificationItemType modification_type = 1 [default = kGameServerModificationItem_Halloween];
+}
+
+message CMsgGC_GameServer_ServerModificationItem {
+	optional .EServerModificationItemType modification_type = 1 [default = kGameServerModificationItem_Halloween];
+	optional bool active = 2;
 }
 
 message CMsgGC_Halloween_ReservedItem {

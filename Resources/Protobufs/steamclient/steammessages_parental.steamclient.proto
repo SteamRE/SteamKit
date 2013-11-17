@@ -22,6 +22,7 @@ message ParentalSettings {
 message CParental_EnableParentalSettings_Request {
 	optional string password = 1;
 	optional .ParentalSettings settings = 2;
+	optional string sessionid = 3;
 	optional fixed64 steamid = 10;
 }
 
@@ -77,6 +78,8 @@ message CParental_ValidatePassword_Response {
 message CParental_ParentalSettingsChange_Notification {
 	optional bytes serialized_settings = 1;
 	optional bytes signature = 2;
+	optional string password = 3;
+	optional string sessionid = 4;
 }
 
 service Parental {

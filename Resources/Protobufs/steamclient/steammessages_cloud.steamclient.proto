@@ -36,9 +36,11 @@ message CCloud_CommitHTTPUpload_Request {
 	optional bool transfer_succeeded = 1 [(description) = "True if the HTTP PUT to the upload URL succeeded (URL provided in response to Cloud.BeginHTTPUpload), false if a failure occurred."];
 	optional uint32 appid = 2 [(description) = "App ID for which the file is being uploaded. Must match the app ID provided to Cloud.BeginHTTPUpload."];
 	optional string file_sha = 3 [(description) = "Hex string (40 digits) representing the SHA1 digest of the file. Must match the SHA1 digest provided to Cloud.BeginHTTPUpload."];
+	optional string filename = 4 [(description) = "Filename as specified in the Cloud.BeginHTTPUpload request."];
 }
 
 message CCloud_CommitHTTPUpload_Response {
+	optional bool file_committed = 1 [(description) = "True if the file was successfully committed, false otherwise."];
 }
 
 message CCloud_GetFileDetails_Request {

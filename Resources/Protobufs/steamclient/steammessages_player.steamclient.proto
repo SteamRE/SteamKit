@@ -127,6 +127,12 @@ message CPlayer_GetLastPlayedTimes_Response {
 	repeated .CPlayer_GetLastPlayedTimes_Response.Game games = 1;
 }
 
+message CPlayer_AcceptSSA_Request {
+}
+
+message CPlayer_AcceptSSA_Response {
+}
+
 message CPlayer_GetNicknameList_Request {
 }
 
@@ -204,6 +210,9 @@ service Player {
 	}
 	rpc ClientGetLastPlayedTimes (.CPlayer_GetLastPlayedTimes_Request) returns (.CPlayer_GetLastPlayedTimes_Response) {
 		option (method_description) = "Gets the last-played times for the account";
+	}
+	rpc AcceptSSA (.CPlayer_AcceptSSA_Request) returns (.CPlayer_AcceptSSA_Response) {
+		option (method_description) = "User is accepting the SSA";
 	}
 	rpc GetNicknameList (.CPlayer_GetNicknameList_Request) returns (.CPlayer_GetNicknameList_Response) {
 		option (method_description) = "Gets the list of nicknames this user has for other users";
