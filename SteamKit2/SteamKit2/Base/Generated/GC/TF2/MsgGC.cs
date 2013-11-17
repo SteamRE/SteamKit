@@ -1321,6 +1321,172 @@ namespace SteamKit2.GC.TF2.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGC_Client_UseServerModificationItem")]
+  public partial class CMsgGC_Client_UseServerModificationItem : global::ProtoBuf.IExtensible
+  {
+    public CMsgGC_Client_UseServerModificationItem() {}
+    
+
+    private ulong _item_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"item_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong item_id
+    {
+      get { return _item_id; }
+      set { _item_id = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGC_Client_UseServerModificationItem_Response")]
+  public partial class CMsgGC_Client_UseServerModificationItem_Response : global::ProtoBuf.IExtensible
+  {
+    public CMsgGC_Client_UseServerModificationItem_Response() {}
+    
+
+    private CMsgGC_Client_UseServerModificationItem_Response.EServerModificationItemResponse _response_code = CMsgGC_Client_UseServerModificationItem_Response.EServerModificationItemResponse.kServerModificationItemResponse_AlreadyInUse;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"response_code", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(CMsgGC_Client_UseServerModificationItem_Response.EServerModificationItemResponse.kServerModificationItemResponse_AlreadyInUse)]
+    public CMsgGC_Client_UseServerModificationItem_Response.EServerModificationItemResponse response_code
+    {
+      get { return _response_code; }
+      set { _response_code = value; }
+    }
+    [global::ProtoBuf.ProtoContract(Name=@"EServerModificationItemResponse", EnumPassthru=true)]
+    public enum EServerModificationItemResponse
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"kServerModificationItemResponse_AlreadyInUse", Value=1)]
+      kServerModificationItemResponse_AlreadyInUse = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"kServerModificationItemResponse_NotOnAuthenticatedServer", Value=2)]
+      kServerModificationItemResponse_NotOnAuthenticatedServer = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"kServerModificationItemResponse_ServerReject", Value=3)]
+      kServerModificationItemResponse_ServerReject = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"kServerModificationItemResponse_InternalError", Value=4)]
+      kServerModificationItemResponse_InternalError = 4,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"kServerModificationItemResponse_EventAlreadyActive", Value=5)]
+      kServerModificationItemResponse_EventAlreadyActive = 5
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGC_GameServer_UseServerModificationItem")]
+  public partial class CMsgGC_GameServer_UseServerModificationItem : global::ProtoBuf.IExtensible
+  {
+    public CMsgGC_GameServer_UseServerModificationItem() {}
+    
+
+    private EServerModificationItemType _modification_type = EServerModificationItemType.kGameServerModificationItem_Halloween;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"modification_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(EServerModificationItemType.kGameServerModificationItem_Halloween)]
+    public EServerModificationItemType modification_type
+    {
+      get { return _modification_type; }
+      set { _modification_type = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGC_GameServer_UseServerModificationItem_Response")]
+  public partial class CMsgGC_GameServer_UseServerModificationItem_Response : global::ProtoBuf.IExtensible
+  {
+    public CMsgGC_GameServer_UseServerModificationItem_Response() {}
+    
+
+    private EServerModificationItemType _modification_type = EServerModificationItemType.kGameServerModificationItem_Halloween;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"modification_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(EServerModificationItemType.kGameServerModificationItem_Halloween)]
+    public EServerModificationItemType modification_type
+    {
+      get { return _modification_type; }
+      set { _modification_type = value; }
+    }
+
+    private CMsgGC_GameServer_UseServerModificationItem_Response.EServerModificationItemServerResponse _server_response_code = CMsgGC_GameServer_UseServerModificationItem_Response.EServerModificationItemServerResponse.kServerModificationItemServerResponse_Accepted;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"server_response_code", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(CMsgGC_GameServer_UseServerModificationItem_Response.EServerModificationItemServerResponse.kServerModificationItemServerResponse_Accepted)]
+    public CMsgGC_GameServer_UseServerModificationItem_Response.EServerModificationItemServerResponse server_response_code
+    {
+      get { return _server_response_code; }
+      set { _server_response_code = value; }
+    }
+    [global::ProtoBuf.ProtoContract(Name=@"EServerModificationItemServerResponse", EnumPassthru=true)]
+    public enum EServerModificationItemServerResponse
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"kServerModificationItemServerResponse_Accepted", Value=1)]
+      kServerModificationItemServerResponse_Accepted = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"kServerModificationItemServerResponse_NoVoteCalled", Value=2)]
+      kServerModificationItemServerResponse_NoVoteCalled = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"kServerModificationItemServerResponse_VoteFailed", Value=3)]
+      kServerModificationItemServerResponse_VoteFailed = 3
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGC_GameServer_ServerModificationItemExpired")]
+  public partial class CMsgGC_GameServer_ServerModificationItemExpired : global::ProtoBuf.IExtensible
+  {
+    public CMsgGC_GameServer_ServerModificationItemExpired() {}
+    
+
+    private EServerModificationItemType _modification_type = EServerModificationItemType.kGameServerModificationItem_Halloween;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"modification_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(EServerModificationItemType.kGameServerModificationItem_Halloween)]
+    public EServerModificationItemType modification_type
+    {
+      get { return _modification_type; }
+      set { _modification_type = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGC_GameServer_ServerModificationItem")]
+  public partial class CMsgGC_GameServer_ServerModificationItem : global::ProtoBuf.IExtensible
+  {
+    public CMsgGC_GameServer_ServerModificationItem() {}
+    
+
+    private EServerModificationItemType _modification_type = EServerModificationItemType.kGameServerModificationItem_Halloween;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"modification_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(EServerModificationItemType.kGameServerModificationItem_Halloween)]
+    public EServerModificationItemType modification_type
+    {
+      get { return _modification_type; }
+      set { _modification_type = value; }
+    }
+
+    private bool _active = default(bool);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"active", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool active
+    {
+      get { return _active; }
+      set { _active = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGC_Halloween_ReservedItem")]
   public partial class CMsgGC_Halloween_ReservedItem : global::ProtoBuf.IExtensible
   {
@@ -4262,6 +4428,14 @@ namespace SteamKit2.GC.TF2.Internal
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"EServerModificationItemType", EnumPassthru=true)]
+    public enum EServerModificationItemType
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"kGameServerModificationItem_Halloween", Value=1)]
+      kGameServerModificationItem_Halloween = 1
+    }
   
     [global::ProtoBuf.ProtoContract(Name=@"TF_MatchmakingMode", EnumPassthru=true)]
     public enum TF_MatchmakingMode

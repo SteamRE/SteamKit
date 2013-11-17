@@ -195,6 +195,12 @@ namespace SteamKit2.GC.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgMemCachedStatsResponse", Value=205)]
       k_EGCMsgMemCachedStatsResponse = 205,
             
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgSQLStats", Value=210)]
+      k_EGCMsgSQLStats = 210,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgSQLStatsResponse", Value=211)]
+      k_EGCMsgSQLStatsResponse = 211,
+            
       [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgMasterSetDirectory", Value=220)]
       k_EGCMsgMasterSetDirectory = 220,
             

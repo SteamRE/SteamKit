@@ -235,6 +235,15 @@ namespace SteamKit2.Unified.Internal
       get { return _file_sha; }
       set { _file_sha = value; }
     }
+
+    private string _filename = "";
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"filename", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string filename
+    {
+      get { return _filename; }
+      set { _filename = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -245,6 +254,15 @@ namespace SteamKit2.Unified.Internal
   {
     public CCloud_CommitHTTPUpload_Response() {}
     
+
+    private bool _file_committed = default(bool);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"file_committed", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool file_committed
+    {
+      get { return _file_committed; }
+      set { _file_committed = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

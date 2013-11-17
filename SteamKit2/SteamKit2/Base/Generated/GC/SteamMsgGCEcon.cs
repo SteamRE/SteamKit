@@ -40,6 +40,69 @@ namespace SteamKit2.GC.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgEconPlayerStrangeCountAdjustment")]
+  public partial class CMsgEconPlayerStrangeCountAdjustment : global::ProtoBuf.IExtensible
+  {
+    public CMsgEconPlayerStrangeCountAdjustment() {}
+    
+
+    private uint _account_id = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint account_id
+    {
+      get { return _account_id; }
+      set { _account_id = value; }
+    }
+    private readonly global::System.Collections.Generic.List<CMsgEconPlayerStrangeCountAdjustment.CStrangeCountAdjustment> _strange_count_adjustments = new global::System.Collections.Generic.List<CMsgEconPlayerStrangeCountAdjustment.CStrangeCountAdjustment>();
+    [global::ProtoBuf.ProtoMember(2, Name=@"strange_count_adjustments", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CMsgEconPlayerStrangeCountAdjustment.CStrangeCountAdjustment> strange_count_adjustments
+    {
+      get { return _strange_count_adjustments; }
+    }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CStrangeCountAdjustment")]
+  public partial class CStrangeCountAdjustment : global::ProtoBuf.IExtensible
+  {
+    public CStrangeCountAdjustment() {}
+    
+
+    private uint _event_type = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"event_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint event_type
+    {
+      get { return _event_type; }
+      set { _event_type = value; }
+    }
+
+    private ulong _item_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"item_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong item_id
+    {
+      get { return _item_id; }
+      set { _item_id = value; }
+    }
+
+    private uint _adjustment = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"adjustment", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint adjustment
+    {
+      get { return _adjustment; }
+      set { _adjustment = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgRequestItemPurgatory_FinalizePurchase")]
   public partial class CMsgRequestItemPurgatory_FinalizePurchase : global::ProtoBuf.IExtensible
   {
@@ -109,6 +172,23 @@ namespace SteamKit2.GC.Internal
       get { return _result; }
       set { _result = value; }
     }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgCraftingResponse")]
+  public partial class CMsgCraftingResponse : global::ProtoBuf.IExtensible
+  {
+    public CMsgCraftingResponse() {}
+    
+    private readonly global::System.Collections.Generic.List<ulong> _item_ids = new global::System.Collections.Generic.List<ulong>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"item_ids", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public global::System.Collections.Generic.List<ulong> item_ids
+    {
+      get { return _item_ids; }
+    }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -322,9 +402,6 @@ namespace SteamKit2.GC.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCApplyStrangePart", Value=1073)]
       k_EMsgGCApplyStrangePart = 1073,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGC_IncrementKillCountAttribute", Value=1074)]
-      k_EMsgGC_IncrementKillCountAttribute = 1074,
-            
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGC_IncrementKillCountResponse", Value=1075)]
       k_EMsgGC_IncrementKillCountResponse = 1075,
             
@@ -346,6 +423,33 @@ namespace SteamKit2.GC.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCUnlockItemStyleResponse", Value=1081)]
       k_EMsgGCUnlockItemStyleResponse = 1081,
             
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCFulfillDynamicRecipeComponent", Value=1082)]
+      k_EMsgGCFulfillDynamicRecipeComponent = 1082,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCFulfillDynamicRecipeComponentResponse", Value=1083)]
+      k_EMsgGCFulfillDynamicRecipeComponentResponse = 1083,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCClientRequestMarketData", Value=1084)]
+      k_EMsgGCClientRequestMarketData = 1084,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCClientRequestMarketDataResponse", Value=1085)]
+      k_EMsgGCClientRequestMarketDataResponse = 1085,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCExtractGems", Value=1086)]
+      k_EMsgGCExtractGems = 1086,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCAddSocket", Value=1087)]
+      k_EMsgGCAddSocket = 1087,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCAddItemToSocket", Value=1088)]
+      k_EMsgGCAddItemToSocket = 1088,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCAddItemToSocketResponse", Value=1089)]
+      k_EMsgGCAddItemToSocketResponse = 1089,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCAddSocketResponse", Value=1090)]
+      k_EMsgGCAddSocketResponse = 1090,
+            
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCTradingBase", Value=1500)]
       k_EMsgGCTradingBase = 1500,
             
@@ -360,6 +464,9 @@ namespace SteamKit2.GC.Internal
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCTrading_SessionClosed", Value=1509)]
       k_EMsgGCTrading_SessionClosed = 1509,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCTrading_InitiateTradeRequestResponse", Value=1514)]
+      k_EMsgGCTrading_InitiateTradeRequestResponse = 1514,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCServerBrowser_FavoriteServer", Value=1601)]
       k_EMsgGCServerBrowser_FavoriteServer = 1601,
@@ -494,7 +601,10 @@ namespace SteamKit2.GC.Internal
       k_EMsgGCItemPurgatory_RefundPurchase = 2533,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCItemPurgatory_RefundPurchaseResponse", Value=2534)]
-      k_EMsgGCItemPurgatory_RefundPurchaseResponse = 2534
+      k_EMsgGCItemPurgatory_RefundPurchaseResponse = 2534,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCPlayerStrangeCountAdjustments", Value=2535)]
+      k_EMsgGCToGCPlayerStrangeCountAdjustments = 2535
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"EGCMsgResponse", EnumPassthru=true)]
@@ -549,7 +659,10 @@ namespace SteamKit2.GC.Internal
       k_UnlockStyle_Failed_CantLockCache = 4,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_UnlockStyle_Failed_CantAffordAttrib", Value=5)]
-      k_UnlockStyle_Failed_CantAffordAttrib = 5
+      k_UnlockStyle_Failed_CantAffordAttrib = 5,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_UnlockStyle_Failed_CantAffordGem", Value=6)]
+      k_UnlockStyle_Failed_CantAffordGem = 6
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"EItemPurgatoryResponse_Finalize", EnumPassthru=true)]

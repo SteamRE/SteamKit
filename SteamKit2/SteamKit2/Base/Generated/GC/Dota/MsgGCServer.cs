@@ -14,6 +14,7 @@ using SteamKit2.GC.Internal;
 // Note: requires additional types generated from: steammessages.proto
 // Note: requires additional types generated from: matchmaker_common.proto
 // Note: requires additional types generated from: dota_gcmessages_common.proto
+// Note: requires additional types generated from: econ_gcmessages.proto
 namespace SteamKit2.GC.Dota.Internal
 {
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgSpawnLootGreevil")]
@@ -651,6 +652,31 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _fantasy_stats; }
     }
   
+    private readonly global::System.Collections.Generic.List<CMsgEconPlayerStrangeCountAdjustment> _player_strange_count_adjustments = new global::System.Collections.Generic.List<CMsgEconPlayerStrangeCountAdjustment>();
+    [global::ProtoBuf.ProtoMember(17, Name=@"player_strange_count_adjustments", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CMsgEconPlayerStrangeCountAdjustment> player_strange_count_adjustments
+    {
+      get { return _player_strange_count_adjustments; }
+    }
+  
+
+    private bool _automatic_surrender = default(bool);
+    [global::ProtoBuf.ProtoMember(18, IsRequired = false, Name=@"automatic_surrender", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool automatic_surrender
+    {
+      get { return _automatic_surrender; }
+      set { _automatic_surrender = value; }
+    }
+
+    private uint _server_version = default(uint);
+    [global::ProtoBuf.ProtoMember(19, IsRequired = false, Name=@"server_version", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint server_version
+    {
+      get { return _server_version; }
+      set { _server_version = value; }
+    }
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CTeam")]
   public partial class CTeam : global::ProtoBuf.IExtensible
   {
@@ -2000,6 +2026,15 @@ namespace SteamKit2.GC.Dota.Internal
     {
       get { return _prize_list; }
       set { _prize_list = value; }
+    }
+
+    private uint _highest_roshan_level = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"highest_roshan_level", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint highest_roshan_level
+    {
+      get { return _highest_roshan_level; }
+      set { _highest_roshan_level = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

@@ -82,10 +82,10 @@ namespace SteamKit2.Unified.Internal
       set { _steamid = value; }
     }
 
-    private uint _state = default(uint);
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"state", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint state
+    private string _state = "";
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"state", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string state
     {
       get { return _state; }
       set { _state = value; }
@@ -246,29 +246,13 @@ namespace SteamKit2.Unified.Internal
       get { return _title; }
       set { _title = value; }
     }
-    private readonly global::System.Collections.Generic.List<ulong> _remove_users = new global::System.Collections.Generic.List<ulong>();
-    [global::ProtoBuf.ProtoMember(4, Name=@"remove_users", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public global::System.Collections.Generic.List<ulong> remove_users
+    private readonly global::System.Collections.Generic.List<CGameNotifications_UserStatus> _users = new global::System.Collections.Generic.List<CGameNotifications_UserStatus>();
+    [global::ProtoBuf.ProtoMember(4, Name=@"users", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CGameNotifications_UserStatus> users
     {
-      get { return _remove_users; }
+      get { return _users; }
     }
   
-    private readonly global::System.Collections.Generic.List<CGameNotifications_UserStatus> _update_users = new global::System.Collections.Generic.List<CGameNotifications_UserStatus>();
-    [global::ProtoBuf.ProtoMember(5, Name=@"update_users", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public global::System.Collections.Generic.List<CGameNotifications_UserStatus> update_users
-    {
-      get { return _update_users; }
-    }
-  
-
-    private CGameNotifications_LocalizedText _status_update = null;
-    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"status_update", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
-    public CGameNotifications_LocalizedText status_update
-    {
-      get { return _status_update; }
-      set { _status_update = value; }
-    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -299,15 +283,6 @@ namespace SteamKit2.Unified.Internal
       set { _appid = value; }
     }
 
-    private bool _include_status_updates = default(bool);
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"include_status_updates", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
-    public bool include_status_updates
-    {
-      get { return _include_status_updates; }
-      set { _include_status_updates = value; }
-    }
-
     private bool _include_all_user_messages = default(bool);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"include_all_user_messages", DataFormat = global::ProtoBuf.DataFormat.Default)]
     [global::System.ComponentModel.DefaultValue(default(bool))]
@@ -324,34 +299,6 @@ namespace SteamKit2.Unified.Internal
     {
       get { return _include_auth_user_message; }
       set { _include_auth_user_message = value; }
-    }
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_StatusUpdate")]
-  public partial class CGameNotifications_StatusUpdate : global::ProtoBuf.IExtensible
-  {
-    public CGameNotifications_StatusUpdate() {}
-    
-
-    private CGameNotifications_LocalizedText _update_text = null;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"update_text", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
-    public CGameNotifications_LocalizedText update_text
-    {
-      get { return _update_text; }
-      set { _update_text = value; }
-    }
-
-    private ulong _time_updated = default(ulong);
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"time_updated", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
-    public ulong time_updated
-    {
-      get { return _time_updated; }
-      set { _time_updated = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -400,19 +347,19 @@ namespace SteamKit2.Unified.Internal
       set { _title = value; }
     }
 
-    private ulong _time_created = default(ulong);
+    private uint _time_created = default(uint);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"time_created", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
-    public ulong time_created
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint time_created
     {
       get { return _time_created; }
       set { _time_created = value; }
     }
 
-    private ulong _time_updated = default(ulong);
+    private uint _time_updated = default(uint);
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"time_updated", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
-    public ulong time_updated
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint time_updated
     {
       get { return _time_updated; }
       set { _time_updated = value; }
@@ -422,13 +369,6 @@ namespace SteamKit2.Unified.Internal
     public global::System.Collections.Generic.List<CGameNotifications_UserStatus> user_status
     {
       get { return _user_status; }
-    }
-  
-    private readonly global::System.Collections.Generic.List<CGameNotifications_StatusUpdate> _status_updates = new global::System.Collections.Generic.List<CGameNotifications_StatusUpdate>();
-    [global::ProtoBuf.ProtoMember(8, Name=@"status_updates", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public global::System.Collections.Generic.List<CGameNotifications_StatusUpdate> status_updates
-    {
-      get { return _status_updates; }
     }
   
     private global::ProtoBuf.IExtension extensionObject;
@@ -475,15 +415,6 @@ namespace SteamKit2.Unified.Internal
     {
       get { return _steamid; }
       set { _steamid = value; }
-    }
-
-    private bool _include_status_updates = default(bool);
-    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"include_status_updates", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
-    public bool include_status_updates
-    {
-      get { return _include_status_updates; }
-      set { _include_status_updates = value; }
     }
 
     private bool _include_all_user_messages = default(bool);
@@ -561,15 +492,6 @@ namespace SteamKit2.Unified.Internal
       set { _sessionid = value; }
     }
 
-    private bool _include_status_updates = default(bool);
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"include_status_updates", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
-    public bool include_status_updates
-    {
-      get { return _include_status_updates; }
-      set { _include_status_updates = value; }
-    }
-
     private bool _include_all_user_messages = default(bool);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"include_all_user_messages", DataFormat = global::ProtoBuf.DataFormat.Default)]
     [global::System.ComponentModel.DefaultValue(default(bool))]
@@ -577,15 +499,6 @@ namespace SteamKit2.Unified.Internal
     {
       get { return _include_all_user_messages; }
       set { _include_all_user_messages = value; }
-    }
-
-    private bool _include_auth_user_message = default(bool);
-    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"include_auth_user_message", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
-    public bool include_auth_user_message
-    {
-      get { return _include_auth_user_message; }
-      set { _include_auth_user_message = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -725,10 +638,10 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_OnNotificationsRequested_Request")]
-  public partial class CGameNotifications_OnNotificationsRequested_Request : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_OnNotificationsRequested_Notification")]
+  public partial class CGameNotifications_OnNotificationsRequested_Notification : global::ProtoBuf.IExtensible
   {
-    public CGameNotifications_OnNotificationsRequested_Request() {}
+    public CGameNotifications_OnNotificationsRequested_Notification() {}
     
 
     private ulong _steamid = default(ulong);
@@ -753,16 +666,6 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_OnNotificationsRequested_Response")]
-  public partial class CGameNotifications_OnNotificationsRequested_Response : global::ProtoBuf.IExtensible
-  {
-    public CGameNotifications_OnNotificationsRequested_Response() {}
-    
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
     public interface IGameNotifications
     {
       CGameNotifications_CreateSession_Response CreateSession(CGameNotifications_CreateSession_Request request);
@@ -779,7 +682,7 @@ namespace SteamKit2.Unified.Internal
     
     public interface IGameNotificationsClient
     {
-      CGameNotifications_OnNotificationsRequested_Response OnNotificationsRequested(CGameNotifications_OnNotificationsRequested_Request request);
+      NoResponse OnNotificationsRequested(CGameNotifications_OnNotificationsRequested_Notification request);
     
     }
     

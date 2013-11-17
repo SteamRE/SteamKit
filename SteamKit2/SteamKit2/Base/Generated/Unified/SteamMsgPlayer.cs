@@ -759,6 +759,26 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPlayer_AcceptSSA_Request")]
+  public partial class CPlayer_AcceptSSA_Request : global::ProtoBuf.IExtensible
+  {
+    public CPlayer_AcceptSSA_Request() {}
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPlayer_AcceptSSA_Response")]
+  public partial class CPlayer_AcceptSSA_Response : global::ProtoBuf.IExtensible
+  {
+    public CPlayer_AcceptSSA_Response() {}
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPlayer_GetNicknameList_Request")]
   public partial class CPlayer_GetNicknameList_Request : global::ProtoBuf.IExtensible
   {
@@ -1010,6 +1030,7 @@ namespace SteamKit2.Unified.Internal
     CPlayer_GetBadges_Response GetBadges(CPlayer_GetBadges_Request request);
     CPlayer_GetCommunityBadgeProgress_Response GetCommunityBadgeProgress(CPlayer_GetCommunityBadgeProgress_Request request);
     CPlayer_GetLastPlayedTimes_Response ClientGetLastPlayedTimes(CPlayer_GetLastPlayedTimes_Request request);
+    CPlayer_AcceptSSA_Response AcceptSSA(CPlayer_AcceptSSA_Request request);
     CPlayer_GetNicknameList_Response GetNicknameList(CPlayer_GetNicknameList_Request request);
     CPlayer_AcceptFriendInvites_Response AcceptFriendInvites(CPlayer_AcceptFriendInvites_Request request);
     CPlayer_AcceptGroupInvites_Response AcceptGroupInvites(CPlayer_AcceptGroupInvites_Request request);

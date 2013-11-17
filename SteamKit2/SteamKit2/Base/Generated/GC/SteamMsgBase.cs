@@ -1092,6 +1092,116 @@ namespace SteamKit2.GC.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGCMsgSQLStats")]
+  public partial class CGCMsgSQLStats : global::ProtoBuf.IExtensible
+  {
+    public CGCMsgSQLStats() {}
+    
+
+    private uint _schema_catalog = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"schema_catalog", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint schema_catalog
+    {
+      get { return _schema_catalog; }
+      set { _schema_catalog = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGCMsgSQLStatsResponse")]
+  public partial class CGCMsgSQLStatsResponse : global::ProtoBuf.IExtensible
+  {
+    public CGCMsgSQLStatsResponse() {}
+    
+
+    private uint _threads = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"threads", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint threads
+    {
+      get { return _threads; }
+      set { _threads = value; }
+    }
+
+    private uint _threads_connected = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"threads_connected", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint threads_connected
+    {
+      get { return _threads_connected; }
+      set { _threads_connected = value; }
+    }
+
+    private uint _threads_active = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"threads_active", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint threads_active
+    {
+      get { return _threads_active; }
+      set { _threads_active = value; }
+    }
+
+    private uint _operations_submitted = default(uint);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"operations_submitted", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint operations_submitted
+    {
+      get { return _operations_submitted; }
+      set { _operations_submitted = value; }
+    }
+
+    private uint _prepared_statements_executed = default(uint);
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"prepared_statements_executed", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint prepared_statements_executed
+    {
+      get { return _prepared_statements_executed; }
+      set { _prepared_statements_executed = value; }
+    }
+
+    private uint _non_prepared_statements_executed = default(uint);
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"non_prepared_statements_executed", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint non_prepared_statements_executed
+    {
+      get { return _non_prepared_statements_executed; }
+      set { _non_prepared_statements_executed = value; }
+    }
+
+    private uint _deadlock_retries = default(uint);
+    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"deadlock_retries", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint deadlock_retries
+    {
+      get { return _deadlock_retries; }
+      set { _deadlock_retries = value; }
+    }
+
+    private uint _operations_timed_out_in_queue = default(uint);
+    [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"operations_timed_out_in_queue", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint operations_timed_out_in_queue
+    {
+      get { return _operations_timed_out_in_queue; }
+      set { _operations_timed_out_in_queue = value; }
+    }
+
+    private uint _errors = default(uint);
+    [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"errors", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint errors
+    {
+      get { return _errors; }
+      set { _errors = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgAMAddFreeLicense")]
   public partial class CMsgAMAddFreeLicense : global::ProtoBuf.IExtensible
   {
@@ -1816,15 +1926,6 @@ namespace SteamKit2.GC.Internal
     {
       get { return _is_inventory_public; }
       set { _is_inventory_public = value; }
-    }
-
-    private bool _is_trusted = default(bool);
-    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"is_trusted", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
-    public bool is_trusted
-    {
-      get { return _is_trusted; }
-      set { _is_trusted = value; }
     }
 
     private bool _is_vac_banned = default(bool);
@@ -2560,6 +2661,15 @@ namespace SteamKit2.GC.Internal
       get { return _client_msg_ranges; }
     }
   
+
+    private CMsgGCMsgSetOptions.GCSQLVersion _gcsql_version = CMsgGCMsgSetOptions.GCSQLVersion.GCSQL_VERSION_BASELINE;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"gcsql_version", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(CMsgGCMsgSetOptions.GCSQLVersion.GCSQL_VERSION_BASELINE)]
+    public CMsgGCMsgSetOptions.GCSQLVersion gcsql_version
+    {
+      get { return _gcsql_version; }
+      set { _gcsql_version = value; }
+    }
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"MessageRange")]
   public partial class MessageRange : global::ProtoBuf.IExtensible
   {
@@ -2599,6 +2709,17 @@ namespace SteamKit2.GC.Internal
             
       [global::ProtoBuf.ProtoEnum(Name=@"NOTIFY_VAC_ACTION", Value=3)]
       NOTIFY_VAC_ACTION = 3
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"GCSQLVersion", EnumPassthru=true)]
+    public enum GCSQLVersion
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"GCSQL_VERSION_BASELINE", Value=1)]
+      GCSQL_VERSION_BASELINE = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"GCSQL_VERSION_BOOLTYPE", Value=2)]
+      GCSQL_VERSION_BOOLTYPE = 2
     }
   
     private global::ProtoBuf.IExtension extensionObject;

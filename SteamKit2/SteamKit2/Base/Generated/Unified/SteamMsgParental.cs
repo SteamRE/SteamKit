@@ -161,6 +161,15 @@ namespace SteamKit2.Unified.Internal
       set { _settings = value; }
     }
 
+    private string _sessionid = "";
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"sessionid", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string sessionid
+    {
+      get { return _sessionid; }
+      set { _sessionid = value; }
+    }
+
     private ulong _steamid = default(ulong);
     [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
     [global::System.ComponentModel.DefaultValue(default(ulong))]
@@ -450,6 +459,24 @@ namespace SteamKit2.Unified.Internal
     {
       get { return _signature; }
       set { _signature = value; }
+    }
+
+    private string _password = "";
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"password", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string password
+    {
+      get { return _password; }
+      set { _password = value; }
+    }
+
+    private string _sessionid = "";
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"sessionid", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string sessionid
+    {
+      get { return _sessionid; }
+      set { _sessionid = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
