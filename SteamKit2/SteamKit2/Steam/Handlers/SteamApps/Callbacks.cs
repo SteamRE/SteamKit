@@ -643,8 +643,15 @@ namespace SteamKit2
                     this.SHAHash = app_info.sha;
 
                     this.KeyValues = new KeyValue();
-                    using (MemoryStream ms = new MemoryStream(app_info.buffer, 0, app_info.buffer.Length - 1))
-                        this.KeyValues.ReadAsText(ms);
+
+                    if ( app_info.buffer != null )
+                    {
+                        // we don't want to read the trailing null byte
+                        using ( var ms = new MemoryStream( app_info.buffer, 0, app_info.buffer.Length - 1 ) )
+                        {
+                            this.KeyValues.ReadAsText( ms );
+                        }
+                    }
 
                     this.OnlyPublic = app_info.only_public;
                 }
@@ -657,11 +664,15 @@ namespace SteamKit2
                     this.SHAHash = package_info.sha;
 
                     this.KeyValues = new KeyValue();
-                    using ( MemoryStream ms = new MemoryStream( package_info.buffer ) )
-                    using ( var br = new BinaryReader( ms ) )
+
+                    if ( package_info.buffer != null )
                     {
-                        br.ReadUInt32();
-                        this.KeyValues.ReadAsBinary( ms );
+                        using ( MemoryStream ms = new MemoryStream( package_info.buffer ) )
+                        using ( var br = new BinaryReader( ms ) )
+                        {
+                            br.ReadUInt32();
+                            this.KeyValues.ReadAsBinary( ms );
+                        }
                     }
                 }
             }
