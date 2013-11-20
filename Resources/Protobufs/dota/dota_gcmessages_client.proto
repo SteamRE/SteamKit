@@ -927,20 +927,6 @@ message CMsgDOTAChatMessage {
 	optional uint32 fantasy_draft_player_account_id = 9;
 }
 
-message CMsgDOTASetChatChannelVerbosity {
-	message ChannelVerbosity {
-		optional fixed64 channel_id = 1;
-		optional uint32 suppression_flags = 2 [default = 0];
-	}
-
-	enum DOTAChatChannelSuppressNotificationsFlags_t {
-		DOTAChannel_AllVerbose = 0;
-		DOTAChannelIgnore_OthersJoined = 1;
-	}
-
-	repeated .CMsgDOTASetChatChannelVerbosity.ChannelVerbosity verbosities = 1;
-}
-
 message CMsgDOTAChatMember {
 	optional fixed64 steam_id = 1;
 	optional string persona_name = 2;
@@ -968,6 +954,17 @@ message CMsgDOTAOtherJoinedChatChannel {
 message CMsgDOTAOtherLeftChatChannel {
 	optional fixed64 channel_id = 1;
 	optional fixed64 steam_id = 2;
+}
+
+message CMsgDOTAChatChannelMemberUpdate {
+	message JoinedMember {
+		optional fixed64 steam_id = 1;
+		optional string persona_name = 2;
+	}
+
+	optional fixed64 channel_id = 1;
+	repeated fixed64 left_steam_ids = 2;
+	repeated .CMsgDOTAChatChannelMemberUpdate.JoinedMember joined_members = 3;
 }
 
 message CMsgDOTARequestDefaultChatChannel {
@@ -2011,8 +2008,9 @@ message CMsgDOTAFantasyPlayerInfoResponse {
 		optional uint32 player_account_id = 1;
 		optional .Fantasy_Roles role = 2 [default = FANTASY_ROLE_UNDEFINED];
 		optional string name = 3;
-		optional string team_name = 4;
-		optional string team_tag = 5;
+		optional uint32 team_id = 4;
+		optional string team_name = 5;
+		optional string team_tag = 6;
 	}
 
 	enum EResult {

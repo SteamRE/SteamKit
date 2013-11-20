@@ -330,6 +330,7 @@ enum EDOTAGCMsg {
 	k_EMsgGCToGCUpdatePlayerPennantCounts = 7378;
 	k_EMsgGCToGCGetPlayerPennantCounts = 7379;
 	k_EMsgGCToGCGetPlayerPennantCountsResponse = 7380;
+	k_EMsgDOTAChatChannelMemberUpdate = 7383;
 	k_EMsgGCDev_GrantWarKill = 8001;
 }
 
