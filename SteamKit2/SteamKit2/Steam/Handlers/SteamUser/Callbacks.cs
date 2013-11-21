@@ -146,7 +146,7 @@ namespace SteamKit2
                 this.VanityURL = resp.vanity_url;
 
                 this.NumLoginFailuresToMigrate = resp.count_loginfailures_to_migrate;
-                this.NumDisconenctsToMigrate = resp.count_disconnects_to_migrate;
+                this.NumDisconnectsToMigrate = resp.count_disconnects_to_migrate;
             }
 
 
