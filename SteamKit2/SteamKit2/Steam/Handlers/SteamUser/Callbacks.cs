@@ -111,7 +111,7 @@ namespace SteamKit2
             /// <summary>
             /// Gets the threshold for disconnects before Steam wants the client to migrate to a new CM.
             /// </summary>
-            public int NumDisconenctsToMigrate { get; private set; }
+            public int NumDisconnectsToMigrate { get; private set; }
 
 
             internal LoggedOnCallback( CMsgClientLogonResponse resp )
