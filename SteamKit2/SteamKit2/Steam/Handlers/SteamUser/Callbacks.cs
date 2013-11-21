@@ -111,7 +111,7 @@ namespace SteamKit2
             /// <summary>
             /// Gets the threshold for disconnects before Steam wants the client to migrate to a new CM.
             /// </summary>
-            public int NumDisconenctsToMigrate { get; private set; }
+            public int NumDisconnectsToMigrate { get; private set; }
 
 
             internal LoggedOnCallback( CMsgClientLogonResponse resp )
@@ -146,7 +146,7 @@ namespace SteamKit2
                 this.VanityURL = resp.vanity_url;
 
                 this.NumLoginFailuresToMigrate = resp.count_loginfailures_to_migrate;
-                this.NumDisconenctsToMigrate = resp.count_disconnects_to_migrate;
+                this.NumDisconnectsToMigrate = resp.count_disconnects_to_migrate;
             }
 
 
