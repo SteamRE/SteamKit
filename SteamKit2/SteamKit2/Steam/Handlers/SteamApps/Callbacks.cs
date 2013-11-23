@@ -633,9 +633,16 @@ namespace SteamKit2
                 /// For an app request, returns if only the public information was requested
                 /// </summary>
                 public bool OnlyPublic { get; private set; }
+                /// <summary>
+                /// Whether or not to use HTTP to load the KeyValues data.
+                /// </summary>
+                public bool UseHttp { get; private set; }
+                /// <summary>
+                /// For an app metadata-only request, returns the Uri for HTTP appinfo requests.
+                /// </summary>
+                public Uri HttpUri { get; private set; }
 
-
-                internal PICSProductInfo( CMsgClientPICSProductInfoResponse.AppInfo app_info )
+                internal PICSProductInfo( CMsgClientPICSProductInfoResponse parentResponse, CMsgClientPICSProductInfoResponse.AppInfo app_info)
                 {
                     this.ID = app_info.appid;
                     this.ChangeNumber = app_info.change_number;
@@ -654,6 +661,18 @@ namespace SteamKit2
                     }
 
                     this.OnlyPublic = app_info.only_public;
+
+                    // We should have all these fields set for the response to a metadata-only request, but guard here just in case.
+                    if (this.SHAHash != null && this.SHAHash.Length > 0 && !string.IsNullOrEmpty(parentResponse.http_host))
+                    {
+                        var shaString = BitConverter.ToString(this.SHAHash)
+                            .Replace("-", string.Empty)
+                            .ToLower();
+                        var uriString = string.Format("http://{0}/appinfo/{1}/sha/{2}.txt.gz", parentResponse.http_host, this.ID, shaString);
+                        this.HttpUri = new Uri(uriString);
+                    }
+
+                    this.UseHttp = this.HttpUri != null && app_info.size >= parentResponse.http_min_size;
                 }
 
                 internal PICSProductInfo( CMsgClientPICSProductInfoResponse.PackageInfo package_info )
@@ -719,7 +738,7 @@ namespace SteamKit2
 
                 foreach ( var app_info in msg.apps )
                 {
-                    Apps.Add( app_info.appid, new PICSProductInfo( app_info ) );
+                    Apps.Add( app_info.appid, new PICSProductInfo( msg, app_info ) );
                 }
             }
         }
