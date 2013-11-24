@@ -1024,6 +1024,89 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGameMatchSignOutPermissionRequest")]
+  public partial class CMsgGameMatchSignOutPermissionRequest : global::ProtoBuf.IExtensible
+  {
+    public CMsgGameMatchSignOutPermissionRequest() {}
+    
+
+    private uint _server_version = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"server_version", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint server_version
+    {
+      get { return _server_version; }
+      set { _server_version = value; }
+    }
+
+    private uint _local_attempt = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"local_attempt", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint local_attempt
+    {
+      get { return _local_attempt; }
+      set { _local_attempt = value; }
+    }
+
+    private uint _total_attempt = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"total_attempt", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint total_attempt
+    {
+      get { return _total_attempt; }
+      set { _total_attempt = value; }
+    }
+
+    private uint _seconds_waited = default(uint);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"seconds_waited", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint seconds_waited
+    {
+      get { return _seconds_waited; }
+      set { _seconds_waited = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGameMatchSignOutPermissionResponse")]
+  public partial class CMsgGameMatchSignOutPermissionResponse : global::ProtoBuf.IExtensible
+  {
+    public CMsgGameMatchSignOutPermissionResponse() {}
+    
+
+    private bool _permission_granted = (bool)false;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"permission_granted", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue((bool)false)]
+    public bool permission_granted
+    {
+      get { return _permission_granted; }
+      set { _permission_granted = value; }
+    }
+
+    private bool _abandon_signout = (bool)false;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"abandon_signout", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue((bool)false)]
+    public bool abandon_signout
+    {
+      get { return _abandon_signout; }
+      set { _abandon_signout = value; }
+    }
+
+    private uint _retry_delay_seconds = (uint)0;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"retry_delay_seconds", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue((uint)0)]
+    public uint retry_delay_seconds
+    {
+      get { return _retry_delay_seconds; }
+      set { _retry_delay_seconds = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGameChatLog")]
   public partial class CMsgGameChatLog : global::ProtoBuf.IExtensible
   {

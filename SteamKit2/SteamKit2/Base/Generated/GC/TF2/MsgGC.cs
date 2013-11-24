@@ -77,6 +77,43 @@ namespace SteamKit2.GC.TF2.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCTFSpecificItemBroadcast")]
+  public partial class CMsgGCTFSpecificItemBroadcast : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCTFSpecificItemBroadcast() {}
+    
+
+    private uint _item_def_index = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"item_def_index", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint item_def_index
+    {
+      get { return _item_def_index; }
+      set { _item_def_index = value; }
+    }
+
+    private bool _was_destruction = default(bool);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"was_destruction", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool was_destruction
+    {
+      get { return _was_destruction; }
+      set { _was_destruction = value; }
+    }
+
+    private string _user_name = "";
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"user_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string user_name
+    {
+      get { return _user_name; }
+      set { _user_name = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CSOTFDuelSummary")]
   public partial class CSOTFDuelSummary : global::ProtoBuf.IExtensible
   {

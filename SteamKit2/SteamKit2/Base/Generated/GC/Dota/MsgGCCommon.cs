@@ -3379,6 +3379,15 @@ namespace SteamKit2.GC.Dota.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCGetPlayerPennantCountsResponse", Value=7380)]
       k_EMsgGCToGCGetPlayerPennantCountsResponse = 7380,
             
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCGameMatchSignOutPermissionRequest", Value=7381)]
+      k_EMsgGCGameMatchSignOutPermissionRequest = 7381,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCGameMatchSignOutPermissionResponse", Value=7382)]
+      k_EMsgGCGameMatchSignOutPermissionResponse = 7382,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgDOTAChatChannelMemberUpdate", Value=7383)]
+      k_EMsgDOTAChatChannelMemberUpdate = 7383,
+            
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCDev_GrantWarKill", Value=8001)]
       k_EMsgGCDev_GrantWarKill = 8001
     }

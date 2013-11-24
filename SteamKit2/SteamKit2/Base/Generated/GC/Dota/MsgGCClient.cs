@@ -4687,62 +4687,6 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTASetChatChannelVerbosity")]
-  public partial class CMsgDOTASetChatChannelVerbosity : global::ProtoBuf.IExtensible
-  {
-    public CMsgDOTASetChatChannelVerbosity() {}
-    
-    private readonly global::System.Collections.Generic.List<CMsgDOTASetChatChannelVerbosity.ChannelVerbosity> _verbosities = new global::System.Collections.Generic.List<CMsgDOTASetChatChannelVerbosity.ChannelVerbosity>();
-    [global::ProtoBuf.ProtoMember(1, Name=@"verbosities", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public global::System.Collections.Generic.List<CMsgDOTASetChatChannelVerbosity.ChannelVerbosity> verbosities
-    {
-      get { return _verbosities; }
-    }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ChannelVerbosity")]
-  public partial class ChannelVerbosity : global::ProtoBuf.IExtensible
-  {
-    public ChannelVerbosity() {}
-    
-
-    private ulong _channel_id = default(ulong);
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"channel_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
-    public ulong channel_id
-    {
-      get { return _channel_id; }
-      set { _channel_id = value; }
-    }
-
-    private uint _suppression_flags = (uint)0;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"suppression_flags", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue((uint)0)]
-    public uint suppression_flags
-    {
-      get { return _suppression_flags; }
-      set { _suppression_flags = value; }
-    }
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-    [global::ProtoBuf.ProtoContract(Name=@"DOTAChatChannelSuppressNotificationsFlags_t", EnumPassthru=true)]
-    public enum DOTAChatChannelSuppressNotificationsFlags_t
-    {
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"DOTAChannel_AllVerbose", Value=0)]
-      DOTAChannel_AllVerbose = 0,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"DOTAChannelIgnore_OthersJoined", Value=1)]
-      DOTAChannelIgnore_OthersJoined = 1
-    }
-  
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAChatMember")]
   public partial class CMsgDOTAChatMember : global::ProtoBuf.IExtensible
   {
@@ -4910,6 +4854,67 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _steam_id; }
       set { _steam_id = value; }
     }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAChatChannelMemberUpdate")]
+  public partial class CMsgDOTAChatChannelMemberUpdate : global::ProtoBuf.IExtensible
+  {
+    public CMsgDOTAChatChannelMemberUpdate() {}
+    
+
+    private ulong _channel_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"channel_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong channel_id
+    {
+      get { return _channel_id; }
+      set { _channel_id = value; }
+    }
+    private readonly global::System.Collections.Generic.List<ulong> _left_steam_ids = new global::System.Collections.Generic.List<ulong>();
+    [global::ProtoBuf.ProtoMember(2, Name=@"left_steam_ids", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public global::System.Collections.Generic.List<ulong> left_steam_ids
+    {
+      get { return _left_steam_ids; }
+    }
+  
+    private readonly global::System.Collections.Generic.List<CMsgDOTAChatChannelMemberUpdate.JoinedMember> _joined_members = new global::System.Collections.Generic.List<CMsgDOTAChatChannelMemberUpdate.JoinedMember>();
+    [global::ProtoBuf.ProtoMember(3, Name=@"joined_members", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CMsgDOTAChatChannelMemberUpdate.JoinedMember> joined_members
+    {
+      get { return _joined_members; }
+    }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"JoinedMember")]
+  public partial class JoinedMember : global::ProtoBuf.IExtensible
+  {
+    public JoinedMember() {}
+    
+
+    private ulong _steam_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steam_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong steam_id
+    {
+      get { return _steam_id; }
+      set { _steam_id = value; }
+    }
+
+    private string _persona_name = "";
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"persona_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string persona_name
+    {
+      get { return _persona_name; }
+      set { _persona_name = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -10624,8 +10629,17 @@ namespace SteamKit2.GC.Dota.Internal
       set { _name = value; }
     }
 
+    private uint _team_id = default(uint);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"team_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint team_id
+    {
+      get { return _team_id; }
+      set { _team_id = value; }
+    }
+
     private string _team_name = "";
-    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"team_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"team_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
     [global::System.ComponentModel.DefaultValue("")]
     public string team_name
     {
@@ -10634,7 +10648,7 @@ namespace SteamKit2.GC.Dota.Internal
     }
 
     private string _team_tag = "";
-    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"team_tag", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"team_tag", DataFormat = global::ProtoBuf.DataFormat.Default)]
     [global::System.ComponentModel.DefaultValue("")]
     public string team_tag
     {

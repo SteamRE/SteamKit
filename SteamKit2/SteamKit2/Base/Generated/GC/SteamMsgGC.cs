@@ -3228,6 +3228,34 @@ namespace SteamKit2.GC.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgResetStrangeGemCount")]
+  public partial class CMsgResetStrangeGemCount : global::ProtoBuf.IExtensible
+  {
+    public CMsgResetStrangeGemCount() {}
+    
+
+    private ulong _item_item_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"item_item_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong item_item_id
+    {
+      get { return _item_item_id; }
+      set { _item_item_id = value; }
+    }
+
+    private uint _socket_index = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"socket_index", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint socket_index
+    {
+      get { return _socket_index; }
+      set { _socket_index = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     [global::ProtoBuf.ProtoContract(Name=@"EGCBaseMsg", EnumPassthru=true)]
     public enum EGCBaseMsg
     {

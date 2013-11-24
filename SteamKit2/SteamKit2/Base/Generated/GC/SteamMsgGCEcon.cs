@@ -450,6 +450,9 @@ namespace SteamKit2.GC.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCAddSocketResponse", Value=1090)]
       k_EMsgGCAddSocketResponse = 1090,
             
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCResetStrangeGemCount", Value=1091)]
+      k_EMsgGCResetStrangeGemCount = 1091,
+            
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCTradingBase", Value=1500)]
       k_EMsgGCTradingBase = 1500,
             
