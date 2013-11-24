@@ -560,3 +560,8 @@ message CMsgAddItemToSocketResponse {
 	repeated uint32 updated_socket_index = 2;
 }
 
+message CMsgResetStrangeGemCount {
+	optional uint64 item_item_id = 1;
+	optional uint32 socket_index = 2;
+}
+

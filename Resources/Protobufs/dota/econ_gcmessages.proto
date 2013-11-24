@@ -85,6 +85,7 @@ enum EGCItemMsg {
 	k_EMsgGCAddItemToSocket = 1088;
 	k_EMsgGCAddItemToSocketResponse = 1089;
 	k_EMsgGCAddSocketResponse = 1090;
+	k_EMsgGCResetStrangeGemCount = 1091;
 	k_EMsgGCTradingBase = 1500;
 	k_EMsgGCTrading_InitiateTradeRequest = 1501;
 	k_EMsgGCTrading_InitiateTradeResponse = 1502;

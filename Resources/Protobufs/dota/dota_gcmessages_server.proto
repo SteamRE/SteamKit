@@ -147,6 +147,19 @@ message CMsgGameMatchSignoutResponse {
 	optional uint32 leagueid = 5;
 }
 
+message CMsgGameMatchSignOutPermissionRequest {
+	optional uint32 server_version = 1;
+	optional uint32 local_attempt = 2;
+	optional uint32 total_attempt = 3;
+	optional uint32 seconds_waited = 4;
+}
+
+message CMsgGameMatchSignOutPermissionResponse {
+	optional bool permission_granted = 1 [default = false];
+	optional bool abandon_signout = 2 [default = false];
+	optional uint32 retry_delay_seconds = 3 [default = 0];
+}
+
 message CMsgGameChatLog {
 	message CChatLine {
 		optional uint32 account_id = 1;

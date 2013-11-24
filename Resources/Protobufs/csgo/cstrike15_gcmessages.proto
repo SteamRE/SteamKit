@@ -45,6 +45,7 @@ enum ECsgoGCMsg {
 	k_EMsgGCCStrike15_v2_GC2ServerReservationUpdate = 9142;
 	k_EMsgGCCStrike15_v2_ClientVarValueNotificationInfo = 9144;
 	k_EMsgGCCStrike15_v2_TournamentMatchRewardDropsNotification = 9145;
+	k_EMsgGCCStrike15_v2_MatchListRequestTournamentGames = 9146;
 }
 
 message GameServerPing {
@@ -61,6 +62,24 @@ message DetailedSearchStatistic {
 	optional uint32 players_searching = 4;
 }
 
+message TournamentTeam {
+	optional int32 team_id = 1;
+	optional string team_tag = 2;
+	optional string team_flag = 3;
+	optional string team_name = 4;
+}
+
+message TournamentEvent {
+	optional int32 event_id = 1;
+	optional string event_tag = 2;
+	optional string event_name = 3;
+	optional uint32 event_time_start = 4;
+	optional uint32 event_time_end = 5;
+	optional int32 event_public = 6;
+	optional int32 event_stage_id = 7;
+	optional string event_stage_name = 8;
+}
+
 message GlobalStatistics {
 	optional uint32 players_online = 1;
 	optional uint32 servers_online = 2;
@@ -73,7 +92,7 @@ message GlobalStatistics {
 	optional uint32 required_appid_version = 9;
 	optional uint32 pricesheet_version = 10;
 	optional uint32 twitch_streams_version = 11;
-	optional uint32 game_monthly_uniques = 12;
+	optional uint32 active_tournament_eventid = 12;
 }
 
 message OperationalStatisticDescription {
@@ -114,24 +133,6 @@ message PlayerMedalsInfo {
 	optional uint32 legacy__coin_op_payback = 6;
 	repeated uint32 display_items_defidx = 7;
 	optional uint32 featured_display_item_defidx = 8;
-}
-
-message TournamentTeam {
-	optional int32 team_id = 1;
-	optional string team_tag = 2;
-	optional string team_flag = 3;
-	optional string team_name = 4;
-}
-
-message TournamentEvent {
-	optional int32 event_id = 1;
-	optional string event_tag = 2;
-	optional string event_name = 3;
-	optional uint32 event_time_start = 4;
-	optional uint32 event_time_end = 5;
-	optional int32 event_public = 6;
-	optional int32 event_stage_id = 7;
-	optional string event_stage_name = 8;
 }
 
 message TournamentMatchSetup {
@@ -274,6 +275,7 @@ message CMsgGCCStrike15_v2_MatchmakingServerRoundStats {
 	repeated int32 enemy_4ks = 19;
 	repeated int32 enemy_5ks = 20;
 	repeated int32 mvps = 21;
+	optional uint32 spectators_count = 22;
 }
 
 message CMsgGCCStrike15_v2_MatchmakingServerMatchEnd {
@@ -508,6 +510,10 @@ message CMsgGCCStrike15_v2_MatchListRequestRecentUserGames {
 	optional uint32 accountid = 1;
 }
 
+message CMsgGCCStrike15_v2_MatchListRequestTournamentGames {
+	optional int32 eventid = 1;
+}
+
 message CDataGCCStrike15_v2_MatchInfo {
 	optional uint64 matchid = 1;
 	optional uint32 matchtime = 2;
@@ -520,6 +526,7 @@ message CMsgGCCStrike15_v2_MatchList {
 	optional uint32 accountid = 2;
 	optional uint32 servertime = 3;
 	repeated .CDataGCCStrike15_v2_MatchInfo matches = 4;
+	repeated .TournamentTeam streams = 5;
 }
 
 message CMsgGCCStrike15_v2_ClientVarValueNotificationInfo {
