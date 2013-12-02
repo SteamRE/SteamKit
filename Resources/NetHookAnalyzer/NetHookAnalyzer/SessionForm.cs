@@ -80,15 +80,11 @@ namespace NetHookAnalyzer
                 var header = BuildHeader( realEMsg, packetStream );
                 object body = null;
                 
-                if ( MsgUtil.IsProtoBuf( realEMsg ) && eMsg == EMsg.ServiceMethod )
+                if ( MsgUtil.IsProtoBuf( realEMsg ) && eMsg == EMsg.ServiceMethod && !string.IsNullOrEmpty( ((MsgHdrProtoBuf)header).Proto.target_job_name ) )
                 {
-                    var protoHdr = (MsgHdrProtoBuf)header;
-                    if ( !string.IsNullOrEmpty( protoHdr.Proto.target_job_name ) )
-                    {
-                        body = BuildServiceMethodBody( protoHdr.Proto.target_job_name,packetStream, x => x.GetParameters().First().ParameterType );
-                    }
+                    body = BuildServiceMethodBody( ((MsgHdrProtoBuf)header).Proto.target_job_name,packetStream, x => x.GetParameters().First().ParameterType );
                 }
-                if ( body == null )
+                else if ( body == null )
                 {
                     body = BuildBody( realEMsg, packetStream );
                 }
