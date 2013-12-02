@@ -46,10 +46,7 @@ namespace NetHookAnalyzer
             if ( nameEnhance != null )
             {
                 var emsg = (SteamKit2.EMsg)EMsg;
-                if ( emsg == SteamKit2.EMsg.ClientToGC || emsg == SteamKit2.EMsg.ClientFromGC )
-                {
-                    this.Name = nameEnhance( emsg, this.Name, fileName );
-                }
+                this.Name = nameEnhance( emsg, this.Name, fileName );
             }
 
             this.IsValid = true;
