@@ -39,6 +39,27 @@ namespace NetHookAnalyzer
             PopulatePackets();
         }
 
+        string PacketItemNameEnhance( EMsg eMsg, string nameFromEMsg, string fileName )
+        {
+            if ( eMsg == EMsg.ClientToGC || eMsg == EMsg.ClientFromGC )
+            {
+                var fileData = File.ReadAllBytes( fileName );
+                var msg = new SteamKit2.PacketClientMsgProtobuf( (EMsg)eMsg, fileData );
+                var proto = new ClientMsgProtobuf<CMsgGCClient>( msg );
+                var gcEMsg = proto.Body.msgtype;
+                var gcName = BuildEMsg( MsgUtil.GetGCMsg( gcEMsg ) );
+
+                var headerToTrim = "k_EMsg";
+                if ( gcName.StartsWith( headerToTrim ) )
+                {
+                    gcName = gcName.Substring( headerToTrim.Length );
+                }
+
+                return string.Format( "{0} ({1})", nameFromEMsg, gcName );
+            }
+
+            return nameFromEMsg;
+        }
 
         void PopulatePackets()
         {
@@ -46,7 +67,8 @@ namespace NetHookAnalyzer
 
             foreach ( var file in packetFiles )
             {
-                PacketItem packItem = new PacketItem( file.FullName );
+                PacketItem.PacketItemNameEnhance nameEnhance = chkGCMsgNames.Checked ? PacketItemNameEnhance : (PacketItem.PacketItemNameEnhance)null;
+                PacketItem packItem = new PacketItem( file.FullName, nameEnhance );
 
                 if ( !packItem.IsValid )
                     continue;
@@ -120,7 +142,7 @@ namespace NetHookAnalyzer
                         {
                             emsg = BuildEMsg( gcBody.msgtype ),
                             header = BuildGCHeader( gcBody.msgtype, ms ),
-                            body = BuildBody( gcBody.msgtype, ms ),
+                            body = BuildBody( gcBody.msgtype, ms, gcBody.appid),
                         };
 
                         DumpType( gc, gcBodyNode );
@@ -404,7 +426,7 @@ namespace NetHookAnalyzer
             return hdr;
         }
 
-        object BuildBody( uint realEMsg, Stream str )
+        object BuildBody( uint realEMsg, Stream str , uint gcAppid = 0)
         {
             EMsg eMsg = MsgUtil.GetMsg( realEMsg );
 
@@ -469,13 +491,6 @@ namespace NetHookAnalyzer
             }
 
             var gcMsgName = BuildEMsg( realEMsg );
-            var gcMsgPossibleTypePrefixes = new[]
-            {
-                "SteamKit2.GC.Internal.CMsg",
-                "SteamKit2.GC.Dota.Internal.CMsg",
-                "SteamKit2.GC.CSGO.Internal.CMsg",
-                "SteamKit2.GC.TF.Internal.CMsg",
-            };
 
             var typeMsgName = gcMsgName
                 .Replace("GC", string.Empty)
@@ -491,7 +506,7 @@ namespace NetHookAnalyzer
                 typeMsgName = "MultipleObjects";
 
             var possibleTypes = from type in typeof( CMClient ).Assembly.GetTypes()
-                                from typePrefix in gcMsgPossibleTypePrefixes
+                                from typePrefix in GetPossibleGCTypePrefixes(gcAppid)
                                 where type.GetInterfaces().Contains( typeof ( IExtensible ) )
                                 where type.FullName.StartsWith( typePrefix ) && type.FullName.EndsWith( typeMsgName )
                                 select type;
@@ -577,6 +592,26 @@ namespace NetHookAnalyzer
             }
 
             return null;
+        }
+
+        IEnumerable<string> GetPossibleGCTypePrefixes(uint appid)
+        {
+            yield return "SteamKit2.GC.Internal.CMsg";
+
+            switch (appid)
+            {
+                case 440:
+                    yield return "SteamKit2.GC.TF.Internal.CMsg";
+                    break;
+
+                case 570:
+                    yield return "SteamKit2.GC.Dota.Internal.CMsg";
+                    break;
+
+                case 730:
+                    yield return "SteamKit2.GC.CSGO.Internal.CMsg";
+                    break;
+            }
         }
 
         byte[] BuildPayload( Stream str )

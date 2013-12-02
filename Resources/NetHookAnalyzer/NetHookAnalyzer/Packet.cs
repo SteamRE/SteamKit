@@ -1,15 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using System.Text.RegularExpressions;
 using System.Collections;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
+using System.Windows.Forms;
 
 namespace NetHookAnalyzer
 {
     class PacketItem : ListViewItem
     {
+        public delegate string PacketItemNameEnhance( SteamKit2.EMsg eMsg, string nameFromEMsg, string fileName );
+
         static Regex NameRegex = new Regex(
             @"(?<num>\d+)_(?<direction>in|out)_(?<emsg>\d+)_k_EMsg(?<name>[\w_<>]+)",
             RegexOptions.Compiled | RegexOptions.IgnoreCase
@@ -26,7 +26,7 @@ namespace NetHookAnalyzer
         public bool IsValid { get; private set; }
 
 
-        public PacketItem( string fileName )
+        public PacketItem( string fileName, PacketItemNameEnhance nameEnhance )
         {
             Match m = NameRegex.Match( fileName );
 
@@ -42,6 +42,15 @@ namespace NetHookAnalyzer
             this.Direction = m.Groups[ "direction" ].Value;
             this.EMsg = Convert.ToInt32( m.Groups[ "emsg" ].Value );
             this.Name = m.Groups[ "name" ].Value;
+
+            if ( nameEnhance != null )
+            {
+                var emsg = (SteamKit2.EMsg)EMsg;
+                if ( emsg == SteamKit2.EMsg.ClientToGC || emsg == SteamKit2.EMsg.ClientFromGC )
+                {
+                    this.Name = nameEnhance( emsg, this.Name, fileName );
+                }
+            }
 
             this.IsValid = true;
 

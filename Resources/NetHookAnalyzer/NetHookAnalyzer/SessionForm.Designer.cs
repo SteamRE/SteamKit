@@ -34,6 +34,7 @@
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.chkGCMsgNames = new System.Windows.Forms.CheckBox();
             this.chkOut = new System.Windows.Forms.CheckBox();
             this.chkIn = new System.Windows.Forms.CheckBox();
             this.treePacket = new System.Windows.Forms.TreeView();
@@ -58,8 +59,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.treePacket);
-            this.splitContainer1.Size = new System.Drawing.Size(731, 571);
-            this.splitContainer1.SplitterDistance = 276;
+            this.splitContainer1.Size = new System.Drawing.Size(847, 571);
+            this.splitContainer1.SplitterDistance = 363;
             this.splitContainer1.TabIndex = 0;
             // 
             // viewPacket
@@ -74,7 +75,7 @@
             this.viewPacket.HideSelection = false;
             this.viewPacket.Location = new System.Drawing.Point(0, 47);
             this.viewPacket.Name = "viewPacket";
-            this.viewPacket.Size = new System.Drawing.Size(276, 524);
+            this.viewPacket.Size = new System.Drawing.Size(363, 524);
             this.viewPacket.TabIndex = 1;
             this.viewPacket.UseCompatibleStateImageBehavior = false;
             this.viewPacket.View = System.Windows.Forms.View.Details;
@@ -94,19 +95,31 @@
             // columnHeader3
             // 
             this.columnHeader3.Text = "Type";
-            this.columnHeader3.Width = 185;
+            this.columnHeader3.Width = 276;
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.chkGCMsgNames);
             this.groupBox1.Controls.Add(this.chkOut);
             this.groupBox1.Controls.Add(this.chkIn);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(276, 47);
+            this.groupBox1.Size = new System.Drawing.Size(363, 47);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filter";
+            // 
+            // chkGCMsgNames
+            // 
+            this.chkGCMsgNames.AutoSize = true;
+            this.chkGCMsgNames.Location = new System.Drawing.Point(102, 19);
+            this.chkGCMsgNames.Name = "chkGCMsgNames";
+            this.chkGCMsgNames.Size = new System.Drawing.Size(153, 17);
+            this.chkGCMsgNames.TabIndex = 1;
+            this.chkGCMsgNames.Text = "Show GC Message Names";
+            this.chkGCMsgNames.UseVisualStyleBackColor = true;
+            this.chkGCMsgNames.CheckedChanged += new System.EventHandler(this.chkOut_CheckedChanged);
             // 
             // chkOut
             // 
@@ -141,14 +154,14 @@
             this.treePacket.HideSelection = false;
             this.treePacket.Location = new System.Drawing.Point(0, 0);
             this.treePacket.Name = "treePacket";
-            this.treePacket.Size = new System.Drawing.Size(451, 571);
+            this.treePacket.Size = new System.Drawing.Size(480, 571);
             this.treePacket.TabIndex = 0;
             // 
             // SessionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(731, 571);
+            this.ClientSize = new System.Drawing.Size(847, 571);
             this.Controls.Add(this.splitContainer1);
             this.Name = "SessionForm";
             this.Text = "SessionForm";
@@ -173,5 +186,6 @@
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.CheckBox chkIn;
         private System.Windows.Forms.CheckBox chkOut;
+        private System.Windows.Forms.CheckBox chkGCMsgNames;
     }
 }
