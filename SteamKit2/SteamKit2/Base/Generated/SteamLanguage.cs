@@ -2546,6 +2546,8 @@ namespace SteamKit2
 		InitiatorNeedsSteamGuard = 21,
 		TargetAccountCannotTrade = 22,
 		InitiatorSteamGuardDuration = 23,
+		InitiatorPasswordResetProbation = 24,
+		InitiatorNewDeviceCooldown = 25,
 		OKToDeliver = 50,
 	}
 	[Flags]
