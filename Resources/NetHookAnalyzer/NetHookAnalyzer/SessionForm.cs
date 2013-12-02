@@ -39,13 +39,20 @@ namespace NetHookAnalyzer
             PopulatePackets();
         }
 
+        ClientMsgProtobuf<T> GetProtoMsgFromFile<T>( EMsg eMsg, string fileName )
+            where T : IExtensible, new()
+        {
+            var fileData = File.ReadAllBytes( fileName );
+            var msg = new SteamKit2.PacketClientMsgProtobuf( eMsg, fileData );
+            var proto = new ClientMsgProtobuf<T>( msg );
+            return proto;
+        }
+
         string PacketItemNameEnhance( EMsg eMsg, string nameFromEMsg, string fileName )
         {
             if ( eMsg == EMsg.ClientToGC || eMsg == EMsg.ClientFromGC )
             {
-                var fileData = File.ReadAllBytes( fileName );
-                var msg = new SteamKit2.PacketClientMsgProtobuf( (EMsg)eMsg, fileData );
-                var proto = new ClientMsgProtobuf<CMsgGCClient>( msg );
+                var proto = GetProtoMsgFromFile<CMsgGCClient>( eMsg, fileName );
                 var gcEMsg = proto.Body.msgtype;
                 var gcName = BuildEMsg( MsgUtil.GetGCMsg( gcEMsg ) );
 
@@ -57,6 +64,27 @@ namespace NetHookAnalyzer
 
                 return string.Format( "{0} ({1})", nameFromEMsg, gcName );
             }
+            else if ( eMsg == EMsg.ServiceMethod )
+            {
+                var fileData = File.ReadAllBytes( fileName );
+                var hdr = new MsgHdrProtoBuf();
+                using ( var ms = new MemoryStream( fileData ) )
+                {
+                    hdr.Deserialize(ms);
+                }
+
+                return string.Format( "{0} ({1})", nameFromEMsg, hdr.Proto.target_job_name );
+            }
+            else if ( eMsg == EMsg.ClientServiceMethod )
+            {
+                var proto = GetProtoMsgFromFile<CMsgClientServiceMethod>( eMsg, fileName );
+                return string.Format( "{0} ({1})", nameFromEMsg, proto.Body.method_name );
+            }
+            else if ( eMsg == EMsg.ClientServiceMethodResponse )
+            {
+                var proto = GetProtoMsgFromFile<CMsgClientServiceMethodResponse>( eMsg, fileName );
+                return string.Format( "{0} ({1})", nameFromEMsg, proto.Body.method_name );
+            }
 
             return nameFromEMsg;
         }
@@ -67,7 +95,7 @@ namespace NetHookAnalyzer
 
             foreach ( var file in packetFiles )
             {
-                PacketItem.PacketItemNameEnhance nameEnhance = chkGCMsgNames.Checked ? PacketItemNameEnhance : (PacketItem.PacketItemNameEnhance)null;
+                PacketItem.PacketItemNameEnhance nameEnhance = chkEnhanceMsgNames.Checked ? PacketItemNameEnhance : (PacketItem.PacketItemNameEnhance)null;
                 PacketItem packItem = new PacketItem( file.FullName, nameEnhance );
 
                 if ( !packItem.IsValid )

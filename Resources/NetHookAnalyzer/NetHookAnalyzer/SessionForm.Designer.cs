@@ -34,7 +34,7 @@
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.chkGCMsgNames = new System.Windows.Forms.CheckBox();
+            this.chkEnhanceMsgNames = new System.Windows.Forms.CheckBox();
             this.chkOut = new System.Windows.Forms.CheckBox();
             this.chkIn = new System.Windows.Forms.CheckBox();
             this.treePacket = new System.Windows.Forms.TreeView();
@@ -99,7 +99,7 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.chkGCMsgNames);
+            this.groupBox1.Controls.Add(this.chkEnhanceMsgNames);
             this.groupBox1.Controls.Add(this.chkOut);
             this.groupBox1.Controls.Add(this.chkIn);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -110,16 +110,16 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filter";
             // 
-            // chkGCMsgNames
+            // chkEnhanceMsgNames
             // 
-            this.chkGCMsgNames.AutoSize = true;
-            this.chkGCMsgNames.Location = new System.Drawing.Point(102, 19);
-            this.chkGCMsgNames.Name = "chkGCMsgNames";
-            this.chkGCMsgNames.Size = new System.Drawing.Size(153, 17);
-            this.chkGCMsgNames.TabIndex = 1;
-            this.chkGCMsgNames.Text = "Show GC Message Names";
-            this.chkGCMsgNames.UseVisualStyleBackColor = true;
-            this.chkGCMsgNames.CheckedChanged += new System.EventHandler(this.chkOut_CheckedChanged);
+            this.chkEnhanceMsgNames.AutoSize = true;
+            this.chkEnhanceMsgNames.Location = new System.Drawing.Point(102, 19);
+            this.chkEnhanceMsgNames.Name = "chkEnhanceMsgNames";
+            this.chkEnhanceMsgNames.Size = new System.Drawing.Size(151, 17);
+            this.chkEnhanceMsgNames.TabIndex = 1;
+            this.chkEnhanceMsgNames.Text = "Enhance Message Names";
+            this.chkEnhanceMsgNames.UseVisualStyleBackColor = true;
+            this.chkEnhanceMsgNames.CheckedChanged += new System.EventHandler(this.chkOut_CheckedChanged);
             // 
             // chkOut
             // 
@@ -186,6 +186,6 @@
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.CheckBox chkIn;
         private System.Windows.Forms.CheckBox chkOut;
-        private System.Windows.Forms.CheckBox chkGCMsgNames;
+        private System.Windows.Forms.CheckBox chkEnhanceMsgNames;
     }
 }
