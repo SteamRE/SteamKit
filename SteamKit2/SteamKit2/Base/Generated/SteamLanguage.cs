@@ -1863,6 +1863,10 @@ namespace SteamKit2
 		BadResponse = 76,
 		RequirePasswordReEntry = 77,
 		ValueOutOfRange = 78,
+		UnexpectedError = 79,
+		Disabled = 80,
+		InvalidCEGSubmission = 81,
+		RestrictedDevice = 82,
 	}
 	public enum EUniverse
 	{
