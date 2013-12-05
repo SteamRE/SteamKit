@@ -139,7 +139,7 @@ const char *CLogger::GetFileName( ENetDirection eDirection, EMsg eMsg, uint8 ser
 
 	sprintf_s(
 		szFileName, sizeof( szFileName ),
-		"%d_%s_%d_%s.bin",
+		"%03d_%s_%d_%s.bin",
 		++m_uiMsgNum,
 		( eDirection == k_eNetIncoming ? "in" : "out" ),
 		eMsg,
