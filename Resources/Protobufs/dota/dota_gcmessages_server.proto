@@ -124,7 +124,6 @@ message CMsgGameMatchSignOut {
 	optional fixed32 date = 4;
 	repeated uint32 num_players = 5;
 	repeated .CMsgGameMatchSignOut.CTeam teams = 6;
-	optional string computer_name = 7;
 	repeated uint32 tower_status = 8;
 	repeated uint32 barracks_status = 9;
 	optional uint32 cluster = 10;
@@ -231,7 +230,6 @@ message CMsgDOTARequestPlayerResourcesResponse {
 	optional bool prevent_text_chat = 4;
 	optional bool prevent_voice_chat = 5;
 	optional bool low_priority = 6;
-	optional uint32 solo_rank = 7;
 }
 
 message CMsgDOTAPlayerFailedToConnect {

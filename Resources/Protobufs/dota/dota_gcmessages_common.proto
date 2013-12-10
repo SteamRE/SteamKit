@@ -396,6 +396,11 @@ enum DOTALeaverStatus_t {
 	DOTA_LEAVER_DECLINED = 8;
 }
 
+enum DOTALowPriorityBanType {
+	DOTA_LOW_PRIORITY_BAN_ABANDONS = 0;
+	DOTA_LOW_PRIORITY_BAN_REPORTS = 1;
+}
+
 enum DOTALobbyReadyState {
 	DOTALobbyReadyState_UNDECLARED = 0;
 	DOTALobbyReadyState_ACCEPTED = 1;
@@ -548,7 +553,7 @@ message CSODOTAParty {
 	optional uint32 attempt_num = 34;
 	optional uint32 matchgroups = 11;
 	optional uint32 low_priority_account_id = 19;
-	optional .MatchType match_type = 21 [default = MATCH_TYPE_RANKED];
+	optional .MatchType match_type = 21 [default = MATCH_TYPE_CASUAL];
 	optional .DOTABotDifficulty bot_difficulty = 22 [default = BOT_DIFFICULTY_PASSIVE];
 	optional uint32 team_id = 23;
 	optional uint32 match_disabled_until_date = 24;
@@ -655,12 +660,13 @@ message CSODOTALobby {
 
 	enum LobbyType {
 		INVALID = -1;
-		MATCH = 0;
+		CASUAL_MATCH = 0;
 		PRACTICE = 1;
 		TOURNAMENT = 2;
 		COOP_BOT_MATCH = 4;
 		TEAM_MATCH = 5;
 		SOLO_QUEUE_MATCH = 6;
+		COMPETITIVE_MATCH = 7;
 	}
 
 	optional uint64 lobby_id = 1 [(key_field) = true];
@@ -723,7 +729,6 @@ message CSODOTALobbyInternal {
 	optional fixed32 replay_salt = 4;
 	optional bool disable_radiant_automatic_team_detection = 5;
 	optional bool disable_dire_automatic_team_detection = 6;
-	optional uint32 final_match_duration = 7;
 	optional bool submitted_match_history = 8;
 	repeated .CDOTALobbyMemberPrivate members = 9;
 	repeated .CDOTALobbyMemberPrivate left_members = 10;

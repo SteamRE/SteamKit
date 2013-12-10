@@ -130,7 +130,7 @@ message CMsgStartFindingMatch {
 	optional uint32 client_version = 3;
 	optional uint32 game_modes = 4 [default = 4294967295];
 	optional .DOTABotDifficulty bot_difficulty = 5 [default = BOT_DIFFICULTY_HARD];
-	optional .MatchType match_type = 6 [default = MATCH_TYPE_RANKED];
+	optional .MatchType match_type = 6 [default = MATCH_TYPE_CASUAL];
 	optional uint32 matchlanguages = 7 [default = 4294967295];
 	optional uint32 team_id = 8;
 }
@@ -1272,7 +1272,7 @@ message CMsgDOTAReportCountsResponse {
 }
 
 message CMsgDOTAKickedFromMatchmakingQueue {
-	optional .MatchType match_type = 1 [default = MATCH_TYPE_RANKED];
+	optional .MatchType match_type = 1 [default = MATCH_TYPE_CASUAL];
 }
 
 message CMsgDOTARequestSaveGames {
@@ -1420,6 +1420,7 @@ message CMsgDOTAWelcome {
 	optional bool profile_private = 17;
 	optional uint32 currency = 18;
 	optional uint32 bang_no = 19;
+	optional bool should_use_new_china_domain = 20;
 }
 
 message CSODOTAGameHeroFavorites {

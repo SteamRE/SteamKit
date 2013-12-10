@@ -164,6 +164,10 @@ message CMsgIncrementKillCountAttribute {
 	optional uint32 increment_value = 5;
 }
 
+message CMsgIncrementKillCountAttribute_Multiple {
+	repeated .CMsgIncrementKillCountAttribute msgs = 1;
+}
+
 message CMsgTrackUniquePlayerPairEvent {
 	optional uint64 killer_steam_id = 1;
 	optional uint64 victim_steam_id = 2;

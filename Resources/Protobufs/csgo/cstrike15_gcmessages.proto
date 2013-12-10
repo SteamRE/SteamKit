@@ -153,6 +153,15 @@ message ServerHltvInfo {
 	optional string game_mapgroup = 9;
 	optional string game_map = 10;
 	optional uint64 tv_master_steamid = 11;
+	optional uint32 tv_local_slots = 12;
+	optional uint32 tv_local_clients = 13;
+	optional uint32 tv_local_proxies = 14;
+	optional uint32 tv_relay_slots = 15;
+	optional uint32 tv_relay_clients = 16;
+	optional uint32 tv_relay_proxies = 17;
+	optional uint32 tv_relay_address = 18;
+	optional uint32 tv_relay_port = 19;
+	optional uint64 tv_relay_steamid = 20;
 }
 
 message IpAddressMask {
@@ -226,6 +235,7 @@ message CMsgGCCStrike15_v2_MatchmakingGC2ServerReserve {
 	optional .TournamentEvent tournament_event = 11;
 	repeated .TournamentTeam tournament_teams = 12;
 	repeated uint32 tournament_casters_account_ids = 13;
+	optional uint64 tv_relay_steamid = 14;
 }
 
 message CMsgGCCStrike15_v2_MatchmakingServerReservationResponse {
