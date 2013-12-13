@@ -366,12 +366,14 @@ message CMsgGCIncrementKillCountResponse {
 }
 
 message CSOEconItemDropRateBonus {
-	optional uint32 account_id = 1;
+	optional uint32 account_id = 1 [(key_field) = true];
 	optional fixed32 expiration_date = 2;
-	optional float bonus = 3;
+	optional float bonus = 3 [(key_field) = true];
 	optional uint32 bonus_count = 4;
 	optional uint64 item_id = 5;
 	optional uint32 def_index = 6;
+	optional uint32 seconds_left = 7;
+	optional uint32 booster_type = 8 [(key_field) = true];
 }
 
 message CSOEconItemLeagueViewPass {
@@ -475,14 +477,6 @@ message CMsgGCToGCUpdateSQLKeyValue {
 	optional string key_name = 1;
 }
 
-message CMsgGCToGCIsTrustedServer {
-	optional fixed64 steam_id = 1;
-}
-
-message CMsgGCToGCIsTrustedServerResponse {
-	optional bool is_trusted = 1;
-}
-
 message CMsgGCToGCBroadcastConsoleCommand {
 	optional string con_command = 1;
 }
@@ -558,5 +552,10 @@ message CMsgAddItemToSocket {
 message CMsgAddItemToSocketResponse {
 	optional uint64 item_item_id = 1;
 	repeated uint32 updated_socket_index = 2;
+}
+
+message CMsgResetStrangeGemCount {
+	optional uint64 item_item_id = 1;
+	optional uint32 socket_index = 2;
 }
 

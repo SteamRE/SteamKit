@@ -136,17 +136,27 @@ message CGCToGCMsgRoutedReply {
 	optional bytes net_message = 2;
 }
 
-message CMsgGCUpdateSessionIP {
-	optional fixed64 steamid = 1;
-	optional fixed32 ip = 2;
+message CMsgGCUpdateSubGCSessionInfo {
+	message CMsgUpdate {
+		optional fixed64 steamid = 1;
+		optional fixed32 ip = 2;
+		optional bool trusted = 3;
+	}
+
+	repeated .CMsgGCUpdateSubGCSessionInfo.CMsgUpdate updates = 1;
 }
 
-message CMsgGCRequestSessionIP {
+message CMsgGCRequestSubGCSessionInfo {
 	optional fixed64 steamid = 1;
 }
 
-message CMsgGCRequestSessionIPResponse {
+message CMsgGCRequestSubGCSessionInfoResponse {
 	optional fixed32 ip = 1;
+	optional bool trusted = 2;
+}
+
+message CMsgGCToGCIncrementRecruitmentLevel {
+	optional fixed64 steamid = 1;
 }
 
 message CMsgSOCacheHaveVersion {

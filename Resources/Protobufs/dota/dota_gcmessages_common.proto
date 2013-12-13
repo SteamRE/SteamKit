@@ -35,8 +35,6 @@ enum EDOTAGCMsg {
 	k_EMsgGCPracticeLobbyResponse = 7055;
 	k_EMsgGCBroadcastNotification = 7056;
 	k_EMsgGCLiveScoreboardUpdate = 7057;
-	k_EMsgGCRequestDefaultChatChannel = 7058;
-	k_EMsgGCRequestDefaultChatChannelResponse = 7059;
 	k_EMsgGCRequestChatChannelList = 7060;
 	k_EMsgGCRequestChatChannelListResponse = 7061;
 	k_EMsgGCRequestMatches = 7064;
@@ -168,8 +166,6 @@ enum EDOTAGCMsg {
 	k_EMsgGCResetMapLocationsResponse = 7210;
 	k_EMsgGCTeamOnProfile = 7211;
 	k_EMsgGCSetFeaturedItems = 7212;
-	k_EMsgGCFeaturedItemsRequest = 7213;
-	k_EMsgGCFeaturedItemsResponse = 7214;
 	k_EMsgGCFeaturedItems = 7215;
 	k_EMsgRefreshPartnerAccountLink = 7216;
 	k_EMsgClientsRejoinChatChannels = 7217;
@@ -226,8 +222,6 @@ enum EDOTAGCMsg {
 	k_EMsgGCChatMessage = 7273;
 	k_EMsgGCGetHeroStandings = 7274;
 	k_EMsgGCGetHeroStandingsResponse = 7275;
-	k_EMsgGCPassportFeaturedMatchRequest = 7277;
-	k_EMsgGCPassportFeaturedMatchResponse = 7278;
 	k_EMsgGCGuildEditLogoRequest = 7279;
 	k_EMsgGCGuildEditLogoResponse = 7280;
 	k_EMsgGCGuildmatePracticeLobbyListRequest = 7281;
@@ -333,6 +327,22 @@ enum EDOTAGCMsg {
 	k_EMsgGCGameMatchSignOutPermissionRequest = 7381;
 	k_EMsgGCGameMatchSignOutPermissionResponse = 7382;
 	k_EMsgDOTAChatChannelMemberUpdate = 7383;
+	k_EMsgDOTAAwardFrostivusPoints = 7384;
+	k_EMsgDOTARedeemFrostivusPrize = 7385;
+	k_EMsgDOTARedeemFrostivusPrizeResponse = 7386;
+	k_EMsgDOTAGetFrostivusPoints = 7387;
+	k_EMsgDOTAGetFrostivusPointsResponse = 7388;
+	k_EMsgGCToGCGrantFrostivusReward = 7389;
+	k_EMsgGCToGCSignoutAwardFrostivusPoints = 7390;
+	k_EMsgDOTAGetWraithNightProgress = 7391;
+	k_EMsgDOTAGetWraithNightProgressResponse = 7392;
+	k_EMsgDOTASendFriendRecruits = 7393;
+	k_EMsgDOTAFriendRecruitsRequest = 7394;
+	k_EMsgDOTAFriendRecruitsResponse = 7395;
+	k_EMsgDOTAFriendRecruitInviteAcceptDecline = 7396;
+	k_EMsgGCPartyLeaderWatchGamePrompt = 7397;
+	k_EMsgDOTAFrostivusTimeElapsed = 7398;
+	k_EMsgGCToGCGrantEarnedLicense = 7399;
 	k_EMsgGCDev_GrantWarKill = 8001;
 }
 
@@ -397,8 +407,9 @@ enum DOTALeaverStatus_t {
 }
 
 enum DOTALowPriorityBanType {
-	DOTA_LOW_PRIORITY_BAN_ABANDONS = 0;
+	DOTA_LOW_PRIORITY_BAN_ABANDON = 0;
 	DOTA_LOW_PRIORITY_BAN_REPORTS = 1;
+	DOTA_LOW_PRIORITY_BAN_SECONDARY_ABANDON = 2;
 }
 
 enum DOTALobbyReadyState {
@@ -506,10 +517,12 @@ message CSODOTAGameAccountClient {
 	optional uint32 level = 13;
 	optional uint32 initial_skill = 14;
 	optional uint32 leaver_count = 15;
+	optional uint32 secondary_leaver_count = 58;
 	optional uint32 low_priority_until_date = 18;
 	optional uint32 prevent_text_chat_until_date = 20;
 	optional uint32 prevent_voice_until_date = 21;
 	optional uint32 last_abandoned_game_date = 22;
+	optional uint32 last_secondary_abandoned_game_date = 59;
 	optional uint32 leaver_penalty_count = 23;
 	optional uint32 completed_game_streak = 24;
 	optional uint32 teaching = 28;
@@ -527,6 +540,15 @@ message CSODOTAGameAccountClient {
 	optional uint32 partner_account_state = 45;
 	optional uint32 shutdownlawterminatetimestamp = 47;
 	optional uint32 low_priority_games_remaining = 48;
+	optional uint32 competitive_rank = 49;
+	optional uint32 competitive_rank_uncertainty = 50;
+	optional uint32 calibration_games_remaining = 51;
+	optional uint32 solo_competitive_rank = 52;
+	optional uint32 solo_competitive_rank_uncertainty = 53;
+	optional uint32 solo_calibration_games_remaining = 54;
+	optional uint32 recruitment_level = 55;
+	optional uint32 recruiter = 56;
+	optional bool recruitment_request_pending = 57;
 }
 
 message CSODOTAPartyMember {
@@ -564,6 +586,8 @@ message CSODOTAParty {
 	optional uint32 open_guild_id = 30;
 	repeated uint32 common_guilds = 31;
 	optional uint32 low_priority_games_remaining = 35;
+	optional uint32 min_level = 36;
+	optional uint32 max_level = 37;
 }
 
 message CSODOTAPartyInternal {
@@ -610,6 +634,7 @@ message CDOTALobbyMember {
 	optional .DOTA_GC_TEAM coach_team = 23 [default = DOTA_GC_TEAM_GOOD_GUYS];
 	optional uint32 nexon_pc_bang_no = 24;
 	optional string nexon_pc_bang_name = 25;
+	optional bool recruitment_bonus = 26;
 }
 
 message CDOTALobbyMemberPrivate {
@@ -721,6 +746,7 @@ message CSODOTALobby {
 	repeated .CLobbyBroadcastChannelInfo broadcast_channel_info = 58;
 	optional uint32 first_leaver_accountid = 59;
 	optional uint32 series_id = 60;
+	optional bool low_priority = 61;
 }
 
 message CSODOTALobbyInternal {
@@ -771,6 +797,7 @@ message CProtoItemSocket {
 	optional string required_hero = 4;
 	optional uint32 gem_def_index = 5;
 	optional bool not_tradable = 6;
+	optional string required_item_slot = 7;
 }
 
 message CProtoItemSocket_Empty {
@@ -811,6 +838,11 @@ message CProtoItemSocket_AnimModifier {
 message CProtoItemSocket_Autograph {
 	optional .CProtoItemSocket socket = 1;
 	optional string autograph = 2;
+}
+
+message CProtoItemSocket_AbilityEffect {
+	optional .CProtoItemSocket socket = 1;
+	optional uint32 ability_effect = 2;
 }
 
 message CMatchPlayerAbilityUpgrade {

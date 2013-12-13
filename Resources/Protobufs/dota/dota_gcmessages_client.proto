@@ -173,6 +173,7 @@ message CSourceTVGame {
 	optional fixed64 server_steamid = 19;
 	optional uint32 leagueid = 20;
 	optional .DOTA_GameMode game_mode = 21 [default = DOTA_GAMEMODE_NONE];
+	optional uint32 lobby_type = 22;
 }
 
 message CMsgSourceTVGamesResponse {
@@ -579,6 +580,12 @@ message CMsgDOTAPopup {
 		PARTY_NOT_VALID_TO_MM_COACHCOUNT = 29;
 		PARTY_MEMBER_IN_ANOTHER_GAME = 30;
 		PARTY_MEMBER_IN_LOW_PRIORITY = 31;
+		CLIENT_OUT_OF_DATE = 32;
+		COMPETITIVE_MM_NO_COACHES = 33;
+		COMPETITIVE_MM_NO_LOW_PRIORITY = 34;
+		COMPETITIVE_MM_NOT_UNLOCKED = 35;
+		COMPETITIVE_MM_GAME_MODE_NOT_ALLOWED = 36;
+		GAME_MODE_NOT_UNLOCKED = 37;
 	}
 
 	optional .CMsgDOTAPopup.PopupID id = 1 [default = KICKED_FROM_LOBBY];
@@ -967,13 +974,6 @@ message CMsgDOTAChatChannelMemberUpdate {
 	repeated .CMsgDOTAChatChannelMemberUpdate.JoinedMember joined_members = 3;
 }
 
-message CMsgDOTARequestDefaultChatChannel {
-}
-
-message CMsgDOTARequestDefaultChatChannelResponse {
-	optional string channel_name = 1;
-}
-
 message CMsgDOTARequestChatChannelList {
 }
 
@@ -1342,6 +1342,10 @@ message CMsgWatchGameResponse {
 	optional fixed64 watch_tv_unique_secret_code = 7;
 }
 
+message CMsgPartyLeaderWatchGamePrompt {
+	optional fixed64 game_server_steamid = 5;
+}
+
 message CMsgGCMatchDetailsRequest {
 	optional uint32 match_id = 1;
 }
@@ -1377,6 +1381,12 @@ message CMsgDOTAProfileResponse {
 		optional uint32 event_id = 1;
 	}
 
+	message FeaturedItem {
+		optional uint64 item_id = 1;
+		optional bytes object_data = 2;
+		optional uint32 slot_index = 3;
+	}
+
 	optional uint32 result = 1;
 	optional .CSODOTAGameAccountClient game_account_client = 2;
 	repeated .CMsgDOTAMatch latest_matches = 3;
@@ -1390,6 +1400,7 @@ message CMsgDOTAProfileResponse {
 	repeated .CMsgDOTAProfileResponse.EventTicket event_tickets = 11;
 	optional uint32 team_id = 12;
 	optional bool has_passport = 13;
+	repeated .CMsgDOTAProfileResponse.FeaturedItem featured_items = 14;
 }
 
 message CMsgGCSteamProfileRequest {
@@ -1421,6 +1432,7 @@ message CMsgDOTAWelcome {
 	optional uint32 currency = 18;
 	optional uint32 bang_no = 19;
 	optional bool should_use_new_china_domain = 20;
+	optional bool should_use_pwrd_cdn = 21;
 }
 
 message CSODOTAGameHeroFavorites {
@@ -1448,15 +1460,6 @@ message CMsgDOTAFeaturedItems {
 	optional uint32 account_id = 1;
 	repeated uint64 featured_item_id = 2;
 	repeated bytes object_data = 3;
-}
-
-message CMsgDOTAFeaturedItemsRequest {
-	optional uint32 account_id = 1;
-}
-
-message CMsgDOTAFeaturedItemsResponse {
-	optional .CMsgDOTAFeaturedItems featured_items = 1;
-	optional uint32 result = 2 [default = 2];
 }
 
 message CMsgRequestLeagueInfo {
@@ -1721,6 +1724,10 @@ message CMsgFantasyLeagueRoleScoring {
 	optional float denies = 6;
 	optional float gpm = 7;
 	optional float xppm = 8;
+	optional float stuns = 9;
+	optional float healing = 10;
+	optional float tower_kills = 11;
+	optional float roshan_kills = 12;
 }
 
 message CMsgDOTAFantasyLeagueInfo {
@@ -1816,27 +1823,6 @@ message CMsgDOTAFantasyLeagueMatchupsResponse {
 	optional .CMsgDOTAFantasyLeagueMatchupsResponse.EResult result = 1 [default = SUCCESS];
 	optional uint32 fantasy_league_id = 2;
 	repeated .CMsgDOTAFantasyLeagueMatchupsResponse.WeeklyMatchups weekly_matchups = 3;
-}
-
-message CMsgDOTACreateFantasyTeamRequest {
-	optional uint32 fantasy_league_id = 1;
-	optional string team_name = 2;
-	optional uint64 team_logo = 3;
-	repeated uint32 team_members = 4;
-	optional uint32 owner_account_id = 5;
-}
-
-message CMsgDOTACreateFantasyTeamResponse {
-	enum EResult {
-		SUCCESS = 0;
-		ERROR_UNSPECIFIED = 1;
-		ERROR_NO_PERMISSION = 2;
-		ERROR_TOO_MANY_TEAMS = 3;
-		ERROR_NAME_ALREADY_TAKEN = 4;
-		ERROR_INVALID_LEAGUE = 5;
-	}
-
-	optional .CMsgDOTACreateFantasyTeamResponse.EResult result = 1 [default = SUCCESS];
 }
 
 message CMsgDOTAEditFantasyTeamRequest {
@@ -2277,6 +2263,10 @@ message CMsgDOTAFantasyPlayerHisoricalStatsResponse {
 		optional float gpm = 7;
 		optional float xppm = 8;
 		optional float score = 9;
+		optional float stuns = 10;
+		optional float healing = 11;
+		optional uint32 tower_kills = 12;
+		optional uint32 roshan_kills = 13;
 	}
 
 	enum EResult {
@@ -2287,6 +2277,37 @@ message CMsgDOTAFantasyPlayerHisoricalStatsResponse {
 
 	optional .CMsgDOTAFantasyPlayerHisoricalStatsResponse.EResult result = 1 [default = SUCCESS];
 	repeated .CMsgDOTAFantasyPlayerHisoricalStatsResponse.PlayerStats stats = 2;
+}
+
+message CMsgDOTASendFriendRecruits {
+	repeated uint32 recruits = 1;
+}
+
+message CMsgDOTAFriendRecruitsRequest {
+	repeated uint32 account_ids = 1;
+}
+
+message CMsgDOTAFriendRecruitsResponse {
+	message FriendRecruitStatus {
+		optional uint32 account_id = 1;
+		optional uint32 status = 2;
+		optional uint32 levels_earned = 3;
+		optional bool bonus = 4;
+	}
+
+	enum EResult {
+		SUCCESS = 0;
+		ERROR_UNSPECIFIED = 1;
+	}
+
+	optional .CMsgDOTAFriendRecruitsResponse.EResult result = 1 [default = SUCCESS];
+	repeated .CMsgDOTAFriendRecruitsResponse.FriendRecruitStatus recruits = 2;
+	repeated .CMsgDOTAFriendRecruitsResponse.FriendRecruitStatus recruiters = 3;
+}
+
+message CMsgDOTAFriendRecruitInviteAcceptDecline {
+	optional bool accepted = 1;
+	optional uint32 account_id = 2;
 }
 
 message CMsgDOTAPassportVoteTeamGuess {
@@ -2337,25 +2358,6 @@ message CMsgPassportDataResponse {
 	optional uint32 fantasy_team_count = 16;
 	optional uint32 fantasy_teamexpiration = 17;
 	optional uint32 fantasy_teams_will_lock_at = 18;
-}
-
-message CMsgPassportFeaturedMatchRequest {
-	optional uint32 league_id = 1;
-}
-
-message CMsgPassportFeaturedMatchResponse {
-	optional uint32 result = 1 [default = 2];
-	optional uint32 league_id = 2;
-	optional uint32 featured_match_id = 3;
-	optional uint32 radiant_team_id = 4;
-	optional uint64 radiant_team_logo = 5;
-	optional string radiant_team_name = 6;
-	repeated uint32 radiant_heroes = 7;
-	optional uint32 dire_team_id = 8;
-	optional uint64 dire_team_logo = 9;
-	optional string dire_team_name = 10;
-	repeated uint32 dire_heroes = 11;
-	optional bool has_passport = 12;
 }
 
 message CMsgRequestLeaguePrizePool {
@@ -2441,5 +2443,36 @@ message CMsgGCLobbyUpdateBroadcastChannelInfo {
 	optional uint32 channel_id = 1;
 	optional string country_code = 2;
 	optional string description = 3;
+}
+
+message CMsgDOTARedeemFrostivusPrize {
+	optional uint32 item_def_index = 1;
+}
+
+message CMsgDOTARedeemFrostivusPrizeResponse {
+	enum ResultCode {
+		Success = 0;
+		ServerError = 1;
+		InsufficientPoints = 2;
+	}
+
+	optional .CMsgDOTARedeemFrostivusPrizeResponse.ResultCode result = 1 [default = Success];
+	optional uint32 remaining_points = 2;
+	optional uint32 remaining_premium_points = 3;
+}
+
+message CMsgDOTAGetFrostivusPoints {
+}
+
+message CMsgDOTAGetFrostivusPointsResponse {
+	optional uint32 total_points = 1;
+	optional uint32 total_premium_points = 2;
+}
+
+message CMsgDOTAGetWraithNightProgress {
+}
+
+message CMsgDOTAGetWraithNightProgressResponse {
+	optional uint32 progress = 1;
 }
 

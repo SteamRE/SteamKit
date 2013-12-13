@@ -123,8 +123,6 @@ enum EGCItemMsg {
 	k_EMsgGCToGCDirtySDOCache = 2516;
 	k_EMsgGCToGCDirtyMultipleSDOCache = 2517;
 	k_EMsgGCToGCUpdateSQLKeyValue = 2518;
-	k_EMsgGCToGCIsTrustedServer = 2519;
-	k_EMsgGCToGCIsTrustedServerResponse = 2520;
 	k_EMsgGCToGCBroadcastConsoleCommand = 2521;
 	k_EMsgGCServerVersionUpdated = 2522;
 	k_EMsgGCApplyAutograph = 2523;
@@ -138,6 +136,9 @@ enum EGCItemMsg {
 	k_EMsgGCItemPurgatory_RefundPurchase = 2533;
 	k_EMsgGCItemPurgatory_RefundPurchaseResponse = 2534;
 	k_EMsgGCToGCPlayerStrangeCountAdjustments = 2535;
+	k_EMsgGCRequestStoreSalesData = 2536;
+	k_EMsgGCRequestStoreSalesDataResponse = 2537;
+	k_EMsgGCRequestStoreSalesDataUpToDateResponse = 2538;
 }
 
 enum EGCMsgResponse {
@@ -214,5 +215,26 @@ message CMsgRequestItemPurgatory_RefundPurchaseResponse {
 
 message CMsgCraftingResponse {
 	repeated uint64 item_ids = 1;
+}
+
+message CMsgGCRequestStoreSalesData {
+	optional uint32 version = 1;
+	optional uint32 currency = 2;
+}
+
+message CMsgGCRequestStoreSalesDataResponse {
+	message Price {
+		optional uint32 item_def = 1;
+		optional uint32 price = 2;
+	}
+
+	repeated .CMsgGCRequestStoreSalesDataResponse.Price sale_price = 1;
+	optional uint32 version = 2;
+	optional uint32 expiration_time = 3;
+}
+
+message CMsgGCRequestStoreSalesDataUpToDateResponse {
+	optional uint32 version = 1;
+	optional uint32 expiration_time = 2;
 }
 

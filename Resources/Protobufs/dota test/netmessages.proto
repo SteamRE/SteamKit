@@ -189,6 +189,7 @@ message CSVCMsg_ServerInfo {
 	optional string map_name = 15;
 	optional string sky_name = 16;
 	optional string host_name = 17;
+	optional string addon_name = 18;
 }
 
 message CSVCMsg_ClassInfo {

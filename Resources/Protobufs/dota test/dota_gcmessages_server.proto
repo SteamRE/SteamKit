@@ -78,6 +78,10 @@ message CMsgDOTAFantasyPlayerStats {
 	optional uint32 denies = 9;
 	optional float gpm = 10;
 	optional float xppm = 11;
+	optional float stuns = 12;
+	optional float healing = 13;
+	optional uint32 tower_kills = 14;
+	optional uint32 roshan_kills = 15;
 }
 
 message CMsgGameMatchSignOut {
@@ -118,13 +122,17 @@ message CMsgGameMatchSignOut {
 		repeated .CMsgGameMatchSignOut.CTeam.CPlayer players = 1;
 	}
 
+	message CAdditionalSignoutMsg {
+		optional uint32 id = 1;
+		optional bytes contents = 2;
+	}
+
 	optional uint32 match_id = 1 [(key_field) = true];
 	optional uint32 duration = 2;
 	optional bool good_guys_win = 3;
 	optional fixed32 date = 4;
 	repeated uint32 num_players = 5;
 	repeated .CMsgGameMatchSignOut.CTeam teams = 6;
-	optional string computer_name = 7;
 	repeated uint32 tower_status = 8;
 	repeated uint32 barracks_status = 9;
 	optional uint32 cluster = 10;
@@ -136,6 +144,8 @@ message CMsgGameMatchSignOut {
 	repeated .CMsgDOTAFantasyPlayerStats fantasy_stats = 16;
 	repeated .CMsgEconPlayerStrangeCountAdjustment player_strange_count_adjustments = 17;
 	optional bool automatic_surrender = 18;
+	optional uint32 server_version = 19;
+	repeated .CMsgGameMatchSignOut.CAdditionalSignoutMsg additional_msgs = 20;
 }
 
 message CMsgGameMatchSignoutResponse {
@@ -144,6 +154,19 @@ message CMsgGameMatchSignoutResponse {
 	repeated .CLobbyTimedRewardDetails timed_reward_details = 3;
 	repeated .CDOTALobbyMember xp_reward_details = 4;
 	optional uint32 leagueid = 5;
+}
+
+message CMsgGameMatchSignOutPermissionRequest {
+	optional uint32 server_version = 1;
+	optional uint32 local_attempt = 2;
+	optional uint32 total_attempt = 3;
+	optional uint32 seconds_waited = 4;
+}
+
+message CMsgGameMatchSignOutPermissionResponse {
+	optional bool permission_granted = 1 [default = false];
+	optional bool abandon_signout = 2 [default = false];
+	optional uint32 retry_delay_seconds = 3 [default = 0];
 }
 
 message CMsgGameChatLog {
@@ -217,7 +240,6 @@ message CMsgDOTARequestPlayerResourcesResponse {
 	optional bool prevent_text_chat = 4;
 	optional bool prevent_voice_chat = 5;
 	optional bool low_priority = 6;
-	optional uint32 solo_rank = 7;
 }
 
 message CMsgDOTAPlayerFailedToConnect {
@@ -323,5 +345,31 @@ message CMsgDOTARewardDiretidePrizes {
 
 message CMsgDOTADiretidePrizesRewardedResponse {
 	optional uint32 prize_list = 1;
+}
+
+message CMsgDOTAAwardFrostivusPoints {
+	message AwardPoints {
+		optional uint32 account_id = 1;
+		optional uint32 points = 2;
+		optional uint32 premium_points = 3;
+	}
+
+	repeated .CMsgDOTAAwardFrostivusPoints.AwardPoints award_points = 1;
+	optional uint64 match_id = 2;
+	optional bool match_reset = 3;
+	optional uint32 round_number = 4;
+	optional uint32 best_difficulty = 5;
+	optional uint32 best_round_number = 6;
+}
+
+message CMsgDOTAFrostivusTimeElapsed {
+	message User {
+		optional uint32 account_id = 1;
+		optional uint32 time_elapsed_s = 2;
+	}
+
+	optional uint32 seconds = 1;
+	repeated .CMsgDOTAFrostivusTimeElapsed.User users = 2;
+	optional uint64 match_id = 3;
 }
 

@@ -58,6 +58,7 @@ message CMsgHttpRequest {
 	repeated .CMsgHttpRequest.QueryParam get_params = 5;
 	repeated .CMsgHttpRequest.QueryParam post_params = 6;
 	optional bytes body = 7;
+	optional uint32 absolute_timeout = 8;
 }
 
 message CMsgWebAPIRequest {

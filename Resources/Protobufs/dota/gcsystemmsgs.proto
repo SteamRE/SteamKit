@@ -107,9 +107,9 @@ enum EGCToGCMsg {
 	k_EGCToGCMsgMasterAckResponse = 151;
 	k_EGCToGCMsgRouted = 152;
 	k_EGCToGCMsgRoutedReply = 153;
-	k_EMsgUpdateSessionIP = 154;
-	k_EMsgRequestSessionIP = 155;
-	k_EMsgRequestSessionIPResponse = 156;
+	k_EMsgGCUpdateSubGCSessionInfo = 154;
+	k_EMsgGCRequestSubGCSessionInfo = 155;
+	k_EMsgGCRequestSubGCSessionInfoResponse = 156;
 	k_EGCToGCMsgMasterStartupComplete = 157;
 	k_EMsgGCToGCSOCacheSubscribe = 158;
 	k_EMsgGCToGCSOCacheUnsubscribe = 159;
