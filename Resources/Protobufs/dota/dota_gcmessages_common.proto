@@ -343,6 +343,8 @@ enum EDOTAGCMsg {
 	k_EMsgGCPartyLeaderWatchGamePrompt = 7397;
 	k_EMsgDOTAFrostivusTimeElapsed = 7398;
 	k_EMsgGCToGCGrantEarnedLicense = 7399;
+	k_EMsgDOTAExchangeFrostivusPoints = 7400;
+	k_EMsgDOTAExchangeFrostivusPointsResponse = 7401;
 	k_EMsgGCDev_GrantWarKill = 8001;
 }
 
@@ -547,8 +549,6 @@ message CSODOTAGameAccountClient {
 	optional uint32 solo_competitive_rank_uncertainty = 53;
 	optional uint32 solo_calibration_games_remaining = 54;
 	optional uint32 recruitment_level = 55;
-	optional uint32 recruiter = 56;
-	optional bool recruitment_request_pending = 57;
 }
 
 message CSODOTAPartyMember {
@@ -582,6 +582,7 @@ message CSODOTAParty {
 	optional uint32 match_disabled_account_id = 25;
 	optional uint32 matchmaking_max_range_minutes = 26;
 	optional uint32 matchlanguages = 27;
+	optional uint32 map_preference = 38;
 	repeated .CSODOTAPartyMember members = 29;
 	optional uint32 open_guild_id = 30;
 	repeated uint32 common_guilds = 31;

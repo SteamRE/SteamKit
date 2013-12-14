@@ -46,6 +46,7 @@ enum ECsgoGCMsg {
 	k_EMsgGCCStrike15_v2_ClientVarValueNotificationInfo = 9144;
 	k_EMsgGCCStrike15_v2_TournamentMatchRewardDropsNotification = 9145;
 	k_EMsgGCCStrike15_v2_MatchListRequestTournamentGames = 9146;
+	k_EMsgGCCStrike15_v2_MatchListRequestFullGameInfo = 9147;
 }
 
 message GameServerPing {
@@ -522,6 +523,12 @@ message CMsgGCCStrike15_v2_MatchListRequestRecentUserGames {
 
 message CMsgGCCStrike15_v2_MatchListRequestTournamentGames {
 	optional int32 eventid = 1;
+}
+
+message CMsgGCCStrike15_v2_MatchListRequestFullGameInfo {
+	optional uint64 matchid = 1;
+	optional uint64 outcomeid = 2;
+	optional uint32 token = 3;
 }
 
 message CDataGCCStrike15_v2_MatchInfo {

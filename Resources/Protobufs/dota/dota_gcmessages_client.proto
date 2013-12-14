@@ -132,6 +132,7 @@ message CMsgStartFindingMatch {
 	optional .DOTABotDifficulty bot_difficulty = 5 [default = BOT_DIFFICULTY_HARD];
 	optional .MatchType match_type = 6 [default = MATCH_TYPE_CASUAL];
 	optional uint32 matchlanguages = 7 [default = 4294967295];
+	optional uint32 map_preference = 9;
 	optional uint32 team_id = 8;
 }
 
@@ -2462,6 +2463,15 @@ message CMsgDOTARedeemFrostivusPrizeResponse {
 }
 
 message CMsgDOTAGetFrostivusPoints {
+}
+
+message CMsgDOTAExchangeFrostivusPoints {
+}
+
+message CMsgDOTAExchangeFrostivusPointsResponse {
+	optional bool success = 1;
+	optional uint32 total_points = 2;
+	optional uint32 total_premium_points = 3;
 }
 
 message CMsgDOTAGetFrostivusPointsResponse {

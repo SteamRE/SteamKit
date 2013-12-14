@@ -2548,13 +2548,13 @@ message CMsgClientFriendUserStatusPublished {
 
 message CMsgClientServiceMethod {
 	optional string method_name = 1;
-	optional string serialized_method = 2;
+	optional bytes serialized_method = 2;
 	optional bool is_notification = 3;
 }
 
 message CMsgClientServiceMethodResponse {
 	optional string method_name = 1;
-	optional string serialized_method_response = 2;
+	optional bytes serialized_method_response = 2;
 }
 
 message CMsgClientUIMode {
@@ -2691,7 +2691,7 @@ message CMsgClientPlayingSessionState {
 	optional uint32 playing_app = 3;
 }
 
-message CMsgClientPlayingSessionKick {
+message CMsgClientKickPlayingSession {
 	optional bool only_stop_game = 1;
 }
 

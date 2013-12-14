@@ -49,6 +49,7 @@ message CPartnerApps_ExistingDRMUpload {
 	optional uint32 flags = 6;
 	optional string mod_type = 7;
 	optional fixed32 timestamp = 8;
+	optional string orig_file_id = 9;
 }
 
 message CPartnerApps_FindDRMUploads_Response {

@@ -23,6 +23,8 @@ message CMsgRemoteClientBroadcastStatus {
 	optional string hostname = 4;
 	repeated fixed64 users = 5;
 	optional uint32 enabled_services = 6;
+	optional int32 ostype = 7 [default = 0];
+	optional bool is64bit = 8 [default = false];
 }
 
 message CMsgRemoteClientBroadcastDiscovery {
@@ -30,9 +32,20 @@ message CMsgRemoteClientBroadcastDiscovery {
 }
 
 message CMsgRemoteClientAppStatus {
+	message AppUpdateInfo {
+		optional fixed32 time_update_start = 1;
+		optional uint64 bytes_to_download = 2;
+		optional uint64 bytes_downloaded = 3;
+		optional uint64 bytes_to_process = 4;
+		optional uint64 bytes_processed = 5;
+		optional int32 estimated_seconds_remaining = 6 [default = -1];
+		optional int32 update_result = 7;
+	}
+
 	message AppStatus {
 		optional uint32 app_id = 1;
 		optional uint32 app_state = 2;
+		optional .CMsgRemoteClientAppStatus.AppUpdateInfo update_info = 3;
 	}
 
 	repeated .CMsgRemoteClientAppStatus.AppStatus status_updates = 1;
@@ -52,6 +65,8 @@ message CMsgRemoteClientStartStream {
 	optional int32 environment = 2;
 	optional bool has_gamepad = 3;
 	optional int32 launch_option = 4 [default = -1];
+	optional bool lock_parental_lock = 5 [default = false];
+	optional string unlock_parental_lock = 6;
 }
 
 message CMsgRemoteClientStartStreamResponse {

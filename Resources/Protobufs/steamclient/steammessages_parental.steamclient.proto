@@ -47,7 +47,6 @@ message CParental_GetParentalSettings_Response {
 
 message CParental_GetSignedParentalSettings_Request {
 	optional uint32 priority = 1;
-	optional fixed64 steamid = 10;
 }
 
 message CParental_GetSignedParentalSettings_Response {
@@ -59,6 +58,7 @@ message CParental_SetParentalSettings_Request {
 	optional string password = 1;
 	optional .ParentalSettings settings = 2;
 	optional string new_password = 3;
+	optional string sessionid = 4;
 	optional fixed64 steamid = 10;
 }
 
@@ -68,11 +68,18 @@ message CParental_SetParentalSettings_Response {
 message CParental_ValidatePassword_Request {
 	optional string password = 1;
 	optional string session = 2;
-	optional fixed64 steamid = 10;
+	optional bool send_unlock_on_success = 3;
 }
 
 message CParental_ValidatePassword_Response {
 	optional string token = 1;
+}
+
+message CParental_LockClient_Request {
+	optional string session = 1;
+}
+
+message CParental_LockClient_Response {
 }
 
 message CParental_ParentalSettingsChange_Notification {
@@ -80,6 +87,15 @@ message CParental_ParentalSettingsChange_Notification {
 	optional bytes signature = 2;
 	optional string password = 3;
 	optional string sessionid = 4;
+}
+
+message CParental_ParentalUnlock_Notification {
+	optional string password = 1;
+	optional string sessionid = 2;
+}
+
+message CParental_ParentalLock_Notification {
+	optional string sessionid = 1;
 }
 
 service Parental {
@@ -102,11 +118,20 @@ service Parental {
 	rpc ValidatePassword (.CParental_ValidatePassword_Request) returns (.CParental_ValidatePassword_Response) {
 		option (method_description) = "Check if the given parental password is correct for the logged in account";
 	}
+	rpc LockClient (.CParental_LockClient_Request) returns (.CParental_LockClient_Response) {
+		option (method_description) = "Notify connected clients that a lock has occurred in a browser";
+	}
 }
 service ParentalClient {
 	option (service_description) = "Parental settings client notifications";
 	option (service_execution_site) = k_EProtoExecutionSiteSteamClient;
 	rpc NotifySettingsChange (.CParental_ParentalSettingsChange_Notification) returns (.NoResponse) {
 		option (method_description) = "Notification from server to client of a change in parental settings";
+	}
+	rpc NotifyUnlock (.CParental_ParentalUnlock_Notification) returns (.NoResponse) {
+		option (method_description) = "Notification from server to client that an unlock has occurred in a browser";
+	}
+	rpc NotifyLock (.CParental_ParentalLock_Notification) returns (.NoResponse) {
+		option (method_description) = "Notification from server to client that a lock has occurred in a browser";
 	}
 }
