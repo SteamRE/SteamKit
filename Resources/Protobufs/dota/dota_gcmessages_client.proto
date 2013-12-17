@@ -2486,3 +2486,7 @@ message CMsgDOTAGetWraithNightProgressResponse {
 	optional uint32 progress = 1;
 }
 
+message CMsgDOTALiveLeagueGameUpdate {
+	optional uint32 live_league_games = 1;
+}
+

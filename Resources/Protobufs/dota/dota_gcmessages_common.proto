@@ -345,6 +345,7 @@ enum EDOTAGCMsg {
 	k_EMsgGCToGCGrantEarnedLicense = 7399;
 	k_EMsgDOTAExchangeFrostivusPoints = 7400;
 	k_EMsgDOTAExchangeFrostivusPointsResponse = 7401;
+	k_EMsgDOTALiveLeagueGameUpdate = 7402;
 	k_EMsgGCDev_GrantWarKill = 8001;
 }
 
@@ -543,10 +544,8 @@ message CSODOTAGameAccountClient {
 	optional uint32 shutdownlawterminatetimestamp = 47;
 	optional uint32 low_priority_games_remaining = 48;
 	optional uint32 competitive_rank = 49;
-	optional uint32 competitive_rank_uncertainty = 50;
 	optional uint32 calibration_games_remaining = 51;
 	optional uint32 solo_competitive_rank = 52;
-	optional uint32 solo_competitive_rank_uncertainty = 53;
 	optional uint32 solo_calibration_games_remaining = 54;
 	optional uint32 recruitment_level = 55;
 }
