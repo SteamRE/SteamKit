@@ -89,6 +89,7 @@ message CMsgClientLogon {
 	optional string machine_name = 96;
 	optional string machine_name_userchosen = 97;
 	optional string country_override = 98;
+	optional bool is_steam_box = 99;
 }
 
 message CMsgClientLogonResponse {
