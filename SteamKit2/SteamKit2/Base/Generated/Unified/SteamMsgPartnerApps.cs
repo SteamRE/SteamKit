@@ -305,6 +305,15 @@ namespace SteamKit2.Unified.Internal
       get { return _timestamp; }
       set { _timestamp = value; }
     }
+
+    private string _orig_file_id = "";
+    [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"orig_file_id", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string orig_file_id
+    {
+      get { return _orig_file_id; }
+      set { _orig_file_id = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

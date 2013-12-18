@@ -680,6 +680,15 @@ namespace SteamKit2.Internal
       get { return _country_override; }
       set { _country_override = value; }
     }
+
+    private bool _is_steam_box = default(bool);
+    [global::ProtoBuf.ProtoMember(99, IsRequired = false, Name=@"is_steam_box", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool is_steam_box
+    {
+      get { return _is_steam_box; }
+      set { _is_steam_box = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -2791,6 +2800,15 @@ namespace SteamKit2.Internal
     {
       get { return _bis_locked_account; }
       set { _bis_locked_account = value; }
+    }
+
+    private bool _bis_limited_account_allowed_to_invite_friends = default(bool);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"bis_limited_account_allowed_to_invite_friends", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool bis_limited_account_allowed_to_invite_friends
+    {
+      get { return _bis_limited_account_allowed_to_invite_friends; }
+      set { _bis_limited_account_allowed_to_invite_friends = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -16859,10 +16877,10 @@ namespace SteamKit2.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientPlayingSessionKick")]
-  public partial class CMsgClientPlayingSessionKick : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientKickPlayingSession")]
+  public partial class CMsgClientKickPlayingSession : global::ProtoBuf.IExtensible
   {
-    public CMsgClientPlayingSessionKick() {}
+    public CMsgClientKickPlayingSession() {}
     
 
     private bool _only_stop_game = default(bool);

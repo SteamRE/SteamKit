@@ -483,6 +483,53 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCredentials_LastCredentialChangeTime_Request")]
+  public partial class CCredentials_LastCredentialChangeTime_Request : global::ProtoBuf.IExtensible
+  {
+    public CCredentials_LastCredentialChangeTime_Request() {}
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCredentials_LastCredentialChangeTime_Response")]
+  public partial class CCredentials_LastCredentialChangeTime_Response : global::ProtoBuf.IExtensible
+  {
+    public CCredentials_LastCredentialChangeTime_Response() {}
+    
+
+    private uint _timestamp_last_password_change = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"timestamp_last_password_change", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint timestamp_last_password_change
+    {
+      get { return _timestamp_last_password_change; }
+      set { _timestamp_last_password_change = value; }
+    }
+
+    private uint _timestamp_last_email_change = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"timestamp_last_email_change", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint timestamp_last_email_change
+    {
+      get { return _timestamp_last_email_change; }
+      set { _timestamp_last_email_change = value; }
+    }
+
+    private uint _timestamp_last_password_reset = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"timestamp_last_password_reset", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint timestamp_last_password_reset
+    {
+      get { return _timestamp_last_password_reset; }
+      set { _timestamp_last_password_reset = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCredentials_SteamGuardLoginAttempt_Notification")]
   public partial class CCredentials_SteamGuardLoginAttempt_Notification : global::ProtoBuf.IExtensible
   {
@@ -528,6 +575,7 @@ namespace SteamKit2.Unified.Internal
     CCredentials_ValidateEmailAddress_Response ValidateEmailAddress(CCredentials_ValidateEmailAddress_Request request);
     CCredentials_SteamGuardPhishingReport_Response SteamGuardPhishingReport(CCredentials_SteamGuardPhishingReport_Request request);
     CCredentials_SteamGuardCode_Response SteamGuardCodeProcess(CCredentials_SteamGuardCode_Request request);
+    CCredentials_LastCredentialChangeTime_Response GetCredentialChangeTimeDetails(CCredentials_LastCredentialChangeTime_Request request);
     
     }
     

@@ -121,11 +121,67 @@ namespace SteamKit2.Unified.Internal
       get { return _last_app_played; }
       set { _last_app_played = value; }
     }
+
+    private bool _is_limited = default(bool);
+    [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"is_limited", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool is_limited
+    {
+      get { return _is_limited; }
+      set { _is_limited = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CDeviceAuth_AcceptAuthorizationRequest_Request")]
+  public partial class CDeviceAuth_AcceptAuthorizationRequest_Request : global::ProtoBuf.IExtensible
+  {
+    public CDeviceAuth_AcceptAuthorizationRequest_Request() {}
+    
+
+    private ulong _steamid = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong steamid
+    {
+      get { return _steamid; }
+      set { _steamid = value; }
+    }
+
+    private ulong _auth_device_token = default(ulong);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"auth_device_token", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong auth_device_token
+    {
+      get { return _auth_device_token; }
+      set { _auth_device_token = value; }
+    }
+
+    private ulong _auth_code = default(ulong);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"auth_code", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong auth_code
+    {
+      get { return _auth_code; }
+      set { _auth_code = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CDeviceAuth_AcceptAuthorizationRequest_Response")]
+  public partial class CDeviceAuth_AcceptAuthorizationRequest_Response : global::ProtoBuf.IExtensible
+  {
+    public CDeviceAuth_AcceptAuthorizationRequest_Response() {}
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -298,12 +354,170 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CDeviceAuth_GetAuthorizedBorrowers_Request")]
+  public partial class CDeviceAuth_GetAuthorizedBorrowers_Request : global::ProtoBuf.IExtensible
+  {
+    public CDeviceAuth_GetAuthorizedBorrowers_Request() {}
+    
+
+    private ulong _steamid = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong steamid
+    {
+      get { return _steamid; }
+      set { _steamid = value; }
+    }
+
+    private bool _include_canceled = default(bool);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"include_canceled", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool include_canceled
+    {
+      get { return _include_canceled; }
+      set { _include_canceled = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CDeviceAuth_GetAuthorizedBorrowers_Response")]
+  public partial class CDeviceAuth_GetAuthorizedBorrowers_Response : global::ProtoBuf.IExtensible
+  {
+    public CDeviceAuth_GetAuthorizedBorrowers_Response() {}
+    
+    private readonly global::System.Collections.Generic.List<CDeviceAuth_GetAuthorizedBorrowers_Response.Borrower> _borrowers = new global::System.Collections.Generic.List<CDeviceAuth_GetAuthorizedBorrowers_Response.Borrower>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"borrowers", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CDeviceAuth_GetAuthorizedBorrowers_Response.Borrower> borrowers
+    {
+      get { return _borrowers; }
+    }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Borrower")]
+  public partial class Borrower : global::ProtoBuf.IExtensible
+  {
+    public Borrower() {}
+    
+
+    private ulong _steamid = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong steamid
+    {
+      get { return _steamid; }
+      set { _steamid = value; }
+    }
+
+    private bool _is_pending = default(bool);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"is_pending", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool is_pending
+    {
+      get { return _is_pending; }
+      set { _is_pending = value; }
+    }
+
+    private bool _is_canceled = default(bool);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"is_canceled", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool is_canceled
+    {
+      get { return _is_canceled; }
+      set { _is_canceled = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CDeviceAuth_AddAuthorizedBorrowers_Request")]
+  public partial class CDeviceAuth_AddAuthorizedBorrowers_Request : global::ProtoBuf.IExtensible
+  {
+    public CDeviceAuth_AddAuthorizedBorrowers_Request() {}
+    
+
+    private ulong _steamid = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong steamid
+    {
+      get { return _steamid; }
+      set { _steamid = value; }
+    }
+    private readonly global::System.Collections.Generic.List<ulong> _steamid_borrower = new global::System.Collections.Generic.List<ulong>();
+    [global::ProtoBuf.ProtoMember(2, Name=@"steamid_borrower", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public global::System.Collections.Generic.List<ulong> steamid_borrower
+    {
+      get { return _steamid_borrower; }
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CDeviceAuth_AddAuthorizedBorrowers_Response")]
+  public partial class CDeviceAuth_AddAuthorizedBorrowers_Response : global::ProtoBuf.IExtensible
+  {
+    public CDeviceAuth_AddAuthorizedBorrowers_Response() {}
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CDeviceAuth_RemoveAuthorizedBorrowers_Request")]
+  public partial class CDeviceAuth_RemoveAuthorizedBorrowers_Request : global::ProtoBuf.IExtensible
+  {
+    public CDeviceAuth_RemoveAuthorizedBorrowers_Request() {}
+    
+
+    private ulong _steamid = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong steamid
+    {
+      get { return _steamid; }
+      set { _steamid = value; }
+    }
+    private readonly global::System.Collections.Generic.List<ulong> _steamid_borrower = new global::System.Collections.Generic.List<ulong>();
+    [global::ProtoBuf.ProtoMember(2, Name=@"steamid_borrower", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public global::System.Collections.Generic.List<ulong> steamid_borrower
+    {
+      get { return _steamid_borrower; }
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CDeviceAuth_RemoveAuthorizedBorrowers_Response")]
+  public partial class CDeviceAuth_RemoveAuthorizedBorrowers_Response : global::ProtoBuf.IExtensible
+  {
+    public CDeviceAuth_RemoveAuthorizedBorrowers_Response() {}
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     public interface IDeviceAuth
     {
       CDeviceAuth_GetOwnAuthorizedDevices_Response GetOwnAuthorizedDevices(CDeviceAuth_GetOwnAuthorizedDevices_Request request);
+    CDeviceAuth_AcceptAuthorizationRequest_Response AcceptAuthorizationRequest(CDeviceAuth_AcceptAuthorizationRequest_Request request);
     CDeviceAuth_AuthorizeRemoteDevice_Response AuthorizeRemoteDevice(CDeviceAuth_AuthorizeRemoteDevice_Request request);
     CDeviceAuth_DeauthorizeRemoteDevice_Response DeauthorizeRemoteDevice(CDeviceAuth_DeauthorizeRemoteDevice_Request request);
     CDeviceAuth_GetUsedAuthorizedDevices_Response GetUsedAuthorizedDevices(CDeviceAuth_GetUsedAuthorizedDevices_Request request);
+    CDeviceAuth_GetAuthorizedBorrowers_Response GetAuthorizedBorrowers(CDeviceAuth_GetAuthorizedBorrowers_Request request);
+    CDeviceAuth_AddAuthorizedBorrowers_Response AddAuthorizedBorrowers(CDeviceAuth_AddAuthorizedBorrowers_Request request);
+    CDeviceAuth_RemoveAuthorizedBorrowers_Response RemoveAuthorizedBorrowers(CDeviceAuth_RemoveAuthorizedBorrowers_Request request);
     
     }
     

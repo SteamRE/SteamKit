@@ -108,6 +108,20 @@ namespace SteamKit2.Unified.Internal
       get { return _platforms_to_sync; }
     }
   
+    private readonly global::System.Collections.Generic.List<string> _request_headers_names = new global::System.Collections.Generic.List<string>();
+    [global::ProtoBuf.ProtoMember(7, Name=@"request_headers_names", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<string> request_headers_names
+    {
+      get { return _request_headers_names; }
+    }
+  
+    private readonly global::System.Collections.Generic.List<string> _request_headers_values = new global::System.Collections.Generic.List<string>();
+    [global::ProtoBuf.ProtoMember(8, Name=@"request_headers_values", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<string> request_headers_values
+    {
+      get { return _request_headers_values; }
+    }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
