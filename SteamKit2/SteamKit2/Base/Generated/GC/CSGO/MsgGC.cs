@@ -741,6 +741,87 @@ namespace SteamKit2.GC.CSGO.Internal
       get { return _tv_master_steamid; }
       set { _tv_master_steamid = value; }
     }
+
+    private uint _tv_local_slots = default(uint);
+    [global::ProtoBuf.ProtoMember(12, IsRequired = false, Name=@"tv_local_slots", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint tv_local_slots
+    {
+      get { return _tv_local_slots; }
+      set { _tv_local_slots = value; }
+    }
+
+    private uint _tv_local_clients = default(uint);
+    [global::ProtoBuf.ProtoMember(13, IsRequired = false, Name=@"tv_local_clients", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint tv_local_clients
+    {
+      get { return _tv_local_clients; }
+      set { _tv_local_clients = value; }
+    }
+
+    private uint _tv_local_proxies = default(uint);
+    [global::ProtoBuf.ProtoMember(14, IsRequired = false, Name=@"tv_local_proxies", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint tv_local_proxies
+    {
+      get { return _tv_local_proxies; }
+      set { _tv_local_proxies = value; }
+    }
+
+    private uint _tv_relay_slots = default(uint);
+    [global::ProtoBuf.ProtoMember(15, IsRequired = false, Name=@"tv_relay_slots", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint tv_relay_slots
+    {
+      get { return _tv_relay_slots; }
+      set { _tv_relay_slots = value; }
+    }
+
+    private uint _tv_relay_clients = default(uint);
+    [global::ProtoBuf.ProtoMember(16, IsRequired = false, Name=@"tv_relay_clients", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint tv_relay_clients
+    {
+      get { return _tv_relay_clients; }
+      set { _tv_relay_clients = value; }
+    }
+
+    private uint _tv_relay_proxies = default(uint);
+    [global::ProtoBuf.ProtoMember(17, IsRequired = false, Name=@"tv_relay_proxies", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint tv_relay_proxies
+    {
+      get { return _tv_relay_proxies; }
+      set { _tv_relay_proxies = value; }
+    }
+
+    private uint _tv_relay_address = default(uint);
+    [global::ProtoBuf.ProtoMember(18, IsRequired = false, Name=@"tv_relay_address", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint tv_relay_address
+    {
+      get { return _tv_relay_address; }
+      set { _tv_relay_address = value; }
+    }
+
+    private uint _tv_relay_port = default(uint);
+    [global::ProtoBuf.ProtoMember(19, IsRequired = false, Name=@"tv_relay_port", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint tv_relay_port
+    {
+      get { return _tv_relay_port; }
+      set { _tv_relay_port = value; }
+    }
+
+    private ulong _tv_relay_steamid = default(ulong);
+    [global::ProtoBuf.ProtoMember(20, IsRequired = false, Name=@"tv_relay_steamid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong tv_relay_steamid
+    {
+      get { return _tv_relay_steamid; }
+      set { _tv_relay_steamid = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -1213,6 +1294,15 @@ namespace SteamKit2.GC.CSGO.Internal
       get { return _tournament_casters_account_ids; }
     }
   
+
+    private ulong _tv_relay_steamid = default(ulong);
+    [global::ProtoBuf.ProtoMember(14, IsRequired = false, Name=@"tv_relay_steamid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong tv_relay_steamid
+    {
+      get { return _tv_relay_steamid; }
+      set { _tv_relay_steamid = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -3130,6 +3220,43 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCCStrike15_v2_MatchListRequestFullGameInfo")]
+  public partial class CMsgGCCStrike15_v2_MatchListRequestFullGameInfo : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCCStrike15_v2_MatchListRequestFullGameInfo() {}
+    
+
+    private ulong _matchid = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"matchid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong matchid
+    {
+      get { return _matchid; }
+      set { _matchid = value; }
+    }
+
+    private ulong _outcomeid = default(ulong);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"outcomeid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong outcomeid
+    {
+      get { return _outcomeid; }
+      set { _outcomeid = value; }
+    }
+
+    private uint _token = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"token", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint token
+    {
+      get { return _token; }
+      set { _token = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CDataGCCStrike15_v2_MatchInfo")]
   public partial class CDataGCCStrike15_v2_MatchInfo : global::ProtoBuf.IExtensible
   {
@@ -3410,7 +3537,10 @@ namespace SteamKit2.GC.CSGO.Internal
       k_EMsgGCCStrike15_v2_TournamentMatchRewardDropsNotification = 9145,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCCStrike15_v2_MatchListRequestTournamentGames", Value=9146)]
-      k_EMsgGCCStrike15_v2_MatchListRequestTournamentGames = 9146
+      k_EMsgGCCStrike15_v2_MatchListRequestTournamentGames = 9146,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCCStrike15_v2_MatchListRequestFullGameInfo", Value=9147)]
+      k_EMsgGCCStrike15_v2_MatchListRequestFullGameInfo = 9147
     }
   
 }

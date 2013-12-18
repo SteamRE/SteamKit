@@ -15,8 +15,8 @@ namespace SteamKit2.GC.Dota.Internal
     public enum MatchType
     {
             
-      [global::ProtoBuf.ProtoEnum(Name=@"MATCH_TYPE_RANKED", Value=0)]
-      MATCH_TYPE_RANKED = 0,
+      [global::ProtoBuf.ProtoEnum(Name=@"MATCH_TYPE_CASUAL", Value=0)]
+      MATCH_TYPE_CASUAL = 0,
             
       [global::ProtoBuf.ProtoEnum(Name=@"MATCH_TYPE_COOP_BOTS", Value=1)]
       MATCH_TYPE_COOP_BOTS = 1,
@@ -25,7 +25,10 @@ namespace SteamKit2.GC.Dota.Internal
       MATCH_TYPE_TEAM_RANKED = 2,
             
       [global::ProtoBuf.ProtoEnum(Name=@"MATCH_TYPE_SOLO_QUEUE", Value=3)]
-      MATCH_TYPE_SOLO_QUEUE = 3
+      MATCH_TYPE_SOLO_QUEUE = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"MATCH_TYPE_COMPETITIVE", Value=4)]
+      MATCH_TYPE_COMPETITIVE = 4
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"DOTABotDifficulty", EnumPassthru=true)]

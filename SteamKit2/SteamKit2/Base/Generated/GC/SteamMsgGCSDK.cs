@@ -759,10 +759,22 @@ namespace SteamKit2.GC.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCUpdateSessionIP")]
-  public partial class CMsgGCUpdateSessionIP : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCUpdateSubGCSessionInfo")]
+  public partial class CMsgGCUpdateSubGCSessionInfo : global::ProtoBuf.IExtensible
   {
-    public CMsgGCUpdateSessionIP() {}
+    public CMsgGCUpdateSubGCSessionInfo() {}
+    
+    private readonly global::System.Collections.Generic.List<CMsgGCUpdateSubGCSessionInfo.CMsgUpdate> _updates = new global::System.Collections.Generic.List<CMsgGCUpdateSubGCSessionInfo.CMsgUpdate>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"updates", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CMsgGCUpdateSubGCSessionInfo.CMsgUpdate> updates
+    {
+      get { return _updates; }
+    }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgUpdate")]
+  public partial class CMsgUpdate : global::ProtoBuf.IExtensible
+  {
+    public CMsgUpdate() {}
     
 
     private ulong _steamid = default(ulong);
@@ -782,15 +794,29 @@ namespace SteamKit2.GC.Internal
       get { return _ip; }
       set { _ip = value; }
     }
+
+    private bool _trusted = default(bool);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"trusted", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool trusted
+    {
+      get { return _trusted; }
+      set { _trusted = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCRequestSessionIP")]
-  public partial class CMsgGCRequestSessionIP : global::ProtoBuf.IExtensible
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCRequestSubGCSessionInfo")]
+  public partial class CMsgGCRequestSubGCSessionInfo : global::ProtoBuf.IExtensible
   {
-    public CMsgGCRequestSessionIP() {}
+    public CMsgGCRequestSubGCSessionInfo() {}
     
 
     private ulong _steamid = default(ulong);
@@ -806,10 +832,10 @@ namespace SteamKit2.GC.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCRequestSessionIPResponse")]
-  public partial class CMsgGCRequestSessionIPResponse : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCRequestSubGCSessionInfoResponse")]
+  public partial class CMsgGCRequestSubGCSessionInfoResponse : global::ProtoBuf.IExtensible
   {
-    public CMsgGCRequestSessionIPResponse() {}
+    public CMsgGCRequestSubGCSessionInfoResponse() {}
     
 
     private uint _ip = default(uint);
@@ -819,6 +845,34 @@ namespace SteamKit2.GC.Internal
     {
       get { return _ip; }
       set { _ip = value; }
+    }
+
+    private bool _trusted = default(bool);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"trusted", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool trusted
+    {
+      get { return _trusted; }
+      set { _trusted = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCToGCIncrementRecruitmentLevel")]
+  public partial class CMsgGCToGCIncrementRecruitmentLevel : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCToGCIncrementRecruitmentLevel() {}
+    
+
+    private ulong _steamid = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong steamid
+    {
+      get { return _steamid; }
+      set { _steamid = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

@@ -194,6 +194,125 @@ namespace SteamKit2.GC.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCRequestStoreSalesData")]
+  public partial class CMsgGCRequestStoreSalesData : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCRequestStoreSalesData() {}
+    
+
+    private uint _version = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"version", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint version
+    {
+      get { return _version; }
+      set { _version = value; }
+    }
+
+    private uint _currency = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"currency", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint currency
+    {
+      get { return _currency; }
+      set { _currency = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCRequestStoreSalesDataResponse")]
+  public partial class CMsgGCRequestStoreSalesDataResponse : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCRequestStoreSalesDataResponse() {}
+    
+    private readonly global::System.Collections.Generic.List<CMsgGCRequestStoreSalesDataResponse.Price> _sale_price = new global::System.Collections.Generic.List<CMsgGCRequestStoreSalesDataResponse.Price>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"sale_price", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CMsgGCRequestStoreSalesDataResponse.Price> sale_price
+    {
+      get { return _sale_price; }
+    }
+  
+
+    private uint _version = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"version", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint version
+    {
+      get { return _version; }
+      set { _version = value; }
+    }
+
+    private uint _expiration_time = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"expiration_time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint expiration_time
+    {
+      get { return _expiration_time; }
+      set { _expiration_time = value; }
+    }
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Price")]
+  public partial class Price : global::ProtoBuf.IExtensible
+  {
+    public Price() {}
+    
+
+    private uint _item_def = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"item_def", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint item_def
+    {
+      get { return _item_def; }
+      set { _item_def = value; }
+    }
+
+    private uint _price = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"price", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint price
+    {
+      get { return _price; }
+      set { _price = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCRequestStoreSalesDataUpToDateResponse")]
+  public partial class CMsgGCRequestStoreSalesDataUpToDateResponse : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCRequestStoreSalesDataUpToDateResponse() {}
+    
+
+    private uint _version = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"version", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint version
+    {
+      get { return _version; }
+      set { _version = value; }
+    }
+
+    private uint _expiration_time = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"expiration_time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint expiration_time
+    {
+      get { return _expiration_time; }
+      set { _expiration_time = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     [global::ProtoBuf.ProtoContract(Name=@"EGCItemMsg", EnumPassthru=true)]
     public enum EGCItemMsg
     {
@@ -564,12 +683,6 @@ namespace SteamKit2.GC.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCUpdateSQLKeyValue", Value=2518)]
       k_EMsgGCToGCUpdateSQLKeyValue = 2518,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCIsTrustedServer", Value=2519)]
-      k_EMsgGCToGCIsTrustedServer = 2519,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCIsTrustedServerResponse", Value=2520)]
-      k_EMsgGCToGCIsTrustedServerResponse = 2520,
-            
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCBroadcastConsoleCommand", Value=2521)]
       k_EMsgGCToGCBroadcastConsoleCommand = 2521,
             
@@ -607,7 +720,16 @@ namespace SteamKit2.GC.Internal
       k_EMsgGCItemPurgatory_RefundPurchaseResponse = 2534,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCPlayerStrangeCountAdjustments", Value=2535)]
-      k_EMsgGCToGCPlayerStrangeCountAdjustments = 2535
+      k_EMsgGCToGCPlayerStrangeCountAdjustments = 2535,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCRequestStoreSalesData", Value=2536)]
+      k_EMsgGCRequestStoreSalesData = 2536,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCRequestStoreSalesDataResponse", Value=2537)]
+      k_EMsgGCRequestStoreSalesDataResponse = 2537,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCRequestStoreSalesDataUpToDateResponse", Value=2538)]
+      k_EMsgGCRequestStoreSalesDataUpToDateResponse = 2538
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"EGCMsgResponse", EnumPassthru=true)]

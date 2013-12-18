@@ -229,6 +229,15 @@ namespace SteamKit2.GC.Internal
       get { return _body; }
       set { _body = value; }
     }
+
+    private uint _absolute_timeout = default(uint);
+    [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"absolute_timeout", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint absolute_timeout
+    {
+      get { return _absolute_timeout; }
+      set { _absolute_timeout = value; }
+    }
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"RequestHeader")]
   public partial class RequestHeader : global::ProtoBuf.IExtensible
   {

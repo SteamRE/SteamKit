@@ -327,14 +327,14 @@ namespace SteamKit2.GC.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"k_EGCToGCMsgRoutedReply", Value=153)]
       k_EGCToGCMsgRoutedReply = 153,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgUpdateSessionIP", Value=154)]
-      k_EMsgUpdateSessionIP = 154,
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCUpdateSubGCSessionInfo", Value=154)]
+      k_EMsgGCUpdateSubGCSessionInfo = 154,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgRequestSessionIP", Value=155)]
-      k_EMsgRequestSessionIP = 155,
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCRequestSubGCSessionInfo", Value=155)]
+      k_EMsgGCRequestSubGCSessionInfo = 155,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgRequestSessionIPResponse", Value=156)]
-      k_EMsgRequestSessionIPResponse = 156,
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCRequestSubGCSessionInfoResponse", Value=156)]
+      k_EMsgGCRequestSubGCSessionInfoResponse = 156,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EGCToGCMsgMasterStartupComplete", Value=157)]
       k_EGCToGCMsgMasterStartupComplete = 157,
