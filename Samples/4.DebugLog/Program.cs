@@ -63,7 +63,9 @@ namespace Sample4_DebugLog
             // install a listener as an anonymous method
             // this call is commented as it would be redundant to install a second listener that also displays messages to the console
             // DebugLog.AddListener( ( category, msg ) => Console.WriteLine( "AnonymousMethod - {0}: {1}", category, msg ) );
-
+            
+            // Enable DebugLog in release builds
+            DebugLog.Enabled = true;
 
             if ( args.Length < 2 )
             {
