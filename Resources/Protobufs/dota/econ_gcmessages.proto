@@ -139,6 +139,8 @@ enum EGCItemMsg {
 	k_EMsgGCRequestStoreSalesData = 2536;
 	k_EMsgGCRequestStoreSalesDataResponse = 2537;
 	k_EMsgGCRequestStoreSalesDataUpToDateResponse = 2538;
+	k_EMsgGCToGCPingRequest = 2539;
+	k_EMsgGCToGCPingResponse = 2540;
 }
 
 enum EGCMsgResponse {
@@ -236,5 +238,11 @@ message CMsgGCRequestStoreSalesDataResponse {
 message CMsgGCRequestStoreSalesDataUpToDateResponse {
 	optional uint32 version = 1;
 	optional uint32 expiration_time = 2;
+}
+
+message CMsgGCToGCPingRequest {
+}
+
+message CMsgGCToGCPingResponse {
 }
 

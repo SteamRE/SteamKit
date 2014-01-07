@@ -420,6 +420,7 @@ message CMsgDOTAMatch {
 		optional float scaled_metric = 11;
 		optional uint32 previous_rank = 12;
 		optional uint32 rank_change = 13;
+		optional bool solo_rank = 49;
 		optional uint32 kills = 14;
 		optional uint32 deaths = 15;
 		optional uint32 assists = 16;
@@ -1432,8 +1433,6 @@ message CMsgDOTAWelcome {
 	optional bool profile_private = 17;
 	optional uint32 currency = 18;
 	optional uint32 bang_no = 19;
-	optional bool should_use_new_china_domain = 20;
-	optional bool should_use_pwrd_cdn = 21;
 }
 
 message CSODOTAGameHeroFavorites {
@@ -1611,6 +1610,29 @@ message CMsgDOTALeaguesInMonthResponse {
 	repeated .CMsgDOTALeague leagues = 4;
 }
 
+message CMsgSockAddrList {
+	repeated fixed32 ip = 1 [packed = true];
+	repeated uint32 port = 2 [packed = true];
+}
+
+message CMsgMatchmakingGroupServerSample {
+	repeated .CMsgSockAddrList servers_by_group = 1;
+	optional uint32 servers_to_ping = 2;
+	optional uint32 reply_odds = 3;
+	optional uint32 reply_detailed_odds = 4;
+}
+
+message CMsgClientGameserverPings {
+	message PingDetail {
+		optional fixed32 ip = 1;
+		optional uint32 port = 2;
+		optional uint32 ping = 3;
+	}
+
+	repeated uint32 average_ping_by_group = 1;
+	repeated .CMsgClientGameserverPings.PingDetail ping_details = 2;
+}
+
 message CMsgDOTAMatchmakingStatsRequest {
 }
 
@@ -1618,6 +1640,7 @@ message CMsgDOTAMatchmakingStatsResponse {
 	repeated uint32 wait_times_by_group = 1;
 	repeated uint32 searching_players_by_group = 2;
 	optional uint32 disabled_groups = 3;
+	optional .CMsgMatchmakingGroupServerSample gameserver_sample = 4;
 }
 
 message CMsgDOTASetMatchHistoryAccess {
@@ -2189,8 +2212,6 @@ message CMsgDOTAFantasyTeamRosterAddDropResponse {
 
 message CMsgDOTAFantasyTeamTradesRequest {
 	optional uint32 fantasy_league_id = 1;
-	optional uint32 owner_account_id = 2;
-	optional uint32 team_index = 3;
 }
 
 message CMsgDOTAFantasyTeamTradesResponse {
@@ -2200,6 +2221,7 @@ message CMsgDOTAFantasyTeamTradesResponse {
 		optional uint32 owner_account_id_2 = 3;
 		optional uint32 player_account_id_1 = 4;
 		optional uint32 player_account_id_2 = 5;
+		optional uint32 status = 6;
 	}
 
 	enum EResult {
@@ -2256,18 +2278,19 @@ message CMsgDOTAFantasyPlayerHisoricalStatsRequest {
 message CMsgDOTAFantasyPlayerHisoricalStatsResponse {
 	message PlayerStats {
 		optional uint32 account_id = 1;
-		optional uint32 kills = 2;
-		optional uint32 deaths = 3;
-		optional uint32 assists = 4;
-		optional uint32 last_hits = 5;
-		optional uint32 denies = 6;
-		optional float gpm = 7;
-		optional float xppm = 8;
-		optional float score = 9;
-		optional float stuns = 10;
-		optional float healing = 11;
-		optional uint32 tower_kills = 12;
-		optional uint32 roshan_kills = 13;
+		optional uint32 matches = 2;
+		optional float score = 3;
+		optional float kills = 4;
+		optional float deaths = 5;
+		optional float assists = 6;
+		optional float last_hits = 7;
+		optional float denies = 8;
+		optional float gpm = 9;
+		optional float xppm = 10;
+		optional float stuns = 11;
+		optional float healing = 12;
+		optional float tower_kills = 13;
+		optional float roshan_kills = 14;
 	}
 
 	enum EResult {
@@ -2479,14 +2502,33 @@ message CMsgDOTAGetFrostivusPointsResponse {
 	optional uint32 total_premium_points = 2;
 }
 
-message CMsgDOTAGetWraithNightProgress {
-}
-
-message CMsgDOTAGetWraithNightProgressResponse {
-	optional uint32 progress = 1;
-}
-
 message CMsgDOTALiveLeagueGameUpdate {
 	optional uint32 live_league_games = 1;
+}
+
+message CMsgDOTAGetPlayerMatchHistory {
+	optional uint32 account_id = 1;
+	optional uint32 start_at_match_id = 2;
+	optional uint32 matches_requested = 3;
+	optional uint32 hero_id = 4;
+	optional uint32 request_id = 5;
+}
+
+message CMsgDOTAGetPlayerMatchHistoryResponse {
+	message Match {
+		optional uint64 match_id = 1;
+		optional uint32 start_time = 2;
+		optional uint32 hero_id = 3;
+		optional bool winner = 4;
+		optional uint32 game_mode = 5;
+		optional int32 rank_change = 6;
+		optional uint32 previous_rank = 7;
+		optional uint32 lobby_type = 8;
+		optional bool solo_rank = 9;
+		optional bool abandon = 10;
+	}
+
+	repeated .CMsgDOTAGetPlayerMatchHistoryResponse.Match matches = 1;
+	optional uint32 request_id = 2;
 }
 

@@ -373,3 +373,18 @@ message CMsgDOTAFrostivusTimeElapsed {
 	optional uint64 match_id = 3;
 }
 
+message CMsgGCToServerPingRequest {
+	optional fixed64 request_id = 1;
+	optional uint64 request_time = 2;
+}
+
+message CMsgGCToServerPingResponse {
+	optional fixed64 request_id = 1;
+	optional uint64 request_time = 2;
+	optional uint32 cluster = 3;
+}
+
+message CMsgGCToServerConsoleCommand {
+	optional string console_command = 1;
+}
+
