@@ -2419,5 +2419,89 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCToServerPingRequest")]
+  public partial class CMsgGCToServerPingRequest : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCToServerPingRequest() {}
+    
+
+    private ulong _request_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"request_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong request_id
+    {
+      get { return _request_id; }
+      set { _request_id = value; }
+    }
+
+    private ulong _request_time = default(ulong);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"request_time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong request_time
+    {
+      get { return _request_time; }
+      set { _request_time = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCToServerPingResponse")]
+  public partial class CMsgGCToServerPingResponse : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCToServerPingResponse() {}
+    
+
+    private ulong _request_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"request_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong request_id
+    {
+      get { return _request_id; }
+      set { _request_id = value; }
+    }
+
+    private ulong _request_time = default(ulong);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"request_time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong request_time
+    {
+      get { return _request_time; }
+      set { _request_time = value; }
+    }
+
+    private uint _cluster = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"cluster", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint cluster
+    {
+      get { return _cluster; }
+      set { _cluster = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCToServerConsoleCommand")]
+  public partial class CMsgGCToServerConsoleCommand : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCToServerConsoleCommand() {}
+    
+
+    private string _console_command = "";
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"console_command", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string console_command
+    {
+      get { return _console_command; }
+      set { _console_command = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
 }
 #pragma warning restore 1591

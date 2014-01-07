@@ -313,6 +313,26 @@ namespace SteamKit2.GC.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCToGCPingRequest")]
+  public partial class CMsgGCToGCPingRequest : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCToGCPingRequest() {}
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCToGCPingResponse")]
+  public partial class CMsgGCToGCPingResponse : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCToGCPingResponse() {}
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     [global::ProtoBuf.ProtoContract(Name=@"EGCItemMsg", EnumPassthru=true)]
     public enum EGCItemMsg
     {
@@ -729,7 +749,13 @@ namespace SteamKit2.GC.Internal
       k_EMsgGCRequestStoreSalesDataResponse = 2537,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCRequestStoreSalesDataUpToDateResponse", Value=2538)]
-      k_EMsgGCRequestStoreSalesDataUpToDateResponse = 2538
+      k_EMsgGCRequestStoreSalesDataUpToDateResponse = 2538,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCPingRequest", Value=2539)]
+      k_EMsgGCToGCPingRequest = 2539,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCPingResponse", Value=2540)]
+      k_EMsgGCToGCPingResponse = 2540
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"EGCMsgResponse", EnumPassthru=true)]

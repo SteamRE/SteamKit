@@ -3530,12 +3530,6 @@ namespace SteamKit2.GC.Dota.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCSignoutAwardFrostivusPoints", Value=7390)]
       k_EMsgGCToGCSignoutAwardFrostivusPoints = 7390,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgDOTAGetWraithNightProgress", Value=7391)]
-      k_EMsgDOTAGetWraithNightProgress = 7391,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgDOTAGetWraithNightProgressResponse", Value=7392)]
-      k_EMsgDOTAGetWraithNightProgressResponse = 7392,
-            
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgDOTASendFriendRecruits", Value=7393)]
       k_EMsgDOTASendFriendRecruits = 7393,
             
@@ -3565,6 +3559,36 @@ namespace SteamKit2.GC.Dota.Internal
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgDOTALiveLeagueGameUpdate", Value=7402)]
       k_EMsgDOTALiveLeagueGameUpdate = 7402,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgDOTAChatGetUserList", Value=7403)]
+      k_EMsgDOTAChatGetUserList = 7403,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgDOTAChatGetUserListResponse", Value=7404)]
+      k_EMsgDOTAChatGetUserListResponse = 7404,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCCompendiumSetSelection", Value=7405)]
+      k_EMsgGCCompendiumSetSelection = 7405,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCCompendiumDataRequest", Value=7406)]
+      k_EMsgGCCompendiumDataRequest = 7406,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCCompendiumDataResponse", Value=7407)]
+      k_EMsgGCCompendiumDataResponse = 7407,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgDOTAGetPlayerMatchHistory", Value=7408)]
+      k_EMsgDOTAGetPlayerMatchHistory = 7408,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgDOTAGetPlayerMatchHistoryResponse", Value=7409)]
+      k_EMsgDOTAGetPlayerMatchHistoryResponse = 7409,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToServerPingRequest", Value=7416)]
+      k_EMsgGCToServerPingRequest = 7416,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToServerPingResponse", Value=7417)]
+      k_EMsgGCToServerPingResponse = 7417,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToServerConsoleCommand", Value=7418)]
+      k_EMsgGCToServerConsoleCommand = 7418,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCDev_GrantWarKill", Value=8001)]
       k_EMsgGCDev_GrantWarKill = 8001
