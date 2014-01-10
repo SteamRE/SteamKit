@@ -12,6 +12,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.IO.Compression;
 
 namespace SteamKit2.Internal
 {
@@ -375,7 +376,13 @@ namespace SteamKit2.Internal
             {
                 try
                 {
-                    payload = ZipUtil.Decompress( payload );
+                    using ( var compressedStream = new MemoryStream( payload ) )
+                    using ( var gzipStream = new GZipStream( compressedStream, CompressionMode.Decompress ) )
+                    using ( var decompressedStream = new MemoryStream() )
+                    {
+                        gzipStream.CopyTo( decompressedStream );
+                        payload = decompressedStream.ToArray();
+                    }
                 }
                 catch ( Exception ex )
                 {
