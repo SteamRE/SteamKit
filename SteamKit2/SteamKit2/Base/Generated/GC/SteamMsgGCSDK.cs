@@ -660,6 +660,15 @@ namespace SteamKit2.GC.Internal
       get { return _gc_type; }
       set { _gc_type = value; }
     }
+
+    private string _machine_name = "";
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"machine_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string machine_name
+    {
+      get { return _machine_name; }
+      set { _machine_name = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -689,6 +698,41 @@ namespace SteamKit2.GC.Internal
   {
     public CGCToGCMsgMasterStartupComplete() {}
     
+    private readonly global::System.Collections.Generic.List<CGCToGCMsgMasterStartupComplete.GCInfo> _gc_info = new global::System.Collections.Generic.List<CGCToGCMsgMasterStartupComplete.GCInfo>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"gc_info", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CGCToGCMsgMasterStartupComplete.GCInfo> gc_info
+    {
+      get { return _gc_info; }
+    }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"GCInfo")]
+  public partial class GCInfo : global::ProtoBuf.IExtensible
+  {
+    public GCInfo() {}
+    
+
+    private uint _dir_index = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"dir_index", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint dir_index
+    {
+      get { return _dir_index; }
+      set { _dir_index = value; }
+    }
+
+    private string _machine_name = "";
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"machine_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string machine_name
+    {
+      get { return _machine_name; }
+      set { _machine_name = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

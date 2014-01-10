@@ -5029,6 +5029,79 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAChatGetUserList")]
+  public partial class CMsgDOTAChatGetUserList : global::ProtoBuf.IExtensible
+  {
+    public CMsgDOTAChatGetUserList() {}
+    
+
+    private ulong _channel_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"channel_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong channel_id
+    {
+      get { return _channel_id; }
+      set { _channel_id = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAChatGetUserListResponse")]
+  public partial class CMsgDOTAChatGetUserListResponse : global::ProtoBuf.IExtensible
+  {
+    public CMsgDOTAChatGetUserListResponse() {}
+    
+
+    private ulong _channel_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"channel_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong channel_id
+    {
+      get { return _channel_id; }
+      set { _channel_id = value; }
+    }
+    private readonly global::System.Collections.Generic.List<CMsgDOTAChatGetUserListResponse.Member> _members = new global::System.Collections.Generic.List<CMsgDOTAChatGetUserListResponse.Member>();
+    [global::ProtoBuf.ProtoMember(2, Name=@"members", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CMsgDOTAChatGetUserListResponse.Member> members
+    {
+      get { return _members; }
+    }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Member")]
+  public partial class Member : global::ProtoBuf.IExtensible
+  {
+    public Member() {}
+    
+
+    private ulong _steam_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steam_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong steam_id
+    {
+      get { return _steam_id; }
+      set { _steam_id = value; }
+    }
+
+    private string _persona_name = "";
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"persona_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string persona_name
+    {
+      get { return _persona_name; }
+      set { _persona_name = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAGuildSDO")]
   public partial class CMsgDOTAGuildSDO : global::ProtoBuf.IExtensible
   {
@@ -8629,6 +8702,15 @@ namespace SteamKit2.GC.Dota.Internal
     {
       get { return _gameserver_sample; }
       set { _gameserver_sample = value; }
+    }
+
+    private bool _maintenance_alerts = default(bool);
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"maintenance_alerts", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool maintenance_alerts
+    {
+      get { return _maintenance_alerts; }
+      set { _maintenance_alerts = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

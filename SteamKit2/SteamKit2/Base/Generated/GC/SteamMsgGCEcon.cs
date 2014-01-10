@@ -333,6 +333,89 @@ namespace SteamKit2.GC.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCToGCGetUserSessionServer")]
+  public partial class CMsgGCToGCGetUserSessionServer : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCToGCGetUserSessionServer() {}
+    
+
+    private uint _account_id = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint account_id
+    {
+      get { return _account_id; }
+      set { _account_id = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCToGCGetUserSessionServerResponse")]
+  public partial class CMsgGCToGCGetUserSessionServerResponse : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCToGCGetUserSessionServerResponse() {}
+    
+
+    private ulong _server_steam_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"server_steam_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong server_steam_id
+    {
+      get { return _server_steam_id; }
+      set { _server_steam_id = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCToGCGetUserServerMembers")]
+  public partial class CMsgGCToGCGetUserServerMembers : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCToGCGetUserServerMembers() {}
+    
+
+    private uint _account_id = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint account_id
+    {
+      get { return _account_id; }
+      set { _account_id = value; }
+    }
+
+    private uint _max_spectators = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"max_spectators", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint max_spectators
+    {
+      get { return _max_spectators; }
+      set { _max_spectators = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCToGCGetUserServerMembersResponse")]
+  public partial class CMsgGCToGCGetUserServerMembersResponse : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCToGCGetUserServerMembersResponse() {}
+    
+    private readonly global::System.Collections.Generic.List<uint> _member_account_id = new global::System.Collections.Generic.List<uint>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"member_account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public global::System.Collections.Generic.List<uint> member_account_id
+    {
+      get { return _member_account_id; }
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     [global::ProtoBuf.ProtoContract(Name=@"EGCItemMsg", EnumPassthru=true)]
     public enum EGCItemMsg
     {
@@ -755,7 +838,19 @@ namespace SteamKit2.GC.Internal
       k_EMsgGCToGCPingRequest = 2539,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCPingResponse", Value=2540)]
-      k_EMsgGCToGCPingResponse = 2540
+      k_EMsgGCToGCPingResponse = 2540,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCGetUserSessionServer", Value=2541)]
+      k_EMsgGCToGCGetUserSessionServer = 2541,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCGetUserSessionServerResponse", Value=2542)]
+      k_EMsgGCToGCGetUserSessionServerResponse = 2542,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCGetUserServerMembers", Value=2543)]
+      k_EMsgGCToGCGetUserServerMembers = 2543,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCGetUserServerMembersResponse", Value=2544)]
+      k_EMsgGCToGCGetUserServerMembersResponse = 2544
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"EGCMsgResponse", EnumPassthru=true)]

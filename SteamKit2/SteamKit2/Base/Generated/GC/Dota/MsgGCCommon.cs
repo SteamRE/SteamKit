@@ -3149,9 +3149,6 @@ namespace SteamKit2.GC.Dota.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCRequestLeaguePrizePoolResponse", Value=7259)]
       k_EMsgGCRequestLeaguePrizePoolResponse = 7259,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCUpdateMatchmakingStats", Value=7260)]
-      k_EMsgGCToGCUpdateMatchmakingStats = 7260,
-            
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCUpdateOpenGuildPartyRequest", Value=7261)]
       k_EMsgGCToGCUpdateOpenGuildPartyRequest = 7261,
             
@@ -3580,6 +3577,24 @@ namespace SteamKit2.GC.Dota.Internal
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgDOTAGetPlayerMatchHistoryResponse", Value=7409)]
       k_EMsgDOTAGetPlayerMatchHistoryResponse = 7409,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCMatchmakingAddParty", Value=7410)]
+      k_EMsgGCToGCMatchmakingAddParty = 7410,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCMatchmakingRemoveParty", Value=7411)]
+      k_EMsgGCToGCMatchmakingRemoveParty = 7411,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCMatchmakingRemoveAllParties", Value=7412)]
+      k_EMsgGCToGCMatchmakingRemoveAllParties = 7412,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCMatchmakingMatchFound", Value=7413)]
+      k_EMsgGCToGCMatchmakingMatchFound = 7413,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCUpdateMatchManagementStats", Value=7414)]
+      k_EMsgGCToGCUpdateMatchManagementStats = 7414,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCUpdateMatchmakingStats", Value=7415)]
+      k_EMsgGCToGCUpdateMatchmakingStats = 7415,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToServerPingRequest", Value=7416)]
       k_EMsgGCToServerPingRequest = 7416,
