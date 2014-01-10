@@ -989,6 +989,20 @@ message CMsgDOTARequestChatChannelListResponse {
 	repeated .CMsgDOTARequestChatChannelListResponse.ChatChannel channels = 1;
 }
 
+message CMsgDOTAChatGetUserList {
+	optional fixed64 channel_id = 1;
+}
+
+message CMsgDOTAChatGetUserListResponse {
+	message Member {
+		optional fixed64 steam_id = 1;
+		optional string persona_name = 2;
+	}
+
+	optional fixed64 channel_id = 1;
+	repeated .CMsgDOTAChatGetUserListResponse.Member members = 2;
+}
+
 message CMsgDOTAGuildSDO {
 	message Member {
 		optional uint32 account_id = 1;
@@ -1641,6 +1655,7 @@ message CMsgDOTAMatchmakingStatsResponse {
 	repeated uint32 searching_players_by_group = 2;
 	optional uint32 disabled_groups = 3;
 	optional .CMsgMatchmakingGroupServerSample gameserver_sample = 4;
+	optional bool maintenance_alerts = 5;
 }
 
 message CMsgDOTASetMatchHistoryAccess {

@@ -141,6 +141,10 @@ enum EGCItemMsg {
 	k_EMsgGCRequestStoreSalesDataUpToDateResponse = 2538;
 	k_EMsgGCToGCPingRequest = 2539;
 	k_EMsgGCToGCPingResponse = 2540;
+	k_EMsgGCToGCGetUserSessionServer = 2541;
+	k_EMsgGCToGCGetUserSessionServerResponse = 2542;
+	k_EMsgGCToGCGetUserServerMembers = 2543;
+	k_EMsgGCToGCGetUserServerMembersResponse = 2544;
 }
 
 enum EGCMsgResponse {
@@ -244,5 +248,22 @@ message CMsgGCToGCPingRequest {
 }
 
 message CMsgGCToGCPingResponse {
+}
+
+message CMsgGCToGCGetUserSessionServer {
+	optional uint32 account_id = 1;
+}
+
+message CMsgGCToGCGetUserSessionServerResponse {
+	optional fixed64 server_steam_id = 1;
+}
+
+message CMsgGCToGCGetUserServerMembers {
+	optional uint32 account_id = 1;
+	optional uint32 max_spectators = 2;
+}
+
+message CMsgGCToGCGetUserServerMembersResponse {
+	repeated uint32 member_account_id = 1;
 }
 

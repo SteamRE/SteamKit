@@ -2569,6 +2569,7 @@ message CMsgClientVanityURLChangedNotification {
 message CMsgClientAuthorizeLocalDeviceRequest {
 	optional string device_description = 1;
 	optional uint32 owner_account_id = 2;
+	optional bool limited_only = 3;
 }
 
 message CMsgClientAuthorizeLocalDevice {

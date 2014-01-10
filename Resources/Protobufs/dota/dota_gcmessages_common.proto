@@ -207,7 +207,6 @@ enum EDOTAGCMsg {
 	k_EMsgGCPassportVoteSelection = 7257;
 	k_EMsgGCRequestLeaguePrizePool = 7258;
 	k_EMsgGCRequestLeaguePrizePoolResponse = 7259;
-	k_EMsgGCToGCUpdateMatchmakingStats = 7260;
 	k_EMsgGCToGCUpdateOpenGuildPartyRequest = 7261;
 	k_EMsgGCToGCUpdateOpenGuildPartyResponse = 7262;
 	k_EMsgGCToGCDestroyOpenGuildPartyRequest = 7263;
@@ -351,6 +350,12 @@ enum EDOTAGCMsg {
 	k_EMsgGCCompendiumDataResponse = 7407;
 	k_EMsgDOTAGetPlayerMatchHistory = 7408;
 	k_EMsgDOTAGetPlayerMatchHistoryResponse = 7409;
+	k_EMsgGCToGCMatchmakingAddParty = 7410;
+	k_EMsgGCToGCMatchmakingRemoveParty = 7411;
+	k_EMsgGCToGCMatchmakingRemoveAllParties = 7412;
+	k_EMsgGCToGCMatchmakingMatchFound = 7413;
+	k_EMsgGCToGCUpdateMatchManagementStats = 7414;
+	k_EMsgGCToGCUpdateMatchmakingStats = 7415;
 	k_EMsgGCToServerPingRequest = 7416;
 	k_EMsgGCToServerPingResponse = 7417;
 	k_EMsgGCToServerConsoleCommand = 7418;

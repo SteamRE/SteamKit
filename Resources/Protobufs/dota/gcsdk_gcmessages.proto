@@ -116,6 +116,7 @@ message CMsgGCMultiplexMessage {
 message CGCToGCMsgMasterAck {
 	optional uint32 dir_index = 1;
 	optional uint32 gc_type = 2;
+	optional string machine_name = 3;
 }
 
 message CGCToGCMsgMasterAck_Response {
@@ -123,6 +124,12 @@ message CGCToGCMsgMasterAck_Response {
 }
 
 message CGCToGCMsgMasterStartupComplete {
+	message GCInfo {
+		optional uint32 dir_index = 1;
+		optional string machine_name = 2;
+	}
+
+	repeated .CGCToGCMsgMasterStartupComplete.GCInfo gc_info = 1;
 }
 
 message CGCToGCMsgRouted {
