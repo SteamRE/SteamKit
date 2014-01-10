@@ -54,8 +54,7 @@ namespace SteamKit2
         {
             var msg = new ClientMsg<MsgClientGetNumberOfCurrentPlayersResponse>( packetMsg );
 
-            var innerCallback = new NumberOfPlayersCallback( msg.Body );
-            var callback = new SteamClient.JobCallback<NumberOfPlayersCallback>( msg.Header.TargetJobID, innerCallback );
+            var callback = new NumberOfPlayersCallback( msg.Header.TargetJobID, msg.Body );
             Client.PostCallback( callback );
         }
         #endregion

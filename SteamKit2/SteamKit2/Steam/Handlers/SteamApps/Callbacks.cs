@@ -157,8 +157,10 @@ namespace SteamKit2
             public byte[] Ticket { get; private set; }
 
 
-            internal AppOwnershipTicketCallback( CMsgClientGetAppOwnershipTicketResponse msg )
+            internal AppOwnershipTicketCallback( JobID jobID, CMsgClientGetAppOwnershipTicketResponse msg )
             {
+                this.JobID = jobID;
+
                 this.Result = ( EResult )msg.eresult;
                 this.AppID = msg.app_id;
                 this.Ticket = msg.ticket;
@@ -251,8 +253,10 @@ namespace SteamKit2
             public uint AppsPending { get; private set; }
 
 
-            internal AppInfoCallback( CMsgClientAppInfoResponse msg )
+            internal AppInfoCallback( JobID jobID, CMsgClientAppInfoResponse msg )
             {
+                JobID = jobID;
+
                 var list = new List<App>();
 
                 list.AddRange( msg.apps.Select( a => new App( a, App.AppInfoStatus.OK ) ) );
@@ -352,8 +356,10 @@ namespace SteamKit2
             public uint PackagesPending { get; private set; }
 
 
-            internal PackageInfoCallback( CMsgClientPackageInfoResponse msg )
+            internal PackageInfoCallback( JobID jobID, CMsgClientPackageInfoResponse msg )
             {
+                JobID = jobID;
+
                 var packages = new List<Package>();
 
                 packages.AddRange( msg.packages.Select( p => new Package( p, Package.PackageStatus.OK ) ) );
@@ -419,8 +425,10 @@ namespace SteamKit2
             public byte[] DepotKey { get; private set; }
 
 
-            internal DepotKeyCallback( CMsgClientGetDepotDecryptionKeyResponse msg )
+            internal DepotKeyCallback( JobID jobID, CMsgClientGetDepotDecryptionKeyResponse msg )
             {
+                JobID = jobID;
+
                 Result = ( EResult )msg.eresult;
                 DepotID = msg.depot_id;
                 DepotKey = msg.depot_encryption_key;
@@ -500,8 +508,10 @@ namespace SteamKit2
             public Dictionary<uint, ulong> AppTokens { get; private set; }
 
 
-            internal PICSTokensCallback( CMsgClientPICSAccessTokenResponse msg )
+            internal PICSTokensCallback( JobID jobID, CMsgClientPICSAccessTokenResponse msg )
             {
+                JobID = jobID;
+
                 PackageTokensDenied = new ReadOnlyCollection<uint>( msg.package_denied_tokens );
                 AppTokensDenied = new ReadOnlyCollection<uint>( msg.app_denied_tokens );
                 PackageTokens = new Dictionary<uint, ulong>();
@@ -579,8 +589,10 @@ namespace SteamKit2
             public Dictionary<uint, PICSChangeData> AppChanges { get; private set; }
 
 
-            internal PICSChangesCallback( CMsgClientPICSChangesSinceResponse msg )
+            internal PICSChangesCallback( JobID jobID, CMsgClientPICSChangesSinceResponse msg )
             {
+                JobID = jobID;
+
                 LastChangeNumber = msg.since_change_number;
                 CurrentChangeNumber = msg.current_change_number;
                 RequiresFullUpdate = msg.force_full_update;
@@ -722,8 +734,10 @@ namespace SteamKit2
             public Dictionary<uint, PICSProductInfo> Packages { get; private set; }
 
 
-            internal PICSProductInfoCallback( CMsgClientPICSProductInfoResponse msg )
+            internal PICSProductInfoCallback( JobID jobID, CMsgClientPICSProductInfoResponse msg )
             {
+                JobID = jobID;
+
                 MetaDataOnly = msg.meta_data_only;
                 ResponsePending = msg.response_pending;
                 UnknownPackages = new ReadOnlyCollection<uint>( msg.unknown_packageids );

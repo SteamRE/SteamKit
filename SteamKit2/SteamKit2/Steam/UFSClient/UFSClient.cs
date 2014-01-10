@@ -141,12 +141,12 @@ namespace SteamKit2
             public byte[] FileData { get; set; }
 
             /// <summary>
-            /// Gets or sets the JobID of this file upload. This value should be assigned from <see cref="UploadFileResponseCallback.JobID"/>.
+            /// Gets or sets the JobID of this file upload. This value should be assigned from <see cref="UploadFileResponseCallback.RemoteJobID"/>.
             /// </summary>
             /// <value>
             /// The job ID.
             /// </value>
-            public JobID JobID { get; set; }
+            public JobID RemoteJobID { get; set; }
         }
 
         /// <summary>
@@ -218,7 +218,7 @@ namespace SteamKit2
                 for ( long readIndex = 0; readIndex < ms.Length; readIndex += buffer.Length )
                 {
                     var msg = new ClientMsgProtobuf<CMsgClientUFSFileChunk>( EMsg.ClientUFSUploadFileChunk );
-                    msg.TargetJobID = details.JobID;
+                    msg.TargetJobID = details.RemoteJobID;
 
                     var bytesRead = ms.Read( buffer, 0, buffer.Length );
 
@@ -358,24 +358,21 @@ namespace SteamKit2
         {
             var loginResp = new ClientMsgProtobuf<CMsgClientUFSLoginResponse>( packetMsg );
 
-            var innerCallback = new LoggedOnCallback( loginResp.Body );
-            var callback = new SteamClient.JobCallback<LoggedOnCallback>( loginResp.TargetJobID, innerCallback );
+            var callback = new LoggedOnCallback( loginResp.TargetJobID, loginResp.Body);
             steamClient.PostCallback( callback );
         }
         void HandleUploadFileResponse( IPacketMsg packetMsg )
         {
             var uploadResp = new ClientMsgProtobuf<CMsgClientUFSUploadFileResponse>( packetMsg );
 
-            var innerCallback = new UploadFileResponseCallback( uploadResp.Body, uploadResp.SourceJobID );
-            var callback = new SteamClient.JobCallback<UploadFileResponseCallback>( uploadResp.TargetJobID, innerCallback );
+            var callback = new UploadFileResponseCallback( uploadResp.TargetJobID, uploadResp.Body, uploadResp.SourceJobID );
             steamClient.PostCallback( callback );
         }
         void HandleUploadFileFinished( IPacketMsg packetMsg )
         {
             var uploadFin = new ClientMsgProtobuf<CMsgClientUFSUploadFileFinished>( packetMsg );
             
-            var innerCallback = new UploadFileFinishedCallback(uploadFin.Body);
-            var callback = new SteamClient.JobCallback<UploadFileFinishedCallback>( uploadFin.TargetJobID, innerCallback );
+            var callback = new UploadFileFinishedCallback( uploadFin.TargetJobID, uploadFin.Body );
             steamClient.PostCallback( callback );
         }
         #endregion

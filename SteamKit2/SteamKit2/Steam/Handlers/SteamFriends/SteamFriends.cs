@@ -782,16 +782,14 @@ namespace SteamKit2
         {
             var response = new ClientMsg<MsgClientSetIgnoreFriendResponse>( packetMsg );
 
-            var innerCallback = new IgnoreFriendCallback( response.Body );
-            var callback = new SteamClient.JobCallback<IgnoreFriendCallback>( response.TargetJobID, innerCallback );
+            var callback = new IgnoreFriendCallback(response.TargetJobID, response.Body);
             this.Client.PostCallback( callback );
         }
         void HandleProfileInfoResponse( IPacketMsg packetMsg )
         {
             var response = new ClientMsgProtobuf<CMsgClientFriendProfileInfoResponse>( packetMsg );
 
-            var innerCallback = new ProfileInfoCallback( response.Body );
-            var callback = new SteamClient.JobCallback<ProfileInfoCallback>( packetMsg.TargetJobID, innerCallback );
+            var callback = new ProfileInfoCallback( packetMsg.TargetJobID, response.Body );
             Client.PostCallback( callback );
         }
         #endregion

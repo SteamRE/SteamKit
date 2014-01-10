@@ -132,10 +132,8 @@ namespace SteamKit2
         {
             var response = new ClientMsgProtobuf<CMsgClientServiceMethodResponse>( packetMsg );
 
-            var responseCallback = new ServiceMethodResponse( (EResult)response.ProtoHeader.eresult, response.Body );
-            var jobCallback = new SteamClient.JobCallback<ServiceMethodResponse>( response.TargetJobID, responseCallback );
-
-            Client.PostCallback( jobCallback );
+            var callback = new ServiceMethodResponse(response.TargetJobID, (EResult)response.ProtoHeader.eresult, response.Body);
+            Client.PostCallback( callback );
         }
 
         void HandleServiceMethod( IPacketMsg packetMsg )

@@ -18,8 +18,13 @@ namespace SteamKit2
         /// </summary>
         protected CallbackMsg()
         {
+            JobID = JobID.Invalid;
         }
 
+        /// <summary>
+        /// Gets or sets the job ID this callback refers to. If it is not a job callback, it will be <see cref="JobID.Invalid" />.
+        /// </summary>
+        public JobID JobID { get; set; }
 
         /// <summary>
         /// Determines whether this callback is a certain type.

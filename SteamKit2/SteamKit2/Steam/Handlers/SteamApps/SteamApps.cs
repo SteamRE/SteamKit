@@ -473,24 +473,21 @@ namespace SteamKit2
         {
             var ticketResponse = new ClientMsgProtobuf<CMsgClientGetAppOwnershipTicketResponse>( packetMsg );
 
-            var innerCallback = new AppOwnershipTicketCallback( ticketResponse.Body );
-            var callback = new SteamClient.JobCallback<AppOwnershipTicketCallback>( ticketResponse.TargetJobID, innerCallback );
+            var callback = new AppOwnershipTicketCallback(ticketResponse.TargetJobID, ticketResponse.Body);
             this.Client.PostCallback( callback );
         }
         void HandleAppInfoResponse( IPacketMsg packetMsg )
         {
             var infoResponse = new ClientMsgProtobuf<CMsgClientAppInfoResponse>( packetMsg );
 
-            var innerCallback = new AppInfoCallback( infoResponse.Body );
-            var callback = new SteamClient.JobCallback<AppInfoCallback>( infoResponse.TargetJobID, innerCallback );
+            var callback = new AppInfoCallback(infoResponse.TargetJobID, infoResponse.Body);
             this.Client.PostCallback( callback );
         }
         void HandlePackageInfoResponse( IPacketMsg packetMsg )
         {
             var response = new ClientMsgProtobuf<CMsgClientPackageInfoResponse>( packetMsg );
 
-            var innerCallback = new PackageInfoCallback( response.Body );
-            var callback = new SteamClient.JobCallback<PackageInfoCallback>( response.TargetJobID, innerCallback );
+            var callback = new PackageInfoCallback(response.TargetJobID, response.Body);
             this.Client.PostCallback( callback );
         }
         void HandleAppInfoChanges( IPacketMsg packetMsg )
@@ -504,8 +501,7 @@ namespace SteamKit2
         {
             var keyResponse = new ClientMsgProtobuf<CMsgClientGetDepotDecryptionKeyResponse>( packetMsg );
 
-            var innerCallback = new DepotKeyCallback( keyResponse.Body );
-            var callback = new SteamClient.JobCallback<DepotKeyCallback>( keyResponse.TargetJobID, innerCallback );
+            var callback = new DepotKeyCallback(keyResponse.TargetJobID, keyResponse.Body);
             this.Client.PostCallback( callback );
         }
         void HandleGameConnectTokens( IPacketMsg packetMsg )
@@ -533,24 +529,21 @@ namespace SteamKit2
         {
             var tokensResponse = new ClientMsgProtobuf<CMsgClientPICSAccessTokenResponse>( packetMsg );
 
-            var innerCallback = new PICSTokensCallback( tokensResponse.Body );
-            var callback = new SteamClient.JobCallback<PICSTokensCallback>( tokensResponse.TargetJobID, innerCallback );
+            var callback = new PICSTokensCallback(tokensResponse.TargetJobID, tokensResponse.Body);
             this.Client.PostCallback( callback );
         }
         void HandlePICSChangesSinceResponse( IPacketMsg packetMsg )
         {
             var changesResponse = new ClientMsgProtobuf<CMsgClientPICSChangesSinceResponse>( packetMsg );
 
-            var innerCallback = new PICSChangesCallback( changesResponse.Body );
-            var callback = new SteamClient.JobCallback<PICSChangesCallback>( changesResponse.TargetJobID, innerCallback );
+            var callback = new PICSChangesCallback( changesResponse.TargetJobID, changesResponse.Body );
             this.Client.PostCallback( callback );
         }
         void HandlePICSProductInfoResponse( IPacketMsg packetMsg )
         {
             var productResponse = new ClientMsgProtobuf<CMsgClientPICSProductInfoResponse>( packetMsg );
 
-            var innerCallback = new PICSProductInfoCallback( productResponse.Body );
-            var callback = new SteamClient.JobCallback<PICSProductInfoCallback>( productResponse.TargetJobID, innerCallback );
+            var callback = new PICSProductInfoCallback( productResponse.TargetJobID, productResponse.Body );
             this.Client.PostCallback( callback );
         }
         void HandleGuestPassList( IPacketMsg packetMsg )

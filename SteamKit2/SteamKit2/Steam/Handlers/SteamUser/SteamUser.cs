@@ -104,7 +104,7 @@ namespace SteamKit2
 
             /// <summary>
             /// Gets or sets the target Job ID for the request.
-            /// This is provided in the <see cref="SteamClient.JobCallback&lt;T&gt;"/> for a <see cref="UpdateMachineAuthCallback"/>.
+            /// This is provided in the <see cref="Callback&lt;T&gt;"/> for a <see cref="UpdateMachineAuthCallback"/>.
             /// </summary>
             /// <value>The Job ID.</value>
             public JobID JobID { get; set; }
@@ -387,8 +387,7 @@ namespace SteamKit2
         {
             var machineAuth = new ClientMsgProtobuf<CMsgClientUpdateMachineAuth>( packetMsg );
 
-            var innerCallback = new UpdateMachineAuthCallback( machineAuth.Body );
-            var callback = new SteamClient.JobCallback<UpdateMachineAuthCallback>( packetMsg.SourceJobID, innerCallback );
+            var callback = new UpdateMachineAuthCallback(packetMsg.SourceJobID, machineAuth.Body);
             Client.PostCallback( callback );
         }
         void HandleSessionToken( IPacketMsg packetMsg )
@@ -445,8 +444,7 @@ namespace SteamKit2
         {
             var userNonce = new ClientMsgProtobuf<CMsgClientRequestWebAPIAuthenticateUserNonceResponse>( packetMsg );
 
-            var innerCallback = new WebAPIUserNonceCallback( userNonce.Body );
-            var callback = new SteamClient.JobCallback<WebAPIUserNonceCallback>( userNonce.TargetJobID, innerCallback );
+            var callback = new WebAPIUserNonceCallback(userNonce.TargetJobID, userNonce.Body);
             this.Client.PostCallback( callback );
         }
         void HandleMarketingMessageUpdate( IPacketMsg packetMsg )

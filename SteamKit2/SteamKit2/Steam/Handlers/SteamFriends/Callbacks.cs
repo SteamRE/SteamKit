@@ -704,8 +704,10 @@ namespace SteamKit2
             public EResult Result { get; private set; }
 
 
-            internal IgnoreFriendCallback( MsgClientSetIgnoreFriendResponse response )
+            internal IgnoreFriendCallback( JobID jobID, MsgClientSetIgnoreFriendResponse response )
             {
+                this.JobID = jobID;
+
                 this.Result = response.Result;
             }
         }
@@ -765,8 +767,10 @@ namespace SteamKit2
             public TimeSpan RecentPlaytime { get; private set; }
 
 
-            internal ProfileInfoCallback( CMsgClientFriendProfileInfoResponse response )
+            internal ProfileInfoCallback( JobID jobID, CMsgClientFriendProfileInfoResponse response )
             {
+                JobID = jobID;
+
                 Result = ( EResult )response.eresult;
 
                 SteamID = response.steamid_friend;

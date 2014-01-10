@@ -98,8 +98,7 @@ namespace SteamKit2
         {
             var queryResponse = new ClientMsgProtobuf<CMsgGMSClientServerQueryResponse>( packetMsg );
 
-            var innerCallback = new QueryCallback( queryResponse.Body );
-            var callback = new SteamClient.JobCallback<QueryCallback>( queryResponse.TargetJobID, innerCallback );
+            var callback = new QueryCallback(queryResponse.TargetJobID, queryResponse.Body);
             Client.PostCallback( callback );
         }
         #endregion

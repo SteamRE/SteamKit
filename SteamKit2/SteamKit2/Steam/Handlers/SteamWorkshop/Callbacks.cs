@@ -170,8 +170,10 @@ namespace SteamKit2
             public int TotalResults { get; private set; }
 
 
-            internal PublishedFilesCallback( CMsgCREEnumeratePublishedFilesResponse msg )
+            internal PublishedFilesCallback( JobID jobID, CMsgCREEnumeratePublishedFilesResponse msg )
             {
+                this.JobID = jobID;
+
                 this.Result = ( EResult )msg.eresult;
 
                 var fileList = msg.published_files
@@ -223,8 +225,10 @@ namespace SteamKit2
             public int TotalResults { get; private set; }
 
 
-            internal UserPublishedFilesCallback( CMsgClientUCMEnumerateUserPublishedFilesResponse msg )
+            internal UserPublishedFilesCallback( JobID jobID, CMsgClientUCMEnumerateUserPublishedFilesResponse msg)
             {
+                this.JobID = jobID;
+
                 this.Result = ( EResult )msg.eresult;
 
                 var fileList = msg.published_files
@@ -283,8 +287,10 @@ namespace SteamKit2
             public int TotalResults { get; private set; }
 
 
-            internal UserSubscribedFilesCallback( CMsgClientUCMEnumerateUserSubscribedFilesResponse msg )
+            internal UserSubscribedFilesCallback( JobID jobID, CMsgClientUCMEnumerateUserSubscribedFilesResponse msg )
             {
+                this.JobID = jobID;
+
                 this.Result = ( EResult )msg.eresult;
 
                 var fileList = msg.subscribed_files
@@ -343,8 +349,10 @@ namespace SteamKit2
             public int TotalResults { get; private set; }
 
 
-            internal UserActionPublishedFilesCallback( CMsgClientUCMEnumeratePublishedFilesByUserActionResponse msg )
+            internal UserActionPublishedFilesCallback( JobID jobID, CMsgClientUCMEnumeratePublishedFilesByUserActionResponse msg )
             {
+                this.JobID = jobID;
+
                 this.Result = ( EResult )msg.eresult;
 
                 var fileList = msg.published_files

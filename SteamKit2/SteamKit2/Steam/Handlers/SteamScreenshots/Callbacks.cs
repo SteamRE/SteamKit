@@ -23,8 +23,10 @@ namespace SteamKit2
 			/// </summary>
 			public UGCHandle ScreenshotID { get; private set; }
 
-			internal ScreenshotAddedCallback( CMsgClientUCMAddScreenshotResponse msg )
+			internal ScreenshotAddedCallback( JobID jobID, CMsgClientUCMAddScreenshotResponse msg )
 			{
+				JobID = jobID;
+
 				Result = ( EResult )msg.eresult;
 				ScreenshotID = msg.screenshotid;
 			}

@@ -257,32 +257,28 @@ namespace SteamKit2
         {
             var response = new ClientMsgProtobuf<CMsgCREEnumeratePublishedFilesResponse>( packetMsg );
 
-            var innerCallback = new PublishedFilesCallback( response.Body );
-            var callback = new SteamClient.JobCallback<PublishedFilesCallback>( response.TargetJobID, innerCallback );
+            var callback = new PublishedFilesCallback(response.TargetJobID, response.Body);
             Client.PostCallback( callback );
         }
         void HandleEnumUserPublishedFiles( IPacketMsg packetMsg )
         {
             var response = new ClientMsgProtobuf<CMsgClientUCMEnumerateUserPublishedFilesResponse>( packetMsg );
 
-            var innerCallback = new UserPublishedFilesCallback( response.Body );
-            var callback = new SteamClient.JobCallback<UserPublishedFilesCallback>( response.TargetJobID, innerCallback );
+            var callback = new UserPublishedFilesCallback(response.TargetJobID, response.Body);
             Client.PostCallback( callback );
         }
         void HandleEnumUserSubscribedFiles( IPacketMsg packetMsg )
         {
             var response = new ClientMsgProtobuf<CMsgClientUCMEnumerateUserSubscribedFilesResponse>( packetMsg );
 
-            var innerCallback = new UserSubscribedFilesCallback( response.Body );
-            var callback = new SteamClient.JobCallback<UserSubscribedFilesCallback>( response.TargetJobID, innerCallback );
+            var callback = new UserSubscribedFilesCallback( response.TargetJobID, response.Body );
             Client.PostCallback( callback );
         }
         void HandleEnumPublishedFilesByAction( IPacketMsg packetMsg )
         {
             var response = new ClientMsgProtobuf<CMsgClientUCMEnumeratePublishedFilesByUserActionResponse>( packetMsg );
 
-            var innerCallback = new UserActionPublishedFilesCallback( response.Body );
-            var callback = new SteamClient.JobCallback<UserActionPublishedFilesCallback>( response.TargetJobID, innerCallback );
+            var callback = new UserActionPublishedFilesCallback(response.TargetJobID, response.Body);
             Client.PostCallback( callback );
         }
         #endregion

@@ -131,9 +131,7 @@ namespace SteamKit2
         {
             var resp = new ClientMsgProtobuf<CMsgClientUCMAddScreenshotResponse>( packetMsg );
 
-            var innerCallback = new ScreenshotAddedCallback( resp.Body );
-            var callback = new SteamClient.JobCallback<ScreenshotAddedCallback>( resp.TargetJobID, innerCallback );
-
+            var callback = new ScreenshotAddedCallback(resp.TargetJobID, resp.Body);
             Client.PostCallback( callback );
         }
         #endregion
