@@ -662,7 +662,7 @@ namespace SteamKit2.Internal
 		public EMsg GetEMsg() { return EMsg.ClientLogon; }
 
 		public static readonly uint ObfuscationMask = 0xBAADF00D;
-		public static readonly uint CurrentProtocol = 65575;
+		public static readonly uint CurrentProtocol = 65579;
 		public static readonly uint ProtocolVerMajorMask = 0xFFFF0000;
 		public static readonly uint ProtocolVerMinorMask = 0xFFFF;
 		public static readonly ushort ProtocolVerMinorMinGameServers = 4;
@@ -683,6 +683,7 @@ namespace SteamKit2.Internal
 		public static readonly ushort ProtocolVerMinorMinForMachineAuth = 33;
 		public static readonly ushort ProtocolVerMinorMinForSessionIDLastAnon = 36;
 		public static readonly ushort ProtocolVerMinorMinForEnhancedAppList = 40;
+		public static readonly ushort ProtocolVerMinorMinForGzipMultiMessages = 43;
 
 		public MsgClientLogon()
 		{
