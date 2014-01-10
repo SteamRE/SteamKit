@@ -12,9 +12,6 @@ class CZip
 public:
 	static bool Inflate( const uint8 *pCompressed, uint32 cubCompressed, uint8 *pDecompressed, uint32 cubDecompressed );
 
-private:
-	static bool InternalInflate( const uint8 *pCompressed, uint32 cubCompressed, uint8 *pDecompressed, uint32 cubDecompressed );
-
 };
 
 
