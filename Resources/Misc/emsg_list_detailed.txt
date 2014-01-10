@@ -3,7 +3,6 @@
 	k_EMsgServiceMethod = 146, // flags: 59, server type: -1
 	k_EMsgServiceMethodResponse = 147, // flags: 59, server type: -1
 	k_EMsgClientChatAction = 597, // flags: 2, server type: -1
-	k_EMsgCSUserContentRequest = 652, // flags: 2, server type: -1
 	k_EMsgClientLogOn_Deprecated = 701, // flags: 2, server type: -1
 	k_EMsgClientAnonLogOn_Deprecated = 702, // flags: 2, server type: -1
 	k_EMsgClientHeartBeat = 703, // flags: 2, server type: -1
@@ -65,8 +64,6 @@
 	k_EMsgClientCMList = 783, // flags: 2, server type: -1
 	k_EMsgClientEncryptPct = 784, // flags: 2, server type: -1
 	k_EMsgClientGetLegacyGameKeyResponse = 785, // flags: 2, server type: -1
-	k_EMsgCSUserContentApprove = 787, // flags: 2, server type: -1
-	k_EMsgCSUserContentDeny = 788, // flags: 2, server type: -1
 	k_EMsgClientAddFriend = 791, // flags: 2, server type: -1
 	k_EMsgClientAddFriendResponse = 792, // flags: 2, server type: -1
 	k_EMsgClientInviteFriend = 793, // flags: 2, server type: -1
@@ -204,8 +201,8 @@
 	k_EMsgClientIsLimitedAccount = 5430, // flags: 2, server type: -1
 	k_EMsgClientAuthList = 5432, // flags: 6, server type: 58
 	k_EMsgClientStat = 5433, // flags: 2, server type: -1
-	k_EMsgClientP2PConnectionInfo = 5434, // flags: 6, server type: 41
-	k_EMsgClientP2PConnectionFailInfo = 5435, // flags: 6, server type: 41
+	k_EMsgClientP2PConnectionInfo = 5434, // flags: 2, server type: -1
+	k_EMsgClientP2PConnectionFailInfo = 5435, // flags: 2, server type: -1
 	k_EMsgClientGetNumberOfCurrentPlayers = 5436, // flags: 2, server type: -1
 	k_EMsgClientGetNumberOfCurrentPlayersResponse = 5437, // flags: 2, server type: -1
 	k_EMsgClientGetDepotDecryptionKey = 5438, // flags: 2, server type: -1
@@ -504,4 +501,4 @@
 	k_EMsgClientUnlockStreaming = 9507, // flags: 2, server type: -1
 	k_EMsgClientUnlockStreamingResponse = 9508, // flags: 2, server type: -1
 	k_EMsgClientPlayingSessionState = 9600, // flags: 2, server type: -1
-	k_EMsgClientPlayingSessionKick = 9601, // flags: 2, server type: -1
+	k_EMsgClientKickPlayingSession = 9601, // flags: 2, server type: -1

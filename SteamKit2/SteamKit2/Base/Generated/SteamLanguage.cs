@@ -226,6 +226,7 @@ namespace SteamKit2
 		DRMEmptyGuidCache = 645,
 		DRMEmptyGuidCacheResponse = 646,
 		BaseCS = 650,
+		[Obsolete]
 		CSUserContentRequest = 652,
 		BaseClient = 700,
 		ClientLogOn_Deprecated = 701,
@@ -304,7 +305,9 @@ namespace SteamKit2
 		ClientEncryptPct = 784,
 		ClientGetLegacyGameKeyResponse = 785,
 		ClientFavoritesList = 786,
+		[Obsolete]
 		CSUserContentApprove = 787,
+		[Obsolete]
 		CSUserContentDeny = 788,
 		ClientInitPurchaseResponse = 789,
 		ClientAddFriend = 791,
@@ -1781,7 +1784,9 @@ namespace SteamKit2
 		ClientUnlockStreaming = 9507,
 		ClientUnlockStreamingResponse = 9508,
 		ClientPlayingSessionState = 9600,
+		[Obsolete( "renamed to ClientKickPlayingSession" )]
 		ClientPlayingSessionKick = 9601,
+		ClientKickPlayingSession = 9601,
 	}
 	public enum EResult
 	{

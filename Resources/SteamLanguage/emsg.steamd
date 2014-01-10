@@ -225,7 +225,7 @@ enum EMsg
 	DRMEmptyGuidCacheResponse = 646;
 	
 	BaseCS = 650;
-	CSUserContentRequest = 652;
+	CSUserContentRequest = 652; obsolete
 	
 	BaseClient = 700;
 	ClientLogOn_Deprecated = 701;
@@ -299,8 +299,8 @@ enum EMsg
 	ClientEncryptPct = 784;
 	ClientGetLegacyGameKeyResponse = 785;
 	ClientFavoritesList = 786;
-	CSUserContentApprove = 787;
-	CSUserContentDeny = 788;
+	CSUserContentApprove = 787; obsolete
+	CSUserContentDeny = 788; obsolete
 	ClientInitPurchaseResponse = 789;
 	ClientAddFriend = 791;
 	ClientAddFriendResponse = 792;
@@ -1796,6 +1796,7 @@ enum EMsg
 	ClientUnlockStreamingResponse = 9508;
 	
 	ClientPlayingSessionState = 9600;
-	ClientPlayingSessionKick = 9601;
+	ClientPlayingSessionKick = 9601; obsolete "renamed to ClientKickPlayingSession"
+	ClientKickPlayingSession = 9601;
 
 };
