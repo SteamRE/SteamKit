@@ -47,6 +47,8 @@ enum ECsgoGCMsg {
 	k_EMsgGCCStrike15_v2_TournamentMatchRewardDropsNotification = 9145;
 	k_EMsgGCCStrike15_v2_MatchListRequestTournamentGames = 9146;
 	k_EMsgGCCStrike15_v2_MatchListRequestFullGameInfo = 9147;
+	k_EMsgGCCStrike15_v2_GiftsLeaderboardRequest = 9148;
+	k_EMsgGCCStrike15_v2_GiftsLeaderboardResponse = 9149;
 }
 
 message GameServerPing {
@@ -551,5 +553,21 @@ message CMsgGCCStrike15_v2_ClientVarValueNotificationInfo {
 	optional int32 value_int = 2;
 	optional uint32 server_addr = 3;
 	optional uint32 server_port = 4;
+}
+
+message CMsgGCCStrike15_v2_GiftsLeaderboardRequest {
+}
+
+message CMsgGCCStrike15_v2_GiftsLeaderboardResponse {
+	message GiftLeaderboardEntry {
+		optional uint32 accountid = 1;
+		optional uint32 gifts = 2;
+	}
+
+	optional uint32 servertime = 1;
+	optional uint32 time_period_seconds = 2;
+	optional uint32 total_gifts_given = 3;
+	optional uint32 total_givers = 4;
+	repeated .CMsgGCCStrike15_v2_GiftsLeaderboardResponse.GiftLeaderboardEntry entries = 5;
 }
 

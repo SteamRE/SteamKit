@@ -28,7 +28,7 @@ enum EGCItemMsg {
 	k_EMsgGCCustomizeItemTextureResponse = 1024;
 	k_EMsgGCUseItemRequest = 1025;
 	k_EMsgGCUseItemResponse = 1026;
-	k_EMsgGCGiftedItems = 1027;
+	k_EMsgGCGiftedItems_DEPRECATED = 1027;
 	k_EMsgGCSpawnItem_DEPRECATED = 1028;
 	k_EMsgGCRespawnPostLoadoutChange = 1029;
 	k_EMsgGCRemoveItemName = 1030;
@@ -81,6 +81,7 @@ enum EGCItemMsg {
 	k_EMsgGCPaintKitItem = 1080;
 	k_EMsgGCPaintKitBaseItem = 1081;
 	k_EMsgGCPaintKitItemResponse = 1082;
+	k_EMsgGCGiftedItems = 1083;
 	k_EMsgGCTradingBase = 1500;
 	k_EMsgGCTrading_InitiateTradeRequest = 1501;
 	k_EMsgGCTrading_InitiateTradeResponse = 1502;
@@ -136,5 +137,13 @@ enum EGCMsgResponse {
 	k_EGCMsgResponseUnknownError = 6;
 	k_EGCMsgResponseNotLoggedOn = 7;
 	k_EGCMsgFailedToCreate = 8;
+}
+
+message CMsgGCGiftedItems {
+	optional uint32 accountid = 1;
+	optional uint32 giftdefindex = 2;
+	optional uint32 max_gifts_possible = 3;
+	optional uint32 num_eligible_recipients = 4;
+	repeated uint32 recipients_accountids = 5;
 }
 

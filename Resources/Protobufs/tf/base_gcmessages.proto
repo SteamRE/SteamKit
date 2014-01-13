@@ -451,3 +451,8 @@ message CMsgSetHatEffectUseHeadOrigin {
 	optional bool use_head = 2;
 }
 
+message CMsgDeliverGiftResponseGiver {
+	optional uint32 response_code = 1;
+	optional string receiver_account_name = 2;
+}
+
