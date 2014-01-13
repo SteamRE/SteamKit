@@ -65,6 +65,13 @@ message CParental_SetParentalSettings_Request {
 message CParental_SetParentalSettings_Response {
 }
 
+message CParental_ValidateToken_Request {
+	optional string unlock_token = 1;
+}
+
+message CParental_ValidateToken_Response {
+}
+
 message CParental_ValidatePassword_Request {
 	optional string password = 1;
 	optional string session = 2;
@@ -115,8 +122,11 @@ service Parental {
 	rpc SetParentalSettings (.CParental_SetParentalSettings_Request) returns (.CParental_SetParentalSettings_Response) {
 		option (method_description) = "Set the current parental settings for the logged in account";
 	}
+	rpc ValidateToken (.CParental_ValidateToken_Request) returns (.CParental_ValidateToken_Response) {
+		option (method_description) = "Check if the given parental unlock token is correct for the logged in account";
+	}
 	rpc ValidatePassword (.CParental_ValidatePassword_Request) returns (.CParental_ValidatePassword_Response) {
-		option (method_description) = "Check if the given parental password is correct for the logged in account";
+		option (method_description) = "Validate the plaintext password for the logged in account and return an unlock token";
 	}
 	rpc LockClient (.CParental_LockClient_Request) returns (.CParental_LockClient_Response) {
 		option (method_description) = "Notify connected clients that a lock has occurred in a browser";

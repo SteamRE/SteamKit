@@ -25,6 +25,7 @@ message CDeviceAuth_AcceptAuthorizationRequest_Request {
 	optional fixed64 steamid = 1;
 	optional fixed64 auth_device_token = 2;
 	optional fixed64 auth_code = 3;
+	optional fixed64 from_steamid = 4;
 }
 
 message CDeviceAuth_AcceptAuthorizationRequest_Response {
@@ -65,6 +66,7 @@ message CDeviceAuth_GetUsedAuthorizedDevices_Response {
 message CDeviceAuth_GetAuthorizedBorrowers_Request {
 	optional fixed64 steamid = 1;
 	optional bool include_canceled = 2;
+	optional bool include_pending = 3;
 }
 
 message CDeviceAuth_GetAuthorizedBorrowers_Response {

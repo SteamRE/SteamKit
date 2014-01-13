@@ -90,6 +90,7 @@ message CMsgClientLogon {
 	optional string machine_name_userchosen = 97;
 	optional string country_override = 98;
 	optional bool is_steam_box = 99;
+	optional uint64 client_instance_id = 100;
 }
 
 message CMsgClientLogonResponse {
@@ -113,6 +114,8 @@ message CMsgClientLogonResponse {
 	optional bytes parental_setting_signature = 23;
 	optional int32 count_loginfailures_to_migrate = 24;
 	optional int32 count_disconnects_to_migrate = 25;
+	optional int32 ogs_data_report_time_window = 26;
+	optional uint64 client_instance_id = 27;
 }
 
 message CMsgClientRequestWebAPIAuthenticateUserNonce {

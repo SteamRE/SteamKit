@@ -17,14 +17,19 @@ message CMsgRemoteClientBroadcastHeader {
 }
 
 message CMsgRemoteClientBroadcastStatus {
+	message User {
+		optional fixed64 steamid = 1;
+		optional uint32 auth_key_id = 2;
+	}
+
 	optional int32 version = 1;
 	optional int32 min_version = 2;
 	optional uint32 connect_port = 3;
 	optional string hostname = 4;
-	repeated fixed64 users = 5;
 	optional uint32 enabled_services = 6;
 	optional int32 ostype = 7 [default = 0];
 	optional bool is64bit = 8 [default = false];
+	repeated .CMsgRemoteClientBroadcastStatus.User users = 9;
 }
 
 message CMsgRemoteClientBroadcastDiscovery {
@@ -67,12 +72,15 @@ message CMsgRemoteClientStartStream {
 	optional int32 launch_option = 4 [default = -1];
 	optional bool lock_parental_lock = 5 [default = false];
 	optional string unlock_parental_lock = 6;
+	optional int32 maximum_resolution_x = 7;
+	optional int32 maximum_resolution_y = 8;
 }
 
 message CMsgRemoteClientStartStreamResponse {
 	optional int32 e_launch_result = 1 [default = 2];
 	optional uint32 stream_port = 2;
 	repeated int32 launch_options = 3;
+	optional string auth_token = 4;
 }
 
 message CMsgRemoteClientPing {
