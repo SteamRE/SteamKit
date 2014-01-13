@@ -50,6 +50,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CallbackManagerFacts.cs" />
     <Compile Include="CMClientFacts.cs" />
     <Compile Include="DebugLogFacts.cs" />
     <Compile Include="KeyValueFacts.cs" />
