@@ -3400,6 +3400,97 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCCStrike15_v2_GiftsLeaderboardRequest")]
+  public partial class CMsgGCCStrike15_v2_GiftsLeaderboardRequest : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCCStrike15_v2_GiftsLeaderboardRequest() {}
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCCStrike15_v2_GiftsLeaderboardResponse")]
+  public partial class CMsgGCCStrike15_v2_GiftsLeaderboardResponse : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCCStrike15_v2_GiftsLeaderboardResponse() {}
+    
+
+    private uint _servertime = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"servertime", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint servertime
+    {
+      get { return _servertime; }
+      set { _servertime = value; }
+    }
+
+    private uint _time_period_seconds = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"time_period_seconds", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint time_period_seconds
+    {
+      get { return _time_period_seconds; }
+      set { _time_period_seconds = value; }
+    }
+
+    private uint _total_gifts_given = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"total_gifts_given", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint total_gifts_given
+    {
+      get { return _total_gifts_given; }
+      set { _total_gifts_given = value; }
+    }
+
+    private uint _total_givers = default(uint);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"total_givers", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint total_givers
+    {
+      get { return _total_givers; }
+      set { _total_givers = value; }
+    }
+    private readonly global::System.Collections.Generic.List<CMsgGCCStrike15_v2_GiftsLeaderboardResponse.GiftLeaderboardEntry> _entries = new global::System.Collections.Generic.List<CMsgGCCStrike15_v2_GiftsLeaderboardResponse.GiftLeaderboardEntry>();
+    [global::ProtoBuf.ProtoMember(5, Name=@"entries", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CMsgGCCStrike15_v2_GiftsLeaderboardResponse.GiftLeaderboardEntry> entries
+    {
+      get { return _entries; }
+    }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"GiftLeaderboardEntry")]
+  public partial class GiftLeaderboardEntry : global::ProtoBuf.IExtensible
+  {
+    public GiftLeaderboardEntry() {}
+    
+
+    private uint _accountid = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"accountid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint accountid
+    {
+      get { return _accountid; }
+      set { _accountid = value; }
+    }
+
+    private uint _gifts = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"gifts", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint gifts
+    {
+      get { return _gifts; }
+      set { _gifts = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     [global::ProtoBuf.ProtoContract(Name=@"ECsgoGCMsg", EnumPassthru=true)]
     public enum ECsgoGCMsg
     {
@@ -3540,7 +3631,13 @@ namespace SteamKit2.GC.CSGO.Internal
       k_EMsgGCCStrike15_v2_MatchListRequestTournamentGames = 9146,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCCStrike15_v2_MatchListRequestFullGameInfo", Value=9147)]
-      k_EMsgGCCStrike15_v2_MatchListRequestFullGameInfo = 9147
+      k_EMsgGCCStrike15_v2_MatchListRequestFullGameInfo = 9147,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCCStrike15_v2_GiftsLeaderboardRequest", Value=9148)]
+      k_EMsgGCCStrike15_v2_GiftsLeaderboardRequest = 9148,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCCStrike15_v2_GiftsLeaderboardResponse", Value=9149)]
+      k_EMsgGCCStrike15_v2_GiftsLeaderboardResponse = 9149
     }
   
 }
