@@ -127,7 +127,7 @@ namespace Tests
                 PostAndRunCallback(jobCallback);
             }
 
-            Assert.False(didCall);
+            Assert.True(didCall);
         }
 
         [Fact]
