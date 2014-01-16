@@ -1872,6 +1872,8 @@ namespace SteamKit2
 		Disabled = 80,
 		InvalidCEGSubmission = 81,
 		RestrictedDevice = 82,
+		RegionLocked = 83,
+		RateLimitExceeded = 84,
 	}
 	public enum EUniverse
 	{
