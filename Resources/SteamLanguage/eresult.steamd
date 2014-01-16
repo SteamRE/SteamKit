@@ -83,4 +83,6 @@ enum EResult
 	Disabled = 80;
 	InvalidCEGSubmission = 81;
 	RestrictedDevice = 82;
+	RegionLocked = 83;
+	RateLimitExceeded = 84;
 };
