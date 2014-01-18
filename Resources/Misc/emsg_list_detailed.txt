@@ -193,7 +193,6 @@
 	k_EMsgClientLBSFindOrCreateLBResponse = 5417, // flags: 6, server type: 34
 	k_EMsgClientLBSGetLBEntries = 5418, // flags: 6, server type: 34
 	k_EMsgClientLBSGetLBEntriesResponse = 5419, // flags: 6, server type: 34
-	k_EMsgClientMarketingMessageUpdate = 5420, // flags: 2, server type: -1
 	k_EMsgClientChatDeclined = 5426, // flags: 2, server type: -1
 	k_EMsgClientFriendMsgIncoming = 5427, // flags: 2, server type: -1
 	k_EMsgClientAuthList_Deprecated = 5428, // flags: 2, server type: -1
@@ -498,7 +497,7 @@
 	k_EMsgClientEmoticonList = 9331, // flags: 2, server type: -1
 	k_EMsgClientSharedLibraryLockStatus = 9405, // flags: 2, server type: -1
 	k_EMsgClientSharedLibraryStopPlaying = 9406, // flags: 2, server type: -1
-	k_EMsgClientUnlockStreaming = 9507, // flags: 2, server type: -1
-	k_EMsgClientUnlockStreamingResponse = 9508, // flags: 2, server type: -1
+	k_EMsgClientUnlockStreaming = 9507, // flags: 59, server type: -1
+	k_EMsgClientUnlockStreamingResponse = 9508, // flags: 59, server type: -1
 	k_EMsgClientPlayingSessionState = 9600, // flags: 2, server type: -1
 	k_EMsgClientKickPlayingSession = 9601, // flags: 2, server type: -1
