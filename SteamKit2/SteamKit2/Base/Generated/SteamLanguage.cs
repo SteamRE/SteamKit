@@ -1208,6 +1208,7 @@ namespace SteamKit2
 		ClientLBSFindOrCreateLBResponse = 5417,
 		ClientLBSGetLBEntries = 5418,
 		ClientLBSGetLBEntriesResponse = 5419,
+		[Obsolete]
 		ClientMarketingMessageUpdate = 5420,
 		ClientChatDeclined = 5426,
 		ClientFriendMsgIncoming = 5427,
