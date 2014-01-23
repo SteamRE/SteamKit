@@ -29,8 +29,6 @@ enum EGCItemMsg {
 	k_EMsgGCUseItemRequest = 1025;
 	k_EMsgGCUseItemResponse = 1026;
 	k_EMsgGCGiftedItems_DEPRECATED = 1027;
-	k_EMsgGCSpawnItem_DEPRECATED = 1028;
-	k_EMsgGCRespawnPostLoadoutChange = 1029;
 	k_EMsgGCRemoveItemName = 1030;
 	k_EMsgGCRemoveItemPaint = 1031;
 	k_EMsgGCGiftWrapItem = 1032;
@@ -49,7 +47,6 @@ enum EGCItemMsg {
 	k_EMsgGCLookupAccountName = 1045;
 	k_EMsgGCLookupAccountNameResponse = 1046;
 	k_EMsgGCUpdateItemSchema = 1049;
-	k_EMsgGCRequestInventoryRefresh = 1050;
 	k_EMsgGCRemoveCustomTexture = 1051;
 	k_EMsgGCRemoveCustomTextureResponse = 1052;
 	k_EMsgGCRemoveMakersMark = 1053;
@@ -82,6 +79,8 @@ enum EGCItemMsg {
 	k_EMsgGCPaintKitBaseItem = 1081;
 	k_EMsgGCPaintKitItemResponse = 1082;
 	k_EMsgGCGiftedItems = 1083;
+	k_EMsgGCUnlockItemStyle = 1084;
+	k_EMsgGCUnlockItemStyleResponse = 1085;
 	k_EMsgGCTradingBase = 1500;
 	k_EMsgGCTrading_InitiateTradeRequest = 1501;
 	k_EMsgGCTrading_InitiateTradeResponse = 1502;
@@ -125,6 +124,19 @@ enum EGCItemMsg {
 	k_EMsgGCBannedWordListResponse = 2513;
 	k_EMsgGCToGCBannedWordListBroadcast = 2514;
 	k_EMsgGCToGCBannedWordListUpdated = 2515;
+	k_EMsgGCToGCDirtySDOCache = 2516;
+	k_EMsgGCToGCDirtyMultipleSDOCache = 2517;
+	k_EMsgGCToGCUpdateSQLKeyValue = 2518;
+	k_EMsgGCToGCIsTrustedServer = 2519;
+	k_EMsgGCToGCIsTrustedServerResponse = 2520;
+	k_EMsgGCToGCBroadcastConsoleCommand = 2521;
+	k_EMsgGCServerVersionUpdated = 2522;
+	k_EMsgGCApplyAutograph = 2523;
+	k_EMsgGCToGCWebAPIAccountChanged = 2524;
+	k_EMsgGCRequestAnnouncements = 2525;
+	k_EMsgGCRequestAnnouncementsResponse = 2526;
+	k_EMsgGCRequestPassportItemGrant = 2527;
+	k_EMsgGCClientVersionUpdated = 2528;
 }
 
 enum EGCMsgResponse {
@@ -139,11 +151,25 @@ enum EGCMsgResponse {
 	k_EGCMsgFailedToCreate = 8;
 }
 
+enum EUnlockStyle {
+	k_UnlockStyle_Succeeded = 0;
+	k_UnlockStyle_Failed_PreReq = 1;
+	k_UnlockStyle_Failed_CantAfford = 2;
+	k_UnlockStyle_Failed_CantCommit = 3;
+	k_UnlockStyle_Failed_CantLockCache = 4;
+	k_UnlockStyle_Failed_CantAffordAttrib = 5;
+}
+
 message CMsgGCGiftedItems {
 	optional uint32 accountid = 1;
 	optional uint32 giftdefindex = 2;
 	optional uint32 max_gifts_possible = 3;
 	optional uint32 num_eligible_recipients = 4;
 	repeated uint32 recipients_accountids = 5;
+}
+
+message CMsgApplyAutograph {
+	optional uint64 autograph_item_id = 1;
+	optional uint64 item_item_id = 2;
 }
 
