@@ -49,6 +49,9 @@ enum ECsgoGCMsg {
 	k_EMsgGCCStrike15_v2_MatchListRequestFullGameInfo = 9147;
 	k_EMsgGCCStrike15_v2_GiftsLeaderboardRequest = 9148;
 	k_EMsgGCCStrike15_v2_GiftsLeaderboardResponse = 9149;
+	k_EMsgGCCStrike15_v2_ServerVarValueNotificationInfo = 9150;
+	k_EMsgGCToGCReloadVersions = 9151;
+	k_EMsgGCCStrike15_v2_ClientSubmitSurveyVote = 9152;
 }
 
 message GameServerPing {
@@ -96,6 +99,7 @@ message GlobalStatistics {
 	optional uint32 pricesheet_version = 10;
 	optional uint32 twitch_streams_version = 11;
 	optional uint32 active_tournament_eventid = 12;
+	optional uint32 active_survey_id = 13;
 }
 
 message OperationalStatisticDescription {
@@ -316,6 +320,7 @@ message CMsgGCCStrike15_v2_MatchmakingGC2ClientHello {
 	repeated .TournamentTeam my_current_event_teams = 11;
 	optional .TournamentTeam my_current_team = 12;
 	repeated .TournamentEvent my_current_event_stages = 13;
+	optional uint32 survey_vote = 14;
 }
 
 message CMsgGCCStrike15_v2_MatchmakingGC2ClientAbandon {
@@ -548,11 +553,31 @@ message CMsgGCCStrike15_v2_MatchList {
 	repeated .TournamentTeam streams = 5;
 }
 
+message CAttribute_String {
+	optional string value = 1;
+}
+
+message CMsgGCToGCReloadVersions {
+}
+
+message CMsgCStrike15Welcome {
+	optional uint32 store_item_hash = 5;
+	optional uint32 timeplayedconsecutively = 6;
+	optional uint32 time_first_played = 10;
+	optional uint32 last_time_played = 12;
+	optional uint32 last_ip_address = 13;
+}
+
 message CMsgGCCStrike15_v2_ClientVarValueNotificationInfo {
 	optional string value_name = 1;
 	optional int32 value_int = 2;
 	optional uint32 server_addr = 3;
 	optional uint32 server_port = 4;
+}
+
+message CMsgGCCStrike15_v2_ServerVarValueNotificationInfo {
+	optional uint32 accountid = 1;
+	repeated uint32 viewangles = 2;
 }
 
 message CMsgGCCStrike15_v2_GiftsLeaderboardRequest {
@@ -569,5 +594,10 @@ message CMsgGCCStrike15_v2_GiftsLeaderboardResponse {
 	optional uint32 total_gifts_given = 3;
 	optional uint32 total_givers = 4;
 	repeated .CMsgGCCStrike15_v2_GiftsLeaderboardResponse.GiftLeaderboardEntry entries = 5;
+}
+
+message CMsgGCCStrike15_v2_ClientSubmitSurveyVote {
+	optional uint32 survey_id = 1;
+	optional uint32 vote = 2;
 }
 

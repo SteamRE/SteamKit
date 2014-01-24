@@ -4,13 +4,7 @@ enum EGCBaseMsg {
 	k_EMsgGCSystemMessage = 4001;
 	k_EMsgGCReplicateConVars = 4002;
 	k_EMsgGCConVarUpdated = 4003;
-	k_EMsgGCClientWelcome = 4004;
-	k_EMsgGCServerWelcome = 4005;
-	k_EMsgGCClientHello = 4006;
-	k_EMsgGCServerHello = 4007;
 	k_EMsgGCInQueue = 4008;
-	k_EMsgGCClientGoodbye = 4009;
-	k_EMsgGCServerGoodbye = 4010;
 	k_EMsgGCInviteToParty = 4501;
 	k_EMsgGCInvitationCreated = 4502;
 	k_EMsgGCPartyInviteResponse = 4503;
@@ -21,6 +15,7 @@ enum EGCBaseMsg {
 	k_EMsgGCGameServerInfo = 4508;
 	k_EMsgGCError = 4509;
 	k_EMsgGCReplay_UploadedToYouTube = 4510;
+	k_EMsgGCLANServerAvailable = 4511;
 }
 
 enum EGCBaseProtoObjectTypes {
@@ -37,6 +32,7 @@ message CGCStorePurchaseInit_LineItem {
 	optional uint32 item_def_id = 1;
 	optional uint32 quantity = 2;
 	optional uint32 cost_in_local_currency = 3;
+	optional uint32 purchase_type = 4;
 }
 
 message CMsgGCStorePurchaseInit {
@@ -67,36 +63,6 @@ message CMsgSystemBroadcast {
 	optional string message = 1;
 }
 
-message CMsgClientHello {
-	optional uint32 version = 1;
-}
-
-message CMsgServerHello {
-	optional uint32 version = 1;
-}
-
-message CMsgClientWelcome {
-	optional uint32 version = 1;
-	optional bytes game_data = 2;
-}
-
-message CMsgServerWelcome {
-	optional uint32 version = 1;
-}
-
-message CMsgClientGoodbye {
-}
-
-message CMsgServerGoodbye {
-}
-
-message CMsgInQueue {
-	optional int32 position = 1;
-	optional int32 queue_size = 2;
-	optional int32 wait_time = 3;
-	optional int32 estimated_time = 4;
-}
-
 message CMsgInviteToParty {
 	optional fixed64 steam_id = 1;
 	optional uint32 client_version = 2;
@@ -125,6 +91,10 @@ message CMsgLeaveParty {
 message CMsgServerAvailable {
 }
 
+message CMsgLANServerAvailable {
+	optional fixed64 lobby_id = 1;
+}
+
 message CSOEconGameAccountClient {
 	optional uint32 additional_backpack_slots = 1 [default = 0];
 	optional bool trial_account = 2 [default = false];
@@ -135,6 +105,7 @@ message CSOEconGameAccountClient {
 	optional fixed32 duel_ban_expiration = 7;
 	optional uint32 preview_item_def = 8 [default = 0];
 	optional bool made_first_purchase = 9 [default = false];
+	optional bool eligible_for_community_market = 10;
 }
 
 message CSOItemCriteriaCondition {
@@ -152,11 +123,11 @@ message CSOItemCriteria {
 	optional bool item_quality_set = 4;
 	optional uint32 initial_inventory = 5;
 	optional uint32 initial_quantity = 6;
-	optional bool forced_quality_match = 7;
 	optional bool ignore_enabled_flag = 8;
 	repeated .CSOItemCriteriaCondition conditions = 9;
 	optional int32 item_rarity = 10;
 	optional bool item_rarity_set = 11;
+	optional bool recent_only = 12;
 }
 
 message CSOItemRecipe {
@@ -212,6 +183,7 @@ message CMsgApplyEggEssence {
 message CSOEconItemAttribute {
 	optional uint32 def_index = 1;
 	optional uint32 value = 2;
+	optional bytes value_bytes = 3;
 }
 
 message CSOEconItemEquipped {
@@ -236,7 +208,6 @@ message CSOEconItem {
 	optional bool in_use = 14 [default = false];
 	optional uint32 style = 15 [default = 0];
 	optional uint64 original_id = 16 [default = 0];
-	optional bool contains_equipped_state = 17;
 	repeated .CSOEconItemEquipped equipped_state = 18;
 	optional uint32 rarity = 19;
 }
@@ -279,7 +250,8 @@ message CMsgStoreGetUserDataResponse {
 message CMsgUpdateItemSchema {
 	optional bytes items_game = 1;
 	optional fixed32 item_schema_version = 2;
-	optional string items_game_url = 3;
+	optional string items_game_url_DEPRECATED2013 = 3;
+	optional string items_game_url = 4;
 }
 
 message CMsgGCError {
@@ -426,23 +398,40 @@ message CSOEconItemEventTicket {
 	optional uint64 item_id = 3;
 }
 
-message CSOEconItemHalloweenEgg {
-	optional uint32 account_id = 1 [(key_field) = true];
-	optional uint64 item_id = 2 [(key_field) = true];
-	optional uint32 unusual_power = 3;
-	optional uint32 red_power = 4;
-	optional uint32 yellow_power = 5;
-	optional uint32 blue_power = 6;
-	optional uint32 orange_power = 7;
-	optional uint32 purple_power = 8;
-	optional uint32 green_power = 9;
-	optional uint32 black_power = 10;
-	optional uint32 skin = 11;
+message CMsgGCItemPreviewItemBoughtNotification {
+	optional uint32 item_def_index = 1;
+}
+
+message CMsgGCStorePurchaseCancel {
+	optional uint64 txn_id = 1;
+}
+
+message CMsgGCStorePurchaseCancelResponse {
+	optional uint32 result = 1;
+}
+
+message CMsgGCStorePurchaseFinalize {
+	optional uint64 txn_id = 1;
+}
+
+message CMsgGCStorePurchaseFinalizeResponse {
+	optional uint32 result = 1;
+	repeated uint64 item_ids = 2;
 }
 
 message CMsgGCBannedWordListRequest {
 	optional uint32 ban_list_group_id = 1;
 	optional uint32 word_id = 2;
+}
+
+message CMsgGCRequestAnnouncements {
+}
+
+message CMsgGCRequestAnnouncementsResponse {
+	optional string announcement_title = 1;
+	optional string announcement = 2;
+	optional string nextmatch_title = 3;
+	optional string nextmatch = 4;
 }
 
 message CMsgGCBannedWord {
@@ -469,5 +458,83 @@ message CSOEconDefaultEquippedDefinitionInstanceClient {
 	optional uint32 item_definition = 2;
 	optional uint32 class_id = 3 [(key_field) = true];
 	optional uint32 slot_id = 4 [(key_field) = true];
+}
+
+message CMsgGCToGCDirtySDOCache {
+	optional uint32 sdo_type = 1;
+	optional uint64 key_uint64 = 2;
+}
+
+message CMsgGCToGCDirtyMultipleSDOCache {
+	optional uint32 sdo_type = 1;
+	repeated uint64 key_uint64 = 2;
+}
+
+message CMsgGCCollectItem {
+	optional uint64 collection_item_id = 1;
+	optional uint64 subject_item_id = 2;
+}
+
+message CMsgSDONoMemcached {
+}
+
+message CMsgGCToGCUpdateSQLKeyValue {
+	optional string key_name = 1;
+}
+
+message CMsgGCToGCIsTrustedServer {
+	optional fixed64 steam_id = 1;
+}
+
+message CMsgGCToGCIsTrustedServerResponse {
+	optional bool is_trusted = 1;
+}
+
+message CMsgGCToGCBroadcastConsoleCommand {
+	optional string con_command = 1;
+}
+
+message CMsgGCServerVersionUpdated {
+	optional uint32 server_version = 1;
+}
+
+message CMsgGCClientVersionUpdated {
+	optional uint32 client_version = 1;
+}
+
+message CMsgGCToGCWebAPIAccountChanged {
+}
+
+message CMsgGCToGCRequestPassportItemGrant {
+	optional fixed64 steam_id = 1;
+	optional uint32 league_id = 2;
+	optional int32 reward_flag = 3;
+}
+
+message CMsgGameServerInfo {
+	enum ServerType {
+		UNSPECIFIED = 0;
+		GAME = 1;
+		PROXY = 2;
+	}
+
+	optional fixed32 server_public_ip_addr = 1;
+	optional fixed32 server_private_ip_addr = 2;
+	optional uint32 server_port = 3;
+	optional uint32 server_tv_port = 4;
+	optional string server_key = 5;
+	optional bool server_hibernation = 6;
+	optional .CMsgGameServerInfo.ServerType server_type = 7 [default = UNSPECIFIED];
+	optional uint32 server_region = 8;
+	optional float server_loadavg = 9;
+	optional float server_tv_broadcast_time = 10;
+	optional float server_game_time = 11;
+	optional fixed64 server_relay_connected_steam_id = 12;
+	optional uint32 relay_slots_max = 13;
+	optional int32 relays_connected = 14;
+	optional int32 relay_clients_connected = 15;
+	optional fixed64 relayed_game_server_steam_id = 16;
+	optional uint32 parent_relay_count = 17;
+	optional fixed64 tv_secret_code = 18;
 }
 

@@ -51,16 +51,29 @@ enum EGCSystemMsg {
 	k_EGCMsgMultiplexMsg = 97;
 	k_EGCMsgWebAPIRegisterInterfaces = 101;
 	k_EGCMsgWebAPIJobRequest = 102;
-	k_EGCMsgWebAPIRegistrationRequested = 103;
+	k_EGCMsgWebAPIJobRequestHttpResponse = 104;
+	k_EGCMsgWebAPIJobRequestForwardResponse = 105;
 	k_EGCMsgMemCachedGet = 200;
 	k_EGCMsgMemCachedGetResponse = 201;
 	k_EGCMsgMemCachedSet = 202;
 	k_EGCMsgMemCachedDelete = 203;
+	k_EGCMsgMemCachedStats = 204;
+	k_EGCMsgMemCachedStatsResponse = 205;
 	k_EGCMsgMasterSetDirectory = 220;
 	k_EGCMsgMasterSetDirectoryResponse = 221;
+	k_EGCMsgMasterSetWebAPIRouting = 222;
+	k_EGCMsgMasterSetWebAPIRoutingResponse = 223;
+	k_EGCMsgMasterSetClientMsgRouting = 224;
+	k_EGCMsgMasterSetClientMsgRoutingResponse = 225;
+	k_EGCMsgSetOptions = 226;
+	k_EGCMsgSetOptionsResponse = 227;
 	k_EGCMsgSystemBase2 = 500;
 	k_EGCMsgGetPurchaseTrustStatus = 501;
 	k_EGCMsgGetPurchaseTrustStatusResponse = 502;
+	k_EGCMsgUpdateSession = 503;
+	k_EGCMsgGCAccountVacStatusChange = 504;
+	k_EGCMsgCheckFriendship = 505;
+	k_EGCMsgCheckFriendshipResponse = 506;
 }
 
 enum ESOMsg {
@@ -74,6 +87,15 @@ enum ESOMsg {
 	k_ESOMsg_CacheSubscriptionRefresh = 28;
 }
 
+enum EGCBaseClientMsg {
+	k_EMsgGCClientWelcome = 4004;
+	k_EMsgGCServerWelcome = 4005;
+	k_EMsgGCClientHello = 4006;
+	k_EMsgGCServerHello = 4007;
+	k_EMsgGCClientConnectionStatus = 4009;
+	k_EMsgGCServerConnectionStatus = 4010;
+}
+
 enum EGCToGCMsg {
 	k_EGCToGCMsgMasterAck = 150;
 	k_EGCToGCMsgMasterAckResponse = 151;
@@ -82,5 +104,6 @@ enum EGCToGCMsg {
 	k_EMsgUpdateSessionIP = 154;
 	k_EMsgRequestSessionIP = 155;
 	k_EMsgRequestSessionIPResponse = 156;
+	k_EGCToGCMsgMasterStartupComplete = 157;
 }
 
