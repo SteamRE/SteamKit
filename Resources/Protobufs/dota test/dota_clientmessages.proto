@@ -24,6 +24,7 @@ enum EDotaClientMessages {
 	DOTA_CM_UpdateQuickBuy = 19;
 	DOTA_CM_UpdateCoachListen = 20;
 	DOTA_CM_CoachHUDPing = 21;
+	DOTA_CM_RecordVote = 22;
 }
 
 message CDOTAClientMsg_MapPing {
@@ -115,5 +116,9 @@ message CDOTAClientMsg_UpdateCoachListen {
 
 message CDOTAClientMsg_CoachHUDPing {
 	optional .CDOTAMsg_CoachHUDPing hud_ping = 1;
+}
+
+message CDOTAClientMsg_RecordVote {
+	optional int32 choice_index = 1;
 }
 

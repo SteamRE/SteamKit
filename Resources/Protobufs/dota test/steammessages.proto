@@ -346,6 +346,7 @@ message CGCSystemMsg_GetAccountDetails_Response {
 	optional uint32 accountid = 20;
 	optional uint32 suspension_end_time = 21;
 	optional string currency = 22;
+	optional uint32 steam_level = 23;
 }
 
 message CMsgGCGetPersonaNames {

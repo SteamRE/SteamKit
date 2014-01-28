@@ -57,6 +57,11 @@ enum EDotaUserMessages {
 	DOTA_UM_CustomMsg = 115;
 	DOTA_UM_CoachHUDPing = 116;
 	DOTA_UM_ClientLoadGridNav = 117;
+	DOTA_UM_AbilityPing = 118;
+	DOTA_UM_ShowGenericPopup = 119;
+	DOTA_UM_VoteStart = 120;
+	DOTA_UM_VoteUpdate = 121;
+	DOTA_UM_VoteEnd = 122;
 }
 
 enum DOTA_CHAT_MESSAGE {
@@ -144,7 +149,16 @@ enum DOTA_NO_BATTLE_POINTS_REASONS {
 }
 
 enum DOTA_CHAT_INFORMATIONAL {
-	COOP_BATTLE_POINTS_RULES = 1;
+	INFO_COOP_BATTLE_POINTS_RULES = 1;
+	INFO_FROSTIVUS_ABANDON_REMINDER = 2;
+	INFO_RANKED_REMINDER = 3;
+	INFO_COOP_LOW_PRIORITY_PASSIVE_REMINDER = 4;
+}
+
+enum DOTA_ABILITY_PING_TYPE {
+	ABILITY_PING_READY = 1;
+	ABILITY_PING_MANA = 2;
+	ABILITY_PING_COOLDOWN = 3;
 }
 
 enum DOTA_COMBATLOG_TYPES {
@@ -631,5 +645,36 @@ message CDOTAUserMsg_CoachHUDPing {
 }
 
 message CDOTAUserMsg_ClientLoadGridNav {
+}
+
+message CDOTAUserMsg_AbilityPing {
+	optional uint32 player_id = 1;
+	optional uint32 ability_id = 2;
+	optional .DOTA_ABILITY_PING_TYPE type = 3 [default = ABILITY_PING_READY];
+	optional uint32 cooldown_seconds = 4;
+}
+
+message CDOTAUserMsg_ShowGenericPopup {
+	required string header = 1;
+	required string body = 2;
+	optional string param1 = 3;
+	optional string param2 = 4;
+	optional bool tint_screen = 5;
+	optional bool show_no_other_dialogs = 6;
+}
+
+message CDOTAUserMsg_VoteStart {
+	optional string title = 1;
+	optional float duration = 2;
+	optional int32 choice_count = 3;
+	repeated string choices = 4;
+}
+
+message CDOTAUserMsg_VoteUpdate {
+	repeated int32 choice_counts = 1;
+}
+
+message CDOTAUserMsg_VoteEnd {
+	optional int32 selected_choice = 1;
 }
 
