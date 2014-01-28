@@ -47,10 +47,17 @@ message CMsgRemoteClientAppStatus {
 		optional int32 update_result = 7;
 	}
 
+	message ShortcutInfo {
+		optional string name = 1;
+		optional string icon = 2;
+		repeated string categories = 3;
+	}
+
 	message AppStatus {
 		optional uint32 app_id = 1;
 		optional uint32 app_state = 2;
 		optional .CMsgRemoteClientAppStatus.AppUpdateInfo update_info = 3;
+		optional .CMsgRemoteClientAppStatus.ShortcutInfo shortcut_info = 4;
 	}
 
 	repeated .CMsgRemoteClientAppStatus.AppStatus status_updates = 1;
@@ -80,7 +87,7 @@ message CMsgRemoteClientStartStreamResponse {
 	optional int32 e_launch_result = 1 [default = 2];
 	optional uint32 stream_port = 2;
 	repeated int32 launch_options = 3;
-	optional string auth_token = 4;
+	optional bytes auth_token = 4;
 }
 
 message CMsgRemoteClientPing {
@@ -91,5 +98,16 @@ message CMsgRemoteClientPingResponse {
 
 message CMsgRemoteClientAcceptEULA {
 	repeated uint32 app_id = 1;
+}
+
+message CMsgRemoteClientGetControllerConfig {
+	optional uint32 app_id = 1;
+	optional int32 window_type = 2;
+	optional uint32 controller_index = 3;
+}
+
+message CMsgRemoteClientGetControllerConfigResponse {
+	optional int32 eresult = 1 [default = 2];
+	optional bytes config_vdf = 2;
 }
 

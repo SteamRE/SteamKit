@@ -115,8 +115,9 @@ message CMsgGCMultiplexMessage {
 
 message CGCToGCMsgMasterAck {
 	optional uint32 dir_index = 1;
-	optional uint32 gc_type = 2;
 	optional string machine_name = 3;
+	optional string process_name = 4;
+	repeated uint32 type_instances = 5;
 }
 
 message CGCToGCMsgMasterAck_Response {
