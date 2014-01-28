@@ -1202,7 +1202,7 @@ enum EMsg
 	ClientLBSFindOrCreateLBResponse = 5417;
 	ClientLBSGetLBEntries = 5418;
 	ClientLBSGetLBEntriesResponse = 5419;
-	ClientMarketingMessageUpdate = 5420;
+	ClientMarketingMessageUpdate = 5420; obsolete
 	ClientChatDeclined = 5426;
 	ClientFriendMsgIncoming = 5427;
 	ClientAuthList_Deprecated = 5428;
