@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Runtime.InteropServices;
-using System.IO;
 
 namespace ProtobufDumper
 {
@@ -34,10 +29,6 @@ namespace ProtobufDumper
             {
                 Console.WriteLine( "Unable to process file: {0}", ex.Message );
                 Environment.ExitCode = -1;
-            }
-            finally
-            {
-                imgFile.Unload();
             }
         }
     }
