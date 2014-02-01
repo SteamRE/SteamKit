@@ -430,178 +430,6 @@ namespace SteamKit2.GC.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgAccountDetails")]
-  public partial class CMsgAccountDetails : global::ProtoBuf.IExtensible
-  {
-    public CMsgAccountDetails() {}
-    
-
-    private bool _valid = default(bool);
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"valid", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
-    public bool valid
-    {
-      get { return _valid; }
-      set { _valid = value; }
-    }
-
-    private string _account_name = "";
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"account_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
-    public string account_name
-    {
-      get { return _account_name; }
-      set { _account_name = value; }
-    }
-
-    private bool _public_profile = default(bool);
-    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"public_profile", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
-    public bool public_profile
-    {
-      get { return _public_profile; }
-      set { _public_profile = value; }
-    }
-
-    private bool _public_inventory = default(bool);
-    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"public_inventory", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
-    public bool public_inventory
-    {
-      get { return _public_inventory; }
-      set { _public_inventory = value; }
-    }
-
-    private bool _vac_banned = default(bool);
-    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"vac_banned", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
-    public bool vac_banned
-    {
-      get { return _vac_banned; }
-      set { _vac_banned = value; }
-    }
-
-    private bool _cyber_cafe = default(bool);
-    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"cyber_cafe", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
-    public bool cyber_cafe
-    {
-      get { return _cyber_cafe; }
-      set { _cyber_cafe = value; }
-    }
-
-    private bool _school_account = default(bool);
-    [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"school_account", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
-    public bool school_account
-    {
-      get { return _school_account; }
-      set { _school_account = value; }
-    }
-
-    private bool _free_trial_account = default(bool);
-    [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"free_trial_account", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
-    public bool free_trial_account
-    {
-      get { return _free_trial_account; }
-      set { _free_trial_account = value; }
-    }
-
-    private bool _subscribed = default(bool);
-    [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"subscribed", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
-    public bool subscribed
-    {
-      get { return _subscribed; }
-      set { _subscribed = value; }
-    }
-
-    private bool _low_violence = default(bool);
-    [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"low_violence", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
-    public bool low_violence
-    {
-      get { return _low_violence; }
-      set { _low_violence = value; }
-    }
-
-    private bool _limited = default(bool);
-    [global::ProtoBuf.ProtoMember(12, IsRequired = false, Name=@"limited", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
-    public bool limited
-    {
-      get { return _limited; }
-      set { _limited = value; }
-    }
-
-    private bool _trusted = default(bool);
-    [global::ProtoBuf.ProtoMember(13, IsRequired = false, Name=@"trusted", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
-    public bool trusted
-    {
-      get { return _trusted; }
-      set { _trusted = value; }
-    }
-
-    private uint _package = default(uint);
-    [global::ProtoBuf.ProtoMember(14, IsRequired = false, Name=@"package", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint package
-    {
-      get { return _package; }
-      set { _package = value; }
-    }
-
-    private uint _time_cached = default(uint);
-    [global::ProtoBuf.ProtoMember(15, IsRequired = false, Name=@"time_cached", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint time_cached
-    {
-      get { return _time_cached; }
-      set { _time_cached = value; }
-    }
-
-    private bool _account_locked = default(bool);
-    [global::ProtoBuf.ProtoMember(16, IsRequired = false, Name=@"account_locked", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
-    public bool account_locked
-    {
-      get { return _account_locked; }
-      set { _account_locked = value; }
-    }
-
-    private bool _community_banned = default(bool);
-    [global::ProtoBuf.ProtoMember(17, IsRequired = false, Name=@"community_banned", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
-    public bool community_banned
-    {
-      get { return _community_banned; }
-      set { _community_banned = value; }
-    }
-
-    private bool _trade_banned = default(bool);
-    [global::ProtoBuf.ProtoMember(18, IsRequired = false, Name=@"trade_banned", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
-    public bool trade_banned
-    {
-      get { return _trade_banned; }
-      set { _trade_banned = value; }
-    }
-
-    private bool _eligible_for_community_market = default(bool);
-    [global::ProtoBuf.ProtoMember(19, IsRequired = false, Name=@"eligible_for_community_market", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
-    public bool eligible_for_community_market
-    {
-      get { return _eligible_for_community_market; }
-      set { _eligible_for_community_market = value; }
-    }
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCMultiplexMessage")]
   public partial class CMsgGCMultiplexMessage : global::ProtoBuf.IExtensible
   {
@@ -652,15 +480,6 @@ namespace SteamKit2.GC.Internal
       set { _dir_index = value; }
     }
 
-    private uint _gc_type = default(uint);
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"gc_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint gc_type
-    {
-      get { return _gc_type; }
-      set { _gc_type = value; }
-    }
-
     private string _machine_name = "";
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"machine_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
     [global::System.ComponentModel.DefaultValue("")]
@@ -669,6 +488,22 @@ namespace SteamKit2.GC.Internal
       get { return _machine_name; }
       set { _machine_name = value; }
     }
+
+    private string _process_name = "";
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"process_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string process_name
+    {
+      get { return _process_name; }
+      set { _process_name = value; }
+    }
+    private readonly global::System.Collections.Generic.List<uint> _type_instances = new global::System.Collections.Generic.List<uint>();
+    [global::ProtoBuf.ProtoMember(5, Name=@"type_instances", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public global::System.Collections.Generic.List<uint> type_instances
+    {
+      get { return _type_instances; }
+    }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -1058,6 +893,15 @@ namespace SteamKit2.GC.Internal
     {
       get { return _location; }
       set { _location = value; }
+    }
+
+    private byte[] _save_game_key = null;
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"save_game_key", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public byte[] save_game_key
+    {
+      get { return _save_game_key; }
+      set { _save_game_key = value; }
     }
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Location")]
   public partial class Location : global::ProtoBuf.IExtensible

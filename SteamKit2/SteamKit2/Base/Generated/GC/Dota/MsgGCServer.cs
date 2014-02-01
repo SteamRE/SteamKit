@@ -1081,6 +1081,41 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _leagueid; }
       set { _leagueid = value; }
     }
+    private readonly global::System.Collections.Generic.List<CMsgGameMatchSignoutResponse.CAdditionalSignoutMsg> _additional_msgs = new global::System.Collections.Generic.List<CMsgGameMatchSignoutResponse.CAdditionalSignoutMsg>();
+    [global::ProtoBuf.ProtoMember(6, Name=@"additional_msgs", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CMsgGameMatchSignoutResponse.CAdditionalSignoutMsg> additional_msgs
+    {
+      get { return _additional_msgs; }
+    }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CAdditionalSignoutMsg")]
+  public partial class CAdditionalSignoutMsg : global::ProtoBuf.IExtensible
+  {
+    public CAdditionalSignoutMsg() {}
+    
+
+    private uint _id = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint id
+    {
+      get { return _id; }
+      set { _id = value; }
+    }
+
+    private byte[] _contents = null;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"contents", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public byte[] contents
+    {
+      get { return _contents; }
+      set { _contents = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -2257,14 +2292,14 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAAwardFrostivusPoints")]
-  public partial class CMsgDOTAAwardFrostivusPoints : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAAwardEventPoints")]
+  public partial class CMsgDOTAAwardEventPoints : global::ProtoBuf.IExtensible
   {
-    public CMsgDOTAAwardFrostivusPoints() {}
+    public CMsgDOTAAwardEventPoints() {}
     
-    private readonly global::System.Collections.Generic.List<CMsgDOTAAwardFrostivusPoints.AwardPoints> _award_points = new global::System.Collections.Generic.List<CMsgDOTAAwardFrostivusPoints.AwardPoints>();
+    private readonly global::System.Collections.Generic.List<CMsgDOTAAwardEventPoints.AwardPoints> _award_points = new global::System.Collections.Generic.List<CMsgDOTAAwardEventPoints.AwardPoints>();
     [global::ProtoBuf.ProtoMember(1, Name=@"award_points", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public global::System.Collections.Generic.List<CMsgDOTAAwardFrostivusPoints.AwardPoints> award_points
+    public global::System.Collections.Generic.List<CMsgDOTAAwardEventPoints.AwardPoints> award_points
     {
       get { return _award_points; }
     }
@@ -2279,40 +2314,13 @@ namespace SteamKit2.GC.Dota.Internal
       set { _match_id = value; }
     }
 
-    private bool _match_reset = default(bool);
-    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"match_reset", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
-    public bool match_reset
-    {
-      get { return _match_reset; }
-      set { _match_reset = value; }
-    }
-
-    private uint _round_number = default(uint);
-    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"round_number", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    private uint _event_id = default(uint);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"event_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint round_number
+    public uint event_id
     {
-      get { return _round_number; }
-      set { _round_number = value; }
-    }
-
-    private uint _best_difficulty = default(uint);
-    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"best_difficulty", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint best_difficulty
-    {
-      get { return _best_difficulty; }
-      set { _best_difficulty = value; }
-    }
-
-    private uint _best_round_number = default(uint);
-    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"best_round_number", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint best_round_number
-    {
-      get { return _best_round_number; }
-      set { _best_round_number = value; }
+      get { return _event_id; }
+      set { _event_id = value; }
     }
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"AwardPoints")]
   public partial class AwardPoints : global::ProtoBuf.IExtensible
@@ -2329,19 +2337,19 @@ namespace SteamKit2.GC.Dota.Internal
       set { _account_id = value; }
     }
 
-    private uint _points = default(uint);
+    private int _points = default(int);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"points", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint points
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int points
     {
       get { return _points; }
       set { _points = value; }
     }
 
-    private uint _premium_points = default(uint);
+    private int _premium_points = default(int);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"premium_points", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint premium_points
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int premium_points
     {
       get { return _premium_points; }
       set { _premium_points = value; }

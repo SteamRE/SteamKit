@@ -2080,6 +2080,15 @@ namespace SteamKit2.GC.Internal
       get { return _currency; }
       set { _currency = value; }
     }
+
+    private uint _steam_level = default(uint);
+    [global::ProtoBuf.ProtoMember(23, IsRequired = false, Name=@"steam_level", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint steam_level
+    {
+      get { return _steam_level; }
+      set { _steam_level = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

@@ -496,15 +496,6 @@ namespace SteamKit2.GC.Internal
       get { return _made_first_purchase; }
       set { _made_first_purchase = value; }
     }
-
-    private bool _eligible_for_community_market = default(bool);
-    [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"eligible_for_community_market", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
-    public bool eligible_for_community_market
-    {
-      get { return _eligible_for_community_market; }
-      set { _eligible_for_community_market = value; }
-    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
