@@ -149,11 +149,17 @@ message CMsgGameMatchSignOut {
 }
 
 message CMsgGameMatchSignoutResponse {
+	message CAdditionalSignoutMsg {
+		optional uint32 id = 1;
+		optional bytes contents = 2;
+	}
+
 	optional uint32 match_id = 1;
 	optional fixed32 replay_salt = 2;
 	repeated .CLobbyTimedRewardDetails timed_reward_details = 3;
 	repeated .CDOTALobbyMember xp_reward_details = 4;
 	optional uint32 leagueid = 5;
+	repeated .CMsgGameMatchSignoutResponse.CAdditionalSignoutMsg additional_msgs = 6;
 }
 
 message CMsgGameMatchSignOutPermissionRequest {
@@ -347,19 +353,16 @@ message CMsgDOTADiretidePrizesRewardedResponse {
 	optional uint32 prize_list = 1;
 }
 
-message CMsgDOTAAwardFrostivusPoints {
+message CMsgDOTAAwardEventPoints {
 	message AwardPoints {
 		optional uint32 account_id = 1;
-		optional uint32 points = 2;
-		optional uint32 premium_points = 3;
+		optional int32 points = 2;
+		optional int32 premium_points = 3;
 	}
 
-	repeated .CMsgDOTAAwardFrostivusPoints.AwardPoints award_points = 1;
+	repeated .CMsgDOTAAwardEventPoints.AwardPoints award_points = 1;
 	optional uint64 match_id = 2;
-	optional bool match_reset = 3;
-	optional uint32 round_number = 4;
-	optional uint32 best_difficulty = 5;
-	optional uint32 best_round_number = 6;
+	optional uint32 event_id = 4;
 }
 
 message CMsgDOTAFrostivusTimeElapsed {

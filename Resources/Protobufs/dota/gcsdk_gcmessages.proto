@@ -86,27 +86,6 @@ message CMsgSOCacheVersion {
 	optional fixed64 version = 1;
 }
 
-message CMsgAccountDetails {
-	optional bool valid = 1;
-	optional string account_name = 2;
-	optional bool public_profile = 4;
-	optional bool public_inventory = 5;
-	optional bool vac_banned = 6;
-	optional bool cyber_cafe = 7;
-	optional bool school_account = 8;
-	optional bool free_trial_account = 9;
-	optional bool subscribed = 10;
-	optional bool low_violence = 11;
-	optional bool limited = 12;
-	optional bool trusted = 13;
-	optional uint32 package = 14;
-	optional fixed32 time_cached = 15;
-	optional bool account_locked = 16;
-	optional bool community_banned = 17;
-	optional bool trade_banned = 18;
-	optional bool eligible_for_community_market = 19;
-}
-
 message CMsgGCMultiplexMessage {
 	optional uint32 msgtype = 1;
 	optional bytes payload = 2;
@@ -193,6 +172,7 @@ message CMsgClientWelcome {
 	repeated .CMsgSOCacheSubscribed outofdate_subscribed_caches = 3;
 	repeated .CMsgSOCacheSubscriptionCheck uptodate_subscribed_caches = 4;
 	optional .CMsgClientWelcome.Location location = 5;
+	optional bytes save_game_key = 6;
 }
 
 message CMsgConnectionStatus {
