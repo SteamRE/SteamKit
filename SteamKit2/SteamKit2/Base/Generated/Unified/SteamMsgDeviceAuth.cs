@@ -172,6 +172,15 @@ namespace SteamKit2.Unified.Internal
       get { return _auth_code; }
       set { _auth_code = value; }
     }
+
+    private ulong _from_steamid = default(ulong);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"from_steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong from_steamid
+    {
+      get { return _from_steamid; }
+      set { _from_steamid = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -376,6 +385,15 @@ namespace SteamKit2.Unified.Internal
     {
       get { return _include_canceled; }
       set { _include_canceled = value; }
+    }
+
+    private bool _include_pending = default(bool);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"include_pending", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool include_pending
+    {
+      get { return _include_pending; }
+      set { _include_pending = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

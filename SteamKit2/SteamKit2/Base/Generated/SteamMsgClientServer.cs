@@ -501,6 +501,15 @@ namespace SteamKit2.Internal
       set { _password = value; }
     }
 
+    private string _game_server_token = "";
+    [global::ProtoBuf.ProtoMember(52, IsRequired = false, Name=@"game_server_token", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string game_server_token
+    {
+      get { return _game_server_token; }
+      set { _game_server_token = value; }
+    }
+
     private string _login_key = "";
     [global::ProtoBuf.ProtoMember(60, IsRequired = false, Name=@"login_key", DataFormat = global::ProtoBuf.DataFormat.Default)]
     [global::System.ComponentModel.DefaultValue("")]
@@ -688,6 +697,15 @@ namespace SteamKit2.Internal
     {
       get { return _is_steam_box; }
       set { _is_steam_box = value; }
+    }
+
+    private ulong _client_instance_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(100, IsRequired = false, Name=@"client_instance_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong client_instance_id
+    {
+      get { return _client_instance_id; }
+      set { _client_instance_id = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -878,6 +896,24 @@ namespace SteamKit2.Internal
     {
       get { return _count_disconnects_to_migrate; }
       set { _count_disconnects_to_migrate = value; }
+    }
+
+    private int _ogs_data_report_time_window = default(int);
+    [global::ProtoBuf.ProtoMember(26, IsRequired = false, Name=@"ogs_data_report_time_window", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int ogs_data_report_time_window
+    {
+      get { return _ogs_data_report_time_window; }
+      set { _ogs_data_report_time_window = value; }
+    }
+
+    private ulong _client_instance_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(27, IsRequired = false, Name=@"client_instance_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong client_instance_id
+    {
+      get { return _client_instance_id; }
+      set { _client_instance_id = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -16151,6 +16187,15 @@ namespace SteamKit2.Internal
     {
       get { return _owner_account_id; }
       set { _owner_account_id = value; }
+    }
+
+    private bool _limited_only = default(bool);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"limited_only", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool limited_only
+    {
+      get { return _limited_only; }
+      set { _limited_only = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

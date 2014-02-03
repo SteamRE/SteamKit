@@ -381,6 +381,35 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CParental_ValidateToken_Request")]
+  public partial class CParental_ValidateToken_Request : global::ProtoBuf.IExtensible
+  {
+    public CParental_ValidateToken_Request() {}
+    
+
+    private string _unlock_token = "";
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"unlock_token", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string unlock_token
+    {
+      get { return _unlock_token; }
+      set { _unlock_token = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CParental_ValidateToken_Response")]
+  public partial class CParental_ValidateToken_Response : global::ProtoBuf.IExtensible
+  {
+    public CParental_ValidateToken_Response() {}
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CParental_ValidatePassword_Request")]
   public partial class CParental_ValidatePassword_Request : global::ProtoBuf.IExtensible
   {
@@ -566,6 +595,7 @@ namespace SteamKit2.Unified.Internal
     CParental_GetParentalSettings_Response GetParentalSettings(CParental_GetParentalSettings_Request request);
     CParental_GetSignedParentalSettings_Response GetSignedParentalSettings(CParental_GetSignedParentalSettings_Request request);
     CParental_SetParentalSettings_Response SetParentalSettings(CParental_SetParentalSettings_Request request);
+    CParental_ValidateToken_Response ValidateToken(CParental_ValidateToken_Request request);
     CParental_ValidatePassword_Response ValidatePassword(CParental_ValidatePassword_Request request);
     CParental_LockClient_Response LockClient(CParental_LockClient_Request request);
     
