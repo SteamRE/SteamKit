@@ -194,20 +194,21 @@ enum EFrameAccumulatedStat {
 	k_EFrameStatFPS = 0;
 	k_EFrameStatCaptureDurationMS = 1;
 	k_EFrameStatEncodeDurationMS = 2;
-	k_EFrameStatServerDurationMS = 3;
-	k_EFrameStatNetworkDurationMS = 4;
-	k_EFrameStatDecodeDurationMS = 5;
-	k_EFrameStatDisplayDurationMS = 6;
-	k_EFrameStatClientDurationMS = 7;
-	k_EFrameStatFrameDurationMS = 8;
-	k_EFrameStatInputLatencyMS = 9;
-	k_EFrameStatGameLatencyMS = 10;
-	k_EFrameStatRoundTripLatencyMS = 11;
-	k_EFrameStatPingTimeMS = 12;
-	k_EFrameStatServerBitrateKbitPerSec = 13;
-	k_EFrameStatClientBitrateKbitPerSec = 14;
-	k_EFrameStatLinkBandwidthKbitPerSec = 15;
-	k_EFrameStatPacketLossPercentage = 16;
+	k_EFrameStatSteamDurationMS = 3;
+	k_EFrameStatServerDurationMS = 4;
+	k_EFrameStatNetworkDurationMS = 5;
+	k_EFrameStatDecodeDurationMS = 6;
+	k_EFrameStatDisplayDurationMS = 7;
+	k_EFrameStatClientDurationMS = 8;
+	k_EFrameStatFrameDurationMS = 9;
+	k_EFrameStatInputLatencyMS = 10;
+	k_EFrameStatGameLatencyMS = 11;
+	k_EFrameStatRoundTripLatencyMS = 12;
+	k_EFrameStatPingTimeMS = 13;
+	k_EFrameStatServerBitrateKbitPerSec = 14;
+	k_EFrameStatClientBitrateKbitPerSec = 15;
+	k_EFrameStatLinkBandwidthKbitPerSec = 16;
+	k_EFrameStatPacketLossPercentage = 17;
 }
 
 message CDiscoveryRequest {

@@ -69,6 +69,7 @@ message CMsgClientLogon {
 	optional fixed32 rtime32_account_creation = 43;
 	optional string account_name = 50;
 	optional string password = 51;
+	optional string game_server_token = 52;
 	optional string login_key = 60;
 	optional bool was_converted_deprecated_msg = 70 [default = false];
 	optional string anon_user_target_account_name = 80;
