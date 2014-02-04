@@ -102,10 +102,11 @@ namespace ProtobufDumper
         unsafe void ScanFile(byte* dataPtr, int rawDataLength)
         {
             byte* endPtr = dataPtr + rawDataLength;
+            char marker = '\n';
 
             while (dataPtr < endPtr)
             {
-                if (*dataPtr == 0x0A)
+                if (*dataPtr == marker)
                 {
                     byte* originalPtr = dataPtr;
                     int nullskiplevel = 0;
@@ -145,6 +146,11 @@ namespace ProtobufDumper
                     }
 
                     string protoName = Encoding.ASCII.GetString(data, 2, strLen);
+                    if (protoName.Contains(marker))
+                    {
+                        dataPtr = originalPtr + 1;
+                        continue;
+                    }
 
                     if (!protoName.EndsWith(".proto", StringComparison.Ordinal))
                     {
