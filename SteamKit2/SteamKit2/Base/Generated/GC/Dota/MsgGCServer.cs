@@ -2354,6 +2354,15 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _premium_points; }
       set { _premium_points = value; }
     }
+
+    private int _rank = default(int);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"rank", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int rank
+    {
+      get { return _rank; }
+      set { _rank = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

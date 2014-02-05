@@ -53,6 +53,15 @@ namespace SteamKit2.GC.Internal
       get { return _purchase_type; }
       set { _purchase_type = value; }
     }
+
+    private ulong _source_reference_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"source_reference_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong source_reference_id
+    {
+      get { return _source_reference_id; }
+      set { _source_reference_id = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
