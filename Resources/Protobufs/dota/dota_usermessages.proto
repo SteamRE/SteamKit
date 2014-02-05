@@ -62,6 +62,8 @@ enum EDotaUserMessages {
 	DOTA_UM_VoteStart = 120;
 	DOTA_UM_VoteUpdate = 121;
 	DOTA_UM_VoteEnd = 122;
+	DOTA_UM_BoosterState = 123;
+	DOTA_UM_WillPurchaseAlert = 124;
 }
 
 enum DOTA_CHAT_MESSAGE {
@@ -299,6 +301,11 @@ message CDOTAUserMsg_LocationPing {
 message CDOTAUserMsg_ItemAlert {
 	optional uint32 player_id = 1;
 	optional .CDOTAMsg_ItemAlert item_alert = 2;
+}
+
+message CDOTAUserMsg_WillPurchaseAlert {
+	optional int32 itemid = 1;
+	optional int32 player_id = 2;
 }
 
 message CDOTAUserMsg_MinimapEvent {
@@ -676,5 +683,15 @@ message CDOTAUserMsg_VoteUpdate {
 
 message CDOTAUserMsg_VoteEnd {
 	optional int32 selected_choice = 1;
+}
+
+message CDOTAUserMsg_BoosterStatePlayer {
+	optional uint32 player_id = 1;
+	optional float bonus = 2;
+	optional float event_bonus = 3;
+}
+
+message CDOTAUserMsg_BoosterState {
+	repeated .CDOTAUserMsg_BoosterStatePlayer boosted_players = 1;
 }
 

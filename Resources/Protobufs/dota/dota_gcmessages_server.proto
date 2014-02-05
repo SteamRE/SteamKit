@@ -358,6 +358,7 @@ message CMsgDOTAAwardEventPoints {
 		optional uint32 account_id = 1;
 		optional int32 points = 2;
 		optional int32 premium_points = 3;
+		optional int32 rank = 4;
 	}
 
 	repeated .CMsgDOTAAwardEventPoints.AwardPoints award_points = 1;
