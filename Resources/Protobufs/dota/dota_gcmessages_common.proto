@@ -812,6 +812,8 @@ message CSODOTALobbyInternal {
 	repeated .CDOTALobbyMemberPrivate members = 9;
 	repeated .CDOTALobbyMemberPrivate left_members = 10;
 	optional bytes save_game_data = 11;
+	optional uint32 server_run_time = 12;
+	optional uint32 last_state_change_time = 13;
 }
 
 message CMsgDOTAGenericResult {

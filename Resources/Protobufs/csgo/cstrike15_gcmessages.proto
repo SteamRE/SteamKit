@@ -52,6 +52,8 @@ enum ECsgoGCMsg {
 	k_EMsgGCCStrike15_v2_ServerVarValueNotificationInfo = 9150;
 	k_EMsgGCToGCReloadVersions = 9151;
 	k_EMsgGCCStrike15_v2_ClientSubmitSurveyVote = 9152;
+	k_EMsgGCCStrike15_v2_Server2GCClientValidate = 9153;
+	k_EMsgGCCStrike15_v2_MatchListRequestLiveGameForUser = 9154;
 }
 
 message GameServerPing {
@@ -524,6 +526,10 @@ message CMsgGCCStrike15_v2_TournamentMatchRewardDropsNotification {
 message CMsgGCCStrike15_v2_MatchListRequestCurrentLiveGames {
 }
 
+message CMsgGCCStrike15_v2_MatchListRequestLiveGameForUser {
+	optional uint32 accountid = 1;
+}
+
 message CMsgGCCStrike15_v2_MatchListRequestRecentUserGames {
 	optional uint32 accountid = 1;
 }
@@ -599,5 +605,9 @@ message CMsgGCCStrike15_v2_GiftsLeaderboardResponse {
 message CMsgGCCStrike15_v2_ClientSubmitSurveyVote {
 	optional uint32 survey_id = 1;
 	optional uint32 vote = 2;
+}
+
+message CMsgGCCStrike15_v2_Server2GCClientValidate {
+	optional uint32 accountid = 1;
 }
 

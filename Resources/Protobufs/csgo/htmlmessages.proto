@@ -41,10 +41,16 @@ message CMsgMouseMove {
 	optional int32 y = 3;
 }
 
+message CMsgMouseLeave {
+	optional uint32 browser_handle = 1;
+}
+
 message CMsgBrowserCreate {
 	optional uint32 request_id = 1;
 	optional bool popup = 2 [default = false];
 	optional string useragent = 3;
+	optional bool webkit_scrollbars = 4 [default = false];
+	optional string user_css = 5;
 }
 
 message CMsgBrowserCreateResponse {
@@ -83,6 +89,7 @@ message CMsgPostURL {
 	optional uint32 browser_handle = 1;
 	optional string url = 2;
 	optional string post = 3;
+	optional uint32 pageserial = 4;
 }
 
 message CMsgAddHeader {
@@ -104,6 +111,10 @@ message CMsgGoForward {
 }
 
 message CMsgGoBack {
+	optional uint32 browser_handle = 1;
+}
+
+message CMsgClearHistory {
 	optional uint32 browser_handle = 1;
 }
 
@@ -197,6 +208,7 @@ message CMsgURLChanged {
 	optional string postData = 3;
 	optional bool bIsRedirect = 4;
 	optional string pagetitle = 5;
+	optional bool bNewNavigation = 6;
 }
 
 message CHTMLHeader {
@@ -294,7 +306,7 @@ message CMsgStatusText {
 message CMsgSetCursor {
 	optional uint32 browser_handle = 1;
 	optional uint32 cursor = 2;
-	optional uint32 data = 3;
+	optional bytes custom_data = 3;
 	optional uint32 wide = 4;
 	optional uint32 tall = 5;
 	optional uint32 xhotspot = 6;
@@ -351,6 +363,7 @@ message CMsgNeedsPaint {
 	optional uint64 combobox_rgba = 12 [default = 0];
 	optional uint32 combobox_wide = 13 [default = 0];
 	optional uint32 combobox_tall = 14 [default = 0];
+	optional uint32 pageserial = 15;
 }
 
 message CMsgNeedsPaintResponse {
@@ -378,6 +391,7 @@ message CMsgLinkAtPositionResponse {
 	optional uint32 x = 2;
 	optional uint32 y = 3;
 	optional string url = 4;
+	optional bool blivelink = 5;
 	optional bool binput = 6;
 }
 
@@ -385,10 +399,6 @@ message CMsgZoomToElementAtPosition {
 	optional uint32 browser_handle = 1;
 	optional uint32 x = 2;
 	optional uint32 y = 3;
-	optional uint32 max_width = 4;
-	optional uint32 max_height = 5;
-	optional uint32 min_block_width = 6;
-	optional uint32 min_block_height = 7;
 }
 
 message CMsgZoomToElementAtPositionResponse {
@@ -404,12 +414,32 @@ message CMsgZoomToElementAtPositionResponse {
 	optional float zoom = 10;
 }
 
+message CMsgScalePageToValue {
+	optional uint32 browser_handle = 1;
+	optional float scale = 2;
+	optional float x = 3;
+	optional float y = 4;
+}
+
+message CMsgScalePageToValueResponse {
+	optional uint32 browser_handle = 1;
+	optional float zoom = 2;
+	optional int32 width_delta = 3;
+	optional int32 height_delta = 4;
+}
+
 message CMsgSavePageToJPEG {
 	optional uint32 browser_handle = 1;
 	optional string url = 2;
 	optional string filename = 3;
 	optional uint32 width = 4;
 	optional uint32 height = 5;
+}
+
+message CMsgSavePageToJPEGResponse {
+	optional uint32 browser_handle = 1;
+	optional string url = 2;
+	optional string filename = 3;
 }
 
 message CMsgJSAlert {
@@ -443,6 +473,7 @@ message CMsgSetCookie {
 	optional string value = 2;
 	optional string path = 3;
 	optional string host = 4;
+	optional uint32 expires = 5;
 }
 
 message CMsgSetTargetFrameRate {
@@ -464,5 +495,56 @@ message CMsgRequestFullScreenResponse {
 
 message CMsgExitFullScreen {
 	optional uint32 browser_handle = 1;
+}
+
+message CMsgGetCookiesForURL {
+	optional uint32 browser_handle = 1;
+	optional string url = 2;
+}
+
+message CCookie {
+	optional string name = 1;
+	optional string value = 2;
+	optional string domain = 3;
+	optional string path = 4;
+}
+
+message CMsgGetCookiesForURLResponse {
+	optional uint32 browser_handle = 1;
+	optional string url = 2;
+	repeated .CCookie cookies = 3;
+}
+
+message CMsgNodeHasFocus {
+	optional uint32 browser_handle = 1;
+	optional bool bInput = 2;
+	optional string name = 3;
+	optional string elementtagname = 4;
+	optional string searchbuttontext = 5;
+	optional bool bHasMultipleInputs = 6;
+	optional string input_type = 7;
+}
+
+message CMsgZoomToFocusedElement {
+	optional uint32 browser_handle = 1;
+	optional uint32 leftoffset = 2 [default = 0];
+	optional uint32 topoffset = 3 [default = 0];
+}
+
+message CMsgCloseFullScreenFlashIfOpen {
+	optional uint32 browser_handle = 1;
+}
+
+message CMsgPauseFullScreenFlashMovieIfOpen {
+	optional uint32 browser_handle = 1;
+}
+
+message CMsgFocusedNodeText {
+	optional uint32 browser_handle = 1;
+}
+
+message CMsgFocusedNodeTextResponse {
+	optional uint32 browser_handle = 1;
+	optional string value = 2;
 }
 

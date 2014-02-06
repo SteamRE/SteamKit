@@ -81,6 +81,7 @@ enum EGCItemMsg {
 	k_EMsgGCGiftedItems = 1083;
 	k_EMsgGCUnlockItemStyle = 1084;
 	k_EMsgGCUnlockItemStyleResponse = 1085;
+	k_EMsgGCApplySticker = 1086;
 	k_EMsgGCTradingBase = 1500;
 	k_EMsgGCTrading_InitiateTradeRequest = 1501;
 	k_EMsgGCTrading_InitiateTradeResponse = 1502;
