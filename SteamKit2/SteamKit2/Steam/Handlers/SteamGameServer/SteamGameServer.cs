@@ -19,14 +19,9 @@ namespace SteamKit2
         public sealed class LogOnDetails
         {
             /// <summary>
-            /// Gets or sets the username.
+            /// Gets or sets the authentication token used to log in as a game server.
             /// </summary>
-            public string Username { get; set; }
-
-            /// <summary>
-            /// Gets or sets the password.
-            /// </summary>
-            public string Password { get; set; }
+            public string Token { get; set; }
 
             /// <summary>
             /// Gets or sets the AppID this gameserver will serve.
@@ -55,9 +50,9 @@ namespace SteamKit2
                 throw new ArgumentNullException( "details" );
             }
 
-            if ( string.IsNullOrEmpty( details.Username ) || string.IsNullOrEmpty( details.Password ) )
+            if ( string.IsNullOrEmpty( details.Token ) )
             {
-                throw new ArgumentException( "LogOn requires a username and password to be set in 'details'." );
+                throw new ArgumentException( "LogOn requires a game server token to be set in 'details'." );
             }
 
             var logon = new ClientMsgProtobuf<CMsgClientLogon>( EMsg.ClientLogonGameServer );
@@ -76,8 +71,7 @@ namespace SteamKit2
             logon.Body.game_server_app_id = ( int )details.AppID;
             logon.Body.machine_id = Utils.GenerateMachineID();
 
-            logon.Body.account_name = details.Username;
-            logon.Body.password = details.Password;
+            logon.Body.game_server_token = details.Token;
 
             this.Client.Send( logon );
         }
