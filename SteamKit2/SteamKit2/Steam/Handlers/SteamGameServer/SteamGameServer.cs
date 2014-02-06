@@ -60,7 +60,7 @@ namespace SteamKit2
                 throw new ArgumentException( "LogOn requires a username and password to be set in 'details'." );
             }
 
-            var logon = new ClientMsgProtobuf<CMsgClientLogon>( EMsg.ClientLogon );
+            var logon = new ClientMsgProtobuf<CMsgClientLogon>( EMsg.ClientLogonGameServer );
 
             SteamID gsId = new SteamID( 0, 0, Client.ConnectedUniverse, EAccountType.GameServer );
 
@@ -90,7 +90,7 @@ namespace SteamKit2
         /// <param name="appId">The AppID served by this game server, or 0 for the default.</param>
         public void LogOnAnonymous( uint appId = 0 )
         {
-            var logon = new ClientMsgProtobuf<CMsgClientLogon>( EMsg.ClientLogon );
+            var logon = new ClientMsgProtobuf<CMsgClientLogon>( EMsg.ClientLogonGameServer );
 
             SteamID gsId = new SteamID( 0, 0, Client.ConnectedUniverse, EAccountType.AnonGameServer );
 
