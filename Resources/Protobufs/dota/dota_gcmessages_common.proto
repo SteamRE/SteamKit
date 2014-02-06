@@ -366,6 +366,7 @@ enum EDOTAGCMsg {
 	k_EMsgGCMakeOffering = 7423;
 	k_EMsgGCRequestOfferings = 7424;
 	k_EMsgGCRequestOfferingsResponse = 7425;
+	k_EMsgGCToGCProcessMatchLeaver = 7426;
 	k_EMsgGCDev_GrantWarKill = 8001;
 }
 
@@ -798,6 +799,7 @@ message CSODOTALobby {
 	optional bool low_priority = 61;
 	repeated .CSODOTALobby.CExtraMsg extra_messages = 62;
 	optional .CDOTASaveGame save_game = 63;
+	optional uint32 custom_game_id = 64;
 }
 
 message CSODOTALobbyInternal {

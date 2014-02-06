@@ -338,6 +338,15 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _lobby_type; }
       set { _lobby_type = value; }
     }
+
+    private uint _custom_game_id = default(uint);
+    [global::ProtoBuf.ProtoMember(23, IsRequired = false, Name=@"custom_game_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint custom_game_id
+    {
+      get { return _custom_game_id; }
+      set { _custom_game_id = value; }
+    }
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Player")]
   public partial class Player : global::ProtoBuf.IExtensible
   {
@@ -466,22 +475,13 @@ namespace SteamKit2.GC.Dota.Internal
       set { _team_game = value; }
     }
 
-    private bool _diretide = default(bool);
-    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"diretide", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
-    public bool diretide
+    private uint _custom_game_id = default(uint);
+    [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"custom_game_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint custom_game_id
     {
-      get { return _diretide; }
-      set { _diretide = value; }
-    }
-
-    private bool _xmas = default(bool);
-    [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"xmas", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
-    public bool xmas
-    {
-      get { return _xmas; }
-      set { _xmas = value; }
+      get { return _custom_game_id; }
+      set { _custom_game_id = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -1458,6 +1458,15 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _map; }
       set { _map = value; }
     }
+
+    private uint _custom_game_id = default(uint);
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"custom_game_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint custom_game_id
+    {
+      get { return _custom_game_id; }
+      set { _custom_game_id = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -2164,6 +2173,15 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _series_type; }
       set { _series_type = value; }
     }
+
+    private uint _custom_game_id = default(uint);
+    [global::ProtoBuf.ProtoMember(41, IsRequired = false, Name=@"custom_game_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint custom_game_id
+    {
+      get { return _custom_game_id; }
+      set { _custom_game_id = value; }
+    }
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Player")]
   public partial class Player : global::ProtoBuf.IExtensible
   {
@@ -2785,6 +2803,15 @@ namespace SteamKit2.GC.Dota.Internal
     {
       get { return _team_id; }
       set { _team_id = value; }
+    }
+
+    private uint _custom_game_id = default(uint);
+    [global::ProtoBuf.ProtoMember(19, IsRequired = false, Name=@"custom_game_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint custom_game_id
+    {
+      get { return _custom_game_id; }
+      set { _custom_game_id = value; }
     }
     [global::ProtoBuf.ProtoContract(Name=@"SkillLevel", EnumPassthru=true)]
     public enum SkillLevel
@@ -7616,6 +7643,15 @@ namespace SteamKit2.GC.Dota.Internal
     {
       get { return _prize_pool_usd; }
       set { _prize_pool_usd = value; }
+    }
+
+    private uint _version = default(uint);
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"version", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint version
+    {
+      get { return _version; }
+      set { _version = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -13106,6 +13142,24 @@ namespace SteamKit2.GC.Dota.Internal
     {
       get { return _event_id; }
       set { _event_id = value; }
+    }
+
+    private uint _points = default(uint);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"points", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint points
+    {
+      get { return _points; }
+      set { _points = value; }
+    }
+
+    private uint _premium_points = default(uint);
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"premium_points", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint premium_points
+    {
+      get { return _premium_points; }
+      set { _premium_points = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

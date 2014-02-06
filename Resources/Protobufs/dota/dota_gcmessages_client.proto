@@ -175,6 +175,7 @@ message CSourceTVGame {
 	optional uint32 leagueid = 20;
 	optional .DOTA_GameMode game_mode = 21 [default = DOTA_GAMEMODE_NONE];
 	optional uint32 lobby_type = 22;
+	optional uint32 custom_game_id = 23;
 }
 
 message CMsgSourceTVGamesResponse {
@@ -189,8 +190,7 @@ message CMsgFindSourceTVGames {
 	optional uint32 leagueid = 4;
 	optional uint32 heroid = 5;
 	optional bool team_game = 6;
-	optional bool diretide = 7;
-	optional bool xmas = 8;
+	optional uint32 custom_game_id = 9;
 }
 
 message CMsgSpectateFriendGame {
@@ -350,6 +350,7 @@ message CMsgCustomGameCreate {
 	optional uint32 difficulty = 3;
 	optional string game_mode = 4;
 	optional string map = 5;
+	optional uint32 custom_game_id = 6;
 }
 
 message CMsgRequestInternationalTicket {
@@ -507,6 +508,7 @@ message CMsgDOTAMatch {
 	optional string dire_team_tag = 38;
 	optional uint32 series_id = 39;
 	optional uint32 series_type = 40;
+	optional uint32 custom_game_id = 41;
 }
 
 message CMsgDOTAPlayerMatchHistory {
@@ -540,6 +542,7 @@ message CMsgDOTARequestMatches {
 	optional uint32 league_id = 16;
 	optional .CMsgDOTARequestMatches.SkillLevel skill = 17 [default = Any];
 	optional uint32 team_id = 18;
+	optional uint32 custom_game_id = 19;
 }
 
 message CMsgDOTARequestMatchesResponse {
@@ -1467,6 +1470,7 @@ message CLeague {
 	optional bool freeleague = 3;
 	optional fixed32 lastgametime = 4;
 	optional uint32 prize_pool_usd = 5;
+	optional uint32 version = 6;
 }
 
 message CMsgResponseLeagueInfo {
@@ -2489,6 +2493,8 @@ message CMsgDOTAGetEventPointsResponse {
 	optional uint32 total_points = 1;
 	optional uint32 total_premium_points = 2;
 	optional uint32 event_id = 3;
+	optional uint32 points = 4;
+	optional uint32 premium_points = 5;
 }
 
 message CMsgDOTAExchangeEventPoints {
