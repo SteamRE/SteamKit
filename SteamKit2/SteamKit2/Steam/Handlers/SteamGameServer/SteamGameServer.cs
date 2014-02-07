@@ -4,6 +4,8 @@
  */
 
 using System;
+using System.Net;
+using System.Net.Sockets;
 using SteamKit2.Internal;
 
 namespace SteamKit2
@@ -27,6 +29,47 @@ namespace SteamKit2
             /// Gets or sets the AppID this gameserver will serve.
             /// </summary>
             public uint AppID { get; set; }
+        }
+
+        /// <summary>
+        /// Represents the details of the game server's current status.
+        /// </summary>
+        public sealed class StatusDetails
+        {
+            /// <summary>
+            /// Gets or sets the AppID this game server is serving.
+            /// </summary>
+            public uint AppID { get; set; }
+
+            /// <summary>
+            /// Gets or sets the server's basic state as flags.
+            /// </summary>
+            public EServerFlags ServerFlags { get; set; }
+
+            /// <summary>
+            /// Gets or sets the directory the game data is in.
+            /// </summary>
+            public string GameDirectory { get; set; }
+
+            /// <summary>
+            /// Gets or sets the IP address the game server listens on.
+            /// </summary>
+            public IPAddress Address { get; set; }
+
+            /// <summary>
+            /// Gets or sets the port the game server listens on.
+            /// </summary>
+            public uint Port { get; set; }
+
+            /// <summary>
+            /// Gets or sets the port the game server responds to queries on.
+            /// </summary>
+            public uint QueryPort { get; set; }
+
+            /// <summary>
+            /// Gets or sets the current version of the game server.
+            /// </summary>
+            public string Version { get; set; }
         }
 
 
@@ -114,6 +157,37 @@ namespace SteamKit2
             this.Client.Send( logOff );
         }
 
+        /// <summary>
+        /// Sends the server's status to the Steam network.
+        /// </summary>
+        /// <param name="details">A <see cref="SteamGameServer.StatusDetails"/> object containing the server's status.</param>
+        public void SendStatus(StatusDetails details)
+        {
+            if (details == null)
+            {
+                throw new ArgumentNullException("details");
+            }
+
+            if (details.Address != null && details.Address.AddressFamily != AddressFamily.InterNetwork)
+            {
+                throw new ArgumentException("Only IPv4 addresses are supported.");
+            }
+
+            var status = new ClientMsgProtobuf<CMsgGSServerType>(EMsg.GSServerType);
+            status.Body.app_id_served = details.AppID;
+            status.Body.flags = (uint)details.ServerFlags;
+            status.Body.game_dir = details.GameDirectory;
+            status.Body.game_port = details.Port;
+            status.Body.game_query_port = details.QueryPort;
+            status.Body.game_version = details.Version;
+
+            if (details.Address != null)
+            {
+                status.Body.game_ip_address = BitConverter.ToUInt32( details.Address.GetAddressBytes(), 0 );
+            }
+
+            this.Client.Send( status );
+        }
 
         /// <summary>
         /// Handles a client message. This should not be called directly.
