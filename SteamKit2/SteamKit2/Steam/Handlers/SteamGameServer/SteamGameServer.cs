@@ -159,6 +159,7 @@ namespace SteamKit2
 
         /// <summary>
         /// Sends the server's status to the Steam network.
+        /// Results are returned in a <see cref="StatusReplyCallback"/> callback.
         /// </summary>
         /// <param name="details">A <see cref="SteamGameServer.StatusDetails"/> object containing the server's status.</param>
         public void SendStatus(StatusDetails details)
