@@ -184,7 +184,7 @@ namespace SteamKit2
 
             if (details.Address != null)
             {
-                status.Body.game_ip_address = BitConverter.ToUInt32( details.Address.GetAddressBytes(), 0 );
+                status.Body.game_ip_address = NetHelpers.GetIPAddress( details.Address );
             }
 
             this.Client.Send( status );
