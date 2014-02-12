@@ -303,6 +303,14 @@ message CMsgGC_GameServer_ResetIdentityResponse {
 	optional string game_server_identity_token = 3;
 }
 
+message CMsgGC_GameServer_AckPolicy {
+}
+
+message CMsgGC_GameServer_AckPolicyResponse {
+	optional uint32 result = 1;
+	optional string message = 2;
+}
+
 message CMsgGC_Client_UseServerModificationItem {
 	optional uint64 item_id = 1;
 }

@@ -367,6 +367,10 @@ enum EDOTAGCMsg {
 	k_EMsgGCRequestOfferings = 7424;
 	k_EMsgGCRequestOfferingsResponse = 7425;
 	k_EMsgGCToGCProcessMatchLeaver = 7426;
+	k_EMsgGCNotificationsRequest = 7427;
+	k_EMsgGCNotificationsResponse = 7428;
+	k_EMsgGCToGCAddNotification = 7429;
+	k_EMsgGCToGCSetNewNotifications = 7430;
 	k_EMsgGCDev_GrantWarKill = 8001;
 }
 
@@ -566,6 +570,7 @@ message CSODOTAGameAccountClient {
 	optional uint32 solo_competitive_rank = 52;
 	optional uint32 solo_calibration_games_remaining = 54;
 	optional uint32 recruitment_level = 55;
+	optional bool has_new_notifications = 56;
 }
 
 message CSODOTAPartyMember {

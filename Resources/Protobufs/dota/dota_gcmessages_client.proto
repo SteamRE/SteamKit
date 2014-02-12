@@ -600,6 +600,7 @@ message CMsgDOTAPopup {
 		COMPETITIVE_MM_GAME_MODE_NOT_ALLOWED = 36;
 		GAME_MODE_NOT_UNLOCKED = 37;
 		SAVE_GAME_CORRUPT = 38;
+		INSUFFICIENT_INGOTS = 39;
 	}
 
 	optional .CMsgDOTAPopup.PopupID id = 1 [default = KICKED_FROM_LOBBY];
@@ -2567,5 +2568,27 @@ message CMsgGCNewBloomModeStateResponse {
 	optional bool active = 1;
 	optional uint32 switch_time = 2;
 	optional uint32 round = 3;
+}
+
+message CMsgGCNotificationsRequest {
+	optional bool all_messages = 1;
+}
+
+message CMsgGCNotificationsResponse {
+	message Notification {
+		optional uint64 id = 1;
+		optional uint32 type = 2;
+		optional uint32 reference_a = 3;
+		optional uint32 reference_b = 4;
+		optional string message = 5;
+	}
+
+	enum EResult {
+		SUCCESS = 0;
+		ERROR_UNSPECIFIED = 1;
+	}
+
+	optional .CMsgGCNotificationsResponse.EResult result = 1 [default = SUCCESS];
+	repeated .CMsgGCNotificationsResponse.Notification notification = 2;
 }
 

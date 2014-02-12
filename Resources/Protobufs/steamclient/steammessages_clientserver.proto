@@ -1915,7 +1915,6 @@ message CMsgClientMDSTransmitManifestDataChunk {
 message CMsgClientMDSUploadManifestRequest {
 	optional uint32 depot_id = 1;
 	optional uint32 manifest_size_compressed = 2;
-	optional bool make_public = 4;
 	optional uint32 build_id = 6;
 	optional uint32 manifest_version = 7;
 	optional bool local_cs_build = 9;
@@ -2573,7 +2572,6 @@ message CMsgClientVanityURLChangedNotification {
 message CMsgClientAuthorizeLocalDeviceRequest {
 	optional string device_description = 1;
 	optional uint32 owner_account_id = 2;
-	optional bool limited_only = 3;
 }
 
 message CMsgClientAuthorizeLocalDevice {

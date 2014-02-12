@@ -335,6 +335,8 @@ message CDOTAUserMsg_CreateLinearProjectile {
 	optional int32 entindex = 4;
 	optional int32 particle_index = 5;
 	optional int32 handle = 6;
+	optional .CMsgVector2D acceleration = 7;
+	optional float max_speed = 8;
 }
 
 message CDOTAUserMsg_DestroyLinearProjectile {

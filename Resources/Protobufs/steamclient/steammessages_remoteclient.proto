@@ -81,6 +81,7 @@ message CMsgRemoteClientStartStream {
 	optional string unlock_parental_lock = 6;
 	optional int32 maximum_resolution_x = 7;
 	optional int32 maximum_resolution_y = 8;
+	optional int32 gamepad_count = 9;
 }
 
 message CMsgRemoteClientStartStreamResponse {

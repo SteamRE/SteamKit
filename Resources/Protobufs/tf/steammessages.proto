@@ -286,7 +286,9 @@ message CGCSystemMsg_GetAccountDetails_Response {
 	optional bool is_trade_banned = 18;
 	optional uint32 trade_ban_expiration = 19;
 	optional uint32 accountid = 20;
-	optional bool eligible_for_community_market = 21;
+	optional uint32 suspension_end_time = 21;
+	optional string currency = 22;
+	optional uint32 steam_level = 23;
 }
 
 message CMsgGCGetPersonaNames {
@@ -312,5 +314,24 @@ message CGCSystemMsg_GetPurchaseTrust_Response {
 	optional bool has_no_recent_password_resets = 2;
 	optional bool is_wallet_cash_trusted = 3;
 	optional uint32 time_all_trusted = 4;
+}
+
+message CMsgGCHAccountVacStatusChange {
+	optional fixed64 steam_id = 1;
+	optional uint32 app_id = 2;
+	optional uint32 rtime_vacban_starts = 3;
+	optional bool is_banned_now = 4;
+	optional bool is_banned_future = 5;
+}
+
+message CMsgNotificationOfSuspiciousActivity {
+	message MultipleGameInstances {
+		optional uint32 app_instance_count = 1;
+		repeated fixed64 other_steamids = 2;
+	}
+
+	optional fixed64 steamid = 1;
+	optional uint32 appid = 2;
+	optional .CMsgNotificationOfSuspiciousActivity.MultipleGameInstances multiple_instances = 3;
 }
 
