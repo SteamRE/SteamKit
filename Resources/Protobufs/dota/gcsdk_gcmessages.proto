@@ -150,6 +150,7 @@ message CMsgSOCacheHaveVersion {
 	optional .CMsgSOIDOwner soid = 1;
 	optional fixed64 version = 2;
 	optional uint32 service_id = 3;
+	optional uint32 cached_file_version = 4;
 }
 
 message CMsgClientHello {

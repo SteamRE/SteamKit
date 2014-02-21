@@ -4,7 +4,6 @@ enum EGCBaseMsg {
 	k_EMsgGCSystemMessage = 4001;
 	k_EMsgGCReplicateConVars = 4002;
 	k_EMsgGCConVarUpdated = 4003;
-	k_EMsgGCInQueue = 4008;
 	k_EMsgGCInviteToParty = 4501;
 	k_EMsgGCInvitationCreated = 4502;
 	k_EMsgGCPartyInviteResponse = 4503;
@@ -188,13 +187,11 @@ message CSOEconItem {
 	optional uint32 account_id = 2;
 	optional uint32 inventory = 3;
 	optional uint32 def_index = 4;
-	optional uint32 quantity = 5;
-	optional uint32 level = 6;
-	optional uint32 quality = 7;
+	optional uint32 quantity = 5 [default = 1];
+	optional uint32 level = 6 [default = 1];
+	optional uint32 quality = 7 [default = 4];
 	optional uint32 flags = 8 [default = 0];
-	optional uint32 origin = 9;
-	optional string custom_name = 10;
-	optional string custom_desc = 11;
+	optional uint32 origin = 9 [default = 0];
 	repeated .CSOEconItemAttribute attribute = 12;
 	optional .CSOEconItem interior_item = 13;
 	optional bool in_use = 14 [default = false];
@@ -296,7 +293,7 @@ message CMsgSetPresetItemPosition {
 
 message CMsgSetItemPositions {
 	message ItemPosition {
-		optional uint32 item_id = 1;
+		optional uint64 item_id = 1;
 		optional uint32 position = 2;
 	}
 

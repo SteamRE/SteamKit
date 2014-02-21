@@ -1427,7 +1427,6 @@ message CMsgDOTAWelcome {
 	optional uint32 partner_account_state = 11;
 	optional uint32 last_time_played = 12;
 	optional uint32 last_ip_address = 13;
-	optional uint32 notify_successful_report = 14;
 	optional uint32 shutdownlawterminateminutes = 15;
 	optional uint32 banned_word_list_version = 16;
 	optional bool profile_private = 17;
@@ -1772,20 +1771,21 @@ message CMsgDOTAFantasyLeagueInfo {
 	optional uint32 league_id = 10;
 	optional uint32 invite_guild_id = 11;
 	optional uint32 draft_time = 12;
-	optional uint32 matchup_interval = 13;
-	optional uint32 season_start = 14;
-	optional uint32 season_length = 15;
-	optional uint32 veto_votes = 16;
-	optional uint32 acquisitions = 17;
-	optional uint32 slot_1 = 18;
-	optional uint32 slot_2 = 19;
-	optional uint32 slot_3 = 20;
-	optional uint32 slot_4 = 21;
-	optional uint32 slot_5 = 22;
-	optional uint32 bench_slots = 23;
-	repeated uint32 owner_account_ids = 24;
-	repeated .CMsgDOTAFantasyLeagueInfo.PlayerInfo players = 25;
-	optional uint32 time_zone = 26;
+	optional uint32 draft_pick_time = 13;
+	optional uint32 matchup_interval = 14;
+	optional uint32 season_start = 15;
+	optional uint32 season_length = 16;
+	optional uint32 veto_votes = 17;
+	optional uint32 acquisitions = 18;
+	optional uint32 slot_1 = 19;
+	optional uint32 slot_2 = 20;
+	optional uint32 slot_3 = 21;
+	optional uint32 slot_4 = 22;
+	optional uint32 slot_5 = 23;
+	optional uint32 bench_slots = 24;
+	repeated uint32 owner_account_ids = 25;
+	repeated .CMsgDOTAFantasyLeagueInfo.PlayerInfo players = 26;
+	optional uint32 time_zone = 27;
 }
 
 message CMsgDOTAFantasyLeagueEditInfoRequest {
@@ -2303,6 +2303,55 @@ message CMsgDOTAFantasyPlayerHisoricalStatsResponse {
 	repeated .CMsgDOTAFantasyPlayerHisoricalStatsResponse.PlayerStats stats = 2;
 }
 
+message CMsgDOTAFantasyMessageAdd {
+	optional uint32 fantasy_league_id = 1;
+	optional string message = 2;
+}
+
+message CMsgDOTAFantasyMessagesRequest {
+	optional uint32 fantasy_league_id = 1;
+	optional uint32 start_message = 2;
+	optional uint32 end_message = 3;
+}
+
+message CMsgDOTAFantasyMessagesResponse {
+	message Message {
+		optional uint32 message_id = 1;
+		optional string message = 2;
+		optional uint32 author_account_id = 3;
+		optional uint32 time = 4;
+	}
+
+	enum EResult {
+		SUCCESS = 0;
+		ERROR_UNSPECIFIED = 1;
+		ERROR_NO_PERMISSION = 2;
+	}
+
+	optional .CMsgDOTAFantasyMessagesResponse.EResult result = 1 [default = SUCCESS];
+	repeated .CMsgDOTAFantasyMessagesResponse.Message messages = 2;
+	optional uint32 num_total_messages = 3;
+}
+
+message CMsgDOTAFantasyScheduledMatchesRequest {
+	optional uint32 fantasy_league_id = 1;
+}
+
+message CMsgDOTAFantasyScheduledMatchesResponse {
+	message ScheduledMatchDays {
+		optional uint32 timestamp = 1;
+		repeated uint32 team_ids = 2;
+	}
+
+	enum EResult {
+		SUCCESS = 0;
+		ERROR_UNSPECIFIED = 1;
+	}
+
+	optional .CMsgDOTAFantasyScheduledMatchesResponse.EResult result = 1 [default = SUCCESS];
+	repeated .CMsgDOTAFantasyScheduledMatchesResponse.ScheduledMatchDays scheduled_match_days = 2;
+}
+
 message CMsgDOTASendFriendRecruits {
 	repeated uint32 recruits = 1;
 }
@@ -2571,16 +2620,20 @@ message CMsgGCNewBloomModeStateResponse {
 }
 
 message CMsgGCNotificationsRequest {
-	optional bool all_messages = 1;
+	optional bool new_messages = 1;
+	optional uint32 start_message_num = 2;
+	optional uint32 end_message_num = 3;
 }
 
 message CMsgGCNotificationsResponse {
 	message Notification {
 		optional uint64 id = 1;
 		optional uint32 type = 2;
-		optional uint32 reference_a = 3;
-		optional uint32 reference_b = 4;
-		optional string message = 5;
+		optional uint32 timestamp = 3;
+		optional uint32 reference_a = 4;
+		optional uint32 reference_b = 5;
+		optional uint32 reference_c = 6;
+		optional string message = 7;
 	}
 
 	enum EResult {
@@ -2590,5 +2643,32 @@ message CMsgGCNotificationsResponse {
 
 	optional .CMsgGCNotificationsResponse.EResult result = 1 [default = SUCCESS];
 	repeated .CMsgGCNotificationsResponse.Notification notification = 2;
+	optional uint32 num_total_notifications = 3;
+}
+
+message CMsgGCNotificationsDismissRequest {
+	optional uint64 id = 1;
+}
+
+message CMsgSerializedSOCache {
+	message TypeCache {
+		optional uint32 type = 1;
+		repeated bytes objects = 2;
+	}
+
+	message Cache {
+		message Version {
+			optional uint32 service = 1;
+			optional uint64 version = 2;
+		}
+
+		optional uint32 type = 1;
+		optional uint64 id = 2;
+		repeated .CMsgSerializedSOCache.Cache.Version versions = 3;
+		repeated .CMsgSerializedSOCache.TypeCache type_caches = 4;
+	}
+
+	optional uint32 file_version = 1;
+	repeated .CMsgSerializedSOCache.Cache caches = 2;
 }
 

@@ -497,3 +497,14 @@ message CMsgGCHUpdateSession {
 	repeated .CMsgGCHUpdateSession.ExtraField extra_fields = 9;
 }
 
+message CMsgNotificationOfSuspiciousActivity {
+	message MultipleGameInstances {
+		optional uint32 app_instance_count = 1;
+		repeated fixed64 other_steamids = 2;
+	}
+
+	optional fixed64 steamid = 1;
+	optional uint32 appid = 2;
+	optional .CMsgNotificationOfSuspiciousActivity.MultipleGameInstances multiple_instances = 3;
+}
+

@@ -26,6 +26,7 @@ message CMsgConnectedPlayers {
 	optional uint32 num_spectators = 3;
 	optional uint32 tower_state = 4;
 	optional bool skip_player_validation = 5;
+	optional bool first_blood_happened = 6;
 }
 
 message CMsgGameServerInfo {

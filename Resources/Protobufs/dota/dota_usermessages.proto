@@ -64,6 +64,7 @@ enum EDotaUserMessages {
 	DOTA_UM_VoteEnd = 122;
 	DOTA_UM_BoosterState = 123;
 	DOTA_UM_WillPurchaseAlert = 124;
+	DOTA_UM_TutorialMinimapPosition = 125;
 }
 
 enum DOTA_CHAT_MESSAGE {
@@ -561,6 +562,9 @@ message CDOTAUserMsg_TutorialFinish {
 	optional string emblem = 2;
 	optional string body = 3;
 	optional bool success = 4;
+}
+
+message CDOTAUserMsg_TutorialMinimapPosition {
 }
 
 message CDOTAUserMsg_SendGenericToolTip {
