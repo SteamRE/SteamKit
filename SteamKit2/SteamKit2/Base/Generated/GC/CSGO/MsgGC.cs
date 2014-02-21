@@ -3685,6 +3685,88 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCCStrike15_v2_Server2GCPureServerValidationFailure")]
+  public partial class CMsgGCCStrike15_v2_Server2GCPureServerValidationFailure : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCCStrike15_v2_Server2GCPureServerValidationFailure() {}
+    
+
+    private uint _accountid = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"accountid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint accountid
+    {
+      get { return _accountid; }
+      set { _accountid = value; }
+    }
+
+    private string _path = "";
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"path", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string path
+    {
+      get { return _path; }
+      set { _path = value; }
+    }
+
+    private string _file = "";
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"file", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string file
+    {
+      get { return _file; }
+      set { _file = value; }
+    }
+
+    private uint _crc = default(uint);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"crc", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint crc
+    {
+      get { return _crc; }
+      set { _crc = value; }
+    }
+
+    private int _hash = default(int);
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"hash", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int hash
+    {
+      get { return _hash; }
+      set { _hash = value; }
+    }
+
+    private int _len = default(int);
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"len", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int len
+    {
+      get { return _len; }
+      set { _len = value; }
+    }
+
+    private int _pack_number = default(int);
+    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"pack_number", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int pack_number
+    {
+      get { return _pack_number; }
+      set { _pack_number = value; }
+    }
+
+    private int _pack_file_id = default(int);
+    [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"pack_file_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int pack_file_id
+    {
+      get { return _pack_file_id; }
+      set { _pack_file_id = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     [global::ProtoBuf.ProtoContract(Name=@"ECsgoGCMsg", EnumPassthru=true)]
     public enum ECsgoGCMsg
     {
@@ -3846,7 +3928,10 @@ namespace SteamKit2.GC.CSGO.Internal
       k_EMsgGCCStrike15_v2_Server2GCClientValidate = 9153,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCCStrike15_v2_MatchListRequestLiveGameForUser", Value=9154)]
-      k_EMsgGCCStrike15_v2_MatchListRequestLiveGameForUser = 9154
+      k_EMsgGCCStrike15_v2_MatchListRequestLiveGameForUser = 9154,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCCStrike15_v2_Server2GCPureServerValidationFailure", Value=9155)]
+      k_EMsgGCCStrike15_v2_Server2GCPureServerValidationFailure = 9155
     }
   
 }

@@ -12193,15 +12193,6 @@ namespace SteamKit2.Internal
       set { _manifest_size_compressed = value; }
     }
 
-    private bool _make_public = default(bool);
-    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"make_public", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
-    public bool make_public
-    {
-      get { return _make_public; }
-      set { _make_public = value; }
-    }
-
     private uint _build_id = default(uint);
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"build_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(default(uint))]
@@ -16187,15 +16178,6 @@ namespace SteamKit2.Internal
     {
       get { return _owner_account_id; }
       set { _owner_account_id = value; }
-    }
-
-    private bool _limited_only = default(bool);
-    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"limited_only", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
-    public bool limited_only
-    {
-      get { return _limited_only; }
-      set { _limited_only = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
