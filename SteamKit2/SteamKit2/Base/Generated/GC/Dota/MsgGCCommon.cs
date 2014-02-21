@@ -193,24 +193,6 @@ namespace SteamKit2.GC.Dota.Internal
       set { _forgiving = value; }
     }
 
-    private uint _successful_report_count = default(uint);
-    [global::ProtoBuf.ProtoMember(36, IsRequired = false, Name=@"successful_report_count", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint successful_report_count
-    {
-      get { return _successful_report_count; }
-      set { _successful_report_count = value; }
-    }
-
-    private uint _notify_successful_report = default(uint);
-    [global::ProtoBuf.ProtoMember(37, IsRequired = false, Name=@"notify_successful_report", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint notify_successful_report
-    {
-      get { return _notify_successful_report; }
-      set { _notify_successful_report = value; }
-    }
-
     private uint _account_disabled_until_date = default(uint);
     [global::ProtoBuf.ProtoMember(38, IsRequired = false, Name=@"account_disabled_until_date", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(default(uint))]
@@ -335,6 +317,15 @@ namespace SteamKit2.GC.Dota.Internal
     {
       get { return _recruitment_level; }
       set { _recruitment_level = value; }
+    }
+
+    private bool _has_new_notifications = default(bool);
+    [global::ProtoBuf.ProtoMember(56, IsRequired = false, Name=@"has_new_notifications", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool has_new_notifications
+    {
+      get { return _has_new_notifications; }
+      set { _has_new_notifications = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -1572,13 +1563,13 @@ namespace SteamKit2.GC.Dota.Internal
       set { _matchgroup = value; }
     }
 
-    private bool _leaver_detected = default(bool);
-    [global::ProtoBuf.ProtoMember(27, IsRequired = false, Name=@"leaver_detected", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    private bool _legacy_leaver_detected = default(bool);
+    [global::ProtoBuf.ProtoMember(27, IsRequired = false, Name=@"legacy_leaver_detected", DataFormat = global::ProtoBuf.DataFormat.Default)]
     [global::System.ComponentModel.DefaultValue(default(bool))]
-    public bool leaver_detected
+    public bool legacy_leaver_detected
     {
-      get { return _leaver_detected; }
-      set { _leaver_detected = value; }
+      get { return _legacy_leaver_detected; }
+      set { _legacy_leaver_detected = value; }
     }
 
     private DOTA_CM_PICK _cm_pick = DOTA_CM_PICK.DOTA_CM_RANDOM;
@@ -1860,6 +1851,24 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _custom_game_id; }
       set { _custom_game_id = value; }
     }
+
+    private bool _first_blood_happened = default(bool);
+    [global::ProtoBuf.ProtoMember(65, IsRequired = false, Name=@"first_blood_happened", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool first_blood_happened
+    {
+      get { return _first_blood_happened; }
+      set { _first_blood_happened = value; }
+    }
+
+    private bool _discard_match_results = default(bool);
+    [global::ProtoBuf.ProtoMember(66, IsRequired = false, Name=@"discard_match_results", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool discard_match_results
+    {
+      get { return _discard_match_results; }
+      set { _discard_match_results = value; }
+    }
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CExtraMsg")]
   public partial class CExtraMsg : global::ProtoBuf.IExtensible
   {
@@ -2029,6 +2038,24 @@ namespace SteamKit2.GC.Dota.Internal
     {
       get { return _save_game_data; }
       set { _save_game_data = value; }
+    }
+
+    private uint _server_run_time = default(uint);
+    [global::ProtoBuf.ProtoMember(12, IsRequired = false, Name=@"server_run_time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint server_run_time
+    {
+      get { return _server_run_time; }
+      set { _server_run_time = value; }
+    }
+
+    private uint _last_state_change_time = default(uint);
+    [global::ProtoBuf.ProtoMember(13, IsRequired = false, Name=@"last_state_change_time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint last_state_change_time
+    {
+      get { return _last_state_change_time; }
+      set { _last_state_change_time = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -2778,51 +2805,6 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _timeremaining; }
       set { _timeremaining = value; }
     }
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgLobbyNewBloomMatchPoints")]
-  public partial class CMsgLobbyNewBloomMatchPoints : global::ProtoBuf.IExtensible
-  {
-    public CMsgLobbyNewBloomMatchPoints() {}
-    
-    private readonly global::System.Collections.Generic.List<CMsgLobbyNewBloomMatchPoints.Player> _players = new global::System.Collections.Generic.List<CMsgLobbyNewBloomMatchPoints.Player>();
-    [global::ProtoBuf.ProtoMember(1, Name=@"players", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public global::System.Collections.Generic.List<CMsgLobbyNewBloomMatchPoints.Player> players
-    {
-      get { return _players; }
-    }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Player")]
-  public partial class Player : global::ProtoBuf.IExtensible
-  {
-    public Player() {}
-    
-
-    private uint _account_id = default(uint);
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint account_id
-    {
-      get { return _account_id; }
-      set { _account_id = value; }
-    }
-
-    private uint _points = default(uint);
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"points", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint points
-    {
-      get { return _points; }
-      set { _points = value; }
-    }
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -3983,9 +3965,6 @@ namespace SteamKit2.GC.Dota.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToServerConsoleCommand", Value=7418)]
       k_EMsgGCToServerConsoleCommand = 7418,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgLobbyNewBloomMatchPoints", Value=7419)]
-      k_EMsgLobbyNewBloomMatchPoints = 7419,
-            
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCUpdateLiveLeagueGameInfo", Value=7420)]
       k_EMsgGCToGCUpdateLiveLeagueGameInfo = 7420,
             
@@ -4006,6 +3985,36 @@ namespace SteamKit2.GC.Dota.Internal
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCProcessMatchLeaver", Value=7426)]
       k_EMsgGCToGCProcessMatchLeaver = 7426,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCNotificationsRequest", Value=7427)]
+      k_EMsgGCNotificationsRequest = 7427,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCNotificationsResponse", Value=7428)]
+      k_EMsgGCNotificationsResponse = 7428,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCModifyNotification", Value=7429)]
+      k_EMsgGCToGCModifyNotification = 7429,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCSetNewNotifications", Value=7430)]
+      k_EMsgGCToGCSetNewNotifications = 7430,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCNotificationsDismissRequest", Value=7435)]
+      k_EMsgGCNotificationsDismissRequest = 7435,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCFantasyMessageAdd", Value=7436)]
+      k_EMsgGCFantasyMessageAdd = 7436,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCFantasyMessagesRequest", Value=7437)]
+      k_EMsgGCFantasyMessagesRequest = 7437,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCFantasyMessagesResponse", Value=7438)]
+      k_EMsgGCFantasyMessagesResponse = 7438,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCFantasyScheduledMatchesRequest", Value=7439)]
+      k_EMsgGCFantasyScheduledMatchesRequest = 7439,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCFantasyScheduledMatchesResponse", Value=7440)]
+      k_EMsgGCFantasyScheduledMatchesResponse = 7440,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCDev_GrantWarKill", Value=8001)]
       k_EMsgGCDev_GrantWarKill = 8001
@@ -4140,6 +4149,32 @@ namespace SteamKit2.GC.Dota.Internal
             
       [global::ProtoBuf.ProtoEnum(Name=@"DOTA_CM_BAD_GUYS", Value=2)]
       DOTA_CM_BAD_GUYS = 2
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"DOTAConnectionState_t", EnumPassthru=true)]
+    public enum DOTAConnectionState_t
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_CONNECTION_STATE_UNKNOWN", Value=0)]
+      DOTA_CONNECTION_STATE_UNKNOWN = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_CONNECTION_STATE_NOT_YET_CONNECTED", Value=1)]
+      DOTA_CONNECTION_STATE_NOT_YET_CONNECTED = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_CONNECTION_STATE_CONNECTED", Value=2)]
+      DOTA_CONNECTION_STATE_CONNECTED = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_CONNECTION_STATE_DISCONNECTED", Value=3)]
+      DOTA_CONNECTION_STATE_DISCONNECTED = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_CONNECTION_STATE_ABANDONED", Value=4)]
+      DOTA_CONNECTION_STATE_ABANDONED = 4,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_CONNECTION_STATE_LOADING", Value=5)]
+      DOTA_CONNECTION_STATE_LOADING = 5,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_CONNECTION_STATE_FAILED", Value=6)]
+      DOTA_CONNECTION_STATE_FAILED = 6
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"DOTALeaverStatus_t", EnumPassthru=true)]

@@ -1048,27 +1048,27 @@ namespace SteamKit2.GC.Internal
       set { _def_index = value; }
     }
 
-    private uint _quantity = default(uint);
+    private uint _quantity = (uint)1;
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"quantity", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue((uint)1)]
     public uint quantity
     {
       get { return _quantity; }
       set { _quantity = value; }
     }
 
-    private uint _level = default(uint);
+    private uint _level = (uint)1;
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"level", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue((uint)1)]
     public uint level
     {
       get { return _level; }
       set { _level = value; }
     }
 
-    private uint _quality = default(uint);
+    private uint _quality = (uint)4;
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"quality", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue((uint)4)]
     public uint quality
     {
       get { return _quality; }
@@ -1084,31 +1084,13 @@ namespace SteamKit2.GC.Internal
       set { _flags = value; }
     }
 
-    private uint _origin = default(uint);
+    private uint _origin = (uint)0;
     [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"origin", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
+    [global::System.ComponentModel.DefaultValue((uint)0)]
     public uint origin
     {
       get { return _origin; }
       set { _origin = value; }
-    }
-
-    private string _custom_name = "";
-    [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"custom_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
-    public string custom_name
-    {
-      get { return _custom_name; }
-      set { _custom_name = value; }
-    }
-
-    private string _custom_desc = "";
-    [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"custom_desc", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
-    public string custom_desc
-    {
-      get { return _custom_desc; }
-      set { _custom_desc = value; }
     }
     private readonly global::System.Collections.Generic.List<CSOEconItemAttribute> _attribute = new global::System.Collections.Generic.List<CSOEconItemAttribute>();
     [global::ProtoBuf.ProtoMember(12, Name=@"attribute", DataFormat = global::ProtoBuf.DataFormat.Default)]
@@ -1741,10 +1723,10 @@ namespace SteamKit2.GC.Internal
     public ItemPosition() {}
     
 
-    private uint _item_id = default(uint);
+    private ulong _item_id = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"item_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint item_id
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong item_id
     {
       get { return _item_id; }
       set { _item_id = value; }
@@ -3248,9 +3230,6 @@ namespace SteamKit2.GC.Internal
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCConVarUpdated", Value=4003)]
       k_EMsgGCConVarUpdated = 4003,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCInQueue", Value=4008)]
-      k_EMsgGCInQueue = 4008,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCInviteToParty", Value=4501)]
       k_EMsgGCInviteToParty = 4501,

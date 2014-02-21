@@ -250,7 +250,10 @@ namespace SteamKit2.GC.Internal
       k_EGCMsgGetPartnerAccountLink = 507,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgGetPartnerAccountLinkResponse", Value=508)]
-      k_EGCMsgGetPartnerAccountLinkResponse = 508
+      k_EGCMsgGetPartnerAccountLinkResponse = 508,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgVSReportedSuspiciousActivity", Value=509)]
+      k_EGCMsgVSReportedSuspiciousActivity = 509
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"ESOMsg", EnumPassthru=true)]

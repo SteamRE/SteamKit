@@ -2862,6 +2862,69 @@ namespace SteamKit2.GC.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgNotificationOfSuspiciousActivity")]
+  public partial class CMsgNotificationOfSuspiciousActivity : global::ProtoBuf.IExtensible
+  {
+    public CMsgNotificationOfSuspiciousActivity() {}
+    
+
+    private ulong _steamid = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong steamid
+    {
+      get { return _steamid; }
+      set { _steamid = value; }
+    }
+
+    private uint _appid = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"appid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint appid
+    {
+      get { return _appid; }
+      set { _appid = value; }
+    }
+
+    private CMsgNotificationOfSuspiciousActivity.MultipleGameInstances _multiple_instances = null;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"multiple_instances", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public CMsgNotificationOfSuspiciousActivity.MultipleGameInstances multiple_instances
+    {
+      get { return _multiple_instances; }
+      set { _multiple_instances = value; }
+    }
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"MultipleGameInstances")]
+  public partial class MultipleGameInstances : global::ProtoBuf.IExtensible
+  {
+    public MultipleGameInstances() {}
+    
+
+    private uint _app_instance_count = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"app_instance_count", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint app_instance_count
+    {
+      get { return _app_instance_count; }
+      set { _app_instance_count = value; }
+    }
+    private readonly global::System.Collections.Generic.List<ulong> _other_steamids = new global::System.Collections.Generic.List<ulong>();
+    [global::ProtoBuf.ProtoMember(2, Name=@"other_steamids", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public global::System.Collections.Generic.List<ulong> other_steamids
+    {
+      get { return _other_steamids; }
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     [global::ProtoBuf.ProtoContract(Name=@"GCProtoBufMsgSrc", EnumPassthru=true)]
     public enum GCProtoBufMsgSrc
     {

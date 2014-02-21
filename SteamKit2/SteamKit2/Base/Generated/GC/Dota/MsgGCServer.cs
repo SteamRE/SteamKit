@@ -122,6 +122,15 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _skip_player_validation; }
       set { _skip_player_validation = value; }
     }
+
+    private bool _first_blood_happened = default(bool);
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"first_blood_happened", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool first_blood_happened
+    {
+      get { return _first_blood_happened; }
+      set { _first_blood_happened = value; }
+    }
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Player")]
   public partial class Player : global::ProtoBuf.IExtensible
   {

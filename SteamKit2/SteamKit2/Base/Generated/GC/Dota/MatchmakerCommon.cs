@@ -51,7 +51,16 @@ namespace SteamKit2.GC.Dota.Internal
       BOT_DIFFICULTY_UNFAIR = 4,
             
       [global::ProtoBuf.ProtoEnum(Name=@"BOT_DIFFICULTY_INVALID", Value=5)]
-      BOT_DIFFICULTY_INVALID = 5
+      BOT_DIFFICULTY_INVALID = 5,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"BOT_DIFFICULTY_EXTRA1", Value=6)]
+      BOT_DIFFICULTY_EXTRA1 = 6,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"BOT_DIFFICULTY_EXTRA2", Value=7)]
+      BOT_DIFFICULTY_EXTRA2 = 7,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"BOT_DIFFICULTY_EXTRA3", Value=8)]
+      BOT_DIFFICULTY_EXTRA3 = 8
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"MatchLanguages", EnumPassthru=true)]

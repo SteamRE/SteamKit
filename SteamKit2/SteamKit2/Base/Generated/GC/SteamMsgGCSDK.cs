@@ -790,6 +790,15 @@ namespace SteamKit2.GC.Internal
       get { return _service_id; }
       set { _service_id = value; }
     }
+
+    private uint _cached_file_version = default(uint);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"cached_file_version", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint cached_file_version
+    {
+      get { return _cached_file_version; }
+      set { _cached_file_version = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

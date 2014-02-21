@@ -416,6 +416,68 @@ namespace SteamKit2.GC.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgLookupMultipleAccountNames")]
+  public partial class CMsgLookupMultipleAccountNames : global::ProtoBuf.IExtensible
+  {
+    public CMsgLookupMultipleAccountNames() {}
+    
+    private readonly global::System.Collections.Generic.List<uint> _accountids = new global::System.Collections.Generic.List<uint>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"accountids", DataFormat = global::ProtoBuf.DataFormat.TwosComplement, Options = global::ProtoBuf.MemberSerializationOptions.Packed)]
+    public global::System.Collections.Generic.List<uint> accountids
+    {
+      get { return _accountids; }
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgLookupMultipleAccountNamesResponse")]
+  public partial class CMsgLookupMultipleAccountNamesResponse : global::ProtoBuf.IExtensible
+  {
+    public CMsgLookupMultipleAccountNamesResponse() {}
+    
+    private readonly global::System.Collections.Generic.List<CMsgLookupMultipleAccountNamesResponse.Account> _accounts = new global::System.Collections.Generic.List<CMsgLookupMultipleAccountNamesResponse.Account>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"accounts", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CMsgLookupMultipleAccountNamesResponse.Account> accounts
+    {
+      get { return _accounts; }
+    }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Account")]
+  public partial class Account : global::ProtoBuf.IExtensible
+  {
+    public Account() {}
+    
+
+    private uint _accountid = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"accountid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint accountid
+    {
+      get { return _accountid; }
+      set { _accountid = value; }
+    }
+
+    private string _persona = "";
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"persona", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string persona
+    {
+      get { return _persona; }
+      set { _persona = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     [global::ProtoBuf.ProtoContract(Name=@"EGCItemMsg", EnumPassthru=true)]
     public enum EGCItemMsg
     {
@@ -735,12 +797,6 @@ namespace SteamKit2.GC.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCStoreGetUserDataResponse", Value=2501)]
       k_EMsgGCStoreGetUserDataResponse = 2501,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCStorePurchaseInit_DEPRECATED", Value=2502)]
-      k_EMsgGCStorePurchaseInit_DEPRECATED = 2502,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCStorePurchaseInitResponse_DEPRECATED", Value=2503)]
-      k_EMsgGCStorePurchaseInitResponse_DEPRECATED = 2503,
-            
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCStorePurchaseFinalize", Value=2504)]
       k_EMsgGCStorePurchaseFinalize = 2504,
             
@@ -752,12 +808,6 @@ namespace SteamKit2.GC.Internal
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCStorePurchaseCancelResponse", Value=2507)]
       k_EMsgGCStorePurchaseCancelResponse = 2507,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCStorePurchaseQueryTxn", Value=2508)]
-      k_EMsgGCStorePurchaseQueryTxn = 2508,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCStorePurchaseQueryTxnResponse", Value=2509)]
-      k_EMsgGCStorePurchaseQueryTxnResponse = 2509,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCStorePurchaseInit", Value=2510)]
       k_EMsgGCStorePurchaseInit = 2510,
