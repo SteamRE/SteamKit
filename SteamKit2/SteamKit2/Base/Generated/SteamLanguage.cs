@@ -265,6 +265,7 @@ namespace SteamKit2
 		ClientAckMessageByGID = 735,
 		ClientGetPurchaseReceipts = 736,
 		ClientAckPurchaseReceipt = 737,
+		[Obsolete]
 		ClientGamesPlayed3_obsolete = 738,
 		ClientSendGuestPass = 739,
 		ClientAckGuestPass = 740,
@@ -275,7 +276,9 @@ namespace SteamKit2
 		ClientAcknowledgeClanInvite = 745,
 		ClientPurchaseWithMachineID = 746,
 		ClientAppUsageEvent = 747,
+		[Obsolete]
 		ClientGetGiftTargetList = 748,
+		[Obsolete]
 		ClientGetGiftTargetListResponse = 749,
 		ClientLogOnResponse = 751,
 		ClientVACChallenge = 753,
@@ -314,6 +317,7 @@ namespace SteamKit2
 		ClientAddFriendResponse = 792,
 		ClientInviteFriend = 793,
 		ClientInviteFriendResponse = 794,
+		[Obsolete]
 		ClientSendGuestPassResponse = 795,
 		ClientAckGuestPassResponse = 796,
 		ClientRedeemGuestPassResponse = 797,

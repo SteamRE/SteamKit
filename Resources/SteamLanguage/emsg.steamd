@@ -259,7 +259,7 @@ enum EMsg
 	ClientAckMessageByGID = 735;
 	ClientGetPurchaseReceipts = 736;
 	ClientAckPurchaseReceipt = 737;
-	ClientGamesPlayed3_obsolete = 738;
+	ClientGamesPlayed3_obsolete = 738; obsolete
 	ClientSendGuestPass = 739;
 	ClientAckGuestPass = 740;
 	ClientRedeemGuestPass = 741;
@@ -269,8 +269,8 @@ enum EMsg
 	ClientAcknowledgeClanInvite = 745;
 	ClientPurchaseWithMachineID = 746;
 	ClientAppUsageEvent = 747;
-	ClientGetGiftTargetList = 748;
-	ClientGetGiftTargetListResponse = 749;
+	ClientGetGiftTargetList = 748; obsolete
+	ClientGetGiftTargetListResponse = 749; obsolete
 	ClientLogOnResponse = 751;
 	ClientVACChallenge = 753;
 	ClientSetHeartbeatRate = 755;
@@ -306,7 +306,7 @@ enum EMsg
 	ClientAddFriendResponse = 792;
 	ClientInviteFriend = 793;
 	ClientInviteFriendResponse = 794;
-	ClientSendGuestPassResponse = 795;
+	ClientSendGuestPassResponse = 795; obsolete
 	ClientAckGuestPassResponse = 796;
 	ClientRedeemGuestPassResponse = 797;
 	ClientUpdateGuestPassesList = 798;
