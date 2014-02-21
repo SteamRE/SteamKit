@@ -324,6 +324,98 @@ message CMsgGCHAccountVacStatusChange {
 	optional bool is_banned_future = 5;
 }
 
+message CMsgGCGetPartnerAccountLink {
+	optional fixed64 steamid = 1;
+}
+
+message CMsgGCGetPartnerAccountLink_Response {
+	optional uint32 pwid = 1;
+	optional uint32 nexonid = 2;
+}
+
+message CMsgGCRoutingInfo {
+	enum RoutingMethod {
+		RANDOM = 0;
+		DISCARD = 1;
+		CLIENT_STEAMID = 2;
+		PROTOBUF_FIELD_UINT64 = 3;
+		WEBAPI_PARAM_UINT64 = 4;
+	}
+
+	repeated uint32 dir_index = 1;
+	optional .CMsgGCRoutingInfo.RoutingMethod method = 2 [default = RANDOM];
+	optional .CMsgGCRoutingInfo.RoutingMethod fallback = 3 [default = DISCARD];
+	optional uint32 protobuf_field = 4;
+	optional string webapi_param = 5;
+}
+
+message CMsgGCMsgMasterSetWebAPIRouting {
+	message Entry {
+		optional string interface_name = 1;
+		optional string method_name = 2;
+		optional .CMsgGCRoutingInfo routing = 3;
+	}
+
+	repeated .CMsgGCMsgMasterSetWebAPIRouting.Entry entries = 1;
+}
+
+message CMsgGCMsgMasterSetClientMsgRouting {
+	message Entry {
+		optional uint32 msg_type = 1;
+		optional .CMsgGCRoutingInfo routing = 2;
+	}
+
+	repeated .CMsgGCMsgMasterSetClientMsgRouting.Entry entries = 1;
+}
+
+message CMsgGCMsgMasterSetWebAPIRouting_Response {
+	optional int32 eresult = 1 [default = 2];
+}
+
+message CMsgGCMsgMasterSetClientMsgRouting_Response {
+	optional int32 eresult = 1 [default = 2];
+}
+
+message CMsgGCMsgSetOptions {
+	message MessageRange {
+		required uint32 low = 1;
+		required uint32 high = 2;
+	}
+
+	enum Option {
+		NOTIFY_USER_SESSIONS = 0;
+		NOTIFY_SERVER_SESSIONS = 1;
+		NOTIFY_ACHIEVEMENTS = 2;
+		NOTIFY_VAC_ACTION = 3;
+	}
+
+	enum GCSQLVersion {
+		GCSQL_VERSION_BASELINE = 1;
+		GCSQL_VERSION_BOOLTYPE = 2;
+	}
+
+	repeated .CMsgGCMsgSetOptions.Option options = 1;
+	repeated .CMsgGCMsgSetOptions.MessageRange client_msg_ranges = 2;
+	optional .CMsgGCMsgSetOptions.GCSQLVersion gcsql_version = 3 [default = GCSQL_VERSION_BASELINE];
+}
+
+message CMsgGCHUpdateSession {
+	message ExtraField {
+		optional string name = 1;
+		optional string value = 2;
+	}
+
+	optional fixed64 steam_id = 1;
+	optional uint32 app_id = 2;
+	optional bool online = 3;
+	optional fixed64 server_steam_id = 4;
+	optional uint32 server_addr = 5;
+	optional uint32 server_port = 6;
+	optional uint32 os_type = 7;
+	optional uint32 client_addr = 8;
+	repeated .CMsgGCHUpdateSession.ExtraField extra_fields = 9;
+}
+
 message CMsgNotificationOfSuspiciousActivity {
 	message MultipleGameInstances {
 		optional uint32 app_instance_count = 1;

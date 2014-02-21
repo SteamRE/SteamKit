@@ -54,6 +54,7 @@ enum ECsgoGCMsg {
 	k_EMsgGCCStrike15_v2_ClientSubmitSurveyVote = 9152;
 	k_EMsgGCCStrike15_v2_Server2GCClientValidate = 9153;
 	k_EMsgGCCStrike15_v2_MatchListRequestLiveGameForUser = 9154;
+	k_EMsgGCCStrike15_v2_Server2GCPureServerValidationFailure = 9155;
 }
 
 message GameServerPing {
@@ -609,5 +610,16 @@ message CMsgGCCStrike15_v2_ClientSubmitSurveyVote {
 
 message CMsgGCCStrike15_v2_Server2GCClientValidate {
 	optional uint32 accountid = 1;
+}
+
+message CMsgGCCStrike15_v2_Server2GCPureServerValidationFailure {
+	optional uint32 accountid = 1;
+	optional string path = 2;
+	optional string file = 3;
+	optional uint32 crc = 4;
+	optional int32 hash = 5;
+	optional int32 len = 6;
+	optional int32 pack_number = 7;
+	optional int32 pack_file_id = 8;
 }
 
