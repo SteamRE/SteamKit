@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 
 namespace SteamLanguageParser
 {
-    class Token
+    public class Token
     {
         public string Name { get; private set; }
         public string Value { get; private set; }
@@ -18,7 +18,7 @@ namespace SteamLanguageParser
         }
     }
 
-    class LanguageParser
+    public class LanguageParser
     {
         public static string pattern =
         @"(?<whitespace>\s+)|" +
