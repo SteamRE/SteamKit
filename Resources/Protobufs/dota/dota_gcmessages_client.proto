@@ -1403,6 +1403,7 @@ message CMsgDOTAProfileResponse {
 	optional uint32 team_id = 12;
 	optional bool has_passport = 13;
 	repeated .CMsgDOTAProfileResponse.FeaturedItem featured_items = 14;
+	optional uint32 abandon_percent = 15;
 }
 
 message CMsgGCSteamProfileRequest {
