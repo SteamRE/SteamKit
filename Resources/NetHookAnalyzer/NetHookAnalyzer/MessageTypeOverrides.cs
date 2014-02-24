@@ -6,7 +6,7 @@ using SteamKit2.Internal;
 
 namespace NetHookAnalyzer
 {
-    class MessageTypeOverrides
+    static class MessageTypeOverrides
     {
         public static Dictionary<EMsg, Type> BodyMap = new Dictionary<EMsg, Type>
         {
