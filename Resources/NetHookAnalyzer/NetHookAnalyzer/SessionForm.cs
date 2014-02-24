@@ -14,6 +14,7 @@ using System.Collections;
 using SteamKit2.Internal;
 using ProtoBuf.Meta;
 using SteamKit2.GC;
+using SteamKit2.GC.Internal;
 
 namespace NetHookAnalyzer
 {
@@ -454,14 +455,14 @@ namespace NetHookAnalyzer
             return hdr;
         }
 
-        object BuildBody( uint realEMsg, Stream str , uint gcAppid = 0)
+        Type GetMessageBodyType( uint realEMsg )
         {
-            EMsg eMsg = MsgUtil.GetMsg( realEMsg );
+            EMsg eMsg = MsgUtil.GetMsg(realEMsg);
 
-            if ( eMsg == EMsg.ClientLogonGameServer )
-                eMsg = EMsg.ClientLogon; // temp hack for now
-            else if( eMsg == EMsg.ClientGamesPlayedWithDataBlob)
-                eMsg = EMsg.ClientGamesPlayed;
+            if ( MessageTypeOverrides.BodyMap.ContainsKey( eMsg ) )
+            {
+                return MessageTypeOverrides.BodyMap[eMsg];
+            }
 
             var protomsgType = typeof(CMClient).Assembly.GetTypes().ToList().Find(type =>
             {
@@ -473,6 +474,47 @@ namespace NetHookAnalyzer
 
                 return false;
             });
+
+            return protomsgType;
+        }
+
+        IEnumerable<Type> GetGCMessageBodyTypeCandidates( uint realEMsg, uint gcAppid = 0 )
+        {
+            uint eMsg = MsgUtil.GetGCMsg( realEMsg );
+
+            if ( MessageTypeOverrides.GCBodyMap.ContainsKey( eMsg ) )
+            {
+                return Enumerable.Repeat( MessageTypeOverrides.GCBodyMap[eMsg], 1 );
+            }
+
+            var gcMsgName = BuildEMsg( realEMsg );
+
+            var typeMsgName = gcMsgName
+                .Replace( "GC", string.Empty )
+                .Replace( "k_", string.Empty )
+                .Replace( "ESOMsg", string.Empty )
+                .TrimStart( '_' )
+                .Replace( "EMsg", string.Empty );
+            
+            var possibleTypes = from type in typeof(CMClient).Assembly.GetTypes()
+                                from typePrefix in GetPossibleGCTypePrefixes( gcAppid )
+                                where type.GetInterfaces().Contains( typeof(IExtensible) )
+                                where type.FullName.StartsWith( typePrefix ) && type.FullName.EndsWith( typeMsgName )
+                                select type;
+
+            return possibleTypes;
+        }
+
+        object BuildBody( uint realEMsg, Stream str , uint gcAppid = 0)
+        {
+            EMsg eMsg = MsgUtil.GetMsg( realEMsg );
+
+            if ( eMsg == EMsg.ClientLogonGameServer )
+                eMsg = EMsg.ClientLogon; // temp hack for now
+            else if( eMsg == EMsg.ClientGamesPlayedWithDataBlob)
+                eMsg = EMsg.ClientGamesPlayed;
+
+            var protomsgType = GetMessageBodyType( realEMsg );
 
             if (protomsgType != null)
             {
@@ -518,28 +560,7 @@ namespace NetHookAnalyzer
                 return Serializer.Deserialize<CMsgGCClient>( str );
             }
 
-            var gcMsgName = BuildEMsg( realEMsg );
-
-            var typeMsgName = gcMsgName
-                .Replace("GC", string.Empty)
-                .Replace("k_", string.Empty)
-                .Replace("ESOMsg", string.Empty)
-                .TrimStart('_')
-                .Replace("EMsg", string.Empty);
-
-            
-            if ( typeMsgName == "Create" || typeMsgName == "Destroy" || typeMsgName == "Update" )
-                typeMsgName = "SingleObject";
-            else if ( typeMsgName == "Multiple" )
-                typeMsgName = "MultipleObjects";
-
-            var possibleTypes = from type in typeof( CMClient ).Assembly.GetTypes()
-                                from typePrefix in GetPossibleGCTypePrefixes(gcAppid)
-                                where type.GetInterfaces().Contains( typeof ( IExtensible ) )
-                                where type.FullName.StartsWith( typePrefix ) && type.FullName.EndsWith( typeMsgName )
-                                select type;
-
-            foreach ( var type in possibleTypes )
+            foreach ( var type in GetGCMessageBodyTypeCandidates( realEMsg, gcAppid ) )
             {
                 var streamPos = str.Position;
                 try
