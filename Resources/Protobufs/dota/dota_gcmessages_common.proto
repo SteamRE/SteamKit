@@ -237,8 +237,6 @@ enum EDOTAGCMsg {
 	k_EMsgGCLastHitChallengeHighScoreResponse = 7292;
 	k_EMsgGCCreateFantasyLeagueRequest = 7293;
 	k_EMsgGCCreateFantasyLeagueResponse = 7294;
-	k_EMsgGCEditFantasyLeagueRequest = 7295;
-	k_EMsgGCEditFantasyLeagueResponse = 7296;
 	k_EMsgGCFantasyLeagueInfoRequest = 7297;
 	k_EMsgGCFantasyLeagueInfoResponse = 7298;
 	k_EMsgGCFantasyLeagueInfo = 7299;
@@ -376,6 +374,7 @@ enum EDOTAGCMsg {
 	k_EMsgGCFantasyMessagesResponse = 7438;
 	k_EMsgGCFantasyScheduledMatchesRequest = 7439;
 	k_EMsgGCFantasyScheduledMatchesResponse = 7440;
+	k_EMsgGCToGCGrantFantasyAccess = 7442;
 	k_EMsgGCDev_GrantWarKill = 8001;
 }
 

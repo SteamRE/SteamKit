@@ -1721,26 +1721,6 @@ message CMsgDOTACreateFantasyLeagueResponse {
 	optional .CMsgDOTACreateFantasyLeagueResponse.EResult result = 1 [default = SUCCESS];
 }
 
-message CMsgDOTAEditFantasyLeagueRequest {
-	optional uint32 fantasy_league_id = 1;
-	optional string league_name = 2;
-	optional uint64 league_logo = 3;
-	optional .Fantasy_Selection_Mode selection_mode = 4 [default = FANTASY_SELECTION_INVALID];
-	optional uint32 team_count = 5;
-}
-
-message CMsgDOTAEditFantasyLeagueResponse {
-	enum EResult {
-		SUCCESS = 0;
-		ERROR_UNSPECIFIED = 1;
-		ERROR_NO_PERMISSION = 2;
-		ERROR_UNKNOWN_LEAGUE = 3;
-		ERROR_CANNOT_SHRINK_LEAGUE = 4;
-	}
-
-	optional .CMsgDOTAEditFantasyLeagueResponse.EResult result = 1 [default = SUCCESS];
-}
-
 message CMsgFantasyLeagueRoleScoring {
 	optional float level = 1;
 	optional float kills = 2;
@@ -1770,7 +1750,6 @@ message CMsgDOTAFantasyLeagueInfo {
 	optional uint64 logo = 6;
 	optional .CMsgFantasyLeagueRoleScoring scoring = 7;
 	optional uint32 league_id = 10;
-	optional uint32 invite_guild_id = 11;
 	optional uint32 draft_time = 12;
 	optional uint32 draft_pick_time = 13;
 	optional uint32 matchup_interval = 14;
@@ -2281,17 +2260,18 @@ message CMsgDOTAFantasyPlayerHisoricalStatsResponse {
 		optional uint32 account_id = 1;
 		optional uint32 matches = 2;
 		optional float score = 3;
-		optional float kills = 4;
-		optional float deaths = 5;
-		optional float assists = 6;
-		optional float last_hits = 7;
-		optional float denies = 8;
-		optional float gpm = 9;
-		optional float xppm = 10;
-		optional float stuns = 11;
-		optional float healing = 12;
-		optional float tower_kills = 13;
-		optional float roshan_kills = 14;
+		optional float levels = 4;
+		optional float kills = 5;
+		optional float deaths = 6;
+		optional float assists = 7;
+		optional float last_hits = 8;
+		optional float denies = 9;
+		optional float gpm = 10;
+		optional float xppm = 11;
+		optional float stuns = 12;
+		optional float healing = 13;
+		optional float tower_kills = 14;
+		optional float roshan_kills = 15;
 	}
 
 	enum EResult {
