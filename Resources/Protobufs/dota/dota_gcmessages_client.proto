@@ -2020,6 +2020,7 @@ message CMsgDOTAFantasyLeagueCreateInfoResponse {
 	message FantasyLeagueCreateInfo {
 		optional uint32 league_id = 1;
 		optional string league_name = 2;
+		optional uint32 create_count = 3;
 	}
 
 	repeated .CMsgDOTAFantasyLeagueCreateInfoResponse.FantasyLeagueCreateInfo create_info = 1;
@@ -2125,7 +2126,8 @@ message CMsgDOTAFantasyLeagueDraftStatus {
 	repeated uint32 draft_order = 2;
 	optional uint32 current_pick = 3;
 	optional uint32 time_remaining = 4;
-	repeated uint32 available_players = 5;
+	optional bool pending_resume = 5;
+	repeated uint32 available_players = 6;
 }
 
 message CMsgDOTAFantasyLeagueDraftPlayerRequest {
