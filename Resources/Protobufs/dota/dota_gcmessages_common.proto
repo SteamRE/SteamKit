@@ -375,6 +375,8 @@ enum EDOTAGCMsg {
 	k_EMsgGCFantasyScheduledMatchesRequest = 7439;
 	k_EMsgGCFantasyScheduledMatchesResponse = 7440;
 	k_EMsgGCToGCGrantFantasyAccess = 7442;
+	k_EMsgGCPerfectWorldUserLookupRequest = 7444;
+	k_EMsgGCPerfectWorldUserLookupResponse = 7445;
 	k_EMsgGCDev_GrantWarKill = 8001;
 }
 
@@ -973,5 +975,22 @@ message CMsgRequestOfferingsResponse {
 
 	repeated .CMsgRequestOfferingsResponse.NewYearsOffering offerings = 1;
 	optional bool completed = 2;
+}
+
+message CMsgPerfectWorldUserLookupRequest {
+	optional string user_name = 1;
+}
+
+message CMsgPerfectWorldUserLookupResponse {
+	enum EResultCode {
+		SUCCESS_ACCOUNT_FOUND = 0;
+		ERROR_UNKNOWN = 1;
+		ERROR_USER_NAME_WRONG_FORMAT = 2;
+		ERROR_NO_PERFECT_WORLD_ACCOUNT_FOUND = 3;
+		ERROR_NO_LINKED_STEAM_ACCOUNT_FOUND = 4;
+	}
+
+	optional .CMsgPerfectWorldUserLookupResponse.EResultCode result_code = 1 [default = SUCCESS_ACCOUNT_FOUND];
+	optional uint32 account_id = 2;
 }
 
