@@ -189,8 +189,6 @@ namespace SteamKit2
                             break;
 
                         case DepotManifest.PROTOBUF_PAYLOAD_MAGIC:
-
-
                             uint payload_length = br.ReadUInt32();
                             byte[] payload_bytes = br.ReadBytes( (int)payload_length );
                             using ( var ms_payload = new MemoryStream( payload_bytes ) ) 
