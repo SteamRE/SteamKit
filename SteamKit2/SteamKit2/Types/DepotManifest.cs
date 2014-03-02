@@ -3,6 +3,8 @@
  * file 'license.txt', which is part of this source code package.
  */
 
+using ProtoBuf;
+using SteamKit2.Internal;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -17,6 +19,11 @@ namespace SteamKit2
     {
         // Mono is nuts and has '/' for both dirchar and altdirchar, going against the lore
         private static char altDirChar = (Path.DirectorySeparatorChar == '\\') ? '/' : '\\';
+
+        private const int PROTOBUF_PAYLOAD_MAGIC = 0x71F617D0;
+        private const int PROTOBUF_METADATA_MAGIC = 0x1F4812BE;
+        private const int PROTOBUF_SIGNATURE_MAGIC = 0x1B81B817;
+        private const int PROTOBUF_ENDOFMANIFEST_MAGIC = 0x32C415AB;
 
         /// <summary>
         /// Represents a single chunk within a file.
@@ -158,31 +165,69 @@ namespace SteamKit2
 
         void Deserialize(byte[] data)
         {
+            ContentManifestPayload payload = null;
+            ContentManifestMetadata metadata = null;
+            ContentManifestSignature signature = null;
+
             using ( var ms = new MemoryStream( data ) )
             using ( var br = new BinaryReader( ms ) )
             {
                 while ( ( ms.Length - ms.Position ) > 0 )
                 {
                     uint magic = br.ReadUInt32();
-                    ms.Seek( -4, SeekOrigin.Current );
 
                     switch ( magic )
                     {
                         case Steam3Manifest.MAGIC:
+                            ms.Seek(-4, SeekOrigin.Current);
                             Steam3Manifest binaryManifest = new Steam3Manifest( br );
                             ParseBinaryManifest( binaryManifest );
+
+                            uint marker = br.ReadUInt32();
+                            if ( marker != magic )
+                                throw new InvalidDataException( "Unable to find end of message marker for depot manifest" );
                             break;
 
-                            // todo: handle protobuf manifest?
+                        case DepotManifest.PROTOBUF_PAYLOAD_MAGIC:
+
+
+                            uint payload_length = br.ReadUInt32();
+                            byte[] payload_bytes = br.ReadBytes( (int)payload_length );
+                            using ( var ms_payload = new MemoryStream( payload_bytes ) ) 
+                                payload = Serializer.Deserialize<ContentManifestPayload>( ms_payload );
+                            break;
+
+                        case DepotManifest.PROTOBUF_METADATA_MAGIC:
+                            uint metadata_length = br.ReadUInt32();
+                            byte[] metadata_bytes = br.ReadBytes( (int)metadata_length );
+                            using ( var ms_metadata = new MemoryStream( metadata_bytes ) )
+                                metadata = Serializer.Deserialize<ContentManifestMetadata>( ms_metadata );
+                            break;
+
+                        case DepotManifest.PROTOBUF_SIGNATURE_MAGIC:
+                            uint signature_length = br.ReadUInt32();
+                            byte[] signature_bytes = br.ReadBytes( (int)signature_length );
+                            using ( var ms_signature = new MemoryStream( signature_bytes ) )
+                                signature = Serializer.Deserialize<ContentManifestSignature>( ms_signature );
+                            break;
+
+                        case DepotManifest.PROTOBUF_ENDOFMANIFEST_MAGIC:
+                            break;
 
                         default:
                             throw new NotImplementedException( string.Format( "Unrecognized magic value {0:X} in depot manifest.", magic ) );
                     }
-
-                    uint marker = br.ReadUInt32();
-                    if ( marker != magic )
-                        throw new InvalidDataException( "Unable to find end of message marker for depot manifest" );
                 }
+            }
+
+            if (payload != null && metadata != null && signature != null)
+            {
+                ParseProtobufManifestMetadata(metadata);
+                ParseProtobufManifestPayload(payload);
+            }
+            else
+            {
+                throw new InvalidDataException("Missing ContentManifest sections required for parsing depot manifest");
             }
         }
 
@@ -204,5 +249,26 @@ namespace SteamKit2
             }
         }
 
+        void ParseProtobufManifestPayload(ContentManifestPayload payload)
+        {
+            Files = new List<FileData>(payload.mappings.Count);
+
+            foreach (var file_mapping in payload.mappings)
+            {
+                FileData filedata = new FileData(file_mapping.filename, (EDepotFileFlag)file_mapping.flags, file_mapping.size, file_mapping.sha_content, FilenamesEncrypted, file_mapping.chunks.Count);
+
+                foreach (var chunk in file_mapping.chunks)
+                {
+                    filedata.Chunks.Add( new ChunkData( chunk.sha, BitConverter.GetBytes(chunk.crc), chunk.offset, chunk.cb_compressed, chunk.cb_original ) );
+                }
+
+                Files.Add(filedata);
+            }
+        }
+
+        void ParseProtobufManifestMetadata(ContentManifestMetadata metadata)
+        {
+            FilenamesEncrypted = metadata.filenames_encrypted;
+        }
     }
 }

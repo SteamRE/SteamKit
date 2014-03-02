@@ -330,7 +330,7 @@ namespace SteamKit2
         /// <returns>A <see cref="DepotManifest"/> instance that contains information about the files present within a depot.</returns>
         public DepotManifest DownloadManifest( ulong manifestId )
         {
-            byte[] compressedManifest = DoRawCommand( connectedServer, "depot", doAuth: true, args: string.Format( "{0}/manifest/{1}", depotId, manifestId ) );
+            byte[] compressedManifest = DoRawCommand( connectedServer, "depot", doAuth: true, args: string.Format( "{0}/manifest/{1}/5", depotId, manifestId ) );
 
             byte[] manifestData = ZipUtil.Decompress( compressedManifest );
 
