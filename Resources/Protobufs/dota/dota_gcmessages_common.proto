@@ -377,6 +377,8 @@ enum EDOTAGCMsg {
 	k_EMsgGCToGCGrantFantasyAccess = 7442;
 	k_EMsgGCPerfectWorldUserLookupRequest = 7444;
 	k_EMsgGCPerfectWorldUserLookupResponse = 7445;
+	k_EMsgGCFantasyRemoveOwner = 7448;
+	k_EMsgGCFantasyRemoveOwnerResponse = 7449;
 	k_EMsgGCDev_GrantWarKill = 8001;
 }
 
