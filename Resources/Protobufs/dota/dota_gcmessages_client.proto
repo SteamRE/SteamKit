@@ -1884,6 +1884,7 @@ message CMsgDOTAFantasyTeamScoreRequest {
 	optional uint32 filter_match_id = 4;
 	optional uint32 filter_start_time = 5;
 	optional uint32 filter_end_time = 6;
+	optional bool include_bench = 7;
 }
 
 message CMsgDOTAFantasyTeamScoreResponse {

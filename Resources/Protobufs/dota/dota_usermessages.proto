@@ -695,6 +695,8 @@ message CDOTAUserMsg_BoosterStatePlayer {
 	optional uint32 player_id = 1;
 	optional float bonus = 2;
 	optional float event_bonus = 3;
+	optional uint32 bonus_item_id = 4;
+	optional uint32 event_bonus_item_id = 5;
 }
 
 message CDOTAUserMsg_BoosterState {

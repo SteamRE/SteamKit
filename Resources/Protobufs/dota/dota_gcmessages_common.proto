@@ -374,6 +374,7 @@ enum EDOTAGCMsg {
 	k_EMsgGCFantasyMessagesResponse = 7438;
 	k_EMsgGCFantasyScheduledMatchesRequest = 7439;
 	k_EMsgGCFantasyScheduledMatchesResponse = 7440;
+	k_EMsgGCToGCGrantLeagueAccess = 7441;
 	k_EMsgGCToGCGrantFantasyAccess = 7442;
 	k_EMsgGCPerfectWorldUserLookupRequest = 7444;
 	k_EMsgGCPerfectWorldUserLookupResponse = 7445;
