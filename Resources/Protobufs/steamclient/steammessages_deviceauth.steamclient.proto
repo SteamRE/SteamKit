@@ -74,6 +74,7 @@ message CDeviceAuth_GetAuthorizedBorrowers_Response {
 		optional fixed64 steamid = 1;
 		optional bool is_pending = 2;
 		optional bool is_canceled = 3;
+		optional uint32 time_created = 4;
 	}
 
 	repeated .CDeviceAuth_GetAuthorizedBorrowers_Response.Borrower borrowers = 1;

@@ -1260,6 +1260,8 @@ message CMsgClientUFSGetUGCDetailsResponse {
 	optional string filename = 4;
 	optional fixed64 steamid_creator = 5;
 	optional uint32 file_size = 6;
+	optional uint32 compressed_file_size = 7;
+	optional string rangecheck_host = 8;
 }
 
 message CMsgClientUFSGetSingleFileInfo {
@@ -1868,6 +1870,19 @@ message CMsgClientMDSInitDepotBuildResponse {
 	optional bytes encrypted_depot_key = 4;
 }
 
+message CMsgClientMDSInitWorkshopBuildRequest {
+	optional uint32 depot_id = 1;
+	optional uint32 app_id = 2;
+	optional uint64 workshop_item_id = 3;
+}
+
+message CMsgClientMDSInitWorkshopBuildResponse {
+	optional int32 eresult = 1 [default = 2];
+	optional uint32 default_chunk_size = 2;
+	optional fixed64 base_manifest = 3;
+	optional bytes symmetric_depot_key = 4;
+}
+
 message CMsgClientMDSLoginRequest {
 	optional bytes encrypted_session_key = 1;
 }
@@ -2228,12 +2243,13 @@ message CMsgGCClient {
 }
 
 message CMsgClientRequestFreeLicense {
-	optional uint32 app_id = 1;
+	repeated uint32 appids = 2;
 }
 
 message CMsgClientRequestFreeLicenseResponse {
 	optional uint32 eresult = 1 [default = 2];
-	optional uint32 package_id = 2;
+	repeated uint32 granted_packageids = 2;
+	repeated uint32 granted_appids = 3;
 }
 
 message CMsgDRMDownloadRequestWithCrashData {

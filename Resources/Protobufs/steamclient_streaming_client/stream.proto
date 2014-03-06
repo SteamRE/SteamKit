@@ -71,14 +71,12 @@ enum EStreamAudioCodec {
 enum EStreamVideoCodec {
 	k_EStreamVideoCodecNone = 0;
 	k_EStreamVideoCodecRaw = 1;
-	k_EStreamVideoCodecHuffYUV = 2;
-	k_EStreamVideoCodecULY0 = 3;
-	k_EStreamVideoCodecVP8 = 4;
-	k_EStreamVideoCodecVP9 = 5;
-	k_EStreamVideoCodecH264 = 6;
-	k_EStreamVideoCodecH265 = 7;
-	k_EStreamVideoCodecORBX1 = 8;
-	k_EStreamVideoCodecORBX2 = 9;
+	k_EStreamVideoCodecVP8 = 2;
+	k_EStreamVideoCodecVP9 = 3;
+	k_EStreamVideoCodecH264 = 4;
+	k_EStreamVideoCodecH265 = 5;
+	k_EStreamVideoCodecORBX1 = 6;
+	k_EStreamVideoCodecORBX2 = 7;
 }
 
 enum EStreamingDataType {
@@ -129,11 +127,12 @@ enum EStreamBitrate {
 }
 
 enum EStreamFramerateLimiter {
-	k_EStreamFramerateSlowEncode = 1;
-	k_EStreamFramerateSlowNetwork = 2;
-	k_EStreamFramerateSlowDecode = 4;
-	k_EStreamFramerateSlowGame = 8;
-	k_EStreamFramerateSlowCapture = 16;
+	k_EStreamFramerateSlowCapture = 1;
+	k_EStreamFramerateSlowConvert = 2;
+	k_EStreamFramerateSlowEncode = 4;
+	k_EStreamFramerateSlowNetwork = 8;
+	k_EStreamFramerateSlowDecode = 16;
+	k_EStreamFramerateSlowGame = 32;
 }
 
 enum EStreamDataMessage {
@@ -194,22 +193,23 @@ enum EStreamFrameResult {
 enum EFrameAccumulatedStat {
 	k_EFrameStatFPS = 0;
 	k_EFrameStatCaptureDurationMS = 1;
-	k_EFrameStatEncodeDurationMS = 2;
-	k_EFrameStatSteamDurationMS = 3;
-	k_EFrameStatServerDurationMS = 4;
-	k_EFrameStatNetworkDurationMS = 5;
-	k_EFrameStatDecodeDurationMS = 6;
-	k_EFrameStatDisplayDurationMS = 7;
-	k_EFrameStatClientDurationMS = 8;
-	k_EFrameStatFrameDurationMS = 9;
-	k_EFrameStatInputLatencyMS = 10;
-	k_EFrameStatGameLatencyMS = 11;
-	k_EFrameStatRoundTripLatencyMS = 12;
-	k_EFrameStatPingTimeMS = 13;
-	k_EFrameStatServerBitrateKbitPerSec = 14;
-	k_EFrameStatClientBitrateKbitPerSec = 15;
-	k_EFrameStatLinkBandwidthKbitPerSec = 16;
-	k_EFrameStatPacketLossPercentage = 17;
+	k_EFrameStatConvertDurationMS = 2;
+	k_EFrameStatEncodeDurationMS = 3;
+	k_EFrameStatSteamDurationMS = 4;
+	k_EFrameStatServerDurationMS = 5;
+	k_EFrameStatNetworkDurationMS = 6;
+	k_EFrameStatDecodeDurationMS = 7;
+	k_EFrameStatDisplayDurationMS = 8;
+	k_EFrameStatClientDurationMS = 9;
+	k_EFrameStatFrameDurationMS = 10;
+	k_EFrameStatInputLatencyMS = 11;
+	k_EFrameStatGameLatencyMS = 12;
+	k_EFrameStatRoundTripLatencyMS = 13;
+	k_EFrameStatPingTimeMS = 14;
+	k_EFrameStatServerBitrateKbitPerSec = 15;
+	k_EFrameStatClientBitrateKbitPerSec = 16;
+	k_EFrameStatLinkBandwidthKbitPerSec = 17;
+	k_EFrameStatPacketLossPercentage = 18;
 }
 
 message CDiscoveryRequest {

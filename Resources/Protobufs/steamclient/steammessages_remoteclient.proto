@@ -76,13 +76,12 @@ message CMsgRemoteClientAuthResponse {
 message CMsgRemoteClientStartStream {
 	optional uint32 app_id = 1;
 	optional int32 environment = 2;
-	optional bool has_gamepad = 3;
+	optional int32 gamepad_count = 3;
 	optional int32 launch_option = 4 [default = -1];
 	optional bool lock_parental_lock = 5 [default = false];
 	optional string unlock_parental_lock = 6;
 	optional int32 maximum_resolution_x = 7;
 	optional int32 maximum_resolution_y = 8;
-	optional int32 gamepad_count = 9;
 }
 
 message CMsgRemoteClientStartStreamResponse {

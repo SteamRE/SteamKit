@@ -26,8 +26,6 @@ message CGameServers_GetServerList_Response {
 		optional bool dedicated = 16;
 		optional string os = 17;
 		optional string gametype = 18;
-		optional bool proxy = 19;
-		optional bool proxyonly = 20;
 	}
 
 	repeated .CGameServers_GetServerList_Response.Server servers = 1 [(description) = "List of servers matching the filter"];
