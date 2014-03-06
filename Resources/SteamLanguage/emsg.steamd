@@ -252,7 +252,7 @@ enum EMsg
 	ClientSystemIM = 726;
 	ClientSystemIMAck = 727;
 	ClientGetLicenses = 728;
-	ClientCancelLicense = 729;
+	ClientCancelLicense = 729; obsolete
 	ClientGetLegacyGameKey = 730;
 	ClientContentServerLogOn_Deprecated = 731; obsolete
 	ClientAckVACBan2 = 732;
@@ -293,7 +293,7 @@ enum EMsg
 	ClientGetFinalPriceResponse = 775;
 	ClientGameConnectTokens = 779;
 	ClientLicenseList = 780;
-	ClientCancelLicenseResponse = 781;
+	ClientCancelLicenseResponse = 781; obsolete
 	ClientVACBanStatus = 782;
 	ClientCMList = 783;
 	ClientEncryptPct = 784;
@@ -1400,8 +1400,10 @@ enum EMsg
 	MDSToAMGetDepotDecryptionKeyResponse = 5813;
 	MDSGetVersionsForDepot = 5814;
 	MDSGetVersionsForDepotResponse = 5815;
-	MDSSetPublicVersionForDepot = 5816;
-	MDSSetPublicVersionForDepotResponse = 5817;
+	MDSSetPublicVersionForDepot = 5816; obsolete
+	MDSSetPublicVersionForDepotResponse = 5817; obsolete
+	ClientMDSInitWorkshopBuildRequest = 5816;
+	ClientMDSInitWorkshopBuildResponse = 5817;
 	ClientMDSGetDepotManifest = 5818;
 	ClientMDSGetDepotManifestResponse = 5819;
 	ClientMDSGetDepotManifestChunk = 5820;

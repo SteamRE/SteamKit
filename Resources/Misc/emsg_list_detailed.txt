@@ -21,7 +21,6 @@
 	k_EMsgClientSystemIM = 726, // flags: 2, server type: -1
 	k_EMsgClientSystemIMAck = 727, // flags: 2, server type: -1
 	k_EMsgClientGetLicenses = 728, // flags: 2, server type: -1
-	k_EMsgClientCancelLicense = 729, // flags: 2, server type: -1
 	k_EMsgClientGetLegacyGameKey = 730, // flags: 2, server type: -1
 	k_EMsgClientContentServerLogOn_Deprecated = 731, // flags: 2, server type: -1
 	k_EMsgClientAckVACBan2 = 732, // flags: 2, server type: -1
@@ -56,7 +55,6 @@
 	k_EMsgGSStatusReply = 774, // flags: 2, server type: -1
 	k_EMsgClientGameConnectTokens = 779, // flags: 2, server type: -1
 	k_EMsgClientLicenseList = 780, // flags: 2, server type: -1
-	k_EMsgClientCancelLicenseResponse = 781, // flags: 2, server type: -1
 	k_EMsgClientVACBanStatus = 782, // flags: 2, server type: -1
 	k_EMsgClientCMList = 783, // flags: 2, server type: -1
 	k_EMsgClientEncryptPct = 784, // flags: 2, server type: -1
@@ -360,6 +358,8 @@
 	k_EMsgClientMDSUploadDepotChunksResponse = 5808, // flags: 2, server type: -1
 	k_EMsgClientMDSInitDepotBuildRequest = 5809, // flags: 2, server type: -1
 	k_EMsgClientMDSInitDepotBuildResponse = 5810, // flags: 2, server type: -1
+	k_EMsgClientMDSInitWorkshopBuildRequest = 5816, // flags: 2, server type: -1
+	k_EMsgClientMDSInitWorkshopBuildResponse = 5817, // flags: 2, server type: -1
 	k_EMsgClientMDSGetDepotManifest = 5818, // flags: 2, server type: -1
 	k_EMsgClientMDSGetDepotManifestResponse = 5819, // flags: 2, server type: -1
 	k_EMsgClientMDSGetDepotManifestChunk = 5820, // flags: 2, server type: -1

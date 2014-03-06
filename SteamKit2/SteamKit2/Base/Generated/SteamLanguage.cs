@@ -257,6 +257,7 @@ namespace SteamKit2
 		ClientSystemIM = 726,
 		ClientSystemIMAck = 727,
 		ClientGetLicenses = 728,
+		[Obsolete]
 		ClientCancelLicense = 729,
 		ClientGetLegacyGameKey = 730,
 		[Obsolete]
@@ -302,6 +303,7 @@ namespace SteamKit2
 		ClientGetFinalPriceResponse = 775,
 		ClientGameConnectTokens = 779,
 		ClientLicenseList = 780,
+		[Obsolete]
 		ClientCancelLicenseResponse = 781,
 		ClientVACBanStatus = 782,
 		ClientCMList = 783,
@@ -1412,8 +1414,12 @@ namespace SteamKit2
 		MDSToAMGetDepotDecryptionKeyResponse = 5813,
 		MDSGetVersionsForDepot = 5814,
 		MDSGetVersionsForDepotResponse = 5815,
+		[Obsolete]
 		MDSSetPublicVersionForDepot = 5816,
+		[Obsolete]
 		MDSSetPublicVersionForDepotResponse = 5817,
+		ClientMDSInitWorkshopBuildRequest = 5816,
+		ClientMDSInitWorkshopBuildResponse = 5817,
 		ClientMDSGetDepotManifest = 5818,
 		ClientMDSGetDepotManifestResponse = 5819,
 		ClientMDSGetDepotManifestChunk = 5820,
