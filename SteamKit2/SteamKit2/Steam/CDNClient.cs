@@ -186,12 +186,13 @@ namespace SteamKit2
         /// If this parameter is not specified, Steam's GeoIP suggested CellID will be used instead.
         /// </param>
         /// <param name="maxServers">The maximum amount of servers to request.</param>
+        /// <param name="typeFilter">The type of content server to get. Defaults to EServerType.CS</param>
         /// <returns>A list of servers.</returns>
         /// <exception cref="System.InvalidOperationException">
         /// No Steam CS servers available, or the suggested CellID is unavailable.
         /// Check that the <see cref="SteamClient"/> associated with this <see cref="CDNClient"/> instance is logged onto Steam.
         /// </exception>
-        public List<Server> FetchServerList( IPEndPoint csServer = null, uint? cellId = null, int maxServers = 20 )
+        public IEnumerable<Server> FetchServerList( IPEndPoint csServer = null, uint? cellId = null, int maxServers = 20, EServerType typeFilter = EServerType.CS )
         {
             DebugLog.Assert( steamClient.IsConnected, "CDNClient", "CMClient is not connected!" );
             DebugLog.Assert( steamClient.CellID != null, "CDNClient", "CMClient is not logged on!" );
@@ -264,7 +265,7 @@ namespace SteamKit2
                 } );
             }
 
-            return serverList;
+            return serverList.Where( server => server.Type == Enum.GetName( typeof( EServerType ), typeFilter ) );
         }
 
 
