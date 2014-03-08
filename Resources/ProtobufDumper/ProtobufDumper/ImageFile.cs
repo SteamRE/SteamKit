@@ -9,6 +9,7 @@ using System.ComponentModel;
 using ProtoBuf;
 using ProtoBuf.Meta;
 using google.protobuf;
+using System.Text.RegularExpressions;
 
 namespace ProtobufDumper
 {
@@ -153,6 +154,13 @@ namespace ProtobufDumper
                     }
 
                     if (!protoName.EndsWith(".proto", StringComparison.Ordinal))
+                    {
+                        dataPtr = originalPtr + 1;
+                        continue;
+                    }
+
+                    Regex regex = new Regex(@"^[a-zA-Z_\\/.]+.proto$");
+                    if (!regex.IsMatch(protoName))
                     {
                         dataPtr = originalPtr + 1;
                         continue;
