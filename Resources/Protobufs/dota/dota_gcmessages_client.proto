@@ -601,6 +601,7 @@ message CMsgDOTAPopup {
 		GAME_MODE_NOT_UNLOCKED = 37;
 		SAVE_GAME_CORRUPT = 38;
 		INSUFFICIENT_INGOTS = 39;
+		COMPETITIVE_MM_NO_4STACKS = 40;
 	}
 
 	optional .CMsgDOTAPopup.PopupID id = 1 [default = KICKED_FROM_LOBBY];
@@ -1472,6 +1473,7 @@ message CLeague {
 	optional fixed32 lastgametime = 4;
 	optional uint32 prize_pool_usd = 5;
 	optional uint32 version = 6;
+	optional bool compendium_is_public = 7;
 }
 
 message CMsgResponseLeagueInfo {
@@ -2091,7 +2093,8 @@ message CMsgDOTAFantasyTeamCreateResponse {
 		ERROR_BAD_FANTASY_LEAGUE_ID = 3;
 		ERROR_BAD_NAME = 4;
 		ERROR_FULL = 5;
-		ERROR_UNSPECIFIED = 6;
+		ERROR_ALREADY_MEMBER = 6;
+		ERROR_UNSPECIFIED = 7;
 	}
 
 	optional .CMsgDOTAFantasyTeamCreateResponse.EResult result = 1 [default = SUCCESS];
@@ -2128,7 +2131,8 @@ message CMsgDOTAFantasyLeagueDraftStatus {
 	optional uint32 current_pick = 3;
 	optional uint32 time_remaining = 4;
 	optional bool pending_resume = 5;
-	repeated uint32 available_players = 6;
+	optional bool completed = 6;
+	repeated uint32 available_players = 7;
 }
 
 message CMsgDOTAFantasyLeagueDraftPlayerRequest {
@@ -2569,6 +2573,11 @@ message CMsgDOTACompendiumSelection {
 	optional uint32 leagueid = 3;
 }
 
+message CMsgDOTACompendiumSelectionResponse {
+	optional uint32 eresult = 1 [default = 2];
+	repeated .CMsgDOTACompendiumSelection extra_selections = 2;
+}
+
 message CMsgDOTACompendiumData {
 	repeated .CMsgDOTACompendiumSelection selections = 1;
 }
@@ -2645,6 +2654,10 @@ message CMsgGCNotificationsResponse {
 	optional .CMsgGCNotificationsResponse.EResult result = 1 [default = SUCCESS];
 	repeated .CMsgGCNotificationsResponse.Notification notification = 2;
 	optional uint32 num_total_notifications = 3;
+}
+
+message CMsgGCLeagueAdminState {
+	repeated uint32 leagues = 1;
 }
 
 message CMsgGCNotificationsDismissRequest {

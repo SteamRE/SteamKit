@@ -142,10 +142,6 @@ message CMsgGCRequestSubGCSessionInfoResponse {
 	optional bool trusted = 2;
 }
 
-message CMsgGCToGCIncrementRecruitmentLevel {
-	optional fixed64 steamid = 1;
-}
-
 message CMsgSOCacheHaveVersion {
 	optional .CMsgSOIDOwner soid = 1;
 	optional fixed64 version = 2;

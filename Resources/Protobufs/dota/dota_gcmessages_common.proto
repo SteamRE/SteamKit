@@ -368,6 +368,10 @@ enum EDOTAGCMsg {
 	k_EMsgGCNotificationsResponse = 7428;
 	k_EMsgGCToGCModifyNotification = 7429;
 	k_EMsgGCToGCSetNewNotifications = 7430;
+	k_EMsgGCToGCSetIsLeagueAdmin = 7431;
+	k_EMsgGCLeagueAdminState = 7432;
+	k_EMsgGCToGCSendLeagueAdminState = 7433;
+	k_EMsgGCLeagueAdminList = 7434;
 	k_EMsgGCNotificationsDismissRequest = 7435;
 	k_EMsgGCFantasyMessageAdd = 7436;
 	k_EMsgGCFantasyMessagesRequest = 7437;
@@ -380,6 +384,10 @@ enum EDOTAGCMsg {
 	k_EMsgGCPerfectWorldUserLookupResponse = 7445;
 	k_EMsgGCFantasyRemoveOwner = 7448;
 	k_EMsgGCFantasyRemoveOwnerResponse = 7449;
+	k_EMsgGCRequestBatchPlayerResources = 7450;
+	k_EMsgGCRequestBatchPlayerResourcesResponse = 7451;
+	k_EMsgGCToGCSendUpdateLeagues = 7452;
+	k_EMsgGCCompendiumSetSelectionResponse = 7453;
 	k_EMsgGCDev_GrantWarKill = 8001;
 }
 
@@ -588,6 +596,7 @@ message CSODOTAGameAccountClient {
 	optional uint32 solo_calibration_games_remaining = 54;
 	optional uint32 recruitment_level = 55;
 	optional bool has_new_notifications = 56;
+	optional bool is_league_admin = 57;
 }
 
 message CSODOTAPartyMember {
@@ -978,6 +987,10 @@ message CMsgRequestOfferingsResponse {
 
 	repeated .CMsgRequestOfferingsResponse.NewYearsOffering offerings = 1;
 	optional bool completed = 2;
+}
+
+message CMsgLeagueAdminList {
+	repeated uint32 account_ids = 1;
 }
 
 message CMsgPerfectWorldUserLookupRequest {

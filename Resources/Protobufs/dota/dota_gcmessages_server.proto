@@ -249,6 +249,25 @@ message CMsgDOTARequestPlayerResourcesResponse {
 	optional bool low_priority = 6;
 }
 
+message CMsgDOTARequestBatchPlayerResources {
+	repeated uint32 account_ids = 1 [packed = true];
+	optional bool rank_use_competitive = 2;
+	repeated bool rank_use_solo = 3 [packed = true];
+}
+
+message CMsgDOTARequestBatchPlayerResourcesResponse {
+	message Result {
+		optional uint32 account_id = 1;
+		optional bool prevent_text_chat = 2;
+		optional bool prevent_voice_chat = 3;
+		optional uint32 rank = 4;
+		optional bool rank_calibrated = 5;
+		optional bool low_priority = 6;
+	}
+
+	repeated .CMsgDOTARequestBatchPlayerResourcesResponse.Result results = 6;
+}
+
 message CMsgDOTAPlayerFailedToConnect {
 	repeated fixed64 failed_loaders = 1;
 	repeated fixed64 abandoned_loaders = 2;
