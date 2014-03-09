@@ -279,7 +279,7 @@ namespace SteamKit2
             var typeString = m.Groups["type"].Value;
             if ( typeString.Length != 1 )
                 return false;
-            type = typeString.ToCharArray().Single();
+            type = typeString[ 0 ];
 
             uint instance = 1;
             var instanceGroup = m.Groups["instance"];
