@@ -6,7 +6,9 @@
 
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace SteamKit2
@@ -50,9 +52,27 @@ namespace SteamKit2
     {
         BitVector64 steamid;
 
-        static Regex SteamIDRegex = new Regex(
+        static Regex Steam2Regex = new Regex(
             @"STEAM_(?<universe>[0-5]):(?<authserver>[0-1]):(?<accountid>\d+)",
             RegexOptions.Compiled | RegexOptions.IgnoreCase );
+
+        static Regex Steam3Regex = new Regex(
+            @"\[(?<type>[AGMPCgcLTIUai]):(?<universe>[0-5]):(?<account>\d+)(:(?<instance>\d+))?\]",
+            RegexOptions.Compiled | RegexOptions.IgnoreCase );
+
+        static Dictionary<EAccountType, char> AccountTypeChars = new Dictionary<EAccountType, char>
+        {
+            { EAccountType.AnonGameServer, 'A' },
+            { EAccountType.GameServer, 'G' },
+            { EAccountType.Multiseat, 'M' },
+            { EAccountType.Pending, 'P' },
+            { EAccountType.ContentServer, 'C' },
+            { EAccountType.Clan, 'g' },
+            { EAccountType.Chat, 'T' }, // Lobby chat is 'L', Clan chat is 'c'
+            { EAccountType.Invalid, 'I' },
+            { EAccountType.Individual, 'U' },
+            { EAccountType.AnonUser, 'a' },
+        };
 
         /// <summary>
         /// The account instance value when representing all instanced <see cref="SteamID">SteamIDs</see>.
@@ -214,7 +234,7 @@ namespace SteamKit2
             if ( string.IsNullOrEmpty( steamId ) )
                 return false;
 
-            Match m = SteamIDRegex.Match( steamId );
+            Match m = Steam2Regex.Match( steamId );
 
             if ( !m.Success )
                 return false;
@@ -228,6 +248,64 @@ namespace SteamKit2
             this.AccountInstance = 1;
             this.AccountType = EAccountType.Individual;
             this.AccountID = ( accId << 1 ) | authServer;
+
+            return true;
+        }
+
+        /// <summary>
+        /// Sets the various components of this SteamID from a Steam3 "[X:1:2:3]" rendered form and universe.
+        /// </summary>
+        /// <param name="steamId">A "[X:1:2:3]" rendered form of the SteamID.</param>
+        /// <returns><c>true</c> if this instance was successfully assigned; otherwise, <c>false</c> if the given string was in an invalid format.</returns>
+        public bool SetFromSteam3String( string steamId )
+        {
+            if ( string.IsNullOrEmpty( steamId ) )
+                return false;
+
+            Match m = Steam3Regex.Match( steamId );
+
+            if ( !m.Success )
+                return false;
+
+            uint accId;
+            if ( !uint.TryParse( m.Groups["account"].Value, out accId ) )
+                return false;
+
+            uint universe;
+            if ( !uint.TryParse( m.Groups["universe"].Value, out universe ) )
+                return false;
+
+            char type;
+            var typeString = m.Groups["type"].Value;
+            if ( typeString.Length != 1 )
+                return false;
+            type = typeString.ToCharArray().Single();
+
+            uint instance = 1;
+            var instanceGroup = m.Groups["instance"];
+            if ( instanceGroup != null && !string.IsNullOrEmpty( instanceGroup.Value ) )
+            {
+                instance = uint.Parse( instanceGroup.Value );
+            }
+
+            if (type == 'c')
+            {
+                instance = ( uint )( ( ChatInstanceFlags )instance | ChatInstanceFlags.Clan );
+                this.AccountType = EAccountType.Chat;
+            }
+            else if (type == 'L')
+            {
+                instance = ( uint )( ( ChatInstanceFlags )instance | ChatInstanceFlags.Lobby );
+                this.AccountType = EAccountType.Chat;
+            }
+            else
+            {
+                this.AccountType = AccountTypeChars.First( x => x.Value == type ).Key;
+            }
+
+            this.AccountUniverse = ( EUniverse )universe;
+            this.AccountInstance = instance;
+            this.AccountID = accId;
 
             return true;
         }
@@ -526,57 +604,40 @@ namespace SteamKit2
                     return Convert.ToString( this );
             }
         }
+
         string RenderSteam3()
         {
+            var accountTypeChar = AccountTypeChars.ContainsKey(AccountType) ? AccountTypeChars[AccountType] : 'i';
+
+            if ( AccountType == EAccountType.Chat )
+            {
+                if ( ( ( ChatInstanceFlags )AccountInstance ).HasFlag( ChatInstanceFlags.Clan ) )
+                   accountTypeChar = 'c';
+                else if ( ( ( ChatInstanceFlags )AccountInstance ).HasFlag( ChatInstanceFlags.Lobby ) )
+                    accountTypeChar = 'L';
+            }
+
+            bool renderInstance = false;
+
             switch ( AccountType )
             {
                 case EAccountType.AnonGameServer:
-                    return string.Format( "[A:{0}:{1}:{2}]", ( uint )AccountUniverse, AccountID, AccountInstance );
-
-                case EAccountType.GameServer:
-                    return string.Format( "[G:{0}:{1}]", ( uint )AccountUniverse, AccountID );
-
                 case EAccountType.Multiseat:
-                    return string.Format( "[M:{0}:{1}:{2}]", ( uint )AccountUniverse, AccountID, AccountInstance );
-
-                case EAccountType.Pending:
-                    return string.Format( "[P:{0}:{1}]", ( uint )AccountUniverse, AccountID );
-
-                case EAccountType.ContentServer:
-                    return string.Format( "[C:{0}:{1}]", ( uint )AccountUniverse, AccountID );
-
-                case EAccountType.Clan:
-                    return string.Format( "[g:{0}:{1}]", ( uint )AccountUniverse, AccountID );
-
-                case EAccountType.Chat:
-                    {
-                        if ( ( ( ChatInstanceFlags )AccountInstance ).HasFlag( ChatInstanceFlags.Clan ) )
-                            return string.Format( "[c:{0}:{1}]", ( uint )AccountUniverse, AccountID );
-
-                        else if ( ( ( ChatInstanceFlags )AccountInstance ).HasFlag( ChatInstanceFlags.Lobby ) )
-                            return string.Format( "[L:{0}:{1}]", ( uint )AccountUniverse, AccountID );
-
-                        else
-                            return string.Format( "[T:{0}:{1}]", ( uint )AccountUniverse, AccountID );
-                    }
-
-                case EAccountType.Invalid:
-                    return string.Format( "[I:{0}:{1}]", ( uint )AccountUniverse, AccountID );
+                    renderInstance = true;
+                    break;
 
                 case EAccountType.Individual:
-                    {
-                        if ( AccountInstance == DesktopInstance )
-                            return string.Format( "[U:{0}:{1}]", ( uint )AccountUniverse, AccountID );
+                    renderInstance = (AccountInstance != DesktopInstance);
+                    break;
+            }
 
-                        else
-                            return string.Format( "[U:{0}:{1}:{2}]", ( uint )AccountUniverse, AccountID, AccountInstance );
-                    }
-
-                case EAccountType.AnonUser:
-                    return string.Format( "[a:{0}:{1}]", ( uint )AccountUniverse, AccountID );
-
-                default:
-                    return string.Format( "[i:{0}:{1}]", ( uint )AccountUniverse, AccountID );
+            if ( renderInstance )
+            {
+                    return string.Format( "[{0}:{1}:{2}:{3}]", accountTypeChar, ( uint )AccountUniverse, AccountID, AccountInstance );
+            }
+            else 
+            {
+                    return string.Format( "[{0}:{1}:{2}]", accountTypeChar, ( uint )AccountUniverse, AccountID );
             }
         }
 
