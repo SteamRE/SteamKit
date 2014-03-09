@@ -4,7 +4,7 @@
  */
 
 
-
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using SteamKit2.Internal;
@@ -383,6 +383,7 @@ namespace SteamKit2
         /// <param name="giftId">64-bit GID of the gift</param>
         /// <param name="accountId">Account ID of the recipient</param>
         /// <param name="email">Optional email of the recipient</param>
+        [Obsolete( "Support for sending gift passes through Steam has likely been removed, and SteamKit will be dropping support for this in a future version" )]
         public void SendGuestPass( ulong giftId, uint accountId, string email = null )
         {
             var sendGift = new ClientMsg<MsgClientSendGuestPass>();
@@ -461,9 +462,11 @@ namespace SteamKit2
                     HandleGuestPassList( packetMsg );
                     break;
 
+#pragma warning disable 0612
                 case EMsg.ClientSendGuestPassResponse:
                     HandleSendGuestPassResponse( packetMsg );
                     break;
+#pragma warning restore 0612
             }
         }
 
