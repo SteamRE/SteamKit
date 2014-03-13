@@ -237,8 +237,6 @@ enum EDOTAGCMsg {
 	k_EMsgGCLastHitChallengeHighScoreResponse = 7292;
 	k_EMsgGCCreateFantasyLeagueRequest = 7293;
 	k_EMsgGCCreateFantasyLeagueResponse = 7294;
-	k_EMsgGCEditFantasyLeagueRequest = 7295;
-	k_EMsgGCEditFantasyLeagueResponse = 7296;
 	k_EMsgGCFantasyLeagueInfoRequest = 7297;
 	k_EMsgGCFantasyLeagueInfoResponse = 7298;
 	k_EMsgGCFantasyLeagueInfo = 7299;
@@ -359,13 +357,38 @@ enum EDOTAGCMsg {
 	k_EMsgGCToServerPingRequest = 7416;
 	k_EMsgGCToServerPingResponse = 7417;
 	k_EMsgGCToServerConsoleCommand = 7418;
-	k_EMsgLobbyNewBloomMatchPoints = 7419;
 	k_EMsgGCToGCUpdateLiveLeagueGameInfo = 7420;
 	k_EMsgGCNewBloomModeState = 7421;
 	k_EMsgGCNewBloomModeStateResponse = 7422;
 	k_EMsgGCMakeOffering = 7423;
 	k_EMsgGCRequestOfferings = 7424;
 	k_EMsgGCRequestOfferingsResponse = 7425;
+	k_EMsgGCToGCProcessMatchLeaver = 7426;
+	k_EMsgGCNotificationsRequest = 7427;
+	k_EMsgGCNotificationsResponse = 7428;
+	k_EMsgGCToGCModifyNotification = 7429;
+	k_EMsgGCToGCSetNewNotifications = 7430;
+	k_EMsgGCToGCSetIsLeagueAdmin = 7431;
+	k_EMsgGCLeagueAdminState = 7432;
+	k_EMsgGCToGCSendLeagueAdminState = 7433;
+	k_EMsgGCLeagueAdminList = 7434;
+	k_EMsgGCNotificationsDismissRequest = 7435;
+	k_EMsgGCFantasyMessageAdd = 7436;
+	k_EMsgGCFantasyMessagesRequest = 7437;
+	k_EMsgGCFantasyMessagesResponse = 7438;
+	k_EMsgGCFantasyScheduledMatchesRequest = 7439;
+	k_EMsgGCFantasyScheduledMatchesResponse = 7440;
+	k_EMsgGCToGCGrantLeagueAccess = 7441;
+	k_EMsgGCToGCGrantFantasyAccess = 7442;
+	k_EMsgGCEventGameCreate = 7443;
+	k_EMsgGCPerfectWorldUserLookupRequest = 7444;
+	k_EMsgGCPerfectWorldUserLookupResponse = 7445;
+	k_EMsgGCFantasyRemoveOwner = 7448;
+	k_EMsgGCFantasyRemoveOwnerResponse = 7449;
+	k_EMsgGCRequestBatchPlayerResources = 7450;
+	k_EMsgGCRequestBatchPlayerResourcesResponse = 7451;
+	k_EMsgGCToGCSendUpdateLeagues = 7452;
+	k_EMsgGCCompendiumSetSelectionResponse = 7453;
 	k_EMsgGCDev_GrantWarKill = 8001;
 }
 
@@ -389,6 +412,7 @@ enum DOTA_GameMode {
 	DOTA_GAMEMODE_CD = 16;
 	DOTA_GAMEMODE_BD = 17;
 	DOTA_GAMEMODE_ABILITY_DRAFT = 18;
+	DOTA_GAMEMODE_EVENT = 19;
 }
 
 enum DOTA_GameState {
@@ -416,6 +440,16 @@ enum DOTA_CM_PICK {
 	DOTA_CM_RANDOM = 0;
 	DOTA_CM_GOOD_GUYS = 1;
 	DOTA_CM_BAD_GUYS = 2;
+}
+
+enum DOTAConnectionState_t {
+	DOTA_CONNECTION_STATE_UNKNOWN = 0;
+	DOTA_CONNECTION_STATE_NOT_YET_CONNECTED = 1;
+	DOTA_CONNECTION_STATE_CONNECTED = 2;
+	DOTA_CONNECTION_STATE_DISCONNECTED = 3;
+	DOTA_CONNECTION_STATE_ABANDONED = 4;
+	DOTA_CONNECTION_STATE_LOADING = 5;
+	DOTA_CONNECTION_STATE_FAILED = 6;
 }
 
 enum DOTALeaverStatus_t {
@@ -549,8 +583,6 @@ message CSODOTAGameAccountClient {
 	optional uint32 leadership = 29;
 	optional uint32 friendly = 30;
 	optional uint32 forgiving = 31;
-	optional uint32 successful_report_count = 36;
-	optional uint32 notify_successful_report = 37;
 	optional uint32 account_disabled_until_date = 38;
 	optional uint32 account_disabled_count = 39;
 	optional uint32 showcase_hero_id = 40;
@@ -565,6 +597,8 @@ message CSODOTAGameAccountClient {
 	optional uint32 solo_competitive_rank = 52;
 	optional uint32 solo_calibration_games_remaining = 54;
 	optional uint32 recruitment_level = 55;
+	optional bool has_new_notifications = 56;
+	optional bool is_league_admin = 57;
 }
 
 message CSODOTAPartyMember {
@@ -657,11 +691,20 @@ message CDOTASaveGame {
 	repeated .CDOTASaveGame.SaveInstance save_instances = 4;
 }
 
+message CMsgLeaverState {
+	optional uint32 lobby_state = 1;
+	optional .DOTA_GameState game_state = 2 [default = DOTA_GAMERULES_STATE_INIT];
+	optional bool leaver_detected = 3;
+	optional bool first_blood_happened = 4;
+	optional bool discard_match_results = 5;
+	optional bool mass_disconnect = 6;
+}
+
 message CDOTALobbyMember {
 	optional fixed64 id = 1 [(key_field) = true];
 	optional uint32 hero_id = 2;
 	optional .DOTA_GC_TEAM team = 3 [default = DOTA_GC_TEAM_GOOD_GUYS];
-	optional bool connected_to_game_server = 4;
+	optional bool legacy_connected_to_game_server = 4;
 	optional string name = 6;
 	optional uint32 slot = 7;
 	optional uint64 party_id = 12;
@@ -669,6 +712,7 @@ message CDOTALobbyMember {
 	optional uint32 meta_xp = 14;
 	optional uint32 meta_xp_awarded = 15;
 	optional .DOTALeaverStatus_t leaver_status = 16 [default = DOTA_LEAVER_NONE];
+	optional uint32 leaver_actions = 28;
 	optional uint32 channel = 17;
 	optional uint32 prize_def_index = 18;
 	optional uint32 meta_xp_bonus_rate = 19;
@@ -684,6 +728,7 @@ message CDOTALobbyMember {
 message CDOTALobbyMemberPrivate {
 	optional uint32 ip = 1;
 	optional .DOTALobbyReadyState ready_state = 2 [default = DOTALobbyReadyState_UNDECLARED];
+	optional .CMsgLeaverState leaver_state = 3;
 }
 
 message CLobbyTeamDetails {
@@ -766,7 +811,6 @@ message CSODOTALobby {
 	optional uint32 num_spectators = 23;
 	optional uint32 tower_state = 24;
 	optional uint32 matchgroup = 25;
-	optional bool leaver_detected = 27;
 	optional .DOTA_CM_PICK cm_pick = 28 [default = DOTA_CM_RANDOM];
 	optional uint32 match_id = 30;
 	optional bool allow_spectating = 31 [default = true];
@@ -798,6 +842,10 @@ message CSODOTALobby {
 	optional bool low_priority = 61;
 	repeated .CSODOTALobby.CExtraMsg extra_messages = 62;
 	optional .CDOTASaveGame save_game = 63;
+	optional uint32 custom_game_id = 64;
+	optional bool first_blood_happened = 65;
+	optional bool discard_match_results = 66;
+	optional bool mass_disconnect = 67;
 }
 
 message CSODOTALobbyInternal {
@@ -810,6 +858,8 @@ message CSODOTALobbyInternal {
 	repeated .CDOTALobbyMemberPrivate members = 9;
 	repeated .CDOTALobbyMemberPrivate left_members = 10;
 	optional bytes save_game_data = 11;
+	optional uint32 server_run_time = 12;
+	optional uint32 last_state_change_time = 13;
 }
 
 message CMsgDOTAGenericResult {
@@ -935,15 +985,6 @@ message CMsgNexonPartnerUpdate {
 	optional uint32 timeremaining = 2;
 }
 
-message CMsgLobbyNewBloomMatchPoints {
-	message Player {
-		optional uint32 account_id = 1;
-		optional uint32 points = 2;
-	}
-
-	repeated .CMsgLobbyNewBloomMatchPoints.Player players = 1;
-}
-
 message CMsgMakeOffering {
 	optional uint64 item_id = 1;
 }
@@ -959,5 +1000,26 @@ message CMsgRequestOfferingsResponse {
 
 	repeated .CMsgRequestOfferingsResponse.NewYearsOffering offerings = 1;
 	optional bool completed = 2;
+}
+
+message CMsgLeagueAdminList {
+	repeated uint32 account_ids = 1;
+}
+
+message CMsgPerfectWorldUserLookupRequest {
+	optional string user_name = 1;
+}
+
+message CMsgPerfectWorldUserLookupResponse {
+	enum EResultCode {
+		SUCCESS_ACCOUNT_FOUND = 0;
+		ERROR_UNKNOWN = 1;
+		ERROR_USER_NAME_WRONG_FORMAT = 2;
+		ERROR_NO_PERFECT_WORLD_ACCOUNT_FOUND = 3;
+		ERROR_NO_LINKED_STEAM_ACCOUNT_FOUND = 4;
+	}
+
+	optional .CMsgPerfectWorldUserLookupResponse.EResultCode result_code = 1 [default = SUCCESS_ACCOUNT_FOUND];
+	optional uint32 account_id = 2;
 }
 

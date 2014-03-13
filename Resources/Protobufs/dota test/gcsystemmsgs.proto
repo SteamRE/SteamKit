@@ -78,6 +78,7 @@ enum EGCSystemMsg {
 	k_EGCMsgCheckFriendshipResponse = 506;
 	k_EGCMsgGetPartnerAccountLink = 507;
 	k_EGCMsgGetPartnerAccountLinkResponse = 508;
+	k_EGCMsgVSReportedSuspiciousActivity = 509;
 }
 
 enum ESOMsg {

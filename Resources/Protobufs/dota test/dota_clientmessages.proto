@@ -25,6 +25,8 @@ enum EDotaClientMessages {
 	DOTA_CM_UpdateCoachListen = 20;
 	DOTA_CM_CoachHUDPing = 21;
 	DOTA_CM_RecordVote = 22;
+	DOTA_CM_UnitsAutoAttackAfterSpell = 23;
+	DOTA_CM_WillPurchaseAlert = 24;
 }
 
 message CDOTAClientMsg_MapPing {
@@ -44,6 +46,10 @@ message CDOTAClientMsg_AspectRatio {
 }
 
 message CDOTAClientMsg_UnitsAutoAttack {
+	optional bool enabled = 1;
+}
+
+message CDOTAClientMsg_UnitsAutoAttackAfterSpell {
 	optional bool enabled = 1;
 }
 
@@ -120,5 +126,9 @@ message CDOTAClientMsg_CoachHUDPing {
 
 message CDOTAClientMsg_RecordVote {
 	optional int32 choice_index = 1;
+}
+
+message CDOTAClientMsg_WillPurchaseAlert {
+	optional int32 itemid = 1;
 }
 

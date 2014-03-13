@@ -106,14 +106,10 @@ enum EGCItemMsg {
 	k_EMsgGCDev_NewItemRequestResponse = 2002;
 	k_EMsgGCStoreGetUserData = 2500;
 	k_EMsgGCStoreGetUserDataResponse = 2501;
-	k_EMsgGCStorePurchaseInit_DEPRECATED = 2502;
-	k_EMsgGCStorePurchaseInitResponse_DEPRECATED = 2503;
 	k_EMsgGCStorePurchaseFinalize = 2504;
 	k_EMsgGCStorePurchaseFinalizeResponse = 2505;
 	k_EMsgGCStorePurchaseCancel = 2506;
 	k_EMsgGCStorePurchaseCancelResponse = 2507;
-	k_EMsgGCStorePurchaseQueryTxn = 2508;
-	k_EMsgGCStorePurchaseQueryTxnResponse = 2509;
 	k_EMsgGCStorePurchaseInit = 2510;
 	k_EMsgGCStorePurchaseInitResponse = 2511;
 	k_EMsgGCBannedWordListRequest = 2512;
@@ -145,6 +141,8 @@ enum EGCItemMsg {
 	k_EMsgGCToGCGetUserSessionServerResponse = 2542;
 	k_EMsgGCToGCGetUserServerMembers = 2543;
 	k_EMsgGCToGCGetUserServerMembersResponse = 2544;
+	k_EMsgGCToGCGetUserPCBangNo = 2545;
+	k_EMsgGCToGCGetUserPCBangNoResponse = 2546;
 }
 
 enum EGCMsgResponse {
@@ -265,5 +263,26 @@ message CMsgGCToGCGetUserServerMembers {
 
 message CMsgGCToGCGetUserServerMembersResponse {
 	repeated uint32 member_account_id = 1;
+}
+
+message CMsgLookupMultipleAccountNames {
+	repeated uint32 accountids = 1 [packed = true];
+}
+
+message CMsgLookupMultipleAccountNamesResponse {
+	message Account {
+		optional uint32 accountid = 1;
+		optional string persona = 2;
+	}
+
+	repeated .CMsgLookupMultipleAccountNamesResponse.Account accounts = 1;
+}
+
+message CMsgGCToGCGetUserPCBangNo {
+	optional uint32 account_id = 1;
+}
+
+message CMsgGCToGCGetUserPCBangNoResponse {
+	optional uint32 pc_bang_no = 1;
 }
 

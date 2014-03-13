@@ -142,14 +142,11 @@ message CMsgGCRequestSubGCSessionInfoResponse {
 	optional bool trusted = 2;
 }
 
-message CMsgGCToGCIncrementRecruitmentLevel {
-	optional fixed64 steamid = 1;
-}
-
 message CMsgSOCacheHaveVersion {
 	optional .CMsgSOIDOwner soid = 1;
 	optional fixed64 version = 2;
 	optional uint32 service_id = 3;
+	optional uint32 cached_file_version = 4;
 }
 
 message CMsgClientHello {
@@ -202,5 +199,20 @@ message CMsgGCToGCSOCacheUnsubscribe {
 }
 
 message CMsgGCClientPing {
+}
+
+message CWorkshop_PopulateItemDescriptions_Request {
+	message SingleItemDescription {
+		optional uint32 gameitemid = 1;
+		optional string item_description = 2;
+	}
+
+	message ItemDescriptionsLanguageBlock {
+		optional string language = 1;
+		repeated .CWorkshop_PopulateItemDescriptions_Request.SingleItemDescription descriptions = 2;
+	}
+
+	optional uint32 appid = 1;
+	repeated .CWorkshop_PopulateItemDescriptions_Request.ItemDescriptionsLanguageBlock languages = 2;
 }
 
