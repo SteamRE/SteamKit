@@ -1998,22 +1998,7 @@ message CMsgDOTAFantasyPlayerInfoRequest {
 }
 
 message CMsgDOTAFantasyPlayerInfoResponse {
-	message Player {
-		optional uint32 player_account_id = 1;
-		optional .Fantasy_Roles role = 2 [default = FANTASY_ROLE_UNDEFINED];
-		optional string name = 3;
-		optional uint32 team_id = 4;
-		optional string team_name = 5;
-		optional string team_tag = 6;
-	}
-
-	enum EResult {
-		SUCCESS = 0;
-		ERROR_UNSPECIFIED = 1;
-	}
-
-	optional .CMsgDOTAFantasyPlayerInfoResponse.EResult result = 1 [default = SUCCESS];
-	repeated .CMsgDOTAFantasyPlayerInfoResponse.Player players = 2;
+	optional .CMsgGCPlayerInfo msg = 1;
 }
 
 message CMsgDOTAFantasyLeagueCreateInfoRequest {
@@ -2657,11 +2642,57 @@ message CMsgGCNotificationsResponse {
 }
 
 message CMsgGCLeagueAdminState {
+	message PrivateLeagueKeys {
+		optional uint32 leagueid = 1;
+		optional uint32 privatekey = 2;
+	}
+
 	repeated uint32 leagues = 1;
+	repeated .CMsgGCLeagueAdminState.PrivateLeagueKeys keys = 2;
 }
 
 message CMsgGCNotificationsDismissRequest {
 	optional uint64 id = 1;
+}
+
+message CMsgGCPlayerInfoRequest {
+	repeated uint32 account_ids = 1;
+}
+
+message CMsgGCPlayerInfo {
+	message PlayerInfo {
+		optional uint32 account_id = 1;
+		optional string name = 2;
+		optional string country_code = 3;
+		optional uint32 fantasy_role = 4;
+		optional uint32 team_id = 5;
+		optional string team_name = 6;
+		optional string team_tag = 7;
+		optional string sponsor = 8;
+		optional bool is_locked = 9;
+		optional string complete_name = 10;
+		optional string complete_name_html = 11;
+	}
+
+	repeated .CMsgGCPlayerInfo.PlayerInfo player_infos = 1;
+}
+
+message CMsgGCPlayerInfoSubmit {
+	optional string name = 1;
+	optional string country_code = 2;
+	optional uint32 fantasy_role = 3;
+	optional uint32 team_id = 4;
+	optional string sponsor = 5;
+}
+
+message CMsgGCPlayerInfoSubmitResponse {
+	enum EResult {
+		SUCCESS = 0;
+		ERROR_UNSPECIFIED = 1;
+		ERROR_INFO_LOCKED = 2;
+	}
+
+	optional .CMsgGCPlayerInfoSubmitResponse.EResult result = 1 [default = SUCCESS];
 }
 
 message CMsgSerializedSOCache {

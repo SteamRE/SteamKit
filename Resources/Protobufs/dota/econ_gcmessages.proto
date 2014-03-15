@@ -141,6 +141,8 @@ enum EGCItemMsg {
 	k_EMsgGCToGCGetUserSessionServerResponse = 2542;
 	k_EMsgGCToGCGetUserServerMembers = 2543;
 	k_EMsgGCToGCGetUserServerMembersResponse = 2544;
+	k_EMsgGCToGCGetUserPCBangNo = 2545;
+	k_EMsgGCToGCGetUserPCBangNoResponse = 2546;
 }
 
 enum EGCMsgResponse {
@@ -274,5 +276,13 @@ message CMsgLookupMultipleAccountNamesResponse {
 	}
 
 	repeated .CMsgLookupMultipleAccountNamesResponse.Account accounts = 1;
+}
+
+message CMsgGCToGCGetUserPCBangNo {
+	optional uint32 account_id = 1;
+}
+
+message CMsgGCToGCGetUserPCBangNoResponse {
+	optional uint32 pc_bang_no = 1;
 }
 

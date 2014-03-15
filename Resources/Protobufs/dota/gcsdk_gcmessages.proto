@@ -201,3 +201,18 @@ message CMsgGCToGCSOCacheUnsubscribe {
 message CMsgGCClientPing {
 }
 
+message CWorkshop_PopulateItemDescriptions_Request {
+	message SingleItemDescription {
+		optional uint32 gameitemid = 1;
+		optional string item_description = 2;
+	}
+
+	message ItemDescriptionsLanguageBlock {
+		optional string language = 1;
+		repeated .CWorkshop_PopulateItemDescriptions_Request.SingleItemDescription descriptions = 2;
+	}
+
+	optional uint32 appid = 1;
+	repeated .CWorkshop_PopulateItemDescriptions_Request.ItemDescriptionsLanguageBlock languages = 2;
+}
+

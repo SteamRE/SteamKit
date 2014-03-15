@@ -380,6 +380,7 @@ enum EDOTAGCMsg {
 	k_EMsgGCFantasyScheduledMatchesResponse = 7440;
 	k_EMsgGCToGCGrantLeagueAccess = 7441;
 	k_EMsgGCToGCGrantFantasyAccess = 7442;
+	k_EMsgGCEventGameCreate = 7443;
 	k_EMsgGCPerfectWorldUserLookupRequest = 7444;
 	k_EMsgGCPerfectWorldUserLookupResponse = 7445;
 	k_EMsgGCFantasyRemoveOwner = 7448;
@@ -388,6 +389,10 @@ enum EDOTAGCMsg {
 	k_EMsgGCRequestBatchPlayerResourcesResponse = 7451;
 	k_EMsgGCToGCSendUpdateLeagues = 7452;
 	k_EMsgGCCompendiumSetSelectionResponse = 7453;
+	k_EMsgGCPlayerInfoRequest = 7454;
+	k_EMsgGCPlayerInfo = 7455;
+	k_EMsgGCPlayerInfoSubmit = 7456;
+	k_EMsgGCPlayerInfoSubmitResponse = 7457;
 	k_EMsgGCDev_GrantWarKill = 8001;
 }
 
@@ -411,6 +416,7 @@ enum DOTA_GameMode {
 	DOTA_GAMEMODE_CD = 16;
 	DOTA_GAMEMODE_BD = 17;
 	DOTA_GAMEMODE_ABILITY_DRAFT = 18;
+	DOTA_GAMEMODE_EVENT = 19;
 }
 
 enum DOTA_GameState {
@@ -689,11 +695,20 @@ message CDOTASaveGame {
 	repeated .CDOTASaveGame.SaveInstance save_instances = 4;
 }
 
+message CMsgLeaverState {
+	optional uint32 lobby_state = 1;
+	optional .DOTA_GameState game_state = 2 [default = DOTA_GAMERULES_STATE_INIT];
+	optional bool leaver_detected = 3;
+	optional bool first_blood_happened = 4;
+	optional bool discard_match_results = 5;
+	optional bool mass_disconnect = 6;
+}
+
 message CDOTALobbyMember {
 	optional fixed64 id = 1 [(key_field) = true];
 	optional uint32 hero_id = 2;
 	optional .DOTA_GC_TEAM team = 3 [default = DOTA_GC_TEAM_GOOD_GUYS];
-	optional bool connected_to_game_server = 4;
+	optional bool legacy_connected_to_game_server = 4;
 	optional string name = 6;
 	optional uint32 slot = 7;
 	optional uint64 party_id = 12;
@@ -701,6 +716,7 @@ message CDOTALobbyMember {
 	optional uint32 meta_xp = 14;
 	optional uint32 meta_xp_awarded = 15;
 	optional .DOTALeaverStatus_t leaver_status = 16 [default = DOTA_LEAVER_NONE];
+	optional uint32 leaver_actions = 28;
 	optional uint32 channel = 17;
 	optional uint32 prize_def_index = 18;
 	optional uint32 meta_xp_bonus_rate = 19;
@@ -716,6 +732,7 @@ message CDOTALobbyMember {
 message CDOTALobbyMemberPrivate {
 	optional uint32 ip = 1;
 	optional .DOTALobbyReadyState ready_state = 2 [default = DOTALobbyReadyState_UNDECLARED];
+	optional .CMsgLeaverState leaver_state = 3;
 }
 
 message CLobbyTeamDetails {
@@ -798,7 +815,6 @@ message CSODOTALobby {
 	optional uint32 num_spectators = 23;
 	optional uint32 tower_state = 24;
 	optional uint32 matchgroup = 25;
-	optional bool legacy_leaver_detected = 27;
 	optional .DOTA_CM_PICK cm_pick = 28 [default = DOTA_CM_RANDOM];
 	optional uint32 match_id = 30;
 	optional bool allow_spectating = 31 [default = true];
@@ -833,6 +849,7 @@ message CSODOTALobby {
 	optional uint32 custom_game_id = 64;
 	optional bool first_blood_happened = 65;
 	optional bool discard_match_results = 66;
+	optional bool mass_disconnect = 67;
 }
 
 message CSODOTALobbyInternal {
