@@ -739,25 +739,6 @@ namespace SteamKit2.GC.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCToGCIncrementRecruitmentLevel")]
-  public partial class CMsgGCToGCIncrementRecruitmentLevel : global::ProtoBuf.IExtensible
-  {
-    public CMsgGCToGCIncrementRecruitmentLevel() {}
-    
-
-    private ulong _steamid = default(ulong);
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
-    public ulong steamid
-    {
-      get { return _steamid; }
-      set { _steamid = value; }
-    }
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgSOCacheHaveVersion")]
   public partial class CMsgSOCacheHaveVersion : global::ProtoBuf.IExtensible
   {
@@ -1123,6 +1104,86 @@ namespace SteamKit2.GC.Internal
   {
     public CMsgGCClientPing() {}
     
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CWorkshop_PopulateItemDescriptions_Request")]
+  public partial class CWorkshop_PopulateItemDescriptions_Request : global::ProtoBuf.IExtensible
+  {
+    public CWorkshop_PopulateItemDescriptions_Request() {}
+    
+
+    private uint _appid = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"appid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint appid
+    {
+      get { return _appid; }
+      set { _appid = value; }
+    }
+    private readonly global::System.Collections.Generic.List<CWorkshop_PopulateItemDescriptions_Request.ItemDescriptionsLanguageBlock> _languages = new global::System.Collections.Generic.List<CWorkshop_PopulateItemDescriptions_Request.ItemDescriptionsLanguageBlock>();
+    [global::ProtoBuf.ProtoMember(2, Name=@"languages", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CWorkshop_PopulateItemDescriptions_Request.ItemDescriptionsLanguageBlock> languages
+    {
+      get { return _languages; }
+    }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"SingleItemDescription")]
+  public partial class SingleItemDescription : global::ProtoBuf.IExtensible
+  {
+    public SingleItemDescription() {}
+    
+
+    private uint _gameitemid = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"gameitemid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint gameitemid
+    {
+      get { return _gameitemid; }
+      set { _gameitemid = value; }
+    }
+
+    private string _item_description = "";
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"item_description", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string item_description
+    {
+      get { return _item_description; }
+      set { _item_description = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ItemDescriptionsLanguageBlock")]
+  public partial class ItemDescriptionsLanguageBlock : global::ProtoBuf.IExtensible
+  {
+    public ItemDescriptionsLanguageBlock() {}
+    
+
+    private string _language = "";
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"language", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string language
+    {
+      get { return _language; }
+      set { _language = value; }
+    }
+    private readonly global::System.Collections.Generic.List<CWorkshop_PopulateItemDescriptions_Request.SingleItemDescription> _descriptions = new global::System.Collections.Generic.List<CWorkshop_PopulateItemDescriptions_Request.SingleItemDescription>();
+    [global::ProtoBuf.ProtoMember(2, Name=@"descriptions", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CWorkshop_PopulateItemDescriptions_Request.SingleItemDescription> descriptions
+    {
+      get { return _descriptions; }
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

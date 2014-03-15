@@ -478,6 +478,44 @@ namespace SteamKit2.GC.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCToGCGetUserPCBangNo")]
+  public partial class CMsgGCToGCGetUserPCBangNo : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCToGCGetUserPCBangNo() {}
+    
+
+    private uint _account_id = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint account_id
+    {
+      get { return _account_id; }
+      set { _account_id = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCToGCGetUserPCBangNoResponse")]
+  public partial class CMsgGCToGCGetUserPCBangNoResponse : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCToGCGetUserPCBangNoResponse() {}
+    
+
+    private uint _pc_bang_no = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"pc_bang_no", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint pc_bang_no
+    {
+      get { return _pc_bang_no; }
+      set { _pc_bang_no = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     [global::ProtoBuf.ProtoContract(Name=@"EGCItemMsg", EnumPassthru=true)]
     public enum EGCItemMsg
     {
@@ -900,7 +938,13 @@ namespace SteamKit2.GC.Internal
       k_EMsgGCToGCGetUserServerMembers = 2543,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCGetUserServerMembersResponse", Value=2544)]
-      k_EMsgGCToGCGetUserServerMembersResponse = 2544
+      k_EMsgGCToGCGetUserServerMembersResponse = 2544,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCGetUserPCBangNo", Value=2545)]
+      k_EMsgGCToGCGetUserPCBangNo = 2545,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCGetUserPCBangNoResponse", Value=2546)]
+      k_EMsgGCToGCGetUserPCBangNoResponse = 2546
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"EGCMsgResponse", EnumPassthru=true)]
