@@ -406,6 +406,27 @@ namespace SteamKit2
             this.Client.Send( sendGift );
         }
 
+
+        /// <summary>
+        /// Request product information for an app or package
+        /// Results are returned in a <see cref="CDNAuthTokenResponse"/> callback.
+        /// </summary>
+        /// <param name="app">App id requested.</param>
+        /// <param name="host_name">CDN host name being requested.</param>
+        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="SteamClient.JobCallback&lt;T&gt;"/>.</returns>
+        public JobID GetCDNAuthToken(uint app, string host_name)
+        {
+            var request = new ClientMsgProtobuf<CMsgClientGetCDNAuthToken>(EMsg.ClientGetCDNAuthToken);
+            request.SourceJobID = Client.GetNextJobID();
+
+            request.Body.app_id = app;
+            request.Body.host_name = host_name;
+
+            this.Client.Send(request);
+
+            return request.SourceJobID;
+        }
+
         /// <summary>
         /// Handles a client message. This should not be called directly.
         /// </summary>
@@ -467,6 +488,10 @@ namespace SteamKit2
                     HandleSendGuestPassResponse( packetMsg );
                     break;
 #pragma warning restore 0612
+
+                case EMsg.ClientGetCDNAuthTokenResponse:
+                    HandleCDNAuthTokenResponse( packetMsg );
+                    break;
             }
         }
 
@@ -564,11 +589,20 @@ namespace SteamKit2
             this.Client.PostCallback( callback );
         }
 
-        void HandleSendGuestPassResponse(IPacketMsg packetMsg)
+        void HandleSendGuestPassResponse( IPacketMsg packetMsg )
         {
-            var response = new ClientMsg<MsgClientSendGuestPassResponse>(packetMsg);
+            var response = new ClientMsg<MsgClientSendGuestPassResponse>( packetMsg );
 
             var callback = new SendGuestPassCallback( response.Body );
+            this.Client.PostCallback( callback );
+        }
+
+        void HandleCDNAuthTokenResponse( IPacketMsg packetMsg )
+        {
+            var response = new ClientMsgProtobuf<CMsgClientGetCDNAuthTokenResponse>( packetMsg );
+
+            var innerCallback = new CDNAuthTokenCallback(response.Body);
+            var callback = new SteamClient.JobCallback<CDNAuthTokenCallback>( response.TargetJobID, innerCallback );
             this.Client.PostCallback( callback );
         }
         #endregion

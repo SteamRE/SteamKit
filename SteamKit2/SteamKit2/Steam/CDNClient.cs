@@ -50,6 +50,10 @@ namespace SteamKit2
             /// </summary>
             public int WeightedLoad { get; internal set; }
 
+            /// <summary>
+            /// Holds the CDN auth token for CDN servers
+            /// </summary>
+            public string CDNAuthToken { get; set; }
 
             /// <summary>
             /// Performs an implicit conversion from <see cref="System.Net.IPEndPoint"/> to <see cref="SteamKit2.CDNClient.Server"/>.
@@ -280,6 +284,13 @@ namespace SteamKit2
             if ( csServer == null )
                 throw new ArgumentNullException( "csServer" );
 
+            // Nothing needs to be done to authenticate a CDN endpoint
+            if ( csServer.Type == "CDN" && csServer.CDNAuthToken != null )
+            {
+                connectedServer = csServer;
+                return;
+            }
+
             byte[] pubKey = KeyDictionary.GetPublicKey( steamClient.ConnectedUniverse );
 
             sessionKey = CryptoHelper.GenerateRandomBlock( 32 );
@@ -392,7 +403,7 @@ namespace SteamKit2
 
         string BuildCommand( Server server, string command, string args )
         {
-            return string.Format( "http://{0}:{1}/{2}/{3}", server.Host, server.Port, command, args );
+            return string.Format( "http://{0}:{1}/{2}/{3}{4}", server.Host, server.Port, command, args, server.CDNAuthToken ?? "" );
         }
 
         byte[] DoRawCommand( Server server, string command, string data = null, string method = WebRequestMethods.Http.Get, bool doAuth = false, string args = "" )
@@ -403,7 +414,7 @@ namespace SteamKit2
             {
                 webClient.Headers.Clear();
 
-                if ( doAuth )
+                if ( doAuth && server.Type == "CS" )
                 {
                     reqCounter++;
 
