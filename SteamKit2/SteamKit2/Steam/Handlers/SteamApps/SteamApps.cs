@@ -409,7 +409,7 @@ namespace SteamKit2
 
         /// <summary>
         /// Request product information for an app or package
-        /// Results are returned in a <see cref="CDNAuthTokenResponse"/> callback.
+        /// Results are returned in a <see cref="CDNAuthTokenCallback"/> callback.
         /// </summary>
         /// <param name="app">App id requested.</param>
         /// <param name="host_name">CDN host name being requested.</param>
