@@ -57,6 +57,7 @@ message CCDDBAppDetailCommon {
 	optional bool community_visible_stats = 9;
 	optional string friendly_name = 10;
 	optional string propagation = 11;
+	optional bool has_adult_content = 12;
 }
 
 message CMsgAppRights {

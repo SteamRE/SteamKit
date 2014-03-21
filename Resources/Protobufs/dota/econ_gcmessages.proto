@@ -86,6 +86,8 @@ enum EGCItemMsg {
 	k_EMsgGCAddItemToSocketResponse = 1089;
 	k_EMsgGCAddSocketResponse = 1090;
 	k_EMsgGCResetStrangeGemCount = 1091;
+	k_EMsgGCRequestCrateItems = 1092;
+	k_EMsgGCRequestCrateItemsResponse = 1093;
 	k_EMsgGCTradingBase = 1500;
 	k_EMsgGCTrading_InitiateTradeRequest = 1501;
 	k_EMsgGCTrading_InitiateTradeResponse = 1502;
@@ -125,7 +127,6 @@ enum EGCItemMsg {
 	k_EMsgGCToGCWebAPIAccountChanged = 2524;
 	k_EMsgGCRequestAnnouncements = 2525;
 	k_EMsgGCRequestAnnouncementsResponse = 2526;
-	k_EMsgGCRequestPassportItemGrant = 2527;
 	k_EMsgGCClientVersionUpdated = 2528;
 	k_EMsgGCItemPurgatory_FinalizePurchase = 2531;
 	k_EMsgGCItemPurgatory_FinalizePurchaseResponse = 2532;
@@ -143,6 +144,9 @@ enum EGCItemMsg {
 	k_EMsgGCToGCGetUserServerMembersResponse = 2544;
 	k_EMsgGCToGCGetUserPCBangNo = 2545;
 	k_EMsgGCToGCGetUserPCBangNoResponse = 2546;
+	k_EMsgGCToGCCanUseDropRateBonus = 2547;
+	k_EMsgSQLAddDropRateBonus = 2548;
+	k_EMsgGCToGCRefreshSOCache = 2549;
 }
 
 enum EGCMsgResponse {
@@ -284,5 +288,35 @@ message CMsgGCToGCGetUserPCBangNo {
 
 message CMsgGCToGCGetUserPCBangNoResponse {
 	optional uint32 pc_bang_no = 1;
+}
+
+message CMsgRequestCrateItems {
+	optional uint32 crate_series = 1;
+}
+
+message CMsgRequestCrateItemsResponse {
+	optional uint32 crate_series = 1;
+	repeated uint32 item_defs = 2;
+}
+
+message CMsgGCToGCCanUseDropRateBonus {
+	optional uint32 account_id = 1;
+	optional float drop_rate_bonus = 2;
+	optional uint32 booster_type = 3;
+}
+
+message CMsgSQLAddDropRateBonus {
+	optional uint32 account_id = 1;
+	optional uint64 item_id = 2;
+	optional uint32 item_def = 3;
+	optional float drop_rate_bonus = 4;
+	optional uint32 booster_type = 5;
+	optional uint32 seconds_duration = 6;
+	optional uint32 end_time_stamp = 7;
+}
+
+message CMsgGCToGCRefreshSOCache {
+	optional uint32 account_id = 1;
+	optional bool reload = 2;
 }
 

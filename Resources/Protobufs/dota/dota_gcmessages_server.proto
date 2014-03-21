@@ -41,7 +41,6 @@ message CMsgConnectedPlayers {
 	optional .DOTA_GameState game_state = 2 [default = DOTA_GAMERULES_STATE_INIT];
 	optional uint32 num_spectators = 3;
 	optional uint32 tower_state = 4;
-	optional bool legacy_skip_player_validation = 5;
 	optional bool first_blood_happened = 6;
 	optional .CMsgConnectedPlayers.SendReason send_reason = 8 [default = INVALID];
 }

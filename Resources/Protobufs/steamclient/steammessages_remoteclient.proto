@@ -9,6 +9,7 @@ enum ERemoteClientBroadcastMsg {
 enum ERemoteClientService {
 	k_ERemoteClientServiceNone = 0;
 	k_ERemoteClientServiceRemoteControl = 1;
+	k_ERemoteClientServiceGameStreaming = 2;
 }
 
 message CMsgRemoteClientBroadcastHeader {
@@ -110,5 +111,9 @@ message CMsgRemoteClientGetControllerConfig {
 message CMsgRemoteClientGetControllerConfigResponse {
 	optional int32 eresult = 1 [default = 2];
 	optional bytes config_vdf = 2;
+}
+
+message CMsgRemoteClientStreamingEnabled {
+	required bool enabled = 1;
 }
 

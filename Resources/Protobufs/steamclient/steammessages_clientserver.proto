@@ -34,6 +34,7 @@ message CMsgClientUDSP2PSessionEnded {
 message CMsgClientRegisterAuthTicketWithCM {
 	optional uint32 protocol_version = 1;
 	optional bytes ticket = 3;
+	optional uint64 client_instance_id = 4;
 }
 
 message CMsgClientTicketAuthComplete {
@@ -1451,6 +1452,7 @@ message CMsgClientUCMPublishFile {
 	optional uint32 video_provider = 13;
 	optional string video_account_name = 14;
 	optional string video_identifier = 15;
+	optional bool in_progress = 16;
 }
 
 message CMsgClientUCMPublishFileResponse {
@@ -1477,6 +1479,8 @@ message CMsgClientUCMUpdatePublishedFile {
 	optional string change_description = 15;
 	optional bool update_url = 16;
 	optional string url = 17;
+	optional bool update_content_manifest = 18;
+	optional fixed64 content_manifest = 19;
 }
 
 message CMsgClientUCMUpdatePublishedFileResponse {

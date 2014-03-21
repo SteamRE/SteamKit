@@ -366,8 +366,10 @@ message CCSUsrMsg_GlowPropTurnOff {
 }
 
 message CCSUsrMsg_RoundBackupFilenames {
-	repeated string filename = 1;
-	repeated string nicefilename = 2;
+	optional int32 count = 1;
+	optional int32 index = 2;
+	optional string filename = 3;
+	optional string nicename = 4;
 }
 
 message CCSUsrMsg_ResetHud {

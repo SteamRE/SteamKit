@@ -603,6 +603,9 @@ message CSODOTAGameAccountClient {
 	optional uint32 recruitment_level = 55;
 	optional bool has_new_notifications = 56;
 	optional bool is_league_admin = 57;
+	optional uint32 casual_games_played = 60;
+	optional uint32 solo_competitive_games_played = 61;
+	optional uint32 party_competitive_games_played = 62;
 }
 
 message CSODOTAPartyMember {
@@ -708,7 +711,6 @@ message CDOTALobbyMember {
 	optional fixed64 id = 1 [(key_field) = true];
 	optional uint32 hero_id = 2;
 	optional .DOTA_GC_TEAM team = 3 [default = DOTA_GC_TEAM_GOOD_GUYS];
-	optional bool legacy_connected_to_game_server = 4;
 	optional string name = 6;
 	optional uint32 slot = 7;
 	optional uint64 party_id = 12;

@@ -489,12 +489,6 @@ message CMsgGCClientVersionUpdated {
 message CMsgGCToGCWebAPIAccountChanged {
 }
 
-message CMsgGCToGCRequestPassportItemGrant {
-	optional uint32 league_id = 2;
-	optional int32 reward_flag = 3;
-	optional uint32 account_id = 4;
-}
-
 message CMsgRecipeComponent {
 	optional uint64 subject_item_id = 1;
 	optional uint64 attribute_index = 2;

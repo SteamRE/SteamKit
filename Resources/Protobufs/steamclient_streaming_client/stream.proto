@@ -54,6 +54,8 @@ enum EStreamControlMessage {
 	k_EStreamControlQuitRequest = 83;
 	k_EStreamControlSetOverrideMode = 84;
 	k_EStreamControlSetMaximumResolution = 85;
+	k_EStreamControlSetQualityPreference = 86;
+	k_EStreamControlSetQoS = 87;
 }
 
 enum EStreamVersion {
@@ -122,8 +124,15 @@ enum EStreamGamepadInputType {
 	k_EStreamGamepadInputRightTrigger = 2097152;
 }
 
+enum EStreamQualityPreference {
+	k_EStreamQualityFast = 1;
+	k_EStreamQualityBalanced = 2;
+	k_EStreamQualityBeautiful = 3;
+}
+
 enum EStreamBitrate {
 	k_EStreamBitrateAutodetect = -1;
+	k_EStreamBitrateUnlimited = 0;
 }
 
 enum EStreamFramerateLimiter {
@@ -391,6 +400,10 @@ message CDeleteCursorMsg {
 	required uint64 cursor_id = 1;
 }
 
+message CSetQualityPreferenceMsg {
+	required .EStreamQualityPreference quality = 1 [default = k_EStreamQualityFast];
+}
+
 message CSetMaximumResolutionMsg {
 	required uint32 x = 1;
 	required uint32 y = 2;
@@ -402,6 +415,10 @@ message CSetMaximumFramerateMsg {
 
 message CSetMaximumBitrateMsg {
 	required int32 bitrate = 1;
+}
+
+message CSetQoSMsg {
+	required bool use_qos = 1;
 }
 
 message CSetTargetFramerateMsg {
