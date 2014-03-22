@@ -21,7 +21,7 @@ namespace SteamKit2
     {
         /// <summary>
         /// Gets the connected universe of this client.
-        /// This value will be <see cref="EUniverse.Invalid"/> if the client is logged off of Steam.
+        /// This value will be <see cref="EUniverse.Invalid"/> if the client is not connected to Steam.
         /// </summary>
         /// <value>The universe.</value>
         public EUniverse ConnectedUniverse { get; private set; }
