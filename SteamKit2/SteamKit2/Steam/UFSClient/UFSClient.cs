@@ -158,8 +158,18 @@ namespace SteamKit2
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="SteamClient.JobCallback&lt;T&gt;"/>.</returns>
         public JobID Logon( IEnumerable<uint> appIds )
         {
+            var jobId = steamClient.GetNextJobID();
+
+            if ( !steamClient.IsConnected )
+            {
+                var cb = new LoggedOnCallback( EResult.NoConnection );
+                var jobCb = new SteamClient.JobCallback<LoggedOnCallback>( jobId, cb );
+                steamClient.PostCallback( jobCb );
+                return jobId;
+            }
+
             var loginReq = new ClientMsgProtobuf<CMsgClientUFSLoginRequest>( EMsg.ClientUFSLoginRequest );
-            loginReq.SourceJobID = steamClient.GetNextJobID();
+            loginReq.SourceJobID = jobId;
 
             loginReq.Body.apps.AddRange( appIds );
             loginReq.Body.protocol_version = MsgClientLogon.CurrentProtocol;

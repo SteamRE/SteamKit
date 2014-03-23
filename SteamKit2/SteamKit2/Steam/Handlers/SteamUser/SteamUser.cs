@@ -199,6 +199,11 @@ namespace SteamKit2
             {
                 throw new ArgumentException( "LogOn requires a username and password to be set in 'details'." );
             }
+            if ( !this.Client.IsConnected )
+            {
+                this.Client.PostCallback( new LoggedOnCallback( EResult.NoConnection ) );
+                return;
+            }
 
             var logon = new ClientMsgProtobuf<CMsgClientLogon>( EMsg.ClientLogon );
 
@@ -244,6 +249,12 @@ namespace SteamKit2
         /// </summary>
         public void LogOnAnonymous()
         {
+            if ( !this.Client.IsConnected )
+            {
+                this.Client.PostCallback( new LoggedOnCallback( EResult.NoConnection ) );
+                return;
+            }
+
             var logon = new ClientMsgProtobuf<CMsgClientLogon>( EMsg.ClientLogon );
 
             SteamID auId = new SteamID( 0, 0, Client.ConnectedUniverse, EAccountType.AnonUser );

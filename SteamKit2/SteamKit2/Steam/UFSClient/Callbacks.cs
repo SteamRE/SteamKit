@@ -58,6 +58,12 @@ namespace SteamKit2
             {
                 Result = ( EResult )body.eresult;
             }
+
+
+            internal LoggedOnCallback( EResult result )
+            {
+                Result = result;
+            }
         }
 
         /// <summary>
