@@ -2403,6 +2403,61 @@ namespace SteamKit2.GC.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCHAccountVacStatusChange")]
+  public partial class CMsgGCHAccountVacStatusChange : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCHAccountVacStatusChange() {}
+    
+
+    private ulong _steam_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steam_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong steam_id
+    {
+      get { return _steam_id; }
+      set { _steam_id = value; }
+    }
+
+    private uint _app_id = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"app_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint app_id
+    {
+      get { return _app_id; }
+      set { _app_id = value; }
+    }
+
+    private uint _rtime_vacban_starts = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"rtime_vacban_starts", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint rtime_vacban_starts
+    {
+      get { return _rtime_vacban_starts; }
+      set { _rtime_vacban_starts = value; }
+    }
+
+    private bool _is_banned_now = default(bool);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"is_banned_now", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool is_banned_now
+    {
+      get { return _is_banned_now; }
+      set { _is_banned_now = value; }
+    }
+
+    private bool _is_banned_future = default(bool);
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"is_banned_future", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool is_banned_future
+    {
+      get { return _is_banned_future; }
+      set { _is_banned_future = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCGetPartnerAccountLink")]
   public partial class CMsgGCGetPartnerAccountLink : global::ProtoBuf.IExtensible
   {

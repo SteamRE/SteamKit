@@ -2944,6 +2944,15 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _custom_text; }
       set { _custom_text = value; }
     }
+
+    private int _int_data = default(int);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"int_data", DataFormat = global::ProtoBuf.DataFormat.ZigZag)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int int_data
+    {
+      get { return _int_data; }
+      set { _int_data = value; }
+    }
     [global::ProtoBuf.ProtoContract(Name=@"PopupID", EnumPassthru=true)]
     public enum PopupID
     {
@@ -3069,7 +3078,16 @@ namespace SteamKit2.GC.Dota.Internal
       INSUFFICIENT_INGOTS = 39,
             
       [global::ProtoBuf.ProtoEnum(Name=@"COMPETITIVE_MM_NO_4STACKS", Value=40)]
-      COMPETITIVE_MM_NO_4STACKS = 40
+      COMPETITIVE_MM_NO_4STACKS = 40,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"COMPETITIVE_MM_PARTY_MMR_SPREAD_TOO_LARGE", Value=41)]
+      COMPETITIVE_MM_PARTY_MMR_SPREAD_TOO_LARGE = 41,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"COMPETITIVE_MM_NOT_ENOUGH_SKILL_DATA_PLAY_MORE_CASUAL", Value=42)]
+      COMPETITIVE_MM_NOT_ENOUGH_SKILL_DATA_PLAY_MORE_CASUAL = 42,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"COMPETITIVE_MM_NOT_ENOUGH_SKILL_DATA_IN_PARTY", Value=43)]
+      COMPETITIVE_MM_NOT_ENOUGH_SKILL_DATA_IN_PARTY = 43
     }
   
     private global::ProtoBuf.IExtension extensionObject;

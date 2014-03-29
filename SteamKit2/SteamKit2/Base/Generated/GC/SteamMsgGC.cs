@@ -2846,43 +2846,6 @@ namespace SteamKit2.GC.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCToGCRequestPassportItemGrant")]
-  public partial class CMsgGCToGCRequestPassportItemGrant : global::ProtoBuf.IExtensible
-  {
-    public CMsgGCToGCRequestPassportItemGrant() {}
-    
-
-    private uint _league_id = default(uint);
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"league_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint league_id
-    {
-      get { return _league_id; }
-      set { _league_id = value; }
-    }
-
-    private int _reward_flag = default(int);
-    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"reward_flag", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
-    public int reward_flag
-    {
-      get { return _reward_flag; }
-      set { _reward_flag = value; }
-    }
-
-    private uint _account_id = default(uint);
-    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint account_id
-    {
-      get { return _account_id; }
-      set { _account_id = value; }
-    }
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgRecipeComponent")]
   public partial class CMsgRecipeComponent : global::ProtoBuf.IExtensible
   {

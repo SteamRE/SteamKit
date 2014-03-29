@@ -86,6 +86,7 @@
     <Compile Include="Base\Generated\GC\Dota\MsgGCClient.cs" />
     <Compile Include="Base\Generated\GC\Dota\MsgGCCommon.cs" />
     <Compile Include="Base\Generated\GC\Dota\MsgGCServer.cs" />
+    <Compile Include="Base\Generated\GC\Dota\NetworkConnection.cs" />
     <Compile Include="Base\Generated\GC\SteamMsgBase.cs" />
     <Compile Include="Base\Generated\GC\SteamMsgGC.cs" />
     <Compile Include="Base\Generated\GC\SteamMsgGCEcon.cs" />

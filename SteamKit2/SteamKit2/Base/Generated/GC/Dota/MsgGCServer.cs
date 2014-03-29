@@ -15,6 +15,7 @@ using SteamKit2.GC.Internal;
 // Note: requires additional types generated from: matchmaker_common.proto
 // Note: requires additional types generated from: dota_gcmessages_common.proto
 // Note: requires additional types generated from: econ_gcmessages.proto
+// Note: requires additional types generated from: network_connection.proto
 namespace SteamKit2.GC.Dota.Internal
 {
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgSpawnLootGreevil")]
@@ -121,15 +122,6 @@ namespace SteamKit2.GC.Dota.Internal
       set { _tower_state = value; }
     }
 
-    private bool _legacy_skip_player_validation = default(bool);
-    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"legacy_skip_player_validation", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
-    public bool legacy_skip_player_validation
-    {
-      get { return _legacy_skip_player_validation; }
-      set { _legacy_skip_player_validation = value; }
-    }
-
     private bool _first_blood_happened = default(bool);
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"first_blood_happened", DataFormat = global::ProtoBuf.DataFormat.Default)]
     [global::System.ComponentModel.DefaultValue(default(bool))]
@@ -178,6 +170,15 @@ namespace SteamKit2.GC.Dota.Internal
     {
       get { return _leaver_state; }
       set { _leaver_state = value; }
+    }
+
+    private ENetworkDisconnectionReason _disconnect_reason = ENetworkDisconnectionReason.NETWORK_DISCONNECT_INVALID;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"disconnect_reason", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(ENetworkDisconnectionReason.NETWORK_DISCONNECT_INVALID)]
+    public ENetworkDisconnectionReason disconnect_reason
+    {
+      get { return _disconnect_reason; }
+      set { _disconnect_reason = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -480,6 +481,15 @@ namespace SteamKit2.GC.Dota.Internal
     {
       get { return _server_cluster; }
       set { _server_cluster = value; }
+    }
+
+    private ENetworkDisconnectionReason _disconnect_reason = ENetworkDisconnectionReason.NETWORK_DISCONNECT_INVALID;
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"disconnect_reason", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(ENetworkDisconnectionReason.NETWORK_DISCONNECT_INVALID)]
+    public ENetworkDisconnectionReason disconnect_reason
+    {
+      get { return _disconnect_reason; }
+      set { _disconnect_reason = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
