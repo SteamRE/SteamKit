@@ -405,6 +405,14 @@ message CGCSystemMsg_GetPurchaseTrust_Response {
 	optional uint32 time_all_trusted = 4;
 }
 
+message CMsgGCHAccountVacStatusChange {
+	optional fixed64 steam_id = 1;
+	optional uint32 app_id = 2;
+	optional uint32 rtime_vacban_starts = 3;
+	optional bool is_banned_now = 4;
+	optional bool is_banned_future = 5;
+}
+
 message CMsgGCGetPartnerAccountLink {
 	optional fixed64 steamid = 1;
 }

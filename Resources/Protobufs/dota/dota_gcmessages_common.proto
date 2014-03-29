@@ -265,7 +265,7 @@ enum EDOTAGCMsg {
 	k_EMsgGCFantasyPlayerInfoRequest = 7322;
 	k_EMsgGCFantasyPlayerInfoResponse = 7323;
 	k_EMsgGCToGCProcessPlayerReportForTarget = 7324;
-	k_EMsgGCToGCProcessCommunicationReportSuccess = 7325;
+	k_EMsgGCToGCProcessReportSuccess = 7325;
 	k_EMsgGCNotifyAccountFlagsChange = 7326;
 	k_EMsgGCSetProfilePrivacy = 7327;
 	k_EMsgGCSetProfilePrivacyResponse = 7328;
@@ -383,6 +383,8 @@ enum EDOTAGCMsg {
 	k_EMsgGCEventGameCreate = 7443;
 	k_EMsgGCPerfectWorldUserLookupRequest = 7444;
 	k_EMsgGCPerfectWorldUserLookupResponse = 7445;
+	k_EMsgGCToGCIncrementRecruitmentSDO = 7446;
+	k_EMsgGCToGCIncrementRecruitmentLevel = 7447;
 	k_EMsgGCFantasyRemoveOwner = 7448;
 	k_EMsgGCFantasyRemoveOwnerResponse = 7449;
 	k_EMsgGCRequestBatchPlayerResources = 7450;
@@ -393,6 +395,12 @@ enum EDOTAGCMsg {
 	k_EMsgGCPlayerInfo = 7455;
 	k_EMsgGCPlayerInfoSubmit = 7456;
 	k_EMsgGCPlayerInfoSubmitResponse = 7457;
+	k_EMsgGCToGCGetAccountLevel = 7458;
+	k_EMsgGCToGCGetAccountLevelResponse = 7459;
+	k_EMsgGCToGCGetAccountPartner = 7460;
+	k_EMsgGCToGCGetAccountPartnerResponse = 7461;
+	k_EMsgGCToGCGetAccountProfile = 7462;
+	k_EMsgGCToGCGetAccountProfileResponse = 7463;
 	k_EMsgGCDev_GrantWarKill = 8001;
 }
 
@@ -500,6 +508,15 @@ enum DOTAMatchVote {
 	DOTAMatchVote_INVALID = 0;
 	DOTAMatchVote_POSITIVE = 1;
 	DOTAMatchVote_NEGATIVE = 2;
+}
+
+enum DOTA_LobbyMemberXPBonus {
+	DOTA_LobbyMemberXPBonus_DEFAULT = 0;
+	DOTA_LobbyMemberXPBonus_BATTLE_BOOSTER = 1;
+	DOTA_LobbyMemberXPBonus_SHARE_BONUS = 2;
+	DOTA_LobbyMemberXPBonus_PARTY = 3;
+	DOTA_LobbyMemberXPBonus_RECRUITMENT = 4;
+	DOTA_LobbyMemberXPBonus_PCBANG = 5;
 }
 
 enum LobbyDotaTVDelay {
@@ -648,10 +665,6 @@ message CSODOTAParty {
 	optional uint32 max_level = 37;
 }
 
-message CSODOTAPartyInternal {
-	optional string search_key = 1;
-}
-
 message CSODOTAPartyInvite {
 	message PartyMember {
 		optional string name = 1;
@@ -708,6 +721,11 @@ message CMsgLeaverState {
 }
 
 message CDOTALobbyMember {
+	message CDOTALobbyMemberXPBonus {
+		optional uint32 type = 1;
+		optional float xp_bonus = 2;
+	}
+
 	optional fixed64 id = 1 [(key_field) = true];
 	optional uint32 hero_id = 2;
 	optional .DOTA_GC_TEAM team = 3 [default = DOTA_GC_TEAM_GOOD_GUYS];
@@ -721,14 +739,13 @@ message CDOTALobbyMember {
 	optional uint32 leaver_actions = 28;
 	optional uint32 channel = 17;
 	optional uint32 prize_def_index = 18;
-	optional uint32 meta_xp_bonus_rate = 19;
 	repeated uint32 disabled_hero_id = 20;
 	optional .PartnerAccountType partner_account_type = 21 [default = PARTNER_NONE];
 	repeated uint32 enabled_hero_id = 22;
 	optional .DOTA_GC_TEAM coach_team = 23 [default = DOTA_GC_TEAM_GOOD_GUYS];
 	optional uint32 nexon_pc_bang_no = 24;
 	optional string nexon_pc_bang_name = 25;
-	optional bool recruitment_bonus = 26;
+	repeated .CDOTALobbyMember.CDOTALobbyMemberXPBonus xp_bonuses = 27;
 }
 
 message CDOTALobbyMemberPrivate {
@@ -824,7 +841,6 @@ message CSODOTALobby {
 	optional .DOTAGameVersion game_version = 37 [default = GAME_VERSION_CURRENT];
 	repeated .CLobbyTimedRewardDetails timed_reward_details = 38;
 	optional string pass_key = 39;
-	optional float drop_rate_bonus = 40;
 	repeated .DOTABotDifficulty bot_slot_difficulty = 41;
 	optional uint32 leagueid = 42;
 	optional uint32 penalty_level_radiant = 43 [default = 0];

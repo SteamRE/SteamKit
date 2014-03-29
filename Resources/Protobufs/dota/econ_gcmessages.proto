@@ -147,6 +147,8 @@ enum EGCItemMsg {
 	k_EMsgGCToGCCanUseDropRateBonus = 2547;
 	k_EMsgSQLAddDropRateBonus = 2548;
 	k_EMsgGCToGCRefreshSOCache = 2549;
+	k_EMsgGCToGCCheckAccountTradeStatus = 2552;
+	k_EMsgGCToGCCheckAccountTradeStatusResponse = 2553;
 }
 
 enum EGCMsgResponse {
@@ -318,5 +320,15 @@ message CMsgSQLAddDropRateBonus {
 message CMsgGCToGCRefreshSOCache {
 	optional uint32 account_id = 1;
 	optional bool reload = 2;
+}
+
+message CMsgGCToGCCheckAccountTradeStatus {
+	optional uint32 account_id = 1;
+	optional bool initiator = 2;
+}
+
+message CMsgGCToGCCheckAccountTradeStatusResponse {
+	optional bool can_trade = 1;
+	optional uint32 error_code = 2;
 }
 

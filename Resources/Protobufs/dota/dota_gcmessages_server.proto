@@ -2,6 +2,7 @@ import "steammessages.proto";
 import "matchmaker_common.proto";
 import "dota_gcmessages_common.proto";
 import "econ_gcmessages.proto";
+import "network_connection.proto";
 
 message CMsgSpawnLootGreevil {
 	optional bool rare = 1;
@@ -20,6 +21,7 @@ message CMsgConnectedPlayers {
 		optional fixed64 steam_id = 1;
 		optional uint32 hero_id = 2;
 		optional .CMsgLeaverState leaver_state = 3;
+		optional .ENetworkDisconnectionReason disconnect_reason = 4 [default = NETWORK_DISCONNECT_INVALID];
 	}
 
 	enum SendReason {
@@ -80,6 +82,7 @@ message CMsgLeaverDetected {
 	optional bool obsolete_mass_disconnect = 3;
 	optional .CMsgLeaverState leaver_state = 4;
 	optional uint32 server_cluster = 5;
+	optional .ENetworkDisconnectionReason disconnect_reason = 6 [default = NETWORK_DISCONNECT_INVALID];
 }
 
 message CMsgLeaverDetectedResponse {

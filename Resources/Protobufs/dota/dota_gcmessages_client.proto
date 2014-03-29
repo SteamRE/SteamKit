@@ -602,10 +602,14 @@ message CMsgDOTAPopup {
 		SAVE_GAME_CORRUPT = 38;
 		INSUFFICIENT_INGOTS = 39;
 		COMPETITIVE_MM_NO_4STACKS = 40;
+		COMPETITIVE_MM_PARTY_MMR_SPREAD_TOO_LARGE = 41;
+		COMPETITIVE_MM_NOT_ENOUGH_SKILL_DATA_PLAY_MORE_CASUAL = 42;
+		COMPETITIVE_MM_NOT_ENOUGH_SKILL_DATA_IN_PARTY = 43;
 	}
 
 	optional .CMsgDOTAPopup.PopupID id = 1 [default = KICKED_FROM_LOBBY];
 	optional string custom_text = 2;
+	optional sint32 int_data = 3;
 }
 
 message CMsgDOTATeamMemberSDO {

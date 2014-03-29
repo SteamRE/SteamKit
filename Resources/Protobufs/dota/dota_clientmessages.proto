@@ -27,6 +27,7 @@ enum EDotaClientMessages {
 	DOTA_CM_RecordVote = 22;
 	DOTA_CM_UnitsAutoAttackAfterSpell = 23;
 	DOTA_CM_WillPurchaseAlert = 24;
+	DOTA_CM_PlayerShowCase = 25;
 }
 
 message CDOTAClientMsg_MapPing {
@@ -130,5 +131,9 @@ message CDOTAClientMsg_RecordVote {
 
 message CDOTAClientMsg_WillPurchaseAlert {
 	optional int32 itemid = 1;
+}
+
+message CDOTAClientMsg_PlayerShowCase {
+	optional bool showcase = 1;
 }
 
