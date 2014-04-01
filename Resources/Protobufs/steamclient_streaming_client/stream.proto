@@ -101,6 +101,7 @@ enum EStreamMouseWheelDirection {
 }
 
 enum EStreamGamepadInputType {
+	k_EStreamGamepadInputInvalid = 0;
 	k_EStreamGamepadInputDPadUp = 1;
 	k_EStreamGamepadInputDPadDown = 2;
 	k_EStreamGamepadInputDPadLeft = 4;
@@ -336,7 +337,7 @@ message CInputGamepadAttachedMsg {
 message CInputGamepadEventMsg {
 	optional uint32 input_mark = 1;
 	required int32 controller_id = 2;
-	required .EStreamGamepadInputType input = 3 [default = k_EStreamGamepadInputDPadUp];
+	required .EStreamGamepadInputType input = 3 [default = k_EStreamGamepadInputInvalid];
 	required float value = 4;
 }
 
