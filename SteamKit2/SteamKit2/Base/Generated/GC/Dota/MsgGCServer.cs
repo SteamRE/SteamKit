@@ -220,7 +220,10 @@ namespace SteamKit2.GC.Dota.Internal
       TOWER_STATE = 9,
             
       [global::ProtoBuf.ProtoEnum(Name=@"GAMESTATE_TIMEOUT", Value=10)]
-      GAMESTATE_TIMEOUT = 10
+      GAMESTATE_TIMEOUT = 10,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"MASS_DISCONNECT", Value=11)]
+      MASS_DISCONNECT = 11
     }
   
     private global::ProtoBuf.IExtension extensionObject;
