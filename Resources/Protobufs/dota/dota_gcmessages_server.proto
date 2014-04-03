@@ -36,6 +36,7 @@ message CMsgConnectedPlayers {
 		SPECTATOR_COUNT = 8;
 		TOWER_STATE = 9;
 		GAMESTATE_TIMEOUT = 10;
+		MASS_DISCONNECT = 11;
 	}
 
 	repeated .CMsgConnectedPlayers.Player connected_players = 1;
