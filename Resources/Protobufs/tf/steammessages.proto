@@ -1,10 +1,25 @@
 import "google/protobuf/descriptor.proto";
 
 extend .google.protobuf.FieldOptions {
-	optional bool key_field = 50000 [default = false];
+	optional bool key_field = 60000 [default = false];
+}
+
+extend .google.protobuf.MessageOptions {
+	optional int32 msgpool_soft_limit = 60000 [default = 32];
+	optional int32 msgpool_hard_limit = 60001 [default = 384];
+}
+
+enum GCProtoBufMsgSrc {
+	GCProtoBufMsgSrc_Unspecified = 0;
+	GCProtoBufMsgSrc_FromSystem = 1;
+	GCProtoBufMsgSrc_FromSteamID = 2;
+	GCProtoBufMsgSrc_FromGC = 3;
+	GCProtoBufMsgSrc_ReplySystem = 4;
 }
 
 message CMsgProtoBufHeader {
+	option (msgpool_soft_limit) = 256;
+	option (msgpool_hard_limit) = 1024;
 	optional fixed64 client_steam_id = 1;
 	optional int32 client_session_id = 2;
 	optional uint32 source_app_id = 3;
@@ -13,6 +28,8 @@ message CMsgProtoBufHeader {
 	optional string target_job_name = 12;
 	optional int32 eresult = 13 [default = 2];
 	optional string error_message = 14;
+	optional .GCProtoBufMsgSrc gc_msg_src = 200 [default = GCProtoBufMsgSrc_Unspecified];
+	optional uint32 gc_dir_index_source = 201;
 }
 
 message CMsgWebAPIKey {
@@ -41,6 +58,7 @@ message CMsgHttpRequest {
 	repeated .CMsgHttpRequest.QueryParam get_params = 5;
 	repeated .CMsgHttpRequest.QueryParam post_params = 6;
 	optional bytes body = 7;
+	optional uint32 absolute_timeout = 8;
 }
 
 message CMsgWebAPIRequest {
@@ -158,6 +176,42 @@ message CGCMsgMemCachedDelete {
 	repeated string keys = 1;
 }
 
+message CGCMsgMemCachedStats {
+}
+
+message CGCMsgMemCachedStatsResponse {
+	optional uint64 curr_connections = 1;
+	optional uint64 cmd_get = 2;
+	optional uint64 cmd_set = 3;
+	optional uint64 cmd_flush = 4;
+	optional uint64 get_hits = 5;
+	optional uint64 get_misses = 6;
+	optional uint64 delete_hits = 7;
+	optional uint64 delete_misses = 8;
+	optional uint64 bytes_read = 9;
+	optional uint64 bytes_written = 10;
+	optional uint64 limit_maxbytes = 11;
+	optional uint64 curr_items = 12;
+	optional uint64 evictions = 13;
+	optional uint64 bytes = 14;
+}
+
+message CGCMsgSQLStats {
+	optional uint32 schema_catalog = 1;
+}
+
+message CGCMsgSQLStatsResponse {
+	optional uint32 threads = 1;
+	optional uint32 threads_connected = 2;
+	optional uint32 threads_active = 3;
+	optional uint32 operations_submitted = 4;
+	optional uint32 prepared_statements_executed = 5;
+	optional uint32 non_prepared_statements_executed = 6;
+	optional uint32 deadlock_retries = 7;
+	optional uint32 operations_timed_out_in_queue = 8;
+	optional uint32 errors = 9;
+}
+
 message CMsgAMAddFreeLicense {
 	optional fixed64 steamid = 1;
 	optional uint32 ip_public = 2;
@@ -262,11 +316,15 @@ message CMsgAMGrantGuestPasses2Response {
 }
 
 message CGCSystemMsg_GetAccountDetails {
+	option (msgpool_soft_limit) = 128;
+	option (msgpool_hard_limit) = 512;
 	optional fixed64 steamid = 1;
 	optional uint32 appid = 2;
 }
 
 message CGCSystemMsg_GetAccountDetails_Response {
+	option (msgpool_soft_limit) = 128;
+	option (msgpool_hard_limit) = 512;
 	optional uint32 eresult_deprecated = 1 [default = 2];
 	optional string account_name = 2;
 	optional string persona_name = 3;
@@ -303,6 +361,37 @@ message CMsgGCGetPersonaNames_Response {
 
 	repeated .CMsgGCGetPersonaNames_Response.PersonaName succeeded_lookups = 1;
 	repeated fixed64 failed_lookup_steamids = 2;
+}
+
+message CMsgGCCheckFriendship {
+	optional fixed64 steamid_left = 1;
+	optional fixed64 steamid_right = 2;
+}
+
+message CMsgGCCheckFriendship_Response {
+	optional bool success = 1;
+	optional bool found_friendship = 2;
+}
+
+message CMsgGCMsgMasterSetDirectory {
+	message SubGC {
+		optional uint32 dir_index = 1;
+		optional string name = 2;
+		optional string box = 3;
+		optional string command_line = 4;
+		optional string gc_binary = 5;
+	}
+
+	optional uint32 master_dir_index = 1;
+	repeated .CMsgGCMsgMasterSetDirectory.SubGC dir = 2;
+}
+
+message CMsgGCMsgMasterSetDirectory_Response {
+	optional int32 eresult = 1 [default = 2];
+}
+
+message CMsgGCMsgWebAPIJobRequestForwardResponse {
+	optional uint32 dir_index = 1;
 }
 
 message CGCSystemMsg_GetPurchaseTrust_Request {
