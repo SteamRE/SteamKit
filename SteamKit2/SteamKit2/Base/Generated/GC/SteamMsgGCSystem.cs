@@ -346,7 +346,13 @@ namespace SteamKit2.GC.Internal
       k_EMsgGCToGCSOCacheSubscribe = 158,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCSOCacheUnsubscribe", Value=159)]
-      k_EMsgGCToGCSOCacheUnsubscribe = 159
+      k_EMsgGCToGCSOCacheUnsubscribe = 159,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCLoadSessionSOCache", Value=160)]
+      k_EMsgGCToGCLoadSessionSOCache = 160,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCLoadSessionSOCacheResponse", Value=161)]
+      k_EMsgGCToGCLoadSessionSOCacheResponse = 161
     }
   
 }

@@ -9222,15 +9222,6 @@ namespace SteamKit2.GC.Dota.Internal
       set { _scoring = value; }
     }
 
-    private uint _league_id = default(uint);
-    [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"league_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint league_id
-    {
-      get { return _league_id; }
-      set { _league_id = value; }
-    }
-
     private uint _draft_time = default(uint);
     [global::ProtoBuf.ProtoMember(12, IsRequired = false, Name=@"draft_time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(default(uint))]
@@ -9247,15 +9238,6 @@ namespace SteamKit2.GC.Dota.Internal
     {
       get { return _draft_pick_time; }
       set { _draft_pick_time = value; }
-    }
-
-    private uint _matchup_interval = default(uint);
-    [global::ProtoBuf.ProtoMember(14, IsRequired = false, Name=@"matchup_interval", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint matchup_interval
-    {
-      get { return _matchup_interval; }
-      set { _matchup_interval = value; }
     }
 
     private uint _season_start = default(uint);
@@ -9347,16 +9329,16 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _bench_slots; }
       set { _bench_slots = value; }
     }
-    private readonly global::System.Collections.Generic.List<uint> _owner_account_ids = new global::System.Collections.Generic.List<uint>();
-    [global::ProtoBuf.ProtoMember(25, Name=@"owner_account_ids", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public global::System.Collections.Generic.List<uint> owner_account_ids
+    private readonly global::System.Collections.Generic.List<CMsgDOTAFantasyLeagueInfo.OwnerInfo> _owner_info = new global::System.Collections.Generic.List<CMsgDOTAFantasyLeagueInfo.OwnerInfo>();
+    [global::ProtoBuf.ProtoMember(25, Name=@"owner_info", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CMsgDOTAFantasyLeagueInfo.OwnerInfo> owner_info
     {
-      get { return _owner_account_ids; }
+      get { return _owner_info; }
     }
   
-    private readonly global::System.Collections.Generic.List<CMsgDOTAFantasyLeagueInfo.PlayerInfo> _players = new global::System.Collections.Generic.List<CMsgDOTAFantasyLeagueInfo.PlayerInfo>();
-    [global::ProtoBuf.ProtoMember(26, Name=@"players", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public global::System.Collections.Generic.List<CMsgDOTAFantasyLeagueInfo.PlayerInfo> players
+    private readonly global::System.Collections.Generic.List<uint> _players = new global::System.Collections.Generic.List<uint>();
+    [global::ProtoBuf.ProtoMember(26, Name=@"players", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public global::System.Collections.Generic.List<uint> players
     {
       get { return _players; }
     }
@@ -9370,20 +9352,20 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _time_zone; }
       set { _time_zone = value; }
     }
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"PlayerInfo")]
-  public partial class PlayerInfo : global::ProtoBuf.IExtensible
-  {
-    public PlayerInfo() {}
-    
 
-    private uint _player_account_id = default(uint);
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"player_account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    private uint _season = default(uint);
+    [global::ProtoBuf.ProtoMember(28, IsRequired = false, Name=@"season", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint player_account_id
+    public uint season
     {
-      get { return _player_account_id; }
-      set { _player_account_id = value; }
+      get { return _season; }
+      set { _season = value; }
     }
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"OwnerInfo")]
+  public partial class OwnerInfo : global::ProtoBuf.IExtensible
+  {
+    public OwnerInfo() {}
+    
 
     private uint _owner_account_id = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"owner_account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
@@ -9393,6 +9375,13 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _owner_account_id; }
       set { _owner_account_id = value; }
     }
+    private readonly global::System.Collections.Generic.List<uint> _player_account_id = new global::System.Collections.Generic.List<uint>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"player_account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public global::System.Collections.Generic.List<uint> player_account_id
+    {
+      get { return _player_account_id; }
+    }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -10670,22 +10659,22 @@ namespace SteamKit2.GC.Dota.Internal
     public FantasyLeagueCreateInfo() {}
     
 
-    private uint _league_id = default(uint);
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"league_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    private uint _season = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"season", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint league_id
+    public uint season
     {
-      get { return _league_id; }
-      set { _league_id = value; }
+      get { return _season; }
+      set { _season = value; }
     }
 
-    private string _league_name = "";
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"league_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    private string _season_name = "";
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"season_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
     [global::System.ComponentModel.DefaultValue("")]
-    public string league_name
+    public string season_name
     {
-      get { return _league_name; }
-      set { _league_name = value; }
+      get { return _season_name; }
+      set { _season_name = value; }
     }
 
     private uint _create_count = default(uint);
@@ -10752,13 +10741,13 @@ namespace SteamKit2.GC.Dota.Internal
       set { _fantasy_league_id = value; }
     }
 
-    private string _league_name = "";
-    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"league_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    private string _season_name = "";
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"season_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
     [global::System.ComponentModel.DefaultValue("")]
-    public string league_name
+    public string season_name
     {
-      get { return _league_name; }
-      set { _league_name = value; }
+      get { return _season_name; }
+      set { _season_name = value; }
     }
 
     private uint _commisioner_id = default(uint);
@@ -10777,24 +10766,6 @@ namespace SteamKit2.GC.Dota.Internal
     {
       get { return _commisioner; }
       set { _commisioner = value; }
-    }
-
-    private bool _guild_invite = default(bool);
-    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"guild_invite", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
-    public bool guild_invite
-    {
-      get { return _guild_invite; }
-      set { _guild_invite = value; }
-    }
-
-    private string _invite_string = "";
-    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"invite_string", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
-    public string invite_string
-    {
-      get { return _invite_string; }
-      set { _invite_string = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -10892,13 +10863,13 @@ namespace SteamKit2.GC.Dota.Internal
       set { _fantasy_league_name = value; }
     }
 
-    private uint _league_id = default(uint);
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"league_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    private uint _season_id = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"season_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint league_id
+    public uint season_id
     {
-      get { return _league_id; }
-      set { _league_id = value; }
+      get { return _season_id; }
+      set { _season_id = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -10947,8 +10918,8 @@ namespace SteamKit2.GC.Dota.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"ERROR_NO_PERMISSION", Value=1)]
       ERROR_NO_PERMISSION = 1,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"ERROR_BAD_LEAGUE_ID", Value=2)]
-      ERROR_BAD_LEAGUE_ID = 2,
+      [global::ProtoBuf.ProtoEnum(Name=@"ERROR_BAD_SEASON_ID", Value=2)]
+      ERROR_BAD_SEASON_ID = 2,
             
       [global::ProtoBuf.ProtoEnum(Name=@"ERROR_BAD_NAME", Value=3)]
       ERROR_BAD_NAME = 3,

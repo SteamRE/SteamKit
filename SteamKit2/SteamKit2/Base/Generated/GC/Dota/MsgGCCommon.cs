@@ -2830,8 +2830,17 @@ namespace SteamKit2.GC.Dota.Internal
       set { _fantasy_league_id = value; }
     }
 
+    private uint _season = default(uint);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"season", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint season
+    {
+      get { return _season; }
+      set { _season = value; }
+    }
+
     private uint _reference_data = default(uint);
-    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"reference_data", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"reference_data", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint reference_data
     {
@@ -4690,17 +4699,6 @@ namespace SteamKit2.GC.Dota.Internal
             
       [global::ProtoBuf.ProtoEnum(Name=@"FANTASY_SELECTION_REGULAR_SEASON", Value=8)]
       FANTASY_SELECTION_REGULAR_SEASON = 8
-    }
-  
-    [global::ProtoBuf.ProtoContract(Name=@"Fantasy_Matchup_Interval", EnumPassthru=true)]
-    public enum Fantasy_Matchup_Interval
-    {
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"FANTASY_INTERVAL_DAILY", Value=1)]
-      FANTASY_INTERVAL_DAILY = 1,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"FANTASY_INTERVAL_WEEKLY", Value=2)]
-      FANTASY_INTERVAL_WEEKLY = 2
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"DOTA_TournamentEvents", EnumPassthru=true)]
