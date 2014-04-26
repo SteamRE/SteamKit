@@ -304,6 +304,7 @@ message CMsgGCCStrike15_v2_MatchmakingServerMatchEnd {
 	optional uint64 rematch = 4;
 	optional uint32 replay_token = 5;
 	optional uint32 replay_cluster_id = 6;
+	optional bool aborted_match = 7;
 }
 
 message CMsgGCCStrike15_v2_MatchmakingClient2GCHello {
