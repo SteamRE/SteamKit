@@ -201,6 +201,13 @@ message CMsgGCToGCSOCacheUnsubscribe {
 message CMsgGCClientPing {
 }
 
+message CMsgGCToGCLoadSessionSOCache {
+	optional uint32 account_id = 1;
+}
+
+message CMsgGCToGCLoadSessionSOCacheResponse {
+}
+
 message CWorkshop_PopulateItemDescriptions_Request {
 	message SingleItemDescription {
 		optional uint32 gameitemid = 1;

@@ -565,11 +565,6 @@ enum Fantasy_Selection_Mode {
 	FANTASY_SELECTION_REGULAR_SEASON = 8;
 }
 
-enum Fantasy_Matchup_Interval {
-	FANTASY_INTERVAL_DAILY = 1;
-	FANTASY_INTERVAL_WEEKLY = 2;
-}
-
 enum DOTA_TournamentEvents {
 	TE_FIRST_BLOOD = 0;
 	TE_GAME_END = 1;
@@ -993,7 +988,8 @@ message CMsgDOTAProcessFantasyScheduledEvent {
 	optional uint32 event = 1;
 	optional uint32 timestamp = 2;
 	optional uint32 fantasy_league_id = 3;
-	optional uint32 reference_data = 4;
+	optional uint32 season = 4;
+	optional uint32 reference_data = 5;
 }
 
 message CSODOTAMapLocationState {

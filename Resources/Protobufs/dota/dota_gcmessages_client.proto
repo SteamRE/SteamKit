@@ -1743,9 +1743,9 @@ message CMsgFantasyLeagueRoleScoring {
 }
 
 message CMsgDOTAFantasyLeagueInfo {
-	message PlayerInfo {
-		optional uint32 player_account_id = 1;
+	message OwnerInfo {
 		optional uint32 owner_account_id = 2;
+		repeated uint32 player_account_id = 1;
 	}
 
 	optional uint32 fantasy_league_id = 1;
@@ -1755,10 +1755,8 @@ message CMsgDOTAFantasyLeagueInfo {
 	optional uint32 team_count = 5;
 	optional uint64 logo = 6;
 	optional .CMsgFantasyLeagueRoleScoring scoring = 7;
-	optional uint32 league_id = 10;
 	optional uint32 draft_time = 12;
 	optional uint32 draft_pick_time = 13;
-	optional uint32 matchup_interval = 14;
 	optional uint32 season_start = 15;
 	optional uint32 season_length = 16;
 	optional uint32 veto_votes = 17;
@@ -1769,9 +1767,10 @@ message CMsgDOTAFantasyLeagueInfo {
 	optional uint32 slot_4 = 22;
 	optional uint32 slot_5 = 23;
 	optional uint32 bench_slots = 24;
-	repeated uint32 owner_account_ids = 25;
-	repeated .CMsgDOTAFantasyLeagueInfo.PlayerInfo players = 26;
+	repeated .CMsgDOTAFantasyLeagueInfo.OwnerInfo owner_info = 25;
+	repeated uint32 players = 26;
 	optional uint32 time_zone = 27;
+	optional uint32 season = 28;
 }
 
 message CMsgDOTAFantasyLeagueEditInfoRequest {
@@ -2010,8 +2009,8 @@ message CMsgDOTAFantasyLeagueCreateInfoRequest {
 
 message CMsgDOTAFantasyLeagueCreateInfoResponse {
 	message FantasyLeagueCreateInfo {
-		optional uint32 league_id = 1;
-		optional string league_name = 2;
+		optional uint32 season = 1;
+		optional string season_name = 2;
 		optional uint32 create_count = 3;
 	}
 
@@ -2025,11 +2024,9 @@ message CMsgDOTAFantasyLeagueJoinInfoResponse {
 	message FantasyLeagueInviteInfo {
 		optional string fantasy_league_name = 1;
 		optional uint32 fantasy_league_id = 2;
-		optional string league_name = 3;
+		optional string season_name = 3;
 		optional uint32 commisioner_id = 4;
 		optional string commisioner = 5;
-		optional bool guild_invite = 6;
-		optional string invite_string = 7;
 	}
 
 	repeated .CMsgDOTAFantasyLeagueJoinInfoResponse.FantasyLeagueInviteInfo join_info = 1;
@@ -2051,14 +2048,14 @@ message CMsgDOTAFantasyLeagueFriendJoinListResponse {
 
 message CMsgDOTAFantasyLeagueCreateRequest {
 	optional string fantasy_league_name = 1;
-	optional uint32 league_id = 2;
+	optional uint32 season_id = 2;
 }
 
 message CMsgDOTAFantasyLeagueCreateResponse {
 	enum EResult {
 		SUCCESS = 0;
 		ERROR_NO_PERMISSION = 1;
-		ERROR_BAD_LEAGUE_ID = 2;
+		ERROR_BAD_SEASON_ID = 2;
 		ERROR_BAD_NAME = 3;
 		ERROR_UNSPECIFIED = 4;
 	}

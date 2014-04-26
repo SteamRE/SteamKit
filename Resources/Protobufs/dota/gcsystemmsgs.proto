@@ -114,5 +114,7 @@ enum EGCToGCMsg {
 	k_EGCToGCMsgMasterStartupComplete = 157;
 	k_EMsgGCToGCSOCacheSubscribe = 158;
 	k_EMsgGCToGCSOCacheUnsubscribe = 159;
+	k_EMsgGCToGCLoadSessionSOCache = 160;
+	k_EMsgGCToGCLoadSessionSOCacheResponse = 161;
 }
 
