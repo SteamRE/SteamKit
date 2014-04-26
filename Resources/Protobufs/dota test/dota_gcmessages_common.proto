@@ -265,7 +265,7 @@ enum EDOTAGCMsg {
 	k_EMsgGCFantasyPlayerInfoRequest = 7322;
 	k_EMsgGCFantasyPlayerInfoResponse = 7323;
 	k_EMsgGCToGCProcessPlayerReportForTarget = 7324;
-	k_EMsgGCToGCProcessCommunicationReportSuccess = 7325;
+	k_EMsgGCToGCProcessReportSuccess = 7325;
 	k_EMsgGCNotifyAccountFlagsChange = 7326;
 	k_EMsgGCSetProfilePrivacy = 7327;
 	k_EMsgGCSetProfilePrivacyResponse = 7328;
@@ -383,12 +383,33 @@ enum EDOTAGCMsg {
 	k_EMsgGCEventGameCreate = 7443;
 	k_EMsgGCPerfectWorldUserLookupRequest = 7444;
 	k_EMsgGCPerfectWorldUserLookupResponse = 7445;
+	k_EMsgGCToGCIncrementRecruitmentSDO = 7446;
+	k_EMsgGCToGCIncrementRecruitmentLevel = 7447;
 	k_EMsgGCFantasyRemoveOwner = 7448;
 	k_EMsgGCFantasyRemoveOwnerResponse = 7449;
 	k_EMsgGCRequestBatchPlayerResources = 7450;
 	k_EMsgGCRequestBatchPlayerResourcesResponse = 7451;
 	k_EMsgGCToGCSendUpdateLeagues = 7452;
 	k_EMsgGCCompendiumSetSelectionResponse = 7453;
+	k_EMsgGCPlayerInfoRequest = 7454;
+	k_EMsgGCPlayerInfo = 7455;
+	k_EMsgGCPlayerInfoSubmit = 7456;
+	k_EMsgGCPlayerInfoSubmitResponse = 7457;
+	k_EMsgGCToGCGetAccountLevel = 7458;
+	k_EMsgGCToGCGetAccountLevelResponse = 7459;
+	k_EMsgGCToGCGetAccountPartner = 7460;
+	k_EMsgGCToGCGetAccountPartnerResponse = 7461;
+	k_EMsgGCToGCGetAccountProfile = 7462;
+	k_EMsgGCToGCGetAccountProfileResponse = 7463;
+	k_EMsgDOTAGetWeekendTourneySchedule = 7464;
+	k_EMsgDOTAWeekendTourneySchedule = 7465;
+	k_EMsgGCJoinableCustomGameModesRequest = 7466;
+	k_EMsgGCJoinableCustomGameModesResponse = 7467;
+	k_EMsgGCJoinableCustomLobbiesRequest = 7468;
+	k_EMsgGCJoinableCustomLobbiesResponse = 7469;
+	k_EMsgGCQuickJoinCustomLobby = 7470;
+	k_EMsgGCQuickJoinCustomLobbyResponse = 7471;
+	k_EMsgGCToGCGrantEventPointAction = 7472;
 	k_EMsgGCDev_GrantWarKill = 8001;
 }
 
@@ -490,12 +511,23 @@ enum DOTAJoinLobbyResult {
 	DOTA_JOIN_RESULT_GENERIC_ERROR = 5;
 	DOTA_JOIN_RESULT_INCORRECT_VERSION = 6;
 	DOTA_JOIN_RESULT_IN_TEAM_PARTY = 7;
+	DOTA_JOIN_RESULT_NO_LOBBY_FOUND = 8;
+	DOTA_JOIN_RESULT_LOBBY_FULL = 9;
 }
 
 enum DOTAMatchVote {
 	DOTAMatchVote_INVALID = 0;
 	DOTAMatchVote_POSITIVE = 1;
 	DOTAMatchVote_NEGATIVE = 2;
+}
+
+enum DOTA_LobbyMemberXPBonus {
+	DOTA_LobbyMemberXPBonus_DEFAULT = 0;
+	DOTA_LobbyMemberXPBonus_BATTLE_BOOSTER = 1;
+	DOTA_LobbyMemberXPBonus_SHARE_BONUS = 2;
+	DOTA_LobbyMemberXPBonus_PARTY = 3;
+	DOTA_LobbyMemberXPBonus_RECRUITMENT = 4;
+	DOTA_LobbyMemberXPBonus_PCBANG = 5;
 }
 
 enum LobbyDotaTVDelay {
@@ -542,11 +574,6 @@ enum Fantasy_Selection_Mode {
 	FANTASY_SELECTION_PRE_DRAFT = 6;
 	FANTASY_SELECTION_DRAFTING = 7;
 	FANTASY_SELECTION_REGULAR_SEASON = 8;
-}
-
-enum Fantasy_Matchup_Interval {
-	FANTASY_INTERVAL_DAILY = 1;
-	FANTASY_INTERVAL_WEEKLY = 2;
 }
 
 enum DOTA_TournamentEvents {
@@ -599,6 +626,9 @@ message CSODOTAGameAccountClient {
 	optional uint32 recruitment_level = 55;
 	optional bool has_new_notifications = 56;
 	optional bool is_league_admin = 57;
+	optional uint32 casual_games_played = 60;
+	optional uint32 solo_competitive_games_played = 61;
+	optional uint32 party_competitive_games_played = 62;
 }
 
 message CSODOTAPartyMember {
@@ -639,10 +669,6 @@ message CSODOTAParty {
 	optional uint32 low_priority_games_remaining = 35;
 	optional uint32 min_level = 36;
 	optional uint32 max_level = 37;
-}
-
-message CSODOTAPartyInternal {
-	optional string search_key = 1;
 }
 
 message CSODOTAPartyInvite {
@@ -701,10 +727,14 @@ message CMsgLeaverState {
 }
 
 message CDOTALobbyMember {
+	message CDOTALobbyMemberXPBonus {
+		optional uint32 type = 1;
+		optional float xp_bonus = 2;
+	}
+
 	optional fixed64 id = 1 [(key_field) = true];
 	optional uint32 hero_id = 2;
 	optional .DOTA_GC_TEAM team = 3 [default = DOTA_GC_TEAM_GOOD_GUYS];
-	optional bool legacy_connected_to_game_server = 4;
 	optional string name = 6;
 	optional uint32 slot = 7;
 	optional uint64 party_id = 12;
@@ -715,14 +745,13 @@ message CDOTALobbyMember {
 	optional uint32 leaver_actions = 28;
 	optional uint32 channel = 17;
 	optional uint32 prize_def_index = 18;
-	optional uint32 meta_xp_bonus_rate = 19;
 	repeated uint32 disabled_hero_id = 20;
 	optional .PartnerAccountType partner_account_type = 21 [default = PARTNER_NONE];
 	repeated uint32 enabled_hero_id = 22;
 	optional .DOTA_GC_TEAM coach_team = 23 [default = DOTA_GC_TEAM_GOOD_GUYS];
 	optional uint32 nexon_pc_bang_no = 24;
 	optional string nexon_pc_bang_name = 25;
-	optional bool recruitment_bonus = 26;
+	repeated .CDOTALobbyMember.CDOTALobbyMemberXPBonus xp_bonuses = 27;
 }
 
 message CDOTALobbyMemberPrivate {
@@ -748,7 +777,6 @@ message CLobbyTeamDetails {
 }
 
 message CLobbyTimedRewardDetails {
-	optional uint64 item_id = 1;
 	optional uint32 item_def_index = 2;
 	optional bool is_supply_crate = 3;
 	optional bool is_timed_drop = 4;
@@ -809,7 +837,6 @@ message CSODOTALobby {
 	optional uint32 server_region = 21 [default = 0];
 	optional .DOTA_GameState game_state = 22 [default = DOTA_GAMERULES_STATE_INIT];
 	optional uint32 num_spectators = 23;
-	optional uint32 tower_state = 24;
 	optional uint32 matchgroup = 25;
 	optional .DOTA_CM_PICK cm_pick = 28 [default = DOTA_CM_RANDOM];
 	optional uint32 match_id = 30;
@@ -818,7 +845,6 @@ message CSODOTALobby {
 	optional .DOTAGameVersion game_version = 37 [default = GAME_VERSION_CURRENT];
 	repeated .CLobbyTimedRewardDetails timed_reward_details = 38;
 	optional string pass_key = 39;
-	optional float drop_rate_bonus = 40;
 	repeated .DOTABotDifficulty bot_slot_difficulty = 41;
 	optional uint32 leagueid = 42;
 	optional uint32 penalty_level_radiant = 43 [default = 0];
@@ -842,10 +868,10 @@ message CSODOTALobby {
 	optional bool low_priority = 61;
 	repeated .CSODOTALobby.CExtraMsg extra_messages = 62;
 	optional .CDOTASaveGame save_game = 63;
-	optional uint32 custom_game_id = 64;
 	optional bool first_blood_happened = 65;
 	optional bool discard_match_results = 66;
 	optional bool mass_disconnect = 67;
+	optional uint64 custom_game_id = 68;
 }
 
 message CSODOTALobbyInternal {
@@ -860,6 +886,7 @@ message CSODOTALobbyInternal {
 	optional bytes save_game_data = 11;
 	optional uint32 server_run_time = 12;
 	optional uint32 last_state_change_time = 13;
+	optional uint32 tower_state = 14;
 }
 
 message CMsgDOTAGenericResult {
@@ -971,7 +998,8 @@ message CMsgDOTAProcessFantasyScheduledEvent {
 	optional uint32 event = 1;
 	optional uint32 timestamp = 2;
 	optional uint32 fantasy_league_id = 3;
-	optional uint32 reference_data = 4;
+	optional uint32 season = 4;
+	optional uint32 reference_data = 5;
 }
 
 message CSODOTAMapLocationState {

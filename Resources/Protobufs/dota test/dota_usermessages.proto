@@ -66,6 +66,7 @@ enum EDotaUserMessages {
 	DOTA_UM_WillPurchaseAlert = 124;
 	DOTA_UM_TutorialMinimapPosition = 125;
 	DOTA_UM_PlayerMMR = 126;
+	DOTA_UM_AbilitySteal = 127;
 }
 
 enum DOTA_CHAT_MESSAGE {
@@ -145,6 +146,7 @@ enum DOTA_CHAT_MESSAGE {
 	CHAT_MESSAGE_WILL_NOT_BE_SCORED_NETWORK_RANKED = 81;
 	CHAT_MESSAGE_CAN_QUIT_WITHOUT_ABANDON = 82;
 	CHAT_MESSAGE_RANKED_GAME_STILL_SCORED_LEAVERS_GET_LOSS = 83;
+	CHAT_MESSAGE_ABANDON_RANKED_BEFORE_FIRST_BLOOD_PARTY = 84;
 }
 
 enum DOTA_NO_BATTLE_POINTS_REASONS {
@@ -708,5 +710,11 @@ message CDOTAUserMsg_BoosterState {
 
 message CDOTAUserMsg_PlayerMMR {
 	repeated sint32 mmr = 1 [packed = true];
+}
+
+message CDOTAUserMsg_AbilitySteal {
+	optional uint32 player_id = 1;
+	optional uint32 ability_id = 2;
+	optional uint32 ability_level = 3;
 }
 

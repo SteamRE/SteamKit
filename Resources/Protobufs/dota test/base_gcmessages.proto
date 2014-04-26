@@ -256,15 +256,6 @@ message CMsgReplicateConVars {
 	repeated .CMsgConVarValue convars = 1;
 }
 
-message CMsgUseItem {
-	optional uint64 item_id = 1;
-	optional fixed64 target_steam_id = 2;
-	repeated uint32 gift__potential_targets = 3;
-	optional uint32 duel__class_lock = 4;
-	optional fixed64 initiator_steam_id = 5;
-	optional bool itempack__ack_immediately = 6;
-}
-
 message CMsgReplayUploadedToYouTube {
 	optional string youtube_url = 1;
 	optional string youtube_account_name = 2;
@@ -462,6 +453,15 @@ message CMsgGCToGCDirtyMultipleSDOCache {
 	repeated uint64 key_uint64 = 2;
 }
 
+message CMsgGCToGCApplyLocalizationDiff {
+	optional uint32 language = 1;
+	optional string packed_diff = 2;
+}
+
+message CMsgGCToGCApplyLocalizationDiffResponse {
+	optional bool success = 1;
+}
+
 message CMsgGCCollectItem {
 	optional uint64 collection_item_id = 1;
 	optional uint64 subject_item_id = 2;
@@ -487,12 +487,6 @@ message CMsgGCClientVersionUpdated {
 }
 
 message CMsgGCToGCWebAPIAccountChanged {
-}
-
-message CMsgGCToGCRequestPassportItemGrant {
-	optional uint32 league_id = 2;
-	optional int32 reward_flag = 3;
-	optional uint32 account_id = 4;
 }
 
 message CMsgRecipeComponent {

@@ -1,5 +1,6 @@
 import "google/protobuf/descriptor.proto";
 import "networkbasetypes.proto";
+import "network_connection.proto";
 
 enum NET_Messages {
 	net_NOP = 0;
@@ -76,7 +77,7 @@ message CNETMsg_NOP {
 }
 
 message CNETMsg_Disconnect {
-	optional string text = 1;
+	optional .ENetworkDisconnectionReason reason = 2 [default = NETWORK_DISCONNECT_INVALID];
 }
 
 message CNETMsg_File {

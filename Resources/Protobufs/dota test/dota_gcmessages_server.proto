@@ -2,6 +2,7 @@ import "steammessages.proto";
 import "matchmaker_common.proto";
 import "dota_gcmessages_common.proto";
 import "econ_gcmessages.proto";
+import "network_connection.proto";
 
 message CMsgSpawnLootGreevil {
 	optional bool rare = 1;
@@ -20,6 +21,7 @@ message CMsgConnectedPlayers {
 		optional fixed64 steam_id = 1;
 		optional uint32 hero_id = 2;
 		optional .CMsgLeaverState leaver_state = 3;
+		optional .ENetworkDisconnectionReason disconnect_reason = 4 [default = NETWORK_DISCONNECT_INVALID];
 	}
 
 	enum SendReason {
@@ -34,6 +36,7 @@ message CMsgConnectedPlayers {
 		SPECTATOR_COUNT = 8;
 		TOWER_STATE = 9;
 		GAMESTATE_TIMEOUT = 10;
+		MASS_DISCONNECT = 11;
 	}
 
 	repeated .CMsgConnectedPlayers.Player connected_players = 1;
@@ -41,7 +44,6 @@ message CMsgConnectedPlayers {
 	optional .DOTA_GameState game_state = 2 [default = DOTA_GAMERULES_STATE_INIT];
 	optional uint32 num_spectators = 3;
 	optional uint32 tower_state = 4;
-	optional bool legacy_skip_player_validation = 5;
 	optional bool first_blood_happened = 6;
 	optional .CMsgConnectedPlayers.SendReason send_reason = 8 [default = INVALID];
 }
@@ -81,6 +83,7 @@ message CMsgLeaverDetected {
 	optional bool obsolete_mass_disconnect = 3;
 	optional .CMsgLeaverState leaver_state = 4;
 	optional uint32 server_cluster = 5;
+	optional .ENetworkDisconnectionReason disconnect_reason = 6 [default = NETWORK_DISCONNECT_INVALID];
 }
 
 message CMsgLeaverDetectedResponse {
@@ -241,6 +244,9 @@ message CMsgDOTALiveScoreboardUpdate {
 			optional uint32 item4 = 20;
 			optional uint32 item5 = 21;
 			optional uint32 respawn_timer = 22;
+			optional uint32 account_id = 23;
+			optional float position_x = 24;
+			optional float position_y = 25;
 		}
 
 		repeated .CMsgDOTALiveScoreboardUpdate.Team.Player players = 1;
@@ -254,6 +260,8 @@ message CMsgDOTALiveScoreboardUpdate {
 	optional .CMsgDOTALiveScoreboardUpdate.Team team_good = 5;
 	optional .CMsgDOTALiveScoreboardUpdate.Team team_bad = 6;
 	optional uint32 roshan_respawn_timer = 7;
+	optional uint32 league_id = 8;
+	optional uint64 match_id = 9;
 }
 
 message CMsgDOTARequestPlayerResources {
@@ -301,6 +309,7 @@ message CMsgGCToRelayConnect {
 	optional uint64 game_server_steam_id = 4;
 	optional uint32 parent_count = 5;
 	optional fixed64 tv_unique_secret_code = 6;
+	optional uint32 source_tv_steamid = 7;
 }
 
 message CMsgGCToRelayConnectResponse {
