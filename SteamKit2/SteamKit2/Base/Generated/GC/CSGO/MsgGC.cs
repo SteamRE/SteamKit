@@ -1738,6 +1738,15 @@ namespace SteamKit2.GC.CSGO.Internal
       get { return _replay_cluster_id; }
       set { _replay_cluster_id = value; }
     }
+
+    private bool _aborted_match = default(bool);
+    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"aborted_match", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool aborted_match
+    {
+      get { return _aborted_match; }
+      set { _aborted_match = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
