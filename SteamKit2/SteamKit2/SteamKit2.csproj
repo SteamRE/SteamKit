@@ -93,6 +93,7 @@
     <Compile Include="Base\Generated\GC\SteamMsgGCSDK.cs" />
     <Compile Include="Base\Generated\GC\SteamMsgGCSystem.cs" />
     <Compile Include="Base\Generated\GC\TF2\MsgGC.cs" />
+    <Compile Include="Base\Generated\GC\TF2\SteamMsgBase.cs" />
     <Compile Include="Base\Generated\IClientObjects.cs" />
     <Compile Include="Base\Generated\SteamLanguageInternal.cs" />
     <Compile Include="Base\Generated\Unified\SteamMsgCloud.cs" />
