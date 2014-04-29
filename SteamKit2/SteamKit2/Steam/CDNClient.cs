@@ -68,6 +68,21 @@ namespace SteamKit2
                 };
             }
 
+			/// <summary>
+			/// Performs an implicit conversion from <see cref="System.Net.DnsEndPoint"/> to <see cref="SteamKit2.CDNClient.Server"/>.
+			/// </summary>
+			/// <param name="endPoint">A DnsEndPoint to convert into a <see cref="SteamKit2.CDNClient.Server"/>.</param>
+			/// <returns>
+			/// The result of the conversion.
+			/// </returns>
+			public static implicit operator Server( DnsEndPoint endPoint )
+			{
+				return new Server
+				{
+					Host = endPoint.Host.ToString(),
+					Port = endPoint.Port,
+				};
+			}
 
             /// <summary>
             /// Returns a <see cref="System.String" /> that represents this server.
