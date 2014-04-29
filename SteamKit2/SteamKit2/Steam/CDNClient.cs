@@ -77,11 +77,11 @@ namespace SteamKit2
             /// </returns>
             public static implicit operator Server( DnsEndPoint endPoint )
             {
-            	return new Server
-            	{
-            		Host = endPoint.Host.ToString(),
-            		Port = endPoint.Port,
-            	};
+                return new Server
+                {
+                    Host = endPoint.Host,
+                    Port = endPoint.Port,
+                };
             }
 
             /// <summary>
