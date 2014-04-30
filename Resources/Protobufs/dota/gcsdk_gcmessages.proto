@@ -223,3 +223,12 @@ message CWorkshop_PopulateItemDescriptions_Request {
 	repeated .CWorkshop_PopulateItemDescriptions_Request.ItemDescriptionsLanguageBlock languages = 2;
 }
 
+message CWorkshop_GetContributors_Request {
+	optional uint32 appid = 1;
+	optional uint32 gameitemid = 2;
+}
+
+message CWorkshop_GetContributors_Response {
+	repeated fixed64 contributors = 1;
+}
+

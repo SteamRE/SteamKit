@@ -66,6 +66,7 @@ enum EDotaUserMessages {
 	DOTA_UM_WillPurchaseAlert = 124;
 	DOTA_UM_TutorialMinimapPosition = 125;
 	DOTA_UM_PlayerMMR = 126;
+	DOTA_UM_AbilitySteal = 127;
 }
 
 enum DOTA_CHAT_MESSAGE {
@@ -350,6 +351,7 @@ message CDOTAUserMsg_DestroyLinearProjectile {
 
 message CDOTAUserMsg_DodgeTrackingProjectiles {
 	required int32 entindex = 1;
+	optional bool attacks_only = 2;
 }
 
 message CDOTAUserMsg_SpectatorPlayerClick {
@@ -709,5 +711,11 @@ message CDOTAUserMsg_BoosterState {
 
 message CDOTAUserMsg_PlayerMMR {
 	repeated sint32 mmr = 1 [packed = true];
+}
+
+message CDOTAUserMsg_AbilitySteal {
+	optional uint32 player_id = 1;
+	optional uint32 ability_id = 2;
+	optional uint32 ability_level = 3;
 }
 

@@ -28,6 +28,7 @@ enum EDotaClientMessages {
 	DOTA_CM_UnitsAutoAttackAfterSpell = 23;
 	DOTA_CM_WillPurchaseAlert = 24;
 	DOTA_CM_PlayerShowCase = 25;
+	DOTA_CM_TeleportRequiresHalt = 26;
 }
 
 message CDOTAClientMsg_MapPing {
@@ -51,6 +52,10 @@ message CDOTAClientMsg_UnitsAutoAttack {
 }
 
 message CDOTAClientMsg_UnitsAutoAttackAfterSpell {
+	optional bool enabled = 1;
+}
+
+message CDOTAClientMsg_TeleportRequiresHalt {
 	optional bool enabled = 1;
 }
 

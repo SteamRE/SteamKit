@@ -88,6 +88,7 @@ enum EGCItemMsg {
 	k_EMsgGCResetStrangeGemCount = 1091;
 	k_EMsgGCRequestCrateItems = 1092;
 	k_EMsgGCRequestCrateItemsResponse = 1093;
+	k_EMsgGCServerUseItemRequest = 1103;
 	k_EMsgGCTradingBase = 1500;
 	k_EMsgGCTrading_InitiateTradeRequest = 1501;
 	k_EMsgGCTrading_InitiateTradeResponse = 1502;
@@ -147,8 +148,12 @@ enum EGCItemMsg {
 	k_EMsgGCToGCCanUseDropRateBonus = 2547;
 	k_EMsgSQLAddDropRateBonus = 2548;
 	k_EMsgGCToGCRefreshSOCache = 2549;
+	k_EMsgGCToGCApplyLocalizationDiff = 2550;
+	k_EMsgGCToGCApplyLocalizationDiffResponse = 2551;
 	k_EMsgGCToGCCheckAccountTradeStatus = 2552;
 	k_EMsgGCToGCCheckAccountTradeStatusResponse = 2553;
+	k_EMsgGCToGCGrantAccountRolledItems = 2554;
+	k_EMsgGCToGCGrantSelfMadeItemToAccount = 2555;
 }
 
 enum EGCMsgResponse {
@@ -330,5 +335,38 @@ message CMsgGCToGCCheckAccountTradeStatus {
 message CMsgGCToGCCheckAccountTradeStatusResponse {
 	optional bool can_trade = 1;
 	optional uint32 error_code = 2;
+}
+
+message CMsgGCToGCGrantAccountRolledItems {
+	message Item {
+		optional uint32 item_def = 1;
+		repeated string loot_lists = 2;
+		optional bool ignore_limit = 3;
+		optional uint32 origin = 4;
+	}
+
+	optional uint32 account_id = 1;
+	repeated .CMsgGCToGCGrantAccountRolledItems.Item items = 2;
+	optional uint32 audit_action = 3;
+	optional uint32 audit_data = 4;
+}
+
+message CMsgGCToGCGrantSelfMadeItemToAccount {
+	optional uint32 item_def_index = 1;
+	optional uint32 accountid = 2;
+}
+
+message CMsgUseItem {
+	optional uint64 item_id = 1;
+	optional fixed64 target_steam_id = 2;
+	repeated uint32 gift__potential_targets = 3;
+	optional uint32 duel__class_lock = 4;
+	optional uint64 initiator_steam_id = 5;
+	optional bool itempack__ack_immediately = 6;
+}
+
+message CMsgServerUseItem {
+	optional uint32 initiator_account_id = 1;
+	optional .CMsgUseItem use_item_msg = 2;
 }
 

@@ -244,6 +244,9 @@ message CMsgDOTALiveScoreboardUpdate {
 			optional uint32 item4 = 20;
 			optional uint32 item5 = 21;
 			optional uint32 respawn_timer = 22;
+			optional uint32 account_id = 23;
+			optional float position_x = 24;
+			optional float position_y = 25;
 		}
 
 		repeated .CMsgDOTALiveScoreboardUpdate.Team.Player players = 1;
@@ -257,6 +260,8 @@ message CMsgDOTALiveScoreboardUpdate {
 	optional .CMsgDOTALiveScoreboardUpdate.Team team_good = 5;
 	optional .CMsgDOTALiveScoreboardUpdate.Team team_bad = 6;
 	optional uint32 roshan_respawn_timer = 7;
+	optional uint32 league_id = 8;
+	optional uint64 match_id = 9;
 }
 
 message CMsgDOTARequestPlayerResources {
@@ -304,6 +309,7 @@ message CMsgGCToRelayConnect {
 	optional uint64 game_server_steam_id = 4;
 	optional uint32 parent_count = 5;
 	optional fixed64 tv_unique_secret_code = 6;
+	optional uint32 source_tv_steamid = 7;
 }
 
 message CMsgGCToRelayConnectResponse {

@@ -401,6 +401,15 @@ enum EDOTAGCMsg {
 	k_EMsgGCToGCGetAccountPartnerResponse = 7461;
 	k_EMsgGCToGCGetAccountProfile = 7462;
 	k_EMsgGCToGCGetAccountProfileResponse = 7463;
+	k_EMsgDOTAGetWeekendTourneySchedule = 7464;
+	k_EMsgDOTAWeekendTourneySchedule = 7465;
+	k_EMsgGCJoinableCustomGameModesRequest = 7466;
+	k_EMsgGCJoinableCustomGameModesResponse = 7467;
+	k_EMsgGCJoinableCustomLobbiesRequest = 7468;
+	k_EMsgGCJoinableCustomLobbiesResponse = 7469;
+	k_EMsgGCQuickJoinCustomLobby = 7470;
+	k_EMsgGCQuickJoinCustomLobbyResponse = 7471;
+	k_EMsgGCToGCGrantEventPointAction = 7472;
 	k_EMsgGCDev_GrantWarKill = 8001;
 }
 
@@ -502,6 +511,8 @@ enum DOTAJoinLobbyResult {
 	DOTA_JOIN_RESULT_GENERIC_ERROR = 5;
 	DOTA_JOIN_RESULT_INCORRECT_VERSION = 6;
 	DOTA_JOIN_RESULT_IN_TEAM_PARTY = 7;
+	DOTA_JOIN_RESULT_NO_LOBBY_FOUND = 8;
+	DOTA_JOIN_RESULT_LOBBY_FULL = 9;
 }
 
 enum DOTAMatchVote {
@@ -766,7 +777,6 @@ message CLobbyTeamDetails {
 }
 
 message CLobbyTimedRewardDetails {
-	optional uint64 item_id = 1;
 	optional uint32 item_def_index = 2;
 	optional bool is_supply_crate = 3;
 	optional bool is_timed_drop = 4;
@@ -827,7 +837,6 @@ message CSODOTALobby {
 	optional uint32 server_region = 21 [default = 0];
 	optional .DOTA_GameState game_state = 22 [default = DOTA_GAMERULES_STATE_INIT];
 	optional uint32 num_spectators = 23;
-	optional uint32 tower_state = 24;
 	optional uint32 matchgroup = 25;
 	optional .DOTA_CM_PICK cm_pick = 28 [default = DOTA_CM_RANDOM];
 	optional uint32 match_id = 30;
@@ -859,10 +868,10 @@ message CSODOTALobby {
 	optional bool low_priority = 61;
 	repeated .CSODOTALobby.CExtraMsg extra_messages = 62;
 	optional .CDOTASaveGame save_game = 63;
-	optional uint32 custom_game_id = 64;
 	optional bool first_blood_happened = 65;
 	optional bool discard_match_results = 66;
 	optional bool mass_disconnect = 67;
+	optional uint64 custom_game_id = 68;
 }
 
 message CSODOTALobbyInternal {
@@ -877,6 +886,7 @@ message CSODOTALobbyInternal {
 	optional bytes save_game_data = 11;
 	optional uint32 server_run_time = 12;
 	optional uint32 last_state_change_time = 13;
+	optional uint32 tower_state = 14;
 }
 
 message CMsgDOTAGenericResult {

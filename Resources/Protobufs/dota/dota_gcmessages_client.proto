@@ -3,6 +3,55 @@ import "matchmaker_common.proto";
 import "dota_gcmessages_common.proto";
 import "gcsdk_gcmessages.proto";
 
+enum ETournamentGameState {
+	k_ETournamentGameState_Pending = 0;
+	k_ETournamentGameState_Active = 1;
+	k_ETournamentGameState_DireVictory = 2;
+	k_ETournamentGameState_RadVictory = 3;
+	k_ETournamentGameState_Canceled = 4;
+}
+
+enum ETournamentTeamState {
+	k_ETournamentTeamState_Unknown = 0;
+	k_ETournamentTeamState_1st = 1;
+	k_ETournamentTeamState_2nd = 2;
+	k_ETournamentTeamState_3rd = 3;
+	k_ETournamentTeamState_4th = 4;
+	k_ETournamentTeamState_5th = 5;
+	k_ETournamentTeamState_6th = 6;
+	k_ETournamentTeamState_7th = 7;
+	k_ETournamentTeamState_8th = 8;
+	k_ETournamentTeamState_9th = 9;
+	k_ETournamentTeamState_10th = 10;
+	k_ETournamentTeamState_11th = 11;
+	k_ETournamentTeamState_12th = 12;
+	k_ETournamentTeamState_13th = 13;
+	k_ETournamentTeamState_14th = 14;
+	k_ETournamentTeamState_15th = 15;
+	k_ETournamentTeamState_16th = 16;
+	k_ETournamentTeamState_WaitingForNextRound = 1000;
+	k_ETournamentTeamState_InMatch = 1001;
+	k_ETournamentTeamState_Eliminated = 1002;
+}
+
+enum ETournamentTemplate {
+	k_ETournamentTemplate_None = 0;
+	k_ETournamentTemplate_SingleElimination = 1;
+}
+
+enum ETournamentType {
+	k_ETournamentTemplate_Unknown = 0;
+	k_ETournamentTemplate_WeeklyDivision = 1;
+}
+
+enum ETournamentState {
+	k_ETournamentState_Unknown = 0;
+	k_ETournamentState_Scheduled = 1;
+	k_ETournamentState_InProgress = 2;
+	k_ETournamentState_Completed = 3;
+	k_ETournamentState_Canceled = 4;
+}
+
 enum DOTAChatChannelType_t {
 	DOTAChannelType_Regional = 0;
 	DOTAChannelType_Custom = 1;
@@ -175,7 +224,7 @@ message CSourceTVGame {
 	optional uint32 leagueid = 20;
 	optional .DOTA_GameMode game_mode = 21 [default = DOTA_GAMEMODE_NONE];
 	optional uint32 lobby_type = 22;
-	optional uint32 custom_game_id = 23;
+	optional uint64 custom_game_id = 24;
 }
 
 message CMsgSourceTVGamesResponse {
@@ -190,7 +239,7 @@ message CMsgFindSourceTVGames {
 	optional uint32 leagueid = 4;
 	optional uint32 heroid = 5;
 	optional bool team_game = 6;
-	optional uint32 custom_game_id = 9;
+	optional uint64 custom_game_id = 10;
 }
 
 message CMsgSpectateFriendGame {
@@ -232,6 +281,10 @@ message CMsgPracticeLobbySetDetails {
 	optional bool allchat = 23 [default = false];
 	optional .LobbyDotaTVDelay dota_tv_delay = 24 [default = LobbyDotaTV_120];
 	optional bool lan = 25;
+	optional string custom_game_mode = 26;
+	optional string custom_map_name = 27;
+	optional uint32 custom_difficulty = 28;
+	optional uint64 custom_game_id = 29;
 }
 
 message CMsgPracticeLobbyCreate {
@@ -336,6 +389,48 @@ message CMsgGuildmatePracticeLobbyListResponse {
 	repeated .CMsgPracticeLobbyListResponseEntry lobbies = 1;
 }
 
+message CMsgJoinableCustomGameModesRequest {
+	optional uint32 server_region = 1;
+}
+
+message CMsgJoinableCustomGameModesResponseEntry {
+	optional uint64 custom_game_id = 1;
+	optional uint32 lobby_count = 2;
+	optional uint32 player_count = 3;
+}
+
+message CMsgJoinableCustomGameModesResponse {
+	repeated .CMsgJoinableCustomGameModesResponseEntry game_modes = 1;
+}
+
+message CMsgJoinableCustomLobbiesRequest {
+	optional uint32 server_region = 1;
+	optional uint64 custom_game_id = 2;
+}
+
+message CMsgJoinableCustomLobbiesResponseEntry {
+	optional fixed64 lobby_id = 1;
+	optional uint64 custom_game_id = 2;
+	optional string lobby_name = 3;
+	optional uint32 member_count = 4;
+	optional uint32 leader_account_id = 5;
+	optional string leader_name = 6;
+}
+
+message CMsgJoinableCustomLobbiesResponse {
+	repeated .CMsgJoinableCustomLobbiesResponseEntry lobbies = 1;
+}
+
+message CMsgQuickJoinCustomLobby {
+	optional uint32 server_region = 1;
+	optional uint64 custom_game_id = 2;
+	optional uint32 client_version = 3;
+}
+
+message CMsgQuickJoinCustomLobbyResponse {
+	optional .DOTAJoinLobbyResult result = 1 [default = DOTA_JOIN_RESULT_SUCCESS];
+}
+
 message CMsgBotGameCreate {
 	optional string search_key = 1;
 	optional uint32 client_version = 2;
@@ -350,7 +445,16 @@ message CMsgCustomGameCreate {
 	optional uint32 difficulty = 3;
 	optional string game_mode = 4;
 	optional string map = 5;
-	optional uint32 custom_game_id = 6;
+	optional uint64 custom_game_id = 7;
+}
+
+message CMsgEventGameCreate {
+	optional string search_key = 1;
+	optional uint32 client_version = 2;
+	optional uint32 difficulty = 3;
+	optional string game_mode = 4;
+	optional string map = 5;
+	optional uint64 custom_game_id = 7;
 }
 
 message CMsgRequestInternationalTicket {
@@ -372,6 +476,7 @@ message CMsgDOTATournament {
 		optional uint32 seed = 5;
 		optional uint64 team_logo = 6;
 		optional string country_code = 7;
+		optional .ETournamentTeamState state = 8 [default = k_ETournamentTeamState_Unknown];
 	}
 
 	message Game {
@@ -385,6 +490,8 @@ message CMsgDOTATournament {
 		optional uint32 game_id = 1;
 		optional uint32 good_team_id = 2;
 		optional uint32 bad_team_id = 3;
+		optional uint32 good_team_seed = 12;
+		optional uint32 bad_team_seed = 13;
 		optional fixed64 lobby_id = 4;
 		optional uint32 match_id = 5;
 		optional string game_name = 6;
@@ -392,11 +499,18 @@ message CMsgDOTATournament {
 		optional string message = 9;
 		optional bool results_final = 10;
 		repeated .CMsgDOTATournament.Game.ReplayURL replay_urls = 11;
+		optional .ETournamentGameState state = 14 [default = k_ETournamentGameState_Pending];
 	}
 
 	repeated .CMsgDOTATournament.Team teams = 1;
 	repeated .CMsgDOTATournament.Game games = 2;
 	optional uint64 gid = 3;
+	optional uint32 tournament_id = 4;
+	optional .ETournamentType tournament_type = 5 [default = k_ETournamentTemplate_Unknown];
+	optional .ETournamentTemplate tournament_template = 6 [default = k_ETournamentTemplate_None];
+	optional uint32 division_id = 7;
+	optional uint32 start_time = 8;
+	optional .ETournamentState state = 9 [default = k_ETournamentState_Unknown];
 }
 
 message CMsgDOTATournamentRequest {
@@ -508,7 +622,7 @@ message CMsgDOTAMatch {
 	optional string dire_team_tag = 38;
 	optional uint32 series_id = 39;
 	optional uint32 series_type = 40;
-	optional uint32 custom_game_id = 41;
+	optional uint64 custom_game_id = 42;
 }
 
 message CMsgDOTAPlayerMatchHistory {
@@ -542,7 +656,7 @@ message CMsgDOTARequestMatches {
 	optional uint32 league_id = 16;
 	optional .CMsgDOTARequestMatches.SkillLevel skill = 17 [default = Any];
 	optional uint32 team_id = 18;
-	optional uint32 custom_game_id = 19;
+	optional uint64 custom_game_id = 20;
 }
 
 message CMsgDOTARequestMatchesResponse {
@@ -605,6 +719,7 @@ message CMsgDOTAPopup {
 		COMPETITIVE_MM_PARTY_MMR_SPREAD_TOO_LARGE = 41;
 		COMPETITIVE_MM_NOT_ENOUGH_SKILL_DATA_PLAY_MORE_CASUAL = 42;
 		COMPETITIVE_MM_NOT_ENOUGH_SKILL_DATA_IN_PARTY = 43;
+		PARTY_LEADER_JOINED_LOBBY = 44;
 	}
 
 	optional .CMsgDOTAPopup.PopupID id = 1 [default = KICKED_FROM_LOBBY];
@@ -625,7 +740,6 @@ message CMsgDOTATeamAdminSDO {
 
 message CMsgDOTATeamMember {
 	optional uint32 account_id = 1;
-	optional uint32 team_id = 2;
 	optional uint32 time_joined = 4;
 	optional bool is_rank_factored_into_team = 5;
 }
@@ -2642,6 +2756,10 @@ message CMsgGCNotificationsResponse {
 	optional uint32 num_total_notifications = 3;
 }
 
+message CMsgGCNotificationsDismissRequest {
+	optional uint64 id = 1;
+}
+
 message CMsgGCLeagueAdminState {
 	message PrivateLeagueKeys {
 		optional uint32 leagueid = 1;
@@ -2650,10 +2768,6 @@ message CMsgGCLeagueAdminState {
 
 	repeated uint32 leagues = 1;
 	repeated .CMsgGCLeagueAdminState.PrivateLeagueKeys keys = 2;
-}
-
-message CMsgGCNotificationsDismissRequest {
-	optional uint64 id = 1;
 }
 
 message CMsgGCPlayerInfoRequest {
@@ -2671,8 +2785,6 @@ message CMsgGCPlayerInfo {
 		optional string team_tag = 7;
 		optional string sponsor = 8;
 		optional bool is_locked = 9;
-		optional string complete_name = 10;
-		optional string complete_name_html = 11;
 	}
 
 	repeated .CMsgGCPlayerInfo.PlayerInfo player_infos = 1;
@@ -2716,5 +2828,18 @@ message CMsgSerializedSOCache {
 
 	optional uint32 file_version = 1;
 	repeated .CMsgSerializedSOCache.Cache caches = 2;
+}
+
+message CMsgRequestWeekendTourneySchedule {
+}
+
+message CMsgWeekendTourneySchedule {
+	message Division {
+		optional uint32 division_code = 1;
+		optional uint32 time_window_open = 2;
+		optional uint32 time_window_close = 3;
+	}
+
+	repeated .CMsgWeekendTourneySchedule.Division divisions = 1;
 }
 
