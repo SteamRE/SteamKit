@@ -1218,6 +1218,51 @@ namespace SteamKit2.GC.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CWorkshop_GetContributors_Request")]
+  public partial class CWorkshop_GetContributors_Request : global::ProtoBuf.IExtensible
+  {
+    public CWorkshop_GetContributors_Request() {}
+    
+
+    private uint _appid = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"appid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint appid
+    {
+      get { return _appid; }
+      set { _appid = value; }
+    }
+
+    private uint _gameitemid = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"gameitemid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint gameitemid
+    {
+      get { return _gameitemid; }
+      set { _gameitemid = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CWorkshop_GetContributors_Response")]
+  public partial class CWorkshop_GetContributors_Response : global::ProtoBuf.IExtensible
+  {
+    public CWorkshop_GetContributors_Response() {}
+    
+    private readonly global::System.Collections.Generic.List<ulong> _contributors = new global::System.Collections.Generic.List<ulong>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"contributors", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public global::System.Collections.Generic.List<ulong> contributors
+    {
+      get { return _contributors; }
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     [global::ProtoBuf.ProtoContract(Name=@"PartnerAccountType", EnumPassthru=true)]
     public enum PartnerAccountType
     {

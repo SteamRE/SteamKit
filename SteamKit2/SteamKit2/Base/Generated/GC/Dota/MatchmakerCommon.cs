@@ -28,7 +28,10 @@ namespace SteamKit2.GC.Dota.Internal
       MATCH_TYPE_SOLO_QUEUE = 3,
             
       [global::ProtoBuf.ProtoEnum(Name=@"MATCH_TYPE_COMPETITIVE", Value=4)]
-      MATCH_TYPE_COMPETITIVE = 4
+      MATCH_TYPE_COMPETITIVE = 4,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"MATCH_TYPE_WEEKEND_TOURNEY", Value=5)]
+      MATCH_TYPE_WEEKEND_TOURNEY = 5
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"DOTABotDifficulty", EnumPassthru=true)]

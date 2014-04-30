@@ -1379,15 +1379,6 @@ namespace SteamKit2.GC.Dota.Internal
     public CLobbyTimedRewardDetails() {}
     
 
-    private ulong _item_id = default(ulong);
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"item_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
-    public ulong item_id
-    {
-      get { return _item_id; }
-      set { _item_id = value; }
-    }
-
     private uint _item_def_index = default(uint);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"item_def_index", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(default(uint))]
@@ -1650,15 +1641,6 @@ namespace SteamKit2.GC.Dota.Internal
     {
       get { return _num_spectators; }
       set { _num_spectators = value; }
-    }
-
-    private uint _tower_state = default(uint);
-    [global::ProtoBuf.ProtoMember(24, IsRequired = false, Name=@"tower_state", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint tower_state
-    {
-      get { return _tower_state; }
-      set { _tower_state = value; }
     }
 
     private uint _matchgroup = default(uint);
@@ -1932,15 +1914,6 @@ namespace SteamKit2.GC.Dota.Internal
       set { _save_game = value; }
     }
 
-    private uint _custom_game_id = default(uint);
-    [global::ProtoBuf.ProtoMember(64, IsRequired = false, Name=@"custom_game_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint custom_game_id
-    {
-      get { return _custom_game_id; }
-      set { _custom_game_id = value; }
-    }
-
     private bool _first_blood_happened = default(bool);
     [global::ProtoBuf.ProtoMember(65, IsRequired = false, Name=@"first_blood_happened", DataFormat = global::ProtoBuf.DataFormat.Default)]
     [global::System.ComponentModel.DefaultValue(default(bool))]
@@ -1966,6 +1939,15 @@ namespace SteamKit2.GC.Dota.Internal
     {
       get { return _mass_disconnect; }
       set { _mass_disconnect = value; }
+    }
+
+    private ulong _custom_game_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(68, IsRequired = false, Name=@"custom_game_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong custom_game_id
+    {
+      get { return _custom_game_id; }
+      set { _custom_game_id = value; }
     }
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CExtraMsg")]
   public partial class CExtraMsg : global::ProtoBuf.IExtensible
@@ -2154,6 +2136,15 @@ namespace SteamKit2.GC.Dota.Internal
     {
       get { return _last_state_change_time; }
       set { _last_state_change_time = value; }
+    }
+
+    private uint _tower_state = default(uint);
+    [global::ProtoBuf.ProtoMember(14, IsRequired = false, Name=@"tower_state", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint tower_state
+    {
+      get { return _tower_state; }
+      set { _tower_state = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -4282,6 +4273,33 @@ namespace SteamKit2.GC.Dota.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCGetAccountProfileResponse", Value=7463)]
       k_EMsgGCToGCGetAccountProfileResponse = 7463,
             
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgDOTAGetWeekendTourneySchedule", Value=7464)]
+      k_EMsgDOTAGetWeekendTourneySchedule = 7464,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgDOTAWeekendTourneySchedule", Value=7465)]
+      k_EMsgDOTAWeekendTourneySchedule = 7465,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCJoinableCustomGameModesRequest", Value=7466)]
+      k_EMsgGCJoinableCustomGameModesRequest = 7466,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCJoinableCustomGameModesResponse", Value=7467)]
+      k_EMsgGCJoinableCustomGameModesResponse = 7467,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCJoinableCustomLobbiesRequest", Value=7468)]
+      k_EMsgGCJoinableCustomLobbiesRequest = 7468,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCJoinableCustomLobbiesResponse", Value=7469)]
+      k_EMsgGCJoinableCustomLobbiesResponse = 7469,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCQuickJoinCustomLobby", Value=7470)]
+      k_EMsgGCQuickJoinCustomLobby = 7470,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCQuickJoinCustomLobbyResponse", Value=7471)]
+      k_EMsgGCQuickJoinCustomLobbyResponse = 7471,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCGrantEventPointAction", Value=7472)]
+      k_EMsgGCToGCGrantEventPointAction = 7472,
+            
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCDev_GrantWarKill", Value=8001)]
       k_EMsgGCDev_GrantWarKill = 8001
     }
@@ -4543,7 +4561,13 @@ namespace SteamKit2.GC.Dota.Internal
       DOTA_JOIN_RESULT_INCORRECT_VERSION = 6,
             
       [global::ProtoBuf.ProtoEnum(Name=@"DOTA_JOIN_RESULT_IN_TEAM_PARTY", Value=7)]
-      DOTA_JOIN_RESULT_IN_TEAM_PARTY = 7
+      DOTA_JOIN_RESULT_IN_TEAM_PARTY = 7,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_JOIN_RESULT_NO_LOBBY_FOUND", Value=8)]
+      DOTA_JOIN_RESULT_NO_LOBBY_FOUND = 8,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_JOIN_RESULT_LOBBY_FULL", Value=9)]
+      DOTA_JOIN_RESULT_LOBBY_FULL = 9
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"DOTAMatchVote", EnumPassthru=true)]
