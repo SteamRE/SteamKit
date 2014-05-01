@@ -75,48 +75,54 @@ CCrypto::CCrypto()
 
 
 	char *pGetMessageList = NULL;
-	steamClientScan.FindFunction(
+	bool bGetMessageList = steamClientScan.FindFunction(
 		"\xB8\x00\x00\x00\x00\x84\x05\x00\x00\x00\x00\x75\x47",
 		"x????xx????xx",
 		(void **)&pGetMessageList
 	);
 
-	MsgInfo_t *pInfos = *(MsgInfo_t **)( pGetMessageList + 40 );
-	MsgInfo_t *pEndInfos = *(MsgInfo_t **)( pGetMessageList + 64 );
-	uint16 numMessages = ( ( int )pEndInfos - ( int )pInfos ) / sizeof( MsgInfo_t );
-
-	g_pLogger->LogConsole( "pGetMessageList = 0x%x\npInfos = 0x%x\nnumMessages = %d\n", pGetMessageList, pInfos, numMessages );
-
-
-	for ( uint16 x = 0 ; x < numMessages; x++ )
+	if (bGetMessageList)
 	{
-		eMsgList.insert( MsgPair( pInfos->eMsg, pInfos ) );
+		MsgInfo_t *pInfos = *(MsgInfo_t **)( pGetMessageList + 40 );
+		MsgInfo_t *pEndInfos = *(MsgInfo_t **)( pGetMessageList + 64 );
+		uint16 numMessages = ( ( int )pEndInfos - ( int )pInfos ) / sizeof( MsgInfo_t );
 
-		pInfos++;
-	}
+		g_pLogger->LogConsole( "pGetMessageList = 0x%x\npInfos = 0x%x\nnumMessages = %d\n", pGetMessageList, pInfos, numMessages );
 
-	if ( eMsgList.size() != 0 )
-	{
-		// should only delete our existing files if we have something new to dump
-		g_pLogger->DeleteFile( "emsg_list.txt", false );
-		g_pLogger->DeleteFile( "emsg_list_detailed.txt", false );
 
-		for ( MsgList::iterator iter = eMsgList.begin() ; iter != eMsgList.end() ; iter++ )
+		for ( uint16 x = 0 ; x < numMessages; x++ )
 		{
-			MsgInfo_t *pInfo = iter->second;
+			eMsgList.insert( MsgPair( pInfos->eMsg, pInfos ) );
 
-			g_pLogger->LogFile( "emsg_list.txt", false, "\t%s = %d,\r\n", pInfo->pchMsgName, pInfo->eMsg );
-			g_pLogger->LogFile( "emsg_list_detailed.txt", false, "\t%s = %d, // flags: %d, server type: %d\r\n", pInfo->pchMsgName, pInfo->eMsg, pInfo->nFlags, pInfo->k_EServerTarget );
+			pInfos++;
 		}
 
-		g_pLogger->LogConsole( "Dumped emsg list! (%d messages)\n", eMsgList.size() );
+		if ( eMsgList.size() != 0 )
+		{
+			// should only delete our existing files if we have something new to dump
+			g_pLogger->DeleteFile( "emsg_list.txt", false );
+			g_pLogger->DeleteFile( "emsg_list_detailed.txt", false );
+
+			for ( MsgList::iterator iter = eMsgList.begin() ; iter != eMsgList.end() ; iter++ )
+			{
+				MsgInfo_t *pInfo = iter->second;
+
+				g_pLogger->LogFile( "emsg_list.txt", false, "\t%s = %d,\r\n", pInfo->pchMsgName, pInfo->eMsg );
+				g_pLogger->LogFile( "emsg_list_detailed.txt", false, "\t%s = %d, // flags: %d, server type: %d\r\n", pInfo->pchMsgName, pInfo->eMsg, pInfo->nFlags, pInfo->k_EServerTarget );
+			}
+
+			g_pLogger->LogConsole( "Dumped emsg list! (%d messages)\n", eMsgList.size() );
+		}
+		else
+		{
+			g_pLogger->LogConsole( "Unable to dump emsg list: No messages! (Offset changed?)\n" );
+		} 
 	}
 	else
 	{
-		g_pLogger->LogConsole( "Unable to dump emsg list: No messages! (Offset changed?)\n" );
+		g_pLogger->LogConsole( "Unable to find GetMessageList.\n" );
 	}
-
-
+	
 	static bool (__cdecl *encrypt)(const uint8*, uint32, const uint8*, uint32, uint8*, uint32*, const uint8*, uint32) = &CCrypto::SymmetricEncrypt;
 	static bool (__cdecl *decrypt)(const uint8*, uint32, uint8*, uint32*, const uint8*, uint32) = &CCrypto::SymmetricDecrypt;
 
