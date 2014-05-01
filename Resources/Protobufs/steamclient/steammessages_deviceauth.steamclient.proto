@@ -86,6 +86,7 @@ message CDeviceAuth_AddAuthorizedBorrowers_Request {
 }
 
 message CDeviceAuth_AddAuthorizedBorrowers_Response {
+	optional int32 seconds_to_wait = 1;
 }
 
 message CDeviceAuth_RemoveAuthorizedBorrowers_Request {

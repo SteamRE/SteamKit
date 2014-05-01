@@ -351,6 +351,7 @@ message CDOTAUserMsg_DestroyLinearProjectile {
 
 message CDOTAUserMsg_DodgeTrackingProjectiles {
 	required int32 entindex = 1;
+	optional bool attacks_only = 2;
 }
 
 message CDOTAUserMsg_SpectatorPlayerClick {

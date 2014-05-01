@@ -114,6 +114,84 @@ message CCloud_ExternalStorageTransferReport_Notification {
 	optional uint32 cellid = 9;
 }
 
+message CCloud_ClientBeginFileUpload_Request {
+	optional uint32 appid = 1 [(description) = "App ID for which the file is being uploaded."];
+	optional uint32 file_size = 2 [(description) = "file size as transmitted and stored in Cloud."];
+	optional uint32 raw_file_size = 3 [(description) = "file size before any compression and/or encryption."];
+	optional bytes file_sha = 4 [(description) = "SHA-1 of raw file."];
+	optional uint64 time_stamp = 5 [(description) = "Timestamp of file."];
+	optional string filename = 6 [(description) = "Name of the file to store in the cloud."];
+	optional uint32 platforms_to_sync = 7 [default = 4294967295];
+	optional uint32 cell_id = 9 [(description) = "Client's cell ID so we can pick storage location."];
+	optional bool can_encrypt = 10 [(description) = "if true, client can encrypt the file before uploading it"];
+}
+
+message ClientCloudFileUploadBlockDetails {
+	message HTTPHeaders {
+		optional string name = 1;
+		optional string value = 2;
+	}
+
+	optional string url_host = 1 [(description) = "Host name of server to which file should be uploaded via HTTP PUT."];
+	optional string url_path = 2 [(description) = "Relative path on server to which file should be uploaded."];
+	optional bool use_https = 3 [(description) = "If true, use https, otherwise use http."];
+	optional int32 http_method = 4 [(description) = "EHTTPMethod to use for this block."];
+	repeated .ClientCloudFileUploadBlockDetails.HTTPHeaders request_headers = 5 [(description) = "Name-value pairs to be sent in HTTP PUT request."];
+	optional uint64 block_offset = 6 [(description) = "offset of file block to upload"];
+	optional uint32 block_length = 7 [(description) = "length of file block to upload - if zero, no part of the file is part of this block"];
+	optional bytes explicit_body_data = 8 [(description) = "explicit body data to use, instead of file data, for this block"];
+	optional bool may_parallelize = 9 [(description) = "if true, this request may be done in parallel with other similarly-marked requests"];
+}
+
+message CCloud_ClientBeginFileUpload_Response {
+	optional bool encrypt_file = 1 [(description) = "If true, the file should be encrypted by the client before upload"];
+	repeated .ClientCloudFileUploadBlockDetails block_requests = 2 [(description) = "HTTP requests to make to perform upload"];
+}
+
+message CCloud_ClientCommitFileUpload_Request {
+	optional bool transfer_succeeded = 1 [(description) = "True if all block uploads succeeded, false if any of them failed."];
+	optional uint32 appid = 2 [(description) = "App ID for which the file is being uploaded. Must match the app ID provided to Cloud.BeginFileUpload."];
+	optional bytes file_sha = 3 [(description) = "SHA1 digest of the raw file. Must match the SHA1 digest provided to Cloud.BeginFileUpload."];
+	optional string filename = 4 [(description) = "Filename as specified in the Cloud.BeginFileUpload request."];
+}
+
+message CCloud_ClientCommitFileUpload_Response {
+	optional bool file_committed = 1 [(description) = "True if the file was successfully committed, false otherwise."];
+}
+
+message CCloud_ClientFileDownload_Request {
+	optional uint32 appid = 1 [(description) = "App ID the file is part of."];
+	optional string filename = 2 [(description) = "Filename of the file."];
+}
+
+message CCloud_ClientFileDownload_Response {
+	message HTTPHeaders {
+		optional string name = 1;
+		optional string value = 2;
+	}
+
+	optional uint32 appid = 1 [(description) = "Application the file belongs to"];
+	optional uint32 file_size = 2 [(description) = "file size as transmitted and stored in the Cloud"];
+	optional uint32 raw_file_size = 3 [(description) = "file size when decompressed and/or decrypted"];
+	optional bytes sha_file = 4 [(description) = "SHA of file"];
+	optional uint64 time_stamp = 5 [(description) = "Timestamp of file"];
+	optional bool is_explicit_delete = 6 [(description) = "True if this is an explicitly deleted file"];
+	optional string url_host = 7 [(description) = "Host to GET the file from"];
+	optional string url_path = 8 [(description) = "Path on that host to use, including URL parameters if any"];
+	optional bool use_https = 9 [(description) = "If set, use HTTPS, else use HTTP"];
+	repeated .CCloud_ClientFileDownload_Response.HTTPHeaders request_headers = 10 [(description) = "Name-value pairs to be sent in HTTP GET request."];
+	optional bool encrypted = 11;
+}
+
+message CCloud_ClientDeleteFile_Request {
+	optional uint32 appid = 1 [(description) = "App ID for which the file is being deleted."];
+	optional string filename = 2 [(description) = "Filename of file."];
+	optional bool is_explicit_delete = 3 [(description) = "If true, this is a 'delete'; if false, it is a 'forget'"];
+}
+
+message CCloud_ClientDeleteFile_Response {
+}
+
 service Cloud {
 	option (service_description) = "A service for Steam Cloud operations.";
 	rpc GetUploadServerInfo (.CCloud_GetUploadServerInfo_Request) returns (.CCloud_GetUploadServerInfo_Response) {
@@ -142,5 +220,17 @@ service Cloud {
 	}
 	rpc ExternalStorageTransferReport (.CCloud_ExternalStorageTransferReport_Notification) returns (.NoResponse) {
 		option (method_description) = "Reports the result of an external Cloud storage transfer.";
+	}
+	rpc ClientBeginFileUpload (.CCloud_ClientBeginFileUpload_Request) returns (.CCloud_ClientBeginFileUpload_Response) {
+		option (method_description) = "Initiate an upload to Cloud.";
+	}
+	rpc ClientCommitFileUpload (.CCloud_ClientCommitFileUpload_Request) returns (.CCloud_ClientCommitFileUpload_Response) {
+		option (method_description) = "Commit the file upload or indicate failure.";
+	}
+	rpc ClientFileDownload (.CCloud_ClientFileDownload_Request) returns (.CCloud_ClientFileDownload_Response) {
+		option (method_description) = "Initiate a file download.";
+	}
+	rpc ClientDeleteFile (.CCloud_ClientDeleteFile_Request) returns (.CCloud_ClientDeleteFile_Response) {
+		option (method_description) = "Delete or forget a file.";
 	}
 }
