@@ -51,14 +51,14 @@ CCrypto::CCrypto()
 
 	char *pEncrypt = NULL;
 	bool bEncrypt = steamClientScan.FindFunction(
-		"\x55\x8B\xEC\x6A\xFF\x68\x00\x00\x00\x00\x64\xA1\x00\x00\x00\x00\x50\x64\x89\x25\x00\x00\x00\x00\x83\xEC\x14\x53",
-		"xxxxxx????xxxxxxxxxxxxxxxxxx",
+		"\x53\x8B\xDC\x83\xEC\x08\x83\xE4\xF0\x83\xC4\x04\x55\x8B\x6B\x04\x89\x6C\x24\x04\x8B\xEC\x64\xA1\x00\x00\x00\x00",
+		"xxxxxxxxxxxxxxxxxxxxxxxxxxxx",
 		(void **)&pEncrypt
 	);
 
 	Encrypt_Orig = (bool (__cdecl *)(const uint8*, uint32, const uint8*, uint32, uint8*, uint32*, const uint8*, uint32))( pEncrypt );
 
-	g_pLogger->LogConsole( "CCrypto::SymmetricEncrypt = 0x%x\n", Encrypt_Orig );
+	g_pLogger->LogConsole( "CCrypto::SymmetricEncryptWithIV = 0x%x\n", Encrypt_Orig );
 
 
 	char *pDecrypt = NULL;
@@ -123,7 +123,7 @@ CCrypto::CCrypto()
 		g_pLogger->LogConsole( "Unable to find GetMessageList.\n" );
 	}
 	
-	static bool (__cdecl *encrypt)(const uint8*, uint32, const uint8*, uint32, uint8*, uint32*, const uint8*, uint32) = &CCrypto::SymmetricEncrypt;
+	static bool (__cdecl *encrypt)(const uint8*, uint32, const uint8*, uint32, uint8*, uint32*, const uint8*, uint32) = &CCrypto::SymmetricEncryptWithIV;
 	static bool (__cdecl *decrypt)(const uint8*, uint32, uint8*, uint32*, const uint8*, uint32) = &CCrypto::SymmetricDecrypt;
 
 	if ( bEncrypt )
@@ -131,11 +131,11 @@ CCrypto::CCrypto()
 		Encrypt_Detour = new CSimpleDetour((void **) &Encrypt_Orig, *(void**) &encrypt);
 		Encrypt_Detour->Attach();
 
-		g_pLogger->LogConsole( "Detoured SymmetricEncrypt!\n" );
+		g_pLogger->LogConsole( "Detoured SymmetricEncryptWithIV!\n" );
 	}
 	else
 	{
-		g_pLogger->LogConsole( "Unable to hook SymmetricEncrypt: Func scan failed.\n" );
+		g_pLogger->LogConsole( "Unable to hook SymmetricEncryptWithIV: Func scan failed.\n" );
 	}
 
 	if ( bDecrypt )
@@ -171,7 +171,7 @@ CCrypto::~CCrypto()
 
 
 
-bool __cdecl CCrypto::SymmetricEncrypt( const uint8 *pubPlaintextData, uint32 cubPlaintextData, const uint8 *pIV, uint32 cubIV, uint8 *pubEncryptedData, uint32 *pcubEncryptedData, const uint8 *pubKey, uint32 cubKey )
+bool __cdecl CCrypto::SymmetricEncryptWithIV( const uint8 *pubPlaintextData, uint32 cubPlaintextData, const uint8 *pIV, uint32 cubIV, uint8 *pubEncryptedData, uint32 *pcubEncryptedData, const uint8 *pubKey, uint32 cubKey )
 {
 	g_pLogger->LogNetMessage( k_eNetOutgoing, (uint8 *)pubPlaintextData, cubPlaintextData );
 
