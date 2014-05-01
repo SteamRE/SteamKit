@@ -63,9 +63,8 @@ CCrypto::CCrypto()
 
 	char *pDecrypt = NULL;
 	bool bDecrypt = steamClientScan.FindFunction(
-		"\x55\x8b\xec\x81\xec\x00\x00\x00\x00\x83\x7d\x08\x00\x53\x56\x8b\x35\x00\x00\x00\x00\x57\x75\x00\x6a\x00\x68\x00\x00"
-		"\x00\x00\x68\x00\x00\x00\x00\x6a\x00\x68\x00\x00\x00\x00\xff\xd6\x83\xc4\x14\x83\x7d\x0c\x00",
-		"xxxxx????xxxxxxxx????xx?xxx????x????xxx????xxxxxxxxx",
+		"\x55\x8B\xEC\x81\xEC\x04\x01\x00\x00\x83\x7D\x08\x00\x53",
+		"xxxxxxxxxxxxxx",
 		(void **)&pDecrypt
 	);
 
@@ -76,15 +75,18 @@ CCrypto::CCrypto()
 
 	char *pGetMessageList = NULL;
 	bool bGetMessageList = steamClientScan.FindFunction(
-		"\xB8\x00\x00\x00\x00\x84\x05\x00\x00\x00\x00\x75\x47",
-		"x????xx????xx",
+		"\xA1\x00\x00\x00\x00\xA8\x01\x75\x00\x83\xC8\x01\xB9\x00\x00\x00\x00\x0056",
+		"x????xxx?xxxx????x",
 		(void **)&pGetMessageList
 	);
 
 	if (bGetMessageList)
 	{
-		MsgInfo_t *pInfos = *(MsgInfo_t **)( pGetMessageList + 40 );
-		MsgInfo_t *pEndInfos = *(MsgInfo_t **)( pGetMessageList + 64 );
+		const uint32 uMessageListStartPtrOffset = 38;
+		const uint32 uMessageListEndPtrOffset = uMessageListStartPtrOffset + 26;
+
+		MsgInfo_t *pInfos = *(MsgInfo_t **)( pGetMessageList + uMessageListStartPtrOffset );
+		MsgInfo_t *pEndInfos = *(MsgInfo_t **)( pGetMessageList + uMessageListEndPtrOffset );
 		uint16 numMessages = ( ( int )pEndInfos - ( int )pInfos ) / sizeof( MsgInfo_t );
 
 		g_pLogger->LogConsole( "pGetMessageList = 0x%x\npInfos = 0x%x\nnumMessages = %d\n", pGetMessageList, pInfos, numMessages );
