@@ -61,6 +61,7 @@ enum ECstrike15UserMessages {
 	CS_UM_GlowPropTurnOff = 60;
 	CS_UM_SendPlayerItemDrops = 61;
 	CS_UM_RoundBackupFilenames = 62;
+	CS_UM_SendPlayerItemFound = 63;
 }
 
 message CCSUsrMsg_VGUIMenu {
@@ -211,6 +212,11 @@ message CCSUsrMsg_ProcessSpottedEntityUpdate {
 
 message CCSUsrMsg_SendPlayerItemDrops {
 	repeated .CEconItemPreviewDataBlock entity_updates = 1;
+}
+
+message CCSUsrMsg_SendPlayerItemFound {
+	optional .CEconItemPreviewDataBlock iteminfo = 1;
+	optional int32 entindex = 2;
 }
 
 message CCSUsrMsg_ReloadEffect {

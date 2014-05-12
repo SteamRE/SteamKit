@@ -273,8 +273,8 @@ enum EDOTAGCMsg {
 	k_EMsgGCSteamProfileRequestResponse = 7330;
 	k_EMsgGCFantasyLeagueCreateInfoRequest = 7331;
 	k_EMsgGCFantasyLeagueCreateInfoResponse = 7332;
-	k_EMsgGCFantasyLeagueJoinInfoRequest = 7333;
-	k_EMsgGCFantasyLeagueJoinInfoResponse = 7334;
+	k_EMsgGCFantasyLeagueInviteInfoRequest = 7333;
+	k_EMsgGCFantasyLeagueInviteInfoResponse = 7334;
 	k_EMsgGCClientIgnoredUser = 7335;
 	k_EMsgGCFantasyLeagueCreateRequest = 7336;
 	k_EMsgGCFantasyLeagueCreateResponse = 7337;
@@ -379,7 +379,6 @@ enum EDOTAGCMsg {
 	k_EMsgGCFantasyScheduledMatchesRequest = 7439;
 	k_EMsgGCFantasyScheduledMatchesResponse = 7440;
 	k_EMsgGCToGCGrantLeagueAccess = 7441;
-	k_EMsgGCToGCGrantFantasyAccess = 7442;
 	k_EMsgGCEventGameCreate = 7443;
 	k_EMsgGCPerfectWorldUserLookupRequest = 7444;
 	k_EMsgGCPerfectWorldUserLookupResponse = 7445;
@@ -410,6 +409,22 @@ enum EDOTAGCMsg {
 	k_EMsgGCQuickJoinCustomLobby = 7470;
 	k_EMsgGCQuickJoinCustomLobbyResponse = 7471;
 	k_EMsgGCToGCGrantEventPointAction = 7472;
+	k_EMsgServerGetEventPoints = 7473;
+	k_EMsgServerGetEventPointsResponse = 7474;
+	k_EMsgServerGrantSurveyPermission = 7475;
+	k_EMsgServerGrantSurveyPermissionResponse = 7476;
+	k_EMsgClientProvideSurveyResult = 7477;
+	k_EMsgGCToGCSetCompendiumSelection = 7478;
+	k_EMsgDOTAUpdateTI4HeroQuest = 7479;
+	k_EMsgGCToGCUpdateTI4HeroQuest = 7480;
+	k_EMsgGCCompendiumDataChanged = 7481;
+	k_EMsgDOTAFantasyLeagueFindRequest = 7482;
+	k_EMsgDOTAFantasyLeagueFindResponse = 7483;
+	k_EMsgGCHasItemQuery = 7484;
+	k_EMsgGCHasItemResponse = 7485;
+	k_EMsgGCConsumeFantasyTicket = 7486;
+	k_EMsgGCConsumeFantasyTicketFailure = 7487;
+	k_EMsgGCToGCGrantEventPointActionMsg = 7488;
 	k_EMsgGCDev_GrantWarKill = 8001;
 }
 
@@ -730,6 +745,7 @@ message CDOTALobbyMember {
 	message CDOTALobbyMemberXPBonus {
 		optional uint32 type = 1;
 		optional float xp_bonus = 2;
+		optional uint64 source_key = 3;
 	}
 
 	optional fixed64 id = 1 [(key_field) = true];
@@ -1000,6 +1016,27 @@ message CMsgDOTAProcessFantasyScheduledEvent {
 	optional uint32 fantasy_league_id = 3;
 	optional uint32 season = 4;
 	optional uint32 reference_data = 5;
+}
+
+message CMsgDOTAHasItemQuery {
+	optional uint32 account_id = 1;
+	optional uint64 item_id = 2;
+}
+
+message CMsgDOTAHasItemResponse {
+	optional bool has_item = 1;
+}
+
+message CMsgDOTAConsumeFantasyTicket {
+	optional uint32 account_id = 1;
+	optional uint64 item_id = 2;
+	optional uint32 fantasy_league_id = 3;
+}
+
+message CMsgDOTAConsumeFantasyTicketFailure {
+	optional uint32 account_id = 1;
+	optional uint64 item_id = 2;
+	optional uint32 fantasy_league_id = 3;
 }
 
 message CSODOTAMapLocationState {

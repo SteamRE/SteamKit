@@ -416,6 +416,15 @@ message CMsgDOTAAwardEventPoints {
 	optional uint32 event_id = 4;
 }
 
+message CMsgDOTAUpdateTI4HeroQuest {
+	message Player {
+		optional uint32 account_id = 1;
+		optional uint32 hero_id = 2;
+	}
+
+	repeated .CMsgDOTAUpdateTI4HeroQuest.Player players = 1;
+}
+
 message CMsgDOTAFrostivusTimeElapsed {
 	message User {
 		optional uint32 account_id = 1;
@@ -440,5 +449,37 @@ message CMsgGCToServerPingResponse {
 
 message CMsgGCToServerConsoleCommand {
 	optional string console_command = 1;
+}
+
+message CMsgServerGetEventPoints {
+	optional uint32 event_id = 1;
+	repeated uint32 account_id = 2;
+}
+
+message CMsgServerGetEventPointsResponse {
+	message Points {
+		optional uint32 account_id = 1;
+		optional uint32 points_total = 2;
+		optional uint32 premium_total = 3;
+	}
+
+	optional uint32 event_id = 1;
+	repeated .CMsgServerGetEventPointsResponse.Points points = 2;
+}
+
+message CMsgServerGrantSurveyPermission {
+	message Survey {
+		optional uint32 account_id = 1;
+		optional uint32 survey_id = 2;
+		optional uint32 expire_time = 3;
+		optional uint64 survey_key = 4;
+		optional uint64 extra_data = 5;
+	}
+
+	repeated .CMsgServerGrantSurveyPermission.Survey surveys = 1;
+}
+
+message CMsgServerGrantSurveyPermissionResponse {
+	optional uint32 result = 1;
 }
 

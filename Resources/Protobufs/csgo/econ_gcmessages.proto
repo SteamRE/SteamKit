@@ -57,7 +57,7 @@ enum EGCItemMsg {
 	k_EMsgGCBackpackSortFinished = 1058;
 	k_EMsgGCAdjustItemEquippedState = 1059;
 	k_EMsgGCCollectItem = 1061;
-	k_EMsgGCItemAcknowledged = 1062;
+	k_EMsgGCItemAcknowledged__DEPRECATED = 1062;
 	k_EMsgGCPresets_SelectPresetForClass = 1063;
 	k_EMsgGCPresets_SetItemPosition = 1064;
 	k_EMsgGC_ReportAbuse = 1065;
@@ -82,6 +82,7 @@ enum EGCItemMsg {
 	k_EMsgGCUnlockItemStyle = 1084;
 	k_EMsgGCUnlockItemStyleResponse = 1085;
 	k_EMsgGCApplySticker = 1086;
+	k_EMsgGCItemAcknowledged = 1087;
 	k_EMsgGCTradingBase = 1500;
 	k_EMsgGCTrading_InitiateTradeRequest = 1501;
 	k_EMsgGCTrading_InitiateTradeResponse = 1502;

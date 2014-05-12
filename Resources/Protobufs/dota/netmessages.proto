@@ -93,8 +93,9 @@ message CNETMsg_SplitScreenUser {
 
 message CNETMsg_Tick {
 	optional uint32 tick = 1;
-	optional uint32 host_frametime = 2;
-	optional uint32 host_frametime_std_deviation = 3;
+	optional uint32 host_computationtime = 4;
+	optional uint32 host_computationtime_std_deviation = 5;
+	optional uint32 host_framestarttime_std_deviation = 6;
 }
 
 message CNETMsg_StringCmd {

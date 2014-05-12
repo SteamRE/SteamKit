@@ -68,6 +68,8 @@ enum EStreamAudioCodec {
 	k_EStreamAudioCodecRaw = 1;
 	k_EStreamAudioCodecVorbis = 2;
 	k_EStreamAudioCodecOpus = 3;
+	k_EStreamAudioCodecMP3 = 4;
+	k_EStreamAudioCodecAAC = 5;
 }
 
 enum EStreamVideoCodec {
@@ -249,6 +251,8 @@ message CStreamVideoMode {
 	required uint32 width = 1;
 	required uint32 height = 2;
 	optional uint32 refresh_rate = 3;
+	optional uint32 refresh_rate_numerator = 4;
+	optional uint32 refresh_rate_denominator = 5;
 }
 
 message CNegotiatedConfig {
@@ -425,6 +429,8 @@ message CSetQoSMsg {
 message CSetTargetFramerateMsg {
 	required uint32 framerate = 1;
 	optional uint32 reasons = 2;
+	optional uint32 framerate_numerator = 3;
+	optional uint32 framerate_denominator = 4;
 }
 
 message COverlayEnabledMsg {

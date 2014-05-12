@@ -55,6 +55,8 @@ enum ECsgoGCMsg {
 	k_EMsgGCCStrike15_v2_Server2GCClientValidate = 9153;
 	k_EMsgGCCStrike15_v2_MatchListRequestLiveGameForUser = 9154;
 	k_EMsgGCCStrike15_v2_Server2GCPureServerValidationFailure = 9155;
+	k_EMsgGCCStrike15_v2_Client2GCEconPreviewDataBlockRequest = 9156;
+	k_EMsgGCCStrike15_v2_Client2GCEconPreviewDataBlockResponse = 9157;
 }
 
 message GameServerPing {
@@ -513,10 +515,26 @@ message CEconItemPreviewDataBlock {
 	optional uint32 killeatervalue = 10;
 	optional string customname = 11;
 	repeated .CEconItemPreviewDataBlock.Sticker stickers = 12;
+	optional uint32 inventory = 13;
+	optional uint32 origin = 14;
 }
 
 message CMsgGCCStrike15_v2_MatchEndRewardDropsNotification {
 	optional .CEconItemPreviewDataBlock iteminfo = 6;
+}
+
+message CMsgItemAcknowledged {
+	optional .CEconItemPreviewDataBlock iteminfo = 1;
+}
+
+message CMsgGCCStrike15_v2_Client2GCEconPreviewDataBlockRequest {
+	optional uint64 param_s = 1;
+	optional uint64 param_a = 2;
+	optional uint64 param_d = 3;
+}
+
+message CMsgGCCStrike15_v2_Client2GCEconPreviewDataBlockResponse {
+	optional .CEconItemPreviewDataBlock iteminfo = 1;
 }
 
 message CMsgGCCStrike15_v2_TournamentMatchRewardDropsNotification {

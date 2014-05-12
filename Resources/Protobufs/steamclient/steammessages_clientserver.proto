@@ -93,6 +93,7 @@ message CMsgClientLogon {
 	optional string country_override = 98;
 	optional bool is_steam_box = 99;
 	optional uint64 client_instance_id = 100;
+	optional string two_factor_code = 101;
 }
 
 message CMsgClientLogonResponse {
@@ -1526,6 +1527,7 @@ message CMsgClientUCMEnumerateUserSubscribedFiles {
 	optional uint32 start_index = 2;
 	optional uint32 list_type = 3 [default = 1];
 	optional uint32 matching_file_type = 4 [default = 0];
+	optional uint32 count = 5 [default = 50];
 }
 
 message CMsgClientUCMEnumerateUserSubscribedFilesResponse {
@@ -1553,6 +1555,7 @@ message CMsgClientUCMEnumerateUserSubscribedFilesWithUpdatesResponse {
 		optional fixed64 file_hcontent = 4;
 		optional uint32 file_size = 5;
 		optional fixed32 rtime32_last_updated = 6;
+		optional bool is_depot_content = 7;
 	}
 
 	optional int32 eresult = 1 [default = 2];
@@ -1575,6 +1578,7 @@ message CMsgClientUCMPublishedFileSubscribed {
 	optional fixed64 file_hcontent = 3;
 	optional uint32 file_size = 4;
 	optional uint32 rtime_subscribed = 5;
+	optional bool is_depot_content = 6;
 }
 
 message CMsgClientUCMPublishedFileUnsubscribed {
@@ -1593,6 +1597,7 @@ message CMsgClientUCMPublishedFileUpdated {
 	optional uint32 time_updated = 3;
 	optional fixed64 hcontent = 4;
 	optional fixed32 file_size = 5;
+	optional bool is_depot_content = 6;
 }
 
 message CMsgClientUCMGetPublishedFilesForUser {
@@ -2700,6 +2705,7 @@ message CMsgClientServiceCallResponse {
 	optional bytes portable_os_version_info = 11;
 	optional bytes portable_system_info = 12;
 	optional bool was_converted = 13;
+	optional uint32 internal_result = 14;
 }
 
 message CMsgAMUnlockStreaming {

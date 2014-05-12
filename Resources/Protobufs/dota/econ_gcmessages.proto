@@ -154,6 +154,7 @@ enum EGCItemMsg {
 	k_EMsgGCToGCCheckAccountTradeStatusResponse = 2553;
 	k_EMsgGCToGCGrantAccountRolledItems = 2554;
 	k_EMsgGCToGCGrantSelfMadeItemToAccount = 2555;
+	k_EMsgSQLUpgradeBattleBooster = 2556;
 }
 
 enum EGCMsgResponse {
@@ -310,6 +311,8 @@ message CMsgGCToGCCanUseDropRateBonus {
 	optional uint32 account_id = 1;
 	optional float drop_rate_bonus = 2;
 	optional uint32 booster_type = 3;
+	optional uint32 exclusive_item_def = 4;
+	optional bool allow_equal_rate = 5;
 }
 
 message CMsgSQLAddDropRateBonus {
@@ -320,6 +323,13 @@ message CMsgSQLAddDropRateBonus {
 	optional uint32 booster_type = 5;
 	optional uint32 seconds_duration = 6;
 	optional uint32 end_time_stamp = 7;
+}
+
+message CMsgSQLUpgradeBattleBooster {
+	optional uint32 account_id = 1;
+	optional uint32 item_def = 2;
+	optional float bonus_to_add = 3;
+	optional uint32 booster_type = 4;
 }
 
 message CMsgGCToGCRefreshSOCache {

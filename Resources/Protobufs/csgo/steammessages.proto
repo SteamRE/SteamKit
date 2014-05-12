@@ -58,6 +58,7 @@ message CMsgHttpRequest {
 	repeated .CMsgHttpRequest.QueryParam get_params = 5;
 	repeated .CMsgHttpRequest.QueryParam post_params = 6;
 	optional bytes body = 7;
+	optional uint32 absolute_timeout = 8;
 }
 
 message CMsgWebAPIRequest {
@@ -107,6 +108,7 @@ message CMsgAMGetLicenses {
 message CMsgPackageLicense {
 	optional uint32 package_id = 1;
 	optional uint32 time_created = 2;
+	optional uint32 owner_id = 3;
 }
 
 message CMsgAMGetLicensesResponse {
@@ -192,6 +194,22 @@ message CGCMsgMemCachedStatsResponse {
 	optional uint64 curr_items = 12;
 	optional uint64 evictions = 13;
 	optional uint64 bytes = 14;
+}
+
+message CGCMsgSQLStats {
+	optional uint32 schema_catalog = 1;
+}
+
+message CGCMsgSQLStatsResponse {
+	optional uint32 threads = 1;
+	optional uint32 threads_connected = 2;
+	optional uint32 threads_active = 3;
+	optional uint32 operations_submitted = 4;
+	optional uint32 prepared_statements_executed = 5;
+	optional uint32 non_prepared_statements_executed = 6;
+	optional uint32 deadlock_retries = 7;
+	optional uint32 operations_timed_out_in_queue = 8;
+	optional uint32 errors = 9;
 }
 
 message CMsgAMAddFreeLicense {
@@ -312,7 +330,6 @@ message CGCSystemMsg_GetAccountDetails_Response {
 	optional string persona_name = 3;
 	optional bool is_profile_public = 4;
 	optional bool is_inventory_public = 5;
-	optional bool is_trusted = 6;
 	optional bool is_vac_banned = 7;
 	optional bool is_cyber_cafe = 8;
 	optional bool is_school_account = 9;
@@ -327,7 +344,9 @@ message CGCSystemMsg_GetAccountDetails_Response {
 	optional bool is_trade_banned = 18;
 	optional uint32 trade_ban_expiration = 19;
 	optional uint32 accountid = 20;
-	optional bool eligible_for_community_market = 21;
+	optional uint32 suspension_end_time = 21;
+	optional string currency = 22;
+	optional uint32 steam_level = 23;
 }
 
 message CMsgGCGetPersonaNames {
@@ -384,6 +403,23 @@ message CGCSystemMsg_GetPurchaseTrust_Response {
 	optional bool has_no_recent_password_resets = 2;
 	optional bool is_wallet_cash_trusted = 3;
 	optional uint32 time_all_trusted = 4;
+}
+
+message CMsgGCHAccountVacStatusChange {
+	optional fixed64 steam_id = 1;
+	optional uint32 app_id = 2;
+	optional uint32 rtime_vacban_starts = 3;
+	optional bool is_banned_now = 4;
+	optional bool is_banned_future = 5;
+}
+
+message CMsgGCGetPartnerAccountLink {
+	optional fixed64 steamid = 1;
+}
+
+message CMsgGCGetPartnerAccountLink_Response {
+	optional uint32 pwid = 1;
+	optional uint32 nexonid = 2;
 }
 
 message CMsgGCRoutingInfo {
@@ -461,5 +497,16 @@ message CMsgGCHUpdateSession {
 	optional uint32 os_type = 7;
 	optional uint32 client_addr = 8;
 	repeated .CMsgGCHUpdateSession.ExtraField extra_fields = 9;
+}
+
+message CMsgNotificationOfSuspiciousActivity {
+	message MultipleGameInstances {
+		optional uint32 app_instance_count = 1;
+		repeated fixed64 other_steamids = 2;
+	}
+
+	optional fixed64 steamid = 1;
+	optional uint32 appid = 2;
+	optional .CMsgNotificationOfSuspiciousActivity.MultipleGameInstances multiple_instances = 3;
 }
 
