@@ -395,6 +395,41 @@ namespace SteamKit2
         }
 
         /// <summary>
+        /// Downloads the depot manifest specified by the given manifest ID, and optionally decrypts the manifest's filenames if the depot decryption key has been provided.
+        /// </summary>
+        /// <param name="depotId">The id of the depot being accessed.</param>
+        /// <param name="manifestId">The unique identifier of the manifest to be downloaded.</param>
+        /// <param name="host">CDN hostname.</param>
+        /// <param name="cdnAuthToken">CDN auth token for CDN content server endpoints.</param>
+        /// <param name="depotKey">
+        /// The depot decryption key for the depot that will be downloaded.
+        /// This is used for decrypting filenames (if needed) in depot manifests, and processing depot chunks.
+        /// </param>
+        /// <returns>A <see cref="DepotManifest"/> instance that contains information about the files present within a depot.</returns>
+        public DepotManifest DownloadManifest( uint depotId, ulong manifestId, string host, string cdnAuthToken, byte[] depotKey = null )
+        {
+            var server = new Server
+            {
+                Host = host,
+                Port = 80
+            };
+
+            byte[] manifestData = DoRawCommand( server, "depot", doAuth: true, args: string.Format( "{0}/manifest/{1}/5", depotId, manifestId ), authtoken: cdnAuthToken );
+
+            manifestData = ZipUtil.Decompress( manifestData );
+
+            var depotManifest = new DepotManifest( manifestData );
+
+            if ( depotKey != null )
+            {
+                // if we have the depot key, decrypt the manifest filenames
+                depotManifest.DecryptFilenames( depotKey );
+            }
+
+            return depotManifest;
+        }
+
+        /// <summary>
         /// Downloads the specified depot chunk, and optionally processes the chunk and verifies the checksum if the depot decryption key has been provided.
         /// </summary>
         /// <remarks>
