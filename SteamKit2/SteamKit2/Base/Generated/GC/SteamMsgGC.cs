@@ -2178,15 +2178,6 @@ namespace SteamKit2.GC.Internal
       set { _league_id = value; }
     }
 
-    private uint _admin = default(uint);
-    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"admin", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint admin
-    {
-      get { return _admin; }
-      set { _admin = value; }
-    }
-
     private uint _itemindex = default(uint);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"itemindex", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(default(uint))]

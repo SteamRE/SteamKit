@@ -593,6 +593,24 @@ namespace SteamKit2.GC.Internal
       get { return _booster_type; }
       set { _booster_type = value; }
     }
+
+    private uint _exclusive_item_def = default(uint);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"exclusive_item_def", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint exclusive_item_def
+    {
+      get { return _exclusive_item_def; }
+      set { _exclusive_item_def = value; }
+    }
+
+    private bool _allow_equal_rate = default(bool);
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"allow_equal_rate", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool allow_equal_rate
+    {
+      get { return _allow_equal_rate; }
+      set { _allow_equal_rate = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -665,6 +683,52 @@ namespace SteamKit2.GC.Internal
     {
       get { return _end_time_stamp; }
       set { _end_time_stamp = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgSQLUpgradeBattleBooster")]
+  public partial class CMsgSQLUpgradeBattleBooster : global::ProtoBuf.IExtensible
+  {
+    public CMsgSQLUpgradeBattleBooster() {}
+    
+
+    private uint _account_id = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint account_id
+    {
+      get { return _account_id; }
+      set { _account_id = value; }
+    }
+
+    private uint _item_def = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"item_def", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint item_def
+    {
+      get { return _item_def; }
+      set { _item_def = value; }
+    }
+
+    private float _bonus_to_add = default(float);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"bonus_to_add", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(float))]
+    public float bonus_to_add
+    {
+      get { return _bonus_to_add; }
+      set { _bonus_to_add = value; }
+    }
+
+    private uint _booster_type = default(uint);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"booster_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint booster_type
+    {
+      get { return _booster_type; }
+      set { _booster_type = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -1422,7 +1486,10 @@ namespace SteamKit2.GC.Internal
       k_EMsgGCToGCGrantAccountRolledItems = 2554,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCGrantSelfMadeItemToAccount", Value=2555)]
-      k_EMsgGCToGCGrantSelfMadeItemToAccount = 2555
+      k_EMsgGCToGCGrantSelfMadeItemToAccount = 2555,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgSQLUpgradeBattleBooster", Value=2556)]
+      k_EMsgSQLUpgradeBattleBooster = 2556
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"EGCMsgResponse", EnumPassthru=true)]

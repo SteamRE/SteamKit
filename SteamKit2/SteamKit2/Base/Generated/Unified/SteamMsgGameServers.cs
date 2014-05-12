@@ -220,24 +220,6 @@ namespace SteamKit2.Unified.Internal
       get { return _gametype; }
       set { _gametype = value; }
     }
-
-    private bool _proxy = default(bool);
-    [global::ProtoBuf.ProtoMember(19, IsRequired = false, Name=@"proxy", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
-    public bool proxy
-    {
-      get { return _proxy; }
-      set { _proxy = value; }
-    }
-
-    private bool _proxyonly = default(bool);
-    [global::ProtoBuf.ProtoMember(20, IsRequired = false, Name=@"proxyonly", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
-    public bool proxyonly
-    {
-      get { return _proxyonly; }
-      set { _proxyonly = value; }
-    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

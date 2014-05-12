@@ -3085,6 +3085,24 @@ namespace SteamKit2.GC.CSGO.Internal
       get { return _stickers; }
     }
   
+
+    private uint _inventory = default(uint);
+    [global::ProtoBuf.ProtoMember(13, IsRequired = false, Name=@"inventory", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint inventory
+    {
+      get { return _inventory; }
+      set { _inventory = value; }
+    }
+
+    private uint _origin = default(uint);
+    [global::ProtoBuf.ProtoMember(14, IsRequired = false, Name=@"origin", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint origin
+    {
+      get { return _origin; }
+      set { _origin = value; }
+    }
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Sticker")]
   public partial class Sticker : global::ProtoBuf.IExtensible
   {
@@ -3153,6 +3171,81 @@ namespace SteamKit2.GC.CSGO.Internal
 
     private CEconItemPreviewDataBlock _iteminfo = null;
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"iteminfo", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public CEconItemPreviewDataBlock iteminfo
+    {
+      get { return _iteminfo; }
+      set { _iteminfo = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgItemAcknowledged")]
+  public partial class CMsgItemAcknowledged : global::ProtoBuf.IExtensible
+  {
+    public CMsgItemAcknowledged() {}
+    
+
+    private CEconItemPreviewDataBlock _iteminfo = null;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"iteminfo", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public CEconItemPreviewDataBlock iteminfo
+    {
+      get { return _iteminfo; }
+      set { _iteminfo = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCCStrike15_v2_Client2GCEconPreviewDataBlockRequest")]
+  public partial class CMsgGCCStrike15_v2_Client2GCEconPreviewDataBlockRequest : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCCStrike15_v2_Client2GCEconPreviewDataBlockRequest() {}
+    
+
+    private ulong _param_s = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"param_s", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong param_s
+    {
+      get { return _param_s; }
+      set { _param_s = value; }
+    }
+
+    private ulong _param_a = default(ulong);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"param_a", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong param_a
+    {
+      get { return _param_a; }
+      set { _param_a = value; }
+    }
+
+    private ulong _param_d = default(ulong);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"param_d", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong param_d
+    {
+      get { return _param_d; }
+      set { _param_d = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCCStrike15_v2_Client2GCEconPreviewDataBlockResponse")]
+  public partial class CMsgGCCStrike15_v2_Client2GCEconPreviewDataBlockResponse : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCCStrike15_v2_Client2GCEconPreviewDataBlockResponse() {}
+    
+
+    private CEconItemPreviewDataBlock _iteminfo = null;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"iteminfo", DataFormat = global::ProtoBuf.DataFormat.Default)]
     [global::System.ComponentModel.DefaultValue(null)]
     public CEconItemPreviewDataBlock iteminfo
     {
@@ -3940,7 +4033,13 @@ namespace SteamKit2.GC.CSGO.Internal
       k_EMsgGCCStrike15_v2_MatchListRequestLiveGameForUser = 9154,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCCStrike15_v2_Server2GCPureServerValidationFailure", Value=9155)]
-      k_EMsgGCCStrike15_v2_Server2GCPureServerValidationFailure = 9155
+      k_EMsgGCCStrike15_v2_Server2GCPureServerValidationFailure = 9155,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCCStrike15_v2_Client2GCEconPreviewDataBlockRequest", Value=9156)]
+      k_EMsgGCCStrike15_v2_Client2GCEconPreviewDataBlockRequest = 9156,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCCStrike15_v2_Client2GCEconPreviewDataBlockResponse", Value=9157)]
+      k_EMsgGCCStrike15_v2_Client2GCEconPreviewDataBlockResponse = 9157
     }
   
 }
