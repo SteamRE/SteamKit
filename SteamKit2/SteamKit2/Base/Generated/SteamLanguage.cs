@@ -1885,6 +1885,8 @@ namespace SteamKit2
 		RestrictedDevice = 82,
 		RegionLocked = 83,
 		RateLimitExceeded = 84,
+		AccountLogonDeniedNeedTwoFactorCode = 85,
+		ItemOrEntryHasBeenDeleted = 86,
 	}
 	public enum EUniverse
 	{
