@@ -197,7 +197,7 @@ namespace SteamKit2
             this.AccountUniverse = eUniverse;
             this.AccountType = eAccountType;
 
-            if ( eAccountType == EAccountType.Clan )
+            if ( eAccountType == EAccountType.Clan || eAccountType == EAccountType.GameServer )
             {
                 this.AccountInstance = 0;
             }
