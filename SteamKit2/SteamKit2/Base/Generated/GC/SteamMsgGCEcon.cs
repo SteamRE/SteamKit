@@ -1025,6 +1025,91 @@ namespace SteamKit2.GC.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCPartnerBalanceRequest")]
+  public partial class CMsgGCPartnerBalanceRequest : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCPartnerBalanceRequest() {}
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCPartnerBalanceResponse")]
+  public partial class CMsgGCPartnerBalanceResponse : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCPartnerBalanceResponse() {}
+    
+
+    private EGCPartnerRequestResponse _result = EGCPartnerRequestResponse.k_EPartnerRequestOK;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"result", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(EGCPartnerRequestResponse.k_EPartnerRequestOK)]
+    public EGCPartnerRequestResponse result
+    {
+      get { return _result; }
+      set { _result = value; }
+    }
+
+    private uint _balance = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"balance", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint balance
+    {
+      get { return _balance; }
+      set { _balance = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCPartnerRechargeRedirectURLRequest")]
+  public partial class CMsgGCPartnerRechargeRedirectURLRequest : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCPartnerRechargeRedirectURLRequest() {}
+    
+
+    private uint _def_index = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"def_index", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint def_index
+    {
+      get { return _def_index; }
+      set { _def_index = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCPartnerRechargeRedirectURLResponse")]
+  public partial class CMsgGCPartnerRechargeRedirectURLResponse : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCPartnerRechargeRedirectURLResponse() {}
+    
+
+    private EGCPartnerRequestResponse _result = EGCPartnerRequestResponse.k_EPartnerRequestOK;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"result", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(EGCPartnerRequestResponse.k_EPartnerRequestOK)]
+    public EGCPartnerRequestResponse result
+    {
+      get { return _result; }
+      set { _result = value; }
+    }
+
+    private string _url = "";
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"url", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string url
+    {
+      get { return _url; }
+      set { _url = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     [global::ProtoBuf.ProtoContract(Name=@"EGCItemMsg", EnumPassthru=true)]
     public enum EGCItemMsg
     {
@@ -1489,7 +1574,19 @@ namespace SteamKit2.GC.Internal
       k_EMsgGCToGCGrantSelfMadeItemToAccount = 2555,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgSQLUpgradeBattleBooster", Value=2556)]
-      k_EMsgSQLUpgradeBattleBooster = 2556
+      k_EMsgSQLUpgradeBattleBooster = 2556,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCPartnerBalanceRequest", Value=2557)]
+      k_EMsgGCPartnerBalanceRequest = 2557,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCPartnerBalanceResponse", Value=2558)]
+      k_EMsgGCPartnerBalanceResponse = 2558,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCPartnerRechargeRedirectURLRequest", Value=2559)]
+      k_EMsgGCPartnerRechargeRedirectURLRequest = 2559,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCPartnerRechargeRedirectURLResponse", Value=2560)]
+      k_EMsgGCPartnerRechargeRedirectURLResponse = 2560
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"EGCMsgResponse", EnumPassthru=true)]
@@ -1594,6 +1691,23 @@ namespace SteamKit2.GC.Internal
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_ItemPurgatoryResponse_Refund_Failed_NexonWebAPI", Value=5)]
       k_ItemPurgatoryResponse_Refund_Failed_NexonWebAPI = 5
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"EGCPartnerRequestResponse", EnumPassthru=true)]
+    public enum EGCPartnerRequestResponse
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EPartnerRequestOK", Value=1)]
+      k_EPartnerRequestOK = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EPartnerRequestBadAccount", Value=2)]
+      k_EPartnerRequestBadAccount = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EPartnerRequestNotLinked", Value=3)]
+      k_EPartnerRequestNotLinked = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EPartnerRequestUnsupportedPartnerType", Value=4)]
+      k_EPartnerRequestUnsupportedPartnerType = 4
     }
   
 }

@@ -356,6 +356,24 @@ namespace SteamKit2.GC.Internal
       get { return _as_coach; }
       set { _as_coach = value; }
     }
+
+    private uint _game_language_enum = default(uint);
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"game_language_enum", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint game_language_enum
+    {
+      get { return _game_language_enum; }
+      set { _game_language_enum = value; }
+    }
+
+    private string _game_language_name = "";
+    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"game_language_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string game_language_name
+    {
+      get { return _game_language_name; }
+      set { _game_language_name = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -2185,6 +2203,15 @@ namespace SteamKit2.GC.Internal
     {
       get { return _itemindex; }
       set { _itemindex = value; }
+    }
+
+    private uint _grant_reason = default(uint);
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"grant_reason", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint grant_reason
+    {
+      get { return _grant_reason; }
+      set { _grant_reason = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

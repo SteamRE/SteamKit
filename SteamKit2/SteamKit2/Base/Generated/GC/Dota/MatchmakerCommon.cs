@@ -70,6 +70,9 @@ namespace SteamKit2.GC.Dota.Internal
     public enum MatchLanguages
     {
             
+      [global::ProtoBuf.ProtoEnum(Name=@"MATCH_LANGUAGE_INVALID", Value=0)]
+      MATCH_LANGUAGE_INVALID = 0,
+            
       [global::ProtoBuf.ProtoEnum(Name=@"MATCH_LANGUAGE_ENGLISH", Value=1)]
       MATCH_LANGUAGE_ENGLISH = 1,
             
