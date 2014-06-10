@@ -81,6 +81,8 @@ message CMsgPartyInviteResponse {
 	optional uint32 client_version = 3;
 	optional uint32 team_id = 4;
 	optional bool as_coach = 5;
+	optional uint32 game_language_enum = 6;
+	optional string game_language_name = 7;
 }
 
 message CMsgKickFromParty {
@@ -368,6 +370,7 @@ message CSOEconItemLeagueViewPass {
 	optional uint32 account_id = 1 [(key_field) = true];
 	optional uint32 league_id = 2 [(key_field) = true];
 	optional uint32 itemindex = 4;
+	optional uint32 grant_reason = 5;
 }
 
 message CSOEconItemEventTicket {
