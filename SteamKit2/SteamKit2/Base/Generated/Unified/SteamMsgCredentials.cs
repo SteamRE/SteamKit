@@ -523,6 +523,80 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCredentials_AccountLockRequest_Request")]
+  public partial class CCredentials_AccountLockRequest_Request : global::ProtoBuf.IExtensible
+  {
+    public CCredentials_AccountLockRequest_Request() {}
+    
+
+    private string _param_string = "";
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"param_string", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string param_string
+    {
+      get { return _param_string; }
+      set { _param_string = value; }
+    }
+
+    private uint _ipaddress_actual = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"ipaddress_actual", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint ipaddress_actual
+    {
+      get { return _ipaddress_actual; }
+      set { _ipaddress_actual = value; }
+    }
+
+    private bool _query_only = default(bool);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"query_only", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool query_only
+    {
+      get { return _query_only; }
+      set { _query_only = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCredentials_AccountLockRequest_Response")]
+  public partial class CCredentials_AccountLockRequest_Response : global::ProtoBuf.IExtensible
+  {
+    public CCredentials_AccountLockRequest_Response() {}
+    
+
+    private bool _success = default(bool);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"success", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool success
+    {
+      get { return _success; }
+      set { _success = value; }
+    }
+
+    private bool _account_already_locked = default(bool);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"account_already_locked", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool account_already_locked
+    {
+      get { return _account_already_locked; }
+      set { _account_already_locked = value; }
+    }
+
+    private bool _expired_link = default(bool);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"expired_link", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool expired_link
+    {
+      get { return _expired_link; }
+      set { _expired_link = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCredentials_SteamGuardCode_Request")]
   public partial class CCredentials_SteamGuardCode_Request : global::ProtoBuf.IExtensible
   {
@@ -690,6 +764,7 @@ namespace SteamKit2.Unified.Internal
     CCredentials_NewMachineNotificationDialog_Response NewMachineNotificationDialogResult(CCredentials_NewMachineNotificationDialog_Request request);
     CCredentials_ValidateEmailAddress_Response ValidateEmailAddress(CCredentials_ValidateEmailAddress_Request request);
     CCredentials_SteamGuardPhishingReport_Response SteamGuardPhishingReport(CCredentials_SteamGuardPhishingReport_Request request);
+    CCredentials_AccountLockRequest_Response AccountLockRequest(CCredentials_AccountLockRequest_Request request);
     CCredentials_SteamGuardCode_Response SteamGuardCodeProcess(CCredentials_SteamGuardCode_Request request);
     CCredentials_LastCredentialChangeTime_Response GetCredentialChangeTimeDetails(CCredentials_LastCredentialChangeTime_Request request);
     CCredentials_GetAccountAuthSecret_Response GetAccountAuthSecret(CCredentials_GetAccountAuthSecret_Request request);
