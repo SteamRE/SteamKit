@@ -1894,6 +1894,51 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCCStrike15_v2_AccountPrivacySettings")]
+  public partial class CMsgGCCStrike15_v2_AccountPrivacySettings : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCCStrike15_v2_AccountPrivacySettings() {}
+    
+    private readonly global::System.Collections.Generic.List<CMsgGCCStrike15_v2_AccountPrivacySettings.Setting> _settings = new global::System.Collections.Generic.List<CMsgGCCStrike15_v2_AccountPrivacySettings.Setting>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"settings", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CMsgGCCStrike15_v2_AccountPrivacySettings.Setting> settings
+    {
+      get { return _settings; }
+    }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Setting")]
+  public partial class Setting : global::ProtoBuf.IExtensible
+  {
+    public Setting() {}
+    
+
+    private uint _setting_type = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"setting_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint setting_type
+    {
+      get { return _setting_type; }
+      set { _setting_type = value; }
+    }
+
+    private uint _setting_value = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"setting_value", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint setting_value
+    {
+      get { return _setting_value; }
+      set { _setting_value = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCCStrike15_v2_MatchmakingGC2ClientAbandon")]
   public partial class CMsgGCCStrike15_v2_MatchmakingGC2ClientAbandon : global::ProtoBuf.IExtensible
   {
@@ -4039,7 +4084,10 @@ namespace SteamKit2.GC.CSGO.Internal
       k_EMsgGCCStrike15_v2_Client2GCEconPreviewDataBlockRequest = 9156,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCCStrike15_v2_Client2GCEconPreviewDataBlockResponse", Value=9157)]
-      k_EMsgGCCStrike15_v2_Client2GCEconPreviewDataBlockResponse = 9157
+      k_EMsgGCCStrike15_v2_Client2GCEconPreviewDataBlockResponse = 9157,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCCStrike15_v2_AccountPrivacySettings", Value=9158)]
+      k_EMsgGCCStrike15_v2_AccountPrivacySettings = 9158
     }
   
 }

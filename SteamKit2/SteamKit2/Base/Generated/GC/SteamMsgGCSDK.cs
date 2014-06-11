@@ -1138,6 +1138,43 @@ namespace SteamKit2.GC.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCToGCUpdateSessionStats")]
+  public partial class CMsgGCToGCUpdateSessionStats : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCToGCUpdateSessionStats() {}
+    
+
+    private uint _user_sessions = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"user_sessions", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint user_sessions
+    {
+      get { return _user_sessions; }
+      set { _user_sessions = value; }
+    }
+
+    private uint _server_sessions = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"server_sessions", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint server_sessions
+    {
+      get { return _server_sessions; }
+      set { _server_sessions = value; }
+    }
+
+    private bool _in_logon_surge = default(bool);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"in_logon_surge", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool in_logon_surge
+    {
+      get { return _in_logon_surge; }
+      set { _in_logon_surge = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CWorkshop_PopulateItemDescriptions_Request")]
   public partial class CWorkshop_PopulateItemDescriptions_Request : global::ProtoBuf.IExtensible
   {

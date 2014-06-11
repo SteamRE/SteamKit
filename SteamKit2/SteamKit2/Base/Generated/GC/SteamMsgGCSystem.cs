@@ -253,7 +253,13 @@ namespace SteamKit2.GC.Internal
       k_EGCMsgGetPartnerAccountLinkResponse = 508,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgVSReportedSuspiciousActivity", Value=509)]
-      k_EGCMsgVSReportedSuspiciousActivity = 509
+      k_EGCMsgVSReportedSuspiciousActivity = 509,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgDPPartnerMicroTxns", Value=512)]
+      k_EGCMsgDPPartnerMicroTxns = 512,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgDPPartnerMicroTxnsResponse", Value=513)]
+      k_EGCMsgDPPartnerMicroTxnsResponse = 513
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"ESOMsg", EnumPassthru=true)]
@@ -352,7 +358,10 @@ namespace SteamKit2.GC.Internal
       k_EMsgGCToGCLoadSessionSOCache = 160,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCLoadSessionSOCacheResponse", Value=161)]
-      k_EMsgGCToGCLoadSessionSOCacheResponse = 161
+      k_EMsgGCToGCLoadSessionSOCacheResponse = 161,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCUpdateSessionStats", Value=162)]
+      k_EMsgGCToGCUpdateSessionStats = 162
     }
   
 }

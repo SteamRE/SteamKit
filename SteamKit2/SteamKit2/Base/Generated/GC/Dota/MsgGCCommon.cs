@@ -4316,8 +4316,8 @@ namespace SteamKit2.GC.Dota.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCLeagueAdminList", Value=7434)]
       k_EMsgGCLeagueAdminList = 7434,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCNotificationsDismissRequest", Value=7435)]
-      k_EMsgGCNotificationsDismissRequest = 7435,
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCNotificationsMarkReadRequest", Value=7435)]
+      k_EMsgGCNotificationsMarkReadRequest = 7435,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCFantasyMessageAdd", Value=7436)]
       k_EMsgGCFantasyMessageAdd = 7436,
@@ -4474,6 +4474,42 @@ namespace SteamKit2.GC.Dota.Internal
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCGrantEventPointActionMsg", Value=7488)]
       k_EMsgGCToGCGrantEventPointActionMsg = 7488,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCTrackDialogResult", Value=7489)]
+      k_EMsgClientToGCTrackDialogResult = 7489,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCFantasyLeaveLeagueRequest", Value=7490)]
+      k_EMsgGCFantasyLeaveLeagueRequest = 7490,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCFantasyLeaveLeagueResponse", Value=7491)]
+      k_EMsgGCFantasyLeaveLeagueResponse = 7491,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCGetCompendiumSelections", Value=7492)]
+      k_EMsgGCToGCGetCompendiumSelections = 7492,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCGetCompendiumSelectionsResponse", Value=7493)]
+      k_EMsgGCToGCGetCompendiumSelectionsResponse = 7493,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgServerToGCMatchConnectionStats", Value=7494)]
+      k_EMsgServerToGCMatchConnectionStats = 7494,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToClientTournamentItemDrop", Value=7495)]
+      k_EMsgGCToClientTournamentItemDrop = 7495,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgSQLDelayedGrantLeagueDrop", Value=7496)]
+      k_EMsgSQLDelayedGrantLeagueDrop = 7496,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgServerGCUpdateSpectatorCount", Value=7497)]
+      k_EMsgServerGCUpdateSpectatorCount = 7497,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgDOTAStartDailyHeroChallengeRequest", Value=7498)]
+      k_EMsgDOTAStartDailyHeroChallengeRequest = 7498,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCFantasyPlayerScoreDetailsRequest", Value=7499)]
+      k_EMsgGCFantasyPlayerScoreDetailsRequest = 7499,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCFantasyPlayerScoreDetailsResponse", Value=7500)]
+      k_EMsgGCFantasyPlayerScoreDetailsResponse = 7500,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCDev_GrantWarKill", Value=8001)]
       k_EMsgGCDev_GrantWarKill = 8001
