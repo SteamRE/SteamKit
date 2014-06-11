@@ -33,7 +33,6 @@ message CMsgConnectedPlayers {
 		PLAYER_HERO = 5;
 		PLAYER_DISCONNECTED_CONSEQUENCES = 6;
 		PLAYER_DISCONNECTED_NOCONSEQUENCES = 7;
-		SPECTATOR_COUNT = 8;
 		TOWER_STATE = 9;
 		GAMESTATE_TIMEOUT = 10;
 		MASS_DISCONNECT = 11;
@@ -42,7 +41,6 @@ message CMsgConnectedPlayers {
 	repeated .CMsgConnectedPlayers.Player connected_players = 1;
 	repeated .CMsgConnectedPlayers.Player disconnected_players = 7;
 	optional .DOTA_GameState game_state = 2 [default = DOTA_GAMERULES_STATE_INIT];
-	optional uint32 num_spectators = 3;
 	optional uint32 tower_state = 4;
 	optional bool first_blood_happened = 6;
 	optional .CMsgConnectedPlayers.SendReason send_reason = 8 [default = INVALID];
@@ -342,10 +340,7 @@ message CMsgTournamentItemEvent {
 
 message CMsgTournamentItemEventResponse {
 	optional .DOTA_TournamentEvents event_type = 1 [default = TE_FIRST_BLOOD];
-	optional string winner_name = 2;
-	optional bool tv_delayed = 3;
-	optional bool inhall = 4;
-	optional uint32 itemdef = 5;
+	optional uint32 viewers_granted = 6;
 }
 
 message CMsgTeamFanfare {
@@ -423,6 +418,8 @@ message CMsgDOTAUpdateTI4HeroQuest {
 	}
 
 	repeated .CMsgDOTAUpdateTI4HeroQuest.Player players = 1;
+	optional fixed32 match_start_time = 2;
+	optional uint64 match_id = 3;
 }
 
 message CMsgDOTAFrostivusTimeElapsed {
@@ -470,7 +467,7 @@ message CMsgServerGetEventPointsResponse {
 message CMsgServerGrantSurveyPermission {
 	message Survey {
 		optional uint32 account_id = 1;
-		optional uint32 survey_id = 2;
+		optional uint32 question_id = 2;
 		optional uint32 expire_time = 3;
 		optional uint64 survey_key = 4;
 		optional uint64 extra_data = 5;
@@ -481,5 +478,26 @@ message CMsgServerGrantSurveyPermission {
 
 message CMsgServerGrantSurveyPermissionResponse {
 	optional uint32 result = 1;
+}
+
+message CMsgServerToGCMatchConnectionStats {
+	message Player {
+		optional uint32 account_id = 1;
+		optional fixed32 ip = 2;
+		optional uint32 avg_ping_ms = 3;
+		optional uint32 peak_ping_ms = 4;
+		optional float packet_loss = 5;
+		optional float ping_deviation = 6;
+		optional uint32 full_resends = 7;
+	}
+
+	optional uint64 match_id = 1;
+	optional uint32 region_id = 2;
+	optional uint32 league_id = 3;
+	repeated .CMsgServerToGCMatchConnectionStats.Player players = 4;
+}
+
+message CMsgServerGCUpdateSpectatorCount {
+	optional uint32 spectator_count = 1;
 }
 

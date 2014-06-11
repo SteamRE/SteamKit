@@ -183,6 +183,8 @@ message CMsgStartFindingMatch {
 	optional uint32 matchlanguages = 7 [default = 4294967295];
 	optional uint32 map_preference = 9;
 	optional uint32 team_id = 8;
+	optional .MatchLanguages game_language_enum = 10 [default = MATCH_LANGUAGE_INVALID];
+	optional string game_language_name = 11;
 }
 
 message CMsgStopFindingMatch {
@@ -1554,6 +1556,8 @@ message CMsgDOTAWelcome {
 	optional uint32 currency = 18;
 	optional uint32 bang_no = 19;
 	optional bool should_request_player_origin = 20;
+	optional uint64 compendium_unlocks = 21;
+	optional uint32 gc_socache_file_version = 22;
 }
 
 message CSODOTAGameHeroFavorites {
@@ -1589,7 +1593,6 @@ message CMsgRequestLeagueInfo {
 message CLeague {
 	optional uint32 leagueid = 1;
 	optional bool live = 2;
-	optional bool freeleague = 3;
 	optional fixed32 lastgametime = 4;
 	optional uint32 prize_pool_usd = 5;
 	optional uint32 version = 6;
@@ -1684,7 +1687,6 @@ message CMsgDOTAStorePromoPagesResponse {
 message CMsgLeagueScheduleBlockTeamInfo {
 	optional uint32 team_id = 1;
 	optional string name = 2;
-	optional string tag = 3;
 	optional uint64 logo = 4;
 }
 
@@ -1724,6 +1726,7 @@ message CMsgDOTALeagueScheduleEditResponse {
 message CMsgDOTALeaguesInMonthRequest {
 	optional uint32 month = 1;
 	optional uint32 year = 2;
+	optional uint32 tier = 3;
 }
 
 message CMsgDOTALeaguesInMonthResponse {
@@ -1860,8 +1863,9 @@ message CMsgFantasyLeagueRoleScoring {
 
 message CMsgDOTAFantasyLeagueInfo {
 	message OwnerInfo {
-		optional uint32 owner_account_id = 2;
-		repeated uint32 player_account_id = 1;
+		optional uint32 owner_account_id = 1;
+		optional bool left_league = 2;
+		repeated uint32 player_account_id = 3;
 	}
 
 	optional uint32 fantasy_league_id = 1;
@@ -1918,6 +1922,7 @@ message CMsgDOTAFantasyLeagueFindResponse {
 		ERROR_UNSPECIFIED = 3;
 		ERROR_FULL = 4;
 		ERROR_ALREADY_MEMBER = 5;
+		ERROR_LEAGUE_LOCKED = 6;
 	}
 
 	optional .CMsgDOTAFantasyLeagueFindResponse.EResult result = 1 [default = SUCCESS];
@@ -2015,6 +2020,8 @@ message CMsgDOTAFantasyMatchFinished {
 	optional uint32 match_id = 1;
 	optional uint32 league_id = 2;
 	optional uint32 series_id = 3;
+	optional uint32 start_time = 4;
+	optional uint32 series_type = 5;
 }
 
 message CMsgDOTAFantasyTeamScoreRequest {
@@ -2184,6 +2191,7 @@ message CMsgDOTAFantasyTeamCreateResponse {
 		ERROR_BAD_PASSWORD = 7;
 		ERROR_UNSPECIFIED = 8;
 		ERROR_NO_TICKET = 9;
+		ERROR_LEAGUE_LOCKED = 10;
 	}
 
 	optional .CMsgDOTAFantasyTeamCreateResponse.EResult result = 1 [default = SUCCESS];
@@ -2411,10 +2419,6 @@ message CMsgDOTAFantasyMessagesResponse {
 	optional uint32 num_total_messages = 3;
 }
 
-message CMsgDOTAFantasyScheduledMatchesRequest {
-	optional uint32 fantasy_league_id = 1;
-}
-
 message CMsgDOTAFantasyRemoveOwner {
 	optional uint32 fantasy_league_id = 1;
 	optional uint32 owner_account_id = 2;
@@ -2432,10 +2436,15 @@ message CMsgDOTAFantasyRemoveOwnerResponse {
 	optional .CMsgDOTAFantasyRemoveOwnerResponse.EResult result = 1 [default = SUCCESS];
 }
 
+message CMsgDOTAFantasyScheduledMatchesRequest {
+	optional uint32 fantasy_league_id = 1;
+}
+
 message CMsgDOTAFantasyScheduledMatchesResponse {
 	message ScheduledMatchDays {
 		optional uint32 timestamp = 1;
 		repeated uint32 team_ids = 2;
+		repeated uint32 league_ids = 3;
 	}
 
 	enum EResult {
@@ -2445,6 +2454,55 @@ message CMsgDOTAFantasyScheduledMatchesResponse {
 
 	optional .CMsgDOTAFantasyScheduledMatchesResponse.EResult result = 1 [default = SUCCESS];
 	repeated .CMsgDOTAFantasyScheduledMatchesResponse.ScheduledMatchDays scheduled_match_days = 2;
+}
+
+message CMsgDOTAFantasyLeaveLeagueRequest {
+	optional uint32 fantasy_league_id = 1;
+	optional uint32 fantasy_team_index = 2;
+}
+
+message CMsgDOTAFantasyLeaveLeagueResponse {
+	enum EResult {
+		SUCCESS = 0;
+		ERROR_UNSPECIFIED = 1;
+		ERROR_NOT_MEMBER = 2;
+		ERROR_LEAGUE_NOT_FOUND = 3;
+		ERROR_DRAFT_ACTIVE = 4;
+	}
+
+	optional .CMsgDOTAFantasyLeaveLeagueResponse.EResult result = 1 [default = SUCCESS];
+}
+
+message CMsgDOTAFantasyPlayerScoreDetailsRequest {
+	optional uint32 fantasy_league_id = 1;
+	optional uint32 player_account_id = 2;
+	optional uint32 start_time = 3;
+	optional uint32 end_time = 4;
+}
+
+message CMsgDOTAFantasyPlayerScoreDetailsResponse {
+	message PlayerMatchData {
+		optional uint32 match_id = 1;
+		optional uint32 series_id = 2;
+		optional uint32 series_num = 3;
+		optional uint32 series_type = 4;
+		optional uint32 league_id = 5;
+		optional uint32 opposing_team_id = 6;
+		optional uint64 opposing_team_logo = 7;
+		optional string opposing_team_name = 8;
+		optional .CMsgFantasyLeagueRoleScoring stats = 9;
+		optional uint32 owned_by = 10;
+		optional bool benched = 11;
+	}
+
+	enum EResult {
+		SUCCESS = 0;
+		ERROR_UNSPECIFIED = 1;
+		ERROR_NOT_MEMBER = 2;
+	}
+
+	optional .CMsgDOTAFantasyPlayerScoreDetailsResponse.EResult result = 1 [default = SUCCESS];
+	repeated .CMsgDOTAFantasyPlayerScoreDetailsResponse.PlayerMatchData data = 2;
 }
 
 message CMsgDOTASendFriendRecruits {
@@ -2718,6 +2776,9 @@ message CMsgDOTAGetPlayerMatchHistoryResponse {
 	optional uint32 request_id = 2;
 }
 
+message CMsgDOTAStartDailyHeroChallenge {
+}
+
 message CMsgGCNewBloomModeState {
 }
 
@@ -2728,9 +2789,6 @@ message CMsgGCNewBloomModeStateResponse {
 }
 
 message CMsgGCNotificationsRequest {
-	optional bool new_messages = 1;
-	optional uint32 start_message_num = 2;
-	optional uint32 end_message_num = 3;
 }
 
 message CMsgGCNotificationsResponse {
@@ -2742,6 +2800,7 @@ message CMsgGCNotificationsResponse {
 		optional uint32 reference_b = 5;
 		optional uint32 reference_c = 6;
 		optional string message = 7;
+		optional bool unread = 8;
 	}
 
 	enum EResult {
@@ -2750,12 +2809,10 @@ message CMsgGCNotificationsResponse {
 	}
 
 	optional .CMsgGCNotificationsResponse.EResult result = 1 [default = SUCCESS];
-	repeated .CMsgGCNotificationsResponse.Notification notification = 2;
-	optional uint32 num_total_notifications = 3;
+	repeated .CMsgGCNotificationsResponse.Notification notifications = 2;
 }
 
-message CMsgGCNotificationsDismissRequest {
-	optional uint64 id = 1;
+message CMsgGCNotificationsMarkReadRequest {
 }
 
 message CMsgGCLeagueAdminState {
@@ -2826,6 +2883,7 @@ message CMsgSerializedSOCache {
 
 	optional uint32 file_version = 1;
 	repeated .CMsgSerializedSOCache.Cache caches = 2;
+	optional uint32 gc_socache_file_version = 3;
 }
 
 message CMsgRequestWeekendTourneySchedule {
@@ -2843,11 +2901,21 @@ message CMsgWeekendTourneySchedule {
 
 message CMsgClientProvideSurveyResult {
 	message Response {
-		optional uint32 survey_id = 1;
+		optional uint32 question_id = 1;
 		optional uint32 survey_value = 2;
 	}
 
 	repeated .CMsgClientProvideSurveyResult.Response responses = 1;
 	optional uint64 survey_key = 2;
+}
+
+message CMsgClientToGCTrackDialogResult {
+	optional uint32 dialog_id = 1;
+	optional uint32 value = 2;
+}
+
+message CMsgGCToClientTournamentItemDrop {
+	optional uint32 item_def = 1;
+	optional uint32 event_type = 2;
 }
 

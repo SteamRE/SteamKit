@@ -372,7 +372,7 @@ enum EDOTAGCMsg {
 	k_EMsgGCLeagueAdminState = 7432;
 	k_EMsgGCToGCSendLeagueAdminState = 7433;
 	k_EMsgGCLeagueAdminList = 7434;
-	k_EMsgGCNotificationsDismissRequest = 7435;
+	k_EMsgGCNotificationsMarkReadRequest = 7435;
 	k_EMsgGCFantasyMessageAdd = 7436;
 	k_EMsgGCFantasyMessagesRequest = 7437;
 	k_EMsgGCFantasyMessagesResponse = 7438;
@@ -425,6 +425,18 @@ enum EDOTAGCMsg {
 	k_EMsgGCConsumeFantasyTicket = 7486;
 	k_EMsgGCConsumeFantasyTicketFailure = 7487;
 	k_EMsgGCToGCGrantEventPointActionMsg = 7488;
+	k_EMsgClientToGCTrackDialogResult = 7489;
+	k_EMsgGCFantasyLeaveLeagueRequest = 7490;
+	k_EMsgGCFantasyLeaveLeagueResponse = 7491;
+	k_EMsgGCToGCGetCompendiumSelections = 7492;
+	k_EMsgGCToGCGetCompendiumSelectionsResponse = 7493;
+	k_EMsgServerToGCMatchConnectionStats = 7494;
+	k_EMsgGCToClientTournamentItemDrop = 7495;
+	k_EMsgSQLDelayedGrantLeagueDrop = 7496;
+	k_EMsgServerGCUpdateSpectatorCount = 7497;
+	k_EMsgDOTAStartDailyHeroChallengeRequest = 7498;
+	k_EMsgGCFantasyPlayerScoreDetailsRequest = 7499;
+	k_EMsgGCFantasyPlayerScoreDetailsResponse = 7500;
 	k_EMsgGCDev_GrantWarKill = 8001;
 }
 

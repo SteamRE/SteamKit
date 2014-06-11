@@ -181,7 +181,7 @@ message CMsgGCTFSpecificItemBroadcast {
 }
 
 message CSOTFDuelSummary {
-	optional uint32 account_id = 1;
+	optional uint32 account_id = 1 [(key_field) = true];
 	optional uint32 duel_wins = 2;
 	optional uint32 duel_losses = 3;
 	optional uint32 last_duel_account_id = 4;
@@ -190,8 +190,8 @@ message CSOTFDuelSummary {
 }
 
 message CSOTFMapContribution {
-	optional uint32 account_id = 1;
-	optional uint32 def_index = 2;
+	optional uint32 account_id = 1 [(key_field) = true];
+	optional uint32 def_index = 2 [(key_field) = true];
 	optional uint32 contribution_level = 3;
 }
 
@@ -526,7 +526,7 @@ message CSOTFParty {
 		AWAITING_RESERVATION_CONFIRMATION = 3;
 	}
 
-	optional uint64 party_id = 1;
+	optional uint64 party_id = 1 [(key_field) = true];
 	optional fixed64 leader_id = 2;
 	repeated fixed64 member_ids = 3;
 	repeated .CSOTFPartyMember members = 13;
@@ -553,7 +553,7 @@ message CSOTFPartyInvite {
 		optional uint32 avatar = 3;
 	}
 
-	optional uint64 group_id = 1;
+	optional uint64 group_id = 1 [(key_field) = true];
 	optional fixed64 sender_id = 2;
 	optional string sender_name = 3;
 	repeated .CSOTFPartyInvite.PartyMember members = 4;
@@ -568,7 +568,7 @@ message CTFLobbyMember {
 		DISCONNECTED = 5;
 	}
 
-	optional fixed64 id = 1;
+	optional fixed64 id = 1 [(key_field) = true];
 	optional .TF_GC_TEAM team = 3 [default = TF_GC_TEAM_DEFENDERS];
 	optional .CTFLobbyMember.ConnectState connect_state = 13 [default = INVALID];
 	optional string name = 6;
@@ -608,7 +608,7 @@ message CSOTFLobby {
 		TUTORIAL = 3;
 	}
 
-	optional uint64 lobby_id = 1;
+	optional uint64 lobby_id = 1 [(key_field) = true];
 	repeated .CTFLobbyMember members = 2;
 	repeated .CTFLobbyMember left_members = 7;
 	optional fixed64 leader_id = 11;

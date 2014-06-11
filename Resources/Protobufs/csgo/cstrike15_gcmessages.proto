@@ -57,6 +57,7 @@ enum ECsgoGCMsg {
 	k_EMsgGCCStrike15_v2_Server2GCPureServerValidationFailure = 9155;
 	k_EMsgGCCStrike15_v2_Client2GCEconPreviewDataBlockRequest = 9156;
 	k_EMsgGCCStrike15_v2_Client2GCEconPreviewDataBlockResponse = 9157;
+	k_EMsgGCCStrike15_v2_AccountPrivacySettings = 9158;
 }
 
 message GameServerPing {
@@ -327,6 +328,15 @@ message CMsgGCCStrike15_v2_MatchmakingGC2ClientHello {
 	optional .TournamentTeam my_current_team = 12;
 	repeated .TournamentEvent my_current_event_stages = 13;
 	optional uint32 survey_vote = 14;
+}
+
+message CMsgGCCStrike15_v2_AccountPrivacySettings {
+	message Setting {
+		optional uint32 setting_type = 1;
+		optional uint32 setting_value = 2;
+	}
+
+	repeated .CMsgGCCStrike15_v2_AccountPrivacySettings.Setting settings = 1;
 }
 
 message CMsgGCCStrike15_v2_MatchmakingGC2ClientAbandon {
