@@ -92,6 +92,7 @@
     <ClCompile Include="crypto.cpp" />
     <ClCompile Include="csimpledetour.cpp" />
     <ClCompile Include="csimplescan.cpp" />
+    <ClCompile Include="injector.cpp" />
     <ClCompile Include="logger.cpp" />
     <ClCompile Include="nethook.cpp" />
     <ClCompile Include="sigscan.cpp" />
