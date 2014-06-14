@@ -8,6 +8,7 @@
 
 CLogger *g_pLogger = NULL;
 CCrypto* g_pCrypto = NULL;
+BOOL g_bOwnsConsole = FALSE;
 
 BOOL IsRunDll32()
 {
@@ -34,7 +35,7 @@ BOOL WINAPI DllMain( HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved )
 	{
 		GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-		AllocConsole();
+		g_bOwnsConsole = AllocConsole();
 
 		LoadLibrary( "steamclient.dll" );
 
@@ -49,7 +50,10 @@ BOOL WINAPI DllMain( HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved )
 
 		delete g_pCrypto;
 
-		FreeConsole();
+		if (g_bOwnsConsole)
+		{
+			FreeConsole();
+		}
 	}
 
 	return TRUE;
