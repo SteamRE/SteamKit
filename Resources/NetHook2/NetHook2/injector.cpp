@@ -40,7 +40,7 @@ int GetSteamProcessID(HWND hWindow, LPSTR lpszCommandLine)
 	{
 		if (!TryParseInt(lpszCommandLine, &iSteamProcessID))
 		{
-			MessageBoxA(hWindow, "Invalid command line. Usage: Rundll32.exe NetHook.dll,Inject [process ID]", "NetHook2", MB_OK | MB_ICONASTERISK);
+			MessageBoxA(hWindow, "Invalid command line. Usage: Rundll32.exe NetHook.dll,<Inject|Eject> [process ID]", "NetHook2", MB_OK | MB_ICONASTERISK);
 			return -1;
 		}
 		else if (!ProcessHasModuleLoaded(iSteamProcessID, "steamclient.dll", /* bPartialMatchFromEnd */ true))
