@@ -1,13 +1,15 @@
 #define WIN32_LEAN_AND_MEAN
 #include <Windows.h>
 #include <Psapi.h>
+#include <stdlib.h>
 
 EXTERN_C IMAGE_DOS_HEADER __ImageBase;
 
 int FindSteamProcessID();
-BOOL ProcessHasModuleLoaded(const int iProcessID, const char * szModuleName);
+BOOL ProcessHasModuleLoaded(const int iProcessID, const char * szModuleName, bool bPartialMatchFromEnd);
+BOOL TryParseInt(const char * szStringIn, int * pIntOut);
 BOOL SelfInjectIntoSteam(const HWND hWindow, const int iSteamProcessID, const char * szNetHookDllPath);
-BOOL InjectEjection(const HWND hWindow, const int iSteamProcessID);
+BOOL InjectEjection(const HWND hWindow, const int iSteamProcessID, const char * szModuleName);
 
 //
 // RunDLL Interface
@@ -22,12 +24,41 @@ __declspec(dllexport) void CALLBACK Inject(HWND hWindow, HINSTANCE hInstance, LP
 #pragma comment(linker, "/EXPORT:Eject=?Eject@@YGXPAUHWND__@@PAUHINSTANCE__@@PADH@Z")
 __declspec(dllexport) void CALLBACK Eject(HWND hWindow, HINSTANCE hInstance, LPSTR lpszCommandLine, int nCmdShow);
 
+int GetSteamProcessID(HWND hWindow, LPSTR lpszCommandLine)
+{
+	int iSteamProcessID;
+	if (strlen(lpszCommandLine) == 0)
+	{
+		iSteamProcessID = FindSteamProcessID();
+		if (iSteamProcessID <= 0)
+		{
+			MessageBoxA(hWindow, "Unable to find Steam. Make sure Steam is running, then try again.", "NetHook2", MB_OK | MB_ICONASTERISK);
+			return -1;
+		}
+	}
+	else
+	{
+		if (!TryParseInt(lpszCommandLine, &iSteamProcessID))
+		{
+			MessageBoxA(hWindow, "Invalid command line. Usage: Rundll32.exe NetHook.dll,Inject [process ID]", "NetHook2", MB_OK | MB_ICONASTERISK);
+			return -1;
+		}
+		else if (!ProcessHasModuleLoaded(iSteamProcessID, "steamclient.dll", /* bPartialMatchFromEnd */ true))
+		{
+			MessageBoxA(hWindow, "Invalid process ID: Target process does not have steamclient.dll loaded.", "NetHook2", MB_OK | MB_ICONASTERISK);
+			return -1;
+		}
+	}
+
+	return iSteamProcessID;
+}
+
 void CALLBACK Inject(HWND hWindow, HINSTANCE hInstance, LPSTR lpszCommandLine, int nCmdShow)
 {
-	int iSteamProcessID = FindSteamProcessID();
+	int iSteamProcessID = GetSteamProcessID(hWindow, lpszCommandLine);
 	if (iSteamProcessID <= 0)
 	{
-		MessageBoxA(hWindow, "Unable to find Steam. Make sure Steam is running, then try again.", "NetHook2", MB_OK | MB_ICONASTERISK);
+		// GetSteamProcessID already shows a messagebox
 		return;
 	}
 
@@ -44,10 +75,10 @@ void CALLBACK Inject(HWND hWindow, HINSTANCE hInstance, LPSTR lpszCommandLine, i
 
 void CALLBACK Eject(HWND hWindow, HINSTANCE hInstance, LPSTR lpszCommandLine, int nCmdShow)
 {
-	int iSteamProcessID = FindSteamProcessID();
+	int iSteamProcessID = GetSteamProcessID(hWindow, lpszCommandLine);
 	if (iSteamProcessID <= 0)
 	{
-		MessageBoxA(hWindow, "Unable to find Steam. Make sure Steam is running, then try again.", "NetHook2", MB_OK | MB_ICONASTERISK);
+		// GetSteamProcessID already shows a messagebox
 		return;
 	}
 
@@ -55,13 +86,13 @@ void CALLBACK Eject(HWND hWindow, HINSTANCE hInstance, LPSTR lpszCommandLine, in
 	ZeroMemory(szNethookDllPath, sizeof(szNethookDllPath));
 	int result = GetModuleFileNameA((HINSTANCE)&__ImageBase, szNethookDllPath, sizeof(szNethookDllPath));
 
-	if (!ProcessHasModuleLoaded(iSteamProcessID, szNethookDllPath))
+	if (!ProcessHasModuleLoaded(iSteamProcessID, szNethookDllPath, /* bPartialMatchFromEnd */ false))
 	{
 		MessageBoxA(hWindow, "Unable to eject NetHook2: This instance of Steam does not have NetHook2 loaded.", "NetHook2", MB_OK | MB_ICONASTERISK);
 		return;
 	}
 	
-	BOOL bInjected = InjectEjection(hWindow, iSteamProcessID);
+	BOOL bInjected = InjectEjection(hWindow, iSteamProcessID, szNethookDllPath);
 	if (!bInjected)
 	{
 		// Do nothing, InjectEjection already shows a messagebox with details.
@@ -111,7 +142,7 @@ int FindSteamProcessID()
 	return -1;
 }
 
-BOOL ProcessHasModuleLoaded(const int iProcessID, const char * szModuleName)
+BOOL ProcessHasModuleLoaded(const int iProcessID, const char * szModuleName, bool bPartialMatchFromEnd)
 {
 	HANDLE hProcess = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, false, iProcessID);
 	if (hProcess != NULL)
@@ -129,7 +160,22 @@ BOOL ProcessHasModuleLoaded(const int iProcessID, const char * szModuleName)
 
 				if (GetModuleFileNameExA(hProcess, hModules[i], szModulePath, sizeof(szModulePath)))
 				{
-					if (_stricmp(szModulePath, szModuleName) == 0)
+					const char * szSearchKeyStart;
+					if (bPartialMatchFromEnd)
+					{
+						const char * pEndOfModulePath = szModulePath + strlen(szModulePath);
+						szSearchKeyStart = pEndOfModulePath - strlen(szModuleName);
+						if (szSearchKeyStart > pEndOfModulePath || szSearchKeyStart < szModulePath)
+						{
+							continue;
+						}
+					}
+					else
+					{
+						szSearchKeyStart = szModulePath;
+					}
+
+					if (_stricmp(szSearchKeyStart, szModuleName) == 0)
 					{
 						CloseHandle(hProcess);
 						return true;
@@ -141,6 +187,23 @@ BOOL ProcessHasModuleLoaded(const int iProcessID, const char * szModuleName)
 		CloseHandle(hProcess);
 	}
 	return false;
+}
+
+
+BOOL TryParseInt(const char * szStringIn, int * pIntOut)
+{
+	int iStrLen = strlen(szStringIn);
+
+	for (int i = 0; i < iStrLen; i++)
+	{
+		if (!isdigit(szStringIn[i]))
+		{
+			return false;
+		}
+	}
+
+	*pIntOut = atoi(szStringIn);
+	return true;
 }
 
 //
@@ -243,7 +306,7 @@ BOOL SelfInjectIntoSteam(const HWND hWindow, const int iSteamProcessID, const ch
 
 // Inject the 'Eject' code cave instructions
 // This seems to be the only way to not crash Steam when ejecting.
-BOOL InjectEjection(const HWND hWindow, const int iSteamProcessID)
+BOOL InjectEjection(const HWND hWindow, const int iSteamProcessID, const char * szModuleName)
 {
 	HANDLE hSteamProcess = OpenProcess(PROCESS_ALL_ACCESS, FALSE, iSteamProcessID);
 	if (hSteamProcess == NULL)
@@ -272,7 +335,7 @@ BOOL InjectEjection(const HWND hWindow, const int iSteamProcessID)
 
 	params.FreeLibrary = (FreeLibraryPtr)GetProcAddress(hKernel32Module, "FreeLibrary");
 	params.GetModuleHandleA = (GetModuleHandleAPtr)GetProcAddress(hKernel32Module, "GetModuleHandleA");
-	strcpy(params.szModuleName, "NetHook2");
+	strncpy_s(params.szModuleName, szModuleName, sizeof(params.szModuleName));
 
 	BOOL bWritten = WriteProcessMemory(hSteamProcess, pEjectParams, &params, sizeof(params), NULL);
 	if (!bWritten)
