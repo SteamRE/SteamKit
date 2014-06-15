@@ -42,19 +42,9 @@ int GetSteamProcessID(HWND hWindow, LPSTR lpszCommandLine)
 			return -1;
 		}
 	}
-	else
+	else if (!TryParseInt(lpszCommandLine, &iSteamProcessID))
 	{
-		if (TryParseInt(lpszCommandLine, &iSteamProcessID))
-		{
-			if (!ProcessHasModuleLoaded(iSteamProcessID, "steamclient.dll", /* bPartialMatchFromEnd */ true))
-			{
-				MessageBoxA(hWindow, "Invalid process: Target process does not have steamclient.dll loaded.", "NetHook2", MB_OK | MB_ICONASTERISK);
-				return -1;
-			}
-
-			return iSteamProcessID;
-		}
-		else if (!FindProcessByName(lpszCommandLine, &iSteamProcessID, &iNumProcesses))
+		if (!FindProcessByName(lpszCommandLine, &iSteamProcessID, &iNumProcesses))
 		{
 			MessageBoxA(hWindow, "Unable to find any processes with the supplied name.", "NetHook2", MB_OK | MB_ICONASTERISK);
 			return -1;
