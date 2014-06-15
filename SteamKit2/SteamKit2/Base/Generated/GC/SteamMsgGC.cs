@@ -2467,62 +2467,6 @@ namespace SteamKit2.GC.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCRequestAnnouncements")]
-  public partial class CMsgGCRequestAnnouncements : global::ProtoBuf.IExtensible
-  {
-    public CMsgGCRequestAnnouncements() {}
-    
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCRequestAnnouncementsResponse")]
-  public partial class CMsgGCRequestAnnouncementsResponse : global::ProtoBuf.IExtensible
-  {
-    public CMsgGCRequestAnnouncementsResponse() {}
-    
-
-    private string _announcement_title = "";
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"announcement_title", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
-    public string announcement_title
-    {
-      get { return _announcement_title; }
-      set { _announcement_title = value; }
-    }
-
-    private string _announcement = "";
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"announcement", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
-    public string announcement
-    {
-      get { return _announcement; }
-      set { _announcement = value; }
-    }
-
-    private string _nextmatch_title = "";
-    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"nextmatch_title", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
-    public string nextmatch_title
-    {
-      get { return _nextmatch_title; }
-      set { _nextmatch_title = value; }
-    }
-
-    private string _nextmatch = "";
-    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"nextmatch", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
-    public string nextmatch
-    {
-      get { return _nextmatch; }
-      set { _nextmatch = value; }
-    }
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCBannedWord")]
   public partial class CMsgGCBannedWord : global::ProtoBuf.IExtensible
   {

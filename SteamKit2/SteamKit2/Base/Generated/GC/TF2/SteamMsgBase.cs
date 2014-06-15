@@ -566,15 +566,6 @@ namespace SteamKit2.GC.TF2.Internal
       set { _trial_account = value; }
     }
 
-    private bool _eligible_for_online_play = (bool)true;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"eligible_for_online_play", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue((bool)true)]
-    public bool eligible_for_online_play
-    {
-      get { return _eligible_for_online_play; }
-      set { _eligible_for_online_play = value; }
-    }
-
     private bool _need_to_choose_most_helpful_friend = default(bool);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"need_to_choose_most_helpful_friend", DataFormat = global::ProtoBuf.DataFormat.Default)]
     [global::System.ComponentModel.DefaultValue(default(bool))]
@@ -771,6 +762,15 @@ namespace SteamKit2.GC.TF2.Internal
     {
       get { return _recent_only; }
       set { _recent_only = value; }
+    }
+
+    private string _tags = "";
+    [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"tags", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string tags
+    {
+      get { return _tags; }
+      set { _tags = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

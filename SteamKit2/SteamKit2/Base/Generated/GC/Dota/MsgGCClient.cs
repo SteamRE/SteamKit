@@ -15047,6 +15047,15 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _objects; }
     }
   
+
+    private uint _service_id = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"service_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint service_id
+    {
+      get { return _service_id; }
+      set { _service_id = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

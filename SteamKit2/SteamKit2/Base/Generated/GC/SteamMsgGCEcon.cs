@@ -1489,12 +1489,6 @@ namespace SteamKit2.GC.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCWebAPIAccountChanged", Value=2524)]
       k_EMsgGCToGCWebAPIAccountChanged = 2524,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCRequestAnnouncements", Value=2525)]
-      k_EMsgGCRequestAnnouncements = 2525,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCRequestAnnouncementsResponse", Value=2526)]
-      k_EMsgGCRequestAnnouncementsResponse = 2526,
-            
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCClientVersionUpdated", Value=2528)]
       k_EMsgGCClientVersionUpdated = 2528,
             

@@ -316,44 +316,6 @@ namespace SteamKit2.GC.TF2.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgTFKickPlayer")]
-  public partial class CMsgTFKickPlayer : global::ProtoBuf.IExtensible
-  {
-    public CMsgTFKickPlayer() {}
-    
-
-    private uint _account_id_player = default(uint);
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_id_player", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint account_id_player
-    {
-      get { return _account_id_player; }
-      set { _account_id_player = value; }
-    }
-
-    private uint _kick_reason = default(uint);
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"kick_reason", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint kick_reason
-    {
-      get { return _kick_reason; }
-      set { _kick_reason = value; }
-    }
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgTFStartedTraining")]
-  public partial class CMsgTFStartedTraining : global::ProtoBuf.IExtensible
-  {
-    public CMsgTFStartedTraining() {}
-    
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgTFFreeTrialChooseMostHelpfulFriend")]
   public partial class CMsgTFFreeTrialChooseMostHelpfulFriend : global::ProtoBuf.IExtensible
   {
@@ -420,15 +382,6 @@ namespace SteamKit2.GC.TF2.Internal
     {
       get { return _num_new_users_helped; }
       set { _num_new_users_helped = value; }
-    }
-
-    private bool _trial_account = (bool)false;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"trial_account", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue((bool)false)]
-    public bool trial_account
-    {
-      get { return _trial_account; }
-      set { _trial_account = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -4504,6 +4457,62 @@ namespace SteamKit2.GC.TF2.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CAttribute_ItemSlotCriteria")]
+  public partial class CAttribute_ItemSlotCriteria : global::ProtoBuf.IExtensible
+  {
+    public CAttribute_ItemSlotCriteria() {}
+    
+
+    private string _tags = "";
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"tags", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string tags
+    {
+      get { return _tags; }
+      set { _tags = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgSetItemSlotAttribute")]
+  public partial class CMsgSetItemSlotAttribute : global::ProtoBuf.IExtensible
+  {
+    public CMsgSetItemSlotAttribute() {}
+    
+
+    private ulong _item_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"item_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong item_id
+    {
+      get { return _item_id; }
+      set { _item_id = value; }
+    }
+
+    private ulong _slot_item_original_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"slot_item_original_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong slot_item_original_id
+    {
+      get { return _slot_item_original_id; }
+      set { _slot_item_original_id = value; }
+    }
+
+    private uint _slot_index = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"slot_index", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint slot_index
+    {
+      get { return _slot_index; }
+      set { _slot_index = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     [global::ProtoBuf.ProtoContract(Name=@"ETFGCMsg", EnumPassthru=true)]
     public enum ETFGCMsg
     {
@@ -4517,11 +4526,11 @@ namespace SteamKit2.GC.TF2.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCVoteKickBanPlayerResult", Value=5019)]
       k_EMsgGCVoteKickBanPlayerResult = 5019,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCKickPlayer", Value=5020)]
-      k_EMsgGCKickPlayer = 5020,
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCKickPlayer_DEPRECATED", Value=5020)]
+      k_EMsgGCKickPlayer_DEPRECATED = 5020,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCStartedTraining", Value=5021)]
-      k_EMsgGCStartedTraining = 5021,
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCStartedTraining_DEPRECATED", Value=5021)]
+      k_EMsgGCStartedTraining_DEPRECATED = 5021,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCFreeTrial_ChooseMostHelpfulFriend", Value=5022)]
       k_EMsgGCFreeTrial_ChooseMostHelpfulFriend = 5022,
@@ -4810,6 +4819,9 @@ namespace SteamKit2.GC.TF2.Internal
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGC_ClientVerificationVerboseResponse", Value=6502)]
       k_EMsgGC_ClientVerificationVerboseResponse = 6502,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGC_ClientSetItemSlotAttribute", Value=6503)]
+      k_EMsgGC_ClientSetItemSlotAttribute = 6503,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCDev_GrantWarKill", Value=10001)]
       k_EMsgGCDev_GrantWarKill = 10001
