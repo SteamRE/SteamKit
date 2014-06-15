@@ -54,7 +54,8 @@
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MinimalRebuild>true</MinimalRebuild>
-      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <BasicRuntimeChecks>
+      </BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
@@ -92,6 +93,7 @@
     <ClCompile Include="crypto.cpp" />
     <ClCompile Include="csimpledetour.cpp" />
     <ClCompile Include="csimplescan.cpp" />
+    <ClCompile Include="injector.cpp" />
     <ClCompile Include="logger.cpp" />
     <ClCompile Include="nethook.cpp" />
     <ClCompile Include="sigscan.cpp" />
