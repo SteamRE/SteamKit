@@ -388,6 +388,7 @@ BOOL InjectEjection(const HWND hWindow, const int iSteamProcessID, const char * 
 	if (pRemoteFunc == NULL)
 	{
 		MessageBoxA(hWindow, "Unable to allocate executable memory inside Steam.", "NetHook2", MB_OK | MB_ICONASTERISK);
+		VirtualFreeEx(hSteamProcess, pEjectParams, 0, MEM_RELEASE);
 		CloseHandle(hSteamProcess);
 		return false;
 	}
