@@ -6,6 +6,7 @@
 EXTERN_C IMAGE_DOS_HEADER __ImageBase;
 
 int FindSteamProcessID();
+BOOL FindProcessByName(const char * szProcessName, int * piFirstProcessID, int * piNumProcesses);
 BOOL ProcessHasModuleLoaded(const int iProcessID, const char * szModuleName, bool bPartialMatchFromEnd);
 BOOL TryParseInt(const char * szStringIn, int * pIntOut);
 BOOL SelfInjectIntoSteam(const HWND hWindow, const int iSteamProcessID, const char * szNetHookDllPath);
@@ -15,7 +16,11 @@ BOOL InjectEjection(const HWND hWindow, const int iSteamProcessID, const char * 
 // RunDLL Interface
 //
 // rundll32.exe C:\Path\To\NetHook2.dll,Inject
+// rundll32.exe C:\Path\To\NetHook2.dll,Inject 1234
+// rundll32.exe C:\Path\To\NetHook2.dll,Inject steam.exe
 // rundll32.exe C:\Path\To\NetHook2.dll,Eject
+// rundll32.exe C:\Path\To\NetHook2.dll,Eject 1234
+// rundll32.exe C:\Path\To\NetHook2.dll,Eject steam.exe
 //
 
 #pragma comment(linker, "/EXPORT:Inject=?Inject@@YGXPAUHWND__@@PAUHINSTANCE__@@PADH@Z")
@@ -27,6 +32,7 @@ __declspec(dllexport) void CALLBACK Eject(HWND hWindow, HINSTANCE hInstance, LPS
 int GetSteamProcessID(HWND hWindow, LPSTR lpszCommandLine)
 {
 	int iSteamProcessID;
+	int iNumProcesses;
 	if (strlen(lpszCommandLine) == 0)
 	{
 		iSteamProcessID = FindSteamProcessID();
@@ -38,16 +44,32 @@ int GetSteamProcessID(HWND hWindow, LPSTR lpszCommandLine)
 	}
 	else
 	{
-		if (!TryParseInt(lpszCommandLine, &iSteamProcessID))
+		if (TryParseInt(lpszCommandLine, &iSteamProcessID))
 		{
-			MessageBoxA(hWindow, "Invalid command line. Usage: Rundll32.exe NetHook.dll,<Inject|Eject> [process ID]", "NetHook2", MB_OK | MB_ICONASTERISK);
+			if (!ProcessHasModuleLoaded(iSteamProcessID, "steamclient.dll", /* bPartialMatchFromEnd */ true))
+			{
+				MessageBoxA(hWindow, "Invalid process: Target process does not have steamclient.dll loaded.", "NetHook2", MB_OK | MB_ICONASTERISK);
+				return -1;
+			}
+
+			return iSteamProcessID;
+		}
+		else if (!FindProcessByName(lpszCommandLine, &iSteamProcessID, &iNumProcesses))
+		{
+			MessageBoxA(hWindow, "Unable to find any processes with the supplied name.", "NetHook2", MB_OK | MB_ICONASTERISK);
 			return -1;
 		}
-		else if (!ProcessHasModuleLoaded(iSteamProcessID, "steamclient.dll", /* bPartialMatchFromEnd */ true))
+		else if (iNumProcesses > 1)
 		{
-			MessageBoxA(hWindow, "Invalid process ID: Target process does not have steamclient.dll loaded.", "NetHook2", MB_OK | MB_ICONASTERISK);
+			MessageBoxA(hWindow, "Multiple processes found with the supplied name. Please supply a process ID instead.", "NetHook2", MB_OK | MB_ICONASTERISK);
 			return -1;
 		}
+	}
+	
+	if (!ProcessHasModuleLoaded(iSteamProcessID, "steamclient.dll", /* bPartialMatchFromEnd */ true))
+	{
+		MessageBoxA(hWindow, "Invalid process: Target process does not have steamclient.dll loaded.", "NetHook2", MB_OK | MB_ICONASTERISK);
+		return -1;
 	}
 
 	return iSteamProcessID;
@@ -104,6 +126,22 @@ void CALLBACK Eject(HWND hWindow, HINSTANCE hInstance, LPSTR lpszCommandLine, in
 //
 int FindSteamProcessID()
 {
+	int iSteamProcessID = 0;
+	int iNumProcesses = 0;
+
+	if (FindProcessByName("steam.exe", &iSteamProcessID, &iNumProcesses) && iNumProcesses == 1)
+	{
+		return iSteamProcessID;
+	}
+
+	return -1;
+}
+
+BOOL FindProcessByName(const char * szProcessName, int * piFirstProcessID, int * piNumProcesses)
+{
+	int iNumProcessesFound = 0;
+	*piFirstProcessID = 0;
+
 	DWORD cbNeeded = 0;
 	const int MAX_NUM_PROCESSES = 2048; // Be generous
 	DWORD piProcesses[MAX_NUM_PROCESSES];
@@ -113,8 +151,8 @@ int FindSteamProcessID()
 		return -1;
 	}
 
-	int iNumProcesses = cbNeeded / sizeof(DWORD);
-	for (int i = 0; i < iNumProcesses; i++)
+	int iNumEnumeratedProcesses = cbNeeded / sizeof(DWORD);
+	for (int i = 0; i < iNumEnumeratedProcesses; i++)
 	{
 		DWORD pid = piProcesses[i];
 
@@ -123,15 +161,23 @@ int FindSteamProcessID()
 		{
 			char szProcessPath[MAX_PATH];
 			DWORD dwPathLength = GetModuleFileNameEx(hProcess, 0, szProcessPath, sizeof(szProcessPath));
-			const char * szEndsWithKey = "\\steam.exe";
+
+			char szEndsWithKey[MAX_PATH];
+			ZeroMemory(szEndsWithKey, sizeof(szEndsWithKey));
+			szEndsWithKey[0] = '\\';
+			strncpy_s(szEndsWithKey + 1, sizeof(szEndsWithKey) - 1, szProcessName, strlen(szProcessName));
 			unsigned int cubEndsWithKey = strlen(szEndsWithKey);
 
 			if (dwPathLength != 0 && dwPathLength > cubEndsWithKey)
 			{
 				if (_stricmp(szProcessPath + dwPathLength - cubEndsWithKey, szEndsWithKey) == 0)
 				{
-					CloseHandle(hProcess);
-					return pid;
+					if (*piFirstProcessID <= 0)
+					{
+						*piFirstProcessID = pid;
+					}
+
+					iNumProcessesFound++;
 				}
 			}
 
@@ -139,7 +185,8 @@ int FindSteamProcessID()
 		}
 	}
 
-	return -1;
+	*piNumProcesses = iNumProcessesFound;
+	return iNumProcessesFound > 0;
 }
 
 BOOL ProcessHasModuleLoaded(const int iProcessID, const char * szModuleName, bool bPartialMatchFromEnd)
@@ -216,7 +263,7 @@ struct EjectParams
 {
 	GetModuleHandleAPtr GetModuleHandleA;
 	FreeLibraryPtr FreeLibrary;
-	char szModuleName[1024];
+	char szModuleName[MAX_PATH];
 };
 
 //
