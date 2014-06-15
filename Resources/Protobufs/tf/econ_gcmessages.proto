@@ -97,6 +97,7 @@ enum EGCItemMsg {
 	k_EMsgGCTrading_InitiateTradeResponse = 1502;
 	k_EMsgGCTrading_StartSession = 1503;
 	k_EMsgGCTrading_SessionClosed = 1509;
+	k_EMsgGCTrading_CancelSession = 1510;
 	k_EMsgGCTrading_InitiateTradeRequestResponse = 1514;
 	k_EMsgGCServerBrowser_FavoriteServer = 1601;
 	k_EMsgGCServerBrowser_BlacklistServer = 1602;
@@ -148,6 +149,8 @@ enum EGCItemMsg {
 	k_EMsgGCToGCGetUserSessionServerResponse = 2542;
 	k_EMsgGCToGCGetUserServerMembers = 2543;
 	k_EMsgGCToGCGetUserServerMembersResponse = 2544;
+	k_EMsgGCToGCGrantSelfMadeItemToAccount = 2555;
+	k_EMsgGCToGCThankedByNewUser = 2556;
 }
 
 enum EGCMsgResponse {
@@ -281,5 +284,15 @@ message CMsgLookupMultipleAccountNamesResponse {
 	}
 
 	repeated .CMsgLookupMultipleAccountNamesResponse.Account accounts = 1;
+}
+
+message CMsgGCToGCGrantSelfMadeItemToAccount {
+	optional uint32 item_def_index = 1;
+	optional uint32 accountid = 2;
+}
+
+message CMsgGCToGCThankedByNewUser {
+	optional uint32 new_user_accountid = 1;
+	optional uint32 thanked_user_accountid = 2;
 }
 

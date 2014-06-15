@@ -125,7 +125,6 @@ message CMsgLANServerAvailable {
 message CSOEconGameAccountClient {
 	optional uint32 additional_backpack_slots = 1 [default = 0];
 	optional bool trial_account = 2 [default = false];
-	optional bool eligible_for_online_play = 3 [default = true];
 	optional bool need_to_choose_most_helpful_friend = 4;
 	optional bool in_coaches_list = 5;
 	optional fixed32 trade_ban_expiration = 6;
@@ -152,6 +151,7 @@ message CSOItemCriteria {
 	optional bool ignore_enabled_flag = 8;
 	repeated .CSOItemCriteriaCondition conditions = 9;
 	optional bool recent_only = 10;
+	optional string tags = 11;
 }
 
 message CSOItemRecipe {

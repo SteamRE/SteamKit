@@ -1100,3 +1100,21 @@ message CMsgPerfectWorldUserLookupResponse {
 	optional uint32 account_id = 2;
 }
 
+message CCompendiumTimestampedData {
+	optional uint32 game_time = 1;
+	optional uint32 gpm = 2;
+	optional uint32 xpm = 3;
+	optional uint32 kills = 4;
+	optional uint32 deaths = 5;
+	repeated uint32 item_purchases = 6;
+}
+
+message CCompendiumGameTimeline {
+	repeated .CCompendiumTimestampedData data = 1;
+	repeated string tags = 2;
+}
+
+message CCompendiumGameList {
+	repeated .CCompendiumGameTimeline games = 1;
+}
+

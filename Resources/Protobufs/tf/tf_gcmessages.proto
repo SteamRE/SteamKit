@@ -4,8 +4,8 @@ enum ETFGCMsg {
 	k_EMsgGCReportWarKill = 5001;
 	k_EMsgGCVoteKickBanPlayer = 5018;
 	k_EMsgGCVoteKickBanPlayerResult = 5019;
-	k_EMsgGCKickPlayer = 5020;
-	k_EMsgGCStartedTraining = 5021;
+	k_EMsgGCKickPlayer_DEPRECATED = 5020;
+	k_EMsgGCStartedTraining_DEPRECATED = 5021;
 	k_EMsgGCFreeTrial_ChooseMostHelpfulFriend = 5022;
 	k_EMsgGCRequestTF2Friends = 5023;
 	k_EMsgGCRequestTF2FriendsResponse = 5024;
@@ -102,6 +102,7 @@ enum ETFGCMsg {
 	k_EMsgGC_ClientVerificationChallenge = 6500;
 	k_EMsgGC_ClientVerificationChallengeResponse = 6501;
 	k_EMsgGC_ClientVerificationVerboseResponse = 6502;
+	k_EMsgGC_ClientSetItemSlotAttribute = 6503;
 	k_EMsgGCDev_GrantWarKill = 10001;
 }
 
@@ -210,14 +211,6 @@ message CMsgTFVoteKickBanPlayerResult {
 	optional uint32 num_possible_votes = 7;
 }
 
-message CMsgTFKickPlayer {
-	optional uint32 account_id_player = 1;
-	optional uint32 kick_reason = 2;
-}
-
-message CMsgTFStartedTraining {
-}
-
 message CMsgTFFreeTrialChooseMostHelpfulFriend {
 	optional uint32 account_id_friend = 1;
 }
@@ -232,7 +225,6 @@ message CMsgTFRequestTF2FriendsResponse {
 
 message CSOTFPlayerInfo {
 	optional uint32 num_new_users_helped = 1;
-	optional bool trial_account = 2 [default = false];
 }
 
 message CMsgTFThankedBySomeone {
@@ -938,5 +930,15 @@ message CAttribute_ItemDynamicRecipeComponentDefinedItem {
 	optional string attributes_string = 4;
 	optional uint32 item_count = 5;
 	optional uint32 items_fulfilled = 6;
+}
+
+message CAttribute_ItemSlotCriteria {
+	optional string tags = 1;
+}
+
+message CMsgSetItemSlotAttribute {
+	optional uint64 item_id = 1;
+	optional uint64 slot_item_original_id = 2;
+	optional uint32 slot_index = 3;
 }
 

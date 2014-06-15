@@ -126,8 +126,6 @@ enum EGCItemMsg {
 	k_EMsgGCServerVersionUpdated = 2522;
 	k_EMsgGCApplyAutograph = 2523;
 	k_EMsgGCToGCWebAPIAccountChanged = 2524;
-	k_EMsgGCRequestAnnouncements = 2525;
-	k_EMsgGCRequestAnnouncementsResponse = 2526;
 	k_EMsgGCClientVersionUpdated = 2528;
 	k_EMsgGCItemPurgatory_FinalizePurchase = 2531;
 	k_EMsgGCItemPurgatory_FinalizePurchaseResponse = 2532;

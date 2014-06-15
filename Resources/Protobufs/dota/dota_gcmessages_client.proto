@@ -2867,6 +2867,7 @@ message CMsgSerializedSOCache {
 	message TypeCache {
 		optional uint32 type = 1;
 		repeated bytes objects = 2;
+		optional uint32 service_id = 3;
 	}
 
 	message Cache {
