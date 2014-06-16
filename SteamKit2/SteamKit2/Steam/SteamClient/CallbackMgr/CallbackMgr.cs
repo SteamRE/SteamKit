@@ -42,7 +42,7 @@ namespace SteamKit2
         /// <summary>
         /// Gets or sets the function to call when a callback of type TCall arrives.
         /// </summary>
-        public Action<TCall, JobID> OnRun { get; set; }
+        public Action<TCall> OnRun { get; set; }
 
         internal override Type CallbackType { get { return typeof( TCall ); } }
 
@@ -57,17 +57,7 @@ namespace SteamKit2
         /// </summary>
         /// <param name="func">The function to call when a callback of type TCall arrives.</param>
         /// <param name="mgr">The <see cref="CallbackManager"/> that is responsible for the routing of callbacks to this handler, or null if the callback will be registered manually.</param>
-        public Callback( Action<TCall> func, CallbackManager mgr = null )
-            : this ( CreateJoblessAction( func ), mgr )
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Callback&lt;TCall&gt;"/> class.
-        /// </summary>
-        /// <param name="func">The function to call when a callback of type TCall arrives.</param>
-        /// <param name="mgr">The <see cref="CallbackManager"/> that is responsible for the routing of callbacks to this handler, or null if the callback will be registered manually.</param>
-        public Callback(Action<TCall, JobID> func, CallbackManager mgr = null)
+        public Callback(Action<TCall> func, CallbackManager mgr = null)
             : this ()
         {
             this.OnRun = func;
@@ -80,7 +70,8 @@ namespace SteamKit2
         /// </summary>
         /// <param name="func">The function to call when a callback of type TCall arrives.</param>
         /// <param name="mgr">The <see cref="CallbackManager"/> that is responsible for the routing of callbacks to this handler, or null if the callback will be registered manually.</param>
-        public Callback(Action<TCall, JobID> func, CallbackManager mgr, JobID jobID)
+        /// <param name="jobID">The <see cref="JobID"/>to filter matching callbacks by. Specify <see cref="P:JobID.Invalid"/> to recieve all callbacks of type TCall.</param>
+        public Callback(Action<TCall> func, CallbackManager mgr, JobID jobID)
             : this ( func, mgr )
         {
             JobID = jobID;
@@ -127,7 +118,7 @@ namespace SteamKit2
             var cb = callback as TCall;
             if (cb != null && (cb.JobID == JobID || JobID == JobID.Invalid) && OnRun != null)
             {
-                OnRun(cb, JobID);
+                OnRun(cb);
             }
         }
 

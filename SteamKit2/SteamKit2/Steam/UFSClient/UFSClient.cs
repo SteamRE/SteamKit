@@ -155,16 +155,15 @@ namespace SteamKit2
         /// Results are returned in a <see cref="LoggedOnCallback"/>.
         /// </summary>
         /// <param name="appIds">The AppIDs to authorize when connecting to the UFS.</param>
-        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="SteamClient.JobCallback&lt;T&gt;"/>.</returns>
+        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="LoggedOnCallback"/>.</returns>
         public JobID Logon( IEnumerable<uint> appIds )
         {
             var jobId = steamClient.GetNextJobID();
 
             if ( !steamClient.IsConnected )
             {
-                var cb = new LoggedOnCallback( EResult.NoConnection );
-                var jobCb = new SteamClient.JobCallback<LoggedOnCallback>( jobId, cb );
-                steamClient.PostCallback( jobCb );
+                var callback = new LoggedOnCallback( jobId, EResult.NoConnection );
+                steamClient.PostCallback( callback );
                 return jobId;
             }
 
@@ -186,7 +185,7 @@ namespace SteamKit2
         /// Results are returned in a <see cref="UploadFileResponseCallback"/>.
         /// </summary>
         /// <param name="details">The details to use for uploading the file.</param>
-        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="SteamClient.JobCallback&lt;T&gt;"/>.</returns>
+        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="UploadFileResponseCallback"/>.</returns>
         public JobID RequestFileUpload( UploadDetails details )
         {
             byte[] compressedData = ZipUtil.Compress( details.FileData );
@@ -213,7 +212,7 @@ namespace SteamKit2
         /// Results are returned in a <see cref="UploadFileFinishedCallback"/>.
         /// </summary>
         /// <param name="details">The details to use for uploading the file.</param>
-        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="SteamClient.JobCallback&lt;T&gt;"/>.</returns>
+        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="UploadFileFinishedCallback"/>.</returns>
         public void UploadFile( UploadDetails details )
         {
             const uint MaxBytesPerChunk = 10240;

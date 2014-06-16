@@ -429,6 +429,10 @@ namespace SteamKit2
             return depotManifest;
         }
 
+        // Ambiguous reference in cref attribute: 'CDNClient.DownloadManifest'. Assuming 'SteamKit2.CDNClient.DownloadManifest(uint, ulong)',
+        // but could have also matched other overloads including 'SteamKit2.CDNClient.DownloadManifest(uint, ulong, string, string, byte[])'.
+#pragma warning disable 0419
+
         /// <summary>
         /// Downloads the specified depot chunk, and optionally processes the chunk and verifies the checksum if the depot decryption key has been provided.
         /// </summary>
@@ -443,6 +447,7 @@ namespace SteamKit2
         /// </param>
         /// <returns>A <see cref="DepotChunk"/> instance that contains the data for the given chunk.</returns>
         /// <exception cref="System.ArgumentNullException">chunk's <see cref="DepotManifest.ChunkData.ChunkID"/> was null.</exception>
+#pragma warning restore 0419
         public DepotChunk DownloadDepotChunk( uint depotId, DepotManifest.ChunkData chunk )
         {
             if ( chunk.ChunkID == null )

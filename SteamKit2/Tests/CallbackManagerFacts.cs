@@ -28,7 +28,7 @@ namespace Tests
             var didCall = false;
             Action<CallbackForTest> action = delegate(CallbackForTest cb)
             {
-                Assert.Equal(cb.UniqueID, callback.UniqueID);
+                Assert.Equal(callback.UniqueID, cb.UniqueID);
                 didCall = true;
             };
 
@@ -41,101 +41,54 @@ namespace Tests
         }
 
         [Fact]
-        public void PostedJobCallbackTriggersAction()
+        public void PostedCallbackTriggersActionForExplicitJobIDInvalid()
         {
-            var callback = new CallbackForTest { UniqueID = Guid.NewGuid() };
             var jobID = new JobID(123456);
-            var jobCallback = new SteamClient.JobCallback<CallbackForTest>(jobID, callback);
+            var callback = new CallbackForTest { JobID = jobID, UniqueID = Guid.NewGuid() };
 
             var didCall = false;
-            Action<CallbackForTest, JobID> action = delegate(CallbackForTest cb, JobID jid)
+            Action<CallbackForTest> action = delegate(CallbackForTest cb)
             {
-                Assert.Equal(cb.UniqueID, callback.UniqueID);
-                Assert.Equal(jobID, jid);
+                Assert.Equal(callback.UniqueID, cb.UniqueID);
+                Assert.Equal(jobID, cb.JobID);
                 didCall = true;
             };
 
-            using (new JobCallback<CallbackForTest>(action, mgr))
+            using (new Callback<CallbackForTest>(action, mgr, JobID.Invalid))
             {
-                PostAndRunCallback(jobCallback);
+                PostAndRunCallback(callback);
             }
 
             Assert.True(didCall);
         }
 
         [Fact]
-        public void PostedJobCallbackTriggersActionForExplicitJobIDInvalid()
+        public void PostedCallbackWithJobIDTriggersActionWhenNoJobIDSpecified()
         {
-            var callback = new CallbackForTest { UniqueID = Guid.NewGuid() };
             var jobID = new JobID(123456);
-            var jobCallback = new SteamClient.JobCallback<CallbackForTest>(jobID, callback);
+            var callback = new CallbackForTest { JobID = jobID, UniqueID = Guid.NewGuid() };
 
             var didCall = false;
-            Action<CallbackForTest, JobID> action = delegate(CallbackForTest cb, JobID jid)
+            Action<CallbackForTest> action = delegate(CallbackForTest cb)
             {
-                Assert.Equal(cb.UniqueID, callback.UniqueID);
-                Assert.Equal(jobID, jid);
+                Assert.Equal(callback.UniqueID, cb.UniqueID);
+                Assert.Equal(jobID, cb.JobID);
                 didCall = true;
             };
 
-            using (new JobCallback<CallbackForTest>(action, mgr, JobID.Invalid))
+            using (new Callback<CallbackForTest>(action, mgr))
             {
-                PostAndRunCallback(jobCallback);
+                PostAndRunCallback(callback);
             }
 
             Assert.True(didCall);
         }
 
         [Fact]
-        public void PostedJobCallbackDoesNotTriggerActionForWrongJobID()
+        public void PostedCallbackDoesNotTriggerActionForWrongJobID()
         {
-            var callback = new CallbackForTest { UniqueID = Guid.NewGuid() };
             var jobID = new JobID(123456);
-            var jobCallback = new SteamClient.JobCallback<CallbackForTest>(jobID, callback);
-
-            var didCall = false;
-            Action<CallbackForTest, JobID> action = delegate(CallbackForTest cb, JobID jid)
-            {
-                Assert.Equal(jobID, jid);
-                didCall = true;
-            };
-
-            using (new JobCallback<CallbackForTest>(action, mgr, new JobID(123)))
-            {
-                PostAndRunCallback(jobCallback);
-            }
-
-            Assert.False(didCall);
-        }
-
-        [Fact]
-        public void PostedJobCallbackTriggersCallbackForJobID()
-        {
-            var callback = new CallbackForTest { UniqueID = Guid.NewGuid() };
-            var jobID = new JobID(123456);
-            var jobCallback = new SteamClient.JobCallback<CallbackForTest>(jobID, callback);
-
-            var didCall = false;
-            Action<CallbackForTest, JobID> action = delegate(CallbackForTest cb, JobID jid)
-            {
-                Assert.Equal(jobID, jid);
-                didCall = true;
-            };
-
-            using (new JobCallback<CallbackForTest>(action, mgr, jobID))
-            {
-                PostAndRunCallback(jobCallback);
-            }
-
-            Assert.True(didCall);
-        }
-
-        [Fact]
-        public void PostedJobCallbackDoesNotTriggerCallback()
-        {
-            var callback = new CallbackForTest { UniqueID = Guid.NewGuid() };
-            var jobID = new JobID(123456);
-            var jobCallback = new SteamClient.JobCallback<CallbackForTest>(jobID, callback);
+            var callback = new CallbackForTest { JobID = jobID, UniqueID = Guid.NewGuid() };
 
             var didCall = false;
             Action<CallbackForTest> action = delegate(CallbackForTest cb)
@@ -143,31 +96,34 @@ namespace Tests
                 didCall = true;
             };
 
-            using (new Callback<CallbackForTest>(action, mgr))
+            using (new Callback<CallbackForTest>(action, mgr, new JobID(123)))
             {
-                PostAndRunCallback(jobCallback);
+                PostAndRunCallback(callback);
             }
 
             Assert.False(didCall);
         }
 
         [Fact]
-        public void PostedCallbackDoesNotTriggerJobCallback()
+        public void PostedCallbackWithJobIDTriggersCallbackForJobID()
         {
-            var callback = new CallbackForTest { UniqueID = Guid.NewGuid() };
+            var jobID = new JobID(123456);
+            var callback = new CallbackForTest { JobID = jobID, UniqueID = Guid.NewGuid() };
 
             var didCall = false;
-            Action<CallbackForTest, JobID> action = delegate(CallbackForTest cb, JobID jid)
+            Action<CallbackForTest> action = delegate(CallbackForTest cb)
             {
+                Assert.Equal(callback.UniqueID, cb.UniqueID);
+                Assert.Equal(jobID, cb.JobID);
                 didCall = true;
             };
 
-            using (new JobCallback<CallbackForTest>(action, mgr))
+            using (new Callback<CallbackForTest>(action, mgr, new JobID(123456)))
             {
                 PostAndRunCallback(callback);
             }
 
-            Assert.False(didCall);
+            Assert.True(didCall);
         }
 
         void PostAndRunCallback(CallbackMsg callback)

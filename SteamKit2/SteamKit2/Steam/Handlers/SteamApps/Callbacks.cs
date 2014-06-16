@@ -831,8 +831,10 @@ namespace SteamKit2
             /// </summary>
             public DateTime Expiration { get; set; }
 
-            internal CDNAuthTokenCallback( CMsgClientGetCDNAuthTokenResponse msg )
+            internal CDNAuthTokenCallback( JobID jobID, CMsgClientGetCDNAuthTokenResponse msg )
             {
+                JobID = jobID;
+
                 Result = (EResult)msg.eresult;
                 Token = msg.token;
                 Expiration = Utils.DateTimeFromUnixTime(msg.expiration_time);

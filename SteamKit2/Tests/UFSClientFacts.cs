@@ -16,12 +16,11 @@ namespace Tests
 
 			var callback = client.GetCallback(freeLast: true);
 			Assert.NotNull( callback );
-			Assert.IsType<SteamClient.JobCallback<UFSClient.LoggedOnCallback>>( callback );
+			Assert.IsType<UFSClient.LoggedOnCallback>( callback );
 
-			var jc = (SteamClient.JobCallback<UFSClient.LoggedOnCallback>)callback;
+			var jc = (UFSClient.LoggedOnCallback)callback;
 			Assert.Equal( logonJobID, jc.JobID );
-			Assert.NotNull( jc.Callback );
-			Assert.Equal( EResult.NoConnection, jc.Callback.Result );
+			Assert.Equal( EResult.NoConnection, jc.Result );
 		}
 	}
 }

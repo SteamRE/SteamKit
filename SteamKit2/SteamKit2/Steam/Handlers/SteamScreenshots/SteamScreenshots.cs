@@ -87,10 +87,10 @@ namespace SteamKit2
 
         /// <summary>
         /// Adds a screenshot to the user's screenshot library. The screenshot image and thumbnail must already exist on the UFS.
-        /// Results are returned in a <see cref="ScreenshotAddedCallback"/> from a <see cref="SteamClient.JobCallback&lt;T&gt;"/>.
+        /// Results are returned in a <see cref="ScreenshotAddedCallback"/>.
         /// </summary>
         /// <param name="details">The details of the screenshot.</param>
-        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="SteamClient.JobCallback&lt;T&gt;"/>.</returns>
+        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="ScreenshotAddedCallback"/>.</returns>
         public JobID AddScreenshot( ScreenshotDetails details )
         {
             var msg = new ClientMsgProtobuf<CMsgClientUCMAddScreenshot>( EMsg.ClientUCMAddScreenshot );

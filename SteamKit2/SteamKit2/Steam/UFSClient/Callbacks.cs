@@ -62,8 +62,10 @@ namespace SteamKit2
             }
 
 
-            internal LoggedOnCallback( EResult result )
+            internal LoggedOnCallback( JobID jobID, EResult result )
             {
+                JobID = jobID;
+
                 Result = result;
             }
         }

@@ -53,10 +53,10 @@ namespace SteamKit2
 
         /// <summary>
         /// Requests a list of servers from the Steam game master server.
-        /// Results are returned in a <see cref="QueryCallback"/> from a <see cref="SteamClient.JobCallback&lt;T&gt;"/>.
+        /// Results are returned in a <see cref="QueryCallback"/>.
         /// </summary>
         /// <param name="details">The details for the request.</param>
-        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="SteamClient.JobCallback&lt;T&gt;"/>.</returns>
+        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="QueryCallback"/>.</returns>
         public JobID ServerQuery( QueryDetails details )
         {
             var query = new ClientMsgProtobuf<CMsgClientGMSServerQuery>( EMsg.ClientGMSServerQuery );

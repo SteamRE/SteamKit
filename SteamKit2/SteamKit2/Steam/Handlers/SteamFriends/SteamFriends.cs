@@ -464,7 +464,7 @@ namespace SteamKit2
         /// </summary>
         /// <param name="steamId">The SteamID of the friend to ignore or unignore.</param>
         /// <param name="setIgnore">if set to <c>true</c>, the friend will be ignored; otherwise, they will be unignored.</param>
-        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="SteamClient.JobCallback&lt;T&gt;"/>.</returns>
+        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="IgnoreFriendCallback"/>.</returns>
         public JobID IgnoreFriend( SteamID steamId, bool setIgnore = true )
         {
             var ignore = new ClientMsg<MsgClientSetIgnoreFriend>();
@@ -485,7 +485,7 @@ namespace SteamKit2
         /// Results are returned in a <see cref="ProfileInfoCallback"/>.
         /// </summary>
         /// <param name="steamId">The SteamID of the friend to request the details of.</param>
-        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="SteamClient.JobCallback&lt;T&gt;"/>.</returns>
+        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="ProfileInfoCallback"/>.</returns>
         public JobID RequestProfileInfo( SteamID steamId )
         {
             var request = new ClientMsgProtobuf<CMsgClientFriendProfileInfo>( EMsg.ClientFriendProfileInfo );
