@@ -35,23 +35,12 @@ namespace SteamKit2
             /// </summary>
             public IPacketGCMsg Message { get; private set; }
 
-            /// <summary>
-            /// Gets the raw message.
-            /// </summary>
-            [Obsolete( "This property is obsolete and the Message property should be used instead." )]
-            public byte[] Payload { get; private set; }
-
 
             internal MessageCallback( CMsgGCClient gcMsg )
             {
                 this.eMsg = gcMsg.msgtype;
                 this.AppID = gcMsg.appid;
-
-#pragma warning disable 0618 // we are knowingly using this obsolete property
-                this.Payload = gcMsg.payload;
-#pragma warning restore 0618
-
-                this.Message = GetPacketGCMsg( gcMsg.msgtype, gcMsg.payload );
+				this.Message = GetPacketGCMsg( gcMsg.msgtype, gcMsg.payload );
             }
 
 

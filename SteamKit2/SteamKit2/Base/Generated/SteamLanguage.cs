@@ -30,6 +30,7 @@ namespace SteamKit2
 		ClientSessionStart = 135,
 		ClientSessionEnd = 136,
 		ClientSessionUpdateAuthTicket = 137,
+		[Obsolete]
 		StatsDeprecated = 138,
 		Ping = 139,
 		PingResponse = 140,
@@ -131,8 +132,6 @@ namespace SteamKit2
 		AMCompletePurchase = 521,
 		AMCancelPurchase = 522,
 		AMNewChallenge = 523,
-		[Obsolete( "renamed to AMFixPendingPurchaseResponse" )]
-		AMFixPendingPurchase = 526,
 		AMFixPendingPurchaseResponse = 526,
 		AMIsUserBanned = 527,
 		AMRegisterKey = 528,
@@ -229,7 +228,9 @@ namespace SteamKit2
 		[Obsolete]
 		CSUserContentRequest = 652,
 		BaseClient = 700,
+		[Obsolete]
 		ClientLogOn_Deprecated = 701,
+		[Obsolete]
 		ClientAnonLogOn_Deprecated = 702,
 		ClientHeartBeat = 703,
 		ClientVACResponse = 704,
@@ -284,6 +285,7 @@ namespace SteamKit2
 		ClientLogOnResponse = 751,
 		ClientVACChallenge = 753,
 		ClientSetHeartbeatRate = 755,
+		[Obsolete]
 		ClientNotLoggedOnDeprecated = 756,
 		ClientLoggedOff = 757,
 		GSApprove = 758,
@@ -471,8 +473,6 @@ namespace SteamKit2
 		BaseBS = 1400,
 		BSPurchaseStart = 1401,
 		BSPurchaseResponse = 1402,
-		[Obsolete( "renamed to BSSettleNOVA" )]
-		BSSettleStart = 1404,
 		BSSettleNOVA = 1404,
 		BSSettleComplete = 1406,
 		BSBannedRequest = 1407,
@@ -493,11 +493,7 @@ namespace SteamKit2
 		BSQueryGCBankXferTxn = 1423,
 		BSQueryGCBankXferTxnResponse = 1424,
 		BSCommitGCTxn = 1425,
-		[Obsolete( "renamed to BSQueryTransactionStatus" )]
-		BSQueryGCOrderStatus = 1426,
 		BSQueryTransactionStatus = 1426,
-		[Obsolete( "renamed to BSQueryTransactionStatusResponse" )]
-		BSQueryGCOrderStatusResponse = 1427,
 		BSQueryTransactionStatusResponse = 1427,
 		BSQueryCBOrderStatus = 1428,
 		BSQueryCBOrderStatusResponse = 1429,
@@ -508,11 +504,7 @@ namespace SteamKit2
 		BSQueryTxnExtendedInfoResponse = 1434,
 		BSUpdateConversionRates = 1435,
 		BSProcessUSBankReports = 1436,
-		[Obsolete( "renamed to BSPurchaseRunFraudChecks" )]
-		BSPurchaseMicroTxn = 1437,
 		BSPurchaseRunFraudChecks = 1437,
-		[Obsolete( "renamed to BSPurchaseRunFraudChecksResponse" )]
-		BSPurchaseMicroTxnResponse = 1438,
 		BSPurchaseRunFraudChecksResponse = 1438,
 		BSStartShippingJobs = 1439,
 		BSQueryBankInformation = 1440,
@@ -593,8 +585,6 @@ namespace SteamKit2
 		DPUniquePlayersStat = 1603,
 		DPVacInfractionStats = 1605,
 		DPVacBanStats = 1606,
-		[Obsolete( "renamed to DPBlockingStats" )]
-		DPCoplayStats = 1607,
 		DPBlockingStats = 1607,
 		DPNatTraversalStats = 1608,
 		DPSteamUsageEvent = 1609,
@@ -619,8 +609,7 @@ namespace SteamKit2
 		BaseCM = 1700,
 		CMSetAllowState = 1701,
 		CMSpewAllowState = 1702,
-		[Obsolete( "deprecated and renamed to CMAppInfoResponseDeprecated" )]
-		CMAppInfoResponse = 1703,
+		[Obsolete]
 		CMAppInfoResponseDeprecated = 1703,
 		BaseDSS = 1800,
 		DSSNewFile = 1801,
@@ -712,11 +701,7 @@ namespace SteamKit2
 		CCSNotifyCommentCount = 3158,
 		CCSGetCommentsForNews = 3159,
 		CCSGetCommentsForNewsResponse = 3160,
-		[Obsolete( "renamed to CCSDeleteAllCommentsByAuthor" )]
-		CCSDeleteAllComments = 3161,
 		CCSDeleteAllCommentsByAuthor = 3161,
-		[Obsolete( "renamed to CCSDeleteAllCommentsByAuthorResponse" )]
-		CCSDeleteAllCommentsResponse = 3162,
 		CCSDeleteAllCommentsByAuthorResponse = 3162,
 		BaseLBSRange = 3200,
 		LBSSetScore = 3201,
@@ -898,8 +883,6 @@ namespace SteamKit2
 		AMGetLobbyListResponse = 4137,
 		AMGetLobbyMetadata = 4138,
 		AMGetLobbyMetadataResponse = 4139,
-		[Obsolete( "renamed to CommunityAddFriendNews" )]
-		AMAddFriendNews = 4140,
 		CommunityAddFriendNews = 4140,
 		AMAddClanNews = 4141,
 		AMWriteNews = 4142,
@@ -915,8 +898,6 @@ namespace SteamKit2
 		AMSendQueuedEmails = 4152,
 		AMSetLicenseFlags = 4153,
 		AMGetUserHistory = 4154,
-		[Obsolete( "renamed to CommunityDeleteUserNews" )]
-		AMDeleteUserNews = 4155,
 		CommunityDeleteUserNews = 4155,
 		AMAllowUserFilesRequest = 4156,
 		AMAllowUserFilesResponse = 4157,
@@ -929,8 +910,6 @@ namespace SteamKit2
 		AMGetFriendsLobbies = 4165,
 		AMGetFriendsLobbiesResponse = 4166,
 		AMGetUserFriendNewsResponse = 4172,
-		[Obsolete( "renamed to CommunityGetUserFriendNews" )]
-		AMGetUserFriendNews = 4173,
 		CommunityGetUserFriendNews = 4173,
 		AMGetUserClansNewsResponse = 4174,
 		AMGetUserClansNews = 4175,
@@ -1080,19 +1059,13 @@ namespace SteamKit2
 		AMGetAccountCommunityBanInfoResponse = 4339,
 		AMGameServerAccountChangePassword = 4340,
 		AMGameServerAccountDeleteAccount = 4341,
-		[Obsolete( "renamed to AMRenewAgreement" )]
-		AMRenewLicenseResponse = 4342,
 		AMRenewAgreement = 4342,
 		AMSendEmail = 4343,
 		AMXsollaPayment = 4344,
 		AMXsollaPaymentResponse = 4345,
 		AMAcctAllowedToPurchase = 4346,
 		AMAcctAllowedToPurchaseResponse = 4347,
-		[Obsolete( "renamed to AMSwapKioskDeposit" )]
-		AMSwapXsollaDeposit = 4348,
 		AMSwapKioskDeposit = 4348,
-		[Obsolete( "renamed to AMSwapKioskDepositResponse" )]
-		AMSwapXsollaDepositResponse = 4349,
 		AMSwapKioskDepositResponse = 4349,
 		AMSetUserGiftUnowned = 4350,
 		AMSetUserGiftUnownedResponse = 4351,
@@ -1218,6 +1191,7 @@ namespace SteamKit2
 		ClientMarketingMessageUpdate = 5420,
 		ClientChatDeclined = 5426,
 		ClientFriendMsgIncoming = 5427,
+		[Obsolete]
 		ClientAuthList_Deprecated = 5428,
 		ClientTicketAuthComplete = 5429,
 		ClientIsLimitedAccount = 5430,
@@ -1459,10 +1433,6 @@ namespace SteamKit2
 		GameServerOutOfDate = 6407,
 		ClientAuthorizeLocalDeviceRequest = 6501,
 		ClientAuthorizeLocalDevice = 6502,
-		[Obsolete( "renamed to ClientDeauthorizeDeviceRequest" )]
-		ClientDeauthorizeLocalDeviceRequest = 6503,
-		[Obsolete( "renamed to ClientDeauthorizeDevice" )]
-		ClientDeauthorizeLocalDevice = 6504,
 		ClientDeauthorizeDeviceRequest = 6503,
 		ClientDeauthorizeDevice = 6504,
 		ClientUseLocalDeviceAuthorizations = 6505,
@@ -1721,23 +1691,11 @@ namespace SteamKit2
 		LogsinkBase = 8800,
 		LogsinkWriteReport = 8800,
 		PICSBase = 8900,
-		[Obsolete( "renamed to ClientPICSChangesSinceRequest" )]
-		PICSChangesSinceRequest = 8901,
 		ClientPICSChangesSinceRequest = 8901,
-		[Obsolete( "renamed to ClientPICSChangesSinceResponse" )]
-		PICSChangesSinceResponse = 8902,
 		ClientPICSChangesSinceResponse = 8902,
-		[Obsolete( "renamed to ClientPICSProductInfoRequest" )]
-		PICSProductInfoRequest = 8903,
 		ClientPICSProductInfoRequest = 8903,
-		[Obsolete( "renamed to ClientPICSProductInfoResponse" )]
-		PICSProductInfoResponse = 8904,
 		ClientPICSProductInfoResponse = 8904,
-		[Obsolete( "renamed to ClientPICSAccessTokenRequest" )]
-		PICSAccessTokenRequest = 8905,
 		ClientPICSAccessTokenRequest = 8905,
-		[Obsolete( "renamed to ClientPICSAccessTokenResponse" )]
-		PICSAccessTokenResponse = 8906,
 		ClientPICSAccessTokenResponse = 8906,
 		WorkerProcess = 9000,
 		WorkerProcessPingRequest = 9000,
@@ -1795,8 +1753,6 @@ namespace SteamKit2
 		ClientUnlockStreaming = 9507,
 		ClientUnlockStreamingResponse = 9508,
 		ClientPlayingSessionState = 9600,
-		[Obsolete( "renamed to ClientKickPlayingSession" )]
-		ClientPlayingSessionKick = 9601,
 		ClientKickPlayingSession = 9601,
 	}
 	public enum EResult

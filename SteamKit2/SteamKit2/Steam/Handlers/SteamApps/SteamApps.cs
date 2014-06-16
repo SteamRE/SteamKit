@@ -383,35 +383,6 @@ namespace SteamKit2
             return request.SourceJobID;
         }
 
-        /// <summary>
-        /// Send a guest pass or gift to a target user, defined by their account id or email
-        /// </summary>
-        /// <param name="giftId">64-bit GID of the gift</param>
-        /// <param name="accountId">Account ID of the recipient</param>
-        /// <param name="email">Optional email of the recipient</param>
-        [Obsolete( "Support for sending gift passes through Steam has likely been removed, and SteamKit will be dropping support for this in a future version" )]
-        public void SendGuestPass( ulong giftId, uint accountId, string email = null )
-        {
-            var sendGift = new ClientMsg<MsgClientSendGuestPass>();
-
-            sendGift.Body.GiftId = giftId;
-
-            if ( string.IsNullOrEmpty( email ) )
-            {
-                sendGift.Body.GiftType = 1;
-                sendGift.Body.AccountId = accountId;
-                sendGift.WriteNullTermString( "" );
-            }
-            else
-            {
-                sendGift.Body.GiftType = 0;
-                sendGift.Body.AccountId = 0;
-                sendGift.WriteNullTermString( email );
-            }
-
-            this.Client.Send( sendGift );
-        }
-
 
         /// <summary>
         /// Request product information for an app or package
@@ -488,12 +459,6 @@ namespace SteamKit2
                 case EMsg.ClientUpdateGuestPassesList:
                     HandleGuestPassList( packetMsg );
                     break;
-
-#pragma warning disable 0612
-                case EMsg.ClientSendGuestPassResponse:
-                    HandleSendGuestPassResponse( packetMsg );
-                    break;
-#pragma warning restore 0612
 
                 case EMsg.ClientGetCDNAuthTokenResponse:
                     HandleCDNAuthTokenResponse( packetMsg );
@@ -585,14 +550,6 @@ namespace SteamKit2
             var guestPasses = new ClientMsg<MsgClientUpdateGuestPassesList>( packetMsg );
 
             var callback = new GuestPassListCallback( guestPasses.Body, guestPasses.Payload );
-            this.Client.PostCallback( callback );
-        }
-
-        void HandleSendGuestPassResponse( IPacketMsg packetMsg )
-        {
-            var response = new ClientMsg<MsgClientSendGuestPassResponse>( packetMsg );
-
-            var callback = new SendGuestPassCallback( response.Body );
             this.Client.PostCallback( callback );
         }
 

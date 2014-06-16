@@ -760,12 +760,6 @@ namespace SteamKit2
             /// </summary>
             public string Summary { get; private set; }
 
-            /// <summary>
-            /// Gets the recent playtime.
-            /// </summary>
-            [Obsolete( "This property is obsolete as this value is no longer returned by Steam." )]
-            public TimeSpan RecentPlaytime { get; private set; }
-
 
             internal ProfileInfoCallback( JobID jobID, CMsgClientFriendProfileInfoResponse response )
             {
@@ -786,10 +780,6 @@ namespace SteamKit2
                 Headline = response.headline;
 
                 Summary = response.summary;
-
-#pragma warning disable 0618 // Knowingly set the value of a deprecated field
-                RecentPlaytime = TimeSpan.Zero;
-#pragma warning restore 0618
             }
         }
     }

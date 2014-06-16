@@ -20,19 +20,6 @@ namespace SteamKit2
 
 
         /// <summary>
-        /// Requests details for a given published workshop file.
-        /// Results are returned in a <see cref="PublishedFileDetailsCallback"/>.
-        /// </summary>
-        /// <param name="publishedFileId">The file ID being requested.</param>
-        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="PublishedFileDetailsCallback"/>.</returns>
-        [Obsolete]
-        public JobID RequestPublishedFileDetails( PublishedFileID publishedFileId )
-        {
-            return JobID.Invalid;
-        }
-
-
-        /// <summary>
         /// Represents the details of an enumeration request used for the local user's files.
         /// </summary>
         public sealed class EnumerationUserDetails
