@@ -447,8 +447,8 @@ namespace SteamKit2
         /// </param>
         /// <returns>A <see cref="DepotChunk"/> instance that contains the data for the given chunk.</returns>
         /// <exception cref="System.ArgumentNullException">chunk's <see cref="DepotManifest.ChunkData.ChunkID"/> was null.</exception>
+        public DepotChunk DownloadDepotChunk( uint depotId, DepotManifest.ChunkData chunk)
 #pragma warning restore 0419
-        public DepotChunk DownloadDepotChunk( uint depotId, DepotManifest.ChunkData chunk )
         {
             if ( chunk.ChunkID == null )
                 throw new ArgumentNullException( "chunk.ChunkID" );

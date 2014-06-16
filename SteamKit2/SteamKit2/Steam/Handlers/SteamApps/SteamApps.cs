@@ -24,8 +24,8 @@ namespace SteamKit2
         /// <summary>
         /// Represents app request details when calling <see cref="SteamApps.GetAppInfo"/>.
         /// </summary>
-#pragma warning restore 0419
         public sealed class AppDetails
+#pragma warning restore 0419
         {
             /// <summary>
             /// Gets or sets the AppID for this request.
@@ -62,8 +62,8 @@ namespace SteamKit2
         /// <summary>
         /// Represents a PICS request used for <see cref="SteamApps.PICSGetProductInfo"/>
         /// </summary>
-#pragma warning restore 0419
         public sealed class PICSRequest
+#pragma warning restore 0419
         {
             /// <summary>
             /// Gets or sets the ID of the app or package being requested
@@ -109,7 +109,6 @@ namespace SteamKit2
                 Public = only_public;
             }
         }
-#pragma warning restore 0419
 
 
         internal SteamApps()

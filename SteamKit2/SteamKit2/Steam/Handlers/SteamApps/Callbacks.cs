@@ -175,6 +175,7 @@ namespace SteamKit2
         /// This callback is received in response to calling <see cref="SteamApps.GetAppInfo"/>.
         /// </summary>
         public sealed class AppInfoCallback : CallbackMsg
+#pragma warning restore 0419
         {
             /// <summary>
             /// Represents a single app in the info response.
@@ -370,8 +371,6 @@ namespace SteamKit2
                 Packages = new ReadOnlyCollection<Package>( packages );
             }
         }
-
-#pragma warning restore 0419
 
         /// <summary>
         /// This callback is received in response to calling <see cref="SteamApps.GetAppChanges"/>.
