@@ -148,7 +148,6 @@ namespace SteamKit2
 
                 var serviceName = splitByDot[0];
                 var methodName = splitByHash[0];
-                var version = int.Parse( splitByHash[1] );
 
                 var serviceInterfaceName = "SteamKit2.Unified.Internal.I" + serviceName;
                 var serviceInterfaceType = Type.GetType( serviceInterfaceName );
