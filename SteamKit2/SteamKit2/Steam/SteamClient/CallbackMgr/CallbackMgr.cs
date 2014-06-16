@@ -46,23 +46,14 @@ namespace SteamKit2
 
         internal override Type CallbackType { get { return typeof( TCall ); } }
 
-
-        internal Callback()
-        {
-            JobID = JobID.Invalid;
-        }
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Callback&lt;TCall&gt;"/> class.
         /// </summary>
         /// <param name="func">The function to call when a callback of type TCall arrives.</param>
         /// <param name="mgr">The <see cref="CallbackManager"/> that is responsible for the routing of callbacks to this handler, or null if the callback will be registered manually.</param>
         public Callback(Action<TCall> func, CallbackManager mgr = null)
-            : this ()
+            : this ( func, mgr, JobID.Invalid )
         {
-            this.OnRun = func;
-
-            AttachTo(mgr);
         }
 
         /// <summary>
@@ -72,9 +63,11 @@ namespace SteamKit2
         /// <param name="mgr">The <see cref="CallbackManager"/> that is responsible for the routing of callbacks to this handler, or null if the callback will be registered manually.</param>
         /// <param name="jobID">The <see cref="JobID"/>to filter matching callbacks by. Specify <see cref="P:JobID.Invalid"/> to recieve all callbacks of type TCall.</param>
         public Callback(Action<TCall> func, CallbackManager mgr, JobID jobID)
-            : this ( func, mgr )
         {
-            JobID = jobID;
+            this.JobID = jobID;
+            this.OnRun = func;
+
+            AttachTo(mgr);
         }
 
         /// <summary>
