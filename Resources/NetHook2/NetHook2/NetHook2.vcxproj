@@ -98,6 +98,7 @@
     <ClCompile Include="nethook.cpp" />
     <ClCompile Include="sigscan.cpp" />
     <ClCompile Include="steammessages_base.pb.cc" />
+    <ClCompile Include="string.cpp" />
     <ClCompile Include="zip.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -114,6 +115,7 @@
     <ClInclude Include="steam\emsg.h" />
     <ClInclude Include="steam\steamtypes.h" />
     <ClInclude Include="steam\udppkt.h" />
+    <ClInclude Include="nh2_string.h" />
     <ClInclude Include="zip.h" />
   </ItemGroup>
   <ItemGroup>

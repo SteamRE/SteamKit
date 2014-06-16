@@ -1,8 +1,9 @@
-
+#define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 
 #include "logger.h"
 #include "crypto.h"
+#include "nh2_string.h"
 
 #include "steammessages_base.pb.h"
 
@@ -14,14 +15,8 @@ BOOL IsRunDll32()
 {
 	char szMainModulePath[MAX_PATH];
 	DWORD dwMainModulePathLength = GetModuleFileNameA(NULL, szMainModulePath, sizeof(szMainModulePath));
-	const char * szEndsWithKey = "\\rundll32.exe";
-	unsigned int szEndsWithKeyLength = strlen(szEndsWithKey);
-	if (dwMainModulePathLength > szEndsWithKeyLength && _stricmp(szMainModulePath + dwMainModulePathLength - szEndsWithKeyLength, szEndsWithKey) == 0)
-	{
-		return TRUE;
-	}
 
-	return FALSE;
+	return stringCaseInsensitiveEndsWith(szMainModulePath, "\\rundll32.exe");
 }
 
 BOOL WINAPI DllMain( HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved )

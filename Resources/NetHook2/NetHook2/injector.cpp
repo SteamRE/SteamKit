@@ -3,6 +3,8 @@
 #include <Psapi.h>
 #include <stdlib.h>
 
+#include "nh2_string.h"
+
 EXTERN_C IMAGE_DOS_HEADER __ImageBase;
 
 int FindSteamProcessID();
@@ -150,25 +152,22 @@ BOOL FindProcessByName(const char * szProcessName, int * piFirstProcessID, int *
 		if (hProcess != NULL)
 		{
 			char szProcessPath[MAX_PATH];
-			DWORD dwPathLength = GetModuleFileNameEx(hProcess, 0, szProcessPath, sizeof(szProcessPath));
+			GetModuleFileNameEx(hProcess, 0, szProcessPath, sizeof(szProcessPath));
 
 			char szEndsWithKey[MAX_PATH];
 			ZeroMemory(szEndsWithKey, sizeof(szEndsWithKey));
+
 			szEndsWithKey[0] = '\\';
 			strncpy_s(szEndsWithKey + 1, sizeof(szEndsWithKey) - 1, szProcessName, strlen(szProcessName));
-			unsigned int cubEndsWithKey = strlen(szEndsWithKey);
 
-			if (dwPathLength != 0 && dwPathLength > cubEndsWithKey)
+			if (stringCaseInsensitiveEndsWith(szProcessPath, szEndsWithKey))
 			{
-				if (_stricmp(szProcessPath + dwPathLength - cubEndsWithKey, szEndsWithKey) == 0)
+				if (*piFirstProcessID <= 0)
 				{
-					if (*piFirstProcessID <= 0)
-					{
-						*piFirstProcessID = pid;
-					}
-
-					iNumProcessesFound++;
+					*piFirstProcessID = pid;
 				}
+
+				iNumProcessesFound++;
 			}
 
 			CloseHandle(hProcess);
@@ -197,22 +196,18 @@ BOOL ProcessHasModuleLoaded(const int iProcessID, const char * szModuleName, boo
 
 				if (GetModuleFileNameExA(hProcess, hModules[i], szModulePath, sizeof(szModulePath)))
 				{
-					const char * szSearchKeyStart;
+					bool bMatches;
+
 					if (bPartialMatchFromEnd)
 					{
-						const char * pEndOfModulePath = szModulePath + strlen(szModulePath);
-						szSearchKeyStart = pEndOfModulePath - strlen(szModuleName);
-						if (szSearchKeyStart > pEndOfModulePath || szSearchKeyStart < szModulePath)
-						{
-							continue;
-						}
+						bMatches = stringCaseInsensitiveEndsWith(szModulePath, szModuleName);
 					}
 					else
 					{
-						szSearchKeyStart = szModulePath;
+						bMatches = (_stricmp(szModulePath, szModuleName) == 0);
 					}
 
-					if (_stricmp(szSearchKeyStart, szModuleName) == 0)
+					if (bMatches)
 					{
 						CloseHandle(hProcess);
 						return true;
