@@ -41,6 +41,28 @@ namespace Tests
         }
 
         [Fact]
+        public void PostedCallbackTriggersAction_CatchAll()
+        {
+            var callback = new CallbackForTest { UniqueID = Guid.NewGuid() };
+
+            var didCall = false;
+            Action<CallbackMsg> action = delegate(CallbackMsg cb)
+            {
+                Assert.IsType<CallbackForTest>(cb);
+                var cft = (CallbackForTest)cb;
+                Assert.Equal(callback.UniqueID, cft.UniqueID);
+                didCall = true;
+            };
+
+            using (new Callback<CallbackMsg>(action, mgr))
+            {
+                PostAndRunCallback(callback);
+            }
+
+            Assert.True(didCall);
+        }
+
+        [Fact]
         public void PostedCallbackTriggersActionForExplicitJobIDInvalid()
         {
             var jobID = new JobID(123456);

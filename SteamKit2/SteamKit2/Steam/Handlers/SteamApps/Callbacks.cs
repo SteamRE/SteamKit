@@ -269,10 +269,15 @@ namespace SteamKit2
             }
         }
 
+        // Ambiguous reference in cref attribute: 'SteamApps.GetPackageInfo'. Assuming 'SteamKit2.SteamApps.GetPackageInfo(uint, bool)',
+        // but could have also matched other overloads including 'SteamKit2.SteamApps.GetPackageInfo(System.Collections.Generic.IEnumerable<uint>, bool)'.
+#pragma warning disable 0419
+
         /// <summary>
         /// This callback is received in response to calling <see cref="SteamApps.GetPackageInfo"/>.
         /// </summary>
         public sealed class PackageInfoCallback : CallbackMsg
+#pragma warning restore 0419
         {
             /// <summary>
             /// Represents a single package in this response.

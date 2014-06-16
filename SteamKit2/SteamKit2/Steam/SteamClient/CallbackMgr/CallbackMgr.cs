@@ -28,7 +28,7 @@ namespace SteamKit2
     /// </summary>
     /// <typeparam name="TCall">The callback type this instance will handle.</typeparam>
     public class Callback<TCall> : Internal.CallbackBase, IDisposable
-        where TCall : CallbackMsg
+        where TCall : class, ICallbackMsg
     {
         CallbackManager mgr;
 
@@ -217,7 +217,7 @@ namespace SteamKit2
             registeredCallbacks.Remove( call );
         }
 
-        void Handle( CallbackMsg call )
+        void Handle( ICallbackMsg call )
         {
             registeredCallbacks
                 .FindAll( callback => callback.CallbackType.IsAssignableFrom( call.GetType() ) ) // find handlers interested in this callback

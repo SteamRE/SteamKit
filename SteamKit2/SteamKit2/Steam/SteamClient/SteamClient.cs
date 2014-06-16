@@ -26,7 +26,7 @@ namespace SteamKit2
         DateTime processStartTime;
 
         object callbackLock = new object();
-        Queue<CallbackMsg> callbackQueue;
+        Queue<ICallbackMsg> callbackQueue;
 
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace SteamKit2
         public SteamClient( ProtocolType type = ProtocolType.Tcp )
             : base( type )
         {
-            callbackQueue = new Queue<CallbackMsg>();
+            callbackQueue = new Queue<ICallbackMsg>();
 
             this.handlers = new Dictionary<Type, ClientMsgHandler>();
 
@@ -122,7 +122,7 @@ namespace SteamKit2
         /// This function does not dequeue the callback, you must call FreeLastCallback after processing it.
         /// </summary>
         /// <returns>The next callback in the queue, or null if no callback is waiting.</returns>
-        public CallbackMsg GetCallback()
+        public ICallbackMsg GetCallback()
         {
             return GetCallback( false );
         }
@@ -131,7 +131,7 @@ namespace SteamKit2
         /// </summary>
         /// <param name="freeLast">if set to <c>true</c> this function also frees the last callback if one existed.</param>
         /// <returns>The next callback in the queue, or null if no callback is waiting.</returns>
-        public CallbackMsg GetCallback( bool freeLast )
+        public ICallbackMsg GetCallback( bool freeLast )
         {
             lock ( callbackLock )
             {
@@ -147,7 +147,7 @@ namespace SteamKit2
         /// This function does not dequeue the callback, you must call FreeLastCallback after processing it.
         /// </summary>
         /// <returns>The callback object from the queue.</returns>
-        public CallbackMsg WaitForCallback()
+        public ICallbackMsg WaitForCallback()
         {
             return WaitForCallback( false );
         }
@@ -157,7 +157,7 @@ namespace SteamKit2
         /// </summary>
         /// <param name="timeout">The length of time to block.</param>
         /// <returns>A callback object from the queue if a callback has been posted, or null if the timeout has elapsed.</returns>
-        public CallbackMsg WaitForCallback( TimeSpan timeout )
+        public ICallbackMsg WaitForCallback( TimeSpan timeout )
         {
             lock ( callbackLock )
             {
@@ -175,7 +175,7 @@ namespace SteamKit2
         /// </summary>
         /// <param name="freeLast">if set to <c>true</c> this function also frees the last callback.</param>
         /// <returns>The callback object from the queue.</returns>
-        public CallbackMsg WaitForCallback( bool freeLast )
+        public ICallbackMsg WaitForCallback( bool freeLast )
         {
             lock ( callbackLock )
             {
@@ -191,7 +191,7 @@ namespace SteamKit2
         /// <param name="freeLast">if set to <c>true</c> this function also frees the last callback.</param>
         /// <param name="timeout">The length of time to block.</param>
         /// <returns>A callback object from the queue if a callback has been posted, or null if the timeout has elapsed.</returns>
-        public CallbackMsg WaitForCallback( bool freeLast, TimeSpan timeout )
+        public ICallbackMsg WaitForCallback( bool freeLast, TimeSpan timeout )
         {
             lock ( callbackLock )
             {
