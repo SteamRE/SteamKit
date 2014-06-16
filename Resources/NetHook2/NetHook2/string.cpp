@@ -2,15 +2,15 @@
 
 bool stringCaseInsensitiveEndsWith(const char * szHaystack, const char * szNeedle)
 {
-	int uHaystackLen = strlen(szHaystack);
-	int uNeedleLen = strlen(szNeedle);
+	int iHaystackLen = strlen(szHaystack);
+	int iNeedleLen = strlen(szNeedle);
 
-	if (uHaystackLen < uNeedleLen)
+	if (iHaystackLen < iNeedleLen)
 	{
 		return false;
 	}
 
-	const char * szHaystackFromNeedleStartPosition = szHaystack + uHaystackLen - uNeedleLen;
+	const char * szHaystackFromNeedleStartPosition = szHaystack + iHaystackLen - iNeedleLen;
 
 	return _stricmp(szHaystackFromNeedleStartPosition, szNeedle) == 0;
 }
