@@ -28,9 +28,16 @@ namespace SteamKit2
     /// </summary>
     /// <typeparam name="TCall">The callback type this instance will handle.</typeparam>
     public class Callback<TCall> : Internal.CallbackBase, IDisposable
-        where TCall : CallbackMsg
+        where TCall : class, ICallbackMsg
     {
         CallbackManager mgr;
+
+        /// <summary>
+        /// Gets or sets the job ID this callback will handle.
+        /// Setting this field to the maximum value of a ulong will unbind this handler,
+        /// allowing all callbacks of type TCall to be handled.
+        /// </summary>
+        public JobID JobID { get; set; }
 
         /// <summary>
         /// Gets or sets the function to call when a callback of type TCall arrives.
@@ -42,6 +49,7 @@ namespace SteamKit2
 
         internal Callback()
         {
+            JobID = JobID.Invalid;
         }
 
         /// <summary>
@@ -49,11 +57,24 @@ namespace SteamKit2
         /// </summary>
         /// <param name="func">The function to call when a callback of type TCall arrives.</param>
         /// <param name="mgr">The <see cref="CallbackManager"/> that is responsible for the routing of callbacks to this handler, or null if the callback will be registered manually.</param>
-        public Callback( Action<TCall> func, CallbackManager mgr = null )
+        public Callback(Action<TCall> func, CallbackManager mgr = null)
+            : this ()
         {
             this.OnRun = func;
 
-            AttachTo( mgr );
+            AttachTo(mgr);
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Callback&lt;TCall&gt;"/> class.
+        /// </summary>
+        /// <param name="func">The function to call when a callback of type TCall arrives.</param>
+        /// <param name="mgr">The <see cref="CallbackManager"/> that is responsible for the routing of callbacks to this handler, or null if the callback will be registered manually.</param>
+        /// <param name="jobID">The <see cref="JobID"/>to filter matching callbacks by. Specify <see cref="P:JobID.Invalid"/> to recieve all callbacks of type TCall.</param>
+        public Callback(Action<TCall> func, CallbackManager mgr, JobID jobID)
+            : this ( func, mgr )
+        {
+            JobID = jobID;
         }
 
         /// <summary>
@@ -94,78 +115,19 @@ namespace SteamKit2
 
         internal override void Run( object callback )
         {
-            if ( OnRun != null )
-                OnRun( callback as TCall );
-        }
-    }
-
-    /// <summary>
-    /// This utility class is used for binding job callbacks to functions.
-    /// </summary>
-    /// <typeparam name="TCall">The callback type this instance will handle.</typeparam>
-    public sealed class JobCallback<TCall> : Callback<SteamClient.JobCallback<TCall>>
-        where TCall : CallbackMsg
-    {
-
-        /// <summary>
-        /// Gets or sets the job ID this callback will handle.
-        /// Setting this field to the maximum value of a ulong will unbind this handler,
-        /// allowing all callbacks of type TCall to be handled.
-        /// </summary>
-        public JobID JobID { get; set; }
-
-        /// <summary>
-        /// Gets or sets the function to call when a job based callback of type TCall arrives.
-        /// </summary>
-        public new Action<TCall, JobID> OnRun { get; set; }
-
-        /// <summary>
-        /// Gets a value indicating whether this <see cref="JobCallback&lt;TCall&gt;"/> is completed.
-        /// Completion is defined as the callback for the given job id being received and handled.
-        /// </summary>
-        /// <value>
-        ///   <c>true</c> if completed; otherwise, <c>false</c>.
-        /// </value>
-        public bool Completed { get; private set; }
-
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="JobCallback&lt;TCall&gt;"/> class.
-        /// </summary>
-        /// <param name="func">The function to call when a job based callback of type TCall arrives.</param>
-        /// <param name="mgr">The <see cref="CallbackManager"/> that is responsible for the routing of callbacks to this handler, or <c>null</c> if the callback will be manually registered.</param>
-        /// <param name="jobID">The Job ID this callback will handle, or <c>JobID.Invalid</c> to handle all job callbacks of type <c>TCall</c>.</param>
-        public JobCallback( Action<TCall, JobID> func, CallbackManager mgr, JobID jobID )
-        {
-            this.OnRun = func;
-            this.JobID = jobID;
-
-            AttachTo( mgr );
-
-            base.OnRun = HandleCallback;
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="JobCallback&lt;TCall&gt;"/> class.
-        /// </summary>
-        /// <param name="func">The function to call when a job based callback of type TCall arrives.</param>
-        /// <param name="mgr">The <see cref="CallbackManager"/> that is responsible for the routing of callbacks to this handler, or <c>null</c> if the callback will be manually registered.</param>
-        public JobCallback( Action<TCall, JobID> func, CallbackManager mgr = null )
-            : this( func, mgr, JobID.Invalid )
-        {
-        }
-
-
-        void HandleCallback( SteamClient.JobCallback<TCall> callback )
-        {
-            // handle the callback if it's our jobid, or if we haven't set one yet
-            if ( callback.JobID == JobID || JobID == JobID.Invalid )
+            var cb = callback as TCall;
+            if (cb != null && (cb.JobID == JobID || JobID == JobID.Invalid) && OnRun != null)
             {
-                if ( OnRun != null )
-                    OnRun( callback.Callback, callback.JobID );
-
-                Completed = true;
+                OnRun(cb);
             }
+        }
+
+        static Action<TCall, JobID> CreateJoblessAction(Action<TCall> func)
+        {
+            return delegate(TCall callback, JobID jobID)
+            {
+                func(callback);
+            };
         }
     }
 
@@ -255,7 +217,7 @@ namespace SteamKit2
             registeredCallbacks.Remove( call );
         }
 
-        void Handle( CallbackMsg call )
+        void Handle( ICallbackMsg call )
         {
             registeredCallbacks
                 .FindAll( callback => callback.CallbackType.IsAssignableFrom( call.GetType() ) ) // find handlers interested in this callback

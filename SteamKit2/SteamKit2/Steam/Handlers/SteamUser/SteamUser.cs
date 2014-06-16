@@ -104,7 +104,7 @@ namespace SteamKit2
 
             /// <summary>
             /// Gets or sets the target Job ID for the request.
-            /// This is provided in the <see cref="SteamClient.JobCallback&lt;T&gt;"/> for a <see cref="UpdateMachineAuthCallback"/>.
+            /// This is provided in the <see cref="Callback&lt;T&gt;"/> for a <see cref="UpdateMachineAuthCallback"/>.
             /// </summary>
             /// <value>The Job ID.</value>
             public JobID JobID { get; set; }
@@ -316,8 +316,9 @@ namespace SteamKit2
 
         /// <summary>
         /// Requests a new WebAPI authentication user nonce. This is used if initial loginkey authentication fails.
+        /// Results are returned in a <see cref="WebAPIUserNonceCallback"/>.
         /// </summary>
-        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="SteamClient.JobCallback&lt;T&gt;"/>.</returns>
+        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="WebAPIUserNonceCallback"/>.</returns>
         public JobID RequestWebAPIUserNonce()
         {
             var reqMsg = new ClientMsgProtobuf<CMsgClientRequestWebAPIAuthenticateUserNonce>( EMsg.ClientRequestWebAPIAuthenticateUserNonce );
@@ -398,8 +399,7 @@ namespace SteamKit2
         {
             var machineAuth = new ClientMsgProtobuf<CMsgClientUpdateMachineAuth>( packetMsg );
 
-            var innerCallback = new UpdateMachineAuthCallback( machineAuth.Body );
-            var callback = new SteamClient.JobCallback<UpdateMachineAuthCallback>( packetMsg.SourceJobID, innerCallback );
+            var callback = new UpdateMachineAuthCallback(packetMsg.SourceJobID, machineAuth.Body);
             Client.PostCallback( callback );
         }
         void HandleSessionToken( IPacketMsg packetMsg )
@@ -456,8 +456,7 @@ namespace SteamKit2
         {
             var userNonce = new ClientMsgProtobuf<CMsgClientRequestWebAPIAuthenticateUserNonceResponse>( packetMsg );
 
-            var innerCallback = new WebAPIUserNonceCallback( userNonce.Body );
-            var callback = new SteamClient.JobCallback<WebAPIUserNonceCallback>( userNonce.TargetJobID, innerCallback );
+            var callback = new WebAPIUserNonceCallback(userNonce.TargetJobID, userNonce.Body);
             this.Client.PostCallback( callback );
         }
         void HandleMarketingMessageUpdate( IPacketMsg packetMsg )

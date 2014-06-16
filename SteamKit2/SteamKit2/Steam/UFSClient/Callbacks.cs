@@ -54,14 +54,18 @@ namespace SteamKit2
             public EResult Result { get; private set; }
 
 
-            internal LoggedOnCallback( CMsgClientUFSLoginResponse body )
+            internal LoggedOnCallback( JobID jobID, CMsgClientUFSLoginResponse body )
             {
+                JobID = jobID;
+
                 Result = ( EResult )body.eresult;
             }
 
 
-            internal LoggedOnCallback( EResult result )
+            internal LoggedOnCallback( JobID jobID, EResult result )
             {
+                JobID = jobID;
+
                 Result = result;
             }
         }
@@ -97,20 +101,22 @@ namespace SteamKit2
             public byte[] ShaHash { get; private set; }
 
             /// <summary>
-            /// Gets the JobID for this upload session. This is used for <see cref="UploadDetails.JobID"/>.
+            /// Gets the JobID on the UFS server.
             /// </summary>
-            public JobID JobID { get; private set; }
+            public JobID RemoteJobID { get; private set; }
 
 
-            internal UploadFileResponseCallback( CMsgClientUFSUploadFileResponse body, JobID remoteJobID )
+            internal UploadFileResponseCallback( JobID jobID, CMsgClientUFSUploadFileResponse body, JobID remoteJobID )
             {
+                JobID = jobID;
+
                 Result = ( EResult )body.eresult;
                 UseHttp = body.use_http;
                 UseHttps = body.use_https;
                 EncryptFile = body.encrypt_file;
                 ShaHash = body.sha_file;
 
-                JobID = remoteJobID;
+                RemoteJobID = remoteJobID;
             }
         }
 
@@ -129,8 +135,10 @@ namespace SteamKit2
             /// </summary>
             public byte[] ShaHash { get; private set; }
 
-            internal UploadFileFinishedCallback( CMsgClientUFSUploadFileFinished body )
+            internal UploadFileFinishedCallback( JobID jobID, CMsgClientUFSUploadFileFinished body )
             {
+                JobID = jobID;
+
                 Result = (EResult)body.eresult;
                 ShaHash = body.sha_file;
             }

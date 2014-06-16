@@ -399,8 +399,10 @@ namespace SteamKit2
             public OTPDetails OneTimePassword { get; private set; }
 
 
-            internal UpdateMachineAuthCallback( CMsgClientUpdateMachineAuth msg )
+            internal UpdateMachineAuthCallback( JobID jobID, CMsgClientUpdateMachineAuth msg )
             {
+                JobID = jobID;
+
                 Data = msg.bytes;
 
                 BytesToWrite = ( int )msg.cubtowrite;
@@ -434,8 +436,10 @@ namespace SteamKit2
             public string Nonce { get; private set; }
 
 
-            internal WebAPIUserNonceCallback( CMsgClientRequestWebAPIAuthenticateUserNonceResponse body )
+            internal WebAPIUserNonceCallback( JobID jobID, CMsgClientRequestWebAPIAuthenticateUserNonceResponse body )
             {
+                this.JobID = jobID;
+
                 this.Result = ( EResult )body.eresult;
                 this.Nonce = body.webapi_authenticate_user_nonce;
             }

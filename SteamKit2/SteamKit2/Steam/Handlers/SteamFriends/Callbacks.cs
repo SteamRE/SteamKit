@@ -704,8 +704,10 @@ namespace SteamKit2
             public EResult Result { get; private set; }
 
 
-            internal IgnoreFriendCallback( MsgClientSetIgnoreFriendResponse response )
+            internal IgnoreFriendCallback( JobID jobID, MsgClientSetIgnoreFriendResponse response )
             {
+                this.JobID = jobID;
+
                 this.Result = response.Result;
             }
         }
@@ -758,15 +760,11 @@ namespace SteamKit2
             /// </summary>
             public string Summary { get; private set; }
 
-            /// <summary>
-            /// Gets the recent playtime.
-            /// </summary>
-            [Obsolete( "This property is obsolete as this value is no longer returned by Steam." )]
-            public TimeSpan RecentPlaytime { get; private set; }
 
-
-            internal ProfileInfoCallback( CMsgClientFriendProfileInfoResponse response )
+            internal ProfileInfoCallback( JobID jobID, CMsgClientFriendProfileInfoResponse response )
             {
+                JobID = jobID;
+
                 Result = ( EResult )response.eresult;
 
                 SteamID = response.steamid_friend;
@@ -782,10 +780,6 @@ namespace SteamKit2
                 Headline = response.headline;
 
                 Summary = response.summary;
-
-#pragma warning disable 0618 // Knowingly set the value of a deprecated field
-                RecentPlaytime = TimeSpan.Zero;
-#pragma warning restore 0618
             }
         }
     }

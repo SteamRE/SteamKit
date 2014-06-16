@@ -57,9 +57,9 @@ enum EResult
 	DiskFull = 54;
 	RemoteCallFailed = 55;
 	PasswordNotSet = 56;
-	PSNAccountNotLinked = 57;
-	InvalidPSNTicket = 58;
-	PSNAccountAlreadyLinked = 59;
+	ExternalAccountUnlinked = 57;
+	PSNTicketInvalid = 58;
+	ExternalAccountAlreadyLinked = 59;
 	RemoteFileConflict = 60;
 	IllegalPassword = 61;
 	SameAsPreviousValue = 62;

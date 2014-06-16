@@ -22,10 +22,10 @@ namespace SteamKit2
 
         /// <summary>
         /// Requests details for a specific item of user generated content from the Steam servers.
-        /// Results are returned in a <see cref="UGCDetailsCallback"/> from a <see cref="SteamClient.JobCallback&lt;T&gt;"/>.
+        /// Results are returned in a <see cref="UGCDetailsCallback"/>.
         /// </summary>
         /// <param name="ugcId">The unique user generated content id.</param>
-        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="SteamClient.JobCallback&lt;T&gt;"/>.</returns>
+        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="Callback&lt;T&gt;"/>.</returns>
         public JobID RequestUGCDetails( UGCHandle ugcId )
         {
             var request = new ClientMsgProtobuf<CMsgClientUFSGetUGCDetails>( EMsg.ClientUFSGetUGCDetails );
@@ -59,8 +59,7 @@ namespace SteamKit2
         {
             var infoResponse = new ClientMsgProtobuf<CMsgClientUFSGetUGCDetailsResponse>( packetMsg );
 
-            var innerCallback = new UGCDetailsCallback( infoResponse.Body );
-            var callback = new SteamClient.JobCallback<UGCDetailsCallback>( infoResponse.TargetJobID, innerCallback );
+            var callback = new UGCDetailsCallback(infoResponse.TargetJobID, infoResponse.Body);
             this.Client.PostCallback( callback );
         }
         #endregion

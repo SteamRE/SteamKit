@@ -82,7 +82,7 @@ namespace Sample6_SteamGuard
             new Callback<SteamUser.LoggedOffCallback>( OnLoggedOff, manager );
 
             // this callback is triggered when the steam servers wish for the client to store the sentry file
-            new JobCallback<SteamUser.UpdateMachineAuthCallback>( OnMachineAuth, manager );
+            new Callback<SteamUser.UpdateMachineAuthCallback>( OnMachineAuth, manager );
 
             isRunning = true;
 
@@ -175,7 +175,7 @@ namespace Sample6_SteamGuard
             Console.WriteLine( "Logged off of Steam: {0}", callback.Result );
         }
 
-        static void OnMachineAuth( SteamUser.UpdateMachineAuthCallback callback, JobID jobId )
+        static void OnMachineAuth( SteamUser.UpdateMachineAuthCallback callback )
         {
             Console.WriteLine( "Updating sentryfile..." );
 
@@ -190,7 +190,7 @@ namespace Sample6_SteamGuard
             // inform the steam servers that we're accepting this sentry file
             steamUser.SendMachineAuthResponse( new SteamUser.MachineAuthDetails
             {
-                JobID = jobId,
+                JobID = callback.JobID,
 
                 FileName = callback.FileName,
 

@@ -26,8 +26,9 @@ namespace SteamKit2
             public uint NumPlayers { get; private set; }
 
 
-            internal NumberOfPlayersCallback( MsgClientGetNumberOfCurrentPlayersResponse resp )
+            internal NumberOfPlayersCallback( JobID jobID, MsgClientGetNumberOfCurrentPlayersResponse resp )
             {
+                this.JobID = jobID;
                 this.Result = resp.Result;
                 this.NumPlayers = resp.NumPlayers;
             }

@@ -20,19 +20,6 @@ namespace SteamKit2
 
 
         /// <summary>
-        /// Requests details for a given published workshop file.
-        /// Results are returned in a <see cref="PublishedFileDetailsCallback"/> from a <see cref="SteamClient.JobCallback&lt;T&gt;"/>.
-        /// </summary>
-        /// <param name="publishedFileId">The file ID being requested.</param>
-        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="SteamClient.JobCallback&lt;T&gt;"/>.</returns>
-        [Obsolete]
-        public JobID RequestPublishedFileDetails( PublishedFileID publishedFileId )
-        {
-            return JobID.Invalid;
-        }
-
-
-        /// <summary>
         /// Represents the details of an enumeration request used for the local user's files.
         /// </summary>
         public sealed class EnumerationUserDetails
@@ -74,10 +61,10 @@ namespace SteamKit2
 
         /// <summary>
         /// Enumerates the list of published files for the current logged in user.
-        /// Results are returned in a <see cref="UserPublishedFilesCallback"/> from a <see cref="SteamClient.JobCallback&lt;T&gt;"/>.
+        /// Results are returned in a <see cref="UserPublishedFilesCallback"/>.
         /// </summary>
         /// <param name="details">The specific details of the request.</param>
-        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="SteamClient.JobCallback&lt;T&gt;"/>.</returns>
+        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="UserPublishedFilesCallback"/>.</returns>
         public JobID EnumerateUserPublishedFiles( EnumerationUserDetails details )
         {
             var enumRequest = new ClientMsgProtobuf<CMsgClientUCMEnumerateUserPublishedFiles>( EMsg.ClientUCMEnumerateUserPublishedFiles );
@@ -93,10 +80,10 @@ namespace SteamKit2
         }
         /// <summary>
         /// Enumerates the list of subscribed files for the current logged in user.
-        /// Results are returned in a <see cref="UserSubscribedFilesCallback"/> from a <see cref="SteamClient.JobCallback&lt;T&gt;"/>.
+        /// Results are returned in a <see cref="UserSubscribedFilesCallback"/>.
         /// </summary>
         /// <param name="details">The specific details of the request.</param>
-        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="SteamClient.JobCallback&lt;T&gt;"/>.</returns>
+        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="UserSubscribedFilesCallback"/>.</returns>
         public JobID EnumerateUserSubscribedFiles( EnumerationUserDetails details )
         {
             var enumRequest = new ClientMsgProtobuf<CMsgClientUCMEnumerateUserSubscribedFiles>( EMsg.ClientUCMEnumerateUserSubscribedFiles );
@@ -112,10 +99,10 @@ namespace SteamKit2
 
         /// <summary>
         /// Enumerates the list of published files for the current logged in user based on user action.
-        /// Results are returned in a <see cref="UserActionPublishedFilesCallback"/> from a <see cref="SteamClient.JobCallback&lt;T&gt;"/>.
+        /// Results are returned in a <see cref="UserActionPublishedFilesCallback"/>.
         /// </summary>
         /// <param name="details">The specific details of the request.</param>
-        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="SteamClient.JobCallback&lt;T&gt;"/>.</returns>
+        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="UserActionPublishedFilesCallback"/>.</returns>
         public JobID EnumeratePublishedFilesByUserAction( EnumerationUserDetails details )
         {
             var enumRequest = new ClientMsgProtobuf<CMsgClientUCMEnumeratePublishedFilesByUserAction>( EMsg.ClientUCMEnumeratePublishedFilesByUserAction );
@@ -197,10 +184,10 @@ namespace SteamKit2
 
         /// <summary>
         /// Enumerates the list of all published files on the Steam workshop.
-        /// Results are returned in a <see cref="PublishedFilesCallback"/> from a <see cref="SteamClient.JobCallback&lt;T&gt;"/>.
+        /// Results are returned in a <see cref="PublishedFilesCallback"/>.
         /// </summary>
         /// <param name="details">The specific details of the request.</param>
-        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="SteamClient.JobCallback&lt;T&gt;"/>.</returns>
+        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="PublishedFilesCallback"/>.</returns>
         public JobID EnumeratePublishedFiles( EnumerationDetails details )
         {
             var enumRequest = new ClientMsgProtobuf<CMsgCREEnumeratePublishedFiles>( EMsg.CREEnumeratePublishedFiles );
@@ -257,32 +244,28 @@ namespace SteamKit2
         {
             var response = new ClientMsgProtobuf<CMsgCREEnumeratePublishedFilesResponse>( packetMsg );
 
-            var innerCallback = new PublishedFilesCallback( response.Body );
-            var callback = new SteamClient.JobCallback<PublishedFilesCallback>( response.TargetJobID, innerCallback );
+            var callback = new PublishedFilesCallback(response.TargetJobID, response.Body);
             Client.PostCallback( callback );
         }
         void HandleEnumUserPublishedFiles( IPacketMsg packetMsg )
         {
             var response = new ClientMsgProtobuf<CMsgClientUCMEnumerateUserPublishedFilesResponse>( packetMsg );
 
-            var innerCallback = new UserPublishedFilesCallback( response.Body );
-            var callback = new SteamClient.JobCallback<UserPublishedFilesCallback>( response.TargetJobID, innerCallback );
+            var callback = new UserPublishedFilesCallback(response.TargetJobID, response.Body);
             Client.PostCallback( callback );
         }
         void HandleEnumUserSubscribedFiles( IPacketMsg packetMsg )
         {
             var response = new ClientMsgProtobuf<CMsgClientUCMEnumerateUserSubscribedFilesResponse>( packetMsg );
 
-            var innerCallback = new UserSubscribedFilesCallback( response.Body );
-            var callback = new SteamClient.JobCallback<UserSubscribedFilesCallback>( response.TargetJobID, innerCallback );
+            var callback = new UserSubscribedFilesCallback( response.TargetJobID, response.Body );
             Client.PostCallback( callback );
         }
         void HandleEnumPublishedFilesByAction( IPacketMsg packetMsg )
         {
             var response = new ClientMsgProtobuf<CMsgClientUCMEnumeratePublishedFilesByUserActionResponse>( packetMsg );
 
-            var innerCallback = new UserActionPublishedFilesCallback( response.Body );
-            var callback = new SteamClient.JobCallback<UserActionPublishedFilesCallback>( response.TargetJobID, innerCallback );
+            var callback = new UserActionPublishedFilesCallback(response.TargetJobID, response.Body);
             Client.PostCallback( callback );
         }
         #endregion

@@ -32,12 +32,12 @@ namespace SteamKit2
 
             /// <summary>
             /// Sends a message.
-            /// Results are returned in a <see cref="ServiceMethodResponse"/> from a <see cref="SteamClient.JobCallback&lt;T&gt;"/>.
+            /// Results are returned in a <see cref="ServiceMethodResponse"/>.
             /// </summary>
             /// <typeparam name="TResponse">The type of the protobuf object which is the response to the RPC call.</typeparam>
             /// <param name="expr">RPC call expression, e.g. x => x.SomeMethodCall(message);</param>
             /// <param name="isNotification">Whether this message is a notification or not.</param>
-            /// <returns>The JobID of the request. This can be used to find the appropriate <see cref="SteamClient.JobCallback&lt;T&gt;"/>.</returns>
+            /// <returns>The JobID of the request. This can be used to find the appropriate <see cref="ServiceMethodResponse"/>.</returns>
             public JobID SendMessage<TResponse>( Expression<Func<TService, TResponse>> expr, bool isNotification = false )
             {
                 var call = expr.Body as MethodCallExpression;
@@ -72,13 +72,13 @@ namespace SteamKit2
 
         /// <summary>
         /// Sends a message.
-        /// Results are returned in a <see cref="ServiceMethodResponse"/> from a <see cref="SteamClient.JobCallback&lt;T&gt;"/>.
+        /// Results are returned in a <see cref="ServiceMethodResponse"/>.
         /// </summary>
         /// <typeparam name="TRequest">The type of a protobuf object.</typeparam>
         /// <param name="name">Name of the RPC endpoint. Takes the format ServiceName.RpcName</param>
         /// <param name="message">The message to send.</param>
         /// <param name="isNotification">Whether this message is a notification or not.</param>
-        /// <returns>The JobID of the request. This can be used to find the appropriate <see cref="SteamClient.JobCallback&lt;T&gt;"/>.</returns>
+        /// <returns>The JobID of the request. This can be used to find the appropriate <see cref="ServiceMethodResponse"/>.</returns>
         public JobID SendMessage<TRequest>( string name, TRequest message, bool isNotification = false )
             where TRequest : IExtensible
         {
@@ -132,10 +132,8 @@ namespace SteamKit2
         {
             var response = new ClientMsgProtobuf<CMsgClientServiceMethodResponse>( packetMsg );
 
-            var responseCallback = new ServiceMethodResponse( (EResult)response.ProtoHeader.eresult, response.Body );
-            var jobCallback = new SteamClient.JobCallback<ServiceMethodResponse>( response.TargetJobID, responseCallback );
-
-            Client.PostCallback( jobCallback );
+            var callback = new ServiceMethodResponse(response.TargetJobID, (EResult)response.ProtoHeader.eresult, response.Body);
+            Client.PostCallback( callback );
         }
 
         void HandleServiceMethod( IPacketMsg packetMsg )
@@ -150,7 +148,6 @@ namespace SteamKit2
 
                 var serviceName = splitByDot[0];
                 var methodName = splitByHash[0];
-                var version = int.Parse( splitByHash[1] );
 
                 var serviceInterfaceName = "SteamKit2.Unified.Internal.I" + serviceName;
                 var serviceInterfaceType = Type.GetType( serviceInterfaceName );

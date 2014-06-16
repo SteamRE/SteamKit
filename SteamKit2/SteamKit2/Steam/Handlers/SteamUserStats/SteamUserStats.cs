@@ -17,10 +17,10 @@ namespace SteamKit2
 
         /// <summary>
         /// Retrieves the number of current players or a given <see cref="GameID"/>.
-        /// Results are returned in a <see cref="NumberOfPlayersCallback"/> from a <see cref="SteamClient.JobCallback&lt;T&gt;"/>.
+        /// Results are returned in a <see cref="NumberOfPlayersCallback"/>.
         /// </summary>
         /// <param name="gameId">The GameID to request the number of players for.</param>
-        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="SteamClient.JobCallback&lt;T&gt;"/>.</returns>
+        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="NumberOfPlayersCallback"/>.</returns>
         public JobID GetNumberOfCurrentPlayers( GameID gameId )
         {
             var msg = new ClientMsg<MsgClientGetNumberOfCurrentPlayers>();
@@ -54,8 +54,7 @@ namespace SteamKit2
         {
             var msg = new ClientMsg<MsgClientGetNumberOfCurrentPlayersResponse>( packetMsg );
 
-            var innerCallback = new NumberOfPlayersCallback( msg.Body );
-            var callback = new SteamClient.JobCallback<NumberOfPlayersCallback>( msg.Header.TargetJobID, innerCallback );
+            var callback = new NumberOfPlayersCallback( msg.Header.TargetJobID, msg.Body );
             Client.PostCallback( callback );
         }
         #endregion

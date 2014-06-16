@@ -49,8 +49,10 @@ namespace SteamKit2
             public ReadOnlyCollection<Server> Servers { get; private set; }
 
 
-            internal QueryCallback( CMsgGMSClientServerQueryResponse msg )
+            internal QueryCallback( JobID jobID, CMsgGMSClientServerQueryResponse msg )
             {
+                JobID = jobID;
+
                 var serverList = msg.servers
                     .Select( s => new Server( s ) )
                     .ToList();

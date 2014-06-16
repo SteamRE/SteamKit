@@ -44,8 +44,10 @@ namespace SteamKit2
             public uint FileSize { get; private set; }
 
 
-            internal UGCDetailsCallback( CMsgClientUFSGetUGCDetailsResponse msg )
+            internal UGCDetailsCallback( JobID jobID, CMsgClientUFSGetUGCDetailsResponse msg )
             {
+                JobID = jobID;
+
                 Result = ( EResult )msg.eresult;
 
                 AppID = msg.app_id;
