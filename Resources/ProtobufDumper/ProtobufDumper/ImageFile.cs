@@ -5,12 +5,11 @@ using System.Text;
 using System.IO;
 using System.Reflection;
 using System.Reflection.Emit;
-using System.Threading;
 using System.ComponentModel;
-using System.Runtime.InteropServices;
 using ProtoBuf;
 using ProtoBuf.Meta;
 using google.protobuf;
+using System.Text.RegularExpressions;
 
 namespace ProtobufDumper
 {
@@ -37,12 +36,6 @@ namespace ProtobufDumper
             moduleBuilder = assemblyBuilder.DefineDynamicModule("JIT", true);
         }
 
-
-        string fileName;
-
-        IntPtr hModule;
-        long loadAddr;
-
         public string OutputDir { get; private set; }
         public List<string> ProtoList { get; private set; }
 
@@ -51,6 +44,8 @@ namespace ProtobufDumper
             public FileDescriptorProto file;
             public StringBuilder buffer;
         }
+
+        private string FileName;
 
         private List<ProtoData> FinalProtoDefinition; 
 
@@ -65,8 +60,8 @@ namespace ProtobufDumper
 
         public ImageFile(string fileName, string output = null)
         {
-            this.fileName = fileName;
-            this.OutputDir = output ?? Path.GetFileNameWithoutExtension(this.fileName);
+            this.FileName = fileName;
+            this.OutputDir = output ?? Path.GetFileNameWithoutExtension(fileName);
             this.ProtoList = new List<string>();
 
             this.FinalProtoDefinition = new List<ProtoData>();
@@ -81,82 +76,15 @@ namespace ProtobufDumper
             this.deferredEnumTokens = new List<string>();
         }
 
-        public void Process()
+        unsafe public void Process()
         {
-            Console.WriteLine("Loading image '{0}'...", fileName);
+            Console.WriteLine("Loading binary '{0}'...", FileName);
 
-            hModule = Native.LoadLibraryEx(
-                this.fileName,
-                IntPtr.Zero,
-                Native.LoadLibraryFlags.LOAD_LIBRARY_AS_IMAGE_RESOURCE
-            );
+            var rawData = File.ReadAllBytes(FileName);
 
-            if (hModule == IntPtr.Zero)
-                throw new Win32Exception(Marshal.GetLastWin32Error(), "Unable to load image!");
-
-            // LOAD_LIBRARY_AS_IMAGE_RESOURCE returns ( HMODULE | 2 )
-            loadAddr = (long)(hModule.ToInt64() & ~2);
-
-            Console.WriteLine("Loaded at 0x{0:X2}!", loadAddr);
-
-            var dosHeader = Native.PtrToStruct<Native.IMAGE_DOS_HEADER>(new IntPtr(loadAddr));
-
-            if (dosHeader.e_magic != Native.IMAGE_DOS_SIGNATURE)
-                throw new InvalidOperationException("Target image has invalid DOS signature!");
-
-            var peHeader = Native.PtrToStruct<Native.IMAGE_NT_HEADERS>(new IntPtr(this.loadAddr + dosHeader.e_lfanew));
-
-            if (peHeader.Signature != Native.IMAGE_NT_SIGNATURE)
-                throw new InvalidOperationException("Target image has invalid PE signature!");
-
-            int sizeOfNtHeaders = 0;
-
-            switch (peHeader.FileHeader.Machine)
+            fixed (byte* pdata = rawData)
             {
-                case 0x014c:
-                    sizeOfNtHeaders = Marshal.SizeOf(typeof(Native.IMAGE_NT_HEADERS32));
-                    break;
-                case 0x8664:
-                    sizeOfNtHeaders = Marshal.SizeOf(typeof(Native.IMAGE_NT_HEADERS64));
-                    break;
-                default:
-                    throw new InvalidOperationException("Unexpected architecture in PE header: " + peHeader.FileHeader.Machine);
-            }
-
-            int numSections = peHeader.FileHeader.NumberOfSections;
-            long baseSectionsAddr = loadAddr + dosHeader.e_lfanew + sizeOfNtHeaders;
-
-            Console.WriteLine("# of sections: {0}", numSections);
-
-            var sectionHeaders = new Native.IMAGE_SECTION_HEADER[numSections];
-
-            for (int x = 0; x < sectionHeaders.Length; ++x)
-            {
-                long baseAddr = baseSectionsAddr + (x * Marshal.SizeOf(sectionHeaders[x]));
-
-                var sectionHdr = Native.PtrToStruct<Native.IMAGE_SECTION_HEADER>(new IntPtr(baseAddr));
-
-                var searchFlags =
-                    Native.IMAGE_SECTION_HEADER.CharacteristicFlags.IMAGE_SCN_MEM_READ |
-                    Native.IMAGE_SECTION_HEADER.CharacteristicFlags.IMAGE_SCN_CNT_INITIALIZED_DATA;
-
-                var excludeFlags =
-                    Native.IMAGE_SECTION_HEADER.CharacteristicFlags.IMAGE_SCN_MEM_WRITE |
-                    Native.IMAGE_SECTION_HEADER.CharacteristicFlags.IMAGE_SCN_MEM_DISCARDABLE;
-
-                if ((sectionHdr.Characteristics & searchFlags) != searchFlags)
-                {
-                    Console.WriteLine("\nSection '{0}' skipped: not an initialized read section.", sectionHdr.Name);
-                    continue;
-                }
-
-                if ((sectionHdr.Characteristics & excludeFlags) != 0)
-                {
-                    Console.WriteLine("\nSection '{0}' skipped: not a non-discardable readonly section.", sectionHdr.Name);
-                    continue;
-                }
-
-                ScanSection(sectionHdr);
+                ScanFile(pdata, rawData.Length);
             }
 
             if (deferredProtos.Count > 0)
@@ -172,19 +100,14 @@ namespace ProtobufDumper
             FinalPassWriteFiles();
         }
 
-        unsafe void ScanSection(Native.IMAGE_SECTION_HEADER sectionHdr)
+        unsafe void ScanFile(byte* dataPtr, int rawDataLength)
         {
-            long sectionDataAddr = loadAddr + sectionHdr.PointerToRawData;
-
-            Console.WriteLine("\nScanning section '{0}' at 0x{1:X2}...\n", sectionHdr.Name, sectionDataAddr);
-
-            byte* dataPtr = (byte*)(sectionDataAddr);
-            byte* endPtr = (byte*)(dataPtr + sectionHdr.SizeOfRawData);
+            byte* endPtr = dataPtr + rawDataLength;
+            char marker = '\n';
 
             while (dataPtr < endPtr)
             {
-
-                if (*dataPtr == 0x0A)
+                if (*dataPtr == marker)
                 {
                     byte* originalPtr = dataPtr;
                     int nullskiplevel = 0;
@@ -207,7 +130,6 @@ namespace ProtobufDumper
                         data = ms.ToArray();
                     }
 
-
                     dataPtr++;
 
                     if (data.Length < 2)
@@ -225,8 +147,20 @@ namespace ProtobufDumper
                     }
 
                     string protoName = Encoding.ASCII.GetString(data, 2, strLen);
+                    if (protoName.Contains(marker))
+                    {
+                        dataPtr = originalPtr + 1;
+                        continue;
+                    }
 
-                    if (!protoName.EndsWith(".proto"))
+                    if (!protoName.EndsWith(".proto", StringComparison.Ordinal))
+                    {
+                        dataPtr = originalPtr + 1;
+                        continue;
+                    }
+
+                    Regex regex = new Regex(@"^[a-zA-Z_\\/.]+.proto$");
+                    if (!regex.IsMatch(protoName))
                     {
                         dataPtr = originalPtr + 1;
                         continue;
@@ -244,14 +178,6 @@ namespace ProtobufDumper
                     dataPtr++;
                 }
             }
-        }
-
-        public void Unload()
-        {
-            if (hModule == IntPtr.Zero)
-                return;
-
-            Native.FreeLibrary(hModule);
         }
 
         private void PushDescriptorName(FileDescriptorProto file)
@@ -294,12 +220,12 @@ namespace ProtobufDumper
             messageNameStack.Pop();
         }
 
-        private string GetEnumDescriptorTokenDefault(string messageName)
+        private static string GetEnumDescriptorTokenDefault(string messageName)
         {
             return String.Format("${0}_DEFAULT_VALUE$", messageName);
         }
 
-        private string GetEnumDescriptorTokenAt(string messageName, int index)
+        private static string GetEnumDescriptorTokenAt(string messageName, int index)
         {
             return String.Format("${0}_{1}_VALUE$", messageName, index);
         }
@@ -425,7 +351,7 @@ namespace ProtobufDumper
             bool defer = false;
             foreach (string dependency in set.dependency)
             {
-                if (!dependency.StartsWith("google") && !ProtoList.Contains(dependency))
+                if (!dependency.StartsWith("google", StringComparison.Ordinal) && !ProtoList.Contains(dependency))
                 {
                     defer = true;
                     break;
@@ -764,7 +690,7 @@ namespace ProtobufDumper
                 if (String.IsNullOrEmpty(mapping.Key))
                     throw new Exception("Empty extendee in extension, this should not be possible");
 
-                if (mapping.Key.StartsWith(".google.protobuf"))
+                if (mapping.Key.StartsWith(".google.protobuf", StringComparison.Ordinal))
                 {
                     BuildExtension(mapping.Key.Substring(1), mapping.ToArray());
                 }

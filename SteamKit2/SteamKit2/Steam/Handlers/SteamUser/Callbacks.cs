@@ -163,6 +163,12 @@ namespace SteamKit2
 
                 this.ClientSteamID = resp.ClientSuppliedSteamId;
             }
+
+
+            internal LoggedOnCallback( EResult result )
+            {
+                this.Result = result;
+            }
         }
 
         /// <summary>

@@ -172,6 +172,15 @@ namespace SteamKit2.Unified.Internal
       get { return _auth_code; }
       set { _auth_code = value; }
     }
+
+    private ulong _from_steamid = default(ulong);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"from_steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong from_steamid
+    {
+      get { return _from_steamid; }
+      set { _from_steamid = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -377,6 +386,15 @@ namespace SteamKit2.Unified.Internal
       get { return _include_canceled; }
       set { _include_canceled = value; }
     }
+
+    private bool _include_pending = default(bool);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"include_pending", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool include_pending
+    {
+      get { return _include_pending; }
+      set { _include_pending = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -426,6 +444,15 @@ namespace SteamKit2.Unified.Internal
       get { return _is_canceled; }
       set { _is_canceled = value; }
     }
+
+    private uint _time_created = default(uint);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"time_created", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint time_created
+    {
+      get { return _time_created; }
+      set { _time_created = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -467,6 +494,15 @@ namespace SteamKit2.Unified.Internal
   {
     public CDeviceAuth_AddAuthorizedBorrowers_Response() {}
     
+
+    private int _seconds_to_wait = default(int);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"seconds_to_wait", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int seconds_to_wait
+    {
+      get { return _seconds_to_wait; }
+      set { _seconds_to_wait = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

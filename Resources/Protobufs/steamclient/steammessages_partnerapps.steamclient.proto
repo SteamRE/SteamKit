@@ -58,6 +58,7 @@ message CPartnerApps_FindDRMUploads_Response {
 
 message CPartnerApps_Download_Request {
 	optional string file_id = 1;
+	optional int32 app_id = 2;
 }
 
 message CPartnerApps_Download_Response {

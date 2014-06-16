@@ -72,6 +72,15 @@ namespace SteamKit2.Internal
       set { _target_job_name = value; }
     }
 
+    private int _seq_num = default(int);
+    [global::ProtoBuf.ProtoMember(24, IsRequired = false, Name=@"seq_num", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int seq_num
+    {
+      get { return _seq_num; }
+      set { _seq_num = value; }
+    }
+
     private int _eresult = (int)2;
     [global::ProtoBuf.ProtoMember(13, IsRequired = false, Name=@"eresult", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue((int)2)]
@@ -398,6 +407,15 @@ namespace SteamKit2.Internal
     {
       get { return _propagation; }
       set { _propagation = value; }
+    }
+
+    private bool _has_adult_content = default(bool);
+    [global::ProtoBuf.ProtoMember(12, IsRequired = false, Name=@"has_adult_content", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool has_adult_content
+    {
+      get { return _has_adult_content; }
+      set { _has_adult_content = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

@@ -1,5 +1,34 @@
 
 ------------------------------------------------------------------------------
+v 1.5.1			Mar 15, 2014
+------------------------------------------------------------------------------
+
+*	Added a parameterless public constructor to DepotManifest.ChunkData to support serialization.
+*	SteamWorkshop.RequestPublishedFileDetails has been obsoleted and is no longer supported. This functionality will be 
+	dropped in a future SteamKit release. See the the PublishedFile WebAPI service for a functional replacement.
+*	Added the request and response messages for the PublishedFile service.
+*	Fixed an unhandled exception when requesting metadata-only PICS product info.
+*	Exposed the following additional fields in the LoggedOnCallback: VanityURL, NumLoginFailuresToMigrate, NumDisconnectsToMigrate.
+*	Exposed the HTTP url details for PICS product info, see: PICSProductInfoCallback.PICSProductInfo.HttpUri and UseHttp.
+*	Added EEconTradeResponse.InitiatorPasswordResetProbation and InitiatorNewDeviceCooldown.
+*	Fixed SteamGameServer.LogOn and LogOnAnonymous sending the wrong message.
+*	Added support for token authentication for game server logon.
+*	Added the request and response messages for the GameServers service.
+*	Added the ability to specify server type for game servers, see: SteamGameServer.SendStatus.
+*	Exposed a few more fields on TradeResultCallback: NumDaysSteamGuardRequired, NumDaysNewDeviceCooldown,
+	DefaultNumDaysPasswordResetProbation, NumDaysPasswordResetProbation.
+*	Fixed being unable to download depot manifests.
+*	Added SteamID.SetFromSteam3String.
+*	Obsoleted SteamApps.SendGuestPass. This functionality will be dropped in a future SteamKit release.
+*	Updated EResult with the following new fields: UnexpectedError, Disabled, InvalidCEGSubmission, RestrictedDevice.
+*	Updated EMsg list.
+*	Updated game related GC messages.
+
+BREAKING CHANGES
+*	Fixed ServiceMethodResponse.RpcName containing a leading '.'.
+
+
+------------------------------------------------------------------------------
 v 1.5.0			Oct 26, 2013
 ------------------------------------------------------------------------------
 

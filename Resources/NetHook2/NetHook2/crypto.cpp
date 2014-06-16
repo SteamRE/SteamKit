@@ -51,23 +51,20 @@ CCrypto::CCrypto()
 
 	char *pEncrypt = NULL;
 	bool bEncrypt = steamClientScan.FindFunction(
-		"\x53\x8B\xDC\x83\xEC\x08\x83\xE4\xF8\x83\xC4\x04\x55\x8B\x6B\x04\x89\x6C\x24\x04\x8B\xEC\x6A\xFF\x68\x00\x00\x00\x00"
-		"\x64\xA1\x00\x00\x00\x00\x50\x64\x89\x25\x00\x00\x00\x00\x51\x53\x81\xEC\x00\x00\x00\x00\xA1\x00\x00\x00\x00\x8B\x08"
-		"\x53\x56\x57\x89\x65\xF0\x85\xC9\x75\x07\x33\xC0\x89\x45\xD8",
-		"xxxxxxxxxxxxxxxxxxxxxxxxx????xx????xxxx????xxxx????x????xxxxxxxxxxxxxxxxx",
+		"\x53\x8B\xDC\x83\xEC\x08\x83\xE4\xF0\x83\xC4\x04\x55\x8B\x6B\x04\x89\x6C\x24\x04\x8B\xEC\x64\xA1\x00\x00\x00\x00",
+		"xxxxxxxxxxxxxxxxxxxxxxxxxxxx",
 		(void **)&pEncrypt
 	);
 
 	Encrypt_Orig = (bool (__cdecl *)(const uint8*, uint32, const uint8*, uint32, uint8*, uint32*, const uint8*, uint32))( pEncrypt );
 
-	g_pLogger->LogConsole( "CCrypto::SymmetricEncrypt = 0x%x\n", Encrypt_Orig );
+	g_pLogger->LogConsole( "CCrypto::SymmetricEncryptWithIV = 0x%x\n", Encrypt_Orig );
 
 
 	char *pDecrypt = NULL;
 	bool bDecrypt = steamClientScan.FindFunction(
-		"\x55\x8b\xec\x81\xec\x00\x00\x00\x00\x83\x7d\x08\x00\x53\x56\x8b\x35\x00\x00\x00\x00\x57\x75\x00\x6a\x00\x68\x00\x00"
-		"\x00\x00\x68\x00\x00\x00\x00\x6a\x00\x68\x00\x00\x00\x00\xff\xd6\x83\xc4\x14\x83\x7d\x0c\x00",
-		"xxxxx????xxxxxxxx????xx?xxx????x????xxx????xxxxxxxxx",
+		"\x55\x8B\xEC\x81\xEC\x04\x01\x00\x00\x83\x7D\x08\x00\x53",
+		"xxxxxxxxxxxxxx",
 		(void **)&pDecrypt
 	);
 
@@ -77,49 +74,58 @@ CCrypto::CCrypto()
 
 
 	char *pGetMessageList = NULL;
-	steamClientScan.FindFunction(
-		"\xB8\x00\x00\x00\x00\x84\x05\x00\x00\x00\x00\x75\x47",
-		"x????xx????xx",
+	bool bGetMessageList = steamClientScan.FindFunction(
+		"\xA1\x00\x00\x00\x00\xA8\x01\x75\x00\x83\xC8\x01\xB9\x00\x00\x00\x00\x0056",
+		"x????xxx?xxxx????x",
 		(void **)&pGetMessageList
 	);
 
-	MsgInfo_t *pInfos = *(MsgInfo_t **)( pGetMessageList + 40 );
-	MsgInfo_t *pEndInfos = *(MsgInfo_t **)( pGetMessageList + 64 );
-	uint16 numMessages = ( ( int )pEndInfos - ( int )pInfos ) / sizeof( MsgInfo_t );
-
-	g_pLogger->LogConsole( "pGetMessageList = 0x%x\npInfos = 0x%x\nnumMessages = %d\n", pGetMessageList, pInfos, numMessages );
-
-
-	for ( uint16 x = 0 ; x < numMessages; x++ )
+	if (bGetMessageList)
 	{
-		eMsgList.insert( MsgPair( pInfos->eMsg, pInfos ) );
+		const uint32 uMessageListStartPtrOffset = 38;
+		const uint32 uMessageListEndPtrOffset = uMessageListStartPtrOffset + 26;
 
-		pInfos++;
-	}
+		MsgInfo_t *pInfos = *(MsgInfo_t **)( pGetMessageList + uMessageListStartPtrOffset );
+		MsgInfo_t *pEndInfos = *(MsgInfo_t **)( pGetMessageList + uMessageListEndPtrOffset );
+		uint16 numMessages = ( ( int )pEndInfos - ( int )pInfos ) / sizeof( MsgInfo_t );
 
-	if ( eMsgList.size() != 0 )
-	{
-		// should only delete our existing files if we have something new to dump
-		g_pLogger->DeleteFile( "emsg_list.txt", false );
-		g_pLogger->DeleteFile( "emsg_list_detailed.txt", false );
+		g_pLogger->LogConsole( "pGetMessageList = 0x%x\npInfos = 0x%x\nnumMessages = %d\n", pGetMessageList, pInfos, numMessages );
 
-		for ( MsgList::iterator iter = eMsgList.begin() ; iter != eMsgList.end() ; iter++ )
+
+		for ( uint16 x = 0 ; x < numMessages; x++ )
 		{
-			MsgInfo_t *pInfo = iter->second;
+			eMsgList.insert( MsgPair( pInfos->eMsg, pInfos ) );
 
-			g_pLogger->LogFile( "emsg_list.txt", false, "\t%s = %d,\r\n", pInfo->pchMsgName, pInfo->eMsg );
-			g_pLogger->LogFile( "emsg_list_detailed.txt", false, "\t%s = %d, // flags: %d, server type: %d\r\n", pInfo->pchMsgName, pInfo->eMsg, pInfo->nFlags, pInfo->k_EServerTarget );
+			pInfos++;
 		}
 
-		g_pLogger->LogConsole( "Dumped emsg list! (%d messages)\n", eMsgList.size() );
+		if ( eMsgList.size() != 0 )
+		{
+			// should only delete our existing files if we have something new to dump
+			g_pLogger->DeleteFile( "emsg_list.txt", false );
+			g_pLogger->DeleteFile( "emsg_list_detailed.txt", false );
+
+			for ( MsgList::iterator iter = eMsgList.begin() ; iter != eMsgList.end() ; iter++ )
+			{
+				MsgInfo_t *pInfo = iter->second;
+
+				g_pLogger->LogFile( "emsg_list.txt", false, "\t%s = %d,\r\n", pInfo->pchMsgName, pInfo->eMsg );
+				g_pLogger->LogFile( "emsg_list_detailed.txt", false, "\t%s = %d, // flags: %d, server type: %d\r\n", pInfo->pchMsgName, pInfo->eMsg, pInfo->nFlags, pInfo->k_EServerTarget );
+			}
+
+			g_pLogger->LogConsole( "Dumped emsg list! (%d messages)\n", eMsgList.size() );
+		}
+		else
+		{
+			g_pLogger->LogConsole( "Unable to dump emsg list: No messages! (Offset changed?)\n" );
+		} 
 	}
 	else
 	{
-		g_pLogger->LogConsole( "Unable to dump emsg list: No messages! (Offset changed?)\n" );
+		g_pLogger->LogConsole( "Unable to find GetMessageList.\n" );
 	}
-
-
-	static bool (__cdecl *encrypt)(const uint8*, uint32, const uint8*, uint32, uint8*, uint32*, const uint8*, uint32) = &CCrypto::SymmetricEncrypt;
+	
+	static bool (__cdecl *encrypt)(const uint8*, uint32, const uint8*, uint32, uint8*, uint32*, const uint8*, uint32) = &CCrypto::SymmetricEncryptWithIV;
 	static bool (__cdecl *decrypt)(const uint8*, uint32, uint8*, uint32*, const uint8*, uint32) = &CCrypto::SymmetricDecrypt;
 
 	if ( bEncrypt )
@@ -127,11 +133,11 @@ CCrypto::CCrypto()
 		Encrypt_Detour = new CSimpleDetour((void **) &Encrypt_Orig, *(void**) &encrypt);
 		Encrypt_Detour->Attach();
 
-		g_pLogger->LogConsole( "Detoured SymmetricEncrypt!\n" );
+		g_pLogger->LogConsole( "Detoured SymmetricEncryptWithIV!\n" );
 	}
 	else
 	{
-		g_pLogger->LogConsole( "Unable to hook SymmetricEncrypt: Func scan failed.\n" );
+		g_pLogger->LogConsole( "Unable to hook SymmetricEncryptWithIV: Func scan failed.\n" );
 	}
 
 	if ( bDecrypt )
@@ -167,7 +173,7 @@ CCrypto::~CCrypto()
 
 
 
-bool __cdecl CCrypto::SymmetricEncrypt( const uint8 *pubPlaintextData, uint32 cubPlaintextData, const uint8 *pIV, uint32 cubIV, uint8 *pubEncryptedData, uint32 *pcubEncryptedData, const uint8 *pubKey, uint32 cubKey )
+bool __cdecl CCrypto::SymmetricEncryptWithIV( const uint8 *pubPlaintextData, uint32 cubPlaintextData, const uint8 *pIV, uint32 cubIV, uint8 *pubEncryptedData, uint32 *pcubEncryptedData, const uint8 *pubKey, uint32 cubKey )
 {
 	g_pLogger->LogNetMessage( k_eNetOutgoing, (uint8 *)pubPlaintextData, cubPlaintextData );
 

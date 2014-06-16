@@ -16,7 +16,8 @@ enum EDemoCommands {
 	DEM_CustomDataCallbacks = 11;
 	DEM_UserCmd = 12;
 	DEM_FullPacket = 13;
-	DEM_Max = 14;
+	DEM_SaveGame = 14;
+	DEM_Max = 15;
 	DEM_IsCompressed = 112;
 }
 
@@ -80,6 +81,13 @@ message CDemoPacket {
 message CDemoFullPacket {
 	optional .CDemoStringTables string_table = 1;
 	optional .CDemoPacket packet = 2;
+}
+
+message CDemoSaveGame {
+	optional bytes data = 1;
+	optional fixed64 steam_id = 2;
+	optional fixed64 signature = 3;
+	optional int32 version = 4;
 }
 
 message CDemoSyncTick {

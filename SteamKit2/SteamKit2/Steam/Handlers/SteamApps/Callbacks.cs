@@ -813,5 +813,30 @@ namespace SteamKit2
             }
         }
 
+        /// <summary>
+        /// This callback is received when a CDN auth token is received
+        /// </summary>
+        public sealed class CDNAuthTokenCallback : CallbackMsg
+        {
+            /// <summary>
+            /// Result of the operation
+            /// </summary>
+            public EResult Result { get; set; }
+            /// <summary>
+            /// CDN auth token
+            /// </summary>
+            public string Token { get; set; }
+            /// <summary>
+            /// Token expiration date
+            /// </summary>
+            public DateTime Expiration { get; set; }
+
+            internal CDNAuthTokenCallback( CMsgClientGetCDNAuthTokenResponse msg )
+            {
+                Result = (EResult)msg.eresult;
+                Token = msg.token;
+                Expiration = Utils.DateTimeFromUnixTime(msg.expiration_time);
+            }
+        }
     }
 }

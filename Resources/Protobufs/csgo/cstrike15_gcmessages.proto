@@ -47,6 +47,17 @@ enum ECsgoGCMsg {
 	k_EMsgGCCStrike15_v2_TournamentMatchRewardDropsNotification = 9145;
 	k_EMsgGCCStrike15_v2_MatchListRequestTournamentGames = 9146;
 	k_EMsgGCCStrike15_v2_MatchListRequestFullGameInfo = 9147;
+	k_EMsgGCCStrike15_v2_GiftsLeaderboardRequest = 9148;
+	k_EMsgGCCStrike15_v2_GiftsLeaderboardResponse = 9149;
+	k_EMsgGCCStrike15_v2_ServerVarValueNotificationInfo = 9150;
+	k_EMsgGCToGCReloadVersions = 9151;
+	k_EMsgGCCStrike15_v2_ClientSubmitSurveyVote = 9152;
+	k_EMsgGCCStrike15_v2_Server2GCClientValidate = 9153;
+	k_EMsgGCCStrike15_v2_MatchListRequestLiveGameForUser = 9154;
+	k_EMsgGCCStrike15_v2_Server2GCPureServerValidationFailure = 9155;
+	k_EMsgGCCStrike15_v2_Client2GCEconPreviewDataBlockRequest = 9156;
+	k_EMsgGCCStrike15_v2_Client2GCEconPreviewDataBlockResponse = 9157;
+	k_EMsgGCCStrike15_v2_AccountPrivacySettings = 9158;
 }
 
 message GameServerPing {
@@ -94,6 +105,7 @@ message GlobalStatistics {
 	optional uint32 pricesheet_version = 10;
 	optional uint32 twitch_streams_version = 11;
 	optional uint32 active_tournament_eventid = 12;
+	optional uint32 active_survey_id = 13;
 }
 
 message OperationalStatisticDescription {
@@ -295,6 +307,7 @@ message CMsgGCCStrike15_v2_MatchmakingServerMatchEnd {
 	optional uint64 rematch = 4;
 	optional uint32 replay_token = 5;
 	optional uint32 replay_cluster_id = 6;
+	optional bool aborted_match = 7;
 }
 
 message CMsgGCCStrike15_v2_MatchmakingClient2GCHello {
@@ -314,6 +327,16 @@ message CMsgGCCStrike15_v2_MatchmakingGC2ClientHello {
 	repeated .TournamentTeam my_current_event_teams = 11;
 	optional .TournamentTeam my_current_team = 12;
 	repeated .TournamentEvent my_current_event_stages = 13;
+	optional uint32 survey_vote = 14;
+}
+
+message CMsgGCCStrike15_v2_AccountPrivacySettings {
+	message Setting {
+		optional uint32 setting_type = 1;
+		optional uint32 setting_value = 2;
+	}
+
+	repeated .CMsgGCCStrike15_v2_AccountPrivacySettings.Setting settings = 1;
 }
 
 message CMsgGCCStrike15_v2_MatchmakingGC2ClientAbandon {
@@ -502,10 +525,26 @@ message CEconItemPreviewDataBlock {
 	optional uint32 killeatervalue = 10;
 	optional string customname = 11;
 	repeated .CEconItemPreviewDataBlock.Sticker stickers = 12;
+	optional uint32 inventory = 13;
+	optional uint32 origin = 14;
 }
 
 message CMsgGCCStrike15_v2_MatchEndRewardDropsNotification {
 	optional .CEconItemPreviewDataBlock iteminfo = 6;
+}
+
+message CMsgItemAcknowledged {
+	optional .CEconItemPreviewDataBlock iteminfo = 1;
+}
+
+message CMsgGCCStrike15_v2_Client2GCEconPreviewDataBlockRequest {
+	optional uint64 param_s = 1;
+	optional uint64 param_a = 2;
+	optional uint64 param_d = 3;
+}
+
+message CMsgGCCStrike15_v2_Client2GCEconPreviewDataBlockResponse {
+	optional .CEconItemPreviewDataBlock iteminfo = 1;
 }
 
 message CMsgGCCStrike15_v2_TournamentMatchRewardDropsNotification {
@@ -515,6 +554,10 @@ message CMsgGCCStrike15_v2_TournamentMatchRewardDropsNotification {
 }
 
 message CMsgGCCStrike15_v2_MatchListRequestCurrentLiveGames {
+}
+
+message CMsgGCCStrike15_v2_MatchListRequestLiveGameForUser {
+	optional uint32 accountid = 1;
 }
 
 message CMsgGCCStrike15_v2_MatchListRequestRecentUserGames {
@@ -546,10 +589,66 @@ message CMsgGCCStrike15_v2_MatchList {
 	repeated .TournamentTeam streams = 5;
 }
 
+message CAttribute_String {
+	optional string value = 1;
+}
+
+message CMsgGCToGCReloadVersions {
+}
+
+message CMsgCStrike15Welcome {
+	optional uint32 store_item_hash = 5;
+	optional uint32 timeplayedconsecutively = 6;
+	optional uint32 time_first_played = 10;
+	optional uint32 last_time_played = 12;
+	optional uint32 last_ip_address = 13;
+}
+
 message CMsgGCCStrike15_v2_ClientVarValueNotificationInfo {
 	optional string value_name = 1;
 	optional int32 value_int = 2;
 	optional uint32 server_addr = 3;
 	optional uint32 server_port = 4;
+}
+
+message CMsgGCCStrike15_v2_ServerVarValueNotificationInfo {
+	optional uint32 accountid = 1;
+	repeated uint32 viewangles = 2;
+}
+
+message CMsgGCCStrike15_v2_GiftsLeaderboardRequest {
+}
+
+message CMsgGCCStrike15_v2_GiftsLeaderboardResponse {
+	message GiftLeaderboardEntry {
+		optional uint32 accountid = 1;
+		optional uint32 gifts = 2;
+	}
+
+	optional uint32 servertime = 1;
+	optional uint32 time_period_seconds = 2;
+	optional uint32 total_gifts_given = 3;
+	optional uint32 total_givers = 4;
+	repeated .CMsgGCCStrike15_v2_GiftsLeaderboardResponse.GiftLeaderboardEntry entries = 5;
+}
+
+message CMsgGCCStrike15_v2_ClientSubmitSurveyVote {
+	optional uint32 survey_id = 1;
+	optional uint32 vote = 2;
+}
+
+message CMsgGCCStrike15_v2_Server2GCClientValidate {
+	optional uint32 accountid = 1;
+}
+
+message CMsgGCCStrike15_v2_Server2GCPureServerValidationFailure {
+	optional uint32 accountid = 1;
+	optional string path = 2;
+	optional string file = 3;
+	optional uint32 crc = 4;
+	optional int32 hash = 5;
+	optional int32 len = 6;
+	optional int32 pack_number = 7;
+	optional int32 pack_file_id = 8;
 }
 

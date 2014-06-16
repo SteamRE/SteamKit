@@ -316,44 +316,6 @@ namespace SteamKit2.GC.TF2.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgTFKickPlayer")]
-  public partial class CMsgTFKickPlayer : global::ProtoBuf.IExtensible
-  {
-    public CMsgTFKickPlayer() {}
-    
-
-    private uint _account_id_player = default(uint);
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_id_player", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint account_id_player
-    {
-      get { return _account_id_player; }
-      set { _account_id_player = value; }
-    }
-
-    private uint _kick_reason = default(uint);
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"kick_reason", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint kick_reason
-    {
-      get { return _kick_reason; }
-      set { _kick_reason = value; }
-    }
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgTFStartedTraining")]
-  public partial class CMsgTFStartedTraining : global::ProtoBuf.IExtensible
-  {
-    public CMsgTFStartedTraining() {}
-    
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgTFFreeTrialChooseMostHelpfulFriend")]
   public partial class CMsgTFFreeTrialChooseMostHelpfulFriend : global::ProtoBuf.IExtensible
   {
@@ -420,15 +382,6 @@ namespace SteamKit2.GC.TF2.Internal
     {
       get { return _num_new_users_helped; }
       set { _num_new_users_helped = value; }
-    }
-
-    private bool _trial_account = (bool)false;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"trial_account", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue((bool)false)]
-    public bool trial_account
-    {
-      get { return _trial_account; }
-      set { _trial_account = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -1352,6 +1305,44 @@ namespace SteamKit2.GC.TF2.Internal
     {
       get { return _game_server_identity_token; }
       set { _game_server_identity_token = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGC_GameServer_AckPolicy")]
+  public partial class CMsgGC_GameServer_AckPolicy : global::ProtoBuf.IExtensible
+  {
+    public CMsgGC_GameServer_AckPolicy() {}
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGC_GameServer_AckPolicyResponse")]
+  public partial class CMsgGC_GameServer_AckPolicyResponse : global::ProtoBuf.IExtensible
+  {
+    public CMsgGC_GameServer_AckPolicyResponse() {}
+    
+
+    private uint _result = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"result", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint result
+    {
+      get { return _result; }
+      set { _result = value; }
+    }
+
+    private string _message = "";
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"message", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string message
+    {
+      get { return _message; }
+      set { _message = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -4465,6 +4456,376 @@ namespace SteamKit2.GC.TF2.Internal
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CAttribute_ItemSlotCriteria")]
+  public partial class CAttribute_ItemSlotCriteria : global::ProtoBuf.IExtensible
+  {
+    public CAttribute_ItemSlotCriteria() {}
+    
+
+    private string _tags = "";
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"tags", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string tags
+    {
+      get { return _tags; }
+      set { _tags = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgSetItemSlotAttribute")]
+  public partial class CMsgSetItemSlotAttribute : global::ProtoBuf.IExtensible
+  {
+    public CMsgSetItemSlotAttribute() {}
+    
+
+    private ulong _item_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"item_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong item_id
+    {
+      get { return _item_id; }
+      set { _item_id = value; }
+    }
+
+    private ulong _slot_item_original_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"slot_item_original_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong slot_item_original_id
+    {
+      get { return _slot_item_original_id; }
+      set { _slot_item_original_id = value; }
+    }
+
+    private uint _slot_index = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"slot_index", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint slot_index
+    {
+      get { return _slot_index; }
+      set { _slot_index = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"ETFGCMsg", EnumPassthru=true)]
+    public enum ETFGCMsg
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCReportWarKill", Value=5001)]
+      k_EMsgGCReportWarKill = 5001,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCVoteKickBanPlayer", Value=5018)]
+      k_EMsgGCVoteKickBanPlayer = 5018,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCVoteKickBanPlayerResult", Value=5019)]
+      k_EMsgGCVoteKickBanPlayerResult = 5019,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCKickPlayer_DEPRECATED", Value=5020)]
+      k_EMsgGCKickPlayer_DEPRECATED = 5020,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCStartedTraining_DEPRECATED", Value=5021)]
+      k_EMsgGCStartedTraining_DEPRECATED = 5021,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCFreeTrial_ChooseMostHelpfulFriend", Value=5022)]
+      k_EMsgGCFreeTrial_ChooseMostHelpfulFriend = 5022,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCRequestTF2Friends", Value=5023)]
+      k_EMsgGCRequestTF2Friends = 5023,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCRequestTF2FriendsResponse", Value=5024)]
+      k_EMsgGCRequestTF2FriendsResponse = 5024,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCReplay_SubmitContestEntry", Value=5026)]
+      k_EMsgGCReplay_SubmitContestEntry = 5026,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCReplay_SubmitContestEntryResponse", Value=5027)]
+      k_EMsgGCReplay_SubmitContestEntryResponse = 5027,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCSaxxy_Awarded", Value=5029)]
+      k_EMsgGCSaxxy_Awarded = 5029,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCFreeTrial_ThankedBySomeone", Value=5028)]
+      k_EMsgGCFreeTrial_ThankedBySomeone = 5028,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCFreeTrial_ThankedSomeone", Value=5030)]
+      k_EMsgGCFreeTrial_ThankedSomeone = 5030,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCFreeTrial_ConvertedToPremium", Value=5031)]
+      k_EMsgGCFreeTrial_ConvertedToPremium = 5031,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCMeetThePyroSilliness_BananaCraft_DEPRECATED", Value=5032)]
+      k_EMsgGCMeetThePyroSilliness_BananaCraft_DEPRECATED = 5032,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCMVMARG_HighFiveSuccessResponse_DEPRECATED", Value=5033)]
+      k_EMsgGCMVMARG_HighFiveSuccessResponse_DEPRECATED = 5033,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCMVMARG_HighFiveOnClient_DEPRECATED", Value=5034)]
+      k_EMsgGCMVMARG_HighFiveOnClient_DEPRECATED = 5034,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCCoaching_AddToCoaches", Value=5200)]
+      k_EMsgGCCoaching_AddToCoaches = 5200,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCCoaching_AddToCoachesResponse", Value=5201)]
+      k_EMsgGCCoaching_AddToCoachesResponse = 5201,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCCoaching_RemoveFromCoaches", Value=5202)]
+      k_EMsgGCCoaching_RemoveFromCoaches = 5202,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCCoaching_RemoveFromCoachesResponse", Value=5203)]
+      k_EMsgGCCoaching_RemoveFromCoachesResponse = 5203,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCCoaching_FindCoach", Value=5204)]
+      k_EMsgGCCoaching_FindCoach = 5204,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCCoaching_FindCoachResponse", Value=5205)]
+      k_EMsgGCCoaching_FindCoachResponse = 5205,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCCoaching_AskCoach", Value=5206)]
+      k_EMsgGCCoaching_AskCoach = 5206,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCCoaching_AskCoachResponse", Value=5207)]
+      k_EMsgGCCoaching_AskCoachResponse = 5207,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCCoaching_CoachJoinGame", Value=5208)]
+      k_EMsgGCCoaching_CoachJoinGame = 5208,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCCoaching_CoachJoining", Value=5209)]
+      k_EMsgGCCoaching_CoachJoining = 5209,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCCoaching_CoachJoined", Value=5210)]
+      k_EMsgGCCoaching_CoachJoined = 5210,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCCoaching_LikeCurrentCoach", Value=5211)]
+      k_EMsgGCCoaching_LikeCurrentCoach = 5211,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCCoaching_RemoveCurrentCoach", Value=5212)]
+      k_EMsgGCCoaching_RemoveCurrentCoach = 5212,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCCoaching_AlreadyRatedCoach", Value=5213)]
+      k_EMsgGCCoaching_AlreadyRatedCoach = 5213,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGC_Duel_Request", Value=5500)]
+      k_EMsgGC_Duel_Request = 5500,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGC_Duel_Response", Value=5501)]
+      k_EMsgGC_Duel_Response = 5501,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGC_Duel_Results", Value=5502)]
+      k_EMsgGC_Duel_Results = 5502,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGC_Duel_Status", Value=5503)]
+      k_EMsgGC_Duel_Status = 5503,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGC_Halloween_ReservedItem_DEPRECATED", Value=5600)]
+      k_EMsgGC_Halloween_ReservedItem_DEPRECATED = 5600,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGC_Halloween_GrantItem_DEPRECATED", Value=5601)]
+      k_EMsgGC_Halloween_GrantItem_DEPRECATED = 5601,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGC_Halloween_GrantItemResponse_DEPRECATED", Value=5604)]
+      k_EMsgGC_Halloween_GrantItemResponse_DEPRECATED = 5604,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGC_Halloween_Cheat_QueryResponse_DEPRECATED", Value=5605)]
+      k_EMsgGC_Halloween_Cheat_QueryResponse_DEPRECATED = 5605,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGC_Halloween_ItemClaimed_DEPRECATED", Value=5606)]
+      k_EMsgGC_Halloween_ItemClaimed_DEPRECATED = 5606,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGC_Halloween_ReservedItem", Value=5607)]
+      k_EMsgGC_Halloween_ReservedItem = 5607,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGC_Halloween_GrantItem", Value=5608)]
+      k_EMsgGC_Halloween_GrantItem = 5608,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGC_Halloween_GrantItemResponse", Value=5609)]
+      k_EMsgGC_Halloween_GrantItemResponse = 5609,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGC_Halloween_Cheat_QueryResponse_DEPRECATED_2", Value=5610)]
+      k_EMsgGC_Halloween_Cheat_QueryResponse_DEPRECATED_2 = 5610,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGC_Halloween_ItemClaimed_DEPRECATED_2", Value=5611)]
+      k_EMsgGC_Halloween_ItemClaimed_DEPRECATED_2 = 5611,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGC_Halloween_ServerBossEvent", Value=5612)]
+      k_EMsgGC_Halloween_ServerBossEvent = 5612,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGC_Halloween_Merasmus2012", Value=5613)]
+      k_EMsgGC_Halloween_Merasmus2012 = 5613,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGC_Halloween_UpdateMerasmusLootLevel", Value=5614)]
+      k_EMsgGC_Halloween_UpdateMerasmusLootLevel = 5614,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGC_GameServer_LevelInfo", Value=5700)]
+      k_EMsgGC_GameServer_LevelInfo = 5700,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGC_GameServer_AuthChallenge", Value=5701)]
+      k_EMsgGC_GameServer_AuthChallenge = 5701,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGC_GameServer_AuthChallengeResponse", Value=5702)]
+      k_EMsgGC_GameServer_AuthChallengeResponse = 5702,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGC_GameServer_CreateIdentity", Value=5703)]
+      k_EMsgGC_GameServer_CreateIdentity = 5703,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGC_GameServer_CreateIdentityResponse", Value=5704)]
+      k_EMsgGC_GameServer_CreateIdentityResponse = 5704,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGC_GameServer_List", Value=5705)]
+      k_EMsgGC_GameServer_List = 5705,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGC_GameServer_ListResponse", Value=5706)]
+      k_EMsgGC_GameServer_ListResponse = 5706,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGC_GameServer_AuthResult", Value=5707)]
+      k_EMsgGC_GameServer_AuthResult = 5707,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGC_GameServer_ResetIdentity", Value=5708)]
+      k_EMsgGC_GameServer_ResetIdentity = 5708,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGC_GameServer_ResetIdentityResponse", Value=5709)]
+      k_EMsgGC_GameServer_ResetIdentityResponse = 5709,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGC_Client_UseServerModificationItem", Value=5710)]
+      k_EMsgGC_Client_UseServerModificationItem = 5710,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGC_Client_UseServerModificationItem_Response", Value=5711)]
+      k_EMsgGC_Client_UseServerModificationItem_Response = 5711,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGC_GameServer_UseServerModificationItem", Value=5712)]
+      k_EMsgGC_GameServer_UseServerModificationItem = 5712,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGC_GameServer_UseServerModificationItem_Response", Value=5713)]
+      k_EMsgGC_GameServer_UseServerModificationItem_Response = 5713,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGC_GameServer_ServerModificationItemExpired", Value=5714)]
+      k_EMsgGC_GameServer_ServerModificationItemExpired = 5714,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGC_GameServer_ModificationItemState", Value=5715)]
+      k_EMsgGC_GameServer_ModificationItemState = 5715,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGC_GameServer_AckPolicy", Value=5716)]
+      k_EMsgGC_GameServer_AckPolicy = 5716,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGC_GameServer_AckPolicyResponse", Value=5717)]
+      k_EMsgGC_GameServer_AckPolicyResponse = 5717,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGC_QP_ScoreServers", Value=5800)]
+      k_EMsgGC_QP_ScoreServers = 5800,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGC_QP_ScoreServersResponse", Value=5801)]
+      k_EMsgGC_QP_ScoreServersResponse = 5801,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGC_QP_PlayerJoining", Value=5802)]
+      k_EMsgGC_QP_PlayerJoining = 5802,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGC_PickupItemEligibility_Query_DEPRECATED", Value=6000)]
+      k_EMsgGC_PickupItemEligibility_Query_DEPRECATED = 6000,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGC_PickupItemEligibility_Query_DEPRECATED_2", Value=6001)]
+      k_EMsgGC_PickupItemEligibility_Query_DEPRECATED_2 = 6001,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGC_IncrementKillCountAttribute_DEPRECATED", Value=6100)]
+      k_EMsgGC_IncrementKillCountAttribute_DEPRECATED = 6100,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGC_IncrementKillCountResponse_DEPRECATED", Value=6101)]
+      k_EMsgGC_IncrementKillCountResponse_DEPRECATED = 6101,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCGameMatchSignOut", Value=6204)]
+      k_EMsgGCGameMatchSignOut = 6204,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCCreateOrUpdateParty", Value=6233)]
+      k_EMsgGCCreateOrUpdateParty = 6233,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCAbandonCurrentGame", Value=6235)]
+      k_EMsgGCAbandonCurrentGame = 6235,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgForceSOCacheResend", Value=6237)]
+      k_EMsgForceSOCacheResend = 6237,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCRequestChatChannelList", Value=6260)]
+      k_EMsgGCRequestChatChannelList = 6260,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCRequestChatChannelListResponse", Value=6261)]
+      k_EMsgGCRequestChatChannelListResponse = 6261,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCReadyUp", Value=6270)]
+      k_EMsgGCReadyUp = 6270,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCKickedFromMatchmakingQueue", Value=6271)]
+      k_EMsgGCKickedFromMatchmakingQueue = 6271,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCLeaverDetected", Value=6272)]
+      k_EMsgGCLeaverDetected = 6272,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCLeaverDetectedResponse", Value=6287)]
+      k_EMsgGCLeaverDetectedResponse = 6287,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCPlayerFailedToConnect", Value=6288)]
+      k_EMsgGCPlayerFailedToConnect = 6288,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCExitMatchmaking", Value=6289)]
+      k_EMsgGCExitMatchmaking = 6289,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCAcceptInvite", Value=6291)]
+      k_EMsgGCAcceptInvite = 6291,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCAcceptInviteResponse", Value=6292)]
+      k_EMsgGCAcceptInviteResponse = 6292,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCMatchmakingProgress", Value=6293)]
+      k_EMsgGCMatchmakingProgress = 6293,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCMvMVictoryInfo", Value=6294)]
+      k_EMsgGCMvMVictoryInfo = 6294,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCGameServerMatchmakingStatus", Value=6295)]
+      k_EMsgGCGameServerMatchmakingStatus = 6295,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCCreateOrUpdatePartyReply", Value=6296)]
+      k_EMsgGCCreateOrUpdatePartyReply = 6296,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCMvMVictory", Value=6297)]
+      k_EMsgGCMvMVictory = 6297,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCMvMVictoryReply", Value=6298)]
+      k_EMsgGCMvMVictoryReply = 6298,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCGameServerKickingLobby", Value=6299)]
+      k_EMsgGCGameServerKickingLobby = 6299,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCLeaveGameAndPrepareToJoinParty", Value=6300)]
+      k_EMsgGCLeaveGameAndPrepareToJoinParty = 6300,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCRemovePlayerFromLobby", Value=6301)]
+      k_EMsgGCRemovePlayerFromLobby = 6301,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCSetLobbySafeToLeave", Value=6302)]
+      k_EMsgGCSetLobbySafeToLeave = 6302,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGC_UpdatePeriodicEvent", Value=6400)]
+      k_EMsgGC_UpdatePeriodicEvent = 6400,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGC_ClientVerificationChallenge", Value=6500)]
+      k_EMsgGC_ClientVerificationChallenge = 6500,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGC_ClientVerificationChallengeResponse", Value=6501)]
+      k_EMsgGC_ClientVerificationChallengeResponse = 6501,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGC_ClientVerificationVerboseResponse", Value=6502)]
+      k_EMsgGC_ClientVerificationVerboseResponse = 6502,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGC_ClientSetItemSlotAttribute", Value=6503)]
+      k_EMsgGC_ClientSetItemSlotAttribute = 6503,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCDev_GrantWarKill", Value=10001)]
+      k_EMsgGCDev_GrantWarKill = 10001
+    }
   
     [global::ProtoBuf.ProtoContract(Name=@"EServerModificationItemType", EnumPassthru=true)]
     public enum EServerModificationItemType

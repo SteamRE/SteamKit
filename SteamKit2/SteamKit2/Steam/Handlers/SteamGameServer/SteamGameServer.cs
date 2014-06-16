@@ -4,6 +4,8 @@
  */
 
 using System;
+using System.Net;
+using System.Net.Sockets;
 using SteamKit2.Internal;
 
 namespace SteamKit2
@@ -19,19 +21,55 @@ namespace SteamKit2
         public sealed class LogOnDetails
         {
             /// <summary>
-            /// Gets or sets the username.
+            /// Gets or sets the authentication token used to log in as a game server.
             /// </summary>
-            public string Username { get; set; }
-
-            /// <summary>
-            /// Gets or sets the password.
-            /// </summary>
-            public string Password { get; set; }
+            public string Token { get; set; }
 
             /// <summary>
             /// Gets or sets the AppID this gameserver will serve.
             /// </summary>
             public uint AppID { get; set; }
+        }
+
+        /// <summary>
+        /// Represents the details of the game server's current status.
+        /// </summary>
+        public sealed class StatusDetails
+        {
+            /// <summary>
+            /// Gets or sets the AppID this game server is serving.
+            /// </summary>
+            public uint AppID { get; set; }
+
+            /// <summary>
+            /// Gets or sets the server's basic state as flags.
+            /// </summary>
+            public EServerFlags ServerFlags { get; set; }
+
+            /// <summary>
+            /// Gets or sets the directory the game data is in.
+            /// </summary>
+            public string GameDirectory { get; set; }
+
+            /// <summary>
+            /// Gets or sets the IP address the game server listens on.
+            /// </summary>
+            public IPAddress Address { get; set; }
+
+            /// <summary>
+            /// Gets or sets the port the game server listens on.
+            /// </summary>
+            public uint Port { get; set; }
+
+            /// <summary>
+            /// Gets or sets the port the game server responds to queries on.
+            /// </summary>
+            public uint QueryPort { get; set; }
+
+            /// <summary>
+            /// Gets or sets the current version of the game server.
+            /// </summary>
+            public string Version { get; set; }
         }
 
 
@@ -55,12 +93,18 @@ namespace SteamKit2
                 throw new ArgumentNullException( "details" );
             }
 
-            if ( string.IsNullOrEmpty( details.Username ) || string.IsNullOrEmpty( details.Password ) )
+            if ( string.IsNullOrEmpty( details.Token ) )
             {
-                throw new ArgumentException( "LogOn requires a username and password to be set in 'details'." );
+                throw new ArgumentException( "LogOn requires a game server token to be set in 'details'." );
+            }
+            
+            if ( !this.Client.IsConnected )
+            {
+                this.Client.PostCallback( new SteamUser.LoggedOnCallback( EResult.NoConnection ) );
+                return;
             }
 
-            var logon = new ClientMsgProtobuf<CMsgClientLogon>( EMsg.ClientLogon );
+            var logon = new ClientMsgProtobuf<CMsgClientLogon>( EMsg.ClientLogonGameServer );
 
             SteamID gsId = new SteamID( 0, 0, Client.ConnectedUniverse, EAccountType.GameServer );
 
@@ -76,8 +120,7 @@ namespace SteamKit2
             logon.Body.game_server_app_id = ( int )details.AppID;
             logon.Body.machine_id = Utils.GenerateMachineID();
 
-            logon.Body.account_name = details.Username;
-            logon.Body.password = details.Password;
+            logon.Body.game_server_token = details.Token;
 
             this.Client.Send( logon );
         }
@@ -90,6 +133,12 @@ namespace SteamKit2
         /// <param name="appId">The AppID served by this game server, or 0 for the default.</param>
         public void LogOnAnonymous( uint appId = 0 )
         {
+            if ( !this.Client.IsConnected )
+            {
+                this.Client.PostCallback( new SteamUser.LoggedOnCallback( EResult.NoConnection ) );
+                return;
+            }
+
             var logon = new ClientMsgProtobuf<CMsgClientLogon>( EMsg.ClientLogon );
 
             SteamID gsId = new SteamID( 0, 0, Client.ConnectedUniverse, EAccountType.AnonGameServer );
@@ -120,6 +169,38 @@ namespace SteamKit2
             this.Client.Send( logOff );
         }
 
+        /// <summary>
+        /// Sends the server's status to the Steam network.
+        /// Results are returned in a <see cref="StatusReplyCallback"/> callback.
+        /// </summary>
+        /// <param name="details">A <see cref="SteamGameServer.StatusDetails"/> object containing the server's status.</param>
+        public void SendStatus(StatusDetails details)
+        {
+            if (details == null)
+            {
+                throw new ArgumentNullException("details");
+            }
+
+            if (details.Address != null && details.Address.AddressFamily != AddressFamily.InterNetwork)
+            {
+                throw new ArgumentException("Only IPv4 addresses are supported.");
+            }
+
+            var status = new ClientMsgProtobuf<CMsgGSServerType>(EMsg.GSServerType);
+            status.Body.app_id_served = details.AppID;
+            status.Body.flags = (uint)details.ServerFlags;
+            status.Body.game_dir = details.GameDirectory;
+            status.Body.game_port = details.Port;
+            status.Body.game_query_port = details.QueryPort;
+            status.Body.game_version = details.Version;
+
+            if (details.Address != null)
+            {
+                status.Body.game_ip_address = NetHelpers.GetIPAddress( details.Address );
+            }
+
+            this.Client.Send( status );
+        }
 
         /// <summary>
         /// Handles a client message. This should not be called directly.

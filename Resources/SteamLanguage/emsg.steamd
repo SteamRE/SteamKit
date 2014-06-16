@@ -252,14 +252,14 @@ enum EMsg
 	ClientSystemIM = 726;
 	ClientSystemIMAck = 727;
 	ClientGetLicenses = 728;
-	ClientCancelLicense = 729;
+	ClientCancelLicense = 729; obsolete
 	ClientGetLegacyGameKey = 730;
 	ClientContentServerLogOn_Deprecated = 731; obsolete
 	ClientAckVACBan2 = 732;
 	ClientAckMessageByGID = 735;
 	ClientGetPurchaseReceipts = 736;
 	ClientAckPurchaseReceipt = 737;
-	ClientGamesPlayed3_obsolete = 738;
+	ClientGamesPlayed3_obsolete = 738; obsolete
 	ClientSendGuestPass = 739;
 	ClientAckGuestPass = 740;
 	ClientRedeemGuestPass = 741;
@@ -269,8 +269,8 @@ enum EMsg
 	ClientAcknowledgeClanInvite = 745;
 	ClientPurchaseWithMachineID = 746;
 	ClientAppUsageEvent = 747;
-	ClientGetGiftTargetList = 748;
-	ClientGetGiftTargetListResponse = 749;
+	ClientGetGiftTargetList = 748; obsolete
+	ClientGetGiftTargetListResponse = 749; obsolete
 	ClientLogOnResponse = 751;
 	ClientVACChallenge = 753;
 	ClientSetHeartbeatRate = 755;
@@ -293,7 +293,7 @@ enum EMsg
 	ClientGetFinalPriceResponse = 775;
 	ClientGameConnectTokens = 779;
 	ClientLicenseList = 780;
-	ClientCancelLicenseResponse = 781;
+	ClientCancelLicenseResponse = 781; obsolete
 	ClientVACBanStatus = 782;
 	ClientCMList = 783;
 	ClientEncryptPct = 784;
@@ -306,7 +306,7 @@ enum EMsg
 	ClientAddFriendResponse = 792;
 	ClientInviteFriend = 793;
 	ClientInviteFriendResponse = 794;
-	ClientSendGuestPassResponse = 795;
+	ClientSendGuestPassResponse = 795; obsolete
 	ClientAckGuestPassResponse = 796;
 	ClientRedeemGuestPassResponse = 797;
 	ClientUpdateGuestPassesList = 798;
@@ -1202,7 +1202,7 @@ enum EMsg
 	ClientLBSFindOrCreateLBResponse = 5417;
 	ClientLBSGetLBEntries = 5418;
 	ClientLBSGetLBEntriesResponse = 5419;
-	ClientMarketingMessageUpdate = 5420;
+	ClientMarketingMessageUpdate = 5420; obsolete
 	ClientChatDeclined = 5426;
 	ClientFriendMsgIncoming = 5427;
 	ClientAuthList_Deprecated = 5428;
@@ -1400,8 +1400,10 @@ enum EMsg
 	MDSToAMGetDepotDecryptionKeyResponse = 5813;
 	MDSGetVersionsForDepot = 5814;
 	MDSGetVersionsForDepotResponse = 5815;
-	MDSSetPublicVersionForDepot = 5816;
-	MDSSetPublicVersionForDepotResponse = 5817;
+	MDSSetPublicVersionForDepot = 5816; obsolete
+	MDSSetPublicVersionForDepotResponse = 5817; obsolete
+	ClientMDSInitWorkshopBuildRequest = 5816;
+	ClientMDSInitWorkshopBuildResponse = 5817;
 	ClientMDSGetDepotManifest = 5818;
 	ClientMDSGetDepotManifestResponse = 5819;
 	ClientMDSGetDepotManifestChunk = 5820;

@@ -67,6 +67,26 @@ namespace SteamKit2
             /// </summary>
             public SteamID OtherClient { get; private set; }
 
+            /// <summary>
+            /// Gets the number of days Steam Guard is required to have been active on this account.
+            /// </summary>
+            public uint NumDaysSteamGuardRequired { get; private set; }
+
+            /// <summary>
+            /// Gets the number of days a new device cannot trade for.
+            /// </summary>
+            public uint NumDaysNewDeviceCooldown { get; private set; }
+
+            /// <summary>
+            /// Gets the default number of days one cannot trade for after a password reset.
+            /// </summary>
+            public uint DefaultNumDaysPasswordResetProbation { get; private set; }
+
+            /// <summary>
+            /// Gets the number of days one cannot trade for after a password reset.
+            /// </summary>
+            public uint NumDaysPasswordResetProbation { get; private set; }
+
 
             internal TradeResultCallback( CMsgTrading_InitiateTradeResponse msg )
             {
@@ -75,6 +95,14 @@ namespace SteamKit2
                 this.Response = ( EEconTradeResponse )msg.response;
 
                 this.OtherClient = msg.other_steamid;
+
+                this.NumDaysSteamGuardRequired = msg.steamguard_required_days;
+
+                this.NumDaysNewDeviceCooldown = msg.new_device_cooldown_days;
+
+                this.DefaultNumDaysPasswordResetProbation = msg.default_password_reset_probation_days;
+
+                this.NumDaysPasswordResetProbation = msg.password_reset_probation_days;
             }
         }
 

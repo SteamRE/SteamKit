@@ -11,6 +11,7 @@ TestResults
 # User-specific files
 *.suo
 *.user
+*.userprefs
 *.sln.docstates
 
 # Build results
@@ -117,3 +118,4 @@ cryptopp/
 
 # misc
 Thumbs.db
+.DS_Store

@@ -257,6 +257,7 @@ namespace SteamKit2
 		ClientSystemIM = 726,
 		ClientSystemIMAck = 727,
 		ClientGetLicenses = 728,
+		[Obsolete]
 		ClientCancelLicense = 729,
 		ClientGetLegacyGameKey = 730,
 		[Obsolete]
@@ -265,6 +266,7 @@ namespace SteamKit2
 		ClientAckMessageByGID = 735,
 		ClientGetPurchaseReceipts = 736,
 		ClientAckPurchaseReceipt = 737,
+		[Obsolete]
 		ClientGamesPlayed3_obsolete = 738,
 		ClientSendGuestPass = 739,
 		ClientAckGuestPass = 740,
@@ -275,7 +277,9 @@ namespace SteamKit2
 		ClientAcknowledgeClanInvite = 745,
 		ClientPurchaseWithMachineID = 746,
 		ClientAppUsageEvent = 747,
+		[Obsolete]
 		ClientGetGiftTargetList = 748,
+		[Obsolete]
 		ClientGetGiftTargetListResponse = 749,
 		ClientLogOnResponse = 751,
 		ClientVACChallenge = 753,
@@ -299,6 +303,7 @@ namespace SteamKit2
 		ClientGetFinalPriceResponse = 775,
 		ClientGameConnectTokens = 779,
 		ClientLicenseList = 780,
+		[Obsolete]
 		ClientCancelLicenseResponse = 781,
 		ClientVACBanStatus = 782,
 		ClientCMList = 783,
@@ -314,6 +319,7 @@ namespace SteamKit2
 		ClientAddFriendResponse = 792,
 		ClientInviteFriend = 793,
 		ClientInviteFriendResponse = 794,
+		[Obsolete]
 		ClientSendGuestPassResponse = 795,
 		ClientAckGuestPassResponse = 796,
 		ClientRedeemGuestPassResponse = 797,
@@ -1208,6 +1214,7 @@ namespace SteamKit2
 		ClientLBSFindOrCreateLBResponse = 5417,
 		ClientLBSGetLBEntries = 5418,
 		ClientLBSGetLBEntriesResponse = 5419,
+		[Obsolete]
 		ClientMarketingMessageUpdate = 5420,
 		ClientChatDeclined = 5426,
 		ClientFriendMsgIncoming = 5427,
@@ -1407,8 +1414,12 @@ namespace SteamKit2
 		MDSToAMGetDepotDecryptionKeyResponse = 5813,
 		MDSGetVersionsForDepot = 5814,
 		MDSGetVersionsForDepotResponse = 5815,
+		[Obsolete]
 		MDSSetPublicVersionForDepot = 5816,
+		[Obsolete]
 		MDSSetPublicVersionForDepotResponse = 5817,
+		ClientMDSInitWorkshopBuildRequest = 5816,
+		ClientMDSInitWorkshopBuildResponse = 5817,
 		ClientMDSGetDepotManifest = 5818,
 		ClientMDSGetDepotManifestResponse = 5819,
 		ClientMDSGetDepotManifestChunk = 5820,
@@ -1872,6 +1883,10 @@ namespace SteamKit2
 		Disabled = 80,
 		InvalidCEGSubmission = 81,
 		RestrictedDevice = 82,
+		RegionLocked = 83,
+		RateLimitExceeded = 84,
+		AccountLogonDeniedNeedTwoFactorCode = 85,
+		ItemOrEntryHasBeenDeleted = 86,
 	}
 	public enum EUniverse
 	{
@@ -2325,6 +2340,9 @@ namespace SteamKit2
 		Linux24 = -201,
 		Linux26 = -200,
 		Linux32 = -199,
+		Linux35 = -198,
+		Linux36 = -197,
+		Linux310 = -196,
 		WinUnknown = 0,
 		Win311 = 1,
 		Win95 = 2,

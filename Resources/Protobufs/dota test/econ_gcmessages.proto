@@ -86,6 +86,9 @@ enum EGCItemMsg {
 	k_EMsgGCAddItemToSocketResponse = 1089;
 	k_EMsgGCAddSocketResponse = 1090;
 	k_EMsgGCResetStrangeGemCount = 1091;
+	k_EMsgGCRequestCrateItems = 1092;
+	k_EMsgGCRequestCrateItemsResponse = 1093;
+	k_EMsgGCServerUseItemRequest = 1103;
 	k_EMsgGCTradingBase = 1500;
 	k_EMsgGCTrading_InitiateTradeRequest = 1501;
 	k_EMsgGCTrading_InitiateTradeResponse = 1502;
@@ -106,14 +109,10 @@ enum EGCItemMsg {
 	k_EMsgGCDev_NewItemRequestResponse = 2002;
 	k_EMsgGCStoreGetUserData = 2500;
 	k_EMsgGCStoreGetUserDataResponse = 2501;
-	k_EMsgGCStorePurchaseInit_DEPRECATED = 2502;
-	k_EMsgGCStorePurchaseInitResponse_DEPRECATED = 2503;
 	k_EMsgGCStorePurchaseFinalize = 2504;
 	k_EMsgGCStorePurchaseFinalizeResponse = 2505;
 	k_EMsgGCStorePurchaseCancel = 2506;
 	k_EMsgGCStorePurchaseCancelResponse = 2507;
-	k_EMsgGCStorePurchaseQueryTxn = 2508;
-	k_EMsgGCStorePurchaseQueryTxnResponse = 2509;
 	k_EMsgGCStorePurchaseInit = 2510;
 	k_EMsgGCStorePurchaseInitResponse = 2511;
 	k_EMsgGCBannedWordListRequest = 2512;
@@ -129,7 +128,6 @@ enum EGCItemMsg {
 	k_EMsgGCToGCWebAPIAccountChanged = 2524;
 	k_EMsgGCRequestAnnouncements = 2525;
 	k_EMsgGCRequestAnnouncementsResponse = 2526;
-	k_EMsgGCRequestPassportItemGrant = 2527;
 	k_EMsgGCClientVersionUpdated = 2528;
 	k_EMsgGCItemPurgatory_FinalizePurchase = 2531;
 	k_EMsgGCItemPurgatory_FinalizePurchaseResponse = 2532;
@@ -139,6 +137,23 @@ enum EGCItemMsg {
 	k_EMsgGCRequestStoreSalesData = 2536;
 	k_EMsgGCRequestStoreSalesDataResponse = 2537;
 	k_EMsgGCRequestStoreSalesDataUpToDateResponse = 2538;
+	k_EMsgGCToGCPingRequest = 2539;
+	k_EMsgGCToGCPingResponse = 2540;
+	k_EMsgGCToGCGetUserSessionServer = 2541;
+	k_EMsgGCToGCGetUserSessionServerResponse = 2542;
+	k_EMsgGCToGCGetUserServerMembers = 2543;
+	k_EMsgGCToGCGetUserServerMembersResponse = 2544;
+	k_EMsgGCToGCGetUserPCBangNo = 2545;
+	k_EMsgGCToGCGetUserPCBangNoResponse = 2546;
+	k_EMsgGCToGCCanUseDropRateBonus = 2547;
+	k_EMsgSQLAddDropRateBonus = 2548;
+	k_EMsgGCToGCRefreshSOCache = 2549;
+	k_EMsgGCToGCApplyLocalizationDiff = 2550;
+	k_EMsgGCToGCApplyLocalizationDiffResponse = 2551;
+	k_EMsgGCToGCCheckAccountTradeStatus = 2552;
+	k_EMsgGCToGCCheckAccountTradeStatusResponse = 2553;
+	k_EMsgGCToGCGrantAccountRolledItems = 2554;
+	k_EMsgGCToGCGrantSelfMadeItemToAccount = 2555;
 }
 
 enum EGCMsgResponse {
@@ -236,5 +251,122 @@ message CMsgGCRequestStoreSalesDataResponse {
 message CMsgGCRequestStoreSalesDataUpToDateResponse {
 	optional uint32 version = 1;
 	optional uint32 expiration_time = 2;
+}
+
+message CMsgGCToGCPingRequest {
+}
+
+message CMsgGCToGCPingResponse {
+}
+
+message CMsgGCToGCGetUserSessionServer {
+	optional uint32 account_id = 1;
+}
+
+message CMsgGCToGCGetUserSessionServerResponse {
+	optional fixed64 server_steam_id = 1;
+}
+
+message CMsgGCToGCGetUserServerMembers {
+	optional uint32 account_id = 1;
+	optional uint32 max_spectators = 2;
+}
+
+message CMsgGCToGCGetUserServerMembersResponse {
+	repeated uint32 member_account_id = 1;
+}
+
+message CMsgLookupMultipleAccountNames {
+	repeated uint32 accountids = 1 [packed = true];
+}
+
+message CMsgLookupMultipleAccountNamesResponse {
+	message Account {
+		optional uint32 accountid = 1;
+		optional string persona = 2;
+	}
+
+	repeated .CMsgLookupMultipleAccountNamesResponse.Account accounts = 1;
+}
+
+message CMsgGCToGCGetUserPCBangNo {
+	optional uint32 account_id = 1;
+}
+
+message CMsgGCToGCGetUserPCBangNoResponse {
+	optional uint32 pc_bang_no = 1;
+}
+
+message CMsgRequestCrateItems {
+	optional uint32 crate_series = 1;
+}
+
+message CMsgRequestCrateItemsResponse {
+	optional uint32 crate_series = 1;
+	repeated uint32 item_defs = 2;
+}
+
+message CMsgGCToGCCanUseDropRateBonus {
+	optional uint32 account_id = 1;
+	optional float drop_rate_bonus = 2;
+	optional uint32 booster_type = 3;
+}
+
+message CMsgSQLAddDropRateBonus {
+	optional uint32 account_id = 1;
+	optional uint64 item_id = 2;
+	optional uint32 item_def = 3;
+	optional float drop_rate_bonus = 4;
+	optional uint32 booster_type = 5;
+	optional uint32 seconds_duration = 6;
+	optional uint32 end_time_stamp = 7;
+}
+
+message CMsgGCToGCRefreshSOCache {
+	optional uint32 account_id = 1;
+	optional bool reload = 2;
+}
+
+message CMsgGCToGCCheckAccountTradeStatus {
+	optional uint32 account_id = 1;
+	optional bool initiator = 2;
+}
+
+message CMsgGCToGCCheckAccountTradeStatusResponse {
+	optional bool can_trade = 1;
+	optional uint32 error_code = 2;
+}
+
+message CMsgGCToGCGrantAccountRolledItems {
+	message Item {
+		optional uint32 item_def = 1;
+		repeated string loot_lists = 2;
+		optional bool ignore_limit = 3;
+		optional uint32 origin = 4;
+	}
+
+	optional uint32 account_id = 1;
+	repeated .CMsgGCToGCGrantAccountRolledItems.Item items = 2;
+	optional uint32 audit_action = 3;
+	optional uint32 audit_data = 4;
+}
+
+message CMsgGCToGCGrantSelfMadeItemToAccount {
+	optional uint32 item_def_index = 1;
+	optional uint32 accountid = 2;
+}
+
+message CMsgUseItem {
+	optional uint64 item_id = 1;
+	optional fixed64 target_steam_id = 2;
+	repeated uint32 gift__potential_targets = 3;
+	optional uint32 duel__class_lock = 4;
+	optional uint64 initiator_steam_id = 5;
+	optional bool itempack__ack_immediately = 6;
+}
+
+message CMsgServerUseItem {
+	optional uint32 initiator_account_id = 1;
+	optional .CMsgUseItem use_item_msg = 2;
 }
 

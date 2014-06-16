@@ -43,6 +43,7 @@ message CUserMsg_CloseCaption {
 	optional fixed32 hash = 1;
 	optional float duration = 2;
 	optional bool from_player = 3;
+	optional int32 ent_index = 4;
 }
 
 message CUserMsg_CurrentTimescale {

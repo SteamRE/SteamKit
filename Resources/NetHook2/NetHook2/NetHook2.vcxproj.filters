@@ -41,6 +41,12 @@
     <ClCompile Include="zip.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="injector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="string.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="binaryreader.h">
@@ -84,6 +90,9 @@
     </ClInclude>
     <ClInclude Include="steam\udppkt.h">
       <Filter>Header Files\steam</Filter>
+    </ClInclude>
+    <ClInclude Include="nh2_string.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,0 +1,62 @@
+import "google/protobuf/descriptor.proto";
+import "steammessages_unified_base.steamclient.proto";
+
+message CGameServers_GetServerList_Request {
+	optional string filter = 1 [(description) = "Query filter string."];
+	optional uint32 limit = 2 [default = 100, (description) = "The maximum number of servers to return in the response"];
+}
+
+message CGameServers_GetServerList_Response {
+	message Server {
+		optional string addr = 1 [(description) = "The server's IP and query port"];
+		optional uint32 gameport = 2;
+		optional uint32 specport = 3;
+		optional fixed64 steamid = 4;
+		optional string name = 5;
+		optional uint32 appid = 6;
+		optional string gamedir = 7;
+		optional string version = 8;
+		optional string product = 9;
+		optional int32 region = 10;
+		optional int32 players = 11;
+		optional int32 max_players = 12;
+		optional int32 bots = 13;
+		optional string map = 14;
+		optional bool secure = 15;
+		optional bool dedicated = 16;
+		optional string os = 17;
+		optional string gametype = 18;
+	}
+
+	repeated .CGameServers_GetServerList_Response.Server servers = 1 [(description) = "List of servers matching the filter"];
+}
+
+message CGameServers_GetServerSteamIDsByIP_Request {
+	repeated string server_ips = 1;
+}
+
+message CGameServers_IPsWithSteamIDs_Response {
+	message Server {
+		optional string addr = 1;
+		optional fixed64 steamid = 2;
+	}
+
+	repeated .CGameServers_IPsWithSteamIDs_Response.Server servers = 1;
+}
+
+message CGameServers_GetServerIPsBySteamID_Request {
+	repeated fixed64 server_steamids = 1;
+}
+
+service GameServers {
+	option (service_description) = "A service for searching and managing game servers.";
+	rpc GetServerList (.CGameServers_GetServerList_Request) returns (.CGameServers_GetServerList_Response) {
+		option (method_description) = "Gets a list of servers given a filter string";
+	}
+	rpc GetServerSteamIDsByIP (.CGameServers_GetServerSteamIDsByIP_Request) returns (.CGameServers_IPsWithSteamIDs_Response) {
+		option (method_description) = "Gets a list of server SteamIDs given a list of IPs";
+	}
+	rpc GetServerIPsBySteamID (.CGameServers_GetServerIPsBySteamID_Request) returns (.CGameServers_IPsWithSteamIDs_Response) {
+		option (method_description) = "Gets a list of server IP addresses given a list of SteamIDs";
+	}
+}

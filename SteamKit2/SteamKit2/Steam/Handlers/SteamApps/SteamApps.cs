@@ -4,7 +4,7 @@
  */
 
 
-
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using SteamKit2.Internal;
@@ -383,6 +383,7 @@ namespace SteamKit2
         /// <param name="giftId">64-bit GID of the gift</param>
         /// <param name="accountId">Account ID of the recipient</param>
         /// <param name="email">Optional email of the recipient</param>
+        [Obsolete( "Support for sending gift passes through Steam has likely been removed, and SteamKit will be dropping support for this in a future version" )]
         public void SendGuestPass( ulong giftId, uint accountId, string email = null )
         {
             var sendGift = new ClientMsg<MsgClientSendGuestPass>();
@@ -403,6 +404,27 @@ namespace SteamKit2
             }
 
             this.Client.Send( sendGift );
+        }
+
+
+        /// <summary>
+        /// Request product information for an app or package
+        /// Results are returned in a <see cref="CDNAuthTokenCallback"/> callback.
+        /// </summary>
+        /// <param name="app">App id requested.</param>
+        /// <param name="host_name">CDN host name being requested.</param>
+        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="SteamClient.JobCallback&lt;T&gt;"/>.</returns>
+        public JobID GetCDNAuthToken(uint app, string host_name)
+        {
+            var request = new ClientMsgProtobuf<CMsgClientGetCDNAuthToken>(EMsg.ClientGetCDNAuthToken);
+            request.SourceJobID = Client.GetNextJobID();
+
+            request.Body.app_id = app;
+            request.Body.host_name = host_name;
+
+            this.Client.Send(request);
+
+            return request.SourceJobID;
         }
 
         /// <summary>
@@ -461,8 +483,14 @@ namespace SteamKit2
                     HandleGuestPassList( packetMsg );
                     break;
 
+#pragma warning disable 0612
                 case EMsg.ClientSendGuestPassResponse:
                     HandleSendGuestPassResponse( packetMsg );
+                    break;
+#pragma warning restore 0612
+
+                case EMsg.ClientGetCDNAuthTokenResponse:
+                    HandleCDNAuthTokenResponse( packetMsg );
                     break;
             }
         }
@@ -554,11 +582,20 @@ namespace SteamKit2
             this.Client.PostCallback( callback );
         }
 
-        void HandleSendGuestPassResponse(IPacketMsg packetMsg)
+        void HandleSendGuestPassResponse( IPacketMsg packetMsg )
         {
-            var response = new ClientMsg<MsgClientSendGuestPassResponse>(packetMsg);
+            var response = new ClientMsg<MsgClientSendGuestPassResponse>( packetMsg );
 
             var callback = new SendGuestPassCallback( response.Body );
+            this.Client.PostCallback( callback );
+        }
+
+        void HandleCDNAuthTokenResponse( IPacketMsg packetMsg )
+        {
+            var response = new ClientMsgProtobuf<CMsgClientGetCDNAuthTokenResponse>( packetMsg );
+
+            var innerCallback = new CDNAuthTokenCallback(response.Body);
+            var callback = new SteamClient.JobCallback<CDNAuthTokenCallback>( response.TargetJobID, innerCallback );
             this.Client.PostCallback( callback );
         }
         #endregion

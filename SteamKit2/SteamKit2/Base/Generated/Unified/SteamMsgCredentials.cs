@@ -138,49 +138,56 @@ namespace SteamKit2.Unified.Internal
       get { return _timestamp_steamguard_enabled; }
       set { _timestamp_steamguard_enabled = value; }
     }
-    private readonly global::System.Collections.Generic.List<CCredentials_GetSteamGuardDetails_Response.NewAuthentication> _newauthentication = new global::System.Collections.Generic.List<CCredentials_GetSteamGuardDetails_Response.NewAuthentication>();
-    [global::ProtoBuf.ProtoMember(3, Name=@"newauthentication", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public global::System.Collections.Generic.List<CCredentials_GetSteamGuardDetails_Response.NewAuthentication> newauthentication
+    private readonly global::System.Collections.Generic.List<CCredentials_GetSteamGuardDetails_Response.NewAuthentication> _deprecated_newauthentication = new global::System.Collections.Generic.List<CCredentials_GetSteamGuardDetails_Response.NewAuthentication>();
+    [global::ProtoBuf.ProtoMember(3, Name=@"deprecated_newauthentication", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CCredentials_GetSteamGuardDetails_Response.NewAuthentication> deprecated_newauthentication
     {
-      get { return _newauthentication; }
+      get { return _deprecated_newauthentication; }
     }
   
 
-    private string _machine_name_userchosen = "";
-    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"machine_name_userchosen", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    private string _deprecated_machine_name_userchosen = "";
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"deprecated_machine_name_userchosen", DataFormat = global::ProtoBuf.DataFormat.Default)]
     [global::System.ComponentModel.DefaultValue("")]
-    public string machine_name_userchosen
+    public string deprecated_machine_name_userchosen
     {
-      get { return _machine_name_userchosen; }
-      set { _machine_name_userchosen = value; }
+      get { return _deprecated_machine_name_userchosen; }
+      set { _deprecated_machine_name_userchosen = value; }
     }
 
-    private uint _timestamp_machine_steamguard_enabled = default(uint);
-    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"timestamp_machine_steamguard_enabled", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    private uint _deprecated_timestamp_machine_steamguard_enabled = default(uint);
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"deprecated_timestamp_machine_steamguard_enabled", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
     [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint timestamp_machine_steamguard_enabled
+    public uint deprecated_timestamp_machine_steamguard_enabled
     {
-      get { return _timestamp_machine_steamguard_enabled; }
-      set { _timestamp_machine_steamguard_enabled = value; }
+      get { return _deprecated_timestamp_machine_steamguard_enabled; }
+      set { _deprecated_timestamp_machine_steamguard_enabled = value; }
     }
 
-    private bool _authentication_exists_from_geoloc_before_mintime = default(bool);
-    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"authentication_exists_from_geoloc_before_mintime", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    private bool _deprecated_authentication_exists_from_geoloc_before_mintime = default(bool);
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"deprecated_authentication_exists_from_geoloc_before_mintime", DataFormat = global::ProtoBuf.DataFormat.Default)]
     [global::System.ComponentModel.DefaultValue(default(bool))]
-    public bool authentication_exists_from_geoloc_before_mintime
+    public bool deprecated_authentication_exists_from_geoloc_before_mintime
     {
-      get { return _authentication_exists_from_geoloc_before_mintime; }
-      set { _authentication_exists_from_geoloc_before_mintime = value; }
+      get { return _deprecated_authentication_exists_from_geoloc_before_mintime; }
+      set { _deprecated_authentication_exists_from_geoloc_before_mintime = value; }
     }
 
-    private ulong _machine_id = default(ulong);
-    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"machine_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    private ulong _deprecated_machine_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"deprecated_machine_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(default(ulong))]
-    public ulong machine_id
+    public ulong deprecated_machine_id
     {
-      get { return _machine_id; }
-      set { _machine_id = value; }
+      get { return _deprecated_machine_id; }
+      set { _deprecated_machine_id = value; }
     }
+    private readonly global::System.Collections.Generic.List<CCredentials_GetSteamGuardDetails_Response.SessionData> _session_data = new global::System.Collections.Generic.List<CCredentials_GetSteamGuardDetails_Response.SessionData>();
+    [global::ProtoBuf.ProtoMember(8, Name=@"session_data", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CCredentials_GetSteamGuardDetails_Response.SessionData> session_data
+    {
+      get { return _session_data; }
+    }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"NewAuthentication")]
   public partial class NewAuthentication : global::ProtoBuf.IExtensible
   {
@@ -248,6 +255,68 @@ namespace SteamKit2.Unified.Internal
     {
       get { return _status; }
       set { _status = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"SessionData")]
+  public partial class SessionData : global::ProtoBuf.IExtensible
+  {
+    public SessionData() {}
+    
+
+    private ulong _machine_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"machine_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong machine_id
+    {
+      get { return _machine_id; }
+      set { _machine_id = value; }
+    }
+
+    private string _machine_name_userchosen = "";
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"machine_name_userchosen", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string machine_name_userchosen
+    {
+      get { return _machine_name_userchosen; }
+      set { _machine_name_userchosen = value; }
+    }
+
+    private uint _timestamp_machine_steamguard_enabled = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"timestamp_machine_steamguard_enabled", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint timestamp_machine_steamguard_enabled
+    {
+      get { return _timestamp_machine_steamguard_enabled; }
+      set { _timestamp_machine_steamguard_enabled = value; }
+    }
+
+    private bool _authentication_exists_from_geoloc_before_mintime = default(bool);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"authentication_exists_from_geoloc_before_mintime", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool authentication_exists_from_geoloc_before_mintime
+    {
+      get { return _authentication_exists_from_geoloc_before_mintime; }
+      set { _authentication_exists_from_geoloc_before_mintime = value; }
+    }
+    private readonly global::System.Collections.Generic.List<CCredentials_GetSteamGuardDetails_Response.NewAuthentication> _newauthentication = new global::System.Collections.Generic.List<CCredentials_GetSteamGuardDetails_Response.NewAuthentication>();
+    [global::ProtoBuf.ProtoMember(5, Name=@"newauthentication", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CCredentials_GetSteamGuardDetails_Response.NewAuthentication> newauthentication
+    {
+      get { return _newauthentication; }
+    }
+  
+
+    private bool _authentication_exists_from_same_ip_before_mintime = default(bool);
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"authentication_exists_from_same_ip_before_mintime", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool authentication_exists_from_same_ip_before_mintime
+    {
+      get { return _authentication_exists_from_same_ip_before_mintime; }
+      set { _authentication_exists_from_same_ip_before_mintime = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -440,6 +509,89 @@ namespace SteamKit2.Unified.Internal
       get { return _cityname_actual; }
       set { _cityname_actual = value; }
     }
+
+    private string _steamguard_code = "";
+    [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"steamguard_code", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string steamguard_code
+    {
+      get { return _steamguard_code; }
+      set { _steamguard_code = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCredentials_AccountLockRequest_Request")]
+  public partial class CCredentials_AccountLockRequest_Request : global::ProtoBuf.IExtensible
+  {
+    public CCredentials_AccountLockRequest_Request() {}
+    
+
+    private string _param_string = "";
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"param_string", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string param_string
+    {
+      get { return _param_string; }
+      set { _param_string = value; }
+    }
+
+    private uint _ipaddress_actual = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"ipaddress_actual", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint ipaddress_actual
+    {
+      get { return _ipaddress_actual; }
+      set { _ipaddress_actual = value; }
+    }
+
+    private bool _query_only = default(bool);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"query_only", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool query_only
+    {
+      get { return _query_only; }
+      set { _query_only = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCredentials_AccountLockRequest_Response")]
+  public partial class CCredentials_AccountLockRequest_Response : global::ProtoBuf.IExtensible
+  {
+    public CCredentials_AccountLockRequest_Response() {}
+    
+
+    private bool _success = default(bool);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"success", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool success
+    {
+      get { return _success; }
+      set { _success = value; }
+    }
+
+    private bool _account_already_locked = default(bool);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"account_already_locked", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool account_already_locked
+    {
+      get { return _account_already_locked; }
+      set { _account_already_locked = value; }
+    }
+
+    private bool _expired_link = default(bool);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"expired_link", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool expired_link
+    {
+      get { return _expired_link; }
+      set { _expired_link = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -530,6 +682,44 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCredentials_GetAccountAuthSecret_Request")]
+  public partial class CCredentials_GetAccountAuthSecret_Request : global::ProtoBuf.IExtensible
+  {
+    public CCredentials_GetAccountAuthSecret_Request() {}
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCredentials_GetAccountAuthSecret_Response")]
+  public partial class CCredentials_GetAccountAuthSecret_Response : global::ProtoBuf.IExtensible
+  {
+    public CCredentials_GetAccountAuthSecret_Response() {}
+    
+
+    private int _secret_id = default(int);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"secret_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int secret_id
+    {
+      get { return _secret_id; }
+      set { _secret_id = value; }
+    }
+
+    private byte[] _secret = null;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"secret", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public byte[] secret
+    {
+      get { return _secret; }
+      set { _secret = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCredentials_SteamGuardLoginAttempt_Notification")]
   public partial class CCredentials_SteamGuardLoginAttempt_Notification : global::ProtoBuf.IExtensible
   {
@@ -574,8 +764,10 @@ namespace SteamKit2.Unified.Internal
     CCredentials_NewMachineNotificationDialog_Response NewMachineNotificationDialogResult(CCredentials_NewMachineNotificationDialog_Request request);
     CCredentials_ValidateEmailAddress_Response ValidateEmailAddress(CCredentials_ValidateEmailAddress_Request request);
     CCredentials_SteamGuardPhishingReport_Response SteamGuardPhishingReport(CCredentials_SteamGuardPhishingReport_Request request);
+    CCredentials_AccountLockRequest_Response AccountLockRequest(CCredentials_AccountLockRequest_Request request);
     CCredentials_SteamGuardCode_Response SteamGuardCodeProcess(CCredentials_SteamGuardCode_Request request);
     CCredentials_LastCredentialChangeTime_Response GetCredentialChangeTimeDetails(CCredentials_LastCredentialChangeTime_Request request);
+    CCredentials_GetAccountAuthSecret_Response GetAccountAuthSecret(CCredentials_GetAccountAuthSecret_Request request);
     
     }
     

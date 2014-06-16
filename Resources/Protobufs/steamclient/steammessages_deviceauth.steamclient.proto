@@ -25,6 +25,7 @@ message CDeviceAuth_AcceptAuthorizationRequest_Request {
 	optional fixed64 steamid = 1;
 	optional fixed64 auth_device_token = 2;
 	optional fixed64 auth_code = 3;
+	optional fixed64 from_steamid = 4;
 }
 
 message CDeviceAuth_AcceptAuthorizationRequest_Response {
@@ -65,6 +66,7 @@ message CDeviceAuth_GetUsedAuthorizedDevices_Response {
 message CDeviceAuth_GetAuthorizedBorrowers_Request {
 	optional fixed64 steamid = 1;
 	optional bool include_canceled = 2;
+	optional bool include_pending = 3;
 }
 
 message CDeviceAuth_GetAuthorizedBorrowers_Response {
@@ -72,6 +74,7 @@ message CDeviceAuth_GetAuthorizedBorrowers_Response {
 		optional fixed64 steamid = 1;
 		optional bool is_pending = 2;
 		optional bool is_canceled = 3;
+		optional uint32 time_created = 4;
 	}
 
 	repeated .CDeviceAuth_GetAuthorizedBorrowers_Response.Borrower borrowers = 1;
@@ -83,6 +86,7 @@ message CDeviceAuth_AddAuthorizedBorrowers_Request {
 }
 
 message CDeviceAuth_AddAuthorizedBorrowers_Response {
+	optional int32 seconds_to_wait = 1;
 }
 
 message CDeviceAuth_RemoveAuthorizedBorrowers_Request {

@@ -350,6 +350,15 @@ namespace SteamKit2.Unified.Internal
       get { return _file_id; }
       set { _file_id = value; }
     }
+
+    private int _app_id = default(int);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"app_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int app_id
+    {
+      get { return _app_id; }
+      set { _app_id = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

@@ -65,7 +65,6 @@
   <ItemGroup>
     <Compile Include="Descriptor.cs" />
     <Compile Include="ImageFile.cs" />
-    <Compile Include="Native.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

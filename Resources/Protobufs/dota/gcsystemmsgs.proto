@@ -78,6 +78,9 @@ enum EGCSystemMsg {
 	k_EGCMsgCheckFriendshipResponse = 506;
 	k_EGCMsgGetPartnerAccountLink = 507;
 	k_EGCMsgGetPartnerAccountLinkResponse = 508;
+	k_EGCMsgVSReportedSuspiciousActivity = 509;
+	k_EGCMsgDPPartnerMicroTxns = 512;
+	k_EGCMsgDPPartnerMicroTxnsResponse = 513;
 }
 
 enum ESOMsg {
@@ -113,5 +116,8 @@ enum EGCToGCMsg {
 	k_EGCToGCMsgMasterStartupComplete = 157;
 	k_EMsgGCToGCSOCacheSubscribe = 158;
 	k_EMsgGCToGCSOCacheUnsubscribe = 159;
+	k_EMsgGCToGCLoadSessionSOCache = 160;
+	k_EMsgGCToGCLoadSessionSOCacheResponse = 161;
+	k_EMsgGCToGCUpdateSessionStats = 162;
 }
 
