@@ -358,6 +358,7 @@ message CMsgPracticeLobbyListResponseEntry {
 	optional uint32 guild_id = 8;
 	optional uint64 guild_logo = 9;
 	optional string name = 10;
+	optional string custom_game_mode = 11;
 }
 
 message CMsgPracticeLobbyListResponse {
@@ -722,6 +723,8 @@ message CMsgDOTAPopup {
 		COMPETITIVE_MM_NOT_ENOUGH_SKILL_DATA_PLAY_MORE_CASUAL = 42;
 		COMPETITIVE_MM_NOT_ENOUGH_SKILL_DATA_IN_PARTY = 43;
 		PARTY_LEADER_JOINED_LOBBY = 44;
+		MM_1V1_NO_PARTIES = 45;
+		MM_1V1_NO_LOW_PRIORITY = 46;
 	}
 
 	optional .CMsgDOTAPopup.PopupID id = 1 [default = KICKED_FROM_LOBBY];
@@ -802,11 +805,13 @@ message CMsgDOTACreateTeamResponse {
 		CREATOR_TEAM_CREATION_COOLDOWN = 13;
 		LOGO_UPLOAD_FAILED = 14;
 		NAME_CHANGED_TOO_RECENTLY = 15;
+		CREATOR_INSUFFICIENT_LEVEL = 16;
 	}
 
 	repeated .CMsgDOTACreateTeamResponse.Result results = 1;
 	optional uint32 team_id = 2;
 	optional uint32 seconds_remaining = 3;
+	optional uint32 required_level = 4;
 }
 
 message CMsgDOTAEditTeam {
@@ -945,10 +950,12 @@ message CMsgDOTATeamInvite_GCImmediateResponseToInviter {
 		INVITEE_ALREADY_ON_THE_TEAM = 4;
 		INVITEE_ALREADY_ON_TOO_MANY_TEAMS = 5;
 		UNSPECIFIED_ERROR = 6;
+		INVITEE_INSUFFICIENT_LEVEL = 7;
 	}
 
 	optional .CMsgDOTATeamInvite_GCImmediateResponseToInviter.Result result = 1 [default = SUCCESS];
 	optional string invitee_name = 2;
+	optional uint32 required_level = 3;
 }
 
 message CMsgDOTATeamInvite_GCRequestToInvitee {
@@ -2486,13 +2493,14 @@ message CMsgDOTAFantasyPlayerScoreDetailsResponse {
 		optional uint32 series_id = 2;
 		optional uint32 series_num = 3;
 		optional uint32 series_type = 4;
-		optional uint32 league_id = 5;
-		optional uint32 opposing_team_id = 6;
-		optional uint64 opposing_team_logo = 7;
-		optional string opposing_team_name = 8;
-		optional .CMsgFantasyLeagueRoleScoring stats = 9;
-		optional uint32 owned_by = 10;
-		optional bool benched = 11;
+		optional float series_multiplier = 5;
+		optional uint32 league_id = 6;
+		optional uint32 opposing_team_id = 7;
+		optional uint64 opposing_team_logo = 8;
+		optional string opposing_team_name = 9;
+		optional .CMsgFantasyLeagueRoleScoring stats = 10;
+		optional uint32 owned_by = 11;
+		optional bool benched = 12;
 	}
 
 	enum EResult {
@@ -2908,6 +2916,11 @@ message CMsgClientProvideSurveyResult {
 
 	repeated .CMsgClientProvideSurveyResult.Response responses = 1;
 	optional uint64 survey_key = 2;
+}
+
+message CMsgDOTAEmoticonAccessSDO {
+	optional uint32 account_id = 1;
+	optional bytes unlocked_emoticons = 2;
 }
 
 message CMsgClientToGCTrackDialogResult {
