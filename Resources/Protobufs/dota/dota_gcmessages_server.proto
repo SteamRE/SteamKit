@@ -171,6 +171,12 @@ message CMsgGameMatchSignOut {
 	repeated .CMsgGameMatchSignOut.CAdditionalSignoutMsg additional_msgs = 20;
 }
 
+message CMsgSignOutDraftInfo {
+	optional uint32 radiant_captain_account_id = 1;
+	optional uint32 dire_captain_account_id = 2;
+	repeated .CMatchHeroSelectEvent picks_bans = 3;
+}
+
 message CMsgGameMatchSignoutResponse {
 	message CAdditionalSignoutMsg {
 		optional uint32 id = 1;
@@ -278,8 +284,9 @@ message CMsgDOTARequestPlayerResourcesResponse {
 
 message CMsgDOTARequestBatchPlayerResources {
 	repeated uint32 account_ids = 1 [packed = true];
-	optional bool rank_use_competitive = 2;
-	repeated bool rank_use_solo = 3 [packed = true];
+	optional bool legacy_rank_use_competitive = 2;
+	repeated bool legacy_rank_use_solo = 3 [packed = true];
+	repeated uint32 rank_types = 4 [packed = true];
 }
 
 message CMsgDOTARequestBatchPlayerResourcesResponse {
@@ -403,7 +410,7 @@ message CMsgDOTAAwardEventPoints {
 		optional uint32 account_id = 1;
 		optional int32 points = 2;
 		optional int32 premium_points = 3;
-		optional int32 rank = 4;
+		optional uint32 trade_ban_time = 5;
 	}
 
 	repeated .CMsgDOTAAwardEventPoints.AwardPoints award_points = 1;

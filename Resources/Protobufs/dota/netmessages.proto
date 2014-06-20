@@ -57,6 +57,7 @@ enum SVC_Messages {
 	svc_GameEventList = 30;
 	svc_GetCvarValue = 31;
 	svc_PacketReliable = 32;
+	svc_FullFrameSplit = 33;
 }
 
 enum ESplitScreenMessageType {
@@ -364,5 +365,12 @@ message CSVCMsg_VoiceData {
 message CSVCMsg_PacketReliable {
 	optional int32 tick = 1;
 	optional int32 messagessize = 2;
+}
+
+message CSVCMsg_FullFrameSplit {
+	optional int32 tick = 1;
+	optional int32 section = 2;
+	optional int32 total = 3;
+	optional bytes data = 4;
 }
 

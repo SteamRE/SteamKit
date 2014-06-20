@@ -51,7 +51,6 @@ enum EGCItemMsg {
 	k_EMsgGCSaxxyBroadcast = 1057;
 	k_EMsgGCBackpackSortFinished = 1058;
 	k_EMsgGCAdjustItemEquippedState = 1059;
-	k_EMsgGCRequestItemSchemaData = 1060;
 	k_EMsgGCCollectItem = 1061;
 	k_EMsgGCItemAcknowledged = 1062;
 	k_EMsgGCPresets_SelectPresetForClass = 1063;
@@ -151,6 +150,7 @@ enum EGCItemMsg {
 	k_EMsgGCToGCGetUserServerMembersResponse = 2544;
 	k_EMsgGCToGCGrantSelfMadeItemToAccount = 2555;
 	k_EMsgGCToGCThankedByNewUser = 2556;
+	k_EMsgGCShuffleCrateContents = 2557;
 }
 
 enum EGCMsgResponse {
@@ -294,5 +294,10 @@ message CMsgGCToGCGrantSelfMadeItemToAccount {
 message CMsgGCToGCThankedByNewUser {
 	optional uint32 new_user_accountid = 1;
 	optional uint32 thanked_user_accountid = 2;
+}
+
+message CMsgGCShuffleCrateContents {
+	optional uint64 crate_item_id = 1;
+	optional string user_code_string = 2;
 }
 
