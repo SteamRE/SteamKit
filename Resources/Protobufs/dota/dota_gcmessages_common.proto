@@ -189,8 +189,6 @@ enum EDOTAGCMsg {
 	k_EMsgGCToGCCanInviteUserResponse = 7235;
 	k_EMsgGCToGCGetUserRank = 7236;
 	k_EMsgGCToGCGetUserRankResponse = 7237;
-	k_EMsgGCToGCGetTeamRankChange = 7238;
-	k_EMsgGCToGCGetTeamRankChangeResponse = 7239;
 	k_EMsgGCToGCUpdateTeamStats = 7240;
 	k_EMsgGCToGCGetTeamRank = 7241;
 	k_EMsgGCToGCGetTeamRankResponse = 7242;
@@ -200,11 +198,9 @@ enum EDOTAGCMsg {
 	k_EMsgGCPassportDataRequest = 7248;
 	k_EMsgGCPassportDataResponse = 7249;
 	k_EMsgGCNotInGuildData = 7251;
-	k_EMsgGCPassportVote = 7253;
 	k_EMsgGCGuildInviteData = 7254;
 	k_EMsgGCToGCGetLeagueAdmin = 7255;
 	k_EMsgGCToGCGetLeagueAdminResponse = 7256;
-	k_EMsgGCPassportVoteSelection = 7257;
 	k_EMsgGCRequestLeaguePrizePool = 7258;
 	k_EMsgGCRequestLeaguePrizePoolResponse = 7259;
 	k_EMsgGCToGCUpdateOpenGuildPartyRequest = 7261;
@@ -329,7 +325,6 @@ enum EDOTAGCMsg {
 	k_EMsgDOTARedeemEventPrizeResponse = 7386;
 	k_EMsgDOTAGetEventPoints = 7387;
 	k_EMsgDOTAGetEventPointsResponse = 7388;
-	k_EMsgGCToGCGrantEventReward = 7389;
 	k_EMsgGCToGCSignoutAwardEventPoints = 7390;
 	k_EMsgDOTASendFriendRecruits = 7393;
 	k_EMsgDOTAFriendRecruitsRequest = 7394;
@@ -437,6 +432,8 @@ enum EDOTAGCMsg {
 	k_EMsgDOTAStartDailyHeroChallengeRequest = 7498;
 	k_EMsgGCFantasyPlayerScoreDetailsRequest = 7499;
 	k_EMsgGCFantasyPlayerScoreDetailsResponse = 7500;
+	k_EMsgGCToGCEmoticonUnlock = 7501;
+	k_EMsgSignOutDraftInfo = 7502;
 	k_EMsgGCDev_GrantWarKill = 8001;
 }
 
@@ -461,6 +458,8 @@ enum DOTA_GameMode {
 	DOTA_GAMEMODE_BD = 17;
 	DOTA_GAMEMODE_ABILITY_DRAFT = 18;
 	DOTA_GAMEMODE_EVENT = 19;
+	DOTA_GAMEMODE_ARDM = 20;
+	DOTA_GAMEMODE_1V1MID = 21;
 }
 
 enum DOTA_GameState {
@@ -472,7 +471,8 @@ enum DOTA_GameState {
 	DOTA_GAMERULES_STATE_GAME_IN_PROGRESS = 5;
 	DOTA_GAMERULES_STATE_POST_GAME = 6;
 	DOTA_GAMERULES_STATE_DISCONNECT = 7;
-	DOTA_GAMERULES_STATE_LAST = 8;
+	DOTA_GAMERULES_STATE_TEAM_SHOWCASE = 8;
+	DOTA_GAMERULES_STATE_LAST = 9;
 }
 
 enum DOTA_GC_TEAM {
@@ -555,6 +555,15 @@ enum DOTA_LobbyMemberXPBonus {
 	DOTA_LobbyMemberXPBonus_PARTY = 3;
 	DOTA_LobbyMemberXPBonus_RECRUITMENT = 4;
 	DOTA_LobbyMemberXPBonus_PCBANG = 5;
+}
+
+enum EDOTAPlayerMMRType {
+	k_EDOTAPlayerMMRType_Invalid = 0;
+	k_EDOTAPlayerMMRType_GeneralHidden = 1;
+	k_EDOTAPlayerMMRType_SoloHidden = 2;
+	k_EDOTAPlayerMMRType_GeneralCompetitive = 3;
+	k_EDOTAPlayerMMRType_SoloCompetitive = 4;
+	k_EDOTAPlayerMMRType_1v1Competitive = 5;
 }
 
 enum LobbyDotaTVDelay {
@@ -650,12 +659,16 @@ message CSODOTAGameAccountClient {
 	optional uint32 calibration_games_remaining = 51;
 	optional uint32 solo_competitive_rank = 52;
 	optional uint32 solo_calibration_games_remaining = 54;
+	optional uint32 competitive_1v1_rank = 63;
+	optional uint32 competitive_1v1_calibration_games_remaining = 64;
 	optional uint32 recruitment_level = 55;
 	optional bool has_new_notifications = 56;
 	optional bool is_league_admin = 57;
 	optional uint32 casual_games_played = 60;
 	optional uint32 solo_competitive_games_played = 61;
 	optional uint32 party_competitive_games_played = 62;
+	optional uint32 casual_1v1_games_played = 65;
+	optional uint32 competitive_team_games_played = 66;
 }
 
 message CSODOTAPartyMember {
@@ -780,6 +793,7 @@ message CDOTALobbyMember {
 	optional uint32 nexon_pc_bang_no = 24;
 	optional string nexon_pc_bang_name = 25;
 	repeated .CDOTALobbyMember.CDOTALobbyMemberXPBonus xp_bonuses = 27;
+	optional sint32 rank_change = 29;
 }
 
 message CDOTALobbyMemberPrivate {
@@ -802,6 +816,8 @@ message CLobbyTeamDetails {
 	optional uint64 guild_logo = 12;
 	optional uint64 guild_base_logo = 13;
 	optional uint64 guild_banner_logo = 14;
+	optional uint32 rank = 15;
+	optional sint32 rank_change = 16;
 }
 
 message CLobbyTimedRewardDetails {
@@ -839,9 +855,10 @@ message CSODOTALobby {
 		PRACTICE = 1;
 		TOURNAMENT = 2;
 		COOP_BOT_MATCH = 4;
-		TEAM_MATCH = 5;
-		SOLO_QUEUE_MATCH = 6;
+		LEGACY_TEAM_MATCH = 5;
+		LEGACY_SOLO_QUEUE_MATCH = 6;
 		COMPETITIVE_MATCH = 7;
+		CASUAL_1V1_MATCH = 8;
 	}
 
 	optional uint64 lobby_id = 1 [(key_field) = true];
@@ -884,7 +901,6 @@ message CSODOTALobby {
 	optional uint32 loot_generated = 49;
 	optional uint32 loot_awarded = 50;
 	optional bool allchat = 51 [default = false];
-	optional uint32 rank_change = 52;
 	optional .LobbyDotaTVDelay dota_tv_delay = 53 [default = LobbyDotaTV_10];
 	optional string custom_game_mode = 54;
 	optional string custom_map_name = 55;

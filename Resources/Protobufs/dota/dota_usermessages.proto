@@ -67,6 +67,7 @@ enum EDotaUserMessages {
 	DOTA_UM_TutorialMinimapPosition = 125;
 	DOTA_UM_PlayerMMR = 126;
 	DOTA_UM_AbilitySteal = 127;
+	DOTA_UM_CourierKilledAlert = 128;
 }
 
 enum DOTA_CHAT_MESSAGE {
@@ -176,6 +177,8 @@ enum DOTA_COMBATLOG_TYPES {
 	DOTA_COMBATLOG_MODIFIER_ADD = 2;
 	DOTA_COMBATLOG_MODIFIER_REMOVE = 3;
 	DOTA_COMBATLOG_DEATH = 4;
+	DOTA_COMBATLOG_ABILITY = 5;
+	DOTA_COMBATLOG_ITEM = 6;
 }
 
 enum EDotaEntityMessages {
@@ -313,6 +316,13 @@ message CDOTAUserMsg_ItemAlert {
 message CDOTAUserMsg_WillPurchaseAlert {
 	optional int32 itemid = 1;
 	optional int32 player_id = 2;
+}
+
+message CDOTAUserMsg_CourierKilledAlert {
+	optional uint32 team = 1;
+	optional uint32 gold_value = 2;
+	optional int32 entity_handle = 3;
+	optional int32 timestamp = 4;
 }
 
 message CDOTAUserMsg_MinimapEvent {
@@ -603,6 +613,8 @@ message CDOTAUserMsg_ShowSurvey {
 	optional int32 survey_id = 1;
 	optional uint32 match_id = 2;
 	optional string response_style = 3;
+	optional uint32 teammate_hero_id = 4;
+	optional string teammate_name = 5;
 }
 
 message CDOTAUserMsg_UpdateSharedContent {
