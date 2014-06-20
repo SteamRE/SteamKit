@@ -310,6 +310,24 @@ namespace SteamKit2.GC.Dota.Internal
       set { _solo_calibration_games_remaining = value; }
     }
 
+    private uint _competitive_1v1_rank = default(uint);
+    [global::ProtoBuf.ProtoMember(63, IsRequired = false, Name=@"competitive_1v1_rank", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint competitive_1v1_rank
+    {
+      get { return _competitive_1v1_rank; }
+      set { _competitive_1v1_rank = value; }
+    }
+
+    private uint _competitive_1v1_calibration_games_remaining = default(uint);
+    [global::ProtoBuf.ProtoMember(64, IsRequired = false, Name=@"competitive_1v1_calibration_games_remaining", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint competitive_1v1_calibration_games_remaining
+    {
+      get { return _competitive_1v1_calibration_games_remaining; }
+      set { _competitive_1v1_calibration_games_remaining = value; }
+    }
+
     private uint _recruitment_level = default(uint);
     [global::ProtoBuf.ProtoMember(55, IsRequired = false, Name=@"recruitment_level", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(default(uint))]
@@ -362,6 +380,24 @@ namespace SteamKit2.GC.Dota.Internal
     {
       get { return _party_competitive_games_played; }
       set { _party_competitive_games_played = value; }
+    }
+
+    private uint _casual_1v1_games_played = default(uint);
+    [global::ProtoBuf.ProtoMember(65, IsRequired = false, Name=@"casual_1v1_games_played", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint casual_1v1_games_played
+    {
+      get { return _casual_1v1_games_played; }
+      set { _casual_1v1_games_played = value; }
+    }
+
+    private uint _competitive_team_games_played = default(uint);
+    [global::ProtoBuf.ProtoMember(66, IsRequired = false, Name=@"competitive_team_games_played", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint competitive_team_games_played
+    {
+      get { return _competitive_team_games_played; }
+      set { _competitive_team_games_played = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -1176,6 +1212,15 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _xp_bonuses; }
     }
   
+
+    private int _rank_change = default(int);
+    [global::ProtoBuf.ProtoMember(29, IsRequired = false, Name=@"rank_change", DataFormat = global::ProtoBuf.DataFormat.ZigZag)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int rank_change
+    {
+      get { return _rank_change; }
+      set { _rank_change = value; }
+    }
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CDOTALobbyMemberXPBonus")]
   public partial class CDOTALobbyMemberXPBonus : global::ProtoBuf.IExtensible
   {
@@ -1376,6 +1421,24 @@ namespace SteamKit2.GC.Dota.Internal
     {
       get { return _guild_banner_logo; }
       set { _guild_banner_logo = value; }
+    }
+
+    private uint _rank = default(uint);
+    [global::ProtoBuf.ProtoMember(15, IsRequired = false, Name=@"rank", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint rank
+    {
+      get { return _rank; }
+      set { _rank = value; }
+    }
+
+    private int _rank_change = default(int);
+    [global::ProtoBuf.ProtoMember(16, IsRequired = false, Name=@"rank_change", DataFormat = global::ProtoBuf.DataFormat.ZigZag)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int rank_change
+    {
+      get { return _rank_change; }
+      set { _rank_change = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -1819,15 +1882,6 @@ namespace SteamKit2.GC.Dota.Internal
       set { _allchat = value; }
     }
 
-    private uint _rank_change = default(uint);
-    [global::ProtoBuf.ProtoMember(52, IsRequired = false, Name=@"rank_change", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint rank_change
-    {
-      get { return _rank_change; }
-      set { _rank_change = value; }
-    }
-
     private LobbyDotaTVDelay _dota_tv_delay = LobbyDotaTVDelay.LobbyDotaTV_10;
     [global::ProtoBuf.ProtoMember(53, IsRequired = false, Name=@"dota_tv_delay", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(LobbyDotaTVDelay.LobbyDotaTV_10)]
@@ -2031,14 +2085,17 @@ namespace SteamKit2.GC.Dota.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"COOP_BOT_MATCH", Value=4)]
       COOP_BOT_MATCH = 4,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"TEAM_MATCH", Value=5)]
-      TEAM_MATCH = 5,
+      [global::ProtoBuf.ProtoEnum(Name=@"LEGACY_TEAM_MATCH", Value=5)]
+      LEGACY_TEAM_MATCH = 5,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"SOLO_QUEUE_MATCH", Value=6)]
-      SOLO_QUEUE_MATCH = 6,
+      [global::ProtoBuf.ProtoEnum(Name=@"LEGACY_SOLO_QUEUE_MATCH", Value=6)]
+      LEGACY_SOLO_QUEUE_MATCH = 6,
             
       [global::ProtoBuf.ProtoEnum(Name=@"COMPETITIVE_MATCH", Value=7)]
-      COMPETITIVE_MATCH = 7
+      COMPETITIVE_MATCH = 7,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"CASUAL_1V1_MATCH", Value=8)]
+      CASUAL_1V1_MATCH = 8
     }
   
     private global::ProtoBuf.IExtension extensionObject;
@@ -3870,12 +3927,6 @@ namespace SteamKit2.GC.Dota.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCGetUserRankResponse", Value=7237)]
       k_EMsgGCToGCGetUserRankResponse = 7237,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCGetTeamRankChange", Value=7238)]
-      k_EMsgGCToGCGetTeamRankChange = 7238,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCGetTeamRankChangeResponse", Value=7239)]
-      k_EMsgGCToGCGetTeamRankChangeResponse = 7239,
-            
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCUpdateTeamStats", Value=7240)]
       k_EMsgGCToGCUpdateTeamStats = 7240,
             
@@ -3903,9 +3954,6 @@ namespace SteamKit2.GC.Dota.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCNotInGuildData", Value=7251)]
       k_EMsgGCNotInGuildData = 7251,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCPassportVote", Value=7253)]
-      k_EMsgGCPassportVote = 7253,
-            
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCGuildInviteData", Value=7254)]
       k_EMsgGCGuildInviteData = 7254,
             
@@ -3914,9 +3962,6 @@ namespace SteamKit2.GC.Dota.Internal
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCGetLeagueAdminResponse", Value=7256)]
       k_EMsgGCToGCGetLeagueAdminResponse = 7256,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCPassportVoteSelection", Value=7257)]
-      k_EMsgGCPassportVoteSelection = 7257,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCRequestLeaguePrizePool", Value=7258)]
       k_EMsgGCRequestLeaguePrizePool = 7258,
@@ -4290,9 +4335,6 @@ namespace SteamKit2.GC.Dota.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgDOTAGetEventPointsResponse", Value=7388)]
       k_EMsgDOTAGetEventPointsResponse = 7388,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCGrantEventReward", Value=7389)]
-      k_EMsgGCToGCGrantEventReward = 7389,
-            
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCSignoutAwardEventPoints", Value=7390)]
       k_EMsgGCToGCSignoutAwardEventPoints = 7390,
             
@@ -4614,6 +4656,12 @@ namespace SteamKit2.GC.Dota.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCFantasyPlayerScoreDetailsResponse", Value=7500)]
       k_EMsgGCFantasyPlayerScoreDetailsResponse = 7500,
             
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCEmoticonUnlock", Value=7501)]
+      k_EMsgGCToGCEmoticonUnlock = 7501,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgSignOutDraftInfo", Value=7502)]
+      k_EMsgSignOutDraftInfo = 7502,
+            
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCDev_GrantWarKill", Value=8001)]
       k_EMsgGCDev_GrantWarKill = 8001
     }
@@ -4680,7 +4728,13 @@ namespace SteamKit2.GC.Dota.Internal
       DOTA_GAMEMODE_ABILITY_DRAFT = 18,
             
       [global::ProtoBuf.ProtoEnum(Name=@"DOTA_GAMEMODE_EVENT", Value=19)]
-      DOTA_GAMEMODE_EVENT = 19
+      DOTA_GAMEMODE_EVENT = 19,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_GAMEMODE_ARDM", Value=20)]
+      DOTA_GAMEMODE_ARDM = 20,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_GAMEMODE_1V1MID", Value=21)]
+      DOTA_GAMEMODE_1V1MID = 21
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"DOTA_GameState", EnumPassthru=true)]
@@ -4711,8 +4765,11 @@ namespace SteamKit2.GC.Dota.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"DOTA_GAMERULES_STATE_DISCONNECT", Value=7)]
       DOTA_GAMERULES_STATE_DISCONNECT = 7,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_GAMERULES_STATE_LAST", Value=8)]
-      DOTA_GAMERULES_STATE_LAST = 8
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_GAMERULES_STATE_TEAM_SHOWCASE", Value=8)]
+      DOTA_GAMERULES_STATE_TEAM_SHOWCASE = 8,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_GAMERULES_STATE_LAST", Value=9)]
+      DOTA_GAMERULES_STATE_LAST = 9
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"DOTA_GC_TEAM", EnumPassthru=true)]
@@ -4919,6 +4976,29 @@ namespace SteamKit2.GC.Dota.Internal
             
       [global::ProtoBuf.ProtoEnum(Name=@"DOTA_LobbyMemberXPBonus_PCBANG", Value=5)]
       DOTA_LobbyMemberXPBonus_PCBANG = 5
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"EDOTAPlayerMMRType", EnumPassthru=true)]
+    public enum EDOTAPlayerMMRType
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EDOTAPlayerMMRType_Invalid", Value=0)]
+      k_EDOTAPlayerMMRType_Invalid = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EDOTAPlayerMMRType_GeneralHidden", Value=1)]
+      k_EDOTAPlayerMMRType_GeneralHidden = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EDOTAPlayerMMRType_SoloHidden", Value=2)]
+      k_EDOTAPlayerMMRType_SoloHidden = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EDOTAPlayerMMRType_GeneralCompetitive", Value=3)]
+      k_EDOTAPlayerMMRType_GeneralCompetitive = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EDOTAPlayerMMRType_SoloCompetitive", Value=4)]
+      k_EDOTAPlayerMMRType_SoloCompetitive = 4,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EDOTAPlayerMMRType_1v1Competitive", Value=5)]
+      k_EDOTAPlayerMMRType_1v1Competitive = 5
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"LobbyDotaTVDelay", EnumPassthru=true)]

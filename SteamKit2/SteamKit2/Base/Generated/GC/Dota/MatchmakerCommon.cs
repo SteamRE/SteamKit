@@ -24,14 +24,17 @@ namespace SteamKit2.GC.Dota.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"MATCH_TYPE_TEAM_RANKED", Value=2)]
       MATCH_TYPE_TEAM_RANKED = 2,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"MATCH_TYPE_SOLO_QUEUE", Value=3)]
-      MATCH_TYPE_SOLO_QUEUE = 3,
+      [global::ProtoBuf.ProtoEnum(Name=@"MATCH_TYPE_LEGACY_SOLO_QUEUE", Value=3)]
+      MATCH_TYPE_LEGACY_SOLO_QUEUE = 3,
             
       [global::ProtoBuf.ProtoEnum(Name=@"MATCH_TYPE_COMPETITIVE", Value=4)]
       MATCH_TYPE_COMPETITIVE = 4,
             
       [global::ProtoBuf.ProtoEnum(Name=@"MATCH_TYPE_WEEKEND_TOURNEY", Value=5)]
-      MATCH_TYPE_WEEKEND_TOURNEY = 5
+      MATCH_TYPE_WEEKEND_TOURNEY = 5,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"MATCH_TYPE_CASUAL_1V1", Value=6)]
+      MATCH_TYPE_CASUAL_1V1 = 6
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"DOTABotDifficulty", EnumPassthru=true)]

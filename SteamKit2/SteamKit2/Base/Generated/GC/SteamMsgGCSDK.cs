@@ -497,12 +497,38 @@ namespace SteamKit2.GC.Internal
       get { return _process_name; }
       set { _process_name = value; }
     }
+    private readonly global::System.Collections.Generic.List<CGCToGCMsgMasterAck.Process> _directory = new global::System.Collections.Generic.List<CGCToGCMsgMasterAck.Process>();
+    [global::ProtoBuf.ProtoMember(6, Name=@"directory", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CGCToGCMsgMasterAck.Process> directory
+    {
+      get { return _directory; }
+    }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Process")]
+  public partial class Process : global::ProtoBuf.IExtensible
+  {
+    public Process() {}
+    
+
+    private uint _dir_index = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"dir_index", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint dir_index
+    {
+      get { return _dir_index; }
+      set { _dir_index = value; }
+    }
     private readonly global::System.Collections.Generic.List<uint> _type_instances = new global::System.Collections.Generic.List<uint>();
-    [global::ProtoBuf.ProtoMember(5, Name=@"type_instances", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(2, Name=@"type_instances", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public global::System.Collections.Generic.List<uint> type_instances
     {
       get { return _type_instances; }
     }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
   
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
