@@ -274,6 +274,13 @@ namespace SteamKit2.Internal
         /// <param name="packetMsg">The packet message.</param>
         protected virtual void OnClientMsgReceived( IPacketMsg packetMsg )
         {
+            if ( packetMsg == null )
+            {
+                DebugLog.WriteLine( "CMClient", "Packet message failed to parse, shutting down connection" );
+                Disconnect();
+                return;
+            }
+
             DebugLog.WriteLine( "CMClient", "<- Recv'd EMsg: {0} ({1}) (Proto: {2})", packetMsg.MsgType, ( int )packetMsg.MsgType, packetMsg.IsProto );
 
             switch ( packetMsg.MsgType )
@@ -346,15 +353,23 @@ namespace SteamKit2.Internal
                     return new PacketMsg( eMsg, data );
             }
 
-            if ( MsgUtil.IsProtoBuf( rawEMsg ) )
+            try
             {
-                // if the emsg is flagged, we're a proto message
-                return new PacketClientMsgProtobuf( eMsg, data );
+                if (MsgUtil.IsProtoBuf(rawEMsg))
+                {
+                    // if the emsg is flagged, we're a proto message
+                    return new PacketClientMsgProtobuf(eMsg, data);
+                }
+                else
+                {
+                    // otherwise we're a struct message
+                    return new PacketClientMsg(eMsg, data);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                // otherwise we're a struct message
-                return new PacketClientMsg( eMsg, data );
+                DebugLog.WriteLine( "CMClient", "Exception deserializing emsg {0} ({1}).\n{2}", eMsg, MsgUtil.IsProtoBuf( rawEMsg ), ex.ToString() );
+                return null;
             }
         }
 

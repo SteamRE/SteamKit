@@ -55,6 +55,18 @@ namespace Tests
 			Assert.IsAssignableFrom<PacketClientMsg>(packetMsg);
 		}
 
+        [Fact]
+        public void GetPacketMsgFailsWithNull()
+        {
+            var msg = MsgUtil.MakeMsg(EMsg.ClientLogOnResponse, protobuf: true);
+            var msgHdr = new MsgHdrProtoBuf { Msg = msg };
+
+            var data = Serialize(msgHdr);
+            Array.Copy(BitConverter.GetBytes(-1), 0, data, 4, 4);
+            var packetMsg = CMClient.GetPacketMsg(data);
+            Assert.Null(packetMsg);
+        }
+
 		static byte[] Serialize(ISteamSerializableHeader hdr)
 		{
 			using (var ms = new MemoryStream())
