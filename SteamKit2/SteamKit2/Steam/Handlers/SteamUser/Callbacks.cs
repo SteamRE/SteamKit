@@ -124,7 +124,7 @@ namespace SteamKit2
 
                 this.PublicIP = NetHelpers.GetIPAddress( resp.public_ip );
 
-                this.ServerTime = Utils.DateTimeFromUnixTime( resp.rtime32_server_time );
+                this.ServerTime = DateUtils.DateTimeFromUnixTime( resp.rtime32_server_time );
 
                 this.AccountFlags = ( EAccountFlags )resp.account_flags;
 
@@ -159,7 +159,7 @@ namespace SteamKit2
 
                 this.PublicIP = NetHelpers.GetIPAddress( resp.IpPublic );
 
-                this.ServerTime = Utils.DateTimeFromUnixTime( resp.ServerRealTime );
+                this.ServerTime = DateUtils.DateTimeFromUnixTime( resp.ServerRealTime );
 
                 this.ClientSteamID = resp.ClientSuppliedSteamId;
             }
@@ -497,7 +497,7 @@ namespace SteamKit2
 
             internal MarketingMessageCallback( MsgClientMarketingMessageUpdate2 body, byte[] payload )
             {
-                UpdateTime = Utils.DateTimeFromUnixTime( body.MarketingMessageUpdateTime );
+                UpdateTime = DateUtils.DateTimeFromUnixTime( body.MarketingMessageUpdateTime );
 
                 var msgList = new List<Message>();
 

@@ -95,8 +95,8 @@ namespace SteamKit2
 
                     this.LastChangeNumber = license.change_number;
 
-                    this.TimeCreated = Utils.DateTimeFromUnixTime( license.time_created );
-                    this.TimeNextProcess = Utils.DateTimeFromUnixTime( license.time_next_process );
+                    this.TimeCreated = DateUtils.DateTimeFromUnixTime( license.time_created );
+                    this.TimeNextProcess = DateUtils.DateTimeFromUnixTime( license.time_next_process );
 
                     this.MinuteLimit = license.minute_limit;
                     this.MinutesUsed = license.minutes_used;
@@ -841,7 +841,7 @@ namespace SteamKit2
 
                 Result = (EResult)msg.eresult;
                 Token = msg.token;
-                Expiration = Utils.DateTimeFromUnixTime(msg.expiration_time);
+                Expiration = DateUtils.DateTimeFromUnixTime( msg.expiration_time );
             }
         }
     }

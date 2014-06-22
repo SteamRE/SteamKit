@@ -117,7 +117,6 @@ namespace SteamKit2
             return enumRequest.SourceJobID;
         }
 
-
         /// <summary>
         /// Represents the details of an enumeration request for all published files.
         /// </summary>
@@ -209,7 +208,6 @@ namespace SteamKit2
 
             return enumRequest.SourceJobID;
         }
-
 
         /// <summary>
         /// Handles a client message. This should not be called directly.

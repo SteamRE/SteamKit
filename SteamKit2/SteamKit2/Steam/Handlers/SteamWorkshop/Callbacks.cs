@@ -174,7 +174,7 @@ namespace SteamKit2
                 {
                     this.FileID = file.published_file_id;
 
-                    this.TimeSubscribed = Utils.DateTimeFromUnixTime( file.rtime32_subscribed );
+                    this.TimeSubscribed = DateUtils.DateTimeFromUnixTime( file.rtime32_subscribed );
                 }
             }
 
@@ -236,7 +236,7 @@ namespace SteamKit2
                 {
                     this.FileID = file.published_file_id;
 
-                    this.Timestamp = Utils.DateTimeFromUnixTime( file.rtime_time_stamp );
+                    this.Timestamp = DateUtils.DateTimeFromUnixTime( file.rtime_time_stamp );
                 }
             }
 

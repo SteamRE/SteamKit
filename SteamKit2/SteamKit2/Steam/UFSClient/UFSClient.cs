@@ -199,7 +199,7 @@ namespace SteamKit2
             msg.Body.file_size = ( uint )compressedData.Length;
             msg.Body.raw_file_size = ( uint )details.FileData.Length;
             msg.Body.sha_file = CryptoHelper.SHAHash( details.FileData );
-            msg.Body.time_stamp = Utils.DateTimeToUnixTime( DateTime.UtcNow );
+            msg.Body.time_stamp = DateUtils.DateTimeToUnixTime( DateTime.UtcNow );
 
             Send( msg );
 

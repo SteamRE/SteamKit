@@ -16,17 +16,6 @@ namespace SteamKit2
 {
     static class Utils
     {
-        public static DateTime DateTimeFromUnixTime( uint unixTime )
-        {
-            DateTime origin = new DateTime( 1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc );
-            return origin.AddSeconds( unixTime );
-        }
-        public static uint DateTimeToUnixTime( DateTime time )
-        {
-            DateTime origin = new DateTime( 1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc );
-            return ( uint )( time - origin ).TotalSeconds;
-        }
-
         public static string EncodeHexString(byte[] input)
         {
             return input.Aggregate(new StringBuilder(),
@@ -151,6 +140,33 @@ namespace SteamKit2
             where T : Attribute
         {
             return type.GetCustomAttributes( typeof( T ), inherit ) as T[];
+        }
+    }
+
+    /// <summary>
+    /// Contains various utility functions for dealing with dates.
+    /// </summary>
+    public static class DateUtils
+    {
+        /// <summary>
+        /// Converts a given unix timestamp to a DateTime
+        /// </summary>
+        /// <param name="unixTime">A unix timestamp expressed as seconds since the unix epoch</param>
+        /// <returns>DateTime representation</returns>
+        public static DateTime DateTimeFromUnixTime(ulong unixTime)
+        {
+            DateTime origin = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+            return origin.AddSeconds(unixTime);
+        }
+        /// <summary>
+        /// Converts a given DateTime into a unix timestamp representing seconds since the unix epoch.
+        /// </summary>
+        /// <param name="time">DateTime to be expressed</param>
+        /// <returns>64-bit wide representation</returns>
+        public static ulong DateTimeToUnixTime(DateTime time)
+        {
+            DateTime origin = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+            return (ulong)(time - origin).TotalSeconds;
         }
     }
 

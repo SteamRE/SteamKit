@@ -146,7 +146,7 @@ namespace SteamKit2
             DepotID = ds.ReadUInt32();
 
             ManifestGID = ds.ReadUInt64();
-            CreationTime = Utils.DateTimeFromUnixTime(ds.ReadUInt32());
+            CreationTime = DateUtils.DateTimeFromUnixTime( ds.ReadUInt32() );
 
             AreFileNamesEncrypted = ds.ReadUInt32() != 0;
 
