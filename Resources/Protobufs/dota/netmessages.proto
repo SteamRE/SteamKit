@@ -328,6 +328,7 @@ message CSVCMsg_PacketEntities {
 	optional int32 baseline = 5;
 	optional int32 delta_from = 6;
 	optional bytes entity_data = 7;
+	optional bool pending_full_frame = 8;
 }
 
 message CSVCMsg_TempEntities {

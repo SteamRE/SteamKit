@@ -483,13 +483,6 @@ message CMsgDOTATournament {
 	}
 
 	message Game {
-		message ReplayURL {
-			optional uint32 provider_id = 1;
-			optional uint32 stream_id = 2;
-			optional string url = 3;
-			optional string description = 4;
-		}
-
 		optional uint32 game_id = 1;
 		optional uint32 good_team_id = 2;
 		optional uint32 bad_team_id = 3;
@@ -501,7 +494,6 @@ message CMsgDOTATournament {
 		optional bool live_stream = 7;
 		optional string message = 9;
 		optional bool results_final = 10;
-		repeated .CMsgDOTATournament.Game.ReplayURL replay_urls = 11;
 		optional .ETournamentGameState state = 14 [default = k_ETournamentGameState_Pending];
 	}
 
@@ -2921,6 +2913,13 @@ message CMsgClientProvideSurveyResult {
 message CMsgDOTAEmoticonAccessSDO {
 	optional uint32 account_id = 1;
 	optional bytes unlocked_emoticons = 2;
+}
+
+message CMsgClientToGCEmoticonDataRequest {
+}
+
+message CMsgGCToClientEmoticonData {
+	optional .CMsgDOTAEmoticonAccessSDO emoticon_access = 1;
 }
 
 message CMsgClientToGCTrackDialogResult {

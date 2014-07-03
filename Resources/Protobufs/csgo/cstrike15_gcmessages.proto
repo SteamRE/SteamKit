@@ -58,6 +58,7 @@ enum ECsgoGCMsg {
 	k_EMsgGCCStrike15_v2_Client2GCEconPreviewDataBlockRequest = 9156;
 	k_EMsgGCCStrike15_v2_Client2GCEconPreviewDataBlockResponse = 9157;
 	k_EMsgGCCStrike15_v2_AccountPrivacySettings = 9158;
+	k_EMsgGCCStrike15_v2_SetMyActivityInfo = 9159;
 }
 
 message GameServerPing {
@@ -146,6 +147,12 @@ message PlayerMedalsInfo {
 	optional uint32 legacy__coin_op_payback = 6;
 	repeated uint32 display_items_defidx = 7;
 	optional uint32 featured_display_item_defidx = 8;
+}
+
+message AccountActivity {
+	optional uint32 activity = 1;
+	optional uint32 mode = 2;
+	optional uint32 map = 3;
 }
 
 message TournamentMatchSetup {
@@ -328,6 +335,7 @@ message CMsgGCCStrike15_v2_MatchmakingGC2ClientHello {
 	optional .TournamentTeam my_current_team = 12;
 	repeated .TournamentEvent my_current_event_stages = 13;
 	optional uint32 survey_vote = 14;
+	optional .AccountActivity activity = 15;
 }
 
 message CMsgGCCStrike15_v2_AccountPrivacySettings {
@@ -500,8 +508,23 @@ message CMsgGCCStrike15_v2_Client2GCTextMsg {
 	repeated bytes args = 2;
 }
 
+message CMsgGC_ServerQuestUpdateData {
+	message PlayerQuestData {
+		message QuestItemData {
+			optional uint64 quest_item_id = 1;
+			optional int32 quest_points_earned = 2;
+		}
+
+		optional uint32 quester_account_id = 1;
+		repeated .CMsgGC_ServerQuestUpdateData.PlayerQuestData.QuestItemData quest_item_data = 2;
+	}
+
+	repeated .CMsgGC_ServerQuestUpdateData.PlayerQuestData player_quest_data = 1;
+}
+
 message CMsgGCCStrike15_v2_MatchEndRunRewardDrops {
 	optional .CMsgGCCStrike15_v2_MatchmakingServerReservationResponse serverinfo = 3;
+	optional .CMsgGC_ServerQuestUpdateData match_end_quest_data = 4;
 }
 
 message CEconItemPreviewDataBlock {
@@ -527,6 +550,7 @@ message CEconItemPreviewDataBlock {
 	repeated .CEconItemPreviewDataBlock.Sticker stickers = 12;
 	optional uint32 inventory = 13;
 	optional uint32 origin = 14;
+	optional uint32 questid = 15;
 }
 
 message CMsgGCCStrike15_v2_MatchEndRewardDropsNotification {

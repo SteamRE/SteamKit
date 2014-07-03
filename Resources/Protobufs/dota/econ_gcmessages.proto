@@ -183,6 +183,8 @@ enum EUnlockStyle {
 	k_UnlockStyle_Failed_CantLockCache = 4;
 	k_UnlockStyle_Failed_CantAffordAttrib = 5;
 	k_UnlockStyle_Failed_CantAffordGem = 6;
+	k_UnlockStyle_Failed_NoCompendiumLevel = 7;
+	k_UnlockStyle_Failed_AlreadyUnlocked = 8;
 }
 
 enum EItemPurgatoryResponse_Finalize {

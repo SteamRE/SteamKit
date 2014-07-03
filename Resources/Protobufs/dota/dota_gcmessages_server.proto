@@ -104,6 +104,7 @@ message CMsgDOTAFantasyPlayerStats {
 	optional float healing = 13;
 	optional uint32 tower_kills = 14;
 	optional uint32 roshan_kills = 15;
+	optional uint32 team_id = 16;
 }
 
 message CMsgGameMatchSignOut {
@@ -139,6 +140,7 @@ message CMsgGameMatchSignOut {
 			optional uint32 misses = 31;
 			repeated .CMatchPlayerAbilityUpgrade ability_upgrades = 32;
 			repeated .CMatchAdditionalUnitInventory additional_units_inventory = 33;
+			optional uint32 net_worth = 34;
 		}
 
 		repeated .CMsgGameMatchSignOut.CTeam.CPlayer players = 1;
@@ -251,6 +253,7 @@ message CMsgDOTALiveScoreboardUpdate {
 			optional uint32 account_id = 23;
 			optional float position_x = 24;
 			optional float position_y = 25;
+			optional uint32 net_worth = 26;
 		}
 
 		repeated .CMsgDOTALiveScoreboardUpdate.Team.Player players = 1;
