@@ -2142,13 +2142,6 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _results_final; }
       set { _results_final = value; }
     }
-    private readonly global::System.Collections.Generic.List<CMsgDOTATournament.Game.ReplayURL> _replay_urls = new global::System.Collections.Generic.List<CMsgDOTATournament.Game.ReplayURL>();
-    [global::ProtoBuf.ProtoMember(11, Name=@"replay_urls", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public global::System.Collections.Generic.List<CMsgDOTATournament.Game.ReplayURL> replay_urls
-    {
-      get { return _replay_urls; }
-    }
-  
 
     private ETournamentGameState _state = ETournamentGameState.k_ETournamentGameState_Pending;
     [global::ProtoBuf.ProtoMember(14, IsRequired = false, Name=@"state", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
@@ -2158,52 +2151,6 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _state; }
       set { _state = value; }
     }
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ReplayURL")]
-  public partial class ReplayURL : global::ProtoBuf.IExtensible
-  {
-    public ReplayURL() {}
-    
-
-    private uint _provider_id = default(uint);
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"provider_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint provider_id
-    {
-      get { return _provider_id; }
-      set { _provider_id = value; }
-    }
-
-    private uint _stream_id = default(uint);
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"stream_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint stream_id
-    {
-      get { return _stream_id; }
-      set { _stream_id = value; }
-    }
-
-    private string _url = "";
-    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"url", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
-    public string url
-    {
-      get { return _url; }
-      set { _url = value; }
-    }
-
-    private string _description = "";
-    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"description", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
-    public string description
-    {
-      get { return _description; }
-      set { _description = value; }
-    }
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -15324,6 +15271,35 @@ namespace SteamKit2.GC.Dota.Internal
     {
       get { return _unlocked_emoticons; }
       set { _unlocked_emoticons = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientToGCEmoticonDataRequest")]
+  public partial class CMsgClientToGCEmoticonDataRequest : global::ProtoBuf.IExtensible
+  {
+    public CMsgClientToGCEmoticonDataRequest() {}
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCToClientEmoticonData")]
+  public partial class CMsgGCToClientEmoticonData : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCToClientEmoticonData() {}
+    
+
+    private CMsgDOTAEmoticonAccessSDO _emoticon_access = null;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"emoticon_access", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public CMsgDOTAEmoticonAccessSDO emoticon_access
+    {
+      get { return _emoticon_access; }
+      set { _emoticon_access = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

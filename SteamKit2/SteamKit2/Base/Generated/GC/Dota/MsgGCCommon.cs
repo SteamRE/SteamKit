@@ -2095,7 +2095,10 @@ namespace SteamKit2.GC.Dota.Internal
       COMPETITIVE_MATCH = 7,
             
       [global::ProtoBuf.ProtoEnum(Name=@"CASUAL_1V1_MATCH", Value=8)]
-      CASUAL_1V1_MATCH = 8
+      CASUAL_1V1_MATCH = 8,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"WEEKEND_TOURNEY", Value=9)]
+      WEEKEND_TOURNEY = 9
     }
   
     private global::ProtoBuf.IExtension extensionObject;
@@ -2211,6 +2214,15 @@ namespace SteamKit2.GC.Dota.Internal
     {
       get { return _tower_state; }
       set { _tower_state = value; }
+    }
+
+    private uint _client_version = default(uint);
+    [global::ProtoBuf.ProtoMember(15, IsRequired = false, Name=@"client_version", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint client_version
+    {
+      get { return _client_version; }
+      set { _client_version = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -4661,6 +4673,12 @@ namespace SteamKit2.GC.Dota.Internal
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgSignOutDraftInfo", Value=7502)]
       k_EMsgSignOutDraftInfo = 7502,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCEmoticonDataRequest", Value=7503)]
+      k_EMsgClientToGCEmoticonDataRequest = 7503,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToClientEmoticonData", Value=7504)]
+      k_EMsgGCToClientEmoticonData = 7504,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCDev_GrantWarKill", Value=8001)]
       k_EMsgGCDev_GrantWarKill = 8001

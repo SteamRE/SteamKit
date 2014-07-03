@@ -1868,7 +1868,13 @@ namespace SteamKit2.GC.Internal
       k_UnlockStyle_Failed_CantAffordAttrib = 5,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_UnlockStyle_Failed_CantAffordGem", Value=6)]
-      k_UnlockStyle_Failed_CantAffordGem = 6
+      k_UnlockStyle_Failed_CantAffordGem = 6,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_UnlockStyle_Failed_NoCompendiumLevel", Value=7)]
+      k_UnlockStyle_Failed_NoCompendiumLevel = 7,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_UnlockStyle_Failed_AlreadyUnlocked", Value=8)]
+      k_UnlockStyle_Failed_AlreadyUnlocked = 8
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"EItemPurgatoryResponse_Finalize", EnumPassthru=true)]
