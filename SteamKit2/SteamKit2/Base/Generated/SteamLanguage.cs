@@ -1842,7 +1842,11 @@ namespace SteamKit2
 		RegionLocked = 83,
 		RateLimitExceeded = 84,
 		AccountLogonDeniedNeedTwoFactorCode = 85,
+		[Obsolete( "renamed to ItemDeleted" )]
 		ItemOrEntryHasBeenDeleted = 86,
+		ItemDeleted = 86,
+		AccountLoginDeniedThrottle = 87,
+		TwoFactorCodeMismatch = 88,
 	}
 	public enum EUniverse
 	{

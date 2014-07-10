@@ -86,5 +86,8 @@ enum EResult
 	RegionLocked = 83;
 	RateLimitExceeded = 84;
 	AccountLogonDeniedNeedTwoFactorCode = 85;
-	ItemOrEntryHasBeenDeleted = 86;
+	ItemOrEntryHasBeenDeleted = 86; obsolete "renamed to ItemDeleted"
+	ItemDeleted = 86;
+	AccountLoginDeniedThrottle = 87;
+	TwoFactorCodeMismatch = 88;
 };
