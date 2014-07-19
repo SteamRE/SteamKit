@@ -179,6 +179,11 @@ enum DOTA_COMBATLOG_TYPES {
 	DOTA_COMBATLOG_DEATH = 4;
 	DOTA_COMBATLOG_ABILITY = 5;
 	DOTA_COMBATLOG_ITEM = 6;
+	DOTA_COMBATLOG_LOCATION = 7;
+	DOTA_COMBATLOG_GOLD = 8;
+	DOTA_COMBATLOG_GAME_STATE = 9;
+	DOTA_COMBATLOG_XP = 10;
+	DOTA_COMBATLOG_PURCHASE = 11;
 }
 
 enum EDotaEntityMessages {
@@ -615,6 +620,7 @@ message CDOTAUserMsg_ShowSurvey {
 	optional string response_style = 3;
 	optional uint32 teammate_hero_id = 4;
 	optional string teammate_name = 5;
+	optional uint32 teammate_account_id = 6;
 }
 
 message CDOTAUserMsg_UpdateSharedContent {

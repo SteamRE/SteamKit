@@ -323,6 +323,9 @@ message CMsgPracticeLobbyJoinBroadcastChannel {
 	optional string preferred_country_code = 3;
 }
 
+message CMsgPracticeLobbyToggleBroadcastChannelCameramanStatus {
+}
+
 message CMsgPracticeLobbyKick {
 	optional uint32 account_id = 3;
 }
@@ -574,6 +577,17 @@ message CMsgDOTAMatch {
 		repeated .CMatchAdditionalUnitInventory additional_units_inventory = 48;
 	}
 
+	message BroadcasterInfo {
+		optional uint32 account_id = 1;
+		optional string name = 2;
+	}
+
+	message BroadcasterChannel {
+		optional string country_code = 1;
+		optional string description = 2;
+		repeated .CMsgDOTAMatch.BroadcasterInfo broadcaster_infos = 3;
+	}
+
 	enum ReplayState {
 		REPLAY_AVAILABLE = 0;
 		REPLAY_NOT_RECORDED = 1;
@@ -618,6 +632,7 @@ message CMsgDOTAMatch {
 	optional uint32 series_id = 39;
 	optional uint32 series_type = 40;
 	optional uint64 custom_game_id = 42;
+	repeated .CMsgDOTAMatch.BroadcasterChannel broadcaster_channels = 43;
 }
 
 message CMsgDOTAPlayerMatchHistory {
@@ -717,6 +732,7 @@ message CMsgDOTAPopup {
 		PARTY_LEADER_JOINED_LOBBY = 44;
 		MM_1V1_NO_PARTIES = 45;
 		MM_1V1_NO_LOW_PRIORITY = 46;
+		WEEKEND_TOURNEY_REGISTRATION_NOT_OPEN = 47;
 	}
 
 	optional .CMsgDOTAPopup.PopupID id = 1 [default = KICKED_FROM_LOBBY];
@@ -2584,6 +2600,31 @@ message CMsgPassportDataResponse {
 	optional uint32 fantasy_team_count = 16;
 	optional uint32 fantasy_teamexpiration = 17;
 	optional uint32 fantasy_teams_will_lock_at = 18;
+}
+
+message CMsgHeroPickStatsRequest {
+	optional uint32 team_id = 1;
+	optional uint32 league_id = 2;
+	optional uint32 hero_id = 3;
+	optional uint32 matches_since_time = 4;
+}
+
+message CMsgHeroPickStatPlayer {
+	optional uint32 account_id = 1;
+	optional bool win = 2;
+	optional uint32 gpm = 3;
+	optional uint32 kills = 4;
+	optional uint32 deaths = 5;
+	optional uint32 assists = 6;
+}
+
+message CMsgHeroPickStatsResponse {
+	optional uint32 hero_id = 1;
+	optional uint32 total_picks = 2;
+	optional uint32 total_wins = 3;
+	optional uint32 team_picks = 4;
+	optional uint32 team_wins = 5;
+	repeated .CMsgHeroPickStatPlayer player_pick = 6;
 }
 
 message CMsgRequestLeaguePrizePool {

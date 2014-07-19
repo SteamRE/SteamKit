@@ -153,11 +153,6 @@ message CSOItemRecipe {
 	repeated uint32 input_item_dupe_counts = 22;
 }
 
-message CMsgDevNewItemRequest {
-	optional fixed64 receiver = 1;
-	optional .CSOItemCriteria criteria = 2;
-}
-
 message CMsgApplyStrangePart {
 	optional uint64 strange_part_item_id = 1;
 	optional uint64 item_item_id = 2;

@@ -448,3 +448,12 @@ message CMsgRedeemCodeResponse {
 	optional uint32 response = 1;
 }
 
+message CMsgDevNewItemRequest {
+	optional string item_def_name = 3;
+	optional string loot_list_name = 4;
+}
+
+message CMsgDevNewItemRequestResponse {
+	optional bool success = 1;
+}
+

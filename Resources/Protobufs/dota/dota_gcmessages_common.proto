@@ -436,6 +436,11 @@ enum EDOTAGCMsg {
 	k_EMsgSignOutDraftInfo = 7502;
 	k_EMsgClientToGCEmoticonDataRequest = 7503;
 	k_EMsgGCToClientEmoticonData = 7504;
+	k_EMsgGCPracticeLobbyToggleBroadcastChannelCameramanStatus = 7505;
+	k_EMsgGCToGCCreateWeekendTourneyRequest = 7506;
+	k_EMsgGCToGCCreateWeekendTourneyResponse = 7507;
+	k_EMsgGCHeroPickStatsRequest = 7508;
+	k_EMsgGCHeroPickStatsResponse = 7509;
 	k_EMsgGCDev_GrantWarKill = 8001;
 }
 
@@ -796,6 +801,7 @@ message CDOTALobbyMember {
 	optional string nexon_pc_bang_name = 25;
 	repeated .CDOTALobbyMember.CDOTALobbyMemberXPBonus xp_bonuses = 27;
 	optional sint32 rank_change = 29;
+	optional bool cameraman = 30;
 }
 
 message CDOTALobbyMemberPrivate {
@@ -1015,6 +1021,7 @@ message CProtoItemSocket_AnimModifier {
 message CProtoItemSocket_Autograph {
 	optional .CProtoItemSocket socket = 1;
 	optional string autograph = 2;
+	optional uint32 autograph_id = 3;
 }
 
 message CProtoItemSocket_AbilityEffect {

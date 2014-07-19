@@ -135,6 +135,9 @@ message CCLCMsg_VoiceData {
 	optional bytes data = 1;
 	optional fixed64 xuid = 2;
 	optional .VoiceDataFormat_t format = 3 [default = VOICEDATA_FORMAT_STEAM];
+	optional int32 sequence_bytes = 4;
+	optional uint32 section_number = 5;
+	optional uint32 uncompressed_sample_offset = 6;
 }
 
 message CCLCMsg_BaselineAck {
@@ -361,6 +364,9 @@ message CSVCMsg_VoiceData {
 	optional int32 audible_mask = 4;
 	optional bytes voice_data = 5;
 	optional .VoiceDataFormat_t format = 6 [default = VOICEDATA_FORMAT_STEAM];
+	optional int32 sequence_bytes = 7;
+	optional uint32 section_number = 8;
+	optional uint32 uncompressed_sample_offset = 9;
 }
 
 message CSVCMsg_PacketReliable {
