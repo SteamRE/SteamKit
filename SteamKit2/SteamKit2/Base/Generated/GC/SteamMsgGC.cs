@@ -847,34 +847,6 @@ namespace SteamKit2.GC.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDevNewItemRequest")]
-  public partial class CMsgDevNewItemRequest : global::ProtoBuf.IExtensible
-  {
-    public CMsgDevNewItemRequest() {}
-    
-
-    private ulong _receiver = default(ulong);
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"receiver", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
-    public ulong receiver
-    {
-      get { return _receiver; }
-      set { _receiver = value; }
-    }
-
-    private CSOItemCriteria _criteria = null;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"criteria", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
-    public CSOItemCriteria criteria
-    {
-      get { return _criteria; }
-      set { _criteria = value; }
-    }
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgApplyStrangePart")]
   public partial class CMsgApplyStrangePart : global::ProtoBuf.IExtensible
   {

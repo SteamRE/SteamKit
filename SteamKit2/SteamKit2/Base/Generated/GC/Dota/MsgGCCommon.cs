@@ -1221,6 +1221,15 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _rank_change; }
       set { _rank_change = value; }
     }
+
+    private bool _cameraman = default(bool);
+    [global::ProtoBuf.ProtoMember(30, IsRequired = false, Name=@"cameraman", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool cameraman
+    {
+      get { return _cameraman; }
+      set { _cameraman = value; }
+    }
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CDOTALobbyMemberXPBonus")]
   public partial class CDOTALobbyMemberXPBonus : global::ProtoBuf.IExtensible
   {
@@ -2722,6 +2731,15 @@ namespace SteamKit2.GC.Dota.Internal
     {
       get { return _autograph; }
       set { _autograph = value; }
+    }
+
+    private uint _autograph_id = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"autograph_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint autograph_id
+    {
+      get { return _autograph_id; }
+      set { _autograph_id = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -4679,6 +4697,21 @@ namespace SteamKit2.GC.Dota.Internal
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToClientEmoticonData", Value=7504)]
       k_EMsgGCToClientEmoticonData = 7504,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCPracticeLobbyToggleBroadcastChannelCameramanStatus", Value=7505)]
+      k_EMsgGCPracticeLobbyToggleBroadcastChannelCameramanStatus = 7505,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCCreateWeekendTourneyRequest", Value=7506)]
+      k_EMsgGCToGCCreateWeekendTourneyRequest = 7506,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCCreateWeekendTourneyResponse", Value=7507)]
+      k_EMsgGCToGCCreateWeekendTourneyResponse = 7507,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCHeroPickStatsRequest", Value=7508)]
+      k_EMsgGCHeroPickStatsRequest = 7508,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCHeroPickStatsResponse", Value=7509)]
+      k_EMsgGCHeroPickStatsResponse = 7509,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCDev_GrantWarKill", Value=8001)]
       k_EMsgGCDev_GrantWarKill = 8001
