@@ -23,6 +23,7 @@ BOOL InjectEjection(const HWND hWindow, const int iSteamProcessID, const char * 
 // rundll32.exe C:\Path\To\NetHook2.dll,Eject
 // rundll32.exe C:\Path\To\NetHook2.dll,Eject 1234
 // rundll32.exe C:\Path\To\NetHook2.dll,Eject steam.exe
+// 1234 - ID of the process to inject into
 //
 
 #pragma comment(linker, "/EXPORT:Inject=?Inject@@YGXPAUHWND__@@PAUHINSTANCE__@@PADH@Z")
@@ -152,7 +153,8 @@ BOOL FindProcessByName(const char * szProcessName, int * piFirstProcessID, int *
 		if (hProcess != NULL)
 		{
 			char szProcessPath[MAX_PATH];
-			GetModuleFileNameEx(hProcess, 0, szProcessPath, sizeof(szProcessPath));
+			if(GetModuleFileNameEx(hProcess, 0, szProcessPath, sizeof(szProcessPath)) == 0)
+				continue;
 
 			char szEndsWithKey[MAX_PATH];
 			ZeroMemory(szEndsWithKey, sizeof(szEndsWithKey));
