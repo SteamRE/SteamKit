@@ -154,7 +154,10 @@ BOOL FindProcessByName(const char * szProcessName, int * piFirstProcessID, int *
 		{
 			char szProcessPath[MAX_PATH];
 			if(GetModuleFileNameEx(hProcess, 0, szProcessPath, sizeof(szProcessPath)) == 0)
+			{
+				CloseHandle(hProcess);
 				continue;
+			}
 
 			char szEndsWithKey[MAX_PATH];
 			ZeroMemory(szEndsWithKey, sizeof(szEndsWithKey));
