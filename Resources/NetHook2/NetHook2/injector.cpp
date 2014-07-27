@@ -21,7 +21,7 @@ inline SafeHandle MakeSafeHandle(HANDLE hHandle)
 typedef std::shared_ptr<void> SafeRemoteMem;
 inline SafeRemoteMem MakeSafeRemoteMem(SafeHandle hRemoteProcess, void * pRemoteMemory)
 {
-	return std::shared_ptr<void>(pRemoteMemory,
+	return SafeRemoteMem(pRemoteMemory,
 		[hRemoteProcess](void * pRemoteMemoryToDelete)
 		{
 			if (pRemoteMemoryToDelete != NULL)
