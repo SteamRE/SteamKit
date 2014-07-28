@@ -8194,6 +8194,15 @@ namespace SteamKit2.Internal
       get { return _rangecheck_host; }
       set { _rangecheck_host = value; }
     }
+
+    private string _file_encoded_sha1 = "";
+    [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"file_encoded_sha1", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string file_encoded_sha1
+    {
+      get { return _file_encoded_sha1; }
+      set { _file_encoded_sha1 = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

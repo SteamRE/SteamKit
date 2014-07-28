@@ -1326,6 +1326,132 @@ namespace SteamKit2.GC.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CWorkshop_SetItemPaymentRules_Request")]
+  public partial class CWorkshop_SetItemPaymentRules_Request : global::ProtoBuf.IExtensible
+  {
+    public CWorkshop_SetItemPaymentRules_Request() {}
+    
+
+    private uint _appid = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"appid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint appid
+    {
+      get { return _appid; }
+      set { _appid = value; }
+    }
+
+    private uint _gameitemid = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"gameitemid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint gameitemid
+    {
+      get { return _gameitemid; }
+      set { _gameitemid = value; }
+    }
+    private readonly global::System.Collections.Generic.List<CWorkshop_SetItemPaymentRules_Request.WorkshopItemPaymentRule> _associated_workshop_files = new global::System.Collections.Generic.List<CWorkshop_SetItemPaymentRules_Request.WorkshopItemPaymentRule>();
+    [global::ProtoBuf.ProtoMember(3, Name=@"associated_workshop_files", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CWorkshop_SetItemPaymentRules_Request.WorkshopItemPaymentRule> associated_workshop_files
+    {
+      get { return _associated_workshop_files; }
+    }
+  
+    private readonly global::System.Collections.Generic.List<CWorkshop_SetItemPaymentRules_Request.PartnerItemPaymentRule> _partner_accounts = new global::System.Collections.Generic.List<CWorkshop_SetItemPaymentRules_Request.PartnerItemPaymentRule>();
+    [global::ProtoBuf.ProtoMember(4, Name=@"partner_accounts", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CWorkshop_SetItemPaymentRules_Request.PartnerItemPaymentRule> partner_accounts
+    {
+      get { return _partner_accounts; }
+    }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"WorkshopItemPaymentRule")]
+  public partial class WorkshopItemPaymentRule : global::ProtoBuf.IExtensible
+  {
+    public WorkshopItemPaymentRule() {}
+    
+
+    private ulong _workshop_file_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"workshop_file_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong workshop_file_id
+    {
+      get { return _workshop_file_id; }
+      set { _workshop_file_id = value; }
+    }
+
+    private float _revenue_percentage = default(float);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"revenue_percentage", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(float))]
+    public float revenue_percentage
+    {
+      get { return _revenue_percentage; }
+      set { _revenue_percentage = value; }
+    }
+
+    private string _rule_description = "";
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"rule_description", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string rule_description
+    {
+      get { return _rule_description; }
+      set { _rule_description = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"PartnerItemPaymentRule")]
+  public partial class PartnerItemPaymentRule : global::ProtoBuf.IExtensible
+  {
+    public PartnerItemPaymentRule() {}
+    
+
+    private uint _account_id = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint account_id
+    {
+      get { return _account_id; }
+      set { _account_id = value; }
+    }
+
+    private float _revenue_percentage = default(float);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"revenue_percentage", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(float))]
+    public float revenue_percentage
+    {
+      get { return _revenue_percentage; }
+      set { _revenue_percentage = value; }
+    }
+
+    private string _rule_description = "";
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"rule_description", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string rule_description
+    {
+      get { return _rule_description; }
+      set { _rule_description = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CWorkshop_SetItemPaymentRules_Response")]
+  public partial class CWorkshop_SetItemPaymentRules_Response : global::ProtoBuf.IExtensible
+  {
+    public CWorkshop_SetItemPaymentRules_Response() {}
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     [global::ProtoBuf.ProtoContract(Name=@"PartnerAccountType", EnumPassthru=true)]
     public enum PartnerAccountType
     {

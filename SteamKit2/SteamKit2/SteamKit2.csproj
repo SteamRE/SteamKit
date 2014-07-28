@@ -107,6 +107,7 @@
     <Compile Include="Base\Generated\Unified\SteamMsgPartnerApps.cs" />
     <Compile Include="Base\Generated\Unified\SteamMsgPlayer.cs" />
     <Compile Include="Base\Generated\Unified\SteamMsgPublishedFile.cs" />
+    <Compile Include="Base\Generated\Unified\SteamMsgTwoFactor.cs" />
     <Compile Include="Base\Generated\Unified\SteamMsgUnifiedBase.cs" />
     <Compile Include="Base\MsgBase.cs" />
     <Compile Include="Base\PacketBase.cs" />

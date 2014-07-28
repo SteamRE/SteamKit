@@ -41,5 +41,6 @@ echo Unified Messages
 ..\..\Protogen\protogen -s:..\ -i:"steammessages_partnerapps.steamclient.proto" -o:"..\..\..\SteamKit2\SteamKit2\Base\Generated\Unified\SteamMsgPartnerApps.cs" -t:csharp -ns:"SteamKit2.Unified.Internal"
 ..\..\Protogen\protogen -s:..\ -i:"steammessages_player.steamclient.proto" -o:"..\..\..\SteamKit2\SteamKit2\Base\Generated\Unified\SteamMsgPlayer.cs" -t:csharp -ns:"SteamKit2.Unified.Internal"
 ..\..\Protogen\protogen -s:..\ -i:"steammessages_publishedfile.steamclient.proto" -o:"..\..\..\SteamKit2\SteamKit2\Base\Generated\Unified\SteamMsgPublishedFile.cs" -t:csharp -ns:"SteamKit2.Unified.Internal"
+..\..\Protogen\protogen -s:..\ -i:"steammessages_twofactor.steamclient.proto" -o:"..\..\..\SteamKit2\SteamKit2\Base\Generated\Unified\SteamMsgTwoFactor.cs" -t:csharp -ns:"SteamKit2.Unified.Internal"
 
 pause
