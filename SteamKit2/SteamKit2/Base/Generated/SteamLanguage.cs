@@ -1392,7 +1392,9 @@ namespace SteamKit2
 		MDSSetPublicVersionForDepot = 5816,
 		[Obsolete]
 		MDSSetPublicVersionForDepotResponse = 5817,
+		[Obsolete]
 		ClientMDSInitWorkshopBuildRequest = 5816,
+		[Obsolete]
 		ClientMDSInitWorkshopBuildResponse = 5817,
 		ClientMDSGetDepotManifest = 5818,
 		ClientMDSGetDepotManifestResponse = 5819,

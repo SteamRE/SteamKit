@@ -1386,8 +1386,8 @@ enum EMsg
 	MDSGetVersionsForDepotResponse = 5815;
 	MDSSetPublicVersionForDepot = 5816; obsolete
 	MDSSetPublicVersionForDepotResponse = 5817; obsolete
-	ClientMDSInitWorkshopBuildRequest = 5816;
-	ClientMDSInitWorkshopBuildResponse = 5817;
+	ClientMDSInitWorkshopBuildRequest = 5816; obsolete
+	ClientMDSInitWorkshopBuildResponse = 5817; obsolete
 	ClientMDSGetDepotManifest = 5818;
 	ClientMDSGetDepotManifestResponse = 5819;
 	ClientMDSGetDepotManifestChunk = 5820;

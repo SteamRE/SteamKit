@@ -358,8 +358,6 @@
 	k_EMsgClientMDSUploadDepotChunksResponse = 5808, // flags: 2, server type: -1
 	k_EMsgClientMDSInitDepotBuildRequest = 5809, // flags: 2, server type: -1
 	k_EMsgClientMDSInitDepotBuildResponse = 5810, // flags: 2, server type: -1
-	k_EMsgClientMDSInitWorkshopBuildRequest = 5816, // flags: 2, server type: -1
-	k_EMsgClientMDSInitWorkshopBuildResponse = 5817, // flags: 2, server type: -1
 	k_EMsgClientMDSGetDepotManifest = 5818, // flags: 2, server type: -1
 	k_EMsgClientMDSGetDepotManifestResponse = 5819, // flags: 2, server type: -1
 	k_EMsgClientMDSGetDepotManifestChunk = 5820, // flags: 2, server type: -1
