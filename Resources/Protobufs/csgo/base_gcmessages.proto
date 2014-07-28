@@ -106,6 +106,7 @@ message CSOEconGameAccountClient {
 	optional uint32 preview_item_def = 8 [default = 0];
 	optional bool made_first_purchase = 9 [default = false];
 	optional bool eligible_for_community_market = 10;
+	optional uint32 mission_refuse_allowed = 11;
 }
 
 message CSOItemCriteriaCondition {

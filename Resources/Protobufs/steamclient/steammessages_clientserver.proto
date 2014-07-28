@@ -1264,6 +1264,7 @@ message CMsgClientUFSGetUGCDetailsResponse {
 	optional uint32 file_size = 6;
 	optional uint32 compressed_file_size = 7;
 	optional string rangecheck_host = 8;
+	optional string file_encoded_sha1 = 9;
 }
 
 message CMsgClientUFSGetSingleFileInfo {

@@ -10,6 +10,7 @@ message CMsgRemoteClientAppStatus {
 		optional uint64 bytes_processed = 5;
 		optional int32 estimated_seconds_remaining = 6 [default = -1];
 		optional int32 update_result = 7;
+		optional uint32 update_state = 8;
 	}
 
 	message ShortcutInfo {
@@ -38,6 +39,11 @@ message CMsgRemoteClientAuthResponse {
 }
 
 message CMsgRemoteClientStartStream {
+	message ReservedGamepad {
+		optional uint32 controller_type = 1;
+		optional uint32 controller_subtype = 2;
+	}
+
 	optional uint32 app_id = 1;
 	optional int32 environment = 2;
 	optional int32 gamepad_count = 3;
@@ -46,6 +52,7 @@ message CMsgRemoteClientStartStream {
 	optional string unlock_parental_lock = 6;
 	optional int32 maximum_resolution_x = 7;
 	optional int32 maximum_resolution_y = 8;
+	repeated .CMsgRemoteClientStartStream.ReservedGamepad gamepads = 9;
 }
 
 message CMsgRemoteClientStartStreamResponse {
