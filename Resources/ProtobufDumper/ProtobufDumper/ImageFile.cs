@@ -159,7 +159,7 @@ namespace ProtobufDumper
                         continue;
                     }
 
-                    Regex regex = new Regex(@"^[a-zA-Z_\\/.]+.proto$");
+                    Regex regex = new Regex(@"^[a-zA-Z_0-9\\/.]+.proto$");
                     if (!regex.IsMatch(protoName))
                     {
                         dataPtr = originalPtr + 1;
