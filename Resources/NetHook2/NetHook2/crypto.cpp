@@ -5,7 +5,7 @@
 #include "logger.h"
 #include "csimplescan.h"
 
-#include <cassert>
+#include <cstddef>
 
 #include <map>
 
@@ -33,6 +33,18 @@ struct MsgInfo_t
 	uint64 uUnk1;
 };
 
+static_assert(sizeof(MsgInfo_t) == 56 &&
+	offsetof(MsgInfo_t, eMsg) == 0 &&
+	offsetof(MsgInfo_t, pchMsgName) == 4 &&
+	offsetof(MsgInfo_t, nFlags) == 8 &&
+	offsetof(MsgInfo_t, k_EServerTarget) == 12 &&
+	offsetof(MsgInfo_t, nTimesSent) == 16 &&
+	offsetof(MsgInfo_t, uBytesSent) == 24 &&
+	offsetof(MsgInfo_t, nTimesSentProfile) == 32 &&
+	offsetof(MsgInfo_t, uBytesSentProfile) == 40 &&
+	offsetof(MsgInfo_t, uUnk1) == 48,
+	"Incorrect layout of MsgInfo_t structure!");
+
 typedef std::map<EMsg, MsgInfo_t *> MsgList;
 typedef std::pair<EMsg, MsgInfo_t *> MsgPair;
 
@@ -43,9 +55,6 @@ MsgList eMsgList;
 CCrypto::CCrypto()
 	: Encrypt_Detour( NULL ), Decrypt_Detour( NULL )
 {
-
-	assert( sizeof( MsgInfo_t ) == 56); // god help the padding never change
-
 	CSimpleScan steamClientScan( "steamclient.dll" );
 
 
