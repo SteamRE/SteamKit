@@ -59,6 +59,9 @@ enum ECsgoGCMsg {
 	k_EMsgGCCStrike15_v2_Client2GCEconPreviewDataBlockResponse = 9157;
 	k_EMsgGCCStrike15_v2_AccountPrivacySettings = 9158;
 	k_EMsgGCCStrike15_v2_SetMyActivityInfo = 9159;
+	k_EMsgGCCStrike15_v2_MatchListRequestTournamentPredictions = 9160;
+	k_EMsgGCCStrike15_v2_MatchListUploadTournamentPredictions = 9161;
+	k_EMsgGCCStrike15_v2_DraftSummary = 9162;
 }
 
 message GameServerPing {
@@ -75,11 +78,22 @@ message DetailedSearchStatistic {
 	optional uint32 players_searching = 4;
 }
 
+message TournamentPlayer {
+	optional uint32 account_id = 1;
+	optional string player_nick = 2;
+	optional string player_name = 3;
+	optional uint32 player_dob = 4;
+	optional string player_flag = 5;
+	optional string player_location = 6;
+	optional string player_desc = 7;
+}
+
 message TournamentTeam {
 	optional int32 team_id = 1;
 	optional string team_tag = 2;
 	optional string team_flag = 3;
 	optional string team_name = 4;
+	repeated .TournamentPlayer players = 5;
 }
 
 message TournamentEvent {
@@ -91,6 +105,7 @@ message TournamentEvent {
 	optional int32 event_public = 6;
 	optional int32 event_stage_id = 7;
 	optional string event_stage_name = 8;
+	optional uint32 active_section_id = 9;
 }
 
 message GlobalStatistics {
@@ -241,6 +256,29 @@ message CMsgGCCStrike15_v2_MatchmakingGC2ClientUpdate {
 	optional .IpAddressMask server_ipaddress_mask = 12;
 }
 
+message CDataGCCStrike15_v2_TournamentMatchDraft {
+	message Entry {
+		optional int32 mapid = 1;
+		optional int32 team_id_ct = 2;
+	}
+
+	optional int32 event_id = 1;
+	optional int32 event_stage_id = 2;
+	optional int32 team_id_0 = 3;
+	optional int32 team_id_1 = 4;
+	optional int32 maps_count = 5;
+	optional int32 maps_current = 6;
+	optional int32 team_id_start = 7;
+	optional int32 team_id_veto1 = 8;
+	optional int32 team_id_pickn = 9;
+	repeated .CDataGCCStrike15_v2_TournamentMatchDraft.Entry drafts = 10;
+}
+
+message CPreMatchInfoData {
+	optional int32 predictions_pct = 1;
+	optional .CDataGCCStrike15_v2_TournamentMatchDraft draft = 4;
+}
+
 message CMsgGCCStrike15_v2_MatchmakingGC2ServerReserve {
 	repeated uint32 account_ids = 1;
 	optional uint32 game_type = 2;
@@ -256,6 +294,7 @@ message CMsgGCCStrike15_v2_MatchmakingGC2ServerReserve {
 	repeated .TournamentTeam tournament_teams = 12;
 	repeated uint32 tournament_casters_account_ids = 13;
 	optional uint64 tv_relay_steamid = 14;
+	optional .CPreMatchInfoData pre_match_data = 15;
 }
 
 message CMsgGCCStrike15_v2_MatchmakingServerReservationResponse {
@@ -605,12 +644,57 @@ message CDataGCCStrike15_v2_MatchInfo {
 	optional .CMsgGCCStrike15_v2_MatchmakingServerRoundStats roundstats = 4;
 }
 
+message CDataGCCStrike15_v2_TournamentGroupTeam {
+	optional int32 team_id = 1;
+	optional int32 score = 2;
+	optional bool correctpick = 3;
+}
+
+message CDataGCCStrike15_v2_TournamentGroup {
+	optional uint32 groupid = 1;
+	optional string name = 2;
+	optional string desc = 3;
+	optional uint32 picks = 4;
+	repeated .CDataGCCStrike15_v2_TournamentGroupTeam teams = 5;
+	repeated int32 stage_ids = 6;
+	optional uint32 picklockuntiltime = 7;
+	optional uint32 pickableteams = 8;
+	optional uint32 points_per_pick = 9;
+}
+
+message CDataGCCStrike15_v2_TournamentSection {
+	optional uint32 sectionid = 1;
+	optional string name = 2;
+	optional string desc = 3;
+	repeated .CDataGCCStrike15_v2_TournamentGroup groups = 4;
+}
+
+message CDataGCCStrike15_v2_TournamentInfo {
+	repeated .CDataGCCStrike15_v2_TournamentSection sections = 1;
+	optional .TournamentEvent tournament_event = 2;
+	repeated .TournamentTeam tournament_teams = 3;
+}
+
 message CMsgGCCStrike15_v2_MatchList {
 	optional uint32 msgrequestid = 1;
 	optional uint32 accountid = 2;
 	optional uint32 servertime = 3;
 	repeated .CDataGCCStrike15_v2_MatchInfo matches = 4;
 	repeated .TournamentTeam streams = 5;
+	optional .CDataGCCStrike15_v2_TournamentInfo tournamentinfo = 6;
+}
+
+message CMsgGCCStrike15_v2_Predictions {
+	message GroupMatchTeamPick {
+		optional int32 sectionid = 1;
+		optional int32 groupid = 2;
+		optional int32 index = 3;
+		optional int32 teamid = 4;
+		optional uint64 itemid = 5;
+	}
+
+	optional uint32 event_id = 1;
+	repeated .CMsgGCCStrike15_v2_Predictions.GroupMatchTeamPick group_match_team_picks = 2;
 }
 
 message CAttribute_String {

@@ -19,27 +19,32 @@ message CMsgKeyChar {
 message CMsgMouseDown {
 	optional uint32 browser_handle = 1;
 	optional uint32 mouse_button = 2;
+	optional uint32 modifiers = 3;
 }
 
 message CMsgMouseUp {
 	optional uint32 browser_handle = 1;
 	optional uint32 mouse_button = 2;
+	optional uint32 modifiers = 3;
 }
 
 message CMsgMouseDblClick {
 	optional uint32 browser_handle = 1;
 	optional uint32 mouse_button = 2;
+	optional uint32 modifiers = 3;
 }
 
 message CMsgMouseWheel {
 	optional uint32 browser_handle = 1;
 	optional int32 delta = 2;
+	optional uint32 modifiers = 3;
 }
 
 message CMsgMouseMove {
 	optional uint32 browser_handle = 1;
 	optional int32 x = 2;
 	optional int32 y = 3;
+	optional uint32 modifiers = 4;
 }
 
 message CMsgMouseLeave {

@@ -1,5 +1,4 @@
 import "steammessages.proto";
-import "matchmaker_common.proto";
 import "dota_gcmessages_common.proto";
 import "econ_gcmessages.proto";
 import "network_connection.proto";
@@ -480,6 +479,7 @@ message CMsgServerGrantSurveyPermission {
 		optional uint32 expire_time = 3;
 		optional uint64 survey_key = 4;
 		optional uint64 extra_data = 5;
+		optional uint64 extra_data_32 = 6;
 	}
 
 	repeated .CMsgServerGrantSurveyPermission.Survey surveys = 1;
@@ -540,5 +540,18 @@ message CSerializedCombatLog {
 	optional uint32 version = 1;
 	optional .CSerializedCombatLog.Dictionary dictionary = 2;
 	repeated .CSerializedCombatLog.Entry entries = 3;
+}
+
+message CMsgServerToGCGetAdditionalEquips {
+	repeated uint32 account_ids = 1;
+}
+
+message CMsgServerToGCGetAdditionalEquipsResponse {
+	message CUserEquips {
+		optional uint32 account_id = 1;
+		repeated .CAdditionalEquipSlot equips = 2;
+	}
+
+	repeated .CMsgServerToGCGetAdditionalEquipsResponse.CUserEquips equips = 1;
 }
 
