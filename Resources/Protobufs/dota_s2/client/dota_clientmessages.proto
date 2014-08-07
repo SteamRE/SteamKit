@@ -1,0 +1,144 @@
+import "google/protobuf/descriptor.proto";
+import "networkbasetypes.proto";
+import "dota_commonmessages.proto";
+
+enum EDotaClientMessages {
+	DOTA_CM_MapLine = 301;
+	DOTA_CM_AspectRatio = 302;
+	DOTA_CM_MapPing = 303;
+	DOTA_CM_UnitsAutoAttack = 304;
+	DOTA_CM_AutoPurchaseItems = 305;
+	DOTA_CM_TestItems = 306;
+	DOTA_CM_SearchString = 307;
+	DOTA_CM_Pause = 308;
+	DOTA_CM_ShopViewMode = 309;
+	DOTA_CM_SetUnitShareFlag = 310;
+	DOTA_CM_SwapRequest = 311;
+	DOTA_CM_SwapAccept = 312;
+	DOTA_CM_WorldLine = 313;
+	DOTA_CM_RequestGraphUpdate = 314;
+	DOTA_CM_ItemAlert = 315;
+	DOTA_CM_ChatWheel = 316;
+	DOTA_CM_SendStatPopup = 317;
+	DOTA_CM_BeginLastHitChallenge = 318;
+	DOTA_CM_UpdateQuickBuy = 319;
+	DOTA_CM_UpdateCoachListen = 320;
+	DOTA_CM_CoachHUDPing = 321;
+	DOTA_CM_RecordVote = 322;
+	DOTA_CM_UnitsAutoAttackAfterSpell = 323;
+	DOTA_CM_WillPurchaseAlert = 324;
+	DOTA_CM_PlayerShowCase = 325;
+	DOTA_CM_TeleportRequiresHalt = 326;
+}
+
+message CDOTAClientMsg_MapPing {
+	optional .CDOTAMsg_LocationPing location_ping = 1;
+}
+
+message CDOTAClientMsg_ItemAlert {
+	optional .CDOTAMsg_ItemAlert item_alert = 1;
+}
+
+message CDOTAClientMsg_MapLine {
+	optional .CDOTAMsg_MapLine mapline = 1;
+}
+
+message CDOTAClientMsg_AspectRatio {
+	optional float ratio = 1;
+}
+
+message CDOTAClientMsg_UnitsAutoAttack {
+	optional bool enabled = 1;
+}
+
+message CDOTAClientMsg_UnitsAutoAttackAfterSpell {
+	optional bool enabled = 1;
+}
+
+message CDOTAClientMsg_TeleportRequiresHalt {
+	optional bool enabled = 1;
+}
+
+message CDOTAClientMsg_AutoPurchaseItems {
+	optional bool enabled = 1;
+}
+
+message CDOTAClientMsg_TestItems {
+	optional string key_values = 1;
+}
+
+message CDOTAClientMsg_SearchString {
+	optional string search = 1;
+}
+
+message CDOTAClientMsg_Pause {
+}
+
+message CDOTAClientMsg_ShopViewMode {
+	optional uint32 mode = 1;
+}
+
+message CDOTAClientMsg_SetUnitShareFlag {
+	optional uint32 playerID = 1;
+	optional uint32 flag = 2;
+	optional bool state = 3;
+}
+
+message CDOTAClientMsg_SwapRequest {
+	optional uint32 player_id = 1;
+}
+
+message CDOTAClientMsg_SwapAccept {
+	optional uint32 player_id = 1;
+}
+
+message CDOTAClientMsg_WorldLine {
+	optional .CDOTAMsg_WorldLine worldline = 1;
+}
+
+message CDOTAClientMsg_RequestGraphUpdate {
+}
+
+message CDOTAClientMsg_ChatWheel {
+	optional .EDOTAChatWheelMessage chat_message = 1 [default = k_EDOTA_CW_Ok];
+	optional uint32 param_hero_id = 2;
+}
+
+message CDOTAClientMsg_SendStatPopup {
+	optional .CDOTAMsg_SendStatPopup statpopup = 1;
+}
+
+message CDOTAClientMsg_BeginLastHitChallenge {
+	optional uint32 chosen_lane = 1;
+	optional bool helper_enabled = 2;
+}
+
+message CDOTAClientMsg_UpdateQuickBuyItem {
+	optional int32 item_type = 1;
+	optional bool purchasable = 2;
+}
+
+message CDOTAClientMsg_UpdateQuickBuy {
+	repeated .CDOTAClientMsg_UpdateQuickBuyItem items = 1;
+}
+
+message CDOTAClientMsg_UpdateCoachListen {
+	optional uint32 player_mask = 1;
+}
+
+message CDOTAClientMsg_CoachHUDPing {
+	optional .CDOTAMsg_CoachHUDPing hud_ping = 1;
+}
+
+message CDOTAClientMsg_RecordVote {
+	optional int32 choice_index = 1;
+}
+
+message CDOTAClientMsg_WillPurchaseAlert {
+	optional int32 itemid = 1;
+}
+
+message CDOTAClientMsg_PlayerShowCase {
+	optional bool showcase = 1;
+}
+
