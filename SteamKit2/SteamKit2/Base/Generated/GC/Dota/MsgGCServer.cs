@@ -12,7 +12,6 @@ using SteamKit2.GC.Internal;
    
 // Generated from: dota_gcmessages_server.proto
 // Note: requires additional types generated from: steammessages.proto
-// Note: requires additional types generated from: matchmaker_common.proto
 // Note: requires additional types generated from: dota_gcmessages_common.proto
 // Note: requires additional types generated from: econ_gcmessages.proto
 // Note: requires additional types generated from: network_connection.proto
@@ -3044,6 +3043,15 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _extra_data; }
       set { _extra_data = value; }
     }
+
+    private ulong _extra_data_32 = default(ulong);
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"extra_data_32", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong extra_data_32
+    {
+      get { return _extra_data_32; }
+      set { _extra_data_32 = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -3411,6 +3419,66 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _slow_duration; }
       set { _slow_duration = value; }
     }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgServerToGCGetAdditionalEquips")]
+  public partial class CMsgServerToGCGetAdditionalEquips : global::ProtoBuf.IExtensible
+  {
+    public CMsgServerToGCGetAdditionalEquips() {}
+    
+    private readonly global::System.Collections.Generic.List<uint> _account_ids = new global::System.Collections.Generic.List<uint>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"account_ids", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public global::System.Collections.Generic.List<uint> account_ids
+    {
+      get { return _account_ids; }
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgServerToGCGetAdditionalEquipsResponse")]
+  public partial class CMsgServerToGCGetAdditionalEquipsResponse : global::ProtoBuf.IExtensible
+  {
+    public CMsgServerToGCGetAdditionalEquipsResponse() {}
+    
+    private readonly global::System.Collections.Generic.List<CMsgServerToGCGetAdditionalEquipsResponse.CUserEquips> _equips = new global::System.Collections.Generic.List<CMsgServerToGCGetAdditionalEquipsResponse.CUserEquips>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"equips", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CMsgServerToGCGetAdditionalEquipsResponse.CUserEquips> equips
+    {
+      get { return _equips; }
+    }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CUserEquips")]
+  public partial class CUserEquips : global::ProtoBuf.IExtensible
+  {
+    public CUserEquips() {}
+    
+
+    private uint _account_id = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint account_id
+    {
+      get { return _account_id; }
+      set { _account_id = value; }
+    }
+    private readonly global::System.Collections.Generic.List<CAdditionalEquipSlot> _equips = new global::System.Collections.Generic.List<CAdditionalEquipSlot>();
+    [global::ProtoBuf.ProtoMember(2, Name=@"equips", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CAdditionalEquipSlot> equips
+    {
+      get { return _equips; }
+    }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

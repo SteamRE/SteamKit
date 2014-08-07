@@ -12,7 +12,6 @@ using SteamKit2.GC.Internal;
    
 // Generated from: dota_gcmessages_common.proto
 // Note: requires additional types generated from: steammessages.proto
-// Note: requires additional types generated from: matchmaker_common.proto
 // Note: requires additional types generated from: gcsdk_gcmessages.proto
 namespace SteamKit2.GC.Dota.Internal
 {
@@ -3395,6 +3394,43 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CAdditionalEquipSlot")]
+  public partial class CAdditionalEquipSlot : global::ProtoBuf.IExtensible
+  {
+    public CAdditionalEquipSlot() {}
+    
+
+    private uint _class_id = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"class_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint class_id
+    {
+      get { return _class_id; }
+      set { _class_id = value; }
+    }
+
+    private uint _slot_id = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"slot_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint slot_id
+    {
+      get { return _slot_id; }
+      set { _slot_id = value; }
+    }
+
+    private uint _def_index = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"def_index", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint def_index
+    {
+      get { return _def_index; }
+      set { _def_index = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     [global::ProtoBuf.ProtoContract(Name=@"EDOTAGCMsg", EnumPassthru=true)]
     public enum EDOTAGCMsg
     {
@@ -4713,6 +4749,36 @@ namespace SteamKit2.GC.Dota.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCHeroPickStatsResponse", Value=7509)]
       k_EMsgGCHeroPickStatsResponse = 7509,
             
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCCreateGenericTeamsRequest", Value=7510)]
+      k_EMsgGCToGCCreateGenericTeamsRequest = 7510,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCCreateGenericTeamsResponse", Value=7511)]
+      k_EMsgGCToGCCreateGenericTeamsResponse = 7511,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgSQLLaunchOneWeekendTourney", Value=7512)]
+      k_EMsgSQLLaunchOneWeekendTourney = 7512,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCSetAdditionalEquips", Value=7513)]
+      k_EMsgClientToGCSetAdditionalEquips = 7513,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCGetAdditionalEquips", Value=7514)]
+      k_EMsgClientToGCGetAdditionalEquips = 7514,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCGetAdditionalEquipsResponse", Value=7515)]
+      k_EMsgClientToGCGetAdditionalEquipsResponse = 7515,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgServerToGCGetAdditionalEquips", Value=7516)]
+      k_EMsgServerToGCGetAdditionalEquips = 7516,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgServerToGCGetAdditionalEquipsResponse", Value=7517)]
+      k_EMsgServerToGCGetAdditionalEquipsResponse = 7517,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCGetServerForClient", Value=7523)]
+      k_EMsgGCToGCGetServerForClient = 7523,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCGetServerForClientResponse", Value=7524)]
+      k_EMsgGCToGCGetServerForClientResponse = 7524,
+            
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCDev_GrantWarKill", Value=8001)]
       k_EMsgGCDev_GrantWarKill = 8001
     }
@@ -5050,6 +5116,112 @@ namespace SteamKit2.GC.Dota.Internal
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EDOTAPlayerMMRType_1v1Competitive", Value=5)]
       k_EDOTAPlayerMMRType_1v1Competitive = 5
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"MatchType", EnumPassthru=true)]
+    public enum MatchType
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"MATCH_TYPE_CASUAL", Value=0)]
+      MATCH_TYPE_CASUAL = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"MATCH_TYPE_COOP_BOTS", Value=1)]
+      MATCH_TYPE_COOP_BOTS = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"MATCH_TYPE_TEAM_RANKED", Value=2)]
+      MATCH_TYPE_TEAM_RANKED = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"MATCH_TYPE_LEGACY_SOLO_QUEUE", Value=3)]
+      MATCH_TYPE_LEGACY_SOLO_QUEUE = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"MATCH_TYPE_COMPETITIVE", Value=4)]
+      MATCH_TYPE_COMPETITIVE = 4,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"MATCH_TYPE_WEEKEND_TOURNEY", Value=5)]
+      MATCH_TYPE_WEEKEND_TOURNEY = 5,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"MATCH_TYPE_CASUAL_1V1", Value=6)]
+      MATCH_TYPE_CASUAL_1V1 = 6
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"DOTABotDifficulty", EnumPassthru=true)]
+    public enum DOTABotDifficulty
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"BOT_DIFFICULTY_PASSIVE", Value=0)]
+      BOT_DIFFICULTY_PASSIVE = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"BOT_DIFFICULTY_EASY", Value=1)]
+      BOT_DIFFICULTY_EASY = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"BOT_DIFFICULTY_MEDIUM", Value=2)]
+      BOT_DIFFICULTY_MEDIUM = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"BOT_DIFFICULTY_HARD", Value=3)]
+      BOT_DIFFICULTY_HARD = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"BOT_DIFFICULTY_UNFAIR", Value=4)]
+      BOT_DIFFICULTY_UNFAIR = 4,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"BOT_DIFFICULTY_INVALID", Value=5)]
+      BOT_DIFFICULTY_INVALID = 5,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"BOT_DIFFICULTY_EXTRA1", Value=6)]
+      BOT_DIFFICULTY_EXTRA1 = 6,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"BOT_DIFFICULTY_EXTRA2", Value=7)]
+      BOT_DIFFICULTY_EXTRA2 = 7,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"BOT_DIFFICULTY_EXTRA3", Value=8)]
+      BOT_DIFFICULTY_EXTRA3 = 8
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"MatchLanguages", EnumPassthru=true)]
+    public enum MatchLanguages
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"MATCH_LANGUAGE_INVALID", Value=0)]
+      MATCH_LANGUAGE_INVALID = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"MATCH_LANGUAGE_ENGLISH", Value=1)]
+      MATCH_LANGUAGE_ENGLISH = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"MATCH_LANGUAGE_RUSSIAN", Value=2)]
+      MATCH_LANGUAGE_RUSSIAN = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"MATCH_LANGUAGE_CHINESE", Value=3)]
+      MATCH_LANGUAGE_CHINESE = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"MATCH_LANGUAGE_KOREAN", Value=4)]
+      MATCH_LANGUAGE_KOREAN = 4,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"MATCH_LANGUAGE_SPANISH", Value=5)]
+      MATCH_LANGUAGE_SPANISH = 5,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"MATCH_LANGUAGE_PORTUGUESE", Value=6)]
+      MATCH_LANGUAGE_PORTUGUESE = 6
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"ETournamentTemplate", EnumPassthru=true)]
+    public enum ETournamentTemplate
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_ETournamentTemplate_None", Value=0)]
+      k_ETournamentTemplate_None = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_ETournamentTemplate_SingleElimination", Value=1)]
+      k_ETournamentTemplate_SingleElimination = 1
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"ETournamentType", EnumPassthru=true)]
+    public enum ETournamentType
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_ETournamentType_Unknown", Value=0)]
+      k_ETournamentType_Unknown = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_ETournamentType_WeeklyDivision", Value=1)]
+      k_ETournamentType_WeeklyDivision = 1
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"LobbyDotaTVDelay", EnumPassthru=true)]
