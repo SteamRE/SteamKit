@@ -126,8 +126,6 @@ enum EGCItemMsg {
 	k_EMsgGCServerVersionUpdated = 2522;
 	k_EMsgGCApplyAutograph = 2523;
 	k_EMsgGCToGCWebAPIAccountChanged = 2524;
-	k_EMsgGCRequestAnnouncements = 2525;
-	k_EMsgGCRequestAnnouncementsResponse = 2526;
 	k_EMsgGCClientVersionUpdated = 2528;
 	k_EMsgGCItemPurgatory_FinalizePurchase = 2531;
 	k_EMsgGCItemPurgatory_FinalizePurchaseResponse = 2532;
@@ -154,6 +152,15 @@ enum EGCItemMsg {
 	k_EMsgGCToGCCheckAccountTradeStatusResponse = 2553;
 	k_EMsgGCToGCGrantAccountRolledItems = 2554;
 	k_EMsgGCToGCGrantSelfMadeItemToAccount = 2555;
+	k_EMsgSQLUpgradeBattleBooster = 2556;
+	k_EMsgGCPartnerBalanceRequest = 2557;
+	k_EMsgGCPartnerBalanceResponse = 2558;
+	k_EMsgGCPartnerRechargeRedirectURLRequest = 2559;
+	k_EMsgGCPartnerRechargeRedirectURLResponse = 2560;
+	k_EMsgGCStatueCraft = 2561;
+	k_EMsgGCRedeemCode = 2562;
+	k_EMsgGCRedeemCodeResponse = 2563;
+	k_EMsgGCToGCItemConsumptionRollback = 2564;
 }
 
 enum EGCMsgResponse {
@@ -176,6 +183,8 @@ enum EUnlockStyle {
 	k_UnlockStyle_Failed_CantLockCache = 4;
 	k_UnlockStyle_Failed_CantAffordAttrib = 5;
 	k_UnlockStyle_Failed_CantAffordGem = 6;
+	k_UnlockStyle_Failed_NoCompendiumLevel = 7;
+	k_UnlockStyle_Failed_AlreadyUnlocked = 8;
 }
 
 enum EItemPurgatoryResponse_Finalize {
@@ -194,6 +203,13 @@ enum EItemPurgatoryResponse_Refund {
 	k_ItemPurgatoryResponse_Refund_Failed_NoSOCache = 3;
 	k_ItemPurgatoryResponse_Refund_Failed_NoDetail = 4;
 	k_ItemPurgatoryResponse_Refund_Failed_NexonWebAPI = 5;
+}
+
+enum EGCPartnerRequestResponse {
+	k_EPartnerRequestOK = 1;
+	k_EPartnerRequestBadAccount = 2;
+	k_EPartnerRequestNotLinked = 3;
+	k_EPartnerRequestUnsupportedPartnerType = 4;
 }
 
 message CMsgApplyAutograph {
@@ -310,6 +326,8 @@ message CMsgGCToGCCanUseDropRateBonus {
 	optional uint32 account_id = 1;
 	optional float drop_rate_bonus = 2;
 	optional uint32 booster_type = 3;
+	optional uint32 exclusive_item_def = 4;
+	optional bool allow_equal_rate = 5;
 }
 
 message CMsgSQLAddDropRateBonus {
@@ -320,6 +338,13 @@ message CMsgSQLAddDropRateBonus {
 	optional uint32 booster_type = 5;
 	optional uint32 seconds_duration = 6;
 	optional uint32 end_time_stamp = 7;
+}
+
+message CMsgSQLUpgradeBattleBooster {
+	optional uint32 account_id = 1;
+	optional uint32 item_def = 2;
+	optional float bonus_to_add = 3;
+	optional uint32 booster_type = 4;
 }
 
 message CMsgGCToGCRefreshSOCache {
@@ -339,10 +364,24 @@ message CMsgGCToGCCheckAccountTradeStatusResponse {
 
 message CMsgGCToGCGrantAccountRolledItems {
 	message Item {
+		message DynamicAttribute {
+			optional string name = 1;
+			optional uint32 value_uint32 = 2;
+			optional float value_float = 3;
+		}
+
+		message AdditionalAuditEntry {
+			optional uint32 owner_account_id = 1;
+			optional uint32 audit_action = 2;
+			optional uint32 audit_data = 3;
+		}
+
 		optional uint32 item_def = 1;
 		repeated string loot_lists = 2;
 		optional bool ignore_limit = 3;
 		optional uint32 origin = 4;
+		repeated .CMsgGCToGCGrantAccountRolledItems.Item.DynamicAttribute dynamic_attributes = 5;
+		repeated .CMsgGCToGCGrantAccountRolledItems.Item.AdditionalAuditEntry additional_audit_entries = 6;
 	}
 
 	optional uint32 account_id = 1;
@@ -368,5 +407,53 @@ message CMsgUseItem {
 message CMsgServerUseItem {
 	optional uint32 initiator_account_id = 1;
 	optional .CMsgUseItem use_item_msg = 2;
+}
+
+message CMsgGCPartnerBalanceRequest {
+}
+
+message CMsgGCPartnerBalanceResponse {
+	optional .EGCPartnerRequestResponse result = 1 [default = k_EPartnerRequestOK];
+	optional uint32 balance = 2;
+}
+
+message CMsgGCPartnerRechargeRedirectURLRequest {
+	optional uint32 def_index = 1;
+}
+
+message CMsgGCPartnerRechargeRedirectURLResponse {
+	optional .EGCPartnerRequestResponse result = 1 [default = k_EPartnerRequestOK];
+	optional string url = 2;
+}
+
+message CMsgGCEconSQLWorkItemEmbeddedRollbackData {
+	optional uint32 account_id = 1;
+	optional uint64 deleted_item_id = 2;
+}
+
+message CMsgCraftStatue {
+	optional uint32 heroid = 1;
+	optional string sequencename = 2;
+	optional float cycle = 3;
+	optional string description = 4;
+	optional uint32 pedestal_itemdef = 5;
+	optional uint64 toolid = 6;
+}
+
+message CMsgRedeemCode {
+	optional string code = 1;
+}
+
+message CMsgRedeemCodeResponse {
+	optional uint32 response = 1;
+}
+
+message CMsgDevNewItemRequest {
+	optional string item_def_name = 3;
+	optional string loot_list_name = 4;
+}
+
+message CMsgDevNewItemRequestResponse {
+	optional bool success = 1;
 }
 

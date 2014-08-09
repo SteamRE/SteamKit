@@ -93,10 +93,15 @@ message CMsgGCMultiplexMessage {
 }
 
 message CGCToGCMsgMasterAck {
+	message Process {
+		optional uint32 dir_index = 1;
+		repeated uint32 type_instances = 2;
+	}
+
 	optional uint32 dir_index = 1;
 	optional string machine_name = 3;
 	optional string process_name = 4;
-	repeated uint32 type_instances = 5;
+	repeated .CGCToGCMsgMasterAck.Process directory = 6;
 }
 
 message CGCToGCMsgMasterAck_Response {
@@ -208,6 +213,12 @@ message CMsgGCToGCLoadSessionSOCache {
 message CMsgGCToGCLoadSessionSOCacheResponse {
 }
 
+message CMsgGCToGCUpdateSessionStats {
+	optional uint32 user_sessions = 1;
+	optional uint32 server_sessions = 2;
+	optional bool in_logon_surge = 3;
+}
+
 message CWorkshop_PopulateItemDescriptions_Request {
 	message SingleItemDescription {
 		optional uint32 gameitemid = 1;
@@ -230,5 +241,27 @@ message CWorkshop_GetContributors_Request {
 
 message CWorkshop_GetContributors_Response {
 	repeated fixed64 contributors = 1;
+}
+
+message CWorkshop_SetItemPaymentRules_Request {
+	message WorkshopItemPaymentRule {
+		optional uint64 workshop_file_id = 1;
+		optional float revenue_percentage = 2;
+		optional string rule_description = 3;
+	}
+
+	message PartnerItemPaymentRule {
+		optional uint32 account_id = 1;
+		optional float revenue_percentage = 2;
+		optional string rule_description = 3;
+	}
+
+	optional uint32 appid = 1;
+	optional uint32 gameitemid = 2;
+	repeated .CWorkshop_SetItemPaymentRules_Request.WorkshopItemPaymentRule associated_workshop_files = 3;
+	repeated .CWorkshop_SetItemPaymentRules_Request.PartnerItemPaymentRule partner_accounts = 4;
+}
+
+message CWorkshop_SetItemPaymentRules_Response {
 }
 

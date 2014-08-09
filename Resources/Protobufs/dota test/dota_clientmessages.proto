@@ -29,6 +29,9 @@ enum EDotaClientMessages {
 	DOTA_CM_WillPurchaseAlert = 24;
 	DOTA_CM_PlayerShowCase = 25;
 	DOTA_CM_TeleportRequiresHalt = 26;
+	DOTA_CM_CameraZoomAmount = 27;
+	DOTA_CM_BroadcasterUsingCamerman = 28;
+	DOTA_CM_BroadcasterUsingAssistedCameraOperator = 29;
 }
 
 message CDOTAClientMsg_MapPing {
@@ -140,5 +143,17 @@ message CDOTAClientMsg_WillPurchaseAlert {
 
 message CDOTAClientMsg_PlayerShowCase {
 	optional bool showcase = 1;
+}
+
+message CDOTAClientMsg_CameraZoomAmount {
+	optional float zoom_amount = 1;
+}
+
+message CDOTAClientMsg_BroadcasterUsingCameraman {
+	optional bool cameraman = 1;
+}
+
+message CDOTAClientMsg_BroadcasterUsingAssistedCameraOperator {
+	optional bool enabled = 1;
 }
 
