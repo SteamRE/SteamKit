@@ -166,8 +166,8 @@
     <Compile Include="Base\Generated\SteamMsgAppTicket.cs" />
     <Compile Include="Base\Generated\SteamMsgBase.cs" />
     <Compile Include="Base\Generated\SteamMsgClientServer.cs" />
-    <Compile Include="Dota\Handlers\DotaLobbies\DotaLobbies.cs" />
-    <Compile Include="Dota\Handlers\DotaLobbies\Callbacks.cs" />
+    <Compile Include="Dota\Handlers\DotaGCHandler\DotaGCHandler.cs" />
+    <Compile Include="Dota\Handlers\DotaGCHandler\Callbacks.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="3rd party.txt">
@@ -215,9 +215,5 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <ItemGroup>
-    <Folder Include="Dota\" />
-    <Folder Include="Dota\Handlers\" />
-    <Folder Include="Dota\Handlers\DotaLobbies\" />
-  </ItemGroup>
+  <ItemGroup />
 </Project>
