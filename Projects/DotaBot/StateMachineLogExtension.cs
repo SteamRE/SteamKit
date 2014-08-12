@@ -109,7 +109,7 @@ namespace Appccelerate.SourceTemplates.Log4Net
         {
             Ensure.ArgumentNotNull(context, "context");
 
-            this.log.DebugExtFormat("State machine {0} performed {1}.", stateMachine, context.GetRecords());
+            this.log.DebugFormat("State machine {0} performed {1}.", stateMachine, context.GetRecords());
         }
 
         /// <summary>
@@ -144,9 +144,9 @@ namespace Appccelerate.SourceTemplates.Log4Net
             Ensure.ArgumentNotNull(stateMachine, "stateMachine");
             Ensure.ArgumentNotNull(context, "context");
 
-            if (this.log.IsDebugExtEnabled)
+            if (this.log.IsDebugEnabled)
             {
-                this.log.DebugExtFormat("State machine {0} performed {1}.", stateMachine.Name, context.GetRecords());
+                this.log.DebugFormat("State machine {0} performed {1}.", stateMachine.Name, context.GetRecords());
             }
         }
 

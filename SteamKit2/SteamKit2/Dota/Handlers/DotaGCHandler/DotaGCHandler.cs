@@ -62,6 +62,13 @@ namespace SteamKit2
             Send(clientHello, 570);
         }
 
+        public void CloseDota()
+        {
+            var playGame = new ClientMsgProtobuf<CMsgClientGamesPlayed>(EMsg.ClientGamesPlayed);
+
+            this.Client.Send(playGame);
+        }
+
         public void JoinLobby(string pass_key)
         {
             var joinLobby = new ClientGCMsgProtobuf<CMsgPracticeLobbyJoin>((uint) EDOTAGCMsg.k_EMsgGCPracticeLobbyJoin);
@@ -69,10 +76,15 @@ namespace SteamKit2
             Send(joinLobby, 570);
         }
 
-        public void PracticeLobbyList(string pass_key=null)
+		/// <summary>
+		/// Requests a lobby list with an optional password 
+		/// </summary>
+		/// <param name="pass_key">Pass key.</param>
+		public void PracticeLobbyList(string pass_key=null, bool tournament=false)
         {
             var list = new ClientGCMsgProtobuf<CMsgPracticeLobbyList>((uint) EDOTAGCMsg.k_EMsgGCPracticeLobbyList);
             list.Body.pass_key = pass_key;
+			list.Body.tournament_games = tournament;
             Send(list, 570);
         }
 
