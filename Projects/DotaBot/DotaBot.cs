@@ -192,26 +192,31 @@ namespace DotaBot
                 }, manager);
                 new Callback<DotaGCHandler.GCWelcomeCallback>(c =>
                 {
-                    log.DebugExt("GC welcomed the bot, version " + c.Version);
+                    log.Debug("GC welcomed the bot, version " + c.Version);
                     fsm.Fire(Events.DotaGCReady);
                 }, manager);
                 new Callback<DotaGCHandler.UnhandledDotaGCCallback>(
-                    c => { log.DebugExt("Unknown GC message: " + c.Message.MsgType); }, manager);
+                    c => { log.Debug("Unknown GC message: " + c.Message.MsgType); }, manager);
                 new Callback<DotaGCHandler.PracticeLobbyJoinResponse>(
-                    c => { log.DebugExt("Received practice lobby join response " + c.result.result); }, manager);
+                    c => { log.Debug("Received practice lobby join response " + c.result.result); }, manager);
                 new Callback<DotaGCHandler.PracticeLobbyListResponse>(c =>
                 {
-                    log.DebugFormatExt("Practice lobby list response, {0} lobbies.", c.result.lobbies.Count);
+                    log.DebugFormat("Practice lobby list response, {0} lobbies.", c.result.lobbies.Count);
                     foreach (var lobby in c.result.lobbies)
                     {
-                        log.DebugFormatExt("Name: {0} Players: {1} Needs key? {2}", lobby.name, lobby.members.Count,
+                        log.DebugFormat("Name: {0} Players: {1} Needs key? {2}", lobby.name, lobby.members.Count,
                             lobby.requires_pass_key);
                     }
                     if (c.result.lobbies.Count > 0)
                     {
-                        log.DebugExt("Found a lobby, picking first one.");
+                        log.Debug("Found a lobby, picking first one.");
                     }
-                });
+                }, manager);
+                new Callback<SteamFriends.FriendsListCallback>(c=>{
+                    foreach(var friend in c.FriendList){
+                      log.DebugFormat("Friend: {0} status: {1}", friend.SteamID, friend.Relationship);
+                    }
+                }, manager);
             }
             client.Connect();
             procThread = new Thread(SteamThread);
