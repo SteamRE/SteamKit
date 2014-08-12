@@ -55,7 +55,7 @@ namespace SteamKit2
             // notice here we're sending this message directly using the SteamClient
             this.Client.Send(playGame);
 
-            Thread.Sleep(2000);
+            Thread.Sleep(5000);
 
             // inform the dota GC that we want a session
             var clientHello = new ClientGCMsgProtobuf<CMsgClientHello>((uint)EGCBaseClientMsg.k_EMsgGCClientHello);

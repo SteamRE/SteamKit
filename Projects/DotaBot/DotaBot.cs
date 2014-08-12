@@ -72,13 +72,13 @@ namespace DotaBot
         .WithSubState(States.DotaJoinEnter);
       fsm.In(States.Connecting)
         .ExecuteOnEntry(InitAndConnect)
-        .ExecuteOnExit(DisconnectAndCleanup)
         .On(Events.Connected).Goto(States.Connected)
         .On(Events.Disconnected).Goto(States.DisconnectRetry)
         .On(Events.LogonFailSteamGuard).Goto(States.Disconnected)//.Execute(() => reconnect = false)
         .On(Events.LogonFailBadCreds).Goto(States.Disconnected);//.Execute(() => reconnect = false);
       fsm.In(States.Connected)
         .ExecuteOnEntry(SetOnlinePresence)
+        .ExecuteOnExit(DisconnectAndCleanup)
         .On(Events.Disconnected).If(ShouldReconnect).Goto(States.Connecting)
         .Otherwise().Goto(States.Disconnected);
       fsm.In(States.Disconnected)
