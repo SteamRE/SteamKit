@@ -175,9 +175,8 @@ namespace DotaBot
 
             user.LogOn(details);
             }, manager);
-        new Callback<SteamClient.DisconnectedCallback>(c => {
-            log.Debug("Disconnected " + c.Result);
-            fsm.Fire(Events.Disconnected);
+        new Callback<SteamClient.DisconnectedCallback>(c =>{
+              fsm.Fire(Events.Disconnected);
             }, manager);
         new Callback<SteamUser.LoggedOnCallback>(c =>
             {
