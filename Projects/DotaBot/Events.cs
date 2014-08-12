@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// File Name:      Events.cs
+// Project:           DotaBot
+// Copyright (c) christian stewart 2014
+// 
+// All rights reserved.
 
 namespace DotaBot
 {
