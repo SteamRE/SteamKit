@@ -3,8 +3,6 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{BEB5BF07-BB56-402A-97A3-A41C6444C6A5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -61,17 +59,14 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="protobuf-net, Version=2.0.0.668, Culture=neutral, PublicKeyToken=257b51d87d2e4d67, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\protobuf-net.2.0.0.668\lib\net40\protobuf-net.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Core">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
+    <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Management" />
     <Reference Include="System.Xml" />
+    <Reference Include="protobuf-net">
+      <HintPath>..\packages\protobuf-net.2.0.0.668\lib\net40\protobuf-net.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Base\ClientMsg.cs" />
@@ -171,6 +166,8 @@
     <Compile Include="Base\Generated\SteamMsgAppTicket.cs" />
     <Compile Include="Base\Generated\SteamMsgBase.cs" />
     <Compile Include="Base\Generated\SteamMsgClientServer.cs" />
+    <Compile Include="Dota\Handlers\DotaLobbies\DotaLobbies.cs" />
+    <Compile Include="Dota\Handlers\DotaLobbies\Callbacks.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="3rd party.txt">
@@ -218,4 +215,9 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <ItemGroup>
+    <Folder Include="Dota\" />
+    <Folder Include="Dota\Handlers\" />
+    <Folder Include="Dota\Handlers\DotaLobbies\" />
+  </ItemGroup>
 </Project>
