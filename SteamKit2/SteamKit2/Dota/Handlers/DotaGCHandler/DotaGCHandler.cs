@@ -69,12 +69,19 @@ namespace SteamKit2
             this.Client.Send(playGame);
         }
 
-        public void JoinLobby(string pass_key)
+        public void JoinLobby(ulong lobbyId, string pass_key=null)
         {
             var joinLobby = new ClientGCMsgProtobuf<CMsgPracticeLobbyJoin>((uint) EDOTAGCMsg.k_EMsgGCPracticeLobbyJoin);
+			joinLobby.Body.lobby_id = lobbyId;
             joinLobby.Body.pass_key = pass_key;
             Send(joinLobby, 570);
         }
+
+		public void LeaveLobby()
+		{
+			var leaveLobby = new ClientGCMsgProtobuf<CMsgPracticeLobbyLeave> ((uint) EDOTAGCMsg.k_EMsgGCPracticeLobbyLeave);
+			Send (leaveLobby, 570);
+		}
 
 		/// <summary>
 		/// Requests a lobby list with an optional password 

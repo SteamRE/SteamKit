@@ -6,6 +6,7 @@
 
 using System;
 using System.Threading;
+using System.Linq;
 using Appccelerate.SourceTemplates.Log4Net;
 using Appccelerate.StateMachine;
 using log4net;
@@ -86,17 +87,16 @@ namespace DotaBot
             fsm.In(States.DisconnectRetry)
                 .ExecuteOnEntry(StartReconnectTimer);
             fsm.In(States.Dota)
-                .ExecuteOnExit(DisconnectDota);
+                .ExecuteOnExit(DisconnectDota)
+                .On(Events.DotaJoinedLobby).Goto(States.DotaLobby);
             fsm.In(States.DotaConnect)
                 .ExecuteOnEntry(ConnectDota)
                 .On(Events.DotaGCReady).Goto(States.DotaJoinLobby);
             fsm.In(States.DotaJoinFind)
                 .ExecuteOnEntry(FindLobby)
-                .On(Events.DotaJoinedLobby).Goto(States.DotaLobby)
                 .On(Events.DotaFoundLobby).Goto(States.DotaJoinEnter);
             fsm.In(States.DotaJoinEnter)
                 .ExecuteOnEntry(EnterLobby)
-                .On(Events.DotaJoinedLobby).Goto(States.DotaLobby)
                 .On(Events.DotaFailedLobby).Goto(States.DotaMenu);
             fsm.Initialize(States.Connecting);
         }
@@ -124,7 +124,8 @@ namespace DotaBot
 
         private void EnterLobby()
         {
-            dota.JoinLobby("workwork");
+            dota.LeaveLobby();
+            dota.JoinLobby(foundLobby.id, "pudge");
         }
 
         private void StartReconnectTimer()
@@ -149,7 +150,7 @@ namespace DotaBot
         private void SetOnlinePresence()
         {
             friends.SetPersonaState(EPersonaState.Online);
-            friends.SetPersonaName("WebLeague #1");
+            friends.SetPersonaName("Dota2 Lobby Bot Test");
         }
 
         private void InitAndConnect()
@@ -197,19 +198,29 @@ namespace DotaBot
                 }, manager);
                 new Callback<DotaGCHandler.UnhandledDotaGCCallback>(
                     c => { log.Debug("Unknown GC message: " + c.Message.MsgType); }, manager);
-                new Callback<DotaGCHandler.PracticeLobbyJoinResponse>(
-                    c => { log.Debug("Received practice lobby join response " + c.result.result); }, manager);
+                new Callback<DotaGCHandler.PracticeLobbyJoinResponse>(c => { 
+                    log.Debug("Received practice lobby join response " + c.result.result);
+                    fsm.Fire(Events.DotaJoinedLobby);
+                }, manager);
                 new Callback<DotaGCHandler.PracticeLobbyListResponse>(c =>
                 {
                     log.DebugFormat("Practice lobby list response, {0} lobbies.", c.result.lobbies.Count);
                     foreach (var lobby in c.result.lobbies)
                     {
-                        log.DebugFormat("Name: {0} Players: {1} Needs key? {2}", lobby.name, lobby.members.Count,
+                        log.DebugFormat("{0} Players: {1} Needs key? {2}", lobby.id, lobby.members.Count,
                             lobby.requires_pass_key);
+                        foreach(var player in lobby.members){
+                          log.DebugFormat(" ==> {0}: {1}", player.account_id, player.player_name);
+                        }
                     }
-                    if (c.result.lobbies.Count > 0)
+                    var aLobby = c.result.lobbies.FirstOrDefault(m=>m.members.Count < 10);
+                    if (aLobby != null)
                     {
-                        log.Debug("Found a lobby, picking first one.");
+                        this.foundLobby = aLobby;
+                        log.Debug("Selected lobby "+aLobby.id);
+                        fsm.Fire(Events.DotaFoundLobby);
+                    }else{
+                        fsm.Fire(Events.DotaFailedLobby);
                     }
                 }, manager);
                 new Callback<SteamFriends.FriendsListCallback>(c=>{
