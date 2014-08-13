@@ -118,7 +118,7 @@ namespace DotaBot
             dota.CloseDota();
         }
 
-        const string password = "quantum555";
+        const string password = "pudge";
         private void FindLobby()
         {
 			dota.LeaveLobby ();
@@ -208,14 +208,7 @@ namespace DotaBot
                 new Callback<DotaGCHandler.PracticeLobbyListResponse>(c =>
                 {
                     log.DebugFormat("Practice lobby list response, {0} lobbies.", c.result.lobbies.Count);
-                    foreach (var lobby in c.result.lobbies)
-                    {
-                        log.DebugFormat("{0} Players: {1} Needs key? {2}", lobby.id, lobby.members.Count,
-                            lobby.requires_pass_key);
-                        foreach(var player in lobby.members){
-                          log.DebugFormat(" ==> {0}: {1}", player.account_id, player.player_name);
-                        }
-                    }
+					log.Debug(JsonConvert.SerializeObject(c.result.lobbies));
                     var aLobby = c.result.lobbies.FirstOrDefault(m=>m.members.Count < 10);
                     if (aLobby != null)
                     {
@@ -227,9 +220,7 @@ namespace DotaBot
                     }
                 }, manager);
                 new Callback<SteamFriends.FriendsListCallback>(c=>{
-                    foreach(var friend in c.FriendList){
-                      log.DebugFormat("Friend: {0} status: {1}", friend.SteamID, friend.Relationship);
-                    }
+					log.Debug(c.FriendList);
                 }, manager);
                 new Callback<DotaGCHandler.PracticeLobbySnapshot>(c=>{
 					log.DebugFormat("Lobby snapshot received!");
