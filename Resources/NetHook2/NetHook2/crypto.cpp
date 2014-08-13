@@ -1,11 +1,9 @@
-
-
 #include "crypto.h"
 
 #include "logger.h"
 #include "csimplescan.h"
 
-#include <cassert>
+#include <cstddef>
 
 #include <map>
 
@@ -33,6 +31,17 @@ struct MsgInfo_t
 	uint64 uUnk1;
 };
 
+static_assert(sizeof(MsgInfo_t) == 56, "Wrong size of MsgInfo_t");
+static_assert(offsetof(MsgInfo_t, eMsg) == 0, "Wrong offset of MsgInfo_t::eMsg");
+static_assert(offsetof(MsgInfo_t, pchMsgName) == 4, "Wrong offset of MsgInfo_t::pchMsgName");
+static_assert(offsetof(MsgInfo_t, nFlags) == 8, "Wrong offset of MsgInfo_t::nFlags");
+static_assert(offsetof(MsgInfo_t, k_EServerTarget) == 12, "Wrong offset of MsgInfo_t::k_EServerTarget");
+static_assert(offsetof(MsgInfo_t, nTimesSent) == 16, "Wrong offset of MsgInfo_t::nTimesSent");
+static_assert(offsetof(MsgInfo_t, uBytesSent) == 24, "Wrong offset of MsgInfo_t::uBytesSent");
+static_assert(offsetof(MsgInfo_t, nTimesSentProfile) == 32, "Wrong offset of MsgInfo_t::nTimesSentProfile");
+static_assert(offsetof(MsgInfo_t, uBytesSentProfile) == 40, "Wrong offset of MsgInfo_t::uBytesSentProfile");
+static_assert(offsetof(MsgInfo_t, uUnk1) == 48, "Wrong offset of MsgInfo_t::uUnk1");
+
 typedef std::map<EMsg, MsgInfo_t *> MsgList;
 typedef std::pair<EMsg, MsgInfo_t *> MsgPair;
 
@@ -43,9 +52,6 @@ MsgList eMsgList;
 CCrypto::CCrypto()
 	: Encrypt_Detour( NULL ), Decrypt_Detour( NULL )
 {
-
-	assert( sizeof( MsgInfo_t ) == 56); // god help the padding never change
-
 	CSimpleScan steamClientScan( "steamclient.dll" );
 
 
