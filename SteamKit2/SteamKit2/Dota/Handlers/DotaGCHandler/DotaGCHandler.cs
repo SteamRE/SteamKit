@@ -109,6 +109,15 @@ namespace SteamKit2
             joinChannel.Body.channel = channel;
             Send(joinChannel, 570);
         }
+
+		public void JoinTeam(DOTA_GC_TEAM team, uint slot=1)
+		{
+			var joinSlot = new ClientGCMsgProtobuf<CMsgPracticeLobbySetTeamSlot> ((uint)EDOTAGCMsg.k_EMsgGCPracticeLobbySetTeamSlot);
+			joinSlot.Body.team = team;
+			joinSlot.Body.slot = slot;
+			Send (joinSlot, 570);
+		}
+
         /// <summary>
         /// Joins a chat channel
         /// </summary>

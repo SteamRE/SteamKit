@@ -113,6 +113,7 @@ namespace DotaBot
                 .On(Events.DotaFailedLobby).Goto(States.DotaMenu);
 			fsm.In (States.DotaLobby)
                 .ExecuteOnEntry(EnterLobbyChat)
+				.ExecuteOnEntry(SwitchTeam)
 				.On (Events.DotaLeftLobby).Goto (States.DotaMenu);
             fsm.Initialize(States.Connecting);
         }
@@ -161,6 +162,11 @@ namespace DotaBot
         {
             dota.JoinChatChannel("Lobby_" + dota.Lobby.lobby_id, DOTAChatChannelType_t.DOTAChannelType_Lobby);
         }
+
+		private void SwitchTeam()
+		{
+			dota.JoinTeam (DOTA_GC_TEAM.DOTA_GC_TEAM_GOOD_GUYS, 2);
+		}
 
         private void StartReconnectTimer()
         {
