@@ -27,6 +27,11 @@ namespace NetHookAnalyzer
             return MessageBox.Show( owner, msg, "NetHookAnalyzer", buttons, icon );
         }
 
+        static string RegistryPathToSteam
+        {
+            get { return Environment.Is64BitProcess ? @"HKEY_LOCAL_MACHINE\Software\Wow6432Node\Valve\Steam" : @"HKEY_LOCAL_MACHINE\Software\Valve\Steam"; }
+        }
+
         public static string GetSteamDir()
         {
             string installPath = "";
@@ -34,7 +39,7 @@ namespace NetHookAnalyzer
             try
             {
                 installPath = ( string )Registry.GetValue(
-                     @"HKEY_LOCAL_MACHINE\Software\Valve\Steam",
+                     RegistryPathToSteam,
                      "InstallPath",
                      null );
             }
