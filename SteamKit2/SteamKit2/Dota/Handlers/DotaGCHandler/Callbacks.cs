@@ -77,6 +77,21 @@ namespace SteamKit2
 			}
 		}
 
+		/// <summary>
+		/// Lobby was updated 
+		/// </summary>
+		public sealed class PracticeLobbyUpdate : CallbackMsg
+		{
+			public CSODOTALobby lobby;
+			public CSODOTALobby oldLobby;
+
+			internal PracticeLobbyUpdate(CSODOTALobby msg, CSODOTALobby oldLob)
+			{
+				this.lobby = msg;
+				this.oldLobby = oldLob;
+			}
+		}
+
         /// <summary>
         /// Ping request from GC
         /// </summary>

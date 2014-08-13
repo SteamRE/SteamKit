@@ -14,6 +14,7 @@ namespace DotaBot
         DotaToMainMenu,
         DotaJoinedLobby,
         DotaLeftLobby,
+		DotaStartFindLobby,
         DotaCreatedLobby,
         DotaFailedLobby,
         DotaFoundLobby,

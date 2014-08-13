@@ -64,6 +64,9 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="KellermanSoftware.Compare-Net-Objects">
+      <HintPath>packages\CompareNETObjects.3.00.0.0\lib\net45\KellermanSoftware.Compare-NET-Objects.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="StateMachineLogExtension.cs" />
@@ -71,6 +74,8 @@
     <Compile Include="Events.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="States.cs" />
+    <Compile Include="EventedLog.cs" />
+    <Compile Include="Differences.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

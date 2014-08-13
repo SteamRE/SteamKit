@@ -113,12 +113,13 @@ namespace SteamKit2
         /// Joins a chat channel
         /// </summary>
         /// <param name="name"></param>
-        public void JoinChatChannel(string name){
+		public void JoinChatChannel(string name, DOTAChatChannelType_t type=DOTAChatChannelType_t.DOTAChannelType_Custom){
             var joinChannel = new ClientGCMsgProtobuf<CMsgDOTAJoinChatChannel>((uint)EDOTAGCMsg.k_EMsgGCJoinChatChannel);
             joinChannel.Body.channel_name = name;
-            joinChannel.Body.channel_type = DOTAChatChannelType_t.DOTAChannelType_Lobby;
+            joinChannel.Body.channel_type = type;
             Send(joinChannel, 570);
         }
+
         /// <summary>
         /// Sends a message in a chat channel.
         /// </summary>
@@ -229,12 +230,16 @@ namespace SteamKit2
             this.Client.PostCallback(new CacheUnsubscribed(unSub.Body));
         }
 
-		private void HandleLobbySnapshot(byte[] data)
+		private void HandleLobbySnapshot(byte[] data, bool update=false)
 		{
 			using (var stream = new MemoryStream (data)) {
 				var lob = Serializer.Deserialize<CSODOTALobby> (stream);
+				var oldLob = this.Lobby;
 				this.Lobby = lob;
-				this.Client.PostCallback (new PracticeLobbySnapshot (lob));
+				if (update)
+					this.Client.PostCallback (new PracticeLobbyUpdate (lob, oldLob));
+				else
+					this.Client.PostCallback (new PracticeLobbySnapshot (lob));
 			}
 		}
 
@@ -281,7 +286,7 @@ namespace SteamKit2
             foreach (var mObj in resp.Body.objects_modified)
 	        {
 				if (mObj.type_id == 2004) {
-					HandleLobbySnapshot (mObj.object_data);
+					HandleLobbySnapshot (mObj.object_data, true);
 				} else {
 					handled = false;
 				}
