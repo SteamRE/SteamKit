@@ -15,7 +15,8 @@ using SteamKit2;
 using SteamKit2.GC.Dota.Internal;
 using Timer = System.Timers.Timer;
 using Newtonsoft.Json;
-
+using System.Collections;
+using System.Collections.Generic;
 namespace DotaBot
 {
     /// <summary>
@@ -383,7 +384,16 @@ namespace DotaBot
                     log.DebugFormat("Tournament games: {0}", c.result.live_league_games);
                 }, manager);
 				new Callback<DotaGCHandler.PracticeLobbyUpdate> (c => {
-					f
+					var diffs = Diff.Compare(c.oldLobby, c.lobby);
+					var dstrings = new List<string>(diffs.Differences.Count);
+					foreach(var diff in diffs.Differences){
+						dstrings.Add(string.Format("{0}: {1} => {2}", diff.PropertyName, diff.Object1Value, diff.Object2Value));
+					}
+					if(dstrings.Count > 0){
+						var msg = "Update: "+string.Join(", ", dstrings);
+						SendChannelMessage(lobbyChannelId, msg);
+						log.Debug(msg);
+					}
 				}, manager);
             }
             client.Connect();
