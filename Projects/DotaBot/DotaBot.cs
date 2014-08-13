@@ -30,6 +30,7 @@ namespace DotaBot
 
         private CMsgPracticeLobbyListResponseEntry foundLobby;
         private CSODOTALobby Lobby;
+        private ulong channelId;
         private SteamFriends friends;
         public ActiveStateMachine<States, Events> fsm;
 
@@ -40,6 +41,7 @@ namespace DotaBot
         private bool reconnect;
         private Timer reconnectTimer = new Timer(5000);
         private SteamUser user;
+        private uint[] adminIds = { 52661068, 69038686 };
 
         public DotaBot(bool reconnect, SteamUser.LogOnDetails details)
         {
@@ -118,7 +120,13 @@ namespace DotaBot
             dota.CloseDota();
         }
 
-        const string password = "pudge";
+        private void leaveLobby()
+        {
+            dota.LeaveLobby();
+            dota.LeaveChatChannel(channelId);
+        }
+
+        const string password = "ilian000";
         private void FindLobby()
         {
 			dota.LeaveLobby ();
@@ -129,6 +137,8 @@ namespace DotaBot
         private void EnterLobby()
         {
             dota.JoinLobby(foundLobby.id, password);
+            //dota.JoinBroadcastChannel();
+            dota.JoinChatChannel("Lobby_" + foundLobby.id);
         }
 
         private void StartReconnectTimer()
@@ -223,10 +233,86 @@ namespace DotaBot
 					log.Debug(c.FriendList);
                 }, manager);
                 new Callback<DotaGCHandler.PracticeLobbySnapshot>(c=>{
-					log.DebugFormat("Lobby snapshot received!");
-					log.Debug(JsonConvert.SerializeObject(c.lobby));
+					log.DebugFormat("Lobby snapshot received with state: {0}", c.lobby.state);
+                    log.Debug(JsonConvert.SerializeObject(c.lobby));
                     this.Lobby = c.lobby; 
 				}, manager);
+                new Callback<DotaGCHandler.PingRequest>(c =>
+                {
+                    log.Debug("GC Sent a ping request. Sending pong!");
+                    dota.Pong();
+                }, manager);
+                new Callback<DotaGCHandler.JoinChatChannelResponse>(c =>
+                {
+                    log.DebugFormat("Chat Channel response code {0} received. {1} users in channel.", c.result.response, c.result.members.Count);
+                    this.channelId = c.result.channel_id;
+                }, manager);
+                new Callback<DotaGCHandler.ChatMessage>(c =>
+                {
+                    log.DebugFormat("Chat message received in channel {0} from {1}: {2}", c.result.channel_id, c.result.persona_name, c.result.text);
+                    if (c.result.text.StartsWith("!"))
+                    {
+                        string cmdMsg = c.result.text.Substring(1);
+                        string command = cmdMsg.Split(' ').FirstOrDefault();
+                        string[] parms = cmdMsg.Split(' ').Skip(1).ToArray();
+                        switch (command)
+                        {
+                            case "about":
+                                {
+                                    dota.SendChannelMessage(c.result.channel_id, "I am a D2Modd.in lobby bot made by kidovate and ilian000.");
+                                    break;
+                                }
+                            case "leave":
+                                {
+                                    if (adminIds.Contains(c.result.account_id))
+                                    {
+                                        dota.SendChannelMessage(c.result.channel_id, "Goodbye my friend!");
+                                        leaveLobby();
+
+                                    }
+                                    else
+                                    {
+                                        dota.SendChannelMessage(c.result.channel_id, "No way, scrub.");
+                                    }
+                                    break;
+                                }
+                            case "say":
+                                {
+                                    if (adminIds.Contains(c.result.account_id))
+                                    {
+                                        dota.SendChannelMessage(c.result.channel_id, String.Join(" ", parms.ToArray()));
+                                    }
+                                    break;
+                                }
+                            default:
+                                {
+                                    break;
+                                }
+
+                        }
+                    }
+                    
+                }, manager);
+                new Callback<DotaGCHandler.OtherJoinedChannel>(c =>
+                {
+                    log.DebugFormat("User with name {0} joined channel {1}.", c.result.persona_name, c.result.channel_id);
+                }, manager);
+                new Callback<DotaGCHandler.OtherLeftChannel>(c =>
+                {
+                    log.DebugFormat("User with steamid {0} left channel {1}.", c.result.steam_id, c.result.channel_id);
+                }, manager);
+                new Callback<DotaGCHandler.CacheUnsubscribed>(c =>
+                {
+                    log.Debug("Left lobby.");
+                }, manager);
+                new Callback<DotaGCHandler.Popup>(c =>
+                {
+                    log.DebugFormat("Received message from GC: {0}", c.result.id);
+                }, manager);
+                new Callback<DotaGCHandler.LiveLeagueGameUpdate>(c =>
+                {
+                    log.DebugFormat("There are {0} tournaments running at the moment...", c.result.live_league_games);
+                }, manager);
             }
             client.Connect();
             procThread = new Thread(SteamThread);

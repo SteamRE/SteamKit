@@ -76,5 +76,92 @@ namespace SteamKit2
 				this.lobby = msg;
 			}
 		}
+
+        /// <summary>
+        /// Ping request from GC
+        /// </summary>
+        public sealed class PingRequest : CallbackMsg
+        {
+            public CMsgGCClientPing request;
+
+            internal PingRequest(CMsgGCClientPing msg)
+            {
+                this.request = msg;
+            }
+        }
+        /// <summary>
+        /// Chat message received from a channel
+        /// </summary>
+        public sealed class ChatMessage : CallbackMsg
+        {
+            public CMsgDOTAChatMessage result;
+            internal ChatMessage(CMsgDOTAChatMessage msg)
+            {
+                this.result = msg;
+            }
+        }
+        /// <summary>
+        /// A user joined our chat channel
+        /// </summary>
+        public sealed class OtherJoinedChannel : CallbackMsg
+        {
+            public CMsgDOTAOtherJoinedChatChannel result;
+            internal OtherJoinedChannel(CMsgDOTAOtherJoinedChatChannel msg)
+            {
+                this.result = msg;
+            }
+        }
+        /// <summary>
+        /// A user left out chat chanel
+        /// </summary>
+        public sealed class OtherLeftChannel : CallbackMsg
+        {
+            public CMsgDOTAOtherLeftChatChannel result;
+            internal OtherLeftChannel(CMsgDOTAOtherLeftChatChannel msg)
+            {
+                this.result = msg;
+            }
+        }
+        /// <summary>
+        /// Reponse when trying to join a chat chanel
+        /// </summary>
+        public sealed class JoinChatChannelResponse : CallbackMsg
+        {
+            public CMsgDOTAJoinChatChannelResponse result;
+            internal JoinChatChannelResponse(CMsgDOTAJoinChatChannelResponse msg)
+            {
+                this.result = msg;
+            }
+        }
+        /// <summary>
+        /// When we leave, we receive a CacheUnsubscribed message
+        /// </summary>
+        public sealed class CacheUnsubscribed : CallbackMsg
+        {
+            public CMsgSOCacheUnsubscribed result;
+            internal CacheUnsubscribed(CMsgSOCacheUnsubscribed msg)
+            {
+                this.result = msg;
+            }
+        }
+        /// <summary>
+        /// We receive a popup. (e.g. Kicked from lobby)
+        /// </summary>
+        public sealed class Popup : CallbackMsg
+        {
+            public CMsgDOTAPopup result;
+            internal Popup(CMsgDOTAPopup msg)
+            {
+                this.result = msg;
+            }
+        }
+        public sealed class LiveLeagueGameUpdate : CallbackMsg
+        {
+            public CMsgDOTALiveLeagueGameUpdate result;
+            internal LiveLeagueGameUpdate(CMsgDOTALiveLeagueGameUpdate msg)
+            {
+                this.result = msg;
+            }
+        }
 	}
 }

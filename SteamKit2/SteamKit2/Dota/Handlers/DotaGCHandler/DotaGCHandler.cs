@@ -81,9 +81,56 @@ namespace SteamKit2
 		public void LeaveLobby()
 		{
 			var leaveLobby = new ClientGCMsgProtobuf<CMsgPracticeLobbyLeave> ((uint) EDOTAGCMsg.k_EMsgGCPracticeLobbyLeave);
-			Send (leaveLobby, 570);
+			Send(leaveLobby, 570);
 		}
 
+        public void Pong()
+        {
+            var pingResponse = new ClientGCMsgProtobuf<CMsgGCClientPing> ((uint) EGCBaseClientMsg.k_EMsgGCPingResponse);
+            Send(pingResponse, 570);
+        }
+        /// <summary>
+        /// Joins a broadcast channel in the lobby
+        /// </summary>
+        /// <param name="channel">The channel slot to join. Valid channel values range from 0 to 5.</param>
+        public void JoinBroadcastChannel(uint channel = 0)
+        {
+            var joinChannel = new ClientGCMsgProtobuf<CMsgPracticeLobbyJoinBroadcastChannel> ((uint) EDOTAGCMsg.k_EMsgGCPracticeLobbyJoinBroadcastChannel);
+            joinChannel.Body.channel = channel;
+            Send(joinChannel, 570);
+        }
+        /// <summary>
+        /// Joins a chat channel
+        /// </summary>
+        /// <param name="name"></param>
+        public void JoinChatChannel(string name){
+            var joinChannel = new ClientGCMsgProtobuf<CMsgDOTAJoinChatChannel>((uint)EDOTAGCMsg.k_EMsgGCJoinChatChannel);
+            joinChannel.Body.channel_name = name;
+            joinChannel.Body.channel_type = DOTAChatChannelType_t.DOTAChannelType_Lobby;
+            Send(joinChannel, 570);
+        }
+        /// <summary>
+        /// Sends a message in a chat channel.
+        /// </summary>
+        /// <param name="channelid">Id of channel to join.</param>
+        /// <param name="message">Message to send.</param>
+        public void SendChannelMessage(ulong channelid, string message)
+        {
+            var chatMsg = new ClientGCMsgProtobuf<CMsgDOTAChatMessage>((uint)EDOTAGCMsg.k_EMsgGCChatMessage);
+            chatMsg.Body.channel_id = channelid;
+            chatMsg.Body.text = message;
+            Send(chatMsg, 570);
+        }
+        /// <summary>
+        /// Leaves chat channel
+        /// </summary>
+        /// <param name="channelId">id of channel to leave</param>
+        public void LeaveChatChannel(ulong channelid)
+        {
+            var leaveChannel = new ClientGCMsgProtobuf<CMsgDOTALeaveChatChannel>((uint)EDOTAGCMsg.k_EMsgGCLeaveChatChannel);
+            leaveChannel.Body.channel_id = channelid;
+            Send(leaveChannel, 570);
+        }
 		/// <summary>
 		/// Requests a lobby list with an optional password 
 		/// </summary>
@@ -129,7 +176,16 @@ namespace SteamKit2
                                          {(uint) EGCBaseClientMsg.k_EMsgGCClientWelcome, HandleWelcome},
                                          {(uint) EDOTAGCMsg.k_EMsgGCPracticeLobbyJoinResponse, HandlePracticeLobbyJoinResponse},
                                          {(uint) EDOTAGCMsg.k_EMsgGCPracticeLobbyListResponse, HandlePracticeLobbyListResponse},
-                                         {(uint) ESOMsg.k_ESOMsg_CacheSubscribed, HandleCacheSubscribed}
+                                         {(uint) ESOMsg.k_ESOMsg_CacheSubscribed, HandleCacheSubscribed},
+                                         {(uint) ESOMsg.k_ESOMsg_CacheUnsubscribed, HandleCacheUnsubscribed},
+                                         {(uint) EGCBaseClientMsg.k_EMsgGCPingRequest, HandlePingRequest},
+                                         {(uint) EDOTAGCMsg.k_EMsgGCJoinChatChannelResponse, HandleJoinChatChannelResponse},
+                                         {(uint) EDOTAGCMsg.k_EMsgGCChatMessage, HandleChatMessage},
+                                         {(uint) EDOTAGCMsg.k_EMsgGCOtherJoinedChannel, HandleOtherJoinedChannel},
+                                         {(uint) EDOTAGCMsg.k_EMsgGCOtherLeftChannel, HandleOtherLeftChannel},
+                                         {(uint) ESOMsg.k_ESOMsg_UpdateMultiple, HandleUpdateMultiple},
+                                         {(uint) EDOTAGCMsg.k_EMsgGCPopup, HandlePopup},
+                                         {(uint) EDOTAGCMsg.k_EMsgDOTALiveLeagueGameUpdate, HandleLiveLeageGameUpdate}
                                      };
 
                     Action<IPacketGCMsg> func;
@@ -156,6 +212,12 @@ namespace SteamKit2
             }
         }
 
+        private void HandleCacheUnsubscribed(IPacketGCMsg obj)
+        {
+            var unSub = new ClientGCMsgProtobuf<CMsgSOCacheUnsubscribed>(obj);
+            this.Client.PostCallback(new CacheUnsubscribed(unSub.Body));
+        }
+
 		private void HandleLobbySnapshot(byte[] data)
 		{
 			using (var stream = new MemoryStream (data)) {
@@ -175,7 +237,58 @@ namespace SteamKit2
             var resp = new ClientGCMsgProtobuf<CMsgPracticeLobbyJoinResponse>(obj);
             this.Client.PostCallback(new PracticeLobbyJoinResponse(resp.Body));
         }
-
+        private void HandlePingRequest(IPacketGCMsg obj)
+        {
+            var req = new ClientGCMsgProtobuf<CMsgGCClientPing>(obj);
+            this.Client.PostCallback(new PingRequest(req.Body));
+        }
+        private void HandleJoinChatChannelResponse(IPacketGCMsg obj)
+        {
+            var resp = new ClientGCMsgProtobuf<CMsgDOTAJoinChatChannelResponse>(obj);
+            this.Client.PostCallback(new JoinChatChannelResponse(resp.Body));
+        }
+        private void HandleChatMessage(IPacketGCMsg obj)
+        {
+            var resp = new ClientGCMsgProtobuf<CMsgDOTAChatMessage>(obj);
+            this.Client.PostCallback(new ChatMessage(resp.Body));
+        }
+        private void HandleOtherJoinedChannel(IPacketGCMsg obj)
+        {
+            var resp = new ClientGCMsgProtobuf<CMsgDOTAOtherJoinedChatChannel>(obj);
+            this.Client.PostCallback(new OtherJoinedChannel(resp.Body));
+        }
+        private void HandleOtherLeftChannel(IPacketGCMsg obj)
+        {
+            var resp = new ClientGCMsgProtobuf<CMsgDOTAOtherLeftChatChannel>(obj);
+            this.Client.PostCallback(new OtherLeftChannel(resp.Body));
+        }
+        private void HandleUpdateMultiple(IPacketGCMsg obj)
+        {
+            var resp = new ClientGCMsgProtobuf<CMsgSOMultipleObjects>(obj);
+            foreach (var mObj in resp.Body.objects_modified)
+	        {
+                if (mObj.type_id == 2004)
+                {
+                    HandleLobbySnapshot(mObj.object_data);
+                }
+	        }
+            if (resp.Body.objects_added.Count > 0 || resp.Body.objects_removed.Count > 0)
+                Console.WriteLine("Unhandled UpdateMultiple received.");
+        }
+        private void HandlePopup(IPacketGCMsg obj)
+        {
+            var resp = new ClientGCMsgProtobuf<CMsgDOTAPopup>(obj);
+            this.Client.PostCallback(new Popup(resp.Body));
+        }
+        /// <summary>
+        /// GC tells us if there are tournaments running.
+        /// </summary>
+        /// <param name="obj"></param>
+        private void HandleLiveLeageGameUpdate(IPacketGCMsg obj)
+        {
+            var resp = new ClientGCMsgProtobuf<CMsgDOTALiveLeagueGameUpdate>(obj);
+            this.Client.PostCallback(new LiveLeagueGameUpdate(resp.Body));
+        }
         //Initial message sent when connected to the GC
         private void HandleWelcome(IPacketGCMsg msg)
         {
