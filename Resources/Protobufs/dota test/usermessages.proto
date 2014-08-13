@@ -32,6 +32,7 @@ enum EBaseUserMessages {
 	UM_VoiceMask = 28;
 	UM_VoiceSubtitle = 29;
 	UM_SendAudio = 30;
+	UM_CameraTransition = 31;
 	UM_MAX_BASE = 63;
 }
 
@@ -197,5 +198,16 @@ message CUserMsg_SayTextChannel {
 message CUserMsg_MessageText {
 	optional uint32 color = 1;
 	optional string text = 2;
+}
+
+message CUserMsg_CameraTransition {
+	message Transition_DataDriven {
+		optional string filename = 1;
+		optional int32 attach_ent_index = 2;
+	}
+
+	optional uint32 camera_type = 1;
+	optional float duration = 2;
+	optional .CUserMsg_CameraTransition.Transition_DataDriven params_data_driven = 3;
 }
 

@@ -1,5 +1,4 @@
 import "steammessages.proto";
-import "matchmaker_common.proto";
 import "dota_gcmessages_common.proto";
 import "econ_gcmessages.proto";
 import "network_connection.proto";
@@ -33,7 +32,6 @@ message CMsgConnectedPlayers {
 		PLAYER_HERO = 5;
 		PLAYER_DISCONNECTED_CONSEQUENCES = 6;
 		PLAYER_DISCONNECTED_NOCONSEQUENCES = 7;
-		SPECTATOR_COUNT = 8;
 		TOWER_STATE = 9;
 		GAMESTATE_TIMEOUT = 10;
 		MASS_DISCONNECT = 11;
@@ -42,7 +40,6 @@ message CMsgConnectedPlayers {
 	repeated .CMsgConnectedPlayers.Player connected_players = 1;
 	repeated .CMsgConnectedPlayers.Player disconnected_players = 7;
 	optional .DOTA_GameState game_state = 2 [default = DOTA_GAMERULES_STATE_INIT];
-	optional uint32 num_spectators = 3;
 	optional uint32 tower_state = 4;
 	optional bool first_blood_happened = 6;
 	optional .CMsgConnectedPlayers.SendReason send_reason = 8 [default = INVALID];
@@ -80,7 +77,6 @@ message CMsgGameServerInfo {
 message CMsgLeaverDetected {
 	optional fixed64 steam_id = 1;
 	optional .DOTALeaverStatus_t leaver_status = 2 [default = DOTA_LEAVER_NONE];
-	optional bool obsolete_mass_disconnect = 3;
 	optional .CMsgLeaverState leaver_state = 4;
 	optional uint32 server_cluster = 5;
 	optional .ENetworkDisconnectionReason disconnect_reason = 6 [default = NETWORK_DISCONNECT_INVALID];
@@ -106,6 +102,7 @@ message CMsgDOTAFantasyPlayerStats {
 	optional float healing = 13;
 	optional uint32 tower_kills = 14;
 	optional uint32 roshan_kills = 15;
+	optional uint32 team_id = 16;
 }
 
 message CMsgGameMatchSignOut {
@@ -141,6 +138,7 @@ message CMsgGameMatchSignOut {
 			optional uint32 misses = 31;
 			repeated .CMatchPlayerAbilityUpgrade ability_upgrades = 32;
 			repeated .CMatchAdditionalUnitInventory additional_units_inventory = 33;
+			optional uint32 net_worth = 34;
 		}
 
 		repeated .CMsgGameMatchSignOut.CTeam.CPlayer players = 1;
@@ -171,6 +169,12 @@ message CMsgGameMatchSignOut {
 	optional uint32 server_version = 19;
 	optional bool mass_disconnect = 21;
 	repeated .CMsgGameMatchSignOut.CAdditionalSignoutMsg additional_msgs = 20;
+}
+
+message CMsgSignOutDraftInfo {
+	optional uint32 radiant_captain_account_id = 1;
+	optional uint32 dire_captain_account_id = 2;
+	repeated .CMatchHeroSelectEvent picks_bans = 3;
 }
 
 message CMsgGameMatchSignoutResponse {
@@ -247,6 +251,7 @@ message CMsgDOTALiveScoreboardUpdate {
 			optional uint32 account_id = 23;
 			optional float position_x = 24;
 			optional float position_y = 25;
+			optional uint32 net_worth = 26;
 		}
 
 		repeated .CMsgDOTALiveScoreboardUpdate.Team.Player players = 1;
@@ -280,8 +285,9 @@ message CMsgDOTARequestPlayerResourcesResponse {
 
 message CMsgDOTARequestBatchPlayerResources {
 	repeated uint32 account_ids = 1 [packed = true];
-	optional bool rank_use_competitive = 2;
-	repeated bool rank_use_solo = 3 [packed = true];
+	optional bool legacy_rank_use_competitive = 2;
+	repeated bool legacy_rank_use_solo = 3 [packed = true];
+	repeated uint32 rank_types = 4 [packed = true];
 }
 
 message CMsgDOTARequestBatchPlayerResourcesResponse {
@@ -342,10 +348,7 @@ message CMsgTournamentItemEvent {
 
 message CMsgTournamentItemEventResponse {
 	optional .DOTA_TournamentEvents event_type = 1 [default = TE_FIRST_BLOOD];
-	optional string winner_name = 2;
-	optional bool tv_delayed = 3;
-	optional bool inhall = 4;
-	optional uint32 itemdef = 5;
+	optional uint32 viewers_granted = 6;
 }
 
 message CMsgTeamFanfare {
@@ -408,12 +411,23 @@ message CMsgDOTAAwardEventPoints {
 		optional uint32 account_id = 1;
 		optional int32 points = 2;
 		optional int32 premium_points = 3;
-		optional int32 rank = 4;
+		optional uint32 trade_ban_time = 5;
 	}
 
 	repeated .CMsgDOTAAwardEventPoints.AwardPoints award_points = 1;
 	optional uint64 match_id = 2;
 	optional uint32 event_id = 4;
+}
+
+message CMsgDOTAUpdateTI4HeroQuest {
+	message Player {
+		optional uint32 account_id = 1;
+		optional uint32 hero_id = 2;
+	}
+
+	repeated .CMsgDOTAUpdateTI4HeroQuest.Player players = 1;
+	optional fixed32 match_start_time = 2;
+	optional uint64 match_id = 3;
 }
 
 message CMsgDOTAFrostivusTimeElapsed {
@@ -440,5 +454,104 @@ message CMsgGCToServerPingResponse {
 
 message CMsgGCToServerConsoleCommand {
 	optional string console_command = 1;
+}
+
+message CMsgServerGetEventPoints {
+	optional uint32 event_id = 1;
+	repeated uint32 account_id = 2;
+}
+
+message CMsgServerGetEventPointsResponse {
+	message Points {
+		optional uint32 account_id = 1;
+		optional uint32 points_total = 2;
+		optional uint32 premium_total = 3;
+	}
+
+	optional uint32 event_id = 1;
+	repeated .CMsgServerGetEventPointsResponse.Points points = 2;
+}
+
+message CMsgServerGrantSurveyPermission {
+	message Survey {
+		optional uint32 account_id = 1;
+		optional uint32 question_id = 2;
+		optional uint32 expire_time = 3;
+		optional uint64 survey_key = 4;
+		optional uint64 extra_data = 5;
+		optional uint64 extra_data_32 = 6;
+	}
+
+	repeated .CMsgServerGrantSurveyPermission.Survey surveys = 1;
+}
+
+message CMsgServerGrantSurveyPermissionResponse {
+	optional uint32 result = 1;
+}
+
+message CMsgServerToGCMatchConnectionStats {
+	message Player {
+		optional uint32 account_id = 1;
+		optional fixed32 ip = 2;
+		optional uint32 avg_ping_ms = 3;
+		optional uint32 peak_ping_ms = 4;
+		optional float packet_loss = 5;
+		optional float ping_deviation = 6;
+		optional uint32 full_resends = 7;
+	}
+
+	optional uint64 match_id = 1;
+	optional uint32 region_id = 2;
+	optional uint32 league_id = 3;
+	repeated .CMsgServerToGCMatchConnectionStats.Player players = 4;
+}
+
+message CMsgServerGCUpdateSpectatorCount {
+	optional uint32 spectator_count = 1;
+}
+
+message CSerializedCombatLog {
+	message Dictionary {
+		message DictString {
+			required uint32 id = 1;
+			required string value = 2;
+		}
+
+		repeated .CSerializedCombatLog.Dictionary.DictString strings = 1;
+	}
+
+	message Entry {
+		optional uint32 type = 1;
+		optional uint32 target_name = 2;
+		optional uint32 target_source_name = 3;
+		optional uint32 attacker_name = 4;
+		optional uint32 inflictor_name = 5;
+		optional bool attacker_illusion = 6;
+		optional bool target_illusion = 7;
+		optional bool visible_radiant = 8;
+		optional bool visible_dire = 9;
+		optional uint32 value = 10;
+		optional uint32 health = 11;
+		optional float time_stamp = 12;
+		optional float stun_duration = 13;
+		optional float slow_duration = 14;
+	}
+
+	optional uint32 version = 1;
+	optional .CSerializedCombatLog.Dictionary dictionary = 2;
+	repeated .CSerializedCombatLog.Entry entries = 3;
+}
+
+message CMsgServerToGCGetAdditionalEquips {
+	repeated uint32 account_ids = 1;
+}
+
+message CMsgServerToGCGetAdditionalEquipsResponse {
+	message CUserEquips {
+		optional uint32 account_id = 1;
+		repeated .CAdditionalEquipSlot equips = 2;
+	}
+
+	repeated .CMsgServerToGCGetAdditionalEquipsResponse.CUserEquips equips = 1;
 }
 
