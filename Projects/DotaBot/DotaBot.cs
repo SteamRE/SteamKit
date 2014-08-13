@@ -13,6 +13,7 @@ using log4net;
 using log4net.Util;
 using SteamKit2;
 using SteamKit2.GC.Dota.Internal;
+using SteamKit2.Internal;
 using Timer = System.Timers.Timer;
 using Newtonsoft.Json;
 using System.Collections;
@@ -111,6 +112,7 @@ namespace DotaBot
                 .ExecuteOnEntry(EnterLobby)
                 .On(Events.DotaFailedLobby).Goto(States.DotaMenu);
 			fsm.In (States.DotaLobby)
+                .ExecuteOnEntry(EnterLobbyChat)
 				.On (Events.DotaLeftLobby).Goto (States.DotaMenu);
             fsm.Initialize(States.Connecting);
         }
@@ -153,7 +155,11 @@ namespace DotaBot
 			StatusNotify("Joining lobby "+foundLobby.id+" ("+foundLobby.members[0].player_name+") "+foundLobby.members.Count+" members...");
             dota.JoinLobby(foundLobby.id, password);
             //dota.JoinBroadcastChannel();
-            dota.JoinChatChannel("Lobby_" + foundLobby.id);
+        }
+
+        private void EnterLobbyChat()
+        {
+            dota.JoinChatChannel("Lobby_" + dota.Lobby.lobby_id, DOTAChatChannelType_t.DOTAChannelType_Lobby);
         }
 
         private void StartReconnectTimer()
@@ -277,16 +283,18 @@ namespace DotaBot
                 }, manager);
                 new Callback<DotaGCHandler.JoinChatChannelResponse>(c =>
                 {
-					log.Debug("Joined chat channel, response "+c.result.response);
-					log.Debug(JsonConvert.SerializeObject(c.result));
 					if(c.result.channel_name=="bottest"){
                     	this.channelId = c.result.channel_id;
 						SendChannelMessage(this.channelId, "Hello!");
 					}
-					else if(c.result.channel_name=="bottestdebug")
-						this.debugChannelId = c.result.channel_id;
+					else if (c.result.channel_name == "bottestdebug")
+					    this.debugChannelId = c.result.channel_id;
 					else
-						this.lobbyChannelId = c.result.channel_id;
+					{
+					    this.lobbyChannelId = c.result.channel_id;
+                        SendChannelMessage(this.lobbyChannelId, "Hi, I'm a D2Modd.in lobby bot.");
+                        log.Debug("Joined chat channel for lobby successfully");
+					}
                 }, manager);
                 new Callback<DotaGCHandler.ChatMessage>(c =>
                 {
@@ -391,7 +399,12 @@ namespace DotaBot
 					}
 					if(dstrings.Count > 0){
 						var msg = "Update: "+string.Join(", ", dstrings);
-						SendChannelMessage(lobbyChannelId, msg);
+                        if(lobbyChannelId != 0)
+						    SendChannelMessage(lobbyChannelId, msg);
+                        else
+                        {
+                            log.Debug("Received lobby update w/o active lobby chat channel.");
+                        }
 						log.Debug(msg);
 					}
 				}, manager);
