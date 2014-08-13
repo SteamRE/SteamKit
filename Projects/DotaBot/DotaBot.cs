@@ -14,6 +14,7 @@ using log4net.Util;
 using SteamKit2;
 using SteamKit2.GC.Dota.Internal;
 using Timer = System.Timers.Timer;
+using Newtonsoft.Json;
 
 namespace DotaBot
 {
@@ -28,6 +29,7 @@ namespace DotaBot
         private DotaGCHandler dota;
 
         private CMsgPracticeLobbyListResponseEntry foundLobby;
+        private CSODOTALobby Lobby;
         private SteamFriends friends;
         public ActiveStateMachine<States, Events> fsm;
 
@@ -116,16 +118,17 @@ namespace DotaBot
             dota.CloseDota();
         }
 
+        const string password = "quantum555";
         private void FindLobby()
         {
-            log.Debug("Sent a request for lobby list");
-            dota.PracticeLobbyList("pudge");
+			dota.LeaveLobby ();
+			log.Debug("Sent a request for lobby list, password "+password);
+            dota.PracticeLobbyList(password);
         }
 
         private void EnterLobby()
         {
-            dota.LeaveLobby();
-            dota.JoinLobby(foundLobby.id, "pudge");
+            dota.JoinLobby(foundLobby.id, password);
         }
 
         private void StartReconnectTimer()
@@ -228,6 +231,11 @@ namespace DotaBot
                       log.DebugFormat("Friend: {0} status: {1}", friend.SteamID, friend.Relationship);
                     }
                 }, manager);
+                new Callback<DotaGCHandler.PracticeLobbySnapshot>(c=>{
+					log.DebugFormat("Lobby snapshot received!");
+					log.Debug(JsonConvert.SerializeObject(c.lobby));
+                    this.Lobby = c.lobby; 
+				}, manager);
             }
             client.Connect();
             procThread = new Thread(SteamThread);

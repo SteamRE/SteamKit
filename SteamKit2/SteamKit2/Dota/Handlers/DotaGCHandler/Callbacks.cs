@@ -63,5 +63,18 @@ namespace SteamKit2
                 this.result = msg;
             }
         }
+
+		/// <summary>
+		/// When joining a lobby a snapshot is sent out.
+		/// </summary>
+		public sealed class PracticeLobbySnapshot : CallbackMsg
+		{
+			public CSODOTALobby lobby;
+
+			internal PracticeLobbySnapshot(CSODOTALobby msg)
+			{
+				this.lobby = msg;
+			}
+		}
 	}
 }

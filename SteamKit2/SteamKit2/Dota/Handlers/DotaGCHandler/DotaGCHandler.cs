@@ -6,10 +6,12 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using System.IO;
 using SteamKit2.GC;
 using SteamKit2.GC.Dota.Internal;
 using SteamKit2.GC.Internal;
 using SteamKit2.Internal;
+using ProtoBuf;
 
 namespace SteamKit2
 {
@@ -65,7 +67,6 @@ namespace SteamKit2
         public void CloseDota()
         {
             var playGame = new ClientMsgProtobuf<CMsgClientGamesPlayed>(EMsg.ClientGamesPlayed);
-
             this.Client.Send(playGame);
         }
 
@@ -127,7 +128,8 @@ namespace SteamKit2
                                      {
                                          {(uint) EGCBaseClientMsg.k_EMsgGCClientWelcome, HandleWelcome},
                                          {(uint) EDOTAGCMsg.k_EMsgGCPracticeLobbyJoinResponse, HandlePracticeLobbyJoinResponse},
-                                         {(uint) EDOTAGCMsg.k_EMsgGCPracticeLobbyListResponse, HandlePracticeLobbyListResponse}
+                                         {(uint) EDOTAGCMsg.k_EMsgGCPracticeLobbyListResponse, HandlePracticeLobbyListResponse},
+                                         {(uint) ESOMsg.k_ESOMsg_CacheSubscribed, HandleCacheSubscribed}
                                      };
 
                     Action<IPacketGCMsg> func;
@@ -141,6 +143,26 @@ namespace SteamKit2
                 }
             }
         }
+
+        private void HandleCacheSubscribed(IPacketGCMsg obj)
+        {
+			var sub = new ClientGCMsgProtobuf<CMsgSOCacheSubscribed>(obj);
+			Console.WriteLine ("Cache subscribed, Owner SOID: {0}, Type: {1}, Service: {2}, version: {3}", sub.Body.owner_soid.id, sub.Body.owner_soid.type, sub.Body.service_id, sub.Body.version);
+			foreach(var cache in sub.Body.objects){
+				Console.WriteLine(string.Format("==> Object type {0}", cache.type_id));
+				if (cache.type_id == 2004) {
+					HandleLobbySnapshot (cache.object_data [0]);
+				}
+            }
+        }
+
+		private void HandleLobbySnapshot(byte[] data)
+		{
+			using (var stream = new MemoryStream (data)) {
+				var lob = Serializer.Deserialize<CSODOTALobby> (stream);
+				this.Client.PostCallback (new PracticeLobbySnapshot (lob));
+			}
+		}
 
         private void HandlePracticeLobbyListResponse(IPacketGCMsg obj)
         {
