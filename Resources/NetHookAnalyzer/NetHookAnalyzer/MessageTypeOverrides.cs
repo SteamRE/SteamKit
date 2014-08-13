@@ -16,6 +16,8 @@ namespace NetHookAnalyzer
             { EMsg.ClientGamesPlayedWithDataBlob, typeof(CMsgClientGamesPlayed) },
 
             { EMsg.AMGameServerUpdate, typeof(CMsgGameServerData) },
+
+            { EMsg.ClientDPUpdateAppJobReport, typeof(CMsgClientUpdateAppJobReport) },
         };
 
         public static Dictionary<uint, Type> GCBodyMap = new Dictionary<uint, Type>
