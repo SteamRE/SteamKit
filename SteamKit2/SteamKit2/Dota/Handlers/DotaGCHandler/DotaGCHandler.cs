@@ -22,6 +22,15 @@ namespace SteamKit2
     {
         private List<CMsgSerializedSOCache> cache = new List<CMsgSerializedSOCache>(); 
 
+		/// <summary>
+		/// The current up to date lobby
+		/// </summary>
+		/// <value>The lobby.</value>
+		public CSODOTALobby Lobby {
+			get;
+			private set;
+		}
+
         internal DotaGCHandler()
         {
                         
@@ -81,6 +90,7 @@ namespace SteamKit2
 		public void LeaveLobby()
 		{
 			var leaveLobby = new ClientGCMsgProtobuf<CMsgPracticeLobbyLeave> ((uint) EDOTAGCMsg.k_EMsgGCPracticeLobbyLeave);
+			this.Lobby = null;
 			Send(leaveLobby, 570);
 		}
 
@@ -124,7 +134,7 @@ namespace SteamKit2
         /// <summary>
         /// Leaves chat channel
         /// </summary>
-        /// <param name="channelId">id of channel to leave</param>
+        /// <param name="channelid">id of channel to leave</param>
         public void LeaveChatChannel(ulong channelid)
         {
             var leaveChannel = new ClientGCMsgProtobuf<CMsgDOTALeaveChatChannel>((uint)EDOTAGCMsg.k_EMsgGCLeaveChatChannel);
@@ -135,6 +145,7 @@ namespace SteamKit2
 		/// Requests a lobby list with an optional password 
 		/// </summary>
 		/// <param name="pass_key">Pass key.</param>
+		/// <param name="tournament"> Tournament games? </param>
 		public void PracticeLobbyList(string pass_key=null, bool tournament=false)
         {
             var list = new ClientGCMsgProtobuf<CMsgPracticeLobbyList>((uint) EDOTAGCMsg.k_EMsgGCPracticeLobbyList);
@@ -203,9 +214,7 @@ namespace SteamKit2
         private void HandleCacheSubscribed(IPacketGCMsg obj)
         {
 			var sub = new ClientGCMsgProtobuf<CMsgSOCacheSubscribed>(obj);
-			Console.WriteLine ("Cache subscribed, Owner SOID: {0}, Type: {1}, Service: {2}, version: {3}", sub.Body.owner_soid.id, sub.Body.owner_soid.type, sub.Body.service_id, sub.Body.version);
 			foreach(var cache in sub.Body.objects){
-				Console.WriteLine(string.Format("==> Object type {0}", cache.type_id));
 				if (cache.type_id == 2004) {
 					HandleLobbySnapshot (cache.object_data [0]);
 				}
@@ -215,6 +224,8 @@ namespace SteamKit2
         private void HandleCacheUnsubscribed(IPacketGCMsg obj)
         {
             var unSub = new ClientGCMsgProtobuf<CMsgSOCacheUnsubscribed>(obj);
+			if (this.Lobby != null && unSub.Body.owner_soid.id == Lobby.lobby_id)
+				this.Lobby = null;
             this.Client.PostCallback(new CacheUnsubscribed(unSub.Body));
         }
 
@@ -222,6 +233,7 @@ namespace SteamKit2
 		{
 			using (var stream = new MemoryStream (data)) {
 				var lob = Serializer.Deserialize<CSODOTALobby> (stream);
+				this.Lobby = lob;
 				this.Client.PostCallback (new PracticeLobbySnapshot (lob));
 			}
 		}
@@ -265,15 +277,18 @@ namespace SteamKit2
         private void HandleUpdateMultiple(IPacketGCMsg obj)
         {
             var resp = new ClientGCMsgProtobuf<CMsgSOMultipleObjects>(obj);
+			var handled = true;
             foreach (var mObj in resp.Body.objects_modified)
 	        {
-                if (mObj.type_id == 2004)
-                {
-                    HandleLobbySnapshot(mObj.object_data);
-                }
+				if (mObj.type_id == 2004) {
+					HandleLobbySnapshot (mObj.object_data);
+				} else {
+					handled = false;
+				}
 	        }
-            if (resp.Body.objects_added.Count > 0 || resp.Body.objects_removed.Count > 0)
-                Console.WriteLine("Unhandled UpdateMultiple received.");
+			if (!handled) {
+				this.Client.PostCallback (new UnhandledDotaGCCallback (obj));
+			}
         }
         private void HandlePopup(IPacketGCMsg obj)
         {

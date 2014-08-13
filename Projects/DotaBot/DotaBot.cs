@@ -29,7 +29,6 @@ namespace DotaBot
         private DotaGCHandler dota;
 
         private CMsgPracticeLobbyListResponseEntry foundLobby;
-        private CSODOTALobby Lobby;
         private ulong channelId;
         private SteamFriends friends;
         public ActiveStateMachine<States, Events> fsm;
@@ -41,7 +40,7 @@ namespace DotaBot
         private bool reconnect;
         private Timer reconnectTimer = new Timer(5000);
         private SteamUser user;
-        private uint[] adminIds = { 52661068, 69038686 };
+		private uint[] adminIds = { 52661068, 69038686, 15218457 };
 
         public DotaBot(bool reconnect, SteamUser.LogOnDetails details)
         {
@@ -96,12 +95,15 @@ namespace DotaBot
             fsm.In(States.DotaConnect)
                 .ExecuteOnEntry(ConnectDota)
                 .On(Events.DotaGCReady).Goto(States.DotaJoinLobby);
-            fsm.In(States.DotaJoinFind)
-                .ExecuteOnEntry(FindLobby)
+			fsm.In (States.DotaJoinFind)
+                .ExecuteOnEntry (FindLobby)
+				.On (Events.DotaFailedLobby).Goto (States.DotaMenu)
                 .On(Events.DotaFoundLobby).Goto(States.DotaJoinEnter);
             fsm.In(States.DotaJoinEnter)
                 .ExecuteOnEntry(EnterLobby)
                 .On(Events.DotaFailedLobby).Goto(States.DotaMenu);
+			fsm.In (States.DotaLobby)
+				.On (Events.DotaLeftLobby).Goto (States.DotaMenu);
             fsm.Initialize(States.Connecting);
         }
 
@@ -126,7 +128,7 @@ namespace DotaBot
             dota.LeaveChatChannel(channelId);
         }
 
-        const string password = "ilian000";
+		const string password = "dr12345";
         private void FindLobby()
         {
 			dota.LeaveLobby ();
@@ -163,7 +165,7 @@ namespace DotaBot
         private void SetOnlinePresence()
         {
             friends.SetPersonaState(EPersonaState.Online);
-            friends.SetPersonaName("Dota2 Lobby Bot Test");
+            friends.SetPersonaName("Kapparino Bot");
         }
 
         private void InitAndConnect()
@@ -235,7 +237,6 @@ namespace DotaBot
                 new Callback<DotaGCHandler.PracticeLobbySnapshot>(c=>{
 					log.DebugFormat("Lobby snapshot received with state: {0}", c.lobby.state);
                     log.Debug(JsonConvert.SerializeObject(c.lobby));
-                    this.Lobby = c.lobby; 
 				}, manager);
                 new Callback<DotaGCHandler.PingRequest>(c =>
                 {
@@ -259,7 +260,7 @@ namespace DotaBot
                         {
                             case "about":
                                 {
-                                    dota.SendChannelMessage(c.result.channel_id, "I am a D2Modd.in lobby bot made by kidovate and ilian000.");
+                                    dota.SendChannelMessage(c.result.channel_id, "I am a D2Modd.in lobby bot made by quantum and ilian000.");
                                     break;
                                 }
                             case "leave":
@@ -304,6 +305,7 @@ namespace DotaBot
                 new Callback<DotaGCHandler.CacheUnsubscribed>(c =>
                 {
                     log.Debug("Left lobby.");
+					fsm.Fire(Events.DotaLeftLobby);
                 }, manager);
                 new Callback<DotaGCHandler.Popup>(c =>
                 {
