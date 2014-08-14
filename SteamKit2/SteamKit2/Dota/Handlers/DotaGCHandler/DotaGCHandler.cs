@@ -119,6 +119,35 @@ namespace SteamKit2
 		}
 
         /// <summary>
+        /// Start the game
+        /// </summary>
+        public void LaunchLobby()
+        {
+            var start =
+                new ClientGCMsgProtobuf<CMsgPracticeLobbyLaunch>((uint) EDOTAGCMsg.k_EMsgGCPracticeLobbyLaunch);
+            Send(start, 570);
+        }
+
+        /// <summary>
+        /// Create a practice or tournament or custom lobby.
+        /// </summary>
+        /// <param name="pass_key">Password for the lobby.</param>
+        /// <param name="details">Lobby options.</param>
+        /// <param name="tournament_game">Is this a tournament game?</param>
+        /// <param name="tournament">Tournament ID</param>
+        /// <param name="tournament_game_id">Tournament game ID</param>
+        public void CreateLobby(string pass_key, CMsgPracticeLobbySetDetails details, bool tournament_game=false, uint tournament=0, uint tournament_game_id=0)
+        {
+            var create = new ClientGCMsgProtobuf<CMsgPracticeLobbyCreate>((uint) EDOTAGCMsg.k_EMsgGCPracticeLobbyCreate);
+            create.Body.pass_key = pass_key;
+            create.Body.tournament_game_id = tournament_game_id;
+            create.Body.tournament_game = tournament_game;
+            create.Body.tournament_id = tournament;
+            create.Body.lobby_details = details;
+            Send(create, 570);
+        }
+
+        /// <summary>
         /// Joins a chat channel
         /// </summary>
         /// <param name="name"></param>
