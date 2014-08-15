@@ -73,6 +73,12 @@ namespace SteamKit2
             Send(clientHello, 570);
         }
 
+        public void AbandonGame()
+        {
+            var abandon = new ClientGCMsgProtobuf<CMsgAbandonCurrentGame>((uint)EDOTAGCMsg.k_EMsgGCAbandonCurrentGame);
+            Send(abandon, 570);
+        }
+
         public void CloseDota()
         {
             var playGame = new ClientMsgProtobuf<CMsgClientGamesPlayed>(EMsg.ClientGamesPlayed);
@@ -108,6 +114,18 @@ namespace SteamKit2
             var joinChannel = new ClientGCMsgProtobuf<CMsgPracticeLobbyJoinBroadcastChannel> ((uint) EDOTAGCMsg.k_EMsgGCPracticeLobbyJoinBroadcastChannel);
             joinChannel.Body.channel = channel;
             Send(joinChannel, 570);
+        }
+
+        public void RequestSubscriptionRefresh(uint type, ulong id)
+        {
+            var refresh =
+                new ClientGCMsgProtobuf<CMsgSOCacheSubscriptionRefresh>((uint) ESOMsg.k_ESOMsg_CacheSubscriptionRefresh);
+            refresh.Body.owner_soid = new CMsgSOIDOwner()
+            {
+                id = id,
+                type = type
+            };
+            Send(refresh, 570);
         }
 
 		public void JoinTeam(DOTA_GC_TEAM team, uint slot=1)

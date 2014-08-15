@@ -28,7 +28,18 @@ namespace DotaBot
 
         #endregion
 
-        DotaLobby
+        #region DOTALOBBY
+
+        DotaLobby,
+        DotaLobbyUI,
+        DotaLobbyPlay,
+        DotaLobbyHost,
+        DotaLobbyHostSetup,
+        DotaLobbyHostSetupWaitWelcome,
+        DotaLobbyHostSetupWaitLobby,
+        DotaLobbyHostPlay
+
+        #endregion
 
         #endregion
     }

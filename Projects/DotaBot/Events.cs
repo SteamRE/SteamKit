@@ -22,5 +22,6 @@ namespace DotaBot
         LogonFailSteamGuard,
         LogonFailBadCreds,
         AttemptReconnect,
+        DotaSetupAndLeader
     }
 }

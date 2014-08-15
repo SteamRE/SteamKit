@@ -6,6 +6,7 @@
 
 using System;
 using System.Data.Entity.Core.Common.CommandTrees;
+using System.Diagnostics;
 using System.Threading;
 using System.Linq;
 using Appccelerate.SourceTemplates.Log4Net;
@@ -13,7 +14,9 @@ using Appccelerate.StateMachine;
 using log4net;
 using log4net.Util;
 using SteamKit2;
+using SteamKit2.GC;
 using SteamKit2.GC.Dota.Internal;
+using SteamKit2.GC.Internal;
 using SteamKit2.Internal;
 using Timer = System.Timers.Timer;
 using Newtonsoft.Json;
@@ -80,6 +83,19 @@ namespace DotaBot
                 .WithHistoryType(HistoryType.None)
                 .WithInitialSubState(States.DotaJoinFind)
                 .WithSubState(States.DotaJoinEnter);
+            fsm.DefineHierarchyOn(States.DotaLobby)
+               .WithHistoryType(HistoryType.None)
+               .WithInitialSubState(States.DotaLobbyUI)
+               .WithSubState(States.DotaLobbyHost)
+               .WithSubState(States.DotaLobbyPlay);
+            fsm.DefineHierarchyOn(States.DotaLobbyHost)
+               .WithHistoryType(HistoryType.None)
+               .WithInitialSubState(States.DotaLobbyHostSetup)
+               .WithSubState(States.DotaLobbyHostPlay);
+            fsm.DefineHierarchyOn(States.DotaLobbyHostSetup)
+               .WithHistoryType(HistoryType.None)
+               .WithInitialSubState(States.DotaLobbyHostSetupWaitWelcome)
+               .WithSubState(States.DotaLobbyHostSetupWaitLobby);
             fsm.In(States.Connecting)
                 .ExecuteOnEntry(InitAndConnect)
                 .On(Events.Connected).Goto(States.Connected)
@@ -115,6 +131,15 @@ namespace DotaBot
 			fsm.In (States.DotaLobby)
                 .ExecuteOnEntry(EnterLobbyChat)
 				.On (Events.DotaLeftLobby).Goto (States.DotaMenu).Execute(LeaveChatChannel);
+            fsm.In(States.DotaLobbyUI)
+               .On(Events.DotaSetupAndLeader).Goto(States.DotaLobbyHostSetup);
+            fsm.In(States.DotaLobbyHostSetupWaitWelcome)
+                .ExecuteOnEntry(DeregisterServer)
+               .ExecuteOnEntry(ReLaunchDota)
+               .On(Events.DotaGCReady).Goto(States.DotaLobbyHostSetupWaitLobby);
+            fsm.In(States.DotaLobbyHostSetupWaitLobby)
+                .ExecuteOnEntry(RequestLobbyRefresh)
+               .On(Events.DotaJoinedLobby).Goto(States.DotaLobbyPlay).Execute(EnterLobbyChat).Execute(InformServerReady);
             fsm.Initialize(States.Connecting);
         }
 
@@ -123,9 +148,64 @@ namespace DotaBot
             fsm.Start();
         }
 
+        private void DeregisterServer()
+        {
+            var msg = new ClientMsgProtobuf<CMsgClientDeregisterWithServer>(EMsg.ClientDeregisterWithServer);
+            msg.Body.app_id = 0;
+            msg.Body.eservertype = 42;
+            this.client.Send(msg);
+        }
+
+        private void RequestLobbyRefresh()
+        {
+            dota.RequestSubscriptionRefresh(3, dota.Lobby.lobby_id);
+        }
+
+        private void ReLaunchDota()
+        {
+            var playGame = new ClientMsgProtobuf<CMsgClientGamesPlayed>(EMsg.ClientGamesPlayed);
+
+            playGame.Body.games_played.Add(new CMsgClientGamesPlayed.GamePlayed
+            {
+                game_id = new GameID(570),
+                steam_id_gs = 0,
+                game_extra_info = "Dota 2",
+                process_id = (uint)Process.GetCurrentProcess().Id,
+                game_flags = 1,
+                owner_id = client.SteamID.AccountID
+            });
+
+            client.Send(playGame);
+
+            Thread.Sleep(5000);
+
+            var clientHello = new ClientGCMsgProtobuf<CMsgClientHello>((uint)EGCBaseClientMsg.k_EMsgGCClientHello);
+            dota.Send(clientHello, 570);
+        }
+
         private void ClearReconnectTimer()
         {
             reconnectTimer.Stop();
+        }
+
+        private void InformServerReady()
+        {
+            var msg = new ClientMsgProtobuf<CMsgClientGamesPlayed>(EMsg.ClientGamesPlayedWithDataBlob);
+            msg.Body.client_os_type = 14;
+            msg.Body.games_played.Add(
+                new CMsgClientGamesPlayed.GamePlayed()
+                {
+                    game_id = new GameID(570),
+                    game_extra_info = "Dota 2",
+                    game_data_blob = null,
+                    process_id = (uint)Process.GetCurrentProcess().Id,
+                    streaming_provider_id = 0,
+                    game_flags = 1,
+                    owner_id = client.SteamID.AccountID,
+                    steam_id_gs = 90091544972500994
+                }
+            );
+            client.Send(msg);
         }
 
         private void DisconnectDota()
@@ -137,6 +217,7 @@ namespace DotaBot
         {
 			if (dota.Lobby != null)
 				StatusNotify ("Leaving lobby " + dota.Lobby.lobby_id);
+            dota.AbandonGame();
             dota.LeaveLobby();
             LeaveChatChannel();
         }
@@ -264,7 +345,6 @@ namespace DotaBot
                     c => { log.Debug("Unknown GC message: " + c.Message.MsgType); }, manager);
                 new Callback<DotaGCHandler.PracticeLobbyJoinResponse>(c => { 
                     log.Debug("Received practice lobby join response " + c.result.result);
-                    fsm.Fire(Events.DotaJoinedLobby);
                 }, manager);
                 new Callback<DotaGCHandler.PracticeLobbyListResponse>(c =>
                 {
@@ -287,6 +367,7 @@ namespace DotaBot
                 new Callback<DotaGCHandler.PracticeLobbySnapshot>(c=>{
 					log.DebugFormat("Lobby snapshot received with state: {0}", c.lobby.state);
                     log.Debug(JsonConvert.SerializeObject(c.lobby));
+                    fsm.Fire(Events.DotaJoinedLobby);
 				}, manager);
                 new Callback<DotaGCHandler.PingRequest>(c =>
                 {
@@ -354,11 +435,18 @@ namespace DotaBot
 									        details.custom_game_id = game_id;
 									        details.custom_game_mode = parms[2];
 									        details.custom_map_name = parms[3];
+									        details.lobby_id = 1;
+									        details.game_mode = 15;
+									        details.server_region = 2;
+									        details.lan = true;
 									    }
 									    details.pass_key = parms[0];
 									    details.game_name = "BOT TEST";
 									    dota.CreateLobby(parms[0], details);
-                                        StatusNotify("Creating lobby with password "+parms[0]+"...");
+                                        if(parms.Length == 4)
+                                            StatusNotify("Creating custom lobby with password "+parms[0]+" id: "+details.custom_game_id+" mode: "+details.custom_game_mode+" map name: "+details.custom_map_name+"...");
+                                        else 
+                                            StatusNotify("Creating lobby with password "+parms[0]+"...");
 									}
 									else
 									{
@@ -526,10 +614,8 @@ namespace DotaBot
 				new Callback<DotaGCHandler.PracticeLobbyUpdate> (c => {
 					var diffs = Diff.Compare(c.oldLobby, c.lobby);
 					var dstrings = new List<string>(diffs.Differences.Count);
-					foreach(var diff in diffs.Differences){
-						dstrings.Add(string.Format("{0}: {1} => {2}", diff.PropertyName, diff.Object1Value, diff.Object2Value));
-					}
-					if(dstrings.Count > 0){
+				    dstrings.AddRange(diffs.Differences.Select(diff => string.Format("{0}: {1} => {2}", diff.PropertyName, diff.Object1Value, diff.Object2Value)));
+				    if(dstrings.Count > 0){
 						var msg = "Update: "+string.Join(", ", dstrings);
                         if(lobbyChannelId != 0)
 						    SendChannelMessage(lobbyChannelId, msg);
@@ -539,6 +625,10 @@ namespace DotaBot
                         }
 						log.Debug(msg);
 					}
+				    if (c.lobby.state == CSODOTALobby.State.SERVERSETUP && c.lobby.leader_id == this.client.SteamID.ConvertToUInt64())
+				    {
+                        fsm.Fire(Events.DotaSetupAndLeader);
+				    }
 				}, manager);
             }
             client.Connect();
