@@ -130,6 +130,7 @@ namespace DotaBot
                 .On(Events.DotaFailedLobby).Goto(States.DotaMenu);
 			fsm.In (States.DotaLobby)
                 .ExecuteOnEntry(EnterLobbyChat)
+                .ExecuteOnEntry(EnterBroadcastChannel)
 				.On (Events.DotaLeftLobby).Goto (States.DotaMenu).Execute(LeaveChatChannel);
             fsm.In(States.DotaLobbyUI)
                .On(Events.DotaSetupAndLeader).Goto(States.DotaLobbyHostSetup);
@@ -242,12 +243,16 @@ namespace DotaBot
         {
 			StatusNotify("Joining lobby "+foundLobby.id+" ("+foundLobby.members[0].player_name+") "+foundLobby.members.Count+" members...");
             dota.JoinLobby(foundLobby.id, password);
-            //dota.JoinBroadcastChannel();
         }
 
         private void EnterLobbyChat()
         {
             dota.JoinChatChannel("Lobby_" + dota.Lobby.lobby_id, DOTAChatChannelType_t.DOTAChannelType_Lobby);
+        }
+
+        private void EnterBroadcastChannel()
+        {
+            dota.JoinBroadcastChannel();
         }
 
 		private void SwitchTeam(DOTA_GC_TEAM team=DOTA_GC_TEAM.DOTA_GC_TEAM_GOOD_GUYS)
@@ -308,6 +313,7 @@ namespace DotaBot
                 dota = client.GetHandler<DotaGCHandler>();
                 manager = new CallbackManager(client);
                 isRunning = true;
+                Console.CancelKeyPress += Console_CancelKeyPress;
                 new Callback<SteamClient.ConnectedCallback>(c =>
                 {
                     if (c.Result != EResult.OK)
@@ -345,6 +351,8 @@ namespace DotaBot
                     c => { log.Debug("Unknown GC message: " + c.Message.MsgType); }, manager);
                 new Callback<DotaGCHandler.PracticeLobbyJoinResponse>(c => { 
                     log.Debug("Received practice lobby join response " + c.result.result);
+                    if (c.result.result != DOTAJoinLobbyResult.DOTA_JOIN_RESULT_SUCCESS)
+                        StatusNotify("Could not join lobby, reason: " + c.result.result);
                 }, manager);
                 new Callback<DotaGCHandler.PracticeLobbyListResponse>(c =>
                 {
@@ -456,11 +464,16 @@ namespace DotaBot
 								} 
                             case "start":
 								{
-								    if (dota.Lobby == null || dota.Lobby.state != CSODOTALobby.State.UI)
-								    {
-								        SendChannelMessage(c.result.channel_id, "Not in lobby or lobby is not in UI state.");
-								        return;
-								    }
+                                    if (dota.Lobby == null || dota.Lobby.state != CSODOTALobby.State.UI)
+                                    {
+                                        SendChannelMessage(c.result.channel_id, "Not in lobby or lobby is not in UI state.");
+                                        return;
+                                    }
+                                    if (dota.Lobby.leader_id != client.SteamID.ConvertToUInt64()) 
+                                    {
+                                        SendChannelMessage(c.result.channel_id, "I am not the lobby host.");
+                                        break;
+                                    }
 									if (adminIds.Contains(c.result.account_id))
 									{
                                         dota.LaunchLobby();
@@ -634,6 +647,15 @@ namespace DotaBot
             client.Connect();
             procThread = new Thread(SteamThread);
             procThread.Start(this);
+        }
+
+        void Console_CancelKeyPress(object sender, ConsoleCancelEventArgs e)
+        {
+            leaveLobby();
+            if (channelId != 0)
+                dota.LeaveChatChannel(channelId);
+            DisconnectDota();
+            DisconnectAndCleanup();
         }
 
         private void ConnectDota()
