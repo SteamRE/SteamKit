@@ -33,6 +33,7 @@ namespace DotaBot
         private SteamClient client;
         private SteamUser.LogOnDetails details;
         private DotaGCHandler dota;
+        private ServerEmulator gameServer;
 
         private CMsgPracticeLobbyListResponseEntry foundLobby;
 		private ulong channelId = 0;
@@ -49,6 +50,7 @@ namespace DotaBot
         private Timer reconnectTimer = new Timer(5000);
         private SteamUser user;
 		private uint[] adminIds = { 52661068, 69038686, 15218457 };
+        private uint GCVersion;
 
 	    string password = "dr12345";
 
@@ -140,7 +142,7 @@ namespace DotaBot
                .On(Events.DotaGCReady).Goto(States.DotaLobbyHostSetupWaitLobby);
             fsm.In(States.DotaLobbyHostSetupWaitLobby)
                 .ExecuteOnEntry(RequestLobbyRefresh)
-               .On(Events.DotaJoinedLobby).Goto(States.DotaLobbyPlay).Execute(EnterLobbyChat).Execute(InformServerReady);
+               .On(Events.DotaJoinedLobby).Goto(States.DotaLobbyPlay).Execute(EnterLobbyChat).Execute(LaunchServer).Execute(InformServerReady);
             fsm.Initialize(States.Connecting);
         }
 
@@ -187,6 +189,14 @@ namespace DotaBot
         private void ClearReconnectTimer()
         {
             reconnectTimer.Stop();
+        }
+
+        private void LaunchServer()
+        {
+            if (dota.Lobby != null)
+                gameServer = new ServerEmulator("178.196.146.85", 27015, dota.Lobby.members.Select(x => x.id).ToArray(), GCVersion, dota.Lobby.lobby_id);
+            else
+                log.Error("Could not start server! Unable to obtain player list.");
         }
 
         private void InformServerReady()
@@ -345,6 +355,7 @@ namespace DotaBot
                 new Callback<DotaGCHandler.GCWelcomeCallback>(c =>
                 {
                     log.Debug("GC welcomed the bot, version " + c.Version);
+                    this.GCVersion = c.Version;
                     fsm.Fire(Events.DotaGCReady);
                 }, manager);
                 new Callback<DotaGCHandler.UnhandledDotaGCCallback>(
@@ -428,7 +439,7 @@ namespace DotaBot
 								        SendChannelMessage(c.result.channel_id, "Already in lobby "+dota.Lobby.lobby_id+".");
 								        return;
 								    }
-                                    if (parms.Length != 1 && parms.Length != 4)
+                                    if (parms.Length != 1 && parms.Length != 2 && parms.Length != 4)
                                     {
                                         SendChannelMessage(c.result.channel_id, "Usage: !create pass_key [custom_game_id custom_game_mode custom_game_map]");
                                         break;
@@ -448,13 +459,18 @@ namespace DotaBot
 									        details.server_region = 2;
 									        details.lan = true;
 									    }
+                                        if (parms.Length == 2)
+                                        {
+                                            if(parms[1] == "lan")
+                                                details.lan = true;
+                                        }
 									    details.pass_key = parms[0];
 									    details.game_name = "BOT TEST";
 									    dota.CreateLobby(parms[0], details);
                                         if(parms.Length == 4)
                                             StatusNotify("Creating custom lobby with password "+parms[0]+" id: "+details.custom_game_id+" mode: "+details.custom_game_mode+" map name: "+details.custom_map_name+"...");
                                         else 
-                                            StatusNotify("Creating lobby with password "+parms[0]+"...");
+                                            StatusNotify("Creating lobby (lan: " + details.lan +") with password "+parms[0]+"...");
 									}
 									else
 									{

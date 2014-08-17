@@ -66,6 +66,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ServerEmulator.cs" />
     <Compile Include="StateMachineLogExtension.cs" />
     <Compile Include="DotaBot.cs" />
     <Compile Include="Events.cs" />
