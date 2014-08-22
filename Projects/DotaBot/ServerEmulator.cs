@@ -26,7 +26,7 @@ namespace DotaBot
         protected bool isRunning = true;
         private ILog log = LogManager.GetLogger(typeof(ServerEmulator));
         private Thread procThread;
-        private SteamClient client;
+        public SteamClient client;
         private SteamGameServer server;
         private CallbackManager manager;
         private SteamGameCoordinator gameCoordinator;
@@ -38,6 +38,9 @@ namespace DotaBot
         ulong[] playerSteamIds;
         uint GCVersion;
         ulong lobby_id;
+
+        public delegate void ReadyEventHandler(object sender, EventArgs e);
+        public event ReadyEventHandler Ready;
 
         public ServerEmulator(string ip, uint port, ulong[] playerSteamIds, uint GCVersion, ulong lobby_id)
         {
@@ -91,11 +94,18 @@ namespace DotaBot
                     log.Debug("Received welcome message from GC.");
                     SendGCServerInfo();
                     SendLANServerAvailable();
+                    OnReady(EventArgs.Empty);
                 }
             }, manager);
             client.Connect();
             procThread = new Thread(SteamThread);
             procThread.Start(this);
+        }
+
+        protected virtual void OnReady(EventArgs e)
+        {
+            if(Ready != null)
+                Ready(this, e);
         }
 
         private static void SteamThread(object state)

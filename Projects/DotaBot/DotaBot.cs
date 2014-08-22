@@ -142,7 +142,7 @@ namespace DotaBot
                .On(Events.DotaGCReady).Goto(States.DotaLobbyHostSetupWaitLobby);
             fsm.In(States.DotaLobbyHostSetupWaitLobby)
                 .ExecuteOnEntry(RequestLobbyRefresh)
-               .On(Events.DotaJoinedLobby).Goto(States.DotaLobbyPlay).Execute(EnterLobbyChat).Execute(LaunchServer).Execute(InformServerReady);
+               .On(Events.DotaJoinedLobby).Goto(States.DotaLobbyPlay).Execute(EnterLobbyChat).Execute(LaunchServer);
             fsm.Initialize(States.Connecting);
         }
 
@@ -194,12 +194,25 @@ namespace DotaBot
         private void LaunchServer()
         {
             if (dota.Lobby != null)
-                gameServer = new ServerEmulator("178.196.146.85", 27015, dota.Lobby.members.Select(x => x.id).ToArray(), GCVersion, dota.Lobby.lobby_id);
+            {
+                if (dota.Lobby.lan)
+                {
+                    gameServer = new ServerEmulator("178.196.146.85", 27015, dota.Lobby.members.Select(x => x.id).ToArray(), GCVersion, dota.Lobby.lobby_id);
+                    gameServer.Ready += gameServer_Ready;
+                }
+            }
             else
                 log.Error("Could not start server! Unable to obtain player list.");
         }
 
-        private void InformServerReady()
+        void gameServer_Ready(object sender, EventArgs e)
+        {
+            log.Debug("Received ready event from gameServer.");
+            var emulator = sender as ServerEmulator;
+            InformServerReady(emulator.client.SteamID.ConvertToUInt64());
+        }
+
+        private void InformServerReady(ulong steam_id_gs)
         {
             var msg = new ClientMsgProtobuf<CMsgClientGamesPlayed>(EMsg.ClientGamesPlayedWithDataBlob);
             msg.Body.client_os_type = 14;
@@ -213,7 +226,7 @@ namespace DotaBot
                     streaming_provider_id = 0,
                     game_flags = 1,
                     owner_id = client.SteamID.AccountID,
-                    steam_id_gs = 90091544972500994
+                    steam_id_gs = steam_id_gs
                 }
             );
             client.Send(msg);
