@@ -96,14 +96,26 @@ namespace SteamKit2
         /// This is a client send constructor.
         /// </summary>
         /// <param name="eMsg">The network message type this client message represents.</param>
+        /// <param name="body">The body of the message, ex <see cref="CMsgClientGamesPlayed"/>.</param>
         /// <param name="payloadReserve">The number of bytes to initialize the payload capacity to.</param>
-        public ClientMsgProtobuf( EMsg eMsg, int payloadReserve = 64 )
-            : base( payloadReserve )
+        public ClientMsgProtobuf(EMsg eMsg, BodyType body, int payloadReserve = 64)
+            : base(payloadReserve)
         {
-            Body = new BodyType();
+            Body = body;
 
             // set our emsg
             Header.Msg = eMsg;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ClientMsgProtobuf&lt;BodyType&gt;"/> class with an empty body.
+        /// This is a client send constructor.
+        /// </summary>
+        /// <param name="eMsg">The network message type this client message represents.</param>
+        /// <param name="payloadReserve">The number of bytes to initialize the payload capacity to.</param>
+        public ClientMsgProtobuf( EMsg eMsg, int payloadReserve = 64 )
+            : this(eMsg, new BodyType(), payloadReserve )
+        {
         }
 
         /// <summary>
@@ -249,15 +261,29 @@ namespace SteamKit2
         /// Initializes a new instance of the <see cref="ClientMsg&lt;BodyType&gt;"/> class.
         /// This is a client send constructor.
         /// </summary>
+        /// <param name="body">The body this message should contain.</param>
         /// <param name="payloadReserve">The number of bytes to initialize the payload capacity to.</param>
-        public ClientMsg( int payloadReserve = 64 )
-            : base( payloadReserve )
+        public ClientMsg(BodyType body, int payloadReserve = 64)
+            : base(payloadReserve)
         {
-            Body = new BodyType();
+            Body = body;
 
             // assign our emsg
-            Header.SetEMsg( Body.GetEMsg() );
+            Header.SetEMsg(Body.GetEMsg());
         }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ClientMsg&lt;BodyType&gt;"/> class with an empty body.
+        /// This is a client send constructor.
+        /// </summary>
+        /// <param name="payloadReserve">The number of bytes to initialize the payload capacity to.</param>
+        public ClientMsg( int payloadReserve = 64 )
+            : this(new BodyType(), payloadReserve )
+        {
+            
+        }
+
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ClientMsg&lt;BodyType&gt;"/> class.
