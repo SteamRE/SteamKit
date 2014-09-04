@@ -490,6 +490,10 @@ message CMsgSetTargetFrameRate {
 	optional uint32 nTargetFrameRate = 1;
 }
 
+message CMsgPauseRepaint {
+	optional uint32 browser_handle = 1;
+}
+
 message CMsgFullRepaint {
 	optional uint32 browser_handle = 1;
 }
