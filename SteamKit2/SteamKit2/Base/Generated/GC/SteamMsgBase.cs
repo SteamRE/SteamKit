@@ -1919,6 +1919,15 @@ namespace SteamKit2.GC.Internal
       set { _persona_name = value; }
     }
 
+    private bool _is_profile_created = default(bool);
+    [global::ProtoBuf.ProtoMember(26, IsRequired = false, Name=@"is_profile_created", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool is_profile_created
+    {
+      get { return _is_profile_created; }
+      set { _is_profile_created = value; }
+    }
+
     private bool _is_profile_public = default(bool);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"is_profile_public", DataFormat = global::ProtoBuf.DataFormat.Default)]
     [global::System.ComponentModel.DefaultValue(default(bool))]
@@ -2088,6 +2097,24 @@ namespace SteamKit2.GC.Internal
     {
       get { return _steam_level; }
       set { _steam_level = value; }
+    }
+
+    private uint _friend_count = default(uint);
+    [global::ProtoBuf.ProtoMember(24, IsRequired = false, Name=@"friend_count", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint friend_count
+    {
+      get { return _friend_count; }
+      set { _friend_count = value; }
+    }
+
+    private uint _account_creation_time = default(uint);
+    [global::ProtoBuf.ProtoMember(25, IsRequired = false, Name=@"account_creation_time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint account_creation_time
+    {
+      get { return _account_creation_time; }
+      set { _account_creation_time = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

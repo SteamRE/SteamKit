@@ -132,6 +132,15 @@ namespace SteamKit2.Unified.Internal
       get { return _enabled_features; }
       set { _enabled_features = value; }
     }
+
+    private string _recovery_email = "";
+    [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"recovery_email", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string recovery_email
+    {
+      get { return _recovery_email; }
+      set { _recovery_email = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -168,6 +177,15 @@ namespace SteamKit2.Unified.Internal
     {
       get { return _sessionid; }
       set { _sessionid = value; }
+    }
+
+    private uint _enablecode = default(uint);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"enablecode", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint enablecode
+    {
+      get { return _enablecode; }
+      set { _enablecode = value; }
     }
 
     private ulong _steamid = default(ulong);
@@ -495,6 +513,64 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CParental_RequestRecoveryCode_Request")]
+  public partial class CParental_RequestRecoveryCode_Request : global::ProtoBuf.IExtensible
+  {
+    public CParental_RequestRecoveryCode_Request() {}
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CParental_RequestRecoveryCode_Response")]
+  public partial class CParental_RequestRecoveryCode_Response : global::ProtoBuf.IExtensible
+  {
+    public CParental_RequestRecoveryCode_Response() {}
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CParental_DisableWithRecoveryCode_Request")]
+  public partial class CParental_DisableWithRecoveryCode_Request : global::ProtoBuf.IExtensible
+  {
+    public CParental_DisableWithRecoveryCode_Request() {}
+    
+
+    private uint _recovery_code = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"recovery_code", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint recovery_code
+    {
+      get { return _recovery_code; }
+      set { _recovery_code = value; }
+    }
+
+    private ulong _steamid = default(ulong);
+    [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong steamid
+    {
+      get { return _steamid; }
+      set { _steamid = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CParental_DisableWithRecoveryCode_Response")]
+  public partial class CParental_DisableWithRecoveryCode_Response : global::ProtoBuf.IExtensible
+  {
+    public CParental_DisableWithRecoveryCode_Response() {}
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CParental_ParentalSettingsChange_Notification")]
   public partial class CParental_ParentalSettingsChange_Notification : global::ProtoBuf.IExtensible
   {
@@ -598,6 +674,8 @@ namespace SteamKit2.Unified.Internal
     CParental_ValidateToken_Response ValidateToken(CParental_ValidateToken_Request request);
     CParental_ValidatePassword_Response ValidatePassword(CParental_ValidatePassword_Request request);
     CParental_LockClient_Response LockClient(CParental_LockClient_Request request);
+    CParental_RequestRecoveryCode_Response RequestRecoveryCode(CParental_RequestRecoveryCode_Request request);
+    CParental_DisableWithRecoveryCode_Response DisableWithRecoveryCode(CParental_DisableWithRecoveryCode_Request request);
     
     }
     
