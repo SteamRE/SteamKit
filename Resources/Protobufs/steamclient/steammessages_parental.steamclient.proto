@@ -17,12 +17,14 @@ message ParentalSettings {
 	optional bytes passwordhash = 8;
 	optional bool is_enabled = 9;
 	optional uint32 enabled_features = 10;
+	optional string recovery_email = 11;
 }
 
 message CParental_EnableParentalSettings_Request {
 	optional string password = 1;
 	optional .ParentalSettings settings = 2;
 	optional string sessionid = 3;
+	optional uint32 enablecode = 4;
 	optional fixed64 steamid = 10;
 }
 
@@ -89,6 +91,20 @@ message CParental_LockClient_Request {
 message CParental_LockClient_Response {
 }
 
+message CParental_RequestRecoveryCode_Request {
+}
+
+message CParental_RequestRecoveryCode_Response {
+}
+
+message CParental_DisableWithRecoveryCode_Request {
+	optional uint32 recovery_code = 1;
+	optional fixed64 steamid = 10;
+}
+
+message CParental_DisableWithRecoveryCode_Response {
+}
+
 message CParental_ParentalSettingsChange_Notification {
 	optional bytes serialized_settings = 1;
 	optional bytes signature = 2;
@@ -130,6 +146,12 @@ service Parental {
 	}
 	rpc LockClient (.CParental_LockClient_Request) returns (.CParental_LockClient_Response) {
 		option (method_description) = "Notify connected clients that a lock has occurred in a browser";
+	}
+	rpc RequestRecoveryCode (.CParental_RequestRecoveryCode_Request) returns (.CParental_RequestRecoveryCode_Response) {
+		option (method_description) = "Request a recovery code be sent to the recovery email address for the specified account";
+	}
+	rpc DisableWithRecoveryCode (.CParental_DisableWithRecoveryCode_Request) returns (.CParental_DisableWithRecoveryCode_Response) {
+		option (method_description) = "Attempt a recovery unlock on the specified account";
 	}
 }
 service ParentalClient {

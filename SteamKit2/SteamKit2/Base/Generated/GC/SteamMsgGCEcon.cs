@@ -522,13 +522,13 @@ namespace SteamKit2.GC.Internal
     public CMsgRequestCrateItems() {}
     
 
-    private uint _crate_series = default(uint);
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"crate_series", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    private uint _crate_item_def = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"crate_item_def", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint crate_series
+    public uint crate_item_def
     {
-      get { return _crate_series; }
-      set { _crate_series = value; }
+      get { return _crate_item_def; }
+      set { _crate_item_def = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -541,13 +541,13 @@ namespace SteamKit2.GC.Internal
     public CMsgRequestCrateItemsResponse() {}
     
 
-    private uint _crate_series = default(uint);
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"crate_series", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    private uint _crate_item_def = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"crate_item_def", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint crate_series
+    public uint crate_item_def
     {
-      get { return _crate_series; }
-      set { _crate_series = value; }
+      get { return _crate_item_def; }
+      set { _crate_item_def = value; }
     }
     private readonly global::System.Collections.Generic.List<uint> _item_defs = new global::System.Collections.Generic.List<uint>();
     [global::ProtoBuf.ProtoMember(2, Name=@"item_defs", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]

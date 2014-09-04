@@ -448,8 +448,14 @@ enum EDOTAGCMsg {
 	k_EMsgClientToGCGetAdditionalEquipsResponse = 7515;
 	k_EMsgServerToGCGetAdditionalEquips = 7516;
 	k_EMsgServerToGCGetAdditionalEquipsResponse = 7517;
+	k_EMsgDOTARedeemItem = 7518;
+	k_EMsgDOTARedeemItemResponse = 7519;
+	k_EMsgSQLGCToGCGrantAllHeroProgress = 7520;
+	k_EMsgClientToGCGetAllHeroProgress = 7521;
+	k_EMsgClientToGCGetAllHeroProgressResponse = 7522;
 	k_EMsgGCToGCGetServerForClient = 7523;
 	k_EMsgGCToGCGetServerForClientResponse = 7524;
+	k_EMsgSQLProcessTournamentGameOutcome = 7525;
 	k_EMsgGCDev_GrantWarKill = 8001;
 }
 
@@ -727,6 +733,7 @@ message CSODOTAGameAccountClient {
 	optional uint32 party_competitive_games_played = 62;
 	optional uint32 casual_1v1_games_played = 65;
 	optional uint32 competitive_team_games_played = 66;
+	optional uint32 curr_all_hero_challenge_id = 67;
 }
 
 message CSODOTAPartyMember {
@@ -1064,9 +1071,9 @@ message CProtoItemSocket_Spectator {
 	optional uint32 team_id = 5;
 }
 
-message CProtoItemSocket_AnimModifier {
+message CProtoItemSocket_AssetModifier {
 	optional .CProtoItemSocket socket = 1;
-	optional uint32 anim_modifier = 2;
+	optional uint32 asset_modifier = 2;
 }
 
 message CProtoItemSocket_Autograph {
@@ -1200,5 +1207,13 @@ message CAdditionalEquipSlot {
 	optional uint32 class_id = 1;
 	optional uint32 slot_id = 2;
 	optional uint32 def_index = 3;
+}
+
+message CMsgDOTARedeemItem {
+	optional uint64 currency_id = 1;
+	optional uint32 purchase_def = 2;
+}
+
+message CMsgDOTARedeemItemResponse {
 }
 

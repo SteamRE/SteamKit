@@ -398,6 +398,15 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _competitive_team_games_played; }
       set { _competitive_team_games_played = value; }
     }
+
+    private uint _curr_all_hero_challenge_id = default(uint);
+    [global::ProtoBuf.ProtoMember(67, IsRequired = false, Name=@"curr_all_hero_challenge_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint curr_all_hero_challenge_id
+    {
+      get { return _curr_all_hero_challenge_id; }
+      set { _curr_all_hero_challenge_id = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -2680,10 +2689,10 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CProtoItemSocket_AnimModifier")]
-  public partial class CProtoItemSocket_AnimModifier : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CProtoItemSocket_AssetModifier")]
+  public partial class CProtoItemSocket_AssetModifier : global::ProtoBuf.IExtensible
   {
-    public CProtoItemSocket_AnimModifier() {}
+    public CProtoItemSocket_AssetModifier() {}
     
 
     private CProtoItemSocket _socket = null;
@@ -2695,13 +2704,13 @@ namespace SteamKit2.GC.Dota.Internal
       set { _socket = value; }
     }
 
-    private uint _anim_modifier = default(uint);
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"anim_modifier", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    private uint _asset_modifier = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"asset_modifier", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint anim_modifier
+    public uint asset_modifier
     {
-      get { return _anim_modifier; }
-      set { _anim_modifier = value; }
+      get { return _asset_modifier; }
+      set { _asset_modifier = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -3426,6 +3435,44 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _def_index; }
       set { _def_index = value; }
     }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTARedeemItem")]
+  public partial class CMsgDOTARedeemItem : global::ProtoBuf.IExtensible
+  {
+    public CMsgDOTARedeemItem() {}
+    
+
+    private ulong _currency_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"currency_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong currency_id
+    {
+      get { return _currency_id; }
+      set { _currency_id = value; }
+    }
+
+    private uint _purchase_def = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"purchase_def", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint purchase_def
+    {
+      get { return _purchase_def; }
+      set { _purchase_def = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTARedeemItemResponse")]
+  public partial class CMsgDOTARedeemItemResponse : global::ProtoBuf.IExtensible
+  {
+    public CMsgDOTARedeemItemResponse() {}
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -4773,11 +4820,29 @@ namespace SteamKit2.GC.Dota.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgServerToGCGetAdditionalEquipsResponse", Value=7517)]
       k_EMsgServerToGCGetAdditionalEquipsResponse = 7517,
             
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgDOTARedeemItem", Value=7518)]
+      k_EMsgDOTARedeemItem = 7518,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgDOTARedeemItemResponse", Value=7519)]
+      k_EMsgDOTARedeemItemResponse = 7519,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgSQLGCToGCGrantAllHeroProgress", Value=7520)]
+      k_EMsgSQLGCToGCGrantAllHeroProgress = 7520,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCGetAllHeroProgress", Value=7521)]
+      k_EMsgClientToGCGetAllHeroProgress = 7521,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCGetAllHeroProgressResponse", Value=7522)]
+      k_EMsgClientToGCGetAllHeroProgressResponse = 7522,
+            
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCGetServerForClient", Value=7523)]
       k_EMsgGCToGCGetServerForClient = 7523,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCGetServerForClientResponse", Value=7524)]
       k_EMsgGCToGCGetServerForClientResponse = 7524,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgSQLProcessTournamentGameOutcome", Value=7525)]
+      k_EMsgSQLProcessTournamentGameOutcome = 7525,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCDev_GrantWarKill", Value=8001)]
       k_EMsgGCDev_GrantWarKill = 8001

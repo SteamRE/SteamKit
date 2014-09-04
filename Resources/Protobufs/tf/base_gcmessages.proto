@@ -523,6 +523,11 @@ message CMsgDeliverGiftResponseGiver {
 	optional string receiver_account_name = 2;
 }
 
+message CSOEconGameAccountForGameServers {
+	optional uint32 skill_rating = 3;
+	optional uint32 skill_rating_beta = 2;
+}
+
 message CWorkshop_PopulateItemDescriptions_Request {
 	message SingleItemDescription {
 		optional uint32 gameitemid = 1;
