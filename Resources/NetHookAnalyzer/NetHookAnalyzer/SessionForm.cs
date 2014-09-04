@@ -222,7 +222,7 @@ namespace NetHookAnalyzer
             if ( methodInfo != null )
             {
                 var requestType = typeSelector( methodInfo );
-                var request = RuntimeTypeModel.Default.Deserialize( methodStream, null, requestType );
+                var request = Serializer.NonGeneric.Deserialize( requestType, methodStream );
                 return request;
             }
 
@@ -603,7 +603,7 @@ namespace NetHookAnalyzer
 
             if (protomsgType != null)
             {
-                return RuntimeTypeModel.Default.Deserialize(str, null, protomsgType);
+                return Serializer.NonGeneric.Deserialize( protomsgType, str );
             }
 
             // lets first find the type by checking all EMsgs we have
