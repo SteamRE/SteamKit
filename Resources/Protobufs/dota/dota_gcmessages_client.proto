@@ -4,12 +4,14 @@ import "gcsdk_gcmessages.proto";
 import "dota_gcmessages_client_fantasy.proto";
 
 enum ETournamentGameState {
-	k_ETournamentGameState_Pending = 0;
-	k_ETournamentGameState_Active = 1;
-	k_ETournamentGameState_DireVictory = 2;
-	k_ETournamentGameState_RadVictory = 3;
-	k_ETournamentGameState_Canceled = 4;
-	k_ETournamentTeamState_NotNeeded = 5;
+	k_ETournamentGameState_Unknown = 0;
+	k_ETournamentGameState_Scheduled = 1;
+	k_ETournamentGameState_WaitingForLobbyToStart = 2;
+	k_ETournamentGameState_Active = 3;
+	k_ETournamentGameState_DireVictory = 4;
+	k_ETournamentGameState_RadVictory = 5;
+	k_ETournamentGameState_Canceled = 6;
+	k_ETournamentTeamState_NotNeeded = 7;
 }
 
 enum ETournamentTeamState {
@@ -485,7 +487,7 @@ message CMsgDOTATournament {
 		optional uint32 seed = 5;
 		optional uint64 team_logo = 6;
 		optional string country_code = 7;
-		optional .ETournamentTeamState node_or_state = 8 [default = k_ETournamentTeamState_Unknown];
+		optional uint32 node_or_state = 8;
 	}
 
 	message Game {
@@ -500,7 +502,9 @@ message CMsgDOTATournament {
 		optional bool live_stream = 7;
 		optional string message = 9;
 		optional bool results_final = 10;
-		optional .ETournamentGameState state = 14 [default = k_ETournamentGameState_Pending];
+		optional .ETournamentGameState state = 14 [default = k_ETournamentGameState_Unknown];
+		optional uint32 node_id = 15;
+		optional uint32 start_time = 16;
 	}
 
 	message Node {
@@ -509,8 +513,10 @@ message CMsgDOTATournament {
 		optional uint32 team_seed_b = 3;
 		optional uint32 winner_node = 4;
 		optional uint32 loser_node = 5;
-		repeated uint32 game_ids = 6 [packed = true];
-		optional uint32 wins_required = 7;
+		optional uint32 series_type = 7;
+		optional .ETournamentNodeState node_state = 8 [default = k_ETournamentNodeState_Unknown];
+		optional uint32 series_id = 9;
+		optional uint32 start_time = 16;
 	}
 
 	repeated .CMsgDOTATournament.Team teams = 1;
@@ -2301,5 +2307,30 @@ message CMsgClientToGCGetAdditionalEquips {
 
 message CMsgClientToGCGetAdditionalEquipsResponse {
 	repeated .CAdditionalEquipSlot equips = 1;
+}
+
+message CMsgClientToGCGetAllHeroProgress {
+	optional uint32 account_id = 1;
+}
+
+message CMsgClientToGCGetAllHeroProgressResponse {
+	optional uint32 account_id = 1;
+	optional uint32 curr_hero_id = 2;
+	optional uint32 laps_completed = 3;
+	optional uint32 curr_hero_games = 4;
+	optional uint32 curr_lap_time_started = 5;
+	optional uint32 curr_lap_games = 6;
+	optional uint32 best_lap_games = 7;
+	optional uint32 best_lap_time = 8;
+	optional uint32 lap_heroes_completed = 9;
+	optional uint32 lap_heroes_remaining = 10;
+	optional uint32 next_hero_id = 11;
+	optional uint32 prev_hero_id = 12;
+	optional uint32 prev_hero_games = 13;
+	optional float prev_avg_tries = 14;
+	optional float curr_avg_tries = 15;
+	optional float next_avg_tries = 16;
+	optional float full_lap_avg_tries = 17;
+	optional float curr_lap_avg_tries = 18;
 }
 

@@ -314,11 +314,11 @@ message CMsgGCToGCGetUserPCBangNoResponse {
 }
 
 message CMsgRequestCrateItems {
-	optional uint32 crate_series = 1;
+	optional uint32 crate_item_def = 1;
 }
 
 message CMsgRequestCrateItemsResponse {
-	optional uint32 crate_series = 1;
+	optional uint32 crate_item_def = 1;
 	repeated uint32 item_defs = 2;
 }
 

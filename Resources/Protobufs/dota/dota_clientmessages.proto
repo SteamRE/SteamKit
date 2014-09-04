@@ -32,6 +32,7 @@ enum EDotaClientMessages {
 	DOTA_CM_CameraZoomAmount = 27;
 	DOTA_CM_BroadcasterUsingCamerman = 28;
 	DOTA_CM_BroadcasterUsingAssistedCameraOperator = 29;
+	DOTA_CM_FreeInventory = 31;
 }
 
 message CDOTAClientMsg_MapPing {
@@ -155,5 +156,15 @@ message CDOTAClientMsg_BroadcasterUsingCameraman {
 
 message CDOTAClientMsg_BroadcasterUsingAssistedCameraOperator {
 	optional bool enabled = 1;
+}
+
+message CAdditionalEquipSlotClientMsg {
+	optional uint32 class_id = 1;
+	optional uint32 slot_id = 2;
+	optional uint32 def_index = 3;
+}
+
+message CDOTAClientMsg_FreeInventory {
+	repeated .CAdditionalEquipSlotClientMsg equips = 1;
 }
 
