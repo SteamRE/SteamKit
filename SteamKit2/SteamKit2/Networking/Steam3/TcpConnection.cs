@@ -18,10 +18,9 @@ namespace SteamKit2
     {
         const uint MAGIC = 0x31305456; // "VT01"
 
-        bool isConnected;
-
         Socket sock;
 
+        bool wantsNetShutdown;
         NetworkStream netStream;
         ReaderWriterLockSlim netLock;
 
@@ -86,6 +85,7 @@ namespace SteamKit2
 
             try
             {
+                wantsNetShutdown = false;
                 netStream = new NetworkStream( sock, false );
 
                 netReader = new BinaryReader( netStream );
@@ -111,6 +111,8 @@ namespace SteamKit2
         {
             if ( netThread == null )
                 return;
+
+            wantsNetShutdown = true;
 
             // wait for our network thread to terminate
             netThread.Join();
@@ -171,13 +173,8 @@ namespace SteamKit2
             const int POLL_MS = 100;
             Socket socket = param as Socket;
 
-            while ( true )
+            while ( !wantsNetShutdown )
             {
-                if ( netStream == null )
-                {
-                    break;
-                }
-
                 bool canRead = socket.Poll( POLL_MS * 1000, SelectMode.SelectRead );
 
                 if ( !canRead )
@@ -188,6 +185,11 @@ namespace SteamKit2
 
                 netLock.EnterUpgradeableReadLock();
                 byte[] packData = null;
+
+                if ( netStream == null )
+                {
+                    break;
+                }
 
                 try
                 {
