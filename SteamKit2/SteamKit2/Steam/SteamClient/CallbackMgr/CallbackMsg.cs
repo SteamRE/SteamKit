@@ -49,10 +49,13 @@ namespace SteamKit2
         /// <typeparam name="T">The type to check against.</typeparam>
         /// <param name="msg">The callback in question.</param>
         /// <param name="handler">The handler to invoke.</param>
+        /// <returns>
+        /// 	<c>true</c> if the callback matches and the handler was called; otherwise, <c>false</c>.
+        /// </returns>
         /// <exception cref="ArgumentNullException">
         /// 	<c>msg</c> is null or <c>handler</c> is null.
         /// </exception>
-        public static void Handle<T>( this ICallbackMsg msg, Action<T> handler )
+        public static bool Handle<T>( this ICallbackMsg msg, Action<T> handler )
             where T : class, ICallbackMsg
         {
             if ( msg == null )
@@ -66,7 +69,10 @@ namespace SteamKit2
             if ( callback != null )
             {
                 handler( callback );
+                return true;
             }
+
+            return false;
         }
     }
 
