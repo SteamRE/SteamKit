@@ -20,7 +20,7 @@ namespace SteamKit2
 
         Socket sock;
 
-        bool wantsNetShutdown;
+        volatile bool wantsNetShutdown;
         NetworkStream netStream;
         ReaderWriterLockSlim netLock;
 
@@ -68,6 +68,7 @@ namespace SteamKit2
         {
             if ( sock == null )
             {
+                DebugLog.WriteLine( "TcpConnection", "Timed out while connecting" );
                 OnDisconnected( EventArgs.Empty );
                 return;
             }
