@@ -32,7 +32,9 @@ enum EDotaClientMessages {
 	DOTA_CM_CameraZoomAmount = 27;
 	DOTA_CM_BroadcasterUsingCamerman = 28;
 	DOTA_CM_BroadcasterUsingAssistedCameraOperator = 29;
+	DOTA_CM_EnemyItemAlert = 30;
 	DOTA_CM_FreeInventory = 31;
+	DOTA_CM_BuyBackStateAlert = 32;
 }
 
 message CDOTAClientMsg_MapPing {
@@ -41,6 +43,10 @@ message CDOTAClientMsg_MapPing {
 
 message CDOTAClientMsg_ItemAlert {
 	optional .CDOTAMsg_ItemAlert item_alert = 1;
+}
+
+message CDOTAClientMsg_EnemyItemAlert {
+	optional .CDOTAMsg_EnemyItemAlert enemy_item_alert = 1;
 }
 
 message CDOTAClientMsg_MapLine {
@@ -140,6 +146,9 @@ message CDOTAClientMsg_RecordVote {
 
 message CDOTAClientMsg_WillPurchaseAlert {
 	optional int32 itemid = 1;
+}
+
+message CDOTAClientMsg_BuyBackStateAlert {
 }
 
 message CDOTAClientMsg_PlayerShowCase {

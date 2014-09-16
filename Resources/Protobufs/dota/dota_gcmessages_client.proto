@@ -326,6 +326,7 @@ message CMsgPracticeLobbyJoinBroadcastChannel {
 	optional uint32 channel = 1;
 	optional string preferred_description = 2;
 	optional string preferred_country_code = 3;
+	optional string preferred_language_code = 4;
 }
 
 message CMsgPracticeLobbyToggleBroadcastChannelCameramanStatus {
@@ -606,6 +607,7 @@ message CMsgDOTAMatch {
 		optional string country_code = 1;
 		optional string description = 2;
 		repeated .CMsgDOTAMatch.BroadcasterInfo broadcaster_infos = 3;
+		optional string language_code = 4;
 	}
 
 	enum ReplayState {
@@ -2025,6 +2027,7 @@ message CMsgGCItemEditorReleaseReservationResponse {
 
 message CMsgDOTARewardTutorialPrizes {
 	optional uint32 location_id = 1;
+	optional bool tracking_only = 2;
 }
 
 message CMsgDOTALastHitChallengeHighScorePost {
@@ -2051,6 +2054,7 @@ message CMsgGCLobbyUpdateBroadcastChannelInfo {
 	optional uint32 channel_id = 1;
 	optional string country_code = 2;
 	optional string description = 3;
+	optional string language_code = 4;
 }
 
 message CMsgDOTARedeemEventPrize {
@@ -2197,6 +2201,10 @@ message CMsgGCNotificationsResponse {
 message CMsgGCNotificationsMarkReadRequest {
 }
 
+message CMsgClientToGCMarkNotificationListRead {
+	repeated uint64 notification_ids = 1;
+}
+
 message CMsgGCLeagueAdminState {
 	message PrivateLeagueKeys {
 		optional uint32 leagueid = 1;
@@ -2332,5 +2340,37 @@ message CMsgClientToGCGetAllHeroProgressResponse {
 	optional float next_avg_tries = 16;
 	optional float full_lap_avg_tries = 17;
 	optional float curr_lap_avg_tries = 18;
+	optional string profile_name = 19;
+}
+
+message CMsgClientToGCGetTrophyList {
+	optional uint32 account_id = 1;
+}
+
+message CMsgClientToGCGetTrophyListResponse {
+	message Trophy {
+		optional uint32 trophy_id = 1;
+		optional uint32 trophy_score = 2;
+	}
+
+	optional uint32 account_id = 1;
+	repeated .CMsgClientToGCGetTrophyListResponse.Trophy trophies = 2;
+	optional string profile_name = 3;
+}
+
+message CMsgGCToClientTrophyAwarded {
+	optional uint32 trophy_id = 1;
+	optional uint32 trophy_score = 2;
+	optional uint32 trophy_old_score = 3;
+}
+
+message CMsgClientToGCGetProfileCard {
+	optional uint32 account_id = 1;
+}
+
+message CMsgClientToGCSetProfileCardSlot {
+	optional uint32 slot_id = 1;
+	optional uint32 slot_type = 2;
+	optional uint64 slot_value = 3;
 }
 

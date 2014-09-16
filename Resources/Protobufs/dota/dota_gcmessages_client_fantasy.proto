@@ -35,7 +35,7 @@ message CMsgDOTACreateFantasyLeagueResponse {
 	optional .CMsgDOTACreateFantasyLeagueResponse.EResult result = 1 [default = SUCCESS];
 }
 
-message CMsgFantasyLeagueRoleScoring {
+message CMsgFantasyLeagueScoring {
 	optional float level = 1;
 	optional float kills = 2;
 	optional float deaths = 3;
@@ -48,6 +48,8 @@ message CMsgFantasyLeagueRoleScoring {
 	optional float healing = 10;
 	optional float tower_kills = 11;
 	optional float roshan_kills = 12;
+	optional float multiplier_premium = 13;
+	optional float multiplier_professional = 14;
 }
 
 message CMsgDOTAFantasyLeagueInfo {
@@ -63,7 +65,7 @@ message CMsgDOTAFantasyLeagueInfo {
 	optional .Fantasy_Selection_Mode selection_mode = 4 [default = FANTASY_SELECTION_INVALID];
 	optional uint32 team_count = 5;
 	optional uint64 logo = 6;
-	optional .CMsgFantasyLeagueRoleScoring scoring = 7;
+	optional .CMsgFantasyLeagueScoring scoring = 7;
 	optional uint32 draft_time = 12;
 	optional uint32 draft_pick_time = 13;
 	optional uint32 season_start = 15;
@@ -203,14 +205,6 @@ message CMsgDOTAFantasyTeamInfo {
 	optional uint32 wins = 6;
 	optional uint32 losses = 7;
 	repeated uint32 current_roster = 8;
-}
-
-message CMsgDOTAFantasyMatchFinished {
-	optional uint32 match_id = 1;
-	optional uint32 league_id = 2;
-	optional uint32 series_id = 3;
-	optional uint32 start_time = 4;
-	optional uint32 series_type = 5;
 }
 
 message CMsgDOTAFantasyTeamScoreRequest {
@@ -457,7 +451,7 @@ message CMsgDOTAFantasyTeamRosterSwapResponse {
 		ERROR_UNSPECIFIED = 1;
 		ERROR_OWNER_NOT_IN_LEAGUE = 2;
 		ERROR_SLOTS_INVALID = 3;
-		ERROR_ROSTER_LOCKED = 4;
+		ERROR_SLOT_LOCKED = 4;
 	}
 
 	optional .CMsgDOTAFantasyTeamRosterSwapResponse.EResult result = 1 [default = SUCCESS];
@@ -542,6 +536,7 @@ message CMsgDOTAFantasyTeamRosterResponse {
 
 	optional .CMsgDOTAFantasyTeamRosterResponse.EResult result = 1 [default = SUCCESS];
 	repeated uint32 player_account_ids = 2;
+	repeated bool player_locked = 3;
 }
 
 message CMsgDOTAFantasyPlayerHisoricalStatsRequest {
@@ -549,23 +544,28 @@ message CMsgDOTAFantasyPlayerHisoricalStatsRequest {
 }
 
 message CMsgDOTAFantasyPlayerHisoricalStatsResponse {
+	message PlayerScoreAccumulator {
+		optional uint32 matches = 1;
+		optional float levels = 2;
+		optional float kills = 3;
+		optional float deaths = 4;
+		optional float assists = 5;
+		optional float last_hits = 6;
+		optional float denies = 7;
+		optional float gpm = 8;
+		optional float xppm = 9;
+		optional float stuns = 10;
+		optional float healing = 11;
+		optional float tower_kills = 12;
+		optional float roshan_kills = 13;
+		optional float score = 14;
+	}
+
 	message PlayerStats {
 		optional uint32 account_id = 1;
-		optional uint32 matches = 2;
-		optional uint32 weeks = 3;
-		optional float score = 4;
-		optional float levels = 5;
-		optional float kills = 6;
-		optional float deaths = 7;
-		optional float assists = 8;
-		optional float last_hits = 9;
-		optional float denies = 10;
-		optional float gpm = 11;
-		optional float xppm = 12;
-		optional float stuns = 13;
-		optional float healing = 14;
-		optional float tower_kills = 15;
-		optional float roshan_kills = 16;
+		optional uint32 weeks = 2;
+		optional .CMsgDOTAFantasyPlayerHisoricalStatsResponse.PlayerScoreAccumulator stats_premium = 4;
+		optional .CMsgDOTAFantasyPlayerHisoricalStatsResponse.PlayerScoreAccumulator stats_professional = 5;
 	}
 
 	enum EResult {
@@ -620,6 +620,7 @@ message CMsgDOTAFantasyRemoveOwnerResponse {
 		ERROR_UNSPECIFIED = 1;
 		ERROR_NO_PERMISSION = 2;
 		ERROR_LEAGUE_LOCKED = 3;
+		ERROR_NOT_A_MEMBER = 4;
 	}
 
 	optional .CMsgDOTAFantasyRemoveOwnerResponse.EResult result = 1 [default = SUCCESS];
@@ -675,12 +676,12 @@ message CMsgDOTAFantasyPlayerScoreDetailsResponse {
 		optional uint32 series_id = 2;
 		optional uint32 series_num = 3;
 		optional uint32 series_type = 4;
-		optional float series_multiplier = 5;
+		optional uint32 league_tier = 5;
 		optional uint32 league_id = 6;
 		optional uint32 opposing_team_id = 7;
 		optional uint64 opposing_team_logo = 8;
 		optional string opposing_team_name = 9;
-		optional .CMsgFantasyLeagueRoleScoring stats = 10;
+		optional .CMsgFantasyLeagueScoring stats = 10;
 		optional uint32 owned_by = 11;
 		optional bool benched = 12;
 	}
