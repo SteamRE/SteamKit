@@ -12,6 +12,37 @@
 // Note: requires additional types generated from: steammessages.proto
 namespace SteamKit2.GC.Internal
 {
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgSHA1Digest")]
+  public partial class CMsgSHA1Digest : global::ProtoBuf.IExtensible
+  {
+    public CMsgSHA1Digest() {}
+    
+    private ulong _block1;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"block1", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public ulong block1
+    {
+      get { return _block1; }
+      set { _block1 = value; }
+    }
+    private ulong _block2;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"block2", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public ulong block2
+    {
+      get { return _block2; }
+      set { _block2 = value; }
+    }
+    private uint _block3;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"block3", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public uint block3
+    {
+      get { return _block3; }
+      set { _block3 = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgSOIDOwner")]
   public partial class CMsgSOIDOwner : global::ProtoBuf.IExtensible
   {
@@ -858,6 +889,15 @@ namespace SteamKit2.GC.Internal
     {
       get { return _secret_key; }
       set { _secret_key = value; }
+    }
+
+    private uint _client_language = default(uint);
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"client_language", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint client_language
+    {
+      get { return _client_language; }
+      set { _client_language = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
