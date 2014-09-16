@@ -3,6 +3,11 @@ import "dota_gcmessages_common.proto";
 import "econ_gcmessages.proto";
 import "network_connection.proto";
 
+enum ESuspiciousActivity {
+	k_ESuspiciousActivity_VAC_MultipleInstances = 1;
+	k_ESuspiciousActivity_IntentionalFeeding = 100;
+}
+
 message CMsgSpawnLootGreevil {
 	optional bool rare = 1;
 }
@@ -566,5 +571,12 @@ message CMsgServerToGCVictoryPredictions {
 	}
 
 	repeated .CMsgServerToGCVictoryPredictions.Record records = 1;
+}
+
+message CMsgServerToGCSuspiciousActivity {
+	optional uint32 account_id = 1;
+	optional .ESuspiciousActivity activity_code = 2 [default = k_ESuspiciousActivity_VAC_MultipleInstances];
+	optional sint32 intdata1 = 3;
+	optional sint32 intdata2 = 4;
 }
 

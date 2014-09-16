@@ -2027,6 +2027,7 @@ message CMsgGCItemEditorReleaseReservationResponse {
 
 message CMsgDOTARewardTutorialPrizes {
 	optional uint32 location_id = 1;
+	optional bool tracking_only = 2;
 }
 
 message CMsgDOTALastHitChallengeHighScorePost {

@@ -474,6 +474,7 @@ enum EDOTAGCMsg {
 	k_EMsgGCToGCProcessVictoryPredictionRecord = 7541;
 	k_EMsgClientToGCMarkNotificationListRead = 7542;
 	k_EMsgGCToClientNewNotificationAdded = 7543;
+	k_EMsgServerToGCSuspiciousActivity = 7544;
 	k_EMsgGCDev_GrantWarKill = 8001;
 }
 
