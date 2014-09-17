@@ -98,6 +98,11 @@ message CDOTAMsg_ItemAlert {
 	optional int32 itemid = 3;
 }
 
+message CDOTAMsg_EnemyItemAlert {
+	optional uint32 player_id = 1;
+	optional int32 itemid = 2;
+}
+
 message CDOTAMsg_MapLine {
 	optional int32 x = 1;
 	optional int32 y = 2;

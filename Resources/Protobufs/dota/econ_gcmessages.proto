@@ -314,11 +314,11 @@ message CMsgGCToGCGetUserPCBangNoResponse {
 }
 
 message CMsgRequestCrateItems {
-	optional uint32 crate_series = 1;
+	optional uint32 crate_item_def = 1;
 }
 
 message CMsgRequestCrateItemsResponse {
-	optional uint32 crate_series = 1;
+	optional uint32 crate_item_def = 1;
 	repeated uint32 item_defs = 2;
 }
 
@@ -382,6 +382,7 @@ message CMsgGCToGCGrantAccountRolledItems {
 		optional uint32 origin = 4;
 		repeated .CMsgGCToGCGrantAccountRolledItems.Item.DynamicAttribute dynamic_attributes = 5;
 		repeated .CMsgGCToGCGrantAccountRolledItems.Item.AdditionalAuditEntry additional_audit_entries = 6;
+		optional uint32 inventory_token = 7;
 	}
 
 	optional uint32 account_id = 1;

@@ -207,6 +207,14 @@ message CMsgDOTAFantasyTeamInfo {
 	repeated uint32 current_roster = 8;
 }
 
+message CMsgDOTAFantasyMatchFinished {
+	optional uint32 match_id = 1;
+	optional uint32 league_id = 2;
+	optional uint32 series_id = 3;
+	optional uint32 start_time = 4;
+	optional uint32 series_type = 5;
+}
+
 message CMsgDOTAFantasyTeamScoreRequest {
 	optional uint32 fantasy_league_id = 1;
 	optional uint32 owner_account_id = 2;
@@ -451,7 +459,7 @@ message CMsgDOTAFantasyTeamRosterSwapResponse {
 		ERROR_UNSPECIFIED = 1;
 		ERROR_OWNER_NOT_IN_LEAGUE = 2;
 		ERROR_SLOTS_INVALID = 3;
-		ERROR_SLOT_LOCKED = 4;
+		ERROR_ROSTER_LOCKED = 4;
 	}
 
 	optional .CMsgDOTAFantasyTeamRosterSwapResponse.EResult result = 1 [default = SUCCESS];
@@ -536,7 +544,6 @@ message CMsgDOTAFantasyTeamRosterResponse {
 
 	optional .CMsgDOTAFantasyTeamRosterResponse.EResult result = 1 [default = SUCCESS];
 	repeated uint32 player_account_ids = 2;
-	repeated bool player_locked = 3;
 }
 
 message CMsgDOTAFantasyPlayerHisoricalStatsRequest {

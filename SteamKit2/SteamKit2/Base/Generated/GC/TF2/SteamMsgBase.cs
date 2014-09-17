@@ -3029,6 +3029,34 @@ namespace SteamKit2.GC.TF2.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CSOEconGameAccountForGameServers")]
+  public partial class CSOEconGameAccountForGameServers : global::ProtoBuf.IExtensible
+  {
+    public CSOEconGameAccountForGameServers() {}
+    
+
+    private uint _skill_rating = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"skill_rating", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint skill_rating
+    {
+      get { return _skill_rating; }
+      set { _skill_rating = value; }
+    }
+
+    private uint _skill_rating_beta = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"skill_rating_beta", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint skill_rating_beta
+    {
+      get { return _skill_rating_beta; }
+      set { _skill_rating_beta = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CWorkshop_PopulateItemDescriptions_Request")]
   public partial class CWorkshop_PopulateItemDescriptions_Request : global::ProtoBuf.IExtensible
   {

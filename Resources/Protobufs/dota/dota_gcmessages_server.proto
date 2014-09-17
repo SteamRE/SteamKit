@@ -3,6 +3,25 @@ import "dota_gcmessages_common.proto";
 import "econ_gcmessages.proto";
 import "network_connection.proto";
 
+enum ESuspiciousActivity {
+	k_ESuspiciousActivity_VAC_MultipleInstances = 1;
+	k_ESuspiciousActivity_IntentionalFeeding = 100;
+	k_ESuspiciousActivity_SuspectedBotFarming = 101;
+}
+
+enum ESuspiciousBuildType {
+	k_ESuspiciousBuildType_None = 0;
+	k_ESuspiciousBuildType_NoGoldSpent = 1;
+	k_ESuspiciousBuildType_NoItems = 2;
+	k_ESuspiciousBuildType_NoSignificantItems = 3;
+	k_ESuspiciousBuildType_TooManyBoots = 4;
+	k_ESuspiciousBuildType_Bot1 = 101;
+	k_ESuspiciousBuildType_Bot2 = 102;
+	k_ESuspiciousBuildType_Bot3 = 103;
+	k_ESuspiciousBuildType_Bot4 = 104;
+	k_ESuspiciousBuildType_Bot5 = 105;
+}
+
 message CMsgSpawnLootGreevil {
 	optional bool rare = 1;
 }
@@ -103,6 +122,15 @@ message CMsgDOTAFantasyPlayerStats {
 	optional uint32 tower_kills = 14;
 	optional uint32 roshan_kills = 15;
 	optional uint32 team_id = 16;
+	optional uint32 league_id = 17;
+}
+
+message CMsgDOTAFantasyMatch {
+	optional uint32 match_id = 1;
+	optional uint32 league_id = 2;
+	optional uint32 series_id = 3;
+	optional uint32 start_time = 4;
+	optional uint32 series_type = 5;
 }
 
 message CMsgGameMatchSignOut {
@@ -175,6 +203,18 @@ message CMsgSignOutDraftInfo {
 	optional uint32 radiant_captain_account_id = 1;
 	optional uint32 dire_captain_account_id = 2;
 	repeated .CMatchHeroSelectEvent picks_bans = 3;
+}
+
+message CMsgSignOutBotInfo {
+	message CMsgBotSlotDifficulty {
+		optional uint32 slot = 1;
+		optional .DOTABotDifficulty bot_difficulty = 2 [default = BOT_DIFFICULTY_PASSIVE];
+	}
+
+	optional bool allow_cheats = 1;
+	optional .DOTABotDifficulty bot_difficulty = 2 [default = BOT_DIFFICULTY_PASSIVE];
+	optional bool created_lobby = 3;
+	repeated .CMsgSignOutBotInfo.CMsgBotSlotDifficulty bot_slot_difficulties = 4;
 }
 
 message CMsgGameMatchSignoutResponse {
@@ -520,26 +560,9 @@ message CSerializedCombatLog {
 		repeated .CSerializedCombatLog.Dictionary.DictString strings = 1;
 	}
 
-	message Entry {
-		optional uint32 type = 1;
-		optional uint32 target_name = 2;
-		optional uint32 target_source_name = 3;
-		optional uint32 attacker_name = 4;
-		optional uint32 inflictor_name = 5;
-		optional bool attacker_illusion = 6;
-		optional bool target_illusion = 7;
-		optional bool visible_radiant = 8;
-		optional bool visible_dire = 9;
-		optional uint32 value = 10;
-		optional uint32 health = 11;
-		optional float time_stamp = 12;
-		optional float stun_duration = 13;
-		optional float slow_duration = 14;
-	}
-
 	optional uint32 version = 1;
 	optional .CSerializedCombatLog.Dictionary dictionary = 2;
-	repeated .CSerializedCombatLog.Entry entries = 3;
+	repeated .CMsgDOTACombatLogEntry entries = 3;
 }
 
 message CMsgServerToGCGetAdditionalEquips {
@@ -553,5 +576,31 @@ message CMsgServerToGCGetAdditionalEquipsResponse {
 	}
 
 	repeated .CMsgServerToGCGetAdditionalEquipsResponse.CUserEquips equips = 1;
+}
+
+message CMsgServerToGCGetProfileCard {
+	repeated uint32 account_ids = 1;
+}
+
+message CMsgServerToGCGetProfileCardResponse {
+	repeated .CMsgDOTAProfileCard cards = 1;
+}
+
+message CMsgServerToGCVictoryPredictions {
+	message Record {
+		optional uint32 account_id = 1;
+		optional uint64 item_id = 2;
+		optional bool victory = 3;
+	}
+
+	repeated .CMsgServerToGCVictoryPredictions.Record records = 1;
+}
+
+message CMsgSuspiciousActivity {
+	optional uint32 account_id = 1;
+	optional .ESuspiciousActivity activity = 2 [default = k_ESuspiciousActivity_VAC_MultipleInstances];
+	optional sint32 intdata1 = 3;
+	optional sint32 intdata2 = 4;
+	optional uint32 time = 5;
 }
 

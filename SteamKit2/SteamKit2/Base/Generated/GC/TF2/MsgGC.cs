@@ -932,6 +932,15 @@ namespace SteamKit2.GC.TF2.Internal
       get { return _steam_id; }
       set { _steam_id = value; }
     }
+
+    private uint _options_score = default(uint);
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"options_score", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint options_score
+    {
+      get { return _options_score; }
+      set { _options_score = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -3253,6 +3262,15 @@ namespace SteamKit2.GC.TF2.Internal
       get { return _mvm_credits_dropped; }
       set { _mvm_credits_dropped = value; }
     }
+
+    private uint _skillrating_force_average = default(uint);
+    [global::ProtoBuf.ProtoMember(21, IsRequired = false, Name=@"skillrating_force_average", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint skillrating_force_average
+    {
+      get { return _skillrating_force_average; }
+      set { _skillrating_force_average = value; }
+    }
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Player")]
   public partial class Player : global::ProtoBuf.IExtensible
   {
@@ -4513,6 +4531,71 @@ namespace SteamKit2.GC.TF2.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGCMsgTFPlayerSkillRatingAdjustment")]
+  public partial class CGCMsgTFPlayerSkillRatingAdjustment : global::ProtoBuf.IExtensible
+  {
+    public CGCMsgTFPlayerSkillRatingAdjustment() {}
+    
+    private readonly global::System.Collections.Generic.List<CGCMsgTFPlayerSkillRatingAdjustment.Player> _players = new global::System.Collections.Generic.List<CGCMsgTFPlayerSkillRatingAdjustment.Player>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"players", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CGCMsgTFPlayerSkillRatingAdjustment.Player> players
+    {
+      get { return _players; }
+    }
+  
+
+    private CGCMsgTFPlayerSkillRatingAdjustment.MatchType _match_type = CGCMsgTFPlayerSkillRatingAdjustment.MatchType.PUBLIC;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"match_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(CGCMsgTFPlayerSkillRatingAdjustment.MatchType.PUBLIC)]
+    public CGCMsgTFPlayerSkillRatingAdjustment.MatchType match_type
+    {
+      get { return _match_type; }
+      set { _match_type = value; }
+    }
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Player")]
+  public partial class Player : global::ProtoBuf.IExtensible
+  {
+    public Player() {}
+    
+
+    private ulong _steam_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steam_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong steam_id
+    {
+      get { return _steam_id; }
+      set { _steam_id = value; }
+    }
+
+    private int _adjustment = default(int);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"adjustment", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int adjustment
+    {
+      get { return _adjustment; }
+      set { _adjustment = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"MatchType", EnumPassthru=true)]
+    public enum MatchType
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"PUBLIC", Value=0)]
+      PUBLIC = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"BETA", Value=1)]
+      BETA = 1
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     [global::ProtoBuf.ProtoContract(Name=@"ETFGCMsg", EnumPassthru=true)]
     public enum ETFGCMsg
     {
@@ -4822,6 +4905,9 @@ namespace SteamKit2.GC.TF2.Internal
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGC_ClientSetItemSlotAttribute", Value=6503)]
       k_EMsgGC_ClientSetItemSlotAttribute = 6503,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGC_PlayerSkillRating_Adjustment", Value=6504)]
+      k_EMsgGC_PlayerSkillRating_Adjustment = 6504,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCDev_GrantWarKill", Value=10001)]
       k_EMsgGCDev_GrantWarKill = 10001

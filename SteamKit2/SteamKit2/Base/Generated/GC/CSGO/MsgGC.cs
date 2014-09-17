@@ -1468,6 +1468,48 @@ namespace SteamKit2.GC.CSGO.Internal
       get { return _draft; }
       set { _draft = value; }
     }
+    private readonly global::System.Collections.Generic.List<CPreMatchInfoData.TeamStats> _stats = new global::System.Collections.Generic.List<CPreMatchInfoData.TeamStats>();
+    [global::ProtoBuf.ProtoMember(5, Name=@"stats", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CPreMatchInfoData.TeamStats> stats
+    {
+      get { return _stats; }
+    }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"TeamStats")]
+  public partial class TeamStats : global::ProtoBuf.IExtensible
+  {
+    public TeamStats() {}
+    
+
+    private int _match_info_idxtxt = default(int);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"match_info_idxtxt", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int match_info_idxtxt
+    {
+      get { return _match_info_idxtxt; }
+      set { _match_info_idxtxt = value; }
+    }
+
+    private string _match_info_txt = "";
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"match_info_txt", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string match_info_txt
+    {
+      get { return _match_info_txt; }
+      set { _match_info_txt = value; }
+    }
+    private readonly global::System.Collections.Generic.List<string> _match_info_teams = new global::System.Collections.Generic.List<string>();
+    [global::ProtoBuf.ProtoMember(3, Name=@"match_info_teams", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<string> match_info_teams
+    {
+      get { return _match_info_teams; }
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -1971,6 +2013,24 @@ namespace SteamKit2.GC.CSGO.Internal
     {
       get { return _spectators_count; }
       set { _spectators_count = value; }
+    }
+
+    private uint _spectators_count_tv = default(uint);
+    [global::ProtoBuf.ProtoMember(23, IsRequired = false, Name=@"spectators_count_tv", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint spectators_count_tv
+    {
+      get { return _spectators_count_tv; }
+      set { _spectators_count_tv = value; }
+    }
+
+    private uint _spectators_count_lnk = default(uint);
+    [global::ProtoBuf.ProtoMember(24, IsRequired = false, Name=@"spectators_count_lnk", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint spectators_count_lnk
+    {
+      get { return _spectators_count_lnk; }
+      set { _spectators_count_lnk = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

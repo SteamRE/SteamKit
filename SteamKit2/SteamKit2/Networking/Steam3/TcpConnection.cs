@@ -18,17 +18,21 @@ namespace SteamKit2
     {
         const uint MAGIC = 0x31305456; // "VT01"
 
-        bool isConnected;
-
         Socket sock;
 
+        volatile bool wantsNetShutdown;
         NetworkStream netStream;
+        ReaderWriterLockSlim netLock;
 
         BinaryReader netReader;
         BinaryWriter netWriter;
 
         Thread netThread;
 
+        public TcpConnection() : base()
+        {
+            netLock = new ReaderWriterLockSlim( LockRecursionPolicy.NoRecursion );
+        }
 
         /// <summary>
         /// Connects to the specified end point.
@@ -64,6 +68,7 @@ namespace SteamKit2
         {
             if ( sock == null )
             {
+                DebugLog.WriteLine( "TcpConnection", "Timed out while connecting" );
                 OnDisconnected( EventArgs.Empty );
                 return;
             }
@@ -77,17 +82,25 @@ namespace SteamKit2
 
             DebugLog.WriteLine( "TcpConnection", "Connected!" );
 
-            isConnected = true;
+            netLock.EnterWriteLock();
 
-            netStream = new NetworkStream( sock, false );
+            try
+            {
+                wantsNetShutdown = false;
+                netStream = new NetworkStream( sock, false );
 
-            netReader = new BinaryReader( netStream );
-            netWriter = new BinaryWriter( netStream );
+                netReader = new BinaryReader( netStream );
+                netWriter = new BinaryWriter( netStream );
 
-            // initialize our network thread
-            netThread = new Thread( NetLoop );
-            netThread.Name = "TcpConnection Thread";
-            netThread.Start();
+                // initialize our network thread
+                netThread = new Thread( NetLoop );
+                netThread.Name = "TcpConnection Thread";
+                netThread.Start( sock );
+            }
+            finally
+            {
+                netLock.ExitWriteLock();
+            }
 
             OnConnected( EventArgs.Empty );
         }
@@ -97,10 +110,10 @@ namespace SteamKit2
         /// </summary>
         public override void Disconnect()
         {
-            if ( !isConnected )
+            if ( netThread == null )
                 return;
 
-            isConnected = false;
+            wantsNetShutdown = true;
 
             // wait for our network thread to terminate
             netThread.Join();
@@ -117,12 +130,6 @@ namespace SteamKit2
         /// <param name="clientMsg">The client net message.</param>
         public override void Send( IClientMsg clientMsg )
         {
-            if ( !isConnected )
-            {
-                DebugLog.WriteLine( "TcpConnection", "Attempting to send client message when not connected: {0}", clientMsg.MsgType );
-                return;
-            }
-
             byte[] data = clientMsg.Serialize();
 
             // encrypt outgoing traffic if we need to
@@ -131,34 +138,45 @@ namespace SteamKit2
                 data = NetFilter.ProcessOutgoing( data );
             }
 
-            lock ( sock )
+            netLock.EnterReadLock();
+
+            try
             {
-                // write header
-                netWriter.Write( ( uint )data.Length );
-                netWriter.Write( TcpConnection.MAGIC );
+                if ( netStream == null )
+                {
+                    DebugLog.WriteLine( "TcpConnection", "Attempting to send client message when not connected: {0}", clientMsg.MsgType );
+                    return;
+                }
 
-                netWriter.Write( data );
+                // need to ensure ordering between concurrent Sends
+                lock ( netWriter )
+                {
+                    // write header
+                    netWriter.Write( (uint)data.Length );
+                    netWriter.Write( TcpConnection.MAGIC );
+
+                    netWriter.Write( data );
+                }
             }
-
+            finally
+            {
+                netLock.ExitReadLock();
+            }
         }
 
         // this is now a steamkit meme
         /// <summary>
         /// Nets the loop.
         /// </summary>
-        void NetLoop()
+        void NetLoop( object param )
         {
             // poll for readable data every 100ms
-            const int POLL_MS = 100; 
+            const int POLL_MS = 100;
+            Socket socket = param as Socket;
 
-            while ( true )
+            while ( !wantsNetShutdown )
             {
-                if ( !isConnected )
-                {
-                    break;
-                }
-
-                bool canRead = sock.Poll( POLL_MS * 1000, SelectMode.SelectRead );
+                bool canRead = socket.Poll( POLL_MS * 1000, SelectMode.SelectRead );
 
                 if ( !canRead )
                 {
@@ -166,44 +184,32 @@ namespace SteamKit2
                     continue;
                 }
 
-                // read the packet off the network
-                ReadPacket();
-            }
-        }
+                netLock.EnterUpgradeableReadLock();
+                byte[] packData = null;
 
+                if ( netStream == null )
+                {
+                    break;
+                }
 
-        void ReadPacket()
-        {
-            // the tcp packet header is considerably less complex than the udp one
-            // it only consists of the packet length, followed by the "VT01" magic
-            uint packetLen = 0;
-            uint packetMagic = 0;
-
-            byte[] packData = null;
-
-            try
-            {
                 try
                 {
-                    packetLen = netReader.ReadUInt32();
-                    packetMagic = netReader.ReadUInt32();
+                    // read the packet off the network
+                    packData = ReadPacket();
                 }
                 catch ( IOException ex )
                 {
-                    throw new IOException( "Connection lost while reading packet header.", ex );
+                    DebugLog.WriteLine( "TcpConnection", "Socket exception occurred while reading packet: {0}", ex );
+
+                    // signal that our connection is dead
+                    Cleanup();
+
+                    OnDisconnected( EventArgs.Empty );
+                    return;
                 }
-
-                if ( packetMagic != TcpConnection.MAGIC )
+                finally
                 {
-                    throw new IOException( "Got a packet with invalid magic!" );
-                }
-
-                // rest of the packet is the physical data
-                packData = netReader.ReadBytes( ( int )packetLen );
-
-                if ( packData.Length != packetLen )
-                {
-                    throw new IOException( "Connection lost while reading packet payload" );
+                    netLock.ExitUpgradeableReadLock();
                 }
 
                 // decrypt the data off the wire if needed
@@ -211,64 +217,95 @@ namespace SteamKit2
                 {
                     packData = NetFilter.ProcessIncoming( packData );
                 }
+
+                OnNetMsgReceived( new NetMsgEventArgs( packData, socket.RemoteEndPoint as IPEndPoint ) );
+            }
+        }
+
+
+        byte[] ReadPacket()
+        {
+            // the tcp packet header is considerably less complex than the udp one
+            // it only consists of the packet length, followed by the "VT01" magic
+            uint packetLen = 0;
+            uint packetMagic = 0;
+
+            try
+            {
+                packetLen = netReader.ReadUInt32();
+                packetMagic = netReader.ReadUInt32();
             }
             catch ( IOException ex )
             {
-                DebugLog.WriteLine( "TcpConnection", "Socket exception occurred while reading packet: {0}", ex );
-
-                // signal that our connection is dead
-                isConnected = false;
-
-                Cleanup();
-
-                OnDisconnected( EventArgs.Empty );
-                return;
+                throw new IOException( "Connection lost while reading packet header.", ex );
             }
 
-            OnNetMsgReceived( new NetMsgEventArgs( packData, sock.RemoteEndPoint as IPEndPoint ) );
+            if ( packetMagic != TcpConnection.MAGIC )
+            {
+                throw new IOException( "Got a packet with invalid magic!" );
+            }
+
+            // rest of the packet is the physical data
+            byte[] packData = netReader.ReadBytes( (int)packetLen );
+
+            if ( packData.Length != packetLen )
+            {
+                throw new IOException( "Connection lost while reading packet payload" );
+            }
+
+            return packData;
         }
 
         void Cleanup()
         {
-            // cleanup streams
-            if ( netReader != null )
-            {
-                netReader.Dispose();
-                netReader = null;
-            }
+            netLock.EnterWriteLock();
 
-            if ( netWriter != null )
+            try
             {
-                netWriter.Dispose();
-                netWriter = null;
-            }
-
-            if ( netStream != null )
-            {
-                netStream.Dispose();
-                netStream = null;
-            }
-
-            if ( sock != null )
-            {
-                try
+                // cleanup streams
+                if ( netReader != null )
                 {
-                    // cleanup socket
-                    if ( sock.Connected )
+                    netReader.Dispose();
+                    netReader = null;
+                }
+
+                if ( netWriter != null )
+                {
+                    netWriter.Dispose();
+                    netWriter = null;
+                }
+
+                if ( netStream != null )
+                {
+                    netStream.Dispose();
+                    netStream = null;
+                }
+
+                if ( sock != null )
+                {
+                    try
                     {
-                        sock.Shutdown( SocketShutdown.Both );
-                        sock.Disconnect( true );
+                        // cleanup socket
+                        if ( sock.Connected )
+                        {
+                            sock.Shutdown( SocketShutdown.Both );
+                            sock.Disconnect( true );
+                        }
+                        sock.Close();
                     }
-                    sock.Close();
-                }
-                catch
-                {
-                    // Shutdown is throwing when the remote end closes the connection before SteamKit attempts to
-                    // so this should be safe as a no-op
-                    // see: https://bitbucket.org/VoiDeD/steamre/issue/41/socketexception-thrown-when-closing
-                }
+                    catch
+                    {
+                        // Shutdown is throwing when the remote end closes the connection before SteamKit attempts to
+                        // so this should be safe as a no-op
+                        // see: https://bitbucket.org/VoiDeD/steamre/issue/41/socketexception-thrown-when-closing
+                    }
 
-                sock = null;
+                    sock = null;
+                }
+            }
+            finally
+            {
+                netLock.ExitWriteLock();
             }
         }
 
@@ -279,7 +316,16 @@ namespace SteamKit2
         /// <returns>The local IP.</returns>
         public override IPAddress GetLocalIP()
         {
-            return NetHelpers.GetLocalIP( sock );
+            netLock.EnterReadLock();
+
+            try
+            {
+                return NetHelpers.GetLocalIP( sock );
+            }
+            finally
+            {
+                netLock.ExitReadLock();
+            }
         }
     }
 }

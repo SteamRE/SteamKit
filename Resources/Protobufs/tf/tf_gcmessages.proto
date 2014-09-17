@@ -103,6 +103,7 @@ enum ETFGCMsg {
 	k_EMsgGC_ClientVerificationChallengeResponse = 6501;
 	k_EMsgGC_ClientVerificationVerboseResponse = 6502;
 	k_EMsgGC_ClientSetItemSlotAttribute = 6503;
+	k_EMsgGC_PlayerSkillRating_Adjustment = 6504;
 	k_EMsgGCDev_GrantWarKill = 10001;
 }
 
@@ -326,6 +327,7 @@ message CMsgTFQuickplay_ScoreServersResponse {
 		optional uint32 server_port = 2;
 		optional float total_score = 3;
 		optional uint64 steam_id = 4;
+		optional uint32 options_score = 5;
 	}
 
 	repeated .CMsgTFQuickplay_ScoreServersResponse.ServerInfo servers = 1;
@@ -754,6 +756,7 @@ message CMsgGameServerMatchmakingStatus {
 	optional uint32 mvm_wave = 18;
 	optional uint32 mvm_credits_acquired = 19;
 	optional uint32 mvm_credits_dropped = 20;
+	optional uint32 skillrating_force_average = 21;
 }
 
 message CMsgMatchmakingProgress {
@@ -940,5 +943,20 @@ message CMsgSetItemSlotAttribute {
 	optional uint64 item_id = 1;
 	optional uint64 slot_item_original_id = 2;
 	optional uint32 slot_index = 3;
+}
+
+message CGCMsgTFPlayerSkillRatingAdjustment {
+	message Player {
+		optional fixed64 steam_id = 1;
+		optional int32 adjustment = 3;
+	}
+
+	enum MatchType {
+		PUBLIC = 0;
+		BETA = 1;
+	}
+
+	repeated .CGCMsgTFPlayerSkillRatingAdjustment.Player players = 1;
+	optional .CGCMsgTFPlayerSkillRatingAdjustment.MatchType match_type = 2 [default = PUBLIC];
 }
 

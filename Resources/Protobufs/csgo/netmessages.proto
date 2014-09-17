@@ -293,6 +293,7 @@ message CSVCMsg_VoiceData {
 	optional fixed64 xuid = 3;
 	optional int32 audible_mask = 4;
 	optional bytes voice_data = 5;
+	optional bool caster = 6;
 }
 
 message CSVCMsg_FixAngle {

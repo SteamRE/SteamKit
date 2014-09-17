@@ -275,8 +275,15 @@ message CDataGCCStrike15_v2_TournamentMatchDraft {
 }
 
 message CPreMatchInfoData {
+	message TeamStats {
+		optional int32 match_info_idxtxt = 1;
+		optional string match_info_txt = 2;
+		repeated string match_info_teams = 3;
+	}
+
 	optional int32 predictions_pct = 1;
 	optional .CDataGCCStrike15_v2_TournamentMatchDraft draft = 4;
+	repeated .CPreMatchInfoData.TeamStats stats = 5;
 }
 
 message CMsgGCCStrike15_v2_MatchmakingGC2ServerReserve {
@@ -345,6 +352,8 @@ message CMsgGCCStrike15_v2_MatchmakingServerRoundStats {
 	repeated int32 enemy_5ks = 20;
 	repeated int32 mvps = 21;
 	optional uint32 spectators_count = 22;
+	optional uint32 spectators_count_tv = 23;
+	optional uint32 spectators_count_lnk = 24;
 }
 
 message CMsgGCCStrike15_v2_MatchmakingServerMatchEnd {
