@@ -37,6 +37,11 @@ namespace SteamKit2
             /// <value>The auth code.</value>
             public string AuthCode { get; set; }
             /// <summary>
+            /// Gets or sets the 2-factor auth code used to login. This is the code that can be received from the authenticator apps.
+            /// </summary>
+            /// <value>The two factor auth code.</value>
+            public string TwoFactorCode { get; set; }
+            /// <summary>
             /// Gets or sets the sentry file hash for this logon attempt, or null if no sentry file is available.
             /// </summary>
             /// <value>The sentry file hash.</value>
@@ -235,6 +240,7 @@ namespace SteamKit2
 
             // steam guard 
             logon.Body.auth_code = details.AuthCode;
+            logon.Body.two_factor_code = details.TwoFactorCode;
 
             logon.Body.sha_sentryfile = details.SentryFileHash;
             logon.Body.eresult_sentryfile = ( int )( details.SentryFileHash != null ? EResult.OK : EResult.FileNotFound );

@@ -110,18 +110,7 @@ namespace SteamKit2
         /// </summary>
         public override void Disconnect()
         {
-            if ( netThread == null )
-                return;
-
-            wantsNetShutdown = true;
-
-            // wait for our network thread to terminate
-            netThread.Join();
-            netThread = null;
-
-            Cleanup();
-
-            OnDisconnected( EventArgs.Empty );
+            Cleanup();            
         }
 
         /// <summary>
@@ -203,8 +192,6 @@ namespace SteamKit2
 
                     // signal that our connection is dead
                     Cleanup();
-
-                    OnDisconnected( EventArgs.Empty );
                     return;
                 }
                 finally
@@ -262,6 +249,19 @@ namespace SteamKit2
 
             try
             {
+                if ( netThread != null )
+                {
+                    if ( Thread.CurrentThread != netThread )
+                    {
+                        wantsNetShutdown = true;
+                        // wait for our network thread to terminate
+                        netThread.Join();
+                    }
+
+                    netThread = null;
+                    OnDisconnected( EventArgs.Empty );
+                }
+
                 // cleanup streams
                 if ( netReader != null )
                 {
