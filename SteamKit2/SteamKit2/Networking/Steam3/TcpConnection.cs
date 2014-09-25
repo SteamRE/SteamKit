@@ -110,18 +110,7 @@ namespace SteamKit2
         /// </summary>
         public override void Disconnect()
         {
-            if ( netThread == null )
-                return;
-
-            wantsNetShutdown = true;
-
-            // wait for our network thread to terminate
-            netThread.Join();
-            netThread = null;
-
-            Cleanup();
-
-            OnDisconnected( EventArgs.Empty );
+            Cleanup();            
         }
 
         /// <summary>
@@ -203,8 +192,6 @@ namespace SteamKit2
 
                     // signal that our connection is dead
                     Cleanup();
-
-                    OnDisconnected( EventArgs.Empty );
                     return;
                 }
                 finally
@@ -258,7 +245,27 @@ namespace SteamKit2
 
         void Cleanup()
         {
-            netLock.EnterWriteLock();
+            // try to acquire write lock unless someone is holding the write lock waiting for us to shutdown
+            while (!netLock.TryEnterWriteLock(500))
+            {
+                if (Thread.CurrentThread == netThread && wantsNetShutdown)
+                {
+                    return;
+                }
+            }
+
+            if (netThread != null)
+            {
+                if (Thread.CurrentThread != netThread)
+                {
+                    wantsNetShutdown = true;
+                    // wait for our network thread to terminate
+                    netThread.Join();
+                }
+
+                netThread = null;
+                OnDisconnected(EventArgs.Empty);
+            }
 
             try
             {
