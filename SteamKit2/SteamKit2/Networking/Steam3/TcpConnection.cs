@@ -245,30 +245,23 @@ namespace SteamKit2
 
         void Cleanup()
         {
-            // try to acquire write lock unless someone is holding the write lock waiting for us to shutdown
-            while (!netLock.TryEnterWriteLock(500))
-            {
-                if (Thread.CurrentThread == netThread && wantsNetShutdown)
-                {
-                    return;
-                }
-            }
-
-            if (netThread != null)
-            {
-                if (Thread.CurrentThread != netThread)
-                {
-                    wantsNetShutdown = true;
-                    // wait for our network thread to terminate
-                    netThread.Join();
-                }
-
-                netThread = null;
-                OnDisconnected(EventArgs.Empty);
-            }
+            netLock.EnterWriteLock();
 
             try
             {
+                if ( netThread != null )
+                {
+                    if ( Thread.CurrentThread != netThread )
+                    {
+                        wantsNetShutdown = true;
+                        // wait for our network thread to terminate
+                        netThread.Join();
+                    }
+
+                    netThread = null;
+                    OnDisconnected( EventArgs.Empty );
+                }
+
                 // cleanup streams
                 if ( netReader != null )
                 {
