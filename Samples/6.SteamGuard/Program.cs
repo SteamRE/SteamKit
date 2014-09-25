@@ -49,7 +49,7 @@ namespace Sample6_SteamGuard
         static bool isRunning;
 
         static string user, pass;
-        static string authCode;
+        static string authCode, twoFactorAuth;
 
 
         static void Main( string[] args )
@@ -128,6 +128,10 @@ namespace Sample6_SteamGuard
                 // this value will be null (which is the default) for our first logon attempt
                 AuthCode = authCode,
 
+                // if the account is using 2-factor auth, we'll provide the two factor code instead
+                // this will also be null on our first logon attempt
+                TwoFactorCode = twoFactorAuth,
+
                 // our subsequent logons use the hash of the sentry file as proof of ownership of the file
                 // this will also be null for our first (no authcode) and second (authcode only) logon attempts
                 SentryFileHash = sentryHash,
@@ -148,12 +152,24 @@ namespace Sample6_SteamGuard
 
         static void OnLoggedOn( SteamUser.LoggedOnCallback callback )
         {
-            if ( callback.Result == EResult.AccountLogonDenied )
+            bool isSteamGuard = callback.Result == EResult.AccountLogonDenied;
+            bool is2FA = callback.Result == EResult.AccountLogonDeniedNeedTwoFactorCode;
+
+            if ( isSteamGuard || is2FA )
             {
                 Console.WriteLine( "This account is SteamGuard protected!" );
-                Console.Write( "Please enter the auth code sent to the email at {0}: ", callback.EmailDomain );
 
-                authCode = Console.ReadLine();
+                if ( is2FA )
+                {
+                    Console.Write( "Please enter your 2 factor auth code from your authenticator app: " );
+                    twoFactorAuth = Console.ReadLine();
+                }
+                else
+                {
+                    Console.Write( "Please enter the auth code sent to the email at {0}: ", callback.EmailDomain );
+                    authCode = Console.ReadLine();
+                }
+
                 return;
             }
 
