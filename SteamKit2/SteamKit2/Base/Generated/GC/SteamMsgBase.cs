@@ -1392,6 +1392,68 @@ namespace SteamKit2.GC.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGCMsgGetIPASN")]
+  public partial class CGCMsgGetIPASN : global::ProtoBuf.IExtensible
+  {
+    public CGCMsgGetIPASN() {}
+    
+    private readonly global::System.Collections.Generic.List<uint> _ips = new global::System.Collections.Generic.List<uint>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"ips", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public global::System.Collections.Generic.List<uint> ips
+    {
+      get { return _ips; }
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CIPASNInfo")]
+  public partial class CIPASNInfo : global::ProtoBuf.IExtensible
+  {
+    public CIPASNInfo() {}
+    
+
+    private uint _ip = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"ip", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint ip
+    {
+      get { return _ip; }
+      set { _ip = value; }
+    }
+
+    private uint _asn = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"asn", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint asn
+    {
+      get { return _asn; }
+      set { _asn = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGCMsgGetIPASNResponse")]
+  public partial class CGCMsgGetIPASNResponse : global::ProtoBuf.IExtensible
+  {
+    public CGCMsgGetIPASNResponse() {}
+    
+    private readonly global::System.Collections.Generic.List<CIPASNInfo> _infos = new global::System.Collections.Generic.List<CIPASNInfo>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"infos", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CIPASNInfo> infos
+    {
+      get { return _infos; }
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGCMsgSystemStatsSchema")]
   public partial class CGCMsgSystemStatsSchema : global::ProtoBuf.IExtensible
   {

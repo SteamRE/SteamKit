@@ -11,7 +11,7 @@ enum EDOTAGCMsg {
 	k_EMsgGCOtherJoinedChannel = 7013;
 	k_EMsgGCOtherLeftChannel = 7014;
 	k_EMsgGCMatchHistoryList = 7017;
-	k_EMsgGCStatus = 7026;
+	k_EMsgServerToGCRequestStatus = 7026;
 	k_EMsgGCGetRecentMatches = 7027;
 	k_EMsgGCRecentMatchesResponse = 7028;
 	k_EMsgGCFindSourceTVGames = 7031;
@@ -475,6 +475,8 @@ enum EDOTAGCMsg {
 	k_EMsgClientToGCMarkNotificationListRead = 7542;
 	k_EMsgGCToClientNewNotificationAdded = 7543;
 	k_EMsgServerToGCSuspiciousActivity = 7544;
+	k_EMsgSignOutCommunicationSummary = 7545;
+	k_EMsgServerToGCRequestStatus_Response = 7546;
 	k_EMsgGCDev_GrantWarKill = 8001;
 }
 
@@ -501,6 +503,7 @@ enum DOTA_GameMode {
 	DOTA_GAMEMODE_EVENT = 19;
 	DOTA_GAMEMODE_ARDM = 20;
 	DOTA_GAMEMODE_1V1MID = 21;
+	DOTA_GAMEMODE_ALL_DRAFT = 22;
 }
 
 enum DOTA_GameState {
@@ -853,7 +856,7 @@ message CDOTASaveGame {
 		optional uint32 save_time = 7;
 	}
 
-	optional uint32 match_id = 5;
+	optional uint64 match_id = 5;
 	optional uint32 save_time = 2;
 	repeated .CDOTASaveGame.Player players = 3;
 	repeated .CDOTASaveGame.SaveInstance save_instances = 4;
@@ -984,7 +987,7 @@ message CSODOTALobby {
 	optional uint32 num_spectators = 23;
 	optional uint32 matchgroup = 25;
 	optional .DOTA_CM_PICK cm_pick = 28 [default = DOTA_CM_RANDOM];
-	optional uint32 match_id = 30;
+	optional uint64 match_id = 30;
 	optional bool allow_spectating = 31 [default = true];
 	optional .DOTABotDifficulty bot_difficulty = 36 [default = BOT_DIFFICULTY_HARD];
 	optional .DOTAGameVersion game_version = 37 [default = GAME_VERSION_CURRENT];
@@ -1259,6 +1262,8 @@ message CMsgDOTACombatLogEntry {
 	optional float location_y = 22;
 	optional uint32 gold_reason = 23;
 	optional float timestamp_raw = 24;
+	optional float modifier_duration = 25;
+	optional uint32 xp_reason = 26;
 }
 
 message CMsgDOTAProfileCard {

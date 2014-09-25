@@ -2124,10 +2124,10 @@ namespace SteamKit2.GC.Dota.Internal
       set { _lobby_id = value; }
     }
 
-    private uint _match_id = default(uint);
+    private ulong _match_id = default(ulong);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"match_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint match_id
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong match_id
     {
       get { return _match_id; }
       set { _match_id = value; }
@@ -2420,10 +2420,10 @@ namespace SteamKit2.GC.Dota.Internal
     }
   
 
-    private uint _match_id = default(uint);
+    private ulong _match_id = default(ulong);
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"match_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint match_id
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong match_id
     {
       get { return _match_id; }
       set { _match_id = value; }
@@ -3251,9 +3251,9 @@ namespace SteamKit2.GC.Dota.Internal
   {
     public CMsgDOTAPlayerMatchHistory() {}
     
-    private readonly global::System.Collections.Generic.List<uint> _match_ids = new global::System.Collections.Generic.List<uint>();
+    private readonly global::System.Collections.Generic.List<ulong> _match_ids = new global::System.Collections.Generic.List<ulong>();
     [global::ProtoBuf.ProtoMember(1, Name=@"match_ids", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public global::System.Collections.Generic.List<uint> match_ids
+    public global::System.Collections.Generic.List<ulong> match_ids
     {
       get { return _match_ids; }
     }
@@ -3268,18 +3268,18 @@ namespace SteamKit2.GC.Dota.Internal
   {
     public CMsgDOTAMatchHistoryFilter() {}
     
-    private readonly global::System.Collections.Generic.List<uint> _match_ids = new global::System.Collections.Generic.List<uint>();
+    private readonly global::System.Collections.Generic.List<ulong> _match_ids = new global::System.Collections.Generic.List<ulong>();
     [global::ProtoBuf.ProtoMember(1, Name=@"match_ids", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public global::System.Collections.Generic.List<uint> match_ids
+    public global::System.Collections.Generic.List<ulong> match_ids
     {
       get { return _match_ids; }
     }
   
 
-    private uint _newest_match_id_at_last_query = default(uint);
+    private ulong _newest_match_id_at_last_query = default(ulong);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"newest_match_id_at_last_query", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint newest_match_id_at_last_query
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong newest_match_id_at_last_query
     {
       get { return _newest_match_id_at_last_query; }
       set { _newest_match_id_at_last_query = value; }
@@ -3349,10 +3349,10 @@ namespace SteamKit2.GC.Dota.Internal
       set { _matches_requested = value; }
     }
 
-    private uint _start_at_match_id = default(uint);
+    private ulong _start_at_match_id = default(ulong);
     [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"start_at_match_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint start_at_match_id
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong start_at_match_id
     {
       get { return _start_at_match_id; }
       set { _start_at_match_id = value; }
@@ -3569,6 +3569,15 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _int_data; }
       set { _int_data = value; }
     }
+
+    private byte[] _popup_data = null;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"popup_data", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public byte[] popup_data
+    {
+      get { return _popup_data; }
+      set { _popup_data = value; }
+    }
     [global::ProtoBuf.ProtoContract(Name=@"PopupID", EnumPassthru=true)]
     public enum PopupID
     {
@@ -3718,7 +3727,25 @@ namespace SteamKit2.GC.Dota.Internal
       WEEKEND_TOURNEY_REGISTRATION_NOT_OPEN = 47,
             
       [global::ProtoBuf.ProtoEnum(Name=@"WEEKEND_TOURNEY_UNMATCHED", Value=48)]
-      WEEKEND_TOURNEY_UNMATCHED = 48
+      WEEKEND_TOURNEY_UNMATCHED = 48,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"POST_MATCH_SURVEY", Value=49)]
+      POST_MATCH_SURVEY = 49,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"TROPHY_AWARDED", Value=50)]
+      TROPHY_AWARDED = 50,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"TROPHY_LEVEL_UP", Value=51)]
+      TROPHY_LEVEL_UP = 51,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"ALL_HERO_CHALLENGE_PROGRESS", Value=52)]
+      ALL_HERO_CHALLENGE_PROGRESS = 52,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"NEED_INITIAL_SKILL", Value=53)]
+      NEED_INITIAL_SKILL = 53,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"NEED_INITIAL_SKILL_IN_PARTY", Value=54)]
+      NEED_INITIAL_SKILL_IN_PARTY = 54
     }
   
     private global::ProtoBuf.IExtension extensionObject;
@@ -7575,10 +7602,10 @@ namespace SteamKit2.GC.Dota.Internal
     public CMsgGCMatchDetailsRequest() {}
     
 
-    private uint _match_id = default(uint);
+    private ulong _match_id = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"match_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint match_id
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong match_id
     {
       get { return _match_id; }
       set { _match_id = value; }
@@ -8378,10 +8405,10 @@ namespace SteamKit2.GC.Dota.Internal
     public CMsgDOTAMatchVotes() {}
     
 
-    private uint _match_id = default(uint);
+    private ulong _match_id = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"match_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint match_id
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong match_id
     {
       get { return _match_id; }
       set { _match_id = value; }
@@ -8432,10 +8459,10 @@ namespace SteamKit2.GC.Dota.Internal
     public CMsgCastMatchVote() {}
     
 
-    private uint _match_id = default(uint);
+    private ulong _match_id = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"match_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint match_id
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong match_id
     {
       get { return _match_id; }
       set { _match_id = value; }
@@ -8460,10 +8487,10 @@ namespace SteamKit2.GC.Dota.Internal
     public CMsgRetrieveMatchVote() {}
     
 
-    private uint _match_id = default(uint);
+    private ulong _match_id = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"match_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint match_id
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong match_id
     {
       get { return _match_id; }
       set { _match_id = value; }
@@ -8637,10 +8664,10 @@ namespace SteamKit2.GC.Dota.Internal
       set { _gold_per_min = value; }
     }
 
-    private uint _match_id = default(uint);
+    private ulong _match_id = default(ulong);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"match_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint match_id
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong match_id
     {
       get { return _match_id; }
       set { _match_id = value; }
@@ -9449,10 +9476,10 @@ namespace SteamKit2.GC.Dota.Internal
     public CMsgUpgradeLeagueItem() {}
     
 
-    private uint _match_id = default(uint);
+    private ulong _match_id = default(ulong);
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"match_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint match_id
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong match_id
     {
       get { return _match_id; }
       set { _match_id = value; }
@@ -11176,10 +11203,10 @@ namespace SteamKit2.GC.Dota.Internal
       set { _account_id = value; }
     }
 
-    private uint _start_at_match_id = default(uint);
+    private ulong _start_at_match_id = default(ulong);
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"start_at_match_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint start_at_match_id
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong start_at_match_id
     {
       get { return _start_at_match_id; }
       set { _start_at_match_id = value; }
