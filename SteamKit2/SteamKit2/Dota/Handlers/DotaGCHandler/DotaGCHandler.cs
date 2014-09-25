@@ -162,6 +162,7 @@ namespace SteamKit2
             create.Body.tournament_game = tournament_game;
             create.Body.tournament_id = tournament;
             create.Body.lobby_details = details;
+            create.Body.lobby_details.pass_key = pass_key;
             Send(create, 570);
         }
 
