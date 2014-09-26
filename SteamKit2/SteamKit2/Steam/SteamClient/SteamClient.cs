@@ -97,6 +97,11 @@ namespace SteamKit2
             this.RemoveHandler( handler.GetType() );
         }
 
+        public void ClearHandlers()
+        {
+            handlers.Clear();
+        }
+
         /// <summary>
         /// Returns a registered handler.
         /// </summary>
@@ -255,7 +260,6 @@ namespace SteamKit2
             };
         }
 
-
         /// <summary>
         /// Called when a client message is received from the network.
         /// </summary>
@@ -321,6 +325,5 @@ namespace SteamKit2
 
             PostCallback( new ServerListCallback( listMsg.Body ) );
         }
-
     }
 }
