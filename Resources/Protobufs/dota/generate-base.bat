@@ -15,4 +15,5 @@ echo Building Dota messages...
 :: dota messages reference some types from the gc base, so we need to import the reference for it
 ..\..\Protogen\protogen -s:..\ -i:"dota_gcmessages_common.proto" -o:"..\..\..\SteamKit2\SteamKit2\Base\Generated\GC\Dota\MsgGCCommon.cs" -t:csharp -ns:"SteamKit2.GC.Dota.Internal" -p:import="SteamKit2.GC.Internal"
 ..\..\Protogen\protogen -s:..\ -i:"dota_gcmessages_client.proto" -o:"..\..\..\SteamKit2\SteamKit2\Base\Generated\GC\Dota\MsgGCClient.cs" -t:csharp -ns:"SteamKit2.GC.Dota.Internal" -p:import="SteamKit2.GC.Internal"
+..\..\Protogen\protogen -s:..\ -i:"dota_gcmessages_client_fantasy.proto" -o:"..\..\..\SteamKit2\SteamKit2\Base\Generated\GC\Dota\MsgGCClientFantasy.cs" -t:csharp -ns:"SteamKit2.GC.Dota.Internal" -p:import="SteamKit2.GC.Internal"
 ..\..\Protogen\protogen -s:..\ -i:"dota_gcmessages_server.proto" -o:"..\..\..\SteamKit2\SteamKit2\Base\Generated\GC\Dota\MsgGCServer.cs" -t:csharp -ns:"SteamKit2.GC.Dota.Internal" -p:import="SteamKit2.GC.Internal"
