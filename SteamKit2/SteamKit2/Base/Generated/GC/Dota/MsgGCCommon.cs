@@ -814,10 +814,10 @@ namespace SteamKit2.GC.Dota.Internal
     public CDOTASaveGame() {}
     
 
-    private uint _match_id = default(uint);
+    private ulong _match_id = default(ulong);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"match_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint match_id
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong match_id
     {
       get { return _match_id; }
       set { _match_id = value; }
@@ -1722,10 +1722,10 @@ namespace SteamKit2.GC.Dota.Internal
       set { _cm_pick = value; }
     }
 
-    private uint _match_id = default(uint);
+    private ulong _match_id = default(ulong);
     [global::ProtoBuf.ProtoMember(30, IsRequired = false, Name=@"match_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint match_id
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong match_id
     {
       get { return _match_id; }
       set { _match_id = value; }
@@ -3551,6 +3551,24 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _timestamp_raw; }
       set { _timestamp_raw = value; }
     }
+
+    private float _modifier_duration = default(float);
+    [global::ProtoBuf.ProtoMember(25, IsRequired = false, Name=@"modifier_duration", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(float))]
+    public float modifier_duration
+    {
+      get { return _modifier_duration; }
+      set { _modifier_duration = value; }
+    }
+
+    private uint _xp_reason = default(uint);
+    [global::ProtoBuf.ProtoMember(26, IsRequired = false, Name=@"xp_reason", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint xp_reason
+    {
+      get { return _xp_reason; }
+      set { _xp_reason = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -3769,8 +3787,8 @@ namespace SteamKit2.GC.Dota.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCMatchHistoryList", Value=7017)]
       k_EMsgGCMatchHistoryList = 7017,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCStatus", Value=7026)]
-      k_EMsgGCStatus = 7026,
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgServerToGCRequestStatus", Value=7026)]
+      k_EMsgServerToGCRequestStatus = 7026,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCGetRecentMatches", Value=7027)]
       k_EMsgGCGetRecentMatches = 7027,
@@ -5161,6 +5179,12 @@ namespace SteamKit2.GC.Dota.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgServerToGCSuspiciousActivity", Value=7544)]
       k_EMsgServerToGCSuspiciousActivity = 7544,
             
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgSignOutCommunicationSummary", Value=7545)]
+      k_EMsgSignOutCommunicationSummary = 7545,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgServerToGCRequestStatus_Response", Value=7546)]
+      k_EMsgServerToGCRequestStatus_Response = 7546,
+            
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCDev_GrantWarKill", Value=8001)]
       k_EMsgGCDev_GrantWarKill = 8001
     }
@@ -5233,7 +5257,10 @@ namespace SteamKit2.GC.Dota.Internal
       DOTA_GAMEMODE_ARDM = 20,
             
       [global::ProtoBuf.ProtoEnum(Name=@"DOTA_GAMEMODE_1V1MID", Value=21)]
-      DOTA_GAMEMODE_1V1MID = 21
+      DOTA_GAMEMODE_1V1MID = 21,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_GAMEMODE_ALL_DRAFT", Value=22)]
+      DOTA_GAMEMODE_ALL_DRAFT = 22
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"DOTA_GameState", EnumPassthru=true)]
