@@ -242,6 +242,19 @@ message CGCMsgGetIPLocationResponse {
 	repeated .CIPLocationInfo infos = 1;
 }
 
+message CGCMsgGetIPASN {
+	repeated fixed32 ips = 1;
+}
+
+message CIPASNInfo {
+	optional fixed32 ip = 1;
+	optional uint32 asn = 2;
+}
+
+message CGCMsgGetIPASNResponse {
+	repeated .CIPASNInfo infos = 1;
+}
+
 message CGCMsgSystemStatsSchema {
 	optional uint32 gc_app_id = 1;
 	optional bytes schema_kv = 2;
