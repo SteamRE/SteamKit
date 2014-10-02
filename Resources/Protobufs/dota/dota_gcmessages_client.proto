@@ -498,7 +498,7 @@ message CMsgDOTATournament {
 		optional uint32 good_team_seed = 12;
 		optional uint32 bad_team_seed = 13;
 		optional fixed64 lobby_id = 4;
-		optional uint32 match_id = 5;
+		optional uint64 match_id = 5;
 		optional string game_name = 6;
 		optional bool live_stream = 7;
 		optional string message = 9;
@@ -620,7 +620,7 @@ message CMsgDOTAMatch {
 	optional uint32 duration = 3;
 	optional fixed32 startTime = 4;
 	repeated .CMsgDOTAMatch.Player players = 5;
-	optional uint32 match_id = 6;
+	optional uint64 match_id = 6;
 	repeated uint32 tower_status = 8;
 	repeated uint32 barracks_status = 9;
 	optional uint32 cluster = 10;
@@ -658,12 +658,12 @@ message CMsgDOTAMatch {
 }
 
 message CMsgDOTAPlayerMatchHistory {
-	repeated uint32 match_ids = 1;
+	repeated uint64 match_ids = 1;
 }
 
 message CMsgDOTAMatchHistoryFilter {
-	repeated uint32 match_ids = 1;
-	optional uint32 newest_match_id_at_last_query = 2;
+	repeated uint64 match_ids = 1;
+	optional uint64 newest_match_id_at_last_query = 2;
 	optional uint32 time_last_query = 3;
 }
 
@@ -680,7 +680,7 @@ message CMsgDOTARequestMatches {
 	optional fixed32 date_min = 6;
 	optional fixed32 date_max = 7;
 	optional uint32 matches_requested = 10;
-	optional uint32 start_at_match_id = 11;
+	optional uint64 start_at_match_id = 11;
 	optional fixed32 min_players = 12;
 	optional uint32 request_id = 13;
 	optional bool tournament_games_only = 14;
@@ -756,11 +756,18 @@ message CMsgDOTAPopup {
 		MM_1V1_NO_LOW_PRIORITY = 46;
 		WEEKEND_TOURNEY_REGISTRATION_NOT_OPEN = 47;
 		WEEKEND_TOURNEY_UNMATCHED = 48;
+		POST_MATCH_SURVEY = 49;
+		TROPHY_AWARDED = 50;
+		TROPHY_LEVEL_UP = 51;
+		ALL_HERO_CHALLENGE_PROGRESS = 52;
+		NEED_INITIAL_SKILL = 53;
+		NEED_INITIAL_SKILL_IN_PARTY = 54;
 	}
 
 	optional .CMsgDOTAPopup.PopupID id = 1 [default = KICKED_FROM_LOBBY];
 	optional string custom_text = 2;
 	optional sint32 int_data = 3;
+	optional bytes popup_data = 4;
 }
 
 message CMsgDOTATeamMemberSDO {
@@ -1508,7 +1515,7 @@ message CMsgPartyLeaderWatchGamePrompt {
 }
 
 message CMsgGCMatchDetailsRequest {
-	optional uint32 match_id = 1;
+	optional uint64 match_id = 1;
 }
 
 message CMsgGCMatchDetailsResponse {
@@ -1646,17 +1653,17 @@ message CMsgDOTAMatchVotes {
 		optional uint32 vote = 2;
 	}
 
-	optional uint32 match_id = 1;
+	optional uint64 match_id = 1;
 	repeated .CMsgDOTAMatchVotes.PlayerVote votes = 2;
 }
 
 message CMsgCastMatchVote {
-	optional uint32 match_id = 1;
+	optional uint64 match_id = 1;
 	optional .DOTAMatchVote vote = 2 [default = DOTAMatchVote_INVALID];
 }
 
 message CMsgRetrieveMatchVote {
-	optional uint32 match_id = 1;
+	optional uint64 match_id = 1;
 	optional uint32 incremental = 2;
 }
 
@@ -1679,7 +1686,7 @@ message CMsgDOTAHallOfFame {
 		optional uint32 account_id = 1;
 		optional uint32 hero_id = 2;
 		optional uint32 gold_per_min = 3;
-		optional uint32 match_id = 4;
+		optional uint64 match_id = 4;
 	}
 
 	optional uint32 week = 1;
@@ -1829,7 +1836,7 @@ message CMsgDOTASetProfilePrivacyResponse {
 }
 
 message CMsgUpgradeLeagueItem {
-	optional uint32 match_id = 1;
+	optional uint64 match_id = 1;
 	optional uint32 league_id = 2;
 }
 
@@ -2138,7 +2145,7 @@ message CMsgDOTACompendiumDataResponse {
 
 message CMsgDOTAGetPlayerMatchHistory {
 	optional uint32 account_id = 1;
-	optional uint32 start_at_match_id = 2;
+	optional uint64 start_at_match_id = 2;
 	optional uint32 matches_requested = 3;
 	optional uint32 hero_id = 4;
 	optional uint32 request_id = 5;

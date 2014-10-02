@@ -211,7 +211,7 @@ message CMsgDOTAFantasyTeamScoreRequest {
 	optional uint32 fantasy_league_id = 1;
 	optional uint32 owner_account_id = 2;
 	optional uint32 fantasy_team_index = 3;
-	optional uint32 filter_match_id = 4;
+	optional uint64 filter_match_id = 4;
 	optional uint32 filter_start_time = 5;
 	optional uint32 filter_end_time = 6;
 	optional bool include_bench = 7;
@@ -240,7 +240,7 @@ message CMsgDOTAFantasyTeamStandingsRequest {
 	optional uint32 count = 2;
 	optional uint32 filter_start_time = 3;
 	optional uint32 filter_end_time = 4;
-	optional uint32 filter_match_id = 5;
+	optional uint64 filter_match_id = 5;
 	optional bool filter_last_match = 6;
 	optional bool filter_in_hall = 7;
 }
@@ -275,7 +275,7 @@ message CMsgDOTAFantasyPlayerScoreRequest {
 	optional uint32 player_account_id = 2;
 	optional uint32 filter_start_time = 3;
 	optional uint32 filter_end_time = 4;
-	optional uint32 filter_match_id = 5;
+	optional uint64 filter_match_id = 5;
 	optional bool filter_last_match = 6;
 }
 
@@ -299,7 +299,7 @@ message CMsgDOTAFantasyPlayerStandingsRequest {
 	optional uint32 role = 3;
 	optional uint32 filter_start_time = 4;
 	optional uint32 filter_end_time = 5;
-	optional uint32 filter_match_id = 6;
+	optional uint64 filter_match_id = 6;
 	optional bool filter_last_match = 7;
 }
 
@@ -672,7 +672,7 @@ message CMsgDOTAFantasyPlayerScoreDetailsRequest {
 
 message CMsgDOTAFantasyPlayerScoreDetailsResponse {
 	message PlayerMatchData {
-		optional uint32 match_id = 1;
+		optional uint64 match_id = 1;
 		optional uint32 series_id = 2;
 		optional uint32 series_num = 3;
 		optional uint32 series_type = 4;
