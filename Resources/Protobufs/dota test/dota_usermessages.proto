@@ -72,6 +72,8 @@ enum EDotaUserMessages {
 	DOTA_UM_StatsMatchDetails = 130;
 	DOTA_UM_MiniTaunt = 131;
 	DOTA_UM_BuyBackStateAlert = 132;
+	DOTA_UM_QuickBuyAlert = 133;
+	DOTA_UM_StatsHeroDetails = 134;
 }
 
 enum DOTA_CHAT_MESSAGE {
@@ -174,6 +176,7 @@ enum DOTA_ABILITY_PING_TYPE {
 	ABILITY_PING_READY = 1;
 	ABILITY_PING_MANA = 2;
 	ABILITY_PING_COOLDOWN = 3;
+	ABILITY_PING_ENEMY = 4;
 }
 
 enum EDotaEntityMessages {
@@ -219,6 +222,31 @@ enum DOTA_OVERHEAD_ALERT {
 	OVERHEAD_ALERT_LAST_HIT_EARLY = 13;
 	OVERHEAD_ALERT_LAST_HIT_CLOSE = 14;
 	OVERHEAD_ALERT_LAST_HIT_MISS = 15;
+}
+
+enum EHeroStatType {
+	k_EHeroStatType_None = 0;
+	k_EHeroStatType_AxeTotalDamage = 2000;
+	k_EHeroStatType_BattleHungerDamage = 2001;
+	k_EHeroStatType_CounterHelixDamage = 2002;
+	k_EHeroStatType_CullingBladeDamage = 2003;
+	k_EHeroStatType_BerserkersCallCastCount = 2004;
+	k_EHeroStatType_BerserkersCallHeroesHitAverage = 2005;
+	k_EHeroStatType_BerserkersCallOtherUnitsHit = 2006;
+	k_EHeroStatType_BerserkersCallHeroAttacksTaken = 2007;
+	k_EHeroStatType_BerserkersCallOtherAttacksTaken = 2008;
+	k_EHeroStatType_BattleHungerCastCount = 2009;
+	k_EHeroStatType_BattleHungerPotentialDuration = 2010;
+	k_EHeroStatType_BattleHungerAverageDuration = 2011;
+	k_EHeroStatType_CounterHelixProcCount = 2012;
+	k_EHeroStatType_CounterHelixHeroProcCount = 2013;
+	k_EHeroStatType_CounterHelixHeroesHitAverage = 2014;
+	k_EHeroStatType_CounterHelixOtherUnitsHitCount = 2015;
+	k_EHeroStatType_CullingBladeCastCount = 2016;
+	k_EHeroStatType_CullingBladeKillCount = 2017;
+	k_EHeroStatType_CullingBladeAverageHealthCulled = 2018;
+	k_EHeroStatType_CullingBladeAverageDamageAvailable = 2019;
+	k_EHeroStatType_CullingBladeHeroBuffAverage = 2020;
 }
 
 message CDOTAUserMsg_AIDebugLine {
@@ -304,10 +332,17 @@ message CDOTAUserMsg_EnemyItemAlert {
 message CDOTAUserMsg_WillPurchaseAlert {
 	optional int32 itemid = 1;
 	optional int32 player_id = 2;
+	optional uint32 gold_remaining = 3;
 }
 
 message CDOTAUserMsg_BuyBackStateAlert {
 	optional int32 player_id = 1;
+}
+
+message CDOTAUserMsg_QuickBuyAlert {
+	optional int32 player_id = 1;
+	optional int32 itemid = 2;
+	optional int32 gold_required = 3;
 }
 
 message CDOTAUserMsg_CourierKilledAlert {
@@ -720,6 +755,11 @@ message CDOTAUserMsg_AbilitySteal {
 	optional uint32 ability_level = 3;
 }
 
+message CDOTAUserMsg_StatsHeroLookup {
+	optional int32 player_id = 1;
+	optional int32 hero_id = 2;
+}
+
 message CDOTAUserMsg_StatsHeroMinuteDetails {
 	optional uint32 last_hits = 1;
 	optional uint32 hero_kills = 2;
@@ -757,13 +797,30 @@ message CDOTAUserMsg_StatsKillDetails {
 }
 
 message CDOTAUserMsg_StatsMatchDetails {
-	repeated .CDOTAUserMsg_StatsTeamMinuteDetails radiant_stats = 1;
-	repeated .CDOTAUserMsg_StatsTeamMinuteDetails dire_stats = 2;
-	repeated .CDOTAUserMsg_StatsKillDetails radiant_kills = 3;
-	repeated .CDOTAUserMsg_StatsKillDetails dire_kills = 4;
+	repeated .CDOTAUserMsg_StatsHeroLookup hero_lookup = 1;
+	repeated .CDOTAUserMsg_StatsTeamMinuteDetails radiant_stats = 2;
+	repeated .CDOTAUserMsg_StatsTeamMinuteDetails dire_stats = 3;
+	repeated .CDOTAUserMsg_StatsKillDetails radiant_kills = 4;
+	repeated .CDOTAUserMsg_StatsKillDetails dire_kills = 5;
 }
 
 message CDOTAUserMsg_MiniTaunt {
 	optional uint32 taunting_player_id = 1;
+}
+
+message CMsgHeroAbilityStat {
+	optional .EHeroStatType stat_type = 1 [default = k_EHeroStatType_None];
+	optional int32 int_value = 2;
+	optional float float_value = 3;
+}
+
+message CMsgCombatAnalyzerPlayerStat {
+	optional uint32 account_id = 1;
+	repeated .CMsgHeroAbilityStat hero_ability_stats = 2;
+}
+
+message CMsgCombatAnalyzerStats {
+	optional uint64 match_id = 1;
+	repeated .CMsgCombatAnalyzerPlayerStat player_stats = 2;
 }
 

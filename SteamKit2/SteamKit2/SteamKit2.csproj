@@ -78,6 +78,7 @@
     <Compile Include="Base\Generated\ContentManifest.cs" />
     <Compile Include="Base\Generated\GC\CSGO\MsgGC.cs" />
     <Compile Include="Base\Generated\GC\Dota\MsgGCClient.cs" />
+    <Compile Include="Base\Generated\GC\Dota\MsgGCClientFantasy.cs" />
     <Compile Include="Base\Generated\GC\Dota\MsgGCCommon.cs" />
     <Compile Include="Base\Generated\GC\Dota\MsgGCServer.cs" />
     <Compile Include="Base\Generated\GC\Dota\NetworkConnection.cs" />

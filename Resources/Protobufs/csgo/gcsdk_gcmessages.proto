@@ -151,6 +151,7 @@ message CMsgClientWelcome {
 	repeated .CMsgSOCacheSubscriptionCheck uptodate_subscribed_caches = 4;
 	optional .CMsgClientWelcome.Location location = 5;
 	optional bytes game_data2 = 6;
+	optional uint32 rtime32_gc_welcome_timestamp = 7;
 }
 
 message CMsgConnectionStatus {
@@ -184,5 +185,27 @@ message CWorkshop_GetContributors_Request {
 
 message CWorkshop_GetContributors_Response {
 	repeated fixed64 contributors = 1;
+}
+
+message CWorkshop_SetItemPaymentRules_Request {
+	message WorkshopItemPaymentRule {
+		optional uint64 workshop_file_id = 1;
+		optional float revenue_percentage = 2;
+		optional string rule_description = 3;
+	}
+
+	message PartnerItemPaymentRule {
+		optional uint32 account_id = 1;
+		optional float revenue_percentage = 2;
+		optional string rule_description = 3;
+	}
+
+	optional uint32 appid = 1;
+	optional uint32 gameitemid = 2;
+	repeated .CWorkshop_SetItemPaymentRules_Request.WorkshopItemPaymentRule associated_workshop_files = 3;
+	repeated .CWorkshop_SetItemPaymentRules_Request.PartnerItemPaymentRule partner_accounts = 4;
+}
+
+message CWorkshop_SetItemPaymentRules_Response {
 }
 
