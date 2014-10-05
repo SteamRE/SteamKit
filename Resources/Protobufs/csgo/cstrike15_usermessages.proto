@@ -407,6 +407,6 @@ message CCSUsrMsg_ClientInfo {
 }
 
 message CCSUsrMsg_ServerRankRevealAll {
-	optional int32 dummy = 1;
+	optional int32 seconds_till_shutdown = 1;
 }
 

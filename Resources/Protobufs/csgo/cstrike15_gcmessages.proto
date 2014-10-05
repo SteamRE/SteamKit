@@ -62,6 +62,8 @@ enum ECsgoGCMsg {
 	k_EMsgGCCStrike15_v2_MatchListRequestTournamentPredictions = 9160;
 	k_EMsgGCCStrike15_v2_MatchListUploadTournamentPredictions = 9161;
 	k_EMsgGCCStrike15_v2_DraftSummary = 9162;
+	k_EMsgGCCStrike15_v2_ClientRequestJoinFriendData = 9163;
+	k_EMsgGCCStrike15_v2_ClientRequestJoinServerData = 9164;
 }
 
 message GameServerPing {
@@ -184,7 +186,7 @@ message ServerHltvInfo {
 	optional uint32 tv_clients = 4;
 	optional uint32 tv_proxies = 5;
 	optional uint32 tv_time = 6;
-	optional uint32 game_mode = 8;
+	optional uint32 game_type = 8;
 	optional string game_mapgroup = 9;
 	optional string game_map = 10;
 	optional uint64 tv_master_steamid = 11;
@@ -275,8 +277,15 @@ message CDataGCCStrike15_v2_TournamentMatchDraft {
 }
 
 message CPreMatchInfoData {
+	message TeamStats {
+		optional int32 match_info_idxtxt = 1;
+		optional string match_info_txt = 2;
+		repeated string match_info_teams = 3;
+	}
+
 	optional int32 predictions_pct = 1;
 	optional .CDataGCCStrike15_v2_TournamentMatchDraft draft = 4;
+	repeated .CPreMatchInfoData.TeamStats stats = 5;
 }
 
 message CMsgGCCStrike15_v2_MatchmakingGC2ServerReserve {
@@ -345,6 +354,8 @@ message CMsgGCCStrike15_v2_MatchmakingServerRoundStats {
 	repeated int32 enemy_5ks = 20;
 	repeated int32 mvps = 21;
 	optional uint32 spectators_count = 22;
+	optional uint32 spectators_count_tv = 23;
+	optional uint32 spectators_count_lnk = 24;
 }
 
 message CMsgGCCStrike15_v2_MatchmakingServerMatchEnd {
@@ -470,12 +481,29 @@ message WatchableMatchInfo {
 	optional bytes tv_watch_password = 5;
 	optional uint64 cl_decryptdata_key = 6;
 	optional uint64 cl_decryptdata_key_pub = 7;
-	optional uint32 game_mode = 8;
+	optional uint32 game_type = 8;
 	optional string game_mapgroup = 9;
 	optional string game_map = 10;
 	optional uint64 server_id = 11;
 	optional uint64 match_id = 12;
 	optional uint64 reservation_id = 13;
+}
+
+message CMsgGCCStrike15_v2_ClientRequestJoinFriendData {
+	optional uint32 version = 1;
+	optional uint32 account_id = 2;
+	optional uint32 join_token = 3;
+	optional uint32 join_ipp = 4;
+	optional .CMsgGCCStrike15_v2_MatchmakingGC2ClientReserve res = 5;
+}
+
+message CMsgGCCStrike15_v2_ClientRequestJoinServerData {
+	optional uint32 version = 1;
+	optional uint32 account_id = 2;
+	optional uint64 serverid = 3;
+	optional uint32 server_ip = 4;
+	optional uint32 server_port = 5;
+	optional .CMsgGCCStrike15_v2_MatchmakingGC2ClientReserve res = 6;
 }
 
 message CMsgGCCStrike15_v2_WatchInfoUsers {
@@ -486,8 +514,10 @@ message CMsgGCCStrike15_v2_WatchInfoUsers {
 }
 
 message CMsgGCCStrike15_v2_ClientRequestPlayersProfile {
-	optional uint32 request_id = 1;
-	repeated uint32 account_ids = 2;
+	optional uint32 request_id__deprecated = 1;
+	repeated uint32 account_ids__deprecated = 2;
+	optional uint32 account_id = 3;
+	optional uint32 request_level = 4;
 }
 
 message CMsgGCCStrike15_v2_PlayersProfile {
@@ -710,6 +740,7 @@ message CMsgCStrike15Welcome {
 	optional uint32 time_first_played = 10;
 	optional uint32 last_time_played = 12;
 	optional uint32 last_ip_address = 13;
+	optional uint64 gscookieid = 18;
 }
 
 message CMsgGCCStrike15_v2_ClientVarValueNotificationInfo {

@@ -52,5 +52,12 @@ enum ENetworkDisconnectionReason {
 	NETWORK_DISCONNECT_PURESERVER_MISMATCH = 44 [(network_connection_token) = "#GameUI_Disconnect_PureServer_Mismatch"];
 	NETWORK_DISCONNECT_USERCMD = 45 [(network_connection_token) = "#GameUI_Disconnect_UserCmd"];
 	NETWORK_DISCONNECT_REJECTED_BY_GAME = 46 [(network_connection_token) = "#GameUI_Disconnect_RejectedByGame"];
+	NETWORK_DISCONNECT_MESSAGE_PARSE_ERROR = 47 [(network_connection_token) = "#GameUI_Disconnect_MessageParseError"];
+	NETWORK_DISCONNECT_INVALID_MESSAGE_ERROR = 48 [(network_connection_token) = "#GameUI_Disconnect_InvalidMessageError"];
+	NETWORK_DISCONNECT_BAD_SERVER_PASSWORD = 49 [(network_connection_token) = "#GameUI_Disconnect_BadServerPassword"];
+	NETWORK_DISCONNECT_DIRECT_CONNECT_RESERVATION = 50;
+	NETWORK_DISCONNECT_CONNECTION_FAILURE = 51 [(network_connection_token) = "#GameUI_Disconnect_ConnectionFailure"];
+	NETWORK_DISCONNECT_NO_PEER_GROUP_HANDLERS = 52 [(network_connection_token) = "#GameUI_Disconnect_NoPeerGroupHandlers"];
+	NETWORK_DISCONNECT_RECONNECTION = 53;
 }
 

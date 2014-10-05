@@ -155,7 +155,28 @@ namespace SteamKit2.GC.Dota.Internal
       NETWORK_DISCONNECT_USERCMD = 45,
             
       [global::ProtoBuf.ProtoEnum(Name=@"NETWORK_DISCONNECT_REJECTED_BY_GAME", Value=46)]
-      NETWORK_DISCONNECT_REJECTED_BY_GAME = 46
+      NETWORK_DISCONNECT_REJECTED_BY_GAME = 46,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"NETWORK_DISCONNECT_MESSAGE_PARSE_ERROR", Value=47)]
+      NETWORK_DISCONNECT_MESSAGE_PARSE_ERROR = 47,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"NETWORK_DISCONNECT_INVALID_MESSAGE_ERROR", Value=48)]
+      NETWORK_DISCONNECT_INVALID_MESSAGE_ERROR = 48,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"NETWORK_DISCONNECT_BAD_SERVER_PASSWORD", Value=49)]
+      NETWORK_DISCONNECT_BAD_SERVER_PASSWORD = 49,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"NETWORK_DISCONNECT_DIRECT_CONNECT_RESERVATION", Value=50)]
+      NETWORK_DISCONNECT_DIRECT_CONNECT_RESERVATION = 50,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"NETWORK_DISCONNECT_CONNECTION_FAILURE", Value=51)]
+      NETWORK_DISCONNECT_CONNECTION_FAILURE = 51,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"NETWORK_DISCONNECT_NO_PEER_GROUP_HANDLERS", Value=52)]
+      NETWORK_DISCONNECT_NO_PEER_GROUP_HANDLERS = 52,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"NETWORK_DISCONNECT_RECONNECTION", Value=53)]
+      NETWORK_DISCONNECT_RECONNECTION = 53
     }
   
 }

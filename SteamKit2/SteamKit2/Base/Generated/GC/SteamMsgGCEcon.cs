@@ -911,6 +911,15 @@ namespace SteamKit2.GC.Internal
       get { return _additional_audit_entries; }
     }
   
+
+    private uint _inventory_token = default(uint);
+    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"inventory_token", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint inventory_token
+    {
+      get { return _inventory_token; }
+      set { _inventory_token = value; }
+    }
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"DynamicAttribute")]
   public partial class DynamicAttribute : global::ProtoBuf.IExtensible
   {

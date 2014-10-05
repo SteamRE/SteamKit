@@ -4,12 +4,14 @@ import "gcsdk_gcmessages.proto";
 import "dota_gcmessages_client_fantasy.proto";
 
 enum ETournamentGameState {
-	k_ETournamentGameState_Pending = 0;
-	k_ETournamentGameState_Active = 1;
-	k_ETournamentGameState_DireVictory = 2;
-	k_ETournamentGameState_RadVictory = 3;
-	k_ETournamentGameState_Canceled = 4;
-	k_ETournamentTeamState_NotNeeded = 5;
+	k_ETournamentGameState_Unknown = 0;
+	k_ETournamentGameState_Scheduled = 1;
+	k_ETournamentGameState_WaitingForLobbyToStart = 2;
+	k_ETournamentGameState_Active = 3;
+	k_ETournamentGameState_DireVictory = 4;
+	k_ETournamentGameState_RadVictory = 5;
+	k_ETournamentGameState_Canceled = 6;
+	k_ETournamentTeamState_NotNeeded = 7;
 }
 
 enum ETournamentTeamState {
@@ -324,6 +326,7 @@ message CMsgPracticeLobbyJoinBroadcastChannel {
 	optional uint32 channel = 1;
 	optional string preferred_description = 2;
 	optional string preferred_country_code = 3;
+	optional string preferred_language_code = 4;
 }
 
 message CMsgPracticeLobbyToggleBroadcastChannelCameramanStatus {
@@ -485,7 +488,7 @@ message CMsgDOTATournament {
 		optional uint32 seed = 5;
 		optional uint64 team_logo = 6;
 		optional string country_code = 7;
-		optional .ETournamentTeamState node_or_state = 8 [default = k_ETournamentTeamState_Unknown];
+		optional uint32 node_or_state = 8;
 	}
 
 	message Game {
@@ -495,12 +498,14 @@ message CMsgDOTATournament {
 		optional uint32 good_team_seed = 12;
 		optional uint32 bad_team_seed = 13;
 		optional fixed64 lobby_id = 4;
-		optional uint32 match_id = 5;
+		optional uint64 match_id = 5;
 		optional string game_name = 6;
 		optional bool live_stream = 7;
 		optional string message = 9;
 		optional bool results_final = 10;
-		optional .ETournamentGameState state = 14 [default = k_ETournamentGameState_Pending];
+		optional .ETournamentGameState state = 14 [default = k_ETournamentGameState_Unknown];
+		optional uint32 node_id = 15;
+		optional uint32 start_time = 16;
 	}
 
 	message Node {
@@ -509,8 +514,10 @@ message CMsgDOTATournament {
 		optional uint32 team_seed_b = 3;
 		optional uint32 winner_node = 4;
 		optional uint32 loser_node = 5;
-		repeated uint32 game_ids = 6 [packed = true];
-		optional uint32 wins_required = 7;
+		optional uint32 series_type = 7;
+		optional .ETournamentNodeState node_state = 8 [default = k_ETournamentNodeState_Unknown];
+		optional uint32 series_id = 9;
+		optional uint32 start_time = 16;
 	}
 
 	repeated .CMsgDOTATournament.Team teams = 1;
@@ -600,6 +607,7 @@ message CMsgDOTAMatch {
 		optional string country_code = 1;
 		optional string description = 2;
 		repeated .CMsgDOTAMatch.BroadcasterInfo broadcaster_infos = 3;
+		optional string language_code = 4;
 	}
 
 	enum ReplayState {
@@ -612,7 +620,7 @@ message CMsgDOTAMatch {
 	optional uint32 duration = 3;
 	optional fixed32 startTime = 4;
 	repeated .CMsgDOTAMatch.Player players = 5;
-	optional uint32 match_id = 6;
+	optional uint64 match_id = 6;
 	repeated uint32 tower_status = 8;
 	repeated uint32 barracks_status = 9;
 	optional uint32 cluster = 10;
@@ -650,12 +658,12 @@ message CMsgDOTAMatch {
 }
 
 message CMsgDOTAPlayerMatchHistory {
-	repeated uint32 match_ids = 1;
+	repeated uint64 match_ids = 1;
 }
 
 message CMsgDOTAMatchHistoryFilter {
-	repeated uint32 match_ids = 1;
-	optional uint32 newest_match_id_at_last_query = 2;
+	repeated uint64 match_ids = 1;
+	optional uint64 newest_match_id_at_last_query = 2;
 	optional uint32 time_last_query = 3;
 }
 
@@ -672,7 +680,7 @@ message CMsgDOTARequestMatches {
 	optional fixed32 date_min = 6;
 	optional fixed32 date_max = 7;
 	optional uint32 matches_requested = 10;
-	optional uint32 start_at_match_id = 11;
+	optional uint64 start_at_match_id = 11;
 	optional fixed32 min_players = 12;
 	optional uint32 request_id = 13;
 	optional bool tournament_games_only = 14;
@@ -748,11 +756,18 @@ message CMsgDOTAPopup {
 		MM_1V1_NO_LOW_PRIORITY = 46;
 		WEEKEND_TOURNEY_REGISTRATION_NOT_OPEN = 47;
 		WEEKEND_TOURNEY_UNMATCHED = 48;
+		POST_MATCH_SURVEY = 49;
+		TROPHY_AWARDED = 50;
+		TROPHY_LEVEL_UP = 51;
+		ALL_HERO_CHALLENGE_PROGRESS = 52;
+		NEED_INITIAL_SKILL = 53;
+		NEED_INITIAL_SKILL_IN_PARTY = 54;
 	}
 
 	optional .CMsgDOTAPopup.PopupID id = 1 [default = KICKED_FROM_LOBBY];
 	optional string custom_text = 2;
 	optional sint32 int_data = 3;
+	optional bytes popup_data = 4;
 }
 
 message CMsgDOTATeamMemberSDO {
@@ -1500,7 +1515,7 @@ message CMsgPartyLeaderWatchGamePrompt {
 }
 
 message CMsgGCMatchDetailsRequest {
-	optional uint32 match_id = 1;
+	optional uint64 match_id = 1;
 }
 
 message CMsgGCMatchDetailsResponse {
@@ -1638,17 +1653,17 @@ message CMsgDOTAMatchVotes {
 		optional uint32 vote = 2;
 	}
 
-	optional uint32 match_id = 1;
+	optional uint64 match_id = 1;
 	repeated .CMsgDOTAMatchVotes.PlayerVote votes = 2;
 }
 
 message CMsgCastMatchVote {
-	optional uint32 match_id = 1;
+	optional uint64 match_id = 1;
 	optional .DOTAMatchVote vote = 2 [default = DOTAMatchVote_INVALID];
 }
 
 message CMsgRetrieveMatchVote {
-	optional uint32 match_id = 1;
+	optional uint64 match_id = 1;
 	optional uint32 incremental = 2;
 }
 
@@ -1671,7 +1686,7 @@ message CMsgDOTAHallOfFame {
 		optional uint32 account_id = 1;
 		optional uint32 hero_id = 2;
 		optional uint32 gold_per_min = 3;
-		optional uint32 match_id = 4;
+		optional uint64 match_id = 4;
 	}
 
 	optional uint32 week = 1;
@@ -1821,7 +1836,7 @@ message CMsgDOTASetProfilePrivacyResponse {
 }
 
 message CMsgUpgradeLeagueItem {
-	optional uint32 match_id = 1;
+	optional uint64 match_id = 1;
 	optional uint32 league_id = 2;
 }
 
@@ -2019,6 +2034,7 @@ message CMsgGCItemEditorReleaseReservationResponse {
 
 message CMsgDOTARewardTutorialPrizes {
 	optional uint32 location_id = 1;
+	optional bool tracking_only = 2;
 }
 
 message CMsgDOTALastHitChallengeHighScorePost {
@@ -2045,6 +2061,7 @@ message CMsgGCLobbyUpdateBroadcastChannelInfo {
 	optional uint32 channel_id = 1;
 	optional string country_code = 2;
 	optional string description = 3;
+	optional string language_code = 4;
 }
 
 message CMsgDOTARedeemEventPrize {
@@ -2128,7 +2145,7 @@ message CMsgDOTACompendiumDataResponse {
 
 message CMsgDOTAGetPlayerMatchHistory {
 	optional uint32 account_id = 1;
-	optional uint32 start_at_match_id = 2;
+	optional uint64 start_at_match_id = 2;
 	optional uint32 matches_requested = 3;
 	optional uint32 hero_id = 4;
 	optional uint32 request_id = 5;
@@ -2189,6 +2206,10 @@ message CMsgGCNotificationsResponse {
 }
 
 message CMsgGCNotificationsMarkReadRequest {
+}
+
+message CMsgClientToGCMarkNotificationListRead {
+	repeated uint64 notification_ids = 1;
 }
 
 message CMsgGCLeagueAdminState {
@@ -2301,5 +2322,62 @@ message CMsgClientToGCGetAdditionalEquips {
 
 message CMsgClientToGCGetAdditionalEquipsResponse {
 	repeated .CAdditionalEquipSlot equips = 1;
+}
+
+message CMsgClientToGCGetAllHeroProgress {
+	optional uint32 account_id = 1;
+}
+
+message CMsgClientToGCGetAllHeroProgressResponse {
+	optional uint32 account_id = 1;
+	optional uint32 curr_hero_id = 2;
+	optional uint32 laps_completed = 3;
+	optional uint32 curr_hero_games = 4;
+	optional uint32 curr_lap_time_started = 5;
+	optional uint32 curr_lap_games = 6;
+	optional uint32 best_lap_games = 7;
+	optional uint32 best_lap_time = 8;
+	optional uint32 lap_heroes_completed = 9;
+	optional uint32 lap_heroes_remaining = 10;
+	optional uint32 next_hero_id = 11;
+	optional uint32 prev_hero_id = 12;
+	optional uint32 prev_hero_games = 13;
+	optional float prev_avg_tries = 14;
+	optional float curr_avg_tries = 15;
+	optional float next_avg_tries = 16;
+	optional float full_lap_avg_tries = 17;
+	optional float curr_lap_avg_tries = 18;
+	optional string profile_name = 19;
+}
+
+message CMsgClientToGCGetTrophyList {
+	optional uint32 account_id = 1;
+}
+
+message CMsgClientToGCGetTrophyListResponse {
+	message Trophy {
+		optional uint32 trophy_id = 1;
+		optional uint32 trophy_score = 2;
+	}
+
+	optional uint32 account_id = 1;
+	repeated .CMsgClientToGCGetTrophyListResponse.Trophy trophies = 2;
+	optional string profile_name = 3;
+}
+
+message CMsgGCToClientTrophyAwarded {
+	optional uint32 trophy_id = 1;
+	optional uint32 trophy_score = 2;
+	optional uint32 trophy_old_score = 3;
+}
+
+message CMsgClientToGCGetProfileCard {
+	optional uint32 account_id = 1;
+}
+
+message CMsgClientToGCSetProfileCardSlot {
+	optional uint32 slot_id = 1;
+	optional uint32 slot_type = 2;
+	optional uint64 slot_value = 3;
 }
 
