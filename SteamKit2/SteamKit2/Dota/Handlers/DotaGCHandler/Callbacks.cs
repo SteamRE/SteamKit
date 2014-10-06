@@ -78,19 +78,75 @@ namespace SteamKit2
 		}
 
 		/// <summary>
-		/// Lobby was updated 
+		/// Party was updated 
 		/// </summary>
-		public sealed class PracticeLobbyUpdate : CallbackMsg
+		public sealed class PartyUpdate : CallbackMsg
 		{
-			public CSODOTALobby lobby;
-			public CSODOTALobby oldLobby;
+			public CSODOTAParty party;
+            public CSODOTAParty oldParty;
 
-			internal PracticeLobbyUpdate(CSODOTALobby msg, CSODOTALobby oldLob)
+            internal PartyUpdate(CSODOTAParty msg, CSODOTAParty oldLob)
 			{
-				this.lobby = msg;
-				this.oldLobby = oldLob;
+                this.party = msg;
+                this.oldParty = oldLob;
 			}
 		}
+
+        /// <summary>
+        /// When joining a party a snapshot is sent out.
+        /// </summary>
+        public sealed class PartySnapshot : CallbackMsg
+        {
+            public CSODOTAParty party;
+
+            internal PartySnapshot(CSODOTAParty msg)
+            {
+                this.party = msg;
+            }
+        }
+
+        /// <summary>
+        /// Party invite was updated 
+        /// </summary>
+        public sealed class PartyInviteUpdate : CallbackMsg
+        {
+            public CSODOTAPartyInvite invite;
+            public CSODOTAPartyInvite oldInvite;
+
+            internal PartyInviteUpdate(CSODOTAPartyInvite msg, CSODOTAPartyInvite oldLob)
+            {
+                this.invite = msg;
+                this.oldInvite = oldLob;
+            }
+        }
+
+        /// <summary>
+        /// When receiving a party invite a snapshot is sent out.
+        /// </summary>
+        public sealed class PartyInviteSnapshot : CallbackMsg
+        {
+            public CSODOTAPartyInvite invite;
+
+            internal PartyInviteSnapshot(CSODOTAPartyInvite msg)
+            {
+                this.invite = msg;
+            }
+        }
+
+        /// <summary>
+        /// Lobby was updated 
+        /// </summary>
+        public sealed class PracticeLobbyUpdate : CallbackMsg
+        {
+            public CSODOTALobby lobby;
+            public CSODOTALobby oldLobby;
+
+            internal PracticeLobbyUpdate(CSODOTALobby msg, CSODOTALobby oldLob)
+            {
+                this.lobby = msg;
+                this.oldLobby = oldLob;
+            }
+        }
 
         /// <summary>
         /// Ping request from GC
@@ -148,8 +204,9 @@ namespace SteamKit2
                 this.result = msg;
             }
         }
+
         /// <summary>
-        /// When we leave, we receive a CacheUnsubscribed message
+        /// An unhandled cache unsubscribe
         /// </summary>
         public sealed class CacheUnsubscribed : CallbackMsg
         {
@@ -159,6 +216,55 @@ namespace SteamKit2
                 this.result = msg;
             }
         }
+
+        /// <summary>
+        /// When leaving a practice lobby this is sent out
+        /// </summary>
+        public sealed class PracticeLobbyLeave : CallbackMsg
+        {
+            public CMsgSOCacheUnsubscribed result;
+            internal PracticeLobbyLeave(CMsgSOCacheUnsubscribed msg)
+            {
+                this.result = msg;
+            }
+        }
+
+        /// <summary>
+        /// When leaving a party this is sent out
+        /// </summary>
+        public sealed class PartyLeave : CallbackMsg
+        {
+            public CMsgSOCacheUnsubscribed result;
+            internal PartyLeave(CMsgSOCacheUnsubscribed msg)
+            {
+                this.result = msg;
+            }
+        }
+
+        /// <summary>
+        /// When receiving a steam component of the party invite
+        /// </summary>
+        public sealed class SteamPartyInvite : CallbackMsg
+        {
+            public CMsgClientUDSInviteToGame result;
+            internal SteamPartyInvite(CMsgClientUDSInviteToGame msg)
+            {
+                this.result = msg;
+            }
+        }
+
+        /// <summary>
+        /// When the party invite is cleared this is sent ou
+        /// </summary>
+        public sealed class PartyInviteLeave : CallbackMsg
+        {
+            public CMsgSOCacheUnsubscribed result;
+            internal PartyInviteLeave(CMsgSOCacheUnsubscribed msg)
+            {
+                this.result = msg;
+            }
+        }
+
         /// <summary>
         /// We receive a popup. (e.g. Kicked from lobby)
         /// </summary>
