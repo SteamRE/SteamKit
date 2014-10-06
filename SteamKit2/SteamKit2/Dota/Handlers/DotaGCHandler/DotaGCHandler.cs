@@ -338,7 +338,7 @@ namespace SteamKit2
                 }
                 else if (cache.type_id == 2006)
                 {
-                    //HandlePartyInviteSnapshot(cache.object_data[0]);
+                    HandlePartyInviteSnapshot(cache.object_data[0]);
                 }
             }
         }
