@@ -103,12 +103,29 @@ namespace SteamKit2
             Send(clientHello, 570);
         }
 
+        /// <summary>
+        /// Abandon the current game
+        /// </summary>
         public void AbandonGame()
         {
             var abandon = new ClientGCMsgProtobuf<CMsgAbandonCurrentGame>((uint)EDOTAGCMsg.k_EMsgGCAbandonCurrentGame);
             Send(abandon, 570);
         }
 
+        /// <summary>
+        /// Cancel the queue for a match
+        /// </summary>
+        public void StopQueue()
+        {
+            var queue = new ClientGCMsgProtobuf<CMsgStopFindingMatch>((uint) EDOTAGCMsg.k_EMsgGCStopFindingMatch);
+            Send(queue, 570);
+        }
+
+        /// <summary>
+        /// Respond to a party invite
+        /// </summary>
+        /// <param name="party_id"></param>
+        /// <param name="accept"></param>
         public void RespondPartyInvite(ulong party_id, bool accept=true)
         {
             var invite = new ClientGCMsgProtobuf<SteamKit2.GC.Internal.CMsgPartyInviteResponse>((uint) EGCBaseMsg.k_EMsgGCPartyInviteResponse);
@@ -127,6 +144,11 @@ namespace SteamKit2
             this.Client.Send(playGame);
         }
 
+        /// <summary>
+        /// Join a lobby given a lobby ID
+        /// </summary>
+        /// <param name="lobbyId"></param>
+        /// <param name="pass_key"></param>
         public void JoinLobby(ulong lobbyId, string pass_key=null)
         {
             var joinLobby = new ClientGCMsgProtobuf<CMsgPracticeLobbyJoin>((uint) EDOTAGCMsg.k_EMsgGCPracticeLobbyJoin);
@@ -135,6 +157,9 @@ namespace SteamKit2
             Send(joinLobby, 570);
         }
 
+        /// <summary>
+        /// Leave a lobby
+        /// </summary>
 		public void LeaveLobby()
 		{
 			var leaveLobby = new ClientGCMsgProtobuf<CMsgPracticeLobbyLeave> ((uint) EDOTAGCMsg.k_EMsgGCPracticeLobbyLeave);
@@ -142,6 +167,9 @@ namespace SteamKit2
 			Send(leaveLobby, 570);
 		}
 
+        /// <summary>
+        /// Leave a party.
+        /// </summary>
         public void LeaveParty()
         {
             var leaveParty = new ClientGCMsgProtobuf<GC.Internal.CMsgLeaveParty>((uint)EGCBaseMsg.k_EMsgGCLeaveParty);
@@ -149,11 +177,15 @@ namespace SteamKit2
             Send(leaveParty, 570);
         }
 
+        /// <summary>
+        /// Respond to a ping()
+        /// </summary>
         public void Pong()
         {
             var pingResponse = new ClientGCMsgProtobuf<CMsgGCClientPing> ((uint) EGCBaseClientMsg.k_EMsgGCPingResponse);
             Send(pingResponse, 570);
         }
+
         /// <summary>
         /// Joins a broadcast channel in the lobby
         /// </summary>
@@ -213,6 +245,40 @@ namespace SteamKit2
             create.Body.lobby_details = details;
             create.Body.lobby_details.pass_key = pass_key;
             Send(create, 570);
+        }
+
+        /// <summary>
+        /// Invite someone to the party.
+        /// </summary>
+        /// <param name="steam_id">Steam ID</param>
+        public void InviteToParty(ulong steam_id)
+        {
+            var invite = new ClientGCMsgProtobuf<GC.Internal.CMsgInviteToParty>((uint) EGCBaseMsg.k_EMsgGCInviteToParty);
+            invite.Body.steam_id = steam_id;
+            Send(invite, 570);
+        }
+
+        /// <summary>
+        /// Set coach slot in party
+        /// </summary>
+        /// <param name="coach"></param>
+        public void SetPartyCoach(bool coach=false)
+        {
+            var slot =
+                new ClientGCMsgProtobuf<CMsgDOTAPartyMemberSetCoach>((uint) EDOTAGCMsg.k_EMsgGCPartyMemberSetCoach);
+            slot.Body.wants_coach = coach;
+            Send(slot, 570);
+        }
+
+        /// <summary>
+        /// Kick a player from the party
+        /// </summary>
+        /// <param name="steam_id">Steam ID of player to kick</param>
+        public void KickPlayerFromParty(ulong steam_id)
+        {
+            var kick = new ClientGCMsgProtobuf<GC.Internal.CMsgKickFromParty>((uint) EGCBaseMsg.k_EMsgGCKickFromParty);
+            kick.Body.steam_id = steam_id;
+            Send(kick, 570);
         }
 
         /// <summary>
@@ -303,7 +369,8 @@ namespace SteamKit2
                         {(uint) EDOTAGCMsg.k_EMsgGCOtherLeftChannel, HandleOtherLeftChannel},
                         {(uint) ESOMsg.k_ESOMsg_UpdateMultiple, HandleUpdateMultiple},
                         {(uint) EDOTAGCMsg.k_EMsgGCPopup, HandlePopup},
-                        {(uint) EDOTAGCMsg.k_EMsgDOTALiveLeagueGameUpdate, HandleLiveLeageGameUpdate}
+                        {(uint) EDOTAGCMsg.k_EMsgDOTALiveLeagueGameUpdate, HandleLiveLeageGameUpdate},
+                        {(uint) EGCBaseMsg.k_EMsgGCInvitationCreated, HandleInvitationCreated}
                     };
                     Action<IPacketGCMsg> func;
                     if (!messageMap.TryGetValue(gcmsg.MsgType, out func))
@@ -324,6 +391,12 @@ namespace SteamKit2
                     this.Client.PostCallback(new SteamPartyInvite(Invitation));
                 }
             }
+        }
+
+        public void HandleInvitationCreated(IPacketGCMsg obj)
+        {
+            var msg = new ClientGCMsgProtobuf<GC.Internal.CMsgInvitationCreated>(obj);
+            this.Client.PostCallback(new InvitationCreated(msg.Body));
         }
 
         private void HandleCacheSubscribed(IPacketGCMsg obj)

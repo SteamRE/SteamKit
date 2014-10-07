@@ -93,6 +93,19 @@ namespace SteamKit2
 		}
 
         /// <summary>
+        /// Handle invitation created
+        /// </summary>
+        public sealed class InvitationCreated : CallbackMsg
+        {
+            public CMsgInvitationCreated invitation;
+
+            internal InvitationCreated(CMsgInvitationCreated msg)
+            {
+                this.invitation = msg;
+            }
+        }
+
+        /// <summary>
         /// When joining a party a snapshot is sent out.
         /// </summary>
         public sealed class PartySnapshot : CallbackMsg
