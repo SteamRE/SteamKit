@@ -259,6 +259,19 @@ namespace SteamKit2
         }
 
         /// <summary>
+        /// Send the chat invite message.
+        /// </summary>
+        /// <param name="steam_id"></param>
+        public void InviteToPartyUDS(ulong steam_id, ulong party_id)
+        {
+            var invite = new ClientMsgProtobuf<CMsgClientUDSInviteToGame>(EMsg.ClientUDSInviteToGame);
+            invite.Body.connect_string = "+invite " + party_id;
+            invite.Body.steam_id_dest = steam_id;
+            invite.Body.steam_id_src = 0;
+            this.Client.Send(invite);
+        }
+
+        /// <summary>
         /// Set coach slot in party
         /// </summary>
         /// <param name="coach"></param>
