@@ -132,7 +132,7 @@ namespace SteamKit2
 
             try
             {
-                if ( netStream == null )
+                if ( wantsNetShutdown || netStream == null )
                 {
                     DebugLog.WriteLine( "TcpConnection", "Attempting to send client message when not connected: {0}", clientMsg.MsgType );
                     return;
@@ -325,7 +325,7 @@ namespace SteamKit2
 
             try
             {
-                if ( sock == null ) return null;
+                if ( wantsNetShutdown || sock == null ) return null;
 
                 return NetHelpers.GetLocalIP( sock );
             }
