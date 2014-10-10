@@ -73,19 +73,19 @@ namespace SteamKit2
                 return;
             }
 
-            if ( !sock.Connected )
-            {
-                DebugLog.WriteLine( "TcpConnection", "Unable to connect" );
-                OnDisconnected( EventArgs.Empty );
-                return;
-            }
-
-            DebugLog.WriteLine( "TcpConnection", "Connected!" );
-
             netLock.EnterWriteLock();
 
             try
             {
+                if ( !sock.Connected )
+                {
+                    DebugLog.WriteLine( "TcpConnection", "Unable to connect" );
+                    OnDisconnected( EventArgs.Empty );
+                    return;
+                }
+
+                DebugLog.WriteLine( "TcpConnection", "Connected!" );
+
                 wantsNetShutdown = false;
                 netStream = new NetworkStream( sock, false );
 
@@ -127,7 +127,8 @@ namespace SteamKit2
                 data = NetFilter.ProcessOutgoing( data );
             }
 
-            netLock.EnterReadLock();
+            // a Send from the netThread has the potential to acquire the read lock and block while Disconnect is trying to join us
+            while ( !wantsNetShutdown && !netLock.TryEnterReadLock( 500 ) ) { }
 
             try
             {
@@ -149,7 +150,8 @@ namespace SteamKit2
             }
             finally
             {
-                netLock.ExitReadLock();
+                if ( netLock.IsReadLockHeld )
+                    netLock.ExitReadLock();
             }
         }
 
@@ -173,16 +175,18 @@ namespace SteamKit2
                     continue;
                 }
 
-                netLock.EnterUpgradeableReadLock();
-                byte[] packData = null;
+                // potential here is to be waiting to acquire the lock when Disconnect is trying to join us
+                while ( !wantsNetShutdown && !netLock.TryEnterUpgradeableReadLock( 500 ) ) { }
 
-                if ( netStream == null )
-                {
-                    break;
-                }
+                byte[] packData = null;
 
                 try
                 {
+                    if ( wantsNetShutdown || netStream == null )
+                    {
+                        break;
+                    }
+
                     // read the packet off the network
                     packData = ReadPacket();
                 }
@@ -196,7 +200,8 @@ namespace SteamKit2
                 }
                 finally
                 {
-                    netLock.ExitUpgradeableReadLock();
+                    if( netLock.IsUpgradeableReadLockHeld )
+                        netLock.ExitUpgradeableReadLock();
                 }
 
                 // decrypt the data off the wire if needed
@@ -316,15 +321,18 @@ namespace SteamKit2
         /// <returns>The local IP.</returns>
         public override IPAddress GetLocalIP()
         {
-            netLock.EnterReadLock();
+            while ( !wantsNetShutdown && !netLock.TryEnterReadLock( 500 ) ) { }
 
             try
             {
+                if ( sock == null ) return null;
+
                 return NetHelpers.GetLocalIP( sock );
             }
             finally
             {
-                netLock.ExitReadLock();
+                if ( netLock.IsReadLockHeld )
+                    netLock.ExitReadLock();
             }
         }
     }
