@@ -1385,6 +1385,14 @@ message CMsgClientFriendMsgIncoming {
 	optional fixed32 rtime32_server_timestamp = 5;
 }
 
+message CMsgClientFriendMsgEchoIncoming {
+	optional fixed64 steamid_from = 1;
+	optional int32 chat_entry_type = 2;
+	optional bool from_limited_account = 3;
+	optional bytes message = 4;
+	optional fixed32 rtime32_server_timestamp = 5;
+}
+
 message CMsgClientAddFriend {
 	optional fixed64 steamid_to_add = 1;
 	optional string accountname_or_email_to_add = 2;

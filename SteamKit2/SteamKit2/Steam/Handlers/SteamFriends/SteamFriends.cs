@@ -523,6 +523,10 @@ namespace SteamKit2
                     HandleFriendMsg( packetMsg );
                     break;
 
+                case EMsg.ClientFriendMsgEchoToSender:
+                    HandleFriendEchoMsg( packetMsg );
+                    break;
+
                 case EMsg.ClientAccountInfo:
                     HandleAccountInfo( packetMsg );
                     break;
@@ -577,6 +581,15 @@ namespace SteamKit2
             var callback = new FriendMsgCallback( friendMsg.Body );
             this.Client.PostCallback( callback );
         }
+
+        void HandleFriendEchoMsg( IPacketMsg packetMsg )
+        {
+            var friendEchoMsg = new ClientMsgProtobuf<CMsgClientFriendMsgEchoIncoming>( packetMsg );
+
+            var callback = new FriendMsgEchoCallback( friendEchoMsg.Body );
+            this.Client.PostCallback( callback );
+        }
+
         void HandleFriendsList( IPacketMsg packetMsg )
         {
             var list = new ClientMsgProtobuf<CMsgClientFriendsList>( packetMsg );

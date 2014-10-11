@@ -402,6 +402,50 @@ namespace SteamKit2
         }
 
         /// <summary>
+        /// This callback is fired in response to receiving an echo message from another instance.
+        /// </summary>
+        public sealed class FriendMsgEchoCallback : CallbackMsg
+        {
+            /// <summary>
+            /// Gets or sets the recipient
+            /// </summary>
+            /// <value>The recipient.</value>
+            public SteamID Recipient { get; private set; }
+            /// <summary>
+            /// Gets the chat entry type.
+            /// </summary>
+            /// <value>The chat entry type.</value>
+            public EChatEntryType EntryType { get; private set; }
+
+            /// <summary>
+            /// Gets a value indicating whether this message is from a limited account.
+            /// </summary>
+            /// <value><c>true</c> if this message is from a limited account; otherwise, <c>false</c>.</value>
+            public bool FromLimitedAccount { get; private set; }
+
+            /// <summary>
+            /// Gets the message.
+            /// </summary>
+            /// <value>The message.</value>
+            public string Message { get; private set; }
+
+
+            internal FriendMsgEchoCallback( CMsgClientFriendMsgEchoIncoming msg )
+            {
+                this.Recipient = msg.steamid_from;
+                this.EntryType = ( EChatEntryType )msg.chat_entry_type;
+
+                this.FromLimitedAccount = msg.from_limited_account;
+
+                if ( msg.message != null )
+                {
+                    this.Message = Encoding.UTF8.GetString( msg.message );
+                    this.Message = this.Message.TrimEnd( new[] { '\0' } ); // trim any extra null chars from the end
+                }
+            }
+        }
+
+        /// <summary>
         /// This callback is fired in response to adding a user to your friends list.
         /// </summary>
         public sealed class FriendAddedCallback : CallbackMsg
