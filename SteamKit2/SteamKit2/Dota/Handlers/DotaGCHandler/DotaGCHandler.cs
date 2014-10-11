@@ -10,8 +10,12 @@ using System.IO;
 using SteamKit2.GC;
 using SteamKit2.GC.Dota.Internal;
 using SteamKit2.GC.Internal;
+using SteamKit2.GC.TF2.Internal;
 using SteamKit2.Internal;
 using ProtoBuf;
+using CMsgClientHello = SteamKit2.GC.Internal.CMsgClientHello;
+using CMsgClientWelcome = SteamKit2.GC.Internal.CMsgClientWelcome;
+using EGCBaseMsg = SteamKit2.GC.Internal.EGCBaseMsg;
 
 namespace SteamKit2
 {
@@ -30,6 +34,32 @@ namespace SteamKit2
 			get;
 			private set;
 		}
+
+        /// <summary>
+        /// The current up to date party.
+        /// </summary>
+        public CSODOTAParty Party
+        {
+            get; 
+            private set;
+        }
+
+        /// <summary>
+        /// The active invite to the party.
+        /// </summary>
+        public CSODOTAPartyInvite PartyInvite
+        {
+            get; 
+            private set; 
+        }
+
+        /// <summary>
+        /// Last invitation to the game.
+        /// </summary>
+        public CMsgClientUDSInviteToGame Invitation
+        {
+            get; private set;
+        }
 
         internal DotaGCHandler()
         {
@@ -73,10 +103,39 @@ namespace SteamKit2
             Send(clientHello, 570);
         }
 
+        /// <summary>
+        /// Abandon the current game
+        /// </summary>
         public void AbandonGame()
         {
             var abandon = new ClientGCMsgProtobuf<CMsgAbandonCurrentGame>((uint)EDOTAGCMsg.k_EMsgGCAbandonCurrentGame);
             Send(abandon, 570);
+        }
+
+        /// <summary>
+        /// Cancel the queue for a match
+        /// </summary>
+        public void StopQueue()
+        {
+            var queue = new ClientGCMsgProtobuf<CMsgStopFindingMatch>((uint) EDOTAGCMsg.k_EMsgGCStopFindingMatch);
+            Send(queue, 570);
+        }
+
+        /// <summary>
+        /// Respond to a party invite
+        /// </summary>
+        /// <param name="party_id"></param>
+        /// <param name="accept"></param>
+        public void RespondPartyInvite(ulong party_id, bool accept=true)
+        {
+            var invite = new ClientGCMsgProtobuf<SteamKit2.GC.Internal.CMsgPartyInviteResponse>((uint) EGCBaseMsg.k_EMsgGCPartyInviteResponse);
+            invite.Body.party_id = party_id;
+            invite.Body.accept = accept;
+            invite.Body.as_coach = false;
+            invite.Body.team_id = 0;
+            invite.Body.game_language_enum = 1;
+            invite.Body.game_language_name = "english";
+            Send(invite, 570);
         }
 
         public void CloseDota()
@@ -85,6 +144,11 @@ namespace SteamKit2
             this.Client.Send(playGame);
         }
 
+        /// <summary>
+        /// Join a lobby given a lobby ID
+        /// </summary>
+        /// <param name="lobbyId"></param>
+        /// <param name="pass_key"></param>
         public void JoinLobby(ulong lobbyId, string pass_key=null)
         {
             var joinLobby = new ClientGCMsgProtobuf<CMsgPracticeLobbyJoin>((uint) EDOTAGCMsg.k_EMsgGCPracticeLobbyJoin);
@@ -93,6 +157,9 @@ namespace SteamKit2
             Send(joinLobby, 570);
         }
 
+        /// <summary>
+        /// Leave a lobby
+        /// </summary>
 		public void LeaveLobby()
 		{
 			var leaveLobby = new ClientGCMsgProtobuf<CMsgPracticeLobbyLeave> ((uint) EDOTAGCMsg.k_EMsgGCPracticeLobbyLeave);
@@ -100,6 +167,19 @@ namespace SteamKit2
 			Send(leaveLobby, 570);
 		}
 
+        /// <summary>
+        /// Leave a party.
+        /// </summary>
+        public void LeaveParty()
+        {
+            var leaveParty = new ClientGCMsgProtobuf<GC.Internal.CMsgLeaveParty>((uint)EGCBaseMsg.k_EMsgGCLeaveParty);
+            this.Party = null;
+            Send(leaveParty, 570);
+        }
+
+        /// <summary>
+        /// Respond to a ping()
+        /// </summary>
         public void Pong()
         {
             var pingResponse = new ClientGCMsgProtobuf<CMsgGCClientPing> ((uint) EGCBaseClientMsg.k_EMsgGCPingResponse);
@@ -178,6 +258,53 @@ namespace SteamKit2
             create.Body.lobby_details = details;
             create.Body.lobby_details.pass_key = pass_key;
             Send(create, 570);
+        }
+
+        /// <summary>
+        /// Invite someone to the party.
+        /// </summary>
+        /// <param name="steam_id">Steam ID</param>
+        public void InviteToParty(ulong steam_id)
+        {
+            var invite = new ClientGCMsgProtobuf<GC.Internal.CMsgInviteToParty>((uint) EGCBaseMsg.k_EMsgGCInviteToParty);
+            invite.Body.steam_id = steam_id;
+            Send(invite, 570);
+        }
+
+        /// <summary>
+        /// Send the chat invite message.
+        /// </summary>
+        /// <param name="steam_id"></param>
+        public void InviteToPartyUDS(ulong steam_id, ulong party_id)
+        {
+            var invite = new ClientMsgProtobuf<CMsgClientUDSInviteToGame>(EMsg.ClientUDSInviteToGame);
+            invite.Body.connect_string = "+invite " + party_id;
+            invite.Body.steam_id_dest = steam_id;
+            invite.Body.steam_id_src = 0;
+            this.Client.Send(invite);
+        }
+
+        /// <summary>
+        /// Set coach slot in party
+        /// </summary>
+        /// <param name="coach"></param>
+        public void SetPartyCoach(bool coach=false)
+        {
+            var slot =
+                new ClientGCMsgProtobuf<CMsgDOTAPartyMemberSetCoach>((uint) EDOTAGCMsg.k_EMsgGCPartyMemberSetCoach);
+            slot.Body.wants_coach = coach;
+            Send(slot, 570);
+        }
+
+        /// <summary>
+        /// Kick a player from the party
+        /// </summary>
+        /// <param name="steam_id">Steam ID of player to kick</param>
+        public void KickPlayerFromParty(ulong steam_id)
+        {
+            var kick = new ClientGCMsgProtobuf<GC.Internal.CMsgKickFromParty>((uint) EGCBaseMsg.k_EMsgGCKickFromParty);
+            kick.Body.steam_id = steam_id;
+            Send(kick, 570);
         }
 
         /// <summary>
@@ -262,28 +389,27 @@ namespace SteamKit2
             if (packetMsg.MsgType == EMsg.ClientFromGC)
             {
                 var msg = new ClientMsgProtobuf<CMsgGCClient>(packetMsg);
-
                 if (msg.Body.appid == 570)
                 {
                     var gcmsg = GetPacketGCMsg(msg.Body.msgtype, msg.Body.payload);
                     var messageMap = new Dictionary<uint, Action<IPacketGCMsg>>
-                                     {
-                                         {(uint) EGCBaseClientMsg.k_EMsgGCClientWelcome, HandleWelcome},
-                                         {(uint) EDOTAGCMsg.k_EMsgGCPracticeLobbyJoinResponse, HandlePracticeLobbyJoinResponse},
-                                         {(uint) EDOTAGCMsg.k_EMsgGCPracticeLobbyListResponse, HandlePracticeLobbyListResponse},
-                                         {(uint) ESOMsg.k_ESOMsg_CacheSubscribed, HandleCacheSubscribed},
-                                         {(uint) ESOMsg.k_ESOMsg_CacheUnsubscribed, HandleCacheUnsubscribed},
-                                         {(uint) EGCBaseClientMsg.k_EMsgGCPingRequest, HandlePingRequest},
-                                         {(uint) EDOTAGCMsg.k_EMsgGCJoinChatChannelResponse, HandleJoinChatChannelResponse},
-                                         {(uint) EDOTAGCMsg.k_EMsgGCChatMessage, HandleChatMessage},
-                                         {(uint) EDOTAGCMsg.k_EMsgGCOtherJoinedChannel, HandleOtherJoinedChannel},
-                                         {(uint) EDOTAGCMsg.k_EMsgGCOtherLeftChannel, HandleOtherLeftChannel},
-                                         {(uint) ESOMsg.k_ESOMsg_UpdateMultiple, HandleUpdateMultiple},
-                                         {(uint) EDOTAGCMsg.k_EMsgGCPopup, HandlePopup},
-                                         {(uint) EDOTAGCMsg.k_EMsgDOTALiveLeagueGameUpdate, HandleLiveLeageGameUpdate},
-                                         {(uint) EDOTAGCMsg.k_EMsgGCMatchDetailsResponse, HandleMatchResultResponse}
-                                     };
-
+                    {
+                        {(uint) EGCBaseClientMsg.k_EMsgGCClientWelcome, HandleWelcome},
+                        {(uint) EDOTAGCMsg.k_EMsgGCPracticeLobbyJoinResponse, HandlePracticeLobbyJoinResponse},
+                        {(uint) EDOTAGCMsg.k_EMsgGCPracticeLobbyListResponse, HandlePracticeLobbyListResponse},
+                        {(uint) ESOMsg.k_ESOMsg_CacheSubscribed, HandleCacheSubscribed},
+                        {(uint) ESOMsg.k_ESOMsg_CacheUnsubscribed, HandleCacheUnsubscribed},
+                        {(uint) ESOMsg.k_ESOMsg_Destroy, HandleCacheDestroy},
+                        {(uint) EGCBaseClientMsg.k_EMsgGCPingRequest, HandlePingRequest},
+                        {(uint) EDOTAGCMsg.k_EMsgGCJoinChatChannelResponse, HandleJoinChatChannelResponse},
+                        {(uint) EDOTAGCMsg.k_EMsgGCChatMessage, HandleChatMessage},
+                        {(uint) EDOTAGCMsg.k_EMsgGCOtherJoinedChannel, HandleOtherJoinedChannel},
+                        {(uint) EDOTAGCMsg.k_EMsgGCOtherLeftChannel, HandleOtherLeftChannel},
+                        {(uint) ESOMsg.k_ESOMsg_UpdateMultiple, HandleUpdateMultiple},
+                        {(uint) EDOTAGCMsg.k_EMsgGCPopup, HandlePopup},
+                        {(uint) EDOTAGCMsg.k_EMsgDOTALiveLeagueGameUpdate, HandleLiveLeageGameUpdate},
+                        {(uint) EGCBaseMsg.k_EMsgGCInvitationCreated, HandleInvitationCreated}
+                    };
                     Action<IPacketGCMsg> func;
                     if (!messageMap.TryGetValue(gcmsg.MsgType, out func))
                     {
@@ -294,6 +420,21 @@ namespace SteamKit2
                     func(gcmsg);
                 }
             }
+            else
+            {
+                if (packetMsg.IsProto && packetMsg.MsgType == EMsg.ClientUDSInviteToGame)
+                {
+                    var msg = new ClientMsgProtobuf<CMsgClientUDSInviteToGame>(packetMsg);
+                    Invitation = msg.Body;
+                    this.Client.PostCallback(new SteamPartyInvite(Invitation));
+                }
+            }
+        }
+
+        public void HandleInvitationCreated(IPacketGCMsg obj)
+        {
+            var msg = new ClientGCMsgProtobuf<GC.Internal.CMsgInvitationCreated>(obj);
+            this.Client.PostCallback(new InvitationCreated(msg.Body));
         }
 
         private void HandleCacheSubscribed(IPacketGCMsg obj)
@@ -301,17 +442,48 @@ namespace SteamKit2
 			var sub = new ClientGCMsgProtobuf<CMsgSOCacheSubscribed>(obj);
 			foreach(var cache in sub.Body.objects){
 				if (cache.type_id == 2004) {
-					HandleLobbySnapshot (cache.object_data [0]);
-				}
+					HandleLobbySnapshot(cache.object_data [0]);
+				}else if (cache.type_id == 2003)
+				{
+				    HandlePartySnapshot(cache.object_data[0]);
+                }
+                else if (cache.type_id == 2006)
+                {
+                    HandlePartyInviteSnapshot(cache.object_data[0]);
+                }
             }
+        }
+
+        public void HandleCacheDestroy(IPacketGCMsg obj)
+        {
+            var dest = new ClientGCMsgProtobuf<CMsgSOSingleObject>(obj);
+            if (this.PartyInvite != null && dest.Body.type_id == 2006)
+            {
+                this.PartyInvite = null;
+                this.Client.PostCallback(new PartyInviteLeave(null));
+            } 
         }
 
         private void HandleCacheUnsubscribed(IPacketGCMsg obj)
         {
             var unSub = new ClientGCMsgProtobuf<CMsgSOCacheUnsubscribed>(obj);
-			if (this.Lobby != null && unSub.Body.owner_soid.id == Lobby.lobby_id)
-				this.Lobby = null;
-            this.Client.PostCallback(new CacheUnsubscribed(unSub.Body));
+            if (this.Lobby != null && unSub.Body.owner_soid.id == Lobby.lobby_id)
+            {
+                this.Lobby = null;
+                this.Client.PostCallback(new PracticeLobbyLeave(unSub.Body));
+            }
+            else if (this.Party != null && unSub.Body.owner_soid.id == Party.party_id)
+            {
+                this.Party = null;
+                this.Client.PostCallback(new PartyLeave(unSub.Body));
+            }
+            else if (this.PartyInvite != null && unSub.Body.owner_soid.id == PartyInvite.group_id)
+            {
+                this.PartyInvite = null;
+                this.Client.PostCallback(new PartyInviteLeave(unSub.Body));
+            }
+            else
+                this.Client.PostCallback(new CacheUnsubscribed(unSub.Body));
         }
 
 		private void HandleLobbySnapshot(byte[] data, bool update=false)
@@ -326,6 +498,34 @@ namespace SteamKit2
 					this.Client.PostCallback (new PracticeLobbySnapshot (lob));
 			}
 		}
+
+        private void HandlePartySnapshot(byte[] data, bool update = false)
+        {
+            using (var stream = new MemoryStream(data))
+            {
+                var party = Serializer.Deserialize<CSODOTAParty>(stream);
+                var oldParty = this.Party;
+                this.Party = party;
+                if (update)
+                    this.Client.PostCallback(new PartyUpdate(party, oldParty));
+                else
+                    this.Client.PostCallback(new PartySnapshot(party));
+            }
+        }
+
+        private void HandlePartyInviteSnapshot(byte[] data, bool update = false)
+        {
+            using (var stream = new MemoryStream(data))
+            {
+                var party = Serializer.Deserialize<CSODOTAPartyInvite>(stream);
+                var oldParty = this.PartyInvite;
+                this.PartyInvite = party;
+                if (update)
+                    this.Client.PostCallback(new PartyInviteUpdate(party, oldParty));
+                else
+                    this.Client.PostCallback(new PartyInviteSnapshot(party));
+            }
+        }
 
         private void HandlePracticeLobbyListResponse(IPacketGCMsg obj)
         {
@@ -383,7 +583,16 @@ namespace SteamKit2
 	        {
 				if (mObj.type_id == 2004) {
 					HandleLobbySnapshot (mObj.object_data, true);
-				} else {
+                }
+                else if (mObj.type_id == 2003)
+                {
+                    HandlePartySnapshot(mObj.object_data, true);
+                }
+                else if (mObj.type_id == 2006)
+                {
+                    //HandlePartyInviteSnapshot(mObj.object_data, true);
+                }
+                else {
 					handled = false;
 				}
 	        }
