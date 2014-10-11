@@ -116,6 +116,17 @@ namespace SteamKit2
             }
         }
         /// <summary>
+        /// Match result response.
+        /// </summary>
+        public sealed class MatchResultResponse : CallbackMsg
+        {
+            public CMsgGCMatchDetailsResponse result;
+            internal MatchResultResponse(CMsgGCMatchDetailsResponse msg)
+            {
+                this.result = msg;
+            }
+        }
+        /// <summary>
         /// A user joined our chat channel
         /// </summary>
         public sealed class OtherJoinedChannel : CallbackMsg
