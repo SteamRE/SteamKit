@@ -1,6 +1,8 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30723.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample2_CallbackManager", "2.CallbackManager\Sample2_CallbackManager.csproj", "{CEF39496-576D-4A70-9A06-16112B84B79F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SteamKit2", "SteamKit2", "{8E4B940C-50A1-4BC5-9032-6BA99C43A7E4}"
