@@ -495,6 +495,7 @@ message CMsgGCCStrike15_v2_ClientRequestJoinFriendData {
 	optional uint32 join_token = 3;
 	optional uint32 join_ipp = 4;
 	optional .CMsgGCCStrike15_v2_MatchmakingGC2ClientReserve res = 5;
+	optional string errormsg = 6;
 }
 
 message CMsgGCCStrike15_v2_ClientRequestJoinServerData {
@@ -634,6 +635,7 @@ message CMsgGCCStrike15_v2_Client2GCEconPreviewDataBlockRequest {
 	optional uint64 param_s = 1;
 	optional uint64 param_a = 2;
 	optional uint64 param_d = 3;
+	optional uint64 param_m = 4;
 }
 
 message CMsgGCCStrike15_v2_Client2GCEconPreviewDataBlockResponse {

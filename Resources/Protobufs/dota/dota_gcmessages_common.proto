@@ -1165,6 +1165,7 @@ message CSODOTAMapLocationState {
 message CMsgNexonPartnerUpdate {
 	optional uint32 messagetype = 1;
 	optional uint32 timeremaining = 2;
+	optional bool terminate = 3;
 }
 
 message CMsgMakeOffering {
