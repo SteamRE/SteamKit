@@ -8920,61 +8920,6 @@ namespace SteamKit2.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientFriendMsgEchoIncoming")]
-  public partial class CMsgClientFriendMsgEchoIncoming : global::ProtoBuf.IExtensible
-  {
-    public CMsgClientFriendMsgEchoIncoming() {}
-    
-
-    private ulong _steamid_from = default(ulong);
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steamid_from", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
-    public ulong steamid_from
-    {
-      get { return _steamid_from; }
-      set { _steamid_from = value; }
-    }
-
-    private int _chat_entry_type = default(int);
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"chat_entry_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
-    public int chat_entry_type
-    {
-      get { return _chat_entry_type; }
-      set { _chat_entry_type = value; }
-    }
-
-    private bool _from_limited_account = default(bool);
-    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"from_limited_account", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
-    public bool from_limited_account
-    {
-      get { return _from_limited_account; }
-      set { _from_limited_account = value; }
-    }
-
-    private byte[] _message = null;
-    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"message", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
-    public byte[] message
-    {
-      get { return _message; }
-      set { _message = value; }
-    }
-
-    private uint _rtime32_server_timestamp = default(uint);
-    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"rtime32_server_timestamp", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint rtime32_server_timestamp
-    {
-      get { return _rtime32_server_timestamp; }
-      set { _rtime32_server_timestamp = value; }
-    }
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientAddFriend")]
   public partial class CMsgClientAddFriend : global::ProtoBuf.IExtensible
   {

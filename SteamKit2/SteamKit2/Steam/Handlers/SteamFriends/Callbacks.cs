@@ -430,7 +430,7 @@ namespace SteamKit2
             public string Message { get; private set; }
 
 
-            internal FriendMsgEchoCallback( CMsgClientFriendMsgEchoIncoming msg )
+            internal FriendMsgEchoCallback( CMsgClientFriendMsgIncoming msg )
             {
                 this.Recipient = msg.steamid_from;
                 this.EntryType = ( EChatEntryType )msg.chat_entry_type;

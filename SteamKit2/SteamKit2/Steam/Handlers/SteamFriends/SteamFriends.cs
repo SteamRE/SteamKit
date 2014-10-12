@@ -584,7 +584,7 @@ namespace SteamKit2
 
         void HandleFriendEchoMsg( IPacketMsg packetMsg )
         {
-            var friendEchoMsg = new ClientMsgProtobuf<CMsgClientFriendMsgEchoIncoming>( packetMsg );
+            var friendEchoMsg = new ClientMsgProtobuf<CMsgClientFriendMsgIncoming>( packetMsg );
 
             var callback = new FriendMsgEchoCallback( friendEchoMsg.Body );
             this.Client.PostCallback( callback );
