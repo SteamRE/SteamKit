@@ -3834,6 +3834,15 @@ namespace SteamKit2.Internal
       get { return _newmethod; }
       set { _newmethod = value; }
     }
+
+    private string _twofactor_code = "";
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"twofactor_code", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string twofactor_code
+    {
+      get { return _twofactor_code; }
+      set { _twofactor_code = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -8193,6 +8202,98 @@ namespace SteamKit2.Internal
     {
       get { return _steamid; }
       set { _steamid = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientVoiceCallPreAuthorize")]
+  public partial class CMsgClientVoiceCallPreAuthorize : global::ProtoBuf.IExtensible
+  {
+    public CMsgClientVoiceCallPreAuthorize() {}
+    
+
+    private ulong _caller_steamid = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"caller_steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong caller_steamid
+    {
+      get { return _caller_steamid; }
+      set { _caller_steamid = value; }
+    }
+
+    private ulong _receiver_steamid = default(ulong);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"receiver_steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong receiver_steamid
+    {
+      get { return _receiver_steamid; }
+      set { _receiver_steamid = value; }
+    }
+
+    private int _caller_id = default(int);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"caller_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int caller_id
+    {
+      get { return _caller_id; }
+      set { _caller_id = value; }
+    }
+
+    private bool _hangup = default(bool);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"hangup", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool hangup
+    {
+      get { return _hangup; }
+      set { _hangup = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientVoiceCallPreAuthorizeResponse")]
+  public partial class CMsgClientVoiceCallPreAuthorizeResponse : global::ProtoBuf.IExtensible
+  {
+    public CMsgClientVoiceCallPreAuthorizeResponse() {}
+    
+
+    private ulong _caller_steamid = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"caller_steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong caller_steamid
+    {
+      get { return _caller_steamid; }
+      set { _caller_steamid = value; }
+    }
+
+    private ulong _receiver_steamid = default(ulong);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"receiver_steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong receiver_steamid
+    {
+      get { return _receiver_steamid; }
+      set { _receiver_steamid = value; }
+    }
+
+    private int _eresult = (int)2;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"eresult", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue((int)2)]
+    public int eresult
+    {
+      get { return _eresult; }
+      set { _eresult = value; }
+    }
+
+    private int _caller_id = default(int);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"caller_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int caller_id
+    {
+      get { return _caller_id; }
+      set { _caller_id = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
