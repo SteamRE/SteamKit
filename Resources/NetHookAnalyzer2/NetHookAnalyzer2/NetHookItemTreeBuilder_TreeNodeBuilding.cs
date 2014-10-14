@@ -215,8 +215,8 @@ namespace NetHookAnalyzer2
 		{
 			var nodeName = node.Text;
 			SetNodeValue(node, value.ToString());
-			SetNodeValueToCopy(node, value.ToString());
 			SetNodeContextMenuForValueCopy(node);
+			SetNodeContextMenuForEnumDisplay(node, nodeName, value);
 
 			node.ContextMenu.MenuItems.Add("-"); // Separator
 
@@ -294,12 +294,14 @@ namespace NetHookAnalyzer2
 
 		static void AddValueObjectValue(TreeNode node, object obj)
 		{
+			var name = node.Text;
 			SetNodeValueWithCopyMenu(node, obj.ToString());
+			SetNodeContextMenuForEnumDisplay(node, name, obj);
 		}
 
 		static void AddStringValue(TreeNode node, string stringValue)
 		{
-			SetNodeValue(node, string.Format("\"{0}\"", stringValue));
+			SetNodeValueNoCopy(node, string.Format("\"{0}\"", stringValue));
 
 			if (!string.IsNullOrEmpty(stringValue))
 			{
@@ -449,13 +451,23 @@ namespace NetHookAnalyzer2
 
 		static void SetNodeValue(TreeNode node, string key, string value)
 		{
+			SetNodeValueNoCopy(node, key, value);
 			SetNodeValueToCopy(node, value);
+		}
+
+		static void SetNodeValueNoCopy(TreeNode node, string key, string value)
+		{
 			node.Text = string.Format("{0}{1}{2}", key, NodeValuePrefix, value);
 		}
 
 		static void SetNodeValue(TreeNode node, string value)
 		{
 			SetNodeValue(node, node.Text, value);
+		}
+
+		static void SetNodeValueNoCopy(TreeNode node, string value)
+		{
+			SetNodeValueNoCopy(node, node.Text, value);
 		}
 
 		static void SetNodeValueWithCopyMenu(TreeNode node, string value)
@@ -471,6 +483,68 @@ namespace NetHookAnalyzer2
 			{
 				Clipboard.SetText(GetNodeValueToCopy(node));
 			}));
+		}
+
+		static void SetNodeContextMenuForEnumDisplay(TreeNode node, string name, object value)
+		{
+			if (node.ContextMenu.MenuItems.Count > 0)
+			{
+				node.ContextMenu.MenuItems.Add(new MenuItem("-")); // Separator
+			}
+
+			var rawValueMenuItem = new MenuItem("Display Raw Value");
+			node.ContextMenu.MenuItems.Add(rawValueMenuItem);
+			rawValueMenuItem.Click += delegate(object sender, EventArgs e)
+			{
+				SetNodeValue(node, name, value.ToString());
+			};
+
+			var enumMenuItem = new MenuItem("Display Enum Value");
+			node.ContextMenu.MenuItems.Add(enumMenuItem);
+
+			var enumTypesByNamespace = typeof(CMClient).Assembly.ExportedTypes
+				.Where(x => x.IsEnum)
+				.GroupBy(x => x.Namespace)
+				.OrderBy(x => x.Key);
+
+			foreach (var enumTypes in enumTypesByNamespace)
+			{
+				var enumNamespaceMenuItem = new MenuItem(enumTypes.Key);
+				enumMenuItem.MenuItems.Add(enumNamespaceMenuItem);
+
+				foreach (var enumType in enumTypes)
+				{
+					var enumName = enumType.FullName.Substring(enumType.Namespace.Length + 1);
+					var item = new MenuItem(enumName);
+
+					item.Click += delegate(object sender, EventArgs e)
+					{
+						object enumValue;
+						try
+						{
+							enumValue = Convert.ChangeType(value, enumType.GetEnumUnderlyingType());
+						}
+						catch (OverflowException)
+						{
+							SetNodeValueNoCopy(node, name, string.Format("{0} (not convertable to '{1}')", value, enumName));
+							SetNodeValueToCopy(node, value.ToString());
+							return;
+						}
+
+						if (Enum.IsDefined(enumType, enumValue))
+						{
+							SetNodeValue(node, name, Enum.GetName(enumType, enumValue));
+						}
+						else
+						{
+							SetNodeValueNoCopy(node, name, string.Format("{0} (not in '{1}')", value, enumName));
+							SetNodeValueToCopy(node, enumValue.ToString());
+						}
+					};
+
+					enumNamespaceMenuItem.MenuItems.Add(item);
+				}
+			}
 		}
 
 		static void SetAsRadioSelected(object sender)
