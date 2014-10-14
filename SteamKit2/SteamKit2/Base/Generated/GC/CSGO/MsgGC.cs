@@ -2967,6 +2967,15 @@ namespace SteamKit2.GC.CSGO.Internal
       get { return _res; }
       set { _res = value; }
     }
+
+    private string _errormsg = "";
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"errormsg", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string errormsg
+    {
+      get { return _errormsg; }
+      set { _errormsg = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -3861,6 +3870,15 @@ namespace SteamKit2.GC.CSGO.Internal
     {
       get { return _param_d; }
       set { _param_d = value; }
+    }
+
+    private ulong _param_m = default(ulong);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"param_m", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong param_m
+    {
+      get { return _param_m; }
+      set { _param_m = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

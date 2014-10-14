@@ -2980,6 +2980,15 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _timeremaining; }
       set { _timeremaining = value; }
     }
+
+    private bool _terminate = default(bool);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"terminate", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool terminate
+    {
+      get { return _terminate; }
+      set { _terminate = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

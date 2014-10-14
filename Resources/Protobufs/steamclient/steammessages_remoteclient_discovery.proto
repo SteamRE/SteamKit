@@ -13,6 +13,7 @@ enum ERemoteClientService {
 message CMsgRemoteClientBroadcastHeader {
 	optional uint64 client_id = 1;
 	optional .ERemoteClientBroadcastMsg msg_type = 2 [default = k_ERemoteClientBroadcastMsgDiscovery];
+	optional uint64 instance_id = 3;
 }
 
 message CMsgRemoteClientBroadcastStatus {
