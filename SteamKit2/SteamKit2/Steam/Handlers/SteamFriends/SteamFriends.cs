@@ -117,6 +117,15 @@ namespace SteamKit2
             return cache.GetUser( steamId ).Name;
         }
         /// <summary>
+        /// Gets the nickname/alias of a friend.
+        /// </summary>
+        /// <param name="steamId">The steam id.</param>
+        /// <returns>The nickname.</returns>
+        public string GetFriendNickname( SteamID steamId )
+        {
+            return cache.GetUser( steamId ).Nickname;
+        }
+        /// <summary>
         /// Gets the persona state of a friend.
         /// </summary>
         /// <param name="steamId">The steam id.</param>
@@ -133,6 +142,15 @@ namespace SteamKit2
         public EFriendRelationship GetFriendRelationship( SteamID steamId )
         {
             return cache.GetUser( steamId ).Relationship;
+        }
+        /// <summary>
+        /// Gets the list of groups this friend occupies.
+        /// </summary>
+        /// <param name="steamId">The steam id.</param>
+        /// <returns>The groups.</returns>
+        public List<string> GetFriendGroupNames( SteamID steamId )
+        {
+            return cache.GetUser( steamId ).Groups;
         }
         /// <summary>
         /// Gets the game name of a friend playing a game.
@@ -527,6 +545,14 @@ namespace SteamKit2
                     HandleFriendEchoMsg( packetMsg );
                     break;
 
+                case EMsg.ClientPlayerNicknameList:
+                    HandlePlayerNicknameList( packetMsg );
+                    break;
+
+                case EMsg.ClientFriendsGroupsList:
+                    HandleFriendsGroupsList( packetMsg );
+                    break;
+
                 case EMsg.ClientAccountInfo:
                     HandleAccountInfo( packetMsg );
                     break;
@@ -678,6 +704,33 @@ namespace SteamKit2
             }
 
             var callback = new FriendsListCallback( list.Body );
+            this.Client.PostCallback( callback );
+        }
+        void HandleFriendsGroupsList( IPacketMsg packetMsg )
+        {
+            var list = new ClientMsgProtobuf<CMsgClientFriendsGroupsList>( packetMsg );
+            Dictionary<int, string> GroupNames = new Dictionary<int,string>();
+
+            foreach ( var Group in list.Body.friendGroups )
+                GroupNames.Add( Group.nGroupID, Group.strGroupName );
+
+            foreach ( var Member in list.Body.memberships )
+            {
+                if ( GroupNames.ContainsKey( Member.nGroupID ) )
+                    cache.GetUser( new SteamID( Member.ulSteamID ) ).Groups.Add( GroupNames[Member.nGroupID] );
+            }
+
+            var callback = new FriendsGroupsListCallback( list.Body );
+            this.Client.PostCallback( callback );
+        }
+        void HandlePlayerNicknameList( IPacketMsg packetMsg )
+        {
+            var list = new ClientMsgProtobuf<CMsgClientPlayerNicknameList>( packetMsg );
+
+            foreach( var Friend in list.Body.nicknames )
+                cache.GetUser( new SteamID( Friend.steamid ) ).Nickname = Friend.nickname;
+
+            var callback = new FriendsNicknameListCallback( list.Body );
             this.Client.PostCallback( callback );
         }
         void HandlePersonaState( IPacketMsg packetMsg )

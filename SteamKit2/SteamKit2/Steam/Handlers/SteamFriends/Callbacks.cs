@@ -358,6 +358,148 @@ namespace SteamKit2
         }
 
         /// <summary>
+        /// This callback is fired when the client receives a list of friend nicknames.
+        /// </summary>
+        public sealed class FriendsNicknameListCallback : CallbackMsg
+        {
+            /// <summary>
+            /// Represents a single friend entry in a client's nickname list.
+            /// </summary>
+            public sealed class Friend
+            {
+                /// <summary>
+                /// Gets the SteamID of the friend.
+                /// </summary>
+                /// <value>The SteamID.</value>
+                public SteamID SteamID { get; private set; }
+                /// <summary>
+                /// Gets the nickname of this friend.
+                /// </summary>
+                /// <value>The nickname.</value>
+                public string Nickname { get; private set; }
+
+
+                internal Friend( CMsgClientPlayerNicknameList.PlayerNickname friend )
+                {
+                    this.SteamID = friend.steamid;
+                    this.Nickname = friend.nickname;
+                }
+            }
+
+            /// <summary>
+            /// Gets a value indicating whether this <see cref="FriendsNicknameListCallback"/> is an incremental update.
+            /// </summary>
+            /// <value><c>true</c> if incremental; otherwise, <c>false</c>.</value>
+            public bool Incremental { get; private set; }
+            /// <summary>
+            /// Gets the nickname list.
+            /// </summary>
+            /// <value>The nickname list.</value>
+            public ReadOnlyCollection<Friend> FriendNicknameList { get; private set; }
+
+
+            internal FriendsNicknameListCallback( CMsgClientPlayerNicknameList msg )
+            {
+                this.Incremental = msg.incremental;
+
+                var list = msg.nicknames
+                    .Select( f => new Friend( f ) )
+                    .ToList();
+
+                this.FriendNicknameList = new ReadOnlyCollection<Friend>( list );
+            }
+        }
+
+        /// <summary>
+        /// This callback is fired when the client receives a list of friend groups.
+        /// </summary>
+        public sealed class FriendsGroupsListCallback : CallbackMsg
+        {
+            /// <summary>
+            /// Represents a group in the friends list.
+            /// </summary>
+            public sealed class Group
+            {
+                /// <summary>
+                /// Gets the GroupID of the group.
+                /// </summary>
+                /// <value>The GroupID.</value>
+                public int GroupID { get; private set; }
+                /// <summary>
+                /// Gets the name of this group.
+                /// </summary>
+                /// <value>The name.</value>
+                public string Name { get; private set; }
+
+
+                internal Group( CMsgClientFriendsGroupsList.FriendGroup group )
+                {
+                    this.GroupID = group.nGroupID;
+                    this.Name = group.strGroupName;
+                }
+            }
+
+            /// <summary>
+            /// Represents a group memeber in the friends list.
+            /// </summary>
+            public sealed class Member
+            {
+                /// <summary>
+                /// Gets the SteamID of the friend.
+                /// </summary>
+                /// <value>The SteamID.</value>
+                public SteamID SteamID { get; private set; }
+                /// <summary>
+                /// Gets ID of the group this friend is in.
+                /// </summary>
+                /// <value>The GroupID.</value>
+                public int GroupID { get; private set; }
+
+
+                internal Member( CMsgClientFriendsGroupsList.FriendGroupsMembership member )
+                {
+                    this.GroupID = member.nGroupID;
+                    this.SteamID = member.ulSteamID;
+                }
+            }
+
+            /// <summary>
+            /// Gets a value indicating whether this <see cref="FriendsGroupsListCallback"/> is an incremental update.
+            /// </summary>
+            /// <value><c>true</c> if incremental; otherwise, <c>false</c>.</value>
+            public bool Incremental { get; private set; }
+            /// <summary>
+            /// Gets the list of groups in the friends list.
+            /// </summary>
+            /// <value>The group list.</value>
+            public ReadOnlyCollection<Group> FriendsGroupsNameList { get; private set; }
+            /// <summary>
+            /// Gets the list of members in each group.
+            /// </summary>
+            /// <value>The group member list.</value>
+            public ReadOnlyCollection<Member> FriendsGroupsMembersList { get; private set; }
+
+
+            internal FriendsGroupsListCallback( CMsgClientFriendsGroupsList msg )
+            {
+                this.Incremental = msg.bincremental;
+                {
+                    var list = msg.friendGroups
+                        .Select( f => new Group( f ) )
+                        .ToList();
+
+                    this.FriendsGroupsNameList = new ReadOnlyCollection<Group>( list );
+                }
+                {
+                    var list = msg.memberships
+                        .Select( f => new Member( f ) )
+                        .ToList();
+                    this.FriendsGroupsMembersList = new ReadOnlyCollection<Member>( list );
+                }
+            }
+        }
+
+        /// <summary>
         /// This callback is fired in response to receiving a message from a friend.
         /// </summary>
         public sealed class FriendMsgCallback : CallbackMsg

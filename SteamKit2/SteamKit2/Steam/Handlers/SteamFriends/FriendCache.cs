@@ -6,6 +6,7 @@
 
 
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 
 namespace SteamKit2
 {
@@ -27,6 +28,10 @@ namespace SteamKit2
 
         sealed class User : Account
         {
+            public string Nickname { get; set; }
+
+            public List<string> Groups { get; set; }
+
             public EFriendRelationship Relationship { get; set; }
 
             public EPersonaState PersonaState { get; set; }
@@ -40,6 +45,7 @@ namespace SteamKit2
             public User()
             {
                 GameID = new GameID();
+                Groups = new List<string>();
             }
         }
 
