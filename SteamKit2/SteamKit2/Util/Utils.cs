@@ -145,7 +145,7 @@ namespace SteamKit2
 
                 try
                 {
-                    return CryptoHelper.SHAHash( Encoding.ASCII.GetBytes( hwString.ToString() ) );
+                    return CryptoHelper.SHAHash( Encoding.UTF8.GetBytes( hwString.ToString() ) );
                 }
                 catch { return null; }
             }

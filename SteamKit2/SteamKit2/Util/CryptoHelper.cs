@@ -232,7 +232,7 @@ namespace SteamKit2
             byte[] key, hash;
             using(SHA256 sha256 = SHA256Managed.Create())
             {
-                byte[] password_bytes = Encoding.ASCII.GetBytes(password);
+                byte[] password_bytes = Encoding.UTF8.GetBytes(password);
                 key = sha256.ComputeHash(password_bytes);
             }
             using(HMACSHA1 hmac = new HMACSHA1(key))

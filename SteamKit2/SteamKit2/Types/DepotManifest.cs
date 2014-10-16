@@ -156,7 +156,7 @@ namespace SteamKit2
                     return false;
                 }
 
-                file.FileName = Encoding.ASCII.GetString( filename ).TrimEnd( new char[] { '\0' } ).Replace(altDirChar, Path.DirectorySeparatorChar);
+                file.FileName = Encoding.UTF8.GetString( filename ).TrimEnd( new char[] { '\0' } ).Replace(altDirChar, Path.DirectorySeparatorChar);
             }
 
             FilenamesEncrypted = false;

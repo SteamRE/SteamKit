@@ -510,7 +510,7 @@ namespace SteamKit2
                         bw.Write( sessionId );
                         bw.Write( req );
                         bw.Write( sessionKey );
-                        bw.Write( Encoding.ASCII.GetBytes( uri.AbsolutePath ) );
+                        bw.Write( Encoding.UTF8.GetBytes( uri.AbsolutePath ) );
 
                         shaHash = CryptoHelper.SHAHash( ms.ToArray() );
                     }
@@ -531,7 +531,7 @@ namespace SteamKit2
                 {
                     webClient.Headers[ HttpRequestHeader.ContentType ] = "application/x-www-form-urlencoded";
 
-                    resultData = webClient.UploadData( url, Encoding.ASCII.GetBytes( data ) );
+                    resultData = webClient.UploadData( url, Encoding.UTF8.GetBytes( data ) );
                 }
 
                 return resultData;
