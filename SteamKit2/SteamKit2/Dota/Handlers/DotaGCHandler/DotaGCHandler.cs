@@ -308,6 +308,17 @@ namespace SteamKit2
         }
 
         /// <summary>
+        /// Kick a player from the lobby
+        /// </summary>
+        /// <param name="steam_id">Account ID of player to kick</param>
+        public void KickPlayerFromLobby(uint account_id)
+        {
+            var kick = new ClientGCMsgProtobuf<CMsgPracticeLobbyKick>((uint)EDOTAGCMsg.k_EMsgGCPracticeLobbyKick);
+            kick.Body.account_id = account_id;
+            Send(kick, 570);
+        }
+
+        /// <summary>
         /// Joins a chat channel
         /// </summary>
         /// <param name="name"></param>
