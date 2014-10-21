@@ -132,7 +132,15 @@ namespace SteamKit2
                     return;
 
                 byte[] processedData = CryptoHelper.SymmetricDecrypt( Data, depotKey );
-                processedData = ZipUtil.Decompress( processedData );
+
+                if ( processedData[0] == 'V' && processedData[1] == 'Z' )
+                {
+                    processedData = VZipUtil.Decompress( processedData );
+                }
+                else
+                {
+                    processedData = ZipUtil.Decompress( processedData );
+                }
 
                 byte[] dataCrc = CryptoHelper.AdlerHash( processedData );
 
