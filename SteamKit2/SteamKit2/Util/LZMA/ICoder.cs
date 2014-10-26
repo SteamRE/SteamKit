@@ -75,7 +75,7 @@ namespace SevenZip
 	/// <summary>
 	/// Provides the fields that represent properties idenitifiers for compressing.
 	/// </summary>
-	public enum CoderPropID
+	enum CoderPropID
 	{
 		/// <summary>
 		/// Specifies default property.
