@@ -1,0 +1,19 @@
+import "google/protobuf/descriptor.proto";
+import "steammessages_unified_base.steamclient.proto";
+
+message CVideo_ClientGetVideoURL_Request {
+	optional uint64 video_id = 1 [(description) = "Video ID"];
+	optional uint32 client_cellid = 2 [(description) = "Cell ID of client, zero if unknown"];
+}
+
+message CVideo_ClientGetVideoURL_Response {
+	optional uint64 video_id = 1 [(description) = "Video ID"];
+	optional string video_url = 2 [(description) = "URL for video manifest"];
+}
+
+service Video {
+	option (service_description) = "Video methods";
+	rpc ClientGetVideoURL (.CVideo_ClientGetVideoURL_Request) returns (.CVideo_ClientGetVideoURL_Response) {
+		option (method_description) = "Get the initial URL to begin streaming a video";
+	}
+}
