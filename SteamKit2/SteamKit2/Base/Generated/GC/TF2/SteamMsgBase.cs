@@ -1712,15 +1712,6 @@ namespace SteamKit2.GC.TF2.Internal
       get { return _items_game_url; }
       set { _items_game_url = value; }
     }
-
-    private byte[] _signature = null;
-    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"signature", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
-    public byte[] signature
-    {
-      get { return _signature; }
-      set { _signature = value; }
-    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

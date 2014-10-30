@@ -1314,6 +1314,59 @@ namespace SteamKit2.GC.CSGO.Internal
       get { return _server_ipaddress_mask; }
       set { _server_ipaddress_mask = value; }
     }
+    private readonly global::System.Collections.Generic.List<CMsgGCCStrike15_v2_MatchmakingGC2ClientUpdate.Note> _notes = new global::System.Collections.Generic.List<CMsgGCCStrike15_v2_MatchmakingGC2ClientUpdate.Note>();
+    [global::ProtoBuf.ProtoMember(13, Name=@"notes", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CMsgGCCStrike15_v2_MatchmakingGC2ClientUpdate.Note> notes
+    {
+      get { return _notes; }
+    }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Note")]
+  public partial class Note : global::ProtoBuf.IExtensible
+  {
+    public Note() {}
+    
+
+    private int _type = default(int);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int type
+    {
+      get { return _type; }
+      set { _type = value; }
+    }
+
+    private int _region_id = default(int);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"region_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int region_id
+    {
+      get { return _region_id; }
+      set { _region_id = value; }
+    }
+
+    private float _region_r = default(float);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"region_r", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(float))]
+    public float region_r
+    {
+      get { return _region_r; }
+      set { _region_r = value; }
+    }
+
+    private float _distance = default(float);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"distance", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(float))]
+    public float distance
+    {
+      get { return _distance; }
+      set { _distance = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -3218,15 +3271,6 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _caseid = value; }
     }
 
-    private uint _verdict_legacy = default(uint);
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"verdict_legacy", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint verdict_legacy
-    {
-      get { return _verdict_legacy; }
-      set { _verdict_legacy = value; }
-    }
-
     private uint _suspectid = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"suspectid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(default(uint))]
@@ -3279,6 +3323,15 @@ namespace SteamKit2.GC.CSGO.Internal
     {
       get { return _rpt_teamharm; }
       set { _rpt_teamharm = value; }
+    }
+
+    private uint _reason = default(uint);
+    [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"reason", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint reason
+    {
+      get { return _reason; }
+      set { _reason = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -3379,6 +3432,15 @@ namespace SteamKit2.GC.CSGO.Internal
     {
       get { return _streakconvictions; }
       set { _streakconvictions = value; }
+    }
+
+    private uint _reason = default(uint);
+    [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"reason", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint reason
+    {
+      get { return _reason; }
+      set { _reason = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

@@ -3745,7 +3745,10 @@ namespace SteamKit2.GC.Dota.Internal
       NEED_INITIAL_SKILL = 53,
             
       [global::ProtoBuf.ProtoEnum(Name=@"NEED_INITIAL_SKILL_IN_PARTY", Value=54)]
-      NEED_INITIAL_SKILL_IN_PARTY = 54
+      NEED_INITIAL_SKILL_IN_PARTY = 54,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"TARGET_ENGINE_MISMATCH", Value=55)]
+      TARGET_ENGINE_MISMATCH = 55
     }
   
     private global::ProtoBuf.IExtension extensionObject;
@@ -9351,6 +9354,15 @@ namespace SteamKit2.GC.Dota.Internal
     {
       get { return _gameserver_sample; }
       set { _gameserver_sample = value; }
+    }
+
+    private CMsgMatchmakingGroupServerSample _gameserver_sample_source2 = null;
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"gameserver_sample_source2", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public CMsgMatchmakingGroupServerSample gameserver_sample_source2
+    {
+      get { return _gameserver_sample_source2; }
+      set { _gameserver_sample_source2 = value; }
     }
 
     private bool _maintenance_alerts = default(bool);

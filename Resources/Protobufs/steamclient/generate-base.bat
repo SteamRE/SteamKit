@@ -37,6 +37,7 @@ echo Unified Messages
 ..\..\Protogen\protogen -s:..\ -i:"steammessages_econ.steamclient.proto" -o:"..\..\..\SteamKit2\SteamKit2\Base\Generated\Unified\SteamMsgEcon.cs" -t:csharp -ns:"SteamKit2.Unified.Internal"
 ..\..\Protogen\protogen -s:..\ -i:"steammessages_gamenotifications.steamclient.proto" -o:"..\..\..\SteamKit2\SteamKit2\Base\Generated\Unified\SteamMsgGameNotifications.cs" -t:csharp -ns:"SteamKit2.Unified.Internal"
 ..\..\Protogen\protogen -s:..\ -i:"steammessages_gameservers.steamclient.proto" -o:"..\..\..\SteamKit2\SteamKit2\Base\Generated\Unified\SteamMsgGameServers.cs" -t:csharp -ns:"SteamKit2.Unified.Internal"
+..\..\Protogen\protogen -s:..\ -i:"steammessages_linkfilter.steamclient.proto" -o:"..\..\..\SteamKit2\SteamKit2\Base\Generated\Unified\SteamMsgLinkFilter.cs" -t:csharp -ns:"SteamKit2.Unified.Internal"
 ..\..\Protogen\protogen -s:..\ -i:"steammessages_offline.steamclient.proto" -o:"..\..\..\SteamKit2\SteamKit2\Base\Generated\Unified\SteamMsgOffline.cs" -t:csharp -ns:"SteamKit2.Unified.Internal"
 ..\..\Protogen\protogen -s:..\ -i:"steammessages_parental.steamclient.proto" -o:"..\..\..\SteamKit2\SteamKit2\Base\Generated\Unified\SteamMsgParental.cs" -t:csharp -ns:"SteamKit2.Unified.Internal"
 ..\..\Protogen\protogen -s:..\ -i:"steammessages_partnerapps.steamclient.proto" -o:"..\..\..\SteamKit2\SteamKit2\Base\Generated\Unified\SteamMsgPartnerApps.cs" -t:csharp -ns:"SteamKit2.Unified.Internal"
