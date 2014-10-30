@@ -125,6 +125,44 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPublishedFile_CanSubscribe_Request")]
+  public partial class CPublishedFile_CanSubscribe_Request : global::ProtoBuf.IExtensible
+  {
+    public CPublishedFile_CanSubscribe_Request() {}
+    
+
+    private ulong _publishedfileid = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"publishedfileid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong publishedfileid
+    {
+      get { return _publishedfileid; }
+      set { _publishedfileid = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPublishedFile_CanSubscribe_Response")]
+  public partial class CPublishedFile_CanSubscribe_Response : global::ProtoBuf.IExtensible
+  {
+    public CPublishedFile_CanSubscribe_Response() {}
+    
+
+    private bool _can_subscribe = default(bool);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"can_subscribe", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool can_subscribe
+    {
+      get { return _can_subscribe; }
+      set { _can_subscribe = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPublishedFile_Publish_Request")]
   public partial class CPublishedFile_Publish_Request : global::ProtoBuf.IExtensible
   {
@@ -1775,6 +1813,7 @@ namespace SteamKit2.Unified.Internal
     {
       CPublishedFile_Subscribe_Response Subscribe(CPublishedFile_Subscribe_Request request);
     CPublishedFile_Unsubscribe_Response Unsubscribe(CPublishedFile_Unsubscribe_Request request);
+    CPublishedFile_CanSubscribe_Response CanSubscribe(CPublishedFile_CanSubscribe_Request request);
     CPublishedFile_Publish_Response Publish(CPublishedFile_Publish_Request request);
     CPublishedFile_GetDetails_Response GetDetails(CPublishedFile_GetDetails_Request request);
     CPublishedFile_GetUserFiles_Response GetUserFiles(CPublishedFile_GetUserFiles_Request request);
