@@ -22,6 +22,14 @@ message CInventory_Response {
 	optional bytes ticket = 5;
 }
 
+message CInventory_ExchangeItem_Request {
+	optional uint32 appid = 1;
+	optional uint64 steamid = 2;
+	repeated uint64 materialsitemid = 3;
+	repeated uint32 materialsquantity = 4;
+	optional uint64 outputitemdefid = 5;
+}
+
 message CInventory_AddItem_Request {
 	optional uint32 appid = 1;
 	repeated uint64 itemdefid = 2;
@@ -88,6 +96,9 @@ service Inventory {
 	option (service_description) = "A service that provides access to inventory";
 	rpc GetInventory (.CInventory_GetInventory_Request) returns (.CInventory_Response) {
 		option (method_description) = "Retrieves a users inventory as a big JSON blob";
+	}
+	rpc ExchangeItem (.CInventory_ExchangeItem_Request) returns (.CInventory_Response) {
+		option (method_description) = "Craft an item in a user's inventory";
 	}
 	rpc AddPromoItem (.CInventory_AddItem_Request) returns (.CInventory_Response) {
 		option (method_description) = "Adds a promo item to a user's inventory";
