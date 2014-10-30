@@ -1105,6 +1105,8 @@ namespace SteamKit2
 		AMPayelpPaymentResponse = 4388,
 		AMPlayerGetClanBasicDetails = 4389,
 		AMPlayerGetClanBasicDetailsResponse = 4390,
+		AMTwoFactorRecoverAuthenticatorRequest = 4402,
+		AMTwoFactorRecoverAuthenticatorResponse = 4403,
 		BasePSRange = 5000,
 		PSCreateShoppingCart = 5001,
 		PSCreateShoppingCartResponse = 5002,
@@ -1668,11 +1670,15 @@ namespace SteamKit2
 		BackpackAddToCurrency = 8401,
 		BackpackAddToCurrencyResponse = 8402,
 		CREBase = 8500,
+		[Obsolete]
 		CRERankByTrend = 8501,
+		[Obsolete]
 		CRERankByTrendResponse = 8502,
 		CREItemVoteSummary = 8503,
 		CREItemVoteSummaryResponse = 8504,
+		[Obsolete]
 		CRERankByVote = 8505,
+		[Obsolete]
 		CRERankByVoteResponse = 8506,
 		CREUpdateUserPublishedItemVote = 8507,
 		CREUpdateUserPublishedItemVoteResponse = 8508,
@@ -1756,6 +1762,12 @@ namespace SteamKit2
 		ClientUnlockStreamingResponse = 9508,
 		ClientPlayingSessionState = 9600,
 		ClientKickPlayingSession = 9601,
+		ClientBroadcastInit = 9700,
+		ClientBroadcastFrames = 9701,
+		ClientBroadcastDisconnect = 9702,
+		ClientBroadcastScreenshot = 9703,
+		ClientVoiceCallPreAuthorize = 9800,
+		ClientVoiceCallPreAuthorizeResponse = 9801,
 	}
 	public enum EResult
 	{
