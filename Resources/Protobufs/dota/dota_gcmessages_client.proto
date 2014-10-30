@@ -762,6 +762,7 @@ message CMsgDOTAPopup {
 		ALL_HERO_CHALLENGE_PROGRESS = 52;
 		NEED_INITIAL_SKILL = 53;
 		NEED_INITIAL_SKILL_IN_PARTY = 54;
+		TARGET_ENGINE_MISMATCH = 55;
 	}
 
 	optional .CMsgDOTAPopup.PopupID id = 1 [default = KICKED_FROM_LOBBY];
@@ -1811,6 +1812,7 @@ message CMsgDOTAMatchmakingStatsResponse {
 	repeated uint32 searching_players_by_group = 2;
 	optional uint32 disabled_groups = 3;
 	optional .CMsgMatchmakingGroupServerSample gameserver_sample = 4;
+	optional .CMsgMatchmakingGroupServerSample gameserver_sample_source2 = 6;
 	optional bool maintenance_alerts = 5;
 }
 
