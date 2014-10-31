@@ -90,4 +90,5 @@ enum EResult
 	ItemDeleted = 86;
 	AccountLoginDeniedThrottle = 87;
 	TwoFactorCodeMismatch = 88;
+	NotModified = 91;
 };
