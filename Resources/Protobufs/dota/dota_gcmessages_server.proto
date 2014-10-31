@@ -653,6 +653,7 @@ message CMsgServerToGCVictoryPredictions {
 		optional uint32 account_id = 1;
 		optional uint64 item_id = 2;
 		optional bool victory = 3;
+		optional uint64 match_id = 4;
 	}
 
 	repeated .CMsgServerToGCVictoryPredictions.Record records = 1;
