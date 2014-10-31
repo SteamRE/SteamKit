@@ -433,7 +433,7 @@ namespace SteamKit2
         /// </param>
         /// <returns>A <see cref="DepotChunk"/> instance that contains the data for the given chunk.</returns>
         /// <exception cref="System.ArgumentNullException">chunk's <see cref="DepotManifest.ChunkData.ChunkID"/> was null.</exception>
-        public DepotChunk DownloadDepotChunk( uint depotId, DepotManifest.ChunkData chunk)
+        public DepotChunk DownloadDepotChunk( uint depotId, DepotManifest.ChunkData chunk )
 #pragma warning restore 0419
         {
             if ( chunk.ChunkID == null )
@@ -441,30 +441,47 @@ namespace SteamKit2
 
             string chunkId = Utils.EncodeHexString( chunk.ChunkID );
             string cdnToken = null;
-            depotCdnAuthKeys.TryGetValue(depotId, out cdnToken);
+            depotCdnAuthKeys.TryGetValue( depotId, out cdnToken );
 
-            byte[] chunkData = DoRawCommand( connectedServer, "depot", doAuth: true, args: string.Format( "{0}/chunk/{1}", depotId, chunkId ), authtoken: cdnToken );
+            byte[] depotKey = null;
+            depotKeys.TryGetValue( depotId, out depotKey );
 
-            if ( chunk.CompressedLength != default( uint ) )
+            return DownloadDepotChunkCore( depotId, chunk, connectedServer, cdnToken, depotKey );
+        }
+
+        /// <summary>
+        /// Downloads the specified depot chunk, and optionally processes the chunk and verifies the checksum if the depot decryption key has been provided.
+        /// </summary>
+        /// <remarks>
+        /// This function will also validate the length of the downloaded chunk with the value of <see cref="DepotManifest.ChunkData.CompressedLength"/>,
+        /// if it has been assigned a value.
+        /// </remarks>
+        /// <param name="depotId">The id of the depot being accessed.</param>
+        /// <param name="chunk">
+        /// A <see cref="DepotManifest.ChunkData"/> instance that represents the chunk to download.
+        /// This value should come from a manifest downloaded with <see cref="CDNClient.DownloadManifest"/>.
+        /// </param>
+        /// <returns>A <see cref="DepotChunk"/> instance that contains the data for the given chunk.</returns>
+        /// <param name="host">CDN hostname.</param>
+        /// <param name="cdnAuthToken">CDN auth token for CDN content server endpoints.</param>
+        /// <param name="depotKey">
+        /// The depot decryption key for the depot that will be downloaded.
+        /// This is used for decrypting filenames (if needed) in depot manifests, and processing depot chunks.
+        /// </param>
+        /// <exception cref="System.ArgumentNullException">chunk's <see cref="DepotManifest.ChunkData.ChunkID"/> was null.</exception>
+        public DepotChunk DownloadDepotChunk( uint depotId, DepotManifest.ChunkData chunk, string host, string cdnAuthToken, byte[] depotKey = null )
+#pragma warning restore 0419
+        {
+            if (chunk.ChunkID == null)
+                throw new ArgumentNullException( "chunk.ChunkID" );
+
+            var server = new Server
             {
-                // assert that lengths match only if the chunk has a length assigned.
-                DebugLog.Assert( chunkData.Length == chunk.CompressedLength, "CDNClient", "Length mismatch after downloading depot chunk!" );
-            }
-
-            var depotChunk = new DepotChunk
-            {
-                ChunkInfo = chunk,
-                Data = chunkData,
+                Host = host,
+                Port = 80
             };
 
-            byte[] depotKey;
-            if ( depotKeys.TryGetValue( depotId, out depotKey ) )
-            {
-                // if we have the depot key, we can process the chunk immediately
-                depotChunk.Process( depotKey );
-            }
-
-            return depotChunk;
+            return DownloadDepotChunkCore( depotId, chunk, server, cdnAuthToken, depotKey );
         }
 
 
@@ -560,6 +577,33 @@ namespace SteamKit2
             }
 
             return depotManifest;
+        }
+
+        DepotChunk DownloadDepotChunkCore( uint depotId, DepotManifest.ChunkData chunk, Server server, string cdnAuthToken, byte[] depotKey )
+        {
+            var chunkID = Utils.EncodeHexString( chunk.ChunkID );
+
+            byte[] chunkData = DoRawCommand( server, "depot", doAuth: true, args: string.Format( "{0}/chunk/{1}", depotId, chunkID ), authtoken: cdnAuthToken );
+
+            if ( chunk.CompressedLength != default( uint ) )
+            {
+                // assert that lengths match only if the chunk has a length assigned.
+                DebugLog.Assert( chunkData.Length == chunk.CompressedLength, "CDNClient", "Length mismatch after downloading depot chunk!" );
+            }
+
+            var depotChunk = new DepotChunk
+            {
+                ChunkInfo = chunk,
+                Data = chunkData,
+            };
+
+            if ( depotKey != null )
+            {
+                // if we have the depot key, we can process the chunk immediately
+                depotChunk.Process( depotKey );
+            }
+
+            return depotChunk;
         }
     }
 }
