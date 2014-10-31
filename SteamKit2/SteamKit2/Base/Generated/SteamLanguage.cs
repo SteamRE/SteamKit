@@ -1861,6 +1861,7 @@ namespace SteamKit2
 		ItemDeleted = 86,
 		AccountLoginDeniedThrottle = 87,
 		TwoFactorCodeMismatch = 88,
+		NotModified = 91,
 	}
 	public enum EUniverse
 	{
@@ -2327,13 +2328,19 @@ namespace SteamKit2
 		WinXP = 7,
 		Win2003 = 8,
 		WinVista = 9,
-		[Obsolete( "renamed to Windows7" )]
 		Win7 = 10,
+		[Obsolete( "renamed to Win7" )]
 		Windows7 = 10,
 		Win2008 = 11,
 		Win2012 = 12,
+		Win8 = 13,
+		[Obsolete( "renamed to Win8" )]
 		Windows8 = 13,
+		Win81 = 14,
+		[Obsolete( "renamed to Win81" )]
 		Windows81 = 14,
+		Win2012R2 = 15,
+		Win10 = 16,
 		WinMAX = 15,
 		Max = 26,
 	}
