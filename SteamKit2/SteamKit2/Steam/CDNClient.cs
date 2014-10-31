@@ -449,8 +449,8 @@ namespace SteamKit2
             return DownloadDepotChunkCore( depotId, chunk, connectedServer, cdnToken, depotKey );
         }
 
-		// Ambiguous reference in cref attribute: 'CDNClient.DownloadManifest'. Assuming 'SteamKit2.CDNClient.DownloadManifest(uint, ulong)',
-		// but could have also matched other overloads including 'SteamKit2.CDNClient.DownloadManifest(uint, ulong, string, string, byte[])'.
+        // Ambiguous reference in cref attribute: 'CDNClient.DownloadManifest'. Assuming 'SteamKit2.CDNClient.DownloadManifest(uint, ulong)',
+        // but could have also matched other overloads including 'SteamKit2.CDNClient.DownloadManifest(uint, ulong, string, string, byte[])'.
 #pragma warning disable 0419
 
         /// <summary>
