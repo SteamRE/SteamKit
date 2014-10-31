@@ -1,0 +1,39 @@
+enum ERemoteClientBroadcastMsg {
+	k_ERemoteClientBroadcastMsgDiscovery = 0;
+	k_ERemoteClientBroadcastMsgStatus = 1;
+	k_ERemoteClientBroadcastMsgOffline = 2;
+}
+
+enum ERemoteClientService {
+	k_ERemoteClientServiceNone = 0;
+	k_ERemoteClientServiceRemoteControl = 1;
+	k_ERemoteClientServiceGameStreaming = 2;
+}
+
+message CMsgRemoteClientBroadcastHeader {
+	optional uint64 client_id = 1;
+	optional .ERemoteClientBroadcastMsg msg_type = 2 [default = k_ERemoteClientBroadcastMsgDiscovery];
+	optional uint64 instance_id = 3;
+}
+
+message CMsgRemoteClientBroadcastStatus {
+	message User {
+		optional fixed64 steamid = 1;
+		optional uint32 auth_key_id = 2;
+	}
+
+	optional int32 version = 1;
+	optional int32 min_version = 2;
+	optional uint32 connect_port = 3;
+	optional string hostname = 4;
+	optional uint32 enabled_services = 6;
+	optional int32 ostype = 7 [default = 0];
+	optional bool is64bit = 8 [default = false];
+	repeated .CMsgRemoteClientBroadcastStatus.User users = 9;
+	optional uint32 remote_control_port = 10;
+}
+
+message CMsgRemoteClientBroadcastDiscovery {
+	optional uint32 seq_num = 1;
+}
+
