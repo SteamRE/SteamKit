@@ -151,6 +151,8 @@ enum EGCItemMsg {
 	k_EMsgGCToGCGrantSelfMadeItemToAccount = 2555;
 	k_EMsgGCToGCThankedByNewUser = 2556;
 	k_EMsgGCShuffleCrateContents = 2557;
+	k_EMsgGCQuestObjective_Progress = 2558;
+	k_EMsgGCQuestCompleted = 2559;
 }
 
 enum EGCMsgResponse {
@@ -299,5 +301,16 @@ message CMsgGCToGCThankedByNewUser {
 message CMsgGCShuffleCrateContents {
 	optional uint64 crate_item_id = 1;
 	optional string user_code_string = 2;
+}
+
+message CMsgGCQuestObjective_Progress {
+	optional uint64 quest_item_id = 1;
+	optional uint32 quest_attrib_index = 2;
+	optional uint32 start_count = 3;
+	optional uint32 proposed_count = 4;
+	optional fixed64 owner_steamid = 5;
+}
+
+message CMsgGCQuestCompleted {
 }
 
