@@ -479,6 +479,7 @@ enum EDOTAGCMsg {
 	k_EMsgServerToGCRequestStatus_Response = 7546;
 	k_EMsgGCGCToLANServerRelayConnect = 7549;
 	k_EMsgGCToGCFantasySetMatchLeague = 7555;
+	k_EMsgClientToGCRecordCompendiumStats = 7558;
 	k_EMsgGCDev_GrantWarKill = 8001;
 }
 

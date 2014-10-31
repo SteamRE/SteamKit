@@ -2383,3 +2383,12 @@ message CMsgClientToGCSetProfileCardSlot {
 	optional uint64 slot_value = 3;
 }
 
+message CMsgClientToGCRecordCompendiumStats {
+	optional uint32 league_id = 1;
+	optional uint32 view_duration_s = 2;
+	optional uint32 videos_viewed = 3;
+	optional uint32 page_turns = 4;
+	optional uint32 links_followed = 5;
+	optional uint32 compendium_version = 6;
+}
+

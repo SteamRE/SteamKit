@@ -7,7 +7,6 @@ enum EUniverse
 	Beta = 2;
 	Internal = 3;
 	Dev = 4;
-	RC = 5; obsolete "Universe no longer exists"
 
 	Max = 5;
 };
@@ -66,11 +65,9 @@ enum EFriendRelationship
 	None = 0;
 	
 	Blocked = 1;
-	PendingInvitee = 2; obsolete "renamed to RequestRecipient"
 	RequestRecipient = 2;
 	Friend = 3;
 	RequestInitiator = 4;
-	PendingInviter = 4;  obsolete "renamed to RequestInitiator"
 	Ignored = 5;
 	IgnoredFriend = 6;
 	SuggestedFriend = 7;
@@ -167,7 +164,6 @@ enum EFriendFlags flags
 	FriendshipRequested = 2;
 	Immediate = 4;
 	ClanMember = 8;
-	GameServer = 16; obsolete "renamed to OnGameServer"
 	OnGameServer = 16;
 	RequestingFriendship = 128;
 	RequestingInfo = 256;
@@ -450,7 +446,6 @@ enum EContentDownloadSourceType
 	CS = 1;
 	CDN = 2;
 	LCS = 3;
-	Proxy = 4; obsolete "renamed to ProxyCache"
 	ProxyCache = 4;
 
 	Max = 5;
@@ -734,9 +729,7 @@ enum EEconTradeResponse
 {
 	Accepted = 0;
 	Declined = 1;
-	VacBannedInitiator = 2; obsolete "renamed to TradeBannedInitiator"
 	TradeBannedInitiator = 2;
-	VacBannedTarget = 3; obsolete "renamed to TradeBannedTarget"
 	TradeBannedTarget = 3;
 	TargetAlreadyTrading = 4;
 	Disabled = 5;
@@ -745,11 +738,8 @@ enum EEconTradeResponse
 	TooSoon = 8;
 	TooSoonPenalty = 9;
 	ConnectionFailed = 10;
-	InitiatorAlreadyTrading = 11; obsolete "renamed to AlreadyTrading"
 	AlreadyTrading = 11;
-	Error = 12; obsolete "renamed to AlreadyHasTradeRequest"
 	AlreadyHasTradeRequest = 12;
-	Timeout = 13; obsolete "renamed to NoResponse"
 	NoResponse = 13;
 	CyberCafeInitiator = 14;
 	CyberCafeTarget = 15;

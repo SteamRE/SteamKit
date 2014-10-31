@@ -1870,8 +1870,6 @@ namespace SteamKit2
 		Beta = 2,
 		Internal = 3,
 		Dev = 4,
-		[Obsolete( "Universe no longer exists" )]
-		RC = 5,
 		Max = 5,
 	}
 	public enum EChatEntryType
@@ -1920,13 +1918,9 @@ namespace SteamKit2
 	{
 		None = 0,
 		Blocked = 1,
-		[Obsolete( "renamed to RequestRecipient" )]
-		PendingInvitee = 2,
 		RequestRecipient = 2,
 		Friend = 3,
 		RequestInitiator = 4,
-		[Obsolete( "renamed to RequestInitiator" )]
-		PendingInviter = 4,
 		Ignored = 5,
 		IgnoredFriend = 6,
 		SuggestedFriend = 7,
@@ -2011,8 +2005,6 @@ namespace SteamKit2
 		FriendshipRequested = 2,
 		Immediate = 4,
 		ClanMember = 8,
-		[Obsolete( "renamed to OnGameServer" )]
-		GameServer = 16,
 		OnGameServer = 16,
 		RequestingFriendship = 128,
 		RequestingInfo = 256,
@@ -2279,8 +2271,6 @@ namespace SteamKit2
 		CS = 1,
 		CDN = 2,
 		LCS = 3,
-		[Obsolete( "renamed to ProxyCache" )]
-		Proxy = 4,
 		ProxyCache = 4,
 		Max = 5,
 	}
@@ -2542,11 +2532,7 @@ namespace SteamKit2
 	{
 		Accepted = 0,
 		Declined = 1,
-		[Obsolete( "renamed to TradeBannedInitiator" )]
-		VacBannedInitiator = 2,
 		TradeBannedInitiator = 2,
-		[Obsolete( "renamed to TradeBannedTarget" )]
-		VacBannedTarget = 3,
 		TradeBannedTarget = 3,
 		TargetAlreadyTrading = 4,
 		Disabled = 5,
@@ -2555,14 +2541,8 @@ namespace SteamKit2
 		TooSoon = 8,
 		TooSoonPenalty = 9,
 		ConnectionFailed = 10,
-		[Obsolete( "renamed to AlreadyTrading" )]
-		InitiatorAlreadyTrading = 11,
 		AlreadyTrading = 11,
-		[Obsolete( "renamed to AlreadyHasTradeRequest" )]
-		Error = 12,
 		AlreadyHasTradeRequest = 12,
-		[Obsolete( "renamed to NoResponse" )]
-		Timeout = 13,
 		NoResponse = 13,
 		CyberCafeInitiator = 14,
 		CyberCafeTarget = 15,
