@@ -386,20 +386,10 @@ namespace SteamKit2
             string cdnToken = null;
             depotCdnAuthKeys.TryGetValue( depotId, out cdnToken );
 
-            byte[] compressedManifest = DoRawCommand( connectedServer, "depot", doAuth: true, args: string.Format( "{0}/manifest/{1}/5", depotId, manifestId ), authtoken: cdnToken );
+            byte[] depotKey = null;
+            depotKeys.TryGetValue( depotId, out depotKey );
 
-            byte[] manifestData = ZipUtil.Decompress( compressedManifest );
-
-            var depotManifest = new DepotManifest( manifestData );
-
-            byte[] depotKey;
-            if ( depotKeys.TryGetValue( depotId, out depotKey ) )
-            {
-                // if we have the depot key, decrypt the manifest filenames
-                depotManifest.DecryptFilenames( depotKey );
-            }
-
-            return depotManifest;
+            return DownloadManifestCore( depotId, manifestId, connectedServer, cdnToken, depotKey );
         }
 
         /// <summary>
@@ -422,19 +412,7 @@ namespace SteamKit2
                 Port = 80
             };
 
-            byte[] manifestData = DoRawCommand( server, "depot", doAuth: true, args: string.Format( "{0}/manifest/{1}/5", depotId, manifestId ), authtoken: cdnAuthToken );
-
-            manifestData = ZipUtil.Decompress( manifestData );
-
-            var depotManifest = new DepotManifest( manifestData );
-
-            if ( depotKey != null )
-            {
-                // if we have the depot key, decrypt the manifest filenames
-                depotManifest.DecryptFilenames( depotKey );
-            }
-
-            return depotManifest;
+            return DownloadManifestCore( depotId, manifestId, server, cdnAuthToken, depotKey );
         }
 
         // Ambiguous reference in cref attribute: 'CDNClient.DownloadManifest'. Assuming 'SteamKit2.CDNClient.DownloadManifest(uint, ulong)',
@@ -566,5 +544,22 @@ namespace SteamKit2
             return dataKv;
         }
 
+        DepotManifest DownloadManifestCore( uint depotId, ulong manifestId, Server server, string cdnAuthToken, byte[] depotKey )
+        {
+
+            byte[] manifestData = DoRawCommand( server, "depot", doAuth: true, args: string.Format( "{0}/manifest/{1}/5", depotId, manifestId ), authtoken: cdnAuthToken );
+
+            manifestData = ZipUtil.Decompress( manifestData );
+
+            var depotManifest = new DepotManifest( manifestData );
+
+            if ( depotKey != null )
+            {
+                // if we have the depot key, decrypt the manifest filenames
+                depotManifest.DecryptFilenames( depotKey );
+            }
+
+            return depotManifest;
+        }
     }
 }
