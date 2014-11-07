@@ -53,24 +53,33 @@ namespace SteamKit2
 
                 if ( asyncResult.AsyncWaitHandle.WaitOne( timeout ) )
                 {
-                    socket.EndConnect( asyncResult );
-
                     sock = socket;
-                    ConnectCompleted( socket );
+                    ConnectCompleted( socket, asyncResult );
                 }
                 else
                 {
                     socket.Close();
-                    ConnectCompleted( null );
+                    ConnectCompleted( null, asyncResult );
                 }
             });
         }
 
-        void ConnectCompleted( Socket sock )
+        void ConnectCompleted( Socket sock, IAsyncResult asyncResult )
         {
             if ( sock == null )
             {
                 DebugLog.WriteLine( "TcpConnection", "Timed out while connecting" );
+                OnDisconnected( EventArgs.Empty );
+                return;
+            }
+
+            try
+            {
+                sock.EndConnect( asyncResult );
+            }
+            catch (Exception ex)
+            {
+                DebugLog.WriteLine( "TcpConnection", "Socket exception while connecting: {0}", ex );
                 OnDisconnected( EventArgs.Empty );
                 return;
             }
