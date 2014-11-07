@@ -53,6 +53,8 @@ namespace SteamKit2
 
                 if ( asyncResult.AsyncWaitHandle.WaitOne( timeout ) )
                 {
+                    socket.EndConnect( asyncResult );
+
                     sock = socket;
                     ConnectCompleted( socket );
                 }
@@ -167,7 +169,19 @@ namespace SteamKit2
 
             while ( !wantsNetShutdown )
             {
-                bool canRead = socket.Poll( POLL_MS * 1000, SelectMode.SelectRead );
+                bool canRead = false;
+
+                try
+                {
+                    canRead = socket.Poll( POLL_MS * 1000, SelectMode.SelectRead );
+                }
+                catch ( Exception ex )
+                {
+                    DebugLog.WriteLine( "TcpConnection", "Socket exception while polling: {0}", ex );
+
+                    Cleanup();
+                    return;
+                }
 
                 if ( !canRead )
                 {
@@ -184,7 +198,7 @@ namespace SteamKit2
                 {
                     if ( wantsNetShutdown || netStream == null )
                     {
-                        break;
+                        return;
                     }
 
                     // read the packet off the network
@@ -250,13 +264,16 @@ namespace SteamKit2
 
         void Cleanup()
         {
-            netLock.EnterWriteLock();
+            while ( !wantsNetShutdown && !netLock.TryEnterWriteLock( 500 ) ) { }
+
+            // no point in continuing if we caught an error inside netThread while shutting down
+            if ( wantsNetShutdown ) return;
 
             try
             {
                 if ( netThread != null )
                 {
-                    if ( Thread.CurrentThread != netThread )
+                    if ( Thread.CurrentThread.ManagedThreadId != netThread.ManagedThreadId )
                     {
                         wantsNetShutdown = true;
                         // wait for our network thread to terminate
