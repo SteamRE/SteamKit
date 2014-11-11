@@ -899,6 +899,15 @@ namespace SteamKit2.GC.Internal
       get { return _client_language; }
       set { _client_language = value; }
     }
+
+    private ESourceEngine _engine = ESourceEngine.k_ESE_Source1;
+    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"engine", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(ESourceEngine.k_ESE_Source1)]
+    public ESourceEngine engine
+    {
+      get { return _engine; }
+      set { _engine = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -1491,6 +1500,17 @@ namespace SteamKit2.GC.Internal
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"ESourceEngine", EnumPassthru=true)]
+    public enum ESourceEngine
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_ESE_Source1", Value=0)]
+      k_ESE_Source1 = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_ESE_Source2", Value=1)]
+      k_ESE_Source2 = 1
+    }
   
     [global::ProtoBuf.ProtoContract(Name=@"PartnerAccountType", EnumPassthru=true)]
     public enum PartnerAccountType

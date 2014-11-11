@@ -309,6 +309,11 @@ message CMsgGameChatLog {
 message CMsgDOTALiveScoreboardUpdate {
 	message Team {
 		message Player {
+			message HeroAbility {
+				optional uint32 ability_id = 1;
+				optional uint32 ability_level = 2;
+			}
+
 			enum DOTAUltimateState {
 				k_EDOTAUltimateStateNotLearned = 0;
 				k_EDOTAUltimateStateCooldown = 1;
@@ -342,10 +347,13 @@ message CMsgDOTALiveScoreboardUpdate {
 			optional float position_x = 24;
 			optional float position_y = 25;
 			optional uint32 net_worth = 26;
+			repeated .CMsgDOTALiveScoreboardUpdate.Team.Player.HeroAbility abilities = 27;
 		}
 
 		repeated .CMsgDOTALiveScoreboardUpdate.Team.Player players = 1;
 		optional uint32 score = 2;
+		optional uint32 tower_state = 3;
+		optional uint32 barracks_state = 4;
 	}
 
 	optional uint32 tournament_id = 1;
@@ -405,7 +413,11 @@ message CMsgGCToRelayConnect {
 	optional uint64 game_server_steam_id = 4;
 	optional uint32 parent_count = 5;
 	optional fixed64 tv_unique_secret_code = 6;
-	optional uint32 source_tv_steamid = 7;
+	optional fixed64 source_tv_steamid = 7;
+}
+
+message CMsgGCGCToLANServerRelayConnect {
+	optional fixed64 relay_steamid = 1;
 }
 
 message CMsgGCToRelayConnectResponse {
@@ -641,6 +653,7 @@ message CMsgServerToGCVictoryPredictions {
 		optional uint32 account_id = 1;
 		optional uint64 item_id = 2;
 		optional bool victory = 3;
+		optional uint64 match_id = 4;
 	}
 
 	repeated .CMsgServerToGCVictoryPredictions.Record records = 1;

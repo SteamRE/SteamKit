@@ -1,0 +1,44 @@
+import "google/protobuf/descriptor.proto";
+import "steammessages_unified_base.steamclient.proto";
+
+message CCommunity_GetLinkFilterHashPrefixes_Request {
+	optional uint32 hit_type = 1 [(description) = "The retrieved hits will be filtered to this type."];
+	optional uint32 count = 2 [(description) = "The number of hits to retrieve in a single batch. Specify 0 for no limit."];
+	optional uint64 start = 3 [(description) = "The starting count when retrieving hits in batches."];
+}
+
+message CCommunity_GetLinkFilterHashPrefixes_Response {
+	repeated uint32 hash_prefixes = 1 [(description) = "The first 32 bits of the SHA1 hashes of each hit requested."];
+}
+
+message CCommunity_GetLinkFilterHashes_Request {
+	optional uint32 hit_type = 1 [(description) = "The retrieved hits will be filtered to this type."];
+	optional uint32 count = 2 [(description) = "The number of hits to retrieve in a single batch. Specify 0 for no limit."];
+	optional uint64 start = 3 [(description) = "The starting count when retrieving hits in batches."];
+}
+
+message CCommunity_GetLinkFilterHashes_Response {
+	repeated bytes hashes = 1 [(description) = "A list of hashes returned from our request."];
+}
+
+message CCommunity_GetLinkFilterListVersion_Request {
+	optional uint32 hit_type = 1 [(description) = "The version hashes for this type's chunks will be returned."];
+}
+
+message CCommunity_GetLinkFilterListVersion_Response {
+	optional string version = 1 [(description) = "A hash built using the IDs of the contained hits."];
+	optional uint64 count = 2 [(description) = "The number of hits of this type"];
+}
+
+service CommunityLinkFilter {
+	option (service_description) = "A service for recording data about Steam Community phishing link filtering";
+	rpc GetLinkFilterHashPrefixes (.CCommunity_GetLinkFilterHashPrefixes_Request) returns (.CCommunity_GetLinkFilterHashPrefixes_Response) {
+		option (method_description) = "Get a list of hash prefixes for the specified hit type, to use for client caching.";
+	}
+	rpc GetLinkFilterHashes (.CCommunity_GetLinkFilterHashes_Request) returns (.CCommunity_GetLinkFilterHashes_Response) {
+		option (method_description) = "Get a list of hashes for the specified hit type, to use for client caching.";
+	}
+	rpc GetLinkFilterListVersion (.CCommunity_GetLinkFilterListVersion_Request) returns (.CCommunity_GetLinkFilterListVersion_Response) {
+		option (method_description) = "Get a list of hashes describing the version of each chunk of the requested size.";
+	}
+}

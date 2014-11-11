@@ -477,6 +477,9 @@ enum EDOTAGCMsg {
 	k_EMsgServerToGCSuspiciousActivity = 7544;
 	k_EMsgSignOutCommunicationSummary = 7545;
 	k_EMsgServerToGCRequestStatus_Response = 7546;
+	k_EMsgGCGCToLANServerRelayConnect = 7549;
+	k_EMsgGCToGCFantasySetMatchLeague = 7555;
+	k_EMsgClientToGCRecordCompendiumStats = 7558;
 	k_EMsgGCDev_GrantWarKill = 8001;
 }
 
@@ -1154,6 +1157,11 @@ message CMsgDOTAConsumeFantasyTicketFailure {
 	optional uint32 account_id = 1;
 	optional uint64 item_id = 2;
 	optional uint32 fantasy_league_id = 3;
+}
+
+message CMsgGCToGCFantasySetMatchLeague {
+	optional uint64 match_id = 1;
+	optional uint32 league_id = 2;
 }
 
 message CSODOTAMapLocationState {

@@ -246,6 +246,13 @@ message CMsgGCCStrike15_v2_MatchmakingClient2ServerPing {
 }
 
 message CMsgGCCStrike15_v2_MatchmakingGC2ClientUpdate {
+	message Note {
+		optional int32 type = 1;
+		optional int32 region_id = 2;
+		optional float region_r = 3;
+		optional float distance = 4;
+	}
+
 	optional int32 matchmaking = 1;
 	repeated uint32 waiting_account_id_sessions = 2;
 	optional string error = 3;
@@ -256,6 +263,7 @@ message CMsgGCCStrike15_v2_MatchmakingGC2ClientUpdate {
 	repeated uint32 failready_account_id_sessions = 10;
 	repeated uint32 vacbanned_account_id_sessions = 11;
 	optional .IpAddressMask server_ipaddress_mask = 12;
+	repeated .CMsgGCCStrike15_v2_MatchmakingGC2ClientUpdate.Note notes = 13;
 }
 
 message CDataGCCStrike15_v2_TournamentMatchDraft {
@@ -535,13 +543,13 @@ message CMsgGCCStrike15_v2_PlayerEarnedRewardNotification {
 
 message CMsgGCCStrike15_v2_PlayerOverwatchCaseUpdate {
 	optional uint64 caseid = 1;
-	optional uint32 verdict_legacy = 2;
 	optional uint32 suspectid = 3;
 	optional uint32 fractionid = 4;
 	optional uint32 rpt_aimbot = 5;
 	optional uint32 rpt_wallhack = 6;
 	optional uint32 rpt_speedhack = 7;
 	optional uint32 rpt_teamharm = 8;
+	optional uint32 reason = 9;
 }
 
 message CMsgGCCStrike15_v2_PlayerOverwatchCaseAssignment {
@@ -555,6 +563,7 @@ message CMsgGCCStrike15_v2_PlayerOverwatchCaseAssignment {
 	optional uint32 numrounds = 8;
 	optional uint32 fractionrounds = 9;
 	optional int32 streakconvictions = 10;
+	optional uint32 reason = 11;
 }
 
 message CMsgGCCStrike15_v2_PlayerOverwatchCaseStatus {

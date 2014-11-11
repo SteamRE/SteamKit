@@ -762,6 +762,7 @@ message CMsgDOTAPopup {
 		ALL_HERO_CHALLENGE_PROGRESS = 52;
 		NEED_INITIAL_SKILL = 53;
 		NEED_INITIAL_SKILL_IN_PARTY = 54;
+		TARGET_ENGINE_MISMATCH = 55;
 	}
 
 	optional .CMsgDOTAPopup.PopupID id = 1 [default = KICKED_FROM_LOBBY];
@@ -1811,6 +1812,7 @@ message CMsgDOTAMatchmakingStatsResponse {
 	repeated uint32 searching_players_by_group = 2;
 	optional uint32 disabled_groups = 3;
 	optional .CMsgMatchmakingGroupServerSample gameserver_sample = 4;
+	optional .CMsgMatchmakingGroupServerSample gameserver_sample_source2 = 6;
 	optional bool maintenance_alerts = 5;
 }
 
@@ -2379,5 +2381,14 @@ message CMsgClientToGCSetProfileCardSlot {
 	optional uint32 slot_id = 1;
 	optional uint32 slot_type = 2;
 	optional uint64 slot_value = 3;
+}
+
+message CMsgClientToGCRecordCompendiumStats {
+	optional uint32 league_id = 1;
+	optional uint32 view_duration_s = 2;
+	optional uint32 videos_viewed = 3;
+	optional uint32 page_turns = 4;
+	optional uint32 links_followed = 5;
+	optional uint32 compendium_version = 6;
 }
 
