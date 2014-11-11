@@ -16,6 +16,7 @@ namespace NetHookAnalyzer2
 			Type[] eMsgEnums =
 			{
 				typeof( SteamKit2.GC.Dota.Internal.EDOTAGCMsg ),
+				typeof( SteamKit2.GC.CSGO.Internal.ECsgoGCMsg ),
 				typeof( SteamKit2.GC.Internal.EGCBaseMsg ),
 				typeof( SteamKit2.GC.Internal.ESOMsg ),
 				typeof( SteamKit2.GC.Internal.EGCSystemMsg ),
