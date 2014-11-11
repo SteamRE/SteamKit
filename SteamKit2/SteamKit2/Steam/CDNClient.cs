@@ -51,6 +51,10 @@ namespace SteamKit2
             /// Gets the weighted load.
             /// </summary>
             public int WeightedLoad { get; internal set; }
+            /// <summary>
+            /// Gets the number of entries this server is worth.
+            /// </summary>
+            public int NumEntries { get; internal set; }
 
             /// <summary>
             /// Performs an implicit conversion from <see cref="System.Net.IPEndPoint"/> to <see cref="SteamKit2.CDNClient.Server"/>.
@@ -167,6 +171,7 @@ namespace SteamKit2
         ulong sessionId;
         long reqCounter;
 
+        public static TimeSpan RequestTimeout = TimeSpan.FromSeconds( 5 );
 
         static CDNClient()
         {
@@ -271,6 +276,7 @@ namespace SteamKit2
                 uint serverCell = ( uint )server[ "cell" ].AsInteger();
                 int load = server[ "load" ].AsInteger();
                 int weightedLoad = server[ "weightedload" ].AsInteger();
+                int entries = server[ "NumEntriesInClientList" ].AsInteger( 1 );
 
                 serverList.Add( new Server
                 {
@@ -283,7 +289,9 @@ namespace SteamKit2
 
                     Load = load,
                     WeightedLoad = weightedLoad,
+                    NumEntries = entries
                 } );
+                
             }
 
             return serverList;
@@ -488,8 +496,6 @@ namespace SteamKit2
             return DownloadDepotChunkCore( depotId, chunk, server, cdnAuthToken, depotKey );
         }
 
-
-
         string BuildCommand( Server server, string command, string args, string authtoken = null )
         {
             return string.Format( "http://{0}:{1}/{2}/{3}{4}", server.Host, server.Port, command, args, authtoken ?? "" );
@@ -498,52 +504,58 @@ namespace SteamKit2
         byte[] DoRawCommand( Server server, string command, string data = null, string method = WebRequestMethods.Http.Get, bool doAuth = false, string args = "", string authtoken = null )
         {
             string url = BuildCommand( server, command, args, authtoken );
+            var webReq = HttpWebRequest.Create( url ) as HttpWebRequest;
+            webReq.Timeout = ( int )RequestTimeout.TotalMilliseconds;
+            webReq.Method = method;
+            webReq.Pipelined = true;
+            webReq.KeepAlive = true;
 
-            using ( var webClient = new WebClient() )
+            if ( doAuth && server.Type == "CS" )
             {
-                webClient.Headers.Clear();
+                var req = Interlocked.Increment( ref reqCounter );
 
-                if ( doAuth && server.Type == "CS" )
+                byte[] shaHash;
+
+                using ( var ms = new MemoryStream() )
+                using ( var bw = new BinaryWriter( ms ) )
                 {
-                    var req = Interlocked.Increment(ref reqCounter);
+                    var uri = new Uri( url );
 
-                    byte[] shaHash;
+                    bw.Write( sessionId );
+                    bw.Write( req );
+                    bw.Write( sessionKey );
+                    bw.Write( Encoding.UTF8.GetBytes( uri.AbsolutePath ) );
 
-                    using ( var ms = new MemoryStream() )
-                    using ( var bw = new BinaryWriter( ms ) )
-                    {
-                        var uri = new Uri( url );
-
-                        bw.Write( sessionId );
-                        bw.Write( req );
-                        bw.Write( sessionKey );
-                        bw.Write( Encoding.UTF8.GetBytes( uri.AbsolutePath ) );
-
-                        shaHash = CryptoHelper.SHAHash( ms.ToArray() );
-                    }
-
-                    string hexHash = Utils.EncodeHexString( shaHash );
-                    string authHeader = string.Format( "sessionid={0};req-counter={1};hash={2};", sessionId, req, hexHash );
-
-                    webClient.Headers[ "x-steam-auth" ] = authHeader;
+                    shaHash = CryptoHelper.SHAHash( ms.ToArray() );
                 }
 
-                byte[] resultData = null;
+                string hexHash = Utils.EncodeHexString( shaHash );
+                string authHeader = string.Format( "sessionid={0};req-counter={1};hash={2};", sessionId, req, hexHash );
 
-                if ( method == WebRequestMethods.Http.Get )
+                webReq.Headers[ "x-steam-auth" ] = authHeader;
+            }
+
+            if ( method == WebRequestMethods.Http.Post )
+            {
+                byte[] payload = Encoding.UTF8.GetBytes( data );
+                webReq.ContentType = "application/x-www-form-urlencoded";
+                webReq.ContentLength = payload.Length;
+
+                using ( var reqStream = webReq.GetRequestStream() )
                 {
-                    resultData = webClient.DownloadData( url );
+                    reqStream.Write(payload, 0, payload.Length);
                 }
-                else if ( method == WebRequestMethods.Http.Post )
-                {
-                    webClient.Headers[ HttpRequestHeader.ContentType ] = "application/x-www-form-urlencoded";
+            }
 
-                    resultData = webClient.UploadData( url, Encoding.UTF8.GetBytes( data ) );
-                }
+            var response = webReq.GetResponse();
 
-                return resultData;
+            using ( var ms = new MemoryStream( ( int )response.ContentLength ) )
+            {
+                response.GetResponseStream().CopyTo( ms );
+                return ms.ToArray();
             }
         }
+
         KeyValue DoCommand( Server server, string command, string data = null, string method = WebRequestMethods.Http.Get, bool doAuth = false, string args = "", string authtoken = null )
         {
             byte[] resultData = DoRawCommand( server, command, data, method, doAuth, args, authtoken );

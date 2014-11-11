@@ -946,6 +946,19 @@ message CAttribute_DynamicRecipeComponent {
 	optional uint32 num_fulfilled = 6;
 }
 
+message CAttribute_DynamicRecipeComponent_COMPAT_NEVER_SERIALIZE_THIS_OUT {
+	optional uint32 def_index = 1;
+	optional uint32 item_def = 2;
+	optional uint32 item_quality = 3;
+	optional uint32 component_flags = 4;
+	optional uint32 item_flags = 5;
+	optional string attributes_string = 6;
+	optional uint32 num_required = 7;
+	optional uint32 item_count = 8;
+	optional uint32 num_fulfilled = 9;
+	optional uint32 items_fulfilled = 10;
+}
+
 message CAttribute_ItemSlotCriteria {
 	optional string tags = 1;
 }
