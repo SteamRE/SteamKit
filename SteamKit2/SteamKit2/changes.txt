@@ -1,5 +1,45 @@
 
 ------------------------------------------------------------------------------
+v 1.6.0			Oct 11, 2014
+------------------------------------------------------------------------------
+
+*	Updated EOSType for newer Linux and Windows versions.
+*	A LoggedOnCallback with EResult.NoConnection is now posted when attempting to logon without being
+	connected to the remote Steam server.
+*	Fixed anonymous gameserver logon.
+*	CDNClient.Server's constructor now accepts a DnsEndPoint.
+*	Updated EResult with the following new fields: AccountLogonDeniedNeedTwoFactorCode, ItemDeleted,
+	AccountLoginDeniedThrottle, TwoFactorCodeMismatch
+*	Added public utility class for working with DateTime and unix epochs: DateUtils
+*	Added GetSingleFileInfo, ShareFile and related callbacks for dealing with Steam cloud files with the
+	SteamCloud handler.
+*	Fixed a potential crash when failing to properly deserialize network messages.
+*	Updated EMsg list.
+*	Refactored the internals of tcp connections to Steam servers to be more resiliant and threadsafe.
+*	CallbackMsg.Handle will now return a boolean indiciating that the passed in callback matches the
+	generic type parameter.
+*	Added support for logging into accounts with two-factor auth enabled. See the
+	SteamUser.LogOnDetails.TwoFactorCode field.
+*	Updated the bootstrap list of Steam CM servers that SteamKit will initially attempt to connect to.
+*	Added SteamFriends.FriendMsgEchoCallback for echoed messages sent to other logged in client
+	instances.
+*	Updated game related GC messages and protobufs.
+
+BREAKING CHANGES
+*	JobCallback API has been merged with Callback. For help with transitioning code, please see the following
+	wiki notes: https://github.com/SteamRE/SteamKit/wiki/JobCallback-Transition.
+*	UFSClient.UploadFileResponseCallback.JobID has been renamed to RemoteJobID in order to not conflict with
+	CallbackMsg's new JobID member.
+*	UFSClient.UploadDetails.JobID has been renamed to RemoteJobID.
+*	CDNClient has been refactored to support multiple authdepot calls for a single instance of the client
+	and to support CDN servers.
+*	The following EResult fields have been renamed:
+		PSNAccountNotLinked -> ExternalAccountUnlinked
+		InvalidPSNTicket -> PSNTicketInvalid
+		PSNAccountAlreadyLinked -> ExternalAccountAlreadyLinked
+
+
+------------------------------------------------------------------------------
 v 1.5.1			Mar 15, 2014
 ------------------------------------------------------------------------------
 

@@ -102,6 +102,7 @@
     <Compile Include="SessionForm.Designer.cs">
       <DependentUpon>SessionForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="StringExtensions.cs" />
     <Compile Include="Utils.cs" />
   </ItemGroup>
   <ItemGroup>

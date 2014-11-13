@@ -567,3 +567,11 @@ message CMsgBuildID {
 	optional uint64 build_id = 1;
 }
 
+message CMsgOpenDevTools {
+	optional uint32 browser_handle = 1;
+}
+
+message CMsgCloseDevTools {
+	optional uint32 browser_handle = 1;
+}
+

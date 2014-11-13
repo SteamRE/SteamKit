@@ -35,6 +35,7 @@ enum EDotaClientMessages {
 	DOTA_CM_EnemyItemAlert = 30;
 	DOTA_CM_FreeInventory = 31;
 	DOTA_CM_BuyBackStateAlert = 32;
+	DOTA_CM_QuickBuyAlert = 33;
 }
 
 message CDOTAClientMsg_MapPing {
@@ -146,9 +147,15 @@ message CDOTAClientMsg_RecordVote {
 
 message CDOTAClientMsg_WillPurchaseAlert {
 	optional int32 itemid = 1;
+	optional uint32 gold_remaining = 2;
 }
 
 message CDOTAClientMsg_BuyBackStateAlert {
+}
+
+message CDOTAClientMsg_QuickBuyAlert {
+	optional int32 itemid = 1;
+	optional int32 gold_required = 2;
 }
 
 message CDOTAClientMsg_PlayerShowCase {

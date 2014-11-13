@@ -3745,7 +3745,10 @@ namespace SteamKit2.GC.Dota.Internal
       NEED_INITIAL_SKILL = 53,
             
       [global::ProtoBuf.ProtoEnum(Name=@"NEED_INITIAL_SKILL_IN_PARTY", Value=54)]
-      NEED_INITIAL_SKILL_IN_PARTY = 54
+      NEED_INITIAL_SKILL_IN_PARTY = 54,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"TARGET_ENGINE_MISMATCH", Value=55)]
+      TARGET_ENGINE_MISMATCH = 55
     }
   
     private global::ProtoBuf.IExtension extensionObject;
@@ -9353,6 +9356,15 @@ namespace SteamKit2.GC.Dota.Internal
       set { _gameserver_sample = value; }
     }
 
+    private CMsgMatchmakingGroupServerSample _gameserver_sample_source2 = null;
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"gameserver_sample_source2", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public CMsgMatchmakingGroupServerSample gameserver_sample_source2
+    {
+      get { return _gameserver_sample_source2; }
+      set { _gameserver_sample_source2 = value; }
+    }
+
     private bool _maintenance_alerts = default(bool);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"maintenance_alerts", DataFormat = global::ProtoBuf.DataFormat.Default)]
     [global::System.ComponentModel.DefaultValue(default(bool))]
@@ -12523,6 +12535,70 @@ namespace SteamKit2.GC.Dota.Internal
     {
       get { return _slot_value; }
       set { _slot_value = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientToGCRecordCompendiumStats")]
+  public partial class CMsgClientToGCRecordCompendiumStats : global::ProtoBuf.IExtensible
+  {
+    public CMsgClientToGCRecordCompendiumStats() {}
+    
+
+    private uint _league_id = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"league_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint league_id
+    {
+      get { return _league_id; }
+      set { _league_id = value; }
+    }
+
+    private uint _view_duration_s = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"view_duration_s", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint view_duration_s
+    {
+      get { return _view_duration_s; }
+      set { _view_duration_s = value; }
+    }
+
+    private uint _videos_viewed = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"videos_viewed", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint videos_viewed
+    {
+      get { return _videos_viewed; }
+      set { _videos_viewed = value; }
+    }
+
+    private uint _page_turns = default(uint);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"page_turns", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint page_turns
+    {
+      get { return _page_turns; }
+      set { _page_turns = value; }
+    }
+
+    private uint _links_followed = default(uint);
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"links_followed", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint links_followed
+    {
+      get { return _links_followed; }
+      set { _links_followed = value; }
+    }
+
+    private uint _compendium_version = default(uint);
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"compendium_version", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint compendium_version
+    {
+      get { return _compendium_version; }
+      set { _compendium_version = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

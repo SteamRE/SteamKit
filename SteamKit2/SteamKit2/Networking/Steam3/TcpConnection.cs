@@ -54,17 +54,17 @@ namespace SteamKit2
                 if ( asyncResult.AsyncWaitHandle.WaitOne( timeout ) )
                 {
                     sock = socket;
-                    ConnectCompleted( socket );
+                    ConnectCompleted( socket, asyncResult );
                 }
                 else
                 {
                     socket.Close();
-                    ConnectCompleted( null );
+                    ConnectCompleted( null, asyncResult );
                 }
             });
         }
 
-        void ConnectCompleted( Socket sock )
+        void ConnectCompleted( Socket sock, IAsyncResult asyncResult )
         {
             if ( sock == null )
             {
@@ -73,19 +73,30 @@ namespace SteamKit2
                 return;
             }
 
-            if ( !sock.Connected )
+            try
             {
-                DebugLog.WriteLine( "TcpConnection", "Unable to connect" );
+                sock.EndConnect( asyncResult );
+            }
+            catch (Exception ex)
+            {
+                DebugLog.WriteLine( "TcpConnection", "Socket exception while connecting: {0}", ex );
                 OnDisconnected( EventArgs.Empty );
                 return;
             }
-
-            DebugLog.WriteLine( "TcpConnection", "Connected!" );
 
             netLock.EnterWriteLock();
 
             try
             {
+                if ( !sock.Connected )
+                {
+                    DebugLog.WriteLine( "TcpConnection", "Unable to connect" );
+                    OnDisconnected( EventArgs.Empty );
+                    return;
+                }
+
+                DebugLog.WriteLine( "TcpConnection", "Connected!" );
+
                 wantsNetShutdown = false;
                 netStream = new NetworkStream( sock, false );
 
@@ -127,11 +138,12 @@ namespace SteamKit2
                 data = NetFilter.ProcessOutgoing( data );
             }
 
-            netLock.EnterReadLock();
+            // a Send from the netThread has the potential to acquire the read lock and block while Disconnect is trying to join us
+            while ( !wantsNetShutdown && !netLock.TryEnterReadLock( 500 ) ) { }
 
             try
             {
-                if ( netStream == null )
+                if ( wantsNetShutdown || netStream == null )
                 {
                     DebugLog.WriteLine( "TcpConnection", "Attempting to send client message when not connected: {0}", clientMsg.MsgType );
                     return;
@@ -149,7 +161,8 @@ namespace SteamKit2
             }
             finally
             {
-                netLock.ExitReadLock();
+                if ( netLock.IsReadLockHeld )
+                    netLock.ExitReadLock();
             }
         }
 
@@ -165,7 +178,19 @@ namespace SteamKit2
 
             while ( !wantsNetShutdown )
             {
-                bool canRead = socket.Poll( POLL_MS * 1000, SelectMode.SelectRead );
+                bool canRead = false;
+
+                try
+                {
+                    canRead = socket.Poll( POLL_MS * 1000, SelectMode.SelectRead );
+                }
+                catch ( Exception ex )
+                {
+                    DebugLog.WriteLine( "TcpConnection", "Socket exception while polling: {0}", ex );
+
+                    Cleanup();
+                    return;
+                }
 
                 if ( !canRead )
                 {
@@ -173,16 +198,18 @@ namespace SteamKit2
                     continue;
                 }
 
-                netLock.EnterUpgradeableReadLock();
-                byte[] packData = null;
+                // potential here is to be waiting to acquire the lock when Disconnect is trying to join us
+                while ( !wantsNetShutdown && !netLock.TryEnterUpgradeableReadLock( 500 ) ) { }
 
-                if ( netStream == null )
-                {
-                    break;
-                }
+                byte[] packData = null;
 
                 try
                 {
+                    if ( wantsNetShutdown || netStream == null )
+                    {
+                        return;
+                    }
+
                     // read the packet off the network
                     packData = ReadPacket();
                 }
@@ -196,7 +223,8 @@ namespace SteamKit2
                 }
                 finally
                 {
-                    netLock.ExitUpgradeableReadLock();
+                    if( netLock.IsUpgradeableReadLockHeld )
+                        netLock.ExitUpgradeableReadLock();
                 }
 
                 // decrypt the data off the wire if needed
@@ -245,13 +273,16 @@ namespace SteamKit2
 
         void Cleanup()
         {
-            netLock.EnterWriteLock();
+            while ( !wantsNetShutdown && !netLock.TryEnterWriteLock( 500 ) ) { }
+
+            // no point in continuing if we caught an error inside netThread while shutting down
+            if ( wantsNetShutdown ) return;
 
             try
             {
                 if ( netThread != null )
                 {
-                    if ( Thread.CurrentThread != netThread )
+                    if ( Thread.CurrentThread.ManagedThreadId != netThread.ManagedThreadId )
                     {
                         wantsNetShutdown = true;
                         // wait for our network thread to terminate
@@ -316,15 +347,18 @@ namespace SteamKit2
         /// <returns>The local IP.</returns>
         public override IPAddress GetLocalIP()
         {
-            netLock.EnterReadLock();
+            while ( !wantsNetShutdown && !netLock.TryEnterReadLock( 500 ) ) { }
 
             try
             {
+                if ( wantsNetShutdown || sock == null ) return null;
+
                 return NetHelpers.GetLocalIP( sock );
             }
             finally
             {
-                netLock.ExitReadLock();
+                if ( netLock.IsReadLockHeld )
+                    netLock.ExitReadLock();
             }
         }
     }

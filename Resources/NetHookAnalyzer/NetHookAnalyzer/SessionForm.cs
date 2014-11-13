@@ -263,6 +263,7 @@ namespace NetHookAnalyzer
             Type[] eMsgEnums =
             {
                 typeof( SteamKit2.GC.Dota.Internal.EDOTAGCMsg ),
+                typeof( SteamKit2.GC.CSGO.Internal.ECsgoGCMsg ),
                 typeof( SteamKit2.GC.Internal.EGCBaseMsg ),
                 typeof( SteamKit2.GC.Internal.ESOMsg ),
                 typeof( SteamKit2.GC.Internal.EGCSystemMsg ),
@@ -575,11 +576,11 @@ namespace NetHookAnalyzer
             var gcMsgName = BuildEMsg( realEMsg );
 
             var typeMsgName = gcMsgName
-                .Replace( "GC", string.Empty )
                 .Replace( "k_", string.Empty )
                 .Replace( "ESOMsg", string.Empty )
                 .TrimStart( '_' )
-                .Replace( "EMsg", string.Empty );
+                .Replace( "EMsg", string.Empty )
+                .TrimStart( "GC" );
             
             var possibleTypes = from type in typeof(CMClient).Assembly.GetTypes()
                                 from typePrefix in GetPossibleGCTypePrefixes( gcAppid )

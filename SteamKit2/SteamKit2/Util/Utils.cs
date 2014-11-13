@@ -69,21 +69,41 @@ namespace SteamKit2
                             case 4:
                                 return EOSType.WinNT;
 
-                            case 5: // XP family
-                                if ( ver.Minor == 0 )
-                                    return EOSType.Win200;
+                            case 5:
+                                switch ( ver.Minor )
+                                {
+                                    case 0:
+                                        return EOSType.Win200;
 
-                                if ( ver.Minor == 1 || ver.Minor == 2 )
-                                    return EOSType.WinXP;
+                                    case 1:
+                                        return EOSType.WinXP;
+
+                                    case 2:
+                                        // Assume nobody runs Windows XP Professional x64 Edition
+                                        // It's an edition of Windows Server 2003 anyway.
+                                        return EOSType.Win2003;
+                                }
 
                                 goto default;
 
-                            case 6: // Vista & 7
-                                if ( ver.Minor == 0 )
-                                    return EOSType.WinVista;
+                            case 6:
+                                switch ( ver.Minor )
+                                {
+                                    case 0:
+                                        return EOSType.WinVista; // Also Server 2008
 
-                                if ( ver.Minor == 1 )
-                                    return EOSType.Windows7;
+                                    case 1:
+                                        return EOSType.Windows7; // Also Server 2008 R2
+
+                                    case 2:
+                                        return EOSType.Windows8; // Also Server 2012
+
+                                    // Note: The OSVersion property reports the same version number (6.2.0.0) for both Windows 8 and Windows 8.1.- http://msdn.microsoft.com/en-us/library/system.environment.osversion(v=vs.110).aspx
+                                    // In practice, this will only get hit if the application targets Windows 8.1 in the app manifest.
+                                    // See http://msdn.microsoft.com/en-us/library/windows/desktop/dn481241(v=vs.85).aspx for more info.
+                                    case 3:
+                                        return EOSType.Windows81; // Also Server 2012 R2
+                                }
 
                                 goto default;
 
@@ -125,7 +145,7 @@ namespace SteamKit2
 
                 try
                 {
-                    return CryptoHelper.SHAHash( Encoding.ASCII.GetBytes( hwString.ToString() ) );
+                    return CryptoHelper.SHAHash( Encoding.UTF8.GetBytes( hwString.ToString() ) );
                 }
                 catch { return null; }
             }

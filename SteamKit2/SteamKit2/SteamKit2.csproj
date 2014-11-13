@@ -78,6 +78,7 @@
     <Compile Include="Base\Generated\ContentManifest.cs" />
     <Compile Include="Base\Generated\GC\CSGO\MsgGC.cs" />
     <Compile Include="Base\Generated\GC\Dota\MsgGCClient.cs" />
+    <Compile Include="Base\Generated\GC\Dota\MsgGCClientFantasy.cs" />
     <Compile Include="Base\Generated\GC\Dota\MsgGCCommon.cs" />
     <Compile Include="Base\Generated\GC\Dota\MsgGCServer.cs" />
     <Compile Include="Base\Generated\GC\Dota\NetworkConnection.cs" />
@@ -96,6 +97,7 @@
     <Compile Include="Base\Generated\Unified\SteamMsgDeviceAuth.cs" />
     <Compile Include="Base\Generated\Unified\SteamMsgGameNotifications.cs" />
     <Compile Include="Base\Generated\Unified\SteamMsgGameServers.cs" />
+    <Compile Include="Base\Generated\Unified\SteamMsgLinkFilter.cs" />
     <Compile Include="Base\Generated\Unified\SteamMsgOffline.cs" />
     <Compile Include="Base\Generated\Unified\SteamMsgParental.cs" />
     <Compile Include="Base\Generated\Unified\SteamMsgPartnerApps.cs" />
@@ -131,6 +133,20 @@
     <Compile Include="Types\PubFile.cs" />
     <Compile Include="Util\AsnKeyParser.cs" />
     <Compile Include="Util\Crc32.cs" />
+    <Compile Include="Util\LZMA\Common\CRC.cs" />
+    <Compile Include="Util\LZMA\Common\InBuffer.cs" />
+    <Compile Include="Util\LZMA\Common\OutBuffer.cs" />
+    <Compile Include="Util\LZMA\Compress\LZMA\LzmaBase.cs" />
+    <Compile Include="Util\LZMA\Compress\LZMA\LzmaDecoder.cs" />
+    <Compile Include="Util\LZMA\Compress\LZMA\LzmaEncoder.cs" />
+    <Compile Include="Util\LZMA\Compress\LZ\IMatchFinder.cs" />
+    <Compile Include="Util\LZMA\Compress\LZ\LzBinTree.cs" />
+    <Compile Include="Util\LZMA\Compress\LZ\LzInWindow.cs" />
+    <Compile Include="Util\LZMA\Compress\LZ\LzOutWindow.cs" />
+    <Compile Include="Util\LZMA\Compress\RangeCoder\RangeCoder.cs" />
+    <Compile Include="Util\LZMA\Compress\RangeCoder\RangeCoderBit.cs" />
+    <Compile Include="Util\LZMA\Compress\RangeCoder\RangeCoderBitTree.cs" />
+    <Compile Include="Util\LZMA\ICoder.cs" />
     <Compile Include="Util\StreamHelpers.cs" />
     <Compile Include="Networking\Steam3\UdpPacket.cs" />
     <Compile Include="Steam\Handlers\SteamApps\Callbacks.cs" />
@@ -151,6 +167,7 @@
     <Compile Include="Steam\Handlers\SteamFriends\SteamFriends.cs" />
     <Compile Include="Util\ScheduledFunction.cs" />
     <Compile Include="Steam\Handlers\SteamUser\SteamUser.cs" />
+    <Compile Include="Util\VZipUtil.cs" />
     <Compile Include="Util\ZipUtil.cs" />
     <Compile Include="Steam\SteamClient\SteamClient.cs" />
     <Compile Include="Steam\CMClient.cs" />
