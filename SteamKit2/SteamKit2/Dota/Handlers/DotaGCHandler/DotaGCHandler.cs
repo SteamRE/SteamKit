@@ -419,7 +419,8 @@ namespace SteamKit2
                         {(uint) ESOMsg.k_ESOMsg_UpdateMultiple, HandleUpdateMultiple},
                         {(uint) EDOTAGCMsg.k_EMsgGCPopup, HandlePopup},
                         {(uint) EDOTAGCMsg.k_EMsgDOTALiveLeagueGameUpdate, HandleLiveLeageGameUpdate},
-                        {(uint) EGCBaseMsg.k_EMsgGCInvitationCreated, HandleInvitationCreated}
+                        {(uint) EGCBaseMsg.k_EMsgGCInvitationCreated, HandleInvitationCreated},
+                        {(uint) EDOTAGCMsg.k_EMsgGCMatchDetailsResponse, HandleMatchDetailsResponse}
                     };
                     Action<IPacketGCMsg> func;
                     if (!messageMap.TryGetValue(gcmsg.MsgType, out func))
@@ -568,7 +569,7 @@ namespace SteamKit2
             this.Client.PostCallback(new ChatMessage(resp.Body));
         }
 
-        private void HandleMatchResultResponse(IPacketGCMsg obj)
+        private void HandleMatchDetailsResponse(IPacketGCMsg obj)
         {
             var resp = new ClientGCMsgProtobuf<CMsgGCMatchDetailsResponse>(obj);
             this.Client.PostCallback(new MatchResultResponse(resp.Body));
