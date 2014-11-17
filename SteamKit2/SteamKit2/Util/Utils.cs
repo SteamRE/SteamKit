@@ -128,10 +128,10 @@ namespace SteamKit2
                                 case 13:
                                     return EOSType.MacOS109; // "Mavericks"
 
-                                    // OS X "Yosemite" 10.10
-                                    // No EOSType for this yet
-                                    // case 14:
-                                    //    return EOSType.MacOS1010;
+                                // OS X "Yosemite" 10.10
+                                // No EOSType for this yet
+                                // case 14:
+                                //    return EOSType.MacOS1010;
 
                                 default:
                                     return EOSType.MacOSUnknown;
