@@ -9,6 +9,7 @@ using System;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Runtime.InteropServices;
 using System.Text;
 using Microsoft.Win32;
 
@@ -113,12 +114,75 @@ namespace SteamKit2
                     }
 
                 case PlatformID.Unix:
-                    return EOSType.LinuxUnknown; // this _could_ be mac, but we're gonna just go with linux for now
+                    {
+                        if ( IsRunningOnDarwin() )
+                        {
+                            switch ( ver.Major )
+                            {
+                                case 11:
+                                    return EOSType.MacOS107; // "Lion"
+
+                                case 12:
+                                    return EOSType.MacOS108; // "Mountain Lion"
+
+                                case 13:
+                                    return EOSType.MacOS109; // "Mavericks"
+
+                                    // OS X "Yosemite" 10.10
+                                    // No EOSType for this yet
+                                    // case 14:
+                                    //    return EOSType.MacOS1010;
+
+                                default:
+                                    return EOSType.MacOSUnknown;
+                            }
+                        }
+                        else
+                        {
+                            return EOSType.LinuxUnknown;
+                        }
+                    }
+
+                // Not currently used by Mono. Maybe .NET Core will use this someday?
+                case PlatformID.MacOSX:
+                    return EOSType.MacOSUnknown;
 
                 default:
                     return EOSType.Unknown;
             }
         }
+
+        static bool IsRunningOnDarwin()
+        {
+            // Replace with a safer way if one exists in the future, such as if
+            // Mono actually decides to use PlatformID.MacOSX
+            var buffer = IntPtr.Zero;
+            try
+            {
+                buffer = Marshal.AllocHGlobal( 1024 );
+                if ( uname( buffer ) == 0 )
+                {
+                    var kernelName = Marshal.PtrToStringAnsi( buffer );
+                    if ( kernelName == "Darwin" )
+                    {
+                        return true;
+                    }
+                }
+            }
+            catch
+            {
+            }
+            finally
+            {
+                if ( buffer != IntPtr.Zero )
+                    Marshal.FreeHGlobal( buffer );
+            }
+
+            return false;
+        }
+
+        [DllImport ("libc")]
+        static extern int uname (IntPtr buf);
 
 
         public static byte[] GenerateMachineID()
