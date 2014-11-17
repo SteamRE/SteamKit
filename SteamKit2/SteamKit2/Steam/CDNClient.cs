@@ -447,7 +447,6 @@ namespace SteamKit2
             if ( chunk.ChunkID == null )
                 throw new ArgumentNullException( "chunk.ChunkID" );
 
-            string chunkId = Utils.EncodeHexString( chunk.ChunkID );
             string cdnToken = null;
             depotCdnAuthKeys.TryGetValue( depotId, out cdnToken );
 
