@@ -157,7 +157,7 @@ namespace SteamKit2
             var buffer = IntPtr.Zero;
             try
             {
-                buffer = Marshal.AllocHGlobal( 1024 );
+                buffer = Marshal.AllocHGlobal( 8192 );
                 if ( uname( buffer ) == 0 )
                 {
                     var kernelName = Marshal.PtrToStringAnsi( buffer );
