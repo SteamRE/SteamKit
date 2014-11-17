@@ -2300,6 +2300,7 @@ namespace SteamKit2
 		MacOS107 = -90,
 		MacOS108 = -89,
 		MacOS109 = -88,
+		MacOS1010 = -87,
 		LinuxUnknown = -203,
 		Linux22 = -202,
 		Linux24 = -201,
