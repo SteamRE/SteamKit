@@ -3846,6 +3846,15 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _victory; }
       set { _victory = value; }
     }
+
+    private ulong _match_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"match_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong match_id
+    {
+      get { return _match_id; }
+      set { _match_id = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

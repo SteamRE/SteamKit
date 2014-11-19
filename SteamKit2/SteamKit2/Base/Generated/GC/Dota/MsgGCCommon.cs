@@ -5228,6 +5228,9 @@ namespace SteamKit2.GC.Dota.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCFantasySetMatchLeague", Value=7555)]
       k_EMsgGCToGCFantasySetMatchLeague = 7555,
             
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCRecordCompendiumStats", Value=7558)]
+      k_EMsgClientToGCRecordCompendiumStats = 7558,
+            
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCDev_GrantWarKill", Value=8001)]
       k_EMsgGCDev_GrantWarKill = 8001
     }
@@ -5651,7 +5654,10 @@ namespace SteamKit2.GC.Dota.Internal
       MATCH_LANGUAGE_SPANISH = 5,
             
       [global::ProtoBuf.ProtoEnum(Name=@"MATCH_LANGUAGE_PORTUGUESE", Value=6)]
-      MATCH_LANGUAGE_PORTUGUESE = 6
+      MATCH_LANGUAGE_PORTUGUESE = 6,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"MATCH_LANGUAGE_ENGLISH2", Value=7)]
+      MATCH_LANGUAGE_ENGLISH2 = 7
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"ETournamentTemplate", EnumPassthru=true)]
