@@ -219,6 +219,9 @@ message CUserMessageColoredText {
 	optional uint32 color = 1;
 	optional string text = 2;
 	optional bool reset = 3;
+	optional int32 context_player_id = 4;
+	optional int32 context_value = 5;
+	optional int32 context_team_id = 6;
 }
 
 message CUserMessageItemPickup {
