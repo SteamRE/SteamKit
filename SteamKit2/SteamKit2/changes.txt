@@ -14,9 +14,6 @@ v 1.6.1			Nov 30, 2014
 *	Removed `EUniverse.RC`.
 *	Updated game related GC messages and protobufs.
 
-BREAKING CHANGES
-*	`Connection.NetFilter` is now set-only via the `SetNetEncryptionFilter` method. The `NetFilter` property has been removed.
-
 
 ------------------------------------------------------------------------------
 v 1.6.0			Oct 11, 2014
