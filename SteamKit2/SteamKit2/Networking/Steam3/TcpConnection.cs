@@ -10,6 +10,7 @@ using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
+using System.Collections.Concurrent;
 
 namespace SteamKit2
 {
@@ -22,6 +23,8 @@ namespace SteamKit2
 
         NetFilterEncryption filter;
 
+        ConcurrentDictionary<CancellationTokenSource, bool> connectTokens;
+
         volatile bool wantsNetShutdown;
         NetworkStream netStream;
         ReaderWriterLockSlim netLock;
@@ -33,6 +36,7 @@ namespace SteamKit2
 
         public TcpConnection() : base()
         {
+            connectTokens = new ConcurrentDictionary<CancellationTokenSource, bool>();
             netLock = new ReaderWriterLockSlim( LockRecursionPolicy.NoRecursion );
         }
 
@@ -49,26 +53,38 @@ namespace SteamKit2
             Socket socket = new Socket( AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp );
             DebugLog.WriteLine( "TcpConnection", "Connecting to {0}...", endPoint );
 
+            var cts = new CancellationTokenSource();
+            connectTokens.TryAdd( cts, true );
+
             ThreadPool.QueueUserWorkItem( sender =>
             {
                 var asyncResult = socket.BeginConnect( endPoint, null, null );
 
-                if ( asyncResult.AsyncWaitHandle.WaitOne( timeout ) )
+                if ( WaitHandle.WaitAny( new WaitHandle[] { asyncResult.AsyncWaitHandle, cts.Token.WaitHandle }, timeout ) == 0 )
                 {
                     sock = socket;
-                    ConnectCompleted( socket, asyncResult );
+                    ConnectCompleted( socket, asyncResult, cts );
                 }
                 else
                 {
                     socket.Close();
-                    ConnectCompleted( null, asyncResult );
+                    ConnectCompleted( null, asyncResult, cts );
                 }
+
+                bool ignored;
+                connectTokens.TryRemove( cts, out ignored );
+                cts.Dispose();
             });
         }
 
-        void ConnectCompleted( Socket sock, IAsyncResult asyncResult )
+        void ConnectCompleted( Socket sock, IAsyncResult asyncResult, CancellationTokenSource connectToken )
         {
-            if ( sock == null )
+            if ( connectToken.IsCancellationRequested )
+            {
+                DebugLog.WriteLine( "TcpConnection", "Connect request was cancelled" );
+                return;
+            }
+            else if ( sock == null )
             {
                 DebugLog.WriteLine( "TcpConnection", "Timed out while connecting" );
                 OnDisconnected( EventArgs.Empty );
@@ -175,6 +191,7 @@ namespace SteamKit2
         /// </summary>
         void NetLoop( object param )
         {
+
             // poll for readable data every 100ms
             const int POLL_MS = 100;
             Socket socket = param as Socket;
@@ -276,6 +293,15 @@ namespace SteamKit2
 
         void Cleanup()
         {
+            foreach ( var key in connectTokens.Keys )
+            {
+                bool ignored;
+                if ( connectTokens.TryRemove( key, out ignored ) )
+                {
+                    key.Cancel();
+                }
+            }
+
             while ( !wantsNetShutdown && !netLock.TryEnterWriteLock( 500 ) ) { }
 
             // no point in continuing if we caught an error inside netThread while shutting down
@@ -371,14 +397,12 @@ namespace SteamKit2
         /// <param name="filter">filter implementing <see cref="NetFilterEncryption"/></param>
         public override void SetNetEncryptionFilter(NetFilterEncryption filter)
         {
-            // we enter a read lock here because the only upgradeable write lock exists in NetLoop
-            // this is safe because filter will only be set to null inside write locks
-            while ( !wantsNetShutdown && !netLock.TryEnterReadLock( 500 ) ) { }
+            while ( !wantsNetShutdown && !netLock.TryEnterWriteLock( 500 ) ) { }
 
             this.filter = filter;
 
-            if( netLock.IsReadLockHeld )
-                netLock.ExitReadLock();
+            if( netLock.IsWriteLockHeld )
+                netLock.ExitWriteLock();
         }
     }
 }
