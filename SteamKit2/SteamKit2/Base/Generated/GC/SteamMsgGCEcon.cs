@@ -1360,6 +1360,20 @@ namespace SteamKit2.GC.Internal
       get { return _loot_list_name; }
       set { _loot_list_name = value; }
     }
+    private readonly global::System.Collections.Generic.List<string> _attr_def_name = new global::System.Collections.Generic.List<string>();
+    [global::ProtoBuf.ProtoMember(5, Name=@"attr_def_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<string> attr_def_name
+    {
+      get { return _attr_def_name; }
+    }
+  
+    private readonly global::System.Collections.Generic.List<string> _attr_value = new global::System.Collections.Generic.List<string>();
+    [global::ProtoBuf.ProtoMember(6, Name=@"attr_value", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<string> attr_value
+    {
+      get { return _attr_value; }
+    }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

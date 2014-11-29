@@ -1523,7 +1523,10 @@ namespace SteamKit2.GC.Internal
       PARTNER_PERFECT_WORLD = 1,
             
       [global::ProtoBuf.ProtoEnum(Name=@"PARTNER_NEXON", Value=2)]
-      PARTNER_NEXON = 2
+      PARTNER_NEXON = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"PARTNER_INVALID", Value=3)]
+      PARTNER_INVALID = 3
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"GCConnectionStatus", EnumPassthru=true)]
