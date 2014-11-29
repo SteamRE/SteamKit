@@ -20,6 +20,8 @@ namespace SteamKit2
 
         Socket sock;
 
+        NetFilterEncryption filter;
+
         volatile bool wantsNetShutdown;
         NetworkStream netStream;
         ReaderWriterLockSlim netLock;
@@ -97,6 +99,7 @@ namespace SteamKit2
 
                 DebugLog.WriteLine( "TcpConnection", "Connected!" );
 
+                filter = null;
                 wantsNetShutdown = false;
                 netStream = new NetworkStream( sock, false );
 
@@ -132,12 +135,6 @@ namespace SteamKit2
         {
             byte[] data = clientMsg.Serialize();
 
-            // encrypt outgoing traffic if we need to
-            if ( NetFilter != null )
-            {
-                data = NetFilter.ProcessOutgoing( data );
-            }
-
             // a Send from the netThread has the potential to acquire the read lock and block while Disconnect is trying to join us
             while ( !wantsNetShutdown && !netLock.TryEnterReadLock( 500 ) ) { }
 
@@ -147,6 +144,12 @@ namespace SteamKit2
                 {
                     DebugLog.WriteLine( "TcpConnection", "Attempting to send client message when not connected: {0}", clientMsg.MsgType );
                     return;
+                }
+
+                // encrypt outgoing traffic if we need to
+                if ( filter != null )
+                {
+                    data = filter.ProcessOutgoing( data );
                 }
 
                 // need to ensure ordering between concurrent Sends
@@ -212,6 +215,12 @@ namespace SteamKit2
 
                     // read the packet off the network
                     packData = ReadPacket();
+
+                    // decrypt the data off the wire if needed
+                    if ( filter != null )
+                    {
+                        packData = filter.ProcessIncoming( packData );
+                    }
                 }
                 catch ( IOException ex )
                 {
@@ -225,12 +234,6 @@ namespace SteamKit2
                 {
                     if( netLock.IsUpgradeableReadLockHeld )
                         netLock.ExitUpgradeableReadLock();
-                }
-
-                // decrypt the data off the wire if needed
-                if ( NetFilter != null )
-                {
-                    packData = NetFilter.ProcessIncoming( packData );
                 }
 
                 OnNetMsgReceived( new NetMsgEventArgs( packData, socket.RemoteEndPoint as IPEndPoint ) );
@@ -360,6 +363,22 @@ namespace SteamKit2
                 if ( netLock.IsReadLockHeld )
                     netLock.ExitReadLock();
             }
+        }
+
+        /// <summary>
+        /// Sets the network encryption filter for this connection
+        /// </summary>
+        /// <param name="filter">filter implementing <see cref="NetFilterEncryption"/></param>
+        public override void SetNetEncryptionFilter(NetFilterEncryption filter)
+        {
+            // we enter a read lock here because the only upgradeable write lock exists in NetLoop
+            // this is safe because filter will only be set to null inside write locks
+            while ( !wantsNetShutdown && !netLock.TryEnterReadLock( 500 ) ) { }
+
+            this.filter = filter;
+
+            if( netLock.IsReadLockHeld )
+                netLock.ExitReadLock();
         }
     }
 }

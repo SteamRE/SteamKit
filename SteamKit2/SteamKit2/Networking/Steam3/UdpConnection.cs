@@ -54,6 +54,8 @@ namespace SteamKit2
         private Socket sock;
         private IPEndPoint remoteEndPoint;
 
+        NetFilterEncryption filter;
+
         private DateTime timeOut;
         private DateTime nextResend;
 
@@ -154,15 +156,15 @@ namespace SteamKit2
         /// Serializes and sends the provided message to the server in as many packets as is necessary.
         /// </summary>
         /// <param name="clientMsg">The ClientMsg</param>
-        public override void Send(IClientMsg clientMsg)
+        public override void Send( IClientMsg clientMsg )
         {
             if ( state != State.Connected )
                 return;
 
             byte[] data = clientMsg.Serialize();
 
-            if ( NetFilter != null )
-                data = NetFilter.ProcessOutgoing( data );
+            if ( filter != null )
+                data = filter.ProcessOutgoing( data );
 
             SendData( new MemoryStream( data ) );
         }
@@ -336,8 +338,8 @@ namespace SteamKit2
 
             byte[] data = payload.ToArray();
 
-            if ( NetFilter != null )
-                data = NetFilter.ProcessIncoming(data);
+            if ( filter != null )
+                data = filter.ProcessIncoming(data);
 
             DebugLog.WriteLine("UdpConnection", "Dispatching message; {0} bytes", data.Length);
 
@@ -567,6 +569,16 @@ namespace SteamKit2
         public override IPAddress GetLocalIP()
         {
             return NetHelpers.GetLocalIP(sock);
+        }
+
+
+        /// <summary>
+        /// Sets the network encryption filter for this connection
+        /// </summary>
+        /// <param name="filter">filter implementing <see cref="NetFilterEncryption"/></param>
+        public override void SetNetEncryptionFilter(NetFilterEncryption filter)
+        {
+            this.filter = filter;
         }
     }
 }
