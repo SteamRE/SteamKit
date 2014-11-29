@@ -1,3 +1,22 @@
+------------------------------------------------------------------------------
+v 1.6.1			Nov 30, 2014
+------------------------------------------------------------------------------
+
+*	Added support for VZip when decompressing depot chunks.
+*	Improved thread safety and error handling inside `TcpConnection`.
+*	Added `DownloadDepotChunk` overload for consumers who insist on connecting to particular CDNs.
+* 	Updated `EResult` with the new field `NotModified`.
+*	Updated `EMsg` list.
+*	Updated `EOSType`.
+	*	The short names for Windows versions (e.g. `Win8` instead of `Windows8`) are preferred.
+	*	Addded `MacOS1010` for OS X 10.10 'Yosemite'
+*	Removed various long-obsolete values from enums where the value was renamed.
+*	Removed `EUniverse.RC`.
+*	Updated game related GC messages and protobufs.
+
+BREAKING CHANGES
+*	`Connection.NetFilter` is now set-only via the `SetNetEncryptionFilter` method. The `NetFilter` property has been removed.
+
 
 ------------------------------------------------------------------------------
 v 1.6.0			Oct 11, 2014
