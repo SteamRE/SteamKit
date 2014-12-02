@@ -21,6 +21,14 @@ message CPublishedFile_Unsubscribe_Request {
 message CPublishedFile_Unsubscribe_Response {
 }
 
+message CPublishedFile_CanSubscribe_Request {
+	optional uint64 publishedfileid = 1;
+}
+
+message CPublishedFile_CanSubscribe_Response {
+	optional bool can_subscribe = 1;
+}
+
 message CPublishedFile_Publish_Request {
 	optional uint32 appid = 1 [(description) = "App Id this file is being published FROM."];
 	optional uint32 consumer_appid = 2 [(description) = "App Id this file is being published TO."];
@@ -251,6 +259,9 @@ service PublishedFile {
 	}
 	rpc Unsubscribe (.CPublishedFile_Unsubscribe_Request) returns (.CPublishedFile_Unsubscribe_Response) {
 		option (method_description) = "Unsubscribes the user from the published file";
+	}
+	rpc CanSubscribe (.CPublishedFile_CanSubscribe_Request) returns (.CPublishedFile_CanSubscribe_Response) {
+		option (method_description) = "Check if the user can subscribe to the published file";
 	}
 	rpc Publish (.CPublishedFile_Publish_Request) returns (.CPublishedFile_Publish_Response) {
 		option (method_description) = "Publishes a clouded user file to the Workshop.";

@@ -1103,6 +1103,9 @@ enum EMsg
 	AMPlayerGetClanBasicDetails = 4389;
 	AMPlayerGetClanBasicDetailsResponse = 4390;
 	
+	AMTwoFactorRecoverAuthenticatorRequest = 4402;
+	AMTwoFactorRecoverAuthenticatorResponse = 4403;
+	
 	BasePSRange = 5000;
 	PSCreateShoppingCart = 5001;
 	PSCreateShoppingCartResponse = 5002;
@@ -1678,12 +1681,12 @@ enum EMsg
 	BackpackAddToCurrencyResponse = 8402;
 
 	CREBase = 8500;
-	CRERankByTrend = 8501;
-	CRERankByTrendResponse = 8502;
+	CRERankByTrend = 8501; obsolete
+	CRERankByTrendResponse = 8502; obsolete
 	CREItemVoteSummary = 8503;
 	CREItemVoteSummaryResponse = 8504;
-	CRERankByVote = 8505;
-	CRERankByVoteResponse = 8506;
+	CRERankByVote = 8505; obsolete
+	CRERankByVoteResponse = 8506; obsolete
 	CREUpdateUserPublishedItemVote = 8507;
 	CREUpdateUserPublishedItemVoteResponse = 8508;
 	CREGetUserPublishedItemVoteDetails = 8509;
@@ -1775,5 +1778,13 @@ enum EMsg
 	
 	ClientPlayingSessionState = 9600;
 	ClientKickPlayingSession = 9601;
+	
+	ClientBroadcastInit = 9700;
+	ClientBroadcastFrames = 9701;
+	ClientBroadcastDisconnect = 9702;
+	ClientBroadcastScreenshot = 9703;
+	
+	ClientVoiceCallPreAuthorize = 9800;
+	ClientVoiceCallPreAuthorizeResponse = 9801;
 
 };

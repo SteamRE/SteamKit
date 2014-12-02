@@ -72,6 +72,8 @@ enum EDotaUserMessages {
 	DOTA_UM_TutorialMinimapPosition = 530;
 	DOTA_UM_PlayerMMR = 531;
 	DOTA_UM_AbilitySteal = 532;
+	DOTA_UM_SpeechBubble = 533;
+	DOTA_UM_CustomHeaderMessage = 534;
 }
 
 enum DOTA_CHAT_MESSAGE {
@@ -339,6 +341,7 @@ message CDOTAUserMsg_MinimapDebugPoint {
 	optional uint32 color = 2;
 	optional int32 size = 3;
 	optional float duration = 4;
+	optional int32 index = 5;
 }
 
 message CDOTAUserMsg_CreateLinearProjectile {
@@ -768,5 +771,16 @@ message CDOTAUserMsg_AbilitySteal {
 	optional uint32 player_id = 1;
 	optional uint32 ability_id = 2;
 	optional uint32 ability_level = 3;
+}
+
+message CDOTAUserMsg_SpeechBubble {
+	optional bool destroy_all = 1;
+}
+
+message CDOTAUserMsg_CustomHeaderMessage {
+	optional uint32 player_id = 1;
+	optional float duration = 2;
+	optional string message = 3;
+	optional int32 value = 4;
 }
 

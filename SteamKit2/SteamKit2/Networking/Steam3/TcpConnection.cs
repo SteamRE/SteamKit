@@ -10,6 +10,7 @@ using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
+using System.Collections.Concurrent;
 
 namespace SteamKit2
 {
@@ -19,6 +20,10 @@ namespace SteamKit2
         const uint MAGIC = 0x31305456; // "VT01"
 
         Socket sock;
+
+        NetFilterEncryption filter;
+
+        ConcurrentDictionary<CancellationTokenSource, bool> connectTokens;
 
         volatile bool wantsNetShutdown;
         NetworkStream netStream;
@@ -31,6 +36,7 @@ namespace SteamKit2
 
         public TcpConnection() : base()
         {
+            connectTokens = new ConcurrentDictionary<CancellationTokenSource, bool>();
             netLock = new ReaderWriterLockSlim( LockRecursionPolicy.NoRecursion );
         }
 
@@ -47,26 +53,38 @@ namespace SteamKit2
             Socket socket = new Socket( AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp );
             DebugLog.WriteLine( "TcpConnection", "Connecting to {0}...", endPoint );
 
+            var cts = new CancellationTokenSource();
+            connectTokens.TryAdd( cts, true );
+
             ThreadPool.QueueUserWorkItem( sender =>
             {
                 var asyncResult = socket.BeginConnect( endPoint, null, null );
 
-                if ( asyncResult.AsyncWaitHandle.WaitOne( timeout ) )
+                if ( WaitHandle.WaitAny( new WaitHandle[] { asyncResult.AsyncWaitHandle, cts.Token.WaitHandle }, timeout ) == 0 )
                 {
                     sock = socket;
-                    ConnectCompleted( socket, asyncResult );
+                    ConnectCompleted( socket, asyncResult, cts );
                 }
                 else
                 {
                     socket.Close();
-                    ConnectCompleted( null, asyncResult );
+                    ConnectCompleted( null, asyncResult, cts );
                 }
+
+                bool ignored;
+                connectTokens.TryRemove( cts, out ignored );
+                cts.Dispose();
             });
         }
 
-        void ConnectCompleted( Socket sock, IAsyncResult asyncResult )
+        void ConnectCompleted( Socket sock, IAsyncResult asyncResult, CancellationTokenSource connectToken )
         {
-            if ( sock == null )
+            if ( connectToken.IsCancellationRequested )
+            {
+                DebugLog.WriteLine( "TcpConnection", "Connect request was cancelled" );
+                return;
+            }
+            else if ( sock == null )
             {
                 DebugLog.WriteLine( "TcpConnection", "Timed out while connecting" );
                 OnDisconnected( EventArgs.Empty );
@@ -97,6 +115,7 @@ namespace SteamKit2
 
                 DebugLog.WriteLine( "TcpConnection", "Connected!" );
 
+                filter = null;
                 wantsNetShutdown = false;
                 netStream = new NetworkStream( sock, false );
 
@@ -132,12 +151,6 @@ namespace SteamKit2
         {
             byte[] data = clientMsg.Serialize();
 
-            // encrypt outgoing traffic if we need to
-            if ( NetFilter != null )
-            {
-                data = NetFilter.ProcessOutgoing( data );
-            }
-
             // a Send from the netThread has the potential to acquire the read lock and block while Disconnect is trying to join us
             while ( !wantsNetShutdown && !netLock.TryEnterReadLock( 500 ) ) { }
 
@@ -147,6 +160,12 @@ namespace SteamKit2
                 {
                     DebugLog.WriteLine( "TcpConnection", "Attempting to send client message when not connected: {0}", clientMsg.MsgType );
                     return;
+                }
+
+                // encrypt outgoing traffic if we need to
+                if ( filter != null )
+                {
+                    data = filter.ProcessOutgoing( data );
                 }
 
                 // need to ensure ordering between concurrent Sends
@@ -172,6 +191,7 @@ namespace SteamKit2
         /// </summary>
         void NetLoop( object param )
         {
+
             // poll for readable data every 100ms
             const int POLL_MS = 100;
             Socket socket = param as Socket;
@@ -212,6 +232,12 @@ namespace SteamKit2
 
                     // read the packet off the network
                     packData = ReadPacket();
+
+                    // decrypt the data off the wire if needed
+                    if ( filter != null )
+                    {
+                        packData = filter.ProcessIncoming( packData );
+                    }
                 }
                 catch ( IOException ex )
                 {
@@ -225,12 +251,6 @@ namespace SteamKit2
                 {
                     if( netLock.IsUpgradeableReadLockHeld )
                         netLock.ExitUpgradeableReadLock();
-                }
-
-                // decrypt the data off the wire if needed
-                if ( NetFilter != null )
-                {
-                    packData = NetFilter.ProcessIncoming( packData );
                 }
 
                 OnNetMsgReceived( new NetMsgEventArgs( packData, socket.RemoteEndPoint as IPEndPoint ) );
@@ -273,6 +293,15 @@ namespace SteamKit2
 
         void Cleanup()
         {
+            foreach ( var key in connectTokens.Keys )
+            {
+                bool ignored;
+                if ( connectTokens.TryRemove( key, out ignored ) )
+                {
+                    key.Cancel();
+                }
+            }
+
             while ( !wantsNetShutdown && !netLock.TryEnterWriteLock( 500 ) ) { }
 
             // no point in continuing if we caught an error inside netThread while shutting down
@@ -360,6 +389,20 @@ namespace SteamKit2
                 if ( netLock.IsReadLockHeld )
                     netLock.ExitReadLock();
             }
+        }
+
+        /// <summary>
+        /// Sets the network encryption filter for this connection
+        /// </summary>
+        /// <param name="filter">filter implementing <see cref="NetFilterEncryption"/></param>
+        public override void SetNetEncryptionFilter(NetFilterEncryption filter)
+        {
+            while ( !wantsNetShutdown && !netLock.TryEnterWriteLock( 500 ) ) { }
+
+            this.filter = filter;
+
+            if( netLock.IsWriteLockHeld )
+                netLock.ExitWriteLock();
         }
     }
 }

@@ -23,11 +23,6 @@ echo Content Manifest
 echo.
 echo.
 
-echo IClient Objects
-..\..\Protogen\protogen -i:"iclient_objects.proto" -o:"..\..\..\SteamKit2\SteamKit2\Base\Generated\IClientObjects.cs" -t:csharp -ns:"SteamKit2.Internal"
-echo.
-echo.
-
 echo Unified Messages
 ..\..\Protogen\protogen -s:..\ -i:"steammessages_unified_base.steamclient.proto" -o:"..\..\..\SteamKit2\SteamKit2\Base\Generated\Unified\SteamMsgUnifiedBase.cs" -t:csharp -ns:"SteamKit2.Unified.Internal"
 
@@ -43,6 +38,8 @@ echo Unified Messages
 ..\..\Protogen\protogen -s:..\ -i:"steammessages_partnerapps.steamclient.proto" -o:"..\..\..\SteamKit2\SteamKit2\Base\Generated\Unified\SteamMsgPartnerApps.cs" -t:csharp -ns:"SteamKit2.Unified.Internal"
 ..\..\Protogen\protogen -s:..\ -i:"steammessages_player.steamclient.proto" -o:"..\..\..\SteamKit2\SteamKit2\Base\Generated\Unified\SteamMsgPlayer.cs" -t:csharp -ns:"SteamKit2.Unified.Internal"
 ..\..\Protogen\protogen -s:..\ -i:"steammessages_publishedfile.steamclient.proto" -o:"..\..\..\SteamKit2\SteamKit2\Base\Generated\Unified\SteamMsgPublishedFile.cs" -t:csharp -ns:"SteamKit2.Unified.Internal"
+..\..\Protogen\protogen -s:..\ -i:"steammessages_secrets.steamclient.proto" -o:"..\..\..\SteamKit2\SteamKit2\Base\Generated\Unified\SteamMsgSecrets.cs" -t:csharp -ns:"SteamKit2.Unified.Internal"
 ..\..\Protogen\protogen -s:..\ -i:"steammessages_twofactor.steamclient.proto" -o:"..\..\..\SteamKit2\SteamKit2\Base\Generated\Unified\SteamMsgTwoFactor.cs" -t:csharp -ns:"SteamKit2.Unified.Internal"
+..\..\Protogen\protogen -s:..\ -i:"steammessages_video.steamclient.proto" -o:"..\..\..\SteamKit2\SteamKit2\Base\Generated\Unified\SteamMsgVideo.cs" -t:csharp -ns:"SteamKit2.Unified.Internal"
 
 pause

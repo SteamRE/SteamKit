@@ -29,6 +29,7 @@ enum EDotaClientMessages {
 	DOTA_CM_WillPurchaseAlert = 324;
 	DOTA_CM_PlayerShowCase = 325;
 	DOTA_CM_TeleportRequiresHalt = 326;
+	DOTA_CM_FillEmptySlotsWithBots = 327;
 }
 
 message CDOTAClientMsg_MapPing {
@@ -140,5 +141,9 @@ message CDOTAClientMsg_WillPurchaseAlert {
 
 message CDOTAClientMsg_PlayerShowCase {
 	optional bool showcase = 1;
+}
+
+message CDOTAClientMsg_FillEmptySlotsWithBots {
+	optional bool fillwithbots = 1;
 }
 

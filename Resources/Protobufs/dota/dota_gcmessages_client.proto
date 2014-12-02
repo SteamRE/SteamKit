@@ -1585,6 +1585,12 @@ message CMsgDOTAClearNotifySuccessfulReport {
 }
 
 message CMsgDOTAWelcome {
+	message LocalizationDigest {
+		optional string context = 1;
+		optional .CMsgSHA1Digest english_language_file_sha1 = 2;
+		optional .CMsgSHA1Digest client_language_file_sha1 = 3;
+	}
+
 	optional bool tournament_admin = 3;
 	optional bool tournament_broadcaster = 4;
 	optional uint32 store_item_hash = 5;
@@ -1603,6 +1609,9 @@ message CMsgDOTAWelcome {
 	optional bool should_request_player_origin = 20;
 	optional uint64 compendium_unlocks = 21;
 	optional uint32 gc_socache_file_version = 22;
+	repeated .CMsgDOTAWelcome.LocalizationDigest localization_digests = 23;
+	optional bool is_perfect_world_test_account = 24;
+	repeated .EIngameEvent active_events = 25;
 }
 
 message CSODOTAGameHeroFavorites {
@@ -1808,7 +1817,6 @@ message CMsgDOTAMatchmakingStatsRequest {
 }
 
 message CMsgDOTAMatchmakingStatsResponse {
-	repeated uint32 wait_times_by_group = 1;
 	repeated uint32 searching_players_by_group = 2;
 	optional uint32 disabled_groups = 3;
 	optional .CMsgMatchmakingGroupServerSample gameserver_sample = 4;
@@ -2032,6 +2040,21 @@ message CMsgGCItemEditorReleaseReservation {
 message CMsgGCItemEditorReleaseReservationResponse {
 	optional uint32 def_index = 1;
 	optional bool released = 2;
+}
+
+message CMsgGCItemEditorRequestLeagueInfo {
+	optional uint32 league_id = 1;
+}
+
+message CMsgGCItemEditorLeagueInfoResponse {
+	optional uint32 league_id = 1;
+	optional string league_name = 2;
+	optional string league_desc = 3;
+	optional string league_url = 4;
+	optional string revenue_url = 5;
+	optional uint32 tier = 6;
+	optional uint32 location = 7;
+	optional uint32 result = 8;
 }
 
 message CMsgDOTARewardTutorialPrizes {
@@ -2383,12 +2406,34 @@ message CMsgClientToGCSetProfileCardSlot {
 	optional uint64 slot_value = 3;
 }
 
+message CMsgClientToGCCreateHeroStatue {
+	optional uint64 source_item = 1;
+	optional uint32 hero_id = 3;
+	optional string sequence_name = 4;
+	optional float cycle = 5;
+	repeated uint32 wearables = 6;
+	optional string inscription = 7;
+	repeated uint32 styles = 8;
+}
+
+message CMsgGCToClientHeroStatueCreateResult {
+	optional uint64 resulting_item = 1;
+}
+
 message CMsgClientToGCRecordCompendiumStats {
 	optional uint32 league_id = 1;
 	optional uint32 view_duration_s = 2;
 	optional uint32 videos_viewed = 3;
 	optional uint32 page_turns = 4;
 	optional uint32 links_followed = 5;
-	optional uint32 compendium_version = 6;
+}
+
+message CMsgClientToGCRecordStatueStats {
+	optional uint32 view_duration_s = 1;
+	optional bool created_statue = 2;
+}
+
+message CMsgGCToClientEventStatusChanged {
+	repeated .EIngameEvent active_events = 1;
 }
 
