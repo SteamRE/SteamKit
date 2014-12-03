@@ -23,51 +23,6 @@ namespace SteamKit2.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientSubscribeToPersonaFeed")]
-  public partial class CMsgClientSubscribeToPersonaFeed : global::ProtoBuf.IExtensible
-  {
-    public CMsgClientSubscribeToPersonaFeed() {}
-    
-    private readonly global::System.Collections.Generic.List<CMsgClientSubscribeToPersonaFeed.PersonaFeed> _persona_feeds = new global::System.Collections.Generic.List<CMsgClientSubscribeToPersonaFeed.PersonaFeed>();
-    [global::ProtoBuf.ProtoMember(1, Name=@"persona_feeds", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public global::System.Collections.Generic.List<CMsgClientSubscribeToPersonaFeed.PersonaFeed> persona_feeds
-    {
-      get { return _persona_feeds; }
-    }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"PersonaFeed")]
-  public partial class PersonaFeed : global::ProtoBuf.IExtensible
-  {
-    public PersonaFeed() {}
-    
-
-    private ulong _steamID = default(ulong);
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steamID", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
-    public ulong steamID
-    {
-      get { return _steamID; }
-      set { _steamID = value; }
-    }
-
-    private bool _subscribe = default(bool);
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"subscribe", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
-    public bool subscribe
-    {
-      get { return _subscribe; }
-      set { _subscribe = value; }
-    }
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientUDSP2PSessionStarted")]
   public partial class CMsgClientUDSP2PSessionStarted : global::ProtoBuf.IExtensible
   {

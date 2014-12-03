@@ -97,6 +97,7 @@
     <Compile Include="Base\Generated\IClientObjects.cs" />
     <Compile Include="Base\Generated\SteamLanguageInternal.cs" />
     <Compile Include="Base\Generated\SteamMsgClientServer2.cs" />
+    <Compile Include="Base\Generated\Unified\SteamMsgBroadcast.cs" />
     <Compile Include="Base\Generated\Unified\SteamMsgCloud.cs" />
     <Compile Include="Base\Generated\Unified\SteamMsgCredentials.cs" />
     <Compile Include="Base\Generated\Unified\SteamMsgDeviceAuth.cs" />
