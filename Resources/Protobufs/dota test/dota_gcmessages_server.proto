@@ -84,6 +84,7 @@ message CMsgConnectedPlayers {
 	optional .DOTA_GameState game_state = 2 [default = DOTA_GAMERULES_STATE_INIT];
 	optional uint32 tower_state = 4;
 	optional bool first_blood_happened = 6;
+	optional bool mass_disconnect = 9;
 	optional .CMsgConnectedPlayers.SendReason send_reason = 8 [default = INVALID];
 }
 
@@ -620,7 +621,6 @@ message CMsgServerToGCMatchConnectionStats {
 		optional uint32 account_id = 1;
 		optional fixed32 ip = 2;
 		optional uint32 avg_ping_ms = 3;
-		optional uint32 peak_ping_ms = 4;
 		optional float packet_loss = 5;
 		optional float ping_deviation = 6;
 		optional uint32 full_resends = 7;

@@ -265,6 +265,7 @@ message CMsgGCCStrike15_v2_MatchmakingGC2ClientUpdate {
 	repeated uint32 vacbanned_account_id_sessions = 11;
 	optional .IpAddressMask server_ipaddress_mask = 12;
 	repeated .CMsgGCCStrike15_v2_MatchmakingGC2ClientUpdate.Note notes = 13;
+	repeated uint32 penalty_account_id_sessions_green = 14;
 }
 
 message CDataGCCStrike15_v2_TournamentMatchDraft {
@@ -395,7 +396,7 @@ message CMsgGCCStrike15_v2_MatchmakingGC2ClientHello {
 	repeated .TournamentEvent my_current_event_stages = 13;
 	optional uint32 survey_vote = 14;
 	optional .AccountActivity activity = 15;
-	optional uint32 seconds_until_next_mission = 16;
+	optional int32 seconds_until_next_mission = 16;
 }
 
 message CMsgGCCStrike15_v2_AccountPrivacySettings {
@@ -767,6 +768,7 @@ message CMsgGCCStrike15_v2_ClientVarValueNotificationInfo {
 	optional int32 value_int = 2;
 	optional uint32 server_addr = 3;
 	optional uint32 server_port = 4;
+	repeated string choked_blocks = 5;
 }
 
 message CMsgGCCStrike15_v2_ServerVarValueNotificationInfo {

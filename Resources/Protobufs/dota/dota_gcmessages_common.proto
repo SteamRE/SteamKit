@@ -685,6 +685,14 @@ enum LobbyDotaTVDelay {
 	LobbyDotaTV_300 = 2;
 }
 
+enum EMatchOutcome {
+	k_EMatchOutcome_Unknown = 0;
+	k_EMatchOutcome_RadVictory = 2;
+	k_EMatchOutcome_DireVictory = 3;
+	k_EMatchOutcome_NotScored_PoorNetworkConditions = 64;
+	k_EMatchOutcome_NotScored_Leaver = 65;
+}
+
 enum EDOTAGCSessionNeed {
 	k_EDOTAGCSessionNeed_Unknown = 0;
 	k_EDOTAGCSessionNeed_UserNoSessionNeeded = 100;
@@ -1044,7 +1052,8 @@ message CSODOTALobby {
 	repeated .CSODOTALobby.CExtraMsg extra_messages = 62;
 	optional .CDOTASaveGame save_game = 63;
 	optional bool first_blood_happened = 65;
-	optional bool discard_match_results = 66;
+	optional bool legacy_discard_match_results = 66;
+	optional .EMatchOutcome match_outcome = 70 [default = k_EMatchOutcome_Unknown];
 	optional bool mass_disconnect = 67;
 	optional uint64 custom_game_id = 68;
 	repeated .EIngameEvent active_ingame_events = 69;
