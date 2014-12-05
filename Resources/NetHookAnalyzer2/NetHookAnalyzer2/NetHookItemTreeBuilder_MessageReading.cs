@@ -81,7 +81,8 @@ namespace NetHookAnalyzer2
 
 			var namespaces = new[]
 			{
-				"SteamKit2.Unified.Internal"
+				"SteamKit2.Unified.Internal",
+				"SteamKit2.Unified.Internal.Steamworks"
 			};
 
 			foreach (var ns in namespaces)
