@@ -64,13 +64,6 @@ namespace SteamKit2
         const int DEFAULT_TIMEOUT = 5000;
 
         /// <summary>
-        /// Gets or sets the net filter for this connection.
-        /// </summary>
-        /// <value>The net filter.</value>
-        public NetFilterEncryption NetFilter { get; set; }
-
-
-        /// <summary>
         /// Occurs when a net message is recieved over the network.
         /// </summary>
         public event EventHandler<NetMsgEventArgs> NetMsgReceived;
@@ -126,6 +119,12 @@ namespace SteamKit2
         /// </summary>
         /// <returns>The local IP.</returns>
         public abstract IPAddress GetLocalIP();
+
+        /// <summary>
+        /// Sets the network encryption filter for this connection
+        /// </summary>
+        /// <param name="filter">filter implementing <see cref="NetFilterEncryption"/></param>
+        public abstract void SetNetEncryptionFilter(NetFilterEncryption filter);
     }
 
 }

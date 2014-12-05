@@ -9,6 +9,7 @@ enum PartnerAccountType {
 	PARTNER_NONE = 0;
 	PARTNER_PERFECT_WORLD = 1;
 	PARTNER_NEXON = 2;
+	PARTNER_INVALID = 3;
 }
 
 enum GCConnectionStatus {

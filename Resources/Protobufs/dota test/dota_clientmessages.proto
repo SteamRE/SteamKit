@@ -36,6 +36,7 @@ enum EDotaClientMessages {
 	DOTA_CM_FreeInventory = 31;
 	DOTA_CM_BuyBackStateAlert = 32;
 	DOTA_CM_QuickBuyAlert = 33;
+	DOTA_CM_HeroStatueLike = 34;
 }
 
 message CDOTAClientMsg_MapPing {
@@ -182,5 +183,9 @@ message CAdditionalEquipSlotClientMsg {
 
 message CDOTAClientMsg_FreeInventory {
 	repeated .CAdditionalEquipSlotClientMsg equips = 1;
+}
+
+message CDOTAClientMsg_HeroStatueLike {
+	optional uint32 owner_player_id = 1;
 }
 

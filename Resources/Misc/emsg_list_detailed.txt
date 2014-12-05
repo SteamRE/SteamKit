@@ -146,6 +146,8 @@
 	k_EMsgClientChatRoomInfo = 4026, // flags: 2, server type: -1
 	k_EMsgAMGameServerUpdate = 4331, // flags: 2, server type: -1
 	k_EMsgAMGameServerRemove = 4332, // flags: 2, server type: -1
+	k_EMsgAMTwoFactorRecoverAuthenticatorRequest = 4402, // flags: 2, server type: -1
+	k_EMsgAMTwoFactorRecoverAuthenticatorResponse = 4403, // flags: 2, server type: -1
 	k_EMsgClientUFSUploadFileRequest = 5202, // flags: 2, server type: -1
 	k_EMsgClientUFSUploadFileResponse = 5203, // flags: 2, server type: -1
 	k_EMsgClientUFSUploadFileChunk = 5204, // flags: 2, server type: -1
@@ -469,12 +471,8 @@
 	k_EMsgEconTrading_CancelTradeRequest = 7706, // flags: 6, server type: 59
 	k_EMsgClientUGSGetGlobalStats = 7901, // flags: 6, server type: 50
 	k_EMsgClientUGSGetGlobalStatsResponse = 7902, // flags: 6, server type: 50
-	k_EMsgCRERankByTrend = 8501, // flags: 6, server type: 53
-	k_EMsgCRERankByTrendResponse = 8502, // flags: 6, server type: 53
 	k_EMsgCREItemVoteSummary = 8503, // flags: 6, server type: 53
 	k_EMsgCREItemVoteSummaryResponse = 8504, // flags: 6, server type: 53
-	k_EMsgCRERankByVote = 8505, // flags: 6, server type: 53
-	k_EMsgCRERankByVoteResponse = 8506, // flags: 6, server type: 53
 	k_EMsgCREUpdateUserPublishedItemVote = 8507, // flags: 6, server type: 53
 	k_EMsgCREUpdateUserPublishedItemVoteResponse = 8508, // flags: 6, server type: 53
 	k_EMsgCREGetUserPublishedItemVoteDetails = 8509, // flags: 6, server type: 53
@@ -495,3 +493,9 @@
 	k_EMsgClientUnlockStreamingResponse = 9508, // flags: 59, server type: -1
 	k_EMsgClientPlayingSessionState = 9600, // flags: 2, server type: -1
 	k_EMsgClientKickPlayingSession = 9601, // flags: 2, server type: -1
+	k_EMsgClientBroadcastInit = 9700, // flags: 2, server type: -1
+	k_EMsgClientBroadcastFrames = 9701, // flags: 2, server type: -1
+	k_EMsgClientBroadcastDisconnect = 9702, // flags: 2, server type: -1
+	k_EMsgClientBroadcastScreenshot = 9703, // flags: 2, server type: -1
+	k_EMsgClientVoiceCallPreAuthorize = 9800, // flags: 59, server type: -1
+	k_EMsgClientVoiceCallPreAuthorizeResponse = 9801, // flags: 59, server type: -1

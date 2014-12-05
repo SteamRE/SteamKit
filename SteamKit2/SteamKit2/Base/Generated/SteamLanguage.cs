@@ -1105,6 +1105,8 @@ namespace SteamKit2
 		AMPayelpPaymentResponse = 4388,
 		AMPlayerGetClanBasicDetails = 4389,
 		AMPlayerGetClanBasicDetailsResponse = 4390,
+		AMTwoFactorRecoverAuthenticatorRequest = 4402,
+		AMTwoFactorRecoverAuthenticatorResponse = 4403,
 		BasePSRange = 5000,
 		PSCreateShoppingCart = 5001,
 		PSCreateShoppingCartResponse = 5002,
@@ -1668,11 +1670,15 @@ namespace SteamKit2
 		BackpackAddToCurrency = 8401,
 		BackpackAddToCurrencyResponse = 8402,
 		CREBase = 8500,
+		[Obsolete]
 		CRERankByTrend = 8501,
+		[Obsolete]
 		CRERankByTrendResponse = 8502,
 		CREItemVoteSummary = 8503,
 		CREItemVoteSummaryResponse = 8504,
+		[Obsolete]
 		CRERankByVote = 8505,
+		[Obsolete]
 		CRERankByVoteResponse = 8506,
 		CREUpdateUserPublishedItemVote = 8507,
 		CREUpdateUserPublishedItemVoteResponse = 8508,
@@ -1756,6 +1762,12 @@ namespace SteamKit2
 		ClientUnlockStreamingResponse = 9508,
 		ClientPlayingSessionState = 9600,
 		ClientKickPlayingSession = 9601,
+		ClientBroadcastInit = 9700,
+		ClientBroadcastFrames = 9701,
+		ClientBroadcastDisconnect = 9702,
+		ClientBroadcastScreenshot = 9703,
+		ClientVoiceCallPreAuthorize = 9800,
+		ClientVoiceCallPreAuthorizeResponse = 9801,
 	}
 	public enum EResult
 	{
@@ -1849,6 +1861,7 @@ namespace SteamKit2
 		ItemDeleted = 86,
 		AccountLoginDeniedThrottle = 87,
 		TwoFactorCodeMismatch = 88,
+		NotModified = 91,
 	}
 	public enum EUniverse
 	{
@@ -2287,6 +2300,7 @@ namespace SteamKit2
 		MacOS107 = -90,
 		MacOS108 = -89,
 		MacOS109 = -88,
+		MacOS1010 = -87,
 		LinuxUnknown = -203,
 		Linux22 = -202,
 		Linux24 = -201,
@@ -2305,13 +2319,19 @@ namespace SteamKit2
 		WinXP = 7,
 		Win2003 = 8,
 		WinVista = 9,
-		[Obsolete( "renamed to Windows7" )]
 		Win7 = 10,
+		[Obsolete( "renamed to Win7" )]
 		Windows7 = 10,
 		Win2008 = 11,
 		Win2012 = 12,
+		Win8 = 13,
+		[Obsolete( "renamed to Win8" )]
 		Windows8 = 13,
+		Win81 = 14,
+		[Obsolete( "renamed to Win81" )]
 		Windows81 = 14,
+		Win2012R2 = 15,
+		Win10 = 16,
 		WinMAX = 15,
 		Max = 26,
 	}

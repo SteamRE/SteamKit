@@ -1,9 +1,15 @@
 import "steammessages.proto";
 
+enum ESourceEngine {
+	k_ESE_Source1 = 0;
+	k_ESE_Source2 = 1;
+}
+
 enum PartnerAccountType {
 	PARTNER_NONE = 0;
 	PARTNER_PERFECT_WORLD = 1;
 	PARTNER_NEXON = 2;
+	PARTNER_INVALID = 3;
 }
 
 enum GCConnectionStatus {
@@ -167,6 +173,7 @@ message CMsgClientHello {
 	optional .PartnerAccountType client_launcher = 4 [default = PARTNER_NONE];
 	optional string secret_key = 5;
 	optional uint32 client_language = 6;
+	optional .ESourceEngine engine = 7 [default = k_ESE_Source1];
 }
 
 message CMsgClientWelcome {

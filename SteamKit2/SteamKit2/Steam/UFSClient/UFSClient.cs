@@ -282,8 +282,6 @@ namespace SteamKit2
         {
             ConnectedUniverse = EUniverse.Invalid;
 
-            connection.NetFilter = null;
-
             steamClient.PostCallback( new DisconnectedCallback() );
         }
 
@@ -358,7 +356,7 @@ namespace SteamKit2
 
             if ( encResult.Body.Result == EResult.OK )
             {
-                connection.NetFilter = new NetFilterEncryption( tempSessionKey );
+                connection.SetNetEncryptionFilter( new NetFilterEncryption( tempSessionKey ) );
             }
 
             steamClient.PostCallback( new ConnectedCallback( encResult.Body ) );

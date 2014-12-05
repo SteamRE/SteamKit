@@ -74,6 +74,7 @@ enum EDotaUserMessages {
 	DOTA_UM_BuyBackStateAlert = 132;
 	DOTA_UM_QuickBuyAlert = 133;
 	DOTA_UM_StatsHeroDetails = 134;
+	DOTA_UM_PredictionResult = 135;
 }
 
 enum DOTA_CHAT_MESSAGE {
@@ -156,6 +157,11 @@ enum DOTA_CHAT_MESSAGE {
 	CHAT_MESSAGE_ABANDON_RANKED_BEFORE_FIRST_BLOOD_PARTY = 84;
 	CHAT_MESSAGE_COMPENDIUM_LEVEL = 85;
 	CHAT_MESSAGE_VICTORY_PREDICTION_STREAK = 86;
+	CHAT_MESSAGE_ASSASSIN_ANNOUNCE = 87;
+	CHAT_MESSAGE_ASSASSIN_SUCCESS = 88;
+	CHAT_MESSAGE_ASSASSIN_DENIED = 89;
+	CHAT_MESSAGE_VICTORY_PREDICTION_SINGLE_USER_CONFIRM = 90;
+	CHAT_MESSAGE_EFFIGY_KILL = 91;
 }
 
 enum DOTA_NO_BATTLE_POINTS_REASONS {
@@ -427,6 +433,26 @@ message CDOTAUserMsg_HalloweenDrops {
 	repeated uint32 item_defs = 1;
 	repeated uint32 player_ids = 2;
 	optional uint32 prize_list = 3;
+}
+
+message CDOTAUserMsg_PredictionResult {
+	message Prediction {
+		enum EResult {
+			k_eResult_ItemGranted = 1;
+			k_eResult_Destroyed = 2;
+		}
+
+		optional uint32 item_def = 1;
+		optional uint32 num_correct = 2;
+		optional uint32 num_fails = 3;
+		optional .CDOTAUserMsg_PredictionResult.Prediction.EResult result = 4 [default = k_eResult_ItemGranted];
+		optional uint32 granted_item_def = 5;
+	}
+
+	optional uint32 account_id = 1;
+	optional uint64 match_id = 2;
+	optional bool correct = 3;
+	repeated .CDOTAUserMsg_PredictionResult.Prediction predictions = 4;
 }
 
 message CDOTAResponseQuerySerialized {
@@ -758,6 +784,8 @@ message CDOTAUserMsg_AbilitySteal {
 message CDOTAUserMsg_StatsHeroLookup {
 	optional int32 player_id = 1;
 	optional int32 hero_id = 2;
+	optional string hero_name = 3;
+	optional string persona = 4;
 }
 
 message CDOTAUserMsg_StatsHeroMinuteDetails {
@@ -794,6 +822,7 @@ message CDOTAUserMsg_StatsKillDetails {
 	optional uint32 damage_to_kill = 3;
 	optional uint32 effective_health = 4;
 	optional float death_time = 5;
+	optional uint32 killer_id = 6;
 }
 
 message CDOTAUserMsg_StatsMatchDetails {

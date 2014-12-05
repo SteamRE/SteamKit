@@ -171,7 +171,10 @@ namespace SteamKit2
         ulong sessionId;
         long reqCounter;
 
-        public static TimeSpan RequestTimeout = TimeSpan.FromSeconds( 5 );
+        /// <summary>
+        /// Default timeout to use when making requests
+        /// </summary>
+        public static TimeSpan RequestTimeout = TimeSpan.FromSeconds( 10 );
 
         static CDNClient()
         {
@@ -447,7 +450,6 @@ namespace SteamKit2
             if ( chunk.ChunkID == null )
                 throw new ArgumentNullException( "chunk.ChunkID" );
 
-            string chunkId = Utils.EncodeHexString( chunk.ChunkID );
             string cdnToken = null;
             depotCdnAuthKeys.TryGetValue( depotId, out cdnToken );
 
@@ -505,7 +507,6 @@ namespace SteamKit2
         {
             string url = BuildCommand( server, command, args, authtoken );
             var webReq = HttpWebRequest.Create( url ) as HttpWebRequest;
-            webReq.Timeout = ( int )RequestTimeout.TotalMilliseconds;
             webReq.Method = method;
             webReq.Pipelined = true;
             webReq.KeepAlive = true;
@@ -543,16 +544,32 @@ namespace SteamKit2
 
                 using ( var reqStream = webReq.GetRequestStream() )
                 {
-                    reqStream.Write(payload, 0, payload.Length);
+                    reqStream.Write( payload, 0, payload.Length );
                 }
             }
 
-            var response = webReq.GetResponse();
 
-            using ( var ms = new MemoryStream( ( int )response.ContentLength ) )
+            var result = webReq.BeginGetResponse( null, null );
+
+            if ( !result.AsyncWaitHandle.WaitOne( RequestTimeout ) )
             {
-                response.GetResponseStream().CopyTo( ms );
-                return ms.ToArray();
+                webReq.Abort();
+            }
+
+            try
+            {
+                var response = webReq.EndGetResponse( result );
+
+                using ( var ms = new MemoryStream( ( int ) response.ContentLength ) )
+                {
+                    response.GetResponseStream().CopyTo( ms );
+                    return ms.ToArray();
+                }
+            }
+            catch ( Exception ex )
+            {
+                DebugLog.WriteLine( "CDNClient", "Failed to complete web request to {0}: {1}", url, ex.Message );
+                throw ex;
             }
         }
 

@@ -56,6 +56,9 @@ enum EStreamControlMessage {
 	k_EStreamControlSetMaximumResolution = 85;
 	k_EStreamControlSetQualityPreference = 86;
 	k_EStreamControlSetQoS = 87;
+	k_EStreamControlInputControllerWirelessPresence = 88;
+	k_EStreamControlSetGammaRamp = 89;
+	k_EStreamControlVideoEncoderInfo = 90;
 }
 
 enum EStreamVersion {
@@ -100,6 +103,8 @@ enum EStreamMouseButton {
 enum EStreamMouseWheelDirection {
 	k_EStreamMouseWheelUp = 120;
 	k_EStreamMouseWheelDown = -120;
+	k_EStreamMouseWheelLeft = 3;
+	k_EStreamMouseWheelRight = 4;
 }
 
 enum EStreamGamepadInputType {
@@ -145,6 +150,7 @@ enum EStreamFramerateLimiter {
 	k_EStreamFramerateSlowNetwork = 8;
 	k_EStreamFramerateSlowDecode = 16;
 	k_EStreamFramerateSlowGame = 32;
+	k_EStreamFramerateSlowDisplay = 64;
 }
 
 enum EStreamDataMessage {
@@ -299,6 +305,7 @@ message CStopVideoDataMsg {
 
 message CInputLatencyTestMsg {
 	required uint32 input_mark = 1;
+	optional uint32 color = 2;
 }
 
 message CInputMouseMotionMsg {
@@ -336,6 +343,8 @@ message CInputKeyUpMsg {
 
 message CInputGamepadAttachedMsg {
 	required int32 controller_id = 1;
+	optional uint32 controller_type = 2;
+	optional uint32 controller_subtype = 3;
 }
 
 message CInputGamepadEventMsg {
@@ -398,6 +407,10 @@ message CVideoDecoderInfoMsg {
 	optional string info = 1;
 }
 
+message CVideoEncoderInfoMsg {
+	optional string info = 1;
+}
+
 message CQuitRequest {
 }
 
@@ -451,6 +464,11 @@ message CInputControllerStateMsg {
 	optional sint32 right_pad_y = 7;
 }
 
+message CInputControllerWirelessPresenceMsg {
+	optional bool wireless_present = 1;
+	optional bool wireless_available = 2;
+}
+
 message CTriggerHapticPulseMsg {
 	required int32 controller_index = 1;
 	required int32 pad_index = 2;
@@ -460,6 +478,10 @@ message CTriggerHapticPulseMsg {
 message CSetOverrideModeMsg {
 	optional int32 window_type = 1;
 	optional string override_mode = 2;
+}
+
+message CSetGammaRampMsg {
+	optional bytes gamma_ramp = 1;
 }
 
 message CInputControllerDetachedMsg {

@@ -84,6 +84,7 @@ message CMsgConnectedPlayers {
 	optional .DOTA_GameState game_state = 2 [default = DOTA_GAMERULES_STATE_INIT];
 	optional uint32 tower_state = 4;
 	optional bool first_blood_happened = 6;
+	optional bool mass_disconnect = 9;
 	optional .CMsgConnectedPlayers.SendReason send_reason = 8 [default = INVALID];
 }
 
@@ -226,6 +227,16 @@ message CMsgGameMatchSignOut {
 	optional sint32 average_networth_delta = 22;
 	optional sint32 networth_delta_min10 = 23;
 	optional sint32 networth_delta_min20 = 24;
+	optional sint32 maximum_losing_networth_lead = 25;
+	optional sint32 average_experience_delta = 26;
+	optional sint32 experience_delta_min10 = 27;
+	optional sint32 experience_delta_min20 = 28;
+	optional sint32 bonus_gold_winner_min10 = 29;
+	optional sint32 bonus_gold_winner_min20 = 30;
+	optional uint32 bonus_gold_winner_total = 31;
+	optional sint32 bonus_gold_loser_min10 = 32;
+	optional sint32 bonus_gold_loser_min20 = 33;
+	optional uint32 bonus_gold_loser_total = 34;
 }
 
 message CMsgSignOutDraftInfo {
@@ -309,6 +320,11 @@ message CMsgGameChatLog {
 message CMsgDOTALiveScoreboardUpdate {
 	message Team {
 		message Player {
+			message HeroAbility {
+				optional uint32 ability_id = 1;
+				optional uint32 ability_level = 2;
+			}
+
 			enum DOTAUltimateState {
 				k_EDOTAUltimateStateNotLearned = 0;
 				k_EDOTAUltimateStateCooldown = 1;
@@ -342,10 +358,15 @@ message CMsgDOTALiveScoreboardUpdate {
 			optional float position_x = 24;
 			optional float position_y = 25;
 			optional uint32 net_worth = 26;
+			repeated .CMsgDOTALiveScoreboardUpdate.Team.Player.HeroAbility abilities = 27;
 		}
 
 		repeated .CMsgDOTALiveScoreboardUpdate.Team.Player players = 1;
 		optional uint32 score = 2;
+		optional uint32 tower_state = 3;
+		optional uint32 barracks_state = 4;
+		repeated uint32 hero_picks = 5;
+		repeated uint32 hero_bans = 6;
 	}
 
 	optional uint32 tournament_id = 1;
@@ -405,7 +426,11 @@ message CMsgGCToRelayConnect {
 	optional uint64 game_server_steam_id = 4;
 	optional uint32 parent_count = 5;
 	optional fixed64 tv_unique_secret_code = 6;
-	optional uint32 source_tv_steamid = 7;
+	optional fixed64 source_tv_steamid = 7;
+}
+
+message CMsgGCGCToLANServerRelayConnect {
+	optional fixed64 relay_steamid = 1;
 }
 
 message CMsgGCToRelayConnectResponse {
@@ -509,6 +534,18 @@ message CMsgDOTAAwardEventPoints {
 	optional uint32 event_id = 4;
 }
 
+message CMsgServerToGCSignoutAwardAdditionalDrops {
+	message AdditionalDrops {
+		optional string loot_list = 1;
+		repeated uint32 player_account_ids = 2;
+		optional bool no_trade = 3;
+		optional bool randomize_reward = 4;
+	}
+
+	repeated .CMsgServerToGCSignoutAwardAdditionalDrops.AdditionalDrops drops = 1;
+	optional uint64 match_id = 2;
+}
+
 message CMsgDOTAUpdateTI4HeroQuest {
 	message Player {
 		optional uint32 account_id = 1;
@@ -584,7 +621,6 @@ message CMsgServerToGCMatchConnectionStats {
 		optional uint32 account_id = 1;
 		optional fixed32 ip = 2;
 		optional uint32 avg_ping_ms = 3;
-		optional uint32 peak_ping_ms = 4;
 		optional float packet_loss = 5;
 		optional float ping_deviation = 6;
 		optional uint32 full_resends = 7;
@@ -640,7 +676,7 @@ message CMsgServerToGCVictoryPredictions {
 	message Record {
 		optional uint32 account_id = 1;
 		optional uint64 item_id = 2;
-		optional bool victory = 3;
+		repeated uint64 item_ids = 5;
 	}
 
 	repeated .CMsgServerToGCVictoryPredictions.Record records = 1;
@@ -659,5 +695,52 @@ message CMsgServerToGCRequestStatus {
 
 message CMsgServerToGCRequestStatus_Response {
 	optional uint32 response = 1;
+}
+
+message CMsgSignOutAssassinMiniGameInfo {
+	repeated fixed64 winning_players = 1;
+	repeated fixed64 losing_players = 2;
+	repeated fixed64 arcana_owners = 3;
+	optional bool assassin_won = 4;
+	optional uint32 target_hero_id = 5;
+}
+
+message CMsgServerToGCGetIngameEventData {
+	optional .EIngameEvent event = 1 [default = k_EIngameEvent_OraclePA];
+}
+
+message CMsgGCToServerIngameEventDataOraclePA {
+	repeated uint32 target_hero_ids = 1;
+}
+
+message CMsgServerToGCKillSummaries {
+	message KillSummary {
+		optional uint32 killer_hero_id = 1;
+		optional uint32 victim_hero_id = 2;
+		optional uint32 kill_count = 3;
+	}
+
+	optional uint32 ingameevent_id = 1;
+	repeated .CMsgServerToGCKillSummaries.KillSummary summaries = 2;
+}
+
+message CMsgGCToServerPredictionResult {
+	message Prediction {
+		enum EResult {
+			k_eResult_ItemGranted = 1;
+			k_eResult_Destroyed = 2;
+		}
+
+		optional uint32 item_def = 1;
+		optional uint32 num_correct = 2;
+		optional uint32 num_fails = 3;
+		optional .CMsgGCToServerPredictionResult.Prediction.EResult result = 4 [default = k_eResult_ItemGranted];
+		optional uint32 granted_item_def = 5;
+	}
+
+	optional uint32 account_id = 1;
+	optional uint64 match_id = 2;
+	optional bool correct = 3;
+	repeated .CMsgGCToServerPredictionResult.Prediction predictions = 4;
 }
 

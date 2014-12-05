@@ -216,6 +216,9 @@ namespace SteamKit2.Internal
         /// <param name="msg">The client message to send.</param>
         public void Send( IClientMsg msg )
         {
+            if ( msg == null )
+                throw new ArgumentException( "A value for 'msg' must be supplied" );
+
             if ( this.SessionID.HasValue )
                 msg.SessionID = this.SessionID.Value;
 
@@ -323,7 +326,6 @@ namespace SteamKit2.Internal
             ConnectedUniverse = EUniverse.Invalid;
 
             heartBeatFunc.Stop();
-            connection.NetFilter = null;
 
             OnClientDisconnected();
         }
@@ -481,7 +483,7 @@ namespace SteamKit2.Internal
 
             if ( encResult.Body.Result == EResult.OK )
             {
-                connection.NetFilter = new NetFilterEncryption( tempSessionKey );
+                connection.SetNetEncryptionFilter( new NetFilterEncryption( tempSessionKey ) );
             }
         }
         void HandleLoggedOff( IPacketMsg packetMsg )

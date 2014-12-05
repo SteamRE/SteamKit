@@ -53,6 +53,8 @@ message CTwoFactor_AddAuthenticator_Response {
 	optional uint64 server_time = 5 [(description) = "Current server time"];
 	optional string account_name = 6 [(description) = "Account name to display on token client"];
 	optional string token_gid = 7 [(description) = "Token GID assigned by server"];
+	optional bytes identity_secret = 8 [(description) = "Secret used for identity attestation (e.g., for eventing)"];
+	optional bytes secret_1 = 9 [(description) = "Spare shared secret"];
 }
 
 message CTwoFactor_SendEmail_Request {
@@ -93,6 +95,28 @@ message CTwoFactor_RemoveAuthenticator_Response {
 	optional uint64 server_time = 3 [(description) = "Current server time"];
 }
 
+message CTwoFactor_CreateEmergencyCodes_Request {
+}
+
+message CTwoFactor_CreateEmergencyCodes_Response {
+	repeated string codes = 1 [(description) = "Emergency codes"];
+}
+
+message CTwoFactor_DestroyEmergencyCodes_Request {
+	optional fixed64 steamid = 1 [(description) = "steamid to use"];
+}
+
+message CTwoFactor_DestroyEmergencyCodes_Response {
+}
+
+message CTwoFactor_ValidateToken_Request {
+	optional string code = 1 [(description) = "code to validate"];
+}
+
+message CTwoFactor_ValidateToken_Response {
+	optional bool valid = 1 [(description) = "result of validation"];
+}
+
 service TwoFactor {
 	option (service_description) = "Two Factor Authentication Service";
 	rpc QueryTime (.CTwoFactor_Time_Request) returns (.CTwoFactor_Time_Response) {
@@ -115,5 +139,14 @@ service TwoFactor {
 	}
 	rpc RemoveAuthenticator (.CTwoFactor_RemoveAuthenticator_Request) returns (.CTwoFactor_RemoveAuthenticator_Response) {
 		option (method_description) = "Remove two-factor authentication addition from the logged-in account";
+	}
+	rpc CreateEmergencyCodes (.CTwoFactor_CreateEmergencyCodes_Request) returns (.CTwoFactor_CreateEmergencyCodes_Response) {
+		option (method_description) = "Generate emergency authenticator codes";
+	}
+	rpc DestroyEmergencyCodes (.CTwoFactor_DestroyEmergencyCodes_Request) returns (.CTwoFactor_DestroyEmergencyCodes_Response) {
+		option (method_description) = "Destroy emergency authenticator codes for the account";
+	}
+	rpc ValidateToken (.CTwoFactor_ValidateToken_Request) returns (.CTwoFactor_ValidateToken_Response) {
+		option (method_description) = "Validate (and consume) a token";
 	}
 }

@@ -452,6 +452,8 @@ message CMsgRedeemCodeResponse {
 message CMsgDevNewItemRequest {
 	optional string item_def_name = 3;
 	optional string loot_list_name = 4;
+	repeated string attr_def_name = 5;
+	repeated string attr_value = 6;
 }
 
 message CMsgDevNewItemRequestResponse {

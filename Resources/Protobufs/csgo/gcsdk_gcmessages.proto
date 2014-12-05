@@ -152,6 +152,7 @@ message CMsgClientWelcome {
 	optional .CMsgClientWelcome.Location location = 5;
 	optional bytes game_data2 = 6;
 	optional uint32 rtime32_gc_welcome_timestamp = 7;
+	optional uint32 currency = 8;
 }
 
 message CMsgConnectionStatus {

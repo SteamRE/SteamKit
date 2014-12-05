@@ -483,6 +483,7 @@ enum EOSType
 	MacOS107 = -90;
 	MacOS108 = -89;
 	MacOS109 = -88;
+	MacOS1010 = -87;
 
 	LinuxUnknown = -203;
 	Linux22 = -202;
@@ -503,12 +504,16 @@ enum EOSType
 	WinXP = 7;
 	Win2003 = 8;
 	WinVista = 9;
-	Win7 = 10; obsolete "renamed to Windows7"
-	Windows7 = 10;
+	Win7 = 10;
+	Windows7 = 10; obsolete "renamed to Win7"
 	Win2008 = 11;
 	Win2012 = 12;
-	Windows8 = 13;
-	Windows81 = 14;
+	Win8 = 13;
+	Windows8 = 13; obsolete "renamed to Win8"
+	Win81 = 14;
+	Windows81 = 14; obsolete "renamed to Win81"
+	Win2012R2 = 15;
+	Win10 = 16;
 
 	WinMAX = 15;
 

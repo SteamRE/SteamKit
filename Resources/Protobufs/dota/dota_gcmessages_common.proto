@@ -471,15 +471,34 @@ enum EDOTAGCMsg {
 	k_EMsgClientToGCSetProfileCardSlot = 7538;
 	k_EMsgGCToClientProfileCardUpdated = 7539;
 	k_EMsgServerToGCVictoryPredictions = 7540;
-	k_EMsgGCToGCProcessVictoryPredictionRecord = 7541;
 	k_EMsgClientToGCMarkNotificationListRead = 7542;
 	k_EMsgGCToClientNewNotificationAdded = 7543;
 	k_EMsgServerToGCSuspiciousActivity = 7544;
 	k_EMsgSignOutCommunicationSummary = 7545;
 	k_EMsgServerToGCRequestStatus_Response = 7546;
+	k_EMsgClientToGCCreateHeroStatue = 7547;
+	k_EMsgGCToClientHeroStatueCreateResult = 7548;
 	k_EMsgGCGCToLANServerRelayConnect = 7549;
-	k_EMsgGCToGCFantasySetMatchLeague = 7555;
+	k_EMsgSignOutAssassinMiniGameInfo = 7550;
+	k_EMsgServerToGCGetIngameEventData = 7551;
+	k_EMsgGCToGCUpdateIngameEventDataBroadcast = 7552;
+	k_EMsgGCToServerIngameEventData_OraclePA = 7553;
+	k_EMsgServerToGCReportKillSummaries = 7554;
+	k_EMsgGCToGCReportKillSummaries = 7555;
+	k_EMsgGCToGCUpdateAssassinMinigame = 7556;
+	k_EMsgGCToGCFantasySetMatchLeague = 7557;
 	k_EMsgClientToGCRecordCompendiumStats = 7558;
+	k_EMsgGCItemEditorRequestLeagueInfo = 7559;
+	k_EMsgGCItemEditorLeagueInfoResponse = 7560;
+	k_EMsgGCToGCUpdatePlayerPredictions = 7561;
+	k_EMsgGCToServerPredictionResult = 7562;
+	k_EMsgServerToGCSignoutAwardAdditionalDrops = 7563;
+	k_EMsgGCToGCSignoutAwardAdditionalDrops = 7564;
+	k_EMsgGCToClientEventStatusChanged = 7565;
+	k_EMsgGCHasItemDefsQuery = 7566;
+	k_EMsgGCHasItemDefsResponse = 7567;
+	k_EMsgClientToGCRecordStatueStats = 7568;
+	k_EMsgGCToGCReplayMonitorValidateReplay = 7569;
 	k_EMsgGCDev_GrantWarKill = 8001;
 }
 
@@ -643,6 +662,7 @@ enum MatchLanguages {
 	MATCH_LANGUAGE_KOREAN = 4;
 	MATCH_LANGUAGE_SPANISH = 5;
 	MATCH_LANGUAGE_PORTUGUESE = 6;
+	MATCH_LANGUAGE_ENGLISH2 = 7;
 }
 
 enum ETournamentTemplate {
@@ -655,10 +675,22 @@ enum ETournamentType {
 	k_ETournamentType_WeeklyDivision = 1;
 }
 
+enum EIngameEvent {
+	k_EIngameEvent_OraclePA = 0;
+}
+
 enum LobbyDotaTVDelay {
 	LobbyDotaTV_10 = 0;
 	LobbyDotaTV_120 = 1;
 	LobbyDotaTV_300 = 2;
+}
+
+enum EMatchOutcome {
+	k_EMatchOutcome_Unknown = 0;
+	k_EMatchOutcome_RadVictory = 2;
+	k_EMatchOutcome_DireVictory = 3;
+	k_EMatchOutcome_NotScored_PoorNetworkConditions = 64;
+	k_EMatchOutcome_NotScored_Leaver = 65;
 }
 
 enum EDOTAGCSessionNeed {
@@ -928,6 +960,7 @@ message CLobbyTimedRewardDetails {
 	optional bool is_supply_crate = 3;
 	optional bool is_timed_drop = 4;
 	optional uint32 account_id = 5;
+	optional uint32 origin = 6;
 }
 
 message CLobbyBroadcastChannelInfo {
@@ -1019,9 +1052,11 @@ message CSODOTALobby {
 	repeated .CSODOTALobby.CExtraMsg extra_messages = 62;
 	optional .CDOTASaveGame save_game = 63;
 	optional bool first_blood_happened = 65;
-	optional bool discard_match_results = 66;
+	optional bool legacy_discard_match_results = 66;
+	optional .EMatchOutcome match_outcome = 70 [default = k_EMatchOutcome_Unknown];
 	optional bool mass_disconnect = 67;
 	optional uint64 custom_game_id = 68;
+	repeated .EIngameEvent active_ingame_events = 69;
 }
 
 message CMsgDOTAGenericResult {
@@ -1052,6 +1087,16 @@ message CAttribute_ItemDynamicRecipeComponent {
 	optional uint32 item_rarity = 7;
 	optional string lootlist = 8;
 	optional uint64 fulfilled_item_id = 9;
+}
+
+message CProtoItemHeroStatue {
+	optional uint32 hero_id = 1;
+	optional uint32 status_effect_index = 2;
+	optional string sequence_name = 3;
+	optional float cycle = 4;
+	repeated uint32 wearable = 5;
+	optional string inscription = 6;
+	repeated uint32 style = 7;
 }
 
 message CProtoItemSocket {
@@ -1145,6 +1190,15 @@ message CMsgDOTAHasItemQuery {
 
 message CMsgDOTAHasItemResponse {
 	optional bool has_item = 1;
+}
+
+message CMsgDOTAHasItemDefsQuery {
+	optional uint32 account_id = 1;
+	repeated uint32 itemdef_ids = 2;
+}
+
+message CMsgDOTAHasItemDefsResponse {
+	optional bool has_items = 1;
 }
 
 message CMsgDOTAConsumeFantasyTicket {

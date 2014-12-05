@@ -31,22 +31,19 @@ namespace SteamKit2
                     throw new Exception("Expecting VZip version 'a'");
                 }
 
-                uint crcHeader = reader.ReadUInt32();
+                // Sometimes this is a creation timestamp (e.g. for Steam Client VZips).
+                // Sometimes this is a CRC32 (e.g. for depot chunks).
+                /* uint creationTimestampOrSecondaryCRC = */ reader.ReadUInt32();
 
                 byte[] properties = reader.ReadBytes(5);
                 byte[] compressedBuffer = reader.ReadBytes((int)ms.Length - HeaderLength - FooterLength - 5);
 
-                uint crcFooter = reader.ReadUInt32();
+                uint outputCRC = reader.ReadUInt32();
                 uint sizeDecompressed = reader.ReadUInt32();
 
                 if (reader.ReadUInt16() != VZipFooter)
                 {
                     throw new Exception("Expecting VZipFooter at end of stream");
-                }
-
-                if (crcHeader != crcFooter)
-                {
-                    throw new Exception("CRC in header and footer do not match");
                 }
 
                 SevenZip.Compression.LZMA.Decoder decoder = new SevenZip.Compression.LZMA.Decoder();
@@ -57,7 +54,13 @@ namespace SteamKit2
                 {
                     decoder.Code(inputStream, outStream, compressedBuffer.Length, sizeDecompressed, null);
 
-                    return outStream.ToArray();
+                    var outData = outStream.ToArray();
+                    if (Crc32.Compute(outData) != outputCRC)
+                    {
+                        throw new InvalidDataException("CRC does not match decompressed data. VZip data may be corrupted.");
+                    }
+
+                    return outData;
                 }
             }
         }
@@ -81,28 +84,28 @@ namespace SteamKit2
                 Int32 numFastBytes = 128;
 
                 SevenZip.CoderPropID[] propIDs = 
-				{
-					SevenZip.CoderPropID.DictionarySize,
-					SevenZip.CoderPropID.PosStateBits,
-					SevenZip.CoderPropID.LitContextBits,
-					SevenZip.CoderPropID.LitPosBits,
-					SevenZip.CoderPropID.Algorithm,
-					SevenZip.CoderPropID.NumFastBytes,
-					SevenZip.CoderPropID.MatchFinder,
-					SevenZip.CoderPropID.EndMarker
-				};
+                {
+                    SevenZip.CoderPropID.DictionarySize,
+                    SevenZip.CoderPropID.PosStateBits,
+                    SevenZip.CoderPropID.LitContextBits,
+                    SevenZip.CoderPropID.LitPosBits,
+                    SevenZip.CoderPropID.Algorithm,
+                    SevenZip.CoderPropID.NumFastBytes,
+                    SevenZip.CoderPropID.MatchFinder,
+                    SevenZip.CoderPropID.EndMarker
+                };
 
                 object[] properties = 
-				{
-					(Int32)(dictionary),
-					(Int32)(posStateBits),
-					(Int32)(litContextBits),
-					(Int32)(litPosBits),
-					(Int32)(algorithm),
-					(Int32)(numFastBytes),
-					"bt4",
-					false
-				};
+                {
+                    (Int32)(dictionary),
+                    (Int32)(posStateBits),
+                    (Int32)(litContextBits),
+                    (Int32)(litPosBits),
+                    (Int32)(algorithm),
+                    (Int32)(numFastBytes),
+                    "bt4",
+                    false
+                };
 
                 SevenZip.Compression.LZMA.Encoder encoder = new SevenZip.Compression.LZMA.Encoder();
                 encoder.SetCoderProperties(propIDs, properties);
