@@ -1984,13 +1984,22 @@ namespace SteamKit2.GC.Dota.Internal
       set { _first_blood_happened = value; }
     }
 
-    private bool _discard_match_results = default(bool);
-    [global::ProtoBuf.ProtoMember(66, IsRequired = false, Name=@"discard_match_results", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    private bool _legacy_discard_match_results = default(bool);
+    [global::ProtoBuf.ProtoMember(66, IsRequired = false, Name=@"legacy_discard_match_results", DataFormat = global::ProtoBuf.DataFormat.Default)]
     [global::System.ComponentModel.DefaultValue(default(bool))]
-    public bool discard_match_results
+    public bool legacy_discard_match_results
     {
-      get { return _discard_match_results; }
-      set { _discard_match_results = value; }
+      get { return _legacy_discard_match_results; }
+      set { _legacy_discard_match_results = value; }
+    }
+
+    private EMatchOutcome _match_outcome = EMatchOutcome.k_EMatchOutcome_Unknown;
+    [global::ProtoBuf.ProtoMember(70, IsRequired = false, Name=@"match_outcome", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(EMatchOutcome.k_EMatchOutcome_Unknown)]
+    public EMatchOutcome match_outcome
+    {
+      get { return _match_outcome; }
+      set { _match_outcome = value; }
     }
 
     private bool _mass_disconnect = default(bool);
@@ -5889,6 +5898,26 @@ namespace SteamKit2.GC.Dota.Internal
             
       [global::ProtoBuf.ProtoEnum(Name=@"LobbyDotaTV_300", Value=2)]
       LobbyDotaTV_300 = 2
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"EMatchOutcome", EnumPassthru=true)]
+    public enum EMatchOutcome
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMatchOutcome_Unknown", Value=0)]
+      k_EMatchOutcome_Unknown = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMatchOutcome_RadVictory", Value=2)]
+      k_EMatchOutcome_RadVictory = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMatchOutcome_DireVictory", Value=3)]
+      k_EMatchOutcome_DireVictory = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMatchOutcome_NotScored_PoorNetworkConditions", Value=64)]
+      k_EMatchOutcome_NotScored_PoorNetworkConditions = 64,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMatchOutcome_NotScored_Leaver", Value=65)]
+      k_EMatchOutcome_NotScored_Leaver = 65
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"EDOTAGCSessionNeed", EnumPassthru=true)]

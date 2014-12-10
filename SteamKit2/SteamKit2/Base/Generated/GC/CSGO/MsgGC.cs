@@ -1321,6 +1321,13 @@ namespace SteamKit2.GC.CSGO.Internal
       get { return _notes; }
     }
   
+    private readonly global::System.Collections.Generic.List<uint> _penalty_account_id_sessions_green = new global::System.Collections.Generic.List<uint>();
+    [global::ProtoBuf.ProtoMember(14, Name=@"penalty_account_id_sessions_green", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public global::System.Collections.Generic.List<uint> penalty_account_id_sessions_green
+    {
+      get { return _penalty_account_id_sessions_green; }
+    }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Note")]
   public partial class Note : global::ProtoBuf.IExtensible
   {
@@ -2301,10 +2308,10 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _activity = value; }
     }
 
-    private uint _seconds_until_next_mission = default(uint);
+    private int _seconds_until_next_mission = default(int);
     [global::ProtoBuf.ProtoMember(16, IsRequired = false, Name=@"seconds_until_next_mission", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint seconds_until_next_mission
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int seconds_until_next_mission
     {
       get { return _seconds_until_next_mission; }
       set { _seconds_until_next_mission = value; }
@@ -4673,6 +4680,13 @@ namespace SteamKit2.GC.CSGO.Internal
       get { return _server_port; }
       set { _server_port = value; }
     }
+    private readonly global::System.Collections.Generic.List<string> _choked_blocks = new global::System.Collections.Generic.List<string>();
+    [global::ProtoBuf.ProtoMember(5, Name=@"choked_blocks", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<string> choked_blocks
+    {
+      get { return _choked_blocks; }
+    }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

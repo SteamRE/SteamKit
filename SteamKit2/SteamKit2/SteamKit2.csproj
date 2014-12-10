@@ -107,6 +107,9 @@
     <Compile Include="Base\Generated\Unified\SteamMsgTwoFactor.cs" />
     <Compile Include="Base\Generated\Unified\SteamMsgUnifiedBase.cs" />
     <Compile Include="Base\Generated\Unified\SteamMsgVideo.cs" />
+    <Compile Include="Base\Generated\Unified\Steamworks\SteamMsgCloudSteamworks.cs" />
+    <Compile Include="Base\Generated\Unified\Steamworks\SteamMsgOAuthSteamworks.cs" />
+    <Compile Include="Base\Generated\Unified\Steamworks\SteamMsgPublishedFileSteamworks.cs" />
     <Compile Include="Base\MsgBase.cs" />
     <Compile Include="Base\PacketBase.cs" />
     <Compile Include="Steam\CDNClient.cs" />
