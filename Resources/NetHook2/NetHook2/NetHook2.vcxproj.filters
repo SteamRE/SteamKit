@@ -47,6 +47,9 @@
     <ClCompile Include="string.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="sedebug.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="binaryreader.h">
@@ -92,6 +95,9 @@
       <Filter>Header Files\steam</Filter>
     </ClInclude>
     <ClInclude Include="nh2_string.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sedebug.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

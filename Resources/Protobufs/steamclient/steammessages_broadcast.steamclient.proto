@@ -53,6 +53,7 @@ message CBroadcast_WatchBroadcast_Response {
 		k_EWatchResponseSystemNotSupported = 8;
 		k_EWatchResponseUserRestricted = 9;
 		k_EWatchResponseClientOutOfDate = 10;
+		k_EWatchResponsePoorUploadQuality = 11;
 	}
 
 	optional .CBroadcast_WatchBroadcast_Response.EWatchResponse response = 1 [default = k_EWatchResponseReady];

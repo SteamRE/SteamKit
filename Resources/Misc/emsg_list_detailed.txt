@@ -497,5 +497,6 @@
 	k_EMsgClientBroadcastFrames = 9701, // flags: 2, server type: -1
 	k_EMsgClientBroadcastDisconnect = 9702, // flags: 2, server type: -1
 	k_EMsgClientBroadcastScreenshot = 9703, // flags: 2, server type: -1
+	k_EMsgClientBroadcastUploadConfig = 9704, // flags: 2, server type: -1
 	k_EMsgClientVoiceCallPreAuthorize = 9800, // flags: 59, server type: -1
 	k_EMsgClientVoiceCallPreAuthorizeResponse = 9801, // flags: 59, server type: -1
