@@ -1766,6 +1766,7 @@ namespace SteamKit2
 		ClientBroadcastFrames = 9701,
 		ClientBroadcastDisconnect = 9702,
 		ClientBroadcastScreenshot = 9703,
+		ClientBroadcastUploadConfig = 9704,
 		ClientVoiceCallPreAuthorize = 9800,
 		ClientVoiceCallPreAuthorizeResponse = 9801,
 	}

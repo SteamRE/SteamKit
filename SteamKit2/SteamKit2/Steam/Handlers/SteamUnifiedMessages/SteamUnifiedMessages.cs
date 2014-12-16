@@ -138,7 +138,7 @@ namespace SteamKit2
 
         void HandleServiceMethod( IPacketMsg packetMsg )
         {
-            var notification = new ClientMsgProtobuf<CMsgClientServiceMethod>( packetMsg );
+            var notification = new ClientMsgProtobuf( packetMsg );
 
             var jobName = notification.Header.Proto.target_job_name;
             if ( !string.IsNullOrEmpty( jobName ) )
