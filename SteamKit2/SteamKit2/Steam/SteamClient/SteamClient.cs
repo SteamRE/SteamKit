@@ -11,6 +11,7 @@ using System.Net.Sockets;
 using System.Threading;
 using SteamKit2.Internal;
 using System.Diagnostics;
+using ProtoBuf;
 
 namespace SteamKit2
 {
@@ -288,7 +289,22 @@ namespace SteamKit2
             // pass along the clientmsg to all registered handlers
             foreach ( var kvp in handlers )
             {
-                kvp.Value.HandleMsg( packetMsg );
+                try
+                {
+                    kvp.Value.HandleMsg( packetMsg );
+                }
+                catch ( ProtoException ex )
+                {
+                    DebugLog.WriteLine( "SteamClient", "'{0}' handler failed to (de)serialize a protobuf: '{1}'", kvp.Key.Name, ex.Message );
+                    Disconnect();
+                    return;
+                }
+                catch ( Exception ex )
+                {
+                    DebugLog.WriteLine( "SteamClient", "Unhandled '{0}' exception from '{1}' handler: '{2}'", ex.GetType().Name, kvp.Key.Name, ex.Message );
+                    Disconnect();
+                    return;
+                }
             }
         }
         /// <summary>
