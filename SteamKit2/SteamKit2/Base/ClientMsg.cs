@@ -4,6 +4,7 @@
  */
 
 
+using System;
 using System.IO;
 using ProtoBuf;
 using SteamKit2.Internal;
@@ -11,12 +12,15 @@ using SteamKit2.Internal;
 namespace SteamKit2
 {
     /// <summary>
-    /// Represents a protobuf backed client message.
+    /// Represents a protobuf backed client message. Only contains the header information.
     /// </summary>
-    /// <typeparam name="BodyType">The body type of this message.</typeparam>
-    public sealed class ClientMsgProtobuf<BodyType> : MsgBase<MsgHdrProtoBuf>
-        where BodyType : IExtensible, new()
+    public class ClientMsgProtobuf : MsgBase<MsgHdrProtoBuf>
     {
+        internal ClientMsgProtobuf( int payloadReserve = 0 )
+            : base( payloadReserve )
+        {
+        }
+
         /// <summary>
         /// Gets a value indicating whether this client message is protobuf backed.
         /// Client messages of this type are always protobuf backed.
@@ -85,6 +89,57 @@ namespace SteamKit2
         /// </summary>
         public CMsgProtoBufHeader ProtoHeader { get { return Header.Proto; } }
 
+
+        internal ClientMsgProtobuf( EMsg eMsg, int payloadReserve = 64 )
+            : base( payloadReserve )
+        {
+            // set our emsg
+            Header.Msg = eMsg;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ClientMsgProtobuf"/> class.
+        /// This is a recieve constructor.
+        /// </summary>
+        /// <param name="msg">The packet message to build this client message from.</param>
+        public ClientMsgProtobuf( IPacketMsg msg )
+            : this( msg.MsgType )
+        {
+            DebugLog.Assert(msg.IsProto, "ClientMsgProtobuf", "ClientMsgProtobuf used for non-proto message!");
+
+            Deserialize( msg.GetData() );
+        }
+
+
+        /// <summary>
+        /// Serializes this client message instance to a byte array.
+        /// </summary>
+        /// <exception cref="NotSupportedException">This class is for reading Protobuf messages only. If you want to create a protobuf message, use <see cref="ClientMsgProtobuf&lt;T&gt;"/>.</exception>
+        public override byte[] Serialize()
+        {
+            throw new NotSupportedException( "ClientMsgProtobuf is for reading only. Use ClientMsgProtobuf<T> for serializing messages." );
+        }
+
+        /// <summary>
+        /// Initializes this client message by deserializing the specified data.
+        /// </summary>
+        /// <param name="data">The data representing a client message.</param>
+        public override void Deserialize( byte[] data )
+        {
+            using ( MemoryStream ms = new MemoryStream( data ) )
+            {
+                Header.Deserialize( ms );
+            }
+        }
+    }
+
+    /// <summary>
+    /// Represents a protobuf backed client message.
+    /// </summary>
+    /// <typeparam name="BodyType">The body type of this message.</typeparam>
+    public sealed class ClientMsgProtobuf<BodyType> : ClientMsgProtobuf
+        where BodyType : IExtensible, new()
+    {
         /// <summary>
         /// Gets the body structure of this message.
         /// </summary>
@@ -128,7 +183,7 @@ namespace SteamKit2
         public ClientMsgProtobuf( IPacketMsg msg )
             : this( msg.MsgType )
         {
-            DebugLog.Assert( msg.IsProto, "ClientMsgProtobuf", "ClientMsgProtobuf used for non-proto message!" );
+            DebugLog.Assert( msg.IsProto, "ClientMsgProtobuf<>", "ClientMsgProtobuf<> used for non-proto message!" );
 
             Deserialize( msg.GetData() );
         }
