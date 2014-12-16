@@ -4,15 +4,6 @@ import "encrypted_app_ticket.proto";
 message CMsgClientHeartBeat {
 }
 
-message CMsgClientSubscribeToPersonaFeed {
-	message PersonaFeed {
-		optional fixed64 steamID = 1;
-		optional bool subscribe = 2;
-	}
-
-	repeated .CMsgClientSubscribeToPersonaFeed.PersonaFeed persona_feeds = 1;
-}
-
 message CMsgClientUDSP2PSessionStarted {
 	optional fixed64 steamid_remote = 1;
 	optional int32 appid = 2;
