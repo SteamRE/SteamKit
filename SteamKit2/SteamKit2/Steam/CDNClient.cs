@@ -563,13 +563,15 @@ namespace SteamKit2
                 using ( var ms = new MemoryStream( ( int ) response.ContentLength ) )
                 {
                     response.GetResponseStream().CopyTo( ms );
+                    response.Close();
+
                     return ms.ToArray();
                 }
             }
             catch ( Exception ex )
             {
                 DebugLog.WriteLine( "CDNClient", "Failed to complete web request to {0}: {1}", url, ex.Message );
-                throw ex;
+                throw;
             }
         }
 
