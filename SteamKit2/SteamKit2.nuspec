@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>SteamKit2</id>
-        <version>1.6.1</version>
+        <version>1.6.2</version>
         <title>SteamKit2</title>
         <authors>voided, netshroud</authors>
         <licenseUrl>https://github.com/SteamRE/SteamKit/blob/master/SteamKit2/SteamKit2/license.txt</licenseUrl>
@@ -11,7 +11,7 @@
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>.NET library that aims to interoperate with the Steam network.</description>
         <summary />
-        <releaseNotes>Release notes are available at https://github.com/SteamRE/SteamKit/releases/tag/SteamKit_1.6.1</releaseNotes>
+        <releaseNotes>Release notes are available at https://github.com/SteamRE/SteamKit/releases/tag/SteamKit_1.6.2</releaseNotes>
         <copyright />
         <tags>steam networking steamkit</tags>
         <dependencies>
