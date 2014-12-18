@@ -420,7 +420,8 @@ namespace SteamKit2
                         {(uint) EDOTAGCMsg.k_EMsgGCPopup, HandlePopup},
                         {(uint) EDOTAGCMsg.k_EMsgDOTALiveLeagueGameUpdate, HandleLiveLeageGameUpdate},
                         {(uint) EGCBaseMsg.k_EMsgGCInvitationCreated, HandleInvitationCreated},
-                        {(uint) EDOTAGCMsg.k_EMsgGCMatchDetailsResponse, HandleMatchDetailsResponse}
+                        {(uint) EDOTAGCMsg.k_EMsgGCMatchDetailsResponse, HandleMatchDetailsResponse},
+                        {(uint) EGCBaseClientMsg.k_EMsgGCClientConnectionStatus, HandleConnectionStatus},
                     };
                     Action<IPacketGCMsg> func;
                     if (!messageMap.TryGetValue(gcmsg.MsgType, out func))
@@ -573,6 +574,12 @@ namespace SteamKit2
         {
             var resp = new ClientGCMsgProtobuf<CMsgGCMatchDetailsResponse>(obj);
             this.Client.PostCallback(new MatchResultResponse(resp.Body));
+        }
+
+        private void HandleConnectionStatus(IPacketGCMsg obj)
+        {
+            var resp = new ClientGCMsgProtobuf<CMsgConnectionStatus>(obj);
+            this.Client.PostCallback(new ConnectionStatus(resp.Body));
         }
 
         private void HandleOtherJoinedChannel(IPacketGCMsg obj)

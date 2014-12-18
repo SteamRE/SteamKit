@@ -196,6 +196,17 @@ namespace SteamKit2
             }
         }
         /// <summary>
+        /// Connection status
+        /// </summary>
+        public sealed class ConnectionStatus : CallbackMsg
+        {
+            public CMsgConnectionStatus result;
+            internal ConnectionStatus(CMsgConnectionStatus msg)
+            {
+                this.result = msg;
+            }
+        }
+        /// <summary>
         /// A user joined our chat channel
         /// </summary>
         public sealed class OtherJoinedChannel : CallbackMsg
