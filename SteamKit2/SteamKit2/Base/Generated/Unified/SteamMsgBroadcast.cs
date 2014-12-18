@@ -328,7 +328,10 @@ namespace SteamKit2.Unified.Internal
       k_EWatchResponseUserRestricted = 9,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EWatchResponseClientOutOfDate", Value=10)]
-      k_EWatchResponseClientOutOfDate = 10
+      k_EWatchResponseClientOutOfDate = 10,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EWatchResponsePoorUploadQuality", Value=11)]
+      k_EWatchResponsePoorUploadQuality = 11
     }
   
     private global::ProtoBuf.IExtension extensionObject;

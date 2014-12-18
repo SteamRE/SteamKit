@@ -1,4 +1,16 @@
 ------------------------------------------------------------------------------
+v 1.6.2			Dec 16, 2014
+------------------------------------------------------------------------------
+
+*	Fixed a crash when receiving a `ServiceMethod` message.
+*	Fixed `ServiceMethodCallback.RpcName` having a leading '.' character (e.g. '.MethodName' instead of 'MethodName).
+*	Fixed web responses in `CDNClient` not being closed, which could lead to running out of system resources.
+*	Added error handling for `ClientMsgHandler`. Any unhandled exceptions will be logged to `DebugLog` and trigger `SteamClient` to disconnect.
+*	Updated `EMsg` list.
+*	Updated Steam protobufs.
+*	Updated game-related GC messages and protobufs.
+
+------------------------------------------------------------------------------
 v 1.6.1			Nov 30, 2014
 ------------------------------------------------------------------------------
 

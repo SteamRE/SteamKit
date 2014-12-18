@@ -94,7 +94,7 @@ namespace SteamKit2
             /// </summary>
             public string RpcName
             {
-                get { return MethodName.Substring( ServiceName.Length ).Split( '#' )[0]; }
+                get { return MethodName.Substring( ServiceName.Length + 1 ).Split( '#' )[0]; }
             }
 
             /// <summary>
