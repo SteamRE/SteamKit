@@ -645,7 +645,7 @@ namespace ProtobufDumper
             return options_kv;
         }
 
-        private string BuildDescriptorDeclaration(FieldDescriptorProto field)
+        private string BuildDescriptorDeclaration(FieldDescriptorProto field, bool emitFieldLabel = true)
         {
             PushDescriptorName(field);
 
@@ -680,7 +680,16 @@ namespace ProtobufDumper
 
             PopDescriptorName();
 
-            return GetLabel(field.label) + " " + type + " " + field.name + " = " + field.number + parameters + ";";
+            var descriptorDeclarationBuilder = new StringBuilder();
+            if (emitFieldLabel)
+            {
+                descriptorDeclarationBuilder.Append(GetLabel(field.label));
+                descriptorDeclarationBuilder.Append(" ");
+            }
+
+            descriptorDeclarationBuilder.AppendFormat("{0} {1} = {2}{3};", type, field.name, field.number, parameters);
+
+            return descriptorDeclarationBuilder.ToString();
         }
 
         private void DumpExtensionDescriptor(List<FieldDescriptorProto> fields, StringBuilder sb, string levelspace)
@@ -827,7 +836,7 @@ namespace ProtobufDumper
                 DumpEnumDescriptor(field, sb, level + 1);
             }
 
-            foreach (FieldDescriptorProto field in proto.field)
+            foreach (FieldDescriptorProto field in proto.field.Where(x => !x.oneof_indexSpecified))
             {
                 var enumLookup = new List<EnumDescriptorProto>();
 
@@ -835,6 +844,21 @@ namespace ProtobufDumper
                 enumLookup.AddRange( proto.enum_type ); // add this message's nested enums
 
                 sb.AppendLine(levelspace + "\t" + BuildDescriptorDeclaration(field));
+            }
+
+            for (int i = 0; i < proto.oneof_decl.Count; i++)
+            {
+                var oneof = proto.oneof_decl[i];
+                var fields = proto.field.Where(x => x.oneof_indexSpecified && x.oneof_index == i).ToArray();
+
+                sb.AppendLine(levelspace + "\toneof " + oneof.name + " {");
+
+                foreach(var field in fields)
+                {
+                    sb.AppendLine(levelspace + "\t\t" + BuildDescriptorDeclaration(field, emitFieldLabel: false));
+                }
+
+                sb.AppendLine(levelspace + "\t}");
             }
 
             if (proto.extension_range.Count > 0)
