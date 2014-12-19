@@ -153,6 +153,7 @@ enum EGCItemMsg {
 	k_EMsgGCShuffleCrateContents = 2557;
 	k_EMsgGCQuestObjective_Progress = 2558;
 	k_EMsgGCQuestCompleted = 2559;
+	k_EMsgGCApplyDuckToken = 2560;
 }
 
 enum EGCMsgResponse {
