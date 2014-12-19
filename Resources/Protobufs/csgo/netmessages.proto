@@ -26,6 +26,7 @@ enum CLC_Messages {
 }
 
 enum ESplitScreenMessageType {
+	option allow_alias = true;
 	MSG_SPLITSCREEN_ADDUSER = 0;
 	MSG_SPLITSCREEN_REMOVEUSER = 1;
 	MSG_SPLITSCREEN_TYPE_BITS = 1;
