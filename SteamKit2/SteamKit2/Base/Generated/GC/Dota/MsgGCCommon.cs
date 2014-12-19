@@ -2377,6 +2377,75 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CProtoItemTeamShowcase")]
+  public partial class CProtoItemTeamShowcase : global::ProtoBuf.IExtensible
+  {
+    public CProtoItemTeamShowcase() {}
+    
+
+    private uint _hero_id = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"hero_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint hero_id
+    {
+      get { return _hero_id; }
+      set { _hero_id = value; }
+    }
+
+    private uint _status_effect_index = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"status_effect_index", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint status_effect_index
+    {
+      get { return _status_effect_index; }
+      set { _status_effect_index = value; }
+    }
+
+    private string _sequence_name = "";
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"sequence_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string sequence_name
+    {
+      get { return _sequence_name; }
+      set { _sequence_name = value; }
+    }
+
+    private float _cycle = default(float);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"cycle", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(float))]
+    public float cycle
+    {
+      get { return _cycle; }
+      set { _cycle = value; }
+    }
+    private readonly global::System.Collections.Generic.List<uint> _wearable = new global::System.Collections.Generic.List<uint>();
+    [global::ProtoBuf.ProtoMember(5, Name=@"wearable", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public global::System.Collections.Generic.List<uint> wearable
+    {
+      get { return _wearable; }
+    }
+  
+
+    private string _inscription = "";
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"inscription", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string inscription
+    {
+      get { return _inscription; }
+      set { _inscription = value; }
+    }
+    private readonly global::System.Collections.Generic.List<uint> _style = new global::System.Collections.Generic.List<uint>();
+    [global::ProtoBuf.ProtoMember(7, Name=@"style", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public global::System.Collections.Generic.List<uint> style
+    {
+      get { return _style; }
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CProtoItemSocket")]
   public partial class CProtoItemSocket : global::ProtoBuf.IExtensible
   {
@@ -5428,7 +5497,13 @@ namespace SteamKit2.GC.Dota.Internal
       k_EMsgGCToGCReplayMonitorValidateReplay = 7569,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCDev_GrantWarKill", Value=8001)]
-      k_EMsgGCDev_GrantWarKill = 8001
+      k_EMsgGCDev_GrantWarKill = 8001,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCCreateTeamShowcase", Value=8002)]
+      k_EMsgClientToGCCreateTeamShowcase = 8002,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToClientTeamShowcaseCreateResult", Value=8003)]
+      k_EMsgGCToClientTeamShowcaseCreateResult = 8003
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"DOTA_GameMode", EnumPassthru=true)]

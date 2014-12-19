@@ -14,7 +14,6 @@ using SteamKit2.GC.Internal;
 // Note: requires additional types generated from: steammessages.proto
 // Note: requires additional types generated from: dota_gcmessages_common.proto
 // Note: requires additional types generated from: gcsdk_gcmessages.proto
-// Note: requires additional types generated from: dota_gcmessages_client_fantasy.proto
 namespace SteamKit2.GC.Dota.Internal
 {
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgStartFindingMatch")]
@@ -3748,7 +3747,10 @@ namespace SteamKit2.GC.Dota.Internal
       NEED_INITIAL_SKILL_IN_PARTY = 54,
             
       [global::ProtoBuf.ProtoEnum(Name=@"TARGET_ENGINE_MISMATCH", Value=55)]
-      TARGET_ENGINE_MISMATCH = 55
+      TARGET_ENGINE_MISMATCH = 55,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"VAC_NOT_VERIFIED", Value=56)]
+      VAC_NOT_VERIFIED = 56
     }
   
     private global::ProtoBuf.IExtension extensionObject;
@@ -5511,6 +5513,15 @@ namespace SteamKit2.GC.Dota.Internal
     {
       get { return _fantasy_draft_player_account_id; }
       set { _fantasy_draft_player_account_id = value; }
+    }
+
+    private uint _compendium_league_id = default(uint);
+    [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"compendium_league_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint compendium_league_id
+    {
+      get { return _compendium_league_id; }
+      set { _compendium_league_id = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -12764,10 +12775,98 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientToGCCreateTeamShowcase")]
+  public partial class CMsgClientToGCCreateTeamShowcase : global::ProtoBuf.IExtensible
+  {
+    public CMsgClientToGCCreateTeamShowcase() {}
+    
+
+    private ulong _source_item = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"source_item", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong source_item
+    {
+      get { return _source_item; }
+      set { _source_item = value; }
+    }
+
+    private uint _hero_id = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"hero_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint hero_id
+    {
+      get { return _hero_id; }
+      set { _hero_id = value; }
+    }
+
+    private string _sequence_name = "";
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"sequence_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string sequence_name
+    {
+      get { return _sequence_name; }
+      set { _sequence_name = value; }
+    }
+
+    private float _cycle = default(float);
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"cycle", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(float))]
+    public float cycle
+    {
+      get { return _cycle; }
+      set { _cycle = value; }
+    }
+    private readonly global::System.Collections.Generic.List<uint> _wearables = new global::System.Collections.Generic.List<uint>();
+    [global::ProtoBuf.ProtoMember(6, Name=@"wearables", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public global::System.Collections.Generic.List<uint> wearables
+    {
+      get { return _wearables; }
+    }
+  
+
+    private string _inscription = "";
+    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"inscription", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string inscription
+    {
+      get { return _inscription; }
+      set { _inscription = value; }
+    }
+    private readonly global::System.Collections.Generic.List<uint> _styles = new global::System.Collections.Generic.List<uint>();
+    [global::ProtoBuf.ProtoMember(8, Name=@"styles", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public global::System.Collections.Generic.List<uint> styles
+    {
+      get { return _styles; }
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCToClientHeroStatueCreateResult")]
   public partial class CMsgGCToClientHeroStatueCreateResult : global::ProtoBuf.IExtensible
   {
     public CMsgGCToClientHeroStatueCreateResult() {}
+    
+
+    private ulong _resulting_item = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"resulting_item", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong resulting_item
+    {
+      get { return _resulting_item; }
+      set { _resulting_item = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCToClientTeamShowcaseCreateResult")]
+  public partial class CMsgGCToClientTeamShowcaseCreateResult : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCToClientTeamShowcaseCreateResult() {}
     
 
     private ulong _resulting_item = default(ulong);
