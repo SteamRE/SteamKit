@@ -1,4 +1,3 @@
-import "google/protobuf/descriptor.proto";
 import "networkbasetypes.proto";
 
 enum CLC_Messages {
@@ -51,6 +50,12 @@ enum VoiceDataFormat_t {
 enum ESplitScreenMessageType {
 	MSG_SPLITSCREEN_ADDUSER = 0;
 	MSG_SPLITSCREEN_REMOVEUSER = 1;
+}
+
+enum ENetworkSystemLimitReport {
+	NSLR_GlobalPacketRateExceeded = 0;
+	NSLR_ConnectionLessRateLimited = 1;
+	NSLR_NetChannelRateLimited = 2;
 }
 
 message CCLCMsg_ClientInfo {

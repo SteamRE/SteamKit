@@ -500,6 +500,8 @@ enum EDOTAGCMsg {
 	k_EMsgClientToGCRecordStatueStats = 7568;
 	k_EMsgGCToGCReplayMonitorValidateReplay = 7569;
 	k_EMsgGCDev_GrantWarKill = 8001;
+	k_EMsgClientToGCCreateTeamShowcase = 8002;
+	k_EMsgGCToClientTeamShowcaseCreateResult = 8003;
 }
 
 enum DOTA_GameMode {
@@ -1090,6 +1092,16 @@ message CAttribute_ItemDynamicRecipeComponent {
 }
 
 message CProtoItemHeroStatue {
+	optional uint32 hero_id = 1;
+	optional uint32 status_effect_index = 2;
+	optional string sequence_name = 3;
+	optional float cycle = 4;
+	repeated uint32 wearable = 5;
+	optional string inscription = 6;
+	repeated uint32 style = 7;
+}
+
+message CProtoItemTeamShowcase {
 	optional uint32 hero_id = 1;
 	optional uint32 status_effect_index = 2;
 	optional string sequence_name = 3;
