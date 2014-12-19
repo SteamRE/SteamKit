@@ -89,6 +89,11 @@ enum EGCItemMsg {
 	k_EMsgGCRequestCrateItems = 1092;
 	k_EMsgGCRequestCrateItemsResponse = 1093;
 	k_EMsgGCServerUseItemRequest = 1103;
+	k_EMsgGCAddGiftItem = 1104;
+	k_EMsgGCRemoveItemGiftMessage = 1105;
+	k_EMsgGCRemoveItemGiftMessageResponse = 1106;
+	k_EMsgGCRemoveItemGifterAccountId = 1107;
+	k_EMsgGCRemoveItemGifterAccountIdResponse = 1108;
 	k_EMsgGCTradingBase = 1500;
 	k_EMsgGCTrading_InitiateTradeRequest = 1501;
 	k_EMsgGCTrading_InitiateTradeResponse = 1502;
@@ -458,5 +463,10 @@ message CMsgDevNewItemRequest {
 
 message CMsgDevNewItemRequestResponse {
 	optional bool success = 1;
+}
+
+message CMsgGCAddGiftItem {
+	optional uint32 account_id = 1;
+	optional uint64 item_id = 2;
 }
 

@@ -1,4 +1,3 @@
-import "google/protobuf/descriptor.proto";
 import "network_connection.proto";
 
 enum SIGNONSTATE {

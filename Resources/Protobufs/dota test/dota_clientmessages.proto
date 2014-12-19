@@ -1,5 +1,3 @@
-import "google/protobuf/descriptor.proto";
-import "networkbasetypes.proto";
 import "dota_commonmessages.proto";
 
 enum EDotaClientMessages {
@@ -37,6 +35,12 @@ enum EDotaClientMessages {
 	DOTA_CM_BuyBackStateAlert = 32;
 	DOTA_CM_QuickBuyAlert = 33;
 	DOTA_CM_HeroStatueLike = 34;
+	DOTA_CM_ModifierAlert = 35;
+	DOTA_CM_TeamShowcaseEditor = 36;
+	DOTA_CM_HPManaAlert = 37;
+	DOTA_CM_GlyphAlert = 38;
+	DOTA_CM_TeamShowcaseClientData = 39;
+	DOTA_CM_PlayTeamShowcase = 40;
 }
 
 message CDOTAClientMsg_MapPing {
@@ -48,7 +52,19 @@ message CDOTAClientMsg_ItemAlert {
 }
 
 message CDOTAClientMsg_EnemyItemAlert {
-	optional .CDOTAMsg_EnemyItemAlert enemy_item_alert = 1;
+	optional uint32 item_entindex = 1;
+}
+
+message CDOTAClientMsg_ModifierAlert {
+	optional int32 buff_internal_index = 1;
+}
+
+message CDOTAClientMsg_HPManaAlert {
+	optional uint32 target_entindex = 1;
+}
+
+message CDOTAClientMsg_GlyphAlert {
+	optional bool negative = 1;
 }
 
 message CDOTAClientMsg_MapLine {
@@ -187,5 +203,16 @@ message CDOTAClientMsg_FreeInventory {
 
 message CDOTAClientMsg_HeroStatueLike {
 	optional uint32 owner_player_id = 1;
+}
+
+message CDOTAClientMsg_TeamShowcaseEditor {
+	optional bytes data = 1;
+}
+
+message CDOTAClientMsg_TeamShowcaseClientData {
+	optional bytes data = 1;
+}
+
+message CDOTAClientMsg_PlayTeamShowcase {
 }
 

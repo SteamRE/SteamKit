@@ -1,4 +1,3 @@
-import "google/protobuf/descriptor.proto";
 import "networkbasetypes.proto";
 
 enum EBaseUserMessages {
