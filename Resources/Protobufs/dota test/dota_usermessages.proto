@@ -2,6 +2,9 @@ import "networkbasetypes.proto";
 import "ai_activity.proto";
 import "dota_commonmessages.proto";
 
+option optimize_for = SPEED;
+option cc_generic_services = false;
+
 enum EDotaUserMessages {
 	DOTA_UM_AddUnitToSelection = 64;
 	DOTA_UM_AIDebugLine = 65;

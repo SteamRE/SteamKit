@@ -1,5 +1,8 @@
 import "networkbasetypes.proto";
 
+option optimize_for = SPEED;
+option cc_generic_services = false;
+
 enum EBaseUserMessages {
 	UM_AchievementEvent = 1;
 	UM_CloseCaption = 2;

@@ -1,5 +1,8 @@
 import "steammessages.proto";
 
+option optimize_for = SPEED;
+option cc_generic_services = false;
+
 enum ECsgoGCMsg {
 	k_EMsgGCCStrike15_v2_Base = 9100;
 	k_EMsgGCCStrike15_v2_MatchmakingStart = 9101;

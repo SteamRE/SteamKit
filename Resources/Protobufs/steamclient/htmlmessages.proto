@@ -1,3 +1,6 @@
+option optimize_for = SPEED;
+option cc_generic_services = false;
+
 message CMsgKeyUp {
 	optional uint32 browser_handle = 1;
 	optional uint32 keyCode = 2;

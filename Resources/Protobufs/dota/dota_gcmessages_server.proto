@@ -3,6 +3,9 @@ import "dota_gcmessages_common.proto";
 import "econ_gcmessages.proto";
 import "network_connection.proto";
 
+option optimize_for = SPEED;
+option cc_generic_services = false;
+
 enum EPoorNetworkConditionsType {
 	k_EPoorNetworkConditions_None = 0;
 	k_EPoorNetworkConditions_Unknown = 1;

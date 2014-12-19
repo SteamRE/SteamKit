@@ -2,6 +2,9 @@ import "steammessages.proto";
 import "dota_gcmessages_common.proto";
 import "gcsdk_gcmessages.proto";
 
+option optimize_for = SPEED;
+option cc_generic_services = false;
+
 enum ETournamentGameState {
 	k_ETournamentGameState_Unknown = 0;
 	k_ETournamentGameState_Scheduled = 1;

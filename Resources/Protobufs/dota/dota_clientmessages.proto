@@ -1,5 +1,8 @@
 import "dota_commonmessages.proto";
 
+option optimize_for = SPEED;
+option cc_generic_services = false;
+
 enum EDotaClientMessages {
 	DOTA_CM_MapLine = 1;
 	DOTA_CM_AspectRatio = 2;

@@ -1,5 +1,7 @@
 import "google/protobuf/descriptor.proto";
 
+option cc_generic_services = false;
+
 enum NET_Messages {
 	net_NOP = 0;
 	net_Disconnect = 1;

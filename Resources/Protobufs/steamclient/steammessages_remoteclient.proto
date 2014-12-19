@@ -1,6 +1,9 @@
 import "steammessages_base.proto";
 import "steammessages_remoteclient_discovery.proto";
 
+option optimize_for = SPEED;
+option cc_generic_services = false;
+
 message CMsgRemoteClientAppStatus {
 	message AppUpdateInfo {
 		optional fixed32 time_update_start = 1;

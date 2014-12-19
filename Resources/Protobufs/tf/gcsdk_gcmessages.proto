@@ -1,5 +1,8 @@
 import "steammessages.proto";
 
+option optimize_for = SPEED;
+option cc_generic_services = false;
+
 enum PartnerAccountType {
 	PARTNER_NONE = 0;
 	PARTNER_PERFECT_WORLD = 1;
