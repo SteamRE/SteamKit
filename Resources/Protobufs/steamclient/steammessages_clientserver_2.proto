@@ -1,6 +1,9 @@
 import "steammessages_base.proto";
 import "encrypted_app_ticket.proto";
 
+option optimize_for = SPEED;
+option cc_generic_services = false;
+
 message CMsgClientUCMAddScreenshot {
 	message Tag {
 		optional string tag_name = 1;

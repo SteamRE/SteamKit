@@ -1,3 +1,5 @@
+option cc_generic_services = false;
+
 enum EDemoCommands {
 	DEM_Error = -1;
 	DEM_Stop = 0;

@@ -1,5 +1,8 @@
 import "google/protobuf/descriptor.proto";
 
+option optimize_for = SPEED;
+option cc_generic_services = false;
+
 extend .google.protobuf.MessageOptions {
 	optional int32 msgpool_soft_limit = 50000 [default = 32];
 	optional int32 msgpool_hard_limit = 50001 [default = 384];

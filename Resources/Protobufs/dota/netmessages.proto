@@ -1,5 +1,7 @@
 import "networkbasetypes.proto";
 
+option cc_generic_services = false;
+
 enum CLC_Messages {
 	clc_ClientInfo = 8;
 	clc_Move = 9;

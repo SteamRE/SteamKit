@@ -1,5 +1,8 @@
 import "steammessages.proto";
 
+option optimize_for = SPEED;
+option cc_generic_services = false;
+
 enum EGCItemMsg {
 	k_EMsgGCBase = 1000;
 	k_EMsgGCSetSingleItemPosition = 1001;
