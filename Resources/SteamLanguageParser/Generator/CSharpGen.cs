@@ -222,16 +222,38 @@ namespace SteamLanguageParser
 
             if (cnode.Ident != null)
             {
+                var cnodeIdentAsStrongSymbol = cnode.Ident as StrongSymbol;
+                var supressObsoletionWarning = false;
+
+                if (cnodeIdentAsStrongSymbol != null)
+                {
+                    var propNode = cnodeIdentAsStrongSymbol.Prop as PropNode;
+                    if (propNode != null && propNode.Obsolete != null)
+                    {
+                        supressObsoletionWarning = true;
+                    }
+                }
+
+                if (supressObsoletionWarning)
+                {
+                    sb.AppendLine( padding + "#pragma warning disable 0612" );
+                }
+
                 if ( cnode.Name.Contains( "MsgGC" ) )
                 {
                     sb.AppendLine( padding + "public uint GetEMsg() { return " + EmitType( cnode.Ident ) + "; }" );
-                    sb.AppendLine();
                 }
                 else
                 {
                     sb.AppendLine( padding + "public EMsg GetEMsg() { return " + EmitType( cnode.Ident ) + "; }" );
-                    sb.AppendLine();
                 }
+
+                if (supressObsoletionWarning)
+                {
+                    sb.AppendLine(padding + "#pragma warning restore 0612");
+                }
+
+                sb.AppendLine();
             }
             else if (cnode.Name.Contains("Hdr"))
             {
