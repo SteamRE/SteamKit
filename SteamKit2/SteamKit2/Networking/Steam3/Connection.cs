@@ -59,6 +59,27 @@ namespace SteamKit2
         }
     }
 
+    enum DisconnectedReason
+    {
+        CleanDisconnect,
+        ConnectionError
+    }
+
+    class DisconnectedEventArgs : EventArgs
+    {
+        public DisconnectedEventArgs(DisconnectedReason reason)
+        {
+            this.reason = reason;
+        }
+
+        readonly DisconnectedReason reason;
+
+        public DisconnectedReason Reason
+        {
+            get { return reason; }
+        }
+    }
+
     abstract class Connection
     {
         const int DEFAULT_TIMEOUT = 5000;
@@ -78,6 +99,12 @@ namespace SteamKit2
         }
 
         /// <summary>
+        /// The <see cref="System.Net.IPEndPoint" /> of the current connection.
+        /// This is non-null between <see cref="E:Connected"/> and <see cref="E:Disconnected"/>, inclusive.
+        /// </summary>
+        public IPEndPoint CurrentEndPoint { get; protected set; }
+
+        /// <summary>
         /// Occurs when the physical connection is established.
         /// </summary>
         public event EventHandler Connected;
@@ -90,11 +117,11 @@ namespace SteamKit2
         /// <summary>
         /// Occurs when the physical connection is broken.
         /// </summary>
-        public event EventHandler Disconnected;
-        protected void OnDisconnected( EventArgs e )
+        public event EventHandler<DisconnectedEventArgs> Disconnected;
+        protected void OnDisconnected( DisconnectedReason reason )
         {
             if ( Disconnected != null )
-                Disconnected( this, e );
+                Disconnected( this, new DisconnectedEventArgs( reason ) );
         }
 
         /// <summary>

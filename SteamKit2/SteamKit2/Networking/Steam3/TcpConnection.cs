@@ -87,7 +87,7 @@ namespace SteamKit2
             else if ( sock == null )
             {
                 DebugLog.WriteLine( "TcpConnection", "Timed out while connecting" );
-                OnDisconnected( EventArgs.Empty );
+                OnDisconnected( DisconnectedReason.ConnectionError );
                 return;
             }
 
@@ -98,7 +98,7 @@ namespace SteamKit2
             catch (Exception ex)
             {
                 DebugLog.WriteLine( "TcpConnection", "Socket exception while connecting: {0}", ex );
-                OnDisconnected( EventArgs.Empty );
+                OnDisconnected( DisconnectedReason.ConnectionError );
                 return;
             }
 
@@ -109,10 +109,11 @@ namespace SteamKit2
                 if ( !sock.Connected )
                 {
                     DebugLog.WriteLine( "TcpConnection", "Unable to connect" );
-                    OnDisconnected( EventArgs.Empty );
+                    OnDisconnected( DisconnectedReason.ConnectionError );
                     return;
                 }
 
+                CurrentEndPoint = (IPEndPoint)sock.RemoteEndPoint;
                 DebugLog.WriteLine( "TcpConnection", "Connected!" );
 
                 filter = null;
@@ -140,7 +141,7 @@ namespace SteamKit2
         /// </summary>
         public override void Disconnect()
         {
-            Cleanup();            
+            Cleanup( cleanDisconnect: true );            
         }
 
         /// <summary>
@@ -208,7 +209,7 @@ namespace SteamKit2
                 {
                     DebugLog.WriteLine( "TcpConnection", "Socket exception while polling: {0}", ex );
 
-                    Cleanup();
+                    Cleanup( cleanDisconnect: false );
                     return;
                 }
 
@@ -244,7 +245,7 @@ namespace SteamKit2
                     DebugLog.WriteLine( "TcpConnection", "Socket exception occurred while reading packet: {0}", ex );
 
                     // signal that our connection is dead
-                    Cleanup();
+                    Cleanup( cleanDisconnect: false );
                     return;
                 }
                 finally
@@ -291,7 +292,7 @@ namespace SteamKit2
             return packData;
         }
 
-        void Cleanup()
+        void Cleanup( bool cleanDisconnect = false )
         {
             foreach ( var key in connectTokens.Keys )
             {
@@ -319,7 +320,8 @@ namespace SteamKit2
                     }
 
                     netThread = null;
-                    OnDisconnected( EventArgs.Empty );
+                    OnDisconnected( cleanDisconnect ? DisconnectedReason.CleanDisconnect : DisconnectedReason.ConnectionError );
+                    CurrentEndPoint = null;
                 }
 
                 // cleanup streams

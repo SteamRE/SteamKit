@@ -364,6 +364,7 @@ namespace SteamKit2
             // Begin by sending off the challenge request
             SendPacket(new UdpPacket(EUdpPacketType.ChallengeReq));
             state = State.ChallengeReqSent;
+            var disconnectReason = DisconnectedReason.ConnectionError; // Pessimistic assumption
 
             while ( state != State.Disconnected )
             {
@@ -423,11 +424,13 @@ namespace SteamKit2
                     DebugLog.WriteLine("UdpConnection", "Graceful disconnect completed");
 
                     state = State.Disconnected;
+                    disconnectReason = DisconnectedReason.CleanDisconnect;
                 }
             }
 
             DebugLog.WriteLine("UdpConnection", "Calling OnDisconnected");
-            OnDisconnected(EventArgs.Empty);
+            OnDisconnected( disconnectReason );
+            CurrentEndPoint = null;
         }
 
         /// <summary>
@@ -543,6 +546,7 @@ namespace SteamKit2
             remoteConnId = packet.Header.SourceConnID;
             inSeqHandled = packet.Header.SeqThis;
 
+            CurrentEndPoint = (IPEndPoint)sock.RemoteEndPoint;
             OnConnected( EventArgs.Empty );
         }
 
