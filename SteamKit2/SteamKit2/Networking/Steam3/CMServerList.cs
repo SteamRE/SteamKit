@@ -33,84 +33,37 @@ namespace SteamKit2.Networking.Steam3
     /// </summary>
     public class SmartCMServerList
     {
-        class ServerInfoComparer : IComparer<ServerInfo>
-        {
-            public ServerInfoComparer(TimeSpan timeSpanToRespectQualityFor)
-            {
-                this.timeSpanToRespectQualityFor = timeSpanToRespectQualityFor;
-                this.serverQualityComparer = new ServerQualityComparer();
-            }
-
-            readonly TimeSpan timeSpanToRespectQualityFor;
-            readonly IComparer<ServerQuality> serverQualityComparer;
-
-            public int Compare(ServerInfo x, ServerInfo y)
-            {
-                var xQuality = GetQuality(x);
-                var yQuality = GetQuality(y);
-
-                return serverQualityComparer.Compare(xQuality, yQuality);
-            }
-
-            ServerQuality GetQuality(ServerInfo info)
-            {
-                // Only use the stored quality for the validity period.
-                if (info.LastQualityChangeTimeUtc.Add(timeSpanToRespectQualityFor) > DateTime.UtcNow)
-                {
-                    return info.Quality;
-                }
-
-                return ServerQuality.Undetermined;
-            }
-        }
-
-        class ServerQualityComparer : IComparer<ServerQuality>
-        {
-            // Good > Undetermined > Bad
-            public int Compare(ServerQuality x, ServerQuality y)
-            {
-                if (x == y)
-                {
-                    return 0;
-                }
-                else if (x == ServerQuality.Good && (y == ServerQuality.Undetermined || y == ServerQuality.Bad))
-                {
-                    return -1;
-                }
-                else if (y == ServerQuality.Good && (x == ServerQuality.Undetermined || x == ServerQuality.Bad))
-                {
-                    return 1;
-                }
-                else if (x == ServerQuality.Undetermined && y == ServerQuality.Bad)
-                {
-                    return -1;
-                }
-                else if (y == ServerQuality.Undetermined && x == ServerQuality.Bad)
-                {
-                    return 1;
-                }
-                else // Probably invalid enum values
-                {
-                    throw new ArgumentOutOfRangeException("x or y is out of range");
-                }
-            }
-        }
-
+        const int BaseWeighting = 100;
+        const int GoodWeighting = 450;
+        const int BadWeighting = 15;
+        
+		[System.Diagnostics.DebuggerDisplay("ServerInfo ({EndPoint}, Weighting {Weighting})")]
         class ServerInfo
         {
             public IPEndPoint EndPoint { get; set; }
-            public ServerQuality Quality { get; set; }
-            public DateTime LastQualityChangeTimeUtc { get; set; }
+            public int Weighting { get; set; }
+            public DateTime LastWeightingChangeTimeUtc { get; set; }
         }
 
         internal SmartCMServerList()
         {
             servers = new Collection<ServerInfo>();
-            qualityValidityTimeSpan = TimeSpan.FromMinutes(5);
+            weightingValidityTimeSpan = TimeSpan.FromMinutes(5);
         }
 
         Collection<ServerInfo> servers;
-        TimeSpan qualityValidityTimeSpan;
+        TimeSpan weightingValidityTimeSpan;
+
+        void ResetOldWeightings()
+        {
+            foreach(var serverInfo in servers)
+            {
+                if (serverInfo.LastWeightingChangeTimeUtc + weightingValidityTimeSpan <= DateTime.UtcNow)
+                {
+                    serverInfo.Weighting = BaseWeighting;
+                }
+            }
+        }
 
         /// <summary>
         /// Adds an <see cref="System.Net.IPEndPoint" /> to the server list.
@@ -143,8 +96,8 @@ namespace SteamKit2.Networking.Steam3
             var info = new ServerInfo
             {
                 EndPoint = endPoint,
-                Quality = ServerQuality.Undetermined,
-                LastQualityChangeTimeUtc = DateTime.UtcNow,
+                Weighting = BaseWeighting,
+                LastWeightingChangeTimeUtc = DateTime.UtcNow,
             };
 
             servers.Add(info);
@@ -153,7 +106,7 @@ namespace SteamKit2.Networking.Steam3
         /// <summary>
         /// Explicitly resets the quality of every stored server.
         /// </summary>
-        public void ResetQualitys()
+        public void ResetWeightings()
         {
             foreach(var server in servers)
             {
@@ -225,10 +178,28 @@ namespace SteamKit2.Networking.Steam3
             SetServerQuality(serverInfo, quality);
         }
 
+        static int GetWeighting(ServerQuality quality)
+        {
+            switch (quality)
+            {
+                case ServerQuality.Bad:
+                    return BadWeighting;
+
+                case ServerQuality.Good:
+                    return GoodWeighting;
+
+                case ServerQuality.Undetermined:
+                    return BaseWeighting;
+
+                default:
+                    throw new ArgumentOutOfRangeException("quality");
+            }
+        }
+
         void SetServerQuality(ServerInfo serverInfo, ServerQuality quality)
         {
-            serverInfo.Quality = quality;
-            serverInfo.LastQualityChangeTimeUtc = DateTime.UtcNow;
+            serverInfo.Weighting = GetWeighting(quality);
+            serverInfo.LastWeightingChangeTimeUtc = DateTime.UtcNow;
         }
 
         /// <summary>
@@ -237,11 +208,22 @@ namespace SteamKit2.Networking.Steam3
         /// <returns>An <see cref="System.Net.IPEndPoint"/>, or null if the list is empty.</returns>
         public IPEndPoint GetNextServer()
         {
-            var serverComparer = new ServerInfoComparer(qualityValidityTimeSpan);
-            return servers
-                .OrderBy(x => x, serverComparer)
-                .Select(x => x.EndPoint)
-                .FirstOrDefault();
+            ResetOldWeightings();
+
+            var totalWeightingValue = servers.Sum(x => x.Weighting);
+            var randomValue = new Random().Next(totalWeightingValue);
+
+            var weightingMarker = 0;
+            foreach(var serverInfo in servers)
+            {
+                weightingMarker += serverInfo.Weighting;
+                if (weightingMarker >= randomValue)
+                {
+                    return serverInfo.EndPoint;
+                }
+            }
+
+            return null;
         }
     }
 }
