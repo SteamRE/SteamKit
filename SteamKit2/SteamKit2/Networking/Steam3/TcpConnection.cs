@@ -58,6 +58,7 @@ namespace SteamKit2
 
             ThreadPool.QueueUserWorkItem( sender =>
             {
+                CurrentEndPoint = endPoint;
                 var asyncResult = socket.BeginConnect( endPoint, null, null );
 
                 if ( WaitHandle.WaitAny( new WaitHandle[] { asyncResult.AsyncWaitHandle, cts.Token.WaitHandle }, timeout ) == 0 )
@@ -82,12 +83,14 @@ namespace SteamKit2
             if ( connectToken.IsCancellationRequested )
             {
                 DebugLog.WriteLine( "TcpConnection", "Connect request was cancelled" );
+                CurrentEndPoint = null;
                 return;
             }
             else if ( sock == null )
             {
                 DebugLog.WriteLine( "TcpConnection", "Timed out while connecting" );
                 OnDisconnected( DisconnectedReason.ConnectionError );
+                CurrentEndPoint = null;
                 return;
             }
 
@@ -99,6 +102,7 @@ namespace SteamKit2
             {
                 DebugLog.WriteLine( "TcpConnection", "Socket exception while connecting: {0}", ex );
                 OnDisconnected( DisconnectedReason.ConnectionError );
+                CurrentEndPoint = null;
                 return;
             }
 
@@ -110,10 +114,10 @@ namespace SteamKit2
                 {
                     DebugLog.WriteLine( "TcpConnection", "Unable to connect" );
                     OnDisconnected( DisconnectedReason.ConnectionError );
+                    CurrentEndPoint = null;
                     return;
                 }
 
-                CurrentEndPoint = (IPEndPoint)sock.RemoteEndPoint;
                 DebugLog.WriteLine( "TcpConnection", "Connected!" );
 
                 filter = null;
