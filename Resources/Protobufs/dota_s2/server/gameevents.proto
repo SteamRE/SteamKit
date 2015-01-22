@@ -1,6 +1,9 @@
 import "google/protobuf/descriptor.proto";
 import "networkbasetypes.proto";
 
+option optimize_for = SPEED;
+option cc_generic_services = false;
+
 enum EBaseGameEvents {
 	GE_VDebugGameSessionIDEvent = 200;
 	GE_PlaceDecalEvent = 201;
