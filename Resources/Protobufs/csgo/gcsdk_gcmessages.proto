@@ -1,5 +1,8 @@
 import "steammessages.proto";
 
+option optimize_for = SPEED;
+option cc_generic_services = false;
+
 enum GCConnectionStatus {
 	GCConnectionStatus_HAVE_SESSION = 0;
 	GCConnectionStatus_GC_GOING_DOWN = 1;

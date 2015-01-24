@@ -1,6 +1,9 @@
 import "steammessages.proto";
 import "gcsdk_gcmessages.proto";
 
+option optimize_for = SPEED;
+option cc_generic_services = false;
+
 enum EDOTAGCMsg {
 	k_EMsgGCDOTABase = 7000;
 	k_EMsgGCGeneralResponse = 7001;
@@ -500,6 +503,8 @@ enum EDOTAGCMsg {
 	k_EMsgClientToGCRecordStatueStats = 7568;
 	k_EMsgGCToGCReplayMonitorValidateReplay = 7569;
 	k_EMsgGCDev_GrantWarKill = 8001;
+	k_EMsgClientToGCCreateTeamShowcase = 8002;
+	k_EMsgGCToClientTeamShowcaseCreateResult = 8003;
 }
 
 enum DOTA_GameMode {
@@ -683,6 +688,14 @@ enum LobbyDotaTVDelay {
 	LobbyDotaTV_10 = 0;
 	LobbyDotaTV_120 = 1;
 	LobbyDotaTV_300 = 2;
+}
+
+enum EMatchOutcome {
+	k_EMatchOutcome_Unknown = 0;
+	k_EMatchOutcome_RadVictory = 2;
+	k_EMatchOutcome_DireVictory = 3;
+	k_EMatchOutcome_NotScored_PoorNetworkConditions = 64;
+	k_EMatchOutcome_NotScored_Leaver = 65;
 }
 
 enum EDOTAGCSessionNeed {
@@ -1044,7 +1057,8 @@ message CSODOTALobby {
 	repeated .CSODOTALobby.CExtraMsg extra_messages = 62;
 	optional .CDOTASaveGame save_game = 63;
 	optional bool first_blood_happened = 65;
-	optional bool discard_match_results = 66;
+	optional bool legacy_discard_match_results = 66;
+	optional .EMatchOutcome match_outcome = 70 [default = k_EMatchOutcome_Unknown];
 	optional bool mass_disconnect = 67;
 	optional uint64 custom_game_id = 68;
 	repeated .EIngameEvent active_ingame_events = 69;
@@ -1087,6 +1101,17 @@ message CProtoItemHeroStatue {
 	optional float cycle = 4;
 	repeated uint32 wearable = 5;
 	optional string inscription = 6;
+	repeated uint32 style = 7;
+}
+
+message CProtoItemTeamShowcase {
+	optional uint32 hero_id = 1;
+	optional uint32 status_effect_index = 2;
+	optional string sequence_name = 3;
+	optional float cycle = 4;
+	repeated uint32 wearable = 5;
+	optional string inscription = 6;
+	repeated uint32 style = 7;
 }
 
 message CProtoItemSocket {

@@ -1,3 +1,5 @@
+option optimize_for = SPEED;
+
 enum ERemoteClientBroadcastMsg {
 	k_ERemoteClientBroadcastMsgDiscovery = 0;
 	k_ERemoteClientBroadcastMsgStatus = 1;

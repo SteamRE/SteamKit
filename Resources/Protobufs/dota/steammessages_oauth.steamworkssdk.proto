@@ -1,4 +1,3 @@
-import "google/protobuf/descriptor.proto";
 import "steammessages_unified_base.steamworkssdk.proto";
 
 message COAuthToken_ImplicitGrantNoPrompt_Request {

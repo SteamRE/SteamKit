@@ -1,7 +1,9 @@
 import "steammessages.proto";
 import "dota_gcmessages_common.proto";
 import "gcsdk_gcmessages.proto";
-import "dota_gcmessages_client_fantasy.proto";
+
+option optimize_for = SPEED;
+option cc_generic_services = false;
 
 enum ETournamentGameState {
 	k_ETournamentGameState_Unknown = 0;
@@ -763,6 +765,7 @@ message CMsgDOTAPopup {
 		NEED_INITIAL_SKILL = 53;
 		NEED_INITIAL_SKILL_IN_PARTY = 54;
 		TARGET_ENGINE_MISMATCH = 55;
+		VAC_NOT_VERIFIED = 56;
 	}
 
 	optional .CMsgDOTAPopup.PopupID id = 1 [default = KICKED_FROM_LOBBY];
@@ -1114,6 +1117,7 @@ message CMsgDOTAChatMessage {
 	optional string suggest_invite_name = 7;
 	optional uint32 fantasy_draft_owner_account_id = 8;
 	optional uint32 fantasy_draft_player_account_id = 9;
+	optional uint32 compendium_league_id = 10;
 }
 
 message CMsgDOTAChatMember {
@@ -2416,7 +2420,21 @@ message CMsgClientToGCCreateHeroStatue {
 	repeated uint32 styles = 8;
 }
 
+message CMsgClientToGCCreateTeamShowcase {
+	optional uint64 source_item = 1;
+	optional uint32 hero_id = 3;
+	optional string sequence_name = 4;
+	optional float cycle = 5;
+	repeated uint32 wearables = 6;
+	optional string inscription = 7;
+	repeated uint32 styles = 8;
+}
+
 message CMsgGCToClientHeroStatueCreateResult {
+	optional uint64 resulting_item = 1;
+}
+
+message CMsgGCToClientTeamShowcaseCreateResult {
 	optional uint64 resulting_item = 1;
 }
 

@@ -1,5 +1,8 @@
 import "steammessages.proto";
 
+option optimize_for = SPEED;
+option cc_generic_services = false;
+
 enum ETFGCMsg {
 	k_EMsgGCReportWarKill = 5001;
 	k_EMsgGCVoteKickBanPlayer = 5018;
@@ -99,6 +102,7 @@ enum ETFGCMsg {
 	k_EMsgGCRemovePlayerFromLobby = 6301;
 	k_EMsgGCSetLobbySafeToLeave = 6302;
 	k_EMsgGC_UpdatePeriodicEvent = 6400;
+	k_EMsgGC_DuckLeaderboard_IndividualUpdate = 6401;
 	k_EMsgGC_ClientVerificationChallenge = 6500;
 	k_EMsgGC_ClientVerificationChallengeResponse = 6501;
 	k_EMsgGC_ClientVerificationVerboseResponse = 6502;
@@ -495,6 +499,7 @@ message CSOTFPartyMember {
 	optional uint32 badge_level = 4;
 	optional bool squad_surplus = 5;
 	optional bool is_banned = 8 [default = false];
+	optional bool owns_ladder_ticket = 9;
 }
 
 message CMsgMatchSearchCriteria {
@@ -1016,5 +1021,12 @@ message CGCMsgGC_SpyVsEngyWar_RequestGlobalStats {
 message CGCMsgGC_SpyVsEngyWar_GlobalStatsResponse {
 	optional uint64 spy_score = 1;
 	optional uint64 engy_score = 2;
+}
+
+message CGCMsgGC_PlayerDuckLeaderboard_IndividualUpdate {
+	optional uint32 score = 2;
+	optional uint32 type = 3;
+	optional bytes score_id = 4;
+	optional uint32 score_check = 5;
 }
 

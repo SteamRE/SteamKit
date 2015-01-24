@@ -1,7 +1,9 @@
-import "google/protobuf/descriptor.proto";
 import "networkbasetypes.proto";
 import "ai_activity.proto";
 import "dota_commonmessages.proto";
+
+option optimize_for = SPEED;
+option cc_generic_services = false;
 
 enum EDotaUserMessages {
 	DOTA_UM_AddUnitToSelection = 64;
@@ -75,6 +77,9 @@ enum EDotaUserMessages {
 	DOTA_UM_QuickBuyAlert = 133;
 	DOTA_UM_StatsHeroDetails = 134;
 	DOTA_UM_PredictionResult = 135;
+	DOTA_UM_ModifierAlert = 136;
+	DOTA_UM_HPManaAlert = 137;
+	DOTA_UM_GlyphAlert = 138;
 }
 
 enum DOTA_CHAT_MESSAGE {
@@ -162,6 +167,7 @@ enum DOTA_CHAT_MESSAGE {
 	CHAT_MESSAGE_ASSASSIN_DENIED = 89;
 	CHAT_MESSAGE_VICTORY_PREDICTION_SINGLE_USER_CONFIRM = 90;
 	CHAT_MESSAGE_EFFIGY_KILL = 91;
+	CHAT_MESSAGE_VOICE_TEXT_BANNED_OVERFLOW = 92;
 }
 
 enum DOTA_NO_BATTLE_POINTS_REASONS {
@@ -183,6 +189,7 @@ enum DOTA_ABILITY_PING_TYPE {
 	ABILITY_PING_MANA = 2;
 	ABILITY_PING_COOLDOWN = 3;
 	ABILITY_PING_ENEMY = 4;
+	ABILITY_PING_UNLEARNED = 5;
 }
 
 enum EDotaEntityMessages {
@@ -228,6 +235,24 @@ enum DOTA_OVERHEAD_ALERT {
 	OVERHEAD_ALERT_LAST_HIT_EARLY = 13;
 	OVERHEAD_ALERT_LAST_HIT_CLOSE = 14;
 	OVERHEAD_ALERT_LAST_HIT_MISS = 15;
+}
+
+enum DOTA_POSITION_CATEGORY {
+	DOTA_POSITION_NONE = 0;
+	DOTA_POSITION_BOTTOM_LANE = 1;
+	DOTA_POSITION_MID_LANE = 2;
+	DOTA_POSITION_TOP_LANE = 3;
+	DOTA_POSITION_RADIANT_JUNGLE = 4;
+	DOTA_POSITION_DIRE_JUNGLE = 5;
+	DOTA_POSITION_RADIANT_ANCIENTS = 6;
+	DOTA_POSITION_DIRE_ANCIENTS = 7;
+	DOTA_POSITION_RADIANT_SECRET_SHOP = 8;
+	DOTA_POSITION_DIRE_SECRET_SHOP = 9;
+	DOTA_POSITION_RIVER = 10;
+	DOTA_POSITION_ROSHAN_PIT = 11;
+	DOTA_POSITION_RADIANT_BASE = 12;
+	DOTA_POSITION_DIRE_BASE = 13;
+	DOTA_POSITION_OTHER = 14;
 }
 
 enum EHeroStatType {
@@ -332,7 +357,26 @@ message CDOTAUserMsg_ItemAlert {
 
 message CDOTAUserMsg_EnemyItemAlert {
 	optional uint32 player_id = 1;
-	optional .CDOTAMsg_EnemyItemAlert enemy_item_alert = 2;
+	optional uint32 target_player_id = 2;
+	optional int32 itemid = 3;
+	optional uint32 rune_type = 4;
+}
+
+message CDOTAUserMsg_ModifierAlert {
+	optional uint32 player_id = 1;
+	optional string class_name = 2;
+	optional uint32 stack_count = 3;
+	optional bool is_debuff = 4;
+}
+
+message CDOTAUserMsg_HPManaAlert {
+	optional uint32 player_id = 1;
+	optional uint32 target_entindex = 2;
+}
+
+message CDOTAUserMsg_GlyphAlert {
+	optional uint32 player_id = 1;
+	optional bool negative = 2;
 }
 
 message CDOTAUserMsg_WillPurchaseAlert {
@@ -543,6 +587,7 @@ message CDOTAUserMsg_ParticleManager {
 		optional int32 particle_name_index = 1;
 		optional int32 attach_type = 2;
 		optional int32 entity_handle = 3;
+		optional int32 entity_handle_for_modifiers = 4;
 	}
 
 	message DestroyParticle {
@@ -733,6 +778,9 @@ message CDOTAUserMsg_AbilityPing {
 	optional uint32 ability_id = 2;
 	optional .DOTA_ABILITY_PING_TYPE type = 3 [default = ABILITY_PING_READY];
 	optional uint32 cooldown_seconds = 4;
+	optional uint32 level = 5;
+	optional bool passive = 6;
+	optional uint32 mana_needed = 7;
 }
 
 message CDOTAUserMsg_ShowGenericPopup {
@@ -788,18 +836,34 @@ message CDOTAUserMsg_StatsHeroLookup {
 	optional string persona = 4;
 }
 
+message CDOTAUserMsg_StatsHeroPositionInfo {
+	message PositionPair {
+		optional .DOTA_POSITION_CATEGORY position_category = 1 [default = DOTA_POSITION_NONE];
+		optional uint32 position_count = 2;
+	}
+
+	optional float average_position = 1;
+	repeated .CDOTAUserMsg_StatsHeroPositionInfo.PositionPair position_details = 2;
+}
+
 message CDOTAUserMsg_StatsHeroMinuteDetails {
 	optional uint32 last_hits = 1;
 	optional uint32 hero_kills = 2;
 	optional uint32 hero_damage = 3;
 	optional uint32 tower_damage = 4;
-	optional float average_position = 5;
+	optional .CDOTAUserMsg_StatsHeroPositionInfo position_info = 5;
 	optional uint32 total_xp = 6;
 	optional uint32 net_worth = 7;
 	optional uint32 harvested_creep_gold = 8;
 }
 
 message CDOTAUserMsg_StatsTeamMinuteDetails {
+	message LocationPerformance {
+		optional uint32 location_category = 1;
+		optional uint32 stat_type = 2;
+		optional uint32 value = 3;
+	}
+
 	repeated .CDOTAUserMsg_StatsHeroMinuteDetails player_stats = 1;
 	optional uint32 tower_kills = 2;
 	optional uint32 barrack_kills = 3;
@@ -809,6 +873,7 @@ message CDOTAUserMsg_StatsTeamMinuteDetails {
 	optional uint32 balance_barracks_value = 7;
 	optional uint32 balance_gold_value = 8;
 	optional uint32 balance_xp_value = 9;
+	repeated .CDOTAUserMsg_StatsTeamMinuteDetails.LocationPerformance lane_performance = 10;
 }
 
 message CDOTAUserMsg_StatsPlayerKillShare {

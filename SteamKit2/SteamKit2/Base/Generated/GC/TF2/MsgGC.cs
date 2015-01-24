@@ -1745,6 +1745,15 @@ namespace SteamKit2.GC.TF2.Internal
       get { return _is_banned; }
       set { _is_banned = value; }
     }
+
+    private bool _owns_ladder_ticket = default(bool);
+    [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"owns_ladder_ticket", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool owns_ladder_ticket
+    {
+      get { return _owns_ladder_ticket; }
+      set { _owns_ladder_ticket = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -4496,6 +4505,106 @@ namespace SteamKit2.GC.TF2.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CAttribute_DynamicRecipeComponent_COMPAT_NEVER_SERIALIZE_THIS_OUT")]
+  public partial class CAttribute_DynamicRecipeComponent_COMPAT_NEVER_SERIALIZE_THIS_OUT : global::ProtoBuf.IExtensible
+  {
+    public CAttribute_DynamicRecipeComponent_COMPAT_NEVER_SERIALIZE_THIS_OUT() {}
+    
+
+    private uint _def_index = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"def_index", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint def_index
+    {
+      get { return _def_index; }
+      set { _def_index = value; }
+    }
+
+    private uint _item_def = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"item_def", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint item_def
+    {
+      get { return _item_def; }
+      set { _item_def = value; }
+    }
+
+    private uint _item_quality = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"item_quality", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint item_quality
+    {
+      get { return _item_quality; }
+      set { _item_quality = value; }
+    }
+
+    private uint _component_flags = default(uint);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"component_flags", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint component_flags
+    {
+      get { return _component_flags; }
+      set { _component_flags = value; }
+    }
+
+    private uint _item_flags = default(uint);
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"item_flags", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint item_flags
+    {
+      get { return _item_flags; }
+      set { _item_flags = value; }
+    }
+
+    private string _attributes_string = "";
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"attributes_string", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string attributes_string
+    {
+      get { return _attributes_string; }
+      set { _attributes_string = value; }
+    }
+
+    private uint _num_required = default(uint);
+    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"num_required", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint num_required
+    {
+      get { return _num_required; }
+      set { _num_required = value; }
+    }
+
+    private uint _item_count = default(uint);
+    [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"item_count", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint item_count
+    {
+      get { return _item_count; }
+      set { _item_count = value; }
+    }
+
+    private uint _num_fulfilled = default(uint);
+    [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"num_fulfilled", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint num_fulfilled
+    {
+      get { return _num_fulfilled; }
+      set { _num_fulfilled = value; }
+    }
+
+    private uint _items_fulfilled = default(uint);
+    [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"items_fulfilled", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint items_fulfilled
+    {
+      get { return _items_fulfilled; }
+      set { _items_fulfilled = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CAttribute_ItemSlotCriteria")]
   public partial class CAttribute_ItemSlotCriteria : global::ProtoBuf.IExtensible
   {
@@ -4821,6 +4930,52 @@ namespace SteamKit2.GC.TF2.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGCMsgGC_PlayerDuckLeaderboard_IndividualUpdate")]
+  public partial class CGCMsgGC_PlayerDuckLeaderboard_IndividualUpdate : global::ProtoBuf.IExtensible
+  {
+    public CGCMsgGC_PlayerDuckLeaderboard_IndividualUpdate() {}
+    
+
+    private uint _score = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"score", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint score
+    {
+      get { return _score; }
+      set { _score = value; }
+    }
+
+    private uint _type = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint type
+    {
+      get { return _type; }
+      set { _type = value; }
+    }
+
+    private byte[] _score_id = null;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"score_id", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public byte[] score_id
+    {
+      get { return _score_id; }
+      set { _score_id = value; }
+    }
+
+    private uint _score_check = default(uint);
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"score_check", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint score_check
+    {
+      get { return _score_check; }
+      set { _score_check = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     [global::ProtoBuf.ProtoContract(Name=@"ETFGCMsg", EnumPassthru=true)]
     public enum ETFGCMsg
     {
@@ -5118,6 +5273,9 @@ namespace SteamKit2.GC.TF2.Internal
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGC_UpdatePeriodicEvent", Value=6400)]
       k_EMsgGC_UpdatePeriodicEvent = 6400,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGC_DuckLeaderboard_IndividualUpdate", Value=6401)]
+      k_EMsgGC_DuckLeaderboard_IndividualUpdate = 6401,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGC_ClientVerificationChallenge", Value=6500)]
       k_EMsgGC_ClientVerificationChallenge = 6500,

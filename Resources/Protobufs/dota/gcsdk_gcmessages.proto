@@ -1,5 +1,8 @@
 import "steammessages.proto";
 
+option optimize_for = SPEED;
+option cc_generic_services = false;
+
 enum ESourceEngine {
 	k_ESE_Source1 = 0;
 	k_ESE_Source2 = 1;

@@ -1398,6 +1398,34 @@ namespace SteamKit2.GC.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCAddGiftItem")]
+  public partial class CMsgGCAddGiftItem : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCAddGiftItem() {}
+    
+
+    private uint _account_id = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint account_id
+    {
+      get { return _account_id; }
+      set { _account_id = value; }
+    }
+
+    private ulong _item_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"item_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong item_id
+    {
+      get { return _item_id; }
+      set { _item_id = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     [global::ProtoBuf.ProtoContract(Name=@"EGCItemMsg", EnumPassthru=true)]
     public enum EGCItemMsg
     {
@@ -1665,6 +1693,21 @@ namespace SteamKit2.GC.Internal
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCServerUseItemRequest", Value=1103)]
       k_EMsgGCServerUseItemRequest = 1103,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCAddGiftItem", Value=1104)]
+      k_EMsgGCAddGiftItem = 1104,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCRemoveItemGiftMessage", Value=1105)]
+      k_EMsgGCRemoveItemGiftMessage = 1105,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCRemoveItemGiftMessageResponse", Value=1106)]
+      k_EMsgGCRemoveItemGiftMessageResponse = 1106,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCRemoveItemGifterAccountId", Value=1107)]
+      k_EMsgGCRemoveItemGifterAccountId = 1107,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCRemoveItemGifterAccountIdResponse", Value=1108)]
+      k_EMsgGCRemoveItemGifterAccountIdResponse = 1108,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCTradingBase", Value=1500)]
       k_EMsgGCTradingBase = 1500,

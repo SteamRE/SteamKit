@@ -3,6 +3,16 @@ import "dota_gcmessages_common.proto";
 import "econ_gcmessages.proto";
 import "network_connection.proto";
 
+option optimize_for = SPEED;
+option cc_generic_services = false;
+
+enum EPoorNetworkConditionsType {
+	k_EPoorNetworkConditions_None = 0;
+	k_EPoorNetworkConditions_Unknown = 1;
+	k_EPoorNetworkConditions_MassDisconnect = 2;
+	k_EPoorNetworkConditions_ExcessBadQosIntervals = 3;
+}
+
 enum EAbilityAbuseType {
 	k_EAbilityAbuseType_None = 0;
 	k_EAbilityAbuseType_Io_Relocate = 1;
@@ -57,6 +67,18 @@ message CMsgDismissLootGreevil {
 message CMsgDismissLootGreevilResponse {
 }
 
+message CMsgPoorNetworkConditions {
+	message Player {
+		optional uint32 account_id = 1;
+		optional .ENetworkDisconnectionReason disconnect_reason = 2 [default = NETWORK_DISCONNECT_INVALID];
+		optional uint32 num_bad_intervals = 3;
+		optional uint32 peak_loss_pct = 4;
+	}
+
+	optional .EPoorNetworkConditionsType detection_type = 1 [default = k_EPoorNetworkConditions_None];
+	repeated .CMsgPoorNetworkConditions.Player players = 2;
+}
+
 message CMsgConnectedPlayers {
 	message Player {
 		optional fixed64 steam_id = 1;
@@ -84,7 +106,8 @@ message CMsgConnectedPlayers {
 	optional .DOTA_GameState game_state = 2 [default = DOTA_GAMERULES_STATE_INIT];
 	optional uint32 tower_state = 4;
 	optional bool first_blood_happened = 6;
-	optional bool mass_disconnect = 9;
+	optional bool legacy_mass_disconnect = 9;
+	optional .CMsgPoorNetworkConditions poor_network_conditions = 10;
 	optional .CMsgConnectedPlayers.SendReason send_reason = 8 [default = INVALID];
 }
 
@@ -123,6 +146,7 @@ message CMsgLeaverDetected {
 	optional .CMsgLeaverState leaver_state = 4;
 	optional uint32 server_cluster = 5;
 	optional .ENetworkDisconnectionReason disconnect_reason = 6 [default = NETWORK_DISCONNECT_INVALID];
+	optional .CMsgPoorNetworkConditions poor_network_conditions = 7;
 }
 
 message CMsgLeaverDetectedResponse {
@@ -222,7 +246,8 @@ message CMsgGameMatchSignOut {
 	repeated .CMsgEconPlayerStrangeCountAdjustment player_strange_count_adjustments = 17;
 	optional bool automatic_surrender = 18;
 	optional uint32 server_version = 19;
-	optional bool mass_disconnect = 21;
+	optional bool legacy_mass_disconnect = 21;
+	optional .CMsgPoorNetworkConditions poor_network_conditions = 35;
 	repeated .CMsgGameMatchSignOut.CAdditionalSignoutMsg additional_msgs = 20;
 	optional sint32 average_networth_delta = 22;
 	optional sint32 networth_delta_min10 = 23;
@@ -630,6 +655,7 @@ message CMsgServerToGCMatchConnectionStats {
 	optional uint32 region_id = 2;
 	optional uint32 league_id = 3;
 	repeated .CMsgServerToGCMatchConnectionStats.Player players = 4;
+	optional uint32 cluster_id = 5;
 }
 
 message CMsgServerGCUpdateSpectatorCount {
@@ -703,6 +729,9 @@ message CMsgSignOutAssassinMiniGameInfo {
 	repeated fixed64 arcana_owners = 3;
 	optional bool assassin_won = 4;
 	optional uint32 target_hero_id = 5;
+	optional bool contract_completed = 6;
+	optional float contract_complete_time = 7;
+	optional bool pa_is_radiant = 8;
 }
 
 message CMsgServerToGCGetIngameEventData {

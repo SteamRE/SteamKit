@@ -1,5 +1,7 @@
 import "google/protobuf/descriptor.proto";
 
+option cc_generic_services = false;
+
 enum NET_Messages {
 	net_NOP = 0;
 	net_Disconnect = 1;
@@ -26,6 +28,7 @@ enum CLC_Messages {
 }
 
 enum ESplitScreenMessageType {
+	option allow_alias = true;
 	MSG_SPLITSCREEN_ADDUSER = 0;
 	MSG_SPLITSCREEN_REMOVEUSER = 1;
 	MSG_SPLITSCREEN_TYPE_BITS = 1;
