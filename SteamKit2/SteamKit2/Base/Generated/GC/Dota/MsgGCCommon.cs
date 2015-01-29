@@ -1984,15 +1984,6 @@ namespace SteamKit2.GC.Dota.Internal
       set { _first_blood_happened = value; }
     }
 
-    private bool _legacy_discard_match_results = default(bool);
-    [global::ProtoBuf.ProtoMember(66, IsRequired = false, Name=@"legacy_discard_match_results", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
-    public bool legacy_discard_match_results
-    {
-      get { return _legacy_discard_match_results; }
-      set { _legacy_discard_match_results = value; }
-    }
-
     private EMatchOutcome _match_outcome = EMatchOutcome.k_EMatchOutcome_Unknown;
     [global::ProtoBuf.ProtoMember(70, IsRequired = false, Name=@"match_outcome", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(EMatchOutcome.k_EMatchOutcome_Unknown)]
@@ -5992,7 +5983,13 @@ namespace SteamKit2.GC.Dota.Internal
       k_EMatchOutcome_NotScored_PoorNetworkConditions = 64,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMatchOutcome_NotScored_Leaver", Value=65)]
-      k_EMatchOutcome_NotScored_Leaver = 65
+      k_EMatchOutcome_NotScored_Leaver = 65,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMatchOutcome_NotScored_ServerCrash", Value=66)]
+      k_EMatchOutcome_NotScored_ServerCrash = 66,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMatchOutcome_NotScored_NeverStarted", Value=67)]
+      k_EMatchOutcome_NotScored_NeverStarted = 67
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"EDOTAGCSessionNeed", EnumPassthru=true)]

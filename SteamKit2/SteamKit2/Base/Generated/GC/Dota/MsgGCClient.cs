@@ -9279,8 +9279,15 @@ namespace SteamKit2.GC.Dota.Internal
   {
     public CMsgMatchmakingGroupServerSample() {}
     
+    private readonly global::System.Collections.Generic.List<CMsgSockAddrList> _servers_by_group_legacy_swapped = new global::System.Collections.Generic.List<CMsgSockAddrList>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"servers_by_group_legacy_swapped", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CMsgSockAddrList> servers_by_group_legacy_swapped
+    {
+      get { return _servers_by_group_legacy_swapped; }
+    }
+  
     private readonly global::System.Collections.Generic.List<CMsgSockAddrList> _servers_by_group = new global::System.Collections.Generic.List<CMsgSockAddrList>();
-    [global::ProtoBuf.ProtoMember(1, Name=@"servers_by_group", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoMember(5, Name=@"servers_by_group", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public global::System.Collections.Generic.List<CMsgSockAddrList> servers_by_group
     {
       get { return _servers_by_group; }
