@@ -696,6 +696,8 @@ enum EMatchOutcome {
 	k_EMatchOutcome_DireVictory = 3;
 	k_EMatchOutcome_NotScored_PoorNetworkConditions = 64;
 	k_EMatchOutcome_NotScored_Leaver = 65;
+	k_EMatchOutcome_NotScored_ServerCrash = 66;
+	k_EMatchOutcome_NotScored_NeverStarted = 67;
 }
 
 enum EDOTAGCSessionNeed {
@@ -1057,7 +1059,6 @@ message CSODOTALobby {
 	repeated .CSODOTALobby.CExtraMsg extra_messages = 62;
 	optional .CDOTASaveGame save_game = 63;
 	optional bool first_blood_happened = 65;
-	optional bool legacy_discard_match_results = 66;
 	optional .EMatchOutcome match_outcome = 70 [default = k_EMatchOutcome_Unknown];
 	optional bool mass_disconnect = 67;
 	optional uint64 custom_game_id = 68;
