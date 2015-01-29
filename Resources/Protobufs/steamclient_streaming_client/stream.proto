@@ -62,6 +62,7 @@ enum EStreamControlMessage {
 	k_EStreamControlInputControllerWirelessPresence = 88;
 	k_EStreamControlSetGammaRamp = 89;
 	k_EStreamControlVideoEncoderInfo = 90;
+	k_EStreamControlSetBurstBitrate = 91;
 }
 
 enum EStreamVersion {
@@ -435,6 +436,10 @@ message CSetMaximumFramerateMsg {
 }
 
 message CSetMaximumBitrateMsg {
+	required int32 bitrate = 1;
+}
+
+message CSetBurstBitrateMsg {
 	required int32 bitrate = 1;
 }
 
