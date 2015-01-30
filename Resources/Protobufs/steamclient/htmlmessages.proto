@@ -586,3 +586,9 @@ message CMsgUnlockH264 {
 	optional string unlock_code = 2;
 }
 
+message CMsgScreenInformationChanged {
+	optional uint32 browser_handle = 1;
+	optional uint32 override_width = 2;
+	optional uint32 override_height = 3;
+}
+
