@@ -140,7 +140,7 @@ namespace SteamKit2
         /// </summary>
         public override void Disconnect()
         {
-            Cleanup();            
+            Cleanup();
         }
 
         /// <summary>
@@ -304,11 +304,11 @@ namespace SteamKit2
 
             while ( !wantsNetShutdown && !netLock.TryEnterWriteLock( 500 ) ) { }
 
-            // no point in continuing if we caught an error inside netThread while shutting down
-            if ( wantsNetShutdown ) return;
-
             try
             {
+                // no point in continuing if we caught an error inside netThread while shutting down
+                if (wantsNetShutdown) return;
+
                 if ( netThread != null )
                 {
                     if ( Thread.CurrentThread.ManagedThreadId != netThread.ManagedThreadId )
@@ -365,7 +365,8 @@ namespace SteamKit2
             }
             finally
             {
-                netLock.ExitWriteLock();
+                if (netLock.IsWriteLockHeld)
+                    netLock.ExitWriteLock();
             }
         }
 
