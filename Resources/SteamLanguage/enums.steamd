@@ -19,7 +19,7 @@ enum EChatEntryType
 	Typing = 2;
 	InviteGame = 3;
 	Emote = 4; obsolete "No longer supported by clients"
-	LobbyGameStart = 5;
+	LobbyGameStart = 5; obsolete "Listen for LobbyGameCreated_t callback instead"
 	LeftConversation = 6;
 	Entered = 7;
 	WasKicked = 8;
@@ -344,6 +344,7 @@ enum EAuthSessionResponse
 	AuthTicketCanceled = 6;
 	AuthTicketInvalidAlreadyUsed = 7;
 	AuthTicketInvalid = 8;
+	PublisherIssuedBan = 9;
 };
 
 enum EChatRoomEnterResponse
