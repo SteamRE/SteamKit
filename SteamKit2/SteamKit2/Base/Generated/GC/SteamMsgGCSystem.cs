@@ -265,7 +265,13 @@ namespace SteamKit2.GC.Internal
       k_EGCMsgGetIPASN = 514,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgGetIPASNResponse", Value=515)]
-      k_EGCMsgGetIPASNResponse = 515
+      k_EGCMsgGetIPASNResponse = 515,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgGetAppFriendsList", Value=516)]
+      k_EGCMsgGetAppFriendsList = 516,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgGetAppFriendsListResponse", Value=517)]
+      k_EGCMsgGetAppFriendsListResponse = 517
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"ESOMsg", EnumPassthru=true)]
