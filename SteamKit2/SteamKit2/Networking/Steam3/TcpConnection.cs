@@ -1,43 +1,171 @@
-﻿/*
+﻿﻿/*
  * This file is subject to the terms and conditions defined in
  * file 'license.txt', which is part of this source code package.
  */
 
-
-
 using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
-using System.Collections.Concurrent;
 
 namespace SteamKit2
 {
-
     class TcpConnection : Connection
     {
         const uint MAGIC = 0x31305456; // "VT01"
 
-        Socket sock;
-
-        NetFilterEncryption filter;
-
-        ConcurrentDictionary<CancellationTokenSource, bool> connectTokens;
-
-        volatile bool wantsNetShutdown;
-        NetworkStream netStream;
-        ReaderWriterLockSlim netLock;
-
-        BinaryReader netReader;
-        BinaryWriter netWriter;
-
-        Thread netThread;
-
-        public TcpConnection() : base()
+        private class SocketState
         {
-            connectTokens = new ConcurrentDictionary<CancellationTokenSource, bool>();
-            netLock = new ReaderWriterLockSlim( LockRecursionPolicy.NoRecursion );
+            public IPEndPoint Destination { get; private set; }
+            public Socket Socket { get; private set; }
+            public CancellationTokenSource CTS { get; private set; }
+            public NetFilterEncryption NetFilter { get; private set; }
+            public ConcurrentQueue<byte[]> Outbound { get; private set; }
+            public Thread WorkThread { get; private set; }
+            public NetworkStream NetStream { get; private set; }
+            public BinaryReader NetReader { get; private set; }
+            public BinaryWriter NetWriter { get; private set; }
+
+            public SocketState(IPEndPoint destination, Socket socket, CancellationTokenSource cts)
+            {
+                this.Destination = destination;
+                this.Socket = socket;
+                this.CTS = cts;
+                this.Outbound = new ConcurrentQueue<byte[]>();
+            }
+
+            public void AttachNetFilter(NetFilterEncryption netFilter)
+            {
+                this.NetFilter = netFilter;
+            }
+
+            public void AttachWorkThread(Thread thread)
+            {
+                NetStream = new NetworkStream(Socket, false);
+
+                NetReader = new BinaryReader(NetStream);
+                NetWriter = new BinaryWriter(NetStream);
+
+                this.WorkThread = thread;
+            }
+
+            ~SocketState()
+            {
+                if (NetWriter != null) NetWriter.Dispose();
+                if (NetReader != null) NetReader.Dispose();
+                if (NetStream != null) NetStream.Dispose();
+                CTS.Dispose();
+                Socket.Dispose();
+            }
+        }
+
+        private List<SocketState> activeStates;
+        private SocketState currentState;
+        private object netLock = new object();
+
+        public TcpConnection()
+        {
+            this.activeStates = new List<SocketState>();
+        }
+
+        private void CancelAllState()
+        {
+            foreach (var state in activeStates)
+            {
+                state.CTS.Cancel();
+            }
+
+            activeStates.Clear();
+        }
+
+        private SocketState AttachConnectionState(IPEndPoint destination, Socket socket, CancellationTokenSource cts)
+        {
+            var state = new SocketState(destination, socket, cts);
+
+            activeStates.Add(state);
+
+            return state;
+        }
+
+        private void DetachConnectionState(SocketState state)
+        {
+            Debug.Assert(this.currentState != state);
+
+            lock (netLock)
+            {
+                activeStates.Remove(state);
+            }
+        }
+
+        private bool FaultConnectionState(SocketState state)
+        {
+            bool shouldNotifyUser = true;
+
+            lock (netLock)
+            {
+                shouldNotifyUser = !state.CTS.IsCancellationRequested;
+                activeStates.Remove(state);
+                state.CTS.Cancel();
+                if (this.currentState == state) this.currentState = null;
+            }
+
+            return shouldNotifyUser;
+        }
+
+        private void NotifyConnectionFailed(SocketState state)
+        {
+            // dispatch callback so that the user can reconnect
+            OnDisconnected(EventArgs.Empty);
+        }
+
+        private void GracefulShutdown(Socket socket)
+        {
+            try
+            {
+                // cleanup socket
+                if (socket.Connected)
+                {
+                    socket.Shutdown(SocketShutdown.Both);
+                    socket.Disconnect(true);
+                }
+                socket.Close();
+            }
+            catch
+            {
+                // Shutdown is throwing when the remote end closes the connection before SteamKit attempts to
+                // so this should be safe as a no-op
+                // see: https://bitbucket.org/VoiDeD/steamre/issue/41/socketexception-thrown-when-closing
+            }
+        }
+
+        private void ConnectCompleted(SocketState state, bool success)
+        {
+            // Always discard result if our request was cancelled
+            if (state.CTS.IsCancellationRequested)
+            {
+                DebugLog.WriteLine("TcpConnection", "Connection request to {0} was cancelled", state.Destination);
+                if (success) GracefulShutdown(state.Socket);
+                DetachConnectionState(state);
+                return;
+            }
+            else if (!success)
+            {
+                DebugLog.WriteLine("TcpConnection", "Timed out while connecting to {0}", state.Destination);
+                DetachConnectionState(state);
+                NotifyConnectionFailed(state);
+                return;
+            }
+
+            this.currentState = state;
+
+            var netThread = new Thread(NetLoop);
+            netThread.Name = "TcpConnection Thread";
+            state.AttachWorkThread(netThread);
+            netThread.Start(state);
         }
 
         /// <summary>
@@ -45,220 +173,137 @@ namespace SteamKit2
         /// </summary>
         /// <param name="endPoint">The end point.</param>
         /// <param name="timeout">Timeout in milliseconds</param>
-        public override void Connect( IPEndPoint endPoint, int timeout )
+        public override void Connect(IPEndPoint endPoint, int timeout)
         {
-            // if we're connected, disconnect
-            Disconnect();
+            Socket _socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            var _cts = new CancellationTokenSource();
+            SocketState _state;
 
-            Socket socket = new Socket( AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp );
-            DebugLog.WriteLine( "TcpConnection", "Connecting to {0}...", endPoint );
-
-            var cts = new CancellationTokenSource();
-            connectTokens.TryAdd( cts, true );
-
-            ThreadPool.QueueUserWorkItem( sender =>
+            lock (netLock)
             {
-                var asyncResult = socket.BeginConnect( endPoint, null, null );
+                CancelAllState();
+                this.currentState = null;
+                _state = AttachConnectionState(endPoint, _socket, _cts);
+            }
 
-                if ( WaitHandle.WaitAny( new WaitHandle[] { asyncResult.AsyncWaitHandle, cts.Token.WaitHandle }, timeout ) == 0 )
+            DebugLog.WriteLine("TcpConnection", "Connecting to {0}...", _state.Destination);
+
+            ThreadPool.QueueUserWorkItem(sender =>
+            {
+                var state = (SocketState)sender;
+                if (state.CTS.IsCancellationRequested)
                 {
-                    sock = socket;
-                    ConnectCompleted( socket, asyncResult, cts );
+                    DebugLog.WriteLine("TcpConnection", "Connection to {0} cancelled by user", state.Destination);
+                    DetachConnectionState(state);
+                    return;
+                }
+
+                var asyncResult = state.Socket.BeginConnect(state.Destination, null, null);
+
+                if (WaitHandle.WaitAny(new WaitHandle[] { asyncResult.AsyncWaitHandle, state.CTS.Token.WaitHandle }, timeout) == 0)
+                {
+                    try
+                    {
+                        state.Socket.EndConnect(asyncResult);
+                        ConnectCompleted(state, true);
+                    }
+                    catch (Exception ex)
+                    {
+                        DebugLog.WriteLine("TcpConnection", "Socket exception while completing connection request to {0}: {1}", state.Destination, ex);
+                        ConnectCompleted(state, false);
+                    }
                 }
                 else
                 {
-                    socket.Close();
-                    ConnectCompleted( null, asyncResult, cts );
+                    ConnectCompleted(state, false);
                 }
-
-                bool ignored;
-                connectTokens.TryRemove( cts, out ignored );
-                cts.Dispose();
-            });
-        }
-
-        void ConnectCompleted( Socket sock, IAsyncResult asyncResult, CancellationTokenSource connectToken )
-        {
-            if ( connectToken.IsCancellationRequested )
-            {
-                DebugLog.WriteLine( "TcpConnection", "Connect request was cancelled" );
-                return;
-            }
-            else if ( sock == null )
-            {
-                DebugLog.WriteLine( "TcpConnection", "Timed out while connecting" );
-                OnDisconnected( EventArgs.Empty );
-                return;
-            }
-
-            try
-            {
-                sock.EndConnect( asyncResult );
-            }
-            catch (Exception ex)
-            {
-                DebugLog.WriteLine( "TcpConnection", "Socket exception while connecting: {0}", ex );
-                OnDisconnected( EventArgs.Empty );
-                return;
-            }
-
-            netLock.EnterWriteLock();
-
-            try
-            {
-                if ( !sock.Connected )
-                {
-                    DebugLog.WriteLine( "TcpConnection", "Unable to connect" );
-                    OnDisconnected( EventArgs.Empty );
-                    return;
-                }
-
-                DebugLog.WriteLine( "TcpConnection", "Connected!" );
-
-                filter = null;
-                wantsNetShutdown = false;
-                netStream = new NetworkStream( sock, false );
-
-                netReader = new BinaryReader( netStream );
-                netWriter = new BinaryWriter( netStream );
-
-                // initialize our network thread
-                netThread = new Thread( NetLoop );
-                netThread.Name = "TcpConnection Thread";
-                netThread.Start( sock );
-            }
-            finally
-            {
-                netLock.ExitWriteLock();
-            }
-
-            OnConnected( EventArgs.Empty );
-        }
-
-        /// <summary>
-        /// Disconnects this instance.
-        /// </summary>
-        public override void Disconnect()
-        {
-            Cleanup();
-        }
-
-        /// <summary>
-        /// Sends the specified client net message.
-        /// </summary>
-        /// <param name="clientMsg">The client net message.</param>
-        public override void Send( IClientMsg clientMsg )
-        {
-            byte[] data = clientMsg.Serialize();
-
-            // a Send from the netThread has the potential to acquire the read lock and block while Disconnect is trying to join us
-            while ( !wantsNetShutdown && !netLock.TryEnterReadLock( 500 ) ) { }
-
-            try
-            {
-                if ( wantsNetShutdown || netStream == null )
-                {
-                    DebugLog.WriteLine( "TcpConnection", "Attempting to send client message when not connected: {0}", clientMsg.MsgType );
-                    return;
-                }
-
-                // encrypt outgoing traffic if we need to
-                if ( filter != null )
-                {
-                    data = filter.ProcessOutgoing( data );
-                }
-
-                // need to ensure ordering between concurrent Sends
-                lock ( netWriter )
-                {
-                    // write header
-                    netWriter.Write( (uint)data.Length );
-                    netWriter.Write( TcpConnection.MAGIC );
-
-                    netWriter.Write( data );
-                }
-            }
-            finally
-            {
-                if ( netLock.IsReadLockHeld )
-                    netLock.ExitReadLock();
-            }
+            }, _state);
         }
 
         // this is now a steamkit meme
         /// <summary>
         /// Nets the loop.
         /// </summary>
-        void NetLoop( object param )
+        void NetLoop(object param)
         {
-
             // poll for readable data every 100ms
             const int POLL_MS = 100;
-            Socket socket = param as Socket;
+            SocketState state = param as SocketState;
 
-            while ( !wantsNetShutdown )
+            while (!state.CTS.IsCancellationRequested)
             {
+                try
+                {
+                    byte[] outbound;
+                    while (state.Outbound.TryDequeue(out outbound))
+                    {
+                        state.NetWriter.Write((uint)outbound.Length);
+                        state.NetWriter.Write(TcpConnection.MAGIC);
+                        state.NetWriter.Write(outbound);
+                        state.NetWriter.Flush();
+                    }
+                }
+
+                catch (Exception ex)
+                {
+                    DebugLog.WriteLine("TcpConnection", "Socket exception while writing data: {0}", ex);
+
+                    if (FaultConnectionState(state)) NotifyConnectionFailed(state);
+                    break;
+                }
+
                 bool canRead = false;
 
                 try
                 {
-                    canRead = socket.Poll( POLL_MS * 1000, SelectMode.SelectRead );
+                    canRead = state.Socket.Poll(POLL_MS * 1000, SelectMode.SelectRead);
                 }
-                catch ( Exception ex )
+                catch (Exception ex)
                 {
-                    DebugLog.WriteLine( "TcpConnection", "Socket exception while polling: {0}", ex );
+                    DebugLog.WriteLine("TcpConnection", "Socket exception while polling: {0}", ex);
 
-                    Cleanup();
-                    return;
+                    if (FaultConnectionState(state)) NotifyConnectionFailed(state);
+                    break;
                 }
 
-                if ( !canRead )
+                if (!canRead)
                 {
                     // nothing to read yet
                     continue;
                 }
 
-                // potential here is to be waiting to acquire the lock when Disconnect is trying to join us
-                while ( !wantsNetShutdown && !netLock.TryEnterUpgradeableReadLock( 500 ) ) { }
-
                 byte[] packData = null;
 
                 try
                 {
-                    if ( wantsNetShutdown || netStream == null )
-                    {
-                        return;
-                    }
-
                     // read the packet off the network
-                    packData = ReadPacket();
+                    packData = ReadPacket(state);
 
                     // decrypt the data off the wire if needed
-                    if ( filter != null )
+                    if (state.NetFilter != null)
                     {
-                        packData = filter.ProcessIncoming( packData );
+                        packData = state.NetFilter.ProcessIncoming(packData);
                     }
                 }
-                catch ( IOException ex )
+                catch (IOException ex)
                 {
-                    DebugLog.WriteLine( "TcpConnection", "Socket exception occurred while reading packet: {0}", ex );
+                    DebugLog.WriteLine("TcpConnection", "Socket exception occurred while reading packet: {0}", ex);
 
                     // signal that our connection is dead
-                    Cleanup();
-                    return;
-                }
-                finally
-                {
-                    if( netLock.IsUpgradeableReadLockHeld )
-                        netLock.ExitUpgradeableReadLock();
+                    if (FaultConnectionState(state)) NotifyConnectionFailed(state);
+                    break;
                 }
 
-                OnNetMsgReceived( new NetMsgEventArgs( packData, socket.RemoteEndPoint as IPEndPoint ) );
+                OnNetMsgReceived(new NetMsgEventArgs(packData, state.Destination));
             }
+
+            // Thread is shutting down, ensure faulted state (even if user initiated)
+            FaultConnectionState(state);
+            GracefulShutdown(state.Socket);
         }
 
 
-        byte[] ReadPacket()
+        byte[] ReadPacket(SocketState state)
         {
             // the tcp packet header is considerably less complex than the udp one
             // it only consists of the packet length, followed by the "VT01" magic
@@ -267,143 +312,72 @@ namespace SteamKit2
 
             try
             {
-                packetLen = netReader.ReadUInt32();
-                packetMagic = netReader.ReadUInt32();
+                packetLen = state.NetReader.ReadUInt32();
+                packetMagic = state.NetReader.ReadUInt32();
             }
-            catch ( IOException ex )
+            catch (IOException ex)
             {
-                throw new IOException( "Connection lost while reading packet header.", ex );
+                throw new IOException("Connection lost while reading packet header.", ex);
             }
 
-            if ( packetMagic != TcpConnection.MAGIC )
+            if (packetMagic != TcpConnection.MAGIC)
             {
-                throw new IOException( "Got a packet with invalid magic!" );
+                throw new IOException("Got a packet with invalid magic!");
             }
 
             // rest of the packet is the physical data
-            byte[] packData = netReader.ReadBytes( (int)packetLen );
+            byte[] packData = state.NetReader.ReadBytes((int)packetLen);
 
-            if ( packData.Length != packetLen )
+            if (packData.Length != packetLen)
             {
-                throw new IOException( "Connection lost while reading packet payload" );
+                throw new IOException("Connection lost while reading packet payload");
             }
 
             return packData;
         }
 
-        void Cleanup()
+        public override void Disconnect()
         {
-            foreach ( var key in connectTokens.Keys )
+            lock (netLock)
             {
-                bool ignored;
-                if ( connectTokens.TryRemove( key, out ignored ) )
-                {
-                    key.Cancel();
-                }
-            }
-
-            while ( !wantsNetShutdown && !netLock.TryEnterWriteLock( 500 ) ) { }
-
-            try
-            {
-                // no point in continuing if we caught an error inside netThread while shutting down
-                if (wantsNetShutdown) return;
-
-                if ( netThread != null )
-                {
-                    if ( Thread.CurrentThread.ManagedThreadId != netThread.ManagedThreadId )
-                    {
-                        wantsNetShutdown = true;
-                        // wait for our network thread to terminate
-                        netThread.Join();
-                    }
-
-                    netThread = null;
-                    OnDisconnected( EventArgs.Empty );
-                }
-
-                // cleanup streams
-                if ( netReader != null )
-                {
-                    netReader.Dispose();
-                    netReader = null;
-                }
-
-                if ( netWriter != null )
-                {
-                    netWriter.Dispose();
-                    netWriter = null;
-                }
-
-                if ( netStream != null )
-                {
-                    netStream.Dispose();
-                    netStream = null;
-                }
-
-                if ( sock != null )
-                {
-                    try
-                    {
-                        // cleanup socket
-                        if ( sock.Connected )
-                        {
-                            sock.Shutdown( SocketShutdown.Both );
-                            sock.Disconnect( true );
-                        }
-                        sock.Close();
-                    }
-                    catch
-                    {
-                        // Shutdown is throwing when the remote end closes the connection before SteamKit attempts to
-                        // so this should be safe as a no-op
-                        // see: https://bitbucket.org/VoiDeD/steamre/issue/41/socketexception-thrown-when-closing
-                    }
-
-                    sock = null;
-                }
-            }
-            finally
-            {
-                if (netLock.IsWriteLockHeld)
-                    netLock.ExitWriteLock();
+                CancelAllState();
+                this.currentState = null;
             }
         }
 
+        public override void Send(IClientMsg clientMsg)
+        {
+            var current = this.currentState;
+            if (current == null || current.CTS.IsCancellationRequested)
+            {
+                DebugLog.WriteLine("TcpConnection", "Attempting to send client message when not connected: {0}", clientMsg.MsgType);
+                return;
+            }
 
-        /// <summary>
-        /// Gets the local IP.
-        /// </summary>
-        /// <returns>The local IP.</returns>
+            byte[] data = clientMsg.Serialize();
+
+            if (current.NetFilter != null)
+            {
+                data = current.NetFilter.ProcessOutgoing(data);
+            }
+
+            current.Outbound.Enqueue(data);
+        }
+
         public override IPAddress GetLocalIP()
         {
-            while ( !wantsNetShutdown && !netLock.TryEnterReadLock( 500 ) ) { }
+            var current = this.currentState;
+            if (current == null) return IPAddress.None;
 
-            try
-            {
-                if ( wantsNetShutdown || sock == null ) return null;
-
-                return NetHelpers.GetLocalIP( sock );
-            }
-            finally
-            {
-                if ( netLock.IsReadLockHeld )
-                    netLock.ExitReadLock();
-            }
+            return NetHelpers.GetLocalIP(current.Socket);
         }
 
-        /// <summary>
-        /// Sets the network encryption filter for this connection
-        /// </summary>
-        /// <param name="filter">filter implementing <see cref="NetFilterEncryption"/></param>
         public override void SetNetEncryptionFilter(NetFilterEncryption filter)
         {
-            while ( !wantsNetShutdown && !netLock.TryEnterWriteLock( 500 ) ) { }
+            var current = this.currentState;
+            if (current == null) return;
 
-            this.filter = filter;
-
-            if( netLock.IsWriteLockHeld )
-                netLock.ExitWriteLock();
+            current.AttachNetFilter(filter);
         }
     }
 }
