@@ -99,6 +99,8 @@ namespace SteamKit2
             {
                 activeStates.Remove(state);
             }
+
+            state.Socket.Close();
         }
 
         private bool FaultConnectionState(SocketState state)
@@ -108,31 +110,31 @@ namespace SteamKit2
             lock (netLock)
             {
                 shouldNotifyUser = !state.CTS.IsCancellationRequested;
-                activeStates.Remove(state);
                 state.CTS.Cancel();
+                activeStates.Remove(state);
                 if (this.currentState == state) this.currentState = null;
             }
 
             return shouldNotifyUser;
         }
 
-        private void NotifyConnectionFailed(SocketState state)
+        private void NotifyConnectionFailed()
         {
             // dispatch callback so that the user can reconnect
             OnDisconnected(EventArgs.Empty);
         }
 
-        private void GracefulShutdown(Socket socket)
+        private void GracefulShutdown(SocketState state)
         {
             try
             {
                 // cleanup socket
-                if (socket.Connected)
+                if (state.Socket.Connected)
                 {
-                    socket.Shutdown(SocketShutdown.Both);
-                    socket.Disconnect(true);
+                    state.Socket.Shutdown(SocketShutdown.Both);
+                    state.Socket.Disconnect(true);
                 }
-                socket.Close();
+                state.Socket.Close();
             }
             catch
             {
@@ -148,7 +150,7 @@ namespace SteamKit2
             if (state.CTS.IsCancellationRequested)
             {
                 DebugLog.WriteLine("TcpConnection", "Connection request to {0} was cancelled", state.Destination);
-                if (success) GracefulShutdown(state.Socket);
+                if (success) GracefulShutdown(state);
                 DetachConnectionState(state);
                 return;
             }
@@ -156,7 +158,7 @@ namespace SteamKit2
             {
                 DebugLog.WriteLine("TcpConnection", "Timed out while connecting to {0}", state.Destination);
                 DetachConnectionState(state);
-                NotifyConnectionFailed(state);
+                NotifyConnectionFailed();
                 return;
             }
 
@@ -243,12 +245,11 @@ namespace SteamKit2
                         state.NetWriter.Flush();
                     }
                 }
-
-                catch (Exception ex)
+                catch (IOException ex)
                 {
                     DebugLog.WriteLine("TcpConnection", "Socket exception while writing data: {0}", ex);
 
-                    if (FaultConnectionState(state)) NotifyConnectionFailed(state);
+                    if (FaultConnectionState(state)) NotifyConnectionFailed();
                     break;
                 }
 
@@ -258,11 +259,11 @@ namespace SteamKit2
                 {
                     canRead = state.Socket.Poll(POLL_MS * 1000, SelectMode.SelectRead);
                 }
-                catch (Exception ex)
+                catch (SocketException ex)
                 {
                     DebugLog.WriteLine("TcpConnection", "Socket exception while polling: {0}", ex);
 
-                    if (FaultConnectionState(state)) NotifyConnectionFailed(state);
+                    if (FaultConnectionState(state)) NotifyConnectionFailed();
                     break;
                 }
 
@@ -290,16 +291,23 @@ namespace SteamKit2
                     DebugLog.WriteLine("TcpConnection", "Socket exception occurred while reading packet: {0}", ex);
 
                     // signal that our connection is dead
-                    if (FaultConnectionState(state)) NotifyConnectionFailed(state);
+                    if (FaultConnectionState(state)) NotifyConnectionFailed();
                     break;
                 }
 
-                OnNetMsgReceived(new NetMsgEventArgs(packData, state.Destination));
+                try
+                {
+                    OnNetMsgReceived(new NetMsgEventArgs(packData, state.Destination));
+                }
+                catch (Exception ex)
+                {
+                    DebugLog.WriteLine("TcpConnection", "Unexpected exception propogated back to NetLoop: {0}", ex);
+                }
             }
 
             // Thread is shutting down, ensure faulted state (even if user initiated)
             FaultConnectionState(state);
-            GracefulShutdown(state.Socket);
+            GracefulShutdown(state);
         }
 
 
@@ -369,7 +377,14 @@ namespace SteamKit2
             var current = this.currentState;
             if (current == null) return IPAddress.None;
 
-            return NetHelpers.GetLocalIP(current.Socket);
+            try
+            {
+                return NetHelpers.GetLocalIP(current.Socket);
+            }
+            catch (Exception)
+            {
+                return IPAddress.None;
+            }
         }
 
         public override void SetNetEncryptionFilter(NetFilterEncryption filter)
