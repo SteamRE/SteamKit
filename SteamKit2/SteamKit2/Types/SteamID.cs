@@ -45,7 +45,7 @@ namespace SteamKit2
     }
 
     /// <summary>
-    /// This 64bit structure is used for identifying various objects on the Steam network.
+    /// This 64-bit structure is used for identifying various objects on the Steam network.
     /// </summary>
     [DebuggerDisplay( "{Render()}, {ConvertToUInt64()}" )]
     public class SteamID
@@ -53,12 +53,16 @@ namespace SteamKit2
         BitVector64 steamid;
 
         static Regex Steam2Regex = new Regex(
-            @"STEAM_(?<universe>[0-5]):(?<authserver>[0-1]):(?<accountid>\d+)",
+            @"STEAM_(?<universe>[0-4]):(?<authserver>[0-1]):(?<accountid>\d+)",
             RegexOptions.Compiled | RegexOptions.IgnoreCase );
 
         static Regex Steam3Regex = new Regex(
-            @"\[(?<type>[AGMPCgcLTIUai]):(?<universe>[0-5]):(?<account>\d+)(:(?<instance>\d+))?\]",
-            RegexOptions.Compiled | RegexOptions.IgnoreCase );
+            @"\[(?<type>[AGMPCgcLTIUai]):(?<universe>[0-4]):(?<account>\d+)(:(?<instance>\d+))?\]",
+            RegexOptions.Compiled );
+
+        static Regex Steam3FallbackRegex = new Regex(
+            @"\[(?<type>[AGMPCgcLTIUai]):(?<universe>[0-4]):(?<account>\d+)(\((?<instance>\d+)\))?\]",
+            RegexOptions.Compiled );
 
         static Dictionary<EAccountType, char> AccountTypeChars = new Dictionary<EAccountType, char>
         {
@@ -92,7 +96,7 @@ namespace SteamKit2
         public const uint WebInstance = 4;
 
         /// <summary>
-        /// Masking vlaue used for the account id.
+        /// Masking value used for the account id.
         /// </summary>
         public const uint AccountIDMask = 0xFFFFFFFF;
         /// <summary>
@@ -265,7 +269,12 @@ namespace SteamKit2
             Match m = Steam3Regex.Match( steamId );
 
             if ( !m.Success )
-                return false;
+            {
+                m = Steam3FallbackRegex.Match( steamId );
+
+                if ( !m.Success )
+                    return false;
+            }
 
             uint accId;
             if ( !uint.TryParse( m.Groups["account"].Value, out accId ) )
@@ -576,7 +585,7 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// Renders this instance into it's Steam2 "STEAM_" or Steam3 represenation.
+        /// Renders this instance into it's Steam2 "STEAM_" or Steam3 representation.
         /// </summary>
         /// <param name="steam3">If set to <c>true</c>, the Steam3 rendering will be returned; otherwise, the Steam2 STEAM_ rendering.</param>
         /// <returns>
@@ -596,10 +605,8 @@ namespace SteamKit2
             {
                 case EAccountType.Invalid:
                 case EAccountType.Individual:
-                    if ( AccountUniverse <= EUniverse.Public )
-                        return String.Format( "STEAM_0:{0}:{1}", AccountID & 1, AccountID >> 1 );
-                    else
-                        return String.Format( "STEAM_{2}:{0}:{1}", AccountID & 1, AccountID >> 1, ( int )AccountUniverse );
+                    var universeDigit = ( AccountUniverse <= EUniverse.Public ) ? "0" : Enum.Format( typeof( EUniverse ), AccountUniverse, "D" );
+                    return String.Format( "STEAM_{0}:{1}:{2}", universeDigit, AccountID & 1, AccountID >> 1 );
                 default:
                     return Convert.ToString( this );
             }
@@ -607,7 +614,7 @@ namespace SteamKit2
 
         string RenderSteam3()
         {
-            var accountTypeChar = AccountTypeChars.ContainsKey(AccountType) ? AccountTypeChars[AccountType] : 'i';
+            var accountTypeChar = AccountTypeChars.ContainsKey( AccountType ) ? AccountTypeChars[ AccountType ] : 'i';
 
             if ( AccountType == EAccountType.Chat )
             {
