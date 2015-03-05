@@ -277,32 +277,48 @@ namespace SteamKit2
             }
 
             uint accId;
-            if ( !uint.TryParse( m.Groups["account"].Value, out accId ) )
+            if ( !uint.TryParse( m.Groups[ "account" ].Value, out accId ) )
                 return false;
 
             uint universe;
-            if ( !uint.TryParse( m.Groups["universe"].Value, out universe ) )
+            if ( !uint.TryParse( m.Groups[ "universe" ].Value, out universe ) )
                 return false;
 
             char type;
-            var typeString = m.Groups["type"].Value;
+            var typeString = m.Groups[ "type" ].Value;
             if ( typeString.Length != 1 )
                 return false;
             type = typeString[ 0 ];
 
-            uint instance = 1;
-            var instanceGroup = m.Groups["instance"];
+            uint instance;
+            var instanceGroup = m.Groups[ "instance" ];
             if ( instanceGroup != null && !string.IsNullOrEmpty( instanceGroup.Value ) )
             {
                 instance = uint.Parse( instanceGroup.Value );
             }
+            else
+            {
+                switch ( type )
+                {
+                    case 'g':
+                    case 'T':
+                    case 'c':
+                    case 'L':
+                        instance = 0;
+                        break;
 
-            if (type == 'c')
+                    default:
+                        instance = 1;
+                        break;
+                }
+            }
+
+            if ( type == 'c' )
             {
                 instance = ( uint )( ( ChatInstanceFlags )instance | ChatInstanceFlags.Clan );
                 this.AccountType = EAccountType.Chat;
             }
-            else if (type == 'L')
+            else if ( type == 'L' )
             {
                 instance = ( uint )( ( ChatInstanceFlags )instance | ChatInstanceFlags.Lobby );
                 this.AccountType = EAccountType.Chat;
