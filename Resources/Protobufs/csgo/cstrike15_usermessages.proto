@@ -226,6 +226,9 @@ message CCSUsrMsg_SendPlayerItemFound {
 message CCSUsrMsg_ReloadEffect {
 	optional int32 entidx = 1;
 	optional int32 actanim = 2;
+	optional float origin_x = 3;
+	optional float origin_y = 4;
+	optional float origin_z = 5;
 }
 
 message CCSUsrMsg_AdjustMoney {

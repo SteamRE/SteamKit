@@ -6,11 +6,11 @@
 
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
-using System.Collections.Concurrent;
 
 namespace SteamKit2
 {
@@ -23,7 +23,7 @@ namespace SteamKit2
 
         NetFilterEncryption filter;
 
-        ConcurrentDictionary<CancellationTokenSource, bool> connectTokens;
+        List<CancellationTokenSource> connectTokens;
 
         volatile bool wantsNetShutdown;
         NetworkStream netStream;
@@ -36,7 +36,7 @@ namespace SteamKit2
 
         public TcpConnection() : base()
         {
-            connectTokens = new ConcurrentDictionary<CancellationTokenSource, bool>();
+            connectTokens = new List<CancellationTokenSource>();
             netLock = new ReaderWriterLockSlim( LockRecursionPolicy.NoRecursion );
         }
 
@@ -54,7 +54,10 @@ namespace SteamKit2
             DebugLog.WriteLine( "TcpConnection", "Connecting to {0}...", endPoint );
 
             var cts = new CancellationTokenSource();
-            connectTokens.TryAdd( cts, true );
+            lock (connectTokens)
+            {
+                connectTokens.Add(cts);
+            }
 
             ThreadPool.QueueUserWorkItem( sender =>
             {
@@ -71,9 +74,11 @@ namespace SteamKit2
                     ConnectCompleted( null, asyncResult, cts );
                 }
 
-                bool ignored;
-                connectTokens.TryRemove( cts, out ignored );
-                cts.Dispose();
+                lock (connectTokens)
+                {
+                    cts.Dispose();
+                    connectTokens.Remove(cts);
+                }
             });
         }
 
@@ -140,7 +145,7 @@ namespace SteamKit2
         /// </summary>
         public override void Disconnect()
         {
-            Cleanup();            
+            Cleanup();
         }
 
         /// <summary>
@@ -293,10 +298,9 @@ namespace SteamKit2
 
         void Cleanup()
         {
-            foreach ( var key in connectTokens.Keys )
+            lock (connectTokens)
             {
-                bool ignored;
-                if ( connectTokens.TryRemove( key, out ignored ) )
+                foreach (var key in connectTokens)
                 {
                     key.Cancel();
                 }
@@ -304,11 +308,11 @@ namespace SteamKit2
 
             while ( !wantsNetShutdown && !netLock.TryEnterWriteLock( 500 ) ) { }
 
-            // no point in continuing if we caught an error inside netThread while shutting down
-            if ( wantsNetShutdown ) return;
-
             try
             {
+                // no point in continuing if we caught an error inside netThread while shutting down
+                if (wantsNetShutdown) return;
+
                 if ( netThread != null )
                 {
                     if ( Thread.CurrentThread.ManagedThreadId != netThread.ManagedThreadId )
@@ -365,7 +369,8 @@ namespace SteamKit2
             }
             finally
             {
-                netLock.ExitWriteLock();
+                if (netLock.IsWriteLockHeld)
+                    netLock.ExitWriteLock();
             }
         }
 

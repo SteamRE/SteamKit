@@ -122,6 +122,7 @@ message CMsgGameServerInfo {
 	optional fixed32 server_private_ip_addr = 2;
 	optional uint32 server_port = 3;
 	optional uint32 server_tv_port = 4;
+	optional uint32 server_steamdatagram_port = 21;
 	optional string server_key = 5;
 	optional bool server_hibernation = 6;
 	optional .CMsgGameServerInfo.ServerType server_type = 7 [default = UNSPECIFIED];
@@ -764,12 +765,17 @@ message CMsgGCToServerPredictionResult {
 		optional uint32 num_correct = 2;
 		optional uint32 num_fails = 3;
 		optional .CMsgGCToServerPredictionResult.Prediction.EResult result = 4 [default = k_eResult_ItemGranted];
-		optional uint32 granted_item_def = 5;
+		repeated uint32 granted_item_defs = 6;
 	}
 
 	optional uint32 account_id = 1;
 	optional uint64 match_id = 2;
 	optional bool correct = 3;
 	repeated .CMsgGCToServerPredictionResult.Prediction predictions = 4;
+}
+
+message CMsgServerToGCLockCharmTrading {
+	optional uint32 account_id = 1;
+	optional uint64 item_id = 2;
 }
 

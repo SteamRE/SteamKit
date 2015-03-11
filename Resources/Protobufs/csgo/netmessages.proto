@@ -111,6 +111,7 @@ message CMsg_CVars {
 	message CVar {
 		optional string name = 1;
 		optional string value = 2;
+		optional uint32 dictionary_name = 3;
 	}
 
 	repeated .CMsg_CVars.CVar cvars = 1;

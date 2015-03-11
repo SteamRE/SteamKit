@@ -1,5 +1,8 @@
 import "steammessages.proto";
 
+option optimize_for = SPEED;
+option cc_generic_services = false;
+
 enum EGCItemMsg {
 	k_EMsgGCBase = 1000;
 	k_EMsgGCSetItemPosition = 1001;
@@ -126,8 +129,6 @@ enum EGCItemMsg {
 	k_EMsgGCServerVersionUpdated = 2522;
 	k_EMsgGCApplyAutograph = 2523;
 	k_EMsgGCToGCWebAPIAccountChanged = 2524;
-	k_EMsgGCRequestAnnouncements = 2525;
-	k_EMsgGCRequestAnnouncementsResponse = 2526;
 	k_EMsgGCClientVersionUpdated = 2528;
 	k_EMsgGCItemPurgatory_FinalizePurchase = 2531;
 	k_EMsgGCItemPurgatory_FinalizePurchaseResponse = 2532;
@@ -159,6 +160,10 @@ enum EGCItemMsg {
 	k_EMsgGCPartnerBalanceResponse = 2558;
 	k_EMsgGCPartnerRechargeRedirectURLRequest = 2559;
 	k_EMsgGCPartnerRechargeRedirectURLResponse = 2560;
+	k_EMsgGCStatueCraft = 2561;
+	k_EMsgGCRedeemCode = 2562;
+	k_EMsgGCRedeemCodeResponse = 2563;
+	k_EMsgGCToGCItemConsumptionRollback = 2564;
 }
 
 enum EGCMsgResponse {
@@ -181,6 +186,8 @@ enum EUnlockStyle {
 	k_UnlockStyle_Failed_CantLockCache = 4;
 	k_UnlockStyle_Failed_CantAffordAttrib = 5;
 	k_UnlockStyle_Failed_CantAffordGem = 6;
+	k_UnlockStyle_Failed_NoCompendiumLevel = 7;
+	k_UnlockStyle_Failed_AlreadyUnlocked = 8;
 }
 
 enum EItemPurgatoryResponse_Finalize {
@@ -310,11 +317,11 @@ message CMsgGCToGCGetUserPCBangNoResponse {
 }
 
 message CMsgRequestCrateItems {
-	optional uint32 crate_series = 1;
+	optional uint32 crate_item_def = 1;
 }
 
 message CMsgRequestCrateItemsResponse {
-	optional uint32 crate_series = 1;
+	optional uint32 crate_item_def = 1;
 	repeated uint32 item_defs = 2;
 }
 
@@ -360,10 +367,25 @@ message CMsgGCToGCCheckAccountTradeStatusResponse {
 
 message CMsgGCToGCGrantAccountRolledItems {
 	message Item {
+		message DynamicAttribute {
+			optional string name = 1;
+			optional uint32 value_uint32 = 2;
+			optional float value_float = 3;
+		}
+
+		message AdditionalAuditEntry {
+			optional uint32 owner_account_id = 1;
+			optional uint32 audit_action = 2;
+			optional uint32 audit_data = 3;
+		}
+
 		optional uint32 item_def = 1;
 		repeated string loot_lists = 2;
 		optional bool ignore_limit = 3;
 		optional uint32 origin = 4;
+		repeated .CMsgGCToGCGrantAccountRolledItems.Item.DynamicAttribute dynamic_attributes = 5;
+		repeated .CMsgGCToGCGrantAccountRolledItems.Item.AdditionalAuditEntry additional_audit_entries = 6;
+		optional uint32 inventory_token = 7;
 	}
 
 	optional uint32 account_id = 1;
@@ -406,5 +428,36 @@ message CMsgGCPartnerRechargeRedirectURLRequest {
 message CMsgGCPartnerRechargeRedirectURLResponse {
 	optional .EGCPartnerRequestResponse result = 1 [default = k_EPartnerRequestOK];
 	optional string url = 2;
+}
+
+message CMsgGCEconSQLWorkItemEmbeddedRollbackData {
+	optional uint32 account_id = 1;
+	optional uint64 deleted_item_id = 2;
+}
+
+message CMsgCraftStatue {
+	optional uint32 heroid = 1;
+	optional string sequencename = 2;
+	optional float cycle = 3;
+	optional string description = 4;
+	optional uint32 pedestal_itemdef = 5;
+	optional uint64 toolid = 6;
+}
+
+message CMsgRedeemCode {
+	optional string code = 1;
+}
+
+message CMsgRedeemCodeResponse {
+	optional uint32 response = 1;
+}
+
+message CMsgDevNewItemRequest {
+	optional string item_def_name = 3;
+	optional string loot_list_name = 4;
+}
+
+message CMsgDevNewItemRequestResponse {
+	optional bool success = 1;
 }
 

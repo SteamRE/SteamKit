@@ -179,6 +179,7 @@ message CMsgClientUCMPublishedFileSubscribed {
 	optional uint32 file_size = 4;
 	optional uint32 rtime_subscribed = 5;
 	optional bool is_depot_content = 6;
+	optional uint32 rtime_updated = 7;
 }
 
 message CMsgClientUCMPublishedFileUnsubscribed {
@@ -198,6 +199,49 @@ message CMsgClientUCMPublishedFileUpdated {
 	optional fixed64 hcontent = 4;
 	optional fixed32 file_size = 5;
 	optional bool is_depot_content = 6;
+}
+
+message CMsgClientWorkshopItemChangesRequest {
+	optional uint32 app_id = 1;
+	optional uint32 num_items_installed = 2;
+	optional fixed64 last_updated_item_id = 3;
+	optional uint32 time_updated_time = 4;
+}
+
+message CMsgClientWorkshopItemChangesResponse {
+	message WorkshopItem {
+		optional fixed64 published_file_id = 1;
+		optional uint32 time_updated = 2;
+	}
+
+	repeated .CMsgClientWorkshopItemChangesResponse.WorkshopItem workshop_items = 1;
+	optional bool request_full_update = 2;
+	optional fixed64 last_updated_item_id = 3;
+	optional uint32 time_updated_time = 4;
+}
+
+message CMsgClientWorkshopItemInfoRequest {
+	message WorkshopItem {
+		optional fixed64 published_file_id = 1;
+		optional uint32 time_updated = 2;
+	}
+
+	optional uint32 app_id = 1;
+	optional uint32 last_time_updated = 2;
+	repeated .CMsgClientWorkshopItemInfoRequest.WorkshopItem workshop_items = 3;
+}
+
+message CMsgClientWorkshopItemInfoResponse {
+	message WorkshopItemInfo {
+		optional fixed64 published_file_id = 1;
+		optional uint32 time_updated = 2;
+		optional fixed64 manifest_id = 3;
+	}
+
+	optional int32 eresult = 1 [default = 2];
+	optional uint32 update_time = 2;
+	repeated .CMsgClientWorkshopItemInfoResponse.WorkshopItemInfo workshop_items = 3;
+	repeated fixed64 failed_items = 4;
 }
 
 message CMsgClientUCMGetPublishedFilesForUser {

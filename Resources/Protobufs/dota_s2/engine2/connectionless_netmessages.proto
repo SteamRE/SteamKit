@@ -1,6 +1,8 @@
 import "google/protobuf/descriptor.proto";
 import "netmessages.proto";
 
+option cc_generic_services = false;
+
 enum ConnectionLessMessageIds {
 	C2S_CONNECT_id = 80;
 }
@@ -11,10 +13,8 @@ message C2S_CONNECT_Message {
 	optional uint32 challenge_number = 3;
 	optional fixed64 reservation_cookie = 4;
 	optional bool low_violence = 5;
-	optional string name = 6;
-	optional string password = 7;
-	repeated .CCLCMsg_SplitPlayerConnect splitplayers = 8;
-	optional bytes auth_cd_key = 9;
-	optional bytes auth_steam = 10;
+	optional bytes encrypted_password = 6;
+	repeated .CCLCMsg_SplitPlayerConnect splitplayers = 7;
+	optional bytes auth_steam = 8;
 }
 

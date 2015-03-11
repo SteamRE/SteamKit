@@ -21,6 +21,7 @@ message CTwoFactor_Status_Response {
 	optional uint32 steamguard_scheme = 5 [(description) = "Steam Guard scheme in effect"];
 	optional string token_gid = 6 [(description) = "String rep of token GID assigned by server"];
 	optional bool email_validated = 7 [(description) = "Account has verified email capability"];
+	optional string device_identifier = 8 [(description) = "Authenticator (phone) identifier"];
 }
 
 message CTwoFactor_Secrets_Request {
@@ -35,6 +36,7 @@ message CTwoFactor_Secrets_Response {
 	optional string activation_code = 5 [(description) = "Activation code"];
 	optional string account_name = 6 [(description) = "Account name to display on token client"];
 	optional string device_identifier = 7 [(description) = "Authenticator identifier"];
+	optional bytes identity_secret = 8 [(description) = "Secret used to attest mobile device identity"];
 }
 
 message CTwoFactor_AddAuthenticator_Request {
@@ -117,6 +119,27 @@ message CTwoFactor_ValidateToken_Response {
 	optional bool valid = 1 [(description) = "result of validation"];
 }
 
+message CTwoFactor_RemoveAuthenticatorViaChallengeStart_Request {
+	optional fixed64 steamid = 1 [(description) = "steamid to use"];
+	optional string encrypted_password = 2 [(description) = "RSA-encrypted password"];
+	optional uint32 password_timestamp = 3 [(description) = "RSA timestamp for password"];
+}
+
+message CTwoFactor_RemoveAuthenticatorViaChallengeStart_Response {
+	optional bool success = 1 [(description) = "True if succeeded, or want more tries with an authenticator_code"];
+}
+
+message CTwoFactor_RemoveAuthenticatorViaChallengeContinue_Request {
+	optional fixed64 steamid = 1 [(description) = "steamid to use"];
+	optional string encrypted_password = 2 [(description) = "RSA-encrypted password"];
+	optional uint32 password_timestamp = 3 [(description) = "RSA timestamp for password"];
+	optional string sms_code = 4 [(description) = "Code from SMS"];
+}
+
+message CTwoFactor_RemoveAuthenticatorViaChallengeContinue_Response {
+	optional bool success = 1 [(description) = "True if succeeded, or want more tries with an authenticator_code"];
+}
+
 service TwoFactor {
 	option (service_description) = "Two Factor Authentication Service";
 	rpc QueryTime (.CTwoFactor_Time_Request) returns (.CTwoFactor_Time_Response) {
@@ -148,5 +171,11 @@ service TwoFactor {
 	}
 	rpc ValidateToken (.CTwoFactor_ValidateToken_Request) returns (.CTwoFactor_ValidateToken_Response) {
 		option (method_description) = "Validate (and consume) a token";
+	}
+	rpc RemoveAuthenticatorViaChallengeStart (.CTwoFactor_RemoveAuthenticatorViaChallengeStart_Request) returns (.CTwoFactor_RemoveAuthenticatorViaChallengeStart_Response) {
+		option (method_description) = "Start challenge-based authenticator removal";
+	}
+	rpc RemoveAuthenticatorViaChallengeContinue (.CTwoFactor_RemoveAuthenticatorViaChallengeContinue_Request) returns (.CTwoFactor_RemoveAuthenticatorViaChallengeContinue_Response) {
+		option (method_description) = "Continue challenge-based authenticator removal";
 	}
 }

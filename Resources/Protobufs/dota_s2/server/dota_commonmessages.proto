@@ -1,6 +1,9 @@
 import "google/protobuf/descriptor.proto";
 import "networkbasetypes.proto";
 
+option optimize_for = SPEED;
+option cc_generic_services = false;
+
 enum EDOTAChatWheelMessage {
 	k_EDOTA_CW_Ok = 0;
 	k_EDOTA_CW_Care = 1;
@@ -81,6 +84,7 @@ enum EDOTAStatPopupTypes {
 	k_EDOTA_SPT_Textline = 0;
 	k_EDOTA_SPT_Basic = 1;
 	k_EDOTA_SPT_Poll = 2;
+	k_EDOTA_SPT_Grid = 3;
 }
 
 message CDOTAMsg_LocationPing {
@@ -95,6 +99,11 @@ message CDOTAMsg_ItemAlert {
 	optional int32 x = 1;
 	optional int32 y = 2;
 	optional int32 itemid = 3;
+}
+
+message CDOTAMsg_EnemyItemAlert {
+	optional uint32 player_id = 1;
+	optional int32 itemid = 2;
 }
 
 message CDOTAMsg_MapLine {

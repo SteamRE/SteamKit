@@ -1,6 +1,8 @@
 import "google/protobuf/descriptor.proto";
 import "netmessages.proto";
 
+option cc_generic_services = false;
+
 enum P2P_Messages {
 	p2p_TextMessage = 256;
 	p2p_Voice = 257;

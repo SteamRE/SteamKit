@@ -1594,6 +1594,15 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _leader_name; }
       set { _leader_name = value; }
     }
+
+    private string _custom_map_name = "";
+    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"custom_map_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string custom_map_name
+    {
+      get { return _custom_map_name; }
+      set { _custom_map_name = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -3750,7 +3759,19 @@ namespace SteamKit2.GC.Dota.Internal
       TARGET_ENGINE_MISMATCH = 55,
             
       [global::ProtoBuf.ProtoEnum(Name=@"VAC_NOT_VERIFIED", Value=56)]
-      VAC_NOT_VERIFIED = 56
+      VAC_NOT_VERIFIED = 56,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"KICKED_FROM_QUEUE_EVENT_STARTING", Value=57)]
+      KICKED_FROM_QUEUE_EVENT_STARTING = 57,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"KICKED_FROM_QUEUE_EVENT_ENDING", Value=58)]
+      KICKED_FROM_QUEUE_EVENT_ENDING = 58,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EVENT_NO_LOW_PRIORITY", Value=59)]
+      EVENT_NO_LOW_PRIORITY = 59,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"MM_LOW_PRI_ONLY_CASUAL_AR", Value=60)]
+      MM_LOW_PRI_ONLY_CASUAL_AR = 60
     }
   
     private global::ProtoBuf.IExtension extensionObject;
@@ -8205,6 +8226,13 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _active_events; }
     }
   
+    private readonly global::System.Collections.Generic.List<CMsgDOTAWelcome.CExtraMsg> _extra_messages = new global::System.Collections.Generic.List<CMsgDOTAWelcome.CExtraMsg>();
+    [global::ProtoBuf.ProtoMember(26, Name=@"extra_messages", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CMsgDOTAWelcome.CExtraMsg> extra_messages
+    {
+      get { return _extra_messages; }
+    }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"LocalizationDigest")]
   public partial class LocalizationDigest : global::ProtoBuf.IExtensible
   {
@@ -8236,6 +8264,34 @@ namespace SteamKit2.GC.Dota.Internal
     {
       get { return _client_language_file_sha1; }
       set { _client_language_file_sha1 = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CExtraMsg")]
+  public partial class CExtraMsg : global::ProtoBuf.IExtensible
+  {
+    public CExtraMsg() {}
+    
+
+    private uint _id = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint id
+    {
+      get { return _id; }
+      set { _id = value; }
+    }
+
+    private byte[] _contents = null;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"contents", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public byte[] contents
+    {
+      get { return _contents; }
+      set { _contents = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -9279,8 +9335,15 @@ namespace SteamKit2.GC.Dota.Internal
   {
     public CMsgMatchmakingGroupServerSample() {}
     
+    private readonly global::System.Collections.Generic.List<CMsgSockAddrList> _servers_by_group_legacy_swapped = new global::System.Collections.Generic.List<CMsgSockAddrList>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"servers_by_group_legacy_swapped", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CMsgSockAddrList> servers_by_group_legacy_swapped
+    {
+      get { return _servers_by_group_legacy_swapped; }
+    }
+  
     private readonly global::System.Collections.Generic.List<CMsgSockAddrList> _servers_by_group = new global::System.Collections.Generic.List<CMsgSockAddrList>();
-    [global::ProtoBuf.ProtoMember(1, Name=@"servers_by_group", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoMember(5, Name=@"servers_by_group", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public global::System.Collections.Generic.List<CMsgSockAddrList> servers_by_group
     {
       get { return _servers_by_group; }
@@ -9399,6 +9462,13 @@ namespace SteamKit2.GC.Dota.Internal
     public global::System.Collections.Generic.List<uint> searching_players_by_group
     {
       get { return _searching_players_by_group; }
+    }
+  
+    private readonly global::System.Collections.Generic.List<uint> _searching_players_by_group_source2 = new global::System.Collections.Generic.List<uint>();
+    [global::ProtoBuf.ProtoMember(7, Name=@"searching_players_by_group_source2", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public global::System.Collections.Generic.List<uint> searching_players_by_group_source2
+    {
+      get { return _searching_players_by_group_source2; }
     }
   
 
@@ -12937,34 +13007,6 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientToGCRecordStatueStats")]
-  public partial class CMsgClientToGCRecordStatueStats : global::ProtoBuf.IExtensible
-  {
-    public CMsgClientToGCRecordStatueStats() {}
-    
-
-    private uint _view_duration_s = default(uint);
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"view_duration_s", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint view_duration_s
-    {
-      get { return _view_duration_s; }
-      set { _view_duration_s = value; }
-    }
-
-    private bool _created_statue = default(bool);
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"created_statue", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
-    public bool created_statue
-    {
-      get { return _created_statue; }
-      set { _created_statue = value; }
-    }
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCToClientEventStatusChanged")]
   public partial class CMsgGCToClientEventStatusChanged : global::ProtoBuf.IExtensible
   {
@@ -12975,6 +13017,59 @@ namespace SteamKit2.GC.Dota.Internal
     public global::System.Collections.Generic.List<EIngameEvent> active_events
     {
       get { return _active_events; }
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientToGCExchangeItemsForOffering")]
+  public partial class CMsgClientToGCExchangeItemsForOffering : global::ProtoBuf.IExtensible
+  {
+    public CMsgClientToGCExchangeItemsForOffering() {}
+    
+    private readonly global::System.Collections.Generic.List<ulong> _item_ids = new global::System.Collections.Generic.List<ulong>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"item_ids", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public global::System.Collections.Generic.List<ulong> item_ids
+    {
+      get { return _item_ids; }
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientToGCExchangeItemsForOfferingResponse")]
+  public partial class CMsgClientToGCExchangeItemsForOfferingResponse : global::ProtoBuf.IExtensible
+  {
+    public CMsgClientToGCExchangeItemsForOfferingResponse() {}
+    
+
+    private CMsgClientToGCExchangeItemsForOfferingResponse.EResponse _response = CMsgClientToGCExchangeItemsForOfferingResponse.EResponse.eResponse_Success;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"response", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(CMsgClientToGCExchangeItemsForOfferingResponse.EResponse.eResponse_Success)]
+    public CMsgClientToGCExchangeItemsForOfferingResponse.EResponse response
+    {
+      get { return _response; }
+      set { _response = value; }
+    }
+    [global::ProtoBuf.ProtoContract(Name=@"EResponse", EnumPassthru=true)]
+    public enum EResponse
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"eResponse_Success", Value=0)]
+      eResponse_Success = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"eResponse_OfferingDisabled", Value=1)]
+      eResponse_OfferingDisabled = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"eResponse_InvalidItems", Value=2)]
+      eResponse_InvalidItems = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"eResponse_InternalError", Value=3)]
+      eResponse_InternalError = 3
     }
   
     private global::ProtoBuf.IExtension extensionObject;

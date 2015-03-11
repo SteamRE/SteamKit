@@ -1,8 +1,52 @@
 import "steammessages.proto";
-import "matchmaker_common.proto";
 import "dota_gcmessages_common.proto";
 import "econ_gcmessages.proto";
 import "network_connection.proto";
+
+option optimize_for = SPEED;
+option cc_generic_services = false;
+
+enum EAbilityAbuseType {
+	k_EAbilityAbuseType_None = 0;
+	k_EAbilityAbuseType_Io_Relocate = 1;
+	k_EAbilityAbuseType_Chen_Test_Of_Faith = 2;
+	k_EAbilityAbuseType_Bane_Nightmare = 3;
+	k_EAbilityAbuseType_Bloodseeker_Bloodrage = 4;
+	k_EAbilityAbuseType_Outworld_Astral_Imprisonment = 5;
+	k_EAbilityAbuseType_Shadow_Demon_Disruption = 6;
+}
+
+enum EIntentionalFeedingType {
+	k_EIntentionalFeedingType_None = 0;
+	k_EIntentionalFeedingType_ExcessiveDeaths = 1;
+	k_EIntentionalFeedingType_MultipleCourierPurchases = 2;
+	k_EIntentionalFeedingType_MultipleCourierDeaths = 4;
+	k_EIntentionalFeedingType_LowActivity = 8;
+	k_EIntentionalFeedingType_LowDamage = 16;
+	k_EIntentionalFeedingType_HighUnspentGold = 32;
+	k_EIntentionalFeedingType_SoldTooMuchItemValue = 64;
+	k_EIntentionalFeedingType_TooManyDroppedItems = 128;
+	k_EIntentionalFeedingType_ExcessiveTowerDamage = 256;
+}
+
+enum ESuspiciousActivity {
+	k_ESuspiciousActivity_VAC_MultipleInstances = 1;
+	k_ESuspiciousActivity_IntentionalFeeding = 100;
+	k_ESuspiciousActivity_SuspectedBotFarming = 101;
+}
+
+enum ESuspiciousBuildType {
+	k_ESuspiciousBuildType_None = 0;
+	k_ESuspiciousBuildType_NoGoldSpent = 1;
+	k_ESuspiciousBuildType_NoItems = 2;
+	k_ESuspiciousBuildType_NoSignificantItems = 3;
+	k_ESuspiciousBuildType_TooManyBoots = 4;
+	k_ESuspiciousBuildType_Bot1 = 101;
+	k_ESuspiciousBuildType_Bot2 = 102;
+	k_ESuspiciousBuildType_Bot3 = 103;
+	k_ESuspiciousBuildType_Bot4 = 104;
+	k_ESuspiciousBuildType_Bot5 = 105;
+}
 
 message CMsgSpawnLootGreevil {
 	optional bool rare = 1;
@@ -78,7 +122,6 @@ message CMsgGameServerInfo {
 message CMsgLeaverDetected {
 	optional fixed64 steam_id = 1;
 	optional .DOTALeaverStatus_t leaver_status = 2 [default = DOTA_LEAVER_NONE];
-	optional bool obsolete_mass_disconnect = 3;
 	optional .CMsgLeaverState leaver_state = 4;
 	optional uint32 server_cluster = 5;
 	optional .ENetworkDisconnectionReason disconnect_reason = 6 [default = NETWORK_DISCONNECT_INVALID];
@@ -104,6 +147,7 @@ message CMsgDOTAFantasyPlayerStats {
 	optional float healing = 13;
 	optional uint32 tower_kills = 14;
 	optional uint32 roshan_kills = 15;
+	optional uint32 team_id = 16;
 }
 
 message CMsgGameMatchSignOut {
@@ -139,6 +183,7 @@ message CMsgGameMatchSignOut {
 			optional uint32 misses = 31;
 			repeated .CMatchPlayerAbilityUpgrade ability_upgrades = 32;
 			repeated .CMatchAdditionalUnitInventory additional_units_inventory = 33;
+			optional uint32 net_worth = 34;
 		}
 
 		repeated .CMsgGameMatchSignOut.CTeam.CPlayer players = 1;
@@ -169,6 +214,24 @@ message CMsgGameMatchSignOut {
 	optional uint32 server_version = 19;
 	optional bool mass_disconnect = 21;
 	repeated .CMsgGameMatchSignOut.CAdditionalSignoutMsg additional_msgs = 20;
+}
+
+message CMsgSignOutDraftInfo {
+	optional uint32 radiant_captain_account_id = 1;
+	optional uint32 dire_captain_account_id = 2;
+	repeated .CMatchHeroSelectEvent picks_bans = 3;
+}
+
+message CMsgSignOutBotInfo {
+	message CMsgBotSlotDifficulty {
+		optional uint32 slot = 1;
+		optional .DOTABotDifficulty bot_difficulty = 2 [default = BOT_DIFFICULTY_PASSIVE];
+	}
+
+	optional bool allow_cheats = 1;
+	optional .DOTABotDifficulty bot_difficulty = 2 [default = BOT_DIFFICULTY_PASSIVE];
+	optional bool created_lobby = 3;
+	repeated .CMsgSignOutBotInfo.CMsgBotSlotDifficulty bot_slot_difficulties = 4;
 }
 
 message CMsgGameMatchSignoutResponse {
@@ -245,6 +308,7 @@ message CMsgDOTALiveScoreboardUpdate {
 			optional uint32 account_id = 23;
 			optional float position_x = 24;
 			optional float position_y = 25;
+			optional uint32 net_worth = 26;
 		}
 
 		repeated .CMsgDOTALiveScoreboardUpdate.Team.Player players = 1;
@@ -278,8 +342,9 @@ message CMsgDOTARequestPlayerResourcesResponse {
 
 message CMsgDOTARequestBatchPlayerResources {
 	repeated uint32 account_ids = 1 [packed = true];
-	optional bool rank_use_competitive = 2;
-	repeated bool rank_use_solo = 3 [packed = true];
+	optional bool legacy_rank_use_competitive = 2;
+	repeated bool legacy_rank_use_solo = 3 [packed = true];
+	repeated uint32 rank_types = 4 [packed = true];
 }
 
 message CMsgDOTARequestBatchPlayerResourcesResponse {
@@ -403,7 +468,7 @@ message CMsgDOTAAwardEventPoints {
 		optional uint32 account_id = 1;
 		optional int32 points = 2;
 		optional int32 premium_points = 3;
-		optional int32 rank = 4;
+		optional uint32 trade_ban_time = 5;
 	}
 
 	repeated .CMsgDOTAAwardEventPoints.AwardPoints award_points = 1;
@@ -471,6 +536,7 @@ message CMsgServerGrantSurveyPermission {
 		optional uint32 expire_time = 3;
 		optional uint64 survey_key = 4;
 		optional uint64 extra_data = 5;
+		optional uint64 extra_data_32 = 6;
 	}
 
 	repeated .CMsgServerGrantSurveyPermission.Survey surveys = 1;
@@ -499,5 +565,66 @@ message CMsgServerToGCMatchConnectionStats {
 
 message CMsgServerGCUpdateSpectatorCount {
 	optional uint32 spectator_count = 1;
+}
+
+message CSerializedCombatLog {
+	message Dictionary {
+		message DictString {
+			required uint32 id = 1;
+			required string value = 2;
+		}
+
+		repeated .CSerializedCombatLog.Dictionary.DictString strings = 1;
+	}
+
+	optional uint32 version = 1;
+	optional .CSerializedCombatLog.Dictionary dictionary = 2;
+	repeated .CMsgDOTACombatLogEntry entries = 3;
+}
+
+message CMsgServerToGCGetAdditionalEquips {
+	repeated uint32 account_ids = 1;
+}
+
+message CMsgServerToGCGetAdditionalEquipsResponse {
+	message CUserEquips {
+		optional uint32 account_id = 1;
+		repeated .CAdditionalEquipSlot equips = 2;
+	}
+
+	repeated .CMsgServerToGCGetAdditionalEquipsResponse.CUserEquips equips = 1;
+}
+
+message CMsgServerToGCGetProfileCard {
+	repeated uint32 account_ids = 1;
+}
+
+message CMsgServerToGCGetProfileCardResponse {
+	repeated .CMsgDOTAProfileCard cards = 1;
+}
+
+message CMsgServerToGCVictoryPredictions {
+	message Record {
+		optional uint32 account_id = 1;
+		optional uint64 item_id = 2;
+		optional bool victory = 3;
+	}
+
+	repeated .CMsgServerToGCVictoryPredictions.Record records = 1;
+}
+
+message CMsgSuspiciousActivity {
+	optional uint32 account_id = 1;
+	optional .ESuspiciousActivity activity = 2 [default = k_ESuspiciousActivity_VAC_MultipleInstances];
+	optional sint32 intdata1 = 3;
+	optional sint32 intdata2 = 4;
+	optional uint32 time = 5;
+}
+
+message CMsgServerToGCRequestStatus {
+}
+
+message CMsgServerToGCRequestStatus_Response {
+	optional uint32 response = 1;
 }
 

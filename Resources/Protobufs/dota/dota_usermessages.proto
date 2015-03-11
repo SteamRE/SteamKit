@@ -80,6 +80,8 @@ enum EDotaUserMessages {
 	DOTA_UM_ModifierAlert = 136;
 	DOTA_UM_HPManaAlert = 137;
 	DOTA_UM_GlyphAlert = 138;
+	DOTA_UM_BeastChat = 139;
+	DOTA_UM_SpectatorPlayerUnitOrders = 140;
 }
 
 enum DOTA_CHAT_MESSAGE {
@@ -168,6 +170,8 @@ enum DOTA_CHAT_MESSAGE {
 	CHAT_MESSAGE_VICTORY_PREDICTION_SINGLE_USER_CONFIRM = 90;
 	CHAT_MESSAGE_EFFIGY_KILL = 91;
 	CHAT_MESSAGE_VOICE_TEXT_BANNED_OVERFLOW = 92;
+	CHAT_MESSAGE_YEAR_BEAST_KILLED = 93;
+	CHAT_MESSAGE_PAUSE_COUNTDOWN = 94;
 }
 
 enum DOTA_NO_BATTLE_POINTS_REASONS {
@@ -252,7 +256,17 @@ enum DOTA_POSITION_CATEGORY {
 	DOTA_POSITION_ROSHAN_PIT = 11;
 	DOTA_POSITION_RADIANT_BASE = 12;
 	DOTA_POSITION_DIRE_BASE = 13;
-	DOTA_POSITION_OTHER = 14;
+	DOTA_POSITION_FOUNTAIN = 14;
+	DOTA_POSITION_OTHER = 15;
+}
+
+enum DOTA_ABILITY_TARGET_TYPE {
+	DOTA_ABILITY_TARGET_NONE = 0;
+	DOTA_ABILITY_TARGET_SELF = 1;
+	DOTA_ABILITY_TARGET_ALLY_HERO = 2;
+	DOTA_ABILITY_TARGET_ALLY_CREEP = 3;
+	DOTA_ABILITY_TARGET_ENEMY_HERO = 4;
+	DOTA_ABILITY_TARGET_ENEMY_CREEP = 5;
 }
 
 enum EHeroStatType {
@@ -367,6 +381,7 @@ message CDOTAUserMsg_ModifierAlert {
 	optional string class_name = 2;
 	optional uint32 stack_count = 3;
 	optional bool is_debuff = 4;
+	optional uint32 target_entindex = 5;
 }
 
 message CDOTAUserMsg_HPManaAlert {
@@ -448,6 +463,16 @@ message CDOTAUserMsg_SpectatorPlayerClick {
 	optional int32 target_index = 3;
 }
 
+message CDOTAUserMsg_SpectatorPlayerUnitOrders {
+	optional int32 entindex = 1;
+	optional int32 order_type = 2;
+	repeated int32 units = 3;
+	optional int32 target_index = 4;
+	optional int32 ability_index = 5;
+	optional .CMsgVector position = 6;
+	optional bool queue = 7;
+}
+
 message CDOTAUserMsg_NevermoreRequiem {
 	optional int32 entity_handle = 1;
 	optional int32 lines = 2;
@@ -490,7 +515,7 @@ message CDOTAUserMsg_PredictionResult {
 		optional uint32 num_correct = 2;
 		optional uint32 num_fails = 3;
 		optional .CDOTAUserMsg_PredictionResult.Prediction.EResult result = 4 [default = k_eResult_ItemGranted];
-		optional uint32 granted_item_def = 5;
+		repeated uint32 granted_item_defs = 6;
 	}
 
 	optional uint32 account_id = 1;
@@ -855,6 +880,13 @@ message CDOTAUserMsg_StatsHeroMinuteDetails {
 	optional uint32 total_xp = 6;
 	optional uint32 net_worth = 7;
 	optional uint32 harvested_creep_gold = 8;
+	optional uint32 claimed_farm = 9;
+	optional uint32 wards_placed = 10;
+	optional uint32 runes_collected = 11;
+	optional uint32 tps_used = 12;
+	repeated uint32 mana_spent = 13;
+	repeated uint32 damage_absorbed = 14;
+	repeated uint32 damage_done = 15;
 }
 
 message CDOTAUserMsg_StatsTeamMinuteDetails {
@@ -879,6 +911,10 @@ message CDOTAUserMsg_StatsTeamMinuteDetails {
 message CDOTAUserMsg_StatsPlayerKillShare {
 	optional int32 player_id = 1;
 	optional float kill_share_percent = 2;
+	optional float player_loc_x = 3;
+	optional float player_loc_y = 4;
+	optional float health_percent = 5;
+	optional float mana_percent = 6;
 }
 
 message CDOTAUserMsg_StatsKillDetails {
@@ -891,11 +927,26 @@ message CDOTAUserMsg_StatsKillDetails {
 }
 
 message CDOTAUserMsg_StatsMatchDetails {
+	message CDOTAUserMsg_StatsFightTeamDetails {
+		repeated uint32 participants = 1;
+		repeated uint32 deaths = 2;
+		optional uint32 gold_delta = 3;
+		optional uint32 xp_delta = 4;
+	}
+
+	message CDOTAUserMsg_StatsFightDetails {
+		optional float start_time = 1;
+		optional float end_time = 2;
+		optional .CDOTAUserMsg_StatsMatchDetails.CDOTAUserMsg_StatsFightTeamDetails radiant_fight_details = 3;
+		optional .CDOTAUserMsg_StatsMatchDetails.CDOTAUserMsg_StatsFightTeamDetails dire_fight_details = 4;
+	}
+
 	repeated .CDOTAUserMsg_StatsHeroLookup hero_lookup = 1;
 	repeated .CDOTAUserMsg_StatsTeamMinuteDetails radiant_stats = 2;
 	repeated .CDOTAUserMsg_StatsTeamMinuteDetails dire_stats = 3;
 	repeated .CDOTAUserMsg_StatsKillDetails radiant_kills = 4;
 	repeated .CDOTAUserMsg_StatsKillDetails dire_kills = 5;
+	repeated .CDOTAUserMsg_StatsMatchDetails.CDOTAUserMsg_StatsFightDetails fight_details = 6;
 }
 
 message CDOTAUserMsg_MiniTaunt {
@@ -916,5 +967,12 @@ message CMsgCombatAnalyzerPlayerStat {
 message CMsgCombatAnalyzerStats {
 	optional uint64 match_id = 1;
 	repeated .CMsgCombatAnalyzerPlayerStat player_stats = 2;
+}
+
+message CDOTAUserMsg_BeastChat {
+	optional uint32 team = 1;
+	optional string format = 2;
+	optional string message = 3;
+	optional string target = 4;
 }
 

@@ -214,6 +214,27 @@ message IpAddressMask {
 	optional uint32 token = 6;
 }
 
+message CMsgGC_ServerQuestUpdateData {
+	message PlayerQuestData {
+		message QuestItemData {
+			optional uint64 quest_item_id = 1;
+			optional int32 quest_points_earned = 2;
+		}
+
+		message LevelProgressData {
+			optional uint32 xp_points = 1;
+			optional int32 xp_category = 2;
+		}
+
+		optional uint32 quester_account_id = 1;
+		repeated .CMsgGC_ServerQuestUpdateData.PlayerQuestData.QuestItemData quest_item_data = 2;
+		repeated .CMsgGC_ServerQuestUpdateData.PlayerQuestData.LevelProgressData level_progress_data = 3;
+		optional uint32 time_played = 4;
+	}
+
+	repeated .CMsgGC_ServerQuestUpdateData.PlayerQuestData player_quest_data = 1;
+}
+
 message CMsgGCCStrike15_v2_MatchmakingGCOperationalStats {
 	optional int32 packetid = 1;
 	repeated .OperationalStatisticDescription namekeys = 2;
@@ -378,6 +399,7 @@ message CMsgGCCStrike15_v2_MatchmakingServerMatchEnd {
 	optional uint32 replay_token = 5;
 	optional uint32 replay_cluster_id = 6;
 	optional bool aborted_match = 7;
+	optional .CMsgGC_ServerQuestUpdateData match_end_quest_data = 8;
 }
 
 message CMsgGCCStrike15_v2_MatchmakingClient2GCHello {
@@ -597,20 +619,6 @@ message CMsgGCCStrike15_v2_GC2ClientTextMsg {
 message CMsgGCCStrike15_v2_Client2GCTextMsg {
 	optional uint32 id = 1;
 	repeated bytes args = 2;
-}
-
-message CMsgGC_ServerQuestUpdateData {
-	message PlayerQuestData {
-		message QuestItemData {
-			optional uint64 quest_item_id = 1;
-			optional int32 quest_points_earned = 2;
-		}
-
-		optional uint32 quester_account_id = 1;
-		repeated .CMsgGC_ServerQuestUpdateData.PlayerQuestData.QuestItemData quest_item_data = 2;
-	}
-
-	repeated .CMsgGC_ServerQuestUpdateData.PlayerQuestData player_quest_data = 1;
 }
 
 message CMsgGCCStrike15_v2_MatchEndRunRewardDrops {

@@ -86,6 +86,8 @@ enum EGCSystemMsg {
 	k_EGCMsgDPPartnerMicroTxnsResponse = 513;
 	k_EGCMsgGetIPASN = 514;
 	k_EGCMsgGetIPASNResponse = 515;
+	k_EGCMsgGetAppFriendsList = 516;
+	k_EGCMsgGetAppFriendsListResponse = 517;
 }
 
 enum ESOMsg {

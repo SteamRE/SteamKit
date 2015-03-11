@@ -1,5 +1,7 @@
 import "google/protobuf/descriptor.proto";
 
+option cc_generic_services = false;
+
 extend .google.protobuf.EnumValueOptions {
 	optional string network_connection_token = 50500;
 }
