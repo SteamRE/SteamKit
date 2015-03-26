@@ -234,6 +234,12 @@ message CSourceTVGame {
 	optional .DOTA_GameMode game_mode = 21 [default = DOTA_GAMEMODE_NONE];
 	optional uint32 lobby_type = 22;
 	optional uint64 custom_game_id = 24;
+	optional uint32 average_rank = 25;
+	optional uint32 radiant_kills = 26;
+	optional uint32 dire_kills = 27;
+	optional uint32 barracks_state = 28;
+	optional uint64 group_id = 29;
+	optional uint32 sort_score = 30;
 }
 
 message CMsgSourceTVGamesResponse {
@@ -249,6 +255,24 @@ message CMsgFindSourceTVGames {
 	optional uint32 heroid = 5;
 	optional bool team_game = 6;
 	optional uint64 custom_game_id = 10;
+}
+
+message CMsgClientToGCFindTopSourceTVGames {
+	optional string search_key = 1;
+	optional uint32 league_id = 2;
+	optional uint32 hero_id = 3;
+	optional uint32 start_game = 4;
+	optional uint32 game_list_index = 5;
+}
+
+message CMsgGCToClientFindTopSourceTVGamesResponse {
+	optional string search_key = 1;
+	optional uint32 league_id = 2;
+	optional uint32 hero_id = 3;
+	optional uint32 start_game = 4;
+	optional uint32 num_games = 5;
+	optional uint32 game_list_index = 6;
+	repeated .CSourceTVGame game_list = 7;
 }
 
 message CMsgSpectateFriendGame {
@@ -771,6 +795,7 @@ message CMsgDOTAPopup {
 		KICKED_FROM_QUEUE_EVENT_ENDING = 58;
 		EVENT_NO_LOW_PRIORITY = 59;
 		MM_LOW_PRI_ONLY_CASUAL_AR = 60;
+		CNY2015_ONCE_PER_ROUND = 61;
 	}
 
 	optional .CMsgDOTAPopup.PopupID id = 1 [default = KICKED_FROM_LOBBY];
@@ -2119,7 +2144,6 @@ message CMsgDOTARedeemEventPrizeResponse {
 
 	optional .CMsgDOTARedeemEventPrizeResponse.ResultCode result = 1 [default = Success];
 	optional uint32 remaining_points = 2;
-	optional uint32 remaining_premium_points = 3;
 	optional uint32 event_id = 4;
 }
 
@@ -2135,23 +2159,11 @@ message CMsgDOTAGetEventPointsResponse {
 	}
 
 	optional uint32 total_points = 1;
-	optional uint32 total_premium_points = 2;
 	optional uint32 event_id = 3;
 	optional uint32 points = 4;
-	optional uint32 premium_points = 5;
 	repeated .CMsgDOTAGetEventPointsResponse.Action completed_actions = 6;
 	optional uint32 account_id = 7;
-}
-
-message CMsgDOTAExchangeEventPoints {
-	optional uint32 event_id = 1;
-}
-
-message CMsgDOTAExchangeEventPointsResponse {
-	optional bool success = 1;
-	optional uint32 total_points = 2;
-	optional uint32 total_premium_points = 3;
-	optional uint32 event_id = 4;
+	optional bool owned = 8;
 }
 
 message CMsgDOTALiveLeagueGameUpdate {
@@ -2212,15 +2224,6 @@ message CMsgDOTAGetPlayerMatchHistoryResponse {
 }
 
 message CMsgDOTAStartDailyHeroChallenge {
-}
-
-message CMsgGCNewBloomModeState {
-}
-
-message CMsgGCNewBloomModeStateResponse {
-	optional bool active = 1;
-	optional uint32 switch_time = 2;
-	optional uint32 round = 3;
 }
 
 message CMsgGCNotificationsRequest {
