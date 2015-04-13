@@ -189,8 +189,8 @@
     <Compile Include="Base\Generated\SteamMsgAppTicket.cs" />
     <Compile Include="Base\Generated\SteamMsgBase.cs" />
     <Compile Include="Base\Generated\SteamMsgClientServer.cs" />
-    <Compile Include="Dota\Handlers\DotaGCHandler\DotaGCHandler.cs" />
-    <Compile Include="Dota\Handlers\DotaGCHandler\Callbacks.cs" />
+    <Compile Include="GC\Dota\DotaGCHandler.cs" />
+    <Compile Include="GC\Dota\Callbacks.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="3rd party.txt">

@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Threading;
+using SteamKit2.GC.Dota;
 using SteamKit2.Internal;
 using System.Diagnostics;
 using ProtoBuf;
