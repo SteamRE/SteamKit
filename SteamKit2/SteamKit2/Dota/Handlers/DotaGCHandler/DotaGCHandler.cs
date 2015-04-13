@@ -353,6 +353,7 @@ namespace SteamKit2
             chatMsg.Body.text = message;
             Send(chatMsg, 570);
         }
+
         /// <summary>
         /// Leaves chat channel
         /// </summary>
@@ -444,7 +445,7 @@ namespace SteamKit2
             }
         }
 
-        public void HandleInvitationCreated(IPacketGCMsg obj)
+        private void HandleInvitationCreated(IPacketGCMsg obj)
         {
             var msg = new ClientGCMsgProtobuf<GC.Internal.CMsgInvitationCreated>(obj);
             this.Client.PostCallback(new InvitationCreated(msg.Body));
@@ -454,16 +455,23 @@ namespace SteamKit2
         {
 			var sub = new ClientGCMsgProtobuf<CMsgSOCacheSubscribed>(obj);
 			foreach(var cache in sub.Body.objects){
-				if (cache.type_id == 2004) {
-					HandleLobbySnapshot(cache.object_data [0]);
-				}else if (cache.type_id == 2003)
-				{
-				    HandlePartySnapshot(cache.object_data[0]);
-                }
-                else if (cache.type_id == 2006)
-                {
-                    HandlePartyInviteSnapshot(cache.object_data[0]);
-                }
+                HandleSubscribedType(cache);
+            }
+        }
+
+        private void HandleSubscribedType(CMsgSOCacheSubscribed.SubscribedType cache)
+        {
+            if (cache.type_id == 2004)
+            {
+                HandleLobbySnapshot(cache.object_data[0]);
+            }
+            else if (cache.type_id == 2003)
+            {
+                HandlePartySnapshot(cache.object_data[0]);
+            }
+            else if (cache.type_id == 2006)
+            {
+                HandlePartyInviteSnapshot(cache.object_data[0]);
             }
         }
 
@@ -641,6 +649,11 @@ namespace SteamKit2
         {
             var wel = new ClientGCMsgProtobuf<CMsgClientWelcome>(msg);
             this.Client.PostCallback(new GCWelcomeCallback(wel.Body));
+
+            //Handle any cache subscriptions
+            foreach (var cache in wel.Body.outofdate_subscribed_caches)
+                foreach (var obj in cache.objects)
+                    HandleSubscribedType(obj);
         }
     }
 }
