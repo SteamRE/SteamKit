@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Threading;
+using SteamKit2.GC.Dota;
 using SteamKit2.Internal;
 using System.Diagnostics;
 using ProtoBuf;
@@ -54,6 +55,7 @@ namespace SteamKit2
             this.AddHandler( new SteamTrading() );
             this.AddHandler( new SteamUnifiedMessages() );
             this.AddHandler( new SteamScreenshots() );
+            this.AddHandler( new DotaGCHandler() );
 
             using ( var process = Process.GetCurrentProcess())
             {
@@ -95,6 +97,11 @@ namespace SteamKit2
         public void RemoveHandler( ClientMsgHandler handler )
         {
             this.RemoveHandler( handler.GetType() );
+        }
+
+        public void ClearHandlers()
+        {
+            handlers.Clear();
         }
 
         /// <summary>
@@ -255,7 +262,6 @@ namespace SteamKit2
             };
         }
 
-
         /// <summary>
         /// Called when a client message is received from the network.
         /// </summary>
@@ -336,6 +342,5 @@ namespace SteamKit2
 
             PostCallback( new ServerListCallback( listMsg.Body ) );
         }
-
     }
 }

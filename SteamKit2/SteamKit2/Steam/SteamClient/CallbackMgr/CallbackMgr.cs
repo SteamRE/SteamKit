@@ -210,6 +210,11 @@ namespace SteamKit2
             registeredCallbacks.Remove( call );
         }
 
+        public void Unregister()
+        {
+            registeredCallbacks.Clear();
+        }
+
         void Handle( ICallbackMsg call )
         {
             registeredCallbacks
