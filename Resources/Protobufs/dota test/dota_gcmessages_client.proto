@@ -429,6 +429,7 @@ message CMsgJoinableCustomLobbiesResponseEntry {
 	optional uint32 member_count = 4;
 	optional uint32 leader_account_id = 5;
 	optional string leader_name = 6;
+	optional string custom_map_name = 7;
 }
 
 message CMsgJoinableCustomLobbiesResponse {
@@ -766,6 +767,10 @@ message CMsgDOTAPopup {
 		NEED_INITIAL_SKILL_IN_PARTY = 54;
 		TARGET_ENGINE_MISMATCH = 55;
 		VAC_NOT_VERIFIED = 56;
+		KICKED_FROM_QUEUE_EVENT_STARTING = 57;
+		KICKED_FROM_QUEUE_EVENT_ENDING = 58;
+		EVENT_NO_LOW_PRIORITY = 59;
+		MM_LOW_PRI_ONLY_CASUAL_AR = 60;
 	}
 
 	optional .CMsgDOTAPopup.PopupID id = 1 [default = KICKED_FROM_LOBBY];
@@ -1595,6 +1600,11 @@ message CMsgDOTAWelcome {
 		optional .CMsgSHA1Digest client_language_file_sha1 = 3;
 	}
 
+	message CExtraMsg {
+		optional uint32 id = 1;
+		optional bytes contents = 2;
+	}
+
 	optional bool tournament_admin = 3;
 	optional bool tournament_broadcaster = 4;
 	optional uint32 store_item_hash = 5;
@@ -1616,6 +1626,7 @@ message CMsgDOTAWelcome {
 	repeated .CMsgDOTAWelcome.LocalizationDigest localization_digests = 23;
 	optional bool is_perfect_world_test_account = 24;
 	repeated .EIngameEvent active_events = 25;
+	repeated .CMsgDOTAWelcome.CExtraMsg extra_messages = 26;
 }
 
 message CSODOTAGameHeroFavorites {
@@ -1800,7 +1811,8 @@ message CMsgSockAddrList {
 }
 
 message CMsgMatchmakingGroupServerSample {
-	repeated .CMsgSockAddrList servers_by_group = 1;
+	repeated .CMsgSockAddrList servers_by_group_legacy_swapped = 1;
+	repeated .CMsgSockAddrList servers_by_group = 5;
 	optional uint32 servers_to_ping = 2;
 	optional uint32 reply_odds = 3;
 	optional uint32 reply_detailed_odds = 4;
@@ -1822,6 +1834,7 @@ message CMsgDOTAMatchmakingStatsRequest {
 
 message CMsgDOTAMatchmakingStatsResponse {
 	repeated uint32 searching_players_by_group = 2;
+	repeated uint32 searching_players_by_group_source2 = 7;
 	optional uint32 disabled_groups = 3;
 	optional .CMsgMatchmakingGroupServerSample gameserver_sample = 4;
 	optional .CMsgMatchmakingGroupServerSample gameserver_sample_source2 = 6;
@@ -2446,12 +2459,22 @@ message CMsgClientToGCRecordCompendiumStats {
 	optional uint32 links_followed = 5;
 }
 
-message CMsgClientToGCRecordStatueStats {
-	optional uint32 view_duration_s = 1;
-	optional bool created_statue = 2;
-}
-
 message CMsgGCToClientEventStatusChanged {
 	repeated .EIngameEvent active_events = 1;
+}
+
+message CMsgClientToGCExchangeItemsForOffering {
+	repeated uint64 item_ids = 1;
+}
+
+message CMsgClientToGCExchangeItemsForOfferingResponse {
+	enum EResponse {
+		eResponse_Success = 0;
+		eResponse_OfferingDisabled = 1;
+		eResponse_InvalidItems = 2;
+		eResponse_InternalError = 3;
+	}
+
+	optional .CMsgClientToGCExchangeItemsForOfferingResponse.EResponse response = 1 [default = eResponse_Success];
 }
 

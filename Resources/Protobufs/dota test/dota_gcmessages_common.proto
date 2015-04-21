@@ -500,11 +500,20 @@ enum EDOTAGCMsg {
 	k_EMsgGCToClientEventStatusChanged = 7565;
 	k_EMsgGCHasItemDefsQuery = 7566;
 	k_EMsgGCHasItemDefsResponse = 7567;
-	k_EMsgClientToGCRecordStatueStats = 7568;
 	k_EMsgGCToGCReplayMonitorValidateReplay = 7569;
+	k_EMsgClientToGCExchangeItemsForOffering = 7570;
+	k_EMsgClientToGCExchangeItemsForOfferingResponse = 7571;
+	k_EMsgLobbyEventPoints = 7572;
+	k_EMsgGCToGCGetCustomGameTickets = 7573;
+	k_EMsgGCToGCGetCustomGameTicketsResponse = 7574;
+	k_EMsgGCToClientNewBloomTimingUpdated = 7575;
+	k_EMsgGCToGCCustomGamePlayed = 7576;
+	k_EMsgGCToGCGrantEventPointsToUser = 7577;
+	k_EMsgGCToGCSetEventMMPanicFlushTime = 7578;
 	k_EMsgGCDev_GrantWarKill = 8001;
 	k_EMsgClientToGCCreateTeamShowcase = 8002;
 	k_EMsgGCToClientTeamShowcaseCreateResult = 8003;
+	k_EMsgServerToGCLockCharmTrading = 8004;
 }
 
 enum DOTA_GameMode {
@@ -645,6 +654,7 @@ enum MatchType {
 	MATCH_TYPE_COMPETITIVE = 4;
 	MATCH_TYPE_WEEKEND_TOURNEY = 5;
 	MATCH_TYPE_CASUAL_1V1 = 6;
+	MATCH_TYPE_EVENT = 7;
 }
 
 enum DOTABotDifficulty {
@@ -682,6 +692,8 @@ enum ETournamentType {
 
 enum EIngameEvent {
 	k_EIngameEvent_OraclePA = 0;
+	k_EIngameEvent_CNY2015 = 1;
+	k_EIngameEvent_CNY2015_PreBeast = 2;
 }
 
 enum LobbyDotaTVDelay {
@@ -696,6 +708,8 @@ enum EMatchOutcome {
 	k_EMatchOutcome_DireVictory = 3;
 	k_EMatchOutcome_NotScored_PoorNetworkConditions = 64;
 	k_EMatchOutcome_NotScored_Leaver = 65;
+	k_EMatchOutcome_NotScored_ServerCrash = 66;
+	k_EMatchOutcome_NotScored_NeverStarted = 67;
 }
 
 enum EDOTAGCSessionNeed {
@@ -854,6 +868,7 @@ message CSODOTAParty {
 	optional uint32 low_priority_games_remaining = 35;
 	optional uint32 min_level = 36;
 	optional uint32 max_level = 37;
+	repeated .EIngameEvent active_ingame_events = 39;
 }
 
 message CSODOTAPartyInvite {
@@ -940,6 +955,7 @@ message CDOTALobbyMember {
 	repeated .CDOTALobbyMember.CDOTALobbyMemberXPBonus xp_bonuses = 27;
 	optional sint32 rank_change = 29;
 	optional bool cameraman = 30;
+	repeated uint32 custom_game_product_ids = 31;
 }
 
 message CLobbyTeamDetails {
@@ -1057,11 +1073,20 @@ message CSODOTALobby {
 	repeated .CSODOTALobby.CExtraMsg extra_messages = 62;
 	optional .CDOTASaveGame save_game = 63;
 	optional bool first_blood_happened = 65;
-	optional bool legacy_discard_match_results = 66;
 	optional .EMatchOutcome match_outcome = 70 [default = k_EMatchOutcome_Unknown];
 	optional bool mass_disconnect = 67;
 	optional uint64 custom_game_id = 68;
 	repeated .EIngameEvent active_ingame_events = 69;
+}
+
+message CMsgLobbyEventPoints {
+	message AccountPoints {
+		optional uint32 account_id = 1;
+		optional uint32 normal_points = 2;
+	}
+
+	optional uint32 event_id = 1;
+	repeated .CMsgLobbyEventPoints.AccountPoints account_points = 2;
 }
 
 message CMsgDOTAGenericResult {
@@ -1159,15 +1184,17 @@ message CProtoItemSocket_AssetModifier {
 	optional uint32 asset_modifier = 2;
 }
 
+message CProtoItemSocket_AssetModifier_DESERIALIZE_FROM_STRING_ONLY {
+	optional .CProtoItemSocket socket = 1;
+	optional uint32 asset_modifier = 2;
+	optional uint32 anim_modifier = 3;
+	optional uint32 ability_effect = 4;
+}
+
 message CProtoItemSocket_Autograph {
 	optional .CProtoItemSocket socket = 1;
 	optional string autograph = 2;
 	optional uint32 autograph_id = 3;
-}
-
-message CProtoItemSocket_AbilityEffect {
-	optional .CProtoItemSocket socket = 1;
-	optional uint32 ability_effect = 2;
 }
 
 message CProtoItemSocket_StaticVisuals {
@@ -1379,5 +1406,12 @@ message CMsgDOTAProfileCard {
 	optional uint32 account_id = 1;
 	optional uint32 background_def_index = 2;
 	repeated .CMsgDOTAProfileCard.Slot slots = 3;
+}
+
+message CMsgGCToClientNewBloomTimingUpdated {
+	optional bool is_active = 1;
+	optional uint32 next_transition_time = 2;
+	optional uint32 bonus_amount = 3;
+	optional uint32 standby_duration = 4;
 }
 
