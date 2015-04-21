@@ -592,3 +592,7 @@ message CMsgScreenInformationChanged {
 	optional uint32 override_height = 3;
 }
 
+message CMsgClearAllCookies {
+	optional uint32 browser_handle = 1;
+}
+

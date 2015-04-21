@@ -1151,6 +1151,8 @@ message CMsgClientPICSChangesSinceRequest {
 	optional uint32 since_change_number = 1;
 	optional bool send_app_info_changes = 2;
 	optional bool send_package_info_changes = 3;
+	optional uint32 num_app_info_cached = 4;
+	optional uint32 num_package_info_cached = 5;
 }
 
 message CMsgClientPICSChangesSinceResponse {
@@ -1171,6 +1173,8 @@ message CMsgClientPICSChangesSinceResponse {
 	optional bool force_full_update = 3;
 	repeated .CMsgClientPICSChangesSinceResponse.PackageChange package_changes = 4;
 	repeated .CMsgClientPICSChangesSinceResponse.AppChange app_changes = 5;
+	optional bool force_full_app_update = 6;
+	optional bool force_full_package_update = 7;
 }
 
 message CMsgClientPICSProductInfoRequest {
