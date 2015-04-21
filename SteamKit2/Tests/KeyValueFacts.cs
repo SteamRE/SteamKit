@@ -1,8 +1,7 @@
-﻿using Xunit;
-using System.Linq;
-using SteamKit2;
+﻿using System;
 using System.IO;
-using System;
+using SteamKit2;
+using Xunit;
 
 namespace Tests
 {
