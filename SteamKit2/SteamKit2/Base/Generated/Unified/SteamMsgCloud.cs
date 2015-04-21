@@ -800,6 +800,15 @@ namespace SteamKit2.Unified.Internal
       get { return _can_encrypt; }
       set { _can_encrypt = value; }
     }
+
+    private bool _is_shared_file = default(bool);
+    [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"is_shared_file", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool is_shared_file
+    {
+      get { return _is_shared_file; }
+      set { _is_shared_file = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

@@ -139,6 +139,15 @@ namespace SteamKit2.Unified.Internal
       get { return _cellid; }
       set { _cellid = value; }
     }
+
+    private bool _as_rtmp = default(bool);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"as_rtmp", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool as_rtmp
+    {
+      get { return _as_rtmp; }
+      set { _as_rtmp = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -632,6 +641,15 @@ namespace SteamKit2.Unified.Internal
     {
       get { return _in_game; }
       set { _in_game = value; }
+    }
+
+    private int _result = default(int);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"result", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int result
+    {
+      get { return _result; }
+      set { _result = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

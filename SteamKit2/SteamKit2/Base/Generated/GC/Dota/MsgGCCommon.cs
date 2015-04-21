@@ -2031,6 +2031,15 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _active_ingame_events; }
     }
   
+
+    private PartnerAccountType _partner_type = PartnerAccountType.PARTNER_NONE;
+    [global::ProtoBuf.ProtoMember(73, IsRequired = false, Name=@"partner_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(PartnerAccountType.PARTNER_NONE)]
+    public PartnerAccountType partner_type
+    {
+      get { return _partner_type; }
+      set { _partner_type = value; }
+    }
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CExtraMsg")]
   public partial class CExtraMsg : global::ProtoBuf.IExtensible
   {
@@ -2171,6 +2180,15 @@ namespace SteamKit2.GC.Dota.Internal
     {
       get { return _normal_points; }
       set { _normal_points = value; }
+    }
+
+    private bool _owned = default(bool);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"owned", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool owned
+    {
+      get { return _owned; }
+      set { _owned = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -4119,6 +4137,15 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _standby_duration; }
       set { _standby_duration = value; }
     }
+
+    private uint _transition_time = default(uint);
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"transition_time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint transition_time
+    {
+      get { return _transition_time; }
+      set { _transition_time = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -5118,12 +5145,6 @@ namespace SteamKit2.GC.Dota.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCGrantEarnedLicense", Value=7399)]
       k_EMsgGCToGCGrantEarnedLicense = 7399,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgDOTAExchangeEventPoints", Value=7400)]
-      k_EMsgDOTAExchangeEventPoints = 7400,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgDOTAExchangeEventPointsResponse", Value=7401)]
-      k_EMsgDOTAExchangeEventPointsResponse = 7401,
-            
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgDOTALiveLeagueGameUpdate", Value=7402)]
       k_EMsgDOTALiveLeagueGameUpdate = 7402,
             
@@ -5177,12 +5198,6 @@ namespace SteamKit2.GC.Dota.Internal
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCUpdateLiveLeagueGameInfo", Value=7420)]
       k_EMsgGCToGCUpdateLiveLeagueGameInfo = 7420,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCNewBloomModeState", Value=7421)]
-      k_EMsgGCNewBloomModeState = 7421,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCNewBloomModeStateResponse", Value=7422)]
-      k_EMsgGCNewBloomModeStateResponse = 7422,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCMakeOffering", Value=7423)]
       k_EMsgGCMakeOffering = 7423,
@@ -5643,6 +5658,18 @@ namespace SteamKit2.GC.Dota.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCSetEventMMPanicFlushTime", Value=7578)]
       k_EMsgGCToGCSetEventMMPanicFlushTime = 7578,
             
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGameserverCrashReport", Value=7579)]
+      k_EMsgGameserverCrashReport = 7579,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGameserverCrashReportResponse", Value=7580)]
+      k_EMsgGameserverCrashReportResponse = 7580,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToClientSteamDatagramTicket", Value=7581)]
+      k_EMsgGCToClientSteamDatagramTicket = 7581,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCGrantEventOwnership", Value=7582)]
+      k_EMsgGCToGCGrantEventOwnership = 7582,
+            
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCDev_GrantWarKill", Value=8001)]
       k_EMsgGCDev_GrantWarKill = 8001,
             
@@ -5653,7 +5680,16 @@ namespace SteamKit2.GC.Dota.Internal
       k_EMsgGCToClientTeamShowcaseCreateResult = 8003,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgServerToGCLockCharmTrading", Value=8004)]
-      k_EMsgServerToGCLockCharmTrading = 8004
+      k_EMsgServerToGCLockCharmTrading = 8004,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgDOTACNY2015EventPointUsage", Value=8005)]
+      k_EMsgDOTACNY2015EventPointUsage = 8005,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCFindTopSourceTVGames", Value=8009)]
+      k_EMsgClientToGCFindTopSourceTVGames = 8009,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToClientFindTopSourceTVGamesResponse", Value=8010)]
+      k_EMsgGCToClientFindTopSourceTVGamesResponse = 8010
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"DOTA_GameMode", EnumPassthru=true)]

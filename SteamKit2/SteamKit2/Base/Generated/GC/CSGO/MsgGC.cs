@@ -4687,6 +4687,15 @@ namespace SteamKit2.GC.CSGO.Internal
       get { return _gscookieid; }
       set { _gscookieid = value; }
     }
+
+    private ulong _uniqueid = default(ulong);
+    [global::ProtoBuf.ProtoMember(19, IsRequired = false, Name=@"uniqueid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong uniqueid
+    {
+      get { return _uniqueid; }
+      set { _uniqueid = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -4991,6 +5000,50 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCCStrike15_v2_GC2ClientTournamentInfo")]
+  public partial class CMsgGCCStrike15_v2_GC2ClientTournamentInfo : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCCStrike15_v2_GC2ClientTournamentInfo() {}
+    
+
+    private uint _eventid = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"eventid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint eventid
+    {
+      get { return _eventid; }
+      set { _eventid = value; }
+    }
+
+    private uint _stageid = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"stageid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint stageid
+    {
+      get { return _stageid; }
+      set { _stageid = value; }
+    }
+
+    private uint _game_type = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"game_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint game_type
+    {
+      get { return _game_type; }
+      set { _game_type = value; }
+    }
+    private readonly global::System.Collections.Generic.List<uint> _teamids = new global::System.Collections.Generic.List<uint>();
+    [global::ProtoBuf.ProtoMember(4, Name=@"teamids", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public global::System.Collections.Generic.List<uint> teamids
+    {
+      get { return _teamids; }
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     [global::ProtoBuf.ProtoContract(Name=@"ECsgoGCMsg", EnumPassthru=true)]
     public enum ECsgoGCMsg
     {
@@ -5185,7 +5238,10 @@ namespace SteamKit2.GC.CSGO.Internal
       k_EMsgGCCStrike15_v2_ClientRequestJoinServerData = 9164,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCCStrike15_v2_ClientRequestNewMission", Value=9165)]
-      k_EMsgGCCStrike15_v2_ClientRequestNewMission = 9165
+      k_EMsgGCCStrike15_v2_ClientRequestNewMission = 9165,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCCStrike15_v2_GC2ClientTournamentInfo", Value=9167)]
+      k_EMsgGCCStrike15_v2_GC2ClientTournamentInfo = 9167
     }
   
 }

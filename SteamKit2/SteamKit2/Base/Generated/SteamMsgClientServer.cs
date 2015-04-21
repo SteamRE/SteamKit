@@ -7487,6 +7487,24 @@ namespace SteamKit2.Internal
       get { return _send_package_info_changes; }
       set { _send_package_info_changes = value; }
     }
+
+    private uint _num_app_info_cached = default(uint);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"num_app_info_cached", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint num_app_info_cached
+    {
+      get { return _num_app_info_cached; }
+      set { _num_app_info_cached = value; }
+    }
+
+    private uint _num_package_info_cached = default(uint);
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"num_package_info_cached", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint num_package_info_cached
+    {
+      get { return _num_package_info_cached; }
+      set { _num_package_info_cached = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -7538,6 +7556,24 @@ namespace SteamKit2.Internal
       get { return _app_changes; }
     }
   
+
+    private bool _force_full_app_update = default(bool);
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"force_full_app_update", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool force_full_app_update
+    {
+      get { return _force_full_app_update; }
+      set { _force_full_app_update = value; }
+    }
+
+    private bool _force_full_package_update = default(bool);
+    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"force_full_package_update", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool force_full_package_update
+    {
+      get { return _force_full_package_update; }
+      set { _force_full_package_update = value; }
+    }
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"PackageChange")]
   public partial class PackageChange : global::ProtoBuf.IExtensible
   {
