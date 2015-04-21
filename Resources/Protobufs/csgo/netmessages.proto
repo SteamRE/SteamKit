@@ -11,6 +11,7 @@ enum NET_Messages {
 	net_StringCmd = 5;
 	net_SetConVar = 6;
 	net_SignonState = 7;
+	net_PlayerAvatarData = 100;
 }
 
 enum CLC_Messages {
@@ -137,6 +138,11 @@ message CNETMsg_File {
 
 message CNETMsg_SplitScreenUser {
 	optional int32 slot = 1;
+}
+
+message CNETMsg_PlayerAvatarData {
+	optional uint32 accountid = 1;
+	optional bytes rgb = 2;
 }
 
 message CCLCMsg_ClientInfo {

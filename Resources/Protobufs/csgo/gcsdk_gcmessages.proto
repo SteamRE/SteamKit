@@ -171,6 +171,7 @@ message CWorkshop_PopulateItemDescriptions_Request {
 	message SingleItemDescription {
 		optional uint32 gameitemid = 1;
 		optional string item_description = 2;
+		optional bool one_per_account = 3;
 	}
 
 	message ItemDescriptionsLanguageBlock {

@@ -68,6 +68,7 @@ enum ECsgoGCMsg {
 	k_EMsgGCCStrike15_v2_ClientRequestJoinFriendData = 9163;
 	k_EMsgGCCStrike15_v2_ClientRequestJoinServerData = 9164;
 	k_EMsgGCCStrike15_v2_ClientRequestNewMission = 9165;
+	k_EMsgGCCStrike15_v2_GC2ClientTournamentInfo = 9167;
 }
 
 message GameServerPing {
@@ -772,6 +773,7 @@ message CMsgCStrike15Welcome {
 	optional uint32 last_time_played = 12;
 	optional uint32 last_ip_address = 13;
 	optional uint64 gscookieid = 18;
+	optional uint64 uniqueid = 19;
 }
 
 message CMsgGCCStrike15_v2_ClientVarValueNotificationInfo {
@@ -821,5 +823,12 @@ message CMsgGCCStrike15_v2_Server2GCPureServerValidationFailure {
 	optional int32 len = 6;
 	optional int32 pack_number = 7;
 	optional int32 pack_file_id = 8;
+}
+
+message CMsgGCCStrike15_v2_GC2ClientTournamentInfo {
+	optional uint32 eventid = 1;
+	optional uint32 stageid = 2;
+	optional uint32 game_type = 3;
+	repeated uint32 teamids = 4;
 }
 
