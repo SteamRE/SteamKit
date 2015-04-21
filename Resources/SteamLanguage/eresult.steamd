@@ -95,6 +95,10 @@ enum EResult
 	AccountLoginDeniedThrottle = 87;
 	TwoFactorCodeMismatch = 88;
 	TwoFactorActivationCodeMismatch = 89;
-	AccountAssociatedToMultiplePartners = 90;
+	AccountAssociatedToMultiplePlayers = 90;
 	NotModified = 91;
+	NoMobileDeviceAvailable = 92;
+	TimeIsOutOfSync = 93;
+	SMSCodeFailed = 94;
+	TooManyAccountsAccessThisResource = 95;
 };
