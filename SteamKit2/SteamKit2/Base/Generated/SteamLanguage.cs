@@ -1827,7 +1827,9 @@ namespace SteamKit2
 		DataCorruption = 53,
 		DiskFull = 54,
 		RemoteCallFailed = 55,
+		[Obsolete( "renamed to PasswordUnset" )]
 		PasswordNotSet = 56,
+		PasswordUnset = 56,
 		ExternalAccountUnlinked = 57,
 		PSNTicketInvalid = 58,
 		ExternalAccountAlreadyLinked = 59,
@@ -1837,14 +1839,18 @@ namespace SteamKit2
 		AccountLogonDenied = 63,
 		CannotUseOldPassword = 64,
 		InvalidLoginAuthCode = 65,
+		[Obsolete( "renamed to AccountLogonDeniedNoMail" )]
 		AccountLogonDeniedNoMailSent = 66,
+		AccountLogonDeniedNoMail = 66,
 		HardwareNotCapableOfIPT = 67,
 		IPTInitError = 68,
 		ParentalControlRestricted = 69,
 		FacebookQueryError = 70,
 		ExpiredLoginAuthCode = 71,
 		IPLoginRestrictionFailed = 72,
+		[Obsolete( "renamed to AccountLockedDown" )]
 		AccountLocked = 73,
+		AccountLockedDown = 73,
 		AccountLogonDeniedVerifiedEmailRequired = 74,
 		NoMatchingURL = 75,
 		BadResponse = 76,
@@ -1856,13 +1862,21 @@ namespace SteamKit2
 		RestrictedDevice = 82,
 		RegionLocked = 83,
 		RateLimitExceeded = 84,
+		[Obsolete( "renamed to AccountLoginDeniedNeedTwoFactor" )]
 		AccountLogonDeniedNeedTwoFactorCode = 85,
+		AccountLoginDeniedNeedTwoFactor = 85,
 		[Obsolete( "renamed to ItemDeleted" )]
 		ItemOrEntryHasBeenDeleted = 86,
 		ItemDeleted = 86,
 		AccountLoginDeniedThrottle = 87,
 		TwoFactorCodeMismatch = 88,
+		TwoFactorActivationCodeMismatch = 89,
+		AccountAssociatedToMultiplePlayers = 90,
 		NotModified = 91,
+		NoMobileDeviceAvailable = 92,
+		TimeIsOutOfSync = 93,
+		SMSCodeFailed = 94,
+		TooManyAccountsAccessThisResource = 95,
 	}
 	public enum EUniverse
 	{
@@ -1881,6 +1895,7 @@ namespace SteamKit2
 		InviteGame = 3,
 		[Obsolete( "No longer supported by clients" )]
 		Emote = 4,
+		[Obsolete( "Listen for LobbyGameCreated_t callback instead" )]
 		LobbyGameStart = 5,
 		LeftConversation = 6,
 		Entered = 7,
@@ -2177,6 +2192,7 @@ namespace SteamKit2
 		AuthTicketCanceled = 6,
 		AuthTicketInvalidAlreadyUsed = 7,
 		AuthTicketInvalid = 8,
+		PublisherIssuedBan = 9,
 	}
 	public enum EChatRoomEnterResponse
 	{
