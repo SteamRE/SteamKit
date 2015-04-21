@@ -73,6 +73,16 @@ namespace SteamKit2
             }
         }
 
+        public static void WriteNullTermString( this Stream stream, string value, Encoding encoding )
+        {
+            var dataLength = encoding.GetByteCount( value );
+            var data = new byte[ dataLength + 1 ];
+            encoding.GetBytes( value, 0, value.Length, data, 0 );
+            data[ dataLength ] = 0x00; // '\0'
+
+            stream.Write( data, 0, data.Length );
+        }
+
         private static byte[] bufferCache;
 
         public static byte[] ReadBytesCached( this Stream stream, int len )
