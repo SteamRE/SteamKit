@@ -25,13 +25,13 @@ namespace NetHookAnalyzer2
 			var firstItem = x as ListViewItem;
 			if (firstItem == null)
 			{
-				throw new ArgumentException("NetHookItemSequentialComparer can only compare ListViewItems.", "x");
+				throw new ArgumentException("NetHookListViewItemSequentialComparer can only compare ListViewItems.", "x");
 			}
 
 			var secondItem = y as ListViewItem;
 			if (secondItem == null)
 			{
-				throw new ArgumentException("NetHookItemSequentialComparer can only compare ListViewItems.", "y");
+				throw new ArgumentException("NetHookListViewItemSequentialComparer can only compare ListViewItems.", "y");
 			}
 
 			return Compare(firstItem, secondItem);
