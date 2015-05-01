@@ -60,6 +60,7 @@
     <Compile Include="NetHookDump.cs" />
     <Compile Include="NetHookItem.cs" />
     <Compile Include="NetHookItemExtensions.cs" />
+    <Compile Include="NetHookListViewItemSequentialComparer.cs" />
     <Compile Include="NetHookItemTreeBuilder.cs" />
     <Compile Include="NetHookItemTreeBuilder_MessageReading.cs" />
     <Compile Include="NetHookItemTreeBuilder_TreeNodeBuilding.cs" />
