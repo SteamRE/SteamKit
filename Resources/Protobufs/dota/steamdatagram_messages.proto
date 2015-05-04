@@ -14,6 +14,8 @@ enum ESteamDatagramMsgID {
 	k_ESteamDatagramMsg_DataServerToRouter = 11;
 	k_ESteamDatagramMsg_DataRouterToClient = 12;
 	k_ESteamDatagramMsg_Stats = 13;
+	k_ESteamDatagramMsg_ClientPingSampleRequest = 14;
+	k_ESteamDatagramMsg_ClientPingSampleReply = 15;
 }
 
 message CMsgSteamDatagramRouterPingReply {
@@ -144,5 +146,20 @@ message CMsgSteamDatagramConnectionStatsRouterToServer {
 	optional uint32 seq_num_c2s = 6;
 	optional fixed64 client_steam_id = 7;
 	optional uint32 client_session_id = 8;
+}
+
+message CMsgSteamDatagramClientPingSampleRequest {
+	optional fixed32 client_cookie = 1;
+}
+
+message CMsgSteamDatagramClientPingSampleReply {
+	message RoutingCluster {
+		optional fixed32 id = 1;
+		optional uint32 front_ping_ms = 2;
+		optional uint32 e2e_ping_ms = 3;
+	}
+
+	optional fixed32 client_cookie = 1;
+	repeated .CMsgSteamDatagramClientPingSampleReply.RoutingCluster routing_clusters = 2;
 }
 

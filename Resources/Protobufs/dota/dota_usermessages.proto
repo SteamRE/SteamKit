@@ -82,6 +82,7 @@ enum EDotaUserMessages {
 	DOTA_UM_GlyphAlert = 138;
 	DOTA_UM_BeastChat = 139;
 	DOTA_UM_SpectatorPlayerUnitOrders = 140;
+	DOTA_UM_CompendiumState = 141;
 }
 
 enum DOTA_CHAT_MESSAGE {
@@ -974,5 +975,14 @@ message CDOTAUserMsg_BeastChat {
 	optional string format = 2;
 	optional string message = 3;
 	optional string target = 4;
+}
+
+message CDOTAUserMsg_CompendiumStatePlayer {
+	optional uint32 player_id = 1;
+	optional uint32 level = 2;
+}
+
+message CDOTAUserMsg_CompendiumState {
+	repeated .CDOTAUserMsg_CompendiumStatePlayer compendium_players = 1;
 }
 
