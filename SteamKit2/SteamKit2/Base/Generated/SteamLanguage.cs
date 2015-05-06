@@ -1905,7 +1905,11 @@ namespace SteamKit2
 		NoMobileDeviceAvailable = 92,
 		TimeIsOutOfSync = 93,
 		SMSCodeFailed = 94,
+		[Obsolete( "renamed to AccountLimitExceeded" )]
 		TooManyAccountsAccessThisResource = 95,
+		AccountLimitExceeded = 95,
+		AccountActivityLimitExceeded = 96,
+		PhoneActivityLimitExceeded = 97,
 	}
 	public enum EUniverse
 	{
@@ -1932,6 +1936,9 @@ namespace SteamKit2
 		WasBanned = 9,
 		Disconnected = 10,
 		HistoricalChat = 11,
+		Reserved1 = 12,
+		Reserved2 = 13,
+		LinkBlocked = 14,
 	}
 	public enum EPersonaState
 	{
@@ -2568,7 +2575,8 @@ namespace SteamKit2
 		Merch = 11,
 		ControllerBinding = 12,
 		SteamworksAccessInvite = 13,
-		Max = 14,
+		SteamVideo = 14,
+		Max = 15,
 	}
 	public enum EWorkshopFileAction
 	{
@@ -2651,6 +2659,8 @@ namespace SteamKit2
 		Windows = 1,
 		OSX = 2,
 		PS3 = 4,
+		Linux = 8,
+		[Obsolete]
 		Reserved1 = 8,
 		Reserved2 = 16,
 		All = -1,

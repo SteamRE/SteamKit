@@ -100,5 +100,8 @@ enum EResult
 	NoMobileDeviceAvailable = 92;
 	TimeIsOutOfSync = 93;
 	SMSCodeFailed = 94;
-	TooManyAccountsAccessThisResource = 95;
+	TooManyAccountsAccessThisResource = 95; obsolete "renamed to AccountLimitExceeded"
+	AccountLimitExceeded = 95;
+	AccountActivityLimitExceeded = 96;
+	PhoneActivityLimitExceeded = 97;
 };
