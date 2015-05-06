@@ -604,8 +604,10 @@ namespace SteamKit2
 		ClientDPSendSpecialSurveyResponseReply = 1623,
 		DPStoreSaleStatistics = 1624,
 		ClientDPUpdateAppJobReport = 1625,
+		[Obsolete]
 		ClientDPSteam2AppStarted = 1627,
 		DPUpdateContentEvent = 1626,
+		ClientDPContentStatsReport = 1630,
 		BaseCM = 1700,
 		CMSetAllowState = 1701,
 		CMSpewAllowState = 1702,
@@ -1107,6 +1109,10 @@ namespace SteamKit2
 		AMPlayerGetClanBasicDetailsResponse = 4390,
 		AMTwoFactorRecoverAuthenticatorRequest = 4402,
 		AMTwoFactorRecoverAuthenticatorResponse = 4403,
+		AMValidatePasswordResetCodeAndSendSmsRequest = 4406,
+		AMValidatePasswordResetCodeAndSendSmsResponse = 4407,
+		AMGetAccountResetDetailsRequest = 4408,
+		AMGetAccountResetDetailsResponse = 4409,
 		BasePSRange = 5000,
 		PSCreateShoppingCart = 5001,
 		PSCreateShoppingCartResponse = 5002,
@@ -1376,15 +1382,25 @@ namespace SteamKit2
 		DFSStartTransfer = 5618,
 		DFSTransferComplete = 5619,
 		BaseMDS = 5800,
+		[Obsolete]
 		ClientMDSLoginRequest = 5801,
+		[Obsolete]
 		ClientMDSLoginResponse = 5802,
+		[Obsolete]
 		ClientMDSUploadManifestRequest = 5803,
+		[Obsolete]
 		ClientMDSUploadManifestResponse = 5804,
+		[Obsolete]
 		ClientMDSTransmitManifestDataChunk = 5805,
+		[Obsolete]
 		ClientMDSHeartbeat = 5806,
+		[Obsolete]
 		ClientMDSUploadDepotChunks = 5807,
+		[Obsolete]
 		ClientMDSUploadDepotChunksResponse = 5808,
+		[Obsolete]
 		ClientMDSInitDepotBuildRequest = 5809,
+		[Obsolete]
 		ClientMDSInitDepotBuildResponse = 5810,
 		AMToMDSGetDepotDecryptionKey = 5812,
 		MDSToAMGetDepotDecryptionKeyResponse = 5813,
@@ -1398,10 +1414,15 @@ namespace SteamKit2
 		ClientMDSInitWorkshopBuildRequest = 5816,
 		[Obsolete]
 		ClientMDSInitWorkshopBuildResponse = 5817,
+		[Obsolete]
 		ClientMDSGetDepotManifest = 5818,
+		[Obsolete]
 		ClientMDSGetDepotManifestResponse = 5819,
+		[Obsolete]
 		ClientMDSGetDepotManifestChunk = 5820,
+		[Obsolete]
 		ClientMDSUploadRateTest = 5823,
+		[Obsolete]
 		ClientMDSUploadRateTestResponse = 5824,
 		MDSDownloadDepotChunksAck = 5825,
 		MDSContentServerStatsBroadcast = 5826,
@@ -1416,14 +1437,18 @@ namespace SteamKit2
 		MDSUpdateContentServerConfig = 5835,
 		MDSGetServerListForUser = 5836,
 		MDSGetServerListForUserResponse = 5837,
+		[Obsolete]
 		ClientMDSRegisterAppBuild = 5838,
+		[Obsolete]
 		ClientMDSRegisterAppBuildResponse = 5839,
 		ClientMDSSetAppBuildLive = 5840,
 		ClientMDSSetAppBuildLiveResponse = 5841,
 		ClientMDSGetPrevDepotBuild = 5842,
 		ClientMDSGetPrevDepotBuildResponse = 5843,
 		MDSToCSFlushChunk = 5844,
+		[Obsolete]
 		ClientMDSSignInstallScript = 5845,
+		[Obsolete]
 		ClientMDSSignInstallScriptResponse = 5846,
 		CSBase = 6200,
 		CSPing = 6201,
@@ -1580,6 +1605,10 @@ namespace SteamKit2
 		ClientUCMEnumerateUserSubscribedFilesWithUpdatesResponse = 7379,
 		UCMPublishedFileContentUpdated = 7380,
 		UCMPublishedFileUpdated = 7381,
+		ClientWorkshopItemChangesRequest = 7382,
+		ClientWorkshopItemChangesResponse = 7383,
+		ClientWorkshopItemInfoRequest = 7384,
+		ClientWorkshopItemInfoResponse = 7385,
 		FSBase = 7500,
 		ClientRichPresenceUpload = 7501,
 		ClientRichPresenceRequest = 7502,
