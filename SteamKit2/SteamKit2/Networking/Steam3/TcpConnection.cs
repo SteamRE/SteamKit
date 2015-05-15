@@ -111,9 +111,30 @@ namespace SteamKit2
                 return;
             }
 
-            netThread = new Thread(NetLoop);
-            netThread.Name = "TcpConnection Thread";
-            netThread.Start();
+            DebugLog.WriteLine("TcpConnection", "Connected to {0}", destination);
+
+            try
+            {
+                lock (netLock)
+                {
+                    netStream = new NetworkStream(socket, false);
+                    netReader = new BinaryReader(netStream);
+                    netWriter = new BinaryWriter(netStream);
+                    netFilter = null;
+
+                    netThread = new Thread(NetLoop);
+                    netThread.Name = "TcpConnection Thread";
+                }
+
+                netThread.Start();
+
+                OnConnected(EventArgs.Empty);
+            }
+            catch (Exception ex)
+            {
+                DebugLog.WriteLine("TcpConnection", "Exception while setting up connection to {0}: {1}", destination, ex);
+                Release(true);
+            }
         }
 
         private void TryConnect(Object sender)
@@ -168,10 +189,6 @@ namespace SteamKit2
 
                     destination = endPoint;
                     socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-                    netStream = new NetworkStream(socket, false);
-                    netReader = new BinaryReader(netStream);
-                    netWriter = new BinaryWriter(netStream);
-                    netFilter = null;
 
                     ThreadPool.QueueUserWorkItem(TryConnect, timeout);
                 }
@@ -296,7 +313,7 @@ namespace SteamKit2
         {
             lock (netLock)
             {
-                if (socket == null)
+                if (socket == null || netStream == null)
                 {
                     DebugLog.WriteLine("TcpConnection", "Attempting to send client message when not connected: {0}", clientMsg.MsgType);
                     return;
