@@ -593,8 +593,9 @@ enum EMsg
 	ClientDPSendSpecialSurveyResponseReply = 1623;
 	DPStoreSaleStatistics = 1624;
 	ClientDPUpdateAppJobReport = 1625;
-	ClientDPSteam2AppStarted = 1627;
+	ClientDPSteam2AppStarted = 1627; obsolete
 	DPUpdateContentEvent = 1626;
+	ClientDPContentStatsReport = 1630;
 	
 	BaseCM = 1700;
 	CMSetAllowState = 1701;
@@ -1105,6 +1106,10 @@ enum EMsg
 	
 	AMTwoFactorRecoverAuthenticatorRequest = 4402;
 	AMTwoFactorRecoverAuthenticatorResponse = 4403;
+    AMValidatePasswordResetCodeAndSendSmsRequest = 4406;
+    AMValidatePasswordResetCodeAndSendSmsResponse = 4407;
+    AMGetAccountResetDetailsRequest = 4408;
+    AMGetAccountResetDetailsResponse = 4409;
 	
 	BasePSRange = 5000;
 	PSCreateShoppingCart = 5001;
@@ -1373,16 +1378,16 @@ enum EMsg
 	DFSTransferComplete = 5619;
 	
 	BaseMDS = 5800;
-	ClientMDSLoginRequest = 5801;
-	ClientMDSLoginResponse = 5802;
-	ClientMDSUploadManifestRequest = 5803;
-	ClientMDSUploadManifestResponse = 5804;
-	ClientMDSTransmitManifestDataChunk = 5805;
-	ClientMDSHeartbeat = 5806;
-	ClientMDSUploadDepotChunks = 5807;
-	ClientMDSUploadDepotChunksResponse = 5808;
-	ClientMDSInitDepotBuildRequest = 5809;
-	ClientMDSInitDepotBuildResponse = 5810;
+	ClientMDSLoginRequest = 5801; obsolete
+	ClientMDSLoginResponse = 5802; obsolete
+	ClientMDSUploadManifestRequest = 5803; obsolete
+	ClientMDSUploadManifestResponse = 5804; obsolete
+	ClientMDSTransmitManifestDataChunk = 5805; obsolete
+	ClientMDSHeartbeat = 5806; obsolete
+	ClientMDSUploadDepotChunks = 5807; obsolete
+	ClientMDSUploadDepotChunksResponse = 5808; obsolete
+	ClientMDSInitDepotBuildRequest = 5809; obsolete
+	ClientMDSInitDepotBuildResponse = 5810; obsolete
 	AMToMDSGetDepotDecryptionKey = 5812;
 	MDSToAMGetDepotDecryptionKeyResponse = 5813;
 	MDSGetVersionsForDepot = 5814;
@@ -1391,11 +1396,11 @@ enum EMsg
 	MDSSetPublicVersionForDepotResponse = 5817; obsolete
 	ClientMDSInitWorkshopBuildRequest = 5816; obsolete
 	ClientMDSInitWorkshopBuildResponse = 5817; obsolete
-	ClientMDSGetDepotManifest = 5818;
-	ClientMDSGetDepotManifestResponse = 5819;
-	ClientMDSGetDepotManifestChunk = 5820;
-	ClientMDSUploadRateTest = 5823;
-	ClientMDSUploadRateTestResponse = 5824;
+	ClientMDSGetDepotManifest = 5818; obsolete
+	ClientMDSGetDepotManifestResponse = 5819; obsolete
+	ClientMDSGetDepotManifestChunk = 5820; obsolete
+	ClientMDSUploadRateTest = 5823; obsolete
+	ClientMDSUploadRateTestResponse = 5824; obsolete
 	MDSDownloadDepotChunksAck = 5825;
 	MDSContentServerStatsBroadcast = 5826;
 	MDSContentServerConfigRequest = 5827;
@@ -1409,15 +1414,15 @@ enum EMsg
 	MDSUpdateContentServerConfig = 5835;
 	MDSGetServerListForUser = 5836;
 	MDSGetServerListForUserResponse = 5837;
-	ClientMDSRegisterAppBuild = 5838;
-	ClientMDSRegisterAppBuildResponse = 5839;
+	ClientMDSRegisterAppBuild = 5838; obsolete
+	ClientMDSRegisterAppBuildResponse = 5839; obsolete
 	ClientMDSSetAppBuildLive = 5840;
 	ClientMDSSetAppBuildLiveResponse = 5841;
 	ClientMDSGetPrevDepotBuild = 5842;
 	ClientMDSGetPrevDepotBuildResponse = 5843;
 	MDSToCSFlushChunk = 5844;
-	ClientMDSSignInstallScript = 5845;
-	ClientMDSSignInstallScriptResponse = 5846;
+	ClientMDSSignInstallScript = 5845; obsolete
+	ClientMDSSignInstallScriptResponse = 5846; obsolete
 	
 	CSBase = 6200;
 	CSPing = 6201;
@@ -1580,6 +1585,10 @@ enum EMsg
 	ClientUCMEnumerateUserSubscribedFilesWithUpdatesResponse = 7379;
 	UCMPublishedFileContentUpdated = 7380;
 	UCMPublishedFileUpdated = 7381;
+    ClientWorkshopItemChangesRequest = 7382;
+    ClientWorkshopItemChangesResponse = 7383;
+    ClientWorkshopItemInfoRequest = 7384;
+    ClientWorkshopItemInfoResponse = 7385;
 	
 	FSBase = 7500;
 	ClientRichPresenceUpload = 7501;

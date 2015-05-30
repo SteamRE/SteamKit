@@ -61,6 +61,8 @@ message CPublishedFile_GetDetails_Request {
 	optional bool includekvtags = 5 [(description) = "If true, return key value tags in the returned details."];
 	optional bool includevotes = 6 [(description) = "If true, return vote data in the returned details."];
 	optional bool short_description = 8 [(description) = "If true, return a short description instead of the full description."];
+	optional bool includeforsaledata = 10 [(description) = "If true, return pricing data, if applicable."];
+	optional bool includemetadata = 11 [(description) = "If true, populate the metadata field."];
 }
 
 message PublishedFileDetails {
@@ -93,6 +95,23 @@ message PublishedFileDetails {
 		optional float score = 1;
 		optional uint32 votes_up = 2;
 		optional uint32 votes_down = 3;
+	}
+
+	message ForSaleData {
+		optional bool is_for_sale = 1;
+		optional uint32 price_category = 2;
+		optional .PublishedFileDetails.EPublishedFileForSaleStatus estatus = 3 [default = k_PFFSS_NotForSale];
+		optional uint32 price_category_floor = 4;
+		optional bool price_is_pay_what_you_want = 5;
+		optional uint32 discount_percentage = 6;
+	}
+
+	enum EPublishedFileForSaleStatus {
+		k_PFFSS_NotForSale = 0;
+		k_PFFSS_PendingApproval = 1;
+		k_PFFSS_ApprovedForSale = 2;
+		k_PFFSS_RejectedForSale = 3;
+		k_PFFSS_NoLongerForSale = 4;
 	}
 
 	optional uint32 result = 1;
@@ -151,6 +170,8 @@ message PublishedFileDetails {
 	repeated .PublishedFileDetails.KVTag kvtags = 54;
 	optional .PublishedFileDetails.VoteData vote_data = 55;
 	optional uint32 time_subscribed = 56 [(description) = "Only valid in PublishedFile.GetUserFiles and not normal PublishedFile.GetDetail calls"];
+	optional .PublishedFileDetails.ForSaleData for_sale_data = 57 [(description) = "Pricing information, if applicable."];
+	optional string metadata = 58 [(description) = "Metadata associated with the item"];
 }
 
 message CPublishedFile_GetDetails_Response {
@@ -170,6 +191,7 @@ message CPublishedFile_GetUserFiles_Request {
 	optional uint32 filetype = 14 [(description) = "(Optional) File type to match files to."];
 	optional uint32 creator_appid = 15 [(description) = "App Id of the app that published the files, only matched if specified."];
 	optional string match_cloud_filename = 16 [(description) = "Match this cloud filename if specified."];
+	optional uint32 cache_max_age_seconds = 27 [default = 0, (description) = "Allow stale data to be returned for the specified number of seconds."];
 	optional bool totalonly = 17 [(description) = "(Optional) If true, only return the total number of files that satisfy this query."];
 	optional bool ids_only = 18 [(description) = "(Optional) If true, only return the published file ids of files that satisfy this query."];
 	optional bool return_vote_data = 19 [default = true, (description) = "Return vote data"];
@@ -178,6 +200,8 @@ message CPublishedFile_GetUserFiles_Request {
 	optional bool return_previews = 22 [(description) = "Return preview image and video details in the file details"];
 	optional bool return_children = 23 [(description) = "Return child item ids in the file details"];
 	optional bool return_short_description = 24 [default = true, (description) = "Populate the short_description field instead of file_description"];
+	optional bool return_for_sale_data = 26 [(description) = "Return pricing information, if applicable"];
+	optional bool return_metadata = 28 [default = false, (description) = "Populate the metadata field"];
 }
 
 message CPublishedFile_GetUserFiles_Response {
@@ -210,6 +234,34 @@ message CPublishedFile_Update_Request {
 message CPublishedFile_Update_Response {
 }
 
+message CPublishedFile_GetChangeHistoryEntry_Request {
+	optional fixed64 publishedfileid = 1 [(description) = "Published file id of the file we'd like to get the change history for."];
+	optional uint32 timestamp = 2;
+}
+
+message CPublishedFile_GetChangeHistoryEntry_Response {
+	optional fixed64 publishedfileid = 1;
+	optional uint32 timestamp = 2;
+	optional string change_description = 3;
+}
+
+message CPublishedFile_GetChangeHistory_Request {
+	optional fixed64 publishedfileid = 1 [(description) = "Published file id of the file we'd like to get the change history for."];
+	optional bool total_only = 2 [(description) = "Return the total number of changes only."];
+	optional uint32 startindex = 3;
+	optional uint32 count = 4;
+}
+
+message CPublishedFile_GetChangeHistory_Response {
+	message ChangeLog {
+		optional uint32 timestamp = 1;
+		optional string change_description = 2;
+	}
+
+	repeated .CPublishedFile_GetChangeHistory_Response.ChangeLog changes = 1;
+	optional uint32 total = 2;
+}
+
 message CPublishedFile_RefreshVotingQueue_Request {
 	optional uint32 appid = 1;
 	optional uint32 matching_file_type = 2 [(description) = "EPublishedFileInfoMatchingFileType"];
@@ -238,6 +290,7 @@ message CPublishedFile_QueryFiles_Request {
 	optional fixed64 child_publishedfileid = 13 [(description) = "Find all items that reference the given item."];
 	optional uint32 days = 14 [(description) = "If query_type is k_PublishedFileQueryType_RankedByTrend, then this is the number of days to get votes for [1,7]."];
 	optional bool include_recent_votes_only = 15 [(description) = "If query_type is k_PublishedFileQueryType_RankedByTrend, then limit result set just to items that have votes within the day range given"];
+	optional uint32 cache_max_age_seconds = 31 [default = 0, (description) = "Allow stale data to be returned for the specified number of seconds."];
 	optional bool totalonly = 16 [(description) = "(Optional) If true, only return the total number of files that satisfy this query."];
 	optional bool return_vote_data = 17 [(description) = "Return vote data"];
 	optional bool return_tags = 18 [(description) = "Return tags in the file details"];
@@ -245,6 +298,8 @@ message CPublishedFile_QueryFiles_Request {
 	optional bool return_previews = 20 [(description) = "Return preview image and video details in the file details"];
 	optional bool return_children = 21 [(description) = "Return child item ids in the file details"];
 	optional bool return_short_description = 22 [(description) = "Populate the short_description field instead of file_description"];
+	optional bool return_for_sale_data = 30 [(description) = "Return pricing information, if applicable"];
+	optional bool return_metadata = 32 [default = false, (description) = "Populate the metadata"];
 }
 
 message CPublishedFile_QueryFiles_Response {
@@ -274,6 +329,12 @@ service PublishedFile {
 	}
 	rpc Update (.CPublishedFile_Update_Request) returns (.CPublishedFile_Update_Response) {
 		option (method_description) = "Updates information about a published file.";
+	}
+	rpc GetChangeHistoryEntry (.CPublishedFile_GetChangeHistoryEntry_Request) returns (.CPublishedFile_GetChangeHistoryEntry_Response) {
+		option (method_description) = "Returns data on a specific change history entry for a published file";
+	}
+	rpc GetChangeHistory (.CPublishedFile_GetChangeHistory_Request) returns (.CPublishedFile_GetChangeHistory_Response) {
+		option (method_description) = "Returns data on the change history for a published file";
 	}
 	rpc RefreshVotingQueue (.CPublishedFile_RefreshVotingQueue_Request) returns (.CPublishedFile_RefreshVotingQueue_Response) {
 		option (method_description) = "Refresh the voting queue for the user";

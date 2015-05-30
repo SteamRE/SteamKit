@@ -2013,7 +2013,9 @@ namespace SteamKit2.Internal
 
 	public class MsgClientSendGuestPassResponse : ISteamSerializableMessage
 	{
+		#pragma warning disable 0612
 		public EMsg GetEMsg() { return EMsg.ClientSendGuestPassResponse; }
+		#pragma warning restore 0612
 
 		// Static size: 4
 		public EResult Result { get; set; }

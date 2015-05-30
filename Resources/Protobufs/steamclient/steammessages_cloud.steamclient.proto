@@ -124,6 +124,7 @@ message CCloud_ClientBeginFileUpload_Request {
 	optional uint32 platforms_to_sync = 7 [default = 4294967295];
 	optional uint32 cell_id = 9 [(description) = "Client's cell ID so we can pick storage location."];
 	optional bool can_encrypt = 10 [(description) = "if true, client can encrypt the file before uploading it"];
+	optional bool is_shared_file = 11 [(description) = "if true, this is going to be UGC or a screenshot or some other shared file"];
 }
 
 message ClientCloudFileUploadBlockDetails {

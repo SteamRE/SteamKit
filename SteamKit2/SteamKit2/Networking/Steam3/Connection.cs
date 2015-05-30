@@ -61,6 +61,7 @@ namespace SteamKit2
 
     enum DisconnectedReason
     {
+        None,
         CleanDisconnect,
         ConnectionError
     }
@@ -102,7 +103,7 @@ namespace SteamKit2
         /// The <see cref="System.Net.IPEndPoint" /> of the current connection.
         /// This is non-null between <see cref="E:Connected"/> and <see cref="E:Disconnected"/>, inclusive.
         /// </summary>
-        public IPEndPoint CurrentEndPoint { get; protected set; }
+        public abstract IPEndPoint CurrentEndPoint { get; }
 
         /// <summary>
         /// Occurs when the physical connection is established.

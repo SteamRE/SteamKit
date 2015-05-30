@@ -102,6 +102,11 @@ namespace SteamKit2
             state = State.Disconnected;
         }
 
+        public override IPEndPoint CurrentEndPoint
+        {
+            get { return remoteEndPoint; }
+        }
+
         /// <summary>
         /// Connects to the specified CM server.
         /// </summary>
@@ -430,7 +435,6 @@ namespace SteamKit2
 
             DebugLog.WriteLine("UdpConnection", "Calling OnDisconnected");
             OnDisconnected( disconnectReason );
-            CurrentEndPoint = null;
         }
 
         /// <summary>
@@ -546,7 +550,6 @@ namespace SteamKit2
             remoteConnId = packet.Header.SourceConnID;
             inSeqHandled = packet.Header.SeqThis;
 
-            CurrentEndPoint = (IPEndPoint)sock.RemoteEndPoint;
             OnConnected( EventArgs.Empty );
         }
 

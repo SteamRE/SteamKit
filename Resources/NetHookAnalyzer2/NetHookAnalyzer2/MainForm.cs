@@ -18,6 +18,8 @@ namespace NetHookAnalyzer2
 
 			selectedListViewItem = null;
 			RepopulateInterface();
+
+			itemsListView.ListViewItemSorter = new NetHookListViewItemSequentialComparer();
 		}
 
 		IDisposable itemsListViewFirstColumnHiderDisposable;

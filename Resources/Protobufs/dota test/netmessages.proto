@@ -54,12 +54,6 @@ enum ESplitScreenMessageType {
 	MSG_SPLITSCREEN_REMOVEUSER = 1;
 }
 
-enum ENetworkSystemLimitReport {
-	NSLR_GlobalPacketRateExceeded = 0;
-	NSLR_ConnectionLessRateLimited = 1;
-	NSLR_NetChannelRateLimited = 2;
-}
-
 message CCLCMsg_ClientInfo {
 	optional fixed32 send_table_crc = 1;
 	optional uint32 server_count = 2;

@@ -69,7 +69,7 @@
 			// sequenceColumnHeader
 			// 
 			sequenceColumnHeader.Text = "#";
-			sequenceColumnHeader.Width = 30;
+			sequenceColumnHeader.Width = 39;
 			// 
 			// directionColumnHeader
 			// 
@@ -97,7 +97,7 @@
             this.fileToolStripMenuItem});
 			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip1.Name = "menuStrip1";
-			this.menuStrip1.Size = new System.Drawing.Size(872, 24);
+			this.menuStrip1.Size = new System.Drawing.Size(883, 24);
 			this.menuStrip1.TabIndex = 0;
 			this.menuStrip1.Text = "menuStrip1";
 			// 
@@ -148,8 +148,8 @@
 			// 
 			this.splitContainer.Panel2.Controls.Add(this.itemExplorerTreeView);
 			this.splitContainer.Panel2.Padding = new System.Windows.Forms.Padding(4);
-			this.splitContainer.Size = new System.Drawing.Size(872, 434);
-			this.splitContainer.SplitterDistance = 411;
+			this.splitContainer.Size = new System.Drawing.Size(883, 434);
+			this.splitContainer.SplitterDistance = 416;
 			this.splitContainer.TabIndex = 2;
 			// 
 			// filterContainerPanel
@@ -159,7 +159,7 @@
 			this.filterContainerPanel.Location = new System.Drawing.Point(0, 0);
 			this.filterContainerPanel.Name = "filterContainerPanel";
 			this.filterContainerPanel.Padding = new System.Windows.Forms.Padding(4, 4, 4, 0);
-			this.filterContainerPanel.Size = new System.Drawing.Size(411, 70);
+			this.filterContainerPanel.Size = new System.Drawing.Size(416, 70);
 			this.filterContainerPanel.TabIndex = 3;
 			// 
 			// filterGroupBox
@@ -172,7 +172,7 @@
 			this.filterGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.filterGroupBox.Location = new System.Drawing.Point(4, 4);
 			this.filterGroupBox.Name = "filterGroupBox";
-			this.filterGroupBox.Size = new System.Drawing.Size(403, 66);
+			this.filterGroupBox.Size = new System.Drawing.Size(408, 66);
 			this.filterGroupBox.TabIndex = 1;
 			this.filterGroupBox.TabStop = false;
 			this.filterGroupBox.Text = "Filter";
@@ -192,7 +192,7 @@
 			this.searchTextBox.ForeColor = System.Drawing.Color.LightGray;
 			this.searchTextBox.Location = new System.Drawing.Point(3, 43);
 			this.searchTextBox.Name = "searchTextBox";
-			this.searchTextBox.Size = new System.Drawing.Size(397, 20);
+			this.searchTextBox.Size = new System.Drawing.Size(402, 20);
 			this.searchTextBox.TabIndex = 1;
 			this.searchTextBox.Text = "Search...";
 			this.searchTextBox.TextChanged += new System.EventHandler(this.searchTextBox_TextChanged);
@@ -241,7 +241,7 @@
 			this.listViewContainerPanel.Location = new System.Drawing.Point(0, 0);
 			this.listViewContainerPanel.Name = "listViewContainerPanel";
 			this.listViewContainerPanel.Padding = new System.Windows.Forms.Padding(4, 74, 4, 4);
-			this.listViewContainerPanel.Size = new System.Drawing.Size(411, 434);
+			this.listViewContainerPanel.Size = new System.Drawing.Size(416, 434);
 			this.listViewContainerPanel.TabIndex = 2;
 			// 
 			// itemsListView
@@ -258,7 +258,7 @@
 			this.itemsListView.Location = new System.Drawing.Point(4, 74);
 			this.itemsListView.MultiSelect = false;
 			this.itemsListView.Name = "itemsListView";
-			this.itemsListView.Size = new System.Drawing.Size(403, 356);
+			this.itemsListView.Size = new System.Drawing.Size(408, 356);
 			this.itemsListView.TabIndex = 0;
 			this.itemsListView.UseCompatibleStateImageBehavior = false;
 			this.itemsListView.View = System.Windows.Forms.View.Details;
@@ -269,14 +269,14 @@
 			this.itemExplorerTreeView.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.itemExplorerTreeView.Location = new System.Drawing.Point(4, 4);
 			this.itemExplorerTreeView.Name = "itemExplorerTreeView";
-			this.itemExplorerTreeView.Size = new System.Drawing.Size(449, 426);
+			this.itemExplorerTreeView.Size = new System.Drawing.Size(455, 426);
 			this.itemExplorerTreeView.TabIndex = 0;
 			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(872, 458);
+			this.ClientSize = new System.Drawing.Size(883, 458);
 			this.Controls.Add(this.splitContainer);
 			this.Controls.Add(this.menuStrip1);
 			this.Name = "MainForm";

@@ -176,6 +176,12 @@ message CMsgApplySticker {
 	optional uint32 baseitem_defidx = 4;
 }
 
+message CMsgApplyStatTrakSwap {
+	optional uint64 tool_item_id = 1;
+	optional uint64 item_1_item_id = 2;
+	optional uint64 item_2_item_id = 3;
+}
+
 message CMsgApplyStrangePart {
 	optional uint64 strange_part_item_id = 1;
 	optional uint64 item_item_id = 2;

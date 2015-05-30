@@ -1,6 +1,8 @@
 import "google/protobuf/descriptor.proto";
 import "networkbasetypes.proto";
 
+option cc_generic_services = false;
+
 enum CLC_Messages {
 	clc_ClientInfo = 20;
 	clc_Move = 21;
@@ -47,6 +49,7 @@ enum SVC_Messages {
 	svc_GameEvent = 67;
 	svc_TempEntities = 68;
 	svc_GameEventList = 69;
+	svc_FullFrameSplit = 70;
 }
 
 enum VoiceDataFormat_t {
@@ -149,8 +152,7 @@ message CCLCMsg_LoadingProgress {
 }
 
 message CCLCMsg_SplitPlayerConnect {
-	optional .CMsg_CVars convars = 1;
-	optional string playername = 2;
+	optional string playername = 1;
 }
 
 message CCLCMsg_ClientMessage {

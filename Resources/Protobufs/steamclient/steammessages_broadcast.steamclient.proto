@@ -23,6 +23,7 @@ message CBroadcast_EndBroadcastSession_Response {
 message CBroadcast_StartBroadcastUpload_Request {
 	optional fixed64 broadcast_id = 1;
 	optional uint32 cellid = 2;
+	optional bool as_rtmp = 3;
 }
 
 message CBroadcast_StartBroadcastUpload_Response {
@@ -116,6 +117,7 @@ message CBroadcast_PostChatMessage_Request {
 message CBroadcast_PostChatMessage_Response {
 	optional string persona_name = 1;
 	optional bool in_game = 2;
+	optional int32 result = 3;
 }
 
 message CBroadcast_MuteBroadcastChatUser_Request {

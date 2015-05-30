@@ -392,6 +392,15 @@ message CMsgGCCheckFriendship_Response {
 	optional bool found_friendship = 2;
 }
 
+message CMsgGCGetAppFriendsList {
+	optional fixed64 steamid = 1;
+}
+
+message CMsgGCGetAppFriendsList_Response {
+	optional bool success = 1;
+	repeated fixed64 steamids = 2;
+}
+
 message CMsgGCMsgMasterSetDirectory {
 	message SubGC {
 		optional uint32 dir_index = 1;

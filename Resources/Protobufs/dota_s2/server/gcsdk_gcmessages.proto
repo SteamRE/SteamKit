@@ -1,5 +1,13 @@
 import "steammessages.proto";
 
+option optimize_for = SPEED;
+option cc_generic_services = false;
+
+enum ESourceEngine {
+	k_ESE_Source1 = 0;
+	k_ESE_Source2 = 1;
+}
+
 enum PartnerAccountType {
 	PARTNER_NONE = 0;
 	PARTNER_PERFECT_WORLD = 1;
@@ -13,6 +21,12 @@ enum GCConnectionStatus {
 	GCConnectionStatus_NO_SESSION_IN_LOGON_QUEUE = 3;
 	GCConnectionStatus_NO_STEAM = 4;
 	GCConnectionStatus_SUSPENDED = 5;
+}
+
+message CMsgSHA1Digest {
+	required fixed64 block1 = 1;
+	required fixed64 block2 = 2;
+	required fixed32 block3 = 3;
 }
 
 message CMsgSOIDOwner {
@@ -93,10 +107,15 @@ message CMsgGCMultiplexMessage {
 }
 
 message CGCToGCMsgMasterAck {
+	message Process {
+		optional uint32 dir_index = 1;
+		repeated uint32 type_instances = 2;
+	}
+
 	optional uint32 dir_index = 1;
 	optional string machine_name = 3;
 	optional string process_name = 4;
-	repeated uint32 type_instances = 5;
+	repeated .CGCToGCMsgMasterAck.Process directory = 6;
 }
 
 message CGCToGCMsgMasterAck_Response {
@@ -155,6 +174,8 @@ message CMsgClientHello {
 	optional uint32 client_session_need = 3;
 	optional .PartnerAccountType client_launcher = 4 [default = PARTNER_NONE];
 	optional string secret_key = 5;
+	optional uint32 client_language = 6;
+	optional .ESourceEngine engine = 7 [default = k_ESE_Source1];
 }
 
 message CMsgClientWelcome {
@@ -236,5 +257,27 @@ message CWorkshop_GetContributors_Request {
 
 message CWorkshop_GetContributors_Response {
 	repeated fixed64 contributors = 1;
+}
+
+message CWorkshop_SetItemPaymentRules_Request {
+	message WorkshopItemPaymentRule {
+		optional uint64 workshop_file_id = 1;
+		optional float revenue_percentage = 2;
+		optional string rule_description = 3;
+	}
+
+	message PartnerItemPaymentRule {
+		optional uint32 account_id = 1;
+		optional float revenue_percentage = 2;
+		optional string rule_description = 3;
+	}
+
+	optional uint32 appid = 1;
+	optional uint32 gameitemid = 2;
+	repeated .CWorkshop_SetItemPaymentRules_Request.WorkshopItemPaymentRule associated_workshop_files = 3;
+	repeated .CWorkshop_SetItemPaymentRules_Request.PartnerItemPaymentRule partner_accounts = 4;
+}
+
+message CWorkshop_SetItemPaymentRules_Response {
 }
 
