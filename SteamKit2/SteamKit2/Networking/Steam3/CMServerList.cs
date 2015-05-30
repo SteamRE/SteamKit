@@ -269,7 +269,6 @@ namespace SteamKit2.Networking.Steam3
                 {
                     return false;
                 }
-
                 MarkServerCore(serverInfo, quality);
                 return true;
             }
@@ -281,18 +280,18 @@ namespace SteamKit2.Networking.Steam3
             switch (quality)
             {
                 case ServerQuality.Good:
-                    {
-                        var newScore = Convert.ToInt32(serverInfo.Score * GoodWeighting);
-                        SetServerScore(serverInfo, Math.Min(newScore, MaxScore));
-                        break;
-                    }
+                {
+                    var newScore = Convert.ToInt32(serverInfo.Score * GoodWeighting);
+                    SetServerScore(serverInfo, Math.Min(newScore, MaxScore));
+                    break;
+                }
 
                 case ServerQuality.Bad:
-                    {
-                        var newScore = Convert.ToInt32(serverInfo.Score * BadWeighting);
-                        SetServerScore(serverInfo, Math.Max(newScore, MinScore));
-                        break;
-                    }
+                {
+                    var newScore = Convert.ToInt32(serverInfo.Score * BadWeighting);
+                    SetServerScore(serverInfo, Math.Max(newScore, MinScore));
+                    break;
+                }
 
                 default:
                     throw new ArgumentOutOfRangeException("quality");
