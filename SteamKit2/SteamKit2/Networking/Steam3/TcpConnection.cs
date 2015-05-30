@@ -263,6 +263,7 @@ namespace SteamKit2
                     DebugLog.WriteLine("TcpConnection", "Socket exception occurred while reading packet: {0}", ex);
                     break;
                 }
+
                 try
                 {
                     OnNetMsgReceived(new NetMsgEventArgs(packData, destination));
