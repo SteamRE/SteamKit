@@ -37,7 +37,7 @@ namespace SteamKit2.Networking.Steam3
         const int GoodWeighting = 450;
         const int BadWeighting = 15;
         
-		[System.Diagnostics.DebuggerDisplay("ServerInfo ({EndPoint}, Weighting {Weighting})")]
+        [System.Diagnostics.DebuggerDisplay("ServerInfo ({EndPoint}, Weighting {Weighting})")]
         class ServerInfo
         {
             public IPEndPoint EndPoint { get; set; }
