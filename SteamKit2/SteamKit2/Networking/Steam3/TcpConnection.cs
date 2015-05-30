@@ -273,7 +273,7 @@ namespace SteamKit2
             bool userShutdown = cancellationToken.IsCancellationRequested;
 
             if (userShutdown) Shutdown();
-            Release(!userShutdown);
+            Release(true);
         }
 
         byte[] ReadPacket()
