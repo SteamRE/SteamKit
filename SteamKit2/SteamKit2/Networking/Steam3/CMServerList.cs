@@ -26,8 +26,10 @@ namespace SteamKit2.Networking.Steam3
     public class SmartCMServerList
     {
         const int BaseScore = 1000;
-        const float GoodWeighting = 1.5f;
-        const float BadWeighting = 0.6f;
+        const float GoodWeighting = 1.2f;
+        const float BadWeighting = 0.8f;
+        const int MaxScore = 4000;
+        const int MinScore = 250;
         
         [System.Diagnostics.DebuggerDisplay("ServerInfo ({EndPoint}, Score {Score})")]
         class ServerInfo
@@ -41,7 +43,7 @@ namespace SteamKit2.Networking.Steam3
         {
             servers = new Collection<ServerInfo>();
             listLock = new object();
-            ScoreExpiryTimeSpan = TimeSpan.FromMinutes(5);
+            ScoreExpiryTimeSpan = TimeSpan.FromMinutes(30);
         }
 
         object listLock;
@@ -197,12 +199,18 @@ namespace SteamKit2.Networking.Steam3
                 switch (quality)
                 {
                     case ServerQuality.Good:
-                        SetServerScore(serverInfo, Convert.ToInt32(serverInfo.Score * GoodWeighting));
+                    {
+                        var newScore = Convert.ToInt32(serverInfo.Score * GoodWeighting);
+                        SetServerScore(serverInfo, Math.Min(newScore, MaxScore));
                         break;
+                    }
 
                     case ServerQuality.Bad:
-                        SetServerScore(serverInfo, Convert.ToInt32(serverInfo.Score * BadWeighting));
+                    {
+                        var newScore = Convert.ToInt32(serverInfo.Score * BadWeighting);
+                        SetServerScore(serverInfo, Math.Max(newScore, MinScore));
                         break;
+                    }
 
                     default:
                         throw new ArgumentOutOfRangeException("quality");
