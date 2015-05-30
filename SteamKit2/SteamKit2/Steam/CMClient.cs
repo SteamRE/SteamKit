@@ -287,14 +287,14 @@ namespace SteamKit2.Internal
 
         void Connected( object sender, EventArgs e )
         {
-            Servers.Mark( connection.CurrentEndPoint, ServerQuality.Good );
+            Servers.TryMark( connection.CurrentEndPoint, ServerQuality.Good );
         }
 
         void Disconnected( object sender, DisconnectedEventArgs e )
         {
             if (e.Reason != DisconnectedReason.CleanDisconnect)
             {
-                Servers.Mark( connection.CurrentEndPoint, ServerQuality.Bad );
+                Servers.TryMark( connection.CurrentEndPoint, ServerQuality.Bad );
             }
 
             ConnectedUniverse = EUniverse.Invalid;
@@ -476,7 +476,7 @@ namespace SteamKit2.Internal
 
                 if ( logoffResult == EResult.TryAnotherCM || logoffResult == EResult.ServiceUnavailable )
                 {
-                    Servers.Mark( connection.CurrentEndPoint, ServerQuality.Bad );
+                    Servers.TryMark( connection.CurrentEndPoint, ServerQuality.Bad );
                 }
             }
         }

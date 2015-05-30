@@ -244,35 +244,58 @@ namespace SteamKit2.Networking.Steam3
         /// <param name="endPoint">The endpoint of the server to mark</param>
         /// <param name="quality">The new server quality</param>
         /// <exception cref="System.ArgumentException">The supplied endPoint does not represent a server in the list.</exception>
+        /// <exception cref="System.ArgumentOutOfRangeException">The supplied <see cref="ServerQuality"/> is not a valid value.</exception>
         public void Mark(IPEndPoint endPoint, ServerQuality quality)
+        {
+            if (!TryMark(endPoint, quality))
+            {
+                throw new ArgumentException("The supplied endpoint is not in the server list.", "endPoint");
+            }
+        }
+
+        /// <summary>
+        /// Marks the server with the supplied <see cref="System.Net.IPEndPoint"/> with the given <see cref="ServerQuality"/>
+        /// </summary>
+        /// <param name="endPoint">The endpoint of the server to mark</param>
+        /// <param name="quality">The new server quality</param>
+        /// <exception cref="System.ArgumentOutOfRangeException">The supplied <see cref="ServerQuality"/> is not a valid value.</exception>
+        /// <returns>True if the server exists in the list, false otherwise</returns>
+        public bool TryMark(IPEndPoint endPoint, ServerQuality quality)
         {
             lock (listLock)
             {
                 var serverInfo = servers.Where(x => x.EndPoint.Equals(endPoint)).SingleOrDefault();
                 if (serverInfo == null)
                 {
-                    throw new ArgumentException("The supplied endpoint is not in the server list.", "endPoint");
+                    return false;
                 }
 
-                switch (quality)
-                {
-                    case ServerQuality.Good:
+                MarkServerCore(serverInfo, quality);
+                return true;
+            }
+        }
+
+        void MarkServerCore(ServerInfo serverInfo, ServerQuality quality)
+        {
+
+            switch (quality)
+            {
+                case ServerQuality.Good:
                     {
                         var newScore = Convert.ToInt32(serverInfo.Score * GoodWeighting);
                         SetServerScore(serverInfo, Math.Min(newScore, MaxScore));
                         break;
                     }
 
-                    case ServerQuality.Bad:
+                case ServerQuality.Bad:
                     {
                         var newScore = Convert.ToInt32(serverInfo.Score * BadWeighting);
                         SetServerScore(serverInfo, Math.Max(newScore, MinScore));
                         break;
                     }
 
-                    default:
-                        throw new ArgumentOutOfRangeException("quality");
-                }
+                default:
+                    throw new ArgumentOutOfRangeException("quality");
             }
         }
 
