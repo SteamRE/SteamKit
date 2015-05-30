@@ -280,7 +280,7 @@ namespace SteamKit2
             {
                 Shutdown();
             }
-            Release(userShutdown ? DisconnectedReason.None : DisconnectedReason.ConnectionError);
+            Release(userShutdown ? DisconnectedReason.CleanDisconnect : DisconnectedReason.ConnectionError);
         }
 
         byte[] ReadPacket()
