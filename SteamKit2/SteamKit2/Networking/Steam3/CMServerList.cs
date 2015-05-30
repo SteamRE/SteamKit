@@ -40,20 +40,32 @@ namespace SteamKit2.Networking.Steam3
         internal SmartCMServerList()
         {
             servers = new Collection<ServerInfo>();
-            scoreExpiryTimeSpan = TimeSpan.FromMinutes(5);
+            listLock = new object();
+            ScoreExpiryTimeSpan = TimeSpan.FromMinutes(5);
         }
 
+        object listLock;
         Collection<ServerInfo> servers;
-        TimeSpan scoreExpiryTimeSpan;
-        object listLock = new object();
 
+        /// <summary>
+        /// Determines after how much time a server's score should expire and be reset to it's base value.
+        /// </summary>
+        public TimeSpan ScoreExpiryTimeSpan
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Resets the scores of all servers which had their scores last updated a <see cref="ScoreExpiryTimeSpan"/> ago.
+        /// </summary>
         public void ResetOldScores()
         {
             lock (listLock)
             {
                 foreach (var serverInfo in servers)
                 {
-                    if (serverInfo.LastScoreChangeTimeUtc + scoreExpiryTimeSpan <= DateTime.UtcNow)
+                    if (serverInfo.LastScoreChangeTimeUtc + ScoreExpiryTimeSpan <= DateTime.UtcNow)
                     {
                         serverInfo.Score = BaseScore;
                     }
