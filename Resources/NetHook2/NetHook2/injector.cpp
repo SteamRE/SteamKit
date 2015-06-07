@@ -383,37 +383,33 @@ BOOL SelfInjectIntoSteam(const HWND hWindow, const int iSteamProcessID, const ch
 		return false;
 	}
 
-	LPVOID pArgBuffer = VirtualAllocEx(hSteamProcess.get(), NULL, strlen(szNetHookDllPath), MEM_RESERVE | MEM_COMMIT, PAGE_READWRITE);
+	SafeRemoteMem pArgBuffer = MakeSafeRemoteMem(hSteamProcess, VirtualAllocEx(hSteamProcess.get(), NULL, strlen(szNetHookDllPath), MEM_RESERVE | MEM_COMMIT, PAGE_READWRITE));
 	if (pArgBuffer == NULL)
 	{
 		MessageBoxA(hWindow, "Unable to allocate memory inside Steam.", "NetHook2", MB_OK | MB_ICONASTERISK);
 		return false;
 	}
 
-	BOOL bWritten = WriteProcessMemory(hSteamProcess.get(), pArgBuffer, szNetHookDllPath, strlen(szNetHookDllPath), NULL);
+	BOOL bWritten = WriteProcessMemory(hSteamProcess.get(), pArgBuffer.get(), szNetHookDllPath, strlen(szNetHookDllPath), NULL);
 	if (!bWritten)
 	{
 		MessageBoxA(hWindow, "Unable to write to allocated memory inside Steam.", "NetHook2", MB_OK | MB_ICONASTERISK);
-		VirtualFreeEx(hSteamProcess.get(), pArgBuffer, 0, MEM_RELEASE);
 		return false;
 	}
 
-	HANDLE hRemoteThread = CreateRemoteThread(hSteamProcess.get(), NULL, 0, (LPTHREAD_START_ROUTINE)pLoadLibraryA, pArgBuffer, NULL, NULL);
+	HANDLE hRemoteThread = CreateRemoteThread(hSteamProcess.get(), NULL, 0, (LPTHREAD_START_ROUTINE)pLoadLibraryA, pArgBuffer.get(), NULL, NULL);
 	if (hRemoteThread == NULL)
 	{
 		MessageBoxA(hWindow, "Unable to create remote thread inside Steam.", "NetHook2", MB_OK | MB_ICONASTERISK);
-		VirtualFreeEx(hSteamProcess.get(), pArgBuffer, 0, MEM_RELEASE);
 		return false;
 	}
 
 	if (WaitForSingleObject(hRemoteThread, 5000 /* milliseconds */) == WAIT_TIMEOUT)
 	{
 		MessageBoxA(hWindow, "Injection timed out.", "NetHook2", MB_OK | MB_ICONASTERISK);
-		VirtualFreeEx(hSteamProcess.get(), pArgBuffer, 0, MEM_RELEASE);
 		return false;
 	}
 
-	VirtualFreeEx(hSteamProcess.get(), pArgBuffer, 0, MEM_RELEASE);
 	return true;
 }
 
