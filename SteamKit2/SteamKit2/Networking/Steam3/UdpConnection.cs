@@ -429,7 +429,7 @@ namespace SteamKit2
                     DebugLog.WriteLine("UdpConnection", "Graceful disconnect completed");
 
                     state = State.Disconnected;
-                    disconnectReason = DisconnectedReason.CleanDisconnect;
+                    disconnectReason = DisconnectedReason.RequestedByConsumer;
                 }
             }
 

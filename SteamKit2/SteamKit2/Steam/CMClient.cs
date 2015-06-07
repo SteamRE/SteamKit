@@ -277,7 +277,7 @@ namespace SteamKit2.Internal
         /// <summary>
         /// Called when the client is physically disconnected from Steam3.
         /// </summary>
-        protected abstract void OnClientDisconnected();
+        protected abstract void OnClientDisconnected( bool consumerInitiated );
 
 
         void NetMsgReceived( object sender, NetMsgEventArgs e )
@@ -292,7 +292,7 @@ namespace SteamKit2.Internal
 
         void Disconnected( object sender, DisconnectedEventArgs e )
         {
-            if (e.Reason != DisconnectedReason.CleanDisconnect)
+            if (e.Reason != DisconnectedReason.RequestedByConsumer)
             {
                 Servers.TryMark( connection.CurrentEndPoint, ServerQuality.Bad );
             }
@@ -301,7 +301,7 @@ namespace SteamKit2.Internal
 
             heartBeatFunc.Stop();
 
-            OnClientDisconnected();
+            OnClientDisconnected( consumerInitiated: e.Reason == DisconnectedReason.RequestedByConsumer );
         }
 
         internal static IPacketMsg GetPacketMsg( byte[] data )

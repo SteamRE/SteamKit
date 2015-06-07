@@ -62,7 +62,7 @@ namespace SteamKit2
     enum DisconnectedReason
     {
         None,
-        CleanDisconnect,
+        RequestedByConsumer,
         ConnectionError
     }
 
