@@ -15,8 +15,8 @@ namespace NetHookAnalyzer2
 	{
 		public class NodeInfo
 		{
-			public bool ShouldExpandByDefault {get;set;}
-			public string ValueToCopy {get;set;}
+			public bool ShouldExpandByDefault { get; set; }
+			public string ValueToCopy { get; set; }
 		}
 
 		#region Top-Level Node-Building
@@ -197,7 +197,7 @@ namespace NetHookAnalyzer2
 				if (index >= 100)
 				{
 					SetNodeExpandByDefault(node, false);
-				} 
+				}
 
 				return;
 			}
@@ -270,7 +270,7 @@ namespace NetHookAnalyzer2
 
 			}) { RadioCheck = true });
 
-				
+
 			var unixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
 
 			node.ContextMenu.MenuItems.Add(new MenuItem("Date/Time", delegate(object sender, EventArgs e)
@@ -525,6 +525,8 @@ namespace NetHookAnalyzer2
 					var enumNamespaceMenuItem = new MenuItem(enumTypes.Key);
 					enumMenuItem.MenuItems.Add(enumNamespaceMenuItem);
 
+					var menuItems = new List<MenuItem>();
+
 					foreach (var enumType in enumTypes)
 					{
 						var enumName = enumType.FullName.Substring(enumType.Namespace.Length + 1);
@@ -535,10 +537,18 @@ namespace NetHookAnalyzer2
 							DisplayEnumValue(node, name, enumType, enumName, value);
 						};
 
-						enumNamespaceMenuItem.MenuItems.Add(item);
+						menuItems.Add(item);
 					}
+
+					menuItems.Sort(MenuItemComparisonByText);
+					enumNamespaceMenuItem.MenuItems.AddRange(menuItems.ToArray());
 				}
 			};
+		}
+
+		static int MenuItemComparisonByText(MenuItem x, MenuItem y)
+		{
+			return x.Text.CompareTo(y.Text);
 		}
 
 		static void DisplayEnumValue(TreeNode node, string name, Type enumType, string enumName, object value)
