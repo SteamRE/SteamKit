@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -485,6 +486,14 @@ namespace NetHookAnalyzer2
 			}));
 		}
 
+		static Lazy<IEnumerable<IGrouping<string, Type>>> lazySteamKit2ExportedEnumTypes = new Lazy<IEnumerable<IGrouping<string, Type>>>(() =>
+		{
+			return typeof(CMClient).Assembly.ExportedTypes
+				.Where(x => x.IsEnum)
+				.GroupBy(x => x.Namespace)
+				.OrderBy(x => x.Key);
+		});
+
 		static void SetNodeContextMenuForEnumDisplay(TreeNode node, string name, object value)
 		{
 			if (node.ContextMenu.MenuItems.Count > 0)
@@ -502,49 +511,60 @@ namespace NetHookAnalyzer2
 			var enumMenuItem = new MenuItem("Display Enum Value");
 			node.ContextMenu.MenuItems.Add(enumMenuItem);
 
-			var enumTypesByNamespace = typeof(CMClient).Assembly.ExportedTypes
-				.Where(x => x.IsEnum)
-				.GroupBy(x => x.Namespace)
-				.OrderBy(x => x.Key);
-
-			foreach (var enumTypes in enumTypesByNamespace)
+			node.ContextMenu.Popup += delegate(object sender, EventArgs eventArgs)
 			{
-				var enumNamespaceMenuItem = new MenuItem(enumTypes.Key);
-				enumMenuItem.MenuItems.Add(enumNamespaceMenuItem);
-
-				foreach (var enumType in enumTypes)
+				if (enumMenuItem.MenuItems.Count > 0)
 				{
-					var enumName = enumType.FullName.Substring(enumType.Namespace.Length + 1);
-					var item = new MenuItem(enumName);
-
-					item.Click += delegate(object sender, EventArgs e)
-					{
-						object enumValue;
-						try
-						{
-							enumValue = Convert.ChangeType(value, enumType.GetEnumUnderlyingType());
-						}
-						catch (OverflowException)
-						{
-							SetNodeValueNoCopy(node, name, string.Format("{0} (not convertable to '{1}')", value, enumName));
-							SetNodeValueToCopy(node, value.ToString());
-							return;
-						}
-
-						if (Enum.IsDefined(enumType, enumValue))
-						{
-							SetNodeValue(node, name, Enum.GetName(enumType, enumValue));
-						}
-						else
-						{
-							SetNodeValueNoCopy(node, name, string.Format("{0} (not in '{1}')", value, enumName));
-							SetNodeValueToCopy(node, enumValue.ToString());
-						}
-					};
-
-					enumNamespaceMenuItem.MenuItems.Add(item);
+					return;
 				}
+
+				var enumTypesByNamespace = lazySteamKit2ExportedEnumTypes.Value;
+
+				foreach (var enumTypes in enumTypesByNamespace)
+				{
+					var enumNamespaceMenuItem = new MenuItem(enumTypes.Key);
+					enumMenuItem.MenuItems.Add(enumNamespaceMenuItem);
+
+					foreach (var enumType in enumTypes)
+					{
+						var enumName = enumType.FullName.Substring(enumType.Namespace.Length + 1);
+						var item = new MenuItem(enumName);
+
+						item.Click += (s, e) =>
+						{
+							DisplayEnumValue(node, name, enumType, enumName, value);
+						};
+
+						enumNamespaceMenuItem.MenuItems.Add(item);
+					}
+				}
+			};
+		}
+
+		static void DisplayEnumValue(TreeNode node, string name, Type enumType, string enumName, object value)
+		{
+			object enumValue;
+			try
+			{
+				enumValue = Convert.ChangeType(value, enumType.GetEnumUnderlyingType());
 			}
+			catch (OverflowException)
+			{
+				SetNodeValueNoCopy(node, name, string.Format("{0} (not convertable to '{1}')", value, enumName));
+				SetNodeValueToCopy(node, value.ToString());
+				return;
+			}
+
+			if (Enum.IsDefined(enumType, enumValue))
+			{
+				SetNodeValue(node, name, Enum.GetName(enumType, enumValue));
+			}
+			else
+			{
+				SetNodeValueNoCopy(node, name, string.Format("{0} (not in '{1}')", value, enumName));
+				SetNodeValueToCopy(node, enumValue.ToString());
+			}
+
 		}
 
 		static void SetAsRadioSelected(object sender)
