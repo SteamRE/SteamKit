@@ -79,7 +79,8 @@ HANDLE SeDebugAcquire()
     if ( !SetPrivilege( hToken, SE_DEBUG_NAME, true ) )
     {
         CloseHandle( hToken );
+        return NULL;
     }
 
-    return NULL;
+    return hToken;
 }
