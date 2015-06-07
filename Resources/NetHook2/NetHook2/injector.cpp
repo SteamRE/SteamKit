@@ -148,6 +148,13 @@ void CALLBACK Inject( HWND hWindow, HINSTANCE hInstance, LPSTR lpszCommandLine, 
 	ZeroMemory( szNethookDllPath, sizeof( szNethookDllPath ) );
 	int result = GetModuleFileNameA( (HINSTANCE)&__ImageBase, szNethookDllPath, sizeof( szNethookDllPath ) );
 
+	if (ProcessHasModuleLoaded(iSteamProcessID, szNethookDllPath, /* bPartialMatchFromEnd */ false))
+	{
+		MessageBoxA(hWindow, "Error: NetHook2 is already injected into this process.", "NetHook2", MB_OK | MB_ICONASTERISK);
+		CloseHandle(hSeDebugToken);
+		return;
+	}
+
 	BOOL bInjected = SelfInjectIntoSteam( hWindow, iSteamProcessID, szNethookDllPath );
 	if ( !bInjected )
 	{
