@@ -224,7 +224,7 @@ namespace NetHookAnalyzer2
 			{
 				SetAsRadioSelected(sender);
 
-				var steamID = new SteamID((ulong)value);
+				var steamID = new SteamID((ulong)Convert.ChangeType(value, typeof(ulong)));
 				SetValueForDisplay(steamID.Render(steam3: false));
 			}
 
@@ -232,7 +232,7 @@ namespace NetHookAnalyzer2
 			{
 				SetAsRadioSelected(sender);
 
-				var steamID = new SteamID((ulong)value);
+				var steamID = new SteamID((ulong)Convert.ChangeType(value, typeof(ulong)));
 				SetValueForDisplay(steamID.Render(steam3: true));
 			}
 
@@ -244,7 +244,7 @@ namespace NetHookAnalyzer2
 			{
 				SetAsRadioSelected(sender);
 
-				var gid = new GlobalID((ulong)value);
+				var gid = new GlobalID((ulong)Convert.ChangeType(value, typeof(ulong)));
 				var children = new[]
 			{
 				new TreeNodeObjectExplorer("Box", gid.BoxID).TreeNode,
@@ -268,7 +268,7 @@ namespace NetHookAnalyzer2
 
 				try
 				{
-					var dateTimeValue = unixEpoch.AddSeconds((double)value).ToString("yyyy-MM-dd HH:mm:ss");
+					var dateTimeValue = unixEpoch.AddSeconds((double)Convert.ChangeType(value, typeof(double))).ToString("yyyy-MM-dd HH:mm:ss");
 					SetValueForDisplay(dateTimeValue);
 				}
 				catch (ArgumentOutOfRangeException)
@@ -406,6 +406,10 @@ namespace NetHookAnalyzer2
 									new MenuItem("Steam3", DisplayAsSteam3ID) { RadioCheck = true }
 								}));
 
+						}
+
+						if (objectType == typeof(long) || objectType == typeof(ulong) || objectType == typeof(int) || objectType == typeof(uint))
+						{
 							ContextMenuItems.Add(new MenuItem("GlobalID (GID)", DisplayAsGlobalID) { RadioCheck = true });
 							ContextMenuItems.Add(new MenuItem("Date/Time", DisplayAsPosixTimestamp) { RadioCheck = true });
 						}
