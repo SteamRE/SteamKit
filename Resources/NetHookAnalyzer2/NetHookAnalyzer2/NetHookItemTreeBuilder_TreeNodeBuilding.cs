@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
@@ -218,6 +219,25 @@ namespace NetHookAnalyzer2
 
 			#endregion
 
+			#region IP Address
+
+			void DisplayAsIPAddress(object sender, EventArgs e)
+			{
+				SetAsRadioSelected(sender);
+
+				var addressInteger = (long)Convert.ChangeType(value, typeof(long));
+				var addressScratch = BitConverter.GetBytes(addressInteger);
+				Array.Reverse(addressScratch);
+
+				var addressBytes = new byte[sizeof(uint)];
+				Array.Copy(addressScratch, sizeof(uint), addressBytes, 0, addressBytes.Length);
+
+				var address = new IPAddress(addressBytes);
+				SetValueForDisplay(address.ToString());
+			}
+
+			#endregion
+
 			#region Steam ID
 
 			void DisplayAsSteam2ID(object sender, EventArgs e)
@@ -412,6 +432,11 @@ namespace NetHookAnalyzer2
 						{
 							ContextMenuItems.Add(new MenuItem("GlobalID (GID)", DisplayAsGlobalID) { RadioCheck = true });
 							ContextMenuItems.Add(new MenuItem("Date/Time", DisplayAsPosixTimestamp) { RadioCheck = true });
+						}
+
+						if (objectType == typeof(int) || objectType == typeof(uint))
+						{
+							ContextMenuItems.Add(new MenuItem("IPv4 Address", DisplayAsIPAddress) { RadioCheck = true });
 						}
 					}
 
