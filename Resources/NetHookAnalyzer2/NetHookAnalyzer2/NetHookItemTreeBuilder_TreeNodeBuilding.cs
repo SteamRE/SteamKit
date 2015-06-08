@@ -418,10 +418,10 @@ namespace NetHookAnalyzer2
 						var data = (byte[])value;
 						if (data.Length > 0 && data.Length <= MaxDataLengthForDisplay)
 						{
-							ContextMenuItems.Add(new MenuItem("&ASCII", DisplayDataAsAscii));
-							ContextMenuItems.Add(new MenuItem("&UTF-8", DisplayDataAsUTF8));
-							ContextMenuItems.Add(new MenuItem("&Hexadecimal", DisplayDataAsHexadecimal));
-							ContextMenuItems.Add(new MenuItem("&Binary KeyValues (VDF)", DisplayDataAsBinaryKeyValues));
+							ContextMenuItems.Add(new MenuItem("&ASCII", DisplayDataAsAscii) { RadioCheck = true });
+							ContextMenuItems.Add(new MenuItem("&UTF-8", DisplayDataAsUTF8) { RadioCheck = true });
+							ContextMenuItems.Add(new MenuItem("&Hexadecimal", DisplayDataAsHexadecimal) { RadioCheck = true, Checked = true });
+							ContextMenuItems.Add(new MenuItem("&Binary KeyValues (VDF)", DisplayDataAsBinaryKeyValues) { RadioCheck = true });
 						}
 					}
 				}
