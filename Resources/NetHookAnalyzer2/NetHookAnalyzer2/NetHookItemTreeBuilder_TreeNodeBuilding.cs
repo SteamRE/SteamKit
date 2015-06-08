@@ -18,7 +18,6 @@ namespace NetHookAnalyzer2
 			var eMsg = MsgUtil.GetMsg(rawEMsg);
 
 			var eMsgExplorer = new TreeNodeObjectExplorer("EMsg", eMsg);
-			eMsgExplorer.DisplayAsEnumMember(typeof(EMsg));
 			
 			return new TreeNode("Info", new[] 
 			{
@@ -286,7 +285,7 @@ namespace NetHookAnalyzer2
 
 			#region Enum
 
-			internal void DisplayAsEnumMember(Type enumType)
+			void DisplayAsEnumMember(Type enumType)
 			{
 				object enumValue;
 				try
@@ -352,7 +351,7 @@ namespace NetHookAnalyzer2
 				{
 					var objectType = value.GetType();
 
-					if (objectType.IsValueType && objectType != typeof(bool))
+					if (objectType.IsValueType && !objectType.IsEnum && objectType != typeof(bool))
 					{
 						ContextMenuItems.Add(new MenuItem("-"));
 
@@ -502,7 +501,11 @@ namespace NetHookAnalyzer2
 				}
 
 				var objectType = value.GetType();
-				if (objectType.IsValueType)
+				if (objectType.IsEnum)
+				{
+					SetValueForDisplay(string.Format("{0:G} ({0:D})", value));
+				}
+				else if (objectType.IsValueType)
 				{
 					SetValueForDisplay(value.ToString());
 				}
