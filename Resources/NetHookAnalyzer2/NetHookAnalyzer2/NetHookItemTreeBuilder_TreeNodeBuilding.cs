@@ -576,7 +576,7 @@ namespace NetHookAnalyzer2
 
 					foreach (var childObject in value as IEnumerable)
 					{
-						if (innerType != null)
+						if (innerType == null)
 						{
 							innerType = childObject.GetType();
 						}
