@@ -39,7 +39,8 @@ namespace NetHookAnalyzer2
 				Node.Nodes.Add(BuildHeaderNode(header));
 
 				var body = ReadBody(rawEMsg, stream, header);
-				Node.Nodes.Add(BuildBodyNode(body));
+				var bodyNode = BuildBodyNode(body);
+				Node.Nodes.Add(bodyNode);
 
 				var payload = ReadPayload(stream);
 				if (payload != null && payload.Length > 0)
@@ -53,12 +54,7 @@ namespace NetHookAnalyzer2
 				var hasSpecializations = Node.Nodes.Count > nodeCount;
 				if (hasSpecializations)
 				{
-					// Hide the 'normal' nodes
-					for (int i = 0; i < nodeCount; i++)
-					{
-						var node = Node.Nodes[i];
-						SetNodeExpandByDefault(node, false);
-					}
+					bodyNode.Collapse(ignoreChildren: true);
 				}
 			}
 		}

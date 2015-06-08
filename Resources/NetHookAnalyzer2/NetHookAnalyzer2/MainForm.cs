@@ -215,27 +215,7 @@ namespace NetHookAnalyzer2
 
 			itemExplorerTreeView.Nodes.Clear();
 			itemExplorerTreeView.Nodes.AddRange(item.BuildTree().Nodes.Cast<TreeNode>().ToArray());
-			RecursiveExpandNodes(itemExplorerTreeView.Nodes.Cast<TreeNode>());
 			itemExplorerTreeView.Nodes[0].EnsureVisible(); // Scroll to top
-		}
-
-		static void RecursiveExpandNodes(IEnumerable<TreeNode> nodes)
-		{
-			foreach (var node in nodes)
-			{
-				var shouldExpand = true;
-				if (node.Tag != null)
-				{
-					var expansionInfo = (NetHookItemTreeBuilder.NodeInfo)node.Tag;
-					shouldExpand = expansionInfo.ShouldExpandByDefault;
-				}
-
-				if (shouldExpand)
-				{
-					RecursiveExpandNodes(node.Nodes.Cast<TreeNode>());
-					node.Expand();
-				}
-			}
 		}
 	}
 }

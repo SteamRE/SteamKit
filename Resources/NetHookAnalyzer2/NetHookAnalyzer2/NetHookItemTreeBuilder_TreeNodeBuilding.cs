@@ -13,70 +13,52 @@ namespace NetHookAnalyzer2
 {
 	partial class NetHookItemTreeBuilder
 	{
-		public class NodeInfo
-		{
-			public bool ShouldExpandByDefault { get; set; }
-			public string ValueToCopy { get; set; }
-		}
-
-		#region Top-Level Node-Building
-
 		static TreeNode BuildInfoNode(uint rawEMsg)
 		{
 			var eMsg = MsgUtil.GetMsg(rawEMsg);
 
+			var eMsgExplorer = new TreeNodeObjectExplorer("EMsg", eMsg);
+			eMsgExplorer.DisplayAsEnumMember(typeof(EMsg));
+			
 			return new TreeNode("Info", new[] 
 			{
-				CreateNode("EMsg", string.Format("{0} ({1})", eMsg.ToString(), (long)eMsg)),
-				CreateNode("Is ProtoBuf", MsgUtil.IsProtoBuf(rawEMsg).ToString()),
+				eMsgExplorer.TreeNode,
+				new TreeNodeObjectExplorer("Is Protobuf", MsgUtil.IsProtoBuf(rawEMsg)).TreeNode
 			});
 		}
 
 		static TreeNode BuildHeaderNode(ISteamSerializableHeader header)
 		{
-			var node = new TreeNode("Header");
-			AddObjectValue(node, header);
-			return node;
+			return new TreeNodeObjectExplorer("Header", header).TreeNode;
 		}
 
 		static TreeNode BuildBodyNode(object body)
 		{
-			var node = new TreeNode("Body");
-			AddObjectValue(node, body);
-			return node;
+			return new TreeNodeObjectExplorer("Body", body).TreeNode;
 		}
 
 		static TreeNode BuildPayloadNode(byte[] data)
 		{
-			var node = new TreeNode("Payload");
-			AddObjectValue(node, data);
-			return node;
+			return new TreeNodeObjectExplorer("Payload", data).TreeNode;
 		}
 
 		static TreeNode BuildGCBodyNode(CMsgGCClient body)
 		{
-			var node = new TreeNode("Game Coordinator Message");
-			var gcBody = body as CMsgGCClient;
-
-			using (var ms = new MemoryStream(gcBody.payload))
+			using (var ms = new MemoryStream(body.payload))
 			{
 				var gc = new
 				{
-					emsg = EMsgExtensions.GetGCMessageName(gcBody.msgtype),
-					header = ReadGameCoordinatorHeader(gcBody.msgtype, ms),
-					body = ReadMessageBody(gcBody.msgtype, ms, gcBody.appid),
+					emsg = EMsgExtensions.GetGCMessageName(body.msgtype),
+					header = ReadGameCoordinatorHeader(body.msgtype, ms),
+					body = ReadMessageBody(body.msgtype, ms, body.appid),
 				};
 
-				AddObjectValue(node, gc);
+				return new TreeNodeObjectExplorer("Game Coordinator Message", gc).TreeNode;
 			}
-
-			return node;
 		}
 
 		static TreeNode BuildServiceMethodBodyNode(CMsgClientServiceMethod body)
 		{
-			var node = new TreeNode("Service Method");
-
 			var name = body.method_name;
 			object innerBody;
 
@@ -85,15 +67,11 @@ namespace NetHookAnalyzer2
 				innerBody = ReadServiceMethodBody(body.method_name, ms, x => x.GetParameters().First().ParameterType);
 			}
 
-			AddObjectValue(node, innerBody);
-
-			return node;
+			return new TreeNodeObjectExplorer("Service Method", innerBody).TreeNode;
 		}
 
 		static TreeNode BuildServiceMethodResponseBodyNode(CMsgClientServiceMethodResponse body)
 		{
-			var node = new TreeNode("Service Method Response");
-
 			var name = body.method_name;
 			object innerBody;
 
@@ -102,293 +80,116 @@ namespace NetHookAnalyzer2
 				innerBody = ReadServiceMethodBody(body.method_name, ms, x => x.ReturnType);
 			}
 
-			AddObjectValue(node, innerBody);
-
-			return node;
+			return new TreeNodeObjectExplorer("Service Method Response", innerBody).TreeNode;
 		}
 
-		#endregion
-
-		#region Lower-Level Node-Building
-
-		const string NodeValuePrefix = ": ";
-
-		static void AddObjectValue(TreeNode node, object obj)
+		class TreeNodeObjectExplorer
 		{
-			if (obj == null)
+			public TreeNodeObjectExplorer(string name, object value)
 			{
-				SetNodeValueWithCopyMenu(node, "<null>");
-				return;
+				this.name = name;
+				this.value = value;
+				this.treeNode = new TreeNode();
+				this.treeNode.ContextMenu = new ContextMenu();
+				this.treeNode.ContextMenu.Popup += OnContextMenuPopup;
+
+				Initialize();
 			}
 
-			var objectType = (obj != null ? obj.GetType() : null);
-			if (obj is ulong)
+			readonly string name;
+			readonly object value;
+			readonly TreeNode treeNode;
+			string clipboardCopyOverride;
+
+			public TreeNode TreeNode
 			{
-				AddUInt64Value(node, (ulong)obj);
-				return;
+				get { return treeNode; }
 			}
-			else if (objectType != null && objectType.IsValueType)
+
+			Menu.MenuItemCollection ContextMenuItems
 			{
-				AddValueObjectValue(node, obj);
-				return;
+				get { return TreeNode.ContextMenu.MenuItems; }
 			}
-			else if (obj is string)
+
+			string ValueForDisplay
 			{
-				AddStringValue(node, (string)obj);
-				return;
-			}
-			else if (obj is SteamID)
-			{
-				AddSteamIDValue(node, (SteamID)obj);
-				return;
-			}
-			else if (obj is byte[])
-			{
-				AddByteArrayValue(node, (byte[])obj);
-				return;
-			}
-			else if (objectType.IsDictionaryType())
-			{
-				var dictionary = obj as IDictionary;
-				foreach (DictionaryEntry entry in dictionary)
+				get { return valueForDisplay; }
+				set
 				{
-					var childNode = new TreeNode(string.Format("[ {0} ]", entry.Key.ToString()));
-					node.Nodes.Add(childNode);
-
-					AddObjectValue(childNode, entry.Value);
+					valueForDisplay = value;
+					UpdateDisplayText();
 				}
-
-				return;
 			}
-			else if (objectType.IsEnumerableType())
+			string valueForDisplay;
+
+			#region Context Menu Actions
+
+			#region Copy to Clipboard
+
+			void CopyNameToClipboard(object sender, EventArgs e)
 			{
-				Type innerType = null;
-				var index = 0;
+				Clipboard.SetText(name, TextDataFormat.Text);
+			}
 
-				foreach (var subObj in obj as IEnumerable)
+			void CopyValueToClipboard(object sender, EventArgs e)
+			{
+				var valueToCopy = clipboardCopyOverride ?? ValueForDisplay;
+				Clipboard.SetText(valueToCopy, TextDataFormat.Text);
+			}
+			void CopyNameAndValueToClipboard(object sender, EventArgs e)
+			{
+				Clipboard.SetText(TreeNode.Text, TextDataFormat.Text);
+			}
+
+			#endregion
+
+			#region Binary Data
+
+			const int MaxDataLengthForDisplay = 400;
+
+			void SaveDataToFile(object sender, EventArgs e)
+			{
+				var data = (byte[])value;
+
+				var dialog = new SaveFileDialog { DefaultExt = "bin", SupportMultiDottedExtensions = true };
+				var result = dialog.ShowDialog();
+				if (result == DialogResult.OK)
 				{
-					innerType = subObj.GetType();
-
-					var childNode = new TreeNode();
-					var name = string.Format("[ {0} ]", index);
-					if (innerType.IsValueType)
-					{
-						SetNodeValue(childNode, name, innerType.Name);
-					}
-					else
-					{
-						childNode.Text = name;
-					}
-
-					node.Nodes.Add(childNode);
-
-					AddObjectValue(childNode, subObj);
-
-					index++;
+					File.WriteAllBytes(dialog.FileName, data);
 				}
-
-				node.Text += string.Format(
-					"{0}{1}[ {2} ]",
-					NodeValuePrefix,
-					(innerType == null ? objectType.Name : innerType.Name),
-					index
-				);
-
-				if (index >= 100)
-				{
-					SetNodeExpandByDefault(node, false);
-				}
-
-				return;
 			}
 
-			foreach (var property in obj.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance))
-			{
-				var childObject = property.GetValue(obj, null);
-				var childNode = new TreeNode(property.Name);
-				node.Nodes.Add(childNode);
-
-				AddObjectValue(childNode, childObject);
-			}
-		}
-
-		static void AddUInt64Value(TreeNode node, ulong value)
-		{
-			var nodeName = node.Text;
-			SetNodeValue(node, value.ToString());
-			SetNodeContextMenuForValueCopy(node);
-			SetNodeContextMenuForEnumDisplay(node, nodeName, value);
-
-			node.ContextMenu.MenuItems.Add("-"); // Separator
-
-			MenuItem initialMenuItem;
-
-			node.ContextMenu.MenuItems.Add((initialMenuItem = new MenuItem("Unsigned 64-bit Integer", delegate(object sender, EventArgs e)
+			void DisplayDataAsAscii(object sender, EventArgs e)
 			{
 				SetAsRadioSelected(sender);
-				node.Nodes.Clear();
 
-				var strUll = value.ToString();
-				SetNodeValue(node, nodeName, strUll);
-
-			}) { RadioCheck = true, Checked = true }));
-
-			node.ContextMenu.MenuItems.Add(new MenuItem("SteamID (Steam2)", delegate(object sender, EventArgs e)
-			{
-				SetAsRadioSelected(sender);
-				node.Nodes.Clear();
-
-				var strSteamID2 = new SteamID(value).Render(steam3: false);
-				SetNodeValue(node, nodeName, strSteamID2);
-
-			}) { RadioCheck = true });
-
-			node.ContextMenu.MenuItems.Add(new MenuItem("SteamID (Steam3)", delegate(object sender, EventArgs e)
-			{
-				SetAsRadioSelected(sender);
-				node.Nodes.Clear();
-
-				var strSteamID3 = new SteamID(value).Render(steam3: true);
-				SetNodeValue(node, nodeName, strSteamID3);
-
-			}) { RadioCheck = true });
-
-			node.ContextMenu.MenuItems.Add(new MenuItem("GlobalID", delegate(object sender, EventArgs e)
-			{
-				SetAsRadioSelected(sender);
-				node.Nodes.Clear();
-
-				var gid = new GlobalID(value);
-				node.Nodes.Add(CreateNode("BoxID", gid.BoxID.ToString()));
-				node.Nodes.Add(CreateNode("ProcessID", gid.ProcessID.ToString()));
-				node.Nodes.Add(CreateNode("StartTime", gid.StartTime.ToString("yyyy-MM-dd HH:mm:ss")));
-				node.Nodes.Add(CreateNode("SequentialCount", gid.SequentialCount.ToString()));
-
-				node.Text = nodeName;
-				SetNodeValueToCopy(node, value.ToString());
-				node.Expand();
-
-			}) { RadioCheck = true });
-
-
-			var unixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-
-			node.ContextMenu.MenuItems.Add(new MenuItem("Date/Time", delegate(object sender, EventArgs e)
-			{
-				SetAsRadioSelected(sender);
-				node.Nodes.Clear();
-
-				string dateTimeValue;
-				try
-				{
-					dateTimeValue = unixEpoch.AddSeconds((double)value).ToString("yyyy-MM-dd HH:mm:ss");
-				}
-				catch (ArgumentOutOfRangeException)
-				{
-					dateTimeValue = "Out of range!";
-				}
-
-				SetNodeValue(node, nodeName, dateTimeValue);
-
-			}) { RadioCheck = true });
-		}
-
-		static void AddValueObjectValue(TreeNode node, object obj)
-		{
-			var name = node.Text;
-			SetNodeValueWithCopyMenu(node, obj.ToString());
-			SetNodeContextMenuForEnumDisplay(node, name, obj);
-		}
-
-		static void AddStringValue(TreeNode node, string stringValue)
-		{
-			SetNodeValueNoCopy(node, string.Format("\"{0}\"", stringValue));
-
-			if (!string.IsNullOrEmpty(stringValue))
-			{
-				SetNodeValueToCopy(node, stringValue);
-				SetNodeContextMenuForValueCopy(node);
-			}
-		}
-
-		static void AddSteamIDValue(TreeNode node, SteamID steamID)
-		{
-			SetNodeValueWithCopyMenu(node, string.Format("{0} ({1}) ", steamID.Render(steam3: true), steamID.ConvertToUInt64()));
-		}
-
-		static void AddByteArrayValue(TreeNode node, byte[] data)
-		{
-			var nodeName = node.Text;
-			SetNodeValue(node, string.Format("byte[ {0} ]", data.Length));
-
-			if (data.Length == 0)
-			{
-				return;
+				var data = (byte[])value;
+				SetValueForDisplay(Encoding.ASCII.GetString(data).Replace("\0", "\\0"));
 			}
 
-			node.ContextMenu = new ContextMenu(new[]
+			void DisplayDataAsUTF8(object sender, EventArgs e)
 			{
-				new MenuItem( "Save to File...", delegate( object sender, EventArgs e )
-				{
-					var dialog = new SaveFileDialog { DefaultExt = "bin", SupportMultiDottedExtensions = true };
-					var result = dialog.ShowDialog();
-					if ( result == DialogResult.OK )
-					{
-						File.WriteAllBytes( dialog.FileName, data );
-					}
-				}),
-			});
+				SetAsRadioSelected(sender);
 
-			const int MaxBinLength = 400;
-			if (data.Length > MaxBinLength)
-			{
-				node.Nodes.Add(string.Format("Length exceeded {0} bytes! Value not shown - right-click to save.", MaxBinLength));
-				return;
+				var data = (byte[])value;
+				SetValueForDisplay(Encoding.UTF8.GetString(data).Replace("\0", "\\0"));
 			}
 
-			SetNodeContextMenuForValueCopy(node);
-
-			node.ContextMenu.MenuItems.Add(new MenuItem("-")); // Separator
-
-			MenuItem intialMenuItem;
-
-			node.ContextMenu.MenuItems.Add(new MenuItem("ASCII", delegate(object sender, EventArgs e)
+			void DisplayDataAsHexadecimal(object sender, EventArgs e)
 			{
 				SetAsRadioSelected(sender);
-				node.Nodes.Clear();
 
-				var strAscii = Encoding.ASCII.GetString(data).Replace("\0", "\\0");
-				SetNodeValue(node, nodeName, strAscii);
+				var data = (byte[])value;
+				var hexString = data.Aggregate(new StringBuilder(), (str, val) => str.Append(val.ToString("X2"))).ToString();
+				SetValueForDisplay(hexString);
 
-			}) { RadioCheck = true });
+			}
 
-			node.ContextMenu.MenuItems.Add(new MenuItem("UTF-8", delegate(object sender, EventArgs e)
+			void DisplayDataAsBinaryKeyValues(object sender, EventArgs e)
 			{
 				SetAsRadioSelected(sender);
-				node.Nodes.Clear();
 
-				var strUnicode = Encoding.UTF8.GetString(data).Replace("\0", "\\0");
-				SetNodeValue(node, nodeName, strUnicode);
-
-			}) { RadioCheck = true });
-
-			node.ContextMenu.MenuItems.Add((intialMenuItem = new MenuItem("Hexadecimal", delegate(object sender, EventArgs e)
-			{
-				SetAsRadioSelected(sender);
-				node.Nodes.Clear();
-
-				var hexString = data.Aggregate(new StringBuilder(), (str, value) => str.Append(value.ToString("X2"))).ToString();
-				SetNodeValue(node, nodeName, hexString);
-
-			}) { RadioCheck = true, Checked = true }));
-
-			node.ContextMenu.MenuItems.Add(new MenuItem("Binary KeyValues", delegate(object sender, EventArgs e)
-			{
-				SetAsRadioSelected(sender);
-				node.Nodes.Clear();
-				SetNodeValueToCopy(node, string.Empty);
-				node.Text = nodeName;
-
+				var data = (byte[])value;
 				var kv = new KeyValue();
 				bool didRead;
 				using (var ms = new MemoryStream(data))
@@ -405,208 +206,403 @@ namespace NetHookAnalyzer2
 
 				if (!didRead)
 				{
-					node.Nodes.Add("Not a valid KeyValues object!");
+					SetValueForDisplay("Not a valid KeyValues object!");
 				}
 				else
 				{
-					node.Nodes.Add(BuildKeyValuesNode(kv.Children[0]));
+					var firstChild = kv.Children[0]; // Due to bug in KeyValues parser.
+					SetValueForDisplay(null, childNodes: new[] { new TreeNodeObjectExplorer(firstChild.Name, firstChild).TreeNode });
 				}
 
-				node.ExpandAll();
-
-			}) { RadioCheck = true });
-
-			intialMenuItem.PerformClick();
-
-			return;
-		}
-
-		static TreeNode BuildKeyValuesNode(KeyValue kv)
-		{
-			var node = new TreeNode(kv.Name);
-			if (kv.Children.Count > 0)
-			{
-				foreach (var child in kv.Children)
-				{
-					node.Nodes.Add(BuildKeyValuesNode(child));
-				}
-			}
-			else
-			{
-				SetNodeValueWithCopyMenu(node, kv.Value);
+				TreeNode.ExpandAll();
 			}
 
-			return node;
-		}
+			#endregion
 
-		static TreeNode CreateNode(string key, string value)
-		{
-			var node = new TreeNode(key);
-			SetNodeValueWithCopyMenu(node, value);
-			return node;
-		}
+			#region Steam ID
 
-		#endregion
-
-		#region Helpers
-
-		static void SetNodeValue(TreeNode node, string key, string value)
-		{
-			SetNodeValueNoCopy(node, key, value);
-			SetNodeValueToCopy(node, value);
-		}
-
-		static void SetNodeValueNoCopy(TreeNode node, string key, string value)
-		{
-			node.Text = string.Format("{0}{1}{2}", key, NodeValuePrefix, value);
-		}
-
-		static void SetNodeValue(TreeNode node, string value)
-		{
-			SetNodeValue(node, node.Text, value);
-		}
-
-		static void SetNodeValueNoCopy(TreeNode node, string value)
-		{
-			SetNodeValueNoCopy(node, node.Text, value);
-		}
-
-		static void SetNodeValueWithCopyMenu(TreeNode node, string value)
-		{
-			SetNodeValue(node, value);
-			SetNodeContextMenuForValueCopy(node);
-		}
-
-		static void SetNodeContextMenuForValueCopy(TreeNode node)
-		{
-			node.ContextMenu = node.ContextMenu ?? new ContextMenu();
-			node.ContextMenu.MenuItems.Add(new MenuItem("&Copy", delegate(object sender, EventArgs e)
+			void DisplayAsSteam2ID(object sender, EventArgs e)
 			{
-				Clipboard.SetText(GetNodeValueToCopy(node));
-			}));
-		}
+				SetAsRadioSelected(sender);
 
-		static Lazy<IEnumerable<IGrouping<string, Type>>> lazySteamKit2ExportedEnumTypes = new Lazy<IEnumerable<IGrouping<string, Type>>>(() =>
-		{
-			return typeof(CMClient).Assembly.ExportedTypes
-				.Where(x => x.IsEnum)
-				.GroupBy(x => x.Namespace)
-				.OrderBy(x => x.Key);
-		});
-
-		static void SetNodeContextMenuForEnumDisplay(TreeNode node, string name, object value)
-		{
-			if (node.ContextMenu.MenuItems.Count > 0)
-			{
-				node.ContextMenu.MenuItems.Add(new MenuItem("-")); // Separator
+				var steamID = new SteamID((ulong)value);
+				SetValueForDisplay(steamID.Render(steam3: false));
 			}
 
-			var rawValueMenuItem = new MenuItem("Display Raw Value");
-			node.ContextMenu.MenuItems.Add(rawValueMenuItem);
-			rawValueMenuItem.Click += delegate(object sender, EventArgs e)
+			void DisplayAsSteam3ID(object sender, EventArgs e)
 			{
-				SetNodeValue(node, name, value.ToString());
+				SetAsRadioSelected(sender);
+
+				var steamID = new SteamID((ulong)value);
+				SetValueForDisplay(steamID.Render(steam3: true));
+			}
+
+			#endregion
+
+			#region GlobalID
+
+			void DisplayAsGlobalID(object sender, EventArgs e)
+			{
+				SetAsRadioSelected(sender);
+
+				var gid = new GlobalID((ulong)value);
+				var children = new[]
+			{
+				new TreeNodeObjectExplorer("Box", gid.BoxID).TreeNode,
+				new TreeNodeObjectExplorer("Process ID", gid.ProcessID).TreeNode,
+				new TreeNodeObjectExplorer("Sequential Count", gid.SequentialCount).TreeNode,
+				new TreeNodeObjectExplorer("StartTime", gid.StartTime.ToString("yyyy-MM-dd HH:mm:ss")).TreeNode
 			};
 
-			var enumMenuItem = new MenuItem("Display Enum Value");
-			node.ContextMenu.MenuItems.Add(enumMenuItem);
+				SetValueForDisplay(null, childNodes: children);
+			}
 
-			node.ContextMenu.Popup += delegate(object sender, EventArgs eventArgs)
+			#endregion
+
+			#region Date/Time
+
+			void DisplayAsPosixTimestamp(object sender, EventArgs e)
 			{
-				if (enumMenuItem.MenuItems.Count > 0)
+				SetAsRadioSelected(sender);
+
+				var unixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+
+				try
+				{
+					var dateTimeValue = unixEpoch.AddSeconds((double)value).ToString("yyyy-MM-dd HH:mm:ss");
+					SetValueForDisplay(dateTimeValue);
+				}
+				catch (ArgumentOutOfRangeException)
+				{
+					SetValueForDisplay("Out of range!");
+				}
+				catch (InvalidCastException)
+				{
+					SetValueForDisplay("Out of range!");
+				}
+			}
+
+			#endregion
+
+			#region Enum
+
+			internal void DisplayAsEnumMember(Type enumType)
+			{
+				object enumValue;
+				try
+				{
+					enumValue = Convert.ChangeType(value, enumType.GetEnumUnderlyingType());
+				}
+				catch (OverflowException)
+				{
+					SetValueForDisplay(string.Format("{0} (not convertible to '{1}')", value, enumType.Name), value.ToString());
+					return;
+				}
+
+				if (Enum.IsDefined(enumType, enumValue))
+				{
+					SetValueForDisplay(Enum.GetName(enumType, enumValue));
+				}
+				else
+				{
+					SetValueForDisplay(string.Format("{0} (not in '{1}')", value, enumType.Name), value.ToString());
+				}
+			}
+
+			static int MenuItemComparisonByText(MenuItem x, MenuItem y)
+			{
+				return string.Compare(x.Text, y.Text);
+			}
+
+			#endregion
+
+			#endregion
+
+			void OnContextMenuPopup(object sender, EventArgs e)
+			{
+				if (ContextMenuItems.Count > 0)
 				{
 					return;
 				}
 
-				var enumTypesByNamespace = lazySteamKit2ExportedEnumTypes.Value;
-
-				foreach (var enumTypes in enumTypesByNamespace)
+				if (!string.IsNullOrEmpty(ValueForDisplay) || clipboardCopyOverride != null)
 				{
-					var enumNamespaceMenuItem = new MenuItem(enumTypes.Key);
-					enumMenuItem.MenuItems.Add(enumNamespaceMenuItem);
-
-					var menuItems = new List<MenuItem>();
-
-					foreach (var enumType in enumTypes)
-					{
-						var enumName = enumType.FullName.Substring(enumType.Namespace.Length + 1);
-						var item = new MenuItem(enumName);
-
-						item.Click += (s, e) =>
+					ContextMenuItems.Add(
+						new MenuItem(
+							"&Copy",
+							new[]
 						{
-							DisplayEnumValue(node, name, enumType, enumName, value);
-						};
+							new MenuItem("Copy &Name", CopyNameToClipboard),
+							new MenuItem("Copy &Value", CopyValueToClipboard),
+							new MenuItem("Copy Name &and Value", CopyNameAndValueToClipboard)
+						}));
+				}
+				else
+				{
+					ContextMenuItems.Add(
+						new MenuItem(
+							"&Copy",
+							new[]
+						{
+							new MenuItem("Copy &Name", CopyNameToClipboard),
+						}));
+				}
 
-						menuItems.Add(item);
+				if (value != null)
+				{
+					var objectType = value.GetType();
+
+					if (objectType.IsValueType && objectType != typeof(bool))
+					{
+						ContextMenuItems.Add(new MenuItem("-"));
+
+						ContextMenuItems.Add(new MenuItem("Display &Raw Value", (s, _) =>
+						{
+							SetAsRadioSelected(s);
+							Initialize();
+						}) { RadioCheck = true, Checked = true });
+
+						var enumMenuItem = new MenuItem("Display as &Enum Value");
+
+						var enumTypesByNamespace = typeof(CMClient).Assembly.ExportedTypes
+							.Where(x => x.IsEnum)
+							.GroupBy(x => x.Namespace)
+							.OrderBy(x => x.Key)
+							.ToArray();
+
+						if (enumTypesByNamespace.Length > 0)
+						{
+							foreach (var enumTypes in enumTypesByNamespace)
+							{
+								var enumNamespaceMenuItem = new MenuItem(enumTypes.Key);
+								enumMenuItem.MenuItems.Add(enumNamespaceMenuItem);
+
+								var menuItems = new List<MenuItem>();
+
+								foreach (var enumType in enumTypes)
+								{
+									var enumName = enumType.FullName.Substring(enumType.Namespace.Length + 1);
+									var item = new MenuItem(enumName, (s, _) =>
+									{
+										SetAsRadioSelected(s);
+										DisplayAsEnumMember(enumType);
+									});
+									menuItems.Add(item);
+								}
+
+								menuItems.Sort(MenuItemComparisonByText);
+								enumNamespaceMenuItem.MenuItems.AddRange(menuItems.ToArray());
+							}
+							ContextMenuItems.Add(enumMenuItem);
+						}
+
+						if (objectType == typeof(long) || objectType == typeof(ulong))
+						{
+							ContextMenuItems.Add(
+								new MenuItem(
+									"SteamID",
+									new[]
+								{
+									new MenuItem("Steam2", DisplayAsSteam2ID) { RadioCheck = true },
+									new MenuItem("Steam3", DisplayAsSteam3ID) { RadioCheck = true }
+								}));
+
+							ContextMenuItems.Add(new MenuItem("GlobalID (GID)", DisplayAsGlobalID) { RadioCheck = true });
+							ContextMenuItems.Add(new MenuItem("Date/Time", DisplayAsPosixTimestamp) { RadioCheck = true });
+						}
 					}
 
-					menuItems.Sort(MenuItemComparisonByText);
-					enumNamespaceMenuItem.MenuItems.AddRange(menuItems.ToArray());
+					if (objectType == typeof(byte[]))
+					{
+						ContextMenuItems.Add(new MenuItem("&Save to file...", SaveDataToFile));
+
+						var data = (byte[])value;
+						if (data.Length > 0 && data.Length <= MaxDataLengthForDisplay)
+						{
+							ContextMenuItems.Add(new MenuItem("&ASCII", DisplayDataAsAscii));
+							ContextMenuItems.Add(new MenuItem("&UTF-8", DisplayDataAsUTF8));
+							ContextMenuItems.Add(new MenuItem("&Hexadecimal", DisplayDataAsHexadecimal));
+							ContextMenuItems.Add(new MenuItem("&Binary KeyValues (VDF)", DisplayDataAsBinaryKeyValues));
+						}
+					}
 				}
-			};
-		}
-
-		static int MenuItemComparisonByText(MenuItem x, MenuItem y)
-		{
-			return x.Text.CompareTo(y.Text);
-		}
-
-		static void DisplayEnumValue(TreeNode node, string name, Type enumType, string enumName, object value)
-		{
-			object enumValue;
-			try
-			{
-				enumValue = Convert.ChangeType(value, enumType.GetEnumUnderlyingType());
-			}
-			catch (OverflowException)
-			{
-				SetNodeValueNoCopy(node, name, string.Format("{0} (not convertable to '{1}')", value, enumName));
-				SetNodeValueToCopy(node, value.ToString());
-				return;
 			}
 
-			if (Enum.IsDefined(enumType, enumValue))
+			void SetValueForDisplay(string valueForDisplay, string clipboardOverrideValue = null, TreeNode[] childNodes = null)
 			{
-				SetNodeValue(node, name, Enum.GetName(enumType, enumValue));
+				this.ValueForDisplay = valueForDisplay;
+				this.clipboardCopyOverride = clipboardOverrideValue;
+
+				TreeNode.Nodes.Clear();
+				if (childNodes != null)
+				{
+					TreeNode.Nodes.AddRange(childNodes);
+				}
+
+				if (childNodes != null && childNodes.Length > 100)
+				{
+					TreeNode.Collapse(ignoreChildren: true);
+				}
+				else
+				{
+					TreeNode.Expand();
+				}
 			}
-			else
+
+			static void SetAsRadioSelected(object sender)
 			{
-				SetNodeValueNoCopy(node, name, string.Format("{0} (not in '{1}')", value, enumName));
-				SetNodeValueToCopy(node, enumValue.ToString());
+				var senderItem = sender as MenuItem;
+				if (senderItem != null)
+				{
+					var contextMenu = senderItem;
+					ContextMenu rootContextMenu;
+					for (
+						rootContextMenu = contextMenu.GetContextMenu();
+						rootContextMenu.GetContextMenu() != rootContextMenu;
+						rootContextMenu = rootContextMenu.GetContextMenu())
+					{
+					}
+
+					RecursiveClearMenuChecked(rootContextMenu);
+					senderItem.Checked = true;
+				}
 			}
 
-		}
-
-		static void SetAsRadioSelected(object sender)
-		{
-			var senderItem = (MenuItem)sender;
-			foreach (MenuItem item in senderItem.Parent.MenuItems)
+			static void RecursiveClearMenuChecked(Menu menu)
 			{
-				item.Checked = false;
+				foreach (MenuItem child in menu.MenuItems)
+				{
+					child.Checked = false;
+
+					RecursiveClearMenuChecked(child);
+				}
 			}
-			senderItem.Checked = true;
-		}
 
-		static string GetNodeValueToCopy(TreeNode node)
-		{
-			var nodeInfo = node.Tag as NodeInfo;
-			return nodeInfo != null ? nodeInfo.ValueToCopy : null;
-		}
+			void UpdateDisplayText()
+			{
+				string textToDisplay;
+				if (string.IsNullOrEmpty(ValueForDisplay))
+				{
+					textToDisplay = name;
+				}
+				else
+				{
+					textToDisplay = string.Format("{0}: {1}", name, ValueForDisplay);
+				}
 
-		static void SetNodeValueToCopy(TreeNode node, string value)
-		{
-			var nodeInfo = node.Tag as NodeInfo ?? new NodeInfo();
-			nodeInfo.ValueToCopy = value;
-			node.Tag = nodeInfo;
-		}
+				TreeNode.Text = textToDisplay;
+			}
 
-		static void SetNodeExpandByDefault(TreeNode node, bool value)
-		{
-			var nodeInfo = node.Tag as NodeInfo ?? new NodeInfo();
-			nodeInfo.ShouldExpandByDefault = value;
-			node.Tag = nodeInfo;
-		}
+			void Initialize()
+			{
+				if (value == null)
+				{
+					SetValueForDisplay("<null>");
+					return;
+				}
 
-		#endregion
+				var objectType = value.GetType();
+				if (objectType.IsValueType)
+				{
+					SetValueForDisplay(value.ToString());
+				}
+				else if (value is string)
+				{
+					SetValueForDisplay(string.Format("\"{0}\"", value), (string)value);
+				}
+				else if (value is SteamID)
+				{
+					var steamID = (SteamID)value;
+					SetValueForDisplay(string.Format("{0} ({1}", steamID.Render(steam3: true), steamID.ConvertToUInt64()));
+				}
+				else if (value is byte[])
+				{
+					var data = (byte[])value;
+					if (data.Length == 0)
+					{
+						SetValueForDisplay("byte[ 0 ]");
+					}
+					else if (data.Length > MaxDataLengthForDisplay)
+					{
+						SetValueForDisplay(string.Format("byte[ {0} ]: Length exceeded {1} bytes! Value not shown - right-click to save.", data.Length, MaxDataLengthForDisplay));
+					}
+					else
+					{
+						var hexadecimalValue = data.Aggregate(new StringBuilder(), (str, val) => str.Append(val.ToString("X2"))).ToString();
+						SetValueForDisplay(hexadecimalValue);
+					}
+				}
+				else if (value is KeyValue)
+				{
+					var kv = (KeyValue)value;
+					if (kv.Children.Count > 0)
+					{
+						var children = new List<TreeNode>();
+						foreach (var child in kv.Children)
+						{
+							children.Add(new TreeNodeObjectExplorer(child.Name, child).TreeNode);
+						}
+
+						SetValueForDisplay(null, childNodes: children.ToArray());
+					}
+					else
+					{
+						SetValueForDisplay(string.Format("\"{0}\"", kv.Value), kv.Value);
+					}
+				}
+				else if (objectType.IsDictionaryType())
+				{
+					var childNodes = new List<TreeNode>();
+
+					var dictionary = value as IDictionary;
+					foreach (DictionaryEntry entry in dictionary)
+					{
+						var childName = string.Format("[ {0} ]", entry.Key.ToString());
+						var childObjectExplorer = new TreeNodeObjectExplorer(childName, entry.Value);
+						childNodes.Add(childObjectExplorer.TreeNode);
+					}
+
+					SetValueForDisplay(null, childNodes: childNodes.ToArray());
+				}
+				else if (objectType.IsEnumerableType())
+				{
+					Type innerType = null;
+					var index = 0;
+
+					var childNodes = new List<TreeNode>();
+
+					foreach (var childObject in value as IEnumerable)
+					{
+						if (innerType != null)
+						{
+							innerType = childObject.GetType();
+						}
+
+						var childName = string.Format("[ {0} ]", index);
+						var childObjectExplorer = new TreeNodeObjectExplorer(childName, childObject);
+						childNodes.Add(childObjectExplorer.TreeNode);
+
+						index++;
+					}
+
+					SetValueForDisplay(string.Format("{0}[ {1} ]", innerType == null ? objectType.Name : innerType.Name, index), childNodes: childNodes.ToArray());
+				}
+				else
+				{
+					var childNodes = new List<TreeNode>();
+
+					foreach (var property in value.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance))
+					{
+						var childName = property.Name;
+						var childObject = property.GetValue(value, null);
+
+						var childObjectExplorer = new TreeNodeObjectExplorer(childName, childObject);
+						childNodes.Add(childObjectExplorer.TreeNode);
+					}
+
+					SetValueForDisplay(null, childNodes: childNodes.ToArray());
+				}
+			}
+		}
 	}
 }
