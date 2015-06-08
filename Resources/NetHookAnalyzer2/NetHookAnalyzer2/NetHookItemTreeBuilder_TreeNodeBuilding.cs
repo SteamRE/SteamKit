@@ -52,8 +52,38 @@ namespace NetHookAnalyzer2
 					header = ReadGameCoordinatorHeader(body.msgtype, ms),
 					body = ReadMessageBody(body.msgtype, ms, body.appid),
 				};
-
-				return new TreeNodeObjectExplorer("Game Coordinator Message", gc).TreeNode;
+				if (body.appid == 570 && EMsgExtensions.GetGCMessageName(body.msgtype) == "k_ESOMsg_UpdateMultiple")
+				{
+					System.Collections.Generic.List<object> gcMsgList = new System.Collections.Generic.List<object>();
+					var castedGC = (SteamKit2.GC.Internal.CMsgSOMultipleObjects)gc.body;
+					foreach (SteamKit2.GC.Internal.CMsgSOMultipleObjects.SingleObject mObj in castedGC.objects_modified)
+					{
+						using (var gcMsgStream = new MemoryStream(mObj.object_data))
+						{
+							switch (mObj.type_id)
+							{
+								case 2003:
+									gcMsgList.Add(ProtoBuf.Serializer.Deserialize<SteamKit2.GC.Dota.Internal.CSODOTAParty>(gcMsgStream));
+									break;
+								case 2004:
+									gcMsgList.Add(ProtoBuf.Serializer.Deserialize<SteamKit2.GC.Dota.Internal.CSODOTALobby>(gcMsgStream));
+									break;
+							}
+						}
+					}
+					var newGC = new
+					{
+						emsg = gc.emsg,
+						header = gc.header,
+						body = gc.body,
+						inner_body = gcMsgList
+					};
+					return new TreeNodeObjectExplorer("Game Coordinator Message", newGC).TreeNode;
+				}
+				else
+				{
+					return new TreeNodeObjectExplorer("Game Coordinator Message", gc).TreeNode;
+				}
 			}
 		}
 
