@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Windows.Forms;
+using NetHookAnalyzer2.Specializations;
 using WinForms = System.Windows.Forms;
 
 namespace NetHookAnalyzer2
@@ -19,10 +20,22 @@ namespace NetHookAnalyzer2
 			RepopulateInterface();
 
 			itemsListView.ListViewItemSorter = new NetHookListViewItemSequentialComparer();
+			specializations = LoadMessageObjectSpecializations();
 		}
 
 		IDisposable itemsListViewFirstColumnHiderDisposable;
 		FileSystemWatcher folderWatcher;
+		readonly ISpecialization[] specializations;
+
+		static ISpecialization[] LoadMessageObjectSpecializations()
+		{
+			return new ISpecialization[]
+			{
+				new ClientServiceMethodSpecialization(),
+				new ClientServiceMethodResponseSpecialization(),
+				new GCGenericSpecialization()
+			};
+		}
 
 		protected override void OnFormClosed(FormClosedEventArgs e)
 		{
@@ -274,8 +287,13 @@ namespace NetHookAnalyzer2
 			}
 
 			itemExplorerTreeView.Nodes.Clear();
-			itemExplorerTreeView.Nodes.AddRange(item.BuildTree().Nodes.Cast<TreeNode>().ToArray());
+			itemExplorerTreeView.Nodes.AddRange(BuildTree(item).Nodes.Cast<TreeNode>().ToArray());
 			itemExplorerTreeView.Nodes[0].EnsureVisible(); // Scroll to top
+		}
+
+		TreeNode BuildTree(NetHookItem item)
+		{
+			return new NetHookItemTreeBuilder(item) { Specializations = specializations }.BuildTree();
 		}
 	}
 }
