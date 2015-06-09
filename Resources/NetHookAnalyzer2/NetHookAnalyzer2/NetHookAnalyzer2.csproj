@@ -68,6 +68,7 @@
     <Compile Include="ProtoBufFieldReader.cs" />
     <Compile Include="Specializations\ClientServiceMethodResponseSpecialization.cs" />
     <Compile Include="Specializations\ClientServiceMethodSpecialization.cs" />
+    <Compile Include="Specializations\Dota2SOMultipleObjectsGCSpecialization.cs" />
     <Compile Include="Specializations\GCGenericSpecialization.cs" />
     <Compile Include="Specializations\IGameCoordinatorSpecialization.cs" />
     <Compile Include="Specializations\ISpecialization.cs" />
