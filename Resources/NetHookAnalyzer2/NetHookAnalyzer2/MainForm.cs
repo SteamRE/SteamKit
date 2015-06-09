@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -23,6 +22,7 @@ namespace NetHookAnalyzer2
 		}
 
 		IDisposable itemsListViewFirstColumnHiderDisposable;
+		FileSystemWatcher folderWatcher;
 
 		protected override void OnFormClosed(FormClosedEventArgs e)
 		{
@@ -30,6 +30,12 @@ namespace NetHookAnalyzer2
 			{
 				itemsListViewFirstColumnHiderDisposable.Dispose();
 				itemsListViewFirstColumnHiderDisposable = null;
+			}
+
+			if (folderWatcher != null)
+			{
+				folderWatcher.Dispose();
+				folderWatcher = null;
 			}
 
 			base.OnFormClosed(e);
@@ -138,6 +144,8 @@ namespace NetHookAnalyzer2
 				itemsListView.Select();
 				itemsListView.Items[0].Selected = true;
 			}
+
+			InitializeFileSystemWatcher(dumpDirectory);
 		}
 
 		void OnDirectionFilterCheckedChanged(object sender, EventArgs e)
@@ -180,6 +188,58 @@ namespace NetHookAnalyzer2
 
 		#endregion
 
+
+		#endregion
+
+		#region FileSystem Watcher
+
+		void InitializeFileSystemWatcher(string path)
+		{
+			if (folderWatcher != null)
+			{
+				folderWatcher.Dispose();
+			}
+
+			folderWatcher = new FileSystemWatcher(path, "*.bin");
+			folderWatcher.BeginInit();
+
+			folderWatcher.Created += OnFolderWatcherCreated;
+			folderWatcher.Deleted += OnFolderWatcherDeleted;
+			folderWatcher.EnableRaisingEvents = true;
+			folderWatcher.IncludeSubdirectories = false;
+			folderWatcher.SynchronizingObject = this;
+
+			folderWatcher.EndInit();
+		}
+
+		void OnFolderWatcherCreated(object sender, FileSystemEventArgs e)
+		{
+			var item = Dump.AddItemFromPath(e.FullPath);
+			if (item == null)
+			{
+				return;
+			}
+
+			var listViewItem = item.AsListViewItem();
+			itemsListView.Items.Add(listViewItem);
+		}
+
+		void OnFolderWatcherDeleted(object sender, FileSystemEventArgs e)
+		{
+			var item = Dump.RemoveItemWithPath(e.FullPath);
+			if (item == null)
+			{
+				return;
+			}
+
+			var listViewItem = itemsListView.Items.Cast<ListViewItem>().SingleOrDefault(x => x.Tag == item);
+			if (listViewItem == null)
+			{
+				return;
+			}
+
+			itemsListView.Items.Remove(listViewItem);
+		}
 
 		#endregion
 

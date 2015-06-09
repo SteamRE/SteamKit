@@ -31,7 +31,7 @@ namespace NetHookAnalyzer2
 		}
 		string innerMessageName;
 
-		FileInfo FileInfo { get; set; }
+		public FileInfo FileInfo { get; private set; }
 
 		public Stream OpenStream()
 		{
