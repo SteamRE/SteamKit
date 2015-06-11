@@ -144,13 +144,22 @@ namespace SteamKit2
             return cache.GetUser( steamId ).Relationship;
         }
         /// <summary>
-        /// Gets the list of groups this friend occupies.
+        /// Gets the relationship of a friend.
         /// </summary>
         /// <param name="steamId">The steam id.</param>
-        /// <returns>The groups.</returns>
-        public List<string> GetFriendGroupNames( SteamID steamId )
+        /// <returns>The relationship of the friend to the local user.</returns>
+        public List<int> GetFriendGroupIDs(SteamID steamId)
         {
-            return cache.GetUser( steamId ).Groups;
+            return cache.GetUser( steamId ).GroupIDs;
+        }
+        /// <summary>
+        /// Gets the relationship of a friend.
+        /// </summary>
+        /// <param name="steamId">The steam id.</param>
+        /// <returns>The relationship of the friend to the local user.</returns>
+        public string GetFriendGroupName(int groupId)
+        {
+            return cache.Groups.GetGroup( groupId ).Name;
         }
         /// <summary>
         /// Gets the game name of a friend playing a game.
@@ -709,16 +718,12 @@ namespace SteamKit2
         void HandleFriendsGroupsList( IPacketMsg packetMsg )
         {
             var list = new ClientMsgProtobuf<CMsgClientFriendsGroupsList>( packetMsg );
-            Dictionary<int, string> GroupNames = new Dictionary<int,string>();
 
             foreach ( var Group in list.Body.friendGroups )
-                GroupNames.Add( Group.nGroupID, Group.strGroupName );
+                cache.Groups.GetGroup( Group.nGroupID ).Name = Group.strGroupName;
 
             foreach ( var Member in list.Body.memberships )
-            {
-                if ( GroupNames.ContainsKey( Member.nGroupID ) )
-                    cache.GetUser( new SteamID( Member.ulSteamID ) ).Groups.Add( GroupNames[Member.nGroupID] );
-            }
+                cache.Groups.GetGroup( Member.nGroupID ).Members.GetAccount( Member.ulSteamID );
 
             var callback = new FriendsGroupsListCallback( list.Body );
             this.Client.PostCallback( callback );
