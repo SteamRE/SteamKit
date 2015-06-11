@@ -1,5 +1,8 @@
 import "steammessages.proto";
 
+option optimize_for = SPEED;
+option cc_generic_services = false;
+
 enum EGCBaseMsg {
 	k_EMsgGCSystemMessage = 4001;
 	k_EMsgGCReplicateConVars = 4002;
@@ -292,6 +295,7 @@ message CMsgUpdateItemSchema {
 	optional bytes items_game = 1;
 	optional fixed32 item_schema_version = 2;
 	optional string items_game_url = 3;
+	optional bytes signature = 4;
 }
 
 message CMsgGCError {

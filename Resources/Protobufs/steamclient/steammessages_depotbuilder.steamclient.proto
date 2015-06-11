@@ -41,6 +41,7 @@ message CContentBuilder_GetMissingDepotChunks_Response {
 
 	repeated .CContentBuilder_GetMissingDepotChunks_Response.Chunks missing_chunks = 1;
 	optional uint32 total_missing_chunks = 2;
+	optional uint64 total_missing_bytes = 3;
 }
 
 message CContentBuilder_FinishDepotUpload_Request {

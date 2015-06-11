@@ -1,5 +1,8 @@
 import "steammessages.proto";
 
+option optimize_for = SPEED;
+option cc_generic_services = false;
+
 enum EGCItemMsg {
 	k_EMsgGCBase = 1000;
 	k_EMsgGCSetItemPosition = 1001;
@@ -83,6 +86,7 @@ enum EGCItemMsg {
 	k_EMsgGCUnlockItemStyleResponse = 1085;
 	k_EMsgGCApplySticker = 1086;
 	k_EMsgGCItemAcknowledged = 1087;
+	k_EMsgGCStatTrakSwap = 1088;
 	k_EMsgGCTradingBase = 1500;
 	k_EMsgGCTrading_InitiateTradeRequest = 1501;
 	k_EMsgGCTrading_InitiateTradeResponse = 1502;

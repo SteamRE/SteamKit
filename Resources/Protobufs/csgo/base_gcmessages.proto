@@ -1,5 +1,8 @@
 import "steammessages.proto";
 
+option optimize_for = SPEED;
+option cc_generic_services = false;
+
 enum EGCBaseMsg {
 	k_EMsgGCSystemMessage = 4001;
 	k_EMsgGCReplicateConVars = 4002;
@@ -173,6 +176,12 @@ message CMsgApplySticker {
 	optional uint32 baseitem_defidx = 4;
 }
 
+message CMsgApplyStatTrakSwap {
+	optional uint64 tool_item_id = 1;
+	optional uint64 item_1_item_id = 2;
+	optional uint64 item_2_item_id = 3;
+}
+
 message CMsgApplyStrangePart {
 	optional uint64 strange_part_item_id = 1;
 	optional uint64 item_item_id = 2;
@@ -240,19 +249,15 @@ message CSOEconClaimCode {
 
 message CMsgStoreGetUserData {
 	optional fixed32 price_sheet_version = 1;
+	optional int32 currency = 2;
 }
 
 message CMsgStoreGetUserDataResponse {
 	optional int32 result = 1;
-	optional int32 currency = 2;
-	optional string country = 3;
+	optional int32 currency_deprecated = 2;
+	optional string country_deprecated = 3;
 	optional fixed32 price_sheet_version = 4;
-	optional uint64 experiment_data = 5 [default = 0];
-	optional int32 featured_item_idx = 6;
-	optional bool show_hat_descriptions = 7 [default = true];
 	optional bytes price_sheet = 8;
-	optional int32 default_item_sort = 9 [default = 0];
-	repeated uint32 popular_items = 10;
 }
 
 message CMsgUpdateItemSchema {

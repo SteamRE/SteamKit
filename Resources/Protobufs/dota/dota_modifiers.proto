@@ -1,5 +1,7 @@
-import "google/protobuf/descriptor.proto";
 import "networkbasetypes.proto";
+
+option optimize_for = SPEED;
+option cc_generic_services = false;
 
 enum DOTA_MODIFIER_ENTRY_TYPE {
 	DOTA_MODIFIER_ENTRY_TYPE_ACTIVE = 1;
@@ -35,5 +37,7 @@ message CDOTAModifierBuffTableEntry {
 	optional int32 range = 26;
 	optional int32 dd_modifier_index = 27;
 	optional int32 dd_ability_index = 28;
+	optional string illusion_label = 29;
+	optional bool active = 30;
 }
 

@@ -5,6 +5,7 @@
 #include <memory>
 
 #include "nh2_string.h"
+#include "sedebug.h"
 
 typedef std::shared_ptr<void> SafeHandle;
 inline SafeHandle MakeSafeHandle(HANDLE hHandle)
@@ -57,86 +58,157 @@ __declspec(dllexport) void CALLBACK Inject(HWND hWindow, HINSTANCE hInstance, LP
 #pragma comment(linker, "/EXPORT:Eject=?Eject@@YGXPAUHWND__@@PAUHINSTANCE__@@PADH@Z")
 __declspec(dllexport) void CALLBACK Eject(HWND hWindow, HINSTANCE hInstance, LPSTR lpszCommandLine, int nCmdShow);
 
-int GetSteamProcessID(HWND hWindow, LPSTR lpszCommandLine)
+typedef enum {
+	k_ESteamProcessSearchErrorNone = 0,
+	k_ESteamProcessSearchErrorCouldNotFindSteam,
+	k_ESteamProcessSearchErrorCouldNotFindProcessWithSuppliedName,
+	k_ESteamProcessSearchErrorFoundMultipleProcessesWithSuppliedName,
+	k_ESteamProcessSearchErrorTargetProcessDoesNotHaveSteamClientDllLoaded,
+
+	k_ESteamProcessSearchErrorMax,
+} ESteamProcessSearchError;
+
+const char * NameFromESteamProcessSearchError( ESteamProcessSearchError eValue )
 {
-	int iSteamProcessID;
-	int iNumProcesses;
-	if (strlen(lpszCommandLine) == 0)
+	switch ( eValue )
 	{
-		iSteamProcessID = FindSteamProcessID();
-		if (iSteamProcessID <= 0)
+		case k_ESteamProcessSearchErrorCouldNotFindSteam:
+			return "Unable to find Steam. Make sure Steam is running, then try again.";
+
+		case k_ESteamProcessSearchErrorCouldNotFindProcessWithSuppliedName:
+			return "Unable to find any processes with the supplied name.";
+
+		case k_ESteamProcessSearchErrorFoundMultipleProcessesWithSuppliedName:
+			return "Multiple processes found with the supplied name. Please supply a process ID instead.";
+
+		case k_ESteamProcessSearchErrorTargetProcessDoesNotHaveSteamClientDllLoaded:
+			return "Invalid process: Target process does not have steamclient.dll loaded.";
+
+		default:
+			return "Unknown error.";
+	}
+}
+
+ESteamProcessSearchError GetSteamProcessID( HWND hWindow, LPSTR lpszCommandLine, int * piSteamProcessID )
+{
+	int iNumProcesses;
+	if ( strlen( lpszCommandLine ) == 0 )
+	{
+		*piSteamProcessID = FindSteamProcessID();
+		if ( *piSteamProcessID <= 0 )
 		{
-			MessageBoxA(hWindow, "Unable to find Steam. Make sure Steam is running, then try again.", "NetHook2", MB_OK | MB_ICONASTERISK);
-			return -1;
+			return k_ESteamProcessSearchErrorCouldNotFindSteam;
 		}
 	}
-	else if (!TryParseInt(lpszCommandLine, &iSteamProcessID))
+	else if ( !TryParseInt( lpszCommandLine, piSteamProcessID ) )
 	{
-		if (!FindProcessByName(lpszCommandLine, &iSteamProcessID, &iNumProcesses))
+		if ( !FindProcessByName( lpszCommandLine, piSteamProcessID, &iNumProcesses ) )
 		{
-			MessageBoxA(hWindow, "Unable to find any processes with the supplied name.", "NetHook2", MB_OK | MB_ICONASTERISK);
-			return -1;
+			return k_ESteamProcessSearchErrorCouldNotFindProcessWithSuppliedName;
 		}
-		else if (iNumProcesses > 1)
+		else if ( iNumProcesses > 1 )
 		{
-			MessageBoxA(hWindow, "Multiple processes found with the supplied name. Please supply a process ID instead.", "NetHook2", MB_OK | MB_ICONASTERISK);
-			return -1;
+			return k_ESteamProcessSearchErrorFoundMultipleProcessesWithSuppliedName;
 		}
 	}
 	
-	if (!ProcessHasModuleLoaded(iSteamProcessID, "steamclient.dll", /* bPartialMatchFromEnd */ true))
+	if ( !ProcessHasModuleLoaded( *piSteamProcessID, "steamclient.dll", /* bPartialMatchFromEnd */ true ) )
 	{
-		MessageBoxA(hWindow, "Invalid process: Target process does not have steamclient.dll loaded.", "NetHook2", MB_OK | MB_ICONASTERISK);
-		return -1;
+		return k_ESteamProcessSearchErrorTargetProcessDoesNotHaveSteamClientDllLoaded;
 	}
 
-	return iSteamProcessID;
+	return k_ESteamProcessSearchErrorNone;
 }
 
-void CALLBACK Inject(HWND hWindow, HINSTANCE hInstance, LPSTR lpszCommandLine, int nCmdShow)
+void CALLBACK Inject( HWND hWindow, HINSTANCE hInstance, LPSTR lpszCommandLine, int nCmdShow )
 {
-	int iSteamProcessID = GetSteamProcessID(hWindow, lpszCommandLine);
-	if (iSteamProcessID <= 0)
+	HANDLE hSeDebugToken = NULL;
+
+	int iSteamProcessID = -1;
+	ESteamProcessSearchError eError = GetSteamProcessID( hWindow, lpszCommandLine, &iSteamProcessID );
+	if ( eError == k_ESteamProcessSearchErrorCouldNotFindSteam || eError == k_ESteamProcessSearchErrorCouldNotFindProcessWithSuppliedName || eError == k_ESteamProcessSearchErrorTargetProcessDoesNotHaveSteamClientDllLoaded )
 	{
-		// GetSteamProcessID already shows a messagebox
+		hSeDebugToken = SeDebugAcquire();
+		if ( hSeDebugToken == NULL )
+		{
+			MessageBoxA( hWindow, "Unable to acquire SeDebug privilege. Make sure you're running as Administrator (elevated).", "NetHook2", MB_OK | MB_ICONASTERISK );
+			return;
+		}
+		eError = GetSteamProcessID( hWindow, lpszCommandLine, &iSteamProcessID );
+	}
+
+	if ( eError != k_ESteamProcessSearchErrorNone )
+	{
+		MessageBoxA( hWindow, NameFromESteamProcessSearchError( eError ), "NetHook2", MB_OK | MB_ICONASTERISK );
+		CloseHandle( hSeDebugToken );
 		return;
 	}
 
 	char szNethookDllPath[MAX_PATH];
-	ZeroMemory(szNethookDllPath, sizeof(szNethookDllPath));
-	int result = GetModuleFileNameA((HINSTANCE)&__ImageBase, szNethookDllPath, sizeof(szNethookDllPath));
+	ZeroMemory( szNethookDllPath, sizeof( szNethookDllPath ) );
+	int result = GetModuleFileNameA( (HINSTANCE)&__ImageBase, szNethookDllPath, sizeof( szNethookDllPath ) );
 
-	BOOL bInjected = SelfInjectIntoSteam(hWindow, iSteamProcessID, szNethookDllPath);
-	if (!bInjected)
+	if (ProcessHasModuleLoaded(iSteamProcessID, szNethookDllPath, /* bPartialMatchFromEnd */ false))
+	{
+		MessageBoxA(hWindow, "Error: NetHook2 is already injected into this process.", "NetHook2", MB_OK | MB_ICONASTERISK);
+		CloseHandle(hSeDebugToken);
+		return;
+	}
+
+	BOOL bInjected = SelfInjectIntoSteam( hWindow, iSteamProcessID, szNethookDllPath );
+	if ( !bInjected )
 	{
 		// Do nothing, SelfInjectIntoSteam already shows a messagebox with details.
 	}
+
+	CloseHandle( hSeDebugToken );
 }
 
-void CALLBACK Eject(HWND hWindow, HINSTANCE hInstance, LPSTR lpszCommandLine, int nCmdShow)
+void CALLBACK Eject( HWND hWindow, HINSTANCE hInstance, LPSTR lpszCommandLine, int nCmdShow )
 {
-	int iSteamProcessID = GetSteamProcessID(hWindow, lpszCommandLine);
-	if (iSteamProcessID <= 0)
+	HANDLE hSeDebugToken = NULL;
+
+	int iSteamProcessID = -1;
+	ESteamProcessSearchError eError = GetSteamProcessID( hWindow, lpszCommandLine, &iSteamProcessID );
+
+	// Steam sets permissions such that PROCESS_VM_READ is denied unless we either modify Steam's permissions somehow, or use
+	// SeDebugPrivilege. As such, GetSteamProcessID will fail at OpenProcess and signal that it could not find the process.
+	if ( eError == k_ESteamProcessSearchErrorCouldNotFindSteam || eError == k_ESteamProcessSearchErrorCouldNotFindProcessWithSuppliedName || eError == k_ESteamProcessSearchErrorTargetProcessDoesNotHaveSteamClientDllLoaded )
 	{
-		// GetSteamProcessID already shows a messagebox
+		hSeDebugToken = SeDebugAcquire();
+		if ( hSeDebugToken == NULL )
+		{
+			MessageBoxA( hWindow, "Unable to acquire SeDebug privilege. Make sure you're running as Administrator (elevated).", "NetHook2", MB_OK | MB_ICONASTERISK );
+			return;
+		}
+		eError = GetSteamProcessID( hWindow, lpszCommandLine, &iSteamProcessID );
+	}
+
+	if ( eError != k_ESteamProcessSearchErrorNone )
+	{
+		MessageBoxA( hWindow, NameFromESteamProcessSearchError( eError ), "NetHook2", MB_OK | MB_ICONASTERISK );
+		CloseHandle( hSeDebugToken );
 		return;
 	}
 
 	char szNethookDllPath[MAX_PATH];
-	ZeroMemory(szNethookDllPath, sizeof(szNethookDllPath));
-	int result = GetModuleFileNameA((HINSTANCE)&__ImageBase, szNethookDllPath, sizeof(szNethookDllPath));
+	ZeroMemory( szNethookDllPath, sizeof( szNethookDllPath ) );
+	int result = GetModuleFileNameA( (HINSTANCE)&__ImageBase, szNethookDllPath, sizeof( szNethookDllPath ) );
 
-	if (!ProcessHasModuleLoaded(iSteamProcessID, szNethookDllPath, /* bPartialMatchFromEnd */ false))
+	if ( !ProcessHasModuleLoaded( iSteamProcessID, szNethookDllPath, /* bPartialMatchFromEnd */ false ) )
 	{
-		MessageBoxA(hWindow, "Unable to eject NetHook2: This instance of Steam does not have NetHook2 loaded.", "NetHook2", MB_OK | MB_ICONASTERISK);
+		MessageBoxA( hWindow, "Unable to eject NetHook2: This instance of Steam does not have NetHook2 loaded.", "NetHook2", MB_OK | MB_ICONASTERISK );
+		CloseHandle( hSeDebugToken );
 		return;
 	}
 	
-	BOOL bInjected = InjectEjection(hWindow, iSteamProcessID, szNethookDllPath);
-	if (!bInjected)
+	BOOL bInjected = InjectEjection( hWindow, iSteamProcessID, szNethookDllPath );
+	if ( !bInjected )
 	{
 		// Do nothing, InjectEjection already shows a messagebox with details.
 	}
+
+	CloseHandle( hSeDebugToken );
 }
 
 //
@@ -318,37 +390,33 @@ BOOL SelfInjectIntoSteam(const HWND hWindow, const int iSteamProcessID, const ch
 		return false;
 	}
 
-	LPVOID pArgBuffer = VirtualAllocEx(hSteamProcess.get(), NULL, strlen(szNetHookDllPath), MEM_RESERVE | MEM_COMMIT, PAGE_READWRITE);
+	SafeRemoteMem pArgBuffer = MakeSafeRemoteMem(hSteamProcess, VirtualAllocEx(hSteamProcess.get(), NULL, strlen(szNetHookDllPath), MEM_RESERVE | MEM_COMMIT, PAGE_READWRITE));
 	if (pArgBuffer == NULL)
 	{
 		MessageBoxA(hWindow, "Unable to allocate memory inside Steam.", "NetHook2", MB_OK | MB_ICONASTERISK);
 		return false;
 	}
 
-	BOOL bWritten = WriteProcessMemory(hSteamProcess.get(), pArgBuffer, szNetHookDllPath, strlen(szNetHookDllPath), NULL);
+	BOOL bWritten = WriteProcessMemory(hSteamProcess.get(), pArgBuffer.get(), szNetHookDllPath, strlen(szNetHookDllPath), NULL);
 	if (!bWritten)
 	{
 		MessageBoxA(hWindow, "Unable to write to allocated memory inside Steam.", "NetHook2", MB_OK | MB_ICONASTERISK);
-		VirtualFreeEx(hSteamProcess.get(), pArgBuffer, 0, MEM_RELEASE);
 		return false;
 	}
 
-	HANDLE hRemoteThread = CreateRemoteThread(hSteamProcess.get(), NULL, 0, (LPTHREAD_START_ROUTINE)pLoadLibraryA, pArgBuffer, NULL, NULL);
+	HANDLE hRemoteThread = CreateRemoteThread(hSteamProcess.get(), NULL, 0, (LPTHREAD_START_ROUTINE)pLoadLibraryA, pArgBuffer.get(), NULL, NULL);
 	if (hRemoteThread == NULL)
 	{
 		MessageBoxA(hWindow, "Unable to create remote thread inside Steam.", "NetHook2", MB_OK | MB_ICONASTERISK);
-		VirtualFreeEx(hSteamProcess.get(), pArgBuffer, 0, MEM_RELEASE);
 		return false;
 	}
 
 	if (WaitForSingleObject(hRemoteThread, 5000 /* milliseconds */) == WAIT_TIMEOUT)
 	{
 		MessageBoxA(hWindow, "Injection timed out.", "NetHook2", MB_OK | MB_ICONASTERISK);
-		VirtualFreeEx(hSteamProcess.get(), pArgBuffer, 0, MEM_RELEASE);
 		return false;
 	}
 
-	VirtualFreeEx(hSteamProcess.get(), pArgBuffer, 0, MEM_RELEASE);
 	return true;
 }
 

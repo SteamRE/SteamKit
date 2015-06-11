@@ -1,5 +1,6 @@
-import "google/protobuf/descriptor.proto";
 import "networkbasetypes.proto";
+
+option cc_generic_services = false;
 
 enum CLC_Messages {
 	clc_ClientInfo = 8;
@@ -76,6 +77,7 @@ message CCLCMsg_VoiceData {
 	optional int32 sequence_bytes = 4;
 	optional uint32 section_number = 5;
 	optional uint32 uncompressed_sample_offset = 6;
+	optional uint32 tick = 7;
 }
 
 message CCLCMsg_BaselineAck {
@@ -305,6 +307,7 @@ message CSVCMsg_VoiceData {
 	optional int32 sequence_bytes = 7;
 	optional uint32 section_number = 8;
 	optional uint32 uncompressed_sample_offset = 9;
+	optional uint32 tick = 10;
 }
 
 message CSVCMsg_PacketReliable {

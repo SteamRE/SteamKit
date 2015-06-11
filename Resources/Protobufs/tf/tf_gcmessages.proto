@@ -1,5 +1,8 @@
 import "steammessages.proto";
 
+option optimize_for = SPEED;
+option cc_generic_services = false;
+
 enum ETFGCMsg {
 	k_EMsgGCReportWarKill = 5001;
 	k_EMsgGCVoteKickBanPlayer = 5018;
@@ -99,11 +102,17 @@ enum ETFGCMsg {
 	k_EMsgGCRemovePlayerFromLobby = 6301;
 	k_EMsgGCSetLobbySafeToLeave = 6302;
 	k_EMsgGC_UpdatePeriodicEvent = 6400;
+	k_EMsgGC_DuckLeaderboard_IndividualUpdate = 6401;
 	k_EMsgGC_ClientVerificationChallenge = 6500;
 	k_EMsgGC_ClientVerificationChallengeResponse = 6501;
 	k_EMsgGC_ClientVerificationVerboseResponse = 6502;
 	k_EMsgGC_ClientSetItemSlotAttribute = 6503;
 	k_EMsgGC_PlayerSkillRating_Adjustment = 6504;
+	k_EMsgGC_SpyVsEngyWar_IndividualUpdate = 6505;
+	k_EMsgGC_SpyVsEngyWar_JoinWar = 6506;
+	k_EMsgGC_SpyVsEngyWar_RequestGlobalStats = 6507;
+	k_EMsgGC_SpyVsEngyWar_GlobalStatsResponse = 6508;
+	k_EMsgGC_SpyVsEngyWar_SetKillCamMessage = 6509;
 	k_EMsgGCDev_GrantWarKill = 10001;
 }
 
@@ -115,6 +124,7 @@ enum TF_MatchmakingMode {
 	TF_Matchmaking_INVALID = 0;
 	TF_Matchmaking_QUICKPLAY = 1;
 	TF_Matchmaking_TOBOR = 2;
+	TF_Matchmaking_LADDER = 3;
 }
 
 enum TF_Matchmaking_WizardStep {
@@ -124,6 +134,7 @@ enum TF_Matchmaking_WizardStep {
 	TF_Matchmaking_WizardStep_TOBOR_CHALLENGE = 3;
 	TF_Matchmaking_WizardStep_QUICKPLAY = 4;
 	TF_Matchmaking_WizardStep_SEARCHING = 5;
+	TF_Matchmaking_WizardStep_LADDER = 6;
 }
 
 enum TF_GC_GameState {
@@ -138,6 +149,7 @@ enum TF_GC_GameState {
 
 enum TF_GC_TEAM {
 	TF_GC_TEAM_DEFENDERS = 0;
+	TF_GC_TEAM_INVADERS = 1;
 	TF_GC_TEAM_BROADCASTER = 2;
 	TF_GC_TEAM_SPECTATOR = 3;
 	TF_GC_TEAM_PLAYER_POOL = 4;
@@ -487,6 +499,7 @@ message CSOTFPartyMember {
 	optional uint32 badge_level = 4;
 	optional bool squad_surplus = 5;
 	optional bool is_banned = 8 [default = false];
+	optional bool owns_ladder_ticket = 9;
 }
 
 message CMsgMatchSearchCriteria {
@@ -496,6 +509,7 @@ message CMsgMatchSearchCriteria {
 	repeated string mvm_missions = 9;
 	optional bool play_for_bragging_rights = 6;
 	optional uint32 quickplay_game_type = 8;
+	optional uint32 ladder_type = 11;
 }
 
 message CMsgCreateOrUpdateParty {
@@ -536,6 +550,7 @@ message CSOTFParty {
 	repeated string search_mvm_missions = 31;
 	optional bool search_play_for_bragging_rights = 26;
 	optional uint32 search_quickplay_game_type = 28;
+	optional uint32 search_ladder_type = 33;
 	optional uint32 prevent_match_until_date = 18;
 	optional uint32 prevent_match_account_id = 19;
 }
@@ -860,6 +875,7 @@ message CMsgRemovePlayerFromLobby {
 		VOTE_KICK = 0;
 		IDLE_KICK = 1;
 		ADMIN_KICK = 2;
+		GAME_OVER = 3;
 	}
 
 	optional fixed64 steam_id = 1;
@@ -926,13 +942,26 @@ message CAttribute_String {
 	optional string value = 1;
 }
 
-message CAttribute_ItemDynamicRecipeComponentDefinedItem {
-	optional uint32 item_def = 1;
+message CAttribute_DynamicRecipeComponent {
+	optional uint32 def_index = 1;
 	optional uint32 item_quality = 2;
-	optional uint32 item_flags = 3;
+	optional uint32 component_flags = 3;
 	optional string attributes_string = 4;
-	optional uint32 item_count = 5;
-	optional uint32 items_fulfilled = 6;
+	optional uint32 num_required = 5;
+	optional uint32 num_fulfilled = 6;
+}
+
+message CAttribute_DynamicRecipeComponent_COMPAT_NEVER_SERIALIZE_THIS_OUT {
+	optional uint32 def_index = 1;
+	optional uint32 item_def = 2;
+	optional uint32 item_quality = 3;
+	optional uint32 component_flags = 4;
+	optional uint32 item_flags = 5;
+	optional string attributes_string = 6;
+	optional uint32 num_required = 7;
+	optional uint32 item_count = 8;
+	optional uint32 num_fulfilled = 9;
+	optional uint32 items_fulfilled = 10;
 }
 
 message CAttribute_ItemSlotCriteria {
@@ -958,5 +987,46 @@ message CGCMsgTFPlayerSkillRatingAdjustment {
 
 	repeated .CGCMsgTFPlayerSkillRatingAdjustment.Player players = 1;
 	optional .CGCMsgTFPlayerSkillRatingAdjustment.MatchType match_type = 2 [default = PUBLIC];
+}
+
+message CSOTFSpyVsEngyWarData {
+	optional uint32 account_id = 1 [(key_field) = true];
+	optional uint32 affiliation = 2;
+	optional uint32 points_for_engy = 3;
+	optional uint32 points_for_spy = 4;
+	optional uint32 kills_for_engy = 5;
+	optional uint32 kills_for_spy = 6;
+	optional string killcam_message = 7;
+}
+
+message CGCMsgGC_SpyVsEngyWar_IndividualUpdate {
+	optional fixed64 steam_id = 1;
+	optional uint32 engy_points_scored = 2;
+	optional uint32 spy_points_scored = 3;
+	optional uint32 engy_kills_scored = 4;
+	optional uint32 spy_kills_scored = 5;
+}
+
+message CGCMsgGC_SpyVsEngyWar_JoinWar {
+	optional uint32 affiliation = 1;
+}
+
+message CGCMsgGC_SpyVsEngyWar_SetKillCamMessage {
+	optional string killcam_message = 1;
+}
+
+message CGCMsgGC_SpyVsEngyWar_RequestGlobalStats {
+}
+
+message CGCMsgGC_SpyVsEngyWar_GlobalStatsResponse {
+	optional uint64 spy_score = 1;
+	optional uint64 engy_score = 2;
+}
+
+message CGCMsgGC_PlayerDuckLeaderboard_IndividualUpdate {
+	optional uint32 score = 2;
+	optional uint32 type = 3;
+	optional bytes score_id = 4;
+	optional uint32 score_check = 5;
 }
 

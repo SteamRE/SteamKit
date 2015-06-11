@@ -1,5 +1,8 @@
 import "google/protobuf/descriptor.proto";
 
+option optimize_for = SPEED;
+option cc_generic_services = false;
+
 extend .google.protobuf.FieldOptions {
 	optional bool key_field = 60000 [default = false];
 }
@@ -389,6 +392,15 @@ message CMsgGCCheckFriendship_Response {
 	optional bool found_friendship = 2;
 }
 
+message CMsgGCGetAppFriendsList {
+	optional fixed64 steamid = 1;
+}
+
+message CMsgGCGetAppFriendsList_Response {
+	optional bool success = 1;
+	repeated fixed64 steamids = 2;
+}
+
 message CMsgGCMsgMasterSetDirectory {
 	message SubGC {
 		optional uint32 dir_index = 1;
@@ -574,9 +586,9 @@ message CMsgDPPartnerMicroTxnsResponse {
 		k_MsgNoTransactions = 3;
 		k_MsgSQLFailure = 4;
 		k_MsgPartnerInfoDiscrepancy = 5;
-		k_MsgTransactionDeleteFailed = 6;
 		k_MsgTransactionInsertFailed = 7;
 		k_MsgAlreadyRunning = 8;
+		k_MsgInvalidTransactionData = 9;
 	}
 
 	optional uint32 eresult = 1 [default = 2];

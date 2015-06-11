@@ -2,6 +2,9 @@ import "google/protobuf/descriptor.proto";
 import "netmessages.proto";
 import "cstrike15_gcmessages.proto";
 
+option optimize_for = SPEED;
+option cc_generic_services = false;
+
 enum ECstrike15UserMessages {
 	CS_UM_VGUIMenu = 1;
 	CS_UM_Geiger = 2;
@@ -223,6 +226,9 @@ message CCSUsrMsg_SendPlayerItemFound {
 message CCSUsrMsg_ReloadEffect {
 	optional int32 entidx = 1;
 	optional int32 actanim = 2;
+	optional float origin_x = 3;
+	optional float origin_y = 4;
+	optional float origin_z = 5;
 }
 
 message CCSUsrMsg_AdjustMoney {

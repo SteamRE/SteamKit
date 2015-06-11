@@ -9,6 +9,7 @@ using System;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Runtime.InteropServices;
 using System.Text;
 using Microsoft.Win32;
 
@@ -93,16 +94,16 @@ namespace SteamKit2
                                         return EOSType.WinVista; // Also Server 2008
 
                                     case 1:
-                                        return EOSType.Windows7; // Also Server 2008 R2
+                                        return EOSType.Win7; // Also Server 2008 R2
 
                                     case 2:
-                                        return EOSType.Windows8; // Also Server 2012
+                                        return EOSType.Win8; // Also Server 2012
 
                                     // Note: The OSVersion property reports the same version number (6.2.0.0) for both Windows 8 and Windows 8.1.- http://msdn.microsoft.com/en-us/library/system.environment.osversion(v=vs.110).aspx
                                     // In practice, this will only get hit if the application targets Windows 8.1 in the app manifest.
                                     // See http://msdn.microsoft.com/en-us/library/windows/desktop/dn481241(v=vs.85).aspx for more info.
                                     case 3:
-                                        return EOSType.Windows81; // Also Server 2012 R2
+                                        return EOSType.Win81; // Also Server 2012 R2
                                 }
 
                                 goto default;
@@ -113,12 +114,73 @@ namespace SteamKit2
                     }
 
                 case PlatformID.Unix:
-                    return EOSType.LinuxUnknown; // this _could_ be mac, but we're gonna just go with linux for now
+                    {
+                        if ( IsRunningOnDarwin() )
+                        {
+                            switch ( ver.Major )
+                            {
+                                case 11:
+                                    return EOSType.MacOS107; // "Lion"
+
+                                case 12:
+                                    return EOSType.MacOS108; // "Mountain Lion"
+
+                                case 13:
+                                    return EOSType.MacOS109; // "Mavericks"
+
+                                case 14:
+                                   return EOSType.MacOS1010; // "Yosemite"
+
+                                default:
+                                    return EOSType.MacOSUnknown;
+                            }
+                        }
+                        else
+                        {
+                            return EOSType.LinuxUnknown;
+                        }
+                    }
+
+                // Not currently used by Mono. Maybe .NET Core will use this someday?
+                case PlatformID.MacOSX:
+                    return EOSType.MacOSUnknown;
 
                 default:
                     return EOSType.Unknown;
             }
         }
+
+        static bool IsRunningOnDarwin()
+        {
+            // Replace with a safer way if one exists in the future, such as if
+            // Mono actually decides to use PlatformID.MacOSX
+            var buffer = IntPtr.Zero;
+            try
+            {
+                buffer = Marshal.AllocHGlobal( 8192 );
+                if ( uname( buffer ) == 0 )
+                {
+                    var kernelName = Marshal.PtrToStringAnsi( buffer );
+                    if ( kernelName == "Darwin" )
+                    {
+                        return true;
+                    }
+                }
+            }
+            catch
+            {
+            }
+            finally
+            {
+                if ( buffer != IntPtr.Zero )
+                    Marshal.FreeHGlobal( buffer );
+            }
+
+            return false;
+        }
+
+        [DllImport ("libc")]
+        static extern int uname (IntPtr buf);
 
 
         public static byte[] GenerateMachineID()
@@ -145,7 +207,7 @@ namespace SteamKit2
 
                 try
                 {
-                    return CryptoHelper.SHAHash( Encoding.ASCII.GetBytes( hwString.ToString() ) );
+                    return CryptoHelper.SHAHash( Encoding.UTF8.GetBytes( hwString.ToString() ) );
                 }
                 catch { return null; }
             }

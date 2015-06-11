@@ -9,6 +9,7 @@ message CGameNotifications_Variable {
 message CGameNotifications_LocalizedText {
 	optional string token = 1 [(description) = "A localization token that maps to the desired string."];
 	repeated .CGameNotifications_Variable variables = 2 [(description) = "A list of variables values to substitute in any variables found in the localized string."];
+	optional string rendered_text = 3 [(description) = "Text rendered in the requested language, complete with variable substitutions, if a language was specified."];
 }
 
 message CGameNotifications_UserStatus {
@@ -54,6 +55,7 @@ message CGameNotifications_EnumerateSessions_Request {
 	optional uint32 appid = 1 [(description) = "The sessionid to request details for. Optional. If not specified, all the user's sessions will be returned."];
 	optional bool include_all_user_messages = 3 [(description) = "(Optional) Boolean determining whether the message for all users should be included. Defaults to false."];
 	optional bool include_auth_user_message = 4 [(description) = "(Optional) Boolean determining whether the message for the authenticated user should be included. Defaults to false."];
+	optional string language = 5 [(description) = "(Optional) Language to localize the text in."];
 }
 
 message CGameNotifications_Session {
@@ -68,6 +70,21 @@ message CGameNotifications_Session {
 
 message CGameNotifications_EnumerateSessions_Response {
 	repeated .CGameNotifications_Session sessions = 1 [(description) = "A list of the user's sessions."];
+}
+
+message CGameNotifications_GetSessionDetails_Request {
+	message RequestedSession {
+		optional uint64 sessionid = 1 [(description) = "The sessionid to get details for."];
+		optional bool include_auth_user_message = 3 [(description) = "(Optional) Boolean determining whether the message for the authenticated user should be included. Defaults to false."];
+	}
+
+	repeated .CGameNotifications_GetSessionDetails_Request.RequestedSession sessions = 1;
+	optional uint32 appid = 2 [(description) = "The appid for the sessions."];
+	optional string language = 3 [(description) = "Language to localize the text in."];
+}
+
+message CGameNotifications_GetSessionDetails_Response {
+	repeated .CGameNotifications_Session sessions = 1 [(description) = "The details of the session."];
 }
 
 message GameNotificationSettings {
@@ -87,6 +104,14 @@ message CGameNotifications_OnNotificationsRequested_Notification {
 	optional uint32 appid = 2 [(description) = "The appid that requested notifications."];
 }
 
+message CGameNotifications_OnUserStatusChanged_Notification {
+	optional fixed64 steamid = 1 [(description) = "steamid of the user whose status changed."];
+	optional uint64 sessionid = 2 [(description) = "The sessionid of the session where the user's status was changed."];
+	optional uint32 appid = 3 [(description) = "The appid of the session where the user's status changed."];
+	optional .CGameNotifications_UserStatus status = 4 [(description) = "(Optional) New status of the user."];
+	optional bool removed = 5 [(description) = "(Optional) User has been removed from the session."];
+}
+
 service GameNotifications {
 	option (service_description) = "A service for functions related to the asyncronous game notification server.";
 	rpc UserCreateSession (.CGameNotifications_CreateSession_Request) returns (.CGameNotifications_CreateSession_Response) {
@@ -101,6 +126,9 @@ service GameNotifications {
 	rpc EnumerateSessions (.CGameNotifications_EnumerateSessions_Request) returns (.CGameNotifications_EnumerateSessions_Response) {
 		option (method_description) = "Enumerates a user's sessions";
 	}
+	rpc GetSessionDetails (.CGameNotifications_GetSessionDetails_Request) returns (.CGameNotifications_GetSessionDetails_Response) {
+		option (method_description) = "Get the details for a specific session";
+	}
 	rpc UpdateNotificationSettings (.CGameNotifications_UpdateNotificationSettings_Request) returns (.CGameNotifications_UpdateNotificationSettings_Response) {
 		option (method_description) = "Updates whether a user allows game notifications for a specific app";
 	}
@@ -110,5 +138,8 @@ service GameNotificationsClient {
 	option (service_execution_site) = k_EProtoExecutionSiteSteamClient;
 	rpc OnNotificationsRequested (.CGameNotifications_OnNotificationsRequested_Notification) returns (.NoResponse) {
 		option (method_description) = "Requests that the user opt into notifications";
+	}
+	rpc OnUserStatusChanged (.CGameNotifications_OnUserStatusChanged_Notification) returns (.NoResponse) {
+		option (method_description) = "Notification that the user's status has changed";
 	}
 }

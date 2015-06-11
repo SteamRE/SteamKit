@@ -1,15 +1,16 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.ComponentModel;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
-using System.ComponentModel;
+using System.Text;
+using System.Text.RegularExpressions;
+using google.protobuf;
 using ProtoBuf;
 using ProtoBuf.Meta;
-using google.protobuf;
-using System.Text.RegularExpressions;
 
 namespace ProtobufDumper
 {
@@ -555,13 +556,11 @@ namespace ProtobufDumper
 
             name = null;
 
-            if (defaultValueList.Length == 0 || protoMember.Length == 0)
+            if (protoMember.Length == 0)
                 return null;
 
             name = protoMember[0].Name;
             object value = null;
-
-            object defValue = defaultValueList[0].Value;
 
             try
             {
@@ -579,8 +578,12 @@ namespace ProtobufDumper
             if (value == null)
                 return null;
 
-            if (defValue != null && defValue.Equals(value))
-                return null;
+            if (defaultValueList.Length > 0)
+            {
+                object defValue = defaultValueList[0].Value;
+                if (defValue != null && defValue.Equals(value))
+                    return null;
+            }
 
             if (enumProxyList.Length > 0)
             {
@@ -595,7 +598,17 @@ namespace ProtobufDumper
                 value = string.Format("\"{0}\"", value);
             }
             else if (value is bool)
+            {
                 value = value.ToString().ToLower();
+            }
+            else if (value is IEnumerable)
+            {
+                var enumerableValue = ((IEnumerable)value).Cast<object>();
+                if (!enumerableValue.Any())
+                {
+                    return null;
+                }
+            }
 
             return Convert.ToString(value);
         }
@@ -607,9 +620,29 @@ namespace ProtobufDumper
             if (options == null)
                 return options_kv;
 
+            var optionsType = options.GetType();
+
             // generate precompiled options
-            foreach (PropertyInfo propInfo in options.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance))
+            var propertySearchBindingFlags = BindingFlags.Public | BindingFlags.Instance;
+            foreach (PropertyInfo propInfo in optionsType.GetProperties(propertySearchBindingFlags))
             {
+                var propertySpecifiedSuffix = "Specified";
+                var propName = propInfo.Name;
+                if (propName.EndsWith(propertySpecifiedSuffix))
+                {
+                    continue;
+                }
+
+                var specifiedProp = optionsType.GetProperty(propName + propertySpecifiedSuffix, propertySearchBindingFlags);
+                if (specifiedProp != null)
+                {
+                    var isSpecified = specifiedProp.GetValue(options);
+                    if (!isSpecified)
+                    {
+                        continue;
+                    }
+                }
+
                 string name;
                 string value = GetValueForProp(propInfo, options, false, out name); 
 
@@ -645,7 +678,7 @@ namespace ProtobufDumper
             return options_kv;
         }
 
-        private string BuildDescriptorDeclaration(FieldDescriptorProto field)
+        private string BuildDescriptorDeclaration(FieldDescriptorProto field, bool emitFieldLabel = true)
         {
             PushDescriptorName(field);
 
@@ -680,7 +713,16 @@ namespace ProtobufDumper
 
             PopDescriptorName();
 
-            return GetLabel(field.label) + " " + type + " " + field.name + " = " + field.number + parameters + ";";
+            var descriptorDeclarationBuilder = new StringBuilder();
+            if (emitFieldLabel)
+            {
+                descriptorDeclarationBuilder.Append(GetLabel(field.label));
+                descriptorDeclarationBuilder.Append(" ");
+            }
+
+            descriptorDeclarationBuilder.AppendFormat("{0} {1} = {2}{3};", type, field.name, field.number, parameters);
+
+            return descriptorDeclarationBuilder.ToString();
         }
 
         private void DumpExtensionDescriptor(List<FieldDescriptorProto> fields, StringBuilder sb, string levelspace)
@@ -827,7 +869,7 @@ namespace ProtobufDumper
                 DumpEnumDescriptor(field, sb, level + 1);
             }
 
-            foreach (FieldDescriptorProto field in proto.field)
+            foreach (FieldDescriptorProto field in proto.field.Where(x => !x.oneof_indexSpecified))
             {
                 var enumLookup = new List<EnumDescriptorProto>();
 
@@ -835,6 +877,21 @@ namespace ProtobufDumper
                 enumLookup.AddRange( proto.enum_type ); // add this message's nested enums
 
                 sb.AppendLine(levelspace + "\t" + BuildDescriptorDeclaration(field));
+            }
+
+            for (int i = 0; i < proto.oneof_decl.Count; i++)
+            {
+                var oneof = proto.oneof_decl[i];
+                var fields = proto.field.Where(x => x.oneof_indexSpecified && x.oneof_index == i).ToArray();
+
+                sb.AppendLine(levelspace + "\toneof " + oneof.name + " {");
+
+                foreach(var field in fields)
+                {
+                    sb.AppendLine(levelspace + "\t\t" + BuildDescriptorDeclaration(field, emitFieldLabel: false));
+                }
+
+                sb.AppendLine(levelspace + "\t}");
             }
 
             if (proto.extension_range.Count > 0)

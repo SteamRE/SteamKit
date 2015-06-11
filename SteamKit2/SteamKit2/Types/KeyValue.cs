@@ -560,21 +560,49 @@ namespace SteamKit2
         /// <param name="asBinary">If set to <c>true</c>, saves this instance as binary.</param>
         public void SaveToFile( string path, bool asBinary )
         {
-            if ( asBinary )
-                throw new NotImplementedException();
-
             using ( var f = File.Create( path ) )
             {
-                RecursiveSaveToFile( f );
+                if ( asBinary )
+                {
+                    RecursiveSaveBinaryToFile( f );
+                }
+                else
+                {
+                    RecursiveSaveTextToFile( f );
+                }
             }
         }
 
-        private void RecursiveSaveToFile( FileStream f )
+        private void RecursiveSaveBinaryToFile( Stream f )
         {
-            RecursiveSaveToFile( f, 0 );
+            RecursiveSaveBinaryToFileCore( f );
+            f.WriteByte( ( byte )Type.End );
         }
 
-        private void RecursiveSaveToFile( FileStream f, int indentLevel )
+        private void RecursiveSaveBinaryToFileCore( Stream f )
+        {
+            // Only supported types ATM:
+            // 1. KeyValue with children (no value itself)
+            // 2. String KeyValue
+            if ( Children.Any() )
+            {
+                f.WriteByte( ( byte )Type.None );
+                f.WriteNullTermString( Name, Encoding.UTF8 );
+                foreach ( var child in Children )
+                {
+                    child.RecursiveSaveBinaryToFileCore( f );
+                }
+                f.WriteByte( ( byte )Type.End );
+            }
+            else
+            {
+                f.WriteByte( ( byte )Type.String );
+                f.WriteNullTermString( Name, Encoding.UTF8 );
+                f.WriteNullTermString( Value ?? string.Empty, Encoding.UTF8 );
+            }
+        }
+
+        private void RecursiveSaveTextToFile( FileStream f, int indentLevel = 0 )
         {
             // write header
             WriteIndents( f, indentLevel );
@@ -588,7 +616,7 @@ namespace SteamKit2
             {
                 if ( child.Value == null )
                 {
-                    child.RecursiveSaveToFile( f, indentLevel + 1 );
+                    child.RecursiveSaveTextToFile( f, indentLevel + 1 );
                 }
                 else
                 {

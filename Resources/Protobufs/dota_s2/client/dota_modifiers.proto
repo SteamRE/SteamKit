@@ -2,6 +2,9 @@ import "google/protobuf/descriptor.proto";
 import "networkbasetypes.proto";
 import "netmessages.proto";
 
+option optimize_for = SPEED;
+option cc_generic_services = false;
+
 enum DOTA_MODIFIER_ENTRY_TYPE {
 	DOTA_MODIFIER_ENTRY_TYPE_ACTIVE = 1;
 	DOTA_MODIFIER_ENTRY_TYPE_REMOVED = 2;

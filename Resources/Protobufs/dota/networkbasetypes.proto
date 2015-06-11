@@ -1,5 +1,6 @@
-import "google/protobuf/descriptor.proto";
 import "network_connection.proto";
+
+option cc_generic_services = false;
 
 enum SIGNONSTATE {
 	SIGNONSTATE_NONE = 0;

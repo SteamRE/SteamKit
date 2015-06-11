@@ -132,6 +132,57 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CInventory_ExchangeItem_Request")]
+  public partial class CInventory_ExchangeItem_Request : global::ProtoBuf.IExtensible
+  {
+    public CInventory_ExchangeItem_Request() {}
+    
+
+    private uint _appid = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"appid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint appid
+    {
+      get { return _appid; }
+      set { _appid = value; }
+    }
+
+    private ulong _steamid = default(ulong);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"steamid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong steamid
+    {
+      get { return _steamid; }
+      set { _steamid = value; }
+    }
+    private readonly global::System.Collections.Generic.List<ulong> _materialsitemid = new global::System.Collections.Generic.List<ulong>();
+    [global::ProtoBuf.ProtoMember(3, Name=@"materialsitemid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public global::System.Collections.Generic.List<ulong> materialsitemid
+    {
+      get { return _materialsitemid; }
+    }
+  
+    private readonly global::System.Collections.Generic.List<uint> _materialsquantity = new global::System.Collections.Generic.List<uint>();
+    [global::ProtoBuf.ProtoMember(4, Name=@"materialsquantity", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public global::System.Collections.Generic.List<uint> materialsquantity
+    {
+      get { return _materialsquantity; }
+    }
+  
+
+    private ulong _outputitemdefid = default(ulong);
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"outputitemdefid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong outputitemdefid
+    {
+      get { return _outputitemdefid; }
+      set { _outputitemdefid = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CInventory_AddItem_Request")]
   public partial class CInventory_AddItem_Request : global::ProtoBuf.IExtensible
   {
@@ -502,6 +553,7 @@ namespace SteamKit2.Unified.Internal
     public interface IInventory
     {
       CInventory_Response GetInventory(CInventory_GetInventory_Request request);
+    CInventory_Response ExchangeItem(CInventory_ExchangeItem_Request request);
     CInventory_Response AddPromoItem(CInventory_AddItem_Request request);
     CInventory_Response SafeModifyItem(CInventory_SafeModifyItem_Request request);
     CInventory_Response ConsumePlaytime(CInventory_ConsumePlaytime_Request request);

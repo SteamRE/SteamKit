@@ -81,7 +81,7 @@ namespace Tests
 
             SteamID sidAnonGSUser = new SteamID();
             sidAnonGSUser.SetFromSteam3String( "[A:1:123:456]" );
-            Assert.Equal (123u, sidAnonGSUser.AccountID );
+            Assert.Equal( 123u, sidAnonGSUser.AccountID );
             Assert.Equal( EUniverse.Public, sidAnonGSUser.AccountUniverse );
             Assert.Equal( 456u, sidAnonGSUser.AccountInstance );
             Assert.Equal( EAccountType.AnonGameServer, sidAnonGSUser.AccountType );
@@ -96,9 +96,34 @@ namespace Tests
             SteamID sidClanChat = new SteamID();
             sidClanChat.SetFromSteam3String( "[c:1:123]" );
             Assert.Equal( 123u, sidClanChat.AccountID );
-            Assert.Equal(EUniverse.Public, sidClanChat.AccountUniverse);
+            Assert.Equal( EUniverse.Public, sidClanChat.AccountUniverse );
             Assert.True( ( ( SteamID.ChatInstanceFlags )sidClanChat.AccountInstance ).HasFlag( SteamID.ChatInstanceFlags.Clan ) );
             Assert.Equal( EAccountType.Chat, sidClanChat.AccountType );
+
+            SteamID sidMultiseat = new SteamID();
+            sidMultiseat.SetFromSteam3String( "[M:1:123:456]" );
+            Assert.Equal( 123u, sidMultiseat.AccountID );
+            Assert.Equal( EUniverse.Public, sidMultiseat.AccountUniverse );
+            Assert.Equal( 456u, sidMultiseat.AccountInstance );
+            Assert.Equal( EAccountType.Multiseat, sidMultiseat.AccountType );
+        }
+
+        [Fact]
+        public void SetFromOldStyleSteam3StringCorrectParse()
+        {
+            SteamID sidMultiseat = new SteamID();
+            sidMultiseat.SetFromSteam3String( "[M:1:123(456)]" );
+            Assert.Equal( 123u, sidMultiseat.AccountID);
+            Assert.Equal( EUniverse.Public, sidMultiseat.AccountUniverse );
+            Assert.Equal( 456u, sidMultiseat.AccountInstance );
+            Assert.Equal( EAccountType.Multiseat, sidMultiseat.AccountType );
+
+            SteamID sidAnonGSUser = new SteamID();
+            sidAnonGSUser.SetFromSteam3String( "[A:1:123(456)]" );
+            Assert.Equal( 123u, sidAnonGSUser.AccountID );
+            Assert.Equal( EUniverse.Public, sidAnonGSUser.AccountUniverse );
+            Assert.Equal( 456u, sidAnonGSUser.AccountInstance );
+            Assert.Equal( EAccountType.AnonGameServer, sidAnonGSUser.AccountType );
         }
 
         [Fact]
@@ -137,6 +162,9 @@ namespace Tests
 
             bool setFromInvalidAccountId = sid.SetFromString( "STEAM_0:1:999999999999999999999999999999", EUniverse.Public );
             Assert.False( setFromInvalidAccountId );
+
+            bool universeOutOfRange = sid.SetFromSteam3String( "STEAM_5:0:123" );
+            Assert.False( universeOutOfRange );
         }
 
         [Fact]
@@ -157,7 +185,16 @@ namespace Tests
             Assert.False( setFromInvalidAccountId );
 
             bool setFromSteam2String = sid.SetFromSteam3String( "STEAM_0:1:4491990" );
-            Assert.False( setFromSteam2String );
+            Assert.False(setFromSteam2String);
+
+            bool mixingBracketsAndColons1 = sid.SetFromSteam3String( "[A:1:2:345)]" );
+            Assert.False( mixingBracketsAndColons1 );
+
+            bool mixingBracketsAndColons2 = sid.SetFromSteam3String( "[A:1:2(345]" );
+            Assert.False( mixingBracketsAndColons2 );
+
+            bool universeOutOfRange = sid.SetFromSteam3String( "[U:5:123]" );
+            Assert.False( universeOutOfRange );
         }
 
         [Fact]
@@ -225,6 +262,36 @@ namespace Tests
             ulong longValue = 172376458626834;
 
             Assert.True( sid.GetHashCode() == longValue.GetHashCode() );
+        }
+
+        [Fact]
+        public void InitializesInstancesCorrectly()
+        {
+            SteamID sid = new SteamID();
+
+            sid.SetFromSteam3String( "[g:1:1234]" );
+            Assert.Equal( EUniverse.Public, sid.AccountUniverse );
+            Assert.Equal( EAccountType.Clan, sid.AccountType );
+            Assert.Equal( 0u, sid.AccountInstance );
+            Assert.Equal( 1234u, sid.AccountID );
+
+            sid.SetFromSteam3String( "[T:1:1234]" );
+            Assert.Equal( EUniverse.Public, sid.AccountUniverse );
+            Assert.Equal( EAccountType.Chat, sid.AccountType );
+            Assert.Equal( 0u, sid.AccountInstance );
+            Assert.Equal( 1234u, sid.AccountID );
+
+            sid.SetFromSteam3String( "[c:1:1234]" );
+            Assert.Equal( EUniverse.Public, sid.AccountUniverse );
+            Assert.Equal( EAccountType.Chat, sid.AccountType );
+            Assert.Equal( (uint)SteamID.ChatInstanceFlags.Clan, sid.AccountInstance );
+            Assert.Equal( 1234u, sid.AccountID);
+
+            sid.SetFromSteam3String( "[L:1:1234]" );
+            Assert.Equal( EUniverse.Public, sid.AccountUniverse );
+            Assert.Equal( EAccountType.Chat, sid.AccountType );
+            Assert.Equal( ( uint ) SteamID.ChatInstanceFlags.Lobby, sid.AccountInstance );
+            Assert.Equal( 1234u, sid.AccountID );
         }
     }
 }

@@ -23,51 +23,6 @@ namespace SteamKit2.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientSubscribeToPersonaFeed")]
-  public partial class CMsgClientSubscribeToPersonaFeed : global::ProtoBuf.IExtensible
-  {
-    public CMsgClientSubscribeToPersonaFeed() {}
-    
-    private readonly global::System.Collections.Generic.List<CMsgClientSubscribeToPersonaFeed.PersonaFeed> _persona_feeds = new global::System.Collections.Generic.List<CMsgClientSubscribeToPersonaFeed.PersonaFeed>();
-    [global::ProtoBuf.ProtoMember(1, Name=@"persona_feeds", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public global::System.Collections.Generic.List<CMsgClientSubscribeToPersonaFeed.PersonaFeed> persona_feeds
-    {
-      get { return _persona_feeds; }
-    }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"PersonaFeed")]
-  public partial class PersonaFeed : global::ProtoBuf.IExtensible
-  {
-    public PersonaFeed() {}
-    
-
-    private ulong _steamID = default(ulong);
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steamID", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
-    public ulong steamID
-    {
-      get { return _steamID; }
-      set { _steamID = value; }
-    }
-
-    private bool _subscribe = default(bool);
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"subscribe", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
-    public bool subscribe
-    {
-      get { return _subscribe; }
-      set { _subscribe = value; }
-    }
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientUDSP2PSessionStarted")]
   public partial class CMsgClientUDSP2PSessionStarted : global::ProtoBuf.IExtensible
   {
@@ -7532,6 +7487,24 @@ namespace SteamKit2.Internal
       get { return _send_package_info_changes; }
       set { _send_package_info_changes = value; }
     }
+
+    private uint _num_app_info_cached = default(uint);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"num_app_info_cached", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint num_app_info_cached
+    {
+      get { return _num_app_info_cached; }
+      set { _num_app_info_cached = value; }
+    }
+
+    private uint _num_package_info_cached = default(uint);
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"num_package_info_cached", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint num_package_info_cached
+    {
+      get { return _num_package_info_cached; }
+      set { _num_package_info_cached = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -7583,6 +7556,24 @@ namespace SteamKit2.Internal
       get { return _app_changes; }
     }
   
+
+    private bool _force_full_app_update = default(bool);
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"force_full_app_update", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool force_full_app_update
+    {
+      get { return _force_full_app_update; }
+      set { _force_full_app_update = value; }
+    }
+
+    private bool _force_full_package_update = default(bool);
+    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"force_full_package_update", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool force_full_package_update
+    {
+      get { return _force_full_package_update; }
+      set { _force_full_package_update = value; }
+    }
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"PackageChange")]
   public partial class PackageChange : global::ProtoBuf.IExtensible
   {

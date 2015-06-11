@@ -1026,6 +1026,121 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGC_ServerQuestUpdateData")]
+  public partial class CMsgGC_ServerQuestUpdateData : global::ProtoBuf.IExtensible
+  {
+    public CMsgGC_ServerQuestUpdateData() {}
+    
+    private readonly global::System.Collections.Generic.List<CMsgGC_ServerQuestUpdateData.PlayerQuestData> _player_quest_data = new global::System.Collections.Generic.List<CMsgGC_ServerQuestUpdateData.PlayerQuestData>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"player_quest_data", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CMsgGC_ServerQuestUpdateData.PlayerQuestData> player_quest_data
+    {
+      get { return _player_quest_data; }
+    }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"PlayerQuestData")]
+  public partial class PlayerQuestData : global::ProtoBuf.IExtensible
+  {
+    public PlayerQuestData() {}
+    
+
+    private uint _quester_account_id = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"quester_account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint quester_account_id
+    {
+      get { return _quester_account_id; }
+      set { _quester_account_id = value; }
+    }
+    private readonly global::System.Collections.Generic.List<CMsgGC_ServerQuestUpdateData.PlayerQuestData.QuestItemData> _quest_item_data = new global::System.Collections.Generic.List<CMsgGC_ServerQuestUpdateData.PlayerQuestData.QuestItemData>();
+    [global::ProtoBuf.ProtoMember(2, Name=@"quest_item_data", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CMsgGC_ServerQuestUpdateData.PlayerQuestData.QuestItemData> quest_item_data
+    {
+      get { return _quest_item_data; }
+    }
+  
+    private readonly global::System.Collections.Generic.List<CMsgGC_ServerQuestUpdateData.PlayerQuestData.LevelProgressData> _level_progress_data = new global::System.Collections.Generic.List<CMsgGC_ServerQuestUpdateData.PlayerQuestData.LevelProgressData>();
+    [global::ProtoBuf.ProtoMember(3, Name=@"level_progress_data", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CMsgGC_ServerQuestUpdateData.PlayerQuestData.LevelProgressData> level_progress_data
+    {
+      get { return _level_progress_data; }
+    }
+  
+
+    private uint _time_played = default(uint);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"time_played", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint time_played
+    {
+      get { return _time_played; }
+      set { _time_played = value; }
+    }
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"QuestItemData")]
+  public partial class QuestItemData : global::ProtoBuf.IExtensible
+  {
+    public QuestItemData() {}
+    
+
+    private ulong _quest_item_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"quest_item_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong quest_item_id
+    {
+      get { return _quest_item_id; }
+      set { _quest_item_id = value; }
+    }
+
+    private int _quest_points_earned = default(int);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"quest_points_earned", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int quest_points_earned
+    {
+      get { return _quest_points_earned; }
+      set { _quest_points_earned = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"LevelProgressData")]
+  public partial class LevelProgressData : global::ProtoBuf.IExtensible
+  {
+    public LevelProgressData() {}
+    
+
+    private uint _xp_points = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"xp_points", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint xp_points
+    {
+      get { return _xp_points; }
+      set { _xp_points = value; }
+    }
+
+    private int _xp_category = default(int);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"xp_category", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int xp_category
+    {
+      get { return _xp_category; }
+      set { _xp_category = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCCStrike15_v2_MatchmakingGCOperationalStats")]
   public partial class CMsgGCCStrike15_v2_MatchmakingGCOperationalStats : global::ProtoBuf.IExtensible
   {
@@ -1314,6 +1429,66 @@ namespace SteamKit2.GC.CSGO.Internal
       get { return _server_ipaddress_mask; }
       set { _server_ipaddress_mask = value; }
     }
+    private readonly global::System.Collections.Generic.List<CMsgGCCStrike15_v2_MatchmakingGC2ClientUpdate.Note> _notes = new global::System.Collections.Generic.List<CMsgGCCStrike15_v2_MatchmakingGC2ClientUpdate.Note>();
+    [global::ProtoBuf.ProtoMember(13, Name=@"notes", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CMsgGCCStrike15_v2_MatchmakingGC2ClientUpdate.Note> notes
+    {
+      get { return _notes; }
+    }
+  
+    private readonly global::System.Collections.Generic.List<uint> _penalty_account_id_sessions_green = new global::System.Collections.Generic.List<uint>();
+    [global::ProtoBuf.ProtoMember(14, Name=@"penalty_account_id_sessions_green", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public global::System.Collections.Generic.List<uint> penalty_account_id_sessions_green
+    {
+      get { return _penalty_account_id_sessions_green; }
+    }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Note")]
+  public partial class Note : global::ProtoBuf.IExtensible
+  {
+    public Note() {}
+    
+
+    private int _type = default(int);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int type
+    {
+      get { return _type; }
+      set { _type = value; }
+    }
+
+    private int _region_id = default(int);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"region_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int region_id
+    {
+      get { return _region_id; }
+      set { _region_id = value; }
+    }
+
+    private float _region_r = default(float);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"region_r", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(float))]
+    public float region_r
+    {
+      get { return _region_r; }
+      set { _region_r = value; }
+    }
+
+    private float _distance = default(float);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"distance", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(float))]
+    public float distance
+    {
+      get { return _distance; }
+      set { _distance = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -2096,6 +2271,15 @@ namespace SteamKit2.GC.CSGO.Internal
       get { return _aborted_match; }
       set { _aborted_match = value; }
     }
+
+    private CMsgGC_ServerQuestUpdateData _match_end_quest_data = null;
+    [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"match_end_quest_data", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public CMsgGC_ServerQuestUpdateData match_end_quest_data
+    {
+      get { return _match_end_quest_data; }
+      set { _match_end_quest_data = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -2247,6 +2431,15 @@ namespace SteamKit2.GC.CSGO.Internal
       get { return _activity; }
       set { _activity = value; }
     }
+
+    private int _seconds_until_next_mission = default(int);
+    [global::ProtoBuf.ProtoMember(16, IsRequired = false, Name=@"seconds_until_next_mission", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int seconds_until_next_mission
+    {
+      get { return _seconds_until_next_mission; }
+      set { _seconds_until_next_mission = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -2328,6 +2521,15 @@ namespace SteamKit2.GC.CSGO.Internal
     {
       get { return _penalty_seconds; }
       set { _penalty_seconds = value; }
+    }
+
+    private uint _penalty_reason = default(uint);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"penalty_reason", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint penalty_reason
+    {
+      get { return _penalty_reason; }
+      set { _penalty_reason = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -3045,6 +3247,34 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCCstrike15_v2_ClientRequestNewMission")]
+  public partial class CMsgGCCstrike15_v2_ClientRequestNewMission : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCCstrike15_v2_ClientRequestNewMission() {}
+    
+
+    private ulong _campaign_item_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"campaign_item_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong campaign_item_id
+    {
+      get { return _campaign_item_id; }
+      set { _campaign_item_id = value; }
+    }
+
+    private uint _mission_id = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"mission_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint mission_id
+    {
+      get { return _mission_id; }
+      set { _mission_id = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCCStrike15_v2_WatchInfoUsers")]
   public partial class CMsgGCCStrike15_v2_WatchInfoUsers : global::ProtoBuf.IExtensible
   {
@@ -3218,15 +3448,6 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _caseid = value; }
     }
 
-    private uint _verdict_legacy = default(uint);
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"verdict_legacy", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint verdict_legacy
-    {
-      get { return _verdict_legacy; }
-      set { _verdict_legacy = value; }
-    }
-
     private uint _suspectid = default(uint);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"suspectid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(default(uint))]
@@ -3279,6 +3500,15 @@ namespace SteamKit2.GC.CSGO.Internal
     {
       get { return _rpt_teamharm; }
       set { _rpt_teamharm = value; }
+    }
+
+    private uint _reason = default(uint);
+    [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"reason", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint reason
+    {
+      get { return _reason; }
+      set { _reason = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -3379,6 +3609,15 @@ namespace SteamKit2.GC.CSGO.Internal
     {
       get { return _streakconvictions; }
       set { _streakconvictions = value; }
+    }
+
+    private uint _reason = default(uint);
+    [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"reason", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint reason
+    {
+      get { return _reason; }
+      set { _reason = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -3498,77 +3737,6 @@ namespace SteamKit2.GC.CSGO.Internal
     {
       get { return _args; }
     }
-  
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGC_ServerQuestUpdateData")]
-  public partial class CMsgGC_ServerQuestUpdateData : global::ProtoBuf.IExtensible
-  {
-    public CMsgGC_ServerQuestUpdateData() {}
-    
-    private readonly global::System.Collections.Generic.List<CMsgGC_ServerQuestUpdateData.PlayerQuestData> _player_quest_data = new global::System.Collections.Generic.List<CMsgGC_ServerQuestUpdateData.PlayerQuestData>();
-    [global::ProtoBuf.ProtoMember(1, Name=@"player_quest_data", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public global::System.Collections.Generic.List<CMsgGC_ServerQuestUpdateData.PlayerQuestData> player_quest_data
-    {
-      get { return _player_quest_data; }
-    }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"PlayerQuestData")]
-  public partial class PlayerQuestData : global::ProtoBuf.IExtensible
-  {
-    public PlayerQuestData() {}
-    
-
-    private uint _quester_account_id = default(uint);
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"quester_account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint quester_account_id
-    {
-      get { return _quester_account_id; }
-      set { _quester_account_id = value; }
-    }
-    private readonly global::System.Collections.Generic.List<CMsgGC_ServerQuestUpdateData.PlayerQuestData.QuestItemData> _quest_item_data = new global::System.Collections.Generic.List<CMsgGC_ServerQuestUpdateData.PlayerQuestData.QuestItemData>();
-    [global::ProtoBuf.ProtoMember(2, Name=@"quest_item_data", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public global::System.Collections.Generic.List<CMsgGC_ServerQuestUpdateData.PlayerQuestData.QuestItemData> quest_item_data
-    {
-      get { return _quest_item_data; }
-    }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"QuestItemData")]
-  public partial class QuestItemData : global::ProtoBuf.IExtensible
-  {
-    public QuestItemData() {}
-    
-
-    private ulong _quest_item_id = default(ulong);
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"quest_item_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
-    public ulong quest_item_id
-    {
-      get { return _quest_item_id; }
-      set { _quest_item_id = value; }
-    }
-
-    private int _quest_points_earned = default(int);
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"quest_points_earned", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
-    public int quest_points_earned
-    {
-      get { return _quest_points_earned; }
-      set { _quest_points_earned = value; }
-    }
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
   
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -4519,6 +4687,15 @@ namespace SteamKit2.GC.CSGO.Internal
       get { return _gscookieid; }
       set { _gscookieid = value; }
     }
+
+    private ulong _uniqueid = default(ulong);
+    [global::ProtoBuf.ProtoMember(19, IsRequired = false, Name=@"uniqueid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong uniqueid
+    {
+      get { return _uniqueid; }
+      set { _uniqueid = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -4565,6 +4742,13 @@ namespace SteamKit2.GC.CSGO.Internal
       get { return _server_port; }
       set { _server_port = value; }
     }
+    private readonly global::System.Collections.Generic.List<string> _choked_blocks = new global::System.Collections.Generic.List<string>();
+    [global::ProtoBuf.ProtoMember(5, Name=@"choked_blocks", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<string> choked_blocks
+    {
+      get { return _choked_blocks; }
+    }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -4816,6 +5000,50 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCCStrike15_v2_GC2ClientTournamentInfo")]
+  public partial class CMsgGCCStrike15_v2_GC2ClientTournamentInfo : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCCStrike15_v2_GC2ClientTournamentInfo() {}
+    
+
+    private uint _eventid = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"eventid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint eventid
+    {
+      get { return _eventid; }
+      set { _eventid = value; }
+    }
+
+    private uint _stageid = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"stageid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint stageid
+    {
+      get { return _stageid; }
+      set { _stageid = value; }
+    }
+
+    private uint _game_type = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"game_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint game_type
+    {
+      get { return _game_type; }
+      set { _game_type = value; }
+    }
+    private readonly global::System.Collections.Generic.List<uint> _teamids = new global::System.Collections.Generic.List<uint>();
+    [global::ProtoBuf.ProtoMember(4, Name=@"teamids", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public global::System.Collections.Generic.List<uint> teamids
+    {
+      get { return _teamids; }
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     [global::ProtoBuf.ProtoContract(Name=@"ECsgoGCMsg", EnumPassthru=true)]
     public enum ECsgoGCMsg
     {
@@ -5007,7 +5235,13 @@ namespace SteamKit2.GC.CSGO.Internal
       k_EMsgGCCStrike15_v2_ClientRequestJoinFriendData = 9163,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCCStrike15_v2_ClientRequestJoinServerData", Value=9164)]
-      k_EMsgGCCStrike15_v2_ClientRequestJoinServerData = 9164
+      k_EMsgGCCStrike15_v2_ClientRequestJoinServerData = 9164,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCCStrike15_v2_ClientRequestNewMission", Value=9165)]
+      k_EMsgGCCStrike15_v2_ClientRequestNewMission = 9165,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCCStrike15_v2_GC2ClientTournamentInfo", Value=9167)]
+      k_EMsgGCCStrike15_v2_GC2ClientTournamentInfo = 9167
     }
   
 }

@@ -1,5 +1,8 @@
 import "steammessages.proto";
 
+option optimize_for = SPEED;
+option cc_generic_services = false;
+
 enum EGCBaseMsg {
 	k_EMsgGCSystemMessage = 4001;
 	k_EMsgGCReplicateConVars = 4002;
@@ -151,11 +154,6 @@ message CSOItemRecipe {
 	repeated .CSOItemCriteria input_items_criteria = 20;
 	repeated .CSOItemCriteria output_items_criteria = 21;
 	repeated uint32 input_item_dupe_counts = 22;
-}
-
-message CMsgDevNewItemRequest {
-	optional fixed64 receiver = 1;
-	optional .CSOItemCriteria criteria = 2;
 }
 
 message CMsgApplyStrangePart {
@@ -414,16 +412,6 @@ message CMsgGCStorePurchaseFinalizeResponse {
 message CMsgGCBannedWordListRequest {
 	optional uint32 ban_list_group_id = 1;
 	optional uint32 word_id = 2;
-}
-
-message CMsgGCRequestAnnouncements {
-}
-
-message CMsgGCRequestAnnouncementsResponse {
-	optional string announcement_title = 1;
-	optional string announcement = 2;
-	optional string nextmatch_title = 3;
-	optional string nextmatch = 4;
 }
 
 message CMsgGCBannedWord {

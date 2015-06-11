@@ -604,8 +604,10 @@ namespace SteamKit2
 		ClientDPSendSpecialSurveyResponseReply = 1623,
 		DPStoreSaleStatistics = 1624,
 		ClientDPUpdateAppJobReport = 1625,
+		[Obsolete]
 		ClientDPSteam2AppStarted = 1627,
 		DPUpdateContentEvent = 1626,
+		ClientDPContentStatsReport = 1630,
 		BaseCM = 1700,
 		CMSetAllowState = 1701,
 		CMSpewAllowState = 1702,
@@ -1105,6 +1107,12 @@ namespace SteamKit2
 		AMPayelpPaymentResponse = 4388,
 		AMPlayerGetClanBasicDetails = 4389,
 		AMPlayerGetClanBasicDetailsResponse = 4390,
+		AMTwoFactorRecoverAuthenticatorRequest = 4402,
+		AMTwoFactorRecoverAuthenticatorResponse = 4403,
+		AMValidatePasswordResetCodeAndSendSmsRequest = 4406,
+		AMValidatePasswordResetCodeAndSendSmsResponse = 4407,
+		AMGetAccountResetDetailsRequest = 4408,
+		AMGetAccountResetDetailsResponse = 4409,
 		BasePSRange = 5000,
 		PSCreateShoppingCart = 5001,
 		PSCreateShoppingCartResponse = 5002,
@@ -1374,15 +1382,25 @@ namespace SteamKit2
 		DFSStartTransfer = 5618,
 		DFSTransferComplete = 5619,
 		BaseMDS = 5800,
+		[Obsolete]
 		ClientMDSLoginRequest = 5801,
+		[Obsolete]
 		ClientMDSLoginResponse = 5802,
+		[Obsolete]
 		ClientMDSUploadManifestRequest = 5803,
+		[Obsolete]
 		ClientMDSUploadManifestResponse = 5804,
+		[Obsolete]
 		ClientMDSTransmitManifestDataChunk = 5805,
+		[Obsolete]
 		ClientMDSHeartbeat = 5806,
+		[Obsolete]
 		ClientMDSUploadDepotChunks = 5807,
+		[Obsolete]
 		ClientMDSUploadDepotChunksResponse = 5808,
+		[Obsolete]
 		ClientMDSInitDepotBuildRequest = 5809,
+		[Obsolete]
 		ClientMDSInitDepotBuildResponse = 5810,
 		AMToMDSGetDepotDecryptionKey = 5812,
 		MDSToAMGetDepotDecryptionKeyResponse = 5813,
@@ -1396,10 +1414,15 @@ namespace SteamKit2
 		ClientMDSInitWorkshopBuildRequest = 5816,
 		[Obsolete]
 		ClientMDSInitWorkshopBuildResponse = 5817,
+		[Obsolete]
 		ClientMDSGetDepotManifest = 5818,
+		[Obsolete]
 		ClientMDSGetDepotManifestResponse = 5819,
+		[Obsolete]
 		ClientMDSGetDepotManifestChunk = 5820,
+		[Obsolete]
 		ClientMDSUploadRateTest = 5823,
+		[Obsolete]
 		ClientMDSUploadRateTestResponse = 5824,
 		MDSDownloadDepotChunksAck = 5825,
 		MDSContentServerStatsBroadcast = 5826,
@@ -1414,14 +1437,18 @@ namespace SteamKit2
 		MDSUpdateContentServerConfig = 5835,
 		MDSGetServerListForUser = 5836,
 		MDSGetServerListForUserResponse = 5837,
+		[Obsolete]
 		ClientMDSRegisterAppBuild = 5838,
+		[Obsolete]
 		ClientMDSRegisterAppBuildResponse = 5839,
 		ClientMDSSetAppBuildLive = 5840,
 		ClientMDSSetAppBuildLiveResponse = 5841,
 		ClientMDSGetPrevDepotBuild = 5842,
 		ClientMDSGetPrevDepotBuildResponse = 5843,
 		MDSToCSFlushChunk = 5844,
+		[Obsolete]
 		ClientMDSSignInstallScript = 5845,
+		[Obsolete]
 		ClientMDSSignInstallScriptResponse = 5846,
 		CSBase = 6200,
 		CSPing = 6201,
@@ -1578,6 +1605,10 @@ namespace SteamKit2
 		ClientUCMEnumerateUserSubscribedFilesWithUpdatesResponse = 7379,
 		UCMPublishedFileContentUpdated = 7380,
 		UCMPublishedFileUpdated = 7381,
+		ClientWorkshopItemChangesRequest = 7382,
+		ClientWorkshopItemChangesResponse = 7383,
+		ClientWorkshopItemInfoRequest = 7384,
+		ClientWorkshopItemInfoResponse = 7385,
 		FSBase = 7500,
 		ClientRichPresenceUpload = 7501,
 		ClientRichPresenceRequest = 7502,
@@ -1668,11 +1699,15 @@ namespace SteamKit2
 		BackpackAddToCurrency = 8401,
 		BackpackAddToCurrencyResponse = 8402,
 		CREBase = 8500,
+		[Obsolete]
 		CRERankByTrend = 8501,
+		[Obsolete]
 		CRERankByTrendResponse = 8502,
 		CREItemVoteSummary = 8503,
 		CREItemVoteSummaryResponse = 8504,
+		[Obsolete]
 		CRERankByVote = 8505,
+		[Obsolete]
 		CRERankByVoteResponse = 8506,
 		CREUpdateUserPublishedItemVote = 8507,
 		CREUpdateUserPublishedItemVoteResponse = 8508,
@@ -1756,6 +1791,13 @@ namespace SteamKit2
 		ClientUnlockStreamingResponse = 9508,
 		ClientPlayingSessionState = 9600,
 		ClientKickPlayingSession = 9601,
+		ClientBroadcastInit = 9700,
+		ClientBroadcastFrames = 9701,
+		ClientBroadcastDisconnect = 9702,
+		ClientBroadcastScreenshot = 9703,
+		ClientBroadcastUploadConfig = 9704,
+		ClientVoiceCallPreAuthorize = 9800,
+		ClientVoiceCallPreAuthorizeResponse = 9801,
 	}
 	public enum EResult
 	{
@@ -1814,7 +1856,9 @@ namespace SteamKit2
 		DataCorruption = 53,
 		DiskFull = 54,
 		RemoteCallFailed = 55,
+		[Obsolete( "renamed to PasswordUnset" )]
 		PasswordNotSet = 56,
+		PasswordUnset = 56,
 		ExternalAccountUnlinked = 57,
 		PSNTicketInvalid = 58,
 		ExternalAccountAlreadyLinked = 59,
@@ -1824,14 +1868,18 @@ namespace SteamKit2
 		AccountLogonDenied = 63,
 		CannotUseOldPassword = 64,
 		InvalidLoginAuthCode = 65,
+		[Obsolete( "renamed to AccountLogonDeniedNoMail" )]
 		AccountLogonDeniedNoMailSent = 66,
+		AccountLogonDeniedNoMail = 66,
 		HardwareNotCapableOfIPT = 67,
 		IPTInitError = 68,
 		ParentalControlRestricted = 69,
 		FacebookQueryError = 70,
 		ExpiredLoginAuthCode = 71,
 		IPLoginRestrictionFailed = 72,
+		[Obsolete( "renamed to AccountLockedDown" )]
 		AccountLocked = 73,
+		AccountLockedDown = 73,
 		AccountLogonDeniedVerifiedEmailRequired = 74,
 		NoMatchingURL = 75,
 		BadResponse = 76,
@@ -1843,12 +1891,25 @@ namespace SteamKit2
 		RestrictedDevice = 82,
 		RegionLocked = 83,
 		RateLimitExceeded = 84,
+		[Obsolete( "renamed to AccountLoginDeniedNeedTwoFactor" )]
 		AccountLogonDeniedNeedTwoFactorCode = 85,
+		AccountLoginDeniedNeedTwoFactor = 85,
 		[Obsolete( "renamed to ItemDeleted" )]
 		ItemOrEntryHasBeenDeleted = 86,
 		ItemDeleted = 86,
 		AccountLoginDeniedThrottle = 87,
 		TwoFactorCodeMismatch = 88,
+		TwoFactorActivationCodeMismatch = 89,
+		AccountAssociatedToMultiplePlayers = 90,
+		NotModified = 91,
+		NoMobileDeviceAvailable = 92,
+		TimeIsOutOfSync = 93,
+		SMSCodeFailed = 94,
+		[Obsolete( "renamed to AccountLimitExceeded" )]
+		TooManyAccountsAccessThisResource = 95,
+		AccountLimitExceeded = 95,
+		AccountActivityLimitExceeded = 96,
+		PhoneActivityLimitExceeded = 97,
 	}
 	public enum EUniverse
 	{
@@ -1857,8 +1918,6 @@ namespace SteamKit2
 		Beta = 2,
 		Internal = 3,
 		Dev = 4,
-		[Obsolete( "Universe no longer exists" )]
-		RC = 5,
 		Max = 5,
 	}
 	public enum EChatEntryType
@@ -1869,6 +1928,7 @@ namespace SteamKit2
 		InviteGame = 3,
 		[Obsolete( "No longer supported by clients" )]
 		Emote = 4,
+		[Obsolete( "Listen for LobbyGameCreated_t callback instead" )]
 		LobbyGameStart = 5,
 		LeftConversation = 6,
 		Entered = 7,
@@ -1876,6 +1936,9 @@ namespace SteamKit2
 		WasBanned = 9,
 		Disconnected = 10,
 		HistoricalChat = 11,
+		Reserved1 = 12,
+		Reserved2 = 13,
+		LinkBlocked = 14,
 	}
 	public enum EPersonaState
 	{
@@ -1907,13 +1970,9 @@ namespace SteamKit2
 	{
 		None = 0,
 		Blocked = 1,
-		[Obsolete( "renamed to RequestRecipient" )]
-		PendingInvitee = 2,
 		RequestRecipient = 2,
 		Friend = 3,
 		RequestInitiator = 4,
-		[Obsolete( "renamed to RequestInitiator" )]
-		PendingInviter = 4,
 		Ignored = 5,
 		IgnoredFriend = 6,
 		SuggestedFriend = 7,
@@ -1998,8 +2057,6 @@ namespace SteamKit2
 		FriendshipRequested = 2,
 		Immediate = 4,
 		ClanMember = 8,
-		[Obsolete( "renamed to OnGameServer" )]
-		GameServer = 16,
 		OnGameServer = 16,
 		RequestingFriendship = 128,
 		RequestingInfo = 256,
@@ -2171,6 +2228,7 @@ namespace SteamKit2
 		AuthTicketCanceled = 6,
 		AuthTicketInvalidAlreadyUsed = 7,
 		AuthTicketInvalid = 8,
+		PublisherIssuedBan = 9,
 	}
 	public enum EChatRoomEnterResponse
 	{
@@ -2266,8 +2324,6 @@ namespace SteamKit2
 		CS = 1,
 		CDN = 2,
 		LCS = 3,
-		[Obsolete( "renamed to ProxyCache" )]
-		Proxy = 4,
 		ProxyCache = 4,
 		Max = 5,
 	}
@@ -2297,6 +2353,7 @@ namespace SteamKit2
 		MacOS107 = -90,
 		MacOS108 = -89,
 		MacOS109 = -88,
+		MacOS1010 = -87,
 		LinuxUnknown = -203,
 		Linux22 = -202,
 		Linux24 = -201,
@@ -2315,13 +2372,19 @@ namespace SteamKit2
 		WinXP = 7,
 		Win2003 = 8,
 		WinVista = 9,
-		[Obsolete( "renamed to Windows7" )]
 		Win7 = 10,
+		[Obsolete( "renamed to Win7" )]
 		Windows7 = 10,
 		Win2008 = 11,
 		Win2012 = 12,
+		Win8 = 13,
+		[Obsolete( "renamed to Win8" )]
 		Windows8 = 13,
+		Win81 = 14,
+		[Obsolete( "renamed to Win81" )]
 		Windows81 = 14,
+		Win2012R2 = 15,
+		Win10 = 16,
 		WinMAX = 15,
 		Max = 26,
 	}
@@ -2512,7 +2575,8 @@ namespace SteamKit2
 		Merch = 11,
 		ControllerBinding = 12,
 		SteamworksAccessInvite = 13,
-		Max = 14,
+		SteamVideo = 14,
+		Max = 15,
 	}
 	public enum EWorkshopFileAction
 	{
@@ -2523,11 +2587,7 @@ namespace SteamKit2
 	{
 		Accepted = 0,
 		Declined = 1,
-		[Obsolete( "renamed to TradeBannedInitiator" )]
-		VacBannedInitiator = 2,
 		TradeBannedInitiator = 2,
-		[Obsolete( "renamed to TradeBannedTarget" )]
-		VacBannedTarget = 3,
 		TradeBannedTarget = 3,
 		TargetAlreadyTrading = 4,
 		Disabled = 5,
@@ -2536,14 +2596,8 @@ namespace SteamKit2
 		TooSoon = 8,
 		TooSoonPenalty = 9,
 		ConnectionFailed = 10,
-		[Obsolete( "renamed to AlreadyTrading" )]
-		InitiatorAlreadyTrading = 11,
 		AlreadyTrading = 11,
-		[Obsolete( "renamed to AlreadyHasTradeRequest" )]
-		Error = 12,
 		AlreadyHasTradeRequest = 12,
-		[Obsolete( "renamed to NoResponse" )]
-		Timeout = 13,
 		NoResponse = 13,
 		CyberCafeInitiator = 14,
 		CyberCafeTarget = 15,
@@ -2605,6 +2659,8 @@ namespace SteamKit2
 		Windows = 1,
 		OSX = 2,
 		PS3 = 4,
+		Linux = 8,
+		[Obsolete]
 		Reserved1 = 8,
 		Reserved2 = 16,
 		All = -1,

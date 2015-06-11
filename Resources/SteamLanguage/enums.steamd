@@ -7,7 +7,6 @@ enum EUniverse
 	Beta = 2;
 	Internal = 3;
 	Dev = 4;
-	RC = 5; obsolete "Universe no longer exists"
 
 	Max = 5;
 };
@@ -20,13 +19,16 @@ enum EChatEntryType
 	Typing = 2;
 	InviteGame = 3;
 	Emote = 4; obsolete "No longer supported by clients"
-	LobbyGameStart = 5;
+	LobbyGameStart = 5; obsolete "Listen for LobbyGameCreated_t callback instead"
 	LeftConversation = 6;
 	Entered = 7;
 	WasKicked = 8;
 	WasBanned = 9;
 	Disconnected = 10;
 	HistoricalChat = 11;
+	Reserved1 = 12;
+	Reserved2 = 13;
+	LinkBlocked = 14;
 };
 
 enum EPersonaState
@@ -66,11 +68,9 @@ enum EFriendRelationship
 	None = 0;
 	
 	Blocked = 1;
-	PendingInvitee = 2; obsolete "renamed to RequestRecipient"
 	RequestRecipient = 2;
 	Friend = 3;
 	RequestInitiator = 4;
-	PendingInviter = 4;  obsolete "renamed to RequestInitiator"
 	Ignored = 5;
 	IgnoredFriend = 6;
 	SuggestedFriend = 7;
@@ -167,7 +167,6 @@ enum EFriendFlags flags
 	FriendshipRequested = 2;
 	Immediate = 4;
 	ClanMember = 8;
-	GameServer = 16; obsolete "renamed to OnGameServer"
 	OnGameServer = 16;
 	RequestingFriendship = 128;
 	RequestingInfo = 256;
@@ -348,6 +347,7 @@ enum EAuthSessionResponse
 	AuthTicketCanceled = 6;
 	AuthTicketInvalidAlreadyUsed = 7;
 	AuthTicketInvalid = 8;
+	PublisherIssuedBan = 9;
 };
 
 enum EChatRoomEnterResponse
@@ -450,7 +450,6 @@ enum EContentDownloadSourceType
 	CS = 1;
 	CDN = 2;
 	LCS = 3;
-	Proxy = 4; obsolete "renamed to ProxyCache"
 	ProxyCache = 4;
 
 	Max = 5;
@@ -488,6 +487,7 @@ enum EOSType
 	MacOS107 = -90;
 	MacOS108 = -89;
 	MacOS109 = -88;
+	MacOS1010 = -87;
 
 	LinuxUnknown = -203;
 	Linux22 = -202;
@@ -508,12 +508,16 @@ enum EOSType
 	WinXP = 7;
 	Win2003 = 8;
 	WinVista = 9;
-	Win7 = 10; obsolete "renamed to Windows7"
-	Windows7 = 10;
+	Win7 = 10;
+	Windows7 = 10; obsolete "renamed to Win7"
 	Win2008 = 11;
 	Win2012 = 12;
-	Windows8 = 13;
-	Windows81 = 14;
+	Win8 = 13;
+	Windows8 = 13; obsolete "renamed to Win8"
+	Win81 = 14;
+	Windows81 = 14; obsolete "renamed to Win81"
+	Win2012R2 = 15;
+	Win10 = 16;
 
 	WinMAX = 15;
 
@@ -716,8 +720,9 @@ enum EWorkshopFileType
 	Merch	= 11;
 	ControllerBinding	= 12;
 	SteamworksAccessInvite = 13;
+	SteamVideo = 14;
 
-	Max = 14;
+	Max = 15;
 };
 
 enum EWorkshopFileAction
@@ -730,9 +735,7 @@ enum EEconTradeResponse
 {
 	Accepted = 0;
 	Declined = 1;
-	VacBannedInitiator = 2; obsolete "renamed to TradeBannedInitiator"
 	TradeBannedInitiator = 2;
-	VacBannedTarget = 3; obsolete "renamed to TradeBannedTarget"
 	TradeBannedTarget = 3;
 	TargetAlreadyTrading = 4;
 	Disabled = 5;
@@ -741,11 +744,8 @@ enum EEconTradeResponse
 	TooSoon = 8;
 	TooSoonPenalty = 9;
 	ConnectionFailed = 10;
-	InitiatorAlreadyTrading = 11; obsolete "renamed to AlreadyTrading"
 	AlreadyTrading = 11;
-	Error = 12; obsolete "renamed to AlreadyHasTradeRequest"
 	AlreadyHasTradeRequest = 12;
-	Timeout = 13; obsolete "renamed to NoResponse"
 	NoResponse = 13;
 	CyberCafeInitiator = 14;
 	CyberCafeTarget = 15;
@@ -812,7 +812,8 @@ enum ERemoteStoragePlatform flags
 	Windows = 1;
 	OSX = 2;
 	PS3 = 4;
-	Reserved1 = 8;
+	Linux = 8;
+	Reserved1 = 8; obsolete
 	Reserved2 = 16;
 
 	All = -1;

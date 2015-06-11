@@ -1,5 +1,8 @@
 import "steammessages.proto";
 
+option optimize_for = SPEED;
+option cc_generic_services = false;
+
 enum ECsgoGCMsg {
 	k_EMsgGCCStrike15_v2_Base = 9100;
 	k_EMsgGCCStrike15_v2_MatchmakingStart = 9101;
@@ -64,6 +67,8 @@ enum ECsgoGCMsg {
 	k_EMsgGCCStrike15_v2_DraftSummary = 9162;
 	k_EMsgGCCStrike15_v2_ClientRequestJoinFriendData = 9163;
 	k_EMsgGCCStrike15_v2_ClientRequestJoinServerData = 9164;
+	k_EMsgGCCStrike15_v2_ClientRequestNewMission = 9165;
+	k_EMsgGCCStrike15_v2_GC2ClientTournamentInfo = 9167;
 }
 
 message GameServerPing {
@@ -210,6 +215,27 @@ message IpAddressMask {
 	optional uint32 token = 6;
 }
 
+message CMsgGC_ServerQuestUpdateData {
+	message PlayerQuestData {
+		message QuestItemData {
+			optional uint64 quest_item_id = 1;
+			optional int32 quest_points_earned = 2;
+		}
+
+		message LevelProgressData {
+			optional uint32 xp_points = 1;
+			optional int32 xp_category = 2;
+		}
+
+		optional uint32 quester_account_id = 1;
+		repeated .CMsgGC_ServerQuestUpdateData.PlayerQuestData.QuestItemData quest_item_data = 2;
+		repeated .CMsgGC_ServerQuestUpdateData.PlayerQuestData.LevelProgressData level_progress_data = 3;
+		optional uint32 time_played = 4;
+	}
+
+	repeated .CMsgGC_ServerQuestUpdateData.PlayerQuestData player_quest_data = 1;
+}
+
 message CMsgGCCStrike15_v2_MatchmakingGCOperationalStats {
 	optional int32 packetid = 1;
 	repeated .OperationalStatisticDescription namekeys = 2;
@@ -246,6 +272,13 @@ message CMsgGCCStrike15_v2_MatchmakingClient2ServerPing {
 }
 
 message CMsgGCCStrike15_v2_MatchmakingGC2ClientUpdate {
+	message Note {
+		optional int32 type = 1;
+		optional int32 region_id = 2;
+		optional float region_r = 3;
+		optional float distance = 4;
+	}
+
 	optional int32 matchmaking = 1;
 	repeated uint32 waiting_account_id_sessions = 2;
 	optional string error = 3;
@@ -256,6 +289,8 @@ message CMsgGCCStrike15_v2_MatchmakingGC2ClientUpdate {
 	repeated uint32 failready_account_id_sessions = 10;
 	repeated uint32 vacbanned_account_id_sessions = 11;
 	optional .IpAddressMask server_ipaddress_mask = 12;
+	repeated .CMsgGCCStrike15_v2_MatchmakingGC2ClientUpdate.Note notes = 13;
+	repeated uint32 penalty_account_id_sessions_green = 14;
 }
 
 message CDataGCCStrike15_v2_TournamentMatchDraft {
@@ -365,6 +400,7 @@ message CMsgGCCStrike15_v2_MatchmakingServerMatchEnd {
 	optional uint32 replay_token = 5;
 	optional uint32 replay_cluster_id = 6;
 	optional bool aborted_match = 7;
+	optional .CMsgGC_ServerQuestUpdateData match_end_quest_data = 8;
 }
 
 message CMsgGCCStrike15_v2_MatchmakingClient2GCHello {
@@ -386,6 +422,7 @@ message CMsgGCCStrike15_v2_MatchmakingGC2ClientHello {
 	repeated .TournamentEvent my_current_event_stages = 13;
 	optional uint32 survey_vote = 14;
 	optional .AccountActivity activity = 15;
+	optional int32 seconds_until_next_mission = 16;
 }
 
 message CMsgGCCStrike15_v2_AccountPrivacySettings {
@@ -401,6 +438,7 @@ message CMsgGCCStrike15_v2_MatchmakingGC2ClientAbandon {
 	optional uint32 account_id = 1;
 	optional .CMsgGCCStrike15_v2_MatchmakingGC2ClientReserve abandoned_match = 2;
 	optional uint32 penalty_seconds = 3;
+	optional uint32 penalty_reason = 4;
 }
 
 message CMsgGCCStrike15_v2_MatchmakingServer2GCKick {
@@ -507,6 +545,11 @@ message CMsgGCCStrike15_v2_ClientRequestJoinServerData {
 	optional .CMsgGCCStrike15_v2_MatchmakingGC2ClientReserve res = 6;
 }
 
+message CMsgGCCstrike15_v2_ClientRequestNewMission {
+	optional uint64 campaign_item_id = 1;
+	optional uint32 mission_id = 2;
+}
+
 message CMsgGCCStrike15_v2_WatchInfoUsers {
 	optional uint32 request_id = 1;
 	repeated uint32 account_ids = 2;
@@ -535,13 +578,13 @@ message CMsgGCCStrike15_v2_PlayerEarnedRewardNotification {
 
 message CMsgGCCStrike15_v2_PlayerOverwatchCaseUpdate {
 	optional uint64 caseid = 1;
-	optional uint32 verdict_legacy = 2;
 	optional uint32 suspectid = 3;
 	optional uint32 fractionid = 4;
 	optional uint32 rpt_aimbot = 5;
 	optional uint32 rpt_wallhack = 6;
 	optional uint32 rpt_speedhack = 7;
 	optional uint32 rpt_teamharm = 8;
+	optional uint32 reason = 9;
 }
 
 message CMsgGCCStrike15_v2_PlayerOverwatchCaseAssignment {
@@ -555,6 +598,7 @@ message CMsgGCCStrike15_v2_PlayerOverwatchCaseAssignment {
 	optional uint32 numrounds = 8;
 	optional uint32 fractionrounds = 9;
 	optional int32 streakconvictions = 10;
+	optional uint32 reason = 11;
 }
 
 message CMsgGCCStrike15_v2_PlayerOverwatchCaseStatus {
@@ -576,20 +620,6 @@ message CMsgGCCStrike15_v2_GC2ClientTextMsg {
 message CMsgGCCStrike15_v2_Client2GCTextMsg {
 	optional uint32 id = 1;
 	repeated bytes args = 2;
-}
-
-message CMsgGC_ServerQuestUpdateData {
-	message PlayerQuestData {
-		message QuestItemData {
-			optional uint64 quest_item_id = 1;
-			optional int32 quest_points_earned = 2;
-		}
-
-		optional uint32 quester_account_id = 1;
-		repeated .CMsgGC_ServerQuestUpdateData.PlayerQuestData.QuestItemData quest_item_data = 2;
-	}
-
-	repeated .CMsgGC_ServerQuestUpdateData.PlayerQuestData player_quest_data = 1;
 }
 
 message CMsgGCCStrike15_v2_MatchEndRunRewardDrops {
@@ -743,6 +773,7 @@ message CMsgCStrike15Welcome {
 	optional uint32 last_time_played = 12;
 	optional uint32 last_ip_address = 13;
 	optional uint64 gscookieid = 18;
+	optional uint64 uniqueid = 19;
 }
 
 message CMsgGCCStrike15_v2_ClientVarValueNotificationInfo {
@@ -750,6 +781,7 @@ message CMsgGCCStrike15_v2_ClientVarValueNotificationInfo {
 	optional int32 value_int = 2;
 	optional uint32 server_addr = 3;
 	optional uint32 server_port = 4;
+	repeated string choked_blocks = 5;
 }
 
 message CMsgGCCStrike15_v2_ServerVarValueNotificationInfo {
@@ -791,5 +823,12 @@ message CMsgGCCStrike15_v2_Server2GCPureServerValidationFailure {
 	optional int32 len = 6;
 	optional int32 pack_number = 7;
 	optional int32 pack_file_id = 8;
+}
+
+message CMsgGCCStrike15_v2_GC2ClientTournamentInfo {
+	optional uint32 eventid = 1;
+	optional uint32 stageid = 2;
+	optional uint32 game_type = 3;
+	repeated uint32 teamids = 4;
 }
 

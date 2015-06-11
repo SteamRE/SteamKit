@@ -1,6 +1,9 @@
 import "google/protobuf/descriptor.proto";
 import "networkbasetypes.proto";
 
+option optimize_for = SPEED;
+option cc_generic_services = false;
+
 enum EBaseUserMessages {
 	UM_AchievementEvent = 101;
 	UM_CloseCaption = 102;
@@ -34,14 +37,18 @@ enum EBaseUserMessages {
 	UM_CrosshairAngle = 133;
 	UM_ShowMenu = 134;
 	UM_CreditsMsg = 135;
+	UM_CloseCaptionPlaceholder = 142;
+	UM_CameraTransition = 143;
+	UM_MAX_BASE = 200;
+}
+
+enum EBaseEntityMessages {
 	EM_PlayJingle = 136;
 	EM_ScreenOverlay = 137;
 	EM_RemoveAllDecals = 138;
 	EM_PropagateForce = 139;
 	EM_DoSpark = 140;
 	EM_FixAngle = 141;
-	UM_CloseCaptionPlaceholder = 142;
-	UM_MAX_BASE = 200;
 }
 
 enum eRollType {
@@ -219,6 +226,9 @@ message CUserMessageColoredText {
 	optional uint32 color = 1;
 	optional string text = 2;
 	optional bool reset = 3;
+	optional int32 context_player_id = 4;
+	optional int32 context_value = 5;
+	optional int32 context_team_id = 6;
 }
 
 message CUserMessageItemPickup {
@@ -272,5 +282,16 @@ message CEntityMessageDoSpark {
 message CEntityMessageFixAngle {
 	optional bool relative = 1;
 	optional .CMsgQAngle angle = 2;
+}
+
+message CUserMessageCameraTransition {
+	message Transition_DataDriven {
+		optional string filename = 1;
+		optional int32 attach_ent_index = 2;
+	}
+
+	optional uint32 camera_type = 1;
+	optional float duration = 2;
+	optional .CUserMessageCameraTransition.Transition_DataDriven params_data_driven = 3;
 }
 

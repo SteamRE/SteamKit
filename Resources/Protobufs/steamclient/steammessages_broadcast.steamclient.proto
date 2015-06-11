@@ -1,0 +1,243 @@
+import "google/protobuf/descriptor.proto";
+import "steammessages_unified_base.steamclient.proto";
+
+message CBroadcast_BeginBroadcastSession_Request {
+	optional int32 permission = 1;
+	optional uint64 gameid = 2;
+	optional uint64 client_instance_id = 3;
+	optional string title = 4;
+	optional uint32 cellid = 5;
+}
+
+message CBroadcast_BeginBroadcastSession_Response {
+	optional fixed64 broadcast_id = 1;
+}
+
+message CBroadcast_EndBroadcastSession_Request {
+	optional fixed64 broadcast_id = 1;
+}
+
+message CBroadcast_EndBroadcastSession_Response {
+}
+
+message CBroadcast_StartBroadcastUpload_Request {
+	optional fixed64 broadcast_id = 1;
+	optional uint32 cellid = 2;
+	optional bool as_rtmp = 3;
+}
+
+message CBroadcast_StartBroadcastUpload_Response {
+	optional string upload_token = 1;
+	optional string upload_address = 2;
+	optional fixed64 upload_relay_id = 3;
+}
+
+message CBroadcast_NotifyBroadcastUploadStop_Notification {
+	optional fixed64 broadcast_relay_id = 1;
+	optional uint32 upload_result = 2;
+}
+
+message CBroadcast_WatchBroadcast_Request {
+	optional fixed64 steamid = 1;
+	optional fixed64 existing_broadcast_id = 2;
+}
+
+message CBroadcast_WatchBroadcast_Response {
+	enum EWatchResponse {
+		k_EWatchResponseReady = 1;
+		k_EWatchResponseNotAvailable = 2;
+		k_EWatchResponseWaitingForApproval = 3;
+		k_EWatchResponseWaitingForStart = 4;
+		k_EWatchResponseInvalidSession = 5;
+		k_EWatchResponseTooManyBroadcasts = 6;
+		k_EWatchResponseWaitingForReconnect = 7;
+		k_EWatchResponseSystemNotSupported = 8;
+		k_EWatchResponseUserRestricted = 9;
+		k_EWatchResponseClientOutOfDate = 10;
+		k_EWatchResponsePoorUploadQuality = 11;
+	}
+
+	optional .CBroadcast_WatchBroadcast_Response.EWatchResponse response = 1 [default = k_EWatchResponseReady];
+	optional string mpd_url = 2;
+	optional fixed64 broadcast_id = 3;
+	optional uint64 gameid = 4;
+	optional string title = 5;
+	optional uint32 num_viewers = 6;
+}
+
+message CBroadcast_GetBroadcastStatus_Request {
+	optional fixed64 steamid = 1;
+	optional fixed64 broadcast_id = 2;
+}
+
+message CBroadcast_GetBroadcastStatus_Response {
+	optional uint64 gameid = 1;
+	optional string title = 2;
+	optional uint32 num_viewers = 3;
+	optional int32 permission = 4;
+}
+
+message CBroadcast_InviteToBroadcast_Request {
+	optional fixed64 steamid = 1;
+	optional bool approval_response = 2;
+}
+
+message CBroadcast_InviteToBroadcast_Response {
+	optional bool success = 1;
+}
+
+message CBroadcast_SendBroadcastStateToServer_Request {
+	optional int32 permission = 1;
+	optional uint64 gameid = 2;
+}
+
+message CBroadcast_SendBroadcastStateToServer_Response {
+}
+
+message CBroadcast_NotifyBroadcastSessionHeartbeat_Notification {
+	optional fixed64 broadcast_id = 1;
+}
+
+message CBroadcast_GetBroadcastChatInfo_Request {
+	optional fixed64 steamid = 1;
+	optional fixed64 broadcast_id = 2;
+}
+
+message CBroadcast_GetBroadcastChatInfo_Response {
+	optional fixed64 chat_id = 1;
+	optional string view_url = 2;
+}
+
+message CBroadcast_PostChatMessage_Request {
+	optional fixed64 chat_id = 1;
+	optional string message = 2;
+	optional uint32 instance_id = 3;
+}
+
+message CBroadcast_PostChatMessage_Response {
+	optional string persona_name = 1;
+	optional bool in_game = 2;
+	optional int32 result = 3;
+}
+
+message CBroadcast_MuteBroadcastChatUser_Request {
+	optional fixed64 chat_id = 1;
+	optional fixed64 user_steamid = 2;
+	optional bool muted = 3;
+}
+
+message CBroadcast_MuteBroadcastChatUser_Response {
+}
+
+message CBroadcast_GetBroadcastChatUserNames_Request {
+	optional fixed64 chat_id = 1;
+	repeated fixed64 user_steamid = 2;
+}
+
+message CBroadcast_GetBroadcastChatUserNames_Response {
+	message PersonaName {
+		optional fixed64 steam_id = 1;
+		optional string persona = 2;
+	}
+
+	repeated .CBroadcast_GetBroadcastChatUserNames_Response.PersonaName persona_names = 1;
+}
+
+message CBroadcast_BroadcastViewerState_Notification {
+	enum EViewerState {
+		k_EViewerNeedsApproval = 1;
+		k_EViewerWatching = 2;
+		k_EViewerLeft = 3;
+	}
+
+	optional fixed64 steamid = 1;
+	optional .CBroadcast_BroadcastViewerState_Notification.EViewerState state = 2 [default = k_EViewerNeedsApproval];
+}
+
+message CBroadcast_WaitingBroadcastViewer_Notification {
+	optional fixed64 broadcast_id = 1;
+}
+
+message CBroadcast_StopBroadcastUpload_Notification {
+	optional fixed64 broadcast_id = 1;
+	optional fixed64 broadcast_relay_id = 2;
+	optional uint32 upload_result = 3;
+	optional bool too_many_poor_uploads = 4;
+}
+
+message CBroadcast_SessionClosed_Notification {
+	optional fixed64 broadcast_id = 1;
+}
+
+message CBroadcast_ViewerBroadcastInvite_Notification {
+	optional fixed64 broadcaster_steamid = 1;
+}
+
+message CBroadcast_BroadcastStatus_Notification {
+	optional fixed64 broadcast_id = 1;
+	optional int32 num_viewers = 2;
+}
+
+service Broadcast {
+	option (service_description) = "Methods for Steam broadcast operations";
+	rpc BeginBroadcastSession (.CBroadcast_BeginBroadcastSession_Request) returns (.CBroadcast_BeginBroadcastSession_Response) {
+		option (method_description) = "Request from client to directory to begin a broadcast session. No data being sent to relay; just available for broadcast.";
+	}
+	rpc EndBroadcastSession (.CBroadcast_EndBroadcastSession_Request) returns (.CBroadcast_EndBroadcastSession_Response) {
+		option (method_description) = "Request from client to stop a broadcast session. Any uploads will terminate.";
+	}
+	rpc StartBroadcastUpload (.CBroadcast_StartBroadcastUpload_Request) returns (.CBroadcast_StartBroadcastUpload_Response) {
+		option (method_description) = "Request from client to begin sending video for a broadcast.";
+	}
+	rpc NotifyBroadcastUploadStop (.CBroadcast_NotifyBroadcastUploadStop_Notification) returns (.NoResponse) {
+		option (method_description) = "Tells directory that client stopped uploading broadcast";
+	}
+	rpc WatchBroadcast (.CBroadcast_WatchBroadcast_Request) returns (.CBroadcast_WatchBroadcast_Response) {
+		option (method_description) = "Request from viewer to watch a broadcast";
+	}
+	rpc GetBroadcastStatus (.CBroadcast_GetBroadcastStatus_Request) returns (.CBroadcast_GetBroadcastStatus_Response) {
+		option (method_description) = "Request from viewer about broadcast details";
+	}
+	rpc InviteToBroadcast (.CBroadcast_InviteToBroadcast_Request) returns (.CBroadcast_InviteToBroadcast_Response) {
+		option (method_description) = "Invites another steam user to watch the caller's broadcast";
+	}
+	rpc SendBroadcastStateToServer (.CBroadcast_SendBroadcastStateToServer_Request) returns (.CBroadcast_SendBroadcastStateToServer_Response) {
+		option (method_description) = "Sends users current broadcast state (permissions, game) to the server";
+	}
+	rpc NotifyBroadcastSessionHeartbeat (.CBroadcast_NotifyBroadcastSessionHeartbeat_Notification) returns (.NoResponse) {
+		option (method_description) = "Tells directory broadcast session is still available";
+	}
+	rpc GetBroadcastChatInfo (.CBroadcast_GetBroadcastChatInfo_Request) returns (.CBroadcast_GetBroadcastChatInfo_Response) {
+		option (method_description) = "Gets chat room info for a broadcast";
+	}
+	rpc PostChatMessage (.CBroadcast_PostChatMessage_Request) returns (.CBroadcast_PostChatMessage_Response) {
+		option (method_description) = "Post chat message to specified chat room";
+	}
+	rpc MuteBroadcastChatUser (.CBroadcast_MuteBroadcastChatUser_Request) returns (.CBroadcast_MuteBroadcastChatUser_Response) {
+		option (method_description) = "Mute a user in your broadcast chat";
+	}
+	rpc GetBroadcastChatUserNames (.CBroadcast_GetBroadcastChatUserNames_Request) returns (.CBroadcast_GetBroadcastChatUserNames_Response) {
+		option (method_description) = "Get names for list of users in chat";
+	}
+}
+service BroadcastClient {
+	option (service_execution_site) = k_EProtoExecutionSiteSteamClient;
+	rpc NotifyBroadcastViewerState (.CBroadcast_BroadcastViewerState_Notification) returns (.NoResponse) {
+		option (method_description) = "Notification from server to client that a viewers state has changed";
+	}
+	rpc NotifyWaitingBroadcastViewer (.CBroadcast_WaitingBroadcastViewer_Notification) returns (.NoResponse) {
+		option (method_description) = "Notification from server to client one or more users is waiting for user to start broadcast";
+	}
+	rpc NotifyStopBroadcastUpload (.CBroadcast_StopBroadcastUpload_Notification) returns (.NoResponse) {
+		option (method_description) = "Notification from server to client telling it to stop uploading when the last viewer has disconnected from their broadcast";
+	}
+	rpc NotifySessionClosed (.CBroadcast_SessionClosed_Notification) returns (.NoResponse) {
+		option (method_description) = "Notification from server to client telling it a session has been closed unexpectedly by the directory";
+	}
+	rpc NotifyViewerBroadcastInvite (.CBroadcast_ViewerBroadcastInvite_Notification) returns (.NoResponse) {
+		option (method_description) = "Notification from server to client that a broadcaster is inviting a viewer to watch their broadcast";
+	}
+	rpc NotifyBroadcastStatus (.CBroadcast_BroadcastStatus_Notification) returns (.NoResponse) {
+		option (method_description) = "Notification from server to client about current broadcast status";
+	}
+}

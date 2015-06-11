@@ -125,6 +125,44 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPublishedFile_CanSubscribe_Request")]
+  public partial class CPublishedFile_CanSubscribe_Request : global::ProtoBuf.IExtensible
+  {
+    public CPublishedFile_CanSubscribe_Request() {}
+    
+
+    private ulong _publishedfileid = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"publishedfileid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong publishedfileid
+    {
+      get { return _publishedfileid; }
+      set { _publishedfileid = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPublishedFile_CanSubscribe_Response")]
+  public partial class CPublishedFile_CanSubscribe_Response : global::ProtoBuf.IExtensible
+  {
+    public CPublishedFile_CanSubscribe_Response() {}
+    
+
+    private bool _can_subscribe = default(bool);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"can_subscribe", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool can_subscribe
+    {
+      get { return _can_subscribe; }
+      set { _can_subscribe = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPublishedFile_Publish_Request")]
   public partial class CPublishedFile_Publish_Request : global::ProtoBuf.IExtensible
   {
@@ -370,6 +408,24 @@ namespace SteamKit2.Unified.Internal
     {
       get { return _short_description; }
       set { _short_description = value; }
+    }
+
+    private bool _includeforsaledata = default(bool);
+    [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"includeforsaledata", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool includeforsaledata
+    {
+      get { return _includeforsaledata; }
+      set { _includeforsaledata = value; }
+    }
+
+    private bool _includemetadata = default(bool);
+    [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"includemetadata", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool includemetadata
+    {
+      get { return _includemetadata; }
+      set { _includemetadata = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -877,6 +933,24 @@ namespace SteamKit2.Unified.Internal
       get { return _time_subscribed; }
       set { _time_subscribed = value; }
     }
+
+    private PublishedFileDetails.ForSaleData _for_sale_data = null;
+    [global::ProtoBuf.ProtoMember(57, IsRequired = false, Name=@"for_sale_data", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public PublishedFileDetails.ForSaleData for_sale_data
+    {
+      get { return _for_sale_data; }
+      set { _for_sale_data = value; }
+    }
+
+    private string _metadata = "";
+    [global::ProtoBuf.ProtoMember(58, IsRequired = false, Name=@"metadata", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string metadata
+    {
+      get { return _metadata; }
+      set { _metadata = value; }
+    }
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Tag")]
   public partial class Tag : global::ProtoBuf.IExtensible
   {
@@ -1071,6 +1145,90 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ForSaleData")]
+  public partial class ForSaleData : global::ProtoBuf.IExtensible
+  {
+    public ForSaleData() {}
+    
+
+    private bool _is_for_sale = default(bool);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"is_for_sale", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool is_for_sale
+    {
+      get { return _is_for_sale; }
+      set { _is_for_sale = value; }
+    }
+
+    private uint _price_category = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"price_category", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint price_category
+    {
+      get { return _price_category; }
+      set { _price_category = value; }
+    }
+
+    private PublishedFileDetails.EPublishedFileForSaleStatus _estatus = PublishedFileDetails.EPublishedFileForSaleStatus.k_PFFSS_NotForSale;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"estatus", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(PublishedFileDetails.EPublishedFileForSaleStatus.k_PFFSS_NotForSale)]
+    public PublishedFileDetails.EPublishedFileForSaleStatus estatus
+    {
+      get { return _estatus; }
+      set { _estatus = value; }
+    }
+
+    private uint _price_category_floor = default(uint);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"price_category_floor", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint price_category_floor
+    {
+      get { return _price_category_floor; }
+      set { _price_category_floor = value; }
+    }
+
+    private bool _price_is_pay_what_you_want = default(bool);
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"price_is_pay_what_you_want", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool price_is_pay_what_you_want
+    {
+      get { return _price_is_pay_what_you_want; }
+      set { _price_is_pay_what_you_want = value; }
+    }
+
+    private uint _discount_percentage = default(uint);
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"discount_percentage", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint discount_percentage
+    {
+      get { return _discount_percentage; }
+      set { _discount_percentage = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"EPublishedFileForSaleStatus", EnumPassthru=true)]
+    public enum EPublishedFileForSaleStatus
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_PFFSS_NotForSale", Value=0)]
+      k_PFFSS_NotForSale = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_PFFSS_PendingApproval", Value=1)]
+      k_PFFSS_PendingApproval = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_PFFSS_ApprovedForSale", Value=2)]
+      k_PFFSS_ApprovedForSale = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_PFFSS_RejectedForSale", Value=3)]
+      k_PFFSS_RejectedForSale = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_PFFSS_NoLongerForSale", Value=4)]
+      k_PFFSS_NoLongerForSale = 4
+    }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -1203,6 +1361,15 @@ namespace SteamKit2.Unified.Internal
       set { _match_cloud_filename = value; }
     }
 
+    private uint _cache_max_age_seconds = (uint)0;
+    [global::ProtoBuf.ProtoMember(27, IsRequired = false, Name=@"cache_max_age_seconds", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue((uint)0)]
+    public uint cache_max_age_seconds
+    {
+      get { return _cache_max_age_seconds; }
+      set { _cache_max_age_seconds = value; }
+    }
+
     private bool _totalonly = default(bool);
     [global::ProtoBuf.ProtoMember(17, IsRequired = false, Name=@"totalonly", DataFormat = global::ProtoBuf.DataFormat.Default)]
     [global::System.ComponentModel.DefaultValue(default(bool))]
@@ -1273,6 +1440,24 @@ namespace SteamKit2.Unified.Internal
     {
       get { return _return_short_description; }
       set { _return_short_description = value; }
+    }
+
+    private bool _return_for_sale_data = default(bool);
+    [global::ProtoBuf.ProtoMember(26, IsRequired = false, Name=@"return_for_sale_data", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool return_for_sale_data
+    {
+      get { return _return_for_sale_data; }
+      set { _return_for_sale_data = value; }
+    }
+
+    private bool _return_metadata = (bool)false;
+    [global::ProtoBuf.ProtoMember(28, IsRequired = false, Name=@"return_metadata", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue((bool)false)]
+    public bool return_metadata
+    {
+      get { return _return_metadata; }
+      set { _return_metadata = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -1470,6 +1655,171 @@ namespace SteamKit2.Unified.Internal
   {
     public CPublishedFile_Update_Response() {}
     
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPublishedFile_GetChangeHistoryEntry_Request")]
+  public partial class CPublishedFile_GetChangeHistoryEntry_Request : global::ProtoBuf.IExtensible
+  {
+    public CPublishedFile_GetChangeHistoryEntry_Request() {}
+    
+
+    private ulong _publishedfileid = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"publishedfileid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong publishedfileid
+    {
+      get { return _publishedfileid; }
+      set { _publishedfileid = value; }
+    }
+
+    private uint _timestamp = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"timestamp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint timestamp
+    {
+      get { return _timestamp; }
+      set { _timestamp = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPublishedFile_GetChangeHistoryEntry_Response")]
+  public partial class CPublishedFile_GetChangeHistoryEntry_Response : global::ProtoBuf.IExtensible
+  {
+    public CPublishedFile_GetChangeHistoryEntry_Response() {}
+    
+
+    private ulong _publishedfileid = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"publishedfileid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong publishedfileid
+    {
+      get { return _publishedfileid; }
+      set { _publishedfileid = value; }
+    }
+
+    private uint _timestamp = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"timestamp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint timestamp
+    {
+      get { return _timestamp; }
+      set { _timestamp = value; }
+    }
+
+    private string _change_description = "";
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"change_description", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string change_description
+    {
+      get { return _change_description; }
+      set { _change_description = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPublishedFile_GetChangeHistory_Request")]
+  public partial class CPublishedFile_GetChangeHistory_Request : global::ProtoBuf.IExtensible
+  {
+    public CPublishedFile_GetChangeHistory_Request() {}
+    
+
+    private ulong _publishedfileid = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"publishedfileid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong publishedfileid
+    {
+      get { return _publishedfileid; }
+      set { _publishedfileid = value; }
+    }
+
+    private bool _total_only = default(bool);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"total_only", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool total_only
+    {
+      get { return _total_only; }
+      set { _total_only = value; }
+    }
+
+    private uint _startindex = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"startindex", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint startindex
+    {
+      get { return _startindex; }
+      set { _startindex = value; }
+    }
+
+    private uint _count = default(uint);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"count", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint count
+    {
+      get { return _count; }
+      set { _count = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPublishedFile_GetChangeHistory_Response")]
+  public partial class CPublishedFile_GetChangeHistory_Response : global::ProtoBuf.IExtensible
+  {
+    public CPublishedFile_GetChangeHistory_Response() {}
+    
+    private readonly global::System.Collections.Generic.List<CPublishedFile_GetChangeHistory_Response.ChangeLog> _changes = new global::System.Collections.Generic.List<CPublishedFile_GetChangeHistory_Response.ChangeLog>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"changes", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CPublishedFile_GetChangeHistory_Response.ChangeLog> changes
+    {
+      get { return _changes; }
+    }
+  
+
+    private uint _total = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"total", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint total
+    {
+      get { return _total; }
+      set { _total = value; }
+    }
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ChangeLog")]
+  public partial class ChangeLog : global::ProtoBuf.IExtensible
+  {
+    public ChangeLog() {}
+    
+
+    private uint _timestamp = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"timestamp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint timestamp
+    {
+      get { return _timestamp; }
+      set { _timestamp = value; }
+    }
+
+    private string _change_description = "";
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"change_description", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string change_description
+    {
+      get { return _change_description; }
+      set { _change_description = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -1678,6 +2028,15 @@ namespace SteamKit2.Unified.Internal
       set { _include_recent_votes_only = value; }
     }
 
+    private uint _cache_max_age_seconds = (uint)0;
+    [global::ProtoBuf.ProtoMember(31, IsRequired = false, Name=@"cache_max_age_seconds", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue((uint)0)]
+    public uint cache_max_age_seconds
+    {
+      get { return _cache_max_age_seconds; }
+      set { _cache_max_age_seconds = value; }
+    }
+
     private bool _totalonly = default(bool);
     [global::ProtoBuf.ProtoMember(16, IsRequired = false, Name=@"totalonly", DataFormat = global::ProtoBuf.DataFormat.Default)]
     [global::System.ComponentModel.DefaultValue(default(bool))]
@@ -1740,6 +2099,24 @@ namespace SteamKit2.Unified.Internal
       get { return _return_short_description; }
       set { _return_short_description = value; }
     }
+
+    private bool _return_for_sale_data = default(bool);
+    [global::ProtoBuf.ProtoMember(30, IsRequired = false, Name=@"return_for_sale_data", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool return_for_sale_data
+    {
+      get { return _return_for_sale_data; }
+      set { _return_for_sale_data = value; }
+    }
+
+    private bool _return_metadata = (bool)false;
+    [global::ProtoBuf.ProtoMember(32, IsRequired = false, Name=@"return_metadata", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue((bool)false)]
+    public bool return_metadata
+    {
+      get { return _return_metadata; }
+      set { _return_metadata = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -1775,10 +2152,13 @@ namespace SteamKit2.Unified.Internal
     {
       CPublishedFile_Subscribe_Response Subscribe(CPublishedFile_Subscribe_Request request);
     CPublishedFile_Unsubscribe_Response Unsubscribe(CPublishedFile_Unsubscribe_Request request);
+    CPublishedFile_CanSubscribe_Response CanSubscribe(CPublishedFile_CanSubscribe_Request request);
     CPublishedFile_Publish_Response Publish(CPublishedFile_Publish_Request request);
     CPublishedFile_GetDetails_Response GetDetails(CPublishedFile_GetDetails_Request request);
     CPublishedFile_GetUserFiles_Response GetUserFiles(CPublishedFile_GetUserFiles_Request request);
     CPublishedFile_Update_Response Update(CPublishedFile_Update_Request request);
+    CPublishedFile_GetChangeHistoryEntry_Response GetChangeHistoryEntry(CPublishedFile_GetChangeHistoryEntry_Request request);
+    CPublishedFile_GetChangeHistory_Response GetChangeHistory(CPublishedFile_GetChangeHistory_Request request);
     CPublishedFile_RefreshVotingQueue_Response RefreshVotingQueue(CPublishedFile_RefreshVotingQueue_Request request);
     CPublishedFile_QueryFiles_Response QueryFiles(CPublishedFile_QueryFiles_Request request);
     

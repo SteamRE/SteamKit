@@ -8,6 +8,8 @@
 //------------------------------------------------------------------------------
 #pragma warning disable 1591
 
+// Option: missing-value detection (*Specified/ShouldSerialize*/Reset*) enabled
+    
 // Generated from: descriptor.proto
 namespace google.protobuf
 {
@@ -34,23 +36,41 @@ namespace google.protobuf
     public FileDescriptorProto() {}
     
 
-    private string _name = "";
+    private string _name;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
     public string name
     {
-      get { return _name; }
+      get { return _name?? ""; }
       set { _name = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool nameSpecified
+    {
+      get { return _name != null; }
+      set { if (value == (_name== null)) _name = value ? name : (string)null; }
+    }
+    private bool ShouldSerializename() { return nameSpecified; }
+    private void Resetname() { nameSpecified = false; }
+    
 
-    private string _package = "";
+    private string _package;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"package", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
     public string package
     {
-      get { return _package; }
+      get { return _package?? ""; }
       set { _package = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool packageSpecified
+    {
+      get { return _package != null; }
+      set { if (value == (_package== null)) _package = value ? package : (string)null; }
+    }
+    private bool ShouldSerializepackage() { return packageSpecified; }
+    private void Resetpackage() { packageSpecified = false; }
+    
     private readonly global::System.Collections.Generic.List<string> _dependency = new global::System.Collections.Generic.List<string>();
     [global::ProtoBuf.ProtoMember(3, Name=@"dependency", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public global::System.Collections.Generic.List<string> dependency
@@ -129,14 +149,23 @@ namespace google.protobuf
     public DescriptorProto() {}
     
 
-    private string _name = "";
+    private string _name;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
     public string name
     {
-      get { return _name; }
+      get { return _name?? ""; }
       set { _name = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool nameSpecified
+    {
+      get { return _name != null; }
+      set { if (value == (_name== null)) _name = value ? name : (string)null; }
+    }
+    private bool ShouldSerializename() { return nameSpecified; }
+    private void Resetname() { nameSpecified = false; }
+    
     private readonly global::System.Collections.Generic.List<google.protobuf.FieldDescriptorProto> _field = new global::System.Collections.Generic.List<google.protobuf.FieldDescriptorProto>();
     [global::ProtoBuf.ProtoMember(2, Name=@"field", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public global::System.Collections.Generic.List<google.protobuf.FieldDescriptorProto> field
@@ -172,6 +201,13 @@ namespace google.protobuf
       get { return _extension_range; }
     }
   
+    private readonly global::System.Collections.Generic.List<google.protobuf.OneofDescriptorProto> _oneof_decl = new global::System.Collections.Generic.List<google.protobuf.OneofDescriptorProto>();
+    [global::ProtoBuf.ProtoMember(8, Name=@"oneof_decl", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<google.protobuf.OneofDescriptorProto> oneof_decl
+    {
+      get { return _oneof_decl; }
+    }
+  
 
     private google.protobuf.MessageOptions _options = null;
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"options", DataFormat = global::ProtoBuf.DataFormat.Default)]
@@ -187,23 +223,41 @@ namespace google.protobuf
     public ExtensionRange() {}
     
 
-    private int _start = default(int);
+    private int? _start;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"start", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
     public int start
     {
-      get { return _start; }
+      get { return _start?? default(int); }
       set { _start = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool startSpecified
+    {
+      get { return _start != null; }
+      set { if (value == (_start== null)) _start = value ? start : (int?)null; }
+    }
+    private bool ShouldSerializestart() { return startSpecified; }
+    private void Resetstart() { startSpecified = false; }
+    
 
-    private int _end = default(int);
+    private int? _end;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"end", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
     public int end
     {
-      get { return _end; }
+      get { return _end?? default(int); }
       set { _end = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool endSpecified
+    {
+      get { return _end != null; }
+      set { if (value == (_end== null)) _end = value ? end : (int?)null; }
+    }
+    private bool ShouldSerializeend() { return endSpecified; }
+    private void Resetend() { endSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -220,68 +274,149 @@ namespace google.protobuf
     public FieldDescriptorProto() {}
     
 
-    private string _name = "";
+    private string _name;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
     public string name
     {
-      get { return _name; }
+      get { return _name?? ""; }
       set { _name = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool nameSpecified
+    {
+      get { return _name != null; }
+      set { if (value == (_name== null)) _name = value ? name : (string)null; }
+    }
+    private bool ShouldSerializename() { return nameSpecified; }
+    private void Resetname() { nameSpecified = false; }
+    
 
-    private int _number = default(int);
+    private int? _number;
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"number", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
     public int number
     {
-      get { return _number; }
+      get { return _number?? default(int); }
       set { _number = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool numberSpecified
+    {
+      get { return _number != null; }
+      set { if (value == (_number== null)) _number = value ? number : (int?)null; }
+    }
+    private bool ShouldSerializenumber() { return numberSpecified; }
+    private void Resetnumber() { numberSpecified = false; }
+    
 
-    private google.protobuf.FieldDescriptorProto.Label _label = google.protobuf.FieldDescriptorProto.Label.LABEL_OPTIONAL;
+    private google.protobuf.FieldDescriptorProto.Label? _label;
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"label", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(google.protobuf.FieldDescriptorProto.Label.LABEL_OPTIONAL)]
     public google.protobuf.FieldDescriptorProto.Label label
     {
-      get { return _label; }
+      get { return _label?? google.protobuf.FieldDescriptorProto.Label.LABEL_OPTIONAL; }
       set { _label = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool labelSpecified
+    {
+      get { return _label != null; }
+      set { if (value == (_label== null)) _label = value ? label : (google.protobuf.FieldDescriptorProto.Label?)null; }
+    }
+    private bool ShouldSerializelabel() { return labelSpecified; }
+    private void Resetlabel() { labelSpecified = false; }
+    
 
-    private google.protobuf.FieldDescriptorProto.Type _type = google.protobuf.FieldDescriptorProto.Type.TYPE_DOUBLE;
+    private google.protobuf.FieldDescriptorProto.Type? _type;
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(google.protobuf.FieldDescriptorProto.Type.TYPE_DOUBLE)]
     public google.protobuf.FieldDescriptorProto.Type type
     {
-      get { return _type; }
+      get { return _type?? google.protobuf.FieldDescriptorProto.Type.TYPE_DOUBLE; }
       set { _type = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool typeSpecified
+    {
+      get { return _type != null; }
+      set { if (value == (_type== null)) _type = value ? type : (google.protobuf.FieldDescriptorProto.Type?)null; }
+    }
+    private bool ShouldSerializetype() { return typeSpecified; }
+    private void Resettype() { typeSpecified = false; }
+    
 
-    private string _type_name = "";
+    private string _type_name;
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"type_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
     public string type_name
     {
-      get { return _type_name; }
+      get { return _type_name?? ""; }
       set { _type_name = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool type_nameSpecified
+    {
+      get { return _type_name != null; }
+      set { if (value == (_type_name== null)) _type_name = value ? type_name : (string)null; }
+    }
+    private bool ShouldSerializetype_name() { return type_nameSpecified; }
+    private void Resettype_name() { type_nameSpecified = false; }
+    
 
-    private string _extendee = "";
+    private string _extendee;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"extendee", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
     public string extendee
     {
-      get { return _extendee; }
+      get { return _extendee?? ""; }
       set { _extendee = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool extendeeSpecified
+    {
+      get { return _extendee != null; }
+      set { if (value == (_extendee== null)) _extendee = value ? extendee : (string)null; }
+    }
+    private bool ShouldSerializeextendee() { return extendeeSpecified; }
+    private void Resetextendee() { extendeeSpecified = false; }
+    
 
-    private string _default_value = "";
+    private string _default_value;
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"default_value", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
     public string default_value
     {
-      get { return _default_value; }
+      get { return _default_value?? ""; }
       set { _default_value = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool default_valueSpecified
+    {
+      get { return _default_value != null; }
+      set { if (value == (_default_value== null)) _default_value = value ? default_value : (string)null; }
+    }
+    private bool ShouldSerializedefault_value() { return default_valueSpecified; }
+    private void Resetdefault_value() { default_valueSpecified = false; }
+    
+
+    private int? _oneof_index;
+    [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"oneof_index", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public int oneof_index
+    {
+      get { return _oneof_index?? default(int); }
+      set { _oneof_index = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool oneof_indexSpecified
+    {
+      get { return _oneof_index != null; }
+      set { if (value == (_oneof_index== null)) _oneof_index = value ? oneof_index : (int?)null; }
+    }
+    private bool ShouldSerializeoneof_index() { return oneof_indexSpecified; }
+    private void Resetoneof_index() { oneof_indexSpecified = false; }
+    
 
     private google.protobuf.FieldOptions _options = null;
     [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"options", DataFormat = global::ProtoBuf.DataFormat.Default)]
@@ -291,7 +426,7 @@ namespace google.protobuf
       get { return _options; }
       set { _options = value; }
     }
-    [global::ProtoBuf.ProtoContract(Name=@"Type")]
+    [global::ProtoBuf.ProtoContract(Name=@"Type", EnumPassthru=true)]
     public enum Type
     {
             
@@ -350,7 +485,7 @@ namespace google.protobuf
       TYPE_SINT64 = 18
     }
   
-    [global::ProtoBuf.ProtoContract(Name=@"Label")]
+    [global::ProtoBuf.ProtoContract(Name=@"Label", EnumPassthru=true)]
     public enum Label
     {
             
@@ -369,20 +504,57 @@ namespace google.protobuf
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"OneofDescriptorProto")]
+  public partial class OneofDescriptorProto : global::ProtoBuf.IExtensible
+  {
+    public OneofDescriptorProto() {}
+    
+
+    private string _name;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"name", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string name
+    {
+      get { return _name?? ""; }
+      set { _name = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool nameSpecified
+    {
+      get { return _name != null; }
+      set { if (value == (_name== null)) _name = value ? name : (string)null; }
+    }
+    private bool ShouldSerializename() { return nameSpecified; }
+    private void Resetname() { nameSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"EnumDescriptorProto")]
   public partial class EnumDescriptorProto : global::ProtoBuf.IExtensible
   {
     public EnumDescriptorProto() {}
     
 
-    private string _name = "";
+    private string _name;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
     public string name
     {
-      get { return _name; }
+      get { return _name?? ""; }
       set { _name = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool nameSpecified
+    {
+      get { return _name != null; }
+      set { if (value == (_name== null)) _name = value ? name : (string)null; }
+    }
+    private bool ShouldSerializename() { return nameSpecified; }
+    private void Resetname() { nameSpecified = false; }
+    
     private readonly global::System.Collections.Generic.List<google.protobuf.EnumValueDescriptorProto> _value = new global::System.Collections.Generic.List<google.protobuf.EnumValueDescriptorProto>();
     [global::ProtoBuf.ProtoMember(2, Name=@"value", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public global::System.Collections.Generic.List<google.protobuf.EnumValueDescriptorProto> value
@@ -410,23 +582,41 @@ namespace google.protobuf
     public EnumValueDescriptorProto() {}
     
 
-    private string _name = "";
+    private string _name;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
     public string name
     {
-      get { return _name; }
+      get { return _name?? ""; }
       set { _name = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool nameSpecified
+    {
+      get { return _name != null; }
+      set { if (value == (_name== null)) _name = value ? name : (string)null; }
+    }
+    private bool ShouldSerializename() { return nameSpecified; }
+    private void Resetname() { nameSpecified = false; }
+    
 
-    private int _number = default(int);
+    private int? _number;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"number", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
     public int number
     {
-      get { return _number; }
+      get { return _number?? default(int); }
       set { _number = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool numberSpecified
+    {
+      get { return _number != null; }
+      set { if (value == (_number== null)) _number = value ? number : (int?)null; }
+    }
+    private bool ShouldSerializenumber() { return numberSpecified; }
+    private void Resetnumber() { numberSpecified = false; }
+    
 
     private google.protobuf.EnumValueOptions _options = null;
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"options", DataFormat = global::ProtoBuf.DataFormat.Default)]
@@ -447,14 +637,23 @@ namespace google.protobuf
     public ServiceDescriptorProto() {}
     
 
-    private string _name = "";
+    private string _name;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
     public string name
     {
-      get { return _name; }
+      get { return _name?? ""; }
       set { _name = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool nameSpecified
+    {
+      get { return _name != null; }
+      set { if (value == (_name== null)) _name = value ? name : (string)null; }
+    }
+    private bool ShouldSerializename() { return nameSpecified; }
+    private void Resetname() { nameSpecified = false; }
+    
     private readonly global::System.Collections.Generic.List<google.protobuf.MethodDescriptorProto> _method = new global::System.Collections.Generic.List<google.protobuf.MethodDescriptorProto>();
     [global::ProtoBuf.ProtoMember(2, Name=@"method", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public global::System.Collections.Generic.List<google.protobuf.MethodDescriptorProto> method
@@ -482,32 +681,59 @@ namespace google.protobuf
     public MethodDescriptorProto() {}
     
 
-    private string _name = "";
+    private string _name;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
     public string name
     {
-      get { return _name; }
+      get { return _name?? ""; }
       set { _name = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool nameSpecified
+    {
+      get { return _name != null; }
+      set { if (value == (_name== null)) _name = value ? name : (string)null; }
+    }
+    private bool ShouldSerializename() { return nameSpecified; }
+    private void Resetname() { nameSpecified = false; }
+    
 
-    private string _input_type = "";
+    private string _input_type;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"input_type", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
     public string input_type
     {
-      get { return _input_type; }
+      get { return _input_type?? ""; }
       set { _input_type = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool input_typeSpecified
+    {
+      get { return _input_type != null; }
+      set { if (value == (_input_type== null)) _input_type = value ? input_type : (string)null; }
+    }
+    private bool ShouldSerializeinput_type() { return input_typeSpecified; }
+    private void Resetinput_type() { input_typeSpecified = false; }
+    
 
-    private string _output_type = "";
+    private string _output_type;
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"output_type", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
     public string output_type
     {
-      get { return _output_type; }
+      get { return _output_type?? ""; }
       set { _output_type = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool output_typeSpecified
+    {
+      get { return _output_type != null; }
+      set { if (value == (_output_type== null)) _output_type = value ? output_type : (string)null; }
+    }
+    private bool ShouldSerializeoutput_type() { return output_typeSpecified; }
+    private void Resetoutput_type() { output_typeSpecified = false; }
+    
 
     private google.protobuf.MethodOptions _options = null;
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"options", DataFormat = global::ProtoBuf.DataFormat.Default)]
@@ -528,86 +754,203 @@ namespace google.protobuf
     public FileOptions() {}
     
 
-    private string _java_package = "";
+    private string _java_package;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"java_package", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
     public string java_package
     {
-      get { return _java_package; }
+      get { return _java_package?? ""; }
       set { _java_package = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool java_packageSpecified
+    {
+      get { return _java_package != null; }
+      set { if (value == (_java_package== null)) _java_package = value ? java_package : (string)null; }
+    }
+    private bool ShouldSerializejava_package() { return java_packageSpecified; }
+    private void Resetjava_package() { java_packageSpecified = false; }
+    
 
-    private string _java_outer_classname = "";
+    private string _java_outer_classname;
     [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"java_outer_classname", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
     public string java_outer_classname
     {
-      get { return _java_outer_classname; }
+      get { return _java_outer_classname?? ""; }
       set { _java_outer_classname = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool java_outer_classnameSpecified
+    {
+      get { return _java_outer_classname != null; }
+      set { if (value == (_java_outer_classname== null)) _java_outer_classname = value ? java_outer_classname : (string)null; }
+    }
+    private bool ShouldSerializejava_outer_classname() { return java_outer_classnameSpecified; }
+    private void Resetjava_outer_classname() { java_outer_classnameSpecified = false; }
+    
 
-    private bool _java_multiple_files = (bool)false;
+    private bool? _java_multiple_files;
     [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"java_multiple_files", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue((bool)false)]
     public bool java_multiple_files
     {
-      get { return _java_multiple_files; }
+      get { return _java_multiple_files?? (bool)false; }
       set { _java_multiple_files = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool java_multiple_filesSpecified
+    {
+      get { return _java_multiple_files != null; }
+      set { if (value == (_java_multiple_files== null)) _java_multiple_files = value ? java_multiple_files : (bool?)null; }
+    }
+    private bool ShouldSerializejava_multiple_files() { return java_multiple_filesSpecified; }
+    private void Resetjava_multiple_files() { java_multiple_filesSpecified = false; }
+    
 
-    private bool _java_generate_equals_and_hash = (bool)false;
+    private bool? _java_generate_equals_and_hash;
     [global::ProtoBuf.ProtoMember(20, IsRequired = false, Name=@"java_generate_equals_and_hash", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue((bool)false)]
     public bool java_generate_equals_and_hash
     {
-      get { return _java_generate_equals_and_hash; }
+      get { return _java_generate_equals_and_hash?? (bool)false; }
       set { _java_generate_equals_and_hash = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool java_generate_equals_and_hashSpecified
+    {
+      get { return _java_generate_equals_and_hash != null; }
+      set { if (value == (_java_generate_equals_and_hash== null)) _java_generate_equals_and_hash = value ? java_generate_equals_and_hash : (bool?)null; }
+    }
+    private bool ShouldSerializejava_generate_equals_and_hash() { return java_generate_equals_and_hashSpecified; }
+    private void Resetjava_generate_equals_and_hash() { java_generate_equals_and_hashSpecified = false; }
+    
 
-    private google.protobuf.FileOptions.OptimizeMode _optimize_for = google.protobuf.FileOptions.OptimizeMode.SPEED;
+    private bool? _java_string_check_utf8;
+    [global::ProtoBuf.ProtoMember(27, IsRequired = false, Name=@"java_string_check_utf8", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public bool java_string_check_utf8
+    {
+      get { return _java_string_check_utf8?? (bool)false; }
+      set { _java_string_check_utf8 = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool java_string_check_utf8Specified
+    {
+      get { return _java_string_check_utf8 != null; }
+      set { if (value == (_java_string_check_utf8== null)) _java_string_check_utf8 = value ? java_string_check_utf8 : (bool?)null; }
+    }
+    private bool ShouldSerializejava_string_check_utf8() { return java_string_check_utf8Specified; }
+    private void Resetjava_string_check_utf8() { java_string_check_utf8Specified = false; }
+    
+
+    private google.protobuf.FileOptions.OptimizeMode? _optimize_for;
     [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"optimize_for", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(google.protobuf.FileOptions.OptimizeMode.SPEED)]
     public google.protobuf.FileOptions.OptimizeMode optimize_for
     {
-      get { return _optimize_for; }
+      get { return _optimize_for?? google.protobuf.FileOptions.OptimizeMode.SPEED; }
       set { _optimize_for = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool optimize_forSpecified
+    {
+      get { return _optimize_for != null; }
+      set { if (value == (_optimize_for== null)) _optimize_for = value ? optimize_for : (google.protobuf.FileOptions.OptimizeMode?)null; }
+    }
+    private bool ShouldSerializeoptimize_for() { return optimize_forSpecified; }
+    private void Resetoptimize_for() { optimize_forSpecified = false; }
+    
 
-    private string _go_package = "";
+    private string _go_package;
     [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"go_package", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
     public string go_package
     {
-      get { return _go_package; }
+      get { return _go_package?? ""; }
       set { _go_package = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool go_packageSpecified
+    {
+      get { return _go_package != null; }
+      set { if (value == (_go_package== null)) _go_package = value ? go_package : (string)null; }
+    }
+    private bool ShouldSerializego_package() { return go_packageSpecified; }
+    private void Resetgo_package() { go_packageSpecified = false; }
+    
 
-    private bool _cc_generic_services = (bool)false;
+    private bool? _cc_generic_services;
     [global::ProtoBuf.ProtoMember(16, IsRequired = false, Name=@"cc_generic_services", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue((bool)false)]
     public bool cc_generic_services
     {
-      get { return _cc_generic_services; }
+      get { return _cc_generic_services?? (bool)false; }
       set { _cc_generic_services = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool cc_generic_servicesSpecified
+    {
+      get { return _cc_generic_services != null; }
+      set { if (value == (_cc_generic_services== null)) _cc_generic_services = value ? cc_generic_services : (bool?)null; }
+    }
+    private bool ShouldSerializecc_generic_services() { return cc_generic_servicesSpecified; }
+    private void Resetcc_generic_services() { cc_generic_servicesSpecified = false; }
+    
 
-    private bool _java_generic_services = (bool)false;
+    private bool? _java_generic_services;
     [global::ProtoBuf.ProtoMember(17, IsRequired = false, Name=@"java_generic_services", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue((bool)false)]
     public bool java_generic_services
     {
-      get { return _java_generic_services; }
+      get { return _java_generic_services?? (bool)false; }
       set { _java_generic_services = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool java_generic_servicesSpecified
+    {
+      get { return _java_generic_services != null; }
+      set { if (value == (_java_generic_services== null)) _java_generic_services = value ? java_generic_services : (bool?)null; }
+    }
+    private bool ShouldSerializejava_generic_services() { return java_generic_servicesSpecified; }
+    private void Resetjava_generic_services() { java_generic_servicesSpecified = false; }
+    
 
-    private bool _py_generic_services = (bool)false;
+    private bool? _py_generic_services;
     [global::ProtoBuf.ProtoMember(18, IsRequired = false, Name=@"py_generic_services", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue((bool)false)]
     public bool py_generic_services
     {
-      get { return _py_generic_services; }
+      get { return _py_generic_services?? (bool)false; }
       set { _py_generic_services = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool py_generic_servicesSpecified
+    {
+      get { return _py_generic_services != null; }
+      set { if (value == (_py_generic_services== null)) _py_generic_services = value ? py_generic_services : (bool?)null; }
+    }
+    private bool ShouldSerializepy_generic_services() { return py_generic_servicesSpecified; }
+    private void Resetpy_generic_services() { py_generic_servicesSpecified = false; }
+    
+
+    private bool? _deprecated;
+    [global::ProtoBuf.ProtoMember(23, IsRequired = false, Name=@"deprecated", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public bool deprecated
+    {
+      get { return _deprecated?? (bool)false; }
+      set { _deprecated = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool deprecatedSpecified
+    {
+      get { return _deprecated != null; }
+      set { if (value == (_deprecated== null)) _deprecated = value ? deprecated : (bool?)null; }
+    }
+    private bool ShouldSerializedeprecated() { return deprecatedSpecified; }
+    private void Resetdeprecated() { deprecatedSpecified = false; }
+    
     private readonly global::System.Collections.Generic.List<google.protobuf.UninterpretedOption> _uninterpreted_option = new global::System.Collections.Generic.List<google.protobuf.UninterpretedOption>();
     [global::ProtoBuf.ProtoMember(999, Name=@"uninterpreted_option", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public global::System.Collections.Generic.List<google.protobuf.UninterpretedOption> uninterpreted_option
@@ -615,7 +958,7 @@ namespace google.protobuf
       get { return _uninterpreted_option; }
     }
   
-    [global::ProtoBuf.ProtoContract(Name=@"OptimizeMode")]
+    [global::ProtoBuf.ProtoContract(Name=@"OptimizeMode", EnumPassthru=true)]
     public enum OptimizeMode
     {
             
@@ -640,23 +983,59 @@ namespace google.protobuf
     public MessageOptions() {}
     
 
-    private bool _message_set_wire_format = (bool)false;
+    private bool? _message_set_wire_format;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"message_set_wire_format", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue((bool)false)]
     public bool message_set_wire_format
     {
-      get { return _message_set_wire_format; }
+      get { return _message_set_wire_format?? (bool)false; }
       set { _message_set_wire_format = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool message_set_wire_formatSpecified
+    {
+      get { return _message_set_wire_format != null; }
+      set { if (value == (_message_set_wire_format== null)) _message_set_wire_format = value ? message_set_wire_format : (bool?)null; }
+    }
+    private bool ShouldSerializemessage_set_wire_format() { return message_set_wire_formatSpecified; }
+    private void Resetmessage_set_wire_format() { message_set_wire_formatSpecified = false; }
+    
 
-    private bool _no_standard_descriptor_accessor = (bool)false;
+    private bool? _no_standard_descriptor_accessor;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"no_standard_descriptor_accessor", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue((bool)false)]
     public bool no_standard_descriptor_accessor
     {
-      get { return _no_standard_descriptor_accessor; }
+      get { return _no_standard_descriptor_accessor?? (bool)false; }
       set { _no_standard_descriptor_accessor = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool no_standard_descriptor_accessorSpecified
+    {
+      get { return _no_standard_descriptor_accessor != null; }
+      set { if (value == (_no_standard_descriptor_accessor== null)) _no_standard_descriptor_accessor = value ? no_standard_descriptor_accessor : (bool?)null; }
+    }
+    private bool ShouldSerializeno_standard_descriptor_accessor() { return no_standard_descriptor_accessorSpecified; }
+    private void Resetno_standard_descriptor_accessor() { no_standard_descriptor_accessorSpecified = false; }
+    
+
+    private bool? _deprecated;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"deprecated", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public bool deprecated
+    {
+      get { return _deprecated?? (bool)false; }
+      set { _deprecated = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool deprecatedSpecified
+    {
+      get { return _deprecated != null; }
+      set { if (value == (_deprecated== null)) _deprecated = value ? deprecated : (bool?)null; }
+    }
+    private bool ShouldSerializedeprecated() { return deprecatedSpecified; }
+    private void Resetdeprecated() { deprecatedSpecified = false; }
+    
     private readonly global::System.Collections.Generic.List<google.protobuf.UninterpretedOption> _uninterpreted_option = new global::System.Collections.Generic.List<google.protobuf.UninterpretedOption>();
     [global::ProtoBuf.ProtoMember(999, Name=@"uninterpreted_option", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public global::System.Collections.Generic.List<google.protobuf.UninterpretedOption> uninterpreted_option
@@ -675,59 +1054,113 @@ namespace google.protobuf
     public FieldOptions() {}
     
 
-    private google.protobuf.FieldOptions.CType _ctype = google.protobuf.FieldOptions.CType.STRING;
+    private google.protobuf.FieldOptions.CType? _ctype;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"ctype", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(google.protobuf.FieldOptions.CType.STRING)]
     public google.protobuf.FieldOptions.CType ctype
     {
-      get { return _ctype; }
+      get { return _ctype?? google.protobuf.FieldOptions.CType.STRING; }
       set { _ctype = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool ctypeSpecified
+    {
+      get { return _ctype != null; }
+      set { if (value == (_ctype== null)) _ctype = value ? ctype : (google.protobuf.FieldOptions.CType?)null; }
+    }
+    private bool ShouldSerializectype() { return ctypeSpecified; }
+    private void Resetctype() { ctypeSpecified = false; }
+    
 
-    private bool _packed = default(bool);
+    private bool? _packed;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"packed", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool packed
     {
-      get { return _packed; }
+      get { return _packed?? default(bool); }
       set { _packed = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool packedSpecified
+    {
+      get { return _packed != null; }
+      set { if (value == (_packed== null)) _packed = value ? packed : (bool?)null; }
+    }
+    private bool ShouldSerializepacked() { return packedSpecified; }
+    private void Resetpacked() { packedSpecified = false; }
+    
 
-    private bool _lazy = (bool)false;
+    private bool? _lazy;
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"lazy", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue((bool)false)]
     public bool lazy
     {
-      get { return _lazy; }
+      get { return _lazy?? (bool)false; }
       set { _lazy = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool lazySpecified
+    {
+      get { return _lazy != null; }
+      set { if (value == (_lazy== null)) _lazy = value ? lazy : (bool?)null; }
+    }
+    private bool ShouldSerializelazy() { return lazySpecified; }
+    private void Resetlazy() { lazySpecified = false; }
+    
 
-    private bool _deprecated = (bool)false;
+    private bool? _deprecated;
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"deprecated", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue((bool)false)]
     public bool deprecated
     {
-      get { return _deprecated; }
+      get { return _deprecated?? (bool)false; }
       set { _deprecated = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool deprecatedSpecified
+    {
+      get { return _deprecated != null; }
+      set { if (value == (_deprecated== null)) _deprecated = value ? deprecated : (bool?)null; }
+    }
+    private bool ShouldSerializedeprecated() { return deprecatedSpecified; }
+    private void Resetdeprecated() { deprecatedSpecified = false; }
+    
 
-    private string _experimental_map_key = "";
+    private string _experimental_map_key;
     [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"experimental_map_key", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
     public string experimental_map_key
     {
-      get { return _experimental_map_key; }
+      get { return _experimental_map_key?? ""; }
       set { _experimental_map_key = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool experimental_map_keySpecified
+    {
+      get { return _experimental_map_key != null; }
+      set { if (value == (_experimental_map_key== null)) _experimental_map_key = value ? experimental_map_key : (string)null; }
+    }
+    private bool ShouldSerializeexperimental_map_key() { return experimental_map_keySpecified; }
+    private void Resetexperimental_map_key() { experimental_map_keySpecified = false; }
+    
 
-    private bool _weak = (bool)false;
+    private bool? _weak;
     [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"weak", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue((bool)false)]
     public bool weak
     {
-      get { return _weak; }
+      get { return _weak?? (bool)false; }
       set { _weak = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool weakSpecified
+    {
+      get { return _weak != null; }
+      set { if (value == (_weak== null)) _weak = value ? weak : (bool?)null; }
+    }
+    private bool ShouldSerializeweak() { return weakSpecified; }
+    private void Resetweak() { weakSpecified = false; }
+    
     private readonly global::System.Collections.Generic.List<google.protobuf.UninterpretedOption> _uninterpreted_option = new global::System.Collections.Generic.List<google.protobuf.UninterpretedOption>();
     [global::ProtoBuf.ProtoMember(999, Name=@"uninterpreted_option", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public global::System.Collections.Generic.List<google.protobuf.UninterpretedOption> uninterpreted_option
@@ -735,7 +1168,7 @@ namespace google.protobuf
       get { return _uninterpreted_option; }
     }
   
-    [global::ProtoBuf.ProtoContract(Name=@"CType")]
+    [global::ProtoBuf.ProtoContract(Name=@"CType", EnumPassthru=true)]
     public enum CType
     {
             
@@ -760,14 +1193,41 @@ namespace google.protobuf
     public EnumOptions() {}
     
 
-    private bool _allow_alias = (bool)true;
+    private bool? _allow_alias;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"allow_alias", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue((bool)true)]
     public bool allow_alias
     {
-      get { return _allow_alias; }
+      get { return _allow_alias?? default(bool); }
       set { _allow_alias = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool allow_aliasSpecified
+    {
+      get { return _allow_alias != null; }
+      set { if (value == (_allow_alias== null)) _allow_alias = value ? allow_alias : (bool?)null; }
+    }
+    private bool ShouldSerializeallow_alias() { return allow_aliasSpecified; }
+    private void Resetallow_alias() { allow_aliasSpecified = false; }
+    
+
+    private bool? _deprecated;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"deprecated", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public bool deprecated
+    {
+      get { return _deprecated?? (bool)false; }
+      set { _deprecated = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool deprecatedSpecified
+    {
+      get { return _deprecated != null; }
+      set { if (value == (_deprecated== null)) _deprecated = value ? deprecated : (bool?)null; }
+    }
+    private bool ShouldSerializedeprecated() { return deprecatedSpecified; }
+    private void Resetdeprecated() { deprecatedSpecified = false; }
+    
     private readonly global::System.Collections.Generic.List<google.protobuf.UninterpretedOption> _uninterpreted_option = new global::System.Collections.Generic.List<google.protobuf.UninterpretedOption>();
     [global::ProtoBuf.ProtoMember(999, Name=@"uninterpreted_option", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public global::System.Collections.Generic.List<google.protobuf.UninterpretedOption> uninterpreted_option
@@ -784,6 +1244,24 @@ namespace google.protobuf
   public partial class EnumValueOptions : global::ProtoBuf.IExtensible
   {
     public EnumValueOptions() {}
+    
+
+    private bool? _deprecated;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"deprecated", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public bool deprecated
+    {
+      get { return _deprecated?? (bool)false; }
+      set { _deprecated = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool deprecatedSpecified
+    {
+      get { return _deprecated != null; }
+      set { if (value == (_deprecated== null)) _deprecated = value ? deprecated : (bool?)null; }
+    }
+    private bool ShouldSerializedeprecated() { return deprecatedSpecified; }
+    private void Resetdeprecated() { deprecatedSpecified = false; }
     
     private readonly global::System.Collections.Generic.List<google.protobuf.UninterpretedOption> _uninterpreted_option = new global::System.Collections.Generic.List<google.protobuf.UninterpretedOption>();
     [global::ProtoBuf.ProtoMember(999, Name=@"uninterpreted_option", DataFormat = global::ProtoBuf.DataFormat.Default)]
@@ -802,6 +1280,24 @@ namespace google.protobuf
   {
     public ServiceOptions() {}
     
+
+    private bool? _deprecated;
+    [global::ProtoBuf.ProtoMember(33, IsRequired = false, Name=@"deprecated", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public bool deprecated
+    {
+      get { return _deprecated?? (bool)false; }
+      set { _deprecated = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool deprecatedSpecified
+    {
+      get { return _deprecated != null; }
+      set { if (value == (_deprecated== null)) _deprecated = value ? deprecated : (bool?)null; }
+    }
+    private bool ShouldSerializedeprecated() { return deprecatedSpecified; }
+    private void Resetdeprecated() { deprecatedSpecified = false; }
+    
     private readonly global::System.Collections.Generic.List<google.protobuf.UninterpretedOption> _uninterpreted_option = new global::System.Collections.Generic.List<google.protobuf.UninterpretedOption>();
     [global::ProtoBuf.ProtoMember(999, Name=@"uninterpreted_option", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public global::System.Collections.Generic.List<google.protobuf.UninterpretedOption> uninterpreted_option
@@ -818,6 +1314,24 @@ namespace google.protobuf
   public partial class MethodOptions : global::ProtoBuf.IExtensible
   {
     public MethodOptions() {}
+    
+
+    private bool? _deprecated;
+    [global::ProtoBuf.ProtoMember(33, IsRequired = false, Name=@"deprecated", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public bool deprecated
+    {
+      get { return _deprecated?? (bool)false; }
+      set { _deprecated = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool deprecatedSpecified
+    {
+      get { return _deprecated != null; }
+      set { if (value == (_deprecated== null)) _deprecated = value ? deprecated : (bool?)null; }
+    }
+    private bool ShouldSerializedeprecated() { return deprecatedSpecified; }
+    private void Resetdeprecated() { deprecatedSpecified = false; }
     
     private readonly global::System.Collections.Generic.List<google.protobuf.UninterpretedOption> _uninterpreted_option = new global::System.Collections.Generic.List<google.protobuf.UninterpretedOption>();
     [global::ProtoBuf.ProtoMember(999, Name=@"uninterpreted_option", DataFormat = global::ProtoBuf.DataFormat.Default)]
@@ -844,59 +1358,113 @@ namespace google.protobuf
     }
   
 
-    private string _identifier_value = "";
+    private string _identifier_value;
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"identifier_value", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
     public string identifier_value
     {
-      get { return _identifier_value; }
+      get { return _identifier_value?? ""; }
       set { _identifier_value = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool identifier_valueSpecified
+    {
+      get { return _identifier_value != null; }
+      set { if (value == (_identifier_value== null)) _identifier_value = value ? identifier_value : (string)null; }
+    }
+    private bool ShouldSerializeidentifier_value() { return identifier_valueSpecified; }
+    private void Resetidentifier_value() { identifier_valueSpecified = false; }
+    
 
-    private ulong _positive_int_value = default(ulong);
+    private ulong? _positive_int_value;
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"positive_int_value", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong positive_int_value
     {
-      get { return _positive_int_value; }
+      get { return _positive_int_value?? default(ulong); }
       set { _positive_int_value = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool positive_int_valueSpecified
+    {
+      get { return _positive_int_value != null; }
+      set { if (value == (_positive_int_value== null)) _positive_int_value = value ? positive_int_value : (ulong?)null; }
+    }
+    private bool ShouldSerializepositive_int_value() { return positive_int_valueSpecified; }
+    private void Resetpositive_int_value() { positive_int_valueSpecified = false; }
+    
 
-    private long _negative_int_value = default(long);
+    private long? _negative_int_value;
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"negative_int_value", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(long))]
     public long negative_int_value
     {
-      get { return _negative_int_value; }
+      get { return _negative_int_value?? default(long); }
       set { _negative_int_value = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool negative_int_valueSpecified
+    {
+      get { return _negative_int_value != null; }
+      set { if (value == (_negative_int_value== null)) _negative_int_value = value ? negative_int_value : (long?)null; }
+    }
+    private bool ShouldSerializenegative_int_value() { return negative_int_valueSpecified; }
+    private void Resetnegative_int_value() { negative_int_valueSpecified = false; }
+    
 
-    private double _double_value = default(double);
+    private double? _double_value;
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"double_value", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(double))]
     public double double_value
     {
-      get { return _double_value; }
+      get { return _double_value?? default(double); }
       set { _double_value = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool double_valueSpecified
+    {
+      get { return _double_value != null; }
+      set { if (value == (_double_value== null)) _double_value = value ? double_value : (double?)null; }
+    }
+    private bool ShouldSerializedouble_value() { return double_valueSpecified; }
+    private void Resetdouble_value() { double_valueSpecified = false; }
+    
 
-    private byte[] _string_value = null;
+    private byte[] _string_value;
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"string_value", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
     public byte[] string_value
     {
-      get { return _string_value; }
+      get { return _string_value?? null; }
       set { _string_value = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool string_valueSpecified
+    {
+      get { return _string_value != null; }
+      set { if (value == (_string_value== null)) _string_value = value ? string_value : (byte[])null; }
+    }
+    private bool ShouldSerializestring_value() { return string_valueSpecified; }
+    private void Resetstring_value() { string_valueSpecified = false; }
+    
 
-    private string _aggregate_value = "";
+    private string _aggregate_value;
     [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"aggregate_value", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
     public string aggregate_value
     {
-      get { return _aggregate_value; }
+      get { return _aggregate_value?? ""; }
       set { _aggregate_value = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool aggregate_valueSpecified
+    {
+      get { return _aggregate_value != null; }
+      set { if (value == (_aggregate_value== null)) _aggregate_value = value ? aggregate_value : (string)null; }
+    }
+    private bool ShouldSerializeaggregate_value() { return aggregate_valueSpecified; }
+    private void Resetaggregate_value() { aggregate_valueSpecified = false; }
+    
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"NamePart")]
   public partial class NamePart : global::ProtoBuf.IExtensible
   {
@@ -958,23 +1526,41 @@ namespace google.protobuf
     }
   
 
-    private string _leading_comments = "";
+    private string _leading_comments;
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"leading_comments", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
     public string leading_comments
     {
-      get { return _leading_comments; }
+      get { return _leading_comments?? ""; }
       set { _leading_comments = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool leading_commentsSpecified
+    {
+      get { return _leading_comments != null; }
+      set { if (value == (_leading_comments== null)) _leading_comments = value ? leading_comments : (string)null; }
+    }
+    private bool ShouldSerializeleading_comments() { return leading_commentsSpecified; }
+    private void Resetleading_comments() { leading_commentsSpecified = false; }
+    
 
-    private string _trailing_comments = "";
+    private string _trailing_comments;
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"trailing_comments", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
     public string trailing_comments
     {
-      get { return _trailing_comments; }
+      get { return _trailing_comments?? ""; }
       set { _trailing_comments = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool trailing_commentsSpecified
+    {
+      get { return _trailing_comments != null; }
+      set { if (value == (_trailing_comments== null)) _trailing_comments = value ? trailing_comments : (string)null; }
+    }
+    private bool ShouldSerializetrailing_comments() { return trailing_commentsSpecified; }
+    private void Resettrailing_comments() { trailing_commentsSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

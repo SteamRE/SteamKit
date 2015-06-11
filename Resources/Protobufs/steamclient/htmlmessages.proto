@@ -1,3 +1,6 @@
+option optimize_for = SPEED;
+option cc_generic_services = false;
+
 message CMsgKeyUp {
 	optional uint32 browser_handle = 1;
 	optional uint32 keyCode = 2;
@@ -365,6 +368,7 @@ message CMsgNeedsPaint {
 	optional uint64 process_handle = 17 [default = 0];
 	optional uint64 shared_memory_size = 18 [default = 0];
 	optional uint64 process_pid = 19 [default = 0];
+	optional uint64 frame_time = 20 [default = 0];
 }
 
 message CMsgComboNeedsPaint {
@@ -410,6 +414,7 @@ message CMsgZoomToElementAtPosition {
 	optional uint32 browser_handle = 1;
 	optional uint32 x = 2;
 	optional uint32 y = 3;
+	optional float duration = 4 [default = 0];
 }
 
 message CMsgZoomToElementAtPositionResponse {
@@ -544,6 +549,7 @@ message CMsgZoomToFocusedElement {
 	optional uint32 browser_handle = 1;
 	optional uint32 leftoffset = 2 [default = 0];
 	optional uint32 topoffset = 3 [default = 0];
+	optional float duration = 4 [default = 0];
 }
 
 message CMsgCloseFullScreenFlashIfOpen {
@@ -572,6 +578,21 @@ message CMsgOpenDevTools {
 }
 
 message CMsgCloseDevTools {
+	optional uint32 browser_handle = 1;
+}
+
+message CMsgUnlockH264 {
+	optional uint32 browser_handle = 1;
+	optional string unlock_code = 2;
+}
+
+message CMsgScreenInformationChanged {
+	optional uint32 browser_handle = 1;
+	optional uint32 override_width = 2;
+	optional uint32 override_height = 3;
+}
+
+message CMsgClearAllCookies {
 	optional uint32 browser_handle = 1;
 }
 

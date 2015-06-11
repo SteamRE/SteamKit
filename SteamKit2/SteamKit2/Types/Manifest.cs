@@ -59,7 +59,7 @@ namespace SteamKit2
 
             internal void Deserialize( BinaryReader ds )
             {
-                FileName = ds.BaseStream.ReadNullTermString( Encoding.ASCII );
+                FileName = ds.BaseStream.ReadNullTermString( Encoding.UTF8 );
 
                 TotalSize = ds.ReadUInt64();
 

@@ -1,6 +1,7 @@
-﻿using Xunit;
-using System.Linq;
+﻿using System;
+using System.IO;
 using SteamKit2;
+using Xunit;
 
 namespace Tests
 {
@@ -145,6 +146,40 @@ namespace Tests
 
             Assert.Equal( "stringvalue", kv[ "name" ].AsString() );
             Assert.Equal( "stringvalue", kv[ "name" ].Value );
+        }
+
+        [Fact]
+        public void KeyValuesWritesBinary()
+        {
+            var expectedHexValue = "00525000017374617475730023444F54415F52505F424F54505241435449434500016E756D5F706172616D730030000" +
+                "17761746368696E675F736572766572005B413A313A323130383933353136393A353431325D00017761746368696E675F66726F6D5F73" +
+                "6572766572005B413A313A3836343436383939343A353431325D000808";
+
+            var kv = new KeyValue( "RP" );
+            kv.Children.Add( new KeyValue( "status", "#DOTA_RP_BOTPRACTICE" ) );
+            kv.Children.Add( new KeyValue( "num_params", "0" ) );
+            kv.Children.Add( new KeyValue( "watching_server", "[A:1:2108935169:5412]" ) );
+            kv.Children.Add( new KeyValue( "watching_from_server", "[A:1:864468994:5412]" ) );
+
+            string tempFileName = null;
+            try
+            {
+                tempFileName = Path.GetTempFileName();
+
+                kv.SaveToFile( tempFileName, asBinary: true );
+
+                var binaryValue = File.ReadAllBytes( tempFileName );
+                var hexValue = BitConverter.ToString( binaryValue ).Replace( "-", "" );
+
+                Assert.Equal( expectedHexValue, hexValue );
+            }
+            finally
+            {
+                if ( tempFileName != null && File.Exists( tempFileName ) )
+                {
+                    File.Delete( tempFileName );
+                }
+            }
         }
     }
 }

@@ -51,6 +51,10 @@ namespace SteamKit2
             /// Gets the weighted load.
             /// </summary>
             public int WeightedLoad { get; internal set; }
+            /// <summary>
+            /// Gets the number of entries this server is worth.
+            /// </summary>
+            public int NumEntries { get; internal set; }
 
             /// <summary>
             /// Performs an implicit conversion from <see cref="System.Net.IPEndPoint"/> to <see cref="SteamKit2.CDNClient.Server"/>.
@@ -132,7 +136,15 @@ namespace SteamKit2
                     return;
 
                 byte[] processedData = CryptoHelper.SymmetricDecrypt( Data, depotKey );
-                processedData = ZipUtil.Decompress( processedData );
+
+                if ( processedData[0] == 'V' && processedData[1] == 'Z' )
+                {
+                    processedData = VZipUtil.Decompress( processedData );
+                }
+                else
+                {
+                    processedData = ZipUtil.Decompress( processedData );
+                }
 
                 byte[] dataCrc = CryptoHelper.AdlerHash( processedData );
 
@@ -159,6 +171,10 @@ namespace SteamKit2
         ulong sessionId;
         long reqCounter;
 
+        /// <summary>
+        /// Default timeout to use when making requests
+        /// </summary>
+        public static TimeSpan RequestTimeout = TimeSpan.FromSeconds( 10 );
 
         static CDNClient()
         {
@@ -263,6 +279,7 @@ namespace SteamKit2
                 uint serverCell = ( uint )server[ "cell" ].AsInteger();
                 int load = server[ "load" ].AsInteger();
                 int weightedLoad = server[ "weightedload" ].AsInteger();
+                int entries = server[ "NumEntriesInClientList" ].AsInteger( 1 );
 
                 serverList.Add( new Server
                 {
@@ -275,7 +292,9 @@ namespace SteamKit2
 
                     Load = load,
                     WeightedLoad = weightedLoad,
+                    NumEntries = entries
                 } );
+                
             }
 
             return serverList;
@@ -378,20 +397,10 @@ namespace SteamKit2
             string cdnToken = null;
             depotCdnAuthKeys.TryGetValue( depotId, out cdnToken );
 
-            byte[] compressedManifest = DoRawCommand( connectedServer, "depot", doAuth: true, args: string.Format( "{0}/manifest/{1}/5", depotId, manifestId ), authtoken: cdnToken );
+            byte[] depotKey = null;
+            depotKeys.TryGetValue( depotId, out depotKey );
 
-            byte[] manifestData = ZipUtil.Decompress( compressedManifest );
-
-            var depotManifest = new DepotManifest( manifestData );
-
-            byte[] depotKey;
-            if ( depotKeys.TryGetValue( depotId, out depotKey ) )
-            {
-                // if we have the depot key, decrypt the manifest filenames
-                depotManifest.DecryptFilenames( depotKey );
-            }
-
-            return depotManifest;
+            return DownloadManifestCore( depotId, manifestId, connectedServer, cdnToken, depotKey );
         }
 
         /// <summary>
@@ -414,19 +423,7 @@ namespace SteamKit2
                 Port = 80
             };
 
-            byte[] manifestData = DoRawCommand( server, "depot", doAuth: true, args: string.Format( "{0}/manifest/{1}/5", depotId, manifestId ), authtoken: cdnAuthToken );
-
-            manifestData = ZipUtil.Decompress( manifestData );
-
-            var depotManifest = new DepotManifest( manifestData );
-
-            if ( depotKey != null )
-            {
-                // if we have the depot key, decrypt the manifest filenames
-                depotManifest.DecryptFilenames( depotKey );
-            }
-
-            return depotManifest;
+            return DownloadManifestCore( depotId, manifestId, server, cdnAuthToken, depotKey );
         }
 
         // Ambiguous reference in cref attribute: 'CDNClient.DownloadManifest'. Assuming 'SteamKit2.CDNClient.DownloadManifest(uint, ulong)',
@@ -447,41 +444,59 @@ namespace SteamKit2
         /// </param>
         /// <returns>A <see cref="DepotChunk"/> instance that contains the data for the given chunk.</returns>
         /// <exception cref="System.ArgumentNullException">chunk's <see cref="DepotManifest.ChunkData.ChunkID"/> was null.</exception>
-        public DepotChunk DownloadDepotChunk( uint depotId, DepotManifest.ChunkData chunk)
+        public DepotChunk DownloadDepotChunk( uint depotId, DepotManifest.ChunkData chunk )
 #pragma warning restore 0419
         {
             if ( chunk.ChunkID == null )
                 throw new ArgumentNullException( "chunk.ChunkID" );
 
-            string chunkId = Utils.EncodeHexString( chunk.ChunkID );
             string cdnToken = null;
-            depotCdnAuthKeys.TryGetValue(depotId, out cdnToken);
+            depotCdnAuthKeys.TryGetValue( depotId, out cdnToken );
 
-            byte[] chunkData = DoRawCommand( connectedServer, "depot", doAuth: true, args: string.Format( "{0}/chunk/{1}", depotId, chunkId ), authtoken: cdnToken );
+            byte[] depotKey = null;
+            depotKeys.TryGetValue( depotId, out depotKey );
 
-            if ( chunk.CompressedLength != default( uint ) )
-            {
-                // assert that lengths match only if the chunk has a length assigned.
-                DebugLog.Assert( chunkData.Length == chunk.CompressedLength, "CDNClient", "Length mismatch after downloading depot chunk!" );
-            }
-
-            var depotChunk = new DepotChunk
-            {
-                ChunkInfo = chunk,
-                Data = chunkData,
-            };
-
-            byte[] depotKey;
-            if ( depotKeys.TryGetValue( depotId, out depotKey ) )
-            {
-                // if we have the depot key, we can process the chunk immediately
-                depotChunk.Process( depotKey );
-            }
-
-            return depotChunk;
+            return DownloadDepotChunkCore( depotId, chunk, connectedServer, cdnToken, depotKey );
         }
 
+        // Ambiguous reference in cref attribute: 'CDNClient.DownloadManifest'. Assuming 'SteamKit2.CDNClient.DownloadManifest(uint, ulong)',
+        // but could have also matched other overloads including 'SteamKit2.CDNClient.DownloadManifest(uint, ulong, string, string, byte[])'.
+#pragma warning disable 0419
 
+        /// <summary>
+        /// Downloads the specified depot chunk, and optionally processes the chunk and verifies the checksum if the depot decryption key has been provided.
+        /// </summary>
+        /// <remarks>
+        /// This function will also validate the length of the downloaded chunk with the value of <see cref="DepotManifest.ChunkData.CompressedLength"/>,
+        /// if it has been assigned a value.
+        /// </remarks>
+        /// <param name="depotId">The id of the depot being accessed.</param>
+        /// <param name="chunk">
+        /// A <see cref="DepotManifest.ChunkData"/> instance that represents the chunk to download.
+        /// This value should come from a manifest downloaded with <see cref="CDNClient.DownloadManifest"/>.
+        /// </param>
+        /// <returns>A <see cref="DepotChunk"/> instance that contains the data for the given chunk.</returns>
+        /// <param name="host">CDN hostname.</param>
+        /// <param name="cdnAuthToken">CDN auth token for CDN content server endpoints.</param>
+        /// <param name="depotKey">
+        /// The depot decryption key for the depot that will be downloaded.
+        /// This is used for decrypting filenames (if needed) in depot manifests, and processing depot chunks.
+        /// </param>
+        /// <exception cref="System.ArgumentNullException">chunk's <see cref="DepotManifest.ChunkData.ChunkID"/> was null.</exception>
+        public DepotChunk DownloadDepotChunk( uint depotId, DepotManifest.ChunkData chunk, string host, string cdnAuthToken, byte[] depotKey = null )
+#pragma warning restore 0419
+        {
+            if (chunk.ChunkID == null)
+                throw new ArgumentNullException( "chunk.ChunkID" );
+
+            var server = new Server
+            {
+                Host = host,
+                Port = 80
+            };
+
+            return DownloadDepotChunkCore( depotId, chunk, server, cdnAuthToken, depotKey );
+        }
 
         string BuildCommand( Server server, string command, string args, string authtoken = null )
         {
@@ -491,52 +506,75 @@ namespace SteamKit2
         byte[] DoRawCommand( Server server, string command, string data = null, string method = WebRequestMethods.Http.Get, bool doAuth = false, string args = "", string authtoken = null )
         {
             string url = BuildCommand( server, command, args, authtoken );
+            var webReq = HttpWebRequest.Create( url ) as HttpWebRequest;
+            webReq.Method = method;
+            webReq.Pipelined = true;
+            webReq.KeepAlive = true;
 
-            using ( var webClient = new WebClient() )
+            if ( doAuth && server.Type == "CS" )
             {
-                webClient.Headers.Clear();
+                var req = Interlocked.Increment( ref reqCounter );
 
-                if ( doAuth && server.Type == "CS" )
+                byte[] shaHash;
+
+                using ( var ms = new MemoryStream() )
+                using ( var bw = new BinaryWriter( ms ) )
                 {
-                    var req = Interlocked.Increment(ref reqCounter);
+                    var uri = new Uri( url );
 
-                    byte[] shaHash;
+                    bw.Write( sessionId );
+                    bw.Write( req );
+                    bw.Write( sessionKey );
+                    bw.Write( Encoding.UTF8.GetBytes( uri.AbsolutePath ) );
 
-                    using ( var ms = new MemoryStream() )
-                    using ( var bw = new BinaryWriter( ms ) )
-                    {
-                        var uri = new Uri( url );
-
-                        bw.Write( sessionId );
-                        bw.Write( req );
-                        bw.Write( sessionKey );
-                        bw.Write( Encoding.ASCII.GetBytes( uri.AbsolutePath ) );
-
-                        shaHash = CryptoHelper.SHAHash( ms.ToArray() );
-                    }
-
-                    string hexHash = Utils.EncodeHexString( shaHash );
-                    string authHeader = string.Format( "sessionid={0};req-counter={1};hash={2};", sessionId, req, hexHash );
-
-                    webClient.Headers[ "x-steam-auth" ] = authHeader;
+                    shaHash = CryptoHelper.SHAHash( ms.ToArray() );
                 }
 
-                byte[] resultData = null;
+                string hexHash = Utils.EncodeHexString( shaHash );
+                string authHeader = string.Format( "sessionid={0};req-counter={1};hash={2};", sessionId, req, hexHash );
 
-                if ( method == WebRequestMethods.Http.Get )
+                webReq.Headers[ "x-steam-auth" ] = authHeader;
+            }
+
+            if ( method == WebRequestMethods.Http.Post )
+            {
+                byte[] payload = Encoding.UTF8.GetBytes( data );
+                webReq.ContentType = "application/x-www-form-urlencoded";
+                webReq.ContentLength = payload.Length;
+
+                using ( var reqStream = webReq.GetRequestStream() )
                 {
-                    resultData = webClient.DownloadData( url );
+                    reqStream.Write( payload, 0, payload.Length );
                 }
-                else if ( method == WebRequestMethods.Http.Post )
+            }
+
+
+            var result = webReq.BeginGetResponse( null, null );
+
+            if ( !result.AsyncWaitHandle.WaitOne( RequestTimeout ) )
+            {
+                webReq.Abort();
+            }
+
+            try
+            {
+                var response = webReq.EndGetResponse( result );
+
+                using ( var ms = new MemoryStream( ( int ) response.ContentLength ) )
                 {
-                    webClient.Headers[ HttpRequestHeader.ContentType ] = "application/x-www-form-urlencoded";
+                    response.GetResponseStream().CopyTo( ms );
+                    response.Close();
 
-                    resultData = webClient.UploadData( url, Encoding.ASCII.GetBytes( data ) );
+                    return ms.ToArray();
                 }
-
-                return resultData;
+            }
+            catch ( Exception ex )
+            {
+                DebugLog.WriteLine( "CDNClient", "Failed to complete web request to {0}: {1}", url, ex.Message );
+                throw;
             }
         }
+
         KeyValue DoCommand( Server server, string command, string data = null, string method = WebRequestMethods.Http.Get, bool doAuth = false, string args = "", string authtoken = null )
         {
             byte[] resultData = DoRawCommand( server, command, data, method, doAuth, args, authtoken );
@@ -558,5 +596,49 @@ namespace SteamKit2
             return dataKv;
         }
 
+        DepotManifest DownloadManifestCore( uint depotId, ulong manifestId, Server server, string cdnAuthToken, byte[] depotKey )
+        {
+
+            byte[] manifestData = DoRawCommand( server, "depot", doAuth: true, args: string.Format( "{0}/manifest/{1}/5", depotId, manifestId ), authtoken: cdnAuthToken );
+
+            manifestData = ZipUtil.Decompress( manifestData );
+
+            var depotManifest = new DepotManifest( manifestData );
+
+            if ( depotKey != null )
+            {
+                // if we have the depot key, decrypt the manifest filenames
+                depotManifest.DecryptFilenames( depotKey );
+            }
+
+            return depotManifest;
+        }
+
+        DepotChunk DownloadDepotChunkCore( uint depotId, DepotManifest.ChunkData chunk, Server server, string cdnAuthToken, byte[] depotKey )
+        {
+            var chunkID = Utils.EncodeHexString( chunk.ChunkID );
+
+            byte[] chunkData = DoRawCommand( server, "depot", doAuth: true, args: string.Format( "{0}/chunk/{1}", depotId, chunkID ), authtoken: cdnAuthToken );
+
+            if ( chunk.CompressedLength != default( uint ) )
+            {
+                // assert that lengths match only if the chunk has a length assigned.
+                DebugLog.Assert( chunkData.Length == chunk.CompressedLength, "CDNClient", "Length mismatch after downloading depot chunk!" );
+            }
+
+            var depotChunk = new DepotChunk
+            {
+                ChunkInfo = chunk,
+                Data = chunkData,
+            };
+
+            if ( depotKey != null )
+            {
+                // if we have the depot key, we can process the chunk immediately
+                depotChunk.Process( depotKey );
+            }
+
+            return depotChunk;
+        }
     }
 }

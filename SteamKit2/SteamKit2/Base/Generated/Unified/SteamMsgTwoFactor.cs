@@ -138,6 +138,15 @@ namespace SteamKit2.Unified.Internal
       get { return _email_validated; }
       set { _email_validated = value; }
     }
+
+    private string _device_identifier = "";
+    [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"device_identifier", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string device_identifier
+    {
+      get { return _device_identifier; }
+      set { _device_identifier = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -229,6 +238,15 @@ namespace SteamKit2.Unified.Internal
     {
       get { return _device_identifier; }
       set { _device_identifier = value; }
+    }
+
+    private byte[] _identity_secret = null;
+    [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"identity_secret", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public byte[] identity_secret
+    {
+      get { return _identity_secret; }
+      set { _identity_secret = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -357,6 +375,24 @@ namespace SteamKit2.Unified.Internal
     {
       get { return _token_gid; }
       set { _token_gid = value; }
+    }
+
+    private byte[] _identity_secret = null;
+    [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"identity_secret", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public byte[] identity_secret
+    {
+      get { return _identity_secret; }
+      set { _identity_secret = value; }
+    }
+
+    private byte[] _secret_1 = null;
+    [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"secret_1", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public byte[] secret_1
+    {
+      get { return _secret_1; }
+      set { _secret_1 = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -603,6 +639,221 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_CreateEmergencyCodes_Request")]
+  public partial class CTwoFactor_CreateEmergencyCodes_Request : global::ProtoBuf.IExtensible
+  {
+    public CTwoFactor_CreateEmergencyCodes_Request() {}
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_CreateEmergencyCodes_Response")]
+  public partial class CTwoFactor_CreateEmergencyCodes_Response : global::ProtoBuf.IExtensible
+  {
+    public CTwoFactor_CreateEmergencyCodes_Response() {}
+    
+    private readonly global::System.Collections.Generic.List<string> _codes = new global::System.Collections.Generic.List<string>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"codes", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<string> codes
+    {
+      get { return _codes; }
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_DestroyEmergencyCodes_Request")]
+  public partial class CTwoFactor_DestroyEmergencyCodes_Request : global::ProtoBuf.IExtensible
+  {
+    public CTwoFactor_DestroyEmergencyCodes_Request() {}
+    
+
+    private ulong _steamid = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong steamid
+    {
+      get { return _steamid; }
+      set { _steamid = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_DestroyEmergencyCodes_Response")]
+  public partial class CTwoFactor_DestroyEmergencyCodes_Response : global::ProtoBuf.IExtensible
+  {
+    public CTwoFactor_DestroyEmergencyCodes_Response() {}
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_ValidateToken_Request")]
+  public partial class CTwoFactor_ValidateToken_Request : global::ProtoBuf.IExtensible
+  {
+    public CTwoFactor_ValidateToken_Request() {}
+    
+
+    private string _code = "";
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"code", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string code
+    {
+      get { return _code; }
+      set { _code = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_ValidateToken_Response")]
+  public partial class CTwoFactor_ValidateToken_Response : global::ProtoBuf.IExtensible
+  {
+    public CTwoFactor_ValidateToken_Response() {}
+    
+
+    private bool _valid = default(bool);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"valid", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool valid
+    {
+      get { return _valid; }
+      set { _valid = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_RemoveAuthenticatorViaChallengeStart_Request")]
+  public partial class CTwoFactor_RemoveAuthenticatorViaChallengeStart_Request : global::ProtoBuf.IExtensible
+  {
+    public CTwoFactor_RemoveAuthenticatorViaChallengeStart_Request() {}
+    
+
+    private ulong _steamid = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong steamid
+    {
+      get { return _steamid; }
+      set { _steamid = value; }
+    }
+
+    private string _encrypted_password = "";
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"encrypted_password", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string encrypted_password
+    {
+      get { return _encrypted_password; }
+      set { _encrypted_password = value; }
+    }
+
+    private uint _password_timestamp = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"password_timestamp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint password_timestamp
+    {
+      get { return _password_timestamp; }
+      set { _password_timestamp = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_RemoveAuthenticatorViaChallengeStart_Response")]
+  public partial class CTwoFactor_RemoveAuthenticatorViaChallengeStart_Response : global::ProtoBuf.IExtensible
+  {
+    public CTwoFactor_RemoveAuthenticatorViaChallengeStart_Response() {}
+    
+
+    private bool _success = default(bool);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"success", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool success
+    {
+      get { return _success; }
+      set { _success = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_RemoveAuthenticatorViaChallengeContinue_Request")]
+  public partial class CTwoFactor_RemoveAuthenticatorViaChallengeContinue_Request : global::ProtoBuf.IExtensible
+  {
+    public CTwoFactor_RemoveAuthenticatorViaChallengeContinue_Request() {}
+    
+
+    private ulong _steamid = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong steamid
+    {
+      get { return _steamid; }
+      set { _steamid = value; }
+    }
+
+    private string _encrypted_password = "";
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"encrypted_password", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string encrypted_password
+    {
+      get { return _encrypted_password; }
+      set { _encrypted_password = value; }
+    }
+
+    private uint _password_timestamp = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"password_timestamp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint password_timestamp
+    {
+      get { return _password_timestamp; }
+      set { _password_timestamp = value; }
+    }
+
+    private string _sms_code = "";
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"sms_code", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string sms_code
+    {
+      get { return _sms_code; }
+      set { _sms_code = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_RemoveAuthenticatorViaChallengeContinue_Response")]
+  public partial class CTwoFactor_RemoveAuthenticatorViaChallengeContinue_Response : global::ProtoBuf.IExtensible
+  {
+    public CTwoFactor_RemoveAuthenticatorViaChallengeContinue_Response() {}
+    
+
+    private bool _success = default(bool);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"success", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool success
+    {
+      get { return _success; }
+      set { _success = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     public interface ITwoFactor
     {
       CTwoFactor_Time_Response QueryTime(CTwoFactor_Time_Request request);
@@ -612,6 +863,11 @@ namespace SteamKit2.Unified.Internal
     CTwoFactor_SendEmail_Response SendEmail(CTwoFactor_SendEmail_Request request);
     CTwoFactor_FinalizeAddAuthenticator_Response FinalizeAddAuthenticator(CTwoFactor_FinalizeAddAuthenticator_Request request);
     CTwoFactor_RemoveAuthenticator_Response RemoveAuthenticator(CTwoFactor_RemoveAuthenticator_Request request);
+    CTwoFactor_CreateEmergencyCodes_Response CreateEmergencyCodes(CTwoFactor_CreateEmergencyCodes_Request request);
+    CTwoFactor_DestroyEmergencyCodes_Response DestroyEmergencyCodes(CTwoFactor_DestroyEmergencyCodes_Request request);
+    CTwoFactor_ValidateToken_Response ValidateToken(CTwoFactor_ValidateToken_Request request);
+    CTwoFactor_RemoveAuthenticatorViaChallengeStart_Response RemoveAuthenticatorViaChallengeStart(CTwoFactor_RemoveAuthenticatorViaChallengeStart_Request request);
+    CTwoFactor_RemoveAuthenticatorViaChallengeContinue_Response RemoveAuthenticatorViaChallengeContinue(CTwoFactor_RemoveAuthenticatorViaChallengeContinue_Request request);
     
     }
     

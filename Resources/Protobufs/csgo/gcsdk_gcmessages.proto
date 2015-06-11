@@ -1,5 +1,8 @@
 import "steammessages.proto";
 
+option optimize_for = SPEED;
+option cc_generic_services = false;
+
 enum GCConnectionStatus {
 	GCConnectionStatus_HAVE_SESSION = 0;
 	GCConnectionStatus_GC_GOING_DOWN = 1;
@@ -152,6 +155,7 @@ message CMsgClientWelcome {
 	optional .CMsgClientWelcome.Location location = 5;
 	optional bytes game_data2 = 6;
 	optional uint32 rtime32_gc_welcome_timestamp = 7;
+	optional uint32 currency = 8;
 }
 
 message CMsgConnectionStatus {
@@ -167,6 +171,7 @@ message CWorkshop_PopulateItemDescriptions_Request {
 	message SingleItemDescription {
 		optional uint32 gameitemid = 1;
 		optional string item_description = 2;
+		optional bool one_per_account = 3;
 	}
 
 	message ItemDescriptionsLanguageBlock {

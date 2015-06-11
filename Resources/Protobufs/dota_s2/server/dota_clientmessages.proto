@@ -2,6 +2,9 @@ import "google/protobuf/descriptor.proto";
 import "networkbasetypes.proto";
 import "dota_commonmessages.proto";
 
+option optimize_for = SPEED;
+option cc_generic_services = false;
+
 enum EDotaClientMessages {
 	DOTA_CM_MapLine = 301;
 	DOTA_CM_AspectRatio = 302;
@@ -29,6 +32,13 @@ enum EDotaClientMessages {
 	DOTA_CM_WillPurchaseAlert = 324;
 	DOTA_CM_PlayerShowCase = 325;
 	DOTA_CM_TeleportRequiresHalt = 326;
+	DOTA_CM_CameraZoomAmount = 327;
+	DOTA_CM_BroadcasterUsingCamerman = 328;
+	DOTA_CM_BroadcasterUsingAssistedCameraOperator = 329;
+	DOTA_CM_EnemyItemAlert = 330;
+	DOTA_CM_FreeInventory = 331;
+	DOTA_CM_BuyBackStateAlert = 332;
+	DOTA_CM_FillEmptySlotsWithBots = 333;
 }
 
 message CDOTAClientMsg_MapPing {
@@ -37,6 +47,10 @@ message CDOTAClientMsg_MapPing {
 
 message CDOTAClientMsg_ItemAlert {
 	optional .CDOTAMsg_ItemAlert item_alert = 1;
+}
+
+message CDOTAClientMsg_EnemyItemAlert {
+	optional .CDOTAMsg_EnemyItemAlert enemy_item_alert = 1;
 }
 
 message CDOTAClientMsg_MapLine {
@@ -138,7 +152,36 @@ message CDOTAClientMsg_WillPurchaseAlert {
 	optional int32 itemid = 1;
 }
 
+message CDOTAClientMsg_BuyBackStateAlert {
+}
+
 message CDOTAClientMsg_PlayerShowCase {
 	optional bool showcase = 1;
+}
+
+message CDOTAClientMsg_CameraZoomAmount {
+	optional float zoom_amount = 1;
+}
+
+message CDOTAClientMsg_BroadcasterUsingCameraman {
+	optional bool cameraman = 1;
+}
+
+message CDOTAClientMsg_BroadcasterUsingAssistedCameraOperator {
+	optional bool enabled = 1;
+}
+
+message CAdditionalEquipSlotClientMsg {
+	optional uint32 class_id = 1;
+	optional uint32 slot_id = 2;
+	optional uint32 def_index = 3;
+}
+
+message CDOTAClientMsg_FreeInventory {
+	repeated .CAdditionalEquipSlotClientMsg equips = 1;
+}
+
+message CDOTAClientMsg_FillEmptySlotsWithBots {
+	optional bool fillwithbots = 1;
 }
 

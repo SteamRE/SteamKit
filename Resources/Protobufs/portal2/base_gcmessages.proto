@@ -1,5 +1,8 @@
 import "steammessages.proto";
 
+option optimize_for = SPEED;
+option cc_generic_services = false;
+
 message CGCStorePurchaseInit_LineItem {
 	optional uint32 item_def_id = 1;
 	optional uint32 quantity = 2;

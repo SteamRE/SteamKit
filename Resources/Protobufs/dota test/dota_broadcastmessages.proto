@@ -1,5 +1,5 @@
-import "google/protobuf/descriptor.proto";
-import "networkbasetypes.proto";
+option optimize_for = SPEED;
+option cc_generic_services = false;
 
 enum EDotaBroadcastMessages {
 	DOTA_BM_LANLobbyRequest = 1;
