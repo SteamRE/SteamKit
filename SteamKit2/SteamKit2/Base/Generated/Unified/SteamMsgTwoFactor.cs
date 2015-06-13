@@ -13,44 +13,6 @@
 // Note: requires additional types generated from: steammessages_unified_base.steamclient.proto
 namespace SteamKit2.Unified.Internal
 {
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_Time_Request")]
-  public partial class CTwoFactor_Time_Request : global::ProtoBuf.IExtensible
-  {
-    public CTwoFactor_Time_Request() {}
-    
-
-    private ulong _sender_time = default(ulong);
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"sender_time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
-    public ulong sender_time
-    {
-      get { return _sender_time; }
-      set { _sender_time = value; }
-    }
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_Time_Response")]
-  public partial class CTwoFactor_Time_Response : global::ProtoBuf.IExtensible
-  {
-    public CTwoFactor_Time_Response() {}
-    
-
-    private ulong _server_time = default(ulong);
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"server_time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
-    public ulong server_time
-    {
-      get { return _server_time; }
-      set { _server_time = value; }
-    }
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_Status_Request")]
   public partial class CTwoFactor_Status_Request : global::ProtoBuf.IExtensible
   {
@@ -303,6 +265,15 @@ namespace SteamKit2.Unified.Internal
       get { return _device_identifier; }
       set { _device_identifier = value; }
     }
+
+    private string _sms_phone_id = "";
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"sms_phone_id", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string sms_phone_id
+    {
+      get { return _sms_phone_id; }
+      set { _sms_phone_id = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -393,6 +364,15 @@ namespace SteamKit2.Unified.Internal
     {
       get { return _secret_1; }
       set { _secret_1 = value; }
+    }
+
+    private int _status = default(int);
+    [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"status", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int status
+    {
+      get { return _status; }
+      set { _status = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -634,6 +614,15 @@ namespace SteamKit2.Unified.Internal
       get { return _server_time; }
       set { _server_time = value; }
     }
+
+    private int _status = default(int);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"status", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int status
+    {
+      get { return _status; }
+      set { _status = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -856,8 +845,7 @@ namespace SteamKit2.Unified.Internal
   
     public interface ITwoFactor
     {
-      CTwoFactor_Time_Response QueryTime(CTwoFactor_Time_Request request);
-    CTwoFactor_Status_Response QueryStatus(CTwoFactor_Status_Request request);
+      CTwoFactor_Status_Response QueryStatus(CTwoFactor_Status_Request request);
     CTwoFactor_Secrets_Response QuerySecrets(CTwoFactor_Secrets_Request request);
     CTwoFactor_AddAuthenticator_Response AddAuthenticator(CTwoFactor_AddAuthenticator_Request request);
     CTwoFactor_SendEmail_Response SendEmail(CTwoFactor_SendEmail_Request request);
