@@ -230,6 +230,7 @@ message CMsgAdjustItemEquippedState {
 	optional uint64 item_id = 1;
 	optional uint32 new_class = 2;
 	optional uint32 new_slot = 3;
+	optional uint32 style_index = 4;
 }
 
 message CMsgEconPlayerStrangeCountAdjustment {

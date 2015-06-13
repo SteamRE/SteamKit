@@ -57,15 +57,12 @@ message CMsgSteamDatagramGameserverSessionRequest {
 
 message CMsgSteamDatagramGameserverSessionEstablished {
 	optional fixed32 client_cookie = 1;
-	optional fixed32 legacy_client_cookie = 2;
 	optional fixed64 gameserver_steam_id = 3;
 	optional uint32 seconds_until_shutdown = 4;
 }
 
 message CMsgSteamDatagramNoSession {
 	optional fixed32 client_cookie = 7;
-	optional uint32 legacy_client_cookie_1 = 1;
-	optional uint32 legacy_client_cookie_2 = 6;
 	optional fixed32 your_public_ip = 2;
 	optional fixed32 server_time = 3;
 	optional fixed64 challenge = 4;
