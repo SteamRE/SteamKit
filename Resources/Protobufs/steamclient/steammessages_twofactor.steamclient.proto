@@ -1,14 +1,6 @@
 import "google/protobuf/descriptor.proto";
 import "steammessages_unified_base.steamclient.proto";
 
-message CTwoFactor_Time_Request {
-	optional uint64 sender_time = 1 [(description) = "Current time on the sender (for stats, don't trust this)"];
-}
-
-message CTwoFactor_Time_Response {
-	optional uint64 server_time = 1 [(description) = "Current server time"];
-}
-
 message CTwoFactor_Status_Request {
 	optional fixed64 steamid = 1 [(description) = "steamid to use"];
 }
@@ -45,6 +37,7 @@ message CTwoFactor_AddAuthenticator_Request {
 	optional fixed64 serial_number = 3 [(description) = "locally computed serial (deprecated)"];
 	optional uint32 authenticator_type = 4 [(description) = "Authenticator type"];
 	optional string device_identifier = 5 [(description) = "Authenticator identifier"];
+	optional string sms_phone_id = 6 [(description) = "ID of phone to use for SMS verification"];
 }
 
 message CTwoFactor_AddAuthenticator_Response {
@@ -57,6 +50,7 @@ message CTwoFactor_AddAuthenticator_Response {
 	optional string token_gid = 7 [(description) = "Token GID assigned by server"];
 	optional bytes identity_secret = 8 [(description) = "Secret used for identity attestation (e.g., for eventing)"];
 	optional bytes secret_1 = 9 [(description) = "Spare shared secret"];
+	optional int32 status = 10 [(description) = "Result code"];
 }
 
 message CTwoFactor_SendEmail_Request {
@@ -95,6 +89,7 @@ message CTwoFactor_RemoveAuthenticator_Response {
 	optional bool success = 1 [(description) = "True if succeeded, or want more tries with an authenticator_code"];
 	optional bool want_more = 2 [(description) = "True if want more tries"];
 	optional uint64 server_time = 3 [(description) = "Current server time"];
+	optional int32 status = 4 [(description) = "Result code"];
 }
 
 message CTwoFactor_CreateEmergencyCodes_Request {
@@ -142,9 +137,6 @@ message CTwoFactor_RemoveAuthenticatorViaChallengeContinue_Response {
 
 service TwoFactor {
 	option (service_description) = "Two Factor Authentication Service";
-	rpc QueryTime (.CTwoFactor_Time_Request) returns (.CTwoFactor_Time_Response) {
-		option (method_description) = "Get server's idea of the current time";
-	}
 	rpc QueryStatus (.CTwoFactor_Status_Request) returns (.CTwoFactor_Status_Response) {
 		option (method_description) = "Get two-factor authentication settings for the logged-in account";
 	}
