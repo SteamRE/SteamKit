@@ -247,13 +247,31 @@ namespace NetHookAnalyzer2
 				return;
 			}
 
-			if (Enum.IsDefined(enumType, enumValue))
+			if (enumType.GetCustomAttribute<FlagsAttribute>() != null)
 			{
-				SetValueForDisplay(Enum.GetName(enumType, enumValue));
+				var allEnumFlags = Enum.GetValues(enumType)
+					.Cast<object>().Select(x => (long)Convert.ChangeType(x, typeof(long))) // .Cast<long> fails to unbox int-backed enums
+					.Aggregate(0L, (acc, val) => acc |= val);
+
+				if ((~allEnumFlags & (long)Convert.ChangeType(enumValue, typeof(long))) > 0)
+				{
+					SetValueForDisplay(string.Format("{0} (not a valid combination of '{1}')", value, enumType.Name), value.ToString());
+				}
+				else
+				{
+					SetValueForDisplay(string.Format("{0:D} = {0:G}", Enum.ToObject(enumType, enumValue)));
+				}
 			}
 			else
 			{
-				SetValueForDisplay(string.Format("{0} (not in '{1}')", value, enumType.Name), value.ToString());
+				if (Enum.IsDefined(enumType, enumValue))
+				{
+					SetValueForDisplay(Enum.GetName(enumType, enumValue));
+				}
+				else
+				{
+					SetValueForDisplay(string.Format("{0} (not in '{1}')", value, enumType.Name), value.ToString());
+				}
 			}
 		}
 
