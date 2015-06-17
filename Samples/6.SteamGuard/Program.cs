@@ -203,11 +203,11 @@ namespace Sample6_SteamGuard
             // for the sake of simplicity, we'll just use "sentry.bin"
 
             int fileSize;
-            using (var fs = File.OpenWrite("sentry.bin"))
+            using ( var fs = File.OpenWrite( "sentry.bin" ) )
             {
-                fs.Seek(callback.Offset, SeekOrigin.Begin);
-                fs.Write(callback.Data, 0, callback.BytesToWrite);
-                fileSize = (int)fs.Length;
+                fs.Seek( callback.Offset, SeekOrigin.Begin );
+                fs.Write( callback.Data, 0, callback.BytesToWrite );
+                fileSize = ( int )fs.Length;
             }
 
             // inform the steam servers that we're accepting this sentry file
