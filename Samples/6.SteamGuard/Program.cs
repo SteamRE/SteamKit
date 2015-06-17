@@ -201,7 +201,14 @@ namespace Sample6_SteamGuard
             // ideally we'd want to write to the filename specified in the callback
             // but then this sample would require more code to find the correct sentry file to read during logon
             // for the sake of simplicity, we'll just use "sentry.bin"
-            File.WriteAllBytes( "sentry.bin", callback.Data );
+
+            int fileSize;
+            using (var fs = File.OpenWrite("sentry.bin"))
+            {
+                fs.Seek(callback.Offset, SeekOrigin.Begin);
+                fs.Write(callback.Data, 0, callback.BytesToWrite);
+                fileSize = (int)fs.Length;
+            }
 
             // inform the steam servers that we're accepting this sentry file
             steamUser.SendMachineAuthResponse( new SteamUser.MachineAuthDetails
@@ -211,7 +218,7 @@ namespace Sample6_SteamGuard
                 FileName = callback.FileName,
 
                 BytesWritten = callback.BytesToWrite,
-                FileSize = callback.Data.Length,
+                FileSize = fileSize,
                 Offset = callback.Offset,
 
                 Result = EResult.OK,
