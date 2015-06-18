@@ -520,6 +520,8 @@ enum EDOTAGCMsg {
 	k_EMsgSQLGCToGCGrantBackpackSlots = 7591;
 	k_EMsgSQLGrantLeagueMatchToTicketHolders = 7592;
 	k_EMsgClientToGCSetAdditionalEquipsResponse = 7593;
+	k_EMsgGCToGCEmoticonUnlockNoRollback = 7594;
+	k_EMsgGCToGCGetCompendiumFanfare = 7595;
 	k_EMsgGCDev_GrantWarKill = 8001;
 	k_EMsgClientToGCCreateTeamShowcase = 8002;
 	k_EMsgGCToClientTeamShowcaseCreateResult = 8003;
@@ -571,6 +573,9 @@ enum EDOTAGCMsg {
 	k_EMsgDOTAChatGetMemberCountResponse = 8049;
 	k_EMsgClientToGCSocialFeedPostMessageRequest = 8050;
 	k_EMsgGCToClientSocialFeedPostMessageResponse = 8051;
+	k_EMsgCustomGameListenServerStartedLoading = 8052;
+	k_EMsgCustomGameClientFinishedLoading = 8053;
+	k_EMsgGCPracticeLobbyCloseBroadcastChannel = 8054;
 }
 
 enum DOTA_GameMode {
@@ -692,6 +697,12 @@ enum DOTA_LobbyMemberXPBonus {
 	DOTA_LobbyMemberXPBonus_PARTY = 3;
 	DOTA_LobbyMemberXPBonus_RECRUITMENT = 4;
 	DOTA_LobbyMemberXPBonus_PCBANG = 5;
+}
+
+enum DOTALobbyVisibility {
+	DOTALobbyVisibility_Public = 0;
+	DOTALobbyVisibility_Friends = 1;
+	DOTALobbyVisibility_Unlisted = 2;
 }
 
 enum EDOTAPlayerMMRType {
@@ -1161,6 +1172,7 @@ message CSODOTALobby {
 	optional uint32 custom_max_players = 72;
 	optional .PartnerAccountType partner_type = 73 [default = PARTNER_NONE];
 	optional uint32 lan_host_ping_to_server_region = 74;
+	optional .DOTALobbyVisibility visibility = 75 [default = DOTALobbyVisibility_Public];
 }
 
 message CMsgLobbyEventPoints {
@@ -1169,6 +1181,8 @@ message CMsgLobbyEventPoints {
 		optional uint32 normal_points = 2;
 		optional uint32 premium_points = 3;
 		optional bool owned = 4;
+		optional uint32 favorite_team = 5;
+		optional uint32 favorite_team_level = 6;
 	}
 
 	optional uint32 event_id = 1;
@@ -1593,6 +1607,10 @@ message CMsgDOTARealtimeGameStats {
 		optional uint32 assists = 3;
 	}
 
+	message AbilityList {
+		repeated uint32 id = 1;
+	}
+
 	message PlayerDetails {
 		optional uint32 accountid = 1;
 		optional uint32 playerid = 2;
@@ -1639,7 +1657,7 @@ message CMsgDOTARealtimeGameStats {
 		repeated .CMsgDOTARealtimeGameStats.ItemDetails items = 43;
 		repeated .CMsgDOTARealtimeGameStats.ItemDetails stashitems = 44;
 		repeated .CMsgDOTARealtimeGameStats.ItemDetails itemshoppinglist = 45;
-		repeated uint32 levelpoints = 46;
+		repeated .CMsgDOTARealtimeGameStats.AbilityList levelpoints = 46;
 		repeated .CMsgDOTARealtimeGameStats.HeroToHeroStats hero_to_hero_stats = 47;
 	}
 
@@ -1696,5 +1714,6 @@ message CMsgDOTARealtimeGameStats {
 	repeated .CMsgDOTARealtimeGameStats.TeamDetails teams = 2;
 	repeated .CMsgDOTARealtimeGameStats.BuildingDetails buildings = 3;
 	optional .CMsgDOTARealtimeGameStats.GraphData graph_data = 4;
+	optional bool delta_frame = 5;
 }
 

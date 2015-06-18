@@ -408,6 +408,7 @@ message CMsgPracticeLobbySetDetails {
 	optional uint32 custom_min_players = 30;
 	optional uint32 custom_max_players = 31;
 	optional uint32 lan_host_ping_to_server_region = 32;
+	optional .DOTALobbyVisibility visibility = 33 [default = DOTALobbyVisibility_Public];
 }
 
 message CMsgPracticeLobbyCreate {
@@ -443,6 +444,10 @@ message CMsgPracticeLobbyJoinBroadcastChannel {
 	optional string preferred_description = 2;
 	optional string preferred_country_code = 3;
 	optional string preferred_language_code = 4;
+}
+
+message CMsgPracticeLobbyCloseBroadcastChannel {
+	optional uint32 channel = 1;
 }
 
 message CMsgPracticeLobbyToggleBroadcastChannelCameramanStatus {
@@ -2818,5 +2823,17 @@ message CMsgDOTAGroupMergeReply {
 message CMsgClientToGCRealtimeGameStateViewing {
 	optional uint64 start_server_id = 1;
 	optional uint64 stop_server_id = 2;
+}
+
+message CMsgDOTACustomGameListenServerStartedLoading {
+	optional fixed64 lobby_id = 1;
+	optional uint64 custom_game_id = 2;
+	repeated uint32 lobby_members = 3;
+	optional uint32 start_time = 4;
+}
+
+message CMsgDOTACustomGameClientFinishedLoading {
+	optional fixed64 lobby_id = 1;
+	optional uint32 loading_duration = 2;
 }
 
