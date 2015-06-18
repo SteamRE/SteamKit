@@ -19,6 +19,7 @@ namespace SteamKit2
         {
             var clientMsg = new ClientMsgProtobuf<CMsgGCClient>( EMsg.ClientToGC );
 
+            clientMsg.ProtoHeader.routing_appid = appId;
             clientMsg.Body.msgtype = MsgUtil.MakeGCMsg( msg.MsgType, msg.IsProto );
             clientMsg.Body.appid = appId;
 
