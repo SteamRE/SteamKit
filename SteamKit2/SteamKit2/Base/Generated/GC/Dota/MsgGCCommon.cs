@@ -2181,6 +2181,15 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _lan_host_ping_to_server_region; }
       set { _lan_host_ping_to_server_region = value; }
     }
+
+    private DOTALobbyVisibility _visibility = DOTALobbyVisibility.DOTALobbyVisibility_Public;
+    [global::ProtoBuf.ProtoMember(75, IsRequired = false, Name=@"visibility", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(DOTALobbyVisibility.DOTALobbyVisibility_Public)]
+    public DOTALobbyVisibility visibility
+    {
+      get { return _visibility; }
+      set { _visibility = value; }
+    }
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CExtraMsg")]
   public partial class CExtraMsg : global::ProtoBuf.IExtensible
   {
@@ -2339,6 +2348,24 @@ namespace SteamKit2.GC.Dota.Internal
     {
       get { return _owned; }
       set { _owned = value; }
+    }
+
+    private uint _favorite_team = default(uint);
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"favorite_team", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint favorite_team
+    {
+      get { return _favorite_team; }
+      set { _favorite_team = value; }
+    }
+
+    private uint _favorite_team_level = default(uint);
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"favorite_team_level", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint favorite_team_level
+    {
+      get { return _favorite_team_level; }
+      set { _favorite_team_level = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -4709,6 +4736,15 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _graph_data; }
       set { _graph_data = value; }
     }
+
+    private bool _delta_frame = default(bool);
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"delta_frame", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool delta_frame
+    {
+      get { return _delta_frame; }
+      set { _delta_frame = value; }
+    }
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"TeamDetails")]
   public partial class TeamDetails : global::ProtoBuf.IExtensible
   {
@@ -4895,6 +4931,23 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _assists; }
       set { _assists = value; }
     }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"AbilityList")]
+  public partial class AbilityList : global::ProtoBuf.IExtensible
+  {
+    public AbilityList() {}
+    
+    private readonly global::System.Collections.Generic.List<uint> _id = new global::System.Collections.Generic.List<uint>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public global::System.Collections.Generic.List<uint> id
+    {
+      get { return _id; }
+    }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -5302,9 +5355,9 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _itemshoppinglist; }
     }
   
-    private readonly global::System.Collections.Generic.List<uint> _levelpoints = new global::System.Collections.Generic.List<uint>();
-    [global::ProtoBuf.ProtoMember(46, Name=@"levelpoints", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public global::System.Collections.Generic.List<uint> levelpoints
+    private readonly global::System.Collections.Generic.List<CMsgDOTARealtimeGameStats.AbilityList> _levelpoints = new global::System.Collections.Generic.List<CMsgDOTARealtimeGameStats.AbilityList>();
+    [global::ProtoBuf.ProtoMember(46, Name=@"levelpoints", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CMsgDOTARealtimeGameStats.AbilityList> levelpoints
     {
       get { return _levelpoints; }
     }
@@ -7200,6 +7253,12 @@ namespace SteamKit2.GC.Dota.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCSetAdditionalEquipsResponse", Value=7593)]
       k_EMsgClientToGCSetAdditionalEquipsResponse = 7593,
             
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCEmoticonUnlockNoRollback", Value=7594)]
+      k_EMsgGCToGCEmoticonUnlockNoRollback = 7594,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCGetCompendiumFanfare", Value=7595)]
+      k_EMsgGCToGCGetCompendiumFanfare = 7595,
+            
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCDev_GrantWarKill", Value=8001)]
       k_EMsgGCDev_GrantWarKill = 8001,
             
@@ -7351,7 +7410,16 @@ namespace SteamKit2.GC.Dota.Internal
       k_EMsgClientToGCSocialFeedPostMessageRequest = 8050,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToClientSocialFeedPostMessageResponse", Value=8051)]
-      k_EMsgGCToClientSocialFeedPostMessageResponse = 8051
+      k_EMsgGCToClientSocialFeedPostMessageResponse = 8051,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgCustomGameListenServerStartedLoading", Value=8052)]
+      k_EMsgCustomGameListenServerStartedLoading = 8052,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgCustomGameClientFinishedLoading", Value=8053)]
+      k_EMsgCustomGameClientFinishedLoading = 8053,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCPracticeLobbyCloseBroadcastChannel", Value=8054)]
+      k_EMsgGCPracticeLobbyCloseBroadcastChannel = 8054
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"DOTA_GameMode", EnumPassthru=true)]
@@ -7667,6 +7735,20 @@ namespace SteamKit2.GC.Dota.Internal
             
       [global::ProtoBuf.ProtoEnum(Name=@"DOTA_LobbyMemberXPBonus_PCBANG", Value=5)]
       DOTA_LobbyMemberXPBonus_PCBANG = 5
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"DOTALobbyVisibility", EnumPassthru=true)]
+    public enum DOTALobbyVisibility
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTALobbyVisibility_Public", Value=0)]
+      DOTALobbyVisibility_Public = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTALobbyVisibility_Friends", Value=1)]
+      DOTALobbyVisibility_Friends = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTALobbyVisibility_Unlisted", Value=2)]
+      DOTALobbyVisibility_Unlisted = 2
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"EDOTAPlayerMMRType", EnumPassthru=true)]
