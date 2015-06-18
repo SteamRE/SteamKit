@@ -61,5 +61,13 @@ enum ENetworkDisconnectionReason {
 	NETWORK_DISCONNECT_CONNECTION_FAILURE = 51 [(network_connection_token) = "#GameUI_Disconnect_ConnectionFailure"];
 	NETWORK_DISCONNECT_NO_PEER_GROUP_HANDLERS = 52 [(network_connection_token) = "#GameUI_Disconnect_NoPeerGroupHandlers"];
 	NETWORK_DISCONNECT_RECONNECTION = 53;
+	NETWORK_DISCONNECT_LOOPSHUTDOWN = 54 [(network_connection_token) = "#GameUI_Disconnect_LoopShutdown"];
+	NETWORK_DISCONNECT_LOOPDEACTIVATE = 55 [(network_connection_token) = "#GameUI_Disconnect_LoopDeactivate"];
+	NETWORK_DISCONNECT_HOST_ENDGAME = 56 [(network_connection_token) = "#GameUI_Disconnect_Host_EndGame"];
+	NETWORK_DISCONNECT_LOOP_LEVELLOAD_ACTIVATE = 57 [(network_connection_token) = "#GameUI_Disconnect_LoopLevelLoadActivate"];
+	NETWORK_DISCONNECT_CREATE_SERVER_FAILED = 58 [(network_connection_token) = "#GameUI_Disconnect_CreateServerFailed"];
+	NETWORK_DISCONNECT_EXITING = 59 [(network_connection_token) = "#GameUI_Disconnect_ExitingEngine"];
+	NETWORK_DISCONNECT_REQUEST_HOSTSTATE_IDLE = 60 [(network_connection_token) = "#GameUI_Disconnect_Request_HSIdle"];
+	NETWORK_DISCONNECT_REQUEST_HOSTSTATE_HLTVRELAY = 61 [(network_connection_token) = "#GameUI_Disconnect_Request_HLTVRelay"];
 }
 

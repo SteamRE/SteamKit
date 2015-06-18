@@ -1,11 +1,6 @@
-import "google/protobuf/descriptor.proto";
 import "netmessages.proto";
 
 option cc_generic_services = false;
-
-enum ConnectionLessMessageIds {
-	C2S_CONNECT_id = 80;
-}
 
 message C2S_CONNECT_Message {
 	optional uint32 host_version = 1;
@@ -16,5 +11,9 @@ message C2S_CONNECT_Message {
 	optional bytes encrypted_password = 6;
 	repeated .CCLCMsg_SplitPlayerConnect splitplayers = 7;
 	optional bytes auth_steam = 8;
+}
+
+message C2S_CONNECTION_Message {
+	optional string addon_name = 1;
 }
 

@@ -1,5 +1,3 @@
-import "google/protobuf/descriptor.proto";
-
 option cc_generic_services = false;
 
 enum EDemoCommands {
@@ -34,6 +32,7 @@ message CDemoFileHeader {
 	optional int32 fullpackets_version = 7;
 	optional bool allow_clientside_entities = 8;
 	optional bool allow_clientside_particles = 9;
+	optional string addons = 10;
 }
 
 message CGameInfo {
@@ -148,7 +147,6 @@ message CDemoUserCmd {
 }
 
 message CDemoSpawnGroups {
-	optional int32 count = 1;
-	optional bytes data = 2;
+	repeated bytes msgs = 3;
 }
 

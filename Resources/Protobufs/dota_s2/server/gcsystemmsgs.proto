@@ -84,6 +84,10 @@ enum EGCSystemMsg {
 	k_EGCMsgVSReportedSuspiciousActivity = 509;
 	k_EGCMsgDPPartnerMicroTxns = 512;
 	k_EGCMsgDPPartnerMicroTxnsResponse = 513;
+	k_EGCMsgGetIPASN = 514;
+	k_EGCMsgGetIPASNResponse = 515;
+	k_EGCMsgGetAppFriendsList = 516;
+	k_EGCMsgGetAppFriendsListResponse = 517;
 }
 
 enum ESOMsg {

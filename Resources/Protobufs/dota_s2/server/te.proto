@@ -1,4 +1,3 @@
-import "google/protobuf/descriptor.proto";
 import "networkbasetypes.proto";
 
 option optimize_for = SPEED;
@@ -143,6 +142,7 @@ message CMsgEffectData {
 	optional uint32 flags = 16;
 	optional int32 attachmentindex = 17;
 	optional uint32 effectname = 18;
+	optional uint32 attachmentname = 19;
 }
 
 message CMsgTEEffectDispatch {
