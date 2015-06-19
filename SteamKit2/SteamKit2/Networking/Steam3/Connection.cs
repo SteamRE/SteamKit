@@ -27,6 +27,16 @@ namespace SteamKit2
         }
     }
 
+    class DisconnectedEventArgs : EventArgs
+    {
+        public bool UserInitiated { get; private set; }
+
+        public DisconnectedEventArgs( bool userInitiated )
+        {
+            this.UserInitiated = userInitiated;
+        }
+    }
+
     class NetFilterEncryption
     {
         byte[] sessionKey;
@@ -90,8 +100,8 @@ namespace SteamKit2
         /// <summary>
         /// Occurs when the physical connection is broken.
         /// </summary>
-        public event EventHandler Disconnected;
-        protected void OnDisconnected( EventArgs e )
+        public event EventHandler<DisconnectedEventArgs> Disconnected;
+        protected void OnDisconnected( DisconnectedEventArgs e )
         {
             if ( Disconnected != null )
                 Disconnected( this, e );
