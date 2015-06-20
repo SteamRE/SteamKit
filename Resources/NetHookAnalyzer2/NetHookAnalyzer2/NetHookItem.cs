@@ -76,7 +76,19 @@ namespace NetHookAnalyzer2
 			return true;
 		}
 
-		public string ReadInnerMessageName()
+		string ReadInnerMessageName()
+		{
+			try
+			{
+				return ReadInnerMessageNameCore();
+			}
+			catch (IOException)
+			{
+				return null;
+			}
+		}
+
+		string ReadInnerMessageNameCore()
 		{
 			switch (EMsg)
 			{

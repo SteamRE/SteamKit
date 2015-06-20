@@ -39,27 +39,39 @@ namespace NetHookAnalyzer2
 			return Node;
 		}
 
-		public void CreateTreeNode()
+		void CreateTreeNode()
 		{
-			Node = new TreeNode();
+			try
+			{
+				Node = CreateTreeNodeCore();
+			}
+			catch (Exception ex)
+			{
+				Node = new TreeNode(null, new[] { new TreeNode(string.Format("{0} encountered whilst parsing item: {1}", ex.GetType().Name, ex.Message)) });
+			}
+		}
+
+		TreeNode CreateTreeNodeCore()
+		{
+			var node = new TreeNode();
 
 			using (var stream = item.OpenStream())
 			{
 				var rawEMsg = PeekUInt(stream);
 
-				Node.Nodes.Add(BuildInfoNode(rawEMsg));
+				node.Nodes.Add(BuildInfoNode(rawEMsg));
 
 				var header = ReadHeader(rawEMsg, stream);
-				Node.Nodes.Add(new TreeNodeObjectExplorer("Header", header).TreeNode);
+				node.Nodes.Add(new TreeNodeObjectExplorer("Header", header).TreeNode);
 
 				var body = ReadBody(rawEMsg, stream, header);
 				var bodyNode = new TreeNodeObjectExplorer("Body", body).TreeNode;
-				Node.Nodes.Add(bodyNode);
+				node.Nodes.Add(bodyNode);
 
 				var payload = ReadPayload(stream);
 				if (payload != null && payload.Length > 0)
 				{
-					Node.Nodes.Add(new TreeNodeObjectExplorer("Payload", payload).TreeNode);
+					node.Nodes.Add(new TreeNodeObjectExplorer("Payload", payload).TreeNode);
 				}
 
 				if (Specializations != null)
@@ -77,13 +89,15 @@ namespace NetHookAnalyzer2
 						bodyNode.Collapse(ignoreChildren: true);
 
 						var extraNodes = specializations.Select(x => new TreeNodeObjectExplorer(x.Key, x.Value).TreeNode).ToArray();
-						Node.Nodes.AddRange(extraNodes);
+						node.Nodes.AddRange(extraNodes);
 
 						// Let the specializers examine any new message objects.
 						objectsToSpecialize = specializations.Select(x => x.Value).ToArray();
 					}
 				}
 			}
+
+			return node;
 		}
 
 		static TreeNode BuildInfoNode(uint rawEMsg)
