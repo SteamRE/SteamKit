@@ -165,6 +165,11 @@ namespace NetHookAnalyzer2
 			}
 
 			InitializeFileSystemWatcher(dumpDirectory);
+
+			if (automaticallySelectNewItemsToolStripMenuItem.Checked)
+			{
+				SelectLastItem();
+			}
 		}
 
 		void OnDirectionFilterCheckedChanged(object sender, EventArgs e)
@@ -241,6 +246,11 @@ namespace NetHookAnalyzer2
 
 			var listViewItem = item.AsListViewItem();
 			itemsListView.Items.Add(listViewItem);
+
+			if (automaticallySelectNewItemsToolStripMenuItem.Checked)
+			{
+				SelectLastItem();
+			}
 		}
 
 		void OnFolderWatcherDeleted(object sender, FileSystemEventArgs e)
@@ -300,6 +310,33 @@ namespace NetHookAnalyzer2
 		TreeNode BuildTree(NetHookItem item)
 		{
 			return new NetHookItemTreeBuilder(item) { Specializations = specializations }.BuildTree();
+		}
+
+		void OnAutomaticallySelectNewItemsCheckedChanged(object sender, EventArgs e)
+		{
+			if (!automaticallySelectNewItemsToolStripMenuItem.Checked)
+			{
+				return;
+			}
+
+			SelectLastItem();
+		}
+
+		void SelectLastItem()
+		{
+
+			if (itemsListView.Items.Count == 0)
+			{
+				return;
+			}
+
+			var lastItem = itemsListView.Items[itemsListView.Items.Count - 1];
+			if (!lastItem.Selected)
+			{
+				lastItem.Selected = true;
+				lastItem.Focused = true;
+				lastItem.EnsureVisible();
+			}
 		}
 	}
 }
