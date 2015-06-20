@@ -6,21 +6,41 @@ using System.Text;
 using SteamKit2;
 
 //
-// Sample 1: Logon
+// Sample 3: DebugLog
 //
-// the first act of business before being able to use steamkit2's features is to
-// logon to the steam network
+// sometimes is may be necessary to peek under the hood of SteamKit2
+// to debug or diagnose some issues
 //
-// interaction with steamkit is done through client message handlers and the results
-// come back through a callback queue controlled by a steamclient instance 
+// to help with this, SK2 includes a component named the DebugLog
 //
-// your code must create a CallbackMgr, and instances of Callback<T>. Callback<T> maps a specific
-// callback type to a function, whilst CallbackMgr routes the callback objects to the functions that
-// you have specified. a Callback<T> is bound to a specific callback manager.
+// internal SK2 components will ocassionally make use of the DebugLog
+// to share diagnostic information
+//
+// in order to use the DebugLog, a listener must first be registered with it
+//
+// by default, SK2 does not install any listeners, user code must install one
+//
+// additionally, the DebugLog is disabled by default in release builds
+// but it may be enabled with the DebugLog.Enabled member
+//
+// you'll note that while this sample project is relatively similar to
+// Sample 1, the console output becomes very verbose
 //
 
-namespace Sample1_Logon
+namespace Sample3_DebugLog
 {
+    // define our debuglog listener
+    class MyListener : IDebugListener
+    {
+        public void WriteLine( string category, string msg )
+        {
+            // this function will be called when internal steamkit components write to the debuglog
+
+            // for this example, we'll print the output to the console
+            Console.WriteLine( "MyListener - {0}: {1}", category, msg );
+        }
+    }
+
     class Program
     {
         static SteamClient steamClient;
@@ -35,9 +55,21 @@ namespace Sample1_Logon
 
         static void Main( string[] args )
         {
+            // install our debug listeners for this example
+
+            // install an instance of our custom listener
+            DebugLog.AddListener( new MyListener() );
+
+            // install a listener as an anonymous method
+            // this call is commented as it would be redundant to install a second listener that also displays messages to the console
+            // DebugLog.AddListener( ( category, msg ) => Console.WriteLine( "AnonymousMethod - {0}: {1}", category, msg ) );
+            
+            // Enable DebugLog in release builds
+            DebugLog.Enabled = true;
+
             if ( args.Length < 2 )
             {
-                Console.WriteLine( "Sample2: No username and password specified!" );
+                Console.WriteLine( "Sample4: No username and password specified!" );
                 return;
             }
 

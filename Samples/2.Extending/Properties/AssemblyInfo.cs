@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle( "SteamKit Sample 7: WebAPI" )]
-[assembly: AssemblyDescription( "SteamKit Sample 7: WebAPI" )]
+[assembly: AssemblyTitle("SteamKit Sample 2: Extending")]
+[assembly: AssemblyDescription("SteamKit Sample 2: Extending")]
 [assembly: AssemblyConfiguration( "" )]
 [assembly: AssemblyCompany( "" )]
-[assembly: AssemblyProduct( "Sample7_WebAPI" )]
-[assembly: AssemblyCopyright( "Copyright © Ryan Stecker 2013" )]
+[assembly: AssemblyProduct("Sample2_Extending")]
+[assembly: AssemblyCopyright( "Copyright © Ryan Stecker 2012" )]
 [assembly: AssemblyTrademark( "" )]
 [assembly: AssemblyCulture( "" )]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible( false )]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid( "f0cc9aee-ab08-4206-b0f8-62dcd148d0d4" )]
+[assembly: Guid( "b9f3f1f9-d2b9-487e-aba4-057e5963a712" )]
 
 // Version information for an assembly consists of the following four values:
 //

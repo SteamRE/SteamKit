@@ -5,14 +5,13 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{CEF39496-576D-4A70-9A06-16112B84B79F}</ProjectGuid>
+    <ProjectGuid>{2D681A01-7F28-43BB-B038-653AD3022895}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Sample1_Logon</RootNamespace>
-    <AssemblyName>Sample1_Logon</AssemblyName>
+    <RootNamespace>Sample5_SteamGuard</RootNamespace>
+    <AssemblyName>Sample5_SteamGuard</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>
-    </TargetFrameworkProfile>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">

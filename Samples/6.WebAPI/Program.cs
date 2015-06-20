@@ -7,7 +7,7 @@ using SteamKit2;
 using System.Net;
 
 //
-// Sample 7: WebAPI
+// Sample 6: WebAPI
 //
 // this sample will give an example of how the WebAPI utilities can be used to
 // interact with the Steam Web APIs
@@ -17,7 +17,7 @@ using System.Net;
 // as such, the API for interacting with the WebAPI follows a similar methodology
 
 
-namespace Sample7_WebAPI
+namespace Sample6_WebAPI
 {
     class Program
     {

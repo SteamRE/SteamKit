@@ -1,21 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample2_CallbackManager", "2.CallbackManager\Sample2_CallbackManager.csproj", "{CEF39496-576D-4A70-9A06-16112B84B79F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample1_Logon", "1.Logon\Sample1_Logon.csproj", "{CEF39496-576D-4A70-9A06-16112B84B79F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SteamKit2", "SteamKit2", "{8E4B940C-50A1-4BC5-9032-6BA99C43A7E4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SteamKit2", "..\SteamKit2\SteamKit2\SteamKit2.csproj", "{BEB5BF07-BB56-402A-97A3-A41C6444C6A5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample1_Logon", "1.Logon\Sample1_Logon.csproj", "{2377CE3F-6862-4C1F-B7B7-91D54DA609FC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample2_Extending", "2.Extending\Sample2_Extending.csproj", "{267EEF16-AD18-497C-8818-9328AB48A6D7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample3_Extending", "3.Extending\Sample3_Extending.csproj", "{267EEF16-AD18-497C-8818-9328AB48A6D7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample3_DebugLog", "3.DebugLog\Sample3_DebugLog.csproj", "{5C673A32-A825-4715-BB96-BAACD450BEA5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample4_DebugLog", "4.DebugLog\Sample4_DebugLog.csproj", "{5C673A32-A825-4715-BB96-BAACD450BEA5}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample5_Friends", "5.Friends\Sample5_Friends.csproj", "{B3033DF8-97DB-4B10-8039-A118E016B5C5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample4_Friends", "4.Friends\Sample4_Friends.csproj", "{B3033DF8-97DB-4B10-8039-A118E016B5C5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{0CC78377-6BA1-43A5-8743-7ED12BB4192A}"
 	ProjectSection(SolutionItems) = preProject
@@ -24,9 +22,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{0CC783
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample6_SteamGuard", "6.SteamGuard\Sample6_SteamGuard.csproj", "{2D681A01-7F28-43BB-B038-653AD3022895}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample5_SteamGuard", "5.SteamGuard\Sample5_SteamGuard.csproj", "{2D681A01-7F28-43BB-B038-653AD3022895}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample7_WebAPI", "7.WebAPI\Sample7_WebAPI.csproj", "{B93A6DDC-0648-4004-86DD-4B09DE1268E7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample6_WebAPI", "6.WebAPI\Sample6_WebAPI.csproj", "{B93A6DDC-0648-4004-86DD-4B09DE1268E7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -58,16 +56,6 @@ Global
 		{BEB5BF07-BB56-402A-97A3-A41C6444C6A5}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{BEB5BF07-BB56-402A-97A3-A41C6444C6A5}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{BEB5BF07-BB56-402A-97A3-A41C6444C6A5}.Release|x86.ActiveCfg = Release|Any CPU
-		{2377CE3F-6862-4C1F-B7B7-91D54DA609FC}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{2377CE3F-6862-4C1F-B7B7-91D54DA609FC}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{2377CE3F-6862-4C1F-B7B7-91D54DA609FC}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{2377CE3F-6862-4C1F-B7B7-91D54DA609FC}.Debug|x86.ActiveCfg = Debug|x86
-		{2377CE3F-6862-4C1F-B7B7-91D54DA609FC}.Debug|x86.Build.0 = Debug|x86
-		{2377CE3F-6862-4C1F-B7B7-91D54DA609FC}.Release|Any CPU.ActiveCfg = Release|x86
-		{2377CE3F-6862-4C1F-B7B7-91D54DA609FC}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{2377CE3F-6862-4C1F-B7B7-91D54DA609FC}.Release|Mixed Platforms.Build.0 = Release|x86
-		{2377CE3F-6862-4C1F-B7B7-91D54DA609FC}.Release|x86.ActiveCfg = Release|x86
-		{2377CE3F-6862-4C1F-B7B7-91D54DA609FC}.Release|x86.Build.0 = Release|x86
 		{267EEF16-AD18-497C-8818-9328AB48A6D7}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{267EEF16-AD18-497C-8818-9328AB48A6D7}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
 		{267EEF16-AD18-497C-8818-9328AB48A6D7}.Debug|Mixed Platforms.Build.0 = Debug|x86

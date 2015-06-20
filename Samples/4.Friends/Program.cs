@@ -6,20 +6,13 @@ using System.Text;
 using SteamKit2;
 
 //
-// Sample 1: Logon
+// Sample 4: Friends
 //
-// the first act of business before being able to use steamkit2's features is to
-// logon to the steam network
-//
-// interaction with steamkit is done through client message handlers and the results
-// come back through a callback queue controlled by a steamclient instance 
-//
-// your code must create a CallbackMgr, and instances of Callback<T>. Callback<T> maps a specific
-// callback type to a function, whilst CallbackMgr routes the callback objects to the functions that
-// you have specified. a Callback<T> is bound to a specific callback manager.
+// this sample expands upon sample 1 and adds basic interaction
+// with the client's persona state and friends list
 //
 
-namespace Sample1_Logon
+namespace Sample4_Friends
 {
     class Program
     {
@@ -27,6 +20,7 @@ namespace Sample1_Logon
         static CallbackManager manager;
 
         static SteamUser steamUser;
+        static SteamFriends steamFriends;
 
         static bool isRunning;
 
@@ -37,7 +31,7 @@ namespace Sample1_Logon
         {
             if ( args.Length < 2 )
             {
-                Console.WriteLine( "Sample2: No username and password specified!" );
+                Console.WriteLine( "Sample5: No username and password specified!" );
                 return;
             }
 
@@ -46,12 +40,14 @@ namespace Sample1_Logon
             pass = args[ 1 ];
 
             // create our steamclient instance
-            steamClient = new SteamClient();
+            steamClient = new SteamClient( System.Net.Sockets.ProtocolType.Tcp );
             // create the callback manager which will route callbacks to function calls
             manager = new CallbackManager( steamClient );
 
             // get the steamuser handler, which is used for logging on after successfully connecting
             steamUser = steamClient.GetHandler<SteamUser>();
+            // get the steam friends handler, which is used for interacting with friends on the network after logging on
+            steamFriends = steamClient.GetHandler<SteamFriends>();
 
             // register a few callbacks we're interested in
             // these are registered upon creation to a callback manager, which will then route the callbacks
@@ -61,6 +57,12 @@ namespace Sample1_Logon
 
             new Callback<SteamUser.LoggedOnCallback>( OnLoggedOn, manager );
             new Callback<SteamUser.LoggedOffCallback>( OnLoggedOff, manager );
+
+            // we use the following callbacks for friends related activities
+            new Callback<SteamUser.AccountInfoCallback>( OnAccountInfo, manager );
+            new Callback<SteamFriends.FriendsListCallback>( OnFriendsList, manager );
+            new Callback<SteamFriends.PersonaStateCallback>( OnPersonaState, manager );
+            new Callback<SteamFriends.FriendAddedCallback>( OnFriendAdded, manager );
 
             isRunning = true;
 
@@ -129,8 +131,59 @@ namespace Sample1_Logon
 
             // at this point, we'd be able to perform actions on Steam
 
-            // for this sample we'll just log off
-            steamUser.LogOff();
+            // for this sample we wait for other callbacks to perform logic
+        }
+
+        static void OnAccountInfo( SteamUser.AccountInfoCallback callback )
+        {
+            // before being able to interact with friends, you must wait for the account info callback
+            // this callback is posted shortly after a successful logon
+
+            // at this point, we can go online on friends, so lets do that
+            steamFriends.SetPersonaState( EPersonaState.Online );
+        }
+
+        static void OnFriendsList( SteamFriends.FriendsListCallback callback )
+        {
+            // at this point, the client has received it's friends list
+
+            int friendCount = steamFriends.GetFriendCount();
+
+            Console.WriteLine( "We have {0} friends", friendCount );
+
+            for ( int x = 0 ; x < friendCount ; x++ )
+            {
+                // steamids identify objects that exist on the steam network, such as friends, as an example
+                SteamID steamIdFriend = steamFriends.GetFriendByIndex( x );
+
+                // we'll just display the STEAM_ rendered version
+                Console.WriteLine( "Friend: {0}", steamIdFriend.Render() );
+            }
+
+            // we can also iterate over our friendslist to accept or decline any pending invites
+
+            foreach ( var friend in callback.FriendList )
+            {
+                if (friend.Relationship == EFriendRelationship.RequestRecipient)
+                {
+                    // this user has added us, let's add him back
+                    steamFriends.AddFriend(friend.SteamID);
+                }
+            }
+        }
+
+        static void OnFriendAdded( SteamFriends.FriendAddedCallback callback)
+        {
+            // someone accepted our friend request, or we accepted one
+            Console.WriteLine( "{0} is now a friend", callback.PersonaName );
+        }
+
+        static void OnPersonaState( SteamFriends.PersonaStateCallback callback )
+        {
+            // this callback is received when the persona state (friend information) of a friend changes
+
+            // for this sample we'll simply display the names of the friends
+            Console.WriteLine( "State change: {0}", callback.Name );
         }
 
         static void OnLoggedOff( SteamUser.LoggedOffCallback callback )

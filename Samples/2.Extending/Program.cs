@@ -6,20 +6,17 @@ using System.Text;
 using SteamKit2;
 
 //
-// Sample 1: Logon
+// Sample 2: Extending SteamKit2
 //
-// the first act of business before being able to use steamkit2's features is to
-// logon to the steam network
+// this sample introduces the method through which SK2 can be extended
+// with custom message handling and additional features
 //
-// interaction with steamkit is done through client message handlers and the results
-// come back through a callback queue controlled by a steamclient instance 
+// this sample extends Sample 1 by making use of a custom handler and a custom callback
 //
-// your code must create a CallbackMgr, and instances of Callback<T>. Callback<T> maps a specific
-// callback type to a function, whilst CallbackMgr routes the callback objects to the functions that
-// you have specified. a Callback<T> is bound to a specific callback manager.
+// of interest are the calls to SteamClient.AddHandler and the MyHandler.cs file
 //
 
-namespace Sample1_Logon
+namespace Sample2_Extending
 {
     class Program
     {
@@ -27,6 +24,7 @@ namespace Sample1_Logon
         static CallbackManager manager;
 
         static SteamUser steamUser;
+        static MyHandler myHandler;
 
         static bool isRunning;
 
@@ -37,7 +35,7 @@ namespace Sample1_Logon
         {
             if ( args.Length < 2 )
             {
-                Console.WriteLine( "Sample2: No username and password specified!" );
+                Console.WriteLine( "Sample3: No username and password specified!" );
                 return;
             }
 
@@ -47,11 +45,17 @@ namespace Sample1_Logon
 
             // create our steamclient instance
             steamClient = new SteamClient();
+
+            // add our custom handler to our steamclient
+            steamClient.AddHandler( new MyHandler() );
+
             // create the callback manager which will route callbacks to function calls
             manager = new CallbackManager( steamClient );
 
             // get the steamuser handler, which is used for logging on after successfully connecting
             steamUser = steamClient.GetHandler<SteamUser>();
+            // now get an instance of our custom handler
+            myHandler = steamClient.GetHandler<MyHandler>();
 
             // register a few callbacks we're interested in
             // these are registered upon creation to a callback manager, which will then route the callbacks
@@ -61,6 +65,9 @@ namespace Sample1_Logon
 
             new Callback<SteamUser.LoggedOnCallback>( OnLoggedOn, manager );
             new Callback<SteamUser.LoggedOffCallback>( OnLoggedOff, manager );
+
+            // handle our own custom callback
+            new Callback<MyHandler.MyCallback>( OnMyCallback, manager );
 
             isRunning = true;
 
@@ -111,7 +118,7 @@ namespace Sample1_Logon
                 {
                     // if we recieve AccountLogonDenied or one of it's flavors (AccountLogonDeniedNoMailSent, etc)
                     // then the account we're logging into is SteamGuard protected
-                    // see sample 5 for how SteamGuard can be handled
+                    // see sample 6 for how SteamGuard can be handled
 
                     Console.WriteLine( "Unable to logon to Steam: This account is SteamGuard protected." );
 
@@ -136,6 +143,12 @@ namespace Sample1_Logon
         static void OnLoggedOff( SteamUser.LoggedOffCallback callback )
         {
             Console.WriteLine( "Logged off of Steam: {0}", callback.Result );
+        }
+
+        static void OnMyCallback( MyHandler.MyCallback callback )
+        {
+            // this will be called when our custom callback gets posted
+            Console.WriteLine( "OnMyCallback: {0}", callback.Result );
         }
     }
 }
