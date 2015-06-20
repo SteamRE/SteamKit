@@ -227,6 +227,7 @@ namespace NetHookAnalyzer2
 			folderWatcher = new FileSystemWatcher(path, "*.bin");
 			folderWatcher.BeginInit();
 
+			folderWatcher.Changed += OnFolderWatcherChanged;
 			folderWatcher.Created += OnFolderWatcherCreated;
 			folderWatcher.Deleted += OnFolderWatcherDeleted;
 			folderWatcher.EnableRaisingEvents = true;
@@ -234,6 +235,36 @@ namespace NetHookAnalyzer2
 			folderWatcher.SynchronizingObject = this;
 
 			folderWatcher.EndInit();
+		}
+
+		void OnFolderWatcherChanged(object sender, FileSystemEventArgs e)
+		{
+			var item = Dump.Items.SingleOrDefault(x => x.FileInfo.FullName == e.FullPath);
+			if (item == null)
+			{
+				return;
+			}
+
+			if (itemsListView.SelectedItems.Count == 0)
+			{
+				return;
+			}
+
+			foreach (var selectedItem in itemsListView.SelectedItems.Cast<ListViewItem>())
+			{
+				var tag = selectedItem.GetNetHookItem();
+				if (tag == null)
+				{
+					continue;
+				}
+
+				if (tag != item)
+				{
+					continue;
+				}
+
+				RepopulateTreeView();
+			}
 		}
 
 		void OnFolderWatcherCreated(object sender, FileSystemEventArgs e)
