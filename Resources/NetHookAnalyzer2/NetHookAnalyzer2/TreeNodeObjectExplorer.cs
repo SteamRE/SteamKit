@@ -173,7 +173,7 @@ namespace NetHookAnalyzer2
 		{
 			SetAsRadioSelected(sender);
 
-			var steamID = new SteamID((ulong)Convert.ChangeType(value, typeof(ulong)));
+            var steamID = ConvertToSteamID(value);
 			SetValueForDisplay(steamID.Render(steam3: false));
 		}
 
@@ -181,9 +181,23 @@ namespace NetHookAnalyzer2
 		{
 			SetAsRadioSelected(sender);
 
-			var steamID = new SteamID((ulong)Convert.ChangeType(value, typeof(ulong)));
+            var steamID = ConvertToSteamID(value);
 			SetValueForDisplay(steamID.Render(steam3: true));
 		}
+
+        SteamID ConvertToSteamID(object value)
+        {
+            // first check if the given value is already a steamid
+            SteamID steamID = value as SteamID;
+
+            if (steamID == null)
+            {
+                // if not, try converting
+                steamID = new SteamID((ulong)Convert.ChangeType(value, typeof(ulong)));
+            }
+
+            return steamID;
+        }
 
 		#endregion
 
@@ -318,7 +332,7 @@ namespace NetHookAnalyzer2
 			{
 				var objectType = value.GetType();
 
-				if (objectType.IsValueType && !objectType.IsEnum && objectType != typeof(bool))
+				if ((objectType.IsValueType || objectType == typeof(SteamID)) && !objectType.IsEnum && objectType != typeof(bool))
 				{
 					ContextMenuItems.Add(new MenuItem("-"));
 
@@ -328,41 +342,46 @@ namespace NetHookAnalyzer2
 						Initialize();
 					}) { RadioCheck = true, Checked = true });
 
-					var enumMenuItem = new MenuItem("Display as &Enum Value");
+                    if (objectType != typeof(SteamID))
+                    {
+                        // only allow displaying as an enum value if we're not a steamid
 
-					var enumTypesByNamespace = typeof(CMClient).Assembly.ExportedTypes
-						.Where(x => x.IsEnum)
-						.GroupBy(x => x.Namespace)
-						.OrderBy(x => x.Key)
-						.ToArray();
+                        var enumMenuItem = new MenuItem("Display as &Enum Value");
 
-					if (enumTypesByNamespace.Length > 0)
-					{
-						foreach (var enumTypes in enumTypesByNamespace)
-						{
-							var enumNamespaceMenuItem = new MenuItem(enumTypes.Key);
-							enumMenuItem.MenuItems.Add(enumNamespaceMenuItem);
+                        var enumTypesByNamespace = typeof(CMClient).Assembly.ExportedTypes
+                            .Where(x => x.IsEnum)
+                            .GroupBy(x => x.Namespace)
+                            .OrderBy(x => x.Key)
+                            .ToArray();
 
-							var menuItems = new List<MenuItem>();
+                        if (enumTypesByNamespace.Length > 0)
+                        {
+                            foreach (var enumTypes in enumTypesByNamespace)
+                            {
+                                var enumNamespaceMenuItem = new MenuItem(enumTypes.Key);
+                                enumMenuItem.MenuItems.Add(enumNamespaceMenuItem);
 
-							foreach (var enumType in enumTypes)
-							{
-								var enumName = enumType.FullName.Substring(enumType.Namespace.Length + 1);
-								var item = new MenuItem(enumName, (s, _) =>
-								{
-									SetAsRadioSelected(s);
-									DisplayAsEnumMember(enumType);
-								});
-								menuItems.Add(item);
-							}
+                                var menuItems = new List<MenuItem>();
 
-							menuItems.Sort(MenuItemComparisonByText);
-							enumNamespaceMenuItem.MenuItems.AddRange(menuItems.ToArray());
-						}
-						ContextMenuItems.Add(enumMenuItem);
-					}
+                                foreach (var enumType in enumTypes)
+                                {
+                                    var enumName = enumType.FullName.Substring(enumType.Namespace.Length + 1);
+                                    var item = new MenuItem(enumName, (s, _) =>
+                                    {
+                                        SetAsRadioSelected(s);
+                                        DisplayAsEnumMember(enumType);
+                                    });
+                                    menuItems.Add(item);
+                                }
 
-					if (objectType == typeof(long) || objectType == typeof(ulong))
+                                menuItems.Sort(MenuItemComparisonByText);
+                                enumNamespaceMenuItem.MenuItems.AddRange(menuItems.ToArray());
+                            }
+                            ContextMenuItems.Add(enumMenuItem);
+                        }
+                    }
+
+					if (objectType == typeof(long) || objectType == typeof(ulong) || objectType == typeof(SteamID))
 					{
 						ContextMenuItems.Add(
 							new MenuItem(
