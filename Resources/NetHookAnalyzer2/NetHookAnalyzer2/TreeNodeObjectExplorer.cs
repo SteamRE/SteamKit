@@ -492,7 +492,7 @@ namespace NetHookAnalyzer2
 			else if (value is SteamID)
 			{
 				var steamID = (SteamID)value;
-				SetValueForDisplay(string.Format("{0} ({1}", steamID.Render(steam3: true), steamID.ConvertToUInt64()));
+				SetValueForDisplay(string.Format("{0} ({1})", steamID.Render(steam3: true), steamID.ConvertToUInt64()));
 			}
 			else if (value is byte[])
 			{
