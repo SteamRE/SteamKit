@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Net;
 
 using SteamKit2;
-using System.Net;
 
 //
 // Sample 6: WebAPI

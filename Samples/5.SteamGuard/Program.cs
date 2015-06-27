@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
+using System.Security.Cryptography;
 using System.Threading;
 
 using SteamKit2;
-using System.Security.Cryptography;
 
 //
 // Sample 5: SteamGuard
@@ -208,7 +205,6 @@ namespace Sample5_SteamGuard
                 fs.Seek( callback.Offset, SeekOrigin.Begin );
                 fs.Write( callback.Data, 0, callback.BytesToWrite );
                 fileSize = ( int )fs.Length;
-
 
                 fs.Seek( 0, SeekOrigin.Begin );
                 using ( var sha = new SHA1CryptoServiceProvider() )
