@@ -335,6 +335,17 @@ namespace SteamKit2
             return reqMsg.SourceJobID;
         }
 
+        /// <summary>
+        /// Accepts the new Login Key provided by a <see cref="LoginKeyCallback"/>.
+        /// </summary>
+        /// <param name="callback">The callback containing the new Login Key.</param>
+        public void AcceptNewLoginKey( LoginKeyCallback callback )
+        {
+            var acceptance = new ClientMsgProtobuf<CMsgClientNewLoginKeyAccepted>( EMsg.ClientNewLoginKeyAccepted );
+            acceptance.Body.unique_id = callback.UniqueID;
+
+            this.Client.Send( acceptance );
+        }
 
         /// <summary>
         /// Handles a client message. This should not be called directly.
@@ -418,11 +429,6 @@ namespace SteamKit2
         void HandleLoginKey( IPacketMsg packetMsg )
         {
             var loginKey = new ClientMsgProtobuf<CMsgClientNewLoginKey>( packetMsg );
-
-            var resp = new ClientMsgProtobuf<CMsgClientNewLoginKeyAccepted>( EMsg.ClientNewLoginKeyAccepted );
-            resp.Body.unique_id = loginKey.Body.unique_id;
-
-            this.Client.Send( resp );
 
             var callback = new LoginKeyCallback( loginKey.Body );
             this.Client.PostCallback( callback );
