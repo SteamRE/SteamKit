@@ -42,6 +42,16 @@ namespace SteamKit2
             /// <value>The two factor auth code.</value>
             public string TwoFactorCode { get; set; }
             /// <summary>
+            /// Gets or sets the login key used to login. This is a key that has been recieved in a previous Steam sesson by a <see cref="LoginKeyCallback"/>.
+            /// </summary>
+            /// <value>The login key.</value>
+            public string LoginKey { get; set; }
+            /// <summary>
+            /// Gets or sets the 'Should Remember Password' flag. This is used in combination with the login key and <see cref="LoginKeyCallback"/> for password-less login.
+            /// </summary>
+            /// <value>The 'Should Remember Password' flag.</value>
+            public bool ShouldRememberPassword { get; set; }
+            /// <summary>
             /// Gets or sets the sentry file hash for this logon attempt, or null if no sentry file is available.
             /// </summary>
             /// <value>The sentry file hash.</value>
@@ -200,7 +210,7 @@ namespace SteamKit2
             {
                 throw new ArgumentNullException( "details" );
             }
-            if ( string.IsNullOrEmpty( details.Username ) || string.IsNullOrEmpty( details.Password ) )
+            if ( string.IsNullOrEmpty( details.Username ) || ( string.IsNullOrEmpty( details.Password ) && string.IsNullOrEmpty( details.LoginKey ) ) )
             {
                 throw new ArgumentException( "LogOn requires a username and password to be set in 'details'." );
             }
@@ -223,6 +233,7 @@ namespace SteamKit2
 
             logon.Body.account_name = details.Username;
             logon.Body.password = details.Password;
+            logon.Body.should_remember_password = details.ShouldRememberPassword;
 
             logon.Body.protocol_version = MsgClientLogon.CurrentProtocol;
             logon.Body.client_os_type = ( uint )Utils.GetOSType();
@@ -241,6 +252,8 @@ namespace SteamKit2
             // steam guard 
             logon.Body.auth_code = details.AuthCode;
             logon.Body.two_factor_code = details.TwoFactorCode;
+
+            logon.Body.login_key = details.LoginKey;
 
             logon.Body.sha_sentryfile = details.SentryFileHash;
             logon.Body.eresult_sentryfile = ( int )( details.SentryFileHash != null ? EResult.OK : EResult.FileNotFound );
