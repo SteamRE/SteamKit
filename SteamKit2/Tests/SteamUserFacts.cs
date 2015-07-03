@@ -83,6 +83,19 @@ namespace Tests
         }
 
         [Fact]
+        public void LogOnThrowsExceptionIfLoginKeyIsProvidedWithoutShouldRememberPassword()
+        {
+            Assert.Throws<ArgumentException>(() =>
+            {
+                Handler.LogOn(new SteamUser.LogOnDetails
+                {
+                    Username = "abc",
+                    LoginKey = "def"
+                });
+            });
+        }
+
+        [Fact]
         public void LogOnAnonymousPostsLoggedOnCallbackWhenNoConnection()
         {
             Handler.LogOnAnonymous();

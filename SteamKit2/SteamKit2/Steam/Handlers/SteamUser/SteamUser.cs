@@ -214,6 +214,13 @@ namespace SteamKit2
             {
                 throw new ArgumentException( "LogOn requires a username and password to be set in 'details'." );
             }
+            if ( !string.IsNullOrEmpty( details.LoginKey ) && !details.ShouldRememberPassword )
+            {
+                // Prevent consumers from screwing this up.
+                // If should_remember_password is false, the login_key is ignored server-side.
+                // The inverse is not applicable (you can log in with should_remember_password and no login_key).
+                throw new ArgumentException( "ShouldRememberPassword is required to be set to true in order to use LoginKey." );
+            }
             if ( !this.Client.IsConnected )
             {
                 this.Client.PostCallback( new LoggedOnCallback( EResult.NoConnection ) );
