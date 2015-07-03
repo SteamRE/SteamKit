@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
+using System.Security.Cryptography;
 using System.Threading;
 
 using SteamKit2;
@@ -195,19 +193,24 @@ namespace Sample5_SteamGuard
         {
             Console.WriteLine( "Updating sentryfile..." );
 
-            byte[] sentryHash = CryptoHelper.SHAHash( callback.Data );
-
             // write out our sentry file
             // ideally we'd want to write to the filename specified in the callback
             // but then this sample would require more code to find the correct sentry file to read during logon
             // for the sake of simplicity, we'll just use "sentry.bin"
 
             int fileSize;
-            using ( var fs = File.OpenWrite( "sentry.bin" ) )
+            byte[] sentryHash;
+            using ( var fs = File.Open( "sentry.bin", FileMode.OpenOrCreate, FileAccess.ReadWrite ) )
             {
                 fs.Seek( callback.Offset, SeekOrigin.Begin );
                 fs.Write( callback.Data, 0, callback.BytesToWrite );
                 fileSize = ( int )fs.Length;
+
+                fs.Seek( 0, SeekOrigin.Begin );
+                using ( var sha = new SHA1CryptoServiceProvider() )
+                {
+                    sentryHash = sha.ComputeHash( fs );
+                }
             }
 
             // inform the steam servers that we're accepting this sentry file
