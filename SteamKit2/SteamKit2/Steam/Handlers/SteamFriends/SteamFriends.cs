@@ -575,6 +575,10 @@ namespace SteamKit2
                     HandleChatMemberInfo( packetMsg );
                     break;
 
+                case EMsg.ClientChatRoomInfo:
+                    HandleChatRoomInfo( packetMsg );
+                    break;
+
                 case EMsg.ClientChatActionResult:
                     HandleChatActionResult( packetMsg );
                     break;
@@ -803,6 +807,15 @@ namespace SteamKit2
             byte[] payload = membInfo.Payload.ToArray();
 
             var callback = new ChatMemberInfoCallback( membInfo.Body, payload );
+            this.Client.PostCallback( callback );
+        }
+        void HandleChatRoomInfo( IPacketMsg packetMsg )
+        {
+            var roomInfo = new ClientMsg<MsgClientChatRoomInfo>( packetMsg );
+
+            byte[] payload = roomInfo.Payload.ToArray();
+
+            var callback = new ChatRoomInfoCallback( roomInfo.Body, payload );
             this.Client.PostCallback( callback );
         }
         void HandleChatActionResult( IPacketMsg packetMsg )
