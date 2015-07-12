@@ -33,13 +33,38 @@ namespace Tests
         }
 
         [Fact]
-        public void LogOnThrowsExceptionIfUsernameNotProvided()
+        public void LogOnThrowsExceptionIfUsernameNotProvided_OnlyPassword()
         {
             Assert.Throws<ArgumentException>(() =>
             {
                 Handler.LogOn(new SteamUser.LogOnDetails
                 {
                     Password = "def"
+                });
+            });
+        }
+
+        [Fact]
+        public void LogOnThrowsExceptionIfUsernameNotProvided_OnlyLoginKey()
+        {
+            Assert.Throws<ArgumentException>(() =>
+            {
+                Handler.LogOn(new SteamUser.LogOnDetails
+                {
+                    LoginKey = "def"
+                });
+            });
+        }
+
+        [Fact]
+        public void LogOnThrowsExceptionIfUsernameNotProvided_OnlyLoginKey_ShouldRememberPassword()
+        {
+            Assert.Throws<ArgumentException>(() =>
+            {
+                Handler.LogOn(new SteamUser.LogOnDetails
+                {
+                    LoginKey = "def",
+                    ShouldRememberPassword = true
                 });
             });
         }
@@ -52,6 +77,19 @@ namespace Tests
                 Handler.LogOn(new SteamUser.LogOnDetails
                 {
                     Username = "abc"
+                });
+            });
+        }
+
+        [Fact]
+        public void LogOnThrowsExceptionIfLoginKeyProvidedWithoutShouldRememberPassword()
+        {
+            Assert.Throws<ArgumentException>(() =>
+            {
+                Handler.LogOn(new SteamUser.LogOnDetails
+                {
+                    Username = "abc",
+                    LoginKey = "def"
                 });
             });
         }
@@ -77,7 +115,8 @@ namespace Tests
                 Handler.LogOn(new SteamUser.LogOnDetails
                 {
                     Username = "abc",
-                    Password = "def"
+                    LoginKey = "def",
+                    ShouldRememberPassword = true,
                 });
             });
         }
