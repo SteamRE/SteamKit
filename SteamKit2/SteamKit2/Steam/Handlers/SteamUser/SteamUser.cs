@@ -341,7 +341,7 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// Requests a new WebAPI authentication user nonce. This is used if initial loginkey authentication fails.
+        /// Requests a new WebAPI authentication user nonce.
         /// Results are returned in a <see cref="WebAPIUserNonceCallback"/>.
         /// </summary>
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="WebAPIUserNonceCallback"/>.</returns>
