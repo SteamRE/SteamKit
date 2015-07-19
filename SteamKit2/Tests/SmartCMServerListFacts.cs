@@ -106,7 +106,7 @@ namespace Tests
         {
             var endPoint = new IPEndPoint( IPAddress.Loopback, 27015 );
             serverList.TryAdd( endPoint );
-            serverList.Mark( endPoint, ServerQuality.Bad );
+            serverList.TryMark( endPoint, ServerQuality.Bad );
 
             var nextEndPoint = serverList.GetNextServer();
             Assert.Equal( endPoint, nextEndPoint );
@@ -128,8 +128,8 @@ namespace Tests
 
             for( int i = 0; i < numTimesToMark; i++ )
             {
-                serverList.Mark( goodEndPoint, ServerQuality.Good );
-                serverList.Mark( badEndPoint, ServerQuality.Bad );
+                serverList.TryMark( goodEndPoint, ServerQuality.Good );
+                serverList.TryMark(badEndPoint, ServerQuality.Bad);
             }
 
             var numTimesGotGoodServer = 0;
@@ -183,6 +183,20 @@ namespace Tests
 
             var marked = serverList.TryMark( new IPEndPoint( IPAddress.Loopback, 27016 ), ServerQuality.Good );
             Assert.False( marked );
+        }
+
+        [Fact]
+        public void Clear_RemovesAllServers()
+        {
+            for (int i = 0; i < 20; i++)
+            {
+                serverList.TryAdd(new IPEndPoint(IPAddress.Loopback, 27015 + i));
+            }
+            Assert.Equal(20, serverList.GetAllEndPoints().Length);
+
+            serverList.Clear();
+
+            Assert.Equal(0, serverList.GetAllEndPoints().Length);
         }
     }
 }
