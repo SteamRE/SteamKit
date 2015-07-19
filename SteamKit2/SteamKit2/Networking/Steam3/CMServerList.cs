@@ -139,10 +139,7 @@ namespace SteamKit2.Networking.Steam3
             servers.Clear();
         }
 
-        /// <summary>
-        /// Loads a hardcoded list of servers.
-        /// </summary>
-        public void UseInbuiltList()
+        internal void UseInbuiltList()
         {
             lock ( listLock )
             {
