@@ -185,7 +185,8 @@ namespace SteamKit2.Networking.Steam3
         }
 
         /// <summary>
-        /// Load a list of servers from the Steam Directory
+        /// Load a list of servers from the Steam Directory.
+        /// This will replace any servers currently in the list.
         /// </summary>
         /// <param name="cellid">Cell ID</param>
         public Task LoadListFromDirectoryAsync( int cellid = 0 )
@@ -194,7 +195,8 @@ namespace SteamKit2.Networking.Steam3
         }
 
         /// <summary>
-        /// Load a list of servers from the Steam Directory
+        /// Load a list of servers from the Steam Directory.
+        /// This will replace any servers currently in the list.
         /// </summary>
         /// <param name="cellid">Cell ID</param>
         /// <param name="cancellationToken">Cancellation Token</param>
@@ -222,7 +224,7 @@ namespace SteamKit2.Networking.Steam3
 
                 cancellationToken.ThrowIfCancellationRequested();
 
-                lock (listLock )
+                lock ( listLock )
                 {
                     Clear();
                     foreach( var child in list.Children )
