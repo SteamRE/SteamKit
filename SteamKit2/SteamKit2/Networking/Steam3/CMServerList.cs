@@ -186,64 +186,7 @@ namespace SteamKit2.Networking.Steam3
                 Add( new IPEndPoint( IPAddress.Parse( "208.78.164.14" ), 27019 ) );
             }
         }
-
-        /// <summary>
-        /// Load a list of servers from the Steam Directory.
-        /// This will replace any servers currently in the list.
-        /// </summary>
-        /// <param name="cellid">Cell ID</param>
-        public Task LoadListFromDirectoryAsync( int cellid = 0 )
-        {
-            return LoadListFromDirectoryAsync( cellid, CancellationToken.None );
-        }
-
-        /// <summary>
-        /// Load a list of servers from the Steam Directory.
-        /// This will replace any servers currently in the list.
-        /// </summary>
-        /// <param name="cellid">Cell ID</param>
-        /// <param name="cancellationToken">Cancellation Token</param>
-        public Task LoadListFromDirectoryAsync( int cellid, CancellationToken cancellationToken )
-        {
-            var directory = new WebAPI.AsyncInterface( "ISteamDirectory", null );
-            var args = new Dictionary<string, string>
-            {
-                { "cellid", cellid.ToString() }
-            };
-
-            cancellationToken.ThrowIfCancellationRequested();
-
-            var task = directory.Call( "GetCMList", version: 1, args: args, secure: true );
-            return task.ContinueWith(t =>
-            {
-                var response = task.Result;
-                var result = ( EResult )response[ "result" ].AsInteger( ( int ) EResult.Invalid );
-                if ( result != EResult.OK )
-                {
-                    throw new InvalidOperationException( string.Format( "Steam Web API returned EResult.{0}", Enum.GetName( typeof( EResult ), result ) ) );
-                }
-
-                var list = response[ "serverlist" ];
-
-                cancellationToken.ThrowIfCancellationRequested();
-
-                lock ( listLock )
-                {
-                    Clear();
-                    foreach( var child in list.Children )
-                    {
-                        IPEndPoint endpoint;
-                        if ( !NetHelpers.TryParseIPEndPoint( child.Value, out endpoint ) )
-                        {
-                            continue;
-                        }
-
-                        Add( endpoint );
-                    }
-                }
-            }, cancellationToken, TaskContinuationOptions.NotOnCanceled | TaskContinuationOptions.NotOnFaulted, TaskScheduler.Current);
-        }
-
+        
         internal bool TryMark( IPEndPoint endPoint, ServerQuality quality )
         {
             lock ( listLock )

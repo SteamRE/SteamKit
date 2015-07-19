@@ -139,6 +139,7 @@
     <Compile Include="Steam\SteamClient\CallbackMgr\CallbackMgr.cs" />
     <Compile Include="Steam\UFSClient\Callbacks.cs" />
     <Compile Include="Steam\UFSClient\UFSClient.cs" />
+    <Compile Include="Steam\WebAPI\SteamDirectory.cs" />
     <Compile Include="Steam\WebAPI\WebAPI.cs" />
     <Compile Include="Types\GlobalID.cs" />
     <Compile Include="Types\DepotManifest.cs" />

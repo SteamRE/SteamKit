@@ -99,13 +99,19 @@ namespace Sample7_ServerList
             {
                 // since we don't have a list of servers saved, load the latest list of Steam servers
                 // from the Steam Directory.
-                var loadServersTask = CMClient.Servers.LoadListFromDirectoryAsync(cellid);
+                var loadServersTask = SteamDirectory.LoadAsync(cellid);
                 loadServersTask.Wait();
 
                 if (loadServersTask.IsFaulted)
                 {
                     Console.WriteLine("Error loading server list from directory: {0}", loadServersTask.Exception.Message);
                     return;
+                }
+
+                CMClient.Servers.Clear();
+                foreach (var server in loadServersTask.Result)
+                {
+                    CMClient.Servers.TryAdd(server);
                 }
             }
 
