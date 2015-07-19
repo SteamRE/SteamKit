@@ -157,7 +157,7 @@ namespace SteamKit2.Internal
 
             if ( cmServer == null )
             {
-                cmServer = Servers.GetNextServer();
+                cmServer = Servers.GetNextServerCandidate();
             }
 
             connection.Connect( cmServer, ( int )ConnectionTimeout.TotalMilliseconds );

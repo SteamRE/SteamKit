@@ -12,13 +12,25 @@ namespace Tests
         }
 
         readonly SmartCMServerList serverList;
-
+        
         [Fact]
         public void TryAdd_ReturnsTrue_WhenAdded()
         {
             var endPoint = new IPEndPoint( IPAddress.Loopback, 27015 );
             var added = serverList.TryAdd( endPoint );
             Assert.True( added, "TryAdd should have added the IPEndPoint to the list." );
+
+            var addresses = serverList.GetAllEndPoints();
+            Assert.Equal( 1, addresses.Length );
+            Assert.Equal( endPoint, addresses[ 0 ] );
+        }
+
+        [Fact]
+        public void TryAddRange_ReturnsTrue_WhenAdded()
+        {
+            var endPoint = new IPEndPoint( IPAddress.Loopback, 27015 );
+            var added = serverList.TryAddRange( new[] { endPoint } );
+            Assert.True( added, "TryAddRange should have added the IPEndPoint to the list." );
 
             var addresses = serverList.GetAllEndPoints();
             Assert.Equal( 1, addresses.Length );
@@ -40,6 +52,20 @@ namespace Tests
         }
 
         [Fact]
+        public void TryAddRange_ReturnsFalse_WhenAnyEqualEndPointAlreadyAdded()
+        {
+            var endPoint = new IPEndPoint( IPAddress.Loopback, 27015 );
+            serverList.TryAdd( endPoint );
+
+            var added = serverList.TryAddRange( new[] { new IPEndPoint( IPAddress.Loopback, 27015 ), new IPEndPoint( IPAddress.Loopback, 27016 ) } );
+            Assert.False( added, "TryAddRange should not have added the equal IPEndPoint to the list." );
+
+            var addresses = serverList.GetAllEndPoints();
+            Assert.Equal( 1, addresses.Length );
+            Assert.Equal( endPoint, addresses[ 0 ] );
+        }
+
+        [Fact]
         public void TryAdd_ReturnsTrue_AddingEndPointWithDifferentAddress()
         {
             serverList.TryAdd( new IPEndPoint( IPAddress.Loopback, 27015 ) );
@@ -48,6 +74,21 @@ namespace Tests
 
             var added = serverList.TryAdd( endPoint );
             Assert.True( added, "TryAdd should have added the IPEndPoint to the list." );
+
+            var addresses = serverList.GetAllEndPoints();
+            Assert.Equal( 2, addresses.Length );
+            Assert.Equal( endPoint, addresses[ 1 ] );
+        }
+        
+        [Fact]
+        public void TryAddRange_ReturnsTrue_AddingEndPointWithDifferentAddress()
+        {
+            serverList.TryAdd( new IPEndPoint( IPAddress.Loopback, 27015 ) );
+
+            var endPoint = new IPEndPoint( IPAddress.Parse( "192.168.0.1" ), 27015 );
+
+            var added = serverList.TryAddRange( new[] { endPoint } );
+            Assert.True( added, "TryAddRange should have added the IPEndPoint to the list." );
 
             var addresses = serverList.GetAllEndPoints();
             Assert.Equal( 2, addresses.Length );
@@ -70,6 +111,21 @@ namespace Tests
         }
 
         [Fact]
+        public void TryAddRange_ReturnsTrue_AddingEndPointWithDifferentPort()
+        {
+            serverList.TryAdd( new IPEndPoint( IPAddress.Loopback, 27015 ) );
+
+            var endPoint = new IPEndPoint( IPAddress.Loopback, 27016 );
+
+            var added = serverList.TryAddRange( new[] { endPoint } );
+            Assert.True( added, "TryAddRange should have added the IPEndPoint to the list." );
+
+            var addresses = serverList.GetAllEndPoints();
+            Assert.Equal( 2, addresses.Length );
+            Assert.Equal( endPoint, addresses[ 1 ] );
+        }
+
+        [Fact]
         public void TryAdd_ReturnsTrue_AddingEndPointWithDifferentAddressAndPort()
         {
             serverList.TryAdd( new IPEndPoint( IPAddress.Loopback, 27015 ) );
@@ -85,36 +141,86 @@ namespace Tests
         }
 
         [Fact]
-        public void GetNextServer_ReturnsNull_IfListIsEmpty()
+        public void TryAddRange_ReturnsTrue_AddingEndPointWithDifferentAddressAndPort()
         {
-            var endPoint = serverList.GetNextServer();
+            serverList.TryAdd( new IPEndPoint( IPAddress.Loopback, 27015 ) );
+
+            var endPoint = new IPEndPoint( IPAddress.Parse( "192.168.0.1" ), 27016 );
+
+            var added = serverList.TryAddRange( new[] { endPoint } );
+            Assert.True( added, "TryAddRange should have added the IPEndPoint to the list." );
+
+            var addresses = serverList.GetAllEndPoints();
+            Assert.Equal( 2, addresses.Length );
+            Assert.Equal( endPoint, addresses[ 1 ] );
+        }
+
+        [Fact]
+        public void TryAdd_ReturnsTrue_AddingAVarietyOfEndPointsWithDifferentAddressAndPort()
+        {
+            serverList.TryAdd(new IPEndPoint(IPAddress.Loopback, 27015));
+            Assert.Equal(1, serverList.GetAllEndPoints().Length);
+
+            var endPoints = new[]
+            {
+                new IPEndPoint( IPAddress.Parse( "192.168.0.1" ), 27015 ),
+                new IPEndPoint( IPAddress.Parse( "192.168.0.1" ), 27016 ),
+                new IPEndPoint( IPAddress.Parse( "192.168.1.1" ), 27017 ),
+                new IPEndPoint( IPAddress.Parse( "10.10.0.1" ), 27017 )
+            };
+
+            var added = serverList.TryAddRange(endPoints);
+            Assert.True(added, "TryAddRange should have added the IPEndPoints to the list.");
+            Assert.Equal( 5, serverList.GetAllEndPoints().Length );
+        }
+
+        [Fact]
+        public void TryAdd_ReturnsTrue_AddingDuplicateEndPointsInSingleRange()
+        {
+            serverList.TryAdd( new IPEndPoint( IPAddress.Loopback, 27015 ) );
+
+            var endPoints = new[]
+            {
+                new IPEndPoint( IPAddress.Parse( "192.168.0.1" ), 27015 ),
+                new IPEndPoint( IPAddress.Parse( "192.168.0.1" ), 27015 )
+            };
+
+            var added = serverList.TryAddRange( endPoints );
+            Assert.True( added, "TryAddRange should have added the IPEndPoints to the list." );
+            Assert.Equal( 3, serverList.GetAllEndPoints().Length );
+        }
+
+        [Fact]
+        public void GetNextServerCandidate_ReturnsNull_IfListIsEmpty()
+        {
+            var endPoint = serverList.GetNextServerCandidate();
             Assert.Null( endPoint );
         }
 
         [Fact]
-        public void GetNextServer_ReturnsServer_IfListHasServers()
+        public void GetNextServerCandidate_ReturnsServer_IfListHasServers()
         {
             var endPoint = new IPEndPoint( IPAddress.Loopback, 27015 );
             serverList.TryAdd( endPoint );
 
-            var nextEndPoint = serverList.GetNextServer();
+            var nextEndPoint = serverList.GetNextServerCandidate();
             Assert.Equal( endPoint, nextEndPoint );
         }
 
         [Fact]
-        public void GetNextServer_ReturnsServer_IfListHasServers_EvenIfAllServersAreBad()
+        public void GetNextServerCandidate_ReturnsServer_IfListHasServers_EvenIfAllServersAreBad()
         {
             var endPoint = new IPEndPoint( IPAddress.Loopback, 27015 );
             serverList.TryAdd( endPoint );
             serverList.TryMark( endPoint, ServerQuality.Bad );
 
-            var nextEndPoint = serverList.GetNextServer();
+            var nextEndPoint = serverList.GetNextServerCandidate();
             Assert.Equal( endPoint, nextEndPoint );
         }
 
         // Warning: This test is dependent on random values from the system and may, if you are unlucky enough, falsely report a failure.
         [Fact]
-        public void GetNextServer_IsBiasedTowardsGoodServers()
+        public void GetNextServerCandidate_IsBiasedTowardsGoodServers()
         {
             var goodEndPoint = new IPEndPoint( IPAddress.Loopback, 27015 );
             var neutralEndPoint = new IPEndPoint( IPAddress.Loopback, 27016 );
@@ -140,7 +246,7 @@ namespace Tests
 
             for ( int i = 0; i < numTimesToGetServer; i++ )
             {
-                var nextServer = serverList.GetNextServer();
+                var nextServer = serverList.GetNextServerCandidate();
 
                 if ( nextServer == goodEndPoint )
                 {

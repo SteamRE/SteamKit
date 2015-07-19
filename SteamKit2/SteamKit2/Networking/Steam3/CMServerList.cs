@@ -98,6 +98,32 @@ namespace SteamKit2.Networking.Steam3
             return true;
         }
 
+        /// <summary>
+        /// Adds the elements of the specified collection of <see cref="System.Net.IPEndPoint" />s to the server list.
+        /// </summary>
+        /// <param name="endPoints">The collection of <see cref="System.Net.IPEndPoint"/>s to add.</param>
+        /// <returns>false if any of the specified servers are already in the list, true otherwise.</returns>
+        public bool TryAddRange( IEnumerable<IPEndPoint> endPoints )
+        {
+            lock ( listLock )
+            {
+                var distinctEndPoints = endPoints.Distinct();
+
+                var endpointsAlreadyInList = servers.Select( x => x.EndPoint );
+                var overlappingEndPoints = endpointsAlreadyInList.Intersect( endPoints, EqualityComparer<IPEndPoint>.Default );
+                if ( overlappingEndPoints.Any() )
+                {
+                    return false;
+                }
+
+                foreach ( var endPoint in endPoints )
+                {
+                    AddCore( endPoint );
+                }
+            }
+            return true;
+        }
+
         void Add( IPEndPoint endPoint )
         {
             if ( servers.Any( x => x.EndPoint == endPoint ) )
@@ -235,7 +261,7 @@ namespace SteamKit2.Networking.Steam3
         /// Get the next server in the list.
         /// </summary>
         /// <returns>An <see cref="System.Net.IPEndPoint"/>, or null if the list is empty.</returns>
-        public IPEndPoint GetNextServer()
+        public IPEndPoint GetNextServerCandidate()
         {
             lock ( listLock)
             {
