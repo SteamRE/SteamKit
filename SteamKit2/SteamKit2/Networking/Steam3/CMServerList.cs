@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Threading;
@@ -34,7 +35,7 @@ namespace SteamKit2.Networking.Steam3
         const int MaxScore = 4000;
         const int MinScore = 250;
         
-        [System.Diagnostics.DebuggerDisplay("ServerInfo ({EndPoint}, Score {Score})")]
+        [DebuggerDisplay("ServerInfo ({EndPoint}, Score {Score})")]
         class ServerInfo
         {
             public IPEndPoint EndPoint { get; set; }
@@ -332,6 +333,29 @@ namespace SteamKit2.Networking.Steam3
             }
 
             return null;
+        }
+
+        /// <summary>
+        /// Gets the <see cref="System.Net.IPEndPoint"/>s of all servers in the server list.
+        /// </summary>
+        /// <returns>An <see cref="T:System.Net.IPEndPoint[]"/> array contains the <see cref="System.Net.IPEndPoint"/>s of the servers in the list</returns>
+        public IPEndPoint[] GetAllEndPoints()
+        {
+            IPEndPoint[] endPoints;
+
+            lock(listLock)
+            {
+                var numServers = servers.Count;
+                endPoints = new IPEndPoint[numServers];
+
+                for (int i = 0; i < numServers; i++)
+                {
+                    var serverInfo = servers[i];
+                    endPoints[i] = serverInfo.EndPoint;
+                }
+            }
+
+            return endPoints;
         }
     }
 }
