@@ -88,7 +88,7 @@ namespace SteamKit2.Networking.Steam3
         {
             lock (listLock)
             {
-                if (servers.Any(x => x.EndPoint == endPoint))
+                if (servers.Any(x => x.EndPoint.Equals(endPoint)))
                 {
                     return false;
                 }
