@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using SteamKit2.Internal;
 
 namespace SteamKit2
 {
@@ -12,6 +13,19 @@ namespace SteamKit2
     /// </summary>
    public static class SteamDirectory
     {
+       /// <summary>
+       /// Initializes <see cref="SteamKit2.Internal.CMClient"/>'s server list with servers from the Steam Directory.
+       /// </summary>
+       public static Task Initialize( int cellid = 0 )
+       {
+           return LoadAsync( cellid ).ContinueWith( t =>
+            {
+                var servers = t.Result;
+                CMClient.Servers.Clear();
+                CMClient.Servers.TryAddRange(servers);
+            }, CancellationToken.None, TaskContinuationOptions.NotOnFaulted | TaskContinuationOptions.NotOnCanceled, TaskScheduler.Current );
+       }
+
         /// <summary>
         /// Load a list of servers from the Steam Directory.
         /// </summary>
