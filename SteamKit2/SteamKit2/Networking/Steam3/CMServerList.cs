@@ -306,7 +306,7 @@ namespace SteamKit2.Networking.Steam3
         }
 
         /// <summary>
-        /// Get the next server in the list, ordered by quality.
+        /// Get the next server in the list.
         /// </summary>
         /// <returns>An <see cref="System.Net.IPEndPoint"/>, or null if the list is empty.</returns>
         public IPEndPoint GetNextServer()
