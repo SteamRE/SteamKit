@@ -47,7 +47,7 @@ namespace SteamKit2.Networking.Steam3
         {
             servers = new Collection<ServerInfo>();
             listLock = new object();
-            ScoreExpiryTimeSpan = TimeSpan.FromMinutes(30);
+            ScoreExpiryTimeSpan = TimeSpan.FromMinutes( 30 );
         }
 
         object listLock;
@@ -67,11 +67,11 @@ namespace SteamKit2.Networking.Steam3
         /// </summary>
         public void ResetOldScores()
         {
-            lock (listLock)
+            lock ( listLock )
             {
-                foreach (var serverInfo in servers)
+                foreach ( var serverInfo in servers )
                 {
-                    if (serverInfo.LastScoreChangeTimeUtc + ScoreExpiryTimeSpan <= DateTime.UtcNow)
+                    if ( serverInfo.LastScoreChangeTimeUtc + ScoreExpiryTimeSpan <= DateTime.UtcNow )
                     {
                         serverInfo.Score = BaseScore;
                     }
@@ -84,31 +84,31 @@ namespace SteamKit2.Networking.Steam3
         /// </summary>
         /// <param name="endPoint">The <see cref="System.Net.IPEndPoint"/> to add.</param>
         /// <returns>false if the server is already in the list, true otherwise.</returns>
-        public bool TryAdd(IPEndPoint endPoint)
+        public bool TryAdd( IPEndPoint endPoint )
         {
-            lock (listLock)
+            lock ( listLock )
             {
-                if (servers.Any(x => x.EndPoint.Equals(endPoint)))
+                if ( servers.Any( x => x.EndPoint.Equals( endPoint ) ) )
                 {
                     return false;
                 }
 
-                AddCore(endPoint);
+                AddCore( endPoint );
             }
             return true;
         }
 
-        void Add(IPEndPoint endPoint)
+        void Add( IPEndPoint endPoint )
         {
-            if (servers.Any(x => x.EndPoint == endPoint))
+            if ( servers.Any( x => x.EndPoint == endPoint ) )
             {
-                throw new ArgumentException("The supplied endpoint is already in the server list.", "endPoint");
+                throw new ArgumentException( "The supplied endpoint is already in the server list.", "endPoint" );
             }
 
-            AddCore(endPoint);
+            AddCore( endPoint );
         }
 
-        void AddCore(IPEndPoint endPoint)
+        void AddCore( IPEndPoint endPoint )
         {
             var info = new ServerInfo
             {
@@ -117,7 +117,7 @@ namespace SteamKit2.Networking.Steam3
                 LastScoreChangeTimeUtc = DateTime.UtcNow,
             };
 
-            servers.Add(info);
+            servers.Add( info );
         }
 
         /// <summary>
@@ -125,11 +125,11 @@ namespace SteamKit2.Networking.Steam3
         /// </summary>
         public void ResetAllScores()
         {
-            lock (listLock)
+            lock ( listLock )
             {
-                foreach (var server in servers)
+                foreach ( var server in servers )
                 {
-                    SetServerScore(server, BaseScore);
+                    SetServerScore( server, BaseScore );
                 }
             }
         }
@@ -144,43 +144,43 @@ namespace SteamKit2.Networking.Steam3
         /// </summary>
         public void UseInbuiltList()
         {
-            lock (listLock)
+            lock ( listLock )
             {
                 Clear();
-                Add(new IPEndPoint(IPAddress.Parse("208.64.200.201"), 27017));
-                Add(new IPEndPoint(IPAddress.Parse("208.64.200.201"), 27018));
-                Add(new IPEndPoint(IPAddress.Parse("208.64.200.201"), 27019));
-                Add(new IPEndPoint(IPAddress.Parse("208.64.200.201"), 27020));
-                Add(new IPEndPoint(IPAddress.Parse("208.64.200.202"), 27017));
-                Add(new IPEndPoint(IPAddress.Parse("208.64.200.202"), 27018));
-                Add(new IPEndPoint(IPAddress.Parse("208.64.200.202"), 27019));
-                Add(new IPEndPoint(IPAddress.Parse("208.64.200.203"), 27017));
-                Add(new IPEndPoint(IPAddress.Parse("208.64.200.203"), 27018));
-                Add(new IPEndPoint(IPAddress.Parse("208.64.200.203"), 27019));
-                Add(new IPEndPoint(IPAddress.Parse("208.64.200.204"), 27017));
-                Add(new IPEndPoint(IPAddress.Parse("208.64.200.204"), 27018));
-                Add(new IPEndPoint(IPAddress.Parse("208.64.200.204"), 27019));
-                Add(new IPEndPoint(IPAddress.Parse("208.64.200.205"), 27017));
-                Add(new IPEndPoint(IPAddress.Parse("208.64.200.205"), 27018));
-                Add(new IPEndPoint(IPAddress.Parse("208.64.200.205"), 27019));
-                Add(new IPEndPoint(IPAddress.Parse("208.78.164.9"), 27017));
-                Add(new IPEndPoint(IPAddress.Parse("208.78.164.9"), 27018));
-                Add(new IPEndPoint(IPAddress.Parse("208.78.164.9"), 27019));
-                Add(new IPEndPoint(IPAddress.Parse("208.78.164.10"), 27017));
-                Add(new IPEndPoint(IPAddress.Parse("208.78.164.10"), 27018));
-                Add(new IPEndPoint(IPAddress.Parse("208.78.164.10"), 27019));
-                Add(new IPEndPoint(IPAddress.Parse("208.78.164.11"), 27017));
-                Add(new IPEndPoint(IPAddress.Parse("208.78.164.11"), 27018));
-                Add(new IPEndPoint(IPAddress.Parse("208.78.164.11"), 27019));
-                Add(new IPEndPoint(IPAddress.Parse("208.78.164.12"), 27017));
-                Add(new IPEndPoint(IPAddress.Parse("208.78.164.12"), 27018));
-                Add(new IPEndPoint(IPAddress.Parse("208.78.164.12"), 27019));
-                Add(new IPEndPoint(IPAddress.Parse("208.78.164.13"), 27017));
-                Add(new IPEndPoint(IPAddress.Parse("208.78.164.13"), 27018));
-                Add(new IPEndPoint(IPAddress.Parse("208.78.164.13"), 27019));
-                Add(new IPEndPoint(IPAddress.Parse("208.78.164.14"), 27017));
-                Add(new IPEndPoint(IPAddress.Parse("208.78.164.14"), 27018));
-                Add(new IPEndPoint(IPAddress.Parse("208.78.164.14"), 27019));
+                Add( new IPEndPoint( IPAddress.Parse( "208.64.200.201" ), 27017 ) );
+                Add( new IPEndPoint( IPAddress.Parse( "208.64.200.201" ), 27018 ) );
+                Add( new IPEndPoint( IPAddress.Parse( "208.64.200.201" ), 27019 ) );
+                Add( new IPEndPoint( IPAddress.Parse( "208.64.200.201" ), 27020 ) );
+                Add( new IPEndPoint( IPAddress.Parse( "208.64.200.202" ), 27017 ) );
+                Add( new IPEndPoint( IPAddress.Parse( "208.64.200.202" ), 27018 ) );
+                Add( new IPEndPoint( IPAddress.Parse( "208.64.200.202" ), 27019 ) );
+                Add( new IPEndPoint( IPAddress.Parse( "208.64.200.203" ), 27017 ) );
+                Add( new IPEndPoint( IPAddress.Parse( "208.64.200.203" ), 27018 ) );
+                Add( new IPEndPoint( IPAddress.Parse( "208.64.200.203" ), 27019 ) );
+                Add( new IPEndPoint( IPAddress.Parse( "208.64.200.204" ), 27017 ) );
+                Add( new IPEndPoint( IPAddress.Parse( "208.64.200.204" ), 27018 ) );
+                Add( new IPEndPoint( IPAddress.Parse( "208.64.200.204" ), 27019 ) );
+                Add( new IPEndPoint( IPAddress.Parse( "208.64.200.205" ), 27017 ) );
+                Add( new IPEndPoint( IPAddress.Parse( "208.64.200.205" ), 27018 ) );
+                Add( new IPEndPoint( IPAddress.Parse( "208.64.200.205" ), 27019 ) );
+                Add( new IPEndPoint( IPAddress.Parse( "208.78.164.9" ), 27017 ) );
+                Add( new IPEndPoint( IPAddress.Parse( "208.78.164.9" ), 27018 ) );
+                Add( new IPEndPoint( IPAddress.Parse( "208.78.164.9" ), 27019 ) );
+                Add( new IPEndPoint( IPAddress.Parse( "208.78.164.10" ), 27017 ) );
+                Add( new IPEndPoint( IPAddress.Parse( "208.78.164.10" ), 27018 ) );
+                Add( new IPEndPoint( IPAddress.Parse( "208.78.164.10" ), 27019 ) );
+                Add( new IPEndPoint( IPAddress.Parse( "208.78.164.11" ), 27017 ) );
+                Add( new IPEndPoint( IPAddress.Parse( "208.78.164.11" ), 27018 ) );
+                Add( new IPEndPoint( IPAddress.Parse( "208.78.164.11" ), 27019 ) );
+                Add( new IPEndPoint( IPAddress.Parse( "208.78.164.12" ), 27017 ) );
+                Add( new IPEndPoint( IPAddress.Parse( "208.78.164.12" ), 27018 ) );
+                Add( new IPEndPoint( IPAddress.Parse( "208.78.164.12" ), 27019 ) );
+                Add( new IPEndPoint( IPAddress.Parse( "208.78.164.13" ), 27017 ) );
+                Add( new IPEndPoint( IPAddress.Parse( "208.78.164.13" ), 27018 ) );
+                Add( new IPEndPoint( IPAddress.Parse( "208.78.164.13" ), 27019 ) );
+                Add( new IPEndPoint( IPAddress.Parse( "208.78.164.14" ), 27017 ) );
+                Add( new IPEndPoint( IPAddress.Parse( "208.78.164.14" ), 27018 ) );
+                Add( new IPEndPoint( IPAddress.Parse( "208.78.164.14" ), 27019 ) );
             }
         }
 
@@ -188,9 +188,9 @@ namespace SteamKit2.Networking.Steam3
         /// Load a list of servers from the Steam Directory
         /// </summary>
         /// <param name="cellid">Cell ID</param>
-        public Task LoadListFromDirectoryAsync(int cellid = 0)
+        public Task LoadListFromDirectoryAsync( int cellid = 0 )
         {
-            return LoadListFromDirectoryAsync(cellid, CancellationToken.None);
+            return LoadListFromDirectoryAsync( cellid, CancellationToken.None );
         }
 
         /// <summary>
@@ -198,9 +198,9 @@ namespace SteamKit2.Networking.Steam3
         /// </summary>
         /// <param name="cellid">Cell ID</param>
         /// <param name="cancellationToken">Cancellation Token</param>
-        public Task LoadListFromDirectoryAsync(int cellid, CancellationToken cancellationToken)
+        public Task LoadListFromDirectoryAsync( int cellid, CancellationToken cancellationToken )
         {
-            var directory = new WebAPI.AsyncInterface("ISteamDirectory", null);
+            var directory = new WebAPI.AsyncInterface( "ISteamDirectory", null );
             var args = new Dictionary<string, string>
             {
                 { "cellid", cellid.ToString() }
@@ -208,32 +208,32 @@ namespace SteamKit2.Networking.Steam3
 
             cancellationToken.ThrowIfCancellationRequested();
 
-            var task = directory.Call("GetCMList", version: 1, args: args, secure: true);
+            var task = directory.Call( "GetCMList", version: 1, args: args, secure: true );
             return task.ContinueWith(t =>
             {
                 var response = task.Result;
-                var result = (EResult)response["result"].AsInteger((int)EResult.Invalid);
-                if (result != EResult.OK)
+                var result = ( EResult )response[ "result" ].AsInteger( ( int ) EResult.Invalid );
+                if ( result != EResult.OK )
                 {
-                    throw new InvalidOperationException(string.Format("Steam Web API returned EResult.{0}", Enum.GetName(typeof(EResult), result)));
+                    throw new InvalidOperationException( string.Format( "Steam Web API returned EResult.{0}", Enum.GetName( typeof( EResult ), result ) ) );
                 }
 
-                var list = response["serverlist"];
+                var list = response[ "serverlist" ];
 
                 cancellationToken.ThrowIfCancellationRequested();
 
-                lock (listLock)
+                lock (listLock )
                 {
                     Clear();
-                    foreach(var child in list.Children)
+                    foreach( var child in list.Children )
                     {
                         IPEndPoint endpoint;
-                        if (!NetHelpers.TryParseIPEndPoint(child.Value, out endpoint))
+                        if ( !NetHelpers.TryParseIPEndPoint( child.Value, out endpoint ) )
                         {
                             continue;
                         }
 
-                        Add(endpoint);
+                        Add( endpoint );
                     }
                 }
             }, cancellationToken, TaskContinuationOptions.NotOnCanceled | TaskContinuationOptions.NotOnFaulted, TaskScheduler.Current);
@@ -246,11 +246,11 @@ namespace SteamKit2.Networking.Steam3
         /// <param name="quality">The new server quality</param>
         /// <exception cref="System.ArgumentException">The supplied endPoint does not represent a server in the list.</exception>
         /// <exception cref="System.ArgumentOutOfRangeException">The supplied <see cref="ServerQuality"/> is not a valid value.</exception>
-        public void Mark(IPEndPoint endPoint, ServerQuality quality)
+        public void Mark( IPEndPoint endPoint, ServerQuality quality )
         {
-            if (!TryMark(endPoint, quality))
+            if ( !TryMark( endPoint, quality ) )
             {
-                throw new ArgumentException("The supplied endpoint is not in the server list.", "endPoint");
+                throw new ArgumentException( "The supplied endpoint is not in the server list.", "endPoint" );
             }
         }
 
@@ -261,45 +261,45 @@ namespace SteamKit2.Networking.Steam3
         /// <param name="quality">The new server quality</param>
         /// <exception cref="System.ArgumentOutOfRangeException">The supplied <see cref="ServerQuality"/> is not a valid value.</exception>
         /// <returns>True if the server exists in the list, false otherwise</returns>
-        public bool TryMark(IPEndPoint endPoint, ServerQuality quality)
+        public bool TryMark( IPEndPoint endPoint, ServerQuality quality )
         {
-            lock (listLock)
+            lock ( listLock )
             {
-                var serverInfo = servers.Where(x => x.EndPoint.Equals(endPoint)).SingleOrDefault();
-                if (serverInfo == null)
+                var serverInfo = servers.Where( x => x.EndPoint.Equals( endPoint ) ).SingleOrDefault();
+                if ( serverInfo == null )
                 {
                     return false;
                 }
-                MarkServerCore(serverInfo, quality);
+                MarkServerCore( serverInfo, quality );
                 return true;
             }
         }
 
-        void MarkServerCore(ServerInfo serverInfo, ServerQuality quality)
+        void MarkServerCore( ServerInfo serverInfo, ServerQuality quality )
         {
 
-            switch (quality)
+            switch ( quality )
             {
                 case ServerQuality.Good:
                 {
-                    var newScore = Convert.ToInt32(serverInfo.Score * GoodWeighting);
-                    SetServerScore(serverInfo, Math.Min(newScore, MaxScore));
+                    var newScore = Convert.ToInt32( serverInfo.Score * GoodWeighting );
+                    SetServerScore( serverInfo, Math.Min( newScore, MaxScore ) );
                     break;
                 }
 
                 case ServerQuality.Bad:
                 {
-                    var newScore = Convert.ToInt32(serverInfo.Score * BadWeighting);
-                    SetServerScore(serverInfo, Math.Max(newScore, MinScore));
+                    var newScore = Convert.ToInt32( serverInfo.Score * BadWeighting );
+                    SetServerScore( serverInfo, Math.Max( newScore, MinScore ) );
                     break;
                 }
 
                 default:
-                    throw new ArgumentOutOfRangeException("quality");
+                    throw new ArgumentOutOfRangeException( "quality" );
             }
         }
 
-        void SetServerScore(ServerInfo serverInfo, int score)
+        void SetServerScore( ServerInfo serverInfo, int score )
         {
             serverInfo.Score = score;
             serverInfo.LastScoreChangeTimeUtc = DateTime.UtcNow;
@@ -311,21 +311,21 @@ namespace SteamKit2.Networking.Steam3
         /// <returns>An <see cref="System.Net.IPEndPoint"/>, or null if the list is empty.</returns>
         public IPEndPoint GetNextServer()
         {
-            lock (listLock)
+            lock ( listLock)
             {
                 // ResetOldScores takes a lock internally, however
                 // locks are re-entrant on the same thread, so this
                 // isn't a problem.
                 ResetOldScores();
 
-                var totalScoreValue = servers.Sum(x => x.Score);
-                var randomValue = new Random().Next(totalScoreValue);
+                var totalScoreValue = servers.Sum( x => x.Score );
+                var randomValue = new Random().Next( totalScoreValue );
 
                 var scoreMarker = 0;
-                foreach (var serverInfo in servers)
+                foreach ( var serverInfo in servers )
                 {
                     scoreMarker += serverInfo.Score;
-                    if (scoreMarker >= randomValue)
+                    if ( scoreMarker >= randomValue )
                     {
                         return serverInfo.EndPoint;
                     }
@@ -343,15 +343,15 @@ namespace SteamKit2.Networking.Steam3
         {
             IPEndPoint[] endPoints;
 
-            lock(listLock)
+            lock( listLock )
             {
                 var numServers = servers.Count;
-                endPoints = new IPEndPoint[numServers];
+                endPoints = new IPEndPoint[ numServers ];
 
-                for (int i = 0; i < numServers; i++)
+                for ( int i = 0; i < numServers; i++ )
                 {
-                    var serverInfo = servers[i];
-                    endPoints[i] = serverInfo.EndPoint;
+                    var serverInfo = servers[ i ];
+                    endPoints[ i ] = serverInfo.EndPoint;
                 }
             }
 
