@@ -28,7 +28,7 @@ namespace NetHookAnalyzer2
 			return SteamKit2Assembly.GetTypes().ToList().Find(type => type.FullName == name);
 		}
 
-		public static IEnumerable<Type> GetGCMessageBodyTypeCandidates(uint rawEMsg, uint gcAppid = 0)
+		public static IEnumerable<Type> GetGCMessageBodyTypeCandidates(uint rawEMsg, uint gcAppid)
 		{
 			var gcMsg = MsgUtil.GetGCMsg(rawEMsg);
 

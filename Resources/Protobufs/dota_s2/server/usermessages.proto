@@ -1,4 +1,3 @@
-import "google/protobuf/descriptor.proto";
 import "networkbasetypes.proto";
 
 option optimize_for = SPEED;
@@ -39,6 +38,12 @@ enum EBaseUserMessages {
 	UM_CreditsMsg = 135;
 	UM_CloseCaptionPlaceholder = 142;
 	UM_CameraTransition = 143;
+	UM_AudioParameter = 144;
+	UM_ParticleManager = 145;
+	UM_HudError = 146;
+	UM_CustomGameEvent_ClientToServer = 147;
+	UM_CustomGameEvent_ServerToClient = 148;
+	UM_TrackedControllerInput_ClientToServer = 149;
 	UM_MAX_BASE = 200;
 }
 
@@ -57,6 +62,23 @@ enum eRollType {
 	ROLL_CREDITS = 1;
 	ROLL_LATE_JOIN_LOGO = 2;
 	ROLL_OUTTRO = 3;
+}
+
+enum PARTICLE_MESSAGE {
+	GAME_PARTICLE_MANAGER_EVENT_CREATE = 0;
+	GAME_PARTICLE_MANAGER_EVENT_UPDATE = 1;
+	GAME_PARTICLE_MANAGER_EVENT_UPDATE_FORWARD = 2;
+	GAME_PARTICLE_MANAGER_EVENT_UPDATE_ORIENTATION = 3;
+	GAME_PARTICLE_MANAGER_EVENT_UPDATE_FALLBACK = 4;
+	GAME_PARTICLE_MANAGER_EVENT_UPDATE_ENT = 5;
+	GAME_PARTICLE_MANAGER_EVENT_UPDATE_OFFSET = 6;
+	GAME_PARTICLE_MANAGER_EVENT_DESTROY = 7;
+	GAME_PARTICLE_MANAGER_EVENT_DESTROY_INVOLVING = 8;
+	GAME_PARTICLE_MANAGER_EVENT_RELEASE = 9;
+	GAME_PARTICLE_MANAGER_EVENT_LATENCY = 10;
+	GAME_PARTICLE_MANAGER_EVENT_SHOULD_DRAW = 11;
+	GAME_PARTICLE_MANAGER_EVENT_FROZEN = 12;
+	GAME_PARTICLE_MANAGER_EVENT_CHANGE_CONTROL_POINT_ATTACHMENT = 13;
 }
 
 message CUserMessageAchievementEvent {
@@ -170,6 +192,12 @@ message CUserMessageResetHUD {
 message CUserMessageSendAudio {
 	optional string soundname = 1;
 	optional bool stop = 2;
+}
+
+message CUserMessageAudioParameter {
+	optional uint32 parameter_type = 1;
+	optional uint32 name_hash_code = 2;
+	optional float value = 3;
 }
 
 message CUserMessageVoiceMask {
@@ -293,5 +321,109 @@ message CUserMessageCameraTransition {
 	optional uint32 camera_type = 1;
 	optional float duration = 2;
 	optional .CUserMessageCameraTransition.Transition_DataDriven params_data_driven = 3;
+}
+
+message CUserMsg_ParticleManager {
+	message ReleaseParticleIndex {
+	}
+
+	message CreateParticle {
+		optional fixed64 particle_name_index = 1;
+		optional int32 attach_type = 2;
+		optional int32 entity_handle = 3;
+	}
+
+	message DestroyParticle {
+		optional bool destroy_immediately = 1;
+	}
+
+	message DestroyParticleInvolving {
+		optional bool destroy_immediately = 1;
+		optional int32 entity_handle = 3;
+	}
+
+	message UpdateParticle {
+		optional int32 control_point = 1;
+		optional .CMsgVector position = 2;
+	}
+
+	message UpdateParticleFwd {
+		optional int32 control_point = 1;
+		optional .CMsgVector forward = 2;
+	}
+
+	message UpdateParticleOrient {
+		optional int32 control_point = 1;
+		optional .CMsgVector forward = 2;
+		optional .CMsgVector right = 3;
+		optional .CMsgVector up = 4;
+	}
+
+	message UpdateParticleFallback {
+		optional int32 control_point = 1;
+		optional .CMsgVector position = 2;
+	}
+
+	message UpdateParticleOffset {
+		optional int32 control_point = 1;
+		optional .CMsgVector origin_offset = 2;
+	}
+
+	message UpdateParticleEnt {
+		optional int32 control_point = 1;
+		optional int32 entity_handle = 2;
+		optional int32 attach_type = 3;
+		optional int32 attachment = 4;
+		optional .CMsgVector fallback_position = 5;
+		optional bool include_wearables = 6;
+	}
+
+	message UpdateParticleSetFrozen {
+		optional bool set_frozen = 1;
+	}
+
+	message UpdateParticleShouldDraw {
+		optional bool should_draw = 1;
+	}
+
+	message ChangeControlPointAttachment {
+		optional int32 attachment_old = 1;
+		optional int32 attachment_new = 2;
+		optional int32 entity_handle = 3;
+	}
+
+	required .PARTICLE_MESSAGE type = 1 [default = GAME_PARTICLE_MANAGER_EVENT_CREATE];
+	required uint32 index = 2;
+	optional .CUserMsg_ParticleManager.ReleaseParticleIndex release_particle_index = 3;
+	optional .CUserMsg_ParticleManager.CreateParticle create_particle = 4;
+	optional .CUserMsg_ParticleManager.DestroyParticle destroy_particle = 5;
+	optional .CUserMsg_ParticleManager.DestroyParticleInvolving destroy_particle_involving = 6;
+	optional .CUserMsg_ParticleManager.UpdateParticle update_particle = 7;
+	optional .CUserMsg_ParticleManager.UpdateParticleFwd update_particle_fwd = 8;
+	optional .CUserMsg_ParticleManager.UpdateParticleOrient update_particle_orient = 9;
+	optional .CUserMsg_ParticleManager.UpdateParticleFallback update_particle_fallback = 10;
+	optional .CUserMsg_ParticleManager.UpdateParticleOffset update_particle_offset = 11;
+	optional .CUserMsg_ParticleManager.UpdateParticleEnt update_particle_ent = 12;
+	optional .CUserMsg_ParticleManager.UpdateParticleShouldDraw update_particle_should_draw = 14;
+	optional .CUserMsg_ParticleManager.UpdateParticleSetFrozen update_particle_set_frozen = 15;
+	optional .CUserMsg_ParticleManager.ChangeControlPointAttachment change_control_point_attachment = 16;
+}
+
+message CUserMsg_HudError {
+	optional int32 order_id = 1;
+}
+
+message CUserMsg_CustomGameEvent_ClientToServer {
+	optional string event_name = 1;
+	optional bytes data = 2;
+}
+
+message CUserMsg_CustomGameEvent_ServerToClient {
+	optional string event_name = 1;
+	optional bytes data = 2;
+}
+
+message CUserMsg_TrackedControllerInput_ClientToServer {
+	optional bytes data = 1;
 }
 

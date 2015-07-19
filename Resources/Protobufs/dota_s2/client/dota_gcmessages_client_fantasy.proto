@@ -210,19 +210,11 @@ message CMsgDOTAFantasyTeamInfo {
 	repeated uint32 current_roster = 8;
 }
 
-message CMsgDOTAFantasyMatchFinished {
-	optional uint32 match_id = 1;
-	optional uint32 league_id = 2;
-	optional uint32 series_id = 3;
-	optional uint32 start_time = 4;
-	optional uint32 series_type = 5;
-}
-
 message CMsgDOTAFantasyTeamScoreRequest {
 	optional uint32 fantasy_league_id = 1;
 	optional uint32 owner_account_id = 2;
 	optional uint32 fantasy_team_index = 3;
-	optional uint32 filter_match_id = 4;
+	optional uint64 filter_match_id = 4;
 	optional uint32 filter_start_time = 5;
 	optional uint32 filter_end_time = 6;
 	optional bool include_bench = 7;
@@ -251,7 +243,7 @@ message CMsgDOTAFantasyTeamStandingsRequest {
 	optional uint32 count = 2;
 	optional uint32 filter_start_time = 3;
 	optional uint32 filter_end_time = 4;
-	optional uint32 filter_match_id = 5;
+	optional uint64 filter_match_id = 5;
 	optional bool filter_last_match = 6;
 	optional bool filter_in_hall = 7;
 }
@@ -286,7 +278,7 @@ message CMsgDOTAFantasyPlayerScoreRequest {
 	optional uint32 player_account_id = 2;
 	optional uint32 filter_start_time = 3;
 	optional uint32 filter_end_time = 4;
-	optional uint32 filter_match_id = 5;
+	optional uint64 filter_match_id = 5;
 	optional bool filter_last_match = 6;
 }
 
@@ -310,7 +302,7 @@ message CMsgDOTAFantasyPlayerStandingsRequest {
 	optional uint32 role = 3;
 	optional uint32 filter_start_time = 4;
 	optional uint32 filter_end_time = 5;
-	optional uint32 filter_match_id = 6;
+	optional uint64 filter_match_id = 6;
 	optional bool filter_last_match = 7;
 }
 
@@ -462,7 +454,7 @@ message CMsgDOTAFantasyTeamRosterSwapResponse {
 		ERROR_UNSPECIFIED = 1;
 		ERROR_OWNER_NOT_IN_LEAGUE = 2;
 		ERROR_SLOTS_INVALID = 3;
-		ERROR_ROSTER_LOCKED = 4;
+		ERROR_SLOT_LOCKED = 4;
 	}
 
 	optional .CMsgDOTAFantasyTeamRosterSwapResponse.EResult result = 1 [default = SUCCESS];
@@ -547,6 +539,7 @@ message CMsgDOTAFantasyTeamRosterResponse {
 
 	optional .CMsgDOTAFantasyTeamRosterResponse.EResult result = 1 [default = SUCCESS];
 	repeated uint32 player_account_ids = 2;
+	repeated bool player_locked = 3;
 }
 
 message CMsgDOTAFantasyPlayerHisoricalStatsRequest {
@@ -682,7 +675,7 @@ message CMsgDOTAFantasyPlayerScoreDetailsRequest {
 
 message CMsgDOTAFantasyPlayerScoreDetailsResponse {
 	message PlayerMatchData {
-		optional uint32 match_id = 1;
+		optional uint64 match_id = 1;
 		optional uint32 series_id = 2;
 		optional uint32 series_num = 3;
 		optional uint32 series_type = 4;

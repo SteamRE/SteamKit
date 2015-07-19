@@ -60,7 +60,7 @@ namespace SteamKit2
             }
         }
 
-        private void Release(DisconnectedReason reason)
+        private void Release( bool userRequestedDisconnect )
         {
             lock (netLock)
             {
@@ -91,12 +91,9 @@ namespace SteamKit2
                 netFilter = null;
             }
 
-            connectionFree.Set();
+            OnDisconnected( new DisconnectedEventArgs( userRequestedDisconnect ) );
 
-            if (reason != DisconnectedReason.None)
-            {
-                OnDisconnected(reason);
-            }
+            connectionFree.Set();
         }
 
         private void ConnectCompleted(bool success)
@@ -106,13 +103,13 @@ namespace SteamKit2
             {
                 DebugLog.WriteLine("TcpConnection", "Connection request to {0} was cancelled", destination);
                 if (success) Shutdown();
-                Release(DisconnectedReason.None);
+                Release( userRequestedDisconnect: true );
                 return;
             }
             else if (!success)
             {
                 DebugLog.WriteLine("TcpConnection", "Timed out while connecting to {0}", destination);
-                Release(DisconnectedReason.ConnectionError);
+                Release( userRequestedDisconnect: false );
                 return;
             }
 
@@ -138,7 +135,7 @@ namespace SteamKit2
             catch (Exception ex)
             {
                 DebugLog.WriteLine("TcpConnection", "Exception while setting up connection to {0}: {1}", destination, ex);
-                Release(DisconnectedReason.ConnectionError);
+                Release( userRequestedDisconnect: false );
             }
         }
 
@@ -148,7 +145,7 @@ namespace SteamKit2
             if (cancellationToken.IsCancellationRequested)
             {
                 DebugLog.WriteLine("TcpConnection", "Connection to {0} cancelled by user", destination);
-                Release(DisconnectedReason.None);
+                Release( userRequestedDisconnect: true );
                 return;
             }
 
@@ -277,11 +274,11 @@ namespace SteamKit2
             // Thread is shutting down, ensure socket is shut down and disposed
             bool userShutdown = cancellationToken.IsCancellationRequested;
 
-            if (userShutdown)
+            if ( userShutdown )
             {
                 Shutdown();
             }
-            Release(userShutdown ? DisconnectedReason.RequestedByConsumer : DisconnectedReason.ConnectionError);
+            Release( userShutdown );
         }
 
         byte[] ReadPacket()

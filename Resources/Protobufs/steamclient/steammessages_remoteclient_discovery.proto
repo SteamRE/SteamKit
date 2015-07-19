@@ -62,7 +62,6 @@ message CMsgRemoteClientBroadcastStatus {
 	optional int32 ostype = 7 [default = 0];
 	optional bool is64bit = 8 [default = false];
 	repeated .CMsgRemoteClientBroadcastStatus.User users = 9;
-	optional uint32 remote_control_port = 10;
 	optional int32 euniverse = 11;
 	optional uint32 timestamp = 12;
 }

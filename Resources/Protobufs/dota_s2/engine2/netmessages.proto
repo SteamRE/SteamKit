@@ -1,4 +1,3 @@
-import "google/protobuf/descriptor.proto";
 import "networkbasetypes.proto";
 
 option cc_generic_services = false;
@@ -61,7 +60,6 @@ enum RequestPause_t {
 	RP_PAUSE = 0;
 	RP_UNPAUSE = 1;
 	RP_TOGGLEPAUSE = 2;
-	RP_BUGPAUSE = 3;
 }
 
 enum PrefetchType {
@@ -98,6 +96,11 @@ enum Bidirectional_Messages {
 	bi_GameEvent = 18;
 }
 
+enum Bidirectional_Messages_LowFrequency {
+	bi_RelayInfo = 700;
+	bi_RelayPacket = 701;
+}
+
 message CCLCMsg_ClientInfo {
 	optional fixed32 send_table_crc = 1;
 	optional uint32 server_count = 2;
@@ -114,13 +117,19 @@ message CCLCMsg_Move {
 	optional bytes data = 3;
 }
 
-message CCLCMsg_VoiceData {
-	optional bytes data = 1;
-	optional fixed64 xuid = 2;
-	optional .VoiceDataFormat_t format = 3 [default = VOICEDATA_FORMAT_STEAM];
-	optional int32 sequence_bytes = 4;
-	optional uint32 section_number = 5;
+message CMsgVoiceAudio {
+	optional .VoiceDataFormat_t format = 1 [default = VOICEDATA_FORMAT_STEAM];
+	optional bytes voice_data = 2;
+	optional int32 sequence_bytes = 3;
+	optional uint32 section_number = 4;
+	optional uint32 sample_rate = 5;
 	optional uint32 uncompressed_sample_offset = 6;
+}
+
+message CCLCMsg_VoiceData {
+	optional .CMsgVoiceAudio audio = 1;
+	optional fixed64 xuid = 2;
+	optional uint32 tick = 3;
 }
 
 message CCLCMsg_BaselineAck {
@@ -173,6 +182,7 @@ message CCLCMsg_ServerPing {
 
 message CCLCMsg_RequestPause {
 	optional .RequestPause_t pause_type = 1 [default = RP_PAUSE];
+	optional int32 pause_group = 2;
 }
 
 message CCLCMsg_CmdKeyValues {
@@ -341,6 +351,7 @@ message CSVCMsg_PacketEntities {
 	optional bytes entity_data = 7;
 	optional bool pending_full_frame = 8;
 	optional uint32 active_spawngroup_handle = 9;
+	optional uint32 max_spawngroup_creationsequence = 10;
 }
 
 message CSVCMsg_TempEntities {
@@ -351,15 +362,14 @@ message CSVCMsg_TempEntities {
 
 message CSVCMsg_CreateStringTable {
 	optional string name = 1;
-	optional int32 max_entries = 2;
-	optional int32 num_entries = 3;
-	optional bool user_data_fixed_size = 4;
-	optional int32 user_data_size = 5;
-	optional int32 user_data_size_bits = 6;
-	optional int32 flags = 7;
-	optional bytes string_data = 8;
-	optional int32 uncompressed_size = 9;
-	optional bool data_compressed = 10;
+	optional int32 num_entries = 2;
+	optional bool user_data_fixed_size = 3;
+	optional int32 user_data_size = 4;
+	optional int32 user_data_size_bits = 5;
+	optional int32 flags = 6;
+	optional bytes string_data = 7;
+	optional int32 uncompressed_size = 8;
+	optional bool data_compressed = 9;
 }
 
 message CSVCMsg_UpdateStringTable {
@@ -369,15 +379,12 @@ message CSVCMsg_UpdateStringTable {
 }
 
 message CSVCMsg_VoiceData {
-	optional int32 client = 1;
-	optional bool proximity = 2;
-	optional fixed64 xuid = 3;
-	optional int32 audible_mask = 4;
-	optional bytes voice_data = 5;
-	optional .VoiceDataFormat_t format = 6 [default = VOICEDATA_FORMAT_STEAM];
-	optional int32 sequence_bytes = 7;
-	optional uint32 section_number = 8;
-	optional uint32 uncompressed_sample_offset = 9;
+	optional .CMsgVoiceAudio audio = 1;
+	optional int32 client = 2;
+	optional bool proximity = 3;
+	optional fixed64 xuid = 4;
+	optional int32 audible_mask = 5;
+	optional uint32 tick = 6;
 }
 
 message CSVCMsg_PacketReliable {
@@ -403,9 +410,12 @@ message CMsgIPCAddress {
 }
 
 message CMsgServerPeer {
-	optional int32 clientid = 1;
+	optional int32 player_slot = 1;
 	optional fixed64 steamid = 2;
 	optional .CMsgIPCAddress ipc = 3;
+	optional bool they_hear_you = 4;
+	optional bool you_hear_them = 5;
+	optional bool is_listenserver_host = 6;
 }
 
 message CSVCMsg_PeerList {
@@ -432,12 +442,13 @@ message ProtoFlattenedSerializerField_t {
 message ProtoFlattenedSerializer_t {
 	optional int32 serializer_name_sym = 1;
 	optional int32 serializer_version = 2;
-	repeated .ProtoFlattenedSerializerField_t fields = 3;
+	repeated int32 fields_index = 3;
 }
 
 message CSVCMsg_FlattenedSerializer {
 	repeated .ProtoFlattenedSerializer_t serializers = 1;
 	repeated string symbols = 2;
+	repeated .ProtoFlattenedSerializerField_t fields = 3;
 }
 
 message CSVCMsg_StopSound {
@@ -453,5 +464,42 @@ message CBidirMsg_RebroadcastGameEvent {
 
 message CBidirMsg_RebroadcastSource {
 	optional int32 eventsource = 1;
+}
+
+message SerializedNetAddress_t {
+	required bytes serializedAddress = 1;
+}
+
+message CBidirMsg_RelayInfo {
+	enum Operation_t {
+		RIO_REQUEST_RELAY = 0;
+		RIO_WILL_RELAY = 1;
+		RIO_NO_ROUTE = 2;
+		RIO_REJECT_RELAY = 3;
+		RIO_ESTABLISH_CONNECTION = 4;
+	}
+
+	required .CBidirMsg_RelayInfo.Operation_t operation = 1 [default = RIO_REQUEST_RELAY];
+	optional .SerializedNetAddress_t serializedTargetAddress = 2;
+	optional uint32 additionalHops = 3;
+}
+
+message SignedPayload_t {
+	required bytes payloadData = 1;
+	required uint32 signature = 2;
+	required bool bPayloadEncrypted = 3;
+}
+
+message CBidirMsg_RelayPacket {
+	message SignedDestinationAddress_t {
+		required .SerializedNetAddress_t serializedAddr = 1;
+		required uint32 signature = 2;
+		optional bytes encryptedPayloadKey = 3;
+	}
+
+	required uint32 prevhopcount = 1;
+	required .SerializedNetAddress_t originalSender = 2;
+	required .SignedPayload_t signedPayload = 3;
+	repeated .CBidirMsg_RelayPacket.SignedDestinationAddress_t recipientList = 4;
 }
 

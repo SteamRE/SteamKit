@@ -51,6 +51,7 @@
 			this.listViewContainerPanel = new System.Windows.Forms.Panel();
 			this.itemsListView = new System.Windows.Forms.ListView();
 			this.itemExplorerTreeView = new System.Windows.Forms.TreeView();
+			this.automaticallySelectNewItemsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			sequenceColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			directionColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			messageColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -105,6 +106,7 @@
 			// 
 			this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openToolStripMenuItem,
+            this.automaticallySelectNewItemsToolStripMenuItem,
             this.exitToolStripMenuItem});
 			this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
 			this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
@@ -115,7 +117,7 @@
 			this.openToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("openToolStripMenuItem.Image")));
 			this.openToolStripMenuItem.Name = "openToolStripMenuItem";
 			this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-			this.openToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+			this.openToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
 			this.openToolStripMenuItem.Text = "&Open...";
 			this.openToolStripMenuItem.Click += new System.EventHandler(this.OnOpenToolStripMenuItemClick);
 			// 
@@ -123,7 +125,7 @@
 			// 
 			this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
 			this.exitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
-			this.exitToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+			this.exitToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
 			this.exitToolStripMenuItem.Text = "E&xit";
 			this.exitToolStripMenuItem.Click += new System.EventHandler(this.OnExitToolStripMenuItemClick);
 			// 
@@ -272,6 +274,14 @@
 			this.itemExplorerTreeView.Size = new System.Drawing.Size(455, 426);
 			this.itemExplorerTreeView.TabIndex = 0;
 			// 
+			// automaticallySelectNewItemsToolStripMenuItem
+			// 
+			this.automaticallySelectNewItemsToolStripMenuItem.CheckOnClick = true;
+			this.automaticallySelectNewItemsToolStripMenuItem.Name = "automaticallySelectNewItemsToolStripMenuItem";
+			this.automaticallySelectNewItemsToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
+			this.automaticallySelectNewItemsToolStripMenuItem.Text = "&Automatically select new items";
+			this.automaticallySelectNewItemsToolStripMenuItem.CheckedChanged += new System.EventHandler(this.OnAutomaticallySelectNewItemsCheckedChanged);
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -315,6 +325,7 @@
 		private System.Windows.Forms.RadioButton inRadioButton;
 		private System.Windows.Forms.RadioButton inOutRadioButton;
 		private System.Windows.Forms.Label label1;
+		private System.Windows.Forms.ToolStripMenuItem automaticallySelectNewItemsToolStripMenuItem;
 	}
 }
 

@@ -65,6 +65,7 @@ enum EStreamControlMessage {
 	k_EStreamControlSetBurstBitrate = 91;
 	k_EStreamControlSetHardwareBitrateCap = 92;
 	k_EStreamControlInputControllerStateHID = 93;
+	k_EStreamControlSetTargetBitrate = 94;
 }
 
 enum EStreamVersion {
@@ -462,6 +463,10 @@ message CSetTargetFramerateMsg {
 	optional uint32 framerate_denominator = 4;
 }
 
+message CSetTargetBitrateMsg {
+	required int32 bitrate = 1;
+}
+
 message COverlayEnabledMsg {
 	required bool enabled = 1;
 }
@@ -500,7 +505,8 @@ message CInputControllerStateHIDMsg {
 	optional uint32 input_mark = 1;
 	optional int32 controller_index = 2;
 	optional uint32 capabilities = 3;
-	optional bytes payload = 4;
+	optional bytes state_payload = 4;
+	optional bytes status_payload = 5;
 }
 
 message CInputControllerWirelessPresenceMsg {

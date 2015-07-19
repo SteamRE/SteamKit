@@ -310,9 +310,9 @@ namespace SteamKit2
         /// <summary>
         /// Called when the client is physically disconnected from Steam3.
         /// </summary>
-        protected override void OnClientDisconnected( bool consumerInitiated )
+        protected override void OnClientDisconnected( bool userInitiated )
         {
-            this.PostCallback( new DisconnectedCallback( consumerInitiated ) );
+            this.PostCallback( new DisconnectedCallback( userInitiated ) );
         }
 
 

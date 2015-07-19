@@ -277,12 +277,12 @@ namespace SteamKit2
         }
 
 
-
-        void Disconnected(object sender, DisconnectedEventArgs e)
+        
+        void Disconnected( object sender, DisconnectedEventArgs e )
         {
             ConnectedUniverse = EUniverse.Invalid;
 
-            steamClient.PostCallback( new DisconnectedCallback( consumerInitiated: e.Reason == DisconnectedReason.RequestedByConsumer ) );
+            steamClient.PostCallback( new DisconnectedCallback( e.UserInitiated ) );
         }
 
         void NetMsgReceived( object sender, NetMsgEventArgs e )

@@ -1501,6 +1501,52 @@ namespace SteamKit2.GC.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CBroadcast_PostGameDataFrame_Request")]
+  public partial class CBroadcast_PostGameDataFrame_Request : global::ProtoBuf.IExtensible
+  {
+    public CBroadcast_PostGameDataFrame_Request() {}
+    
+
+    private uint _appid = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"appid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint appid
+    {
+      get { return _appid; }
+      set { _appid = value; }
+    }
+
+    private ulong _steamid = default(ulong);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong steamid
+    {
+      get { return _steamid; }
+      set { _steamid = value; }
+    }
+
+    private ulong _broadcast_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"broadcast_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong broadcast_id
+    {
+      get { return _broadcast_id; }
+      set { _broadcast_id = value; }
+    }
+
+    private byte[] _frame_data = null;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"frame_data", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public byte[] frame_data
+    {
+      get { return _frame_data; }
+      set { _frame_data = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     [global::ProtoBuf.ProtoContract(Name=@"ESourceEngine", EnumPassthru=true)]
     public enum ESourceEngine
     {

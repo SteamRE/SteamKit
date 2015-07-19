@@ -1,0 +1,116 @@
+import "google/protobuf/descriptor.proto";
+import "steammessages_unified_base.steamclient.proto";
+
+message CInventory_GetInventory_Request {
+	optional uint32 appid = 1;
+	optional uint64 steamid = 2;
+}
+
+message CInventory_Response {
+	optional string etag = 1;
+	repeated uint64 removeditemids = 2;
+	optional string item_json = 3;
+	optional string itemdef_json = 4;
+	optional bytes ticket = 5;
+}
+
+message CInventory_ExchangeItem_Request {
+	optional uint32 appid = 1;
+	optional uint64 steamid = 2;
+	repeated uint64 materialsitemid = 3;
+	repeated uint32 materialsquantity = 4;
+	optional uint64 outputitemdefid = 5;
+}
+
+message CInventory_AddItem_Request {
+	optional uint32 appid = 1;
+	repeated uint64 itemdefid = 2;
+	repeated string itempropsjson = 3;
+	optional uint64 steamid = 4;
+}
+
+message CInventory_SafeModifyItem_Request {
+	optional uint32 appid = 1;
+	optional uint64 acctid = 2;
+	optional uint64 itemid = 3;
+	optional string itempropsjson = 4;
+}
+
+message CInventory_ConsumePlaytime_Request {
+	optional uint32 appid = 1;
+	optional uint64 itemdefid = 2;
+}
+
+message CInventory_GetItemDefs_Request {
+	optional uint32 appid = 1;
+	optional string modifiedsince = 2;
+	optional bool includeworkshop = 3;
+	repeated uint64 itemdefids = 4;
+	repeated uint64 workshopids = 5;
+}
+
+message CInventory_ConsumeItem_Request {
+	optional uint32 appid = 1;
+	optional uint64 itemid = 2;
+	optional uint32 quantity = 3;
+	optional string timestamp = 4;
+}
+
+message CInventory_DevSetNextDrop_Request {
+	optional uint32 appid = 1;
+	optional uint64 itemdefid = 2;
+	optional string droptime = 3;
+}
+
+message CInventory_SplitItemStack_Request {
+	optional uint32 appid = 1;
+	optional uint64 itemid = 2;
+	optional uint32 quantity = 3;
+	optional string timestamp = 4;
+}
+
+message CInventory_CombineItemStacks_Request {
+	optional uint32 appid = 1;
+	optional uint64 fromitemid = 2;
+	optional uint64 destitemid = 3;
+	optional uint32 quantity = 4;
+	optional string fromtimestamp = 5;
+	optional string desttimestamp = 6;
+}
+
+service Inventory {
+	option (service_description) = "A service that provides access to inventory";
+	rpc GetInventory (.CInventory_GetInventory_Request) returns (.CInventory_Response) {
+		option (method_description) = "Retrieves a users inventory as a big JSON blob";
+	}
+	rpc ExchangeItem (.CInventory_ExchangeItem_Request) returns (.CInventory_Response) {
+		option (method_description) = "Craft an item in a user's inventory";
+	}
+	rpc AddPromoItem (.CInventory_AddItem_Request) returns (.CInventory_Response) {
+		option (method_description) = "Adds a promo item to a user's inventory";
+	}
+	rpc SafeModifyItem (.CInventory_SafeModifyItem_Request) returns (.CInventory_Response) {
+		option (method_description) = "Modify an item in a user's inventory (safe properties only)";
+	}
+	rpc ConsumePlaytime (.CInventory_ConsumePlaytime_Request) returns (.CInventory_Response) {
+		option (method_description) = "Consumes playtime and possibly returns a granted item";
+	}
+	rpc GetItemDefs (.CInventory_GetItemDefs_Request) returns (.CInventory_Response) {
+		option (method_description) = "Get item definitions";
+	}
+	rpc ConsumeItem (.CInventory_ConsumeItem_Request) returns (.CInventory_Response) {
+		option (method_description) = "Consume an item";
+	}
+	rpc DevGenerateItem (.CInventory_AddItem_Request) returns (.CInventory_Response) {
+		option (method_description) = "Grant an item when in developer mode";
+	}
+	rpc DevSetNextDrop (.CInventory_DevSetNextDrop_Request) returns (.CInventory_Response) {
+		option (method_description) = "Consume an item";
+	}
+	rpc SplitItemStack (.CInventory_SplitItemStack_Request) returns (.CInventory_Response) {
+		option (method_description) = "Split an item stack into two stacks";
+	}
+	rpc CombineItemStacks (.CInventory_CombineItemStacks_Request) returns (.CInventory_Response) {
+		option (method_description) = "Combine two stacks of items";
+	}
+}

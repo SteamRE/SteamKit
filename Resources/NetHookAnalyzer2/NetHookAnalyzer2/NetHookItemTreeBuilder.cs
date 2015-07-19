@@ -1,5 +1,12 @@
-﻿using System.Windows.Forms;
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
+using System.Windows.Forms;
 using SteamKit2.Internal;
+using System.Linq;
+using System;
+using ProtoBuf.Meta;
+using SteamKit2;
 
 namespace NetHookAnalyzer2
 {
@@ -11,6 +18,13 @@ namespace NetHookAnalyzer2
 		}
 
 		readonly NetHookItem item;
+
+
+		public ISpecialization[] Specializations
+		{
+			get;
+			set;
+		}
 
 		TreeNode Node { get; set; }
 
@@ -25,63 +39,78 @@ namespace NetHookAnalyzer2
 			return Node;
 		}
 
-		public void CreateTreeNode()
+		void CreateTreeNode()
 		{
-			Node = new TreeNode();
+			try
+			{
+				Node = CreateTreeNodeCore();
+			}
+			catch (Exception ex)
+			{
+				Node = new TreeNode(null, new[] { new TreeNode(string.Format("{0} encountered whilst parsing item: {1}", ex.GetType().Name, ex.Message)) });
+			}
+		}
+
+		TreeNode CreateTreeNodeCore()
+		{
+			var node = new TreeNode();
 
 			using (var stream = item.OpenStream())
 			{
 				var rawEMsg = PeekUInt(stream);
 
-				Node.Nodes.Add(BuildInfoNode(rawEMsg));
+				node.Nodes.Add(BuildInfoNode(rawEMsg));
 
 				var header = ReadHeader(rawEMsg, stream);
-				Node.Nodes.Add(BuildHeaderNode(header));
+				node.Nodes.Add(new TreeNodeObjectExplorer("Header", header).TreeNode);
 
 				var body = ReadBody(rawEMsg, stream, header);
-				Node.Nodes.Add(BuildBodyNode(body));
+				var bodyNode = new TreeNodeObjectExplorer("Body", body).TreeNode;
+				node.Nodes.Add(bodyNode);
 
 				var payload = ReadPayload(stream);
 				if (payload != null && payload.Length > 0)
 				{
-					Node.Nodes.Add(BuildPayloadNode(payload));
+					node.Nodes.Add(new TreeNodeObjectExplorer("Payload", payload).TreeNode);
 				}
 
-				var nodeCount = Node.Nodes.Count;
-				BuildSpecializations(body);
-
-				var hasSpecializations = Node.Nodes.Count > nodeCount;
-				if (hasSpecializations)
+				if (Specializations != null)
 				{
-					// Hide the 'normal' nodes
-					for (int i = 0; i < nodeCount; i++)
+					var objectsToSpecialize = new[] { body };
+					while (objectsToSpecialize.Any())
 					{
-						var node = Node.Nodes[i];
-						SetNodeExpandByDefault(node, false);
+						var specializations = objectsToSpecialize.SelectMany(o => Specializations.SelectMany(x => x.ReadExtraObjects(o)));
+
+						if (!specializations.Any())
+						{
+							break;
+						}
+
+						bodyNode.Collapse(ignoreChildren: true);
+
+						var extraNodes = specializations.Select(x => new TreeNodeObjectExplorer(x.Key, x.Value).TreeNode).ToArray();
+						node.Nodes.AddRange(extraNodes);
+
+						// Let the specializers examine any new message objects.
+						objectsToSpecialize = specializations.Select(x => x.Value).ToArray();
 					}
 				}
 			}
+
+			return node;
 		}
 
-		void BuildSpecializations(object body)
+		static TreeNode BuildInfoNode(uint rawEMsg)
 		{
-			var gcBody = body as CMsgGCClient;
-			if (gcBody != null)
-			{
-				Node.Nodes.Add(BuildGCBodyNode(gcBody));
-			}
+			var eMsg = MsgUtil.GetMsg(rawEMsg);
 
-			var serviceMethodBody = body as CMsgClientServiceMethod;
-			if (serviceMethodBody != null)
-			{
-				Node.Nodes.Add(BuildServiceMethodBodyNode(serviceMethodBody));
-			}
+			var eMsgExplorer = new TreeNodeObjectExplorer("EMsg", eMsg);
 
-			var serviceMethodResponseBody = body as CMsgClientServiceMethodResponse;
-			if (serviceMethodResponseBody != null)
+			return new TreeNode("Info", new[] 
 			{
-				Node.Nodes.Add(BuildServiceMethodResponseBodyNode(serviceMethodResponseBody));
-			}
+				eMsgExplorer.TreeNode,
+				new TreeNodeObjectExplorer("Is Protobuf", MsgUtil.IsProtoBuf(rawEMsg)).TreeNode
+			});
 		}
 	}
 }

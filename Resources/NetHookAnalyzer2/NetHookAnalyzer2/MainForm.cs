@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Windows.Forms;
+using NetHookAnalyzer2.Specializations;
 using WinForms = System.Windows.Forms;
 
 namespace NetHookAnalyzer2
@@ -20,9 +20,28 @@ namespace NetHookAnalyzer2
 			RepopulateInterface();
 
 			itemsListView.ListViewItemSorter = new NetHookListViewItemSequentialComparer();
+			specializations = LoadMessageObjectSpecializations();
 		}
 
 		IDisposable itemsListViewFirstColumnHiderDisposable;
+		FileSystemWatcher folderWatcher;
+		readonly ISpecialization[] specializations;
+
+		static ISpecialization[] LoadMessageObjectSpecializations()
+		{
+			return new ISpecialization[]
+			{
+				new ClientServiceMethodSpecialization(),
+				new ClientServiceMethodResponseSpecialization(),
+				new GCGenericSpecialization()
+				{
+					GameCoordinatorSpecializations = new[]
+					{
+						new Dota2SOMultipleObjectsGCSpecialization(),
+					}
+				}
+			};
+		}
 
 		protected override void OnFormClosed(FormClosedEventArgs e)
 		{
@@ -30,6 +49,12 @@ namespace NetHookAnalyzer2
 			{
 				itemsListViewFirstColumnHiderDisposable.Dispose();
 				itemsListViewFirstColumnHiderDisposable = null;
+			}
+
+			if (folderWatcher != null)
+			{
+				folderWatcher.Dispose();
+				folderWatcher = null;
 			}
 
 			base.OnFormClosed(e);
@@ -138,6 +163,13 @@ namespace NetHookAnalyzer2
 				itemsListView.Select();
 				itemsListView.Items[0].Selected = true;
 			}
+
+			InitializeFileSystemWatcher(dumpDirectory);
+
+			if (automaticallySelectNewItemsToolStripMenuItem.Checked)
+			{
+				SelectLastItem();
+			}
 		}
 
 		void OnDirectionFilterCheckedChanged(object sender, EventArgs e)
@@ -183,6 +215,94 @@ namespace NetHookAnalyzer2
 
 		#endregion
 
+		#region FileSystem Watcher
+
+		void InitializeFileSystemWatcher(string path)
+		{
+			if (folderWatcher != null)
+			{
+				folderWatcher.Dispose();
+			}
+
+			folderWatcher = new FileSystemWatcher(path, "*.bin");
+			folderWatcher.BeginInit();
+
+			folderWatcher.Changed += OnFolderWatcherChanged;
+			folderWatcher.Created += OnFolderWatcherCreated;
+			folderWatcher.Deleted += OnFolderWatcherDeleted;
+			folderWatcher.EnableRaisingEvents = true;
+			folderWatcher.IncludeSubdirectories = false;
+			folderWatcher.SynchronizingObject = this;
+
+			folderWatcher.EndInit();
+		}
+
+		void OnFolderWatcherChanged(object sender, FileSystemEventArgs e)
+		{
+			var item = Dump.Items.SingleOrDefault(x => x.FileInfo.FullName == e.FullPath);
+			if (item == null)
+			{
+				return;
+			}
+
+			if (itemsListView.SelectedItems.Count == 0)
+			{
+				return;
+			}
+
+			foreach (var selectedItem in itemsListView.SelectedItems.Cast<ListViewItem>())
+			{
+				var tag = selectedItem.GetNetHookItem();
+				if (tag == null)
+				{
+					continue;
+				}
+
+				if (tag != item)
+				{
+					continue;
+				}
+
+				RepopulateTreeView();
+			}
+		}
+
+		void OnFolderWatcherCreated(object sender, FileSystemEventArgs e)
+		{
+			var item = Dump.AddItemFromPath(e.FullPath);
+			if (item == null)
+			{
+				return;
+			}
+
+			var listViewItem = item.AsListViewItem();
+			itemsListView.Items.Add(listViewItem);
+
+			if (automaticallySelectNewItemsToolStripMenuItem.Checked)
+			{
+				SelectLastItem();
+			}
+		}
+
+		void OnFolderWatcherDeleted(object sender, FileSystemEventArgs e)
+		{
+			var item = Dump.RemoveItemWithPath(e.FullPath);
+			if (item == null)
+			{
+				return;
+			}
+
+			var listViewItem = itemsListView.Items.Cast<ListViewItem>().SingleOrDefault(x => x.Tag == item);
+			if (listViewItem == null)
+			{
+				return;
+			}
+
+			itemsListView.Items.Remove(listViewItem);
+		}
+
+		#endregion
+
 		ListViewItem selectedListViewItem;
 
 		void OnItemsListViewSelectedIndexChanged(object sender, EventArgs e)
@@ -214,27 +334,39 @@ namespace NetHookAnalyzer2
 			}
 
 			itemExplorerTreeView.Nodes.Clear();
-			itemExplorerTreeView.Nodes.AddRange(item.BuildTree().Nodes.Cast<TreeNode>().ToArray());
-			RecursiveExpandNodes(itemExplorerTreeView.Nodes.Cast<TreeNode>());
+			itemExplorerTreeView.Nodes.AddRange(BuildTree(item).Nodes.Cast<TreeNode>().ToArray());
 			itemExplorerTreeView.Nodes[0].EnsureVisible(); // Scroll to top
 		}
 
-		static void RecursiveExpandNodes(IEnumerable<TreeNode> nodes)
+		TreeNode BuildTree(NetHookItem item)
 		{
-			foreach (var node in nodes)
-			{
-				var shouldExpand = true;
-				if (node.Tag != null)
-				{
-					var expansionInfo = (NetHookItemTreeBuilder.NodeInfo)node.Tag;
-					shouldExpand = expansionInfo.ShouldExpandByDefault;
-				}
+			return new NetHookItemTreeBuilder(item) { Specializations = specializations }.BuildTree();
+		}
 
-				if (shouldExpand)
-				{
-					RecursiveExpandNodes(node.Nodes.Cast<TreeNode>());
-					node.Expand();
-				}
+		void OnAutomaticallySelectNewItemsCheckedChanged(object sender, EventArgs e)
+		{
+			if (!automaticallySelectNewItemsToolStripMenuItem.Checked)
+			{
+				return;
+			}
+
+			SelectLastItem();
+		}
+
+		void SelectLastItem()
+		{
+
+			if (itemsListView.Items.Count == 0)
+			{
+				return;
+			}
+
+			var lastItem = itemsListView.Items[itemsListView.Items.Count - 1];
+			if (!lastItem.Selected)
+			{
+				lastItem.Selected = true;
+				lastItem.Focused = true;
+				lastItem.EnsureVisible();
 			}
 		}
 	}

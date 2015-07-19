@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{2377CE3F-6862-4C1F-B7B7-91D54DA609FC}</ProjectGuid>
+    <ProjectGuid>{CEF39496-576D-4A70-9A06-16112B84B79F}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Sample1_Logon</RootNamespace>
@@ -50,7 +50,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\SteamKit2\SteamKit2\SteamKit2.csproj">
       <Project>{BEB5BF07-BB56-402A-97A3-A41C6444C6A5}</Project>
-      <Name>SteamKit2 %28SteamKit2\SteamKit2%29</Name>
+      <Name>SteamKit2</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

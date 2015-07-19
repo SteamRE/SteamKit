@@ -27,6 +27,16 @@ namespace SteamKit2
         }
     }
 
+    class DisconnectedEventArgs : EventArgs
+    {
+        public bool UserInitiated { get; private set; }
+
+        public DisconnectedEventArgs( bool userInitiated )
+        {
+            this.UserInitiated = userInitiated;
+        }
+    }
+
     class NetFilterEncryption
     {
         byte[] sessionKey;
@@ -56,28 +66,6 @@ namespace SteamKit2
         public byte[] ProcessOutgoing( byte[] ms )
         {
             return CryptoHelper.SymmetricEncrypt( ms, sessionKey );
-        }
-    }
-
-    enum DisconnectedReason
-    {
-        None,
-        RequestedByConsumer,
-        ConnectionError
-    }
-
-    class DisconnectedEventArgs : EventArgs
-    {
-        public DisconnectedEventArgs(DisconnectedReason reason)
-        {
-            this.reason = reason;
-        }
-
-        readonly DisconnectedReason reason;
-
-        public DisconnectedReason Reason
-        {
-            get { return reason; }
         }
     }
 
@@ -119,10 +107,10 @@ namespace SteamKit2
         /// Occurs when the physical connection is broken.
         /// </summary>
         public event EventHandler<DisconnectedEventArgs> Disconnected;
-        protected void OnDisconnected( DisconnectedReason reason )
+        protected void OnDisconnected( DisconnectedEventArgs e )
         {
             if ( Disconnected != null )
-                Disconnected( this, new DisconnectedEventArgs( reason ) );
+                Disconnected( this, e );
         }
 
         /// <summary>

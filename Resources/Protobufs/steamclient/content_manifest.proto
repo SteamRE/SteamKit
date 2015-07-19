@@ -17,6 +17,7 @@ message ContentManifestPayload {
 		optional bytes sha_filename = 4;
 		optional bytes sha_content = 5;
 		repeated .ContentManifestPayload.FileMapping.ChunkData chunks = 6;
+		optional string linktarget = 7;
 	}
 
 	repeated .ContentManifestPayload.FileMapping mappings = 1;

@@ -66,6 +66,8 @@ enum ECstrike15UserMessages {
 	CS_UM_RoundBackupFilenames = 62;
 	CS_UM_SendPlayerItemFound = 63;
 	CS_UM_ReportHit = 64;
+	CS_UM_XpUpdate = 65;
+	CS_UM_QuestProgress = 66;
 }
 
 message CCSUsrMsg_VGUIMenu {
@@ -289,6 +291,12 @@ message CCSUsrMsg_DisplayInventory {
 	optional int32 user_id = 2;
 }
 
+message CCSUsrMsg_QuestProgress {
+	optional uint32 quest_id = 1;
+	optional uint32 normal_points = 2;
+	optional uint32 bonus_points = 3;
+}
+
 message CCSUsrMsg_XRankGet {
 	optional int32 mode_idx = 1;
 	optional int32 controller = 2;
@@ -348,6 +356,10 @@ message CCSUsrMsg_ServerRankUpdate {
 	}
 
 	repeated .CCSUsrMsg_ServerRankUpdate.RankUpdate rank_update = 1;
+}
+
+message CCSUsrMsg_XpUpdate {
+	optional .CMsgGCCstrike15_v2_GC2ServerNotifyXPRewarded data = 1;
 }
 
 message CCSUsrMsg_ItemPickup {

@@ -1,4 +1,3 @@
-import "google/protobuf/descriptor.proto";
 import "networkbasetypes.proto";
 
 option optimize_for = SPEED;
@@ -15,8 +14,8 @@ enum EBaseGameEvents {
 	GE_Source1LegacyGameEvent = 207;
 	GE_SosStartSoundEvent = 208;
 	GE_SosStopSoundEvent = 209;
-	GE_SosSetSoundEventParam = 210;
-	GE_SosSetLibraryStackField = 211;
+	GE_SosSetSoundEventParams = 210;
+	GE_SosSetLibraryStackFields = 211;
 	GE_SosStopSoundEventHash = 212;
 }
 
@@ -56,8 +55,18 @@ message CMsgClearDecalsForSkeletonInstanceEvent {
 }
 
 message CMsgSource1LegacyGameEventList {
-	optional uint32 count = 1;
-	optional bytes data = 2;
+	message key_t {
+		optional int32 type = 1;
+		optional string name = 2;
+	}
+
+	message descriptor_t {
+		optional int32 eventid = 1;
+		optional string name = 2;
+		repeated .CMsgSource1LegacyGameEventList.key_t keys = 3;
+	}
+
+	repeated .CMsgSource1LegacyGameEventList.descriptor_t descriptors = 1;
 }
 
 message CMsgSource1LegacyListenEvents {
@@ -66,7 +75,20 @@ message CMsgSource1LegacyListenEvents {
 }
 
 message CMsgSource1LegacyGameEvent {
-	optional bytes data = 1;
+	message key_t {
+		optional int32 type = 1;
+		optional string val_string = 2;
+		optional float val_float = 3;
+		optional int32 val_long = 4;
+		optional int32 val_short = 5;
+		optional int32 val_byte = 6;
+		optional bool val_bool = 7;
+		optional uint64 val_uint64 = 8;
+	}
+
+	optional string event_name = 1;
+	optional int32 eventid = 2;
+	repeated .CMsgSource1LegacyGameEvent.key_t keys = 3;
 }
 
 message CMsgSosStartSoundEvent {
@@ -74,6 +96,7 @@ message CMsgSosStartSoundEvent {
 	optional fixed32 soundevent_hash = 2;
 	optional int32 source_entity_index = 3;
 	optional int32 seed = 4;
+	optional bytes packed_params = 5;
 }
 
 message CMsgSosStopSoundEvent {
@@ -85,17 +108,13 @@ message CMsgSosStopSoundEventHash {
 	optional int32 source_entity_index = 2;
 }
 
-message CMsgSosSetSoundEventParam {
+message CMsgSosSetSoundEventParams {
 	optional int32 soundevent_guid = 1;
-	optional fixed32 opfield_hash = 2;
-	optional bytes data = 3;
-	optional int32 index = 4;
+	optional bytes packed_params = 5;
 }
 
-message CMsgSosSetLibraryStackField {
+message CMsgSosSetLibraryStackFields {
 	optional fixed32 stack_hash = 1;
-	optional fixed32 opfield_hash = 2;
-	optional bytes data = 3;
-	optional int32 index = 4;
+	optional bytes packed_fields = 5;
 }
 

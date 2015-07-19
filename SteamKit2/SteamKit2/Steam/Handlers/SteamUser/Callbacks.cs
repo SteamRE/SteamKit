@@ -172,7 +172,7 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// This callback is returned in response to a log off attempt, or when the client is told to log off by the server.
+        /// This callback is returned when the client is told to log off by the server.
         /// </summary>
         public sealed class LoggedOffCallback : CallbackMsg
         {

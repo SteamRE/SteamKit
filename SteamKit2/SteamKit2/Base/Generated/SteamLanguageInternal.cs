@@ -1746,6 +1746,40 @@ namespace SteamKit2.Internal
 		}
 	}
 
+	public class MsgClientChatRoomInfo : ISteamSerializableMessage
+	{
+		public EMsg GetEMsg() { return EMsg.ClientChatRoomInfo; }
+
+		// Static size: 8
+		private ulong steamIdChat;
+		public SteamID SteamIdChat { get { return new SteamID( steamIdChat ); } set { steamIdChat = value.ConvertToUInt64(); } }
+		// Static size: 4
+		public EChatInfoType Type { get; set; }
+
+		public MsgClientChatRoomInfo()
+		{
+			steamIdChat = 0;
+			Type = 0;
+		}
+
+		public void Serialize(Stream stream)
+		{
+			BinaryWriter bw = new BinaryWriter( stream );
+
+			bw.Write( steamIdChat );
+			bw.Write( (int)Type );
+
+		}
+
+		public void Deserialize( Stream stream )
+		{
+			BinaryReader br = new BinaryReader( stream );
+
+			steamIdChat = br.ReadUInt64();
+			Type = (EChatInfoType)br.ReadInt32();
+		}
+	}
+
 	public class MsgClientGetNumberOfCurrentPlayers : ISteamSerializableMessage
 	{
 		public EMsg GetEMsg() { return EMsg.ClientGetNumberOfCurrentPlayers; }

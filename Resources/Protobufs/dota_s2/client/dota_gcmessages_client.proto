@@ -1,7 +1,6 @@
 import "steammessages.proto";
 import "dota_gcmessages_common.proto";
 import "gcsdk_gcmessages.proto";
-import "dota_gcmessages_client_fantasy.proto";
 
 option optimize_for = SPEED;
 option cc_generic_services = false;
@@ -68,6 +67,14 @@ enum DOTAChatChannelType_t {
 	DOTAChannelType_Team = 4;
 	DOTAChannelType_Guild = 5;
 	DOTAChannelType_Fantasy = 6;
+	DOTAChannelType_Whisper = 7;
+	DOTAChannelType_Console = 8;
+	DOTAChannelType_Tab = 9;
+	DOTAChannelType_Invalid = 10;
+	DOTAChannelType_GameAll = 11;
+	DOTAChannelType_GameAllies = 12;
+	DOTAChannelType_GameSpectator = 13;
+	DOTAChannelType_GameCoaching = 14;
 }
 
 enum DOTA_WatchReplayType {
@@ -181,6 +188,55 @@ enum EItemEditorReservationResult {
 	k_EItemEditorReservationResult_TimedOut = 4;
 }
 
+enum EProfileCardSlotType {
+	k_EProfileCardSlotType_Empty = 0;
+	k_EProfileCardSlotType_Stat = 1;
+	k_EProfileCardSlotType_Trophy = 2;
+	k_EProfileCardSlotType_Item = 3;
+	k_EProfileCardSlotType_Hero = 4;
+	k_EProfileCardSlotType_Emoticon = 5;
+}
+
+enum EFeaturedHeroTextField {
+	k_EFeaturedHeroTextField_NewHero = 0;
+	k_EFeaturedHeroTextField_NewItem = 1;
+	k_EFeaturedHeroTextField_ItemSetDescription = 2;
+	k_EFeaturedHeroTextField_ItemDescription = 3;
+	k_EFeaturedHeroTextField_Hype = 4;
+	k_EFeaturedHeroTextField_HeroWinLoss = 5;
+	k_EFeaturedHeroTextField_FrequentlyPlayedHero = 6;
+	k_EFeaturedHeroTextField_FeaturedItem = 7;
+	k_EFeaturedHeroTextField_PopularItem = 8;
+	k_EFeaturedHeroTextField_SaleItem = 9;
+	k_EFeaturedHeroTextField_SaleDiscount = 10;
+	k_EFeaturedHeroTextField_Container = 11;
+}
+
+enum EFeaturedHeroDataType {
+	k_EFeaturedHeroDataType_HeroID = 0;
+	k_EFeaturedHeroDataType_ItemDef = 1;
+	k_EFeaturedHeroDataType_HypeString = 2;
+	k_EFeaturedHeroDataType_StartTimestamp = 3;
+	k_EFeaturedHeroDataType_ExpireTimestamp = 4;
+	k_EFeaturedHeroDataType_HeroWins = 5;
+	k_EFeaturedHeroDataType_HeroLosses = 6;
+	k_EFeaturedHeroDataType_SaleDiscount = 7;
+	k_EFeaturedHeroDataType_ContainerItemDef = 8;
+}
+
+enum EDOTAGroupMergeResult {
+	k_EDOTAGroupMergeResult_OK = 0;
+	k_EDOTAGroupMergeResult_FAILED_GENERIC = 1;
+	k_EDOTAGroupMergeResult_NOT_LEADER = 2;
+	k_EDOTAGroupMergeResult_TOO_MANY_PLAYERS = 3;
+	k_EDOTAGroupMergeResult_TOO_MANY_COACHES = 4;
+	k_EDOTAGroupMergeResult_ENGINE_MISMATCH = 5;
+	k_EDOTAGroupMergeResult_NO_SUCH_GROUP = 6;
+	k_EDOTAGroupMergeResult_OTHER_GROUP_NOT_OPEN = 7;
+	k_EDOTAGroupMergeResult_ALREADY_INVITED = 8;
+	k_EDOTAGroupMergeResult_NOT_INVITED = 9;
+}
+
 message CMsgStartFindingMatch {
 	optional string key = 1;
 	optional uint32 matchgroups = 2 [default = 4294967295];
@@ -235,6 +291,14 @@ message CSourceTVGame {
 	optional .DOTA_GameMode game_mode = 21 [default = DOTA_GAMEMODE_NONE];
 	optional uint32 lobby_type = 22;
 	optional uint64 custom_game_id = 24;
+	optional uint32 average_rank = 25;
+	optional uint32 radiant_kills = 26;
+	optional uint32 dire_kills = 27;
+	optional uint32 barracks_state = 28;
+	optional uint64 group_id = 29;
+	optional uint32 sort_score = 30;
+	optional uint32 engine = 31;
+	optional uint32 broadcast_delay = 32;
 }
 
 message CMsgSourceTVGamesResponse {
@@ -250,6 +314,63 @@ message CMsgFindSourceTVGames {
 	optional uint32 heroid = 5;
 	optional bool team_game = 6;
 	optional uint64 custom_game_id = 10;
+}
+
+message CMsgClientToGCFindTopSourceTVGames {
+	optional string search_key = 1;
+	optional uint32 league_id = 2;
+	optional uint32 hero_id = 3;
+	optional uint32 start_game = 4;
+	optional uint32 game_list_index = 5;
+	repeated uint64 lobby_ids = 6;
+}
+
+message CMsgGCToClientFindTopSourceTVGamesResponse {
+	optional string search_key = 1;
+	optional uint32 league_id = 2;
+	optional uint32 hero_id = 3;
+	optional uint32 start_game = 4;
+	optional uint32 num_games = 5;
+	optional uint32 game_list_index = 6;
+	repeated .CSourceTVGame game_list = 7;
+	optional bool specific_games = 8;
+}
+
+message CMsgClientToGCTopLeagueMatchesRequest {
+}
+
+message CMsgClientToGCTopFriendMatchesRequest {
+}
+
+message CMsgClientToGCTopPubMatchesRequest {
+}
+
+message CMsgGCToClientTopMatchesResponse {
+	enum Type {
+		LEAGUES = 1;
+		FRIENDS = 2;
+		PUBS = 3;
+	}
+
+	optional .CMsgGCToClientTopMatchesResponse.Type type = 1 [default = LEAGUES];
+	repeated .CMsgDOTAMatch matches = 2;
+}
+
+message CMsgClientToGCFindTopMatches {
+	optional uint32 start_game = 1;
+	optional uint32 league_id = 2;
+	optional uint32 hero_id = 3;
+	optional uint32 friend_id = 4;
+	optional bool friend_list = 5;
+	optional bool league_list = 6;
+}
+
+message CMsgGCToClientFindTopLeagueMatchesResponse {
+	optional uint32 start_game = 1;
+	optional uint32 league_id = 2;
+	optional uint32 hero_id = 3;
+	repeated uint32 match_ids = 4;
+	repeated .CMsgDOTAMatch matches = 5;
 }
 
 message CMsgSpectateFriendGame {
@@ -295,6 +416,10 @@ message CMsgPracticeLobbySetDetails {
 	optional string custom_map_name = 27;
 	optional uint32 custom_difficulty = 28;
 	optional uint64 custom_game_id = 29;
+	optional uint32 custom_min_players = 30;
+	optional uint32 custom_max_players = 31;
+	optional uint32 lan_host_ping_to_server_region = 32;
+	optional .DOTALobbyVisibility visibility = 33 [default = DOTALobbyVisibility_Public];
 }
 
 message CMsgPracticeLobbyCreate {
@@ -318,7 +443,7 @@ message CMsgPracticeLobbyCreate {
 message CMsgPracticeLobbySetTeamSlot {
 	optional .DOTA_GC_TEAM team = 1 [default = DOTA_GC_TEAM_GOOD_GUYS];
 	optional uint32 slot = 2;
-	optional .DOTABotDifficulty bot_difficulty = 3 [default = BOT_DIFFICULTY_INVALID];
+	optional .DOTABotDifficulty bot_difficulty = 3 [default = BOT_DIFFICULTY_PASSIVE];
 }
 
 message CMsgPracticeLobbySetCoach {
@@ -332,11 +457,19 @@ message CMsgPracticeLobbyJoinBroadcastChannel {
 	optional string preferred_language_code = 4;
 }
 
+message CMsgPracticeLobbyCloseBroadcastChannel {
+	optional uint32 channel = 1;
+}
+
 message CMsgPracticeLobbyToggleBroadcastChannelCameramanStatus {
 }
 
 message CMsgPracticeLobbyKick {
 	optional uint32 account_id = 3;
+}
+
+message CMsgPracticeLobbyKickFromTeam {
+	optional uint32 account_id = 1;
 }
 
 message CMsgPracticeLobbyLeave {
@@ -350,9 +483,14 @@ message CMsgApplyTeamToPracticeLobby {
 	optional uint32 team_id = 1;
 }
 
+message CMsgClearPracticeLobbyTeam {
+}
+
 message CMsgPracticeLobbyList {
 	optional bool tournament_games = 1;
 	optional string pass_key = 2;
+	optional uint32 region = 3;
+	optional .DOTA_GameMode game_mode = 4 [default = DOTA_GAMEMODE_NONE];
 }
 
 message CMsgPracticeLobbyListResponseEntry {
@@ -371,11 +509,27 @@ message CMsgPracticeLobbyListResponseEntry {
 	optional uint64 guild_logo = 9;
 	optional string name = 10;
 	optional string custom_game_mode = 11;
+	optional .DOTA_GameMode game_mode = 12 [default = DOTA_GAMEMODE_NONE];
+	optional bool friend_present = 13;
+	optional uint32 players = 14;
+	optional string custom_map_name = 15;
+	optional uint32 max_player_count = 16;
+	optional uint32 server_region = 17;
+	optional uint32 lan_host_ping_to_server_region = 18;
 }
 
 message CMsgPracticeLobbyListResponse {
 	optional bool tournament_games = 1;
 	repeated .CMsgPracticeLobbyListResponseEntry lobbies = 2;
+}
+
+message CMsgLobbyList {
+	optional uint32 server_region = 1 [default = 0];
+	optional .DOTA_GameMode game_mode = 2 [default = DOTA_GAMEMODE_NONE];
+}
+
+message CMsgLobbyListResponse {
+	repeated .CMsgPracticeLobbyListResponseEntry lobbies = 1;
 }
 
 message CMsgPracticeLobbyJoin {
@@ -430,6 +584,11 @@ message CMsgJoinableCustomLobbiesResponseEntry {
 	optional uint32 member_count = 4;
 	optional uint32 leader_account_id = 5;
 	optional string leader_name = 6;
+	optional string custom_map_name = 7;
+	optional uint32 max_player_count = 8;
+	optional uint32 server_region = 9;
+	optional uint32 lan_host_ping_to_server_region = 10;
+	optional bool has_pass_key = 11;
 }
 
 message CMsgJoinableCustomLobbiesResponse {
@@ -437,9 +596,17 @@ message CMsgJoinableCustomLobbiesResponse {
 }
 
 message CMsgQuickJoinCustomLobby {
+	message RegionPing {
+		optional uint32 server_region = 1;
+		optional uint32 ping = 2;
+	}
+
 	optional uint32 server_region = 1;
 	optional uint64 custom_game_id = 2;
 	optional uint32 client_version = 3;
+	optional .CMsgPracticeLobbySetDetails create_lobby_details = 4;
+	optional bool allow_any_map = 5;
+	repeated .CMsgQuickJoinCustomLobby.RegionPing region_pings = 6;
 }
 
 message CMsgQuickJoinCustomLobbyResponse {
@@ -501,7 +668,7 @@ message CMsgDOTATournament {
 		optional uint32 good_team_seed = 12;
 		optional uint32 bad_team_seed = 13;
 		optional fixed64 lobby_id = 4;
-		optional uint32 match_id = 5;
+		optional uint64 match_id = 5;
 		optional string game_name = 6;
 		optional bool live_stream = 7;
 		optional string message = 9;
@@ -552,6 +719,11 @@ message CMsgDOTAClearTournamentGame {
 
 message CMsgDOTAMatch {
 	message Player {
+		message CustomGameData {
+			optional uint32 dota_team = 1;
+			optional bool winner = 2;
+		}
+
 		optional uint32 account_id = 1;
 		optional uint32 player_slot = 2;
 		optional uint32 hero_id = 3;
@@ -599,6 +771,7 @@ message CMsgDOTAMatch {
 		optional uint32 misses = 46;
 		repeated .CMatchPlayerAbilityUpgrade ability_upgrades = 47;
 		repeated .CMatchAdditionalUnitInventory additional_units_inventory = 48;
+		optional .CMsgDOTAMatch.Player.CustomGameData custom_game_data = 50;
 	}
 
 	message BroadcasterInfo {
@@ -613,6 +786,11 @@ message CMsgDOTAMatch {
 		optional string language_code = 4;
 	}
 
+	message CustomGameData {
+		optional uint64 custom_game_id = 1;
+		optional string map_name = 2;
+	}
+
 	enum ReplayState {
 		REPLAY_AVAILABLE = 0;
 		REPLAY_NOT_RECORDED = 1;
@@ -623,7 +801,7 @@ message CMsgDOTAMatch {
 	optional uint32 duration = 3;
 	optional fixed32 startTime = 4;
 	repeated .CMsgDOTAMatch.Player players = 5;
-	optional uint32 match_id = 6;
+	optional uint64 match_id = 6;
 	repeated uint32 tower_status = 8;
 	repeated uint32 barracks_status = 9;
 	optional uint32 cluster = 10;
@@ -658,15 +836,17 @@ message CMsgDOTAMatch {
 	optional uint32 series_type = 40;
 	optional uint64 custom_game_id = 42;
 	repeated .CMsgDOTAMatch.BroadcasterChannel broadcaster_channels = 43;
+	optional uint32 engine = 44;
+	optional .CMsgDOTAMatch.CustomGameData custom_game_data = 45;
 }
 
 message CMsgDOTAPlayerMatchHistory {
-	repeated uint32 match_ids = 1;
+	repeated uint64 match_ids = 1;
 }
 
 message CMsgDOTAMatchHistoryFilter {
-	repeated uint32 match_ids = 1;
-	optional uint32 newest_match_id_at_last_query = 2;
+	repeated uint64 match_ids = 1;
+	optional uint64 newest_match_id_at_last_query = 2;
 	optional uint32 time_last_query = 3;
 }
 
@@ -683,7 +863,7 @@ message CMsgDOTARequestMatches {
 	optional fixed32 date_min = 6;
 	optional fixed32 date_max = 7;
 	optional uint32 matches_requested = 10;
-	optional uint32 start_at_match_id = 11;
+	optional uint64 start_at_match_id = 11;
 	optional fixed32 min_players = 12;
 	optional uint32 request_id = 13;
 	optional bool tournament_games_only = 14;
@@ -759,12 +939,26 @@ message CMsgDOTAPopup {
 		MM_1V1_NO_LOW_PRIORITY = 46;
 		WEEKEND_TOURNEY_REGISTRATION_NOT_OPEN = 47;
 		WEEKEND_TOURNEY_UNMATCHED = 48;
+		POST_MATCH_SURVEY = 49;
+		TROPHY_AWARDED = 50;
+		TROPHY_LEVEL_UP = 51;
+		ALL_HERO_CHALLENGE_PROGRESS = 52;
+		NEED_INITIAL_SKILL = 53;
+		NEED_INITIAL_SKILL_IN_PARTY = 54;
 		TARGET_ENGINE_MISMATCH = 55;
+		VAC_NOT_VERIFIED = 56;
+		KICKED_FROM_QUEUE_EVENT_STARTING = 57;
+		KICKED_FROM_QUEUE_EVENT_ENDING = 58;
+		EVENT_NO_LOW_PRIORITY = 59;
+		MM_LOW_PRI_ONLY_CASUAL_AR = 60;
+		CNY2015_ONCE_PER_ROUND = 61;
+		LOBBY_FULL = 62;
 	}
 
 	optional .CMsgDOTAPopup.PopupID id = 1 [default = KICKED_FROM_LOBBY];
 	optional string custom_text = 2;
 	optional sint32 int_data = 3;
+	optional bytes popup_data = 4;
 }
 
 message CMsgDOTATeamMemberSDO {
@@ -1110,6 +1304,10 @@ message CMsgDOTAChatMessage {
 	optional string suggest_invite_name = 7;
 	optional uint32 fantasy_draft_owner_account_id = 8;
 	optional uint32 fantasy_draft_player_account_id = 9;
+	optional uint32 event_id = 10;
+	optional bool suggest_invite_to_lobby = 11;
+	optional uint32 event_points = 12;
+	optional int32 player_id = 13 [default = -1];
 }
 
 message CMsgDOTAChatMember {
@@ -1177,6 +1375,17 @@ message CMsgDOTAChatGetUserListResponse {
 
 	optional fixed64 channel_id = 1;
 	repeated .CMsgDOTAChatGetUserListResponse.Member members = 2;
+}
+
+message CMsgDOTAChatGetMemberCount {
+	optional string channel_name = 1;
+	optional .DOTAChatChannelType_t channel_type = 2 [default = DOTAChannelType_Regional];
+}
+
+message CMsgDOTAChatGetMemberCountResponse {
+	optional string channel_name = 1;
+	optional .DOTAChatChannelType_t channel_type = 2 [default = DOTAChannelType_Regional];
+	optional uint32 member_count = 3;
 }
 
 message CMsgDOTAGuildSDO {
@@ -1512,7 +1721,7 @@ message CMsgPartyLeaderWatchGamePrompt {
 }
 
 message CMsgGCMatchDetailsRequest {
-	optional uint32 match_id = 1;
+	optional uint64 match_id = 1;
 }
 
 message CMsgGCMatchDetailsResponse {
@@ -1524,6 +1733,7 @@ message CMsgGCMatchDetailsResponse {
 message CMsgDOTAProfileRequest {
 	optional uint32 account_id = 1;
 	optional bool request_name = 2;
+	optional .ESourceEngine engine = 3 [default = k_ESE_Source1];
 }
 
 message CMsgDOTAProfileResponse {
@@ -1581,6 +1791,17 @@ message CMsgDOTAClearNotifySuccessfulReport {
 }
 
 message CMsgDOTAWelcome {
+	message LocalizationDigest {
+		optional string context = 1;
+		optional .CMsgSHA1Digest english_language_file_sha1 = 2;
+		optional .CMsgSHA1Digest client_language_file_sha1 = 3;
+	}
+
+	message CExtraMsg {
+		optional uint32 id = 1;
+		optional bytes contents = 2;
+	}
+
 	optional bool tournament_admin = 3;
 	optional bool tournament_broadcaster = 4;
 	optional uint32 store_item_hash = 5;
@@ -1599,6 +1820,10 @@ message CMsgDOTAWelcome {
 	optional bool should_request_player_origin = 20;
 	optional uint64 compendium_unlocks = 21;
 	optional uint32 gc_socache_file_version = 22;
+	repeated .CMsgDOTAWelcome.LocalizationDigest localization_digests = 23;
+	optional bool is_perfect_world_test_account = 24;
+	repeated .EIngameEvent active_events = 25;
+	repeated .CMsgDOTAWelcome.CExtraMsg extra_messages = 26;
 }
 
 message CSODOTAGameHeroFavorites {
@@ -1638,6 +1863,7 @@ message CLeague {
 	optional uint32 prize_pool_usd = 5;
 	optional uint32 version = 6;
 	optional bool compendium_is_public = 7;
+	optional uint32 content_version = 8;
 }
 
 message CMsgResponseLeagueInfo {
@@ -1650,17 +1876,17 @@ message CMsgDOTAMatchVotes {
 		optional uint32 vote = 2;
 	}
 
-	optional uint32 match_id = 1;
+	optional uint64 match_id = 1;
 	repeated .CMsgDOTAMatchVotes.PlayerVote votes = 2;
 }
 
 message CMsgCastMatchVote {
-	optional uint32 match_id = 1;
+	optional uint64 match_id = 1;
 	optional .DOTAMatchVote vote = 2 [default = DOTAMatchVote_INVALID];
 }
 
 message CMsgRetrieveMatchVote {
-	optional uint32 match_id = 1;
+	optional uint64 match_id = 1;
 	optional uint32 incremental = 2;
 }
 
@@ -1683,7 +1909,7 @@ message CMsgDOTAHallOfFame {
 		optional uint32 account_id = 1;
 		optional uint32 hero_id = 2;
 		optional uint32 gold_per_min = 3;
-		optional uint32 match_id = 4;
+		optional uint64 match_id = 4;
 	}
 
 	optional uint32 week = 1;
@@ -1783,7 +2009,8 @@ message CMsgSockAddrList {
 }
 
 message CMsgMatchmakingGroupServerSample {
-	repeated .CMsgSockAddrList servers_by_group = 1;
+	repeated .CMsgSockAddrList servers_by_group_legacy_swapped = 1;
+	repeated .CMsgSockAddrList servers_by_group = 5;
 	optional uint32 servers_to_ping = 2;
 	optional uint32 reply_odds = 3;
 	optional uint32 reply_detailed_odds = 4;
@@ -1804,8 +2031,8 @@ message CMsgDOTAMatchmakingStatsRequest {
 }
 
 message CMsgDOTAMatchmakingStatsResponse {
-	repeated uint32 wait_times_by_group = 1;
 	repeated uint32 searching_players_by_group = 2;
+	repeated uint32 searching_players_by_group_source2 = 7;
 	optional uint32 disabled_groups = 3;
 	optional .CMsgMatchmakingGroupServerSample gameserver_sample = 4;
 	optional .CMsgMatchmakingGroupServerSample gameserver_sample_source2 = 6;
@@ -1834,7 +2061,7 @@ message CMsgDOTASetProfilePrivacyResponse {
 }
 
 message CMsgUpgradeLeagueItem {
-	optional uint32 match_id = 1;
+	optional uint64 match_id = 1;
 	optional uint32 league_id = 2;
 }
 
@@ -2030,8 +2257,24 @@ message CMsgGCItemEditorReleaseReservationResponse {
 	optional bool released = 2;
 }
 
+message CMsgGCItemEditorRequestLeagueInfo {
+	optional uint32 league_id = 1;
+}
+
+message CMsgGCItemEditorLeagueInfoResponse {
+	optional uint32 league_id = 1;
+	optional string league_name = 2;
+	optional string league_desc = 3;
+	optional string league_url = 4;
+	optional string revenue_url = 5;
+	optional uint32 tier = 6;
+	optional uint32 location = 7;
+	optional uint32 result = 8;
+}
+
 message CMsgDOTARewardTutorialPrizes {
 	optional uint32 location_id = 1;
+	optional bool tracking_only = 2;
 }
 
 message CMsgDOTALastHitChallengeHighScorePost {
@@ -2062,7 +2305,8 @@ message CMsgGCLobbyUpdateBroadcastChannelInfo {
 }
 
 message CMsgDOTARedeemEventPrize {
-	optional uint32 item_def_index = 1;
+	optional uint32 prize_id = 1;
+	optional uint32 event_id = 2;
 }
 
 message CMsgDOTARedeemEventPrizeResponse {
@@ -2096,17 +2340,7 @@ message CMsgDOTAGetEventPointsResponse {
 	optional uint32 premium_points = 5;
 	repeated .CMsgDOTAGetEventPointsResponse.Action completed_actions = 6;
 	optional uint32 account_id = 7;
-}
-
-message CMsgDOTAExchangeEventPoints {
-	optional uint32 event_id = 1;
-}
-
-message CMsgDOTAExchangeEventPointsResponse {
-	optional bool success = 1;
-	optional uint32 total_points = 2;
-	optional uint32 total_premium_points = 3;
-	optional uint32 event_id = 4;
+	optional bool owned = 8;
 }
 
 message CMsgDOTALiveLeagueGameUpdate {
@@ -2142,10 +2376,12 @@ message CMsgDOTACompendiumDataResponse {
 
 message CMsgDOTAGetPlayerMatchHistory {
 	optional uint32 account_id = 1;
-	optional uint32 start_at_match_id = 2;
+	optional uint64 start_at_match_id = 2;
 	optional uint32 matches_requested = 3;
 	optional uint32 hero_id = 4;
 	optional uint32 request_id = 5;
+	optional .ESourceEngine engine = 6 [default = k_ESE_Source1];
+	optional bool include_practice_matches = 7;
 }
 
 message CMsgDOTAGetPlayerMatchHistoryResponse {
@@ -2160,6 +2396,8 @@ message CMsgDOTAGetPlayerMatchHistoryResponse {
 		optional uint32 lobby_type = 8;
 		optional bool solo_rank = 9;
 		optional bool abandon = 10;
+		optional uint32 duration = 11;
+		optional uint32 engine = 12;
 	}
 
 	repeated .CMsgDOTAGetPlayerMatchHistoryResponse.Match matches = 1;
@@ -2167,15 +2405,6 @@ message CMsgDOTAGetPlayerMatchHistoryResponse {
 }
 
 message CMsgDOTAStartDailyHeroChallenge {
-}
-
-message CMsgGCNewBloomModeState {
-}
-
-message CMsgGCNewBloomModeStateResponse {
-	optional bool active = 1;
-	optional uint32 switch_time = 2;
-	optional uint32 round = 3;
 }
 
 message CMsgGCNotificationsRequest {
@@ -2314,6 +2543,9 @@ message CMsgClientToGCSetAdditionalEquips {
 	repeated .CAdditionalEquipSlot equips = 1;
 }
 
+message CMsgClientToGCSetAdditionalEquipsResponse {
+}
+
 message CMsgClientToGCGetAdditionalEquips {
 }
 
@@ -2372,9 +2604,274 @@ message CMsgClientToGCGetProfileCard {
 	optional uint32 account_id = 1;
 }
 
-message CMsgClientToGCSetProfileCardSlot {
-	optional uint32 slot_id = 1;
-	optional uint32 slot_type = 2;
-	optional uint64 slot_value = 3;
+message CMsgClientToGCSetProfileCardSlots {
+	message CardSlot {
+		optional uint32 slot_id = 1;
+		optional .EProfileCardSlotType slot_type = 2 [default = k_EProfileCardSlotType_Empty];
+		optional uint64 slot_value = 3;
+	}
+
+	repeated .CMsgClientToGCSetProfileCardSlots.CardSlot slots = 1;
+}
+
+message CMsgClientToGCGetProfileCardStats {
+}
+
+message CMsgClientToGCCreateHeroStatue {
+	optional uint64 source_item = 1;
+	optional uint32 hero_id = 3;
+	optional string sequence_name = 4;
+	optional float cycle = 5;
+	repeated uint32 wearables = 6;
+	optional string inscription = 7;
+	repeated uint32 styles = 8;
+	optional uint64 reforger_item = 9;
+	optional bool tournament_drop = 10;
+}
+
+message CMsgClientToGCCreateTeamShowcase {
+	optional uint64 source_item = 1;
+	optional uint32 hero_id = 3;
+	optional string sequence_name = 4;
+	optional float cycle = 5;
+	repeated uint32 wearables = 6;
+	optional string inscription = 7;
+	repeated uint32 styles = 8;
+}
+
+message CMsgGCToClientHeroStatueCreateResult {
+	optional uint64 resulting_item = 1;
+}
+
+message CMsgGCToClientTeamShowcaseCreateResult {
+	optional uint64 resulting_item = 1;
+}
+
+message CMsgClientToGCRecordCompendiumStats {
+	optional uint32 league_id = 1;
+	optional uint32 view_duration_s = 2;
+	optional uint32 videos_viewed = 3;
+	optional uint32 page_turns = 4;
+	optional uint32 links_followed = 5;
+}
+
+message CMsgGCToClientEventStatusChanged {
+	repeated .EIngameEvent active_events = 1;
+}
+
+message CMsgClientToGCExchangeItemsForOffering {
+	repeated uint64 item_ids = 1;
+	optional uint32 recycle_id = 2;
+}
+
+message CMsgClientToGCExchangeItemsForOfferingResponse {
+	enum EResponse {
+		eResponse_Success = 0;
+		eResponse_OfferingDisabled = 1;
+		eResponse_InvalidItems = 2;
+		eResponse_InternalError = 3;
+	}
+
+	optional .CMsgClientToGCExchangeItemsForOfferingResponse.EResponse response = 1 [default = eResponse_Success];
+}
+
+message CMsgClientToGCPlayerStatsRequest {
+	optional uint32 account_id = 1;
+}
+
+message CMsgGCToClientPlayerStatsResponse {
+	optional uint32 account_id = 1;
+	repeated float player_stats = 2;
+	optional uint32 match_count = 3;
+	optional float mean_gpm = 4;
+	optional float mean_xppm = 5;
+	optional float mean_lasthits = 6;
+	optional uint32 rampages = 7;
+	optional uint32 triple_kills = 8;
+	optional uint32 first_blood_claimed = 9;
+	optional uint32 first_blood_given = 10;
+	optional uint32 couriers_killed = 11;
+	optional uint32 aegises_snatched = 12;
+	optional uint32 cheeses_eaten = 13;
+	optional uint32 creeps_stacked = 14;
+	optional float fight_score = 15;
+	optional float farm_score = 16;
+	optional float support_score = 17;
+	optional float push_score = 18;
+	optional float versatility_score = 19;
+}
+
+message CMsgClientToGCCustomGamePlayerCountRequest {
+	optional uint64 custom_game_id = 1;
+}
+
+message CMsgGCToClientCustomGamePlayerCountResponse {
+	optional uint64 custom_game_id = 1;
+	optional uint64 player_count = 2;
+	optional uint64 spectator_count = 3;
+}
+
+message CMsgClientToGCCustomGamesFriendsPlayedRequest {
+	optional uint32 account_id = 1;
+}
+
+message CMsgGCToClientCustomGamesFriendsPlayedResponse {
+	message CustomGame {
+		optional uint64 custom_game_id = 1;
+		repeated uint32 account_ids = 2;
+	}
+
+	optional uint32 account_id = 1;
+	repeated .CMsgGCToClientCustomGamesFriendsPlayedResponse.CustomGame games = 2;
+}
+
+message CMsgClientToGCSocialFeedPostCommentRequest {
+	optional uint64 event_id = 1;
+	optional string comment = 2;
+}
+
+message CMsgGCToClientSocialFeedPostCommentResponse {
+	optional bool success = 1;
+}
+
+message CMsgClientToGCSocialFeedPostMessageRequest {
+	optional string message = 1;
+	optional uint64 match_id = 2;
+	optional uint32 match_timestamp = 3;
+}
+
+message CMsgGCToClientSocialFeedPostMessageResponse {
+	optional bool success = 1;
+}
+
+message CMsgClientToGCFriendsPlayedCustomGameRequest {
+	optional uint64 custom_game_id = 1;
+}
+
+message CMsgGCToClientFriendsPlayedCustomGameResponse {
+	optional uint64 custom_game_id = 1;
+	repeated uint32 account_ids = 2;
+}
+
+message CMsgClientToGCFeaturedHeroesRequest {
+}
+
+message CMsgGCToClientFeaturedHeroesResponse {
+	message DataField {
+		optional .EFeaturedHeroDataType data_type = 1 [default = k_EFeaturedHeroDataType_HeroID];
+		optional uint32 uint32_value = 2;
+		optional uint64 uint64_value = 3;
+		optional string string_value = 4;
+		optional float float_value = 5;
+	}
+
+	message FeaturedHero {
+		repeated .CMsgGCToClientFeaturedHeroesResponse.DataField data_fields = 1;
+	}
+
+	message Category {
+		optional int32 category_weight = 1;
+		repeated .EFeaturedHeroTextField text_fields = 2;
+		repeated .CMsgGCToClientFeaturedHeroesResponse.FeaturedHero featured_heroes = 3;
+	}
+
+	repeated .CMsgGCToClientFeaturedHeroesResponse.Category categories = 1;
+}
+
+message CMsgClientToGCSocialMatchPostCommentRequest {
+	optional uint64 match_id = 1;
+	optional string comment = 2;
+}
+
+message CMsgGCToClientSocialMatchPostCommentResponse {
+	optional bool success = 1;
+}
+
+message CMsgClientToGCSocialMatchDetailsRequest {
+	optional uint64 match_id = 1;
+	optional uint32 pagination_timestamp = 2;
+}
+
+message CMsgGCToClientSocialMatchDetailsResponse {
+	message Comment {
+		optional uint32 account_id = 1;
+		optional string persona_name = 2;
+		optional uint32 timestamp = 3;
+		optional string comment = 4;
+	}
+
+	optional bool success = 1;
+	repeated .CMsgGCToClientSocialMatchDetailsResponse.Comment comments = 2;
+}
+
+message CMsgDOTAPartyMemberSetCoach {
+	optional bool wants_coach = 1;
+}
+
+message CMsgDOTASetGroupLeader {
+	optional fixed64 new_leader_steamid = 1;
+}
+
+message CMsgDOTACancelGroupInvites {
+	repeated fixed64 invited_steamids = 1;
+	repeated fixed64 invited_groupids = 2;
+}
+
+message CMsgDOTASetGroupOpenStatus {
+	optional bool open = 1;
+}
+
+message CMsgDOTAGroupMergeInvite {
+	optional fixed64 other_group_id = 1;
+}
+
+message CMsgDOTAGroupMergeResponse {
+	optional fixed64 initiator_group_id = 1;
+	optional bool accept = 2;
+}
+
+message CMsgDOTAGroupMergeReply {
+	optional .EDOTAGroupMergeResult result = 1 [default = k_EDOTAGroupMergeResult_OK];
+}
+
+message CMsgDOTAPartyRichPresence {
+	message Member {
+		optional fixed64 steam_id = 1;
+		optional bool coach = 2;
+	}
+
+	optional fixed64 party_id = 1;
+	optional .CSODOTAParty.State party_state = 2 [default = UI];
+	optional bool open = 3;
+	optional bool low_priority = 5;
+	repeated .CMsgDOTAPartyRichPresence.Member members = 4;
+}
+
+message CMsgDOTALobbyRichPresence {
+	optional fixed64 lobby_id = 1;
+	optional .CSODOTALobby.State lobby_state = 2 [default = UI];
+	optional bool password = 3;
+	optional .DOTA_GameMode game_mode = 4 [default = DOTA_GAMEMODE_NONE];
+	optional uint32 member_count = 5;
+	optional uint32 max_member_count = 6;
+	optional fixed64 custom_game_id = 7;
+	optional string name = 8;
+}
+
+message CMsgClientToGCRealtimeGameStateViewing {
+	optional uint64 start_server_id = 1;
+	optional uint64 stop_server_id = 2;
+}
+
+message CMsgDOTACustomGameListenServerStartedLoading {
+	optional fixed64 lobby_id = 1;
+	optional uint64 custom_game_id = 2;
+	repeated uint32 lobby_members = 3;
+	optional uint32 start_time = 4;
+}
+
+message CMsgDOTACustomGameClientFinishedLoading {
+	optional fixed64 lobby_id = 1;
+	optional uint32 loading_duration = 2;
 }
 

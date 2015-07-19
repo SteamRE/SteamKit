@@ -202,9 +202,23 @@ message CMsgDOTAFantasyMatch {
 	optional uint32 team_2 = 7;
 }
 
+message CMsgServerToGCRealtimeStats {
+	optional .CMsgDOTARealtimeGameStats delayed = 1;
+	optional .CMsgDOTARealtimeGameStats current = 2;
+}
+
+message CMsgGCToServerRealtimeStatsStartStop {
+	optional bool start = 1;
+}
+
 message CMsgGameMatchSignOut {
 	message CTeam {
 		message CPlayer {
+			message CCustomGameData {
+				optional uint32 dota_team = 1;
+				optional bool winner = 2;
+			}
+
 			optional fixed64 steam_id = 1;
 			optional uint32 hero_id = 3;
 			repeated uint32 items = 4;
@@ -236,6 +250,7 @@ message CMsgGameMatchSignOut {
 			repeated .CMatchPlayerAbilityUpgrade ability_upgrades = 32;
 			repeated .CMatchAdditionalUnitInventory additional_units_inventory = 33;
 			optional uint32 net_worth = 34;
+			optional .CMsgGameMatchSignOut.CTeam.CPlayer.CCustomGameData custom_game_data = 35;
 		}
 
 		repeated .CMsgGameMatchSignOut.CTeam.CPlayer players = 1;
@@ -252,6 +267,10 @@ message CMsgGameMatchSignOut {
 		optional uint32 event_type = 3;
 		optional int32 game_time = 4;
 		optional uint32 replay_time = 5;
+	}
+
+	message CCustomGameData {
+		optional uint32 publish_timestamp = 1;
 	}
 
 	optional uint64 match_id = 1 [(key_field) = true];
@@ -289,6 +308,7 @@ message CMsgGameMatchSignOut {
 	optional sint32 bonus_gold_loser_min10 = 32;
 	optional sint32 bonus_gold_loser_min20 = 33;
 	optional uint32 bonus_gold_loser_total = 34;
+	optional .CMsgGameMatchSignOut.CCustomGameData custom_game_data = 37;
 }
 
 message CMsgSignOutDraftInfo {
@@ -326,6 +346,13 @@ message CMsgSignOutPlayerStats {
 	optional float farm_score = 14;
 	optional float support_score = 15;
 	optional float push_score = 16;
+	optional uint32 kills = 17;
+	optional uint32 deaths = 18;
+	optional uint32 assists = 19;
+	optional uint32 last_hits = 20;
+	optional uint32 denies = 21;
+	optional float gpm = 22;
+	optional float xppm = 23;
 }
 
 message CMsgSignOutCommunicationSummary {

@@ -1,0 +1,79 @@
+import "networkbasetypes.proto";
+
+option cc_generic_services = false;
+
+message ChangeMapToolEvent {
+	optional string mapname = 1;
+}
+
+message TraceRayServerToolEvent {
+	optional .CMsgVector start = 1;
+	optional .CMsgVector end = 2;
+}
+
+message ToolTraceRayResult {
+	optional bool hit = 1;
+	optional .CMsgVector impact = 2;
+	optional .CMsgVector normal = 3;
+	optional float distance = 4;
+	optional float fraction = 5;
+	optional int32 ehandle = 6;
+}
+
+message SpawnEntityToolEvent {
+	optional bytes entity_keyvalues = 1;
+	optional bool clientsideentity = 2;
+}
+
+message SpawnEntityToolEventResult {
+	optional int32 ehandle = 1;
+}
+
+message DestroyEntityToolEvent {
+	optional int32 ehandle = 1;
+}
+
+message DestroyAllEntitiesToolEvent {
+}
+
+message RestartMapToolEvent {
+}
+
+message ToolEvent_GetEntityInfo {
+	optional int32 ehandle = 1;
+	optional bool clientsideentity = 2;
+}
+
+message ToolEvent_GetEntityInfoResult {
+	optional string cppclass = 1 [default = "shithead"];
+	optional string classname = 2;
+	optional string name = 3;
+	optional .CMsgVector origin = 4;
+	optional .CMsgVector mins = 5;
+	optional .CMsgVector maxs = 6;
+}
+
+message ToolEvent_GetEntityInputs {
+	optional int32 ehandle = 1;
+	optional bool clientsideentity = 2;
+}
+
+message ToolEvent_GetEntityInputsResult {
+	repeated string input_list = 1;
+}
+
+message ToolEvent_FireEntityInput {
+	optional int32 ehandle = 1;
+	optional bool clientsideentity = 2;
+	optional string input_name = 3;
+	optional string input_param = 4;
+}
+
+message ToolEvent_SFMRecordingStateChanged {
+	optional bool isrecording = 1;
+}
+
+message ToolEvent_SFMToolActiveStateChanged {
+	optional bool isactive = 1;
+}
+

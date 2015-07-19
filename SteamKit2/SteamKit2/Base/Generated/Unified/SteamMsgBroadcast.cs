@@ -63,6 +63,15 @@ namespace SteamKit2.Unified.Internal
       get { return _cellid; }
       set { _cellid = value; }
     }
+
+    private ulong _rtmp_token = default(ulong);
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"rtmp_token", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong rtmp_token
+    {
+      get { return _rtmp_token; }
+      set { _rtmp_token = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -305,6 +314,33 @@ namespace SteamKit2.Unified.Internal
       get { return _num_viewers; }
       set { _num_viewers = value; }
     }
+
+    private int _permission = default(int);
+    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"permission", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int permission
+    {
+      get { return _permission; }
+      set { _permission = value; }
+    }
+
+    private bool _is_rtmp = default(bool);
+    [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"is_rtmp", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool is_rtmp
+    {
+      get { return _is_rtmp; }
+      set { _is_rtmp = value; }
+    }
+
+    private int _seconds_delay = default(int);
+    [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"seconds_delay", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int seconds_delay
+    {
+      get { return _seconds_delay; }
+      set { _seconds_delay = value; }
+    }
     [global::ProtoBuf.ProtoContract(Name=@"EWatchResponse", EnumPassthru=true)]
     public enum EWatchResponse
     {
@@ -417,6 +453,24 @@ namespace SteamKit2.Unified.Internal
       get { return _permission; }
       set { _permission = value; }
     }
+
+    private bool _is_rtmp = default(bool);
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"is_rtmp", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool is_rtmp
+    {
+      get { return _is_rtmp; }
+      set { _is_rtmp = value; }
+    }
+
+    private int _seconds_delay = default(int);
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"seconds_delay", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int seconds_delay
+    {
+      get { return _seconds_delay; }
+      set { _seconds_delay = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -491,6 +545,15 @@ namespace SteamKit2.Unified.Internal
     {
       get { return _gameid; }
       set { _gameid = value; }
+    }
+
+    private string _title = "";
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"title", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string title
+    {
+      get { return _title; }
+      set { _title = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

@@ -72,6 +72,15 @@ namespace SteamKit2.GC.Internal
       get { return _new_slot; }
       set { _new_slot = value; }
     }
+
+    private uint _style_index = default(uint);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"style_index", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint style_index
+    {
+      get { return _style_index; }
+      set { _style_index = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

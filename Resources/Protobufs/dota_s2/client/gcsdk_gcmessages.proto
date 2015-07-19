@@ -12,6 +12,7 @@ enum PartnerAccountType {
 	PARTNER_NONE = 0;
 	PARTNER_PERFECT_WORLD = 1;
 	PARTNER_NEXON = 2;
+	PARTNER_INVALID = 3;
 }
 
 enum GCConnectionStatus {
@@ -279,5 +280,12 @@ message CWorkshop_SetItemPaymentRules_Request {
 }
 
 message CWorkshop_SetItemPaymentRules_Response {
+}
+
+message CBroadcast_PostGameDataFrame_Request {
+	optional uint32 appid = 1;
+	optional fixed64 steamid = 2;
+	optional fixed64 broadcast_id = 3;
+	optional bytes frame_data = 4;
 }
 
