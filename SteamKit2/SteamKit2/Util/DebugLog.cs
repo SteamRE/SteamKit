@@ -139,7 +139,16 @@ namespace SteamKit2
             if ( !DebugLog.Enabled )
                 return;
 
-            string strMsg = string.Format( msg, args );
+            string strMsg;
+
+            if ( args == null || args.Length == 0 )
+            {
+                strMsg = msg;
+            }
+            else
+            {
+                strMsg = string.Format( msg, args );
+            }
 
             foreach ( IDebugListener debugListener in listeners )
             {
