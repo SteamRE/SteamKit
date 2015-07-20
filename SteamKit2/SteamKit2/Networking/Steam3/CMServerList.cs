@@ -234,7 +234,7 @@ namespace SteamKit2.Networking.Steam3
             {
                 case ServerQuality.Good:
                 {
-                    var newScore = Math.Min(Convert.ToInt32(serverInfo.Score * GoodWeighting), MaxScore);
+                    var newScore = Math.Min( Convert.ToInt32( serverInfo.Score * GoodWeighting ), MaxScore );
                     if ( newScore > serverInfo.Score )
                     {
                         DebugWrite( "{0} is good - increasing score from {1} to {2}.", serverInfo.EndPoint, serverInfo.Score, newScore );
