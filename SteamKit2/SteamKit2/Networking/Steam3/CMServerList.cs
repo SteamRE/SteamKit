@@ -234,15 +234,31 @@ namespace SteamKit2.Networking.Steam3
             {
                 case ServerQuality.Good:
                 {
-                    var newScore = Convert.ToInt32( serverInfo.Score * GoodWeighting );
-                    SetServerScore( serverInfo, Math.Min( newScore, MaxScore ) );
+                    var newScore = Math.Min(Convert.ToInt32(serverInfo.Score * GoodWeighting), MaxScore);
+                    if ( newScore > serverInfo.Score )
+                    {
+                        DebugWrite( "{0} is good - increasing score from {1} to {2}.", serverInfo.EndPoint, serverInfo.Score, newScore );
+                        SetServerScore( serverInfo, newScore );
+                    }
+                    else
+                    {
+                        DebugWrite( "{0} is good but has hit the score ceiling of {1}.", serverInfo.EndPoint, MaxScore );
+                    }
                     break;
                 }
 
                 case ServerQuality.Bad:
                 {
-                    var newScore = Convert.ToInt32( serverInfo.Score * BadWeighting );
-                    SetServerScore( serverInfo, Math.Max( newScore, MinScore ) );
+                    var newScore = Math.Max( Convert.ToInt32( serverInfo.Score * BadWeighting ), MinScore );
+                    if ( newScore < serverInfo.Score )
+                    {
+                        DebugWrite( "{0} is bad - dropping score from {1} to {2}.", serverInfo.EndPoint, serverInfo.Score, newScore );
+                        SetServerScore( serverInfo, newScore );
+                    }
+                    else
+                    {
+                        DebugWrite( "{0} is bad but has hit the score floor of {1}.", serverInfo.EndPoint, MinScore );
+                    }
                     break;
                 }
 
@@ -308,6 +324,11 @@ namespace SteamKit2.Networking.Steam3
             }
 
             return endPoints;
+        }
+
+        static void DebugWrite( string msg, params object[] args )
+        {
+            DebugLog.WriteLine( "ServerList", msg, args);
         }
     }
 }
