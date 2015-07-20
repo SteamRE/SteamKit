@@ -11,6 +11,7 @@ enum NET_Messages {
 	net_StringCmd = 5;
 	net_SetConVar = 6;
 	net_SignonState = 7;
+	net_PlayerAvatarData = 100;
 }
 
 enum CLC_Messages {
@@ -25,6 +26,11 @@ enum CLC_Messages {
 	clc_SplitPlayerConnect = 16;
 	clc_ClientMessage = 17;
 	clc_CmdKeyValues = 18;
+}
+
+enum VoiceDataFormat_t {
+	VOICEDATA_FORMAT_STEAM = 0;
+	VOICEDATA_FORMAT_ENGINE = 1;
 }
 
 enum ESplitScreenMessageType {
@@ -139,6 +145,11 @@ message CNETMsg_SplitScreenUser {
 	optional int32 slot = 1;
 }
 
+message CNETMsg_PlayerAvatarData {
+	optional uint32 accountid = 1;
+	optional bytes rgb = 2;
+}
+
 message CCLCMsg_ClientInfo {
 	optional fixed32 send_table_crc = 1;
 	optional uint32 server_count = 2;
@@ -158,6 +169,10 @@ message CCLCMsg_Move {
 message CCLCMsg_VoiceData {
 	optional bytes data = 1;
 	optional fixed64 xuid = 2;
+	optional .VoiceDataFormat_t format = 3 [default = VOICEDATA_FORMAT_ENGINE];
+	optional int32 sequence_bytes = 4;
+	optional uint32 section_number = 5;
+	optional uint32 uncompressed_sample_offset = 6;
 }
 
 message CCLCMsg_BaselineAck {
@@ -289,6 +304,7 @@ message CSVCMsg_UpdateStringTable {
 message CSVCMsg_VoiceInit {
 	optional int32 quality = 1;
 	optional string codec = 2;
+	optional int32 version = 3 [default = 0];
 }
 
 message CSVCMsg_VoiceData {
@@ -298,6 +314,10 @@ message CSVCMsg_VoiceData {
 	optional int32 audible_mask = 4;
 	optional bytes voice_data = 5;
 	optional bool caster = 6;
+	optional .VoiceDataFormat_t format = 7 [default = VOICEDATA_FORMAT_ENGINE];
+	optional int32 sequence_bytes = 8;
+	optional uint32 section_number = 9;
+	optional uint32 uncompressed_sample_offset = 10;
 }
 
 message CSVCMsg_FixAngle {

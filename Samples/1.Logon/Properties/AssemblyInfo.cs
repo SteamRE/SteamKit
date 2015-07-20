@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle( "SteamKit Sample 1: Logon" )]
-[assembly: AssemblyDescription( "SteamKit Sample 1: Logon" )]
+[assembly: AssemblyTitle("SteamKit Sample 1: Logon")]
+[assembly: AssemblyDescription("SteamKit Sample 1: Logon")]
 [assembly: AssemblyConfiguration( "" )]
 [assembly: AssemblyCompany( "" )]
-[assembly: AssemblyProduct( "Sample1_Logon" )]
+[assembly: AssemblyProduct("Sample1_CallbackManager")]
 [assembly: AssemblyCopyright( "Copyright © Ryan Stecker 2012" )]
 [assembly: AssemblyTrademark( "" )]
 [assembly: AssemblyCulture( "" )]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible( false )]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid( "e0e464d4-8e0b-4b50-9b0e-9af00aaf151e" )]
+[assembly: Guid( "676d1c61-a2b3-46c7-b8a8-3ab34f400e58" )]
 
 // Version information for an assembly consists of the following four values:
 //

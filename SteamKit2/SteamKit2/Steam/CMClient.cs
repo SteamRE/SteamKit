@@ -313,7 +313,7 @@ namespace SteamKit2.Internal
         /// <summary>
         /// Called when the client is physically disconnected from Steam3.
         /// </summary>
-        protected abstract void OnClientDisconnected();
+        protected abstract void OnClientDisconnected( bool userInitiated );
 
 
         void NetMsgReceived( object sender, NetMsgEventArgs e )
@@ -321,13 +321,13 @@ namespace SteamKit2.Internal
             OnClientMsgReceived( GetPacketMsg( e.Data ) );
         }
 
-        void Disconnected( object sender, EventArgs e )
+        void Disconnected( object sender, DisconnectedEventArgs e )
         {
             ConnectedUniverse = EUniverse.Invalid;
 
             heartBeatFunc.Stop();
 
-            OnClientDisconnected();
+            OnClientDisconnected( e.UserInitiated );
         }
 
         internal static IPacketMsg GetPacketMsg( byte[] data )

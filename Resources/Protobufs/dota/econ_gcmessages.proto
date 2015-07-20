@@ -166,6 +166,10 @@ enum EGCItemMsg {
 	k_EMsgGCToGCItemConsumptionRollback = 2564;
 	k_EMsgClientToGCWrapAndDeliverGift = 2565;
 	k_EMsgClientToGCWrapAndDeliverGiftResponse = 2566;
+	k_EMsgGCToClientBundleUnpacked = 2567;
+	k_EMsgGCToClientStoreTransactionCompleted = 2568;
+	k_EMsgClientToGCEquipItems = 2569;
+	k_EMsgClientToGCEquipItemsResponse = 2570;
 }
 
 enum EGCMsgResponse {
@@ -220,6 +224,13 @@ enum EGCPartnerRequestResponse {
 message CMsgApplyAutograph {
 	optional uint64 autograph_item_id = 1;
 	optional uint64 item_item_id = 2;
+}
+
+message CMsgAdjustItemEquippedState {
+	optional uint64 item_id = 1;
+	optional uint32 new_class = 2;
+	optional uint32 new_slot = 3;
+	optional uint32 style_index = 4;
 }
 
 message CMsgEconPlayerStrangeCountAdjustment {
@@ -478,9 +489,32 @@ message CMsgClientToGCWrapAndDeliverGift {
 
 message CMsgClientToGCWrapAndDeliverGiftResponse {
 	optional .EGCMsgResponse response = 1 [default = k_EGCMsgResponseOK];
+	optional uint32 gifting_charge_uses = 2;
+	optional int32 gifting_charge_max = 3;
+	optional uint32 gifting_uses = 4;
+	optional int32 gifting_max = 5;
+	optional uint32 gifting_window_hours = 6;
 }
 
 message CMsgClientToGCUnwrapGift {
 	optional uint64 item_id = 1;
+}
+
+message CMsgGCToClientBundleUnpacked {
+	optional uint64 bundle_item_id = 1;
+	repeated uint64 item_ids = 2;
+}
+
+message CMsgGCToClientStoreTransactionCompleted {
+	optional uint64 txn_id = 1;
+	repeated uint64 item_ids = 2;
+}
+
+message CMsgClientToGCEquipItems {
+	repeated .CMsgAdjustItemEquippedState equips = 1;
+}
+
+message CMsgClientToGCEquipItemsResponse {
+	optional fixed64 so_cache_version_id = 1;
 }
 

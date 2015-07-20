@@ -318,6 +318,15 @@ namespace SteamKit2.Unified.Internal
       get { return _authentication_exists_from_same_ip_before_mintime; }
       set { _authentication_exists_from_same_ip_before_mintime = value; }
     }
+
+    private uint _public_ipv4 = default(uint);
+    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"public_ipv4", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint public_ipv4
+    {
+      get { return _public_ipv4; }
+      set { _public_ipv4 = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

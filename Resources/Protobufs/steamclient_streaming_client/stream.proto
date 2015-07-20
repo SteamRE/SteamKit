@@ -63,6 +63,9 @@ enum EStreamControlMessage {
 	k_EStreamControlSetGammaRamp = 89;
 	k_EStreamControlVideoEncoderInfo = 90;
 	k_EStreamControlSetBurstBitrate = 91;
+	k_EStreamControlSetHardwareBitrateCap = 92;
+	k_EStreamControlInputControllerStateHID = 93;
+	k_EStreamControlSetTargetBitrate = 94;
 }
 
 enum EStreamVersion {
@@ -177,6 +180,7 @@ enum EVideoFormat {
 enum EStreamStatsMessage {
 	k_EStreamStatsFrameEvents = 1;
 	k_EStreamStatsDebugDump = 2;
+	k_EStreamStatsLogMessage = 3;
 }
 
 enum EStreamFrameEvent {
@@ -409,6 +413,7 @@ message CSystemInfoMsg {
 
 message CVideoDecoderInfoMsg {
 	optional string info = 1;
+	optional int32 threads = 2;
 }
 
 message CVideoEncoderInfoMsg {
@@ -443,6 +448,10 @@ message CSetBurstBitrateMsg {
 	required int32 bitrate = 1;
 }
 
+message CSetHardwareBitrateCap {
+	required int32 bitrate = 1;
+}
+
 message CSetQoSMsg {
 	required bool use_qos = 1;
 }
@@ -452,6 +461,10 @@ message CSetTargetFramerateMsg {
 	optional uint32 reasons = 2;
 	optional uint32 framerate_numerator = 3;
 	optional uint32 framerate_denominator = 4;
+}
+
+message CSetTargetBitrateMsg {
+	required int32 bitrate = 1;
 }
 
 message COverlayEnabledMsg {
@@ -470,6 +483,30 @@ message CInputControllerStateMsg {
 	optional sint32 left_pad_y = 5;
 	optional sint32 right_pad_x = 6;
 	optional sint32 right_pad_y = 7;
+	optional sint32 left_stick_x = 8;
+	optional sint32 left_stick_y = 9;
+	optional uint32 left_analog = 10;
+	optional uint32 right_analog = 11;
+	optional sint32 accel_x = 12;
+	optional sint32 accel_y = 13;
+	optional sint32 accel_z = 14;
+	optional sint32 gyro_x = 15;
+	optional sint32 gyro_y = 16;
+	optional sint32 gyro_z = 17;
+	optional sint32 gyroquat_w = 18;
+	optional sint32 gyroquat_x = 19;
+	optional sint32 gyroquat_y = 20;
+	optional sint32 gyroquat_z = 21;
+	optional sint32 gyrosteeringangle = 22;
+	optional uint32 batterylevel = 23;
+}
+
+message CInputControllerStateHIDMsg {
+	optional uint32 input_mark = 1;
+	optional int32 controller_index = 2;
+	optional uint32 capabilities = 3;
+	optional bytes state_payload = 4;
+	optional bytes status_payload = 5;
 }
 
 message CInputControllerWirelessPresenceMsg {
@@ -548,5 +585,10 @@ message CFrameStatsListMsg {
 
 message CDebugDumpMsg {
 	optional bytes screenshot = 1;
+}
+
+message CLogMsg {
+	optional int32 type = 1;
+	optional string message = 2;
 }
 

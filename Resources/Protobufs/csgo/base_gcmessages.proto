@@ -100,16 +100,8 @@ message CMsgLANServerAvailable {
 
 message CSOEconGameAccountClient {
 	optional uint32 additional_backpack_slots = 1 [default = 0];
-	optional bool trial_account = 2 [default = false];
-	optional bool eligible_for_online_play = 3 [default = true];
-	optional bool need_to_choose_most_helpful_friend = 4;
-	optional bool in_coaches_list = 5;
-	optional fixed32 trade_ban_expiration = 6;
-	optional fixed32 duel_ban_expiration = 7;
-	optional uint32 preview_item_def = 8 [default = 0];
-	optional bool made_first_purchase = 9 [default = false];
-	optional bool eligible_for_community_market = 10;
-	optional uint32 mission_refuse_allowed = 11;
+	optional fixed32 bonus_xp_timestamp_refresh = 12;
+	optional uint32 bonus_xp_usedflags = 13;
 }
 
 message CSOItemCriteriaCondition {
@@ -174,6 +166,12 @@ message CMsgApplySticker {
 	optional uint64 item_item_id = 2;
 	optional uint32 sticker_slot = 3;
 	optional uint32 baseitem_defidx = 4;
+}
+
+message CMsgApplyStatTrakSwap {
+	optional uint64 tool_item_id = 1;
+	optional uint64 item_1_item_id = 2;
+	optional uint64 item_2_item_id = 3;
 }
 
 message CMsgApplyStrangePart {

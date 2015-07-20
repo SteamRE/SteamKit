@@ -1,4 +1,17 @@
 ------------------------------------------------------------------------------
+v 1.6.3			Jun 20, 2015
+------------------------------------------------------------------------------
+
+* Added support for parsing older representations of Steam3 Steam IDs such as those from Counter-Strike: Global Offensive, i.e. `[M:1:123(456)]`.
+* Steam IDs parsed from Steam3 string representations will now have the correct instance ID set.
+* KeyValues can now be serialized to binary, however all values will be serialized as the string type.
+* Improved reliability of TCP connections to the CM and UFS servers.
+* Added `UserInitiated` property to `SteamClient.DisconnectedCallback` and `UFSClient.DisconnectedCallback` to indicate whether a disconnect was caused by the user, or by another source (Steam servers, bad network connection).
+* Updated Steam protobufs.
+* Updated game-related GC messages and protobufs.
+
+
+------------------------------------------------------------------------------
 v 1.6.2			Dec 16, 2014
 ------------------------------------------------------------------------------
 
@@ -9,6 +22,7 @@ v 1.6.2			Dec 16, 2014
 *	Updated `EMsg` list.
 *	Updated Steam protobufs.
 *	Updated game-related GC messages and protobufs.
+
 
 ------------------------------------------------------------------------------
 v 1.6.1			Nov 30, 2014

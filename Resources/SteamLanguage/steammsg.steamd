@@ -263,6 +263,12 @@ class MsgClientChatActionResult<EMsg::ClientChatActionResult>
 	EChatActionResult actionResult;
 };
 
+class MsgClientChatRoomInfo<EMsg::ClientChatRoomInfo>
+{
+	steamidmarshal ulong steamIdChat;
+	EChatInfoType type;	
+};
+
 class MsgClientGetNumberOfCurrentPlayers<EMsg::ClientGetNumberOfCurrentPlayers>
 {
 	gameidmarshal ulong gameID;

@@ -58,6 +58,7 @@ message CMsgBrowserCreate {
 	optional uint32 request_id = 1;
 	optional string useragent = 3;
 	optional string user_css = 5;
+	optional bool native_dropdowns = 6;
 }
 
 message CMsgBrowserCreateResponse {
@@ -350,25 +351,21 @@ message CMsgClose {
 	optional uint32 browser_handle = 1;
 }
 
+message CMsgSetSharedPaintBuffers {
+	optional uint32 browser_handle = 1;
+	optional uint32 wide = 2;
+	optional uint32 tall = 3;
+	optional uint64 source_pid = 4;
+	optional uint64 source_handle = 5;
+	optional uint64 handle = 6;
+}
+
 message CMsgNeedsPaint {
 	optional uint32 browser_handle = 1;
-	optional uint64 rgba = 2;
-	optional uint32 wide = 3;
-	optional uint32 tall = 4;
-	optional uint32 textureid = 5;
-	optional uint32 updatex = 6;
-	optional uint32 updatey = 7;
-	optional uint32 updatewide = 8;
-	optional uint32 updatetall = 9;
 	optional uint32 scrollx = 10;
 	optional uint32 scrolly = 11;
 	optional float pagescale = 12;
 	optional uint32 pageserial = 15;
-	optional uint64 shared_memory_handle = 16 [default = 0];
-	optional uint64 process_handle = 17 [default = 0];
-	optional uint64 shared_memory_size = 18 [default = 0];
-	optional uint64 process_pid = 19 [default = 0];
-	optional uint64 frame_time = 20 [default = 0];
 }
 
 message CMsgComboNeedsPaint {
@@ -377,13 +374,7 @@ message CMsgComboNeedsPaint {
 	optional uint32 combobox_wide = 3 [default = 0];
 	optional uint32 combobox_tall = 4 [default = 0];
 	optional uint64 shared_memory_handle = 5 [default = 0];
-	optional uint64 process_handle = 6 [default = 0];
 	optional uint64 shared_memory_size = 7 [default = 0];
-}
-
-message CMsgNeedsPaintResponse {
-	optional uint32 browser_handle = 1;
-	optional uint32 textureid = 2;
 }
 
 message CMsgGetZoom {
@@ -493,7 +484,8 @@ message CMsgSetCookie {
 }
 
 message CMsgSetTargetFrameRate {
-	optional uint32 nTargetFrameRate = 1;
+	optional uint32 browser_handle = 1;
+	optional uint32 nTargetFrameRate = 2;
 }
 
 message CMsgPauseRepaint {
@@ -590,5 +582,9 @@ message CMsgScreenInformationChanged {
 	optional uint32 browser_handle = 1;
 	optional uint32 override_width = 2;
 	optional uint32 override_height = 3;
+}
+
+message CMsgClearAllCookies {
+	optional uint32 browser_handle = 1;
 }
 

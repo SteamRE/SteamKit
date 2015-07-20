@@ -80,6 +80,15 @@ namespace SteamKit2.Internal
       get { return _chunks; }
     }
   
+
+    private string _linktarget = "";
+    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"linktarget", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string linktarget
+    {
+      get { return _linktarget; }
+      set { _linktarget = value; }
+    }
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ChunkData")]
   public partial class ChunkData : global::ProtoBuf.IExtensible
   {

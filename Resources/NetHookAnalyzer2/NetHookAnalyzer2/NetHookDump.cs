@@ -36,5 +36,30 @@ namespace NetHookAnalyzer2
 		{
 			get { return items.AsQueryable(); }
 		}
+
+		public NetHookItem AddItemFromPath(string path)
+		{
+			var fileInfo = new FileInfo(path);
+			var item = new NetHookItem();
+			if (!item.LoadFromFile(fileInfo))
+			{
+				return null;
+			}
+
+			items.Add(item);
+			return item;
+		}
+
+		public NetHookItem RemoveItemWithPath(string path)
+		{
+			var item = items.SingleOrDefault(x => x.FileInfo.FullName == path);
+			if (item == null)
+			{
+				return null;
+			}
+
+			items.Remove(item);
+			return item;
+		}
 	}
 }

@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 using SteamKit2;
 
@@ -14,10 +11,9 @@ using SteamKit2;
 // interaction with steamkit is done through client message handlers and the results
 // come back through a callback queue controlled by a steamclient instance 
 //
-// this sample will introduce the 1st of two primary ways of handling callbacks: the inline loop
-// 
-// do note however, that this method isn't preferred, and the method introduced in
-// Sample 2 should be used
+// your code must create a CallbackMgr, and instances of Callback<T>. Callback<T> maps a specific
+// callback type to a function, whilst CallbackMgr routes the callback objects to the functions that
+// you have specified. a Callback<T> is bound to a specific callback manager.
 //
 
 namespace Sample1_Logon
@@ -25,6 +21,7 @@ namespace Sample1_Logon
     class Program
     {
         static SteamClient steamClient;
+        static CallbackManager manager;
 
         static SteamUser steamUser;
 
@@ -37,7 +34,7 @@ namespace Sample1_Logon
         {
             if ( args.Length < 2 )
             {
-                Console.WriteLine( "Sample1: No username and password specified!" );
+                Console.WriteLine( "Sample2: No username and password specified!" );
                 return;
             }
 
@@ -47,10 +44,21 @@ namespace Sample1_Logon
 
             // create our steamclient instance
             steamClient = new SteamClient();
+            // create the callback manager which will route callbacks to function calls
+            manager = new CallbackManager( steamClient );
 
             // get the steamuser handler, which is used for logging on after successfully connecting
             steamUser = steamClient.GetHandler<SteamUser>();
-            
+
+            // register a few callbacks we're interested in
+            // these are registered upon creation to a callback manager, which will then route the callbacks
+            // to the functions specified
+            new Callback<SteamClient.ConnectedCallback>( OnConnected, manager );
+            new Callback<SteamClient.DisconnectedCallback>( OnDisconnected, manager );
+
+            new Callback<SteamUser.LoggedOnCallback>( OnLoggedOn, manager );
+            new Callback<SteamUser.LoggedOffCallback>( OnLoggedOff, manager );
+
             isRunning = true;
 
             Console.WriteLine( "Connecting to Steam..." );
@@ -61,73 +69,70 @@ namespace Sample1_Logon
             // create our callback handling loop
             while ( isRunning )
             {
-                // wait for a callback to be posted
-                var callback = steamClient.WaitForCallback( true );
+                // in order for the callbacks to get routed, they need to be handled by the manager
+                manager.RunWaitCallbacks( TimeSpan.FromSeconds( 1 ) );
+            }
+        }
 
-                // handle the callback
-                // the Handle function will only call the passed in handler
-                // if the callback type matches the generic type
-                callback.Handle<SteamClient.ConnectedCallback>( c =>
+        static void OnConnected( SteamClient.ConnectedCallback callback )
+        {
+            if ( callback.Result != EResult.OK )
+            {
+                Console.WriteLine( "Unable to connect to Steam: {0}", callback.Result );
+
+                isRunning = false;
+                return;
+            }
+
+            Console.WriteLine( "Connected to Steam! Logging in '{0}'...", user );
+
+            steamUser.LogOn( new SteamUser.LogOnDetails
+            {
+                Username = user,
+                Password = pass,
+            } );
+        }
+
+        static void OnDisconnected( SteamClient.DisconnectedCallback callback )
+        {
+            Console.WriteLine( "Disconnected from Steam" );
+
+            isRunning = false;
+        }
+
+        static void OnLoggedOn( SteamUser.LoggedOnCallback callback )
+        {
+            if ( callback.Result != EResult.OK )
+            {
+                if ( callback.Result == EResult.AccountLogonDenied )
                 {
-                    if ( c.Result != EResult.OK )
-                    {
-                        Console.WriteLine( "Unable to connect to Steam: {0}", c.Result );
+                    // if we recieve AccountLogonDenied or one of it's flavors (AccountLogonDeniedNoMailSent, etc)
+                    // then the account we're logging into is SteamGuard protected
+                    // see sample 5 for how SteamGuard can be handled
 
-                        isRunning = false;
-                        return;
-                    }
-
-                    Console.WriteLine( "Connected to Steam! Logging in '{0}'...", user );
-
-                    steamUser.LogOn( new SteamUser.LogOnDetails
-                    {
-                        Username = user,
-                        Password = pass,
-                    } );
-                } );
-
-                callback.Handle<SteamClient.DisconnectedCallback>( c =>
-                {
-                    Console.WriteLine( "Disconnected from Steam" );
+                    Console.WriteLine( "Unable to logon to Steam: This account is SteamGuard protected." );
 
                     isRunning = false;
-                } );
+                    return;
+                }
 
-                callback.Handle<SteamUser.LoggedOnCallback>( c =>
-                {
-                    if ( c.Result != EResult.OK )
-                    {
-                        if ( c.Result == EResult.AccountLogonDenied )
-                        {
-                            // if we recieve AccountLogonDenied or one of it's flavors (AccountLogonDeniedNoMailSent, etc)
-                            // then the account we're logging into is SteamGuard protected
-                            // see sample 6 for how SteamGuard can be handled
+                Console.WriteLine( "Unable to logon to Steam: {0} / {1}", callback.Result, callback.ExtendedResult );
 
-                            Console.WriteLine( "Unable to logon to Steam: This account is SteamGuard protected." );
-
-                            isRunning = false;
-                            return;
-                        }
-
-                        Console.WriteLine( "Unable to logon to Steam: {0} / {1}", c.Result, c.ExtendedResult );
-
-                        isRunning = false;
-                        return;
-                    }
-
-                    Console.WriteLine( "Successfully logged on!" );
-
-                    // at this point, we'd be able to perform actions on Steam
-
-                    // for this sample we'll just log off
-                    steamUser.LogOff();
-                } );
-
-                callback.Handle<SteamUser.LoggedOffCallback>( c =>
-                {
-                    Console.WriteLine( "Logged off of Steam: {0}", c.Result );
-                } );
+                isRunning = false;
+                return;
             }
+
+            Console.WriteLine( "Successfully logged on!" );
+
+            // at this point, we'd be able to perform actions on Steam
+
+            // for this sample we'll just log off
+            steamUser.LogOff();
+        }
+
+        static void OnLoggedOff( SteamUser.LoggedOffCallback callback )
+        {
+            Console.WriteLine( "Logged off of Steam: {0}", callback.Result );
         }
     }
 }

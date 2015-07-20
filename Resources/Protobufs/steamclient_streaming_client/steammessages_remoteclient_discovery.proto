@@ -10,6 +10,8 @@ enum ERemoteClientBroadcastMsg {
 	k_ERemoteDeviceStreamingResponse = 6;
 	k_ERemoteDeviceProofRequest = 7;
 	k_ERemoteDeviceProofResponse = 8;
+	k_ERemoteDeviceAuthorizationCancelRequest = 9;
+	k_ERemoteDeviceStreamingCancelRequest = 10;
 }
 
 enum ERemoteClientService {
@@ -27,6 +29,7 @@ enum ERemoteDeviceAuthorizationResult {
 	k_ERemoteDeviceAuthorizationInProgress = 5;
 	k_ERemoteDeviceAuthorizationTimedOut = 6;
 	k_ERemoteDeviceAuthorizationFailed = 7;
+	k_ERemoteDeviceAuthorizationCanceled = 8;
 }
 
 enum ERemoteDeviceStreamingResult {
@@ -36,6 +39,7 @@ enum ERemoteDeviceStreamingResult {
 	k_ERemoteDeviceStreamingFailed = 3;
 	k_ERemoteDeviceStreamingBusy = 4;
 	k_ERemoteDeviceStreamingInProgress = 5;
+	k_ERemoteDeviceStreamingCanceled = 6;
 }
 
 message CMsgRemoteClientBroadcastHeader {
@@ -58,7 +62,6 @@ message CMsgRemoteClientBroadcastStatus {
 	optional int32 ostype = 7 [default = 0];
 	optional bool is64bit = 8 [default = false];
 	repeated .CMsgRemoteClientBroadcastStatus.User users = 9;
-	optional uint32 remote_control_port = 10;
 	optional int32 euniverse = 11;
 	optional uint32 timestamp = 12;
 }
@@ -85,11 +88,18 @@ message CMsgRemoteDeviceAuthorizationRequest {
 	required bytes encrypted_request = 3;
 }
 
+message CMsgRemoteDeviceAuthorizationCancelRequest {
+}
+
 message CMsgRemoteDeviceAuthorizationResponse {
 	required .ERemoteDeviceAuthorizationResult result = 1 [default = k_ERemoteDeviceAuthorizationSuccess];
 }
 
 message CMsgRemoteDeviceStreamingRequest {
+	required uint32 request_id = 1;
+}
+
+message CMsgRemoteDeviceStreamingCancelRequest {
 	required uint32 request_id = 1;
 }
 

@@ -41,7 +41,7 @@ Detoured SymmetricDecrypt!
 
 If instead you see a failure message or your Steam process crashes, it's possible that an update to Steam may have broken one of NetHook2's binary signature scans and they will require updating. If you're on the beta branch of Steam, try using the non-beta version and vice versa. Additionally check to see if there's any recent NetHook2 related commits on our `steamclient-beta` branch.
 
-If nothing seems to work, feel free to file an issue or hop [on IRC](https://github.com/SteamRE/SteamKit/wiki#contact) and lets know!
+If nothing seems to work, feel free to file an issue or hop [on IRC](https://github.com/SteamRE/SteamKit/wiki#contact) and let us know!
 
 Provided everything successfully injected and hooked, NetHook2 will now begin dumping every message to file. You can locate the dumps in your Steam install, under the `nethook` directory. The directories are numbered with the unix time that dumping began.
 

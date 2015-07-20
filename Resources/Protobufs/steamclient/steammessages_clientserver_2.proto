@@ -82,6 +82,8 @@ message CMsgClientUCMUpdatePublishedFile {
 	optional string url = 17;
 	optional bool update_content_manifest = 18;
 	optional fixed64 content_manifest = 19;
+	optional string metadata = 20;
+	optional bool update_metadata = 21;
 }
 
 message CMsgClientUCMUpdatePublishedFileResponse {
@@ -203,21 +205,20 @@ message CMsgClientUCMPublishedFileUpdated {
 
 message CMsgClientWorkshopItemChangesRequest {
 	optional uint32 app_id = 1;
-	optional uint32 num_items_installed = 2;
-	optional fixed64 last_updated_item_id = 3;
-	optional uint32 time_updated_time = 4;
+	optional uint32 last_time_updated = 2;
+	optional uint32 num_items_needed = 3;
 }
 
 message CMsgClientWorkshopItemChangesResponse {
-	message WorkshopItem {
+	message WorkshopItemInfo {
 		optional fixed64 published_file_id = 1;
 		optional uint32 time_updated = 2;
+		optional fixed64 manifest_id = 3;
 	}
 
-	repeated .CMsgClientWorkshopItemChangesResponse.WorkshopItem workshop_items = 1;
-	optional bool request_full_update = 2;
-	optional fixed64 last_updated_item_id = 3;
-	optional uint32 time_updated_time = 4;
+	optional int32 eresult = 1 [default = 2];
+	optional uint32 update_time = 2;
+	repeated .CMsgClientWorkshopItemChangesResponse.WorkshopItemInfo workshop_items = 5;
 }
 
 message CMsgClientWorkshopItemInfoRequest {
@@ -241,7 +242,6 @@ message CMsgClientWorkshopItemInfoResponse {
 	optional int32 eresult = 1 [default = 2];
 	optional uint32 update_time = 2;
 	repeated .CMsgClientWorkshopItemInfoResponse.WorkshopItemInfo workshop_items = 3;
-	repeated fixed64 failed_items = 4;
 }
 
 message CMsgClientUCMGetPublishedFilesForUser {
@@ -498,6 +498,8 @@ message CMsgTrading_InitiateTradeResponse {
 	optional uint32 new_device_cooldown_days = 5;
 	optional uint32 default_password_reset_probation_days = 6;
 	optional uint32 password_reset_probation_days = 7;
+	optional uint32 default_email_change_probation_days = 8;
+	optional uint32 email_change_probation_days = 9;
 }
 
 message CMsgTrading_CancelTradeRequest {
@@ -506,148 +508,6 @@ message CMsgTrading_CancelTradeRequest {
 
 message CMsgTrading_StartSession {
 	optional uint64 other_steamid = 1;
-}
-
-message CMsgClientMDSInitDepotBuildRequest {
-	optional uint32 depot_id = 1;
-	optional bytes encrypted_aes_key = 2;
-	optional uint32 build_id = 4;
-	optional bool for_local_cs = 5;
-	optional bool no_baseline = 6;
-}
-
-message CMsgClientMDSInitDepotBuildResponse {
-	optional int32 eresult = 1 [default = 2];
-	optional uint32 default_chunk_size = 2;
-	optional fixed64 base_manifest = 3;
-	optional bytes encrypted_depot_key = 4;
-}
-
-message CMsgClientMDSInitWorkshopBuildRequest {
-	optional uint32 depot_id = 1;
-	optional uint32 app_id = 2;
-	optional uint64 workshop_item_id = 3;
-}
-
-message CMsgClientMDSInitWorkshopBuildResponse {
-	optional int32 eresult = 1 [default = 2];
-	optional uint32 default_chunk_size = 2;
-	optional fixed64 base_manifest = 3;
-	optional bytes symmetric_depot_key = 4;
-}
-
-message CMsgClientMDSLoginRequest {
-	optional bytes encrypted_session_key = 1;
-}
-
-message CMsgClientMDSLoginResponse {
-	optional int32 eresult = 1 [default = 2];
-}
-
-message CMsgClientMDSUploadDepotChunks {
-	message ChunkUploadData {
-		optional bytes sha = 1;
-		optional uint32 rolling_crc = 2;
-		optional uint32 original_chunk_size = 3;
-		optional bytes data = 4;
-		optional uint32 compressed_chunk_size = 5;
-		optional uint32 compressed_crc = 6;
-	}
-
-	optional uint32 depot_id = 1;
-	repeated .CMsgClientMDSUploadDepotChunks.ChunkUploadData chunks = 2;
-	optional bool only_meta_data = 3;
-}
-
-message CMsgClientMDSUploadDepotChunksResponse {
-	optional int32 eresult = 1 [default = 2];
-}
-
-message CMsgClientMDSUploadRateTest {
-	optional uint32 serial_number = 1;
-	optional bytes test_data = 2;
-	optional uint32 test_data_size = 3;
-	optional uint32 test_data_crc = 4;
-}
-
-message CMsgClientMDSUploadRateTestResponse {
-	optional int32 eresult = 1 [default = 2];
-	optional uint32 serial_number = 2;
-}
-
-message CMsgClientMDSTransmitManifestDataChunk {
-	optional int32 offset = 1;
-	optional bytes data = 2;
-}
-
-message CMsgClientMDSUploadManifestRequest {
-	optional uint32 depot_id = 1;
-	optional uint32 manifest_size_compressed = 2;
-	optional uint32 build_id = 6;
-	optional uint32 manifest_version = 7;
-	optional bool local_cs_build = 9;
-}
-
-message CMsgClientMDSUploadManifestResponse {
-	optional int32 eresult = 1 [default = 2];
-	optional fixed64 new_manifest = 2;
-	optional uint32 unique_chunks = 3;
-	optional uint32 missing_chunks = 4;
-	optional uint32 bitstring_size_uncompressed = 5;
-	optional bytes bitstring = 6;
-	optional bool is_prev_manifest = 7;
-}
-
-message CMsgClientMDSGetDepotManifest {
-	optional uint32 depot_id = 1;
-	optional fixed64 manifest_id = 2;
-	optional uint32 manifest_version = 3;
-}
-
-message CMsgClientMDSGetDepotManifestResponse {
-	optional int32 eresult = 1 [default = 2];
-	optional uint32 manifest_size_compressed = 3;
-}
-
-message CMsgClientMDSGetDepotManifestChunk {
-	optional uint32 offset = 1;
-	optional bytes data = 3;
-}
-
-message CMsgClientMDSRegisterAppBuild {
-	optional int32 app_id = 1;
-	optional string description = 2;
-	optional bool for_local_cs = 5;
-}
-
-message CMsgClientMDSRegisterAppBuildResponse {
-	optional int32 eresult = 1 [default = 2];
-	optional uint32 build_id = 2;
-}
-
-message CMsgMDSSetAppBuildLive {
-	optional uint32 build_id = 1;
-	optional uint32 app_id = 2;
-	optional string beta_key = 3;
-	optional string beta_password = 5;
-	optional bool only_finish = 6;
-	optional uint32 num_skip_depots = 7;
-}
-
-message CMsgMDSSetAppBuildLiveResponse {
-	optional int32 eresult = 1 [default = 2];
-	optional string error_string = 2;
-}
-
-message CMsgClientMDSSignInstallScript {
-	optional int32 depot_id = 1;
-	optional string data = 2;
-}
-
-message CMsgClientMDSSignInstallScriptResponse {
-	optional int32 eresult = 1 [default = 2];
-	optional string error_string = 2;
-	optional string data = 3;
 }
 
 message CMsgClientEmailChange {
@@ -706,11 +566,17 @@ message CMsgClientUpdateAppJobReport {
 	optional uint64 bytes_staged = 9;
 	optional uint64 bytes_comitted = 10;
 	optional uint32 start_app_state = 11;
+	optional fixed64 stats_machine_id = 12;
 }
 
-message CMsgClientSteam2AppStarted {
-	optional uint32 app_id = 1;
-	optional string command_line = 2;
+message CMsgClientDPContentStatsReport {
+	optional fixed64 stats_machine_id = 1;
+	optional string country_code = 2;
+	optional int32 os_type = 3;
+	optional int32 language = 4;
+	optional uint32 num_install_folders = 5;
+	optional uint32 num_installed_games = 6;
+	optional uint64 size_installed_games = 7;
 }
 
 message CMsgClientGetCDNAuthTokenResponse {

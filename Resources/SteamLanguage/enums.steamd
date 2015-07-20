@@ -19,13 +19,16 @@ enum EChatEntryType
 	Typing = 2;
 	InviteGame = 3;
 	Emote = 4; obsolete "No longer supported by clients"
-	LobbyGameStart = 5;
+	LobbyGameStart = 5; obsolete "Listen for LobbyGameCreated_t callback instead"
 	LeftConversation = 6;
 	Entered = 7;
 	WasKicked = 8;
 	WasBanned = 9;
 	Disconnected = 10;
 	HistoricalChat = 11;
+	Reserved1 = 12;
+	Reserved2 = 13;
+	LinkBlocked = 14;
 };
 
 enum EPersonaState
@@ -344,6 +347,7 @@ enum EAuthSessionResponse
 	AuthTicketCanceled = 6;
 	AuthTicketInvalidAlreadyUsed = 7;
 	AuthTicketInvalid = 8;
+	PublisherIssuedBan = 9;
 };
 
 enum EChatRoomEnterResponse
@@ -716,8 +720,9 @@ enum EWorkshopFileType
 	Merch	= 11;
 	ControllerBinding	= 12;
 	SteamworksAccessInvite = 13;
+	SteamVideo = 14;
 
-	Max = 14;
+	Max = 15;
 };
 
 enum EWorkshopFileAction
@@ -807,7 +812,8 @@ enum ERemoteStoragePlatform flags
 	Windows = 1;
 	OSX = 2;
 	PS3 = 4;
-	Reserved1 = 8;
+	Linux = 8;
+	Reserved1 = 8; obsolete
 	Reserved2 = 16;
 
 	All = -1;

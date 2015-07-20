@@ -649,6 +649,30 @@ namespace SteamKit2
         }
 
         /// <summary>
+        /// This callback is fired in response to chat room info being recieved.
+        /// </summary>
+        public sealed class ChatRoomInfoCallback : CallbackMsg
+        {
+            /// <summary>
+            /// Gets SteamId of the chat room.
+            /// </summary>
+            public SteamID ChatRoomID { get; private set; }
+            /// <summary>
+            /// Gets the info type.
+            /// </summary>
+            public EChatInfoType Type { get; private set; }
+
+
+            internal ChatRoomInfoCallback( MsgClientChatRoomInfo msg, byte[] payload )
+            {
+                ChatRoomID = msg.SteamIdChat;
+                Type = msg.Type;
+
+                // todo: handle inner payload based on the type similar to ChatMemberInfoCallback
+            }
+        }
+
+        /// <summary>
         /// This callback is fired when a chat action has completed.
         /// </summary>
         public sealed class ChatActionResultCallback : CallbackMsg

@@ -7,6 +7,7 @@ message CMsgBeginFrame {
 	optional uint32 surface_height = 3;
 	optional uint32 render_target = 4;
 	optional double ui_scale_factor = 5;
+	optional bool empty_frame = 6;
 }
 
 message CMsgEndFrame {
@@ -17,6 +18,9 @@ message CMsgEndFrame {
 
 message CMsgClearBackbuffer {
 	optional uint32 clear_color_rgba = 1;
+}
+
+message CMsgClearGPUResources {
 }
 
 message CMsgDeleteTexture {
@@ -117,6 +121,22 @@ message CBoxShadowData {
 	optional bool animating = 8;
 }
 
+message CTextShadowData {
+	optional double horizontal_offset = 2;
+	optional double vertical_offset = 3;
+	optional double blur_radius = 4;
+	optional uint32 color = 6;
+	optional bool animating = 8;
+	optional double strength = 9;
+}
+
+message CMsgClipData {
+	optional double left = 1;
+	optional double top = 2;
+	optional double right = 3;
+	optional double bottom = 4;
+}
+
 message CMsgPushCompositingLayer {
 	optional uint64 layer_id = 1;
 	optional double width = 2;
@@ -166,6 +186,14 @@ message CMsgPushCompositingLayer {
 	optional double scale_2d_factors_y = 46;
 	optional double rotate_2d = 47;
 	optional bool needs_clear = 48;
+	optional bool needs_depth = 49;
+	optional bool needs_redraw_every_frame = 50;
+	optional .CTextShadowData text_shadow = 51;
+	optional uint32 mix_blend_mode = 52;
+	optional double occluded_left_edge = 53;
+	optional double occluded_top_edge = 54;
+	optional double occluded_right_edge = 55;
+	optional double occluded_bottom_edge = 56;
 }
 
 message CMsgPopCompositingLayer {
@@ -539,6 +567,36 @@ message CMsgBoxShadow {
 	repeated .CMsgAnimationData animations = 4;
 }
 
+message CMsgTextShadow {
+	message AnimationFrameData {
+		optional .CTextShadowData data = 1;
+	}
+
+	extend .CMsgAnimationFrameData {
+		optional .CMsgTextShadow.AnimationFrameData animation_frame_data = 1017;
+	}
+
+	optional .CTextShadowData base = 1;
+	optional .CMsgTransitionData transition_data = 2;
+	optional .CTextShadowData transition = 3;
+	repeated .CMsgAnimationData animations = 4;
+}
+
+message CMsgClip {
+	message AnimationFrameData {
+		optional .CMsgClipData data = 1;
+	}
+
+	extend .CMsgAnimationFrameData {
+		optional .CMsgClip.AnimationFrameData animation_frame_data = 1018;
+	}
+
+	optional .CMsgClipData base = 1;
+	optional .CMsgTransitionData transition_data = 2;
+	optional .CMsgClipData transition = 3;
+	repeated .CMsgAnimationData animations = 4;
+}
+
 message CMsgPushClipLayer {
 	optional .CMsgPoint top_left = 1;
 	optional .CMsgPoint bottom_right = 2;
@@ -570,9 +628,13 @@ message CMsgPushAAndTContext {
 	optional .CMsgBoxShadow box_shadow = 20;
 	optional .CMsgPointWithTransition scale_2d_centered = 21;
 	optional .CMsgRotate2D rotate_2d_centered = 22;
-	optional bool suppress_clip_to_bounds = 23;
-	optional int32 needs_full_repaint = 24;
-	optional bool wants_hit_test = 25;
+	optional .CMsgTextShadow text_shadow = 23;
+	optional .CMsgClip clip = 24;
+	optional bool suppress_clip_to_bounds = 25;
+	optional int32 needs_full_repaint = 26;
+	optional bool wants_hit_test = 27;
+	optional uint32 mix_blend_mode = 28;
+	optional bool opaque_background = 29;
 }
 
 message CMsgPopAAndTContext {
@@ -612,6 +674,7 @@ message CMsgDrawTexturedRect {
 	optional .CMsgPoint texture_top_left = 4;
 	optional .CMsgPoint texture_bottom_right = 5;
 	optional int32 texture_serial = 6 [default = 0];
+	optional uint32 texture_sample_mode = 7 [default = 0];
 }
 
 message CMsgDrawDoubleBufferedRect {
@@ -637,11 +700,17 @@ message CMsgRenderTexturedRect {
 	optional .CMsgPoint texture_top_left = 4;
 	optional .CMsgPoint texture_bottom_right = 5;
 	optional int32 texture_serial = 6 [default = 0];
+	optional uint32 texture_sample_mode = 7 [default = 0];
 }
 
 message CMsgLockTexture {
 	optional uint32 texture_id = 1;
 	optional int32 texture_serial = 2 [default = 0];
+}
+
+message CMsgTextInlineObject {
+	optional float width = 1;
+	optional float height = 2;
 }
 
 message CMsgTextFormat {
@@ -652,6 +721,8 @@ message CMsgTextFormat {
 	optional bool underline = 5;
 	optional bool strikethrough = 6;
 	optional .CMsgFillBrushCollection fill_brush_collection = 7;
+	optional int32 letter_spacing = 8 [default = 0];
+	optional .CMsgTextInlineObject inline_object = 9;
 }
 
 message CMsgTextRangeFormat {
@@ -668,6 +739,8 @@ message CMsgRenderTextFormat {
 	optional bool underline = 5;
 	optional bool strikethrough = 6;
 	optional .CMsgRenderFillBrushCollection fill_brush_collection = 7;
+	optional int32 letter_spacing = 8 [default = 0];
+	optional .CMsgTextInlineObject inline_object = 9;
 }
 
 message CMsgRenderTextRangeFormat {
@@ -698,5 +771,15 @@ message CMsgRenderTextRegion {
 	optional bool wrapping = 8;
 	optional bool ellipsis = 9;
 	repeated .CMsgRenderTextRangeFormat range_formats = 10;
+	optional .CTextShadowData text_shadow = 11;
+}
+
+message CMsgRequestRenderCallback {
+	optional bytes callback_obj = 1;
+	optional .CMsgPoint top_left = 2;
+	optional .CMsgPoint bottom_right = 3;
+	optional .CMsgPoint top_left_padding = 4;
+	optional .CMsgPoint bottom_right_padding = 5;
+	optional bool needs_redraw_every_frame = 6;
 }
 

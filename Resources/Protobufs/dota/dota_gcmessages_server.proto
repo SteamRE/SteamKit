@@ -79,6 +79,18 @@ message CMsgPoorNetworkConditions {
 	repeated .CMsgPoorNetworkConditions.Player players = 2;
 }
 
+message CMsgGameserverCrash {
+	optional uint64 match_id = 1;
+	optional fixed64 lobby_id = 2;
+	optional .DOTA_GameState game_state = 3 [default = DOTA_GAMERULES_STATE_INIT];
+	optional fixed32 sentinel_save_time = 4;
+	optional fixed64 server_steam_id = 5;
+	optional fixed32 server_public_ip_addr = 6;
+	optional uint32 server_port = 7;
+	optional uint32 server_cluster = 8;
+	optional uint32 pid = 9;
+}
+
 message CMsgConnectedPlayers {
 	message Player {
 		optional fixed64 steam_id = 1;
@@ -99,6 +111,8 @@ message CMsgConnectedPlayers {
 		TOWER_STATE = 9;
 		GAMESTATE_TIMEOUT = 10;
 		MASS_DISCONNECT = 11;
+		BARRACKS_STATE = 12;
+		KILLS = 13;
 	}
 
 	repeated .CMsgConnectedPlayers.Player connected_players = 1;
@@ -109,6 +123,9 @@ message CMsgConnectedPlayers {
 	optional bool legacy_mass_disconnect = 9;
 	optional .CMsgPoorNetworkConditions poor_network_conditions = 10;
 	optional .CMsgConnectedPlayers.SendReason send_reason = 8 [default = INVALID];
+	optional uint32 radiant_kills = 11;
+	optional uint32 dire_kills = 12;
+	optional uint32 barracks_state = 13;
 }
 
 message CMsgGameServerInfo {
@@ -185,10 +202,24 @@ message CMsgDOTAFantasyMatch {
 	optional uint32 team_2 = 7;
 }
 
+message CMsgServerToGCRealtimeStats {
+	optional .CMsgDOTARealtimeGameStats delayed = 1;
+	optional .CMsgDOTARealtimeGameStats current = 2;
+}
+
+message CMsgGCToServerRealtimeStatsStartStop {
+	optional bool start = 1;
+}
+
 message CMsgGameMatchSignOut {
 	message CTeam {
 		message CPlayer {
-			optional fixed64 account_id = 1;
+			message CCustomGameData {
+				optional uint32 dota_team = 1;
+				optional bool winner = 2;
+			}
+
+			optional fixed64 steam_id = 1;
 			optional uint32 hero_id = 3;
 			repeated uint32 items = 4;
 			optional uint32 gold = 5;
@@ -219,6 +250,7 @@ message CMsgGameMatchSignOut {
 			repeated .CMatchPlayerAbilityUpgrade ability_upgrades = 32;
 			repeated .CMatchAdditionalUnitInventory additional_units_inventory = 33;
 			optional uint32 net_worth = 34;
+			optional .CMsgGameMatchSignOut.CTeam.CPlayer.CCustomGameData custom_game_data = 35;
 		}
 
 		repeated .CMsgGameMatchSignOut.CTeam.CPlayer players = 1;
@@ -227,6 +259,18 @@ message CMsgGameMatchSignOut {
 	message CAdditionalSignoutMsg {
 		optional uint32 id = 1;
 		optional bytes contents = 2;
+	}
+
+	message CSocialFeedMatchEvent {
+		optional uint32 account_id = 1;
+		optional uint32 timestamp = 2;
+		optional uint32 event_type = 3;
+		optional int32 game_time = 4;
+		optional uint32 replay_time = 5;
+	}
+
+	message CCustomGameData {
+		optional uint32 publish_timestamp = 1;
 	}
 
 	optional uint64 match_id = 1 [(key_field) = true];
@@ -250,6 +294,7 @@ message CMsgGameMatchSignOut {
 	optional bool legacy_mass_disconnect = 21;
 	optional .CMsgPoorNetworkConditions poor_network_conditions = 35;
 	repeated .CMsgGameMatchSignOut.CAdditionalSignoutMsg additional_msgs = 20;
+	repeated .CMsgGameMatchSignOut.CSocialFeedMatchEvent social_feed_events = 36;
 	optional sint32 average_networth_delta = 22;
 	optional sint32 networth_delta_min10 = 23;
 	optional sint32 networth_delta_min20 = 24;
@@ -263,6 +308,7 @@ message CMsgGameMatchSignOut {
 	optional sint32 bonus_gold_loser_min10 = 32;
 	optional sint32 bonus_gold_loser_min20 = 33;
 	optional uint32 bonus_gold_loser_total = 34;
+	optional .CMsgGameMatchSignOut.CCustomGameData custom_game_data = 37;
 }
 
 message CMsgSignOutDraftInfo {
@@ -281,6 +327,32 @@ message CMsgSignOutBotInfo {
 	optional .DOTABotDifficulty bot_difficulty = 2 [default = BOT_DIFFICULTY_PASSIVE];
 	optional bool created_lobby = 3;
 	repeated .CMsgSignOutBotInfo.CMsgBotSlotDifficulty bot_slot_difficulties = 4;
+}
+
+message CMsgSignOutPlayerStats {
+	optional int32 account_id = 1;
+	optional uint64 match_id = 2;
+	optional uint32 rank = 3;
+	optional uint32 hero_id = 4;
+	optional uint32 rampages = 5;
+	optional uint32 triple_kills = 6;
+	optional uint32 first_blood_claimed = 7;
+	optional uint32 first_blood_given = 8;
+	optional uint32 couriers_killed = 9;
+	optional uint32 aegises_snatched = 10;
+	optional uint32 cheeses_eaten = 11;
+	optional uint32 creeps_stacked = 12;
+	optional float fight_score = 13;
+	optional float farm_score = 14;
+	optional float support_score = 15;
+	optional float push_score = 16;
+	optional uint32 kills = 17;
+	optional uint32 deaths = 18;
+	optional uint32 assists = 19;
+	optional uint32 last_hits = 20;
+	optional uint32 denies = 21;
+	optional float gpm = 22;
+	optional float xppm = 23;
 }
 
 message CMsgSignOutCommunicationSummary {
@@ -422,8 +494,6 @@ message CMsgDOTARequestPlayerResourcesResponse {
 
 message CMsgDOTARequestBatchPlayerResources {
 	repeated uint32 account_ids = 1 [packed = true];
-	optional bool legacy_rank_use_competitive = 2;
-	repeated bool legacy_rank_use_solo = 3 [packed = true];
 	repeated uint32 rank_types = 4 [packed = true];
 }
 
@@ -485,6 +555,7 @@ message CMsgTournamentItemEvent {
 	optional uint32 multi_kill_count = 9;
 	optional uint32 winner_score = 10;
 	optional uint32 loser_score = 11;
+	repeated .CProtoItemHeroStatue hero_statues = 12;
 }
 
 message CMsgTournamentItemEventResponse {
@@ -618,7 +689,7 @@ message CMsgServerGetEventPointsResponse {
 	message Points {
 		optional uint32 account_id = 1;
 		optional uint32 points_total = 2;
-		optional uint32 premium_total = 3;
+		optional bool owned = 4;
 	}
 
 	optional uint32 event_id = 1;
@@ -777,5 +848,33 @@ message CMsgGCToServerPredictionResult {
 message CMsgServerToGCLockCharmTrading {
 	optional uint32 account_id = 1;
 	optional uint64 item_id = 2;
+}
+
+message CMsgDOTACNY2015EventPointUsage {
+	message PointUsage {
+		repeated uint32 path = 1;
+		repeated uint32 path_level = 2;
+		repeated uint32 ability_points_spent = 3;
+	}
+
+	optional .CMsgDOTACNY2015EventPointUsage.PointUsage winning_team_usage = 1;
+	optional .CMsgDOTACNY2015EventPointUsage.PointUsage losing_team_usage = 2;
+}
+
+message CMsgSignOutUpdatePlayerChallenge {
+	message Challenge {
+		optional uint32 event_id = 1;
+		optional uint32 sequence_id = 3;
+	}
+
+	optional uint32 account_id = 1;
+	repeated .CMsgSignOutUpdatePlayerChallenge.Challenge completed = 2;
+	repeated .CMsgSignOutUpdatePlayerChallenge.Challenge rerolled = 3;
+	optional uint64 match_id = 4;
+}
+
+message CMsgServerToGCRerollPlayerChallenge {
+	optional uint32 account_id = 1;
+	optional .CMsgClientToGCRerollPlayerChallenge reroll_msg = 2;
 }
 

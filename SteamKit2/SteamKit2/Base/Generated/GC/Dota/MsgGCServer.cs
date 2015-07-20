@@ -146,6 +146,97 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGameserverCrash")]
+  public partial class CMsgGameserverCrash : global::ProtoBuf.IExtensible
+  {
+    public CMsgGameserverCrash() {}
+    
+
+    private ulong _match_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"match_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong match_id
+    {
+      get { return _match_id; }
+      set { _match_id = value; }
+    }
+
+    private ulong _lobby_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"lobby_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong lobby_id
+    {
+      get { return _lobby_id; }
+      set { _lobby_id = value; }
+    }
+
+    private DOTA_GameState _game_state = DOTA_GameState.DOTA_GAMERULES_STATE_INIT;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"game_state", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(DOTA_GameState.DOTA_GAMERULES_STATE_INIT)]
+    public DOTA_GameState game_state
+    {
+      get { return _game_state; }
+      set { _game_state = value; }
+    }
+
+    private uint _sentinel_save_time = default(uint);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"sentinel_save_time", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint sentinel_save_time
+    {
+      get { return _sentinel_save_time; }
+      set { _sentinel_save_time = value; }
+    }
+
+    private ulong _server_steam_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"server_steam_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong server_steam_id
+    {
+      get { return _server_steam_id; }
+      set { _server_steam_id = value; }
+    }
+
+    private uint _server_public_ip_addr = default(uint);
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"server_public_ip_addr", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint server_public_ip_addr
+    {
+      get { return _server_public_ip_addr; }
+      set { _server_public_ip_addr = value; }
+    }
+
+    private uint _server_port = default(uint);
+    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"server_port", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint server_port
+    {
+      get { return _server_port; }
+      set { _server_port = value; }
+    }
+
+    private uint _server_cluster = default(uint);
+    [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"server_cluster", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint server_cluster
+    {
+      get { return _server_cluster; }
+      set { _server_cluster = value; }
+    }
+
+    private uint _pid = default(uint);
+    [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"pid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint pid
+    {
+      get { return _pid; }
+      set { _pid = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgConnectedPlayers")]
   public partial class CMsgConnectedPlayers : global::ProtoBuf.IExtensible
   {
@@ -218,6 +309,33 @@ namespace SteamKit2.GC.Dota.Internal
     {
       get { return _send_reason; }
       set { _send_reason = value; }
+    }
+
+    private uint _radiant_kills = default(uint);
+    [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"radiant_kills", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint radiant_kills
+    {
+      get { return _radiant_kills; }
+      set { _radiant_kills = value; }
+    }
+
+    private uint _dire_kills = default(uint);
+    [global::ProtoBuf.ProtoMember(12, IsRequired = false, Name=@"dire_kills", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint dire_kills
+    {
+      get { return _dire_kills; }
+      set { _dire_kills = value; }
+    }
+
+    private uint _barracks_state = default(uint);
+    [global::ProtoBuf.ProtoMember(13, IsRequired = false, Name=@"barracks_state", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint barracks_state
+    {
+      get { return _barracks_state; }
+      set { _barracks_state = value; }
     }
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Player")]
   public partial class Player : global::ProtoBuf.IExtensible
@@ -300,7 +418,13 @@ namespace SteamKit2.GC.Dota.Internal
       GAMESTATE_TIMEOUT = 10,
             
       [global::ProtoBuf.ProtoEnum(Name=@"MASS_DISCONNECT", Value=11)]
-      MASS_DISCONNECT = 11
+      MASS_DISCONNECT = 11,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"BARRACKS_STATE", Value=12)]
+      BARRACKS_STATE = 12,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"KILLS", Value=13)]
+      KILLS = 13
     }
   
     private global::ProtoBuf.IExtension extensionObject;
@@ -849,6 +973,53 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgServerToGCRealtimeStats")]
+  public partial class CMsgServerToGCRealtimeStats : global::ProtoBuf.IExtensible
+  {
+    public CMsgServerToGCRealtimeStats() {}
+    
+
+    private CMsgDOTARealtimeGameStats _delayed = null;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"delayed", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public CMsgDOTARealtimeGameStats delayed
+    {
+      get { return _delayed; }
+      set { _delayed = value; }
+    }
+
+    private CMsgDOTARealtimeGameStats _current = null;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"current", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public CMsgDOTARealtimeGameStats current
+    {
+      get { return _current; }
+      set { _current = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCToServerRealtimeStatsStartStop")]
+  public partial class CMsgGCToServerRealtimeStatsStartStop : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCToServerRealtimeStatsStartStop() {}
+    
+
+    private bool _start = default(bool);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"start", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool start
+    {
+      get { return _start; }
+      set { _start = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGameMatchSignOut")]
   public partial class CMsgGameMatchSignOut : global::ProtoBuf.IExtensible
   {
@@ -1027,6 +1198,13 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _additional_msgs; }
     }
   
+    private readonly global::System.Collections.Generic.List<CMsgGameMatchSignOut.CSocialFeedMatchEvent> _social_feed_events = new global::System.Collections.Generic.List<CMsgGameMatchSignOut.CSocialFeedMatchEvent>();
+    [global::ProtoBuf.ProtoMember(36, Name=@"social_feed_events", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CMsgGameMatchSignOut.CSocialFeedMatchEvent> social_feed_events
+    {
+      get { return _social_feed_events; }
+    }
+  
 
     private int _average_networth_delta = default(int);
     [global::ProtoBuf.ProtoMember(22, IsRequired = false, Name=@"average_networth_delta", DataFormat = global::ProtoBuf.DataFormat.ZigZag)]
@@ -1144,6 +1322,15 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _bonus_gold_loser_total; }
       set { _bonus_gold_loser_total = value; }
     }
+
+    private CMsgGameMatchSignOut.CCustomGameData _custom_game_data = null;
+    [global::ProtoBuf.ProtoMember(37, IsRequired = false, Name=@"custom_game_data", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public CMsgGameMatchSignOut.CCustomGameData custom_game_data
+    {
+      get { return _custom_game_data; }
+      set { _custom_game_data = value; }
+    }
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CTeam")]
   public partial class CTeam : global::ProtoBuf.IExtensible
   {
@@ -1162,13 +1349,13 @@ namespace SteamKit2.GC.Dota.Internal
     public CPlayer() {}
     
 
-    private ulong _account_id = default(ulong);
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    private ulong _steam_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steam_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
     [global::System.ComponentModel.DefaultValue(default(ulong))]
-    public ulong account_id
+    public ulong steam_id
     {
-      get { return _account_id; }
-      set { _account_id = value; }
+      get { return _steam_id; }
+      set { _steam_id = value; }
     }
 
     private uint _hero_id = default(uint);
@@ -1434,6 +1621,43 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _net_worth; }
       set { _net_worth = value; }
     }
+
+    private CMsgGameMatchSignOut.CTeam.CPlayer.CCustomGameData _custom_game_data = null;
+    [global::ProtoBuf.ProtoMember(35, IsRequired = false, Name=@"custom_game_data", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public CMsgGameMatchSignOut.CTeam.CPlayer.CCustomGameData custom_game_data
+    {
+      get { return _custom_game_data; }
+      set { _custom_game_data = value; }
+    }
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCustomGameData")]
+  public partial class CCustomGameData : global::ProtoBuf.IExtensible
+  {
+    public CCustomGameData() {}
+    
+
+    private uint _dota_team = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"dota_team", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint dota_team
+    {
+      get { return _dota_team; }
+      set { _dota_team = value; }
+    }
+
+    private bool _winner = default(bool);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"winner", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool winner
+    {
+      get { return _winner; }
+      set { _winner = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -1466,6 +1690,80 @@ namespace SteamKit2.GC.Dota.Internal
     {
       get { return _contents; }
       set { _contents = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CSocialFeedMatchEvent")]
+  public partial class CSocialFeedMatchEvent : global::ProtoBuf.IExtensible
+  {
+    public CSocialFeedMatchEvent() {}
+    
+
+    private uint _account_id = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint account_id
+    {
+      get { return _account_id; }
+      set { _account_id = value; }
+    }
+
+    private uint _timestamp = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"timestamp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint timestamp
+    {
+      get { return _timestamp; }
+      set { _timestamp = value; }
+    }
+
+    private uint _event_type = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"event_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint event_type
+    {
+      get { return _event_type; }
+      set { _event_type = value; }
+    }
+
+    private int _game_time = default(int);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"game_time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int game_time
+    {
+      get { return _game_time; }
+      set { _game_time = value; }
+    }
+
+    private uint _replay_time = default(uint);
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"replay_time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint replay_time
+    {
+      get { return _replay_time; }
+      set { _replay_time = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCustomGameData")]
+  public partial class CCustomGameData : global::ProtoBuf.IExtensible
+  {
+    public CCustomGameData() {}
+    
+
+    private uint _publish_timestamp = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"publish_timestamp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint publish_timestamp
+    {
+      get { return _publish_timestamp; }
+      set { _publish_timestamp = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -1579,6 +1877,223 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgSignOutPlayerStats")]
+  public partial class CMsgSignOutPlayerStats : global::ProtoBuf.IExtensible
+  {
+    public CMsgSignOutPlayerStats() {}
+    
+
+    private int _account_id = default(int);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int account_id
+    {
+      get { return _account_id; }
+      set { _account_id = value; }
+    }
+
+    private ulong _match_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"match_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong match_id
+    {
+      get { return _match_id; }
+      set { _match_id = value; }
+    }
+
+    private uint _rank = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"rank", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint rank
+    {
+      get { return _rank; }
+      set { _rank = value; }
+    }
+
+    private uint _hero_id = default(uint);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"hero_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint hero_id
+    {
+      get { return _hero_id; }
+      set { _hero_id = value; }
+    }
+
+    private uint _rampages = default(uint);
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"rampages", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint rampages
+    {
+      get { return _rampages; }
+      set { _rampages = value; }
+    }
+
+    private uint _triple_kills = default(uint);
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"triple_kills", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint triple_kills
+    {
+      get { return _triple_kills; }
+      set { _triple_kills = value; }
+    }
+
+    private uint _first_blood_claimed = default(uint);
+    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"first_blood_claimed", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint first_blood_claimed
+    {
+      get { return _first_blood_claimed; }
+      set { _first_blood_claimed = value; }
+    }
+
+    private uint _first_blood_given = default(uint);
+    [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"first_blood_given", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint first_blood_given
+    {
+      get { return _first_blood_given; }
+      set { _first_blood_given = value; }
+    }
+
+    private uint _couriers_killed = default(uint);
+    [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"couriers_killed", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint couriers_killed
+    {
+      get { return _couriers_killed; }
+      set { _couriers_killed = value; }
+    }
+
+    private uint _aegises_snatched = default(uint);
+    [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"aegises_snatched", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint aegises_snatched
+    {
+      get { return _aegises_snatched; }
+      set { _aegises_snatched = value; }
+    }
+
+    private uint _cheeses_eaten = default(uint);
+    [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"cheeses_eaten", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint cheeses_eaten
+    {
+      get { return _cheeses_eaten; }
+      set { _cheeses_eaten = value; }
+    }
+
+    private uint _creeps_stacked = default(uint);
+    [global::ProtoBuf.ProtoMember(12, IsRequired = false, Name=@"creeps_stacked", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint creeps_stacked
+    {
+      get { return _creeps_stacked; }
+      set { _creeps_stacked = value; }
+    }
+
+    private float _fight_score = default(float);
+    [global::ProtoBuf.ProtoMember(13, IsRequired = false, Name=@"fight_score", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(float))]
+    public float fight_score
+    {
+      get { return _fight_score; }
+      set { _fight_score = value; }
+    }
+
+    private float _farm_score = default(float);
+    [global::ProtoBuf.ProtoMember(14, IsRequired = false, Name=@"farm_score", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(float))]
+    public float farm_score
+    {
+      get { return _farm_score; }
+      set { _farm_score = value; }
+    }
+
+    private float _support_score = default(float);
+    [global::ProtoBuf.ProtoMember(15, IsRequired = false, Name=@"support_score", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(float))]
+    public float support_score
+    {
+      get { return _support_score; }
+      set { _support_score = value; }
+    }
+
+    private float _push_score = default(float);
+    [global::ProtoBuf.ProtoMember(16, IsRequired = false, Name=@"push_score", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(float))]
+    public float push_score
+    {
+      get { return _push_score; }
+      set { _push_score = value; }
+    }
+
+    private uint _kills = default(uint);
+    [global::ProtoBuf.ProtoMember(17, IsRequired = false, Name=@"kills", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint kills
+    {
+      get { return _kills; }
+      set { _kills = value; }
+    }
+
+    private uint _deaths = default(uint);
+    [global::ProtoBuf.ProtoMember(18, IsRequired = false, Name=@"deaths", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint deaths
+    {
+      get { return _deaths; }
+      set { _deaths = value; }
+    }
+
+    private uint _assists = default(uint);
+    [global::ProtoBuf.ProtoMember(19, IsRequired = false, Name=@"assists", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint assists
+    {
+      get { return _assists; }
+      set { _assists = value; }
+    }
+
+    private uint _last_hits = default(uint);
+    [global::ProtoBuf.ProtoMember(20, IsRequired = false, Name=@"last_hits", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint last_hits
+    {
+      get { return _last_hits; }
+      set { _last_hits = value; }
+    }
+
+    private uint _denies = default(uint);
+    [global::ProtoBuf.ProtoMember(21, IsRequired = false, Name=@"denies", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint denies
+    {
+      get { return _denies; }
+      set { _denies = value; }
+    }
+
+    private float _gpm = default(float);
+    [global::ProtoBuf.ProtoMember(22, IsRequired = false, Name=@"gpm", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(float))]
+    public float gpm
+    {
+      get { return _gpm; }
+      set { _gpm = value; }
+    }
+
+    private float _xppm = default(float);
+    [global::ProtoBuf.ProtoMember(23, IsRequired = false, Name=@"xppm", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(float))]
+    public float xppm
+    {
+      get { return _xppm; }
+      set { _xppm = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -2527,22 +3042,6 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _account_ids; }
     }
   
-
-    private bool _legacy_rank_use_competitive = default(bool);
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"legacy_rank_use_competitive", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
-    public bool legacy_rank_use_competitive
-    {
-      get { return _legacy_rank_use_competitive; }
-      set { _legacy_rank_use_competitive = value; }
-    }
-    private readonly global::System.Collections.Generic.List<bool> _legacy_rank_use_solo = new global::System.Collections.Generic.List<bool>();
-    [global::ProtoBuf.ProtoMember(3, Name=@"legacy_rank_use_solo", DataFormat = global::ProtoBuf.DataFormat.Default, Options = global::ProtoBuf.MemberSerializationOptions.Packed)]
-    public global::System.Collections.Generic.List<bool> legacy_rank_use_solo
-    {
-      get { return _legacy_rank_use_solo; }
-    }
-  
     private readonly global::System.Collections.Generic.List<uint> _rank_types = new global::System.Collections.Generic.List<uint>();
     [global::ProtoBuf.ProtoMember(4, Name=@"rank_types", DataFormat = global::ProtoBuf.DataFormat.TwosComplement, Options = global::ProtoBuf.MemberSerializationOptions.Packed)]
     public global::System.Collections.Generic.List<uint> rank_types
@@ -2931,6 +3430,13 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _loser_score; }
       set { _loser_score = value; }
     }
+    private readonly global::System.Collections.Generic.List<CProtoItemHeroStatue> _hero_statues = new global::System.Collections.Generic.List<CProtoItemHeroStatue>();
+    [global::ProtoBuf.ProtoMember(12, Name=@"hero_statues", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CProtoItemHeroStatue> hero_statues
+    {
+      get { return _hero_statues; }
+    }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -3669,13 +4175,13 @@ namespace SteamKit2.GC.Dota.Internal
       set { _points_total = value; }
     }
 
-    private uint _premium_total = default(uint);
-    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"premium_total", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint premium_total
+    private bool _owned = default(bool);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"owned", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool owned
     {
-      get { return _premium_total; }
-      set { _premium_total = value; }
+      get { return _owned; }
+      set { _owned = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -4534,6 +5040,163 @@ namespace SteamKit2.GC.Dota.Internal
     {
       get { return _item_id; }
       set { _item_id = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTACNY2015EventPointUsage")]
+  public partial class CMsgDOTACNY2015EventPointUsage : global::ProtoBuf.IExtensible
+  {
+    public CMsgDOTACNY2015EventPointUsage() {}
+    
+
+    private CMsgDOTACNY2015EventPointUsage.PointUsage _winning_team_usage = null;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"winning_team_usage", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public CMsgDOTACNY2015EventPointUsage.PointUsage winning_team_usage
+    {
+      get { return _winning_team_usage; }
+      set { _winning_team_usage = value; }
+    }
+
+    private CMsgDOTACNY2015EventPointUsage.PointUsage _losing_team_usage = null;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"losing_team_usage", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public CMsgDOTACNY2015EventPointUsage.PointUsage losing_team_usage
+    {
+      get { return _losing_team_usage; }
+      set { _losing_team_usage = value; }
+    }
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"PointUsage")]
+  public partial class PointUsage : global::ProtoBuf.IExtensible
+  {
+    public PointUsage() {}
+    
+    private readonly global::System.Collections.Generic.List<uint> _path = new global::System.Collections.Generic.List<uint>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"path", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public global::System.Collections.Generic.List<uint> path
+    {
+      get { return _path; }
+    }
+  
+    private readonly global::System.Collections.Generic.List<uint> _path_level = new global::System.Collections.Generic.List<uint>();
+    [global::ProtoBuf.ProtoMember(2, Name=@"path_level", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public global::System.Collections.Generic.List<uint> path_level
+    {
+      get { return _path_level; }
+    }
+  
+    private readonly global::System.Collections.Generic.List<uint> _ability_points_spent = new global::System.Collections.Generic.List<uint>();
+    [global::ProtoBuf.ProtoMember(3, Name=@"ability_points_spent", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public global::System.Collections.Generic.List<uint> ability_points_spent
+    {
+      get { return _ability_points_spent; }
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgSignOutUpdatePlayerChallenge")]
+  public partial class CMsgSignOutUpdatePlayerChallenge : global::ProtoBuf.IExtensible
+  {
+    public CMsgSignOutUpdatePlayerChallenge() {}
+    
+
+    private uint _account_id = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint account_id
+    {
+      get { return _account_id; }
+      set { _account_id = value; }
+    }
+    private readonly global::System.Collections.Generic.List<CMsgSignOutUpdatePlayerChallenge.Challenge> _completed = new global::System.Collections.Generic.List<CMsgSignOutUpdatePlayerChallenge.Challenge>();
+    [global::ProtoBuf.ProtoMember(2, Name=@"completed", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CMsgSignOutUpdatePlayerChallenge.Challenge> completed
+    {
+      get { return _completed; }
+    }
+  
+    private readonly global::System.Collections.Generic.List<CMsgSignOutUpdatePlayerChallenge.Challenge> _rerolled = new global::System.Collections.Generic.List<CMsgSignOutUpdatePlayerChallenge.Challenge>();
+    [global::ProtoBuf.ProtoMember(3, Name=@"rerolled", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CMsgSignOutUpdatePlayerChallenge.Challenge> rerolled
+    {
+      get { return _rerolled; }
+    }
+  
+
+    private ulong _match_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"match_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong match_id
+    {
+      get { return _match_id; }
+      set { _match_id = value; }
+    }
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Challenge")]
+  public partial class Challenge : global::ProtoBuf.IExtensible
+  {
+    public Challenge() {}
+    
+
+    private uint _event_id = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"event_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint event_id
+    {
+      get { return _event_id; }
+      set { _event_id = value; }
+    }
+
+    private uint _sequence_id = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"sequence_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint sequence_id
+    {
+      get { return _sequence_id; }
+      set { _sequence_id = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgServerToGCRerollPlayerChallenge")]
+  public partial class CMsgServerToGCRerollPlayerChallenge : global::ProtoBuf.IExtensible
+  {
+    public CMsgServerToGCRerollPlayerChallenge() {}
+    
+
+    private uint _account_id = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint account_id
+    {
+      get { return _account_id; }
+      set { _account_id = value; }
+    }
+
+    private CMsgClientToGCRerollPlayerChallenge _reroll_msg = null;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"reroll_msg", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public CMsgClientToGCRerollPlayerChallenge reroll_msg
+    {
+      get { return _reroll_msg; }
+      set { _reroll_msg = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

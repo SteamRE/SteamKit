@@ -38,5 +38,6 @@ message CDOTAModifierBuffTableEntry {
 	optional int32 dd_modifier_index = 27;
 	optional int32 dd_ability_index = 28;
 	optional string illusion_label = 29;
+	optional bool active = 30;
 }
 

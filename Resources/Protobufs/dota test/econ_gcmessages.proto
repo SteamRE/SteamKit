@@ -34,11 +34,6 @@ enum EGCItemMsg {
 	k_EMsgGCGiftedItems = 1027;
 	k_EMsgGCRemoveItemName = 1030;
 	k_EMsgGCRemoveItemPaint = 1031;
-	k_EMsgGCGiftWrapItem = 1032;
-	k_EMsgGCGiftWrapItemResponse = 1033;
-	k_EMsgGCDeliverGift = 1034;
-	k_EMsgGCDeliverGiftResponseGiver = 1035;
-	k_EMsgGCDeliverGiftResponseReceiver = 1036;
 	k_EMsgGCUnwrapGiftRequest = 1037;
 	k_EMsgGCUnwrapGiftResponse = 1038;
 	k_EMsgGCSetItemStyle = 1039;
@@ -169,6 +164,8 @@ enum EGCItemMsg {
 	k_EMsgGCRedeemCode = 2562;
 	k_EMsgGCRedeemCodeResponse = 2563;
 	k_EMsgGCToGCItemConsumptionRollback = 2564;
+	k_EMsgClientToGCWrapAndDeliverGift = 2565;
+	k_EMsgClientToGCWrapAndDeliverGiftResponse = 2566;
 }
 
 enum EGCMsgResponse {
@@ -471,5 +468,19 @@ message CMsgDevNewItemRequestResponse {
 message CMsgGCAddGiftItem {
 	optional uint32 account_id = 1;
 	optional uint64 item_id = 2;
+}
+
+message CMsgClientToGCWrapAndDeliverGift {
+	optional uint64 item_id = 1;
+	optional uint32 give_to_account_id = 2;
+	optional string gift_message = 3;
+}
+
+message CMsgClientToGCWrapAndDeliverGiftResponse {
+	optional .EGCMsgResponse response = 1 [default = k_EGCMsgResponseOK];
+}
+
+message CMsgClientToGCUnwrapGift {
+	optional uint64 item_id = 1;
 }
 

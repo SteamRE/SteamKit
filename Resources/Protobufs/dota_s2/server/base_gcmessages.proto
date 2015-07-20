@@ -18,6 +18,8 @@ enum EGCBaseMsg {
 	k_EMsgGCError = 4509;
 	k_EMsgGCReplay_UploadedToYouTube = 4510;
 	k_EMsgGCLANServerAvailable = 4511;
+	k_EMsgGCInviteToLobby = 4512;
+	k_EMsgGCLobbyInviteResponse = 4513;
 }
 
 enum EGCBaseProtoObjectTypes {
@@ -50,18 +52,6 @@ message CMsgGCStorePurchaseInitResponse {
 	optional uint64 txn_id = 2;
 }
 
-message CSOPartyInvite {
-	optional uint64 group_id = 1 [(key_field) = true];
-	optional fixed64 sender_id = 2;
-	optional string sender_name = 3;
-}
-
-message CSOLobbyInvite {
-	optional uint64 group_id = 1 [(key_field) = true];
-	optional fixed64 sender_id = 2;
-	optional string sender_name = 3;
-}
-
 message CMsgSystemBroadcast {
 	optional string message = 1;
 }
@@ -71,6 +61,11 @@ message CMsgInviteToParty {
 	optional uint32 client_version = 2;
 	optional uint32 team_id = 3;
 	optional bool as_coach = 4;
+}
+
+message CMsgInviteToLobby {
+	optional fixed64 steam_id = 1;
+	optional uint32 client_version = 2;
 }
 
 message CMsgInvitationCreated {
@@ -86,6 +81,14 @@ message CMsgPartyInviteResponse {
 	optional bool as_coach = 5;
 	optional uint32 game_language_enum = 6;
 	optional string game_language_name = 7;
+}
+
+message CMsgLobbyInviteResponse {
+	optional fixed64 lobby_id = 1;
+	optional bool accept = 2;
+	optional uint32 client_version = 3;
+	optional uint32 game_language_enum = 4;
+	optional string game_language_name = 5;
 }
 
 message CMsgKickFromParty {
@@ -198,12 +201,6 @@ message CSOEconItem {
 	optional uint32 style = 15 [default = 0];
 	optional uint64 original_id = 16 [default = 0];
 	repeated .CSOEconItemEquipped equipped_state = 18;
-}
-
-message CMsgAdjustItemEquippedState {
-	optional uint64 item_id = 1;
-	optional uint32 new_class = 2;
-	optional uint32 new_slot = 3;
 }
 
 message CMsgSortItems {

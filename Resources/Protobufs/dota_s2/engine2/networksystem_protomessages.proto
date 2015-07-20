@@ -1,0 +1,46 @@
+option cc_generic_services = false;
+
+message NetMessageSplitscreenUserChanged {
+	optional uint32 slot = 1;
+}
+
+message NetMessageConnectionClosed {
+	optional uint32 reason = 1;
+}
+
+message NetMessageConnectionCrashed {
+	optional uint32 reason = 1;
+}
+
+message NetMessagePacketStart {
+	optional uint32 incoming_sequence = 1;
+	optional uint32 outgoing_acknowledged = 2;
+}
+
+message NetMessagePacketEnd {
+}
+
+message NetMessageFileReceived {
+	optional uint32 transfer_id = 1;
+	optional string filename = 2;
+	optional bool isreplaydemofile = 3;
+}
+
+message NetMessageFileRequested {
+	optional uint32 transfer_id = 1;
+	optional string filename = 2;
+	optional bool isreplaydemofile = 3;
+}
+
+message NetMessageFileDenied {
+	optional uint32 transfer_id = 1;
+	optional string filename = 2;
+	optional bool isreplaydemofile = 3;
+}
+
+message NetMessageFileSent {
+	optional uint32 transfer_id = 1;
+	optional string filename = 2;
+	optional bool isreplaydemofile = 3;
+}
+

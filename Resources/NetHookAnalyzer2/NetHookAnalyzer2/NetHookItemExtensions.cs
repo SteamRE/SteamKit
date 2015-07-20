@@ -40,10 +40,5 @@ namespace NetHookAnalyzer2
 		{
 			return item.Tag as NetHookItem;
 		}
-
-		public static TreeNode BuildTree(this NetHookItem item)
-		{
-			return new NetHookItemTreeBuilder(item).BuildTree();
-		}
 	}
 }

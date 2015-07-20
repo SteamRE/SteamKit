@@ -7,6 +7,7 @@ message CBroadcast_BeginBroadcastSession_Request {
 	optional uint64 client_instance_id = 3;
 	optional string title = 4;
 	optional uint32 cellid = 5;
+	optional uint64 rtmp_token = 6;
 }
 
 message CBroadcast_BeginBroadcastSession_Response {
@@ -23,6 +24,7 @@ message CBroadcast_EndBroadcastSession_Response {
 message CBroadcast_StartBroadcastUpload_Request {
 	optional fixed64 broadcast_id = 1;
 	optional uint32 cellid = 2;
+	optional bool as_rtmp = 3;
 }
 
 message CBroadcast_StartBroadcastUpload_Response {
@@ -62,6 +64,9 @@ message CBroadcast_WatchBroadcast_Response {
 	optional uint64 gameid = 4;
 	optional string title = 5;
 	optional uint32 num_viewers = 6;
+	optional int32 permission = 7;
+	optional bool is_rtmp = 8;
+	optional int32 seconds_delay = 9;
 }
 
 message CBroadcast_GetBroadcastStatus_Request {
@@ -74,6 +79,8 @@ message CBroadcast_GetBroadcastStatus_Response {
 	optional string title = 2;
 	optional uint32 num_viewers = 3;
 	optional int32 permission = 4;
+	optional bool is_rtmp = 5;
+	optional int32 seconds_delay = 6;
 }
 
 message CBroadcast_InviteToBroadcast_Request {
@@ -88,6 +95,7 @@ message CBroadcast_InviteToBroadcast_Response {
 message CBroadcast_SendBroadcastStateToServer_Request {
 	optional int32 permission = 1;
 	optional uint64 gameid = 2;
+	optional string title = 3;
 }
 
 message CBroadcast_SendBroadcastStateToServer_Response {
@@ -116,6 +124,7 @@ message CBroadcast_PostChatMessage_Request {
 message CBroadcast_PostChatMessage_Response {
 	optional string persona_name = 1;
 	optional bool in_game = 2;
+	optional int32 result = 3;
 }
 
 message CBroadcast_MuteBroadcastChatUser_Request {

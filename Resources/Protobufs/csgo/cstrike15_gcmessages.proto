@@ -33,7 +33,6 @@ enum ECsgoGCMsg {
 	k_EMsgGCCStrike15_v2_ClientRequestPlayersProfile = 9127;
 	k_EMsgGCCStrike15_v2_PlayersProfile = 9128;
 	k_EMsgGCCStrike15_v2_SetMyMedalsInfo = 9129;
-	k_EMsgGCCStrike15_v2_PlayerEarnedRewardNotification = 9130;
 	k_EMsgGCCStrike15_v2_PlayerOverwatchCaseUpdate = 9131;
 	k_EMsgGCCStrike15_v2_PlayerOverwatchCaseAssignment = 9132;
 	k_EMsgGCCStrike15_v2_PlayerOverwatchCaseStatus = 9133;
@@ -68,6 +67,12 @@ enum ECsgoGCMsg {
 	k_EMsgGCCStrike15_v2_ClientRequestJoinFriendData = 9163;
 	k_EMsgGCCStrike15_v2_ClientRequestJoinServerData = 9164;
 	k_EMsgGCCStrike15_v2_ClientRequestNewMission = 9165;
+	k_EMsgGCCStrike15_v2_GC2ServerNotifyXPRewarded = 9166;
+	k_EMsgGCCStrike15_v2_GC2ClientTournamentInfo = 9167;
+	k_EMsgGC_GlobalGame_Subscribe = 9168;
+	k_EMsgGC_GlobalGame_Unsubscribe = 9169;
+	k_EMsgGC_GlobalGame_Play = 9170;
+	k_EMsgGCCStrike15_v2_AcknowledgePenalty = 9171;
 }
 
 message GameServerPing {
@@ -165,7 +170,6 @@ message PlayerMedalsInfo {
 	optional uint32 medal_weapon = 3;
 	optional uint32 medal_global = 4;
 	optional uint32 medal_arms = 5;
-	optional uint32 legacy__coin_op_payback = 6;
 	repeated uint32 display_items_defidx = 7;
 	optional uint32 featured_display_item_defidx = 8;
 }
@@ -214,25 +218,27 @@ message IpAddressMask {
 	optional uint32 token = 6;
 }
 
-message CMsgGC_ServerQuestUpdateData {
-	message PlayerQuestData {
-		message QuestItemData {
-			optional uint64 quest_item_id = 1;
-			optional int32 quest_points_earned = 2;
-		}
+message XpProgressData {
+	optional uint32 xp_points = 1;
+	optional int32 xp_category = 2;
+}
 
-		message LevelProgressData {
-			optional uint32 xp_points = 1;
-			optional int32 xp_category = 2;
-		}
-
-		optional uint32 quester_account_id = 1;
-		repeated .CMsgGC_ServerQuestUpdateData.PlayerQuestData.QuestItemData quest_item_data = 2;
-		repeated .CMsgGC_ServerQuestUpdateData.PlayerQuestData.LevelProgressData level_progress_data = 3;
-		optional uint32 time_played = 4;
+message PlayerQuestData {
+	message QuestItemData {
+		optional uint64 quest_id = 1;
+		optional int32 quest_normal_points_earned = 2;
+		optional int32 quest_bonus_points_earned = 3;
 	}
 
-	repeated .CMsgGC_ServerQuestUpdateData.PlayerQuestData player_quest_data = 1;
+	optional uint32 quester_account_id = 1;
+	repeated .PlayerQuestData.QuestItemData quest_item_data = 2;
+	repeated .XpProgressData xp_progress_data = 3;
+	optional uint32 time_played = 4;
+	optional uint32 mm_game_mode = 5;
+}
+
+message CMsgGC_ServerQuestUpdateData {
+	repeated .PlayerQuestData player_quest_data = 1;
 }
 
 message CMsgGCCStrike15_v2_MatchmakingGCOperationalStats {
@@ -290,6 +296,7 @@ message CMsgGCCStrike15_v2_MatchmakingGC2ClientUpdate {
 	optional .IpAddressMask server_ipaddress_mask = 12;
 	repeated .CMsgGCCStrike15_v2_MatchmakingGC2ClientUpdate.Note notes = 13;
 	repeated uint32 penalty_account_id_sessions_green = 14;
+	repeated uint32 insufficientlevel_sessions = 15;
 }
 
 message CDataGCCStrike15_v2_TournamentMatchDraft {
@@ -421,7 +428,9 @@ message CMsgGCCStrike15_v2_MatchmakingGC2ClientHello {
 	repeated .TournamentEvent my_current_event_stages = 13;
 	optional uint32 survey_vote = 14;
 	optional .AccountActivity activity = 15;
-	optional int32 seconds_until_next_mission = 16;
+	optional int32 player_level = 17;
+	optional int32 player_cur_xp = 18;
+	optional int32 player_xp_bonus_flags = 19;
 }
 
 message CMsgGCCStrike15_v2_AccountPrivacySettings {
@@ -545,8 +554,16 @@ message CMsgGCCStrike15_v2_ClientRequestJoinServerData {
 }
 
 message CMsgGCCstrike15_v2_ClientRequestNewMission {
-	optional uint64 campaign_item_id = 1;
 	optional uint32 mission_id = 2;
+	optional uint32 campaign_id = 3;
+}
+
+message CMsgGCCstrike15_v2_GC2ServerNotifyXPRewarded {
+	repeated .XpProgressData xp_progress_data = 1;
+	optional uint32 account_id = 2;
+	optional uint32 current_xp = 3;
+	optional uint32 current_level = 4;
+	optional uint32 upgraded_defidx = 5;
 }
 
 message CMsgGCCStrike15_v2_WatchInfoUsers {
@@ -566,13 +583,6 @@ message CMsgGCCStrike15_v2_ClientRequestPlayersProfile {
 message CMsgGCCStrike15_v2_PlayersProfile {
 	optional uint32 request_id = 1;
 	repeated .CMsgGCCStrike15_v2_MatchmakingGC2ClientHello account_profiles = 2;
-}
-
-message CMsgGCCStrike15_v2_PlayerEarnedRewardNotification {
-	optional uint32 account_id = 1;
-	optional uint32 item_def_index = 2;
-	optional uint32 attr_def_index = 3;
-	optional uint32 attr_value = 4;
 }
 
 message CMsgGCCStrike15_v2_PlayerOverwatchCaseUpdate {
@@ -650,6 +660,7 @@ message CEconItemPreviewDataBlock {
 	optional uint32 inventory = 13;
 	optional uint32 origin = 14;
 	optional uint32 questid = 15;
+	optional uint32 dropreason = 16;
 }
 
 message CMsgGCCStrike15_v2_MatchEndRewardDropsNotification {
@@ -772,6 +783,7 @@ message CMsgCStrike15Welcome {
 	optional uint32 last_time_played = 12;
 	optional uint32 last_ip_address = 13;
 	optional uint64 gscookieid = 18;
+	optional uint64 uniqueid = 19;
 }
 
 message CMsgGCCStrike15_v2_ClientVarValueNotificationInfo {
@@ -821,5 +833,47 @@ message CMsgGCCStrike15_v2_Server2GCPureServerValidationFailure {
 	optional int32 len = 6;
 	optional int32 pack_number = 7;
 	optional int32 pack_file_id = 8;
+}
+
+message CMsgGCCStrike15_v2_GC2ClientTournamentInfo {
+	optional uint32 eventid = 1;
+	optional uint32 stageid = 2;
+	optional uint32 game_type = 3;
+	repeated uint32 teamids = 4;
+}
+
+message CSOEconCoupon {
+	optional uint32 entryid = 1 [(key_field) = true];
+	optional uint32 defidx = 2;
+	optional fixed32 expiration_date = 3;
+}
+
+message CSOQuestProgress {
+	optional uint32 questid = 1 [(key_field) = true];
+	optional uint32 points_remaining = 2;
+	optional uint32 bonus_points = 3;
+}
+
+message CSOPersonaDataPublic {
+	optional int32 player_level = 1;
+	optional .PlayerCommendationInfo commendation = 2;
+}
+
+message CMsgGC_GlobalGame_Subscribe {
+	optional uint64 ticket = 1;
+}
+
+message CMsgGC_GlobalGame_Unsubscribe {
+	optional int32 timeleft = 1;
+}
+
+message CMsgGC_GlobalGame_Play {
+	optional uint64 ticket = 1;
+	optional uint32 gametimems = 2;
+	optional uint32 msperpoint = 3;
+}
+
+message CMsgGCCStrike15_v2_AcknowledgePenalty {
+	optional int32 acknowledged = 1;
 }
 

@@ -278,11 +278,11 @@ namespace SteamKit2
 
 
 
-        void Disconnected( object sender, EventArgs e )
+        void Disconnected( object sender, DisconnectedEventArgs e )
         {
             ConnectedUniverse = EUniverse.Invalid;
 
-            steamClient.PostCallback( new DisconnectedCallback() );
+            steamClient.PostCallback( new DisconnectedCallback( e.UserInitiated ) );
         }
 
         void NetMsgReceived( object sender, NetMsgEventArgs e )

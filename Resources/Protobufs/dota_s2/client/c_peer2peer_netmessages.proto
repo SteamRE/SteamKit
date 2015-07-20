@@ -1,0 +1,32 @@
+import "netmessages.proto";
+
+option cc_generic_services = false;
+
+enum P2P_Messages {
+	p2p_TextMessage = 256;
+	p2p_Voice = 257;
+	p2p_Ping = 258;
+}
+
+message CP2P_TextMessage {
+	optional bytes text = 1;
+}
+
+message CSteam_Voice_Encoding {
+	optional bytes voice_data = 1;
+}
+
+message CP2P_Voice {
+	enum Handler_Flags {
+		Played_Audio = 1;
+	}
+
+	optional .CMsgVoiceAudio audio = 1;
+	optional uint32 broadcast_group = 2;
+}
+
+message CP2P_Ping {
+	required uint64 send_time = 1;
+	required bool is_reply = 2;
+}
+

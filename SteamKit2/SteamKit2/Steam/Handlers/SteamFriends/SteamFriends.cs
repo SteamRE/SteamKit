@@ -350,6 +350,34 @@ namespace SteamKit2
         }
 
         /// <summary>
+        /// Invites a user to a chat room.
+        /// The results of this action will be available through the <see cref="ChatActionResultCallback"/> callback.
+        /// </summary>
+        /// <param name="steamIdUser">The SteamID of the user to invite.</param>
+        /// <param name="steamIdChat">The SteamID of the chat room to invite the user to.</param>
+        public void InviteUserToChat( SteamID steamIdUser, SteamID steamIdChat )
+        {
+            SteamID chatId = steamIdChat.ConvertToUInt64(); // copy the steamid so we don't modify it
+
+            if ( chatId.IsClanAccount )
+            {
+                // this steamid is incorrect, so we'll fix it up
+                chatId.AccountInstance = (uint)SteamID.ChatInstanceFlags.Clan;
+                chatId.AccountType = EAccountType.Chat;
+            }
+
+            var inviteMsg = new ClientMsgProtobuf<CMsgClientChatInvite>( EMsg.ClientChatInvite );
+
+            inviteMsg.Body.steam_id_chat = chatId;
+            inviteMsg.Body.steam_id_invited = steamIdUser;
+            // steamclient also sends the steamid of the user that did the invitation
+            // we'll mimic that behavior
+            inviteMsg.Body.steam_id_patron = Client.SteamID;
+
+            this.Client.Send( inviteMsg );
+        }
+
+        /// <summary>
         /// Kicks the specified chat member from the given chat room.
         /// </summary>
         /// <param name="steamIdChat">The SteamID of chat room to kick the member from.</param>
@@ -545,6 +573,10 @@ namespace SteamKit2
 
                 case EMsg.ClientChatMemberInfo:
                     HandleChatMemberInfo( packetMsg );
+                    break;
+
+                case EMsg.ClientChatRoomInfo:
+                    HandleChatRoomInfo( packetMsg );
                     break;
 
                 case EMsg.ClientChatActionResult:
@@ -775,6 +807,15 @@ namespace SteamKit2
             byte[] payload = membInfo.Payload.ToArray();
 
             var callback = new ChatMemberInfoCallback( membInfo.Body, payload );
+            this.Client.PostCallback( callback );
+        }
+        void HandleChatRoomInfo( IPacketMsg packetMsg )
+        {
+            var roomInfo = new ClientMsg<MsgClientChatRoomInfo>( packetMsg );
+
+            byte[] payload = roomInfo.Payload.ToArray();
+
+            var callback = new ChatRoomInfoCallback( roomInfo.Body, payload );
             this.Client.PostCallback( callback );
         }
         void HandleChatActionResult( IPacketMsg packetMsg )

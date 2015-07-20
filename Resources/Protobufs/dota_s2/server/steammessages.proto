@@ -245,6 +245,19 @@ message CGCMsgGetIPLocationResponse {
 	repeated .CIPLocationInfo infos = 1;
 }
 
+message CGCMsgGetIPASN {
+	repeated fixed32 ips = 1;
+}
+
+message CIPASNInfo {
+	optional fixed32 ip = 1;
+	optional uint32 asn = 2;
+}
+
+message CGCMsgGetIPASNResponse {
+	repeated .CIPASNInfo infos = 1;
+}
+
 message CGCMsgSystemStatsSchema {
 	optional uint32 gc_app_id = 1;
 	optional bytes schema_kv = 2;
@@ -377,6 +390,15 @@ message CMsgGCCheckFriendship {
 message CMsgGCCheckFriendship_Response {
 	optional bool success = 1;
 	optional bool found_friendship = 2;
+}
+
+message CMsgGCGetAppFriendsList {
+	optional fixed64 steamid = 1;
+}
+
+message CMsgGCGetAppFriendsList_Response {
+	optional bool success = 1;
+	repeated fixed64 steamids = 2;
 }
 
 message CMsgGCMsgMasterSetDirectory {
@@ -564,9 +586,9 @@ message CMsgDPPartnerMicroTxnsResponse {
 		k_MsgNoTransactions = 3;
 		k_MsgSQLFailure = 4;
 		k_MsgPartnerInfoDiscrepancy = 5;
-		k_MsgTransactionDeleteFailed = 6;
 		k_MsgTransactionInsertFailed = 7;
 		k_MsgAlreadyRunning = 8;
+		k_MsgInvalidTransactionData = 9;
 	}
 
 	optional uint32 eresult = 1 [default = 2];

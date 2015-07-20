@@ -45,6 +45,9 @@ enum EDotaClientMessages {
 	DOTA_CM_TeamShowcaseClientData = 39;
 	DOTA_CM_PlayTeamShowcase = 40;
 	DOTA_CM_EventCNY2015Cmd = 41;
+	DOTA_CM_ChallengeSelect = 42;
+	DOTA_CM_ChallengeReroll = 43;
+	DOTA_CM_ClickedBuff = 44;
 }
 
 message CDOTAClientMsg_MapPing {
@@ -60,6 +63,11 @@ message CDOTAClientMsg_EnemyItemAlert {
 }
 
 message CDOTAClientMsg_ModifierAlert {
+	optional int32 buff_internal_index = 1;
+	optional uint32 target_entindex = 2;
+}
+
+message CDOTAClientMsg_ClickedBuff {
 	optional int32 buff_internal_index = 1;
 	optional uint32 target_entindex = 2;
 }
@@ -223,5 +231,17 @@ message CDOTAClientMsg_PlayTeamShowcase {
 
 message CDOTAClientMsg_EventCNY2015Cmd {
 	optional bytes data = 1;
+}
+
+message CDOTAClientMsg_ChallengeSelect {
+	optional uint32 event_id = 1;
+	optional uint32 slot_id = 2;
+	optional uint32 sequence_id = 3;
+}
+
+message CDOTAClientMsg_ChallengeReroll {
+	optional uint32 event_id = 1;
+	optional uint32 slot_id = 2;
+	optional uint32 sequence_id = 3;
 }
 

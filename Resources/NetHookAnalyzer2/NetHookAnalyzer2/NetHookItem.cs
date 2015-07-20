@@ -31,7 +31,7 @@ namespace NetHookAnalyzer2
 		}
 		string innerMessageName;
 
-		FileInfo FileInfo { get; set; }
+		public FileInfo FileInfo { get; private set; }
 
 		public Stream OpenStream()
 		{
@@ -76,7 +76,19 @@ namespace NetHookAnalyzer2
 			return true;
 		}
 
-		public string ReadInnerMessageName()
+		string ReadInnerMessageName()
+		{
+			try
+			{
+				return ReadInnerMessageNameCore();
+			}
+			catch (IOException)
+			{
+				return null;
+			}
+		}
+
+		string ReadInnerMessageNameCore()
 		{
 			switch (EMsg)
 			{

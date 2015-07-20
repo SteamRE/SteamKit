@@ -1,5 +1,3 @@
-import "google/protobuf/descriptor.proto";
-import "networkbasetypes.proto";
 import "dota_commonmessages.proto";
 
 option optimize_for = SPEED;
@@ -38,7 +36,22 @@ enum EDotaClientMessages {
 	DOTA_CM_EnemyItemAlert = 330;
 	DOTA_CM_FreeInventory = 331;
 	DOTA_CM_BuyBackStateAlert = 332;
-	DOTA_CM_FillEmptySlotsWithBots = 333;
+	DOTA_CM_QuickBuyAlert = 333;
+	DOTA_CM_HeroStatueLike = 334;
+	DOTA_CM_ModifierAlert = 335;
+	DOTA_CM_TeamShowcaseEditor = 336;
+	DOTA_CM_HPManaAlert = 337;
+	DOTA_CM_GlyphAlert = 338;
+	DOTA_CM_TeamShowcaseClientData = 339;
+	DOTA_CM_PlayTeamShowcase = 340;
+	DOTA_CM_EventCNY2015Cmd = 341;
+	DOTA_CM_FillEmptySlotsWithBots = 342;
+	DOTA_CM_DemoHero = 343;
+	DOTA_CM_AbilityLearnModeToggled = 344;
+	DOTA_CM_AbilityStartUse = 345;
+	DOTA_CM_ChallengeSelect = 346;
+	DOTA_CM_ChallengeReroll = 347;
+	DOTA_CM_ClickedBuff = 348;
 }
 
 message CDOTAClientMsg_MapPing {
@@ -50,7 +63,25 @@ message CDOTAClientMsg_ItemAlert {
 }
 
 message CDOTAClientMsg_EnemyItemAlert {
-	optional .CDOTAMsg_EnemyItemAlert enemy_item_alert = 1;
+	optional uint32 item_entindex = 1;
+}
+
+message CDOTAClientMsg_ModifierAlert {
+	optional int32 buff_internal_index = 1;
+	optional uint32 target_entindex = 2;
+}
+
+message CDOTAClientMsg_ClickedBuff {
+	optional int32 buff_internal_index = 1;
+	optional uint32 target_entindex = 2;
+}
+
+message CDOTAClientMsg_HPManaAlert {
+	optional uint32 target_entindex = 1;
+}
+
+message CDOTAClientMsg_GlyphAlert {
+	optional bool negative = 1;
 }
 
 message CDOTAClientMsg_MapLine {
@@ -150,9 +181,15 @@ message CDOTAClientMsg_RecordVote {
 
 message CDOTAClientMsg_WillPurchaseAlert {
 	optional int32 itemid = 1;
+	optional uint32 gold_remaining = 2;
 }
 
 message CDOTAClientMsg_BuyBackStateAlert {
+}
+
+message CDOTAClientMsg_QuickBuyAlert {
+	optional int32 itemid = 1;
+	optional int32 gold_required = 2;
 }
 
 message CDOTAClientMsg_PlayerShowCase {
@@ -183,5 +220,42 @@ message CDOTAClientMsg_FreeInventory {
 
 message CDOTAClientMsg_FillEmptySlotsWithBots {
 	optional bool fillwithbots = 1;
+}
+
+message CDOTAClientMsg_HeroStatueLike {
+	optional uint32 owner_player_id = 1;
+}
+
+message CDOTAClientMsg_TeamShowcaseEditor {
+	optional bytes data = 1;
+}
+
+message CDOTAClientMsg_TeamShowcaseClientData {
+	optional bytes data = 1;
+}
+
+message CDOTAClientMsg_PlayTeamShowcase {
+}
+
+message CDOTAClientMsg_EventCNY2015Cmd {
+	optional bytes data = 1;
+}
+
+message CDOTAClientMsg_DemoHero {
+	optional int32 hero_id = 1;
+	repeated uint32 item_defs = 2;
+	repeated uint64 item_ids = 3;
+}
+
+message CDOTAClientMsg_ChallengeSelect {
+	optional uint32 event_id = 1;
+	optional uint32 slot_id = 2;
+	optional uint32 sequence_id = 3;
+}
+
+message CDOTAClientMsg_ChallengeReroll {
+	optional uint32 event_id = 1;
+	optional uint32 slot_id = 2;
+	optional uint32 sequence_id = 3;
 }
 

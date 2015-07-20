@@ -79,6 +79,18 @@ message CMsgPoorNetworkConditions {
 	repeated .CMsgPoorNetworkConditions.Player players = 2;
 }
 
+message CMsgGameserverCrash {
+	optional uint64 match_id = 1;
+	optional fixed64 lobby_id = 2;
+	optional .DOTA_GameState game_state = 3 [default = DOTA_GAMERULES_STATE_INIT];
+	optional fixed32 sentinel_save_time = 4;
+	optional fixed64 server_steam_id = 5;
+	optional fixed32 server_public_ip_addr = 6;
+	optional uint32 server_port = 7;
+	optional uint32 server_cluster = 8;
+	optional uint32 pid = 9;
+}
+
 message CMsgConnectedPlayers {
 	message Player {
 		optional fixed64 steam_id = 1;
@@ -99,6 +111,8 @@ message CMsgConnectedPlayers {
 		TOWER_STATE = 9;
 		GAMESTATE_TIMEOUT = 10;
 		MASS_DISCONNECT = 11;
+		BARRACKS_STATE = 12;
+		KILLS = 13;
 	}
 
 	repeated .CMsgConnectedPlayers.Player connected_players = 1;
@@ -109,6 +123,9 @@ message CMsgConnectedPlayers {
 	optional bool legacy_mass_disconnect = 9;
 	optional .CMsgPoorNetworkConditions poor_network_conditions = 10;
 	optional .CMsgConnectedPlayers.SendReason send_reason = 8 [default = INVALID];
+	optional uint32 radiant_kills = 11;
+	optional uint32 dire_kills = 12;
+	optional uint32 barracks_state = 13;
 }
 
 message CMsgGameServerInfo {
@@ -122,6 +139,7 @@ message CMsgGameServerInfo {
 	optional fixed32 server_private_ip_addr = 2;
 	optional uint32 server_port = 3;
 	optional uint32 server_tv_port = 4;
+	optional uint32 server_steamdatagram_port = 21;
 	optional string server_key = 5;
 	optional bool server_hibernation = 6;
 	optional .CMsgGameServerInfo.ServerType server_type = 7 [default = UNSPECIFIED];
@@ -187,7 +205,7 @@ message CMsgDOTAFantasyMatch {
 message CMsgGameMatchSignOut {
 	message CTeam {
 		message CPlayer {
-			optional fixed64 account_id = 1;
+			optional fixed64 steam_id = 1;
 			optional uint32 hero_id = 3;
 			repeated uint32 items = 4;
 			optional uint32 gold = 5;
@@ -421,8 +439,6 @@ message CMsgDOTARequestPlayerResourcesResponse {
 
 message CMsgDOTARequestBatchPlayerResources {
 	repeated uint32 account_ids = 1 [packed = true];
-	optional bool legacy_rank_use_competitive = 2;
-	repeated bool legacy_rank_use_solo = 3 [packed = true];
 	repeated uint32 rank_types = 4 [packed = true];
 }
 
@@ -550,7 +566,6 @@ message CMsgDOTAAwardEventPoints {
 	message AwardPoints {
 		optional uint32 account_id = 1;
 		optional int32 points = 2;
-		optional int32 premium_points = 3;
 		optional uint32 trade_ban_time = 5;
 	}
 
@@ -617,7 +632,7 @@ message CMsgServerGetEventPointsResponse {
 	message Points {
 		optional uint32 account_id = 1;
 		optional uint32 points_total = 2;
-		optional uint32 premium_total = 3;
+		optional bool owned = 4;
 	}
 
 	optional uint32 event_id = 1;
@@ -764,12 +779,28 @@ message CMsgGCToServerPredictionResult {
 		optional uint32 num_correct = 2;
 		optional uint32 num_fails = 3;
 		optional .CMsgGCToServerPredictionResult.Prediction.EResult result = 4 [default = k_eResult_ItemGranted];
-		optional uint32 granted_item_def = 5;
+		repeated uint32 granted_item_defs = 6;
 	}
 
 	optional uint32 account_id = 1;
 	optional uint64 match_id = 2;
 	optional bool correct = 3;
 	repeated .CMsgGCToServerPredictionResult.Prediction predictions = 4;
+}
+
+message CMsgServerToGCLockCharmTrading {
+	optional uint32 account_id = 1;
+	optional uint64 item_id = 2;
+}
+
+message CMsgDOTACNY2015EventPointUsage {
+	message PointUsage {
+		repeated uint32 path = 1;
+		repeated uint32 path_level = 2;
+		repeated uint32 ability_points_spent = 3;
+	}
+
+	optional .CMsgDOTACNY2015EventPointUsage.PointUsage winning_team_usage = 1;
+	optional .CMsgDOTACNY2015EventPointUsage.PointUsage losing_team_usage = 2;
 }
 

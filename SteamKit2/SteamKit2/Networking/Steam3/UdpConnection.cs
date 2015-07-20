@@ -364,6 +364,7 @@ namespace SteamKit2
             // Begin by sending off the challenge request
             SendPacket(new UdpPacket(EUdpPacketType.ChallengeReq));
             state = State.ChallengeReqSent;
+            var userRequestedDisconnect = false;
 
             while ( state != State.Disconnected )
             {
@@ -423,11 +424,12 @@ namespace SteamKit2
                     DebugLog.WriteLine("UdpConnection", "Graceful disconnect completed");
 
                     state = State.Disconnected;
+                    userRequestedDisconnect = true;
                 }
             }
 
             DebugLog.WriteLine("UdpConnection", "Calling OnDisconnected");
-            OnDisconnected(EventArgs.Empty);
+            OnDisconnected( new DisconnectedEventArgs( userRequestedDisconnect ) );
         }
 
         /// <summary>
