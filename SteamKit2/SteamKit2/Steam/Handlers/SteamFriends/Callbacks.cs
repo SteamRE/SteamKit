@@ -6,6 +6,7 @@
 
 
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
@@ -17,6 +18,33 @@ namespace SteamKit2
 {
     public partial class SteamFriends
     {
+        public sealed class ChatMemberInfo : MessageObject
+        {
+            public ChatMemberInfo( KeyValue keyValues )
+                : base( keyValues )
+            {
+            }
+            public ChatMemberInfo() : base()
+            {
+            }
+
+
+            public int Details
+            {
+                get { return KeyValues[ "Details" ].AsInteger(); }
+            }
+
+            public EChatPermission Permissions
+            {
+                get { return KeyValues[ "Permissions" ].AsEnum<EChatPermission>(); }
+            }
+
+            public SteamID SteamID
+            {
+                get { return KeyValues[ "SteamID" ].AsUnsignedLong(); }
+            }
+        }
+
         /// <summary>
         /// This callback is fired in response to someone changing their friend details over the network.
         /// </summary>
@@ -520,8 +548,14 @@ namespace SteamKit2
             /// </summary>
             public EChatRoomEnterResponse EnterResponse { get; private set; }
 
+            public int NumChatMembers { get; private set; }
 
-            internal ChatEnterCallback( MsgClientChatEnter msg )
+            public string ChatRoomName { get; private set; }
+
+            public ReadOnlyCollection<ChatMemberInfo> ChatMembers { get; private set; }
+
+
+            internal ChatEnterCallback( MsgClientChatEnter msg, byte[] payload )
             {
                 ChatID = msg.SteamIdChat;
                 FriendID = msg.SteamIdFriend;
@@ -534,6 +568,32 @@ namespace SteamKit2
                 ChatFlags = msg.ChatFlags;
 
                 EnterResponse = msg.EnterResponse;
+
+                NumChatMembers = msg.NumMembers;
+
+                using ( var ms = new MemoryStream( payload ) )
+                {
+                    // steamclient always attempts to read the chat room name, regardless of the enter response
+                    ChatRoomName = ms.ReadNullTermString( Encoding.UTF8 );
+
+                    if ( EnterResponse != EChatRoomEnterResponse.Success )
+                    {
+                        // the rest of the payload depends on a successful chat enter
+                        return;
+                    }
+
+                    var memberList = new List<ChatMemberInfo>();
+
+                    for ( int x = 0 ; x < NumChatMembers ; ++x )
+                    {
+                        var memberInfo = new ChatMemberInfo();
+                        memberInfo.ReadFromStream( ms );
+
+                        memberList.Add( memberInfo );
+                    }
+
+                    ChatMembers = new ReadOnlyCollection<ChatMemberInfo>( memberList );
+                }
             }
         }
 

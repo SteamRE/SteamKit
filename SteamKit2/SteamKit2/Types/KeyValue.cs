@@ -327,6 +327,17 @@ namespace SteamKit2
 
             return value;
         }
+        public ulong AsUnsignedLong( ulong defaultValue = default( ulong ) )
+        {
+            ulong value;
+
+            if ( ulong.TryParse( this.Value, out value ) == false )
+            {
+                return defaultValue;
+            }
+
+            return value;
+        }
 
         /// <summary>
         /// Attempts to convert and return the value of this instance as a float.
@@ -362,6 +373,19 @@ namespace SteamKit2
             }
 
             return value != 0;
+        }
+
+        public T AsEnum<T>( T defaultValue = default( T ) )
+            where T : struct
+        {
+            T value;
+
+            if ( Enum.TryParse<T>( this.Value, out value ) == false )
+            {
+                return defaultValue;
+            }
+
+            return value;
         }
 
         /// <summary>
@@ -720,7 +744,8 @@ namespace SteamKit2
                 this.Children.Add( current );
             }
 
-            return input.Position == input.Length;
+            // it's okay if we haven't reached the end of the input stream
+            return input.Position <= input.Length;
         }
     }
 }
