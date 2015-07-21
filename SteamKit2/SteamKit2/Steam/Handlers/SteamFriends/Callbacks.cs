@@ -688,6 +688,12 @@ namespace SteamKit2
                 /// </summary>
                 public SteamID ChatterActedBy { get; private set; }
 
+                /// <summary>
+                /// Gets the member information for a user that has joined the chat room.
+                /// This field is only populated when <see cref="StateChange"/> is <see cref="EChatMemberStateChange.Entered"/>.
+                /// </summary>
+                public ChatMemberInfo MemberInfo { get; private set; }
+
 
                 internal StateChangeDetails( byte[] data )
                 {
@@ -698,8 +704,11 @@ namespace SteamKit2
                         StateChange = ( EChatMemberStateChange )br.ReadInt32();
                         ChatterActedBy = br.ReadUInt64();
 
-                        // todo: for EChatMemberStateChange.Entered, the following data is a binary kv MessageObject
-                        // that includes permission and details that may be useful
+                        if ( StateChange == EChatMemberStateChange.Entered )
+                        {
+                            MemberInfo = new ChatMemberInfo();
+                            MemberInfo.ReadFromStream( ms );
+                        }
                     }
                 }
             }
@@ -732,6 +741,10 @@ namespace SteamKit2
                         break;
 
                     // todo: handle more types
+                    // based off disassembly
+                    //   - for InfoUpdate, a ChatMemberInfo object is present
+                    //   - for MemberLimitChange, looks like an ignored uint64 (probably steamid) followed
+                    //     by an int which likely represents the member limit
                 }
             }
         }
