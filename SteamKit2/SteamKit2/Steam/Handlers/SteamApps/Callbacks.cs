@@ -334,7 +334,11 @@ namespace SteamKit2
                     using ( var ms = new MemoryStream( pack.buffer ) )
                     using ( var br = new BinaryReader( ms ) )
                     {
-                        br.ReadUInt32(); // unknown uint at the beginning of the buffer
+                        // steamclient checks this value == 1 before it attempts to read the KV from the buffer
+                        // see: CPackageInfo::UpdateFromBuffer(CSHA const&,uint,CUtlBuffer &)
+                        // todo: we've apparently ignored this with zero ill effects, but perhaps we want to respect it?
+                        br.ReadUInt32();
+
                         Data.ReadAsBinary( ms );
                     }
 
@@ -705,7 +709,11 @@ namespace SteamKit2
                         using ( MemoryStream ms = new MemoryStream( package_info.buffer ) )
                         using ( var br = new BinaryReader( ms ) )
                         {
+                            // steamclient checks this value == 1 before it attempts to read the KV from the buffer
+                            // see: CPackageInfo::UpdateFromBuffer(CSHA const&,uint,CUtlBuffer &)
+                            // todo: we've apparently ignored this with zero ill effects, but perhaps we want to respect it?
                             br.ReadUInt32();
+
                             this.KeyValues.ReadAsBinary( ms );
                         }
                     }
