@@ -40,11 +40,11 @@ namespace SteamKit2
 
 
             /// <summary>
-            /// Gets the details of this chat member.
+            /// Gets the clan permission details of this chat member.
             /// </summary>
-            public int Details
+            public EClanPermission Details
             {
-                get { return KeyValues[ "Details" ].AsInteger(); }
+                get { return KeyValues[ "Details" ].AsEnum<EClanPermission>(); }
             }
 
             /// <summary>
