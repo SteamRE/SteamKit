@@ -118,6 +118,7 @@
     <Compile Include="Base\Generated\Unified\Steamworks\SteamMsgPublishedFileSteamworks.cs" />
     <Compile Include="Base\MsgBase.cs" />
     <Compile Include="Base\PacketBase.cs" />
+    <Compile Include="Networking\Steam3\CMServerList.cs" />
     <Compile Include="Steam\CDNClient.cs" />
     <Compile Include="Steam\Handlers\SteamCloud\Callbacks.cs" />
     <Compile Include="Steam\Handlers\SteamCloud\SteamCloud.cs" />
@@ -138,6 +139,7 @@
     <Compile Include="Steam\SteamClient\CallbackMgr\CallbackMgr.cs" />
     <Compile Include="Steam\UFSClient\Callbacks.cs" />
     <Compile Include="Steam\UFSClient\UFSClient.cs" />
+    <Compile Include="Steam\WebAPI\SteamDirectory.cs" />
     <Compile Include="Steam\WebAPI\WebAPI.cs" />
     <Compile Include="Types\GlobalID.cs" />
     <Compile Include="Types\DepotManifest.cs" />

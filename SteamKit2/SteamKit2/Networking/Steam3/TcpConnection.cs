@@ -37,6 +37,11 @@ namespace SteamKit2
             connectionFree = new ManualResetEvent(true);
         }
 
+        public override IPEndPoint CurrentEndPoint
+        {
+            get { return destination; }
+        }
+
         private void Shutdown()
         {
             try
@@ -269,7 +274,10 @@ namespace SteamKit2
             // Thread is shutting down, ensure socket is shut down and disposed
             bool userShutdown = cancellationToken.IsCancellationRequested;
 
-            if ( userShutdown ) Shutdown();
+            if ( userShutdown )
+            {
+                Shutdown();
+            }
             Release( userShutdown );
         }
 

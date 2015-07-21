@@ -88,6 +88,12 @@ namespace SteamKit2
         }
 
         /// <summary>
+        /// The <see cref="System.Net.IPEndPoint" /> of the current connection.
+        /// This is non-null between <see cref="E:Connected"/> and <see cref="E:Disconnected"/>, inclusive.
+        /// </summary>
+        public abstract IPEndPoint CurrentEndPoint { get; }
+
+        /// <summary>
         /// Occurs when the physical connection is established.
         /// </summary>
         public event EventHandler Connected;

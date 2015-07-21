@@ -8,11 +8,10 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Compression;
+using System.Linq;
 using System.Net;
 using System.Net.Sockets;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.IO.Compression;
 
 namespace SteamKit2.Internal
 {
@@ -24,7 +23,7 @@ namespace SteamKit2.Internal
         /// <summary>
         /// Bootstrap list of CM servers.
         /// </summary>
-        public static ReadOnlyCollection<IPEndPoint> Servers { get; private set; }
+        public static SmartCMServerList Servers { get; private set; }
 
         /// <summary>
         /// Returns the the local IP of this client.
@@ -94,43 +93,8 @@ namespace SteamKit2.Internal
 
         static CMClient()
         {
-            Servers = new ReadOnlyCollection<IPEndPoint>( new List<IPEndPoint>
-            {
-                new IPEndPoint( IPAddress.Parse( "208.64.200.201" ), 27017 ),
-                new IPEndPoint( IPAddress.Parse( "208.64.200.201" ), 27018 ),
-                new IPEndPoint( IPAddress.Parse( "208.64.200.201" ), 27019 ),
-                new IPEndPoint( IPAddress.Parse( "208.64.200.201" ), 27020 ),
-                new IPEndPoint( IPAddress.Parse( "208.64.200.202" ), 27017 ),
-                new IPEndPoint( IPAddress.Parse( "208.64.200.202" ), 27018 ),
-                new IPEndPoint( IPAddress.Parse( "208.64.200.202" ), 27019 ),
-                new IPEndPoint( IPAddress.Parse( "208.64.200.203" ), 27017 ),
-                new IPEndPoint( IPAddress.Parse( "208.64.200.203" ), 27018 ),
-                new IPEndPoint( IPAddress.Parse( "208.64.200.203" ), 27019 ),
-                new IPEndPoint( IPAddress.Parse( "208.64.200.204" ), 27017 ),
-                new IPEndPoint( IPAddress.Parse( "208.64.200.204" ), 27018 ),
-                new IPEndPoint( IPAddress.Parse( "208.64.200.204" ), 27019 ),
-                new IPEndPoint( IPAddress.Parse( "208.64.200.205" ), 27017 ),
-                new IPEndPoint( IPAddress.Parse( "208.64.200.205" ), 27018 ),
-                new IPEndPoint( IPAddress.Parse( "208.64.200.205" ), 27019 ),
-                new IPEndPoint( IPAddress.Parse( "208.78.164.9" ), 27017 ),
-                new IPEndPoint( IPAddress.Parse( "208.78.164.9" ), 27018 ),
-                new IPEndPoint( IPAddress.Parse( "208.78.164.9" ), 27019 ),
-                new IPEndPoint( IPAddress.Parse( "208.78.164.10" ), 27017 ),
-                new IPEndPoint( IPAddress.Parse( "208.78.164.10" ), 27018 ),
-                new IPEndPoint( IPAddress.Parse( "208.78.164.10" ), 27019 ),
-                new IPEndPoint( IPAddress.Parse( "208.78.164.11" ), 27017 ),
-                new IPEndPoint( IPAddress.Parse( "208.78.164.11" ), 27018 ),
-                new IPEndPoint( IPAddress.Parse( "208.78.164.11" ), 27019 ),
-                new IPEndPoint( IPAddress.Parse( "208.78.164.12" ), 27017 ),
-                new IPEndPoint( IPAddress.Parse( "208.78.164.12" ), 27018 ),
-                new IPEndPoint( IPAddress.Parse( "208.78.164.12" ), 27019 ),
-                new IPEndPoint( IPAddress.Parse( "208.78.164.13" ), 27017 ),
-                new IPEndPoint( IPAddress.Parse( "208.78.164.13" ), 27018 ),
-                new IPEndPoint( IPAddress.Parse( "208.78.164.13" ), 27019 ),
-                new IPEndPoint( IPAddress.Parse( "208.78.164.14" ), 27017 ),
-                new IPEndPoint( IPAddress.Parse( "208.78.164.14" ), 27018 ),
-                new IPEndPoint( IPAddress.Parse( "208.78.164.14" ), 27019 ),
-            } );
+            Servers = new SmartCMServerList();
+            Servers.UseInbuiltList();
         }
 
         /// <summary>
@@ -163,6 +127,7 @@ namespace SteamKit2.Internal
             }
 
             connection.NetMsgReceived += NetMsgReceived;
+            connection.Connected += Connected;
             connection.Disconnected += Disconnected;
 
             heartBeatFunc = new ScheduledFunction( () =>
@@ -190,10 +155,7 @@ namespace SteamKit2.Internal
 
             if ( cmServer == null )
             {
-                var serverList = Servers;
-
-                Random random = new Random();
-                cmServer = serverList[ random.Next( serverList.Count ) ];
+                cmServer = Servers.GetNextServerCandidate();
             }
 
             connection.Connect( cmServer, ( int )ConnectionTimeout.TotalMilliseconds );
@@ -321,13 +283,23 @@ namespace SteamKit2.Internal
             OnClientMsgReceived( GetPacketMsg( e.Data ) );
         }
 
+        void Connected( object sender, EventArgs e )
+        {
+            Servers.TryMark( connection.CurrentEndPoint, ServerQuality.Good );
+        }
+
         void Disconnected( object sender, DisconnectedEventArgs e )
         {
+            if ( !e.UserInitiated )
+            {
+                Servers.TryMark( connection.CurrentEndPoint, ServerQuality.Bad );
+            }
+
             ConnectedUniverse = EUniverse.Invalid;
 
             heartBeatFunc.Stop();
 
-            OnClientDisconnected( e.UserInitiated );
+            OnClientDisconnected( userInitiated: e.UserInitiated );
         }
 
         internal static IPacketMsg GetPacketMsg( byte[] data )
@@ -494,6 +466,17 @@ namespace SteamKit2.Internal
             CellID = null;
 
             heartBeatFunc.Stop();
+
+            if ( packetMsg.IsProto )
+            {
+                var logoffMsg = new ClientMsgProtobuf<CMsgClientLoggedOff>( packetMsg );
+                var logoffResult = (EResult)logoffMsg.Body.eresult;
+
+                if ( logoffResult == EResult.TryAnotherCM || logoffResult == EResult.ServiceUnavailable )
+                {
+                    Servers.TryMark( connection.CurrentEndPoint, ServerQuality.Bad );
+                }
+            }
         }
         void HandleServerList( IPacketMsg packetMsg )
         {
@@ -521,7 +504,10 @@ namespace SteamKit2.Internal
                 .Zip( cmMsg.Body.cm_ports, ( addr, port ) => new IPEndPoint( NetHelpers.GetIPAddress( addr ), ( int )port ) );
 
             // update our bootstrap list with steam's list of CMs
-            Servers = new ReadOnlyCollection<IPEndPoint>( cmList.ToList() );
+            foreach ( var cm in cmList )
+            {
+                Servers.TryAdd( cm );
+            }
         }
         void HandleSessionToken( IPacketMsg packetMsg )
         {

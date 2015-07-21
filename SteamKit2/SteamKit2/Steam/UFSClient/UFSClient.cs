@@ -277,7 +277,7 @@ namespace SteamKit2
         }
 
 
-
+        
         void Disconnected( object sender, DisconnectedEventArgs e )
         {
             ConnectedUniverse = EUniverse.Invalid;

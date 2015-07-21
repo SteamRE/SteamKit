@@ -434,5 +434,31 @@ namespace SteamKit2
         {
             return ( ushort )IPAddress.NetworkToHostOrder( ( short )input );
         }
+        public static bool TryParseIPEndPoint(string stringValue, out IPEndPoint endPoint)
+        {
+            var endpointParts = stringValue.Split(':');
+            if (endpointParts.Length != 2)
+            {
+                endPoint = null;
+                return false;
+            }
+
+            IPAddress address;
+            if (!IPAddress.TryParse(endpointParts[0], out address))
+            {
+                endPoint = null;
+                return false;
+            }
+
+            int port;
+            if (!int.TryParse(endpointParts[1], out port))
+            {
+                endPoint = null;
+                return false;
+            }
+
+            endPoint = new IPEndPoint(address, port);
+            return true;
+        }
     }
 }
