@@ -18,27 +18,46 @@ namespace SteamKit2
 {
     public partial class SteamFriends
     {
+        /// <summary>
+        /// Represents the details of a user which is a member of a chatroom.
+        /// </summary>
         public sealed class ChatMemberInfo : MessageObject
         {
+            /// <summary>
+            /// Initializes a new instance of the <see cref="ChatMemberInfo"/> class.
+            /// </summary>
+            /// <param name="keyValues">The KeyValue backing store for this member info.</param>
             public ChatMemberInfo( KeyValue keyValues )
                 : base( keyValues )
             {
             }
+            /// <summary>
+            /// Initializes a new instance of the <see cref="ChatMemberInfo"/> class.
+            /// </summary>
             public ChatMemberInfo() : base()
             {
             }
 
 
+            /// <summary>
+            /// Gets the details of this chat member.
+            /// </summary>
             public int Details
             {
                 get { return KeyValues[ "Details" ].AsInteger(); }
             }
 
+            /// <summary>
+            /// Gets the permissions this user has with the chatroom.
+            /// </summary>
             public EChatPermission Permissions
             {
                 get { return KeyValues[ "Permissions" ].AsEnum<EChatPermission>(); }
             }
 
+            /// <summary>
+            /// Gets the <see cref="SteamID"/> of this user.
+            /// </summary>
             public SteamID SteamID
             {
                 get { return KeyValues[ "SteamID" ].AsUnsignedLong(); }
@@ -548,10 +567,19 @@ namespace SteamKit2
             /// </summary>
             public EChatRoomEnterResponse EnterResponse { get; private set; }
 
+            /// <summary>
+            /// Gets the number of users currently in this chat room.
+            /// </summary>
             public int NumChatMembers { get; private set; }
 
+            /// <summary>
+            /// Gets the name of the chat room.
+            /// </summary>
             public string ChatRoomName { get; private set; }
 
+            /// <summary>
+            /// Gets a list of <see cref="ChatMemberInfo"/> instances for each of the members of this chat room.
+            /// </summary>
             public ReadOnlyCollection<ChatMemberInfo> ChatMembers { get; private set; }
 
 
