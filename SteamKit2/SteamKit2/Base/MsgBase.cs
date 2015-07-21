@@ -402,6 +402,24 @@ namespace SteamKit2
             return reader.ReadDouble();
         }
 
+        /// <summary>
+        /// Reads a null terminated string from the message payload with the default encoding.
+        /// </summary>
+        /// <returns>The string.</returns>
+        public string ReadNullTermString()
+        {
+            return ReadNullTermString( Encoding.Default );
+        }
+        /// <summary>
+        /// Reads a null terminated string from the message payload with the specified encoding.
+        /// </summary>
+        /// <param name="encoding">The encoding to use.</param>
+        /// /// <returns>The string.</returns>
+        public string ReadNullTermString( Encoding encoding )
+        {
+            return Payload.ReadNullTermString( encoding );
+        }
+
     }
 
     /// <summary>
