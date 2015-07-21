@@ -8,12 +8,10 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Compression;
+using System.Linq;
 using System.Net;
 using System.Net.Sockets;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.IO.Compression;
-using SteamKit2.Networking.Steam3;
 
 namespace SteamKit2.Internal
 {

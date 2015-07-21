@@ -4,10 +4,8 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
-using System.Threading;
-using System.Threading.Tasks;
 
-namespace SteamKit2.Networking.Steam3
+namespace SteamKit2
 {
     /// <summary>
     /// Currently marked quality of a server. All servers start off as Undetermined.
