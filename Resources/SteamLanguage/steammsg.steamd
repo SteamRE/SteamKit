@@ -233,6 +233,8 @@ class MsgClientChatEnter<EMsg::ClientChatEnter>
 	byte chatFlags;
 
 	EChatRoomEnterResponse enterResponse;
+
+	int numMembers;
 };
 
 class MsgClientChatMsg<EMsg::ClientChatMsg>
