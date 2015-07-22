@@ -650,19 +650,22 @@ namespace SteamKit2
         /// <returns><c>true</c> if the read was successful; otherwise, <c>false</c>.</returns>
         public bool ReadAsBinary( Stream input )
         {
-            this.Children = new List<KeyValue>();
+            return ReadAsBinaryCore( input, this );
+        }
+
+        static bool ReadAsBinaryCore( Stream input, KeyValue current )
+        {
+            current.Children = new List<KeyValue>();
 
             while ( true )
             {
-
                 var type = ( Type )input.ReadByte();
 
                 if ( type == Type.End )
                 {
                     break;
                 }
-
-                var current = new KeyValue();
+                
                 current.Name = input.ReadNullTermString( Encoding.UTF8 );
 
                 try
@@ -671,7 +674,9 @@ namespace SteamKit2
                     {
                         case Type.None:
                             {
-                                current.ReadAsBinary( input );
+                                var child = new KeyValue();
+                                current.Children.Add( child );
+                                ReadAsBinaryCore( input, child );
                                 break;
                             }
 
@@ -716,8 +721,6 @@ namespace SteamKit2
                 {
                     throw new InvalidDataException( string.Format( "An exception ocurred while reading KV '{0}'", current.Name ), ex );
                 }
-
-                this.Children.Add( current );
             }
 
             return input.Position == input.Length;

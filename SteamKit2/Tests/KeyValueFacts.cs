@@ -181,5 +181,37 @@ namespace Tests
                 }
             }
         }
+
+        [Fact]
+        public void KeyValueBinarySerializationIsSymmetric()
+        {
+            var kv = new KeyValue( "MessageObject" );
+            kv.Children.Add( new KeyValue( "key", "value" ) );
+
+            KeyValue deserializedKv;
+
+            var temporaryFile = Path.GetTempFileName();
+            try
+            {
+                kv.SaveToFile( temporaryFile, asBinary: true );
+                deserializedKv = KeyValue.LoadAsBinary( temporaryFile );
+            }
+            finally
+            {
+                File.Delete( temporaryFile );
+            }
+
+            Assert.Equal( kv.Name, deserializedKv.Name );
+            Assert.Equal( kv.Children.Count, deserializedKv.Children.Count );
+
+            for ( int i = 0; i < kv.Children.Count; i++ )
+            {
+                var originalChild = kv.Children[ i ];
+                var deserializedChild = deserializedKv.Children[ i ];
+                
+                Assert.Equal( originalChild.Name, deserializedChild.Name );
+                Assert.Equal( originalChild.Value, deserializedChild.Value );
+            }
+        }
     }
 }
