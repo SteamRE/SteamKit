@@ -228,11 +228,11 @@ namespace SteamKit2
                         KeyValue kv = new KeyValue();
 
                         using ( MemoryStream ms = new MemoryStream( section.section_kv ) )
-                            kv.ReadAsBinary( ms );
-
-                        if ( kv.Children != null )
                         {
-                            Sections.Add( ( EAppInfoSection )section.section_id, kv.Children.FirstOrDefault() ?? KeyValue.Invalid );
+                            if ( kv.ReadAsBinary( ms ) )
+                            {
+                                Sections.Add( ( EAppInfoSection )section.section_id, kv );
+                            }
                         }
                     }
                 }
@@ -340,11 +340,6 @@ namespace SteamKit2
                         br.ReadUInt32();
 
                         Data.ReadAsBinary( ms );
-                    }
-
-                    if ( Data.Children != null )
-                    {
-                        Data = Data.Children.FirstOrDefault() ?? KeyValue.Invalid;
                     }
                 }
 
@@ -803,7 +798,7 @@ namespace SteamKit2
                 {
                     var kv = new KeyValue();
                     kv.ReadAsBinary( payload );
-                    GuestPasses.Add( kv.Children[0] );
+                    GuestPasses.Add( kv );
                 }
             }
         }
