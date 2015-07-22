@@ -139,8 +139,7 @@ namespace NetHookAnalyzer2
 			}
 			else
 			{
-				var firstChild = kv.Children[0]; // Due to bug in KeyValues parser.
-				SetValueForDisplay(null, childNodes: new[] { new TreeNodeObjectExplorer(firstChild.Name, firstChild).TreeNode });
+				SetValueForDisplay(null, childNodes: new[] { new TreeNodeObjectExplorer(kv.Name, kv).TreeNode });
 			}
 
 			TreeNode.ExpandAll();
