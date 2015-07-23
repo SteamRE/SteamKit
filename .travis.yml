@@ -16,7 +16,7 @@ notifications:
     irc:
         channels:
             - "irc.gamesurge.net#opensteamworks"
-        on_success: always
+        on_success: never
         on_failure: always
 
 cache:
