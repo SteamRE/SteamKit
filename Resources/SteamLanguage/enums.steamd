@@ -271,10 +271,47 @@ enum EPaymentMethod
 	Hipercard = 27;
 	MastercardBrazil = 28;
 	DinersCardBrazil = 29;
+	AuthorizedDevice = 30;
+	MOLPoints = 31;
 	ClickAndBuy = 32;
+	Beeline = 33;
+	Konbini = 34;
+	EClubPoints = 35;
+	CreditCardJapan = 36;
+	BankTransferJapan = 37;
+	PayEasyJapan = 38;
+	Zong = 39;
+	CultureVoucher = 40;
+	BookVoucher = 41;
+	HappymoneyVoucher = 42;
+	ConvenientStoreVoucher = 43;
+	GameVoucher = 44;
+	Multibanco = 45;
+	Payshop = 46;
+	Maestro = 47;
+	OXXO = 48;
+	ToditoCash = 49;
+	Carnet = 50;
+	SPEI = 51;
+	ThreePay = 52;
+	IsBank = 53;
+	Garanti = 54;
+	Akbank = 55;
+	YapiKredi = 56;
+	Halkbank = 57;
+	BankAsya = 58;
+	Finansbank = 59;
+	DenizBank = 60;
+	PTT = 61;
+	CashU = 62;
+	OneCard = 63;
 	AutoGrant = 64;
+	WebMoneyJapan = 65;
+	Smart2PayTest = 66;
 	Wallet = 128;
 	Valve = 129;
+	SteamPressMaster = 130;
+	StorePromotion = 131;
 	OEMTicket = 256;
 	Split = 512;
 	Complimentary = 1024;
@@ -439,8 +476,9 @@ enum EAppInfoSection
 	Policies = 13;
 	SysReqs = 14;
 	Community = 15;
+	Store = 16;
 
-	Max = 16;
+	Max = 17;
 };
 
 enum EContentDownloadSourceType
@@ -666,9 +704,33 @@ enum ECurrencyCode
 	RUB = 5;
 	PLN = 6;
 	BRL = 7;
+	JPY = 8;
 	NOK = 9;
+	IDR = 10;
+	MYR = 11;
+	PHP = 12;
+	SGD = 13;
+	THB = 14;
+	VND = 15;
+	KRW = 16;
+	TRY = 17;
+	UAH = 18;
+	MXN = 19;
+	CAD = 20;
+	AUD = 21;
+	NZD = 22;
+	CNY = 23;
+	INR = 24;
+	CLP = 25;
+	PEN = 26;
+	COP = 27;
+	ZAR = 28;
+	HKD = 29;
+	TWD = 30;
+	SAR = 31;
+	AED = 32;
 
-	Max = 10;
+	Max = 33;
 };
 
 enum EDepotFileFlag flags
