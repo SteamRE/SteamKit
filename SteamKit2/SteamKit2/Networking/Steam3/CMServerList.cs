@@ -101,20 +101,20 @@ namespace SteamKit2
         /// </summary>
         /// <param name="endPoints">The collection of <see cref="System.Net.IPEndPoint"/>s to add.</param>
         /// <returns>false if any of the specified servers are already in the list, true otherwise.</returns>
-        public bool TryAddRange( IEnumerable<IPEndPoint> endPoints )
+        public bool TryAddRange( IEnumerable<IPEndPoint> endPoints)
         {
             lock ( listLock )
             {
                 var distinctEndPoints = endPoints.Distinct();
 
                 var endpointsAlreadyInList = servers.Select( x => x.EndPoint );
-                var overlappingEndPoints = endpointsAlreadyInList.Intersect( endPoints, EqualityComparer<IPEndPoint>.Default );
+                var overlappingEndPoints = endpointsAlreadyInList.Intersect( distinctEndPoints, EqualityComparer<IPEndPoint>.Default );
                 if ( overlappingEndPoints.Any() )
                 {
                     return false;
                 }
 
-                foreach ( var endPoint in endPoints )
+                foreach ( var endPoint in distinctEndPoints )
                 {
                     AddCore( endPoint );
                 }

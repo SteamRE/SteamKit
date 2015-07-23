@@ -175,7 +175,7 @@ namespace Tests
         }
 
         [Fact]
-        public void TryAdd_ReturnsTrue_AddingDuplicateEndPointsInSingleRange()
+        public void TryAddRange_ReturnsTrue_AddingDuplicateEndPointsInSingleRange()
         {
             serverList.TryAdd( new IPEndPoint( IPAddress.Loopback, 27015 ) );
 
@@ -187,7 +187,7 @@ namespace Tests
 
             var added = serverList.TryAddRange( endPoints );
             Assert.True( added, "TryAddRange should have added the IPEndPoints to the list." );
-            Assert.Equal( 3, serverList.GetAllEndPoints().Length );
+            Assert.Equal( 2, serverList.GetAllEndPoints().Length );
         }
 
         [Fact]
