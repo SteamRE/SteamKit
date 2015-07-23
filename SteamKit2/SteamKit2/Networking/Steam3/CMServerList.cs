@@ -101,7 +101,7 @@ namespace SteamKit2
         /// </summary>
         /// <param name="endPoints">The collection of <see cref="System.Net.IPEndPoint"/>s to add.</param>
         /// <returns>false if any of the specified servers are already in the list, true otherwise.</returns>
-        public bool TryAddRange( IEnumerable<IPEndPoint> endPoints)
+        public bool TryAddRange( IEnumerable<IPEndPoint> endPoints )
         {
             lock ( listLock )
             {
