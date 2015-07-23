@@ -17,4 +17,3 @@ notifications:
             - "irc.gamesurge.net#opensteamworks"
         on_success: always
         on_failure: always
-        skip_join: true
