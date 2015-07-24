@@ -667,63 +667,61 @@ namespace SteamKit2
                 }
                 
                 current.Name = input.ReadNullTermString( Encoding.UTF8 );
-
-                try
+                
+                switch ( type )
                 {
-                    switch ( type )
-                    {
-                        case Type.None:
+                    case Type.None:
+                        {
+                            var child = new KeyValue();
+                            current.Children.Add( child );
+                            var didReadChild = ReadAsBinaryCore( input, child );
+                            if ( !didReadChild )
                             {
-                                var child = new KeyValue();
-                                current.Children.Add( child );
-                                ReadAsBinaryCore( input, child );
-                                break;
+                                return false;
                             }
+                            break;
+                        }
 
-                        case Type.String:
-                            {
-                                current.Value = input.ReadNullTermString( Encoding.UTF8 );
-                                break;
-                            }
+                    case Type.String:
+                        {
+                            current.Value = input.ReadNullTermString( Encoding.UTF8 );
+                            break;
+                        }
 
-                        case Type.WideString:
-                            {
-                                throw new InvalidDataException( "wstring is unsupported" );
-                            }
+                    case Type.WideString:
+                        {
+                            DebugLog.WriteLine( "KeyValue", "Encountered WideString type when parsing binary KeyValue, which is unsupported. Returning false.");
+                            return false;
+                        }
 
-                        case Type.Int32:
-                        case Type.Color:
-                        case Type.Pointer:
-                            {
-                                current.Value = Convert.ToString( input.ReadInt32() );
-                                break;
-                            }
+                    case Type.Int32:
+                    case Type.Color:
+                    case Type.Pointer:
+                        {
+                            current.Value = Convert.ToString( input.ReadInt32() );
+                            break;
+                        }
 
-                        case Type.UInt64:
-                            {
-                                current.Value = Convert.ToString( input.ReadUInt64() );
-                                break;
-                            }
+                    case Type.UInt64:
+                        {
+                            current.Value = Convert.ToString( input.ReadUInt64() );
+                            break;
+                        }
 
-                        case Type.Float32:
-                            {
-                                current.Value = Convert.ToString( input.ReadFloat() );
-                                break;
-                            }
+                    case Type.Float32:
+                        {
+                            current.Value = Convert.ToString( input.ReadFloat() );
+                            break;
+                        }
 
-                        default:
-                            {
-                                throw new InvalidDataException( "Unknown KV type encountered." );
-                            }
-                    }
-                }
-                catch ( InvalidDataException ex )
-                {
-                    throw new InvalidDataException( string.Format( "An exception ocurred while reading KV '{0}'", current.Name ), ex );
+                    default:
+                        {
+                            return false;
+                        }
                 }
             }
 
-            return input.Position == input.Length;
+            return true;
         }
     }
 }

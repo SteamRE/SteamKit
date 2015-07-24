@@ -213,5 +213,66 @@ namespace Tests
                 Assert.Equal( originalChild.Value, deserializedChild.Value );
             }
         }
+
+        [Fact]
+        public void KeyValuesReadsBinary()
+        {
+            var binary = Utils.DecodeHexString( TestObjectHex );
+            var kv = new KeyValue();
+            bool success;
+            using ( var ms = new MemoryStream( binary ) )
+            {
+                success = kv.ReadAsBinary( ms );
+                Assert.Equal( ms.Length, ms.Position );
+            }
+
+            Assert.True( success, "Should have read test object." );
+            Assert.Equal( "TestObject", kv.Name );
+            Assert.Equal( 1, kv.Children.Count );
+            Assert.Equal( "key", kv.Children[0].Name );
+            Assert.Equal( "value", kv.Children[0].Value );
+        }
+
+        [Fact]
+        public void KeyValuesReadsBinaryWithLeftoverData()
+        {
+            var binary = Utils.DecodeHexString( TestObjectHex + Guid.NewGuid().ToString().Replace("-", "") );
+            var kv = new KeyValue();
+            bool success;
+            using ( var ms = new MemoryStream( binary ) )
+            {
+                success = kv.ReadAsBinary( ms );
+                Assert.Equal( TestObjectHex.Length / 2, ms.Position );
+                Assert.Equal( 16, ms.Length - ms.Position );
+            }
+
+            Assert.True( success, "Should have read test object." );
+            Assert.Equal( "TestObject", kv.Name );
+            Assert.Equal( 1, kv.Children.Count );
+            Assert.Equal( "key", kv.Children[0].Name );
+            Assert.Equal( "value", kv.Children[0].Value );
+        }
+
+        [Fact]
+        public void KeyValuesFailsToReadTruncatedBinary()
+        {
+            // Test every possible truncation boundary we have.
+            for ( int i = 0; i < TestObjectHex.Length; i += 2 )
+            {
+                var binary = Utils.DecodeHexString( TestObjectHex.Substring( 0, i ) );
+                var kv = new KeyValue();
+                bool success;
+                using ( var ms = new MemoryStream( binary ) )
+                {
+                    success = kv.ReadAsBinary( ms );
+                    Assert.Equal( ms.Length, ms.Position );
+                }
+
+                Assert.False( success, "Should not have read test object." );
+            }
+        }
+
+
+        const string TestObjectHex = "00546573744F626A65637400016B65790076616C7565000808";
     }
 }
