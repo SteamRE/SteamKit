@@ -396,6 +396,7 @@ namespace SteamKit2
         /// <remarks>
         /// This method will swallow any exceptions that occur when reading, use <see cref="ReadAsBinary"/> if you wish to handle exceptions.
         /// </remarks>
+        [Obsolete( "Warning: The behavior of this function has changed. See https://git.io/vYcR3 for details." )]
         public static KeyValue LoadAsBinary( string path )
         {
             return LoadFromFile( path, true );
@@ -417,7 +418,9 @@ namespace SteamKit2
 
                     if ( asBinary )
                     {
+#pragma warning disable 0618
                         if ( kv.ReadAsBinary( input ) == false )
+#pragma warning restore 0618
                         {
                             return null;
                         }
@@ -648,6 +651,7 @@ namespace SteamKit2
         /// </summary>
         /// <param name="input">The input <see cref="Stream"/> to read from.</param>
         /// <returns><c>true</c> if the read was successful; otherwise, <c>false</c>.</returns>
+        [Obsolete( "Warning: The behavior of this function has changed. See https://git.io/vYcR3 for details." )]
         public bool ReadAsBinary( Stream input )
         {
             return ReadAsBinaryCore( input, this );

@@ -182,6 +182,8 @@ namespace Tests
             }
         }
 
+#pragma warning disable 0618
+
         [Fact]
         public void KeyValueBinarySerializationIsSymmetric()
         {
@@ -272,6 +274,7 @@ namespace Tests
             }
         }
 
+#pragma warning restore 0618
 
         const string TestObjectHex = "00546573744F626A65637400016B65790076616C7565000808";
     }
