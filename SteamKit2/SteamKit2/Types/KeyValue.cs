@@ -671,7 +671,7 @@ namespace SteamKit2
         {
             var dummyChild = new KeyValue();
             this.Children.Add( dummyChild );
-            return ReadAsBinaryCore( input, dummyChild );
+            return dummyChild.TryReadAsBinary( input );
         }
 
         /// <summary>
@@ -681,10 +681,10 @@ namespace SteamKit2
         /// <returns><c>true</c> if the read was successful; otherwise, <c>false</c>.</returns>
         public bool TryReadAsBinary( Stream input )
         {
-            return ReadAsBinaryCore( input, this );
+            return TryReadAsBinaryCore( input, this, null );
         }
 
-        static bool ReadAsBinaryCore( Stream input, KeyValue current )
+        static bool TryReadAsBinaryCore( Stream input, KeyValue current, KeyValue parent )
         {
             current.Children = new List<KeyValue>();
 
@@ -696,7 +696,7 @@ namespace SteamKit2
                 {
                     break;
                 }
-                
+
                 current.Name = input.ReadNullTermString( Encoding.UTF8 );
                 
                 switch ( type )
@@ -704,8 +704,7 @@ namespace SteamKit2
                     case Type.None:
                         {
                             var child = new KeyValue();
-                            current.Children.Add( child );
-                            var didReadChild = ReadAsBinaryCore( input, child );
+                            var didReadChild = TryReadAsBinaryCore( input, child, current );
                             if ( !didReadChild )
                             {
                                 return false;
@@ -750,6 +749,12 @@ namespace SteamKit2
                             return false;
                         }
                 }
+
+                if (parent != null)
+                {
+                    parent.Children.Add(current);
+                }
+                current = new KeyValue();
             }
 
             return true;

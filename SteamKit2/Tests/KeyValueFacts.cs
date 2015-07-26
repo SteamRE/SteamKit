@@ -341,6 +341,28 @@ namespace Tests
             }
         }
 
+        [Fact]
+        public void KeyValuesReadsBinaryWithMultipleChildren()
+        {
+            var hex = "00546573744f626a65637400016b6579310076616c75653100016b6579320076616c756532000808";
+            var binary = Utils.DecodeHexString( hex );
+            var kv = new KeyValue();
+            bool success;
+            using ( var ms = new MemoryStream( binary ) )
+            {
+                success = kv.TryReadAsBinary( ms );
+            }
+
+            Assert.True( success );
+            
+            Assert.Equal( "TestObject", kv.Name );
+            Assert.Equal( 2, kv.Children.Count );
+            Assert.Equal( "key1", kv.Children[ 0 ].Name );
+            Assert.Equal( "value1", kv.Children[ 0 ].Value );
+            Assert.Equal( "key2", kv.Children[ 1 ].Name );
+            Assert.Equal( "value2", kv.Children[ 1 ].Value );
+        }
+
         const string TestObjectHex = "00546573744F626A65637400016B65790076616C7565000808";
     }
 }
