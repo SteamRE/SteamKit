@@ -229,9 +229,7 @@ namespace SteamKit2
 
                         using ( MemoryStream ms = new MemoryStream( section.section_kv ) )
                         {
-#pragma warning disable 0618
-                            if ( kv.ReadAsBinary( ms ) )
-#pragma warning restore 0618
+                            if ( kv.TryReadAsBinary( ms ) )
                             {
                                 Sections.Add( ( EAppInfoSection )section.section_id, kv );
                             }
@@ -341,9 +339,7 @@ namespace SteamKit2
                         // todo: we've apparently ignored this with zero ill effects, but perhaps we want to respect it?
                         br.ReadUInt32();
                         
-#pragma warning disable 0618
-                        Data.ReadAsBinary( ms );
-#pragma warning restore 0618
+                        Data.TryReadAsBinary( ms );
                     }
                 }
 
@@ -712,10 +708,8 @@ namespace SteamKit2
                             // see: CPackageInfo::UpdateFromBuffer(CSHA const&,uint,CUtlBuffer &)
                             // todo: we've apparently ignored this with zero ill effects, but perhaps we want to respect it?
                             br.ReadUInt32();
-
-#pragma warning disable 0618
-                            this.KeyValues.ReadAsBinary( ms );
-#pragma warning restore 0618
+                            
+                            this.KeyValues.TryReadAsBinary( ms );
                         }
                     }
                 }
@@ -803,9 +797,7 @@ namespace SteamKit2
                 for ( int i = 0; i < CountGuestPassesToGive + CountGuestPassesToRedeem; i++ )
                 {
                     var kv = new KeyValue();
-#pragma warning disable 0618
-                    kv.ReadAsBinary( payload );
-#pragma warning restore 0618
+                    kv.TryReadAsBinary( payload );
                     GuestPasses.Add( kv );
                 }
             }

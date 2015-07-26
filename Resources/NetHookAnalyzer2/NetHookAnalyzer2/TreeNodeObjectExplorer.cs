@@ -123,14 +123,7 @@ namespace NetHookAnalyzer2
 			bool didRead;
 			using (var ms = new MemoryStream(data))
 			{
-				try
-				{
-					didRead = kv.ReadAsBinary(ms);
-				}
-				catch (InvalidDataException)
-				{
-					didRead = false;
-				}
+				didRead = kv.TryReadAsBinary(ms);
 			}
 
 			if (!didRead)
