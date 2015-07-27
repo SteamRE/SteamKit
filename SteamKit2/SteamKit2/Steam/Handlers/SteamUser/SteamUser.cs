@@ -82,6 +82,16 @@ namespace SteamKit2
             /// </value>
             public bool RequestSteam2Ticket { get; set; }
 
+            /// <summary>
+            /// Gets or sets the client operating system type.
+            /// </summary>
+            /// <value>The client operating system type.</value>
+            public EOSType ClientOSType { get; set; }
+            /// <summary>
+            /// Gets or sets the client language.
+            /// </summary>
+            /// <value>The client language.</value>
+            public string ClientLanguage { get; set; }
 
             /// <summary>
             /// Initializes a new instance of the <see cref="LogOnDetails"/> class.
@@ -90,6 +100,35 @@ namespace SteamKit2
             {
                 AccountInstance = SteamID.DesktopInstance; // use the default pc steam instance
                 AccountID = 0;
+
+                ClientOSType = Utils.GetOSType();
+                ClientLanguage = "english";
+            }
+        }
+
+        /// <summary>
+        /// Represents the details required to log into Steam3 as an anonymous user.
+        /// </summary>
+        public sealed class AnonymousLogOnDetails
+        {
+            /// <summary>
+            /// Gets or sets the client operating system type.
+            /// </summary>
+            /// <value>The client operating system type.</value>
+            public EOSType ClientOSType { get; set; }
+            /// <summary>
+            /// Gets or sets the client language.
+            /// </summary>
+            /// <value>The client language.</value>
+            public string ClientLanguage { get; set; }
+
+            /// <summary>
+            /// Initializes a new instance of the <see cref="AnonymousLogOnDetails"/> class.
+            /// </summary>
+            public AnonymousLogOnDetails()
+            {
+                ClientOSType = Utils.GetOSType();
+                ClientLanguage = "english";
             }
         }
 
@@ -243,8 +282,8 @@ namespace SteamKit2
             logon.Body.should_remember_password = details.ShouldRememberPassword;
 
             logon.Body.protocol_version = MsgClientLogon.CurrentProtocol;
-            logon.Body.client_os_type = ( uint )Utils.GetOSType();
-            logon.Body.client_language = "english";
+            logon.Body.client_os_type = ( uint )details.ClientOSType;
+            logon.Body.client_language = details.ClientLanguage;
 
             logon.Body.steam2_ticket_request = details.RequestSteam2Ticket;
 
@@ -268,12 +307,23 @@ namespace SteamKit2
 
             this.Client.Send( logon );
         }
+
         /// <summary>
         /// Logs the client into the Steam3 network as an anonymous user.
         /// The client should already have been connected at this point.
         /// Results are returned in a <see cref="LoggedOnCallback"/>.
         /// </summary>
         public void LogOnAnonymous()
+        {
+            LogOnAnonymous( new AnonymousLogOnDetails() );
+        }
+        /// <summary>
+        /// Logs the client into the Steam3 network as an anonymous user.
+        /// The client should already have been connected at this point.
+        /// Results are returned in a <see cref="LoggedOnCallback"/>.
+        /// </summary>
+        /// <param name="details">The details to use for logging on.</param>
+        public void LogOnAnonymous( AnonymousLogOnDetails details )
         {
             if ( !this.Client.IsConnected )
             {
@@ -289,7 +339,8 @@ namespace SteamKit2
             logon.ProtoHeader.steamid = auId.ConvertToUInt64();
 
             logon.Body.protocol_version = MsgClientLogon.CurrentProtocol;
-            logon.Body.client_os_type = ( uint )Utils.GetOSType();
+            logon.Body.client_os_type = ( uint )details.ClientOSType;
+            logon.Body.client_language = details.ClientLanguage;
 
             // this is not a proper machine id that Steam accepts
             // but it's good enough for identifying a machine
