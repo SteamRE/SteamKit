@@ -181,5 +181,188 @@ namespace Tests
                 }
             }
         }
+
+        [Fact]
+        public void KeyValueBinarySerializationIsSymmetric()
+        {
+            var kv = new KeyValue( "MessageObject" );
+            kv.Children.Add( new KeyValue( "key", "value" ) );
+
+            KeyValue deserializedKv;
+
+            var temporaryFile = Path.GetTempFileName();
+            try
+            {
+                kv.SaveToFile( temporaryFile, asBinary: true );
+                var loaded = KeyValue.TryLoadAsBinary( temporaryFile, out deserializedKv );
+                Assert.True( loaded );
+            }
+            finally
+            {
+                File.Delete( temporaryFile );
+            }
+
+            Assert.Equal( kv.Name, deserializedKv.Name );
+            Assert.Equal( kv.Children.Count, deserializedKv.Children.Count );
+
+            for ( int i = 0; i < kv.Children.Count; i++ )
+            {
+                var originalChild = kv.Children[ i ];
+                var deserializedChild = deserializedKv.Children[ i ];
+                
+                Assert.Equal( originalChild.Name, deserializedChild.Name );
+                Assert.Equal( originalChild.Value, deserializedChild.Value );
+            }
+        }
+
+#pragma warning disable 0618
+
+        [Fact]
+        public void KeyValueBinarySerialization_LoadAsBinaryPreservesBuggyBehavior()
+        {
+            var kv = new KeyValue( "MessageObject" );
+            kv.Children.Add( new KeyValue( "key", "value" ) );
+
+            KeyValue deserializedKv;
+
+            var temporaryFile = Path.GetTempFileName();
+            try
+            {
+                kv.SaveToFile( temporaryFile, asBinary: true );
+                deserializedKv = KeyValue.LoadAsBinary( temporaryFile );
+            }
+            finally
+            {
+                File.Delete( temporaryFile );
+            }
+
+            Assert.Null( deserializedKv.Name );
+            Assert.Equal(1, deserializedKv.Children.Count );
+
+            var actualKv = deserializedKv.Children[ 0 ];
+
+            Assert.Equal( kv.Name, actualKv.Name );
+            Assert.Equal( kv.Children.Count, actualKv.Children.Count );
+
+            for ( int i = 0; i < kv.Children.Count; i++ )
+            {
+                var originalChild = kv.Children[ i ];
+                var deserializedChild = actualKv.Children[ i ];
+                
+                Assert.Equal( originalChild.Name, deserializedChild.Name );
+                Assert.Equal( originalChild.Value, deserializedChild.Value );
+            }
+        }
+
+#pragma warning restore 0618
+
+        [Fact]
+        public void KeyValues_TryReadAsBinary_ReadsBinary()
+        {
+            var binary = Utils.DecodeHexString( TestObjectHex );
+            var kv = new KeyValue();
+            bool success;
+            using ( var ms = new MemoryStream( binary ) )
+            {
+                success = kv.TryReadAsBinary( ms );
+                Assert.Equal( ms.Length, ms.Position );
+            }
+
+            Assert.True( success, "Should have read test object." );
+            Assert.Equal( "TestObject", kv.Name );
+            Assert.Equal( 1, kv.Children.Count );
+            Assert.Equal( "key", kv.Children[0].Name );
+            Assert.Equal( "value", kv.Children[0].Value );
+        }
+
+#pragma warning disable 0618
+
+        [Fact]
+        public void KeyValuesReadsBinary_ReadAsBinary_PreservesBuggyBehavior()
+        {
+            var binary = Utils.DecodeHexString( TestObjectHex );
+            var kv = new KeyValue();
+            bool success;
+            using ( var ms = new MemoryStream( binary ) )
+            {
+                success = kv.ReadAsBinary( ms );
+                Assert.Equal( ms.Length, ms.Position );
+            }
+
+            Assert.True( success, "Should have read test object." );
+            Assert.Null( kv.Name );
+            Assert.Equal( 1, kv.Children.Count );
+
+            var actualKv = kv.Children[ 0 ];
+            Assert.Equal( "TestObject", actualKv.Name );
+            Assert.Equal( 1, actualKv.Children.Count );
+            Assert.Equal( "key", actualKv.Children[0].Name );
+            Assert.Equal( "value", actualKv.Children[0].Value );
+        }
+
+#pragma warning restore 0618
+
+        [Fact]
+        public void KeyValuesReadsBinaryWithLeftoverData()
+        {
+            var binary = Utils.DecodeHexString( TestObjectHex + Guid.NewGuid().ToString().Replace("-", "") );
+            var kv = new KeyValue();
+            bool success;
+            using ( var ms = new MemoryStream( binary ) )
+            {
+                success = kv.TryReadAsBinary( ms );
+                Assert.Equal( TestObjectHex.Length / 2, ms.Position );
+                Assert.Equal( 16, ms.Length - ms.Position );
+            }
+
+            Assert.True( success, "Should have read test object." );
+            Assert.Equal( "TestObject", kv.Name );
+            Assert.Equal( 1, kv.Children.Count );
+            Assert.Equal( "key", kv.Children[0].Name );
+            Assert.Equal( "value", kv.Children[0].Value );
+        }
+
+        [Fact]
+        public void KeyValuesFailsToReadTruncatedBinary()
+        {
+            // Test every possible truncation boundary we have.
+            for ( int i = 0; i < TestObjectHex.Length; i += 2 )
+            {
+                var binary = Utils.DecodeHexString( TestObjectHex.Substring( 0, i ) );
+                var kv = new KeyValue();
+                bool success;
+                using ( var ms = new MemoryStream( binary ) )
+                {
+                    success = kv.TryReadAsBinary( ms );
+                    Assert.Equal( ms.Length, ms.Position );
+                }
+
+                Assert.False( success, "Should not have read test object." );
+            }
+        }
+
+        [Fact]
+        public void KeyValuesReadsBinaryWithMultipleChildren()
+        {
+            var hex = "00546573744f626a65637400016b6579310076616c75653100016b6579320076616c756532000808";
+            var binary = Utils.DecodeHexString( hex );
+            var kv = new KeyValue();
+            bool success;
+            using ( var ms = new MemoryStream( binary ) )
+            {
+                success = kv.TryReadAsBinary( ms );
+            }
+
+            Assert.True( success );
+            
+            Assert.Equal( "TestObject", kv.Name );
+            Assert.Equal( 2, kv.Children.Count );
+            Assert.Equal( "key1", kv.Children[ 0 ].Name );
+            Assert.Equal( "value1", kv.Children[ 0 ].Value );
+            Assert.Equal( "key2", kv.Children[ 1 ].Name );
+            Assert.Equal( "value2", kv.Children[ 1 ].Value );
+        }
+
+        const string TestObjectHex = "00546573744F626A65637400016B65790076616C7565000808";
     }
 }

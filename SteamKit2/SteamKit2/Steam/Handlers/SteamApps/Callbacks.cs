@@ -228,11 +228,11 @@ namespace SteamKit2
                         KeyValue kv = new KeyValue();
 
                         using ( MemoryStream ms = new MemoryStream( section.section_kv ) )
-                            kv.ReadAsBinary( ms );
-
-                        if ( kv.Children != null )
                         {
-                            Sections.Add( ( EAppInfoSection )section.section_id, kv.Children.FirstOrDefault() ?? KeyValue.Invalid );
+                            if ( kv.TryReadAsBinary( ms ) )
+                            {
+                                Sections.Add( ( EAppInfoSection )section.section_id, kv );
+                            }
                         }
                     }
                 }
@@ -338,13 +338,8 @@ namespace SteamKit2
                         // see: CPackageInfo::UpdateFromBuffer(CSHA const&,uint,CUtlBuffer &)
                         // todo: we've apparently ignored this with zero ill effects, but perhaps we want to respect it?
                         br.ReadUInt32();
-
-                        Data.ReadAsBinary( ms );
-                    }
-
-                    if ( Data.Children != null )
-                    {
-                        Data = Data.Children.FirstOrDefault() ?? KeyValue.Invalid;
+                        
+                        Data.TryReadAsBinary( ms );
                     }
                 }
 
@@ -713,8 +708,8 @@ namespace SteamKit2
                             // see: CPackageInfo::UpdateFromBuffer(CSHA const&,uint,CUtlBuffer &)
                             // todo: we've apparently ignored this with zero ill effects, but perhaps we want to respect it?
                             br.ReadUInt32();
-
-                            this.KeyValues.ReadAsBinary( ms );
+                            
+                            this.KeyValues.TryReadAsBinary( ms );
                         }
                     }
                 }
@@ -802,8 +797,8 @@ namespace SteamKit2
                 for ( int i = 0; i < CountGuestPassesToGive + CountGuestPassesToRedeem; i++ )
                 {
                     var kv = new KeyValue();
-                    kv.ReadAsBinary( payload );
-                    GuestPasses.Add( kv.Children[0] );
+                    kv.TryReadAsBinary( payload );
+                    GuestPasses.Add( kv );
                 }
             }
         }
