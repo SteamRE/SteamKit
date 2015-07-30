@@ -4,6 +4,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 using SteamKit2.Internal;
 
 namespace SteamKit2
@@ -424,44 +425,29 @@ namespace SteamKit2
         /// <param name="packetMsg">The packet message that contains the data.</param>
         public override void HandleMsg( IPacketMsg packetMsg )
         {
-            switch ( packetMsg.MsgType )
+            var dispatchMap = new Dictionary<EMsg, Action<IPacketMsg>>
             {
-                case EMsg.ClientLogOnResponse:
-                    HandleLogOnResponse( packetMsg );
-                    break;
+                { EMsg.ClientLogOnResponse, HandleLogOnResponse },
+                { EMsg.ClientLoggedOff, HandleLoggedOff },
+                { EMsg.ClientNewLoginKey, HandleLoginKey },
+                { EMsg.ClientSessionToken, HandleSessionToken },
+                { EMsg.ClientUpdateMachineAuth, HandleUpdateMachineAuth },
+                { EMsg.ClientAccountInfo, HandleAccountInfo },
+                { EMsg.ClientWalletInfoUpdate, HandleWalletInfo },
+                { EMsg.ClientRequestWebAPIAuthenticateUserNonceResponse, HandleWebAPIUserNonce },
+                { EMsg.ClientMarketingMessageUpdate2, HandleMarketingMessageUpdate },
+            };
 
-                case EMsg.ClientNewLoginKey:
-                    HandleLoginKey( packetMsg );
-                    break;
+            Action<IPacketMsg> handlerFunc;
+            bool haveFunc = dispatchMap.TryGetValue( packetMsg.MsgType, out handlerFunc );
 
-                case EMsg.ClientSessionToken:
-                    HandleSessionToken( packetMsg );
-                    break;
-
-                case EMsg.ClientLoggedOff:
-                    HandleLoggedOff( packetMsg );
-                    break;
-
-                case EMsg.ClientUpdateMachineAuth:
-                    HandleUpdateMachineAuth( packetMsg );
-                    break;
-
-                case EMsg.ClientAccountInfo:
-                    HandleAccountInfo( packetMsg );
-                    break;
-
-                case EMsg.ClientWalletInfoUpdate:
-                    HandleWalletInfo( packetMsg );
-                    break;
-
-                case EMsg.ClientRequestWebAPIAuthenticateUserNonceResponse:
-                    HandleWebAPIUserNonce( packetMsg );
-                    break;
-
-                case EMsg.ClientMarketingMessageUpdate2:
-                    HandleMarketingMessageUpdate( packetMsg );
-                    break;
+            if ( !haveFunc )
+            {
+                // ignore messages that we don't have a handler function for
+                return;
             }
+
+            handlerFunc( packetMsg );
         }
 
         

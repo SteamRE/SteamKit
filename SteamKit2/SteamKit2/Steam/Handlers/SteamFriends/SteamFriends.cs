@@ -5,6 +5,7 @@
 
 
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -533,68 +534,35 @@ namespace SteamKit2
         /// <param name="packetMsg">The packet message that contains the data.</param>
         public override void HandleMsg( IPacketMsg packetMsg )
         {
-            switch ( packetMsg.MsgType )
+            var dispatchMap = new Dictionary<EMsg, Action<IPacketMsg>>
             {
-                case EMsg.ClientPersonaState:
-                    HandlePersonaState( packetMsg );
-                    break;
+                { EMsg.ClientPersonaState, HandlePersonaState },
+                { EMsg.ClientClanState, HandleClanState },
+                { EMsg.ClientFriendsList, HandleFriendsList },
+                { EMsg.ClientFriendMsgIncoming, HandleFriendMsg },
+                { EMsg.ClientFriendMsgEchoToSender, HandleFriendEchoMsg },
+                { EMsg.ClientAccountInfo, HandleAccountInfo },
+                { EMsg.ClientAddFriendResponse, HandleFriendResponse },
+                { EMsg.ClientChatEnter, HandleChatEnter },
+                { EMsg.ClientChatMsg, HandleChatMsg },
+                { EMsg.ClientChatMemberInfo, HandleChatMemberInfo },
+                { EMsg.ClientChatRoomInfo, HandleChatRoomInfo },
+                { EMsg.ClientChatActionResult, HandleChatActionResult },
+                { EMsg.ClientChatInvite, HandleChatInvite },
+                { EMsg.ClientSetIgnoreFriendResponse, HandleIgnoreFriendResponse },
+                { EMsg.ClientFriendProfileInfoResponse, HandleProfileInfoResponse },
+            };
 
-                case EMsg.ClientClanState:
-                    HandleClanState( packetMsg );
-                    break;
+            Action<IPacketMsg> handlerFunc;
+            bool haveFunc = dispatchMap.TryGetValue( packetMsg.MsgType, out handlerFunc );
 
-                case EMsg.ClientFriendsList:
-                    HandleFriendsList( packetMsg );
-                    break;
-
-                case EMsg.ClientFriendMsgIncoming:
-                    HandleFriendMsg( packetMsg );
-                    break;
-
-                case EMsg.ClientFriendMsgEchoToSender:
-                    HandleFriendEchoMsg( packetMsg );
-                    break;
-
-                case EMsg.ClientAccountInfo:
-                    HandleAccountInfo( packetMsg );
-                    break;
-
-                case EMsg.ClientAddFriendResponse:
-                    HandleFriendResponse( packetMsg );
-                    break;
-
-                case EMsg.ClientChatEnter:
-                    HandleChatEnter( packetMsg );
-                    break;
-
-                case EMsg.ClientChatMsg:
-                    HandleChatMsg( packetMsg );
-                    break;
-
-                case EMsg.ClientChatMemberInfo:
-                    HandleChatMemberInfo( packetMsg );
-                    break;
-
-                case EMsg.ClientChatRoomInfo:
-                    HandleChatRoomInfo( packetMsg );
-                    break;
-
-                case EMsg.ClientChatActionResult:
-                    HandleChatActionResult( packetMsg );
-                    break;
-
-                case EMsg.ClientChatInvite:
-                    HandleChatInvite( packetMsg );
-                    break;
-
-                case EMsg.ClientSetIgnoreFriendResponse:
-                    HandleIgnoreFriendResponse( packetMsg );
-                    break;
-
-                case EMsg.ClientFriendProfileInfoResponse:
-                    HandleProfileInfoResponse( packetMsg );
-                    break;
+            if ( !haveFunc )
+            {
+                // ignore messages that we don't have a handler function for
+                return;
             }
+
+            handlerFunc( packetMsg );
         }
 
 

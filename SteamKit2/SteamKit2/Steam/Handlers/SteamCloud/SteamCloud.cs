@@ -5,6 +5,8 @@
 
 
 
+using System;
+using System.Collections.Generic;
 using SteamKit2.Internal;
 
 namespace SteamKit2
@@ -84,18 +86,23 @@ namespace SteamKit2
         /// <param name="packetMsg">The packet message that contains the data.</param>
         public override void HandleMsg( IPacketMsg packetMsg )
         {
-            switch ( packetMsg.MsgType )
+            var dispatchMap = new Dictionary<EMsg, Action<IPacketMsg>>
             {
-                case EMsg.ClientUFSGetUGCDetailsResponse:
-                    HandleUGCDetailsResponse( packetMsg );
-                    break;
-                case EMsg.ClientUFSGetSingleFileInfoResponse:
-                    HandleSingleFileInfoResponse( packetMsg );
-                    break;
-                case EMsg.ClientUFSShareFileResponse:
-                    HandleShareFileResponse( packetMsg );
-                    break;
+                { EMsg.ClientUFSGetUGCDetailsResponse, HandleUGCDetailsResponse },
+                { EMsg.ClientUFSGetSingleFileInfoResponse, HandleSingleFileInfoResponse },
+                { EMsg.ClientUFSShareFileResponse, HandleShareFileResponse },
+            };
+
+            Action<IPacketMsg> handlerFunc;
+            bool haveFunc = dispatchMap.TryGetValue( packetMsg.MsgType, out handlerFunc );
+
+            if ( !haveFunc )
+            {
+                // ignore messages that we don't have a handler function for
+                return;
             }
+
+            handlerFunc( packetMsg );
         }
 
 

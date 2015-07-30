@@ -271,19 +271,22 @@ namespace SteamKit2
                 return;
             }
 
-            switch ( packetMsg.MsgType )
+            var dispatchMap = new Dictionary<EMsg, Action<IPacketMsg>>
             {
-                case EMsg.ChannelEncryptResult:
-                    HandleEncryptResult( packetMsg ); // we're interested in this client message to post the connected callback
-                    break;
+                // we're interested in this client message to post the connected callback
+                { EMsg.ChannelEncryptResult, HandleEncryptResult },
 
-                case EMsg.ClientCMList:
-                    HandleCMList( packetMsg );
-                    break;
+                { EMsg.ClientCMList, HandleCMList },
+                { EMsg.ClientServerList, HandleServerList },
+            };
 
-                case EMsg.ClientServerList:
-                    HandleServerList( packetMsg );
-                    break;
+            Action<IPacketMsg> handlerFunc;
+            bool haveFunc = dispatchMap.TryGetValue( packetMsg.MsgType, out handlerFunc );
+
+            if ( haveFunc )
+            {
+                // we want to handle some of the clientmsgs before we pass them along to registered handlers
+                handlerFunc( packetMsg );
             }
 
             // pass along the clientmsg to all registered handlers

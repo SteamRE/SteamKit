@@ -69,20 +69,23 @@ namespace SteamKit2
         /// <param name="packetMsg">The packet message that contains the data.</param>
         public override void HandleMsg( IPacketMsg packetMsg )
         {
-            switch ( packetMsg.MsgType )
+            var dispatchMap = new Dictionary<EMsg, Action<IPacketMsg>>
             {
-                case EMsg.EconTrading_InitiateTradeProposed:
-                    HandleTradeProposed( packetMsg );
-                    break;
+                { EMsg.EconTrading_InitiateTradeProposed, HandleTradeProposed },
+                { EMsg.EconTrading_InitiateTradeResult, HandleTradeResult },
+                { EMsg.EconTrading_StartSession, HandleStartSession },
+            };
 
-                case EMsg.EconTrading_InitiateTradeResult:
-                    HandleTradeResult( packetMsg );
-                    break;
+            Action<IPacketMsg> handlerFunc;
+            bool haveFunc = dispatchMap.TryGetValue( packetMsg.MsgType, out handlerFunc );
 
-                case EMsg.EconTrading_StartSession:
-                    HandleStartSession( packetMsg );
-                    break;
+            if ( !haveFunc )
+            {
+                // ignore messages that we don't have a handler function for
+                return;
             }
+
+            handlerFunc( packetMsg );
         }
 
 

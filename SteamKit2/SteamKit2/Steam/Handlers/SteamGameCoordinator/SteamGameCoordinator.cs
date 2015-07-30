@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using SteamKit2.GC;
 using SteamKit2.Internal;
 
@@ -35,13 +36,32 @@ namespace SteamKit2
         /// <param name="packetMsg">The packet message that contains the data.</param>
         public override void HandleMsg( IPacketMsg packetMsg )
         {
-            if ( packetMsg.MsgType == EMsg.ClientFromGC )
+            var dispatchMap = new Dictionary<EMsg, Action<IPacketMsg>>
             {
-                var msg = new ClientMsgProtobuf<CMsgGCClient>( packetMsg );
+                { EMsg.ClientFromGC, HandleFromGC },
+            };
 
-                var callback = new MessageCallback( msg.Body );
-                this.Client.PostCallback( callback );
+            Action<IPacketMsg> handlerFunc;
+            bool haveFunc = dispatchMap.TryGetValue( packetMsg.MsgType, out handlerFunc );
+
+            if ( !haveFunc )
+            {
+                // ignore messages that we don't have a handler function for
+                return;
             }
+
+            handlerFunc( packetMsg );
         }
+
+
+        #region ClientMsg Handlers
+        void HandleFromGC( IPacketMsg packetMsg )
+        {
+            var msg = new ClientMsgProtobuf<CMsgGCClient>( packetMsg );
+
+            var callback = new MessageCallback( msg.Body );
+            this.Client.PostCallback( callback );
+        }
+        #endregion
     }
 }

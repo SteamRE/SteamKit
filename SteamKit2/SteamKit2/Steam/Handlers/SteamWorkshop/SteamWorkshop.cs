@@ -215,26 +215,25 @@ namespace SteamKit2
         /// <param name="packetMsg">The packet message that contains the data.</param>
         public override void HandleMsg( IPacketMsg packetMsg )
         {
-            switch ( packetMsg.MsgType )
+            var dispatchMap = new Dictionary<EMsg, Action<IPacketMsg>>
             {
-                case EMsg.CREEnumeratePublishedFilesResponse:
-                    HandleEnumPublishedFiles( packetMsg );
-                    break;
+                { EMsg.CREEnumeratePublishedFilesResponse, HandleEnumPublishedFiles },
+                { EMsg.ClientUCMEnumerateUserPublishedFilesResponse, HandleEnumUserPublishedFiles },
+                { EMsg.ClientUCMEnumerateUserSubscribedFilesResponse, HandleEnumUserSubscribedFiles },
+                { EMsg.ClientUCMEnumeratePublishedFilesByUserActionResponse, HandleEnumPublishedFilesByAction },
+            };
 
-                case EMsg.ClientUCMEnumerateUserPublishedFilesResponse:
-                    HandleEnumUserPublishedFiles( packetMsg );
-                    break;
+            Action<IPacketMsg> handlerFunc;
+            bool haveFunc = dispatchMap.TryGetValue( packetMsg.MsgType, out handlerFunc );
 
-                case EMsg.ClientUCMEnumerateUserSubscribedFilesResponse:
-                    HandleEnumUserSubscribedFiles( packetMsg );
-                    break;
-
-                case EMsg.ClientUCMEnumeratePublishedFilesByUserActionResponse:
-                    HandleEnumPublishedFilesByAction( packetMsg );
-                    break;
+            if ( !haveFunc )
+            {
+                // ignore messages that we don't have a handler function for
+                return;
             }
-        }
 
+            handlerFunc( packetMsg );
+        }
 
 
         #region ClientMsg Handlers
