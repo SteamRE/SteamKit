@@ -788,7 +788,9 @@ namespace SteamKit2
         {
             var chatEnter = new ClientMsg<MsgClientChatEnter>( packetMsg );
 
-            var callback = new ChatEnterCallback( chatEnter.Body );
+            byte[] payload = chatEnter.Payload.ToArray();
+
+            var callback = new ChatEnterCallback( chatEnter.Body, payload );
             this.Client.PostCallback( callback );
         }
         void HandleChatMsg( IPacketMsg packetMsg )

@@ -315,12 +315,29 @@ namespace SteamKit2
         /// If the conversion is invalid, the default value is returned.
         /// </summary>
         /// <param name="defaultValue">The default value to return if the conversion is invalid.</param>
-        /// <returns>The value of this instance as an long.</returns>
+        /// <returns>The value of this instance as a long.</returns>
         public long AsLong( long defaultValue = default( long ) )
         {
             long value;
 
             if ( long.TryParse( this.Value, out value ) == false )
+            {
+                return defaultValue;
+            }
+
+            return value;
+        }
+        /// <summary>
+        /// Attempts to convert and return the value of this instance as an unsigned long.
+        /// If the conversion is invalid, the default value is returned.
+        /// </summary>
+        /// <param name="defaultValue">The default value to return if the conversion is invalid.</param>
+        /// <returns>The value of this instance as an unsigned long.</returns>
+        public ulong AsUnsignedLong( ulong defaultValue = default( ulong ) )
+        {
+            ulong value;
+
+            if ( ulong.TryParse( this.Value, out value ) == false )
             {
                 return defaultValue;
             }
@@ -333,7 +350,7 @@ namespace SteamKit2
         /// If the conversion is invalid, the default value is returned.
         /// </summary>
         /// <param name="defaultValue">The default value to return if the conversion is invalid.</param>
-        /// <returns>The value of this instance as an float.</returns>
+        /// <returns>The value of this instance as a float.</returns>
         public float AsFloat( float defaultValue = default( float ) )
         {
             float value;
@@ -351,7 +368,7 @@ namespace SteamKit2
         /// If the conversion is invalid, the default value is returned.
         /// </summary>
         /// <param name="defaultValue">The default value to return if the conversion is invalid.</param>
-        /// <returns>The value of this instance as an boolean.</returns>
+        /// <returns>The value of this instance as a boolean.</returns>
         public bool AsBoolean( bool defaultValue = default( bool ) )
         {
             int value;
@@ -362,6 +379,25 @@ namespace SteamKit2
             }
 
             return value != 0;
+        }
+
+        /// <summary>
+        /// Attempts to convert and return the value of this instance as an enum.
+        /// If the conversion is invalid, the default value is returned.
+        /// </summary>
+        /// <param name="defaultValue">The default value to return if the conversion is invalid.</param>
+        /// <returns>The value of this instance as an enum.</returns>
+        public T AsEnum<T>( T defaultValue = default( T ) )
+            where T : struct
+        {
+            T value;
+
+            if ( Enum.TryParse<T>( this.Value, out value ) == false )
+            {
+                return defaultValue;
+            }
+
+            return value;
         }
 
         /// <summary>

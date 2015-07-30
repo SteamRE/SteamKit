@@ -143,6 +143,7 @@
     <Compile Include="Steam\WebAPI\WebAPI.cs" />
     <Compile Include="Types\GlobalID.cs" />
     <Compile Include="Types\DepotManifest.cs" />
+    <Compile Include="Types\MessageObject.cs" />
     <Compile Include="Types\PubFile.cs" />
     <Compile Include="Util\AsnKeyParser.cs" />
     <Compile Include="Util\Crc32.cs" />

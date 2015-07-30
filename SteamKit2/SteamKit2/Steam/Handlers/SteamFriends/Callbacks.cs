@@ -6,6 +6,7 @@
 
 
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
@@ -17,6 +18,52 @@ namespace SteamKit2
 {
     public partial class SteamFriends
     {
+        /// <summary>
+        /// Represents the details of a user which is a member of a chatroom.
+        /// </summary>
+        public sealed class ChatMemberInfo : MessageObject
+        {
+            /// <summary>
+            /// Initializes a new instance of the <see cref="ChatMemberInfo"/> class.
+            /// </summary>
+            /// <param name="keyValues">The KeyValue backing store for this member info.</param>
+            public ChatMemberInfo( KeyValue keyValues )
+                : base( keyValues )
+            {
+            }
+            /// <summary>
+            /// Initializes a new instance of the <see cref="ChatMemberInfo"/> class.
+            /// </summary>
+            public ChatMemberInfo() : base()
+            {
+            }
+
+
+            /// <summary>
+            /// Gets the clan permission details of this chat member.
+            /// </summary>
+            public EClanPermission Details
+            {
+                get { return KeyValues[ "Details" ].AsEnum<EClanPermission>(); }
+            }
+
+            /// <summary>
+            /// Gets the permissions this user has with the chatroom.
+            /// </summary>
+            public EChatPermission Permissions
+            {
+                get { return KeyValues[ "Permissions" ].AsEnum<EChatPermission>(); }
+            }
+
+            /// <summary>
+            /// Gets the <see cref="SteamID"/> of this user.
+            /// </summary>
+            public SteamID SteamID
+            {
+                get { return KeyValues[ "SteamID" ].AsUnsignedLong(); }
+            }
+        }
+
         /// <summary>
         /// This callback is fired in response to someone changing their friend details over the network.
         /// </summary>
@@ -520,8 +567,23 @@ namespace SteamKit2
             /// </summary>
             public EChatRoomEnterResponse EnterResponse { get; private set; }
 
+            /// <summary>
+            /// Gets the number of users currently in this chat room.
+            /// </summary>
+            public int NumChatMembers { get; private set; }
 
-            internal ChatEnterCallback( MsgClientChatEnter msg )
+            /// <summary>
+            /// Gets the name of the chat room.
+            /// </summary>
+            public string ChatRoomName { get; private set; }
+
+            /// <summary>
+            /// Gets a list of <see cref="ChatMemberInfo"/> instances for each of the members of this chat room.
+            /// </summary>
+            public ReadOnlyCollection<ChatMemberInfo> ChatMembers { get; private set; }
+
+
+            internal ChatEnterCallback( MsgClientChatEnter msg, byte[] payload )
             {
                 ChatID = msg.SteamIdChat;
                 FriendID = msg.SteamIdFriend;
@@ -534,6 +596,32 @@ namespace SteamKit2
                 ChatFlags = msg.ChatFlags;
 
                 EnterResponse = msg.EnterResponse;
+
+                NumChatMembers = msg.NumMembers;
+
+                using ( var ms = new MemoryStream( payload ) )
+                {
+                    // steamclient always attempts to read the chat room name, regardless of the enter response
+                    ChatRoomName = ms.ReadNullTermString( Encoding.UTF8 );
+
+                    if ( EnterResponse != EChatRoomEnterResponse.Success )
+                    {
+                        // the rest of the payload depends on a successful chat enter
+                        return;
+                    }
+
+                    var memberList = new List<ChatMemberInfo>();
+
+                    for ( int x = 0 ; x < NumChatMembers ; ++x )
+                    {
+                        var memberInfo = new ChatMemberInfo();
+                        memberInfo.ReadFromStream( ms );
+
+                        memberList.Add( memberInfo );
+                    }
+
+                    ChatMembers = new ReadOnlyCollection<ChatMemberInfo>( memberList );
+                }
             }
         }
 
@@ -600,6 +688,12 @@ namespace SteamKit2
                 /// </summary>
                 public SteamID ChatterActedBy { get; private set; }
 
+                /// <summary>
+                /// Gets the member information for a user that has joined the chat room.
+                /// This field is only populated when <see cref="StateChange"/> is <see cref="EChatMemberStateChange.Entered"/>.
+                /// </summary>
+                public ChatMemberInfo MemberInfo { get; private set; }
+
 
                 internal StateChangeDetails( byte[] data )
                 {
@@ -610,8 +704,11 @@ namespace SteamKit2
                         StateChange = ( EChatMemberStateChange )br.ReadInt32();
                         ChatterActedBy = br.ReadUInt64();
 
-                        // todo: for EChatMemberStateChange.Entered, the following data is a binary kv MessageObject
-                        // that includes permission and details that may be useful
+                        if ( StateChange == EChatMemberStateChange.Entered )
+                        {
+                            MemberInfo = new ChatMemberInfo();
+                            MemberInfo.ReadFromStream( ms );
+                        }
                     }
                 }
             }
@@ -644,6 +741,10 @@ namespace SteamKit2
                         break;
 
                     // todo: handle more types
+                    // based off disassembly
+                    //   - for InfoUpdate, a ChatMemberInfo object is present
+                    //   - for MemberLimitChange, looks like an ignored uint64 (probably steamid) followed
+                    //     by an int which likely represents the member limit
                 }
             }
         }
