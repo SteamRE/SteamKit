@@ -783,8 +783,9 @@ enum EWorkshopFileType
 	ControllerBinding	= 12;
 	SteamworksAccessInvite = 13;
 	SteamVideo = 14;
+	GameManagedItem = 15;
 
-	Max = 15;
+	Max = 16;
 };
 
 enum EWorkshopFileAction

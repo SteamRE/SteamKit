@@ -2647,7 +2647,8 @@ namespace SteamKit2
 		ControllerBinding = 12,
 		SteamworksAccessInvite = 13,
 		SteamVideo = 14,
-		Max = 15,
+		GameManagedItem = 15,
+		Max = 16,
 	}
 	public enum EWorkshopFileAction
 	{
