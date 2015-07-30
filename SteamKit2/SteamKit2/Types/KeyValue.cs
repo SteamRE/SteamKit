@@ -429,12 +429,30 @@ namespace SteamKit2
         /// </summary>
         /// <param name="path">The path to the file to load.</param>
         /// <returns>a <see cref="KeyValue"/> instance if the load was successful, or <c>null</c> on failure.</returns>
-        /// <remarks>
-        /// This method will swallow any exceptions that occur when reading, use <see cref="ReadAsBinary"/> if you wish to handle exceptions.
-        /// </remarks>
+        [Obsolete( "Use TryReadAsBinary instead. Note that TryLoadAsBinary returns the root object, not a dummy parent node containg the root object." )]
         public static KeyValue LoadAsBinary( string path )
         {
-            return LoadFromFile( path, true );
+            var kv = LoadFromFile( path, true );
+            if (kv == null)
+            {
+                return null;
+            }
+
+            var parent = new KeyValue();
+            parent.Children.Add(kv);
+            return parent;
+        }
+
+        /// <summary>
+        /// Attempts to load the given filename as a binary <see cref="KeyValue"/>.
+        /// </summary>
+        /// <param name="path">The path to the file to load.</param>
+        /// <param name="keyValue">The resulting <see cref="KeyValue"/> object if the load was successful, or <c>null</c> if unsuccessful.</param>
+        /// <returns><c>true</c> if the load was successful, or <c>false</c> on failure.</returns>
+        public static bool TryLoadAsBinary( string path, out KeyValue keyValue )
+        {
+            keyValue = LoadFromFile(path, true);
+            return keyValue != null;
         }
 
 
@@ -453,7 +471,7 @@ namespace SteamKit2
 
                     if ( asBinary )
                     {
-                        if ( kv.ReadAsBinary( input ) == false )
+                        if ( kv.TryReadAsBinary( input ) == false )
                         {
                             return null;
                         }
@@ -684,13 +702,30 @@ namespace SteamKit2
         /// </summary>
         /// <param name="input">The input <see cref="Stream"/> to read from.</param>
         /// <returns><c>true</c> if the read was successful; otherwise, <c>false</c>.</returns>
+        [Obsolete( "Use TryReadAsBinary instead. Note that TryReadAsBinary returns the root object, not a dummy parent node containg the root object." )]
         public bool ReadAsBinary( Stream input )
         {
-            this.Children = new List<KeyValue>();
+            var dummyChild = new KeyValue();
+            this.Children.Add( dummyChild );
+            return dummyChild.TryReadAsBinary( input );
+        }
+
+        /// <summary>
+        /// Populate this instance from the given <see cref="Stream"/> as a binary <see cref="KeyValue"/>.
+        /// </summary>
+        /// <param name="input">The input <see cref="Stream"/> to read from.</param>
+        /// <returns><c>true</c> if the read was successful; otherwise, <c>false</c>.</returns>
+        public bool TryReadAsBinary( Stream input )
+        {
+            return TryReadAsBinaryCore( input, this, null );
+        }
+
+        static bool TryReadAsBinaryCore( Stream input, KeyValue current, KeyValue parent )
+        {
+            current.Children = new List<KeyValue>();
 
             while ( true )
             {
-
                 var type = ( Type )input.ReadByte();
 
                 if ( type == Type.End )
@@ -698,66 +733,67 @@ namespace SteamKit2
                     break;
                 }
 
-                var current = new KeyValue();
                 current.Name = input.ReadNullTermString( Encoding.UTF8 );
-
-                try
+                
+                switch ( type )
                 {
-                    switch ( type )
-                    {
-                        case Type.None:
+                    case Type.None:
+                        {
+                            var child = new KeyValue();
+                            var didReadChild = TryReadAsBinaryCore( input, child, current );
+                            if ( !didReadChild )
                             {
-                                current.ReadAsBinary( input );
-                                break;
+                                return false;
                             }
+                            break;
+                        }
 
-                        case Type.String:
-                            {
-                                current.Value = input.ReadNullTermString( Encoding.UTF8 );
-                                break;
-                            }
+                    case Type.String:
+                        {
+                            current.Value = input.ReadNullTermString( Encoding.UTF8 );
+                            break;
+                        }
 
-                        case Type.WideString:
-                            {
-                                throw new InvalidDataException( "wstring is unsupported" );
-                            }
+                    case Type.WideString:
+                        {
+                            DebugLog.WriteLine( "KeyValue", "Encountered WideString type when parsing binary KeyValue, which is unsupported. Returning false.");
+                            return false;
+                        }
 
-                        case Type.Int32:
-                        case Type.Color:
-                        case Type.Pointer:
-                            {
-                                current.Value = Convert.ToString( input.ReadInt32() );
-                                break;
-                            }
+                    case Type.Int32:
+                    case Type.Color:
+                    case Type.Pointer:
+                        {
+                            current.Value = Convert.ToString( input.ReadInt32() );
+                            break;
+                        }
 
-                        case Type.UInt64:
-                            {
-                                current.Value = Convert.ToString( input.ReadUInt64() );
-                                break;
-                            }
+                    case Type.UInt64:
+                        {
+                            current.Value = Convert.ToString( input.ReadUInt64() );
+                            break;
+                        }
 
-                        case Type.Float32:
-                            {
-                                current.Value = Convert.ToString( input.ReadFloat() );
-                                break;
-                            }
+                    case Type.Float32:
+                        {
+                            current.Value = Convert.ToString( input.ReadFloat() );
+                            break;
+                        }
 
-                        default:
-                            {
-                                throw new InvalidDataException( "Unknown KV type encountered." );
-                            }
-                    }
+                    default:
+                        {
+                            return false;
+                        }
                 }
-                catch ( InvalidDataException ex )
+
+                if (parent != null)
                 {
-                    throw new InvalidDataException( string.Format( "An exception ocurred while reading KV '{0}'", current.Name ), ex );
+                    parent.Children.Add(current);
                 }
-
-                this.Children.Add( current );
+                current = new KeyValue();
             }
 
-            // it's okay if we haven't reached the end of the input stream
-            return input.Position <= input.Length;
+            return true;
         }
     }
 }

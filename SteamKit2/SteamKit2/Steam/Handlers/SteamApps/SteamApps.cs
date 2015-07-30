@@ -137,6 +137,8 @@ namespace SteamKit2
         /// <summary>
         /// Requests app information for a single app. Use the overload for requesting information on a batch of apps.
         /// Results are returned in a <see cref="AppInfoCallback"/> callback.
+        /// 
+        /// Consider using <see cref="o:SteamApps.PICSGetProductInfo"/> instead.
         /// </summary>
         /// <param name="app">The app to request information for.</param>
         /// <param name="supportsBatches">if set to <c>true</c>, the request supports batches.</param>
@@ -148,6 +150,8 @@ namespace SteamKit2
         /// <summary>
         /// Requests app information for a single app. Use the overload for requesting information on a batch of apps.
         /// Results are returned in a <see cref="AppInfoCallback"/> callback.
+        /// 
+        /// Consider using <see cref="o:SteamApps.PICSGetProductInfo"/> instead.
         /// </summary>
         /// <param name="app">The app to request information for.</param>
         /// <param name="supportsBatches">if set to <c>true</c>, the request supports batches.</param>
@@ -159,6 +163,8 @@ namespace SteamKit2
         /// <summary>
         /// Requests app information for a list of apps.
         /// Results are returned in a <see cref="AppInfoCallback"/> callback.
+        /// 
+        /// Consider using <see cref="o:SteamApps.PICSGetProductInfo"/> instead.
         /// </summary>
         /// <param name="apps">The apps to request information for.</param>
         /// <param name="supportsBatches">if set to <c>true</c>, the request supports batches.</param>
@@ -170,6 +176,8 @@ namespace SteamKit2
         /// <summary>
         /// Requests app information for a list of apps.
         /// Results are returned in a <see cref="AppInfoCallback"/> callback.
+        /// 
+        /// Consider using <see cref="o:SteamApps.PICSGetProductInfo"/> instead.
         /// </summary>
         /// <param name="apps">The apps to request information for.</param>
         /// <param name="supportsBatches">if set to <c>true</c>, the request supports batches.</param>
@@ -202,6 +210,8 @@ namespace SteamKit2
         /// <summary>
         /// Requests package information for a single package. Use the overload for requesting information on a batch of packages.
         /// Results are returned in a <see cref="PackageInfoCallback"/> callback.
+        /// 
+        /// Consider using <see cref="o:SteamApps.PICSGetProductInfo"/> instead.
         /// </summary>
         /// <param name="packageId">The package id to request information for.</param>
         /// <param name="metaDataOnly">if set to <c>true</c>, request metadata only.</param>
@@ -213,6 +223,8 @@ namespace SteamKit2
         /// <summary>
         /// Requests package information for a list of packages.
         /// Results are returned in a <see cref="PackageInfoCallback"/> callback.
+        /// 
+        /// Consider using <see cref="o:SteamApps.PICSGetProductInfo"/> instead.
         /// </summary>
         /// <param name="packageId">The packages to request information for.</param>
         /// <param name="metaDataOnly">if set to <c>true</c> to request metadata only.</param>
@@ -234,6 +246,8 @@ namespace SteamKit2
         /// <summary>
         /// Requests a list of app changes since the last provided change number value.
         /// Results are returned in a <see cref="AppChangesCallback"/> callback.
+        /// 
+        /// Consider using <see cref="SteamApps.PICSGetChangesSince"/> instead.
         /// </summary>
         /// <param name="lastChangeNumber">The last change number value.</param>
         /// <param name="sendChangelist">if set to <c>true</c>, request a change list.</param>

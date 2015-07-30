@@ -108,13 +108,13 @@ namespace SteamKit2
                 var distinctEndPoints = endPoints.Distinct();
 
                 var endpointsAlreadyInList = servers.Select( x => x.EndPoint );
-                var overlappingEndPoints = endpointsAlreadyInList.Intersect( endPoints, EqualityComparer<IPEndPoint>.Default );
+                var overlappingEndPoints = endpointsAlreadyInList.Intersect( distinctEndPoints, EqualityComparer<IPEndPoint>.Default );
                 if ( overlappingEndPoints.Any() )
                 {
                     return false;
                 }
 
-                foreach ( var endPoint in endPoints )
+                foreach ( var endPoint in distinctEndPoints )
                 {
                     AddCore( endPoint );
                 }
