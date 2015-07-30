@@ -1916,6 +1916,9 @@ namespace SteamKit2
 		AccountLimitExceeded = 95,
 		AccountActivityLimitExceeded = 96,
 		PhoneActivityLimitExceeded = 97,
+		RefundToWallet = 98,
+		EmailSendFailure = 99,
+		NotSettled = 100,
 	}
 	public enum EUniverse
 	{
