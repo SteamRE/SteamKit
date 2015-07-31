@@ -111,8 +111,26 @@ namespace SteamKit2
         }
 
 
+        Dictionary<EMsg, Action<IPacketMsg>> dispatchMap;
+
         internal SteamApps()
         {
+            dispatchMap = new Dictionary<EMsg, Action<IPacketMsg>>
+            {
+                { EMsg.ClientLicenseList, HandleLicenseList },
+                { EMsg.ClientGameConnectTokens, HandleGameConnectTokens },
+                { EMsg.ClientVACBanStatus, HandleVACBanStatus },
+                { EMsg.ClientGetAppOwnershipTicketResponse, HandleAppOwnershipTicketResponse },
+                { EMsg.ClientAppInfoResponse, HandleAppInfoResponse },
+                { EMsg.ClientPackageInfoResponse, HandlePackageInfoResponse },
+                { EMsg.ClientAppInfoChanges, HandleAppInfoChanges },
+                { EMsg.ClientGetDepotDecryptionKeyResponse, HandleDepotKeyResponse },
+                { EMsg.ClientPICSAccessTokenResponse, HandlePICSAccessTokenResponse },
+                { EMsg.ClientPICSChangesSinceResponse, HandlePICSChangesSinceResponse },
+                { EMsg.ClientPICSProductInfoResponse, HandlePICSProductInfoResponse },
+                { EMsg.ClientUpdateGuestPassesList, HandleGuestPassList },
+                { EMsg.ClientGetCDNAuthTokenResponse, HandleCDNAuthTokenResponse },
+            };
         }
 
 
@@ -423,23 +441,6 @@ namespace SteamKit2
         /// <param name="packetMsg">The packet message that contains the data.</param>
         public override void HandleMsg( IPacketMsg packetMsg )
         {
-            var dispatchMap = new Dictionary<EMsg, Action<IPacketMsg>>
-            {
-                { EMsg.ClientLicenseList, HandleLicenseList },
-                { EMsg.ClientGameConnectTokens, HandleGameConnectTokens },
-                { EMsg.ClientVACBanStatus, HandleVACBanStatus },
-                { EMsg.ClientGetAppOwnershipTicketResponse, HandleAppOwnershipTicketResponse },
-                { EMsg.ClientAppInfoResponse, HandleAppInfoResponse },
-                { EMsg.ClientPackageInfoResponse, HandlePackageInfoResponse },
-                { EMsg.ClientAppInfoChanges, HandleAppInfoChanges },
-                { EMsg.ClientGetDepotDecryptionKeyResponse, HandleDepotKeyResponse },
-                { EMsg.ClientPICSAccessTokenResponse, HandlePICSAccessTokenResponse },
-                { EMsg.ClientPICSChangesSinceResponse, HandlePICSChangesSinceResponse },
-                { EMsg.ClientPICSProductInfoResponse, HandlePICSProductInfoResponse },
-                { EMsg.ClientUpdateGuestPassesList, HandleGuestPassList },
-                { EMsg.ClientGetCDNAuthTokenResponse, HandleCDNAuthTokenResponse },
-            };
-
             Action<IPacketMsg> handlerFunc;
             bool haveFunc = dispatchMap.TryGetValue( packetMsg.MsgType, out handlerFunc );
 

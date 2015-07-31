@@ -80,8 +80,15 @@ namespace SteamKit2
             }
         }
 
+
+        Dictionary<EMsg, Action<IPacketMsg>> dispatchMap;
+
         internal SteamScreenshots()
         {
+            dispatchMap = new Dictionary<EMsg, Action<IPacketMsg>>
+            {
+                { EMsg.ClientUCMAddScreenshotResponse, HandleUCMAddScreenshot },
+            };
         }
 
 
@@ -117,11 +124,6 @@ namespace SteamKit2
         /// <param name="packetMsg">The packet message that contains the data.</param>
         public override void HandleMsg( IPacketMsg packetMsg )
         {
-            var dispatchMap = new Dictionary<EMsg, Action<IPacketMsg>>
-            {
-                { EMsg.ClientUCMAddScreenshotResponse, HandleUCMAddScreenshot },
-            };
-
             Action<IPacketMsg> handlerFunc;
             bool haveFunc = dispatchMap.TryGetValue( packetMsg.MsgType, out handlerFunc );
 

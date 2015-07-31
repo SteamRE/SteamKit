@@ -24,6 +24,7 @@ namespace SteamKit2
 
         AccountCache cache;
 
+        Dictionary<EMsg, Action<IPacketMsg>> dispatchMap;
 
         internal SteamFriends()
         {
@@ -31,6 +32,25 @@ namespace SteamKit2
             clanList = new List<SteamID>();
 
             cache = new AccountCache();
+
+            dispatchMap = new Dictionary<EMsg, Action<IPacketMsg>>
+            {
+                { EMsg.ClientPersonaState, HandlePersonaState },
+                { EMsg.ClientClanState, HandleClanState },
+                { EMsg.ClientFriendsList, HandleFriendsList },
+                { EMsg.ClientFriendMsgIncoming, HandleFriendMsg },
+                { EMsg.ClientFriendMsgEchoToSender, HandleFriendEchoMsg },
+                { EMsg.ClientAccountInfo, HandleAccountInfo },
+                { EMsg.ClientAddFriendResponse, HandleFriendResponse },
+                { EMsg.ClientChatEnter, HandleChatEnter },
+                { EMsg.ClientChatMsg, HandleChatMsg },
+                { EMsg.ClientChatMemberInfo, HandleChatMemberInfo },
+                { EMsg.ClientChatRoomInfo, HandleChatRoomInfo },
+                { EMsg.ClientChatActionResult, HandleChatActionResult },
+                { EMsg.ClientChatInvite, HandleChatInvite },
+                { EMsg.ClientSetIgnoreFriendResponse, HandleIgnoreFriendResponse },
+                { EMsg.ClientFriendProfileInfoResponse, HandleProfileInfoResponse },
+            };
         }
 
 
@@ -534,25 +554,6 @@ namespace SteamKit2
         /// <param name="packetMsg">The packet message that contains the data.</param>
         public override void HandleMsg( IPacketMsg packetMsg )
         {
-            var dispatchMap = new Dictionary<EMsg, Action<IPacketMsg>>
-            {
-                { EMsg.ClientPersonaState, HandlePersonaState },
-                { EMsg.ClientClanState, HandleClanState },
-                { EMsg.ClientFriendsList, HandleFriendsList },
-                { EMsg.ClientFriendMsgIncoming, HandleFriendMsg },
-                { EMsg.ClientFriendMsgEchoToSender, HandleFriendEchoMsg },
-                { EMsg.ClientAccountInfo, HandleAccountInfo },
-                { EMsg.ClientAddFriendResponse, HandleFriendResponse },
-                { EMsg.ClientChatEnter, HandleChatEnter },
-                { EMsg.ClientChatMsg, HandleChatMsg },
-                { EMsg.ClientChatMemberInfo, HandleChatMemberInfo },
-                { EMsg.ClientChatRoomInfo, HandleChatRoomInfo },
-                { EMsg.ClientChatActionResult, HandleChatActionResult },
-                { EMsg.ClientChatInvite, HandleChatInvite },
-                { EMsg.ClientSetIgnoreFriendResponse, HandleIgnoreFriendResponse },
-                { EMsg.ClientFriendProfileInfoResponse, HandleProfileInfoResponse },
-            };
-
             Action<IPacketMsg> handlerFunc;
             bool haveFunc = dispatchMap.TryGetValue( packetMsg.MsgType, out handlerFunc );
 

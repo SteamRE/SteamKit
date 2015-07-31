@@ -16,9 +16,16 @@ namespace SteamKit2
     /// </summary>
     public sealed partial class SteamCloud : ClientMsgHandler
     {
- 
+        Dictionary<EMsg, Action<IPacketMsg>> dispatchMap;
+
         internal SteamCloud()
         {
+            dispatchMap = new Dictionary<EMsg, Action<IPacketMsg>>
+            {
+                { EMsg.ClientUFSGetUGCDetailsResponse, HandleUGCDetailsResponse },
+                { EMsg.ClientUFSGetSingleFileInfoResponse, HandleSingleFileInfoResponse },
+                { EMsg.ClientUFSShareFileResponse, HandleShareFileResponse },
+            };
         }
 
 
@@ -86,13 +93,6 @@ namespace SteamKit2
         /// <param name="packetMsg">The packet message that contains the data.</param>
         public override void HandleMsg( IPacketMsg packetMsg )
         {
-            var dispatchMap = new Dictionary<EMsg, Action<IPacketMsg>>
-            {
-                { EMsg.ClientUFSGetUGCDetailsResponse, HandleUGCDetailsResponse },
-                { EMsg.ClientUFSGetSingleFileInfoResponse, HandleSingleFileInfoResponse },
-                { EMsg.ClientUFSShareFileResponse, HandleShareFileResponse },
-            };
-
             Action<IPacketMsg> handlerFunc;
             bool haveFunc = dispatchMap.TryGetValue( packetMsg.MsgType, out handlerFunc );
 

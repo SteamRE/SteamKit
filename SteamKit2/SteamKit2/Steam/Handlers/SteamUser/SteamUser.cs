@@ -231,8 +231,22 @@ namespace SteamKit2
         }
 
 
+        Dictionary<EMsg, Action<IPacketMsg>> dispatchMap;
+
         internal SteamUser()
         {
+            dispatchMap = new Dictionary<EMsg, Action<IPacketMsg>>
+            {
+                { EMsg.ClientLogOnResponse, HandleLogOnResponse },
+                { EMsg.ClientLoggedOff, HandleLoggedOff },
+                { EMsg.ClientNewLoginKey, HandleLoginKey },
+                { EMsg.ClientSessionToken, HandleSessionToken },
+                { EMsg.ClientUpdateMachineAuth, HandleUpdateMachineAuth },
+                { EMsg.ClientAccountInfo, HandleAccountInfo },
+                { EMsg.ClientWalletInfoUpdate, HandleWalletInfo },
+                { EMsg.ClientRequestWebAPIAuthenticateUserNonceResponse, HandleWebAPIUserNonce },
+                { EMsg.ClientMarketingMessageUpdate2, HandleMarketingMessageUpdate },
+            };
         }
 
 
@@ -425,19 +439,6 @@ namespace SteamKit2
         /// <param name="packetMsg">The packet message that contains the data.</param>
         public override void HandleMsg( IPacketMsg packetMsg )
         {
-            var dispatchMap = new Dictionary<EMsg, Action<IPacketMsg>>
-            {
-                { EMsg.ClientLogOnResponse, HandleLogOnResponse },
-                { EMsg.ClientLoggedOff, HandleLoggedOff },
-                { EMsg.ClientNewLoginKey, HandleLoginKey },
-                { EMsg.ClientSessionToken, HandleSessionToken },
-                { EMsg.ClientUpdateMachineAuth, HandleUpdateMachineAuth },
-                { EMsg.ClientAccountInfo, HandleAccountInfo },
-                { EMsg.ClientWalletInfoUpdate, HandleWalletInfo },
-                { EMsg.ClientRequestWebAPIAuthenticateUserNonceResponse, HandleWebAPIUserNonce },
-                { EMsg.ClientMarketingMessageUpdate2, HandleMarketingMessageUpdate },
-            };
-
             Action<IPacketMsg> handlerFunc;
             bool haveFunc = dispatchMap.TryGetValue( packetMsg.MsgType, out handlerFunc );
 

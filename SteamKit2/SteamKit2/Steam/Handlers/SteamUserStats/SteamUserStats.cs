@@ -16,6 +16,16 @@ namespace SteamKit2
     /// </summary>
     public sealed partial class SteamUserStats : ClientMsgHandler
     {
+        Dictionary<EMsg, Action<IPacketMsg>> dispatchMap;
+
+        internal SteamUserStats()
+        {
+            dispatchMap = new Dictionary<EMsg, Action<IPacketMsg>>
+            {
+                { EMsg.ClientGetNumberOfCurrentPlayersResponse, HandleNumberOfPlayersResponse },
+            };
+        }
+
 
         /// <summary>
         /// Retrieves the number of current players or a given <see cref="GameID"/>.
@@ -42,11 +52,6 @@ namespace SteamKit2
         /// <param name="packetMsg">The <see cref="SteamKit2.IPacketMsg"/> instance containing the event data.</param>
         public override void HandleMsg( IPacketMsg packetMsg )
         {
-            var dispatchMap = new Dictionary<EMsg, Action<IPacketMsg>>
-            {
-                { EMsg.ClientGetNumberOfCurrentPlayersResponse, HandleNumberOfPlayersResponse },
-            };
-
             Action<IPacketMsg> handlerFunc;
             bool haveFunc = dispatchMap.TryGetValue( packetMsg.MsgType, out handlerFunc );
 

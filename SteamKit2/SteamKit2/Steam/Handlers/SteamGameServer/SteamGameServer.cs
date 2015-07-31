@@ -74,8 +74,15 @@ namespace SteamKit2
         }
 
 
+        Dictionary<EMsg, Action<IPacketMsg>> dispatchMap;
+
         internal SteamGameServer()
         {
+            dispatchMap = new Dictionary<EMsg, Action<IPacketMsg>>
+            {
+                { EMsg.GSStatusReply, HandleStatusReply },
+                { EMsg.ClientTicketAuthComplete, HandleAuthComplete },
+            };
         }
 
 
@@ -209,12 +216,6 @@ namespace SteamKit2
         /// <param name="packetMsg">The packet message that contains the data.</param>
         public override void HandleMsg( IPacketMsg packetMsg )
         {
-            var dispatchMap = new Dictionary<EMsg, Action<IPacketMsg>>
-            {
-                { EMsg.GSStatusReply, HandleStatusReply },
-                { EMsg.ClientTicketAuthComplete, HandleAuthComplete },
-            };
-
             Action<IPacketMsg> handlerFunc;
             bool haveFunc = dispatchMap.TryGetValue( packetMsg.MsgType, out handlerFunc );
 

@@ -14,8 +14,17 @@ namespace SteamKit2
     /// </summary>
     public sealed partial class SteamWorkshop : ClientMsgHandler
     {
+        Dictionary<EMsg, Action<IPacketMsg>> dispatchMap;
+
         internal SteamWorkshop()
         {
+            dispatchMap = new Dictionary<EMsg, Action<IPacketMsg>>
+            {
+                { EMsg.CREEnumeratePublishedFilesResponse, HandleEnumPublishedFiles },
+                { EMsg.ClientUCMEnumerateUserPublishedFilesResponse, HandleEnumUserPublishedFiles },
+                { EMsg.ClientUCMEnumerateUserSubscribedFilesResponse, HandleEnumUserSubscribedFiles },
+                { EMsg.ClientUCMEnumeratePublishedFilesByUserActionResponse, HandleEnumPublishedFilesByAction },
+            };
         }
 
 
@@ -215,14 +224,6 @@ namespace SteamKit2
         /// <param name="packetMsg">The packet message that contains the data.</param>
         public override void HandleMsg( IPacketMsg packetMsg )
         {
-            var dispatchMap = new Dictionary<EMsg, Action<IPacketMsg>>
-            {
-                { EMsg.CREEnumeratePublishedFilesResponse, HandleEnumPublishedFiles },
-                { EMsg.ClientUCMEnumerateUserPublishedFilesResponse, HandleEnumUserPublishedFiles },
-                { EMsg.ClientUCMEnumerateUserSubscribedFilesResponse, HandleEnumUserSubscribedFiles },
-                { EMsg.ClientUCMEnumeratePublishedFilesByUserActionResponse, HandleEnumPublishedFilesByAction },
-            };
-
             Action<IPacketMsg> handlerFunc;
             bool haveFunc = dispatchMap.TryGetValue( packetMsg.MsgType, out handlerFunc );
 
