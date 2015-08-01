@@ -72,8 +72,6 @@ enum EGCItemMsg {
 	k_EMsgGCSetItemPositions = 1077;
 	k_EMsgGCApplyEggEssence = 1078;
 	k_EMsgGCNameEggEssenceResponse = 1079;
-	k_EMsgGCUnlockItemStyle = 1080;
-	k_EMsgGCUnlockItemStyleResponse = 1081;
 	k_EMsgGCFulfillDynamicRecipeComponent = 1082;
 	k_EMsgGCFulfillDynamicRecipeComponentResponse = 1083;
 	k_EMsgGCClientRequestMarketData = 1084;
@@ -170,6 +168,9 @@ enum EGCItemMsg {
 	k_EMsgGCToClientStoreTransactionCompleted = 2568;
 	k_EMsgClientToGCEquipItems = 2569;
 	k_EMsgClientToGCEquipItemsResponse = 2570;
+	k_EMsgClientToGCUnlockItemStyle = 2571;
+	k_EMsgClientToGCUnlockItemStyleResponse = 2572;
+	k_EMsgClientToGCSetItemInventoryCategory = 2573;
 }
 
 enum EGCMsgResponse {
@@ -182,18 +183,6 @@ enum EGCMsgResponse {
 	k_EGCMsgResponseUnknownError = 6;
 	k_EGCMsgResponseNotLoggedOn = 7;
 	k_EGCMsgFailedToCreate = 8;
-}
-
-enum EUnlockStyle {
-	k_UnlockStyle_Succeeded = 0;
-	k_UnlockStyle_Failed_PreReq = 1;
-	k_UnlockStyle_Failed_CantAfford = 2;
-	k_UnlockStyle_Failed_CantCommit = 3;
-	k_UnlockStyle_Failed_CantLockCache = 4;
-	k_UnlockStyle_Failed_CantAffordAttrib = 5;
-	k_UnlockStyle_Failed_CantAffordGem = 6;
-	k_UnlockStyle_Failed_NoCompendiumLevel = 7;
-	k_UnlockStyle_Failed_AlreadyUnlocked = 8;
 }
 
 enum EItemPurgatoryResponse_Finalize {
@@ -219,6 +208,32 @@ enum EGCPartnerRequestResponse {
 	k_EPartnerRequestBadAccount = 2;
 	k_EPartnerRequestNotLinked = 3;
 	k_EPartnerRequestUnsupportedPartnerType = 4;
+}
+
+enum EGCMsgInitiateTradeResponse {
+	k_EGCMsgInitiateTradeResponse_Accepted = 0;
+	k_EGCMsgInitiateTradeResponse_Declined = 1;
+	k_EGCMsgInitiateTradeResponse_VAC_Banned_Initiator = 2;
+	k_EGCMsgInitiateTradeResponse_VAC_Banned_Target = 3;
+	k_EGCMsgInitiateTradeResponse_Target_Already_Trading = 4;
+	k_EGCMsgInitiateTradeResponse_Disabled = 5;
+	k_EGCMsgInitiateTradeResponse_NotLoggedIn = 6;
+	k_EGCMsgInitiateTradeResponse_Cancel = 7;
+	k_EGCMsgInitiateTradeResponse_TooSoon = 8;
+	k_EGCMsgInitiateTradeResponse_TooSoonPenalty = 9;
+	k_EGCMsgInitiateTradeResponse_Trade_Banned_Initiator = 10;
+	k_EGCMsgInitiateTradeResponse_Trade_Banned_Target = 11;
+	k_EGCMsgInitiateTradeResponse_Free_Account_Initiator_DEPRECATED = 12;
+	k_EGCMsgInitiateTradeResponse_Shared_Account_Initiator = 13;
+	k_EGCMsgInitiateTradeResponse_Service_Unavailable = 14;
+	k_EGCMsgInitiateTradeResponse_Target_Blocked = 15;
+	k_EGCMsgInitiateTradeResponse_NeedVerifiedEmail = 16;
+	k_EGCMsgInitiateTradeResponse_NeedSteamGuard = 17;
+	k_EGCMsgInitiateTradeResponse_SteamGuardDuration = 18;
+	k_EGCMsgInitiateTradeResponse_TheyCannotTrade = 19;
+	k_EGCMsgInitiateTradeResponse_Recent_Password_Reset = 20;
+	k_EGCMsgInitiateTradeResponse_Using_New_Device = 21;
+	k_EGCMsgInitiateTradeResponse_Sent_Invalid_Cookie = 22;
 }
 
 message CMsgApplyAutograph {
@@ -494,6 +509,7 @@ message CMsgClientToGCWrapAndDeliverGiftResponse {
 	optional uint32 gifting_uses = 4;
 	optional int32 gifting_max = 5;
 	optional uint32 gifting_window_hours = 6;
+	optional .EGCMsgInitiateTradeResponse trade_restriction = 7 [default = k_EGCMsgInitiateTradeResponse_Accepted];
 }
 
 message CMsgClientToGCUnwrapGift {
@@ -516,5 +532,37 @@ message CMsgClientToGCEquipItems {
 
 message CMsgClientToGCEquipItemsResponse {
 	optional fixed64 so_cache_version_id = 1;
+}
+
+message CMsgClientToGCUnlockItemStyle {
+	optional uint64 item_to_unlock = 1;
+	optional uint32 style_index = 2;
+	repeated uint64 consumable_item_ids = 3;
+}
+
+message CMsgClientToGCUnlockItemStyleResponse {
+	enum EUnlockStyle {
+		k_UnlockStyle_Succeeded = 0;
+		k_UnlockStyle_Failed_PreReq = 1;
+		k_UnlockStyle_Failed_CantAfford = 2;
+		k_UnlockStyle_Failed_CantCommit = 3;
+		k_UnlockStyle_Failed_CantLockCache = 4;
+		k_UnlockStyle_Failed_CantAffordAttrib = 5;
+		k_UnlockStyle_Failed_CantAffordGem = 6;
+		k_UnlockStyle_Failed_NoCompendiumLevel = 7;
+		k_UnlockStyle_Failed_AlreadyUnlocked = 8;
+	}
+
+	optional .CMsgClientToGCUnlockItemStyleResponse.EUnlockStyle response = 1 [default = k_UnlockStyle_Succeeded];
+	optional uint64 item_id = 2;
+	optional uint32 style_index = 3;
+	optional uint32 style_prereq = 4;
+}
+
+message CMsgClientToGCSetItemInventoryCategory {
+	repeated uint64 item_ids = 1;
+	optional uint32 set_to_value = 2;
+	optional uint32 remove_categories = 3;
+	optional uint32 add_categories = 4;
 }
 

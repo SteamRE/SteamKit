@@ -27,6 +27,19 @@ enum EGCBaseProtoObjectTypes {
 	k_EProtoObjectLobbyInvite = 1002;
 }
 
+enum ECustomGameInstallStatus {
+	k_ECustomGameInstallStatus_Unknown = 0;
+	k_ECustomGameInstallStatus_Ready = 1;
+	k_ECustomGameInstallStatus_Busy = 2;
+	k_ECustomGameInstallStatus_FailedGeneric = 101;
+	k_ECustomGameInstallStatus_FailedInternalError = 102;
+	k_ECustomGameInstallStatus_RequestedTimestampTooOld = 103;
+	k_ECustomGameInstallStatus_RequestedTimestampTooNew = 104;
+	k_ECustomGameInstallStatus_CRCMismatch = 105;
+	k_ECustomGameInstallStatus_FailedSteam = 106;
+	k_ECustomGameInstallStatus_FailedCanceled = 107;
+}
+
 enum GC_BannedWordType {
 	GC_BANNED_WORD_DISABLE_WORD = 0;
 	GC_BANNED_WORD_ENABLE_WORD = 1;
@@ -89,6 +102,8 @@ message CMsgLobbyInviteResponse {
 	optional uint32 client_version = 3;
 	optional uint32 game_language_enum = 4;
 	optional string game_language_name = 5;
+	optional fixed64 custom_game_crc = 6;
+	optional fixed32 custom_game_timestamp = 7;
 }
 
 message CMsgKickFromParty {
@@ -98,7 +113,14 @@ message CMsgKickFromParty {
 message CMsgLeaveParty {
 }
 
+message CMsgCustomGameInstallStatus {
+	optional .ECustomGameInstallStatus status = 1 [default = k_ECustomGameInstallStatus_Unknown];
+	optional string message = 2;
+	optional fixed32 latest_timestamp_from_steam = 3;
+}
+
 message CMsgServerAvailable {
+	optional .CMsgCustomGameInstallStatus custom_game_install_status = 1;
 }
 
 message CMsgLANServerAvailable {

@@ -139,6 +139,7 @@ message CMsgGameServerInfo {
 	optional fixed32 server_private_ip_addr = 2;
 	optional uint32 server_port = 3;
 	optional uint32 server_tv_port = 4;
+	optional uint32 assigned_server_tv_port = 22;
 	optional uint32 server_steamdatagram_port = 21;
 	optional string server_key = 5;
 	optional bool server_hibernation = 6;
@@ -203,12 +204,13 @@ message CMsgDOTAFantasyMatch {
 }
 
 message CMsgServerToGCRealtimeStats {
-	optional .CMsgDOTARealtimeGameStats delayed = 1;
+	optional .CMsgDOTARealtimeGameStatsTerse delayed = 1;
 	optional .CMsgDOTARealtimeGameStats current = 2;
 }
 
 message CMsgGCToServerRealtimeStatsStartStop {
-	optional bool start = 1;
+	optional bool delayed = 1;
+	optional bool current = 2;
 }
 
 message CMsgGameMatchSignOut {
@@ -876,5 +878,30 @@ message CMsgSignOutUpdatePlayerChallenge {
 message CMsgServerToGCRerollPlayerChallenge {
 	optional uint32 account_id = 1;
 	optional .CMsgClientToGCRerollPlayerChallenge reroll_msg = 2;
+}
+
+message CMsgServerToGCHoldEventPoints {
+	message HoldRequest {
+		optional uint32 account_id = 1;
+		optional uint32 points_held = 2;
+		optional uint32 premium_held = 3;
+	}
+
+	repeated .CMsgServerToGCHoldEventPoints.HoldRequest holds = 1;
+	optional uint32 event_id = 2;
+	optional uint64 hold_key = 3;
+	optional uint32 hold_until = 4;
+}
+
+message CMsgSignOutReleaseEventPointHolds {
+	repeated uint32 account_ids = 1;
+	optional uint32 event_id = 2;
+	optional uint64 hold_key = 3;
+}
+
+message CMsgGCToServerUpdateBroadcastCheers {
+	optional uint32 time_stamp = 1;
+	optional uint32 team_1_cheers = 2;
+	optional uint32 team_2_cheers = 3;
 }
 
