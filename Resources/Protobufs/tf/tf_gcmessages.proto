@@ -113,6 +113,8 @@ enum ETFGCMsg {
 	k_EMsgGC_SpyVsEngyWar_RequestGlobalStats = 6507;
 	k_EMsgGC_SpyVsEngyWar_GlobalStatsResponse = 6508;
 	k_EMsgGC_SpyVsEngyWar_SetKillCamMessage = 6509;
+	k_EMsgGC_WorldItemPlacement_Attribute = 6510;
+	k_EMsgGC_WorldItemPlacement_Update = 6511;
 	k_EMsgGCDev_GrantWarKill = 10001;
 }
 
@@ -500,6 +502,7 @@ message CSOTFPartyMember {
 	optional bool squad_surplus = 5;
 	optional bool is_banned = 8 [default = false];
 	optional bool owns_ladder_ticket = 9;
+	optional bool phone_verified = 10 [default = false];
 }
 
 message CMsgMatchSearchCriteria {
@@ -509,7 +512,7 @@ message CMsgMatchSearchCriteria {
 	repeated string mvm_missions = 9;
 	optional bool play_for_bragging_rights = 6;
 	optional uint32 quickplay_game_type = 8;
-	optional uint32 ladder_type = 11;
+	optional uint32 ladder_game_type = 11;
 }
 
 message CMsgCreateOrUpdateParty {
@@ -550,7 +553,7 @@ message CSOTFParty {
 	repeated string search_mvm_missions = 31;
 	optional bool search_play_for_bragging_rights = 26;
 	optional uint32 search_quickplay_game_type = 28;
-	optional uint32 search_ladder_type = 33;
+	optional uint32 search_ladder_game_type = 33;
 	optional uint32 prevent_match_until_date = 18;
 	optional uint32 prevent_match_account_id = 19;
 }
@@ -772,6 +775,7 @@ message CMsgGameServerMatchmakingStatus {
 	optional uint32 mvm_credits_acquired = 19;
 	optional uint32 mvm_credits_dropped = 20;
 	optional uint32 skillrating_force_average = 21;
+	optional uint32 ladder_game_type = 22;
 }
 
 message CMsgMatchmakingProgress {
@@ -864,6 +868,7 @@ message CMsgMvMMannUpVictoryReply {
 
 message CMsgGameServerKickingLobby {
 	repeated fixed64 connected_players = 1;
+	optional bool create_party = 2 [default = true];
 }
 
 message CMsgLeaveGameAndPrepareToJoinParty {
@@ -981,12 +986,14 @@ message CGCMsgTFPlayerSkillRatingAdjustment {
 	}
 
 	enum MatchType {
+		INVALID = -1;
 		PUBLIC = 0;
-		BETA = 1;
+		LADDER_6V6 = 1;
+		LADDER_9V9 = 2;
 	}
 
 	repeated .CGCMsgTFPlayerSkillRatingAdjustment.Player players = 1;
-	optional .CGCMsgTFPlayerSkillRatingAdjustment.MatchType match_type = 2 [default = PUBLIC];
+	optional .CGCMsgTFPlayerSkillRatingAdjustment.MatchType match_type = 2 [default = INVALID];
 }
 
 message CSOTFSpyVsEngyWarData {
@@ -1028,5 +1035,27 @@ message CGCMsgGC_PlayerDuckLeaderboard_IndividualUpdate {
 	optional uint32 type = 3;
 	optional bytes score_id = 4;
 	optional uint32 score_check = 5;
+}
+
+message CAttribute_WorldItemPlacement {
+	optional uint64 original_item_id = 1;
+	optional float pos_x = 2;
+	optional float pos_y = 3;
+	optional float pos_z = 4;
+	optional float ang_x = 5;
+	optional float ang_y = 6;
+	optional float ang_z = 7;
+}
+
+message CGCMsg_WorldItemPlacement_Update {
+	optional uint64 original_item_id = 1;
+	optional float pos_x = 2;
+	optional float pos_y = 3;
+	optional float pos_z = 4;
+	optional float ang_x = 5;
+	optional float ang_y = 6;
+	optional float ang_z = 7;
+	optional bool force_remove_all = 8;
+	optional string attrib_name = 9;
 }
 

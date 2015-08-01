@@ -134,6 +134,7 @@ message CSOEconGameAccountClient {
 	optional fixed32 duel_ban_expiration = 7;
 	optional uint32 preview_item_def = 8 [default = 0];
 	optional uint32 prevent_match_until_date = 18;
+	optional bool phone_verified = 19 [default = false];
 }
 
 message CSOItemCriteriaCondition {
@@ -340,6 +341,9 @@ message CMsgItemAcknowledged {
 	optional uint32 quality = 4;
 	optional uint32 rarity = 5;
 	optional uint32 origin = 6;
+	optional uint32 is_strange = 7;
+	optional uint32 is_unusual = 8;
+	optional float wear = 9;
 }
 
 message CMsgSetPresetItemPosition {
@@ -529,7 +533,8 @@ message CMsgDeliverGiftResponseGiver {
 
 message CSOEconGameAccountForGameServers {
 	optional uint32 skill_rating = 3;
-	optional uint32 skill_rating_beta = 2;
+	optional uint32 skill_rating_6v6 = 2;
+	optional uint32 skill_rating_9v9 = 4;
 }
 
 message CWorkshop_PopulateItemDescriptions_Request {
