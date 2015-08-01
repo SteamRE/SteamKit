@@ -118,6 +118,7 @@ namespace SteamKit2
             dispatchMap = new Dictionary<EMsg, Action<IPacketMsg>>
             {
                 { EMsg.ClientLicenseList, HandleLicenseList },
+                { EMsg.ClientRequestFreeLicenseResponse, HandleFreeLicense },
                 { EMsg.ClientGameConnectTokens, HandleGameConnectTokens },
                 { EMsg.ClientVACBanStatus, HandleVACBanStatus },
                 { EMsg.ClientGetAppOwnershipTicketResponse, HandleAppOwnershipTicketResponse },
@@ -436,6 +437,34 @@ namespace SteamKit2
         }
 
         /// <summary>
+        /// Request a free license for given appid, can be used for free on demand apps
+        /// Results are returned in a <see cref="FreeLicenseCallback"/> callback.
+        /// </summary>
+        /// <param name="app">The app to request a free license for.</param>
+        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="FreeLicenseCallback"/>.</returns>
+        public JobID RequestFreeLicense( uint app )
+        {
+            return RequestFreeLicense( new List<uint> { app } );
+        }
+        /// <summary>
+        /// Request a free license for given appids, can be used for free on demand apps
+        /// Results are returned in a <see cref="FreeLicenseCallback"/> callback.
+        /// </summary>
+        /// <param name="apps">The apps to request a free license for.</param>
+        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="FreeLicenseCallback"/>.</returns>
+        public JobID RequestFreeLicense( IEnumerable<uint> apps )
+        {
+            var request = new ClientMsgProtobuf<CMsgClientRequestFreeLicense>( EMsg.ClientRequestFreeLicense );
+            request.SourceJobID = Client.GetNextJobID();
+
+            request.Body.appids.AddRange( apps );
+
+            this.Client.Send( request );
+
+            return request.SourceJobID;
+        }
+
+        /// <summary>
         /// Handles a client message. This should not be called directly.
         /// </summary>
         /// <param name="packetMsg">The packet message that contains the data.</param>
@@ -502,6 +531,13 @@ namespace SteamKit2
             var licenseList = new ClientMsgProtobuf<CMsgClientLicenseList>( packetMsg );
 
             var callback = new LicenseListCallback( licenseList.Body );
+            this.Client.PostCallback( callback );
+        }
+        void HandleFreeLicense( IPacketMsg packetMsg )
+        {
+            var grantedLicenses = new ClientMsgProtobuf<CMsgClientRequestFreeLicenseResponse>( packetMsg );
+
+            var callback = new FreeLicenseCallback( grantedLicenses.TargetJobID, grantedLicenses.Body );
             this.Client.PostCallback( callback );
         }
         void HandleVACBanStatus( IPacketMsg packetMsg )
