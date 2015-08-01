@@ -91,6 +91,11 @@ message CMsgGCMultiplexMessage {
 	optional uint32 msgtype = 1;
 	optional bytes payload = 2;
 	repeated fixed64 steamids = 3;
+	optional bool replytogc = 4;
+}
+
+message CMsgGCMultiplexMessage_Response {
+	optional uint32 msgtype = 1;
 }
 
 message CGCToGCMsgMasterAck {

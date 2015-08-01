@@ -52,6 +52,7 @@ enum EGCSystemMsg {
 	k_EGCMsgGetPersonaNames = 95;
 	k_EGCMsgGetPersonaNamesResponse = 96;
 	k_EGCMsgMultiplexMsg = 97;
+	k_EGCMsgMultiplexMsgResponse = 98;
 	k_EGCMsgWebAPIRegisterInterfaces = 101;
 	k_EGCMsgWebAPIJobRequest = 102;
 	k_EGCMsgWebAPIJobRequestHttpResponse = 104;

@@ -73,6 +73,9 @@ enum ECsgoGCMsg {
 	k_EMsgGC_GlobalGame_Unsubscribe = 9169;
 	k_EMsgGC_GlobalGame_Play = 9170;
 	k_EMsgGCCStrike15_v2_AcknowledgePenalty = 9171;
+	k_EMsgGCCStrike15_v2_Client2GCRequestPrestigeCoin = 9172;
+	k_EMsgGCCStrike15_v2_GC2ClientGlobalStats = 9173;
+	k_EMsgGCCStrike15_v2_Client2GCStreamUnlock = 9174;
 }
 
 message GameServerPing {
@@ -397,6 +400,7 @@ message CMsgGCCStrike15_v2_MatchmakingServerRoundStats {
 	optional uint32 spectators_count = 22;
 	optional uint32 spectators_count_tv = 23;
 	optional uint32 spectators_count_lnk = 24;
+	repeated int32 enemy_kills_agg = 25;
 }
 
 message CMsgGCCStrike15_v2_MatchmakingServerMatchEnd {
@@ -713,7 +717,8 @@ message CDataGCCStrike15_v2_MatchInfo {
 	optional uint64 matchid = 1;
 	optional uint32 matchtime = 2;
 	optional .WatchableMatchInfo watchablematchinfo = 3;
-	optional .CMsgGCCStrike15_v2_MatchmakingServerRoundStats roundstats = 4;
+	optional .CMsgGCCStrike15_v2_MatchmakingServerRoundStats roundstats_legacy = 4;
+	repeated .CMsgGCCStrike15_v2_MatchmakingServerRoundStats roundstatsall = 5;
 }
 
 message CDataGCCStrike15_v2_TournamentGroupTeam {
@@ -797,6 +802,7 @@ message CMsgGCCStrike15_v2_ClientVarValueNotificationInfo {
 message CMsgGCCStrike15_v2_ServerVarValueNotificationInfo {
 	optional uint32 accountid = 1;
 	repeated uint32 viewangles = 2;
+	optional uint32 type = 3;
 }
 
 message CMsgGCCStrike15_v2_GiftsLeaderboardRequest {
@@ -875,5 +881,13 @@ message CMsgGC_GlobalGame_Play {
 
 message CMsgGCCStrike15_v2_AcknowledgePenalty {
 	optional int32 acknowledged = 1;
+}
+
+message CMsgGCCStrike15_v2_Client2GCRequestPrestigeCoin {
+}
+
+message CMsgGCCStrike15_v2_Client2GCStreamUnlock {
+	optional uint64 ticket = 1;
+	optional int32 os = 2;
 }
 
