@@ -5,6 +5,7 @@
 
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
@@ -70,6 +71,18 @@ namespace SteamKit2
             }
         }
 
+
+        Dictionary<EMsg, Action<IPacketMsg>> dispatchMap;
+
+        internal SteamUnifiedMessages()
+        {
+            dispatchMap = new Dictionary<EMsg, Action<IPacketMsg>>
+            {
+                { EMsg.ClientServiceMethodResponse, HandleClientServiceMethodResponse },
+                { EMsg.ServiceMethod, HandleServiceMethod },
+            };
+        }
+
         /// <summary>
         /// Sends a message.
         /// Results are returned in a <see cref="ServiceMethodResponse"/>.
@@ -116,18 +129,20 @@ namespace SteamKit2
         /// <param name="packetMsg">The packet message that contains the data.</param>
         public override void HandleMsg( IPacketMsg packetMsg )
         {
-            switch ( packetMsg.MsgType )
-            {
-                case EMsg.ClientServiceMethodResponse:
-                    HandleClientServiceMethodResponse( packetMsg );
-                    break;
+            Action<IPacketMsg> handlerFunc;
+            bool haveFunc = dispatchMap.TryGetValue( packetMsg.MsgType, out handlerFunc );
 
-                case EMsg.ServiceMethod:
-                    HandleServiceMethod( packetMsg );
-                    break;
+            if ( !haveFunc )
+            {
+                // ignore messages that we don't have a handler function for
+                return;
             }
+
+            handlerFunc( packetMsg );
         }
 
+
+        #region ClientMsg Handlers
         void HandleClientServiceMethodResponse( IPacketMsg packetMsg )
         {
             var response = new ClientMsgProtobuf<CMsgClientServiceMethodResponse>( packetMsg );
@@ -164,6 +179,6 @@ namespace SteamKit2
                 }
             }
         }
-
+        #endregion
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using SteamKit2.GC;
 using SteamKit2.Internal;
 
@@ -9,6 +10,16 @@ namespace SteamKit2
     /// </summary>
     public sealed partial class SteamGameCoordinator : ClientMsgHandler
     {
+        Dictionary<EMsg, Action<IPacketMsg>> dispatchMap;
+
+        internal SteamGameCoordinator()
+        {
+            dispatchMap = new Dictionary<EMsg, Action<IPacketMsg>>
+            {
+                { EMsg.ClientFromGC, HandleFromGC },
+            };
+        }
+
 
         /// <summary>
         /// Sends a game coordinator message for a specific appid.
@@ -35,13 +46,27 @@ namespace SteamKit2
         /// <param name="packetMsg">The packet message that contains the data.</param>
         public override void HandleMsg( IPacketMsg packetMsg )
         {
-            if ( packetMsg.MsgType == EMsg.ClientFromGC )
-            {
-                var msg = new ClientMsgProtobuf<CMsgGCClient>( packetMsg );
+            Action<IPacketMsg> handlerFunc;
+            bool haveFunc = dispatchMap.TryGetValue( packetMsg.MsgType, out handlerFunc );
 
-                var callback = new MessageCallback( msg.Body );
-                this.Client.PostCallback( callback );
+            if ( !haveFunc )
+            {
+                // ignore messages that we don't have a handler function for
+                return;
             }
+
+            handlerFunc( packetMsg );
         }
+
+
+        #region ClientMsg Handlers
+        void HandleFromGC( IPacketMsg packetMsg )
+        {
+            var msg = new ClientMsgProtobuf<CMsgGCClient>( packetMsg );
+
+            var callback = new MessageCallback( msg.Body );
+            this.Client.PostCallback( callback );
+        }
+        #endregion
     }
 }

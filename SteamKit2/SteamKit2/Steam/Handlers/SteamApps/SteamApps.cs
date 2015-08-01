@@ -111,8 +111,26 @@ namespace SteamKit2
         }
 
 
+        Dictionary<EMsg, Action<IPacketMsg>> dispatchMap;
+
         internal SteamApps()
         {
+            dispatchMap = new Dictionary<EMsg, Action<IPacketMsg>>
+            {
+                { EMsg.ClientLicenseList, HandleLicenseList },
+                { EMsg.ClientGameConnectTokens, HandleGameConnectTokens },
+                { EMsg.ClientVACBanStatus, HandleVACBanStatus },
+                { EMsg.ClientGetAppOwnershipTicketResponse, HandleAppOwnershipTicketResponse },
+                { EMsg.ClientAppInfoResponse, HandleAppInfoResponse },
+                { EMsg.ClientPackageInfoResponse, HandlePackageInfoResponse },
+                { EMsg.ClientAppInfoChanges, HandleAppInfoChanges },
+                { EMsg.ClientGetDepotDecryptionKeyResponse, HandleDepotKeyResponse },
+                { EMsg.ClientPICSAccessTokenResponse, HandlePICSAccessTokenResponse },
+                { EMsg.ClientPICSChangesSinceResponse, HandlePICSChangesSinceResponse },
+                { EMsg.ClientPICSProductInfoResponse, HandlePICSProductInfoResponse },
+                { EMsg.ClientUpdateGuestPassesList, HandleGuestPassList },
+                { EMsg.ClientGetCDNAuthTokenResponse, HandleCDNAuthTokenResponse },
+            };
         }
 
 
@@ -423,60 +441,16 @@ namespace SteamKit2
         /// <param name="packetMsg">The packet message that contains the data.</param>
         public override void HandleMsg( IPacketMsg packetMsg )
         {
-            switch ( packetMsg.MsgType )
+            Action<IPacketMsg> handlerFunc;
+            bool haveFunc = dispatchMap.TryGetValue( packetMsg.MsgType, out handlerFunc );
+
+            if ( !haveFunc )
             {
-                case EMsg.ClientLicenseList:
-                    HandleLicenseList( packetMsg );
-                    break;
-
-                case EMsg.ClientGameConnectTokens:
-                    HandleGameConnectTokens( packetMsg );
-                    break;
-
-                case EMsg.ClientVACBanStatus:
-                    HandleVACBanStatus( packetMsg );
-                    break;
-
-                case EMsg.ClientGetAppOwnershipTicketResponse:
-                    HandleAppOwnershipTicketResponse( packetMsg );
-                    break;
-
-                case EMsg.ClientAppInfoResponse:
-                    HandleAppInfoResponse( packetMsg );
-                    break;
-
-                case EMsg.ClientPackageInfoResponse:
-                    HandlePackageInfoResponse( packetMsg );
-                    break;
-
-                case EMsg.ClientAppInfoChanges:
-                    HandleAppInfoChanges( packetMsg );
-                    break;
-
-                case EMsg.ClientGetDepotDecryptionKeyResponse:
-                    HandleDepotKeyResponse( packetMsg );
-                    break;
-
-                case EMsg.ClientPICSAccessTokenResponse:
-                    HandlePICSAccessTokenResponse( packetMsg );
-                    break;
-
-                case EMsg.ClientPICSChangesSinceResponse:
-                    HandlePICSChangesSinceResponse( packetMsg );
-                    break;
-
-                case EMsg.ClientPICSProductInfoResponse:
-                    HandlePICSProductInfoResponse( packetMsg );
-                    break;
-
-                case EMsg.ClientUpdateGuestPassesList:
-                    HandleGuestPassList( packetMsg );
-                    break;
-
-                case EMsg.ClientGetCDNAuthTokenResponse:
-                    HandleCDNAuthTokenResponse( packetMsg );
-                    break;
+                // ignore messages that we don't have a handler function for
+                return;
             }
+
+            handlerFunc( packetMsg );
         }
 
 

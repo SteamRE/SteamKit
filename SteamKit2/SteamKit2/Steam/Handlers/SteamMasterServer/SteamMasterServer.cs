@@ -3,6 +3,8 @@
  * file 'license.txt', which is part of this source code package.
  */
 
+using System;
+using System.Collections.Generic;
 using System.Net;
 using SteamKit2.Internal;
 
@@ -46,8 +48,14 @@ namespace SteamKit2
         }
 
 
+        Dictionary<EMsg, Action<IPacketMsg>> dispatchMap;
+
         internal SteamMasterServer()
         {
+            dispatchMap = new Dictionary<EMsg, Action<IPacketMsg>>
+            {
+                { EMsg.GMSClientServerQueryResponse, HandleServerQueryResponse },
+            };
         }
 
 
@@ -84,12 +92,16 @@ namespace SteamKit2
         /// <param name="packetMsg">The packet message that contains the data.</param>
         public override void HandleMsg( IPacketMsg packetMsg )
         {
-            switch ( packetMsg.MsgType )
+            Action<IPacketMsg> handlerFunc;
+            bool haveFunc = dispatchMap.TryGetValue( packetMsg.MsgType, out handlerFunc );
+
+            if ( !haveFunc )
             {
-                case EMsg.GMSClientServerQueryResponse:
-                    HandleServerQueryResponse( packetMsg );
-                    break;
+                // ignore messages that we don't have a handler function for
+                return;
             }
+
+            handlerFunc( packetMsg );
         }
 
 

@@ -4,6 +4,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 using SteamKit2.Internal;
@@ -73,8 +74,15 @@ namespace SteamKit2
         }
 
 
+        Dictionary<EMsg, Action<IPacketMsg>> dispatchMap;
+
         internal SteamGameServer()
         {
+            dispatchMap = new Dictionary<EMsg, Action<IPacketMsg>>
+            {
+                { EMsg.GSStatusReply, HandleStatusReply },
+                { EMsg.ClientTicketAuthComplete, HandleAuthComplete },
+            };
         }
 
 
@@ -208,16 +216,16 @@ namespace SteamKit2
         /// <param name="packetMsg">The packet message that contains the data.</param>
         public override void HandleMsg( IPacketMsg packetMsg )
         {
-            switch ( packetMsg.MsgType )
-            {
-                case EMsg.GSStatusReply:
-                    HandleStatusReply( packetMsg );
-                    break;
+            Action<IPacketMsg> handlerFunc;
+            bool haveFunc = dispatchMap.TryGetValue( packetMsg.MsgType, out handlerFunc );
 
-                case EMsg.ClientTicketAuthComplete:
-                    HandleAuthComplete( packetMsg );
-                    break;
+            if ( !haveFunc )
+            {
+                // ignore messages that we don't have a handler function for
+                return;
             }
+
+            handlerFunc( packetMsg );
         }
 
 

@@ -29,6 +29,8 @@ namespace SteamKit2
         object callbackLock = new object();
         Queue<ICallbackMsg> callbackQueue;
 
+        Dictionary<EMsg, Action<IPacketMsg>> dispatchMap;
+
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SteamClient"/> class with a specific connection type.
@@ -55,10 +57,19 @@ namespace SteamKit2
             this.AddHandler( new SteamUnifiedMessages() );
             this.AddHandler( new SteamScreenshots() );
 
-            using ( var process = Process.GetCurrentProcess())
+            using ( var process = Process.GetCurrentProcess() )
             {
                 this.processStartTime = process.StartTime;
             }
+
+            dispatchMap = new Dictionary<EMsg, Action<IPacketMsg>>
+            {
+                // we're interested in this client message to post the connected callback
+                { EMsg.ChannelEncryptResult, HandleEncryptResult },
+
+                { EMsg.ClientCMList, HandleCMList },
+                { EMsg.ClientServerList, HandleServerList },
+            };
         }
 
 
@@ -271,19 +282,13 @@ namespace SteamKit2
                 return;
             }
 
-            switch ( packetMsg.MsgType )
+            Action<IPacketMsg> handlerFunc;
+            bool haveFunc = dispatchMap.TryGetValue( packetMsg.MsgType, out handlerFunc );
+
+            if ( haveFunc )
             {
-                case EMsg.ChannelEncryptResult:
-                    HandleEncryptResult( packetMsg ); // we're interested in this client message to post the connected callback
-                    break;
-
-                case EMsg.ClientCMList:
-                    HandleCMList( packetMsg );
-                    break;
-
-                case EMsg.ClientServerList:
-                    HandleServerList( packetMsg );
-                    break;
+                // we want to handle some of the clientmsgs before we pass them along to registered handlers
+                handlerFunc( packetMsg );
             }
 
             // pass along the clientmsg to all registered handlers
