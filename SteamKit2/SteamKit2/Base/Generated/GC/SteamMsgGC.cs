@@ -383,6 +383,24 @@ namespace SteamKit2.GC.Internal
       get { return _game_language_name; }
       set { _game_language_name = value; }
     }
+
+    private ulong _custom_game_crc = default(ulong);
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"custom_game_crc", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong custom_game_crc
+    {
+      get { return _custom_game_crc; }
+      set { _custom_game_crc = value; }
+    }
+
+    private uint _custom_game_timestamp = default(uint);
+    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"custom_game_timestamp", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint custom_game_timestamp
+    {
+      get { return _custom_game_timestamp; }
+      set { _custom_game_timestamp = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -417,11 +435,57 @@ namespace SteamKit2.GC.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgCustomGameInstallStatus")]
+  public partial class CMsgCustomGameInstallStatus : global::ProtoBuf.IExtensible
+  {
+    public CMsgCustomGameInstallStatus() {}
+    
+
+    private ECustomGameInstallStatus _status = ECustomGameInstallStatus.k_ECustomGameInstallStatus_Unknown;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"status", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(ECustomGameInstallStatus.k_ECustomGameInstallStatus_Unknown)]
+    public ECustomGameInstallStatus status
+    {
+      get { return _status; }
+      set { _status = value; }
+    }
+
+    private string _message = "";
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"message", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string message
+    {
+      get { return _message; }
+      set { _message = value; }
+    }
+
+    private uint _latest_timestamp_from_steam = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"latest_timestamp_from_steam", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint latest_timestamp_from_steam
+    {
+      get { return _latest_timestamp_from_steam; }
+      set { _latest_timestamp_from_steam = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgServerAvailable")]
   public partial class CMsgServerAvailable : global::ProtoBuf.IExtensible
   {
     public CMsgServerAvailable() {}
     
+
+    private CMsgCustomGameInstallStatus _custom_game_install_status = null;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"custom_game_install_status", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public CMsgCustomGameInstallStatus custom_game_install_status
+    {
+      get { return _custom_game_install_status; }
+      set { _custom_game_install_status = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -3134,6 +3198,41 @@ namespace SteamKit2.GC.Internal
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EProtoObjectLobbyInvite", Value=1002)]
       k_EProtoObjectLobbyInvite = 1002
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"ECustomGameInstallStatus", EnumPassthru=true)]
+    public enum ECustomGameInstallStatus
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_ECustomGameInstallStatus_Unknown", Value=0)]
+      k_ECustomGameInstallStatus_Unknown = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_ECustomGameInstallStatus_Ready", Value=1)]
+      k_ECustomGameInstallStatus_Ready = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_ECustomGameInstallStatus_Busy", Value=2)]
+      k_ECustomGameInstallStatus_Busy = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_ECustomGameInstallStatus_FailedGeneric", Value=101)]
+      k_ECustomGameInstallStatus_FailedGeneric = 101,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_ECustomGameInstallStatus_FailedInternalError", Value=102)]
+      k_ECustomGameInstallStatus_FailedInternalError = 102,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_ECustomGameInstallStatus_RequestedTimestampTooOld", Value=103)]
+      k_ECustomGameInstallStatus_RequestedTimestampTooOld = 103,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_ECustomGameInstallStatus_RequestedTimestampTooNew", Value=104)]
+      k_ECustomGameInstallStatus_RequestedTimestampTooNew = 104,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_ECustomGameInstallStatus_CRCMismatch", Value=105)]
+      k_ECustomGameInstallStatus_CRCMismatch = 105,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_ECustomGameInstallStatus_FailedSteam", Value=106)]
+      k_ECustomGameInstallStatus_FailedSteam = 106,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_ECustomGameInstallStatus_FailedCanceled", Value=107)]
+      k_ECustomGameInstallStatus_FailedCanceled = 107
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"GC_BannedWordType", EnumPassthru=true)]

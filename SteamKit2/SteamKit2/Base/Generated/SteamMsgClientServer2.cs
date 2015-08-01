@@ -600,6 +600,57 @@ namespace SteamKit2.Internal
       get { return _update_metadata; }
       set { _update_metadata = value; }
     }
+
+    private int _language = (int)0;
+    [global::ProtoBuf.ProtoMember(22, IsRequired = false, Name=@"language", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue((int)0)]
+    public int language
+    {
+      get { return _language; }
+      set { _language = value; }
+    }
+    private readonly global::System.Collections.Generic.List<string> _removed_kvtags = new global::System.Collections.Generic.List<string>();
+    [global::ProtoBuf.ProtoMember(23, Name=@"removed_kvtags", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<string> removed_kvtags
+    {
+      get { return _removed_kvtags; }
+    }
+  
+    private readonly global::System.Collections.Generic.List<CMsgClientUCMUpdatePublishedFile.KeyValueTag> _kvtags = new global::System.Collections.Generic.List<CMsgClientUCMUpdatePublishedFile.KeyValueTag>();
+    [global::ProtoBuf.ProtoMember(24, Name=@"kvtags", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CMsgClientUCMUpdatePublishedFile.KeyValueTag> kvtags
+    {
+      get { return _kvtags; }
+    }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"KeyValueTag")]
+  public partial class KeyValueTag : global::ProtoBuf.IExtensible
+  {
+    public KeyValueTag() {}
+    
+
+    private string _key = "";
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"key", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string key
+    {
+      get { return _key; }
+      set { _key = value; }
+    }
+
+    private string _value = "";
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"value", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string value
+    {
+      get { return _value; }
+      set { _value = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -3441,6 +3492,71 @@ namespace SteamKit2.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientCheckAppBetaPassword")]
+  public partial class CMsgClientCheckAppBetaPassword : global::ProtoBuf.IExtensible
+  {
+    public CMsgClientCheckAppBetaPassword() {}
+    
+
+    private uint _app_id = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"app_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint app_id
+    {
+      get { return _app_id; }
+      set { _app_id = value; }
+    }
+
+    private string _betapassword = "";
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"betapassword", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string betapassword
+    {
+      get { return _betapassword; }
+      set { _betapassword = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientCheckAppBetaPasswordResponse")]
+  public partial class CMsgClientCheckAppBetaPasswordResponse : global::ProtoBuf.IExtensible
+  {
+    public CMsgClientCheckAppBetaPasswordResponse() {}
+    
+
+    private int _eresult = (int)2;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"eresult", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue((int)2)]
+    public int eresult
+    {
+      get { return _eresult; }
+      set { _eresult = value; }
+    }
+
+    private string _betaname = "";
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"betaname", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string betaname
+    {
+      get { return _betaname; }
+      set { _betaname = value; }
+    }
+
+    private string _betapassword = "";
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"betapassword", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string betapassword
+    {
+      get { return _betapassword; }
+      set { _betapassword = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

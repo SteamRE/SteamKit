@@ -8,7 +8,7 @@
 //------------------------------------------------------------------------------
 #pragma warning disable 1591
 
-// Generated from: steammessages_clientserver_asbytes.proto
+// Generated from: steammessages_clientserver.proto
 // Note: requires additional types generated from: steammessages_base.proto
 // Note: requires additional types generated from: encrypted_app_ticket.proto
 namespace SteamKit2.Internal
@@ -7124,6 +7124,15 @@ namespace SteamKit2.Internal
     {
       get { return _currency; }
       set { _currency = value; }
+    }
+
+    private int _balance_delayed = default(int);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"balance_delayed", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int balance_delayed
+    {
+      get { return _balance_delayed; }
+      set { _balance_delayed = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

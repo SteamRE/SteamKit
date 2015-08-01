@@ -577,6 +577,15 @@ namespace SteamKit2.Unified.Internal
       get { return _steamguard_scheme; }
       set { _steamguard_scheme = value; }
     }
+
+    private bool _remove_all_steamguard_cookies = default(bool);
+    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"remove_all_steamguard_cookies", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool remove_all_steamguard_cookies
+    {
+      get { return _remove_all_steamguard_cookies; }
+      set { _remove_all_steamguard_cookies = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

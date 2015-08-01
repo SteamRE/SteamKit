@@ -176,7 +176,55 @@ namespace SteamKit2.GC.Dota.Internal
       NETWORK_DISCONNECT_NO_PEER_GROUP_HANDLERS = 52,
             
       [global::ProtoBuf.ProtoEnum(Name=@"NETWORK_DISCONNECT_RECONNECTION", Value=53)]
-      NETWORK_DISCONNECT_RECONNECTION = 53
+      NETWORK_DISCONNECT_RECONNECTION = 53,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"NETWORK_DISCONNECT_LOOPSHUTDOWN", Value=54)]
+      NETWORK_DISCONNECT_LOOPSHUTDOWN = 54,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"NETWORK_DISCONNECT_LOOPDEACTIVATE", Value=55)]
+      NETWORK_DISCONNECT_LOOPDEACTIVATE = 55,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"NETWORK_DISCONNECT_HOST_ENDGAME", Value=56)]
+      NETWORK_DISCONNECT_HOST_ENDGAME = 56,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"NETWORK_DISCONNECT_LOOP_LEVELLOAD_ACTIVATE", Value=57)]
+      NETWORK_DISCONNECT_LOOP_LEVELLOAD_ACTIVATE = 57,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"NETWORK_DISCONNECT_CREATE_SERVER_FAILED", Value=58)]
+      NETWORK_DISCONNECT_CREATE_SERVER_FAILED = 58,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"NETWORK_DISCONNECT_EXITING", Value=59)]
+      NETWORK_DISCONNECT_EXITING = 59,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"NETWORK_DISCONNECT_REQUEST_HOSTSTATE_IDLE", Value=60)]
+      NETWORK_DISCONNECT_REQUEST_HOSTSTATE_IDLE = 60,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"NETWORK_DISCONNECT_REQUEST_HOSTSTATE_HLTVRELAY", Value=61)]
+      NETWORK_DISCONNECT_REQUEST_HOSTSTATE_HLTVRELAY = 61,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"NETWORK_DISCONNECT_CLIENT_CONSISTENCY_FAIL", Value=62)]
+      NETWORK_DISCONNECT_CLIENT_CONSISTENCY_FAIL = 62,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"NETWORK_DISCONNECT_CLIENT_UNABLE_TO_CRC_MAP", Value=63)]
+      NETWORK_DISCONNECT_CLIENT_UNABLE_TO_CRC_MAP = 63,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"NETWORK_DISCONNECT_CLIENT_NO_MAP", Value=64)]
+      NETWORK_DISCONNECT_CLIENT_NO_MAP = 64,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"NETWORK_DISCONNECT_CLIENT_DIFFERENT_MAP", Value=65)]
+      NETWORK_DISCONNECT_CLIENT_DIFFERENT_MAP = 65,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"NETWORK_DISCONNECT_SERVER_REQUIRES_STEAM", Value=66)]
+      NETWORK_DISCONNECT_SERVER_REQUIRES_STEAM = 66,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"NETWORK_DISCONNECT_STEAM_DENY_MISC", Value=67)]
+      NETWORK_DISCONNECT_STEAM_DENY_MISC = 67,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"NETWORK_DISCONNECT_STEAM_DENY_BAD_ANTI_CHEAT", Value=68)]
+      NETWORK_DISCONNECT_STEAM_DENY_BAD_ANTI_CHEAT = 68,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"NETWORK_DISCONNECT_SERVER_SHUTDOWN", Value=69)]
+      NETWORK_DISCONNECT_SERVER_SHUTDOWN = 69
     }
   
 }

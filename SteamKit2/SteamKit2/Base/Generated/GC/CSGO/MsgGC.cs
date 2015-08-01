@@ -2223,6 +2223,13 @@ namespace SteamKit2.GC.CSGO.Internal
       get { return _spectators_count_lnk; }
       set { _spectators_count_lnk = value; }
     }
+    private readonly global::System.Collections.Generic.List<int> _enemy_kills_agg = new global::System.Collections.Generic.List<int>();
+    [global::ProtoBuf.ProtoMember(25, Name=@"enemy_kills_agg", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public global::System.Collections.Generic.List<int> enemy_kills_agg
+    {
+      get { return _enemy_kills_agg; }
+    }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -4294,14 +4301,21 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _watchablematchinfo = value; }
     }
 
-    private CMsgGCCStrike15_v2_MatchmakingServerRoundStats _roundstats = null;
-    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"roundstats", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    private CMsgGCCStrike15_v2_MatchmakingServerRoundStats _roundstats_legacy = null;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"roundstats_legacy", DataFormat = global::ProtoBuf.DataFormat.Default)]
     [global::System.ComponentModel.DefaultValue(null)]
-    public CMsgGCCStrike15_v2_MatchmakingServerRoundStats roundstats
+    public CMsgGCCStrike15_v2_MatchmakingServerRoundStats roundstats_legacy
     {
-      get { return _roundstats; }
-      set { _roundstats = value; }
+      get { return _roundstats_legacy; }
+      set { _roundstats_legacy = value; }
     }
+    private readonly global::System.Collections.Generic.List<CMsgGCCStrike15_v2_MatchmakingServerRoundStats> _roundstatsall = new global::System.Collections.Generic.List<CMsgGCCStrike15_v2_MatchmakingServerRoundStats>();
+    [global::ProtoBuf.ProtoMember(5, Name=@"roundstatsall", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CMsgGCCStrike15_v2_MatchmakingServerRoundStats> roundstatsall
+    {
+      get { return _roundstatsall; }
+    }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -4825,6 +4839,15 @@ namespace SteamKit2.GC.CSGO.Internal
       get { return _viewangles; }
     }
   
+
+    private uint _type = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint type
+    {
+      get { return _type; }
+      set { _type = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -5290,6 +5313,44 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCCStrike15_v2_Client2GCRequestPrestigeCoin")]
+  public partial class CMsgGCCStrike15_v2_Client2GCRequestPrestigeCoin : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCCStrike15_v2_Client2GCRequestPrestigeCoin() {}
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCCStrike15_v2_Client2GCStreamUnlock")]
+  public partial class CMsgGCCStrike15_v2_Client2GCStreamUnlock : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCCStrike15_v2_Client2GCStreamUnlock() {}
+    
+
+    private ulong _ticket = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"ticket", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong ticket
+    {
+      get { return _ticket; }
+      set { _ticket = value; }
+    }
+
+    private int _os = default(int);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"os", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int os
+    {
+      get { return _os; }
+      set { _os = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     [global::ProtoBuf.ProtoContract(Name=@"ECsgoGCMsg", EnumPassthru=true)]
     public enum ECsgoGCMsg
     {
@@ -5499,7 +5560,16 @@ namespace SteamKit2.GC.CSGO.Internal
       k_EMsgGC_GlobalGame_Play = 9170,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCCStrike15_v2_AcknowledgePenalty", Value=9171)]
-      k_EMsgGCCStrike15_v2_AcknowledgePenalty = 9171
+      k_EMsgGCCStrike15_v2_AcknowledgePenalty = 9171,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCCStrike15_v2_Client2GCRequestPrestigeCoin", Value=9172)]
+      k_EMsgGCCStrike15_v2_Client2GCRequestPrestigeCoin = 9172,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCCStrike15_v2_GC2ClientGlobalStats", Value=9173)]
+      k_EMsgGCCStrike15_v2_GC2ClientGlobalStats = 9173,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCCStrike15_v2_Client2GCStreamUnlock", Value=9174)]
+      k_EMsgGCCStrike15_v2_Client2GCStreamUnlock = 9174
     }
   
 }

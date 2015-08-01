@@ -157,6 +157,15 @@ namespace SteamKit2.Unified.Internal
       get { return _as_rtmp; }
       set { _as_rtmp = value; }
     }
+
+    private uint _delay_seconds = default(uint);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"delay_seconds", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint delay_seconds
+    {
+      get { return _delay_seconds; }
+      set { _delay_seconds = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -250,6 +259,15 @@ namespace SteamKit2.Unified.Internal
       get { return _existing_broadcast_id; }
       set { _existing_broadcast_id = value; }
     }
+
+    private ulong _viewer_token = default(ulong);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"viewer_token", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong viewer_token
+    {
+      get { return _viewer_token; }
+      set { _viewer_token = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -340,6 +358,15 @@ namespace SteamKit2.Unified.Internal
     {
       get { return _seconds_delay; }
       set { _seconds_delay = value; }
+    }
+
+    private ulong _viewer_token = default(ulong);
+    [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"viewer_token", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong viewer_token
+    {
+      get { return _viewer_token; }
+      set { _viewer_token = value; }
     }
     [global::ProtoBuf.ProtoContract(Name=@"EWatchResponse", EnumPassthru=true)]
     public enum EWatchResponse
@@ -471,6 +498,15 @@ namespace SteamKit2.Unified.Internal
       get { return _seconds_delay; }
       set { _seconds_delay = value; }
     }
+
+    private bool _is_publisher = default(bool);
+    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"is_publisher", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool is_publisher
+    {
+      get { return _is_publisher; }
+      set { _is_publisher = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -554,6 +590,15 @@ namespace SteamKit2.Unified.Internal
     {
       get { return _title; }
       set { _title = value; }
+    }
+
+    private string _game_data_config = "";
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"game_data_config", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string game_data_config
+    {
+      get { return _game_data_config; }
+      set { _game_data_config = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

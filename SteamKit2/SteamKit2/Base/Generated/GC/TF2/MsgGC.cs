@@ -1754,6 +1754,15 @@ namespace SteamKit2.GC.TF2.Internal
       get { return _owns_ladder_ticket; }
       set { _owns_ladder_ticket = value; }
     }
+
+    private bool _phone_verified = (bool)false;
+    [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"phone_verified", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue((bool)false)]
+    public bool phone_verified
+    {
+      get { return _phone_verified; }
+      set { _phone_verified = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -1817,13 +1826,13 @@ namespace SteamKit2.GC.TF2.Internal
       set { _quickplay_game_type = value; }
     }
 
-    private uint _ladder_type = default(uint);
-    [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"ladder_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    private uint _ladder_game_type = default(uint);
+    [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"ladder_game_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint ladder_type
+    public uint ladder_game_type
     {
-      get { return _ladder_type; }
-      set { _ladder_type = value; }
+      get { return _ladder_game_type; }
+      set { _ladder_game_type = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -2062,13 +2071,13 @@ namespace SteamKit2.GC.TF2.Internal
       set { _search_quickplay_game_type = value; }
     }
 
-    private uint _search_ladder_type = default(uint);
-    [global::ProtoBuf.ProtoMember(33, IsRequired = false, Name=@"search_ladder_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    private uint _search_ladder_game_type = default(uint);
+    [global::ProtoBuf.ProtoMember(33, IsRequired = false, Name=@"search_ladder_game_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint search_ladder_type
+    public uint search_ladder_game_type
     {
-      get { return _search_ladder_type; }
-      set { _search_ladder_type = value; }
+      get { return _search_ladder_game_type; }
+      set { _search_ladder_game_type = value; }
     }
 
     private uint _prevent_match_until_date = default(uint);
@@ -3298,6 +3307,15 @@ namespace SteamKit2.GC.TF2.Internal
       get { return _skillrating_force_average; }
       set { _skillrating_force_average = value; }
     }
+
+    private uint _ladder_game_type = default(uint);
+    [global::ProtoBuf.ProtoMember(22, IsRequired = false, Name=@"ladder_game_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint ladder_game_type
+    {
+      get { return _ladder_game_type; }
+      set { _ladder_game_type = value; }
+    }
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Player")]
   public partial class Player : global::ProtoBuf.IExtensible
   {
@@ -3936,6 +3954,15 @@ namespace SteamKit2.GC.TF2.Internal
       get { return _connected_players; }
     }
   
+
+    private bool _create_party = (bool)true;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"create_party", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue((bool)true)]
+    public bool create_party
+    {
+      get { return _create_party; }
+      set { _create_party = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -4674,9 +4701,9 @@ namespace SteamKit2.GC.TF2.Internal
     }
   
 
-    private CGCMsgTFPlayerSkillRatingAdjustment.MatchType _match_type = CGCMsgTFPlayerSkillRatingAdjustment.MatchType.PUBLIC;
+    private CGCMsgTFPlayerSkillRatingAdjustment.MatchType _match_type = CGCMsgTFPlayerSkillRatingAdjustment.MatchType.INVALID;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"match_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(CGCMsgTFPlayerSkillRatingAdjustment.MatchType.PUBLIC)]
+    [global::System.ComponentModel.DefaultValue(CGCMsgTFPlayerSkillRatingAdjustment.MatchType.INVALID)]
     public CGCMsgTFPlayerSkillRatingAdjustment.MatchType match_type
     {
       get { return _match_type; }
@@ -4714,11 +4741,17 @@ namespace SteamKit2.GC.TF2.Internal
     public enum MatchType
     {
             
+      [global::ProtoBuf.ProtoEnum(Name=@"INVALID", Value=-1)]
+      INVALID = -1,
+            
       [global::ProtoBuf.ProtoEnum(Name=@"PUBLIC", Value=0)]
       PUBLIC = 0,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"BETA", Value=1)]
-      BETA = 1
+      [global::ProtoBuf.ProtoEnum(Name=@"LADDER_6V6", Value=1)]
+      LADDER_6V6 = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"LADDER_9V9", Value=2)]
+      LADDER_9V9 = 2
     }
   
     private global::ProtoBuf.IExtension extensionObject;
@@ -4970,6 +5003,170 @@ namespace SteamKit2.GC.TF2.Internal
     {
       get { return _score_check; }
       set { _score_check = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CAttribute_WorldItemPlacement")]
+  public partial class CAttribute_WorldItemPlacement : global::ProtoBuf.IExtensible
+  {
+    public CAttribute_WorldItemPlacement() {}
+    
+
+    private ulong _original_item_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"original_item_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong original_item_id
+    {
+      get { return _original_item_id; }
+      set { _original_item_id = value; }
+    }
+
+    private float _pos_x = default(float);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"pos_x", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(float))]
+    public float pos_x
+    {
+      get { return _pos_x; }
+      set { _pos_x = value; }
+    }
+
+    private float _pos_y = default(float);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"pos_y", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(float))]
+    public float pos_y
+    {
+      get { return _pos_y; }
+      set { _pos_y = value; }
+    }
+
+    private float _pos_z = default(float);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"pos_z", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(float))]
+    public float pos_z
+    {
+      get { return _pos_z; }
+      set { _pos_z = value; }
+    }
+
+    private float _ang_x = default(float);
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"ang_x", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(float))]
+    public float ang_x
+    {
+      get { return _ang_x; }
+      set { _ang_x = value; }
+    }
+
+    private float _ang_y = default(float);
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"ang_y", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(float))]
+    public float ang_y
+    {
+      get { return _ang_y; }
+      set { _ang_y = value; }
+    }
+
+    private float _ang_z = default(float);
+    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"ang_z", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(float))]
+    public float ang_z
+    {
+      get { return _ang_z; }
+      set { _ang_z = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGCMsg_WorldItemPlacement_Update")]
+  public partial class CGCMsg_WorldItemPlacement_Update : global::ProtoBuf.IExtensible
+  {
+    public CGCMsg_WorldItemPlacement_Update() {}
+    
+
+    private ulong _original_item_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"original_item_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong original_item_id
+    {
+      get { return _original_item_id; }
+      set { _original_item_id = value; }
+    }
+
+    private float _pos_x = default(float);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"pos_x", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(float))]
+    public float pos_x
+    {
+      get { return _pos_x; }
+      set { _pos_x = value; }
+    }
+
+    private float _pos_y = default(float);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"pos_y", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(float))]
+    public float pos_y
+    {
+      get { return _pos_y; }
+      set { _pos_y = value; }
+    }
+
+    private float _pos_z = default(float);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"pos_z", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(float))]
+    public float pos_z
+    {
+      get { return _pos_z; }
+      set { _pos_z = value; }
+    }
+
+    private float _ang_x = default(float);
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"ang_x", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(float))]
+    public float ang_x
+    {
+      get { return _ang_x; }
+      set { _ang_x = value; }
+    }
+
+    private float _ang_y = default(float);
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"ang_y", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(float))]
+    public float ang_y
+    {
+      get { return _ang_y; }
+      set { _ang_y = value; }
+    }
+
+    private float _ang_z = default(float);
+    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"ang_z", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(float))]
+    public float ang_z
+    {
+      get { return _ang_z; }
+      set { _ang_z = value; }
+    }
+
+    private bool _force_remove_all = default(bool);
+    [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"force_remove_all", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool force_remove_all
+    {
+      get { return _force_remove_all; }
+      set { _force_remove_all = value; }
+    }
+
+    private string _attrib_name = "";
+    [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"attrib_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string attrib_name
+    {
+      get { return _attrib_name; }
+      set { _attrib_name = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -5306,6 +5503,12 @@ namespace SteamKit2.GC.TF2.Internal
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGC_SpyVsEngyWar_SetKillCamMessage", Value=6509)]
       k_EMsgGC_SpyVsEngyWar_SetKillCamMessage = 6509,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGC_WorldItemPlacement_Attribute", Value=6510)]
+      k_EMsgGC_WorldItemPlacement_Attribute = 6510,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGC_WorldItemPlacement_Update", Value=6511)]
+      k_EMsgGC_WorldItemPlacement_Update = 6511,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCDev_GrantWarKill", Value=10001)]
       k_EMsgGCDev_GrantWarKill = 10001

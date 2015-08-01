@@ -69,9 +69,35 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CVideo_UnlockedH264_Notification")]
+  public partial class CVideo_UnlockedH264_Notification : global::ProtoBuf.IExtensible
+  {
+    public CVideo_UnlockedH264_Notification() {}
+    
+
+    private byte[] _encryption_key = null;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"encryption_key", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public byte[] encryption_key
+    {
+      get { return _encryption_key; }
+      set { _encryption_key = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     public interface IVideo
     {
       CVideo_ClientGetVideoURL_Response ClientGetVideoURL(CVideo_ClientGetVideoURL_Request request);
+    
+    }
+    
+    
+    public interface IVideoClient
+    {
+      NoResponse NotifyUnlockedH264(CVideo_UnlockedH264_Notification request);
     
     }
     

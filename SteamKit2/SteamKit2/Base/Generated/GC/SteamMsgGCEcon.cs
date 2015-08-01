@@ -1568,6 +1568,15 @@ namespace SteamKit2.GC.Internal
       get { return _gifting_window_hours; }
       set { _gifting_window_hours = value; }
     }
+
+    private EGCMsgInitiateTradeResponse _trade_restriction = EGCMsgInitiateTradeResponse.k_EGCMsgInitiateTradeResponse_Accepted;
+    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"trade_restriction", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(EGCMsgInitiateTradeResponse.k_EGCMsgInitiateTradeResponse_Accepted)]
+    public EGCMsgInitiateTradeResponse trade_restriction
+    {
+      get { return _trade_restriction; }
+      set { _trade_restriction = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -1674,6 +1683,163 @@ namespace SteamKit2.GC.Internal
     {
       get { return _so_cache_version_id; }
       set { _so_cache_version_id = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientToGCUnlockItemStyle")]
+  public partial class CMsgClientToGCUnlockItemStyle : global::ProtoBuf.IExtensible
+  {
+    public CMsgClientToGCUnlockItemStyle() {}
+    
+
+    private ulong _item_to_unlock = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"item_to_unlock", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong item_to_unlock
+    {
+      get { return _item_to_unlock; }
+      set { _item_to_unlock = value; }
+    }
+
+    private uint _style_index = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"style_index", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint style_index
+    {
+      get { return _style_index; }
+      set { _style_index = value; }
+    }
+    private readonly global::System.Collections.Generic.List<ulong> _consumable_item_ids = new global::System.Collections.Generic.List<ulong>();
+    [global::ProtoBuf.ProtoMember(3, Name=@"consumable_item_ids", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public global::System.Collections.Generic.List<ulong> consumable_item_ids
+    {
+      get { return _consumable_item_ids; }
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientToGCUnlockItemStyleResponse")]
+  public partial class CMsgClientToGCUnlockItemStyleResponse : global::ProtoBuf.IExtensible
+  {
+    public CMsgClientToGCUnlockItemStyleResponse() {}
+    
+
+    private CMsgClientToGCUnlockItemStyleResponse.EUnlockStyle _response = CMsgClientToGCUnlockItemStyleResponse.EUnlockStyle.k_UnlockStyle_Succeeded;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"response", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(CMsgClientToGCUnlockItemStyleResponse.EUnlockStyle.k_UnlockStyle_Succeeded)]
+    public CMsgClientToGCUnlockItemStyleResponse.EUnlockStyle response
+    {
+      get { return _response; }
+      set { _response = value; }
+    }
+
+    private ulong _item_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"item_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong item_id
+    {
+      get { return _item_id; }
+      set { _item_id = value; }
+    }
+
+    private uint _style_index = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"style_index", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint style_index
+    {
+      get { return _style_index; }
+      set { _style_index = value; }
+    }
+
+    private uint _style_prereq = default(uint);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"style_prereq", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint style_prereq
+    {
+      get { return _style_prereq; }
+      set { _style_prereq = value; }
+    }
+    [global::ProtoBuf.ProtoContract(Name=@"EUnlockStyle", EnumPassthru=true)]
+    public enum EUnlockStyle
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_UnlockStyle_Succeeded", Value=0)]
+      k_UnlockStyle_Succeeded = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_UnlockStyle_Failed_PreReq", Value=1)]
+      k_UnlockStyle_Failed_PreReq = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_UnlockStyle_Failed_CantAfford", Value=2)]
+      k_UnlockStyle_Failed_CantAfford = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_UnlockStyle_Failed_CantCommit", Value=3)]
+      k_UnlockStyle_Failed_CantCommit = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_UnlockStyle_Failed_CantLockCache", Value=4)]
+      k_UnlockStyle_Failed_CantLockCache = 4,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_UnlockStyle_Failed_CantAffordAttrib", Value=5)]
+      k_UnlockStyle_Failed_CantAffordAttrib = 5,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_UnlockStyle_Failed_CantAffordGem", Value=6)]
+      k_UnlockStyle_Failed_CantAffordGem = 6,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_UnlockStyle_Failed_NoCompendiumLevel", Value=7)]
+      k_UnlockStyle_Failed_NoCompendiumLevel = 7,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_UnlockStyle_Failed_AlreadyUnlocked", Value=8)]
+      k_UnlockStyle_Failed_AlreadyUnlocked = 8
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientToGCSetItemInventoryCategory")]
+  public partial class CMsgClientToGCSetItemInventoryCategory : global::ProtoBuf.IExtensible
+  {
+    public CMsgClientToGCSetItemInventoryCategory() {}
+    
+    private readonly global::System.Collections.Generic.List<ulong> _item_ids = new global::System.Collections.Generic.List<ulong>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"item_ids", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public global::System.Collections.Generic.List<ulong> item_ids
+    {
+      get { return _item_ids; }
+    }
+  
+
+    private uint _set_to_value = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"set_to_value", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint set_to_value
+    {
+      get { return _set_to_value; }
+      set { _set_to_value = value; }
+    }
+
+    private uint _remove_categories = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"remove_categories", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint remove_categories
+    {
+      get { return _remove_categories; }
+      set { _remove_categories = value; }
+    }
+
+    private uint _add_categories = default(uint);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"add_categories", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint add_categories
+    {
+      get { return _add_categories; }
+      set { _add_categories = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -1887,12 +2053,6 @@ namespace SteamKit2.GC.Internal
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCNameEggEssenceResponse", Value=1079)]
       k_EMsgGCNameEggEssenceResponse = 1079,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCUnlockItemStyle", Value=1080)]
-      k_EMsgGCUnlockItemStyle = 1080,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCUnlockItemStyleResponse", Value=1081)]
-      k_EMsgGCUnlockItemStyleResponse = 1081,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCFulfillDynamicRecipeComponent", Value=1082)]
       k_EMsgGCFulfillDynamicRecipeComponent = 1082,
@@ -2180,7 +2340,16 @@ namespace SteamKit2.GC.Internal
       k_EMsgClientToGCEquipItems = 2569,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCEquipItemsResponse", Value=2570)]
-      k_EMsgClientToGCEquipItemsResponse = 2570
+      k_EMsgClientToGCEquipItemsResponse = 2570,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCUnlockItemStyle", Value=2571)]
+      k_EMsgClientToGCUnlockItemStyle = 2571,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCUnlockItemStyleResponse", Value=2572)]
+      k_EMsgClientToGCUnlockItemStyleResponse = 2572,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCSetItemInventoryCategory", Value=2573)]
+      k_EMsgClientToGCSetItemInventoryCategory = 2573
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"EGCMsgResponse", EnumPassthru=true)]
@@ -2213,38 +2382,6 @@ namespace SteamKit2.GC.Internal
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgFailedToCreate", Value=8)]
       k_EGCMsgFailedToCreate = 8
-    }
-  
-    [global::ProtoBuf.ProtoContract(Name=@"EUnlockStyle", EnumPassthru=true)]
-    public enum EUnlockStyle
-    {
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_UnlockStyle_Succeeded", Value=0)]
-      k_UnlockStyle_Succeeded = 0,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_UnlockStyle_Failed_PreReq", Value=1)]
-      k_UnlockStyle_Failed_PreReq = 1,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_UnlockStyle_Failed_CantAfford", Value=2)]
-      k_UnlockStyle_Failed_CantAfford = 2,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_UnlockStyle_Failed_CantCommit", Value=3)]
-      k_UnlockStyle_Failed_CantCommit = 3,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_UnlockStyle_Failed_CantLockCache", Value=4)]
-      k_UnlockStyle_Failed_CantLockCache = 4,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_UnlockStyle_Failed_CantAffordAttrib", Value=5)]
-      k_UnlockStyle_Failed_CantAffordAttrib = 5,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_UnlockStyle_Failed_CantAffordGem", Value=6)]
-      k_UnlockStyle_Failed_CantAffordGem = 6,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_UnlockStyle_Failed_NoCompendiumLevel", Value=7)]
-      k_UnlockStyle_Failed_NoCompendiumLevel = 7,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_UnlockStyle_Failed_AlreadyUnlocked", Value=8)]
-      k_UnlockStyle_Failed_AlreadyUnlocked = 8
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"EItemPurgatoryResponse_Finalize", EnumPassthru=true)]
@@ -2308,6 +2445,80 @@ namespace SteamKit2.GC.Internal
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EPartnerRequestUnsupportedPartnerType", Value=4)]
       k_EPartnerRequestUnsupportedPartnerType = 4
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"EGCMsgInitiateTradeResponse", EnumPassthru=true)]
+    public enum EGCMsgInitiateTradeResponse
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgInitiateTradeResponse_Accepted", Value=0)]
+      k_EGCMsgInitiateTradeResponse_Accepted = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgInitiateTradeResponse_Declined", Value=1)]
+      k_EGCMsgInitiateTradeResponse_Declined = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgInitiateTradeResponse_VAC_Banned_Initiator", Value=2)]
+      k_EGCMsgInitiateTradeResponse_VAC_Banned_Initiator = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgInitiateTradeResponse_VAC_Banned_Target", Value=3)]
+      k_EGCMsgInitiateTradeResponse_VAC_Banned_Target = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgInitiateTradeResponse_Target_Already_Trading", Value=4)]
+      k_EGCMsgInitiateTradeResponse_Target_Already_Trading = 4,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgInitiateTradeResponse_Disabled", Value=5)]
+      k_EGCMsgInitiateTradeResponse_Disabled = 5,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgInitiateTradeResponse_NotLoggedIn", Value=6)]
+      k_EGCMsgInitiateTradeResponse_NotLoggedIn = 6,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgInitiateTradeResponse_Cancel", Value=7)]
+      k_EGCMsgInitiateTradeResponse_Cancel = 7,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgInitiateTradeResponse_TooSoon", Value=8)]
+      k_EGCMsgInitiateTradeResponse_TooSoon = 8,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgInitiateTradeResponse_TooSoonPenalty", Value=9)]
+      k_EGCMsgInitiateTradeResponse_TooSoonPenalty = 9,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgInitiateTradeResponse_Trade_Banned_Initiator", Value=10)]
+      k_EGCMsgInitiateTradeResponse_Trade_Banned_Initiator = 10,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgInitiateTradeResponse_Trade_Banned_Target", Value=11)]
+      k_EGCMsgInitiateTradeResponse_Trade_Banned_Target = 11,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgInitiateTradeResponse_Free_Account_Initiator_DEPRECATED", Value=12)]
+      k_EGCMsgInitiateTradeResponse_Free_Account_Initiator_DEPRECATED = 12,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgInitiateTradeResponse_Shared_Account_Initiator", Value=13)]
+      k_EGCMsgInitiateTradeResponse_Shared_Account_Initiator = 13,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgInitiateTradeResponse_Service_Unavailable", Value=14)]
+      k_EGCMsgInitiateTradeResponse_Service_Unavailable = 14,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgInitiateTradeResponse_Target_Blocked", Value=15)]
+      k_EGCMsgInitiateTradeResponse_Target_Blocked = 15,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgInitiateTradeResponse_NeedVerifiedEmail", Value=16)]
+      k_EGCMsgInitiateTradeResponse_NeedVerifiedEmail = 16,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgInitiateTradeResponse_NeedSteamGuard", Value=17)]
+      k_EGCMsgInitiateTradeResponse_NeedSteamGuard = 17,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgInitiateTradeResponse_SteamGuardDuration", Value=18)]
+      k_EGCMsgInitiateTradeResponse_SteamGuardDuration = 18,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgInitiateTradeResponse_TheyCannotTrade", Value=19)]
+      k_EGCMsgInitiateTradeResponse_TheyCannotTrade = 19,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgInitiateTradeResponse_Recent_Password_Reset", Value=20)]
+      k_EGCMsgInitiateTradeResponse_Recent_Password_Reset = 20,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgInitiateTradeResponse_Using_New_Device", Value=21)]
+      k_EGCMsgInitiateTradeResponse_Using_New_Device = 21,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgInitiateTradeResponse_Sent_Invalid_Cookie", Value=22)]
+      k_EGCMsgInitiateTradeResponse_Sent_Invalid_Cookie = 22
     }
   
 }

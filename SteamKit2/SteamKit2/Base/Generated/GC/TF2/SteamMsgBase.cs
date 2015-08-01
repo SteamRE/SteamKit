@@ -619,6 +619,15 @@ namespace SteamKit2.GC.TF2.Internal
       get { return _prevent_match_until_date; }
       set { _prevent_match_until_date = value; }
     }
+
+    private bool _phone_verified = (bool)false;
+    [global::ProtoBuf.ProtoMember(19, IsRequired = false, Name=@"phone_verified", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue((bool)false)]
+    public bool phone_verified
+    {
+      get { return _phone_verified; }
+      set { _phone_verified = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -1977,6 +1986,33 @@ namespace SteamKit2.GC.TF2.Internal
       get { return _origin; }
       set { _origin = value; }
     }
+
+    private uint _is_strange = default(uint);
+    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"is_strange", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint is_strange
+    {
+      get { return _is_strange; }
+      set { _is_strange = value; }
+    }
+
+    private uint _is_unusual = default(uint);
+    [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"is_unusual", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint is_unusual
+    {
+      get { return _is_unusual; }
+      set { _is_unusual = value; }
+    }
+
+    private float _wear = default(float);
+    [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"wear", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(float))]
+    public float wear
+    {
+      get { return _wear; }
+      set { _wear = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -3053,13 +3089,22 @@ namespace SteamKit2.GC.TF2.Internal
       set { _skill_rating = value; }
     }
 
-    private uint _skill_rating_beta = default(uint);
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"skill_rating_beta", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    private uint _skill_rating_6v6 = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"skill_rating_6v6", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint skill_rating_beta
+    public uint skill_rating_6v6
     {
-      get { return _skill_rating_beta; }
-      set { _skill_rating_beta = value; }
+      get { return _skill_rating_6v6; }
+      set { _skill_rating_6v6 = value; }
+    }
+
+    private uint _skill_rating_9v9 = default(uint);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"skill_rating_9v9", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint skill_rating_9v9
+    {
+      get { return _skill_rating_9v9; }
+      set { _skill_rating_9v9 = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

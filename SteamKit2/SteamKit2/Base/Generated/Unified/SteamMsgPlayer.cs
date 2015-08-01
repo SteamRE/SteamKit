@@ -214,6 +214,308 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPlayerClient_GetSystemInformation_Request")]
+  public partial class CPlayerClient_GetSystemInformation_Request : global::ProtoBuf.IExtensible
+  {
+    public CPlayerClient_GetSystemInformation_Request() {}
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CClientSystemInfo")]
+  public partial class CClientSystemInfo : global::ProtoBuf.IExtensible
+  {
+    public CClientSystemInfo() {}
+    
+
+    private CClientSystemInfo.CPU _cpu = null;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"cpu", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public CClientSystemInfo.CPU cpu
+    {
+      get { return _cpu; }
+      set { _cpu = value; }
+    }
+
+    private CClientSystemInfo.VideoCard _video_card = null;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"video_card", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public CClientSystemInfo.VideoCard video_card
+    {
+      get { return _video_card; }
+      set { _video_card = value; }
+    }
+
+    private string _operating_system = "";
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"operating_system", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string operating_system
+    {
+      get { return _operating_system; }
+      set { _operating_system = value; }
+    }
+
+    private bool _os_64bit = default(bool);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"os_64bit", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool os_64bit
+    {
+      get { return _os_64bit; }
+      set { _os_64bit = value; }
+    }
+
+    private int _system_ram_mb = default(int);
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"system_ram_mb", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int system_ram_mb
+    {
+      get { return _system_ram_mb; }
+      set { _system_ram_mb = value; }
+    }
+
+    private string _audio_device = "";
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"audio_device", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string audio_device
+    {
+      get { return _audio_device; }
+      set { _audio_device = value; }
+    }
+
+    private string _audio_driver_version = "";
+    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"audio_driver_version", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string audio_driver_version
+    {
+      get { return _audio_driver_version; }
+      set { _audio_driver_version = value; }
+    }
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPU")]
+  public partial class CPU : global::ProtoBuf.IExtensible
+  {
+    public CPU() {}
+    
+
+    private int _speed_mhz = default(int);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"speed_mhz", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int speed_mhz
+    {
+      get { return _speed_mhz; }
+      set { _speed_mhz = value; }
+    }
+
+    private string _vendor = "";
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"vendor", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string vendor
+    {
+      get { return _vendor; }
+      set { _vendor = value; }
+    }
+
+    private int _logical_processors = default(int);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"logical_processors", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int logical_processors
+    {
+      get { return _logical_processors; }
+      set { _logical_processors = value; }
+    }
+
+    private int _physical_processors = default(int);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"physical_processors", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int physical_processors
+    {
+      get { return _physical_processors; }
+      set { _physical_processors = value; }
+    }
+
+    private bool _hyperthreading = default(bool);
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"hyperthreading", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool hyperthreading
+    {
+      get { return _hyperthreading; }
+      set { _hyperthreading = value; }
+    }
+
+    private bool _fcmov = default(bool);
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"fcmov", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool fcmov
+    {
+      get { return _fcmov; }
+      set { _fcmov = value; }
+    }
+
+    private bool _sse2 = default(bool);
+    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"sse2", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool sse2
+    {
+      get { return _sse2; }
+      set { _sse2 = value; }
+    }
+
+    private bool _sse3 = default(bool);
+    [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"sse3", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool sse3
+    {
+      get { return _sse3; }
+      set { _sse3 = value; }
+    }
+
+    private bool _ssse3 = default(bool);
+    [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"ssse3", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool ssse3
+    {
+      get { return _ssse3; }
+      set { _ssse3 = value; }
+    }
+
+    private bool _sse4a = default(bool);
+    [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"sse4a", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool sse4a
+    {
+      get { return _sse4a; }
+      set { _sse4a = value; }
+    }
+
+    private bool _sse41 = default(bool);
+    [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"sse41", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool sse41
+    {
+      get { return _sse41; }
+      set { _sse41 = value; }
+    }
+
+    private bool _sse42 = default(bool);
+    [global::ProtoBuf.ProtoMember(12, IsRequired = false, Name=@"sse42", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool sse42
+    {
+      get { return _sse42; }
+      set { _sse42 = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"VideoCard")]
+  public partial class VideoCard : global::ProtoBuf.IExtensible
+  {
+    public VideoCard() {}
+    
+
+    private string _driver = "";
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"driver", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string driver
+    {
+      get { return _driver; }
+      set { _driver = value; }
+    }
+
+    private string _driver_version = "";
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"driver_version", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string driver_version
+    {
+      get { return _driver_version; }
+      set { _driver_version = value; }
+    }
+
+    private uint _driver_date = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"driver_date", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint driver_date
+    {
+      get { return _driver_date; }
+      set { _driver_date = value; }
+    }
+
+    private string _directx_version = "";
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"directx_version", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string directx_version
+    {
+      get { return _directx_version; }
+      set { _directx_version = value; }
+    }
+
+    private string _opengl_version = "";
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"opengl_version", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string opengl_version
+    {
+      get { return _opengl_version; }
+      set { _opengl_version = value; }
+    }
+
+    private int _vendorid = default(int);
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"vendorid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int vendorid
+    {
+      get { return _vendorid; }
+      set { _vendorid = value; }
+    }
+
+    private int _deviceid = default(int);
+    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"deviceid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int deviceid
+    {
+      get { return _deviceid; }
+      set { _deviceid = value; }
+    }
+
+    private int _vram_mb = default(int);
+    [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"vram_mb", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int vram_mb
+    {
+      get { return _vram_mb; }
+      set { _vram_mb = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPlayerClient_GetSystemInformation_Response")]
+  public partial class CPlayerClient_GetSystemInformation_Response : global::ProtoBuf.IExtensible
+  {
+    public CPlayerClient_GetSystemInformation_Response() {}
+    
+
+    private CClientSystemInfo _system_info = null;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"system_info", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public CClientSystemInfo system_info
+    {
+      get { return _system_info; }
+      set { _system_info = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     public interface IPlayer
     {
       CPlayer_GetGameBadgeLevels_Response GetGameBadgeLevels(CPlayer_GetGameBadgeLevels_Request request);
@@ -226,6 +528,7 @@ namespace SteamKit2.Unified.Internal
     public interface IPlayerClient
     {
       NoResponse NotifyLastPlayedTimes(CPlayer_LastPlayedTimes_Notification request);
+    CPlayerClient_GetSystemInformation_Response GetSystemInformation(CPlayerClient_GetSystemInformation_Request request);
     
     }
     

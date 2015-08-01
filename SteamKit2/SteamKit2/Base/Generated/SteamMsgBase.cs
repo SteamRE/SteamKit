@@ -179,6 +179,15 @@ namespace SteamKit2.Internal
       get { return _trace_tag; }
       set { _trace_tag = value; }
     }
+
+    private uint _webapi_key_id = default(uint);
+    [global::ProtoBuf.ProtoMember(25, IsRequired = false, Name=@"webapi_key_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint webapi_key_id
+    {
+      get { return _webapi_key_id; }
+      set { _webapi_key_id = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -543,6 +552,24 @@ namespace SteamKit2.Internal
     {
       get { return _economy_support_supervisor; }
       set { _economy_support_supervisor = value; }
+    }
+
+    private bool _manage_pricing = default(bool);
+    [global::ProtoBuf.ProtoMember(14, IsRequired = false, Name=@"manage_pricing", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool manage_pricing
+    {
+      get { return _manage_pricing; }
+      set { _manage_pricing = value; }
+    }
+
+    private bool _broadcast_live = default(bool);
+    [global::ProtoBuf.ProtoMember(15, IsRequired = false, Name=@"broadcast_live", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool broadcast_live
+    {
+      get { return _broadcast_live; }
+      set { _broadcast_live = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
