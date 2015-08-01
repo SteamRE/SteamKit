@@ -6,6 +6,7 @@
 
 
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 
 namespace SteamKit2
 {
@@ -27,6 +28,8 @@ namespace SteamKit2
 
         sealed class User : Account
         {
+            public string Nickname { get; set; }
+
             public EFriendRelationship Relationship { get; set; }
 
             public EPersonaState PersonaState { get; set; }
@@ -35,11 +38,13 @@ namespace SteamKit2
             public uint GameAppID { get; set; }
             public GameID GameID { get; set; }
             public string GameName { get; set; }
+            public List<int> GroupIDs { get; set; }
 
 
             public User()
             {
                 GameID = new GameID();
+                GroupIDs = new List<int>();
             }
         }
 
@@ -48,6 +53,16 @@ namespace SteamKit2
             public EClanRelationship Relationship { get; set; }
         }
 
+        class Group
+        {
+            public int GroupID;
+            public string Name { get; set; }
+            public AccountList<User> Members { get; set; }
+            public Group()
+            {
+                Members = new AccountList<User>();
+            }
+        }
 
         sealed class AccountList<T> : ConcurrentDictionary<SteamID, T>
             where T : Account, new()
@@ -58,13 +73,22 @@ namespace SteamKit2
             }
         }
 
+        sealed class GroupList<T> : ConcurrentDictionary<int, T>
+            where T : Group, new()
+        {
+            public T GetGroup( int groupId )
+            {
+                return this.GetOrAdd( groupId, new T { GroupID = groupId });
+            }
+        }
+
         class AccountCache
         {
             public User LocalUser { get; private set; }
 
             public AccountList<User> Users { get; private set; }
             public AccountList<Clan> Clans { get; private set; }
-
+            public GroupList<Group> Groups { get; private set; }
             public AccountCache()
             {
                 LocalUser = new User();
@@ -72,6 +96,7 @@ namespace SteamKit2
 
                 Users = new AccountList<User>();
                 Clans = new AccountList<Clan>();
+                Groups = new GroupList<Group>();
             }
 
 
