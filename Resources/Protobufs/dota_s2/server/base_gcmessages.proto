@@ -89,6 +89,8 @@ message CMsgLobbyInviteResponse {
 	optional uint32 client_version = 3;
 	optional uint32 game_language_enum = 4;
 	optional string game_language_name = 5;
+	optional fixed64 custom_game_crc = 6;
+	optional fixed32 custom_game_timestamp = 7;
 }
 
 message CMsgKickFromParty {

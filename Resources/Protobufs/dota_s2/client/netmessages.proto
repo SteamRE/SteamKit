@@ -108,7 +108,6 @@ message CCLCMsg_ClientInfo {
 	optional bool is_replay = 4;
 	optional uint32 friends_id = 5;
 	optional string friends_name = 6;
-	repeated fixed32 custom_files = 7;
 }
 
 message CCLCMsg_Move {

@@ -257,6 +257,7 @@ message CMsgStopFindingMatch {
 message CMsgReadyUp {
 	optional .DOTALobbyReadyState state = 1 [default = DOTALobbyReadyState_UNDECLARED];
 	optional fixed64 ready_up_key = 2;
+	optional .CDOTAClientHardwareSpecs hardware_specs = 3;
 }
 
 message CMsgReadyUpStatus {
@@ -296,9 +297,29 @@ message CSourceTVGame {
 	optional uint32 dire_kills = 27;
 	optional uint32 barracks_state = 28;
 	optional uint64 group_id = 29;
-	optional uint32 sort_score = 30;
 	optional uint32 engine = 31;
 	optional uint32 broadcast_delay = 32;
+}
+
+message CSourceTVGameSmall {
+	optional uint32 activate_time = 1;
+	optional uint32 deactivate_time = 2;
+	optional uint64 server_steam_id = 3;
+	optional uint64 lobby_id = 4;
+	optional uint32 league_id = 5;
+	optional uint32 lobby_type = 6;
+	optional int32 game_time = 7;
+	optional uint32 delay = 8;
+	optional uint32 spectators = 9;
+	optional uint32 game_mode = 10;
+	optional uint32 average_mmr = 11;
+	optional uint32 engine = 12;
+	repeated uint32 hero_ids = 13;
+	repeated fixed64 steam_ids = 14;
+	optional string team_name_radiant = 15;
+	optional string team_name_dire = 16;
+	optional uint32 sort_score = 17;
+	optional float last_update_time = 18;
 }
 
 message CMsgSourceTVGamesResponse {
@@ -332,7 +353,7 @@ message CMsgGCToClientFindTopSourceTVGamesResponse {
 	optional uint32 start_game = 4;
 	optional uint32 num_games = 5;
 	optional uint32 game_list_index = 6;
-	repeated .CSourceTVGame game_list = 7;
+	repeated .CSourceTVGameSmall game_list = 7;
 	optional bool specific_games = 8;
 }
 
@@ -420,6 +441,8 @@ message CMsgPracticeLobbySetDetails {
 	optional uint32 custom_max_players = 31;
 	optional uint32 lan_host_ping_to_server_region = 32;
 	optional .DOTALobbyVisibility visibility = 33 [default = DOTALobbyVisibility_Public];
+	optional fixed64 custom_game_crc = 34;
+	optional fixed32 custom_game_timestamp = 37;
 }
 
 message CMsgPracticeLobbyCreate {
@@ -536,6 +559,8 @@ message CMsgPracticeLobbyJoin {
 	optional uint64 lobby_id = 1;
 	optional uint32 client_version = 2;
 	optional string pass_key = 3;
+	optional fixed64 custom_game_crc = 4;
+	optional fixed32 custom_game_timestamp = 5;
 }
 
 message CMsgPracticeLobbyJoinResponse {
@@ -599,6 +624,7 @@ message CMsgQuickJoinCustomLobby {
 	message RegionPing {
 		optional uint32 server_region = 1;
 		optional uint32 ping = 2;
+		optional fixed32 region_code = 3;
 	}
 
 	optional uint32 server_region = 1;
@@ -834,7 +860,6 @@ message CMsgDOTAMatch {
 	optional string dire_team_tag = 38;
 	optional uint32 series_id = 39;
 	optional uint32 series_type = 40;
-	optional uint64 custom_game_id = 42;
 	repeated .CMsgDOTAMatch.BroadcasterChannel broadcaster_channels = 43;
 	optional uint32 engine = 44;
 	optional .CMsgDOTAMatch.CustomGameData custom_game_data = 45;
@@ -953,6 +978,9 @@ message CMsgDOTAPopup {
 		MM_LOW_PRI_ONLY_CASUAL_AR = 60;
 		CNY2015_ONCE_PER_ROUND = 61;
 		LOBBY_FULL = 62;
+		TI2015_POINTS_EARNED = 63;
+		CUSTOM_GAME_INCORRECT_VERSION = 64;
+		COMPETITIVE_MM_MMR_TOO_HIGH_S2 = 65;
 	}
 
 	optional .CMsgDOTAPopup.PopupID id = 1 [default = KICKED_FROM_LOBBY];
@@ -2009,7 +2037,6 @@ message CMsgSockAddrList {
 }
 
 message CMsgMatchmakingGroupServerSample {
-	repeated .CMsgSockAddrList servers_by_group_legacy_swapped = 1;
 	repeated .CMsgSockAddrList servers_by_group = 5;
 	optional uint32 servers_to_ping = 2;
 	optional uint32 reply_odds = 3;
@@ -2034,6 +2061,7 @@ message CMsgDOTAMatchmakingStatsResponse {
 	repeated uint32 searching_players_by_group = 2;
 	repeated uint32 searching_players_by_group_source2 = 7;
 	optional uint32 disabled_groups = 3;
+	optional uint32 disabled_groups_source2 = 8;
 	optional .CMsgMatchmakingGroupServerSample gameserver_sample = 4;
 	optional .CMsgMatchmakingGroupServerSample gameserver_sample_source2 = 6;
 	optional bool maintenance_alerts = 5;
@@ -2314,6 +2342,7 @@ message CMsgDOTARedeemEventPrizeResponse {
 		Success = 0;
 		ServerError = 1;
 		InsufficientPoints = 2;
+		PointsHeld = 3;
 	}
 
 	optional .CMsgDOTARedeemEventPrizeResponse.ResultCode result = 1 [default = Success];
@@ -2712,7 +2741,6 @@ message CMsgGCToClientCustomGamePlayerCountResponse {
 }
 
 message CMsgClientToGCCustomGamesFriendsPlayedRequest {
-	optional uint32 account_id = 1;
 }
 
 message CMsgGCToClientCustomGamesFriendsPlayedResponse {
@@ -2858,11 +2886,6 @@ message CMsgDOTALobbyRichPresence {
 	optional string name = 8;
 }
 
-message CMsgClientToGCRealtimeGameStateViewing {
-	optional uint64 start_server_id = 1;
-	optional uint64 stop_server_id = 2;
-}
-
 message CMsgDOTACustomGameListenServerStartedLoading {
 	optional fixed64 lobby_id = 1;
 	optional uint64 custom_game_id = 2;
@@ -2873,5 +2896,9 @@ message CMsgDOTACustomGameListenServerStartedLoading {
 message CMsgDOTACustomGameClientFinishedLoading {
 	optional fixed64 lobby_id = 1;
 	optional uint32 loading_duration = 2;
+	optional sint32 result_code = 3;
+	optional string result_string = 4;
+	optional uint32 signon_states = 5;
+	optional string comment = 6;
 }
 

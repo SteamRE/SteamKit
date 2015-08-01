@@ -20,27 +20,3 @@ message NetMessagePacketStart {
 message NetMessagePacketEnd {
 }
 
-message NetMessageFileReceived {
-	optional uint32 transfer_id = 1;
-	optional string filename = 2;
-	optional bool isreplaydemofile = 3;
-}
-
-message NetMessageFileRequested {
-	optional uint32 transfer_id = 1;
-	optional string filename = 2;
-	optional bool isreplaydemofile = 3;
-}
-
-message NetMessageFileDenied {
-	optional uint32 transfer_id = 1;
-	optional string filename = 2;
-	optional bool isreplaydemofile = 3;
-}
-
-message NetMessageFileSent {
-	optional uint32 transfer_id = 1;
-	optional string filename = 2;
-	optional bool isreplaydemofile = 3;
-}
-

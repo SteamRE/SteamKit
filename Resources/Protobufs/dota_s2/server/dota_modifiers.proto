@@ -42,3 +42,8 @@ message CDOTAModifierBuffTableEntry {
 	optional string lua_name = 31;
 }
 
+message CDOTALuaModifierEntry {
+	required int32 modifier_type = 1;
+	required string modifier_filename = 2;
+}
+

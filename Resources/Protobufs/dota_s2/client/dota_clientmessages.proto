@@ -245,6 +245,7 @@ message CDOTAClientMsg_DemoHero {
 	optional int32 hero_id = 1;
 	repeated uint32 item_defs = 2;
 	repeated uint64 item_ids = 3;
+	optional uint32 style_index = 4;
 }
 
 message CDOTAClientMsg_ChallengeSelect {

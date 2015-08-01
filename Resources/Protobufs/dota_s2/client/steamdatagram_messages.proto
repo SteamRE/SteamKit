@@ -16,6 +16,7 @@ enum ESteamDatagramMsgID {
 	k_ESteamDatagramMsg_Stats = 13;
 	k_ESteamDatagramMsg_ClientPingSampleRequest = 14;
 	k_ESteamDatagramMsg_ClientPingSampleReply = 15;
+	k_ESteamDatagramMsg_ClientToRouterSwitchedPrimary = 16;
 }
 
 message CMsgSteamDatagramRouterPingReply {
@@ -40,12 +41,22 @@ message CMsgSteamDatagramGameserverPing {
 }
 
 message CMsgSteamDatagramGameServerAuthTicket {
+	message ExtraField {
+		optional string name = 1;
+		optional string string_value = 2;
+		optional sint32 int32_value = 3;
+		optional fixed32 fixed32_value = 4;
+		optional fixed64 fixed64_value = 5;
+	}
+
 	optional fixed32 time_expiry = 1;
 	optional fixed64 authorized_steam_id = 2;
 	optional fixed32 authorized_public_ip = 3;
 	optional fixed64 gameserver_steam_id = 4;
 	optional fixed64 gameserver_net_id = 5;
 	optional bytes signature = 6;
+	optional uint32 app_id = 7;
+	repeated .CMsgSteamDatagramGameServerAuthTicket.ExtraField extra_fields = 8;
 }
 
 message CMsgSteamDatagramGameserverSessionRequest {
@@ -158,5 +169,25 @@ message CMsgSteamDatagramClientPingSampleReply {
 
 	optional fixed32 client_cookie = 1;
 	repeated .CMsgSteamDatagramClientPingSampleReply.RoutingCluster routing_clusters = 2;
+}
+
+message CMsgSteamDatagramClientSwitchedPrimary {
+	message RouterQuality {
+		optional uint32 score = 1;
+		optional uint32 front_ping = 2;
+		optional uint32 back_ping = 3;
+		optional uint32 seconds_until_down = 4;
+	}
+
+	optional fixed32 client_cookie = 1;
+	optional fixed32 old_ip = 2;
+	optional uint32 old_port = 3;
+	optional fixed32 old_router_cluster = 4;
+	optional uint32 old_active_time = 5;
+	optional uint32 old_active_packets_recv = 6;
+	optional string old_dropped_reason = 7;
+	optional uint32 gap_ms = 8;
+	optional .CMsgSteamDatagramClientSwitchedPrimary.RouterQuality old_quality = 9;
+	optional .CMsgSteamDatagramClientSwitchedPrimary.RouterQuality new_quality = 10;
 }
 
