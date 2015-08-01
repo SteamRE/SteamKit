@@ -138,6 +138,40 @@ namespace SteamKit2
         }
 
         /// <summary>
+        /// This callback is received in response to calling <see cref="SteamApps.RequestFreeLicence"/>, informing the client of newly granted packages, if any.
+        /// </summary>
+        public sealed class FreeLicenseCallback : CallbackMsg
+        {
+            /// <summary>
+            /// Gets the result of the message.
+            /// </summary>
+            /// <value>The result.</value>
+            public EResult Result { get; private set; }
+
+            /// <summary>
+            /// Gets the list of granted apps.
+            /// </summary>
+            /// <value>List of granted apps.</value>
+            public ReadOnlyCollection<uint> GrantedApps { get; private set; }
+
+            /// <summary>
+            /// Gets the list of granted packages.
+            /// </summary>
+            /// <value>List of granted packages.</value>
+            public ReadOnlyCollection<uint> GrantedPackages { get; private set; }
+
+            internal FreeLicenseCallback( JobID jobID, CMsgClientRequestFreeLicenseResponse msg )
+            {
+                this.JobID = jobID;
+
+                this.Result = ( EResult )msg.eresult;
+
+                this.GrantedApps = new ReadOnlyCollection<uint>( msg.granted_appids );
+                this.GrantedPackages = new ReadOnlyCollection<uint>( msg.granted_packageids );
+            }
+        }
+
+        /// <summary>
         /// This callback is received in response to calling <see cref="SteamApps.GetAppOwnershipTicket"/>.
         /// </summary>
         public sealed class AppOwnershipTicketCallback : CallbackMsg
