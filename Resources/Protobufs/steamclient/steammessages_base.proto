@@ -27,6 +27,7 @@ message CMsgProtoBufHeader {
 	optional uint32 publisher_group_id = 19;
 	optional uint32 sysid = 20;
 	optional uint64 trace_tag = 21;
+	optional uint32 webapi_key_id = 25;
 }
 
 message CMsgMulti {
@@ -77,5 +78,7 @@ message CMsgAppRights {
 	optional bool edit_marketing = 11;
 	optional bool economy_support = 12;
 	optional bool economy_support_supervisor = 13;
+	optional bool manage_pricing = 14;
+	optional bool broadcast_live = 15;
 }
 

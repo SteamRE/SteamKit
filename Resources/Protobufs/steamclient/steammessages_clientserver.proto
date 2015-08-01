@@ -1086,6 +1086,7 @@ message CMsgClientWalletInfoUpdate {
 	optional bool has_wallet = 1;
 	optional int32 balance = 2;
 	optional int32 currency = 3;
+	optional int32 balance_delayed = 4;
 }
 
 message CMsgClientAppInfoUpdate {

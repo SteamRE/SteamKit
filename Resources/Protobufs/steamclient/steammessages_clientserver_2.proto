@@ -63,6 +63,11 @@ message CMsgClientUCMPublishFileResponse {
 }
 
 message CMsgClientUCMUpdatePublishedFile {
+	message KeyValueTag {
+		optional string key = 1;
+		optional string value = 2;
+	}
+
 	optional uint32 app_id = 1;
 	optional fixed64 published_file_id = 2;
 	optional string file_name = 3;
@@ -84,6 +89,9 @@ message CMsgClientUCMUpdatePublishedFile {
 	optional fixed64 content_manifest = 19;
 	optional string metadata = 20;
 	optional bool update_metadata = 21;
+	optional int32 language = 22 [default = 0];
+	repeated string removed_kvtags = 23;
+	repeated .CMsgClientUCMUpdatePublishedFile.KeyValueTag kvtags = 24;
 }
 
 message CMsgClientUCMUpdatePublishedFileResponse {
@@ -552,6 +560,17 @@ message CMsgClientGetAppBetaPasswordsResponse {
 	optional int32 eresult = 1 [default = 2];
 	optional uint32 app_id = 2;
 	repeated .CMsgClientGetAppBetaPasswordsResponse.BetaPassword betapasswords = 3;
+}
+
+message CMsgClientCheckAppBetaPassword {
+	optional uint32 app_id = 1;
+	optional string betapassword = 2;
+}
+
+message CMsgClientCheckAppBetaPasswordResponse {
+	optional int32 eresult = 1 [default = 2];
+	optional string betaname = 2;
+	optional string betapassword = 3;
 }
 
 message CMsgClientUpdateAppJobReport {

@@ -83,6 +83,7 @@ message CTwoFactor_RemoveAuthenticator_Request {
 	optional uint64 authenticator_time = 4 [(description) = "Current authenticator time"];
 	optional uint32 revocation_reason = 5 [(description) = "Reason the authenticator is being removed"];
 	optional uint32 steamguard_scheme = 6 [(description) = "Type of Steam Guard to use once token is removed"];
+	optional bool remove_all_steamguard_cookies = 7 [(description) = "Remove all steamguard cookies"];
 }
 
 message CTwoFactor_RemoveAuthenticator_Response {

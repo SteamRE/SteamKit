@@ -11,9 +11,19 @@ message CVideo_ClientGetVideoURL_Response {
 	optional string video_url = 2 [(description) = "URL for video manifest"];
 }
 
+message CVideo_UnlockedH264_Notification {
+	optional bytes encryption_key = 1;
+}
+
 service Video {
 	option (service_description) = "Video methods";
 	rpc ClientGetVideoURL (.CVideo_ClientGetVideoURL_Request) returns (.CVideo_ClientGetVideoURL_Response) {
 		option (method_description) = "Get the initial URL to begin streaming a video";
+	}
+}
+service VideoClient {
+	option (service_execution_site) = k_EProtoExecutionSiteSteamClient;
+	rpc NotifyUnlockedH264 (.CVideo_UnlockedH264_Notification) returns (.NoResponse) {
+		option (method_description) = "Notification from server to client that h264 has been unlocked";
 	}
 }

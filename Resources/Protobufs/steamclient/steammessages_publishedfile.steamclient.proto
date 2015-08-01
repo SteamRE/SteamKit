@@ -63,6 +63,7 @@ message CPublishedFile_GetDetails_Request {
 	optional bool short_description = 8 [(description) = "If true, return a short description instead of the full description."];
 	optional bool includeforsaledata = 10 [(description) = "If true, return pricing data, if applicable."];
 	optional bool includemetadata = 11 [(description) = "If true, populate the metadata field."];
+	optional int32 language = 12 [default = 0, (description) = "Specifies the localized text to return. Defaults to English."];
 }
 
 message PublishedFileDetails {
@@ -172,10 +173,35 @@ message PublishedFileDetails {
 	optional uint32 time_subscribed = 56 [(description) = "Only valid in PublishedFile.GetUserFiles and not normal PublishedFile.GetDetail calls"];
 	optional .PublishedFileDetails.ForSaleData for_sale_data = 57 [(description) = "Pricing information, if applicable."];
 	optional string metadata = 58 [(description) = "Metadata associated with the item"];
+	optional fixed64 incompatible_actor = 59;
+	optional uint32 incompatible_timestamp = 60;
+	optional int32 language = 61 [default = 0, (description) = "The language of the title and description."];
 }
 
 message CPublishedFile_GetDetails_Response {
 	repeated .PublishedFileDetails publishedfiledetails = 1;
+}
+
+message CPublishedFile_GetItemInfo_Request {
+	message WorkshopItem {
+		optional fixed64 published_file_id = 1;
+		optional uint32 time_updated = 2;
+	}
+
+	optional uint32 app_id = 1;
+	optional uint32 last_time_updated = 2;
+	repeated .CPublishedFile_GetItemInfo_Request.WorkshopItem workshop_items = 3;
+}
+
+message CPublishedFile_GetItemInfo_Response {
+	message WorkshopItemInfo {
+		optional fixed64 published_file_id = 1;
+		optional uint32 time_updated = 2;
+		optional fixed64 manifest_id = 3;
+	}
+
+	optional uint32 update_time = 1;
+	repeated .CPublishedFile_GetItemInfo_Response.WorkshopItemInfo workshop_items = 2;
 }
 
 message CPublishedFile_GetUserFiles_Request {
@@ -192,6 +218,7 @@ message CPublishedFile_GetUserFiles_Request {
 	optional uint32 creator_appid = 15 [(description) = "App Id of the app that published the files, only matched if specified."];
 	optional string match_cloud_filename = 16 [(description) = "Match this cloud filename if specified."];
 	optional uint32 cache_max_age_seconds = 27 [default = 0, (description) = "Allow stale data to be returned for the specified number of seconds."];
+	optional int32 language = 29 [default = 0, (description) = "Specifies the localized text to return. Defaults to English."];
 	optional bool totalonly = 17 [(description) = "(Optional) If true, only return the total number of files that satisfy this query."];
 	optional bool ids_only = 18 [(description) = "(Optional) If true, only return the published file ids of files that satisfy this query."];
 	optional bool return_vote_data = 19 [default = true, (description) = "Return vote data"];
@@ -237,12 +264,12 @@ message CPublishedFile_Update_Response {
 message CPublishedFile_GetChangeHistoryEntry_Request {
 	optional fixed64 publishedfileid = 1 [(description) = "Published file id of the file we'd like to get the change history for."];
 	optional uint32 timestamp = 2;
+	optional int32 language = 3;
 }
 
 message CPublishedFile_GetChangeHistoryEntry_Response {
-	optional fixed64 publishedfileid = 1;
-	optional uint32 timestamp = 2;
-	optional string change_description = 3;
+	optional string change_description = 1;
+	optional int32 language = 2;
 }
 
 message CPublishedFile_GetChangeHistory_Request {
@@ -250,12 +277,14 @@ message CPublishedFile_GetChangeHistory_Request {
 	optional bool total_only = 2 [(description) = "Return the total number of changes only."];
 	optional uint32 startindex = 3;
 	optional uint32 count = 4;
+	optional int32 language = 5 [default = 0, (description) = "Desired language"];
 }
 
 message CPublishedFile_GetChangeHistory_Response {
 	message ChangeLog {
 		optional uint32 timestamp = 1;
 		optional string change_description = 2;
+		optional int32 language = 3;
 	}
 
 	repeated .CPublishedFile_GetChangeHistory_Response.ChangeLog changes = 1;
@@ -275,6 +304,11 @@ message CPublishedFile_RefreshVotingQueue_Response {
 }
 
 message CPublishedFile_QueryFiles_Request {
+	message KVTag {
+		optional string key = 1;
+		optional string value = 2;
+	}
+
 	optional uint32 query_type = 1 [(description) = "enumeration EPublishedFileQueryType in clientenums.h"];
 	optional uint32 page = 2 [(description) = "Current page"];
 	optional uint32 numperpage = 3 [default = 1, (description) = "(Optional) The number of results, per page to return."];
@@ -291,6 +325,8 @@ message CPublishedFile_QueryFiles_Request {
 	optional uint32 days = 14 [(description) = "If query_type is k_PublishedFileQueryType_RankedByTrend, then this is the number of days to get votes for [1,7]."];
 	optional bool include_recent_votes_only = 15 [(description) = "If query_type is k_PublishedFileQueryType_RankedByTrend, then limit result set just to items that have votes within the day range given"];
 	optional uint32 cache_max_age_seconds = 31 [default = 0, (description) = "Allow stale data to be returned for the specified number of seconds."];
+	optional int32 language = 33 [default = 0, (description) = "Language to search in and also what gets returned. Defaults to English."];
+	repeated .CPublishedFile_QueryFiles_Request.KVTag required_kv_tags = 34 [(description) = "Required key-value tags to match on."];
 	optional bool totalonly = 16 [(description) = "(Optional) If true, only return the total number of files that satisfy this query."];
 	optional bool return_vote_data = 17 [(description) = "Return vote data"];
 	optional bool return_tags = 18 [(description) = "Return tags in the file details"];
@@ -322,6 +358,9 @@ service PublishedFile {
 		option (method_description) = "Publishes a clouded user file to the Workshop.";
 	}
 	rpc GetDetails (.CPublishedFile_GetDetails_Request) returns (.CPublishedFile_GetDetails_Response) {
+		option (method_description) = "Retrieves information about a set of published files.";
+	}
+	rpc GetItemInfo (.CPublishedFile_GetItemInfo_Request) returns (.CPublishedFile_GetItemInfo_Response) {
 		option (method_description) = "Retrieves information about a set of published files.";
 	}
 	rpc GetUserFiles (.CPublishedFile_GetUserFiles_Request) returns (.CPublishedFile_GetUserFiles_Response) {

@@ -66,6 +66,9 @@ enum EStreamControlMessage {
 	k_EStreamControlSetHardwareBitrateCap = 92;
 	k_EStreamControlInputControllerStateHID = 93;
 	k_EStreamControlSetTargetBitrate = 94;
+	k_EStreamControlSetControllerPairingEnabled = 95;
+	k_EStreamControlSetControllerPairingResult = 96;
+	k_EStreamControlTriggerControllerDisconnect = 97;
 }
 
 enum EStreamVersion {
@@ -473,6 +476,8 @@ message COverlayEnabledMsg {
 
 message CInputControllerAttachedMsg {
 	required int32 controller_index = 1;
+	optional bool wireless = 2;
+	optional bool pairing_in_progress = 3;
 }
 
 message CInputControllerStateMsg {
@@ -507,6 +512,7 @@ message CInputControllerStateHIDMsg {
 	optional uint32 capabilities = 3;
 	optional bytes state_payload = 4;
 	optional bytes status_payload = 5;
+	optional bytes report_bytes = 6;
 }
 
 message CInputControllerWirelessPresenceMsg {
@@ -514,10 +520,31 @@ message CInputControllerWirelessPresenceMsg {
 	optional bool wireless_available = 2;
 }
 
+message CInputControllerDetachedMsg {
+	required int32 controller_index = 1;
+}
+
 message CTriggerHapticPulseMsg {
 	required int32 controller_index = 1;
 	required int32 pad_index = 2;
 	required uint32 duration_microsec = 3;
+	optional uint32 interval_microsec = 4;
+	optional uint32 repeat_count = 5;
+	optional uint32 flags = 6;
+}
+
+message CSetControllerPairingEnabledMsg {
+	optional bool enabled = 1;
+	optional int32 timeout = 2;
+}
+
+message CSetControllerPairingResultMsg {
+	required int32 controller_index = 1;
+	optional bool commit_pairing = 2;
+}
+
+message CTriggerControllerDisconnectMsg {
+	required int32 controller_index = 1;
 }
 
 message CSetOverrideModeMsg {
@@ -527,10 +554,6 @@ message CSetOverrideModeMsg {
 
 message CSetGammaRampMsg {
 	optional bytes gamma_ramp = 1;
-}
-
-message CInputControllerDetachedMsg {
-	required int32 controller_index = 1;
 }
 
 message CStreamDataLostMsg {
