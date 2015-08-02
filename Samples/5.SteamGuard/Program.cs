@@ -73,14 +73,14 @@ namespace Sample5_SteamGuard
             // register a few callbacks we're interested in
             // these are registered upon creation to a callback manager, which will then route the callbacks
             // to the functions specified
-            new Callback<SteamClient.ConnectedCallback>( OnConnected, manager );
-            new Callback<SteamClient.DisconnectedCallback>( OnDisconnected, manager );
+            manager.Subscribe<SteamClient.ConnectedCallback>( OnConnected );
+            manager.Subscribe<SteamClient.DisconnectedCallback>( OnDisconnected );
 
-            new Callback<SteamUser.LoggedOnCallback>( OnLoggedOn, manager );
-            new Callback<SteamUser.LoggedOffCallback>( OnLoggedOff, manager );
+            manager.Subscribe<SteamUser.LoggedOnCallback>( OnLoggedOn );
+            manager.Subscribe<SteamUser.LoggedOffCallback>( OnLoggedOff );
 
             // this callback is triggered when the steam servers wish for the client to store the sentry file
-            new Callback<SteamUser.UpdateMachineAuthCallback>( OnMachineAuth, manager );
+            manager.Subscribe<SteamUser.UpdateMachineAuthCallback>( OnMachineAuth );
 
             isRunning = true;
 

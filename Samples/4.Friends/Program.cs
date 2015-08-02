@@ -28,7 +28,7 @@ namespace Sample4_Friends
         {
             if ( args.Length < 2 )
             {
-                Console.WriteLine( "Sample5: No username and password specified!" );
+                Console.WriteLine( "Sample4: No username and password specified!" );
                 return;
             }
 
@@ -49,17 +49,17 @@ namespace Sample4_Friends
             // register a few callbacks we're interested in
             // these are registered upon creation to a callback manager, which will then route the callbacks
             // to the functions specified
-            new Callback<SteamClient.ConnectedCallback>( OnConnected, manager );
-            new Callback<SteamClient.DisconnectedCallback>( OnDisconnected, manager );
+            manager.Subscribe<SteamClient.ConnectedCallback>( OnConnected );
+            manager.Subscribe<SteamClient.DisconnectedCallback>( OnDisconnected );
 
-            new Callback<SteamUser.LoggedOnCallback>( OnLoggedOn, manager );
-            new Callback<SteamUser.LoggedOffCallback>( OnLoggedOff, manager );
+            manager.Subscribe<SteamUser.LoggedOnCallback>( OnLoggedOn );
+            manager.Subscribe<SteamUser.LoggedOffCallback>( OnLoggedOff );
 
-            // we use the following callbacks for friends related activities
-            new Callback<SteamUser.AccountInfoCallback>( OnAccountInfo, manager );
-            new Callback<SteamFriends.FriendsListCallback>( OnFriendsList, manager );
-            new Callback<SteamFriends.PersonaStateCallback>( OnPersonaState, manager );
-            new Callback<SteamFriends.FriendAddedCallback>( OnFriendAdded, manager );
+            // we use following callbacks for friends related activities
+            manager.Subscribe<SteamUser.AccountInfoCallback>( OnAccountInfo );
+            manager.Subscribe<SteamFriends.FriendsListCallback>( OnFriendsList );
+            manager.Subscribe<SteamFriends.PersonaStateCallback>( OnPersonaState );
+            manager.Subscribe<SteamFriends.FriendAddedCallback>( OnFriendAdded );
 
             isRunning = true;
 
