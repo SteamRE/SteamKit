@@ -55,7 +55,7 @@ namespace Sample4_Friends
             manager.Subscribe<SteamUser.LoggedOnCallback>( OnLoggedOn );
             manager.Subscribe<SteamUser.LoggedOffCallback>( OnLoggedOff );
 
-            // we use following callbacks for friends related activities
+            // we use the following callbacks for friends related activities
             manager.Subscribe<SteamUser.AccountInfoCallback>( OnAccountInfo );
             manager.Subscribe<SteamFriends.FriendsListCallback>( OnFriendsList );
             manager.Subscribe<SteamFriends.PersonaStateCallback>( OnPersonaState );
