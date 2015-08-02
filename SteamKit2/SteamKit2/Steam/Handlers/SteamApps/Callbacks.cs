@@ -138,7 +138,7 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// This callback is received in response to calling <see cref="SteamApps.RequestFreeLicence"/>, informing the client of newly granted packages, if any.
+        /// This callback is received in response to calling <see cref="o:SteamApps.RequestFreeLicence"/>, informing the client of newly granted packages, if any.
         /// </summary>
         public sealed class FreeLicenseCallback : CallbackMsg
         {
