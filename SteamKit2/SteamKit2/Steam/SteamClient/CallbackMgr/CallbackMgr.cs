@@ -27,6 +27,7 @@ namespace SteamKit2
     /// This utility class is used for binding a callback to a function.
     /// </summary>
     /// <typeparam name="TCall">The callback type this instance will handle.</typeparam>
+    [Obsolete( "Callback<T> and related APIs are obsolete and will be removed in a future version of SteamKit. Use CallbackManager.Subscribe instead." )]
     public class Callback<TCall> : Internal.CallbackBase, IDisposable
         where TCall : class, ICallbackMsg
     {
@@ -192,6 +193,7 @@ namespace SteamKit2
         /// If the specified callback is already registered, no exception is thrown.
         /// </summary>
         /// <param name="call">The callback handler to register.</param>
+        [Obsolete( "Callback<T> and related APIs are obsolete and will be removed in a future version of SteamKit. Use CallbackManager.Subscribe instead." )]
         public void Register( Internal.CallbackBase call )
         {
             if ( registeredCallbacks.Contains( call ) )
@@ -199,15 +201,44 @@ namespace SteamKit2
 
             registeredCallbacks.Add( call );
         }
+
+        /// <summary>
+        /// Registers the provided <see cref="Action{T}"/> to receive callbacks of type <typeparamref name="TCallback" />.
+        /// </summary>
+        /// <param name="jobID">The <see cref="JobID"/> of the callbacks that should be subscribed to.
+        ///		If this is <see cref="JobID.Invalid"/>, all callbacks of type <typeparamref name="TCallback" /> will be recieved.</param>
+        /// <param name="callbackFunc">The function to invoke with the callback.</param>
+        /// <typeparam name="TCallback">The type of callback to subscribe to.</typeparam>
+        /// <returns>An <see cref="IDisposable"/>. Disposing of the return value will unsubscribe the <paramref name="callbackFunc"/>.</returns>
+        public IDisposable Subscribe<TCallback>( JobID jobID, Action<TCallback> callbackFunc )
+            where TCallback : class, ICallbackMsg
+        {
+#pragma warning disable 0618 // Callback<T> is not obsolete internally, only to consumers
+            var callback = new Callback<TCallback>( callbackFunc, this, jobID );
+#pragma warning restore 0618
+            return new Subscription( callback, this );
+        }
+
+        /// <summary>
+        /// Registers the provided <see cref="Action{T}"/> to receive callbacks of type <typeparam name="TCallback" />.
+        /// </summary>
+        /// <param name="callbackFunc">The function to invoke with the callback.</param>
+        /// <returns>An <see cref="IDisposable"/>. Disposing of the return value will unsubscribe the <paramref name="callbackFunc"/>.</returns>
+        public IDisposable Subscribe<TCallback>( Action<TCallback> callbackFunc)
+            where TCallback : class, ICallbackMsg
+        {
+            return Subscribe( JobID.Invalid, callbackFunc );
+        }
         /// <summary>
         /// Unregisters the specified callback handler.
         /// This is generally not required, as a handler will unregister itself when disposed or finalized.
         /// If the specified callback isn't registered, no exception is thrown.
         /// </summary>
         /// <param name="call">The callback handler to unregister.</param>
+        [Obsolete( "Callback<T> and related APIs are obsolete and will be removed in a future version of SteamKit. Use CallbackManager.Subscribe instead." )]
         public void Unregister( Internal.CallbackBase call )
         {
-            registeredCallbacks.Remove( call );
+            Unsubscribe( call );
         }
 
         void Handle( ICallbackMsg call )
@@ -215,6 +246,33 @@ namespace SteamKit2
             registeredCallbacks
                 .FindAll( callback => callback.CallbackType.IsAssignableFrom( call.GetType() ) ) // find handlers interested in this callback
                 .ForEach( callback => callback.Run( call ) ); // run them
+        }
+
+        internal void Unsubscribe( Internal.CallbackBase call )
+        {
+            registeredCallbacks.Remove( call );
+        }
+
+        sealed class Subscription : IDisposable
+        {
+            public Subscription(Internal.CallbackBase call, CallbackManager manager)
+            {
+                this.manager = manager;
+                this.call = call;
+            }
+
+            CallbackManager manager;
+            Internal.CallbackBase call;
+
+            void IDisposable.Dispose()
+            {
+                if (call != null && manager != null)
+                {
+                    manager.Unsubscribe( call );
+                    call = null;
+                    manager = null;
+                }
+            }
         }
     }
 }

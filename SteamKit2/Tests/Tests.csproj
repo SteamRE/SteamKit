@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CallbackManagerFacts.cs" />
+    <Compile Include="CallbackManagerFacts_LegacyBehavior.cs" />
     <Compile Include="ClientMsgFacts.cs" />
     <Compile Include="CMClientFacts.cs" />
     <Compile Include="DebugLogFacts.cs" />
