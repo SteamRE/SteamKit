@@ -34,7 +34,7 @@ namespace SteamKit2
         /// <exception cref="ArgumentNullException">
         /// 	<c>msg</c> is null.
         /// </exception>
-        [Obsolete("This method will be removed in a future version of SteamKit. Please migrate to CallbackMgr.")]
+        [Obsolete( "This method will be removed in a future version of SteamKit. Please migrate to CallbackManager." )]
         public static bool IsType<T>( this ICallbackMsg msg )
             where T : ICallbackMsg
         {
@@ -56,7 +56,7 @@ namespace SteamKit2
         /// <exception cref="ArgumentNullException">
         /// 	<c>msg</c> is null or <c>handler</c> is null.
         /// </exception>
-        [Obsolete("This method will be removed in a future version of SteamKit. Please migrate to CallbackMgr.")]
+        [Obsolete( "This method will be removed in a future version of SteamKit. Please migrate to CallbackManager." )]
         public static bool Handle<T>( this ICallbackMsg msg, Action<T> handler )
             where T : class, ICallbackMsg
         {
