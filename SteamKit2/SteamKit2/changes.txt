@@ -1,4 +1,26 @@
 ------------------------------------------------------------------------------
+v 1.6.4			Aug 03, 2015
+------------------------------------------------------------------------------
+* Added smarter server selection logic.
+* Added ability to load initial server list from Steam Directory Web API. See `SteamDirectory.Initialize`.
+* Added ability to persist internal server list. See Sample 7 for details.
+* Added `SteamFriends.InviteUserToChat`.
+* Added support in `SteamUser` for passwordless login with a login key.
+* Added `NumChatMembers`, `ChatRoomName` and `ChatMembers` to `ChatEnterCallback`.
+* Added new API for callback subscriptions, `CallbackManager.Subscribe`.
+* Added `SteamApps.RequestFreeLicense` to request Free On-Demand licences.
+* Exposed `ClientOSType` and `ClientLanguage` when logging in as a specific or as an anonymous user.
+* Fixed `KeyValue` binary deserialization returning a dummy parent node containing the actually deserialized `KeyValue`. You must change to the new `Try`-prefixed methods to adopt the fixed behavior.
+* Updated Steam enums and protobufs.
+* Updated game-related GC messages and protobufs.
+
+DEPRECATIONS
+* `ICallbackMsg.IsType<>` and `ICallbackMsg.Handle<>` are deprecated and will be removed soon in a future version of SteamKit. Please use `CallbackManager.Subscribe` instead.
+* `Callback<T>` is deprecated and will be removed in a future version of SteamKit. Please use `CallbackManager.Subscribe` instead.
+* `KeyValue.ReadAsBinary` and `KeyValue.LoadAsBinary` are deprecated and will be removed in a future version of SteamKit. Use the `Try`-prefixed methods as outlined above.
+
+
+------------------------------------------------------------------------------
 v 1.6.3			Jun 20, 2015
 ------------------------------------------------------------------------------
 
