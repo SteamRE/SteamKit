@@ -31,6 +31,11 @@ namespace SteamKit2
             /// <value>The password.</value>
             public string Password { get; set; }
 
+            /// <summary>
+            /// Gets or sets the CellID.
+            /// </summary>
+            /// <value>The CellID.</value>
+            public uint CellID { get; set; }
 
             /// <summary>
             /// Gets or sets the Steam Guard auth code used to login. This is the code sent to the user's email.
@@ -112,6 +117,12 @@ namespace SteamKit2
         /// </summary>
         public sealed class AnonymousLogOnDetails
         {
+            /// <summary>
+            /// Gets or sets the CellID.
+            /// </summary>
+            /// <value>The CellID.</value>
+            public uint CellID { get; set; }
+
             /// <summary>
             /// Gets or sets the client operating system type.
             /// </summary>
@@ -299,6 +310,7 @@ namespace SteamKit2
             logon.Body.protocol_version = MsgClientLogon.CurrentProtocol;
             logon.Body.client_os_type = ( uint )details.ClientOSType;
             logon.Body.client_language = details.ClientLanguage;
+            logon.Body.cell_id = details.CellID;
 
             logon.Body.steam2_ticket_request = details.RequestSteam2Ticket;
 
@@ -356,6 +368,7 @@ namespace SteamKit2
             logon.Body.protocol_version = MsgClientLogon.CurrentProtocol;
             logon.Body.client_os_type = ( uint )details.ClientOSType;
             logon.Body.client_language = details.ClientLanguage;
+            logon.Body.cell_id = details.CellID;
 
             // this is not a proper machine id that Steam accepts
             // but it's good enough for identifying a machine
