@@ -2,6 +2,7 @@
 using System.IO;
 using SteamKit2;
 using Xunit;
+using System.Text;
 
 namespace Tests
 {
@@ -149,7 +150,7 @@ namespace Tests
         }
 
         [Fact]
-        public void KeyValuesWritesBinary()
+        public void KeyValuesWritesBinaryToFile()
         {
             var expectedHexValue = "00525000017374617475730023444F54415F52505F424F54505241435449434500016E756D5F706172616D730030000" +
                 "17761746368696E675F736572766572005B413A313A323130383933353136393A353431325D00017761746368696E675F66726F6D5F73" +
@@ -160,7 +161,7 @@ namespace Tests
             kv.Children.Add( new KeyValue( "num_params", "0" ) );
             kv.Children.Add( new KeyValue( "watching_server", "[A:1:2108935169:5412]" ) );
             kv.Children.Add( new KeyValue( "watching_from_server", "[A:1:864468994:5412]" ) );
-
+            
             string tempFileName = null;
             try
             {
@@ -183,24 +184,47 @@ namespace Tests
         }
 
         [Fact]
+        public void KeyValuesWritesBinaryToStream()
+        {
+            var expectedHexValue = "00525000017374617475730023444F54415F52505F424F54505241435449434500016E756D5F706172616D730030000" +
+                "17761746368696E675F736572766572005B413A313A323130383933353136393A353431325D00017761746368696E675F66726F6D5F73" +
+                "6572766572005B413A313A3836343436383939343A353431325D000808";
+
+            var kv = new KeyValue( "RP" );
+            kv.Children.Add( new KeyValue( "status", "#DOTA_RP_BOTPRACTICE" ) );
+            kv.Children.Add( new KeyValue( "num_params", "0" ) );
+            kv.Children.Add( new KeyValue( "watching_server", "[A:1:2108935169:5412]" ) );
+            kv.Children.Add( new KeyValue( "watching_from_server", "[A:1:864468994:5412]" ) );
+            
+            byte[] binaryValue;
+            using ( var ms = new MemoryStream() )
+            {
+                kv.SaveToStream( ms, asBinary: true );
+                binaryValue = ms.ToArray();
+            }
+
+            var hexValue = BitConverter.ToString( binaryValue ).Replace( "-", "" );
+
+            Assert.Equal( expectedHexValue, hexValue );
+        }
+
+        [Fact]
         public void KeyValueBinarySerializationIsSymmetric()
         {
             var kv = new KeyValue( "MessageObject" );
             kv.Children.Add( new KeyValue( "key", "value" ) );
 
-            KeyValue deserializedKv;
+            var deserializedKv = new KeyValue();
+            bool loaded;
 
-            var temporaryFile = Path.GetTempFileName();
-            try
+            using ( var ms = new MemoryStream() )
             {
-                kv.SaveToFile( temporaryFile, asBinary: true );
-                var loaded = KeyValue.TryLoadAsBinary( temporaryFile, out deserializedKv );
-                Assert.True( loaded );
+                kv.SaveToStream( ms, asBinary: true );
+                ms.Seek( 0, SeekOrigin.Begin );
+                loaded = deserializedKv.TryReadAsBinary( ms );
             }
-            finally
-            {
-                File.Delete( temporaryFile );
-            }
+
+            Assert.True( loaded );
 
             Assert.Equal( kv.Name, deserializedKv.Name );
             Assert.Equal( kv.Children.Count, deserializedKv.Children.Count );
@@ -361,6 +385,75 @@ namespace Tests
             Assert.Equal( "value1", kv.Children[ 0 ].Value );
             Assert.Equal( "key2", kv.Children[ 1 ].Name );
             Assert.Equal( "value2", kv.Children[ 1 ].Value );
+        }
+
+        [Fact]
+        public void KeyValuesSavesTextToFile()
+        {
+            var expected = "\"RootNode\"\n{\n\t\"key1\"\t\t\"value1\"\n\t\"key2\"\n\t{\n\t\t\"ChildKey\"\t\t\"ChildValue\"\n\t}\n}\n";
+
+            var kv = new KeyValue( "RootNode" )
+            {
+                Children =
+                {
+                    new KeyValue( "key1", "value1" ),
+                    new KeyValue( "key2" )
+                    {
+                        Children =
+                        {
+                            new KeyValue( "ChildKey", "ChildValue" )
+                        }
+                    }
+                }
+            };
+
+            string text;
+            var temporaryFile = Path.GetTempFileName();
+            try
+            {
+                kv.SaveToFile( temporaryFile, asBinary: false );
+                text = File.ReadAllText( temporaryFile );
+            }
+            finally
+            {
+                File.Delete( temporaryFile );
+            }
+
+            Assert.Equal( expected, text );
+        }
+
+        [Fact]
+        public void KeyValuesSavesTextToStream()
+        {
+            var expected = "\"RootNode\"\n{\n\t\"key1\"\t\t\"value1\"\n\t\"key2\"\n\t{\n\t\t\"ChildKey\"\t\t\"ChildValue\"\n\t}\n}\n";
+            
+            var kv = new KeyValue( "RootNode" )
+            {
+                Children =
+                {
+                    new KeyValue( "key1", "value1" ),
+                    new KeyValue( "key2" )
+                    {
+                        Children =
+                        {
+                            new KeyValue( "ChildKey", "ChildValue" )
+                        }
+                    }
+                }
+            };
+
+            string text;
+            using ( var ms = new MemoryStream() )
+            {
+                kv.SaveToStream( ms, asBinary: false );
+                ms.Seek( 0, SeekOrigin.Begin );
+                using ( var reader = new StreamReader( ms ) )
+                {
+                    text = reader.ReadToEnd();
+                }
+            }
+
+            Assert.Equal( expected, text );
         }
 
         const string TestObjectHex = "00546573744F626A65637400016B65790076616C7565000808";
