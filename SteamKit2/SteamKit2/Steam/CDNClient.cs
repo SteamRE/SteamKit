@@ -345,7 +345,7 @@ namespace SteamKit2
 
             KeyValue initKv = DoCommand( csServer, "initsession", data, WebRequestMethods.Http.Post );
 
-            sessionId = ( ulong )initKv[ "sessionid" ].AsLong();
+            ulong.TryParse( initKv["sessionid"].AsString(), out sessionId );
             reqCounter = initKv[ "req-counter" ].AsLong();
             connectedServer = csServer;
         }
