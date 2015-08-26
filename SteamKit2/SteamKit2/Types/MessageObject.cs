@@ -43,5 +43,14 @@ namespace SteamKit2
         {
             return KeyValues.TryReadAsBinary( stream );
         }
+
+        /// <summary>
+        /// Writes this MessageObject instance to the given stream.
+        /// </summary>
+        /// <param name="stream">The stream to write to.</param>
+        public void WriteToStream( Stream stream )
+        {
+            KeyValues.SaveToStream( stream, true );
+        }
     }
 }
