@@ -195,7 +195,7 @@ namespace SteamKit2
                 }
                 finally
                 {
-                    IOKit.IOObjectRelease( platformExpert );
+                    IOObjectRelease( platformExpert );
                 }
             }
 
