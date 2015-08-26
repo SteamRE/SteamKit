@@ -28,7 +28,7 @@ namespace SteamKit2
 
 
         /// <summary>
-        /// Retrieves the number of current players or a given <see cref="GameID"/>.
+        /// Retrieves the number of current players for a given <see cref="GameID"/>.
         /// Results are returned in a <see cref="NumberOfPlayersCallback"/>.
         /// </summary>
         /// <param name="gameId">The GameID to request the number of players for.</param>
