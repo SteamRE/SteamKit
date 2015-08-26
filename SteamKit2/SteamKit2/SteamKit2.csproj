@@ -199,6 +199,7 @@
     <Compile Include="Base\Generated\SteamMsgAppTicket.cs" />
     <Compile Include="Base\Generated\SteamMsgBase.cs" />
     <Compile Include="Base\Generated\SteamMsgClientServer.cs" />
+    <Compile Include="Util\MacHelpers.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="3rd party.txt">
