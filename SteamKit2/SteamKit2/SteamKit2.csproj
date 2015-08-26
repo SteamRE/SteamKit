@@ -148,6 +148,7 @@
     <Compile Include="Types\PubFile.cs" />
     <Compile Include="Util\AsnKeyParser.cs" />
     <Compile Include="Util\Crc32.cs" />
+    <Compile Include="Util\HardwareUtils.cs" />
     <Compile Include="Util\LZMA\Common\CRC.cs" />
     <Compile Include="Util\LZMA\Common\InBuffer.cs" />
     <Compile Include="Util\LZMA\Common\OutBuffer.cs" />

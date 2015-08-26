@@ -6,13 +6,11 @@
 
 
 using System;
-using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Runtime.InteropServices;
 using System.Text;
-using Microsoft.Win32;
 
 namespace SteamKit2
 {
@@ -424,93 +422,6 @@ namespace SteamKit2
 
             endPoint = new IPEndPoint(address, port);
             return true;
-        }
-    }
-
-    static class MachineIdUtils
-    {
-        class MachineID : MessageObject
-        {
-            public MachineID()
-                : base()
-            {
-                this.KeyValues["BB3"] = new KeyValue();
-                this.KeyValues["FF2"] = new KeyValue();
-                this.KeyValues["3B3"] = new KeyValue();
-            }
-
-
-            public string BB3
-            {
-                set { this.KeyValues["BB3"].Value = value; }
-            }
-
-            public string FF2
-            {
-                set { this.KeyValues["FF2"].Value = value; }
-            }
-
-            public string ThreeB3
-            {
-                set { this.KeyValues["3B3"].Value = value; }
-            }
-        }
-
-        public static byte[] GenerateMachineID()
-        {
-            // the aug 25th 2015 CM update made well-formed machine MessageObjects required for logon
-            // this was flipped off shortly after the update rolled out, likely due to linux steamclients running on distros without a way to build a machineid
-            // so while a valid MO isn't currently (as of aug 25th) required, they could be in the future and we'll abide by The Valve Law now
-
-            var machineId = new MachineID();
-
-            using ( var ms = new MemoryStream() )
-            {
-                // TODO: each field should ideally be a different set of identifying information, but we'll just temporarily use machineguids for all three
-                machineId.BB3 = GetMachineGuid();
-                machineId.FF2 = GetMachineGuid();
-                machineId.ThreeB3 = GetMachineGuid();
-
-                machineId.WriteToStream( ms );
-
-                return ms.ToArray();
-            }
-        }
-
-        static string GetMachineGuid()
-        {
-            PlatformID platform = Environment.OSVersion.Platform;
-
-            if ( platform == PlatformID.Win32NT )
-            {
-                // if all else fails, we can at least identify steamkit clients on windows
-                string hwString = "SteamKit";
-
-                try
-                {
-                    RegistryKey localKey = RegistryKey.OpenBaseKey( Microsoft.Win32.RegistryHive.LocalMachine, RegistryView.Registry64 );
-                    localKey = localKey.OpenSubKey( @"SOFTWARE\Microsoft\Cryptography" );
-                    if ( localKey != null )
-                    {
-                        hwString = localKey.GetValue( "MachineGuid" ).ToString();
-                    }
-                }
-                catch { }
-
-                return GetHexString( CryptoHelper.SHAHash( Encoding.UTF8.GetBytes( hwString ) ) );
-            }
-            else
-            {
-                // TODO: we need a linux implementation before the machineid requirement is flipped back on
-                return GetHexString( new byte[] { 0x0 } );
-            }
-        }
-
-        static string GetHexString( byte[] data )
-        {
-            return BitConverter.ToString( data )
-                .Replace( "-", "" )
-                .ToLower();
         }
     }
 }
