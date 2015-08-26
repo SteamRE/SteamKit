@@ -149,7 +149,7 @@ namespace SteamKit2
             }
         }
 
-        static bool IsRunningOnDarwin()
+        public static bool IsRunningOnDarwin()
         {
             // Replace with a safer way if one exists in the future, such as if
             // Mono actually decides to use PlatformID.MacOSX

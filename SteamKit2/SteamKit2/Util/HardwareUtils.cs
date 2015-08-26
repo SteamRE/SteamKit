@@ -18,6 +18,13 @@ namespace SteamKit2
                 case PlatformID.Win32NT:
                 case PlatformID.Win32Windows:
                     return new WindowsInfoProvider();
+
+                case PlatformID.Unix:
+                    if ( !Utils.IsRunningOnDarwin() )
+                    {
+                        return new LinuxInfoProvider();
+                    }
+                    break;
             }
 
             return new DefaultInfoProvider();
@@ -32,7 +39,7 @@ namespace SteamKit2
     {
         public override byte[] GetMachineGuid()
         {
-            return Encoding.UTF8.GetBytes( "SteamKit-MachineGuid" );
+            return Encoding.UTF8.GetBytes( Environment.MachineName + "-SteamKit" );
         }
 
         public override byte[] GetMacAddress()
@@ -118,6 +125,43 @@ namespace SteamKit2
             var searcher = new ManagementObjectSearcher( query );
 
             return searcher.Get().Cast<ManagementObject>();
+        }
+    }
+
+    class LinuxInfoProvider : DefaultInfoProvider
+    {
+        public override byte[] GetMachineGuid()
+        {
+            string[] machineFiles =
+            {
+                "/var/lib/dbus/machine-id",
+                "/sys/class/net/eth0/address",
+                "/sys/class/net/eth1/address",
+                "/sys/class/net/eth2/address",
+                "/sys/class/net/eth3/address",
+                "/etc/hostname",
+            };
+
+            foreach ( var fileName in machineFiles )
+            {
+                try
+                {
+                    return File.ReadAllBytes( fileName );
+                }
+                catch
+                {
+                    // if we can't read a file, continue to the next until we hit one we can
+                    continue;
+                }
+            }
+
+            return base.GetMachineGuid();
+        }
+
+        public override byte[] GetDiskId()
+        {
+            // todo: need a not-so-painful way to get drive uuids
+            return base.GetDiskId();
         }
     }
 
