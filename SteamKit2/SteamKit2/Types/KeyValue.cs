@@ -264,8 +264,8 @@ namespace SteamKit2
 
 
         /// <summary>
-        /// Gets the child <see cref="SteamKit2.KeyValue"/> with the specified key.
-        /// If no child with this key exists, <see cref="Invalid"/> is returned.
+        /// Gets or sets the child <see cref="SteamKit2.KeyValue" /> with the specified key.
+        /// When retrieving by key, if no child with the given key exists, <see cref="Invalid" /> is returned.
         /// </summary>
         public KeyValue this[ string key ]
         {
@@ -280,6 +280,22 @@ namespace SteamKit2
                 }
 
                 return child;
+            }
+            set
+            {
+                var existingChild = this.Children
+                    .FirstOrDefault( c => string.Equals( c.Name, key, StringComparison.OrdinalIgnoreCase ) );
+
+                if ( existingChild != null )
+                {
+                    // if the key already exists, remove the old one
+                    this.Children.Remove( existingChild );
+                }
+
+                // ensure the given KV actually has the correct key assigned
+                value.Name = key;
+
+                this.Children.Add( value );
             }
         }
 

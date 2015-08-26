@@ -20,6 +20,50 @@ namespace Tests
         }
 
         [Fact]
+        public void KeyValueIndexerReturnsValidAndInvalid()
+        {
+            KeyValue kv = new KeyValue();
+
+            kv.Children.Add( new KeyValue( "exists", "value" ) );
+
+            Assert.Equal( kv["exists"].Value, "value" );
+            Assert.Equal( kv["thiskeydoesntexist"], KeyValue.Invalid );
+        }
+
+        [Fact]
+        public void KeyValueIndexerDoesntallowDuplicates()
+        {
+            KeyValue kv = new KeyValue();
+
+            kv["key"] = new KeyValue();
+
+            Assert.Equal( kv.Children.Count, 1 );
+
+            kv["key"] = new KeyValue();
+
+            Assert.Equal( kv.Children.Count, 1 );
+
+            kv["key2"] = new KeyValue();
+
+            Assert.Equal( kv.Children.Count, 2 );
+        }
+
+        [Fact]
+        public void KeyValueIndexerUpdatesKey()
+        {
+            KeyValue kv = new KeyValue();
+
+            KeyValue subkey = new KeyValue();
+
+            Assert.Null( subkey.Name );
+
+            kv["subkey"] = subkey;
+
+            Assert.Equal( subkey.Name, "subkey" );
+            Assert.Equal( kv["subkey"].Name, "subkey" );
+        }
+
+        [Fact]
         public void KeyValueLoadsFromString()
         {
             KeyValue kv = KeyValue.LoadFromString(
