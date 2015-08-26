@@ -23,6 +23,8 @@ namespace SteamKit2
             dispatchMap = new Dictionary<EMsg, Action<IPacketMsg>>
             {
                 { EMsg.ClientGetNumberOfCurrentPlayersResponse, HandleNumberOfPlayersResponse },
+                { EMsg.ClientLBSFindOrCreateLBResponse, HandleFindOrCreateLBResponse },
+                { EMsg.ClientLBSGetLBEntriesResponse, HandleGetLBEntriesRespons },
             };
         }
 
@@ -45,6 +47,85 @@ namespace SteamKit2
             return msg.SourceJobID;
         }
 
+        /// <summary>
+        /// Asks the Steam back-end for a leaderboard by name for a given appid.
+        /// Results are returned in a <see cref="FindOrCreateLeaderboardCallback"/>.
+        /// </summary>
+        /// <param name="appId">The AppID to request a leaderboard for.</param>
+        /// <param name="name">Name of the leaderboard to request.</param>
+        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="FindOrCreateLeaderboardCallback"/>.</returns>
+        public JobID FindLeaderboard( uint appId, string name )
+        {
+            var msg = new ClientMsgProtobuf<CMsgClientLBSFindOrCreateLB>( EMsg.ClientLBSFindOrCreateLB );
+            msg.SourceJobID = Client.GetNextJobID();
+
+            // routing_appid has to be set correctly to receive a response
+            msg.ProtoHeader.routing_appid = appId;
+
+            msg.Body.app_id = appId;
+            msg.Body.leaderboard_name = name;
+            msg.Body.create_if_not_found = false;
+
+            Client.Send( msg );
+
+            return msg.SourceJobID;
+        }
+        /// <summary>
+        /// Asks the Steam back-end for a leaderboard by name, and will create it if it's not yet.
+        /// Results are returned in a <see cref="FindOrCreateLeaderboardCallback"/>.
+        /// </summary>
+        /// <param name="appId">The AppID to request a leaderboard for.</param>
+        /// <param name="name">Name of the leaderboard to create.</param>
+        /// <param name="sortMethod">Sort method to use for this leaderboard</param>
+        /// <param name="displayType">Display type for this leaderboard.</param>
+        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="FindOrCreateLeaderboardCallback"/>.</returns>
+        public JobID CreateLeaderboard( uint appId, string name, ELeaderboardSortMethod sortMethod, ELeaderboardDisplayType displayType )
+        {
+            var msg = new ClientMsgProtobuf<CMsgClientLBSFindOrCreateLB>( EMsg.ClientLBSFindOrCreateLB );
+            msg.SourceJobID = Client.GetNextJobID();
+
+            // routing_appid has to be set correctly to receive a response
+            msg.ProtoHeader.routing_appid = appId;
+
+            msg.Body.app_id = appId;
+            msg.Body.leaderboard_name = name;
+            msg.Body.leaderboard_display_type = ( int )displayType;
+            msg.Body.leaderboard_sort_method = ( int )sortMethod;
+            msg.Body.create_if_not_found = true;
+
+            Client.Send( msg );
+
+            return msg.SourceJobID;
+        }
+
+        /// <summary>
+        /// Asks the Steam back-end for a set of rows in the leaderboard.
+        /// Results are returned in a <see cref="LeaderboardEntriesCallback"/>.
+        /// </summary>
+        /// <param name="appId">The AppID to request leaderboard rows for.</param>
+        /// <param name="id">ID of the leaderboard to view.</param>
+        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="FindOrCreateLeaderboardCallback"/>.</returns>
+        /// <param name="rangeStart">Range start or 0.</param>
+        /// <param name="rangeEnd">Range end or max leaderboard entries.</param>
+        /// <param name="dataRequest">Type of request.</param>
+        public JobID GetLeaderboardEntries( uint appId, int id, int rangeStart, int rangeEnd, ELeaderboardDataRequest dataRequest )
+        {
+            var msg = new ClientMsgProtobuf<CMsgClientLBSGetLBEntries>( EMsg.ClientLBSGetLBEntries );
+            msg.SourceJobID = Client.GetNextJobID();
+
+            // routing_appid has to be set correctly to receive a response
+            msg.ProtoHeader.routing_appid = appId;
+
+            msg.Body.app_id = ( int )appId;
+            msg.Body.leaderboard_id = id;
+            msg.Body.leaderboard_data_request = ( int )dataRequest;
+            msg.Body.range_start = rangeStart;
+            msg.Body.range_end = rangeEnd;
+
+            Client.Send( msg );
+
+            return msg.SourceJobID;
+        }
 
         /// <summary>
         /// Handles a client message. This should not be called directly.
@@ -71,6 +152,20 @@ namespace SteamKit2
             var msg = new ClientMsg<MsgClientGetNumberOfCurrentPlayersResponse>( packetMsg );
 
             var callback = new NumberOfPlayersCallback( msg.Header.TargetJobID, msg.Body );
+            Client.PostCallback( callback );
+        }
+        void HandleFindOrCreateLBResponse( IPacketMsg packetMsg )
+        {
+            var msg = new ClientMsgProtobuf<CMsgClientLBSFindOrCreateLBResponse>( packetMsg );
+
+            var callback = new FindOrCreateLeaderboardCallback( msg.TargetJobID, msg.Body );
+            Client.PostCallback( callback );
+        }
+        void HandleGetLBEntriesRespons( IPacketMsg packetMsg )
+        {
+            var msg = new ClientMsgProtobuf<CMsgClientLBSGetLBEntriesResponse>( packetMsg );
+
+            var callback = new LeaderboardEntriesCallback( msg.TargetJobID, msg.Body );
             Client.PostCallback( callback );
         }
         #endregion
