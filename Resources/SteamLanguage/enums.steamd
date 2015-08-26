@@ -961,6 +961,14 @@ enum ELeaderboardSortMethod
 	Descending = 2;
 };
 
+enum ELeaderboardDisplayType
+{
+	None = 0; 
+	Numeric = 1;
+	TimeSeconds = 2;
+	TimeMilliSeconds = 3;
+};
+
 enum ELeaderboardUploadScoreMethod
 {
 	None = 0;
