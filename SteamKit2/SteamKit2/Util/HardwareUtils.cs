@@ -12,6 +12,7 @@ using static SteamKit2.Util.MacHelpers.LibC;
 using static SteamKit2.Util.MacHelpers.CoreFoundation;
 using static SteamKit2.Util.MacHelpers.DiskArbitration;
 using static SteamKit2.Util.MacHelpers.IOKit;
+using System.Threading.Tasks;
 
 namespace SteamKit2
 {
@@ -317,7 +318,37 @@ namespace SteamKit2
             }
         }
 
-        public static byte[] GenerateMachineID()
+
+        static Task<MachineID> generateTask;
+
+
+        public static void Init()
+        {
+            generateTask = Task.Factory.StartNew( GenerateMachineID );
+        }
+
+        public static byte[] GetMachineID()
+        {
+            bool didComplete = generateTask.Wait( TimeSpan.FromSeconds( 30 ) );
+
+            if ( !didComplete )
+            {
+                DebugLog.WriteLine( nameof( HardwareUtils ), "Unable to generate machine_id in a timely fashion, logons may fail" );
+                return null;
+            }
+
+            MachineID machineId = generateTask.Result;
+
+            using ( MemoryStream ms = new MemoryStream() )
+            {
+                machineId.WriteToStream( ms );
+
+                return ms.ToArray();
+            }
+        }
+
+
+        static MachineID GenerateMachineID()
         {
             // the aug 25th 2015 CM update made well-formed machine MessageObjects required for logon
             // this was flipped off shortly after the update rolled out, likely due to linux steamclients running on distros without a way to build a machineid
@@ -325,20 +356,15 @@ namespace SteamKit2
 
             var machineId = new MachineID();
 
-            using ( var ms = new MemoryStream() )
-            {
-                MachineInfoProvider provider = MachineInfoProvider.GetProvider();
+            MachineInfoProvider provider = MachineInfoProvider.GetProvider();
 
-                machineId.SetBB3( GetHexString( provider.GetMachineGuid() ) );
-                machineId.SetFF2( GetHexString( provider.GetMacAddress() ) );
-                machineId.Set3B3( GetHexString( provider.GetDiskId() ) );
+            machineId.SetBB3( GetHexString( provider.GetMachineGuid() ) );
+            machineId.SetFF2( GetHexString( provider.GetMacAddress() ) );
+            machineId.Set3B3( GetHexString( provider.GetDiskId() ) );
 
-                // 333 is currently unused
+            // 333 is some sort of user supplied data and is currently unused
 
-                machineId.WriteToStream( ms );
-
-                return ms.ToArray();
-            }
+            return machineId;
         }
 
         static string GetHexString( byte[] data )
