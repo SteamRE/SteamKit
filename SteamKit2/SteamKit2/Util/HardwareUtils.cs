@@ -143,6 +143,7 @@ namespace SteamKit2
         {
             string[] machineFiles =
             {
+                "/etc/machine-id", // present on at least some gentoo systems
                 "/var/lib/dbus/machine-id",
                 "/sys/class/net/eth0/address",
                 "/sys/class/net/eth1/address",
