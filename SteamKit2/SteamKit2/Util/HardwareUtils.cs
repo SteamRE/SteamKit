@@ -127,6 +127,7 @@ namespace SteamKit2
             return Encoding.UTF8.GetBytes( serialNumber );
         }
 
+
         IEnumerable<ManagementObject> WmiQuery( string queryFormat, params object[] args )
         {
             string query = string.Format( queryFormat, args );
@@ -170,8 +171,57 @@ namespace SteamKit2
 
         public override byte[] GetDiskId()
         {
-            // todo: need a not-so-painful way to get drive uuids
+            string[] bootParams = GetBootOptions();
+
+            if ( bootParams != null )
+            {
+                string[] paramsToCheck =
+                {
+                    "root=UUID=",
+                    "root=PARTUUID=",
+                };
+
+                foreach ( string param in paramsToCheck )
+                {
+                    string paramValue = GetParamValue( bootParams, param );
+
+                    if ( !string.IsNullOrEmpty( paramValue ) )
+                    {
+                        return Encoding.UTF8.GetBytes( paramValue );
+                    }
+                }
+
+                // todo: need to account for distros or partition configurations where root isn't mounted by UUID
+            }
+
             return base.GetDiskId();
+        }
+
+
+        string[] GetBootOptions()
+        {
+            string bootOptions;
+
+            try
+            {
+                bootOptions = File.ReadAllText( "/proc/cmdline" );
+            }
+            catch
+            {
+                return null;
+            }
+
+            return bootOptions.Split( ' ' );
+        }
+        string GetParamValue( string[] bootOptions, string param )
+        {
+            string paramString = bootOptions
+                .FirstOrDefault( p => p.StartsWith( param, StringComparison.OrdinalIgnoreCase ) );
+
+            if ( paramString == null )
+                return null;
+
+            return paramString.Substring( param.Length );
         }
     }
 
