@@ -7,6 +7,7 @@
 
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using SteamKit2.Internal;
 
@@ -102,6 +103,10 @@ namespace SteamKit2
                 /// Gets the <see cref="UGCHandle"/> attached to this entry.
                 /// </summary>
                 public UGCHandle UGCId { get; private set; }
+                /// <summary>
+                /// Extra game-defined information regarding how the user got that score.
+                /// </summary>
+                public ReadOnlyCollection<int> Details { get; private set; }
 
 
                 internal LeaderboardEntry( CMsgClientLBSGetLBEntriesResponse.Entry entry )
@@ -111,7 +116,14 @@ namespace SteamKit2
                     SteamID = new SteamID( entry.steam_id_user );
                     UGCId = new UGCHandle( entry.ugc_id );
 
-                    // entry.details // TODO: ???
+                    var details = new List<int>();
+
+                    using ( var stream = new MemoryStream( entry.details ) )
+                    {
+                        details.Add( stream.ReadInt32() );
+                    }
+
+                    Details = new ReadOnlyCollection<int>( details );
                 }
             }
 
