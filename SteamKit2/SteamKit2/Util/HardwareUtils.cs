@@ -174,25 +174,27 @@ namespace SteamKit2
         {
             string[] bootParams = GetBootOptions();
 
-            if ( bootParams != null )
+            string[] paramsToCheck =
             {
-                string[] paramsToCheck =
-                {
-                    "root=UUID=",
-                    "root=PARTUUID=",
-                };
+                "root=UUID=",
+                "root=PARTUUID=",
+            };
 
-                foreach ( string param in paramsToCheck )
-                {
-                    string paramValue = GetParamValue( bootParams, param );
+            foreach ( string param in paramsToCheck )
+            {
+                string paramValue = GetParamValue( bootParams, param );
 
-                    if ( !string.IsNullOrEmpty( paramValue ) )
-                    {
-                        return Encoding.UTF8.GetBytes( paramValue );
-                    }
+                if ( !string.IsNullOrEmpty( paramValue ) )
+                {
+                    return Encoding.UTF8.GetBytes( paramValue );
                 }
+            }
 
-                // todo: need to account for distros or partition configurations where root isn't mounted by UUID
+            string[] diskUuids = GetDiskUUIDs();
+
+            if ( diskUuids.Length > 0 )
+            {
+                return Encoding.UTF8.GetBytes( diskUuids.FirstOrDefault() );
             }
 
             return base.GetDiskId();
@@ -209,10 +211,27 @@ namespace SteamKit2
             }
             catch
             {
-                return null;
+                return new string[0];
             }
 
             return bootOptions.Split( ' ' );
+        }
+        string[] GetDiskUUIDs()
+        {
+            string[] files;
+
+            try
+            {
+                files = Directory.GetFiles( "/dev/disk/by-uuid" );
+            }
+            catch
+            {
+                return new string[0];
+            }
+
+            return files
+                .Select( f => Path.GetFileName( f ) )
+                .ToArray();
         }
         string GetParamValue( string[] bootOptions, string param )
         {
