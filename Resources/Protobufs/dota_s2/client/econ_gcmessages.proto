@@ -221,6 +221,32 @@ enum EGCPartnerRequestResponse {
 	k_EPartnerRequestUnsupportedPartnerType = 4;
 }
 
+enum EGCMsgInitiateTradeResponse {
+	k_EGCMsgInitiateTradeResponse_Accepted = 0;
+	k_EGCMsgInitiateTradeResponse_Declined = 1;
+	k_EGCMsgInitiateTradeResponse_VAC_Banned_Initiator = 2;
+	k_EGCMsgInitiateTradeResponse_VAC_Banned_Target = 3;
+	k_EGCMsgInitiateTradeResponse_Target_Already_Trading = 4;
+	k_EGCMsgInitiateTradeResponse_Disabled = 5;
+	k_EGCMsgInitiateTradeResponse_NotLoggedIn = 6;
+	k_EGCMsgInitiateTradeResponse_Cancel = 7;
+	k_EGCMsgInitiateTradeResponse_TooSoon = 8;
+	k_EGCMsgInitiateTradeResponse_TooSoonPenalty = 9;
+	k_EGCMsgInitiateTradeResponse_Trade_Banned_Initiator = 10;
+	k_EGCMsgInitiateTradeResponse_Trade_Banned_Target = 11;
+	k_EGCMsgInitiateTradeResponse_Free_Account_Initiator_DEPRECATED = 12;
+	k_EGCMsgInitiateTradeResponse_Shared_Account_Initiator = 13;
+	k_EGCMsgInitiateTradeResponse_Service_Unavailable = 14;
+	k_EGCMsgInitiateTradeResponse_Target_Blocked = 15;
+	k_EGCMsgInitiateTradeResponse_NeedVerifiedEmail = 16;
+	k_EGCMsgInitiateTradeResponse_NeedSteamGuard = 17;
+	k_EGCMsgInitiateTradeResponse_SteamGuardDuration = 18;
+	k_EGCMsgInitiateTradeResponse_TheyCannotTrade = 19;
+	k_EGCMsgInitiateTradeResponse_Recent_Password_Reset = 20;
+	k_EGCMsgInitiateTradeResponse_Using_New_Device = 21;
+	k_EGCMsgInitiateTradeResponse_Sent_Invalid_Cookie = 22;
+}
+
 message CMsgApplyAutograph {
 	optional uint64 autograph_item_id = 1;
 	optional uint64 item_item_id = 2;
@@ -494,6 +520,7 @@ message CMsgClientToGCWrapAndDeliverGiftResponse {
 	optional uint32 gifting_uses = 4;
 	optional int32 gifting_max = 5;
 	optional uint32 gifting_window_hours = 6;
+	optional .EGCMsgInitiateTradeResponse trade_restriction = 7 [default = k_EGCMsgInitiateTradeResponse_Accepted];
 }
 
 message CMsgClientToGCUnwrapGift {

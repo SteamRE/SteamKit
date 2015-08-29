@@ -436,6 +436,7 @@ message ProtoFlattenedSerializerField_t {
 	optional int32 field_serializer_name_sym = 7;
 	optional int32 field_serializer_version = 8;
 	optional int32 send_node_sym = 9;
+	optional int32 var_encoder_sym = 10;
 }
 
 message ProtoFlattenedSerializer_t {

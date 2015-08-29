@@ -180,14 +180,16 @@ message CMsgSteamDatagramClientSwitchedPrimary {
 	}
 
 	optional fixed32 client_cookie = 1;
-	optional fixed32 old_ip = 2;
-	optional uint32 old_port = 3;
-	optional fixed32 old_router_cluster = 4;
-	optional uint32 old_active_time = 5;
-	optional uint32 old_active_packets_recv = 6;
-	optional string old_dropped_reason = 7;
+	optional fixed32 from_ip = 2;
+	optional uint32 from_port = 3;
+	optional fixed32 from_router_cluster = 4;
+	optional uint32 from_active_time = 5;
+	optional uint32 from_active_packets_recv = 6;
+	optional string from_dropped_reason = 7;
 	optional uint32 gap_ms = 8;
-	optional .CMsgSteamDatagramClientSwitchedPrimary.RouterQuality old_quality = 9;
-	optional .CMsgSteamDatagramClientSwitchedPrimary.RouterQuality new_quality = 10;
+	optional .CMsgSteamDatagramClientSwitchedPrimary.RouterQuality from_quality_now = 9;
+	optional .CMsgSteamDatagramClientSwitchedPrimary.RouterQuality to_quality_now = 10;
+	optional .CMsgSteamDatagramClientSwitchedPrimary.RouterQuality from_quality_then = 11;
+	optional .CMsgSteamDatagramClientSwitchedPrimary.RouterQuality to_quality_then = 12;
 }
 

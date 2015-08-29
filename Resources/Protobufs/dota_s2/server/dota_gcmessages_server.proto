@@ -84,11 +84,13 @@ message CMsgGameserverCrash {
 	optional fixed64 lobby_id = 2;
 	optional .DOTA_GameState game_state = 3 [default = DOTA_GAMERULES_STATE_INIT];
 	optional fixed32 sentinel_save_time = 4;
+	optional fixed64 custom_game_id = 11;
 	optional fixed64 server_steam_id = 5;
 	optional fixed32 server_public_ip_addr = 6;
 	optional uint32 server_port = 7;
 	optional uint32 server_cluster = 8;
 	optional uint32 pid = 9;
+	optional uint32 engine = 10;
 }
 
 message CMsgConnectedPlayers {

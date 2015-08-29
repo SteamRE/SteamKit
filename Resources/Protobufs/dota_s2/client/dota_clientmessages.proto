@@ -243,9 +243,10 @@ message CDOTAClientMsg_EventCNY2015Cmd {
 
 message CDOTAClientMsg_DemoHero {
 	optional int32 hero_id = 1;
-	repeated uint32 item_defs = 2;
-	repeated uint64 item_ids = 3;
-	optional uint32 style_index = 4;
+	optional int32 hero_id_to_spawn = 2;
+	repeated uint32 item_defs = 3;
+	repeated uint64 item_ids = 4;
+	optional uint32 style_index = 5;
 }
 
 message CDOTAClientMsg_ChallengeSelect {
