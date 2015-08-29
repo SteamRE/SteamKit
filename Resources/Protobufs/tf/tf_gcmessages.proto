@@ -115,6 +115,7 @@ enum ETFGCMsg {
 	k_EMsgGC_SpyVsEngyWar_SetKillCamMessage = 6509;
 	k_EMsgGC_WorldItemPlacement_Attribute = 6510;
 	k_EMsgGC_WorldItemPlacement_Update = 6511;
+	k_EMsgGC_Match_Result = 6512;
 	k_EMsgGCDev_GrantWarKill = 10001;
 }
 
@@ -177,6 +178,13 @@ enum ServerMatchmakingState {
 	ServerMatchmakingState_EMPTY = 2;
 	ServerMatchmakingState_ACTIVE_SLOTS_AVAILABLE = 3;
 	ServerMatchmakingState_ACTIVE_FULL = 4;
+}
+
+enum TF_SkillRatingMatchType {
+	TF_SkillRatingMatchType_INVALID = -1;
+	TF_SkillRatingMatchType_PUBLIC = 0;
+	TF_SkillRatingMatchType_LADDER_6V6 = 1;
+	TF_SkillRatingMatchType_LADDER_9V9 = 2;
 }
 
 message CMsgTFGoldenWrenchBroadcast {
@@ -501,7 +509,7 @@ message CSOTFPartyMember {
 	optional uint32 badge_level = 4;
 	optional bool squad_surplus = 5;
 	optional bool is_banned = 8 [default = false];
-	optional bool owns_ladder_ticket = 9;
+	optional bool owns_ladder_pass = 9;
 	optional bool phone_verified = 10 [default = false];
 }
 
@@ -644,7 +652,7 @@ message CSOTFLobby {
 	optional string map_name = 38;
 	optional string mission_name = 39;
 	optional uint32 match_group = 41;
-	optional uint32 match_id = 30;
+	optional uint64 match_id = 30 [default = 0];
 	optional fixed32 replay_salt = 35;
 }
 
@@ -985,15 +993,8 @@ message CGCMsgTFPlayerSkillRatingAdjustment {
 		optional int32 adjustment = 3;
 	}
 
-	enum MatchType {
-		INVALID = -1;
-		PUBLIC = 0;
-		LADDER_6V6 = 1;
-		LADDER_9V9 = 2;
-	}
-
 	repeated .CGCMsgTFPlayerSkillRatingAdjustment.Player players = 1;
-	optional .CGCMsgTFPlayerSkillRatingAdjustment.MatchType match_type = 2 [default = INVALID];
+	optional .TF_SkillRatingMatchType match_type = 2 [default = TF_SkillRatingMatchType_INVALID];
 }
 
 message CSOTFSpyVsEngyWarData {
@@ -1057,5 +1058,39 @@ message CGCMsg_WorldItemPlacement_Update {
 	optional float ang_z = 7;
 	optional bool force_remove_all = 8;
 	optional string attrib_name = 9;
+}
+
+message CMsgGC_Match_Result {
+	message Player {
+		optional fixed64 steam_id = 1;
+		optional uint32 team = 2;
+		optional uint32 score = 3;
+		optional uint32 ping = 4;
+		optional uint32 flags = 5;
+		optional uint32 skillrating = 6;
+		optional uint32 skillrating_change = 7;
+		optional uint32 classes_played = 8;
+	}
+
+	enum Status {
+		MATCH_SUCCEEDED = 0;
+		MATCH_FAILED_GC = 1;
+		MATCH_FAILED_TRUSTED = 2;
+		MATCH_FAILED_LEAVER = 3;
+		MATCH_FAILED_RATING = 4;
+	}
+
+	optional uint64 match_id = 1 [(key_field) = true];
+	optional .TF_SkillRatingMatchType match_type = 2 [default = TF_SkillRatingMatchType_INVALID];
+	optional .CMsgGC_Match_Result.Status status = 3 [default = MATCH_SUCCEEDED];
+	optional uint32 duration = 4;
+	optional uint32 red_score = 5;
+	optional uint32 blue_score = 6;
+	optional uint32 winning_team = 7;
+	optional string map_name = 8;
+	optional uint32 game_type = 9 [default = 0];
+	repeated .CMsgGC_Match_Result.Player players = 10;
+	optional uint32 red_skillrating = 11;
+	optional uint32 blue_skillrating = 12;
 }
 

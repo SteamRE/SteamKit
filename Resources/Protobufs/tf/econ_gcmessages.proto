@@ -159,6 +159,11 @@ enum EGCItemMsg {
 	k_EMsgGCApplyDuckToken = 2560;
 	k_EMsgGCQuestComplete_Request = 2561;
 	k_EMsgGCQuestObjective_PointsChange = 2562;
+	k_EMsgGCQuestObjective_PointsChangeResponse = 2563;
+	k_EMsgGCQuestObjective_RequestLoanerItems = 2564;
+	k_EMsgGCQuestObjective_RequestLoanerResponse = 2565;
+	k_EMsgGCApplyStrangeCountTransfer = 2566;
+	k_EMsgGCCraftCollectionUpgrade = 2567;
 }
 
 enum EGCMsgResponse {
@@ -328,5 +333,9 @@ message CMsgGCQuestComplete_Request {
 }
 
 message CMsgGCQuestCompleted {
+}
+
+message CMsgCraftCollectionUpgrade {
+	repeated uint64 item_id = 1;
 }
 
