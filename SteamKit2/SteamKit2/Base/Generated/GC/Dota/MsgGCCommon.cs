@@ -407,6 +407,15 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _curr_all_hero_challenge_id; }
       set { _curr_all_hero_challenge_id = value; }
     }
+
+    private uint _play_time_points = default(uint);
+    [global::ProtoBuf.ProtoMember(68, IsRequired = false, Name=@"play_time_points", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint play_time_points
+    {
+      get { return _play_time_points; }
+      set { _play_time_points = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -8034,6 +8043,12 @@ namespace SteamKit2.GC.Dota.Internal
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCApplyGemCombiner", Value=7603)]
       k_EMsgClientToGCApplyGemCombiner = 7603,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCCreateStaticRecipe", Value=7604)]
+      k_EMsgClientToGCCreateStaticRecipe = 7604,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCCreateStaticRecipeResponse", Value=7605)]
+      k_EMsgClientToGCCreateStaticRecipeResponse = 7605,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCDev_GrantWarKill", Value=8001)]
       k_EMsgGCDev_GrantWarKill = 8001,

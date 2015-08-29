@@ -45,6 +45,15 @@ namespace SteamKit2.Unified.Internal
       get { return _usage; }
       set { _usage = value; }
     }
+
+    private string _device_name = "";
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"device_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string device_name
+    {
+      get { return _device_name; }
+      set { _device_name = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -99,6 +108,42 @@ namespace SteamKit2.Unified.Internal
     {
       get { return _usage; }
       set { _usage = value; }
+    }
+
+    private string _device_name = "";
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"device_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string device_name
+    {
+      get { return _device_name; }
+      set { _device_name = value; }
+    }
+
+    private string _device_model = "";
+    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"device_model", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string device_model
+    {
+      get { return _device_model; }
+      set { _device_model = value; }
+    }
+
+    private string _device_serial = "";
+    [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"device_serial", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string device_serial
+    {
+      get { return _device_serial; }
+      set { _device_serial = value; }
+    }
+
+    private uint _device_provisioning_id = default(uint);
+    [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"device_provisioning_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint device_provisioning_id
+    {
+      get { return _device_provisioning_id; }
+      set { _device_provisioning_id = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

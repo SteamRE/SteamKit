@@ -2230,6 +2230,34 @@ namespace SteamKit2.GC.CSGO.Internal
       get { return _enemy_kills_agg; }
     }
   
+
+    private CMsgGCCStrike15_v2_MatchmakingServerRoundStats.DropInfo _drop_info = null;
+    [global::ProtoBuf.ProtoMember(26, IsRequired = false, Name=@"drop_info", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public CMsgGCCStrike15_v2_MatchmakingServerRoundStats.DropInfo drop_info
+    {
+      get { return _drop_info; }
+      set { _drop_info = value; }
+    }
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"DropInfo")]
+  public partial class DropInfo : global::ProtoBuf.IExtensible
+  {
+    public DropInfo() {}
+    
+
+    private uint _account_mvp = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_mvp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint account_mvp
+    {
+      get { return _account_mvp; }
+      set { _account_mvp = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -4391,13 +4419,13 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _desc = value; }
     }
 
-    private uint _picks = default(uint);
-    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"picks", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    private uint _picks__deprecated = default(uint);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"picks__deprecated", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint picks
+    public uint picks__deprecated
     {
-      get { return _picks; }
-      set { _picks = value; }
+      get { return _picks__deprecated; }
+      set { _picks__deprecated = value; }
     }
     private readonly global::System.Collections.Generic.List<CDataGCCStrike15_v2_TournamentGroupTeam> _teams = new global::System.Collections.Generic.List<CDataGCCStrike15_v2_TournamentGroupTeam>();
     [global::ProtoBuf.ProtoMember(5, Name=@"teams", DataFormat = global::ProtoBuf.DataFormat.Default)]
@@ -4440,6 +4468,30 @@ namespace SteamKit2.GC.CSGO.Internal
       get { return _points_per_pick; }
       set { _points_per_pick = value; }
     }
+    private readonly global::System.Collections.Generic.List<CDataGCCStrike15_v2_TournamentGroup.Picks> _picks = new global::System.Collections.Generic.List<CDataGCCStrike15_v2_TournamentGroup.Picks>();
+    [global::ProtoBuf.ProtoMember(10, Name=@"picks", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CDataGCCStrike15_v2_TournamentGroup.Picks> picks
+    {
+      get { return _picks; }
+    }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Picks")]
+  public partial class Picks : global::ProtoBuf.IExtensible
+  {
+    public Picks() {}
+    
+    private readonly global::System.Collections.Generic.List<int> _pickids = new global::System.Collections.Generic.List<int>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"pickids", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public global::System.Collections.Generic.List<int> pickids
+    {
+      get { return _pickids; }
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

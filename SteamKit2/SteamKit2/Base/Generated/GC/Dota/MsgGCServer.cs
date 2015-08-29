@@ -188,6 +188,15 @@ namespace SteamKit2.GC.Dota.Internal
       set { _sentinel_save_time = value; }
     }
 
+    private ulong _custom_game_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"custom_game_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong custom_game_id
+    {
+      get { return _custom_game_id; }
+      set { _custom_game_id = value; }
+    }
+
     private ulong _server_steam_id = default(ulong);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"server_steam_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
     [global::System.ComponentModel.DefaultValue(default(ulong))]
@@ -231,6 +240,15 @@ namespace SteamKit2.GC.Dota.Internal
     {
       get { return _pid; }
       set { _pid = value; }
+    }
+
+    private uint _engine = default(uint);
+    [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"engine", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint engine
+    {
+      get { return _engine; }
+      set { _engine = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

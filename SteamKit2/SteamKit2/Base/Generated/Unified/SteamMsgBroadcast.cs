@@ -268,6 +268,24 @@ namespace SteamKit2.Unified.Internal
       get { return _viewer_token; }
       set { _viewer_token = value; }
     }
+
+    private uint _client_ip = default(uint);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"client_ip", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint client_ip
+    {
+      get { return _client_ip; }
+      set { _client_ip = value; }
+    }
+
+    private uint _client_cell = default(uint);
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"client_cell", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint client_cell
+    {
+      get { return _client_cell; }
+      set { _client_cell = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -657,6 +675,24 @@ namespace SteamKit2.Unified.Internal
       get { return _broadcast_id; }
       set { _broadcast_id = value; }
     }
+
+    private uint _client_ip = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"client_ip", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint client_ip
+    {
+      get { return _client_ip; }
+      set { _client_ip = value; }
+    }
+
+    private uint _client_cell = default(uint);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"client_cell", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint client_cell
+    {
+      get { return _client_cell; }
+      set { _client_cell = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -684,6 +720,15 @@ namespace SteamKit2.Unified.Internal
     {
       get { return _view_url; }
       set { _view_url = value; }
+    }
+
+    private string _view_url_template = "";
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"view_url_template", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string view_url_template
+    {
+      get { return _view_url_template; }
+      set { _view_url_template = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -805,6 +850,44 @@ namespace SteamKit2.Unified.Internal
   public partial class CBroadcast_MuteBroadcastChatUser_Response : global::ProtoBuf.IExtensible
   {
     public CBroadcast_MuteBroadcastChatUser_Response() {}
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CBroadcast_RemoveUserChatText_Request")]
+  public partial class CBroadcast_RemoveUserChatText_Request : global::ProtoBuf.IExtensible
+  {
+    public CBroadcast_RemoveUserChatText_Request() {}
+    
+
+    private ulong _chat_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"chat_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong chat_id
+    {
+      get { return _chat_id; }
+      set { _chat_id = value; }
+    }
+
+    private ulong _user_steamid = default(ulong);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"user_steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong user_steamid
+    {
+      get { return _user_steamid; }
+      set { _user_steamid = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CBroadcast_RemoveUserChatText_Response")]
+  public partial class CBroadcast_RemoveUserChatText_Response : global::ProtoBuf.IExtensible
+  {
+    public CBroadcast_RemoveUserChatText_Response() {}
     
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -1069,6 +1152,7 @@ namespace SteamKit2.Unified.Internal
     CBroadcast_GetBroadcastChatInfo_Response GetBroadcastChatInfo(CBroadcast_GetBroadcastChatInfo_Request request);
     CBroadcast_PostChatMessage_Response PostChatMessage(CBroadcast_PostChatMessage_Request request);
     CBroadcast_MuteBroadcastChatUser_Response MuteBroadcastChatUser(CBroadcast_MuteBroadcastChatUser_Request request);
+    CBroadcast_RemoveUserChatText_Response RemoveUserChatText(CBroadcast_RemoveUserChatText_Request request);
     CBroadcast_GetBroadcastChatUserNames_Response GetBroadcastChatUserNames(CBroadcast_GetBroadcastChatUserNames_Request request);
     
     }
