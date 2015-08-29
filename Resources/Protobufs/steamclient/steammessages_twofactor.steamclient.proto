@@ -115,27 +115,6 @@ message CTwoFactor_ValidateToken_Response {
 	optional bool valid = 1 [(description) = "result of validation"];
 }
 
-message CTwoFactor_RemoveAuthenticatorViaChallengeStart_Request {
-	optional fixed64 steamid = 1 [(description) = "steamid to use"];
-	optional string encrypted_password = 2 [(description) = "RSA-encrypted password"];
-	optional uint32 password_timestamp = 3 [(description) = "RSA timestamp for password"];
-}
-
-message CTwoFactor_RemoveAuthenticatorViaChallengeStart_Response {
-	optional bool success = 1 [(description) = "True if succeeded, or want more tries with an authenticator_code"];
-}
-
-message CTwoFactor_RemoveAuthenticatorViaChallengeContinue_Request {
-	optional fixed64 steamid = 1 [(description) = "steamid to use"];
-	optional string encrypted_password = 2 [(description) = "RSA-encrypted password"];
-	optional uint32 password_timestamp = 3 [(description) = "RSA timestamp for password"];
-	optional string sms_code = 4 [(description) = "Code from SMS"];
-}
-
-message CTwoFactor_RemoveAuthenticatorViaChallengeContinue_Response {
-	optional bool success = 1 [(description) = "True if succeeded, or want more tries with an authenticator_code"];
-}
-
 service TwoFactor {
 	option (service_description) = "Two Factor Authentication Service";
 	rpc QueryStatus (.CTwoFactor_Status_Request) returns (.CTwoFactor_Status_Response) {
@@ -164,11 +143,5 @@ service TwoFactor {
 	}
 	rpc ValidateToken (.CTwoFactor_ValidateToken_Request) returns (.CTwoFactor_ValidateToken_Response) {
 		option (method_description) = "Validate (and consume) a token";
-	}
-	rpc RemoveAuthenticatorViaChallengeStart (.CTwoFactor_RemoveAuthenticatorViaChallengeStart_Request) returns (.CTwoFactor_RemoveAuthenticatorViaChallengeStart_Response) {
-		option (method_description) = "Start challenge-based authenticator removal";
-	}
-	rpc RemoveAuthenticatorViaChallengeContinue (.CTwoFactor_RemoveAuthenticatorViaChallengeContinue_Request) returns (.CTwoFactor_RemoveAuthenticatorViaChallengeContinue_Response) {
-		option (method_description) = "Continue challenge-based authenticator removal";
 	}
 }

@@ -59,6 +59,7 @@ message CMsgBrowserCreate {
 	optional string useragent = 3;
 	optional string user_css = 5;
 	optional bool native_dropdowns = 6;
+	optional float dpi_scaling = 7;
 }
 
 message CMsgBrowserCreateResponse {

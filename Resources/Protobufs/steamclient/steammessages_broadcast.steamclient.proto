@@ -43,6 +43,8 @@ message CBroadcast_WatchBroadcast_Request {
 	optional fixed64 steamid = 1;
 	optional fixed64 existing_broadcast_id = 2;
 	optional fixed64 viewer_token = 3;
+	optional uint32 client_ip = 4;
+	optional uint32 client_cell = 5;
 }
 
 message CBroadcast_WatchBroadcast_Response {
@@ -113,11 +115,14 @@ message CBroadcast_NotifyBroadcastSessionHeartbeat_Notification {
 message CBroadcast_GetBroadcastChatInfo_Request {
 	optional fixed64 steamid = 1;
 	optional fixed64 broadcast_id = 2;
+	optional uint32 client_ip = 3;
+	optional uint32 client_cell = 4;
 }
 
 message CBroadcast_GetBroadcastChatInfo_Response {
 	optional fixed64 chat_id = 1;
 	optional string view_url = 2;
+	optional string view_url_template = 3;
 }
 
 message CBroadcast_PostChatMessage_Request {
@@ -139,6 +144,14 @@ message CBroadcast_MuteBroadcastChatUser_Request {
 }
 
 message CBroadcast_MuteBroadcastChatUser_Response {
+}
+
+message CBroadcast_RemoveUserChatText_Request {
+	optional fixed64 chat_id = 1;
+	optional fixed64 user_steamid = 2;
+}
+
+message CBroadcast_RemoveUserChatText_Response {
 }
 
 message CBroadcast_GetBroadcastChatUserNames_Request {
@@ -227,6 +240,9 @@ service Broadcast {
 	}
 	rpc MuteBroadcastChatUser (.CBroadcast_MuteBroadcastChatUser_Request) returns (.CBroadcast_MuteBroadcastChatUser_Response) {
 		option (method_description) = "Mute a user in your broadcast chat";
+	}
+	rpc RemoveUserChatText (.CBroadcast_RemoveUserChatText_Request) returns (.CBroadcast_RemoveUserChatText_Response) {
+		option (method_description) = "Tell all viewers to remove user chat text";
 	}
 	rpc GetBroadcastChatUserNames (.CBroadcast_GetBroadcastChatUserNames_Request) returns (.CBroadcast_GetBroadcastChatUserNames_Response) {
 		option (method_description) = "Get names for list of users in chat";

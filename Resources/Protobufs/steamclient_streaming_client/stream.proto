@@ -69,6 +69,7 @@ enum EStreamControlMessage {
 	k_EStreamControlSetControllerPairingEnabled = 95;
 	k_EStreamControlSetControllerPairingResult = 96;
 	k_EStreamControlTriggerControllerDisconnect = 97;
+	k_EStreamControlSetActivity = 98;
 }
 
 enum EStreamVersion {
@@ -161,6 +162,12 @@ enum EStreamFramerateLimiter {
 	k_EStreamFramerateSlowDecode = 16;
 	k_EStreamFramerateSlowGame = 32;
 	k_EStreamFramerateSlowDisplay = 64;
+}
+
+enum EStreamActivity {
+	k_EStreamActivityIdle = 1;
+	k_EStreamActivityGame = 2;
+	k_EStreamActivityDesktop = 3;
 }
 
 enum EStreamDataMessage {
@@ -554,6 +561,10 @@ message CSetOverrideModeMsg {
 
 message CSetGammaRampMsg {
 	optional bytes gamma_ramp = 1;
+}
+
+message CSetActivityMsg {
+	optional .EStreamActivity activity = 1 [default = k_EStreamActivityIdle];
 }
 
 message CStreamDataLostMsg {

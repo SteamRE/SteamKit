@@ -77,6 +77,10 @@ message CMsgRemoteDeviceAuthorizationRequest {
 		optional bytes payload = 3;
 		optional uint32 timestamp = 4;
 		optional .CMsgRemoteDeviceAuthorizationRequest.EKeyEscrowUsage usage = 5 [default = k_EKeyEscrowUsageStreamingDevice];
+		optional string device_name = 6;
+		optional string device_model = 7;
+		optional string device_serial = 8;
+		optional uint32 device_provisioning_id = 9;
 	}
 
 	enum EKeyEscrowUsage {
