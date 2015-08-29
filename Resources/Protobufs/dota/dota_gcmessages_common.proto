@@ -528,6 +528,8 @@ enum EDOTAGCMsg {
 	k_EMsgSQLGCToGCSignoutUpdateLeagueSchedule = 7601;
 	k_EMsgGCToServerUpdateBroadcastCheers = 7602;
 	k_EMsgClientToGCApplyGemCombiner = 7603;
+	k_EMsgClientToGCCreateStaticRecipe = 7604;
+	k_EMsgClientToGCCreateStaticRecipeResponse = 7605;
 	k_EMsgGCDev_GrantWarKill = 8001;
 	k_EMsgClientToGCCreateTeamShowcase = 8002;
 	k_EMsgGCToClientTeamShowcaseCreateResult = 8003;
@@ -911,6 +913,7 @@ message CSODOTAGameAccountClient {
 	optional uint32 casual_1v1_games_played = 65;
 	optional uint32 competitive_team_games_played = 66;
 	optional uint32 curr_all_hero_challenge_id = 67;
+	optional uint32 play_time_points = 68;
 }
 
 message CSODOTAPartyMember {

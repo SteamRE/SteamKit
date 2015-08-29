@@ -14,6 +14,8 @@ enum DOTAChatChannelType_t {
 	DOTAChannelType_Team = 4;
 	DOTAChannelType_Guild = 5;
 	DOTAChannelType_Fantasy = 6;
+	DOTAChannelType_Cafe = 7;
+	DOTAChannelType_CustomGame = 8;
 }
 
 enum DOTA_WatchReplayType {
@@ -2604,5 +2606,27 @@ message CMsgClientToGCApplyGemCombiner {
 message CDummyUnbreakMessage {
 	optional .CMsgDOTAClearTournamentGame dummy_field = 1;
 	optional .ETournamentState another_dummy_field = 2 [default = k_ETournamentState_Unknown];
+}
+
+message CMsgClientToGCCreateStaticRecipe {
+	message Item {
+		optional uint64 item_id = 1;
+		optional uint32 slot_id = 2;
+	}
+
+	repeated .CMsgClientToGCCreateStaticRecipe.Item items = 1;
+	optional uint32 recipe_def_index = 2;
+}
+
+message CMsgClientToGCCreateStaticRecipeResponse {
+	enum EResponse {
+		eResponse_Success = 0;
+		eResponse_OfferingDisabled = 1;
+		eResponse_InvalidItems = 2;
+		eResponse_InternalError = 3;
+		eResponse_MissingLeague = 4;
+	}
+
+	optional .CMsgClientToGCCreateStaticRecipeResponse.EResponse response = 1 [default = eResponse_Success];
 }
 
