@@ -376,6 +376,10 @@ message CMsgGCCStrike15_v2_MatchmakingGC2ClientReserve {
 }
 
 message CMsgGCCStrike15_v2_MatchmakingServerRoundStats {
+	message DropInfo {
+		optional uint32 account_mvp = 1;
+	}
+
 	optional uint64 reservationid = 1;
 	optional .CMsgGCCStrike15_v2_MatchmakingGC2ServerReserve reservation = 2;
 	optional string map = 3;
@@ -401,6 +405,7 @@ message CMsgGCCStrike15_v2_MatchmakingServerRoundStats {
 	optional uint32 spectators_count_tv = 23;
 	optional uint32 spectators_count_lnk = 24;
 	repeated int32 enemy_kills_agg = 25;
+	optional .CMsgGCCStrike15_v2_MatchmakingServerRoundStats.DropInfo drop_info = 26;
 }
 
 message CMsgGCCStrike15_v2_MatchmakingServerMatchEnd {
@@ -728,15 +733,20 @@ message CDataGCCStrike15_v2_TournamentGroupTeam {
 }
 
 message CDataGCCStrike15_v2_TournamentGroup {
+	message Picks {
+		repeated int32 pickids = 1;
+	}
+
 	optional uint32 groupid = 1;
 	optional string name = 2;
 	optional string desc = 3;
-	optional uint32 picks = 4;
+	optional uint32 picks__deprecated = 4;
 	repeated .CDataGCCStrike15_v2_TournamentGroupTeam teams = 5;
 	repeated int32 stage_ids = 6;
 	optional uint32 picklockuntiltime = 7;
 	optional uint32 pickableteams = 8;
 	optional uint32 points_per_pick = 9;
+	repeated .CDataGCCStrike15_v2_TournamentGroup.Picks picks = 10;
 }
 
 message CDataGCCStrike15_v2_TournamentSection {
