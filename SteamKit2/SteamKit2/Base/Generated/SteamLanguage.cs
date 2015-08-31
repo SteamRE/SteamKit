@@ -2805,6 +2805,13 @@ namespace SteamKit2
 		Ascending = 1,
 		Descending = 2,
 	}
+	public enum ELeaderboardDisplayType
+	{
+		None = 0,
+		Numeric = 1,
+		TimeSeconds = 2,
+		TimeMilliSeconds = 3,
+	}
 	public enum ELeaderboardUploadScoreMethod
 	{
 		None = 0,
