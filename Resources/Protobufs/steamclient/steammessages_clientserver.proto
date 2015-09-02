@@ -392,17 +392,10 @@ message CMsgClientLBSGetLBEntriesResponse {
 message CMsgClientAccountInfo {
 	optional string persona_name = 1;
 	optional string ip_country = 2;
-	optional bytes salt_password = 3;
-	optional bytes sha_digest_Password = 4;
 	optional int32 count_authed_computers = 5;
-	optional bool locked_with_ipt = 6;
 	optional uint32 account_flags = 7;
 	optional uint64 facebook_id = 8;
 	optional string facebook_name = 9;
-	optional int32 steam_guard_provider = 10;
-	optional bool steamguard_require_code_default = 11;
-	optional bool steamguard_show_providers = 12;
-	optional bool steamguard_can_use_mobile_provider = 13;
 	optional bool steamguard_notify_newmachines = 14;
 	optional string steamguard_machine_name_user_chosen = 15;
 }
