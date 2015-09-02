@@ -114,107 +114,6 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_Secrets_Request")]
-  public partial class CTwoFactor_Secrets_Request : global::ProtoBuf.IExtensible
-  {
-    public CTwoFactor_Secrets_Request() {}
-    
-
-    private ulong _steamid = default(ulong);
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
-    public ulong steamid
-    {
-      get { return _steamid; }
-      set { _steamid = value; }
-    }
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_Secrets_Response")]
-  public partial class CTwoFactor_Secrets_Response : global::ProtoBuf.IExtensible
-  {
-    public CTwoFactor_Secrets_Response() {}
-    
-
-    private byte[] _shared_secret = null;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"shared_secret", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
-    public byte[] shared_secret
-    {
-      get { return _shared_secret; }
-      set { _shared_secret = value; }
-    }
-
-    private ulong _serial_number = default(ulong);
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"serial_number", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
-    public ulong serial_number
-    {
-      get { return _serial_number; }
-      set { _serial_number = value; }
-    }
-
-    private string _revocation_code = "";
-    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"revocation_code", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
-    public string revocation_code
-    {
-      get { return _revocation_code; }
-      set { _revocation_code = value; }
-    }
-
-    private string _uri = "";
-    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"uri", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
-    public string uri
-    {
-      get { return _uri; }
-      set { _uri = value; }
-    }
-
-    private string _activation_code = "";
-    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"activation_code", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
-    public string activation_code
-    {
-      get { return _activation_code; }
-      set { _activation_code = value; }
-    }
-
-    private string _account_name = "";
-    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"account_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
-    public string account_name
-    {
-      get { return _account_name; }
-      set { _account_name = value; }
-    }
-
-    private string _device_identifier = "";
-    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"device_identifier", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
-    public string device_identifier
-    {
-      get { return _device_identifier; }
-      set { _device_identifier = value; }
-    }
-
-    private byte[] _identity_secret = null;
-    [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"identity_secret", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
-    public byte[] identity_secret
-    {
-      get { return _identity_secret; }
-      set { _identity_secret = value; }
-    }
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_AddAuthenticator_Request")]
   public partial class CTwoFactor_AddAuthenticator_Request : global::ProtoBuf.IExtensible
   {
@@ -734,7 +633,6 @@ namespace SteamKit2.Unified.Internal
     public interface ITwoFactor
     {
       CTwoFactor_Status_Response QueryStatus(CTwoFactor_Status_Request request);
-    CTwoFactor_Secrets_Response QuerySecrets(CTwoFactor_Secrets_Request request);
     CTwoFactor_AddAuthenticator_Response AddAuthenticator(CTwoFactor_AddAuthenticator_Request request);
     CTwoFactor_SendEmail_Response SendEmail(CTwoFactor_SendEmail_Request request);
     CTwoFactor_FinalizeAddAuthenticator_Response FinalizeAddAuthenticator(CTwoFactor_FinalizeAddAuthenticator_Request request);

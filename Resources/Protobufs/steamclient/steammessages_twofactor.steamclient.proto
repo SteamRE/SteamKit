@@ -16,21 +16,6 @@ message CTwoFactor_Status_Response {
 	optional string device_identifier = 8 [(description) = "Authenticator (phone) identifier"];
 }
 
-message CTwoFactor_Secrets_Request {
-	optional fixed64 steamid = 1 [(description) = "steamid to use"];
-}
-
-message CTwoFactor_Secrets_Response {
-	optional bytes shared_secret = 1 [(description) = "Shared secret between server and authenticator"];
-	optional fixed64 serial_number = 2 [(description) = "Authenticator serial number (unique per token)"];
-	optional string revocation_code = 3 [(description) = "code used to revoke authenticator"];
-	optional string uri = 4 [(description) = "URI for QR code generation"];
-	optional string activation_code = 5 [(description) = "Activation code"];
-	optional string account_name = 6 [(description) = "Account name to display on token client"];
-	optional string device_identifier = 7 [(description) = "Authenticator identifier"];
-	optional bytes identity_secret = 8 [(description) = "Secret used to attest mobile device identity"];
-}
-
 message CTwoFactor_AddAuthenticator_Request {
 	optional fixed64 steamid = 1 [(description) = "steamid to use"];
 	optional uint64 authenticator_time = 2 [(description) = "Current authenticator time"];
@@ -119,9 +104,6 @@ service TwoFactor {
 	option (service_description) = "Two Factor Authentication Service";
 	rpc QueryStatus (.CTwoFactor_Status_Request) returns (.CTwoFactor_Status_Response) {
 		option (method_description) = "Get two-factor authentication settings for the logged-in account";
-	}
-	rpc QuerySecrets (.CTwoFactor_Secrets_Request) returns (.CTwoFactor_Secrets_Response) {
-		option (method_description) = "Get two-factor secrets for the logged-in account";
 	}
 	rpc AddAuthenticator (.CTwoFactor_AddAuthenticator_Request) returns (.CTwoFactor_AddAuthenticator_Response) {
 		option (method_description) = "Add two-factor authenticator to the logged-in account";

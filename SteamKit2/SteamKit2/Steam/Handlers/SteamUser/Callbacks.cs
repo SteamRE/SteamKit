@@ -248,10 +248,12 @@ namespace SteamKit2
             /// <summary>
             /// Gets the salt used for the password.
             /// </summary>
+            [Obsolete( "This field is no longer sent by Steam" )]
             public byte[] PasswordSalt { get; private set; }
             /// <summary>
             /// Gets the SHA-1 disgest of the password.
             /// </summary>
+            [Obsolete( "This field is no longer sent by Steam" )]
             public byte[] PasswordSHADisgest { get; private set; }
 
             /// <summary>
@@ -264,6 +266,7 @@ namespace SteamKit2
             /// <value>
             ///   <c>true</c> if this account is locked with IPT; otherwise, <c>false</c>.
             /// </value>
+            [Obsolete( "This field is no longer sent by Steam" )]
             public bool LockedWithIPT { get; private set; }
 
             /// <summary>
@@ -286,11 +289,7 @@ namespace SteamKit2
                 PersonaName = msg.persona_name;
                 Country = msg.ip_country;
 
-                PasswordSalt = msg.salt_password;
-                PasswordSHADisgest = msg.sha_digest_Password;
-
                 CountAuthedComputers = msg.count_authed_computers;
-                LockedWithIPT = msg.locked_with_ipt;
 
                 AccountFlags = ( EAccountFlags )msg.account_flags;
 

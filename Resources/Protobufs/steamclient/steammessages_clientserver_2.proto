@@ -123,15 +123,6 @@ message CMsgClientUCMEnumerateUserPublishedFilesResponse {
 	optional uint32 total_results = 3;
 }
 
-message CMsgClientUCMSubscribePublishedFile {
-	optional uint32 app_id = 1;
-	optional fixed64 published_file_id = 2;
-}
-
-message CMsgClientUCMSubscribePublishedFileResponse {
-	optional int32 eresult = 1 [default = 2];
-}
-
 message CMsgClientUCMEnumerateUserSubscribedFiles {
 	optional uint32 app_id = 1;
 	optional uint32 start_index = 2;
@@ -171,15 +162,6 @@ message CMsgClientUCMEnumerateUserSubscribedFilesWithUpdatesResponse {
 	optional int32 eresult = 1 [default = 2];
 	repeated .CMsgClientUCMEnumerateUserSubscribedFilesWithUpdatesResponse.PublishedFileId subscribed_files = 2;
 	optional uint32 total_results = 3;
-}
-
-message CMsgClientUCMUnsubscribePublishedFile {
-	optional uint32 app_id = 1;
-	optional fixed64 published_file_id = 2;
-}
-
-message CMsgClientUCMUnsubscribePublishedFileResponse {
-	optional int32 eresult = 1 [default = 2];
 }
 
 message CMsgClientUCMPublishedFileSubscribed {
@@ -400,17 +382,6 @@ message CMsgClientRequestMachineAuth {
 }
 
 message CMsgClientRequestMachineAuthResponse {
-	optional uint32 eresult = 1;
-}
-
-message CMsgClientChangeSteamGuardOptions {
-	optional uint32 steamguard_provider = 1;
-	optional uint32 steamguard_require_code_default = 2;
-	optional string machine_name = 3;
-	optional string machine_name_userchosen = 4;
-}
-
-message CMsgClientChangeSteamGuardOptionsResponse {
 	optional uint32 eresult = 1;
 }
 
@@ -1214,8 +1185,6 @@ message CMsgClientCreateAccount {
 	optional string account_name = 1;
 	optional string password = 2;
 	optional string email = 3;
-	optional string question = 4;
-	optional string answer = 5;
 	optional uint32 launcher = 6;
 }
 

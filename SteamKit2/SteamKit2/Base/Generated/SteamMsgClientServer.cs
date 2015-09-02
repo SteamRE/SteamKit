@@ -2603,24 +2603,6 @@ namespace SteamKit2.Internal
       set { _ip_country = value; }
     }
 
-    private byte[] _salt_password = null;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"salt_password", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
-    public byte[] salt_password
-    {
-      get { return _salt_password; }
-      set { _salt_password = value; }
-    }
-
-    private byte[] _sha_digest_Password = null;
-    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"sha_digest_Password", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
-    public byte[] sha_digest_Password
-    {
-      get { return _sha_digest_Password; }
-      set { _sha_digest_Password = value; }
-    }
-
     private int _count_authed_computers = default(int);
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"count_authed_computers", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(default(int))]
@@ -2628,15 +2610,6 @@ namespace SteamKit2.Internal
     {
       get { return _count_authed_computers; }
       set { _count_authed_computers = value; }
-    }
-
-    private bool _locked_with_ipt = default(bool);
-    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"locked_with_ipt", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
-    public bool locked_with_ipt
-    {
-      get { return _locked_with_ipt; }
-      set { _locked_with_ipt = value; }
     }
 
     private uint _account_flags = default(uint);
@@ -2664,42 +2637,6 @@ namespace SteamKit2.Internal
     {
       get { return _facebook_name; }
       set { _facebook_name = value; }
-    }
-
-    private int _steam_guard_provider = default(int);
-    [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"steam_guard_provider", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
-    public int steam_guard_provider
-    {
-      get { return _steam_guard_provider; }
-      set { _steam_guard_provider = value; }
-    }
-
-    private bool _steamguard_require_code_default = default(bool);
-    [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"steamguard_require_code_default", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
-    public bool steamguard_require_code_default
-    {
-      get { return _steamguard_require_code_default; }
-      set { _steamguard_require_code_default = value; }
-    }
-
-    private bool _steamguard_show_providers = default(bool);
-    [global::ProtoBuf.ProtoMember(12, IsRequired = false, Name=@"steamguard_show_providers", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
-    public bool steamguard_show_providers
-    {
-      get { return _steamguard_show_providers; }
-      set { _steamguard_show_providers = value; }
-    }
-
-    private bool _steamguard_can_use_mobile_provider = default(bool);
-    [global::ProtoBuf.ProtoMember(13, IsRequired = false, Name=@"steamguard_can_use_mobile_provider", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
-    public bool steamguard_can_use_mobile_provider
-    {
-      get { return _steamguard_can_use_mobile_provider; }
-      set { _steamguard_can_use_mobile_provider = value; }
     }
 
     private bool _steamguard_notify_newmachines = default(bool);
