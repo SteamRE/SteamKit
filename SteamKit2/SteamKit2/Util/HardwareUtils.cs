@@ -58,7 +58,7 @@ namespace SteamKit2
             // if it turns out to be buggy we can always roll our own and poke into /sys/class/net on nix
 
             var firstEth = NetworkInterface.GetAllNetworkInterfaces()
-                .Where( i => i.NetworkInterfaceType == NetworkInterfaceType.Ethernet )
+                .Where( i => i.NetworkInterfaceType == NetworkInterfaceType.Ethernet || i.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 )
                 .FirstOrDefault();
 
             if ( firstEth == null )
