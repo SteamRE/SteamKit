@@ -188,6 +188,24 @@ namespace SteamKit2.Unified.Internal
       get { return _session_data; }
     }
   
+
+    private bool _is_twofactor_enabled = default(bool);
+    [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"is_twofactor_enabled", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool is_twofactor_enabled
+    {
+      get { return _is_twofactor_enabled; }
+      set { _is_twofactor_enabled = value; }
+    }
+
+    private uint _timestamp_twofactor_enabled = default(uint);
+    [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"timestamp_twofactor_enabled", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint timestamp_twofactor_enabled
+    {
+      get { return _timestamp_twofactor_enabled; }
+      set { _timestamp_twofactor_enabled = value; }
+    }
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"NewAuthentication")]
   public partial class NewAuthentication : global::ProtoBuf.IExtensible
   {
@@ -606,44 +624,6 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCredentials_SteamGuardCode_Request")]
-  public partial class CCredentials_SteamGuardCode_Request : global::ProtoBuf.IExtensible
-  {
-    public CCredentials_SteamGuardCode_Request() {}
-    
-
-    private bool _panic_button = default(bool);
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"panic_button", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
-    public bool panic_button
-    {
-      get { return _panic_button; }
-      set { _panic_button = value; }
-    }
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCredentials_SteamGuardCode_Response")]
-  public partial class CCredentials_SteamGuardCode_Response : global::ProtoBuf.IExtensible
-  {
-    public CCredentials_SteamGuardCode_Response() {}
-    
-
-    private string _steamguard_code = "";
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steamguard_code", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
-    public string steamguard_code
-    {
-      get { return _steamguard_code; }
-      set { _steamguard_code = value; }
-    }
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCredentials_LastCredentialChangeTime_Request")]
   public partial class CCredentials_LastCredentialChangeTime_Request : global::ProtoBuf.IExtensible
   {
@@ -729,43 +709,6 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCredentials_SteamGuardLoginAttempt_Notification")]
-  public partial class CCredentials_SteamGuardLoginAttempt_Notification : global::ProtoBuf.IExtensible
-  {
-    public CCredentials_SteamGuardLoginAttempt_Notification() {}
-    
-
-    private bool _is_web_cookie = default(bool);
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"is_web_cookie", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
-    public bool is_web_cookie
-    {
-      get { return _is_web_cookie; }
-      set { _is_web_cookie = value; }
-    }
-
-    private int _ipaddress = default(int);
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"ipaddress", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
-    public int ipaddress
-    {
-      get { return _ipaddress; }
-      set { _ipaddress = value; }
-    }
-
-    private string _geoloc_info = "";
-    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"geoloc_info", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
-    public string geoloc_info
-    {
-      get { return _geoloc_info; }
-      set { _geoloc_info = value; }
-    }
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
     public interface ICredentials
     {
       CCredentials_TestAvailablePassword_Response TestAvailablePassword(CCredentials_TestAvailablePassword_Request request);
@@ -774,16 +717,8 @@ namespace SteamKit2.Unified.Internal
     CCredentials_ValidateEmailAddress_Response ValidateEmailAddress(CCredentials_ValidateEmailAddress_Request request);
     CCredentials_SteamGuardPhishingReport_Response SteamGuardPhishingReport(CCredentials_SteamGuardPhishingReport_Request request);
     CCredentials_AccountLockRequest_Response AccountLockRequest(CCredentials_AccountLockRequest_Request request);
-    CCredentials_SteamGuardCode_Response SteamGuardCodeProcess(CCredentials_SteamGuardCode_Request request);
     CCredentials_LastCredentialChangeTime_Response GetCredentialChangeTimeDetails(CCredentials_LastCredentialChangeTime_Request request);
     CCredentials_GetAccountAuthSecret_Response GetAccountAuthSecret(CCredentials_GetAccountAuthSecret_Request request);
-    
-    }
-    
-    
-    public interface ICredentialsClient
-    {
-      NoResponse NotifySteamGuardLoginAttempt(CCredentials_SteamGuardLoginAttempt_Notification request);
     
     }
     
