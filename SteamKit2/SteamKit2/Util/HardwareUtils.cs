@@ -218,20 +218,20 @@ namespace SteamKit2
         }
         string[] GetDiskUUIDs()
         {
-            string[] files;
-
             try
             {
-                files = Directory.GetFiles( "/dev/disk/by-uuid" );
+                var dirInfo = new DirectoryInfo( "/dev/disk/by-uuid" );
+
+                // we want the oldest disk symlinks first
+                return dirInfo.GetFiles()
+                    .OrderBy( f => f.LastWriteTime )
+                    .Select( f => f.Name )
+                    .ToArray();
             }
             catch
             {
                 return new string[0];
             }
-
-            return files
-                .Select( f => Path.GetFileName( f ) )
-                .ToArray();
         }
         string GetParamValue( string[] bootOptions, string param )
         {
