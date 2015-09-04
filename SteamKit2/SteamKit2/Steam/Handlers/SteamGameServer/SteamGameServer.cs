@@ -126,7 +126,7 @@ namespace SteamKit2
 
             logon.Body.client_os_type = ( uint )Utils.GetOSType();
             logon.Body.game_server_app_id = ( int )details.AppID;
-            logon.Body.machine_id = MachineIdUtils.GenerateMachineID();
+            logon.Body.machine_id = HardwareUtils.GetMachineID();
 
             logon.Body.game_server_token = details.Token;
 
@@ -161,7 +161,7 @@ namespace SteamKit2
 
             logon.Body.client_os_type = ( uint )Utils.GetOSType();
             logon.Body.game_server_app_id = ( int )appId;
-            logon.Body.machine_id = MachineIdUtils.GenerateMachineID();
+            logon.Body.machine_id = HardwareUtils.GetMachineID();
 
             this.Client.Send( logon );
         }

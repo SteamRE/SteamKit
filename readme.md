@@ -32,9 +32,13 @@ SteamKit2 is released under the [LGPL-2.1 license](http://www.tldrlegal.com/lice
 
 ## Dependencies
 
-In order to compile and use SteamKit2, the following dependencies are required:
+In order to use SteamKit2 at runtime, the following dependencies are required:
 
   - .NET 4.0 or [Mono ≥2.8](http://mono-project.com)
+
+To compile SteamKit2, the following is required:
+
+  - C# 6.0 compiler &mdash; [Visual Studio 2015](https://www.visualstudio.com/en-us/products/vs-2015-product-editions.aspx) or [Mono ≥4.0](http://www.mono-project.com/docs/about-mono/releases/4.0.0/)
   - [protobuf-net](http://code.google.com/p/protobuf-net/) ([NuGet package](http://nuget.org/packages/protobuf-net))
 
 Note: If you're using the NuGet package, the protobuf-net dependency _should_ be resolved for you. See the [Installation Guide](https://github.com/SteamRE/SteamKit/wiki/Installation) for more information.

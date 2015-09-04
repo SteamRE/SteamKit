@@ -148,6 +148,7 @@
     <Compile Include="Types\PubFile.cs" />
     <Compile Include="Util\AsnKeyParser.cs" />
     <Compile Include="Util\Crc32.cs" />
+    <Compile Include="Util\HardwareUtils.cs" />
     <Compile Include="Util\LZMA\Common\CRC.cs" />
     <Compile Include="Util\LZMA\Common\InBuffer.cs" />
     <Compile Include="Util\LZMA\Common\OutBuffer.cs" />
@@ -198,6 +199,7 @@
     <Compile Include="Base\Generated\SteamMsgAppTicket.cs" />
     <Compile Include="Base\Generated\SteamMsgBase.cs" />
     <Compile Include="Base\Generated\SteamMsgClientServer.cs" />
+    <Compile Include="Util\MacHelpers.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="3rd party.txt">
