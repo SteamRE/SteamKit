@@ -19,6 +19,7 @@ namespace SteamKit2
         /// <summary>
         /// This callback is fired during logon, informing the client of it's available licenses.
         /// </summary>
+        [SteamCallback( EMsg.ClientLicenseList )]
         public sealed class LicenseListCallback : CallbackMsg
         {
             /// <summary>
@@ -125,11 +126,13 @@ namespace SteamKit2
             public ReadOnlyCollection<License> LicenseList { get; private set; }
 
 
-            internal LicenseListCallback( CMsgClientLicenseList msg )
+            internal LicenseListCallback( IPacketMsg packetMsg )
             {
-                this.Result = ( EResult )msg.eresult;
+                var licenseList = new ClientMsgProtobuf<CMsgClientLicenseList>( packetMsg );
 
-                var list = msg.licenses
+                this.Result = (EResult)licenseList.Body.eresult;
+                
+                var list = licenseList.Body.licenses
                     .Select( l => new License( l ) )
                     .ToList();
 
@@ -140,6 +143,7 @@ namespace SteamKit2
         /// <summary>
         /// This callback is received in response to calling <see cref="o:SteamApps.RequestFreeLicence"/>, informing the client of newly granted packages, if any.
         /// </summary>
+        [SteamCallback( EMsg.ClientRequestFreeLicenseResponse )]
         public sealed class FreeLicenseCallback : CallbackMsg
         {
             /// <summary>
@@ -160,20 +164,24 @@ namespace SteamKit2
             /// <value>List of granted packages.</value>
             public ReadOnlyCollection<uint> GrantedPackages { get; private set; }
 
-            internal FreeLicenseCallback( JobID jobID, CMsgClientRequestFreeLicenseResponse msg )
+
+            internal FreeLicenseCallback( IPacketMsg packetMsg )
             {
-                this.JobID = jobID;
+                var grantedLicenses = new ClientMsgProtobuf<CMsgClientRequestFreeLicenseResponse>( packetMsg );
 
-                this.Result = ( EResult )msg.eresult;
+                this.JobID = grantedLicenses.TargetJobID;
 
-                this.GrantedApps = new ReadOnlyCollection<uint>( msg.granted_appids );
-                this.GrantedPackages = new ReadOnlyCollection<uint>( msg.granted_packageids );
+                this.Result = (EResult)grantedLicenses.Body.eresult;
+
+                this.GrantedApps = new ReadOnlyCollection<uint>( grantedLicenses.Body.granted_appids );
+                this.GrantedPackages = new ReadOnlyCollection<uint>( grantedLicenses.Body.granted_packageids );
             }
         }
 
         /// <summary>
         /// This callback is received in response to calling <see cref="SteamApps.GetAppOwnershipTicket"/>.
         /// </summary>
+        [SteamCallback( EMsg.ClientGetAppOwnershipTicketResponse )]
         public sealed class AppOwnershipTicketCallback : CallbackMsg
         {
             /// <summary>
@@ -191,13 +199,15 @@ namespace SteamKit2
             public byte[] Ticket { get; private set; }
 
 
-            internal AppOwnershipTicketCallback( JobID jobID, CMsgClientGetAppOwnershipTicketResponse msg )
+            internal AppOwnershipTicketCallback( IPacketMsg packetMsg )
             {
-                this.JobID = jobID;
+                var ticketResponse = new ClientMsgProtobuf<CMsgClientGetAppOwnershipTicketResponse>( packetMsg );
 
-                this.Result = ( EResult )msg.eresult;
-                this.AppID = msg.app_id;
-                this.Ticket = msg.ticket;
+                this.JobID = ticketResponse.TargetJobID;
+
+                this.Result = ( EResult )ticketResponse.Body.eresult;
+                this.AppID = ticketResponse.Body.app_id;
+                this.Ticket = ticketResponse.Body.ticket;
             }
         }
 
@@ -208,6 +218,7 @@ namespace SteamKit2
         /// <summary>
         /// This callback is received in response to calling <see cref="SteamApps.GetAppInfo"/>.
         /// </summary>
+        [SteamCallback( EMsg.ClientAppInfoResponse )]
         public sealed class AppInfoCallback : CallbackMsg
 #pragma warning restore 0419
         {
@@ -288,16 +299,18 @@ namespace SteamKit2
             public uint AppsPending { get; private set; }
 
 
-            internal AppInfoCallback( JobID jobID, CMsgClientAppInfoResponse msg )
+            internal AppInfoCallback( IPacketMsg packetMsg )
             {
-                JobID = jobID;
+                var infoResponse = new ClientMsgProtobuf<CMsgClientAppInfoResponse>( packetMsg );
+
+                JobID = infoResponse.TargetJobID;
 
                 var list = new List<App>();
 
-                list.AddRange( msg.apps.Select( a => new App( a, App.AppInfoStatus.OK ) ) );
-                list.AddRange( msg.apps_unknown.Select( a => new App( a, App.AppInfoStatus.Unknown ) ) );
+                list.AddRange( infoResponse.Body.apps.Select( a => new App( a, App.AppInfoStatus.OK ) ) );
+                list.AddRange( infoResponse.Body.apps_unknown.Select( a => new App( a, App.AppInfoStatus.Unknown ) ) );
 
-                AppsPending = msg.apps_pending;
+                AppsPending = infoResponse.Body.apps_pending;
 
                 Apps = new ReadOnlyCollection<App>( list );
             }
@@ -310,6 +323,7 @@ namespace SteamKit2
         /// <summary>
         /// This callback is received in response to calling <see cref="SteamApps.GetPackageInfo"/>.
         /// </summary>
+        [SteamCallback( EMsg.ClientPackageInfoResponse )]
         public sealed class PackageInfoCallback : CallbackMsg
 #pragma warning restore 0419
         {
@@ -395,16 +409,18 @@ namespace SteamKit2
             public uint PackagesPending { get; private set; }
 
 
-            internal PackageInfoCallback( JobID jobID, CMsgClientPackageInfoResponse msg )
+            internal PackageInfoCallback( IPacketMsg packetMsg )
             {
-                JobID = jobID;
+                var packInfo = new ClientMsgProtobuf<CMsgClientPackageInfoResponse>( packetMsg );
+
+                JobID = packInfo.TargetJobID;
 
                 var packages = new List<Package>();
 
-                packages.AddRange( msg.packages.Select( p => new Package( p, Package.PackageStatus.OK ) ) );
-                packages.AddRange( msg.packages_unknown.Select( p => new Package( p, Package.PackageStatus.Unknown ) ) );
+                packages.AddRange( packInfo.Body.packages.Select( p => new Package( p, Package.PackageStatus.OK ) ) );
+                packages.AddRange( packInfo.Body.packages_unknown.Select( p => new Package( p, Package.PackageStatus.Unknown ) ) );
 
-                PackagesPending = msg.packages_pending;
+                PackagesPending = packInfo.Body.packages_pending;
 
                 Packages = new ReadOnlyCollection<Package>( packages );
             }
@@ -413,6 +429,7 @@ namespace SteamKit2
         /// <summary>
         /// This callback is received in response to calling <see cref="SteamApps.GetAppChanges"/>.
         /// </summary>
+        [SteamCallback( EMsg.ClientAppInfoChanges )]
         public sealed class AppChangesCallback : CallbackMsg
         {
             /// <summary>
@@ -433,18 +450,21 @@ namespace SteamKit2
             public bool ForceFullUpdate { get; private set; }
 
 
-            internal AppChangesCallback( CMsgClientAppInfoChanges msg )
+            internal AppChangesCallback( IPacketMsg packetMsg )
             {
-                AppIDs = new ReadOnlyCollection<uint>( msg.appIDs );
-                CurrentChangeNumber = msg.current_change_number;
+                var changes = new ClientMsgProtobuf<CMsgClientAppInfoChanges>( packetMsg );
 
-                ForceFullUpdate = msg.force_full_update;
+                AppIDs = new ReadOnlyCollection<uint>( changes.Body.appIDs );
+                CurrentChangeNumber = changes.Body.current_change_number;
+
+                ForceFullUpdate = changes.Body.force_full_update;
             }
         }
 
         /// <summary>
         /// This callback is recieved in response to calling <see cref="SteamApps.GetDepotDecryptionKey"/>.
         /// </summary>
+        [SteamCallback( EMsg.ClientGetDepotDecryptionKeyResponse )]
         public sealed class DepotKeyCallback : CallbackMsg
         {
             /// <summary>
@@ -462,19 +482,22 @@ namespace SteamKit2
             public byte[] DepotKey { get; private set; }
 
 
-            internal DepotKeyCallback( JobID jobID, CMsgClientGetDepotDecryptionKeyResponse msg )
+            internal DepotKeyCallback( IPacketMsg packetMsg )
             {
-                JobID = jobID;
+                var keyResponse = new ClientMsgProtobuf<CMsgClientGetDepotDecryptionKeyResponse>( packetMsg );
 
-                Result = ( EResult )msg.eresult;
-                DepotID = msg.depot_id;
-                DepotKey = msg.depot_encryption_key;
+                JobID = keyResponse.TargetJobID;
+
+                Result = ( EResult )keyResponse.Body.eresult;
+                DepotID = keyResponse.Body.depot_id;
+                DepotKey = keyResponse.Body.depot_encryption_key;
             }
         }
 
         /// <summary>
         /// This callback is fired when the client receives a list of game connect tokens.
         /// </summary>
+        [SteamCallback(EMsg.ClientGameConnectTokens )]
         public sealed class GameConnectTokensCallback : CallbackMsg
         {
             /// <summary>
@@ -487,16 +510,19 @@ namespace SteamKit2
             public ReadOnlyCollection<byte[]> Tokens { get; private set; }
 
 
-            internal GameConnectTokensCallback( CMsgClientGameConnectTokens msg )
+            internal GameConnectTokensCallback( IPacketMsg packetMsg )
             {
-                TokensToKeep = msg.max_tokens_to_keep;
-                Tokens = new ReadOnlyCollection<byte[]>( msg.tokens );
+                var gcTokens = new ClientMsgProtobuf<CMsgClientGameConnectTokens>( packetMsg );
+
+                TokensToKeep = gcTokens.Body.max_tokens_to_keep;
+                Tokens = new ReadOnlyCollection<byte[]>( gcTokens.Body.tokens );
             }
         }
 
         /// <summary>
         /// This callback is fired when the client receives it's VAC banned status.
         /// </summary>
+        [SteamCallback( EMsg.ClientVACBanStatus )]
         public sealed class VACStatusCallback : CallbackMsg
         {
             /// <summary>
@@ -505,26 +531,25 @@ namespace SteamKit2
             public ReadOnlyCollection<uint> BannedApps { get; private set; }
 
 
-            internal VACStatusCallback( MsgClientVACBanStatus msg, byte[] payload )
+            internal VACStatusCallback( IPacketMsg packetMsg )
             {
+                var vacStatus = new ClientMsg<MsgClientVACBanStatus>( packetMsg );
+
                 var tempList = new List<uint>();
-
-                using ( var ms = new MemoryStream( payload ) )
-                using ( var br = new BinaryReader( ms ) )
+                
+                for ( int x = 0 ; x < vacStatus.Body.NumBans ; x++ )
                 {
-                    for ( int x = 0 ; x < msg.NumBans ; x++ )
-                    {
-                        tempList.Add( br.ReadUInt32() );
-                    }
-
-                    BannedApps = new ReadOnlyCollection<uint>( tempList );
+                    tempList.Add( vacStatus.ReadUInt32() );
                 }
+
+                BannedApps = new ReadOnlyCollection<uint>( tempList );
             }
         }
 
         /// <summary>
         /// This callback is fired when the PICS returns access tokens for a list of appids and packageids
         /// </summary>
+        [SteamCallback( EMsg.ClientPICSAccessTokenResponse )]
         public sealed class PICSTokensCallback : CallbackMsg
         {
             /// <summary>
@@ -545,21 +570,23 @@ namespace SteamKit2
             public Dictionary<uint, ulong> AppTokens { get; private set; }
 
 
-            internal PICSTokensCallback( JobID jobID, CMsgClientPICSAccessTokenResponse msg )
+            internal PICSTokensCallback( IPacketMsg packetMsg )
             {
-                JobID = jobID;
+                var tokensResponse = new ClientMsgProtobuf<CMsgClientPICSAccessTokenResponse>( packetMsg );
 
-                PackageTokensDenied = new ReadOnlyCollection<uint>( msg.package_denied_tokens );
-                AppTokensDenied = new ReadOnlyCollection<uint>( msg.app_denied_tokens );
+                JobID = tokensResponse.TargetJobID;
+
+                PackageTokensDenied = new ReadOnlyCollection<uint>( tokensResponse.Body.package_denied_tokens );
+                AppTokensDenied = new ReadOnlyCollection<uint>( tokensResponse.Body.app_denied_tokens );
                 PackageTokens = new Dictionary<uint, ulong>();
                 AppTokens = new Dictionary<uint, ulong>();
 
-                foreach ( var package_token in msg.package_access_tokens )
+                foreach ( var package_token in tokensResponse.Body.package_access_tokens )
                 {
                     PackageTokens.Add( package_token.packageid, package_token.access_token );
                 }
 
-                foreach ( var app_token in msg.app_access_tokens )
+                foreach ( var app_token in tokensResponse.Body.app_access_tokens )
                 {
                     AppTokens.Add( app_token.appid, app_token.access_token );
                 }
@@ -569,6 +596,7 @@ namespace SteamKit2
         /// <summary>
         /// This callback is fired when the PICS returns the changes since the last change number
         /// </summary>
+        [SteamCallback( EMsg.ClientPICSChangesSinceResponse )]
         public sealed class PICSChangesCallback : CallbackMsg
         {
             /// <summary>
@@ -626,22 +654,25 @@ namespace SteamKit2
             public Dictionary<uint, PICSChangeData> AppChanges { get; private set; }
 
 
-            internal PICSChangesCallback( JobID jobID, CMsgClientPICSChangesSinceResponse msg )
+            internal PICSChangesCallback( IPacketMsg packetMsg )
             {
-                JobID = jobID;
+                var changesResponse = new ClientMsgProtobuf<CMsgClientPICSChangesSinceResponse>( packetMsg );
 
-                LastChangeNumber = msg.since_change_number;
-                CurrentChangeNumber = msg.current_change_number;
-                RequiresFullUpdate = msg.force_full_update;
+                JobID = changesResponse.TargetJobID;
+
+                LastChangeNumber = changesResponse.Body.since_change_number;
+                CurrentChangeNumber = changesResponse.Body.current_change_number;
+                RequiresFullUpdate = changesResponse.Body.force_full_update;
+
                 PackageChanges = new Dictionary<uint, PICSChangeData>();
                 AppChanges = new Dictionary<uint, PICSChangeData>();
 
-                foreach ( var package_change in msg.package_changes )
+                foreach ( var package_change in changesResponse.Body.package_changes )
                 {
                     PackageChanges.Add( package_change.packageid, new PICSChangeData( package_change ) );
                 }
 
-                foreach ( var app_change in msg.app_changes )
+                foreach ( var app_change in changesResponse.Body.app_changes )
                 {
                     AppChanges.Add( app_change.appid, new PICSChangeData( app_change ) );
                 }
@@ -651,6 +682,7 @@ namespace SteamKit2
         /// <summary>
         /// This callback is fired when the PICS returns the product information requested
         /// </summary>
+        [SteamCallback( EMsg.ClientPICSProductInfoResponse )]
         public sealed class PICSProductInfoCallback : CallbackMsg
         {
             /// <summary>
@@ -775,25 +807,29 @@ namespace SteamKit2
             public Dictionary<uint, PICSProductInfo> Packages { get; private set; }
 
 
-            internal PICSProductInfoCallback( JobID jobID, CMsgClientPICSProductInfoResponse msg )
+            internal PICSProductInfoCallback( IPacketMsg packetMsg )
             {
-                JobID = jobID;
+                var productResponse = new ClientMsgProtobuf<CMsgClientPICSProductInfoResponse>( packetMsg );
 
-                MetaDataOnly = msg.meta_data_only;
-                ResponsePending = msg.response_pending;
-                UnknownPackages = new ReadOnlyCollection<uint>( msg.unknown_packageids );
-                UnknownApps = new ReadOnlyCollection<uint>( msg.unknown_appids );
+                JobID = productResponse.TargetJobID;
+
+                MetaDataOnly = productResponse.Body.meta_data_only;
+                ResponsePending = productResponse.Body.response_pending;
+
+                UnknownPackages = new ReadOnlyCollection<uint>( productResponse.Body.unknown_packageids );
+                UnknownApps = new ReadOnlyCollection<uint>( productResponse.Body.unknown_appids );
+
                 Packages = new Dictionary<uint, PICSProductInfo>();
                 Apps = new Dictionary<uint, PICSProductInfo>();
 
-                foreach ( var package_info in msg.packages )
+                foreach ( var package_info in productResponse.Body.packages )
                 {
                     Packages.Add( package_info.packageid, new PICSProductInfo( package_info ) );
                 }
 
-                foreach ( var app_info in msg.apps )
+                foreach ( var app_info in productResponse.Body.apps )
                 {
-                    Apps.Add( app_info.appid, new PICSProductInfo( msg, app_info ) );
+                    Apps.Add( app_info.appid, new PICSProductInfo( productResponse.Body, app_info ) );
                 }
             }
         }
@@ -801,6 +837,7 @@ namespace SteamKit2
         /// <summary>
         /// This callback is received when the list of guest passes is updated.
         /// </summary>
+        [SteamCallback( EMsg.ClientUpdateGuestPassesList )]
         public sealed class GuestPassListCallback : CallbackMsg
         {
             /// <summary>
@@ -821,17 +858,21 @@ namespace SteamKit2
             public List<KeyValue> GuestPasses { get; set; }
 
 
-            internal GuestPassListCallback( MsgClientUpdateGuestPassesList msg, Stream payload )
+            internal GuestPassListCallback( IPacketMsg packetMsg )
             {
-                Result = msg.Result;
-                CountGuestPassesToGive = msg.CountGuestPassesToGive;
-                CountGuestPassesToRedeem = msg.CountGuestPassesToRedeem;
+                var guestPasses = new ClientMsg<MsgClientUpdateGuestPassesList>( packetMsg );
+
+                Result = guestPasses.Body.Result;
+                CountGuestPassesToGive = guestPasses.Body.CountGuestPassesToGive;
+                CountGuestPassesToRedeem = guestPasses.Body.CountGuestPassesToRedeem;
 
                 GuestPasses = new List<KeyValue>();
+
                 for ( int i = 0; i < CountGuestPassesToGive + CountGuestPassesToRedeem; i++ )
                 {
                     var kv = new KeyValue();
-                    kv.TryReadAsBinary( payload );
+                    kv.TryReadAsBinary( guestPasses.Payload );
+
                     GuestPasses.Add( kv );
                 }
             }
@@ -857,6 +898,7 @@ namespace SteamKit2
         /// <summary>
         /// This callback is received when a CDN auth token is received
         /// </summary>
+        [SteamCallback( EMsg.ClientGetCDNAuthTokenResponse )]
         public sealed class CDNAuthTokenCallback : CallbackMsg
         {
             /// <summary>
@@ -872,13 +914,15 @@ namespace SteamKit2
             /// </summary>
             public DateTime Expiration { get; set; }
 
-            internal CDNAuthTokenCallback( JobID jobID, CMsgClientGetCDNAuthTokenResponse msg )
+            internal CDNAuthTokenCallback( IPacketMsg packetMsg )
             {
-                JobID = jobID;
+                var authToken = new ClientMsgProtobuf<CMsgClientGetCDNAuthTokenResponse>( packetMsg );
 
-                Result = (EResult)msg.eresult;
-                Token = msg.token;
-                Expiration = DateUtils.DateTimeFromUnixTime( msg.expiration_time );
+                JobID = authToken.TargetJobID;
+
+                Result = (EResult)authToken.Body.eresult;
+                Token = authToken.Body.token;
+                Expiration = DateUtils.DateTimeFromUnixTime( authToken.Body.expiration_time );
             }
         }
     }
