@@ -31,6 +31,8 @@ namespace SteamKit2
 
         Dictionary<EMsg, Action<IPacketMsg>> dispatchMap;
 
+        MessageHandler msgHandler;
+
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SteamClient"/> class with a specific connection type.
@@ -70,6 +72,8 @@ namespace SteamKit2
                 { EMsg.ClientCMList, HandleCMList },
                 { EMsg.ClientServerList, HandleServerList },
             };
+
+            msgHandler = new MessageHandler( this );
         }
 
 
@@ -311,6 +315,10 @@ namespace SteamKit2
                     return;
                 }
             }
+
+            // finally pass the message along to the message handler, which will pass the message along to
+            // interested callbackmsg objects and automatically post them to the callback queue
+            msgHandler.RouteToCallback( packetMsg );
         }
         /// <summary>
         /// Called when the client is physically disconnected from Steam3.

@@ -126,6 +126,7 @@
     <Compile Include="Steam\Handlers\SteamGameServer\Callbacks.cs" />
     <Compile Include="Steam\Handlers\SteamGameServer\SteamGameServer.cs" />
     <Compile Include="Steam\Handlers\SteamGameCoordinator\Callbacks.cs" />
+    <Compile Include="Steam\SteamClient\MessageHandler.cs" />
     <Compile Include="Steam\Handlers\SteamMasterServer\Callbacks.cs" />
     <Compile Include="Steam\Handlers\SteamMasterServer\SteamMasterServer.cs" />
     <Compile Include="Steam\Handlers\SteamScreenshots\Callbacks.cs" />
