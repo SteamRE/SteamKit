@@ -295,6 +295,9 @@ namespace SteamKit2.Internal
                 Servers.TryMark( connection.CurrentEndPoint, ServerQuality.Bad );
             }
 
+            SessionID = null;
+            SteamID = null;
+
             ConnectedUniverse = EUniverse.Invalid;
 
             heartBeatFunc.Stop();
