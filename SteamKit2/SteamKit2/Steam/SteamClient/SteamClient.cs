@@ -341,6 +341,15 @@ namespace SteamKit2
         /// </summary>
         protected override void OnClientDisconnected( bool userInitiated )
         {
+            // if we are disconnected, cancel all pending jobs
+
+            foreach ( AsyncJob asyncJob in asyncJobs.Values )
+            {
+                asyncJob.Complete( null );
+            }
+
+            asyncJobs.Clear();
+
             this.PostCallback( new DisconnectedCallback( userInitiated ) );
         }
 

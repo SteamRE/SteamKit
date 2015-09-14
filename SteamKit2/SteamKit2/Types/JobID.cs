@@ -100,8 +100,19 @@ namespace SteamKit2
             return ToTask().GetAwaiter();
         }
 
+
         internal override void Complete( object callback )
         {
+            if ( callback == null )
+            {
+                // if we're completing with a null callback object, this is a signal that the job has been cancelled
+                // without a valid result from the steam servers
+
+                tcs.TrySetCanceled();
+
+                return;
+            }
+
             tcs.TrySetResult( (T)callback );
         }
     }
