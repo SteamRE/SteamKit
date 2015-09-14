@@ -33,6 +33,7 @@ namespace SteamKit2
         Dictionary<EMsg, Action<IPacketMsg>> dispatchMap;
 
         ConcurrentDictionary<JobID, AsyncJob> asyncJobs;
+        ScheduledFunction jobTimeoutFunc;
 
 
         /// <summary>
@@ -75,6 +76,8 @@ namespace SteamKit2
             };
 
             asyncJobs = new ConcurrentDictionary<JobID, AsyncJob>();
+
+            jobTimeoutFunc = new ScheduledFunction( CancelTimedoutJobs, TimeSpan.FromSeconds( 5 ) );
         }
 
 
@@ -289,6 +292,28 @@ namespace SteamKit2
 
             asyncJob.Complete( callback );
         }
+        void CancelPendingJobs()
+        {
+            foreach ( AsyncJob asyncJob in asyncJobs.Values )
+            {
+                asyncJob.Complete( null );
+            }
+
+            asyncJobs.Clear();
+        }
+        void CancelTimedoutJobs()
+        {
+            foreach ( AsyncJob job in asyncJobs.Values )
+            {
+                if ( job.IsTimedout )
+                {
+                    job.Complete( null );
+
+                    AsyncJob ignored;
+                    asyncJobs.TryRemove( job, out ignored );
+                }
+            }
+        }
 
 
         /// <summary>
@@ -342,13 +367,9 @@ namespace SteamKit2
         protected override void OnClientDisconnected( bool userInitiated )
         {
             // if we are disconnected, cancel all pending jobs
+            CancelPendingJobs();
 
-            foreach ( AsyncJob asyncJob in asyncJobs.Values )
-            {
-                asyncJob.Complete( null );
-            }
-
-            asyncJobs.Clear();
+            jobTimeoutFunc.Stop();
 
             this.PostCallback( new DisconnectedCallback( userInitiated ) );
         }
@@ -357,6 +378,11 @@ namespace SteamKit2
         void HandleEncryptResult( IPacketMsg packetMsg )
         {
             var encResult = new Msg<MsgChannelEncryptResult>( packetMsg );
+
+            if ( encResult.Body.Result == EResult.OK )
+            {
+                jobTimeoutFunc.Start();
+            }
 
             PostCallback( new ConnectedCallback( encResult.Body ) );
         }

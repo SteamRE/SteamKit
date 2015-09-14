@@ -67,9 +67,19 @@ namespace SteamKit2
 
     public abstract class AsyncJob : JobID
     {
+        DateTime jobStart;
+
+        internal bool IsTimedout
+        {
+            get { return DateTime.UtcNow >= jobStart + TimeSpan.FromMinutes( 1 ); }
+        }
+
+
         public AsyncJob( SteamClient client, ulong jobId )
             : base( jobId )
         {
+            jobStart = DateTime.UtcNow;
+
             client.StartJob( this );
         }
 
