@@ -32,8 +32,8 @@ namespace SteamKit2
 
         Dictionary<EMsg, Action<IPacketMsg>> dispatchMap;
 
-        ConcurrentDictionary<JobID, AsyncJob> asyncJobs;
-        ScheduledFunction jobTimeoutFunc;
+        internal ConcurrentDictionary<JobID, AsyncJob> asyncJobs;
+        internal ScheduledFunction jobTimeoutFunc;
 
 
         /// <summary>
