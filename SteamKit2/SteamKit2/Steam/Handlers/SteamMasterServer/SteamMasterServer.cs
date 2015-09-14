@@ -65,7 +65,7 @@ namespace SteamKit2
         /// </summary>
         /// <param name="details">The details for the request.</param>
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="QueryCallback"/>.</returns>
-        public JobID ServerQuery( QueryDetails details )
+        public AsyncJob<QueryCallback> ServerQuery( QueryDetails details )
         {
             var query = new ClientMsgProtobuf<CMsgClientGMSServerQuery>( EMsg.ClientGMSServerQuery );
             query.SourceJobID = Client.GetNextJobID();
@@ -82,7 +82,7 @@ namespace SteamKit2
 
             this.Client.Send( query );
 
-            return query.SourceJobID;
+            return new AsyncJob<QueryCallback>( this.Client, query.SourceJobID );
         }
 
 
