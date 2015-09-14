@@ -6,12 +6,13 @@
 
 
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net.Sockets;
 using System.Threading;
-using SteamKit2.Internal;
-using System.Diagnostics;
 using ProtoBuf;
+using SteamKit2.Internal;
 
 namespace SteamKit2
 {
@@ -30,6 +31,8 @@ namespace SteamKit2
         Queue<ICallbackMsg> callbackQueue;
 
         Dictionary<EMsg, Action<IPacketMsg>> dispatchMap;
+
+        ConcurrentDictionary<JobID, AsyncJob> asyncJobs;
 
 
         /// <summary>
@@ -70,6 +73,8 @@ namespace SteamKit2
                 { EMsg.ClientCMList, HandleCMList },
                 { EMsg.ClientServerList, HandleServerList },
             };
+
+            asyncJobs = new ConcurrentDictionary<JobID, AsyncJob>();
         }
 
 
@@ -245,6 +250,8 @@ namespace SteamKit2
                 callbackQueue.Enqueue( msg );
                 Monitor.Pulse( callbackLock );
             }
+
+            TryCompleteJob( msg.JobID, msg );
         }
         #endregion
 
@@ -264,6 +271,23 @@ namespace SteamKit2
                 SequentialCount = sequence,
                 StartTime = processStartTime
             };
+        }
+
+        internal void StartJob( AsyncJob asyncJob )
+        {
+            asyncJobs.TryAdd( asyncJob, asyncJob );
+        }
+        void TryCompleteJob( JobID jobId, object callback )
+        {
+            AsyncJob asyncJob;
+
+            if ( !asyncJobs.TryRemove( jobId, out asyncJob ) )
+            {
+                // not a job we are tracking ourselves, can ignore it
+                return;
+            }
+
+            asyncJob.Complete( callback );
         }
 
 
