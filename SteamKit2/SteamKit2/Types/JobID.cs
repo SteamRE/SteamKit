@@ -65,17 +65,30 @@ namespace SteamKit2
         }
     }
 
+    /// <summary>
+    /// The base class for awaitable versions of a <see cref="JobID"/>.
+    /// Should not be used or constructed directly, but rather with <see cref="AsyncJob{T}"/>.
+    /// </summary>
     public abstract class AsyncJob : JobID
     {
         DateTime jobStart;
 
+
+        /// <summary>
+        /// Gets or sets the period of time before this job will be considered timed out and will be canceled. By default this is 1 minute.
+        /// </summary>
+        /// <value>
+        /// The timeout value.
+        /// </value>
+        public TimeSpan Timeout { get; set; } = TimeSpan.FromMinutes( 1 );
+
         internal bool IsTimedout
         {
-            get { return DateTime.UtcNow >= jobStart + TimeSpan.FromMinutes( 1 ); }
+            get { return DateTime.UtcNow >= jobStart + Timeout; }
         }
 
 
-        public AsyncJob( SteamClient client, ulong jobId )
+        internal AsyncJob( SteamClient client, ulong jobId )
             : base( jobId )
         {
             jobStart = DateTime.UtcNow;
@@ -87,12 +100,22 @@ namespace SteamKit2
         internal abstract void Complete( object callback );
     }
 
+    /// <summary>
+    /// Represents an awaitable version of a <see cref="JobID"/>.
+    /// Can either be converted to a TPL <see cref="Task"/> with <see cref="ToTask"/> or can be awaited directly.
+    /// </summary>
+    /// <typeparam name="T">The callback type that will be returned by this async job.</typeparam>
     public sealed class AsyncJob<T> : AsyncJob
         where T : CallbackMsg
     {
         TaskCompletionSource<T> tcs;
 
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AsyncJob{T}" /> class.
+        /// </summary>
+        /// <param name="client">The <see cref="SteamClient"/> that this job will be associated with.</param>
+        /// <param name="jobId">The Job ID value associated with this async job.</param>
         public AsyncJob( SteamClient client, ulong jobId )
             : base( client, jobId )
         {
@@ -100,11 +123,18 @@ namespace SteamKit2
         }
 
 
+        /// <summary>
+        /// Converts this <see cref="AsyncJob{T}"/> instance into a TPL <see cref="Task{T}"/>.
+        /// </summary>
+        /// <returns></returns>
         public Task<T> ToTask()
         {
             return tcs.Task;
         }
 
+        /// <summary>Gets an awaiter used to await this <see cref="AsyncJob{T}"/>.</summary>
+        /// <returns>An awaiter instance.</returns>
+        /// <remarks>This method is intended for compiler use rather than use directly in code.</remarks>
         public TaskAwaiter<T> GetAwaiter()
         {
             return ToTask().GetAwaiter();
