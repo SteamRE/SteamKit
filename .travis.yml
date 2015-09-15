@@ -1,5 +1,8 @@
 sudo: false
 language: csharp
+mono:
+    - alpha
+
 solution: SteamKit2/SteamKit2.sln
 
 install:
