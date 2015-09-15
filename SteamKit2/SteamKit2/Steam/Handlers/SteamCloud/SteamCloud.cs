@@ -32,10 +32,11 @@ namespace SteamKit2
         /// <summary>
         /// Requests details for a specific item of user generated content from the Steam servers.
         /// Results are returned in a <see cref="UGCDetailsCallback"/>.
+        /// The returned <see cref="AsyncJob{T}"/> can also be awaited to retrieve the callback result.
         /// </summary>
         /// <param name="ugcId">The unique user generated content id.</param>
-        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="Callback&lt;T&gt;"/>.</returns>
-        public JobID RequestUGCDetails( UGCHandle ugcId )
+        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="UGCDetailsCallback"/>.</returns>
+        public AsyncJob<UGCDetailsCallback> RequestUGCDetails( UGCHandle ugcId )
         {
             var request = new ClientMsgProtobuf<CMsgClientUFSGetUGCDetails>( EMsg.ClientUFSGetUGCDetails );
             request.SourceJobID = Client.GetNextJobID();
@@ -44,17 +45,18 @@ namespace SteamKit2
 
             this.Client.Send( request );
 
-            return request.SourceJobID;
+            return new AsyncJob<UGCDetailsCallback>( this.Client, request.SourceJobID );
         }
 
         /// <summary>
         /// Requests details for a specific file in the user's Cloud storage.
         /// Results are returned in a <see cref="SingleFileInfoCallback"/>.
+        /// The returned <see cref="AsyncJob{T}"/> can also be awaited to retrieve the callback result.
         /// </summary>
         /// <param name="appid">The app id of the game.</param>
         /// <param name="filename">The path to the file being requested.</param>
-        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="Callback&lt;T&gt;"/>.</returns>
-        public JobID GetSingleFileInfo(uint appid, string filename)
+        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="SingleFileInfoCallback"/>.</returns>
+        public AsyncJob<SingleFileInfoCallback> GetSingleFileInfo(uint appid, string filename)
         {
             var request = new ClientMsgProtobuf<CMsgClientUFSGetSingleFileInfo>(EMsg.ClientUFSGetSingleFileInfo);
             request.SourceJobID = Client.GetNextJobID();
@@ -64,17 +66,18 @@ namespace SteamKit2
 
             this.Client.Send(request);
 
-            return request.SourceJobID;
+            return new AsyncJob<SingleFileInfoCallback>( this.Client, request.SourceJobID );
         }
 
         /// <summary>
         /// Commit a Cloud file at the given path to make its UGC handle publicly visible.
         /// Results are returned in a <see cref="ShareFileCallback"/>.
+        /// The returned <see cref="AsyncJob{T}"/> can also be awaited to retrieve the callback result.
         /// </summary>
         /// <param name="appid">The app id of the game.</param>
         /// <param name="filename">The path to the file being requested.</param>
-        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="Callback&lt;T&gt;"/>.</returns>
-        public JobID ShareFile(uint appid, string filename)
+        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="ShareFileCallback"/>.</returns>
+        public AsyncJob<ShareFileCallback> ShareFile(uint appid, string filename)
         {
             var request = new ClientMsgProtobuf<CMsgClientUFSShareFile>(EMsg.ClientUFSShareFile);
             request.SourceJobID = Client.GetNextJobID();
@@ -84,7 +87,7 @@ namespace SteamKit2
 
             this.Client.Send(request);
 
-            return request.SourceJobID;
+            return new AsyncJob<ShareFileCallback>( this.Client, request.SourceJobID );
         }
 
         /// <summary>
