@@ -34,7 +34,7 @@ namespace SteamKit2
         /// Results are returned in a <see cref="UGCDetailsCallback"/>.
         /// </summary>
         /// <param name="ugcId">The unique user generated content id.</param>
-        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="Callback&lt;T&gt;"/>.</returns>
+        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="UGCDetailsCallback"/>.</returns>
         public JobID RequestUGCDetails( UGCHandle ugcId )
         {
             var request = new ClientMsgProtobuf<CMsgClientUFSGetUGCDetails>( EMsg.ClientUFSGetUGCDetails );
@@ -53,7 +53,7 @@ namespace SteamKit2
         /// </summary>
         /// <param name="appid">The app id of the game.</param>
         /// <param name="filename">The path to the file being requested.</param>
-        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="Callback&lt;T&gt;"/>.</returns>
+        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="SingleFileInfoCallback"/>.</returns>
         public JobID GetSingleFileInfo(uint appid, string filename)
         {
             var request = new ClientMsgProtobuf<CMsgClientUFSGetSingleFileInfo>(EMsg.ClientUFSGetSingleFileInfo);
@@ -73,7 +73,7 @@ namespace SteamKit2
         /// </summary>
         /// <param name="appid">The app id of the game.</param>
         /// <param name="filename">The path to the file being requested.</param>
-        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="Callback&lt;T&gt;"/>.</returns>
+        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="ShareFileCallback"/>.</returns>
         public JobID ShareFile(uint appid, string filename)
         {
             var request = new ClientMsgProtobuf<CMsgClientUFSShareFile>(EMsg.ClientUFSShareFile);

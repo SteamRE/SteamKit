@@ -104,7 +104,7 @@ namespace SteamKit2
         /// </summary>
         /// <param name="appId">The AppID to request leaderboard rows for.</param>
         /// <param name="id">ID of the leaderboard to view.</param>
-        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="FindOrCreateLeaderboardCallback"/>.</returns>
+        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="LeaderboardEntriesCallback"/>.</returns>
         /// <param name="rangeStart">Range start or 0.</param>
         /// <param name="rangeEnd">Range end or max leaderboard entries.</param>
         /// <param name="dataRequest">Type of request.</param>

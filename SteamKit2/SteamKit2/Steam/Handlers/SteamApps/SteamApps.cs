@@ -350,7 +350,7 @@ namespace SteamKit2
         /// <param name="package">Package id requested.</param>
         /// <param name="onlyPublic">Whether to send only public information.</param>
         /// <param name="metaDataOnly">Whether to send only meta data.</param>
-        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="PICSTokensCallback"/>.</returns>
+        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="PICSProductInfoCallback"/>.</returns>
         public JobID PICSGetProductInfo(uint? app, uint? package, bool onlyPublic = true, bool metaDataOnly = false)
         {
             List<uint> apps = new List<uint>();
