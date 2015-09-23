@@ -59,9 +59,9 @@ namespace DotaMatchRequest
             // setup callbacks
             callbackMgr = new CallbackManager( client );
 
-            new Callback<SteamClient.ConnectedCallback>( OnConnected, callbackMgr );
-            new Callback<SteamUser.LoggedOnCallback>( OnLoggedOn, callbackMgr );
-            new Callback<SteamGameCoordinator.MessageCallback>( OnGCMessage, callbackMgr );
+            callbackMgr.Subscribe<SteamClient.ConnectedCallback>( OnConnected );
+            callbackMgr.Subscribe<SteamUser.LoggedOnCallback>( OnLoggedOn );
+            callbackMgr.Subscribe<SteamGameCoordinator.MessageCallback>( OnGCMessage );
         }
 
 
