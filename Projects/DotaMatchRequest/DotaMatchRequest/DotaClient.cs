@@ -145,6 +145,7 @@ namespace DotaMatchRequest
 
             // inform the dota GC that we want a session
             var clientHello = new ClientGCMsgProtobuf<CMsgClientHello>( ( uint )EGCBaseClientMsg.k_EMsgGCClientHello );
+            clientHello.Body.engine = ESourceEngine.k_ESE_Source2;
             gameCoordinator.Send( clientHello, APPID );
         }
 
