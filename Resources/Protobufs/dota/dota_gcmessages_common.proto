@@ -530,6 +530,9 @@ enum EDOTAGCMsg {
 	k_EMsgClientToGCApplyGemCombiner = 7603;
 	k_EMsgClientToGCCreateStaticRecipe = 7604;
 	k_EMsgClientToGCCreateStaticRecipeResponse = 7605;
+	k_EMsgClientToGCGetAllHeroOrder = 7606;
+	k_EMsgClientToGCGetAllHeroOrderResponse = 7607;
+	k_EMsgSQLGCToGCGrantBadgePoints = 7608;
 	k_EMsgGCDev_GrantWarKill = 8001;
 	k_EMsgClientToGCCreateTeamShowcase = 8002;
 	k_EMsgGCToClientTeamShowcaseCreateResult = 8003;
@@ -567,8 +570,6 @@ enum EDOTAGCMsg {
 	k_EMsgClientToGCGetProfileCardStatsResponse = 8035;
 	k_EMsgClientToGCTopLeagueMatchesRequest = 8036;
 	k_EMsgClientToGCTopFriendMatchesRequest = 8037;
-	k_EMsgGCToClientTopMatchesResponse = 8038;
-	k_EMsgClientToGCTopPubMatchesRequest = 8039;
 	k_EMsgGCToClientProfileCardStatsUpdated = 8040;
 	k_EMsgServerToGCRealtimeStats = 8041;
 	k_EMsgGCToServerRealtimeStatsStartStop = 8042;
@@ -584,6 +585,12 @@ enum EDOTAGCMsg {
 	k_EMsgGCPracticeLobbyCloseBroadcastChannel = 8054;
 	k_EMsgGCStartFindingMatchResponse = 8055;
 	k_EMsgSQLGCToGCUpdateHeroMMR = 8056;
+	k_EMsgSQLGCToGCGrantAccountFlag = 8057;
+	k_EMsgGCToGCGetAccountFlags = 8058;
+	k_EMsgGCToGCGetAccountFlagsResponse = 8059;
+	k_EMsgSignOutWagerStats = 8060;
+	k_EMsgGCToClientTopLeagueMatchesResponse = 8061;
+	k_EMsgGCToClientTopFriendMatchesResponse = 8062;
 }
 
 enum DOTA_GameMode {
@@ -622,7 +629,8 @@ enum DOTA_GameState {
 	DOTA_GAMERULES_STATE_POST_GAME = 6;
 	DOTA_GAMERULES_STATE_DISCONNECT = 7;
 	DOTA_GAMERULES_STATE_TEAM_SHOWCASE = 8;
-	DOTA_GAMERULES_STATE_LAST = 9;
+	DOTA_GAMERULES_STATE_CUSTOM_GAME_SETUP = 9;
+	DOTA_GAMERULES_STATE_LAST = 10;
 }
 
 enum DOTA_GC_TEAM {
@@ -767,11 +775,20 @@ enum ETournamentType {
 	k_ETournamentType_WeeklyDivision = 1;
 }
 
-enum EIngameEvent {
-	k_EIngameEvent_OraclePA = 0;
-	k_EIngameEvent_CNY2015 = 1;
-	k_EIngameEvent_CNY2015_PreBeast = 2;
-	k_EIngameEvent_TI5 = 3;
+enum EEvent {
+	EVENT_ID_NONE = 0;
+	EVENT_ID_DIRETIDE = 1;
+	EVENT_ID_SPRING_FESTIVAL = 2;
+	EVENT_ID_FROSTIVUS_2013 = 3;
+	EVENT_ID_COMPENDIUM_2014 = 4;
+	EVENT_ID_NEXON_PC_BANG = 5;
+	EVENT_ID_PWRD_DAC_2015 = 6;
+	EVENT_ID_NEW_BLOOM_2015 = 7;
+	EVENT_ID_INTERNATIONAL_2015 = 8;
+	EVENT_ID_FALL_MAJOR_2015 = 9;
+	EVENT_ID_ORACLE_PA = 10;
+	EVENT_ID_NEW_BLOOM_2015_PREBEAST = 11;
+	EVENT_ID_FROSTIVUS = 12;
 }
 
 enum LobbyDotaTVDelay {
@@ -867,6 +884,8 @@ enum DOTA_COMBATLOG_TYPES {
 	DOTA_COMBATLOG_TEAM_BUILDING_KILL = 17;
 	DOTA_COMBATLOG_FIRST_BLOOD = 18;
 	DOTA_COMBATLOG_MODIFIER_REFRESH = 19;
+	DOTA_COMBATLOG_NEUTRAL_CAMP_STACK = 20;
+	DOTA_COMBATLOG_PICKUP_RUNE = 21;
 }
 
 message CSODOTAGameAccountClient {
@@ -914,6 +933,8 @@ message CSODOTAGameAccountClient {
 	optional uint32 competitive_team_games_played = 66;
 	optional uint32 curr_all_hero_challenge_id = 67;
 	optional uint32 play_time_points = 68;
+	optional uint32 account_flags = 69;
+	optional uint32 play_time_level = 70;
 }
 
 message CSODOTAPartyMember {
@@ -953,10 +974,11 @@ message CSODOTAParty {
 	optional uint32 low_priority_games_remaining = 35;
 	optional uint32 min_level = 36;
 	optional uint32 max_level = 37;
-	repeated .EIngameEvent active_ingame_events = 39;
+	repeated .EEvent active_ingame_events = 39;
 	optional bool open_for_join_requests = 40;
 	repeated .CSODOTAPartyInvite sent_invites = 41;
 	repeated .CSODOTAPartyInvite recv_invites = 42;
+	optional uint32 account_flags = 43;
 }
 
 message CSODOTAPartyInvite {
@@ -1189,7 +1211,7 @@ message CSODOTALobby {
 	optional .EMatchOutcome match_outcome = 70 [default = k_EMatchOutcome_Unknown];
 	optional bool mass_disconnect = 67;
 	optional uint64 custom_game_id = 68;
-	repeated .EIngameEvent active_ingame_events = 69;
+	repeated .EEvent active_ingame_events = 69;
 	optional uint32 custom_min_players = 71;
 	optional uint32 custom_max_players = 72;
 	optional .PartnerAccountType partner_type = 73 [default = PARTNER_NONE];
@@ -1511,6 +1533,9 @@ message CMsgDOTACombatLogEntry {
 	optional uint32 assist_player3 = 34;
 	optional uint32 stack_count = 35;
 	optional bool hidden_modifier = 36;
+	optional bool is_target_building = 37;
+	optional uint32 neutral_camp_type = 38;
+	optional uint32 rune_type = 39;
 }
 
 message CMsgDOTAProfileCard {
@@ -1527,6 +1552,7 @@ message CMsgDOTAProfileCard {
 
 		message Item {
 			optional bytes serialized_item = 1;
+			optional uint64 item_id = 2;
 		}
 
 		message Hero {
@@ -1559,6 +1585,9 @@ message CMsgDOTAProfileCard {
 	optional uint32 account_id = 1;
 	optional uint32 background_def_index = 2;
 	repeated .CMsgDOTAProfileCard.Slot slots = 3;
+	optional uint32 badge_points = 4;
+	optional uint32 event_points = 5;
+	optional uint32 event_id = 6;
 }
 
 message CMsgGCToClientNewBloomTimingUpdated {

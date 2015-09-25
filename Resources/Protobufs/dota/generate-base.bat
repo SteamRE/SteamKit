@@ -10,9 +10,7 @@ echo Building GC base
 ..\..\Protogen\protogen -s:..\ -i:"econ_gcmessages.proto" -o:"..\..\..\SteamKit2\SteamKit2\Base\Generated\GC\SteamMsgGCEcon.cs" -t:csharp -ns:"SteamKit2.GC.Internal"
 
 echo Building Steamworks Unified Messages
-..\..\Protogen\protogen -s:..\ -i:"steammessages_cloud.steamworkssdk.proto" -o:"..\..\..\SteamKit2\SteamKit2\Base\Generated\Unified\Steamworks\SteamMsgCloudSteamworks.cs" -t:csharp -ns:"SteamKit2.Unified.Internal.Steamworks"
 ..\..\Protogen\protogen -s:..\ -i:"steammessages_oauth.steamworkssdk.proto" -o:"..\..\..\SteamKit2\SteamKit2\Base\Generated\Unified\Steamworks\SteamMsgOAuthSteamworks.cs" -t:csharp -ns:"SteamKit2.Unified.Internal.Steamworks"
-..\..\Protogen\protogen -s:..\ -i:"steammessages_publishedfile.steamworkssdk.proto" -o:"..\..\..\SteamKit2\SteamKit2\Base\Generated\Unified\Steamworks\SteamMsgPublishedFileSteamworks.cs" -t:csharp -ns:"SteamKit2.Unified.Internal.Steamworks"
 
 echo Building Dota messages...
 ..\..\Protogen\protogen -s:..\ -i:"network_connection.proto" -o:"..\..\..\SteamKit2\SteamKit2\Base\Generated\GC\Dota\NetworkConnection.cs" -t:csharp -ns:"SteamKit2.GC.Dota.Internal"

@@ -14,8 +14,16 @@ enum DOTAChatChannelType_t {
 	DOTAChannelType_Team = 4;
 	DOTAChannelType_Guild = 5;
 	DOTAChannelType_Fantasy = 6;
-	DOTAChannelType_Cafe = 7;
-	DOTAChannelType_CustomGame = 8;
+	DOTAChannelType_Whisper = 7;
+	DOTAChannelType_Console = 8;
+	DOTAChannelType_Tab = 9;
+	DOTAChannelType_Invalid = 10;
+	DOTAChannelType_GameAll = 11;
+	DOTAChannelType_GameAllies = 12;
+	DOTAChannelType_GameSpectator = 13;
+	DOTAChannelType_GameCoaching = 14;
+	DOTAChannelType_Cafe = 15;
+	DOTAChannelType_CustomGame = 16;
 }
 
 enum DOTA_WatchReplayType {
@@ -199,21 +207,24 @@ message CMsgGCToClientFindTopSourceTVGamesResponse {
 	optional bool specific_games = 8;
 }
 
+message CMsgClientToGCTopMatchesRequest {
+	optional uint32 hero_id = 1;
+	optional uint32 player_account_id = 2;
+	optional uint32 team_id = 3;
+}
+
 message CMsgClientToGCTopLeagueMatchesRequest {
 }
 
 message CMsgClientToGCTopFriendMatchesRequest {
 }
 
-message CMsgGCToClientTopMatchesResponse {
-	enum Type {
-		LEAGUES = 1;
-		FRIENDS = 2;
-		PUBS = 3;
-	}
+message CMsgGCToClientTopLeagueMatchesResponse {
+	repeated .CMsgDOTAMatchMinimal matches = 2;
+}
 
-	optional .CMsgGCToClientTopMatchesResponse.Type type = 1 [default = LEAGUES];
-	repeated .CMsgDOTAMatch matches = 2;
+message CMsgGCToClientTopFriendMatchesResponse {
+	repeated .CMsgDOTAMatchMinimal matches = 1;
 }
 
 message CMsgClientToGCFindTopMatches {
@@ -353,6 +364,8 @@ message CMsgClearPracticeLobbyTeam {
 message CMsgPracticeLobbyList {
 	optional bool tournament_games = 1;
 	optional string pass_key = 2;
+	optional uint32 region = 3;
+	optional .DOTA_GameMode game_mode = 4 [default = DOTA_GAMEMODE_NONE];
 }
 
 message CMsgPracticeLobbyListResponseEntry {
@@ -378,6 +391,7 @@ message CMsgPracticeLobbyListResponseEntry {
 	optional uint32 max_player_count = 16;
 	optional uint32 server_region = 17;
 	optional uint32 lan_host_ping_to_server_region = 18;
+	optional uint32 league_id = 19;
 }
 
 message CMsgPracticeLobbyListResponse {
@@ -463,6 +477,7 @@ message CMsgQuickJoinCustomLobby {
 	message RegionPing {
 		optional uint32 server_region = 1;
 		optional uint32 ping = 2;
+		optional fixed32 region_code = 3;
 	}
 
 	optional uint32 server_region = 1;
@@ -637,6 +652,22 @@ message CMsgDOTAMatch {
 
 message CMsgDOTAPlayerMatchHistory {
 	repeated uint64 match_ids = 1;
+}
+
+message CMsgDOTAMatchMinimal {
+	optional uint32 match_id = 1;
+	optional fixed32 start_time = 2;
+	optional uint32 duration = 3;
+	repeated uint32 player_account_ids = 4;
+	repeated uint32 hero_ids = 5;
+	optional .DOTA_GameMode game_mode = 6 [default = DOTA_GAMEMODE_NONE];
+	optional uint32 league_id = 7;
+	optional uint32 radiant_team_id = 8;
+	optional string radiant_team_name = 9;
+	optional uint64 radiant_team_logo = 10;
+	optional uint32 dire_team_id = 11;
+	optional string dire_team_name = 12;
+	optional uint64 dire_team_logo = 13;
 }
 
 message CMsgDOTAMatchHistoryFilter {
@@ -1106,6 +1137,7 @@ message CMsgDOTAChatMessage {
 	optional bool suggest_invite_to_lobby = 11;
 	optional uint32 event_points = 12;
 	optional bool coin_flip = 13;
+	optional int32 player_id = 14 [default = -1];
 }
 
 message CMsgDOTAChatMember {
@@ -1620,7 +1652,7 @@ message CMsgDOTAWelcome {
 	optional uint32 gc_socache_file_version = 22;
 	repeated .CMsgDOTAWelcome.LocalizationDigest localization_digests = 23;
 	optional bool is_perfect_world_test_account = 24;
-	repeated .EIngameEvent active_events = 25;
+	repeated .EEvent active_events = 25;
 	repeated .CMsgDOTAWelcome.CExtraMsg extra_messages = 26;
 }
 
@@ -1662,6 +1694,14 @@ message CLeague {
 	optional uint32 version = 6;
 	optional bool compendium_is_public = 7;
 	optional uint32 content_version = 8;
+}
+
+message CMsgClientLeagueInfo {
+	optional .CLeague league = 1;
+	optional bool is_major = 2;
+	optional bool is_owned = 3;
+	optional uint32 sort_order = 4;
+	optional uint32 amateur_region = 5;
 }
 
 message CMsgResponseLeagueInfo {
@@ -2104,8 +2144,8 @@ message CMsgDOTAGetPlayerMatchHistory {
 	optional uint32 matches_requested = 3;
 	optional uint32 hero_id = 4;
 	optional uint32 request_id = 5;
-	optional .ESourceEngine engine = 6 [default = k_ESE_Source1];
 	optional bool include_practice_matches = 7;
+	optional bool include_custom_games = 8;
 }
 
 message CMsgDOTAGetPlayerMatchHistoryResponse {
@@ -2277,6 +2317,13 @@ message CMsgClientToGCGetAdditionalEquipsResponse {
 	repeated .CAdditionalEquipSlot equips = 1;
 }
 
+message CMsgClientToGCGetAllHeroOrder {
+}
+
+message CMsgClientToGCGetAllHeroOrderResponse {
+	repeated uint32 hero_ids = 1;
+}
+
 message CMsgClientToGCGetAllHeroProgress {
 	optional uint32 account_id = 1;
 }
@@ -2301,6 +2348,7 @@ message CMsgClientToGCGetAllHeroProgressResponse {
 	optional float full_lap_avg_tries = 17;
 	optional float curr_lap_avg_tries = 18;
 	optional string profile_name = 19;
+	optional uint32 start_hero_id = 20;
 }
 
 message CMsgClientToGCGetTrophyList {
@@ -2311,6 +2359,7 @@ message CMsgClientToGCGetTrophyListResponse {
 	message Trophy {
 		optional uint32 trophy_id = 1;
 		optional uint32 trophy_score = 2;
+		optional uint32 last_updated = 3;
 	}
 
 	optional uint32 account_id = 1;
@@ -2322,6 +2371,7 @@ message CMsgGCToClientTrophyAwarded {
 	optional uint32 trophy_id = 1;
 	optional uint32 trophy_score = 2;
 	optional uint32 trophy_old_score = 3;
+	optional uint32 last_updated = 4;
 }
 
 message CMsgClientToGCGetProfileCard {
@@ -2380,7 +2430,7 @@ message CMsgClientToGCRecordCompendiumStats {
 }
 
 message CMsgGCToClientEventStatusChanged {
-	repeated .EIngameEvent active_events = 1;
+	repeated .EEvent active_events = 1;
 }
 
 message CMsgClientToGCExchangeItemsForOffering {
@@ -2555,6 +2605,30 @@ message CMsgDOTAGroupMergeResponse {
 
 message CMsgDOTAGroupMergeReply {
 	optional .EDOTAGroupMergeResult result = 1 [default = k_EDOTAGroupMergeResult_OK];
+}
+
+message CMsgDOTAPartyRichPresence {
+	message Member {
+		optional fixed64 steam_id = 1;
+		optional bool coach = 2;
+	}
+
+	optional fixed64 party_id = 1;
+	optional .CSODOTAParty.State party_state = 2 [default = UI];
+	optional bool open = 3;
+	optional bool low_priority = 5;
+	repeated .CMsgDOTAPartyRichPresence.Member members = 4;
+}
+
+message CMsgDOTALobbyRichPresence {
+	optional fixed64 lobby_id = 1;
+	optional .CSODOTALobby.State lobby_state = 2 [default = UI];
+	optional bool password = 3;
+	optional .DOTA_GameMode game_mode = 4 [default = DOTA_GAMEMODE_NONE];
+	optional uint32 member_count = 5;
+	optional uint32 max_member_count = 6;
+	optional fixed64 custom_game_id = 7;
+	optional string name = 8;
 }
 
 message CMsgDOTACustomGameListenServerStartedLoading {

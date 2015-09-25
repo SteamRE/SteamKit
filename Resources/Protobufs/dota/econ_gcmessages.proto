@@ -90,6 +90,9 @@ enum EGCItemMsg {
 	k_EMsgGCRemoveItemGiftMessageResponse = 1106;
 	k_EMsgGCRemoveItemGifterAccountId = 1107;
 	k_EMsgGCRemoveItemGifterAccountIdResponse = 1108;
+	k_EMsgClientToGCRemoveItemGifterAttributes = 1109;
+	k_EMsgClientToGCRemoveItemName = 1110;
+	k_EMsgClientToGCRemoveItemDescription = 1111;
 	k_EMsgGCTradingBase = 1500;
 	k_EMsgGCTrading_InitiateTradeRequest = 1501;
 	k_EMsgGCTrading_InitiateTradeResponse = 1502;
@@ -171,6 +174,8 @@ enum EGCItemMsg {
 	k_EMsgClientToGCUnlockItemStyle = 2571;
 	k_EMsgClientToGCUnlockItemStyleResponse = 2572;
 	k_EMsgClientToGCSetItemInventoryCategory = 2573;
+	k_EMsgClientToGCUnlockCrate = 2574;
+	k_EMsgClientToGCUnlockCrateResponse = 2575;
 }
 
 enum EGCMsgResponse {
@@ -564,5 +569,35 @@ message CMsgClientToGCSetItemInventoryCategory {
 	optional uint32 set_to_value = 2;
 	optional uint32 remove_categories = 3;
 	optional uint32 add_categories = 4;
+}
+
+message CMsgClientToGCUnlockCrate {
+	optional uint64 crate_item_id = 1;
+	optional uint64 key_item_id = 2;
+}
+
+message CMsgClientToGCUnlockCrateResponse {
+	message Item {
+		optional uint64 item_id = 1;
+		optional uint32 def_index = 2;
+	}
+
+	optional .EGCMsgResponse result = 1 [default = k_EGCMsgResponseOK];
+	repeated .CMsgClientToGCUnlockCrateResponse.Item granted_items = 2;
+}
+
+message CMsgGCRemoveItemAttributeMsg {
+	optional uint64 item_id = 1;
+}
+
+message CMsgGCNameItem {
+	optional uint64 subject_item_id = 1;
+	optional uint64 tool_item_id = 2;
+	optional string name = 3;
+}
+
+message CMsgGCSetItemPosition {
+	optional uint64 item_id = 1;
+	optional uint32 new_position = 2;
 }
 

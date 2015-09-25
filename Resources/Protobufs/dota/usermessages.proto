@@ -4,82 +4,137 @@ option optimize_for = SPEED;
 option cc_generic_services = false;
 
 enum EBaseUserMessages {
-	UM_AchievementEvent = 1;
-	UM_CloseCaption = 2;
-	UM_CloseCaptionDirect = 3;
-	UM_CurrentTimescale = 4;
-	UM_DesiredTimescale = 5;
-	UM_Fade = 6;
-	UM_GameTitle = 7;
-	UM_Geiger = 8;
-	UM_HintText = 9;
-	UM_HudMsg = 10;
-	UM_HudText = 11;
-	UM_KeyHintText = 12;
-	UM_MessageText = 13;
-	UM_RequestState = 14;
-	UM_ResetHUD = 15;
-	UM_Rumble = 16;
-	UM_SayText = 17;
-	UM_SayText2 = 18;
-	UM_SayTextChannel = 19;
-	UM_Shake = 20;
-	UM_ShakeDir = 21;
-	UM_StatsCrawlMsg = 22;
-	UM_StatsSkipState = 23;
-	UM_TextMsg = 24;
-	UM_Tilt = 25;
-	UM_Train = 26;
-	UM_VGUIMenu = 27;
-	UM_VoiceMask = 28;
-	UM_VoiceSubtitle = 29;
-	UM_SendAudio = 30;
-	UM_CameraTransition = 31;
-	UM_MAX_BASE = 63;
+	UM_AchievementEvent = 101;
+	UM_CloseCaption = 102;
+	UM_CloseCaptionDirect = 103;
+	UM_CurrentTimescale = 104;
+	UM_DesiredTimescale = 105;
+	UM_Fade = 106;
+	UM_GameTitle = 107;
+	UM_HintText = 109;
+	UM_HudMsg = 110;
+	UM_HudText = 111;
+	UM_KeyHintText = 112;
+	UM_ColoredText = 113;
+	UM_RequestState = 114;
+	UM_ResetHUD = 115;
+	UM_Rumble = 116;
+	UM_SayText = 117;
+	UM_SayText2 = 118;
+	UM_SayTextChannel = 119;
+	UM_Shake = 120;
+	UM_ShakeDir = 121;
+	UM_TextMsg = 124;
+	UM_ScreenTilt = 125;
+	UM_Train = 126;
+	UM_VGUIMenu = 127;
+	UM_VoiceMask = 128;
+	UM_VoiceSubtitle = 129;
+	UM_SendAudio = 130;
+	UM_ItemPickup = 131;
+	UM_AmmoDenied = 132;
+	UM_CrosshairAngle = 133;
+	UM_ShowMenu = 134;
+	UM_CreditsMsg = 135;
+	UM_CloseCaptionPlaceholder = 142;
+	UM_CameraTransition = 143;
+	UM_AudioParameter = 144;
+	UM_ParticleManager = 145;
+	UM_HudError = 146;
+	UM_CustomGameEvent = 148;
+	UM_MAX_BASE = 200;
 }
 
-message CUserMsg_AchievementEvent {
+enum EBaseEntityMessages {
+	EM_PlayJingle = 136;
+	EM_ScreenOverlay = 137;
+	EM_RemoveAllDecals = 138;
+	EM_PropagateForce = 139;
+	EM_DoSpark = 140;
+	EM_FixAngle = 141;
+}
+
+enum eRollType {
+	ROLL_NONE = -1;
+	ROLL_STATS = 0;
+	ROLL_CREDITS = 1;
+	ROLL_LATE_JOIN_LOGO = 2;
+	ROLL_OUTTRO = 3;
+}
+
+enum PARTICLE_MESSAGE {
+	GAME_PARTICLE_MANAGER_EVENT_CREATE = 0;
+	GAME_PARTICLE_MANAGER_EVENT_UPDATE = 1;
+	GAME_PARTICLE_MANAGER_EVENT_UPDATE_FORWARD = 2;
+	GAME_PARTICLE_MANAGER_EVENT_UPDATE_ORIENTATION = 3;
+	GAME_PARTICLE_MANAGER_EVENT_UPDATE_FALLBACK = 4;
+	GAME_PARTICLE_MANAGER_EVENT_UPDATE_ENT = 5;
+	GAME_PARTICLE_MANAGER_EVENT_UPDATE_OFFSET = 6;
+	GAME_PARTICLE_MANAGER_EVENT_DESTROY = 7;
+	GAME_PARTICLE_MANAGER_EVENT_DESTROY_INVOLVING = 8;
+	GAME_PARTICLE_MANAGER_EVENT_RELEASE = 9;
+	GAME_PARTICLE_MANAGER_EVENT_LATENCY = 10;
+	GAME_PARTICLE_MANAGER_EVENT_SHOULD_DRAW = 11;
+	GAME_PARTICLE_MANAGER_EVENT_FROZEN = 12;
+	GAME_PARTICLE_MANAGER_EVENT_CHANGE_CONTROL_POINT_ATTACHMENT = 13;
+}
+
+message CUserMessageAchievementEvent {
 	optional uint32 achievement = 1;
 }
 
-message CUserMsg_CloseCaption {
+message CUserMessageCloseCaption {
 	optional fixed32 hash = 1;
 	optional float duration = 2;
 	optional bool from_player = 3;
 	optional int32 ent_index = 4;
 }
 
-message CUserMsg_CurrentTimescale {
+message CUserMessageCloseCaptionDirect {
+	optional fixed32 hash = 1;
+	optional float duration = 2;
+	optional bool from_player = 3;
+	optional int32 ent_index = 4;
+}
+
+message CUserMessageCloseCaptionPlaceholder {
+	optional string string = 1;
+	optional float duration = 2;
+	optional bool from_player = 3;
+	optional int32 ent_index = 4;
+}
+
+message CUserMessageCurrentTimescale {
 	optional float current = 1;
 }
 
-message CUserMsg_DesiredTimescale {
+message CUserMessageDesiredTimescale {
 	optional float desired = 1;
-	optional float duration = 2;
-	optional uint32 interpolator = 3;
-	optional float start_blend_time = 4;
+	optional float acceleration = 2;
+	optional float minblendrate = 3;
+	optional float blenddeltamultiplier = 4;
 }
 
-message CUserMsg_Fade {
+message CUserMessageFade {
 	optional uint32 duration = 1;
 	optional uint32 hold_time = 2;
 	optional uint32 flags = 3;
 	optional fixed32 color = 4;
 }
 
-message CUserMsg_Shake {
+message CUserMessageShake {
 	optional uint32 command = 1;
 	optional float amplitude = 2;
 	optional float frequency = 3;
 	optional float duration = 4;
 }
 
-message CUserMsg_ShakeDir {
-	optional .CUserMsg_Shake shake = 1;
+message CUserMessageShakeDir {
+	optional .CUserMessageShake shake = 1;
 	optional .CMsgVector direction = 2;
 }
 
-message CUserMsg_Tilt {
+message CUserMessageScreenTilt {
 	optional uint32 command = 1;
 	optional bool ease_in_out = 2;
 	optional .CMsgVector angle = 3;
@@ -87,27 +142,28 @@ message CUserMsg_Tilt {
 	optional float time = 5;
 }
 
-message CUserMsg_SayText {
-	optional uint32 client = 1;
+message CUserMessageSayText {
+	optional uint32 playerindex = 1;
 	optional string text = 2;
 	optional bool chat = 3;
 }
 
-message CUserMsg_SayText2 {
-	optional uint32 client = 1;
+message CUserMessageSayText2 {
+	optional uint32 entityindex = 1;
 	optional bool chat = 2;
-	optional string format = 3;
-	optional string prefix = 4;
-	optional string text = 5;
-	optional string location = 6;
+	optional string messagename = 3;
+	optional string param1 = 4;
+	optional string param2 = 5;
+	optional string param3 = 6;
+	optional string param4 = 7;
 }
 
-message CUserMsg_HudMsg {
+message CUserMessageHudMsg {
 	optional uint32 channel = 1;
 	optional float x = 2;
 	optional float y = 3;
-	optional uint32 color1 = 4;
-	optional uint32 color2 = 5;
+	optional fixed32 color1 = 4;
+	optional fixed32 color2 = 5;
 	optional uint32 effect = 6;
 	optional float fade_in_time = 7;
 	optional float fade_out_time = 8;
@@ -116,57 +172,56 @@ message CUserMsg_HudMsg {
 	optional string message = 11;
 }
 
-message CUserMsg_HudText {
+message CUserMessageHudText {
 	optional string message = 1;
 }
 
-message CUserMsg_TextMsg {
+message CUserMessageTextMsg {
 	optional uint32 dest = 1;
 	repeated string param = 2;
 }
 
-message CUserMsg_GameTitle {
+message CUserMessageGameTitle {
 }
 
-message CUserMsg_ResetHUD {
+message CUserMessageResetHUD {
 }
 
-message CUserMsg_SendAudio {
+message CUserMessageSendAudio {
+	optional string soundname = 1;
 	optional bool stop = 2;
-	optional string name = 3;
 }
 
-message CUserMsg_VoiceMask {
-	repeated int32 audible_players_mask = 1;
-	optional bool player_mod_enabled = 2;
+message CUserMessageAudioParameter {
+	optional uint32 parameter_type = 1;
+	optional uint32 name_hash_code = 2;
+	optional float value = 3;
 }
 
-message CUserMsg_RequestState {
+message CUserMessageVoiceMask {
+	repeated uint32 gamerules_masks = 1;
+	repeated uint32 ban_masks = 2;
+	optional bool mod_enable = 3;
 }
 
-message CUserMsg_HintText {
+message CUserMessageRequestState {
+}
+
+message CUserMessageHintText {
 	optional string message = 1;
 }
 
-message CUserMsg_KeyHintText {
+message CUserMessageKeyHintText {
 	repeated string messages = 1;
 }
 
-message CUserMsg_StatsCrawlMsg {
-}
-
-message CUserMsg_StatsSkipState {
-	optional int32 num_skips = 1;
-	optional int32 num_players = 2;
-}
-
-message CUserMsg_VoiceSubtitle {
-	optional int32 ent_index = 1;
+message CUserMessageVoiceSubtitle {
+	optional int32 player = 1;
 	optional int32 menu = 2;
 	optional int32 item = 3;
 }
 
-message CUserMsg_VGUIMenu {
+message CUserMessageVGUIMenu {
 	message Keys {
 		optional string name = 1;
 		optional string value = 2;
@@ -174,35 +229,88 @@ message CUserMsg_VGUIMenu {
 
 	optional string name = 1;
 	optional bool show = 2;
-	repeated .CUserMsg_VGUIMenu.Keys keys = 3;
+	repeated .CUserMessageVGUIMenu.Keys keys = 3;
 }
 
-message CUserMsg_Geiger {
-	optional int32 range = 1;
-}
-
-message CUserMsg_Rumble {
+message CUserMessageRumble {
 	optional int32 index = 1;
 	optional int32 data = 2;
 	optional int32 flags = 3;
 }
 
-message CUserMsg_Train {
-	optional int32 train = 1;
+message CUserMessageTrain {
+	optional uint32 position = 1;
 }
 
-message CUserMsg_SayTextChannel {
+message CUserMessageSayTextChannel {
 	optional int32 player = 1;
 	optional int32 channel = 2;
 	optional string text = 3;
 }
 
-message CUserMsg_MessageText {
+message CUserMessageColoredText {
 	optional uint32 color = 1;
 	optional string text = 2;
+	optional bool reset = 3;
+	optional int32 context_player_id = 4;
+	optional int32 context_value = 5;
+	optional int32 context_team_id = 6;
 }
 
-message CUserMsg_CameraTransition {
+message CUserMessageItemPickup {
+	optional string itemname = 1;
+}
+
+message CUserMessageAmmoDenied {
+	optional uint32 ammo_id = 1;
+}
+
+message CUserMessageCrosshairAngle {
+	optional .CMsgQAngle angcrosshair = 1;
+}
+
+message CUserMessageShowMenu {
+	optional uint32 validslots = 1;
+	optional uint32 displaytime = 2;
+	optional bool needmore = 3;
+	optional string menustring = 4;
+}
+
+message CUserMessageCreditsMsg {
+	optional .eRollType rolltype = 1 [default = ROLL_NONE];
+}
+
+message CEntityMessagePlayJingle {
+}
+
+message CEntityMessageScreenOverlay {
+	optional bool start_effect = 1;
+}
+
+message CEntityMessageRemoveAllDecals {
+	optional bool remove_decals = 1;
+}
+
+message CEntityMessagePropagateForce {
+	optional .CMsgVector impulse = 1;
+}
+
+message CEntityMessageDoSpark {
+	optional .CMsgVector origin = 1;
+	optional uint32 entityindex = 2;
+	optional float radius = 3;
+	optional fixed32 color = 4;
+	optional uint32 beams = 5;
+	optional float thick = 6;
+	optional float duration = 7;
+}
+
+message CEntityMessageFixAngle {
+	optional bool relative = 1;
+	optional .CMsgQAngle angle = 2;
+}
+
+message CUserMessageCameraTransition {
 	message Transition_DataDriven {
 		optional string filename = 1;
 		optional int32 attach_ent_index = 2;
@@ -210,6 +318,101 @@ message CUserMsg_CameraTransition {
 
 	optional uint32 camera_type = 1;
 	optional float duration = 2;
-	optional .CUserMsg_CameraTransition.Transition_DataDriven params_data_driven = 3;
+	optional .CUserMessageCameraTransition.Transition_DataDriven params_data_driven = 3;
+}
+
+message CUserMsg_ParticleManager {
+	message ReleaseParticleIndex {
+	}
+
+	message CreateParticle {
+		optional fixed64 particle_name_index = 1;
+		optional int32 attach_type = 2;
+		optional int32 entity_handle = 3;
+	}
+
+	message DestroyParticle {
+		optional bool destroy_immediately = 1;
+	}
+
+	message DestroyParticleInvolving {
+		optional bool destroy_immediately = 1;
+		optional int32 entity_handle = 3;
+	}
+
+	message UpdateParticle {
+		optional int32 control_point = 1;
+		optional .CMsgVector position = 2;
+	}
+
+	message UpdateParticleFwd {
+		optional int32 control_point = 1;
+		optional .CMsgVector forward = 2;
+	}
+
+	message UpdateParticleOrient {
+		optional int32 control_point = 1;
+		optional .CMsgVector forward = 2;
+		optional .CMsgVector right = 3;
+		optional .CMsgVector up = 4;
+	}
+
+	message UpdateParticleFallback {
+		optional int32 control_point = 1;
+		optional .CMsgVector position = 2;
+	}
+
+	message UpdateParticleOffset {
+		optional int32 control_point = 1;
+		optional .CMsgVector origin_offset = 2;
+	}
+
+	message UpdateParticleEnt {
+		optional int32 control_point = 1;
+		optional int32 entity_handle = 2;
+		optional int32 attach_type = 3;
+		optional int32 attachment = 4;
+		optional .CMsgVector fallback_position = 5;
+		optional bool include_wearables = 6;
+	}
+
+	message UpdateParticleSetFrozen {
+		optional bool set_frozen = 1;
+	}
+
+	message UpdateParticleShouldDraw {
+		optional bool should_draw = 1;
+	}
+
+	message ChangeControlPointAttachment {
+		optional int32 attachment_old = 1;
+		optional int32 attachment_new = 2;
+		optional int32 entity_handle = 3;
+	}
+
+	required .PARTICLE_MESSAGE type = 1 [default = GAME_PARTICLE_MANAGER_EVENT_CREATE];
+	required uint32 index = 2;
+	optional .CUserMsg_ParticleManager.ReleaseParticleIndex release_particle_index = 3;
+	optional .CUserMsg_ParticleManager.CreateParticle create_particle = 4;
+	optional .CUserMsg_ParticleManager.DestroyParticle destroy_particle = 5;
+	optional .CUserMsg_ParticleManager.DestroyParticleInvolving destroy_particle_involving = 6;
+	optional .CUserMsg_ParticleManager.UpdateParticle update_particle = 7;
+	optional .CUserMsg_ParticleManager.UpdateParticleFwd update_particle_fwd = 8;
+	optional .CUserMsg_ParticleManager.UpdateParticleOrient update_particle_orient = 9;
+	optional .CUserMsg_ParticleManager.UpdateParticleFallback update_particle_fallback = 10;
+	optional .CUserMsg_ParticleManager.UpdateParticleOffset update_particle_offset = 11;
+	optional .CUserMsg_ParticleManager.UpdateParticleEnt update_particle_ent = 12;
+	optional .CUserMsg_ParticleManager.UpdateParticleShouldDraw update_particle_should_draw = 14;
+	optional .CUserMsg_ParticleManager.UpdateParticleSetFrozen update_particle_set_frozen = 15;
+	optional .CUserMsg_ParticleManager.ChangeControlPointAttachment change_control_point_attachment = 16;
+}
+
+message CUserMsg_HudError {
+	optional int32 order_id = 1;
+}
+
+message CUserMsg_CustomGameEvent {
+	optional string event_name = 1;
+	optional bytes data = 2;
 }
 
