@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using ProtoBuf;
 using ProtoBuf.Meta;
-using SteamKit2.GC.Dota.Internal;
 using SteamKit2.GC.Internal;
 
 namespace NetHookAnalyzer2.Specializations
@@ -53,6 +52,10 @@ namespace NetHookAnalyzer2.Specializations
                 }
             }
             catch (ProtoException ex)
+            {
+                return "Error parsing SO data: " + ex.Message;
+            }
+            catch (EndOfStreamException ex)
             {
                 return "Error parsing SO data: " + ex.Message;
             }
