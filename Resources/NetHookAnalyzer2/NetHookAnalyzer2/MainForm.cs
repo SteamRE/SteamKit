@@ -35,8 +35,10 @@ namespace NetHookAnalyzer2
 				new ClientServiceMethodResponseSpecialization(),
 				new GCGenericSpecialization()
 				{
-					GameCoordinatorSpecializations = new[]
+					GameCoordinatorSpecializations = new IGameCoordinatorSpecialization[]
 					{
+						new Dota2CacheSubscribedGCSpecialization(),
+						new Dota2SOSingleObjectGCSpecialization(),
 						new Dota2SOMultipleObjectsGCSpecialization(),
 					}
 				}

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using ProtoBuf;
 using ProtoBuf.Meta;
@@ -58,13 +59,10 @@ namespace NetHookAnalyzer2.Specializations
 			{
 				using (var ms = new MemoryStream(sharedObject.object_data))
 				{
-					switch (sharedObject.type_id)
+					Type t;
+					if (Dota2SOHelper.SOTypes.TryGetValue(sharedObject.type_id, out t))
 					{
-						case 2003:
-							return RuntimeTypeModel.Default.Deserialize(ms, null, typeof(CSODOTAParty));
-
-						case 2004:
-							return RuntimeTypeModel.Default.Deserialize(ms, null, typeof(CSODOTALobby));
+						return RuntimeTypeModel.Default.Deserialize(ms, null, t);
 					}
 				}
 			}
