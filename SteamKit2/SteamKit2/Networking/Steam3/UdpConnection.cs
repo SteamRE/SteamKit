@@ -136,6 +136,38 @@ namespace SteamKit2
         }
 
         /// <summary>
+        /// Connects using a pre-connected socket.
+        /// </summary>
+        /// <param name="socket">A pre-connected socket.</param>
+        public override void Connect(Socket socket)
+        {
+            if (socket.ProtocolType != ProtocolType.Udp)
+            {
+                throw new ArgumentException("With a UdpConnection the socket must use the UDP protocol.", nameof(socket));
+            }
+
+            Disconnect();
+
+            outPackets = new List<UdpPacket>();
+            inPackets = new Dictionary<uint, UdpPacket>();
+
+            remoteEndPoint = socket.RemoteEndPoint as IPEndPoint;
+            remoteConnId = 0;
+
+            outSeq = 1;
+            outSeqSent = 0;
+            outSeqAcked = 0;
+
+            inSeq = 0;
+            inSeqAcked = 0;
+            inSeqHandled = 0;
+
+            netThread = new Thread(NetLoop);
+            netThread.Name = "UdpConnection Thread";
+            netThread.Start();
+        }
+
+        /// <summary>
         /// Disconnects this instance, blocking until the queue of messages is empty or the connection
         /// is otherwise terminated.
         /// </summary>

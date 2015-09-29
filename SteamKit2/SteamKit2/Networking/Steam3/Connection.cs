@@ -9,6 +9,7 @@ using System;
 using System.Net;
 using System.Security.Cryptography;
 using System.IO;
+using System.Net.Sockets;
 
 namespace SteamKit2
 {
@@ -119,6 +120,13 @@ namespace SteamKit2
         /// <param name="endPoint">The end point.</param>
         /// <param name="timeout">Timeout in milliseconds</param>
         public abstract void Connect( IPEndPoint endPoint, int timeout = DEFAULT_TIMEOUT );
+
+        /// <summary>
+        /// Connects using a pre-connected socket.
+        /// </summary>
+        /// <param name="socket">A pre-connected socket.</param>
+        public abstract void Connect( Socket socket );
+
         /// <summary>
         /// Disconnects this instance.
         /// </summary>

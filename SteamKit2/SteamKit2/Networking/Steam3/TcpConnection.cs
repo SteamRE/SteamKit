@@ -197,6 +197,61 @@ namespace SteamKit2
             }
         }
 
+        /// <summary>
+        /// Connects using a pre-connected socket.
+        /// </summary>
+        /// <param name="socket">A pre-connected socket.</param>
+        public override void Connect(Socket socket)
+        {
+            if (!socket.Connected)
+            {
+                throw new ArgumentException("The socket must already be connected.", nameof(socket));
+            }
+
+            if (socket.ProtocolType != ProtocolType.Tcp)
+            {
+                throw new ArgumentException("With a TcpConnection the socket must use the TCP protocol.", nameof(socket));
+            }
+
+            lock (connectLock)
+            {
+                var ep = socket.RemoteEndPoint as IPEndPoint;
+                DebugLog.WriteLine("TcpConnection", "Using existing connection to {0}...", ep);
+                Disconnect();
+                destination = ep;
+
+                connectionFree.Reset();
+
+                lock (netLock)
+                {
+                    Debug.Assert(cancellationToken == null);
+                    cancellationToken = new CancellationTokenSource();
+
+                    this.socket = socket;
+
+                    try
+                    {
+                        netStream = new NetworkStream(socket, false);
+                        netReader = new BinaryReader(netStream);
+                        netWriter = new BinaryWriter(netStream);
+                        netFilter = null;
+
+                        netThread = new Thread(NetLoop);
+                        netThread.Name = "TcpConnection Thread";
+
+                        netThread.Start();
+
+                        OnConnected(EventArgs.Empty);
+                    }
+                    catch (Exception ex)
+                    {
+                        DebugLog.WriteLine("TcpConnection", "Exception while setting up connection to {0}: {1}", destination, ex);
+                        Release(userRequestedDisconnect: false);
+                    }
+                }
+            }
+        }
+
         public override void Disconnect()
         {
             lock (connectLock)
