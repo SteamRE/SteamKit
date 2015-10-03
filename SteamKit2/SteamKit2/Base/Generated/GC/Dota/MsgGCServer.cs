@@ -5428,10 +5428,10 @@ namespace SteamKit2.GC.Dota.Internal
       set { _account_id = value; }
     }
 
-    private int _winnings = default(int);
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"winnings", DataFormat = global::ProtoBuf.DataFormat.ZigZag)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
-    public int winnings
+    private uint _winnings = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"winnings", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint winnings
     {
       get { return _winnings; }
       set { _winnings = value; }
@@ -5444,6 +5444,15 @@ namespace SteamKit2.GC.Dota.Internal
     {
       get { return _max_wager; }
       set { _max_wager = value; }
+    }
+
+    private uint _wager = default(uint);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"wager", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint wager
+    {
+      get { return _wager; }
+      set { _wager = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

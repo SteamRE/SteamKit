@@ -462,6 +462,20 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _is_coach; }
       set { _is_coach = value; }
     }
+    private readonly global::System.Collections.Generic.List<uint> _region_ping_codes = new global::System.Collections.Generic.List<uint>();
+    [global::ProtoBuf.ProtoMember(4, Name=@"region_ping_codes", DataFormat = global::ProtoBuf.DataFormat.TwosComplement, Options = global::ProtoBuf.MemberSerializationOptions.Packed)]
+    public global::System.Collections.Generic.List<uint> region_ping_codes
+    {
+      get { return _region_ping_codes; }
+    }
+  
+    private readonly global::System.Collections.Generic.List<uint> _region_ping_times = new global::System.Collections.Generic.List<uint>();
+    [global::ProtoBuf.ProtoMember(5, Name=@"region_ping_times", DataFormat = global::ProtoBuf.DataFormat.TwosComplement, Options = global::ProtoBuf.MemberSerializationOptions.Packed)]
+    public global::System.Collections.Generic.List<uint> region_ping_times
+    {
+      get { return _region_ping_times; }
+    }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -2362,6 +2376,13 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _custom_game_timestamp; }
       set { _custom_game_timestamp = value; }
     }
+    private readonly global::System.Collections.Generic.List<ulong> _previous_series_matches = new global::System.Collections.Generic.List<ulong>();
+    [global::ProtoBuf.ProtoMember(81, Name=@"previous_series_matches", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public global::System.Collections.Generic.List<ulong> previous_series_matches
+    {
+      get { return _previous_series_matches; }
+    }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CExtraMsg")]
   public partial class CExtraMsg : global::ProtoBuf.IExtensible
   {
@@ -4420,6 +4441,13 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _rune_type; }
       set { _rune_type = value; }
     }
+    private readonly global::System.Collections.Generic.List<uint> _assist_players = new global::System.Collections.Generic.List<uint>();
+    [global::ProtoBuf.ProtoMember(40, Name=@"assist_players", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public global::System.Collections.Generic.List<uint> assist_players
+    {
+      get { return _assist_players; }
+    }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -8321,7 +8349,36 @@ namespace SteamKit2.GC.Dota.Internal
       k_EMsgGCToClientTopLeagueMatchesResponse = 8061,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToClientTopFriendMatchesResponse", Value=8062)]
-      k_EMsgGCToClientTopFriendMatchesResponse = 8062
+      k_EMsgGCToClientTopFriendMatchesResponse = 8062,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCMatchesMinimalRequest", Value=8063)]
+      k_EMsgClientToGCMatchesMinimalRequest = 8063,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCMatchesMinimalResponse", Value=8064)]
+      k_EMsgClientToGCMatchesMinimalResponse = 8064,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCGetProfileBadgePoints", Value=8065)]
+      k_EMsgGCToGCGetProfileBadgePoints = 8065,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCGetProfileBadgePointsResponse", Value=8066)]
+      k_EMsgGCToGCGetProfileBadgePointsResponse = 8066,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToClientChatRegionsEnabled", Value=8067)]
+      k_EMsgGCToClientChatRegionsEnabled = 8067,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCPingData", Value=8068)]
+      k_EMsgClientToGCPingData = 8068
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"ESpecialPingValue", EnumPassthru=true)]
+    public enum ESpecialPingValue
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_ESpecialPingValue_NoData", Value=16382)]
+      k_ESpecialPingValue_NoData = 16382,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_ESpecialPingValue_Failed", Value=16383)]
+      k_ESpecialPingValue_Failed = 16383
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"DOTA_GameMode", EnumPassthru=true)]
@@ -9095,6 +9152,62 @@ namespace SteamKit2.GC.Dota.Internal
             
       [global::ProtoBuf.ProtoEnum(Name=@"DOTA_COMBATLOG_PICKUP_RUNE", Value=21)]
       DOTA_COMBATLOG_PICKUP_RUNE = 21
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"DOTAChatChannelType_t", EnumPassthru=true)]
+    public enum DOTAChatChannelType_t
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTAChannelType_Regional", Value=0)]
+      DOTAChannelType_Regional = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTAChannelType_Custom", Value=1)]
+      DOTAChannelType_Custom = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTAChannelType_Party", Value=2)]
+      DOTAChannelType_Party = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTAChannelType_Lobby", Value=3)]
+      DOTAChannelType_Lobby = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTAChannelType_Team", Value=4)]
+      DOTAChannelType_Team = 4,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTAChannelType_Guild", Value=5)]
+      DOTAChannelType_Guild = 5,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTAChannelType_Fantasy", Value=6)]
+      DOTAChannelType_Fantasy = 6,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTAChannelType_Whisper", Value=7)]
+      DOTAChannelType_Whisper = 7,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTAChannelType_Console", Value=8)]
+      DOTAChannelType_Console = 8,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTAChannelType_Tab", Value=9)]
+      DOTAChannelType_Tab = 9,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTAChannelType_Invalid", Value=10)]
+      DOTAChannelType_Invalid = 10,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTAChannelType_GameAll", Value=11)]
+      DOTAChannelType_GameAll = 11,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTAChannelType_GameAllies", Value=12)]
+      DOTAChannelType_GameAllies = 12,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTAChannelType_GameSpectator", Value=13)]
+      DOTAChannelType_GameSpectator = 13,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTAChannelType_GameCoaching", Value=14)]
+      DOTAChannelType_GameCoaching = 14,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTAChannelType_Cafe", Value=15)]
+      DOTAChannelType_Cafe = 15,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTAChannelType_CustomGame", Value=16)]
+      DOTAChannelType_CustomGame = 16
     }
   
 }

@@ -2256,6 +2256,9 @@ namespace SteamKit2.GC.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCRequestCrateItemsResponse", Value=1093)]
       k_EMsgGCRequestCrateItemsResponse = 1093,
             
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCExtractGemsResponse", Value=1094)]
+      k_EMsgGCExtractGemsResponse = 1094,
+            
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCServerUseItemRequest", Value=1103)]
       k_EMsgGCServerUseItemRequest = 1103,
             
