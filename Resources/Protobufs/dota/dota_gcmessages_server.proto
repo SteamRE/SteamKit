@@ -910,8 +910,9 @@ message CMsgGCToServerUpdateBroadcastCheers {
 message CMsgSignOutWagerStats {
 	message Player {
 		optional uint32 account_id = 1;
-		optional sint32 winnings = 2;
+		optional uint32 winnings = 2;
 		optional uint32 max_wager = 3;
+		optional uint32 wager = 4;
 	}
 
 	repeated .CMsgSignOutWagerStats.Player players = 1;

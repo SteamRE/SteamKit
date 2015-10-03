@@ -84,6 +84,7 @@ enum EGCItemMsg {
 	k_EMsgGCResetStrangeGemCount = 1091;
 	k_EMsgGCRequestCrateItems = 1092;
 	k_EMsgGCRequestCrateItemsResponse = 1093;
+	k_EMsgGCExtractGemsResponse = 1094;
 	k_EMsgGCServerUseItemRequest = 1103;
 	k_EMsgGCAddGiftItem = 1104;
 	k_EMsgGCRemoveItemGiftMessage = 1105;
