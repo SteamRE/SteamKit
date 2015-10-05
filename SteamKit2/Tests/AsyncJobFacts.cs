@@ -22,8 +22,8 @@ namespace Tests
 
             AsyncJob<Callback> asyncJob = new AsyncJob<Callback>( client, 123 );
 
-            Assert.True( client.asyncJobs.ContainsKey( asyncJob ) );
-            Assert.True( client.asyncJobs.ContainsKey( 123 ) );
+            Assert.True( client.asyncJobs.ContainsKey( asyncJob ), "Async job dictionary should contain the jobid key" );
+            Assert.True( client.asyncJobs.ContainsKey( 123 ), "Async job dictionary should contain jobid key as a value type" );
         }
 
         [Fact]
@@ -36,9 +36,9 @@ namespace Tests
 
             client.PostCallback( new Callback { JobID = 123 } );
 
-            Assert.True( asyncTask.IsCompleted );
-            Assert.False( asyncTask.IsCanceled );
-            Assert.False( asyncTask.IsFaulted );
+            Assert.True( asyncTask.IsCompleted, "Async job should be completed after callback is posted" );
+            Assert.False( asyncTask.IsCanceled, "Async job should not be canceled after callback is posted" );
+            Assert.False( asyncTask.IsFaulted, "Async job should not be faulted after callback is posted" );
         }
 
         [Fact]
@@ -50,8 +50,8 @@ namespace Tests
 
             client.PostCallback( new Callback { JobID = 123 } );
 
-            Assert.False( client.asyncJobs.ContainsKey( asyncJob ) );
-            Assert.False( client.asyncJobs.ContainsKey( 123 ) );
+            Assert.False( client.asyncJobs.ContainsKey( asyncJob ), "Async job dictionary should no longer contain jobid key after callback is posted" );
+            Assert.False( client.asyncJobs.ContainsKey( 123 ), "Async job dictionary should no longer contain jobid key (as value type) after callback is posted" );
         }
 
         [Fact]
@@ -64,10 +64,10 @@ namespace Tests
 
             bool jobFinished = asyncJob.AddResult( null );
 
-            Assert.True( jobFinished );
-            Assert.True( asyncTask.IsCompleted );
-            Assert.True( asyncTask.IsCanceled );
-            
+            Assert.True( jobFinished, "Async job should inform that it has been completed on a null callback" );
+            Assert.True( asyncTask.IsCompleted, "Async job should be completed on null callback" );
+            Assert.True( asyncTask.IsCanceled, "Async job should be canceled on null callback" );
+
             await Assert.ThrowsAsync( typeof( TaskCanceledException ), async () => await asyncTask );
         }
 
@@ -97,10 +97,10 @@ namespace Tests
 
             Task<Callback> asyncTask = asyncJob.ToTask();
 
-            await Task.Delay( TimeSpan.FromSeconds( 10 ) );
+            await Task.Delay( TimeSpan.FromSeconds( 5 ) );
 
-            Assert.True( asyncTask.IsCompleted );
-            Assert.True( asyncTask.IsCanceled );
+            Assert.True( asyncTask.IsCompleted, "Async job should be completed after 5 seconds of a 1 second job timeout" );
+            Assert.True( asyncTask.IsCanceled, "Async job should be canceled after 5 seconds of a 1 second job timeout" );
 
             await Assert.ThrowsAsync( typeof( TaskCanceledException ), async () => await asyncTask );
         }
@@ -115,10 +115,10 @@ namespace Tests
 
             bool jobFinished = asyncJob.AddResult( new Callback { JobID = 123 } );
 
-            Assert.True( jobFinished );
-            Assert.True( asyncTask.IsCompleted );
-            Assert.False( asyncTask.IsCanceled );
-            Assert.False( asyncTask.IsFaulted );
+            Assert.True( jobFinished, "Async job should inform that it is completed when completion predicate is always true and a result is given" );
+            Assert.True( asyncTask.IsCompleted, "Async job should be completed when empty predicate result is given" );
+            Assert.False( asyncTask.IsCanceled, "Async job should not be canceled when empty predicate result is given" );
+            Assert.False( asyncTask.IsFaulted, "Async job should not be faulted when empty predicate result is given" );
         }
 
         [Fact]
@@ -131,17 +131,17 @@ namespace Tests
 
             bool jobFinished = asyncJob.AddResult( new Callback { JobID = 123, IsFinished = false } );
 
-            Assert.False( jobFinished );
-            Assert.False( asyncTask.IsCompleted );
-            Assert.False( asyncTask.IsCanceled );
-            Assert.False( asyncTask.IsFaulted );
+            Assert.False( jobFinished, "Async job should not inform that it is finished when completion predicate is false after a result is given" );
+            Assert.False( asyncTask.IsCompleted, "Async job should not be completed when completion predicate is false" );
+            Assert.False( asyncTask.IsCanceled, "Async job should not be canceled when completion predicate is false" );
+            Assert.False( asyncTask.IsFaulted, "Async job should not be faulted when completion predicate is false" );
 
             jobFinished = asyncJob.AddResult( new Callback { JobID = 123, IsFinished = true } );
 
-            Assert.True( jobFinished );
-            Assert.True( asyncTask.IsCompleted );
-            Assert.False( asyncTask.IsCanceled );
-            Assert.False( asyncTask.IsFaulted );
+            Assert.True( jobFinished, "Async job should inform completion when completion predicat is passed after a result is given" );
+            Assert.True( asyncTask.IsCompleted, "Async job should be completed when completion predicate is true" );
+            Assert.False( asyncTask.IsCanceled, "Async job should not be canceled when completion predicate is true" );
+            Assert.False( asyncTask.IsFaulted, "Async job should not be faulted when completion predicate is true" );
         }
 
         [Fact]
@@ -153,8 +153,92 @@ namespace Tests
 
             client.PostCallback( new Callback { JobID = 123, IsFinished = true } );
 
-            Assert.False( client.asyncJobs.ContainsKey( asyncJob ) );
-            Assert.False( client.asyncJobs.ContainsKey( 123 ) );
+            Assert.False( client.asyncJobs.ContainsKey( asyncJob ), "Async job dictionary should not contain jobid key for AsyncJobMultiple on completion" );
+            Assert.False( client.asyncJobs.ContainsKey( 123 ), "Async job dictionary should not contain jobid key (as value type) for AsyncJobMultiple on completion" );
+        }
+
+        [Fact]
+        public async void AsyncJobMultipleExtendsTimeoutOnMessage()
+        {
+            SteamClient client = new SteamClient();
+            client.jobTimeoutFunc.Start();
+
+            AsyncJobMultiple<Callback> asyncJob = new AsyncJobMultiple<Callback>( client, 123, call => call.IsFinished );
+            asyncJob.Timeout = TimeSpan.FromSeconds( 5 );
+
+            Task<AsyncJobMultiple<Callback>.ResultSet> asyncTask = asyncJob.ToTask();
+
+            // wait 3 seconds before we post any results to this job at all
+            await Task.Delay( TimeSpan.FromSeconds( 3 ) );
+
+            // we should not be completed or canceled yet
+            Assert.False( asyncTask.IsCompleted, "AsyncJobMultiple should not be completed after 3 seconds of 5 second timeout" );
+            Assert.False( asyncTask.IsCanceled, "AsyncJobMultiple should not be canceled after 3 seconds of 5 second timeout" );
+
+            // give result 1 of 2
+            asyncJob.AddResult( new Callback { JobID = 123, IsFinished = false } );
+
+            // delay for what the original timeout would have been
+            await Task.Delay( TimeSpan.FromSeconds( 5 ) );
+
+            // we still shouldn't be completed or canceled (timed out)
+            Assert.False( asyncTask.IsCompleted, "AsyncJobMultiple should not be completed 5 seconds after a result was added (result should extend timeout)" );
+            Assert.False( asyncTask.IsCanceled, "AsyncJobMultiple should not be canceled 5 seconds after a result was added (result should extend timeout)" );
+
+            asyncJob.AddResult( new Callback { JobID = 123, IsFinished = true } );
+
+            // we should be completed but not canceled
+            Assert.True( asyncTask.IsCompleted, "AsyncJobMultiple should be completed when final result is added to set" );
+            Assert.False( asyncTask.IsCanceled, "AsyncJobMultiple should not be canceled when final result is added to set" );
+        }
+
+        [Fact]
+        public async void AsyncJobMultipleTimesout()
+        {
+            SteamClient client = new SteamClient();
+            client.jobTimeoutFunc.Start();
+
+            AsyncJobMultiple<Callback> asyncJob = new AsyncJobMultiple<Callback>( client, 123, call => false );
+            asyncJob.Timeout = TimeSpan.FromSeconds( 1 );
+
+            Task<AsyncJobMultiple<Callback>.ResultSet> asyncTask = asyncJob.ToTask();
+
+            await Task.Delay( TimeSpan.FromSeconds( 5 ) );
+
+            Assert.True( asyncTask.IsCompleted, "AsyncJobMultiple should be completed after 5 seconds of a 1 second job timeout" );
+            Assert.True( asyncTask.IsCanceled, "AsyncJobMultiple should be canceled after 5 seconds of a 1 second job timeout" );
+
+            await Assert.ThrowsAsync( typeof( TaskCanceledException ), async () => await asyncTask );
+        }
+
+        [Fact]
+        public async void AsyncJobMultipleCompletesOnIncompleteResult()
+        {
+            SteamClient client = new SteamClient();
+            client.jobTimeoutFunc.Start();
+
+            AsyncJobMultiple<Callback> asyncJob = new AsyncJobMultiple<Callback>( client, 123, call => call.IsFinished );
+            asyncJob.Timeout = TimeSpan.FromSeconds( 1 );
+
+            Task<AsyncJobMultiple<Callback>.ResultSet> asyncTask = asyncJob.ToTask();
+
+            Callback onlyResult = new Callback { JobID = 123, IsFinished = false };
+
+            asyncJob.AddResult( onlyResult );
+
+            // adding a result will extend the job's timeout, but we'll cheat here and decrease it
+            asyncJob.Timeout = TimeSpan.FromSeconds( 1 );
+
+            await Task.Delay( TimeSpan.FromSeconds( 5 ) );
+
+            Assert.True( asyncTask.IsCompleted, "AsyncJobMultiple should be completed on partial (timed out) result set" );
+            Assert.False( asyncTask.IsCanceled, "AsyncJobMultiple should not be canceled on partial (timed out) result set" );
+
+            AsyncJobMultiple<Callback>.ResultSet result = asyncTask.Result;
+
+            Assert.False( result.Complete, "ResultSet should be incomplete" );
+            Assert.Equal( result.Results.Count, 1 );
+            Assert.Contains( onlyResult, result.Results );
         }
     }
 }

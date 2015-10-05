@@ -285,6 +285,9 @@ namespace SteamKit2
             else
             {
                 // otherwise, we're not complete and we'll wait for the next message
+                // and we'll give this job 10 extra seconds to wait for the next result
+                Timeout += TimeSpan.FromSeconds( 10 );
+
                 return false;
             }
         }

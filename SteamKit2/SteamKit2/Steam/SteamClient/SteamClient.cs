@@ -77,7 +77,7 @@ namespace SteamKit2
 
             asyncJobs = new ConcurrentDictionary<JobID, AsyncJob>();
 
-            jobTimeoutFunc = new ScheduledFunction( CancelTimedoutJobs, TimeSpan.FromSeconds( 5 ) );
+            jobTimeoutFunc = new ScheduledFunction( CancelTimedoutJobs, TimeSpan.FromSeconds( 1 ) );
         }
 
 
