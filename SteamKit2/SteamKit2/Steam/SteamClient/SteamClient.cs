@@ -280,7 +280,7 @@ namespace SteamKit2
         {
             asyncJobs.TryAdd( asyncJob, asyncJob );
         }
-        void TryCompleteJob( JobID jobId, object callback )
+        void TryCompleteJob( JobID jobId, CallbackMsg callback )
         {
             AsyncJob asyncJob;
 

@@ -103,7 +103,7 @@ namespace SteamKit2
         /// </summary>
         /// <param name="callback">The callback.</param>
         /// <returns><c>true</c> if this result completes the set; otherwise, <c>false</c>.</returns>
-        internal abstract bool AddResult( object callback );
+        internal abstract bool AddResult( CallbackMsg callback );
     }
 
     /// <summary>
@@ -152,7 +152,7 @@ namespace SteamKit2
         /// </summary>
         /// <param name="callback">The callback.</param>
         /// <returns>Always <c>true</c>.</returns>
-        internal override bool AddResult( object callback )
+        internal override bool AddResult( CallbackMsg callback )
         {
             if ( callback == null )
             {
@@ -242,7 +242,7 @@ namespace SteamKit2
         /// </summary>
         /// <param name="callback">The callback.</param>
         /// <returns><c>true</c> if this result completes the set; otherwise, <c>false</c>.</returns>
-        internal override bool AddResult( object callback )
+        internal override bool AddResult( CallbackMsg callback )
         {
             if ( callback == null )
             {
