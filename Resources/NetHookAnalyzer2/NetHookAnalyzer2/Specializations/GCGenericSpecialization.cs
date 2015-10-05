@@ -98,6 +98,10 @@ namespace NetHookAnalyzer2.Specializations
 				{
 					return "Invalid protobuf data.";
 				}
+				catch (EndOfStreamException ex)
+				{
+					return "Error parsing SO data: " + ex.Message;
+				}
 			}
 
 			return null;

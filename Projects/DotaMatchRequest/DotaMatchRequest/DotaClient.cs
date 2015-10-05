@@ -59,9 +59,9 @@ namespace DotaMatchRequest
             // setup callbacks
             callbackMgr = new CallbackManager( client );
 
-            new Callback<SteamClient.ConnectedCallback>( OnConnected, callbackMgr );
-            new Callback<SteamUser.LoggedOnCallback>( OnLoggedOn, callbackMgr );
-            new Callback<SteamGameCoordinator.MessageCallback>( OnGCMessage, callbackMgr );
+            callbackMgr.Subscribe<SteamClient.ConnectedCallback>( OnConnected );
+            callbackMgr.Subscribe<SteamUser.LoggedOnCallback>( OnLoggedOn );
+            callbackMgr.Subscribe<SteamGameCoordinator.MessageCallback>( OnGCMessage );
         }
 
 
@@ -145,6 +145,7 @@ namespace DotaMatchRequest
 
             // inform the dota GC that we want a session
             var clientHello = new ClientGCMsgProtobuf<CMsgClientHello>( ( uint )EGCBaseClientMsg.k_EMsgGCClientHello );
+            clientHello.Body.engine = ESourceEngine.k_ESE_Source2;
             gameCoordinator.Send( clientHello, APPID );
         }
 

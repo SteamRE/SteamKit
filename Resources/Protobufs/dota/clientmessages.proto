@@ -1,0 +1,18 @@
+option optimize_for = SPEED;
+option cc_generic_services = false;
+
+enum EBaseClientMessages {
+	CM_CustomGameEvent = 280;
+	CM_TrackedControllerInput = 281;
+	CM_MAX_BASE = 300;
+}
+
+message CClientMsg_CustomGameEvent {
+	optional string event_name = 1;
+	optional bytes data = 2;
+}
+
+message CClientMsg_TrackedControllerInput {
+	optional bytes data = 1;
+}
+

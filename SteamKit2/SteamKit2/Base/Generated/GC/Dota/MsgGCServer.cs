@@ -4853,10 +4853,10 @@ namespace SteamKit2.GC.Dota.Internal
     public CMsgServerToGCGetIngameEventData() {}
     
 
-    private EIngameEvent _event = EIngameEvent.k_EIngameEvent_OraclePA;
+    private EEvent _event = EEvent.EVENT_ID_NONE;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"event", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(EIngameEvent.k_EIngameEvent_OraclePA)]
-    public EIngameEvent @event
+    [global::System.ComponentModel.DefaultValue(EEvent.EVENT_ID_NONE)]
+    public EEvent @event
     {
       get { return _event; }
       set { _event = value; }
@@ -5387,6 +5387,78 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _team_2_cheers; }
       set { _team_2_cheers = value; }
     }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgSignOutWagerStats")]
+  public partial class CMsgSignOutWagerStats : global::ProtoBuf.IExtensible
+  {
+    public CMsgSignOutWagerStats() {}
+    
+    private readonly global::System.Collections.Generic.List<CMsgSignOutWagerStats.Player> _players = new global::System.Collections.Generic.List<CMsgSignOutWagerStats.Player>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"players", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CMsgSignOutWagerStats.Player> players
+    {
+      get { return _players; }
+    }
+  
+
+    private uint _event_id = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"event_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint event_id
+    {
+      get { return _event_id; }
+      set { _event_id = value; }
+    }
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Player")]
+  public partial class Player : global::ProtoBuf.IExtensible
+  {
+    public Player() {}
+    
+
+    private uint _account_id = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint account_id
+    {
+      get { return _account_id; }
+      set { _account_id = value; }
+    }
+
+    private uint _winnings = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"winnings", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint winnings
+    {
+      get { return _winnings; }
+      set { _winnings = value; }
+    }
+
+    private uint _max_wager = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"max_wager", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint max_wager
+    {
+      get { return _max_wager; }
+      set { _max_wager = value; }
+    }
+
+    private uint _wager = default(uint);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"wager", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint wager
+    {
+      get { return _wager; }
+      set { _wager = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

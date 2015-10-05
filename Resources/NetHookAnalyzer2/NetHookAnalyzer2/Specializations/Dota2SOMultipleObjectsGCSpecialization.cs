@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using ProtoBuf;
 using ProtoBuf.Meta;
-using SteamKit2.GC.Dota.Internal;
 using SteamKit2.GC.Internal;
 
 namespace NetHookAnalyzer2.Specializations
@@ -58,17 +58,18 @@ namespace NetHookAnalyzer2.Specializations
 			{
 				using (var ms = new MemoryStream(sharedObject.object_data))
 				{
-					switch (sharedObject.type_id)
+					Type t;
+					if (Dota2SOHelper.SOTypes.TryGetValue(sharedObject.type_id, out t))
 					{
-						case 2003:
-							return RuntimeTypeModel.Default.Deserialize(ms, null, typeof(CSODOTAParty));
-
-						case 2004:
-							return RuntimeTypeModel.Default.Deserialize(ms, null, typeof(CSODOTALobby));
+						return RuntimeTypeModel.Default.Deserialize(ms, null, t);
 					}
 				}
 			}
 			catch (ProtoException ex)
+			{
+				return "Error parsing SO data: " + ex.Message;
+			}
+			catch (EndOfStreamException ex)
 			{
 				return "Error parsing SO data: " + ex.Message;
 			}

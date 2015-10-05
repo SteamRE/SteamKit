@@ -192,6 +192,8 @@ message CMsgClientWelcome {
 	repeated .CMsgSOCacheSubscriptionCheck uptodate_subscribed_caches = 4;
 	optional .CMsgClientWelcome.Location location = 5;
 	optional bytes save_game_key = 6;
+	optional fixed32 item_schema_crc = 7;
+	optional string items_game_url = 8;
 }
 
 message CMsgConnectionStatus {

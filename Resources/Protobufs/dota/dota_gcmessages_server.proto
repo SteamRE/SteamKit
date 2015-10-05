@@ -811,7 +811,7 @@ message CMsgSignOutAssassinMiniGameInfo {
 }
 
 message CMsgServerToGCGetIngameEventData {
-	optional .EIngameEvent event = 1 [default = k_EIngameEvent_OraclePA];
+	optional .EEvent event = 1 [default = EVENT_ID_NONE];
 }
 
 message CMsgGCToServerIngameEventDataOraclePA {
@@ -905,5 +905,17 @@ message CMsgGCToServerUpdateBroadcastCheers {
 	optional uint32 time_stamp = 1;
 	optional uint32 team_1_cheers = 2;
 	optional uint32 team_2_cheers = 3;
+}
+
+message CMsgSignOutWagerStats {
+	message Player {
+		optional uint32 account_id = 1;
+		optional uint32 winnings = 2;
+		optional uint32 max_wager = 3;
+		optional uint32 wager = 4;
+	}
+
+	repeated .CMsgSignOutWagerStats.Player players = 1;
+	optional uint32 event_id = 2;
 }
 
