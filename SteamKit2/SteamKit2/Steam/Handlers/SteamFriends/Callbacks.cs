@@ -951,5 +951,31 @@ namespace SteamKit2
                 Summary = response.summary;
             }
         }
+
+        /// <summary>
+        /// This callback is fired in response to setting this client's persona name or state
+        /// with <see cref="SteamFriends.SetPersonaName(string)"/> or <see cref="SteamFriends.SetPersonaState(EPersonaState)"/>.
+        /// </summary>
+        public sealed class PersonaChangeCallback : CallbackMsg
+        {
+            /// <summary>
+            /// Gets the result of changing this client's persona information.
+            /// </summary>
+            public EResult Result { get; private set; }
+
+            /// <summary>
+            /// Gets the name of this client according to Steam.
+            /// </summary>
+            public string Name { get; private set; }
+
+
+            internal PersonaChangeCallback( JobID jobID, CMsgPersonaChangeResponse msg )
+            {
+                JobID = jobID;
+
+                Result = (EResult)msg.result;
+                Name = msg.player_name;
+            }
+        }
     }
 }
