@@ -362,7 +362,7 @@ namespace SteamKit2
         /// <param name="onlyPublic">Whether to send only public information.</param>
         /// <param name="metaDataOnly">Whether to send only meta data.</param>
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="PICSProductInfoCallback"/>.</returns>
-        public AsyncJob<PICSProductInfoCallback> PICSGetProductInfo(uint? app, uint? package, bool onlyPublic = true, bool metaDataOnly = false)
+        public AsyncJobMultiple<PICSProductInfoCallback> PICSGetProductInfo(uint? app, uint? package, bool onlyPublic = true, bool metaDataOnly = false)
         {
             List<uint> apps = new List<uint>();
             List<uint> packages = new List<uint>();
@@ -383,7 +383,7 @@ namespace SteamKit2
         /// <param name="onlyPublic">Whether to send only public information.</param>
         /// <param name="metaDataOnly">Whether to send only meta data.</param>
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="PICSProductInfoCallback"/>.</returns>
-        public AsyncJob<PICSProductInfoCallback> PICSGetProductInfo( IEnumerable<uint> apps, IEnumerable<uint> packages, bool onlyPublic = true, bool metaDataOnly = false )
+        public AsyncJobMultiple<PICSProductInfoCallback> PICSGetProductInfo( IEnumerable<uint> apps, IEnumerable<uint> packages, bool onlyPublic = true, bool metaDataOnly = false )
         {
             return PICSGetProductInfo( apps.Select( app => new PICSRequest( app, 0, onlyPublic ) ), packages.Select( package => new PICSRequest( package ) ), metaDataOnly );
         }
@@ -397,7 +397,7 @@ namespace SteamKit2
         /// <param name="packages">List of <see cref="PICSRequest"/> requests for packages.</param>
         /// <param name="metaDataOnly">Whether to send only meta data.</param>
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="PICSProductInfoCallback"/>.</returns>
-        public AsyncJob<PICSProductInfoCallback> PICSGetProductInfo( IEnumerable<PICSRequest> apps, IEnumerable<PICSRequest> packages, bool metaDataOnly = false )
+        public AsyncJobMultiple<PICSProductInfoCallback> PICSGetProductInfo( IEnumerable<PICSRequest> apps, IEnumerable<PICSRequest> packages, bool metaDataOnly = false )
         {
             var request = new ClientMsgProtobuf<CMsgClientPICSProductInfoRequest>( EMsg.ClientPICSProductInfoRequest );
             request.SourceJobID = Client.GetNextJobID();
@@ -425,7 +425,7 @@ namespace SteamKit2
 
             this.Client.Send( request );
 
-            return new AsyncJob<PICSProductInfoCallback>( this.Client, request.SourceJobID );
+            return new AsyncJobMultiple<PICSProductInfoCallback>( this.Client, request.SourceJobID, callback => !callback.ResponsePending );
         }
 
 

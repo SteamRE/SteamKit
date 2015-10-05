@@ -284,19 +284,25 @@ namespace SteamKit2
         {
             AsyncJob asyncJob;
 
-            if ( !asyncJobs.TryRemove( jobId, out asyncJob ) )
+            if ( !asyncJobs.TryGetValue( jobId, out asyncJob ) )
             {
                 // not a job we are tracking ourselves, can ignore it
                 return;
             }
 
-            asyncJob.Complete( callback );
+            bool jobFinished = asyncJob.AddResult( callback );
+
+            if ( jobFinished )
+            {
+                // if adding this result has finished the job, remove it from our list
+                asyncJobs.TryRemove( jobId, out asyncJob );
+            }
         }
         void CancelPendingJobs()
         {
             foreach ( AsyncJob asyncJob in asyncJobs.Values )
             {
-                asyncJob.Complete( null );
+                asyncJob.AddResult( null );
             }
 
             asyncJobs.Clear();
@@ -307,7 +313,7 @@ namespace SteamKit2
             {
                 if ( job.IsTimedout )
                 {
-                    job.Complete( null );
+                    job.AddResult( null );
 
                     AsyncJob ignored;
                     asyncJobs.TryRemove( job, out ignored );
