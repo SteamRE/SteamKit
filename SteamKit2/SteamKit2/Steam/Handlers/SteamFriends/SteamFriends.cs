@@ -66,10 +66,11 @@ namespace SteamKit2
         /// <summary>
         /// Sets the local user's persona name and broadcasts it over the network.
         /// Results are returned in a <see cref="PersonaChangeCallback"/> callback.
+        /// The returned <see cref="AsyncJob{T}"/> can also be awaited to retrieve the callback result.
         /// </summary>
         /// <param name="name">The name.</param>
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="PersonaChangeCallback"/>.</returns>
-        public JobID SetPersonaName( string name )
+        public AsyncJob<PersonaChangeCallback> SetPersonaName( string name )
         {
             // cache the local name right away, so that early calls to SetPersonaState don't reset the set name
             cache.LocalUser.Name = name;
@@ -82,7 +83,7 @@ namespace SteamKit2
 
             this.Client.Send( stateMsg );
 
-            return stateMsg.SourceJobID;
+            return new AsyncJob<PersonaChangeCallback>( this.Client, stateMsg.SourceJobID );
         }
 
         /// <summary>
@@ -96,10 +97,11 @@ namespace SteamKit2
         /// <summary>
         /// Sets the local user's persona state and broadcasts it over the network.
         /// Results are returned in a <see cref="PersonaChangeCallback"/> callback.
+        /// The returned <see cref="AsyncJob{T}"/> can also be awaited to retrieve the callback result.
         /// </summary>
         /// <param name="state">The state.</param>
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="PersonaChangeCallback"/>.</returns>
-        public JobID SetPersonaState( EPersonaState state )
+        public AsyncJob<PersonaChangeCallback> SetPersonaState( EPersonaState state )
         {
             cache.LocalUser.PersonaState = state;
 
@@ -111,7 +113,7 @@ namespace SteamKit2
 
             this.Client.Send( stateMsg );
 
-            return stateMsg.SourceJobID;
+            return new AsyncJob<PersonaChangeCallback>( this.Client, stateMsg.SourceJobID );
         }
 
         /// <summary>
