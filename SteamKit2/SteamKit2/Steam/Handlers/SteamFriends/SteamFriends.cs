@@ -50,6 +50,7 @@ namespace SteamKit2
                 { EMsg.ClientChatInvite, HandleChatInvite },
                 { EMsg.ClientSetIgnoreFriendResponse, HandleIgnoreFriendResponse },
                 { EMsg.ClientFriendProfileInfoResponse, HandleProfileInfoResponse },
+                { EMsg.ClientPersonaChangeResponse, HandlePersonaChangeResponse },
             };
         }
 
@@ -64,18 +65,24 @@ namespace SteamKit2
         }
         /// <summary>
         /// Sets the local user's persona name and broadcasts it over the network.
+        /// Results are returned in a <see cref="PersonaChangeCallback"/> callback.
         /// </summary>
         /// <param name="name">The name.</param>
-        public void SetPersonaName( string name )
+        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="PersonaChangeCallback"/>.</returns>
+        public JobID SetPersonaName( string name )
         {
             // cache the local name right away, so that early calls to SetPersonaState don't reset the set name
             cache.LocalUser.Name = name;
 
             var stateMsg = new ClientMsgProtobuf<CMsgClientChangeStatus>( EMsg.ClientChangeStatus );
+            stateMsg.SourceJobID = Client.GetNextJobID();
+
             stateMsg.Body.persona_state = ( uint )cache.LocalUser.PersonaState;
             stateMsg.Body.player_name = name;
 
             this.Client.Send( stateMsg );
+
+            return stateMsg.SourceJobID;
         }
 
         /// <summary>
@@ -88,17 +95,23 @@ namespace SteamKit2
         }
         /// <summary>
         /// Sets the local user's persona state and broadcasts it over the network.
+        /// Results are returned in a <see cref="PersonaChangeCallback"/> callback.
         /// </summary>
         /// <param name="state">The state.</param>
-        public void SetPersonaState( EPersonaState state )
+        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="PersonaChangeCallback"/>.</returns>
+        public JobID SetPersonaState( EPersonaState state )
         {
             cache.LocalUser.PersonaState = state;
 
             var stateMsg = new ClientMsgProtobuf<CMsgClientChangeStatus>( EMsg.ClientChangeStatus );
+            stateMsg.SourceJobID = Client.GetNextJobID();
+
             stateMsg.Body.persona_state = ( uint )state;
             stateMsg.Body.player_name = cache.LocalUser.Name;
 
             this.Client.Send( stateMsg );
+
+            return stateMsg.SourceJobID;
         }
 
         /// <summary>
@@ -817,6 +830,16 @@ namespace SteamKit2
             var response = new ClientMsgProtobuf<CMsgClientFriendProfileInfoResponse>( packetMsg );
 
             var callback = new ProfileInfoCallback( packetMsg.TargetJobID, response.Body );
+            Client.PostCallback( callback );
+        }
+        void HandlePersonaChangeResponse( IPacketMsg packetMsg )
+        {
+            var response = new ClientMsgProtobuf<CMsgPersonaChangeResponse>( packetMsg );
+
+            // update our cache to what steam says our name is
+            cache.LocalUser.Name = response.Body.player_name;
+
+            var callback = new PersonaChangeCallback( packetMsg.TargetJobID, response.Body );
             Client.PostCallback( callback );
         }
         #endregion
