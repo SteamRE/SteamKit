@@ -96,7 +96,7 @@ namespace Tests
 
             var tae = (TraceAssertException)exception;
 
-            // Can't nameof(ClientMsg) - nameof doesn't support open generic types (yet).
+            // Can't nameof(ClientMsgProtobuf) - nameof doesn't support open generic types (yet).
             Assert.Contains( $"ClientMsgProtobuf<{typeof( CMsgClientLogon ).FullName}>", tae.AssertMessage );
         }
 
