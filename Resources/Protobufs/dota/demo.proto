@@ -17,9 +17,8 @@ enum EDemoCommands {
 	DEM_UserCmd = 12;
 	DEM_FullPacket = 13;
 	DEM_SaveGame = 14;
-	DEM_SpawnGroups = 15;
-	DEM_Max = 16;
-	DEM_IsCompressed = 64;
+	DEM_Max = 15;
+	DEM_IsCompressed = 112;
 }
 
 message CDemoFileHeader {
@@ -32,7 +31,6 @@ message CDemoFileHeader {
 	optional int32 fullpackets_version = 7;
 	optional bool allow_clientside_entities = 8;
 	optional bool allow_clientside_particles = 9;
-	optional string addons = 10;
 }
 
 message CGameInfo {
@@ -144,9 +142,5 @@ message CDemoStop {
 message CDemoUserCmd {
 	optional int32 cmd_number = 1;
 	optional bytes data = 2;
-}
-
-message CDemoSpawnGroups {
-	repeated bytes msgs = 3;
 }
 

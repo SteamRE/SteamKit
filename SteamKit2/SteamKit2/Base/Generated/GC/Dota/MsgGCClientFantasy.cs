@@ -112,15 +112,6 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _is_locked; }
       set { _is_locked = value; }
     }
-
-    private bool _is_pro = default(bool);
-    [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"is_pro", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
-    public bool is_pro
-    {
-      get { return _is_pro; }
-      set { _is_pro = value; }
-    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
