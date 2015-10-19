@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Reflection;
+
 using SteamKit2;
-using SteamKit2.Internal;
 
 //
 // Sample 1: Logon
@@ -19,163 +18,121 @@ using SteamKit2.Internal;
 
 namespace Sample1_Logon
 {
-	class Program
-	{
-		static SteamClient steamClient;
-		static CallbackManager manager;
+    class Program
+    {
+        static SteamClient steamClient;
+        static CallbackManager manager;
 
-		static SteamUser steamUser;
+        static SteamUser steamUser;
 
-		static bool isRunning;
+        static bool isRunning;
 
-		static string user, pass;
+        static string user, pass;
 
 
-		static void Main( string[] args )
-		{
-			if ( args.Length < 2 )
-			{
-				Console.WriteLine( "Sample1: No username and password specified!" );
-				return;
-			}
+        static void Main( string[] args )
+        {
+            if ( args.Length < 2 )
+            {
+                Console.WriteLine( "Sample1: No username and password specified!" );
+                return;
+            }
 
-			// save our logon details
-			user = args[ 0 ];
-			pass = args[ 1 ];
+            // save our logon details
+            user = args[ 0 ];
+            pass = args[ 1 ];
 
-			DebugLog.Enabled = true;
-			DebugLog.AddListener((c, m) => Console.WriteLine($"[{c}] {m}"));
+            // create our steamclient instance
+            steamClient = new SteamClient();
+            // create the callback manager which will route callbacks to function calls
+            manager = new CallbackManager( steamClient );
 
-			// create our steamclient instance
-			steamClient = new SteamClient();
-			// create the callback manager which will route callbacks to function calls
-			manager = new CallbackManager( steamClient );
+            // get the steamuser handler, which is used for logging on after successfully connecting
+            steamUser = steamClient.GetHandler<SteamUser>();
 
-			// get the steamuser handler, which is used for logging on after successfully connecting
-			steamUser = steamClient.GetHandler<SteamUser>();
+            // register a few callbacks we're interested in
+            // these are registered upon creation to a callback manager, which will then route the callbacks
+            // to the functions specified
+            manager.Subscribe<SteamClient.ConnectedCallback>( OnConnected );
+            manager.Subscribe<SteamClient.DisconnectedCallback>( OnDisconnected );
 
-			steamClient.AddHandler(new JobFailureHandler());
+            manager.Subscribe<SteamUser.LoggedOnCallback>( OnLoggedOn );
+            manager.Subscribe<SteamUser.LoggedOffCallback>( OnLoggedOff );
 
-			// register a few callbacks we're interested in
-			// these are registered upon creation to a callback manager, which will then route the callbacks
-			// to the functions specified
-			manager.Subscribe<SteamClient.ConnectedCallback>( OnConnected );
-			manager.Subscribe<SteamClient.DisconnectedCallback>( OnDisconnected );
+            isRunning = true;
 
-			manager.Subscribe<SteamUser.LoggedOnCallback>( OnLoggedOn );
-			manager.Subscribe<SteamUser.LoggedOffCallback>( OnLoggedOff );
-			manager.Subscribe<DestinationJobFailedCallback>(OnJobFailure);
+            Console.WriteLine( "Connecting to Steam..." );
 
-			isRunning = true;
+            // initiate the connection
+            steamClient.Connect();
 
-			Console.WriteLine( "Connecting to Steam..." );
+            // create our callback handling loop
+            while ( isRunning )
+            {
+                // in order for the callbacks to get routed, they need to be handled by the manager
+                manager.RunWaitCallbacks( TimeSpan.FromSeconds( 1 ) );
+            }
+        }
 
-			// initiate the connection
-			steamClient.Connect();
+        static void OnConnected( SteamClient.ConnectedCallback callback )
+        {
+            if ( callback.Result != EResult.OK )
+            {
+                Console.WriteLine( "Unable to connect to Steam: {0}", callback.Result );
 
-			// create our callback handling loop
-			while ( isRunning )
-			{
-				// in order for the callbacks to get routed, they need to be handled by the manager
-				manager.RunWaitCallbacks( TimeSpan.FromSeconds( 1 ) );
-			}
-		}
+                isRunning = false;
+                return;
+            }
 
-		static void OnConnected( SteamClient.ConnectedCallback callback )
-		{
-			if ( callback.Result != EResult.OK )
-			{
-				Console.WriteLine( "Unable to connect to Steam: {0}", callback.Result );
+            Console.WriteLine( "Connected to Steam! Logging in '{0}'...", user );
 
-				isRunning = false;
-				return;
-			}
+            steamUser.LogOn( new SteamUser.LogOnDetails
+            {
+                Username = user,
+                Password = pass,
+            } );
+        }
 
-			Console.WriteLine( "Connected to Steam! Logging in '{0}'...", user );
+        static void OnDisconnected( SteamClient.DisconnectedCallback callback )
+        {
+            Console.WriteLine( "Disconnected from Steam" );
 
-			steamUser.LogOn(new SteamUser.LogOnDetails
-			{
-				Username = user,
-				Password = pass,
-			});
-		}
+            isRunning = false;
+        }
 
-		static void OnDisconnected( SteamClient.DisconnectedCallback callback )
-		{
-			Console.WriteLine( "Disconnected from Steam" );
+        static void OnLoggedOn( SteamUser.LoggedOnCallback callback )
+        {
+            if ( callback.Result != EResult.OK )
+            {
+                if ( callback.Result == EResult.AccountLogonDenied )
+                {
+                    // if we recieve AccountLogonDenied or one of it's flavors (AccountLogonDeniedNoMailSent, etc)
+                    // then the account we're logging into is SteamGuard protected
+                    // see sample 5 for how SteamGuard can be handled
 
-			isRunning = false;
-		}
+                    Console.WriteLine( "Unable to logon to Steam: This account is SteamGuard protected." );
 
-		static void OnLoggedOn( SteamUser.LoggedOnCallback callback )
-		{
-			if ( callback.Result != EResult.OK )
-			{
-				if ( callback.Result == EResult.AccountLogonDenied )
-				{
-					// if we recieve AccountLogonDenied or one of it's flavors (AccountLogonDeniedNoMailSent, etc)
-					// then the account we're logging into is SteamGuard protected
-					// see sample 5 for how SteamGuard can be handled
+                    isRunning = false;
+                    return;
+                }
 
-					Console.WriteLine( "Unable to logon to Steam: This account is SteamGuard protected." );
+                Console.WriteLine( "Unable to logon to Steam: {0} / {1}", callback.Result, callback.ExtendedResult );
 
-					isRunning = false;
-					return;
-				}
+                isRunning = false;
+                return;
+            }
 
-				Console.WriteLine( "Unable to logon to Steam: {0} / {1}", callback.Result, callback.ExtendedResult );
+            Console.WriteLine( "Successfully logged on!" );
 
-				isRunning = false;
-				return;
-			}
+            // at this point, we'd be able to perform actions on Steam
 
-			Console.WriteLine( "Successfully logged on!" );
+            // for this sample we'll just log off
+            steamUser.LogOff();
+        }
 
-			// at this point, we'd be able to perform actions on Steam
-
-			// for this sample we'll just log off
-			// steamUser.LogOff();
-			steamUser.RequestWebAPIUserNonce();
-		}
-
-		static void OnLoggedOff( SteamUser.LoggedOffCallback callback )
-		{
-			Console.WriteLine( "Logged off of Steam: {0}", callback.Result );
-		}
-
-		static void OnWebAPIUserNonceCallback(SteamUser.WebAPIUserNonceCallback callback)
-		{
-
-		}
-
-		static void OnJobFailure(DestinationJobFailedCallback failure)
-		{
-
-		}
-
-		class JobFailureHandler : ClientMsgHandler
-		{
-			public override void HandleMsg(IPacketMsg packetMsg)
-			{
-				if (packetMsg.MsgType != EMsg.DestJobFailed)
-				{
-					return;
-				}
-
-				var failure = new ClientMsg<MsgClientJustStrings>(packetMsg);
-				var callback = new DestinationJobFailedCallback(failure.TargetJobID);
-				steamClient.PostCallback(callback);
-
-				Console.WriteLine("Job failed!");
-			}
-		}
-
-		public class DestinationJobFailedCallback : CallbackMsg
-		{
-			public DestinationJobFailedCallback(JobID jobID)
-			{
-				this.JobID = jobID;
-			}
-		}
-	}
+        static void OnLoggedOff( SteamUser.LoggedOffCallback callback )
+        {
+            Console.WriteLine( "Logged off of Steam: {0}", callback.Result );
+        }
+    }
 }
