@@ -13,25 +13,26 @@ namespace SteamKit2
     /// </summary>
    public static class SteamDirectory
     {
-       /// <summary>
-       /// Initializes <see cref="SteamKit2.Internal.CMClient"/>'s server list with servers from the Steam Directory.
-       /// </summary>
-       public static Task Initialize( int cellid = 0 )
-       {
-           return LoadAsync( cellid ).ContinueWith( t =>
+        /// <summary>
+        /// Initializes <see cref="SteamKit2.Internal.CMClient"/>'s server list with servers from the Steam Directory.
+        /// </summary>
+        /// <param name="cellid">Cell ID</param>
+        public static Task Initialize( uint cellid = 0 )
+        {
+            return LoadAsync( cellid ).ContinueWith( t =>
             {
                 var servers = t.Result;
                 CMClient.Servers.Clear();
                 CMClient.Servers.TryAddRange(servers);
             }, CancellationToken.None, TaskContinuationOptions.NotOnFaulted | TaskContinuationOptions.NotOnCanceled, TaskScheduler.Current );
-       }
+        }
 
         /// <summary>
         /// Load a list of servers from the Steam Directory.
         /// </summary>
         /// <param name="cellid">Cell ID</param>
         /// <returns>A <see cref="System.Threading.Tasks.Task"/> with the Result set to an enumerable list of <see cref="System.Net.IPEndPoint"/>s.</returns>
-        public static Task<IEnumerable<IPEndPoint>> LoadAsync( int cellid = 0 )
+        public static Task<IEnumerable<IPEndPoint>> LoadAsync( uint cellid = 0 )
         {
             return LoadAsync( cellid, CancellationToken.None );
         }
@@ -42,7 +43,7 @@ namespace SteamKit2
         /// <param name="cellid">Cell ID</param>
         /// <param name="cancellationToken">Cancellation Token</param>
         /// <returns>A <see cref="System.Threading.Tasks.Task"/> with the Result set to an enumerable list of <see cref="System.Net.IPEndPoint"/>s.</returns>
-        public static Task<IEnumerable<IPEndPoint>> LoadAsync( int cellid, CancellationToken cancellationToken )
+        public static Task<IEnumerable<IPEndPoint>> LoadAsync( uint cellid, CancellationToken cancellationToken )
         {
             var directory = new WebAPI.AsyncInterface( "ISteamDirectory", null );
             var args = new Dictionary<string, string>
@@ -82,6 +83,5 @@ namespace SteamKit2
                 return endPoints.AsEnumerable();
             }, cancellationToken, TaskContinuationOptions.NotOnCanceled | TaskContinuationOptions.NotOnFaulted, TaskScheduler.Current );
         }
-
     }
 }

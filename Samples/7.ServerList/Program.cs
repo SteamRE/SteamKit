@@ -61,12 +61,12 @@ namespace Sample7_ServerList
                 steamUser.LogOff();
             };
 
-            int cellid = 0;
+            var cellid = 0u;
 
             // if we've previously connected and saved our cellid, load it.
             if ( File.Exists( "cellid.txt" ) )
             {
-                if ( !int.TryParse( File.ReadAllText( "cellid.txt"), out cellid ) )
+                if ( !uint.TryParse( File.ReadAllText( "cellid.txt"), out cellid ) )
                 {
                     Console.WriteLine( "Error parsing cellid from cellid.txt. Continuing with cellid 0." );
                 }
