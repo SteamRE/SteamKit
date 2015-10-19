@@ -255,7 +255,7 @@ enum EMsg
 	ClientGetLegacyGameKey = 730;
 	ClientContentServerLogOn_Deprecated = 731; obsolete
 	ClientAckVACBan2 = 732;
-	ClientAckMessageByGID = 735;
+	ClientAckMessageByGID = 735; obsolete
 	ClientGetPurchaseReceipts = 736;
 	ClientAckPurchaseReceipt = 737;
 	ClientGamesPlayed3_obsolete = 738; obsolete
@@ -303,8 +303,8 @@ enum EMsg
 	ClientInitPurchaseResponse = 789;
 	ClientAddFriend = 791;
 	ClientAddFriendResponse = 792;
-	ClientInviteFriend = 793;
-	ClientInviteFriendResponse = 794;
+	ClientInviteFriend = 793; obsolete
+	ClientInviteFriendResponse = 794; obsolete
 	ClientSendGuestPassResponse = 795; obsolete
 	ClientAckGuestPassResponse = 796;
 	ClientRedeemGuestPassResponse = 797;
@@ -1218,6 +1218,8 @@ enum EMsg
 	ClientDisableTestLicenseResponse = 5446;
 	ClientRequestValidationMail = 5448;
 	ClientRequestValidationMailResponse = 5449;
+	ClientCheckAppBetaPassword = 5450;
+	ClientCheckAppBetaPasswordResponse = 5451;
 	ClientToGC = 5452;
 	ClientFromGC = 5453;
 	ClientRequestChangeMail = 5454;
@@ -1228,7 +1230,7 @@ enum EMsg
 	ClientPersonalQAChange3 = 5459;
 	ClientResetForgottenPassword3 = 5460;
 	ClientRequestForgottenPasswordEmail3 = 5461;
-	ClientCreateAccount3 = 5462;
+	ClientCreateAccount3 = 5462; obsolete
 	ClientNewLoginKey = 5463;
 	ClientNewLoginKeyAccepted = 5464;
 	ClientLogOnWithHash_Deprecated = 5465; obsolete
@@ -1332,8 +1334,8 @@ enum EMsg
 	ClientItemAnnouncements = 5576;
 	ClientRequestItemAnnouncements = 5577;
 	ClientFriendMsgEchoToSender = 5578;
-	ClientChangeSteamGuardOptions = 5579;
-	ClientChangeSteamGuardOptionsResponse = 5580;
+	ClientChangeSteamGuardOptions = 5579; obsolete
+	ClientChangeSteamGuardOptionsResponse = 5580; obsolete
 	ClientOGSGameServerPingSample = 5581;
 	ClientCommentNotifications = 5582;
 	ClientRequestCommentNotifications = 5583;
@@ -1522,12 +1524,12 @@ enum EMsg
 	ClientUCMDeletePublishedFileResponse = 7316;
 	ClientUCMEnumerateUserPublishedFiles = 7317;
 	ClientUCMEnumerateUserPublishedFilesResponse = 7318;
-	ClientUCMSubscribePublishedFile = 7319;
-	ClientUCMSubscribePublishedFileResponse = 7320;
+	ClientUCMSubscribePublishedFile = 7319; obsolete
+	ClientUCMSubscribePublishedFileResponse = 7320; obsolete
 	ClientUCMEnumerateUserSubscribedFiles = 7321;
 	ClientUCMEnumerateUserSubscribedFilesResponse = 7322;
-	ClientUCMUnsubscribePublishedFile = 7323;
-	ClientUCMUnsubscribePublishedFileResponse = 7324;
+	ClientUCMUnsubscribePublishedFile = 7323; obsolete
+	ClientUCMUnsubscribePublishedFileResponse = 7324; obsolete
 	ClientUCMUpdatePublishedFile = 7325;
 	ClientUCMUpdatePublishedFileResponse = 7326;
 	UCMUpdatePublishedFile = 7327;

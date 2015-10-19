@@ -24,7 +24,6 @@
 	k_EMsgClientGetLegacyGameKey = 730, // flags: 2, server type: -1
 	k_EMsgClientContentServerLogOn_Deprecated = 731, // flags: 2, server type: -1
 	k_EMsgClientAckVACBan2 = 732, // flags: 2, server type: -1
-	k_EMsgClientAckMessageByGID = 735, // flags: 2, server type: -1
 	k_EMsgClientGetPurchaseReceipts = 736, // flags: 2, server type: -1
 	k_EMsgClientAckGuestPass = 740, // flags: 2, server type: -1
 	k_EMsgClientRedeemGuestPass = 741, // flags: 2, server type: -1
@@ -61,8 +60,6 @@
 	k_EMsgClientGetLegacyGameKeyResponse = 785, // flags: 2, server type: -1
 	k_EMsgClientAddFriend = 791, // flags: 2, server type: -1
 	k_EMsgClientAddFriendResponse = 792, // flags: 2, server type: -1
-	k_EMsgClientInviteFriend = 793, // flags: 2, server type: -1
-	k_EMsgClientInviteFriendResponse = 794, // flags: 2, server type: -1
 	k_EMsgClientAckGuestPassResponse = 796, // flags: 2, server type: -1
 	k_EMsgClientRedeemGuestPassResponse = 797, // flags: 2, server type: -1
 	k_EMsgClientUpdateGuestPassesList = 798, // flags: 2, server type: -1
@@ -215,6 +212,8 @@
 	k_EMsgClientDisableTestLicenseResponse = 5446, // flags: 2, server type: -1
 	k_EMsgClientRequestValidationMail = 5448, // flags: 2, server type: -1
 	k_EMsgClientRequestValidationMailResponse = 5449, // flags: 2, server type: -1
+	k_EMsgClientCheckAppBetaPassword = 5450, // flags: 2, server type: -1
+	k_EMsgClientCheckAppBetaPasswordResponse = 5451, // flags: 2, server type: -1
 	k_EMsgClientToGC = 5452, // flags: 6, server type: 57
 	k_EMsgClientFromGC = 5453, // flags: 2, server type: -1
 	k_EMsgClientRequestChangeMail = 5454, // flags: 2, server type: -1
@@ -225,7 +224,6 @@
 	k_EMsgClientPersonalQAChange3 = 5459, // flags: 2, server type: -1
 	k_EMsgClientResetForgottenPassword3 = 5460, // flags: 2, server type: -1
 	k_EMsgClientRequestForgottenPasswordEmail3 = 5461, // flags: 2, server type: -1
-	k_EMsgClientCreateAccount3 = 5462, // flags: 2, server type: -1
 	k_EMsgClientNewLoginKey = 5463, // flags: 2, server type: -1
 	k_EMsgClientNewLoginKeyAccepted = 5464, // flags: 2, server type: -1
 	k_EMsgClientLogOnWithHash_Deprecated = 5465, // flags: 2, server type: -1
@@ -329,8 +327,6 @@
 	k_EMsgClientItemAnnouncements = 5576, // flags: 2, server type: -1
 	k_EMsgClientRequestItemAnnouncements = 5577, // flags: 6, server type: 47
 	k_EMsgClientFriendMsgEchoToSender = 5578, // flags: 2, server type: -1
-	k_EMsgClientChangeSteamGuardOptions = 5579, // flags: 2, server type: -1
-	k_EMsgClientChangeSteamGuardOptionsResponse = 5580, // flags: 2, server type: -1
 	k_EMsgClientOGSGameServerPingSample = 5581, // flags: 6, server type: 39
 	k_EMsgClientCommentNotifications = 5582, // flags: 2, server type: -1
 	k_EMsgClientRequestCommentNotifications = 5583, // flags: 6, server type: 47
@@ -410,12 +406,8 @@
 	k_EMsgClientUCMDeletePublishedFileResponse = 7316, // flags: 6, server type: 45
 	k_EMsgClientUCMEnumerateUserPublishedFiles = 7317, // flags: 6, server type: 45
 	k_EMsgClientUCMEnumerateUserPublishedFilesResponse = 7318, // flags: 6, server type: 45
-	k_EMsgClientUCMSubscribePublishedFile = 7319, // flags: 6, server type: 45
-	k_EMsgClientUCMSubscribePublishedFileResponse = 7320, // flags: 6, server type: 45
 	k_EMsgClientUCMEnumerateUserSubscribedFiles = 7321, // flags: 6, server type: 45
 	k_EMsgClientUCMEnumerateUserSubscribedFilesResponse = 7322, // flags: 6, server type: 45
-	k_EMsgClientUCMUnsubscribePublishedFile = 7323, // flags: 6, server type: 45
-	k_EMsgClientUCMUnsubscribePublishedFileResponse = 7324, // flags: 6, server type: 45
 	k_EMsgClientUCMUpdatePublishedFile = 7325, // flags: 6, server type: 45
 	k_EMsgClientUCMUpdatePublishedFileResponse = 7326, // flags: 6, server type: 45
 	k_EMsgClientUCMPublishedFileSubscribed = 7347, // flags: 2, server type: -1
