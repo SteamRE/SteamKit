@@ -10,6 +10,7 @@
 
 // Generated from: tf_gcmessages.proto
 // Note: requires additional types generated from: steammessages.proto
+// Note: requires additional types generated from: base_gcmessages.proto
 namespace SteamKit2.GC.TF2.Internal
 {
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgTFGoldenWrenchBroadcast")]
@@ -5374,6 +5375,90 @@ namespace SteamKit2.GC.TF2.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CEconItemPreviewDataBlock")]
+  public partial class CEconItemPreviewDataBlock : global::ProtoBuf.IExtensible
+  {
+    public CEconItemPreviewDataBlock() {}
+    
+
+    private CSOEconItem _econitem = null;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"econitem", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public CSOEconItem econitem
+    {
+      get { return _econitem; }
+      set { _econitem = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGC_Client2GCEconPreviewDataBlockRequest")]
+  public partial class CMsgGC_Client2GCEconPreviewDataBlockRequest : global::ProtoBuf.IExtensible
+  {
+    public CMsgGC_Client2GCEconPreviewDataBlockRequest() {}
+    
+
+    private ulong _param_s = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"param_s", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong param_s
+    {
+      get { return _param_s; }
+      set { _param_s = value; }
+    }
+
+    private ulong _param_a = default(ulong);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"param_a", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong param_a
+    {
+      get { return _param_a; }
+      set { _param_a = value; }
+    }
+
+    private ulong _param_d = default(ulong);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"param_d", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong param_d
+    {
+      get { return _param_d; }
+      set { _param_d = value; }
+    }
+
+    private ulong _param_m = default(ulong);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"param_m", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong param_m
+    {
+      get { return _param_m; }
+      set { _param_m = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGC_Client2GCEconPreviewDataBlockResponse")]
+  public partial class CMsgGC_Client2GCEconPreviewDataBlockResponse : global::ProtoBuf.IExtensible
+  {
+    public CMsgGC_Client2GCEconPreviewDataBlockResponse() {}
+    
+
+    private CEconItemPreviewDataBlock _iteminfo = null;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"iteminfo", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public CEconItemPreviewDataBlock iteminfo
+    {
+      get { return _iteminfo; }
+      set { _iteminfo = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     [global::ProtoBuf.ProtoContract(Name=@"ETFGCMsg", EnumPassthru=true)]
     public enum ETFGCMsg
     {
@@ -5674,6 +5759,12 @@ namespace SteamKit2.GC.TF2.Internal
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGC_DuckLeaderboard_IndividualUpdate", Value=6401)]
       k_EMsgGC_DuckLeaderboard_IndividualUpdate = 6401,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGC_Client2GCEconPreviewDataBlockRequest", Value=6402)]
+      k_EMsgGC_Client2GCEconPreviewDataBlockRequest = 6402,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGC_Client2GCEconPreviewDataBlockResponse", Value=6403)]
+      k_EMsgGC_Client2GCEconPreviewDataBlockResponse = 6403,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGC_ClientVerificationChallenge", Value=6500)]
       k_EMsgGC_ClientVerificationChallenge = 6500,

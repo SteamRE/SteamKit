@@ -1,4 +1,5 @@
 import "steammessages.proto";
+import "base_gcmessages.proto";
 
 option optimize_for = SPEED;
 option cc_generic_services = false;
@@ -103,6 +104,8 @@ enum ETFGCMsg {
 	k_EMsgGCSetLobbySafeToLeave = 6302;
 	k_EMsgGC_UpdatePeriodicEvent = 6400;
 	k_EMsgGC_DuckLeaderboard_IndividualUpdate = 6401;
+	k_EMsgGC_Client2GCEconPreviewDataBlockRequest = 6402;
+	k_EMsgGC_Client2GCEconPreviewDataBlockResponse = 6403;
 	k_EMsgGC_ClientVerificationChallenge = 6500;
 	k_EMsgGC_ClientVerificationChallengeResponse = 6501;
 	k_EMsgGC_ClientVerificationVerboseResponse = 6502;
@@ -1092,5 +1095,20 @@ message CMsgGC_Match_Result {
 	repeated .CMsgGC_Match_Result.Player players = 10;
 	optional uint32 red_skillrating = 11;
 	optional uint32 blue_skillrating = 12;
+}
+
+message CEconItemPreviewDataBlock {
+	optional .CSOEconItem econitem = 1;
+}
+
+message CMsgGC_Client2GCEconPreviewDataBlockRequest {
+	optional uint64 param_s = 1;
+	optional uint64 param_a = 2;
+	optional uint64 param_d = 3;
+	optional uint64 param_m = 4;
+}
+
+message CMsgGC_Client2GCEconPreviewDataBlockResponse {
+	optional .CEconItemPreviewDataBlock iteminfo = 1;
 }
 
