@@ -62,7 +62,7 @@ message CTwoFactor_FinalizeAddAuthenticator_Response {
 }
 
 message CTwoFactor_RemoveAuthenticator_Request {
-	optional fixed64 steamid = 1 [(description) = "steamid to use"];
+	optional fixed64 steamid = 1 [(description) = "Deprecated. Do not use."];
 	optional string revocation_code = 2 [(description) = "Password needed to remove token"];
 	optional string authenticator_code = 3 [(description) = "Current auth code"];
 	optional uint64 authenticator_time = 4 [(description) = "Current authenticator time"];

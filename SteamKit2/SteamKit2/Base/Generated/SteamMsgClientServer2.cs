@@ -3139,6 +3139,24 @@ namespace SteamKit2.Internal
       get { return _twofactor_code; }
       set { _twofactor_code = value; }
     }
+
+    private string _sms_code = "";
+    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"sms_code", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string sms_code
+    {
+      get { return _sms_code; }
+      set { _sms_code = value; }
+    }
+
+    private bool _client_supports_sms = default(bool);
+    [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"client_supports_sms", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool client_supports_sms
+    {
+      get { return _client_supports_sms; }
+      set { _client_supports_sms = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -3157,6 +3175,15 @@ namespace SteamKit2.Internal
     {
       get { return _eresult; }
       set { _eresult = value; }
+    }
+
+    private bool _requires_sms_code = default(bool);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"requires_sms_code", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool requires_sms_code
+    {
+      get { return _requires_sms_code; }
+      set { _requires_sms_code = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -3380,9 +3407,21 @@ namespace SteamKit2.Internal
       get { return _eresult; }
       set { _eresult = value; }
     }
+    private readonly global::System.Collections.Generic.List<CMsgClientCheckAppBetaPasswordResponse.BetaPassword> _betapasswords = new global::System.Collections.Generic.List<CMsgClientCheckAppBetaPasswordResponse.BetaPassword>();
+    [global::ProtoBuf.ProtoMember(4, Name=@"betapasswords", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CMsgClientCheckAppBetaPasswordResponse.BetaPassword> betapasswords
+    {
+      get { return _betapasswords; }
+    }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"BetaPassword")]
+  public partial class BetaPassword : global::ProtoBuf.IExtensible
+  {
+    public BetaPassword() {}
+    
 
     private string _betaname = "";
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"betaname", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"betaname", DataFormat = global::ProtoBuf.DataFormat.Default)]
     [global::System.ComponentModel.DefaultValue("")]
     public string betaname
     {
@@ -3391,13 +3430,18 @@ namespace SteamKit2.Internal
     }
 
     private string _betapassword = "";
-    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"betapassword", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"betapassword", DataFormat = global::ProtoBuf.DataFormat.Default)]
     [global::System.ComponentModel.DefaultValue("")]
     public string betapassword
     {
       get { return _betapassword; }
       set { _betapassword = value; }
     }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

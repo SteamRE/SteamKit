@@ -1,0 +1,16 @@
+import "google/protobuf/descriptor.proto";
+import "steammessages_unified_base.steamclient.proto";
+
+message CPhysicalGoods_RegisterSteamController_Request {
+	optional string serial_number = 1;
+}
+
+message CPhysicalGoods_RegisterSteamController_Response {
+}
+
+service PhysicalGoods {
+	option (service_description) = "A service to use physical goods related methods";
+	rpc RegisterSteamController (.CPhysicalGoods_RegisterSteamController_Request) returns (.CPhysicalGoods_RegisterSteamController_Response) {
+		option (method_description) = "Records a serial number and the calling user's account info for warranty purposes.";
+	}
+}

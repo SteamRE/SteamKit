@@ -64,10 +64,14 @@ message CMsgRemoteClientBroadcastStatus {
 	repeated .CMsgRemoteClientBroadcastStatus.User users = 9;
 	optional int32 euniverse = 11;
 	optional uint32 timestamp = 12;
+	optional bool screen_locked = 13;
+	optional bool games_running = 14;
+	repeated string mac_addresses = 15;
 }
 
 message CMsgRemoteClientBroadcastDiscovery {
 	optional uint32 seq_num = 1;
+	repeated uint64 client_ids = 2;
 }
 
 message CMsgRemoteDeviceAuthorizationRequest {

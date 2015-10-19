@@ -496,10 +496,13 @@ message CMsgClientEmailChange {
 	optional bool final = 4;
 	optional bool newmethod = 5;
 	optional string twofactor_code = 6;
+	optional string sms_code = 7;
+	optional bool client_supports_sms = 8;
 }
 
 message CMsgClientEmailChangeResponse {
 	optional int32 eresult = 1 [default = 2];
+	optional bool requires_sms_code = 2;
 }
 
 message CMsgClientGetCDNAuthToken {
@@ -539,9 +542,13 @@ message CMsgClientCheckAppBetaPassword {
 }
 
 message CMsgClientCheckAppBetaPasswordResponse {
+	message BetaPassword {
+		optional string betaname = 1;
+		optional string betapassword = 2;
+	}
+
 	optional int32 eresult = 1 [default = 2];
-	optional string betaname = 2;
-	optional string betapassword = 3;
+	repeated .CMsgClientCheckAppBetaPasswordResponse.BetaPassword betapasswords = 4;
 }
 
 message CMsgClientUpdateAppJobReport {
