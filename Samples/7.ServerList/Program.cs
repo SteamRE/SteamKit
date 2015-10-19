@@ -70,6 +70,10 @@ namespace Sample7_ServerList
                 {
                     Console.WriteLine( "Error parsing cellid from cellid.txt. Continuing with cellid 0." );
                 }
+                else
+                {
+                    Console.WriteLine( $"Using persisted cell ID {cellid}" );
+                }
             }
 
             if ( File.Exists( "servers.bin" ) )
@@ -94,6 +98,8 @@ namespace Sample7_ServerList
                         CMClient.Servers.TryAdd( endPoint );
                     }
                 }
+
+                Console.WriteLine($"Loaded {CMClient.Servers.GetAllEndPoints().Length} servers from server list cache.");
             }
             else
             {
