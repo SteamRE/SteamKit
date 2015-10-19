@@ -1045,6 +1045,43 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"MatchEndItemUpdates")]
+  public partial class MatchEndItemUpdates : global::ProtoBuf.IExtensible
+  {
+    public MatchEndItemUpdates() {}
+    
+
+    private ulong _item_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"item_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong item_id
+    {
+      get { return _item_id; }
+      set { _item_id = value; }
+    }
+
+    private uint _item_attr_defidx = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"item_attr_defidx", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint item_attr_defidx
+    {
+      get { return _item_attr_defidx; }
+      set { _item_attr_defidx = value; }
+    }
+
+    private uint _item_attr_delta_value = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"item_attr_delta_value", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint item_attr_delta_value
+    {
+      get { return _item_attr_delta_value; }
+      set { _item_attr_delta_value = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"PlayerQuestData")]
   public partial class PlayerQuestData : global::ProtoBuf.IExtensible
   {
@@ -1091,6 +1128,13 @@ namespace SteamKit2.GC.CSGO.Internal
       get { return _mm_game_mode; }
       set { _mm_game_mode = value; }
     }
+    private readonly global::System.Collections.Generic.List<MatchEndItemUpdates> _item_updates = new global::System.Collections.Generic.List<MatchEndItemUpdates>();
+    [global::ProtoBuf.ProtoMember(6, Name=@"item_updates", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<MatchEndItemUpdates> item_updates
+    {
+      get { return _item_updates; }
+    }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"QuestItemData")]
   public partial class QuestItemData : global::ProtoBuf.IExtensible
   {

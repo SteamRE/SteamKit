@@ -226,6 +226,12 @@ message XpProgressData {
 	optional int32 xp_category = 2;
 }
 
+message MatchEndItemUpdates {
+	optional uint64 item_id = 1;
+	optional uint32 item_attr_defidx = 2;
+	optional uint32 item_attr_delta_value = 3;
+}
+
 message PlayerQuestData {
 	message QuestItemData {
 		optional uint64 quest_id = 1;
@@ -238,6 +244,7 @@ message PlayerQuestData {
 	repeated .XpProgressData xp_progress_data = 3;
 	optional uint32 time_played = 4;
 	optional uint32 mm_game_mode = 5;
+	repeated .MatchEndItemUpdates item_updates = 6;
 }
 
 message CMsgGC_ServerQuestUpdateData {
