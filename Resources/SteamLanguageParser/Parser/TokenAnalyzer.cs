@@ -62,7 +62,7 @@ namespace SteamLanguageParser
 
                         if (cur.Value == "import")
                         {
-                            Queue<Token> parentTokens = LanguageParser.TokenizeString( File.ReadAllText( text.Value ) );
+                            Queue<Token> parentTokens = LanguageParser.TokenizeString( File.ReadAllText( text.Value ), text.Value );
 
                             Node newRoot = Analyze( parentTokens );
 
@@ -257,7 +257,15 @@ namespace SteamLanguageParser
 
             if (peek.Name != name || peek.Value != value)
             {
-                throw new Exception("Expecting " + name + " '" + value + "', but got '" + peek.Value + "'");
+                if (peek.Source.HasValue)
+                {
+                    var source = peek.Source.Value;
+                    throw new Exception( $"Expecting {name} '{value}', but got '{peek.Value}' at {source.FileName} {source.StartLineNumber},{source.StartColumnNumber}-{source.EndLineNumber},{source.EndColumnNumber}" );
+                }
+                else
+                {
+                    throw new Exception("Expecting " + name + " '" + value + "', but got '" + peek.Value + "'");
+                }
             }
 
             return tokens.Dequeue();
