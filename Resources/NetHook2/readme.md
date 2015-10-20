@@ -15,7 +15,7 @@ NetHook2 requires the following libraries to compile:
 
 #### Building
 1. Execute `SetupDependencies.bat` to automatically acquire the zlib and protobuf headers and libraries. Alternatively, you can retrieve these dependencies yourself and tweak the include paths in Visual Studio.
-2. Build with VS 2013 (the v120 toolset is required to link with libprotobuf correctly).
+2. Build with VS 2015 (the v140 toolset is required to link with libprotobuf correctly).
 3. Behold: a fresh new `NetHook2.dll` is born into this world. You can place this DLL wherever you like, or leave where you built it. You'll need its full file path later when injecting.
 
 Usage
