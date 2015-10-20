@@ -106,6 +106,13 @@ namespace Tests
             Assert.Equal( EUniverse.Public, sidMultiseat.AccountUniverse );
             Assert.Equal( 456u, sidMultiseat.AccountInstance );
             Assert.Equal( EAccountType.Multiseat, sidMultiseat.AccountType );
+
+            SteamID sidLowercaseI = new SteamID();
+            sidLowercaseI.SetFromSteam3String( "[i:2:456]" );
+            Assert.Equal( 456u, sidLowercaseI.AccountID );
+            Assert.Equal( EUniverse.Beta, sidLowercaseI.AccountUniverse );
+            Assert.Equal( 1u, sidLowercaseI.AccountInstance );
+            Assert.Equal( EAccountType.Invalid, sidLowercaseI.AccountType );
         }
 
         [Fact]
@@ -292,6 +299,13 @@ namespace Tests
             Assert.Equal( EAccountType.Chat, sid.AccountType );
             Assert.Equal( ( uint ) SteamID.ChatInstanceFlags.Lobby, sid.AccountInstance );
             Assert.Equal( 1234u, sid.AccountID );
+        }
+
+        [Fact]
+        public void RendersOutOfRangeAccountTypeAsLowercaseI()
+        {
+            SteamID sid = new SteamID( 123, EUniverse.Beta, (EAccountType)(-1) );
+            Assert.Equal( "[i:2:123]", sid.Render(steam3: true) );
         }
     }
 }

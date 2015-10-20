@@ -78,6 +78,8 @@ namespace SteamKit2
             { EAccountType.AnonUser, 'a' },
         };
 
+        const char UnknownAccountTypeChar = 'i';
+
         /// <summary>
         /// The account instance value when representing all instanced <see cref="SteamID">SteamIDs</see>.
         /// </summary>
@@ -322,6 +324,10 @@ namespace SteamKit2
             {
                 instance = ( uint )( ( ChatInstanceFlags )instance | ChatInstanceFlags.Lobby );
                 this.AccountType = EAccountType.Chat;
+            }
+            else if ( type == UnknownAccountTypeChar )
+            {
+                this.AccountType = EAccountType.Invalid;
             }
             else
             {
@@ -630,7 +636,11 @@ namespace SteamKit2
 
         string RenderSteam3()
         {
-            var accountTypeChar = AccountTypeChars.ContainsKey( AccountType ) ? AccountTypeChars[ AccountType ] : 'i';
+            char accountTypeChar;
+            if ( !AccountTypeChars.TryGetValue( AccountType, out accountTypeChar ) )
+            {
+                accountTypeChar = UnknownAccountTypeChar;
+            }
 
             if ( AccountType == EAccountType.Chat )
             {
