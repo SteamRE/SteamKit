@@ -28,6 +28,7 @@ namespace ProtobufDumper
             catch ( Exception ex )
             {
                 Console.WriteLine( "Unable to process file: {0}", ex.Message );
+                Console.WriteLine( ex.StackTrace );
                 Environment.ExitCode = -1;
             }
         }
