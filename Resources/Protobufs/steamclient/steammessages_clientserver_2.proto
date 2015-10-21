@@ -1146,6 +1146,8 @@ message CMsgClientServiceCall {
 	optional uint32 cub_output_max = 6;
 	optional uint32 flags = 7;
 	optional bytes callparameter = 8;
+	optional bool ping_only = 9;
+	optional uint32 max_outstanding_calls = 10;
 }
 
 message CMsgClientServiceModule {
@@ -1169,6 +1171,13 @@ message CMsgClientServiceCallResponse {
 	optional bytes portable_system_info = 12;
 	optional bool was_converted = 13;
 	optional uint32 internal_result = 14;
+	optional uint32 current_count = 15;
+	optional uint32 last_call_handle = 16;
+	optional uint32 last_call_module_crc = 17;
+	optional bytes last_call_sysid_routing = 18;
+	optional uint32 last_ecallresult = 19;
+	optional uint32 last_callissue_delta = 20;
+	optional uint32 last_callcomplete_delta = 21;
 }
 
 message CMsgAMUnlockStreaming {

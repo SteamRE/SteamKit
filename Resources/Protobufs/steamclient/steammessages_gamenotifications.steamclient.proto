@@ -1,5 +1,6 @@
-import "google/protobuf/descriptor.proto";
 import "steammessages_unified_base.steamclient.proto";
+
+option cc_generic_services = true;
 
 message CGameNotifications_Variable {
 	optional string key = 1 [(description) = "The name of the variable in the localized text -- anywhere that %variablename% is found within the text it will be substituded with the given value"];

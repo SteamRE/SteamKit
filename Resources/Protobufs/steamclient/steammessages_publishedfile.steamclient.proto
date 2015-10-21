@@ -1,5 +1,6 @@
-import "google/protobuf/descriptor.proto";
 import "steammessages_unified_base.steamclient.proto";
+
+option cc_generic_services = true;
 
 message CPublishedFile_Subscribe_Request {
 	optional uint64 publishedfileid = 1;
@@ -113,6 +114,7 @@ message PublishedFileDetails {
 		k_PFFSS_ApprovedForSale = 2;
 		k_PFFSS_RejectedForSale = 3;
 		k_PFFSS_NoLongerForSale = 4;
+		k_PFFSS_TentativeApproval = 5;
 	}
 
 	optional uint32 result = 1;

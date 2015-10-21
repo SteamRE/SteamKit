@@ -1,5 +1,6 @@
-import "google/protobuf/descriptor.proto";
 import "steammessages_unified_base.steamclient.proto";
+
+option cc_generic_services = true;
 
 message COffline_GetOfflineLogonTicket_Request {
 	optional uint32 priority = 1;

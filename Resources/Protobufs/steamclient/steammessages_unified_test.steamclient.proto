@@ -1,5 +1,6 @@
-import "google/protobuf/descriptor.proto";
 import "steammessages_unified_base.steamclient.proto";
+
+option cc_generic_services = true;
 
 message CMsgTest_MessageToClient_Request {
 	optional string some_text = 1 [(description) = "Some string."];
