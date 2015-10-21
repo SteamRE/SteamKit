@@ -108,7 +108,7 @@ namespace SteamKit2
         /// Enables or disables periodic checks for job timeouts.
         /// </summary>
         /// <param name="enable">Whether or not job timeout checks should be enabled.</param>
-        public void EnableTimeouts( bool enable )
+        public void SetTimeoutsEnabled( bool enable )
         {
             if ( enable )
             {

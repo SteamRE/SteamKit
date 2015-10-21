@@ -74,7 +74,7 @@ namespace SteamKit2
         /// </returns>
         public static implicit operator JobID( AsyncJob asyncJob )
         {
-            return new JobID( asyncJob.JobID );
+            return asyncJob.JobID;
         }
     }
 

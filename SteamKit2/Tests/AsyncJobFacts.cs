@@ -90,7 +90,7 @@ namespace Tests
         public async void AsyncJobTimesout()
         {
             SteamClient client = new SteamClient();
-            client.jobManager.EnableTimeouts( true );
+            client.jobManager.SetTimeoutsEnabled( true );
 
             AsyncJob<Callback> asyncJob = new AsyncJob<Callback>( client, 123 );
             asyncJob.Timeout = TimeSpan.FromSeconds( 1 );
@@ -161,7 +161,7 @@ namespace Tests
         public async void AsyncJobMultipleExtendsTimeoutOnMessage()
         {
             SteamClient client = new SteamClient();
-            client.jobManager.EnableTimeouts( true );
+            client.jobManager.SetTimeoutsEnabled( true );
 
             AsyncJobMultiple<Callback> asyncJob = new AsyncJobMultiple<Callback>( client, 123, call => call.IsFinished );
             asyncJob.Timeout = TimeSpan.FromSeconds( 5 );
@@ -196,7 +196,7 @@ namespace Tests
         public async void AsyncJobMultipleTimesout()
         {
             SteamClient client = new SteamClient();
-            client.jobManager.EnableTimeouts( true );
+            client.jobManager.SetTimeoutsEnabled( true );
 
             AsyncJobMultiple<Callback> asyncJob = new AsyncJobMultiple<Callback>( client, 123, call => false );
             asyncJob.Timeout = TimeSpan.FromSeconds( 1 );
@@ -215,7 +215,7 @@ namespace Tests
         public async void AsyncJobMultipleCompletesOnIncompleteResult()
         {
             SteamClient client = new SteamClient();
-            client.jobManager.EnableTimeouts( true );
+            client.jobManager.SetTimeoutsEnabled( true );
 
             AsyncJobMultiple<Callback> asyncJob = new AsyncJobMultiple<Callback>( client, 123, call => call.IsFinished );
             asyncJob.Timeout = TimeSpan.FromSeconds( 1 );

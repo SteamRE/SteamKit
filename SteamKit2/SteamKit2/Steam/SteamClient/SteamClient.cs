@@ -259,6 +259,7 @@ namespace SteamKit2
         }
         #endregion
 
+
         #region Jobs
         /// <summary>
         /// Returns the next available JobID for job based messages.
@@ -336,7 +337,7 @@ namespace SteamKit2
             // if we are disconnected, cancel all pending jobs
             jobManager.CancelPendingJobs();
 
-            jobManager.EnableTimeouts( false );
+            jobManager.SetTimeoutsEnabled( false );
 
             this.PostCallback( new DisconnectedCallback( userInitiated ) );
         }
@@ -348,7 +349,7 @@ namespace SteamKit2
 
             if ( encResult.Body.Result == EResult.OK )
             {
-                jobManager.EnableTimeouts( true );
+                jobManager.SetTimeoutsEnabled( true );
             }
 
             PostCallback( new ConnectedCallback( encResult.Body ) );
