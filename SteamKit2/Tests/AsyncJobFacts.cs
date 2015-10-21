@@ -55,16 +55,30 @@ namespace Tests
         }
 
         [Fact]
-        public async void AsyncJobCancelsOnNull()
+        public async void AsyncJobClearsOnTimeout()
+        {
+            SteamClient client = new SteamClient();
+            client.jobManager.SetTimeoutsEnabled( true );
+
+            AsyncJob<Callback> asyncJob = new AsyncJob<Callback>( client, 123 );
+            asyncJob.Timeout = TimeSpan.FromSeconds( 1 );
+
+            await Task.Delay( TimeSpan.FromSeconds( 5 ) );
+
+            Assert.False( client.jobManager.asyncJobs.ContainsKey( asyncJob ), "Async job dictionary should no longer contain jobid key after timeout" );
+            Assert.False( client.jobManager.asyncJobs.ContainsKey( 123 ), "Async job dictionary should no longer contain jobid key (as value type) after timeout" );
+        }
+
+        [Fact]
+        public async void AsyncJobCancelsOnSetFailedTimeout()
         {
             SteamClient client = new SteamClient();
 
             AsyncJob<Callback> asyncJob = new AsyncJob<Callback>( client, 123 );
             Task<Callback> asyncTask = asyncJob.ToTask();
 
-            bool jobFinished = asyncJob.AddResult( null );
-
-            Assert.True( jobFinished, "Async job should inform that it has been completed on a null callback" );
+            asyncJob.SetFailed( dueToRemoteFailure: false );
+            
             Assert.True( asyncTask.IsCompleted, "Async job should be completed on null callback" );
             Assert.True( asyncTask.IsCanceled, "Async job should be canceled on null callback" );
 
@@ -103,6 +117,16 @@ namespace Tests
             Assert.True( asyncTask.IsCanceled, "Async job should be canceled after 5 seconds of a 1 second job timeout" );
 
             await Assert.ThrowsAsync( typeof( TaskCanceledException ), async () => await asyncTask );
+        }
+
+        [Fact]
+        public void AsyncJobThrowsExceptionOnNullCallback()
+        {
+            SteamClient client = new SteamClient();
+
+            AsyncJob<Callback> asyncJob = new AsyncJob<Callback>( client, 123 );
+
+            Assert.Throws<ArgumentNullException>( () => asyncJob.AddResult( null ) );
         }
 
         [Fact]
@@ -155,6 +179,21 @@ namespace Tests
 
             Assert.False( client.jobManager.asyncJobs.ContainsKey( asyncJob ), "Async job dictionary should not contain jobid key for AsyncJobMultiple on completion" );
             Assert.False( client.jobManager.asyncJobs.ContainsKey( 123 ), "Async job dictionary should not contain jobid key (as value type) for AsyncJobMultiple on completion" );
+        }
+
+        [Fact]
+        public async void AsyncJobMultipleClearsOnTimeout()
+        {
+            SteamClient client = new SteamClient();
+            client.jobManager.SetTimeoutsEnabled( true );
+
+            AsyncJobMultiple<Callback> asyncJob = new AsyncJobMultiple<Callback>( client, 123, ccall => true );
+            asyncJob.Timeout = TimeSpan.FromSeconds( 1 );
+
+            await Task.Delay( TimeSpan.FromSeconds( 5 ) );
+
+            Assert.False( client.jobManager.asyncJobs.ContainsKey( asyncJob ), "Async job dictionary should no longer contain jobid key after timeout" );
+            Assert.False( client.jobManager.asyncJobs.ContainsKey( 123 ), "Async job dictionary should no longer contain jobid key (as value type) after timeout" );
         }
 
         [Fact]
@@ -239,6 +278,16 @@ namespace Tests
             Assert.False( result.Complete, "ResultSet should be incomplete" );
             Assert.Equal( result.Results.Count, 1 );
             Assert.Contains( onlyResult, result.Results );
+        }
+
+        [Fact]
+        public void AsyncJobMultipleThrowsExceptionOnNullCallback()
+        {
+            SteamClient client = new SteamClient();
+
+            AsyncJobMultiple<Callback> asyncJob = new AsyncJobMultiple<Callback>( client, 123, call => true );
+
+            Assert.Throws<ArgumentNullException>( () => asyncJob.AddResult( null ) );
         }
     }
 }

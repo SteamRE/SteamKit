@@ -120,6 +120,15 @@ namespace SteamKit2
         internal abstract bool AddResult( CallbackMsg callback );
 
         /// <summary>
+        /// Sets this job as failed, either remotely or due to a message timeout.
+        /// </summary>
+        /// <param name="dueToRemoteFailure">
+        /// If set to <c>true</c> this job is marked as failed because Steam informed us of a job failure;
+        /// otherwise, this job has failed due to a message timeout.
+        /// </param>
+        internal abstract void SetFailed( bool dueToRemoteFailure );
+
+        /// <summary>
         /// Marks this job as having received a heartbeat and extends the job's timeout.
         /// </summary>
         internal void Heartbeat()
@@ -179,19 +188,31 @@ namespace SteamKit2
         {
             if ( callback == null )
             {
-                // if we're completing with a null callback object, this is a signal that the job has been cancelled
-                // without a valid result from the steam servers
+                throw new ArgumentNullException( nameof( callback ) );
+            }
 
-                tcs.TrySetCanceled();
-            }
-            else
-            {
-                // otherwise, we're complete with just this callback
-                tcs.TrySetResult( (T)callback );
-            }
+            // we're complete with just this callback
+            tcs.TrySetResult( (T)callback );
 
             // inform steamclient that this job wishes to be removed from tracking since we've recieved the single callback we were waiting for
             return true;
+        }
+
+        /// <summary>
+        /// Sets this job as failed, either remotely or due to a message timeout.
+        /// </summary>
+        /// <param name="dueToRemoteFailure">
+        /// If set to <c>true</c> this job is marked as failed because Steam informed us of a job failure;
+        /// otherwise, this job has failed due to a message timeout.
+        /// </param>
+        internal override void SetFailed( bool dueToRemoteFailure )
+        {
+            if ( !dueToRemoteFailure )
+            {
+                tcs.TrySetCanceled();
+            }
+
+            // todo: handle Steam remote failures
         }
     }
 
@@ -269,25 +290,7 @@ namespace SteamKit2
         {
             if ( callback == null )
             {
-                // steamclient is informing this async task that we've timed out waiting on an additional callback
-                // now we have to determine what to do:
-
-                if ( results.Count == 0 )
-                {
-                    // if we have zero callbacks in our result set, we can simply cancel this task
-
-                    tcs.TrySetCanceled();
-                }
-                else
-                {
-                    // otherwise, we can complete the task with the results we do have, and let consumers figure out
-                    // what they want to do with the incomplete set
-
-                    tcs.TrySetResult( new ResultSet { Complete = false, Results = new ReadOnlyCollection<T>( results ) } );
-                }
-
-                // we're complete in both cases, so stop tracking this job
-                return true;
+                throw new ArgumentNullException( nameof( callback ) );
             }
 
             T callbackMsg = (T)callback;
@@ -312,6 +315,40 @@ namespace SteamKit2
                 Heartbeat();
 
                 return false;
+            }
+        }
+
+        /// <summary>
+        /// Sets this job as failed, either remotely or due to a message timeout.
+        /// </summary>
+        /// <param name="dueToRemoteFailure">
+        /// If set to <c>true</c> this job is marked as failed because Steam informed us of a job failure;
+        /// otherwise, this job has failed due to a message timeout.
+        /// </param>
+        internal override void SetFailed( bool dueToRemoteFailure )
+        {
+            if ( dueToRemoteFailure )
+            {
+                // todo: handle Steam remote failures
+            }
+            else
+            {
+                // steamclient is informing this async task that we've timed out waiting on an additional callback
+                // now we have to determine what to do:
+
+                if ( results.Count == 0 )
+                {
+                    // if we have zero callbacks in our result set, we can simply cancel this task
+
+                    tcs.TrySetCanceled();
+                }
+                else
+                {
+                    // otherwise, we can complete the task with the results we do have, and let consumers figure out
+                    // what they want to do with the incomplete set
+
+                    tcs.TrySetResult( new ResultSet { Complete = false, Results = new ReadOnlyCollection<T>( results ) } );
+                }
             }
         }
     }

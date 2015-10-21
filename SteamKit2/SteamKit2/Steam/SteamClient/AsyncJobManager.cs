@@ -84,9 +84,7 @@ namespace SteamKit2
                 return;
             }
 
-            // todo: for now a remote failure triggers the same cancellation logic as timeouts
-            // we can likely introduce our own exception here
-            asyncJob.AddResult( null );
+            asyncJob.SetFailed( dueToRemoteFailure: true );
             
         }
 
@@ -97,7 +95,7 @@ namespace SteamKit2
         {
             foreach ( AsyncJob asyncJob in asyncJobs.Values )
             {
-                asyncJob.AddResult( null );
+                asyncJob.SetFailed( dueToRemoteFailure: false );
             }
 
             asyncJobs.Clear();
@@ -132,7 +130,7 @@ namespace SteamKit2
             {
                 if ( job.IsTimedout )
                 {
-                    job.AddResult( null );
+                    job.SetFailed( dueToRemoteFailure: false );
 
                     AsyncJob ignored;
                     asyncJobs.TryRemove( job, out ignored );
