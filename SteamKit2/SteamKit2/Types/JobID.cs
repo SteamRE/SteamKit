@@ -64,23 +64,37 @@ namespace SteamKit2
         {
             return new JobID( jobId );
         }
+
+        /// <summary>
+        /// Performs an implicit conversion from <see cref="AsyncJob"/> to <see cref="JobID"/>.
+        /// </summary>
+        /// <param name="asyncJob">The asynchronous job.</param>
+        /// <returns>
+        /// The result of the conversion.
+        /// </returns>
+        public static implicit operator JobID( AsyncJob asyncJob )
+        {
+            return new JobID( asyncJob.JobID );
+        }
     }
 
     /// <summary>
     /// The base class for awaitable versions of a <see cref="JobID"/>.
     /// Should not be used or constructed directly, but rather with <see cref="AsyncJob{T}"/>.
     /// </summary>
-    public abstract class AsyncJob : JobID
+    public abstract class AsyncJob
     {
         DateTime jobStart;
 
 
         /// <summary>
+        /// Gets the <see cref="JobID"/> for this job.
+        /// </summary>
+        public JobID JobID { get; private set; }
+
+        /// <summary>
         /// Gets or sets the period of time before this job will be considered timed out and will be canceled. By default this is 1 minute.
         /// </summary>
-        /// <value>
-        /// The timeout value.
-        /// </value>
         public TimeSpan Timeout { get; set; } = TimeSpan.FromMinutes( 1 );
 
         internal bool IsTimedout
@@ -90,9 +104,9 @@ namespace SteamKit2
 
 
         internal AsyncJob( SteamClient client, ulong jobId )
-            : base( jobId )
         {
             jobStart = DateTime.UtcNow;
+            JobID = jobId;
 
             client.StartJob( this );
         }
