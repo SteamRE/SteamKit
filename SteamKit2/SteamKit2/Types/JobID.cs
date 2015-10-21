@@ -207,12 +207,17 @@ namespace SteamKit2
         /// </param>
         internal override void SetFailed( bool dueToRemoteFailure )
         {
-            if ( !dueToRemoteFailure )
+            if ( dueToRemoteFailure )
             {
+                // if steam informs us of a remote failure, we cancel with our exception
+                tcs.TrySetException( new AsyncJobFailedException() );
+            }
+            else
+            {
+                // if we time out, we trigger a normal cancellation
                 tcs.TrySetCanceled();
             }
-
-            // todo: handle Steam remote failures
+            
         }
     }
 
@@ -234,6 +239,11 @@ namespace SteamKit2
             /// Gets a value indicating whether this <see cref="AsyncJobMultiple{T}.ResultSet" /> is complete and contains every result sent by Steam.
             /// </summary>
             public bool Complete { get; internal set; }
+
+            /// <summary>
+            /// Gets a value indicating whether the parent <see cref="AsyncJobMultiple{T}" /> received an incomplete result set and then encountered a remote failure.
+            /// </summary>
+            public bool Failed { get; internal set; }
 
             /// <summary>
             /// Gets a read only collection of callback results for this async job.
@@ -327,28 +337,40 @@ namespace SteamKit2
         /// </param>
         internal override void SetFailed( bool dueToRemoteFailure )
         {
-            if ( dueToRemoteFailure )
-            {
-                // todo: handle Steam remote failures
-            }
-            else
-            {
-                // steamclient is informing this async task that we've timed out waiting on an additional callback
-                // now we have to determine what to do:
+            // steamclient is informing this async job that we've either timed out or failed while waiting for an additional callback
+            // now we have to determine what to do:
 
-                if ( results.Count == 0 )
+            if ( results.Count == 0 )
+            {
+                // if we have zero callbacks in our result set, we cancel this task
+
+                if ( dueToRemoteFailure )
                 {
-                    // if we have zero callbacks in our result set, we can simply cancel this task
-
-                    tcs.TrySetCanceled();
+                    // if we're canceling with a remote failure, post a job failure exception
+                    tcs.TrySetException( new AsyncJobFailedException() );
                 }
                 else
                 {
-                    // otherwise, we can complete the task with the results we do have, and let consumers figure out
-                    // what they want to do with the incomplete set
-
-                    tcs.TrySetResult( new ResultSet { Complete = false, Results = new ReadOnlyCollection<T>( results ) } );
+                    // otherwise, normal task cancelation for timeouts
+                    tcs.TrySetCanceled();
                 }
+            }
+            else
+            {
+                // if we do have a partial result set, we can complete this job with the results we have and let consumers
+                // work out what they want to do with the incomplete set
+
+                var resultSet = new ResultSet
+                {
+                    // we're not a complete set
+                    Complete = false,
+                    // let consumers know if we've failed because of a remote failure
+                    Failed = dueToRemoteFailure,
+
+                    Results = new ReadOnlyCollection<T>( results ),
+                };
+
+                tcs.TrySetResult( resultSet );
             }
         }
     }
