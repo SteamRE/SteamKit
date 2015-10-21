@@ -104,6 +104,15 @@ namespace SteamKit2
         /// <param name="callback">The callback.</param>
         /// <returns><c>true</c> if this result completes the set; otherwise, <c>false</c>.</returns>
         internal abstract bool AddResult( CallbackMsg callback );
+
+        /// <summary>
+        /// Marks this job as having received a heartbeat and extends the job's timeout.
+        /// </summary>
+        internal void Heartbeat()
+        {
+            // extend timeout for this job, as Steam is informing us that more messages will follow
+            Timeout += TimeSpan.FromSeconds( 10 );
+        }
     }
 
     /// <summary>
@@ -285,8 +294,8 @@ namespace SteamKit2
             else
             {
                 // otherwise, we're not complete and we'll wait for the next message
-                // and we'll give this job 10 extra seconds to wait for the next result
-                Timeout += TimeSpan.FromSeconds( 10 );
+                // trigger heartbeat logic to keep this job alive as it waits for the next message
+                Heartbeat();
 
                 return false;
             }

@@ -73,6 +73,10 @@ namespace SteamKit2
 
                 { EMsg.ClientCMList, HandleCMList },
                 { EMsg.ClientServerList, HandleServerList },
+
+                // to support asyncjob life time
+                { EMsg.JobHeartbeat, HandleJobHeartbeat },
+                { EMsg.DestJobFailed, HandleJobFailed },
             };
 
             asyncJobs = new ConcurrentDictionary<JobID, AsyncJob>();
@@ -298,6 +302,30 @@ namespace SteamKit2
                 asyncJobs.TryRemove( jobId, out asyncJob );
             }
         }
+        void HeartbeatJob( JobID jobId )
+        {
+            AsyncJob asyncJob;
+
+            if ( !asyncJobs.TryGetValue( jobId, out asyncJob ) )
+            {
+                // not a job we are tracking ourselves, can ignore any heartbeats
+                return;
+            }
+
+            asyncJob.Heartbeat();
+        }
+        void FailJob( JobID jobId )
+        {
+            AsyncJob asyncJob;
+
+            if ( !asyncJobs.TryRemove( jobId, out asyncJob ) )
+            {
+                // not a job we are tracking ourselves, can ignore any failures
+                return;
+            }
+
+            asyncJob.AddResult( null );
+        }
         void CancelPendingJobs()
         {
             foreach ( AsyncJob asyncJob in asyncJobs.Values )
@@ -399,12 +427,20 @@ namespace SteamKit2
 
             PostCallback( new CMListCallback( cmMsg.Body ) );
         }
-
         void HandleServerList( IPacketMsg packetMsg )
         {
             var listMsg = new ClientMsgProtobuf<CMsgClientServerList>( packetMsg );
 
             PostCallback( new ServerListCallback( listMsg.Body ) );
+        }
+
+        void HandleJobHeartbeat( IPacketMsg packetMsg )
+        {
+            HeartbeatJob( packetMsg.TargetJobID );
+        }
+        void HandleJobFailed( IPacketMsg packetMsg )
+        {
+            FailJob( packetMsg.TargetJobID );
         }
 
     }
