@@ -93,9 +93,9 @@ namespace SteamKit2
         public JobID JobID { get; private set; }
 
         /// <summary>
-        /// Gets or sets the period of time before this job will be considered timed out and will be canceled. By default this is 1 minute.
+        /// Gets or sets the period of time before this job will be considered timed out and will be canceled. By default this is 10 seconds.
         /// </summary>
-        public TimeSpan Timeout { get; set; } = TimeSpan.FromMinutes( 1 );
+        public TimeSpan Timeout { get; set; } = TimeSpan.FromSeconds( 10 );
 
         internal bool IsTimedout
         {
