@@ -22,8 +22,8 @@ namespace Tests
 
             AsyncJob<Callback> asyncJob = new AsyncJob<Callback>( client, 123 );
 
-            Assert.True( client.asyncJobs.ContainsKey( asyncJob ), "Async job dictionary should contain the jobid key" );
-            Assert.True( client.asyncJobs.ContainsKey( 123 ), "Async job dictionary should contain jobid key as a value type" );
+            Assert.True( client.jobManager.asyncJobs.ContainsKey( asyncJob ), "Async job dictionary should contain the jobid key" );
+            Assert.True( client.jobManager.asyncJobs.ContainsKey( 123 ), "Async job dictionary should contain jobid key as a value type" );
         }
 
         [Fact]
@@ -50,8 +50,8 @@ namespace Tests
 
             client.PostCallback( new Callback { JobID = 123 } );
 
-            Assert.False( client.asyncJobs.ContainsKey( asyncJob ), "Async job dictionary should no longer contain jobid key after callback is posted" );
-            Assert.False( client.asyncJobs.ContainsKey( 123 ), "Async job dictionary should no longer contain jobid key (as value type) after callback is posted" );
+            Assert.False( client.jobManager.asyncJobs.ContainsKey( asyncJob ), "Async job dictionary should no longer contain jobid key after callback is posted" );
+            Assert.False( client.jobManager.asyncJobs.ContainsKey( 123 ), "Async job dictionary should no longer contain jobid key (as value type) after callback is posted" );
         }
 
         [Fact]
@@ -90,7 +90,7 @@ namespace Tests
         public async void AsyncJobTimesout()
         {
             SteamClient client = new SteamClient();
-            client.jobTimeoutFunc.Start();
+            client.jobManager.EnableTimeouts( true );
 
             AsyncJob<Callback> asyncJob = new AsyncJob<Callback>( client, 123 );
             asyncJob.Timeout = TimeSpan.FromSeconds( 1 );
@@ -153,15 +153,15 @@ namespace Tests
 
             client.PostCallback( new Callback { JobID = 123, IsFinished = true } );
 
-            Assert.False( client.asyncJobs.ContainsKey( asyncJob ), "Async job dictionary should not contain jobid key for AsyncJobMultiple on completion" );
-            Assert.False( client.asyncJobs.ContainsKey( 123 ), "Async job dictionary should not contain jobid key (as value type) for AsyncJobMultiple on completion" );
+            Assert.False( client.jobManager.asyncJobs.ContainsKey( asyncJob ), "Async job dictionary should not contain jobid key for AsyncJobMultiple on completion" );
+            Assert.False( client.jobManager.asyncJobs.ContainsKey( 123 ), "Async job dictionary should not contain jobid key (as value type) for AsyncJobMultiple on completion" );
         }
 
         [Fact]
         public async void AsyncJobMultipleExtendsTimeoutOnMessage()
         {
             SteamClient client = new SteamClient();
-            client.jobTimeoutFunc.Start();
+            client.jobManager.EnableTimeouts( true );
 
             AsyncJobMultiple<Callback> asyncJob = new AsyncJobMultiple<Callback>( client, 123, call => call.IsFinished );
             asyncJob.Timeout = TimeSpan.FromSeconds( 5 );
@@ -196,7 +196,7 @@ namespace Tests
         public async void AsyncJobMultipleTimesout()
         {
             SteamClient client = new SteamClient();
-            client.jobTimeoutFunc.Start();
+            client.jobManager.EnableTimeouts( true );
 
             AsyncJobMultiple<Callback> asyncJob = new AsyncJobMultiple<Callback>( client, 123, call => false );
             asyncJob.Timeout = TimeSpan.FromSeconds( 1 );
@@ -215,7 +215,7 @@ namespace Tests
         public async void AsyncJobMultipleCompletesOnIncompleteResult()
         {
             SteamClient client = new SteamClient();
-            client.jobTimeoutFunc.Start();
+            client.jobManager.EnableTimeouts( true );
 
             AsyncJobMultiple<Callback> asyncJob = new AsyncJobMultiple<Callback>( client, 123, call => call.IsFinished );
             asyncJob.Timeout = TimeSpan.FromSeconds( 1 );

@@ -139,6 +139,7 @@
     <Compile Include="Steam\Handlers\SteamWorkshop\Callbacks.cs" />
     <Compile Include="Steam\Handlers\SteamWorkshop\SteamWorkshop.cs" />
     <Compile Include="Steam\Handlers\SteamUserStats\SteamUserStats.cs" />
+    <Compile Include="Steam\SteamClient\AsyncJobManager.cs" />
     <Compile Include="Steam\SteamClient\CallbackMgr\CallbackMgr.cs" />
     <Compile Include="Steam\UFSClient\Callbacks.cs" />
     <Compile Include="Steam\UFSClient\UFSClient.cs" />

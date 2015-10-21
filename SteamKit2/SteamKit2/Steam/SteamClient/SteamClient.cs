@@ -32,8 +32,7 @@ namespace SteamKit2
 
         Dictionary<EMsg, Action<IPacketMsg>> dispatchMap;
 
-        internal ConcurrentDictionary<JobID, AsyncJob> asyncJobs;
-        internal ScheduledFunction jobTimeoutFunc;
+        internal AsyncJobManager jobManager;
 
 
         /// <summary>
@@ -79,9 +78,7 @@ namespace SteamKit2
                 { EMsg.DestJobFailed, HandleJobFailed },
             };
 
-            asyncJobs = new ConcurrentDictionary<JobID, AsyncJob>();
-
-            jobTimeoutFunc = new ScheduledFunction( CancelTimedoutJobs, TimeSpan.FromSeconds( 1 ) );
+            jobManager = new AsyncJobManager();
         }
 
 
@@ -258,11 +255,11 @@ namespace SteamKit2
                 Monitor.Pulse( callbackLock );
             }
 
-            TryCompleteJob( msg.JobID, msg );
+            jobManager.TryCompleteJob( msg.JobID, msg );
         }
         #endregion
 
-
+        #region Jobs
         /// <summary>
         /// Returns the next available JobID for job based messages.
         /// This function is thread-safe.
@@ -279,75 +276,11 @@ namespace SteamKit2
                 StartTime = processStartTime
             };
         }
-
-        internal void StartJob( AsyncJob asyncJob )
+        internal void StartJob( AsyncJob job )
         {
-            asyncJobs.TryAdd( asyncJob, asyncJob );
+            jobManager.StartJob( job );
         }
-        void TryCompleteJob( JobID jobId, CallbackMsg callback )
-        {
-            AsyncJob asyncJob;
-
-            if ( !asyncJobs.TryGetValue( jobId, out asyncJob ) )
-            {
-                // not a job we are tracking ourselves, can ignore it
-                return;
-            }
-
-            bool jobFinished = asyncJob.AddResult( callback );
-
-            if ( jobFinished )
-            {
-                // if adding this result has finished the job, remove it from our list
-                asyncJobs.TryRemove( jobId, out asyncJob );
-            }
-        }
-        void HeartbeatJob( JobID jobId )
-        {
-            AsyncJob asyncJob;
-
-            if ( !asyncJobs.TryGetValue( jobId, out asyncJob ) )
-            {
-                // not a job we are tracking ourselves, can ignore any heartbeats
-                return;
-            }
-
-            asyncJob.Heartbeat();
-        }
-        void FailJob( JobID jobId )
-        {
-            AsyncJob asyncJob;
-
-            if ( !asyncJobs.TryRemove( jobId, out asyncJob ) )
-            {
-                // not a job we are tracking ourselves, can ignore any failures
-                return;
-            }
-
-            asyncJob.AddResult( null );
-        }
-        void CancelPendingJobs()
-        {
-            foreach ( AsyncJob asyncJob in asyncJobs.Values )
-            {
-                asyncJob.AddResult( null );
-            }
-
-            asyncJobs.Clear();
-        }
-        void CancelTimedoutJobs()
-        {
-            foreach ( AsyncJob job in asyncJobs.Values )
-            {
-                if ( job.IsTimedout )
-                {
-                    job.AddResult( null );
-
-                    AsyncJob ignored;
-                    asyncJobs.TryRemove( job, out ignored );
-                }
-            }
-        }
+        #endregion
 
 
         /// <summary>
@@ -401,9 +334,9 @@ namespace SteamKit2
         protected override void OnClientDisconnected( bool userInitiated )
         {
             // if we are disconnected, cancel all pending jobs
-            CancelPendingJobs();
+            jobManager.CancelPendingJobs();
 
-            jobTimeoutFunc.Stop();
+            jobManager.EnableTimeouts( false );
 
             this.PostCallback( new DisconnectedCallback( userInitiated ) );
         }
@@ -415,7 +348,7 @@ namespace SteamKit2
 
             if ( encResult.Body.Result == EResult.OK )
             {
-                jobTimeoutFunc.Start();
+                jobManager.EnableTimeouts( true );
             }
 
             PostCallback( new ConnectedCallback( encResult.Body ) );
@@ -436,11 +369,11 @@ namespace SteamKit2
 
         void HandleJobHeartbeat( IPacketMsg packetMsg )
         {
-            HeartbeatJob( packetMsg.TargetJobID );
+            jobManager.HeartbeatJob( packetMsg.TargetJobID );
         }
         void HandleJobFailed( IPacketMsg packetMsg )
         {
-            FailJob( packetMsg.TargetJobID );
+            jobManager.FailJob( packetMsg.TargetJobID );
         }
 
     }
