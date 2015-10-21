@@ -1931,6 +1931,7 @@ namespace SteamKit2
 		RefundToWallet = 98,
 		EmailSendFailure = 99,
 		NotSettled = 100,
+		NeedCaptcha = 101,
 	}
 	public enum EUniverse
 	{
