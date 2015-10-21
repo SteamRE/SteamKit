@@ -4,7 +4,7 @@ namespace ProtobufDumper
 {
     class Program
     {
-        static unsafe void Main( string[] args )
+        static void Main( string[] args )
         {
             Environment.ExitCode = 0;
 
