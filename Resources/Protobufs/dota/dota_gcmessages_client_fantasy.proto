@@ -167,9 +167,16 @@ message CMsgGCPlayerInfo {
 		optional string team_tag = 7;
 		optional string sponsor = 8;
 		optional bool is_locked = 9;
+		optional bool is_pro = 10;
+	}
+
+	message RegionLeaderboard {
+		optional uint32 division = 1;
+		repeated uint32 account_ids = 2;
 	}
 
 	repeated .CMsgGCPlayerInfo.PlayerInfo player_infos = 1;
+	repeated .CMsgGCPlayerInfo.RegionLeaderboard leaderboards = 2;
 }
 
 message CMsgDOTACreateFantasyLeagueRequest {

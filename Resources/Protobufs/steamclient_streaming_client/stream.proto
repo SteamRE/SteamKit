@@ -482,6 +482,7 @@ message CInputControllerAttachedMsg {
 	optional bool pairing_in_progress = 3;
 	optional uint32 bootloader_version = 4;
 	optional uint32 firmware_version = 5;
+	optional string serial_number = 6;
 }
 
 message CInputControllerStateMsg {

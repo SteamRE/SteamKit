@@ -968,6 +968,24 @@ namespace SteamKit2.GC.Internal
       get { return _save_game_key; }
       set { _save_game_key = value; }
     }
+
+    private uint _item_schema_crc = default(uint);
+    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"item_schema_crc", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint item_schema_crc
+    {
+      get { return _item_schema_crc; }
+      set { _item_schema_crc = value; }
+    }
+
+    private string _items_game_url = "";
+    [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"items_game_url", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string items_game_url
+    {
+      get { return _items_game_url; }
+      set { _items_game_url = value; }
+    }
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Location")]
   public partial class Location : global::ProtoBuf.IExtensible
   {

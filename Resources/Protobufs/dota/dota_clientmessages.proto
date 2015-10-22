@@ -4,50 +4,56 @@ option optimize_for = SPEED;
 option cc_generic_services = false;
 
 enum EDotaClientMessages {
-	DOTA_CM_MapLine = 1;
-	DOTA_CM_AspectRatio = 2;
-	DOTA_CM_MapPing = 3;
-	DOTA_CM_UnitsAutoAttack = 4;
-	DOTA_CM_AutoPurchaseItems = 5;
-	DOTA_CM_TestItems = 6;
-	DOTA_CM_SearchString = 7;
-	DOTA_CM_Pause = 8;
-	DOTA_CM_ShopViewMode = 9;
-	DOTA_CM_SetUnitShareFlag = 10;
-	DOTA_CM_SwapRequest = 11;
-	DOTA_CM_SwapAccept = 12;
-	DOTA_CM_WorldLine = 13;
-	DOTA_CM_RequestGraphUpdate = 14;
-	DOTA_CM_ItemAlert = 15;
-	DOTA_CM_ChatWheel = 16;
-	DOTA_CM_SendStatPopup = 17;
-	DOTA_CM_BeginLastHitChallenge = 18;
-	DOTA_CM_UpdateQuickBuy = 19;
-	DOTA_CM_UpdateCoachListen = 20;
-	DOTA_CM_CoachHUDPing = 21;
-	DOTA_CM_RecordVote = 22;
-	DOTA_CM_UnitsAutoAttackAfterSpell = 23;
-	DOTA_CM_WillPurchaseAlert = 24;
-	DOTA_CM_PlayerShowCase = 25;
-	DOTA_CM_TeleportRequiresHalt = 26;
-	DOTA_CM_CameraZoomAmount = 27;
-	DOTA_CM_BroadcasterUsingCamerman = 28;
-	DOTA_CM_BroadcasterUsingAssistedCameraOperator = 29;
-	DOTA_CM_EnemyItemAlert = 30;
-	DOTA_CM_FreeInventory = 31;
-	DOTA_CM_BuyBackStateAlert = 32;
-	DOTA_CM_QuickBuyAlert = 33;
-	DOTA_CM_HeroStatueLike = 34;
-	DOTA_CM_ModifierAlert = 35;
-	DOTA_CM_TeamShowcaseEditor = 36;
-	DOTA_CM_HPManaAlert = 37;
-	DOTA_CM_GlyphAlert = 38;
-	DOTA_CM_TeamShowcaseClientData = 39;
-	DOTA_CM_PlayTeamShowcase = 40;
-	DOTA_CM_EventCNY2015Cmd = 41;
-	DOTA_CM_ChallengeSelect = 42;
-	DOTA_CM_ChallengeReroll = 43;
-	DOTA_CM_ClickedBuff = 44;
+	DOTA_CM_MapLine = 301;
+	DOTA_CM_AspectRatio = 302;
+	DOTA_CM_MapPing = 303;
+	DOTA_CM_UnitsAutoAttack = 304;
+	DOTA_CM_AutoPurchaseItems = 305;
+	DOTA_CM_TestItems = 306;
+	DOTA_CM_SearchString = 307;
+	DOTA_CM_Pause = 308;
+	DOTA_CM_ShopViewMode = 309;
+	DOTA_CM_SetUnitShareFlag = 310;
+	DOTA_CM_SwapRequest = 311;
+	DOTA_CM_SwapAccept = 312;
+	DOTA_CM_WorldLine = 313;
+	DOTA_CM_RequestGraphUpdate = 314;
+	DOTA_CM_ItemAlert = 315;
+	DOTA_CM_ChatWheel = 316;
+	DOTA_CM_SendStatPopup = 317;
+	DOTA_CM_BeginLastHitChallenge = 318;
+	DOTA_CM_UpdateQuickBuy = 319;
+	DOTA_CM_UpdateCoachListen = 320;
+	DOTA_CM_CoachHUDPing = 321;
+	DOTA_CM_RecordVote = 322;
+	DOTA_CM_UnitsAutoAttackAfterSpell = 323;
+	DOTA_CM_WillPurchaseAlert = 324;
+	DOTA_CM_PlayerShowCase = 325;
+	DOTA_CM_TeleportRequiresHalt = 326;
+	DOTA_CM_CameraZoomAmount = 327;
+	DOTA_CM_BroadcasterUsingCamerman = 328;
+	DOTA_CM_BroadcasterUsingAssistedCameraOperator = 329;
+	DOTA_CM_EnemyItemAlert = 330;
+	DOTA_CM_FreeInventory = 331;
+	DOTA_CM_BuyBackStateAlert = 332;
+	DOTA_CM_QuickBuyAlert = 333;
+	DOTA_CM_HeroStatueLike = 334;
+	DOTA_CM_ModifierAlert = 335;
+	DOTA_CM_TeamShowcaseEditor = 336;
+	DOTA_CM_HPManaAlert = 337;
+	DOTA_CM_GlyphAlert = 338;
+	DOTA_CM_TeamShowcaseClientData = 339;
+	DOTA_CM_PlayTeamShowcase = 340;
+	DOTA_CM_EventCNY2015Cmd = 341;
+	DOTA_CM_FillEmptySlotsWithBots = 342;
+	DOTA_CM_DemoHero = 343;
+	DOTA_CM_AbilityLearnModeToggled = 344;
+	DOTA_CM_AbilityStartUse = 345;
+	DOTA_CM_ChallengeSelect = 346;
+	DOTA_CM_ChallengeReroll = 347;
+	DOTA_CM_ClickedBuff = 348;
+	DOTA_CM_CoinWager = 349;
+	DOTA_CM_ExecuteOrders = 350;
 }
 
 message CDOTAClientMsg_MapPing {
@@ -214,6 +220,10 @@ message CDOTAClientMsg_FreeInventory {
 	repeated .CAdditionalEquipSlotClientMsg equips = 1;
 }
 
+message CDOTAClientMsg_FillEmptySlotsWithBots {
+	optional bool fillwithbots = 1;
+}
+
 message CDOTAClientMsg_HeroStatueLike {
 	optional uint32 owner_player_id = 1;
 }
@@ -233,6 +243,15 @@ message CDOTAClientMsg_EventCNY2015Cmd {
 	optional bytes data = 1;
 }
 
+message CDOTAClientMsg_DemoHero {
+	optional int32 hero_id = 1;
+	optional int32 hero_id_to_spawn = 2;
+	repeated uint32 item_defs = 3;
+	repeated uint64 item_ids = 4;
+	optional uint32 style_index = 5;
+	optional bool keep_existing_demohero = 6;
+}
+
 message CDOTAClientMsg_ChallengeSelect {
 	optional uint32 event_id = 1;
 	optional uint32 slot_id = 2;
@@ -243,5 +262,13 @@ message CDOTAClientMsg_ChallengeReroll {
 	optional uint32 event_id = 1;
 	optional uint32 slot_id = 2;
 	optional uint32 sequence_id = 3;
+}
+
+message CDOTAClientMsg_CoinWager {
+	optional uint32 wager_amount = 1;
+}
+
+message CDOTAClientMsg_ExecuteOrders {
+	repeated .CDOTAMsg_UnitOrder orders = 1;
 }
 

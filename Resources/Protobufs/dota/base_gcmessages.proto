@@ -69,11 +69,20 @@ message CMsgSystemBroadcast {
 	optional string message = 1;
 }
 
+message CMsgClientPingData {
+	repeated fixed32 relay_codes = 4 [packed = true];
+	repeated uint32 relay_pings = 5 [packed = true];
+	repeated uint32 region_codes = 8 [packed = true];
+	repeated uint32 region_pings = 9 [packed = true];
+	optional uint32 region_ping_failed_bitmask = 10;
+}
+
 message CMsgInviteToParty {
 	optional fixed64 steam_id = 1;
 	optional uint32 client_version = 2;
 	optional uint32 team_id = 3;
 	optional bool as_coach = 4;
+	optional .CMsgClientPingData ping_data = 5;
 }
 
 message CMsgInviteToLobby {
@@ -84,6 +93,7 @@ message CMsgInviteToLobby {
 message CMsgInvitationCreated {
 	optional uint64 group_id = 1;
 	optional fixed64 steam_id = 2;
+	optional bool user_offline = 3;
 }
 
 message CMsgPartyInviteResponse {
@@ -94,6 +104,7 @@ message CMsgPartyInviteResponse {
 	optional bool as_coach = 5;
 	optional uint32 game_language_enum = 6;
 	optional string game_language_name = 7;
+	optional .CMsgClientPingData ping_data = 8;
 }
 
 message CMsgLobbyInviteResponse {
@@ -526,6 +537,20 @@ message CMsgGCClientMarketData {
 message CMsgExtractGems {
 	optional uint64 tool_item_id = 1;
 	optional uint64 item_item_id = 2;
+	optional uint32 item_socket_id = 3 [default = 65535];
+}
+
+message CMsgExtractGemsResponse {
+	enum EExtractGems {
+		k_ExtractGems_Succeeded = 0;
+		k_ExtractGems_Failed_ToolIsInvalid = 1;
+		k_ExtractGems_Failed_ItemIsInvalid = 2;
+		k_ExtractGems_Failed_ToolCannotRemoveGem = 3;
+		k_ExtractGems_Failed_FailedToRemoveGem = 4;
+	}
+
+	optional uint64 item_id = 1;
+	optional .CMsgExtractGemsResponse.EExtractGems response = 2 [default = k_ExtractGems_Succeeded];
 }
 
 message CMsgAddSocket {
@@ -535,8 +560,16 @@ message CMsgAddSocket {
 }
 
 message CMsgAddSocketResponse {
+	enum EAddSocket {
+		k_AddSocket_Succeeded = 0;
+		k_AddSocket_Failed_ToolIsInvalid = 1;
+		k_AddSocket_Failed_ItemCannotBeSocketed = 2;
+		k_AddSocket_Failed_FailedToAddSocket = 3;
+	}
+
 	optional uint64 item_id = 1;
 	repeated uint32 updated_socket_index = 2;
+	optional .CMsgAddSocketResponse.EAddSocket response = 3 [default = k_AddSocket_Succeeded];
 }
 
 message CMsgAddItemToSocketData {
@@ -550,12 +583,36 @@ message CMsgAddItemToSocket {
 }
 
 message CMsgAddItemToSocketResponse {
+	enum EAddGem {
+		k_AddGem_Succeeded = 0;
+		k_AddGem_Failed_GemIsInvalid = 1;
+		k_AddGem_Failed_ItemIsInvalid = 2;
+		k_AddGem_Failed_FailedToAddGem = 3;
+		k_AddGem_Failed_InvalidGemTypeForSocket = 4;
+		k_AddGem_Failed_InvalidGemTypeForHero = 5;
+		k_AddGem_Failed_InvalidGemTypeForSlot = 6;
+		k_AddGem_Failed_SocketContainsUnremovableGem = 7;
+	}
+
 	optional uint64 item_item_id = 1;
 	repeated uint32 updated_socket_index = 2;
+	optional .CMsgAddItemToSocketResponse.EAddGem response = 3 [default = k_AddGem_Succeeded];
 }
 
 message CMsgResetStrangeGemCount {
 	optional uint64 item_item_id = 1;
 	optional uint32 socket_index = 2;
+}
+
+message CMsgResetStrangeGemCountResponse {
+	enum EResetGem {
+		k_ResetGem_Succeeded = 0;
+		k_ResetGem_Failed_FailedToResetGem = 1;
+		k_ResetGem_Failed_ItemIsInvalid = 2;
+		k_ResetGem_Failed_InvalidSocketId = 3;
+		k_ResetGem_Failed_SocketCannotBeReset = 4;
+	}
+
+	optional .CMsgResetStrangeGemCountResponse.EResetGem response = 1 [default = k_ResetGem_Succeeded];
 }
 

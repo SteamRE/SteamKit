@@ -158,6 +158,53 @@ namespace SteamKit2.GC.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientPingData")]
+  public partial class CMsgClientPingData : global::ProtoBuf.IExtensible
+  {
+    public CMsgClientPingData() {}
+    
+    private readonly global::System.Collections.Generic.List<uint> _relay_codes = new global::System.Collections.Generic.List<uint>();
+    [global::ProtoBuf.ProtoMember(4, Name=@"relay_codes", DataFormat = global::ProtoBuf.DataFormat.FixedSize, Options = global::ProtoBuf.MemberSerializationOptions.Packed)]
+    public global::System.Collections.Generic.List<uint> relay_codes
+    {
+      get { return _relay_codes; }
+    }
+  
+    private readonly global::System.Collections.Generic.List<uint> _relay_pings = new global::System.Collections.Generic.List<uint>();
+    [global::ProtoBuf.ProtoMember(5, Name=@"relay_pings", DataFormat = global::ProtoBuf.DataFormat.TwosComplement, Options = global::ProtoBuf.MemberSerializationOptions.Packed)]
+    public global::System.Collections.Generic.List<uint> relay_pings
+    {
+      get { return _relay_pings; }
+    }
+  
+    private readonly global::System.Collections.Generic.List<uint> _region_codes = new global::System.Collections.Generic.List<uint>();
+    [global::ProtoBuf.ProtoMember(8, Name=@"region_codes", DataFormat = global::ProtoBuf.DataFormat.TwosComplement, Options = global::ProtoBuf.MemberSerializationOptions.Packed)]
+    public global::System.Collections.Generic.List<uint> region_codes
+    {
+      get { return _region_codes; }
+    }
+  
+    private readonly global::System.Collections.Generic.List<uint> _region_pings = new global::System.Collections.Generic.List<uint>();
+    [global::ProtoBuf.ProtoMember(9, Name=@"region_pings", DataFormat = global::ProtoBuf.DataFormat.TwosComplement, Options = global::ProtoBuf.MemberSerializationOptions.Packed)]
+    public global::System.Collections.Generic.List<uint> region_pings
+    {
+      get { return _region_pings; }
+    }
+  
+
+    private uint _region_ping_failed_bitmask = default(uint);
+    [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"region_ping_failed_bitmask", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint region_ping_failed_bitmask
+    {
+      get { return _region_ping_failed_bitmask; }
+      set { _region_ping_failed_bitmask = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgInviteToParty")]
   public partial class CMsgInviteToParty : global::ProtoBuf.IExtensible
   {
@@ -198,6 +245,15 @@ namespace SteamKit2.GC.Internal
     {
       get { return _as_coach; }
       set { _as_coach = value; }
+    }
+
+    private CMsgClientPingData _ping_data = null;
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"ping_data", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public CMsgClientPingData ping_data
+    {
+      get { return _ping_data; }
+      set { _ping_data = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -254,6 +310,15 @@ namespace SteamKit2.GC.Internal
     {
       get { return _steam_id; }
       set { _steam_id = value; }
+    }
+
+    private bool _user_offline = default(bool);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"user_offline", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool user_offline
+    {
+      get { return _user_offline; }
+      set { _user_offline = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -327,6 +392,15 @@ namespace SteamKit2.GC.Internal
     {
       get { return _game_language_name; }
       set { _game_language_name = value; }
+    }
+
+    private CMsgClientPingData _ping_data = null;
+    [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"ping_data", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public CMsgClientPingData ping_data
+    {
+      get { return _ping_data; }
+      set { _ping_data = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -2960,6 +3034,63 @@ namespace SteamKit2.GC.Internal
       get { return _item_item_id; }
       set { _item_item_id = value; }
     }
+
+    private uint _item_socket_id = (uint)65535;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"item_socket_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue((uint)65535)]
+    public uint item_socket_id
+    {
+      get { return _item_socket_id; }
+      set { _item_socket_id = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgExtractGemsResponse")]
+  public partial class CMsgExtractGemsResponse : global::ProtoBuf.IExtensible
+  {
+    public CMsgExtractGemsResponse() {}
+    
+
+    private ulong _item_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"item_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong item_id
+    {
+      get { return _item_id; }
+      set { _item_id = value; }
+    }
+
+    private CMsgExtractGemsResponse.EExtractGems _response = CMsgExtractGemsResponse.EExtractGems.k_ExtractGems_Succeeded;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"response", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(CMsgExtractGemsResponse.EExtractGems.k_ExtractGems_Succeeded)]
+    public CMsgExtractGemsResponse.EExtractGems response
+    {
+      get { return _response; }
+      set { _response = value; }
+    }
+    [global::ProtoBuf.ProtoContract(Name=@"EExtractGems", EnumPassthru=true)]
+    public enum EExtractGems
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_ExtractGems_Succeeded", Value=0)]
+      k_ExtractGems_Succeeded = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_ExtractGems_Failed_ToolIsInvalid", Value=1)]
+      k_ExtractGems_Failed_ToolIsInvalid = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_ExtractGems_Failed_ItemIsInvalid", Value=2)]
+      k_ExtractGems_Failed_ItemIsInvalid = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_ExtractGems_Failed_ToolCannotRemoveGem", Value=3)]
+      k_ExtractGems_Failed_ToolCannotRemoveGem = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_ExtractGems_Failed_FailedToRemoveGem", Value=4)]
+      k_ExtractGems_Failed_FailedToRemoveGem = 4
+    }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -3021,6 +3152,32 @@ namespace SteamKit2.GC.Internal
     public global::System.Collections.Generic.List<uint> updated_socket_index
     {
       get { return _updated_socket_index; }
+    }
+  
+
+    private CMsgAddSocketResponse.EAddSocket _response = CMsgAddSocketResponse.EAddSocket.k_AddSocket_Succeeded;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"response", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(CMsgAddSocketResponse.EAddSocket.k_AddSocket_Succeeded)]
+    public CMsgAddSocketResponse.EAddSocket response
+    {
+      get { return _response; }
+      set { _response = value; }
+    }
+    [global::ProtoBuf.ProtoContract(Name=@"EAddSocket", EnumPassthru=true)]
+    public enum EAddSocket
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_AddSocket_Succeeded", Value=0)]
+      k_AddSocket_Succeeded = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_AddSocket_Failed_ToolIsInvalid", Value=1)]
+      k_AddSocket_Failed_ToolIsInvalid = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_AddSocket_Failed_ItemCannotBeSocketed", Value=2)]
+      k_AddSocket_Failed_ItemCannotBeSocketed = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_AddSocket_Failed_FailedToAddSocket", Value=3)]
+      k_AddSocket_Failed_FailedToAddSocket = 3
     }
   
     private global::ProtoBuf.IExtension extensionObject;
@@ -3103,6 +3260,44 @@ namespace SteamKit2.GC.Internal
       get { return _updated_socket_index; }
     }
   
+
+    private CMsgAddItemToSocketResponse.EAddGem _response = CMsgAddItemToSocketResponse.EAddGem.k_AddGem_Succeeded;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"response", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(CMsgAddItemToSocketResponse.EAddGem.k_AddGem_Succeeded)]
+    public CMsgAddItemToSocketResponse.EAddGem response
+    {
+      get { return _response; }
+      set { _response = value; }
+    }
+    [global::ProtoBuf.ProtoContract(Name=@"EAddGem", EnumPassthru=true)]
+    public enum EAddGem
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_AddGem_Succeeded", Value=0)]
+      k_AddGem_Succeeded = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_AddGem_Failed_GemIsInvalid", Value=1)]
+      k_AddGem_Failed_GemIsInvalid = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_AddGem_Failed_ItemIsInvalid", Value=2)]
+      k_AddGem_Failed_ItemIsInvalid = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_AddGem_Failed_FailedToAddGem", Value=3)]
+      k_AddGem_Failed_FailedToAddGem = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_AddGem_Failed_InvalidGemTypeForSocket", Value=4)]
+      k_AddGem_Failed_InvalidGemTypeForSocket = 4,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_AddGem_Failed_InvalidGemTypeForHero", Value=5)]
+      k_AddGem_Failed_InvalidGemTypeForHero = 5,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_AddGem_Failed_InvalidGemTypeForSlot", Value=6)]
+      k_AddGem_Failed_InvalidGemTypeForSlot = 6,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_AddGem_Failed_SocketContainsUnremovableGem", Value=7)]
+      k_AddGem_Failed_SocketContainsUnremovableGem = 7
+    }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -3131,6 +3326,45 @@ namespace SteamKit2.GC.Internal
       get { return _socket_index; }
       set { _socket_index = value; }
     }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgResetStrangeGemCountResponse")]
+  public partial class CMsgResetStrangeGemCountResponse : global::ProtoBuf.IExtensible
+  {
+    public CMsgResetStrangeGemCountResponse() {}
+    
+
+    private CMsgResetStrangeGemCountResponse.EResetGem _response = CMsgResetStrangeGemCountResponse.EResetGem.k_ResetGem_Succeeded;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"response", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(CMsgResetStrangeGemCountResponse.EResetGem.k_ResetGem_Succeeded)]
+    public CMsgResetStrangeGemCountResponse.EResetGem response
+    {
+      get { return _response; }
+      set { _response = value; }
+    }
+    [global::ProtoBuf.ProtoContract(Name=@"EResetGem", EnumPassthru=true)]
+    public enum EResetGem
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_ResetGem_Succeeded", Value=0)]
+      k_ResetGem_Succeeded = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_ResetGem_Failed_FailedToResetGem", Value=1)]
+      k_ResetGem_Failed_FailedToResetGem = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_ResetGem_Failed_ItemIsInvalid", Value=2)]
+      k_ResetGem_Failed_ItemIsInvalid = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_ResetGem_Failed_InvalidSocketId", Value=3)]
+      k_ResetGem_Failed_InvalidSocketId = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_ResetGem_Failed_SocketCannotBeReset", Value=4)]
+      k_ResetGem_Failed_SocketCannotBeReset = 4
+    }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

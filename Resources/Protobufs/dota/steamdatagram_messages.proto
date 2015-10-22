@@ -148,12 +148,23 @@ message CMsgSteamDatagramConnectionStatsRouterToClient {
 }
 
 message CMsgSteamDatagramConnectionStatsRouterToServer {
+	optional .CMsgSteamDatagramConnectionQuality r2s = 1;
 	optional .CMsgSteamDatagramConnectionQuality c2s = 2;
 	optional fixed32 client_timestamp = 3;
 	optional fixed32 router_timestamp = 4;
+	optional uint32 seq_num_r2s = 5;
 	optional uint32 seq_num_c2s = 6;
 	optional fixed64 client_steam_id = 7;
 	optional uint32 client_session_id = 8;
+}
+
+message CMsgSteamDatagramConnectionStatsServerToRouter {
+	optional .CMsgSteamDatagramConnectionQuality s2r = 1;
+	optional .CMsgSteamDatagramConnectionQuality s2c = 2;
+	optional uint32 seq_num_s2r = 3;
+	optional uint32 seq_num_s2c = 4;
+	optional fixed64 client_steam_id = 5;
+	optional uint32 client_session_id = 6;
 }
 
 message CMsgSteamDatagramClientPingSampleRequest {

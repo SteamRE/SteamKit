@@ -1,3 +1,5 @@
+import "networkbasetypes.proto";
+
 option optimize_for = SPEED;
 option cc_generic_services = false;
 
@@ -167,5 +169,16 @@ message CDOTAMsg_CoachHUDPing {
 	optional uint32 x = 1;
 	optional uint32 y = 2;
 	optional string tgtpath = 3;
+}
+
+message CDOTAMsg_UnitOrder {
+	optional sint32 issuer = 1 [default = -1];
+	optional .dotaunitorder_t order_type = 2 [default = DOTA_UNIT_ORDER_NONE];
+	repeated int32 units = 3;
+	optional int32 target_index = 4;
+	optional int32 ability_index = 5;
+	optional .CMsgVector position = 6;
+	optional bool queue = 7;
+	optional int32 sequence_number = 8;
 }
 
