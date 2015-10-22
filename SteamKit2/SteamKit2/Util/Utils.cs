@@ -16,23 +16,23 @@ namespace SteamKit2
 {
     static class Utils
     {
-        public static string EncodeHexString(byte[] input)
+        public static string EncodeHexString( byte[] input )
         {
             return input.Aggregate(new StringBuilder(),
-                       (sb, v) => sb.Append(v.ToString("x2"))
+                       ( sb, v ) => sb.Append(v.ToString("x2"))
                       ).ToString();
         }
 
-        public static byte[] DecodeHexString(string hex)
+        public static byte[] DecodeHexString( string hex )
         {
-            if (hex == null)
+            if ( hex == null )
                 return null;
 
             int chars = hex.Length;
             byte[] bytes = new byte[chars / 2];
 
-            for (int i = 0; i < chars; i += 2)
-                bytes[i / 2] = Convert.ToByte(hex.Substring(i, 2), 16);
+            for ( int i = 0; i < chars; i += 2 )
+                bytes[i / 2] = Convert.ToByte( hex.Substring(i, 2 ), 16);
 
             return bytes;
         }
@@ -98,9 +98,9 @@ namespace SteamKit2
                                     case 2:
                                         return EOSType.Win8; // Also Server 2012
 
-                                    // Note: The OSVersion property reports the same version number (6.2.0.0) for both Windows 8 and Windows 8.1.- http://msdn.microsoft.com/en-us/library/system.environment.osversion(v=vs.110).aspx
+                                    // Note: The OSVersion property reports the same version number ( 6.2.0.0 ) for both Windows 8 and Windows 8.1.- http://msdn.microsoft.com/en-us/library/system.environment.osversion( v=vs.110 ).aspx
                                     // In practice, this will only get hit if the application targets Windows 8.1 in the app manifest.
-                                    // See http://msdn.microsoft.com/en-us/library/windows/desktop/dn481241(v=vs.85).aspx for more info.
+                                    // See http://msdn.microsoft.com/en-us/library/windows/desktop/dn481241( v=vs.85 ).aspx for more info.
                                     case 3:
                                         return EOSType.Win81; // Also Server 2012 R2
                                 }
@@ -179,7 +179,7 @@ namespace SteamKit2
         }
 
         [DllImport ("libc")]
-        static extern int uname (IntPtr buf);
+        static extern int uname ( IntPtr buf );
 
         public static T[] GetAttributes<T>( this Type type, bool inherit = false )
             where T : Attribute
@@ -198,20 +198,20 @@ namespace SteamKit2
         /// </summary>
         /// <param name="unixTime">A unix timestamp expressed as seconds since the unix epoch</param>
         /// <returns>DateTime representation</returns>
-        public static DateTime DateTimeFromUnixTime(ulong unixTime)
+        public static DateTime DateTimeFromUnixTime( ulong unixTime )
         {
-            DateTime origin = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
-            return origin.AddSeconds(unixTime);
+            DateTime origin = new DateTime( 1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc );
+            return origin.AddSeconds( unixTime );
         }
         /// <summary>
         /// Converts a given DateTime into a unix timestamp representing seconds since the unix epoch.
         /// </summary>
         /// <param name="time">DateTime to be expressed</param>
         /// <returns>64-bit wide representation</returns>
-        public static ulong DateTimeToUnixTime(DateTime time)
+        public static ulong DateTimeToUnixTime( DateTime time )
         {
-            DateTime origin = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
-            return (ulong)(time - origin).TotalSeconds;
+            DateTime origin = new DateTime( 1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc );
+            return ( ulong )( time - origin ).TotalSeconds;
         }
     }
 
@@ -359,7 +359,7 @@ namespace SteamKit2
 
     static class NetHelpers
     {
-        public static IPAddress GetLocalIP(Socket activeSocket)
+        public static IPAddress GetLocalIP( Socket activeSocket )
         {
             IPEndPoint ipEndPoint = activeSocket.LocalEndPoint as IPEndPoint;
 
@@ -397,30 +397,30 @@ namespace SteamKit2
         {
             return ( ushort )IPAddress.NetworkToHostOrder( ( short )input );
         }
-        public static bool TryParseIPEndPoint(string stringValue, out IPEndPoint endPoint)
+        public static bool TryParseIPEndPoint( string stringValue, out IPEndPoint endPoint )
         {
             var endpointParts = stringValue.Split(':');
-            if (endpointParts.Length != 2)
+            if ( endpointParts.Length != 2 )
             {
                 endPoint = null;
                 return false;
             }
 
             IPAddress address;
-            if (!IPAddress.TryParse(endpointParts[0], out address))
+            if (!IPAddress.TryParse( endpointParts[0], out address ))
             {
                 endPoint = null;
                 return false;
             }
 
             int port;
-            if (!int.TryParse(endpointParts[1], out port))
+            if (!int.TryParse( endpointParts[1], out port ))
             {
                 endPoint = null;
                 return false;
             }
 
-            endPoint = new IPEndPoint(address, port);
+            endPoint = new IPEndPoint( address, port );
             return true;
         }
     }

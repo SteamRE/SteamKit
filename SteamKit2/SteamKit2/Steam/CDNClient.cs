@@ -356,7 +356,7 @@ namespace SteamKit2
         /// <param name="depotid">The id of the depot being accessed.</param>
         /// <param name="depotKey">
         /// The optional depot decryption key for the depot that will be downloaded.
-        /// This is used for decrypting filenames (if needed) in depot manifests, and processing depot chunks.
+        /// This is used for decrypting filenames ( if needed ) in depot manifests, and processing depot chunks.
         /// </param>
         /// <param name="cdnAuthToken">CDN auth token for CDN content server endpoints.</param>
         public void AuthenticateDepot( uint depotid, byte[] depotKey = null, string cdnAuthToken = null )
@@ -412,7 +412,7 @@ namespace SteamKit2
         /// <param name="cdnAuthToken">CDN auth token for CDN content server endpoints.</param>
         /// <param name="depotKey">
         /// The depot decryption key for the depot that will be downloaded.
-        /// This is used for decrypting filenames (if needed) in depot manifests, and processing depot chunks.
+        /// This is used for decrypting filenames ( if needed ) in depot manifests, and processing depot chunks.
         /// </param>
         /// <returns>A <see cref="DepotManifest"/> instance that contains information about the files present within a depot.</returns>
         public DepotManifest DownloadManifest( uint depotId, ulong manifestId, string host, string cdnAuthToken, byte[] depotKey = null )
@@ -426,7 +426,7 @@ namespace SteamKit2
             return DownloadManifestCore( depotId, manifestId, server, cdnAuthToken, depotKey );
         }
 
-        // Ambiguous reference in cref attribute: 'CDNClient.DownloadManifest'. Assuming 'SteamKit2.CDNClient.DownloadManifest(uint, ulong)',
+        // Ambiguous reference in cref attribute: 'CDNClient.DownloadManifest'. Assuming 'SteamKit2.CDNClient.DownloadManifest( uint, ulong )',
         // but could have also matched other overloads including 'SteamKit2.CDNClient.DownloadManifest(uint, ulong, string, string, byte[])'.
 #pragma warning disable 0419
 
@@ -459,7 +459,7 @@ namespace SteamKit2
             return DownloadDepotChunkCore( depotId, chunk, connectedServer, cdnToken, depotKey );
         }
 
-        // Ambiguous reference in cref attribute: 'CDNClient.DownloadManifest'. Assuming 'SteamKit2.CDNClient.DownloadManifest(uint, ulong)',
+        // Ambiguous reference in cref attribute: 'CDNClient.DownloadManifest'. Assuming 'SteamKit2.CDNClient.DownloadManifest( uint, ulong )',
         // but could have also matched other overloads including 'SteamKit2.CDNClient.DownloadManifest(uint, ulong, string, string, byte[])'.
 #pragma warning disable 0419
 
@@ -480,13 +480,13 @@ namespace SteamKit2
         /// <param name="cdnAuthToken">CDN auth token for CDN content server endpoints.</param>
         /// <param name="depotKey">
         /// The depot decryption key for the depot that will be downloaded.
-        /// This is used for decrypting filenames (if needed) in depot manifests, and processing depot chunks.
+        /// This is used for decrypting filenames ( if needed ) in depot manifests, and processing depot chunks.
         /// </param>
         /// <exception cref="System.ArgumentNullException">chunk's <see cref="DepotManifest.ChunkData.ChunkID"/> was null.</exception>
         public DepotChunk DownloadDepotChunk( uint depotId, DepotManifest.ChunkData chunk, string host, string cdnAuthToken, byte[] depotKey = null )
 #pragma warning restore 0419
         {
-            if (chunk.ChunkID == null)
+            if ( chunk.ChunkID == null )
                 throw new ArgumentNullException( "chunk.ChunkID" );
 
             var server = new Server

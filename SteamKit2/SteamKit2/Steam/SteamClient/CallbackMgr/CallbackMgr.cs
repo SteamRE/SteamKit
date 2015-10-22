@@ -52,7 +52,7 @@ namespace SteamKit2
         /// </summary>
         /// <param name="func">The function to call when a callback of type TCall arrives.</param>
         /// <param name="mgr">The <see cref="CallbackManager"/> that is responsible for the routing of callbacks to this handler, or null if the callback will be registered manually.</param>
-        public Callback(Action<TCall> func, CallbackManager mgr = null)
+        public Callback( Action<TCall> func, CallbackManager mgr = null )
             : this ( func, mgr, JobID.Invalid )
         {
         }
@@ -63,12 +63,12 @@ namespace SteamKit2
         /// <param name="func">The function to call when a callback of type TCall arrives.</param>
         /// <param name="mgr">The <see cref="CallbackManager"/> that is responsible for the routing of callbacks to this handler, or null if the callback will be registered manually.</param>
         /// <param name="jobID">The <see cref="JobID"/>to filter matching callbacks by. Specify <see cref="P:JobID.Invalid"/> to recieve all callbacks of type TCall.</param>
-        public Callback(Action<TCall> func, CallbackManager mgr, JobID jobID)
+        public Callback( Action<TCall> func, CallbackManager mgr, JobID jobID )
         {
             this.JobID = jobID;
             this.OnRun = func;
 
-            AttachTo(mgr);
+            AttachTo( mgr );
         }
 
         /// <summary>
@@ -110,17 +110,17 @@ namespace SteamKit2
         internal override void Run( object callback )
         {
             var cb = callback as TCall;
-            if (cb != null && (cb.JobID == JobID || JobID == JobID.Invalid) && OnRun != null)
+            if ( cb != null && (cb.JobID == JobID || JobID == JobID.Invalid ) && OnRun != null)
             {
                 OnRun(cb);
             }
         }
 
-        static Action<TCall, JobID> CreateJoblessAction(Action<TCall> func)
+        static Action<TCall, JobID> CreateJoblessAction( Action<TCall> func )
         {
-            return delegate(TCall callback, JobID jobID)
+            return delegate( TCall callback, JobID jobID )
             {
-                func(callback);
+                func( callback );
             };
         }
     }
@@ -255,7 +255,7 @@ namespace SteamKit2
 
         sealed class Subscription : IDisposable
         {
-            public Subscription(Internal.CallbackBase call, CallbackManager manager)
+            public Subscription( Internal.CallbackBase call, CallbackManager manager )
             {
                 this.manager = manager;
                 this.call = call;
@@ -266,7 +266,7 @@ namespace SteamKit2
 
             void IDisposable.Dispose()
             {
-                if (call != null && manager != null)
+                if ( call != null && manager != null )
                 {
                     manager.Unsubscribe( call );
                     call = null;

@@ -64,7 +64,7 @@ namespace SteamKit2
             public byte[] SentryFileHash { get; set; }
 
             /// <summary>
-            /// Gets or sets the account instance. 1 for the PC instance or 2 for the Console (PS3) instance.
+            /// Gets or sets the account instance. 1 for the PC instance or 2 for the Console ( PS3 ) instance.
             /// </summary>
             /// <value>The account instance.</value>
             /// <seealso cref="SteamKit2.SteamID.DesktopInstance"/>
@@ -288,7 +288,7 @@ namespace SteamKit2
             {
                 // Prevent consumers from screwing this up.
                 // If should_remember_password is false, the login_key is ignored server-side.
-                // The inverse is not applicable (you can log in with should_remember_password and no login_key).
+                // The inverse is not applicable ( you can log in with should_remember_password and no login_key ).
                 throw new ArgumentException( "ShouldRememberPassword is required to be set to true in order to use LoginKey." );
             }
             if ( !this.Client.IsConnected )
@@ -486,7 +486,7 @@ namespace SteamKit2
         {
             var machineAuth = new ClientMsgProtobuf<CMsgClientUpdateMachineAuth>( packetMsg );
 
-            var callback = new UpdateMachineAuthCallback(packetMsg.SourceJobID, machineAuth.Body);
+            var callback = new UpdateMachineAuthCallback( packetMsg.SourceJobID, machineAuth.Body );
             Client.PostCallback( callback );
         }
         void HandleSessionToken( IPacketMsg packetMsg )
@@ -538,7 +538,7 @@ namespace SteamKit2
         {
             var userNonce = new ClientMsgProtobuf<CMsgClientRequestWebAPIAuthenticateUserNonceResponse>( packetMsg );
 
-            var callback = new WebAPIUserNonceCallback(userNonce.TargetJobID, userNonce.Body);
+            var callback = new WebAPIUserNonceCallback( userNonce.TargetJobID, userNonce.Body );
             this.Client.PostCallback( callback );
         }
         void HandleMarketingMessageUpdate( IPacketMsg packetMsg )

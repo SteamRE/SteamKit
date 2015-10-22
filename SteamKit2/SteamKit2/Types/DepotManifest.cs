@@ -100,12 +100,12 @@ namespace SteamKit2
             public byte[] FileHash { get; private set; }
 
 
-            internal FileData(string filename, EDepotFileFlag flag, ulong size, byte[] hash, bool encrypted, int numChunks)
+            internal FileData( string filename, EDepotFileFlag flag, ulong size, byte[] hash, bool encrypted, int numChunks )
             {
-                if (encrypted)
+                if ( encrypted )
                     this.FileName = filename;
                 else
-                    this.FileName = filename.Replace(altDirChar, Path.DirectorySeparatorChar);
+                    this.FileName = filename.Replace( altDirChar, Path.DirectorySeparatorChar );
 
                 this.Flags = flag;
                 this.TotalSize = size;
@@ -127,9 +127,9 @@ namespace SteamKit2
         public bool FilenamesEncrypted { get; private set; }
 
 
-        internal DepotManifest(byte[] data)
+        internal DepotManifest( byte[] data )
         {
-            Deserialize(data);
+            Deserialize( data );
         }
 
 
@@ -138,32 +138,32 @@ namespace SteamKit2
         /// </summary>
         /// <param name="encryptionKey">The encryption key.</param>
         /// <returns><c>true</c> if the file names were successfully decrypted; otherwise, <c>false</c>.</returns>
-        public bool DecryptFilenames(byte[] encryptionKey)
+        public bool DecryptFilenames( byte[] encryptionKey )
         {
             if (!FilenamesEncrypted)
                 return true;
 
-            foreach (var file in Files)
+            foreach ( var file in Files )
             {
-                byte[] enc_filename = Convert.FromBase64String(file.FileName);
+                byte[] enc_filename = Convert.FromBase64String( file.FileName );
                 byte[] filename;
                 try
                 {
-                    filename = CryptoHelper.SymmetricDecrypt(enc_filename, encryptionKey);
+                    filename = CryptoHelper.SymmetricDecrypt( enc_filename, encryptionKey );
                 }
-                catch (Exception)
+                catch ( Exception )
                 {
                     return false;
                 }
 
-                file.FileName = Encoding.UTF8.GetString( filename ).TrimEnd( new char[] { '\0' } ).Replace(altDirChar, Path.DirectorySeparatorChar);
+                file.FileName = Encoding.UTF8.GetString( filename ).TrimEnd( new char[] { '\0' } ).Replace( altDirChar, Path.DirectorySeparatorChar );
             }
 
             FilenamesEncrypted = false;
             return true;
         }
 
-        void Deserialize(byte[] data)
+        void Deserialize( byte[] data )
         {
             ContentManifestPayload payload = null;
             ContentManifestMetadata metadata = null;
@@ -190,21 +190,21 @@ namespace SteamKit2
 
                         case DepotManifest.PROTOBUF_PAYLOAD_MAGIC:
                             uint payload_length = br.ReadUInt32();
-                            byte[] payload_bytes = br.ReadBytes( (int)payload_length );
+                            byte[] payload_bytes = br.ReadBytes( ( int )payload_length );
                             using ( var ms_payload = new MemoryStream( payload_bytes ) ) 
                                 payload = Serializer.Deserialize<ContentManifestPayload>( ms_payload );
                             break;
 
                         case DepotManifest.PROTOBUF_METADATA_MAGIC:
                             uint metadata_length = br.ReadUInt32();
-                            byte[] metadata_bytes = br.ReadBytes( (int)metadata_length );
+                            byte[] metadata_bytes = br.ReadBytes( ( int )metadata_length );
                             using ( var ms_metadata = new MemoryStream( metadata_bytes ) )
                                 metadata = Serializer.Deserialize<ContentManifestMetadata>( ms_metadata );
                             break;
 
                         case DepotManifest.PROTOBUF_SIGNATURE_MAGIC:
                             uint signature_length = br.ReadUInt32();
-                            byte[] signature_bytes = br.ReadBytes( (int)signature_length );
+                            byte[] signature_bytes = br.ReadBytes( ( int )signature_length );
                             using ( var ms_signature = new MemoryStream( signature_bytes ) )
                                 signature = Serializer.Deserialize<ContentManifestSignature>( ms_signature );
                             break;
@@ -218,10 +218,10 @@ namespace SteamKit2
                 }
             }
 
-            if (payload != null && metadata != null && signature != null)
+            if ( payload != null && metadata != null && signature != null )
             {
-                ParseProtobufManifestMetadata(metadata);
-                ParseProtobufManifestPayload(payload);
+                ParseProtobufManifestMetadata( metadata );
+                ParseProtobufManifestPayload( payload );
             }
             else
             {
@@ -229,42 +229,42 @@ namespace SteamKit2
             }
         }
 
-        void ParseBinaryManifest(Steam3Manifest manifest)
+        void ParseBinaryManifest( Steam3Manifest manifest )
         {
             Files = new List<FileData>( manifest.Mapping.Count );
             FilenamesEncrypted = manifest.AreFileNamesEncrypted;
 
-            foreach (var file_mapping in manifest.Mapping)
+            foreach ( var file_mapping in manifest.Mapping )
             {
-                FileData filedata = new FileData(file_mapping.FileName, file_mapping.Flags, file_mapping.TotalSize, file_mapping.HashContent, FilenamesEncrypted, file_mapping.Chunks.Length);
+                FileData filedata = new FileData( file_mapping.FileName, file_mapping.Flags, file_mapping.TotalSize, file_mapping.HashContent, FilenamesEncrypted, file_mapping.Chunks.Length );
 
-                foreach (var chunk in file_mapping.Chunks)
+                foreach ( var chunk in file_mapping.Chunks )
                 {
                     filedata.Chunks.Add( new ChunkData( chunk.ChunkGID, chunk.Checksum, chunk.Offset, chunk.CompressedSize, chunk.DecompressedSize ) );
                 }
 
-                Files.Add(filedata);
+                Files.Add( filedata );
             }
         }
 
-        void ParseProtobufManifestPayload(ContentManifestPayload payload)
+        void ParseProtobufManifestPayload( ContentManifestPayload payload )
         {
-            Files = new List<FileData>(payload.mappings.Count);
+            Files = new List<FileData>( payload.mappings.Count );
 
-            foreach (var file_mapping in payload.mappings)
+            foreach ( var file_mapping in payload.mappings )
             {
-                FileData filedata = new FileData(file_mapping.filename, (EDepotFileFlag)file_mapping.flags, file_mapping.size, file_mapping.sha_content, FilenamesEncrypted, file_mapping.chunks.Count);
+                FileData filedata = new FileData( file_mapping.filename, (EDepotFileFlag )file_mapping.flags, file_mapping.size, file_mapping.sha_content, FilenamesEncrypted, file_mapping.chunks.Count);
 
-                foreach (var chunk in file_mapping.chunks)
+                foreach ( var chunk in file_mapping.chunks )
                 {
-                    filedata.Chunks.Add( new ChunkData( chunk.sha, BitConverter.GetBytes(chunk.crc), chunk.offset, chunk.cb_compressed, chunk.cb_original ) );
+                    filedata.Chunks.Add( new ChunkData( chunk.sha, BitConverter.GetBytes( chunk.crc ), chunk.offset, chunk.cb_compressed, chunk.cb_original ) );
                 }
 
-                Files.Add(filedata);
+                Files.Add( filedata );
             }
         }
 
-        void ParseProtobufManifestMetadata(ContentManifestMetadata metadata)
+        void ParseProtobufManifestMetadata( ContentManifestMetadata metadata )
         {
             FilenamesEncrypted = metadata.filenames_encrypted;
         }

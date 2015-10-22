@@ -276,7 +276,7 @@ namespace SteamKit2
             // let the underlying CMClient handle this message first
             base.OnClientMsgReceived( packetMsg );
 
-            if (packetMsg == null)
+            if ( packetMsg == null )
             {
                 // bail if the packet failed to parse. CMClient will handle this
                 return;

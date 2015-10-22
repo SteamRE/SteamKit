@@ -396,7 +396,7 @@ namespace SteamKit2
             if ( chatId.IsClanAccount )
             {
                 // this steamid is incorrect, so we'll fix it up
-                chatId.AccountInstance = (uint)SteamID.ChatInstanceFlags.Clan;
+                chatId.AccountInstance = ( uint )SteamID.ChatInstanceFlags.Clan;
                 chatId.AccountType = EAccountType.Chat;
             }
 
@@ -734,7 +734,7 @@ namespace SteamKit2
                         cacheClan.Name = friend.player_name;
                     }
 
-                    if ( (flags & EClientPersonaStateFlag.Presence) == EClientPersonaStateFlag.Presence )
+                    if ( ( flags & EClientPersonaStateFlag.Presence ) == EClientPersonaStateFlag.Presence )
                     {
                         cacheClan.AvatarHash = friend.avatar_hash;
                     }
@@ -820,7 +820,7 @@ namespace SteamKit2
         {
             var response = new ClientMsg<MsgClientSetIgnoreFriendResponse>( packetMsg );
 
-            var callback = new IgnoreFriendCallback(response.TargetJobID, response.Body);
+            var callback = new IgnoreFriendCallback( response.TargetJobID, response.Body );
             this.Client.PostCallback( callback );
         }
         void HandleProfileInfoResponse( IPacketMsg packetMsg )

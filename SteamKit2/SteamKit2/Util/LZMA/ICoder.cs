@@ -31,7 +31,7 @@ namespace SevenZip
 		/// <param name="outSize">
 		/// output size. -1 if unknown.
 		/// </param>
-		void SetProgress(Int64 inSize, Int64 outSize);
+		void SetProgress( Int64 inSize, Int64 outSize );
 	};
 
 	interface ICoder
@@ -57,18 +57,18 @@ namespace SevenZip
 		/// <exception cref="SevenZip.DataErrorException">
 		/// if input stream is not valid
 		/// </exception>
-		void Code(System.IO.Stream inStream, System.IO.Stream outStream,
-			Int64 inSize, Int64 outSize, ICodeProgress progress);
+		void Code( System.IO.Stream inStream, System.IO.Stream outStream,
+			Int64 inSize, Int64 outSize, ICodeProgress progress );
 	};
 
 	/*
 	public interface ICoder2
 	{
-		 void Code(ISequentialInStream []inStreams,
+		 void Code( ISequentialInStream []inStreams,
 				const UInt64 []inSizes, 
 				ISequentialOutStream []outStreams, 
 				UInt64 []outSizes,
-				ICodeProgress progress);
+				ICodeProgress progress );
 	};
   */
 
@@ -98,15 +98,15 @@ namespace SevenZip
 		/// </summary>
 		BlockSize,
 		/// <summary>
-        /// Specifies number of postion state bits for LZMA (0 &lt;= x &lt;= 4).
+        /// Specifies number of postion state bits for LZMA ( 0 &lt;= x &lt;= 4 ).
 		/// </summary>
 		PosStateBits,
 		/// <summary>
-        /// Specifies number of literal context bits for LZMA (0 &lt;= x &lt;= 8).
+        /// Specifies number of literal context bits for LZMA ( 0 &lt;= x &lt;= 8 ).
 		/// </summary>
 		LitContextBits,
 		/// <summary>
-        /// Specifies number of literal position bits for LZMA (0 &lt;= x &lt;= 4).
+        /// Specifies number of literal position bits for LZMA ( 0 &lt;= x &lt;= 4 ).
 		/// </summary>
 		LitPosBits,
 		/// <summary>
@@ -142,16 +142,16 @@ namespace SevenZip
 
 	interface ISetCoderProperties
 	{
-		void SetCoderProperties(CoderPropID[] propIDs, object[] properties);
+		void SetCoderProperties( CoderPropID[] propIDs, object[] properties );
 	};
 
 	interface IWriteCoderProperties
 	{
-		void WriteCoderProperties(System.IO.Stream outStream);
+		void WriteCoderProperties( System.IO.Stream outStream );
 	}
 
 	interface ISetDecoderProperties
 	{
-		void SetDecoderProperties(byte[] properties);
+		void SetDecoderProperties( byte[] properties );
 	}
 }

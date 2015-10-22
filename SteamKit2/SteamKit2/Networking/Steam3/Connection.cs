@@ -97,10 +97,10 @@ namespace SteamKit2
         /// Occurs when the physical connection is established.
         /// </summary>
         public event EventHandler Connected;
-        protected void OnConnected(EventArgs e)
+        protected void OnConnected( EventArgs e )
         {
-            if (Connected != null)
-                Connected(this, e);
+            if ( Connected != null )
+                Connected( this, e );
         }
 
         /// <summary>
@@ -140,7 +140,7 @@ namespace SteamKit2
         /// Sets the network encryption filter for this connection
         /// </summary>
         /// <param name="filter">filter implementing <see cref="NetFilterEncryption"/></param>
-        public abstract void SetNetEncryptionFilter(NetFilterEncryption filter);
+        public abstract void SetNetEncryptionFilter( NetFilterEncryption filter );
     }
 
 }

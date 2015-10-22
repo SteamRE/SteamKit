@@ -321,18 +321,18 @@ namespace SteamKit2.Internal
 
             try
             {
-                if (MsgUtil.IsProtoBuf(rawEMsg))
+                if ( MsgUtil.IsProtoBuf(rawEMsg ))
                 {
                     // if the emsg is flagged, we're a proto message
-                    return new PacketClientMsgProtobuf(eMsg, data);
+                    return new PacketClientMsgProtobuf( eMsg, data );
                 }
                 else
                 {
                     // otherwise we're a struct message
-                    return new PacketClientMsg(eMsg, data);
+                    return new PacketClientMsg( eMsg, data );
                 }
             }
-            catch (Exception ex)
+            catch ( Exception ex )
             {
                 DebugLog.WriteLine( "CMClient", "Exception deserializing emsg {0} ({1}).\n{2}", eMsg, MsgUtil.IsProtoBuf( rawEMsg ), ex.ToString() );
                 return null;
@@ -473,7 +473,7 @@ namespace SteamKit2.Internal
             if ( packetMsg.IsProto )
             {
                 var logoffMsg = new ClientMsgProtobuf<CMsgClientLoggedOff>( packetMsg );
-                var logoffResult = (EResult)logoffMsg.Body.eresult;
+                var logoffResult = ( EResult )logoffMsg.Body.eresult;
 
                 if ( logoffResult == EResult.TryAnotherCM || logoffResult == EResult.ServiceUnavailable )
                 {

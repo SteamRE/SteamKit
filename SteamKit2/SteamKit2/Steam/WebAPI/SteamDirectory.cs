@@ -23,7 +23,7 @@ namespace SteamKit2
             {
                 var servers = t.Result;
                 CMClient.Servers.Clear();
-                CMClient.Servers.TryAddRange(servers);
+                CMClient.Servers.TryAddRange( servers );
             }, CancellationToken.None, TaskContinuationOptions.NotOnFaulted | TaskContinuationOptions.NotOnCanceled, TaskScheduler.Current );
         }
 

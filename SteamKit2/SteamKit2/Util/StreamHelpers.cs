@@ -7,35 +7,35 @@ namespace SteamKit2
     internal static class StreamHelpers
     {
         static byte[] data = new byte[8];
-        public static Int16 ReadInt16(this Stream stream)
+        public static Int16 ReadInt16( this Stream stream )
         {
             stream.Read( data, 0, 2 );
 
             return BitConverter.ToInt16( data, 0 );
         }
 
-        public static UInt16 ReadUInt16(this Stream stream)
+        public static UInt16 ReadUInt16( this Stream stream )
         {
-            stream.Read(data, 0, 2);
+            stream.Read( data, 0, 2 );
 
-            return BitConverter.ToUInt16(data, 0);
+            return BitConverter.ToUInt16( data, 0 );
         }
 
-        public static Int32 ReadInt32(this Stream stream)
+        public static Int32 ReadInt32( this Stream stream )
         {
             stream.Read( data, 0, 4 );
 
             return BitConverter.ToInt32( data, 0 );
         }
 
-        public static UInt32 ReadUInt32(this Stream stream)
+        public static UInt32 ReadUInt32( this Stream stream )
         {
-            stream.Read(data, 0, 4);
+            stream.Read( data, 0, 4 );
 
-            return BitConverter.ToUInt32(data, 0);
+            return BitConverter.ToUInt32( data, 0 );
         }
 
-        public static UInt64 ReadUInt64(this Stream stream)
+        public static UInt64 ReadUInt64( this Stream stream )
         {
             stream.Read( data, 0, 8 );
 
@@ -87,7 +87,7 @@ namespace SteamKit2
 
         public static byte[] ReadBytesCached( this Stream stream, int len )
         {
-            if (bufferCache == null || bufferCache.Length < len)
+            if ( bufferCache == null || bufferCache.Length < len )
                 bufferCache = new byte[len];
 
             stream.Read( bufferCache, 0, len );
@@ -97,15 +97,15 @@ namespace SteamKit2
 
         static byte[] discardBuffer = new byte[2 << 12];
 
-        public static void ReadAndDiscard(this Stream stream, int len)
+        public static void ReadAndDiscard( this Stream stream, int len )
         {
-            while (len > discardBuffer.Length)
+            while ( len > discardBuffer.Length )
             {
-                stream.Read(discardBuffer, 0, discardBuffer.Length);
+                stream.Read( discardBuffer, 0, discardBuffer.Length );
                 len -= discardBuffer.Length;
             }
 
-            stream.Read(discardBuffer, 0, len);
+            stream.Read( discardBuffer, 0, len );
         }
     }
 }

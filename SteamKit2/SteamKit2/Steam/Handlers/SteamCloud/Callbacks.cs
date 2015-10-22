@@ -98,11 +98,11 @@ namespace SteamKit2
             /// </summary>
             public bool IsExplicitDelete { get; private set; }
 
-            internal SingleFileInfoCallback(JobID jobID, CMsgClientUFSGetSingleFileInfoResponse msg)
+            internal SingleFileInfoCallback( JobID jobID, CMsgClientUFSGetSingleFileInfoResponse msg )
             {
                 JobID = jobID;
 
-                Result = (EResult)msg.eresult;
+                Result = ( EResult )msg.eresult;
 
                 AppID = msg.app_id;
                 FileName = msg.file_name;
@@ -128,11 +128,11 @@ namespace SteamKit2
             /// </summary>
             public ulong UGCId { get; private set; }
 
-            internal ShareFileCallback(JobID jobID, CMsgClientUFSShareFileResponse msg)
+            internal ShareFileCallback( JobID jobID, CMsgClientUFSShareFileResponse msg )
             {
                 JobID = jobID;
 
-                Result = (EResult)msg.eresult;
+                Result = ( EResult )msg.eresult;
 
                 UGCId = msg.hcontent;
             }
