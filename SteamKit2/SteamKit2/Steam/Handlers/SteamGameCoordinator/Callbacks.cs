@@ -11,7 +11,7 @@ namespace SteamKit2
         /// </summary>
         public class MessageCallback : CallbackMsg
         {
-            // raw emsg (with protobuf flag, if present)
+            // raw emsg ( with protobuf flag, if present )
             uint eMsg;
 
             /// <summary>

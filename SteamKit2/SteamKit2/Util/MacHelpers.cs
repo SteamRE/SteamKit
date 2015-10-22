@@ -7,18 +7,18 @@ namespace SteamKit2.Util.MacHelpers
     class CFTypeRef : SafeHandle
     {
         CFTypeRef()
-            : base(IntPtr.Zero, ownsHandle: true)
+            : base( IntPtr.Zero, ownsHandle: true )
         {
         }
 
         protected override bool ReleaseHandle()
         {
-            if (IsInvalid)
+            if ( IsInvalid )
             {
                 return false;
             }
 
-            CoreFoundation.CFRelease(handle);
+            CoreFoundation.CFRelease( handle );
             return true;
         }
 
@@ -47,23 +47,23 @@ namespace SteamKit2.Util.MacHelpers
         public ulong   f_files;    /* total file nodes in file system */
         public ulong   f_ffree;    /* free file nodes in fs */
 
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 2)]
+        [MarshalAs( UnmanagedType.ByValArray, SizeConst = 2 )]
         public uint[]  f_fsid;     /* file system id */
         public uint    f_owner;    /* user that mounted the filesystem */
         public uint    f_type;     /* type of filesystem */
         public uint    f_flags;    /* copy of mount exported flags */
-        public uint    f_fssubtype;    /* fs sub-type (flavor) */
+        public uint    f_fssubtype;    /* fs sub-type ( flavor ) */
 
-        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = MFSTYPENAMELEN)]
+        [MarshalAs( UnmanagedType.ByValTStr, SizeConst = MFSTYPENAMELEN )]
         public string  f_fstypename;  /* fs type name */
 
-        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = PATH_MAX)]
+        [MarshalAs( UnmanagedType.ByValTStr, SizeConst = PATH_MAX )]
         public string  f_mntonname;    /* directory on which mounted */
 
-        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = PATH_MAX)]
+        [MarshalAs( UnmanagedType.ByValTStr, SizeConst = PATH_MAX )]
         public string  f_mntfromname ; /* mounted filesystem */
 
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 8)]
+        [MarshalAs( UnmanagedType.ByValArray, SizeConst = 8 )]
         public uint[]  f_reserved;  /* For future use */
     }
 
@@ -71,8 +71,8 @@ namespace SteamKit2.Util.MacHelpers
     {
         const string LibraryName = "libc";
 
-        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int statfs64(string path, ref statfs buf);
+        [DllImport( LibraryName, CallingConvention = CallingConvention.Cdecl )]
+        public static extern int statfs64( string path, ref statfs buf );
     }
 
     static class CoreFoundation
@@ -84,22 +84,22 @@ namespace SteamKit2.Util.MacHelpers
             kCFStringEncodingASCII = 0x0600
         }
 
-        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void CFRelease(IntPtr cf);
+        [DllImport( LibraryName, CallingConvention = CallingConvention.Cdecl )]
+        public static extern void CFRelease( IntPtr cf );
 
-        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        [return: MarshalAs(UnmanagedType.I1)]
-        public static extern bool CFDictionaryGetValueIfPresent(CFTypeRef theDict, CFTypeRef key, out IntPtr value);
+        [DllImport( LibraryName, CallingConvention = CallingConvention.Cdecl )]
+        [return: MarshalAs( UnmanagedType.I1 )]
+        public static extern bool CFDictionaryGetValueIfPresent( CFTypeRef theDict, CFTypeRef key, out IntPtr value );
 
-        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern CFTypeRef CFStringCreateWithCString(CFTypeRef allocator, string cStr, CFStringEncoding encoding);
+        [DllImport( LibraryName, CallingConvention = CallingConvention.Cdecl )]
+        public static extern CFTypeRef CFStringCreateWithCString( CFTypeRef allocator, string cStr, CFStringEncoding encoding );
 
-        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        [return:MarshalAs(UnmanagedType.U1)]
-        public static extern bool CFStringGetCString(CFTypeRef theString, StringBuilder buffer, long bufferSize, CFStringEncoding encoding);
+        [DllImport( LibraryName, CallingConvention = CallingConvention.Cdecl )]
+        [return:MarshalAs( UnmanagedType.U1 )]
+        public static extern bool CFStringGetCString( CFTypeRef theString, StringBuilder buffer, long bufferSize, CFStringEncoding encoding );
 
-        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern CFTypeRef CFUUIDCreateString(CFTypeRef allocator, IntPtr uuid);
+        [DllImport( LibraryName, CallingConvention = CallingConvention.Cdecl )]
+        public static extern CFTypeRef CFUUIDCreateString( CFTypeRef allocator, IntPtr uuid );
     }
 
     static class DiskArbitration
@@ -107,14 +107,14 @@ namespace SteamKit2.Util.MacHelpers
         const string LibraryName = "DiskArbitration.framework/DiskArbitration";
         public const string kDADiskDescriptionMediaUUIDKey = "DAMediaUUID";
 
-        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern CFTypeRef DASessionCreate(CFTypeRef allocator);
+        [DllImport( LibraryName, CallingConvention = CallingConvention.Cdecl )]
+        public static extern CFTypeRef DASessionCreate( CFTypeRef allocator );
 
-        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern CFTypeRef DADiskCreateFromBSDName(CFTypeRef allocator, CFTypeRef session, string name);
+        [DllImport( LibraryName, CallingConvention = CallingConvention.Cdecl )]
+        public static extern CFTypeRef DADiskCreateFromBSDName( CFTypeRef allocator, CFTypeRef session, string name );
 
-        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern CFTypeRef DADiskCopyDescription(CFTypeRef disk);
+        [DllImport( LibraryName, CallingConvention = CallingConvention.Cdecl )]
+        public static extern CFTypeRef DADiskCopyDescription( CFTypeRef disk );
     }
 
     static class IOKit
@@ -124,17 +124,17 @@ namespace SteamKit2.Util.MacHelpers
         public const uint kIOMasterPortDefault = 0;
         public const string kIOPlatformSerialNumberKey = "IOPlatformSerialNumber";
 
-        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern CFTypeRef IORegistryEntryCreateCFProperty(uint entry, CFTypeRef key, CFTypeRef allocator, uint options);
+        [DllImport( LibraryName, CallingConvention = CallingConvention.Cdecl )]
+        public static extern CFTypeRef IORegistryEntryCreateCFProperty( uint entry, CFTypeRef key, CFTypeRef allocator, uint options );
 
-        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern uint IOServiceGetMatchingService(uint masterPort, IntPtr matching);
+        [DllImport( LibraryName, CallingConvention = CallingConvention.Cdecl )]
+        public static extern uint IOServiceGetMatchingService( uint masterPort, IntPtr matching );
 
-        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern IntPtr IOServiceMatching(string name);
+        [DllImport( LibraryName, CallingConvention = CallingConvention.Cdecl )]
+        public static extern IntPtr IOServiceMatching( string name );
 
-        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int IOObjectRelease(uint @object);
+        [DllImport( LibraryName, CallingConvention = CallingConvention.Cdecl )]
+        public static extern int IOObjectRelease( uint @object );
     }
 }
 

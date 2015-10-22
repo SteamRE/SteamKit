@@ -142,7 +142,7 @@ namespace SteamKit2
         {
             var resp = new ClientMsgProtobuf<CMsgClientUCMAddScreenshotResponse>( packetMsg );
 
-            var callback = new ScreenshotAddedCallback(resp.TargetJobID, resp.Body);
+            var callback = new ScreenshotAddedCallback( resp.TargetJobID, resp.Body );
             Client.PostCallback( callback );
         }
         #endregion

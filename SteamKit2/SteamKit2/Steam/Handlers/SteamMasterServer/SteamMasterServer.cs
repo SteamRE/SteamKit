@@ -110,7 +110,7 @@ namespace SteamKit2
         {
             var queryResponse = new ClientMsgProtobuf<CMsgGMSClientServerQueryResponse>( packetMsg );
 
-            var callback = new QueryCallback(queryResponse.TargetJobID, queryResponse.Body);
+            var callback = new QueryCallback( queryResponse.TargetJobID, queryResponse.Body );
             Client.PostCallback( callback );
         }
         #endregion

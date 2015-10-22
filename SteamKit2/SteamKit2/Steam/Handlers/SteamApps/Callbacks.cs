@@ -22,7 +22,7 @@ namespace SteamKit2
         public sealed class LicenseListCallback : CallbackMsg
         {
             /// <summary>
-            /// Represents a granted license (steam3 subscription) for one or more games.
+            /// Represents a granted license ( steam3 subscription ) for one or more games.
             /// </summary>
             public sealed class License
             {
@@ -201,8 +201,8 @@ namespace SteamKit2
             }
         }
 
-// Ambiguous reference in cref attribute: 'SteamApps.GetPackageInfo'. Assuming 'SteamKit2.SteamApps.GetPackageInfo(uint, bool)',
-// but could have also matched other overloads including 'SteamKit2.SteamApps.GetPackageInfo(System.Collections.Generic.IEnumerable<uint>, bool)'.
+// Ambiguous reference in cref attribute: 'SteamApps.GetPackageInfo'. Assuming 'SteamKit2.SteamApps.GetPackageInfo( uint, bool )',
+// but could have also matched other overloads including 'SteamKit2.SteamApps.GetPackageInfo( System.Collections.Generic.IEnumerable<uint>, bool )'.
 #pragma warning disable 0419
 
         /// <summary>
@@ -303,8 +303,8 @@ namespace SteamKit2
             }
         }
 
-        // Ambiguous reference in cref attribute: 'SteamApps.GetPackageInfo'. Assuming 'SteamKit2.SteamApps.GetPackageInfo(uint, bool)',
-        // but could have also matched other overloads including 'SteamKit2.SteamApps.GetPackageInfo(System.Collections.Generic.IEnumerable<uint>, bool)'.
+        // Ambiguous reference in cref attribute: 'SteamApps.GetPackageInfo'. Assuming 'SteamKit2.SteamApps.GetPackageInfo( uint, bool )',
+        // but could have also matched other overloads including 'SteamKit2.SteamApps.GetPackageInfo( System.Collections.Generic.IEnumerable<uint>, bool )'.
 #pragma warning disable 0419
 
         /// <summary>
@@ -712,13 +712,13 @@ namespace SteamKit2
                     this.OnlyPublic = app_info.only_public;
 
                     // We should have all these fields set for the response to a metadata-only request, but guard here just in case.
-                    if (this.SHAHash != null && this.SHAHash.Length > 0 && !string.IsNullOrEmpty(parentResponse.http_host))
+                    if ( this.SHAHash != null && this.SHAHash.Length > 0 && !string.IsNullOrEmpty(parentResponse.http_host ))
                     {
-                        var shaString = BitConverter.ToString(this.SHAHash)
+                        var shaString = BitConverter.ToString( this.SHAHash )
                             .Replace("-", string.Empty)
                             .ToLower();
                         var uriString = string.Format("http://{0}/appinfo/{1}/sha/{2}.txt.gz", parentResponse.http_host, this.ID, shaString);
-                        this.HttpUri = new Uri(uriString);
+                        this.HttpUri = new Uri( uriString );
                     }
 
                     this.UseHttp = this.HttpUri != null && app_info.size >= parentResponse.http_min_size;
@@ -876,7 +876,7 @@ namespace SteamKit2
             {
                 JobID = jobID;
 
-                Result = (EResult)msg.eresult;
+                Result = ( EResult )msg.eresult;
                 Token = msg.token;
                 Expiration = DateUtils.DateTimeFromUnixTime( msg.expiration_time );
             }

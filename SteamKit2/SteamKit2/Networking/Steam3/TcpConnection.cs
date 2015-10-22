@@ -34,7 +34,7 @@ namespace SteamKit2
         {
             netLock = new object();
             connectLock = new object();
-            connectionFree = new ManualResetEvent(true);
+            connectionFree = new ManualResetEvent( true );
         }
 
         public override IPEndPoint CurrentEndPoint
@@ -46,10 +46,10 @@ namespace SteamKit2
         {
             try
             {
-                if (socket.Connected)
+                if ( socket.Connected )
                 {
-                    socket.Shutdown(SocketShutdown.Both);
-                    socket.Disconnect(true);
+                    socket.Shutdown( SocketShutdown.Both );
+                    socket.Disconnect( true );
                 }
             }
             catch
@@ -62,24 +62,24 @@ namespace SteamKit2
 
         private void Release( bool userRequestedDisconnect )
         {
-            lock (netLock)
+            lock ( netLock )
             {
                 cancellationToken.Dispose();
                 cancellationToken = null;
 
-                if (netWriter != null)
+                if ( netWriter != null )
                 {
                     netWriter.Dispose();
                     netWriter = null;
                 }
 
-                if (netReader != null)
+                if ( netReader != null )
                 {
                     netReader.Dispose();
                     netReader = null;
                 }
 
-                if (netStream != null)
+                if ( netStream != null )
                 {
                     netStream.Dispose();
                     netStream = null;
@@ -96,13 +96,13 @@ namespace SteamKit2
             connectionFree.Set();
         }
 
-        private void ConnectCompleted(bool success)
+        private void ConnectCompleted( bool success )
         {
             // Always discard result if our request was cancelled
-            if (cancellationToken.IsCancellationRequested)
+            if ( cancellationToken.IsCancellationRequested )
             {
                 DebugLog.WriteLine("TcpConnection", "Connection request to {0} was cancelled", destination);
-                if (success) Shutdown();
+                if ( success ) Shutdown();
                 Release( userRequestedDisconnect: true );
                 return;
             }
@@ -117,56 +117,56 @@ namespace SteamKit2
 
             try
             {
-                lock (netLock)
+                lock ( netLock )
                 {
-                    netStream = new NetworkStream(socket, false);
-                    netReader = new BinaryReader(netStream);
-                    netWriter = new BinaryWriter(netStream);
+                    netStream = new NetworkStream( socket, false );
+                    netReader = new BinaryReader( netStream );
+                    netWriter = new BinaryWriter( netStream );
                     netFilter = null;
 
-                    netThread = new Thread(NetLoop);
+                    netThread = new Thread( NetLoop );
                     netThread.Name = "TcpConnection Thread";
                 }
 
                 netThread.Start();
 
-                OnConnected(EventArgs.Empty);
+                OnConnected( EventArgs.Empty );
             }
-            catch (Exception ex)
+            catch ( Exception ex )
             {
                 DebugLog.WriteLine("TcpConnection", "Exception while setting up connection to {0}: {1}", destination, ex);
                 Release( userRequestedDisconnect: false );
             }
         }
 
-        private void TryConnect(Object sender)
+        private void TryConnect( Object sender )
         {
-            int timeout = (int)sender;
-            if (cancellationToken.IsCancellationRequested)
+            int timeout = ( int )sender;
+            if ( cancellationToken.IsCancellationRequested )
             {
                 DebugLog.WriteLine("TcpConnection", "Connection to {0} cancelled by user", destination);
                 Release( userRequestedDisconnect: true );
                 return;
             }
 
-            var asyncResult = socket.BeginConnect(destination, null, null);
+            var asyncResult = socket.BeginConnect( destination, null, null );
 
-            if (WaitHandle.WaitAny(new WaitHandle[] { asyncResult.AsyncWaitHandle, cancellationToken.Token.WaitHandle }, timeout) == 0)
+            if ( WaitHandle.WaitAny(new WaitHandle[] { asyncResult.AsyncWaitHandle, cancellationToken.Token.WaitHandle }, timeout ) == 0)
             {
                 try
                 {
-                    socket.EndConnect(asyncResult);
-                    ConnectCompleted(true);
+                    socket.EndConnect( asyncResult );
+                    ConnectCompleted( true );
                 }
-                catch (Exception ex)
+                catch ( Exception ex )
                 {
                     DebugLog.WriteLine("TcpConnection", "Socket exception while completing connection request to {0}: {1}", destination, ex);
-                    ConnectCompleted(false);
+                    ConnectCompleted( false );
                 }
             }
             else
             {
-                ConnectCompleted(false);
+                ConnectCompleted( false );
             }
         }
 
@@ -175,35 +175,35 @@ namespace SteamKit2
         /// </summary>
         /// <param name="endPoint">The end point.</param>
         /// <param name="timeout">Timeout in milliseconds</param>
-        public override void Connect(IPEndPoint endPoint, int timeout)
+        public override void Connect( IPEndPoint endPoint, int timeout )
         {
-            lock (connectLock)
+            lock ( connectLock )
             {
                 DebugLog.WriteLine("TcpConnection", "Connecting to {0}...", endPoint);
                 Disconnect();
 
                 connectionFree.Reset();
 
-                lock (netLock)
+                lock ( netLock )
                 {
-                    Debug.Assert(cancellationToken == null);
+                    Debug.Assert( cancellationToken == null );
                     cancellationToken = new CancellationTokenSource();
 
                     destination = endPoint;
-                    socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                    socket = new Socket( AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp );
 
-                    ThreadPool.QueueUserWorkItem(TryConnect, timeout);
+                    ThreadPool.QueueUserWorkItem( TryConnect, timeout );
                 }
             }
         }
 
         public override void Disconnect()
         {
-            lock (connectLock)
+            lock ( connectLock )
             {
-                lock (netLock)
+                lock ( netLock )
                 {
-                    if (cancellationToken != null)
+                    if ( cancellationToken != null )
                     {
                         cancellationToken.Cancel();
                     }
@@ -228,9 +228,9 @@ namespace SteamKit2
 
                 try
                 {
-                    canRead = socket.Poll(POLL_MS * 1000, SelectMode.SelectRead);
+                    canRead = socket.Poll( POLL_MS * 1000, SelectMode.SelectRead );
                 }
-                catch (SocketException ex)
+                catch ( SocketException ex )
                 {
                     DebugLog.WriteLine("TcpConnection", "Socket exception while polling: {0}", ex);
                     break;
@@ -250,12 +250,12 @@ namespace SteamKit2
                     packData = ReadPacket();
 
                     // decrypt the data off the wire if needed
-                    if (netFilter != null)
+                    if ( netFilter != null )
                     {
-                        packData = netFilter.ProcessIncoming(packData);
+                        packData = netFilter.ProcessIncoming( packData );
                     }
                 }
-                catch (IOException ex)
+                catch ( IOException ex )
                 {
                     DebugLog.WriteLine("TcpConnection", "Socket exception occurred while reading packet: {0}", ex);
                     break;
@@ -263,9 +263,9 @@ namespace SteamKit2
 
                 try
                 {
-                    OnNetMsgReceived(new NetMsgEventArgs(packData, destination));
+                    OnNetMsgReceived( new NetMsgEventArgs(packData, destination ));
                 }
-                catch (Exception ex)
+                catch ( Exception ex )
                 {
                     DebugLog.WriteLine("TcpConnection", "Unexpected exception propogated back to NetLoop: {0}", ex);
                 }
@@ -293,20 +293,20 @@ namespace SteamKit2
                 packetLen = netReader.ReadUInt32();
                 packetMagic = netReader.ReadUInt32();
             }
-            catch (IOException ex)
+            catch ( IOException ex )
             {
                 throw new IOException("Connection lost while reading packet header.", ex);
             }
 
-            if (packetMagic != TcpConnection.MAGIC)
+            if ( packetMagic != TcpConnection.MAGIC )
             {
                 throw new IOException("Got a packet with invalid magic!");
             }
 
             // rest of the packet is the physical data
-            byte[] packData = netReader.ReadBytes((int)packetLen);
+            byte[] packData = netReader.ReadBytes(( int )packetLen);
 
-            if (packData.Length != packetLen)
+            if ( packData.Length != packetLen )
             {
                 throw new IOException("Connection lost while reading packet payload");
             }
@@ -314,11 +314,11 @@ namespace SteamKit2
             return packData;
         }
 
-        public override void Send(IClientMsg clientMsg)
+        public override void Send( IClientMsg clientMsg )
         {
-            lock (netLock)
+            lock ( netLock )
             {
-                if (socket == null || netStream == null)
+                if ( socket == null || netStream == null )
                 {
                     DebugLog.WriteLine("TcpConnection", "Attempting to send client message when not connected: {0}", clientMsg.MsgType);
                     return;
@@ -326,18 +326,18 @@ namespace SteamKit2
 
                 byte[] data = clientMsg.Serialize();
 
-                if (netFilter != null)
+                if ( netFilter != null )
                 {
-                    data = netFilter.ProcessOutgoing(data);
+                    data = netFilter.ProcessOutgoing( data );
                 }
 
                 try
                 {
-                    netWriter.Write((uint)data.Length);
-                    netWriter.Write(TcpConnection.MAGIC);
-                    netWriter.Write(data);
+                    netWriter.Write(( uint )data.Length);
+                    netWriter.Write( TcpConnection.MAGIC );
+                    netWriter.Write( data );
                 }
-                catch (IOException ex)
+                catch ( IOException ex )
                 {
                     DebugLog.WriteLine("TcpConnection", "Socket exception while writing data: {0}", ex);
                 }
@@ -346,18 +346,18 @@ namespace SteamKit2
 
         public override IPAddress GetLocalIP()
         {
-            lock (netLock)
+            lock ( netLock )
             {
-                if (socket == null)
+                if ( socket == null )
                 {
                     return IPAddress.None;
                 }
 
                 try
                 {
-                    return NetHelpers.GetLocalIP(socket);
+                    return NetHelpers.GetLocalIP( socket );
                 }
-                catch (Exception ex)
+                catch ( Exception ex )
                 {
                     DebugLog.WriteLine("TcpConnection", "Socket exception trying to read bound IP: {0}", ex);
                     return IPAddress.None;
@@ -365,11 +365,11 @@ namespace SteamKit2
             }
         }
 
-        public override void SetNetEncryptionFilter(NetFilterEncryption filter)
+        public override void SetNetEncryptionFilter( NetFilterEncryption filter )
         {
-            lock (netLock)
+            lock ( netLock )
             {
-                if (socket != null)
+                if ( socket != null )
                 {
                     netFilter = filter;
                 }

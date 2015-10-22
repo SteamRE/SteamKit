@@ -65,7 +65,7 @@ namespace SteamKit2
             using ( MemoryStream ms = new MemoryStream() )
             using ( BinaryWriter writer = new BinaryWriter( ms ) )
             {
-                uint checkSum = Crc32.Compute(buffer);
+                uint checkSum = Crc32.Compute( buffer );
 
                 byte[] compressed = DeflateBuffer( buffer );
 

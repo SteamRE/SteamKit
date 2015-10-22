@@ -16,10 +16,10 @@ namespace SteamKit2
         private static char Version = 'a';
 
 
-        public static byte[] Decompress(byte[] buffer)
+        public static byte[] Decompress( byte[] buffer )
         {
-            using (MemoryStream ms = new MemoryStream(buffer))
-            using (BinaryReader reader = new BinaryReader(ms))
+            using ( MemoryStream ms = new MemoryStream(buffer ))
+            using ( BinaryReader reader = new BinaryReader(ms ))
             {
                 if (reader.ReadUInt16() != VZipHeader)
                 {
@@ -31,12 +31,12 @@ namespace SteamKit2
                     throw new Exception("Expecting VZip version 'a'");
                 }
 
-                // Sometimes this is a creation timestamp (e.g. for Steam Client VZips).
-                // Sometimes this is a CRC32 (e.g. for depot chunks).
+                // Sometimes this is a creation timestamp ( e.g. for Steam Client VZips ).
+                // Sometimes this is a CRC32 ( e.g. for depot chunks ).
                 /* uint creationTimestampOrSecondaryCRC = */ reader.ReadUInt32();
 
                 byte[] properties = reader.ReadBytes(5);
-                byte[] compressedBuffer = reader.ReadBytes((int)ms.Length - HeaderLength - FooterLength - 5);
+                byte[] compressedBuffer = reader.ReadBytes(( int )ms.Length - HeaderLength - FooterLength - 5);
 
                 uint outputCRC = reader.ReadUInt32();
                 uint sizeDecompressed = reader.ReadUInt32();
@@ -47,15 +47,15 @@ namespace SteamKit2
                 }
 
                 SevenZip.Compression.LZMA.Decoder decoder = new SevenZip.Compression.LZMA.Decoder();
-                decoder.SetDecoderProperties(properties);
+                decoder.SetDecoderProperties( properties );
 
-                using (MemoryStream inputStream = new MemoryStream(compressedBuffer))
-                using (MemoryStream outStream = new MemoryStream((int)sizeDecompressed))
+                using ( MemoryStream inputStream = new MemoryStream(compressedBuffer ))
+                using ( MemoryStream outStream = new MemoryStream((int )sizeDecompressed))
                 {
-                    decoder.Code(inputStream, outStream, compressedBuffer.Length, sizeDecompressed, null);
+                    decoder.Code( inputStream, outStream, compressedBuffer.Length, sizeDecompressed, null );
 
                     var outData = outStream.ToArray();
-                    if (Crc32.Compute(outData) != outputCRC)
+                    if ( Crc32.Compute(outData ) != outputCRC)
                     {
                         throw new InvalidDataException("CRC does not match decompressed data. VZip data may be corrupted.");
                     }
@@ -65,16 +65,16 @@ namespace SteamKit2
             }
         }
 
-        public static byte[] Compress(byte[] buffer)
+        public static byte[] Compress( byte[] buffer )
         {
             using (MemoryStream ms = new MemoryStream())
-            using (BinaryWriter writer = new BinaryWriter(ms))
+            using ( BinaryWriter writer = new BinaryWriter(ms ))
             {
-                byte[] crc = CryptoHelper.CRCHash(buffer);
+                byte[] crc = CryptoHelper.CRCHash( buffer );
 
-                writer.Write(VZipHeader);
-                writer.Write((byte)Version);
-                writer.Write(crc);
+                writer.Write( VZipHeader );
+                writer.Write(( byte )Version);
+                writer.Write( crc );
 
                 Int32 dictionary = 1 << 23;
                 Int32 posStateBits = 2;
@@ -97,27 +97,27 @@ namespace SteamKit2
 
                 object[] properties = 
                 {
-                    (Int32)(dictionary),
-                    (Int32)(posStateBits),
-                    (Int32)(litContextBits),
-                    (Int32)(litPosBits),
-                    (Int32)(algorithm),
-                    (Int32)(numFastBytes),
+                    ( Int32 )( dictionary ),
+                    ( Int32 )( posStateBits ),
+                    ( Int32 )( litContextBits ),
+                    ( Int32 )( litPosBits ),
+                    ( Int32 )( algorithm ),
+                    ( Int32 )( numFastBytes ),
                     "bt4",
                     false
                 };
 
                 SevenZip.Compression.LZMA.Encoder encoder = new SevenZip.Compression.LZMA.Encoder();
-                encoder.SetCoderProperties(propIDs, properties);
+                encoder.SetCoderProperties( propIDs, properties );
                 encoder.WriteCoderProperties(ms);
 
-                using(MemoryStream input = new MemoryStream(buffer)) {
-                    encoder.Code(input, ms, -1, -1, null);
+                using( MemoryStream input = new MemoryStream(buffer )) {
+                    encoder.Code( input, ms, -1, -1, null );
                 }
 
-                writer.Write(crc);
-                writer.Write((uint)buffer.Length);
-                writer.Write(VZipFooter);
+                writer.Write( crc );
+                writer.Write(( uint )buffer.Length);
+                writer.Write( VZipFooter );
 
                 return ms.ToArray();
             }

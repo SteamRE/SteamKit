@@ -49,30 +49,30 @@ namespace SteamKit2
         {
         }
 
-        public BerDecodeException(String message)
-            : base(message)
+        public BerDecodeException( String message )
+            : base( message )
         {
         }
 
-        public BerDecodeException(String message, Exception ex)
-            : base(message, ex)
+        public BerDecodeException( String message, Exception ex )
+            : base( message, ex )
         {
         }
 
-        public BerDecodeException(String message, int position)
-            : base(message)
-        {
-            _position = position;
-        }
-
-        public BerDecodeException(String message, int position, Exception ex)
-            : base(message, ex)
+        public BerDecodeException( String message, int position )
+            : base( message )
         {
             _position = position;
         }
 
-        BerDecodeException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
+        public BerDecodeException( String message, int position, Exception ex )
+            : base( message, ex )
+        {
+            _position = position;
+        }
+
+        BerDecodeException( SerializationInfo info, StreamingContext context )
+            : base( info, context )
         {
             _position = info.GetInt32("Position");
         }
@@ -86,7 +86,7 @@ namespace SteamKit2
         {
             get
             {
-                var sb = new StringBuilder(base.Message);
+                var sb = new StringBuilder( base.Message );
 
                 sb.AppendFormat(" (Position {0}){1}",
                                 _position, Environment.NewLine);
@@ -95,10 +95,10 @@ namespace SteamKit2
             }
         }
 
-        [SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
-        public override void GetObjectData(SerializationInfo info, StreamingContext context)
+        [SecurityPermission( SecurityAction.Demand, SerializationFormatter = true )]
+        public override void GetObjectData( SerializationInfo info, StreamingContext context )
         {
-            base.GetObjectData(info, context);
+            base.GetObjectData( info, context );
             info.AddValue("Position", _position);
         }
     }
@@ -108,42 +108,42 @@ namespace SteamKit2
     {
             readonly AsnParser _parser;
 
-            public AsnKeyParser(String pathname)
+            public AsnKeyParser( String pathname )
             {
-                using (var reader = new BinaryReader(
-                  new FileStream(pathname, FileMode.Open, FileAccess.Read)))
+                using ( var reader = new BinaryReader(
+                  new FileStream(pathname, FileMode.Open, FileAccess.Read )))
                 {
-                    var info = new FileInfo(pathname);
+                    var info = new FileInfo( pathname );
 
-                    _parser = new AsnParser(reader.ReadBytes((int)info.Length));
+                    _parser = new AsnParser( reader.ReadBytes((int )info.Length));
                 }
             }
 
-            public AsnKeyParser(ICollection<byte> contents)
+            public AsnKeyParser( ICollection<byte> contents )
             {
-                _parser = new AsnParser(contents);
+                _parser = new AsnParser( contents );
             }
 
-            public static byte[] TrimLeadingZero(byte[] values)
+            public static byte[] TrimLeadingZero( byte[] values )
             {
                 byte[] r;
-                if ((0x00 == values[0]) && (values.Length > 1))
+                if ((0x00 == values[0]) && ( values.Length > 1 ))
                 {
                     r = new byte[values.Length - 1];
-                    Array.Copy(values, 1, r, 0, values.Length - 1);
+                    Array.Copy( values, 1, r, 0, values.Length - 1 );
                 }
                 else
                 {
                     r = new byte[values.Length];
-                    Array.Copy(values, r, values.Length);
+                    Array.Copy( values, r, values.Length );
                 }
 
                 return r;
             }
 
-            public static bool EqualOid(byte[] first, byte[] second)
+            public static bool EqualOid( byte[] first, byte[] second )
             {
-                if (first.Length != second.Length)
+                if ( first.Length != second.Length )
                 {
                     return false;
                 }
@@ -176,8 +176,8 @@ namespace SteamKit2
                 {
                     var sb = new StringBuilder("Incorrect Sequence Size. ");
                     sb.AppendFormat("Specified: {0}, Remaining: {1}",
-                                    length.ToString(CultureInfo.InvariantCulture),
-                                    _parser.RemainingBytes().ToString(CultureInfo.InvariantCulture));
+                                    length.ToString( CultureInfo.InvariantCulture ),
+                                    _parser.RemainingBytes().ToString( CultureInfo.InvariantCulture ));
                     throw new BerDecodeException(sb.ToString(), position);
                 }
 
@@ -190,8 +190,8 @@ namespace SteamKit2
                 {
                     var sb = new StringBuilder("Incorrect AlgorithmIdentifier Size. ");
                     sb.AppendFormat("Specified: {0}, Remaining: {1}",
-                                    length.ToString(CultureInfo.InvariantCulture),
-                                    _parser.RemainingBytes().ToString(CultureInfo.InvariantCulture));
+                                    length.ToString( CultureInfo.InvariantCulture ),
+                                    _parser.RemainingBytes().ToString( CultureInfo.InvariantCulture ));
                     throw new BerDecodeException(sb.ToString(), position);
                 }
 
@@ -200,7 +200,7 @@ namespace SteamKit2
                 // Grab the OID
                 byte[] value = _parser.NextOID();
                 byte[] oid = { 0x2a, 0x86, 0x48, 0x86, 0xf7, 0x0d, 0x01, 0x01, 0x01 };
-                if (!EqualOid(value, oid))
+                if (!EqualOid( value, oid ))
                 {
                     throw new BerDecodeException("Expected OID 1.2.840.113549.1.1.1", position);
                 }
@@ -226,8 +226,8 @@ namespace SteamKit2
                 {
                     var sb = new StringBuilder("Incorrect PublicKey Size. ");
                     sb.AppendFormat("Specified: {0}, Remaining: {1}",
-                                    length.ToString(CultureInfo.InvariantCulture),
-                                    (_parser.RemainingBytes()).ToString(CultureInfo.InvariantCulture));
+                                    length.ToString( CultureInfo.InvariantCulture ),
+                                    (_parser.RemainingBytes()).ToString( CultureInfo.InvariantCulture ));
                     throw new BerDecodeException(sb.ToString(), position);
                 }
 
@@ -240,8 +240,8 @@ namespace SteamKit2
                 {
                     var sb = new StringBuilder("Incorrect RSAPublicKey Size. ");
                     sb.AppendFormat("Specified: {0}, Remaining: {1}",
-                                    length.ToString(CultureInfo.InvariantCulture),
-                                    _parser.RemainingBytes().ToString(CultureInfo.InvariantCulture));
+                                    length.ToString( CultureInfo.InvariantCulture ),
+                                    _parser.RemainingBytes().ToString( CultureInfo.InvariantCulture ));
                     throw new BerDecodeException(sb.ToString(), position);
                 }
 
@@ -269,8 +269,8 @@ namespace SteamKit2
                 {
                     var sb = new StringBuilder("Incorrect Sequence Size. ");
                     sb.AppendFormat("Specified: {0}, Remaining: {1}",
-                                    length.ToString(CultureInfo.InvariantCulture),
-                                    _parser.RemainingBytes().ToString(CultureInfo.InvariantCulture));
+                                    length.ToString( CultureInfo.InvariantCulture ),
+                                    _parser.RemainingBytes().ToString( CultureInfo.InvariantCulture ));
                     throw new BerDecodeException(sb.ToString(), position);
                 }
 
@@ -283,8 +283,8 @@ namespace SteamKit2
                 {
                     var sb = new StringBuilder("Incorrect AlgorithmIdentifier Size. ");
                     sb.AppendFormat("Specified: {0}, Remaining: {1}",
-                                    length.ToString(CultureInfo.InvariantCulture),
-                                    _parser.RemainingBytes().ToString(CultureInfo.InvariantCulture));
+                                    length.ToString( CultureInfo.InvariantCulture ),
+                                    _parser.RemainingBytes().ToString( CultureInfo.InvariantCulture ));
                     throw new BerDecodeException(sb.ToString(), position);
                 }
 
@@ -294,7 +294,7 @@ namespace SteamKit2
                 // Grab the OID
                 byte[] value = _parser.NextOID();
                 byte[] oid = { 0x2a, 0x86, 0x48, 0xce, 0x38, 0x04, 0x01 };
-                if (!EqualOid(value, oid))
+                if (!EqualOid( value, oid ))
                 {
                     throw new BerDecodeException("Expected OID 1.2.840.10040.4.1", position);
                 }
@@ -309,8 +309,8 @@ namespace SteamKit2
                 {
                     var sb = new StringBuilder("Incorrect DSS-Params Size. ");
                     sb.AppendFormat("Specified: {0}, Remaining: {1}",
-                                    length.ToString(CultureInfo.InvariantCulture),
-                                    _parser.RemainingBytes().ToString(CultureInfo.InvariantCulture));
+                                    length.ToString( CultureInfo.InvariantCulture ),
+                                    _parser.RemainingBytes().ToString( CultureInfo.InvariantCulture ));
                     throw new BerDecodeException(sb.ToString(), position);
                 }
 
@@ -336,10 +336,10 @@ namespace SteamKit2
             readonly int _initialCount;
             readonly List<byte> _octets;
 
-            public AsnParser(ICollection<byte> values)
+            public AsnParser( ICollection<byte> values )
             {
-                _octets = new List<byte>(values.Count);
-                _octets.AddRange(values);
+                _octets = new List<byte>( values.Count );
+                _octets.AddRange( values );
 
                 _initialCount = _octets.Count;
             }
@@ -365,17 +365,17 @@ namespace SteamKit2
                 {
                     byte b = GetNextOctet();
 
-                    if (b == (b & 0x7f))
+                    if ( b == (b & 0x7f ))
                     {
                         return b;
                     }
                     int i = b & 0x7f;
 
-                    if (i > 4)
+                    if ( i > 4 )
                     {
                         var sb = new StringBuilder("Invalid Length Encoding. ");
                         sb.AppendFormat("Length uses {0} _octets",
-                                        i.ToString(CultureInfo.InvariantCulture));
+                                        i.ToString( CultureInfo.InvariantCulture ));
                         throw new BerDecodeException(sb.ToString(), position);
                     }
 
@@ -387,7 +387,7 @@ namespace SteamKit2
                         length |= GetNextOctet();
                     }
                 }
-                catch (ArgumentOutOfRangeException ex)
+                catch ( ArgumentOutOfRangeException ex )
                 {
                     throw new BerDecodeException("Error Parsing Key", position, ex);
                 }
@@ -412,15 +412,15 @@ namespace SteamKit2
                     {
                         var sb = new StringBuilder("Incorrect Size. ");
                         sb.AppendFormat("Specified: {0}, Remaining: {1}",
-                                        length.ToString(CultureInfo.InvariantCulture),
-                                        RemainingBytes().ToString(CultureInfo.InvariantCulture));
+                                        length.ToString( CultureInfo.InvariantCulture ),
+                                        RemainingBytes().ToString( CultureInfo.InvariantCulture ));
                         throw new BerDecodeException(sb.ToString(), position);
                     }
 
-                    return GetOctets(length);
+                    return GetOctets( length );
                 }
 
-                catch (ArgumentOutOfRangeException ex)
+                catch ( ArgumentOutOfRangeException ex )
                 {
                     throw new BerDecodeException("Error Parsing Key", position, ex);
                 }
@@ -434,8 +434,8 @@ namespace SteamKit2
                 {
                     var sb = new StringBuilder("Incorrect Size. ");
                     sb.AppendFormat("Specified: {0}, Remaining: {1}",
-                                    1.ToString(CultureInfo.InvariantCulture),
-                                    RemainingBytes().ToString(CultureInfo.InvariantCulture));
+                                    1.ToString( CultureInfo.InvariantCulture ),
+                                    RemainingBytes().ToString( CultureInfo.InvariantCulture ));
                     throw new BerDecodeException(sb.ToString(), position);
                 }
 
@@ -444,7 +444,7 @@ namespace SteamKit2
                 return b;
             }
 
-            public byte[] GetOctets(int octetCount)
+            public byte[] GetOctets( int octetCount )
             {
                 int position = CurrentPosition();
 
@@ -452,8 +452,8 @@ namespace SteamKit2
                 {
                     var sb = new StringBuilder("Incorrect Size. ");
                     sb.AppendFormat("Specified: {0}, Remaining: {1}",
-                                    octetCount.ToString(CultureInfo.InvariantCulture),
-                                    RemainingBytes().ToString(CultureInfo.InvariantCulture));
+                                    octetCount.ToString( CultureInfo.InvariantCulture ),
+                                    RemainingBytes().ToString( CultureInfo.InvariantCulture ));
                     throw new BerDecodeException(sb.ToString(), position);
                 }
 
@@ -461,11 +461,11 @@ namespace SteamKit2
 
                 try
                 {
-                    _octets.CopyTo(0, values, 0, octetCount);
-                    _octets.RemoveRange(0, octetCount);
+                    _octets.CopyTo( 0, values, 0, octetCount );
+                    _octets.RemoveRange( 0, octetCount );
                 }
 
-                catch (ArgumentOutOfRangeException ex)
+                catch ( ArgumentOutOfRangeException ex )
                 {
                     throw new BerDecodeException("Error Parsing Key", position, ex);
                 }
@@ -485,26 +485,26 @@ namespace SteamKit2
                 try
                 {
                     byte b = GetNextOctet();
-                    if (0x05 != b)
+                    if ( 0x05 != b )
                     {
                         var sb = new StringBuilder("Expected Null. ");
-                        sb.AppendFormat("Specified Identifier: {0}", b.ToString(CultureInfo.InvariantCulture));
+                        sb.AppendFormat("Specified Identifier: {0}", b.ToString( CultureInfo.InvariantCulture ));
                         throw new BerDecodeException(sb.ToString(), position);
                     }
 
                     // Next octet must be 0
                     b = GetNextOctet();
-                    if (0x00 != b)
+                    if ( 0x00 != b )
                     {
                         var sb = new StringBuilder("Null has non-zero size. ");
-                        sb.AppendFormat("Size: {0}", b.ToString(CultureInfo.InvariantCulture));
+                        sb.AppendFormat("Size: {0}", b.ToString( CultureInfo.InvariantCulture ));
                         throw new BerDecodeException(sb.ToString(), position);
                     }
 
                     return 0;
                 }
 
-                catch (ArgumentOutOfRangeException ex)
+                catch ( ArgumentOutOfRangeException ex )
                 {
                     throw new BerDecodeException("Error Parsing Key", position, ex);
                 }
@@ -522,11 +522,11 @@ namespace SteamKit2
                 try
                 {
                     byte b = GetNextOctet();
-                    if (0x30 != b)
+                    if ( 0x30 != b )
                     {
                         var sb = new StringBuilder("Expected Sequence. ");
                         sb.AppendFormat("Specified Identifier: {0}",
-                                        b.ToString(CultureInfo.InvariantCulture));
+                                        b.ToString( CultureInfo.InvariantCulture ));
                         throw new BerDecodeException(sb.ToString(), position);
                     }
 
@@ -535,15 +535,15 @@ namespace SteamKit2
                     {
                         var sb = new StringBuilder("Incorrect Sequence Size. ");
                         sb.AppendFormat("Specified: {0}, Remaining: {1}",
-                                        length.ToString(CultureInfo.InvariantCulture),
-                                        RemainingBytes().ToString(CultureInfo.InvariantCulture));
+                                        length.ToString( CultureInfo.InvariantCulture ),
+                                        RemainingBytes().ToString( CultureInfo.InvariantCulture ));
                         throw new BerDecodeException(sb.ToString(), position);
                     }
 
                     return length;
                 }
 
-                catch (ArgumentOutOfRangeException ex)
+                catch ( ArgumentOutOfRangeException ex )
                 {
                     throw new BerDecodeException("Error Parsing Key", position, ex);
                 }
@@ -561,10 +561,10 @@ namespace SteamKit2
                 try
                 {
                     byte b = GetNextOctet();
-                    if (0x04 != b)
+                    if ( 0x04 != b )
                     {
                         var sb = new StringBuilder("Expected Octet String. ");
-                        sb.AppendFormat("Specified Identifier: {0}", b.ToString(CultureInfo.InvariantCulture));
+                        sb.AppendFormat("Specified Identifier: {0}", b.ToString( CultureInfo.InvariantCulture ));
                         throw new BerDecodeException(sb.ToString(), position);
                     }
 
@@ -573,15 +573,15 @@ namespace SteamKit2
                     {
                         var sb = new StringBuilder("Incorrect Octet String Size. ");
                         sb.AppendFormat("Specified: {0}, Remaining: {1}",
-                                        length.ToString(CultureInfo.InvariantCulture),
-                                        RemainingBytes().ToString(CultureInfo.InvariantCulture));
+                                        length.ToString( CultureInfo.InvariantCulture ),
+                                        RemainingBytes().ToString( CultureInfo.InvariantCulture ));
                         throw new BerDecodeException(sb.ToString(), position);
                     }
 
                     return length;
                 }
 
-                catch (ArgumentOutOfRangeException ex)
+                catch ( ArgumentOutOfRangeException ex )
                 {
                     throw new BerDecodeException("Error Parsing Key", position, ex);
                 }
@@ -599,10 +599,10 @@ namespace SteamKit2
                 try
                 {
                     byte b = GetNextOctet();
-                    if (0x03 != b)
+                    if ( 0x03 != b )
                     {
                         var sb = new StringBuilder("Expected Bit String. ");
-                        sb.AppendFormat("Specified Identifier: {0}", b.ToString(CultureInfo.InvariantCulture));
+                        sb.AppendFormat("Specified Identifier: {0}", b.ToString( CultureInfo.InvariantCulture ));
                         throw new BerDecodeException(sb.ToString(), position);
                     }
 
@@ -614,7 +614,7 @@ namespace SteamKit2
                     _octets.RemoveAt(0);
                     length--;
 
-                    if (0x00 != b)
+                    if ( 0x00 != b )
                     {
                         throw new BerDecodeException("The first octet of BitString must be 0", position);
                     }
@@ -622,7 +622,7 @@ namespace SteamKit2
                     return length;
                 }
 
-                catch (ArgumentOutOfRangeException ex)
+                catch ( ArgumentOutOfRangeException ex )
                 {
                     throw new BerDecodeException("Error Parsing Key", position, ex);
                 }
@@ -640,10 +640,10 @@ namespace SteamKit2
                 try
                 {
                     byte b = GetNextOctet();
-                    if (0x02 != b)
+                    if ( 0x02 != b )
                     {
                         var sb = new StringBuilder("Expected Integer. ");
-                        sb.AppendFormat("Specified Identifier: {0}", b.ToString(CultureInfo.InvariantCulture));
+                        sb.AppendFormat("Specified Identifier: {0}", b.ToString( CultureInfo.InvariantCulture ));
                         throw new BerDecodeException(sb.ToString(), position);
                     }
 
@@ -652,15 +652,15 @@ namespace SteamKit2
                     {
                         var sb = new StringBuilder("Incorrect Integer Size. ");
                         sb.AppendFormat("Specified: {0}, Remaining: {1}",
-                                        length.ToString(CultureInfo.InvariantCulture),
-                                        RemainingBytes().ToString(CultureInfo.InvariantCulture));
+                                        length.ToString( CultureInfo.InvariantCulture ),
+                                        RemainingBytes().ToString( CultureInfo.InvariantCulture ));
                         throw new BerDecodeException(sb.ToString(), position);
                     }
 
-                    return GetOctets(length);
+                    return GetOctets( length );
                 }
 
-                catch (ArgumentOutOfRangeException ex)
+                catch ( ArgumentOutOfRangeException ex )
                 {
                     throw new BerDecodeException("Error Parsing Key", position, ex);
                 }
@@ -673,11 +673,11 @@ namespace SteamKit2
                 try
                 {
                     byte b = GetNextOctet();
-                    if (0x06 != b)
+                    if ( 0x06 != b )
                     {
                         var sb = new StringBuilder("Expected Object Identifier. ");
                         sb.AppendFormat("Specified Identifier: {0}",
-                                        b.ToString(CultureInfo.InvariantCulture));
+                                        b.ToString( CultureInfo.InvariantCulture ));
                         throw new BerDecodeException(sb.ToString(), position);
                     }
 
@@ -686,8 +686,8 @@ namespace SteamKit2
                     {
                         var sb = new StringBuilder("Incorrect Object Identifier Size. ");
                         sb.AppendFormat("Specified: {0}, Remaining: {1}",
-                                        length.ToString(CultureInfo.InvariantCulture),
-                                        RemainingBytes().ToString(CultureInfo.InvariantCulture));
+                                        length.ToString( CultureInfo.InvariantCulture ),
+                                        RemainingBytes().ToString( CultureInfo.InvariantCulture ));
                         throw new BerDecodeException(sb.ToString(), position);
                     }
 
@@ -702,7 +702,7 @@ namespace SteamKit2
                     return values;
                 }
 
-                catch (ArgumentOutOfRangeException ex)
+                catch ( ArgumentOutOfRangeException ex )
                 {
                     throw new BerDecodeException("Error Parsing Key", position, ex);
                 }

@@ -258,7 +258,7 @@ namespace SteamKit2
         {
             msg.SteamID = steamClient.SteamID;
 
-            DebugLog.WriteLine( "UFSClient", "Sent -> EMsg: {0} {1}", msg.MsgType, msg.IsProto ? "(Proto)" : "" );
+            DebugLog.WriteLine( "UFSClient", "Sent -> EMsg: {0} {1}", msg.MsgType, msg.IsProto ? "( Proto )" : "" );
 
             // we'll swallow any network failures here because they will be thrown later
             // on the network thread, and that will lead to a disconnect callback
@@ -289,7 +289,7 @@ namespace SteamKit2
         {
             var packetMsg = CMClient.GetPacketMsg( e.Data );
 
-            DebugLog.WriteLine( "UFSClient", "<- Recv'd EMsg: {0} ({1}) {2}", packetMsg.MsgType, ( int )packetMsg.MsgType, packetMsg.IsProto ? "(Proto)" : "" );
+            DebugLog.WriteLine( "UFSClient", "<- Recv'd EMsg: {0} ({1}) {2}", packetMsg.MsgType, ( int )packetMsg.MsgType, packetMsg.IsProto ? "( Proto )" : "" );
 
             var msgDispatch = new Dictionary<EMsg, Action<IPacketMsg>>
             {

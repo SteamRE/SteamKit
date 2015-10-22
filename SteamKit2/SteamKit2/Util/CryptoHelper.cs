@@ -149,7 +149,7 @@ namespace SteamKit2
                     cryptedIv = aesTransform.TransformFinalBlock( iv, 0, iv.Length );
                 }
 
-                // encrypt input plaintext with CBC using the generated (plaintext) IV and the provided key
+                // encrypt input plaintext with CBC using the generated ( plaintext ) IV and the provided key
                 aes.Mode = CipherMode.CBC;
                 aes.Padding = PaddingMode.PKCS7;
 
@@ -232,12 +232,12 @@ namespace SteamKit2
             byte[] key, hash;
             using(SHA256 sha256 = SHA256Managed.Create())
             {
-                byte[] password_bytes = Encoding.UTF8.GetBytes(password);
-                key = sha256.ComputeHash(password_bytes);
+                byte[] password_bytes = Encoding.UTF8.GetBytes( password );
+                key = sha256.ComputeHash( password_bytes );
             }
-            using(HMACSHA1 hmac = new HMACSHA1(key))
+            using( HMACSHA1 hmac = new HMACSHA1(key ))
             {
-                hash = hmac.ComputeHash(input, 0, 32);
+                hash = hmac.ComputeHash( input, 0, 32 );
             }
 
             for (int i = 32; i < input.Length; i++)
@@ -245,9 +245,9 @@ namespace SteamKit2
                     return null;
 
             byte[] encrypted = new byte[32];
-            Array.Copy(input, 0, encrypted, 0, 32);
+            Array.Copy( input, 0, encrypted, 0, 32 );
 
-            return CryptoHelper.SymmetricDecrypt(encrypted, key);
+            return CryptoHelper.SymmetricDecrypt( encrypted, key );
         }
 
         /// <summary>

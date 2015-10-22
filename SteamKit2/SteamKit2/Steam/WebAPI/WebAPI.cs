@@ -38,7 +38,7 @@ namespace SteamKit2
             /// Gets or sets the timeout value in milliseconds for any web requests made to the WebAPI.
             /// </summary>
             /// <value>
-            /// The timeout value in milliseconds. The default value is 100,000 milliseconds (100 seconds).
+            /// The timeout value in milliseconds. The default value is 100,000 milliseconds ( 100 seconds ).
             /// </value>
             public int Timeout { get; set; }
 
@@ -117,13 +117,13 @@ namespace SteamKit2
             /// <param name="binder">
             /// Provides information about the dynamic operation.
             /// The binder.Name property provides the name of the member on which the dynamic operation is performed.
-            /// For example, for the statement sampleObject.SampleMethod(100), where sampleObject is an instance of the
+            /// For example, for the statement sampleObject.SampleMethod( 100 ), where sampleObject is an instance of the
             /// class derived from the <see cref="T:System.Dynamic.DynamicObject"/> class, binder.Name returns "SampleMethod".
             /// The binder.IgnoreCase property specifies whether the member name is case-sensitive.
             /// </param>
             /// <param name="args">
             /// The arguments that are passed to the object member during the invoke operation. For example,
-            /// for the statement sampleObject.SampleMethod(100), where sampleObject is derived from the
+            /// for the statement sampleObject.SampleMethod( 100 ), where sampleObject is derived from the
             /// <see cref="T:System.Dynamic.DynamicObject"/> class, the first argument to <paramref name="args"/> is equal to 100.
             /// </param>
             /// <param name="result">The result of the member invocation.</param>
@@ -318,7 +318,7 @@ namespace SteamKit2
                 task.ContinueWith( t =>
                 {
                     // we need to observe the exception in this OnlyOnFaulted continuation if our task throws an exception but we're not able to observe it
-                    // (such as when waiting for the task times out, and an exception is thrown later)
+                    // ( such as when waiting for the task times out, and an exception is thrown later )
                     // see: http://msdn.microsoft.com/en-us/library/dd997415.aspx
 
                     DebugLog.WriteLine( "WebAPI", "Threw an unobserved exception: {0}", t.Exception );
@@ -345,13 +345,13 @@ namespace SteamKit2
             /// <param name="binder">
             /// Provides information about the dynamic operation.
             /// The binder.Name property provides the name of the member on which the dynamic operation is performed.
-            /// For example, for the statement sampleObject.SampleMethod(100), where sampleObject is an instance of the
+            /// For example, for the statement sampleObject.SampleMethod( 100 ), where sampleObject is an instance of the
             /// class derived from the <see cref="T:System.Dynamic.DynamicObject"/> class, binder.Name returns "SampleMethod".
             /// The binder.IgnoreCase property specifies whether the member name is case-sensitive.
             /// </param>
             /// <param name="args">
             /// The arguments that are passed to the object member during the invoke operation. For example,
-            /// for the statement sampleObject.SampleMethod(100), where sampleObject is derived from the
+            /// for the statement sampleObject.SampleMethod( 100 ), where sampleObject is derived from the
             /// <see cref="T:System.Dynamic.DynamicObject"/> class, the first argument to <paramref name="args"/> is equal to 100.
             /// </param>
             /// <param name="result">The result of the member invocation.</param>

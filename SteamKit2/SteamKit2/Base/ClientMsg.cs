@@ -105,7 +105,7 @@ namespace SteamKit2
         public ClientMsgProtobuf( IPacketMsg msg )
             : this( msg.MsgType )
         {
-            DebugLog.Assert(msg.IsProto, "ClientMsgProtobuf", "ClientMsgProtobuf used for non-proto message!");
+            DebugLog.Assert( msg.IsProto, "ClientMsgProtobuf", "ClientMsgProtobuf used for non-proto message!" );
 
             Deserialize( msg.GetData() );
         }

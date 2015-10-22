@@ -242,14 +242,14 @@ namespace SteamKit2
         {
             var response = new ClientMsgProtobuf<CMsgCREEnumeratePublishedFilesResponse>( packetMsg );
 
-            var callback = new PublishedFilesCallback(response.TargetJobID, response.Body);
+            var callback = new PublishedFilesCallback( response.TargetJobID, response.Body );
             Client.PostCallback( callback );
         }
         void HandleEnumUserPublishedFiles( IPacketMsg packetMsg )
         {
             var response = new ClientMsgProtobuf<CMsgClientUCMEnumerateUserPublishedFilesResponse>( packetMsg );
 
-            var callback = new UserPublishedFilesCallback(response.TargetJobID, response.Body);
+            var callback = new UserPublishedFilesCallback( response.TargetJobID, response.Body );
             Client.PostCallback( callback );
         }
         void HandleEnumUserSubscribedFiles( IPacketMsg packetMsg )
@@ -263,7 +263,7 @@ namespace SteamKit2
         {
             var response = new ClientMsgProtobuf<CMsgClientUCMEnumeratePublishedFilesByUserActionResponse>( packetMsg );
 
-            var callback = new UserActionPublishedFilesCallback(response.TargetJobID, response.Body);
+            var callback = new UserActionPublishedFilesCallback( response.TargetJobID, response.Body );
             Client.PostCallback( callback );
         }
         #endregion

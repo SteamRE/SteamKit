@@ -449,7 +449,7 @@ namespace SteamKit2
         public static KeyValue LoadAsBinary( string path )
         {
             var kv = LoadFromFile( path, true );
-            if (kv == null)
+            if ( kv == null )
             {
                 return null;
             }
@@ -467,7 +467,7 @@ namespace SteamKit2
         /// <returns><c>true</c> if the load was successful, or <c>false</c> on failure.</returns>
         public static bool TryLoadAsBinary( string path, out KeyValue keyValue )
         {
-            keyValue = LoadFromFile(path, true);
+            keyValue = LoadFromFile( path, true );
             return keyValue != null;
         }
 
@@ -643,7 +643,7 @@ namespace SteamKit2
         /// <param name="asBinary">If set to <c>true</c>, saves this instance as binary.</param>
         public void SaveToStream( Stream stream, bool asBinary )
         {
-            if (asBinary)
+            if ( asBinary )
             {
                 RecursiveSaveBinaryToStream( stream );
             }
@@ -662,7 +662,7 @@ namespace SteamKit2
         void RecursiveSaveBinaryToStreamCore( Stream f )
         {
             // Only supported types ATM:
-            // 1. KeyValue with children (no value itself)
+            // 1. KeyValue with children ( no value itself )
             // 2. String KeyValue
             if ( Children.Any() )
             {
@@ -812,9 +812,9 @@ namespace SteamKit2
                         }
                 }
 
-                if (parent != null)
+                if ( parent != null )
                 {
-                    parent.Children.Add(current);
+                    parent.Children.Add( current );
                 }
                 current = new KeyValue();
             }

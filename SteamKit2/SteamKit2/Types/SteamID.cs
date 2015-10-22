@@ -660,7 +660,7 @@ namespace SteamKit2
                     break;
 
                 case EAccountType.Individual:
-                    renderInstance = (AccountInstance != DesktopInstance);
+                    renderInstance = ( AccountInstance != DesktopInstance );
                     break;
             }
 

@@ -54,15 +54,15 @@ namespace SteamKit2
         /// <param name="appid">The app id of the game.</param>
         /// <param name="filename">The path to the file being requested.</param>
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="SingleFileInfoCallback"/>.</returns>
-        public JobID GetSingleFileInfo(uint appid, string filename)
+        public JobID GetSingleFileInfo( uint appid, string filename )
         {
-            var request = new ClientMsgProtobuf<CMsgClientUFSGetSingleFileInfo>(EMsg.ClientUFSGetSingleFileInfo);
+            var request = new ClientMsgProtobuf<CMsgClientUFSGetSingleFileInfo>( EMsg.ClientUFSGetSingleFileInfo );
             request.SourceJobID = Client.GetNextJobID();
 
             request.Body.app_id = appid;
             request.Body.file_name = filename;
 
-            this.Client.Send(request);
+            this.Client.Send( request );
 
             return request.SourceJobID;
         }
@@ -74,15 +74,15 @@ namespace SteamKit2
         /// <param name="appid">The app id of the game.</param>
         /// <param name="filename">The path to the file being requested.</param>
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="ShareFileCallback"/>.</returns>
-        public JobID ShareFile(uint appid, string filename)
+        public JobID ShareFile( uint appid, string filename )
         {
-            var request = new ClientMsgProtobuf<CMsgClientUFSShareFile>(EMsg.ClientUFSShareFile);
+            var request = new ClientMsgProtobuf<CMsgClientUFSShareFile>( EMsg.ClientUFSShareFile );
             request.SourceJobID = Client.GetNextJobID();
 
             request.Body.app_id = appid;
             request.Body.file_name = filename;
 
-            this.Client.Send(request);
+            this.Client.Send( request );
 
             return request.SourceJobID;
         }
@@ -111,24 +111,24 @@ namespace SteamKit2
         {
             var infoResponse = new ClientMsgProtobuf<CMsgClientUFSGetUGCDetailsResponse>( packetMsg );
 
-            var callback = new UGCDetailsCallback(infoResponse.TargetJobID, infoResponse.Body);
+            var callback = new UGCDetailsCallback( infoResponse.TargetJobID, infoResponse.Body );
             this.Client.PostCallback( callback );
         }
 
-        void HandleSingleFileInfoResponse(IPacketMsg packetMsg)
+        void HandleSingleFileInfoResponse( IPacketMsg packetMsg )
         {
             var infoResponse = new ClientMsgProtobuf<CMsgClientUFSGetSingleFileInfoResponse>( packetMsg );
 
-            var callback = new SingleFileInfoCallback(infoResponse.TargetJobID, infoResponse.Body);
-            this.Client.PostCallback(callback);
+            var callback = new SingleFileInfoCallback( infoResponse.TargetJobID, infoResponse.Body );
+            this.Client.PostCallback( callback );
         }
 
-        void HandleShareFileResponse(IPacketMsg packetMsg)
+        void HandleShareFileResponse( IPacketMsg packetMsg )
         {
-            var shareResponse = new ClientMsgProtobuf<CMsgClientUFSShareFileResponse>(packetMsg);
+            var shareResponse = new ClientMsgProtobuf<CMsgClientUFSShareFileResponse>( packetMsg );
 
-            var callback = new ShareFileCallback(shareResponse.TargetJobID, shareResponse.Body);
-            this.Client.PostCallback(callback);
+            var callback = new ShareFileCallback( shareResponse.TargetJobID, shareResponse.Body );
+            this.Client.PostCallback( callback );
         }
         #endregion
 

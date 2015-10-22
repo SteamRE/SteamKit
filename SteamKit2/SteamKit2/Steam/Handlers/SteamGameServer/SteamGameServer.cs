@@ -182,27 +182,27 @@ namespace SteamKit2
         /// Results are returned in a <see cref="StatusReplyCallback"/> callback.
         /// </summary>
         /// <param name="details">A <see cref="SteamGameServer.StatusDetails"/> object containing the server's status.</param>
-        public void SendStatus(StatusDetails details)
+        public void SendStatus( StatusDetails details )
         {
-            if (details == null)
+            if ( details == null )
             {
                 throw new ArgumentNullException("details");
             }
 
-            if (details.Address != null && details.Address.AddressFamily != AddressFamily.InterNetwork)
+            if ( details.Address != null && details.Address.AddressFamily != AddressFamily.InterNetwork )
             {
                 throw new ArgumentException("Only IPv4 addresses are supported.");
             }
 
-            var status = new ClientMsgProtobuf<CMsgGSServerType>(EMsg.GSServerType);
+            var status = new ClientMsgProtobuf<CMsgGSServerType>( EMsg.GSServerType );
             status.Body.app_id_served = details.AppID;
-            status.Body.flags = (uint)details.ServerFlags;
+            status.Body.flags = ( uint )details.ServerFlags;
             status.Body.game_dir = details.GameDirectory;
             status.Body.game_port = details.Port;
             status.Body.game_query_port = details.QueryPort;
             status.Body.game_version = details.Version;
 
-            if (details.Address != null)
+            if ( details.Address != null )
             {
                 status.Body.game_ip_address = NetHelpers.GetIPAddress( details.Address );
             }

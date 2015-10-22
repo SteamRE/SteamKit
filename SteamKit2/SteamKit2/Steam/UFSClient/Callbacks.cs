@@ -150,7 +150,7 @@ namespace SteamKit2
             {
                 JobID = jobID;
 
-                Result = (EResult)body.eresult;
+                Result = ( EResult )body.eresult;
                 ShaHash = body.sha_file;
             }
         }

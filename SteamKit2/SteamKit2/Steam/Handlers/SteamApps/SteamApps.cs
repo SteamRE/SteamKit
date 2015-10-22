@@ -17,8 +17,8 @@ namespace SteamKit2
     public sealed partial class SteamApps : ClientMsgHandler
     {
 
-// Ambiguous reference in cref attribute: 'SteamApps.GetPackageInfo'. Assuming 'SteamKit2.SteamApps.GetPackageInfo(uint, bool)',
-// but could have also matched other overloads including 'SteamKit2.SteamApps.GetPackageInfo(System.Collections.Generic.IEnumerable<uint>, bool)'.
+// Ambiguous reference in cref attribute: 'SteamApps.GetPackageInfo'. Assuming 'SteamKit2.SteamApps.GetPackageInfo( uint, bool )',
+// but could have also matched other overloads including 'SteamKit2.SteamApps.GetPackageInfo( System.Collections.Generic.IEnumerable<uint>, bool )'.
 #pragma warning disable 0419
 
         /// <summary>
@@ -55,8 +55,8 @@ namespace SteamKit2
             }
         }
 
-        // Ambiguous reference in cref attribute: 'SteamApps.PICSGetProductInfo'. Assuming 'SteamKit2.SteamApps.PICSGetProductInfo(uint?, uint?, bool, bool)',
-        // but could have also matched other overloads including 'SteamKit2.SteamApps.PICSGetProductInfo(System.Collections.Generic.IEnumerable<SteamKit2.SteamApps.PICSRequest>, System.Collections.Generic.IEnumerable<SteamKit2.SteamApps.PICSRequest>, bool)'.
+        // Ambiguous reference in cref attribute: 'SteamApps.PICSGetProductInfo'. Assuming 'SteamKit2.SteamApps.PICSGetProductInfo( uint?, uint?, bool, bool )',
+        // but could have also matched other overloads including 'SteamKit2.SteamApps.PICSGetProductInfo( System.Collections.Generic.IEnumerable<SteamKit2.SteamApps.PICSRequest>, System.Collections.Generic.IEnumerable<SteamKit2.SteamApps.PICSRequest>, bool )'.
 #pragma warning disable 0419
 
         /// <summary>
@@ -351,7 +351,7 @@ namespace SteamKit2
         /// <param name="onlyPublic">Whether to send only public information.</param>
         /// <param name="metaDataOnly">Whether to send only meta data.</param>
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="PICSProductInfoCallback"/>.</returns>
-        public JobID PICSGetProductInfo(uint? app, uint? package, bool onlyPublic = true, bool metaDataOnly = false)
+        public JobID PICSGetProductInfo( uint? app, uint? package, bool onlyPublic = true, bool metaDataOnly = false )
         {
             List<uint> apps = new List<uint>();
             List<uint> packages = new List<uint>();
@@ -423,15 +423,15 @@ namespace SteamKit2
         /// <param name="app">App id requested.</param>
         /// <param name="host_name">CDN host name being requested.</param>
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="CDNAuthTokenCallback"/>.</returns>
-        public JobID GetCDNAuthToken(uint app, string host_name)
+        public JobID GetCDNAuthToken( uint app, string host_name )
         {
-            var request = new ClientMsgProtobuf<CMsgClientGetCDNAuthToken>(EMsg.ClientGetCDNAuthToken);
+            var request = new ClientMsgProtobuf<CMsgClientGetCDNAuthToken>( EMsg.ClientGetCDNAuthToken );
             request.SourceJobID = Client.GetNextJobID();
 
             request.Body.app_id = app;
             request.Body.host_name = host_name;
 
-            this.Client.Send(request);
+            this.Client.Send( request );
 
             return request.SourceJobID;
         }
@@ -488,21 +488,21 @@ namespace SteamKit2
         {
             var ticketResponse = new ClientMsgProtobuf<CMsgClientGetAppOwnershipTicketResponse>( packetMsg );
 
-            var callback = new AppOwnershipTicketCallback(ticketResponse.TargetJobID, ticketResponse.Body);
+            var callback = new AppOwnershipTicketCallback( ticketResponse.TargetJobID, ticketResponse.Body );
             this.Client.PostCallback( callback );
         }
         void HandleAppInfoResponse( IPacketMsg packetMsg )
         {
             var infoResponse = new ClientMsgProtobuf<CMsgClientAppInfoResponse>( packetMsg );
 
-            var callback = new AppInfoCallback(infoResponse.TargetJobID, infoResponse.Body);
+            var callback = new AppInfoCallback( infoResponse.TargetJobID, infoResponse.Body );
             this.Client.PostCallback( callback );
         }
         void HandlePackageInfoResponse( IPacketMsg packetMsg )
         {
             var response = new ClientMsgProtobuf<CMsgClientPackageInfoResponse>( packetMsg );
 
-            var callback = new PackageInfoCallback(response.TargetJobID, response.Body);
+            var callback = new PackageInfoCallback( response.TargetJobID, response.Body );
             this.Client.PostCallback( callback );
         }
         void HandleAppInfoChanges( IPacketMsg packetMsg )
@@ -516,7 +516,7 @@ namespace SteamKit2
         {
             var keyResponse = new ClientMsgProtobuf<CMsgClientGetDepotDecryptionKeyResponse>( packetMsg );
 
-            var callback = new DepotKeyCallback(keyResponse.TargetJobID, keyResponse.Body);
+            var callback = new DepotKeyCallback( keyResponse.TargetJobID, keyResponse.Body );
             this.Client.PostCallback( callback );
         }
         void HandleGameConnectTokens( IPacketMsg packetMsg )
@@ -551,7 +551,7 @@ namespace SteamKit2
         {
             var tokensResponse = new ClientMsgProtobuf<CMsgClientPICSAccessTokenResponse>( packetMsg );
 
-            var callback = new PICSTokensCallback(tokensResponse.TargetJobID, tokensResponse.Body);
+            var callback = new PICSTokensCallback( tokensResponse.TargetJobID, tokensResponse.Body );
             this.Client.PostCallback( callback );
         }
         void HandlePICSChangesSinceResponse( IPacketMsg packetMsg )

@@ -63,7 +63,7 @@ namespace SteamKit2
 
                 TotalSize = ds.ReadUInt64();
 
-                Flags = (EDepotFileFlag)ds.ReadUInt32();
+                Flags = ( EDepotFileFlag )ds.ReadUInt32();
 
                 HashContent = ds.ReadBytes( 20 );
                 HashFileName = ds.ReadBytes( 20 );
@@ -113,17 +113,17 @@ namespace SteamKit2
         {
         }
 
-        public Steam3Manifest(byte[] data)
+        public Steam3Manifest( byte[] data )
         {
-            Deserialize(data);
+            Deserialize( data );
         }
 
-        internal Steam3Manifest(BinaryReader data)
+        internal Steam3Manifest( BinaryReader data )
         {
-            Deserialize(data);
+            Deserialize( data );
         }
 
-        void Deserialize(byte[] data)
+        void Deserialize( byte[] data )
         {
             using ( var ms = new MemoryStream( data ) )
             using ( var br = new BinaryReader( ms ) )
@@ -136,7 +136,7 @@ namespace SteamKit2
         {
             Magic = ds.ReadUInt32();
 
-            if (Magic != MAGIC)
+            if ( Magic != MAGIC )
             {
                 throw new InvalidDataException("data is not a valid steam3 manifest: incorrect magic.");
             }
@@ -171,9 +171,9 @@ namespace SteamKit2
 
                 FileMapping mapping = new FileMapping();
                 mapping.Deserialize(ds);
-                Mapping.Add(mapping);
+                Mapping.Add( mapping );
 
-                i -= (uint)(ds.BaseStream.Position - start);
+                i -= ( uint )( ds.BaseStream.Position - start );
             }
         }
 

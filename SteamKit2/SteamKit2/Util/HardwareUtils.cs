@@ -111,7 +111,7 @@ namespace SteamKit2
                 return base.GetDiskId();
             }
 
-            uint index = (uint)activePartition["DiskIndex"];
+            uint index = ( uint )activePartition["DiskIndex"];
 
             var bootableDisk = WmiQuery(
                 @"SELECT SerialNumber FROM Win32_DiskDrive
@@ -123,7 +123,7 @@ namespace SteamKit2
                 return base.GetDiskId();
             }
 
-            string serialNumber = (string)bootableDisk["SerialNumber"];
+            string serialNumber = ( string )bootableDisk["SerialNumber"];
 
             return Encoding.UTF8.GetBytes( serialNumber );
         }
@@ -371,7 +371,7 @@ namespace SteamKit2
         {
             // the aug 25th 2015 CM update made well-formed machine MessageObjects required for logon
             // this was flipped off shortly after the update rolled out, likely due to linux steamclients running on distros without a way to build a machineid
-            // so while a valid MO isn't currently (as of aug 25th) required, they could be in the future and we'll abide by The Valve Law now
+            // so while a valid MO isn't currently ( as of aug 25th ) required, they could be in the future and we'll abide by The Valve Law now
 
             var machineId = new MachineID();
 
