@@ -7021,6 +7021,24 @@ namespace SteamKit2.Internal
       get { return _callparameter; }
       set { _callparameter = value; }
     }
+
+    private bool _ping_only = default(bool);
+    [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"ping_only", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool ping_only
+    {
+      get { return _ping_only; }
+      set { _ping_only = value; }
+    }
+
+    private uint _max_outstanding_calls = default(uint);
+    [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"max_outstanding_calls", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint max_outstanding_calls
+    {
+      get { return _max_outstanding_calls; }
+      set { _max_outstanding_calls = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -7193,6 +7211,69 @@ namespace SteamKit2.Internal
     {
       get { return _internal_result; }
       set { _internal_result = value; }
+    }
+
+    private uint _current_count = default(uint);
+    [global::ProtoBuf.ProtoMember(15, IsRequired = false, Name=@"current_count", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint current_count
+    {
+      get { return _current_count; }
+      set { _current_count = value; }
+    }
+
+    private uint _last_call_handle = default(uint);
+    [global::ProtoBuf.ProtoMember(16, IsRequired = false, Name=@"last_call_handle", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint last_call_handle
+    {
+      get { return _last_call_handle; }
+      set { _last_call_handle = value; }
+    }
+
+    private uint _last_call_module_crc = default(uint);
+    [global::ProtoBuf.ProtoMember(17, IsRequired = false, Name=@"last_call_module_crc", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint last_call_module_crc
+    {
+      get { return _last_call_module_crc; }
+      set { _last_call_module_crc = value; }
+    }
+
+    private byte[] _last_call_sysid_routing = null;
+    [global::ProtoBuf.ProtoMember(18, IsRequired = false, Name=@"last_call_sysid_routing", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public byte[] last_call_sysid_routing
+    {
+      get { return _last_call_sysid_routing; }
+      set { _last_call_sysid_routing = value; }
+    }
+
+    private uint _last_ecallresult = default(uint);
+    [global::ProtoBuf.ProtoMember(19, IsRequired = false, Name=@"last_ecallresult", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint last_ecallresult
+    {
+      get { return _last_ecallresult; }
+      set { _last_ecallresult = value; }
+    }
+
+    private uint _last_callissue_delta = default(uint);
+    [global::ProtoBuf.ProtoMember(20, IsRequired = false, Name=@"last_callissue_delta", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint last_callissue_delta
+    {
+      get { return _last_callissue_delta; }
+      set { _last_callissue_delta = value; }
+    }
+
+    private uint _last_callcomplete_delta = default(uint);
+    [global::ProtoBuf.ProtoMember(21, IsRequired = false, Name=@"last_callcomplete_delta", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint last_callcomplete_delta
+    {
+      get { return _last_callcomplete_delta; }
+      set { _last_callcomplete_delta = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

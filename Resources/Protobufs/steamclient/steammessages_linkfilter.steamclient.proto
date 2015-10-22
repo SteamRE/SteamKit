@@ -1,5 +1,6 @@
-import "google/protobuf/descriptor.proto";
 import "steammessages_unified_base.steamclient.proto";
+
+option cc_generic_services = true;
 
 message CCommunity_GetLinkFilterHashPrefixes_Request {
 	optional uint32 hit_type = 1 [(description) = "The retrieved hits will be filtered to this type."];

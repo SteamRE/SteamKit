@@ -9,7 +9,6 @@
 #pragma warning disable 1591
 
 // Generated from: steammessages_inventory.steamclient.proto
-// Note: requires additional types generated from: google/protobuf/descriptor.proto
 // Note: requires additional types generated from: steammessages_unified_base.steamclient.proto
 namespace SteamKit2.Unified.Internal
 {
@@ -284,15 +283,6 @@ namespace SteamKit2.Unified.Internal
       get { return _modifiedsince; }
       set { _modifiedsince = value; }
     }
-
-    private bool _includeworkshop = default(bool);
-    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"includeworkshop", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
-    public bool includeworkshop
-    {
-      get { return _includeworkshop; }
-      set { _includeworkshop = value; }
-    }
     private readonly global::System.Collections.Generic.List<ulong> _itemdefids = new global::System.Collections.Generic.List<ulong>();
     [global::ProtoBuf.ProtoMember(4, Name=@"itemdefids", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public global::System.Collections.Generic.List<ulong> itemdefids
@@ -307,6 +297,24 @@ namespace SteamKit2.Unified.Internal
       get { return _workshopids; }
     }
   
+
+    private string _currency = "";
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"currency", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string currency
+    {
+      get { return _currency; }
+      set { _currency = value; }
+    }
+
+    private uint _cache_max_age_seconds = (uint)0;
+    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"cache_max_age_seconds", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue((uint)0)]
+    public uint cache_max_age_seconds
+    {
+      get { return _cache_max_age_seconds; }
+      set { _cache_max_age_seconds = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
