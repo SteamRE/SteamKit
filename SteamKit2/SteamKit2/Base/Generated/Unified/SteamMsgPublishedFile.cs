@@ -9,7 +9,6 @@
 #pragma warning disable 1591
 
 // Generated from: steammessages_publishedfile.steamclient.proto
-// Note: requires additional types generated from: google/protobuf/descriptor.proto
 // Note: requires additional types generated from: steammessages_unified_base.steamclient.proto
 namespace SteamKit2.Unified.Internal
 {
@@ -1262,7 +1261,10 @@ namespace SteamKit2.Unified.Internal
       k_PFFSS_RejectedForSale = 3,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_PFFSS_NoLongerForSale", Value=4)]
-      k_PFFSS_NoLongerForSale = 4
+      k_PFFSS_NoLongerForSale = 4,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_PFFSS_TentativeApproval", Value=5)]
+      k_PFFSS_TentativeApproval = 5
     }
   
     private global::ProtoBuf.IExtension extensionObject;

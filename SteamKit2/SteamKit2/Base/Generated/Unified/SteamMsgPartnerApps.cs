@@ -9,7 +9,6 @@
 #pragma warning disable 1591
 
 // Generated from: steammessages_partnerapps.steamclient.proto
-// Note: requires additional types generated from: google/protobuf/descriptor.proto
 // Note: requires additional types generated from: steammessages_unified_base.steamclient.proto
 namespace SteamKit2.Unified.Internal
 {
