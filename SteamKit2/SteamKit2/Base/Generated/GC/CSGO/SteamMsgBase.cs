@@ -10,7 +10,7 @@
 
 // Generated from: steammessages.proto
 // Note: requires additional types generated from: google/protobuf/descriptor.proto
-namespace SteamKit2.GC.TF2.Internal
+namespace SteamKit2.GC.CSGO.Internal
 {
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgProtoBufHeader")]
   public partial class CMsgProtoBufHeader : global::ProtoBuf.IExtensible
@@ -2089,69 +2089,6 @@ namespace SteamKit2.GC.TF2.Internal
       get { return _steam_level; }
       set { _steam_level = value; }
     }
-
-    private uint _friend_count = default(uint);
-    [global::ProtoBuf.ProtoMember(24, IsRequired = false, Name=@"friend_count", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint friend_count
-    {
-      get { return _friend_count; }
-      set { _friend_count = value; }
-    }
-
-    private uint _account_creation_time = default(uint);
-    [global::ProtoBuf.ProtoMember(25, IsRequired = false, Name=@"account_creation_time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint account_creation_time
-    {
-      get { return _account_creation_time; }
-      set { _account_creation_time = value; }
-    }
-
-    private bool _is_steamguard_enabled = default(bool);
-    [global::ProtoBuf.ProtoMember(27, IsRequired = false, Name=@"is_steamguard_enabled", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
-    public bool is_steamguard_enabled
-    {
-      get { return _is_steamguard_enabled; }
-      set { _is_steamguard_enabled = value; }
-    }
-
-    private bool _is_phone_verified = default(bool);
-    [global::ProtoBuf.ProtoMember(28, IsRequired = false, Name=@"is_phone_verified", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
-    public bool is_phone_verified
-    {
-      get { return _is_phone_verified; }
-      set { _is_phone_verified = value; }
-    }
-
-    private bool _is_two_factor_auth_enabled = default(bool);
-    [global::ProtoBuf.ProtoMember(29, IsRequired = false, Name=@"is_two_factor_auth_enabled", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
-    public bool is_two_factor_auth_enabled
-    {
-      get { return _is_two_factor_auth_enabled; }
-      set { _is_two_factor_auth_enabled = value; }
-    }
-
-    private uint _two_factor_enabled_time = default(uint);
-    [global::ProtoBuf.ProtoMember(30, IsRequired = false, Name=@"two_factor_enabled_time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint two_factor_enabled_time
-    {
-      get { return _two_factor_enabled_time; }
-      set { _two_factor_enabled_time = value; }
-    }
-
-    private uint _phone_verification_time = default(uint);
-    [global::ProtoBuf.ProtoMember(31, IsRequired = false, Name=@"phone_verification_time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint phone_verification_time
-    {
-      get { return _phone_verification_time; }
-      set { _phone_verification_time = value; }
-    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -2797,15 +2734,6 @@ namespace SteamKit2.GC.TF2.Internal
       get { return _client_msg_ranges; }
     }
   
-
-    private CMsgGCMsgSetOptions.GCSQLVersion _gcsql_version = CMsgGCMsgSetOptions.GCSQLVersion.GCSQL_VERSION_BASELINE;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"gcsql_version", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(CMsgGCMsgSetOptions.GCSQLVersion.GCSQL_VERSION_BASELINE)]
-    public CMsgGCMsgSetOptions.GCSQLVersion gcsql_version
-    {
-      get { return _gcsql_version; }
-      set { _gcsql_version = value; }
-    }
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"MessageRange")]
   public partial class MessageRange : global::ProtoBuf.IExtensible
   {
@@ -2845,17 +2773,6 @@ namespace SteamKit2.GC.TF2.Internal
             
       [global::ProtoBuf.ProtoEnum(Name=@"NOTIFY_VAC_ACTION", Value=3)]
       NOTIFY_VAC_ACTION = 3
-    }
-  
-    [global::ProtoBuf.ProtoContract(Name=@"GCSQLVersion", EnumPassthru=true)]
-    public enum GCSQLVersion
-    {
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"GCSQL_VERSION_BASELINE", Value=1)]
-      GCSQL_VERSION_BASELINE = 1,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"GCSQL_VERSION_BOOLTYPE", Value=2)]
-      GCSQL_VERSION_BOOLTYPE = 2
     }
   
     private global::ProtoBuf.IExtension extensionObject;

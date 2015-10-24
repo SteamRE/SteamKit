@@ -379,7 +379,7 @@ namespace SteamKit2.Internal
 		// Static size: 4
 		public int HeaderLength { get; set; }
 		// Static size: 0
-		public SteamKit2.GC.Internal.CMsgProtoBufHeader Proto { get; set; }
+		public SteamKit2.Internal.CMsgProtoBufHeader Proto { get; set; }
 
 		public MsgGCHdrProtoBuf()
 		{
