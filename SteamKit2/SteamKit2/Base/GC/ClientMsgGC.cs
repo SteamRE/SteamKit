@@ -7,7 +7,7 @@
 using System.IO;
 using ProtoBuf;
 using SteamKit2.Internal;
-using CMsgProtoBufHeader = SteamKit2.GC.Dota.Internal.CMsgProtoBufHeader;
+using CMsgProtoBufHeader = SteamKit2.GC.Internal.CMsgProtoBufHeader;
 using MsgGCHdr = SteamKit2.Internal.MsgGCHdr;
 using MsgGCHdrProtoBuf = SteamKit2.Internal.MsgGCHdrProtoBuf;
 

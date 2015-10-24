@@ -95,6 +95,7 @@
     <Compile Include="Base\Generated\GC\Dota\SteamMsgGCEcon.cs" />
     <Compile Include="Base\Generated\GC\Dota\SteamMsgGCSDK.cs" />
     <Compile Include="Base\Generated\GC\Dota\SteamMsgGCSystem.cs" />
+    <Compile Include="Base\Generated\GC\MsgBaseGC.cs" />
     <Compile Include="Base\Generated\GC\TF2\MsgGC.cs" />
     <Compile Include="Base\Generated\GC\TF2\SteamMsgBase.cs" />
     <Compile Include="Base\Generated\GC\TF2\SteamMsgGC.cs" />
