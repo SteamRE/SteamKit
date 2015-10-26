@@ -3,6 +3,9 @@ using System.IO;
 using SteamKit2;
 using Xunit;
 using System.Text;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 
 namespace Tests
 {
@@ -498,6 +501,62 @@ namespace Tests
             }
 
             Assert.Equal( expected, text );
+        }
+        
+        [Fact]
+        public void KeyValuesDictTest()
+        {
+            TimeSpan tVal = new TimeSpan(TimeSpan.TicksPerDay * 60);
+            KeyValue root = new KeyValue("root"),
+                value1 = new KeyValue("ByteTest", byte.MaxValue.ToString()),
+                value2 = new KeyValue("TimeSpanTest", tVal.ToString());
+
+            root.Add(value1);
+            root.Add(value2);
+
+            Assert.NotEqual(value1.CompareTo(value2), 0);
+            Assert.Equal(root.CompareTo(root), 0);
+            Assert.True(root.Equals(root));
+            Assert.False(root.Equals(value1));
+
+            Assert.True(root.Contains(value1));
+            Assert.True(root.Contains(value2));
+
+            Assert.Equal(root.Keys.Count, 2);
+            Assert.Equal(root.Values.Count, root.Keys.Count);
+
+            TimeSpan tVal2;
+            Assert.True(TimeSpan.TryParse(value2.Value, out tVal2));
+            Assert.Equal(tVal2, tVal);
+            Assert.Equal(((IConvertible)value1).ToUInt16(CultureInfo.CurrentCulture), byte.MaxValue);
+
+            Assert.True(root.ContainsKey(value1.Name));
+
+            KeyValue value3 = new KeyValue("LOL?", "5");
+
+            Assert.NotEqual(root[value2.Name], value3);
+            Assert.Equal(root[value3.Name], KeyValue.Invalid);
+            root.Add(value2.Name, value3);
+            Assert.Equal(root[value2.Name], value3);
+            Assert.NotEqual(root[value2.Name], value2);
+
+            Assert.False(root.Remove(value2));
+            Assert.True(root.Remove(value3));
+            Assert.False(root.Remove(value3));
+
+            Assert.Equal(root.Keys.Count, 1);
+            Assert.Equal(root.Values.Count, root.Keys.Count);
+
+            KeyValue test;
+            Assert.True(root.TryGetValue(value1.Name, out test));
+            Assert.Equal(test, value1);
+            Assert.False(root.TryGetValue(value2.Name, out test));
+            Assert.Equal(test, KeyValue.Invalid);
+
+            root.Clear();
+
+            Assert.Equal(root.Keys.Count, 0);
+            Assert.Equal(root.Values.Count, root.Keys.Count);
         }
 
         const string TestObjectHex = "00546573744F626A65637400016B65790076616C7565000808";
