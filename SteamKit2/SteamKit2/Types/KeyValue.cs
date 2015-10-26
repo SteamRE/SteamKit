@@ -322,7 +322,7 @@ namespace SteamKit2
         {
             get
             {
-                return Children.ConvertAll( c => c.Name );
+                return this.Children.ConvertAll( c => c.Name );
             }
         }
 
@@ -333,7 +333,7 @@ namespace SteamKit2
         {
             get
             {
-                return Children;
+                return this.Children;
             }
         }
 
@@ -344,7 +344,7 @@ namespace SteamKit2
         {
             get
             {
-                return Children.Count;
+                return this.Children.Count;
             }
         }
 
@@ -498,7 +498,7 @@ namespace SteamKit2
         /// <returns><c>true</c> if child exists, <c>false</c> otherwise.</returns>
         public bool ContainsKey( string key )
         {
-            return Children.Any( c => string.Equals( c.Name, key, StringComparison.OrdinalIgnoreCase ) );
+            return this.Children.Any( c => string.Equals( c.Name, key, StringComparison.OrdinalIgnoreCase ) );
         }
 
         /// <summary>
@@ -530,9 +530,9 @@ namespace SteamKit2
         /// <returns><c>true</c> if removed or doesn't exist, <c>false</c> otherwise.</returns>
         public bool Remove( string key )
         {
-            var value = Children.FirstOrDefault( c => string.Equals( c.Name, key, StringComparison.OrdinalIgnoreCase ) );
+            var value = this.Children.FirstOrDefault( c => string.Equals( c.Name, key, StringComparison.OrdinalIgnoreCase ) );
             if ( value != null )
-                return Children.Remove( value );
+                return this.Children.Remove( value );
             return false;
         }
 
@@ -544,7 +544,7 @@ namespace SteamKit2
         /// <returns><c>true</c> if value found, <c>false</c> otherwise.</returns>
         public bool TryGetValue( string key, out KeyValue value )
         {
-            value = Children.FirstOrDefault( c => string.Equals( c.Name, key, StringComparison.OrdinalIgnoreCase ) );
+            value = this.Children.FirstOrDefault( c => string.Equals( c.Name, key, StringComparison.OrdinalIgnoreCase ) );
             if ( value == null )
                 value = Invalid;
             return value != Invalid;
@@ -576,7 +576,7 @@ namespace SteamKit2
         /// </summary>
         public void Clear()
         {
-            Children.Clear();
+            this.Children.Clear();
         }
 
         /// <summary>
@@ -586,7 +586,7 @@ namespace SteamKit2
         /// <returns><c>true</c> if match found, <c>false</c> otherwise.</returns>
         public bool Contains( KeyValuePair<string, KeyValue> item )
         {
-            return Children.Any( c => c.Equals( item ) );
+            return this.Children.Any( c => c.Equals( item ) );
         }
 
         /// <summary>
@@ -599,7 +599,7 @@ namespace SteamKit2
         /// <param name="arrayIndex">The zero-based index in array at which copying begins.</param>
         public void CopyTo( KeyValuePair<string, KeyValue>[] array, int arrayIndex )
         {
-            Children.ConvertAll<KeyValuePair<string, KeyValue>>( c => c ).CopyTo( array, arrayIndex );
+            this.Children.ConvertAll<KeyValuePair<string, KeyValue>>( c => c ).CopyTo( array, arrayIndex );
         }
 
         /// <summary>
@@ -609,9 +609,9 @@ namespace SteamKit2
         /// <returns><c>true</c> if removed or doesn't exist, <c>false</c> otherwise.</returns>
         public bool Remove( KeyValuePair<string, KeyValue> item )
         {
-            var value = Children.FirstOrDefault( c => c.Equals( item ) );
+            var value = this.Children.FirstOrDefault( c => c.Equals( item ) );
             if ( value != null )
-                return Children.Remove( value );
+                return this.Children.Remove( value );
             return false;
         }
 
@@ -621,7 +621,7 @@ namespace SteamKit2
         /// <returns>A <see cref="IEnumerator{T}"/> that can be used to iterate through the collection.</returns>
         public IEnumerator<KeyValuePair<string, KeyValue>> GetEnumerator()
         {
-            return Children.ConvertAll<KeyValuePair<string, KeyValue>>( c => c ).GetEnumerator();
+            return this.Children.ConvertAll<KeyValuePair<string, KeyValue>>( c => c ).GetEnumerator();
         }
 
         /// <summary>
@@ -630,7 +630,7 @@ namespace SteamKit2
         /// <returns>A <see cref="IEnumerator"/> that can be used to iterate through the collection.</returns>
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return Children.ConvertAll<KeyValuePair<string, KeyValue>>( c => c ).GetEnumerator();
+            return this.Children.ConvertAll<KeyValuePair<string, KeyValue>>( c => c ).GetEnumerator();
         }
 
         /// <summary>
@@ -640,9 +640,9 @@ namespace SteamKit2
         /// <returns><c>true</c> if equal, <c>false</c> otherwise.</returns>
         public bool Equals( KeyValue other )
         {
-            return string.Equals( Name, other.Name, StringComparison.OrdinalIgnoreCase ) &&
-                string.Equals( Value, other.Value, StringComparison.OrdinalIgnoreCase ) &&
-                Children.OrderBy( c => c ).SequenceEqual( other.Children.OrderBy( c => c ) );
+            return string.Equals( this.Name, other.Name, StringComparison.OrdinalIgnoreCase ) &&
+                string.Equals( this.Value, other.Value, StringComparison.OrdinalIgnoreCase ) &&
+                this.Children.OrderBy( c => c ).SequenceEqual( other.Children.OrderBy( c => c ) );
         }
 
         /// <summary>
@@ -654,12 +654,12 @@ namespace SteamKit2
         {
             if ( other == null )
                 return -1;
-            else if ( !string.Equals( Name, other.Name, StringComparison.OrdinalIgnoreCase ) )
-                return string.Compare( Name, other.Name, true );
-            else if ( !string.Equals( Value, other.Value, StringComparison.OrdinalIgnoreCase ) )
-                return string.Compare( Value, other.Value, true );
-            else if ( !Children.OrderBy( c => c ).SequenceEqual( other.Children.OrderBy( c => c ) ) )
-                return Children.OrderBy( c => c ).SequenceCompare( other.Children.OrderBy( c => c ) );
+            else if ( !string.Equals( this.Name, other.Name, StringComparison.OrdinalIgnoreCase ) )
+                return string.Compare( this.Name, other.Name, true );
+            else if ( !string.Equals( this.Value, other.Value, StringComparison.OrdinalIgnoreCase ) )
+                return string.Compare( this.Value, other.Value, true );
+            else if ( !this.Children.OrderBy( c => c ).SequenceEqual( other.Children.OrderBy( c => c ) ) )
+                return this.Children.OrderBy( c => c ).SequenceCompare( other.Children.OrderBy( c => c ) );
             return 0;
         }
 
