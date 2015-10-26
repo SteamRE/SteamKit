@@ -8,8 +8,6 @@
 //------------------------------------------------------------------------------
 #pragma warning disable 1591
 
-using SteamKit2.GC.Internal;
-   
 // Generated from: dota_gcmessages_server.proto
 // Note: requires additional types generated from: steammessages.proto
 // Note: requires additional types generated from: dota_gcmessages_common.proto
@@ -284,15 +282,6 @@ namespace SteamKit2.GC.Dota.Internal
       set { _game_state = value; }
     }
 
-    private uint _tower_state = default(uint);
-    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"tower_state", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint tower_state
-    {
-      get { return _tower_state; }
-      set { _tower_state = value; }
-    }
-
     private bool _first_blood_happened = default(bool);
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"first_blood_happened", DataFormat = global::ProtoBuf.DataFormat.Default)]
     [global::System.ComponentModel.DefaultValue(default(bool))]
@@ -347,13 +336,22 @@ namespace SteamKit2.GC.Dota.Internal
       set { _dire_kills = value; }
     }
 
-    private uint _barracks_state = default(uint);
-    [global::ProtoBuf.ProtoMember(13, IsRequired = false, Name=@"barracks_state", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint barracks_state
+    private int _radiant_lead = default(int);
+    [global::ProtoBuf.ProtoMember(14, IsRequired = false, Name=@"radiant_lead", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int radiant_lead
     {
-      get { return _barracks_state; }
-      set { _barracks_state = value; }
+      get { return _radiant_lead; }
+      set { _radiant_lead = value; }
+    }
+
+    private uint _building_state = default(uint);
+    [global::ProtoBuf.ProtoMember(15, IsRequired = false, Name=@"building_state", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint building_state
+    {
+      get { return _building_state; }
+      set { _building_state = value; }
     }
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Player")]
   public partial class Player : global::ProtoBuf.IExtensible
@@ -429,20 +427,17 @@ namespace SteamKit2.GC.Dota.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"PLAYER_DISCONNECTED_NOCONSEQUENCES", Value=7)]
       PLAYER_DISCONNECTED_NOCONSEQUENCES = 7,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"TOWER_STATE", Value=9)]
-      TOWER_STATE = 9,
-            
       [global::ProtoBuf.ProtoEnum(Name=@"GAMESTATE_TIMEOUT", Value=10)]
       GAMESTATE_TIMEOUT = 10,
             
       [global::ProtoBuf.ProtoEnum(Name=@"MASS_DISCONNECT", Value=11)]
       MASS_DISCONNECT = 11,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"BARRACKS_STATE", Value=12)]
-      BARRACKS_STATE = 12,
-            
       [global::ProtoBuf.ProtoEnum(Name=@"KILLS", Value=13)]
-      KILLS = 13
+      KILLS = 13,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"BUILDING_STATE", Value=14)]
+      BUILDING_STATE = 14
     }
   
     private global::ProtoBuf.IExtension extensionObject;

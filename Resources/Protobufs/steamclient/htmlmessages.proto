@@ -589,3 +589,8 @@ message CMsgClearAllCookies {
 	optional uint32 browser_handle = 1;
 }
 
+message CMsgScreenDPI {
+	optional uint32 browser_handle = 1;
+	optional float dpi_scaling = 2;
+}
+

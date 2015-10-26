@@ -1,4 +1,19 @@
 ------------------------------------------------------------------------------
+v 1.6.5			Oct 17, 2015
+------------------------------------------------------------------------------
+* Added inventory service unified protobufs.
+* Added the ability to specify the client's prefered Cell ID in `LogOnDetails.CellID`. (pr #148)
+* `KeyValue` objects can now be serialized (both text and binary) to streams with `SaveToStream`.
+* Fixed an issue with `CDNClient` session initialization involving sessionid values. 
+* Added setter for `KeyValue`'s indexer operator.
+* Added `ELeaderboardDisplayType` and various leaderboard retrieval functions to `SteamUserStats`. (pr #153)
+* Implemented machine id support for logon for when the Steam servers inevitably require it. (pr #152)
+* Fixed case where logging on with a different account could lead to an anonymous logon instead. (bug #160)
+* `SteamFriends.SetPersonaName` now supports `JobID`s and has a new associated callback: `PersonaChangeCallback`
+* Updated game-related GC messages and protobufs.
+
+
+------------------------------------------------------------------------------
 v 1.6.4			Aug 03, 2015
 ------------------------------------------------------------------------------
 * Added smarter server selection logic.

@@ -110,24 +110,23 @@ message CMsgConnectedPlayers {
 		PLAYER_HERO = 5;
 		PLAYER_DISCONNECTED_CONSEQUENCES = 6;
 		PLAYER_DISCONNECTED_NOCONSEQUENCES = 7;
-		TOWER_STATE = 9;
 		GAMESTATE_TIMEOUT = 10;
 		MASS_DISCONNECT = 11;
-		BARRACKS_STATE = 12;
 		KILLS = 13;
+		BUILDING_STATE = 14;
 	}
 
 	repeated .CMsgConnectedPlayers.Player connected_players = 1;
 	repeated .CMsgConnectedPlayers.Player disconnected_players = 7;
 	optional .DOTA_GameState game_state = 2 [default = DOTA_GAMERULES_STATE_INIT];
-	optional uint32 tower_state = 4;
 	optional bool first_blood_happened = 6;
 	optional bool legacy_mass_disconnect = 9;
 	optional .CMsgPoorNetworkConditions poor_network_conditions = 10;
 	optional .CMsgConnectedPlayers.SendReason send_reason = 8 [default = INVALID];
 	optional uint32 radiant_kills = 11;
 	optional uint32 dire_kills = 12;
-	optional uint32 barracks_state = 13;
+	optional int32 radiant_lead = 14;
+	optional uint32 building_state = 15;
 }
 
 message CMsgGameServerInfo {

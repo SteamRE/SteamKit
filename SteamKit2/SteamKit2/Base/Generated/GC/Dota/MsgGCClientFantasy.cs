@@ -8,8 +8,6 @@
 //------------------------------------------------------------------------------
 #pragma warning disable 1591
 
-using SteamKit2.GC.Internal;
-   
 // Generated from: dota_gcmessages_client_fantasy.proto
 // Note: requires additional types generated from: dota_gcmessages_common.proto
 namespace SteamKit2.GC.Dota.Internal
@@ -24,6 +22,13 @@ namespace SteamKit2.GC.Dota.Internal
     public global::System.Collections.Generic.List<CMsgGCPlayerInfo.PlayerInfo> player_infos
     {
       get { return _player_infos; }
+    }
+  
+    private readonly global::System.Collections.Generic.List<CMsgGCPlayerInfo.RegionLeaderboard> _leaderboards = new global::System.Collections.Generic.List<CMsgGCPlayerInfo.RegionLeaderboard>();
+    [global::ProtoBuf.ProtoMember(2, Name=@"leaderboards", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CMsgGCPlayerInfo.RegionLeaderboard> leaderboards
+    {
+      get { return _leaderboards; }
     }
   
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"PlayerInfo")]
@@ -121,6 +126,32 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _is_pro; }
       set { _is_pro = value; }
     }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"RegionLeaderboard")]
+  public partial class RegionLeaderboard : global::ProtoBuf.IExtensible
+  {
+    public RegionLeaderboard() {}
+    
+
+    private uint _division = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"division", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint division
+    {
+      get { return _division; }
+      set { _division = value; }
+    }
+    private readonly global::System.Collections.Generic.List<uint> _account_ids = new global::System.Collections.Generic.List<uint>();
+    [global::ProtoBuf.ProtoMember(2, Name=@"account_ids", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public global::System.Collections.Generic.List<uint> account_ids
+    {
+      get { return _account_ids; }
+    }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

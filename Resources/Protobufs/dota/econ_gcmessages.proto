@@ -70,6 +70,7 @@ enum EGCItemMsg {
 	k_EMsgGC_IncrementKillCountResponse = 1075;
 	k_EMsgGCApplyPennantUpgrade = 1076;
 	k_EMsgGCSetItemPositions = 1077;
+	k_EMsgGCSetItemPositions_RateLimited = 1096;
 	k_EMsgGCApplyEggEssence = 1078;
 	k_EMsgGCNameEggEssenceResponse = 1079;
 	k_EMsgGCFulfillDynamicRecipeComponent = 1082;
@@ -85,6 +86,7 @@ enum EGCItemMsg {
 	k_EMsgGCRequestCrateItems = 1092;
 	k_EMsgGCRequestCrateItemsResponse = 1093;
 	k_EMsgGCExtractGemsResponse = 1094;
+	k_EMsgGCResetStrangeGemCountResponse = 1095;
 	k_EMsgGCServerUseItemRequest = 1103;
 	k_EMsgGCAddGiftItem = 1104;
 	k_EMsgGCRemoveItemGiftMessage = 1105;
@@ -168,7 +170,7 @@ enum EGCItemMsg {
 	k_EMsgGCToGCItemConsumptionRollback = 2564;
 	k_EMsgClientToGCWrapAndDeliverGift = 2565;
 	k_EMsgClientToGCWrapAndDeliverGiftResponse = 2566;
-	k_EMsgGCToClientBundleUnpacked = 2567;
+	k_EMsgClientToGCUnpackBundleResponse = 2567;
 	k_EMsgGCToClientStoreTransactionCompleted = 2568;
 	k_EMsgClientToGCEquipItems = 2569;
 	k_EMsgClientToGCEquipItemsResponse = 2570;
@@ -177,6 +179,7 @@ enum EGCItemMsg {
 	k_EMsgClientToGCSetItemInventoryCategory = 2573;
 	k_EMsgClientToGCUnlockCrate = 2574;
 	k_EMsgClientToGCUnlockCrateResponse = 2575;
+	k_EMsgClientToGCUnpackBundle = 2576;
 }
 
 enum EGCMsgResponse {
@@ -522,9 +525,23 @@ message CMsgClientToGCUnwrapGift {
 	optional uint64 item_id = 1;
 }
 
-message CMsgGCToClientBundleUnpacked {
-	optional uint64 bundle_item_id = 1;
-	repeated uint64 item_ids = 2;
+message CMsgClientToGCUnpackBundle {
+	optional uint64 item_id = 1;
+}
+
+message CMsgClientToGCUnpackBundleResponse {
+	enum EUnpackBundle {
+		k_UnpackBundle_Succeeded = 0;
+		k_UnpackBundle_Failed_ItemIsNotBundle = 1;
+		k_UnpackBundle_Failed_UnableToCreateContainedItem = 2;
+		k_UnpackBundle_Failed_SOCacheError = 3;
+		k_UnpackBundle_Failed_ItemIsInvalid = 4;
+		k_UnpackBundle_Failed_BadItemQuantity = 5;
+		k_UnpackBundle_Failed_UnableToDeleteItem = 6;
+	}
+
+	repeated uint64 unpacked_item_ids = 1;
+	optional .CMsgClientToGCUnpackBundleResponse.EUnpackBundle response = 2 [default = k_UnpackBundle_Succeeded];
 }
 
 message CMsgGCToClientStoreTransactionCompleted {

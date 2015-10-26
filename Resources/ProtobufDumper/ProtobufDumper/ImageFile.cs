@@ -59,6 +59,8 @@ namespace ProtobufDumper
         private Dictionary<string, int> enumLookupCount;
         private List<string> deferredEnumTokens;
 
+        private Regex ProtoFileNameRegex;
+
         public ImageFile(string fileName, string output = null)
         {
             this.FileName = fileName;
@@ -75,67 +77,86 @@ namespace ProtobufDumper
             this.enumLookup = new Dictionary<string, EnumDescriptorProto>();
             this.enumLookupCount = new Dictionary<string, int>();
             this.deferredEnumTokens = new List<string>();
+
+            this.ProtoFileNameRegex = new Regex(@"^[a-zA-Z_0-9\\/.]+\.proto$", RegexOptions.Compiled | RegexOptions.CultureInvariant | RegexOptions.ExplicitCapture);
         }
 
-        unsafe public void Process()
+        public void Process()
         {
             Console.WriteLine("Loading binary '{0}'...", FileName);
 
             var rawData = File.ReadAllBytes(FileName);
 
-            fixed (byte* pdata = rawData)
+            using (var ms = new MemoryStream(rawData))
             {
-                ScanFile(pdata, rawData.Length);
+                ScanFile(ms);
             }
 
-            if (deferredProtos.Count > 0)
-            {
-                Console.WriteLine("WARNING: Some protobufs were left unresolved: ");
+            var safeguard = 10;
 
-                foreach (var proto in deferredProtos)
+            while (deferredProtos.Count > 0 && safeguard-- > 0)
+            {
+                foreach (var proto in deferredProtos.ToList())
                 {
-                    DoParseFile(proto);
+                    if (safeguard == 0 || !ShouldDeferProto(proto))
+                    {
+                        DoParseFile(proto);
+
+                        deferredProtos.Remove(proto);
+                    }
                 }
             }
 
             FinalPassWriteFiles();
         }
 
-        unsafe void ScanFile(byte* dataPtr, int rawDataLength)
+        void ScanFile(Stream stream)
         {
-            byte* endPtr = dataPtr + rawDataLength;
-            char marker = '\n';
+            int characterSize = Encoding.ASCII.GetByteCount("e");
+            const char marker = '\n';
 
-            while (dataPtr < endPtr)
+            while (stream.Position < stream.Length)
             {
-                if (*dataPtr == marker)
+                var currentByte = stream.ReadByte();
+
+                if (currentByte == marker)
                 {
-                    byte* originalPtr = dataPtr;
-                    int nullskiplevel = 0;
-
-                rescan:
-                    int t = nullskiplevel;
-                    dataPtr = originalPtr;
-
+                    bool nullSkip = false;
                     byte[] data = null;
 
+                continueScanning:
+                    stream.Position--; // Return back to the marker we just read
+
                     using (var ms = new MemoryStream())
-                    using (var bw = new BinaryWriter(ms))
                     {
-                        for (; *(short*)dataPtr != 0 || t-- > 0; dataPtr++)
+                        if (data != null)
                         {
-                            bw.Write(*dataPtr);
+                            ms.Write(data, 0, data.Length);
                         }
 
-                        bw.Write((byte)0);
+                        while (true)
+                        {
+                            var data2 = new byte[characterSize];
+                            stream.Read(data2, 0, characterSize);
+
+                            if (Encoding.ASCII.GetString(data2, 0, characterSize) == "\0")
+                            {
+                                if (!nullSkip)
+                                {
+                                    break;
+                                }
+
+                                nullSkip = false;
+                            }
+
+                            ms.Write(data2, 0, data2.Length);
+                        }
+
                         data = ms.ToArray();
                     }
 
-                    dataPtr++;
-
                     if (data.Length < 2)
                     {
-                        dataPtr = originalPtr + 1;
                         continue;
                     }
 
@@ -143,40 +164,27 @@ namespace ProtobufDumper
 
                     if (data.Length - 2 < strLen)
                     {
-                        dataPtr = originalPtr + 1;
                         continue;
                     }
 
                     string protoName = Encoding.ASCII.GetString(data, 2, strLen);
-                    if (protoName.Contains(marker))
+
+                    if (!ProtoFileNameRegex.IsMatch(protoName))
                     {
-                        dataPtr = originalPtr + 1;
                         continue;
                     }
 
-                    if (!protoName.EndsWith(".proto", StringComparison.Ordinal))
+                    if (deferredProtos.Any(x => x.name == protoName))
                     {
-                        dataPtr = originalPtr + 1;
-                        continue;
-                    }
-
-                    Regex regex = new Regex(@"^[a-zA-Z_0-9\\/.]+.proto$");
-                    if (!regex.IsMatch(protoName))
-                    {
-                        dataPtr = originalPtr + 1;
                         continue;
                     }
 
                     if (!HandleProto(protoName, data))
                     {
-                        nullskiplevel++;
+                        nullSkip = true;
 
-                        goto rescan;
+                        goto continueScanning;
                     }
-                }
-                else
-                {
-                    dataPtr++;
                 }
             }
         }
@@ -269,7 +277,7 @@ namespace ProtobufDumper
  
         private bool HandleProto(string name, byte[] data)
         {
-            Console.WriteLine("Found protobuf candidate '{0}'!", name);
+            Console.Write("{0}... ", name);
 
             FileDescriptorProto set = null;
 
@@ -287,7 +295,6 @@ namespace ProtobufDumper
                 catch (Exception ex)
                 {
                     Console.WriteLine("Unable to dump: {0}", ex.Message);
-                    return true;
                 }
             }
 
@@ -298,51 +305,24 @@ namespace ProtobufDumper
             }
             catch (EndOfStreamException ex)
             {
-                Console.WriteLine("'{0}' needs rescan: {1}\n", name, ex.Message);
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine("needs rescan: {0}", ex.Message);
+                Console.ResetColor();
                 return false;
-            }
-            catch (ProtoException ex)
-            {
-                Console.WriteLine("'{0}' needs rescan: {1}\n", name, ex.Message);
-                // try scanning backwards for null terminators
-                for (int i = data.Length - 1; i > 0; i--)
-                {
-                    if (data[i] == 0)
-                    {
-                        try
-                        {
-                            using (MemoryStream ms = new MemoryStream(data, 0, i))
-                                set = Serializer.Deserialize<FileDescriptorProto>(ms);
-                            break;
-                        }
-                        catch (Exception)
-                        {
-                        }
-                    }
-                }
-                
-                if(set == null)
-                {
-                    Console.WriteLine("'{0}' was invalid\n", name);
-                    return true;
-                }
             }
             catch (Exception ex)
             {
-                Console.WriteLine("'{0}' was invalid: {1}\n", name, ex.Message);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("is invalid: {0}", ex.Message);
+                Console.ResetColor();
                 return true;
             }
 
-            if (ShouldDeferProto(set))
-            {
-                Console.WriteLine("  ! Deferring parsing proto '{0}'\n", set.name);
+            deferredProtos.Add(set);
 
-                deferredProtos.Add(set);
-            }
-            else
-            {
-                DoParseFile(set);
-            }
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("OK!");
+            Console.ResetColor();
 
             return true;
         }
@@ -370,35 +350,18 @@ namespace ProtobufDumper
 
             FinalProtoDefinition.Add(new ProtoData { file = set, buffer = sb });
             ProtoList.Add(set.name);
-
-            List<FileDescriptorProto> protosToRender = new List<FileDescriptorProto>();
-            do
-            {
-                protosToRender.Clear();
-
-                foreach (var proto in deferredProtos)
-                {
-                    if (!ShouldDeferProto(proto))
-                        protosToRender.Add(proto);
-                }
-
-                foreach (var proto in protosToRender)
-                {
-                    deferredProtos.Remove(proto);
-                    DoParseFile(proto);
-                }
-            }
-            while (protosToRender.Count != 0);
         }
 
         private void FinalPassWriteFiles()
         {
+            Console.WriteLine();
+
             foreach (var proto in FinalProtoDefinition)
             {
                 Directory.CreateDirectory(OutputDir);
                 string outputFile = Path.Combine(OutputDir, proto.file.name);
 
-                Console.WriteLine("  ! Outputting proto to '{0}'\n", outputFile);
+                Console.WriteLine("  ! Outputting proto to '{0}'", outputFile);
                 Directory.CreateDirectory(Path.GetDirectoryName(outputFile));
 
                 foreach(string type in deferredEnumTokens)
@@ -410,7 +373,7 @@ namespace ProtobufDumper
                         proto.buffer.Replace(GetEnumDescriptorTokenAt(type, i), ResolveOrDeferEnumValueAt(type, i));
                     }
                 }
-                
+
                 File.WriteAllText(outputFile, proto.buffer.ToString());
             }
         }
@@ -571,7 +534,9 @@ namespace ProtobufDumper
             }
             catch (Exception ex)
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Unable to dump option '{0}': {1}", name, ex.Message);
+                Console.ResetColor();
                 return null;
             }
 
@@ -989,7 +954,9 @@ namespace ProtobufDumper
                     }
                     catch (FormatException)
                     {
+                        Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("Constructor for extension had bad format: {0}", key);
+                        Console.ResetColor();
                         return;
                     }
                 }

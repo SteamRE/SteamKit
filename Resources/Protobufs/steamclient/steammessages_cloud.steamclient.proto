@@ -1,5 +1,6 @@
-import "google/protobuf/descriptor.proto";
 import "steammessages_unified_base.steamclient.proto";
+
+option cc_generic_services = true;
 
 message CCloud_GetUploadServerInfo_Request {
 	optional uint32 appid = 1 [(description) = "App ID to which a file will be uploaded to."];

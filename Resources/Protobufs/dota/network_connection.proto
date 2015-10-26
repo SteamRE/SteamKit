@@ -79,5 +79,6 @@ enum ENetworkDisconnectionReason {
 	NETWORK_DISCONNECT_SERVER_SHUTDOWN = 69 [(network_connection_token) = "#GameUI_Disconnect_ServerShutdown"];
 	NETWORK_DISCONNECT_SPLITPACKET_SEND_OVERFLOW = 70 [(network_connection_token) = "#GameUI_Disconnect_Splitpacket_Send_Overflow"];
 	NETWORK_DISCONNECT_REPLAY_INCOMPATIBLE = 71 [(network_connection_token) = "#GameUI_Disconnect_ReplayIncompatible"];
+	NETWORK_DISCONNECT_CONNECT_REQUEST_TIMEDOUT = 72 [(network_connection_token) = "#GameUI_Disconnect_ConnectionTimedout"];
 }
 

@@ -1,5 +1,6 @@
-import "google/protobuf/descriptor.proto";
 import "steammessages_unified_base.steamclient.proto";
+
+option cc_generic_services = true;
 
 message CGameServers_GetServerList_Request {
 	optional string filter = 1 [(description) = "Query filter string."];

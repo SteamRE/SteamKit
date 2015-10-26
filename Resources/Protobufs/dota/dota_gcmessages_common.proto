@@ -17,8 +17,6 @@ enum EDOTAGCMsg {
 	k_EMsgServerToGCRequestStatus = 7026;
 	k_EMsgGCGetRecentMatches = 7027;
 	k_EMsgGCRecentMatchesResponse = 7028;
-	k_EMsgGCFindSourceTVGames = 7031;
-	k_EMsgGCSourceTVGamesResponse = 7032;
 	k_EMsgGCStartFindingMatch = 7033;
 	k_EMsgGCConnectedPlayers = 7034;
 	k_EMsgGCAbandonCurrentGame = 7035;
@@ -533,6 +531,8 @@ enum EDOTAGCMsg {
 	k_EMsgClientToGCGetAllHeroOrder = 7606;
 	k_EMsgClientToGCGetAllHeroOrderResponse = 7607;
 	k_EMsgSQLGCToGCGrantBadgePoints = 7608;
+	k_EMsgGCToGCGetAccountMatchStatus = 7609;
+	k_EMsgGCToGCGetAccountMatchStatusResponse = 7610;
 	k_EMsgGCDev_GrantWarKill = 8001;
 	k_EMsgClientToGCCreateTeamShowcase = 8002;
 	k_EMsgGCToClientTeamShowcaseCreateResult = 8003;
@@ -597,6 +597,12 @@ enum EDOTAGCMsg {
 	k_EMsgGCToGCGetProfileBadgePointsResponse = 8066;
 	k_EMsgGCToClientChatRegionsEnabled = 8067;
 	k_EMsgClientToGCPingData = 8068;
+	k_EMsgServerToGCMatchDetailsRequest = 8069;
+	k_EMsgGCToServerMatchDetailsResponse = 8070;
+	k_EMsgGCToGCEnsureAccountInParty = 8071;
+	k_EMsgGCToGCEnsureAccountInPartyResponse = 8072;
+	k_EMsgClientToGCGetProfileTickets = 8073;
+	k_EMsgClientToGCGetProfileTicketsResponse = 8074;
 }
 
 enum ESpecialPingValue {
@@ -973,6 +979,7 @@ message CSODOTAPartyMember {
 	optional bool is_coach = 2;
 	repeated uint32 region_ping_codes = 4 [packed = true];
 	repeated uint32 region_ping_times = 5 [packed = true];
+	optional uint32 region_ping_failed_bitmask = 6;
 }
 
 message CSODOTAParty {
@@ -1256,6 +1263,7 @@ message CSODOTALobby {
 	optional uint32 league_game_id = 79;
 	optional fixed32 custom_game_timestamp = 80;
 	repeated uint64 previous_series_matches = 81;
+	optional uint64 previous_match_override = 82;
 }
 
 message CMsgLobbyEventPoints {
@@ -1770,6 +1778,7 @@ message CMsgDOTARealtimeGameStats {
 		optional uint32 type = 6;
 		optional float x = 7;
 		optional float y = 8;
+		optional bool destroyed = 9;
 	}
 
 	message KillDetails {
@@ -1883,6 +1892,7 @@ message CMsgDOTARealtimeGameStatsTerse {
 		optional uint32 tier = 5;
 		optional float x = 6;
 		optional float y = 7;
+		optional bool destroyed = 8;
 	}
 
 	message MatchDetails {

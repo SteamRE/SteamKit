@@ -9,7 +9,6 @@
 #pragma warning disable 1591
 
 // Generated from: steammessages_credentials.steamclient.proto
-// Note: requires additional types generated from: google/protobuf/descriptor.proto
 // Note: requires additional types generated from: steammessages_unified_base.steamclient.proto
 namespace SteamKit2.Unified.Internal
 {
@@ -205,6 +204,15 @@ namespace SteamKit2.Unified.Internal
     {
       get { return _timestamp_twofactor_enabled; }
       set { _timestamp_twofactor_enabled = value; }
+    }
+
+    private bool _is_phone_verified = default(bool);
+    [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"is_phone_verified", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool is_phone_verified
+    {
+      get { return _is_phone_verified; }
+      set { _is_phone_verified = value; }
     }
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"NewAuthentication")]
   public partial class NewAuthentication : global::ProtoBuf.IExtensible
@@ -581,6 +589,15 @@ namespace SteamKit2.Unified.Internal
     {
       get { return _query_only; }
       set { _query_only = value; }
+    }
+
+    private int _email_message_type = default(int);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"email_message_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int email_message_type
+    {
+      get { return _email_message_type; }
+      set { _email_message_type = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

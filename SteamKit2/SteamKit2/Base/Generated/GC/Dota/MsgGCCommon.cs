@@ -8,8 +8,6 @@
 //------------------------------------------------------------------------------
 #pragma warning disable 1591
 
-using SteamKit2.GC.Internal;
-   
 // Generated from: dota_gcmessages_common.proto
 // Note: requires additional types generated from: steammessages.proto
 // Note: requires additional types generated from: gcsdk_gcmessages.proto
@@ -476,6 +474,15 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _region_ping_times; }
     }
   
+
+    private uint _region_ping_failed_bitmask = default(uint);
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"region_ping_failed_bitmask", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint region_ping_failed_bitmask
+    {
+      get { return _region_ping_failed_bitmask; }
+      set { _region_ping_failed_bitmask = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -2383,6 +2390,15 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _previous_series_matches; }
     }
   
+
+    private ulong _previous_match_override = default(ulong);
+    [global::ProtoBuf.ProtoMember(82, IsRequired = false, Name=@"previous_match_override", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong previous_match_override
+    {
+      get { return _previous_match_override; }
+      set { _previous_match_override = value; }
+    }
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CExtraMsg")]
   public partial class CExtraMsg : global::ProtoBuf.IExtensible
   {
@@ -5795,6 +5811,15 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _y; }
       set { _y = value; }
     }
+
+    private bool _destroyed = default(bool);
+    [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"destroyed", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool destroyed
+    {
+      get { return _destroyed; }
+      set { _destroyed = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -6491,6 +6516,15 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _y; }
       set { _y = value; }
     }
+
+    private bool _destroyed = default(bool);
+    [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"destroyed", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool destroyed
+    {
+      get { return _destroyed; }
+      set { _destroyed = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -6628,12 +6662,6 @@ namespace SteamKit2.GC.Dota.Internal
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCRecentMatchesResponse", Value=7028)]
       k_EMsgGCRecentMatchesResponse = 7028,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCFindSourceTVGames", Value=7031)]
-      k_EMsgGCFindSourceTVGames = 7031,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCSourceTVGamesResponse", Value=7032)]
-      k_EMsgGCSourceTVGamesResponse = 7032,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCStartFindingMatch", Value=7033)]
       k_EMsgGCStartFindingMatch = 7033,
@@ -8177,6 +8205,12 @@ namespace SteamKit2.GC.Dota.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgSQLGCToGCGrantBadgePoints", Value=7608)]
       k_EMsgSQLGCToGCGrantBadgePoints = 7608,
             
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCGetAccountMatchStatus", Value=7609)]
+      k_EMsgGCToGCGetAccountMatchStatus = 7609,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCGetAccountMatchStatusResponse", Value=7610)]
+      k_EMsgGCToGCGetAccountMatchStatusResponse = 7610,
+            
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCDev_GrantWarKill", Value=8001)]
       k_EMsgGCDev_GrantWarKill = 8001,
             
@@ -8367,7 +8401,25 @@ namespace SteamKit2.GC.Dota.Internal
       k_EMsgGCToClientChatRegionsEnabled = 8067,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCPingData", Value=8068)]
-      k_EMsgClientToGCPingData = 8068
+      k_EMsgClientToGCPingData = 8068,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgServerToGCMatchDetailsRequest", Value=8069)]
+      k_EMsgServerToGCMatchDetailsRequest = 8069,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToServerMatchDetailsResponse", Value=8070)]
+      k_EMsgGCToServerMatchDetailsResponse = 8070,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCEnsureAccountInParty", Value=8071)]
+      k_EMsgGCToGCEnsureAccountInParty = 8071,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCEnsureAccountInPartyResponse", Value=8072)]
+      k_EMsgGCToGCEnsureAccountInPartyResponse = 8072,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCGetProfileTickets", Value=8073)]
+      k_EMsgClientToGCGetProfileTickets = 8073,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCGetProfileTicketsResponse", Value=8074)]
+      k_EMsgClientToGCGetProfileTicketsResponse = 8074
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"ESpecialPingValue", EnumPassthru=true)]

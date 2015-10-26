@@ -94,6 +94,7 @@ enum EDotaUserMessages {
 	DOTA_UM_CompendiumState = 551;
 	DOTA_UM_ProjectionAbility = 552;
 	DOTA_UM_ProjectionEvent = 553;
+	DOTA_UM_CombatLogDataHLTV = 554;
 }
 
 enum DOTA_CHAT_MESSAGE {
@@ -859,6 +860,7 @@ message CDOTAUserMsg_TE_Projectile {
 	optional bool isEvaded = 8;
 	optional float expireTime = 9;
 	optional float maximpacttime = 10;
+	optional fixed32 colorgemcolor = 11;
 }
 
 message CDOTAUserMsg_TE_ProjectileLoc {
@@ -871,6 +873,7 @@ message CDOTAUserMsg_TE_ProjectileLoc {
 	optional bool isEvaded = 8;
 	optional float expireTime = 9;
 	optional .CMsgVector vTargetLoc = 10;
+	optional fixed32 colorgemcolor = 11;
 }
 
 message CDOTAUserMsg_TE_DotaBloodImpact {

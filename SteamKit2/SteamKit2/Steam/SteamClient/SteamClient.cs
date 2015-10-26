@@ -339,7 +339,7 @@ namespace SteamKit2
 
             jobManager.SetTimeoutsEnabled( false );
 
-            this.PostCallback( new DisconnectedCallback( userInitiated ) );
+            PostCallback( new DisconnectedCallback( userInitiated ) );
         }
 
 

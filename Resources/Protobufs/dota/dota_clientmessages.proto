@@ -249,6 +249,7 @@ message CDOTAClientMsg_DemoHero {
 	repeated uint32 item_defs = 3;
 	repeated uint64 item_ids = 4;
 	optional uint32 style_index = 5;
+	optional bool keep_existing_demohero = 6;
 }
 
 message CDOTAClientMsg_ChallengeSelect {

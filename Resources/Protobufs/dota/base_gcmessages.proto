@@ -74,6 +74,7 @@ message CMsgClientPingData {
 	repeated uint32 relay_pings = 5 [packed = true];
 	repeated uint32 region_codes = 8 [packed = true];
 	repeated uint32 region_pings = 9 [packed = true];
+	optional uint32 region_ping_failed_bitmask = 10;
 }
 
 message CMsgInviteToParty {
@@ -92,6 +93,7 @@ message CMsgInviteToLobby {
 message CMsgInvitationCreated {
 	optional uint64 group_id = 1;
 	optional fixed64 steam_id = 2;
+	optional bool user_offline = 3;
 }
 
 message CMsgPartyInviteResponse {
@@ -600,5 +602,17 @@ message CMsgAddItemToSocketResponse {
 message CMsgResetStrangeGemCount {
 	optional uint64 item_item_id = 1;
 	optional uint32 socket_index = 2;
+}
+
+message CMsgResetStrangeGemCountResponse {
+	enum EResetGem {
+		k_ResetGem_Succeeded = 0;
+		k_ResetGem_Failed_FailedToResetGem = 1;
+		k_ResetGem_Failed_ItemIsInvalid = 2;
+		k_ResetGem_Failed_InvalidSocketId = 3;
+		k_ResetGem_Failed_SocketCannotBeReset = 4;
+	}
+
+	optional .CMsgResetStrangeGemCountResponse.EResetGem response = 1 [default = k_ResetGem_Succeeded];
 }
 

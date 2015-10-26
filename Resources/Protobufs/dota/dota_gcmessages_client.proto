@@ -98,42 +98,12 @@ message CMsgReadyUpStatus {
 	repeated uint32 declined_ids = 3;
 }
 
-message CSourceTVGame {
+message CSourceTVGameSmall {
 	message Player {
-		optional fixed64 steam_id = 1;
-		optional string name = 2;
-		optional uint32 hero_id = 3;
+		optional uint32 account_id = 1;
+		optional uint32 hero_id = 2;
 	}
 
-	optional uint32 source_tv_public_addr = 1;
-	optional uint32 source_tv_private_addr = 2;
-	optional uint32 source_tv_port = 3;
-	repeated .CSourceTVGame.Player good_players = 14;
-	repeated .CSourceTVGame.Player bad_players = 15;
-	repeated .CSourceTVGame.Player other_players = 16;
-	optional string game_name = 7;
-	repeated .CLobbyTeamDetails team_details = 9;
-	optional uint32 num_spectators = 10;
-	optional uint32 tournament_id = 11;
-	optional uint32 tournament_game_id = 12;
-	optional uint32 tower_state = 13;
-	optional float tv_broadcast_time = 17;
-	optional float game_time = 18;
-	optional fixed64 server_steamid = 19;
-	optional uint32 leagueid = 20;
-	optional .DOTA_GameMode game_mode = 21 [default = DOTA_GAMEMODE_NONE];
-	optional uint32 lobby_type = 22;
-	optional uint64 custom_game_id = 24;
-	optional uint32 average_rank = 25;
-	optional uint32 radiant_kills = 26;
-	optional uint32 dire_kills = 27;
-	optional uint32 barracks_state = 28;
-	optional uint64 group_id = 29;
-	optional uint32 engine = 31;
-	optional uint32 broadcast_delay = 32;
-}
-
-message CSourceTVGameSmall {
 	optional uint32 activate_time = 1;
 	optional uint32 deactivate_time = 2;
 	optional uint64 server_steam_id = 3;
@@ -145,28 +115,15 @@ message CSourceTVGameSmall {
 	optional uint32 spectators = 9;
 	optional uint32 game_mode = 10;
 	optional uint32 average_mmr = 11;
-	optional uint32 engine = 12;
-	repeated uint32 hero_ids = 13;
-	repeated fixed64 steam_ids = 14;
 	optional string team_name_radiant = 15;
 	optional string team_name_dire = 16;
 	optional uint32 sort_score = 17;
 	optional float last_update_time = 18;
-}
-
-message CMsgSourceTVGamesResponse {
-	repeated .CSourceTVGame games = 1;
-	optional uint32 num_total_games = 2;
-}
-
-message CMsgFindSourceTVGames {
-	optional string search_key = 1;
-	optional uint32 start = 2;
-	optional uint32 num_games = 3;
-	optional uint32 leagueid = 4;
-	optional uint32 heroid = 5;
-	optional bool team_game = 6;
-	optional uint64 custom_game_id = 10;
+	optional int32 radiant_lead = 19;
+	optional uint32 radiant_score = 20;
+	optional uint32 dire_score = 21;
+	repeated .CSourceTVGameSmall.Player players = 22;
+	optional fixed32 building_state = 23;
 }
 
 message CMsgClientToGCFindTopSourceTVGames {
@@ -286,6 +243,7 @@ message CMsgPracticeLobbySetDetails {
 	optional uint32 league_series_id = 35;
 	optional uint32 league_game_id = 36;
 	optional fixed32 custom_game_timestamp = 37;
+	optional uint64 previous_match_override = 38;
 }
 
 message CMsgPracticeLobbyCreate {
@@ -1133,6 +1091,12 @@ message CMsgDOTAClientIgnoredUser {
 }
 
 message CMsgDOTAChatMessage {
+	message DiceRoll {
+		optional int32 roll_min = 1;
+		optional int32 roll_max = 2;
+		optional int32 result = 3;
+	}
+
 	optional uint32 account_id = 1;
 	optional uint64 channel_id = 2;
 	optional string persona_name = 3;
@@ -1149,6 +1113,11 @@ message CMsgDOTAChatMessage {
 	optional int32 player_id = 14 [default = -1];
 	optional uint32 share_profile_account_id = 15;
 	optional uint32 channel_user_id = 16;
+	optional .CMsgDOTAChatMessage.DiceRoll dice_roll = 17;
+	optional uint64 share_party_id = 18;
+	optional uint64 share_lobby_id = 19;
+	optional uint64 share_lobby_custom_game_id = 20;
+	optional string share_lobby_passkey = 21;
 }
 
 message CMsgDOTAChatMember {
@@ -1605,6 +1574,14 @@ message CMsgGCMatchDetailsResponse {
 	optional .DOTAMatchVote vote = 3 [default = DOTAMatchVote_INVALID];
 }
 
+message CMsgServerToGCMatchDetailsRequest {
+	repeated uint64 match_ids = 1;
+}
+
+message CMsgGCToServerMatchDetailsResponse {
+	repeated .CMsgDOTAMatch matches = 1;
+}
+
 message CMsgDOTAProfileRequest {
 	optional uint32 account_id = 1;
 	optional bool request_name = 2;
@@ -1652,6 +1629,26 @@ message CMsgDOTAProfileResponse {
 	optional bool has_passport = 13;
 	repeated .CMsgDOTAProfileResponse.FeaturedItem featured_items = 14;
 	optional uint32 abandon_percent = 15;
+}
+
+message CMsgDOTAProfileTickets {
+	message LeaguePass {
+		optional uint32 league_id = 1;
+		optional uint32 item_def = 2;
+	}
+
+	message EventTicket {
+		optional uint32 event_id = 1;
+	}
+
+	optional uint32 result = 1;
+	optional uint32 account_id = 2;
+	repeated .CMsgDOTAProfileTickets.LeaguePass league_passes = 3;
+	repeated .CMsgDOTAProfileTickets.EventTicket event_tickets = 4;
+}
+
+message CMsgClientToGCGetProfileTickets {
+	optional uint32 account_id = 1;
 }
 
 message CMsgGCSteamProfileRequest {

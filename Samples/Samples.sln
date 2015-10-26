@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample6_WebAPI", "6.WebAPI\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample7_ServerList", "7.ServerList\Sample7_ServerList.csproj", "{622D5E15-9FDC-4811-9FF0-8A38B900906F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample8_UnifiedMessages", "8.UnifiedMessages\Sample8_UnifiedMessages.csproj", "{B5A561B8-F81A-41B4-81AB-37AC8C333C7E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -111,6 +113,18 @@ Global
 		{622D5E15-9FDC-4811-9FF0-8A38B900906F}.Release|Mixed Platforms.Build.0 = Release|x86
 		{622D5E15-9FDC-4811-9FF0-8A38B900906F}.Release|x86.ActiveCfg = Release|x86
 		{622D5E15-9FDC-4811-9FF0-8A38B900906F}.Release|x86.Build.0 = Release|x86
+		{B5A561B8-F81A-41B4-81AB-37AC8C333C7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5A561B8-F81A-41B4-81AB-37AC8C333C7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5A561B8-F81A-41B4-81AB-37AC8C333C7E}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{B5A561B8-F81A-41B4-81AB-37AC8C333C7E}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{B5A561B8-F81A-41B4-81AB-37AC8C333C7E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B5A561B8-F81A-41B4-81AB-37AC8C333C7E}.Debug|x86.Build.0 = Debug|Any CPU
+		{B5A561B8-F81A-41B4-81AB-37AC8C333C7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5A561B8-F81A-41B4-81AB-37AC8C333C7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5A561B8-F81A-41B4-81AB-37AC8C333C7E}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{B5A561B8-F81A-41B4-81AB-37AC8C333C7E}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{B5A561B8-F81A-41B4-81AB-37AC8C333C7E}.Release|x86.ActiveCfg = Release|Any CPU
+		{B5A561B8-F81A-41B4-81AB-37AC8C333C7E}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

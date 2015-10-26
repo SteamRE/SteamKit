@@ -1,5 +1,6 @@
-import "google/protobuf/descriptor.proto";
 import "steammessages_unified_base.steamclient.proto";
+
+option cc_generic_services = true;
 
 message CDeviceAuth_GetOwnAuthorizedDevices_Request {
 	optional fixed64 steamid = 1;

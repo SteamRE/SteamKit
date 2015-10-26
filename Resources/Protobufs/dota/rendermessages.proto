@@ -163,13 +163,14 @@ message CMsgPushCompositingLayer {
 	optional double rotate_2d = 49;
 	optional bool needs_clear = 50;
 	optional bool needs_depth = 51;
-	optional bool needs_redraw_every_frame = 52;
-	optional .CTextShadowData text_shadow = 53;
-	optional uint32 mix_blend_mode = 54;
-	optional double occluded_left_edge = 55;
-	optional double occluded_top_edge = 56;
-	optional double occluded_right_edge = 57;
-	optional double occluded_bottom_edge = 58;
+	optional bool needs_intermediate_texture = 52;
+	optional bool needs_redraw_every_frame = 53;
+	optional .CTextShadowData text_shadow = 54;
+	optional uint32 mix_blend_mode = 55;
+	optional double occluded_left_edge = 56;
+	optional double occluded_top_edge = 57;
+	optional double occluded_right_edge = 58;
+	optional double occluded_bottom_edge = 59;
 }
 
 message CMsgPopCompositingLayer {
@@ -655,9 +656,10 @@ message CMsgPushAAndTContext {
 	optional .CMsgClip clip = 26;
 	optional bool suppress_clip_to_bounds = 27;
 	optional int32 needs_full_repaint = 28;
-	optional bool wants_hit_test = 29;
-	optional uint32 mix_blend_mode = 30;
-	optional bool opaque_background = 31;
+	optional bool needs_intermediate_texture = 29;
+	optional bool wants_hit_test = 30;
+	optional uint32 mix_blend_mode = 31;
+	optional bool opaque_background = 32;
 }
 
 message CMsgPopAAndTContext {

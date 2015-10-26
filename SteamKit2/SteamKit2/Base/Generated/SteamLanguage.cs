@@ -264,6 +264,7 @@ namespace SteamKit2
 		[Obsolete]
 		ClientContentServerLogOn_Deprecated = 731,
 		ClientAckVACBan2 = 732,
+		[Obsolete]
 		ClientAckMessageByGID = 735,
 		ClientGetPurchaseReceipts = 736,
 		ClientAckPurchaseReceipt = 737,
@@ -319,7 +320,9 @@ namespace SteamKit2
 		ClientInitPurchaseResponse = 789,
 		ClientAddFriend = 791,
 		ClientAddFriendResponse = 792,
+		[Obsolete]
 		ClientInviteFriend = 793,
+		[Obsolete]
 		ClientInviteFriendResponse = 794,
 		[Obsolete]
 		ClientSendGuestPassResponse = 795,
@@ -1221,6 +1224,8 @@ namespace SteamKit2
 		ClientDisableTestLicenseResponse = 5446,
 		ClientRequestValidationMail = 5448,
 		ClientRequestValidationMailResponse = 5449,
+		ClientCheckAppBetaPassword = 5450,
+		ClientCheckAppBetaPasswordResponse = 5451,
 		ClientToGC = 5452,
 		ClientFromGC = 5453,
 		ClientRequestChangeMail = 5454,
@@ -1231,6 +1236,7 @@ namespace SteamKit2
 		ClientPersonalQAChange3 = 5459,
 		ClientResetForgottenPassword3 = 5460,
 		ClientRequestForgottenPasswordEmail3 = 5461,
+		[Obsolete]
 		ClientCreateAccount3 = 5462,
 		ClientNewLoginKey = 5463,
 		ClientNewLoginKeyAccepted = 5464,
@@ -1336,7 +1342,9 @@ namespace SteamKit2
 		ClientItemAnnouncements = 5576,
 		ClientRequestItemAnnouncements = 5577,
 		ClientFriendMsgEchoToSender = 5578,
+		[Obsolete]
 		ClientChangeSteamGuardOptions = 5579,
+		[Obsolete]
 		ClientChangeSteamGuardOptionsResponse = 5580,
 		ClientOGSGameServerPingSample = 5581,
 		ClientCommentNotifications = 5582,
@@ -1542,11 +1550,15 @@ namespace SteamKit2
 		ClientUCMDeletePublishedFileResponse = 7316,
 		ClientUCMEnumerateUserPublishedFiles = 7317,
 		ClientUCMEnumerateUserPublishedFilesResponse = 7318,
+		[Obsolete]
 		ClientUCMSubscribePublishedFile = 7319,
+		[Obsolete]
 		ClientUCMSubscribePublishedFileResponse = 7320,
 		ClientUCMEnumerateUserSubscribedFiles = 7321,
 		ClientUCMEnumerateUserSubscribedFilesResponse = 7322,
+		[Obsolete]
 		ClientUCMUnsubscribePublishedFile = 7323,
+		[Obsolete]
 		ClientUCMUnsubscribePublishedFileResponse = 7324,
 		ClientUCMUpdatePublishedFile = 7325,
 		ClientUCMUpdatePublishedFileResponse = 7326,
@@ -1919,6 +1931,7 @@ namespace SteamKit2
 		RefundToWallet = 98,
 		EmailSendFailure = 99,
 		NotSettled = 100,
+		NeedCaptcha = 101,
 	}
 	public enum EUniverse
 	{
