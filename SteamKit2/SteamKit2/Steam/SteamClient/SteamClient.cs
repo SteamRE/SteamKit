@@ -317,7 +317,7 @@ namespace SteamKit2
         /// </summary>
         protected override void OnClientDisconnected( bool userInitiated )
         {
-            this.PostCallback( new DisconnectedCallback( userInitiated ) );
+            PostCallback( new DisconnectedCallback( userInitiated ) );
         }
 
 
