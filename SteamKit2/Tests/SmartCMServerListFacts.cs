@@ -218,59 +218,29 @@ namespace Tests
             Assert.Equal( endPoint, nextEndPoint );
         }
 
-        // Warning: This test is dependent on random values from the system and may, if you are unlucky enough, falsely report a failure.
         [Fact]
-        public void GetNextServerCandidate_IsBiasedTowardsGoodServers()
+        public void GetNextServerCandidate_IsBiasedTowardsServerOrdering()
         {
-            var goodEndPoint = new IPEndPoint( IPAddress.Loopback, 27015 );
-            var neutralEndPoint = new IPEndPoint( IPAddress.Loopback, 27016 );
-            var badEndPoint = new IPEndPoint( IPAddress.Loopback, 27017 );
+            var goodEndPoint = new IPEndPoint(IPAddress.Loopback, 27015);
+            var neutralEndPoint = new IPEndPoint(IPAddress.Loopback, 27016);
+            var badEndPoint = new IPEndPoint(IPAddress.Loopback, 27017);
 
-            serverList.TryAdd( goodEndPoint );
-            serverList.TryAdd( neutralEndPoint );
             serverList.TryAdd( badEndPoint );
+            serverList.TryAdd( neutralEndPoint );
+            serverList.TryAdd( goodEndPoint );
 
-            const int numTimesToMark = 5;
+            serverList.TryMark( badEndPoint, ServerQuality.Bad );
+            serverList.TryMark( goodEndPoint, ServerQuality.Good );
 
-            for( int i = 0; i < numTimesToMark; i++ )
-            {
-                serverList.TryMark( goodEndPoint, ServerQuality.Good );
-                serverList.TryMark(badEndPoint, ServerQuality.Bad);
-            }
+            var nextServerCandidate = serverList.GetNextServerCandidate();
+            Assert.Equal( neutralEndPoint, nextServerCandidate );
 
-            var numTimesGotGoodServer = 0;
-            var numTimesGotNeutralServer = 0;
-            var numTimesGotBadServer = 0;
+            serverList.TryMark( badEndPoint, ServerQuality.Good);
 
-            const int numTimesToGetServer = 1000000;
-
-            for ( int i = 0; i < numTimesToGetServer; i++ )
-            {
-                var nextServer = serverList.GetNextServerCandidate();
-
-                if ( nextServer == goodEndPoint )
-                {
-                    numTimesGotGoodServer++;
-                }
-                else if ( nextServer == neutralEndPoint )
-                {
-                    numTimesGotNeutralServer++;
-                }
-                else if ( nextServer == badEndPoint )
-                {
-                    numTimesGotBadServer++;
-                }
-                else
-                {
-                    Assert.True( false, "Got server that was not added to the server list." );
-                }
-            }
-
-            Assert.True( numTimesGotGoodServer > numTimesGotNeutralServer, "Should get good servers more times than neutral servers" );
-            Assert.True( numTimesGotGoodServer > numTimesGotBadServer, "Should get good servers more times than bad servers" );
-            Assert.True( numTimesGotNeutralServer > numTimesGotBadServer, "Should get neutral servers more times than bad servers" );
+            nextServerCandidate = serverList.GetNextServerCandidate();
+            Assert.Equal( badEndPoint, nextServerCandidate );
         }
-
+        
         [Fact]
         public void TryMark_ReturnsTrue_IfServerInList()
         {
