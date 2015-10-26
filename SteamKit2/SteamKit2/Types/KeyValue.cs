@@ -316,7 +316,7 @@ namespace SteamKit2
         public List<KeyValue> Children { get; private set; }
 
         /// <summary>
-        /// This gets the all the children's keys of this <see cref="KeyValue"/>.
+        /// This gets the all the childrens' <see cref="Name"/> of this <see cref="KeyValue"/>.
         /// </summary>
         public ICollection<string> Keys
         {
