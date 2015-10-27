@@ -127,9 +127,9 @@ namespace SteamKit2
             lock ( listLock )
             {
                 var distinctEndPoints = listToMerge.Distinct().ToArray();
-                var endpointsAlreadyInList = servers.Select( x => x.EndPoint );
 
-                var preExistingServers = servers.Where( s => distinctEndPoints.Contains( s.EndPoint ) ).ToArray();
+                var distinctEndPointsSet = new HashSet<IPEndPoint>(distinctEndPoints);
+                var preExistingServers = servers.Where( s => distinctEndPointsSet.Contains( s.EndPoint ) ).ToArray();
 
                 // This will let us do a simpler insert, but will also reset the bad connection state.
                 // If we were just told by Steam to use this CM, give it a second chance.
