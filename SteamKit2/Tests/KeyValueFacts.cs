@@ -541,12 +541,6 @@ namespace Tests
             Assert.Equal( ( ( IConvertible )value1 ).ToDouble( CultureInfo.CurrentCulture ), Convert.ToDouble( sbyte.MaxValue ) );
             Assert.Equal( ( ( IConvertible )value1 ).ToDecimal( CultureInfo.CurrentCulture ), Convert.ToDecimal( sbyte.MaxValue ) );
 
-            DateTime d = DateTime.Now;
-
-            KeyValue dt = new KeyValue( null, d.ToString( "s", CultureInfo.CurrentCulture ) );
-
-            Assert.Equal( ( ( IConvertible )value1 ).ToDateTime( CultureInfo.CurrentCulture ), d );
-
             KeyValue cTest = new KeyValue( null, bool.TrueString );
 
             Assert.Equal( ( ( IConvertible )cTest ).ToBoolean( CultureInfo.CurrentCulture ), true );
