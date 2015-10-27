@@ -509,7 +509,7 @@ namespace Tests
             TimeSpan tVal = new TimeSpan( TimeSpan.TicksPerDay * 60 );
             KeyValue root = new KeyValue( "root" ),
                 value1 = new KeyValue( "ByteTest", sbyte.MaxValue.ToString() ),
-                value2 = new KeyValue( "TimeSpanTest", tVal.ToString( "s", CultureInfo.CurrentCulture ) );
+                value2 = new KeyValue( "TimeSpanTest", tVal.ToString() );
 
             root.Add( value1 );
             root.Add( value2 );
@@ -526,7 +526,7 @@ namespace Tests
             Assert.Equal( root.Values.Count, root.Keys.Count );
 
             TimeSpan tVal2;
-            Assert.True( TimeSpan.TryParse( value2.Value, CultureInfo.CurrentCulture, out tVal2 ) );
+            Assert.True( TimeSpan.TryParse( value2.Value, out tVal2 ) );
             Assert.Equal( tVal2, tVal );
             Assert.Equal( ( ( IConvertible )value1 ).ToByte( CultureInfo.CurrentCulture ), ( byte )sbyte.MaxValue );
             Assert.Equal( ( ( IConvertible )value1 ).ToUInt16( CultureInfo.CurrentCulture ), ( byte )sbyte.MaxValue );
