@@ -29,8 +29,8 @@ namespace Tests
 
             kv.Children.Add( new KeyValue( "exists", "value" ) );
 
-            Assert.Equal( kv["exists"].Value, "value" );
-            Assert.Equal( kv["thiskeydoesntexist"], KeyValue.Invalid );
+            Assert.Equal( kv[ "exists" ].Value, "value" );
+            Assert.Equal( kv[ "thiskeydoesntexist" ], KeyValue.Invalid );
         }
 
         [Fact]
@@ -38,15 +38,15 @@ namespace Tests
         {
             KeyValue kv = new KeyValue();
 
-            kv["key"] = new KeyValue();
+            kv[ "key" ] = new KeyValue();
 
             Assert.Equal( kv.Children.Count, 1 );
 
-            kv["key"] = new KeyValue();
+            kv[ "key" ] = new KeyValue();
 
             Assert.Equal( kv.Children.Count, 1 );
 
-            kv["key2"] = new KeyValue();
+            kv[ "key2" ] = new KeyValue();
 
             Assert.Equal( kv.Children.Count, 2 );
         }
@@ -60,10 +60,10 @@ namespace Tests
 
             Assert.Null( subkey.Name );
 
-            kv["subkey"] = subkey;
+            kv[ "subkey" ] = subkey;
 
             Assert.Equal( subkey.Name, "subkey" );
-            Assert.Equal( kv["subkey"].Name, "subkey" );
+            Assert.Equal( kv[ "subkey" ].Name, "subkey" );
         }
 
         [Fact]
@@ -208,7 +208,7 @@ namespace Tests
             kv.Children.Add( new KeyValue( "num_params", "0" ) );
             kv.Children.Add( new KeyValue( "watching_server", "[A:1:2108935169:5412]" ) );
             kv.Children.Add( new KeyValue( "watching_from_server", "[A:1:864468994:5412]" ) );
-            
+
             string tempFileName = null;
             try
             {
@@ -242,7 +242,7 @@ namespace Tests
             kv.Children.Add( new KeyValue( "num_params", "0" ) );
             kv.Children.Add( new KeyValue( "watching_server", "[A:1:2108935169:5412]" ) );
             kv.Children.Add( new KeyValue( "watching_from_server", "[A:1:864468994:5412]" ) );
-            
+
             byte[] binaryValue;
             using ( var ms = new MemoryStream() )
             {
@@ -280,7 +280,7 @@ namespace Tests
             {
                 var originalChild = kv.Children[ i ];
                 var deserializedChild = deserializedKv.Children[ i ];
-                
+
                 Assert.Equal( originalChild.Name, deserializedChild.Name );
                 Assert.Equal( originalChild.Value, deserializedChild.Value );
             }
@@ -308,7 +308,7 @@ namespace Tests
             }
 
             Assert.Null( deserializedKv.Name );
-            Assert.Equal(1, deserializedKv.Children.Count );
+            Assert.Equal( 1, deserializedKv.Children.Count );
 
             var actualKv = deserializedKv.Children[ 0 ];
 
@@ -319,7 +319,7 @@ namespace Tests
             {
                 var originalChild = kv.Children[ i ];
                 var deserializedChild = actualKv.Children[ i ];
-                
+
                 Assert.Equal( originalChild.Name, deserializedChild.Name );
                 Assert.Equal( originalChild.Value, deserializedChild.Value );
             }
@@ -342,8 +342,8 @@ namespace Tests
             Assert.True( success, "Should have read test object." );
             Assert.Equal( "TestObject", kv.Name );
             Assert.Equal( 1, kv.Children.Count );
-            Assert.Equal( "key", kv.Children[0].Name );
-            Assert.Equal( "value", kv.Children[0].Value );
+            Assert.Equal( "key", kv.Children[ 0 ].Name );
+            Assert.Equal( "value", kv.Children[ 0 ].Value );
         }
 
 #pragma warning disable 0618
@@ -367,8 +367,8 @@ namespace Tests
             var actualKv = kv.Children[ 0 ];
             Assert.Equal( "TestObject", actualKv.Name );
             Assert.Equal( 1, actualKv.Children.Count );
-            Assert.Equal( "key", actualKv.Children[0].Name );
-            Assert.Equal( "value", actualKv.Children[0].Value );
+            Assert.Equal( "key", actualKv.Children[ 0 ].Name );
+            Assert.Equal( "value", actualKv.Children[ 0 ].Value );
         }
 
 #pragma warning restore 0618
@@ -376,7 +376,7 @@ namespace Tests
         [Fact]
         public void KeyValuesReadsBinaryWithLeftoverData()
         {
-            var binary = Utils.DecodeHexString( TestObjectHex + Guid.NewGuid().ToString().Replace("-", "") );
+            var binary = Utils.DecodeHexString( TestObjectHex + Guid.NewGuid().ToString().Replace( "-", "" ) );
             var kv = new KeyValue();
             bool success;
             using ( var ms = new MemoryStream( binary ) )
@@ -389,8 +389,8 @@ namespace Tests
             Assert.True( success, "Should have read test object." );
             Assert.Equal( "TestObject", kv.Name );
             Assert.Equal( 1, kv.Children.Count );
-            Assert.Equal( "key", kv.Children[0].Name );
-            Assert.Equal( "value", kv.Children[0].Value );
+            Assert.Equal( "key", kv.Children[ 0 ].Name );
+            Assert.Equal( "value", kv.Children[ 0 ].Value );
         }
 
         [Fact]
@@ -425,7 +425,7 @@ namespace Tests
             }
 
             Assert.True( success );
-            
+
             Assert.Equal( "TestObject", kv.Name );
             Assert.Equal( 2, kv.Children.Count );
             Assert.Equal( "key1", kv.Children[ 0 ].Name );
@@ -473,7 +473,7 @@ namespace Tests
         public void KeyValuesSavesTextToStream()
         {
             var expected = "\"RootNode\"\n{\n\t\"key1\"\t\t\"value1\"\n\t\"key2\"\n\t{\n\t\t\"ChildKey\"\t\t\"ChildValue\"\n\t}\n}\n";
-            
+
             var kv = new KeyValue( "RootNode" )
             {
                 Children =
@@ -502,61 +502,86 @@ namespace Tests
 
             Assert.Equal( expected, text );
         }
-        
+
         [Fact]
         public void KeyValuesDictTest()
         {
-            TimeSpan tVal = new TimeSpan(TimeSpan.TicksPerDay * 60);
-            KeyValue root = new KeyValue("root"),
-                value1 = new KeyValue("ByteTest", byte.MaxValue.ToString()),
-                value2 = new KeyValue("TimeSpanTest", tVal.ToString());
+            TimeSpan tVal = new TimeSpan( TimeSpan.TicksPerDay * 60 );
+            KeyValue root = new KeyValue( "root" ),
+                value1 = new KeyValue( "ByteTest", sbyte.MaxValue.ToString() ),
+                value2 = new KeyValue( "TimeSpanTest", tVal.ToString() );
 
-            root.Add(value1);
-            root.Add(value2);
+            root.Add( value1 );
+            root.Add( value2 );
 
-            Assert.NotEqual(value1.CompareTo(value2), 0);
-            Assert.Equal(root.CompareTo(root), 0);
-            Assert.True(root.Equals(root));
-            Assert.False(root.Equals(value1));
+            Assert.NotEqual( value1.CompareTo( value2 ), 0 );
+            Assert.Equal( root.CompareTo( root ), 0 );
+            Assert.True( root.Equals( root ) );
+            Assert.False( root.Equals( value1 ) );
 
-            Assert.True(root.Contains(value1));
-            Assert.True(root.Contains(value2));
+            Assert.True( root.Contains( value1 ) );
+            Assert.True( root.Contains( value2 ) );
 
-            Assert.Equal(root.Keys.Count, 2);
-            Assert.Equal(root.Values.Count, root.Keys.Count);
+            Assert.Equal( root.Keys.Count, 2 );
+            Assert.Equal( root.Values.Count, root.Keys.Count );
 
             TimeSpan tVal2;
-            Assert.True(TimeSpan.TryParse(value2.Value, out tVal2));
-            Assert.Equal(tVal2, tVal);
-            Assert.Equal(((IConvertible)value1).ToUInt16(CultureInfo.CurrentCulture), byte.MaxValue);
+            Assert.True( TimeSpan.TryParse( value2.Value, out tVal2 ) );
+            Assert.Equal( tVal2, tVal );
+            Assert.Equal( ( ( IConvertible )value1 ).ToByte( CultureInfo.CurrentCulture ), ( byte )sbyte.MaxValue );
+            Assert.Equal( ( ( IConvertible )value1 ).ToUInt16( CultureInfo.CurrentCulture ), ( byte )sbyte.MaxValue );
+            Assert.Equal( ( ( IConvertible )value1 ).ToUInt32( CultureInfo.CurrentCulture ), ( byte )sbyte.MaxValue );
+            Assert.Equal( ( ( IConvertible )value1 ).ToUInt64( CultureInfo.CurrentCulture ), ( byte )sbyte.MaxValue );
+            Assert.Equal( ( ( IConvertible )value1 ).ToSByte( CultureInfo.CurrentCulture ), sbyte.MaxValue );
+            Assert.Equal( ( ( IConvertible )value1 ).ToInt16( CultureInfo.CurrentCulture ), sbyte.MaxValue );
+            Assert.Equal( ( ( IConvertible )value1 ).ToInt32( CultureInfo.CurrentCulture ), sbyte.MaxValue );
+            Assert.Equal( ( ( IConvertible )value1 ).ToInt64( CultureInfo.CurrentCulture ), sbyte.MaxValue );
 
-            Assert.True(root.ContainsKey(value1.Name));
+            Assert.Equal( ( ( IConvertible )value1 ).ToSingle ( CultureInfo.CurrentCulture ), Convert.ToSingle( sbyte.MaxValue ) );
+            Assert.Equal( ( ( IConvertible )value1 ).ToDouble( CultureInfo.CurrentCulture ), Convert.ToDouble( sbyte.MaxValue ) );
+            Assert.Equal( ( ( IConvertible )value1 ).ToDecimal( CultureInfo.CurrentCulture ), Convert.ToDecimal( sbyte.MaxValue ) );
 
-            KeyValue value3 = new KeyValue("LOL?", "5");
+            DateTime d = DateTime.Now;
 
-            Assert.NotEqual(root[value2.Name], value3);
-            Assert.Equal(root[value3.Name], KeyValue.Invalid);
-            root.Add(value2.Name, value3);
-            Assert.Equal(root[value2.Name], value3);
-            Assert.NotEqual(root[value2.Name], value2);
+            KeyValue dt = new KeyValue( null, d.ToString() );
 
-            Assert.False(root.Remove(value2));
-            Assert.True(root.Remove(value3));
-            Assert.False(root.Remove(value3));
+            Assert.Equal( ( ( IConvertible )value1 ).ToDateTime( CultureInfo.CurrentCulture ), d );
 
-            Assert.Equal(root.Keys.Count, 1);
-            Assert.Equal(root.Values.Count, root.Keys.Count);
+            KeyValue cTest = new KeyValue( null, bool.TrueString );
+
+            Assert.Equal( ( ( IConvertible )cTest ).ToBoolean( CultureInfo.CurrentCulture ), true );
+
+            cTest.Value = string.Empty + 'c';
+
+            Assert.Equal( ( ( IConvertible )cTest ).ToChar( CultureInfo.CurrentCulture ), 'c' );
+
+            Assert.True( root.ContainsKey( value1.Name ) );
+
+            KeyValue value3 = new KeyValue( "LOL?", "5" );
+
+            Assert.NotEqual( root[ value2.Name ], value3 );
+            Assert.Equal( root[ value3.Name ], KeyValue.Invalid );
+            root.Add( value2.Name, value3 );
+            Assert.Equal( root[ value2.Name ], value3 );
+            Assert.NotEqual( root[ value2.Name ], value2 );
+
+            Assert.False( root.Remove( value2 ) );
+            Assert.True( root.Remove( value3 ) );
+            Assert.False( root.Remove( value3 ) );
+
+            Assert.Equal( root.Keys.Count, 1 );
+            Assert.Equal( root.Values.Count, root.Keys.Count );
 
             KeyValue test;
-            Assert.True(root.TryGetValue(value1.Name, out test));
-            Assert.Equal(test, value1);
-            Assert.False(root.TryGetValue(value2.Name, out test));
-            Assert.Equal(test, KeyValue.Invalid);
+            Assert.True( root.TryGetValue( value1.Name, out test ) );
+            Assert.Equal( test, value1 );
+            Assert.False( root.TryGetValue( value2.Name, out test ) );
+            Assert.Equal( test, KeyValue.Invalid );
 
             root.Clear();
 
-            Assert.Equal(root.Keys.Count, 0);
-            Assert.Equal(root.Values.Count, root.Keys.Count);
+            Assert.Equal( root.Keys.Count, 0 );
+            Assert.Equal( root.Values.Count, root.Keys.Count );
         }
 
         const string TestObjectHex = "00546573744F626A65637400016B65790076616C7565000808";
