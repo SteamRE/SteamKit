@@ -566,11 +566,8 @@ namespace SteamKit2.Internal
             var cmList = cmMsg.Body.cm_addresses
                 .Zip( cmMsg.Body.cm_ports, ( addr, port ) => new IPEndPoint( NetHelpers.GetIPAddress( addr ), ( int )port ) );
 
-            // update our bootstrap list with steam's list of CMs
-            foreach ( var cm in cmList )
-            {
-                Servers.TryAdd( cm );
-            }
+            // update our list with steam's list of CMs
+            Servers.MergeWithList( cmList );
         }
         void HandleSessionToken( IPacketMsg packetMsg )
         {

@@ -189,6 +189,39 @@ namespace Tests
             Assert.True( added, "TryAddRange should have added the IPEndPoints to the list." );
             Assert.Equal( 2, serverList.GetAllEndPoints().Length );
         }
+        
+        [Fact]
+        public void TryMergeWithList_AddsToHead_AndMovesExisting()
+        {
+            var seedList = new[]
+            {
+                new IPEndPoint( IPAddress.Loopback, 27025 ),
+                new IPEndPoint( IPAddress.Loopback, 27035 ),
+                new IPEndPoint( IPAddress.Loopback, 27045 ),
+                new IPEndPoint( IPAddress.Loopback, 27105 ),
+            };
+            var seeded = serverList.TryAddRange( seedList );
+            Assert.True( seeded, "Sanity check" );
+
+            var listToMerge = new[]
+            {
+                new IPEndPoint( IPAddress.Loopback, 27015 ),
+                new IPEndPoint( IPAddress.Loopback, 27035 ),
+                new IPEndPoint( IPAddress.Loopback, 27105 ),
+            };
+
+            serverList.MergeWithList( listToMerge );
+
+            var addresses = serverList.GetAllEndPoints();
+            Assert.Equal( 5, addresses.Length );
+            Assert.Equal( listToMerge[ 0 ], addresses[ 0 ] );
+            Assert.Equal( listToMerge[ 1 ], addresses[ 1 ] );
+            Assert.Equal( seedList[ 1 ], addresses[ 1 ] );
+            Assert.Equal( listToMerge[ 2 ], addresses[ 2 ] );
+            Assert.Equal( seedList[ 3 ], addresses[ 2 ] );
+            Assert.Equal( seedList[ 0 ], addresses[ 3 ] );
+            Assert.Equal( seedList[ 2 ], addresses[ 4 ] );
+        }
 
         [Fact]
         public void GetNextServerCandidate_ReturnsNull_IfListIsEmpty()

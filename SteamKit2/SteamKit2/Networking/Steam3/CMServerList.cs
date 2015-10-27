@@ -90,9 +90,9 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// Adds the elements of the specified collection of <see cref="System.Net.IPEndPoint" />s to the server list.
+        /// Adds the elements of the specified collection of <see cref="IPEndPoint" />s to the server list.
         /// </summary>
-        /// <param name="endPoints">The collection of <see cref="System.Net.IPEndPoint"/>s to add.</param>
+        /// <param name="endPoints">The collection of <see cref="IPEndPoint"/>s to add.</param>
         /// <returns>false if any of the specified servers are already in the list, true otherwise.</returns>
         public bool TryAddRange( IEnumerable<IPEndPoint> endPoints )
         {
@@ -115,6 +115,36 @@ namespace SteamKit2
             return true;
         }
 
+        /// <summary>
+        /// Merges the list with a new list of servers provided to us by the Steam servers.
+        /// This adds the new list of <see cref="IPEndPoint"/>s to the beginning of the list,
+        /// ensuring that any pre-existing servers are moved into their new place in order near
+        /// the beginning of the list.
+        /// </summary>
+        /// <param name="listToMerge">The <see cref="IPEndPoint"/>s to merge into this <see cref="SmartCMServerList"/>.</param>
+        public void MergeWithList( IEnumerable<IPEndPoint> listToMerge )
+        {
+            lock ( listLock )
+            {
+                var distinctEndPoints = listToMerge.Distinct().ToArray();
+                var endpointsAlreadyInList = servers.Select( x => x.EndPoint );
+
+                var preExistingServers = servers.Where( s => distinctEndPoints.Contains( s.EndPoint ) ).ToArray();
+
+                // This will let us do a simpler insert, but will also reset the bad connection state.
+                // If we were just told by Steam to use this CM, give it a second chance.
+                foreach ( var serverInfo in preExistingServers )
+                {
+                    servers.Remove( serverInfo );
+                }
+                
+                for ( var i = 0; i < distinctEndPoints.Length; i++ )
+                {
+                    AddCore( distinctEndPoints[ i ], i );
+                }
+            }
+        }
+
         void Add( IPEndPoint endPoint )
         {
             if ( servers.Any( x => x.EndPoint == endPoint ) )
@@ -127,9 +157,14 @@ namespace SteamKit2
 
         void AddCore( IPEndPoint endPoint )
         {
+            AddCore( endPoint, servers.Count );
+        }
+
+        void AddCore( IPEndPoint endPoint, int index )
+        {
             var info = new ServerInfo { EndPoint = endPoint };
 
-            servers.Add( info );
+            servers.Insert( index, info );
         }
 
         /// <summary>
@@ -198,7 +233,7 @@ namespace SteamKit2
                 Add( new IPEndPoint( IPAddress.Parse( "208.78.164.14" ), 27019 ) );
             }
         }
-        
+
         internal bool TryMark( IPEndPoint endPoint, ServerQuality quality )
         {
             lock ( listLock )
