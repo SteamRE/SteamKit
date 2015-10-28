@@ -92,16 +92,14 @@ namespace SteamKit2
                 char next = ( char )Peek();
                 if ( next == '/' )
                 {
-                    Read();
-                    if ( next == '/' )
-                    {
-                        ReadLine();
-                        return true;
-                    }
-                    else
-                    {
-                        throw new Exception( "BARE / WHAT ARE YOU DOIOIOIINODGNOIGNONGOIGNGGGGGGG" );
-                    }
+		    ReadLine();
+		    return true;
+		    /*
+		     *  As came up in parsing the Dota 2 units.txt file, the reference (Valve) implementation
+		     *  of the KV format considers a single forward slash to be sufficient to comment out the
+		     *  entirety of a line. While they still _tend_ to use two, it's not required, and likely
+		     *  is just done out of habit.
+		     */
                 }
 
                 return false;
