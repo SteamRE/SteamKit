@@ -1,0 +1,27 @@
+version: 1.0.{build}-Alpha
+os: Visual Studio 2015
+
+cache:
+  - '%LocalAppData%\NuGet\Cache'
+
+configuration:
+  - Debug
+  - Release
+
+init:
+  - git config --global core.autocrlf true
+
+install:
+  - set PATH=C:\Program Files (x86)\MSBuild\14.0\Bin;%PATH%
+
+before_build:
+  - nuget restore SteamKit2\SteamKit2.sln
+  - nuget restore Samples\Samples.sln
+
+build_script:
+  - msbuild SteamKit2\SteamKit2.sln
+  - msbuild Samples\Samples.sln
+
+test:
+  assemblies:
+    - 'SteamKit2\Tests\Bin\$(configuration)\*.dll'
