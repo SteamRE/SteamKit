@@ -1,6 +1,7 @@
 # SteamKit2
 
-[![Build Status](https://img.shields.io/travis/SteamRE/SteamKit.svg?style=flat-square)](https://travis-ci.org/SteamRE/SteamKit)
+[![Build Status (Mono)](https://img.shields.io/travis/SteamRE/SteamKit.svg?style=flat-square&label=Mono)](https://travis-ci.org/SteamRE/SteamKit)
+[![Build Status (Windows)](https://img.shields.io/appveyor/ci/SteamRE/SteamKit.svg?style=flat-square&label=Windows)](https://ci.appveyor.com/project/SteamRE/SteamKit)
 [![NuGet](https://img.shields.io/nuget/v/SteamKit2.svg?style=flat-square)](https://www.nuget.org/packages/SteamKit2/)
 
 
