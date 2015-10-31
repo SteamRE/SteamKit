@@ -10,7 +10,7 @@ Set-Location $PSScriptRoot
 
 if (-Not (Test-Path $NetHook2DependenciesTemporaryDirectory))
 {
-    New-Item -Path $NetHook2DependenciesTemporaryDirectory -Type Directory
+    New-Item -Path $NetHook2DependenciesTemporaryDirectory -Type Directory | Out-Null
 }
 
 Write-Host Loading System.IO.Compression...

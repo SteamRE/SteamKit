@@ -3,7 +3,7 @@ os: Visual Studio 2015
 
 cache:
   - '%LocalAppData%\NuGet\Cache'
-  - '%Temp%\nethook2-dependencies -> Resources\NetHook2\SetupDependencies.cmd'
+  - '%Temp%\nethook2-dependencies -> Resources\NetHook2\SetupDependencies.ps1'
 
 configuration:
   - Debug
