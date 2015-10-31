@@ -493,6 +493,40 @@ namespace SteamKit2
         }
 
         /// <summary>
+        /// This callback is fired in response to receiving historical messages. 
+        /// This can be due to a call to <see cref="RequestOfflineMessages"/>
+        /// or due to a call to <see cref="RequestMessageHistory(SteamID)"/>.
+        /// </summary>
+        public sealed class FriendMsgHistoryCallback : CallbackMsg
+        {
+            /// <summary>
+            /// Gets the result of the request.
+            /// </summary>
+            public EResult Result { get; private set; }
+
+            /// <summary>
+            /// Gets the SteamID of the user with whom these messages were exchanged.
+            /// </summary>
+            public SteamID SteamID { get; private set; }
+
+            /// <summary>
+            /// The messages exchanged with the user.
+            /// Offline messages are marked by having set 
+            /// <see cref="CMsgClientFSGetFriendMessageHistoryResponse.FriendMessage.unread"/> to true
+            /// </summary>
+            public List<CMsgClientFSGetFriendMessageHistoryResponse.FriendMessage> Messages { get; private set; }
+
+            internal FriendMsgHistoryCallback( CMsgClientFSGetFriendMessageHistoryResponse msg )
+            {
+                Result = ( EResult )msg.success;
+
+                SteamID = msg.steamid;
+
+                Messages = msg.messages;
+            }
+        }
+
+        /// <summary>
         /// This callback is fired in response to adding a user to your friends list.
         /// </summary>
         public sealed class FriendAddedCallback : CallbackMsg

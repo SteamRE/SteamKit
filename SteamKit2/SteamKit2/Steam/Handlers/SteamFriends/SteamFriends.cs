@@ -40,6 +40,7 @@ namespace SteamKit2
                 { EMsg.ClientFriendsList, HandleFriendsList },
                 { EMsg.ClientFriendMsgIncoming, HandleFriendMsg },
                 { EMsg.ClientFriendMsgEchoToSender, HandleFriendEchoMsg },
+                { EMsg.ClientFSGetFriendMessageHistoryResponse, HandleFriendMessageHistoryResponse },
                 { EMsg.ClientAccountInfo, HandleAccountInfo },
                 { EMsg.ClientAddFriendResponse, HandleFriendResponse },
                 { EMsg.ClientChatEnter, HandleChatEnter },
@@ -560,6 +561,32 @@ namespace SteamKit2
             return request.SourceJobID;
         }
 
+        /// <summary>
+        /// Requests the last few chat messages with a friend.
+        /// Results are returned in a <see cref="FriendMsgHistoryCallback"/>
+        /// </summary>
+        /// <param name="steamId">SteamID of the friend</param>
+        public void RequestMessageHistory( SteamID steamId )
+        {
+            var request = new ClientMsgProtobuf<CMsgClientFSGetFriendMessageHistory>( EMsg.ClientFSGetFriendMessageHistory );
+
+            request.Body.steamid = steamId;
+
+            this.Client.Send(request);
+        }
+
+        /// <summary>
+        /// Requests all offline messages.
+        /// Results are returned in a <see cref="FriendMsgHistoryCallback"/>.
+        /// This also marks them as read server side.
+        /// </summary>
+        public void RequestOfflineMessages()
+        {
+            var request = new ClientMsgProtobuf<CMsgClientFSGetFriendMessageHistoryForOfflineMessages>( EMsg.ClientFSGetFriendMessageHistoryForOfflineMessages );
+            
+            this.Client.Send( request );
+        }
+
 
         /// <summary>
         /// Handles a client message. This should not be called directly.
@@ -601,6 +628,14 @@ namespace SteamKit2
             var friendEchoMsg = new ClientMsgProtobuf<CMsgClientFriendMsgIncoming>( packetMsg );
 
             var callback = new FriendMsgEchoCallback( friendEchoMsg.Body );
+            this.Client.PostCallback( callback );
+        }
+
+        private void HandleFriendMessageHistoryResponse( IPacketMsg packetMsg )
+        {
+            var historyResponse = new ClientMsgProtobuf<CMsgClientFSGetFriendMessageHistoryResponse>( packetMsg );
+
+            var callback = new FriendMsgHistoryCallback( historyResponse.Body );
             this.Client.PostCallback( callback );
         }
 
