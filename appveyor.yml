@@ -3,10 +3,14 @@ os: Visual Studio 2015
 
 cache:
   - '%LocalAppData%\NuGet\Cache'
+  - '%Temp%\nethook2-dependencies -> Resources\NetHook2\SetupDependencies.cmd'
 
 configuration:
   - Debug
   - Release
+
+environment:
+  SK_BUILD_CONFIGURATION: $(configuration)
 
 init:
   - git config --global core.autocrlf true
@@ -17,11 +21,20 @@ install:
 before_build:
   - nuget restore SteamKit2\SteamKit2.sln
   - nuget restore Samples\Samples.sln
+  - Resources\NetHook2\SetupDependencies.cmd
 
 build_script:
   - msbuild SteamKit2\SteamKit2.sln
   - msbuild Samples\Samples.sln
+  - msbuild Resources\NetHook2\NetHook2.sln
+
+after_build:
+  - '7z a NetHook2.zip .\Resources\NetHook2\%SK_BUILD_CONFIGURATION%\*.dll .\Resources\NetHook2\%SK_BUILD_CONFIGURATION%\*.pdb'
 
 test:
   assemblies:
     - 'SteamKit2\Tests\Bin\$(configuration)\*.dll'
+
+artifacts:
+  - path: NetHook2.zip
+    name: NetHook2
