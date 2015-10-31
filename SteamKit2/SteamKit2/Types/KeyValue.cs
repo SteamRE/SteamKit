@@ -4,6 +4,7 @@
  */
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -210,10 +211,62 @@ namespace SteamKit2
         }
     }
 
+    internal static class KeyValueUtils
+    {
+        // Method below copied from here: http://stackoverflow.com/questions/2811725/is-there-a-built-in-way-to-compare-ienumerablet-by-their-elements
+        // Note, modified from original code.
+        public static int SequenceCompare<T>( this IEnumerable<T> source1, IEnumerable<T> source2 )
+        {
+            if ( source1 == null )
+                throw new ArgumentNullException( "source1" );
+            else if ( source1 == null )
+                throw new ArgumentNullException( "source2" );
+            using ( IEnumerator<T> iterator1 = source1.GetEnumerator() )
+            using ( IEnumerator<T> iterator2 = source2.GetEnumerator() )
+            {
+                while ( true )
+                {
+                    bool next1 = iterator1.MoveNext();
+                    bool next2 = iterator2.MoveNext();
+
+                    if ( !next1 && !next2 ) // Both sequences finished
+                    {
+                        return 0;
+                    }
+
+                    if ( !next1 ) // Only the first sequence has finished
+                    {
+                        return -1;
+                    }
+
+                    if ( !next2 ) // Only the second sequence has finished
+                    {
+                        return 1;
+                    }
+
+                    int comparison = -1;
+
+                    if ( typeof( T ).IsAssignableFrom( typeof( IComparable<T> ) ) )
+                        comparison = ( ( IComparable<T> )iterator1.Current ).CompareTo( iterator2.Current );
+                    else if ( typeof( T ).IsAssignableFrom( typeof( IComparable ) ) )
+                        comparison = ( ( IComparable )iterator1.Current ).CompareTo( iterator2.Current );
+                    else
+                        Comparer<T>.Default.Compare( iterator1.Current, iterator2.Current );
+
+                    // If elements are non-equal, we're done
+                    if ( comparison != 0 )
+                    {
+                        return comparison;
+                    }
+                }
+            }
+        }
+    }
+
     /// <summary>
     /// Represents a recursive string key to arbitrary value container.
     /// </summary>
-    public class KeyValue
+    public class KeyValue : IConvertible, IDictionary<string, KeyValue>, IEquatable<KeyValue>, IComparable<KeyValue>, IComparable
     {
         enum Type : byte
         {
@@ -260,6 +313,51 @@ namespace SteamKit2
         /// </summary>
         public List<KeyValue> Children { get; private set; }
 
+        /// <summary>
+        /// This gets the all the childrens' <see cref="Name"/> of this <see cref="KeyValue"/>.
+        /// </summary>
+        public ICollection<string> Keys
+        {
+            get
+            {
+                return this.Children.ConvertAll( c => c.Name );
+            }
+        }
+
+        /// <summary>
+        /// This gets all the children of this <see cref="KeyValue"/>.
+        /// </summary>
+        public ICollection<KeyValue> Values
+        {
+            get
+            {
+                return this.Children;
+            }
+        }
+
+        /// <summary>
+        /// This returns the number of children this <see cref="KeyValue"/> has.
+        /// </summary>
+        public int Count
+        {
+            get
+            {
+                return this.Children.Count;
+            }
+        }
+
+        /// <summary>
+        /// Is this readonly?
+        /// </summary>
+        /// <value><c>false</c>.</value>
+        public bool IsReadOnly
+        {
+            get
+            {
+                return false;
+            }
+        }
+
 
         /// <summary>
         /// Gets or sets the child <see cref="SteamKit2.KeyValue" /> with the specified key.
@@ -295,6 +393,287 @@ namespace SteamKit2
 
                 this.Children.Add( value );
             }
+        }
+
+        /// <summary>
+        /// Returns the <see cref="TypeCode"/> for class <see cref="KeyValue"/>.
+        /// </summary>
+        /// <returns>The enumerated constant, <see cref="TypeCode.String"/>.</returns>
+        public TypeCode GetTypeCode()
+        {
+            return this.Value.GetTypeCode();
+        }
+
+        bool IConvertible.ToBoolean( IFormatProvider provider )
+        {
+            return ( ( IConvertible )this.Value ).ToBoolean( provider );
+        }
+
+        char IConvertible.ToChar( IFormatProvider provider )
+        {
+            return ( ( IConvertible )this.Value ).ToChar( provider );
+        }
+
+        sbyte IConvertible.ToSByte( IFormatProvider provider )
+        {
+            return ( ( IConvertible )this.Value ).ToSByte( provider );
+        }
+
+        byte IConvertible.ToByte( IFormatProvider provider )
+        {
+            return ( ( IConvertible )this.Value ).ToByte( provider );
+        }
+
+        short IConvertible.ToInt16( IFormatProvider provider )
+        {
+            return ( ( IConvertible )this.Value ).ToInt16( provider );
+        }
+
+        ushort IConvertible.ToUInt16( IFormatProvider provider )
+        {
+            return ( ( IConvertible )this.Value ).ToUInt16( provider );
+        }
+
+        int IConvertible.ToInt32( IFormatProvider provider )
+        {
+            return ( ( IConvertible )this.Value ).ToInt32( provider );
+        }
+
+        uint IConvertible.ToUInt32( IFormatProvider provider )
+        {
+            return ( ( IConvertible )this.Value ).ToUInt32( provider );
+        }
+
+        long IConvertible.ToInt64( IFormatProvider provider )
+        {
+            return ( ( IConvertible )this.Value ).ToInt64( provider );
+        }
+
+        ulong IConvertible.ToUInt64( IFormatProvider provider )
+        {
+            return ( ( IConvertible )this.Value ).ToUInt64( provider );
+        }
+
+        float IConvertible.ToSingle( IFormatProvider provider )
+        {
+            return ( ( IConvertible )this.Value ).ToSingle( provider );
+        }
+
+        double IConvertible.ToDouble( IFormatProvider provider )
+        {
+            return ( ( IConvertible )this.Value ).ToDouble( provider );
+        }
+
+        decimal IConvertible.ToDecimal( IFormatProvider provider )
+        {
+            return ( ( IConvertible )this.Value ).ToDecimal( provider );
+        }
+
+        DateTime IConvertible.ToDateTime( IFormatProvider provider )
+        {
+            return ( ( IConvertible )this.Value ).ToDateTime( provider );
+        }
+
+        /// <summary>
+        /// Returns the value of <see cref="Value"/>.
+        /// </summary>
+        /// <param name="provider">(Reserved) An object that supplies culture-specific formatting information.</param>
+        /// <returns>The current value of <see cref="Value"/>.</returns>
+        public string ToString( IFormatProvider provider )
+        {
+            return this.Value;
+        }
+
+        object IConvertible.ToType( System.Type conversionType, IFormatProvider provider )
+        {
+            return ( ( IConvertible )this.Value ).ToType( conversionType, provider );
+        }
+
+        /// <summary>
+        /// This checks for a child at key.
+        /// </summary>
+        /// <param name="key">Key to look for.</param>
+        /// <returns><c>true</c> if child exists, <c>false</c> otherwise.</returns>
+        public bool ContainsKey( string key )
+        {
+            return this.Children.Any( c => string.Equals( c.Name, key, StringComparison.OrdinalIgnoreCase ) );
+        }
+
+        /// <summary>
+        /// This sets the child <see cref="SteamKit2.KeyValue" /> with the specified key.
+        /// </summary>
+        /// <param name="key">Key to set.</param>
+        /// <param name="value">Value to set.</param>
+        public void Add( string key, KeyValue value )
+        {
+            var existingChild = this.Children
+                .FirstOrDefault( c => string.Equals( c.Name, key, StringComparison.OrdinalIgnoreCase ) );
+
+            if ( existingChild != null )
+            {
+                // if the key already exists, remove the old one
+                this.Children.Remove( existingChild );
+            }
+
+            // ensure the given KV actually has the correct key assigned
+            value.Name = key;
+
+            this.Children.Add( value );
+        }
+
+        /// <summary>
+        /// This attempts to remove the child at key.
+        /// </summary>
+        /// <param name="key">Key to remove.</param>
+        /// <returns><c>true</c> if removed or doesn't exist, <c>false</c> otherwise.</returns>
+        public bool Remove( string key )
+        {
+            var value = this.Children.FirstOrDefault( c => string.Equals( c.Name, key, StringComparison.OrdinalIgnoreCase ) );
+            if ( value != null )
+                return this.Children.Remove( value );
+            return false;
+        }
+
+        /// <summary>
+        /// This attempts to retrieve the value at key.
+        /// </summary>
+        /// <param name="key">Key to find.</param>
+        /// <param name="value">Location to store the found value on success, <see cref="Invalid"/> if key not found.</param>
+        /// <returns><c>true</c> if value found, <c>false</c> otherwise.</returns>
+        public bool TryGetValue( string key, out KeyValue value )
+        {
+            value = this.Children.FirstOrDefault( c => string.Equals( c.Name, key, StringComparison.OrdinalIgnoreCase ) );
+            if ( value == null )
+                value = Invalid;
+            return value != Invalid;
+        }
+
+        /// <summary>
+        /// This sets the child <see cref="SteamKit2.KeyValue" /> with the specified <see cref="KeyValuePair{TKey, TValue}.Key"/>.
+        /// </summary>
+        /// <param name="item">The <see cref="KeyValuePair{TKey, TValue}"/> to add.</param>
+        public void Add( KeyValuePair<string, KeyValue> item )
+        {
+            var existingChild = this.Children
+                .FirstOrDefault( c => string.Equals( c.Name, item.Key, StringComparison.OrdinalIgnoreCase ) );
+
+            if ( existingChild != null )
+            {
+                // if the key already exists, remove the old one
+                this.Children.Remove( existingChild );
+            }
+
+            // ensure the given KV actually has the correct key assigned
+            item.Value.Name = item.Key;
+
+            this.Children.Add( item.Value );
+        }
+
+        /// <summary>
+        /// This clears this <see cref="KeyValue"/> of all children.
+        /// </summary>
+        public void Clear()
+        {
+            this.Children.Clear();
+        }
+
+        /// <summary>
+        /// This checks to see if the specified <see cref="KeyValuePair{TKey, TValue}"/> exists as a child.
+        /// </summary>
+        /// <param name="item">The <see cref="KeyValuePair{TKey, TValue}"/> to lookup.</param>
+        /// <returns><c>true</c> if match found, <c>false</c> otherwise.</returns>
+        public bool Contains( KeyValuePair<string, KeyValue> item )
+        {
+            return this.Children.Any( c => c.Equals( item ) );
+        }
+
+        /// <summary>
+        /// Copies the elements of this <see cref="KeyValue"/>'s children to an <see cref="Array"/>,
+        /// starting at a particular <see cref="Array"/> index.
+        /// </summary>
+        /// <param name="array">The one-dimensional <see cref="Array"/> that is the destination of
+        /// the elements copied from this <see cref="KeyValue"/>'s children.
+        /// The <see cref="Array"/> must have zero-based indexing.</param>
+        /// <param name="arrayIndex">The zero-based index in array at which copying begins.</param>
+        public void CopyTo( KeyValuePair<string, KeyValue>[] array, int arrayIndex )
+        {
+            this.Children.ConvertAll<KeyValuePair<string, KeyValue>>( c => c ).CopyTo( array, arrayIndex );
+        }
+
+        /// <summary>
+        /// This attempts to remove the child at <see cref="KeyValuePair{TKey, TValue}.Key"/>.
+        /// </summary>
+        /// <param name="item">The <see cref="KeyValuePair{TKey, TValue}"/> to remove.</param>
+        /// <returns><c>true</c> if removed or doesn't exist, <c>false</c> otherwise.</returns>
+        public bool Remove( KeyValuePair<string, KeyValue> item )
+        {
+            var value = this.Children.FirstOrDefault( c => c.Equals( item ) );
+            if ( value != null )
+                return this.Children.Remove( value );
+            return false;
+        }
+
+        /// <summary>
+        /// Returns an enumerator that iterates through the collection.
+        /// </summary>
+        /// <returns>A <see cref="IEnumerator{T}"/> that can be used to iterate through the collection.</returns>
+        public IEnumerator<KeyValuePair<string, KeyValue>> GetEnumerator()
+        {
+            return this.Children.ConvertAll<KeyValuePair<string, KeyValue>>( c => c ).GetEnumerator();
+        }
+
+        /// <summary>
+        /// Returns an enumerator that iterates through the collection.
+        /// </summary>
+        /// <returns>A <see cref="IEnumerator"/> that can be used to iterate through the collection.</returns>
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return this.Children.ConvertAll<KeyValuePair<string, KeyValue>>( c => c ).GetEnumerator();
+        }
+
+        /// <summary>
+        /// Returns whether this <see cref="KeyValue"/> is equals to another <see cref="KeyValue"/>.
+        /// </summary>
+        /// <param name="other">Other <see cref="KeyValue"/> to compare.</param>
+        /// <returns><c>true</c> if equal, <c>false</c> otherwise.</returns>
+        public bool Equals( KeyValue other )
+        {
+            return string.Equals( this.Name, other.Name, StringComparison.OrdinalIgnoreCase ) &&
+                string.Equals( this.Value, other.Value, StringComparison.OrdinalIgnoreCase ) &&
+                this.Children.OrderBy( c => c ).SequenceEqual( other.Children.OrderBy( c => c ) );
+        }
+
+        /// <summary>
+        /// Compares this <see cref="KeyValue"/> to another <see cref="KeyValue"/>.
+        /// </summary>
+        /// <param name="other">Other <see cref="KeyValue"/> to compare.</param>
+        /// <returns><c>1</c> if this is greater, <c>0</c> if equal, <c>-1</c> is this is lesser.</returns>
+        public int CompareTo( KeyValue other )
+        {
+            if ( other == null )
+                return -1;
+            else if ( !string.Equals( this.Name, other.Name, StringComparison.OrdinalIgnoreCase ) )
+                return string.Compare( this.Name, other.Name, true );
+            else if ( !string.Equals( this.Value, other.Value, StringComparison.OrdinalIgnoreCase ) )
+                return string.Compare( this.Value, other.Value, true );
+            else if ( !this.Children.OrderBy( c => c ).SequenceEqual( other.Children.OrderBy( c => c ) ) )
+                return this.Children.OrderBy( c => c ).SequenceCompare( other.Children.OrderBy( c => c ) );
+            return 0;
+        }
+
+        /// <summary>
+        /// Compares this <see cref="KeyValue"/> to a <see cref="object"/>.
+        /// </summary>
+        /// <param name="other">The <see cref="object"/> to compare.</param>
+        /// <returns><c>1</c> if this is greater, <c>0</c> if equal, <c>-1</c> is this is lesser.</returns>
+        public int CompareTo( object other )
+        {
+            if ( other == null )
+                return -1;
+            KeyValue c = other as KeyValue;
+            if ( c == null )
+                return -1;
+            return CompareTo( c );
         }
 
         /// <summary>
@@ -406,7 +785,7 @@ namespace SteamKit2
         {
             T value;
 
-            if ( Enum.TryParse<T>( this.Value, out value ) == false )
+            if ( Enum.TryParse( this.Value, out value ) == false )
             {
                 return defaultValue;
             }
@@ -415,10 +794,10 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// Returns a <see cref="System.String"/> that represents this instance.
+        /// Returns a <see cref="string"/> that represents this instance.
         /// </summary>
         /// <returns>
-        /// A <see cref="System.String"/> that represents this instance.
+        /// A <see cref="string"/> that represents this instance.
         /// </returns>
         public override string ToString()
         {
@@ -447,13 +826,13 @@ namespace SteamKit2
         public static KeyValue LoadAsBinary( string path )
         {
             var kv = LoadFromFile( path, true );
-            if (kv == null)
+            if ( kv == null )
             {
                 return null;
             }
 
             var parent = new KeyValue();
-            parent.Children.Add(kv);
+            parent.Children.Add( kv );
             return parent;
         }
 
@@ -465,7 +844,7 @@ namespace SteamKit2
         /// <returns><c>true</c> if the load was successful, or <c>false</c> on failure.</returns>
         public static bool TryLoadAsBinary( string path, out KeyValue keyValue )
         {
-            keyValue = LoadFromFile(path, true);
+            keyValue = LoadFromFile( path, true );
             return keyValue != null;
         }
 
@@ -641,7 +1020,7 @@ namespace SteamKit2
         /// <param name="asBinary">If set to <c>true</c>, saves this instance as binary.</param>
         public void SaveToStream( Stream stream, bool asBinary )
         {
-            if (asBinary)
+            if ( asBinary )
             {
                 RecursiveSaveBinaryToStream( stream );
             }
@@ -758,7 +1137,7 @@ namespace SteamKit2
                 }
 
                 current.Name = input.ReadNullTermString( Encoding.UTF8 );
-                
+
                 switch ( type )
                 {
                     case Type.None:
@@ -780,7 +1159,7 @@ namespace SteamKit2
 
                     case Type.WideString:
                         {
-                            DebugLog.WriteLine( "KeyValue", "Encountered WideString type when parsing binary KeyValue, which is unsupported. Returning false.");
+                            DebugLog.WriteLine( "KeyValue", "Encountered WideString type when parsing binary KeyValue, which is unsupported. Returning false." );
                             return false;
                         }
 
@@ -810,14 +1189,35 @@ namespace SteamKit2
                         }
                 }
 
-                if (parent != null)
+                if ( parent != null )
                 {
-                    parent.Children.Add(current);
+                    parent.Children.Add( current );
                 }
                 current = new KeyValue();
             }
 
             return true;
+        }
+
+        /// <summary>
+        /// Converts a <see cref="KeyValue"/> into a <see cref="KeyValuePair{TKey, TValue}"/>.
+        /// </summary>
+        /// <param name="c">The <see cref="KeyValue"/> to convert.</param>
+        public static implicit operator KeyValuePair<string, KeyValue>( KeyValue c )
+        {
+            if ( c == null )
+                return default( KeyValuePair<string, KeyValue> );
+            return new KeyValuePair<string, KeyValue>( c.Name, c );
+        }
+
+        /// <summary>
+        /// Converts a <see cref="KeyValuePair{TKey, TValue}"/> into a <see cref="KeyValue"/>.
+        /// </summary>
+        /// <param name="c">The <see cref="KeyValuePair{TKey, TValue}"/> to convert.</param>
+        public static implicit operator KeyValue( KeyValuePair<string, KeyValue> c )
+        {
+            c.Value.Name = c.Key;
+            return c.Value;
         }
     }
 }
