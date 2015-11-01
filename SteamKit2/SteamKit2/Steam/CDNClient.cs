@@ -72,6 +72,8 @@ namespace SteamKit2
                 };
             }
 
+            public static void Foo() { }
+
             /// <summary>
             /// Performs an implicit conversion from <see cref="System.Net.DnsEndPoint"/> to <see cref="SteamKit2.CDNClient.Server"/>.
             /// </summary>
