@@ -31,9 +31,18 @@ build_script:
 after_build:
   - '7z a NetHook2.zip .\Resources\NetHook2\%SK_BUILD_CONFIGURATION%\*.dll .\Resources\NetHook2\%SK_BUILD_CONFIGURATION%\*.pdb'
 
-test:
-  assemblies:
-    - 'SteamKit2\Tests\Bin\$(configuration)\*.dll'
+test_script:
+  - ps: >-
+      $TestAssembly = "SteamKit2\Tests\Bin\$env:SK_BUILD_CONFIGURATION\Tests.dll"
+      
+      if (Test-Path $TestAssembly)
+      {
+          & nuget install OpenCover -Version 4.6.166 -OutputDirectory SteamKit2\packages
+          & SteamKit2\packages\OpenCover.4.6.166\tools\OpenCover.Console.exe -register:user "-target:xunit.console.clr4.exe" "-targetargs:$TestAssembly /noshadow /appveyor" -returntargetcode "-filter:+[SteamKit2]* -[SteamKit2]SteamKit2.Internal.* -[SteamKit2]SteamKit2.*.Internal.* -[SteamKit2]SevenZip*" "-excludebyattribute:*.ProtoContract*" -hideskipped:All -output:SteamKit2-code-coverage.xml
+          $env:Path = "C:\Python34;C:\Python34\Scripts;" + $env:Path
+          & pip install codecov
+          & codecov -f "SteamKit2-code-coverage.xml" -X gcov
+      }
 
 artifacts:
   - path: NetHook2.zip
