@@ -32,12 +32,17 @@ namespace NetHookAnalyzer2
 		{
 			var gcMsg = MsgUtil.GetGCMsg(rawEMsg);
 
-			if (MessageTypeOverrides.GCBodyMap.ContainsKey(gcMsg))
+			Dictionary<uint, Type> gcBodyDict;
+			if (MessageTypeOverrides.GCBodyMap.TryGetValue(gcAppid, out gcBodyDict))
 			{
-				return Enumerable.Repeat(MessageTypeOverrides.GCBodyMap[gcMsg], 1);
+				Type bodyType;
+				if (gcBodyDict.TryGetValue(gcMsg, out bodyType))
+				{
+					return Enumerable.Repeat(bodyType, 1);
+				}
 			}
 
-			var gcMsgName = EMsgExtensions.GetGCMessageName(rawEMsg);
+			var gcMsgName = EMsgExtensions.GetGCMessageName(rawEMsg, gcAppid);
 
 			var typeMsgName = gcMsgName
 				.Replace("k_", string.Empty)
@@ -125,15 +130,15 @@ namespace NetHookAnalyzer2
 
 			switch (appid)
 			{
-				case 440:
+				case WellKnownAppIDs.TeamFortress2:
 					yield return "SteamKit2.GC.TF.Internal.CMsg";
 					break;
 
-				case 570:
+				case WellKnownAppIDs.Dota2:
 					yield return "SteamKit2.GC.Dota.Internal.CMsg";
 					break;
 
-				case 730:
+				case WellKnownAppIDs.CounterStrikeGlobalOffensive:
 					yield return "SteamKit2.GC.CSGO.Internal.CMsg";
 					break;
 			}

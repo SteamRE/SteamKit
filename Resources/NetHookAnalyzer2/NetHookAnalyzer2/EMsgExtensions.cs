@@ -1,28 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
 using SteamKit2;
+
+using CSGO = SteamKit2.GC.CSGO.Internal;
+using Dota = SteamKit2.GC.Dota.Internal;
+using TF2 = SteamKit2.GC.TF2.Internal;
 
 namespace NetHookAnalyzer2
 {
 	static class EMsgExtensions
 	{
-		public static string GetGCMessageName(uint eMsg)
+		public static string GetGCMessageName(uint eMsg, uint appId)
 		{
 			eMsg = MsgUtil.GetGCMsg( eMsg );
 
-			// first lets try the enum'd emsgs
-			Type[] eMsgEnums =
-			{
-				typeof( SteamKit2.GC.Dota.Internal.EDOTAGCMsg ),
-				typeof( SteamKit2.GC.CSGO.Internal.ECsgoGCMsg ),
-				typeof( SteamKit2.GC.Internal.EGCBaseMsg ),
-				typeof( SteamKit2.GC.Internal.ESOMsg ),
-				typeof( SteamKit2.GC.Internal.EGCSystemMsg ),
-				typeof( SteamKit2.GC.Internal.EGCItemMsg ),
-				typeof( SteamKit2.GC.Internal.EGCBaseClientMsg ),
-			};
+			var eMsgEnums = GetGCEMsgEnums(appId);
 
 			foreach ( var enumType in eMsgEnums )
 			{
@@ -30,21 +22,40 @@ namespace NetHookAnalyzer2
 					return Enum.GetName( enumType, ( int )eMsg );
 			}
 
-			// no dice on those, back to the classes
-			List<FieldInfo> fields = new List<FieldInfo>();
-			fields.AddRange( typeof( SteamKit2.GC.TF2.EGCMsg ).GetFields( BindingFlags.Public | BindingFlags.Static ) );
-			fields.AddRange( typeof( SteamKit2.GC.CSGO.EGCMsg ).GetFields( BindingFlags.Public | BindingFlags.Static ) );
-
-			var field = fields.SingleOrDefault( f =>
-			{
-				uint value = ( uint )f.GetValue( null );
-				return value == eMsg;
-			} );
-
-			if ( field != null )
-				return string.Format( "{0} ({1})", field.Name, field.DeclaringType.FullName );
-
 			return eMsg.ToString();
+		}
+
+		static IEnumerable<Type> GetGCEMsgEnums(uint appId)
+		{
+			switch (appId)
+			{
+				case WellKnownAppIDs.TeamFortress2:
+					yield return typeof(TF2.ETFGCMsg);
+					yield return typeof(TF2.EGCBaseMsg);
+					yield return typeof(TF2.ESOMsg);
+					yield return typeof(TF2.EGCSystemMsg);
+					yield return typeof(TF2.EGCItemMsg);
+					yield return typeof(TF2.EGCBaseClientMsg);
+					break;
+
+				case WellKnownAppIDs.Dota2:
+					yield return typeof(Dota.EDOTAGCMsg);
+					yield return typeof(Dota.EGCBaseMsg);
+					yield return typeof(Dota.ESOMsg);
+					yield return typeof(Dota.EGCSystemMsg);
+					yield return typeof(Dota.EGCItemMsg);
+					yield return typeof(Dota.EGCBaseClientMsg);
+					break;
+
+				case WellKnownAppIDs.CounterStrikeGlobalOffensive:
+					yield return typeof(CSGO.ECsgoGCMsg);
+					yield return typeof(CSGO.EGCBaseMsg);
+					yield return typeof(CSGO.ESOMsg);
+					yield return typeof(CSGO.EGCSystemMsg);
+					yield return typeof(CSGO.EGCItemMsg);
+					yield return typeof(CSGO.EGCBaseClientMsg);
+					break;
+			}
 		}
 	}
 }
