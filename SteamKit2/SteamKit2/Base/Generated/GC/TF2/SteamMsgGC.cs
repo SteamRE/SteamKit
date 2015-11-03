@@ -628,6 +628,24 @@ namespace SteamKit2.GC.TF2.Internal
       get { return _phone_verified; }
       set { _phone_verified = value; }
     }
+
+    private uint _skill_rating_6v6 = default(uint);
+    [global::ProtoBuf.ProtoMember(20, IsRequired = false, Name=@"skill_rating_6v6", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint skill_rating_6v6
+    {
+      get { return _skill_rating_6v6; }
+      set { _skill_rating_6v6 = value; }
+    }
+
+    private uint _skill_rating_9v9 = default(uint);
+    [global::ProtoBuf.ProtoMember(21, IsRequired = false, Name=@"skill_rating_9v9", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint skill_rating_9v9
+    {
+      get { return _skill_rating_9v9; }
+      set { _skill_rating_9v9 = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -1129,6 +1147,43 @@ namespace SteamKit2.GC.TF2.Internal
     {
       get { return _event_type; }
       set { _event_type = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgApplyStrangeCountTransfer")]
+  public partial class CMsgApplyStrangeCountTransfer : global::ProtoBuf.IExtensible
+  {
+    public CMsgApplyStrangeCountTransfer() {}
+    
+
+    private ulong _tool_item_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"tool_item_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong tool_item_id
+    {
+      get { return _tool_item_id; }
+      set { _tool_item_id = value; }
+    }
+
+    private ulong _item_src_item_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"item_src_item_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong item_src_item_id
+    {
+      get { return _item_src_item_id; }
+      set { _item_src_item_id = value; }
+    }
+
+    private ulong _item_dest_item_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"item_dest_item_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong item_dest_item_id
+    {
+      get { return _item_dest_item_id; }
+      set { _item_dest_item_id = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

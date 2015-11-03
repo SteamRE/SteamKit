@@ -119,6 +119,8 @@ enum ETFGCMsg {
 	k_EMsgGC_WorldItemPlacement_Attribute = 6510;
 	k_EMsgGC_WorldItemPlacement_Update = 6511;
 	k_EMsgGC_Match_Result = 6512;
+	k_EMsgGCVoteKickPlayerRequest = 6513;
+	k_EMsgGCVoteKickPlayerRequestResponse = 6514;
 	k_EMsgGCDev_GrantWarKill = 10001;
 }
 
@@ -1073,6 +1075,10 @@ message CMsgGC_Match_Result {
 		optional uint32 skillrating = 6;
 		optional uint32 skillrating_change = 7;
 		optional uint32 classes_played = 8;
+		optional uint32 kills = 9;
+		optional uint32 damage = 10;
+		optional uint32 healing = 11;
+		optional uint32 support = 12;
 	}
 
 	enum Status {
@@ -1095,6 +1101,7 @@ message CMsgGC_Match_Result {
 	repeated .CMsgGC_Match_Result.Player players = 10;
 	optional uint32 red_skillrating = 11;
 	optional uint32 blue_skillrating = 12;
+	optional uint32 win_reason = 13;
 }
 
 message CEconItemPreviewDataBlock {
@@ -1110,5 +1117,23 @@ message CMsgGC_Client2GCEconPreviewDataBlockRequest {
 
 message CMsgGC_Client2GCEconPreviewDataBlockResponse {
 	optional .CEconItemPreviewDataBlock iteminfo = 1;
+}
+
+message CSOTFLadderPlayerStats {
+	optional uint32 account_id = 1 [(key_field) = true];
+	optional .TF_SkillRatingMatchType match_type = 2 [default = TF_SkillRatingMatchType_INVALID, (key_field) = true];
+	optional uint32 games = 3;
+	optional uint32 kills = 4;
+	optional uint32 damage = 5;
+	optional uint32 healing = 6;
+	optional uint32 support = 7;
+}
+
+message CMsgGC_TFVoteKickPlayerRequest {
+	optional uint32 account_id = 1;
+}
+
+message CMsgGC_VoteKickPlayerRequestResponse {
+	optional bool allowed = 1;
 }
 
