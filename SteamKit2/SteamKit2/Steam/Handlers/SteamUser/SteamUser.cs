@@ -236,10 +236,7 @@ namespace SteamKit2
         /// Gets the SteamID of this client. This value is assigned after a logon attempt has succeeded.
         /// </summary>
         /// <value>The SteamID.</value>
-        public SteamID SteamID
-        {
-            get { return this.Client.SteamID; }
-        }
+        public SteamID SteamID => this.Client.SteamID;
 
 
         Dictionary<EMsg, Action<IPacketMsg>> dispatchMap;

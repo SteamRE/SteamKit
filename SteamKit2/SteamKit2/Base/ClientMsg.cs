@@ -28,14 +28,15 @@ namespace SteamKit2
         /// <value>
         /// 	<c>true</c> if this instance is protobuf backed; otherwise, <c>false</c>.
         /// </value>
-        public override bool IsProto { get { return true; } }
+        public override bool IsProto => true;
+
         /// <summary>
         /// Gets the network message type of this client message.
         /// </summary>
         /// <value>
         /// The network message type.
         /// </value>
-        public override EMsg MsgType { get { return Header.Msg; } }
+        public override EMsg MsgType => Header.Msg;
 
         /// <summary>
         /// Gets or sets the session id for this client message.
@@ -87,7 +88,7 @@ namespace SteamKit2
         /// <summary>
         /// Shorthand accessor for the protobuf header.
         /// </summary>
-        public CMsgProtoBufHeader ProtoHeader { get { return Header.Proto; } }
+        public CMsgProtoBufHeader ProtoHeader => Header.Proto;
 
 
         internal ClientMsgProtobuf( EMsg eMsg, int payloadReserve = 64 )
@@ -239,14 +240,15 @@ namespace SteamKit2
         /// <value>
         /// 	<c>true</c> if this instance is protobuf backed; otherwise, <c>false</c>.
         /// </value>
-        public override bool IsProto { get { return false; } }
+        public override bool IsProto => false;
+
         /// <summary>
         /// Gets the network message type of this client message.
         /// </summary>
         /// <value>
         /// The network message type.
         /// </value>
-        public override EMsg MsgType { get { return Header.Msg; } }
+        public override EMsg MsgType => Header.Msg;
 
         /// <summary>
         /// Gets or sets the session id for this client message.
@@ -392,14 +394,15 @@ namespace SteamKit2
         /// <value>
         /// 	<c>true</c> if this instance is protobuf backed; otherwise, <c>false</c>.
         /// </value>
-        public override bool IsProto { get { return false; } }
+        public override bool IsProto => false;
+
         /// <summary>
         /// Gets the network message type of this client message.
         /// </summary>
         /// <value>
         /// The network message type.
         /// </value>
-        public override EMsg MsgType { get { return Header.Msg; } }
+        public override EMsg MsgType => Header.Msg;
 
         /// <summary>
         /// Gets or sets the session id for this client message.

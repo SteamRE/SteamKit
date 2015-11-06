@@ -77,10 +77,7 @@ namespace SteamKit2
             _position = info.GetInt32("Position");
         }
 
-        public int Position
-        {
-            get { return _position; }
-        }
+        public int Position => _position;
 
         public override string Message
         {

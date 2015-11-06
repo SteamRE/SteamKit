@@ -42,26 +42,17 @@ namespace SteamKit2
             /// <summary>
             /// Gets the clan permission details of this chat member.
             /// </summary>
-            public EClanPermission Details
-            {
-                get { return KeyValues[ "Details" ].AsEnum<EClanPermission>(); }
-            }
+            public EClanPermission Details => KeyValues[ "Details" ].AsEnum<EClanPermission>();
 
             /// <summary>
             /// Gets the permissions this user has with the chatroom.
             /// </summary>
-            public EChatPermission Permissions
-            {
-                get { return KeyValues[ "Permissions" ].AsEnum<EChatPermission>(); }
-            }
+            public EChatPermission Permissions => KeyValues[ "Permissions" ].AsEnum<EChatPermission>();
 
             /// <summary>
             /// Gets the <see cref="SteamID"/> of this user.
             /// </summary>
-            public SteamID SteamID
-            {
-                get { return KeyValues[ "SteamID" ].AsUnsignedLong(); }
-            }
+            public SteamID SteamID => KeyValues[ "SteamID" ].AsUnsignedLong();
         }
 
         /// <summary>

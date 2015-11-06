@@ -102,10 +102,7 @@ namespace SteamKit2
             state = State.Disconnected;
         }
 
-        public override IPEndPoint CurrentEndPoint
-        {
-            get { return remoteEndPoint; }
-        }
+        public override IPEndPoint CurrentEndPoint => remoteEndPoint;
 
         /// <summary>
         /// Connects to the specified CM server.

@@ -27,14 +27,15 @@ namespace SteamKit2.GC
         /// <value>
         /// 	<c>true</c> if this instance is protobuf backed; otherwise, <c>false</c>.
         /// </value>
-        public override bool IsProto { get { return true; } }
+        public override bool IsProto => true;
+
         /// <summary>
         /// Gets the network message type of this gc message.
         /// </summary>
         /// <value>
         /// The network message type.
         /// </value>
-        public override uint MsgType { get { return Header.Msg; } }
+        public override uint MsgType => Header.Msg;
 
         /// <summary>
         /// Gets or sets the target job id for this gc message.
@@ -63,7 +64,7 @@ namespace SteamKit2.GC
         /// <summary>
         /// Shorthand accessor for the protobuf header.
         /// </summary>
-        public CMsgProtoBufHeader ProtoHeader { get { return Header.Proto; } }
+        public CMsgProtoBufHeader ProtoHeader => Header.Proto;
 
         /// <summary>
         /// Gets the body structure of this message.
@@ -163,7 +164,7 @@ namespace SteamKit2.GC
         /// <value>
         /// 	<c>true</c> if this instance is protobuf backed; otherwise, <c>false</c>.
         /// </value>
-        public override bool IsProto { get { return false; } }
+        public override bool IsProto => false;
 
         uint msgType;
         /// <summary>
@@ -172,7 +173,7 @@ namespace SteamKit2.GC
         /// <value>
         /// The network message type.
         /// </value>
-        public override uint MsgType { get { return msgType; } }
+        public override uint MsgType => msgType;
 
         /// <summary>
         /// Gets or sets the target job id for this gc message.

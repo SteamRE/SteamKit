@@ -45,7 +45,7 @@ namespace SteamKit2
         /// </summary>
         public Action<TCall> OnRun { get; set; }
 
-        internal override Type CallbackType { get { return typeof( TCall ); } }
+        internal override Type CallbackType => typeof( TCall );
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Callback&lt;TCall&gt;"/> class.

@@ -32,7 +32,7 @@ namespace SteamKit2
         /// <value>
         /// 	<c>true</c> if this instance is connected; otherwise, <c>false</c>.
         /// </value>
-        public bool IsConnected { get { return ConnectedUniverse != EUniverse.Invalid; } }
+        public bool IsConnected => ConnectedUniverse != EUniverse.Invalid;
 
         /// <summary>
         /// Gets or sets the connection timeout used when connecting to the UFS server.

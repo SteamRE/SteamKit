@@ -29,10 +29,7 @@ namespace SteamKit2.Internal
         /// Returns the the local IP of this client.
         /// </summary>
         /// <returns>The local IP.</returns>
-        public IPAddress LocalIP
-        {
-            get { return connection.GetLocalIP(); }
-        }
+        public IPAddress LocalIP => connection.GetLocalIP();
 
         /// <summary>
         /// Gets the connected universe of this client.
@@ -47,7 +44,7 @@ namespace SteamKit2.Internal
         /// <value>
         /// 	<c>true</c> if this instance is connected; otherwise, <c>false</c>.
         /// </value>
-        public bool IsConnected { get { return ConnectedUniverse != EUniverse.Invalid; } }
+        public bool IsConnected => ConnectedUniverse != EUniverse.Invalid;
 
         /// <summary>
         /// Gets the session token assigned to this client from the AM.

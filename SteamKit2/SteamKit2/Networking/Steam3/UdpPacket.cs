@@ -23,15 +23,9 @@ namespace SteamKit2
         /// <value>
         ///   <c>true</c> if this instance is valid; otherwise, <c>false</c>.
         /// </value>
-        public bool IsValid
-        {
-            get
-            {
-                return Header.Magic == UdpHeader.MAGIC
-                    && Header.PayloadSize <= MAX_PAYLOAD
-                    && Payload != null;
-            }
-        }
+        public bool IsValid => Header.Magic == UdpHeader.MAGIC
+                               && Header.PayloadSize <= MAX_PAYLOAD
+                               && Payload != null;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="UdpPacket"/> class with
