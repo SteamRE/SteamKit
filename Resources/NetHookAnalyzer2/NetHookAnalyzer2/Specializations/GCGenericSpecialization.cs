@@ -32,7 +32,7 @@ namespace NetHookAnalyzer2.Specializations
 
 				var gc = new
 				{
-					emsg = EMsgExtensions.GetGCMessageName(gameCoordinatorMessage.msgtype),
+					emsg = EMsgExtensions.GetGCMessageName(gameCoordinatorMessage.msgtype, gameCoordinatorMessage.appid),
 					header = header,
 					body = gcBody,
 				};

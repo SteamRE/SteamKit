@@ -3,17 +3,15 @@ using System.Collections.Generic;
 using System.IO;
 using ProtoBuf;
 using ProtoBuf.Meta;
-using SteamKit2.GC.Internal;
+using SteamKit2.GC.Dota.Internal;
 
 namespace NetHookAnalyzer2.Specializations
 {
     class Dota2SOSingleObjectGCSpecialization : IGameCoordinatorSpecialization
     {
-        const uint Dota2AppID = 570;
-
         public IEnumerable<KeyValuePair<string, object>> GetExtraObjects(object body, uint appID)
         {
-            if (appID != Dota2AppID)
+            if (appID != WellKnownAppIDs.Dota2)
             {
                 yield break;
             }

@@ -164,6 +164,7 @@ enum EGCItemMsg {
 	k_EMsgGCQuestObjective_RequestLoanerResponse = 2565;
 	k_EMsgGCApplyStrangeCountTransfer = 2566;
 	k_EMsgGCCraftCollectionUpgrade = 2567;
+	k_EMsgGCCraftHalloweenOffering = 2568;
 }
 
 enum EGCMsgResponse {
@@ -326,6 +327,14 @@ message CMsgGCQuestObjective_PointsChange {
 	optional uint32 standard_points = 2;
 	optional uint32 bonus_points = 3;
 	optional fixed64 owner_steamid = 4;
+	optional bool update_base_points = 5 [default = false];
+}
+
+message CMsgGCQuestObjective_PointsChangeResponse {
+	optional uint64 quest_item_id = 1;
+	optional uint32 standard_points = 2;
+	optional uint32 bonus_points = 3;
+	optional bool update_base_points = 4;
 }
 
 message CMsgGCQuestComplete_Request {
@@ -335,7 +344,19 @@ message CMsgGCQuestComplete_Request {
 message CMsgGCQuestCompleted {
 }
 
+message CMsgGCQuestObjective_RequestLoanerItems {
+	optional uint64 quest_item_id = 1;
+}
+
+message CMsgGCQuestObjective_RequestLoanerResponse {
+}
+
 message CMsgCraftCollectionUpgrade {
 	repeated uint64 item_id = 1;
+}
+
+message CMsgCraftHalloweenOffering {
+	optional uint64 tool_id = 1;
+	repeated uint64 item_id = 2;
 }
 

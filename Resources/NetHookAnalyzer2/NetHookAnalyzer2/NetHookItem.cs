@@ -97,7 +97,7 @@ namespace NetHookAnalyzer2
 				{
 					var proto = ReadAsProtobufMsg<CMsgGCClient>();
 					var gcEMsg = proto.Body.msgtype;
-					var gcName = EMsgExtensions.GetGCMessageName(gcEMsg);
+					var gcName = EMsgExtensions.GetGCMessageName(gcEMsg, proto.Body.appid);
 
 					var headerToTrim = "k_EMsg";
 					if (gcName.StartsWith(headerToTrim))

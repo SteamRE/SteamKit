@@ -309,6 +309,25 @@ namespace SteamKit2
         }
 
         /// <summary>
+        /// Request PICS access tokens for an app or package.
+        /// Results are returned in a <see cref="PICSTokensCallback"/> callback.
+        /// The returned <see cref="AsyncJob{T}"/> can also be awaited to retrieve the callback result.
+        /// </summary>
+        /// <param name="app">App id to request access token for.</param>
+        /// <param name="package">Package id to request access token for.</param>
+        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="PICSTokensCallback"/>.</returns>
+        public AsyncJob<PICSTokensCallback> PICSGetAccessTokens( uint? app, uint? package )
+        {
+            List<uint> apps = new List<uint>();
+            List<uint> packages = new List<uint>();
+
+            if ( app.HasValue ) apps.Add( app.Value );
+            if ( package.HasValue ) packages.Add( package.Value );
+
+            return PICSGetAccessTokens( apps, packages );
+        }
+
+        /// <summary>
         /// Request PICS access tokens for a list of app ids and package ids
         /// Results are returned in a <see cref="PICSTokensCallback"/> callback.
         /// The returned <see cref="AsyncJob{T}"/> can also be awaited to retrieve the callback result.

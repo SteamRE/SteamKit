@@ -125,6 +125,11 @@ namespace SteamKit2
 
             string serialNumber = (string)bootableDisk["SerialNumber"];
 
+            if ( string.IsNullOrEmpty( serialNumber ) )
+            {
+                return base.GetDiskId();
+            }
+
             return Encoding.UTF8.GetBytes( serialNumber );
         }
 
