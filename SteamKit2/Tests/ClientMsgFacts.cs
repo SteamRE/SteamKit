@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using SteamKit2;
@@ -38,6 +39,16 @@ namespace Tests
             0x65, 0x74, 0x61, 0x69, 0x6C, 0x73, 0x00, 0x02, 0x00, 0x00, 0x00, 0x08, 0x08, 0xE8, 0x03, 0x00,
             0x00,
         };
+
+        public ClientMsgFacts()
+        {
+            // Debug.Assert's default behavior is to display a dialog if the default trace listener is still installed
+            // xunit prior to 2.0 would disable the default trace listener and prevent the assert dialog
+            // since we're now on 2.0, we need to restore this behavior ourselves
+
+            Debug.Listeners.Clear();
+            Debug.Listeners.Add( new TraceAssertListener() );
+        }
 
         [Fact]
         public void PayloadReaderReadsNullTermString()
