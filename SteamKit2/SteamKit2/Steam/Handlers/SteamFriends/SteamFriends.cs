@@ -577,8 +577,8 @@ namespace SteamKit2
 
         /// <summary>
         /// Requests all offline messages.
-        /// Results are returned in a <see cref="FriendMsgHistoryCallback"/>.
         /// This also marks them as read server side.
+        /// Results are returned in a <see cref="FriendMsgHistoryCallback"/>.
         /// </summary>
         public void RequestOfflineMessages()
         {
@@ -635,7 +635,7 @@ namespace SteamKit2
         {
             var historyResponse = new ClientMsgProtobuf<CMsgClientFSGetFriendMessageHistoryResponse>( packetMsg );
 
-            var callback = new FriendMsgHistoryCallback( historyResponse.Body );
+            var callback = new FriendMsgHistoryCallback( historyResponse.Body, this.Client.ConnectedUniverse );
             this.Client.PostCallback( callback );
         }
 

@@ -515,17 +515,24 @@ namespace SteamKit2
             /// </summary>
             public ReadOnlyCollection<FriendMessage> Messages { get; private set; }
 
-            internal FriendMsgHistoryCallback( CMsgClientFSGetFriendMessageHistoryResponse msg )
+            internal FriendMsgHistoryCallback( CMsgClientFSGetFriendMessageHistoryResponse msg, EUniverse universe )
             {
                 Result = ( EResult )msg.success;
 
                 SteamID = msg.steamid;
 
                 var messages = msg.messages
-                 .Select(m => new FriendMessage(m))
+                 .Select( m =>
+                    {
+                        SteamID senderID = new SteamID( m.accountid, universe, EAccountType.Individual );
+                        DateTime timestamp = DateUtils.DateTimeFromUnixTime( m.timestamp );
+
+                        return new FriendMessage( senderID, m.unread, m.message, timestamp );
+                    }
+                 )
                  .ToList();
 
-                Messages = new ReadOnlyCollection<FriendMessage>(messages);
+                Messages = new ReadOnlyCollection<FriendMessage>( messages );
             }
 
             /// <summary>
@@ -544,7 +551,7 @@ namespace SteamKit2
                 public bool Unread { get; private set; }
 
                 /// <summary>
-                /// The actualy message
+                /// The actual message
                 /// </summary>
                 public string Message { get; private set; }
 
@@ -553,13 +560,12 @@ namespace SteamKit2
                 /// </summary>
                 public DateTime Timestamp { get; private set; }
 
-                internal FriendMessage( CMsgClientFSGetFriendMessageHistoryResponse.FriendMessage msg )
+                internal FriendMessage( SteamID steamID, bool unread, string message, DateTime timestamp )
                 {
-                    SteamID = new SteamID(msg.accountid);
-                    Unread = msg.unread;
-                    Message = msg.message;
-
-                    Timestamp = DateUtils.DateTimeFromUnixTime(msg.timestamp);
+                    SteamID = steamID;
+                    Unread = unread;
+                    Message = message;
+                    Timestamp = timestamp;
                 }
             }
         }
