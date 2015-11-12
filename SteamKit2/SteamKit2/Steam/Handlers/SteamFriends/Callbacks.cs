@@ -493,9 +493,9 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// This callback is fired in response to receiving historical messages. 
-        /// This can be due to a call to <see cref="RequestOfflineMessages"/>
-        /// or due to a call to <see cref="RequestMessageHistory(SteamID)"/>.
+        /// <para>This callback is fired in response to receiving historical messages.</para> 
+        /// See also <seealso cref="RequestOfflineMessages"/> and
+        /// <seealso cref="RequestMessageHistory(SteamID)"/>.
         /// </summary>
         public sealed class FriendMsgHistoryCallback : CallbackMsg
         {
@@ -511,10 +511,9 @@ namespace SteamKit2
 
             /// <summary>
             /// The messages exchanged with the user.
-            /// Offline messages are marked by having set 
-            /// <see cref="CMsgClientFSGetFriendMessageHistoryResponse.FriendMessage.unread"/> to true
+            /// Offline messages are marked by having set <see cref="FriendMessage.Unread"/> to <c>true</c>
             /// </summary>
-            public List<CMsgClientFSGetFriendMessageHistoryResponse.FriendMessage> Messages { get; private set; }
+            public ReadOnlyCollection<FriendMessage> Messages { get; private set; }
 
             internal FriendMsgHistoryCallback( CMsgClientFSGetFriendMessageHistoryResponse msg )
             {
@@ -522,7 +521,46 @@ namespace SteamKit2
 
                 SteamID = msg.steamid;
 
-                Messages = msg.messages;
+                var messages = msg.messages
+                 .Select(m => new FriendMessage(m))
+                 .ToList();
+
+                Messages = new ReadOnlyCollection<FriendMessage>(messages);
+            }
+
+            /// <summary>
+            /// Represents a single Message sent to or received from a friend
+            /// </summary>
+            public sealed class FriendMessage
+            {
+                /// <summary>
+                /// The SteamID of the User that wrote the message
+                /// </summary>
+                public SteamID SteamID { get; private set; }
+
+                /// <summary>
+                /// Whether or not the message has been read, i.e., is an offline message.
+                /// </summary>
+                public bool Unread { get; private set; }
+
+                /// <summary>
+                /// The actualy message
+                /// </summary>
+                public string Message { get; private set; }
+
+                /// <summary>
+                /// The time (in UTC) when the message was sent
+                /// </summary>
+                public DateTime Timestamp { get; private set; }
+
+                internal FriendMessage( CMsgClientFSGetFriendMessageHistoryResponse.FriendMessage msg )
+                {
+                    SteamID = new SteamID(msg.accountid);
+                    Unread = msg.unread;
+                    Message = msg.message;
+
+                    Timestamp = DateUtils.DateTimeFromUnixTime(msg.timestamp);
+                }
             }
         }
 
