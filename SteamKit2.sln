@@ -3,18 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Steam Language", "Steam Language", "{9B9ED32F-938F-4CC1-B3EC-AE94BB102FC1}"
 	ProjectSection(SolutionItems) = preProject
-		..\Resources\SteamLanguage\emsg.steamd = ..\Resources\SteamLanguage\emsg.steamd
-		..\Resources\SteamLanguage\enums.steamd = ..\Resources\SteamLanguage\enums.steamd
-		..\Resources\SteamLanguage\eresult.steamd = ..\Resources\SteamLanguage\eresult.steamd
-		..\Resources\SteamLanguage\gamecoordinator.steamd = ..\Resources\SteamLanguage\gamecoordinator.steamd
-		..\Resources\SteamLanguage\header.steamd = ..\Resources\SteamLanguage\header.steamd
-		..\Resources\SteamLanguage\netheader.steamd = ..\Resources\SteamLanguage\netheader.steamd
-		..\Resources\SteamLanguage\steammsg.steamd = ..\Resources\SteamLanguage\steammsg.steamd
+		Resources\SteamLanguage\emsg.steamd = Resources\SteamLanguage\emsg.steamd
+		Resources\SteamLanguage\enums.steamd = Resources\SteamLanguage\enums.steamd
+		Resources\SteamLanguage\eresult.steamd = Resources\SteamLanguage\eresult.steamd
+		Resources\SteamLanguage\gamecoordinator.steamd = Resources\SteamLanguage\gamecoordinator.steamd
+		Resources\SteamLanguage\header.steamd = Resources\SteamLanguage\header.steamd
+		Resources\SteamLanguage\netheader.steamd = Resources\SteamLanguage\netheader.steamd
+		Resources\SteamLanguage\steammsg.steamd = Resources\SteamLanguage\steammsg.steamd
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SteamKit2", "SteamKit2\SteamKit2.csproj", "{BEB5BF07-BB56-402A-97A3-A41C6444C6A5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SteamLanguageParser", "..\Resources\SteamLanguageParser\SteamLanguageParser.csproj", "{EBF5B7D5-58F4-4F68-A997-1BE71A72F078}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SteamLanguageParser", "Resources\SteamLanguageParser\SteamLanguageParser.csproj", "{EBF5B7D5-58F4-4F68-A997-1BE71A72F078}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{12C745D3-CA88-466A-86AD-62D54D9806E5}"
 EndProject
