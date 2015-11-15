@@ -1,16 +1,16 @@
 sudo: false
 language: csharp
-solution: SteamKit2/SteamKit2.sln
+solution: SteamKit2.sln
 
 install:
-    - nuget restore SteamKit2/SteamKit2.sln
+    - nuget restore SteamKit2.sln
     - nuget restore Samples/Samples.sln
-    - nuget install xunit.runners -Version 1.9.1 -o SteamKit2/packages
+    - nuget install xunit.runners -Version 1.9.1 -o packages
 
 script:
-    - xbuild /p:NoWarn=1584 SteamKit2/SteamKit2.sln /target:SteamKit2 /target:Tests
+    - xbuild /p:NoWarn=1584 SteamKit2.sln /target:SteamKit2 /target:Tests
     - xbuild Samples/Samples.sln
-    - mono SteamKit2/packages/xunit.runners.1.9.1/tools/xunit.console.exe SteamKit2/Tests/bin/Debug/Tests.dll
+    - mono packages/xunit.runners.1.9.1/tools/xunit.console.exe Tests/bin/Debug/Tests.dll
 
 notifications:
     irc:

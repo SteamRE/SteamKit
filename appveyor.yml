@@ -19,12 +19,12 @@ install:
   - set PATH=C:\Program Files (x86)\MSBuild\14.0\Bin;%PATH%
 
 before_build:
-  - nuget restore SteamKit2\SteamKit2.sln
+  - nuget restore SteamKit2.sln
   - nuget restore Samples\Samples.sln
   - Resources\NetHook2\SetupDependencies.cmd
 
 build_script:
-  - msbuild SteamKit2\SteamKit2.sln
+  - msbuild SteamKit2.sln
   - msbuild Samples\Samples.sln
   - msbuild Resources\NetHook2\NetHook2.sln
 
@@ -33,12 +33,12 @@ after_build:
 
 test_script:
   - ps: >-
-      $TestAssembly = "SteamKit2\Tests\Bin\$env:SK_BUILD_CONFIGURATION\Tests.dll"
+      $TestAssembly = "Tests\Bin\$env:SK_BUILD_CONFIGURATION\Tests.dll"
       
       if (Test-Path $TestAssembly)
       {
-          & nuget install OpenCover -Version 4.6.166 -OutputDirectory SteamKit2\packages
-          & SteamKit2\packages\OpenCover.4.6.166\tools\OpenCover.Console.exe -register:user "-target:xunit.console.clr4.exe" "-targetargs:$TestAssembly /noshadow /appveyor" -returntargetcode "-filter:+[SteamKit2]* -[SteamKit2]SteamKit2.Internal.* -[SteamKit2]SteamKit2.*.Internal.* -[SteamKit2]SevenZip*" "-excludebyattribute:*.ProtoContract*" -hideskipped:All -output:SteamKit2-code-coverage.xml
+          & nuget install OpenCover -Version 4.6.166 -OutputDirectory packages
+          & packages\OpenCover.4.6.166\tools\OpenCover.Console.exe -register:user "-target:xunit.console.clr4.exe" "-targetargs:$TestAssembly /noshadow /appveyor" -returntargetcode "-filter:+[SteamKit2]* -[SteamKit2]SteamKit2.Internal.* -[SteamKit2]SteamKit2.*.Internal.* -[SteamKit2]SevenZip*" "-excludebyattribute:*.ProtoContract*" -hideskipped:All -output:SteamKit2-code-coverage.xml
           $env:Path = "C:\Python34;C:\Python34\Scripts;" + $env:Path
           & pip install codecov
           & codecov -f "SteamKit2-code-coverage.xml" -X gcov
