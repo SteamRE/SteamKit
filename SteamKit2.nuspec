@@ -5,7 +5,7 @@
         <version>1.6.5</version>
         <title>SteamKit2</title>
         <authors>voided, netshroud</authors>
-        <licenseUrl>https://github.com/SteamRE/SteamKit/blob/master/SteamKit2/SteamKit2/license.txt</licenseUrl>
+        <licenseUrl>https://github.com/SteamRE/SteamKit/blob/master/SteamKit2/license.txt</licenseUrl>
         <projectUrl>https://github.com/SteamRE/SteamKit</projectUrl>
         <iconUrl>https://raw.github.com/SteamRE/SteamKit/master/Resources/Misc/steamkit_logo_128.png</iconUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
