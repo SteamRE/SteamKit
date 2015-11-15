@@ -18,7 +18,7 @@ namespace SteamLanguageParser
                 throw new Exception( "Unable to find SteamRE project path, please specify the `SteamRE` environment variable" );
             }
 
-            ParseFile( projectPath, @"Resources\SteamLanguage", "steammsg.steamd", "SteamKit2", @"SteamKit2\SteamKit2\Base\Generated\", "SteamLanguage", true, new CSharpGen(), "cs" );
+            ParseFile( projectPath, @"Resources\SteamLanguage", "steammsg.steamd", "SteamKit2", @"SteamKit2\Base\Generated\", "SteamLanguage", true, new CSharpGen(), "cs" );
 
             //ParseFile( projectPath, @"Resources\SteamLanguage", "steammsg.steamd", "SteamKit2", @"SteamKit2\ObjC\", "SteamLanguage", true, new ObjCInterfaceGen(), "h" );
             //ParseFile( projectPath, @"Resources\SteamLanguage", "steammsg.steamd", "SteamKit2", @"SteamKit2\ObjC\", "SteamLanguage", true, new ObjCImplementationGen(), "m" );
