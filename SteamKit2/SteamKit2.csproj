@@ -127,7 +127,7 @@
     <Compile Include="Base\Generated\Unified\Steamworks\SteamMsgOAuthSteamworks.cs" />
     <Compile Include="Base\MsgBase.cs" />
     <Compile Include="Base\PacketBase.cs" />
-    <Compile Include="Networking\Steam3\CMServerList.cs" />
+    <Compile Include="Networking\CMServerList.cs" />
     <Compile Include="Steam\CDNClient.cs" />
     <Compile Include="Steam\Handlers\SteamCloud\Callbacks.cs" />
     <Compile Include="Steam\Handlers\SteamCloud\SteamCloud.cs" />
@@ -172,7 +172,7 @@
     <Compile Include="Util\LZMA\Compress\RangeCoder\RangeCoderBitTree.cs" />
     <Compile Include="Util\LZMA\ICoder.cs" />
     <Compile Include="Util\StreamHelpers.cs" />
-    <Compile Include="Networking\Steam3\UdpPacket.cs" />
+    <Compile Include="Networking\UdpPacket.cs" />
     <Compile Include="Steam\Handlers\SteamApps\Callbacks.cs" />
     <Compile Include="Steam\Handlers\SteamApps\SteamApps.cs" />
     <Compile Include="Steam\Handlers\SteamFriends\Callbacks.cs" />
@@ -195,10 +195,10 @@
     <Compile Include="Util\ZipUtil.cs" />
     <Compile Include="Steam\SteamClient\SteamClient.cs" />
     <Compile Include="Steam\CMClient.cs" />
-    <Compile Include="Networking\Steam3\TcpConnection.cs" />
+    <Compile Include="Networking\TcpConnection.cs" />
     <Compile Include="Types\IPAddrPort.cs" />
-    <Compile Include="Networking\Steam3\UdpConnection.cs" />
-    <Compile Include="Networking\Steam3\Connection.cs" />
+    <Compile Include="Networking\UdpConnection.cs" />
+    <Compile Include="Networking\Connection.cs" />
     <Compile Include="Util\KeyDictionary.cs" />
     <Compile Include="Util\CryptoHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
