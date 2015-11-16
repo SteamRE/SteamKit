@@ -48,7 +48,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\SteamKit2\SteamKit2\SteamKit2.csproj">
+    <ProjectReference Include="..\..\SteamKit2\SteamKit2.csproj">
       <Project>{BEB5BF07-BB56-402A-97A3-A41C6444C6A5}</Project>
       <Name>SteamKit2</Name>
     </ProjectReference>
