@@ -298,15 +298,6 @@ namespace SteamKit2.Unified.Internal
     }
   
 
-    private string _currency = "";
-    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"currency", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
-    public string currency
-    {
-      get { return _currency; }
-      set { _currency = value; }
-    }
-
     private uint _cache_max_age_seconds = (uint)0;
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"cache_max_age_seconds", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue((uint)0)]

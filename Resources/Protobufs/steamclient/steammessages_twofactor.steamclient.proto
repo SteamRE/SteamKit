@@ -15,6 +15,7 @@ message CTwoFactor_Status_Response {
 	optional string token_gid = 6 [(description) = "String rep of token GID assigned by server"];
 	optional bool email_validated = 7 [(description) = "Account has verified email capability"];
 	optional string device_identifier = 8 [(description) = "Authenticator (phone) identifier"];
+	optional uint32 time_created = 9 [(description) = "When the token was created"];
 }
 
 message CTwoFactor_AddAuthenticator_Request {

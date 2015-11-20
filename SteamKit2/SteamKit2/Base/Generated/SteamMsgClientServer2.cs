@@ -1471,6 +1471,13 @@ namespace SteamKit2.Internal
       get { return _workshop_items; }
     }
   
+    private readonly global::System.Collections.Generic.List<ulong> _private_items = new global::System.Collections.Generic.List<ulong>();
+    [global::ProtoBuf.ProtoMember(4, Name=@"private_items", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public global::System.Collections.Generic.List<ulong> private_items
+    {
+      get { return _private_items; }
+    }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"WorkshopItemInfo")]
   public partial class WorkshopItemInfo : global::ProtoBuf.IExtensible
   {

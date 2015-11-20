@@ -207,6 +207,11 @@ message CPublishedFile_GetItemInfo_Response {
 }
 
 message CPublishedFile_GetUserFiles_Request {
+	message KVTag {
+		optional string key = 1;
+		optional string value = 2;
+	}
+
 	optional fixed64 steamid = 1 [(description) = "Steam ID of the user whose files are being requested."];
 	optional uint32 appid = 2 [(description) = "App Id of the app that the files were published to."];
 	optional uint32 page = 4 [default = 1, (description) = "(Optional) Starting page for results."];
@@ -216,6 +221,7 @@ message CPublishedFile_GetUserFiles_Request {
 	optional uint32 privacy = 9 [(description) = "(optional) Filter by privacy settings."];
 	repeated string requiredtags = 10 [(description) = "(Optional) Tags that must be present on a published file to satisfy the query."];
 	repeated string excludedtags = 11 [(description) = "(Optional) Tags that must NOT be present on a published file to satisfy the query."];
+	repeated .CPublishedFile_GetUserFiles_Request.KVTag required_kv_tags = 30 [(description) = "Required key-value tags to match on."];
 	optional uint32 filetype = 14 [(description) = "(Optional) File type to match files to."];
 	optional uint32 creator_appid = 15 [(description) = "App Id of the app that published the files, only matched if specified."];
 	optional string match_cloud_filename = 16 [(description) = "Match this cloud filename if specified."];

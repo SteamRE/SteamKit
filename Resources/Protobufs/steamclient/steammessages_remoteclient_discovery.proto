@@ -40,6 +40,7 @@ enum ERemoteDeviceStreamingResult {
 	k_ERemoteDeviceStreamingBusy = 4;
 	k_ERemoteDeviceStreamingInProgress = 5;
 	k_ERemoteDeviceStreamingCanceled = 6;
+	k_ERemoteDeviceStreamingDriversNotInstalled = 7;
 }
 
 message CMsgRemoteClientBroadcastHeader {
