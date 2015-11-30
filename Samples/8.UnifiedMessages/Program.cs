@@ -38,7 +38,7 @@ namespace Sample8_UnifiedMessages
         {
             if ( args.Length < 2 )
             {
-                Console.WriteLine( "Sample4: No username and password specified!" );
+                Console.WriteLine( "Sample8: No username and password specified!" );
                 return;
             }
 
