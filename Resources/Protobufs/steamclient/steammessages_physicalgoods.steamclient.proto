@@ -4,14 +4,57 @@ option cc_generic_services = true;
 
 message CPhysicalGoods_RegisterSteamController_Request {
 	optional string serial_number = 1;
+	optional string controller_code = 2;
 }
 
 message CPhysicalGoods_RegisterSteamController_Response {
+}
+
+message CPhysicalGoods_CompleteSteamControllerRegistration_Request {
+	optional string serial_number = 1;
+	optional string controller_code = 2;
+}
+
+message CPhysicalGoods_CompleteSteamControllerRegistration_Response {
+}
+
+message CPhysicalGoods_SteamControllerSetConfig_Request {
+	optional string serial_number = 1;
+	optional string controller_code = 2;
+	optional uint32 accountid = 3;
+	optional uint32 appid = 4;
+	optional uint64 publishedfileid = 5;
+}
+
+message CPhysicalGoods_SteamControllerSetConfig_Response {
+}
+
+message CPhysicalGoods_QueryAccountsRegisteredToSerial_Request {
+	optional string serial_number = 1;
+	optional string controller_code = 2;
+}
+
+message CPhysicalGoods_QueryAccountsRegisteredToSerial_Accounts {
+	optional uint32 accountid = 1;
+	optional bool registration_complete = 2;
+}
+
+message CPhysicalGoods_QueryAccountsRegisteredToSerial_Response {
+	repeated .CPhysicalGoods_QueryAccountsRegisteredToSerial_Accounts accounts = 1;
 }
 
 service PhysicalGoods {
 	option (service_description) = "A service to use physical goods related methods";
 	rpc RegisterSteamController (.CPhysicalGoods_RegisterSteamController_Request) returns (.CPhysicalGoods_RegisterSteamController_Response) {
 		option (method_description) = "Records a serial number and the calling user's account info for warranty purposes.";
+	}
+	rpc CompleteSteamControllerRegistration (.CPhysicalGoods_CompleteSteamControllerRegistration_Request) returns (.CPhysicalGoods_CompleteSteamControllerRegistration_Response) {
+		option (method_description) = "Marks a controller's registration as complete";
+	}
+	rpc SteamControllerSetConfig (.CPhysicalGoods_SteamControllerSetConfig_Request) returns (.CPhysicalGoods_SteamControllerSetConfig_Response) {
+		option (method_description) = "Sets one or more app->configuration settings for a user's steam controller.";
+	}
+	rpc QueryAccountsRegisteredToController (.CPhysicalGoods_QueryAccountsRegisteredToSerial_Request) returns (.CPhysicalGoods_QueryAccountsRegisteredToSerial_Response) {
+		option (method_description) = "Sends back a list of accounts registered to a controller.";
 	}
 }

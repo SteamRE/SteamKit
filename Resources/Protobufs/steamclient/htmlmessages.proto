@@ -406,20 +406,12 @@ message CMsgZoomToElementAtPosition {
 	optional uint32 browser_handle = 1;
 	optional uint32 x = 2;
 	optional uint32 y = 3;
-	optional float duration = 4 [default = 0];
 }
 
 message CMsgZoomToElementAtPositionResponse {
 	optional uint32 browser_handle = 1;
-	optional sint32 initial_x = 2;
-	optional sint32 initial_y = 3;
-	optional uint32 initial_width = 4;
-	optional uint32 initial_height = 5;
-	optional sint32 final_x = 6;
-	optional sint32 final_y = 7;
-	optional uint32 final_width = 8;
-	optional uint32 final_height = 9;
-	optional float zoom = 10;
+	optional float scale = 2;
+	optional float duration = 3;
 }
 
 message CMsgScalePageToValue {
@@ -540,9 +532,6 @@ message CMsgNodeHasFocus {
 
 message CMsgZoomToFocusedElement {
 	optional uint32 browser_handle = 1;
-	optional uint32 leftoffset = 2 [default = 0];
-	optional uint32 topoffset = 3 [default = 0];
-	optional float duration = 4 [default = 0];
 }
 
 message CMsgCloseFullScreenFlashIfOpen {

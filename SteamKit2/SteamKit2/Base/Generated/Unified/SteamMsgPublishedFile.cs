@@ -1497,6 +1497,13 @@ namespace SteamKit2.Unified.Internal
       get { return _excludedtags; }
     }
   
+    private readonly global::System.Collections.Generic.List<CPublishedFile_GetUserFiles_Request.KVTag> _required_kv_tags = new global::System.Collections.Generic.List<CPublishedFile_GetUserFiles_Request.KVTag>();
+    [global::ProtoBuf.ProtoMember(30, Name=@"required_kv_tags", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CPublishedFile_GetUserFiles_Request.KVTag> required_kv_tags
+    {
+      get { return _required_kv_tags; }
+    }
+  
 
     private uint _filetype = default(uint);
     [global::ProtoBuf.ProtoMember(14, IsRequired = false, Name=@"filetype", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
@@ -1632,6 +1639,34 @@ namespace SteamKit2.Unified.Internal
       get { return _return_metadata; }
       set { _return_metadata = value; }
     }
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"KVTag")]
+  public partial class KVTag : global::ProtoBuf.IExtensible
+  {
+    public KVTag() {}
+    
+
+    private string _key = "";
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"key", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string key
+    {
+      get { return _key; }
+      set { _key = value; }
+    }
+
+    private string _value = "";
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"value", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string value
+    {
+      get { return _value; }
+      set { _value = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

@@ -108,6 +108,15 @@ namespace SteamKit2.Unified.Internal
       get { return _device_identifier; }
       set { _device_identifier = value; }
     }
+
+    private uint _time_created = default(uint);
+    [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"time_created", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint time_created
+    {
+      get { return _time_created; }
+      set { _time_created = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
