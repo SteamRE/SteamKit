@@ -680,6 +680,15 @@ namespace SteamKit2.Internal
       get { return _two_factor_code; }
       set { _two_factor_code = value; }
     }
+
+    private bool _supports_rate_limit_response = default(bool);
+    [global::ProtoBuf.ProtoMember(102, IsRequired = false, Name=@"supports_rate_limit_response", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool supports_rate_limit_response
+    {
+      get { return _supports_rate_limit_response; }
+      set { _supports_rate_limit_response = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

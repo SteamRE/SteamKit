@@ -1510,6 +1510,15 @@ namespace SteamKit2.Internal
       get { return _manifest_id; }
       set { _manifest_id = value; }
     }
+
+    private bool _is_legacy = default(bool);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"is_legacy", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool is_legacy
+    {
+      get { return _is_legacy; }
+      set { _is_legacy = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

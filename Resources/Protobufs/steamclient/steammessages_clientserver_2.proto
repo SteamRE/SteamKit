@@ -227,6 +227,7 @@ message CMsgClientWorkshopItemInfoResponse {
 		optional fixed64 published_file_id = 1;
 		optional uint32 time_updated = 2;
 		optional fixed64 manifest_id = 3;
+		optional bool is_legacy = 4;
 	}
 
 	optional int32 eresult = 1 [default = 2];
