@@ -324,6 +324,8 @@ namespace SteamKit2
 
             if ( pubKey == null )
             {
+                connection.Disconnect();
+
                 DebugLog.WriteLine( "UFSClient", "HandleEncryptionRequest got request for invalid universe! Universe: {0} Protocol ver: {1}", eUniv, protoVersion );
                 return;
             }
@@ -354,10 +356,14 @@ namespace SteamKit2
 
             DebugLog.WriteLine( "UFSClient", "Encryption result: {0}", encResult.Body.Result );
 
-            if ( encResult.Body.Result == EResult.OK )
+            if ( encResult.Body.Result != EResult.OK || tempSessionKey == null )
             {
-                connection.SetNetEncryptionFilter( new NetFilterEncryption( tempSessionKey ) );
+                connection.Disconnect();
+
+                return;
             }
+
+            connection.SetNetEncryptionFilter( new NetFilterEncryption( tempSessionKey ) );
 
             steamClient.PostCallback( new ConnectedCallback( encResult.Body ) );
         }
