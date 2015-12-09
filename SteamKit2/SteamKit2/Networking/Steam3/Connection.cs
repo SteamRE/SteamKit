@@ -6,9 +6,10 @@
 
 
 using System;
+using System.IO;
+using System.Linq;
 using System.Net;
 using System.Security.Cryptography;
-using System.IO;
 
 namespace SteamKit2
 {
@@ -37,13 +38,19 @@ namespace SteamKit2
         }
     }
 
-    class NetFilterEncryption
+    interface INetFilterEncryption
     {
-        byte[] sessionKey;
+        byte[] ProcessIncoming( byte[] data );
+        byte[] ProcessOutgoing( byte[] data );
+    }
+
+    class NetFilterEncryption : INetFilterEncryption
+    {
+        readonly byte[] sessionKey;
 
         public NetFilterEncryption( byte[] sessionKey )
         {
-            DebugLog.Assert( sessionKey.Length == 32, "NetFilterEncryption", "AES session key was not 32 bytes!" );
+            DebugLog.Assert( sessionKey.Length == 32, nameof(NetFilterEncryption), "AES session key was not 32 bytes!" );
 
             this.sessionKey = sessionKey;
         }
@@ -56,16 +63,48 @@ namespace SteamKit2
             }
             catch ( CryptographicException ex )
             {
-                DebugLog.WriteLine( "NetFilterEncryption", "Unable to decrypt incoming packet: " + ex.Message );
+                DebugLog.WriteLine( nameof(NetFilterEncryption), "Unable to decrypt incoming packet: " + ex.Message );
 
                 // rethrow as an IO exception so it's handled in the network thread
                 throw new IOException( "Unable to decrypt incoming packet", ex );
             }
         }
 
-        public byte[] ProcessOutgoing( byte[] ms )
+        public byte[] ProcessOutgoing( byte[] data )
         {
-            return CryptoHelper.SymmetricEncrypt( ms, sessionKey );
+            return CryptoHelper.SymmetricEncrypt( data, sessionKey );
+        }
+    }
+
+    class NetFilterEncryptionWithHMAC : INetFilterEncryption
+    {
+        readonly byte[] sessionKey;
+
+        public NetFilterEncryptionWithHMAC( byte[] sessionKey )
+        {
+            DebugLog.Assert( sessionKey.Length == 32, nameof(NetFilterEncryption), "AES session key was not 32 bytes!" );
+
+            this.sessionKey = sessionKey;
+        }
+
+        public byte[] ProcessIncoming( byte[] data )
+        {
+            try
+            {
+                return CryptoHelper.SymmetricDecryptHMACIV( data, sessionKey );
+            }
+            catch ( CryptographicException ex )
+            {
+                DebugLog.WriteLine( nameof(NetFilterEncryptionWithHMAC), "Unable to decrypt incoming packet: " + ex.Message );
+
+                // rethrow as an IO exception so it's handled in the network thread
+                throw new IOException( "Unable to decrypt incoming packet", ex );
+            }
+        }
+
+        public byte[] ProcessOutgoing( byte[] data )
+        {
+            return CryptoHelper.SymmetricEncryptWithHMACIV( data, sessionKey );
         }
     }
 
@@ -139,8 +178,8 @@ namespace SteamKit2
         /// <summary>
         /// Sets the network encryption filter for this connection
         /// </summary>
-        /// <param name="filter">filter implementing <see cref="NetFilterEncryption"/></param>
-        public abstract void SetNetEncryptionFilter(NetFilterEncryption filter);
+        /// <param name="filter">filter implementing <see cref="INetFilterEncryption"/></param>
+        public abstract void SetNetEncryptionFilter( INetFilterEncryption filter );
     }
 
 }
