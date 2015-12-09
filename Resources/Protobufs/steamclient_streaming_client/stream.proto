@@ -293,8 +293,12 @@ message CStreamingClientConfig {
 }
 
 message CStreamingServerConfig {
-	optional bool enable_hardware_encoding = 1;
-	optional bool enable_traffic_priority = 2;
+	optional bool enable_hardware_encoding_nvidia = 1;
+	optional bool enable_hardware_encoding_amd = 2;
+	optional bool enable_hardware_encoding_intel = 3;
+	optional int32 software_encoding_threads = 4;
+	optional bool dynamically_adjust_resolution = 5;
+	optional bool enable_traffic_priority = 6;
 }
 
 message CNegotiatedConfig {
