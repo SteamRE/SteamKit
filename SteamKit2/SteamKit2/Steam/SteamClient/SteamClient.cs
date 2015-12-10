@@ -325,7 +325,10 @@ namespace SteamKit2
         {
             var encResult = new Msg<MsgChannelEncryptResult>( packetMsg );
 
-            PostCallback( new ConnectedCallback( encResult.Body ) );
+            if ( encResult.Body.Result == EResult.OK )
+            {
+                PostCallback( new ConnectedCallback( encResult.Body ) );
+            }
         }
 
         void HandleCMList( IPacketMsg packetMsg )

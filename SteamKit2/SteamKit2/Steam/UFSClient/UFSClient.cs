@@ -337,6 +337,8 @@ namespace SteamKit2
 
             if ( pubKey == null )
             {
+                connection.Disconnect();
+
                 DebugLog.WriteLine( "UFSClient", "HandleEncryptionRequest got request for invalid universe! Universe: {0} Protocol ver: {1}", eUniv, protoVersion );
                 return;
             }
@@ -387,15 +389,19 @@ namespace SteamKit2
 
             DebugLog.WriteLine( "UFSClient", "Encryption result: {0}", encResult.Body.Result );
 
-            if ( encResult.Body.Result == EResult.OK )
+            if ( encResult.Body.Result == EResult.OK && pendingNetFilterEncryption != null )
             {
                 Debug.Assert( pendingNetFilterEncryption != null );
                 connection.SetNetEncryptionFilter( pendingNetFilterEncryption );
+
+                pendingNetFilterEncryption = null;
+                steamClient.PostCallback( new ConnectedCallback( encResult.Body ) );
             }
-
-            pendingNetFilterEncryption = null;
-
-            steamClient.PostCallback( new ConnectedCallback( encResult.Body ) );
+            else
+            {
+                DebugLog.WriteLine( "UFSClient", "Encryption channel setup failed" );
+                connection.Disconnect();
+            }
         }
         void HandleLoginResponse( IPacketMsg packetMsg )
         {
