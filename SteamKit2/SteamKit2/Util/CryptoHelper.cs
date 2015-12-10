@@ -185,27 +185,19 @@ namespace SteamKit2
         /// <summary>
         /// Performs an encryption using AES/CBC/PKCS7 with an input byte array and key, with a IV (comprised of random bytes and the HMAC-SHA1 of the random bytes and plaintext) prepended using AES/ECB/None
         /// </summary>
-        public static byte[] SymmetricEncryptWithHMACIV( byte[] input, byte[] key )
+        public static byte[] SymmetricEncryptWithHMACIV( byte[] input, byte[] key, byte[] hmacSecret )
         {
-            Debug.Assert( key.Length >= 16 );
-            var truncatedKeyForHmac = new byte[ 16 ];
-            Array.Copy( key, 0, truncatedKeyForHmac, 0, truncatedKeyForHmac.Length );
-
             // IV is HMAC-SHA1(Random(3) + Plaintext) + Random(3). (Same random values for both)
             var iv = new byte[ 16 ];
             var random = GenerateRandomBlock( 3 );
             Array.Copy( random, 0, iv, iv.Length - random.Length, random.Length );
 
-            var hmacBuffer = new byte[ random.Length + input.Length ];
-            Array.Copy( random, 0, hmacBuffer, 0, random.Length );
-            Array.Copy( input, 0, hmacBuffer, random.Length, input.Length );
-
-            byte[] hmacBytes;
-            using ( var hmac = new HMACSHA1( truncatedKeyForHmac ) )
+            using ( var hmac = new HMACSHA1( hmacSecret ) )
             {
-                hmacBytes = hmac.ComputeHash( hmacBuffer );
+                hmac.TransformBlock( random, 0, random.Length, null, 0 );
+                hmac.TransformFinalBlock( input, 0, input.Length );
+                Array.Copy( hmac.Hash, iv, iv.Length - random.Length );
             }
-            Array.Copy( hmacBytes, 0, iv, 0, iv.Length - random.Length );
             
             return SymmetricEncryptWithIV( input, key, iv );
         }
@@ -220,9 +212,9 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// Decrypts using AES/CBC/PKCS7 with an input byte array and key, using the IV ((comprised of random bytes and the HMAC-SHA1 of the random bytes and plaintext) prepended using AES/ECB/None
+        /// Decrypts using AES/CBC/PKCS7 with an input byte array and key, using the IV (comprised of random bytes and the HMAC-SHA1 of the random bytes and plaintext) prepended using AES/ECB/None
         /// </summary>
-        public static byte[] SymmetricDecryptHMACIV( byte[] input, byte[] key )
+        public static byte[] SymmetricDecryptHMACIV( byte[] input, byte[] key, byte[] hmacSecret )
         {
             Debug.Assert( key.Length >= 16 );
             var truncatedKeyForHmac = new byte[ 16 ];
@@ -231,26 +223,17 @@ namespace SteamKit2
             byte[] iv;
             var plaintextData = SymmetricDecrypt( input, key, out iv );
 
-            var random = new byte[ 3 ];
-            Array.Copy( iv, iv.Length - random.Length, random, 0, random.Length );
-            var remotePartialHmac = new byte[ iv.Length - random.Length ];
-            Array.Copy( iv, 0, remotePartialHmac, 0, remotePartialHmac.Length );
-
-            var hmacBuffer = new byte[ random.Length + plaintextData.Length ];
-            Array.Copy( random, 0, hmacBuffer, 0, random.Length );
-            Array.Copy( plaintextData, 0, hmacBuffer, random.Length, plaintextData.Length );
-
+            // validate HMAC
             byte[] hmacBytes;
-            using ( var hmac = new HMACSHA1( truncatedKeyForHmac ) )
+            using ( var hmac = new HMACSHA1( hmacSecret ) )
             {
-                hmacBytes = hmac.ComputeHash( hmacBuffer);
+                hmac.TransformBlock( iv, iv.Length - 3, 3, null, 0 );
+                hmac.TransformFinalBlock( plaintextData, 0, plaintextData.Length );
+
+                hmacBytes = hmac.Hash;
             }
 
-            Debug.Assert( remotePartialHmac.Length <= hmacBytes.Length );
-            var computedPartialHmac = new byte[ remotePartialHmac.Length ];
-            Array.Copy( hmacBytes, 0, computedPartialHmac, 0, remotePartialHmac.Length );
-
-            if ( !computedPartialHmac.SequenceEqual( remotePartialHmac ) )
+            if ( !hmacBytes.Take( iv.Length - 3 ).SequenceEqual( iv.Take( iv.Length - 3 ) ) )
             {
                 throw new CryptographicException( string.Format( CultureInfo.InvariantCulture, "{0} was unable to decrypt packet: HMAC from server did not match computed HMAC.", nameof(NetFilterEncryption) ) );
             }
@@ -315,24 +298,24 @@ namespace SteamKit2
         public static byte[] VerifyAndDecryptPassword( byte[] input, string password )
         {
             byte[] key, hash;
-            using(SHA256 sha256 = SHA256Managed.Create())
+            using( SHA256 sha256 = SHA256Managed.Create() )
             {
-                byte[] password_bytes = Encoding.UTF8.GetBytes(password);
-                key = sha256.ComputeHash(password_bytes);
+                byte[] password_bytes = Encoding.UTF8.GetBytes( password );
+                key = sha256.ComputeHash( password_bytes );
             }
-            using(HMACSHA1 hmac = new HMACSHA1(key))
+            using( HMACSHA1 hmac = new HMACSHA1(key) )
             {
-                hash = hmac.ComputeHash(input, 0, 32);
+                hash = hmac.ComputeHash( input, 0, 32 );
             }
 
-            for (int i = 32; i < input.Length; i++)
-                if (input[i] != hash[i % 32])
+            for ( int i = 32; i < input.Length; i++ )
+                if ( input[ i ] != hash[ i % 32 ] )
                     return null;
 
-            byte[] encrypted = new byte[32];
-            Array.Copy(input, 0, encrypted, 0, 32);
+            byte[] encrypted = new byte[ 32 ];
+            Array.Copy( input, encrypted, encrypted.Length );
 
-            return CryptoHelper.SymmetricDecrypt(encrypted, key);
+            return CryptoHelper.SymmetricDecrypt( encrypted, key );
         }
 
         /// <summary>

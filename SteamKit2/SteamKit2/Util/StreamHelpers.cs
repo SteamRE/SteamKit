@@ -83,18 +83,6 @@ namespace SteamKit2
             stream.Write( data, 0, data.Length );
         }
 
-        private static byte[] bufferCache;
-
-        public static byte[] ReadBytesCached( this Stream stream, int len )
-        {
-            if (bufferCache == null || bufferCache.Length < len)
-                bufferCache = new byte[len];
-
-            stream.Read( bufferCache, 0, len );
-
-            return bufferCache;
-        }
-
         static byte[] discardBuffer = new byte[2 << 12];
 
         public static void ReadAndDiscard(this Stream stream, int len)

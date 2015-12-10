@@ -167,6 +167,7 @@ namespace SteamKit2.Internal
         /// </summary>
         public void Disconnect()
         {
+            pendingNetFilterEncryption = null;
             heartBeatFunc.Stop();
 
             connection.Disconnect();
@@ -426,7 +427,7 @@ namespace SteamKit2.Internal
             byte[] randomChallenge;
             if ( encRequest.Payload.Length >= 16 )
             {
-                randomChallenge = encRequest.Payload.ReadBytesCached( 16 );
+                randomChallenge = encRequest.Payload.ToArray();
             }
             else
             {
