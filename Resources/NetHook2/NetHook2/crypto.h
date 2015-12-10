@@ -22,7 +22,7 @@ public:
 	CSimpleDetour* Decrypt_Detour;
 
 	static bool __cdecl SymmetricEncryptWithIV( const uint8 *pubPlaintextData, uint32 cubPlaintextData, const uint8* pIV, uint32 cubIV, uint8 *pubEncryptedData, uint32 *pcubEncryptedData, const uint8 *pubKey, uint32 cubKey );
-	static bool __cdecl SymmetricDecrypt( const uint8 *pubEncryptedData, uint32 cubEncryptedData, uint8 *pubPlaintextData, uint32 *pcubPlaintextData, const uint8 *pubKey, uint32 cubKey );
+	static bool __cdecl SymmetricDecrypt( const uint8 *pubEncryptedData, uint32 cubEncryptedData, uint8 *pubPlaintextData, uint32 *pcubPlaintextData, uint8 *pubUnk, uint32 cubUnk, const uint8 *pubKey, uint32 cubKey );
 
 };
 

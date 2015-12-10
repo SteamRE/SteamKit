@@ -10,7 +10,7 @@
 
 
 bool (__cdecl *Encrypt_Orig)(const uint8*, uint32, const uint8*, uint32, uint8*, uint32*, const uint8*, uint32) = 0;
-bool (__cdecl *Decrypt_Orig)(const uint8*, uint32, uint8*, uint32*, const uint8*, uint32) = 0;
+bool (__cdecl *Decrypt_Orig)(const uint8*, uint32, uint8*, uint32*, uint8*, uint32, const uint8*, uint32) = 0;
 bool (__cdecl *GetMessageFn)( int * ) = 0;
 
 
@@ -74,7 +74,7 @@ CCrypto::CCrypto()
 		(void **)&pDecrypt
 	);
 
-	Decrypt_Orig = (bool (__cdecl *)(const uint8*, uint32, uint8*, uint32*, const uint8*, uint32))( pDecrypt );
+	Decrypt_Orig = (bool (__cdecl *)(const uint8*, uint32, uint8*, uint32*, uint8*, uint32, const uint8*, uint32))( pDecrypt );
 
 	g_pLogger->LogConsole( "CCrypto::SymmetricDecrypt = 0x%x\n", Decrypt_Orig );
 
@@ -132,7 +132,7 @@ CCrypto::CCrypto()
 	}
 	
 	static bool (__cdecl *encrypt)(const uint8*, uint32, const uint8*, uint32, uint8*, uint32*, const uint8*, uint32) = &CCrypto::SymmetricEncryptWithIV;
-	static bool (__cdecl *decrypt)(const uint8*, uint32, uint8*, uint32*, const uint8*, uint32) = &CCrypto::SymmetricDecrypt;
+	static bool (__cdecl *decrypt)(const uint8*, uint32, uint8*, uint32*, uint8*, uint32, const uint8*, uint32) = &CCrypto::SymmetricDecrypt;
 
 	if ( bEncrypt )
 	{
@@ -186,9 +186,9 @@ bool __cdecl CCrypto::SymmetricEncryptWithIV( const uint8 *pubPlaintextData, uin
 	return (*Encrypt_Orig)( pubPlaintextData, cubPlaintextData, pIV, cubIV, pubEncryptedData, pcubEncryptedData, pubKey, cubKey );
 }
 
-bool __cdecl CCrypto::SymmetricDecrypt( const uint8 *pubEncryptedData, uint32 cubEncryptedData, uint8 *pubPlaintextData, uint32 *pcubPlaintextData, const uint8 *pubKey, uint32 cubKey )
+bool __cdecl CCrypto::SymmetricDecrypt( const uint8 *pubEncryptedData, uint32 cubEncryptedData, uint8 *pubPlaintextData, uint32 *pcubPlaintextData, uint8 *pubUnk, uint32 cubUnk, const uint8 *pubKey, uint32 cubKey )
 {
-	bool ret = (*Decrypt_Orig)(pubEncryptedData, cubEncryptedData, pubPlaintextData, pcubPlaintextData, pubKey, cubKey);
+	bool ret = (*Decrypt_Orig)(pubEncryptedData, cubEncryptedData, pubPlaintextData, pcubPlaintextData, pubUnk, cubUnk, pubKey, cubKey);
 
 	g_pLogger->LogNetMessage( k_eNetIncoming, pubPlaintextData, *pcubPlaintextData );
 
