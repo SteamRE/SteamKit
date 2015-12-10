@@ -85,6 +85,7 @@ namespace SteamKit2.Internal
 
 
         Connection connection;
+        bool encryptionSetup;
         INetFilterEncryption pendingNetFilterEncryption;
 
         ScheduledFunction heartBeatFunc;
@@ -154,6 +155,9 @@ namespace SteamKit2.Internal
         {
             this.Disconnect();
 
+            encryptionSetup = false;
+            pendingNetFilterEncryption = null;
+
             if ( cmServer == null )
             {
                 cmServer = Servers.GetNextServerCandidate();
@@ -167,7 +171,6 @@ namespace SteamKit2.Internal
         /// </summary>
         public void Disconnect()
         {
-            pendingNetFilterEncryption = null;
             heartBeatFunc.Stop();
 
             connection.Disconnect();
@@ -228,26 +231,32 @@ namespace SteamKit2.Internal
         /// Called when a client message is received from the network.
         /// </summary>
         /// <param name="packetMsg">The packet message.</param>
-        protected virtual void OnClientMsgReceived( IPacketMsg packetMsg )
+        protected virtual bool OnClientMsgReceived( IPacketMsg packetMsg )
         {
             if ( packetMsg == null )
             {
                 DebugLog.WriteLine( "CMClient", "Packet message failed to parse, shutting down connection" );
                 Disconnect();
-                return;
+                return false;
             }
 
             DebugLog.WriteLine( "CMClient", "<- Recv'd EMsg: {0} ({1}) (Proto: {2})", packetMsg.MsgType, ( int )packetMsg.MsgType, packetMsg.IsProto );
 
+            // ensure that during channel setup, no other messages are processed
+            if ( ( !encryptionSetup && pendingNetFilterEncryption == null && packetMsg.MsgType != EMsg.ChannelEncryptRequest ) ||
+                 ( !encryptionSetup && pendingNetFilterEncryption != null && packetMsg.MsgType != EMsg.ChannelEncryptRequest && packetMsg.MsgType != EMsg.ChannelEncryptResult ) )
+            {
+                DebugLog.WriteLine( "CMClient", "Rejected EMsg: {0} during channel setup" );
+                return false;
+            }
+
             switch ( packetMsg.MsgType )
             {
                 case EMsg.ChannelEncryptRequest:
-                    HandleEncryptRequest( packetMsg );
-                    break;
+                    return HandleEncryptRequest( packetMsg );
 
                 case EMsg.ChannelEncryptResult:
-                    HandleEncryptResult( packetMsg );
-                    break;
+                    return HandleEncryptResult( packetMsg );
 
                 case EMsg.Multi:
                     HandleMulti( packetMsg );
@@ -273,6 +282,8 @@ namespace SteamKit2.Internal
                     HandleSessionToken( packetMsg );
                     break;
             }
+
+            return true;
         }
         /// <summary>
         /// Called when the client is physically disconnected from Steam3.
@@ -382,7 +393,10 @@ namespace SteamKit2.Internal
                     int subSize = br.ReadInt32();
                     byte[] subData = br.ReadBytes( subSize );
 
-                    OnClientMsgReceived( GetPacketMsg( subData ) );
+                    if ( !OnClientMsgReceived( GetPacketMsg( subData ) ) )
+                    {
+                        break;
+                    }
                 }
             }
 
@@ -414,7 +428,7 @@ namespace SteamKit2.Internal
                 heartBeatFunc.Start();
             }
         }
-        void HandleEncryptRequest( IPacketMsg packetMsg )
+        bool HandleEncryptRequest( IPacketMsg packetMsg )
         {
             var encRequest = new Msg<MsgChannelEncryptRequest>( packetMsg );
 
@@ -441,7 +455,7 @@ namespace SteamKit2.Internal
                 connection.Disconnect();
 
                 DebugLog.WriteLine( "CMClient", "HandleEncryptionRequest got request for invalid universe! Universe: {0} Protocol ver: {1}", eUniv, protoVersion );
-                return;
+                return false;
             }
 
             ConnectedUniverse = eUniv;
@@ -483,8 +497,9 @@ namespace SteamKit2.Internal
             }
 
             this.Send( encResp );
+            return true;
         }
-        void HandleEncryptResult( IPacketMsg packetMsg )
+        bool HandleEncryptResult( IPacketMsg packetMsg )
         {
             var encResult = new Msg<MsgChannelEncryptResult>( packetMsg );
 
@@ -496,11 +511,14 @@ namespace SteamKit2.Internal
                 connection.SetNetEncryptionFilter( pendingNetFilterEncryption );
 
                 pendingNetFilterEncryption = null;
+                encryptionSetup = true;
+                return true;
             }
             else
             {
                 DebugLog.WriteLine( "CMClient", "Encryption channel setup failed" );
                 connection.Disconnect();
+                return false;
             }
         }
         void HandleLoggedOff( IPacketMsg packetMsg )

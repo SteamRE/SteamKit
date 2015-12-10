@@ -92,6 +92,8 @@ namespace SteamKit2
 
             this.Disconnect();
 
+            pendingNetFilterEncryption = null;
+
             if ( ufsServer == null )
             {
                 var serverList = steamClient.GetServersOfType( EServerType.UFS );
@@ -109,8 +111,6 @@ namespace SteamKit2
         /// </summary>
         public void Disconnect()
         {
-            pendingNetFilterEncryption = null;
-
             connection.Disconnect();
         }
 

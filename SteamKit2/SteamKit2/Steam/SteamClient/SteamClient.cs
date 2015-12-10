@@ -271,15 +271,12 @@ namespace SteamKit2
         /// Called when a client message is received from the network.
         /// </summary>
         /// <param name="packetMsg">The packet message.</param>
-        protected override void OnClientMsgReceived( IPacketMsg packetMsg )
+        protected override bool OnClientMsgReceived( IPacketMsg packetMsg )
         {
             // let the underlying CMClient handle this message first
-            base.OnClientMsgReceived( packetMsg );
-
-            if (packetMsg == null)
+            if ( !base.OnClientMsgReceived( packetMsg ) )
             {
-                // bail if the packet failed to parse. CMClient will handle this
-                return;
+                return false;
             }
 
             Action<IPacketMsg> handlerFunc;
@@ -302,15 +299,17 @@ namespace SteamKit2
                 {
                     DebugLog.WriteLine( "SteamClient", "'{0}' handler failed to (de)serialize a protobuf: '{1}'", kvp.Key.Name, ex.Message );
                     Disconnect();
-                    return;
+                    return false;
                 }
                 catch ( Exception ex )
                 {
                     DebugLog.WriteLine( "SteamClient", "Unhandled '{0}' exception from '{1}' handler: '{2}'", ex.GetType().Name, kvp.Key.Name, ex.Message );
                     Disconnect();
-                    return;
+                    return false;
                 }
             }
+
+            return true;
         }
         /// <summary>
         /// Called when the client is physically disconnected from Steam3.
