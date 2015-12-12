@@ -21,6 +21,7 @@ namespace NetHookAnalyzer2
             { EMsg.ClientFromGC, typeof(CMsgGCClient) },
             { EMsg.ClientFriendMsgIncoming, typeof(CMsgClientFriendMsgIncoming) },
             { EMsg.ClientFriendMsgEchoToSender, typeof(CMsgClientFriendMsgIncoming) },
+            { EMsg.ClientCurrentUIMode, typeof(CMsgClientUIMode) },
 
             { EMsg.AMGameServerUpdate, typeof(CMsgGameServerData) },
 
