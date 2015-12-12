@@ -38,10 +38,10 @@ namespace SteamKit2
             public uint CellID { get; set; }
 
             /// <summary>
-            /// Gets or sets the LoginID. This number is used for identifying logon session. Value of 0 will cause this to be automatically generated.
+            /// Gets or sets the LoginID. This number is used for identifying logon session. Null value will cause this to be automatically generated.
             /// </summary>
             /// <value>The LoginID.</value>
-            public uint LoginID { get; set; }
+            public uint? LoginID { get; set; }
 
             /// <summary>
             /// Gets or sets the Steam Guard auth code used to login. This is the code sent to the user's email.
@@ -307,16 +307,18 @@ namespace SteamKit2
 
             SteamID steamId = new SteamID( details.AccountID, details.AccountInstance, Client.ConnectedUniverse, EAccountType.Individual );
 
-            if ( details.LoginID == 0 )
+            if ( details.LoginID == null )
             {
                 uint localIp = NetHelpers.GetIPAddress( this.Client.LocalIP );
-                details.LoginID = localIp ^ MsgClientLogon.ObfuscationMask;
+                logon.Body.obfustucated_private_ip = localIp ^ MsgClientLogon.ObfuscationMask;
+            }
+            else
+            {
+                logon.Body.obfustucated_private_ip = details.LoginID.Value;
             }
 
             logon.ProtoHeader.client_sessionid = 0;
             logon.ProtoHeader.steamid = steamId.ConvertToUInt64();
-
-            logon.Body.obfustucated_private_ip = details.LoginID;
 
             logon.Body.account_name = details.Username;
             logon.Body.password = details.Password;
