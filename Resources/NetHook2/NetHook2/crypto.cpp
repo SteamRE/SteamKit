@@ -9,8 +9,8 @@
 
 
 
-bool (__cdecl *Encrypt_Orig)(const uint8*, uint32, const uint8*, uint32, uint8*, uint32*, const uint8*, uint32) = 0;
-bool (__cdecl *Decrypt_Orig)(const uint8*, uint32, uint8*, uint32*, uint8*, uint32, const uint8*, uint32) = 0;
+SymmetricEncryptWithIVFn Encrypt_Orig = 0;
+SymmetricDecryptRecoverIVFn Decrypt_Orig = 0;
 bool (__cdecl *GetMessageFn)( int * ) = 0;
 
 
@@ -55,28 +55,28 @@ CCrypto::CCrypto()
 	CSimpleScan steamClientScan( "steamclient.dll" );
 
 
-	char *pEncrypt = NULL;
+	SymmetricEncryptWithIVFn pEncrypt = NULL;
 	bool bEncrypt = steamClientScan.FindFunction(
 		"\x53\x8B\xDC\x83\xEC\x08\x83\xE4\xF0\x83\xC4\x04\x55\x8B\x6B\x04\x89\x6C\x24\x04\x8B\xEC\x64\xA1\x00\x00\x00\x00",
 		"xxxxxxxxxxxxxxxxxxxxxxxxxxxx",
 		(void **)&pEncrypt
 	);
 
-	Encrypt_Orig = (bool (__cdecl *)(const uint8*, uint32, const uint8*, uint32, uint8*, uint32*, const uint8*, uint32))( pEncrypt );
+	Encrypt_Orig = pEncrypt;
 
 	g_pLogger->LogConsole( "CCrypto::SymmetricEncryptWithIV = 0x%x\n", Encrypt_Orig );
 
 
-	char *pDecrypt = NULL;
+	SymmetricDecryptRecoverIVFn pDecrypt = NULL;
 	bool bDecrypt = steamClientScan.FindFunction(
 		"\x55\x8B\xEC\x81\xEC\x04\x01\x00\x00\x83\x7D\x08\x00\x53",
 		"xxxxxxxxxxxxxx",
 		(void **)&pDecrypt
 	);
 
-	Decrypt_Orig = (bool (__cdecl *)(const uint8*, uint32, uint8*, uint32*, uint8*, uint32, const uint8*, uint32))( pDecrypt );
+	Decrypt_Orig = pDecrypt;
 
-	g_pLogger->LogConsole( "CCrypto::SymmetricDecrypt = 0x%x\n", Decrypt_Orig );
+	g_pLogger->LogConsole( "CCrypto::SymmetricDecryptRecoverIV = 0x%x\n", Decrypt_Orig );
 
 
 	char *pGetMessageList = NULL;
@@ -130,13 +130,13 @@ CCrypto::CCrypto()
 	{
 		g_pLogger->LogConsole( "Unable to find GetMessageList.\n" );
 	}
-	
-	static bool (__cdecl *encrypt)(const uint8*, uint32, const uint8*, uint32, uint8*, uint32*, const uint8*, uint32) = &CCrypto::SymmetricEncryptWithIV;
-	static bool (__cdecl *decrypt)(const uint8*, uint32, uint8*, uint32*, uint8*, uint32, const uint8*, uint32) = &CCrypto::SymmetricDecrypt;
+
+	SymmetricEncryptWithIVFn encrypt = CCrypto::SymmetricEncryptWithIV;
+	SymmetricDecryptRecoverIVFn decrypt = CCrypto::SymmetricDecryptRecoverIV;
 
 	if ( bEncrypt )
 	{
-		Encrypt_Detour = new CSimpleDetour((void **) &Encrypt_Orig, *(void**) &encrypt);
+		Encrypt_Detour = new CSimpleDetour((void **) &Encrypt_Orig, (void*) encrypt);
 		Encrypt_Detour->Attach();
 
 		g_pLogger->LogConsole( "Detoured SymmetricEncryptWithIV!\n" );
@@ -148,14 +148,14 @@ CCrypto::CCrypto()
 
 	if ( bDecrypt )
 	{
-		Decrypt_Detour = new CSimpleDetour((void **) &Decrypt_Orig, *(void**) &decrypt);
+		Decrypt_Detour = new CSimpleDetour((void **) &Decrypt_Orig, (void*) decrypt);
 		Decrypt_Detour->Attach();
 
-		g_pLogger->LogConsole( "Detoured SymmetricDecrypt!\n" );
+		g_pLogger->LogConsole( "Detoured SymmetricDecryptRecoverIV!\n" );
 	}
 	else
 	{
-		g_pLogger->LogConsole( "Unable to hook SymmetricDecrypt: Func scan failed.\n" );
+		g_pLogger->LogConsole( "Unable to hook SymmetricDecryptRecoverIV: Func scan failed.\n" );
 	}
 }
 
@@ -186,9 +186,9 @@ bool __cdecl CCrypto::SymmetricEncryptWithIV( const uint8 *pubPlaintextData, uin
 	return (*Encrypt_Orig)( pubPlaintextData, cubPlaintextData, pIV, cubIV, pubEncryptedData, pcubEncryptedData, pubKey, cubKey );
 }
 
-bool __cdecl CCrypto::SymmetricDecrypt( const uint8 *pubEncryptedData, uint32 cubEncryptedData, uint8 *pubPlaintextData, uint32 *pcubPlaintextData, uint8 *pubUnk, uint32 cubUnk, const uint8 *pubKey, uint32 cubKey )
+bool __cdecl CCrypto::SymmetricDecryptRecoverIV( const uint8 *pubEncryptedData, uint32 cubEncryptedData, uint8 *pubPlaintextData, uint32 *pcubPlaintextData, uint8 *pubRecoveredIV, uint32 cubRecoveredIV, const uint8 *pubKey, uint32 cubKey )
 {
-	bool ret = (*Decrypt_Orig)(pubEncryptedData, cubEncryptedData, pubPlaintextData, pcubPlaintextData, pubUnk, cubUnk, pubKey, cubKey);
+	bool ret = (*Decrypt_Orig)(pubEncryptedData, cubEncryptedData, pubPlaintextData, pcubPlaintextData, pubRecoveredIV, cubRecoveredIV, pubKey, cubKey);
 
 	g_pLogger->LogNetMessage( k_eNetIncoming, pubPlaintextData, *pcubPlaintextData );
 
