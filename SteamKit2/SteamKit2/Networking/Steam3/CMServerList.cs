@@ -27,7 +27,7 @@ namespace SteamKit2
     /// </summary>
     public class SmartCMServerList
     {
-        [DebuggerDisplay("ServerInfo ({EndPoint}, Bad: {LastBadConnectionDateTime.HasValue})")]
+        [DebuggerDisplay("ServerInfo ({EndPoint}, Bad: {LastBadConnectionDateTimeUtc.HasValue})")]
         class ServerInfo
         {
             public IPEndPoint EndPoint { get; set; }
