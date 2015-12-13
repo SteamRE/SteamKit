@@ -3,7 +3,6 @@
  * file 'license.txt', which is part of this source code package.
  */
 
-using System;
 
 namespace SteamKit2
 {
@@ -17,65 +16,6 @@ namespace SteamKit2
         /// then this will be <see cref="P:JobID.Invalid"/>
         /// </summary>
         JobID JobID { get; set; }
-    }
-
-    /// <summary>
-    /// Useful extensions for ICallbackMsg
-    /// </summary>
-    public static class CallbackMsgExtensions
-    {
-        /// <summary>
-        /// Determines whether this callback is a certain type.
-        /// </summary>
-        /// <typeparam name="T">The type to check against.</typeparam>
-        /// <returns>
-        /// 	<c>true</c> if this callback is the type specified; otherwise, <c>false</c>.
-        /// </returns>
-        /// <exception cref="ArgumentNullException">
-        /// 	<c>msg</c> is null.
-        /// </exception>
-        [Obsolete( "This method will be removed in a future version of SteamKit. Please migrate to CallbackManager." )]
-        public static bool IsType<T>( this ICallbackMsg msg )
-            where T : ICallbackMsg
-        {
-            if ( msg == null )
-                throw new ArgumentNullException( "msg" );
-
-            return ( msg is T );
-        }
-
-        /// <summary>
-        /// Invokes the specified handler delegate if the callback matches the type parameter.
-        /// </summary>
-        /// <typeparam name="T">The type to check against.</typeparam>
-        /// <param name="msg">The callback in question.</param>
-        /// <param name="handler">The handler to invoke.</param>
-        /// <returns>
-        /// 	<c>true</c> if the callback matches and the handler was called; otherwise, <c>false</c>.
-        /// </returns>
-        /// <exception cref="ArgumentNullException">
-        /// 	<c>msg</c> is null or <c>handler</c> is null.
-        /// </exception>
-        [Obsolete( "This method will be removed in a future version of SteamKit. Please migrate to CallbackManager." )]
-        public static bool Handle<T>( this ICallbackMsg msg, Action<T> handler )
-            where T : class, ICallbackMsg
-        {
-            if ( msg == null )
-                throw new ArgumentNullException( "msg" );
-
-            if ( handler == null )
-                throw new ArgumentNullException( "handler" );
-
-            var callback = msg as T;
-
-            if ( callback != null )
-            {
-                handler( callback );
-                return true;
-            }
-
-            return false;
-        }
     }
 
     /// <summary>
