@@ -158,7 +158,7 @@ namespace SteamKit2.Internal
         /// The <see cref="IPEndPoint"/> of the CM server to connect to.
         /// If <c>null</c>, SteamKit will randomly select a CM server from its internal list.
         /// </param>
-        public virtual void Connect( IPEndPoint cmServer = null  )
+        public void Connect( IPEndPoint cmServer = null  )
         {
             this.Disconnect();
 
