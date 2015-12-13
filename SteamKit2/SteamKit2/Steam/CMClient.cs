@@ -83,6 +83,8 @@ namespace SteamKit2.Internal
         /// </value>
         public TimeSpan ConnectionTimeout { get; set; }
 
+        internal bool ExpectDisconnection { get; set; }
+
 
         Connection connection;
         bool encryptionSetup;
@@ -157,6 +159,7 @@ namespace SteamKit2.Internal
 
             encryptionSetup = false;
             pendingNetFilterEncryption = null;
+            ExpectDisconnection = false;
 
             if ( cmServer == null )
             {
@@ -315,7 +318,7 @@ namespace SteamKit2.Internal
 
             heartBeatFunc.Stop();
 
-            OnClientDisconnected( userInitiated: e.UserInitiated );
+            OnClientDisconnected( userInitiated: e.UserInitiated || ExpectDisconnection );
         }
 
         internal static IPacketMsg GetPacketMsg( byte[] data )
