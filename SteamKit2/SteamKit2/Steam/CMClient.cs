@@ -83,6 +83,13 @@ namespace SteamKit2.Internal
         /// </value>
         public TimeSpan ConnectionTimeout { get; set; }
 
+        /// <summary>
+        /// Gets or sets whether or not this <see cref="CMClient"/> should imminently expect the server to close the connection.
+        /// If this is true when the connection is closed, the <see cref="SteamClient.DisconnectedCallback"/>'s <see cref="SteamClient.DisconnectedCallback.UserInitiated"/> property
+        /// will be set to <c>true</c>.
+        /// </summary>
+        public bool ExpectDisconnection { get; set; }
+
 
         Connection connection;
         bool encryptionSetup;
@@ -151,12 +158,13 @@ namespace SteamKit2.Internal
         /// The <see cref="IPEndPoint"/> of the CM server to connect to.
         /// If <c>null</c>, SteamKit will randomly select a CM server from its internal list.
         /// </param>
-        public void Connect( IPEndPoint cmServer = null  )
+        public virtual void Connect( IPEndPoint cmServer = null  )
         {
             this.Disconnect();
 
             encryptionSetup = false;
             pendingNetFilterEncryption = null;
+            ExpectDisconnection = false;
 
             if ( cmServer == null )
             {
@@ -315,7 +323,7 @@ namespace SteamKit2.Internal
 
             heartBeatFunc.Stop();
 
-            OnClientDisconnected( userInitiated: e.UserInitiated );
+            OnClientDisconnected( userInitiated: e.UserInitiated || ExpectDisconnection );
         }
 
         internal static IPacketMsg GetPacketMsg( byte[] data )
