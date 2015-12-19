@@ -313,14 +313,14 @@ namespace SteamKit2
 
             SteamID steamId = new SteamID( details.AccountID, details.AccountInstance, Client.ConnectedUniverse, EAccountType.Individual );
 
-            if ( details.LoginID == null )
+            if ( details.LoginID.HasValue )
             {
-                uint localIp = NetHelpers.GetIPAddress( this.Client.LocalIP );
-                logon.Body.obfustucated_private_ip = localIp ^ MsgClientLogon.ObfuscationMask;
+                logon.Body.obfustucated_private_ip = details.LoginID.Value;
             }
             else
             {
-                logon.Body.obfustucated_private_ip = details.LoginID.Value;
+                uint localIp = NetHelpers.GetIPAddress( this.Client.LocalIP );
+                logon.Body.obfustucated_private_ip = localIp ^ MsgClientLogon.ObfuscationMask;
             }
 
             logon.ProtoHeader.client_sessionid = 0;
