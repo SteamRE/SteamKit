@@ -38,6 +38,18 @@ namespace SteamKit2
             public uint CellID { get; set; }
 
             /// <summary>
+            /// Gets or sets the LoginID. This number is used for identifying logon session.
+            /// The purpose of this field is to allow multiple sessions to the same steam account from the same machine.
+            /// This is because Steam Network doesn't allow more than one session with the same LoginID to access given account at the same time.
+            /// If you want to establish more than one active session to given account, you must make sure that every session (to that account) has unique LoginID.
+            /// By default LoginID is automatically generated based on machine's primary bind address, which is the same for all sessions.
+            /// Null value will cause this property to be automatically generated based on default behaviour.
+            /// If in doubt, set this property to null.
+            /// </summary>
+            /// <value>The LoginID.</value>
+            public uint? LoginID { get; set; }
+
+            /// <summary>
             /// Gets or sets the Steam Guard auth code used to login. This is the code sent to the user's email.
             /// </summary>
             /// <value>The auth code.</value>
@@ -301,12 +313,18 @@ namespace SteamKit2
 
             SteamID steamId = new SteamID( details.AccountID, details.AccountInstance, Client.ConnectedUniverse, EAccountType.Individual );
 
-            uint localIp = NetHelpers.GetIPAddress( this.Client.LocalIP );
+            if ( details.LoginID.HasValue )
+            {
+                logon.Body.obfustucated_private_ip = details.LoginID.Value;
+            }
+            else
+            {
+                uint localIp = NetHelpers.GetIPAddress( this.Client.LocalIP );
+                logon.Body.obfustucated_private_ip = localIp ^ MsgClientLogon.ObfuscationMask;
+            }
 
             logon.ProtoHeader.client_sessionid = 0;
             logon.ProtoHeader.steamid = steamId.ConvertToUInt64();
-
-            logon.Body.obfustucated_private_ip = localIp ^ MsgClientLogon.ObfuscationMask;
 
             logon.Body.account_name = details.Username;
             logon.Body.password = details.Password;
