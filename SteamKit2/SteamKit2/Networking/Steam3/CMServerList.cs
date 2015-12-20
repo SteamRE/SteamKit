@@ -27,41 +27,34 @@ namespace SteamKit2
     /// </summary>
     public class SmartCMServerList
     {
-        const int BaseScore = 1000;
-        const float GoodWeighting = 1.2f;
-        const float BadWeighting = 0.8f;
-        const int MaxScore = 4000;
-        const int MinScore = 250;
-        
-        [DebuggerDisplay("ServerInfo ({EndPoint}, Score {Score})")]
+        [DebuggerDisplay("ServerInfo ({EndPoint}, Bad: {LastBadConnectionDateTimeUtc.HasValue})")]
         class ServerInfo
         {
             public IPEndPoint EndPoint { get; set; }
-            public int Score { get; set; }
-            public DateTime LastScoreChangeTimeUtc { get; set; }
+            public DateTime? LastBadConnectionDateTimeUtc { get; set; }
         }
 
         internal SmartCMServerList()
         {
             servers = new Collection<ServerInfo>();
             listLock = new object();
-            ScoreExpiryTimeSpan = TimeSpan.FromMinutes( 30 );
+            BadConnectionMemoryTimeSpan = TimeSpan.FromMinutes( 5 );
         }
 
         object listLock;
         Collection<ServerInfo> servers;
 
         /// <summary>
-        /// Determines after how much time a server's score should expire and be reset to it's base value.
+        /// Determines how long a server's bad connection state is remembered for.
         /// </summary>
-        public TimeSpan ScoreExpiryTimeSpan
+        public TimeSpan BadConnectionMemoryTimeSpan
         {
             get;
             set;
         }
 
         /// <summary>
-        /// Resets the scores of all servers which had their scores last updated a <see cref="ScoreExpiryTimeSpan"/> ago.
+        /// Resets the scores of all servers which has a last bad connection more than <see cref="BadConnectionMemoryTimeSpan"/> ago.
         /// </summary>
         public void ResetOldScores()
         {
@@ -69,9 +62,9 @@ namespace SteamKit2
             {
                 foreach ( var serverInfo in servers )
                 {
-                    if ( serverInfo.LastScoreChangeTimeUtc + ScoreExpiryTimeSpan <= DateTime.UtcNow )
+                    if ( serverInfo.LastBadConnectionDateTimeUtc.HasValue && ( serverInfo.LastBadConnectionDateTimeUtc.Value + BadConnectionMemoryTimeSpan < DateTime.UtcNow ) )
                     {
-                        serverInfo.Score = BaseScore;
+                        serverInfo.LastBadConnectionDateTimeUtc = null;
                     }
                 }
             }
@@ -97,9 +90,9 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// Adds the elements of the specified collection of <see cref="System.Net.IPEndPoint" />s to the server list.
+        /// Adds the elements of the specified collection of <see cref="IPEndPoint" />s to the server list.
         /// </summary>
-        /// <param name="endPoints">The collection of <see cref="System.Net.IPEndPoint"/>s to add.</param>
+        /// <param name="endPoints">The collection of <see cref="IPEndPoint"/>s to add.</param>
         /// <returns>false if any of the specified servers are already in the list, true otherwise.</returns>
         public bool TryAddRange( IEnumerable<IPEndPoint> endPoints )
         {
@@ -122,6 +115,36 @@ namespace SteamKit2
             return true;
         }
 
+        /// <summary>
+        /// Merges the list with a new list of servers provided to us by the Steam servers.
+        /// This adds the new list of <see cref="IPEndPoint"/>s to the beginning of the list,
+        /// ensuring that any pre-existing servers are moved into their new place in order near
+        /// the beginning of the list.
+        /// </summary>
+        /// <param name="listToMerge">The <see cref="IPEndPoint"/>s to merge into this <see cref="SmartCMServerList"/>.</param>
+        public void MergeWithList( IEnumerable<IPEndPoint> listToMerge )
+        {
+            lock ( listLock )
+            {
+                var distinctEndPoints = listToMerge.Distinct().ToArray();
+
+                var distinctEndPointsSet = new HashSet<IPEndPoint>(distinctEndPoints);
+                var preExistingServers = servers.Where( s => distinctEndPointsSet.Contains( s.EndPoint ) ).ToArray();
+
+                // This will let us do a simpler insert, but will also reset the bad connection state.
+                // If we were just told by Steam to use this CM, give it a second chance.
+                foreach ( var serverInfo in preExistingServers )
+                {
+                    servers.Remove( serverInfo );
+                }
+                
+                for ( var i = 0; i < distinctEndPoints.Length; i++ )
+                {
+                    AddCore( distinctEndPoints[ i ], i );
+                }
+            }
+        }
+
         void Add( IPEndPoint endPoint )
         {
             if ( servers.Any( x => x.EndPoint == endPoint ) )
@@ -134,26 +157,26 @@ namespace SteamKit2
 
         void AddCore( IPEndPoint endPoint )
         {
-            var info = new ServerInfo
-            {
-                EndPoint = endPoint,
-                Score = BaseScore,
-                LastScoreChangeTimeUtc = DateTime.UtcNow,
-            };
+            AddCore( endPoint, servers.Count );
+        }
 
-            servers.Add( info );
+        void AddCore( IPEndPoint endPoint, int index )
+        {
+            var info = new ServerInfo { EndPoint = endPoint };
+
+            servers.Insert( index, info );
         }
 
         /// <summary>
-        /// Explicitly resets the quality of every stored server.
+        /// Explicitly resets the known state of all servers.
         /// </summary>
-        public void ResetAllScores()
+        public void ResetBadServers()
         {
             lock ( listLock )
             {
                 foreach ( var server in servers )
                 {
-                    SetServerScore( server, BaseScore );
+                    server.LastBadConnectionDateTimeUtc = null;
                 }
             }
         }
@@ -210,7 +233,7 @@ namespace SteamKit2
                 Add( new IPEndPoint( IPAddress.Parse( "208.78.164.14" ), 27019 ) );
             }
         }
-        
+
         internal bool TryMark( IPEndPoint endPoint, ServerQuality quality )
         {
             lock ( listLock )
@@ -232,43 +255,19 @@ namespace SteamKit2
             {
                 case ServerQuality.Good:
                 {
-                    var newScore = Math.Min( Convert.ToInt32( serverInfo.Score * GoodWeighting ), MaxScore );
-                    if ( newScore > serverInfo.Score )
-                    {
-                        DebugWrite( "{0} is good - increasing score from {1} to {2}.", serverInfo.EndPoint, serverInfo.Score, newScore );
-                        SetServerScore( serverInfo, newScore );
-                    }
-                    else
-                    {
-                        DebugWrite( "{0} is good but has hit the score ceiling of {1}.", serverInfo.EndPoint, MaxScore );
-                    }
+                    serverInfo.LastBadConnectionDateTimeUtc = null;
                     break;
                 }
 
                 case ServerQuality.Bad:
                 {
-                    var newScore = Math.Max( Convert.ToInt32( serverInfo.Score * BadWeighting ), MinScore );
-                    if ( newScore < serverInfo.Score )
-                    {
-                        DebugWrite( "{0} is bad - dropping score from {1} to {2}.", serverInfo.EndPoint, serverInfo.Score, newScore );
-                        SetServerScore( serverInfo, newScore );
-                    }
-                    else
-                    {
-                        DebugWrite( "{0} is bad but has hit the score floor of {1}.", serverInfo.EndPoint, MinScore );
-                    }
+                    serverInfo.LastBadConnectionDateTimeUtc = DateTime.UtcNow;
                     break;
                 }
 
                 default:
                     throw new ArgumentOutOfRangeException( "quality" );
             }
-        }
-
-        void SetServerScore( ServerInfo serverInfo, int score )
-        {
-            serverInfo.Score = score;
-            serverInfo.LastScoreChangeTimeUtc = DateTime.UtcNow;
         }
 
         /// <summary>
@@ -284,21 +283,20 @@ namespace SteamKit2
                 // isn't a problem.
                 ResetOldScores();
 
-                var totalScoreValue = servers.Sum( x => x.Score );
-                var randomValue = new Random().Next( totalScoreValue );
-
-                var scoreMarker = 0;
-                foreach ( var serverInfo in servers )
+                var serverInfo = servers
+                    .Select( (s, index) => new { EndPoint = s.EndPoint, IsBad = s.LastBadConnectionDateTimeUtc.HasValue, Index = index } )
+                    .OrderBy( x => x.IsBad )
+                    .ThenBy( x => x.Index )
+                    .FirstOrDefault();
+                
+                if ( serverInfo == null )
                 {
-                    scoreMarker += serverInfo.Score;
-                    if ( scoreMarker >= randomValue )
-                    {
-                        return serverInfo.EndPoint;
-                    }
+                    return null;
                 }
-            }
 
-            return null;
+                DebugWrite( $"Next server candidiate: {serverInfo.EndPoint}" );
+                return serverInfo.EndPoint;
+            }
         }
 
         /// <summary>
