@@ -167,12 +167,13 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// Logs the game server off of the Steam3 network.
-        /// This method does not disconnect the client.
-        /// Results are returned in a <see cref="SteamUser.LoggedOffCallback"/>.
+        /// Informs the Steam servers that this client wishes to log off from the network.
+        /// The Steam server will disconnect the client, and a <see cref="SteamClient.DisconnectedCallback"/> will be posted.
         /// </summary>
         public void LogOff()
         {
+            this.Client.ExpectDisconnection = true;
+
             var logOff = new ClientMsgProtobuf<CMsgClientLogOff>( EMsg.ClientLogOff );
             this.Client.Send( logOff );
         }

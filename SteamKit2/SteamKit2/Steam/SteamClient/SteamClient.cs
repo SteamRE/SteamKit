@@ -7,11 +7,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net.Sockets;
 using System.Threading;
-using SteamKit2.Internal;
-using System.Diagnostics;
 using ProtoBuf;
+using SteamKit2.Internal;
 
 namespace SteamKit2
 {

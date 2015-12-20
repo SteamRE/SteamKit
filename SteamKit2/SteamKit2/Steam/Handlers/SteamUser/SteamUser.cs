@@ -400,6 +400,8 @@ namespace SteamKit2
         /// </summary>
         public void LogOff()
         {
+            this.Client.ExpectDisconnection = true;
+
             var logOff = new ClientMsgProtobuf<CMsgClientLogOff>( EMsg.ClientLogOff );
             this.Client.Send( logOff );
         }
