@@ -83,8 +83,13 @@ namespace SteamKit2.Internal
         /// </value>
         public TimeSpan ConnectionTimeout { get; set; }
 
-        internal bool ExpectDisconnection { get; set; }
+        /// <summary>
+        /// Gets or sets the network listening interface. Use this for debugging only.
+        /// For your convenience, you can use <see cref="NetHookNetworkListener"/> class.
+        /// </summary>
+        public IDebugNetworkListener DebugNetworkListener { get; set; }
 
+        internal bool ExpectDisconnection { get; set; }
 
         Connection connection;
         bool encryptionSetup;
@@ -197,6 +202,14 @@ namespace SteamKit2.Internal
 
             DebugLog.WriteLine( "CMClient", "Sent -> EMsg: {0} (Proto: {1})", msg.MsgType, msg.IsProto );
 
+            try
+            {
+                DebugNetworkListener?.OnOutgoingNetworkMessage(msg.MsgType, msg.Serialize());
+            }
+            catch ( Exception e )
+            {
+                DebugLog.WriteLine( "CMClient", "DebugNetworkListener threw an exception: {0}", e );
+            }
 
             // we'll swallow any network failures here because they will be thrown later
             // on the network thread, and that will lead to a disconnect callback
@@ -244,6 +257,19 @@ namespace SteamKit2.Internal
             }
 
             DebugLog.WriteLine( "CMClient", "<- Recv'd EMsg: {0} ({1}) (Proto: {2})", packetMsg.MsgType, ( int )packetMsg.MsgType, packetMsg.IsProto );
+
+            // Multi message gets logged down the line after it's decompressed
+            if ( packetMsg.MsgType != EMsg.Multi )
+            {
+                try
+                {
+                    DebugNetworkListener?.OnIncomingNetworkMessage( packetMsg.MsgType, packetMsg.GetData() );
+                }
+                catch ( Exception e )
+                {
+                    DebugLog.WriteLine( "CMClient", "DebugNetworkListener threw an exception: {0}", e );
+                }
+            }
 
             // ensure that during channel setup, no other messages are processed
             if ( ( !encryptionSetup && pendingNetFilterEncryption == null && packetMsg.MsgType != EMsg.ChannelEncryptRequest ) ||

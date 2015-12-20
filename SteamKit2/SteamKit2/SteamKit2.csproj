@@ -171,6 +171,7 @@
     <Compile Include="Util\LZMA\Compress\RangeCoder\RangeCoderBit.cs" />
     <Compile Include="Util\LZMA\Compress\RangeCoder\RangeCoderBitTree.cs" />
     <Compile Include="Util\LZMA\ICoder.cs" />
+    <Compile Include="Util\DebugNetworkListener.cs" />
     <Compile Include="Util\StreamHelpers.cs" />
     <Compile Include="Networking\Steam3\UdpPacket.cs" />
     <Compile Include="Steam\Handlers\SteamApps\Callbacks.cs" />
