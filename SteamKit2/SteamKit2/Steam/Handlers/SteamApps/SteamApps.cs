@@ -138,10 +138,11 @@ namespace SteamKit2
         /// <summary>
         /// Requests an app ownership ticket for the specified AppID.
         /// Results are returned in a <see cref="AppOwnershipTicketCallback"/> callback.
+        /// The returned <see cref="AsyncJob{T}"/> can also be awaited to retrieve the callback result.
         /// </summary>
         /// <param name="appid">The appid to request the ownership ticket of.</param>
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="AppOwnershipTicketCallback"/>.</returns>
-        public JobID GetAppOwnershipTicket( uint appid )
+        public AsyncJob<AppOwnershipTicketCallback> GetAppOwnershipTicket( uint appid )
         {
             var request = new ClientMsgProtobuf<CMsgClientGetAppOwnershipTicket>( EMsg.ClientGetAppOwnershipTicket );
             request.SourceJobID = Client.GetNextJobID();
@@ -150,58 +151,62 @@ namespace SteamKit2
 
             this.Client.Send( request );
 
-            return request.SourceJobID;
+            return new AsyncJob<AppOwnershipTicketCallback>( this.Client, request.SourceJobID );
         }
 
         /// <summary>
         /// Requests app information for a single app. Use the overload for requesting information on a batch of apps.
         /// Results are returned in a <see cref="AppInfoCallback"/> callback.
+        /// The returned <see cref="AsyncJob{T}"/> can also be awaited to retrieve the callback result.
         /// 
         /// Consider using <see cref="o:SteamApps.PICSGetProductInfo"/> instead.
         /// </summary>
         /// <param name="app">The app to request information for.</param>
         /// <param name="supportsBatches">if set to <c>true</c>, the request supports batches.</param>
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="AppInfoCallback"/>.</returns>
-        public JobID GetAppInfo( AppDetails app, bool supportsBatches = false )
+        public AsyncJob<AppInfoCallback> GetAppInfo( AppDetails app, bool supportsBatches = false )
         {
             return GetAppInfo( new AppDetails[] { app }, supportsBatches );
         }
         /// <summary>
         /// Requests app information for a single app. Use the overload for requesting information on a batch of apps.
         /// Results are returned in a <see cref="AppInfoCallback"/> callback.
+        /// The returned <see cref="AsyncJob{T}"/> can also be awaited to retrieve the callback result.
         /// 
         /// Consider using <see cref="o:SteamApps.PICSGetProductInfo"/> instead.
         /// </summary>
         /// <param name="app">The app to request information for.</param>
         /// <param name="supportsBatches">if set to <c>true</c>, the request supports batches.</param>
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="AppInfoCallback"/>.</returns>
-        public JobID GetAppInfo( uint app, bool supportsBatches = false )
+        public AsyncJob<AppInfoCallback> GetAppInfo( uint app, bool supportsBatches = false )
         {
             return GetAppInfo( new uint[] { app }, supportsBatches );
         }
         /// <summary>
         /// Requests app information for a list of apps.
         /// Results are returned in a <see cref="AppInfoCallback"/> callback.
+        /// The returned <see cref="AsyncJob{T}"/> can also be awaited to retrieve the callback result.
         /// 
         /// Consider using <see cref="o:SteamApps.PICSGetProductInfo"/> instead.
         /// </summary>
         /// <param name="apps">The apps to request information for.</param>
         /// <param name="supportsBatches">if set to <c>true</c>, the request supports batches.</param>
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="AppInfoCallback"/>.</returns>
-        public JobID GetAppInfo( IEnumerable<uint> apps, bool supportsBatches = false )
+        public AsyncJob<AppInfoCallback> GetAppInfo( IEnumerable<uint> apps, bool supportsBatches = false )
         {
             return GetAppInfo( apps.Select( a => new AppDetails { AppID = a } ), supportsBatches );
         }
         /// <summary>
         /// Requests app information for a list of apps.
         /// Results are returned in a <see cref="AppInfoCallback"/> callback.
+        /// The returned <see cref="AsyncJob{T}"/> can also be awaited to retrieve the callback result.
         /// 
         /// Consider using <see cref="o:SteamApps.PICSGetProductInfo"/> instead.
         /// </summary>
         /// <param name="apps">The apps to request information for.</param>
         /// <param name="supportsBatches">if set to <c>true</c>, the request supports batches.</param>
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="AppInfoCallback"/>.</returns>
-        public JobID GetAppInfo( IEnumerable<AppDetails> apps, bool supportsBatches = false )
+        public AsyncJob<AppInfoCallback> GetAppInfo( IEnumerable<AppDetails> apps, bool supportsBatches = false )
         {
             var request = new ClientMsgProtobuf<CMsgClientAppInfoRequest>( EMsg.ClientAppInfoRequest );
             request.SourceJobID = Client.GetNextJobID();
@@ -223,32 +228,34 @@ namespace SteamKit2
 
             this.Client.Send( request );
 
-            return request.SourceJobID;
+            return new AsyncJob<AppInfoCallback>( this.Client, request.SourceJobID );
         }
 
         /// <summary>
         /// Requests package information for a single package. Use the overload for requesting information on a batch of packages.
         /// Results are returned in a <see cref="PackageInfoCallback"/> callback.
+        /// The returned <see cref="AsyncJob{T}"/> can also be awaited to retrieve the callback result.
         /// 
         /// Consider using <see cref="o:SteamApps.PICSGetProductInfo"/> instead.
         /// </summary>
         /// <param name="packageId">The package id to request information for.</param>
         /// <param name="metaDataOnly">if set to <c>true</c>, request metadata only.</param>
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="PackageInfoCallback"/>.</returns>
-        public JobID GetPackageInfo( uint packageId, bool metaDataOnly = false )
+        public AsyncJob<PackageInfoCallback> GetPackageInfo( uint packageId, bool metaDataOnly = false )
         {
             return GetPackageInfo( new uint[] { packageId }, metaDataOnly );
         }
         /// <summary>
         /// Requests package information for a list of packages.
         /// Results are returned in a <see cref="PackageInfoCallback"/> callback.
+        /// The returned <see cref="AsyncJob{T}"/> can also be awaited to retrieve the callback result.
         /// 
         /// Consider using <see cref="o:SteamApps.PICSGetProductInfo"/> instead.
         /// </summary>
         /// <param name="packageId">The packages to request information for.</param>
         /// <param name="metaDataOnly">if set to <c>true</c> to request metadata only.</param>
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="PackageInfoCallback"/>.</returns>
-        public JobID GetPackageInfo( IEnumerable<uint> packageId, bool metaDataOnly = false )
+        public AsyncJob<PackageInfoCallback> GetPackageInfo( IEnumerable<uint> packageId, bool metaDataOnly = false )
         {
             var request = new ClientMsgProtobuf<CMsgClientPackageInfoRequest>( EMsg.ClientPackageInfoRequest );
 
@@ -259,7 +266,7 @@ namespace SteamKit2
 
             this.Client.Send( request );
 
-            return request.SourceJobID;
+            return new AsyncJob<PackageInfoCallback>( this.Client, request.SourceJobID );
         }
 
         /// <summary>
@@ -283,11 +290,12 @@ namespace SteamKit2
         /// <summary>
         /// Request the depot decryption key for a specified DepotID.
         /// Results are returned in a <see cref="DepotKeyCallback"/> callback.
+        /// The returned <see cref="AsyncJob{T}"/> can also be awaited to retrieve the callback result.
         /// </summary>
         /// <param name="depotid">The DepotID to request a decryption key for.</param>
         /// <param name="appid">The AppID to request the decryption key for.</param>
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="DepotKeyCallback"/>.</returns>
-        public JobID GetDepotDecryptionKey( uint depotid, uint appid = 0 )
+        public AsyncJob<DepotKeyCallback> GetDepotDecryptionKey( uint depotid, uint appid = 0 )
         {
             var request = new ClientMsgProtobuf<CMsgClientGetDepotDecryptionKey>( EMsg.ClientGetDepotDecryptionKey );
             request.SourceJobID = Client.GetNextJobID();
@@ -297,17 +305,18 @@ namespace SteamKit2
 
             this.Client.Send( request );
 
-            return request.SourceJobID;
+            return new AsyncJob<DepotKeyCallback>( this.Client, request.SourceJobID );
         }
 
         /// <summary>
         /// Request PICS access tokens for an app or package.
         /// Results are returned in a <see cref="PICSTokensCallback"/> callback.
+        /// The returned <see cref="AsyncJob{T}"/> can also be awaited to retrieve the callback result.
         /// </summary>
         /// <param name="app">App id to request access token for.</param>
         /// <param name="package">Package id to request access token for.</param>
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="PICSTokensCallback"/>.</returns>
-        public JobID PICSGetAccessTokens( uint? app, uint? package )
+        public AsyncJob<PICSTokensCallback> PICSGetAccessTokens( uint? app, uint? package )
         {
             List<uint> apps = new List<uint>();
             List<uint> packages = new List<uint>();
@@ -321,11 +330,12 @@ namespace SteamKit2
         /// <summary>
         /// Request PICS access tokens for a list of app ids and package ids
         /// Results are returned in a <see cref="PICSTokensCallback"/> callback.
+        /// The returned <see cref="AsyncJob{T}"/> can also be awaited to retrieve the callback result.
         /// </summary>
         /// <param name="appIds">List of app ids to request access tokens for.</param>
         /// <param name="packageIds">List of package ids to request access tokens for.</param>
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="PICSTokensCallback"/>.</returns>
-        public JobID PICSGetAccessTokens( IEnumerable<uint> appIds, IEnumerable<uint> packageIds )
+        public AsyncJob<PICSTokensCallback> PICSGetAccessTokens( IEnumerable<uint> appIds, IEnumerable<uint> packageIds )
         {
             var request = new ClientMsgProtobuf<CMsgClientPICSAccessTokenRequest>( EMsg.ClientPICSAccessTokenRequest );
             request.SourceJobID = Client.GetNextJobID();
@@ -335,18 +345,19 @@ namespace SteamKit2
 
             this.Client.Send( request );
 
-            return request.SourceJobID;
+            return new AsyncJob<PICSTokensCallback>( this.Client, request.SourceJobID );
         }
 
         /// <summary>
         /// Request changes for apps and packages since a given change number
         /// Results are returned in a <see cref="PICSChangesCallback"/> callback.
+        /// The returned <see cref="AsyncJob{T}"/> can also be awaited to retrieve the callback result.
         /// </summary>
         /// <param name="lastChangeNumber">Last change number seen.</param>
         /// <param name="sendAppChangelist">Whether to send app changes.</param>
         /// <param name="sendPackageChangelist">Whether to send package changes.</param>
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="PICSChangesCallback"/>.</returns>
-        public JobID PICSGetChangesSince( uint lastChangeNumber = 0, bool sendAppChangelist = true, bool sendPackageChangelist = false )
+        public AsyncJob<PICSChangesCallback> PICSGetChangesSince( uint lastChangeNumber = 0, bool sendAppChangelist = true, bool sendPackageChangelist = false )
         {
             var request = new ClientMsgProtobuf<CMsgClientPICSChangesSinceRequest>( EMsg.ClientPICSChangesSinceRequest );
             request.SourceJobID = Client.GetNextJobID();
@@ -357,19 +368,20 @@ namespace SteamKit2
 
             this.Client.Send( request );
 
-            return request.SourceJobID;
+            return new AsyncJob<PICSChangesCallback>( this.Client, request.SourceJobID );
         }
 
         /// <summary>
         /// Request product information for an app or package
         /// Results are returned in a <see cref="PICSProductInfoCallback"/> callback.
+        /// The returned <see cref="AsyncJob{T}"/> can also be awaited to retrieve the callback result.
         /// </summary>
         /// <param name="app">App id requested.</param>
         /// <param name="package">Package id requested.</param>
         /// <param name="onlyPublic">Whether to send only public information.</param>
         /// <param name="metaDataOnly">Whether to send only meta data.</param>
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="PICSProductInfoCallback"/>.</returns>
-        public JobID PICSGetProductInfo(uint? app, uint? package, bool onlyPublic = true, bool metaDataOnly = false)
+        public AsyncJobMultiple<PICSProductInfoCallback> PICSGetProductInfo(uint? app, uint? package, bool onlyPublic = true, bool metaDataOnly = false)
         {
             List<uint> apps = new List<uint>();
             List<uint> packages = new List<uint>();
@@ -383,13 +395,14 @@ namespace SteamKit2
         /// <summary>
         /// Request product information for a list of apps or packages
         /// Results are returned in a <see cref="PICSProductInfoCallback"/> callback.
+        /// The returned <see cref="AsyncJob{T}"/> can also be awaited to retrieve the callback result.
         /// </summary>
         /// <param name="apps">List of app ids requested.</param>
         /// <param name="packages">List of package ids requested.</param>
         /// <param name="onlyPublic">Whether to send only public information.</param>
         /// <param name="metaDataOnly">Whether to send only meta data.</param>
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="PICSProductInfoCallback"/>.</returns>
-        public JobID PICSGetProductInfo( IEnumerable<uint> apps, IEnumerable<uint> packages, bool onlyPublic = true, bool metaDataOnly = false )
+        public AsyncJobMultiple<PICSProductInfoCallback> PICSGetProductInfo( IEnumerable<uint> apps, IEnumerable<uint> packages, bool onlyPublic = true, bool metaDataOnly = false )
         {
             return PICSGetProductInfo( apps.Select( app => new PICSRequest( app, 0, onlyPublic ) ), packages.Select( package => new PICSRequest( package ) ), metaDataOnly );
         }
@@ -397,12 +410,13 @@ namespace SteamKit2
         /// <summary>
         /// Request product information for a list of apps or packages
         /// Results are returned in a <see cref="PICSProductInfoCallback"/> callback.
+        /// The returned <see cref="AsyncJob{T}"/> can also be awaited to retrieve the callback result.
         /// </summary>
         /// <param name="apps">List of <see cref="PICSRequest"/> requests for apps.</param>
         /// <param name="packages">List of <see cref="PICSRequest"/> requests for packages.</param>
         /// <param name="metaDataOnly">Whether to send only meta data.</param>
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="PICSProductInfoCallback"/>.</returns>
-        public JobID PICSGetProductInfo( IEnumerable<PICSRequest> apps, IEnumerable<PICSRequest> packages, bool metaDataOnly = false )
+        public AsyncJobMultiple<PICSProductInfoCallback> PICSGetProductInfo( IEnumerable<PICSRequest> apps, IEnumerable<PICSRequest> packages, bool metaDataOnly = false )
         {
             var request = new ClientMsgProtobuf<CMsgClientPICSProductInfoRequest>( EMsg.ClientPICSProductInfoRequest );
             request.SourceJobID = Client.GetNextJobID();
@@ -430,18 +444,19 @@ namespace SteamKit2
 
             this.Client.Send( request );
 
-            return request.SourceJobID;
+            return new AsyncJobMultiple<PICSProductInfoCallback>( this.Client, request.SourceJobID, callback => !callback.ResponsePending );
         }
 
 
         /// <summary>
         /// Request product information for an app or package
         /// Results are returned in a <see cref="CDNAuthTokenCallback"/> callback.
+        /// The returned <see cref="AsyncJob{T}"/> can also be awaited to retrieve the callback result.
         /// </summary>
         /// <param name="app">App id requested.</param>
         /// <param name="host_name">CDN host name being requested.</param>
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="CDNAuthTokenCallback"/>.</returns>
-        public JobID GetCDNAuthToken(uint app, string host_name)
+        public AsyncJob<CDNAuthTokenCallback> GetCDNAuthToken(uint app, string host_name)
         {
             var request = new ClientMsgProtobuf<CMsgClientGetCDNAuthToken>(EMsg.ClientGetCDNAuthToken);
             request.SourceJobID = Client.GetNextJobID();
@@ -451,26 +466,28 @@ namespace SteamKit2
 
             this.Client.Send(request);
 
-            return request.SourceJobID;
+            return new AsyncJob<CDNAuthTokenCallback>( this.Client, request.SourceJobID );
         }
 
         /// <summary>
         /// Request a free license for given appid, can be used for free on demand apps
         /// Results are returned in a <see cref="FreeLicenseCallback"/> callback.
+        /// The returned <see cref="AsyncJob{T}"/> can also be awaited to retrieve the callback result.
         /// </summary>
         /// <param name="app">The app to request a free license for.</param>
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="FreeLicenseCallback"/>.</returns>
-        public JobID RequestFreeLicense( uint app )
+        public AsyncJob<FreeLicenseCallback> RequestFreeLicense( uint app )
         {
             return RequestFreeLicense( new List<uint> { app } );
         }
         /// <summary>
         /// Request a free license for given appids, can be used for free on demand apps
         /// Results are returned in a <see cref="FreeLicenseCallback"/> callback.
+        /// The returned <see cref="AsyncJob{T}"/> can also be awaited to retrieve the callback result.
         /// </summary>
         /// <param name="apps">The apps to request a free license for.</param>
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="FreeLicenseCallback"/>.</returns>
-        public JobID RequestFreeLicense( IEnumerable<uint> apps )
+        public AsyncJob<FreeLicenseCallback> RequestFreeLicense( IEnumerable<uint> apps )
         {
             var request = new ClientMsgProtobuf<CMsgClientRequestFreeLicense>( EMsg.ClientRequestFreeLicense );
             request.SourceJobID = Client.GetNextJobID();
@@ -479,7 +496,7 @@ namespace SteamKit2
 
             this.Client.Send( request );
 
-            return request.SourceJobID;
+            return new AsyncJob<FreeLicenseCallback>( this.Client, request.SourceJobID );
         }
 
         /// <summary>

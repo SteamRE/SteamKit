@@ -440,16 +440,17 @@ namespace SteamKit2
         /// <summary>
         /// Requests a new WebAPI authentication user nonce.
         /// Results are returned in a <see cref="WebAPIUserNonceCallback"/>.
+        /// The returned <see cref="AsyncJob{T}"/> can also be awaited to retrieve the callback result.
         /// </summary>
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="WebAPIUserNonceCallback"/>.</returns>
-        public JobID RequestWebAPIUserNonce()
+        public AsyncJob<WebAPIUserNonceCallback> RequestWebAPIUserNonce()
         {
             var reqMsg = new ClientMsgProtobuf<CMsgClientRequestWebAPIAuthenticateUserNonce>( EMsg.ClientRequestWebAPIAuthenticateUserNonce );
             reqMsg.SourceJobID = Client.GetNextJobID();
 
             this.Client.Send( reqMsg );
 
-            return reqMsg.SourceJobID;
+            return new AsyncJob<WebAPIUserNonceCallback>( this.Client, reqMsg.SourceJobID );
         }
 
         /// <summary>

@@ -6,6 +6,7 @@
 
 
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net.Sockets;
@@ -30,6 +31,8 @@ namespace SteamKit2
         Queue<ICallbackMsg> callbackQueue;
 
         Dictionary<EMsg, Action<IPacketMsg>> dispatchMap;
+
+        internal AsyncJobManager jobManager;
 
 
         /// <summary>
@@ -69,7 +72,13 @@ namespace SteamKit2
 
                 { EMsg.ClientCMList, HandleCMList },
                 { EMsg.ClientServerList, HandleServerList },
+
+                // to support asyncjob life time
+                { EMsg.JobHeartbeat, HandleJobHeartbeat },
+                { EMsg.DestJobFailed, HandleJobFailed },
             };
+
+            jobManager = new AsyncJobManager();
         }
 
 
@@ -245,10 +254,13 @@ namespace SteamKit2
                 callbackQueue.Enqueue( msg );
                 Monitor.Pulse( callbackLock );
             }
+
+            jobManager.TryCompleteJob( msg.JobID, msg );
         }
         #endregion
 
 
+        #region Jobs
         /// <summary>
         /// Returns the next available JobID for job based messages.
         /// This function is thread-safe.
@@ -265,6 +277,11 @@ namespace SteamKit2
                 StartTime = processStartTime
             };
         }
+        internal void StartJob( AsyncJob job )
+        {
+            jobManager.StartJob( job );
+        }
+        #endregion
 
 
         /// <summary>
@@ -316,6 +333,11 @@ namespace SteamKit2
         /// </summary>
         protected override void OnClientDisconnected( bool userInitiated )
         {
+            // if we are disconnected, cancel all pending jobs
+            jobManager.CancelPendingJobs();
+
+            jobManager.SetTimeoutsEnabled( false );
+
             PostCallback( new DisconnectedCallback( userInitiated ) );
         }
 
@@ -326,6 +348,8 @@ namespace SteamKit2
 
             if ( encResult.Body.Result == EResult.OK )
             {
+                jobManager.SetTimeoutsEnabled( true );
+
                 PostCallback( new ConnectedCallback( encResult.Body ) );
             }
         }
@@ -336,12 +360,20 @@ namespace SteamKit2
 
             PostCallback( new CMListCallback( cmMsg.Body ) );
         }
-
         void HandleServerList( IPacketMsg packetMsg )
         {
             var listMsg = new ClientMsgProtobuf<CMsgClientServerList>( packetMsg );
 
             PostCallback( new ServerListCallback( listMsg.Body ) );
+        }
+
+        void HandleJobHeartbeat( IPacketMsg packetMsg )
+        {
+            jobManager.HeartbeatJob( packetMsg.TargetJobID );
+        }
+        void HandleJobFailed( IPacketMsg packetMsg )
+        {
+            jobManager.FailJob( packetMsg.TargetJobID );
         }
 
     }

@@ -34,12 +34,13 @@ namespace SteamKit2
             /// <summary>
             /// Sends a message.
             /// Results are returned in a <see cref="ServiceMethodResponse"/>.
+            /// The returned <see cref="AsyncJob{T}"/> can also be awaited to retrieve the callback result.
             /// </summary>
             /// <typeparam name="TResponse">The type of the protobuf object which is the response to the RPC call.</typeparam>
             /// <param name="expr">RPC call expression, e.g. x => x.SomeMethodCall(message);</param>
             /// <param name="isNotification">Whether this message is a notification or not.</param>
             /// <returns>The JobID of the request. This can be used to find the appropriate <see cref="ServiceMethodResponse"/>.</returns>
-            public JobID SendMessage<TResponse>( Expression<Func<TService, TResponse>> expr, bool isNotification = false )
+            public AsyncJob<ServiceMethodResponse> SendMessage<TResponse>( Expression<Func<TService, TResponse>> expr, bool isNotification = false )
             {
                 var call = expr.Body as MethodCallExpression;
                 var methodInfo = call.Method;
@@ -67,7 +68,7 @@ namespace SteamKit2
 
                 var method = typeof(SteamUnifiedMessages).GetMethod( "SendMessage" ).MakeGenericMethod( message.GetType() );
                 var result = method.Invoke( this.steamUnifiedMessages, new[] { rpcName, message, isNotification } );
-                return (JobID)result;
+                return (AsyncJob<ServiceMethodResponse>)result;
             }
         }
 
@@ -86,13 +87,14 @@ namespace SteamKit2
         /// <summary>
         /// Sends a message.
         /// Results are returned in a <see cref="ServiceMethodResponse"/>.
+        /// The returned <see cref="AsyncJob{T}"/> can also be awaited to retrieve the callback result.
         /// </summary>
         /// <typeparam name="TRequest">The type of a protobuf object.</typeparam>
         /// <param name="name">Name of the RPC endpoint. Takes the format ServiceName.RpcName</param>
         /// <param name="message">The message to send.</param>
         /// <param name="isNotification">Whether this message is a notification or not.</param>
         /// <returns>The JobID of the request. This can be used to find the appropriate <see cref="ServiceMethodResponse"/>.</returns>
-        public JobID SendMessage<TRequest>( string name, TRequest message, bool isNotification = false )
+        public AsyncJob<ServiceMethodResponse> SendMessage<TRequest>( string name, TRequest message, bool isNotification = false )
             where TRequest : IExtensible
         {
             var msg = new ClientMsgProtobuf<CMsgClientServiceMethod>( EMsg.ClientServiceMethod );
@@ -109,7 +111,7 @@ namespace SteamKit2
 
             Client.Send( msg );
 
-            return msg.SourceJobID;
+            return new AsyncJob<ServiceMethodResponse>( this.Client, msg.SourceJobID );
         }
 
         /// <summary>

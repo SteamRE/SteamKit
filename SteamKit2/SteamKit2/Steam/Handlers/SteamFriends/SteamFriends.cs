@@ -67,10 +67,11 @@ namespace SteamKit2
         /// <summary>
         /// Sets the local user's persona name and broadcasts it over the network.
         /// Results are returned in a <see cref="PersonaChangeCallback"/> callback.
+        /// The returned <see cref="AsyncJob{T}"/> can also be awaited to retrieve the callback result.
         /// </summary>
         /// <param name="name">The name.</param>
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="PersonaChangeCallback"/>.</returns>
-        public JobID SetPersonaName( string name )
+        public AsyncJob<PersonaChangeCallback> SetPersonaName( string name )
         {
             // cache the local name right away, so that early calls to SetPersonaState don't reset the set name
             cache.LocalUser.Name = name;
@@ -83,7 +84,7 @@ namespace SteamKit2
 
             this.Client.Send( stateMsg );
 
-            return stateMsg.SourceJobID;
+            return new AsyncJob<PersonaChangeCallback>( this.Client, stateMsg.SourceJobID );
         }
 
         /// <summary>
@@ -97,10 +98,11 @@ namespace SteamKit2
         /// <summary>
         /// Sets the local user's persona state and broadcasts it over the network.
         /// Results are returned in a <see cref="PersonaChangeCallback"/> callback.
+        /// The returned <see cref="AsyncJob{T}"/> can also be awaited to retrieve the callback result.
         /// </summary>
         /// <param name="state">The state.</param>
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="PersonaChangeCallback"/>.</returns>
-        public JobID SetPersonaState( EPersonaState state )
+        public AsyncJob<PersonaChangeCallback> SetPersonaState( EPersonaState state )
         {
             cache.LocalUser.PersonaState = state;
 
@@ -112,7 +114,7 @@ namespace SteamKit2
 
             this.Client.Send( stateMsg );
 
-            return stateMsg.SourceJobID;
+            return new AsyncJob<PersonaChangeCallback>( this.Client, stateMsg.SourceJobID );
         }
 
         /// <summary>
@@ -524,11 +526,12 @@ namespace SteamKit2
         /// <summary>
         /// Ignores or unignores a friend on Steam.
         /// Results are returned in a <see cref="IgnoreFriendCallback"/>.
+        /// The returned <see cref="AsyncJob{T}"/> can also be awaited to retrieve the callback result.
         /// </summary>
         /// <param name="steamId">The SteamID of the friend to ignore or unignore.</param>
         /// <param name="setIgnore">if set to <c>true</c>, the friend will be ignored; otherwise, they will be unignored.</param>
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="IgnoreFriendCallback"/>.</returns>
-        public JobID IgnoreFriend( SteamID steamId, bool setIgnore = true )
+        public AsyncJob<IgnoreFriendCallback> IgnoreFriend( SteamID steamId, bool setIgnore = true )
         {
             var ignore = new ClientMsg<MsgClientSetIgnoreFriend>();
             ignore.SourceJobID = Client.GetNextJobID();
@@ -539,17 +542,18 @@ namespace SteamKit2
 
             this.Client.Send( ignore );
 
-            return ignore.SourceJobID;
+            return new AsyncJob<IgnoreFriendCallback>( this.Client, ignore.SourceJobID );
         }
 
 
         /// <summary>
         /// Requests profile information for the given <see cref="SteamID"/>.
         /// Results are returned in a <see cref="ProfileInfoCallback"/>.
+        /// The returned <see cref="AsyncJob{T}"/> can also be awaited to retrieve the callback result.
         /// </summary>
         /// <param name="steamId">The SteamID of the friend to request the details of.</param>
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="ProfileInfoCallback"/>.</returns>
-        public JobID RequestProfileInfo( SteamID steamId )
+        public AsyncJob<ProfileInfoCallback> RequestProfileInfo( SteamID steamId )
         {
             var request = new ClientMsgProtobuf<CMsgClientFriendProfileInfo>( EMsg.ClientFriendProfileInfo );
             request.SourceJobID = Client.GetNextJobID();
@@ -558,7 +562,7 @@ namespace SteamKit2
 
             this.Client.Send( request );
 
-            return request.SourceJobID;
+            return new AsyncJob<ProfileInfoCallback>( this.Client, request.SourceJobID );
         }
 
         /// <summary>

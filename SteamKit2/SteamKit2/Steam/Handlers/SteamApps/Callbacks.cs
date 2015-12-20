@@ -754,7 +754,7 @@ namespace SteamKit2
             /// </summary>
             public bool MetaDataOnly { get; private set; }
             /// <summary>
-            /// Gets if the are more product information responses pending
+            /// Gets if there are more product information responses pending
             /// </summary>
             public bool ResponsePending { get; private set; }
             /// <summary>
