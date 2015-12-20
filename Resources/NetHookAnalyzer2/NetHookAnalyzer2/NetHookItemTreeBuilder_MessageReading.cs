@@ -22,7 +22,18 @@ namespace NetHookAnalyzer2
 			}
 			else
 			{
-				header = new ExtendedClientMsgHdr();
+				switch (rawEMsg)
+				{
+					case (uint)EMsg.ChannelEncryptRequest:
+					case (uint)EMsg.ChannelEncryptResponse:
+					case (uint)EMsg.ChannelEncryptResult:
+						header = new MsgHdr();
+						break;
+
+					default:
+						header = new ExtendedClientMsgHdr();
+						break;
+				}
 			}
 
 			header.Deserialize(stream);
