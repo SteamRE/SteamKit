@@ -13,7 +13,7 @@ v 1.7.0			Dec 21, 2015
 * Server List will now maintain ordering from Steam, increasing the chances of a successful and geographically local connection. (pr #218)
 * After calling `SteamUser.LogOff` or `SteamGameServer.LogOff`, `SteamClient.DisconnectedCallback.UserInitiated` will be `true`. (pr #205)
 * Fixed a crash when parsing a Steam ID of the format '[i:1:234]'.
-* Fixed a crash when logging on in an enviromnent where the hard disk has no serial ID, such as Hyper-V.
+* Fixed a crash when logging on in an environment where the hard disk has no serial ID, such as Hyper-V.
 * Fixed a bug when parsing a KeyValue file that contains a `/` followed by a newline. (pr #187)
 * Updated Steam enums and protobufs.
 * Updated game-related GC messages and protobufs.
