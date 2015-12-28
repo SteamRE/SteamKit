@@ -56,6 +56,7 @@ message CMsgRemoteClientStartStream {
 	optional int32 maximum_resolution_x = 7;
 	optional int32 maximum_resolution_y = 8;
 	repeated .CMsgRemoteClientStartStream.ReservedGamepad gamepads = 9;
+	optional int32 audio_channel_count = 10 [default = 2];
 }
 
 message CMsgRemoteClientStartStreamResponse {
@@ -77,7 +78,6 @@ message CMsgRemoteClientAcceptEULA {
 
 message CMsgRemoteClientGetControllerConfig {
 	optional uint32 app_id = 1;
-	optional int32 window_type = 2;
 	optional uint32 controller_index = 3;
 }
 

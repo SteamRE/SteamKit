@@ -16,6 +16,8 @@ message CTwoFactor_Status_Response {
 	optional bool email_validated = 7 [(description) = "Account has verified email capability"];
 	optional string device_identifier = 8 [(description) = "Authenticator (phone) identifier"];
 	optional uint32 time_created = 9 [(description) = "When the token was created"];
+	optional uint32 revocation_attempts_remaining = 10 [(description) = "Number of revocation code attempts remaining"];
+	optional string classified_agent = 11 [(description) = "Agent that added the authenticator (e.g., ios / android / other)"];
 }
 
 message CTwoFactor_AddAuthenticator_Request {
@@ -25,6 +27,7 @@ message CTwoFactor_AddAuthenticator_Request {
 	optional uint32 authenticator_type = 4 [(description) = "Authenticator type"];
 	optional string device_identifier = 5 [(description) = "Authenticator identifier"];
 	optional string sms_phone_id = 6 [(description) = "ID of phone to use for SMS verification"];
+	repeated string http_headers = 7 [(description) = "HTTP headers alternating by K/V"];
 }
 
 message CTwoFactor_AddAuthenticator_Response {
@@ -54,6 +57,7 @@ message CTwoFactor_FinalizeAddAuthenticator_Request {
 	optional string authenticator_code = 2 [(description) = "Current auth code"];
 	optional uint64 authenticator_time = 3 [(description) = "Current authenticator time"];
 	optional string activation_code = 4 [(description) = "Activation code from out-of-band message"];
+	repeated string http_headers = 5 [(description) = "HTTP headers alternating by K/V"];
 }
 
 message CTwoFactor_FinalizeAddAuthenticator_Response {
@@ -64,20 +68,16 @@ message CTwoFactor_FinalizeAddAuthenticator_Response {
 }
 
 message CTwoFactor_RemoveAuthenticator_Request {
-	optional fixed64 steamid = 1 [(description) = "Deprecated. Do not use."];
 	optional string revocation_code = 2 [(description) = "Password needed to remove token"];
-	optional string authenticator_code = 3 [(description) = "Current auth code"];
-	optional uint64 authenticator_time = 4 [(description) = "Current authenticator time"];
 	optional uint32 revocation_reason = 5 [(description) = "Reason the authenticator is being removed"];
 	optional uint32 steamguard_scheme = 6 [(description) = "Type of Steam Guard to use once token is removed"];
 	optional bool remove_all_steamguard_cookies = 7 [(description) = "Remove all steamguard cookies"];
 }
 
 message CTwoFactor_RemoveAuthenticator_Response {
-	optional bool success = 1 [(description) = "True if succeeded, or want more tries with an authenticator_code"];
-	optional bool want_more = 2 [(description) = "True if want more tries"];
+	optional bool success = 1 [(description) = "True if request succeeeded. The mobile app checks this."];
 	optional uint64 server_time = 3 [(description) = "Current server time"];
-	optional int32 status = 4 [(description) = "Result code"];
+	optional uint32 revocation_attempts_remaining = 5 [(description) = "Number of revocation code attempts remaining"];
 }
 
 message CTwoFactor_CreateEmergencyCodes_Request {

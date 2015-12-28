@@ -186,6 +186,9 @@ enum EStreamStatsMessage {
 	k_EStreamStatsFrameEvents = 1;
 	k_EStreamStatsDebugDump = 2;
 	k_EStreamStatsLogMessage = 3;
+	k_EStreamStatsLogUploadBegin = 4;
+	k_EStreamStatsLogUploadData = 5;
+	k_EStreamStatsLogUploadComplete = 6;
 }
 
 enum EStreamFrameEvent {
@@ -243,6 +246,12 @@ enum EFrameAccumulatedStat {
 	k_EFrameStatPacketLossPercentage = 18;
 }
 
+enum ELogFileType {
+	k_ELogFileSystemBoot = 0;
+	k_ELogFileSystemReset = 1;
+	k_ELogFileSystemDebug = 2;
+}
+
 message CDiscoveryRequest {
 	optional bytes token = 1;
 }
@@ -290,15 +299,19 @@ message CStreamingClientConfig {
 	optional int32 maximum_bitrate_kbps = 6 [default = -1];
 	optional bool enable_hardware_decoding = 7 [default = true];
 	optional bool enable_performance_overlay = 8 [default = false];
+	optional bool enable_video_streaming = 9 [default = true];
+	optional bool enable_audio_streaming = 10 [default = true];
+	optional bool enable_input_streaming = 11 [default = true];
 }
 
 message CStreamingServerConfig {
 	optional bool enable_hardware_encoding_nvidia = 1;
-	optional bool enable_hardware_encoding_amd = 2;
-	optional bool enable_hardware_encoding_intel = 3;
-	optional int32 software_encoding_threads = 4;
-	optional bool dynamically_adjust_resolution = 5;
-	optional bool enable_traffic_priority = 6;
+	optional bool enable_hardware_encoding_nvfbc_h264 = 2;
+	optional bool enable_hardware_encoding_amd = 3;
+	optional bool enable_hardware_encoding_intel = 4;
+	optional int32 software_encoding_threads = 5;
+	optional bool dynamically_adjust_resolution = 6;
+	optional bool enable_traffic_priority = 7;
 }
 
 message CNegotiatedConfig {
@@ -629,5 +642,10 @@ message CDebugDumpMsg {
 message CLogMsg {
 	optional int32 type = 1;
 	optional string message = 2;
+}
+
+message CLogUploadMsg {
+	optional .ELogFileType type = 1 [default = k_ELogFileSystemBoot];
+	optional bytes data = 3;
 }
 
