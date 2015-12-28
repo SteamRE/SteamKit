@@ -628,6 +628,36 @@ message CMsgPushClipLayer {
 message CMsgPopClipLayer {
 }
 
+message CMsgPushPanelContextInLayer {
+	optional double transform_m00 = 1;
+	optional double transform_m01 = 2;
+	optional double transform_m02 = 3;
+	optional double transform_m03 = 4;
+	optional double transform_m10 = 5;
+	optional double transform_m11 = 6;
+	optional double transform_m12 = 7;
+	optional double transform_m13 = 8;
+	optional double transform_m20 = 9;
+	optional double transform_m21 = 10;
+	optional double transform_m22 = 11;
+	optional double transform_m23 = 12;
+	optional double transform_m30 = 13;
+	optional double transform_m31 = 14;
+	optional double transform_m32 = 15;
+	optional double transform_m33 = 16;
+	optional .CBoxShadowData box_shadow = 17;
+	optional double width = 18;
+	optional double height = 19;
+	optional double position_x = 20;
+	optional double position_y = 21;
+	optional .CBorderData border = 22;
+	optional double scroll_x = 23;
+	optional double scroll_y = 24;
+}
+
+message CMsgPopPanelContextInLayer {
+}
+
 message CMsgPushAAndTContext {
 	optional uint64 context_id = 1;
 	optional double width = 3;
@@ -657,9 +687,11 @@ message CMsgPushAAndTContext {
 	optional bool suppress_clip_to_bounds = 27;
 	optional int32 needs_full_repaint = 28;
 	optional bool needs_intermediate_texture = 29;
-	optional bool wants_hit_test = 30;
-	optional uint32 mix_blend_mode = 31;
-	optional bool opaque_background = 32;
+	optional bool clip_after_transform = 30;
+	optional bool wants_hit_test = 31;
+	optional uint32 mix_blend_mode = 32;
+	optional bool opaque_background = 33;
+	optional uint32 child_panel_count = 34;
 }
 
 message CMsgPopAAndTContext {
@@ -700,6 +732,7 @@ message CMsgDrawTexturedRect {
 	optional .CMsgPoint texture_bottom_right = 5;
 	optional int32 texture_serial = 6 [default = 0];
 	optional uint32 texture_sample_mode = 7 [default = 0];
+	optional .CMsgOpacity texture_opacity = 8;
 }
 
 message CMsgDrawDoubleBufferedRect {
@@ -726,6 +759,7 @@ message CMsgRenderTexturedRect {
 	optional .CMsgPoint texture_bottom_right = 5;
 	optional int32 texture_serial = 6 [default = 0];
 	optional uint32 texture_sample_mode = 7 [default = 0];
+	optional float texture_opacity = 8 [default = 1];
 }
 
 message CMsgLockTexture {

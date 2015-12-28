@@ -22,6 +22,7 @@ enum GCConnectionStatus {
 	GCConnectionStatus_NO_SESSION_IN_LOGON_QUEUE = 3;
 	GCConnectionStatus_NO_STEAM = 4;
 	GCConnectionStatus_SUSPENDED = 5;
+	GCConnectionStatus_STEAM_GOING_DOWN = 6;
 }
 
 message CMsgSHA1Digest {

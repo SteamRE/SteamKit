@@ -136,6 +136,12 @@ message CMsgGameServerInfo {
 		PROXY = 2;
 	}
 
+	enum CustomGames {
+		BOTH = 0;
+		NONE = 1;
+		ONLY = 2;
+	}
+
 	optional fixed32 server_public_ip_addr = 1;
 	optional fixed32 server_private_ip_addr = 2;
 	optional uint32 server_port = 3;
@@ -158,6 +164,7 @@ message CMsgGameServerInfo {
 	optional fixed64 tv_secret_code = 18;
 	optional uint32 server_version = 19;
 	optional uint32 server_cluster = 20;
+	optional .CMsgGameServerInfo.CustomGames allow_custom_games = 23 [default = BOTH];
 }
 
 message CMsgLeaverDetected {
@@ -632,6 +639,7 @@ message CMsgDOTAAwardEventPoints {
 	repeated .CMsgDOTAAwardEventPoints.AwardPoints award_points = 1;
 	optional uint64 match_id = 2;
 	optional uint32 event_id = 4;
+	optional uint32 timestamp = 5;
 }
 
 message CMsgServerToGCSignoutAwardAdditionalDrops {
@@ -868,12 +876,14 @@ message CMsgSignOutUpdatePlayerChallenge {
 	message Challenge {
 		optional uint32 event_id = 1;
 		optional uint32 sequence_id = 3;
+		optional uint32 progress = 4;
 	}
 
 	optional uint32 account_id = 1;
 	repeated .CMsgSignOutUpdatePlayerChallenge.Challenge completed = 2;
 	repeated .CMsgSignOutUpdatePlayerChallenge.Challenge rerolled = 3;
 	optional uint64 match_id = 4;
+	optional uint32 hero_id = 5;
 }
 
 message CMsgServerToGCRerollPlayerChallenge {
@@ -916,5 +926,18 @@ message CMsgSignOutWagerStats {
 
 	repeated .CMsgSignOutWagerStats.Player players = 1;
 	optional uint32 event_id = 2;
+}
+
+message CMsgSignOutXPCoins {
+	message Player {
+		optional uint32 account_id = 1;
+		optional uint32 xp_gained = 2;
+		optional uint32 coins_spent = 3;
+	}
+
+	repeated .CMsgSignOutXPCoins.Player players = 1;
+	optional uint32 event_id = 2;
+	optional uint64 match_id = 3;
+	optional uint32 timestamp = 4;
 }
 
