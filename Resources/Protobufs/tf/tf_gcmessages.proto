@@ -516,6 +516,7 @@ message CSOTFPartyMember {
 	optional bool is_banned = 8 [default = false];
 	optional bool owns_ladder_pass = 9;
 	optional bool phone_verified = 10 [default = false];
+	optional bool two_factor_enabled = 11 [default = false];
 }
 
 message CMsgMatchSearchCriteria {
@@ -826,6 +827,7 @@ message CMsgMvMVictoryInfo {
 		optional uint32 badge_progress_bits = 7;
 		repeated .CMsgMvMVictoryInfo.Item items = 8;
 		optional bool voucher_missing = 9;
+		optional uint32 badge_points = 10;
 	}
 
 	enum GrantReason {
@@ -1127,6 +1129,8 @@ message CSOTFLadderPlayerStats {
 	optional uint32 damage = 5;
 	optional uint32 healing = 6;
 	optional uint32 support = 7;
+	optional uint32 score = 8;
+	optional uint32 experience = 9;
 }
 
 message CMsgGC_TFVoteKickPlayerRequest {

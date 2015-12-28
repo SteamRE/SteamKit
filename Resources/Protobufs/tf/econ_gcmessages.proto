@@ -165,6 +165,9 @@ enum EGCItemMsg {
 	k_EMsgGCApplyStrangeCountTransfer = 2566;
 	k_EMsgGCCraftCollectionUpgrade = 2567;
 	k_EMsgGCCraftHalloweenOffering = 2568;
+	k_EMsgGCQuestDiscard_Request = 2569;
+	k_EMsgGCRemoveGiftedBy = 2570;
+	k_EMsgGCRemoveGiftedByResponse = 2571;
 }
 
 enum EGCMsgResponse {
@@ -358,5 +361,9 @@ message CMsgCraftCollectionUpgrade {
 message CMsgCraftHalloweenOffering {
 	optional uint64 tool_id = 1;
 	repeated uint64 item_id = 2;
+}
+
+message CMsgGCQuestDiscard_Request {
+	optional uint64 quest_item_id = 1;
 }
 
