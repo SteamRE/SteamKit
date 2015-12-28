@@ -182,6 +182,7 @@ message CCSUsrMsg_VoiceMask {
 message CCSUsrMsg_Damage {
 	optional int32 amount = 1;
 	optional .CMsgVector inflictor_world_pos = 2;
+	optional int32 victim_entindex = 3;
 }
 
 message CCSUsrMsg_RadioText {

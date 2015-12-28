@@ -312,8 +312,9 @@ message CMsgSetPresetItemPosition {
 
 message CMsgSetItemPositions {
 	message ItemPosition {
-		optional uint32 item_id = 1;
+		optional uint32 legacy_item_id = 1;
 		optional uint32 position = 2;
+		optional uint64 item_id = 3;
 	}
 
 	repeated .CMsgSetItemPositions.ItemPosition item_positions = 1;

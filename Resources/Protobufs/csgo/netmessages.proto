@@ -26,6 +26,7 @@ enum CLC_Messages {
 	clc_SplitPlayerConnect = 16;
 	clc_ClientMessage = 17;
 	clc_CmdKeyValues = 18;
+	clc_HltvReplay = 20;
 }
 
 enum VoiceDataFormat_t {
@@ -68,6 +69,13 @@ enum SVC_Messages {
 	svc_PaintmapData = 33;
 	svc_CmdKeyValues = 34;
 	svc_EncryptedData = 35;
+	svc_HltvReplay = 36;
+}
+
+enum ReplayEventType_t {
+	REPLAY_EVENT_CANCEL = 0;
+	REPLAY_EVENT_DEATH = 1;
+	REPLAY_EVENT_GENERIC = 2;
 }
 
 message CMsgVector {
@@ -99,6 +107,7 @@ message CNETMsg_Tick {
 	optional uint32 host_computationtime = 4;
 	optional uint32 host_computationtime_std_deviation = 5;
 	optional uint32 host_framestarttime_std_deviation = 6;
+	optional uint32 hltv_replay_flags = 7;
 }
 
 message CNETMsg_StringCmd {
@@ -360,6 +369,7 @@ message CSVCMsg_Menu {
 message CSVCMsg_UserMessage {
 	optional int32 msg_type = 1;
 	optional bytes msg_data = 2;
+	optional int32 passthrough = 3;
 }
 
 message CSVCMsg_PaintmapData {
@@ -382,6 +392,7 @@ message CSVCMsg_GameEvent {
 	optional string event_name = 1;
 	optional int32 eventid = 2;
 	repeated .CSVCMsg_GameEvent.key_t keys = 3;
+	optional int32 passthrough = 4;
 }
 
 message CSVCMsg_GameEventList {
@@ -453,5 +464,23 @@ message CSVCMsg_CmdKeyValues {
 message CSVCMsg_EncryptedData {
 	optional bytes encrypted = 1;
 	optional int32 key_type = 2;
+}
+
+message CSVCMsg_HltvReplay {
+	optional int32 delay = 1;
+	optional int32 primary_target = 2;
+	optional int32 replay_stop_at = 3;
+	optional int32 replay_start_at = 4;
+	optional int32 replay_slowdown_begin = 5;
+	optional int32 replay_slowdown_end = 6;
+	optional float replay_slowdown_rate = 7;
+}
+
+message CCLCMsg_HltvReplay {
+	optional int32 request = 1;
+	optional float slowdown_length = 2;
+	optional float slowdown_rate = 3;
+	optional int32 primary_target_ent_index = 4;
+	optional float event_time = 5;
 }
 
