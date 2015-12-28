@@ -2001,6 +2001,15 @@ namespace SteamKit2.GC.CSGO.Internal
       get { return _tournament_tag; }
       set { _tournament_tag = value; }
     }
+
+    private uint _steamdatagram_port = default(uint);
+    [global::ProtoBuf.ProtoMember(14, IsRequired = false, Name=@"steamdatagram_port", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint steamdatagram_port
+    {
+      get { return _steamdatagram_port; }
+      set { _steamdatagram_port = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -2021,22 +2030,31 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _serverid = value; }
     }
 
-    private uint _serverip = default(uint);
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"serverip", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint serverip
+    private string _server_address = "";
+    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"server_address", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string server_address
     {
-      get { return _serverip; }
-      set { _serverip = value; }
+      get { return _server_address; }
+      set { _server_address = value; }
     }
 
-    private uint _serverport = default(uint);
-    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"serverport", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    private uint _legacy_serverip = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"legacy_serverip", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint serverport
+    public uint legacy_serverip
     {
-      get { return _serverport; }
-      set { _serverport = value; }
+      get { return _legacy_serverip; }
+      set { _legacy_serverip = value; }
+    }
+
+    private uint _legacy_serverport = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"legacy_serverport", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint legacy_serverport
+    {
+      get { return _legacy_serverport; }
+      set { _legacy_serverport = value; }
     }
 
     private ulong _reservationid = default(ulong);
@@ -2686,52 +2704,6 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CDataGCCStrike15_v2_MatchmakingLockedInMatch")]
-  public partial class CDataGCCStrike15_v2_MatchmakingLockedInMatch : global::ProtoBuf.IExtensible
-  {
-    public CDataGCCStrike15_v2_MatchmakingLockedInMatch() {}
-    
-
-    private CMsgGCCStrike15_v2_MatchmakingGC2ClientReserve _client_reservation = null;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"client_reservation", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
-    public CMsgGCCStrike15_v2_MatchmakingGC2ClientReserve client_reservation
-    {
-      get { return _client_reservation; }
-      set { _client_reservation = value; }
-    }
-
-    private CMsgGCCStrike15_v2_MatchmakingServerRoundStats _server_stats = null;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"server_stats", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
-    public CMsgGCCStrike15_v2_MatchmakingServerRoundStats server_stats
-    {
-      get { return _server_stats; }
-      set { _server_stats = value; }
-    }
-
-    private uint _rtime32_server_info = default(uint);
-    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"rtime32_server_info", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint rtime32_server_info
-    {
-      get { return _rtime32_server_info; }
-      set { _rtime32_server_info = value; }
-    }
-
-    private CMsgGCCStrike15_v2_MatchmakingServerRoundStats _last_round_stats_temp = null;
-    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"last_round_stats_temp", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
-    public CMsgGCCStrike15_v2_MatchmakingServerRoundStats last_round_stats_temp
-    {
-      get { return _last_round_stats_temp; }
-      set { _last_round_stats_temp = value; }
-    }
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCCStrike15_v2_MatchmakingGC2ServerRankUpdate")]
   public partial class CMsgGCCStrike15_v2_MatchmakingGC2ServerRankUpdate : global::ProtoBuf.IExtensible
   {
@@ -2982,6 +2954,15 @@ namespace SteamKit2.GC.CSGO.Internal
     {
       get { return _rpt_listingabuse; }
       set { _rpt_listingabuse = value; }
+    }
+
+    private uint _rpt_inventoryabuse = default(uint);
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"rpt_inventoryabuse", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint rpt_inventoryabuse
+    {
+      get { return _rpt_inventoryabuse; }
+      set { _rpt_inventoryabuse = value; }
     }
 
     private ulong _match_id = default(ulong);

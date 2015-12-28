@@ -358,42 +358,6 @@ namespace SteamKit2.GC.Dota.Internal
       set { _client_version = value; }
     }
 
-    private uint _team_id = default(uint);
-    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"team_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint team_id
-    {
-      get { return _team_id; }
-      set { _team_id = value; }
-    }
-
-    private bool _as_coach = default(bool);
-    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"as_coach", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
-    public bool as_coach
-    {
-      get { return _as_coach; }
-      set { _as_coach = value; }
-    }
-
-    private uint _game_language_enum = default(uint);
-    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"game_language_enum", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint game_language_enum
-    {
-      get { return _game_language_enum; }
-      set { _game_language_enum = value; }
-    }
-
-    private string _game_language_name = "";
-    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"game_language_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
-    public string game_language_name
-    {
-      get { return _game_language_name; }
-      set { _game_language_name = value; }
-    }
-
     private CMsgClientPingData _ping_data = null;
     [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"ping_data", DataFormat = global::ProtoBuf.DataFormat.Default)]
     [global::System.ComponentModel.DefaultValue(null)]
@@ -438,24 +402,6 @@ namespace SteamKit2.GC.Dota.Internal
     {
       get { return _client_version; }
       set { _client_version = value; }
-    }
-
-    private uint _game_language_enum = default(uint);
-    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"game_language_enum", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint game_language_enum
-    {
-      get { return _game_language_enum; }
-      set { _game_language_enum = value; }
-    }
-
-    private string _game_language_name = "";
-    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"game_language_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
-    public string game_language_name
-    {
-      get { return _game_language_name; }
-      set { _game_language_name = value; }
     }
 
     private ulong _custom_game_crc = default(ulong);
@@ -1912,116 +1858,6 @@ namespace SteamKit2.GC.Dota.Internal
     {
       get { return _preset_id; }
       set { _preset_id = value; }
-    }
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCReportAbuse")]
-  public partial class CMsgGCReportAbuse : global::ProtoBuf.IExtensible
-  {
-    public CMsgGCReportAbuse() {}
-    
-
-    private ulong _target_steam_id = default(ulong);
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"target_steam_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
-    public ulong target_steam_id
-    {
-      get { return _target_steam_id; }
-      set { _target_steam_id = value; }
-    }
-
-    private string _description = "";
-    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"description", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
-    public string description
-    {
-      get { return _description; }
-      set { _description = value; }
-    }
-
-    private ulong _gid = default(ulong);
-    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"gid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
-    public ulong gid
-    {
-      get { return _gid; }
-      set { _gid = value; }
-    }
-
-    private uint _abuse_type = default(uint);
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"abuse_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint abuse_type
-    {
-      get { return _abuse_type; }
-      set { _abuse_type = value; }
-    }
-
-    private uint _content_type = default(uint);
-    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"content_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint content_type
-    {
-      get { return _content_type; }
-      set { _content_type = value; }
-    }
-
-    private uint _target_game_server_ip = default(uint);
-    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"target_game_server_ip", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint target_game_server_ip
-    {
-      get { return _target_game_server_ip; }
-      set { _target_game_server_ip = value; }
-    }
-
-    private uint _target_game_server_port = default(uint);
-    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"target_game_server_port", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint target_game_server_port
-    {
-      get { return _target_game_server_port; }
-      set { _target_game_server_port = value; }
-    }
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCReportAbuseResponse")]
-  public partial class CMsgGCReportAbuseResponse : global::ProtoBuf.IExtensible
-  {
-    public CMsgGCReportAbuseResponse() {}
-    
-
-    private ulong _target_steam_id = default(ulong);
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"target_steam_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
-    public ulong target_steam_id
-    {
-      get { return _target_steam_id; }
-      set { _target_steam_id = value; }
-    }
-
-    private uint _result = default(uint);
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"result", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint result
-    {
-      get { return _result; }
-      set { _result = value; }
-    }
-
-    private string _error_message = "";
-    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"error_message", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
-    public string error_message
-    {
-      get { return _error_message; }
-      set { _error_message = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

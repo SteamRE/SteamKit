@@ -117,6 +117,24 @@ namespace SteamKit2.Unified.Internal
       get { return _time_created; }
       set { _time_created = value; }
     }
+
+    private uint _revocation_attempts_remaining = default(uint);
+    [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"revocation_attempts_remaining", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint revocation_attempts_remaining
+    {
+      get { return _revocation_attempts_remaining; }
+      set { _revocation_attempts_remaining = value; }
+    }
+
+    private string _classified_agent = "";
+    [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"classified_agent", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string classified_agent
+    {
+      get { return _classified_agent; }
+      set { _classified_agent = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -181,6 +199,13 @@ namespace SteamKit2.Unified.Internal
       get { return _sms_phone_id; }
       set { _sms_phone_id = value; }
     }
+    private readonly global::System.Collections.Generic.List<string> _http_headers = new global::System.Collections.Generic.List<string>();
+    [global::ProtoBuf.ProtoMember(7, Name=@"http_headers", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<string> http_headers
+    {
+      get { return _http_headers; }
+    }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -374,6 +399,13 @@ namespace SteamKit2.Unified.Internal
       get { return _activation_code; }
       set { _activation_code = value; }
     }
+    private readonly global::System.Collections.Generic.List<string> _http_headers = new global::System.Collections.Generic.List<string>();
+    [global::ProtoBuf.ProtoMember(5, Name=@"http_headers", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<string> http_headers
+    {
+      get { return _http_headers; }
+    }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -431,15 +463,6 @@ namespace SteamKit2.Unified.Internal
     public CTwoFactor_RemoveAuthenticator_Request() {}
     
 
-    private ulong _steamid = default(ulong);
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
-    public ulong steamid
-    {
-      get { return _steamid; }
-      set { _steamid = value; }
-    }
-
     private string _revocation_code = "";
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"revocation_code", DataFormat = global::ProtoBuf.DataFormat.Default)]
     [global::System.ComponentModel.DefaultValue("")]
@@ -447,24 +470,6 @@ namespace SteamKit2.Unified.Internal
     {
       get { return _revocation_code; }
       set { _revocation_code = value; }
-    }
-
-    private string _authenticator_code = "";
-    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"authenticator_code", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
-    public string authenticator_code
-    {
-      get { return _authenticator_code; }
-      set { _authenticator_code = value; }
-    }
-
-    private ulong _authenticator_time = default(ulong);
-    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"authenticator_time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
-    public ulong authenticator_time
-    {
-      get { return _authenticator_time; }
-      set { _authenticator_time = value; }
     }
 
     private uint _revocation_reason = default(uint);
@@ -513,15 +518,6 @@ namespace SteamKit2.Unified.Internal
       set { _success = value; }
     }
 
-    private bool _want_more = default(bool);
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"want_more", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
-    public bool want_more
-    {
-      get { return _want_more; }
-      set { _want_more = value; }
-    }
-
     private ulong _server_time = default(ulong);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"server_time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(default(ulong))]
@@ -531,13 +527,13 @@ namespace SteamKit2.Unified.Internal
       set { _server_time = value; }
     }
 
-    private int _status = default(int);
-    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"status", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
-    public int status
+    private uint _revocation_attempts_remaining = default(uint);
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"revocation_attempts_remaining", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint revocation_attempts_remaining
     {
-      get { return _status; }
-      set { _status = value; }
+      get { return _revocation_attempts_remaining; }
+      set { _revocation_attempts_remaining = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

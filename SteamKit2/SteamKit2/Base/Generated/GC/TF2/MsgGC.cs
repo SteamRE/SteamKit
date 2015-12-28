@@ -1764,6 +1764,15 @@ namespace SteamKit2.GC.TF2.Internal
       get { return _phone_verified; }
       set { _phone_verified = value; }
     }
+
+    private bool _two_factor_enabled = (bool)false;
+    [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"two_factor_enabled", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue((bool)false)]
+    public bool two_factor_enabled
+    {
+      get { return _two_factor_enabled; }
+      set { _two_factor_enabled = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -3677,6 +3686,15 @@ namespace SteamKit2.GC.TF2.Internal
       get { return _voucher_missing; }
       set { _voucher_missing = value; }
     }
+
+    private uint _badge_points = default(uint);
+    [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"badge_points", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint badge_points
+    {
+      get { return _badge_points; }
+      set { _badge_points = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -5571,6 +5589,24 @@ namespace SteamKit2.GC.TF2.Internal
     {
       get { return _support; }
       set { _support = value; }
+    }
+
+    private uint _score = default(uint);
+    [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"score", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint score
+    {
+      get { return _score; }
+      set { _score = value; }
+    }
+
+    private uint _experience = default(uint);
+    [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"experience", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint experience
+    {
+      get { return _experience; }
+      set { _experience = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

@@ -1809,13 +1809,13 @@ namespace SteamKit2.GC.CSGO.Internal
     public ItemPosition() {}
     
 
-    private uint _item_id = default(uint);
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"item_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    private uint _legacy_item_id = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"legacy_item_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint item_id
+    public uint legacy_item_id
     {
-      get { return _item_id; }
-      set { _item_id = value; }
+      get { return _legacy_item_id; }
+      set { _legacy_item_id = value; }
     }
 
     private uint _position = default(uint);
@@ -1825,6 +1825,15 @@ namespace SteamKit2.GC.CSGO.Internal
     {
       get { return _position; }
       set { _position = value; }
+    }
+
+    private ulong _item_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"item_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong item_id
+    {
+      get { return _item_id; }
+      set { _item_id = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
