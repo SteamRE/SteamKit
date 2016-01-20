@@ -25,7 +25,7 @@ namespace SteamKit2
             : base( input )
         {
             bool wasQuoted;
-            bool wasConditional;
+            string condition;
 
             KeyValue currentKey = kv;
 
@@ -33,7 +33,7 @@ namespace SteamKit2
             {
                 // bool bAccepted = true;
 
-                string s = ReadToken( out wasQuoted, out wasConditional );
+                string s = ReadToken( out wasQuoted, out condition );
 
                 if ( string.IsNullOrEmpty( s ) )
                     break;
@@ -47,14 +47,14 @@ namespace SteamKit2
                     currentKey.Name = s;
                 }
 
-                s = ReadToken( out wasQuoted, out wasConditional );
+                s = ReadToken( out wasQuoted, out condition);
 
-                if ( wasConditional )
+                if ( condition != null )
                 {
                     // bAccepted = ( s == "[$WIN32]" );
 
                     // Now get the '{'
-                    s = ReadToken( out wasQuoted, out wasConditional );
+                    s = ReadToken( out wasQuoted, out condition);
                 }
 
                 if ( s.StartsWith( "{" ) && !wasQuoted )
@@ -76,7 +76,7 @@ namespace SteamKit2
         {
             while ( !EndOfStream )
             {
-                if ( !Char.IsWhiteSpace( ( char )Peek() ) )
+                if ( !char.IsWhiteSpace( ( char )Peek() ) )
                 {
                     break;
                 }
@@ -92,14 +92,14 @@ namespace SteamKit2
                 char next = ( char )Peek();
                 if ( next == '/' )
                 {
-		    ReadLine();
-		    return true;
-		    /*
-		     *  As came up in parsing the Dota 2 units.txt file, the reference (Valve) implementation
-		     *  of the KV format considers a single forward slash to be sufficient to comment out the
-		     *  entirety of a line. While they still _tend_ to use two, it's not required, and likely
-		     *  is just done out of habit.
-		     */
+                    ReadLine();
+                    return true;
+                    /*
+                     *  As came up in parsing the Dota 2 units.txt file, the reference (Valve) implementation
+                     *  of the KV format considers a single forward slash to be sufficient to comment out the
+                     *  entirety of a line. While they still _tend_ to use two, it's not required, and likely
+                     *  is just done out of habit.
+                     */
                 }
 
                 return false;
@@ -108,10 +108,10 @@ namespace SteamKit2
             return false;
         }
 
-        public string ReadToken( out bool wasQuoted, out bool wasConditional )
+        public string ReadToken( out bool wasQuoted, out string condition )
         {
             wasQuoted = false;
-            wasConditional = false;
+            condition = null;
 
             while ( true )
             {
@@ -130,6 +130,8 @@ namespace SteamKit2
 
             if ( EndOfStream )
                 return null;
+            
+            var sb = new StringBuilder();
 
             char next = ( char )Peek();
             if ( next == '"' )
@@ -138,8 +140,6 @@ namespace SteamKit2
 
                 // "
                 Read();
-
-                var sb = new StringBuilder();
                 while ( !EndOfStream )
                 {
                     if ( Peek() == '\\' )
@@ -165,8 +165,6 @@ namespace SteamKit2
 
                 // "
                 Read();
-
-                return sb.ToString();
             }
 
             if ( next == '{' || next == '}' )
@@ -175,7 +173,6 @@ namespace SteamKit2
                 return next.ToString();
             }
 
-            bool bConditionalStart = false;
             int count = 0;
             var ret = new StringBuilder();
             while ( !EndOfStream )
@@ -185,14 +182,17 @@ namespace SteamKit2
                 if ( next == '"' || next == '{' || next == '}' )
                     break;
 
-                if ( next == '[' )
-                    bConditionalStart = true;
+                if ( char.IsWhiteSpace( next ) )
+                {
+                    EatWhiteSpace();
+                    continue;
+                }
 
-                if ( next == ']' && bConditionalStart )
-                    wasConditional = true;
-
-                if ( Char.IsWhiteSpace( next ) )
-                    break;
+                if ( next == '/' )
+                {
+                    EatCPPComment();
+                    continue;
+                }
 
                 if ( count < 1023 )
                 {
@@ -206,7 +206,17 @@ namespace SteamKit2
                 Read();
             }
 
-            return ret.ToString();
+            if ( ret.Length > 0 )
+            {
+                condition = ret.ToString();
+
+                if ( condition[ 0 ] != '[' || condition[ condition.Length - 1 ] != ']' )
+                {
+                    throw new InvalidDataException("Improperly formatted conditional.");
+                }
+            }
+
+            return sb.ToString();
         }
     }
 
@@ -559,7 +569,7 @@ namespace SteamKit2
         /// <returns><c>true</c> if the read was successful; otherwise, <c>false</c>.</returns>
         public bool ReadFileAsText( string filename )
         {
-            using ( FileStream fs = new FileStream( filename, FileMode.Open ) )
+            using ( FileStream fs = new FileStream( filename, FileMode.Open, FileAccess.Read, FileShare.Read ) )
             {
                 return ReadAsText( fs );
             }
@@ -568,18 +578,23 @@ namespace SteamKit2
         internal void RecursiveLoadFromBuffer( KVTextReader kvr )
         {
             bool wasQuoted;
-            bool wasConditional;
+            string condition;
 
             while ( true )
             {
                 // bool bAccepted = true;
 
                 // get the key name
-                string name = kvr.ReadToken( out wasQuoted, out wasConditional );
-
+                string name = kvr.ReadToken( out wasQuoted, out condition );
+                
                 if ( string.IsNullOrEmpty( name ) )
                 {
                     throw new Exception( "RecursiveLoadFromBuffer: got EOF or empty keyname" );
+                }
+
+                if (condition != null)
+                {
+                    throw new Exception("RecursiveLoadFromBuffer:  got conditional between key and value");
                 }
 
                 if ( name.StartsWith( "}" ) && !wasQuoted )	// top level closed, stop reading
@@ -590,12 +605,12 @@ namespace SteamKit2
                 this.Children.Add( dat );
 
                 // get the value
-                string value = kvr.ReadToken( out wasQuoted, out wasConditional );
+                string value = kvr.ReadToken( out wasQuoted, out condition);
 
-                if ( wasConditional && value != null )
+                if ( condition != null && value != null )
                 {
                     // bAccepted = ( value == "[$WIN32]" );
-                    value = kvr.ReadToken( out wasQuoted, out wasConditional );
+                    // value = kvr.ReadToken( out wasQuoted, out condition);
                 }
 
                 if ( value == null )
@@ -610,13 +625,7 @@ namespace SteamKit2
                 }
                 else
                 {
-                    if ( wasConditional )
-                    {
-                        throw new Exception( "RecursiveLoadFromBuffer:  got conditional between key and value" );
-                    }
-
                     dat.Value = value;
-                    // blahconditionalsdontcare
                 }
             }
         }
@@ -701,13 +710,20 @@ namespace SteamKit2
                     WriteIndents( stream, indentLevel + 1 );
                     WriteString( stream, child.Name, true );
                     WriteString( stream, "\t\t" );
-                    WriteString( stream, child.AsString(), true );
+                    WriteString( stream, FormatValueForWriting( child ), true );
                     WriteString( stream, "\n" );
                 }
             }
 
             WriteIndents( stream, indentLevel );
             WriteString( stream, "}\n" );
+        }
+
+        static string FormatValueForWriting( KeyValue kv )
+        {
+            return kv.AsString()
+                .Replace("\r\n", @"\n")
+                .Replace("\n", @"\n");
         }
 
         void WriteIndents( Stream stream, int indentLevel )
