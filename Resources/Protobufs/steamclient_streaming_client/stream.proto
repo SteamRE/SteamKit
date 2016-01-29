@@ -302,6 +302,7 @@ message CStreamingClientConfig {
 	optional bool enable_video_streaming = 9 [default = true];
 	optional bool enable_audio_streaming = 10 [default = true];
 	optional bool enable_input_streaming = 11 [default = true];
+	optional int32 audio_channels = 12 [default = 2];
 }
 
 message CStreamingServerConfig {
@@ -500,6 +501,8 @@ message CInputControllerAttachedMsg {
 	optional uint32 bootloader_version = 4;
 	optional uint32 firmware_version = 5;
 	optional string serial_number = 6;
+	optional string chip_id = 7;
+	repeated uint32 attributes = 8;
 }
 
 message CInputControllerStateMsg {

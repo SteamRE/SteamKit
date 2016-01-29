@@ -200,6 +200,7 @@ message CPublishedFile_GetItemInfo_Response {
 		optional fixed64 published_file_id = 1;
 		optional uint32 time_updated = 2;
 		optional fixed64 manifest_id = 3;
+		optional uint32 flags = 4;
 	}
 
 	optional uint32 update_time = 1;

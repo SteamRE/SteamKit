@@ -41,6 +41,7 @@ enum ERemoteDeviceStreamingResult {
 	k_ERemoteDeviceStreamingInProgress = 5;
 	k_ERemoteDeviceStreamingCanceled = 6;
 	k_ERemoteDeviceStreamingDriversNotInstalled = 7;
+	k_ERemoteDeviceStreamingDisabled = 8;
 }
 
 message CMsgRemoteClientBroadcastHeader {
@@ -106,6 +107,9 @@ message CMsgRemoteDeviceAuthorizationResponse {
 
 message CMsgRemoteDeviceStreamingRequest {
 	required uint32 request_id = 1;
+	optional int32 maximum_resolution_x = 2;
+	optional int32 maximum_resolution_y = 3;
+	optional int32 audio_channel_count = 4 [default = 2];
 }
 
 message CMsgRemoteDeviceStreamingCancelRequest {
