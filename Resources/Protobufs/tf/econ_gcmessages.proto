@@ -168,6 +168,8 @@ enum EGCItemMsg {
 	k_EMsgGCQuestDiscard_Request = 2569;
 	k_EMsgGCRemoveGiftedBy = 2570;
 	k_EMsgGCRemoveGiftedByResponse = 2571;
+	k_EMsgGCRemoveFestivizer = 2572;
+	k_EMsgGCRemoveFestivizerResponse = 2573;
 }
 
 enum EGCMsgResponse {
