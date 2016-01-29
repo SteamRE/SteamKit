@@ -251,6 +251,8 @@ message PlayerQuestData {
 
 message CMsgGC_ServerQuestUpdateData {
 	repeated .PlayerQuestData player_quest_data = 1;
+	optional bytes binary_data = 2;
+	optional uint32 mm_game_mode = 3;
 }
 
 message CMsgGCCStrike15_v2_MatchmakingGCOperationalStats {
@@ -427,6 +429,7 @@ message CMsgGCCStrike15_v2_MatchmakingServerMatchEnd {
 	optional uint32 replay_cluster_id = 6;
 	optional bool aborted_match = 7;
 	optional .CMsgGC_ServerQuestUpdateData match_end_quest_data = 8;
+	optional uint32 server_version = 9;
 }
 
 message CMsgGCCStrike15_v2_MatchmakingClient2GCHello {
