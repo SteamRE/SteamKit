@@ -124,6 +124,14 @@ message CGCToGCMsgMasterAck_Response {
 	optional int32 eresult = 1 [default = 2];
 }
 
+message CMsgGCToGCUniverseStartup {
+	optional bool is_initial_startup = 1;
+}
+
+message CMsgGCToGCUniverseStartupResponse {
+	optional int32 eresult = 1;
+}
+
 message CGCToGCMsgMasterStartupComplete {
 	message GCInfo {
 		optional uint32 dir_index = 1;

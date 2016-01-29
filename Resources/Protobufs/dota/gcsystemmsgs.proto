@@ -126,5 +126,7 @@ enum EGCToGCMsg {
 	k_EMsgGCToGCLoadSessionSOCache = 160;
 	k_EMsgGCToGCLoadSessionSOCacheResponse = 161;
 	k_EMsgGCToGCUpdateSessionStats = 162;
+	k_EMsgGCToGCUniverseStartup = 163;
+	k_EMsgGCToGCUniverseStartupResponse = 164;
 }
 

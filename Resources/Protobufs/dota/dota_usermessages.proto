@@ -96,6 +96,7 @@ enum EDotaUserMessages {
 	DOTA_UM_ProjectionEvent = 553;
 	DOTA_UM_CombatLogDataHLTV = 554;
 	DOTA_UM_XPAlert = 555;
+	DOTA_UM_UpdateQuestProgress = 556;
 }
 
 enum DOTA_CHAT_MESSAGE {
@@ -236,6 +237,7 @@ enum DOTA_PARTICLE_MESSAGE {
 	DOTA_PARTICLE_MANAGER_EVENT_SHOULD_DRAW = 11;
 	DOTA_PARTICLE_MANAGER_EVENT_FROZEN = 12;
 	DOTA_PARTICLE_MANAGER_EVENT_CHANGE_CONTROL_POINT_ATTACHMENT = 13;
+	DOTA_PARTICLE_MANAGER_EVENT_UPDATE_ENTITY_POSITION = 14;
 }
 
 enum DOTA_OVERHEAD_ALERT {
@@ -720,6 +722,11 @@ message CDOTAUserMsg_ParticleManager {
 		optional int32 entity_handle = 3;
 	}
 
+	message UpdateEntityPosition {
+		optional int32 entity_handle = 1;
+		optional .CMsgVector position = 2;
+	}
+
 	required .DOTA_PARTICLE_MESSAGE type = 1 [default = DOTA_PARTICLE_MANAGER_EVENT_CREATE];
 	required uint32 index = 2;
 	optional .CDOTAUserMsg_ParticleManager.ReleaseParticleIndex release_particle_index = 3;
@@ -735,6 +742,7 @@ message CDOTAUserMsg_ParticleManager {
 	optional .CDOTAUserMsg_ParticleManager.UpdateParticleShouldDraw update_particle_should_draw = 14;
 	optional .CDOTAUserMsg_ParticleManager.UpdateParticleSetFrozen update_particle_set_frozen = 15;
 	optional .CDOTAUserMsg_ParticleManager.ChangeControlPointAttachment change_control_point_attachment = 16;
+	optional .CDOTAUserMsg_ParticleManager.UpdateEntityPosition update_entity_position = 17;
 }
 
 message CDOTAUserMsg_OverheadEvent {
@@ -1132,5 +1140,8 @@ message CDOTAUserMsg_ProjectionEvent {
 message CDOTAUserMsg_XPAlert {
 	optional uint32 player_id = 1;
 	optional uint32 target_entindex = 2;
+}
+
+message CDOTAUserMsg_UpdateQuestProgress {
 }
 

@@ -56,6 +56,7 @@ enum EDotaClientMessages {
 	DOTA_CM_ExecuteOrders = 350;
 	DOTA_CM_XPAlert = 351;
 	DOTA_CM_GenericBooleanConvar = 352;
+	DOTA_CM_EventPointsTip = 353;
 }
 
 message CDOTAClientMsg_MapPing {
@@ -277,6 +278,10 @@ message CDOTAClientMsg_ChallengeReroll {
 
 message CDOTAClientMsg_CoinWager {
 	optional uint32 wager_amount = 1;
+}
+
+message CDOTAClientMsg_EventPointsTip {
+	optional uint32 recipient_player_id = 1;
 }
 
 message CDOTAClientMsg_ExecuteOrders {

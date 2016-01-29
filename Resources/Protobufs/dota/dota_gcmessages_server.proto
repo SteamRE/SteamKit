@@ -319,6 +319,7 @@ message CMsgGameMatchSignOut {
 	optional sint32 bonus_gold_loser_min20 = 33;
 	optional uint32 bonus_gold_loser_total = 34;
 	optional .CMsgGameMatchSignOut.CCustomGameData custom_game_data = 37;
+	optional uint32 match_flags = 38;
 }
 
 message CMsgSignOutDraftInfo {
@@ -640,6 +641,7 @@ message CMsgDOTAAwardEventPoints {
 	optional uint64 match_id = 2;
 	optional uint32 event_id = 4;
 	optional uint32 timestamp = 5;
+	optional uint32 audit_action = 6;
 }
 
 message CMsgServerToGCSignoutAwardAdditionalDrops {
@@ -939,5 +941,25 @@ message CMsgSignOutXPCoins {
 	optional uint32 event_id = 2;
 	optional uint64 match_id = 3;
 	optional uint32 timestamp = 4;
+}
+
+message CMsgServerToGCPostMatchTip {
+	optional uint32 event_id = 1;
+	optional uint64 match_id = 2;
+	optional uint32 tipper_account_id = 3;
+	optional uint32 recipient_account_id = 4;
+	optional uint32 tip_amount = 5;
+}
+
+message CMsgServerToGCPostMatchTipResponse {
+	enum Result {
+		SUCCESS = 0;
+		FAILURE = 1;
+	}
+
+	optional uint64 match_id = 1;
+	optional uint32 tipper_account_id = 2;
+	optional uint32 recipient_account_id = 3;
+	optional .CMsgServerToGCPostMatchTipResponse.Result result = 4 [default = SUCCESS];
 }
 

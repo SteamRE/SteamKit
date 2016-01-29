@@ -168,6 +168,7 @@ message CMsgGCPlayerInfo {
 		optional string sponsor = 8;
 		optional bool is_locked = 9;
 		optional bool is_pro = 10;
+		optional uint32 locked_until = 11;
 	}
 
 	message RegionLeaderboard {

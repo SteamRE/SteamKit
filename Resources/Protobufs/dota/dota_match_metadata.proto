@@ -1,0 +1,25 @@
+option cc_generic_services = false;
+
+message CDOTAMatchMetadataFile {
+	required int32 version = 1;
+	required uint64 match_id = 2;
+	optional .CDOTAMatchMetadata metadata = 3;
+}
+
+message CDOTAMatchMetadata {
+	message Team {
+		message Player {
+			optional uint32 account_id = 1;
+			repeated uint32 ability_upgrades = 2;
+		}
+
+		optional uint32 dota_team = 1;
+		repeated .CDOTAMatchMetadata.Team.Player players = 2;
+		repeated float graph_experience = 3;
+		repeated float graph_gold_earned = 4;
+		repeated float graph_net_worth = 5;
+	}
+
+	repeated .CDOTAMatchMetadata.Team teams = 1;
+}
+

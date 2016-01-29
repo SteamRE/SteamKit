@@ -87,6 +87,7 @@ message CMsgStartFindingMatch {
 	optional .MatchLanguages game_language_enum = 10 [default = MATCH_LANGUAGE_INVALID];
 	optional string game_language_name = 11;
 	optional .CMsgClientPingData ping_data = 12;
+	optional uint32 region_select_flags = 13;
 }
 
 message CMsgStopFindingMatch {
@@ -608,6 +609,7 @@ message CMsgDOTAMatch {
 	repeated .CMsgDOTAMatch.BroadcasterChannel broadcaster_channels = 43;
 	optional uint32 engine = 44;
 	optional .CMsgDOTAMatch.CustomGameData custom_game_data = 45;
+	optional uint32 match_flags = 46;
 }
 
 message CMsgDOTAPlayerMatchHistory {
@@ -2191,6 +2193,7 @@ message CMsgDOTAGetEventPointsResponse {
 	repeated .CMsgDOTAGetEventPointsResponse.Action completed_actions = 6;
 	optional uint32 account_id = 7;
 	optional bool owned = 8;
+	optional uint32 audit_action = 9;
 }
 
 message CMsgDOTALiveLeagueGameUpdate {
@@ -2819,6 +2822,7 @@ message CMsgClientToGCGetQuestProgressResponse {
 		optional uint32 time_completed = 2;
 		optional uint32 attempts = 3;
 		optional uint32 hero_id = 4;
+		optional uint32 challenge_type = 5;
 	}
 
 	message Quest {
@@ -2904,7 +2908,10 @@ message CMsgGCToClientPrivateChatInfoResponse {
 	optional uint32 creation_date = 4;
 }
 
-message CMsgPlayerBehaviorReport {
+message CMsgPlayerConductScorecardRequest {
+}
+
+message CMsgPlayerConductScorecard {
 	optional uint32 account_id = 1;
 	optional uint64 match_id = 2;
 	optional uint32 seq_num = 3;
@@ -2917,6 +2924,57 @@ message CMsgPlayerBehaviorReport {
 	optional uint32 reports_parties = 10;
 	optional uint32 commend_count = 11;
 	optional uint32 end_score = 13;
-	optional bool client_acknowledged = 100;
+	optional uint32 date = 14;
+}
+
+message CMsgClientToGCWageringRequest {
+	optional uint32 event_id = 1;
+}
+
+message CMsgGCToClientWageringResponse {
+	optional uint32 coins_remaining = 1;
+	optional uint32 total_points_won = 2;
+	optional uint32 total_points_wagered = 3;
+	optional uint32 total_points_tipped = 4;
+	optional uint32 success_rate = 5;
+	optional uint32 total_games_wagered = 6;
+}
+
+message CMsgClientToGCMysteryItem {
+	optional uint32 event_id = 1;
+	optional uint32 action_id = 2;
+}
+
+message CMsgGCToClientMysteryItemResponse {
+	enum Result {
+		SUCCESS = 0;
+		FAILURE_SDO_LOAD = 1;
+		FAILURE_NO_ACTIONS = 2;
+		FAILURE_NO_LOOTLIST = 3;
+		FAILURE_EMPTY_LOOTLIST = 4;
+		FAILURE_NO_ITEM_GENERATED = 5;
+		FAILURE_SQL_COMMIT = 6;
+		FAILURE_EVENT_NOT_OWNED = 7;
+		FAILURE_INVALID_ACTION = 8;
+		FAILURE_ALREADY_GRANTED = 9;
+	}
+
+	optional .CMsgGCToClientMysteryItemResponse.Result result = 1 [default = SUCCESS];
+	optional uint32 reward_type = 2;
+	optional uint32 itemdef = 3;
+}
+
+message CMsgClientToGCGetEventGoals {
+	repeated .EEvent event_ids = 1;
+}
+
+message CMsgEventGoals {
+	message EventGoal {
+		optional .EEvent event_id = 1 [default = EVENT_ID_NONE];
+		optional uint32 goal_id = 2;
+		optional uint64 value = 3;
+	}
+
+	repeated .CMsgEventGoals.EventGoal event_goals = 1;
 }
 

@@ -529,6 +529,8 @@ enum EDOTAGCMsg {
 	k_EMsgSQLGCToGCGrantBadgePoints = 7608;
 	k_EMsgGCToGCGetAccountMatchStatus = 7609;
 	k_EMsgGCToGCGetAccountMatchStatusResponse = 7610;
+	k_EMsgGCToGCCheckOwnsEntireEmoticonRange = 7611;
+	k_EMsgGCToGCCheckOwnsEntireEmoticonRangeResponse = 7612;
 	k_EMsgGCDev_GrantWarKill = 8001;
 	k_EMsgClientToGCCreateTeamShowcase = 8002;
 	k_EMsgGCToClientTeamShowcaseCreateResult = 8003;
@@ -615,8 +617,17 @@ enum EDOTAGCMsg {
 	k_EMsgGCToClientPrivateChatResponse = 8091;
 	k_EMsgClientToGCPrivateChatInfoRequest = 8092;
 	k_EMsgGCToClientPrivateChatInfoResponse = 8093;
-	k_EMsgClientToGCLatestBehaviorReportRequest = 8095;
-	k_EMsgClientToGCLatestBehaviorReport = 8096;
+	k_EMsgClientToGCLatestConductScorecardRequest = 8095;
+	k_EMsgClientToGCLatestConductScorecard = 8096;
+	k_EMsgServerToGCPostMatchTip = 8097;
+	k_EMsgServerToGCPostMatchTipResponse = 8098;
+	k_EMsgClientToGCWageringRequest = 8099;
+	k_EMsgGCToClientWageringResponse = 8100;
+	k_EMsgClientToGCMysteryItem = 8101;
+	k_EMsgGCToClientMysteryItemResponse = 8102;
+	k_EMsgClientToGCEventGoalsRequest = 8103;
+	k_EMsgClientToGCEventGoalsResponse = 8104;
+	k_EMsgGCToGCEventGoalsCacheIncrement = 8105;
 }
 
 enum ESpecialPingValue {
@@ -828,7 +839,7 @@ enum EEvent {
 	EVENT_ID_ORACLE_PA = 10;
 	EVENT_ID_NEW_BLOOM_2015_PREBEAST = 11;
 	EVENT_ID_FROSTIVUS = 12;
-	EVENT_ID_WINTER_MAJOR_2015 = 13;
+	EVENT_ID_WINTER_MAJOR_2016 = 13;
 }
 
 enum LobbyDotaTVDelay {
@@ -938,6 +949,9 @@ enum DOTA_COMBATLOG_TYPES {
 	DOTA_COMBATLOG_HERO_SAVED = 23;
 	DOTA_COMBATLOG_MANA_RESTORED = 24;
 	DOTA_COMBATLOG_HERO_LEVELUP = 25;
+	DOTA_COMBATLOG_BOTTLE_HEAL_ALLY = 26;
+	DOTA_COMBATLOG_ENDGAME_STATS = 27;
+	DOTA_COMBATLOG_INTERRUPT_CHANNEL = 28;
 }
 
 enum DOTAChatChannelType_t {
@@ -1010,6 +1024,7 @@ message CSODOTAGameAccountClient {
 	optional uint32 play_time_level = 70;
 	optional uint32 player_behavior_seq_num_last_report = 71;
 	optional uint32 player_behavior_score_last_report = 72;
+	optional bool player_behavior_report_old_data = 73;
 }
 
 message CSODOTAPartyMember {
@@ -1057,6 +1072,7 @@ message CSODOTAParty {
 	repeated .CSODOTAPartyInvite sent_invites = 41;
 	repeated .CSODOTAPartyInvite recv_invites = 42;
 	optional uint32 account_flags = 43;
+	optional uint32 region_select_flags = 44;
 }
 
 message CSODOTAPartyInvite {
@@ -1554,6 +1570,10 @@ message CMsgDOTACombatLogEntry {
 	optional uint32 gpm = 46;
 	optional uint32 event_location = 47;
 	optional bool target_is_self = 48;
+	optional uint32 damage_type = 49;
+	optional bool invisibility_modifier = 50;
+	optional uint32 damage_category = 51;
+	optional uint32 networth = 52;
 }
 
 message CMsgDOTAProfileCard {
@@ -1910,5 +1930,36 @@ message CMsgDOTASDOHeroStatsHistory {
 	optional uint32 kills = 8;
 	optional uint32 deaths = 9;
 	optional uint32 assists = 10;
+}
+
+message CMsgDOTASeasonRewards {
+	message Reward {
+		optional string name = 1;
+		optional uint32 itemdef = 2;
+		optional uint32 importance = 3;
+		optional uint32 base_level = 4;
+		optional uint32 repeat_level = 5;
+		optional uint32 reward_type = 6;
+		optional string image = 7;
+		optional uint32 action_id = 8;
+	}
+
+	repeated .CMsgDOTASeasonRewards.Reward rewards = 1;
+}
+
+message CMsgDOTASeasonAchievements {
+	message Achievement {
+		optional string name = 1;
+		optional string description = 2;
+		optional string image = 3;
+		optional uint32 action_id = 4;
+		optional uint32 max_grants = 5;
+		optional uint32 normal_points = 6;
+		optional uint32 tracking_achievement = 7;
+		optional uint32 achievement_goal = 8;
+		optional uint32 achievement_level = 9;
+	}
+
+	repeated .CMsgDOTASeasonAchievements.Achievement achievements = 1;
 }
 
