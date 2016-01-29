@@ -126,6 +126,15 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _is_pro; }
       set { _is_pro = value; }
     }
+
+    private uint _locked_until = default(uint);
+    [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"locked_until", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint locked_until
+    {
+      get { return _locked_until; }
+      set { _locked_until = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

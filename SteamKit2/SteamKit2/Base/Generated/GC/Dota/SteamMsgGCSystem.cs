@@ -373,7 +373,13 @@ namespace SteamKit2.GC.Dota.Internal
       k_EMsgGCToGCLoadSessionSOCacheResponse = 161,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCUpdateSessionStats", Value=162)]
-      k_EMsgGCToGCUpdateSessionStats = 162
+      k_EMsgGCToGCUpdateSessionStats = 162,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCUniverseStartup", Value=163)]
+      k_EMsgGCToGCUniverseStartup = 163,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCUniverseStartupResponse", Value=164)]
+      k_EMsgGCToGCUniverseStartupResponse = 164
     }
   
 }

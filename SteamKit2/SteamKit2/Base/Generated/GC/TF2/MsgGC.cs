@@ -1773,6 +1773,15 @@ namespace SteamKit2.GC.TF2.Internal
       get { return _two_factor_enabled; }
       set { _two_factor_enabled = value; }
     }
+
+    private uint _ladder_rank = default(uint);
+    [global::ProtoBuf.ProtoMember(12, IsRequired = false, Name=@"ladder_rank", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint ladder_rank
+    {
+      get { return _ladder_rank; }
+      set { _ladder_rank = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -5608,6 +5617,24 @@ namespace SteamKit2.GC.TF2.Internal
       get { return _experience; }
       set { _experience = value; }
     }
+
+    private uint _highest_rank = default(uint);
+    [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"highest_rank", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint highest_rank
+    {
+      get { return _highest_rank; }
+      set { _highest_rank = value; }
+    }
+
+    private uint _rank = default(uint);
+    [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"rank", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint rank
+    {
+      get { return _rank; }
+      set { _rank = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -5645,6 +5672,34 @@ namespace SteamKit2.GC.TF2.Internal
     {
       get { return _allowed; }
       set { _allowed = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGC_Ladder_RankUp")]
+  public partial class CMsgGC_Ladder_RankUp : global::ProtoBuf.IExtensible
+  {
+    public CMsgGC_Ladder_RankUp() {}
+    
+
+    private uint _rank = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"rank", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint rank
+    {
+      get { return _rank; }
+      set { _rank = value; }
+    }
+
+    private TF_SkillRatingMatchType _match_type = TF_SkillRatingMatchType.TF_SkillRatingMatchType_INVALID;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"match_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(TF_SkillRatingMatchType.TF_SkillRatingMatchType_INVALID)]
+    public TF_SkillRatingMatchType match_type
+    {
+      get { return _match_type; }
+      set { _match_type = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -6002,6 +6057,9 @@ namespace SteamKit2.GC.TF2.Internal
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCVoteKickPlayerRequestResponse", Value=6514)]
       k_EMsgGCVoteKickPlayerRequestResponse = 6514,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGC_Ladder_RankUp", Value=6515)]
+      k_EMsgGC_Ladder_RankUp = 6515,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCDev_GrantWarKill", Value=10001)]
       k_EMsgGCDev_GrantWarKill = 10001

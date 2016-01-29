@@ -1189,6 +1189,24 @@ namespace SteamKit2.GC.CSGO.Internal
       get { return _player_quest_data; }
     }
   
+
+    private byte[] _binary_data = null;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"binary_data", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public byte[] binary_data
+    {
+      get { return _binary_data; }
+      set { _binary_data = value; }
+    }
+
+    private uint _mm_game_mode = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"mm_game_mode", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint mm_game_mode
+    {
+      get { return _mm_game_mode; }
+      set { _mm_game_mode = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -2392,6 +2410,15 @@ namespace SteamKit2.GC.CSGO.Internal
     {
       get { return _match_end_quest_data; }
       set { _match_end_quest_data = value; }
+    }
+
+    private uint _server_version = default(uint);
+    [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"server_version", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint server_version
+    {
+      get { return _server_version; }
+      set { _server_version = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

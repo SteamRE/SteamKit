@@ -1405,6 +1405,15 @@ namespace SteamKit2.Unified.Internal
       get { return _manifest_id; }
       set { _manifest_id = value; }
     }
+
+    private uint _flags = default(uint);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"flags", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint flags
+    {
+      get { return _flags; }
+      set { _flags = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

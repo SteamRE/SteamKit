@@ -1323,7 +1323,13 @@ namespace SteamKit2.GC.TF2.Internal
       k_EMsgGCRemoveGiftedBy = 2570,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCRemoveGiftedByResponse", Value=2571)]
-      k_EMsgGCRemoveGiftedByResponse = 2571
+      k_EMsgGCRemoveGiftedByResponse = 2571,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCRemoveFestivizer", Value=2572)]
+      k_EMsgGCRemoveFestivizer = 2572,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCRemoveFestivizerResponse", Value=2573)]
+      k_EMsgGCRemoveFestivizerResponse = 2573
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"EGCMsgResponse", EnumPassthru=true)]

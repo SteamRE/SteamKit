@@ -607,6 +607,15 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _item_defs; }
     }
   
+
+    private uint _peek_item_def = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"peek_item_def", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint peek_item_def
+    {
+      get { return _peek_item_def; }
+      set { _peek_item_def = value; }
+    }
     [global::ProtoBuf.ProtoContract(Name=@"EResult", EnumPassthru=true)]
     public enum EResult
     {
@@ -912,10 +921,10 @@ namespace SteamKit2.GC.Dota.Internal
       set { _audit_action = value; }
     }
 
-    private uint _audit_data = default(uint);
+    private ulong _audit_data = default(ulong);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"audit_data", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint audit_data
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong audit_data
     {
       get { return _audit_data; }
       set { _audit_data = value; }
@@ -1043,10 +1052,10 @@ namespace SteamKit2.GC.Dota.Internal
       set { _audit_action = value; }
     }
 
-    private uint _audit_data = default(uint);
+    private ulong _audit_data = default(ulong);
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"audit_data", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint audit_data
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong audit_data
     {
       get { return _audit_data; }
       set { _audit_data = value; }
@@ -3010,12 +3019,6 @@ namespace SteamKit2.GC.Dota.Internal
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCSetItemPosition", Value=1001)]
       k_EMsgGCSetItemPosition = 1001,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCCraft", Value=1002)]
-      k_EMsgGCCraft = 1002,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCCraftResponse", Value=1003)]
-      k_EMsgGCCraftResponse = 1003,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCDelete", Value=1004)]
       k_EMsgGCDelete = 1004,
