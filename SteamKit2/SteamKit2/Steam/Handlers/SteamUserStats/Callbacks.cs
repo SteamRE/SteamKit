@@ -16,7 +16,7 @@ namespace SteamKit2
     public partial class SteamUserStats
     {
         /// <summary>
-        /// This callback is fired in response to <see cref="GetNumberOfCurrentPlayers" />.
+        /// This callback is fired in response to <see cref="GetNumberOfCurrentPlayers(uint)" />.
         /// </summary>
         public class NumberOfPlayersCallback : CallbackMsg
         {
