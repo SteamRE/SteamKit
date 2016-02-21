@@ -25,7 +25,7 @@ namespace NetHookAnalyzer2.Specializations
             var extraNode = ReadExtraObject(updateSingle);
             if (extraNode != null)
             {
-                yield return new KeyValuePair<string, object>("SO", extraNode);
+                yield return new KeyValuePair<string, object>(string.Format("SO ({0})", extraNode.GetType().Name), extraNode);
             }
         }
 
