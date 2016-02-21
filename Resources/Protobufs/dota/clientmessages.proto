@@ -4,7 +4,14 @@ option cc_generic_services = false;
 enum EBaseClientMessages {
 	CM_CustomGameEvent = 280;
 	CM_TrackedControllerInput = 281;
+	CM_ClientUIEvent = 282;
 	CM_MAX_BASE = 300;
+}
+
+enum EClientUIEvent {
+	EClientUIEvent_Invalid = 0;
+	EClientUIEvent_DialogFinished = 1;
+	EClientUIEvent_FireOutput = 2;
 }
 
 message CClientMsg_CustomGameEvent {
@@ -14,5 +21,13 @@ message CClientMsg_CustomGameEvent {
 
 message CClientMsg_TrackedControllerInput {
 	optional bytes data = 1;
+}
+
+message CClientMsg_ClientUIEvent {
+	optional .EClientUIEvent event = 1 [default = EClientUIEvent_Invalid];
+	optional uint32 ent_ehandle = 2;
+	optional uint32 client_ehandle = 3;
+	optional string data1 = 4;
+	optional string data2 = 5;
 }
 

@@ -97,6 +97,7 @@ enum EDotaUserMessages {
 	DOTA_UM_CombatLogDataHLTV = 554;
 	DOTA_UM_XPAlert = 555;
 	DOTA_UM_UpdateQuestProgress = 556;
+	DOTA_UM_MatchMetadata = 557;
 }
 
 enum DOTA_CHAT_MESSAGE {
@@ -795,7 +796,7 @@ message CDOTAUserMsg_ReceivedXmasGift {
 
 message CDOTAUserMsg_ShowSurvey {
 	optional int32 survey_id = 1;
-	optional uint32 match_id = 2;
+	optional uint64 match_id = 2;
 	optional string response_style = 3;
 	optional uint32 teammate_hero_id = 4;
 	optional string teammate_name = 5;

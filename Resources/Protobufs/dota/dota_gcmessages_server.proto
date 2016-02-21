@@ -261,6 +261,7 @@ message CMsgGameMatchSignOut {
 			repeated .CMatchAdditionalUnitInventory additional_units_inventory = 33;
 			optional uint32 net_worth = 34;
 			optional .CMsgGameMatchSignOut.CTeam.CPlayer.CCustomGameData custom_game_data = 35;
+			optional uint32 match_player_flags = 36;
 		}
 
 		repeated .CMsgGameMatchSignOut.CTeam.CPlayer players = 1;
@@ -399,6 +400,7 @@ message CMsgGameMatchSignoutResponse {
 	repeated .CDOTALobbyMember xp_reward_details = 4;
 	optional uint32 leagueid = 5;
 	repeated .CMsgGameMatchSignoutResponse.CAdditionalSignoutMsg additional_msgs = 6;
+	optional fixed32 metadata_private_key = 7;
 }
 
 message CMsgGameMatchSignOutPermissionRequest {

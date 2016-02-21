@@ -184,7 +184,6 @@ message CMsgPushCompositingLayer {
 	optional double motionblur_velocity = 61;
 	optional double motionblur_dirx = 62;
 	optional double motionblur_diry = 63;
-	optional uint32 motionblur_samplecount = 64;
 }
 
 message CMsgPopCompositingLayer {
@@ -494,7 +493,6 @@ message CMsgMotionBlurValues {
 	optional double velocity = 1;
 	optional double dirx = 2;
 	optional double diry = 3;
-	optional uint32 sample_count = 4;
 }
 
 message CMsgMotionBlur {

@@ -30,8 +30,6 @@ enum EDOTAGCMsg {
 	k_EMsgGCPracticeLobbySetDetails = 7046;
 	k_EMsgGCPracticeLobbySetTeamSlot = 7047;
 	k_EMsgGCInitialQuestionnaireResponse = 7049;
-	k_EMsgGCTournamentRequest = 7051;
-	k_EMsgGCTournamentResponse = 7052;
 	k_EMsgGCPracticeLobbyResponse = 7055;
 	k_EMsgGCBroadcastNotification = 7056;
 	k_EMsgGCLiveScoreboardUpdate = 7057;
@@ -103,7 +101,6 @@ enum EDOTAGCMsg {
 	k_EMsgGCApplyTeamToPracticeLobby = 7142;
 	k_EMsgGCRequestInternatinalTicketEmail = 7143;
 	k_EMsgGCTransferTeamAdmin = 7144;
-	k_EMsgGCClearTournamentGame = 7145;
 	k_EMsgRequestLeagueInfo = 7147;
 	k_EMsgResponseLeagueInfo = 7148;
 	k_EMsgGCPracticeLobbyJoinBroadcastChannel = 7149;
@@ -522,8 +519,8 @@ enum EDOTAGCMsg {
 	k_EMsgSQLGCToGCSignoutUpdateLeagueSchedule = 7601;
 	k_EMsgGCToServerUpdateBroadcastCheers = 7602;
 	k_EMsgClientToGCApplyGemCombiner = 7603;
-	k_EMsgClientToGCCreateStaticRecipe = 7604;
-	k_EMsgClientToGCCreateStaticRecipeResponse = 7605;
+	k_EMsgClientToGCDOTACreateStaticRecipe = 7604;
+	k_EMsgClientToGCDOTACreateStaticRecipeResponse = 7605;
 	k_EMsgClientToGCGetAllHeroOrder = 7606;
 	k_EMsgClientToGCGetAllHeroOrderResponse = 7607;
 	k_EMsgSQLGCToGCGrantBadgePoints = 7608;
@@ -628,6 +625,17 @@ enum EDOTAGCMsg {
 	k_EMsgClientToGCEventGoalsRequest = 8103;
 	k_EMsgClientToGCEventGoalsResponse = 8104;
 	k_EMsgGCToGCEventGoalsCacheIncrement = 8105;
+	k_EMsgClientToGCLeaguePredictions = 8106;
+	k_EMsgGCToClientLeaguePredictionsResponse = 8107;
+	k_EMsgGCToGCLeaguePredictionsUpdate = 8108;
+	k_EMsgClientToGCSuspiciousActivity = 8109;
+	k_EMsgGCToGCAddUserToPostGameChat = 8110;
+	k_EMsgClientToGCHasPlayerVotedForMVP = 8111;
+	k_EMsgClientToGCHasPlayerVotedForMVPResponse = 8112;
+	k_EMsgClientToGCVoteForMVP = 8113;
+	k_EMsgClientToGCVoteForMVPResponse = 8114;
+	k_EMsgGCToGCGetEventOwnership = 8115;
+	k_EMsgGCToGCGetEventOwnershipResponse = 8116;
 }
 
 enum ESpecialPingValue {
@@ -952,6 +960,8 @@ enum DOTA_COMBATLOG_TYPES {
 	DOTA_COMBATLOG_BOTTLE_HEAL_ALLY = 26;
 	DOTA_COMBATLOG_ENDGAME_STATS = 27;
 	DOTA_COMBATLOG_INTERRUPT_CHANNEL = 28;
+	DOTA_COMBATLOG_ALLIED_GOLD = 29;
+	DOTA_COMBATLOG_AEGIS_TAKEN = 30;
 }
 
 enum DOTAChatChannelType_t {
@@ -973,6 +983,7 @@ enum DOTAChatChannelType_t {
 	DOTAChannelType_Cafe = 15;
 	DOTAChannelType_CustomGame = 16;
 	DOTAChannelType_Private = 17;
+	DOTAChannelType_PostGame = 18;
 }
 
 message CSODOTAGameAccountClient {
@@ -1574,6 +1585,8 @@ message CMsgDOTACombatLogEntry {
 	optional bool invisibility_modifier = 50;
 	optional uint32 damage_category = 51;
 	optional uint32 networth = 52;
+	optional uint32 building_type = 53;
+	optional float modifier_elapsed_duration = 54;
 }
 
 message CMsgDOTAProfileCard {
@@ -1961,5 +1974,34 @@ message CMsgDOTASeasonAchievements {
 	}
 
 	repeated .CMsgDOTASeasonAchievements.Achievement achievements = 1;
+}
+
+message CMsgDOTASeasonPredictions {
+	message Choice {
+		optional uint32 value = 1;
+		optional string name = 2;
+	}
+
+	message Prediction {
+		optional uint32 type = 1;
+		optional string question = 2;
+		repeated .CMsgDOTASeasonPredictions.Choice choices = 3;
+		optional uint32 team_id = 4;
+		optional uint32 series_id = 5;
+		optional uint32 group_id = 6;
+		optional uint32 phase_id = 7;
+		optional uint32 selection_id = 8;
+		optional uint32 lock_date = 9;
+		optional uint32 reward = 10;
+	}
+
+	enum ePredictionType {
+		Generic = 0;
+		Hero = 1;
+		Team = 2;
+		Player = 3;
+	}
+
+	repeated .CMsgDOTASeasonPredictions.Prediction predictions = 1;
 }
 

@@ -1,9 +1,12 @@
+import "base_gcmessages.proto";
+
 option cc_generic_services = false;
 
 message CDOTAMatchMetadataFile {
 	required int32 version = 1;
 	required uint64 match_id = 2;
 	optional .CDOTAMatchMetadata metadata = 3;
+	optional bytes private_metadata = 4;
 }
 
 message CDOTAMatchMetadata {
@@ -11,6 +14,8 @@ message CDOTAMatchMetadata {
 		message Player {
 			optional uint32 account_id = 1;
 			repeated uint32 ability_upgrades = 2;
+			optional uint32 player_slot = 3;
+			repeated .CSOEconItem equipped_econ_items = 4;
 		}
 
 		optional uint32 dota_team = 1;
@@ -21,5 +26,17 @@ message CDOTAMatchMetadata {
 	}
 
 	repeated .CDOTAMatchMetadata.Team teams = 1;
+}
+
+message CDOTAMatchPrivateMetadata {
+	message Kill {
+		optional int32 timestamp = 1;
+		optional uint32 killer_hero_id = 2;
+		optional uint32 victim_hero_id = 3;
+		repeated uint32 assist_hero_ids = 4;
+	}
+
+	repeated .CDOTAMatchPrivateMetadata.Kill kills = 1;
+	optional string test_string = 100;
 }
 
