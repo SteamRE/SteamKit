@@ -271,7 +271,13 @@ namespace SteamKit2.GC.Dota.Internal
       k_EGCMsgGetAppFriendsList = 516,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgGetAppFriendsListResponse", Value=517)]
-      k_EGCMsgGetAppFriendsListResponse = 517
+      k_EGCMsgGetAppFriendsListResponse = 517,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgVacVerificationChange", Value=518)]
+      k_EGCMsgVacVerificationChange = 518,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgAccountPhoneNumberChange", Value=519)]
+      k_EGCMsgAccountPhoneNumberChange = 519
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"ESOMsg", EnumPassthru=true)]

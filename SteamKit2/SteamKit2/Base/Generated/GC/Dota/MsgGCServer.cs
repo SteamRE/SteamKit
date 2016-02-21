@@ -1693,6 +1693,15 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _custom_game_data; }
       set { _custom_game_data = value; }
     }
+
+    private uint _match_player_flags = default(uint);
+    [global::ProtoBuf.ProtoMember(36, IsRequired = false, Name=@"match_player_flags", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint match_player_flags
+    {
+      get { return _match_player_flags; }
+      set { _match_player_flags = value; }
+    }
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCustomGameData")]
   public partial class CCustomGameData : global::ProtoBuf.IExtensible
   {
@@ -2368,6 +2377,15 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _additional_msgs; }
     }
   
+
+    private uint _metadata_private_key = default(uint);
+    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"metadata_private_key", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint metadata_private_key
+    {
+      get { return _metadata_private_key; }
+      set { _metadata_private_key = value; }
+    }
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CAdditionalSignoutMsg")]
   public partial class CAdditionalSignoutMsg : global::ProtoBuf.IExtensible
   {

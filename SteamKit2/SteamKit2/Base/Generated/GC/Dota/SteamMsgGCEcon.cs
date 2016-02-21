@@ -3010,6 +3010,171 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCToGCDevRevokeUserItems")]
+  public partial class CMsgGCToGCDevRevokeUserItems : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCToGCDevRevokeUserItems() {}
+    
+
+    private uint _account_id = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint account_id
+    {
+      get { return _account_id; }
+      set { _account_id = value; }
+    }
+
+    private ulong _audit_data = default(ulong);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"audit_data", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong audit_data
+    {
+      get { return _audit_data; }
+      set { _audit_data = value; }
+    }
+
+    private bool _delete_audit_history = default(bool);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"delete_audit_history", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool delete_audit_history
+    {
+      get { return _delete_audit_history; }
+      set { _delete_audit_history = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientToGCCreateStaticRecipe")]
+  public partial class CMsgClientToGCCreateStaticRecipe : global::ProtoBuf.IExtensible
+  {
+    public CMsgClientToGCCreateStaticRecipe() {}
+    
+    private readonly global::System.Collections.Generic.List<CMsgClientToGCCreateStaticRecipe.Item> _items = new global::System.Collections.Generic.List<CMsgClientToGCCreateStaticRecipe.Item>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"items", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CMsgClientToGCCreateStaticRecipe.Item> items
+    {
+      get { return _items; }
+    }
+  
+
+    private uint _recipe_def_index = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"recipe_def_index", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint recipe_def_index
+    {
+      get { return _recipe_def_index; }
+      set { _recipe_def_index = value; }
+    }
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Item")]
+  public partial class Item : global::ProtoBuf.IExtensible
+  {
+    public Item() {}
+    
+
+    private ulong _item_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"item_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong item_id
+    {
+      get { return _item_id; }
+      set { _item_id = value; }
+    }
+
+    private uint _slot_id = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"slot_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint slot_id
+    {
+      get { return _slot_id; }
+      set { _slot_id = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientToGCCreateStaticRecipeResponse")]
+  public partial class CMsgClientToGCCreateStaticRecipeResponse : global::ProtoBuf.IExtensible
+  {
+    public CMsgClientToGCCreateStaticRecipeResponse() {}
+    
+
+    private CMsgClientToGCCreateStaticRecipeResponse.EResponse _response = CMsgClientToGCCreateStaticRecipeResponse.EResponse.eResponse_Success;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"response", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(CMsgClientToGCCreateStaticRecipeResponse.EResponse.eResponse_Success)]
+    public CMsgClientToGCCreateStaticRecipeResponse.EResponse response
+    {
+      get { return _response; }
+      set { _response = value; }
+    }
+    private readonly global::System.Collections.Generic.List<CMsgClientToGCCreateStaticRecipeResponse.OutputItem> _output_items = new global::System.Collections.Generic.List<CMsgClientToGCCreateStaticRecipeResponse.OutputItem>();
+    [global::ProtoBuf.ProtoMember(2, Name=@"output_items", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CMsgClientToGCCreateStaticRecipeResponse.OutputItem> output_items
+    {
+      get { return _output_items; }
+    }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"OutputItem")]
+  public partial class OutputItem : global::ProtoBuf.IExtensible
+  {
+    public OutputItem() {}
+    
+
+    private uint _def_index = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"def_index", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint def_index
+    {
+      get { return _def_index; }
+      set { _def_index = value; }
+    }
+
+    private ulong _item_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"item_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong item_id
+    {
+      get { return _item_id; }
+      set { _item_id = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"EResponse", EnumPassthru=true)]
+    public enum EResponse
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"eResponse_Success", Value=0)]
+      eResponse_Success = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"eResponse_OfferingDisabled", Value=1)]
+      eResponse_OfferingDisabled = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"eResponse_InvalidItems", Value=2)]
+      eResponse_InvalidItems = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"eResponse_InternalError", Value=3)]
+      eResponse_InternalError = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"eResponse_MissingLeague", Value=4)]
+      eResponse_MissingLeague = 4
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     [global::ProtoBuf.ProtoContract(Name=@"EGCItemMsg", EnumPassthru=true)]
     public enum EGCItemMsg
     {
@@ -3531,7 +3696,16 @@ namespace SteamKit2.GC.Dota.Internal
       k_EMsgClientToGCLookupAccountName = 2581,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCLookupAccountNameResponse", Value=2582)]
-      k_EMsgClientToGCLookupAccountNameResponse = 2582
+      k_EMsgClientToGCLookupAccountNameResponse = 2582,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCDevRevokeUserItems", Value=2583)]
+      k_EMsgGCToGCDevRevokeUserItems = 2583,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCCreateStaticRecipe", Value=2584)]
+      k_EMsgClientToGCCreateStaticRecipe = 2584,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCCreateStaticRecipeResponse", Value=2585)]
+      k_EMsgClientToGCCreateStaticRecipeResponse = 2585
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"EGCMsgResponse", EnumPassthru=true)]
