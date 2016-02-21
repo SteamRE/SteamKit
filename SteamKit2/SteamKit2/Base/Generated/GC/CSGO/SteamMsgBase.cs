@@ -2089,6 +2089,87 @@ namespace SteamKit2.GC.CSGO.Internal
       get { return _steam_level; }
       set { _steam_level = value; }
     }
+
+    private uint _friend_count = default(uint);
+    [global::ProtoBuf.ProtoMember(24, IsRequired = false, Name=@"friend_count", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint friend_count
+    {
+      get { return _friend_count; }
+      set { _friend_count = value; }
+    }
+
+    private uint _account_creation_time = default(uint);
+    [global::ProtoBuf.ProtoMember(25, IsRequired = false, Name=@"account_creation_time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint account_creation_time
+    {
+      get { return _account_creation_time; }
+      set { _account_creation_time = value; }
+    }
+
+    private bool _is_steamguard_enabled = default(bool);
+    [global::ProtoBuf.ProtoMember(27, IsRequired = false, Name=@"is_steamguard_enabled", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool is_steamguard_enabled
+    {
+      get { return _is_steamguard_enabled; }
+      set { _is_steamguard_enabled = value; }
+    }
+
+    private bool _is_phone_verified = default(bool);
+    [global::ProtoBuf.ProtoMember(28, IsRequired = false, Name=@"is_phone_verified", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool is_phone_verified
+    {
+      get { return _is_phone_verified; }
+      set { _is_phone_verified = value; }
+    }
+
+    private bool _is_two_factor_auth_enabled = default(bool);
+    [global::ProtoBuf.ProtoMember(29, IsRequired = false, Name=@"is_two_factor_auth_enabled", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool is_two_factor_auth_enabled
+    {
+      get { return _is_two_factor_auth_enabled; }
+      set { _is_two_factor_auth_enabled = value; }
+    }
+
+    private uint _two_factor_enabled_time = default(uint);
+    [global::ProtoBuf.ProtoMember(30, IsRequired = false, Name=@"two_factor_enabled_time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint two_factor_enabled_time
+    {
+      get { return _two_factor_enabled_time; }
+      set { _two_factor_enabled_time = value; }
+    }
+
+    private uint _phone_verification_time = default(uint);
+    [global::ProtoBuf.ProtoMember(31, IsRequired = false, Name=@"phone_verification_time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint phone_verification_time
+    {
+      get { return _phone_verification_time; }
+      set { _phone_verification_time = value; }
+    }
+
+    private ulong _phone_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(33, IsRequired = false, Name=@"phone_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong phone_id
+    {
+      get { return _phone_id; }
+      set { _phone_id = value; }
+    }
+
+    private bool _is_phone_identifying = default(bool);
+    [global::ProtoBuf.ProtoMember(34, IsRequired = false, Name=@"is_phone_identifying", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool is_phone_identifying
+    {
+      get { return _is_phone_identifying; }
+      set { _is_phone_identifying = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
