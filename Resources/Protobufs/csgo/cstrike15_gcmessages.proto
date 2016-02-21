@@ -234,6 +234,23 @@ message MatchEndItemUpdates {
 	optional uint32 item_attr_delta_value = 3;
 }
 
+message ScoreLeaderboardData {
+	message Entry {
+		optional uint32 tag = 1;
+		optional uint32 val = 2;
+	}
+
+	message AccountEntries {
+		optional uint32 accountid = 1;
+		repeated .ScoreLeaderboardData.Entry entries = 2;
+	}
+
+	optional uint64 quest_id = 1;
+	optional uint32 score = 2;
+	repeated .ScoreLeaderboardData.AccountEntries accountentries = 3;
+	repeated .ScoreLeaderboardData.Entry matchentries = 5;
+}
+
 message PlayerQuestData {
 	message QuestItemData {
 		optional uint64 quest_id = 1;
@@ -253,6 +270,7 @@ message CMsgGC_ServerQuestUpdateData {
 	repeated .PlayerQuestData player_quest_data = 1;
 	optional bytes binary_data = 2;
 	optional uint32 mm_game_mode = 3;
+	optional .ScoreLeaderboardData missionlbsdata = 4;
 }
 
 message CMsgGCCStrike15_v2_MatchmakingGCOperationalStats {

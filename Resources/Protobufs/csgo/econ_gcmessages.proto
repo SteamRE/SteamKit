@@ -61,11 +61,8 @@ enum EGCItemMsg {
 	k_EMsgGCAdjustItemEquippedState = 1059;
 	k_EMsgGCCollectItem = 1061;
 	k_EMsgGCItemAcknowledged__DEPRECATED = 1062;
-	k_EMsgGCPresets_SelectPresetForClass = 1063;
-	k_EMsgGCPresets_SetItemPosition = 1064;
 	k_EMsgGC_ReportAbuse = 1065;
 	k_EMsgGC_ReportAbuseResponse = 1066;
-	k_EMsgGCPresets_SelectPresetForClassReply = 1067;
 	k_EMsgGCNameItemNotification = 1068;
 	k_EMsgGCApplyConsumableEffects = 1069;
 	k_EMsgGCConsumableExhausted = 1070;

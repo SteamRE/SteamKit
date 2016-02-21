@@ -78,6 +78,7 @@ enum EGCSystemMsg {
 	k_EGCMsgGCAccountVacStatusChange = 504;
 	k_EGCMsgCheckFriendship = 505;
 	k_EGCMsgCheckFriendshipResponse = 506;
+	k_EGCMsgVacVerificationChange = 518;
 }
 
 enum ESOMsg {
@@ -109,5 +110,11 @@ enum EGCToGCMsg {
 	k_EMsgRequestSessionIP = 155;
 	k_EMsgRequestSessionIPResponse = 156;
 	k_EGCToGCMsgMasterStartupComplete = 157;
+}
+
+message CMsgGCHVacVerificationChange {
+	optional fixed64 steamid = 1;
+	optional uint32 appid = 2;
+	optional bool is_verified = 3;
 }
 
