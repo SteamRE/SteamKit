@@ -323,6 +323,23 @@ namespace SteamKit2
 
             return value;
         }
+        /// <summary>
+        /// Attempts to convert and return the value of this instance as an unsigned integer.
+        /// If the conversion is invalid, the default value is returned.
+        /// </summary>
+        /// <param name="defaultValue">The default value to return if the conversion is invalid.</param>
+        /// <returns>The value of this instance as an unsigned integer.</returns>
+        public uint AsUnsignedInteger( uint defaultValue = default( uint ) )
+        {
+            uint value;
+
+            if ( uint.TryParse( this.Value, out value ) == false )
+            {
+                return defaultValue;
+            }
+
+            return value;
+        }
 
         /// <summary>
         /// Attempts to convert and return the value of this instance as a long.
