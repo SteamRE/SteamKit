@@ -29,11 +29,11 @@ namespace SteamKit2.Discovery
         private IsolatedStorageFile isolatedStorage;
 
         /// <summary>
-        /// Initialize a new instance of IsolatedStorageServerListProvider using <see cref="IsolatedStorageFile.GetMachineStoreForAssembly"/>
+        /// Initialize a new instance of IsolatedStorageServerListProvider using <see cref="IsolatedStorageFile.GetUserStoreForAssembly"/>
         /// </summary>
         public IsolatedStorageServerListProvider()
         {
-            isolatedStorage = IsolatedStorageFile.GetMachineStoreForAssembly();
+            isolatedStorage = IsolatedStorageFile.GetUserStoreForAssembly();
         }
 
         /// <summary>
