@@ -12,6 +12,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using SteamKit2.Internal;
+using System.Threading.Tasks;
 
 namespace SteamKit2
 {
@@ -112,14 +113,13 @@ namespace SteamKit2
         /// </summary>
         /// <param name="endPoint">The CM server.</param>
         /// <param name="timeout">Timeout in milliseconds</param>
-        public override void Connect(IPEndPoint endPoint, int timeout)
+        public override void Connect(Task<IPEndPoint> endPoint, int timeout)
         {
             Disconnect();
 
             outPackets = new List<UdpPacket>();
             inPackets = new Dictionary<uint, UdpPacket>();
 
-            remoteEndPoint = endPoint;
             remoteConnId = 0;
 
             outSeq = 1;
@@ -132,7 +132,7 @@ namespace SteamKit2
 
             netThread = new Thread(NetLoop);
             netThread.Name = "UdpConnection Thread";
-            netThread.Start();
+            netThread.Start(endPoint);
         }
 
         /// <summary>
@@ -356,8 +356,18 @@ namespace SteamKit2
         /// <summary>
         /// Processes incoming packets, maintains connection consistency, and oversees outgoing packets.
         /// </summary>
-        private void NetLoop()
+        private async void NetLoop(object param)
         {
+            if (param is IPEndPoint)
+            {
+                remoteEndPoint = param as IPEndPoint;
+            }
+            else
+            {
+                var epTask = param as Task<IPEndPoint>;
+                remoteEndPoint = await epTask;
+            }
+
             // Variables that will be used deeper in the function; locating them here avoids recreating
             // them since they don't need to be.
             EndPoint packetSender = (EndPoint) new IPEndPoint(IPAddress.Any, 0);
@@ -403,6 +413,13 @@ namespace SteamKit2
 
                         ReceivePacket(packet);
                     }
+                }
+                catch (IOException ex)
+                {
+                    DebugLog.WriteLine("UdpConnection", "Exception occurred while reading packet: {0}", ex);
+
+                    state = State.Disconnected;
+                    break;
                 }
                 catch ( SocketException e )
                 {

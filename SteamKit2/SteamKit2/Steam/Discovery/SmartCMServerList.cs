@@ -4,8 +4,9 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 
-namespace SteamKit2
+namespace SteamKit2.Discovery
 {
     /// <summary>
     /// Currently marked quality of a server. All servers start off as Undetermined.
@@ -22,6 +23,7 @@ namespace SteamKit2
         /// </summary>
         Bad
     };
+
     /// <summary>
     /// Smart list of CM servers.
     /// </summary>
@@ -34,15 +36,64 @@ namespace SteamKit2
             public DateTime? LastBadConnectionDateTimeUtc { get; set; }
         }
 
-        internal SmartCMServerList()
+        /// <summary>
+        /// Initialize SmartCMServerList with a given server list provider
+        /// </summary>
+        /// <param name="provider">The ServerListProvider to persist servers</param>
+        /// <param name="allowDirectoryFetch">Specifies if we can query SteamDirectory to discover more servers</param>
+        public SmartCMServerList( ServerListProvider provider, bool allowDirectoryFetch = true )
         {
+            serverListProvider = provider;
+            canFetchDirectory = allowDirectoryFetch;
+
             servers = new Collection<ServerInfo>();
             listLock = new object();
             BadConnectionMemoryTimeSpan = TimeSpan.FromMinutes( 5 );
+
+            listTask = ResolveServerList();
         }
+
+        /// <summary>
+        /// Initialize SmartCMServerList with the default <see cref="IsolatedStorageServerListProvider"/> server list provider
+        /// </summary>
+        public SmartCMServerList() :
+            this( new IsolatedStorageServerListProvider() )
+        {
+        }
+
+        ServerListProvider serverListProvider;
+        bool canFetchDirectory;
+        Task listTask;
 
         object listLock;
         Collection<ServerInfo> servers;
+
+        private async Task ResolveServerList()
+        {
+            DebugLog.WriteLine( "SmartCMServerList", "Resolving server list" );
+
+            ICollection<IPEndPoint> serverList = await serverListProvider.FetchServerList();
+
+            if ( serverList.Count == 0 && canFetchDirectory )
+            {
+                DebugLog.WriteLine( "SmartCMServerList", "Server list provider had no entries, will query SteamDirectory" );
+                var directoryList = await SteamDirectory.LoadAsync();
+                serverList = directoryList.ToList();
+
+                await serverListProvider.UpdateServerList( directoryList );
+            }
+
+            if ( serverList.Count == 0 && canFetchDirectory )
+            {
+                DebugLog.WriteLine( "SmartCMServerList", "Falling back to cm0" );
+                var cm0 = await Dns.GetHostAddressesAsync( "cm0.steampowered.com" );
+
+                serverList = cm0.Select( ipaddr => new IPEndPoint( ipaddr, 27015 ) ).ToList();
+            }
+
+            DebugLog.WriteLine( "SmartCMServerList", "Resolved {0} servers", serverList.Count );
+            TryAddRange( serverList );
+        }
 
         /// <summary>
         /// Determines how long a server's bad connection state is remembered for.
@@ -192,48 +243,6 @@ namespace SteamKit2
             }
         }
 
-        internal void UseInbuiltList()
-        {
-            lock ( listLock )
-            {
-                Clear();
-                Add( new IPEndPoint( IPAddress.Parse( "208.64.200.201" ), 27017 ) );
-                Add( new IPEndPoint( IPAddress.Parse( "208.64.200.201" ), 27018 ) );
-                Add( new IPEndPoint( IPAddress.Parse( "208.64.200.201" ), 27019 ) );
-                Add( new IPEndPoint( IPAddress.Parse( "208.64.200.201" ), 27020 ) );
-                Add( new IPEndPoint( IPAddress.Parse( "208.64.200.202" ), 27017 ) );
-                Add( new IPEndPoint( IPAddress.Parse( "208.64.200.202" ), 27018 ) );
-                Add( new IPEndPoint( IPAddress.Parse( "208.64.200.202" ), 27019 ) );
-                Add( new IPEndPoint( IPAddress.Parse( "208.64.200.203" ), 27017 ) );
-                Add( new IPEndPoint( IPAddress.Parse( "208.64.200.203" ), 27018 ) );
-                Add( new IPEndPoint( IPAddress.Parse( "208.64.200.203" ), 27019 ) );
-                Add( new IPEndPoint( IPAddress.Parse( "208.64.200.204" ), 27017 ) );
-                Add( new IPEndPoint( IPAddress.Parse( "208.64.200.204" ), 27018 ) );
-                Add( new IPEndPoint( IPAddress.Parse( "208.64.200.204" ), 27019 ) );
-                Add( new IPEndPoint( IPAddress.Parse( "208.64.200.205" ), 27017 ) );
-                Add( new IPEndPoint( IPAddress.Parse( "208.64.200.205" ), 27018 ) );
-                Add( new IPEndPoint( IPAddress.Parse( "208.64.200.205" ), 27019 ) );
-                Add( new IPEndPoint( IPAddress.Parse( "208.78.164.9" ), 27017 ) );
-                Add( new IPEndPoint( IPAddress.Parse( "208.78.164.9" ), 27018 ) );
-                Add( new IPEndPoint( IPAddress.Parse( "208.78.164.9" ), 27019 ) );
-                Add( new IPEndPoint( IPAddress.Parse( "208.78.164.10" ), 27017 ) );
-                Add( new IPEndPoint( IPAddress.Parse( "208.78.164.10" ), 27018 ) );
-                Add( new IPEndPoint( IPAddress.Parse( "208.78.164.10" ), 27019 ) );
-                Add( new IPEndPoint( IPAddress.Parse( "208.78.164.11" ), 27017 ) );
-                Add( new IPEndPoint( IPAddress.Parse( "208.78.164.11" ), 27018 ) );
-                Add( new IPEndPoint( IPAddress.Parse( "208.78.164.11" ), 27019 ) );
-                Add( new IPEndPoint( IPAddress.Parse( "208.78.164.12" ), 27017 ) );
-                Add( new IPEndPoint( IPAddress.Parse( "208.78.164.12" ), 27018 ) );
-                Add( new IPEndPoint( IPAddress.Parse( "208.78.164.12" ), 27019 ) );
-                Add( new IPEndPoint( IPAddress.Parse( "208.78.164.13" ), 27017 ) );
-                Add( new IPEndPoint( IPAddress.Parse( "208.78.164.13" ), 27018 ) );
-                Add( new IPEndPoint( IPAddress.Parse( "208.78.164.13" ), 27019 ) );
-                Add( new IPEndPoint( IPAddress.Parse( "208.78.164.14" ), 27017 ) );
-                Add( new IPEndPoint( IPAddress.Parse( "208.78.164.14" ), 27018 ) );
-                Add( new IPEndPoint( IPAddress.Parse( "208.78.164.14" ), 27019 ) );
-            }
-        }
-
         internal bool TryMark( IPEndPoint endPoint, ServerQuality quality )
         {
             lock ( listLock )
@@ -276,6 +285,8 @@ namespace SteamKit2
         /// <returns>An <see cref="System.Net.IPEndPoint"/>, or null if the list is empty.</returns>
         public IPEndPoint GetNextServerCandidate()
         {
+            listTask.Wait();
+
             lock ( listLock)
             {
                 // ResetOldScores takes a lock internally, however
@@ -300,6 +311,18 @@ namespace SteamKit2
         }
 
         /// <summary>
+        /// Get the next server in the list.
+        /// </summary>
+        /// <returns>An <see cref="System.Net.IPEndPoint"/>, or null if the list is empty.</returns>
+        public Task<IPEndPoint> GetNextServerCandidateAsync()
+        {
+            return listTask.ContinueWith( t =>
+            {
+                return GetNextServerCandidate();
+            });
+        }
+
+        /// <summary>
         /// Gets the <see cref="System.Net.IPEndPoint"/>s of all servers in the server list.
         /// </summary>
         /// <returns>An <see cref="T:System.Net.IPEndPoint[]"/> array contains the <see cref="System.Net.IPEndPoint"/>s of the servers in the list</returns>
@@ -307,7 +330,9 @@ namespace SteamKit2
         {
             IPEndPoint[] endPoints;
 
-            lock( listLock )
+            listTask.Wait();
+
+            lock ( listLock )
             {
                 var numServers = servers.Count;
                 endPoints = new IPEndPoint[ numServers ];

@@ -12,6 +12,7 @@ using System.IO;
 using System.Net.Sockets;
 using SteamKit2.Internal;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace SteamKit2
 {
@@ -102,7 +103,7 @@ namespace SteamKit2
                 ufsServer = serverList[ random.Next( serverList.Count ) ];
             }
 
-            connection.Connect( ufsServer, ( int )ConnectionTimeout.TotalMilliseconds );
+            connection.Connect( Task.FromResult(ufsServer), ( int )ConnectionTimeout.TotalMilliseconds );
         }
 
         /// <summary>

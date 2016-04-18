@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using SteamKit2;
 using Xunit;
+using SteamKit2.Discovery;
 
 namespace Tests
 {
@@ -8,7 +9,7 @@ namespace Tests
     {
         public SmartCMServerListFacts()
         {
-            serverList = new SmartCMServerList();
+            serverList = new SmartCMServerList(new NullServerListProvider(), allowDirectoryFetch: false);
         }
 
         readonly SmartCMServerList serverList;

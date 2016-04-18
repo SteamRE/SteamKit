@@ -9,6 +9,7 @@ using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace SteamKit2
 {
@@ -173,7 +174,7 @@ namespace SteamKit2
         /// </summary>
         /// <param name="endPoint">The end point.</param>
         /// <param name="timeout">Timeout in milliseconds</param>
-        public override void Connect(IPEndPoint endPoint, int timeout)
+        public override void Connect(Task<IPEndPoint> endPoint, int timeout)
         {
             lock (connectLock)
             {
@@ -187,10 +188,14 @@ namespace SteamKit2
                     Debug.Assert(cancellationToken == null);
                     cancellationToken = new CancellationTokenSource();
 
-                    destination = endPoint;
                     socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
-                    ThreadPool.QueueUserWorkItem(TryConnect, timeout);
+                    endPoint.ContinueWith(t =>
+                    {
+                        destination = t.Result;
+                        ThreadPool.QueueUserWorkItem(TryConnect, timeout);
+                    });
+
                 }
             }
         }
