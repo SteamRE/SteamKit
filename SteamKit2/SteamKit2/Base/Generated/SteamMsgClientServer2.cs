@@ -1471,6 +1471,13 @@ namespace SteamKit2.Internal
       get { return _workshop_items; }
     }
   
+    private readonly global::System.Collections.Generic.List<ulong> _private_items = new global::System.Collections.Generic.List<ulong>();
+    [global::ProtoBuf.ProtoMember(4, Name=@"private_items", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public global::System.Collections.Generic.List<ulong> private_items
+    {
+      get { return _private_items; }
+    }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"WorkshopItemInfo")]
   public partial class WorkshopItemInfo : global::ProtoBuf.IExtensible
   {
@@ -1502,6 +1509,15 @@ namespace SteamKit2.Internal
     {
       get { return _manifest_id; }
       set { _manifest_id = value; }
+    }
+
+    private bool _is_legacy = default(bool);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"is_legacy", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool is_legacy
+    {
+      get { return _is_legacy; }
+      set { _is_legacy = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

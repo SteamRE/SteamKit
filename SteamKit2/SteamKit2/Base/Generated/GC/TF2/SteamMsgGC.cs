@@ -646,6 +646,15 @@ namespace SteamKit2.GC.TF2.Internal
       get { return _skill_rating_9v9; }
       set { _skill_rating_9v9 = value; }
     }
+
+    private bool _two_factor_enabled = (bool)false;
+    [global::ProtoBuf.ProtoMember(22, IsRequired = false, Name=@"two_factor_enabled", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue((bool)false)]
+    public bool two_factor_enabled
+    {
+      get { return _two_factor_enabled; }
+      set { _two_factor_enabled = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

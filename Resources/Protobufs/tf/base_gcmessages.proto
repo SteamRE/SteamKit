@@ -137,6 +137,7 @@ message CSOEconGameAccountClient {
 	optional bool phone_verified = 19 [default = false];
 	optional uint32 skill_rating_6v6 = 20;
 	optional uint32 skill_rating_9v9 = 21;
+	optional bool two_factor_enabled = 22 [default = false];
 }
 
 message CSOItemCriteriaCondition {

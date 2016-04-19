@@ -3,7 +3,7 @@
 [![Build Status (Mono)](https://img.shields.io/travis/SteamRE/SteamKit.svg?style=flat-square&label=Mono)](https://travis-ci.org/SteamRE/SteamKit)
 [![Build Status (Windows)](https://img.shields.io/appveyor/ci/SteamRE/SteamKit.svg?style=flat-square&label=Windows)](https://ci.appveyor.com/project/SteamRE/SteamKit)
 [![NuGet](https://img.shields.io/nuget/v/SteamKit2.svg?style=flat-square)](https://www.nuget.org/packages/SteamKit2/)
-[![Code Coverage](https://codecov.io/github/SteamRE/SteamKit/coverage.svg)](https://codecov.io/github/SteamRE/SteamKit)
+[![Code Coverage](https://img.shields.io/badge/Code-Coverage-007ec6.svg?style=flat-square)](https://codecov.io/github/SteamRE/SteamKit)
 
 
 SteamKit2 is a .NET library designed to interoperate with Valve's [Steam network](http://store.steampowered.com/about). It aims to provide a simple, yet extensible, interface to perform various actions on the network.
@@ -39,7 +39,7 @@ SteamKit2 is released under the [LGPL-2.1 license](http://www.tldrlegal.com/lice
 
 In order to use SteamKit2 at runtime, the following dependencies are required:
 
-  - .NET 4.0 or [Mono ≥2.8](http://mono-project.com)
+  - .NET 4.5 or [Mono ≥3.0](http://mono-project.com)
 
 To compile SteamKit2, the following is required:
 

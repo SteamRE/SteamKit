@@ -95,6 +95,9 @@ enum EDotaUserMessages {
 	DOTA_UM_ProjectionAbility = 552;
 	DOTA_UM_ProjectionEvent = 553;
 	DOTA_UM_CombatLogDataHLTV = 554;
+	DOTA_UM_XPAlert = 555;
+	DOTA_UM_UpdateQuestProgress = 556;
+	DOTA_UM_MatchMetadata = 557;
 }
 
 enum DOTA_CHAT_MESSAGE {
@@ -235,6 +238,7 @@ enum DOTA_PARTICLE_MESSAGE {
 	DOTA_PARTICLE_MANAGER_EVENT_SHOULD_DRAW = 11;
 	DOTA_PARTICLE_MANAGER_EVENT_FROZEN = 12;
 	DOTA_PARTICLE_MANAGER_EVENT_CHANGE_CONTROL_POINT_ATTACHMENT = 13;
+	DOTA_PARTICLE_MANAGER_EVENT_UPDATE_ENTITY_POSITION = 14;
 }
 
 enum DOTA_OVERHEAD_ALERT {
@@ -339,7 +343,8 @@ message CDOTAUserMsg_AIDebugLine {
 }
 
 message CDOTAUserMsg_Ping {
-	optional string message = 1;
+	optional uint32 ping = 2;
+	optional uint32 loss = 3;
 }
 
 message CDOTAUserMsg_SwapVerify {
@@ -483,7 +488,6 @@ message CDOTAUserMsg_MinimapDebugPoint {
 message CDOTAUserMsg_CreateLinearProjectile {
 	optional .CMsgVector origin = 1;
 	optional .CMsgVector2D velocity = 2;
-	optional int32 latency = 3;
 	optional int32 entindex = 4;
 	optional uint64 particle_index = 5;
 	optional int32 handle = 6;
@@ -521,6 +525,7 @@ message CDOTAUserMsg_NevermoreRequiem {
 	optional int32 entity_handle = 1;
 	optional int32 lines = 2;
 	optional .CMsgVector origin = 3;
+	optional bool reverse = 4;
 }
 
 message CDOTAUserMsg_InvalidCommand {
@@ -718,6 +723,11 @@ message CDOTAUserMsg_ParticleManager {
 		optional int32 entity_handle = 3;
 	}
 
+	message UpdateEntityPosition {
+		optional int32 entity_handle = 1;
+		optional .CMsgVector position = 2;
+	}
+
 	required .DOTA_PARTICLE_MESSAGE type = 1 [default = DOTA_PARTICLE_MANAGER_EVENT_CREATE];
 	required uint32 index = 2;
 	optional .CDOTAUserMsg_ParticleManager.ReleaseParticleIndex release_particle_index = 3;
@@ -733,6 +743,7 @@ message CDOTAUserMsg_ParticleManager {
 	optional .CDOTAUserMsg_ParticleManager.UpdateParticleShouldDraw update_particle_should_draw = 14;
 	optional .CDOTAUserMsg_ParticleManager.UpdateParticleSetFrozen update_particle_set_frozen = 15;
 	optional .CDOTAUserMsg_ParticleManager.ChangeControlPointAttachment change_control_point_attachment = 16;
+	optional .CDOTAUserMsg_ParticleManager.UpdateEntityPosition update_entity_position = 17;
 }
 
 message CDOTAUserMsg_OverheadEvent {
@@ -785,7 +796,7 @@ message CDOTAUserMsg_ReceivedXmasGift {
 
 message CDOTAUserMsg_ShowSurvey {
 	optional int32 survey_id = 1;
-	optional uint32 match_id = 2;
+	optional uint64 match_id = 2;
 	optional string response_style = 3;
 	optional uint32 teammate_hero_id = 4;
 	optional string teammate_name = 5;
@@ -1125,5 +1136,13 @@ message CDOTAUserMsg_ProjectionAbility {
 message CDOTAUserMsg_ProjectionEvent {
 	optional .EProjectionEvent event_id = 1 [default = ePE_FirstBlood];
 	optional uint32 team = 2;
+}
+
+message CDOTAUserMsg_XPAlert {
+	optional uint32 player_id = 1;
+	optional uint32 target_entindex = 2;
+}
+
+message CDOTAUserMsg_UpdateQuestProgress {
 }
 

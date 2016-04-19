@@ -26,6 +26,15 @@ namespace SteamKit2.Unified.Internal
       get { return _serial_number; }
       set { _serial_number = value; }
     }
+
+    private string _controller_code = "";
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"controller_code", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string controller_code
+    {
+      get { return _controller_code; }
+      set { _controller_code = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -41,9 +50,459 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPhysicalGoods_CompleteSteamControllerRegistration_Request")]
+  public partial class CPhysicalGoods_CompleteSteamControllerRegistration_Request : global::ProtoBuf.IExtensible
+  {
+    public CPhysicalGoods_CompleteSteamControllerRegistration_Request() {}
+    
+
+    private string _serial_number = "";
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"serial_number", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string serial_number
+    {
+      get { return _serial_number; }
+      set { _serial_number = value; }
+    }
+
+    private string _controller_code = "";
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"controller_code", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string controller_code
+    {
+      get { return _controller_code; }
+      set { _controller_code = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPhysicalGoods_CompleteSteamControllerRegistration_Response")]
+  public partial class CPhysicalGoods_CompleteSteamControllerRegistration_Response : global::ProtoBuf.IExtensible
+  {
+    public CPhysicalGoods_CompleteSteamControllerRegistration_Response() {}
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPhysicalGoods_QueryAccountsRegisteredToSerial_Request")]
+  public partial class CPhysicalGoods_QueryAccountsRegisteredToSerial_Request : global::ProtoBuf.IExtensible
+  {
+    public CPhysicalGoods_QueryAccountsRegisteredToSerial_Request() {}
+    
+
+    private string _serial_number = "";
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"serial_number", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string serial_number
+    {
+      get { return _serial_number; }
+      set { _serial_number = value; }
+    }
+
+    private string _controller_code = "";
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"controller_code", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string controller_code
+    {
+      get { return _controller_code; }
+      set { _controller_code = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPhysicalGoods_QueryAccountsRegisteredToSerial_Accounts")]
+  public partial class CPhysicalGoods_QueryAccountsRegisteredToSerial_Accounts : global::ProtoBuf.IExtensible
+  {
+    public CPhysicalGoods_QueryAccountsRegisteredToSerial_Accounts() {}
+    
+
+    private uint _accountid = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"accountid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint accountid
+    {
+      get { return _accountid; }
+      set { _accountid = value; }
+    }
+
+    private bool _registration_complete = default(bool);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"registration_complete", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool registration_complete
+    {
+      get { return _registration_complete; }
+      set { _registration_complete = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPhysicalGoods_QueryAccountsRegisteredToSerial_Response")]
+  public partial class CPhysicalGoods_QueryAccountsRegisteredToSerial_Response : global::ProtoBuf.IExtensible
+  {
+    public CPhysicalGoods_QueryAccountsRegisteredToSerial_Response() {}
+    
+    private readonly global::System.Collections.Generic.List<CPhysicalGoods_QueryAccountsRegisteredToSerial_Accounts> _accounts = new global::System.Collections.Generic.List<CPhysicalGoods_QueryAccountsRegisteredToSerial_Accounts>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"accounts", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CPhysicalGoods_QueryAccountsRegisteredToSerial_Accounts> accounts
+    {
+      get { return _accounts; }
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPhysicalGoods_SteamControllerSetConfig_ControllerConfig")]
+  public partial class CPhysicalGoods_SteamControllerSetConfig_ControllerConfig : global::ProtoBuf.IExtensible
+  {
+    public CPhysicalGoods_SteamControllerSetConfig_ControllerConfig() {}
+    
+
+    private string _appidorname = "";
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"appidorname", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string appidorname
+    {
+      get { return _appidorname; }
+      set { _appidorname = value; }
+    }
+
+    private ulong _publishedfileid = default(ulong);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"publishedfileid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong publishedfileid
+    {
+      get { return _publishedfileid; }
+      set { _publishedfileid = value; }
+    }
+
+    private string _templatename = "";
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"templatename", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string templatename
+    {
+      get { return _templatename; }
+      set { _templatename = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPhysicalGoods_SteamControllerSetConfig_Request")]
+  public partial class CPhysicalGoods_SteamControllerSetConfig_Request : global::ProtoBuf.IExtensible
+  {
+    public CPhysicalGoods_SteamControllerSetConfig_Request() {}
+    
+
+    private string _serial_number = "";
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"serial_number", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string serial_number
+    {
+      get { return _serial_number; }
+      set { _serial_number = value; }
+    }
+
+    private string _controller_code = "";
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"controller_code", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string controller_code
+    {
+      get { return _controller_code; }
+      set { _controller_code = value; }
+    }
+
+    private uint _accountid = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"accountid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint accountid
+    {
+      get { return _accountid; }
+      set { _accountid = value; }
+    }
+    private readonly global::System.Collections.Generic.List<CPhysicalGoods_SteamControllerSetConfig_ControllerConfig> _configurations = new global::System.Collections.Generic.List<CPhysicalGoods_SteamControllerSetConfig_ControllerConfig>();
+    [global::ProtoBuf.ProtoMember(4, Name=@"configurations", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CPhysicalGoods_SteamControllerSetConfig_ControllerConfig> configurations
+    {
+      get { return _configurations; }
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPhysicalGoods_SteamControllerSetConfig_Response")]
+  public partial class CPhysicalGoods_SteamControllerSetConfig_Response : global::ProtoBuf.IExtensible
+  {
+    public CPhysicalGoods_SteamControllerSetConfig_Response() {}
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPhysicalGoods_SteamControllerGetConfig_Request")]
+  public partial class CPhysicalGoods_SteamControllerGetConfig_Request : global::ProtoBuf.IExtensible
+  {
+    public CPhysicalGoods_SteamControllerGetConfig_Request() {}
+    
+
+    private string _serial_number = "";
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"serial_number", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string serial_number
+    {
+      get { return _serial_number; }
+      set { _serial_number = value; }
+    }
+
+    private string _controller_code = "";
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"controller_code", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string controller_code
+    {
+      get { return _controller_code; }
+      set { _controller_code = value; }
+    }
+
+    private uint _accountid = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"accountid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint accountid
+    {
+      get { return _accountid; }
+      set { _accountid = value; }
+    }
+
+    private string _appidorname = "";
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"appidorname", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string appidorname
+    {
+      get { return _appidorname; }
+      set { _appidorname = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPhysicalGoods_SteamControllerGetConfig_ControllerConfig")]
+  public partial class CPhysicalGoods_SteamControllerGetConfig_ControllerConfig : global::ProtoBuf.IExtensible
+  {
+    public CPhysicalGoods_SteamControllerGetConfig_ControllerConfig() {}
+    
+
+    private string _appidorname = "";
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"appidorname", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string appidorname
+    {
+      get { return _appidorname; }
+      set { _appidorname = value; }
+    }
+
+    private ulong _publishedfileid = default(ulong);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"publishedfileid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong publishedfileid
+    {
+      get { return _publishedfileid; }
+      set { _publishedfileid = value; }
+    }
+
+    private string _templatename = "";
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"templatename", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string templatename
+    {
+      get { return _templatename; }
+      set { _templatename = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPhysicalGoods_SteamControllerGetConfig_Response")]
+  public partial class CPhysicalGoods_SteamControllerGetConfig_Response : global::ProtoBuf.IExtensible
+  {
+    public CPhysicalGoods_SteamControllerGetConfig_Response() {}
+    
+    private readonly global::System.Collections.Generic.List<CPhysicalGoods_SteamControllerGetConfig_ControllerConfig> _configurations = new global::System.Collections.Generic.List<CPhysicalGoods_SteamControllerGetConfig_ControllerConfig>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"configurations", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CPhysicalGoods_SteamControllerGetConfig_ControllerConfig> configurations
+    {
+      get { return _configurations; }
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPhysicalGoods_DeRegisterSteamController_Request")]
+  public partial class CPhysicalGoods_DeRegisterSteamController_Request : global::ProtoBuf.IExtensible
+  {
+    public CPhysicalGoods_DeRegisterSteamController_Request() {}
+    
+
+    private string _serial_number = "";
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"serial_number", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string serial_number
+    {
+      get { return _serial_number; }
+      set { _serial_number = value; }
+    }
+
+    private string _controller_code = "";
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"controller_code", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string controller_code
+    {
+      get { return _controller_code; }
+      set { _controller_code = value; }
+    }
+
+    private uint _accountid = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"accountid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint accountid
+    {
+      get { return _accountid; }
+      set { _accountid = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPhysicalGoods_DeRegisterSteamController_Response")]
+  public partial class CPhysicalGoods_DeRegisterSteamController_Response : global::ProtoBuf.IExtensible
+  {
+    public CPhysicalGoods_DeRegisterSteamController_Response() {}
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPhysicalGoods_SetPersonalizationFile_Request")]
+  public partial class CPhysicalGoods_SetPersonalizationFile_Request : global::ProtoBuf.IExtensible
+  {
+    public CPhysicalGoods_SetPersonalizationFile_Request() {}
+    
+
+    private string _serial_number = "";
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"serial_number", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string serial_number
+    {
+      get { return _serial_number; }
+      set { _serial_number = value; }
+    }
+
+    private ulong _publishedfileid = default(ulong);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"publishedfileid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong publishedfileid
+    {
+      get { return _publishedfileid; }
+      set { _publishedfileid = value; }
+    }
+
+    private uint _accountid = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"accountid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint accountid
+    {
+      get { return _accountid; }
+      set { _accountid = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPhysicalGoods_SetPersonalizationFile_Response")]
+  public partial class CPhysicalGoods_SetPersonalizationFile_Response : global::ProtoBuf.IExtensible
+  {
+    public CPhysicalGoods_SetPersonalizationFile_Response() {}
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPhysicalGoods_GetPersonalizationFile_Request")]
+  public partial class CPhysicalGoods_GetPersonalizationFile_Request : global::ProtoBuf.IExtensible
+  {
+    public CPhysicalGoods_GetPersonalizationFile_Request() {}
+    
+
+    private string _serial_number = "";
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"serial_number", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string serial_number
+    {
+      get { return _serial_number; }
+      set { _serial_number = value; }
+    }
+
+    private uint _accountid = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"accountid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint accountid
+    {
+      get { return _accountid; }
+      set { _accountid = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPhysicalGoods_GetPersonalizationFile_Response")]
+  public partial class CPhysicalGoods_GetPersonalizationFile_Response : global::ProtoBuf.IExtensible
+  {
+    public CPhysicalGoods_GetPersonalizationFile_Response() {}
+    
+
+    private ulong _publishedfileid = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"publishedfileid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong publishedfileid
+    {
+      get { return _publishedfileid; }
+      set { _publishedfileid = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     public interface IPhysicalGoods
     {
       CPhysicalGoods_RegisterSteamController_Response RegisterSteamController(CPhysicalGoods_RegisterSteamController_Request request);
+    CPhysicalGoods_CompleteSteamControllerRegistration_Response CompleteSteamControllerRegistration(CPhysicalGoods_CompleteSteamControllerRegistration_Request request);
+    CPhysicalGoods_QueryAccountsRegisteredToSerial_Response QueryAccountsRegisteredToController(CPhysicalGoods_QueryAccountsRegisteredToSerial_Request request);
+    CPhysicalGoods_SteamControllerSetConfig_Response SetDesiredControllerConfigForApp(CPhysicalGoods_SteamControllerSetConfig_Request request);
+    CPhysicalGoods_SteamControllerGetConfig_Response GetDesiredControllerConfigForApp(CPhysicalGoods_SteamControllerGetConfig_Request request);
+    CPhysicalGoods_DeRegisterSteamController_Response DeRegisterSteamController(CPhysicalGoods_DeRegisterSteamController_Request request);
+    CPhysicalGoods_SetPersonalizationFile_Response SetControllerPersonalizationFile(CPhysicalGoods_SetPersonalizationFile_Request request);
+    CPhysicalGoods_GetPersonalizationFile_Response GetControllerPersonalizationFile(CPhysicalGoods_GetPersonalizationFile_Request request);
     
     }
     

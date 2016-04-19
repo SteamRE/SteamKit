@@ -804,6 +804,59 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgServerHello")]
+  public partial class CMsgServerHello : global::ProtoBuf.IExtensible
+  {
+    public CMsgServerHello() {}
+    
+
+    private uint _version = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"version", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint version
+    {
+      get { return _version; }
+      set { _version = value; }
+    }
+    private readonly global::System.Collections.Generic.List<CMsgSOCacheHaveVersion> _socache_have_versions = new global::System.Collections.Generic.List<CMsgSOCacheHaveVersion>();
+    [global::ProtoBuf.ProtoMember(2, Name=@"socache_have_versions", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CMsgSOCacheHaveVersion> socache_have_versions
+    {
+      get { return _socache_have_versions; }
+    }
+  
+
+    private uint _legacy_client_session_need = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"legacy_client_session_need", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint legacy_client_session_need
+    {
+      get { return _legacy_client_session_need; }
+      set { _legacy_client_session_need = value; }
+    }
+
+    private uint _legacy_client_launcher = default(uint);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"legacy_client_launcher", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint legacy_client_launcher
+    {
+      get { return _legacy_client_launcher; }
+      set { _legacy_client_launcher = value; }
+    }
+
+    private uint _steamdatagram_port = default(uint);
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"steamdatagram_port", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint steamdatagram_port
+    {
+      get { return _steamdatagram_port; }
+      set { _steamdatagram_port = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientWelcome")]
   public partial class CMsgClientWelcome : global::ProtoBuf.IExtensible
   {

@@ -76,6 +76,12 @@ namespace Sample3_DebugLog
 
             // create our steamclient instance
             steamClient = new SteamClient();
+
+            // uncomment this if you'd like to dump raw sent and received packets
+            // that can be opened for analysis in NetHookAnalyzer
+            // NOTE: dumps may contain sensitive data (such as your Steam password)
+            //steamClient.DebugNetworkListener = new NetHookNetworkListener();
+
             // create the callback manager which will route callbacks to function calls
             manager = new CallbackManager( steamClient );
 

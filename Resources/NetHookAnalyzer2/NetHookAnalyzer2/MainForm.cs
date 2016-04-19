@@ -37,10 +37,16 @@ namespace NetHookAnalyzer2
 				{
 					GameCoordinatorSpecializations = new IGameCoordinatorSpecialization[]
 					{
+						new CSGOCacheSubscribedGCSpecialization(),
+						new CSGOSOMultipleObjectsGCSpecialization(),
+						new CSGOSOSingleObjectGCSpecialization(),
 						new Dota2CacheSubscribedGCSpecialization(),
 						new Dota2SOSingleObjectGCSpecialization(),
 						new Dota2SOMultipleObjectsGCSpecialization(),
-					}
+						new TF2CacheSubscribedGCSpecialization(),
+						new TF2SOMultipleObjectsGCSpecialization(),
+						new TF2SOSingleObjectGCSpecialization(),
+                    }
 				}
 			};
 		}

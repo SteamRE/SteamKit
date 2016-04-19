@@ -54,7 +54,7 @@ namespace SteamKit2
         private Socket sock;
         private IPEndPoint remoteEndPoint;
 
-        NetFilterEncryption filter;
+        INetFilterEncryption filter;
 
         private DateTime timeOut;
         private DateTime nextResend;
@@ -579,8 +579,8 @@ namespace SteamKit2
         /// <summary>
         /// Sets the network encryption filter for this connection
         /// </summary>
-        /// <param name="filter">filter implementing <see cref="NetFilterEncryption"/></param>
-        public override void SetNetEncryptionFilter(NetFilterEncryption filter)
+        /// <param name="filter">filter implementing <see cref="INetFilterEncryption"/></param>
+        public override void SetNetEncryptionFilter( INetFilterEncryption filter )
         {
             this.filter = filter;
         }

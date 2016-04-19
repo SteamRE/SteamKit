@@ -350,6 +350,15 @@ message CGCSystemMsg_GetAccountDetails_Response {
 	optional uint32 suspension_end_time = 21;
 	optional string currency = 22;
 	optional uint32 steam_level = 23;
+	optional uint32 friend_count = 24;
+	optional uint32 account_creation_time = 25;
+	optional bool is_steamguard_enabled = 27;
+	optional bool is_phone_verified = 28;
+	optional bool is_two_factor_auth_enabled = 29;
+	optional uint32 two_factor_enabled_time = 30;
+	optional uint32 phone_verification_time = 31;
+	optional uint64 phone_id = 33;
+	optional bool is_phone_identifying = 34;
 }
 
 message CMsgGCGetPersonaNames {

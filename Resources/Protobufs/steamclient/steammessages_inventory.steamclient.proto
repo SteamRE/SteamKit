@@ -47,7 +47,6 @@ message CInventory_GetItemDefs_Request {
 	optional string modifiedsince = 2;
 	repeated uint64 itemdefids = 4;
 	repeated uint64 workshopids = 5;
-	optional string currency = 6 [(description) = "If set, return the current price as the property current_price"];
 	optional uint32 cache_max_age_seconds = 7 [default = 0, (description) = "Allow stale data to be returned for the specified number of seconds."];
 }
 

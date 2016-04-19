@@ -810,6 +810,25 @@ namespace SteamKit2.GC.TF2.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCQuestDiscard_Request")]
+  public partial class CMsgGCQuestDiscard_Request : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCQuestDiscard_Request() {}
+    
+
+    private ulong _quest_item_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"quest_item_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong quest_item_id
+    {
+      get { return _quest_item_id; }
+      set { _quest_item_id = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     [global::ProtoBuf.ProtoContract(Name=@"EGCItemMsg", EnumPassthru=true)]
     public enum EGCItemMsg
     {
@@ -1295,7 +1314,22 @@ namespace SteamKit2.GC.TF2.Internal
       k_EMsgGCCraftCollectionUpgrade = 2567,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCCraftHalloweenOffering", Value=2568)]
-      k_EMsgGCCraftHalloweenOffering = 2568
+      k_EMsgGCCraftHalloweenOffering = 2568,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCQuestDiscard_Request", Value=2569)]
+      k_EMsgGCQuestDiscard_Request = 2569,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCRemoveGiftedBy", Value=2570)]
+      k_EMsgGCRemoveGiftedBy = 2570,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCRemoveGiftedByResponse", Value=2571)]
+      k_EMsgGCRemoveGiftedByResponse = 2571,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCRemoveFestivizer", Value=2572)]
+      k_EMsgGCRemoveFestivizer = 2572,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCRemoveFestivizerResponse", Value=2573)]
+      k_EMsgGCRemoveFestivizerResponse = 2573
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"EGCMsgResponse", EnumPassthru=true)]

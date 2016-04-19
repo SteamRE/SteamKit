@@ -6,12 +6,13 @@
 
 
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net.Sockets;
 using System.Threading;
-using SteamKit2.Internal;
-using System.Diagnostics;
 using ProtoBuf;
+using SteamKit2.Internal;
 
 namespace SteamKit2
 {
@@ -30,6 +31,8 @@ namespace SteamKit2
         Queue<ICallbackMsg> callbackQueue;
 
         Dictionary<EMsg, Action<IPacketMsg>> dispatchMap;
+
+        internal AsyncJobManager jobManager;
 
 
         /// <summary>
@@ -69,7 +72,13 @@ namespace SteamKit2
 
                 { EMsg.ClientCMList, HandleCMList },
                 { EMsg.ClientServerList, HandleServerList },
+
+                // to support asyncjob life time
+                { EMsg.JobHeartbeat, HandleJobHeartbeat },
+                { EMsg.DestJobFailed, HandleJobFailed },
             };
+
+            jobManager = new AsyncJobManager();
         }
 
 
@@ -245,10 +254,13 @@ namespace SteamKit2
                 callbackQueue.Enqueue( msg );
                 Monitor.Pulse( callbackLock );
             }
+
+            jobManager.TryCompleteJob( msg.JobID, msg );
         }
         #endregion
 
 
+        #region Jobs
         /// <summary>
         /// Returns the next available JobID for job based messages.
         /// This function is thread-safe.
@@ -265,21 +277,23 @@ namespace SteamKit2
                 StartTime = processStartTime
             };
         }
+        internal void StartJob( AsyncJob job )
+        {
+            jobManager.StartJob( job );
+        }
+        #endregion
 
 
         /// <summary>
         /// Called when a client message is received from the network.
         /// </summary>
         /// <param name="packetMsg">The packet message.</param>
-        protected override void OnClientMsgReceived( IPacketMsg packetMsg )
+        protected override bool OnClientMsgReceived( IPacketMsg packetMsg )
         {
             // let the underlying CMClient handle this message first
-            base.OnClientMsgReceived( packetMsg );
-
-            if (packetMsg == null)
+            if ( !base.OnClientMsgReceived( packetMsg ) )
             {
-                // bail if the packet failed to parse. CMClient will handle this
-                return;
+                return false;
             }
 
             Action<IPacketMsg> handlerFunc;
@@ -302,21 +316,28 @@ namespace SteamKit2
                 {
                     DebugLog.WriteLine( "SteamClient", "'{0}' handler failed to (de)serialize a protobuf: '{1}'", kvp.Key.Name, ex.Message );
                     Disconnect();
-                    return;
+                    return false;
                 }
                 catch ( Exception ex )
                 {
                     DebugLog.WriteLine( "SteamClient", "Unhandled '{0}' exception from '{1}' handler: '{2}'", ex.GetType().Name, kvp.Key.Name, ex.Message );
                     Disconnect();
-                    return;
+                    return false;
                 }
             }
+
+            return true;
         }
         /// <summary>
         /// Called when the client is physically disconnected from Steam3.
         /// </summary>
         protected override void OnClientDisconnected( bool userInitiated )
         {
+            // if we are disconnected, cancel all pending jobs
+            jobManager.CancelPendingJobs();
+
+            jobManager.SetTimeoutsEnabled( false );
+
             PostCallback( new DisconnectedCallback( userInitiated ) );
         }
 
@@ -325,7 +346,12 @@ namespace SteamKit2
         {
             var encResult = new Msg<MsgChannelEncryptResult>( packetMsg );
 
-            PostCallback( new ConnectedCallback( encResult.Body ) );
+            if ( encResult.Body.Result == EResult.OK )
+            {
+                jobManager.SetTimeoutsEnabled( true );
+
+                PostCallback( new ConnectedCallback( encResult.Body ) );
+            }
         }
 
         void HandleCMList( IPacketMsg packetMsg )
@@ -334,12 +360,20 @@ namespace SteamKit2
 
             PostCallback( new CMListCallback( cmMsg.Body ) );
         }
-
         void HandleServerList( IPacketMsg packetMsg )
         {
             var listMsg = new ClientMsgProtobuf<CMsgClientServerList>( packetMsg );
 
             PostCallback( new ServerListCallback( listMsg.Body ) );
+        }
+
+        void HandleJobHeartbeat( IPacketMsg packetMsg )
+        {
+            jobManager.HeartbeatJob( packetMsg.TargetJobID );
+        }
+        void HandleJobFailed( IPacketMsg packetMsg )
+        {
+            jobManager.FailJob( packetMsg.TargetJobID );
         }
 
     }

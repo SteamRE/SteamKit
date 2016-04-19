@@ -16,7 +16,7 @@ namespace SteamKit2
     public partial class SteamUserStats
     {
         /// <summary>
-        /// This callback is fired in response to <see cref="GetNumberOfCurrentPlayers" />.
+        /// This callback is fired in response to <see cref="GetNumberOfCurrentPlayers(uint)" />.
         /// </summary>
         public class NumberOfPlayersCallback : CallbackMsg
         {
@@ -30,11 +30,11 @@ namespace SteamKit2
             public uint NumPlayers { get; private set; }
 
 
-            internal NumberOfPlayersCallback( JobID jobID, MsgClientGetNumberOfCurrentPlayersResponse resp )
+            internal NumberOfPlayersCallback( JobID jobID, CMsgDPGetNumberOfCurrentPlayersResponse resp )
             {
                 this.JobID = jobID;
-                this.Result = resp.Result;
-                this.NumPlayers = resp.NumPlayers;
+                this.Result = ( EResult )resp.eresult;
+                this.NumPlayers = ( uint )resp.player_count;
             }
         }
 

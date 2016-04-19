@@ -585,6 +585,44 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCToGCUniverseStartup")]
+  public partial class CMsgGCToGCUniverseStartup : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCToGCUniverseStartup() {}
+    
+
+    private bool _is_initial_startup = default(bool);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"is_initial_startup", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool is_initial_startup
+    {
+      get { return _is_initial_startup; }
+      set { _is_initial_startup = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCToGCUniverseStartupResponse")]
+  public partial class CMsgGCToGCUniverseStartupResponse : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCToGCUniverseStartupResponse() {}
+    
+
+    private int _eresult = default(int);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"eresult", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int eresult
+    {
+      get { return _eresult; }
+      set { _eresult = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGCToGCMsgMasterStartupComplete")]
   public partial class CGCToGCMsgMasterStartupComplete : global::ProtoBuf.IExtensible
   {
@@ -1613,7 +1651,10 @@ namespace SteamKit2.GC.Dota.Internal
       GCConnectionStatus_NO_STEAM = 4,
             
       [global::ProtoBuf.ProtoEnum(Name=@"GCConnectionStatus_SUSPENDED", Value=5)]
-      GCConnectionStatus_SUSPENDED = 5
+      GCConnectionStatus_SUSPENDED = 5,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"GCConnectionStatus_STEAM_GOING_DOWN", Value=6)]
+      GCConnectionStatus_STEAM_GOING_DOWN = 6
     }
   
 }

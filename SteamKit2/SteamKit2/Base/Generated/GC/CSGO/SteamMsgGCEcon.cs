@@ -268,20 +268,11 @@ namespace SteamKit2.GC.CSGO.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCItemAcknowledged__DEPRECATED", Value=1062)]
       k_EMsgGCItemAcknowledged__DEPRECATED = 1062,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCPresets_SelectPresetForClass", Value=1063)]
-      k_EMsgGCPresets_SelectPresetForClass = 1063,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCPresets_SetItemPosition", Value=1064)]
-      k_EMsgGCPresets_SetItemPosition = 1064,
-            
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGC_ReportAbuse", Value=1065)]
       k_EMsgGC_ReportAbuse = 1065,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGC_ReportAbuseResponse", Value=1066)]
       k_EMsgGC_ReportAbuseResponse = 1066,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCPresets_SelectPresetForClassReply", Value=1067)]
-      k_EMsgGCPresets_SelectPresetForClassReply = 1067,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCNameItemNotification", Value=1068)]
       k_EMsgGCNameItemNotification = 1068,

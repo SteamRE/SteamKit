@@ -2178,6 +2178,69 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _account_creation_time; }
       set { _account_creation_time = value; }
     }
+
+    private bool _is_steamguard_enabled = default(bool);
+    [global::ProtoBuf.ProtoMember(27, IsRequired = false, Name=@"is_steamguard_enabled", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool is_steamguard_enabled
+    {
+      get { return _is_steamguard_enabled; }
+      set { _is_steamguard_enabled = value; }
+    }
+
+    private bool _is_phone_verified = default(bool);
+    [global::ProtoBuf.ProtoMember(28, IsRequired = false, Name=@"is_phone_verified", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool is_phone_verified
+    {
+      get { return _is_phone_verified; }
+      set { _is_phone_verified = value; }
+    }
+
+    private bool _is_two_factor_auth_enabled = default(bool);
+    [global::ProtoBuf.ProtoMember(29, IsRequired = false, Name=@"is_two_factor_auth_enabled", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool is_two_factor_auth_enabled
+    {
+      get { return _is_two_factor_auth_enabled; }
+      set { _is_two_factor_auth_enabled = value; }
+    }
+
+    private uint _two_factor_enabled_time = default(uint);
+    [global::ProtoBuf.ProtoMember(30, IsRequired = false, Name=@"two_factor_enabled_time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint two_factor_enabled_time
+    {
+      get { return _two_factor_enabled_time; }
+      set { _two_factor_enabled_time = value; }
+    }
+
+    private uint _phone_verification_time = default(uint);
+    [global::ProtoBuf.ProtoMember(31, IsRequired = false, Name=@"phone_verification_time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint phone_verification_time
+    {
+      get { return _phone_verification_time; }
+      set { _phone_verification_time = value; }
+    }
+
+    private ulong _phone_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(33, IsRequired = false, Name=@"phone_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong phone_id
+    {
+      get { return _phone_id; }
+      set { _phone_id = value; }
+    }
+
+    private bool _is_phone_identifying = default(bool);
+    [global::ProtoBuf.ProtoMember(34, IsRequired = false, Name=@"is_phone_identifying", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool is_phone_identifying
+    {
+      get { return _is_phone_identifying; }
+      set { _is_phone_identifying = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -3422,6 +3485,43 @@ namespace SteamKit2.GC.Dota.Internal
       k_MsgInvalidTransactionData = 9
     }
   
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCHVacVerificationChange")]
+  public partial class CMsgGCHVacVerificationChange : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCHVacVerificationChange() {}
+    
+
+    private ulong _steamid = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong steamid
+    {
+      get { return _steamid; }
+      set { _steamid = value; }
+    }
+
+    private uint _appid = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"appid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint appid
+    {
+      get { return _appid; }
+      set { _appid = value; }
+    }
+
+    private bool _is_verified = default(bool);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"is_verified", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool is_verified
+    {
+      get { return _is_verified; }
+      set { _is_verified = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

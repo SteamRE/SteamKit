@@ -680,6 +680,15 @@ namespace SteamKit2.Internal
       get { return _two_factor_code; }
       set { _two_factor_code = value; }
     }
+
+    private bool _supports_rate_limit_response = default(bool);
+    [global::ProtoBuf.ProtoMember(102, IsRequired = false, Name=@"supports_rate_limit_response", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool supports_rate_limit_response
+    {
+      get { return _supports_rate_limit_response; }
+      set { _supports_rate_limit_response = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -2131,6 +2140,42 @@ namespace SteamKit2.Internal
     {
       get { return _owner_id; }
       set { _owner_id = value; }
+    }
+
+    private uint _initial_period = default(uint);
+    [global::ProtoBuf.ProtoMember(13, IsRequired = false, Name=@"initial_period", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint initial_period
+    {
+      get { return _initial_period; }
+      set { _initial_period = value; }
+    }
+
+    private uint _initial_time_unit = default(uint);
+    [global::ProtoBuf.ProtoMember(14, IsRequired = false, Name=@"initial_time_unit", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint initial_time_unit
+    {
+      get { return _initial_time_unit; }
+      set { _initial_time_unit = value; }
+    }
+
+    private uint _renewal_period = default(uint);
+    [global::ProtoBuf.ProtoMember(15, IsRequired = false, Name=@"renewal_period", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint renewal_period
+    {
+      get { return _renewal_period; }
+      set { _renewal_period = value; }
+    }
+
+    private uint _renewal_time_unit = default(uint);
+    [global::ProtoBuf.ProtoMember(16, IsRequired = false, Name=@"renewal_time_unit", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint renewal_time_unit
+    {
+      get { return _renewal_time_unit; }
+      set { _renewal_time_unit = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

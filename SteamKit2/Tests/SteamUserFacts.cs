@@ -97,7 +97,7 @@ namespace Tests
         [Fact]
         public void LogOnDoesNotThrowExceptionIfUserNameAndPasswordProvided()
         {
-            Assert.DoesNotThrow(() =>
+            var ex = Record.Exception(() =>
             {
                 Handler.LogOn(new SteamUser.LogOnDetails
                 {
@@ -105,12 +105,14 @@ namespace Tests
                     Password = "def"
                 });
             });
+
+            Assert.Null( ex );
         }
         
         [Fact]
         public void LogOnDoesNotThrowExceptionIfUserNameAndLoginKeyProvided()
         {
-            Assert.DoesNotThrow(() =>
+            var ex = Record.Exception(() =>
             {
                 Handler.LogOn(new SteamUser.LogOnDetails
                 {
@@ -119,6 +121,8 @@ namespace Tests
                     ShouldRememberPassword = true,
                 });
             });
+
+            Assert.Null( ex );
         }
 
         [Fact]

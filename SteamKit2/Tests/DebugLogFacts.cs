@@ -1,5 +1,6 @@
 ﻿using Xunit;
 using SteamKit2;
+using Xunit.Sdk;
 
 namespace Tests
 {

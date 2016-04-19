@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
@@ -79,9 +80,17 @@ namespace SteamKit2.Internal
         /// </value>
         public TimeSpan ConnectionTimeout { get; set; }
 
+        /// <summary>
+        /// Gets or sets the network listening interface. Use this for debugging only.
+        /// For your convenience, you can use <see cref="NetHookNetworkListener"/> class.
+        /// </summary>
+        public IDebugNetworkListener DebugNetworkListener { get; set; }
+
+        internal bool ExpectDisconnection { get; set; }
 
         Connection connection;
-        byte[] tempSessionKey;
+        bool encryptionSetup;
+        INetFilterEncryption pendingNetFilterEncryption;
 
         ScheduledFunction heartBeatFunc;
 
@@ -150,6 +159,10 @@ namespace SteamKit2.Internal
         {
             this.Disconnect();
 
+            encryptionSetup = false;
+            pendingNetFilterEncryption = null;
+            ExpectDisconnection = false;
+
             if ( cmServer == null )
             {
                 cmServer = Servers.GetNextServerCandidate();
@@ -186,6 +199,14 @@ namespace SteamKit2.Internal
 
             DebugLog.WriteLine( "CMClient", "Sent -> EMsg: {0} (Proto: {1})", msg.MsgType, msg.IsProto );
 
+            try
+            {
+                DebugNetworkListener?.OnOutgoingNetworkMessage(msg.MsgType, msg.Serialize());
+            }
+            catch ( Exception e )
+            {
+                DebugLog.WriteLine( "CMClient", "DebugNetworkListener threw an exception: {0}", e );
+            }
 
             // we'll swallow any network failures here because they will be thrown later
             // on the network thread, and that will lead to a disconnect callback
@@ -223,26 +244,45 @@ namespace SteamKit2.Internal
         /// Called when a client message is received from the network.
         /// </summary>
         /// <param name="packetMsg">The packet message.</param>
-        protected virtual void OnClientMsgReceived( IPacketMsg packetMsg )
+        protected virtual bool OnClientMsgReceived( IPacketMsg packetMsg )
         {
             if ( packetMsg == null )
             {
                 DebugLog.WriteLine( "CMClient", "Packet message failed to parse, shutting down connection" );
                 Disconnect();
-                return;
+                return false;
             }
 
             DebugLog.WriteLine( "CMClient", "<- Recv'd EMsg: {0} ({1}) (Proto: {2})", packetMsg.MsgType, ( int )packetMsg.MsgType, packetMsg.IsProto );
 
+            // Multi message gets logged down the line after it's decompressed
+            if ( packetMsg.MsgType != EMsg.Multi )
+            {
+                try
+                {
+                    DebugNetworkListener?.OnIncomingNetworkMessage( packetMsg.MsgType, packetMsg.GetData() );
+                }
+                catch ( Exception e )
+                {
+                    DebugLog.WriteLine( "CMClient", "DebugNetworkListener threw an exception: {0}", e );
+                }
+            }
+
+            // ensure that during channel setup, no other messages are processed
+            if ( ( !encryptionSetup && pendingNetFilterEncryption == null && packetMsg.MsgType != EMsg.ChannelEncryptRequest ) ||
+                 ( !encryptionSetup && pendingNetFilterEncryption != null && packetMsg.MsgType != EMsg.ChannelEncryptRequest && packetMsg.MsgType != EMsg.ChannelEncryptResult ) )
+            {
+                DebugLog.WriteLine( "CMClient", "Rejected EMsg: {0} during channel setup" );
+                return false;
+            }
+
             switch ( packetMsg.MsgType )
             {
                 case EMsg.ChannelEncryptRequest:
-                    HandleEncryptRequest( packetMsg );
-                    break;
+                    return HandleEncryptRequest( packetMsg );
 
                 case EMsg.ChannelEncryptResult:
-                    HandleEncryptResult( packetMsg );
-                    break;
+                    return HandleEncryptResult( packetMsg );
 
                 case EMsg.Multi:
                     HandleMulti( packetMsg );
@@ -268,6 +308,8 @@ namespace SteamKit2.Internal
                     HandleSessionToken( packetMsg );
                     break;
             }
+
+            return true;
         }
         /// <summary>
         /// Called when the client is physically disconnected from Steam3.
@@ -299,7 +341,7 @@ namespace SteamKit2.Internal
 
             heartBeatFunc.Stop();
 
-            OnClientDisconnected( userInitiated: e.UserInitiated );
+            OnClientDisconnected( userInitiated: e.UserInitiated || ExpectDisconnection );
         }
 
         internal static IPacketMsg GetPacketMsg( byte[] data )
@@ -377,7 +419,10 @@ namespace SteamKit2.Internal
                     int subSize = br.ReadInt32();
                     byte[] subData = br.ReadBytes( subSize );
 
-                    OnClientMsgReceived( GetPacketMsg( subData ) );
+                    if ( !OnClientMsgReceived( GetPacketMsg( subData ) ) )
+                    {
+                        break;
+                    }
                 }
             }
 
@@ -409,7 +454,7 @@ namespace SteamKit2.Internal
                 heartBeatFunc.Start();
             }
         }
-        void HandleEncryptRequest( IPacketMsg packetMsg )
+        bool HandleEncryptRequest( IPacketMsg packetMsg )
         {
             var encRequest = new Msg<MsgChannelEncryptRequest>( packetMsg );
 
@@ -419,43 +464,87 @@ namespace SteamKit2.Internal
             DebugLog.WriteLine( "CMClient", "Got encryption request. Universe: {0} Protocol ver: {1}", eUniv, protoVersion );
             DebugLog.Assert( protoVersion == 1, "CMClient", "Encryption handshake protocol version mismatch!" );
 
+            byte[] randomChallenge;
+            if ( encRequest.Payload.Length >= 16 )
+            {
+                randomChallenge = encRequest.Payload.ToArray();
+            }
+            else
+            {
+                randomChallenge = null;
+            }
+
             byte[] pubKey = KeyDictionary.GetPublicKey( eUniv );
 
             if ( pubKey == null )
             {
+                connection.Disconnect();
+
                 DebugLog.WriteLine( "CMClient", "HandleEncryptionRequest got request for invalid universe! Universe: {0} Protocol ver: {1}", eUniv, protoVersion );
-                return;
+                return false;
             }
 
             ConnectedUniverse = eUniv;
 
             var encResp = new Msg<MsgChannelEncryptResponse>();
-
-            tempSessionKey = CryptoHelper.GenerateRandomBlock( 32 );
-            byte[] cryptedSessKey = null;
-
+            
+            var tempSessionKey = CryptoHelper.GenerateRandomBlock( 32 );
+            byte[] encryptedHandshakeBlob = null;
+            
             using ( var rsa = new RSACrypto( pubKey ) )
             {
-                cryptedSessKey = rsa.Encrypt( tempSessionKey );
+                if ( randomChallenge != null )
+                {
+                    var blobToEncrypt = new byte[ tempSessionKey.Length + randomChallenge.Length ];
+                    Array.Copy( tempSessionKey, blobToEncrypt, tempSessionKey.Length );
+                    Array.Copy( randomChallenge, 0, blobToEncrypt, tempSessionKey.Length, randomChallenge.Length );
+
+                    encryptedHandshakeBlob = rsa.Encrypt( blobToEncrypt );
+                }
+                else
+                {
+                    encryptedHandshakeBlob = rsa.Encrypt( tempSessionKey );
+                }
             }
 
-            byte[] keyCrc = CryptoHelper.CRCHash( cryptedSessKey );
+            var keyCrc = CryptoHelper.CRCHash( encryptedHandshakeBlob );
 
-            encResp.Write( cryptedSessKey );
+            encResp.Write( encryptedHandshakeBlob );
             encResp.Write( keyCrc );
             encResp.Write( ( uint )0 );
+            
+            if (randomChallenge != null)
+            {
+                pendingNetFilterEncryption = new NetFilterEncryptionWithHMAC( tempSessionKey );
+            }
+            else
+            {
+                pendingNetFilterEncryption = new NetFilterEncryption( tempSessionKey );
+            }
 
             this.Send( encResp );
+            return true;
         }
-        void HandleEncryptResult( IPacketMsg packetMsg )
+        bool HandleEncryptResult( IPacketMsg packetMsg )
         {
             var encResult = new Msg<MsgChannelEncryptResult>( packetMsg );
 
             DebugLog.WriteLine( "CMClient", "Encryption result: {0}", encResult.Body.Result );
 
-            if ( encResult.Body.Result == EResult.OK )
+            if ( encResult.Body.Result == EResult.OK && pendingNetFilterEncryption != null )
             {
-                connection.SetNetEncryptionFilter( new NetFilterEncryption( tempSessionKey ) );
+                Debug.Assert( pendingNetFilterEncryption != null );
+                connection.SetNetEncryptionFilter( pendingNetFilterEncryption );
+
+                pendingNetFilterEncryption = null;
+                encryptionSetup = true;
+                return true;
+            }
+            else
+            {
+                DebugLog.WriteLine( "CMClient", "Encryption channel setup failed" );
+                connection.Disconnect();
+                return false;
             }
         }
         void HandleLoggedOff( IPacketMsg packetMsg )
@@ -503,11 +592,8 @@ namespace SteamKit2.Internal
             var cmList = cmMsg.Body.cm_addresses
                 .Zip( cmMsg.Body.cm_ports, ( addr, port ) => new IPEndPoint( NetHelpers.GetIPAddress( addr ), ( int )port ) );
 
-            // update our bootstrap list with steam's list of CMs
-            foreach ( var cm in cmList )
-            {
-                Servers.TryAdd( cm );
-            }
+            // update our list with steam's list of CMs
+            Servers.MergeWithList( cmList );
         }
         void HandleSessionToken( IPacketMsg packetMsg )
         {

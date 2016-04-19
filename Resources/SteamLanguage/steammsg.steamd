@@ -271,17 +271,6 @@ class MsgClientChatRoomInfo<EMsg::ClientChatRoomInfo>
 	EChatInfoType type;	
 };
 
-class MsgClientGetNumberOfCurrentPlayers<EMsg::ClientGetNumberOfCurrentPlayers>
-{
-	gameidmarshal ulong gameID;
-};
-
-class MsgClientGetNumberOfCurrentPlayersResponse<EMsg::ClientGetNumberOfCurrentPlayersResponse>
-{
-	EResult result;
-	uint numPlayers;
-};
-
 class MsgClientSetIgnoreFriend<EMsg::ClientSetIgnoreFriend>
 {
 	steamidmarshal ulong mySteamId;

@@ -88,6 +88,7 @@ message CMsgClientLogon {
 	optional bool is_steam_box = 99;
 	optional uint64 client_instance_id = 100;
 	optional string two_factor_code = 101;
+	optional bool supports_rate_limit_response = 102;
 }
 
 message CMsgClientLogonResponse {
@@ -317,6 +318,10 @@ message CMsgClientLicenseList {
 		optional int32 territory_code = 10;
 		optional int32 change_number = 11;
 		optional uint32 owner_id = 12;
+		optional uint32 initial_period = 13;
+		optional uint32 initial_time_unit = 14;
+		optional uint32 renewal_period = 15;
+		optional uint32 renewal_time_unit = 16;
 	}
 
 	optional int32 eresult = 1 [default = 2];

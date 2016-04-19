@@ -51,7 +51,7 @@ message CGameInfo {
 			optional uint32 hero_id = 3;
 		}
 
-		optional uint32 match_id = 1;
+		optional uint64 match_id = 1;
 		optional int32 game_mode = 2;
 		optional int32 game_winner = 3;
 		repeated .CGameInfo.CDotaGameInfo.CPlayerInfo player_info = 4;

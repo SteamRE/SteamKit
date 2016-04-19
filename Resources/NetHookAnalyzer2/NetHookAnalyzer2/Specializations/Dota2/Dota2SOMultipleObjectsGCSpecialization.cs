@@ -27,7 +27,7 @@ namespace NetHookAnalyzer2.Specializations
 				var extraNode = ReadExtraObject(singleObject);
 				if (extraNode != null)
 				{
-					yield return new KeyValuePair<string, object>("New SO", extraNode);
+					yield return new KeyValuePair<string, object>(string.Format("New SO ({0})", extraNode.GetType().Name), extraNode);
 				}
 			}
 
@@ -36,7 +36,7 @@ namespace NetHookAnalyzer2.Specializations
 				var extraNode = ReadExtraObject(singleObject);
 				if (extraNode != null)
 				{
-					yield return new KeyValuePair<string, object>("Modified SO", extraNode);
+					yield return new KeyValuePair<string, object>(string.Format("Modified SO ({0})", extraNode.GetType().Name), extraNode);
 				}
 			}
 
@@ -45,7 +45,7 @@ namespace NetHookAnalyzer2.Specializations
 				var extraNode = ReadExtraObject(singleObject);
 				if (extraNode != null)
 				{
-					yield return new KeyValuePair<string, object>("Removed SO", extraNode);
+					yield return new KeyValuePair<string, object>(string.Format("Removed SO ({0})", extraNode.GetType().Name), extraNode);
 				}
 			}
 		}

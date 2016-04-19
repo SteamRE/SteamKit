@@ -17,6 +17,17 @@ namespace SteamKit2
         /// </summary>
         protected SteamClient Client { get; private set; }
 
+        /// <summary>
+        /// Gets or sets whether or not the related <see cref="SteamClient" /> should imminently expect the server to close the connection.
+        /// If this is true when the connection is closed, the <see cref="SteamClient.DisconnectedCallback"/>'s <see cref="SteamClient.DisconnectedCallback.UserInitiated"/> property
+        /// will be set to <c>true</c>.
+        /// </summary>
+        protected bool ExpectDisconnection
+        {
+            get { return Client.ExpectDisconnection; }
+            set { Client.ExpectDisconnection = value; }
+        }
+
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ClientMsgHandler"/> class.

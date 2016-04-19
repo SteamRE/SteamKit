@@ -227,11 +227,13 @@ message CMsgClientWorkshopItemInfoResponse {
 		optional fixed64 published_file_id = 1;
 		optional uint32 time_updated = 2;
 		optional fixed64 manifest_id = 3;
+		optional bool is_legacy = 4;
 	}
 
 	optional int32 eresult = 1 [default = 2];
 	optional uint32 update_time = 2;
 	repeated .CMsgClientWorkshopItemInfoResponse.WorkshopItemInfo workshop_items = 3;
+	repeated fixed64 private_items = 4;
 }
 
 message CMsgClientUCMGetPublishedFilesForUser {

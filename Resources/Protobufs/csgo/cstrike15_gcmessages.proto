@@ -234,6 +234,23 @@ message MatchEndItemUpdates {
 	optional uint32 item_attr_delta_value = 3;
 }
 
+message ScoreLeaderboardData {
+	message Entry {
+		optional uint32 tag = 1;
+		optional uint32 val = 2;
+	}
+
+	message AccountEntries {
+		optional uint32 accountid = 1;
+		repeated .ScoreLeaderboardData.Entry entries = 2;
+	}
+
+	optional uint64 quest_id = 1;
+	optional uint32 score = 2;
+	repeated .ScoreLeaderboardData.AccountEntries accountentries = 3;
+	repeated .ScoreLeaderboardData.Entry matchentries = 5;
+}
+
 message PlayerQuestData {
 	message QuestItemData {
 		optional uint64 quest_id = 1;
@@ -251,6 +268,9 @@ message PlayerQuestData {
 
 message CMsgGC_ServerQuestUpdateData {
 	repeated .PlayerQuestData player_quest_data = 1;
+	optional bytes binary_data = 2;
+	optional uint32 mm_game_mode = 3;
+	optional .ScoreLeaderboardData missionlbsdata = 4;
 }
 
 message CMsgGCCStrike15_v2_MatchmakingGCOperationalStats {
@@ -373,12 +393,14 @@ message CMsgGCCStrike15_v2_MatchmakingServerReservationResponse {
 	optional uint32 reward_item_attr_reward_idx = 11;
 	optional uint32 reward_drop_list = 12;
 	optional string tournament_tag = 13;
+	optional uint32 steamdatagram_port = 14;
 }
 
 message CMsgGCCStrike15_v2_MatchmakingGC2ClientReserve {
 	optional uint64 serverid = 1;
-	optional uint32 serverip = 2;
-	optional uint32 serverport = 3;
+	optional string server_address = 7;
+	optional uint32 legacy_serverip = 2;
+	optional uint32 legacy_serverport = 3;
 	optional uint64 reservationid = 4;
 	optional .CMsgGCCStrike15_v2_MatchmakingGC2ServerReserve reservation = 5;
 	optional string map = 6;
@@ -425,6 +447,7 @@ message CMsgGCCStrike15_v2_MatchmakingServerMatchEnd {
 	optional uint32 replay_cluster_id = 6;
 	optional bool aborted_match = 7;
 	optional .CMsgGC_ServerQuestUpdateData match_end_quest_data = 8;
+	optional uint32 server_version = 9;
 }
 
 message CMsgGCCStrike15_v2_MatchmakingClient2GCHello {
@@ -473,13 +496,6 @@ message CMsgGCCStrike15_v2_MatchmakingServer2GCKick {
 	optional uint32 reason = 3;
 }
 
-message CDataGCCStrike15_v2_MatchmakingLockedInMatch {
-	optional .CMsgGCCStrike15_v2_MatchmakingGC2ClientReserve client_reservation = 1;
-	optional .CMsgGCCStrike15_v2_MatchmakingServerRoundStats server_stats = 2;
-	optional uint32 rtime32_server_info = 3;
-	optional .CMsgGCCStrike15_v2_MatchmakingServerRoundStats last_round_stats_temp = 4;
-}
-
 message CMsgGCCStrike15_v2_MatchmakingGC2ServerRankUpdate {
 	repeated .PlayerRankingInfo rankings = 1;
 	optional uint64 match_id = 2;
@@ -518,6 +534,7 @@ message CMsgGCCStrike15_v2_ClientReportServer {
 	optional uint32 rpt_abusivemodels = 2;
 	optional uint32 rpt_badmotd = 3;
 	optional uint32 rpt_listingabuse = 4;
+	optional uint32 rpt_inventoryabuse = 5;
 	optional uint64 match_id = 8;
 }
 

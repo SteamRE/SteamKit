@@ -121,6 +121,7 @@ enum ETFGCMsg {
 	k_EMsgGC_Match_Result = 6512;
 	k_EMsgGCVoteKickPlayerRequest = 6513;
 	k_EMsgGCVoteKickPlayerRequestResponse = 6514;
+	k_EMsgGC_Ladder_RankUp = 6515;
 	k_EMsgGCDev_GrantWarKill = 10001;
 }
 
@@ -516,6 +517,8 @@ message CSOTFPartyMember {
 	optional bool is_banned = 8 [default = false];
 	optional bool owns_ladder_pass = 9;
 	optional bool phone_verified = 10 [default = false];
+	optional bool two_factor_enabled = 11 [default = false];
+	optional uint32 ladder_rank = 12;
 }
 
 message CMsgMatchSearchCriteria {
@@ -826,6 +829,7 @@ message CMsgMvMVictoryInfo {
 		optional uint32 badge_progress_bits = 7;
 		repeated .CMsgMvMVictoryInfo.Item items = 8;
 		optional bool voucher_missing = 9;
+		optional uint32 badge_points = 10;
 	}
 
 	enum GrantReason {
@@ -1127,6 +1131,10 @@ message CSOTFLadderPlayerStats {
 	optional uint32 damage = 5;
 	optional uint32 healing = 6;
 	optional uint32 support = 7;
+	optional uint32 score = 8;
+	optional uint32 experience = 9;
+	optional uint32 highest_rank = 10;
+	optional uint32 rank = 11;
 }
 
 message CMsgGC_TFVoteKickPlayerRequest {
@@ -1135,5 +1143,10 @@ message CMsgGC_TFVoteKickPlayerRequest {
 
 message CMsgGC_VoteKickPlayerRequestResponse {
 	optional bool allowed = 1;
+}
+
+message CMsgGC_Ladder_RankUp {
+	optional uint32 rank = 1;
+	optional .TF_SkillRatingMatchType match_type = 2 [default = TF_SkillRatingMatchType_INVALID];
 }
 

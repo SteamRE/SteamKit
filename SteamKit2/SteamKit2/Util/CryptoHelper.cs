@@ -6,7 +6,10 @@
 
 
 using System;
+using System.Diagnostics;
+using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -126,7 +129,7 @@ namespace SteamKit2
         /// <summary>
         /// Performs an encryption using AES/CBC/PKCS7 with an input byte array and key, with a random IV prepended using AES/ECB/None
         /// </summary>
-        public static byte[] SymmetricEncrypt( byte[] input, byte[] key )
+        public static byte[] SymmetricEncryptWithIV( byte[] input, byte[] key, byte[] iv )
         {
             DebugLog.Assert( key.Length == 32, "CryptoHelper", "SymmetricEncrypt used with non 32 byte key!" );
 
@@ -135,11 +138,8 @@ namespace SteamKit2
                 aes.BlockSize = 128;
                 aes.KeySize = 256;
 
-                // generate iv
-                byte[] iv = GenerateRandomBlock( 16 );
-                byte[] cryptedIv = new byte[ 16 ];
-
-
+                var cryptedIv = new byte[ 16 ];
+                
                 // encrypt iv using ECB and provided key
                 aes.Mode = CipherMode.ECB;
                 aes.Padding = PaddingMode.None;
@@ -160,10 +160,10 @@ namespace SteamKit2
                     cs.Write( input, 0, input.Length );
                     cs.FlushFinalBlock();
 
-                    byte[] cipherText = ms.ToArray();
+                    var cipherText = ms.ToArray();
 
                     // final output is 16 byte ecb crypted IV + cbc crypted plaintext
-                    byte[] output = new byte[ cryptedIv.Length + cipherText.Length ];
+                    var output = new byte[ cryptedIv.Length + cipherText.Length ];
 
                     Array.Copy( cryptedIv, 0, output, 0, cryptedIv.Length );
                     Array.Copy( cipherText, 0, output, cryptedIv.Length, cipherText.Length );
@@ -174,9 +174,77 @@ namespace SteamKit2
         }
 
         /// <summary>
+        /// Performs an encryption using AES/CBC/PKCS7 with an input byte array and key, with a random IV prepended using AES/ECB/None
+        /// </summary>
+        public static byte[] SymmetricEncrypt( byte[] input, byte[] key )
+        {
+            var iv = GenerateRandomBlock( 16 );
+            return SymmetricEncryptWithIV( input, key, iv );
+        }
+
+        /// <summary>
+        /// Performs an encryption using AES/CBC/PKCS7 with an input byte array and key, with a IV (comprised of random bytes and the HMAC-SHA1 of the random bytes and plaintext) prepended using AES/ECB/None
+        /// </summary>
+        public static byte[] SymmetricEncryptWithHMACIV( byte[] input, byte[] key, byte[] hmacSecret )
+        {
+            // IV is HMAC-SHA1(Random(3) + Plaintext) + Random(3). (Same random values for both)
+            var iv = new byte[ 16 ];
+            var random = GenerateRandomBlock( 3 );
+            Array.Copy( random, 0, iv, iv.Length - random.Length, random.Length );
+
+            using ( var hmac = new HMACSHA1( hmacSecret ) )
+            {
+                hmac.TransformBlock( random, 0, random.Length, null, 0 );
+                hmac.TransformFinalBlock( input, 0, input.Length );
+                Array.Copy( hmac.Hash, iv, iv.Length - random.Length );
+            }
+            
+            return SymmetricEncryptWithIV( input, key, iv );
+        }
+
+        /// <summary>
         /// Decrypts using AES/CBC/PKCS7 with an input byte array and key, using the random IV prepended using AES/ECB/None
         /// </summary>
         public static byte[] SymmetricDecrypt( byte[] input, byte[] key )
+        {
+            byte[] iv;
+            return SymmetricDecrypt( input, key, out iv );
+        }
+
+        /// <summary>
+        /// Decrypts using AES/CBC/PKCS7 with an input byte array and key, using the IV (comprised of random bytes and the HMAC-SHA1 of the random bytes and plaintext) prepended using AES/ECB/None
+        /// </summary>
+        public static byte[] SymmetricDecryptHMACIV( byte[] input, byte[] key, byte[] hmacSecret )
+        {
+            Debug.Assert( key.Length >= 16 );
+            var truncatedKeyForHmac = new byte[ 16 ];
+            Array.Copy( key, 0, truncatedKeyForHmac, 0, truncatedKeyForHmac.Length );
+
+            byte[] iv;
+            var plaintextData = SymmetricDecrypt( input, key, out iv );
+
+            // validate HMAC
+            byte[] hmacBytes;
+            using ( var hmac = new HMACSHA1( hmacSecret ) )
+            {
+                hmac.TransformBlock( iv, iv.Length - 3, 3, null, 0 );
+                hmac.TransformFinalBlock( plaintextData, 0, plaintextData.Length );
+
+                hmacBytes = hmac.Hash;
+            }
+
+            if ( !hmacBytes.Take( iv.Length - 3 ).SequenceEqual( iv.Take( iv.Length - 3 ) ) )
+            {
+                throw new CryptographicException( string.Format( CultureInfo.InvariantCulture, "{0} was unable to decrypt packet: HMAC from server did not match computed HMAC.", nameof(NetFilterEncryption) ) );
+            }
+
+            return plaintextData;
+        }
+
+        /// <summary>
+        /// Decrypts using AES/CBC/PKCS7 with an input byte array and key, using the random IV prepended using AES/ECB/None
+        /// </summary>
+        static byte[] SymmetricDecrypt( byte[] input, byte[] key, out byte[] iv )
         {
             DebugLog.Assert( key.Length == 32, "CryptoHelper", "SymmetricDecrypt used with non 32 byte key!" );
 
@@ -187,7 +255,7 @@ namespace SteamKit2
 
                 // first 16 bytes of input is the ECB encrypted IV
                 byte[] cryptedIv = new byte[ 16 ];
-                byte[] iv = new byte[ cryptedIv.Length ];
+                iv = new byte[ cryptedIv.Length ];
                 Array.Copy( input, 0, cryptedIv, 0, cryptedIv.Length );
 
                 // the rest is ciphertext
@@ -230,24 +298,24 @@ namespace SteamKit2
         public static byte[] VerifyAndDecryptPassword( byte[] input, string password )
         {
             byte[] key, hash;
-            using(SHA256 sha256 = SHA256Managed.Create())
+            using( SHA256 sha256 = SHA256Managed.Create() )
             {
-                byte[] password_bytes = Encoding.UTF8.GetBytes(password);
-                key = sha256.ComputeHash(password_bytes);
+                byte[] password_bytes = Encoding.UTF8.GetBytes( password );
+                key = sha256.ComputeHash( password_bytes );
             }
-            using(HMACSHA1 hmac = new HMACSHA1(key))
+            using( HMACSHA1 hmac = new HMACSHA1(key) )
             {
-                hash = hmac.ComputeHash(input, 0, 32);
+                hash = hmac.ComputeHash( input, 0, 32 );
             }
 
-            for (int i = 32; i < input.Length; i++)
-                if (input[i] != hash[i % 32])
+            for ( int i = 32; i < input.Length; i++ )
+                if ( input[ i ] != hash[ i % 32 ] )
                     return null;
 
-            byte[] encrypted = new byte[32];
-            Array.Copy(input, 0, encrypted, 0, 32);
+            byte[] encrypted = new byte[ 32 ];
+            Array.Copy( input, encrypted, encrypted.Length );
 
-            return CryptoHelper.SymmetricDecrypt(encrypted, key);
+            return CryptoHelper.SymmetricDecrypt( encrypted, key );
         }
 
         /// <summary>

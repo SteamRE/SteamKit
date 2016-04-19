@@ -146,6 +146,14 @@ message CMsgClientHello {
 	optional uint32 client_launcher = 4;
 }
 
+message CMsgServerHello {
+	optional uint32 version = 1;
+	repeated .CMsgSOCacheHaveVersion socache_have_versions = 2;
+	optional uint32 legacy_client_session_need = 3;
+	optional uint32 legacy_client_launcher = 4;
+	optional uint32 steamdatagram_port = 5;
+}
+
 message CMsgClientWelcome {
 	message Location {
 		optional float latitude = 1;

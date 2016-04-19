@@ -13,6 +13,7 @@ using static SteamKit2.Util.MacHelpers.CoreFoundation;
 using static SteamKit2.Util.MacHelpers.DiskArbitration;
 using static SteamKit2.Util.MacHelpers.IOKit;
 using System.Threading.Tasks;
+using System.Runtime.InteropServices;
 
 namespace SteamKit2
 {
@@ -125,6 +126,11 @@ namespace SteamKit2
 
             string serialNumber = (string)bootableDisk["SerialNumber"];
 
+            if ( string.IsNullOrEmpty( serialNumber ) )
+            {
+                return base.GetDiskId();
+            }
+
             return Encoding.UTF8.GetBytes( serialNumber );
         }
 
@@ -135,7 +141,14 @@ namespace SteamKit2
 
             var searcher = new ManagementObjectSearcher( query );
 
-            return searcher.Get().Cast<ManagementObject>();
+            try {
+                return searcher.Get().Cast<ManagementObject>();
+            }
+            catch ( COMException ce )
+            {
+                DebugLog.WriteLine( nameof(WindowsInfoProvider), "Failed to execute WMI query '{0}': {1}", query, ce.Message );
+                return Enumerable.Empty<ManagementObject>();
+            }
         }
     }
 

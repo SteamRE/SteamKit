@@ -38,6 +38,18 @@ namespace SteamKit2
             public uint CellID { get; set; }
 
             /// <summary>
+            /// Gets or sets the LoginID. This number is used for identifying logon session.
+            /// The purpose of this field is to allow multiple sessions to the same steam account from the same machine.
+            /// This is because Steam Network doesn't allow more than one session with the same LoginID to access given account at the same time.
+            /// If you want to establish more than one active session to given account, you must make sure that every session (to that account) has unique LoginID.
+            /// By default LoginID is automatically generated based on machine's primary bind address, which is the same for all sessions.
+            /// Null value will cause this property to be automatically generated based on default behaviour.
+            /// If in doubt, set this property to null.
+            /// </summary>
+            /// <value>The LoginID.</value>
+            public uint? LoginID { get; set; }
+
+            /// <summary>
             /// Gets or sets the Steam Guard auth code used to login. This is the code sent to the user's email.
             /// </summary>
             /// <value>The auth code.</value>
@@ -298,12 +310,18 @@ namespace SteamKit2
 
             SteamID steamId = new SteamID( details.AccountID, details.AccountInstance, Client.ConnectedUniverse, EAccountType.Individual );
 
-            uint localIp = NetHelpers.GetIPAddress( this.Client.LocalIP );
+            if ( details.LoginID.HasValue )
+            {
+                logon.Body.obfustucated_private_ip = details.LoginID.Value;
+            }
+            else
+            {
+                uint localIp = NetHelpers.GetIPAddress( this.Client.LocalIP );
+                logon.Body.obfustucated_private_ip = localIp ^ MsgClientLogon.ObfuscationMask;
+            }
 
             logon.ProtoHeader.client_sessionid = 0;
             logon.ProtoHeader.steamid = steamId.ConvertToUInt64();
-
-            logon.Body.obfustucated_private_ip = localIp ^ MsgClientLogon.ObfuscationMask;
 
             logon.Body.account_name = details.Username;
             logon.Body.password = details.Password;
@@ -374,12 +392,13 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// Logs the user off of the Steam3 network.
-        /// This method does not disconnect the client.
-        /// Results are returned in a <see cref="LoggedOffCallback"/>.
+        /// Informs the Steam servers that this client wishes to log off from the network.
+        /// The Steam server will disconnect the client, and a <see cref="SteamClient.DisconnectedCallback"/> will be posted.
         /// </summary>
         public void LogOff()
         {
+            ExpectDisconnection = true;
+
             var logOff = new ClientMsgProtobuf<CMsgClientLogOff>( EMsg.ClientLogOff );
             this.Client.Send( logOff );
         }
@@ -418,16 +437,17 @@ namespace SteamKit2
         /// <summary>
         /// Requests a new WebAPI authentication user nonce.
         /// Results are returned in a <see cref="WebAPIUserNonceCallback"/>.
+        /// The returned <see cref="AsyncJob{T}"/> can also be awaited to retrieve the callback result.
         /// </summary>
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="WebAPIUserNonceCallback"/>.</returns>
-        public JobID RequestWebAPIUserNonce()
+        public AsyncJob<WebAPIUserNonceCallback> RequestWebAPIUserNonce()
         {
             var reqMsg = new ClientMsgProtobuf<CMsgClientRequestWebAPIAuthenticateUserNonce>( EMsg.ClientRequestWebAPIAuthenticateUserNonce );
             reqMsg.SourceJobID = Client.GetNextJobID();
 
             this.Client.Send( reqMsg );
 
-            return reqMsg.SourceJobID;
+            return new AsyncJob<WebAPIUserNonceCallback>( this.Client, reqMsg.SourceJobID );
         }
 
         /// <summary>
