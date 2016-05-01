@@ -1932,6 +1932,9 @@ namespace SteamKit2
 		EmailSendFailure = 99,
 		NotSettled = 100,
 		NeedCaptcha = 101,
+		GSLTDenied = 102,
+		GSOwnerDenied = 103,
+		InvalidItemType = 104,
 	}
 	public enum EUniverse
 	{
