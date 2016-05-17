@@ -319,6 +319,12 @@ namespace SteamKit2.GC.Dota.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCPingResponse", Value=3002)]
       k_EMsgGCPingResponse = 3002,
             
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToClientPollConvarRequest", Value=3003)]
+      k_EMsgGCToClientPollConvarRequest = 3003,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToClientPollConvarResponse", Value=3004)]
+      k_EMsgGCToClientPollConvarResponse = 3004,
+            
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCClientWelcome", Value=4004)]
       k_EMsgGCClientWelcome = 4004,
             

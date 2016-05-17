@@ -2385,6 +2385,15 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _steamid; }
       set { _steamid = value; }
     }
+
+    private bool _include_friendship_timestamps = default(bool);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"include_friendship_timestamps", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool include_friendship_timestamps
+    {
+      get { return _include_friendship_timestamps; }
+      set { _include_friendship_timestamps = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -2409,6 +2418,13 @@ namespace SteamKit2.GC.Dota.Internal
     public global::System.Collections.Generic.List<ulong> steamids
     {
       get { return _steamids; }
+    }
+  
+    private readonly global::System.Collections.Generic.List<uint> _friendship_timestamps = new global::System.Collections.Generic.List<uint>();
+    [global::ProtoBuf.ProtoMember(3, Name=@"friendship_timestamps", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public global::System.Collections.Generic.List<uint> friendship_timestamps
+    {
+      get { return _friendship_timestamps; }
     }
   
     private global::ProtoBuf.IExtension extensionObject;
@@ -3544,7 +3560,10 @@ namespace SteamKit2.GC.Dota.Internal
       GCProtoBufMsgSrc_FromGC = 3,
             
       [global::ProtoBuf.ProtoEnum(Name=@"GCProtoBufMsgSrc_ReplySystem", Value=4)]
-      GCProtoBufMsgSrc_ReplySystem = 4
+      GCProtoBufMsgSrc_ReplySystem = 4,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"GCProtoBufMsgSrc_SpoofedSteamID", Value=5)]
+      GCProtoBufMsgSrc_SpoofedSteamID = 5
     }
   
 }

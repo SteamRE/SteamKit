@@ -1024,6 +1024,15 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _items_game_url; }
       set { _items_game_url = value; }
     }
+
+    private uint _gc_socache_file_version = default(uint);
+    [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"gc_socache_file_version", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint gc_socache_file_version
+    {
+      get { return _gc_socache_file_version; }
+      set { _gc_socache_file_version = value; }
+    }
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Location")]
   public partial class Location : global::ProtoBuf.IExtensible
   {
@@ -1597,6 +1606,202 @@ namespace SteamKit2.GC.Dota.Internal
     {
       get { return _frame_data; }
       set { _frame_data = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgSerializedSOCache")]
+  public partial class CMsgSerializedSOCache : global::ProtoBuf.IExtensible
+  {
+    public CMsgSerializedSOCache() {}
+    
+
+    private uint _file_version = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"file_version", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint file_version
+    {
+      get { return _file_version; }
+      set { _file_version = value; }
+    }
+    private readonly global::System.Collections.Generic.List<CMsgSerializedSOCache.Cache> _caches = new global::System.Collections.Generic.List<CMsgSerializedSOCache.Cache>();
+    [global::ProtoBuf.ProtoMember(2, Name=@"caches", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CMsgSerializedSOCache.Cache> caches
+    {
+      get { return _caches; }
+    }
+  
+
+    private uint _gc_socache_file_version = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"gc_socache_file_version", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint gc_socache_file_version
+    {
+      get { return _gc_socache_file_version; }
+      set { _gc_socache_file_version = value; }
+    }
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"TypeCache")]
+  public partial class TypeCache : global::ProtoBuf.IExtensible
+  {
+    public TypeCache() {}
+    
+
+    private uint _type = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint type
+    {
+      get { return _type; }
+      set { _type = value; }
+    }
+    private readonly global::System.Collections.Generic.List<byte[]> _objects = new global::System.Collections.Generic.List<byte[]>();
+    [global::ProtoBuf.ProtoMember(2, Name=@"objects", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<byte[]> objects
+    {
+      get { return _objects; }
+    }
+  
+
+    private uint _service_id = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"service_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint service_id
+    {
+      get { return _service_id; }
+      set { _service_id = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Cache")]
+  public partial class Cache : global::ProtoBuf.IExtensible
+  {
+    public Cache() {}
+    
+
+    private uint _type = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint type
+    {
+      get { return _type; }
+      set { _type = value; }
+    }
+
+    private ulong _id = default(ulong);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong id
+    {
+      get { return _id; }
+      set { _id = value; }
+    }
+    private readonly global::System.Collections.Generic.List<CMsgSerializedSOCache.Cache.Version> _versions = new global::System.Collections.Generic.List<CMsgSerializedSOCache.Cache.Version>();
+    [global::ProtoBuf.ProtoMember(3, Name=@"versions", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CMsgSerializedSOCache.Cache.Version> versions
+    {
+      get { return _versions; }
+    }
+  
+    private readonly global::System.Collections.Generic.List<CMsgSerializedSOCache.TypeCache> _type_caches = new global::System.Collections.Generic.List<CMsgSerializedSOCache.TypeCache>();
+    [global::ProtoBuf.ProtoMember(4, Name=@"type_caches", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CMsgSerializedSOCache.TypeCache> type_caches
+    {
+      get { return _type_caches; }
+    }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Version")]
+  public partial class Version : global::ProtoBuf.IExtensible
+  {
+    public Version() {}
+    
+
+    private uint _service = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"service", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint service
+    {
+      get { return _service; }
+      set { _service = value; }
+    }
+
+    private ulong _version = default(ulong);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"version", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong version
+    {
+      get { return _version; }
+      set { _version = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCToClientPollConvarRequest")]
+  public partial class CMsgGCToClientPollConvarRequest : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCToClientPollConvarRequest() {}
+    
+
+    private string _convar_name = "";
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"convar_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string convar_name
+    {
+      get { return _convar_name; }
+      set { _convar_name = value; }
+    }
+
+    private uint _poll_id = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"poll_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint poll_id
+    {
+      get { return _poll_id; }
+      set { _poll_id = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCToClientPollConvarResponse")]
+  public partial class CMsgGCToClientPollConvarResponse : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCToClientPollConvarResponse() {}
+    
+
+    private uint _poll_id = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"poll_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint poll_id
+    {
+      get { return _poll_id; }
+      set { _poll_id = value; }
+    }
+
+    private string _convar_value = "";
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"convar_value", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string convar_value
+    {
+      get { return _convar_value; }
+      set { _convar_value = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
