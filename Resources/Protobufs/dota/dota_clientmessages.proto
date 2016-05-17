@@ -8,7 +8,6 @@ enum EDotaClientMessages {
 	DOTA_CM_AspectRatio = 302;
 	DOTA_CM_MapPing = 303;
 	DOTA_CM_UnitsAutoAttack = 304;
-	DOTA_CM_AutoPurchaseItems = 305;
 	DOTA_CM_SearchString = 307;
 	DOTA_CM_Pause = 308;
 	DOTA_CM_ShopViewMode = 309;
@@ -57,6 +56,8 @@ enum EDotaClientMessages {
 	DOTA_CM_GenericBooleanConvar = 352;
 	DOTA_CM_EventPointsTip = 353;
 	DOTA_CM_MatchMetadata = 354;
+	DOTA_CM_KillMyHero = 355;
+	DOTA_CM_QuestStatus = 356;
 }
 
 message CDOTAClientMsg_MapPing {
@@ -97,8 +98,21 @@ message CDOTAClientMsg_AspectRatio {
 	optional float ratio = 1;
 }
 
-message CDOTAClientMsg_UnitsAutoAttack {
-	optional bool enabled = 1;
+message CDOTAClientMsg_UnitsAutoAttackMode {
+	enum EMode {
+		INVALID = -1;
+		NEVER = 0;
+		AFTER_SPELLCAST = 1;
+		ALWAYS = 2;
+	}
+
+	enum EUnitType {
+		NORMAL = 0;
+		SUMMONED = 1;
+	}
+
+	optional .CDOTAClientMsg_UnitsAutoAttackMode.EMode mode = 1 [default = INVALID];
+	optional .CDOTAClientMsg_UnitsAutoAttackMode.EUnitType unit_type = 2 [default = NORMAL];
 }
 
 message CDOTAClientMsg_UnitsAutoAttackAfterSpell {
@@ -112,14 +126,11 @@ message CDOTAClientMsg_TeleportRequiresHalt {
 message CDOTAClientMsg_GenericBooleanConvar {
 	enum EType {
 		FORCE_DEFAULT_RESPAWN_STINGER = 1;
+		FORCE_DEFAULT_DEATH_STINGER = 2;
 	}
 
 	optional .CDOTAClientMsg_GenericBooleanConvar.EType type = 1 [default = FORCE_DEFAULT_RESPAWN_STINGER];
 	optional bool value = 2;
-}
-
-message CDOTAClientMsg_AutoPurchaseItems {
-	optional bool enabled = 1;
 }
 
 message CDOTAClientMsg_SearchString {
@@ -291,5 +302,18 @@ message CDOTAClientMsg_XPAlert {
 message CDOTAClientMsg_MatchMetadata {
 	optional uint64 match_id = 1;
 	optional bytes metadata = 2;
+}
+
+message CDOTAClientMsg_KillMyHero {
+}
+
+message CDOTAClientMsg_QuestStatus {
+	optional uint32 quest_id = 1;
+	optional uint32 challenge_id = 2;
+	optional uint32 progress = 3;
+	optional uint32 goal = 4;
+	optional uint32 query = 5;
+	optional float fail_gametime = 6;
+	optional uint32 item_id = 7;
 }
 

@@ -299,13 +299,6 @@ message CMsgItemAcknowledged {
 	optional uint32 origin = 6;
 }
 
-message CMsgSetPresetItemPosition {
-	optional uint32 class_id = 1;
-	optional uint32 preset_id = 2;
-	optional uint32 slot_id = 3;
-	optional uint64 item_id = 4;
-}
-
 message CMsgSetItemPositions {
 	message ItemPosition {
 		optional uint64 item_id = 1;
@@ -313,28 +306,6 @@ message CMsgSetItemPositions {
 	}
 
 	repeated .CMsgSetItemPositions.ItemPosition item_positions = 1;
-}
-
-message CSOEconItemPresetInstance {
-	optional uint32 class_id = 2 [(key_field) = true];
-	optional uint32 preset_id = 3 [(key_field) = true];
-	optional uint32 slot_id = 4 [(key_field) = true];
-	optional uint64 item_id = 5;
-}
-
-message CMsgSelectItemPresetForClass {
-	optional uint32 class_id = 1;
-	optional uint32 preset_id = 2;
-}
-
-message CMsgSelectItemPresetForClassReply {
-	optional bool success = 1;
-}
-
-message CSOSelectedItemPreset {
-	optional uint32 account_id = 1 [(key_field) = true];
-	optional uint32 class_id = 2 [(key_field) = true];
-	optional uint32 preset_id = 3;
 }
 
 message CMsgGCNameItemNotification {
@@ -470,10 +441,6 @@ message CMsgSDONoMemcached {
 
 message CMsgGCToGCUpdateSQLKeyValue {
 	optional string key_name = 1;
-}
-
-message CMsgGCToGCBroadcastConsoleCommand {
-	optional string con_command = 1;
 }
 
 message CMsgGCServerVersionUpdated {

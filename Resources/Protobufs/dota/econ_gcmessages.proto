@@ -1,4 +1,5 @@
 import "steammessages.proto";
+import "econ_shared_enums.proto";
 
 option optimize_for = SPEED;
 option cc_generic_services = false;
@@ -173,25 +174,21 @@ enum EGCItemMsg {
 	k_EMsgClientToGCUnpackBundle = 2576;
 	k_EMsgClientToGCSetItemStyle = 2577;
 	k_EMsgClientToGCSetItemStyleResponse = 2578;
-	k_EMsgGCGenericResult = 2579;
 	k_EMsgSQLGCToGCGrantBackpackSlots = 2580;
 	k_EMsgClientToGCLookupAccountName = 2581;
 	k_EMsgClientToGCLookupAccountNameResponse = 2582;
 	k_EMsgGCToGCDevRevokeUserItems = 2583;
 	k_EMsgClientToGCCreateStaticRecipe = 2584;
 	k_EMsgClientToGCCreateStaticRecipeResponse = 2585;
-}
-
-enum EGCMsgResponse {
-	k_EGCMsgResponseOK = 0;
-	k_EGCMsgResponseDenied = 1;
-	k_EGCMsgResponseServerError = 2;
-	k_EGCMsgResponseTimeout = 3;
-	k_EGCMsgResponseInvalid = 4;
-	k_EGCMsgResponseNoMatch = 5;
-	k_EGCMsgResponseUnknownError = 6;
-	k_EGCMsgResponseNotLoggedOn = 7;
-	k_EGCMsgFailedToCreate = 8;
+	k_EMsgGCToGCStoreProcessCDKeyTransaction = 2586;
+	k_EMsgGCToGCStoreProcessCDKeyTransactionResponse = 2587;
+	k_EMsgGCToGCStoreProcessSettlement = 2588;
+	k_EMsgGCToGCStoreProcessSettlementResponse = 2589;
+	k_EMsgGCToGCConsoleOutput = 2590;
+	k_EMsgGCToClientItemAges = 2591;
+	k_EMsgGCToGCInternalTestMsg = 2592;
+	k_EMsgGCToGCClientServerVersionsUpdated = 2593;
+	k_EMsgGCUseMultipleItemsRequest = 2594;
 }
 
 enum EItemPurgatoryResponse_Finalize {
@@ -210,13 +207,6 @@ enum EItemPurgatoryResponse_Refund {
 	k_ItemPurgatoryResponse_Refund_Failed_NoSOCache = 3;
 	k_ItemPurgatoryResponse_Refund_Failed_NoDetail = 4;
 	k_ItemPurgatoryResponse_Refund_Failed_NexonWebAPI = 5;
-}
-
-enum EGCPartnerRequestResponse {
-	k_EPartnerRequestOK = 1;
-	k_EPartnerRequestBadAccount = 2;
-	k_EPartnerRequestNotLinked = 3;
-	k_EPartnerRequestUnsupportedPartnerType = 4;
 }
 
 enum EGCMsgInitiateTradeResponse {
@@ -455,6 +445,10 @@ message CMsgUseItem {
 message CMsgServerUseItem {
 	optional uint32 initiator_account_id = 1;
 	optional .CMsgUseItem use_item_msg = 2;
+}
+
+message CMsgUseMultipleItems {
+	repeated uint64 item_ids = 1;
 }
 
 message CMsgGCPartnerBalanceRequest {
@@ -780,10 +774,6 @@ message CWorkshop_GetItemDailyRevenue_Response {
 	repeated .CWorkshop_GetItemDailyRevenue_Response.CountryDailyRevenue country_revenue = 1;
 }
 
-message CMsgGenericResult {
-	optional uint32 eresult = 1 [default = 2];
-}
-
 message CMsgSQLGCToGCGrantBackpackSlots {
 	optional uint32 account_id = 1;
 	optional uint32 add_slots = 2;
@@ -830,5 +820,91 @@ message CMsgClientToGCCreateStaticRecipeResponse {
 
 	optional .CMsgClientToGCCreateStaticRecipeResponse.EResponse response = 1 [default = eResponse_Success];
 	repeated .CMsgClientToGCCreateStaticRecipeResponse.OutputItem output_items = 2;
+}
+
+message CMsgProcessTransactionOrder {
+	message Item {
+		optional uint32 item_def_index = 1;
+		optional uint32 item_price = 2;
+		optional uint32 quantity = 3;
+		optional string category_desc = 4;
+		optional uint32 store_purchase_type = 5;
+		optional uint64 source_reference_id = 6;
+		optional int32 parent_stack_index = 7;
+		optional bool default_price = 8;
+		optional bool is_user_facing = 9;
+	}
+
+	optional uint64 txn_id = 1;
+	optional uint64 steam_txn_id = 2;
+	optional uint64 partner_txn_id = 3;
+	optional fixed64 steam_id = 4;
+	optional uint32 time_stamp = 5;
+	optional uint64 watermark = 6;
+	optional int32 purchase_report_status = 7;
+	optional uint32 currency = 8;
+	repeated .CMsgProcessTransactionOrder.Item items = 9;
+}
+
+message CMsgGCToGCStoreProcessCDKeyTransaction {
+	optional .CMsgProcessTransactionOrder order = 1;
+	optional uint32 reason_code = 2;
+}
+
+message CMsgGCToGCStoreProcessCDKeyTransactionResponse {
+	optional bool success = 1;
+}
+
+message CMsgGCToGCStoreProcessSettlement {
+	optional .CMsgProcessTransactionOrder order = 1;
+	optional uint32 partner = 2;
+}
+
+message CMsgGCToGCStoreProcessSettlementResponse {
+	optional bool success = 1;
+}
+
+message CMsgGCToGCBroadcastConsoleCommand {
+	optional string con_command = 1;
+	optional bool report_output = 2;
+	optional uint32 sending_gc = 3;
+	optional string output_initiator = 4;
+}
+
+message CMsgGCToGCConsoleOutput {
+	message OutputLine {
+		optional string text = 1;
+		optional uint32 spew_level = 2;
+	}
+
+	optional string initiator = 1;
+	optional uint32 sending_gc = 2;
+	repeated .CMsgGCToGCConsoleOutput.OutputLine msgs = 3;
+}
+
+message CMsgItemAges {
+	message MaxItemIDTimestamp {
+		optional uint32 timestamp = 1;
+		optional uint64 max_item_id = 2;
+	}
+
+	repeated .CMsgItemAges.MaxItemIDTimestamp max_item_id_timestamps = 1;
+}
+
+message CMsgGCToGCInternalTestMsg {
+	optional uint32 sending_gc = 1;
+	optional fixed64 sender_id = 2;
+	optional uint32 context = 3;
+	optional uint32 message_id = 4;
+	optional bytes message_body = 5;
+	optional fixed64 job_id_source = 6;
+	optional fixed64 job_id_target = 7;
+}
+
+message CMsgGCToGCClientServerVersionsUpdated {
+	optional uint32 client_min_allowed_version = 1;
+	optional uint32 client_active_version = 2;
+	optional uint32 server_active_version = 3;
+	optional uint32 server_deployed_version = 4;
 }
 

@@ -98,6 +98,8 @@ enum EDotaUserMessages {
 	DOTA_UM_XPAlert = 555;
 	DOTA_UM_UpdateQuestProgress = 556;
 	DOTA_UM_MatchMetadata = 557;
+	DOTA_UM_MatchDetails = 558;
+	DOTA_UM_QuestStatus = 559;
 }
 
 enum DOTA_CHAT_MESSAGE {
@@ -189,6 +191,11 @@ enum DOTA_CHAT_MESSAGE {
 	CHAT_MESSAGE_YEAR_BEAST_KILLED = 93;
 	CHAT_MESSAGE_PAUSE_COUNTDOWN = 94;
 	CHAT_MESSAGE_COINS_WAGERED = 95;
+	CHAT_MESSAGE_HERO_NOMINATED_BAN = 96;
+	CHAT_MESSAGE_HERO_BANNED = 97;
+	CHAT_MESSAGE_HERO_BAN_COUNT = 98;
+	CHAT_MESSAGE_RIVER_PAINTED = 99;
+	CHAT_MESSAGE_SCAN_USED = 100;
 }
 
 enum DOTA_NO_BATTLE_POINTS_REASONS {
@@ -258,6 +265,7 @@ enum DOTA_OVERHEAD_ALERT {
 	OVERHEAD_ALERT_LAST_HIT_EARLY = 13;
 	OVERHEAD_ALERT_LAST_HIT_CLOSE = 14;
 	OVERHEAD_ALERT_LAST_HIT_MISS = 15;
+	OVERHEAD_ALERT_MAGICAL_BLOCK = 16;
 }
 
 enum DOTA_POSITION_CATEGORY {
@@ -614,6 +622,7 @@ message CDOTAUserMsg_UnitEvent {
 		optional int32 slot = 2;
 		optional float fade_in = 3 [default = 0];
 		optional float fade_out = 4 [default = 0.1];
+		optional float playback_rate = 5 [default = 1];
 	}
 
 	message RemoveGesture {
@@ -1144,5 +1153,16 @@ message CDOTAUserMsg_XPAlert {
 }
 
 message CDOTAUserMsg_UpdateQuestProgress {
+}
+
+message CDOTAUserMsg_QuestStatus {
+	required uint32 player_id = 1;
+	optional uint32 quest_id = 2;
+	optional uint32 challenge_id = 3;
+	optional uint32 progress = 4;
+	optional uint32 goal = 5;
+	optional uint32 query = 6;
+	optional float fail_gametime = 7;
+	optional uint32 item_id = 8;
 }
 

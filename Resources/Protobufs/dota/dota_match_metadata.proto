@@ -1,4 +1,5 @@
 import "base_gcmessages.proto";
+import "dota_gcmessages_common.proto";
 
 option cc_generic_services = false;
 
@@ -11,11 +12,38 @@ message CDOTAMatchMetadataFile {
 
 message CDOTAMatchMetadata {
 	message Team {
+		message PlayerKill {
+			optional uint32 victim_slot = 1;
+			optional uint32 count = 2;
+		}
+
+		message ItemPurchase {
+			optional uint32 item_id = 1;
+			optional uint32 purchase_time = 2;
+		}
+
 		message Player {
 			optional uint32 account_id = 1;
 			repeated uint32 ability_upgrades = 2;
 			optional uint32 player_slot = 3;
 			repeated .CSOEconItem equipped_econ_items = 4;
+			repeated .CDOTAMatchMetadata.Team.PlayerKill kills = 5;
+			repeated .CDOTAMatchMetadata.Team.ItemPurchase items = 6;
+			optional uint32 avg_kills_x16 = 7;
+			optional uint32 avg_deaths_x16 = 8;
+			optional uint32 avg_assists_x16 = 9;
+			optional uint32 avg_gpm_x16 = 10;
+			optional uint32 avg_xpm_x16 = 11;
+			optional uint32 best_kills_x16 = 12;
+			optional uint32 best_assists_x16 = 13;
+			optional uint32 best_gpm_x16 = 14;
+			optional uint32 best_xpm_x16 = 15;
+			optional uint32 win_streak = 16;
+			optional uint32 best_win_streak = 17;
+			optional float fight_score = 18;
+			optional float farm_score = 19;
+			optional float support_score = 20;
+			optional float push_score = 21;
 		}
 
 		optional uint32 dota_team = 1;
@@ -23,9 +51,15 @@ message CDOTAMatchMetadata {
 		repeated float graph_experience = 3;
 		repeated float graph_gold_earned = 4;
 		repeated float graph_net_worth = 5;
+		optional bool cm_first_pick = 6;
+		optional uint32 cm_captain_player_id = 7;
+		repeated uint32 cm_bans = 8;
+		repeated uint32 cm_picks = 9;
+		optional uint32 cm_penalty = 10;
 	}
 
 	repeated .CDOTAMatchMetadata.Team teams = 1;
+	repeated .CLobbyTimedRewardDetails item_rewards = 2;
 }
 
 message CDOTAMatchPrivateMetadata {

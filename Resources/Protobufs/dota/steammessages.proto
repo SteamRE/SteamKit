@@ -18,6 +18,7 @@ enum GCProtoBufMsgSrc {
 	GCProtoBufMsgSrc_FromSteamID = 2;
 	GCProtoBufMsgSrc_FromGC = 3;
 	GCProtoBufMsgSrc_ReplySystem = 4;
+	GCProtoBufMsgSrc_SpoofedSteamID = 5;
 }
 
 message CMsgProtoBufHeader {
@@ -401,11 +402,13 @@ message CMsgGCCheckFriendship_Response {
 
 message CMsgGCGetAppFriendsList {
 	optional fixed64 steamid = 1;
+	optional bool include_friendship_timestamps = 2;
 }
 
 message CMsgGCGetAppFriendsList_Response {
 	optional bool success = 1;
 	repeated fixed64 steamids = 2;
+	repeated fixed32 friendship_timestamps = 3;
 }
 
 message CMsgGCMsgMasterSetDirectory {
