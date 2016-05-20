@@ -14,6 +14,7 @@
 // Note: requires additional types generated from: dota_gcmessages_common.proto
 // Note: requires additional types generated from: econ_gcmessages.proto
 // Note: requires additional types generated from: network_connection.proto
+// Note: requires additional types generated from: dota_gcmessages_common_match_management.proto
 namespace SteamKit2.GC.Dota.Internal
 {
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgSpawnLootGreevil")]

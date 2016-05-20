@@ -11,6 +11,239 @@
 // Generated from: dota_shared_enums.proto
 namespace SteamKit2.GC.Dota.Internal
 {
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CDOTAClientHardwareSpecs")]
+  public partial class CDOTAClientHardwareSpecs : global::ProtoBuf.IExtensible
+  {
+    public CDOTAClientHardwareSpecs() {}
+    
+
+    private uint _logical_processors = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"logical_processors", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint logical_processors
+    {
+      get { return _logical_processors; }
+      set { _logical_processors = value; }
+    }
+
+    private ulong _cpu_cycles_per_second = default(ulong);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"cpu_cycles_per_second", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong cpu_cycles_per_second
+    {
+      get { return _cpu_cycles_per_second; }
+      set { _cpu_cycles_per_second = value; }
+    }
+
+    private ulong _total_physical_memory = default(ulong);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"total_physical_memory", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong total_physical_memory
+    {
+      get { return _total_physical_memory; }
+      set { _total_physical_memory = value; }
+    }
+
+    private bool _is_64_bit_os = default(bool);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"is_64_bit_os", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool is_64_bit_os
+    {
+      get { return _is_64_bit_os; }
+      set { _is_64_bit_os = value; }
+    }
+
+    private ulong _upload_measurement = default(ulong);
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"upload_measurement", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong upload_measurement
+    {
+      get { return _upload_measurement; }
+      set { _upload_measurement = value; }
+    }
+
+    private bool _prefer_not_host = default(bool);
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"prefer_not_host", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool prefer_not_host
+    {
+      get { return _prefer_not_host; }
+      set { _prefer_not_host = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CDOTASaveGame")]
+  public partial class CDOTASaveGame : global::ProtoBuf.IExtensible
+  {
+    public CDOTASaveGame() {}
+    
+
+    private ulong _match_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"match_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong match_id
+    {
+      get { return _match_id; }
+      set { _match_id = value; }
+    }
+
+    private uint _save_time = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"save_time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint save_time
+    {
+      get { return _save_time; }
+      set { _save_time = value; }
+    }
+    private readonly global::System.Collections.Generic.List<CDOTASaveGame.Player> _players = new global::System.Collections.Generic.List<CDOTASaveGame.Player>();
+    [global::ProtoBuf.ProtoMember(3, Name=@"players", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CDOTASaveGame.Player> players
+    {
+      get { return _players; }
+    }
+  
+    private readonly global::System.Collections.Generic.List<CDOTASaveGame.SaveInstance> _save_instances = new global::System.Collections.Generic.List<CDOTASaveGame.SaveInstance>();
+    [global::ProtoBuf.ProtoMember(4, Name=@"save_instances", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CDOTASaveGame.SaveInstance> save_instances
+    {
+      get { return _save_instances; }
+    }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Player")]
+  public partial class Player : global::ProtoBuf.IExtensible
+  {
+    public Player() {}
+    
+
+    private DOTA_GC_TEAM _team = DOTA_GC_TEAM.DOTA_GC_TEAM_GOOD_GUYS;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"team", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(DOTA_GC_TEAM.DOTA_GC_TEAM_GOOD_GUYS)]
+    public DOTA_GC_TEAM team
+    {
+      get { return _team; }
+      set { _team = value; }
+    }
+
+    private string _name = "";
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"name", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string name
+    {
+      get { return _name; }
+      set { _name = value; }
+    }
+
+    private string _hero = "";
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"hero", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string hero
+    {
+      get { return _hero; }
+      set { _hero = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"SaveInstance")]
+  public partial class SaveInstance : global::ProtoBuf.IExtensible
+  {
+    public SaveInstance() {}
+    
+
+    private uint _game_time = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"game_time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint game_time
+    {
+      get { return _game_time; }
+      set { _game_time = value; }
+    }
+
+    private uint _team1_score = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"team1_score", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint team1_score
+    {
+      get { return _team1_score; }
+      set { _team1_score = value; }
+    }
+
+    private uint _team2_score = default(uint);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"team2_score", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint team2_score
+    {
+      get { return _team2_score; }
+      set { _team2_score = value; }
+    }
+    private readonly global::System.Collections.Generic.List<CDOTASaveGame.SaveInstance.PlayerPositions> _player_positions = new global::System.Collections.Generic.List<CDOTASaveGame.SaveInstance.PlayerPositions>();
+    [global::ProtoBuf.ProtoMember(5, Name=@"player_positions", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CDOTASaveGame.SaveInstance.PlayerPositions> player_positions
+    {
+      get { return _player_positions; }
+    }
+  
+
+    private uint _save_id = default(uint);
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"save_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint save_id
+    {
+      get { return _save_id; }
+      set { _save_id = value; }
+    }
+
+    private uint _save_time = default(uint);
+    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"save_time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint save_time
+    {
+      get { return _save_time; }
+      set { _save_time = value; }
+    }
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"PlayerPositions")]
+  public partial class PlayerPositions : global::ProtoBuf.IExtensible
+  {
+    public PlayerPositions() {}
+    
+
+    private float _x = default(float);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"x", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(float))]
+    public float x
+    {
+      get { return _x; }
+      set { _x = value; }
+    }
+
+    private float _y = default(float);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"y", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(float))]
+    public float y
+    {
+      get { return _y; }
+      set { _y = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     [global::ProtoBuf.ProtoContract(Name=@"DOTA_GameMode", EnumPassthru=true)]
     public enum DOTA_GameMode
     {
@@ -417,6 +650,316 @@ namespace SteamKit2.GC.Dota.Internal
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMatchGroupServerStatus_Offline", Value=2)]
       k_EMatchGroupServerStatus_Offline = 2
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"DOTA_CM_PICK", EnumPassthru=true)]
+    public enum DOTA_CM_PICK
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_CM_RANDOM", Value=0)]
+      DOTA_CM_RANDOM = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_CM_GOOD_GUYS", Value=1)]
+      DOTA_CM_GOOD_GUYS = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_CM_BAD_GUYS", Value=2)]
+      DOTA_CM_BAD_GUYS = 2
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"DOTALowPriorityBanType", EnumPassthru=true)]
+    public enum DOTALowPriorityBanType
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_LOW_PRIORITY_BAN_ABANDON", Value=0)]
+      DOTA_LOW_PRIORITY_BAN_ABANDON = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_LOW_PRIORITY_BAN_REPORTS", Value=1)]
+      DOTA_LOW_PRIORITY_BAN_REPORTS = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_LOW_PRIORITY_BAN_SECONDARY_ABANDON", Value=2)]
+      DOTA_LOW_PRIORITY_BAN_SECONDARY_ABANDON = 2
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"DOTALobbyReadyState", EnumPassthru=true)]
+    public enum DOTALobbyReadyState
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTALobbyReadyState_UNDECLARED", Value=0)]
+      DOTALobbyReadyState_UNDECLARED = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTALobbyReadyState_ACCEPTED", Value=1)]
+      DOTALobbyReadyState_ACCEPTED = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTALobbyReadyState_DECLINED", Value=2)]
+      DOTALobbyReadyState_DECLINED = 2
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"DOTAGameVersion", EnumPassthru=true)]
+    public enum DOTAGameVersion
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"GAME_VERSION_CURRENT", Value=0)]
+      GAME_VERSION_CURRENT = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"GAME_VERSION_STABLE", Value=1)]
+      GAME_VERSION_STABLE = 1
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"DOTAJoinLobbyResult", EnumPassthru=true)]
+    public enum DOTAJoinLobbyResult
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_JOIN_RESULT_SUCCESS", Value=0)]
+      DOTA_JOIN_RESULT_SUCCESS = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_JOIN_RESULT_ALREADY_IN_GAME", Value=1)]
+      DOTA_JOIN_RESULT_ALREADY_IN_GAME = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_JOIN_RESULT_INVALID_LOBBY", Value=2)]
+      DOTA_JOIN_RESULT_INVALID_LOBBY = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_JOIN_RESULT_INCORRECT_PASSWORD", Value=3)]
+      DOTA_JOIN_RESULT_INCORRECT_PASSWORD = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_JOIN_RESULT_ACCESS_DENIED", Value=4)]
+      DOTA_JOIN_RESULT_ACCESS_DENIED = 4,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_JOIN_RESULT_GENERIC_ERROR", Value=5)]
+      DOTA_JOIN_RESULT_GENERIC_ERROR = 5,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_JOIN_RESULT_INCORRECT_VERSION", Value=6)]
+      DOTA_JOIN_RESULT_INCORRECT_VERSION = 6,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_JOIN_RESULT_IN_TEAM_PARTY", Value=7)]
+      DOTA_JOIN_RESULT_IN_TEAM_PARTY = 7,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_JOIN_RESULT_NO_LOBBY_FOUND", Value=8)]
+      DOTA_JOIN_RESULT_NO_LOBBY_FOUND = 8,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_JOIN_RESULT_LOBBY_FULL", Value=9)]
+      DOTA_JOIN_RESULT_LOBBY_FULL = 9,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_JOIN_RESULT_CUSTOM_GAME_INCORRECT_VERSION", Value=10)]
+      DOTA_JOIN_RESULT_CUSTOM_GAME_INCORRECT_VERSION = 10
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"SelectionPriorityType", EnumPassthru=true)]
+    public enum SelectionPriorityType
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"UNDEFINED", Value=0)]
+      UNDEFINED = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"RADIANT", Value=1)]
+      RADIANT = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DIRE", Value=2)]
+      DIRE = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"FIRST_PICK", Value=3)]
+      FIRST_PICK = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"SECOND_PICK", Value=4)]
+      SECOND_PICK = 4
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"DOTAMatchVote", EnumPassthru=true)]
+    public enum DOTAMatchVote
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTAMatchVote_INVALID", Value=0)]
+      DOTAMatchVote_INVALID = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTAMatchVote_POSITIVE", Value=1)]
+      DOTAMatchVote_POSITIVE = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTAMatchVote_NEGATIVE", Value=2)]
+      DOTAMatchVote_NEGATIVE = 2
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"DOTA_LobbyMemberXPBonus", EnumPassthru=true)]
+    public enum DOTA_LobbyMemberXPBonus
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_LobbyMemberXPBonus_DEFAULT", Value=0)]
+      DOTA_LobbyMemberXPBonus_DEFAULT = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_LobbyMemberXPBonus_BATTLE_BOOSTER", Value=1)]
+      DOTA_LobbyMemberXPBonus_BATTLE_BOOSTER = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_LobbyMemberXPBonus_SHARE_BONUS", Value=2)]
+      DOTA_LobbyMemberXPBonus_SHARE_BONUS = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_LobbyMemberXPBonus_PARTY", Value=3)]
+      DOTA_LobbyMemberXPBonus_PARTY = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_LobbyMemberXPBonus_RECRUITMENT", Value=4)]
+      DOTA_LobbyMemberXPBonus_RECRUITMENT = 4,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_LobbyMemberXPBonus_PCBANG", Value=5)]
+      DOTA_LobbyMemberXPBonus_PCBANG = 5
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"DOTALobbyVisibility", EnumPassthru=true)]
+    public enum DOTALobbyVisibility
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTALobbyVisibility_Public", Value=0)]
+      DOTALobbyVisibility_Public = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTALobbyVisibility_Friends", Value=1)]
+      DOTALobbyVisibility_Friends = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTALobbyVisibility_Unlisted", Value=2)]
+      DOTALobbyVisibility_Unlisted = 2
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"EDOTAPlayerMMRType", EnumPassthru=true)]
+    public enum EDOTAPlayerMMRType
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EDOTAPlayerMMRType_Invalid", Value=0)]
+      k_EDOTAPlayerMMRType_Invalid = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EDOTAPlayerMMRType_GeneralHidden", Value=1)]
+      k_EDOTAPlayerMMRType_GeneralHidden = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EDOTAPlayerMMRType_SoloHidden", Value=2)]
+      k_EDOTAPlayerMMRType_SoloHidden = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EDOTAPlayerMMRType_GeneralCompetitive", Value=3)]
+      k_EDOTAPlayerMMRType_GeneralCompetitive = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EDOTAPlayerMMRType_SoloCompetitive", Value=4)]
+      k_EDOTAPlayerMMRType_SoloCompetitive = 4,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EDOTAPlayerMMRType_1v1Competitive", Value=5)]
+      k_EDOTAPlayerMMRType_1v1Competitive = 5,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EDOTAPlayerMMRType_GeneralSeasonalRanked", Value=6)]
+      k_EDOTAPlayerMMRType_GeneralSeasonalRanked = 6,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EDOTAPlayerMMRType_SoloSeasonalRanked", Value=7)]
+      k_EDOTAPlayerMMRType_SoloSeasonalRanked = 7
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"MatchType", EnumPassthru=true)]
+    public enum MatchType
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"MATCH_TYPE_CASUAL", Value=0)]
+      MATCH_TYPE_CASUAL = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"MATCH_TYPE_COOP_BOTS", Value=1)]
+      MATCH_TYPE_COOP_BOTS = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"MATCH_TYPE_TEAM_RANKED", Value=2)]
+      MATCH_TYPE_TEAM_RANKED = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"MATCH_TYPE_LEGACY_SOLO_QUEUE", Value=3)]
+      MATCH_TYPE_LEGACY_SOLO_QUEUE = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"MATCH_TYPE_COMPETITIVE", Value=4)]
+      MATCH_TYPE_COMPETITIVE = 4,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"MATCH_TYPE_WEEKEND_TOURNEY", Value=5)]
+      MATCH_TYPE_WEEKEND_TOURNEY = 5,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"MATCH_TYPE_CASUAL_1V1", Value=6)]
+      MATCH_TYPE_CASUAL_1V1 = 6,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"MATCH_TYPE_EVENT", Value=7)]
+      MATCH_TYPE_EVENT = 7,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"MATCH_TYPE_SEASONAL_RANKED", Value=8)]
+      MATCH_TYPE_SEASONAL_RANKED = 8
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"DOTABotDifficulty", EnumPassthru=true)]
+    public enum DOTABotDifficulty
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"BOT_DIFFICULTY_PASSIVE", Value=0)]
+      BOT_DIFFICULTY_PASSIVE = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"BOT_DIFFICULTY_EASY", Value=1)]
+      BOT_DIFFICULTY_EASY = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"BOT_DIFFICULTY_MEDIUM", Value=2)]
+      BOT_DIFFICULTY_MEDIUM = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"BOT_DIFFICULTY_HARD", Value=3)]
+      BOT_DIFFICULTY_HARD = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"BOT_DIFFICULTY_UNFAIR", Value=4)]
+      BOT_DIFFICULTY_UNFAIR = 4,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"BOT_DIFFICULTY_INVALID", Value=5)]
+      BOT_DIFFICULTY_INVALID = 5,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"BOT_DIFFICULTY_EXTRA1", Value=6)]
+      BOT_DIFFICULTY_EXTRA1 = 6,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"BOT_DIFFICULTY_EXTRA2", Value=7)]
+      BOT_DIFFICULTY_EXTRA2 = 7,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"BOT_DIFFICULTY_EXTRA3", Value=8)]
+      BOT_DIFFICULTY_EXTRA3 = 8
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"MatchLanguages", EnumPassthru=true)]
+    public enum MatchLanguages
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"MATCH_LANGUAGE_INVALID", Value=0)]
+      MATCH_LANGUAGE_INVALID = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"MATCH_LANGUAGE_ENGLISH", Value=1)]
+      MATCH_LANGUAGE_ENGLISH = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"MATCH_LANGUAGE_RUSSIAN", Value=2)]
+      MATCH_LANGUAGE_RUSSIAN = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"MATCH_LANGUAGE_CHINESE", Value=3)]
+      MATCH_LANGUAGE_CHINESE = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"MATCH_LANGUAGE_KOREAN", Value=4)]
+      MATCH_LANGUAGE_KOREAN = 4,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"MATCH_LANGUAGE_SPANISH", Value=5)]
+      MATCH_LANGUAGE_SPANISH = 5,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"MATCH_LANGUAGE_PORTUGUESE", Value=6)]
+      MATCH_LANGUAGE_PORTUGUESE = 6,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"MATCH_LANGUAGE_ENGLISH2", Value=7)]
+      MATCH_LANGUAGE_ENGLISH2 = 7
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"ETourneyQueueDeadlineState", EnumPassthru=true)]
+    public enum ETourneyQueueDeadlineState
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_ETourneyQueueDeadlineState_Normal", Value=0)]
+      k_ETourneyQueueDeadlineState_Normal = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_ETourneyQueueDeadlineState_Missed", Value=1)]
+      k_ETourneyQueueDeadlineState_Missed = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_ETourneyQueueDeadlineState_ExpiredOK", Value=2)]
+      k_ETourneyQueueDeadlineState_ExpiredOK = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_ETourneyQueueDeadlineState_SeekingBye", Value=3)]
+      k_ETourneyQueueDeadlineState_SeekingBye = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_ETourneyQueueDeadlineState_EligibleForRefund", Value=4)]
+      k_ETourneyQueueDeadlineState_EligibleForRefund = 4,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_ETourneyQueueDeadlineState_NA", Value=-1)]
+      k_ETourneyQueueDeadlineState_NA = -1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_ETourneyQueueDeadlineState_ExpiringSoon", Value=101)]
+      k_ETourneyQueueDeadlineState_ExpiringSoon = 101
     }
   
 }
