@@ -15,8 +15,6 @@ namespace NetHookAnalyzer2.Specializations
             {1, typeof(CSOEconItem)},
             {5, typeof(CSOItemRecipe)},
             {7, typeof(CSOEconGameAccountClient)},
-            {35, typeof(CSOSelectedItemPreset)},
-            {36, typeof(CSOEconItemPresetInstance)},
             {38, typeof(CSOEconItemDropRateBonus)},
             {39, typeof(CSOEconItemLeagueViewPass)},
             {40, typeof(CSOEconItemEventTicket)},
