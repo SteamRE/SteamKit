@@ -1,0 +1,253 @@
+option optimize_for = SPEED;
+option cc_generic_services = false;
+
+message CMsgDOTAGuildSDO {
+	message Member {
+		optional uint32 account_id = 1;
+		optional uint32 time_joined = 2;
+		optional uint32 role = 3;
+	}
+
+	message Invitation {
+		optional uint32 account_id = 1;
+		optional uint32 time_sent = 2;
+		optional uint32 account_id_sender = 3;
+	}
+
+	optional uint32 guild_id = 1;
+	optional string name = 2;
+	optional string tag = 3;
+	optional uint32 time_created = 4;
+	optional uint32 time_disbanded = 5;
+	optional uint64 logo = 6;
+	optional uint64 base_logo = 7;
+	optional uint64 banner_logo = 8;
+	repeated .CMsgDOTAGuildSDO.Member members = 9;
+	repeated .CMsgDOTAGuildSDO.Invitation invitations = 10;
+	optional string message = 11;
+	optional bool incremental = 12;
+}
+
+message CMsgDOTAGuildAuditSDO {
+	message Entry {
+		optional uint32 event_index = 1;
+		optional uint32 timestamp = 2;
+		optional uint32 action = 3;
+		optional uint32 account_id_requestor = 4;
+		optional uint32 account_id_target = 5;
+		optional uint32 reference_data_a = 6;
+		optional uint32 reference_data_b = 7;
+	}
+
+	optional uint32 guild_id = 1;
+	repeated .CMsgDOTAGuildAuditSDO.Entry entries = 2;
+}
+
+message CMsgDOTAAccountGuildMembershipsSDO {
+	message Membership {
+		optional uint32 guild_id = 1;
+		optional uint32 role = 2;
+	}
+
+	message Invitation {
+		optional uint32 guild_id = 1;
+		optional uint32 time_sent = 2;
+		optional uint32 account_id_sender = 3;
+	}
+
+	optional uint32 account_id = 1;
+	repeated .CMsgDOTAAccountGuildMembershipsSDO.Membership memberships = 2;
+	repeated .CMsgDOTAAccountGuildMembershipsSDO.Invitation invitations = 3;
+}
+
+message CMsgDOTAGuildCreateRequest {
+	optional string name = 1;
+	optional string tag = 2;
+	optional uint64 logo = 3;
+	optional uint64 base_logo = 4;
+	optional uint64 banner_logo = 5;
+}
+
+message CMsgDOTAGuildCreateResponse {
+	enum EError {
+		UNSPECIFIED = 0;
+		NAME_EMPTY = 1;
+		NAME_BAD_CHARACTERS = 2;
+		NAME_TOO_LONG = 3;
+		NAME_TAKEN = 4;
+		TAG_EMPTY = 5;
+		TAG_BAD_CHARACTERS = 6;
+		TAG_TOO_LONG = 7;
+		ACCOUNT_TOO_MANY_GUILDS = 8;
+		LOGO_UPLOAD_FAILED = 9;
+	}
+
+	optional uint32 guild_id = 1;
+	repeated .CMsgDOTAGuildCreateResponse.EError errors = 2;
+}
+
+message CMsgDOTAGuildSetAccountRoleRequest {
+	optional uint32 guild_id = 1;
+	optional uint32 target_account_id = 2;
+	optional uint32 target_role = 3;
+}
+
+message CMsgDOTAGuildSetAccountRoleResponse {
+	enum EResult {
+		SUCCESS = 0;
+		ERROR_UNSPECIFIED = 1;
+		ERROR_NO_PERMISSION = 2;
+		ERROR_NO_OTHER_LEADER = 3;
+		ERROR_ACCOUNT_TOO_MANY_GUILDS = 4;
+		ERROR_GUILD_TOO_MANY_MEMBERS = 5;
+	}
+
+	optional .CMsgDOTAGuildSetAccountRoleResponse.EResult result = 1 [default = SUCCESS];
+}
+
+message CMsgDOTAGuildInviteAccountRequest {
+	optional uint32 guild_id = 1;
+	optional uint32 target_account_id = 2;
+}
+
+message CMsgDOTAGuildInviteAccountResponse {
+	enum EResult {
+		SUCCESS = 0;
+		ERROR_UNSPECIFIED = 1;
+		ERROR_NO_PERMISSION = 2;
+		ERROR_ACCOUNT_ALREADY_INVITED = 3;
+		ERROR_ACCOUNT_ALREADY_IN_GUILD = 4;
+		ERROR_ACCOUNT_TOO_MANY_INVITES = 5;
+		ERROR_GUILD_TOO_MANY_INVITES = 6;
+		ERROR_ACCOUNT_TOO_MANY_GUILDS = 7;
+	}
+
+	optional .CMsgDOTAGuildInviteAccountResponse.EResult result = 1 [default = SUCCESS];
+}
+
+message CMsgDOTAGuildCancelInviteRequest {
+	optional uint32 guild_id = 1;
+	optional uint32 target_account_id = 2;
+}
+
+message CMsgDOTAGuildCancelInviteResponse {
+	enum EResult {
+		SUCCESS = 0;
+		ERROR_UNSPECIFIED = 1;
+		ERROR_NO_PERMISSION = 2;
+	}
+
+	optional .CMsgDOTAGuildCancelInviteResponse.EResult result = 1 [default = SUCCESS];
+}
+
+message CMsgDOTAGuildUpdateDetailsRequest {
+	optional uint32 guild_id = 1;
+	optional uint64 logo = 2;
+	optional uint64 base_logo = 3;
+	optional uint64 banner_logo = 4;
+}
+
+message CMsgDOTAGuildUpdateDetailsResponse {
+	enum EResult {
+		SUCCESS = 0;
+		ERROR_UNSPECIFIED = 1;
+		ERROR_NO_PERMISSION = 2;
+	}
+
+	optional .CMsgDOTAGuildUpdateDetailsResponse.EResult result = 1 [default = SUCCESS];
+}
+
+message CMsgDOTAGCToGCUpdateOpenGuildPartyRequest {
+	optional uint64 party_id = 1;
+	optional uint32 guild_id = 2;
+	repeated uint32 member_account_ids = 3;
+	optional string description = 4;
+}
+
+message CMsgDOTAGCToGCUpdateOpenGuildPartyResponse {
+	optional bool maintain_association = 1;
+}
+
+message CMsgDOTAGCToGCDestroyOpenGuildPartyRequest {
+	optional uint64 party_id = 1;
+	optional uint32 guild_id = 2;
+}
+
+message CMsgDOTAGCToGCDestroyOpenGuildPartyResponse {
+}
+
+message CMsgDOTAPartySetOpenGuildRequest {
+	optional uint32 guild_id = 1;
+	optional string description = 2;
+}
+
+message CMsgDOTAPartySetOpenGuildResponse {
+	enum EResult {
+		SUCCESS = 0;
+		ERROR_UNSPECIFIED = 1;
+	}
+
+	optional .CMsgDOTAPartySetOpenGuildResponse.EResult result = 1 [default = SUCCESS];
+}
+
+message CMsgDOTAJoinOpenGuildPartyRequest {
+	optional uint64 party_id = 1;
+}
+
+message CMsgDOTAJoinOpenGuildPartyResponse {
+	enum EResult {
+		SUCCESS = 0;
+		ERROR_UNSPECIFIED = 1;
+	}
+
+	optional .CMsgDOTAJoinOpenGuildPartyResponse.EResult result = 1 [default = SUCCESS];
+}
+
+message CMsgDOTAGuildOpenPartyRefresh {
+	message OpenParty {
+		optional uint64 party_id = 1;
+		repeated uint32 member_account_ids = 2;
+		optional uint32 time_created = 3;
+		optional string description = 4;
+	}
+
+	optional uint32 guild_id = 1;
+	repeated .CMsgDOTAGuildOpenPartyRefresh.OpenParty open_parties = 2;
+}
+
+message CMsgDOTARequestGuildData {
+}
+
+message CMsgDOTAGuildInviteData {
+	optional bool invited_to_guild = 1;
+	optional uint32 guild_id = 2;
+	optional string guild_name = 3;
+	optional string guild_tag = 4;
+	optional uint64 logo = 5;
+	optional uint32 inviter = 6;
+	optional string inviter_name = 7;
+	optional uint32 member_count = 8;
+}
+
+message CMsgDOTAGuildUpdateMessage {
+	optional string message = 1;
+	optional uint32 guild_id = 2;
+}
+
+message CMsgDOTAGuildEditLogoRequest {
+	optional uint32 guild_id = 1;
+	optional uint64 logo = 2;
+}
+
+message CMsgDOTAGuildEditLogoResponse {
+	enum EResult {
+		SUCCESS = 0;
+		NO_PERMISSION = 1;
+		LOGO_UPLOAD_FAILED = 2;
+		UNSPECIFIED_ERROR = 3;
+	}
+
+	optional uint32 guild_id = 1;
+	optional .CMsgDOTAGuildEditLogoResponse.EResult result = 2 [default = SUCCESS];
+}
+

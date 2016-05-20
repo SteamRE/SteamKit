@@ -1,5 +1,5 @@
 import "base_gcmessages.proto";
-import "dota_gcmessages_common.proto";
+import "dota_gcmessages_common_match_management.proto";
 
 option cc_generic_services = false;
 

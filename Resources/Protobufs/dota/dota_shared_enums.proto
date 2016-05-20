@@ -153,3 +153,161 @@ enum EMatchGroupServerStatus {
 	k_EMatchGroupServerStatus_Offline = 2;
 }
 
+enum DOTA_CM_PICK {
+	DOTA_CM_RANDOM = 0;
+	DOTA_CM_GOOD_GUYS = 1;
+	DOTA_CM_BAD_GUYS = 2;
+}
+
+enum DOTALowPriorityBanType {
+	DOTA_LOW_PRIORITY_BAN_ABANDON = 0;
+	DOTA_LOW_PRIORITY_BAN_REPORTS = 1;
+	DOTA_LOW_PRIORITY_BAN_SECONDARY_ABANDON = 2;
+}
+
+enum DOTALobbyReadyState {
+	DOTALobbyReadyState_UNDECLARED = 0;
+	DOTALobbyReadyState_ACCEPTED = 1;
+	DOTALobbyReadyState_DECLINED = 2;
+}
+
+enum DOTAGameVersion {
+	GAME_VERSION_CURRENT = 0;
+	GAME_VERSION_STABLE = 1;
+}
+
+enum DOTAJoinLobbyResult {
+	DOTA_JOIN_RESULT_SUCCESS = 0;
+	DOTA_JOIN_RESULT_ALREADY_IN_GAME = 1;
+	DOTA_JOIN_RESULT_INVALID_LOBBY = 2;
+	DOTA_JOIN_RESULT_INCORRECT_PASSWORD = 3;
+	DOTA_JOIN_RESULT_ACCESS_DENIED = 4;
+	DOTA_JOIN_RESULT_GENERIC_ERROR = 5;
+	DOTA_JOIN_RESULT_INCORRECT_VERSION = 6;
+	DOTA_JOIN_RESULT_IN_TEAM_PARTY = 7;
+	DOTA_JOIN_RESULT_NO_LOBBY_FOUND = 8;
+	DOTA_JOIN_RESULT_LOBBY_FULL = 9;
+	DOTA_JOIN_RESULT_CUSTOM_GAME_INCORRECT_VERSION = 10;
+}
+
+enum SelectionPriorityType {
+	UNDEFINED = 0;
+	RADIANT = 1;
+	DIRE = 2;
+	FIRST_PICK = 3;
+	SECOND_PICK = 4;
+}
+
+enum DOTAMatchVote {
+	DOTAMatchVote_INVALID = 0;
+	DOTAMatchVote_POSITIVE = 1;
+	DOTAMatchVote_NEGATIVE = 2;
+}
+
+enum DOTA_LobbyMemberXPBonus {
+	DOTA_LobbyMemberXPBonus_DEFAULT = 0;
+	DOTA_LobbyMemberXPBonus_BATTLE_BOOSTER = 1;
+	DOTA_LobbyMemberXPBonus_SHARE_BONUS = 2;
+	DOTA_LobbyMemberXPBonus_PARTY = 3;
+	DOTA_LobbyMemberXPBonus_RECRUITMENT = 4;
+	DOTA_LobbyMemberXPBonus_PCBANG = 5;
+}
+
+enum DOTALobbyVisibility {
+	DOTALobbyVisibility_Public = 0;
+	DOTALobbyVisibility_Friends = 1;
+	DOTALobbyVisibility_Unlisted = 2;
+}
+
+enum EDOTAPlayerMMRType {
+	k_EDOTAPlayerMMRType_Invalid = 0;
+	k_EDOTAPlayerMMRType_GeneralHidden = 1;
+	k_EDOTAPlayerMMRType_SoloHidden = 2;
+	k_EDOTAPlayerMMRType_GeneralCompetitive = 3;
+	k_EDOTAPlayerMMRType_SoloCompetitive = 4;
+	k_EDOTAPlayerMMRType_1v1Competitive = 5;
+	k_EDOTAPlayerMMRType_GeneralSeasonalRanked = 6;
+	k_EDOTAPlayerMMRType_SoloSeasonalRanked = 7;
+}
+
+enum MatchType {
+	MATCH_TYPE_CASUAL = 0;
+	MATCH_TYPE_COOP_BOTS = 1;
+	MATCH_TYPE_TEAM_RANKED = 2;
+	MATCH_TYPE_LEGACY_SOLO_QUEUE = 3;
+	MATCH_TYPE_COMPETITIVE = 4;
+	MATCH_TYPE_WEEKEND_TOURNEY = 5;
+	MATCH_TYPE_CASUAL_1V1 = 6;
+	MATCH_TYPE_EVENT = 7;
+	MATCH_TYPE_SEASONAL_RANKED = 8;
+}
+
+enum DOTABotDifficulty {
+	BOT_DIFFICULTY_PASSIVE = 0;
+	BOT_DIFFICULTY_EASY = 1;
+	BOT_DIFFICULTY_MEDIUM = 2;
+	BOT_DIFFICULTY_HARD = 3;
+	BOT_DIFFICULTY_UNFAIR = 4;
+	BOT_DIFFICULTY_INVALID = 5;
+	BOT_DIFFICULTY_EXTRA1 = 6;
+	BOT_DIFFICULTY_EXTRA2 = 7;
+	BOT_DIFFICULTY_EXTRA3 = 8;
+}
+
+enum MatchLanguages {
+	MATCH_LANGUAGE_INVALID = 0;
+	MATCH_LANGUAGE_ENGLISH = 1;
+	MATCH_LANGUAGE_RUSSIAN = 2;
+	MATCH_LANGUAGE_CHINESE = 3;
+	MATCH_LANGUAGE_KOREAN = 4;
+	MATCH_LANGUAGE_SPANISH = 5;
+	MATCH_LANGUAGE_PORTUGUESE = 6;
+	MATCH_LANGUAGE_ENGLISH2 = 7;
+}
+
+enum ETourneyQueueDeadlineState {
+	k_ETourneyQueueDeadlineState_Normal = 0;
+	k_ETourneyQueueDeadlineState_Missed = 1;
+	k_ETourneyQueueDeadlineState_ExpiredOK = 2;
+	k_ETourneyQueueDeadlineState_SeekingBye = 3;
+	k_ETourneyQueueDeadlineState_EligibleForRefund = 4;
+	k_ETourneyQueueDeadlineState_NA = -1;
+	k_ETourneyQueueDeadlineState_ExpiringSoon = 101;
+}
+
+message CDOTAClientHardwareSpecs {
+	optional uint32 logical_processors = 1;
+	optional fixed64 cpu_cycles_per_second = 2;
+	optional fixed64 total_physical_memory = 3;
+	optional bool is_64_bit_os = 4;
+	optional uint64 upload_measurement = 5;
+	optional bool prefer_not_host = 6;
+}
+
+message CDOTASaveGame {
+	message Player {
+		optional .DOTA_GC_TEAM team = 1 [default = DOTA_GC_TEAM_GOOD_GUYS];
+		optional string name = 2;
+		optional string hero = 3;
+	}
+
+	message SaveInstance {
+		message PlayerPositions {
+			optional float x = 1;
+			optional float y = 2;
+		}
+
+		optional uint32 game_time = 2;
+		optional uint32 team1_score = 3;
+		optional uint32 team2_score = 4;
+		repeated .CDOTASaveGame.SaveInstance.PlayerPositions player_positions = 5;
+		optional uint32 save_id = 6;
+		optional uint32 save_time = 7;
+	}
+
+	optional uint64 match_id = 5;
+	optional uint32 save_time = 2;
+	repeated .CDOTASaveGame.Player players = 3;
+	repeated .CDOTASaveGame.SaveInstance save_instances = 4;
+}
+
