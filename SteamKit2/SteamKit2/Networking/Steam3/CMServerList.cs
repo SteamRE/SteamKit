@@ -197,22 +197,6 @@ namespace SteamKit2
             lock ( listLock )
             {
                 Clear();
-                Add( new IPEndPoint( IPAddress.Parse( "208.64.200.201" ), 27017 ) );
-                Add( new IPEndPoint( IPAddress.Parse( "208.64.200.201" ), 27018 ) );
-                Add( new IPEndPoint( IPAddress.Parse( "208.64.200.201" ), 27019 ) );
-                Add( new IPEndPoint( IPAddress.Parse( "208.64.200.201" ), 27020 ) );
-                Add( new IPEndPoint( IPAddress.Parse( "208.64.200.202" ), 27017 ) );
-                Add( new IPEndPoint( IPAddress.Parse( "208.64.200.202" ), 27018 ) );
-                Add( new IPEndPoint( IPAddress.Parse( "208.64.200.202" ), 27019 ) );
-                Add( new IPEndPoint( IPAddress.Parse( "208.64.200.203" ), 27017 ) );
-                Add( new IPEndPoint( IPAddress.Parse( "208.64.200.203" ), 27018 ) );
-                Add( new IPEndPoint( IPAddress.Parse( "208.64.200.203" ), 27019 ) );
-                Add( new IPEndPoint( IPAddress.Parse( "208.64.200.204" ), 27017 ) );
-                Add( new IPEndPoint( IPAddress.Parse( "208.64.200.204" ), 27018 ) );
-                Add( new IPEndPoint( IPAddress.Parse( "208.64.200.204" ), 27019 ) );
-                Add( new IPEndPoint( IPAddress.Parse( "208.64.200.205" ), 27017 ) );
-                Add( new IPEndPoint( IPAddress.Parse( "208.64.200.205" ), 27018 ) );
-                Add( new IPEndPoint( IPAddress.Parse( "208.64.200.205" ), 27019 ) );
                 Add( new IPEndPoint( IPAddress.Parse( "208.78.164.9" ), 27017 ) );
                 Add( new IPEndPoint( IPAddress.Parse( "208.78.164.9" ), 27018 ) );
                 Add( new IPEndPoint( IPAddress.Parse( "208.78.164.9" ), 27019 ) );
