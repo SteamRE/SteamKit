@@ -40,8 +40,8 @@ namespace SteamKit2
             /// <summary>
             /// Gets or sets the LoginID. This number is used for identifying logon session.
             /// The purpose of this field is to allow multiple sessions to the same steam account from the same machine.
-            /// This is because Steam Network doesn't allow more than one session with the same LoginID to access given account at the same time.
-            /// If you want to establish more than one active session to given account, you must make sure that every session (to that account) has unique LoginID.
+            /// This is because Steam Network doesn't allow more than one session with the same LoginID to access given account at the same time from the same public IP.
+            /// If you want to establish more than one active session to given account, you must make sure that every session (to that account) from the same public IP has a unique LoginID.
             /// By default LoginID is automatically generated based on machine's primary bind address, which is the same for all sessions.
             /// Null value will cause this property to be automatically generated based on default behaviour.
             /// If in doubt, set this property to null.
