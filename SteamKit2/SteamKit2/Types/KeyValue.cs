@@ -413,6 +413,16 @@ namespace SteamKit2
         }
 
         /// <summary>
+        /// Returns the value of this instance as a DateTime object.
+        /// Example: 1427581143 As DateTime creates 3/28/2015 12:00:00 AM
+        /// </summary>
+        /// <returns>The value of this instance as a DateTime object</returns>
+        public DateTime AsDateTime()
+        {
+            return new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(Convert.ToUInt64(this.Value));
+        }
+
+        /// <summary>
         /// Attempts to convert and return the value of this instance as an enum.
         /// If the conversion is invalid, the default value is returned.
         /// </summary>
