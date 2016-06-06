@@ -49,7 +49,7 @@ namespace SteamKit2
         /// Contains information about the state of the connection, used to filter out packets that are
         /// unexpected or not valid given the state of the connection.
         /// </summary>
-        private State state;
+        private volatile int state;
 
         private Thread netThread;
         private Socket sock;
@@ -100,7 +100,7 @@ namespace SteamKit2
             sock = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
             sock.Bind(localEndPoint);
 
-            state = State.Disconnected;
+            state = (int)State.Disconnected;
         }
 
         public override IPEndPoint CurrentEndPoint
@@ -148,7 +148,7 @@ namespace SteamKit2
             // so it needs to be sent sequenced.
             SendSequenced(new UdpPacket(EUdpPacketType.Disconnect));
 
-            state = State.Disconnecting;
+            state = (int)State.Disconnecting;
 
             // Graceful shutdown allows for the connection to empty its queue of messages to send
             netThread.Join();
@@ -163,7 +163,7 @@ namespace SteamKit2
         /// <param name="clientMsg">The ClientMsg</param>
         public override void Send( IClientMsg clientMsg )
         {
-            if ( state != State.Connected )
+            if ( state != (int)State.Connected )
                 return;
 
             byte[] data = clientMsg.Serialize();
@@ -251,7 +251,7 @@ namespace SteamKit2
             {
                 DebugLog.WriteLine("UdpConnection", "Critical socket failure: " + e.ErrorCode);
 
-                state = State.Disconnected;
+                state = (int)State.Disconnected;
                 return;
             }
 
@@ -377,12 +377,18 @@ namespace SteamKit2
             timeOut = DateTime.Now.AddSeconds(TIMEOUT_DELAY);
             nextResend = DateTime.Now.AddSeconds(RESEND_DELAY);
 
-            // Begin by sending off the challenge request
-            SendPacket(new UdpPacket(EUdpPacketType.ChallengeReq));
-            state = State.ChallengeReqSent;
             var userRequestedDisconnect = false;
 
-            while ( state != State.Disconnected )
+            if (Interlocked.CompareExchange(ref state, (int)State.ChallengeReqSent, (int)State.Disconnected) != (int)State.Disconnected)
+            {
+                state = (int)State.Disconnected;
+                userRequestedDisconnect = true;
+            }
+
+            // Begin by sending off the challenge request
+            SendPacket(new UdpPacket(EUdpPacketType.ChallengeReq));
+
+            while ( state != (int)State.Disconnected )
             {
                 try
                 {
@@ -392,7 +398,7 @@ namespace SteamKit2
                     {
                         DebugLog.WriteLine("UdpConnection", "Connection timed out");
 
-                        state = State.Disconnected;
+                        state = (int)State.Disconnected;
                         break;
                     }
 
@@ -419,20 +425,20 @@ namespace SteamKit2
                 {
                     DebugLog.WriteLine("UdpConnection", "Exception occurred while reading packet: {0}", ex);
 
-                    state = State.Disconnected;
+                    state = (int)State.Disconnected;
                     break;
                 }
                 catch ( SocketException e )
                 {
                     DebugLog.WriteLine("UdpConnection", "Critical socket failure: " + e.ErrorCode);
 
-                    state = State.Disconnected;
+                    state = (int)State.Disconnected;
                     break;
                 }
 
                 // Send or resend any sequenced packets; a call to ReceivePacket can set our state to disconnected
                 // so don't send anything we have queued in that case
-                if ( state != State.Disconnected )
+                if ( state != (int)State.Disconnected )
                     SendPendingMessages();
 
                 // If we received data but had no data to send back, we need to manually Ack (usually tags along with
@@ -442,12 +448,13 @@ namespace SteamKit2
 
                 // If a graceful shutdown has been requested, nothing in the outgoing queue is discarded.
                 // Once it's empty, we exit, since the last packet was our disconnect notification.
-                if ( state == State.Disconnecting && outPackets.Count == 0 )
+                if ( state == (int)State.Disconnecting && outPackets.Count == 0 )
                 {
                     DebugLog.WriteLine("UdpConnection", "Graceful disconnect completed");
 
-                    state = State.Disconnected;
+                    state = (int)State.Disconnected;
                     userRequestedDisconnect = true;
+                    break;
                 }
             }
 
@@ -515,7 +522,7 @@ namespace SteamKit2
 
                 case EUdpPacketType.Disconnect:
                     DebugLog.WriteLine("UdpConnection", "Disconnected by server");
-                    state = State.Disconnected;
+                    state = (int)State.Disconnected;
                     return;
 
                 case EUdpPacketType.Datagram:
@@ -533,7 +540,7 @@ namespace SteamKit2
         /// <param name="packet">The packet.</param>
         private void ReceiveChallenge(UdpPacket packet)
         {
-            if ( state != State.ChallengeReqSent )
+            if ( Interlocked.CompareExchange( ref state, (int)State.ConnectSent, (int)State.ChallengeReqSent ) != (int)State.ChallengeReqSent )
                 return;
 
             ChallengeData cr = new ChallengeData();
@@ -548,7 +555,6 @@ namespace SteamKit2
 
             SendSequenced(new UdpPacket(EUdpPacketType.Connect, ms));
 
-            state = State.ConnectSent;
             inSeqHandled = packet.Header.SeqThis;
         }
 
@@ -559,12 +565,10 @@ namespace SteamKit2
         /// <param name="packet">The packet.</param>
         private void ReceiveAccept(UdpPacket packet)
         {
-            if ( state != State.ConnectSent )
+            if ( Interlocked.CompareExchange( ref state, (int)State.Connected, (int)State.ConnectSent ) != (int)State.ConnectSent )
                 return;
 
             DebugLog.WriteLine("UdpConnection", "Connection established");
-
-            state = State.Connected;
             remoteConnId = packet.Header.SourceConnID;
             inSeqHandled = packet.Header.SeqThis;
 
@@ -578,7 +582,7 @@ namespace SteamKit2
         private void ReceiveData(UdpPacket packet)
         {
             // Data packets are unexpected if a valid connection has not been established
-            if ( state != State.Connected && state != State.Disconnecting )
+            if ( state != (int)State.Connected && state != (int)State.Disconnecting )
                 return;
 
             // If we receive a packet that we've already processed (e.g. it got resent due to a lost ack)
