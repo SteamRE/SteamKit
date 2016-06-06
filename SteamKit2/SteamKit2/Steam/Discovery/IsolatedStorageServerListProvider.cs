@@ -76,7 +76,7 @@ namespace SteamKit2.Discovery
                     ProtoBuf.Serializer.Serialize(ms, endpoints.Select(ep => new ServerListProto() { ipAddress = ep.Address.ToString(), port = ep.Port }));
                     ms.Position = 0;
 
-                    using (IsolatedStorageFileStream fileStream = isolatedStorage.OpenFile("serverlist.json", FileMode.Create))
+                    using (IsolatedStorageFileStream fileStream = isolatedStorage.OpenFile(FileName, FileMode.Create))
                     {
                         await ms.CopyToAsync(fileStream);
                     }
