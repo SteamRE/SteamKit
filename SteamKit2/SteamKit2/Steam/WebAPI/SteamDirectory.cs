@@ -22,8 +22,7 @@ namespace SteamKit2
             return LoadAsync( cellid ).ContinueWith( t =>
             {
                 var servers = t.Result;
-                CMClient.Servers.Clear();
-                CMClient.Servers.TryAddRange(servers);
+                CMClient.Servers.ReplaceList(servers);
             }, CancellationToken.None, TaskContinuationOptions.NotOnFaulted | TaskContinuationOptions.NotOnCanceled, TaskScheduler.Current );
         }
 

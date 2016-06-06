@@ -356,7 +356,7 @@ namespace SteamKit2
         /// <summary>
         /// Processes incoming packets, maintains connection consistency, and oversees outgoing packets.
         /// </summary>
-        private async void NetLoop(object param)
+        private void NetLoop(object param)
         {
             if (param is IPEndPoint)
             {
@@ -365,7 +365,8 @@ namespace SteamKit2
             else
             {
                 var epTask = param as Task<IPEndPoint>;
-                remoteEndPoint = await epTask;
+                epTask.Wait();
+                remoteEndPoint = epTask.Result;
             }
 
             // Variables that will be used deeper in the function; locating them here avoids recreating

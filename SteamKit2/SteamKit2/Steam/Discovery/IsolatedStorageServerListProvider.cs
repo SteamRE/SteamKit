@@ -15,7 +15,7 @@ namespace SteamKit2.Discovery
     /// </summary>
     public class IsolatedStorageServerListProvider : ServerListProvider
     {
-        private static string FileName = "serverlist.json";
+        private static string FileName = "serverlist.protobuf";
 
         [ProtoContract]
         class ServerListProto

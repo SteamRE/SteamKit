@@ -603,7 +603,7 @@ namespace SteamKit2.Internal
                 .Zip( cmMsg.Body.cm_ports, ( addr, port ) => new IPEndPoint( NetHelpers.GetIPAddress( addr ), ( int )port ) );
 
             // update our list with steam's list of CMs
-            Servers.MergeWithList( cmList );
+            Servers.ReplaceList( cmList );
         }
         void HandleSessionToken( IPacketMsg packetMsg )
         {

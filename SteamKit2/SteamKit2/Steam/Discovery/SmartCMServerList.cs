@@ -43,44 +43,59 @@ namespace SteamKit2.Discovery
         /// <param name="allowDirectoryFetch">Specifies if we can query SteamDirectory to discover more servers</param>
         public SmartCMServerList( ServerListProvider provider, bool allowDirectoryFetch = true )
         {
-            serverListProvider = provider;
+            ServerListProvider = provider;
             canFetchDirectory = allowDirectoryFetch;
 
             servers = new Collection<ServerInfo>();
             listLock = new object();
             BadConnectionMemoryTimeSpan = TimeSpan.FromMinutes( 5 );
-
-            listTask = ResolveServerList();
         }
 
         /// <summary>
-        /// Initialize SmartCMServerList with the default <see cref="IsolatedStorageServerListProvider"/> server list provider
+        /// Initialize SmartCMServerList with the default <see cref="NullServerListProvider"/> server list provider
         /// </summary>
         public SmartCMServerList() :
-            this( new IsolatedStorageServerListProvider() )
+            this( new NullServerListProvider() )
         {
         }
 
-        ServerListProvider serverListProvider;
+        /// <summary>
+        /// The server list provider chosen to provide a persistent list of servers to connect to
+        /// </summary>
+        public ServerListProvider ServerListProvider
+        {
+            get;
+            set;
+        }
+
         bool canFetchDirectory;
         Task listTask;
 
         object listLock;
         Collection<ServerInfo> servers;
 
+        private void StartFetchingServers()
+        {
+            lock (listLock)
+            {
+                if (listTask == null)
+                {
+                    listTask = ResolveServerList();
+                }
+            }
+        }
+
         private async Task ResolveServerList()
         {
             DebugLog.WriteLine( "SmartCMServerList", "Resolving server list" );
 
-            ICollection<IPEndPoint> serverList = await serverListProvider.FetchServerList();
+            ICollection<IPEndPoint> serverList = await ServerListProvider.FetchServerList();
 
             if ( serverList.Count == 0 && canFetchDirectory )
             {
                 DebugLog.WriteLine( "SmartCMServerList", "Server list provider had no entries, will query SteamDirectory" );
                 var directoryList = await SteamDirectory.LoadAsync();
                 serverList = directoryList.ToList();
-
-                await serverListProvider.UpdateServerList( directoryList );
             }
 
             if ( serverList.Count == 0 && canFetchDirectory )
@@ -92,7 +107,7 @@ namespace SteamKit2.Discovery
             }
 
             DebugLog.WriteLine( "SmartCMServerList", "Resolved {0} servers", serverList.Count );
-            TryAddRange( serverList );
+            ReplaceList( serverList );
         }
 
         /// <summary>
@@ -122,100 +137,31 @@ namespace SteamKit2.Discovery
         }
 
         /// <summary>
-        /// Adds an <see cref="System.Net.IPEndPoint" /> to the server list.
+        /// Replace the list with a new list of servers provided to us by the Steam servers.
         /// </summary>
-        /// <param name="endPoint">The <see cref="System.Net.IPEndPoint"/> to add.</param>
-        /// <returns>false if the server is already in the list, true otherwise.</returns>
-        public bool TryAdd( IPEndPoint endPoint )
+        /// <param name="endpointList">The <see cref="IPEndPoint"/>s to use for this <see cref="SmartCMServerList"/>.</param>
+        public void ReplaceList( IEnumerable<IPEndPoint> endpointList )
         {
             lock ( listLock )
             {
-                if ( servers.Any( x => x.EndPoint.Equals( endPoint ) ) )
-                {
-                    return false;
-                }
+                var distinctEndPoints = endpointList.Distinct().ToArray();
 
-                AddCore( endPoint );
-            }
-            return true;
-        }
+                servers.Clear();
 
-        /// <summary>
-        /// Adds the elements of the specified collection of <see cref="IPEndPoint" />s to the server list.
-        /// </summary>
-        /// <param name="endPoints">The collection of <see cref="IPEndPoint"/>s to add.</param>
-        /// <returns>false if any of the specified servers are already in the list, true otherwise.</returns>
-        public bool TryAddRange( IEnumerable<IPEndPoint> endPoints )
-        {
-            lock ( listLock )
-            {
-                var distinctEndPoints = endPoints.Distinct();
-
-                var endpointsAlreadyInList = servers.Select( x => x.EndPoint );
-                var overlappingEndPoints = endpointsAlreadyInList.Intersect( distinctEndPoints, EqualityComparer<IPEndPoint>.Default );
-                if ( overlappingEndPoints.Any() )
-                {
-                    return false;
-                }
-
-                foreach ( var endPoint in distinctEndPoints )
-                {
-                    AddCore( endPoint );
-                }
-            }
-            return true;
-        }
-
-        /// <summary>
-        /// Merges the list with a new list of servers provided to us by the Steam servers.
-        /// This adds the new list of <see cref="IPEndPoint"/>s to the beginning of the list,
-        /// ensuring that any pre-existing servers are moved into their new place in order near
-        /// the beginning of the list.
-        /// </summary>
-        /// <param name="listToMerge">The <see cref="IPEndPoint"/>s to merge into this <see cref="SmartCMServerList"/>.</param>
-        public void MergeWithList( IEnumerable<IPEndPoint> listToMerge )
-        {
-            lock ( listLock )
-            {
-                var distinctEndPoints = listToMerge.Distinct().ToArray();
-
-                var distinctEndPointsSet = new HashSet<IPEndPoint>(distinctEndPoints);
-                var preExistingServers = servers.Where( s => distinctEndPointsSet.Contains( s.EndPoint ) ).ToArray();
-
-                // This will let us do a simpler insert, but will also reset the bad connection state.
-                // If we were just told by Steam to use this CM, give it a second chance.
-                foreach ( var serverInfo in preExistingServers )
-                {
-                    servers.Remove( serverInfo );
-                }
-                
                 for ( var i = 0; i < distinctEndPoints.Length; i++ )
                 {
-                    AddCore( distinctEndPoints[ i ], i );
+                    AddCore( distinctEndPoints[ i ] );
                 }
-            }
-        }
 
-        void Add( IPEndPoint endPoint )
-        {
-            if ( servers.Any( x => x.EndPoint == endPoint ) )
-            {
-                throw new ArgumentException( "The supplied endpoint is already in the server list.", "endPoint" );
+                ServerListProvider.UpdateServerList( distinctEndPoints ).Wait();
             }
-
-            AddCore( endPoint );
         }
 
         void AddCore( IPEndPoint endPoint )
         {
-            AddCore( endPoint, servers.Count );
-        }
-
-        void AddCore( IPEndPoint endPoint, int index )
-        {
             var info = new ServerInfo { EndPoint = endPoint };
 
-            servers.Insert( index, info );
+            servers.Add( info );
         }
 
         /// <summary>
@@ -229,17 +175,6 @@ namespace SteamKit2.Discovery
                 {
                     server.LastBadConnectionDateTimeUtc = null;
                 }
-            }
-        }
-
-        /// <summary>
-        /// Removes all servers from the list.
-        /// </summary>
-        public void Clear()
-        {
-            lock ( listLock )
-            {
-                servers.Clear();
             }
         }
 
@@ -285,9 +220,10 @@ namespace SteamKit2.Discovery
         /// <returns>An <see cref="System.Net.IPEndPoint"/>, or null if the list is empty.</returns>
         public IPEndPoint GetNextServerCandidate()
         {
+            StartFetchingServers();
             listTask.Wait();
 
-            lock ( listLock)
+            lock ( listLock )
             {
                 // ResetOldScores takes a lock internally, however
                 // locks are re-entrant on the same thread, so this
@@ -316,6 +252,7 @@ namespace SteamKit2.Discovery
         /// <returns>An <see cref="System.Net.IPEndPoint"/>, or null if the list is empty.</returns>
         public Task<IPEndPoint> GetNextServerCandidateAsync()
         {
+            StartFetchingServers();
             return listTask.ContinueWith( t =>
             {
                 return GetNextServerCandidate();
@@ -330,6 +267,7 @@ namespace SteamKit2.Discovery
         {
             IPEndPoint[] endPoints;
 
+            StartFetchingServers();
             listTask.Wait();
 
             lock ( listLock )
