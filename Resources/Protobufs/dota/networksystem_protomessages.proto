@@ -1,5 +1,8 @@
 option cc_generic_services = false;
 
+option java_package = "org.opensteamworks.steamkit.base.proto.dota";
+option java_multiple_files = true;
+
 message NetMessageSplitscreenUserChanged {
 	optional uint32 slot = 1;
 }

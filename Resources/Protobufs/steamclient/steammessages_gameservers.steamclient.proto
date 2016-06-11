@@ -2,6 +2,9 @@ import "steammessages_unified_base.steamclient.proto";
 
 option cc_generic_services = true;
 
+option java_package = "org.opensteamworks.steamkit.base.proto.steamclient";
+option java_multiple_files = true;
+
 message CGameServers_GetServerList_Request {
 	optional string filter = 1 [(description) = "Query filter string."];
 	optional uint32 limit = 2 [default = 100, (description) = "The maximum number of servers to return in the response"];

@@ -3,6 +3,9 @@ import "dota_gcmessages_common_match_management.proto";
 
 option cc_generic_services = false;
 
+option java_package = "org.opensteamworks.steamkit.base.proto.dota";
+option java_multiple_files = true;
+
 message CDOTAMatchMetadataFile {
 	required int32 version = 1;
 	required uint64 match_id = 2;

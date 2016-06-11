@@ -2,6 +2,9 @@ import "steammessages_unified_base.steamclient.proto";
 
 option cc_generic_services = true;
 
+option java_package = "org.opensteamworks.steamkit.base.proto.steamclient";
+option java_multiple_files = true;
+
 message CGameNotifications_Variable {
 	optional string key = 1 [(description) = "The name of the variable in the localized text -- anywhere that %variablename% is found within the text it will be substituded with the given value"];
 	optional string value = 2 [(description) = "The value of the variable to substitute in the localized text in place of the given variable.  Can itself be a localization token."];

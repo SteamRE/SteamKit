@@ -3,6 +3,9 @@ import "dota_commonmessages.proto";
 option optimize_for = SPEED;
 option cc_generic_services = false;
 
+option java_package = "org.opensteamworks.steamkit.base.proto.dota";
+option java_multiple_files = true;
+
 enum EDotaClientMessages {
 	DOTA_CM_MapLine = 301;
 	DOTA_CM_AspectRatio = 302;

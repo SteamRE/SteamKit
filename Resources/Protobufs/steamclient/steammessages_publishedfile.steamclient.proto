@@ -2,6 +2,9 @@ import "steammessages_unified_base.steamclient.proto";
 
 option cc_generic_services = true;
 
+option java_package = "org.opensteamworks.steamkit.base.proto.steamclient";
+option java_multiple_files = true;
+
 message CPublishedFile_Subscribe_Request {
 	optional uint64 publishedfileid = 1;
 	optional uint32 list_type = 2;

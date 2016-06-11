@@ -8,6 +8,9 @@ import "dota_gcmessages_common_match_management.proto";
 option optimize_for = SPEED;
 option cc_generic_services = false;
 
+option java_package = "org.opensteamworks.steamkit.base.proto.dota";
+option java_multiple_files = true;
+
 enum EPoorNetworkConditionsType {
 	k_EPoorNetworkConditions_None = 0;
 	k_EPoorNetworkConditions_Unknown = 1;

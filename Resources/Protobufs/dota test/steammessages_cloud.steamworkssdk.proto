@@ -1,5 +1,8 @@
 import "steammessages_unified_base.steamworkssdk.proto";
 
+option java_package = "org.opensteamworks.steamkit.base.proto.dota.test";
+option java_multiple_files = true;
+
 message CCloud_GetUploadServerInfo_Request {
 	optional uint32 appid = 1 [(description) = "App ID to which a file will be uploaded to."];
 }

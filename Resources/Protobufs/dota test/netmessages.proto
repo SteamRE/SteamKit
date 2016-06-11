@@ -2,6 +2,9 @@ import "networkbasetypes.proto";
 
 option cc_generic_services = false;
 
+option java_package = "org.opensteamworks.steamkit.base.proto.dota.test";
+option java_multiple_files = true;
+
 enum CLC_Messages {
 	clc_ClientInfo = 8;
 	clc_Move = 9;

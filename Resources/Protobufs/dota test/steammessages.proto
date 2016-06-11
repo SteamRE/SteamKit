@@ -3,6 +3,9 @@ import "google/protobuf/descriptor.proto";
 option optimize_for = SPEED;
 option cc_generic_services = false;
 
+option java_package = "org.opensteamworks.steamkit.base.proto.dota.test";
+option java_multiple_files = true;
+
 extend .google.protobuf.FieldOptions {
 	optional bool key_field = 60000 [default = false];
 }

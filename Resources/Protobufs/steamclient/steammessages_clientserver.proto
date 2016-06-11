@@ -4,6 +4,9 @@ import "encrypted_app_ticket.proto";
 option optimize_for = SPEED;
 option cc_generic_services = false;
 
+option java_package = "org.opensteamworks.steamkit.base.proto.steamclient";
+option java_multiple_files = true;
+
 message CMsgClientHeartBeat {
 }
 
