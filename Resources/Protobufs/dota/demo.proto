@@ -1,5 +1,8 @@
 option cc_generic_services = false;
 
+option java_package = "org.opensteamworks.steamkit.base.proto.dota";
+option java_multiple_files = true;
+
 enum EDemoCommands {
 	DEM_Error = -1;
 	DEM_Stop = 0;

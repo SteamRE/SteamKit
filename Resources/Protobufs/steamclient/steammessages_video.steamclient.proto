@@ -2,6 +2,9 @@ import "steammessages_unified_base.steamclient.proto";
 
 option cc_generic_services = true;
 
+option java_package = "org.opensteamworks.steamkit.base.proto.steamclient";
+option java_multiple_files = true;
+
 message CVideo_ClientGetVideoURL_Request {
 	optional uint64 video_id = 1 [(description) = "Video ID"];
 	optional uint32 client_cellid = 2 [(description) = "Cell ID of client, zero if unknown"];

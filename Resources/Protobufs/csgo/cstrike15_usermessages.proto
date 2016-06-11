@@ -5,6 +5,9 @@ import "cstrike15_gcmessages.proto";
 option optimize_for = SPEED;
 option cc_generic_services = false;
 
+option java_package = "org.opensteamworks.steamkit.base.proto.csgo";
+option java_multiple_files = true;
+
 enum ECstrike15UserMessages {
 	CS_UM_VGUIMenu = 1;
 	CS_UM_Geiger = 2;

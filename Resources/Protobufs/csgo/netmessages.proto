@@ -2,6 +2,9 @@ import "google/protobuf/descriptor.proto";
 
 option cc_generic_services = false;
 
+option java_package = "org.opensteamworks.steamkit.base.proto.csgo";
+option java_multiple_files = true;
+
 enum NET_Messages {
 	net_NOP = 0;
 	net_Disconnect = 1;

@@ -2,6 +2,9 @@ import "steammessages_unified_base.steamclient.proto";
 
 option cc_generic_services = true;
 
+option java_package = "org.opensteamworks.steamkit.base.proto.steamclient";
+option java_multiple_files = true;
+
 message CDeviceAuth_GetOwnAuthorizedDevices_Request {
 	optional fixed64 steamid = 1;
 	optional bool include_canceled = 2;

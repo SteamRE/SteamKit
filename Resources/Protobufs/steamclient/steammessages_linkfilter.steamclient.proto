@@ -2,6 +2,9 @@ import "steammessages_unified_base.steamclient.proto";
 
 option cc_generic_services = true;
 
+option java_package = "org.opensteamworks.steamkit.base.proto.steamclient";
+option java_multiple_files = true;
+
 message CCommunity_GetLinkFilterHashPrefixes_Request {
 	optional uint32 hit_type = 1 [(description) = "The retrieved hits will be filtered to this type."];
 	optional uint32 count = 2 [(description) = "The number of hits to retrieve in a single batch. Specify 0 for no limit."];

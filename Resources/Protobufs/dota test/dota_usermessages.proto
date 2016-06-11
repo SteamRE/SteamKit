@@ -5,6 +5,9 @@ import "dota_commonmessages.proto";
 option optimize_for = SPEED;
 option cc_generic_services = false;
 
+option java_package = "org.opensteamworks.steamkit.base.proto.dota.test";
+option java_multiple_files = true;
+
 enum EDotaUserMessages {
 	DOTA_UM_AddUnitToSelection = 64;
 	DOTA_UM_AIDebugLine = 65;

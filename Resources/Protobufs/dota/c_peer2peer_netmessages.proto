@@ -2,6 +2,9 @@ import "netmessages.proto";
 
 option cc_generic_services = false;
 
+option java_package = "org.opensteamworks.steamkit.base.proto.dota";
+option java_multiple_files = true;
+
 enum P2P_Messages {
 	p2p_TextMessage = 256;
 	p2p_Voice = 257;

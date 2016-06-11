@@ -1,3 +1,6 @@
+option java_package = "org.opensteamworks.steamkit.base.proto.portal";
+option java_multiple_files = true;
+
 message CMsgProtoBufHeader {
 	optional fixed64 client_steam_id = 1;
 	optional int32 client_session_id = 2;

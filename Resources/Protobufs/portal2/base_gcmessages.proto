@@ -1,5 +1,8 @@
 import "steammessages.proto";
 
+option java_package = "org.opensteamworks.steamkit.base.proto.portal2";
+option java_multiple_files = true;
+
 option optimize_for = SPEED;
 option cc_generic_services = false;
 

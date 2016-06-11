@@ -1,5 +1,8 @@
 import "steammessages_unified_base.steamworkssdk.proto";
 
+option java_package = "org.opensteamworks.steamkit.base.proto.dota.test";
+option java_multiple_files = true;
+
 message COAuthToken_ImplicitGrantNoPrompt_Request {
 	optional string clientid = 1 [(description) = "Client ID for which to count the number of issued tokens"];
 }

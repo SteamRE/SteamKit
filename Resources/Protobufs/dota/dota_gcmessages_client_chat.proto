@@ -3,6 +3,9 @@ import "dota_shared_enums.proto";
 option optimize_for = SPEED;
 option cc_generic_services = false;
 
+option java_package = "org.opensteamworks.steamkit.base.proto.dota";
+option java_multiple_files = true;
+
 message CMsgClientToGCPrivateChatInvite {
 	optional string private_chat_channel_name = 1;
 	optional uint32 invited_account_id = 2;

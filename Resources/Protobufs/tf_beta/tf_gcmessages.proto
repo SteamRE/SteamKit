@@ -1,5 +1,8 @@
 import "steammessages.proto";
 
+option java_package = "org.opensteamworks.steamkit.base.proto.tf.beta";
+option java_multiple_files = true;
+
 enum TF_MatchmakingMode {
 	TF_Matchmaking_INVALID = 0;
 	TF_Matchmaking_QUICKPLAY = 1;

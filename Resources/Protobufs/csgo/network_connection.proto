@@ -2,6 +2,9 @@ import "google/protobuf/descriptor.proto";
 
 option cc_generic_services = false;
 
+option java_package = "org.opensteamworks.steamkit.base.proto.csgo";
+option java_multiple_files = true;
+
 extend .google.protobuf.EnumValueOptions {
 	optional string network_connection_token = 50500;
 }
