@@ -68,6 +68,15 @@ namespace SteamKit2.Discovery
             set;
         }
 
+        /// <summary>
+        /// The preferred cell id for retrieving the list of servers from the Steam directory
+        /// </summary>
+        public uint CellID
+        {
+            get;
+            set;
+        }
+
         bool canFetchDirectory;
         Task listTask;
 
@@ -94,7 +103,7 @@ namespace SteamKit2.Discovery
             if ( serverList.Count == 0 && canFetchDirectory )
             {
                 DebugLog.WriteLine( "SmartCMServerList", "Server list provider had no entries, will query SteamDirectory" );
-                var directoryList = await SteamDirectory.LoadAsync();
+                var directoryList = await SteamDirectory.LoadAsync(CellID);
                 serverList = directoryList.ToList();
             }
 

@@ -135,6 +135,7 @@
     <Compile Include="Base\Generated\Unified\Steamworks\SteamMsgOAuthSteamworks.cs" />
     <Compile Include="Base\MsgBase.cs" />
     <Compile Include="Base\PacketBase.cs" />
+    <Compile Include="Steam\Discovery\FileStorageServerListProvider.cs" />
     <Compile Include="Steam\Discovery\NullServerListProvider.cs" />
     <Compile Include="Steam\Discovery\SmartCMServerList.cs" />
     <Compile Include="Steam\CDNClient.cs" />
