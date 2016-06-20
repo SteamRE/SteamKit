@@ -130,6 +130,8 @@ namespace SteamKit2
             inSeqAcked = 0;
             inSeqHandled = 0;
 
+            filter = null;
+
             netThread = new Thread(NetLoop);
             netThread.Name = "UdpConnection Thread";
             netThread.Start(endPoint);
@@ -144,11 +146,18 @@ namespace SteamKit2
             if ( netThread == null )
                 return;
 
-            // Play nicely and let the server know that we're done. Other party is expected to Ack this,
-            // so it needs to be sent sequenced.
-            SendSequenced(new UdpPacket(EUdpPacketType.Disconnect));
+            // if we think we aren't already disconnected, apply disconnecting unless we read back disconnected
+            if ( state != (int)State.Disconnected && Interlocked.Exchange(ref state, (int)State.Disconnecting) == (int)State.Disconnected )
+            {
+                state = (int)State.Disconnected;
+            }
 
-            state = (int)State.Disconnecting;
+            // only notify if we actually applied the disconnecting state
+            if ( state == (int)State.Disconnecting ) {
+                // Play nicely and let the server know that we're done. Other party is expected to Ack this,
+                // so it needs to be sent sequenced.
+                SendSequenced(new UdpPacket(EUdpPacketType.Disconnect));
+            }
 
             // Graceful shutdown allows for the connection to empty its queue of messages to send
             netThread.Join();
