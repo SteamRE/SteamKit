@@ -178,6 +178,19 @@ namespace SteamKit2
             Handle( call );
         }
         /// <summary>
+        /// Blocks the current thread to run all queued callbacks.
+        /// If no callback is queued, the method will block for the given timeout.
+        /// </summary>
+        /// <param name="timeout">The length of time to block.</param>
+        public void RunWaitAllCallbacks( TimeSpan timeout )
+        {
+            var calls = client.GetAllCallbacks( true, timeout );
+            foreach ( var call in calls )
+            {
+                Handle( call );
+            }
+        }
+        /// <summary>
         /// Blocks the current thread to run a single queued callback.
         /// If no callback is queued, the method will block until one is posted.
         /// </summary>

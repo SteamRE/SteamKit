@@ -97,7 +97,7 @@ namespace SteamKit2.Internal
 
         ScheduledFunction heartBeatFunc;
 
-        Dictionary<EServerType, List<IPEndPoint>> serverMap;
+        Dictionary<EServerType, HashSet<IPEndPoint>> serverMap;
 
 
         static CMClient()
@@ -116,7 +116,7 @@ namespace SteamKit2.Internal
         /// </exception>
         public CMClient( ProtocolType type = ProtocolType.Tcp )
         {
-            serverMap = new Dictionary<EServerType, List<IPEndPoint>>();
+            serverMap = new Dictionary<EServerType, HashSet<IPEndPoint>>();
 
             // our default timeout
             ConnectionTimeout = TimeSpan.FromSeconds( 5 );
@@ -235,11 +235,11 @@ namespace SteamKit2.Internal
         /// <returns>List of server endpoints</returns>
         public List<IPEndPoint> GetServersOfType( EServerType type )
         {
-            List<IPEndPoint> list;
-            if ( !serverMap.TryGetValue( type, out list ) )
+            HashSet<IPEndPoint> set;
+            if ( !serverMap.TryGetValue( type, out set ) )
                 return new List<IPEndPoint>();
 
-            return list;
+            return set.ToList();
         }
 
 
@@ -317,7 +317,13 @@ namespace SteamKit2.Internal
         /// <summary>
         /// Called when the client is physically disconnected from Steam3.
         /// </summary>
-        protected abstract void OnClientDisconnected( bool userInitiated );
+        protected virtual void OnClientDisconnected( bool userInitiated )
+        {
+            foreach ( var set in serverMap.Values )
+            {
+                set.Clear();
+            }
+        }
 
 
         void NetMsgReceived( object sender, NetMsgEventArgs e )
@@ -576,15 +582,15 @@ namespace SteamKit2.Internal
 
             foreach ( var server in listMsg.Body.servers )
             {
-                EServerType type = ( EServerType )server.server_type;
+                var type = ( EServerType )server.server_type;
 
-                List<IPEndPoint> endpointList;
-                if ( !serverMap.TryGetValue( type, out endpointList ) )
+                HashSet<IPEndPoint> endpointSet;
+                if ( !serverMap.TryGetValue( type, out endpointSet ) )
                 {
-                    serverMap[ type ] = endpointList = new List<IPEndPoint>();
+                    serverMap[ type ] = endpointSet = new HashSet<IPEndPoint>();
                 }
 
-                endpointList.Add( new IPEndPoint( NetHelpers.GetIPAddress( server.server_ip ), ( int )server.server_port ) );
+                endpointSet.Add( new IPEndPoint( NetHelpers.GetIPAddress( server.server_ip ), ( int )server.server_port ) );
             }
         }
         void HandleCMList( IPacketMsg packetMsg )
