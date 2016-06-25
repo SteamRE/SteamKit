@@ -500,6 +500,30 @@ namespace Tests
             Assert.Equal( expected, text );
         }
 
+        [Fact]
+		public void KeyValuesUnsignedByteConversion()
+        {
+            byte expectedValue = 37;
+
+			var kv = new KeyValue("key", "37");
+			Assert.Equal(kv.AsUnsignedByte(), expectedValue);
+
+			kv.Value = "256";
+			Assert.Equal(kv.AsUnsignedByte(expectedValue), expectedValue);
+        }
+
+		[Fact]
+		public void KeyValuesUnsignedShortConversion()
+        {
+            ushort expectedValue = 1337;
+
+			var kv = new KeyValue("key", "1337");
+			Assert.Equal(kv.AsUnsignedShort(), expectedValue);
+
+			kv.Value = "123456";
+			Assert.Equal(kv.AsUnsignedShort(expectedValue), expectedValue);
+        }
+
         const string TestObjectHex = "00546573744F626A65637400016B65790076616C7565000808";
     }
 }
