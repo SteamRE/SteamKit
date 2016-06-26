@@ -505,11 +505,11 @@ namespace Tests
         {
             byte expectedValue = 37;
 
-            var kv = new KeyValue("key", "37");
-            Assert.Equal(kv.AsUnsignedByte(), expectedValue);
+            var kv = new KeyValue( "key", "37" );
+            Assert.Equal( expectedValue, kv.AsUnsignedByte() );
 
             kv.Value = "256";
-            Assert.Equal(kv.AsUnsignedByte(expectedValue), expectedValue);
+            Assert.Equal( expectedValue, kv.AsUnsignedByte(expectedValue) );
         }
 
         [Fact]
@@ -517,11 +517,11 @@ namespace Tests
         {
             ushort expectedValue = 1337;
 
-            var kv = new KeyValue("key", "1337");
-            Assert.Equal(kv.AsUnsignedShort(), expectedValue);
+            var kv = new KeyValue( "key", "1337" );
+            Assert.Equal( expectedValue, kv.AsUnsignedShort() );
 
             kv.Value = "123456";
-            Assert.Equal(kv.AsUnsignedShort(expectedValue), expectedValue);
+            Assert.Equal( expectedValue, kv.AsUnsignedShort(expectedValue) );
         }
 
         const string TestObjectHex = "00546573744F626A65637400016B65790076616C7565000808";
