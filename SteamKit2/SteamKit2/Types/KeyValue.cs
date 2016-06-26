@@ -307,6 +307,42 @@ namespace SteamKit2
         }
 
         /// <summary>
+        /// Attempts to convert and return the value of this instance as an unsigned byte.
+        /// If the conversion is invalid, the default value is returned.
+        /// </summary>
+        /// <param name="defaultValue">The default value to return if the conversion is invalid.</param>
+        /// <returns>The value of this instance as an unsigned byte.</returns>
+        public byte AsUnsignedByte( byte defaultValue = default( byte ) )
+        {
+            byte value;
+
+            if ( byte.TryParse( this.Value, out value ) == false )
+            {
+                return defaultValue;
+            }
+
+            return value;
+        }
+
+        /// <summary>
+        /// Attempts to convert and return the value of this instance as an unsigned short.
+        /// If the conversion is invalid, the default value is returned.
+        /// </summary>
+        /// <param name="defaultValue">The default value to return if the conversion is invalid.</param>
+        /// <returns>The value of this instance as an unsigned short.</returns>
+        public ushort AsUnsignedShort( ushort defaultValue = default( ushort ) )
+        {
+            ushort value;
+
+            if ( ushort.TryParse( this.Value, out value ) == false )
+            {
+                return defaultValue;
+            }
+
+            return value;
+        }
+
+        /// <summary>
         /// Attempts to convert and return the value of this instance as an integer.
         /// If the conversion is invalid, the default value is returned.
         /// </summary>
@@ -323,6 +359,7 @@ namespace SteamKit2
 
             return value;
         }
+
         /// <summary>
         /// Attempts to convert and return the value of this instance as an unsigned integer.
         /// If the conversion is invalid, the default value is returned.
@@ -358,6 +395,7 @@ namespace SteamKit2
 
             return value;
         }
+
         /// <summary>
         /// Attempts to convert and return the value of this instance as an unsigned long.
         /// If the conversion is invalid, the default value is returned.
