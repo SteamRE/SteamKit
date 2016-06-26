@@ -9,6 +9,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Net.Sockets;
 using System.Threading;
 using ProtoBuf;
@@ -225,7 +226,35 @@ namespace SteamKit2
                 return ( freeLast ? callbackQueue.Dequeue() : callbackQueue.Peek() );
             }
         }
+        /// <summary>
+        /// Blocks the calling thread until the queue contains a callback object. Returns all callbacks, and optionally frees them.
+        /// </summary>
+        /// <param name="freeLast">if set to <c>true</c> this function also frees all callbacks.</param>
+        /// <param name="timeout">The length of time to block.</param>
+        /// <returns>All current callback objects in the queue.</returns>
+        public IEnumerable<ICallbackMsg> GetAllCallbacks( bool freeLast, TimeSpan timeout )
+        {
+            IEnumerable<ICallbackMsg> callbacks;
 
+            lock ( callbackLock )
+            {
+                if ( callbackQueue.Count == 0 )
+                {
+                    if ( !Monitor.Wait( callbackLock, timeout ) )
+                    {
+                        return Enumerable.Empty<ICallbackMsg>();
+                    }
+                }
+
+                callbacks = callbackQueue.ToArray();
+                if ( freeLast )
+                {
+                    callbackQueue.Clear();
+                }
+            }
+
+            return callbacks;
+        }
         /// <summary>
         /// Frees the last callback in the queue.
         /// </summary>
@@ -333,6 +362,8 @@ namespace SteamKit2
         /// </summary>
         protected override void OnClientDisconnected( bool userInitiated )
         {
+            base.OnClientDisconnected( userInitiated );
+
             // if we are disconnected, cancel all pending jobs
             jobManager.CancelPendingJobs();
 

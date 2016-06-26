@@ -168,6 +168,34 @@ namespace Tests
             Assert.Equal(1, callCount);
         }
 
+        [Fact]
+        public void PostedCallbacksTriggerActions()
+        {
+            var callback = new CallbackForTest { UniqueID = Guid.NewGuid() };
+
+            var numCallbacksRun = 0;
+            Action<CallbackForTest> action = delegate (CallbackForTest cb)
+            {
+                Assert.Equal(callback.UniqueID, cb.UniqueID);
+                numCallbacksRun++;
+            };
+
+            using (mgr.Subscribe(action))
+            {
+                for (var i = 0; i < 10; i++)
+                {
+                    client.PostCallback(callback);
+                }
+
+                mgr.RunWaitAllCallbacks(TimeSpan.Zero);
+                Assert.Equal(10, numCallbacksRun);
+
+                // Callbacks should have been freed.
+                mgr.RunWaitAllCallbacks(TimeSpan.Zero);
+                Assert.Equal(10, numCallbacksRun);
+            }
+        }
+
         void PostAndRunCallback(CallbackMsg callback)
         {
             client.PostCallback(callback);
