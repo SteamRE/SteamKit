@@ -42,6 +42,8 @@ enum ERemoteDeviceStreamingResult {
 	k_ERemoteDeviceStreamingCanceled = 6;
 	k_ERemoteDeviceStreamingDriversNotInstalled = 7;
 	k_ERemoteDeviceStreamingDisabled = 8;
+	k_ERemoteDeviceStreamingBroadcastingActive = 9;
+	k_ERemoteDeviceStreamingVRActive = 10;
 }
 
 message CMsgRemoteClientBroadcastHeader {
@@ -69,6 +71,9 @@ message CMsgRemoteClientBroadcastStatus {
 	optional bool screen_locked = 13;
 	optional bool games_running = 14;
 	repeated string mac_addresses = 15;
+	optional uint32 download_lan_peer_group = 16;
+	optional bool broadcasting_active = 17;
+	optional bool vr_active = 18;
 }
 
 message CMsgRemoteClientBroadcastDiscovery {
@@ -110,6 +115,7 @@ message CMsgRemoteDeviceStreamingRequest {
 	optional int32 maximum_resolution_x = 2;
 	optional int32 maximum_resolution_y = 3;
 	optional int32 audio_channel_count = 4 [default = 2];
+	optional string device_version = 5;
 }
 
 message CMsgRemoteDeviceStreamingCancelRequest {
@@ -121,6 +127,7 @@ message CMsgRemoteDeviceStreamingResponse {
 	required .ERemoteDeviceStreamingResult result = 2 [default = k_ERemoteDeviceStreamingSuccess];
 	optional uint32 port = 3;
 	optional bytes encrypted_session_key = 4;
+	optional int32 virtualhere_licensed_device_count = 5;
 }
 
 message CMsgRemoteDeviceProofRequest {

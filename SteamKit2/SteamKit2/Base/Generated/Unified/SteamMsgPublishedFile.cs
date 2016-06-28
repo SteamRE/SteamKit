@@ -1073,6 +1073,24 @@ namespace SteamKit2.Unified.Internal
       get { return _youtubevideoid; }
       set { _youtubevideoid = value; }
     }
+
+    private uint _preview_type = default(uint);
+    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"preview_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint preview_type
+    {
+      get { return _preview_type; }
+      set { _preview_type = value; }
+    }
+
+    private string _external_reference = "";
+    [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"external_reference", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string external_reference
+    {
+      get { return _external_reference; }
+      set { _external_reference = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

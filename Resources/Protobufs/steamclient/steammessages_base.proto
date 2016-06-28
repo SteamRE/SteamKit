@@ -8,6 +8,10 @@ extend .google.protobuf.MessageOptions {
 	optional int32 msgpool_hard_limit = 50001 [default = 384];
 }
 
+extend .google.protobuf.FileOptions {
+	optional bool force_php_generation = 50000 [default = false];
+}
+
 message CMsgProtoBufHeader {
 	optional fixed64 steamid = 1;
 	optional int32 client_sessionid = 2;
@@ -28,6 +32,7 @@ message CMsgProtoBufHeader {
 	optional uint32 sysid = 20;
 	optional uint64 trace_tag = 21;
 	optional uint32 webapi_key_id = 25;
+	optional bool is_from_external_source = 26;
 }
 
 message CMsgMulti {

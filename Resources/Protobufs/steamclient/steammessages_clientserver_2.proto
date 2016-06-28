@@ -1,5 +1,4 @@
 import "steammessages_base.proto";
-import "encrypted_app_ticket.proto";
 
 option optimize_for = SPEED;
 option cc_generic_services = false;
@@ -68,6 +67,14 @@ message CMsgClientUCMUpdatePublishedFile {
 		optional string value = 2;
 	}
 
+	message AdditionalPreview {
+		optional string original_file_name = 1;
+		optional string internal_file_name = 2;
+		optional string videoid = 3;
+		optional uint32 preview_type = 4;
+		optional int32 update_index = 5 [default = -1];
+	}
+
 	optional uint32 app_id = 1;
 	optional fixed64 published_file_id = 2;
 	optional string file_name = 3;
@@ -92,6 +99,9 @@ message CMsgClientUCMUpdatePublishedFile {
 	optional int32 language = 22 [default = 0];
 	repeated string removed_kvtags = 23;
 	repeated .CMsgClientUCMUpdatePublishedFile.KeyValueTag kvtags = 24;
+	repeated .CMsgClientUCMUpdatePublishedFile.AdditionalPreview previews = 25;
+	repeated int32 previews_to_remove = 26;
+	optional bool clear_in_progress = 27;
 }
 
 message CMsgClientUCMUpdatePublishedFileResponse {

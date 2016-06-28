@@ -1,0 +1,27 @@
+import "steammessages_base.proto";
+
+option optimize_for = SPEED;
+option cc_generic_services = false;
+
+message CMsgClientLANP2PRequestChunks {
+	message ChunkKey {
+		optional uint32 depot_id = 1;
+		optional bytes sha = 2;
+	}
+
+	repeated .CMsgClientLANP2PRequestChunks.ChunkKey chunk_keys = 1;
+}
+
+message CMsgClientLANP2PRequestChunksResponse {
+	message ChunkData {
+		optional uint32 result = 1;
+		optional uint32 depot_id = 2;
+		optional bytes sha = 3;
+		optional bytes chunk_data = 4;
+		optional bool encrypted = 5;
+		optional bool compressed = 6;
+	}
+
+	repeated .CMsgClientLANP2PRequestChunksResponse.ChunkData chunk_responses = 1;
+}
+

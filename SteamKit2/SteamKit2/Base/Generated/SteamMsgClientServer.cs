@@ -1522,6 +1522,33 @@ namespace SteamKit2.Internal
       get { return _owner_id; }
       set { _owner_id = value; }
     }
+
+    private string _vr_hmd_vendor = "";
+    [global::ProtoBuf.ProtoMember(13, IsRequired = false, Name=@"vr_hmd_vendor", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string vr_hmd_vendor
+    {
+      get { return _vr_hmd_vendor; }
+      set { _vr_hmd_vendor = value; }
+    }
+
+    private string _vr_hmd_model = "";
+    [global::ProtoBuf.ProtoMember(14, IsRequired = false, Name=@"vr_hmd_model", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string vr_hmd_model
+    {
+      get { return _vr_hmd_model; }
+      set { _vr_hmd_model = value; }
+    }
+
+    private uint _launch_option_type = (uint)0;
+    [global::ProtoBuf.ProtoMember(15, IsRequired = false, Name=@"launch_option_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue((uint)0)]
+    public uint launch_option_type
+    {
+      get { return _launch_option_type; }
+      set { _launch_option_type = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -2701,6 +2728,42 @@ namespace SteamKit2.Internal
       get { return _steamguard_machine_name_user_chosen; }
       set { _steamguard_machine_name_user_chosen = value; }
     }
+
+    private bool _is_phone_verified = default(bool);
+    [global::ProtoBuf.ProtoMember(16, IsRequired = false, Name=@"is_phone_verified", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool is_phone_verified
+    {
+      get { return _is_phone_verified; }
+      set { _is_phone_verified = value; }
+    }
+
+    private uint _two_factor_state = default(uint);
+    [global::ProtoBuf.ProtoMember(17, IsRequired = false, Name=@"two_factor_state", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint two_factor_state
+    {
+      get { return _two_factor_state; }
+      set { _two_factor_state = value; }
+    }
+
+    private bool _is_phone_identifying = default(bool);
+    [global::ProtoBuf.ProtoMember(18, IsRequired = false, Name=@"is_phone_identifying", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool is_phone_identifying
+    {
+      get { return _is_phone_identifying; }
+      set { _is_phone_identifying = value; }
+    }
+
+    private bool _is_phone_needing_reverify = default(bool);
+    [global::ProtoBuf.ProtoMember(19, IsRequired = false, Name=@"is_phone_needing_reverify", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool is_phone_needing_reverify
+    {
+      get { return _is_phone_needing_reverify; }
+      set { _is_phone_needing_reverify = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -2881,6 +2944,15 @@ namespace SteamKit2.Internal
     {
       get { return _persona_set_by_user; }
       set { _persona_set_by_user = value; }
+    }
+
+    private uint _persona_state_flags = (uint)0;
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"persona_state_flags", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue((uint)0)]
+    public uint persona_state_flags
+    {
+      get { return _persona_state_flags; }
+      set { _persona_state_flags = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

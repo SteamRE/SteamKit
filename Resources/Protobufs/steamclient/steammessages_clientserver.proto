@@ -217,6 +217,9 @@ message CMsgClientGamesPlayed {
 		optional uint32 streaming_provider_id = 10;
 		optional uint32 game_flags = 11;
 		optional uint32 owner_id = 12;
+		optional string vr_hmd_vendor = 13;
+		optional string vr_hmd_model = 14;
+		optional uint32 launch_option_type = 15 [default = 0];
 	}
 
 	repeated .CMsgClientGamesPlayed.GamePlayed games_played = 1;
@@ -403,6 +406,10 @@ message CMsgClientAccountInfo {
 	optional string facebook_name = 9;
 	optional bool steamguard_notify_newmachines = 14;
 	optional string steamguard_machine_name_user_chosen = 15;
+	optional bool is_phone_verified = 16;
+	optional uint32 two_factor_state = 17;
+	optional bool is_phone_identifying = 18;
+	optional bool is_phone_needing_reverify = 19;
 }
 
 message CMsgClientAppMinutesPlayedData {
@@ -433,6 +440,7 @@ message CMsgClientChangeStatus {
 	optional bool is_auto_generated_name = 3;
 	optional bool high_priority = 4;
 	optional bool persona_set_by_user = 5;
+	optional uint32 persona_state_flags = 6 [default = 0];
 }
 
 message CMsgPersonaChangeResponse {

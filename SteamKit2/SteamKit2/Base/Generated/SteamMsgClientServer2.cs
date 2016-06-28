@@ -10,7 +10,6 @@
 
 // Generated from: steammessages_clientserver_2.proto
 // Note: requires additional types generated from: steammessages_base.proto
-// Note: requires additional types generated from: encrypted_app_ticket.proto
 namespace SteamKit2.Internal
 {
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientUCMAddScreenshot")]
@@ -623,6 +622,29 @@ namespace SteamKit2.Internal
       get { return _kvtags; }
     }
   
+    private readonly global::System.Collections.Generic.List<CMsgClientUCMUpdatePublishedFile.AdditionalPreview> _previews = new global::System.Collections.Generic.List<CMsgClientUCMUpdatePublishedFile.AdditionalPreview>();
+    [global::ProtoBuf.ProtoMember(25, Name=@"previews", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CMsgClientUCMUpdatePublishedFile.AdditionalPreview> previews
+    {
+      get { return _previews; }
+    }
+  
+    private readonly global::System.Collections.Generic.List<int> _previews_to_remove = new global::System.Collections.Generic.List<int>();
+    [global::ProtoBuf.ProtoMember(26, Name=@"previews_to_remove", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public global::System.Collections.Generic.List<int> previews_to_remove
+    {
+      get { return _previews_to_remove; }
+    }
+  
+
+    private bool _clear_in_progress = default(bool);
+    [global::ProtoBuf.ProtoMember(27, IsRequired = false, Name=@"clear_in_progress", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool clear_in_progress
+    {
+      get { return _clear_in_progress; }
+      set { _clear_in_progress = value; }
+    }
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"KeyValueTag")]
   public partial class KeyValueTag : global::ProtoBuf.IExtensible
   {
@@ -645,6 +667,61 @@ namespace SteamKit2.Internal
     {
       get { return _value; }
       set { _value = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"AdditionalPreview")]
+  public partial class AdditionalPreview : global::ProtoBuf.IExtensible
+  {
+    public AdditionalPreview() {}
+    
+
+    private string _original_file_name = "";
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"original_file_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string original_file_name
+    {
+      get { return _original_file_name; }
+      set { _original_file_name = value; }
+    }
+
+    private string _internal_file_name = "";
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"internal_file_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string internal_file_name
+    {
+      get { return _internal_file_name; }
+      set { _internal_file_name = value; }
+    }
+
+    private string _videoid = "";
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"videoid", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string videoid
+    {
+      get { return _videoid; }
+      set { _videoid = value; }
+    }
+
+    private uint _preview_type = default(uint);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"preview_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint preview_type
+    {
+      get { return _preview_type; }
+      set { _preview_type = value; }
+    }
+
+    private int _update_index = (int)-1;
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"update_index", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue((int)-1)]
+    public int update_index
+    {
+      get { return _update_index; }
+      set { _update_index = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

@@ -1,0 +1,14 @@
+import "steammessages_unified_base.steamclient.proto";
+
+option cc_generic_services = true;
+
+message CSiteLicense_ClientSiteAssociation_Notification {
+	optional bytes site_association_file = 1;
+}
+
+service SiteLicense {
+	option (service_description) = "Site License service";
+	rpc ClientSiteAssociation (.CSiteLicense_ClientSiteAssociation_Notification) returns (.NoResponse) {
+		option (method_description) = "Client is sending up site association info";
+	}
+}

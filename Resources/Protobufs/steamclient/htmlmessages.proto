@@ -71,6 +71,19 @@ message CMsgBrowserRemove {
 	optional uint32 browser_handle = 1;
 }
 
+message CMsgSetLocalFileRequestMapping {
+	message AdditionalRoute {
+		optional string relative_url = 1;
+		optional string local_path = 2;
+		optional string allowed_extensions = 3;
+	}
+
+	optional uint32 browser_handle = 1;
+	optional string request_url = 2;
+	optional string default_local_path = 3;
+	repeated .CMsgSetLocalFileRequestMapping.AdditionalRoute routes = 4;
+}
+
 message CMsgBrowserErrorStrings {
 	optional uint32 browser_handle = 1;
 	optional string title = 2;
@@ -581,5 +594,61 @@ message CMsgClearAllCookies {
 message CMsgScreenDPI {
 	optional uint32 browser_handle = 1;
 	optional float dpi_scaling = 2;
+}
+
+message CMsgJSRegisterMethod {
+	optional uint32 browser_handle = 1;
+	optional string name = 2;
+}
+
+message CJSMethodArgument {
+	optional string json_data = 1;
+	optional uint32 function_handle = 2;
+}
+
+message CMsgJSValue {
+	message JSObjectProperty {
+		optional string name = 1;
+		optional .CMsgJSValue value = 2;
+	}
+
+	optional bool bool_value = 1;
+	optional int32 int_value = 2;
+	optional uint32 uint_value = 3;
+	optional float float_value = 4;
+	optional string string_value = 5;
+	optional uint32 function_handle = 6;
+	optional bool is_array = 8;
+	repeated .CMsgJSValue array_values = 9;
+	optional bool is_object = 10;
+	repeated .CMsgJSValue.JSObjectProperty object_properties = 11;
+}
+
+message CMsgJSMethodCall {
+	optional uint32 browser_handle = 1;
+	optional string name = 2;
+	repeated .CMsgJSValue arguments = 3;
+}
+
+message CMsgJSExecuteCallback {
+	optional uint32 browser_handle = 1;
+	optional uint32 function_handle = 2;
+	repeated .CMsgJSValue arguments = 3;
+}
+
+message CMsgJSReleaseCallback {
+	optional uint32 browser_handle = 1;
+	optional uint32 function_handle = 2;
+}
+
+message CMsgJSRaiseException {
+	optional uint32 browser_handle = 1;
+	optional string exception = 2;
+}
+
+message CMsgLoadLocalization {
+	optional uint32 browser_handle = 1;
+	optional string localization_path = 2;
+	optional string language = 3;
 }
 

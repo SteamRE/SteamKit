@@ -80,6 +80,8 @@ message PublishedFileDetails {
 		optional uint32 size = 4;
 		optional string filename = 5;
 		optional string youtubevideoid = 6;
+		optional uint32 preview_type = 7;
+		optional string external_reference = 8;
 	}
 
 	message Child {

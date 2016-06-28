@@ -28,6 +28,7 @@ message CInventory_AddItem_Request {
 	repeated uint64 itemdefid = 2;
 	repeated string itempropsjson = 3;
 	optional uint64 steamid = 4;
+	optional bool notify = 5 [(description) = "Should notify the user that the item was added to their Steam Inventory."];
 }
 
 message CInventory_SafeModifyItem_Request {
@@ -55,6 +56,7 @@ message CInventory_ConsumeItem_Request {
 	optional uint64 itemid = 2;
 	optional uint32 quantity = 3;
 	optional string timestamp = 4;
+	optional uint64 steamid = 5;
 }
 
 message CInventory_DevSetNextDrop_Request {

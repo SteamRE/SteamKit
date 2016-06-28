@@ -135,6 +135,24 @@ namespace SteamKit2.Unified.Internal
       get { return _classified_agent; }
       set { _classified_agent = value; }
     }
+
+    private bool _allow_external_authenticator = default(bool);
+    [global::ProtoBuf.ProtoMember(12, IsRequired = false, Name=@"allow_external_authenticator", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool allow_external_authenticator
+    {
+      get { return _allow_external_authenticator; }
+      set { _allow_external_authenticator = value; }
+    }
+
+    private uint _external_authenticator_type = default(uint);
+    [global::ProtoBuf.ProtoMember(13, IsRequired = false, Name=@"external_authenticator_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint external_authenticator_type
+    {
+      get { return _external_authenticator_type; }
+      set { _external_authenticator_type = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

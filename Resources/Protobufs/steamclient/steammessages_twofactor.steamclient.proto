@@ -18,6 +18,8 @@ message CTwoFactor_Status_Response {
 	optional uint32 time_created = 9 [(description) = "When the token was created"];
 	optional uint32 revocation_attempts_remaining = 10 [(description) = "Number of revocation code attempts remaining"];
 	optional string classified_agent = 11 [(description) = "Agent that added the authenticator (e.g., ios / android / other)"];
+	optional bool allow_external_authenticator = 12 [(description) = "Allow a third-party authenticator (in addition to two-factor)"];
+	optional uint32 external_authenticator_type = 13 [(description) = "Type of third-party authenticator"];
 }
 
 message CTwoFactor_AddAuthenticator_Request {

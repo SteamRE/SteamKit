@@ -188,6 +188,15 @@ namespace SteamKit2.Internal
       get { return _webapi_key_id; }
       set { _webapi_key_id = value; }
     }
+
+    private bool _is_from_external_source = default(bool);
+    [global::ProtoBuf.ProtoMember(26, IsRequired = false, Name=@"is_from_external_source", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool is_from_external_source
+    {
+      get { return _is_from_external_source; }
+      set { _is_from_external_source = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
