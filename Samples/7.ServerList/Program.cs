@@ -1,9 +1,7 @@
-﻿using System;
-using System.IO;
-using System.Net;
-using SteamKit2;
-using SteamKit2.Internal;
+﻿using SteamKit2;
 using SteamKit2.Discovery;
+using System;
+using System.IO;
 
 //
 // Sample 7: ServerList
@@ -78,7 +76,7 @@ namespace Sample7_ServerList
             }
 
             SteamClient.Servers.CellID = cellid;
-            SteamClient.Servers.ServerListProvider = new FileStorageServerListProvider("servers.bin");
+            SteamClient.Servers.ServerListProvider = new FileStorageServerListProvider("servers_list.bin");
 
             isRunning = true;
 

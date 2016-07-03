@@ -1,11 +1,5 @@
-﻿using ProtoBuf;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.IO.IsolatedStorage;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Net;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace SteamKit2.Discovery
@@ -13,13 +7,13 @@ namespace SteamKit2.Discovery
     /// <summary>
     /// A server list provider that returns an empty list, for consumers that populate the server list themselves
     /// </summary>
-    public class NullServerListProvider : ServerListProvider
+    public class NullServerListProvider : IServerListProvider
     {
         /// <summary>
         /// No-op implementation that returns an empty server list
         /// </summary>
         /// <returns>Empty server list</returns>
-        public Task<ICollection<IPEndPoint>> FetchServerList()
+        public Task<ICollection<IPEndPoint>> FetchServerListAsync()
         {
             ICollection<IPEndPoint> empty = new List<IPEndPoint>();
             return Task.FromResult(empty);
@@ -30,9 +24,9 @@ namespace SteamKit2.Discovery
         /// </summary>
         /// <param name="endpoints">Server list</param>
         /// <returns>Completed task</returns>
-        public Task UpdateServerList(IEnumerable<IPEndPoint> endpoints)
+        public Task UpdateServerListAsync(IEnumerable<IPEndPoint> endpoints)
         {
-            return Task.FromResult(0);
+            return Task.Delay(0);
         }
     }
 }

@@ -41,7 +41,7 @@ namespace SteamKit2.Discovery
         /// </summary>
         /// <param name="provider">The ServerListProvider to persist servers</param>
         /// <param name="allowDirectoryFetch">Specifies if we can query SteamDirectory to discover more servers</param>
-        public SmartCMServerList( ServerListProvider provider, bool allowDirectoryFetch = true )
+        public SmartCMServerList( IServerListProvider provider, bool allowDirectoryFetch = true )
         {
             ServerListProvider = provider;
             canFetchDirectory = allowDirectoryFetch;
@@ -62,7 +62,7 @@ namespace SteamKit2.Discovery
         /// <summary>
         /// The server list provider chosen to provide a persistent list of servers to connect to
         /// </summary>
-        public ServerListProvider ServerListProvider
+        public IServerListProvider ServerListProvider
         {
             get;
             set;
@@ -87,7 +87,7 @@ namespace SteamKit2.Discovery
         {
             lock (listLock)
             {
-                if (listTask == null)
+                if (listTask == null || listTask.IsFaulted || listTask.IsCanceled)
                 {
                     listTask = ResolveServerList();
                 }
@@ -96,26 +96,26 @@ namespace SteamKit2.Discovery
 
         private async Task ResolveServerList()
         {
-            DebugLog.WriteLine( "SmartCMServerList", "Resolving server list" );
+            DebugWrite( "Resolving server list" );
 
-            ICollection<IPEndPoint> serverList = await ServerListProvider.FetchServerList();
+            ICollection<IPEndPoint> serverList = await ServerListProvider.FetchServerListAsync();
 
             if ( serverList.Count == 0 && canFetchDirectory )
             {
-                DebugLog.WriteLine( "SmartCMServerList", "Server list provider had no entries, will query SteamDirectory" );
+                DebugWrite( "Server list provider had no entries, will query SteamDirectory" );
                 var directoryList = await SteamDirectory.LoadAsync(CellID);
                 serverList = directoryList.ToList();
             }
 
             if ( serverList.Count == 0 && canFetchDirectory )
             {
-                DebugLog.WriteLine( "SmartCMServerList", "Falling back to cm0" );
+                DebugWrite( "Could not query SteamDirectory, falling back to cm0" );
                 var cm0 = await Dns.GetHostAddressesAsync( "cm0.steampowered.com" );
 
                 serverList = cm0.Select( ipaddr => new IPEndPoint( ipaddr, 27015 ) ).ToList();
             }
 
-            DebugLog.WriteLine( "SmartCMServerList", "Resolved {0} servers", serverList.Count );
+            DebugWrite( "Resolved {0} servers", serverList.Count );
             ReplaceList( serverList );
         }
 
@@ -162,7 +162,7 @@ namespace SteamKit2.Discovery
                     AddCore( distinctEndPoints[ i ] );
                 }
 
-                ServerListProvider.UpdateServerList( distinctEndPoints ).Wait();
+                ServerListProvider.UpdateServerListAsync( distinctEndPoints ).Wait();
             }
         }
 
@@ -224,14 +224,11 @@ namespace SteamKit2.Discovery
         }
 
         /// <summary>
-        /// Get the next server in the list.
+        /// Perform the actual score lookup of the server list and return the candidate
         /// </summary>
-        /// <returns>An <see cref="System.Net.IPEndPoint"/>, or null if the list is empty.</returns>
-        public IPEndPoint GetNextServerCandidate()
+        /// <returns>IPEndPoint candidate</returns>
+        private IPEndPoint GetNextServerCandidateInternal()
         {
-            StartFetchingServers();
-            listTask.Wait();
-
             lock ( listLock )
             {
                 // ResetOldScores takes a lock internally, however
@@ -259,13 +256,33 @@ namespace SteamKit2.Discovery
         /// Get the next server in the list.
         /// </summary>
         /// <returns>An <see cref="System.Net.IPEndPoint"/>, or null if the list is empty.</returns>
-        public Task<IPEndPoint> GetNextServerCandidateAsync()
+        public IPEndPoint GetNextServerCandidate()
         {
             StartFetchingServers();
-            return listTask.ContinueWith( t =>
+
+            try
             {
-                return GetNextServerCandidate();
-            });
+                listTask.Wait();
+            }
+            catch (Exception ex)
+            {
+                DebugWrite("Failed to retrieve server list: {0}", ex);
+                return null;
+            }
+
+            return GetNextServerCandidateInternal();
+        }
+
+        /// <summary>
+        /// Get the next server in the list.
+        /// </summary>
+        /// <returns>An <see cref="System.Net.IPEndPoint"/>, or null if the list is empty.</returns>
+        public async Task<IPEndPoint> GetNextServerCandidateAsync()
+        {
+            StartFetchingServers();
+            await listTask;
+
+            return GetNextServerCandidateInternal();
         }
 
         /// <summary>
@@ -277,7 +294,16 @@ namespace SteamKit2.Discovery
             IPEndPoint[] endPoints;
 
             StartFetchingServers();
-            listTask.Wait();
+
+            try
+            {
+                listTask.Wait();
+            }
+            catch(Exception ex)
+            {
+                DebugWrite("Failed to retrieve server list: {0}", ex);
+                return new IPEndPoint[0];
+            }
 
             lock ( listLock )
             {

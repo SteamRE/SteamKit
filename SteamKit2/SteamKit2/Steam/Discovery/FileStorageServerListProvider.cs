@@ -2,10 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.IO.IsolatedStorage;
 using System.Linq;
 using System.Net;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace SteamKit2.Discovery
@@ -13,7 +11,7 @@ namespace SteamKit2.Discovery
     /// <summary>
     /// A server list provider that uses a file to persist the server list using protobuf
     /// </summary>
-    public class FileStorageServerListProvider : ServerListProvider
+    public class FileStorageServerListProvider : IServerListProvider
     {
         [ProtoContract]
         class ServerListProto
@@ -24,7 +22,7 @@ namespace SteamKit2.Discovery
             public int port { get; set; }
         }
 
-        private string filename;
+        string filename;
 
         /// <summary>
         /// Initialize a new instance of FileStorageServerListProvider
@@ -38,7 +36,7 @@ namespace SteamKit2.Discovery
         /// Read the stored list of servers from the file
         /// </summary>
         /// <returns>List of servers if persisted, otherwise an empty list</returns>
-        public async Task<ICollection<IPEndPoint>> FetchServerList()
+        public async Task<ICollection<IPEndPoint>> FetchServerListAsync()
         {
             try
             {
@@ -65,7 +63,7 @@ namespace SteamKit2.Discovery
         /// </summary>
         /// <param name="endpoints">List of server endpoints</param>
         /// <returns>Awaitable task for write completion</returns>
-        public async Task UpdateServerList(IEnumerable<IPEndPoint> endpoints)
+        public async Task UpdateServerListAsync(IEnumerable<IPEndPoint> endpoints)
         {
             try
             {
@@ -77,6 +75,7 @@ namespace SteamKit2.Discovery
                     using (FileStream fileStream = File.OpenWrite(filename))
                     {
                         await ms.CopyToAsync(fileStream);
+                        fileStream.SetLength(fileStream.Position);
                     }
                 }
             }

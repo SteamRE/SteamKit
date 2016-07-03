@@ -1,9 +1,8 @@
-﻿using System.Net;
-using SteamKit2;
-using Xunit;
-using SteamKit2.Discovery;
+﻿using SteamKit2.Discovery;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using Xunit;
 
 namespace Tests
 {
@@ -19,13 +18,13 @@ namespace Tests
         [Fact]
         public void ReadsUpdatedServerList()
         {
-            isolatedStorageProvider.UpdateServerList(new List<IPEndPoint>()
+            isolatedStorageProvider.UpdateServerListAsync(new List<IPEndPoint>()
             {
                 new IPEndPoint(IPAddress.Any, 1234),
                 new IPEndPoint(IPAddress.Loopback, 4321)
             }).Wait();
 
-            var serverListTask = isolatedStorageProvider.FetchServerList();
+            var serverListTask = isolatedStorageProvider.FetchServerListAsync();
             serverListTask.Wait();
 
             var servers = serverListTask.Result;
@@ -34,7 +33,7 @@ namespace Tests
             Assert.Equal(IPAddress.Any, servers.First().Address);
             Assert.Equal(1234, servers.First().Port);
 
-            isolatedStorageProvider.UpdateServerList(new List<IPEndPoint>()).Wait();
+            isolatedStorageProvider.UpdateServerListAsync(new List<IPEndPoint>()).Wait();
         }
     }
 }

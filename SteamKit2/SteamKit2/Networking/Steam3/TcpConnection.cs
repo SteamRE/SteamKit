@@ -172,13 +172,12 @@ namespace SteamKit2
         /// <summary>
         /// Connects to the specified end point.
         /// </summary>
-        /// <param name="endPoint">The end point.</param>
+        /// <param name="endPointTask">Task returning the end point.</param>
         /// <param name="timeout">Timeout in milliseconds</param>
-        public override void Connect(Task<IPEndPoint> endPoint, int timeout)
+        public override void Connect(Task<IPEndPoint> endPointTask, int timeout)
         {
             lock (connectLock)
             {
-                DebugLog.WriteLine("TcpConnection", "Connecting to {0}...", endPoint);
                 Disconnect();
 
                 connectionFree.Reset();
@@ -190,11 +189,20 @@ namespace SteamKit2
 
                     socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
-                    endPoint.ContinueWith(t =>
+                    endPointTask.ContinueWith( t =>
                     {
+                        if (t.IsFaulted || t.IsCanceled)
+                        {
+                            DebugLog.WriteLine("TcpConnection", "Unable to find endpoint to connect, endpoint task returned: {0}", t.Exception);
+                            Release(userRequestedDisconnect: false);
+                            return;
+                        }
+
                         destination = t.Result;
-                        ThreadPool.QueueUserWorkItem(TryConnect, timeout);
-                    });
+                        DebugLog.WriteLine("TcpConnection", "Connecting to {0}...", destination);
+
+                        TryConnect(timeout);
+                    }, TaskContinuationOptions.LongRunning);
 
                 }
             }

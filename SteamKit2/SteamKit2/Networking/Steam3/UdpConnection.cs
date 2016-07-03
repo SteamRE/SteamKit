@@ -5,13 +5,13 @@
 
 
 
+using SteamKit2.Internal;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
-using SteamKit2.Internal;
 using System.Threading.Tasks;
 
 namespace SteamKit2
@@ -111,15 +111,16 @@ namespace SteamKit2
         /// <summary>
         /// Connects to the specified CM server.
         /// </summary>
-        /// <param name="endPoint">The CM server.</param>
+        /// <param name="endPointTask">Task returning the CM server.</param>
         /// <param name="timeout">Timeout in milliseconds</param>
-        public override void Connect(Task<IPEndPoint> endPoint, int timeout)
+        public override void Connect(Task<IPEndPoint> endPointTask, int timeout)
         {
             Disconnect();
 
             outPackets = new List<UdpPacket>();
             inPackets = new Dictionary<uint, UdpPacket>();
 
+            remoteEndPoint = null;
             remoteConnId = 0;
 
             outSeq = 1;
@@ -134,7 +135,7 @@ namespace SteamKit2
 
             netThread = new Thread(NetLoop);
             netThread.Name = "UdpConnection Thread";
-            netThread.Start(endPoint);
+            netThread.Start(endPointTask);
         }
 
         /// <summary>
@@ -367,6 +368,12 @@ namespace SteamKit2
         /// </summary>
         private void NetLoop(object param)
         {
+            // Variables that will be used deeper in the function; locating them here avoids recreating
+            // them since they don't need to be.
+            var userRequestedDisconnect = false;
+            EndPoint packetSender = (EndPoint)new IPEndPoint(IPAddress.Any, 0);
+            byte[] buf = new byte[2048];
+
             if (param is IPEndPoint)
             {
                 remoteEndPoint = param as IPEndPoint;
@@ -374,28 +381,32 @@ namespace SteamKit2
             else
             {
                 var epTask = param as Task<IPEndPoint>;
-                epTask.Wait();
-                remoteEndPoint = epTask.Result;
+                try
+                {
+                    remoteEndPoint = epTask.Result;
+                }
+                catch (Exception ex)
+                {
+                    DebugLog.WriteLine("UdpConnection", "Unable to find endpoint to connect, endpoint task returned: {0}", ex);
+                }
             }
 
-            // Variables that will be used deeper in the function; locating them here avoids recreating
-            // them since they don't need to be.
-            EndPoint packetSender = (EndPoint) new IPEndPoint(IPAddress.Any, 0);
-            byte[] buf = new byte[2048];
-
-            timeOut = DateTime.Now.AddSeconds(TIMEOUT_DELAY);
-            nextResend = DateTime.Now.AddSeconds(RESEND_DELAY);
-
-            var userRequestedDisconnect = false;
-
-            if (Interlocked.CompareExchange(ref state, (int)State.ChallengeReqSent, (int)State.Disconnected) != (int)State.Disconnected)
+            if ( remoteEndPoint != null )
             {
-                state = (int)State.Disconnected;
-                userRequestedDisconnect = true;
-            }
+                timeOut = DateTime.Now.AddSeconds(TIMEOUT_DELAY);
+                nextResend = DateTime.Now.AddSeconds(RESEND_DELAY);
 
-            // Begin by sending off the challenge request
-            SendPacket(new UdpPacket(EUdpPacketType.ChallengeReq));
+                if ( Interlocked.CompareExchange(ref state, (int)State.ChallengeReqSent, (int)State.Disconnected) != (int)State.Disconnected )
+                {
+                    state = (int)State.Disconnected;
+                    userRequestedDisconnect = true;
+                }
+                else
+                {
+                    // Begin by sending off the challenge request
+                    SendPacket(new UdpPacket(EUdpPacketType.ChallengeReq));
+                }
+            }
 
             while ( state != (int)State.Disconnected )
             {
