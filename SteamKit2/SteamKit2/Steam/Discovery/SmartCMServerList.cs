@@ -98,6 +98,12 @@ namespace SteamKit2.Discovery
         {
             DebugWrite( "Resolving server list" );
 
+            // if the server list has been populated, no need to perform any additional work
+            if ( servers.Count > 0 )
+            {
+                return;
+            }
+
             ICollection<IPEndPoint> serverList = await ServerListProvider.FetchServerListAsync();
 
             if ( serverList.Count == 0 && canFetchDirectory )
