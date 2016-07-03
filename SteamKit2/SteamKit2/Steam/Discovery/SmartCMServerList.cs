@@ -85,9 +85,14 @@ namespace SteamKit2.Discovery
 
         private void StartFetchingServers()
         {
-            lock (listLock)
+            lock ( listLock )
             {
-                if (listTask == null || listTask.IsFaulted || listTask.IsCanceled)
+                // if the server list has been populated, no need to perform any additional work
+                if ( servers.Count > 0 )
+                {
+                    listTask = Task.Delay( 0 );
+                }
+                else if ( listTask == null || listTask.IsFaulted || listTask.IsCanceled )
                 {
                     listTask = ResolveServerList();
                 }
@@ -98,18 +103,12 @@ namespace SteamKit2.Discovery
         {
             DebugWrite( "Resolving server list" );
 
-            // if the server list has been populated, no need to perform any additional work
-            if ( servers.Count > 0 )
-            {
-                return;
-            }
-
             ICollection<IPEndPoint> serverList = await ServerListProvider.FetchServerListAsync();
 
             if ( serverList.Count == 0 && canFetchDirectory )
             {
                 DebugWrite( "Server list provider had no entries, will query SteamDirectory" );
-                var directoryList = await SteamDirectory.LoadAsync(CellID);
+                var directoryList = await SteamDirectory.LoadAsync( CellID );
                 serverList = directoryList.ToList();
             }
 
