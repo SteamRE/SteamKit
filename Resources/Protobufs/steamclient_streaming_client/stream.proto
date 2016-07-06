@@ -10,8 +10,8 @@ enum EStreamChannel {
 }
 
 enum EStreamDiscoveryMessage {
-	k_EStreamDiscoveryRequest = 1;
-	k_EStreamDiscoveryResponse = 2;
+	k_EStreamDiscoveryPingRequest = 1;
+	k_EStreamDiscoveryPingResponse = 2;
 }
 
 enum EStreamControlMessage {
@@ -20,6 +20,10 @@ enum EStreamControlMessage {
 	k_EStreamControlNegotiationInit = 3;
 	k_EStreamControlNegotiationSetConfig = 4;
 	k_EStreamControlNegotiationComplete = 5;
+	k_EStreamControlClientHandshake = 6;
+	k_EStreamControlServerHandshake = 7;
+	k_EStreamControlStartNetworkTest = 8;
+	k_EStreamControlKeepAlive = 9;
 	k_EStreamControl_LAST_SETUP_MESSAGE = 15;
 	k_EStreamControlStartAudioData = 50;
 	k_EStreamControlStopAudioData = 51;
@@ -65,6 +69,9 @@ enum EStreamControlMessage {
 	k_EStreamControlSetStreamingClientConfig = 99;
 	k_EStreamControlSystemSuspend = 100;
 	k_EStreamControlSetControllerSettings = 101;
+	k_EStreamControlVirtualHereRequest = 102;
+	k_EStreamControlVirtualHereReady = 103;
+	k_EStreamControlVirtualHereShareDevice = 104;
 }
 
 enum EStreamVersion {
@@ -252,12 +259,30 @@ enum ELogFileType {
 	k_ELogFileSystemDebug = 2;
 }
 
-message CDiscoveryRequest {
-	optional bytes token = 1;
+message CDiscoveryPingRequest {
+	optional uint32 sequence = 1;
+	optional uint32 packet_size_requested = 2;
 }
 
-message CDiscoveryResponse {
-	optional string name = 1;
+message CDiscoveryPingResponse {
+	optional uint32 sequence = 1;
+	optional uint32 packet_size_received = 2;
+}
+
+message CStreamingClientHandshakeInfo {
+	optional int32 network_test = 2;
+}
+
+message CClientHandshakeMsg {
+	required .CStreamingClientHandshakeInfo info = 1;
+}
+
+message CStreamingServerHandshakeInfo {
+	optional int32 mtu = 1;
+}
+
+message CServerHandshakeMsg {
+	required .CStreamingServerHandshakeInfo info = 1;
 }
 
 message CAuthenticationRequestMsg {
@@ -273,6 +298,16 @@ message CAuthenticationResponseMsg {
 
 	optional .CAuthenticationResponseMsg.AuthenticationResult result = 1 [default = SUCCEEDED];
 	optional .EStreamVersion version = 2 [default = k_EStreamVersionNone];
+}
+
+message CKeepAliveMsg {
+}
+
+message CStartNetworkTestMsg {
+	optional uint32 frames = 1;
+	optional uint32 framerate = 2;
+	optional uint32 bitrate_kbps = 3;
+	optional uint32 burst_bitrate_kbps = 4;
 }
 
 message CStreamVideoMode {
@@ -503,6 +538,7 @@ message CInputControllerAttachedMsg {
 	optional string serial_number = 6;
 	optional string chip_id = 7;
 	repeated uint32 attributes = 8;
+	optional uint32 dongle_version = 9;
 }
 
 message CInputControllerStateMsg {
@@ -586,6 +622,18 @@ message CSetActivityMsg {
 }
 
 message CSystemSuspendMsg {
+}
+
+message CVirtualHereRequestMsg {
+	optional string hostname = 1;
+}
+
+message CVirtualHereReadyMsg {
+	optional uint32 licensed_device_count = 1;
+}
+
+message CVirtualHereShareDeviceMsg {
+	optional string device_address = 1;
 }
 
 message CStreamDataLostMsg {
