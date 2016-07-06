@@ -1,4 +1,5 @@
 import "steammessages.proto";
+import "engine_gcmessages.proto";
 
 option optimize_for = SPEED;
 option cc_generic_services = false;
@@ -78,6 +79,12 @@ enum ECsgoGCMsg {
 	k_EMsgGCCStrike15_v2_Client2GCStreamUnlock = 9174;
 	k_EMsgGCCStrike15_v2_FantasyRequestClientData = 9175;
 	k_EMsgGCCStrike15_v2_FantasyUpdateClientData = 9176;
+	k_EMsgGCCStrike15_v2_ClientToGCRequestElevate = 9179;
+	k_EMsgGCCStrike15_v2_GlobalChat = 9180;
+	k_EMsgGCCStrike15_v2_GlobalChat_Subscribe = 9181;
+	k_EMsgGCCStrike15_v2_GlobalChat_Unsubscribe = 9182;
+	k_EMsgGCCStrike15_v2_ClientAuthKeyCode = 9183;
+	k_EMsgGCCStrike15_v2_GotvSyncPacket = 9184;
 }
 
 message GameServerPing {
@@ -296,6 +303,7 @@ message CMsgGCCStrike15_v2_MatchmakingStart {
 	optional string ticket_data = 3;
 	optional uint32 client_version = 4;
 	optional .TournamentMatchSetup tournament_match = 5;
+	optional bool prime_only = 6;
 }
 
 message CMsgGCCStrike15_v2_MatchmakingStop {
@@ -398,12 +406,10 @@ message CMsgGCCStrike15_v2_MatchmakingServerReservationResponse {
 
 message CMsgGCCStrike15_v2_MatchmakingGC2ClientReserve {
 	optional uint64 serverid = 1;
-	optional string server_address = 7;
-	optional uint32 legacy_serverip = 2;
-	optional uint32 legacy_serverport = 3;
 	optional uint64 reservationid = 4;
 	optional .CMsgGCCStrike15_v2_MatchmakingGC2ServerReserve reservation = 5;
 	optional string map = 6;
+	optional string server_address = 7;
 }
 
 message CMsgGCCStrike15_v2_MatchmakingServerRoundStats {
@@ -915,6 +921,7 @@ message CSOQuestProgress {
 message CSOPersonaDataPublic {
 	optional int32 player_level = 1;
 	optional .PlayerCommendationInfo commendation = 2;
+	optional bool elevated_state = 3;
 }
 
 message CMsgGC_GlobalGame_Subscribe {
@@ -941,5 +948,28 @@ message CMsgGCCStrike15_v2_Client2GCRequestPrestigeCoin {
 message CMsgGCCStrike15_v2_Client2GCStreamUnlock {
 	optional uint64 ticket = 1;
 	optional int32 os = 2;
+}
+
+message CMsgGCCStrike15_v2_ClientToGCRequestElevate {
+	optional uint32 stage = 1;
+}
+
+message CMsgGCCStrike15_v2_ClientToGCChat {
+	optional uint64 match_id = 1;
+	optional string text = 2;
+}
+
+message CMsgGCCStrike15_v2_GCToClientChat {
+	optional uint32 account_id = 1;
+	optional string text = 2;
+}
+
+message CMsgGCCStrike15_v2_ClientAuthKeyCode {
+	optional uint32 eventid = 1;
+	optional string code = 2;
+}
+
+message CMsgGCCStrike15_GotvSyncPacket {
+	optional .CEngineGotvSyncPacket data = 1;
 }
 

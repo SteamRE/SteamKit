@@ -79,6 +79,7 @@ enum EGCSystemMsg {
 	k_EGCMsgCheckFriendship = 505;
 	k_EGCMsgCheckFriendshipResponse = 506;
 	k_EGCMsgVacVerificationChange = 518;
+	k_EGCMsgAccountPhoneNumberChange = 519;
 }
 
 enum ESOMsg {
@@ -116,5 +117,13 @@ message CMsgGCHVacVerificationChange {
 	optional fixed64 steamid = 1;
 	optional uint32 appid = 2;
 	optional bool is_verified = 3;
+}
+
+message CMsgGCHAccountPhoneNumberChange {
+	optional fixed64 steamid = 1;
+	optional uint32 appid = 2;
+	optional uint64 phone_id = 3;
+	optional bool is_verified = 4;
+	optional bool is_identifying = 5;
 }
 

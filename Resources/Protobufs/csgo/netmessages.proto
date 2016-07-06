@@ -70,6 +70,7 @@ enum SVC_Messages {
 	svc_CmdKeyValues = 34;
 	svc_EncryptedData = 35;
 	svc_HltvReplay = 36;
+	svc_Broadcast_Command = 38;
 }
 
 enum ReplayEventType_t {
@@ -483,5 +484,9 @@ message CCLCMsg_HltvReplay {
 	optional float slowdown_rate = 3;
 	optional int32 primary_target_ent_index = 4;
 	optional float event_time = 5;
+}
+
+message CSVCMsg_Broadcast_Command {
+	optional string cmd = 1;
 }
 
