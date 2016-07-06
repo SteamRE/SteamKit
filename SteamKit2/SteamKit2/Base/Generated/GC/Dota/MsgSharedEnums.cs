@@ -550,7 +550,10 @@ namespace SteamKit2.GC.Dota.Internal
       FANTASY_SELECTION_DRAFTING = 7,
             
       [global::ProtoBuf.ProtoEnum(Name=@"FANTASY_SELECTION_REGULAR_SEASON", Value=8)]
-      FANTASY_SELECTION_REGULAR_SEASON = 8
+      FANTASY_SELECTION_REGULAR_SEASON = 8,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"FANTASY_SELECTION_CARD_BASED", Value=9)]
+      FANTASY_SELECTION_CARD_BASED = 9
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"DOTAChatChannelType_t", EnumPassthru=true)]
@@ -612,7 +615,10 @@ namespace SteamKit2.GC.Dota.Internal
       DOTAChannelType_Private = 17,
             
       [global::ProtoBuf.ProtoEnum(Name=@"DOTAChannelType_PostGame", Value=18)]
-      DOTAChannelType_PostGame = 18
+      DOTAChannelType_PostGame = 18,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTAChannelType_BattleCup", Value=19)]
+      DOTAChannelType_BattleCup = 19
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"EProfileCardSlotType", EnumPassthru=true)]
@@ -740,7 +746,10 @@ namespace SteamKit2.GC.Dota.Internal
       DOTA_JOIN_RESULT_LOBBY_FULL = 9,
             
       [global::ProtoBuf.ProtoEnum(Name=@"DOTA_JOIN_RESULT_CUSTOM_GAME_INCORRECT_VERSION", Value=10)]
-      DOTA_JOIN_RESULT_CUSTOM_GAME_INCORRECT_VERSION = 10
+      DOTA_JOIN_RESULT_CUSTOM_GAME_INCORRECT_VERSION = 10,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_JOIN_RESULT_TIMEOUT", Value=11)]
+      DOTA_JOIN_RESULT_TIMEOUT = 11
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"SelectionPriorityType", EnumPassthru=true)]
@@ -960,6 +969,32 @@ namespace SteamKit2.GC.Dota.Internal
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_ETourneyQueueDeadlineState_ExpiringSoon", Value=101)]
       k_ETourneyQueueDeadlineState_ExpiringSoon = 101
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"EMatchOutcome", EnumPassthru=true)]
+    public enum EMatchOutcome
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMatchOutcome_Unknown", Value=0)]
+      k_EMatchOutcome_Unknown = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMatchOutcome_RadVictory", Value=2)]
+      k_EMatchOutcome_RadVictory = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMatchOutcome_DireVictory", Value=3)]
+      k_EMatchOutcome_DireVictory = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMatchOutcome_NotScored_PoorNetworkConditions", Value=64)]
+      k_EMatchOutcome_NotScored_PoorNetworkConditions = 64,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMatchOutcome_NotScored_Leaver", Value=65)]
+      k_EMatchOutcome_NotScored_Leaver = 65,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMatchOutcome_NotScored_ServerCrash", Value=66)]
+      k_EMatchOutcome_NotScored_ServerCrash = 66,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMatchOutcome_NotScored_NeverStarted", Value=67)]
+      k_EMatchOutcome_NotScored_NeverStarted = 67
     }
   
 }

@@ -611,22 +611,13 @@ namespace SteamKit2.GC.TF2.Internal
       set { _preview_item_def = value; }
     }
 
-    private uint _prevent_match_until_date = default(uint);
-    [global::ProtoBuf.ProtoMember(18, IsRequired = false, Name=@"prevent_match_until_date", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    private uint _matchmaking_ban_time = default(uint);
+    [global::ProtoBuf.ProtoMember(18, IsRequired = false, Name=@"matchmaking_ban_time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint prevent_match_until_date
+    public uint matchmaking_ban_time
     {
-      get { return _prevent_match_until_date; }
-      set { _prevent_match_until_date = value; }
-    }
-
-    private bool _phone_verified = (bool)false;
-    [global::ProtoBuf.ProtoMember(19, IsRequired = false, Name=@"phone_verified", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue((bool)false)]
-    public bool phone_verified
-    {
-      get { return _phone_verified; }
-      set { _phone_verified = value; }
+      get { return _matchmaking_ban_time; }
+      set { _matchmaking_ban_time = value; }
     }
 
     private uint _skill_rating_6v6 = default(uint);
@@ -647,13 +638,22 @@ namespace SteamKit2.GC.TF2.Internal
       set { _skill_rating_9v9 = value; }
     }
 
-    private bool _two_factor_enabled = (bool)false;
-    [global::ProtoBuf.ProtoMember(22, IsRequired = false, Name=@"two_factor_enabled", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    private bool _competitive_beta_access = (bool)false;
+    [global::ProtoBuf.ProtoMember(23, IsRequired = false, Name=@"competitive_beta_access", DataFormat = global::ProtoBuf.DataFormat.Default)]
     [global::System.ComponentModel.DefaultValue((bool)false)]
-    public bool two_factor_enabled
+    public bool competitive_beta_access
     {
-      get { return _two_factor_enabled; }
-      set { _two_factor_enabled = value; }
+      get { return _competitive_beta_access; }
+      set { _competitive_beta_access = value; }
+    }
+
+    private uint _matchmaking_low_priority_time = (uint)0;
+    [global::ProtoBuf.ProtoMember(24, IsRequired = false, Name=@"matchmaking_low_priority_time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue((uint)0)]
+    public uint matchmaking_low_priority_time
+    {
+      get { return _matchmaking_low_priority_time; }
+      set { _matchmaking_low_priority_time = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

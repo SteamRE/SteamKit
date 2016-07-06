@@ -424,6 +424,24 @@ namespace SteamKit2.GC.CSGO.Internal
       get { return _bonus_xp_usedflags; }
       set { _bonus_xp_usedflags = value; }
     }
+
+    private uint _elevated_state = default(uint);
+    [global::ProtoBuf.ProtoMember(14, IsRequired = false, Name=@"elevated_state", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint elevated_state
+    {
+      get { return _elevated_state; }
+      set { _elevated_state = value; }
+    }
+
+    private uint _elevated_timestamp = default(uint);
+    [global::ProtoBuf.ProtoMember(15, IsRequired = false, Name=@"elevated_timestamp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint elevated_timestamp
+    {
+      get { return _elevated_timestamp; }
+      set { _elevated_timestamp = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -889,6 +907,15 @@ namespace SteamKit2.GC.CSGO.Internal
     {
       get { return _baseitem_defidx; }
       set { _baseitem_defidx = value; }
+    }
+
+    private float _sticker_wear = default(float);
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"sticker_wear", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(float))]
+    public float sticker_wear
+    {
+      get { return _sticker_wear; }
+      set { _sticker_wear = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

@@ -589,6 +589,15 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _status; }
       set { _status = value; }
     }
+
+    private bool _battle_cup_victory = default(bool);
+    [global::ProtoBuf.ProtoMember(24, IsRequired = false, Name=@"battle_cup_victory", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool battle_cup_victory
+    {
+      get { return _battle_cup_victory; }
+      set { _battle_cup_victory = value; }
+    }
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"DiceRoll")]
   public partial class DiceRoll : global::ProtoBuf.IExtensible
   {

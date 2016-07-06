@@ -316,24 +316,6 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _low_priority_games_remaining; }
       set { _low_priority_games_remaining = value; }
     }
-
-    private uint _min_level = default(uint);
-    [global::ProtoBuf.ProtoMember(36, IsRequired = false, Name=@"min_level", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint min_level
-    {
-      get { return _min_level; }
-      set { _min_level = value; }
-    }
-
-    private uint _max_level = default(uint);
-    [global::ProtoBuf.ProtoMember(37, IsRequired = false, Name=@"max_level", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint max_level
-    {
-      get { return _max_level; }
-      set { _max_level = value; }
-    }
     private readonly global::System.Collections.Generic.List<EEvent> _active_ingame_events = new global::System.Collections.Generic.List<EEvent>();
     [global::ProtoBuf.ProtoMember(39, Name=@"active_ingame_events", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public global::System.Collections.Generic.List<EEvent> active_ingame_events
@@ -2021,7 +2003,10 @@ namespace SteamKit2.GC.Dota.Internal
       WEEKEND_TOURNEY = 9,
             
       [global::ProtoBuf.ProtoEnum(Name=@"LOCAL_BOT_MATCH", Value=10)]
-      LOCAL_BOT_MATCH = 10
+      LOCAL_BOT_MATCH = 10,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"SPECTATOR", Value=11)]
+      SPECTATOR = 11
     }
   
     private global::ProtoBuf.IExtension extensionObject;
@@ -2055,32 +2040,6 @@ namespace SteamKit2.GC.Dota.Internal
             
       [global::ProtoBuf.ProtoEnum(Name=@"LobbyDotaPauseSetting_Disabled", Value=2)]
       LobbyDotaPauseSetting_Disabled = 2
-    }
-  
-    [global::ProtoBuf.ProtoContract(Name=@"EMatchOutcome", EnumPassthru=true)]
-    public enum EMatchOutcome
-    {
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMatchOutcome_Unknown", Value=0)]
-      k_EMatchOutcome_Unknown = 0,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMatchOutcome_RadVictory", Value=2)]
-      k_EMatchOutcome_RadVictory = 2,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMatchOutcome_DireVictory", Value=3)]
-      k_EMatchOutcome_DireVictory = 3,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMatchOutcome_NotScored_PoorNetworkConditions", Value=64)]
-      k_EMatchOutcome_NotScored_PoorNetworkConditions = 64,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMatchOutcome_NotScored_Leaver", Value=65)]
-      k_EMatchOutcome_NotScored_Leaver = 65,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMatchOutcome_NotScored_ServerCrash", Value=66)]
-      k_EMatchOutcome_NotScored_ServerCrash = 66,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMatchOutcome_NotScored_NeverStarted", Value=67)]
-      k_EMatchOutcome_NotScored_NeverStarted = 67
     }
   
 }

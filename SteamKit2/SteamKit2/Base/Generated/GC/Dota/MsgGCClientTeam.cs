@@ -1136,13 +1136,13 @@ namespace SteamKit2.GC.Dota.Internal
       set { _invitee_name = value; }
     }
 
-    private uint _required_level = default(uint);
-    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"required_level", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    private uint _required_badge_level = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"required_badge_level", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint required_level
+    public uint required_badge_level
     {
-      get { return _required_level; }
-      set { _required_level = value; }
+      get { return _required_badge_level; }
+      set { _required_badge_level = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

@@ -134,6 +134,7 @@
     <Compile Include="Base\Generated\Unified\SteamMsgPlayer.cs" />
     <Compile Include="Base\Generated\Unified\SteamMsgPublishedFile.cs" />
     <Compile Include="Base\Generated\Unified\SteamMsgSecrets.cs" />
+    <Compile Include="Base\Generated\Unified\SteamMsgSiteLicense.cs" />
     <Compile Include="Base\Generated\Unified\SteamMsgTwoFactor.cs" />
     <Compile Include="Base\Generated\Unified\SteamMsgUnifiedBase.cs" />
     <Compile Include="Base\Generated\Unified\SteamMsgVideo.cs" />

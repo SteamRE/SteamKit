@@ -699,15 +699,6 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _game_mode; }
       set { _game_mode = value; }
     }
-
-    private uint _winning_team = default(uint);
-    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"winning_team", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint winning_team
-    {
-      get { return _winning_team; }
-      set { _winning_team = value; }
-    }
     private readonly global::System.Collections.Generic.List<CMsgDOTAMatchMinimal.Player> _players = new global::System.Collections.Generic.List<CMsgDOTAMatchMinimal.Player>();
     [global::ProtoBuf.ProtoMember(6, Name=@"players", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public global::System.Collections.Generic.List<CMsgDOTAMatchMinimal.Player> players
@@ -723,6 +714,15 @@ namespace SteamKit2.GC.Dota.Internal
     {
       get { return _league; }
       set { _league = value; }
+    }
+
+    private EMatchOutcome _match_outcome = EMatchOutcome.k_EMatchOutcome_Unknown;
+    [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"match_outcome", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(EMatchOutcome.k_EMatchOutcome_Unknown)]
+    public EMatchOutcome match_outcome
+    {
+      get { return _match_outcome; }
+      set { _match_outcome = value; }
     }
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Player")]
   public partial class Player : global::ProtoBuf.IExtensible

@@ -829,6 +829,24 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _trusted; }
       set { _trusted = value; }
     }
+
+    private uint _port = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"port", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint port
+    {
+      get { return _port; }
+      set { _port = value; }
+    }
+
+    private bool _success = default(bool);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"success", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool success
+    {
+      get { return _success; }
+      set { _success = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -1154,13 +1172,13 @@ namespace SteamKit2.GC.Dota.Internal
       set { _subscriber = value; }
     }
 
-    private ulong _subscribe_to = default(ulong);
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"subscribe_to", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    private ulong _subscribe_to_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"subscribe_to_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
     [global::System.ComponentModel.DefaultValue(default(ulong))]
-    public ulong subscribe_to
+    public ulong subscribe_to_id
     {
-      get { return _subscribe_to; }
-      set { _subscribe_to = value; }
+      get { return _subscribe_to_id; }
+      set { _subscribe_to_id = value; }
     }
 
     private ulong _sync_version = default(ulong);
@@ -1178,6 +1196,15 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _have_versions; }
     }
   
+
+    private uint _subscribe_to_type = default(uint);
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"subscribe_to_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint subscribe_to_type
+    {
+      get { return _subscribe_to_type; }
+      set { _subscribe_to_type = value; }
+    }
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgHaveVersions")]
   public partial class CMsgHaveVersions : global::ProtoBuf.IExtensible
   {
@@ -1226,13 +1253,22 @@ namespace SteamKit2.GC.Dota.Internal
       set { _subscriber = value; }
     }
 
-    private ulong _unsubscribe_from = default(ulong);
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"unsubscribe_from", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    private ulong _unsubscribe_from_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"unsubscribe_from_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
     [global::System.ComponentModel.DefaultValue(default(ulong))]
-    public ulong unsubscribe_from
+    public ulong unsubscribe_from_id
     {
-      get { return _unsubscribe_from; }
-      set { _unsubscribe_from = value; }
+      get { return _unsubscribe_from_id; }
+      set { _unsubscribe_from_id = value; }
+    }
+
+    private uint _unsubscribe_from_type = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"unsubscribe_from_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint unsubscribe_from_type
+    {
+      get { return _unsubscribe_from_type; }
+      set { _unsubscribe_from_type = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

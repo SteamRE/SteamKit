@@ -1696,6 +1696,106 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientToGCGetGiftPermissions")]
+  public partial class CMsgClientToGCGetGiftPermissions : global::ProtoBuf.IExtensible
+  {
+    public CMsgClientToGCGetGiftPermissions() {}
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientToGCGetGiftPermissionsResponse")]
+  public partial class CMsgClientToGCGetGiftPermissionsResponse : global::ProtoBuf.IExtensible
+  {
+    public CMsgClientToGCGetGiftPermissionsResponse() {}
+    
+
+    private bool _is_unlimited = default(bool);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"is_unlimited", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool is_unlimited
+    {
+      get { return _is_unlimited; }
+      set { _is_unlimited = value; }
+    }
+
+    private bool _has_two_factor = default(bool);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"has_two_factor", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool has_two_factor
+    {
+      get { return _has_two_factor; }
+      set { _has_two_factor = value; }
+    }
+
+    private EGCMsgInitiateTradeResponse _sender_permission = EGCMsgInitiateTradeResponse.k_EGCMsgInitiateTradeResponse_Accepted;
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"sender_permission", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(EGCMsgInitiateTradeResponse.k_EGCMsgInitiateTradeResponse_Accepted)]
+    public EGCMsgInitiateTradeResponse sender_permission
+    {
+      get { return _sender_permission; }
+      set { _sender_permission = value; }
+    }
+
+    private uint _friendship_age_requirement = default(uint);
+    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"friendship_age_requirement", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint friendship_age_requirement
+    {
+      get { return _friendship_age_requirement; }
+      set { _friendship_age_requirement = value; }
+    }
+
+    private uint _friendship_age_requirement_two_factor = default(uint);
+    [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"friendship_age_requirement_two_factor", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint friendship_age_requirement_two_factor
+    {
+      get { return _friendship_age_requirement_two_factor; }
+      set { _friendship_age_requirement_two_factor = value; }
+    }
+    private readonly global::System.Collections.Generic.List<CMsgClientToGCGetGiftPermissionsResponse.FriendPermission> _friend_permissions = new global::System.Collections.Generic.List<CMsgClientToGCGetGiftPermissionsResponse.FriendPermission>();
+    [global::ProtoBuf.ProtoMember(9, Name=@"friend_permissions", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CMsgClientToGCGetGiftPermissionsResponse.FriendPermission> friend_permissions
+    {
+      get { return _friend_permissions; }
+    }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"FriendPermission")]
+  public partial class FriendPermission : global::ProtoBuf.IExtensible
+  {
+    public FriendPermission() {}
+    
+
+    private uint _account_id = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint account_id
+    {
+      get { return _account_id; }
+      set { _account_id = value; }
+    }
+
+    private EGCMsgInitiateTradeResponse _permission = EGCMsgInitiateTradeResponse.k_EGCMsgInitiateTradeResponse_Accepted;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"permission", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(EGCMsgInitiateTradeResponse.k_EGCMsgInitiateTradeResponse_Accepted)]
+    public EGCMsgInitiateTradeResponse permission
+    {
+      get { return _permission; }
+      set { _permission = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientToGCUnpackBundle")]
   public partial class CMsgClientToGCUnpackBundle : global::ProtoBuf.IExtensible
   {
@@ -4163,9 +4263,6 @@ namespace SteamKit2.GC.Dota.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCGrantSelfMadeItemToAccount", Value=2555)]
       k_EMsgGCToGCGrantSelfMadeItemToAccount = 2555,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgSQLUpgradeBattleBooster", Value=2556)]
-      k_EMsgSQLUpgradeBattleBooster = 2556,
-            
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCPartnerBalanceRequest", Value=2557)]
       k_EMsgGCPartnerBalanceRequest = 2557,
             
@@ -4395,7 +4492,10 @@ namespace SteamKit2.GC.Dota.Internal
       k_EGCMsgInitiateTradeResponse_Using_New_Device = 21,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgInitiateTradeResponse_Sent_Invalid_Cookie", Value=22)]
-      k_EGCMsgInitiateTradeResponse_Sent_Invalid_Cookie = 22
+      k_EGCMsgInitiateTradeResponse_Sent_Invalid_Cookie = 22,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgInitiateTradeResponse_TooRecentFriend", Value=23)]
+      k_EGCMsgInitiateTradeResponse_TooRecentFriend = 23
     }
   
 }

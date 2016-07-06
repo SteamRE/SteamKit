@@ -76,9 +76,6 @@ namespace SteamKit2.GC.Dota.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"k_ETournamentTeamState_Forfeited", Value=14004)]
       k_ETournamentTeamState_Forfeited = 14004,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"k_ETournamentTeamState_Refunded", Value=14005)]
-      k_ETournamentTeamState_Refunded = 14005,
-            
       [global::ProtoBuf.ProtoEnum(Name=@"k_ETournamentTeamState_Finished1st", Value=15001)]
       k_ETournamentTeamState_Finished1st = 15001,
             
@@ -197,11 +194,17 @@ namespace SteamKit2.GC.Dota.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"k_ETournamentNodeState_A_Bye", Value=9)]
       k_ETournamentNodeState_A_Bye = 9,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"k_ETournamentNodeState_A_Forfeit", Value=10)]
-      k_ETournamentNodeState_A_Forfeit = 10,
+      [global::ProtoBuf.ProtoEnum(Name=@"k_ETournamentNodeState_A_Abandoned", Value=10)]
+      k_ETournamentNodeState_A_Abandoned = 10,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_ETournamentNodeState_ServerFailure", Value=11)]
-      k_ETournamentNodeState_ServerFailure = 11
+      k_ETournamentNodeState_ServerFailure = 11,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_ETournamentNodeState_A_TimeoutForfeit", Value=12)]
+      k_ETournamentNodeState_A_TimeoutForfeit = 12,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_ETournamentNodeState_A_TimeoutRefund", Value=13)]
+      k_ETournamentNodeState_A_TimeoutRefund = 13
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"EDOTAGroupMergeResult", EnumPassthru=true)]

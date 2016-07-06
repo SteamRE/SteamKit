@@ -810,6 +810,32 @@ namespace SteamKit2.GC.TF2.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgCraftCommonStatClock")]
+  public partial class CMsgCraftCommonStatClock : global::ProtoBuf.IExtensible
+  {
+    public CMsgCraftCommonStatClock() {}
+    
+
+    private ulong _tool_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"tool_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong tool_id
+    {
+      get { return _tool_id; }
+      set { _tool_id = value; }
+    }
+    private readonly global::System.Collections.Generic.List<ulong> _item_id = new global::System.Collections.Generic.List<ulong>();
+    [global::ProtoBuf.ProtoMember(2, Name=@"item_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public global::System.Collections.Generic.List<ulong> item_id
+    {
+      get { return _item_id; }
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCQuestDiscard_Request")]
   public partial class CMsgGCQuestDiscard_Request : global::ProtoBuf.IExtensible
   {
@@ -1329,7 +1355,10 @@ namespace SteamKit2.GC.TF2.Internal
       k_EMsgGCRemoveFestivizer = 2572,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCRemoveFestivizerResponse", Value=2573)]
-      k_EMsgGCRemoveFestivizerResponse = 2573
+      k_EMsgGCRemoveFestivizerResponse = 2573,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCCraftCommonStatClock", Value=2574)]
+      k_EMsgGCCraftCommonStatClock = 2574
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"EGCMsgResponse", EnumPassthru=true)]

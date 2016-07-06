@@ -48,6 +48,61 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCHAccountPhoneNumberChange")]
+  public partial class CMsgGCHAccountPhoneNumberChange : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCHAccountPhoneNumberChange() {}
+    
+
+    private ulong _steamid = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong steamid
+    {
+      get { return _steamid; }
+      set { _steamid = value; }
+    }
+
+    private uint _appid = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"appid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint appid
+    {
+      get { return _appid; }
+      set { _appid = value; }
+    }
+
+    private ulong _phone_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"phone_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong phone_id
+    {
+      get { return _phone_id; }
+      set { _phone_id = value; }
+    }
+
+    private bool _is_verified = default(bool);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"is_verified", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool is_verified
+    {
+      get { return _is_verified; }
+      set { _is_verified = value; }
+    }
+
+    private bool _is_identifying = default(bool);
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"is_identifying", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool is_identifying
+    {
+      get { return _is_identifying; }
+      set { _is_identifying = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     [global::ProtoBuf.ProtoContract(Name=@"EGCSystemMsg", EnumPassthru=true)]
     public enum EGCSystemMsg
     {
@@ -281,7 +336,10 @@ namespace SteamKit2.GC.CSGO.Internal
       k_EGCMsgCheckFriendshipResponse = 506,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgVacVerificationChange", Value=518)]
-      k_EGCMsgVacVerificationChange = 518
+      k_EGCMsgVacVerificationChange = 518,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgAccountPhoneNumberChange", Value=519)]
+      k_EGCMsgAccountPhoneNumberChange = 519
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"ESOMsg", EnumPassthru=true)]
