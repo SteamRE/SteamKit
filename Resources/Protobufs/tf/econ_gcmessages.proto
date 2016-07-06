@@ -170,6 +170,7 @@ enum EGCItemMsg {
 	k_EMsgGCRemoveGiftedByResponse = 2571;
 	k_EMsgGCRemoveFestivizer = 2572;
 	k_EMsgGCRemoveFestivizerResponse = 2573;
+	k_EMsgGCCraftCommonStatClock = 2574;
 }
 
 enum EGCMsgResponse {
@@ -361,6 +362,11 @@ message CMsgCraftCollectionUpgrade {
 }
 
 message CMsgCraftHalloweenOffering {
+	optional uint64 tool_id = 1;
+	repeated uint64 item_id = 2;
+}
+
+message CMsgCraftCommonStatClock {
 	optional uint64 tool_id = 1;
 	repeated uint64 item_id = 2;
 }
