@@ -122,10 +122,7 @@ enum EDOTAGCMsg {
 	k_EMsgGCGenerateDiretidePrizeListResponse = 7180;
 	k_EMsgGCStorePromoPagesRequest = 7182;
 	k_EMsgGCStorePromoPagesResponse = 7183;
-	k_EMsgGCSpawnLootGreevil = 7184;
-	k_EMsgGCDismissLootGreevil = 7185;
 	k_EMsgGCToGCMatchCompleted = 7186;
-	k_EMsgGCDismissLootGreevilResponse = 7187;
 	k_EMsgGCBalancedShuffleLobby = 7188;
 	k_EMsgGCToGCCheckLeaguePermission = 7189;
 	k_EMsgGCToGCCheckLeaguePermissionResponse = 7190;
@@ -311,7 +308,6 @@ enum EDOTAGCMsg {
 	k_EMsgDOTAFriendRecruitInviteAcceptDecline = 7396;
 	k_EMsgGCPartyLeaderWatchGamePrompt = 7397;
 	k_EMsgDOTAFrostivusTimeElapsed = 7398;
-	k_EMsgGCToGCGrantEarnedLicense = 7399;
 	k_EMsgDOTALiveLeagueGameUpdate = 7402;
 	k_EMsgDOTAChatGetUserList = 7403;
 	k_EMsgDOTAChatGetUserListResponse = 7404;
@@ -352,8 +348,6 @@ enum EDOTAGCMsg {
 	k_EMsgGCEventGameCreate = 7443;
 	k_EMsgGCPerfectWorldUserLookupRequest = 7444;
 	k_EMsgGCPerfectWorldUserLookupResponse = 7445;
-	k_EMsgGCToGCIncrementRecruitmentSDO = 7446;
-	k_EMsgGCToGCIncrementRecruitmentLevel = 7447;
 	k_EMsgGCFantasyRemoveOwner = 7448;
 	k_EMsgGCFantasyRemoveOwnerResponse = 7449;
 	k_EMsgGCRequestBatchPlayerResources = 7450;
@@ -403,7 +397,6 @@ enum EDOTAGCMsg {
 	k_EMsgGCToClientTournamentItemDrop = 7495;
 	k_EMsgSQLDelayedGrantLeagueDrop = 7496;
 	k_EMsgServerGCUpdateSpectatorCount = 7497;
-	k_EMsgDOTAStartDailyHeroChallengeRequest = 7498;
 	k_EMsgGCFantasyPlayerScoreDetailsRequest = 7499;
 	k_EMsgGCFantasyPlayerScoreDetailsResponse = 7500;
 	k_EMsgGCToGCEmoticonUnlock = 7501;
@@ -449,7 +442,6 @@ enum EDOTAGCMsg {
 	k_EMsgClientToGCCreateHeroStatue = 7547;
 	k_EMsgGCToClientHeroStatueCreateResult = 7548;
 	k_EMsgGCGCToLANServerRelayConnect = 7549;
-	k_EMsgSignOutAssassinMiniGameInfo = 7550;
 	k_EMsgServerToGCGetIngameEventData = 7551;
 	k_EMsgGCToGCUpdateIngameEventDataBroadcast = 7552;
 	k_EMsgGCToServerIngameEventData_OraclePA = 7553;
@@ -511,7 +503,6 @@ enum EDOTAGCMsg {
 	k_EMsgClientToGCCreateTeamShowcase = 8002;
 	k_EMsgGCToClientTeamShowcaseCreateResult = 8003;
 	k_EMsgServerToGCLockCharmTrading = 8004;
-	k_EMsgDOTACNY2015EventPointUsage = 8005;
 	k_EMsgClientToGCPlayerStatsRequest = 8006;
 	k_EMsgGCToClientPlayerStatsResponse = 8007;
 	k_EMsgGCClearPracticeLobbyTeam = 8008;
@@ -558,7 +549,6 @@ enum EDOTAGCMsg {
 	k_EMsgCustomGameClientFinishedLoading = 8053;
 	k_EMsgGCPracticeLobbyCloseBroadcastChannel = 8054;
 	k_EMsgGCStartFindingMatchResponse = 8055;
-	k_EMsgSQLGCToGCUpdateHeroMMR = 8056;
 	k_EMsgSQLGCToGCGrantAccountFlag = 8057;
 	k_EMsgGCToGCGetAccountFlags = 8058;
 	k_EMsgGCToGCGetAccountFlagsResponse = 8059;
@@ -652,5 +642,34 @@ enum EDOTAGCMsg {
 	k_EMsgGCToClientWageringUpdate = 8154;
 	k_EMsgGCToClientArcanaVotesUpdate = 8155;
 	k_EMsgClientToGCAddTI6TreeProgress = 8156;
+	k_EMsgClientToGCSetSpectatorLobbyDetails = 8157;
+	k_EMsgClientToGCSetSpectatorLobbyDetailsResponse = 8158;
+	k_EMsgClientToGCCreateSpectatorLobby = 8159;
+	k_EMsgClientToGCCreateSpectatorLobbyResponse = 8160;
+	k_EMsgClientToGCSpectatorLobbyList = 8161;
+	k_EMsgClientToGCSpectatorLobbyListResponse = 8162;
+	k_EMsgSpectatorLobbyGameDetails = 8163;
+	k_EMsgServerToGCStartCompendiumInGamePredictions = 8164;
+	k_EMsgServerToGCEndCompendiumInGamePredictions = 8165;
+	k_EMsgServerToGCCompendiumInGamePredictionResults = 8166;
+	k_EMsgServerToGCCloseCompendiumInGamePredictionVoting = 8167;
+	k_EMsgClientToGCOpenPlayerCardPack = 8168;
+	k_EMsgClientToGCOpenPlayerCardPackResponse = 8169;
+	k_EMsgClientToGCSelectCompendiumInGamePrediction = 8170;
+	k_EMsgClientToGCSelectCompendiumInGamePredictionResponse = 8171;
+	k_EMsgClientToGCWeekendTourneyGetPlayerStats = 8172;
+	k_EMsgClientToGCWeekendTourneyGetPlayerStatsResponse = 8173;
+	k_EMsgClientToGCRecyclePlayerCard = 8174;
+	k_EMsgClientToGCRecyclePlayerCardResponse = 8175;
+	k_EMsgClientToGCCreatePlayerCardPack = 8176;
+	k_EMsgClientToGCCreatePlayerCardPackResponse = 8177;
+	k_EMsgClientToGCGetPlayerCardRosterRequest = 8178;
+	k_EMsgClientToGCGetPlayerCardRosterResponse = 8179;
+	k_EMsgClientToGCSetPlayerCardRosterRequest = 8180;
+	k_EMsgClientToGCSetPlayerCardRosterResponse = 8181;
+	k_EMsgServerToGCStartCompendiumInGamePredictionsResponse = 8182;
+	k_EMsgServerToGCCloseCompendiumInGamePredictionVotingResponse = 8183;
+	k_EMsgServerToGCEndCompendiumInGamePredictionsResponse = 8184;
+	k_EMsgServerToGCCompendiumInGamePredictionResultsResponse = 8185;
 }
 

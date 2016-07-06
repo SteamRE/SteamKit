@@ -157,6 +157,7 @@ message CNETMsg_SpawnGroup_Load {
 	optional int32 manifestloadpriority = 14;
 	optional uint32 worldgroupid = 15;
 	optional uint32 creationsequence = 16;
+	optional string savegamefilename = 17;
 }
 
 message CNETMsg_SpawnGroup_ManifestUpdate {

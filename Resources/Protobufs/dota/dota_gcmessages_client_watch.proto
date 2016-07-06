@@ -133,9 +133,9 @@ message CMsgDOTAMatchMinimal {
 	optional fixed32 start_time = 2;
 	optional uint32 duration = 3;
 	optional .DOTA_GameMode game_mode = 4 [default = DOTA_GAMEMODE_NONE];
-	optional uint32 winning_team = 5;
 	repeated .CMsgDOTAMatchMinimal.Player players = 6;
 	optional .CMsgDOTAMatchMinimal.League league = 7;
+	optional .EMatchOutcome match_outcome = 8 [default = k_EMatchOutcome_Unknown];
 }
 
 message CDOTAReplayDownloadInfo {

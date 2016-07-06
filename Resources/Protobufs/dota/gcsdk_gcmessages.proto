@@ -169,6 +169,8 @@ message CMsgGCRequestSubGCSessionInfo {
 message CMsgGCRequestSubGCSessionInfoResponse {
 	optional fixed32 ip = 1;
 	optional bool trusted = 2;
+	optional uint32 port = 3;
+	optional bool success = 4;
 }
 
 message CMsgSOCacheHaveVersion {
@@ -222,14 +224,16 @@ message CMsgGCToGCSOCacheSubscribe {
 	}
 
 	optional fixed64 subscriber = 1;
-	optional fixed64 subscribe_to = 2;
+	optional fixed64 subscribe_to_id = 2;
 	optional fixed64 sync_version = 3;
 	repeated .CMsgGCToGCSOCacheSubscribe.CMsgHaveVersions have_versions = 4;
+	optional uint32 subscribe_to_type = 5;
 }
 
 message CMsgGCToGCSOCacheUnsubscribe {
 	optional fixed64 subscriber = 1;
-	optional fixed64 unsubscribe_from = 2;
+	optional fixed64 unsubscribe_from_id = 2;
+	optional uint32 unsubscribe_from_type = 3;
 }
 
 message CMsgGCClientPing {

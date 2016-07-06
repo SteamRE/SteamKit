@@ -834,3 +834,62 @@ message CMsgDOTAPassportVote {
 	repeated .CMsgDOTAPassportPlayerCardChallenge player_card_challenges = 4;
 }
 
+message CMsgDOTAFantasyPlayerMatchStats {
+	message Match {
+		optional uint64 match_id = 1;
+		optional uint32 series_id = 2;
+		optional uint32 series_type = 3;
+		optional uint32 level = 4;
+		optional uint32 kills = 5;
+		optional uint32 deaths = 6;
+		optional uint32 assists = 7;
+		optional uint32 last_hits = 8;
+		optional uint32 denies = 9;
+		optional float gpm = 10;
+		optional float xppm = 11;
+		optional float stuns = 12;
+		optional float healing = 13;
+		optional uint32 tower_kills = 14;
+		optional uint32 roshan_kills = 15;
+	}
+
+	optional uint32 player_account_id = 1;
+	repeated .CMsgDOTAFantasyPlayerMatchStats.Match matches = 2;
+}
+
+message CMsgClientToGCGetPlayerCardRosterRequest {
+	optional uint32 league_id = 1;
+	optional uint32 timestamp = 2;
+}
+
+message CMsgClientToGCGetPlayerCardRosterResponse {
+	enum Result {
+		SUCCESS = 0;
+		ERROR_UNSPECIFIED = 1;
+		ERROR_INVALID_LEAGUE_ID = 2;
+		ERROR_INVALID_TIMESTAMP = 3;
+	}
+
+	optional .CMsgClientToGCGetPlayerCardRosterResponse.Result result = 1 [default = SUCCESS];
+	repeated uint64 player_card_item_id = 2;
+}
+
+message CMsgClientToGCSetPlayerCardRosterRequest {
+	optional uint32 league_id = 1;
+	optional uint32 timestamp = 2;
+	optional uint32 slot = 3;
+	optional uint64 player_card_item_id = 4;
+}
+
+message CMsgClientToGCSetPlayerCardRosterResponse {
+	enum Result {
+		SUCCESS = 0;
+		ERROR_UNSPECIFIED = 1;
+		ERROR_INVALID_LEAGUE_ID = 2;
+		ERROR_INVALID_TIMESTAMP = 3;
+		ERROR_PLAYER_CARD_NOT_OWNED = 4;
+	}
+
+	optional .CMsgClientToGCSetPlayerCardRosterResponse.Result result = 1 [default = SUCCESS];
+}
+

@@ -199,7 +199,7 @@ message CMsgDOTATeamInvite_InviterToGC {
 message CMsgDOTATeamInvite_GCImmediateResponseToInviter {
 	optional .ETeamInviteResult result = 1 [default = TEAM_INVITE_SUCCESS];
 	optional string invitee_name = 2;
-	optional uint32 required_level = 3;
+	optional uint32 required_badge_level = 3;
 }
 
 message CMsgDOTATeamInvite_GCRequestToInvitee {

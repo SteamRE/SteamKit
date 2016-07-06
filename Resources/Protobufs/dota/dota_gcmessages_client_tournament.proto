@@ -117,10 +117,12 @@ message CMsgDOTATournament {
 		optional uint32 node_or_state = 2;
 		repeated uint32 players = 3 [packed = true];
 		repeated uint32 player_buyin = 9 [packed = true];
+		repeated uint32 player_skill_level = 10 [packed = true];
 		optional uint32 team_id = 4;
 		optional string team_name = 5;
 		optional uint64 team_base_logo = 7;
 		optional uint64 team_ui_logo = 8;
+		optional uint32 team_date = 11;
 	}
 
 	message Game {
@@ -145,6 +147,8 @@ message CMsgDOTATournament {
 	optional uint32 skill_level = 4;
 	optional .ETournamentTemplate tournament_template = 5 [default = k_ETournamentTemplate_None];
 	optional .ETournamentState state = 6 [default = k_ETournamentState_Unknown];
+	optional uint32 state_seq_num = 10;
+	optional uint32 season_trophy_id = 11;
 	repeated .CMsgDOTATournament.Team teams = 7;
 	repeated .CMsgDOTATournament.Game games = 8;
 	repeated .CMsgDOTATournament.Node nodes = 9;
@@ -159,6 +163,7 @@ message CMsgDOTATournamentStateChange {
 	message TeamChange {
 		optional uint64 team_gid = 1;
 		optional uint32 new_node_or_state = 2;
+		optional uint32 old_node_or_state = 3;
 	}
 
 	optional uint32 new_tournament_id = 1;
@@ -167,6 +172,7 @@ message CMsgDOTATournamentStateChange {
 	repeated .CMsgDOTATournamentStateChange.GameChange game_changes = 4;
 	repeated .CMsgDOTATournamentStateChange.TeamChange team_changes = 5;
 	repeated uint32 merged_tournament_ids = 6 [packed = true];
+	optional uint32 state_seq_num = 7;
 }
 
 message CMsgDOTATournamentRequest {
@@ -182,5 +188,26 @@ message CMsgDOTATournamentResponse {
 message CMsgDOTAClearTournamentGame {
 	optional uint32 tournament_id = 1;
 	optional uint32 game_id = 2;
+}
+
+message CMsgDOTAWeekendTourneyPlayerStats {
+	optional uint32 account_id = 1;
+	optional uint32 season_trophy_id = 2;
+	optional uint32 times_won_0 = 3;
+	optional uint32 times_won_1 = 4;
+	optional uint32 times_won_2 = 5;
+	optional uint32 times_won_3 = 6;
+	optional uint32 times_bye_and_lost = 7;
+	optional uint32 times_bye_and_won = 8;
+	optional uint32 total_games_won = 9;
+	optional uint32 max_tier_played = 10;
+	optional uint32 max_tier_won_game = 11;
+	optional uint32 max_tier_champion = 12;
+	optional uint32 score = 13;
+}
+
+message CMsgDOTAWeekendTourneyPlayerStatsRequest {
+	optional uint32 account_id = 1;
+	optional uint32 season_trophy_id = 2;
 }
 

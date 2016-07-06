@@ -97,6 +97,7 @@ message CMsgSosStartSoundEvent {
 	optional int32 source_entity_index = 3;
 	optional int32 seed = 4;
 	optional bytes packed_params = 5;
+	optional float start_time = 6;
 }
 
 message CMsgSosStopSoundEvent {

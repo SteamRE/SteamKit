@@ -114,6 +114,7 @@ enum Fantasy_Selection_Mode {
 	FANTASY_SELECTION_PRE_DRAFT = 6;
 	FANTASY_SELECTION_DRAFTING = 7;
 	FANTASY_SELECTION_REGULAR_SEASON = 8;
+	FANTASY_SELECTION_CARD_BASED = 9;
 }
 
 enum DOTAChatChannelType_t {
@@ -136,6 +137,7 @@ enum DOTAChatChannelType_t {
 	DOTAChannelType_CustomGame = 16;
 	DOTAChannelType_Private = 17;
 	DOTAChannelType_PostGame = 18;
+	DOTAChannelType_BattleCup = 19;
 }
 
 enum EProfileCardSlotType {
@@ -188,6 +190,7 @@ enum DOTAJoinLobbyResult {
 	DOTA_JOIN_RESULT_NO_LOBBY_FOUND = 8;
 	DOTA_JOIN_RESULT_LOBBY_FULL = 9;
 	DOTA_JOIN_RESULT_CUSTOM_GAME_INCORRECT_VERSION = 10;
+	DOTA_JOIN_RESULT_TIMEOUT = 11;
 }
 
 enum SelectionPriorityType {
@@ -273,6 +276,16 @@ enum ETourneyQueueDeadlineState {
 	k_ETourneyQueueDeadlineState_EligibleForRefund = 4;
 	k_ETourneyQueueDeadlineState_NA = -1;
 	k_ETourneyQueueDeadlineState_ExpiringSoon = 101;
+}
+
+enum EMatchOutcome {
+	k_EMatchOutcome_Unknown = 0;
+	k_EMatchOutcome_RadVictory = 2;
+	k_EMatchOutcome_DireVictory = 3;
+	k_EMatchOutcome_NotScored_PoorNetworkConditions = 64;
+	k_EMatchOutcome_NotScored_Leaver = 65;
+	k_EMatchOutcome_NotScored_ServerCrash = 66;
+	k_EMatchOutcome_NotScored_NeverStarted = 67;
 }
 
 message CDOTAClientHardwareSpecs {

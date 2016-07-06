@@ -43,6 +43,7 @@ enum DOTA_TournamentEvents {
 }
 
 enum DOTA_COMBATLOG_TYPES {
+	DOTA_COMBATLOG_INVALID = -1;
 	DOTA_COMBATLOG_DAMAGE = 0;
 	DOTA_COMBATLOG_HEAL = 1;
 	DOTA_COMBATLOG_MODIFIER_ADD = 2;
@@ -161,6 +162,18 @@ message CMsgLobbyEventPoints {
 	repeated .CMsgLobbyEventPoints.AccountPoints account_points = 2;
 }
 
+message CMsgLobbyBattleCupVictory {
+	message BattleCupVictory {
+		optional uint32 account_id = 1;
+		optional uint32 win_date = 2;
+		optional uint32 skill_level = 3;
+		optional uint32 team_id = 4;
+		optional uint32 tournament_id = 5;
+	}
+
+	repeated .CMsgLobbyBattleCupVictory.BattleCupVictory winner_accounts = 1;
+}
+
 message CMsgDOTABroadcastNotification {
 	optional string message = 1;
 }
@@ -268,7 +281,7 @@ message CAdditionalEquipSlot {
 }
 
 message CMsgDOTACombatLogEntry {
-	optional .DOTA_COMBATLOG_TYPES type = 1 [default = DOTA_COMBATLOG_DAMAGE];
+	optional .DOTA_COMBATLOG_TYPES type = 1 [default = DOTA_COMBATLOG_INVALID];
 	optional uint32 target_name = 2;
 	optional uint32 target_source_name = 3;
 	optional uint32 attacker_name = 4;
@@ -378,6 +391,11 @@ message CMsgDOTAProfileCard {
 	optional uint32 badge_points = 4;
 	optional uint32 event_points = 5;
 	optional uint32 event_id = 6;
+	optional uint32 battle_cup_win_date = 7;
+	optional uint32 battle_cup_valid_until = 8;
+	optional uint32 battle_cup_skill_level = 9;
+	optional uint32 battle_cup_team_id = 10;
+	optional uint32 battle_cup_tournament_id = 11;
 }
 
 message CSODOTAPlayerChallenge {
@@ -720,14 +738,21 @@ message CMsgDOTASeasonPredictions {
 	message Choice {
 		optional uint32 value = 1;
 		optional string name = 2;
+		optional uint32 min_raw_value = 3;
+		optional uint32 max_raw_value = 4;
 	}
 
 	message Answers {
 		repeated uint32 answer_id = 1;
 	}
 
+	message QueryKeyValues {
+		optional string name = 1;
+		optional string value = 2;
+	}
+
 	message Prediction {
-		optional uint32 type = 1;
+		optional .CMsgDOTASeasonPredictions.ePredictionType type = 1 [default = Generic];
 		optional string question = 2;
 		repeated .CMsgDOTASeasonPredictions.Choice choices = 3;
 		optional uint32 team_id = 4;
@@ -740,6 +765,27 @@ message CMsgDOTASeasonPredictions {
 		optional uint32 answer_type = 11;
 		optional uint32 answer_id = 12;
 		repeated .CMsgDOTASeasonPredictions.Answers answers = 13;
+		optional string query_name = 14;
+		optional uint32 lock_on_selection_id = 15;
+		optional uint32 lock_on_selection_value = 16;
+		optional bool lock_on_selection_set = 17;
+	}
+
+	message InGamePrediction {
+		optional uint32 id = 1;
+		optional string name = 2;
+		optional .CMsgDOTASeasonPredictions.ePredictionType type = 3 [default = Generic];
+		optional .CMsgDOTASeasonPredictions.eRandomSelectionGroup_t group = 4 [default = EarlyGame];
+		optional string question = 5;
+		repeated .CMsgDOTASeasonPredictions.Choice choices = 6;
+		repeated string required_heroes = 7;
+		optional string query_name = 8;
+		repeated .CMsgDOTASeasonPredictions.QueryKeyValues query_values = 9;
+		optional .CMsgDOTASeasonPredictions.eResolutionType_t answer_resolution_type = 10 [default = InvalidQuery];
+		optional uint32 points_to_grant = 11;
+		optional uint32 reward_action = 12;
+		optional uint32 debug_force_selection = 13;
+		optional .CMsgDOTASeasonPredictions.eRawValueType_t raw_value_type = 14 [default = Number];
 	}
 
 	enum ePredictionType {
@@ -748,6 +794,7 @@ message CMsgDOTASeasonPredictions {
 		Team = 2;
 		Player = 3;
 		Special = 4;
+		YesNo = 5;
 	}
 
 	enum eAnswerType {
@@ -758,9 +805,37 @@ message CMsgDOTASeasonPredictions {
 		AnswerTeam = 4;
 		SingleTime = 5;
 		MultipleTime = 6;
+		NoAnswer = 7;
+	}
+
+	enum eResolutionType_t {
+		InvalidQuery = 0;
+		FirstToPassQuery = 1;
+		LastToPassQuery = 2;
+		LastRemainingQuery = 3;
+		MaxToPassQuery = 4;
+		MinToPassQuery = 5;
+		SumQuery = 6;
+		MaxTeamSumToPassQuery = 7;
+		MinTeamSumToPassQuery = 8;
+	}
+
+	enum eRandomSelectionGroup_t {
+		EarlyGame = 0;
+		MidGame = 1;
+		LateGame = 2;
+		Count = 3;
+	}
+
+	enum eRawValueType_t {
+		Number = 0;
+		Time = 1;
 	}
 
 	repeated .CMsgDOTASeasonPredictions.Prediction predictions = 1;
+	repeated .CMsgDOTASeasonPredictions.InGamePrediction in_game_predictions = 2;
+	optional uint32 in_game_prediction_count_per_game = 3;
+	optional uint32 in_game_prediction_voting_period_minutes = 4;
 }
 
 message CMsgDOTAMatch {
@@ -846,7 +921,6 @@ message CMsgDOTAMatch {
 		REPLAY_EXPIRED = 2;
 	}
 
-	optional bool good_guys_win = 2;
 	optional uint32 duration = 3;
 	optional fixed32 startTime = 4;
 	repeated .CMsgDOTAMatch.Player players = 5;
@@ -890,5 +964,19 @@ message CMsgDOTAMatch {
 	optional fixed32 private_metadata_key = 47;
 	optional uint32 radiant_team_score = 48;
 	optional uint32 dire_team_score = 49;
+	optional .EMatchOutcome match_outcome = 50 [default = k_EMatchOutcome_Unknown];
+	optional uint32 tournament_id = 51;
+	optional uint32 tournament_round = 52;
+	optional uint32 pre_game_duration = 53;
+}
+
+message CMsgPlayerCard {
+	message StatModifier {
+		optional uint32 stat = 1;
+		optional uint32 value = 2;
+	}
+
+	optional uint32 account_id = 1;
+	repeated .CMsgPlayerCard.StatModifier stat_modifier = 2;
 }
 

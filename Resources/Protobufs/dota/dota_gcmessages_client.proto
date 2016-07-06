@@ -145,6 +145,7 @@ message CMsgDOTAPopup {
 		TOURNAMENT_GAME_HAS_NO_DIRE_TEAM = 25;
 		TOURNAMENT_GAME_SQL_UPDATE_FAILED = 26;
 		NOT_LEAGUE_ADMIN = 27;
+		IN_ANOTHER_GAME = 29;
 		PARTY_MEMBER_IN_ANOTHER_GAME = 30;
 		PARTY_MEMBER_IN_LOW_PRIORITY = 31;
 		CLIENT_OUT_OF_DATE = 32;
@@ -190,6 +191,7 @@ message CMsgDOTAReportsRemainingResponse {
 message CMsgDOTASubmitPlayerReport {
 	optional uint32 target_account_id = 1;
 	optional uint32 report_flags = 2;
+	optional uint64 lobby_id = 4;
 	optional string comment = 5;
 }
 
@@ -222,8 +224,8 @@ message CMsgDOTASubmitLobbyMVPVoteResponse {
 
 message CMsgDOTALobbyMVPNotifyRecipient {
 	optional uint32 voter_account_id = 1;
-	optional uint32 num_votes = 2;
-	optional string voter_persona_name = 3;
+	optional uint32 recipient_account_id = 2;
+	optional uint32 num_votes = 3;
 }
 
 message CMsgDOTALobbyMVPAwarded {
@@ -597,6 +599,14 @@ message CMsgDOTAMatchmakingStatsResponse {
 	repeated .CMsgMatchmakingMatchGroupInfo match_groups = 8;
 }
 
+message CMsgDOTAUpdateMatchmakingStats {
+	optional .CMsgDOTAMatchmakingStatsResponse stats = 1;
+}
+
+message CMsgDOTAUpdateMatchManagementStats {
+	optional .CMsgDOTAMatchmakingStatsResponse stats = 1;
+}
+
 message CMsgDOTASetMatchHistoryAccess {
 	optional bool allow_3rd_party_match_history = 1;
 }
@@ -899,6 +909,13 @@ message CMsgDOTAGetPlayerMatchHistoryResponse {
 		optional uint32 engine = 12;
 		optional bool active_battle_pass = 13;
 		optional bool seasonal_rank = 14;
+		optional uint32 tourney_id = 15;
+		optional uint32 tourney_round = 16;
+		optional uint32 tourney_tier = 17;
+		optional uint32 tourney_division = 18;
+		optional uint32 team_id = 19;
+		optional string team_name = 20;
+		optional uint64 ugc_team_ui_logo = 21;
 	}
 
 	repeated .CMsgDOTAGetPlayerMatchHistoryResponse.Match matches = 1;
@@ -1277,8 +1294,9 @@ message CMsgDOTAPartyRichPresence {
 		optional uint32 skill_level = 2;
 		optional uint32 round = 3;
 		optional uint32 tournament_id = 4;
-		optional .EWeekendTourneyRichPresenceEvent event = 5 [default = k_EWeekendTourneyRichPresenceEvent_None];
-		optional uint32 event_round = 6;
+		optional uint32 state_seq_num = 5;
+		optional .EWeekendTourneyRichPresenceEvent event = 6 [default = k_EWeekendTourneyRichPresenceEvent_None];
+		optional uint32 event_round = 7;
 	}
 
 	optional fixed64 party_id = 1;
@@ -1560,18 +1578,6 @@ message CMsgClientToGCTeammateStatsResponse {
 	repeated .CMsgClientToGCTeammateStatsResponse.TeammateStat teammate_stats = 2;
 }
 
-message CMsgClientToGCGetGiftPermissions {
-	optional uint32 gift_item_def = 1;
-}
-
-message CMsgClientToGCGetGiftPermissionsResponse {
-	optional bool is_unlimited = 1;
-	repeated uint32 allowed_account_ids = 2;
-	optional bool has_two_factor = 3;
-	optional uint32 item_def_limit_count = 4;
-	optional uint32 item_def_limit_period = 5;
-}
-
 message CMsgClientToGCVoteForArcana {
 	message MatchVote {
 		optional uint64 match_id = 1;
@@ -1618,6 +1624,7 @@ message CMsgArcanaVotes {
 	optional uint32 round_number = 3;
 	optional uint32 voting_state = 4;
 	optional bool is_current_round_calibrating = 5;
+	optional uint32 closest_active_match_id = 6;
 }
 
 message CMsgClientToGCRequestArcanaVotesRemaining {
@@ -1673,6 +1680,14 @@ message CMsgClientToGCRequestEventPointLogResponse {
 		optional bool community_goal_item = 1;
 	}
 
+	message CorrectPredictionEvent {
+		optional uint32 prediction_id = 1;
+	}
+
+	message InGamePredictionCorrectEvent {
+		optional uint64 match_id = 1;
+	}
+
 	message EventPointTransaction {
 		optional uint32 time = 1;
 		optional int32 event_points = 2;
@@ -1685,6 +1700,8 @@ message CMsgClientToGCRequestEventPointLogResponse {
 		optional .CMsgClientToGCRequestEventPointLogResponse.TipReceivedEvent tip_received_event = 9;
 		optional .CMsgClientToGCRequestEventPointLogResponse.RecycledItemEvent recycled_item_event = 10;
 		optional .CMsgClientToGCRequestEventPointLogResponse.AchievementEvent achievement_event = 11;
+		optional .CMsgClientToGCRequestEventPointLogResponse.InGamePredictionCorrectEvent in_game_prediction_event = 12;
+		optional .CMsgClientToGCRequestEventPointLogResponse.CorrectPredictionEvent prediction_event = 13;
 	}
 
 	optional bool result = 1;
@@ -1813,5 +1830,87 @@ message CMsgDOTAPCBangTimedReward {
 	optional string persona = 1;
 	optional uint32 itemdef = 2;
 	optional string pcbangname = 3;
+}
+
+message CMsgDOTACompendiumInGamePredictionResults {
+	message PredictionResult {
+		optional uint32 prediction_id = 1;
+		optional uint32 prediction_value = 2;
+	}
+
+	repeated .CMsgDOTACompendiumInGamePredictionResults.PredictionResult results = 1;
+	optional uint32 league_id = 2;
+	optional bool predictions_closed = 3;
+}
+
+message CMsgClientToGCSelectCompendiumInGamePrediction {
+	message Prediction {
+		optional uint32 prediction_id = 1;
+		optional uint32 prediction_value = 2;
+	}
+
+	optional uint64 match_id = 1;
+	repeated .CMsgClientToGCSelectCompendiumInGamePrediction.Prediction predictions = 2;
+}
+
+message CMsgClientToGCSelectCompendiumInGamePredictionResponse {
+	enum EResult {
+		SUCCESS = 0;
+		INVALID_MATCH = 1;
+		PREDICTIONS_ARE_CLOSED = 2;
+		OTHER_ERROR = 3;
+	}
+
+	optional .CMsgClientToGCSelectCompendiumInGamePredictionResponse.EResult result = 1 [default = SUCCESS];
+}
+
+message CMsgClientToGCOpenPlayerCardPack {
+	optional uint64 player_card_pack_item_id = 1;
+}
+
+message CMsgClientToGCOpenPlayerCardPackResponse {
+	enum Result {
+		SUCCESS = 1;
+		ERROR_INTERNAL = 2;
+		ERROR_FAILED_TO_FIND_PACK = 3;
+		ERROR_ITEM_NOT_CARD_PACK = 4;
+		ERROR_FAILED_CARD_CREATE = 5;
+	}
+
+	optional .CMsgClientToGCOpenPlayerCardPackResponse.Result result = 1 [default = SUCCESS];
+	repeated uint64 player_card_item_ids = 2;
+}
+
+message CMsgClientToGCRecyclePlayerCard {
+	optional uint64 player_card_item_id = 1;
+}
+
+message CMsgClientToGCRecyclePlayerCardResponse {
+	enum Result {
+		SUCCESS = 1;
+		ERROR_INTERNAL = 2;
+		ERROR_FAILED_TO_FIND_PLAYER_CARD = 3;
+		ERROR_ITEM_NOT_PLAYER_CARD = 4;
+		ERROR_FAILED_DUST_CARD_CREATE = 5;
+	}
+
+	optional .CMsgClientToGCRecyclePlayerCardResponse.Result result = 1 [default = SUCCESS];
+	optional uint32 dust_amount = 2;
+}
+
+message CMsgClientToGCCreatePlayerCardPack {
+	optional uint64 card_dust_item_id = 1;
+}
+
+message CMsgClientToGCCreatePlayerCardPackResponse {
+	enum Result {
+		SUCCESS = 1;
+		ERROR_INTERNAL = 2;
+		ERROR_INSUFFICIENT_DUST = 3;
+		ERROR_ITEM_NOT_DUST_ITEM = 4;
+		ERROR_FAILED_CARD_PACK_CREATE = 5;
+	}
+
+	optional .CMsgClientToGCCreatePlayerCardPackResponse.Result result = 1 [default = SUCCESS];
 }
 

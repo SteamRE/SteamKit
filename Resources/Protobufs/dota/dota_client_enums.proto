@@ -25,7 +25,6 @@ enum ETournamentTeamState {
 	k_ETournamentTeamState_NodeMax = 1024;
 	k_ETournamentTeamState_Eliminated = 14003;
 	k_ETournamentTeamState_Forfeited = 14004;
-	k_ETournamentTeamState_Refunded = 14005;
 	k_ETournamentTeamState_Finished1st = 15001;
 	k_ETournamentTeamState_Finished2nd = 15002;
 	k_ETournamentTeamState_Finished3rd = 15003;
@@ -68,8 +67,10 @@ enum ETournamentNodeState {
 	k_ETournamentNodeState_A_WonByForfeit = 7;
 	k_ETournamentNodeState_B_WonByForfeit = 8;
 	k_ETournamentNodeState_A_Bye = 9;
-	k_ETournamentNodeState_A_Forfeit = 10;
+	k_ETournamentNodeState_A_Abandoned = 10;
 	k_ETournamentNodeState_ServerFailure = 11;
+	k_ETournamentNodeState_A_TimeoutForfeit = 12;
+	k_ETournamentNodeState_A_TimeoutRefund = 13;
 }
 
 enum EDOTAGroupMergeResult {

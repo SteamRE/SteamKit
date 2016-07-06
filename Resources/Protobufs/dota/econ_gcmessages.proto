@@ -151,7 +151,6 @@ enum EGCItemMsg {
 	k_EMsgGCToGCCheckAccountTradeStatusResponse = 2553;
 	k_EMsgGCToGCGrantAccountRolledItems = 2554;
 	k_EMsgGCToGCGrantSelfMadeItemToAccount = 2555;
-	k_EMsgSQLUpgradeBattleBooster = 2556;
 	k_EMsgGCPartnerBalanceRequest = 2557;
 	k_EMsgGCPartnerBalanceResponse = 2558;
 	k_EMsgGCPartnerRechargeRedirectURLRequest = 2559;
@@ -233,6 +232,7 @@ enum EGCMsgInitiateTradeResponse {
 	k_EGCMsgInitiateTradeResponse_Recent_Password_Reset = 20;
 	k_EGCMsgInitiateTradeResponse_Using_New_Device = 21;
 	k_EGCMsgInitiateTradeResponse_Sent_Invalid_Cookie = 22;
+	k_EGCMsgInitiateTradeResponse_TooRecentFriend = 23;
 }
 
 message CMsgApplyAutograph {
@@ -537,6 +537,23 @@ message CMsgClientToGCWrapAndDeliverGiftResponse {
 
 message CMsgClientToGCUnwrapGift {
 	optional uint64 item_id = 1;
+}
+
+message CMsgClientToGCGetGiftPermissions {
+}
+
+message CMsgClientToGCGetGiftPermissionsResponse {
+	message FriendPermission {
+		optional uint32 account_id = 1;
+		optional .EGCMsgInitiateTradeResponse permission = 2 [default = k_EGCMsgInitiateTradeResponse_Accepted];
+	}
+
+	optional bool is_unlimited = 1;
+	optional bool has_two_factor = 3;
+	optional .EGCMsgInitiateTradeResponse sender_permission = 6 [default = k_EGCMsgInitiateTradeResponse_Accepted];
+	optional uint32 friendship_age_requirement = 7;
+	optional uint32 friendship_age_requirement_two_factor = 8;
+	repeated .CMsgClientToGCGetGiftPermissionsResponse.FriendPermission friend_permissions = 9;
 }
 
 message CMsgClientToGCUnpackBundle {

@@ -506,3 +506,45 @@ message CBidirMsg_RelayPacket {
 	repeated .CBidirMsg_RelayPacket.SignedDestinationAddress_t recipientList = 4;
 }
 
+message CMsgServerNetworkStats {
+	message Port {
+		optional int32 port = 1;
+		optional string name = 2;
+	}
+
+	message Player {
+		optional uint64 steamid = 1;
+		optional string remote_addr = 2;
+		optional int32 ping_stddev_ms = 3;
+		optional int32 ping_avg_ms = 4;
+		optional float packet_loss_pct = 5;
+		optional bool is_bot = 6;
+	}
+
+	optional bool dedicated = 1;
+	optional int32 cpu_usage = 2;
+	optional int32 memory_used_mb = 3;
+	optional int32 memory_free_mb = 4;
+	optional int32 uptime = 5;
+	optional int32 spawn_count = 6;
+	optional int32 num_clients = 8;
+	optional int32 num_bots = 9;
+	optional int32 num_spectators = 10;
+	optional int32 num_tv_relays = 11;
+	optional float fps = 12;
+	repeated .CMsgServerNetworkStats.Port ports = 17;
+	optional float avg_latency_out = 18;
+	optional float avg_latency_in = 19;
+	optional float avg_packets_out = 20;
+	optional float avg_packets_in = 21;
+	optional float avg_loss_out = 22;
+	optional float avg_loss_in = 23;
+	optional float avg_data_out = 24;
+	optional float avg_data_in = 25;
+	optional uint64 total_data_in = 26;
+	optional uint64 total_packets_in = 27;
+	optional uint64 total_data_out = 28;
+	optional uint64 total_packets_out = 29;
+	repeated .CMsgServerNetworkStats.Player players = 30;
+}
+

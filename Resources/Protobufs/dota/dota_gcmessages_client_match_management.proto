@@ -30,6 +30,7 @@ enum EStartFindingMatchResult {
 	k_EStartFindingMatchResult_WeekendTourneyIndividualBuyInTooLarge = 116;
 	k_EStartFindingMatchResult_WeekendTourneyTeamBuyInTooLarge = 117;
 	k_EStartFindingMatchResult_MemberMissingEventOwnership = 118;
+	k_EStartFindingMatchResult_WeekendTourneyNotUnlocked = 119;
 }
 
 message CMsgStartFindingMatch {
@@ -364,5 +365,48 @@ message CMsgDOTAGroupMergeResponse {
 
 message CMsgDOTAGroupMergeReply {
 	optional .EDOTAGroupMergeResult result = 1 [default = k_EDOTAGroupMergeResult_OK];
+}
+
+message CMsgSpectatorLobbyGameDetails {
+	optional uint32 language = 1;
+	optional uint64 match_id = 2;
+	optional fixed64 server_steam_id = 3;
+	optional string stream_url = 4;
+	optional string stream_name = 5;
+	optional uint32 league_id = 6;
+	optional uint32 series_id = 7;
+	optional uint32 series_type = 8;
+	optional uint32 series_game = 9;
+	optional uint32 team1_id = 10;
+	optional uint32 team2_id = 11;
+	optional string stage_name = 12;
+}
+
+message CMsgSetSpectatorLobbyDetails {
+	optional uint64 lobby_id = 1;
+	optional string lobby_name = 2;
+	optional string pass_key = 3;
+	optional .CMsgSpectatorLobbyGameDetails game_details = 4;
+}
+
+message CMsgCreateSpectatorLobby {
+	optional uint32 client_version = 1;
+	optional .CMsgSetSpectatorLobbyDetails details = 2;
+}
+
+message CMsgSpectatorLobbyList {
+}
+
+message CMsgSpectatorLobbyListResponse {
+	message SpectatorLobby {
+		optional uint64 lobby_id = 1;
+		optional string game_name = 2;
+		optional bool requires_pass_key = 3;
+		optional uint32 leader_account_id = 4;
+		optional uint32 member_count = 5;
+		optional .CMsgSpectatorLobbyGameDetails game_details = 7;
+	}
+
+	repeated .CMsgSpectatorLobbyListResponse.SpectatorLobby lobbies = 1;
 }
 

@@ -17,16 +17,6 @@ enum LobbyDotaPauseSetting {
 	LobbyDotaPauseSetting_Disabled = 2;
 }
 
-enum EMatchOutcome {
-	k_EMatchOutcome_Unknown = 0;
-	k_EMatchOutcome_RadVictory = 2;
-	k_EMatchOutcome_DireVictory = 3;
-	k_EMatchOutcome_NotScored_PoorNetworkConditions = 64;
-	k_EMatchOutcome_NotScored_Leaver = 65;
-	k_EMatchOutcome_NotScored_ServerCrash = 66;
-	k_EMatchOutcome_NotScored_NeverStarted = 67;
-}
-
 message CSODOTAPartyMember {
 	optional .PartnerAccountType partner_type = 1 [default = PARTNER_NONE];
 	optional bool is_coach = 2;
@@ -70,8 +60,6 @@ message CSODOTAParty {
 	optional uint32 open_guild_id = 30;
 	repeated uint32 common_guilds = 31;
 	optional uint32 low_priority_games_remaining = 35;
-	optional uint32 min_level = 36;
-	optional uint32 max_level = 37;
 	repeated .EEvent active_ingame_events = 39;
 	optional bool open_for_join_requests = 40;
 	repeated .CSODOTAPartyInvite sent_invites = 41;
@@ -225,6 +213,7 @@ message CSODOTALobby {
 		CASUAL_1V1_MATCH = 8;
 		WEEKEND_TOURNEY = 9;
 		LOCAL_BOT_MATCH = 10;
+		SPECTATOR = 11;
 	}
 
 	optional uint64 lobby_id = 1 [(key_field) = true];
