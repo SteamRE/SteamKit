@@ -374,20 +374,24 @@ namespace SteamKit2
             EndPoint packetSender = (EndPoint)new IPEndPoint(IPAddress.Any, 0);
             byte[] buf = new byte[2048];
 
-            if (param is IPEndPoint)
+            var epTask = param as Task<IPEndPoint>;
+            try
             {
-                remoteEndPoint = param as IPEndPoint;
-            }
-            else
-            {
-                var epTask = param as Task<IPEndPoint>;
-                try
+                if ( epTask != null )
                 {
                     remoteEndPoint = epTask.Result;
                 }
-                catch (Exception ex)
+                else
                 {
-                    DebugLog.WriteLine("UdpConnection", "Unable to find endpoint to connect, endpoint task returned: {0}", ex);
+                    DebugLog.WriteLine("UdpConnection", "Invalid endpoint supplied for connection: {0}", param);
+                }
+                
+            }
+            catch ( AggregateException ae )
+            {
+                foreach ( var ex in ae.Flatten().InnerExceptions )
+                {
+                    DebugLog.WriteLine("UdpConnection", "Endpoint task threw exception: {0}", ex);
                 }
             }
 

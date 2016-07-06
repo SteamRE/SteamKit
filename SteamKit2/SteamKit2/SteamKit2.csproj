@@ -135,12 +135,13 @@
     <Compile Include="Base\Generated\Unified\Steamworks\SteamMsgOAuthSteamworks.cs" />
     <Compile Include="Base\MsgBase.cs" />
     <Compile Include="Base\PacketBase.cs" />
+    <Compile Include="Steam\Discovery\BasicServerListProto.cs" />
     <Compile Include="Steam\Discovery\FileStorageServerListProvider.cs" />
     <Compile Include="Steam\Discovery\NullServerListProvider.cs" />
     <Compile Include="Steam\Discovery\SmartCMServerList.cs" />
     <Compile Include="Steam\CDNClient.cs" />
     <Compile Include="Steam\Discovery\IsolatedStorageServerListProvider.cs" />
-    <Compile Include="Steam\Discovery\ServerListProvider.cs" />
+    <Compile Include="Steam\Discovery\IServerListProvider.cs" />
     <Compile Include="Steam\Handlers\SteamCloud\Callbacks.cs" />
     <Compile Include="Steam\Handlers\SteamCloud\SteamCloud.cs" />
     <Compile Include="Steam\Handlers\SteamGameServer\Callbacks.cs" />

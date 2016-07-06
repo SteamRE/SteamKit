@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -13,10 +14,9 @@ namespace SteamKit2.Discovery
         /// No-op implementation that returns an empty server list
         /// </summary>
         /// <returns>Empty server list</returns>
-        public Task<ICollection<IPEndPoint>> FetchServerListAsync()
+        public Task<IEnumerable<IPEndPoint>> FetchServerListAsync()
         {
-            ICollection<IPEndPoint> empty = new List<IPEndPoint>();
-            return Task.FromResult(empty);
+            return Task.FromResult(Enumerable.Empty<IPEndPoint>());
         }
 
         /// <summary>

@@ -193,15 +193,32 @@ namespace SteamKit2
                     {
                         if (t.IsFaulted || t.IsCanceled)
                         {
-                            DebugLog.WriteLine("TcpConnection", "Unable to find endpoint to connect, endpoint task returned: {0}", t.Exception);
+                            if (t.Exception != null)
+                            {
+                                foreach (var ex in t.Exception.Flatten().InnerExceptions)
+                                {
+                                    DebugLog.WriteLine("TcpConnection", "Endpoint task threw exception: {0}", ex);
+                                }
+                            }
+
                             Release(userRequestedDisconnect: false);
                             return;
                         }
 
                         destination = t.Result;
-                        DebugLog.WriteLine("TcpConnection", "Connecting to {0}...", destination);
 
-                        TryConnect(timeout);
+                        if (destination != null)
+                        {
+                            DebugLog.WriteLine("TcpConnection", "Connecting to {0}...", destination);
+                            TryConnect(timeout);
+                        }
+                        else
+                        {
+                            DebugLog.WriteLine("TcpConnection", "No destination supplied from endpoint task");
+                            Release(userRequestedDisconnect: false);
+                            return;
+                        }
+
                     }, TaskContinuationOptions.LongRunning);
 
                 }

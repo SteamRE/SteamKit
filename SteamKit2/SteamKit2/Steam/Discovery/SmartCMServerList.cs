@@ -99,29 +99,51 @@ namespace SteamKit2.Discovery
             }
         }
 
+        private bool WaitForServersFetched()
+        {
+            StartFetchingServers();
+
+            try
+            {
+                listTask.Wait();
+                return true;
+            }
+            catch ( AggregateException ae )
+            {
+                foreach( var ex in ae.Flatten().InnerExceptions )
+                {
+                    DebugWrite( "Failed to retrieve server list: {0}", ex );
+                }
+            }
+
+            return false;
+        }
+
         private async Task ResolveServerList()
         {
             DebugWrite( "Resolving server list" );
 
-            ICollection<IPEndPoint> serverList = await ServerListProvider.FetchServerListAsync();
+            IEnumerable<IPEndPoint> serverList = await ServerListProvider.FetchServerListAsync();
+            List<IPEndPoint> endpointList = serverList.ToList();
 
-            if ( serverList.Count == 0 && canFetchDirectory )
+            if ( endpointList.Count == 0 && canFetchDirectory )
             {
                 DebugWrite( "Server list provider had no entries, will query SteamDirectory" );
                 var directoryList = await SteamDirectory.LoadAsync( CellID );
-                serverList = directoryList.ToList();
+
+                endpointList = directoryList.ToList();
             }
 
-            if ( serverList.Count == 0 && canFetchDirectory )
+            if ( endpointList.Count == 0 && canFetchDirectory )
             {
                 DebugWrite( "Could not query SteamDirectory, falling back to cm0" );
                 var cm0 = await Dns.GetHostAddressesAsync( "cm0.steampowered.com" );
 
-                serverList = cm0.Select( ipaddr => new IPEndPoint( ipaddr, 27015 ) ).ToList();
+                endpointList = cm0.Select( ipaddr => new IPEndPoint(ipaddr, 27015) ).ToList();
             }
 
-            DebugWrite( "Resolved {0} servers", serverList.Count );
-            ReplaceList( serverList );
+            DebugWrite( "Resolved {0} servers", endpointList.Count );
+            ReplaceList( endpointList );
         }
 
         /// <summary>
@@ -263,15 +285,8 @@ namespace SteamKit2.Discovery
         /// <returns>An <see cref="System.Net.IPEndPoint"/>, or null if the list is empty.</returns>
         public IPEndPoint GetNextServerCandidate()
         {
-            StartFetchingServers();
-
-            try
+            if ( !WaitForServersFetched() )
             {
-                listTask.Wait();
-            }
-            catch (Exception ex)
-            {
-                DebugWrite("Failed to retrieve server list: {0}", ex);
                 return null;
             }
 
@@ -298,15 +313,8 @@ namespace SteamKit2.Discovery
         {
             IPEndPoint[] endPoints;
 
-            StartFetchingServers();
-
-            try
+            if ( !WaitForServersFetched() )
             {
-                listTask.Wait();
-            }
-            catch(Exception ex)
-            {
-                DebugWrite("Failed to retrieve server list: {0}", ex);
                 return new IPEndPoint[0];
             }
 

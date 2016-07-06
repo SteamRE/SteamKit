@@ -6,31 +6,31 @@ using Xunit;
 
 namespace Tests
 {
-    public class IsolatedStorageServerListProviderFacts
+    public class FileStorageServerListProviderFacts
     {
-        public IsolatedStorageServerListProviderFacts()
+        public FileStorageServerListProviderFacts()
         {
-            isolatedStorageProvider = new IsolatedStorageServerListProvider();
+            fileStorageProvider = new FileStorageServerListProvider("servertest.bin");
         }
 
-        readonly IsolatedStorageServerListProvider isolatedStorageProvider;
+        readonly FileStorageServerListProvider fileStorageProvider;
 
         [Fact]
         public async void ReadsUpdatedServerList()
         {
-            await isolatedStorageProvider.UpdateServerListAsync(new List<IPEndPoint>()
+            await fileStorageProvider.UpdateServerListAsync(new List<IPEndPoint>()
             {
                 new IPEndPoint(IPAddress.Any, 1234),
                 new IPEndPoint(IPAddress.Loopback, 4321)
             });
 
-            var servers = await isolatedStorageProvider.FetchServerListAsync();
+            var servers = await fileStorageProvider.FetchServerListAsync();
 
             Assert.Equal(2, servers.Count());
             Assert.Equal(IPAddress.Any, servers.First().Address);
             Assert.Equal(1234, servers.First().Port);
 
-            await isolatedStorageProvider.UpdateServerListAsync(new List<IPEndPoint>());
+            await fileStorageProvider.UpdateServerListAsync(new List<IPEndPoint>());
         }
     }
 }

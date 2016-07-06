@@ -13,15 +13,6 @@ namespace SteamKit2.Discovery
     /// </summary>
     public class FileStorageServerListProvider : IServerListProvider
     {
-        [ProtoContract]
-        class ServerListProto
-        {
-            [ProtoMember(1)]
-            public String ipAddress { get; set; }
-            [ProtoMember(2)]
-            public int port { get; set; }
-        }
-
         string filename;
 
         /// <summary>
@@ -36,26 +27,25 @@ namespace SteamKit2.Discovery
         /// Read the stored list of servers from the file
         /// </summary>
         /// <returns>List of servers if persisted, otherwise an empty list</returns>
-        public async Task<ICollection<IPEndPoint>> FetchServerListAsync()
+        public Task<IEnumerable<IPEndPoint>> FetchServerListAsync()
         {
-            try
+            return Task.Run(() =>
             {
-                using (MemoryStream ms = new MemoryStream())
+                try
                 {
                     using (FileStream fileStream = File.OpenRead(filename))
                     {
-                        await fileStream.CopyToAsync(ms);
-                        ms.Position = 0;
-
-                        return ProtoBuf.Serializer.DeserializeItems<ServerListProto>(ms, PrefixStyle.Base128, 1).Select(item => new IPEndPoint(IPAddress.Parse(item.ipAddress), item.port)).ToList();
+                        return ProtoBuf.Serializer.DeserializeItems<BasicServerListProto>(fileStream, PrefixStyle.Base128, 1)
+                            .Select(item => new IPEndPoint(IPAddress.Parse(item.ipAddress), item.port))
+                            .ToList();
                     }
                 }
-            }
-            catch (IOException ex)
-            {
-                DebugLog.WriteLine("FileStorageServerListProvider", "Failed to read file {0}: {1}", filename, ex.Message);
-                return new List<IPEndPoint>();
-            }
+                catch (IOException ex)
+                {
+                    DebugLog.WriteLine("FileStorageServerListProvider", "Failed to read file {0}: {1}", filename, ex.Message);
+                    return Enumerable.Empty<IPEndPoint>();
+                }
+            });
         }
 
         /// <summary>
@@ -63,27 +53,24 @@ namespace SteamKit2.Discovery
         /// </summary>
         /// <param name="endpoints">List of server endpoints</param>
         /// <returns>Awaitable task for write completion</returns>
-        public async Task UpdateServerListAsync(IEnumerable<IPEndPoint> endpoints)
+        public Task UpdateServerListAsync(IEnumerable<IPEndPoint> endpoints)
         {
-            try
+            return Task.Run(() =>
             {
-                using (MemoryStream ms = new MemoryStream())
+                try
                 {
-                    ProtoBuf.Serializer.Serialize(ms, endpoints.Select(ep => new ServerListProto() { ipAddress = ep.Address.ToString(), port = ep.Port }));
-                    ms.Position = 0;
-
                     using (FileStream fileStream = File.OpenWrite(filename))
                     {
-                        await ms.CopyToAsync(fileStream);
+                        ProtoBuf.Serializer.Serialize(fileStream, 
+                            endpoints.Select(ep => new BasicServerListProto {ipAddress = ep.Address.ToString(), port = ep.Port}));
                         fileStream.SetLength(fileStream.Position);
                     }
                 }
-            }
-            catch (IOException ex)
-            {
-                DebugLog.WriteLine("FileStorageServerListProvider", "Failed to write file {0}: {1}", filename, ex.Message);
-            }
+                catch (IOException ex)
+                {
+                    DebugLog.WriteLine("FileStorageServerListProvider", "Failed to write file {0}: {1}", filename, ex.Message);
+                }
+            });
         }
-
     }
 }

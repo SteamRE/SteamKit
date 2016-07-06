@@ -78,6 +78,7 @@
     <Compile Include="DebugLogFacts.cs" />
     <Compile Include="Helpers\HandlerTestBase.cs" />
     <Compile Include="Helpers\TraceAssertListener.cs" />
+    <Compile Include="FileStorageServerListProviderFacts.cs" />
     <Compile Include="KeyValueFacts.cs" />
     <Compile Include="NetworkListenerFacts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
