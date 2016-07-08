@@ -3,15 +3,15 @@
  * file 'license.txt', which is part of this source code package.
  */
 
+using SteamKit2.Internal;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Net;
-using System.IO;
-using System.Net.Sockets;
-using SteamKit2.Internal;
 using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Net.Sockets;
+using System.Threading.Tasks;
 
 namespace SteamKit2
 {
@@ -102,7 +102,7 @@ namespace SteamKit2
                 ufsServer = serverList[ random.Next( serverList.Count ) ];
             }
 
-            connection.Connect( ufsServer, ( int )ConnectionTimeout.TotalMilliseconds );
+            connection.Connect( Task.FromResult(ufsServer), ( int )ConnectionTimeout.TotalMilliseconds );
         }
 
         /// <summary>

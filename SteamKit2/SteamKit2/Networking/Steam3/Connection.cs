@@ -10,6 +10,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Security.Cryptography;
+using System.Threading.Tasks;
 
 namespace SteamKit2
 {
@@ -158,9 +159,9 @@ namespace SteamKit2
         /// <summary>
         /// Connects to the specified end point.
         /// </summary>
-        /// <param name="endPoint">The end point.</param>
+        /// <param name="endPointTask">Task returning the end point.</param>
         /// <param name="timeout">Timeout in milliseconds</param>
-        public abstract void Connect( IPEndPoint endPoint, int timeout = DEFAULT_TIMEOUT );
+        public abstract void Connect( Task<IPEndPoint> endPointTask, int timeout = DEFAULT_TIMEOUT );
         /// <summary>
         /// Disconnects this instance.
         /// </summary>

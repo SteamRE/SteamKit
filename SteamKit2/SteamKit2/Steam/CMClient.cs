@@ -5,6 +5,7 @@
 
 
 
+using SteamKit2.Discovery;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -13,6 +14,7 @@ using System.IO.Compression;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Threading.Tasks;
 
 namespace SteamKit2.Internal
 {
@@ -103,7 +105,6 @@ namespace SteamKit2.Internal
         static CMClient()
         {
             Servers = new SmartCMServerList();
-            Servers.UseInbuiltList();
         }
 
         /// <summary>
@@ -166,12 +167,18 @@ namespace SteamKit2.Internal
             pendingNetFilterEncryption = null;
             ExpectDisconnection = false;
 
+            Task<IPEndPoint> epTask = null;
+
             if ( cmServer == null )
             {
-                cmServer = Servers.GetNextServerCandidate();
+                epTask = Servers.GetNextServerCandidateAsync();
+            }
+            else
+            {
+                epTask = Task.FromResult( cmServer );
             }
 
-            connection.Connect( cmServer, ( int )ConnectionTimeout.TotalMilliseconds );
+            connection.Connect( epTask, ( int )ConnectionTimeout.TotalMilliseconds );
         }
 
         /// <summary>
@@ -602,7 +609,7 @@ namespace SteamKit2.Internal
                 .Zip( cmMsg.Body.cm_ports, ( addr, port ) => new IPEndPoint( NetHelpers.GetIPAddress( addr ), ( int )port ) );
 
             // update our list with steam's list of CMs
-            Servers.MergeWithList( cmList );
+            Servers.ReplaceList( cmList );
         }
         void HandleSessionToken( IPacketMsg packetMsg )
         {

@@ -62,6 +62,12 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>..\..\SteamKit.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="protobuf-net, Version=2.0.0.668, Culture=neutral, PublicKeyToken=257b51d87d2e4d67, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -142,8 +148,13 @@
     <Compile Include="Base\Generated\Unified\Steamworks\SteamMsgOAuthSteamworks.cs" />
     <Compile Include="Base\MsgBase.cs" />
     <Compile Include="Base\PacketBase.cs" />
-    <Compile Include="Networking\Steam3\CMServerList.cs" />
+    <Compile Include="Steam\Discovery\BasicServerListProto.cs" />
+    <Compile Include="Steam\Discovery\FileStorageServerListProvider.cs" />
+    <Compile Include="Steam\Discovery\NullServerListProvider.cs" />
+    <Compile Include="Steam\Discovery\SmartCMServerList.cs" />
     <Compile Include="Steam\CDNClient.cs" />
+    <Compile Include="Steam\Discovery\IsolatedStorageServerListProvider.cs" />
+    <Compile Include="Steam\Discovery\IServerListProvider.cs" />
     <Compile Include="Steam\Handlers\SteamCloud\Callbacks.cs" />
     <Compile Include="Steam\Handlers\SteamCloud\SteamCloud.cs" />
     <Compile Include="Steam\Handlers\SteamGameServer\Callbacks.cs" />
@@ -263,6 +274,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="..\..\SteamKit.snk" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
