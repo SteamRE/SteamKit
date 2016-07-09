@@ -159,7 +159,6 @@ enum EGCItemMsg {
 	k_EMsgGCApplyDuckToken = 2560;
 	k_EMsgGCQuestComplete_Request = 2561;
 	k_EMsgGCQuestObjective_PointsChange = 2562;
-	k_EMsgGCQuestObjective_PointsChangeResponse = 2563;
 	k_EMsgGCQuestObjective_RequestLoanerItems = 2564;
 	k_EMsgGCQuestObjective_RequestLoanerResponse = 2565;
 	k_EMsgGCApplyStrangeCountTransfer = 2566;
@@ -170,6 +169,7 @@ enum EGCItemMsg {
 	k_EMsgGCRemoveGiftedByResponse = 2571;
 	k_EMsgGCRemoveFestivizer = 2572;
 	k_EMsgGCRemoveFestivizerResponse = 2573;
+	k_EMsgGCCraftCommonStatClock = 2574;
 }
 
 enum EGCMsgResponse {
@@ -335,13 +335,6 @@ message CMsgGCQuestObjective_PointsChange {
 	optional bool update_base_points = 5 [default = false];
 }
 
-message CMsgGCQuestObjective_PointsChangeResponse {
-	optional uint64 quest_item_id = 1;
-	optional uint32 standard_points = 2;
-	optional uint32 bonus_points = 3;
-	optional bool update_base_points = 4;
-}
-
 message CMsgGCQuestComplete_Request {
 	optional uint64 quest_item_id = 1;
 }
@@ -361,6 +354,11 @@ message CMsgCraftCollectionUpgrade {
 }
 
 message CMsgCraftHalloweenOffering {
+	optional uint64 tool_id = 1;
+	repeated uint64 item_id = 2;
+}
+
+message CMsgCraftCommonStatClock {
 	optional uint64 tool_id = 1;
 	repeated uint64 item_id = 2;
 }

@@ -357,6 +357,17 @@ message CGCSystemMsg_GetAccountDetails_Response {
 	optional bool is_two_factor_auth_enabled = 29;
 	optional uint32 two_factor_enabled_time = 30;
 	optional uint32 phone_verification_time = 31;
+	optional uint64 phone_id = 33;
+	optional bool is_phone_identifying = 34;
+}
+
+message CMsgGCCheckClanMembership {
+	optional fixed64 steamid = 1;
+	optional uint32 clanid = 2;
+}
+
+message CMsgGCCheckClanMembership_Response {
+	optional bool ismember = 1;
 }
 
 message CMsgGCGetPersonaNames {
@@ -421,6 +432,39 @@ message CMsgGCHAccountVacStatusChange {
 	optional uint32 rtime_vacban_starts = 3;
 	optional bool is_banned_now = 4;
 	optional bool is_banned_future = 5;
+}
+
+message CMsgGCHAccountTradeBanStatusChange {
+	optional fixed64 steamid = 1;
+	optional uint32 appid = 2;
+	optional bool is_banned = 3;
+	optional uint32 time_banned_until = 4;
+}
+
+message CMsgGCHAccountLockStatusChange {
+	optional fixed64 steamid = 1;
+	optional uint32 appid = 2;
+	optional bool is_locked = 3;
+}
+
+message CMsgGCHVacVerificationChange {
+	optional fixed64 steamid = 1;
+	optional uint32 appid = 2;
+	optional bool is_verified = 3;
+}
+
+message CMsgGCHAccountPhoneNumberChange {
+	optional fixed64 steamid = 1;
+	optional uint32 appid = 2;
+	optional uint64 phone_id = 3;
+	optional bool is_verified = 4;
+	optional bool is_identifying = 5;
+}
+
+message CMsgGCHAccountTwoFactorChange {
+	optional fixed64 steamid = 1;
+	optional uint32 appid = 2;
+	optional bool twofactor_enabled = 3;
 }
 
 message CMsgGCGetPartnerAccountLink {

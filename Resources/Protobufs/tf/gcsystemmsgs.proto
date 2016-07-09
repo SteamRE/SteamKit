@@ -82,6 +82,19 @@ enum EGCSystemMsg {
 	k_EGCMsgGetPartnerAccountLink = 507;
 	k_EGCMsgGetPartnerAccountLinkResponse = 508;
 	k_EGCMsgVSReportedSuspiciousActivity = 509;
+	k_EGCMsgAccountTradeBanStatusChange = 510;
+	k_EGCMsgAccountLockStatusChange = 511;
+	k_EGCMsgDPPartnerMicroTxns = 512;
+	k_EGCMsgDPPartnerMicroTxnsResponse = 513;
+	k_EGCMsgGetIPASN = 514;
+	k_EGCMsgGetIPASNResponse = 515;
+	k_EGCMsgGetAppFriendsList = 516;
+	k_EGCMsgGetAppFriendsListResponse = 517;
+	k_EGCMsgVacVerificationChange = 518;
+	k_EGCMsgAccountPhoneNumberChange = 519;
+	k_EGCMsgAccountTwoFactorChange = 520;
+	k_EGCMsgCheckClanMembership = 521;
+	k_EGCMsgCheckClanMembershipResponse = 522;
 }
 
 enum ESOMsg {
