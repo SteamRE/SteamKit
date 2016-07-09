@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace SteamKit2.Steam.Discovery
+namespace SteamKit2.Discovery
 {
 	/// <summary>
 	/// A server list provider that uses in-memory collection to persist the server list.
