@@ -9,7 +9,7 @@ namespace SteamKit2.Discovery
 	/// A server list provider that uses in-memory collection to persist the server list.
 	/// It allows you to implement your own saving logic on <see cref="ServerListUpdated"/> event.
 	/// </summary>
-	public class InMemoryServerListProvider
+	public class InMemoryServerListProvider : IServerListProvider
 	{
 		/// <summary>
 		/// Actual collection used for keeping server list in memory.
