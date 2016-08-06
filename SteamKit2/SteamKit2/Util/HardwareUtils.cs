@@ -144,9 +144,9 @@ namespace SteamKit2
             try {
                 return searcher.Get().Cast<ManagementObject>();
             }
-            catch ( COMException ce )
+            catch ( Exception ex )
             {
-                DebugLog.WriteLine( nameof(WindowsInfoProvider), "Failed to execute WMI query '{0}': {1}", query, ce.Message );
+                DebugLog.WriteLine( nameof(WindowsInfoProvider), "Failed to execute WMI query '{0}': {1}", query, ex.Message );
                 return Enumerable.Empty<ManagementObject>();
             }
         }
