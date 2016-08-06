@@ -235,6 +235,11 @@ namespace SteamKit2
                     {
                         cancellationToken.Cancel();
                     }
+                    else
+                    {
+                        // we already appear to be disconncted, nothing to wait for
+                        return;
+                    }
                 }
 
                 connectionFree.WaitOne();
