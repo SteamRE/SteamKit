@@ -611,13 +611,13 @@ namespace SteamKit2.GC.TF2.Internal
       set { _preview_item_def = value; }
     }
 
-    private uint _matchmaking_ban_time = default(uint);
-    [global::ProtoBuf.ProtoMember(18, IsRequired = false, Name=@"matchmaking_ban_time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint matchmaking_ban_time
+    private bool _phone_verified = (bool)false;
+    [global::ProtoBuf.ProtoMember(19, IsRequired = false, Name=@"phone_verified", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue((bool)false)]
+    public bool phone_verified
     {
-      get { return _matchmaking_ban_time; }
-      set { _matchmaking_ban_time = value; }
+      get { return _phone_verified; }
+      set { _phone_verified = value; }
     }
 
     private uint _skill_rating_6v6 = default(uint);
@@ -638,22 +638,94 @@ namespace SteamKit2.GC.TF2.Internal
       set { _skill_rating_9v9 = value; }
     }
 
-    private bool _competitive_beta_access = (bool)false;
-    [global::ProtoBuf.ProtoMember(23, IsRequired = false, Name=@"competitive_beta_access", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    private bool _competitive_access = (bool)false;
+    [global::ProtoBuf.ProtoMember(23, IsRequired = false, Name=@"competitive_access", DataFormat = global::ProtoBuf.DataFormat.Default)]
     [global::System.ComponentModel.DefaultValue((bool)false)]
-    public bool competitive_beta_access
+    public bool competitive_access
     {
-      get { return _competitive_beta_access; }
-      set { _competitive_beta_access = value; }
+      get { return _competitive_access; }
+      set { _competitive_access = value; }
     }
 
-    private uint _matchmaking_low_priority_time = (uint)0;
-    [global::ProtoBuf.ProtoMember(24, IsRequired = false, Name=@"matchmaking_low_priority_time", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue((uint)0)]
-    public uint matchmaking_low_priority_time
+    private uint _matchmaking_ranked_ban_expiration = default(uint);
+    [global::ProtoBuf.ProtoMember(18, IsRequired = false, Name=@"matchmaking_ranked_ban_expiration", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint matchmaking_ranked_ban_expiration
     {
-      get { return _matchmaking_low_priority_time; }
-      set { _matchmaking_low_priority_time = value; }
+      get { return _matchmaking_ranked_ban_expiration; }
+      set { _matchmaking_ranked_ban_expiration = value; }
+    }
+
+    private uint _matchmaking_ranked_low_priority_expiration = default(uint);
+    [global::ProtoBuf.ProtoMember(24, IsRequired = false, Name=@"matchmaking_ranked_low_priority_expiration", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint matchmaking_ranked_low_priority_expiration
+    {
+      get { return _matchmaking_ranked_low_priority_expiration; }
+      set { _matchmaking_ranked_low_priority_expiration = value; }
+    }
+
+    private uint _matchmaking_ranked_ban_last_duration = default(uint);
+    [global::ProtoBuf.ProtoMember(25, IsRequired = false, Name=@"matchmaking_ranked_ban_last_duration", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint matchmaking_ranked_ban_last_duration
+    {
+      get { return _matchmaking_ranked_ban_last_duration; }
+      set { _matchmaking_ranked_ban_last_duration = value; }
+    }
+
+    private uint _matchmaking_ranked_low_priority_last_duration = default(uint);
+    [global::ProtoBuf.ProtoMember(26, IsRequired = false, Name=@"matchmaking_ranked_low_priority_last_duration", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint matchmaking_ranked_low_priority_last_duration
+    {
+      get { return _matchmaking_ranked_low_priority_last_duration; }
+      set { _matchmaking_ranked_low_priority_last_duration = value; }
+    }
+
+    private uint _matchmaking_casual_ban_expiration = default(uint);
+    [global::ProtoBuf.ProtoMember(27, IsRequired = false, Name=@"matchmaking_casual_ban_expiration", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint matchmaking_casual_ban_expiration
+    {
+      get { return _matchmaking_casual_ban_expiration; }
+      set { _matchmaking_casual_ban_expiration = value; }
+    }
+
+    private uint _matchmaking_casual_low_priority_expiration = default(uint);
+    [global::ProtoBuf.ProtoMember(28, IsRequired = false, Name=@"matchmaking_casual_low_priority_expiration", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint matchmaking_casual_low_priority_expiration
+    {
+      get { return _matchmaking_casual_low_priority_expiration; }
+      set { _matchmaking_casual_low_priority_expiration = value; }
+    }
+
+    private uint _matchmaking_casual_ban_last_duration = default(uint);
+    [global::ProtoBuf.ProtoMember(29, IsRequired = false, Name=@"matchmaking_casual_ban_last_duration", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint matchmaking_casual_ban_last_duration
+    {
+      get { return _matchmaking_casual_ban_last_duration; }
+      set { _matchmaking_casual_ban_last_duration = value; }
+    }
+
+    private uint _matchmaking_casual_low_priority_last_duration = default(uint);
+    [global::ProtoBuf.ProtoMember(30, IsRequired = false, Name=@"matchmaking_casual_low_priority_last_duration", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint matchmaking_casual_low_priority_last_duration
+    {
+      get { return _matchmaking_casual_low_priority_last_duration; }
+      set { _matchmaking_casual_low_priority_last_duration = value; }
+    }
+
+    private bool _phone_identifying = (bool)false;
+    [global::ProtoBuf.ProtoMember(31, IsRequired = false, Name=@"phone_identifying", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue((bool)false)]
+    public bool phone_identifying
+    {
+      get { return _phone_identifying; }
+      set { _phone_identifying = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -3169,6 +3241,15 @@ namespace SteamKit2.GC.TF2.Internal
     {
       get { return _skill_rating_9v9; }
       set { _skill_rating_9v9 = value; }
+    }
+
+    private uint _skill_rating_12v12 = default(uint);
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"skill_rating_12v12", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint skill_rating_12v12
+    {
+      get { return _skill_rating_12v12; }
+      set { _skill_rating_12v12 = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
