@@ -2152,6 +2152,24 @@ namespace SteamKit2.GC.TF2.Internal
       get { return _phone_verification_time; }
       set { _phone_verification_time = value; }
     }
+
+    private ulong _phone_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(33, IsRequired = false, Name=@"phone_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong phone_id
+    {
+      get { return _phone_id; }
+      set { _phone_id = value; }
+    }
+
+    private bool _is_phone_identifying = default(bool);
+    [global::ProtoBuf.ProtoMember(34, IsRequired = false, Name=@"is_phone_identifying", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool is_phone_identifying
+    {
+      get { return _is_phone_identifying; }
+      set { _is_phone_identifying = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

@@ -17,6 +17,7 @@ namespace NetHookAnalyzer2.Specializations
             {28, typeof(CSOTFMapContribution)},
             {37, typeof(CSOEconGameAccountForGameServers)},
             {39, typeof(CSOTFLadderPlayerStats)},
+            {42, typeof(CMsgGCNotification)},
             {1001, typeof(CSOPartyInvite)},
             {2003, typeof(CSOTFParty)},
             {2004, typeof(CSOTFLobby)},
