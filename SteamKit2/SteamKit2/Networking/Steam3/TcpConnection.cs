@@ -188,6 +188,8 @@ namespace SteamKit2
                     cancellationToken = new CancellationTokenSource();
 
                     socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                    socket.ReceiveTimeout = timeout;
+                    socket.SendTimeout = timeout;
 
                     endPointTask.ContinueWith( t =>
                     {
