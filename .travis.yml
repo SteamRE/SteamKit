@@ -1,7 +1,16 @@
 sudo: false
 language: csharp
 mono:
+#   - weekly
     - alpha
+#   - beta
+    - latest
+
+matrix:
+    allow_failures:
+#       - mono: weekly
+        - mono: alpha
+#       - mono: beta
 
 solution: SteamKit2/SteamKit2.sln
 
