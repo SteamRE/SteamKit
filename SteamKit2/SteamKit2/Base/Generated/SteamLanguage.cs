@@ -1936,6 +1936,7 @@ namespace SteamKit2
 		GSOwnerDenied = 103,
 		InvalidItemType = 104,
 		IPBanned = 105,
+		GSLTExpired = 106,
 	}
 	public enum EUniverse
 	{
