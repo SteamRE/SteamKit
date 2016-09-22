@@ -495,7 +495,8 @@ namespace SteamKit2
         // the default details to request in most situations
         const EClientPersonaStateFlag defaultInfoRequest =
             EClientPersonaStateFlag.PlayerName | EClientPersonaStateFlag.Presence |
-            EClientPersonaStateFlag.SourceID | EClientPersonaStateFlag.GameExtraInfo;
+            EClientPersonaStateFlag.SourceID | EClientPersonaStateFlag.GameExtraInfo |
+            EClientPersonaStateFlag.LastSeen;
 
         /// <summary>
         /// Requests persona state for a list of specified SteamID.
