@@ -81,6 +81,15 @@ message CInventory_CombineItemStacks_Request {
 	optional string desttimestamp = 6;
 }
 
+message CInventory_GetItemDefMeta_Request {
+	optional uint32 appid = 1;
+}
+
+message CInventory_GetItemDefMeta_Response {
+	optional uint32 modified = 1;
+	optional string digest = 2;
+}
+
 service Inventory {
 	option (service_description) = "A service that provides access to inventory";
 	rpc GetInventory (.CInventory_GetInventory_Request) returns (.CInventory_Response) {
@@ -115,5 +124,8 @@ service Inventory {
 	}
 	rpc CombineItemStacks (.CInventory_CombineItemStacks_Request) returns (.CInventory_Response) {
 		option (method_description) = "Combine two stacks of items";
+	}
+	rpc GetItemDefMeta (.CInventory_GetItemDefMeta_Request) returns (.CInventory_GetItemDefMeta_Response) {
+		option (method_description) = "Get metadata about the current item definition for this game.";
 	}
 }

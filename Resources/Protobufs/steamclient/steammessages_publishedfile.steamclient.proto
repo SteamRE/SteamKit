@@ -160,6 +160,8 @@ message PublishedFileDetails {
 	optional uint32 lifetime_subscriptions = 39;
 	optional uint32 lifetime_favorited = 40;
 	optional uint32 lifetime_followers = 41;
+	optional uint64 lifetime_playtime = 62;
+	optional uint64 lifetime_playtime_sessions = 63;
 	optional uint32 views = 42;
 	optional uint32 image_width = 43;
 	optional uint32 image_height = 44;
@@ -339,6 +341,7 @@ message CPublishedFile_QueryFiles_Request {
 	optional int32 language = 33 [default = 0, (description) = "Language to search in and also what gets returned. Defaults to English."];
 	repeated .CPublishedFile_QueryFiles_Request.KVTag required_kv_tags = 34 [(description) = "Required key-value tags to match on."];
 	optional bool totalonly = 16 [(description) = "(Optional) If true, only return the total number of files that satisfy this query."];
+	optional bool ids_only = 35 [(description) = "(Optional) If true, only return the published file ids of files that satisfy this query."];
 	optional bool return_vote_data = 17 [(description) = "Return vote data"];
 	optional bool return_tags = 18 [(description) = "Return tags in the file details"];
 	optional bool return_kv_tags = 19 [(description) = "Return key-value tags in the file details"];
@@ -352,6 +355,42 @@ message CPublishedFile_QueryFiles_Request {
 message CPublishedFile_QueryFiles_Response {
 	optional uint32 total = 1 [(description) = "Number of matches found, not necessarily number of items returned"];
 	repeated .PublishedFileDetails publishedfiledetails = 2 [(description) = "Each file details will be populated, depending on what return values were requested."];
+}
+
+message CPublishedFile_StartPlaytimeTracking_Request {
+	optional uint32 appid = 1;
+	repeated uint64 publishedfileids = 2;
+}
+
+message CPublishedFile_StartPlaytimeTracking_Response {
+}
+
+message CPublishedFile_StopPlaytimeTracking_Request {
+	optional uint32 appid = 1;
+	repeated uint64 publishedfileids = 2;
+}
+
+message CPublishedFile_StopPlaytimeTracking_Response {
+}
+
+message CPublishedFile_StopPlaytimeTrackingForAllAppItems_Request {
+	optional uint32 appid = 1;
+}
+
+message CPublishedFile_StopPlaytimeTrackingForAllAppItems_Response {
+}
+
+message CPublishedFile_SetPlaytimeForControllerConfigs_Request {
+	message ControllerConfigUsage {
+		optional uint64 publishedfileid = 1;
+		optional float seconds_active = 2;
+	}
+
+	optional uint32 appid = 1;
+	repeated .CPublishedFile_SetPlaytimeForControllerConfigs_Request.ControllerConfigUsage controller_config_usage = 2;
+}
+
+message CPublishedFile_SetPlaytimeForControllerConfigs_Response {
 }
 
 service PublishedFile {
@@ -391,5 +430,17 @@ service PublishedFile {
 	}
 	rpc QueryFiles (.CPublishedFile_QueryFiles_Request) returns (.CPublishedFile_QueryFiles_Response) {
 		option (method_description) = "Performs a search query for published files";
+	}
+	rpc StartPlaytimeTracking (.CPublishedFile_StartPlaytimeTracking_Request) returns (.CPublishedFile_StartPlaytimeTracking_Response) {
+		option (method_description) = "Start usage tracking for a given set of published files";
+	}
+	rpc StopPlaytimeTracking (.CPublishedFile_StopPlaytimeTracking_Request) returns (.CPublishedFile_StopPlaytimeTracking_Response) {
+		option (method_description) = "Stops usage tracking for a given set of published files";
+	}
+	rpc StopPlaytimeTrackingForAllAppItems (.CPublishedFile_StopPlaytimeTrackingForAllAppItems_Request) returns (.CPublishedFile_StopPlaytimeTrackingForAllAppItems_Response) {
+		option (method_description) = "Stops usage tracking for all items currently tracked for the specified app";
+	}
+	rpc SetPlaytimeForControllerConfigs (.CPublishedFile_SetPlaytimeForControllerConfigs_Request) returns (.CPublishedFile_SetPlaytimeForControllerConfigs_Response) {
+		option (method_description) = "Stops usage tracking all controller configs for the given app and set the usage time for the for the given controller configs";
 	}
 }

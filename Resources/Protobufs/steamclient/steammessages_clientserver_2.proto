@@ -12,6 +12,7 @@ message CMsgClientUCMAddScreenshot {
 	optional uint32 appid = 1;
 	optional string filename = 2;
 	optional string thumbname = 3;
+	optional string vr_filename = 14;
 	optional fixed32 rtime32_created = 4;
 	optional uint32 width = 5;
 	optional uint32 height = 6;
@@ -518,8 +519,9 @@ message CMsgClientEmailChangeResponse {
 }
 
 message CMsgClientGetCDNAuthToken {
-	optional uint32 app_id = 1;
+	optional uint32 depot_id = 1;
 	optional string host_name = 2;
+	optional uint32 app_id = 3;
 }
 
 message CMsgClientGetDepotDecryptionKey {
@@ -531,21 +533,6 @@ message CMsgClientGetDepotDecryptionKeyResponse {
 	optional int32 eresult = 1 [default = 2];
 	optional uint32 depot_id = 2;
 	optional bytes depot_encryption_key = 3;
-}
-
-message CMsgClientGetAppBetaPasswords {
-	optional uint32 app_id = 1;
-}
-
-message CMsgClientGetAppBetaPasswordsResponse {
-	message BetaPassword {
-		optional string betaname = 1;
-		optional string betapassword = 2;
-	}
-
-	optional int32 eresult = 1 [default = 2];
-	optional uint32 app_id = 2;
-	repeated .CMsgClientGetAppBetaPasswordsResponse.BetaPassword betapasswords = 3;
 }
 
 message CMsgClientCheckAppBetaPassword {
@@ -571,11 +558,14 @@ message CMsgClientUpdateAppJobReport {
 	optional string error_details = 5;
 	optional uint32 job_duration = 6;
 	optional uint32 files_validation_failed = 7;
-	optional uint64 bytes_downloaded = 8;
-	optional uint64 bytes_staged = 9;
+	optional uint64 job_bytes_downloaded = 8;
+	optional uint64 job_bytes_staged = 9;
 	optional uint64 bytes_comitted = 10;
 	optional uint32 start_app_state = 11;
 	optional fixed64 stats_machine_id = 12;
+	optional string branch_name = 13;
+	optional uint64 total_bytes_downloaded = 14;
+	optional uint64 total_bytes_staged = 15;
 }
 
 message CMsgClientDPContentStatsReport {
