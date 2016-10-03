@@ -1549,6 +1549,51 @@ namespace SteamKit2.Internal
       get { return _launch_option_type; }
       set { _launch_option_type = value; }
     }
+
+    private int _primary_controller_type = (int)-1;
+    [global::ProtoBuf.ProtoMember(16, IsRequired = false, Name=@"primary_controller_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue((int)-1)]
+    public int primary_controller_type
+    {
+      get { return _primary_controller_type; }
+      set { _primary_controller_type = value; }
+    }
+
+    private string _primary_steam_controller_serial = "";
+    [global::ProtoBuf.ProtoMember(17, IsRequired = false, Name=@"primary_steam_controller_serial", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string primary_steam_controller_serial
+    {
+      get { return _primary_steam_controller_serial; }
+      set { _primary_steam_controller_serial = value; }
+    }
+
+    private uint _total_steam_controller_count = (uint)0;
+    [global::ProtoBuf.ProtoMember(18, IsRequired = false, Name=@"total_steam_controller_count", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue((uint)0)]
+    public uint total_steam_controller_count
+    {
+      get { return _total_steam_controller_count; }
+      set { _total_steam_controller_count = value; }
+    }
+
+    private uint _total_non_steam_controller_count = (uint)0;
+    [global::ProtoBuf.ProtoMember(19, IsRequired = false, Name=@"total_non_steam_controller_count", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue((uint)0)]
+    public uint total_non_steam_controller_count
+    {
+      get { return _total_non_steam_controller_count; }
+      set { _total_non_steam_controller_count = value; }
+    }
+
+    private ulong _controller_workshop_file_id = (ulong)0;
+    [global::ProtoBuf.ProtoMember(20, IsRequired = false, Name=@"controller_workshop_file_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(@"0")]
+    public ulong controller_workshop_file_id
+    {
+      get { return _controller_workshop_file_id; }
+      set { _controller_workshop_file_id = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

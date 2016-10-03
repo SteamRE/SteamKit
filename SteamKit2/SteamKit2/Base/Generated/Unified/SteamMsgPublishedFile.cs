@@ -815,6 +815,24 @@ namespace SteamKit2.Unified.Internal
       set { _lifetime_followers = value; }
     }
 
+    private ulong _lifetime_playtime = default(ulong);
+    [global::ProtoBuf.ProtoMember(62, IsRequired = false, Name=@"lifetime_playtime", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong lifetime_playtime
+    {
+      get { return _lifetime_playtime; }
+      set { _lifetime_playtime = value; }
+    }
+
+    private ulong _lifetime_playtime_sessions = default(ulong);
+    [global::ProtoBuf.ProtoMember(63, IsRequired = false, Name=@"lifetime_playtime_sessions", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong lifetime_playtime_sessions
+    {
+      get { return _lifetime_playtime_sessions; }
+      set { _lifetime_playtime_sessions = value; }
+    }
+
     private uint _views = default(uint);
     [global::ProtoBuf.ProtoMember(42, IsRequired = false, Name=@"views", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(default(uint))]
@@ -2315,6 +2333,15 @@ namespace SteamKit2.Unified.Internal
       set { _totalonly = value; }
     }
 
+    private bool _ids_only = default(bool);
+    [global::ProtoBuf.ProtoMember(35, IsRequired = false, Name=@"ids_only", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool ids_only
+    {
+      get { return _ids_only; }
+      set { _ids_only = value; }
+    }
+
     private bool _return_vote_data = default(bool);
     [global::ProtoBuf.ProtoMember(17, IsRequired = false, Name=@"return_vote_data", DataFormat = global::ProtoBuf.DataFormat.Default)]
     [global::System.ComponentModel.DefaultValue(default(bool))]
@@ -2445,6 +2472,171 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPublishedFile_StartPlaytimeTracking_Request")]
+  public partial class CPublishedFile_StartPlaytimeTracking_Request : global::ProtoBuf.IExtensible
+  {
+    public CPublishedFile_StartPlaytimeTracking_Request() {}
+    
+
+    private uint _appid = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"appid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint appid
+    {
+      get { return _appid; }
+      set { _appid = value; }
+    }
+    private readonly global::System.Collections.Generic.List<ulong> _publishedfileids = new global::System.Collections.Generic.List<ulong>();
+    [global::ProtoBuf.ProtoMember(2, Name=@"publishedfileids", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public global::System.Collections.Generic.List<ulong> publishedfileids
+    {
+      get { return _publishedfileids; }
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPublishedFile_StartPlaytimeTracking_Response")]
+  public partial class CPublishedFile_StartPlaytimeTracking_Response : global::ProtoBuf.IExtensible
+  {
+    public CPublishedFile_StartPlaytimeTracking_Response() {}
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPublishedFile_StopPlaytimeTracking_Request")]
+  public partial class CPublishedFile_StopPlaytimeTracking_Request : global::ProtoBuf.IExtensible
+  {
+    public CPublishedFile_StopPlaytimeTracking_Request() {}
+    
+
+    private uint _appid = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"appid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint appid
+    {
+      get { return _appid; }
+      set { _appid = value; }
+    }
+    private readonly global::System.Collections.Generic.List<ulong> _publishedfileids = new global::System.Collections.Generic.List<ulong>();
+    [global::ProtoBuf.ProtoMember(2, Name=@"publishedfileids", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public global::System.Collections.Generic.List<ulong> publishedfileids
+    {
+      get { return _publishedfileids; }
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPublishedFile_StopPlaytimeTracking_Response")]
+  public partial class CPublishedFile_StopPlaytimeTracking_Response : global::ProtoBuf.IExtensible
+  {
+    public CPublishedFile_StopPlaytimeTracking_Response() {}
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPublishedFile_StopPlaytimeTrackingForAllAppItems_Request")]
+  public partial class CPublishedFile_StopPlaytimeTrackingForAllAppItems_Request : global::ProtoBuf.IExtensible
+  {
+    public CPublishedFile_StopPlaytimeTrackingForAllAppItems_Request() {}
+    
+
+    private uint _appid = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"appid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint appid
+    {
+      get { return _appid; }
+      set { _appid = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPublishedFile_StopPlaytimeTrackingForAllAppItems_Response")]
+  public partial class CPublishedFile_StopPlaytimeTrackingForAllAppItems_Response : global::ProtoBuf.IExtensible
+  {
+    public CPublishedFile_StopPlaytimeTrackingForAllAppItems_Response() {}
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPublishedFile_SetPlaytimeForControllerConfigs_Request")]
+  public partial class CPublishedFile_SetPlaytimeForControllerConfigs_Request : global::ProtoBuf.IExtensible
+  {
+    public CPublishedFile_SetPlaytimeForControllerConfigs_Request() {}
+    
+
+    private uint _appid = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"appid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint appid
+    {
+      get { return _appid; }
+      set { _appid = value; }
+    }
+    private readonly global::System.Collections.Generic.List<CPublishedFile_SetPlaytimeForControllerConfigs_Request.ControllerConfigUsage> _controller_config_usage = new global::System.Collections.Generic.List<CPublishedFile_SetPlaytimeForControllerConfigs_Request.ControllerConfigUsage>();
+    [global::ProtoBuf.ProtoMember(2, Name=@"controller_config_usage", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CPublishedFile_SetPlaytimeForControllerConfigs_Request.ControllerConfigUsage> controller_config_usage
+    {
+      get { return _controller_config_usage; }
+    }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ControllerConfigUsage")]
+  public partial class ControllerConfigUsage : global::ProtoBuf.IExtensible
+  {
+    public ControllerConfigUsage() {}
+    
+
+    private ulong _publishedfileid = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"publishedfileid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong publishedfileid
+    {
+      get { return _publishedfileid; }
+      set { _publishedfileid = value; }
+    }
+
+    private float _seconds_active = default(float);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"seconds_active", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(float))]
+    public float seconds_active
+    {
+      get { return _seconds_active; }
+      set { _seconds_active = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPublishedFile_SetPlaytimeForControllerConfigs_Response")]
+  public partial class CPublishedFile_SetPlaytimeForControllerConfigs_Response : global::ProtoBuf.IExtensible
+  {
+    public CPublishedFile_SetPlaytimeForControllerConfigs_Response() {}
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     public interface IPublishedFile
     {
       CPublishedFile_Subscribe_Response Subscribe(CPublishedFile_Subscribe_Request request);
@@ -2459,6 +2651,10 @@ namespace SteamKit2.Unified.Internal
     CPublishedFile_GetChangeHistory_Response GetChangeHistory(CPublishedFile_GetChangeHistory_Request request);
     CPublishedFile_RefreshVotingQueue_Response RefreshVotingQueue(CPublishedFile_RefreshVotingQueue_Request request);
     CPublishedFile_QueryFiles_Response QueryFiles(CPublishedFile_QueryFiles_Request request);
+    CPublishedFile_StartPlaytimeTracking_Response StartPlaytimeTracking(CPublishedFile_StartPlaytimeTracking_Request request);
+    CPublishedFile_StopPlaytimeTracking_Response StopPlaytimeTracking(CPublishedFile_StopPlaytimeTracking_Request request);
+    CPublishedFile_StopPlaytimeTrackingForAllAppItems_Response StopPlaytimeTrackingForAllAppItems(CPublishedFile_StopPlaytimeTrackingForAllAppItems_Request request);
+    CPublishedFile_SetPlaytimeForControllerConfigs_Response SetPlaytimeForControllerConfigs(CPublishedFile_SetPlaytimeForControllerConfigs_Request request);
     
     }
     

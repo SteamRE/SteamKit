@@ -522,6 +522,53 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CInventory_GetItemDefMeta_Request")]
+  public partial class CInventory_GetItemDefMeta_Request : global::ProtoBuf.IExtensible
+  {
+    public CInventory_GetItemDefMeta_Request() {}
+    
+
+    private uint _appid = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"appid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint appid
+    {
+      get { return _appid; }
+      set { _appid = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CInventory_GetItemDefMeta_Response")]
+  public partial class CInventory_GetItemDefMeta_Response : global::ProtoBuf.IExtensible
+  {
+    public CInventory_GetItemDefMeta_Response() {}
+    
+
+    private uint _modified = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"modified", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint modified
+    {
+      get { return _modified; }
+      set { _modified = value; }
+    }
+
+    private string _digest = "";
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"digest", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string digest
+    {
+      get { return _digest; }
+      set { _digest = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     public interface IInventory
     {
       CInventory_Response GetInventory(CInventory_GetInventory_Request request);
@@ -535,6 +582,7 @@ namespace SteamKit2.Unified.Internal
     CInventory_Response DevSetNextDrop(CInventory_DevSetNextDrop_Request request);
     CInventory_Response SplitItemStack(CInventory_SplitItemStack_Request request);
     CInventory_Response CombineItemStacks(CInventory_CombineItemStacks_Request request);
+    CInventory_GetItemDefMeta_Response GetItemDefMeta(CInventory_GetItemDefMeta_Request request);
     
     }
     
