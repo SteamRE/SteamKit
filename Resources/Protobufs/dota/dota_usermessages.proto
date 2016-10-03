@@ -220,6 +220,12 @@ enum DOTA_ABILITY_PING_TYPE {
 	ABILITY_PING_UNLEARNED = 5;
 }
 
+enum DOTA_REPLAY_STATE_EVENT {
+	DOTA_REPLAY_STATE_EVENT_GAME_START = 1;
+	DOTA_REPLAY_STATE_EVENT_STARTING_HORN = 2;
+	DOTA_REPLAY_STATE_EVENT_FIRST_BLOOD = 3;
+}
+
 enum EDotaEntityMessages {
 	DOTA_UNIT_SPEECH = 0;
 	DOTA_UNIT_SPEECH_MUTE = 1;
@@ -246,6 +252,7 @@ enum DOTA_PARTICLE_MESSAGE {
 	DOTA_PARTICLE_MANAGER_EVENT_FROZEN = 12;
 	DOTA_PARTICLE_MANAGER_EVENT_CHANGE_CONTROL_POINT_ATTACHMENT = 13;
 	DOTA_PARTICLE_MANAGER_EVENT_UPDATE_ENTITY_POSITION = 14;
+	DOTA_PARTICLE_MANAGER_EVENT_SET_FOW_PROPERTIES = 15;
 }
 
 enum DOTA_OVERHEAD_ALERT {
@@ -344,6 +351,7 @@ enum EPlayerVoiceListenState {
 
 enum EProjectionEvent {
 	ePE_FirstBlood = 0;
+	ePE_Killstreak_godlike = 1;
 }
 
 message CDOTAUserMsg_AIDebugLine {
@@ -501,6 +509,8 @@ message CDOTAUserMsg_CreateLinearProjectile {
 	optional int32 handle = 6;
 	optional .CMsgVector2D acceleration = 7;
 	optional float max_speed = 8;
+	optional float fow_radius = 9;
+	optional bool sticky_fow_reveal = 10;
 }
 
 message CDOTAUserMsg_DestroyLinearProjectile {
@@ -737,6 +747,12 @@ message CDOTAUserMsg_ParticleManager {
 		optional .CMsgVector position = 2;
 	}
 
+	message SetParticleFoWProperties {
+		optional int32 fow_control_point = 1;
+		optional int32 fow_control_point2 = 2;
+		optional float fow_radius = 3;
+	}
+
 	required .DOTA_PARTICLE_MESSAGE type = 1 [default = DOTA_PARTICLE_MANAGER_EVENT_CREATE];
 	required uint32 index = 2;
 	optional .CDOTAUserMsg_ParticleManager.ReleaseParticleIndex release_particle_index = 3;
@@ -753,6 +769,7 @@ message CDOTAUserMsg_ParticleManager {
 	optional .CDOTAUserMsg_ParticleManager.UpdateParticleSetFrozen update_particle_set_frozen = 15;
 	optional .CDOTAUserMsg_ParticleManager.ChangeControlPointAttachment change_control_point_attachment = 16;
 	optional .CDOTAUserMsg_ParticleManager.UpdateEntityPosition update_entity_position = 17;
+	optional .CDOTAUserMsg_ParticleManager.SetParticleFoWProperties set_particle_fow_properties = 18;
 }
 
 message CDOTAUserMsg_OverheadEvent {

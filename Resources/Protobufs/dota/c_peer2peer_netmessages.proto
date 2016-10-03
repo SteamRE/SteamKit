@@ -41,6 +41,8 @@ message CP2P_VRAvatarPosition {
 
 	repeated .CP2P_VRAvatarPosition.COrientation body_parts = 1;
 	optional int32 hat_id = 2;
+	optional int32 scene_id = 3;
+	optional int32 world_scale = 4;
 }
 
 message CP2P_WatchSynchronization {

@@ -132,5 +132,6 @@ enum EGCToGCMsg {
 	k_EMsgGCToGCUpdateSessionStats = 162;
 	k_EMsgGCToGCUniverseStartup = 163;
 	k_EMsgGCToGCUniverseStartupResponse = 164;
+	k_EMsgGCToGCForwardAccountDetails = 165;
 }
 

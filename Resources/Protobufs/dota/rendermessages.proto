@@ -181,9 +181,7 @@ message CMsgPushCompositingLayer {
 	optional double occluded_right_edge = 58;
 	optional double occluded_bottom_edge = 59;
 	optional .CRadialClipData radial_clip = 60;
-	optional double motionblur_velocity = 61;
-	optional double motionblur_dirx = 62;
-	optional double motionblur_diry = 63;
+	optional string composition_layer_texture_name = 64;
 }
 
 message CMsgPopCompositingLayer {
@@ -501,28 +499,6 @@ message CMsgGaussianBlur {
 	repeated .CMsgAnimationData animations = 5;
 }
 
-message CMsgMotionBlurValues {
-	optional double velocity = 1;
-	optional double dirx = 2;
-	optional double diry = 3;
-}
-
-message CMsgMotionBlur {
-	message AnimationFrameData {
-		optional .CMsgMotionBlurValues data = 1;
-	}
-
-	extend .CMsgAnimationFrameData {
-		optional .CMsgMotionBlur.AnimationFrameData animation_frame_data = 1022;
-	}
-
-	optional .CMsgMotionBlurValues base = 1;
-	optional .CMsgMotionBlurValues transition = 2;
-	optional .CMsgTransitionData transition_data = 3;
-	repeated .CMsgAnimationData animations = 4;
-	optional uint32 style_symbol = 5;
-}
-
 message CMsg3DTransformPerspective {
 	message AnimationFrameData {
 		optional double data = 1;
@@ -751,7 +727,7 @@ message CMsgPushAAndTContext {
 	optional bool opaque_background = 34;
 	optional uint32 child_panel_count = 35;
 	optional bool wants_screenspace_quad_output = 36;
-	optional .CMsgMotionBlur motion_blur = 37;
+	optional string composition_layer_texture_name = 38;
 }
 
 message CMsgPopAAndTContext {
@@ -793,22 +769,6 @@ message CMsgDrawTexturedRect {
 	optional int32 texture_serial = 6 [default = 0];
 	optional uint32 texture_sample_mode = 7 [default = 0];
 	optional .CMsgOpacity texture_opacity = 8;
-}
-
-message CMsgDrawDoubleBufferedRect {
-	optional .CMsgPoint top_left = 1;
-	optional .CMsgPoint bottom_right = 2;
-	optional uint32 texture_id = 3;
-	optional .CMsgPoint texture_top_left = 4;
-	optional .CMsgPoint texture_bottom_right = 5;
-}
-
-message CMsgDrawYUV420DoubleBufferedRect {
-	optional .CMsgPoint top_left = 1;
-	optional .CMsgPoint bottom_right = 2;
-	optional uint32 texture_id = 3;
-	optional .CMsgPoint texture_top_left = 4;
-	optional .CMsgPoint texture_bottom_right = 5;
 }
 
 message CMsgRenderTexturedRect {

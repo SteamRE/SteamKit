@@ -426,7 +426,10 @@ namespace SteamKit2.GC.Dota.Internal
       EVENT_ID_WINTER_MAJOR_2016 = 13,
             
       [global::ProtoBuf.ProtoEnum(Name=@"EVENT_ID_INTERNATIONAL_2016", Value=14)]
-      EVENT_ID_INTERNATIONAL_2016 = 14
+      EVENT_ID_INTERNATIONAL_2016 = 14,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EVENT_ID_COUNT", Value=15)]
+      EVENT_ID_COUNT = 15
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"DOTALeaverStatus_t", EnumPassthru=true)]
@@ -618,7 +621,10 @@ namespace SteamKit2.GC.Dota.Internal
       DOTAChannelType_PostGame = 18,
             
       [global::ProtoBuf.ProtoEnum(Name=@"DOTAChannelType_BattleCup", Value=19)]
-      DOTAChannelType_BattleCup = 19
+      DOTAChannelType_BattleCup = 19,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTAChannelType_HLTVSpectator", Value=20)]
+      DOTAChannelType_HLTVSpectator = 20
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"EProfileCardSlotType", EnumPassthru=true)]
@@ -842,8 +848,8 @@ namespace SteamKit2.GC.Dota.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"k_EDOTAPlayerMMRType_SoloCompetitive", Value=4)]
       k_EDOTAPlayerMMRType_SoloCompetitive = 4,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EDOTAPlayerMMRType_1v1Competitive", Value=5)]
-      k_EDOTAPlayerMMRType_1v1Competitive = 5,
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EDOTAPlayerMMRType_1v1Competitive_UNUSED", Value=5)]
+      k_EDOTAPlayerMMRType_1v1Competitive_UNUSED = 5,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EDOTAPlayerMMRType_GeneralSeasonalRanked", Value=6)]
       k_EDOTAPlayerMMRType_GeneralSeasonalRanked = 6,
@@ -994,7 +1000,10 @@ namespace SteamKit2.GC.Dota.Internal
       k_EMatchOutcome_NotScored_ServerCrash = 66,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMatchOutcome_NotScored_NeverStarted", Value=67)]
-      k_EMatchOutcome_NotScored_NeverStarted = 67
+      k_EMatchOutcome_NotScored_NeverStarted = 67,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMatchOutcome_NotScored_Canceled", Value=68)]
+      k_EMatchOutcome_NotScored_Canceled = 68
     }
   
 }

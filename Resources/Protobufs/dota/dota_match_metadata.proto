@@ -22,6 +22,15 @@ message CDOTAMatchMetadata {
 			optional int32 purchase_time = 2;
 		}
 
+		message InventorySnapshot {
+			repeated uint32 item_id = 1;
+			optional int32 game_time = 2;
+			optional uint32 kills = 3;
+			optional uint32 deaths = 4;
+			optional uint32 assists = 5;
+			optional uint32 level = 6;
+		}
+
 		message Player {
 			optional uint32 account_id = 1;
 			repeated uint32 ability_upgrades = 2;
@@ -46,6 +55,8 @@ message CDOTAMatchMetadata {
 			optional float push_score = 21;
 			repeated uint32 level_up_times = 22;
 			repeated float graph_net_worth = 23;
+			repeated .CDOTAMatchMetadata.Team.InventorySnapshot inventory_snapshot = 24;
+			optional bool avg_stats_calibrated = 25;
 		}
 
 		optional uint32 dota_team = 1;
@@ -62,6 +73,8 @@ message CDOTAMatchMetadata {
 
 	repeated .CDOTAMatchMetadata.Team teams = 1;
 	repeated .CLobbyTimedRewardDetails item_rewards = 2;
+	optional fixed64 lobby_id = 3;
+	optional fixed64 report_until_time = 4;
 }
 
 message CDOTAMatchPrivateMetadata {
@@ -72,8 +85,16 @@ message CDOTAMatchPrivateMetadata {
 			optional bytes position_stream = 3;
 		}
 
+		message Building {
+			optional string unit_name = 1;
+			optional uint32 position_quant_x = 2;
+			optional uint32 position_quant_y = 3;
+			optional float death_time = 4;
+		}
+
 		optional uint32 dota_team = 1;
 		repeated .CDOTAMatchPrivateMetadata.Team.Player players = 2;
+		repeated .CDOTAMatchPrivateMetadata.Team.Building buildings = 3;
 	}
 
 	repeated .CDOTAMatchPrivateMetadata.Team teams = 1;

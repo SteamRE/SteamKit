@@ -44,6 +44,7 @@ enum SVC_Messages {
 	svc_PeerList = 60;
 	svc_PacketReliable = 61;
 	svc_HLTVStatus = 62;
+	svc_ServerSteamID = 63;
 	svc_FullFrameSplit = 70;
 }
 
@@ -400,6 +401,10 @@ message CSVCMsg_HLTVStatus {
 	optional int32 clients = 2;
 	optional int32 slots = 3;
 	optional int32 proxies = 4;
+}
+
+message CSVCMsg_ServerSteamID {
+	optional uint64 steam_id = 1;
 }
 
 message CSVCMsg_CmdKeyValues {

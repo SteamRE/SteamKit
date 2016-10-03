@@ -3720,15 +3720,6 @@ namespace SteamKit2.GC.Dota.Internal
       set { _opposing_team_name = value; }
     }
 
-    private CMsgFantasyLeagueScoring _stats = null;
-    [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"stats", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
-    public CMsgFantasyLeagueScoring stats
-    {
-      get { return _stats; }
-      set { _stats = value; }
-    }
-
     private uint _owned_by = default(uint);
     [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"owned_by", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(default(uint))]
@@ -3920,177 +3911,6 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAFantasyPlayerMatchStats")]
-  public partial class CMsgDOTAFantasyPlayerMatchStats : global::ProtoBuf.IExtensible
-  {
-    public CMsgDOTAFantasyPlayerMatchStats() {}
-    
-
-    private uint _player_account_id = default(uint);
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"player_account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint player_account_id
-    {
-      get { return _player_account_id; }
-      set { _player_account_id = value; }
-    }
-    private readonly global::System.Collections.Generic.List<CMsgDOTAFantasyPlayerMatchStats.Match> _matches = new global::System.Collections.Generic.List<CMsgDOTAFantasyPlayerMatchStats.Match>();
-    [global::ProtoBuf.ProtoMember(2, Name=@"matches", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public global::System.Collections.Generic.List<CMsgDOTAFantasyPlayerMatchStats.Match> matches
-    {
-      get { return _matches; }
-    }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Match")]
-  public partial class Match : global::ProtoBuf.IExtensible
-  {
-    public Match() {}
-    
-
-    private ulong _match_id = default(ulong);
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"match_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
-    public ulong match_id
-    {
-      get { return _match_id; }
-      set { _match_id = value; }
-    }
-
-    private uint _series_id = default(uint);
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"series_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint series_id
-    {
-      get { return _series_id; }
-      set { _series_id = value; }
-    }
-
-    private uint _series_type = default(uint);
-    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"series_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint series_type
-    {
-      get { return _series_type; }
-      set { _series_type = value; }
-    }
-
-    private uint _level = default(uint);
-    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"level", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint level
-    {
-      get { return _level; }
-      set { _level = value; }
-    }
-
-    private uint _kills = default(uint);
-    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"kills", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint kills
-    {
-      get { return _kills; }
-      set { _kills = value; }
-    }
-
-    private uint _deaths = default(uint);
-    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"deaths", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint deaths
-    {
-      get { return _deaths; }
-      set { _deaths = value; }
-    }
-
-    private uint _assists = default(uint);
-    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"assists", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint assists
-    {
-      get { return _assists; }
-      set { _assists = value; }
-    }
-
-    private uint _last_hits = default(uint);
-    [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"last_hits", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint last_hits
-    {
-      get { return _last_hits; }
-      set { _last_hits = value; }
-    }
-
-    private uint _denies = default(uint);
-    [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"denies", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint denies
-    {
-      get { return _denies; }
-      set { _denies = value; }
-    }
-
-    private float _gpm = default(float);
-    [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"gpm", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(float))]
-    public float gpm
-    {
-      get { return _gpm; }
-      set { _gpm = value; }
-    }
-
-    private float _xppm = default(float);
-    [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"xppm", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(float))]
-    public float xppm
-    {
-      get { return _xppm; }
-      set { _xppm = value; }
-    }
-
-    private float _stuns = default(float);
-    [global::ProtoBuf.ProtoMember(12, IsRequired = false, Name=@"stuns", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(float))]
-    public float stuns
-    {
-      get { return _stuns; }
-      set { _stuns = value; }
-    }
-
-    private float _healing = default(float);
-    [global::ProtoBuf.ProtoMember(13, IsRequired = false, Name=@"healing", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(float))]
-    public float healing
-    {
-      get { return _healing; }
-      set { _healing = value; }
-    }
-
-    private uint _tower_kills = default(uint);
-    [global::ProtoBuf.ProtoMember(14, IsRequired = false, Name=@"tower_kills", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint tower_kills
-    {
-      get { return _tower_kills; }
-      set { _tower_kills = value; }
-    }
-
-    private uint _roshan_kills = default(uint);
-    [global::ProtoBuf.ProtoMember(15, IsRequired = false, Name=@"roshan_kills", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint roshan_kills
-    {
-      get { return _roshan_kills; }
-      set { _roshan_kills = value; }
-    }
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientToGCGetPlayerCardRosterRequest")]
   public partial class CMsgClientToGCGetPlayerCardRosterRequest : global::ProtoBuf.IExtensible
   {
@@ -4140,6 +3960,33 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _player_card_item_id; }
     }
   
+
+    private float _score = default(float);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"score", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(float))]
+    public float score
+    {
+      get { return _score; }
+      set { _score = value; }
+    }
+
+    private bool _finalized = default(bool);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"finalized", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool finalized
+    {
+      get { return _finalized; }
+      set { _finalized = value; }
+    }
+
+    private float _percentile = default(float);
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"percentile", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(float))]
+    public float percentile
+    {
+      get { return _percentile; }
+      set { _percentile = value; }
+    }
     [global::ProtoBuf.ProtoContract(Name=@"Result", EnumPassthru=true)]
     public enum Result
     {
@@ -4239,7 +4086,19 @@ namespace SteamKit2.GC.Dota.Internal
       ERROR_INVALID_TIMESTAMP = 3,
             
       [global::ProtoBuf.ProtoEnum(Name=@"ERROR_PLAYER_CARD_NOT_OWNED", Value=4)]
-      ERROR_PLAYER_CARD_NOT_OWNED = 4
+      ERROR_PLAYER_CARD_NOT_OWNED = 4,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"ERROR_INVALID_SLOT", Value=5)]
+      ERROR_INVALID_SLOT = 5,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"ERROR_FAILED_CARD_INFO", Value=6)]
+      ERROR_FAILED_CARD_INFO = 6,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"ERROR_ACCOUNT_DUPLICATE", Value=7)]
+      ERROR_ACCOUNT_DUPLICATE = 7,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"ERROR_LOCKED_TIMESTAMP", Value=8)]
+      ERROR_LOCKED_TIMESTAMP = 8
     }
   
     private global::ProtoBuf.IExtension extensionObject;

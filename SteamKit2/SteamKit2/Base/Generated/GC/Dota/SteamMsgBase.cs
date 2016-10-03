@@ -504,15 +504,6 @@ namespace SteamKit2.GC.Dota.Internal
       set { _alert_type = value; }
     }
 
-    private uint _alert_destination = default(uint);
-    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"alert_destination", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint alert_destination
-    {
-      get { return _alert_destination; }
-      set { _alert_destination = value; }
-    }
-
     private bool _critical = default(bool);
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"critical", DataFormat = global::ProtoBuf.DataFormat.Default)]
     [global::System.ComponentModel.DefaultValue(default(bool))]
@@ -547,6 +538,15 @@ namespace SteamKit2.GC.Dota.Internal
     {
       get { return _text; }
       set { _text = value; }
+    }
+
+    private string _recipient = "";
+    [global::ProtoBuf.ProtoMember(12, IsRequired = false, Name=@"recipient", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string recipient
+    {
+      get { return _recipient; }
+      set { _recipient = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -2527,6 +2527,15 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _eresult; }
       set { _eresult = value; }
     }
+
+    private string _message = "";
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"message", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string message
+    {
+      get { return _message; }
+      set { _message = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -2782,8 +2791,11 @@ namespace SteamKit2.GC.Dota.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"PROTOBUF_FIELD_UINT64", Value=3)]
       PROTOBUF_FIELD_UINT64 = 3,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"WEBAPI_PARAM_UINT64", Value=4)]
-      WEBAPI_PARAM_UINT64 = 4
+      [global::ProtoBuf.ProtoEnum(Name=@"WEBAPI_PARAM", Value=4)]
+      WEBAPI_PARAM = 4,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"WEBAPI_PARAM_STEAMID_ACCOUNTID", Value=5)]
+      WEBAPI_PARAM_STEAMID_ACCOUNTID = 5
     }
   
     private global::ProtoBuf.IExtension extensionObject;

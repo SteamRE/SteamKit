@@ -237,17 +237,6 @@ message CDOTAClientMsg_HeroStatueLike {
 	optional uint32 owner_player_id = 1;
 }
 
-message CDOTAClientMsg_TeamShowcaseEditor {
-	optional bytes data = 1;
-}
-
-message CDOTAClientMsg_TeamShowcaseClientData {
-	optional bytes data = 1;
-}
-
-message CDOTAClientMsg_PlayTeamShowcase {
-}
-
 message CDOTAClientMsg_EventCNY2015Cmd {
 	optional bytes data = 1;
 }

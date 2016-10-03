@@ -16,7 +16,6 @@ enum EGCBaseMsg {
 	k_EMsgGCClientConnectToServer = 4507;
 	k_EMsgGCGameServerInfo = 4508;
 	k_EMsgGCError = 4509;
-	k_EMsgGCReplay_UploadedToYouTube = 4510;
 	k_EMsgGCLANServerAvailable = 4511;
 	k_EMsgGCInviteToLobby = 4512;
 	k_EMsgGCLobbyInviteResponse = 4513;
@@ -280,12 +279,6 @@ message CMsgReplicateConVars {
 	repeated .CMsgConVarValue convars = 1;
 }
 
-message CMsgReplayUploadedToYouTube {
-	optional string youtube_url = 1;
-	optional string youtube_account_name = 2;
-	optional uint64 session_id = 3;
-}
-
 message CMsgConsumableExhausted {
 	optional int32 item_def_id = 1;
 }
@@ -365,10 +358,6 @@ message CSOEconItemTournamentPassport {
 	optional uint32 version = 6;
 	optional uint32 def_index = 7;
 	optional uint32 reward_flags = 8;
-}
-
-message CMsgGCItemPreviewItemBoughtNotification {
-	optional uint32 item_def_index = 1;
 }
 
 message CMsgGCStorePurchaseCancel {

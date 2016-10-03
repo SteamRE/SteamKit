@@ -1285,6 +1285,43 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCToGCForwardAccountDetails")]
+  public partial class CMsgGCToGCForwardAccountDetails : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCToGCForwardAccountDetails() {}
+    
+
+    private ulong _steamid = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong steamid
+    {
+      get { return _steamid; }
+      set { _steamid = value; }
+    }
+
+    private CGCSystemMsg_GetAccountDetails_Response _account_details = null;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"account_details", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public CGCSystemMsg_GetAccountDetails_Response account_details
+    {
+      get { return _account_details; }
+      set { _account_details = value; }
+    }
+
+    private uint _age_seconds = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"age_seconds", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint age_seconds
+    {
+      get { return _age_seconds; }
+      set { _age_seconds = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCToGCLoadSessionSOCache")]
   public partial class CMsgGCToGCLoadSessionSOCache : global::ProtoBuf.IExtensible
   {
@@ -1298,6 +1335,15 @@ namespace SteamKit2.GC.Dota.Internal
     {
       get { return _account_id; }
       set { _account_id = value; }
+    }
+
+    private CMsgGCToGCForwardAccountDetails _forward_account_details = null;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"forward_account_details", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public CMsgGCToGCForwardAccountDetails forward_account_details
+    {
+      get { return _forward_account_details; }
+      set { _forward_account_details = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

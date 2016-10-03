@@ -78,6 +78,15 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _tourney_buyin; }
       set { _tourney_buyin = value; }
     }
+
+    private uint _tourney_prevent_until = default(uint);
+    [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"tourney_prevent_until", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint tourney_prevent_until
+    {
+      get { return _tourney_prevent_until; }
+      set { _tourney_prevent_until = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -881,9 +890,9 @@ namespace SteamKit2.GC.Dota.Internal
     }
   
 
-    private DOTA_GC_TEAM _coach_team = DOTA_GC_TEAM.DOTA_GC_TEAM_GOOD_GUYS;
+    private DOTA_GC_TEAM _coach_team = DOTA_GC_TEAM.DOTA_GC_TEAM_NOTEAM;
     [global::ProtoBuf.ProtoMember(23, IsRequired = false, Name=@"coach_team", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(DOTA_GC_TEAM.DOTA_GC_TEAM_GOOD_GUYS)]
+    [global::System.ComponentModel.DefaultValue(DOTA_GC_TEAM.DOTA_GC_TEAM_NOTEAM)]
     public DOTA_GC_TEAM coach_team
     {
       get { return _coach_team; }
@@ -1913,6 +1922,33 @@ namespace SteamKit2.GC.Dota.Internal
     {
       get { return _lobby_mvp_account_id; }
       set { _lobby_mvp_account_id = value; }
+    }
+
+    private uint _weekend_tourney_division_id = default(uint);
+    [global::ProtoBuf.ProtoMember(90, IsRequired = false, Name=@"weekend_tourney_division_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint weekend_tourney_division_id
+    {
+      get { return _weekend_tourney_division_id; }
+      set { _weekend_tourney_division_id = value; }
+    }
+
+    private uint _weekend_tourney_skill_level = default(uint);
+    [global::ProtoBuf.ProtoMember(91, IsRequired = false, Name=@"weekend_tourney_skill_level", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint weekend_tourney_skill_level
+    {
+      get { return _weekend_tourney_skill_level; }
+      set { _weekend_tourney_skill_level = value; }
+    }
+
+    private uint _weekend_tourney_bracket_round = default(uint);
+    [global::ProtoBuf.ProtoMember(92, IsRequired = false, Name=@"weekend_tourney_bracket_round", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint weekend_tourney_bracket_round
+    {
+      get { return _weekend_tourney_bracket_round; }
+      set { _weekend_tourney_bracket_round = value; }
     }
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CExtraMsg")]
   public partial class CExtraMsg : global::ProtoBuf.IExtensible

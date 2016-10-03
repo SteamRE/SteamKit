@@ -25,6 +25,7 @@ message CSODOTAPartyMember {
 	optional uint32 region_ping_failed_bitmask = 6;
 	optional uint32 tourney_skill_level = 7;
 	optional uint32 tourney_buyin = 8;
+	optional uint32 tourney_prevent_until = 9;
 }
 
 message CSODOTAParty {
@@ -140,7 +141,7 @@ message CDOTALobbyMember {
 	repeated uint32 disabled_hero_id = 20;
 	optional .PartnerAccountType partner_account_type = 21 [default = PARTNER_NONE];
 	repeated uint32 enabled_hero_id = 22;
-	optional .DOTA_GC_TEAM coach_team = 23 [default = DOTA_GC_TEAM_GOOD_GUYS];
+	optional .DOTA_GC_TEAM coach_team = 23 [default = DOTA_GC_TEAM_NOTEAM];
 	optional uint32 nexon_pc_bang_no = 24;
 	optional string nexon_pc_bang_name = 25;
 	repeated .CDOTALobbyMember.CDOTALobbyMemberXPBonus xp_bonuses = 27;
@@ -291,5 +292,8 @@ message CSODOTALobby {
 	optional uint32 game_start_time = 87;
 	optional .LobbyDotaPauseSetting pause_setting = 88 [default = LobbyDotaPauseSetting_Unlimited];
 	optional uint32 lobby_mvp_account_id = 89;
+	optional uint32 weekend_tourney_division_id = 90;
+	optional uint32 weekend_tourney_skill_level = 91;
+	optional uint32 weekend_tourney_bracket_round = 92;
 }
 

@@ -66,6 +66,7 @@ enum EEvent {
 	EVENT_ID_FROSTIVUS = 12;
 	EVENT_ID_WINTER_MAJOR_2016 = 13;
 	EVENT_ID_INTERNATIONAL_2016 = 14;
+	EVENT_ID_COUNT = 15;
 }
 
 enum DOTALeaverStatus_t {
@@ -138,6 +139,7 @@ enum DOTAChatChannelType_t {
 	DOTAChannelType_Private = 17;
 	DOTAChannelType_PostGame = 18;
 	DOTAChannelType_BattleCup = 19;
+	DOTAChannelType_HLTVSpectator = 20;
 }
 
 enum EProfileCardSlotType {
@@ -228,7 +230,7 @@ enum EDOTAPlayerMMRType {
 	k_EDOTAPlayerMMRType_SoloHidden = 2;
 	k_EDOTAPlayerMMRType_GeneralCompetitive = 3;
 	k_EDOTAPlayerMMRType_SoloCompetitive = 4;
-	k_EDOTAPlayerMMRType_1v1Competitive = 5;
+	k_EDOTAPlayerMMRType_1v1Competitive_UNUSED = 5;
 	k_EDOTAPlayerMMRType_GeneralSeasonalRanked = 6;
 	k_EDOTAPlayerMMRType_SoloSeasonalRanked = 7;
 }
@@ -286,6 +288,7 @@ enum EMatchOutcome {
 	k_EMatchOutcome_NotScored_Leaver = 65;
 	k_EMatchOutcome_NotScored_ServerCrash = 66;
 	k_EMatchOutcome_NotScored_NeverStarted = 67;
+	k_EMatchOutcome_NotScored_Canceled = 68;
 }
 
 message CDOTAClientHardwareSpecs {

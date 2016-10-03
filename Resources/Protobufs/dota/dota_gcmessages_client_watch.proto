@@ -23,6 +23,8 @@ message CSourceTVGameSmall {
 	optional uint32 average_mmr = 11;
 	optional string team_name_radiant = 15;
 	optional string team_name_dire = 16;
+	optional fixed64 team_logo_radiant = 24;
+	optional fixed64 team_logo_dire = 25;
 	optional uint32 sort_score = 17;
 	optional float last_update_time = 18;
 	optional int32 radiant_lead = 19;
@@ -30,6 +32,10 @@ message CSourceTVGameSmall {
 	optional uint32 dire_score = 21;
 	repeated .CSourceTVGameSmall.Player players = 22;
 	optional fixed32 building_state = 23;
+	optional uint32 weekend_tourney_tournament_id = 26;
+	optional uint32 weekend_tourney_division = 27;
+	optional uint32 weekend_tourney_skill_level = 28;
+	optional uint32 weekend_tourney_bracket_round = 29;
 }
 
 message CMsgClientToGCFindTopSourceTVGames {
@@ -117,16 +123,20 @@ message CMsgDOTAMatchMinimal {
 		optional uint32 player_slot = 7;
 	}
 
-	message League {
+	message Tourney {
 		optional uint32 league_id = 1;
+		optional uint32 series_type = 8;
+		optional uint32 series_game = 9;
+		optional uint32 weekend_tourney_tournament_id = 10;
+		optional uint32 weekend_tourney_season_trophy_id = 11;
+		optional uint32 weekend_tourney_division = 12;
+		optional uint32 weekend_tourney_skill_level = 13;
 		optional uint32 radiant_team_id = 2;
 		optional string radiant_team_name = 3;
 		optional fixed64 radiant_team_logo = 4;
 		optional uint32 dire_team_id = 5;
 		optional string dire_team_name = 6;
 		optional fixed64 dire_team_logo = 7;
-		optional uint32 series_type = 8;
-		optional uint32 series_game = 9;
 	}
 
 	optional uint64 match_id = 1;
@@ -134,7 +144,7 @@ message CMsgDOTAMatchMinimal {
 	optional uint32 duration = 3;
 	optional .DOTA_GameMode game_mode = 4 [default = DOTA_GAMEMODE_NONE];
 	repeated .CMsgDOTAMatchMinimal.Player players = 6;
-	optional .CMsgDOTAMatchMinimal.League league = 7;
+	optional .CMsgDOTAMatchMinimal.Tourney tourney = 7;
 	optional .EMatchOutcome match_outcome = 8 [default = k_EMatchOutcome_Unknown];
 }
 

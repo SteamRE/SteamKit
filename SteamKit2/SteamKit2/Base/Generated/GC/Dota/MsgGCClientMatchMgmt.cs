@@ -2183,17 +2183,8 @@ namespace SteamKit2.GC.Dota.Internal
       set { _league_id = value; }
     }
 
-    private uint _series_id = default(uint);
-    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"series_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint series_id
-    {
-      get { return _series_id; }
-      set { _series_id = value; }
-    }
-
     private uint _series_type = default(uint);
-    [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"series_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"series_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint series_type
     {
@@ -2202,7 +2193,7 @@ namespace SteamKit2.GC.Dota.Internal
     }
 
     private uint _series_game = default(uint);
-    [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"series_game", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"series_game", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint series_game
     {
@@ -2210,32 +2201,60 @@ namespace SteamKit2.GC.Dota.Internal
       set { _series_game = value; }
     }
 
-    private uint _team1_id = default(uint);
-    [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"team1_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint team1_id
+    private CMsgSpectatorLobbyGameDetails.Team _radiant_team = null;
+    [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"radiant_team", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public CMsgSpectatorLobbyGameDetails.Team radiant_team
     {
-      get { return _team1_id; }
-      set { _team1_id = value; }
+      get { return _radiant_team; }
+      set { _radiant_team = value; }
     }
 
-    private uint _team2_id = default(uint);
-    [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"team2_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint team2_id
+    private CMsgSpectatorLobbyGameDetails.Team _dire_team = null;
+    [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"dire_team", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public CMsgSpectatorLobbyGameDetails.Team dire_team
     {
-      get { return _team2_id; }
-      set { _team2_id = value; }
+      get { return _dire_team; }
+      set { _dire_team = value; }
+    }
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Team")]
+  public partial class Team : global::ProtoBuf.IExtensible
+  {
+    public Team() {}
+    
+
+    private uint _team_id = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"team_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint team_id
+    {
+      get { return _team_id; }
+      set { _team_id = value; }
     }
 
-    private string _stage_name = "";
-    [global::ProtoBuf.ProtoMember(12, IsRequired = false, Name=@"stage_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    private string _team_name = "";
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"team_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
     [global::System.ComponentModel.DefaultValue("")]
-    public string stage_name
+    public string team_name
     {
-      get { return _stage_name; }
-      set { _stage_name = value; }
+      get { return _team_name; }
+      set { _team_name = value; }
     }
+
+    private ulong _team_logo = default(ulong);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"team_logo", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong team_logo
+    {
+      get { return _team_logo; }
+      set { _team_logo = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -2406,6 +2425,53 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientToGCRequestSteamDatagramTicket")]
+  public partial class CMsgClientToGCRequestSteamDatagramTicket : global::ProtoBuf.IExtensible
+  {
+    public CMsgClientToGCRequestSteamDatagramTicket() {}
+    
+
+    private ulong _server_steam_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"server_steam_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong server_steam_id
+    {
+      get { return _server_steam_id; }
+      set { _server_steam_id = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientToGCRequestSteamDatagramTicketResponse")]
+  public partial class CMsgClientToGCRequestSteamDatagramTicketResponse : global::ProtoBuf.IExtensible
+  {
+    public CMsgClientToGCRequestSteamDatagramTicketResponse() {}
+    
+
+    private string _serialized_ticket = "";
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"serialized_ticket", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string serialized_ticket
+    {
+      get { return _serialized_ticket; }
+      set { _serialized_ticket = value; }
+    }
+
+    private string _message = "";
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"message", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string message
+    {
+      get { return _message; }
+      set { _message = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     [global::ProtoBuf.ProtoContract(Name=@"EStartFindingMatchResult", EnumPassthru=true)]
     public enum EStartFindingMatchResult
     {
@@ -2477,7 +2543,10 @@ namespace SteamKit2.GC.Dota.Internal
       k_EStartFindingMatchResult_MemberMissingEventOwnership = 118,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EStartFindingMatchResult_WeekendTourneyNotUnlocked", Value=119)]
-      k_EStartFindingMatchResult_WeekendTourneyNotUnlocked = 119
+      k_EStartFindingMatchResult_WeekendTourneyNotUnlocked = 119,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EStartFindingMatchResult_WeekendTourneyRecentParticipation", Value=120)]
+      k_EStartFindingMatchResult_WeekendTourneyRecentParticipation = 120
     }
   
 }
