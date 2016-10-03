@@ -116,6 +116,8 @@ message CMsgKickFromParty {
 }
 
 message CMsgLeaveParty {
+	optional uint64 party_id = 1;
+	optional uint64 lobby_id = 2;
 }
 
 message CMsgServerAvailable {
