@@ -1509,12 +1509,6 @@ namespace SteamKit2.GC.Dota.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCDev_GrantWarKill", Value=8001)]
       k_EMsgGCDev_GrantWarKill = 8001,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCCreateTeamShowcase", Value=8002)]
-      k_EMsgClientToGCCreateTeamShowcase = 8002,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToClientTeamShowcaseCreateResult", Value=8003)]
-      k_EMsgGCToClientTeamShowcaseCreateResult = 8003,
-            
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgServerToGCLockCharmTrading", Value=8004)]
       k_EMsgServerToGCLockCharmTrading = 8004,
             
@@ -2020,7 +2014,43 @@ namespace SteamKit2.GC.Dota.Internal
       k_EMsgServerToGCEndCompendiumInGamePredictionsResponse = 8184,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgServerToGCCompendiumInGamePredictionResultsResponse", Value=8185)]
-      k_EMsgServerToGCCompendiumInGamePredictionResultsResponse = 8185
+      k_EMsgServerToGCCompendiumInGamePredictionResultsResponse = 8185,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgLobbyBattleCupVictory", Value=8186)]
+      k_EMsgLobbyBattleCupVictory = 8186,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCGetPlayerCardItemInfo", Value=8187)]
+      k_EMsgGCGetPlayerCardItemInfo = 8187,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCGetPlayerCardItemInfoResponse", Value=8188)]
+      k_EMsgGCGetPlayerCardItemInfoResponse = 8188,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCRequestSteamDatagramTicket", Value=8189)]
+      k_EMsgClientToGCRequestSteamDatagramTicket = 8189,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCRequestSteamDatagramTicketResponse", Value=8190)]
+      k_EMsgClientToGCRequestSteamDatagramTicketResponse = 8190,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToClientBattlePassRollupRequest", Value=8191)]
+      k_EMsgGCToClientBattlePassRollupRequest = 8191,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToClientBattlePassRollupResponse", Value=8192)]
+      k_EMsgGCToClientBattlePassRollupResponse = 8192,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCTransferSeasonalMMRRequest", Value=8193)]
+      k_EMsgClientToGCTransferSeasonalMMRRequest = 8193,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCTransferSeasonalMMRResponse", Value=8194)]
+      k_EMsgClientToGCTransferSeasonalMMRResponse = 8194,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCPublicChatCommunicationBan", Value=8195)]
+      k_EMsgGCToGCPublicChatCommunicationBan = 8195,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCUpdateAccountPublicChatBan", Value=8196)]
+      k_EMsgGCToGCUpdateAccountPublicChatBan = 8196,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCChatReportPublicSpam", Value=8197)]
+      k_EMsgGCChatReportPublicSpam = 8197
     }
   
 }

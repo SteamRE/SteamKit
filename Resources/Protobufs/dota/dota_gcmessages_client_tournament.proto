@@ -118,6 +118,7 @@ message CMsgDOTATournament {
 		repeated uint32 players = 3 [packed = true];
 		repeated uint32 player_buyin = 9 [packed = true];
 		repeated uint32 player_skill_level = 10 [packed = true];
+		optional uint32 match_group_mask = 12;
 		optional uint32 team_id = 4;
 		optional string team_name = 5;
 		optional uint64 team_base_logo = 7;
@@ -190,24 +191,70 @@ message CMsgDOTAClearTournamentGame {
 	optional uint32 game_id = 2;
 }
 
+message CMsgDOTAWeekendTourneyPlayerSkillLevelStats {
+	optional uint32 skill_level = 1;
+	optional uint32 times_won_0 = 2;
+	optional uint32 times_won_1 = 3;
+	optional uint32 times_won_2 = 4;
+	optional uint32 times_won_3 = 5;
+	optional uint32 times_bye_and_lost = 6;
+	optional uint32 times_bye_and_won = 7;
+	optional uint32 total_games_won = 8;
+	optional uint32 score = 9;
+}
+
 message CMsgDOTAWeekendTourneyPlayerStats {
 	optional uint32 account_id = 1;
 	optional uint32 season_trophy_id = 2;
-	optional uint32 times_won_0 = 3;
-	optional uint32 times_won_1 = 4;
-	optional uint32 times_won_2 = 5;
-	optional uint32 times_won_3 = 6;
-	optional uint32 times_bye_and_lost = 7;
-	optional uint32 times_bye_and_won = 8;
-	optional uint32 total_games_won = 9;
-	optional uint32 max_tier_played = 10;
-	optional uint32 max_tier_won_game = 11;
-	optional uint32 max_tier_champion = 12;
-	optional uint32 score = 13;
+	repeated .CMsgDOTAWeekendTourneyPlayerSkillLevelStats skill_levels = 3;
+	optional uint32 current_tier = 4;
 }
 
 message CMsgDOTAWeekendTourneyPlayerStatsRequest {
 	optional uint32 account_id = 1;
 	optional uint32 season_trophy_id = 2;
+}
+
+message CMsgDOTAWeekendTourneyPlayerHistoryRequest {
+	optional uint32 account_id = 1;
+	optional uint32 season_trophy_id = 2;
+}
+
+message CMsgDOTAWeekendTourneyPlayerHistory {
+	message Tournament {
+		optional uint32 tournament_id = 1;
+		optional uint32 start_time = 2;
+		optional uint32 tournament_tier = 3;
+		optional uint32 team_id = 4;
+		optional uint32 team_date = 5;
+		optional uint32 team_result = 6;
+		repeated uint32 account_id = 7;
+		optional string team_name = 8;
+	}
+
+	optional uint32 account_id = 1;
+	optional uint32 season_trophy_id = 2;
+	repeated .CMsgDOTAWeekendTourneyPlayerHistory.Tournament tournaments = 3;
+}
+
+message CMsgDOTAWeekendTourneyParticipationDetails {
+	message Tier {
+		optional uint32 tier = 1;
+		optional uint32 players = 2;
+		optional uint32 teams = 3;
+		optional uint32 winning_teams = 4;
+		optional uint32 players_streak_2 = 5;
+		optional uint32 players_streak_3 = 6;
+		optional uint32 players_streak_4 = 7;
+		optional uint32 players_streak_5 = 8;
+	}
+
+	message Division {
+		optional uint32 division_id = 1;
+		optional uint32 schedule_time = 2;
+		repeated .CMsgDOTAWeekendTourneyParticipationDetails.Tier tiers = 3;
+	}
+
+	repeated .CMsgDOTAWeekendTourneyParticipationDetails.Division divisions = 1;
 }
 

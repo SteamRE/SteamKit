@@ -1523,43 +1523,6 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgReplayUploadedToYouTube")]
-  public partial class CMsgReplayUploadedToYouTube : global::ProtoBuf.IExtensible
-  {
-    public CMsgReplayUploadedToYouTube() {}
-    
-
-    private string _youtube_url = "";
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"youtube_url", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
-    public string youtube_url
-    {
-      get { return _youtube_url; }
-      set { _youtube_url = value; }
-    }
-
-    private string _youtube_account_name = "";
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"youtube_account_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
-    public string youtube_account_name
-    {
-      get { return _youtube_account_name; }
-      set { _youtube_account_name = value; }
-    }
-
-    private ulong _session_id = default(ulong);
-    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"session_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
-    public ulong session_id
-    {
-      get { return _session_id; }
-      set { _session_id = value; }
-    }
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgConsumableExhausted")]
   public partial class CMsgConsumableExhausted : global::ProtoBuf.IExtensible
   {
@@ -2073,25 +2036,6 @@ namespace SteamKit2.GC.Dota.Internal
     {
       get { return _reward_flags; }
       set { _reward_flags = value; }
-    }
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCItemPreviewItemBoughtNotification")]
-  public partial class CMsgGCItemPreviewItemBoughtNotification : global::ProtoBuf.IExtensible
-  {
-    public CMsgGCItemPreviewItemBoughtNotification() {}
-    
-
-    private uint _item_def_index = default(uint);
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"item_def_index", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint item_def_index
-    {
-      get { return _item_def_index; }
-      set { _item_def_index = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -3050,9 +2994,6 @@ namespace SteamKit2.GC.Dota.Internal
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCError", Value=4509)]
       k_EMsgGCError = 4509,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCReplay_UploadedToYouTube", Value=4510)]
-      k_EMsgGCReplay_UploadedToYouTube = 4510,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCLANServerAvailable", Value=4511)]
       k_EMsgGCLANServerAvailable = 4511,

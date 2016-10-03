@@ -97,13 +97,6 @@ enum EGCItemMsg {
 	k_EMsgGCServerBrowser_FavoriteServer = 1601;
 	k_EMsgGCServerBrowser_BlacklistServer = 1602;
 	k_EMsgGCServerRentalsBase = 1700;
-	k_EMsgGCItemPreviewCheckStatus = 1701;
-	k_EMsgGCItemPreviewStatusResponse = 1702;
-	k_EMsgGCItemPreviewRequest = 1703;
-	k_EMsgGCItemPreviewRequestResponse = 1704;
-	k_EMsgGCItemPreviewExpire = 1705;
-	k_EMsgGCItemPreviewExpireNotification = 1706;
-	k_EMsgGCItemPreviewItemBoughtNotification = 1707;
 	k_EMsgGCDev_NewItemRequest = 2001;
 	k_EMsgGCDev_NewItemRequestResponse = 2002;
 	k_EMsgGCStoreGetUserData = 2500;
@@ -825,6 +818,17 @@ message CMsgClientToGCCreateStaticRecipeResponse {
 	message OutputItem {
 		optional uint32 def_index = 1;
 		optional uint64 item_id = 2;
+		optional uint32 slot_id = 3;
+	}
+
+	message InputError {
+		optional uint32 slot_id = 1;
+		optional .CMsgClientToGCCreateStaticRecipeResponse.EResponse error = 2 [default = eResponse_Success];
+	}
+
+	message AdditionalOutput {
+		optional uint32 slot_id = 1;
+		optional uint64 value = 2;
 	}
 
 	enum EResponse {
@@ -837,6 +841,8 @@ message CMsgClientToGCCreateStaticRecipeResponse {
 
 	optional .CMsgClientToGCCreateStaticRecipeResponse.EResponse response = 1 [default = eResponse_Success];
 	repeated .CMsgClientToGCCreateStaticRecipeResponse.OutputItem output_items = 2;
+	repeated .CMsgClientToGCCreateStaticRecipeResponse.InputError input_errors = 3;
+	repeated .CMsgClientToGCCreateStaticRecipeResponse.AdditionalOutput additional_outputs = 4;
 }
 
 message CMsgProcessTransactionOrder {

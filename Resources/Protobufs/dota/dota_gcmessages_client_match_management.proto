@@ -31,6 +31,7 @@ enum EStartFindingMatchResult {
 	k_EStartFindingMatchResult_WeekendTourneyTeamBuyInTooLarge = 117;
 	k_EStartFindingMatchResult_MemberMissingEventOwnership = 118;
 	k_EStartFindingMatchResult_WeekendTourneyNotUnlocked = 119;
+	k_EStartFindingMatchResult_WeekendTourneyRecentParticipation = 120;
 }
 
 message CMsgStartFindingMatch {
@@ -368,18 +369,22 @@ message CMsgDOTAGroupMergeReply {
 }
 
 message CMsgSpectatorLobbyGameDetails {
+	message Team {
+		optional uint32 team_id = 1;
+		optional string team_name = 2;
+		optional fixed64 team_logo = 3;
+	}
+
 	optional uint32 language = 1;
 	optional uint64 match_id = 2;
 	optional fixed64 server_steam_id = 3;
 	optional string stream_url = 4;
 	optional string stream_name = 5;
 	optional uint32 league_id = 6;
-	optional uint32 series_id = 7;
-	optional uint32 series_type = 8;
-	optional uint32 series_game = 9;
-	optional uint32 team1_id = 10;
-	optional uint32 team2_id = 11;
-	optional string stage_name = 12;
+	optional uint32 series_type = 7;
+	optional uint32 series_game = 8;
+	optional .CMsgSpectatorLobbyGameDetails.Team radiant_team = 9;
+	optional .CMsgSpectatorLobbyGameDetails.Team dire_team = 10;
 }
 
 message CMsgSetSpectatorLobbyDetails {
@@ -408,5 +413,14 @@ message CMsgSpectatorLobbyListResponse {
 	}
 
 	repeated .CMsgSpectatorLobbyListResponse.SpectatorLobby lobbies = 1;
+}
+
+message CMsgClientToGCRequestSteamDatagramTicket {
+	optional fixed64 server_steam_id = 1;
+}
+
+message CMsgClientToGCRequestSteamDatagramTicketResponse {
+	optional string serialized_ticket = 1;
+	optional string message = 2;
 }
 

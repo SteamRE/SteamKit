@@ -239,8 +239,15 @@ message CMsgGCToGCSOCacheUnsubscribe {
 message CMsgGCClientPing {
 }
 
+message CMsgGCToGCForwardAccountDetails {
+	optional fixed64 steamid = 1;
+	optional .CGCSystemMsg_GetAccountDetails_Response account_details = 2;
+	optional uint32 age_seconds = 3;
+}
+
 message CMsgGCToGCLoadSessionSOCache {
 	optional uint32 account_id = 1;
+	optional .CMsgGCToGCForwardAccountDetails forward_account_details = 2;
 }
 
 message CMsgGCToGCLoadSessionSOCacheResponse {

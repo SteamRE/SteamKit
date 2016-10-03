@@ -79,6 +79,7 @@ enum DOTA_COMBATLOG_TYPES {
 	DOTA_COMBATLOG_PHYSICAL_DAMAGE_PREVENTED = 32;
 	DOTA_COMBATLOG_UNIT_SUMMONED = 33;
 	DOTA_COMBATLOG_ATTACK_EVADE = 34;
+	DOTA_COMBATLOG_TREE_CUT = 35;
 }
 
 message CSODOTAGameAccountClient {
@@ -93,6 +94,7 @@ message CSODOTAGameAccountClient {
 	optional uint32 low_priority_until_date = 18;
 	optional uint32 prevent_text_chat_until_date = 20;
 	optional uint32 prevent_voice_until_date = 21;
+	optional uint32 prevent_public_text_chat_until_date = 86;
 	optional uint32 last_abandoned_game_date = 22;
 	optional uint32 last_secondary_abandoned_game_date = 59;
 	optional uint32 leaver_penalty_count = 23;
@@ -114,16 +116,16 @@ message CSODOTAGameAccountClient {
 	optional uint32 calibration_games_remaining = 51;
 	optional uint32 solo_competitive_rank = 52;
 	optional uint32 solo_calibration_games_remaining = 54;
-	optional uint32 competitive_1v1_rank = 63;
-	optional uint32 competitive_1v1_calibration_games_remaining = 64;
 	optional uint32 general_seasonal_ranked_rank = 75;
 	optional uint32 general_seasonal_ranked_calibration_games_remaining = 76;
 	optional uint32 general_seasonal_ranked_games_played = 80;
 	optional uint32 general_seasonal_ranked_rank_peak = 81;
+	optional bool general_seasonal_rank_transferred = 83;
 	optional uint32 solo_seasonal_ranked_rank = 77;
 	optional uint32 solo_seasonal_ranked_calibration_games_remaining = 78;
 	optional uint32 solo_seasonal_ranked_games_played = 79;
 	optional uint32 solo_seasonal_ranked_rank_peak = 82;
+	optional bool solo_seasonal_rank_transferred = 84;
 	optional uint32 recruitment_level = 55;
 	optional bool has_new_notifications = 56;
 	optional bool is_league_admin = 57;
@@ -140,6 +142,7 @@ message CSODOTAGameAccountClient {
 	optional uint32 player_behavior_score_last_report = 72;
 	optional bool player_behavior_report_old_data = 73;
 	optional uint32 tourney_skill_level = 74;
+	optional uint32 tourney_recent_participation_date = 85;
 }
 
 message CMsgLobbyEventPoints {
@@ -162,16 +165,19 @@ message CMsgLobbyEventPoints {
 	repeated .CMsgLobbyEventPoints.AccountPoints account_points = 2;
 }
 
-message CMsgLobbyBattleCupVictory {
-	message BattleCupVictory {
-		optional uint32 account_id = 1;
-		optional uint32 win_date = 2;
-		optional uint32 skill_level = 3;
-		optional uint32 team_id = 4;
-		optional uint32 tournament_id = 5;
-	}
+message CMsgBattleCupVictory {
+	optional uint32 account_id = 1;
+	optional uint32 win_date = 2;
+	optional uint32 valid_until = 3;
+	optional uint32 skill_level = 4;
+	optional uint32 tournament_id = 5;
+	optional uint32 division_id = 6;
+	optional uint32 team_id = 7;
+	optional uint32 streak = 8;
+}
 
-	repeated .CMsgLobbyBattleCupVictory.BattleCupVictory winner_accounts = 1;
+message CMsgLobbyBattleCupVictoryList {
+	repeated .CMsgBattleCupVictory winners = 1;
 }
 
 message CMsgDOTABroadcastNotification {
@@ -209,6 +215,11 @@ message CMatchAdditionalUnitInventory {
 	repeated uint32 items = 2;
 }
 
+message CMatchPlayerPermanentBuff {
+	optional uint32 permanent_buff = 1;
+	optional uint32 stack_count = 2;
+}
+
 message CMatchHeroSelectEvent {
 	optional bool is_pick = 1;
 	optional uint32 team = 2;
@@ -239,6 +250,21 @@ message CMsgDOTAHasItemDefsQuery {
 
 message CMsgDOTAHasItemDefsResponse {
 	optional bool has_items = 1;
+}
+
+message CMsgGCGetPlayerCardItemInfo {
+	optional uint32 account_id = 1;
+	repeated uint64 player_card_item_ids = 2;
+}
+
+message CMsgGCGetPlayerCardItemInfoResponse {
+	message PlayerCardInfo {
+		optional uint64 player_card_item_id = 1;
+		optional uint32 account_id = 2;
+		optional uint64 packed_bonuses = 3;
+	}
+
+	repeated .CMsgGCGetPlayerCardItemInfoResponse.PlayerCardInfo player_card_infos = 1;
 }
 
 message CMsgGCToGCFantasySetMatchLeague {
@@ -391,11 +417,7 @@ message CMsgDOTAProfileCard {
 	optional uint32 badge_points = 4;
 	optional uint32 event_points = 5;
 	optional uint32 event_id = 6;
-	optional uint32 battle_cup_win_date = 7;
-	optional uint32 battle_cup_valid_until = 8;
-	optional uint32 battle_cup_skill_level = 9;
-	optional uint32 battle_cup_team_id = 10;
-	optional uint32 battle_cup_tournament_id = 11;
+	optional .CMsgBattleCupVictory recent_battle_cup_victory = 7;
 }
 
 message CSODOTAPlayerChallenge {
@@ -743,7 +765,7 @@ message CMsgDOTASeasonPredictions {
 	}
 
 	message Answers {
-		repeated uint32 answer_id = 1;
+		optional uint32 answer_id = 1;
 	}
 
 	message QueryKeyValues {
@@ -755,20 +777,18 @@ message CMsgDOTASeasonPredictions {
 		optional .CMsgDOTASeasonPredictions.ePredictionType type = 1 [default = Generic];
 		optional string question = 2;
 		repeated .CMsgDOTASeasonPredictions.Choice choices = 3;
-		optional uint32 team_id = 4;
-		optional uint32 series_id = 5;
-		optional uint32 group_id = 6;
-		optional uint32 phase_id = 7;
-		optional uint32 selection_id = 8;
-		optional uint32 lock_date = 9;
-		optional uint32 reward = 10;
-		optional uint32 answer_type = 11;
-		optional uint32 answer_id = 12;
-		repeated .CMsgDOTASeasonPredictions.Answers answers = 13;
-		optional string query_name = 14;
-		optional uint32 lock_on_selection_id = 15;
-		optional uint32 lock_on_selection_value = 16;
-		optional bool lock_on_selection_set = 17;
+		optional uint32 selection_id = 4;
+		optional uint32 start_date = 5;
+		optional uint32 lock_date = 6;
+		optional uint32 reward = 7;
+		optional .CMsgDOTASeasonPredictions.eAnswerType answer_type = 8 [default = SingleInt];
+		optional uint32 answer_id = 9;
+		repeated .CMsgDOTASeasonPredictions.Answers answers = 10;
+		optional string query_name = 11;
+		repeated uint32 query_bind_params = 12;
+		optional uint32 lock_on_selection_id = 13;
+		optional uint32 lock_on_selection_value = 14;
+		optional bool lock_on_selection_set = 15;
 	}
 
 	message InGamePrediction {
@@ -857,7 +877,7 @@ message CMsgDOTAMatch {
 		optional float expected_team_contribution = 10;
 		optional float scaled_metric = 11;
 		optional uint32 previous_rank = 12;
-		optional uint32 rank_change = 13;
+		optional sint32 rank_change = 13;
 		optional bool solo_rank = 49;
 		optional bool seasonal_rank = 53;
 		optional uint32 kills = 14;
@@ -883,6 +903,9 @@ message CMsgDOTAMatch {
 		optional int32 rank_uncertainty_change = 36;
 		optional uint32 hero_play_count = 37;
 		optional fixed64 party_id = 38;
+		optional uint32 scaled_hero_damage = 54;
+		optional uint32 scaled_tower_damage = 55;
+		optional uint32 scaled_hero_healing = 56;
 		optional float scaled_kills = 39;
 		optional float scaled_deaths = 40;
 		optional float scaled_assists = 41;
@@ -893,9 +916,11 @@ message CMsgDOTAMatch {
 		optional uint32 misses = 46;
 		repeated .CMatchPlayerAbilityUpgrade ability_upgrades = 47;
 		repeated .CMatchAdditionalUnitInventory additional_units_inventory = 48;
+		repeated .CMatchPlayerPermanentBuff permanent_buffs = 57;
 		optional .CMsgDOTAMatch.Player.CustomGameData custom_game_data = 50;
 		optional bool active_battle_pass = 51;
 		optional uint32 net_worth = 52;
+		optional uint32 bot_difficulty = 58;
 	}
 
 	message BroadcasterInfo {
@@ -978,5 +1003,32 @@ message CMsgPlayerCard {
 
 	optional uint32 account_id = 1;
 	repeated .CMsgPlayerCard.StatModifier stat_modifier = 2;
+}
+
+message CMsgDOTAFantasyPlayerStats {
+	optional uint32 player_account_id = 1;
+	optional uint64 match_id = 2;
+	optional bool match_completed = 3;
+	optional uint32 team_id = 4;
+	optional uint32 league_id = 5;
+	optional uint32 delay = 6;
+	optional uint32 series_id = 7;
+	optional uint32 series_type = 8;
+	optional uint32 kills = 10;
+	optional uint32 deaths = 11;
+	optional uint32 cs = 12;
+	optional float gpm = 13;
+	optional uint32 tower_kills = 14;
+	optional uint32 roshan_kills = 15;
+	optional float teamfight_participation = 16;
+	optional uint32 wards_placed = 17;
+	optional uint32 camps_stacked = 18;
+	optional uint32 runes_grabbed = 19;
+	optional uint32 first_blood = 20;
+	optional float stuns = 21;
+}
+
+message CMsgDOTAFantasyPlayerMatchStats {
+	repeated .CMsgDOTAFantasyPlayerStats matches = 1;
 }
 

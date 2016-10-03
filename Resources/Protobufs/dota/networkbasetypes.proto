@@ -98,6 +98,7 @@ message CNETMsg_SignonState {
 	optional uint32 num_server_players = 3;
 	repeated string players_networkids = 4;
 	optional string map_name = 5;
+	optional string addons = 6;
 }
 
 message CSVCMsg_GameEvent {

@@ -170,12 +170,20 @@ message CMsgDOTAPopup {
 		LIMITED_USER_CHAT = 66;
 		EVENT_PREMIUM_POINTS_EARNED = 67;
 		LOBBY_MVP_AWARDED = 68;
+		LOW_BADGE_LEVEL_CHAT = 71;
+		GENERIC_INFO = 69;
+		GENERIC_ERROR = 70;
 	}
 
 	optional .CMsgDOTAPopup.PopupID id = 1 [default = NONE];
 	optional string custom_text = 2;
 	optional sint32 int_data = 3;
 	optional bytes popup_data = 4;
+	optional string loc_token_header = 5;
+	optional string loc_token_msg = 6;
+	repeated string var_names = 7;
+	repeated string var_values = 8;
+	optional string debug_text = 9;
 }
 
 message CMsgDOTAReportsRemainingRequest {
@@ -199,6 +207,7 @@ message CMsgDOTASubmitPlayerReportResponse {
 	optional uint32 target_account_id = 1;
 	optional uint32 report_flags = 2;
 	optional uint32 result = 3;
+	optional string debug_message = 4;
 }
 
 message CMsgDOTAReportCountsRequest {
@@ -1125,21 +1134,7 @@ message CMsgClientToGCCreateHeroStatue {
 	optional bool tournament_drop = 10;
 }
 
-message CMsgClientToGCCreateTeamShowcase {
-	optional uint64 source_item = 1;
-	optional uint32 hero_id = 3;
-	optional string sequence_name = 4;
-	optional float cycle = 5;
-	repeated uint32 wearables = 6;
-	optional string inscription = 7;
-	repeated uint32 styles = 8;
-}
-
 message CMsgGCToClientHeroStatueCreateResult {
-	optional uint64 resulting_item = 1;
-}
-
-message CMsgGCToClientTeamShowcaseCreateResult {
 	optional uint64 resulting_item = 1;
 }
 
@@ -1319,6 +1314,7 @@ message CMsgDOTALobbyRichPresence {
 	optional uint32 max_member_count = 6;
 	optional fixed64 custom_game_id = 7;
 	optional string name = 8;
+	optional uint32 lobby_type = 9;
 }
 
 message CMsgDOTACustomGameListenServerStartedLoading {
@@ -1688,6 +1684,18 @@ message CMsgClientToGCRequestEventPointLogResponse {
 		optional uint64 match_id = 1;
 	}
 
+	message WeekendTourneyPayoutEvent {
+		optional uint64 team_gid = 1;
+	}
+
+	message FantasyRewardEvent {
+		optional uint32 percentile = 1;
+	}
+
+	message BracketRewardEvent {
+		optional uint32 correct_answers = 1;
+	}
+
 	message EventPointTransaction {
 		optional uint32 time = 1;
 		optional int32 event_points = 2;
@@ -1702,6 +1710,9 @@ message CMsgClientToGCRequestEventPointLogResponse {
 		optional .CMsgClientToGCRequestEventPointLogResponse.AchievementEvent achievement_event = 11;
 		optional .CMsgClientToGCRequestEventPointLogResponse.InGamePredictionCorrectEvent in_game_prediction_event = 12;
 		optional .CMsgClientToGCRequestEventPointLogResponse.CorrectPredictionEvent prediction_event = 13;
+		optional .CMsgClientToGCRequestEventPointLogResponse.WeekendTourneyPayoutEvent weekend_tourney_payout_event = 14;
+		optional .CMsgClientToGCRequestEventPointLogResponse.FantasyRewardEvent fantasy_reward_event = 15;
+		optional .CMsgClientToGCRequestEventPointLogResponse.BracketRewardEvent bracket_reward_event = 16;
 	}
 
 	optional bool result = 1;
@@ -1892,6 +1903,7 @@ message CMsgClientToGCRecyclePlayerCardResponse {
 		ERROR_FAILED_TO_FIND_PLAYER_CARD = 3;
 		ERROR_ITEM_NOT_PLAYER_CARD = 4;
 		ERROR_FAILED_DUST_CARD_CREATE = 5;
+		ERROR_CARD_LOCKED = 6;
 	}
 
 	optional .CMsgClientToGCRecyclePlayerCardResponse.Result result = 1 [default = SUCCESS];
@@ -1912,5 +1924,79 @@ message CMsgClientToGCCreatePlayerCardPackResponse {
 	}
 
 	optional .CMsgClientToGCCreatePlayerCardPackResponse.Result result = 1 [default = SUCCESS];
+}
+
+message CMsgGCToClientBattlePassRollup_International2016 {
+	message Questlines {
+		optional string name = 1;
+		optional uint32 completed = 2;
+		optional uint32 total = 3;
+	}
+
+	message Wagering {
+		optional uint32 total_wagered = 1;
+		optional uint32 total_won = 2;
+		optional uint32 average_won = 3;
+		optional uint32 success_rate = 4;
+		optional uint32 total_tips = 5;
+	}
+
+	message Achievements {
+		optional uint32 completed = 1;
+		optional uint32 total = 2;
+		optional uint32 points = 3;
+	}
+
+	message BattleCup {
+		optional uint32 wins = 1;
+		optional uint32 score = 2;
+	}
+
+	message Predictions {
+		optional uint32 correct = 1;
+		optional uint32 total = 2;
+		optional uint32 points = 3;
+	}
+
+	message Bracket {
+		optional uint32 correct = 1;
+		optional uint32 points = 2;
+	}
+
+	message PlayerCard {
+		optional uint32 account_id = 1;
+		optional uint32 quality = 2;
+	}
+
+	message FantasyChallenge {
+		optional float total_score = 1;
+		optional float percentile = 2;
+	}
+
+	optional uint32 battle_pass_level = 1;
+	repeated .CMsgGCToClientBattlePassRollup_International2016.Questlines questlines = 2;
+	optional .CMsgGCToClientBattlePassRollup_International2016.Wagering wagering = 3;
+	optional .CMsgGCToClientBattlePassRollup_International2016.Achievements achievements = 4;
+	optional .CMsgGCToClientBattlePassRollup_International2016.BattleCup battle_cup = 5;
+	optional .CMsgGCToClientBattlePassRollup_International2016.Predictions predictions = 6;
+	optional .CMsgGCToClientBattlePassRollup_International2016.Bracket bracket = 7;
+	repeated .CMsgGCToClientBattlePassRollup_International2016.PlayerCard player_cards = 8;
+	optional .CMsgGCToClientBattlePassRollup_International2016.FantasyChallenge fantasy_challenge = 9;
+}
+
+message CMsgGCToClientBattlePassRollupRequest {
+	optional uint32 event_id = 1;
+}
+
+message CMsgGCToClientBattlePassRollupResponse {
+	optional .CMsgGCToClientBattlePassRollup_International2016 event_ti6 = 1;
+}
+
+message CMsgClientToGCTransferSeasonalMMRRequest {
+	optional bool is_party = 1;
+}
+
+message CMsgClientToGCTransferSeasonalMMRResponse {
+	optional bool success = 1;
 }
 

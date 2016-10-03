@@ -358,6 +358,34 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCChatReportPublicSpam")]
+  public partial class CMsgGCChatReportPublicSpam : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCChatReportPublicSpam() {}
+    
+
+    private ulong _channel_id = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"channel_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong channel_id
+    {
+      get { return _channel_id; }
+      set { _channel_id = value; }
+    }
+
+    private uint _channel_user_id = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"channel_user_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint channel_user_id
+    {
+      get { return _channel_user_id; }
+      set { _channel_user_id = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAClientIgnoredUser")]
   public partial class CMsgDOTAClientIgnoredUser : global::ProtoBuf.IExtensible
   {
@@ -597,6 +625,15 @@ namespace SteamKit2.GC.Dota.Internal
     {
       get { return _battle_cup_victory; }
       set { _battle_cup_victory = value; }
+    }
+
+    private uint _badge_level = default(uint);
+    [global::ProtoBuf.ProtoMember(25, IsRequired = false, Name=@"badge_level", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint badge_level
+    {
+      get { return _badge_level; }
+      set { _badge_level = value; }
     }
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"DiceRoll")]
   public partial class DiceRoll : global::ProtoBuf.IExtensible
