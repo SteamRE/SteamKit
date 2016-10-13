@@ -524,6 +524,28 @@ namespace Tests
             Assert.Equal( expectedValue, kv.AsUnsignedShort(expectedValue) );
         }
 
+        [Fact]
+        public void KeyValuesEscapesTextWhenSerializing()
+        {
+            var kv = new KeyValue( "key" );
+            kv.Children.Add( new KeyValue( "slashes", @"\o/" ) );
+            kv.Children.Add( new KeyValue( "newline", "\r\n" ) );
+
+            string text;
+            using ( var ms = new MemoryStream() )
+            {
+                kv.SaveToStream( ms, asBinary: false );
+                ms.Seek( 0, SeekOrigin.Begin );
+                using ( var reader = new StreamReader( ms ) )
+                {
+                    text = reader.ReadToEnd();
+                }
+            }
+
+            var expectedValue = "\"key\"\n{\n\t\"slashes\"\t\t\"\\\\o/\"\n\t\"newline\"\t\t\"\\r\\n\"\n}\n";
+            Assert.Equal( expectedValue, text );
+        }
+
         const string TestObjectHex = "00546573744F626A65637400016B65790076616C7565000808";
     }
 }

@@ -13,8 +13,9 @@ namespace SteamKit2
 {
     class KVTextReader : StreamReader
     {
-        static Dictionary<char, char> escapedMapping = new Dictionary<char, char>
+        internal static Dictionary<char, char> escapedMapping = new Dictionary<char, char>
         {
+            { '\\', '\\' },
             { 'n', '\n' },
             { 'r', '\r' },
             { 't', '\t' },
@@ -92,14 +93,14 @@ namespace SteamKit2
                 char next = ( char )Peek();
                 if ( next == '/' )
                 {
-		    ReadLine();
-		    return true;
-		    /*
-		     *  As came up in parsing the Dota 2 units.txt file, the reference (Valve) implementation
-		     *  of the KV format considers a single forward slash to be sufficient to comment out the
-		     *  entirety of a line. While they still _tend_ to use two, it's not required, and likely
-		     *  is just done out of habit.
-		     */
+                    ReadLine();
+                    return true;
+                    /*
+                     *  As came up in parsing the Dota 2 units.txt file, the reference (Valve) implementation
+                     *  of the KV format considers a single forward slash to be sufficient to comment out the
+                     *  entirety of a line. While they still _tend_ to use two, it's not required, and likely
+                     *  is just done out of habit.
+                     */
                 }
 
                 return false;
@@ -756,13 +757,25 @@ namespace SteamKit2
                     WriteIndents( stream, indentLevel + 1 );
                     WriteString( stream, child.Name, true );
                     WriteString( stream, "\t\t" );
-                    WriteString( stream, child.AsString(), true );
+                    WriteString( stream, EscapeText( child.AsString() ), true );
                     WriteString( stream, "\n" );
                 }
             }
 
             WriteIndents( stream, indentLevel );
             WriteString( stream, "}\n" );
+        }
+
+        static string EscapeText( string value )
+        {
+            foreach ( var kvp in KVTextReader.escapedMapping )
+            {
+                var textToReplace = new string( kvp.Value, 1 );
+                var escapedReplacement = @"\" + kvp.Key;
+                value = value.Replace( textToReplace, escapedReplacement );
+            }
+
+            return value;
         }
 
         void WriteIndents( Stream stream, int indentLevel )
