@@ -3,7 +3,7 @@
     /// <summary>
     /// Cache types
     /// </summary>
-    internal enum CacheSubscritionTypes
+    public enum CacheSubscritionTypes
     {
         /// <summary>
         /// An economy item.
