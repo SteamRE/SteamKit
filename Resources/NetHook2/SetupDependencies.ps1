@@ -1,7 +1,7 @@
 $NetHook2DependenciesTemporaryDirectory = [System.IO.Path]::Combine([System.IO.Path]::GetTempPath(), "nethook2-dependencies")
-$ZLibSourceZipUrl = "http://zlib.net/zlib128.zip"
+$ZLibSourceZipUrl = "http://zlib.net/zlib1210.zip"
 $ZLibSourceFile = [System.IO.Path]::Combine($NetHook2DependenciesTemporaryDirectory, "zlib.zip")
-$ZLibSourceInnerFolderName = "zlib-1.2.8"
+$ZLibSourceInnerFolderName = "zlib-1.2.10"
 $ProtobufSourceZipUrl = "https://github.com/google/protobuf/releases/download/v2.5.0/protobuf-2.5.0.zip"
 $ProtobufSourceFile = [System.IO.Path]::Combine($NetHook2DependenciesTemporaryDirectory, "protobuf.zip")
 $ProtobufSourceInnerFolderName = "protobuf-2.5.0"
