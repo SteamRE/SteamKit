@@ -454,14 +454,16 @@ namespace SteamKit2
         /// The returned <see cref="AsyncJob{T}"/> can also be awaited to retrieve the callback result.
         /// </summary>
         /// <param name="app">App id requested.</param>
+        /// <param name="depot">Depot id requested.</param>
         /// <param name="host_name">CDN host name being requested.</param>
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="CDNAuthTokenCallback"/>.</returns>
-        public AsyncJob<CDNAuthTokenCallback> GetCDNAuthToken(uint app, string host_name)
+        public AsyncJob<CDNAuthTokenCallback> GetCDNAuthToken(uint app, uint depot, string host_name)
         {
             var request = new ClientMsgProtobuf<CMsgClientGetCDNAuthToken>(EMsg.ClientGetCDNAuthToken);
             request.SourceJobID = Client.GetNextJobID();
 
             request.Body.app_id = app;
+            request.Body.depot_id = depot;
             request.Body.host_name = host_name;
 
             this.Client.Send(request);
