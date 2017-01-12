@@ -14,13 +14,14 @@ namespace SteamKit2
     /// <summary>
     /// This handler handles Steam user statistic related actions.
     /// </summary>
-    public sealed partial class SteamUserStats : ClientMsgHandler
+    public sealed partial class SteamUserStats : ClientMsgMappingHandler
     {
-        Dictionary<EMsg, Action<IPacketMsg>> dispatchMap;
+        /// <inheritdoc />
+        protected override Dictionary<EMsg, Action<IPacketMsg>> DispatchMap { get; }
 
         internal SteamUserStats()
         {
-            dispatchMap = new Dictionary<EMsg, Action<IPacketMsg>>
+            DispatchMap = new Dictionary<EMsg, Action<IPacketMsg>>
             {
                 { EMsg.ClientGetNumberOfCurrentPlayersDPResponse, HandleNumberOfPlayersResponse },
                 { EMsg.ClientLBSFindOrCreateLBResponse, HandleFindOrCreateLBResponse },
@@ -141,25 +142,6 @@ namespace SteamKit2
 
             return new AsyncJob<LeaderboardEntriesCallback>( this.Client, msg.SourceJobID );
         }
-
-        /// <summary>
-        /// Handles a client message. This should not be called directly.
-        /// </summary>
-        /// <param name="packetMsg">The <see cref="SteamKit2.IPacketMsg"/> instance containing the event data.</param>
-        public override void HandleMsg( IPacketMsg packetMsg )
-        {
-            Action<IPacketMsg> handlerFunc;
-            bool haveFunc = dispatchMap.TryGetValue( packetMsg.MsgType, out handlerFunc );
-
-            if ( !haveFunc )
-            {
-                // ignore messages that we don't have a handler function for
-                return;
-            }
-
-            handlerFunc( packetMsg );
-        }
-
 
         #region ClientMsg Handlers
         void HandleNumberOfPlayersResponse( IPacketMsg packetMsg )

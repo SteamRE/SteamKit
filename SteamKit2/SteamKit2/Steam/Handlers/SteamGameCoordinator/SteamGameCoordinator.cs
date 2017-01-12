@@ -8,13 +8,14 @@ namespace SteamKit2
     /// <summary>
     /// This handler handles all game coordinator messaging.
     /// </summary>
-    public sealed partial class SteamGameCoordinator : ClientMsgHandler
+    public sealed partial class SteamGameCoordinator : ClientMsgMappingHandler
     {
-        Dictionary<EMsg, Action<IPacketMsg>> dispatchMap;
+        /// <inheritdoc />
+        protected override Dictionary<EMsg, Action<IPacketMsg>> DispatchMap { get; }
 
         internal SteamGameCoordinator()
         {
-            dispatchMap = new Dictionary<EMsg, Action<IPacketMsg>>
+            DispatchMap = new Dictionary<EMsg, Action<IPacketMsg>>
             {
                 { EMsg.ClientFromGC, HandleFromGC },
             };
@@ -38,26 +39,6 @@ namespace SteamKit2
 
             this.Client.Send( clientMsg );
         }
-
-
-        /// <summary>
-        /// Handles a client message. This should not be called directly.
-        /// </summary>
-        /// <param name="packetMsg">The packet message that contains the data.</param>
-        public override void HandleMsg( IPacketMsg packetMsg )
-        {
-            Action<IPacketMsg> handlerFunc;
-            bool haveFunc = dispatchMap.TryGetValue( packetMsg.MsgType, out handlerFunc );
-
-            if ( !haveFunc )
-            {
-                // ignore messages that we don't have a handler function for
-                return;
-            }
-
-            handlerFunc( packetMsg );
-        }
-
 
         #region ClientMsg Handlers
         void HandleFromGC( IPacketMsg packetMsg )

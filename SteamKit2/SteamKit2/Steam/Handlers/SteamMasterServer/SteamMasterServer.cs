@@ -13,7 +13,7 @@ namespace SteamKit2
     /// <summary>
     /// This handler is used for requesting server list details from Steam.
     /// </summary>
-    public sealed partial class SteamMasterServer : ClientMsgHandler
+    public sealed partial class SteamMasterServer : ClientMsgMappingHandler
     {
         /// <summary>
         /// Details used when performing a server list query.
@@ -48,11 +48,12 @@ namespace SteamKit2
         }
 
 
-        Dictionary<EMsg, Action<IPacketMsg>> dispatchMap;
+        /// <inheritdoc />
+        protected override Dictionary<EMsg, Action<IPacketMsg>> DispatchMap { get; }
 
         internal SteamMasterServer()
         {
-            dispatchMap = new Dictionary<EMsg, Action<IPacketMsg>>
+            DispatchMap = new Dictionary<EMsg, Action<IPacketMsg>>
             {
                 { EMsg.GMSClientServerQueryResponse, HandleServerQueryResponse },
             };
@@ -85,26 +86,6 @@ namespace SteamKit2
 
             return new AsyncJob<QueryCallback>( this.Client, query.SourceJobID );
         }
-
-
-        /// <summary>
-        /// Handles a client message. This should not be called directly.
-        /// </summary>
-        /// <param name="packetMsg">The packet message that contains the data.</param>
-        public override void HandleMsg( IPacketMsg packetMsg )
-        {
-            Action<IPacketMsg> handlerFunc;
-            bool haveFunc = dispatchMap.TryGetValue( packetMsg.MsgType, out handlerFunc );
-
-            if ( !haveFunc )
-            {
-                // ignore messages that we don't have a handler function for
-                return;
-            }
-
-            handlerFunc( packetMsg );
-        }
-
 
         #region ClientMsg Handlers
         void HandleServerQueryResponse( IPacketMsg packetMsg )

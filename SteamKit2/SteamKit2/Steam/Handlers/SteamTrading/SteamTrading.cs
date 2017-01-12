@@ -14,13 +14,14 @@ namespace SteamKit2
     /// <summary>
     /// This handler is used for initializing Steam trades with other clients.
     /// </summary>
-    public sealed partial class SteamTrading : ClientMsgHandler
+    public sealed partial class SteamTrading : ClientMsgMappingHandler
     {
-        Dictionary<EMsg, Action<IPacketMsg>> dispatchMap;
+        /// <inheritdoc />
+        protected override Dictionary<EMsg, Action<IPacketMsg>> DispatchMap { get; }
 
         internal SteamTrading()
         {
-            dispatchMap = new Dictionary<EMsg, Action<IPacketMsg>>
+            DispatchMap = new Dictionary<EMsg, Action<IPacketMsg>>
             {
                 { EMsg.EconTrading_InitiateTradeProposed, HandleTradeProposed },
                 { EMsg.EconTrading_InitiateTradeResult, HandleTradeResult },
@@ -69,26 +70,6 @@ namespace SteamKit2
 
             Client.Send( cancelTrade );
         }
-
-
-        /// <summary>
-        /// Handles a client message. This should not be called directly.
-        /// </summary>
-        /// <param name="packetMsg">The packet message that contains the data.</param>
-        public override void HandleMsg( IPacketMsg packetMsg )
-        {
-            Action<IPacketMsg> handlerFunc;
-            bool haveFunc = dispatchMap.TryGetValue( packetMsg.MsgType, out handlerFunc );
-
-            if ( !haveFunc )
-            {
-                // ignore messages that we don't have a handler function for
-                return;
-            }
-
-            handlerFunc( packetMsg );
-        }
-
 
         #region ClientMsg Handlers
         void HandleTradeProposed( IPacketMsg packetMsg )

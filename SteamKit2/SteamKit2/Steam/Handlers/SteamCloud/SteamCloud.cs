@@ -14,13 +14,14 @@ namespace SteamKit2
     /// <summary>
     /// This handler is used for interacting with remote storage and user generated content.
     /// </summary>
-    public sealed partial class SteamCloud : ClientMsgHandler
+    public sealed partial class SteamCloud : ClientMsgMappingHandler
     {
-        Dictionary<EMsg, Action<IPacketMsg>> dispatchMap;
+        /// <inheritdoc />
+        protected override Dictionary<EMsg, Action<IPacketMsg>> DispatchMap { get; }
 
         internal SteamCloud()
         {
-            dispatchMap = new Dictionary<EMsg, Action<IPacketMsg>>
+            DispatchMap = new Dictionary<EMsg, Action<IPacketMsg>>
             {
                 { EMsg.ClientUFSGetUGCDetailsResponse, HandleUGCDetailsResponse },
                 { EMsg.ClientUFSGetSingleFileInfoResponse, HandleSingleFileInfoResponse },
@@ -89,25 +90,6 @@ namespace SteamKit2
 
             return new AsyncJob<ShareFileCallback>( this.Client, request.SourceJobID );
         }
-
-        /// <summary>
-        /// Handles a client message. This should not be called directly.
-        /// </summary>
-        /// <param name="packetMsg">The packet message that contains the data.</param>
-        public override void HandleMsg( IPacketMsg packetMsg )
-        {
-            Action<IPacketMsg> handlerFunc;
-            bool haveFunc = dispatchMap.TryGetValue( packetMsg.MsgType, out handlerFunc );
-
-            if ( !haveFunc )
-            {
-                // ignore messages that we don't have a handler function for
-                return;
-            }
-
-            handlerFunc( packetMsg );
-        }
-
 
         #region ClientMsg Handlers
         void HandleUGCDetailsResponse( IPacketMsg packetMsg )

@@ -12,7 +12,7 @@ using System.Reflection;
 
 namespace SteamKit2
 {
-    public partial class SteamUnifiedMessages : ClientMsgHandler
+    public partial class SteamUnifiedMessages
     {
         /// <summary>
         /// This callback is returned in response to a service method sent through <see cref="SteamUnifiedMessages"/>.

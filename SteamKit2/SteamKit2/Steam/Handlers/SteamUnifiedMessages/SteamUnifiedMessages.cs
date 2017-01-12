@@ -17,7 +17,7 @@ namespace SteamKit2
     /// <summary>
     /// This handler is used for interacting with Steamworks unified messaging
     /// </summary>
-    public partial class SteamUnifiedMessages : ClientMsgHandler
+    public partial class SteamUnifiedMessages : ClientMsgMappingHandler
     {
         /// <summary>
         /// This wrapper is used for expression-based RPC calls using Steam Unified Messaging.
@@ -71,13 +71,13 @@ namespace SteamKit2
                 return (AsyncJob<ServiceMethodResponse>)result;
             }
         }
-
-
-        Dictionary<EMsg, Action<IPacketMsg>> dispatchMap;
+        
+        /// <inheritdoc />
+        protected override Dictionary<EMsg, Action<IPacketMsg>> DispatchMap { get; }
 
         internal SteamUnifiedMessages()
         {
-            dispatchMap = new Dictionary<EMsg, Action<IPacketMsg>>
+            DispatchMap = new Dictionary<EMsg, Action<IPacketMsg>>
             {
                 { EMsg.ClientServiceMethodResponse, HandleClientServiceMethodResponse },
                 { EMsg.ServiceMethod, HandleServiceMethod },
@@ -123,26 +123,6 @@ namespace SteamKit2
         {
             return new UnifiedService<TService>( this );
         }
-
-
-        /// <summary>
-        /// Handles a client message. This should not be called directly.
-        /// </summary>
-        /// <param name="packetMsg">The packet message that contains the data.</param>
-        public override void HandleMsg( IPacketMsg packetMsg )
-        {
-            Action<IPacketMsg> handlerFunc;
-            bool haveFunc = dispatchMap.TryGetValue( packetMsg.MsgType, out handlerFunc );
-
-            if ( !haveFunc )
-            {
-                // ignore messages that we don't have a handler function for
-                return;
-            }
-
-            handlerFunc( packetMsg );
-        }
-
 
         #region ClientMsg Handlers
         void HandleClientServiceMethodResponse( IPacketMsg packetMsg )

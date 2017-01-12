@@ -9,7 +9,7 @@ namespace SteamKit2
     /// <summary>
     /// This handler is used for initializing Steam trades with other clients.
     /// </summary>
-    public sealed partial class SteamScreenshots : ClientMsgHandler
+    public sealed partial class SteamScreenshots : ClientMsgMappingHandler
     {
         /// <summary>
         /// Width of a screenshot thumnail
@@ -79,13 +79,13 @@ namespace SteamKit2
             {
             }
         }
-
-
-        Dictionary<EMsg, Action<IPacketMsg>> dispatchMap;
+        
+        /// <inheritdoc />
+        protected override Dictionary<EMsg, Action<IPacketMsg>> DispatchMap { get; }
 
         internal SteamScreenshots()
         {
-            dispatchMap = new Dictionary<EMsg, Action<IPacketMsg>>
+            DispatchMap = new Dictionary<EMsg, Action<IPacketMsg>>
             {
                 { EMsg.ClientUCMAddScreenshotResponse, HandleUCMAddScreenshot },
             };
@@ -118,25 +118,6 @@ namespace SteamKit2
 
             return new AsyncJob<ScreenshotAddedCallback>( this.Client, msg.SourceJobID );
         }
-
-        /// <summary>
-        /// Handles a client message. This should not be called directly.
-        /// </summary>
-        /// <param name="packetMsg">The packet message that contains the data.</param>
-        public override void HandleMsg( IPacketMsg packetMsg )
-        {
-            Action<IPacketMsg> handlerFunc;
-            bool haveFunc = dispatchMap.TryGetValue( packetMsg.MsgType, out handlerFunc );
-
-            if ( !haveFunc )
-            {
-                // ignore messages that we don't have a handler function for
-                return;
-            }
-
-            handlerFunc( packetMsg );
-        }
-
 
         #region ClientMsg Handlers
         void HandleUCMAddScreenshot( IPacketMsg packetMsg )

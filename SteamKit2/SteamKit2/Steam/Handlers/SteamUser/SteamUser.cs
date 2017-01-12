@@ -12,7 +12,7 @@ namespace SteamKit2
     /// <summary>
     /// This handler handles all user log on/log off related actions and callbacks.
     /// </summary>
-    public sealed partial class SteamUser : ClientMsgHandler
+    public sealed partial class SteamUser : ClientMsgMappingHandler
     {
 
         /// <summary>
@@ -252,13 +252,13 @@ namespace SteamKit2
         {
             get { return this.Client.SteamID; }
         }
-
-
-        Dictionary<EMsg, Action<IPacketMsg>> dispatchMap;
+        
+        /// <inheritdoc />
+        protected override Dictionary<EMsg, Action<IPacketMsg>> DispatchMap { get; }
 
         internal SteamUser()
         {
-            dispatchMap = new Dictionary<EMsg, Action<IPacketMsg>>
+            DispatchMap = new Dictionary<EMsg, Action<IPacketMsg>>
             {
                 { EMsg.ClientLogOnResponse, HandleLogOnResponse },
                 { EMsg.ClientLoggedOff, HandleLoggedOff },
@@ -465,25 +465,6 @@ namespace SteamKit2
 
             this.Client.Send( acceptance );
         }
-
-        /// <summary>
-        /// Handles a client message. This should not be called directly.
-        /// </summary>
-        /// <param name="packetMsg">The packet message that contains the data.</param>
-        public override void HandleMsg( IPacketMsg packetMsg )
-        {
-            Action<IPacketMsg> handlerFunc;
-            bool haveFunc = dispatchMap.TryGetValue( packetMsg.MsgType, out handlerFunc );
-
-            if ( !haveFunc )
-            {
-                // ignore messages that we don't have a handler function for
-                return;
-            }
-
-            handlerFunc( packetMsg );
-        }
-
         
         #region ClientMsg Handlers
         void HandleLoggedOff( IPacketMsg packetMsg )

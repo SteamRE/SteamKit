@@ -155,6 +155,7 @@
     <Compile Include="Steam\CDNClient.cs" />
     <Compile Include="Steam\Discovery\IsolatedStorageServerListProvider.cs" />
     <Compile Include="Steam\Discovery\IServerListProvider.cs" />
+    <Compile Include="Steam\Handlers\ClientMsgMappingHandler.cs" />
     <Compile Include="Steam\Handlers\SteamCloud\Callbacks.cs" />
     <Compile Include="Steam\Handlers\SteamCloud\SteamCloud.cs" />
     <Compile Include="Steam\Handlers\SteamGameServer\Callbacks.cs" />

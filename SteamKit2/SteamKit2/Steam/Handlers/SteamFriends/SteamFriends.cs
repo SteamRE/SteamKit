@@ -16,7 +16,7 @@ namespace SteamKit2
     /// <summary>
     /// This handler handles all interaction with other users on the Steam3 network.
     /// </summary>
-    public sealed partial class SteamFriends : ClientMsgHandler
+    public sealed partial class SteamFriends : ClientMsgMappingHandler
     {
         object listLock = new object();
         List<SteamID> friendList;
@@ -24,7 +24,8 @@ namespace SteamKit2
 
         AccountCache cache;
 
-        Dictionary<EMsg, Action<IPacketMsg>> dispatchMap;
+        /// <inheritdoc />
+        protected override Dictionary<EMsg, Action<IPacketMsg>> DispatchMap { get; }
 
         internal SteamFriends()
         {
@@ -33,7 +34,7 @@ namespace SteamKit2
 
             cache = new AccountCache();
 
-            dispatchMap = new Dictionary<EMsg, Action<IPacketMsg>>
+            DispatchMap = new Dictionary<EMsg, Action<IPacketMsg>>
             {
                 { EMsg.ClientPersonaState, HandlePersonaState },
                 { EMsg.ClientClanState, HandleClanState },
@@ -591,26 +592,6 @@ namespace SteamKit2
             
             this.Client.Send( request );
         }
-
-
-        /// <summary>
-        /// Handles a client message. This should not be called directly.
-        /// </summary>
-        /// <param name="packetMsg">The packet message that contains the data.</param>
-        public override void HandleMsg( IPacketMsg packetMsg )
-        {
-            Action<IPacketMsg> handlerFunc;
-            bool haveFunc = dispatchMap.TryGetValue( packetMsg.MsgType, out handlerFunc );
-
-            if ( !haveFunc )
-            {
-                // ignore messages that we don't have a handler function for
-                return;
-            }
-
-            handlerFunc( packetMsg );
-        }
-
 
         #region ClientMsg Handlers
         void HandleAccountInfo( IPacketMsg packetMsg )
