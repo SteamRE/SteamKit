@@ -5,6 +5,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -425,7 +426,7 @@ namespace SteamKit2
         {
             float value;
 
-            if ( float.TryParse( this.Value, out value ) == false )
+            if ( float.TryParse( this.Value, NumberStyles.Float | NumberStyles.AllowThousands, CultureInfo.InvariantCulture, out value ) == false )
             {
                 return defaultValue;
             }
