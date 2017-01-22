@@ -876,9 +876,37 @@ namespace SteamKit2
             {
                 JobID = jobID;
 
-                Result = (EResult)msg.eresult;
+                Result = ( EResult )msg.eresult;
                 Token = msg.token;
                 Expiration = DateUtils.DateTimeFromUnixTime( msg.expiration_time );
+            }
+        }
+
+        /// <summary>
+        /// This callback is received when a beta password check has been completed
+        /// </summary>
+        public sealed class CheckAppBetaPasswordCallback : CallbackMsg
+        {
+            /// <summary>
+            /// Result of the operation
+            /// </summary>
+            public EResult Result { get; set; }
+            /// <summary>
+            /// Map of beta names to their encryption keys
+            /// </summary>
+            public Dictionary<string, byte[]> BetaPasswords { get; private set; }
+
+            internal CheckAppBetaPasswordCallback( JobID jobID, CMsgClientCheckAppBetaPasswordResponse msg )
+            {
+                JobID = jobID;
+
+                Result = ( EResult )msg.eresult;
+                BetaPasswords = new Dictionary<string, byte[]>();
+
+                foreach ( var password in msg.betapasswords )
+                {
+                    BetaPasswords.Add( password.betaname, Utils.DecodeHexString( password.betapassword ) );
+                }
             }
         }
     }

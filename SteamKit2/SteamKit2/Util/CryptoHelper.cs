@@ -319,6 +319,29 @@ namespace SteamKit2
         }
 
         /// <summary>
+        /// Decrypts using AES/ECB/None
+        /// </summary>
+        public static byte[] SymmetricDecryptECB( byte[] input, byte[] key )
+        {
+            DebugLog.Assert( key.Length == 32, "CryptoHelper", "SymmetricDecryptECB used with non 32 byte key!" );
+
+            using ( var aes = new RijndaelManaged() )
+            {
+                aes.BlockSize = 128;
+                aes.KeySize = 256;
+                aes.Mode = CipherMode.ECB;
+                aes.Padding = PaddingMode.None;
+
+                using ( var aesTransform = aes.CreateDecryptor( key, null ) )
+                {
+                    byte[] output = aesTransform.TransformFinalBlock( input, 0, input.Length );
+
+                    return output;
+                }
+            }
+        }
+
+        /// <summary>
         /// Performs CRC32 on an input byte array using the CrcStandard.Crc32Bit parameters
         /// </summary>
         public static byte[] CRCHash( byte[] input )

@@ -131,6 +131,7 @@ namespace SteamKit2
                 { EMsg.ClientPICSProductInfoResponse, HandlePICSProductInfoResponse },
                 { EMsg.ClientUpdateGuestPassesList, HandleGuestPassList },
                 { EMsg.ClientGetCDNAuthTokenResponse, HandleCDNAuthTokenResponse },
+                { EMsg.ClientCheckAppBetaPasswordResponse, HandleCheckAppBetaPasswordResponse }
             };
         }
 
@@ -502,6 +503,27 @@ namespace SteamKit2
         }
 
         /// <summary>
+        /// Submit a beta password for a given app to retrieve any betas and their encryption keys.
+        /// Results are returned in a <see cref="CheckAppBetaPasswordCallback"/> callback.
+        /// The returned <see cref="AsyncJob{T}"/> can also be awaited to retrieve the callback result.
+        /// </summary>
+        /// <param name="app">App id requested.</param>
+        /// <param name="password">Password to check.</param>
+        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="CheckAppBetaPasswordCallback"/>.</returns>
+        public AsyncJob<CheckAppBetaPasswordCallback> CheckAppBetaPassword( uint app, string password )
+        {
+            var request = new ClientMsgProtobuf<CMsgClientCheckAppBetaPassword>( EMsg.ClientCheckAppBetaPassword );
+            request.SourceJobID = Client.GetNextJobID();
+
+            request.Body.app_id = app;
+            request.Body.betapassword = password;
+
+            this.Client.Send( request );
+
+            return new AsyncJob<CheckAppBetaPasswordCallback>( this.Client, request.SourceJobID );
+        }
+
+        /// <summary>
         /// Handles a client message. This should not be called directly.
         /// </summary>
         /// <param name="packetMsg">The packet message that contains the data.</param>
@@ -620,6 +642,15 @@ namespace SteamKit2
             var callback = new CDNAuthTokenCallback( response.TargetJobID, response.Body );
             this.Client.PostCallback( callback );
         }
+
+        void HandleCheckAppBetaPasswordResponse(IPacketMsg packetMsg)
+        {
+            var response = new ClientMsgProtobuf<CMsgClientCheckAppBetaPasswordResponse>( packetMsg );
+
+            var callback = new CheckAppBetaPasswordCallback( response.TargetJobID, response.Body );
+            this.Client.PostCallback( callback );
+        }
+        
         #endregion
 
     }
