@@ -319,7 +319,7 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// Decrypts using AES/ECB/None
+        /// Decrypts using AES/ECB/PKCS7
         /// </summary>
         public static byte[] SymmetricDecryptECB( byte[] input, byte[] key )
         {
@@ -330,7 +330,7 @@ namespace SteamKit2
                 aes.BlockSize = 128;
                 aes.KeySize = 256;
                 aes.Mode = CipherMode.ECB;
-                aes.Padding = PaddingMode.None;
+                aes.Padding = PaddingMode.PKCS7;
 
                 using ( var aesTransform = aes.CreateDecryptor( key, null ) )
                 {
