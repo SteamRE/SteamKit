@@ -24,6 +24,8 @@ namespace SteamKit2
             // the backend doesn't like it
             ServicePointManager.Expect100Continue = false;
         }
+		
+		public static void Bar() { }
 
         /// <summary>
         /// Represents a single interface that exists within the Web API.
