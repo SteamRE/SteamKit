@@ -799,6 +799,33 @@ namespace SteamKit2.GC.CSGO.Internal
       get { return _client_launcher; }
       set { _client_launcher = value; }
     }
+
+    private uint _partner_srcid = default(uint);
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"partner_srcid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint partner_srcid
+    {
+      get { return _partner_srcid; }
+      set { _partner_srcid = value; }
+    }
+
+    private uint _partner_accountid = default(uint);
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"partner_accountid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint partner_accountid
+    {
+      get { return _partner_accountid; }
+      set { _partner_accountid = value; }
+    }
+
+    private uint _partner_accountflags = default(uint);
+    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"partner_accountflags", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint partner_accountflags
+    {
+      get { return _partner_accountflags; }
+      set { _partner_accountflags = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -835,13 +862,13 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _legacy_client_session_need = value; }
     }
 
-    private uint _legacy_client_launcher = default(uint);
-    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"legacy_client_launcher", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    private uint _client_launcher = default(uint);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"client_launcher", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint legacy_client_launcher
+    public uint client_launcher
     {
-      get { return _legacy_client_launcher; }
-      set { _legacy_client_launcher = value; }
+      get { return _client_launcher; }
+      set { _client_launcher = value; }
     }
 
     private uint _steamdatagram_port = default(uint);
@@ -1295,6 +1322,17 @@ namespace SteamKit2.GC.CSGO.Internal
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"GCClientLauncherType", EnumPassthru=true)]
+    public enum GCClientLauncherType
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"GCClientLauncherType_DEFAULT", Value=0)]
+      GCClientLauncherType_DEFAULT = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"GCClientLauncherType_PERFECTWORLD", Value=1)]
+      GCClientLauncherType_PERFECTWORLD = 1
+    }
   
     [global::ProtoBuf.ProtoContract(Name=@"GCConnectionStatus", EnumPassthru=true)]
     public enum GCConnectionStatus

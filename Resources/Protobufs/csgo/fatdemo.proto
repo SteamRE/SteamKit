@@ -1,0 +1,116 @@
+import "netmessages.proto";
+
+enum EHitGroup {
+	EHG_Generic = 0;
+	EHG_Head = 1;
+	EHG_Chest = 2;
+	EHG_Stomach = 3;
+	EHG_LeftArm = 4;
+	EHG_RightArm = 5;
+	EHG_LeftLeg = 6;
+	EHG_RightLeg = 7;
+	EHG_Gear = 8;
+	EHG_Miss = 9;
+}
+
+enum ETeam {
+	ET_Unknown = 0;
+	ET_Spectator = 1;
+	ET_Terrorist = 2;
+	ET_CT = 3;
+}
+
+enum EWeaponType {
+	EWT_Knife = 0;
+	EWT_Pistol = 1;
+	EWT_SubMachineGun = 2;
+	EWT_Rifle = 3;
+	EWT_Shotgun = 4;
+	EWT_SniperRifle = 5;
+	EWT_MachineGun = 6;
+	EWT_C4 = 7;
+	EWT_Grenade = 8;
+	EWT_Equipment = 9;
+	EWT_StackableItem = 10;
+	EWT_Unknown = 11;
+}
+
+message MLDict {
+	optional string key = 1;
+	optional string val_string = 2;
+	optional int32 val_int = 3;
+	optional float val_float = 4;
+}
+
+message MLEvent {
+	optional string event_name = 1;
+	repeated .MLDict data = 2;
+}
+
+message MLMatchState {
+	optional string game_mode = 1;
+	optional string phase = 2;
+	optional int32 round = 3;
+	optional int32 score_ct = 4;
+	optional int32 score_t = 5;
+}
+
+message MLRoundState {
+	optional string phase = 1;
+	optional .ETeam win_team = 2 [default = ET_Unknown];
+	optional string bomb_state = 3;
+}
+
+message MLWeaponState {
+	optional int32 index = 1;
+	optional string name = 2;
+	optional .EWeaponType type = 3 [default = EWT_Knife];
+	optional int32 ammo_clip = 4;
+	optional int32 ammo_clip_max = 5;
+	optional int32 ammo_reserve = 6;
+	optional string state = 7;
+	optional float recoil_index = 8;
+}
+
+message MLPlayerState {
+	optional int32 account_id = 1;
+	optional int32 user_id = 2;
+	optional int32 entindex = 3;
+	optional string name = 4;
+	optional string clan = 5;
+	optional .ETeam team = 6 [default = ET_Unknown];
+	optional .CMsgVector abspos = 7;
+	optional .CMsgQAngle eyeangle = 8;
+	optional .CMsgVector eyeangle_fwd = 9;
+	optional int32 health = 10;
+	optional int32 armor = 11;
+	optional float flashed = 12;
+	optional float smoked = 13;
+	optional int32 money = 14;
+	optional int32 round_kills = 15;
+	optional int32 round_killhs = 16;
+	optional float burning = 17;
+	optional bool helmet = 18;
+	optional bool defuse_kit = 19;
+	repeated .MLWeaponState weapons = 20;
+}
+
+message MLGameState {
+	optional .MLMatchState match = 1;
+	optional .MLRoundState round = 2;
+	repeated .MLPlayerState players = 3;
+}
+
+message MLDemoHeader {
+	optional string map_name = 1;
+	optional int32 tick_rate = 2;
+	optional uint32 version = 3;
+	optional uint32 steam_universe = 4;
+}
+
+message MLTick {
+	optional int32 tick_count = 1;
+	optional .MLGameState state = 2;
+	repeated .MLEvent events = 3;
+}
+
