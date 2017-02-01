@@ -335,6 +335,12 @@ namespace SteamKit2.GC.CSGO.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgCheckFriendshipResponse", Value=506)]
       k_EGCMsgCheckFriendshipResponse = 506,
             
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgGetPartnerAccountLink", Value=507)]
+      k_EGCMsgGetPartnerAccountLink = 507,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgGetPartnerAccountLinkResponse", Value=508)]
+      k_EGCMsgGetPartnerAccountLinkResponse = 508,
+            
       [global::ProtoBuf.ProtoEnum(Name=@"k_EGCMsgVacVerificationChange", Value=518)]
       k_EGCMsgVacVerificationChange = 518,
             
@@ -391,7 +397,22 @@ namespace SteamKit2.GC.CSGO.Internal
       k_EMsgGCClientConnectionStatus = 4009,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCServerConnectionStatus", Value=4010)]
-      k_EMsgGCServerConnectionStatus = 4010
+      k_EMsgGCServerConnectionStatus = 4010,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCClientHelloPartner", Value=4011)]
+      k_EMsgGCClientHelloPartner = 4011,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCClientHelloPW", Value=4012)]
+      k_EMsgGCClientHelloPW = 4012,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCClientHelloR2", Value=4013)]
+      k_EMsgGCClientHelloR2 = 4013,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCClientHelloR3", Value=4014)]
+      k_EMsgGCClientHelloR3 = 4014,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCClientHelloR4", Value=4015)]
+      k_EMsgGCClientHelloR4 = 4015
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"EGCToGCMsg", EnumPassthru=true)]
