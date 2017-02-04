@@ -280,6 +280,13 @@ namespace SteamKit2
                 int load = server[ "load" ].AsInteger();
                 int weightedLoad = server[ "weightedload" ].AsInteger();
                 int entries = server[ "NumEntriesInClientList" ].AsInteger( 1 );
+                int useTokenAuth = server[ "usetokenauth" ].AsInteger();
+
+                // If usetokenauth is specified, we can treat this server as a CDN and request tokens
+                if ( useTokenAuth > 0 )
+                {
+                    type = "CDN";
+                }
 
                 serverList.Add( new Server
                 {
