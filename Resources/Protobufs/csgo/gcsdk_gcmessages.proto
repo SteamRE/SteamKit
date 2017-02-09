@@ -3,11 +3,6 @@ import "steammessages.proto";
 option optimize_for = SPEED;
 option cc_generic_services = false;
 
-enum GCClientLauncherType {
-	GCClientLauncherType_DEFAULT = 0;
-	GCClientLauncherType_PERFECTWORLD = 1;
-}
-
 enum GCConnectionStatus {
 	GCConnectionStatus_HAVE_SESSION = 0;
 	GCConnectionStatus_GC_GOING_DOWN = 1;
@@ -149,16 +144,13 @@ message CMsgClientHello {
 	repeated .CMsgSOCacheHaveVersion socache_have_versions = 2;
 	optional uint32 client_session_need = 3;
 	optional uint32 client_launcher = 4;
-	optional uint32 partner_srcid = 5;
-	optional uint32 partner_accountid = 6;
-	optional uint32 partner_accountflags = 7;
 }
 
 message CMsgServerHello {
 	optional uint32 version = 1;
 	repeated .CMsgSOCacheHaveVersion socache_have_versions = 2;
 	optional uint32 legacy_client_session_need = 3;
-	optional uint32 client_launcher = 4;
+	optional uint32 legacy_client_launcher = 4;
 	optional uint32 steamdatagram_port = 5;
 }
 

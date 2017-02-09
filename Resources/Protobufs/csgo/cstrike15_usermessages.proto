@@ -69,7 +69,6 @@ enum ECstrike15UserMessages {
 	CS_UM_XpUpdate = 65;
 	CS_UM_QuestProgress = 66;
 	CS_UM_ScoreLeaderboardData = 67;
-	CS_UM_PlayerDecalDigitalSignature = 68;
 }
 
 message CCSUsrMsg_VGUIMenu {
@@ -303,10 +302,6 @@ message CCSUsrMsg_QuestProgress {
 
 message CCSUsrMsg_ScoreLeaderboardData {
 	optional .ScoreLeaderboardData data = 1;
-}
-
-message CCSUsrMsg_PlayerDecalDigitalSignature {
-	optional .PlayerDecalDigitalSignature data = 1;
 }
 
 message CCSUsrMsg_XRankGet {

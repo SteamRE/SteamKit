@@ -84,7 +84,6 @@ enum EGCItemMsg {
 	k_EMsgGCApplySticker = 1086;
 	k_EMsgGCItemAcknowledged = 1087;
 	k_EMsgGCStatTrakSwap = 1088;
-	k_EMsgGCUserTrackTimePlayedConsecutively = 1089;
 	k_EMsgGCTradingBase = 1500;
 	k_EMsgGCTrading_InitiateTradeRequest = 1501;
 	k_EMsgGCTrading_InitiateTradeResponse = 1502;
@@ -175,9 +174,5 @@ message CMsgGCGiftedItems {
 message CMsgApplyAutograph {
 	optional uint64 autograph_item_id = 1;
 	optional uint64 item_item_id = 2;
-}
-
-message CMsgGCUserTrackTimePlayedConsecutively {
-	optional uint32 state = 1;
 }
 

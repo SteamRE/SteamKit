@@ -67,6 +67,5 @@ enum ENetworkDisconnectionReason {
 	NETWORK_DISCONNECT_VERYLARGETRANSFEROVERFLOW = 57 [(network_connection_token) = "#GameUI_Disconnect_VeryLargeTransferOverflow"];
 	NETWORK_DISCONNECT_SENDNETOVERFLOW = 58 [(network_connection_token) = "#GameUI_Disconnect_SendNetOverflow"];
 	NETWORK_DISCONNECT_PLAYER_REMOVED_FROM_HOST_SESSION = 59 [(network_connection_token) = "#GameUI_Disconnect_PlayerRemovedFromHostSession"];
-	NETWORK_DISCONNECT_SERVER_DOS = 61 [(network_connection_token) = "#GameUI_Disconnect_TooManyCommands"];
 }
 
