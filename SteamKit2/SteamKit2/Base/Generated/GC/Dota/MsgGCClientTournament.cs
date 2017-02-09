@@ -438,6 +438,15 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _team2_score; }
       set { _team2_score = value; }
     }
+
+    private uint _phase_id = default(uint);
+    [global::ProtoBuf.ProtoMember(26, IsRequired = false, Name=@"phase_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint phase_id
+    {
+      get { return _phase_id; }
+      set { _phase_id = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -556,6 +565,15 @@ namespace SteamKit2.GC.Dota.Internal
     {
       get { return _time_window_open_next; }
       set { _time_window_open_next = value; }
+    }
+
+    private uint _trophy_id = default(uint);
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"trophy_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint trophy_id
+    {
+      get { return _trophy_id; }
+      set { _trophy_id = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -1396,15 +1414,6 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _account_id; }
       set { _account_id = value; }
     }
-
-    private uint _season_trophy_id = default(uint);
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"season_trophy_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint season_trophy_id
-    {
-      get { return _season_trophy_id; }
-      set { _season_trophy_id = value; }
-    }
     private readonly global::System.Collections.Generic.List<CMsgDOTAWeekendTourneyPlayerHistory.Tournament> _tournaments = new global::System.Collections.Generic.List<CMsgDOTAWeekendTourneyPlayerHistory.Tournament>();
     [global::ProtoBuf.ProtoMember(3, Name=@"tournaments", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public global::System.Collections.Generic.List<CMsgDOTAWeekendTourneyPlayerHistory.Tournament> tournaments
@@ -1486,6 +1495,15 @@ namespace SteamKit2.GC.Dota.Internal
     {
       get { return _team_name; }
       set { _team_name = value; }
+    }
+
+    private uint _season_trophy_id = default(uint);
+    [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"season_trophy_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint season_trophy_id
+    {
+      get { return _season_trophy_id; }
+      set { _season_trophy_id = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

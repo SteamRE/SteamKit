@@ -206,6 +206,61 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgPartyBuilderOptions")]
+  public partial class CMsgPartyBuilderOptions : global::ProtoBuf.IExtensible
+  {
+    public CMsgPartyBuilderOptions() {}
+    
+
+    private uint _additional_slots = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"additional_slots", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint additional_slots
+    {
+      get { return _additional_slots; }
+      set { _additional_slots = value; }
+    }
+
+    private MatchType _match_type = MatchType.MATCH_TYPE_CASUAL;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"match_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(MatchType.MATCH_TYPE_CASUAL)]
+    public MatchType match_type
+    {
+      get { return _match_type; }
+      set { _match_type = value; }
+    }
+
+    private uint _matchgroups = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"matchgroups", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint matchgroups
+    {
+      get { return _matchgroups; }
+      set { _matchgroups = value; }
+    }
+
+    private uint _client_version = default(uint);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"client_version", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint client_version
+    {
+      get { return _client_version; }
+      set { _client_version = value; }
+    }
+
+    private MatchLanguages _language = MatchLanguages.MATCH_LANGUAGE_INVALID;
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"language", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(MatchLanguages.MATCH_LANGUAGE_INVALID)]
+    public MatchLanguages language
+    {
+      get { return _language; }
+      set { _language = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgReadyUp")]
   public partial class CMsgReadyUp : global::ProtoBuf.IExtensible
   {
@@ -344,13 +399,13 @@ namespace SteamKit2.GC.Dota.Internal
       set { _cm_pick = value; }
     }
 
-    private DOTABotDifficulty _bot_difficulty = DOTABotDifficulty.BOT_DIFFICULTY_MEDIUM;
-    [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"bot_difficulty", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(DOTABotDifficulty.BOT_DIFFICULTY_MEDIUM)]
-    public DOTABotDifficulty bot_difficulty
+    private DOTABotDifficulty _bot_difficulty_radiant = DOTABotDifficulty.BOT_DIFFICULTY_PASSIVE;
+    [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"bot_difficulty_radiant", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(DOTABotDifficulty.BOT_DIFFICULTY_PASSIVE)]
+    public DOTABotDifficulty bot_difficulty_radiant
     {
-      get { return _bot_difficulty; }
-      set { _bot_difficulty = value; }
+      get { return _bot_difficulty_radiant; }
+      set { _bot_difficulty_radiant = value; }
     }
 
     private bool _allow_cheats = default(bool);
@@ -648,6 +703,33 @@ namespace SteamKit2.GC.Dota.Internal
     {
       get { return _pause_setting; }
       set { _pause_setting = value; }
+    }
+
+    private DOTABotDifficulty _bot_difficulty_dire = DOTABotDifficulty.BOT_DIFFICULTY_PASSIVE;
+    [global::ProtoBuf.ProtoMember(43, IsRequired = false, Name=@"bot_difficulty_dire", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(DOTABotDifficulty.BOT_DIFFICULTY_PASSIVE)]
+    public DOTABotDifficulty bot_difficulty_dire
+    {
+      get { return _bot_difficulty_dire; }
+      set { _bot_difficulty_dire = value; }
+    }
+
+    private ulong _bot_radiant = default(ulong);
+    [global::ProtoBuf.ProtoMember(44, IsRequired = false, Name=@"bot_radiant", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong bot_radiant
+    {
+      get { return _bot_radiant; }
+      set { _bot_radiant = value; }
+    }
+
+    private ulong _bot_dire = default(ulong);
+    [global::ProtoBuf.ProtoMember(45, IsRequired = false, Name=@"bot_dire", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong bot_dire
+    {
+      get { return _bot_dire; }
+      set { _bot_dire = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -1817,13 +1899,13 @@ namespace SteamKit2.GC.Dota.Internal
       set { _client_version = value; }
     }
 
-    private DOTABotDifficulty _difficulty = DOTABotDifficulty.BOT_DIFFICULTY_PASSIVE;
-    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"difficulty", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    private DOTABotDifficulty _difficulty_radiant = DOTABotDifficulty.BOT_DIFFICULTY_PASSIVE;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"difficulty_radiant", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(DOTABotDifficulty.BOT_DIFFICULTY_PASSIVE)]
-    public DOTABotDifficulty difficulty
+    public DOTABotDifficulty difficulty_radiant
     {
-      get { return _difficulty; }
-      set { _difficulty = value; }
+      get { return _difficulty_radiant; }
+      set { _difficulty_radiant = value; }
     }
 
     private DOTA_GC_TEAM _team = DOTA_GC_TEAM.DOTA_GC_TEAM_GOOD_GUYS;
@@ -1842,6 +1924,15 @@ namespace SteamKit2.GC.Dota.Internal
     {
       get { return _game_mode; }
       set { _game_mode = value; }
+    }
+
+    private DOTABotDifficulty _difficulty_dire = DOTABotDifficulty.BOT_DIFFICULTY_PASSIVE;
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"difficulty_dire", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(DOTABotDifficulty.BOT_DIFFICULTY_PASSIVE)]
+    public DOTABotDifficulty difficulty_dire
+    {
+      get { return _difficulty_dire; }
+      set { _difficulty_dire = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

@@ -618,13 +618,22 @@ namespace SteamKit2.GC.Dota.Internal
       set { _status = value; }
     }
 
-    private bool _battle_cup_victory = default(bool);
-    [global::ProtoBuf.ProtoMember(24, IsRequired = false, Name=@"battle_cup_victory", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    private bool _legacy_battle_cup_victory = default(bool);
+    [global::ProtoBuf.ProtoMember(24, IsRequired = false, Name=@"legacy_battle_cup_victory", DataFormat = global::ProtoBuf.DataFormat.Default)]
     [global::System.ComponentModel.DefaultValue(default(bool))]
-    public bool battle_cup_victory
+    public bool legacy_battle_cup_victory
     {
-      get { return _battle_cup_victory; }
-      set { _battle_cup_victory = value; }
+      get { return _legacy_battle_cup_victory; }
+      set { _legacy_battle_cup_victory = value; }
+    }
+
+    private uint _battle_cup_streak = default(uint);
+    [global::ProtoBuf.ProtoMember(29, IsRequired = false, Name=@"battle_cup_streak", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint battle_cup_streak
+    {
+      get { return _battle_cup_streak; }
+      set { _battle_cup_streak = value; }
     }
 
     private uint _badge_level = default(uint);
@@ -634,6 +643,33 @@ namespace SteamKit2.GC.Dota.Internal
     {
       get { return _badge_level; }
       set { _badge_level = value; }
+    }
+
+    private uint _suggest_pick_hero_id = default(uint);
+    [global::ProtoBuf.ProtoMember(26, IsRequired = false, Name=@"suggest_pick_hero_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint suggest_pick_hero_id
+    {
+      get { return _suggest_pick_hero_id; }
+      set { _suggest_pick_hero_id = value; }
+    }
+
+    private string _suggest_pick_hero_role = "";
+    [global::ProtoBuf.ProtoMember(27, IsRequired = false, Name=@"suggest_pick_hero_role", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string suggest_pick_hero_role
+    {
+      get { return _suggest_pick_hero_role; }
+      set { _suggest_pick_hero_role = value; }
+    }
+
+    private bool _terse = default(bool);
+    [global::ProtoBuf.ProtoMember(28, IsRequired = false, Name=@"terse", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool terse
+    {
+      get { return _terse; }
+      set { _terse = value; }
     }
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"DiceRoll")]
   public partial class DiceRoll : global::ProtoBuf.IExtensible

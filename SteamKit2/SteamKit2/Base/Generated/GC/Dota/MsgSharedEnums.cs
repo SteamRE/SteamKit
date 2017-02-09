@@ -352,8 +352,11 @@ namespace SteamKit2.GC.Dota.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"DOTA_GAMERULES_STATE_CUSTOM_GAME_SETUP", Value=9)]
       DOTA_GAMERULES_STATE_CUSTOM_GAME_SETUP = 9,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_GAMERULES_STATE_LAST", Value=10)]
-      DOTA_GAMERULES_STATE_LAST = 10
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_GAMERULES_STATE_WAIT_FOR_MAP_TO_LOAD", Value=10)]
+      DOTA_GAMERULES_STATE_WAIT_FOR_MAP_TO_LOAD = 10,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_GAMERULES_STATE_LAST", Value=11)]
+      DOTA_GAMERULES_STATE_LAST = 11
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"DOTA_GC_TEAM", EnumPassthru=true)]
@@ -428,8 +431,17 @@ namespace SteamKit2.GC.Dota.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"EVENT_ID_INTERNATIONAL_2016", Value=14)]
       EVENT_ID_INTERNATIONAL_2016 = 14,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EVENT_ID_COUNT", Value=15)]
-      EVENT_ID_COUNT = 15
+      [global::ProtoBuf.ProtoEnum(Name=@"EVENT_ID_FALL_MAJOR_2016", Value=15)]
+      EVENT_ID_FALL_MAJOR_2016 = 15,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EVENT_ID_WINTER_MAJOR_2017", Value=16)]
+      EVENT_ID_WINTER_MAJOR_2017 = 16,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EVENT_ID_NEW_BLOOM_2017", Value=17)]
+      EVENT_ID_NEW_BLOOM_2017 = 17,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EVENT_ID_COUNT", Value=18)]
+      EVENT_ID_COUNT = 18
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"DOTALeaverStatus_t", EnumPassthru=true)]
@@ -501,7 +513,10 @@ namespace SteamKit2.GC.Dota.Internal
       FANTASY_ROLE_CORE = 1,
             
       [global::ProtoBuf.ProtoEnum(Name=@"FANTASY_ROLE_SUPPORT", Value=2)]
-      FANTASY_ROLE_SUPPORT = 2
+      FANTASY_ROLE_SUPPORT = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"FANTASY_ROLE_OFFLANE", Value=3)]
+      FANTASY_ROLE_OFFLANE = 3
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"Fantasy_Team_Slots", EnumPassthru=true)]
@@ -605,9 +620,6 @@ namespace SteamKit2.GC.Dota.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"DOTAChannelType_GameSpectator", Value=13)]
       DOTAChannelType_GameSpectator = 13,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"DOTAChannelType_GameCoaching", Value=14)]
-      DOTAChannelType_GameCoaching = 14,
-            
       [global::ProtoBuf.ProtoEnum(Name=@"DOTAChannelType_Cafe", Value=15)]
       DOTAChannelType_Cafe = 15,
             
@@ -624,7 +636,10 @@ namespace SteamKit2.GC.Dota.Internal
       DOTAChannelType_BattleCup = 19,
             
       [global::ProtoBuf.ProtoEnum(Name=@"DOTAChannelType_HLTVSpectator", Value=20)]
-      DOTAChannelType_HLTVSpectator = 20
+      DOTAChannelType_HLTVSpectator = 20,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTAChannelType_GameEvents", Value=21)]
+      DOTAChannelType_GameEvents = 21
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"EProfileCardSlotType", EnumPassthru=true)]
@@ -920,6 +935,89 @@ namespace SteamKit2.GC.Dota.Internal
             
       [global::ProtoBuf.ProtoEnum(Name=@"BOT_DIFFICULTY_EXTRA3", Value=8)]
       BOT_DIFFICULTY_EXTRA3 = 8
+    }
+  
+    [global::ProtoBuf.ProtoContract(Name=@"DOTA_BOT_MODE", EnumPassthru=true)]
+    public enum DOTA_BOT_MODE
+    {
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_BOT_MODE_NONE", Value=0)]
+      DOTA_BOT_MODE_NONE = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_BOT_MODE_LANING", Value=1)]
+      DOTA_BOT_MODE_LANING = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_BOT_MODE_ATTACK", Value=2)]
+      DOTA_BOT_MODE_ATTACK = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_BOT_MODE_ROAM", Value=3)]
+      DOTA_BOT_MODE_ROAM = 3,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_BOT_MODE_RETREAT", Value=4)]
+      DOTA_BOT_MODE_RETREAT = 4,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_BOT_MODE_SECRET_SHOP", Value=5)]
+      DOTA_BOT_MODE_SECRET_SHOP = 5,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_BOT_MODE_SIDE_SHOP", Value=6)]
+      DOTA_BOT_MODE_SIDE_SHOP = 6,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_BOT_MODE_RUNE", Value=7)]
+      DOTA_BOT_MODE_RUNE = 7,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_BOT_MODE_PUSH_TOWER_TOP", Value=8)]
+      DOTA_BOT_MODE_PUSH_TOWER_TOP = 8,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_BOT_MODE_PUSH_TOWER_MID", Value=9)]
+      DOTA_BOT_MODE_PUSH_TOWER_MID = 9,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_BOT_MODE_PUSH_TOWER_BOT", Value=10)]
+      DOTA_BOT_MODE_PUSH_TOWER_BOT = 10,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_BOT_MODE_DEFEND_TOWER_TOP", Value=11)]
+      DOTA_BOT_MODE_DEFEND_TOWER_TOP = 11,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_BOT_MODE_DEFEND_TOWER_MID", Value=12)]
+      DOTA_BOT_MODE_DEFEND_TOWER_MID = 12,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_BOT_MODE_DEFEND_TOWER_BOT", Value=13)]
+      DOTA_BOT_MODE_DEFEND_TOWER_BOT = 13,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_BOT_MODE_ASSEMBLE", Value=14)]
+      DOTA_BOT_MODE_ASSEMBLE = 14,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_BOT_MODE_ASSEMBLE_WITH_HUMANS", Value=15)]
+      DOTA_BOT_MODE_ASSEMBLE_WITH_HUMANS = 15,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_BOT_MODE_TEAM_ROAM", Value=16)]
+      DOTA_BOT_MODE_TEAM_ROAM = 16,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_BOT_MODE_FARM", Value=17)]
+      DOTA_BOT_MODE_FARM = 17,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_BOT_MODE_DEFEND_ALLY", Value=18)]
+      DOTA_BOT_MODE_DEFEND_ALLY = 18,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_BOT_MODE_EVASIVE_MANEUVERS", Value=19)]
+      DOTA_BOT_MODE_EVASIVE_MANEUVERS = 19,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_BOT_MODE_ROSHAN", Value=20)]
+      DOTA_BOT_MODE_ROSHAN = 20,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_BOT_MODE_ITEM", Value=21)]
+      DOTA_BOT_MODE_ITEM = 21,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_BOT_MODE_WARD", Value=22)]
+      DOTA_BOT_MODE_WARD = 22,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_BOT_MODE_COMPANION", Value=23)]
+      DOTA_BOT_MODE_COMPANION = 23,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_BOT_MODE_TUTORIAL_BOSS", Value=24)]
+      DOTA_BOT_MODE_TUTORIAL_BOSS = 24,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_BOT_MODE_MINION", Value=25)]
+      DOTA_BOT_MODE_MINION = 25
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"MatchLanguages", EnumPassthru=true)]

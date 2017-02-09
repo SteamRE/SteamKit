@@ -425,6 +425,23 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCToClientTopWeekendTourneyGames")]
+  public partial class CMsgGCToClientTopWeekendTourneyGames : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCToClientTopWeekendTourneyGames() {}
+    
+    private readonly global::System.Collections.Generic.List<CSourceTVGameSmall> _live_games = new global::System.Collections.Generic.List<CSourceTVGameSmall>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"live_games", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CSourceTVGameSmall> live_games
+    {
+      get { return _live_games; }
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientToGCTopMatchesRequest")]
   public partial class CMsgClientToGCTopMatchesRequest : global::ProtoBuf.IExtensible
   {

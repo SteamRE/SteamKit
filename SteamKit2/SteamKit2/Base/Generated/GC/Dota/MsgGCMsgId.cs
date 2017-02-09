@@ -900,12 +900,6 @@ namespace SteamKit2.GC.Dota.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgDOTAAwardEventPoints", Value=7384)]
       k_EMsgDOTAAwardEventPoints = 7384,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgDOTARedeemEventPrize", Value=7385)]
-      k_EMsgDOTARedeemEventPrize = 7385,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgDOTARedeemEventPrizeResponse", Value=7386)]
-      k_EMsgDOTARedeemEventPrizeResponse = 7386,
-            
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgDOTAGetEventPoints", Value=7387)]
       k_EMsgDOTAGetEventPoints = 7387,
             
@@ -1770,12 +1764,6 @@ namespace SteamKit2.GC.Dota.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToClientWageringResponse", Value=8100)]
       k_EMsgGCToClientWageringResponse = 8100,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCMysteryItem", Value=8101)]
-      k_EMsgClientToGCMysteryItem = 8101,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToClientMysteryItemResponse", Value=8102)]
-      k_EMsgGCToClientMysteryItemResponse = 8102,
-            
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCEventGoalsRequest", Value=8103)]
       k_EMsgClientToGCEventGoalsRequest = 8103,
             
@@ -1883,12 +1871,6 @@ namespace SteamKit2.GC.Dota.Internal
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCSignoutSpendWager", Value=8141)]
       k_EMsgGCToGCSignoutSpendWager = 8141,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCRedeemReward", Value=8142)]
-      k_EMsgClientToGCRedeemReward = 8142,
-            
-      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToClientRedeemRewardResponse", Value=8143)]
-      k_EMsgGCToClientRedeemRewardResponse = 8143,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCSubmitLobbyMVPVote", Value=8144)]
       k_EMsgGCSubmitLobbyMVPVote = 8144,
@@ -2050,7 +2032,46 @@ namespace SteamKit2.GC.Dota.Internal
       k_EMsgGCToGCUpdateAccountPublicChatBan = 8196,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCChatReportPublicSpam", Value=8197)]
-      k_EMsgGCChatReportPublicSpam = 8197
+      k_EMsgGCChatReportPublicSpam = 8197,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCSetPartyBuilderOptions", Value=8198)]
+      k_EMsgClientToGCSetPartyBuilderOptions = 8198,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCSetPartyBuilderOptionsResponse", Value=8199)]
+      k_EMsgClientToGCSetPartyBuilderOptionsResponse = 8199,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToClientPlaytestStatus", Value=8200)]
+      k_EMsgGCToClientPlaytestStatus = 8200,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCJoinPlaytest", Value=8201)]
+      k_EMsgClientToGCJoinPlaytest = 8201,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCJoinPlaytestResponse", Value=8202)]
+      k_EMsgClientToGCJoinPlaytestResponse = 8202,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgLobbyPlaytestDetails", Value=8203)]
+      k_EMsgLobbyPlaytestDetails = 8203,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgDOTASetFavoriteTeam", Value=8204)]
+      k_EMsgDOTASetFavoriteTeam = 8204,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToClientBattlePassRollupListRequest", Value=8205)]
+      k_EMsgGCToClientBattlePassRollupListRequest = 8205,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToClientBattlePassRollupListResponse", Value=8206)]
+      k_EMsgGCToClientBattlePassRollupListResponse = 8206,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCIsProQuery", Value=8207)]
+      k_EMsgGCIsProQuery = 8207,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCIsProResponse", Value=8208)]
+      k_EMsgGCIsProResponse = 8208,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgDOTAClaimEventAction", Value=8209)]
+      k_EMsgDOTAClaimEventAction = 8209,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgDOTAClaimEventActionResponse", Value=8210)]
+      k_EMsgDOTAClaimEventActionResponse = 8210
     }
   
 }

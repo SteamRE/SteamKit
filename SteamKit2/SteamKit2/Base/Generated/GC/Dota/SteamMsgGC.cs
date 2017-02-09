@@ -599,15 +599,6 @@ namespace SteamKit2.GC.Dota.Internal
       set { _duel_ban_expiration = value; }
     }
 
-    private uint _preview_item_def = (uint)0;
-    [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"preview_item_def", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue((uint)0)]
-    public uint preview_item_def
-    {
-      get { return _preview_item_def; }
-      set { _preview_item_def = value; }
-    }
-
     private bool _made_first_purchase = (bool)false;
     [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"made_first_purchase", DataFormat = global::ProtoBuf.DataFormat.Default)]
     [global::System.ComponentModel.DefaultValue((bool)false)]
@@ -2955,6 +2946,71 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCToClientPollFileRequest")]
+  public partial class CMsgGCToClientPollFileRequest : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCToClientPollFileRequest() {}
+    
+
+    private string _file_name = "";
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"file_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string file_name
+    {
+      get { return _file_name; }
+      set { _file_name = value; }
+    }
+
+    private uint _client_version = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"client_version", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint client_version
+    {
+      get { return _client_version; }
+      set { _client_version = value; }
+    }
+
+    private uint _poll_id = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"poll_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint poll_id
+    {
+      get { return _poll_id; }
+      set { _poll_id = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCToClientPollFileResponse")]
+  public partial class CMsgGCToClientPollFileResponse : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCToClientPollFileResponse() {}
+    
+
+    private uint _poll_id = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"poll_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint poll_id
+    {
+      get { return _poll_id; }
+      set { _poll_id = value; }
+    }
+
+    private uint _file_size = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"file_size", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint file_size
+    {
+      get { return _file_size; }
+      set { _file_size = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     [global::ProtoBuf.ProtoContract(Name=@"EGCBaseMsg", EnumPassthru=true)]
     public enum EGCBaseMsg
     {
@@ -3002,7 +3058,13 @@ namespace SteamKit2.GC.Dota.Internal
       k_EMsgGCInviteToLobby = 4512,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCLobbyInviteResponse", Value=4513)]
-      k_EMsgGCLobbyInviteResponse = 4513
+      k_EMsgGCLobbyInviteResponse = 4513,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToClientPollFileRequest", Value=4514)]
+      k_EMsgGCToClientPollFileRequest = 4514,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToClientPollFileResponse", Value=4515)]
+      k_EMsgGCToClientPollFileResponse = 4515
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"EGCBaseProtoObjectTypes", EnumPassthru=true)]

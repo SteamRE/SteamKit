@@ -1568,6 +1568,13 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _match_player_flags; }
       set { _match_player_flags = value; }
     }
+    private readonly global::System.Collections.Generic.List<uint> _talent_ability_ids = new global::System.Collections.Generic.List<uint>();
+    [global::ProtoBuf.ProtoMember(41, Name=@"talent_ability_ids", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public global::System.Collections.Generic.List<uint> talent_ability_ids
+    {
+      get { return _talent_ability_ids; }
+    }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCustomGameData")]
   public partial class CCustomGameData : global::ProtoBuf.IExtensible
   {
@@ -1763,13 +1770,13 @@ namespace SteamKit2.GC.Dota.Internal
       set { _allow_cheats = value; }
     }
 
-    private DOTABotDifficulty _bot_difficulty = DOTABotDifficulty.BOT_DIFFICULTY_PASSIVE;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"bot_difficulty", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    private DOTABotDifficulty _bot_difficulty_radiant = DOTABotDifficulty.BOT_DIFFICULTY_PASSIVE;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"bot_difficulty_radiant", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(DOTABotDifficulty.BOT_DIFFICULTY_PASSIVE)]
-    public DOTABotDifficulty bot_difficulty
+    public DOTABotDifficulty bot_difficulty_radiant
     {
-      get { return _bot_difficulty; }
-      set { _bot_difficulty = value; }
+      get { return _bot_difficulty_radiant; }
+      set { _bot_difficulty_radiant = value; }
     }
 
     private bool _created_lobby = default(bool);
@@ -1780,41 +1787,15 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _created_lobby; }
       set { _created_lobby = value; }
     }
-    private readonly global::System.Collections.Generic.List<CMsgSignOutBotInfo.CMsgBotSlotDifficulty> _bot_slot_difficulties = new global::System.Collections.Generic.List<CMsgSignOutBotInfo.CMsgBotSlotDifficulty>();
-    [global::ProtoBuf.ProtoMember(4, Name=@"bot_slot_difficulties", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public global::System.Collections.Generic.List<CMsgSignOutBotInfo.CMsgBotSlotDifficulty> bot_slot_difficulties
-    {
-      get { return _bot_slot_difficulties; }
-    }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgBotSlotDifficulty")]
-  public partial class CMsgBotSlotDifficulty : global::ProtoBuf.IExtensible
-  {
-    public CMsgBotSlotDifficulty() {}
-    
 
-    private uint _slot = default(uint);
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"slot", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint slot
-    {
-      get { return _slot; }
-      set { _slot = value; }
-    }
-
-    private DOTABotDifficulty _bot_difficulty = DOTABotDifficulty.BOT_DIFFICULTY_PASSIVE;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"bot_difficulty", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    private DOTABotDifficulty _bot_difficulty_dire = DOTABotDifficulty.BOT_DIFFICULTY_PASSIVE;
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"bot_difficulty_dire", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(DOTABotDifficulty.BOT_DIFFICULTY_PASSIVE)]
-    public DOTABotDifficulty bot_difficulty
+    public DOTABotDifficulty bot_difficulty_dire
     {
-      get { return _bot_difficulty; }
-      set { _bot_difficulty = value; }
+      get { return _bot_difficulty_dire; }
+      set { _bot_difficulty_dire = value; }
     }
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
