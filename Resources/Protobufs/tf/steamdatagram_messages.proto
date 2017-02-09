@@ -1,6 +1,7 @@
 option cc_generic_services = false;
 
 enum ESteamDatagramMsgID {
+	k_ESteamDatagramMsg_Invalid = 0;
 	k_ESteamDatagramMsg_RouterPingRequest = 1;
 	k_ESteamDatagramMsg_RouterPingReply = 2;
 	k_ESteamDatagramMsg_GameserverPingRequest = 3;
@@ -64,6 +65,7 @@ message CMsgSteamDatagramGameserverSessionRequest {
 	optional fixed32 challenge_time = 3;
 	optional fixed64 challenge = 4;
 	optional fixed32 client_cookie = 5;
+	optional uint32 network_config_version = 6;
 }
 
 message CMsgSteamDatagramGameserverSessionEstablished {
@@ -107,6 +109,7 @@ message CMsgSteamDatagramLinkInstantaneousStats {
 	optional uint32 ping_ms = 5;
 	optional uint32 packets_dropped_pct = 6;
 	optional uint32 packets_weird_sequence_pct = 7;
+	optional uint32 peak_jitter_usec = 8;
 }
 
 message CMsgSteamDatagramLinkLifetimeStats {
@@ -119,6 +122,39 @@ message CMsgSteamDatagramLinkLifetimeStats {
 	optional uint64 packets_recv_out_of_order = 9;
 	optional uint64 packets_recv_duplicate = 10;
 	optional uint64 packets_recv_lurch = 11;
+	optional uint32 quality_histogram_100 = 21;
+	optional uint32 quality_histogram_99 = 22;
+	optional uint32 quality_histogram_97 = 23;
+	optional uint32 quality_histogram_95 = 24;
+	optional uint32 quality_histogram_90 = 25;
+	optional uint32 quality_histogram_75 = 26;
+	optional uint32 quality_histogram_50 = 27;
+	optional uint32 quality_histogram_1 = 28;
+	optional uint32 quality_histogram_dead = 29;
+	optional uint32 quality_ntile_2nd = 30;
+	optional uint32 quality_ntile_5th = 31;
+	optional uint32 quality_ntile_25th = 32;
+	optional uint32 quality_ntile_50th = 33;
+	optional uint32 ping_histogram_25 = 41;
+	optional uint32 ping_histogram_50 = 42;
+	optional uint32 ping_histogram_75 = 43;
+	optional uint32 ping_histogram_100 = 44;
+	optional uint32 ping_histogram_125 = 45;
+	optional uint32 ping_histogram_150 = 46;
+	optional uint32 ping_histogram_200 = 47;
+	optional uint32 ping_histogram_300 = 48;
+	optional uint32 ping_histogram_max = 49;
+	optional uint32 ping_ntile_5th = 50;
+	optional uint32 ping_ntile_50th = 51;
+	optional uint32 ping_ntile_75th = 52;
+	optional uint32 ping_ntile_95th = 53;
+	optional uint32 ping_ntile_98th = 54;
+	optional uint32 jitter_histogram_negligible = 61;
+	optional uint32 jitter_histogram_1 = 62;
+	optional uint32 jitter_histogram_2 = 63;
+	optional uint32 jitter_histogram_5 = 64;
+	optional uint32 jitter_histogram_10 = 65;
+	optional uint32 jitter_histogram_20 = 66;
 }
 
 message CMsgSteamDatagramConnectionQuality {

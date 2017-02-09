@@ -123,16 +123,21 @@ enum ETFGCMsg {
 	k_EMsgGCGameServerKickingLobbyResponse = 6521;
 	k_EMsgGCPlayerLeftMatch = 6522;
 	k_EMsgGCPlayerLeftMatchResponse = 6523;
-	k_EMsgGCRequestCasualCriteriaStats = 6524;
-	k_EMsgGCCasualCriteriaStatsResponse = 6525;
+	k_EMsgGCRequestMatchMakerStats = 6524;
+	k_EMsgGCMatchMakerStatsResponse = 6525;
 	k_EMsgGCMatchHistoryLoad = 6526;
 	k_EMsgGC_AcknowledgeXP = 6527;
 	k_EMsgGCDataCenterPing_Update = 6528;
 	k_EMsgGC_NotificationAcknowledge = 6529;
 	k_EMsgGC_NotificationAcknowledgeReply = 6530;
 	k_EMsgGC_KickPlayerFromLobby = 6531;
-	k_EMsgGC_RematchRequest = 6532;
-	k_EMsgGC_RematchRequestResponse = 6533;
+	k_EMsgGC_SurveyQuestionRequest = 6534;
+	k_EMsgGC_SurveyQuestionResponse = 6535;
+	k_EMsgGC_TFClientInit = 6536;
+	k_EMsgGC_NewMatchForLobbyRequest = 6537;
+	k_EMsgGC_NewMatchForLobbyResponse = 6538;
+	k_EMsgGC_ChangeMatchPlayerTeamsRequest = 6539;
+	k_EMsgGC_ChangeMatchPlayerTeamsResponse = 6540;
 	k_EMsgGCDev_GrantWarKill = 10001;
 }
 
@@ -205,6 +210,10 @@ enum ServerMatchmakingState {
 	ServerMatchmakingState_EMPTY = 2;
 	ServerMatchmakingState_ACTIVE_MATCH_REQUESTING_LATE_JOIN = 3;
 	ServerMatchmakingState_ACTIVE_MATCH = 4;
+}
+
+enum SurveyQuestionType {
+	QUESTION_MATCH_QUALITY = 0;
 }
 
 message CMsgTFGoldenWrenchBroadcast {
@@ -543,6 +552,7 @@ message CSOTFPartyMember {
 message CMsgMatchSearchCriteria {
 	optional .TF_MatchmakingMode matchmaking_mode = 7 [default = TF_Matchmaking_INVALID];
 	optional bool late_join_ok = 5;
+	optional uint32 custom_ping_tolerance = 13 [default = 0];
 	optional string mvm_mannup_tour = 10;
 	repeated string mvm_missions = 9;
 	optional bool play_for_bragging_rights = 6;
@@ -596,6 +606,7 @@ message CSOTFParty {
 	optional uint32 search_quickplay_game_type = 28;
 	optional uint32 search_ladder_game_type = 33;
 	optional .CMsgCasualMatchmakingSearchCriteria search_casual = 34;
+	optional uint32 custom_ping_tolerance = 36;
 	optional uint32 matchmaking_ban_time = 18;
 	optional uint32 matchmaking_ban_account_id = 19;
 	optional uint32 matchmaking_low_priority_time = 20;
@@ -691,6 +702,7 @@ message CSOTFGameServerLobby {
 	optional bool late_join_eligible = 44;
 	optional uint32 fixed_match_size = 45;
 	optional .CSOTFGameServerLobby.WarMatch is_war_match = 46 [default = NOPE];
+	repeated uint32 next_maps_for_vote = 47;
 }
 
 message CMsgExitMatchmaking {
@@ -1097,7 +1109,8 @@ message CMsgTFXPSource {
 		SOURCE_COMPETITIVE_ABANDON = 3;
 		SOURCE_COMPETITIVE_WIN = 4;
 		SOURCE_COMPETITIVE_LOSS = 5;
-		NUM_SOURCE_TYPES = 9;
+		SOURCE_AUTOBALANCE_BONUS = 6;
+		NUM_SOURCE_TYPES = 7;
 	}
 
 	optional .CMsgTFXPSource.XPSourceType type = 1 [default = SOURCE_SCORE, (key_field) = true];
@@ -1111,19 +1124,25 @@ message CMsgTFXPSourceBreakdown {
 	repeated .CMsgTFXPSource sources = 1;
 }
 
+message CMsgTFClientInit {
+	optional uint32 client_version = 1;
+	optional int32 language = 2;
+}
+
 message CMsgGCNotification {
 	enum NotificationType {
 		NOTIFICATION_REPORTED_PLAYER_BANNED = 0;
 		NOTIFICATION_CUSTOM_STRING = 1;
 		NOTIFICATION_MM_BAN_DUE_TO_EXCESSIVE_REPORTS = 2;
 		NOTIFICATION_REPORTED_PLAYER_WAS_BANNED = 3;
-		NOTIFICATION_NUM_TYPES = 4;
+		NOTIFICATION_SUPPORT_MESSAGE = 4;
+		NOTIFICATION_NUM_TYPES = 5;
 	}
 
 	optional uint64 notification_id = 1 [(key_field) = true];
 	optional uint32 account_id = 2;
 	optional fixed32 expiration_time = 3;
-	optional .CMsgGCNotification.NotificationType type = 4 [default = NOTIFICATION_REPORTED_PLAYER_BANNED];
+	optional .CMsgGCNotification.NotificationType type = 4 [default = NOTIFICATION_CUSTOM_STRING];
 	optional string notification_string = 5;
 }
 
@@ -1193,6 +1212,7 @@ message CMsgGC_Match_Result {
 	optional uint32 flags = 14;
 	optional uint32 server_version = 15;
 	optional uint32 bots = 16;
+	optional bool server_created = 17 [default = false];
 }
 
 message CMsgGC_Match_ResultResponse {
@@ -1250,6 +1270,7 @@ message CSOTFLadderPlayerStats {
 
 message CMsgGC_TFVoteKickPlayerRequest {
 	optional uint32 account_id = 1;
+	optional uint64 target_id = 2;
 }
 
 message CMsgGC_VoteKickPlayerRequestResponse {
@@ -1321,11 +1342,21 @@ message CSOTFMatchResultPlayerStats {
 	optional uint32 map_index = 26;
 }
 
-message CMsgGCRequestCasualCriteriaStats {
+message CMsgGCRequestMatchMakerStats {
 }
 
-message CMsgGCCasualCriteriaStatsResponse {
+message CMsgGCDataCenterPopulation {
+	optional string name = 1;
+	optional float health_ratio = 2;
+}
+
+message CMsgGCMatchGroupDataCenterPopulation {
+	repeated .CMsgGCDataCenterPopulation data_center_population = 1;
+}
+
+message CMsgGCMatchMakerStatsResponse {
 	repeated uint32 map_count = 1;
+	repeated .CMsgGCMatchGroupDataCenterPopulation matchgroup_data_center_population = 2;
 }
 
 message CMsgGCMatchHistoryLoad {
@@ -1352,19 +1383,39 @@ message CMsgGC_KickPlayerFromLobby {
 	optional uint64 targetID = 1;
 }
 
-message CMsgGCRematchRequest {
-	message PartyEntry {
-		optional uint64 party_id = 1;
-		optional uint32 team = 2;
-		optional uint64 leader_steam_id = 3;
-	}
-
-	repeated .CMsgGCRematchRequest.PartyEntry party = 1;
-	optional uint32 match_group = 2;
-	optional .CMsgCasualMatchmakingSearchCriteria casual_criteria = 3;
+message CMsgGCSurveyRequest {
+	optional .SurveyQuestionType question_type = 1 [default = QUESTION_MATCH_QUALITY];
+	optional uint64 match_id = 2;
 }
 
-message CMsgGCRematchRequestResponse {
+message CMsgGCSurveyResponse {
+	optional .SurveyQuestionType question_type = 1 [default = QUESTION_MATCH_QUALITY];
+	optional uint64 match_id = 2;
+	optional int32 response = 3;
+}
+
+message CMsgGCNewMatchForLobbyRequest {
+	optional uint64 current_match_id = 1;
+	optional uint32 next_map_id = 2;
+	optional uint64 lobby_id = 3;
+}
+
+message CMsgGCNewMatchForLobbyResponse {
+	optional bool success = 1;
+}
+
+message CMsgGCChangeMatchPlayerTeamsRequest {
+	message Member {
+		optional uint64 member_id = 1;
+		optional .TF_GC_TEAM new_team = 2 [default = TF_GC_TEAM_NOTEAM];
+	}
+
+	optional uint64 match_id = 1;
+	optional uint64 lobby_id = 2;
+	repeated .CMsgGCChangeMatchPlayerTeamsRequest.Member member = 3;
+}
+
+message CMsgGCChangeMatchPlayerTeamsResponse {
 	optional bool success = 1;
 }
 
