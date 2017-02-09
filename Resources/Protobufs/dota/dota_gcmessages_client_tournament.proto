@@ -67,6 +67,7 @@ message CMsgDOTATournamentInfo {
 		optional uint32 phase_type = 23;
 		optional uint32 team1_score = 24;
 		optional uint32 team2_score = 25;
+		optional uint32 phase_id = 26;
 	}
 
 	message News {
@@ -92,6 +93,7 @@ message CMsgWeekendTourneySchedule {
 		optional uint32 time_window_open = 2;
 		optional uint32 time_window_close = 3;
 		optional uint32 time_window_open_next = 4;
+		optional uint32 trophy_id = 5;
 	}
 
 	repeated .CMsgWeekendTourneySchedule.Division divisions = 1;
@@ -230,10 +232,10 @@ message CMsgDOTAWeekendTourneyPlayerHistory {
 		optional uint32 team_result = 6;
 		repeated uint32 account_id = 7;
 		optional string team_name = 8;
+		optional uint32 season_trophy_id = 9;
 	}
 
 	optional uint32 account_id = 1;
-	optional uint32 season_trophy_id = 2;
 	repeated .CMsgDOTAWeekendTourneyPlayerHistory.Tournament tournaments = 3;
 }
 

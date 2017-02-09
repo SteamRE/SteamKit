@@ -297,8 +297,6 @@ enum EDOTAGCMsg {
 	k_EMsgGCGameMatchSignOutPermissionResponse = 7382;
 	k_EMsgDOTAChatChannelMemberUpdate = 7383;
 	k_EMsgDOTAAwardEventPoints = 7384;
-	k_EMsgDOTARedeemEventPrize = 7385;
-	k_EMsgDOTARedeemEventPrizeResponse = 7386;
 	k_EMsgDOTAGetEventPoints = 7387;
 	k_EMsgDOTAGetEventPointsResponse = 7388;
 	k_EMsgGCToGCSignoutAwardEventPoints = 7390;
@@ -587,8 +585,6 @@ enum EDOTAGCMsg {
 	k_EMsgServerToGCPostMatchTipResponse = 8098;
 	k_EMsgClientToGCWageringRequest = 8099;
 	k_EMsgGCToClientWageringResponse = 8100;
-	k_EMsgClientToGCMysteryItem = 8101;
-	k_EMsgGCToClientMysteryItemResponse = 8102;
 	k_EMsgClientToGCEventGoalsRequest = 8103;
 	k_EMsgClientToGCEventGoalsResponse = 8104;
 	k_EMsgClientToGCLeaguePredictions = 8106;
@@ -625,8 +621,6 @@ enum EDOTAGCMsg {
 	k_EMsgClientToGCRequestEventPointLogResponse = 8139;
 	k_EMsgClientToGCPublishUserStat = 8140;
 	k_EMsgGCToGCSignoutSpendWager = 8141;
-	k_EMsgClientToGCRedeemReward = 8142;
-	k_EMsgGCToClientRedeemRewardResponse = 8143;
 	k_EMsgGCSubmitLobbyMVPVote = 8144;
 	k_EMsgGCSubmitLobbyMVPVoteResponse = 8145;
 	k_EMsgClientToGCRequestLinaPlaysRemaining = 8146;
@@ -681,5 +675,18 @@ enum EDOTAGCMsg {
 	k_EMsgGCToGCPublicChatCommunicationBan = 8195;
 	k_EMsgGCToGCUpdateAccountPublicChatBan = 8196;
 	k_EMsgGCChatReportPublicSpam = 8197;
+	k_EMsgClientToGCSetPartyBuilderOptions = 8198;
+	k_EMsgClientToGCSetPartyBuilderOptionsResponse = 8199;
+	k_EMsgGCToClientPlaytestStatus = 8200;
+	k_EMsgClientToGCJoinPlaytest = 8201;
+	k_EMsgClientToGCJoinPlaytestResponse = 8202;
+	k_EMsgLobbyPlaytestDetails = 8203;
+	k_EMsgDOTASetFavoriteTeam = 8204;
+	k_EMsgGCToClientBattlePassRollupListRequest = 8205;
+	k_EMsgGCToClientBattlePassRollupListResponse = 8206;
+	k_EMsgGCIsProQuery = 8207;
+	k_EMsgGCIsProResponse = 8208;
+	k_EMsgDOTAClaimEventAction = 8209;
+	k_EMsgDOTAClaimEventActionResponse = 8210;
 }
 

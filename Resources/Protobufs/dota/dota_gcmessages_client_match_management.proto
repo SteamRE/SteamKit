@@ -61,6 +61,14 @@ message CMsgStartFindingMatchResult {
 message CMsgStopFindingMatch {
 }
 
+message CMsgPartyBuilderOptions {
+	optional uint32 additional_slots = 1;
+	optional .MatchType match_type = 2 [default = MATCH_TYPE_CASUAL];
+	optional uint32 matchgroups = 3;
+	optional uint32 client_version = 4;
+	optional .MatchLanguages language = 5 [default = MATCH_LANGUAGE_INVALID];
+}
+
 message CMsgReadyUp {
 	optional .DOTALobbyReadyState state = 1 [default = DOTALobbyReadyState_UNDECLARED];
 	optional fixed64 ready_up_key = 2;
@@ -83,7 +91,7 @@ message CMsgPracticeLobbySetDetails {
 	optional uint32 server_region = 4;
 	optional uint32 game_mode = 5;
 	optional .DOTA_CM_PICK cm_pick = 6 [default = DOTA_CM_RANDOM];
-	optional .DOTABotDifficulty bot_difficulty = 9 [default = BOT_DIFFICULTY_MEDIUM];
+	optional .DOTABotDifficulty bot_difficulty_radiant = 9 [default = BOT_DIFFICULTY_PASSIVE];
 	optional bool allow_cheats = 10;
 	optional bool fill_with_bots = 11;
 	optional bool intro_mode = 12;
@@ -117,6 +125,9 @@ message CMsgPracticeLobbySetDetails {
 	optional .SelectionPriorityType league_selection_priority_choice = 40 [default = UNDEFINED];
 	optional .SelectionPriorityType league_non_selection_priority_choice = 41 [default = UNDEFINED];
 	optional .LobbyDotaPauseSetting pause_setting = 42 [default = LobbyDotaPauseSetting_Unlimited];
+	optional .DOTABotDifficulty bot_difficulty_dire = 43 [default = BOT_DIFFICULTY_PASSIVE];
+	optional uint64 bot_radiant = 44;
+	optional uint64 bot_dire = 45;
 }
 
 message CMsgPracticeLobbyCreate {
@@ -315,9 +326,10 @@ message CMsgQuickJoinCustomLobbyResponse {
 message CMsgBotGameCreate {
 	optional string search_key = 1;
 	optional uint32 client_version = 2;
-	optional .DOTABotDifficulty difficulty = 3 [default = BOT_DIFFICULTY_PASSIVE];
+	optional .DOTABotDifficulty difficulty_radiant = 3 [default = BOT_DIFFICULTY_PASSIVE];
 	optional .DOTA_GC_TEAM team = 4 [default = DOTA_GC_TEAM_GOOD_GUYS];
 	optional uint32 game_mode = 5;
+	optional .DOTABotDifficulty difficulty_dire = 6 [default = BOT_DIFFICULTY_PASSIVE];
 }
 
 message CMsgCustomGameCreate {

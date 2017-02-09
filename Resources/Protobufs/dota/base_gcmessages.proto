@@ -19,6 +19,8 @@ enum EGCBaseMsg {
 	k_EMsgGCLANServerAvailable = 4511;
 	k_EMsgGCInviteToLobby = 4512;
 	k_EMsgGCLobbyInviteResponse = 4513;
+	k_EMsgGCToClientPollFileRequest = 4514;
+	k_EMsgGCToClientPollFileResponse = 4515;
 }
 
 enum EGCBaseProtoObjectTypes {
@@ -139,7 +141,6 @@ message CSOEconGameAccountClient {
 	optional bool in_coaches_list = 5;
 	optional fixed32 trade_ban_expiration = 6;
 	optional fixed32 duel_ban_expiration = 7;
-	optional uint32 preview_item_def = 8 [default = 0];
 	optional bool made_first_purchase = 9 [default = false];
 }
 
@@ -548,5 +549,16 @@ message CMsgResetStrangeGemCountResponse {
 	}
 
 	optional .CMsgResetStrangeGemCountResponse.EResetGem response = 1 [default = k_ResetGem_Succeeded];
+}
+
+message CMsgGCToClientPollFileRequest {
+	optional string file_name = 1;
+	optional uint32 client_version = 2;
+	optional uint32 poll_id = 3;
+}
+
+message CMsgGCToClientPollFileResponse {
+	optional uint32 poll_id = 1;
+	optional uint32 file_size = 2;
 }
 

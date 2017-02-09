@@ -58,6 +58,12 @@ enum EDotaClientMessages {
 	DOTA_CM_KillMyHero = 355;
 	DOTA_CM_QuestStatus = 356;
 	DOTA_CM_ToggleAutoattack = 357;
+	DOTA_CM_SpecialAbility = 358;
+	DOTA_CM_KillcamDamageTaken = 359;
+	DOTA_CM_SetEnemyStartingPosition = 360;
+	DOTA_CM_SetDesiredWardPlacement = 361;
+	DOTA_CM_RollDice = 362;
+	DOTA_CM_FlipCoin = 363;
 }
 
 message CDOTAClientMsg_MapPing {
@@ -178,14 +184,6 @@ message CDOTAClientMsg_UpdateQuickBuy {
 	repeated .CDOTAClientMsg_UpdateQuickBuyItem items = 1;
 }
 
-message CDOTAClientMsg_UpdateCoachListen {
-	optional uint32 player_mask = 1;
-}
-
-message CDOTAClientMsg_CoachHUDPing {
-	optional .CDOTAMsg_CoachHUDPing hud_ping = 1;
-}
-
 message CDOTAClientMsg_RecordVote {
 	optional int32 choice_index = 1;
 }
@@ -276,6 +274,16 @@ message CDOTAClientMsg_ExecuteOrders {
 
 message CDOTAClientMsg_XPAlert {
 	optional uint32 target_entindex = 1;
+	optional uint32 damage_taken = 2;
+}
+
+message CDOTAClientMsg_KillcamDamageTaken {
+	optional uint32 target_entindex = 1;
+	optional uint32 damage_taken = 2;
+	optional uint32 item_type = 3;
+	optional uint32 item_id = 4;
+	optional string hero_name = 5;
+	optional string damage_color = 6;
 }
 
 message CDOTAClientMsg_MatchMetadata {
@@ -299,5 +307,31 @@ message CDOTAClientMsg_QuestStatus {
 message CDOTAClientMsg_ToggleAutoattack {
 	optional int32 mode = 1;
 	optional bool show_message = 2;
+}
+
+message CDOTAClientMsg_SpecialAbility {
+	optional uint32 ability_index = 1;
+	optional uint32 target_entindex = 2;
+}
+
+message CDOTAClientMsg_SetEnemyStartingPosition {
+	optional uint32 enemy_player_id = 1;
+	optional uint32 enemy_starting_position = 2;
+}
+
+message CDOTAClientMsg_SetDesiredWardPlacement {
+	optional uint32 ward_index = 1;
+	optional float ward_x = 2;
+	optional float ward_y = 3;
+}
+
+message CDOTAClientMsg_RollDice {
+	optional uint32 channel_type = 1;
+	optional uint32 roll_min = 2;
+	optional uint32 roll_max = 3;
+}
+
+message CDOTAClientMsg_FlipCoin {
+	optional uint32 channel_type = 1;
 }
 

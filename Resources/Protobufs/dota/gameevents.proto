@@ -38,6 +38,7 @@ message CMsgPlaceDecalEvent {
 	optional fixed32 skeletoninstancehash = 11;
 	optional int32 boneindex = 12;
 	optional bool translucenthit = 13;
+	optional bool is_adjacent = 14;
 }
 
 message CMsgClearWorldDecalsEvent {

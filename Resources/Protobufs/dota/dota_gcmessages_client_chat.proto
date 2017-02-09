@@ -112,8 +112,12 @@ message CMsgDOTAChatMessage {
 	optional string share_lobby_passkey = 21;
 	optional uint32 private_chat_channel_id = 22;
 	optional uint32 status = 23;
-	optional bool battle_cup_victory = 24;
+	optional bool legacy_battle_cup_victory = 24;
+	optional uint32 battle_cup_streak = 29;
 	optional uint32 badge_level = 25;
+	optional uint32 suggest_pick_hero_id = 26;
+	optional string suggest_pick_hero_role = 27;
+	optional bool terse = 28;
 }
 
 message CMsgDOTAChatMember {

@@ -80,6 +80,8 @@ enum DOTA_COMBATLOG_TYPES {
 	DOTA_COMBATLOG_UNIT_SUMMONED = 33;
 	DOTA_COMBATLOG_ATTACK_EVADE = 34;
 	DOTA_COMBATLOG_TREE_CUT = 35;
+	DOTA_COMBATLOG_SUCCESSFUL_SCAN = 36;
+	DOTA_COMBATLOG_END_KILLSTREAK = 37;
 }
 
 message CSODOTAGameAccountClient {
@@ -143,6 +145,7 @@ message CSODOTAGameAccountClient {
 	optional bool player_behavior_report_old_data = 73;
 	optional uint32 tourney_skill_level = 74;
 	optional uint32 tourney_recent_participation_date = 85;
+	optional uint32 favorite_team = 87;
 }
 
 message CMsgLobbyEventPoints {
@@ -174,6 +177,7 @@ message CMsgBattleCupVictory {
 	optional uint32 division_id = 6;
 	optional uint32 team_id = 7;
 	optional uint32 streak = 8;
+	optional uint32 trophy_id = 9;
 }
 
 message CMsgLobbyBattleCupVictoryList {
@@ -241,6 +245,14 @@ message CMsgDOTAHasItemQuery {
 
 message CMsgDOTAHasItemResponse {
 	optional bool has_item = 1;
+}
+
+message CMsgGCIsProQuery {
+	optional uint32 account_id = 1;
+}
+
+message CMsgGCIsProResponse {
+	optional bool is_pro = 1;
 }
 
 message CMsgDOTAHasItemDefsQuery {
@@ -365,6 +377,10 @@ message CMsgDOTACombatLogEntry {
 	optional bool heal_from_lifesteal = 56;
 	optional bool modifier_purged = 57;
 	optional bool spell_evaded = 58;
+	optional bool motion_controller_modifier = 59;
+	optional bool long_range_kill = 60;
+	optional uint32 modifier_purge_ability = 61;
+	optional uint32 modifier_purge_npc = 62;
 }
 
 message CMsgDOTAProfileCard {
@@ -735,6 +751,7 @@ message CMsgDOTASeasonRewards {
 		MysteryWheel = 1;
 		AbilityEffect = 2;
 		Other = 3;
+		MysteryWheelPointsBased = 4;
 	}
 
 	repeated .CMsgDOTASeasonRewards.Reward rewards = 1;
@@ -874,6 +891,9 @@ message CMsgDOTAMatch {
 		optional uint32 item_3 = 7;
 		optional uint32 item_4 = 8;
 		optional uint32 item_5 = 9;
+		optional uint32 item_6 = 59;
+		optional uint32 item_7 = 60;
+		optional uint32 item_8 = 61;
 		optional float expected_team_contribution = 10;
 		optional float scaled_metric = 11;
 		optional uint32 previous_rank = 12;
@@ -1030,5 +1050,50 @@ message CMsgDOTAFantasyPlayerStats {
 
 message CMsgDOTAFantasyPlayerMatchStats {
 	repeated .CMsgDOTAFantasyPlayerStats matches = 1;
+}
+
+message CMsgDOTABotDebugInfo {
+	message Bot {
+		message Mode {
+			optional uint32 mode_id = 1;
+			optional float desire = 2;
+			optional uint32 target_entity = 3;
+			optional uint32 target_x = 4;
+			optional uint32 target_y = 5;
+			optional uint32 target_z = 6;
+		}
+
+		message Action {
+			optional uint32 action_id = 1;
+			optional string action_target = 2;
+		}
+
+		optional uint32 player_owner_id = 1;
+		optional uint32 hero_id = 2;
+		optional uint32 difficulty = 3;
+		optional uint32 power_current = 4;
+		optional uint32 power_max = 5;
+		optional uint32 move_target_x = 6;
+		optional uint32 move_target_y = 7;
+		optional uint32 move_target_z = 8;
+		optional uint32 active_mode_id = 9;
+		optional float execution_time = 10;
+		repeated .CMsgDOTABotDebugInfo.Bot.Mode modes = 11;
+		optional .CMsgDOTABotDebugInfo.Bot.Action action = 12;
+	}
+
+	repeated .CMsgDOTABotDebugInfo.Bot bots = 1;
+	optional float desire_push_lane_top = 2;
+	optional float desire_push_lane_mid = 3;
+	optional float desire_push_lane_bot = 4;
+	optional float desire_defend_lane_top = 5;
+	optional float desire_defend_lane_mid = 6;
+	optional float desire_defend_lane_bot = 7;
+	optional float desire_farm_lane_top = 8;
+	optional float desire_farm_lane_mid = 9;
+	optional float desire_farm_lane_bot = 10;
+	optional float desire_farm_roshan = 11;
+	optional float execution_time = 12;
+	repeated uint32 rune_status = 13;
 }
 

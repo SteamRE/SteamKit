@@ -74,6 +74,9 @@ message CSODOTAParty {
 	optional uint32 tourney_bracket_round = 50;
 	optional uint32 tourney_queue_deadline_time = 54;
 	optional .ETourneyQueueDeadlineState tourney_queue_deadline_state = 55 [default = k_ETourneyQueueDeadlineState_Normal];
+	optional uint32 party_builder_slots_to_fill = 56;
+	optional uint32 party_builder_match_groups = 57;
+	optional uint32 party_builder_start_time = 58;
 }
 
 message CSODOTAPartyInvite {
@@ -150,6 +153,7 @@ message CDOTALobbyMember {
 	repeated uint32 custom_game_product_ids = 31;
 	optional uint32 lobby_mvp_vote_account_id = 32;
 	optional .MatchType search_match_type = 33 [default = MATCH_TYPE_CASUAL];
+	optional uint32 favorite_team_and_quality = 34;
 }
 
 message CLobbyTeamDetails {
@@ -242,11 +246,10 @@ message CSODOTALobby {
 	optional .DOTA_CM_PICK cm_pick = 28 [default = DOTA_CM_RANDOM];
 	optional uint64 match_id = 30;
 	optional bool allow_spectating = 31 [default = true];
-	optional .DOTABotDifficulty bot_difficulty = 36 [default = BOT_DIFFICULTY_HARD];
+	optional .DOTABotDifficulty bot_difficulty_radiant = 36 [default = BOT_DIFFICULTY_HARD];
 	optional .DOTAGameVersion game_version = 37 [default = GAME_VERSION_CURRENT];
 	repeated .CLobbyTimedRewardDetails timed_reward_details = 38;
 	optional string pass_key = 39;
-	repeated .DOTABotDifficulty bot_slot_difficulty = 41;
 	optional uint32 leagueid = 42;
 	optional uint32 penalty_level_radiant = 43 [default = 0];
 	optional uint32 penalty_level_dire = 44 [default = 0];
@@ -295,5 +298,12 @@ message CSODOTALobby {
 	optional uint32 weekend_tourney_division_id = 90;
 	optional uint32 weekend_tourney_skill_level = 91;
 	optional uint32 weekend_tourney_bracket_round = 92;
+	optional .DOTABotDifficulty bot_difficulty_dire = 93 [default = BOT_DIFFICULTY_HARD];
+	optional uint64 bot_radiant = 94;
+	optional uint64 bot_dire = 95;
+}
+
+message CMsgLobbyPlaytestDetails {
+	optional string json = 1;
 }
 

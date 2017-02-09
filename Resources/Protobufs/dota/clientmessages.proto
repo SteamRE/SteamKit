@@ -4,6 +4,9 @@ option cc_generic_services = false;
 enum EBaseClientMessages {
 	CM_CustomGameEvent = 280;
 	CM_ClientUIEvent = 282;
+	CM_DevPaletteVisibilityChanged = 283;
+	CM_WorldUIControllerHasPanelChanged = 284;
+	CM_RotateAnchor = 285;
 	CM_MAX_BASE = 300;
 }
 
@@ -24,5 +27,19 @@ message CClientMsg_ClientUIEvent {
 	optional uint32 client_ehandle = 3;
 	optional string data1 = 4;
 	optional string data2 = 5;
+}
+
+message CClientMsg_DevPaletteVisibilityChangedEvent {
+	optional bool visible = 1;
+}
+
+message CClientMsg_WorldUIControllerHasPanelChangedEvent {
+	optional bool has_panel = 1;
+	optional uint32 client_ehandle = 2;
+	optional uint32 literal_hand_type = 3;
+}
+
+message CClientMsg_RotateAnchor {
+	optional float angle = 1;
 }
 

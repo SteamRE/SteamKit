@@ -58,6 +58,10 @@ message CMsgGCToClientFindTopSourceTVGamesResponse {
 	optional bool specific_games = 8;
 }
 
+message CMsgGCToClientTopWeekendTourneyGames {
+	repeated .CSourceTVGameSmall live_games = 1;
+}
+
 message CMsgClientToGCTopMatchesRequest {
 	optional uint32 hero_id = 1;
 	optional uint32 player_account_id = 2;

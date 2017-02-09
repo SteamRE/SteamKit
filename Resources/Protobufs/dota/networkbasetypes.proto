@@ -159,6 +159,7 @@ message CNETMsg_SpawnGroup_Load {
 	optional uint32 worldgroupid = 15;
 	optional uint32 creationsequence = 16;
 	optional string savegamefilename = 17;
+	optional uint32 spawngroupparenthandle = 18;
 }
 
 message CNETMsg_SpawnGroup_ManifestUpdate {
@@ -199,5 +200,8 @@ message CSVCMsg_GameSessionConfiguration {
 	optional string server_ip_address = 13;
 	optional bytes data = 14;
 	optional bool is_localonly = 15;
+	optional bool is_transition = 16;
+	optional string previouslevel = 17;
+	optional string landmarkname = 18;
 }
 
