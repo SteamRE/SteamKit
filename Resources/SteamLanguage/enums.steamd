@@ -185,11 +185,17 @@ enum EPersonaStateFlag flags
 {
 	HasRichPresence = 1;
 	InJoinableGame = 2;
+	Golden = 4; obsolete "no longer has any effect"
 	
-	OnlineUsingWeb = 256;
-	OnlineUsingMobile = 512;
-	OnlineUsingBigPicture = 1024;
-	OnlineUsingVR = 2048;
+	OnlineUsingWeb = 256; obsolete "renamed to ClientTypeWeb"
+	ClientTypeWeb = 256;
+	OnlineUsingMobile = 512; obsolete "renamed to ClientTypeMobile"
+	ClientTypeMobile = 512;
+	OnlineUsingBigPicture = 1024; obsolete "renamed to ClientTypeTenfoot"
+	ClientTypeTenfoot = 1024;
+	OnlineUsingVR = 2048; obsolete "renamed to ClientTypeVR"
+	ClientTypeVR = 2048;
+	LaunchTypeGamepad = 4096;
 };
 
 enum EClientPersonaStateFlag flags
@@ -199,7 +205,7 @@ enum EClientPersonaStateFlag flags
 	QueryPort = 4;
 	SourceID = 8;
 	Presence = 16;
-	Metadata = 32;
+	Metadata = 32; obsolete
 	LastSeen = 64;
 	ClanInfo = 128;
 	GameExtraInfo = 256;
@@ -289,7 +295,8 @@ enum EPaymentMethod
 	EClubPoints = 35;
 	CreditCardJapan = 36;
 	BankTransferJapan = 37;
-	PayEasyJapan = 38;
+	PayEasyJapan = 38; obsolete "renamed to PayEasy"
+	PayEasy = 38;
 	Zong = 39;
 	CultureVoucher = 40;
 	BookVoucher = 41;
@@ -298,7 +305,8 @@ enum EPaymentMethod
 	GameVoucher = 44;
 	Multibanco = 45;
 	Payshop = 46;
-	Maestro = 47;
+	Maestro = 47; obsolete "renamed to MaestroBoaCompra"
+	MaestroBoaCompra = 47;
 	OXXO = 48;
 	ToditoCash = 49;
 	Carnet = 50;
@@ -314,14 +322,28 @@ enum EPaymentMethod
 	DenizBank = 60;
 	PTT = 61;
 	CashU = 62;
-	OneCard = 63;
 	AutoGrant = 64;
 	WebMoneyJapan = 65;
-	Smart2PayTest = 66;
+	OneCard = 66;
+	PSE = 67;
+	Exito = 68;
+	Efecty = 69;
+	Paloto = 70;
+	PinValidda = 71;
+	MangirKart = 72;
+	BancoCreditoDePeru = 73;
+	BBVAContinental = 74;
+	SafetyPay = 75;
+	PagoEfectivo = 76;
+	Trustly = 77;
+	UnionPay = 78;
+	BitCoin = 79;
 	Wallet = 128;
 	Valve = 129;
-	SteamPressMaster = 130;
-	StorePromotion = 131;
+	SteamPressMaster = 130; obsolete "renamed to MasterComp"
+	MasterComp = 130;
+	StorePromotion = 131; obsolete "renamed to Promotional"
+	Promotional = 131;
 	OEMTicket = 256;
 	Split = 512;
 	Complimentary = 1024;
@@ -477,8 +499,10 @@ enum EAppInfoSection
 	Stats = 5;
 	Install = 6;
 	Depots = 7;
-	VAC = 8;
-	DRM = 9;
+	VAC = 8; obsolete
+	VAC_UNUSED = 8; obsolete
+	DRM = 9; obsolete
+	DRM_UNUSED = 9; obsolete
 	UFS = 10;
 	OGG = 11;
 	Items = 12; obsolete
@@ -499,6 +523,7 @@ enum EContentDownloadSourceType
 	CDN = 2;
 	LCS = 3;
 	ProxyCache = 4;
+	LANPeer = 5;
 
 	Max = 5;
 };
@@ -509,9 +534,11 @@ enum EPlatformType
 
 	Win32 = 1;
 	Win64 = 2;
-	Linux = 3;
+	Linux = 3; obsolete "split to Linux64 and Linux32"
+	Linux64 = 3;
 	OSX = 4;
 	PS3 = 5;
+	Linux32 = 6;
 
 	Max = 6;
 };
@@ -519,6 +546,10 @@ enum EPlatformType
 enum EOSType
 {
 	Unknown = -1;
+	
+	IOSUnknown = -600;
+	
+	AndroidUnknown = -500;
 
 	UMQ = -400;
 
@@ -536,6 +567,9 @@ enum EOSType
 	MacOS108 = -89;
 	MacOS109 = -88;
 	MacOS1010 = -87;
+	MacOS1011 = -86;
+	MacOS1012 = -85;
+	MacOSMax = -1;
 
 	LinuxUnknown = -203;
 	Linux22 = -202;
@@ -545,6 +579,7 @@ enum EOSType
 	Linux35 = -198;
 	Linux36 = -197;
 	Linux310 = -196;
+	LinuxMax = -103;
 
 	WinUnknown = 0;
 	Win311 = 1;
@@ -552,20 +587,22 @@ enum EOSType
 	Win98 = 3;
 	WinME = 4;
 	WinNT = 5;
-	Win200 = 6;
+	Win200 = 6; obsolete "renamed to Win2000"
+	Win2000 = 6;
 	WinXP = 7;
 	Win2003 = 8;
 	WinVista = 9;
-	Win7 = 10;
-	Windows7 = 10; obsolete "renamed to Win7"
+	Win7 = 10; obsolete "renamed to Windows7"
+	Windows7 = 10;
 	Win2008 = 11;
 	Win2012 = 12;
-	Win8 = 13;
-	Windows8 = 13; obsolete "renamed to Win8"
-	Win81 = 14;
-	Windows81 = 14; obsolete "renamed to Win81"
+	Win8 = 13; obsolete "renamed to Windows8"
+	Windows8 = 13;
+	Win81 = 14; obsolete "renamed to Windows81"
+	Windows81 = 14;
 	Win2012R2 = 15;
-	Win10 = 16;
+	Win10 = 16; obsolete "renamed to Windows10"
+	Windows10 = 16;
 
 	WinMAX = 15;
 
@@ -579,7 +616,8 @@ enum EServerType
 
 	Shell = 0;
 	GM = 1;
-	BUM = 2;
+	BUM = 2; obsolete
+	BUMOBOSOLETE = 2; obsolete
 	AM = 3;
 	BS = 4;	
 	VS = 5;
@@ -598,7 +636,8 @@ enum EServerType
 	BootstrapOBSOLETE = 16; obsolete;
 	DP = 17;
 	WG = 18;	
-	SM = 19;	
+	SM = 19;
+	SLC = 20;	
 	UFS = 21;	
 	Util = 23;	
 	DSS = 24; obsolete "renamed to Community"
@@ -607,7 +646,8 @@ enum EServerType
 	AppInformation = 26;	
 	Spare = 27;	
 	FTS = 28;	
-	EPM = 29;
+	EPM = 29; obsolete
+	EPMOBSOLETE = 29; obsolete
 	PS = 30;	
 	IS = 31;	
 	CCS = 32;	
@@ -629,7 +669,8 @@ enum EServerType
 	Econ = 48;
 	Backpack = 49;
 	UGS = 50;
-	Store = 51;
+	Store = 51; obsolete "renamed to StoreFeature"
+	StoreFeature = 51;
 	MoneyStats = 52;
 	CRE = 53;
 	UMQ = 54;
@@ -645,8 +686,38 @@ enum EServerType
 	WDS = 64;
 	ACS = 65;
 	PNP = 66;
+	TaxForm = 67;
+	ExternalMonitor = 68;
+	Parental = 69;
+	PartnerUpload = 70;
+	Partner = 71;
+	ES = 72;
+	DepotWebContent = 73;
+	ExternalConfig = 74;
+	GameNotifications = 75;
+	MarketRepl = 76;
+	MarketSearch = 77;
+	Localization = 78;
+	Steam2Emulator = 79;
+	PublicTest = 80;
+	SolrMgr = 81;
+	BroadcastRelay = 82;
+	BroadcastDirectory = 83;
+	VideoManager = 84;
+	TradeOffer = 85;
+	BroadcastChat = 86;
+	Phone = 87;
+	AccountScore = 88;
+	Support = 89;
+	LogRequest = 90;
+	LogWorker = 91;
+	EmailDelivery = 92;
+	InventoryManagement = 93;
+	Auth = 94;
+	StoreCatalog = 95;
+	HLTVRelay = 96;
 
-	Max = 67;
+	Max = 97;
 };
  
 enum EBillingType
@@ -661,8 +732,12 @@ enum EBillingType
 	AutoGrant = 7;
 	OEMTicket = 8;
 	RecurringOption = 9;
+	BillOnceOrCDKey = 10;
+	Repurchaseable = 11;
+	FreeOnDemand = 12;
+	Rental = 13;
 
-	NumBillingTypes = 10;
+	NumBillingTypes = 14;
 };
 
 enum EActivationCodeClass<uint>
@@ -739,8 +814,9 @@ enum ECurrencyCode
 	TWD = 30;
 	SAR = 31;
 	AED = 32;
+	SEK = 33;
 
-	Max = 33;
+	Max = 34;
 };
 
 enum EDepotFileFlag flags

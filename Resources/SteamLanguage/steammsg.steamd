@@ -67,7 +67,11 @@ class MsgClientLogon<EMsg::ClientLogon>
 	const ushort ProtocolVerMinorMinForMachineAuth = 33;
 	const ushort ProtocolVerMinorMinForSessionIDLastAnon = 36;
 	const ushort ProtocolVerMinorMinForEnhancedAppList = 40;
+	const ushort ProtocolVerMinorMinForSteamGuardNotificationUI = 41;
+	const ushort ProtocolVerMinorMinForProtoBufServiceModuleCalls = 42;
 	const ushort ProtocolVerMinorMinForGzipMultiMessages = 43;
+	const ushort ProtocolVerMinorMinForNewVoiceCallAuthorize = 44;
+	const ushort ProtocolVerMinorMinForClientInstanceIDs = 44;
 };
 
 class MsgClientVACBanStatus<EMsg::ClientVACBanStatus>

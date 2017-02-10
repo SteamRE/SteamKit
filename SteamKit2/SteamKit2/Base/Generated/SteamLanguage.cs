@@ -2437,10 +2437,21 @@ namespace SteamKit2
 	{
 		HasRichPresence = 1,
 		InJoinableGame = 2,
+		[Obsolete( "no longer has any effect" )]
+		Golden = 4,
+		[Obsolete( "renamed to ClientTypeWeb" )]
 		OnlineUsingWeb = 256,
+		ClientTypeWeb = 256,
+		[Obsolete( "renamed to ClientTypeMobile" )]
 		OnlineUsingMobile = 512,
+		ClientTypeMobile = 512,
+		[Obsolete( "renamed to ClientTypeTenfoot" )]
 		OnlineUsingBigPicture = 1024,
+		ClientTypeTenfoot = 1024,
+		[Obsolete( "renamed to ClientTypeVR" )]
 		OnlineUsingVR = 2048,
+		ClientTypeVR = 2048,
+		LaunchTypeGamepad = 4096,
 	}
 	[Flags]
 	public enum EClientPersonaStateFlag
@@ -2450,6 +2461,7 @@ namespace SteamKit2
 		QueryPort = 4,
 		SourceID = 8,
 		Presence = 16,
+		[Obsolete]
 		Metadata = 32,
 		LastSeen = 64,
 		ClanInfo = 128,
@@ -2537,7 +2549,9 @@ namespace SteamKit2
 		EClubPoints = 35,
 		CreditCardJapan = 36,
 		BankTransferJapan = 37,
+		[Obsolete( "renamed to PayEasy" )]
 		PayEasyJapan = 38,
+		PayEasy = 38,
 		Zong = 39,
 		CultureVoucher = 40,
 		BookVoucher = 41,
@@ -2546,7 +2560,9 @@ namespace SteamKit2
 		GameVoucher = 44,
 		Multibanco = 45,
 		Payshop = 46,
+		[Obsolete( "renamed to MaestroBoaCompra" )]
 		Maestro = 47,
+		MaestroBoaCompra = 47,
 		OXXO = 48,
 		ToditoCash = 49,
 		Carnet = 50,
@@ -2562,14 +2578,30 @@ namespace SteamKit2
 		DenizBank = 60,
 		PTT = 61,
 		CashU = 62,
-		OneCard = 63,
 		AutoGrant = 64,
 		WebMoneyJapan = 65,
-		Smart2PayTest = 66,
+		OneCard = 66,
+		PSE = 67,
+		Exito = 68,
+		Efecty = 69,
+		Paloto = 70,
+		PinValidda = 71,
+		MangirKart = 72,
+		BancoCreditoDePeru = 73,
+		BBVAContinental = 74,
+		SafetyPay = 75,
+		PagoEfectivo = 76,
+		Trustly = 77,
+		UnionPay = 78,
+		BitCoin = 79,
 		Wallet = 128,
 		Valve = 129,
+		[Obsolete( "renamed to MasterComp" )]
 		SteamPressMaster = 130,
+		MasterComp = 130,
+		[Obsolete( "renamed to Promotional" )]
 		StorePromotion = 131,
+		Promotional = 131,
 		OEMTicket = 256,
 		Split = 512,
 		Complimentary = 1024,
@@ -2715,8 +2747,14 @@ namespace SteamKit2
 		Stats = 5,
 		Install = 6,
 		Depots = 7,
+		[Obsolete]
 		VAC = 8,
+		[Obsolete]
+		VAC_UNUSED = 8,
+		[Obsolete]
 		DRM = 9,
+		[Obsolete]
+		DRM_UNUSED = 9,
 		UFS = 10,
 		OGG = 11,
 		[Obsolete]
@@ -2736,6 +2774,7 @@ namespace SteamKit2
 		CDN = 2,
 		LCS = 3,
 		ProxyCache = 4,
+		LANPeer = 5,
 		Max = 5,
 	}
 	public enum EPlatformType
@@ -2743,14 +2782,19 @@ namespace SteamKit2
 		Unknown = 0,
 		Win32 = 1,
 		Win64 = 2,
+		[Obsolete( "split to Linux64 and Linux32" )]
 		Linux = 3,
+		Linux64 = 3,
 		OSX = 4,
 		PS3 = 5,
+		Linux32 = 6,
 		Max = 6,
 	}
 	public enum EOSType
 	{
 		Unknown = -1,
+		IOSUnknown = -600,
+		AndroidUnknown = -500,
 		UMQ = -400,
 		PS3 = -300,
 		MacOSUnknown = -102,
@@ -2765,6 +2809,9 @@ namespace SteamKit2
 		MacOS108 = -89,
 		MacOS109 = -88,
 		MacOS1010 = -87,
+		MacOS1011 = -86,
+		MacOS1012 = -85,
+		MacOSMax = -1,
 		LinuxUnknown = -203,
 		Linux22 = -202,
 		Linux24 = -201,
@@ -2773,29 +2820,34 @@ namespace SteamKit2
 		Linux35 = -198,
 		Linux36 = -197,
 		Linux310 = -196,
+		LinuxMax = -103,
 		WinUnknown = 0,
 		Win311 = 1,
 		Win95 = 2,
 		Win98 = 3,
 		WinME = 4,
 		WinNT = 5,
+		[Obsolete( "renamed to Win2000" )]
 		Win200 = 6,
+		Win2000 = 6,
 		WinXP = 7,
 		Win2003 = 8,
 		WinVista = 9,
+		[Obsolete( "renamed to Windows7" )]
 		Win7 = 10,
-		[Obsolete( "renamed to Win7" )]
 		Windows7 = 10,
 		Win2008 = 11,
 		Win2012 = 12,
+		[Obsolete( "renamed to Windows8" )]
 		Win8 = 13,
-		[Obsolete( "renamed to Win8" )]
 		Windows8 = 13,
+		[Obsolete( "renamed to Windows81" )]
 		Win81 = 14,
-		[Obsolete( "renamed to Win81" )]
 		Windows81 = 14,
 		Win2012R2 = 15,
+		[Obsolete( "renamed to Windows10" )]
 		Win10 = 16,
+		Windows10 = 16,
 		WinMAX = 15,
 		Max = 26,
 	}
@@ -2805,7 +2857,10 @@ namespace SteamKit2
 		First = 0,
 		Shell = 0,
 		GM = 1,
+		[Obsolete]
 		BUM = 2,
+		[Obsolete]
+		BUMOBOSOLETE = 2,
 		AM = 3,
 		BS = 4,
 		VS = 5,
@@ -2829,6 +2884,7 @@ namespace SteamKit2
 		DP = 17,
 		WG = 18,
 		SM = 19,
+		SLC = 20,
 		UFS = 21,
 		Util = 23,
 		[Obsolete( "renamed to Community" )]
@@ -2839,7 +2895,10 @@ namespace SteamKit2
 		AppInformation = 26,
 		Spare = 27,
 		FTS = 28,
+		[Obsolete]
 		EPM = 29,
+		[Obsolete]
+		EPMOBSOLETE = 29,
 		PS = 30,
 		IS = 31,
 		CCS = 32,
@@ -2861,7 +2920,9 @@ namespace SteamKit2
 		Econ = 48,
 		Backpack = 49,
 		UGS = 50,
+		[Obsolete( "renamed to StoreFeature" )]
 		Store = 51,
+		StoreFeature = 51,
 		MoneyStats = 52,
 		CRE = 53,
 		UMQ = 54,
@@ -2877,7 +2938,37 @@ namespace SteamKit2
 		WDS = 64,
 		ACS = 65,
 		PNP = 66,
-		Max = 67,
+		TaxForm = 67,
+		ExternalMonitor = 68,
+		Parental = 69,
+		PartnerUpload = 70,
+		Partner = 71,
+		ES = 72,
+		DepotWebContent = 73,
+		ExternalConfig = 74,
+		GameNotifications = 75,
+		MarketRepl = 76,
+		MarketSearch = 77,
+		Localization = 78,
+		Steam2Emulator = 79,
+		PublicTest = 80,
+		SolrMgr = 81,
+		BroadcastRelay = 82,
+		BroadcastDirectory = 83,
+		VideoManager = 84,
+		TradeOffer = 85,
+		BroadcastChat = 86,
+		Phone = 87,
+		AccountScore = 88,
+		Support = 89,
+		LogRequest = 90,
+		LogWorker = 91,
+		EmailDelivery = 92,
+		InventoryManagement = 93,
+		Auth = 94,
+		StoreCatalog = 95,
+		HLTVRelay = 96,
+		Max = 97,
 	}
 	public enum EBillingType
 	{
@@ -2891,7 +2982,11 @@ namespace SteamKit2
 		AutoGrant = 7,
 		OEMTicket = 8,
 		RecurringOption = 9,
-		NumBillingTypes = 10,
+		BillOnceOrCDKey = 10,
+		Repurchaseable = 11,
+		FreeOnDemand = 12,
+		Rental = 13,
+		NumBillingTypes = 14,
 	}
 	public enum EActivationCodeClass : uint
 	{
@@ -2962,7 +3057,8 @@ namespace SteamKit2
 		TWD = 30,
 		SAR = 31,
 		AED = 32,
-		Max = 33,
+		SEK = 33,
+		Max = 34,
 	}
 	[Flags]
 	public enum EDepotFileFlag
