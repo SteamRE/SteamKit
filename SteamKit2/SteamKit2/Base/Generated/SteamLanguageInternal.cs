@@ -1952,7 +1952,9 @@ namespace SteamKit2.Internal
 
 	public class MsgClientSendGuestPass : ISteamSerializableMessage
 	{
+		#pragma warning disable 0612
 		public EMsg GetEMsg() { return EMsg.ClientSendGuestPass; }
+		#pragma warning restore 0612
 
 		// Static size: 8
 		public ulong GiftId { get; set; }

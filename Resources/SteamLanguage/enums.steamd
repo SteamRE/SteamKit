@@ -110,6 +110,9 @@ enum EAccountFlags flags
 	BannedFromWebAPI = 33554432;
 	ClansOnlyFromFriends = 67108864;
 	GlobalModerator = 134217728;
+	ParentalSettings = 268435456;
+	ThirdPartySupport = 536870912;
+	NeedsSSANextSteamLogon = 1073741824;
 };
 
 enum EClanPermission flags
@@ -173,6 +176,7 @@ enum EFriendFlags flags
 	Ignored = 512;
 	IgnoredFriend = 1024;
 	Suggested = 2048;
+	ChatMember = 4096;
 
 	FlagAll = 65535;
 };
@@ -227,6 +231,10 @@ enum ELicenseFlags flags
 	CancelledByAdmin = 0x20;
 	LowViolenceContent = 0x40;
 	ImportedFromSteam2 = 0x80;
+	ForceRunRestriction = 0x100;
+	RegionRestrictionExpired = 0x200;
+	CancelledByFriendlyFraudLock = 0x400;
+	NotActivated = 0x800;
 };
 
 enum ELicenseType
@@ -238,6 +246,7 @@ enum ELicenseType
 	RecurringChargeLimitedUse = 4;
 	RecurringChargeLimitedUseWithOverages = 5;
 	RecurringOption = 6;
+	LimitedUseDelayedActivation = 7;
 };
 
 enum EPaymentMethod
@@ -745,6 +754,7 @@ enum EDepotFileFlag flags
 	Directory = 64;
 	CustomExecutable = 128;
 	InstallScript = 256;
+	Symlink = 512;
 };
 
 enum EWorkshopEnumerationType
@@ -822,6 +832,12 @@ enum EEconTradeResponse
 	InitiatorSteamGuardDuration = 23;
 	InitiatorPasswordResetProbation = 24;
 	InitiatorNewDeviceCooldown = 25;
+	InitiatorSentInvalidCookie = 26;
+	NeedsEmailConfirmation = 27;
+	InitiatorRecentEmailChange = 28;
+	NeedsMobileConfirmation = 29;
+	TradingHoldForClearedTradeOffersInitiator = 30;
+	WouldExceedMaxAssetCount = 31;
 	OKToDeliver = 50;
 };
 
