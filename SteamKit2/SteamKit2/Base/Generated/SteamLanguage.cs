@@ -1789,8 +1789,8 @@ namespace SteamKit2
 		[Obsolete( "renamed to UDSHasSession" )]
 		UDSFindSession = 7006,
 		UDSHasSession = 7006,
-		UDSFindSessionResponse = 7007,
 		[Obsolete( "renamed to UDSHasSessionResponse" )]
+		UDSFindSessionResponse = 7007,
 		UDSHasSessionResponse = 7007,
 		MPASBase = 7100,
 		MPASVacBanReset = 7101,

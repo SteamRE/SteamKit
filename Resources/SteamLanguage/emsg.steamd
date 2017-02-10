@@ -1565,8 +1565,8 @@ enum EMsg
 	ClientUDSInviteToGame = 7005;
 	UDSFindSession = 7006; obsolete "renamed to UDSHasSession"
 	UDSHasSession = 7006;
-	UDSFindSessionResponse = 7007;
-	UDSHasSessionResponse = 7007; obsolete "renamed to UDSHasSessionResponse"
+	UDSFindSessionResponse = 7007; obsolete "renamed to UDSHasSessionResponse"
+	UDSHasSessionResponse = 7007;
 
 	MPASBase = 7100;
 	MPASVacBanReset = 7101;
