@@ -20,7 +20,7 @@ namespace NetHookAnalyzer2.Specializations
             {42, typeof(CMsgGCNotification)},
             {1001, typeof(CSOPartyInvite)},
             {2003, typeof(CSOTFParty)},
-            {2004, typeof(CSOTFLobby)},
+            {2004, typeof(CSOTFGameServerLobby)},
             {2006, typeof(CSOTFPartyInvite)},
         };
     }
