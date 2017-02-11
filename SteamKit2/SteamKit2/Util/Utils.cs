@@ -73,7 +73,7 @@ namespace SteamKit2
                                 switch ( ver.Minor )
                                 {
                                     case 0:
-                                        return EOSType.Win200;
+                                        return EOSType.Win2000;
 
                                     case 1:
                                         return EOSType.WinXP;
@@ -93,16 +93,16 @@ namespace SteamKit2
                                         return EOSType.WinVista; // Also Server 2008
 
                                     case 1:
-                                        return EOSType.Win7; // Also Server 2008 R2
+                                        return EOSType.Windows7; // Also Server 2008 R2
 
                                     case 2:
-                                        return EOSType.Win8; // Also Server 2012
+                                        return EOSType.Windows8; // Also Server 2012
 
                                     // Note: The OSVersion property reports the same version number (6.2.0.0) for both Windows 8 and Windows 8.1.- http://msdn.microsoft.com/en-us/library/system.environment.osversion(v=vs.110).aspx
                                     // In practice, this will only get hit if the application targets Windows 8.1 in the app manifest.
                                     // See http://msdn.microsoft.com/en-us/library/windows/desktop/dn481241(v=vs.85).aspx for more info.
                                     case 3:
-                                        return EOSType.Win81; // Also Server 2012 R2
+                                        return EOSType.Windows81; // Also Server 2012 R2
                                 }
 
                                 goto default;
