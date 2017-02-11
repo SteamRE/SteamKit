@@ -107,6 +107,9 @@ namespace SteamKit2
 
                                 goto default;
 
+                            case 10:
+                                return EOSType.Windows10;
+
                             default:
                                 return EOSType.WinUnknown;
                         }
@@ -129,6 +132,12 @@ namespace SteamKit2
 
                                 case 14:
                                    return EOSType.MacOS1010; // "Yosemite"
+
+                                case 15:
+                                    return EOSType.MacOS1011; // El Capitan
+
+                                case 16:
+                                    return EOSType.MacOS1012; // Sierra
 
                                 default:
                                     return EOSType.MacOSUnknown;
