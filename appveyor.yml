@@ -41,7 +41,7 @@ after_build:
       $version = $null
       if (Test-Path Env:APPVEYOR_REPO_TAG_NAME)
       {
-        $version = (Get-Item Env:APPVEYOR_REPO_TAG_NAME).Value
+          $version = (Get-Item Env:APPVEYOR_REPO_TAG_NAME).Value
       }
       
       if (![string]::IsNullOrEmpty($version))
