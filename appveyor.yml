@@ -66,9 +66,9 @@ test_script:
 artifacts:
   - path: NetHook2.zip
     name: NetHook2
-  - path: '**\*.nupkg'
+  - path: 'SteamKit2.*.nupkg'
     name: 'NuGet Package'
-  - path: 'Resources\NetHookAnalyzer2\Bin\$(configuration)'
+  - path: 'Resources\NetHookAnalyzer2\NetHookAnalyzer2\Bin\$(configuration)'
     name: 'NetHook Analyzer 2'
 
 deploy:
