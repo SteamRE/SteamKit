@@ -1,4 +1,4 @@
-version: 1.0.{build}-Alpha
+version: 1.8.1.{build}
 os: Visual Studio 2015
 
 cache:
@@ -8,7 +8,9 @@ cache:
 assembly_info:
   patch: true
   file: AssemblyInfo.cs
-  assembly_informational_version: "{version} - CI (AppVeyor)"
+  assembly_version: "1.8.1"
+  assembly_file_version: "{version}"
+  assembly_informational_version: "{version} - CI (AppVeyor, branch: {branch})"
 
 configuration:
   - Debug
@@ -65,29 +67,31 @@ test_script:
 
 artifacts:
   - path: NetHook2.zip
-    name: NetHook2
   - path: 'SteamKit2.*.nupkg'
-    name: 'NuGet Package'
+    name: SteamKit2.nupkg
   - path: 'Resources\NetHookAnalyzer2\NetHookAnalyzer2\Bin\$(configuration)'
-    name: 'NetHook Analyzer 2'
+    name: NetHookAnalyzer2.zip
 
 deploy:
+
   - provider: NuGet
     api_key:
       secure: 'Qtxl16gv6dxg4FXOPLiNkLkTuVdPcso3IS99WgRO7IXyqgLJQJ3Ldrnymai2+1Uo'
     skip_symbols: false
-    artifact: 'NuGet Package'
+    artifact: SteamKit2.nupkg
     on:
       #branch: master
       configuration: Release
       appveyor_repo_tag: true
+
   - provider: GitHub
     auth_token:
       secure: 'KEOYmhFMh4Ea7RVYmX1Sv/1SWQW5uoNv6p3+aUtJXw/2Vbp2PEmbJxYJxO9xIuc9'
     release: 'SteamKit2 $(appveyor_repo_tag_name)'
-    artifact: 'NuGet Package, NetHook Analyzer 2'
+    artifact: /.*/
     draft: false
     prerelease: true
+    tag: $(appveyor_repo_tag_name)
     on:
       #branch: master
       configuration: Release
