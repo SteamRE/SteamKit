@@ -38,7 +38,12 @@ after_build:
   - '7z a NetHook2.zip .\Resources\NetHook2\%SK_BUILD_CONFIGURATION%\*.dll .\Resources\NetHook2\%SK_BUILD_CONFIGURATION%\*.pdb'
   - ps: >-
       $args = @('pack', 'SteamKit2\SteamKit2.nuspec')
-      $version = Get-Item Env:APPVEYOR_REPO_TAG_NAME
+      $version = $null
+      if (Test-Path Env:APPVEYOR_REPO_TAG_NAME)
+      {
+        $version = (Get-Item Env:APPVEYOR_REPO_TAG_NAME).Value
+      }
+      
       if (![string]::IsNullOrEmpty($version))
       {
           $args += $('-Version', $version)
