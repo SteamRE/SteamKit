@@ -36,7 +36,7 @@ build_script:
 
 after_build:
   - '7z a NetHook2.zip .\Resources\NetHook2\%SK_BUILD_CONFIGURATION%\*.dll .\Resources\NetHook2\%SK_BUILD_CONFIGURATION%\*.pdb'
-  - ps: >-
+  - ps: |
       $args = @('pack', 'SteamKit2\SteamKit2.nuspec')
       $version = $null
       if (Test-Path Env:APPVEYOR_REPO_TAG_NAME)
@@ -51,7 +51,7 @@ after_build:
       & nuget $args
 
 test_script:
-  - ps: >-
+  - ps: |
       $TestAssembly = "SteamKit2\Tests\Bin\$env:SK_BUILD_CONFIGURATION\Tests.dll"
       
       if (Test-Path $TestAssembly)
