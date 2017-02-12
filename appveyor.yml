@@ -80,7 +80,7 @@ deploy:
     skip_symbols: false
     artifact: SteamKit2.nupkg
     on:
-      #branch: master
+      branch: master
       configuration: Release
       appveyor_repo_tag: true
 
@@ -93,6 +93,6 @@ deploy:
     prerelease: true
     tag: $(appveyor_repo_tag_name)
     on:
-      #branch: master
+      branch: master
       configuration: Release
       appveyor_repo_tag: true
