@@ -70,7 +70,7 @@ artifacts:
   - path: 'SteamKit2.*.nupkg'
     name: SteamKit2.nupkg
   - path: 'Resources\NetHookAnalyzer2\NetHookAnalyzer2\Bin\$(configuration)'
-    name: NetHookAnalyzer2.zip
+    name: NetHookAnalyzer2
 
 deploy:
 
