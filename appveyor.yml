@@ -5,6 +5,11 @@ cache:
   - '%LocalAppData%\NuGet\Cache'
   - '%Temp%\nethook2-dependencies -> Resources\NetHook2\SetupDependencies.ps1'
 
+assembly_info:
+  patch: true
+  file: AssemblyInfo.cs
+  assembly_informational_version: "{version} - CI (AppVeyor)"
+
 configuration:
   - Debug
   - Release
@@ -27,9 +32,11 @@ build_script:
   - msbuild SteamKit2\SteamKit2.sln
   - msbuild Samples\Samples.sln
   - msbuild Resources\NetHook2\NetHook2.sln
+  - msbuild Resources\NetHookAnalyzer2\NetHookAnalyzer2.sln
 
 after_build:
   - '7z a NetHook2.zip .\Resources\NetHook2\%SK_BUILD_CONFIGURATION%\*.dll .\Resources\NetHook2\%SK_BUILD_CONFIGURATION%\*.pdb'
+  - 'nuget pack SteamKit2\SteamKit2.nuspec -Version %APPVEYOR_REPO_TAG_NAME%'
 
 test_script:
   - ps: >-
@@ -47,3 +54,29 @@ test_script:
 artifacts:
   - path: NetHook2.zip
     name: NetHook2
+  - path: '**\*.nupkg'
+    name: 'NuGet Package'
+  - path: 'Resources\NetHookAnalyzer2\Bin\$(configuration)'
+    name: 'NetHook Analyzer 2'
+
+deploy:
+  - provider: NuGet
+    api_key:
+      secure: 'Qtxl16gv6dxg4FXOPLiNkLkTuVdPcso3IS99WgRO7IXyqgLJQJ3Ldrnymai2+1Uo'
+    skip_symbols: false
+    artifact: 'NuGet Package'
+    on:
+      #branch: master
+      configuration: Release
+      appveyor_repo_tag: true
+  - provider: GitHub
+    auth_token:
+      secure: 'KEOYmhFMh4Ea7RVYmX1Sv/1SWQW5uoNv6p3+aUtJXw/2Vbp2PEmbJxYJxO9xIuc9'
+    release: 'SteamKit2 $(appveyor_repo_tag_name)'
+    artifact: 'NuGet Package, NetHook Analyzer 2'
+    draft: false
+    prerelease: true
+    on:
+      #branch: master
+      configuration: Release
+      appveyor_repo_tag: true
