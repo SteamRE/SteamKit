@@ -1,9 +1,16 @@
-version: 1.0.{build}-Alpha
+version: 1.8.0.{build}
 os: Visual Studio 2015
 
 cache:
   - '%LocalAppData%\NuGet\Cache'
   - '%Temp%\nethook2-dependencies -> Resources\NetHook2\SetupDependencies.ps1'
+
+assembly_info:
+  patch: true
+  file: AssemblyInfo.cs
+  assembly_version: "1.8.0"
+  assembly_file_version: "{version}"
+  assembly_informational_version: "{version} - CI (AppVeyor, branch: {branch})"
 
 configuration:
   - Debug
@@ -27,12 +34,26 @@ build_script:
   - msbuild SteamKit2\SteamKit2.sln
   - msbuild Samples\Samples.sln
   - msbuild Resources\NetHook2\NetHook2.sln
+  - msbuild Resources\NetHookAnalyzer2\NetHookAnalyzer2.sln
 
 after_build:
   - '7z a NetHook2.zip .\Resources\NetHook2\%SK_BUILD_CONFIGURATION%\*.dll .\Resources\NetHook2\%SK_BUILD_CONFIGURATION%\*.pdb'
+  - ps: |
+      $args = @('pack', 'SteamKit2\SteamKit2.nuspec')
+      $version = $null
+      if (Test-Path Env:APPVEYOR_REPO_TAG_NAME)
+      {
+          $version = (Get-Item Env:APPVEYOR_REPO_TAG_NAME).Value
+      }
+      
+      if (![string]::IsNullOrEmpty($version))
+      {
+          $args += $('-Version', $version)
+      }
+      & nuget $args
 
 test_script:
-  - ps: >-
+  - ps: |
       $TestAssembly = "SteamKit2\Tests\Bin\$env:SK_BUILD_CONFIGURATION\Tests.dll"
       
       if (Test-Path $TestAssembly)
@@ -46,4 +67,32 @@ test_script:
 
 artifacts:
   - path: NetHook2.zip
-    name: NetHook2
+  - path: 'SteamKit2.*.nupkg'
+    name: SteamKit2.nupkg
+  - path: 'Resources\NetHookAnalyzer2\NetHookAnalyzer2\Bin\$(configuration)'
+    name: NetHookAnalyzer2
+
+deploy:
+
+  - provider: NuGet
+    api_key:
+      secure: 'Qtxl16gv6dxg4FXOPLiNkLkTuVdPcso3IS99WgRO7IXyqgLJQJ3Ldrnymai2+1Uo'
+    skip_symbols: false
+    artifact: SteamKit2.nupkg
+    on:
+      branch: master
+      configuration: Release
+      appveyor_repo_tag: true
+
+  - provider: GitHub
+    auth_token:
+      secure: 'KEOYmhFMh4Ea7RVYmX1Sv/1SWQW5uoNv6p3+aUtJXw/2Vbp2PEmbJxYJxO9xIuc9'
+    release: 'SteamKit2 $(appveyor_repo_tag_name)'
+    artifact: /.*/
+    draft: false
+    prerelease: true
+    tag: $(appveyor_repo_tag_name)
+    on:
+      branch: master
+      configuration: Release
+      appveyor_repo_tag: true
