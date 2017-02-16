@@ -411,7 +411,7 @@ BOOL SelfInjectIntoSteam(const HWND hWindow, const int iSteamProcessID, const ch
 		return false;
 	}
 
-	if (WaitForSingleObject(hRemoteThread, 5000 /* milliseconds */) == WAIT_TIMEOUT)
+	if (WaitForSingleObject(hRemoteThread, 10000 /* milliseconds */) == WAIT_TIMEOUT)
 	{
 		MessageBoxA(hWindow, "Injection timed out.", "NetHook2", MB_OK | MB_ICONASTERISK);
 		return false;
