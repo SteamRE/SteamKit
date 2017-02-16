@@ -1834,13 +1834,14 @@ namespace SteamKit2.Internal
 		public EMsg GetEMsg() { return EMsg.ClientSetIgnoreFriendResponse; }
 
 		// Static size: 8
-		public ulong Unknown { get; set; }
+		private ulong friendId;
+		public SteamID FriendId { get { return new SteamID( friendId ); } set { friendId = value.ConvertToUInt64(); } }
 		// Static size: 4
 		public EResult Result { get; set; }
 
 		public MsgClientSetIgnoreFriendResponse()
 		{
-			Unknown = 0;
+			friendId = 0;
 			Result = 0;
 		}
 
@@ -1848,7 +1849,7 @@ namespace SteamKit2.Internal
 		{
 			BinaryWriter bw = new BinaryWriter( stream );
 
-			bw.Write( Unknown );
+			bw.Write( friendId );
 			bw.Write( (int)Result );
 
 		}
@@ -1857,7 +1858,7 @@ namespace SteamKit2.Internal
 		{
 			BinaryReader br = new BinaryReader( stream );
 
-			Unknown = br.ReadUInt64();
+			friendId = br.ReadUInt64();
 			Result = (EResult)br.ReadInt32();
 		}
 	}

@@ -285,8 +285,7 @@ class MsgClientSetIgnoreFriend<EMsg::ClientSetIgnoreFriend>
 
 class MsgClientSetIgnoreFriendResponse<EMsg::ClientSetIgnoreFriendResponse>
 {
-	ulong unknown;
-
+	steamidmarshal ulong friendId;
 	EResult result;
 };
 
