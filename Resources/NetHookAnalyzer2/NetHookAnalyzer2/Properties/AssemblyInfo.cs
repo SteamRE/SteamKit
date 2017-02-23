@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("SteamRE")]
 [assembly: AssemblyProduct("NetHookAnalyzer2")]
-[assembly: AssemblyCopyright("Copyright © SteamRE 2014")]
+[assembly: AssemblyCopyright("Copyright © SteamRE 2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
