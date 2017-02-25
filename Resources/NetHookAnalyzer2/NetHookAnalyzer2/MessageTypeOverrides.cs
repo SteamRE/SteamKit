@@ -22,6 +22,10 @@ namespace NetHookAnalyzer2
             { EMsg.ClientFriendMsgIncoming, typeof(CMsgClientFriendMsgIncoming) },
             { EMsg.ClientFriendMsgEchoToSender, typeof(CMsgClientFriendMsgIncoming) },
             { EMsg.ClientCurrentUIMode, typeof(CMsgClientUIMode) },
+            { EMsg.ClientCreateAccountProto, typeof(CMsgClientCreateAccount) },
+            { EMsg.ClientCreateAccountProtoResponse, typeof(CMsgClientCreateAccountResponse) },
+            { EMsg.ClientGetNumberOfCurrentPlayersDP, typeof(CMsgDPGetNumberOfCurrentPlayers) },
+            { EMsg.ClientGetNumberOfCurrentPlayersDPResponse, typeof(CMsgDPGetNumberOfCurrentPlayersResponse) },
 
             { EMsg.AMGameServerUpdate, typeof(CMsgGameServerData) },
 
@@ -53,6 +57,9 @@ namespace NetHookAnalyzer2
                 [(uint)Dota.ESOMsg.k_ESOMsg_Destroy] = typeof(Dota.CMsgSOSingleObject),
                 [(uint)Dota.ESOMsg.k_ESOMsg_Update] = typeof(Dota.CMsgSOSingleObject),
                 [(uint)Dota.ESOMsg.k_ESOMsg_UpdateMultiple] = typeof(Dota.CMsgSOMultipleObjects),
+
+                [(uint)Dota.EDOTAGCMsg.k_EMsgGCToClientTeamsInfo] = typeof(Dota.CMsgDOTATeamsInfo),
+                [(uint)Dota.EDOTAGCMsg.k_EMsgClientToGCMyTeamInfoRequest] = typeof(Dota.CMsgDOTAMyTeamInfoRequest),
             },
             [WellKnownAppIDs.CounterStrikeGlobalOffensive] = new Dictionary<uint, Type>
             {
