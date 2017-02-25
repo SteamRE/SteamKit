@@ -14,7 +14,7 @@ namespace NetHookAnalyzer2
 {
 	class TreeNodeObjectExplorer
 	{
-		public static bool ShowAll = false;
+		public static bool ShowAll = true;
 
 		public TreeNodeObjectExplorer(string name, object value, bool showFaded = false)
 		{
