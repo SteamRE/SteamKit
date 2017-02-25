@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("SteamKit Sample 1: Logon")]
 [assembly: AssemblyDescription("SteamKit Sample 1: Logon")]
 [assembly: AssemblyConfiguration( "" )]
-[assembly: AssemblyCompany( "" )]
+[assembly: AssemblyCompany( "SteamRE Team" )]
 [assembly: AssemblyProduct("Sample1_CallbackManager")]
 [assembly: AssemblyCopyright( "Copyright © Ryan Stecker 2017" )]
 [assembly: AssemblyTrademark( "" )]

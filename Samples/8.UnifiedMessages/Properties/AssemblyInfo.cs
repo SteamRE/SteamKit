@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle( "SteamKit Sample 8: UnifiedMessages" )]
 [assembly: AssemblyDescription( "SteamKit Sample 8: UnifiedMessages" )]
 [assembly: AssemblyConfiguration( "" )]
-[assembly: AssemblyCompany( "" )]
+[assembly: AssemblyCompany( "SteamRE Team" )]
 [assembly: AssemblyProduct( "Sample8_UnifiedMessages" )]
 [assembly: AssemblyCopyright( "Copyright © Ryan Stecker 2017" )]
 [assembly: AssemblyTrademark( "" )]

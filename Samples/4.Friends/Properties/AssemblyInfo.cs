@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("SteamKit Sample 4: Friends")]
 [assembly: AssemblyDescription("SteamKit Sample 4: Friends")]
 [assembly: AssemblyConfiguration( "" )]
-[assembly: AssemblyCompany( "" )]
+[assembly: AssemblyCompany( "SteamRE Team" )]
 [assembly: AssemblyProduct("Sample4_Friends")]
 [assembly: AssemblyCopyright( "Copyright © Ryan Stecker 2017" )]
 [assembly: AssemblyTrademark( "" )]

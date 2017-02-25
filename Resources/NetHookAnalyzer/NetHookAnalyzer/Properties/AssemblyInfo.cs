@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle( "NetHookAnalyzer" )]
-[assembly: AssemblyDescription( "" )]
+[assembly: AssemblyTitle( "NetHook Analyzer" )]
+[assembly: AssemblyDescription( "NetHook Analyzer" )]
 [assembly: AssemblyConfiguration( "" )]
 [assembly: AssemblyCompany( "SteamRE" )]
 [assembly: AssemblyProduct( "NetHookAnalyzer" )]
-[assembly: AssemblyCopyright( "Copyright © SteamRE 2017" )]
+[assembly: AssemblyCopyright( "Copyright © SteamRE Team 2017" )]
 [assembly: AssemblyTrademark( "" )]
 [assembly: AssemblyCulture( "" )]
 

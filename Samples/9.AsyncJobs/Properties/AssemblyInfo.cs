@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("SteamKit Sample 9: AsyncJobs")]
 [assembly: AssemblyDescription("SteamKit Sample 9: AsyncJobs")]
 [assembly: AssemblyConfiguration( "" )]
-[assembly: AssemblyCompany( "" )]
+[assembly: AssemblyCompany( "SteamRE Team" )]
 [assembly: AssemblyProduct("Sample9_AsyncJobs")]
 [assembly: AssemblyCopyright( "Copyright © Ryan Stecker 2017" )]
 [assembly: AssemblyTrademark( "" )]
