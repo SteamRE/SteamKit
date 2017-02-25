@@ -257,6 +257,7 @@
 			this.itemsListView.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.itemsListView.FullRowSelect = true;
 			this.itemsListView.GridLines = true;
+			this.itemsListView.HideSelection = false;
 			this.itemsListView.Location = new System.Drawing.Point(4, 74);
 			this.itemsListView.MultiSelect = false;
 			this.itemsListView.Name = "itemsListView";
