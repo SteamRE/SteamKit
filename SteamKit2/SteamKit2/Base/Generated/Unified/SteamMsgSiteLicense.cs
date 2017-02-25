@@ -8,6 +8,8 @@
 //------------------------------------------------------------------------------
 #pragma warning disable 1591
 
+// Option: missing-value detection (*Specified/ShouldSerialize*/Reset*) enabled
+    
 // Generated from: steammessages_site_license.steamclient.proto
 // Note: requires additional types generated from: steammessages_unified_base.steamclient.proto
 namespace SteamKit2.Unified.Internal
@@ -18,14 +20,23 @@ namespace SteamKit2.Unified.Internal
     public CSiteLicense_ClientSiteAssociation_Notification() {}
     
 
-    private byte[] _site_association_file = null;
+    private byte[] _site_association_file;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"site_association_file", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
     public byte[] site_association_file
     {
-      get { return _site_association_file; }
+      get { return _site_association_file?? null; }
       set { _site_association_file = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool site_association_fileSpecified
+    {
+      get { return _site_association_file != null; }
+      set { if (value == (_site_association_file== null)) _site_association_file = value ? this.site_association_file : (byte[])null; }
+    }
+    private bool ShouldSerializesite_association_file() { return site_association_fileSpecified; }
+    private void Resetsite_association_file() { site_association_fileSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

@@ -8,6 +8,8 @@
 //------------------------------------------------------------------------------
 #pragma warning disable 1591
 
+// Option: missing-value detection (*Specified/ShouldSerialize*/Reset*) enabled
+    
 // Generated from: steammessages_player.steamclient.proto
 // Note: requires additional types generated from: steammessages_unified_base.steamclient.proto
 namespace SteamKit2.Unified.Internal
@@ -18,14 +20,23 @@ namespace SteamKit2.Unified.Internal
     public CPlayer_GetGameBadgeLevels_Request() {}
     
 
-    private uint _appid = default(uint);
+    private uint? _appid;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"appid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint appid
     {
-      get { return _appid; }
+      get { return _appid?? default(uint); }
       set { _appid = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool appidSpecified
+    {
+      get { return _appid != null; }
+      set { if (value == (_appid== null)) _appid = value ? this.appid : (uint?)null; }
+    }
+    private bool ShouldSerializeappid() { return appidSpecified; }
+    private void Resetappid() { appidSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -37,14 +48,23 @@ namespace SteamKit2.Unified.Internal
     public CPlayer_GetGameBadgeLevels_Response() {}
     
 
-    private uint _player_level = default(uint);
+    private uint? _player_level;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"player_level", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint player_level
     {
-      get { return _player_level; }
+      get { return _player_level?? default(uint); }
       set { _player_level = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool player_levelSpecified
+    {
+      get { return _player_level != null; }
+      set { if (value == (_player_level== null)) _player_level = value ? this.player_level : (uint?)null; }
+    }
+    private bool ShouldSerializeplayer_level() { return player_levelSpecified; }
+    private void Resetplayer_level() { player_levelSpecified = false; }
+    
     private readonly global::System.Collections.Generic.List<CPlayer_GetGameBadgeLevels_Response.Badge> _badges = new global::System.Collections.Generic.List<CPlayer_GetGameBadgeLevels_Response.Badge>();
     [global::ProtoBuf.ProtoMember(2, Name=@"badges", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public global::System.Collections.Generic.List<CPlayer_GetGameBadgeLevels_Response.Badge> badges
@@ -58,32 +78,59 @@ namespace SteamKit2.Unified.Internal
     public Badge() {}
     
 
-    private int _level = default(int);
+    private int? _level;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"level", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
     public int level
     {
-      get { return _level; }
+      get { return _level?? default(int); }
       set { _level = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool levelSpecified
+    {
+      get { return _level != null; }
+      set { if (value == (_level== null)) _level = value ? this.level : (int?)null; }
+    }
+    private bool ShouldSerializelevel() { return levelSpecified; }
+    private void Resetlevel() { levelSpecified = false; }
+    
 
-    private int _series = default(int);
+    private int? _series;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"series", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
     public int series
     {
-      get { return _series; }
+      get { return _series?? default(int); }
       set { _series = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool seriesSpecified
+    {
+      get { return _series != null; }
+      set { if (value == (_series== null)) _series = value ? this.series : (int?)null; }
+    }
+    private bool ShouldSerializeseries() { return seriesSpecified; }
+    private void Resetseries() { seriesSpecified = false; }
+    
 
-    private uint _border_color = default(uint);
+    private uint? _border_color;
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"border_color", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint border_color
     {
-      get { return _border_color; }
+      get { return _border_color?? default(uint); }
       set { _border_color = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool border_colorSpecified
+    {
+      get { return _border_color != null; }
+      set { if (value == (_border_color== null)) _border_color = value ? this.border_color : (uint?)null; }
+    }
+    private bool ShouldSerializeborder_color() { return border_colorSpecified; }
+    private void Resetborder_color() { border_colorSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -100,14 +147,23 @@ namespace SteamKit2.Unified.Internal
     public CPlayer_GetLastPlayedTimes_Request() {}
     
 
-    private uint _min_last_played = default(uint);
+    private uint? _min_last_played;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"min_last_played", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint min_last_played
     {
-      get { return _min_last_played; }
+      get { return _min_last_played?? default(uint); }
       set { _min_last_played = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool min_last_playedSpecified
+    {
+      get { return _min_last_played != null; }
+      set { if (value == (_min_last_played== null)) _min_last_played = value ? this.min_last_played : (uint?)null; }
+    }
+    private bool ShouldSerializemin_last_played() { return min_last_playedSpecified; }
+    private void Resetmin_last_played() { min_last_playedSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -131,41 +187,77 @@ namespace SteamKit2.Unified.Internal
     public Game() {}
     
 
-    private int _appid = default(int);
+    private int? _appid;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"appid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
     public int appid
     {
-      get { return _appid; }
+      get { return _appid?? default(int); }
       set { _appid = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool appidSpecified
+    {
+      get { return _appid != null; }
+      set { if (value == (_appid== null)) _appid = value ? this.appid : (int?)null; }
+    }
+    private bool ShouldSerializeappid() { return appidSpecified; }
+    private void Resetappid() { appidSpecified = false; }
+    
 
-    private uint _last_playtime = default(uint);
+    private uint? _last_playtime;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"last_playtime", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint last_playtime
     {
-      get { return _last_playtime; }
+      get { return _last_playtime?? default(uint); }
       set { _last_playtime = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool last_playtimeSpecified
+    {
+      get { return _last_playtime != null; }
+      set { if (value == (_last_playtime== null)) _last_playtime = value ? this.last_playtime : (uint?)null; }
+    }
+    private bool ShouldSerializelast_playtime() { return last_playtimeSpecified; }
+    private void Resetlast_playtime() { last_playtimeSpecified = false; }
+    
 
-    private int _playtime_2weeks = default(int);
+    private int? _playtime_2weeks;
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"playtime_2weeks", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
     public int playtime_2weeks
     {
-      get { return _playtime_2weeks; }
+      get { return _playtime_2weeks?? default(int); }
       set { _playtime_2weeks = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool playtime_2weeksSpecified
+    {
+      get { return _playtime_2weeks != null; }
+      set { if (value == (_playtime_2weeks== null)) _playtime_2weeks = value ? this.playtime_2weeks : (int?)null; }
+    }
+    private bool ShouldSerializeplaytime_2weeks() { return playtime_2weeksSpecified; }
+    private void Resetplaytime_2weeks() { playtime_2weeksSpecified = false; }
+    
 
-    private int _playtime_forever = default(int);
+    private int? _playtime_forever;
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"playtime_forever", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
     public int playtime_forever
     {
-      get { return _playtime_forever; }
+      get { return _playtime_forever?? default(int); }
       set { _playtime_forever = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool playtime_foreverSpecified
+    {
+      get { return _playtime_forever != null; }
+      set { if (value == (_playtime_forever== null)) _playtime_forever = value ? this.playtime_forever : (int?)null; }
+    }
+    private bool ShouldSerializeplaytime_forever() { return playtime_foreverSpecified; }
+    private void Resetplaytime_forever() { playtime_foreverSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -247,163 +339,316 @@ namespace SteamKit2.Unified.Internal
       set { _video_card = value; }
     }
 
-    private string _operating_system = "";
+    private string _operating_system;
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"operating_system", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
     public string operating_system
     {
-      get { return _operating_system; }
+      get { return _operating_system?? ""; }
       set { _operating_system = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool operating_systemSpecified
+    {
+      get { return _operating_system != null; }
+      set { if (value == (_operating_system== null)) _operating_system = value ? this.operating_system : (string)null; }
+    }
+    private bool ShouldSerializeoperating_system() { return operating_systemSpecified; }
+    private void Resetoperating_system() { operating_systemSpecified = false; }
+    
 
-    private bool _os_64bit = default(bool);
+    private bool? _os_64bit;
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"os_64bit", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool os_64bit
     {
-      get { return _os_64bit; }
+      get { return _os_64bit?? default(bool); }
       set { _os_64bit = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool os_64bitSpecified
+    {
+      get { return _os_64bit != null; }
+      set { if (value == (_os_64bit== null)) _os_64bit = value ? this.os_64bit : (bool?)null; }
+    }
+    private bool ShouldSerializeos_64bit() { return os_64bitSpecified; }
+    private void Resetos_64bit() { os_64bitSpecified = false; }
+    
 
-    private int _system_ram_mb = default(int);
+    private int? _system_ram_mb;
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"system_ram_mb", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
     public int system_ram_mb
     {
-      get { return _system_ram_mb; }
+      get { return _system_ram_mb?? default(int); }
       set { _system_ram_mb = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool system_ram_mbSpecified
+    {
+      get { return _system_ram_mb != null; }
+      set { if (value == (_system_ram_mb== null)) _system_ram_mb = value ? this.system_ram_mb : (int?)null; }
+    }
+    private bool ShouldSerializesystem_ram_mb() { return system_ram_mbSpecified; }
+    private void Resetsystem_ram_mb() { system_ram_mbSpecified = false; }
+    
 
-    private string _audio_device = "";
+    private string _audio_device;
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"audio_device", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
     public string audio_device
     {
-      get { return _audio_device; }
+      get { return _audio_device?? ""; }
       set { _audio_device = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool audio_deviceSpecified
+    {
+      get { return _audio_device != null; }
+      set { if (value == (_audio_device== null)) _audio_device = value ? this.audio_device : (string)null; }
+    }
+    private bool ShouldSerializeaudio_device() { return audio_deviceSpecified; }
+    private void Resetaudio_device() { audio_deviceSpecified = false; }
+    
 
-    private string _audio_driver_version = "";
+    private string _audio_driver_version;
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"audio_driver_version", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
     public string audio_driver_version
     {
-      get { return _audio_driver_version; }
+      get { return _audio_driver_version?? ""; }
       set { _audio_driver_version = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool audio_driver_versionSpecified
+    {
+      get { return _audio_driver_version != null; }
+      set { if (value == (_audio_driver_version== null)) _audio_driver_version = value ? this.audio_driver_version : (string)null; }
+    }
+    private bool ShouldSerializeaudio_driver_version() { return audio_driver_versionSpecified; }
+    private void Resetaudio_driver_version() { audio_driver_versionSpecified = false; }
+    
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPU")]
   public partial class CPU : global::ProtoBuf.IExtensible
   {
     public CPU() {}
     
 
-    private int _speed_mhz = default(int);
+    private int? _speed_mhz;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"speed_mhz", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
     public int speed_mhz
     {
-      get { return _speed_mhz; }
+      get { return _speed_mhz?? default(int); }
       set { _speed_mhz = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool speed_mhzSpecified
+    {
+      get { return _speed_mhz != null; }
+      set { if (value == (_speed_mhz== null)) _speed_mhz = value ? this.speed_mhz : (int?)null; }
+    }
+    private bool ShouldSerializespeed_mhz() { return speed_mhzSpecified; }
+    private void Resetspeed_mhz() { speed_mhzSpecified = false; }
+    
 
-    private string _vendor = "";
+    private string _vendor;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"vendor", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
     public string vendor
     {
-      get { return _vendor; }
+      get { return _vendor?? ""; }
       set { _vendor = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool vendorSpecified
+    {
+      get { return _vendor != null; }
+      set { if (value == (_vendor== null)) _vendor = value ? this.vendor : (string)null; }
+    }
+    private bool ShouldSerializevendor() { return vendorSpecified; }
+    private void Resetvendor() { vendorSpecified = false; }
+    
 
-    private int _logical_processors = default(int);
+    private int? _logical_processors;
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"logical_processors", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
     public int logical_processors
     {
-      get { return _logical_processors; }
+      get { return _logical_processors?? default(int); }
       set { _logical_processors = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool logical_processorsSpecified
+    {
+      get { return _logical_processors != null; }
+      set { if (value == (_logical_processors== null)) _logical_processors = value ? this.logical_processors : (int?)null; }
+    }
+    private bool ShouldSerializelogical_processors() { return logical_processorsSpecified; }
+    private void Resetlogical_processors() { logical_processorsSpecified = false; }
+    
 
-    private int _physical_processors = default(int);
+    private int? _physical_processors;
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"physical_processors", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
     public int physical_processors
     {
-      get { return _physical_processors; }
+      get { return _physical_processors?? default(int); }
       set { _physical_processors = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool physical_processorsSpecified
+    {
+      get { return _physical_processors != null; }
+      set { if (value == (_physical_processors== null)) _physical_processors = value ? this.physical_processors : (int?)null; }
+    }
+    private bool ShouldSerializephysical_processors() { return physical_processorsSpecified; }
+    private void Resetphysical_processors() { physical_processorsSpecified = false; }
+    
 
-    private bool _hyperthreading = default(bool);
+    private bool? _hyperthreading;
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"hyperthreading", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool hyperthreading
     {
-      get { return _hyperthreading; }
+      get { return _hyperthreading?? default(bool); }
       set { _hyperthreading = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool hyperthreadingSpecified
+    {
+      get { return _hyperthreading != null; }
+      set { if (value == (_hyperthreading== null)) _hyperthreading = value ? this.hyperthreading : (bool?)null; }
+    }
+    private bool ShouldSerializehyperthreading() { return hyperthreadingSpecified; }
+    private void Resethyperthreading() { hyperthreadingSpecified = false; }
+    
 
-    private bool _fcmov = default(bool);
+    private bool? _fcmov;
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"fcmov", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool fcmov
     {
-      get { return _fcmov; }
+      get { return _fcmov?? default(bool); }
       set { _fcmov = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool fcmovSpecified
+    {
+      get { return _fcmov != null; }
+      set { if (value == (_fcmov== null)) _fcmov = value ? this.fcmov : (bool?)null; }
+    }
+    private bool ShouldSerializefcmov() { return fcmovSpecified; }
+    private void Resetfcmov() { fcmovSpecified = false; }
+    
 
-    private bool _sse2 = default(bool);
+    private bool? _sse2;
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"sse2", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool sse2
     {
-      get { return _sse2; }
+      get { return _sse2?? default(bool); }
       set { _sse2 = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool sse2Specified
+    {
+      get { return _sse2 != null; }
+      set { if (value == (_sse2== null)) _sse2 = value ? this.sse2 : (bool?)null; }
+    }
+    private bool ShouldSerializesse2() { return sse2Specified; }
+    private void Resetsse2() { sse2Specified = false; }
+    
 
-    private bool _sse3 = default(bool);
+    private bool? _sse3;
     [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"sse3", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool sse3
     {
-      get { return _sse3; }
+      get { return _sse3?? default(bool); }
       set { _sse3 = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool sse3Specified
+    {
+      get { return _sse3 != null; }
+      set { if (value == (_sse3== null)) _sse3 = value ? this.sse3 : (bool?)null; }
+    }
+    private bool ShouldSerializesse3() { return sse3Specified; }
+    private void Resetsse3() { sse3Specified = false; }
+    
 
-    private bool _ssse3 = default(bool);
+    private bool? _ssse3;
     [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"ssse3", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool ssse3
     {
-      get { return _ssse3; }
+      get { return _ssse3?? default(bool); }
       set { _ssse3 = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool ssse3Specified
+    {
+      get { return _ssse3 != null; }
+      set { if (value == (_ssse3== null)) _ssse3 = value ? this.ssse3 : (bool?)null; }
+    }
+    private bool ShouldSerializessse3() { return ssse3Specified; }
+    private void Resetssse3() { ssse3Specified = false; }
+    
 
-    private bool _sse4a = default(bool);
+    private bool? _sse4a;
     [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"sse4a", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool sse4a
     {
-      get { return _sse4a; }
+      get { return _sse4a?? default(bool); }
       set { _sse4a = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool sse4aSpecified
+    {
+      get { return _sse4a != null; }
+      set { if (value == (_sse4a== null)) _sse4a = value ? this.sse4a : (bool?)null; }
+    }
+    private bool ShouldSerializesse4a() { return sse4aSpecified; }
+    private void Resetsse4a() { sse4aSpecified = false; }
+    
 
-    private bool _sse41 = default(bool);
+    private bool? _sse41;
     [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"sse41", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool sse41
     {
-      get { return _sse41; }
+      get { return _sse41?? default(bool); }
       set { _sse41 = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool sse41Specified
+    {
+      get { return _sse41 != null; }
+      set { if (value == (_sse41== null)) _sse41 = value ? this.sse41 : (bool?)null; }
+    }
+    private bool ShouldSerializesse41() { return sse41Specified; }
+    private void Resetsse41() { sse41Specified = false; }
+    
 
-    private bool _sse42 = default(bool);
+    private bool? _sse42;
     [global::ProtoBuf.ProtoMember(12, IsRequired = false, Name=@"sse42", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool sse42
     {
-      get { return _sse42; }
+      get { return _sse42?? default(bool); }
       set { _sse42 = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool sse42Specified
+    {
+      get { return _sse42 != null; }
+      set { if (value == (_sse42== null)) _sse42 = value ? this.sse42 : (bool?)null; }
+    }
+    private bool ShouldSerializesse42() { return sse42Specified; }
+    private void Resetsse42() { sse42Specified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -415,77 +660,149 @@ namespace SteamKit2.Unified.Internal
     public VideoCard() {}
     
 
-    private string _driver = "";
+    private string _driver;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"driver", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
     public string driver
     {
-      get { return _driver; }
+      get { return _driver?? ""; }
       set { _driver = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool driverSpecified
+    {
+      get { return _driver != null; }
+      set { if (value == (_driver== null)) _driver = value ? this.driver : (string)null; }
+    }
+    private bool ShouldSerializedriver() { return driverSpecified; }
+    private void Resetdriver() { driverSpecified = false; }
+    
 
-    private string _driver_version = "";
+    private string _driver_version;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"driver_version", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
     public string driver_version
     {
-      get { return _driver_version; }
+      get { return _driver_version?? ""; }
       set { _driver_version = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool driver_versionSpecified
+    {
+      get { return _driver_version != null; }
+      set { if (value == (_driver_version== null)) _driver_version = value ? this.driver_version : (string)null; }
+    }
+    private bool ShouldSerializedriver_version() { return driver_versionSpecified; }
+    private void Resetdriver_version() { driver_versionSpecified = false; }
+    
 
-    private uint _driver_date = default(uint);
+    private uint? _driver_date;
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"driver_date", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint driver_date
     {
-      get { return _driver_date; }
+      get { return _driver_date?? default(uint); }
       set { _driver_date = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool driver_dateSpecified
+    {
+      get { return _driver_date != null; }
+      set { if (value == (_driver_date== null)) _driver_date = value ? this.driver_date : (uint?)null; }
+    }
+    private bool ShouldSerializedriver_date() { return driver_dateSpecified; }
+    private void Resetdriver_date() { driver_dateSpecified = false; }
+    
 
-    private string _directx_version = "";
+    private string _directx_version;
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"directx_version", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
     public string directx_version
     {
-      get { return _directx_version; }
+      get { return _directx_version?? ""; }
       set { _directx_version = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool directx_versionSpecified
+    {
+      get { return _directx_version != null; }
+      set { if (value == (_directx_version== null)) _directx_version = value ? this.directx_version : (string)null; }
+    }
+    private bool ShouldSerializedirectx_version() { return directx_versionSpecified; }
+    private void Resetdirectx_version() { directx_versionSpecified = false; }
+    
 
-    private string _opengl_version = "";
+    private string _opengl_version;
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"opengl_version", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
     public string opengl_version
     {
-      get { return _opengl_version; }
+      get { return _opengl_version?? ""; }
       set { _opengl_version = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool opengl_versionSpecified
+    {
+      get { return _opengl_version != null; }
+      set { if (value == (_opengl_version== null)) _opengl_version = value ? this.opengl_version : (string)null; }
+    }
+    private bool ShouldSerializeopengl_version() { return opengl_versionSpecified; }
+    private void Resetopengl_version() { opengl_versionSpecified = false; }
+    
 
-    private int _vendorid = default(int);
+    private int? _vendorid;
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"vendorid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
     public int vendorid
     {
-      get { return _vendorid; }
+      get { return _vendorid?? default(int); }
       set { _vendorid = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool vendoridSpecified
+    {
+      get { return _vendorid != null; }
+      set { if (value == (_vendorid== null)) _vendorid = value ? this.vendorid : (int?)null; }
+    }
+    private bool ShouldSerializevendorid() { return vendoridSpecified; }
+    private void Resetvendorid() { vendoridSpecified = false; }
+    
 
-    private int _deviceid = default(int);
+    private int? _deviceid;
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"deviceid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
     public int deviceid
     {
-      get { return _deviceid; }
+      get { return _deviceid?? default(int); }
       set { _deviceid = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool deviceidSpecified
+    {
+      get { return _deviceid != null; }
+      set { if (value == (_deviceid== null)) _deviceid = value ? this.deviceid : (int?)null; }
+    }
+    private bool ShouldSerializedeviceid() { return deviceidSpecified; }
+    private void Resetdeviceid() { deviceidSpecified = false; }
+    
 
-    private int _vram_mb = default(int);
+    private int? _vram_mb;
     [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"vram_mb", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
     public int vram_mb
     {
-      get { return _vram_mb; }
+      get { return _vram_mb?? default(int); }
       set { _vram_mb = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool vram_mbSpecified
+    {
+      get { return _vram_mb != null; }
+      set { if (value == (_vram_mb== null)) _vram_mb = value ? this.vram_mb : (int?)null; }
+    }
+    private bool ShouldSerializevram_mb() { return vram_mbSpecified; }
+    private void Resetvram_mb() { vram_mbSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

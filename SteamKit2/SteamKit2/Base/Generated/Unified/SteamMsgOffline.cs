@@ -8,6 +8,8 @@
 //------------------------------------------------------------------------------
 #pragma warning disable 1591
 
+// Option: missing-value detection (*Specified/ShouldSerialize*/Reset*) enabled
+    
 // Generated from: steammessages_offline.steamclient.proto
 // Note: requires additional types generated from: steammessages_unified_base.steamclient.proto
 namespace SteamKit2.Unified.Internal
@@ -18,14 +20,23 @@ namespace SteamKit2.Unified.Internal
     public COffline_GetOfflineLogonTicket_Request() {}
     
 
-    private uint _priority = default(uint);
+    private uint? _priority;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"priority", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint priority
     {
-      get { return _priority; }
+      get { return _priority?? default(uint); }
       set { _priority = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool prioritySpecified
+    {
+      get { return _priority != null; }
+      set { if (value == (_priority== null)) _priority = value ? this.priority : (uint?)null; }
+    }
+    private bool ShouldSerializepriority() { return prioritySpecified; }
+    private void Resetpriority() { prioritySpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -37,23 +48,41 @@ namespace SteamKit2.Unified.Internal
     public COffline_GetOfflineLogonTicket_Response() {}
     
 
-    private byte[] _serialized_ticket = null;
+    private byte[] _serialized_ticket;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"serialized_ticket", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
     public byte[] serialized_ticket
     {
-      get { return _serialized_ticket; }
+      get { return _serialized_ticket?? null; }
       set { _serialized_ticket = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool serialized_ticketSpecified
+    {
+      get { return _serialized_ticket != null; }
+      set { if (value == (_serialized_ticket== null)) _serialized_ticket = value ? this.serialized_ticket : (byte[])null; }
+    }
+    private bool ShouldSerializeserialized_ticket() { return serialized_ticketSpecified; }
+    private void Resetserialized_ticket() { serialized_ticketSpecified = false; }
+    
 
-    private byte[] _signature = null;
+    private byte[] _signature;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"signature", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
     public byte[] signature
     {
-      get { return _signature; }
+      get { return _signature?? null; }
       set { _signature = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool signatureSpecified
+    {
+      get { return _signature != null; }
+      set { if (value == (_signature== null)) _signature = value ? this.signature : (byte[])null; }
+    }
+    private bool ShouldSerializesignature() { return signatureSpecified; }
+    private void Resetsignature() { signatureSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -75,23 +104,41 @@ namespace SteamKit2.Unified.Internal
     public COffline_OfflineLogonTicket() {}
     
 
-    private uint _accountid = default(uint);
+    private uint? _accountid;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"accountid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint accountid
     {
-      get { return _accountid; }
+      get { return _accountid?? default(uint); }
       set { _accountid = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool accountidSpecified
+    {
+      get { return _accountid != null; }
+      set { if (value == (_accountid== null)) _accountid = value ? this.accountid : (uint?)null; }
+    }
+    private bool ShouldSerializeaccountid() { return accountidSpecified; }
+    private void Resetaccountid() { accountidSpecified = false; }
+    
 
-    private uint _rtime32_creation_time = default(uint);
+    private uint? _rtime32_creation_time;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"rtime32_creation_time", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint rtime32_creation_time
     {
-      get { return _rtime32_creation_time; }
+      get { return _rtime32_creation_time?? default(uint); }
       set { _rtime32_creation_time = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool rtime32_creation_timeSpecified
+    {
+      get { return _rtime32_creation_time != null; }
+      set { if (value == (_rtime32_creation_time== null)) _rtime32_creation_time = value ? this.rtime32_creation_time : (uint?)null; }
+    }
+    private bool ShouldSerializertime32_creation_time() { return rtime32_creation_timeSpecified; }
+    private void Resetrtime32_creation_time() { rtime32_creation_timeSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

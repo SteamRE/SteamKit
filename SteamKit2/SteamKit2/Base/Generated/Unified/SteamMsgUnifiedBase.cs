@@ -8,6 +8,8 @@
 //------------------------------------------------------------------------------
 #pragma warning disable 1591
 
+// Option: missing-value detection (*Specified/ShouldSerialize*/Reset*) enabled
+    
 // Generated from: steammessages_unified_base.steamclient.proto
 // Note: requires additional types generated from: google/protobuf/descriptor.proto
 namespace SteamKit2.Unified.Internal

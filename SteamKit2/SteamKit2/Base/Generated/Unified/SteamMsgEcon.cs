@@ -8,6 +8,8 @@
 //------------------------------------------------------------------------------
 #pragma warning disable 1591
 
+// Option: missing-value detection (*Specified/ShouldSerialize*/Reset*) enabled
+    
 // Generated from: steammessages_econ.steamclient.proto
 // Note: requires additional types generated from: steammessages_unified_base.steamclient.proto
 namespace SteamKit2.Unified.Internal
@@ -18,14 +20,23 @@ namespace SteamKit2.Unified.Internal
     public CEcon_ClientGetItemShopOverlayAuthURL_Request() {}
     
 
-    private string _return_url = "";
+    private string _return_url;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"return_url", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
     public string return_url
     {
-      get { return _return_url; }
+      get { return _return_url?? ""; }
       set { _return_url = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool return_urlSpecified
+    {
+      get { return _return_url != null; }
+      set { if (value == (_return_url== null)) _return_url = value ? this.return_url : (string)null; }
+    }
+    private bool ShouldSerializereturn_url() { return return_urlSpecified; }
+    private void Resetreturn_url() { return_urlSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -37,14 +48,23 @@ namespace SteamKit2.Unified.Internal
     public CEcon_ClientGetItemShopOverlayAuthURL_Response() {}
     
 
-    private string _url = "";
+    private string _url;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"url", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
     public string url
     {
-      get { return _url; }
+      get { return _url?? ""; }
       set { _url = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool urlSpecified
+    {
+      get { return _url != null; }
+      set { if (value == (_url== null)) _url = value ? this.url : (string)null; }
+    }
+    private bool ShouldSerializeurl() { return urlSpecified; }
+    private void Reseturl() { urlSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
