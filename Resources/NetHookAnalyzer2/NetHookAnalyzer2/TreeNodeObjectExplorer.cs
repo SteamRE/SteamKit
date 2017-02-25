@@ -588,9 +588,12 @@ namespace NetHookAnalyzer2
 				var childNodes = new List<TreeNode>();
 
 				var properties = value.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance).ToList();
-				if (typeof(ProtoBuf.IExtensible).IsAssignableFrom(value.GetType()))
+				bool valueIsProtobufMsg = value is ProtoBuf.IExtensible;
+
+				if (valueIsProtobufMsg)
 				{
-				    properties = properties.Where(x => {
+					// For proto msgs, we want to skip vars where name is "<blah>Specified", unless there's no var named "<blah>"
+					properties = properties.Where(x => {
 				        return !x.Name.EndsWith("Specified") || properties.FirstOrDefault(y => {
 				            return y.Name == x.Name.Remove(x.Name.Length - 9);
 				        }) == null;
@@ -602,10 +605,19 @@ namespace NetHookAnalyzer2
 					var childName = property.Name;
 					var childObject = property.GetValue(value, null);
 					bool valueIsSet = true;
-					if (typeof(ProtoBuf.IExtensible).IsAssignableFrom(value.GetType()))
+					if (valueIsProtobufMsg)
 					{
-						var propSpecified = value.GetType().GetProperty(property.Name + "Specified");
-						valueIsSet = propSpecified != null && (bool)propSpecified.GetValue(value);
+						if (childObject is IList)
+						{
+							// Repeated fields are marshalled as Lists, but aren't "set"/sent if they have no values added.
+							valueIsSet = (property.GetValue(value) as IList).Count != 0;
+						}
+						else
+						{
+							// For non-repeated fields, look for the "<blah>Specfied" field existing and being set to false;
+							var propSpecified = value.GetType().GetProperty(property.Name + "Specified");
+							valueIsSet = propSpecified == null || (bool)propSpecified.GetValue(value);
+						}
 					}
 					
 					if (valueIsSet || ShowAll)
