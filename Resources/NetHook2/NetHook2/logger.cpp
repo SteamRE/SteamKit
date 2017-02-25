@@ -88,15 +88,19 @@ void CLogger::LogSessionData( ENetDirection eDirection, uint8 *pData, uint32 cub
 {
 	std::string fullFile = m_LogDir;
 
-	const char *outFile = GetFileName( eDirection, (EMsg)*(uint16*)pData );
+	const char *outFile = GetFileNameBase( eDirection, (EMsg)*(uint16*)pData );
 	fullFile += outFile;
 
-	HANDLE hFile = CreateFile( fullFile.c_str(), GENERIC_WRITE, FILE_SHARE_READ, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL );
+	std::string fullFileTmp = fullFile + ".tmp";
+	std::string fullFileFinal = fullFile + ".bin";
+	HANDLE hFile = CreateFile( fullFileTmp.c_str(), GENERIC_WRITE, FILE_SHARE_READ, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL );
 
 	DWORD numBytes = 0;
 	WriteFile( hFile, pData, cubData, &numBytes, NULL );
 
 	CloseHandle( hFile );
+
+	MoveFile( fullFileTmp.c_str(), fullFileFinal.c_str() );
 
 	this->LogConsole( "Wrote %d bytes to %s\n", cubData, outFile );
 }
@@ -133,13 +137,13 @@ void CLogger::LogFile( const char *szFileName, bool bSession, const char *szFmt,
 	delete [] szBuff;
 }
 
-const char *CLogger::GetFileName( ENetDirection eDirection, EMsg eMsg, uint8 serverType )
+const char *CLogger::GetFileNameBase( ENetDirection eDirection, EMsg eMsg, uint8 serverType )
 {
 	static char szFileName[MAX_PATH];
 
 	sprintf_s(
 		szFileName, sizeof( szFileName ),
-		"%03d_%s_%d_%s.bin",
+		"%03d_%s_%d_%s",
 		++m_uiMsgNum,
 		( eDirection == k_eNetIncoming ? "in" : "out" ),
 		eMsg,
