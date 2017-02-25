@@ -38,11 +38,13 @@
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.automaticallySelectNewItemsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.splitContainer = new System.Windows.Forms.SplitContainer();
 			this.filterContainerPanel = new System.Windows.Forms.Panel();
 			this.filterGroupBox = new System.Windows.Forms.GroupBox();
+			this.showAllCheckBox = new System.Windows.Forms.CheckBox();
 			this.label1 = new System.Windows.Forms.Label();
 			this.searchTextBox = new System.Windows.Forms.TextBox();
 			this.outRadioButton = new System.Windows.Forms.RadioButton();
@@ -51,7 +53,6 @@
 			this.listViewContainerPanel = new System.Windows.Forms.Panel();
 			this.itemsListView = new System.Windows.Forms.ListView();
 			this.itemExplorerTreeView = new System.Windows.Forms.TreeView();
-			this.automaticallySelectNewItemsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			sequenceColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			directionColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			messageColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -121,6 +122,14 @@
 			this.openToolStripMenuItem.Text = "&Open...";
 			this.openToolStripMenuItem.Click += new System.EventHandler(this.OnOpenToolStripMenuItemClick);
 			// 
+			// automaticallySelectNewItemsToolStripMenuItem
+			// 
+			this.automaticallySelectNewItemsToolStripMenuItem.CheckOnClick = true;
+			this.automaticallySelectNewItemsToolStripMenuItem.Name = "automaticallySelectNewItemsToolStripMenuItem";
+			this.automaticallySelectNewItemsToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
+			this.automaticallySelectNewItemsToolStripMenuItem.Text = "&Automatically select new items";
+			this.automaticallySelectNewItemsToolStripMenuItem.CheckedChanged += new System.EventHandler(this.OnAutomaticallySelectNewItemsCheckedChanged);
+			// 
 			// exitToolStripMenuItem
 			// 
 			this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
@@ -166,6 +175,7 @@
 			// 
 			// filterGroupBox
 			// 
+			this.filterGroupBox.Controls.Add(this.showAllCheckBox);
 			this.filterGroupBox.Controls.Add(this.label1);
 			this.filterGroupBox.Controls.Add(this.searchTextBox);
 			this.filterGroupBox.Controls.Add(this.outRadioButton);
@@ -178,6 +188,17 @@
 			this.filterGroupBox.TabIndex = 1;
 			this.filterGroupBox.TabStop = false;
 			this.filterGroupBox.Text = "Filter";
+			// 
+			// showAllCheckBox
+			// 
+			this.showAllCheckBox.AutoSize = true;
+			this.showAllCheckBox.Location = new System.Drawing.Point(277, 19);
+			this.showAllCheckBox.Name = "showAllCheckBox";
+			this.showAllCheckBox.Size = new System.Drawing.Size(125, 17);
+			this.showAllCheckBox.TabIndex = 3;
+			this.showAllCheckBox.Text = "Show All Msg Values";
+			this.showAllCheckBox.UseVisualStyleBackColor = true;
+			this.showAllCheckBox.CheckedChanged += new System.EventHandler(this.OnShowAllCheckedChanged);
 			// 
 			// label1
 			// 
@@ -275,14 +296,6 @@
 			this.itemExplorerTreeView.Size = new System.Drawing.Size(455, 426);
 			this.itemExplorerTreeView.TabIndex = 0;
 			// 
-			// automaticallySelectNewItemsToolStripMenuItem
-			// 
-			this.automaticallySelectNewItemsToolStripMenuItem.CheckOnClick = true;
-			this.automaticallySelectNewItemsToolStripMenuItem.Name = "automaticallySelectNewItemsToolStripMenuItem";
-			this.automaticallySelectNewItemsToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
-			this.automaticallySelectNewItemsToolStripMenuItem.Text = "&Automatically select new items";
-			this.automaticallySelectNewItemsToolStripMenuItem.CheckedChanged += new System.EventHandler(this.OnAutomaticallySelectNewItemsCheckedChanged);
-			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -327,6 +340,7 @@
 		private System.Windows.Forms.RadioButton inOutRadioButton;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.ToolStripMenuItem automaticallySelectNewItemsToolStripMenuItem;
-	}
+        private System.Windows.Forms.CheckBox showAllCheckBox;
+    }
 }
 
