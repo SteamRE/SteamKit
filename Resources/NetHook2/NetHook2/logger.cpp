@@ -105,11 +105,21 @@ void CLogger::LogSessionData( ENetDirection eDirection, uint8 *pData, uint32 cub
 	this->LogConsole( "Wrote %d bytes to %s\n", cubData, outFile );
 }
 
-void CLogger::LogFile( const char *szFileName, bool bSession, const char *szFmt, ... )
+HANDLE CLogger::OpenFile( const char *szFileName, bool bSession )
 {
 	std::string outputFile = ( bSession ? m_LogDir : m_RootDir );
 	outputFile += szFileName;
 
+	return CreateFile( outputFile.c_str(), GENERIC_WRITE, FILE_SHARE_READ, NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL );
+}
+
+void CLogger::CloseFile( HANDLE hFile )
+{
+	CloseHandle( hFile );
+}
+
+void CLogger::LogOpenFile( HANDLE hFile, const char *szFmt, ... )
+{
 	va_list args;
 	va_start( args, szFmt );
 
@@ -125,14 +135,10 @@ void CLogger::LogFile( const char *szFileName, bool bSession, const char *szFmt,
 
 	szBuff[ buffSize - 1 ] = 0;
 
-	HANDLE hFile = CreateFile( outputFile.c_str(), GENERIC_WRITE, FILE_SHARE_READ, NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL );
-
 	SetFilePointer( hFile, 0, NULL, FILE_END );
 
 	DWORD numBytes = 0;
 	WriteFile( hFile, szBuff, len, &numBytes, NULL );
-
-	CloseHandle( hFile );
 
 	delete [] szBuff;
 }

@@ -111,13 +111,19 @@ CCrypto::CCrypto()
 			g_pLogger->DeleteFile( "emsg_list.txt", false );
 			g_pLogger->DeleteFile( "emsg_list_detailed.txt", false );
 
+			HANDLE hListFile = g_pLogger->OpenFile( "emsg_list.txt", false );
+			HANDLE hListDetailedFile = g_pLogger->OpenFile( "emsg_list_detailed.txt", false );
+
 			for ( MsgList::iterator iter = eMsgList.begin() ; iter != eMsgList.end() ; iter++ )
 			{
 				MsgInfo_t *pInfo = iter->second;
 
-				g_pLogger->LogFile( "emsg_list.txt", false, "\t%s = %d,\r\n", pInfo->pchMsgName, pInfo->eMsg );
-				g_pLogger->LogFile( "emsg_list_detailed.txt", false, "\t%s = %d, // flags: %d, server type: %d\r\n", pInfo->pchMsgName, pInfo->eMsg, pInfo->nFlags, pInfo->k_EServerTarget );
+				g_pLogger->LogOpenFile( hListFile, "\t%s = %d,\r\n", pInfo->pchMsgName, pInfo->eMsg );
+				g_pLogger->LogOpenFile( hListDetailedFile, "\t%s = %d, // flags: %d, server type: %d\r\n", pInfo->pchMsgName, pInfo->eMsg, pInfo->nFlags, pInfo->k_EServerTarget );
 			}
+
+			g_pLogger->CloseFile( hListFile );
+			g_pLogger->CloseFile( hListDetailedFile );
 
 			g_pLogger->LogConsole( "Dumped emsg list! (%d messages)\n", eMsgList.size() );
 		}
