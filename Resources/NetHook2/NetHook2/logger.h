@@ -36,7 +36,7 @@ public:
 	void LogFile( const char *szFileName, bool bSession, const char *szFmt, ... );
 
 private:
-	const char *GetFileName( ENetDirection eDirection, EMsg eMsg, uint8 serverType = 0xFF );
+	const char *GetFileNameBase( ENetDirection eDirection, EMsg eMsg, uint8 serverType = 0xFF );
 	void MultiplexMulti( ENetDirection eDirection, uint8 *pData, uint32 cubData );
 
 private:
