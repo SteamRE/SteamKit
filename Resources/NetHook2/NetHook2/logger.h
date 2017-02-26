@@ -27,13 +27,13 @@ public:
 	CLogger();
 
 	void LogConsole( const char *szFmt, ... );
-
-	void DeleteFile( const char *szFileName, bool bSession );
-
 	void LogNetMessage( ENetDirection eDirection, uint8 *pData, uint32 cubData );
-
 	void LogSessionData( ENetDirection eDirection, uint8 *pData, uint32 cubData );
-	void LogFile( const char *szFileName, bool bSession, const char *szFmt, ... );
+	void LogOpenFile( HANDLE hFile, const char *szFmt, ... );
+
+	HANDLE OpenFile( const char *szFileName, bool bSession );
+	void CloseFile( HANDLE hFile);
+	void DeleteFile( const char *szFileName, bool bSession );
 
 private:
 	const char *GetFileNameBase( ENetDirection eDirection, EMsg eMsg, uint8 serverType = 0xFF );
