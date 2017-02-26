@@ -43,6 +43,8 @@ message CPhysicalGoods_SteamControllerSetConfig_Request {
 	optional string controller_code = 2;
 	optional uint32 accountid = 3;
 	repeated .CPhysicalGoods_SteamControllerSetConfig_ControllerConfig configurations = 4;
+	optional int32 controller_type = 5 [default = 2];
+	optional bool only_for_this_serial = 6 [default = false];
 }
 
 message CPhysicalGoods_SteamControllerSetConfig_Response {
@@ -53,12 +55,15 @@ message CPhysicalGoods_SteamControllerGetConfig_Request {
 	optional string controller_code = 2;
 	optional uint32 accountid = 3;
 	optional string appidorname = 4;
+	optional int32 controller_type = 5 [default = 2];
+	optional bool only_for_this_serial = 6 [default = false];
 }
 
 message CPhysicalGoods_SteamControllerGetConfig_ControllerConfig {
 	optional string appidorname = 1;
 	optional uint64 publishedfileid = 2;
 	optional string templatename = 3;
+	optional string serial_number = 4;
 }
 
 message CPhysicalGoods_SteamControllerGetConfig_Response {

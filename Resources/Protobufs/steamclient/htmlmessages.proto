@@ -603,7 +603,7 @@ message CMsgJSRegisterMethod {
 
 message CJSMethodArgument {
 	optional string json_data = 1;
-	optional uint32 function_handle = 2;
+	optional uint64 function_handle = 2;
 }
 
 message CMsgJSValue {
@@ -617,7 +617,7 @@ message CMsgJSValue {
 	optional uint32 uint_value = 3;
 	optional float float_value = 4;
 	optional string string_value = 5;
-	optional uint32 function_handle = 6;
+	optional uint64 function_handle = 6;
 	optional bool is_array = 8;
 	repeated .CMsgJSValue array_values = 9;
 	optional bool is_object = 10;
@@ -632,13 +632,13 @@ message CMsgJSMethodCall {
 
 message CMsgJSExecuteCallback {
 	optional uint32 browser_handle = 1;
-	optional uint32 function_handle = 2;
+	optional uint64 function_handle = 2;
 	repeated .CMsgJSValue arguments = 3;
 }
 
 message CMsgJSReleaseCallback {
 	optional uint32 browser_handle = 1;
-	optional uint32 function_handle = 2;
+	optional uint64 function_handle = 2;
 }
 
 message CMsgJSRaiseException {

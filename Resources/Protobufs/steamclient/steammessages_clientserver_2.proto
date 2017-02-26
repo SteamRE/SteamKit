@@ -566,6 +566,9 @@ message CMsgClientUpdateAppJobReport {
 	optional string branch_name = 13;
 	optional uint64 total_bytes_downloaded = 14;
 	optional uint64 total_bytes_staged = 15;
+	optional uint64 total_bytes_restored = 16;
+	optional bool is_borrowed = 17;
+	optional bool is_free_weekend = 18;
 }
 
 message CMsgClientDPContentStatsReport {
@@ -1062,12 +1065,19 @@ message CMsgClientVanityURLChangedNotification {
 message CMsgClientAuthorizeLocalDeviceRequest {
 	optional string device_description = 1;
 	optional uint32 owner_account_id = 2;
+	optional uint64 local_device_token = 3;
 }
 
 message CMsgClientAuthorizeLocalDevice {
 	optional int32 eresult = 1 [default = 2];
 	optional uint32 owner_account_id = 2;
 	optional uint64 authed_device_token = 3;
+}
+
+message CMsgClientAuthorizeLocalDeviceNotification {
+	optional int32 eresult = 1 [default = 2];
+	optional uint32 owner_account_id = 2;
+	optional uint64 local_device_token = 3;
 }
 
 message CMsgClientDeauthorizeDeviceRequest {
@@ -1204,6 +1214,7 @@ message CMsgClientCreateAccount {
 	optional string password = 2;
 	optional string email = 3;
 	optional uint32 launcher = 6;
+	optional uint32 language = 7;
 }
 
 message CMsgClientCreateAccountResponse {

@@ -42,49 +42,6 @@ message CPlayer_LastPlayedTimes_Notification {
 	repeated .CPlayer_GetLastPlayedTimes_Response.Game games = 1;
 }
 
-message CPlayerClient_GetSystemInformation_Request {
-}
-
-message CClientSystemInfo {
-	message CPU {
-		optional int32 speed_mhz = 1;
-		optional string vendor = 2;
-		optional int32 logical_processors = 3;
-		optional int32 physical_processors = 4;
-		optional bool hyperthreading = 5;
-		optional bool fcmov = 6;
-		optional bool sse2 = 7;
-		optional bool sse3 = 8;
-		optional bool ssse3 = 9;
-		optional bool sse4a = 10;
-		optional bool sse41 = 11;
-		optional bool sse42 = 12;
-	}
-
-	message VideoCard {
-		optional string driver = 1;
-		optional string driver_version = 2;
-		optional uint32 driver_date = 3;
-		optional string directx_version = 4;
-		optional string opengl_version = 5;
-		optional int32 vendorid = 6;
-		optional int32 deviceid = 7;
-		optional int32 vram_mb = 8;
-	}
-
-	optional .CClientSystemInfo.CPU cpu = 1;
-	optional .CClientSystemInfo.VideoCard video_card = 2;
-	optional string operating_system = 3;
-	optional bool os_64bit = 4;
-	optional int32 system_ram_mb = 5;
-	optional string audio_device = 6;
-	optional string audio_driver_version = 7;
-}
-
-message CPlayerClient_GetSystemInformation_Response {
-	optional .CClientSystemInfo system_info = 1;
-}
-
 service Player {
 	option (service_description) = "A service for accessing Steam player data";
 	rpc GetGameBadgeLevels (.CPlayer_GetGameBadgeLevels_Request) returns (.CPlayer_GetGameBadgeLevels_Response) {
@@ -102,8 +59,5 @@ service PlayerClient {
 	option (service_execution_site) = k_EProtoExecutionSiteSteamClient;
 	rpc NotifyLastPlayedTimes (.CPlayer_LastPlayedTimes_Notification) returns (.NoResponse) {
 		option (method_description) = "Notification from server to client of more recent play time";
-	}
-	rpc GetSystemInformation (.CPlayerClient_GetSystemInformation_Request) returns (.CPlayerClient_GetSystemInformation_Response) {
-		option (method_description) = "Request from the server to the client for information about the users system";
 	}
 }

@@ -98,6 +98,39 @@ message CDeviceAuth_RemoveAuthorizedBorrowers_Request {
 message CDeviceAuth_RemoveAuthorizedBorrowers_Response {
 }
 
+message CDeviceAuth_GetAuthorizedAsBorrower_Request {
+	optional fixed64 steamid = 1;
+	optional bool include_canceled = 2;
+	optional bool include_pending = 3;
+}
+
+message CDeviceAuth_GetAuthorizedAsBorrower_Response {
+	message Lender {
+		optional fixed64 steamid = 1;
+		optional uint32 time_created = 2;
+		optional bool is_pending = 3;
+		optional bool is_canceled = 4;
+		optional bool is_used = 5;
+	}
+
+	repeated .CDeviceAuth_GetAuthorizedAsBorrower_Response.Lender lenders = 1;
+}
+
+message CDeviceAuth_GetExcludedGamesInLibrary_Request {
+	optional fixed64 steamid = 1;
+}
+
+message CDeviceAuth_GetExcludedGamesInLibrary_Response {
+	message ExcludedGame {
+		optional uint32 appid = 1;
+		optional string game_name = 2;
+		optional bool vac_banned = 3;
+		optional bool package_excluded = 4;
+	}
+
+	repeated .CDeviceAuth_GetExcludedGamesInLibrary_Response.ExcludedGame excluded_games = 1;
+}
+
 service DeviceAuth {
 	option (service_description) = "Library Sharing settings service";
 	rpc GetOwnAuthorizedDevices (.CDeviceAuth_GetOwnAuthorizedDevices_Request) returns (.CDeviceAuth_GetOwnAuthorizedDevices_Response) {
@@ -123,5 +156,11 @@ service DeviceAuth {
 	}
 	rpc RemoveAuthorizedBorrowers (.CDeviceAuth_RemoveAuthorizedBorrowers_Request) returns (.CDeviceAuth_RemoveAuthorizedBorrowers_Response) {
 		option (method_description) = "Remove users that can borrow on limited authorized devices";
+	}
+	rpc GetAuthorizedAsBorrower (.CDeviceAuth_GetAuthorizedAsBorrower_Request) returns (.CDeviceAuth_GetAuthorizedAsBorrower_Response) {
+		option (method_description) = "Get list of lenders that authorized given account as borrower";
+	}
+	rpc GetExcludedGamesInLibrary (.CDeviceAuth_GetExcludedGamesInLibrary_Request) returns (.CDeviceAuth_GetExcludedGamesInLibrary_Response) {
+		option (method_description) = "Get list of excluded games in lenders library";
 	}
 }

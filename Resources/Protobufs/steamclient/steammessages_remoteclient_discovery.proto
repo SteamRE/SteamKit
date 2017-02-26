@@ -116,6 +116,7 @@ message CMsgRemoteDeviceStreamingRequest {
 	optional int32 maximum_resolution_y = 3;
 	optional int32 audio_channel_count = 4 [default = 2];
 	optional string device_version = 5;
+	optional bool stream_desktop = 6;
 }
 
 message CMsgRemoteDeviceStreamingCancelRequest {
