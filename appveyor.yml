@@ -59,7 +59,7 @@ test_script:
       if (Test-Path $TestAssembly)
       {
           & nuget install OpenCover -Version 4.6.166 -OutputDirectory SteamKit2\packages
-          & SteamKit2\packages\OpenCover.4.6.166\tools\OpenCover.Console.exe -register:user "-target:xunit.console.clr4.exe" "-targetargs:$TestAssembly /noshadow /appveyor" -returntargetcode "-filter:+[SteamKit2]* -[SteamKit2]SteamKit2.Internal.* -[SteamKit2]SteamKit2.*.Internal.* -[SteamKit2]SevenZip*" "-excludebyattribute:*.ProtoContract*" -hideskipped:All -output:SteamKit2-code-coverage.xml
+          & SteamKit2\packages\OpenCover.4.6.166\tools\OpenCover.Console.exe -register:user "-target:%xunit20%\xunit.console.exe" "-targetargs:$TestAssembly -noshadow -appveyor" -returntargetcode "-filter:+[SteamKit2]* -[SteamKit2]SteamKit2.Internal.* -[SteamKit2]SteamKit2.*.Internal.* -[SteamKit2]SevenZip*" "-excludebyattribute:*.ProtoContract*" -hideskipped:All -output:SteamKit2-code-coverage.xml
           $env:Path = "C:\Python34;C:\Python34\Scripts;" + $env:Path
           & pip install codecov
           & codecov -f "SteamKit2-code-coverage.xml" -X gcov
@@ -94,7 +94,3 @@ deploy:
     on:
       configuration: Release
       appveyor_repo_tag: true
-
-on_finish:
-  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
-  
