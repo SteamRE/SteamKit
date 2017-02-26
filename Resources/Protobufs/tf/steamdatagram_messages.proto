@@ -18,6 +18,7 @@ enum ESteamDatagramMsgID {
 	k_ESteamDatagramMsg_ClientPingSampleRequest = 14;
 	k_ESteamDatagramMsg_ClientPingSampleReply = 15;
 	k_ESteamDatagramMsg_ClientToRouterSwitchedPrimary = 16;
+	k_ESteamDatagramMsg_RelayHealth = 17;
 }
 
 message CMsgSteamDatagramRouterPingReply {
@@ -29,6 +30,9 @@ message CMsgSteamDatagramRouterPingReply {
 	optional fixed64 challenge = 6;
 	optional uint32 seconds_until_shutdown = 7;
 	optional fixed32 client_cookie = 8;
+	optional uint32 scoring_penalty_relay_cluster = 9;
+	repeated fixed32 scoring_penalty_datacenter_ids = 10 [packed = true];
+	repeated uint32 scoring_penalty_values = 11 [packed = true];
 }
 
 message CMsgSteamDatagramGameserverPing {
@@ -72,6 +76,7 @@ message CMsgSteamDatagramGameserverSessionEstablished {
 	optional fixed32 client_cookie = 1;
 	optional fixed64 gameserver_steam_id = 3;
 	optional uint32 seconds_until_shutdown = 4;
+	optional uint32 session_id = 5;
 }
 
 message CMsgSteamDatagramNoSession {
@@ -178,6 +183,9 @@ message CMsgSteamDatagramConnectionStatsRouterToClient {
 	optional fixed32 client_timestamp_from_server = 4;
 	optional uint32 router_gameserver_latency = 5;
 	optional uint32 seconds_until_shutdown = 6;
+	optional fixed32 migrate_request_ip = 10;
+	optional uint32 migrate_request_port = 11;
+	optional uint32 scoring_penalty_relay_cluster = 12;
 	optional fixed32 client_cookie = 7;
 	optional uint32 seq_num_r2c = 8;
 	optional uint32 seq_num_s2c = 9;
@@ -238,5 +246,22 @@ message CMsgSteamDatagramClientSwitchedPrimary {
 	optional .CMsgSteamDatagramClientSwitchedPrimary.RouterQuality to_quality_now = 10;
 	optional .CMsgSteamDatagramClientSwitchedPrimary.RouterQuality from_quality_then = 11;
 	optional .CMsgSteamDatagramClientSwitchedPrimary.RouterQuality to_quality_then = 12;
+}
+
+message CMsgSteamDatagramRouterHealth {
+	message DataCenter {
+		optional fixed32 datacenter_id = 1;
+		optional uint32 state = 2;
+	}
+
+	optional float cpu_load = 1;
+	optional uint32 active_sessions = 2;
+	optional uint32 data_pkts_sec = 3;
+	optional uint32 other_pkts_sec = 4;
+	optional uint32 seconds_until_shutdown = 5;
+	optional float cpu_cost_per_user = 8;
+	optional float cpu_cost_per_packet = 9;
+	repeated .CMsgSteamDatagramRouterHealth.DataCenter data_centers = 6;
+	optional fixed64 magic = 7;
 }
 

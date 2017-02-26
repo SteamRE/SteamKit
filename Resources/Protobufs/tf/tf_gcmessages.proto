@@ -214,6 +214,9 @@ enum ServerMatchmakingState {
 
 enum SurveyQuestionType {
 	QUESTION_MATCH_QUALITY = 0;
+	QUESTION_MAP_QUALITY = 1;
+	QUESTION_COMP_INQUIRY = 2;
+	QUESTION_CASUAL_INQUIRY = 3;
 }
 
 message CMsgTFGoldenWrenchBroadcast {
