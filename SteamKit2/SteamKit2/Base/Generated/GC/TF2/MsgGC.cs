@@ -7802,7 +7802,16 @@ namespace SteamKit2.GC.TF2.Internal
     {
             
       [global::ProtoBuf.ProtoEnum(Name=@"QUESTION_MATCH_QUALITY", Value=0)]
-      QUESTION_MATCH_QUALITY = 0
+      QUESTION_MATCH_QUALITY = 0,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"QUESTION_MAP_QUALITY", Value=1)]
+      QUESTION_MAP_QUALITY = 1,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"QUESTION_COMP_INQUIRY", Value=2)]
+      QUESTION_COMP_INQUIRY = 2,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"QUESTION_CASUAL_INQUIRY", Value=3)]
+      QUESTION_CASUAL_INQUIRY = 3
     }
   
 }
