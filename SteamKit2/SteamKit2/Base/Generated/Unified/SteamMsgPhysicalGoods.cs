@@ -237,6 +237,24 @@ namespace SteamKit2.Unified.Internal
       get { return _configurations; }
     }
   
+
+    private int _controller_type = (int)2;
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"controller_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue((int)2)]
+    public int controller_type
+    {
+      get { return _controller_type; }
+      set { _controller_type = value; }
+    }
+
+    private bool _only_for_this_serial = (bool)false;
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"only_for_this_serial", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue((bool)false)]
+    public bool only_for_this_serial
+    {
+      get { return _only_for_this_serial; }
+      set { _only_for_this_serial = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -293,6 +311,24 @@ namespace SteamKit2.Unified.Internal
       get { return _appidorname; }
       set { _appidorname = value; }
     }
+
+    private int _controller_type = (int)2;
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"controller_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue((int)2)]
+    public int controller_type
+    {
+      get { return _controller_type; }
+      set { _controller_type = value; }
+    }
+
+    private bool _only_for_this_serial = (bool)false;
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"only_for_this_serial", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue((bool)false)]
+    public bool only_for_this_serial
+    {
+      get { return _only_for_this_serial; }
+      set { _only_for_this_serial = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -329,6 +365,15 @@ namespace SteamKit2.Unified.Internal
     {
       get { return _templatename; }
       set { _templatename = value; }
+    }
+
+    private string _serial_number = "";
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"serial_number", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string serial_number
+    {
+      get { return _serial_number; }
+      set { _serial_number = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

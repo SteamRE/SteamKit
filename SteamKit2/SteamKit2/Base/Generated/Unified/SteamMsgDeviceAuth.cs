@@ -543,6 +543,197 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CDeviceAuth_GetAuthorizedAsBorrower_Request")]
+  public partial class CDeviceAuth_GetAuthorizedAsBorrower_Request : global::ProtoBuf.IExtensible
+  {
+    public CDeviceAuth_GetAuthorizedAsBorrower_Request() {}
+    
+
+    private ulong _steamid = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong steamid
+    {
+      get { return _steamid; }
+      set { _steamid = value; }
+    }
+
+    private bool _include_canceled = default(bool);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"include_canceled", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool include_canceled
+    {
+      get { return _include_canceled; }
+      set { _include_canceled = value; }
+    }
+
+    private bool _include_pending = default(bool);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"include_pending", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool include_pending
+    {
+      get { return _include_pending; }
+      set { _include_pending = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CDeviceAuth_GetAuthorizedAsBorrower_Response")]
+  public partial class CDeviceAuth_GetAuthorizedAsBorrower_Response : global::ProtoBuf.IExtensible
+  {
+    public CDeviceAuth_GetAuthorizedAsBorrower_Response() {}
+    
+    private readonly global::System.Collections.Generic.List<CDeviceAuth_GetAuthorizedAsBorrower_Response.Lender> _lenders = new global::System.Collections.Generic.List<CDeviceAuth_GetAuthorizedAsBorrower_Response.Lender>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"lenders", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CDeviceAuth_GetAuthorizedAsBorrower_Response.Lender> lenders
+    {
+      get { return _lenders; }
+    }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Lender")]
+  public partial class Lender : global::ProtoBuf.IExtensible
+  {
+    public Lender() {}
+    
+
+    private ulong _steamid = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong steamid
+    {
+      get { return _steamid; }
+      set { _steamid = value; }
+    }
+
+    private uint _time_created = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"time_created", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint time_created
+    {
+      get { return _time_created; }
+      set { _time_created = value; }
+    }
+
+    private bool _is_pending = default(bool);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"is_pending", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool is_pending
+    {
+      get { return _is_pending; }
+      set { _is_pending = value; }
+    }
+
+    private bool _is_canceled = default(bool);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"is_canceled", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool is_canceled
+    {
+      get { return _is_canceled; }
+      set { _is_canceled = value; }
+    }
+
+    private bool _is_used = default(bool);
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"is_used", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool is_used
+    {
+      get { return _is_used; }
+      set { _is_used = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CDeviceAuth_GetExcludedGamesInLibrary_Request")]
+  public partial class CDeviceAuth_GetExcludedGamesInLibrary_Request : global::ProtoBuf.IExtensible
+  {
+    public CDeviceAuth_GetExcludedGamesInLibrary_Request() {}
+    
+
+    private ulong _steamid = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong steamid
+    {
+      get { return _steamid; }
+      set { _steamid = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CDeviceAuth_GetExcludedGamesInLibrary_Response")]
+  public partial class CDeviceAuth_GetExcludedGamesInLibrary_Response : global::ProtoBuf.IExtensible
+  {
+    public CDeviceAuth_GetExcludedGamesInLibrary_Response() {}
+    
+    private readonly global::System.Collections.Generic.List<CDeviceAuth_GetExcludedGamesInLibrary_Response.ExcludedGame> _excluded_games = new global::System.Collections.Generic.List<CDeviceAuth_GetExcludedGamesInLibrary_Response.ExcludedGame>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"excluded_games", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CDeviceAuth_GetExcludedGamesInLibrary_Response.ExcludedGame> excluded_games
+    {
+      get { return _excluded_games; }
+    }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ExcludedGame")]
+  public partial class ExcludedGame : global::ProtoBuf.IExtensible
+  {
+    public ExcludedGame() {}
+    
+
+    private uint _appid = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"appid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint appid
+    {
+      get { return _appid; }
+      set { _appid = value; }
+    }
+
+    private string _game_name = "";
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"game_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string game_name
+    {
+      get { return _game_name; }
+      set { _game_name = value; }
+    }
+
+    private bool _vac_banned = default(bool);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"vac_banned", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool vac_banned
+    {
+      get { return _vac_banned; }
+      set { _vac_banned = value; }
+    }
+
+    private bool _package_excluded = default(bool);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"package_excluded", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool package_excluded
+    {
+      get { return _package_excluded; }
+      set { _package_excluded = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     public interface IDeviceAuth
     {
       CDeviceAuth_GetOwnAuthorizedDevices_Response GetOwnAuthorizedDevices(CDeviceAuth_GetOwnAuthorizedDevices_Request request);
@@ -553,6 +744,8 @@ namespace SteamKit2.Unified.Internal
     CDeviceAuth_GetAuthorizedBorrowers_Response GetAuthorizedBorrowers(CDeviceAuth_GetAuthorizedBorrowers_Request request);
     CDeviceAuth_AddAuthorizedBorrowers_Response AddAuthorizedBorrowers(CDeviceAuth_AddAuthorizedBorrowers_Request request);
     CDeviceAuth_RemoveAuthorizedBorrowers_Response RemoveAuthorizedBorrowers(CDeviceAuth_RemoveAuthorizedBorrowers_Request request);
+    CDeviceAuth_GetAuthorizedAsBorrower_Response GetAuthorizedAsBorrower(CDeviceAuth_GetAuthorizedAsBorrower_Request request);
+    CDeviceAuth_GetExcludedGamesInLibrary_Response GetExcludedGamesInLibrary(CDeviceAuth_GetExcludedGamesInLibrary_Request request);
     
     }
     

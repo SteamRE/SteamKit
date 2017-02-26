@@ -3614,6 +3614,33 @@ namespace SteamKit2.Internal
       get { return _total_bytes_staged; }
       set { _total_bytes_staged = value; }
     }
+
+    private ulong _total_bytes_restored = default(ulong);
+    [global::ProtoBuf.ProtoMember(16, IsRequired = false, Name=@"total_bytes_restored", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong total_bytes_restored
+    {
+      get { return _total_bytes_restored; }
+      set { _total_bytes_restored = value; }
+    }
+
+    private bool _is_borrowed = default(bool);
+    [global::ProtoBuf.ProtoMember(17, IsRequired = false, Name=@"is_borrowed", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool is_borrowed
+    {
+      get { return _is_borrowed; }
+      set { _is_borrowed = value; }
+    }
+
+    private bool _is_free_weekend = default(bool);
+    [global::ProtoBuf.ProtoMember(18, IsRequired = false, Name=@"is_free_weekend", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool is_free_weekend
+    {
+      get { return _is_free_weekend; }
+      set { _is_free_weekend = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -6587,6 +6614,15 @@ namespace SteamKit2.Internal
       get { return _owner_account_id; }
       set { _owner_account_id = value; }
     }
+
+    private ulong _local_device_token = default(ulong);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"local_device_token", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong local_device_token
+    {
+      get { return _local_device_token; }
+      set { _local_device_token = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -6623,6 +6659,43 @@ namespace SteamKit2.Internal
     {
       get { return _authed_device_token; }
       set { _authed_device_token = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientAuthorizeLocalDeviceNotification")]
+  public partial class CMsgClientAuthorizeLocalDeviceNotification : global::ProtoBuf.IExtensible
+  {
+    public CMsgClientAuthorizeLocalDeviceNotification() {}
+    
+
+    private int _eresult = (int)2;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"eresult", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue((int)2)]
+    public int eresult
+    {
+      get { return _eresult; }
+      set { _eresult = value; }
+    }
+
+    private uint _owner_account_id = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"owner_account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint owner_account_id
+    {
+      get { return _owner_account_id; }
+      set { _owner_account_id = value; }
+    }
+
+    private ulong _local_device_token = default(ulong);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"local_device_token", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong local_device_token
+    {
+      get { return _local_device_token; }
+      set { _local_device_token = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -7461,6 +7534,15 @@ namespace SteamKit2.Internal
     {
       get { return _launcher; }
       set { _launcher = value; }
+    }
+
+    private uint _language = default(uint);
+    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"language", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint language
+    {
+      get { return _language; }
+      set { _language = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
