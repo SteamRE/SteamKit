@@ -881,7 +881,22 @@ message CMsgDOTAGetEventPointsResponse {
 	optional uint32 account_id = 7;
 	optional bool owned = 8;
 	optional uint32 audit_action = 9;
-	optional uint32 periodic_points_remaining = 10;
+}
+
+message CMsgDOTAGetPeriodicResource {
+	optional uint32 account_id = 1;
+	optional uint32 periodic_resource_id = 2;
+	optional uint32 timestamp = 3;
+}
+
+message CMsgDOTAGetPeriodicResourceResponse {
+	optional uint32 periodic_resource_max = 1;
+	optional uint32 periodic_resource_used = 2;
+}
+
+message CMsgDOTAPeriodicResourceUpdated {
+	optional .CMsgDOTAGetPeriodicResource periodic_resource_key = 1;
+	optional .CMsgDOTAGetPeriodicResourceResponse periodic_resource_value = 2;
 }
 
 message CMsgDOTALiveLeagueGameUpdate {
@@ -1668,8 +1683,9 @@ message CMsgClientToGCRequestEventPointLogResponse {
 		optional uint32 recipe_item_def_index = 1;
 	}
 
-	message AchievementEvent {
+	message ActionRewardEvent {
 		optional uint32 action_id = 1;
+		optional uint32 action_score = 2;
 	}
 
 	message MysteryItemReceivedEvent {
@@ -1707,14 +1723,11 @@ message CMsgClientToGCRequestEventPointLogResponse {
 		optional .CMsgClientToGCRequestEventPointLogResponse.TipGivenEvent tip_given_event = 8;
 		optional .CMsgClientToGCRequestEventPointLogResponse.TipReceivedEvent tip_received_event = 9;
 		optional .CMsgClientToGCRequestEventPointLogResponse.RecycledItemEvent recycled_item_event = 10;
-		optional .CMsgClientToGCRequestEventPointLogResponse.AchievementEvent achievement_event = 11;
+		optional .CMsgClientToGCRequestEventPointLogResponse.ActionRewardEvent action_reward_event = 11;
 		optional .CMsgClientToGCRequestEventPointLogResponse.InGamePredictionCorrectEvent in_game_prediction_event = 12;
 		optional .CMsgClientToGCRequestEventPointLogResponse.CorrectPredictionEvent prediction_event = 13;
-		optional .CMsgClientToGCRequestEventPointLogResponse.WeekendTourneyPayoutEvent weekend_tourney_payout_event = 14;
 		optional .CMsgClientToGCRequestEventPointLogResponse.FantasyRewardEvent fantasy_reward_event = 15;
 		optional .CMsgClientToGCRequestEventPointLogResponse.BracketRewardEvent bracket_reward_event = 16;
-		optional bool weekly_quest_completed_event = 17;
-		optional bool daily_quest_completed_event = 18;
 	}
 
 	optional bool result = 1;

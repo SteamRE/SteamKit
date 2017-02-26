@@ -43,6 +43,7 @@ enum EBaseUserMessages {
 	UM_HudError = 146;
 	UM_CustomGameEvent = 148;
 	UM_HandHapticPulse = 149;
+	UM_AnimGraphUpdate = 150;
 	UM_MAX_BASE = 200;
 }
 
@@ -428,5 +429,10 @@ message CUserMsg_CustomGameEvent {
 message CUserMessageHapticPulse {
 	optional int32 hand_id = 1;
 	optional .EHapticPulseType pulse_type = 2 [default = VR_HAND_HAPTIC_PULSE_LIGHT];
+}
+
+message CUserMessageAnimStateGraphState {
+	optional int32 entity_index = 1;
+	optional bytes data = 2;
 }
 

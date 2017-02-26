@@ -192,9 +192,6 @@ message CSVCMsg_ServerInfo {
 	optional bool is_hltv = 4;
 	optional bool is_replay = 5;
 	optional int32 c_os = 6;
-	optional fixed32 map_crc = 7;
-	optional fixed32 client_crc = 8;
-	optional fixed32 string_table_crc = 9;
 	optional int32 max_clients = 10;
 	optional int32 max_classes = 11;
 	optional int32 player_slot = 12;
@@ -431,7 +428,6 @@ message CSVCMsg_PeerList {
 
 message CSVCMsg_ClearAllStringTables {
 	optional string mapname = 1;
-	optional uint32 map_crc = 2;
 }
 
 message ProtoFlattenedSerializerField_t {

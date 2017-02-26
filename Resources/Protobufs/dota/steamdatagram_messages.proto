@@ -21,6 +21,15 @@ enum ESteamDatagramMsgID {
 	k_ESteamDatagramMsg_RelayHealth = 17;
 }
 
+enum ESteamNetworkingUDPMsgID {
+	k_ESteamNetworkingUDPMsg_ConnectRequest1 = 32;
+	k_ESteamNetworkingUDPMsg_ConnectReply1 = 33;
+	k_ESteamNetworkingUDPMsg_ConnectRequest2 = 34;
+	k_ESteamNetworkingUDPMsg_ConnectOK = 35;
+	k_ESteamNetworkingUDPMsg_ConnectionClosed = 36;
+	k_ESteamNetworkingUDPMsg_NoConnection = 37;
+}
+
 message CMsgSteamDatagramRouterPingReply {
 	optional fixed32 client_timestamp = 1;
 	repeated fixed32 latency_datacenter_ids = 2 [packed = true];
@@ -263,5 +272,34 @@ message CMsgSteamDatagramRouterHealth {
 	optional float cpu_cost_per_packet = 9;
 	repeated .CMsgSteamDatagramRouterHealth.DataCenter data_centers = 6;
 	optional fixed64 magic = 7;
+}
+
+message CMsgSteamSockets_UDP_ConnectRequest1 {
+	optional fixed32 session_id = 1;
+}
+
+message CMsgSteamSockets_UDP_ConnectReply1 {
+	optional fixed32 session_id = 1;
+	optional fixed64 challenge = 2;
+}
+
+message CMsgSteamSockets_UDP_ConnectRequest2 {
+	optional fixed32 session_id = 1;
+	optional fixed64 challenge = 2;
+	optional fixed64 client_steam_id = 3;
+}
+
+message CMsgSteamSockets_UDP_ConnectOK {
+	optional fixed32 session_id = 1;
+	optional fixed64 server_steam_id = 2;
+}
+
+message CMsgSteamSockets_UDP_ConnectionClosed {
+	optional fixed32 session_id = 1;
+	optional string reason = 2;
+}
+
+message CMsgSteamSockets_UDP_NoConnection {
+	optional fixed32 session_id = 1;
 }
 

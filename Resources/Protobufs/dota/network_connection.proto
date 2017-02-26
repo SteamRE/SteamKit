@@ -81,5 +81,27 @@ enum ENetworkDisconnectionReason {
 	NETWORK_DISCONNECT_REPLAY_INCOMPATIBLE = 71 [(network_connection_token) = "#GameUI_Disconnect_ReplayIncompatible"];
 	NETWORK_DISCONNECT_CONNECT_REQUEST_TIMEDOUT = 72 [(network_connection_token) = "#GameUI_Disconnect_ConnectionTimedout"];
 	NETWORK_DISCONNECT_SERVER_INCOMPATIBLE = 73 [(network_connection_token) = "#GameUI_Disconnect_ServerIncompatible"];
+	NETWORK_DISCONNECT_REJECT_BADCHALLENGE = 128 [(network_connection_token) = "#GameUI_ServerRejectBadChallenge"];
+	NETWORK_DISCONNECT_REJECT_NOLOBBY = 129 [(network_connection_token) = "#GameUI_ServerNoLobby"];
+	NETWORK_DISCONNECT_REJECT_BACKGROUND_MAP = 130 [(network_connection_token) = "#Valve_Reject_Background_Map"];
+	NETWORK_DISCONNECT_REJECT_SINGLE_PLAYER = 131 [(network_connection_token) = "#Valve_Reject_Single_Player"];
+	NETWORK_DISCONNECT_REJECT_HIDDEN_GAME = 132 [(network_connection_token) = "#Valve_Reject_Hidden_Game"];
+	NETWORK_DISCONNECT_REJECT_LANRESTRICT = 133 [(network_connection_token) = "#GameUI_ServerRejectLANRestrict"];
+	NETWORK_DISCONNECT_REJECT_BADPASSWORD = 134 [(network_connection_token) = "#GameUI_ServerRejectBadPassword"];
+	NETWORK_DISCONNECT_REJECT_SERVERFULL = 135 [(network_connection_token) = "#GameUI_ServerRejectServerFull"];
+	NETWORK_DISCONNECT_REJECT_INVALIDRESERVATION = 136 [(network_connection_token) = "#GameUI_ServerRejectInvalidReservation"];
+	NETWORK_DISCONNECT_REJECT_FAILEDCHANNEL = 137 [(network_connection_token) = "#GameUI_ServerRejectFailedChannel"];
+	NETWORK_DISCONNECT_REJECT_CONNECT_FROM_LOBBY = 138 [(network_connection_token) = "#Valve_Reject_Connect_From_Lobby"];
+	NETWORK_DISCONNECT_REJECT_RESERVED_FOR_LOBBY = 139 [(network_connection_token) = "#Valve_Reject_Reserved_For_Lobby"];
+	NETWORK_DISCONNECT_REJECT_INVALIDKEYLENGTH = 140 [(network_connection_token) = "#GameUI_ServerReject_InvalidKeyLength"];
+	NETWORK_DISCONNECT_REJECT_OLDPROTOCOL = 141 [(network_connection_token) = "#GameUI_ServerRejectOldProtocol"];
+	NETWORK_DISCONNECT_REJECT_NEWPROTOCOL = 142 [(network_connection_token) = "#GameUI_ServerRejectNewProtocol"];
+	NETWORK_DISCONNECT_REJECT_INVALIDCONNECTION = 143 [(network_connection_token) = "#GameUI_ServerRejectInvalidConnection"];
+	NETWORK_DISCONNECT_REJECT_INVALIDCERTLEN = 144 [(network_connection_token) = "#GameUI_ServerRejectInvalidCertLen"];
+	NETWORK_DISCONNECT_REJECT_INVALIDSTEAMCERTLEN = 145 [(network_connection_token) = "#GameUI_ServerRejectInvalidSteamCertLen"];
+	NETWORK_DISCONNECT_REJECT_STEAM = 146 [(network_connection_token) = "#GameUI_ServerRejectSteam"];
+	NETWORK_DISCONNECT_REJECT_SERVERAUTHDISABLED = 147 [(network_connection_token) = "#GameUI_ServerAuthDisabled"];
+	NETWORK_DISCONNECT_REJECT_SERVERCDKEYAUTHINVALID = 148 [(network_connection_token) = "#GameUI_ServerCDKeyAuthInvalid"];
+	NETWORK_DISCONNECT_REJECT_BANNED = 149 [(network_connection_token) = "#GameUI_ServerRejectBanned"];
 }
 

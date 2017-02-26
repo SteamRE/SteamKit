@@ -64,6 +64,7 @@ enum EDotaClientMessages {
 	DOTA_CM_SetDesiredWardPlacement = 361;
 	DOTA_CM_RollDice = 362;
 	DOTA_CM_FlipCoin = 363;
+	DOTA_CM_RequestItemSuggestions = 364;
 }
 
 message CDOTAClientMsg_MapPing {
@@ -191,6 +192,7 @@ message CDOTAClientMsg_RecordVote {
 message CDOTAClientMsg_WillPurchaseAlert {
 	optional int32 itemid = 1;
 	optional uint32 gold_remaining = 2;
+	optional int32 suggestion_player_id = 3;
 }
 
 message CDOTAClientMsg_BuyBackStateAlert {
@@ -333,5 +335,8 @@ message CDOTAClientMsg_RollDice {
 
 message CDOTAClientMsg_FlipCoin {
 	optional uint32 channel_type = 1;
+}
+
+message CDOTAClientMsg_RequestItemSuggestions {
 }
 

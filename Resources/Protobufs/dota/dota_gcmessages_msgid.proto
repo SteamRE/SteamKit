@@ -688,5 +688,8 @@ enum EDOTAGCMsg {
 	k_EMsgGCIsProResponse = 8208;
 	k_EMsgDOTAClaimEventAction = 8209;
 	k_EMsgDOTAClaimEventActionResponse = 8210;
+	k_EMsgDOTAGetPeriodicResource = 8211;
+	k_EMsgDOTAGetPeriodicResourceResponse = 8212;
+	k_EMsgDOTAPeriodicResourceUpdated = 8213;
 }
 
