@@ -4587,15 +4587,6 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _audit_action; }
       set { _audit_action = value; }
     }
-
-    private uint _periodic_points_remaining = default(uint);
-    [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"periodic_points_remaining", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint periodic_points_remaining
-    {
-      get { return _periodic_points_remaining; }
-      set { _periodic_points_remaining = value; }
-    }
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Action")]
   public partial class Action : global::ProtoBuf.IExtensible
   {
@@ -4624,6 +4615,99 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAGetPeriodicResource")]
+  public partial class CMsgDOTAGetPeriodicResource : global::ProtoBuf.IExtensible
+  {
+    public CMsgDOTAGetPeriodicResource() {}
+    
+
+    private uint _account_id = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"account_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint account_id
+    {
+      get { return _account_id; }
+      set { _account_id = value; }
+    }
+
+    private uint _periodic_resource_id = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"periodic_resource_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint periodic_resource_id
+    {
+      get { return _periodic_resource_id; }
+      set { _periodic_resource_id = value; }
+    }
+
+    private uint _timestamp = default(uint);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"timestamp", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint timestamp
+    {
+      get { return _timestamp; }
+      set { _timestamp = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAGetPeriodicResourceResponse")]
+  public partial class CMsgDOTAGetPeriodicResourceResponse : global::ProtoBuf.IExtensible
+  {
+    public CMsgDOTAGetPeriodicResourceResponse() {}
+    
+
+    private uint _periodic_resource_max = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"periodic_resource_max", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint periodic_resource_max
+    {
+      get { return _periodic_resource_max; }
+      set { _periodic_resource_max = value; }
+    }
+
+    private uint _periodic_resource_used = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"periodic_resource_used", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint periodic_resource_used
+    {
+      get { return _periodic_resource_used; }
+      set { _periodic_resource_used = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAPeriodicResourceUpdated")]
+  public partial class CMsgDOTAPeriodicResourceUpdated : global::ProtoBuf.IExtensible
+  {
+    public CMsgDOTAPeriodicResourceUpdated() {}
+    
+
+    private CMsgDOTAGetPeriodicResource _periodic_resource_key = null;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"periodic_resource_key", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public CMsgDOTAGetPeriodicResource periodic_resource_key
+    {
+      get { return _periodic_resource_key; }
+      set { _periodic_resource_key = value; }
+    }
+
+    private CMsgDOTAGetPeriodicResourceResponse _periodic_resource_value = null;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"periodic_resource_value", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public CMsgDOTAGetPeriodicResourceResponse periodic_resource_value
+    {
+      get { return _periodic_resource_value; }
+      set { _periodic_resource_value = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -9218,10 +9302,10 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"AchievementEvent")]
-  public partial class AchievementEvent : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ActionRewardEvent")]
+  public partial class ActionRewardEvent : global::ProtoBuf.IExtensible
   {
-    public AchievementEvent() {}
+    public ActionRewardEvent() {}
     
 
     private uint _action_id = default(uint);
@@ -9231,6 +9315,15 @@ namespace SteamKit2.GC.Dota.Internal
     {
       get { return _action_id; }
       set { _action_id = value; }
+    }
+
+    private uint _action_score = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"action_score", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint action_score
+    {
+      get { return _action_score; }
+      set { _action_score = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -9447,13 +9540,13 @@ namespace SteamKit2.GC.Dota.Internal
       set { _recycled_item_event = value; }
     }
 
-    private CMsgClientToGCRequestEventPointLogResponse.AchievementEvent _achievement_event = null;
-    [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"achievement_event", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    private CMsgClientToGCRequestEventPointLogResponse.ActionRewardEvent _action_reward_event = null;
+    [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"action_reward_event", DataFormat = global::ProtoBuf.DataFormat.Default)]
     [global::System.ComponentModel.DefaultValue(null)]
-    public CMsgClientToGCRequestEventPointLogResponse.AchievementEvent achievement_event
+    public CMsgClientToGCRequestEventPointLogResponse.ActionRewardEvent action_reward_event
     {
-      get { return _achievement_event; }
-      set { _achievement_event = value; }
+      get { return _action_reward_event; }
+      set { _action_reward_event = value; }
     }
 
     private CMsgClientToGCRequestEventPointLogResponse.InGamePredictionCorrectEvent _in_game_prediction_event = null;
@@ -9474,15 +9567,6 @@ namespace SteamKit2.GC.Dota.Internal
       set { _prediction_event = value; }
     }
 
-    private CMsgClientToGCRequestEventPointLogResponse.WeekendTourneyPayoutEvent _weekend_tourney_payout_event = null;
-    [global::ProtoBuf.ProtoMember(14, IsRequired = false, Name=@"weekend_tourney_payout_event", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
-    public CMsgClientToGCRequestEventPointLogResponse.WeekendTourneyPayoutEvent weekend_tourney_payout_event
-    {
-      get { return _weekend_tourney_payout_event; }
-      set { _weekend_tourney_payout_event = value; }
-    }
-
     private CMsgClientToGCRequestEventPointLogResponse.FantasyRewardEvent _fantasy_reward_event = null;
     [global::ProtoBuf.ProtoMember(15, IsRequired = false, Name=@"fantasy_reward_event", DataFormat = global::ProtoBuf.DataFormat.Default)]
     [global::System.ComponentModel.DefaultValue(null)]
@@ -9499,24 +9583,6 @@ namespace SteamKit2.GC.Dota.Internal
     {
       get { return _bracket_reward_event; }
       set { _bracket_reward_event = value; }
-    }
-
-    private bool _weekly_quest_completed_event = default(bool);
-    [global::ProtoBuf.ProtoMember(17, IsRequired = false, Name=@"weekly_quest_completed_event", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
-    public bool weekly_quest_completed_event
-    {
-      get { return _weekly_quest_completed_event; }
-      set { _weekly_quest_completed_event = value; }
-    }
-
-    private bool _daily_quest_completed_event = default(bool);
-    [global::ProtoBuf.ProtoMember(18, IsRequired = false, Name=@"daily_quest_completed_event", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
-    public bool daily_quest_completed_event
-    {
-      get { return _daily_quest_completed_event; }
-      set { _daily_quest_completed_event = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

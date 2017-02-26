@@ -2071,7 +2071,16 @@ namespace SteamKit2.GC.Dota.Internal
       k_EMsgDOTAClaimEventAction = 8209,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgDOTAClaimEventActionResponse", Value=8210)]
-      k_EMsgDOTAClaimEventActionResponse = 8210
+      k_EMsgDOTAClaimEventActionResponse = 8210,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgDOTAGetPeriodicResource", Value=8211)]
+      k_EMsgDOTAGetPeriodicResource = 8211,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgDOTAGetPeriodicResourceResponse", Value=8212)]
+      k_EMsgDOTAGetPeriodicResourceResponse = 8212,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgDOTAPeriodicResourceUpdated", Value=8213)]
+      k_EMsgDOTAPeriodicResourceUpdated = 8213
     }
   
 }

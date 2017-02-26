@@ -418,6 +418,15 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _server_steam_id; }
       set { _server_steam_id = value; }
     }
+
+    private bool _is_online = default(bool);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"is_online", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool is_online
+    {
+      get { return _is_online; }
+      set { _is_online = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

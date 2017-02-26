@@ -440,8 +440,11 @@ namespace SteamKit2.GC.Dota.Internal
       [global::ProtoBuf.ProtoEnum(Name=@"EVENT_ID_NEW_BLOOM_2017", Value=17)]
       EVENT_ID_NEW_BLOOM_2017 = 17,
             
-      [global::ProtoBuf.ProtoEnum(Name=@"EVENT_ID_COUNT", Value=18)]
-      EVENT_ID_COUNT = 18
+      [global::ProtoBuf.ProtoEnum(Name=@"EVENT_ID_INTERNATIONAL_2017", Value=18)]
+      EVENT_ID_INTERNATIONAL_2017 = 18,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"EVENT_ID_COUNT", Value=19)]
+      EVENT_ID_COUNT = 19
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"DOTALeaverStatus_t", EnumPassthru=true)]
