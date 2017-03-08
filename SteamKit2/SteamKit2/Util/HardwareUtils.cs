@@ -2,18 +2,20 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Management;
+using System.Threading.Tasks;
 using System.Net.NetworkInformation;
 using System.Text;
-using Microsoft.Win32;
 using SteamKit2.Util.MacHelpers;
+using Microsoft.Win32;
+
+#if NET46
+using System.Management;
+#endif
 
 using static SteamKit2.Util.MacHelpers.LibC;
 using static SteamKit2.Util.MacHelpers.CoreFoundation;
 using static SteamKit2.Util.MacHelpers.DiskArbitration;
 using static SteamKit2.Util.MacHelpers.IOKit;
-using System.Threading.Tasks;
-using System.Runtime.InteropServices;
 
 namespace SteamKit2
 {
@@ -50,7 +52,13 @@ namespace SteamKit2
     {
         public override byte[] GetMachineGuid()
         {
+#if NETSTANDARD1_3
+            return Encoding.UTF8.GetBytes( "SteamKit2-MachineID" );
+#elif NET46
             return Encoding.UTF8.GetBytes( Environment.MachineName + "-SteamKit" );
+#else
+#error Unknown Target Platform
+#endif
         }
 
         public override byte[] GetMacAddress()
@@ -81,6 +89,9 @@ namespace SteamKit2
     {
         public override byte[] GetMachineGuid()
         {
+#if NETSTANDARD1_3
+            return base.GetMachineGuid();
+#elif NET46
             RegistryKey localKey = RegistryKey
                 .OpenBaseKey( Microsoft.Win32.RegistryHive.LocalMachine, RegistryView.Registry64 )
                 .OpenSubKey( @"SOFTWARE\Microsoft\Cryptography" );
@@ -98,10 +109,16 @@ namespace SteamKit2
             }
 
             return Encoding.UTF8.GetBytes( guid.ToString() );
+#else
+#error Unknown Target Platform
+#endif
         }
 
         public override byte[] GetDiskId()
         {
+#if NETSTANDARD1_3
+            return base.GetDiskId();
+#elif NET46
             var activePartition = WmiQuery(
                 @"SELECT DiskIndex FROM Win32_DiskPartition
                   WHERE Bootable = 1"
@@ -132,9 +149,13 @@ namespace SteamKit2
             }
 
             return Encoding.UTF8.GetBytes( serialNumber );
+#else
+#error Unknown Target Platform
+#endif
         }
 
 
+#if NET46
         IEnumerable<ManagementObject> WmiQuery( string queryFormat, params object[] args )
         {
             string query = string.Format( queryFormat, args );
@@ -150,6 +171,7 @@ namespace SteamKit2
                 return Enumerable.Empty<ManagementObject>();
             }
         }
+#endif
     }
 
     class LinuxInfoProvider : DefaultInfoProvider
