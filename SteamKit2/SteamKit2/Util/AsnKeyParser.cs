@@ -35,12 +35,17 @@ using System.Globalization;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Security.Cryptography;
-using System.Security.Permissions;
 using System.Text;
+
+#if NET46
+using System.Security.Permissions;
+#endif
 
 namespace SteamKit2
 {
+#if NET46
     [Serializable]
+#endif
     sealed class BerDecodeException : Exception
     {
         readonly int _position;
@@ -71,11 +76,13 @@ namespace SteamKit2
             _position = position;
         }
 
+#if NET46
         BerDecodeException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
             _position = info.GetInt32("Position");
         }
+#endif
 
         public int Position
         {
@@ -95,15 +102,17 @@ namespace SteamKit2
             }
         }
 
+#if NET46
         [SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             base.GetObjectData(info, context);
             info.AddValue("Position", _position);
         }
+#endif
     }
-	
-	
+    
+    
     class AsnKeyParser
     {
             readonly AsnParser _parser;
@@ -253,6 +262,7 @@ namespace SteamKit2
                 return parameters;
             }
 
+#if NET46
             public DSAParameters ParseDSAPublicKey()
             {
                 var parameters = new DSAParameters();
@@ -329,9 +339,10 @@ namespace SteamKit2
 
                 return parameters;
             }
-        }
+#endif
+    }
 
-        internal class AsnParser
+    internal class AsnParser
         {
             readonly int _initialCount;
             readonly List<byte> _octets;

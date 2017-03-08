@@ -36,6 +36,7 @@
 
   <ItemGroup>
     <PackageReference Include="protobuf-net" Version="2.1.0" />
+    <PackageReference Include="System.Security.Cryptography.Algorithms" Version="4.3.0" />
   </ItemGroup>
 
   <ItemGroup>
