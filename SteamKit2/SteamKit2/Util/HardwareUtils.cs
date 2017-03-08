@@ -8,6 +8,10 @@ using System.Text;
 using SteamKit2.Util.MacHelpers;
 using Microsoft.Win32;
 
+#if NETSTANDARD1_3
+using System.Runtime.InteropServices;
+#endif
+
 #if NET46
 using System.Management;
 #endif
@@ -23,6 +27,20 @@ namespace SteamKit2
     {
         public static MachineInfoProvider GetProvider()
         {
+#if NETSTANDARD1_3
+            if ( RuntimeInformation.IsOSPlatform( OSPlatform.Windows ) )
+            {
+                return new WindowsInfoProvider();
+            }
+            else if ( RuntimeInformation.IsOSPlatform( OSPlatform.OSX ) )
+            {
+                return new OSXInfoProvider();
+            }
+            else if ( RuntimeInformation.IsOSPlatform( OSPlatform.Linux ) )
+            {
+                return new LinuxInfoProvider();
+            }
+#elif NET46
             switch ( Environment.OSVersion.Platform )
             {
                 case PlatformID.Win32NT:
@@ -39,6 +57,9 @@ namespace SteamKit2
                         return new LinuxInfoProvider();
                     }
             }
+#else
+#error Unknown Target Platform
+#endif
 
             return new DefaultInfoProvider();
         }
