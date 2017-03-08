@@ -9,6 +9,7 @@ using System;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 
@@ -39,6 +40,24 @@ namespace SteamKit2
 
         public static EOSType GetOSType()
         {
+#if NETSTANDARD1_3
+            if ( RuntimeInformation.IsOSPlatform( OSPlatform.Windows ) )
+            {
+                return EOSType.WinUnknown;
+            }
+            else if ( RuntimeInformation.IsOSPlatform( OSPlatform.OSX ) )
+            {
+                return EOSType.MacOSUnknown;
+            }
+            else if ( RuntimeInformation.IsOSPlatform( OSPlatform.Linux ) )
+            {
+                return EOSType.LinuxUnknown;
+            }
+            else
+            {
+                return EOSType.Unknown;
+            }
+#elif NET46
             var osVer = Environment.OSVersion;
             var ver = osVer.Version;
 
@@ -156,6 +175,9 @@ namespace SteamKit2
                 default:
                     return EOSType.Unknown;
             }
+#else
+#error Unknown Target Platform
+#endif
         }
 
         public static bool IsRunningOnDarwin()
@@ -193,7 +215,7 @@ namespace SteamKit2
         public static T[] GetAttributes<T>( this Type type, bool inherit = false )
             where T : Attribute
         {
-            return type.GetCustomAttributes( typeof( T ), inherit ) as T[];
+            return type.GetTypeInfo().GetCustomAttributes( typeof( T ), inherit ) as T[];
         }
     }
 
