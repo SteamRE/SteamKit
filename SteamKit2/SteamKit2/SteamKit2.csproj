@@ -36,6 +36,7 @@
 
   <ItemGroup>
     <PackageReference Include="protobuf-net" Version="2.1.0" />
+    <PackageReference Include="System.AppContext" Version="4.3.0" />
     <PackageReference Include="System.Net.NetworkInformation" Version="4.3.0" />
     <PackageReference Include="System.Security.Cryptography.Algorithms" Version="4.3.0" />
     <PackageReference Include="System.Threading.Thread" Version="4.3.0" />
@@ -46,5 +47,5 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-
+  
 </Project>
