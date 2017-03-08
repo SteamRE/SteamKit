@@ -2,6 +2,13 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard1.3;net46</TargetFrameworks>
+    <Company>SteamRE Team</Company>
+    <Authors></Authors>
+    <Description>Steam Networking Library</Description>
+    <Copyright>Copyright © SteamRE Team 2017</Copyright>
+    <AssemblyVersion>1.8.1</AssemblyVersion>
+    <FileVersion>1.8.1</FileVersion>
+    <InformationalVersion>1.8.1 - Development</InformationalVersion>
   </PropertyGroup>
 
   <ItemGroup>
