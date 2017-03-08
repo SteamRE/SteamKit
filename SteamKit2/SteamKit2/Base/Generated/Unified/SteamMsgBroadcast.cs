@@ -8,11 +8,13 @@
 //------------------------------------------------------------------------------
 #pragma warning disable 1591
 
+// Option: light framework (CF/Silverlight) enabled
+    
 // Generated from: steammessages_broadcast.steamclient.proto
 // Note: requires additional types generated from: steammessages_unified_base.steamclient.proto
 namespace SteamKit2.Unified.Internal
 {
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CBroadcast_BeginBroadcastSession_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CBroadcast_BeginBroadcastSession_Request")]
   public partial class CBroadcast_BeginBroadcastSession_Request : global::ProtoBuf.IExtensible
   {
     public CBroadcast_BeginBroadcastSession_Request() {}
@@ -76,7 +78,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CBroadcast_BeginBroadcastSession_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CBroadcast_BeginBroadcastSession_Response")]
   public partial class CBroadcast_BeginBroadcastSession_Response : global::ProtoBuf.IExtensible
   {
     public CBroadcast_BeginBroadcastSession_Response() {}
@@ -95,7 +97,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CBroadcast_EndBroadcastSession_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CBroadcast_EndBroadcastSession_Request")]
   public partial class CBroadcast_EndBroadcastSession_Request : global::ProtoBuf.IExtensible
   {
     public CBroadcast_EndBroadcastSession_Request() {}
@@ -114,7 +116,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CBroadcast_EndBroadcastSession_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CBroadcast_EndBroadcastSession_Response")]
   public partial class CBroadcast_EndBroadcastSession_Response : global::ProtoBuf.IExtensible
   {
     public CBroadcast_EndBroadcastSession_Response() {}
@@ -124,7 +126,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CBroadcast_StartBroadcastUpload_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CBroadcast_StartBroadcastUpload_Request")]
   public partial class CBroadcast_StartBroadcastUpload_Request : global::ProtoBuf.IExtensible
   {
     public CBroadcast_StartBroadcastUpload_Request() {}
@@ -170,7 +172,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CBroadcast_StartBroadcastUpload_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CBroadcast_StartBroadcastUpload_Response")]
   public partial class CBroadcast_StartBroadcastUpload_Response : global::ProtoBuf.IExtensible
   {
     public CBroadcast_StartBroadcastUpload_Response() {}
@@ -207,7 +209,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CBroadcast_NotifyBroadcastUploadStop_Notification")]
+  [global::ProtoBuf.ProtoContract(Name=@"CBroadcast_NotifyBroadcastUploadStop_Notification")]
   public partial class CBroadcast_NotifyBroadcastUploadStop_Notification : global::ProtoBuf.IExtensible
   {
     public CBroadcast_NotifyBroadcastUploadStop_Notification() {}
@@ -235,7 +237,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CBroadcast_WatchBroadcast_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CBroadcast_WatchBroadcast_Request")]
   public partial class CBroadcast_WatchBroadcast_Request : global::ProtoBuf.IExtensible
   {
     public CBroadcast_WatchBroadcast_Request() {}
@@ -290,7 +292,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CBroadcast_WatchBroadcast_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CBroadcast_WatchBroadcast_Response")]
   public partial class CBroadcast_WatchBroadcast_Response : global::ProtoBuf.IExtensible
   {
     public CBroadcast_WatchBroadcast_Response() {}
@@ -431,7 +433,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CBroadcast_GetBroadcastStatus_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CBroadcast_GetBroadcastStatus_Request")]
   public partial class CBroadcast_GetBroadcastStatus_Request : global::ProtoBuf.IExtensible
   {
     public CBroadcast_GetBroadcastStatus_Request() {}
@@ -459,7 +461,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CBroadcast_GetBroadcastStatus_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CBroadcast_GetBroadcastStatus_Response")]
   public partial class CBroadcast_GetBroadcastStatus_Response : global::ProtoBuf.IExtensible
   {
     public CBroadcast_GetBroadcastStatus_Response() {}
@@ -532,7 +534,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CBroadcast_InviteToBroadcast_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CBroadcast_InviteToBroadcast_Request")]
   public partial class CBroadcast_InviteToBroadcast_Request : global::ProtoBuf.IExtensible
   {
     public CBroadcast_InviteToBroadcast_Request() {}
@@ -560,7 +562,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CBroadcast_InviteToBroadcast_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CBroadcast_InviteToBroadcast_Response")]
   public partial class CBroadcast_InviteToBroadcast_Response : global::ProtoBuf.IExtensible
   {
     public CBroadcast_InviteToBroadcast_Response() {}
@@ -579,7 +581,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CBroadcast_SendBroadcastStateToServer_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CBroadcast_SendBroadcastStateToServer_Request")]
   public partial class CBroadcast_SendBroadcastStateToServer_Request : global::ProtoBuf.IExtensible
   {
     public CBroadcast_SendBroadcastStateToServer_Request() {}
@@ -625,7 +627,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CBroadcast_SendBroadcastStateToServer_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CBroadcast_SendBroadcastStateToServer_Response")]
   public partial class CBroadcast_SendBroadcastStateToServer_Response : global::ProtoBuf.IExtensible
   {
     public CBroadcast_SendBroadcastStateToServer_Response() {}
@@ -635,7 +637,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CBroadcast_NotifyBroadcastSessionHeartbeat_Notification")]
+  [global::ProtoBuf.ProtoContract(Name=@"CBroadcast_NotifyBroadcastSessionHeartbeat_Notification")]
   public partial class CBroadcast_NotifyBroadcastSessionHeartbeat_Notification : global::ProtoBuf.IExtensible
   {
     public CBroadcast_NotifyBroadcastSessionHeartbeat_Notification() {}
@@ -654,7 +656,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CBroadcast_GetBroadcastChatInfo_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CBroadcast_GetBroadcastChatInfo_Request")]
   public partial class CBroadcast_GetBroadcastChatInfo_Request : global::ProtoBuf.IExtensible
   {
     public CBroadcast_GetBroadcastChatInfo_Request() {}
@@ -700,7 +702,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CBroadcast_GetBroadcastChatInfo_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CBroadcast_GetBroadcastChatInfo_Response")]
   public partial class CBroadcast_GetBroadcastChatInfo_Response : global::ProtoBuf.IExtensible
   {
     public CBroadcast_GetBroadcastChatInfo_Response() {}
@@ -737,7 +739,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CBroadcast_PostChatMessage_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CBroadcast_PostChatMessage_Request")]
   public partial class CBroadcast_PostChatMessage_Request : global::ProtoBuf.IExtensible
   {
     public CBroadcast_PostChatMessage_Request() {}
@@ -774,7 +776,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CBroadcast_PostChatMessage_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CBroadcast_PostChatMessage_Response")]
   public partial class CBroadcast_PostChatMessage_Response : global::ProtoBuf.IExtensible
   {
     public CBroadcast_PostChatMessage_Response() {}
@@ -811,7 +813,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CBroadcast_MuteBroadcastChatUser_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CBroadcast_MuteBroadcastChatUser_Request")]
   public partial class CBroadcast_MuteBroadcastChatUser_Request : global::ProtoBuf.IExtensible
   {
     public CBroadcast_MuteBroadcastChatUser_Request() {}
@@ -848,7 +850,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CBroadcast_MuteBroadcastChatUser_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CBroadcast_MuteBroadcastChatUser_Response")]
   public partial class CBroadcast_MuteBroadcastChatUser_Response : global::ProtoBuf.IExtensible
   {
     public CBroadcast_MuteBroadcastChatUser_Response() {}
@@ -858,7 +860,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CBroadcast_RemoveUserChatText_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CBroadcast_RemoveUserChatText_Request")]
   public partial class CBroadcast_RemoveUserChatText_Request : global::ProtoBuf.IExtensible
   {
     public CBroadcast_RemoveUserChatText_Request() {}
@@ -886,7 +888,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CBroadcast_RemoveUserChatText_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CBroadcast_RemoveUserChatText_Response")]
   public partial class CBroadcast_RemoveUserChatText_Response : global::ProtoBuf.IExtensible
   {
     public CBroadcast_RemoveUserChatText_Response() {}
@@ -896,7 +898,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CBroadcast_GetBroadcastChatUserNames_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CBroadcast_GetBroadcastChatUserNames_Request")]
   public partial class CBroadcast_GetBroadcastChatUserNames_Request : global::ProtoBuf.IExtensible
   {
     public CBroadcast_GetBroadcastChatUserNames_Request() {}
@@ -922,7 +924,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CBroadcast_GetBroadcastChatUserNames_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CBroadcast_GetBroadcastChatUserNames_Response")]
   public partial class CBroadcast_GetBroadcastChatUserNames_Response : global::ProtoBuf.IExtensible
   {
     public CBroadcast_GetBroadcastChatUserNames_Response() {}
@@ -934,7 +936,7 @@ namespace SteamKit2.Unified.Internal
       get { return _persona_names; }
     }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"PersonaName")]
+  [global::ProtoBuf.ProtoContract(Name=@"PersonaName")]
   public partial class PersonaName : global::ProtoBuf.IExtensible
   {
     public PersonaName() {}
@@ -967,7 +969,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CBroadcast_BroadcastViewerState_Notification")]
+  [global::ProtoBuf.ProtoContract(Name=@"CBroadcast_BroadcastViewerState_Notification")]
   public partial class CBroadcast_BroadcastViewerState_Notification : global::ProtoBuf.IExtensible
   {
     public CBroadcast_BroadcastViewerState_Notification() {}
@@ -1009,7 +1011,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CBroadcast_WaitingBroadcastViewer_Notification")]
+  [global::ProtoBuf.ProtoContract(Name=@"CBroadcast_WaitingBroadcastViewer_Notification")]
   public partial class CBroadcast_WaitingBroadcastViewer_Notification : global::ProtoBuf.IExtensible
   {
     public CBroadcast_WaitingBroadcastViewer_Notification() {}
@@ -1028,7 +1030,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CBroadcast_StopBroadcastUpload_Notification")]
+  [global::ProtoBuf.ProtoContract(Name=@"CBroadcast_StopBroadcastUpload_Notification")]
   public partial class CBroadcast_StopBroadcastUpload_Notification : global::ProtoBuf.IExtensible
   {
     public CBroadcast_StopBroadcastUpload_Notification() {}
@@ -1074,7 +1076,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CBroadcast_SessionClosed_Notification")]
+  [global::ProtoBuf.ProtoContract(Name=@"CBroadcast_SessionClosed_Notification")]
   public partial class CBroadcast_SessionClosed_Notification : global::ProtoBuf.IExtensible
   {
     public CBroadcast_SessionClosed_Notification() {}
@@ -1093,7 +1095,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CBroadcast_ViewerBroadcastInvite_Notification")]
+  [global::ProtoBuf.ProtoContract(Name=@"CBroadcast_ViewerBroadcastInvite_Notification")]
   public partial class CBroadcast_ViewerBroadcastInvite_Notification : global::ProtoBuf.IExtensible
   {
     public CBroadcast_ViewerBroadcastInvite_Notification() {}
@@ -1112,7 +1114,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CBroadcast_BroadcastStatus_Notification")]
+  [global::ProtoBuf.ProtoContract(Name=@"CBroadcast_BroadcastStatus_Notification")]
   public partial class CBroadcast_BroadcastStatus_Notification : global::ProtoBuf.IExtensible
   {
     public CBroadcast_BroadcastStatus_Notification() {}

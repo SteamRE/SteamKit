@@ -8,10 +8,12 @@
 //------------------------------------------------------------------------------
 #pragma warning disable 1591
 
+// Option: light framework (CF/Silverlight) enabled
+    
 // Generated from: content_manifest.proto
 namespace SteamKit2.Internal
 {
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ContentManifestPayload")]
+  [global::ProtoBuf.ProtoContract(Name=@"ContentManifestPayload")]
   public partial class ContentManifestPayload : global::ProtoBuf.IExtensible
   {
     public ContentManifestPayload() {}
@@ -23,7 +25,7 @@ namespace SteamKit2.Internal
       get { return _mappings; }
     }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"FileMapping")]
+  [global::ProtoBuf.ProtoContract(Name=@"FileMapping")]
   public partial class FileMapping : global::ProtoBuf.IExtensible
   {
     public FileMapping() {}
@@ -89,7 +91,7 @@ namespace SteamKit2.Internal
       get { return _linktarget; }
       set { _linktarget = value; }
     }
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ChunkData")]
+  [global::ProtoBuf.ProtoContract(Name=@"ChunkData")]
   public partial class ChunkData : global::ProtoBuf.IExtensible
   {
     public ChunkData() {}
@@ -154,7 +156,7 @@ namespace SteamKit2.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ContentManifestMetadata")]
+  [global::ProtoBuf.ProtoContract(Name=@"ContentManifestMetadata")]
   public partial class ContentManifestMetadata : global::ProtoBuf.IExtensible
   {
     public ContentManifestMetadata() {}
@@ -245,7 +247,7 @@ namespace SteamKit2.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ContentManifestSignature")]
+  [global::ProtoBuf.ProtoContract(Name=@"ContentManifestSignature")]
   public partial class ContentManifestSignature : global::ProtoBuf.IExtensible
   {
     public ContentManifestSignature() {}

@@ -8,11 +8,13 @@
 //------------------------------------------------------------------------------
 #pragma warning disable 1591
 
+// Option: light framework (CF/Silverlight) enabled
+    
 // Generated from: steammessages_parental.steamclient.proto
 // Note: requires additional types generated from: steammessages_unified_base.steamclient.proto
 namespace SteamKit2.Unified.Internal
 {
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ParentalApp")]
+  [global::ProtoBuf.ProtoContract(Name=@"ParentalApp")]
   public partial class ParentalApp : global::ProtoBuf.IExtensible
   {
     public ParentalApp() {}
@@ -40,7 +42,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ParentalSettings")]
+  [global::ProtoBuf.ProtoContract(Name=@"ParentalSettings")]
   public partial class ParentalSettings : global::ProtoBuf.IExtensible
   {
     public ParentalSettings() {}
@@ -145,7 +147,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CParental_EnableParentalSettings_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CParental_EnableParentalSettings_Request")]
   public partial class CParental_EnableParentalSettings_Request : global::ProtoBuf.IExtensible
   {
     public CParental_EnableParentalSettings_Request() {}
@@ -200,7 +202,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CParental_EnableParentalSettings_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CParental_EnableParentalSettings_Response")]
   public partial class CParental_EnableParentalSettings_Response : global::ProtoBuf.IExtensible
   {
     public CParental_EnableParentalSettings_Response() {}
@@ -210,7 +212,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CParental_DisableParentalSettings_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CParental_DisableParentalSettings_Request")]
   public partial class CParental_DisableParentalSettings_Request : global::ProtoBuf.IExtensible
   {
     public CParental_DisableParentalSettings_Request() {}
@@ -238,7 +240,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CParental_DisableParentalSettings_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CParental_DisableParentalSettings_Response")]
   public partial class CParental_DisableParentalSettings_Response : global::ProtoBuf.IExtensible
   {
     public CParental_DisableParentalSettings_Response() {}
@@ -248,7 +250,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CParental_GetParentalSettings_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CParental_GetParentalSettings_Request")]
   public partial class CParental_GetParentalSettings_Request : global::ProtoBuf.IExtensible
   {
     public CParental_GetParentalSettings_Request() {}
@@ -267,7 +269,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CParental_GetParentalSettings_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CParental_GetParentalSettings_Response")]
   public partial class CParental_GetParentalSettings_Response : global::ProtoBuf.IExtensible
   {
     public CParental_GetParentalSettings_Response() {}
@@ -286,7 +288,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CParental_GetSignedParentalSettings_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CParental_GetSignedParentalSettings_Request")]
   public partial class CParental_GetSignedParentalSettings_Request : global::ProtoBuf.IExtensible
   {
     public CParental_GetSignedParentalSettings_Request() {}
@@ -305,7 +307,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CParental_GetSignedParentalSettings_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CParental_GetSignedParentalSettings_Response")]
   public partial class CParental_GetSignedParentalSettings_Response : global::ProtoBuf.IExtensible
   {
     public CParental_GetSignedParentalSettings_Response() {}
@@ -333,7 +335,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CParental_SetParentalSettings_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CParental_SetParentalSettings_Request")]
   public partial class CParental_SetParentalSettings_Request : global::ProtoBuf.IExtensible
   {
     public CParental_SetParentalSettings_Request() {}
@@ -388,7 +390,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CParental_SetParentalSettings_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CParental_SetParentalSettings_Response")]
   public partial class CParental_SetParentalSettings_Response : global::ProtoBuf.IExtensible
   {
     public CParental_SetParentalSettings_Response() {}
@@ -398,7 +400,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CParental_ValidateToken_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CParental_ValidateToken_Request")]
   public partial class CParental_ValidateToken_Request : global::ProtoBuf.IExtensible
   {
     public CParental_ValidateToken_Request() {}
@@ -417,7 +419,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CParental_ValidateToken_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CParental_ValidateToken_Response")]
   public partial class CParental_ValidateToken_Response : global::ProtoBuf.IExtensible
   {
     public CParental_ValidateToken_Response() {}
@@ -427,7 +429,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CParental_ValidatePassword_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CParental_ValidatePassword_Request")]
   public partial class CParental_ValidatePassword_Request : global::ProtoBuf.IExtensible
   {
     public CParental_ValidatePassword_Request() {}
@@ -464,7 +466,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CParental_ValidatePassword_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CParental_ValidatePassword_Response")]
   public partial class CParental_ValidatePassword_Response : global::ProtoBuf.IExtensible
   {
     public CParental_ValidatePassword_Response() {}
@@ -483,7 +485,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CParental_LockClient_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CParental_LockClient_Request")]
   public partial class CParental_LockClient_Request : global::ProtoBuf.IExtensible
   {
     public CParental_LockClient_Request() {}
@@ -502,7 +504,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CParental_LockClient_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CParental_LockClient_Response")]
   public partial class CParental_LockClient_Response : global::ProtoBuf.IExtensible
   {
     public CParental_LockClient_Response() {}
@@ -512,7 +514,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CParental_RequestRecoveryCode_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CParental_RequestRecoveryCode_Request")]
   public partial class CParental_RequestRecoveryCode_Request : global::ProtoBuf.IExtensible
   {
     public CParental_RequestRecoveryCode_Request() {}
@@ -522,7 +524,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CParental_RequestRecoveryCode_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CParental_RequestRecoveryCode_Response")]
   public partial class CParental_RequestRecoveryCode_Response : global::ProtoBuf.IExtensible
   {
     public CParental_RequestRecoveryCode_Response() {}
@@ -532,7 +534,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CParental_DisableWithRecoveryCode_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CParental_DisableWithRecoveryCode_Request")]
   public partial class CParental_DisableWithRecoveryCode_Request : global::ProtoBuf.IExtensible
   {
     public CParental_DisableWithRecoveryCode_Request() {}
@@ -560,7 +562,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CParental_DisableWithRecoveryCode_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CParental_DisableWithRecoveryCode_Response")]
   public partial class CParental_DisableWithRecoveryCode_Response : global::ProtoBuf.IExtensible
   {
     public CParental_DisableWithRecoveryCode_Response() {}
@@ -570,7 +572,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CParental_ParentalSettingsChange_Notification")]
+  [global::ProtoBuf.ProtoContract(Name=@"CParental_ParentalSettingsChange_Notification")]
   public partial class CParental_ParentalSettingsChange_Notification : global::ProtoBuf.IExtensible
   {
     public CParental_ParentalSettingsChange_Notification() {}
@@ -616,7 +618,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CParental_ParentalUnlock_Notification")]
+  [global::ProtoBuf.ProtoContract(Name=@"CParental_ParentalUnlock_Notification")]
   public partial class CParental_ParentalUnlock_Notification : global::ProtoBuf.IExtensible
   {
     public CParental_ParentalUnlock_Notification() {}
@@ -644,7 +646,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CParental_ParentalLock_Notification")]
+  [global::ProtoBuf.ProtoContract(Name=@"CParental_ParentalLock_Notification")]
   public partial class CParental_ParentalLock_Notification : global::ProtoBuf.IExtensible
   {
     public CParental_ParentalLock_Notification() {}

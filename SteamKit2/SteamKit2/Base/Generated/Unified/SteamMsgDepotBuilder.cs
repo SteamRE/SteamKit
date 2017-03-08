@@ -8,11 +8,13 @@
 //------------------------------------------------------------------------------
 #pragma warning disable 1591
 
+// Option: light framework (CF/Silverlight) enabled
+    
 // Generated from: steammessages_depotbuilder.steamclient.proto
 // Note: requires additional types generated from: steammessages_unified_base.steamclient.proto
 namespace SteamKit2.Unified.Internal
 {
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CContentBuilder_InitDepotBuild_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CContentBuilder_InitDepotBuild_Request")]
   public partial class CContentBuilder_InitDepotBuild_Request : global::ProtoBuf.IExtensible
   {
     public CContentBuilder_InitDepotBuild_Request() {}
@@ -58,7 +60,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CContentBuilder_InitDepotBuild_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CContentBuilder_InitDepotBuild_Response")]
   public partial class CContentBuilder_InitDepotBuild_Response : global::ProtoBuf.IExtensible
   {
     public CContentBuilder_InitDepotBuild_Response() {}
@@ -113,7 +115,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CContentBuilder_StartDepotUpload_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CContentBuilder_StartDepotUpload_Request")]
   public partial class CContentBuilder_StartDepotUpload_Request : global::ProtoBuf.IExtensible
   {
     public CContentBuilder_StartDepotUpload_Request() {}
@@ -177,7 +179,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CContentBuilder_StartDepotUpload_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CContentBuilder_StartDepotUpload_Response")]
   public partial class CContentBuilder_StartDepotUpload_Response : global::ProtoBuf.IExtensible
   {
     public CContentBuilder_StartDepotUpload_Response() {}
@@ -196,7 +198,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CContentBuilder_GetMissingDepotChunks_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CContentBuilder_GetMissingDepotChunks_Request")]
   public partial class CContentBuilder_GetMissingDepotChunks_Request : global::ProtoBuf.IExtensible
   {
     public CContentBuilder_GetMissingDepotChunks_Request() {}
@@ -224,7 +226,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CContentBuilder_GetMissingDepotChunks_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CContentBuilder_GetMissingDepotChunks_Response")]
   public partial class CContentBuilder_GetMissingDepotChunks_Response : global::ProtoBuf.IExtensible
   {
     public CContentBuilder_GetMissingDepotChunks_Response() {}
@@ -254,7 +256,7 @@ namespace SteamKit2.Unified.Internal
       get { return _total_missing_bytes; }
       set { _total_missing_bytes = value; }
     }
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Chunks")]
+  [global::ProtoBuf.ProtoContract(Name=@"Chunks")]
   public partial class Chunks : global::ProtoBuf.IExtensible
   {
     public Chunks() {}
@@ -278,7 +280,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CContentBuilder_FinishDepotUpload_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CContentBuilder_FinishDepotUpload_Request")]
   public partial class CContentBuilder_FinishDepotUpload_Request : global::ProtoBuf.IExtensible
   {
     public CContentBuilder_FinishDepotUpload_Request() {}
@@ -306,7 +308,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CContentBuilder_FinishDepotUpload_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CContentBuilder_FinishDepotUpload_Response")]
   public partial class CContentBuilder_FinishDepotUpload_Response : global::ProtoBuf.IExtensible
   {
     public CContentBuilder_FinishDepotUpload_Response() {}
@@ -334,7 +336,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CContentBuilder_CommitAppBuild_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CContentBuilder_CommitAppBuild_Request")]
   public partial class CContentBuilder_CommitAppBuild_Request : global::ProtoBuf.IExtensible
   {
     public CContentBuilder_CommitAppBuild_Request() {}
@@ -373,7 +375,7 @@ namespace SteamKit2.Unified.Internal
       get { return _live_branch; }
       set { _live_branch = value; }
     }
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Depots")]
+  [global::ProtoBuf.ProtoContract(Name=@"Depots")]
   public partial class Depots : global::ProtoBuf.IExtensible
   {
     public Depots() {}
@@ -406,7 +408,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CContentBuilder_CommitAppBuild_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CContentBuilder_CommitAppBuild_Response")]
   public partial class CContentBuilder_CommitAppBuild_Response : global::ProtoBuf.IExtensible
   {
     public CContentBuilder_CommitAppBuild_Response() {}
@@ -425,7 +427,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CContentBuilder_SignInstallScript_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CContentBuilder_SignInstallScript_Request")]
   public partial class CContentBuilder_SignInstallScript_Request : global::ProtoBuf.IExtensible
   {
     public CContentBuilder_SignInstallScript_Request() {}
@@ -462,7 +464,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CContentBuilder_SignInstallScript_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CContentBuilder_SignInstallScript_Response")]
   public partial class CContentBuilder_SignInstallScript_Response : global::ProtoBuf.IExtensible
   {
     public CContentBuilder_SignInstallScript_Response() {}

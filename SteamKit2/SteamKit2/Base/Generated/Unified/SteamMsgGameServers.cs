@@ -8,11 +8,13 @@
 //------------------------------------------------------------------------------
 #pragma warning disable 1591
 
+// Option: light framework (CF/Silverlight) enabled
+    
 // Generated from: steammessages_gameservers.steamclient.proto
 // Note: requires additional types generated from: steammessages_unified_base.steamclient.proto
 namespace SteamKit2.Unified.Internal
 {
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGameServers_GetServerList_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CGameServers_GetServerList_Request")]
   public partial class CGameServers_GetServerList_Request : global::ProtoBuf.IExtensible
   {
     public CGameServers_GetServerList_Request() {}
@@ -40,7 +42,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGameServers_GetServerList_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CGameServers_GetServerList_Response")]
   public partial class CGameServers_GetServerList_Response : global::ProtoBuf.IExtensible
   {
     public CGameServers_GetServerList_Response() {}
@@ -52,7 +54,7 @@ namespace SteamKit2.Unified.Internal
       get { return _servers; }
     }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Server")]
+  [global::ProtoBuf.ProtoContract(Name=@"Server")]
   public partial class Server : global::ProtoBuf.IExtensible
   {
     public Server() {}
@@ -229,7 +231,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGameServers_GetServerSteamIDsByIP_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CGameServers_GetServerSteamIDsByIP_Request")]
   public partial class CGameServers_GetServerSteamIDsByIP_Request : global::ProtoBuf.IExtensible
   {
     public CGameServers_GetServerSteamIDsByIP_Request() {}
@@ -246,7 +248,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGameServers_IPsWithSteamIDs_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CGameServers_IPsWithSteamIDs_Response")]
   public partial class CGameServers_IPsWithSteamIDs_Response : global::ProtoBuf.IExtensible
   {
     public CGameServers_IPsWithSteamIDs_Response() {}
@@ -258,7 +260,7 @@ namespace SteamKit2.Unified.Internal
       get { return _servers; }
     }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Server")]
+  [global::ProtoBuf.ProtoContract(Name=@"Server")]
   public partial class Server : global::ProtoBuf.IExtensible
   {
     public Server() {}
@@ -291,7 +293,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGameServers_GetServerIPsBySteamID_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CGameServers_GetServerIPsBySteamID_Request")]
   public partial class CGameServers_GetServerIPsBySteamID_Request : global::ProtoBuf.IExtensible
   {
     public CGameServers_GetServerIPsBySteamID_Request() {}

@@ -8,11 +8,13 @@
 //------------------------------------------------------------------------------
 #pragma warning disable 1591
 
+// Option: light framework (CF/Silverlight) enabled
+    
 // Generated from: steammessages_credentials.steamclient.proto
 // Note: requires additional types generated from: steammessages_unified_base.steamclient.proto
 namespace SteamKit2.Unified.Internal
 {
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCredentials_TestAvailablePassword_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CCredentials_TestAvailablePassword_Request")]
   public partial class CCredentials_TestAvailablePassword_Request : global::ProtoBuf.IExtensible
   {
     public CCredentials_TestAvailablePassword_Request() {}
@@ -49,7 +51,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCredentials_TestAvailablePassword_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CCredentials_TestAvailablePassword_Response")]
   public partial class CCredentials_TestAvailablePassword_Response : global::ProtoBuf.IExtensible
   {
     public CCredentials_TestAvailablePassword_Response() {}
@@ -68,7 +70,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCredentials_GetSteamGuardDetails_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CCredentials_GetSteamGuardDetails_Request")]
   public partial class CCredentials_GetSteamGuardDetails_Request : global::ProtoBuf.IExtensible
   {
     public CCredentials_GetSteamGuardDetails_Request() {}
@@ -114,7 +116,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCredentials_GetSteamGuardDetails_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CCredentials_GetSteamGuardDetails_Response")]
   public partial class CCredentials_GetSteamGuardDetails_Response : global::ProtoBuf.IExtensible
   {
     public CCredentials_GetSteamGuardDetails_Response() {}
@@ -214,7 +216,7 @@ namespace SteamKit2.Unified.Internal
       get { return _is_phone_verified; }
       set { _is_phone_verified = value; }
     }
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"NewAuthentication")]
+  [global::ProtoBuf.ProtoContract(Name=@"NewAuthentication")]
   public partial class NewAuthentication : global::ProtoBuf.IExtensible
   {
     public NewAuthentication() {}
@@ -287,7 +289,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"SessionData")]
+  [global::ProtoBuf.ProtoContract(Name=@"SessionData")]
   public partial class SessionData : global::ProtoBuf.IExtensible
   {
     public SessionData() {}
@@ -363,7 +365,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCredentials_NewMachineNotificationDialog_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CCredentials_NewMachineNotificationDialog_Request")]
   public partial class CCredentials_NewMachineNotificationDialog_Request : global::ProtoBuf.IExtensible
   {
     public CCredentials_NewMachineNotificationDialog_Request() {}
@@ -391,7 +393,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCredentials_NewMachineNotificationDialog_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CCredentials_NewMachineNotificationDialog_Response")]
   public partial class CCredentials_NewMachineNotificationDialog_Response : global::ProtoBuf.IExtensible
   {
     public CCredentials_NewMachineNotificationDialog_Response() {}
@@ -401,7 +403,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCredentials_ValidateEmailAddress_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CCredentials_ValidateEmailAddress_Request")]
   public partial class CCredentials_ValidateEmailAddress_Request : global::ProtoBuf.IExtensible
   {
     public CCredentials_ValidateEmailAddress_Request() {}
@@ -420,7 +422,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCredentials_ValidateEmailAddress_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CCredentials_ValidateEmailAddress_Response")]
   public partial class CCredentials_ValidateEmailAddress_Response : global::ProtoBuf.IExtensible
   {
     public CCredentials_ValidateEmailAddress_Response() {}
@@ -439,7 +441,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCredentials_SteamGuardPhishingReport_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CCredentials_SteamGuardPhishingReport_Request")]
   public partial class CCredentials_SteamGuardPhishingReport_Request : global::ProtoBuf.IExtensible
   {
     public CCredentials_SteamGuardPhishingReport_Request() {}
@@ -467,7 +469,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCredentials_SteamGuardPhishingReport_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CCredentials_SteamGuardPhishingReport_Response")]
   public partial class CCredentials_SteamGuardPhishingReport_Response : global::ProtoBuf.IExtensible
   {
     public CCredentials_SteamGuardPhishingReport_Response() {}
@@ -558,7 +560,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCredentials_LastCredentialChangeTime_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CCredentials_LastCredentialChangeTime_Request")]
   public partial class CCredentials_LastCredentialChangeTime_Request : global::ProtoBuf.IExtensible
   {
     public CCredentials_LastCredentialChangeTime_Request() {}
@@ -568,7 +570,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCredentials_LastCredentialChangeTime_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CCredentials_LastCredentialChangeTime_Response")]
   public partial class CCredentials_LastCredentialChangeTime_Response : global::ProtoBuf.IExtensible
   {
     public CCredentials_LastCredentialChangeTime_Response() {}
@@ -605,7 +607,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCredentials_GetAccountAuthSecret_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CCredentials_GetAccountAuthSecret_Request")]
   public partial class CCredentials_GetAccountAuthSecret_Request : global::ProtoBuf.IExtensible
   {
     public CCredentials_GetAccountAuthSecret_Request() {}
@@ -615,7 +617,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCredentials_GetAccountAuthSecret_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CCredentials_GetAccountAuthSecret_Response")]
   public partial class CCredentials_GetAccountAuthSecret_Response : global::ProtoBuf.IExtensible
   {
     public CCredentials_GetAccountAuthSecret_Response() {}

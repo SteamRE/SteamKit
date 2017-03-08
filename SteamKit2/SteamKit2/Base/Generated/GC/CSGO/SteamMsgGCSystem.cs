@@ -8,10 +8,12 @@
 //------------------------------------------------------------------------------
 #pragma warning disable 1591
 
+// Option: light framework (CF/Silverlight) enabled
+    
 // Generated from: gcsystemmsgs.proto
 namespace SteamKit2.GC.CSGO.Internal
 {
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCHVacVerificationChange")]
+  [global::ProtoBuf.ProtoContract(Name=@"CMsgGCHVacVerificationChange")]
   public partial class CMsgGCHVacVerificationChange : global::ProtoBuf.IExtensible
   {
     public CMsgGCHVacVerificationChange() {}
@@ -48,7 +50,7 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCHAccountPhoneNumberChange")]
+  [global::ProtoBuf.ProtoContract(Name=@"CMsgGCHAccountPhoneNumberChange")]
   public partial class CMsgGCHAccountPhoneNumberChange : global::ProtoBuf.IExtensible
   {
     public CMsgGCHAccountPhoneNumberChange() {}

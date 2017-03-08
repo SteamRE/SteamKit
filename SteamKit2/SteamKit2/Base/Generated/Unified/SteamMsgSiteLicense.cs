@@ -8,11 +8,13 @@
 //------------------------------------------------------------------------------
 #pragma warning disable 1591
 
+// Option: light framework (CF/Silverlight) enabled
+    
 // Generated from: steammessages_site_license.steamclient.proto
 // Note: requires additional types generated from: steammessages_unified_base.steamclient.proto
 namespace SteamKit2.Unified.Internal
 {
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CSiteLicense_ClientSiteAssociation_Notification")]
+  [global::ProtoBuf.ProtoContract(Name=@"CSiteLicense_ClientSiteAssociation_Notification")]
   public partial class CSiteLicense_ClientSiteAssociation_Notification : global::ProtoBuf.IExtensible
   {
     public CSiteLicense_ClientSiteAssociation_Notification() {}

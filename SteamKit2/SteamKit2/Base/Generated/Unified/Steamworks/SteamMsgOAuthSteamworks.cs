@@ -8,11 +8,13 @@
 //------------------------------------------------------------------------------
 #pragma warning disable 1591
 
+// Option: light framework (CF/Silverlight) enabled
+    
 // Generated from: steammessages_oauth.steamworkssdk.proto
 // Note: requires additional types generated from: steammessages_unified_base.steamworkssdk.proto
 namespace SteamKit2.Unified.Internal.Steamworks
 {
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"COAuthToken_ImplicitGrantNoPrompt_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"COAuthToken_ImplicitGrantNoPrompt_Request")]
   public partial class COAuthToken_ImplicitGrantNoPrompt_Request : global::ProtoBuf.IExtensible
   {
     public COAuthToken_ImplicitGrantNoPrompt_Request() {}
@@ -31,7 +33,7 @@ namespace SteamKit2.Unified.Internal.Steamworks
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"COAuthToken_ImplicitGrantNoPrompt_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"COAuthToken_ImplicitGrantNoPrompt_Response")]
   public partial class COAuthToken_ImplicitGrantNoPrompt_Response : global::ProtoBuf.IExtensible
   {
     public COAuthToken_ImplicitGrantNoPrompt_Response() {}

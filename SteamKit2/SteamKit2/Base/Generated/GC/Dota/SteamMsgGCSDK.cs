@@ -8,11 +8,13 @@
 //------------------------------------------------------------------------------
 #pragma warning disable 1591
 
+// Option: light framework (CF/Silverlight) enabled
+    
 // Generated from: gcsdk_gcmessages.proto
 // Note: requires additional types generated from: steammessages.proto
 namespace SteamKit2.GC.Dota.Internal
 {
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgSHA1Digest")]
+  [global::ProtoBuf.ProtoContract(Name=@"CMsgSHA1Digest")]
   public partial class CMsgSHA1Digest : global::ProtoBuf.IExtensible
   {
     public CMsgSHA1Digest() {}
@@ -43,7 +45,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgSOIDOwner")]
+  [global::ProtoBuf.ProtoContract(Name=@"CMsgSOIDOwner")]
   public partial class CMsgSOIDOwner : global::ProtoBuf.IExtensible
   {
     public CMsgSOIDOwner() {}
@@ -71,7 +73,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgSOSingleObject")]
+  [global::ProtoBuf.ProtoContract(Name=@"CMsgSOSingleObject")]
   public partial class CMsgSOSingleObject : global::ProtoBuf.IExtensible
   {
     public CMsgSOSingleObject() {}
@@ -126,7 +128,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgSOMultipleObjects")]
+  [global::ProtoBuf.ProtoContract(Name=@"CMsgSOMultipleObjects")]
   public partial class CMsgSOMultipleObjects : global::ProtoBuf.IExtensible
   {
     public CMsgSOMultipleObjects() {}
@@ -179,7 +181,7 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _service_id; }
       set { _service_id = value; }
     }
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"SingleObject")]
+  [global::ProtoBuf.ProtoContract(Name=@"SingleObject")]
   public partial class SingleObject : global::ProtoBuf.IExtensible
   {
     public SingleObject() {}
@@ -212,7 +214,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgSOCacheSubscribed")]
+  [global::ProtoBuf.ProtoContract(Name=@"CMsgSOCacheSubscribed")]
   public partial class CMsgSOCacheSubscribed : global::ProtoBuf.IExtensible
   {
     public CMsgSOCacheSubscribed() {}
@@ -267,7 +269,7 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _sync_version; }
       set { _sync_version = value; }
     }
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"SubscribedType")]
+  [global::ProtoBuf.ProtoContract(Name=@"SubscribedType")]
   public partial class SubscribedType : global::ProtoBuf.IExtensible
   {
     public SubscribedType() {}
@@ -298,7 +300,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgSOCacheSubscribedUpToDate")]
+  [global::ProtoBuf.ProtoContract(Name=@"CMsgSOCacheSubscribedUpToDate")]
   public partial class CMsgSOCacheSubscribedUpToDate : global::ProtoBuf.IExtensible
   {
     public CMsgSOCacheSubscribedUpToDate() {}
@@ -351,7 +353,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgSOCacheUnsubscribed")]
+  [global::ProtoBuf.ProtoContract(Name=@"CMsgSOCacheUnsubscribed")]
   public partial class CMsgSOCacheUnsubscribed : global::ProtoBuf.IExtensible
   {
     public CMsgSOCacheUnsubscribed() {}
@@ -370,7 +372,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgSOCacheSubscriptionCheck")]
+  [global::ProtoBuf.ProtoContract(Name=@"CMsgSOCacheSubscriptionCheck")]
   public partial class CMsgSOCacheSubscriptionCheck : global::ProtoBuf.IExtensible
   {
     public CMsgSOCacheSubscriptionCheck() {}
@@ -423,7 +425,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgSOCacheSubscriptionRefresh")]
+  [global::ProtoBuf.ProtoContract(Name=@"CMsgSOCacheSubscriptionRefresh")]
   public partial class CMsgSOCacheSubscriptionRefresh : global::ProtoBuf.IExtensible
   {
     public CMsgSOCacheSubscriptionRefresh() {}
@@ -442,7 +444,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgSOCacheVersion")]
+  [global::ProtoBuf.ProtoContract(Name=@"CMsgSOCacheVersion")]
   public partial class CMsgSOCacheVersion : global::ProtoBuf.IExtensible
   {
     public CMsgSOCacheVersion() {}
@@ -461,7 +463,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCMultiplexMessage")]
+  [global::ProtoBuf.ProtoContract(Name=@"CMsgGCMultiplexMessage")]
   public partial class CMsgGCMultiplexMessage : global::ProtoBuf.IExtensible
   {
     public CMsgGCMultiplexMessage() {}
@@ -496,7 +498,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGCToGCMsgMasterAck")]
+  [global::ProtoBuf.ProtoContract(Name=@"CGCToGCMsgMasterAck")]
   public partial class CGCToGCMsgMasterAck : global::ProtoBuf.IExtensible
   {
     public CGCToGCMsgMasterAck() {}
@@ -535,7 +537,7 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _directory; }
     }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Process")]
+  [global::ProtoBuf.ProtoContract(Name=@"Process")]
   public partial class Process : global::ProtoBuf.IExtensible
   {
     public Process() {}
@@ -566,7 +568,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGCToGCMsgMasterAck_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CGCToGCMsgMasterAck_Response")]
   public partial class CGCToGCMsgMasterAck_Response : global::ProtoBuf.IExtensible
   {
     public CGCToGCMsgMasterAck_Response() {}
@@ -585,7 +587,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCToGCUniverseStartup")]
+  [global::ProtoBuf.ProtoContract(Name=@"CMsgGCToGCUniverseStartup")]
   public partial class CMsgGCToGCUniverseStartup : global::ProtoBuf.IExtensible
   {
     public CMsgGCToGCUniverseStartup() {}
@@ -604,7 +606,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCToGCUniverseStartupResponse")]
+  [global::ProtoBuf.ProtoContract(Name=@"CMsgGCToGCUniverseStartupResponse")]
   public partial class CMsgGCToGCUniverseStartupResponse : global::ProtoBuf.IExtensible
   {
     public CMsgGCToGCUniverseStartupResponse() {}
@@ -623,7 +625,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGCToGCMsgMasterStartupComplete")]
+  [global::ProtoBuf.ProtoContract(Name=@"CGCToGCMsgMasterStartupComplete")]
   public partial class CGCToGCMsgMasterStartupComplete : global::ProtoBuf.IExtensible
   {
     public CGCToGCMsgMasterStartupComplete() {}
@@ -635,7 +637,7 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _gc_info; }
     }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"GCInfo")]
+  [global::ProtoBuf.ProtoContract(Name=@"GCInfo")]
   public partial class GCInfo : global::ProtoBuf.IExtensible
   {
     public GCInfo() {}
@@ -668,7 +670,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGCToGCMsgRouted")]
+  [global::ProtoBuf.ProtoContract(Name=@"CGCToGCMsgRouted")]
   public partial class CGCToGCMsgRouted : global::ProtoBuf.IExtensible
   {
     public CGCToGCMsgRouted() {}
@@ -705,7 +707,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGCToGCMsgRoutedReply")]
+  [global::ProtoBuf.ProtoContract(Name=@"CGCToGCMsgRoutedReply")]
   public partial class CGCToGCMsgRoutedReply : global::ProtoBuf.IExtensible
   {
     public CGCToGCMsgRoutedReply() {}
@@ -733,7 +735,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCUpdateSubGCSessionInfo")]
+  [global::ProtoBuf.ProtoContract(Name=@"CMsgGCUpdateSubGCSessionInfo")]
   public partial class CMsgGCUpdateSubGCSessionInfo : global::ProtoBuf.IExtensible
   {
     public CMsgGCUpdateSubGCSessionInfo() {}
@@ -745,7 +747,7 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _updates; }
     }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgUpdate")]
+  [global::ProtoBuf.ProtoContract(Name=@"CMsgUpdate")]
   public partial class CMsgUpdate : global::ProtoBuf.IExtensible
   {
     public CMsgUpdate() {}
@@ -787,7 +789,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCRequestSubGCSessionInfo")]
+  [global::ProtoBuf.ProtoContract(Name=@"CMsgGCRequestSubGCSessionInfo")]
   public partial class CMsgGCRequestSubGCSessionInfo : global::ProtoBuf.IExtensible
   {
     public CMsgGCRequestSubGCSessionInfo() {}
@@ -806,7 +808,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCRequestSubGCSessionInfoResponse")]
+  [global::ProtoBuf.ProtoContract(Name=@"CMsgGCRequestSubGCSessionInfoResponse")]
   public partial class CMsgGCRequestSubGCSessionInfoResponse : global::ProtoBuf.IExtensible
   {
     public CMsgGCRequestSubGCSessionInfoResponse() {}
@@ -852,7 +854,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgSOCacheHaveVersion")]
+  [global::ProtoBuf.ProtoContract(Name=@"CMsgSOCacheHaveVersion")]
   public partial class CMsgSOCacheHaveVersion : global::ProtoBuf.IExtensible
   {
     public CMsgSOCacheHaveVersion() {}
@@ -898,7 +900,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientHello")]
+  [global::ProtoBuf.ProtoContract(Name=@"CMsgClientHello")]
   public partial class CMsgClientHello : global::ProtoBuf.IExtensible
   {
     public CMsgClientHello() {}
@@ -969,7 +971,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientWelcome")]
+  [global::ProtoBuf.ProtoContract(Name=@"CMsgClientWelcome")]
   public partial class CMsgClientWelcome : global::ProtoBuf.IExtensible
   {
     public CMsgClientWelcome() {}
@@ -1051,7 +1053,7 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _gc_socache_file_version; }
       set { _gc_socache_file_version = value; }
     }
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Location")]
+  [global::ProtoBuf.ProtoContract(Name=@"Location")]
   public partial class Location : global::ProtoBuf.IExtensible
   {
     public Location() {}
@@ -1093,7 +1095,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgConnectionStatus")]
+  [global::ProtoBuf.ProtoContract(Name=@"CMsgConnectionStatus")]
   public partial class CMsgConnectionStatus : global::ProtoBuf.IExtensible
   {
     public CMsgConnectionStatus() {}
@@ -1157,7 +1159,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCToGCSOCacheSubscribe")]
+  [global::ProtoBuf.ProtoContract(Name=@"CMsgGCToGCSOCacheSubscribe")]
   public partial class CMsgGCToGCSOCacheSubscribe : global::ProtoBuf.IExtensible
   {
     public CMsgGCToGCSOCacheSubscribe() {}
@@ -1205,7 +1207,7 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _subscribe_to_type; }
       set { _subscribe_to_type = value; }
     }
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgHaveVersions")]
+  [global::ProtoBuf.ProtoContract(Name=@"CMsgHaveVersions")]
   public partial class CMsgHaveVersions : global::ProtoBuf.IExtensible
   {
     public CMsgHaveVersions() {}
@@ -1238,7 +1240,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCToGCSOCacheUnsubscribe")]
+  [global::ProtoBuf.ProtoContract(Name=@"CMsgGCToGCSOCacheUnsubscribe")]
   public partial class CMsgGCToGCSOCacheUnsubscribe : global::ProtoBuf.IExtensible
   {
     public CMsgGCToGCSOCacheUnsubscribe() {}
@@ -1275,7 +1277,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCClientPing")]
+  [global::ProtoBuf.ProtoContract(Name=@"CMsgGCClientPing")]
   public partial class CMsgGCClientPing : global::ProtoBuf.IExtensible
   {
     public CMsgGCClientPing() {}
@@ -1285,7 +1287,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCToGCForwardAccountDetails")]
+  [global::ProtoBuf.ProtoContract(Name=@"CMsgGCToGCForwardAccountDetails")]
   public partial class CMsgGCToGCForwardAccountDetails : global::ProtoBuf.IExtensible
   {
     public CMsgGCToGCForwardAccountDetails() {}
@@ -1322,7 +1324,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCToGCLoadSessionSOCache")]
+  [global::ProtoBuf.ProtoContract(Name=@"CMsgGCToGCLoadSessionSOCache")]
   public partial class CMsgGCToGCLoadSessionSOCache : global::ProtoBuf.IExtensible
   {
     public CMsgGCToGCLoadSessionSOCache() {}
@@ -1350,7 +1352,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCToGCLoadSessionSOCacheResponse")]
+  [global::ProtoBuf.ProtoContract(Name=@"CMsgGCToGCLoadSessionSOCacheResponse")]
   public partial class CMsgGCToGCLoadSessionSOCacheResponse : global::ProtoBuf.IExtensible
   {
     public CMsgGCToGCLoadSessionSOCacheResponse() {}
@@ -1360,7 +1362,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCToGCUpdateSessionStats")]
+  [global::ProtoBuf.ProtoContract(Name=@"CMsgGCToGCUpdateSessionStats")]
   public partial class CMsgGCToGCUpdateSessionStats : global::ProtoBuf.IExtensible
   {
     public CMsgGCToGCUpdateSessionStats() {}
@@ -1397,7 +1399,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CWorkshop_PopulateItemDescriptions_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CWorkshop_PopulateItemDescriptions_Request")]
   public partial class CWorkshop_PopulateItemDescriptions_Request : global::ProtoBuf.IExtensible
   {
     public CWorkshop_PopulateItemDescriptions_Request() {}
@@ -1418,7 +1420,7 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _languages; }
     }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"SingleItemDescription")]
+  [global::ProtoBuf.ProtoContract(Name=@"SingleItemDescription")]
   public partial class SingleItemDescription : global::ProtoBuf.IExtensible
   {
     public SingleItemDescription() {}
@@ -1446,7 +1448,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ItemDescriptionsLanguageBlock")]
+  [global::ProtoBuf.ProtoContract(Name=@"ItemDescriptionsLanguageBlock")]
   public partial class ItemDescriptionsLanguageBlock : global::ProtoBuf.IExtensible
   {
     public ItemDescriptionsLanguageBlock() {}
@@ -1477,7 +1479,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CWorkshop_GetContributors_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CWorkshop_GetContributors_Request")]
   public partial class CWorkshop_GetContributors_Request : global::ProtoBuf.IExtensible
   {
     public CWorkshop_GetContributors_Request() {}
@@ -1505,7 +1507,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CWorkshop_GetContributors_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CWorkshop_GetContributors_Response")]
   public partial class CWorkshop_GetContributors_Response : global::ProtoBuf.IExtensible
   {
     public CWorkshop_GetContributors_Response() {}
@@ -1522,7 +1524,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CWorkshop_SetItemPaymentRules_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CWorkshop_SetItemPaymentRules_Request")]
   public partial class CWorkshop_SetItemPaymentRules_Request : global::ProtoBuf.IExtensible
   {
     public CWorkshop_SetItemPaymentRules_Request() {}
@@ -1559,7 +1561,7 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _partner_accounts; }
     }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"WorkshopItemPaymentRule")]
+  [global::ProtoBuf.ProtoContract(Name=@"WorkshopItemPaymentRule")]
   public partial class WorkshopItemPaymentRule : global::ProtoBuf.IExtensible
   {
     public WorkshopItemPaymentRule() {}
@@ -1596,7 +1598,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"PartnerItemPaymentRule")]
+  [global::ProtoBuf.ProtoContract(Name=@"PartnerItemPaymentRule")]
   public partial class PartnerItemPaymentRule : global::ProtoBuf.IExtensible
   {
     public PartnerItemPaymentRule() {}
@@ -1638,7 +1640,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CWorkshop_SetItemPaymentRules_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CWorkshop_SetItemPaymentRules_Response")]
   public partial class CWorkshop_SetItemPaymentRules_Response : global::ProtoBuf.IExtensible
   {
     public CWorkshop_SetItemPaymentRules_Response() {}
@@ -1648,7 +1650,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CBroadcast_PostGameDataFrame_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CBroadcast_PostGameDataFrame_Request")]
   public partial class CBroadcast_PostGameDataFrame_Request : global::ProtoBuf.IExtensible
   {
     public CBroadcast_PostGameDataFrame_Request() {}
@@ -1694,7 +1696,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgSerializedSOCache")]
+  [global::ProtoBuf.ProtoContract(Name=@"CMsgSerializedSOCache")]
   public partial class CMsgSerializedSOCache : global::ProtoBuf.IExtensible
   {
     public CMsgSerializedSOCache() {}
@@ -1724,7 +1726,7 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _gc_socache_file_version; }
       set { _gc_socache_file_version = value; }
     }
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"TypeCache")]
+  [global::ProtoBuf.ProtoContract(Name=@"TypeCache")]
   public partial class TypeCache : global::ProtoBuf.IExtensible
   {
     public TypeCache() {}
@@ -1759,7 +1761,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Cache")]
+  [global::ProtoBuf.ProtoContract(Name=@"Cache")]
   public partial class Cache : global::ProtoBuf.IExtensible
   {
     public Cache() {}
@@ -1796,7 +1798,7 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _type_caches; }
     }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Version")]
+  [global::ProtoBuf.ProtoContract(Name=@"Version")]
   public partial class Version : global::ProtoBuf.IExtensible
   {
     public Version() {}
@@ -1834,7 +1836,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCToClientPollConvarRequest")]
+  [global::ProtoBuf.ProtoContract(Name=@"CMsgGCToClientPollConvarRequest")]
   public partial class CMsgGCToClientPollConvarRequest : global::ProtoBuf.IExtensible
   {
     public CMsgGCToClientPollConvarRequest() {}
@@ -1862,7 +1864,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCToClientPollConvarResponse")]
+  [global::ProtoBuf.ProtoContract(Name=@"CMsgGCToClientPollConvarResponse")]
   public partial class CMsgGCToClientPollConvarResponse : global::ProtoBuf.IExtensible
   {
     public CMsgGCToClientPollConvarResponse() {}

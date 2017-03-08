@@ -8,6 +8,8 @@
 //------------------------------------------------------------------------------
 #pragma warning disable 1591
 
+// Option: light framework (CF/Silverlight) enabled
+    
 // Generated from: gcsystemmsgs.proto
 namespace SteamKit2.GC.TF2.Internal
 {

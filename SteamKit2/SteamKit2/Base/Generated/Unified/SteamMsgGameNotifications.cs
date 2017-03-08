@@ -8,11 +8,13 @@
 //------------------------------------------------------------------------------
 #pragma warning disable 1591
 
+// Option: light framework (CF/Silverlight) enabled
+    
 // Generated from: steammessages_gamenotifications.steamclient.proto
 // Note: requires additional types generated from: steammessages_unified_base.steamclient.proto
 namespace SteamKit2.Unified.Internal
 {
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_Variable")]
+  [global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_Variable")]
   public partial class CGameNotifications_Variable : global::ProtoBuf.IExtensible
   {
     public CGameNotifications_Variable() {}
@@ -40,7 +42,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_LocalizedText")]
+  [global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_LocalizedText")]
   public partial class CGameNotifications_LocalizedText : global::ProtoBuf.IExtensible
   {
     public CGameNotifications_LocalizedText() {}
@@ -75,7 +77,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_UserStatus")]
+  [global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_UserStatus")]
   public partial class CGameNotifications_UserStatus : global::ProtoBuf.IExtensible
   {
     public CGameNotifications_UserStatus() {}
@@ -121,7 +123,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_CreateSession_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_CreateSession_Request")]
   public partial class CGameNotifications_CreateSession_Request : global::ProtoBuf.IExtensible
   {
     public CGameNotifications_CreateSession_Request() {}
@@ -174,7 +176,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_CreateSession_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_CreateSession_Response")]
   public partial class CGameNotifications_CreateSession_Response : global::ProtoBuf.IExtensible
   {
     public CGameNotifications_CreateSession_Response() {}
@@ -193,7 +195,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_DeleteSession_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_DeleteSession_Request")]
   public partial class CGameNotifications_DeleteSession_Request : global::ProtoBuf.IExtensible
   {
     public CGameNotifications_DeleteSession_Request() {}
@@ -230,7 +232,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_DeleteSession_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_DeleteSession_Response")]
   public partial class CGameNotifications_DeleteSession_Response : global::ProtoBuf.IExtensible
   {
     public CGameNotifications_DeleteSession_Response() {}
@@ -240,7 +242,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_UpdateSession_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_UpdateSession_Request")]
   public partial class CGameNotifications_UpdateSession_Request : global::ProtoBuf.IExtensible
   {
     public CGameNotifications_UpdateSession_Request() {}
@@ -293,7 +295,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_UpdateSession_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_UpdateSession_Response")]
   public partial class CGameNotifications_UpdateSession_Response : global::ProtoBuf.IExtensible
   {
     public CGameNotifications_UpdateSession_Response() {}
@@ -303,7 +305,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_EnumerateSessions_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_EnumerateSessions_Request")]
   public partial class CGameNotifications_EnumerateSessions_Request : global::ProtoBuf.IExtensible
   {
     public CGameNotifications_EnumerateSessions_Request() {}
@@ -349,7 +351,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_Session")]
+  [global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_Session")]
   public partial class CGameNotifications_Session : global::ProtoBuf.IExtensible
   {
     public CGameNotifications_Session() {}
@@ -420,7 +422,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_EnumerateSessions_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_EnumerateSessions_Response")]
   public partial class CGameNotifications_EnumerateSessions_Response : global::ProtoBuf.IExtensible
   {
     public CGameNotifications_EnumerateSessions_Response() {}
@@ -437,7 +439,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_GetSessionDetails_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_GetSessionDetails_Request")]
   public partial class CGameNotifications_GetSessionDetails_Request : global::ProtoBuf.IExtensible
   {
     public CGameNotifications_GetSessionDetails_Request() {}
@@ -467,7 +469,7 @@ namespace SteamKit2.Unified.Internal
       get { return _language; }
       set { _language = value; }
     }
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"RequestedSession")]
+  [global::ProtoBuf.ProtoContract(Name=@"RequestedSession")]
   public partial class RequestedSession : global::ProtoBuf.IExtensible
   {
     public RequestedSession() {}
@@ -500,7 +502,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_GetSessionDetails_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_GetSessionDetails_Response")]
   public partial class CGameNotifications_GetSessionDetails_Response : global::ProtoBuf.IExtensible
   {
     public CGameNotifications_GetSessionDetails_Response() {}
@@ -517,7 +519,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"GameNotificationSettings")]
+  [global::ProtoBuf.ProtoContract(Name=@"GameNotificationSettings")]
   public partial class GameNotificationSettings : global::ProtoBuf.IExtensible
   {
     public GameNotificationSettings() {}
@@ -545,7 +547,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_UpdateNotificationSettings_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_UpdateNotificationSettings_Request")]
   public partial class CGameNotifications_UpdateNotificationSettings_Request : global::ProtoBuf.IExtensible
   {
     public CGameNotifications_UpdateNotificationSettings_Request() {}
@@ -562,7 +564,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_UpdateNotificationSettings_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_UpdateNotificationSettings_Response")]
   public partial class CGameNotifications_UpdateNotificationSettings_Response : global::ProtoBuf.IExtensible
   {
     public CGameNotifications_UpdateNotificationSettings_Response() {}
@@ -572,7 +574,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_OnNotificationsRequested_Notification")]
+  [global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_OnNotificationsRequested_Notification")]
   public partial class CGameNotifications_OnNotificationsRequested_Notification : global::ProtoBuf.IExtensible
   {
     public CGameNotifications_OnNotificationsRequested_Notification() {}
@@ -600,7 +602,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_OnUserStatusChanged_Notification")]
+  [global::ProtoBuf.ProtoContract(Name=@"CGameNotifications_OnUserStatusChanged_Notification")]
   public partial class CGameNotifications_OnUserStatusChanged_Notification : global::ProtoBuf.IExtensible
   {
     public CGameNotifications_OnUserStatusChanged_Notification() {}

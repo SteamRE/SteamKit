@@ -8,11 +8,13 @@
 //------------------------------------------------------------------------------
 #pragma warning disable 1591
 
+// Option: light framework (CF/Silverlight) enabled
+    
 // Generated from: steammessages_base.proto
 // Note: requires additional types generated from: google/protobuf/descriptor.proto
 namespace SteamKit2.Internal
 {
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgProtoBufHeader")]
+  [global::ProtoBuf.ProtoContract(Name=@"CMsgProtoBufHeader")]
   public partial class CMsgProtoBufHeader : global::ProtoBuf.IExtensible
   {
     public CMsgProtoBufHeader() {}
@@ -202,7 +204,7 @@ namespace SteamKit2.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgMulti")]
+  [global::ProtoBuf.ProtoContract(Name=@"CMsgMulti")]
   public partial class CMsgMulti : global::ProtoBuf.IExtensible
   {
     public CMsgMulti() {}
@@ -230,7 +232,7 @@ namespace SteamKit2.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgProtobufWrapped")]
+  [global::ProtoBuf.ProtoContract(Name=@"CMsgProtobufWrapped")]
   public partial class CMsgProtobufWrapped : global::ProtoBuf.IExtensible
   {
     public CMsgProtobufWrapped() {}
@@ -249,7 +251,7 @@ namespace SteamKit2.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgAuthTicket")]
+  [global::ProtoBuf.ProtoContract(Name=@"CMsgAuthTicket")]
   public partial class CMsgAuthTicket : global::ProtoBuf.IExtensible
   {
     public CMsgAuthTicket() {}
@@ -322,7 +324,7 @@ namespace SteamKit2.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCDDBAppDetailCommon")]
+  [global::ProtoBuf.ProtoContract(Name=@"CCDDBAppDetailCommon")]
   public partial class CCDDBAppDetailCommon : global::ProtoBuf.IExtensible
   {
     public CCDDBAppDetailCommon() {}
@@ -440,7 +442,7 @@ namespace SteamKit2.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgAppRights")]
+  [global::ProtoBuf.ProtoContract(Name=@"CMsgAppRights")]
   public partial class CMsgAppRights : global::ProtoBuf.IExtensible
   {
     public CMsgAppRights() {}
