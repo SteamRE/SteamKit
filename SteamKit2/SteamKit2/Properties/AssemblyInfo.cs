@@ -12,6 +12,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
+[assembly: AssemblyTitle( "SteamKit2 ")]
+[assembly: AssemblyDescription( "Steam Networking Library" )]
+[assembly: AssemblyConfiguration( "" )]
+[assembly: AssemblyCompany( "SteamRE Team" )]
+[assembly: AssemblyProduct( "SteamKit2" )]
+[assembly: AssemblyCopyright( "Copyright © SteamRE Team 2017" )]
 [assembly: AssemblyTrademark( "" )]
 [assembly: AssemblyCulture( "" )]
 
@@ -22,6 +28,11 @@ using System.Runtime.InteropServices;
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 [assembly: Guid( "cd42d0bc-72e4-451e-bcd0-5d09c4bca2a9" )]
+
+// These are automatically modified by AppVeyor for CI builds and automated deployment.
+[assembly: AssemblyVersion( "1.8.1.0" )]
+[assembly: AssemblyFileVersion( "1.8.1.0" )]
+[assembly: AssemblyInformationalVersion( "1.8.1 - Development" )]
 
 #if DEBUG
 [assembly: InternalsVisibleTo( "Tests, PublicKey="+
