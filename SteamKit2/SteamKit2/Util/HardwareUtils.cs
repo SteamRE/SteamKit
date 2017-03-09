@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,14 +11,11 @@ using Microsoft.Win32;
 using System.Runtime.InteropServices;
 #endif
 
-#if NET46
-using System.Management;
-#endif
-
 using static SteamKit2.Util.MacHelpers.LibC;
 using static SteamKit2.Util.MacHelpers.CoreFoundation;
 using static SteamKit2.Util.MacHelpers.DiskArbitration;
 using static SteamKit2.Util.MacHelpers.IOKit;
+using SteamKit2.Util;
 
 namespace SteamKit2
 {
@@ -137,32 +133,7 @@ namespace SteamKit2
 
         public override byte[] GetDiskId()
         {
-#if NETSTANDARD1_3 || NET46
-            return base.GetDiskId();
-#elif WMI_AVAILABLE
-            var activePartition = WmiQuery(
-                @"SELECT DiskIndex FROM Win32_DiskPartition
-                  WHERE Bootable = 1"
-                ).FirstOrDefault();
-
-            if ( activePartition == null )
-            {
-                return base.GetDiskId();
-            }
-
-            uint index = (uint)activePartition["DiskIndex"];
-
-            var bootableDisk = WmiQuery(
-                @"SELECT SerialNumber FROM Win32_DiskDrive
-                  WHERE Index = {0}", index
-                ).FirstOrDefault();
-
-            if ( bootableDisk == null )
-            {
-                return base.GetDiskId();
-            }
-
-            string serialNumber = (string)bootableDisk["SerialNumber"];
+            var serialNumber = Win32Helpers.GetBootDiskSerialNumber();
 
             if ( string.IsNullOrEmpty( serialNumber ) )
             {
@@ -170,29 +141,7 @@ namespace SteamKit2
             }
 
             return Encoding.UTF8.GetBytes( serialNumber );
-#else
-#error Unknown Target Platform
-#endif
         }
-
-
-#if WMI_AVAILABLE
-        IEnumerable<ManagementObject> WmiQuery( string queryFormat, params object[] args )
-        {
-            string query = string.Format( queryFormat, args );
-
-            var searcher = new ManagementObjectSearcher( query );
-
-            try {
-                return searcher.Get().Cast<ManagementObject>();
-            }
-            catch ( Exception ex )
-            {
-                DebugLog.WriteLine( nameof(WindowsInfoProvider), "Failed to execute WMI query '{0}': {1}", query, ex.Message );
-                return Enumerable.Empty<ManagementObject>();
-            }
-        }
-#endif
     }
 
     class LinuxInfoProvider : DefaultInfoProvider
