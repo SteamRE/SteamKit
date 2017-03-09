@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿#if NET46
+using System;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Tests
 {
@@ -36,3 +33,4 @@ namespace Tests
         }
     }
 }
+#endif

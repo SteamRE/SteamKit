@@ -40,6 +40,7 @@ namespace Tests
             0x00,
         };
 
+#if NET46
         public ClientMsgFacts()
         {
             // Debug.Assert's default behavior is to display a dialog if the default trace listener is still installed
@@ -48,7 +49,8 @@ namespace Tests
 
             Debug.Listeners.Clear();
             Debug.Listeners.Add( new TraceAssertListener() );
-        }
+    }
+#endif
 
         [Fact]
         public void PayloadReaderReadsNullTermString()
@@ -78,6 +80,7 @@ namespace Tests
             Assert.Equal( mByte, 'M' );
         }
 
+#if NET46
         [Fact]
         public void ClientMsgAssertsInitializedWithNonProtoMsg()
         {
@@ -110,6 +113,7 @@ namespace Tests
             // Can't nameof(ClientMsgProtobuf) - nameof doesn't support open generic types (yet).
             Assert.Contains( $"ClientMsgProtobuf<{typeof( CMsgClientLogon ).FullName}>", tae.AssertMessage );
         }
+#endif
 
         static IPacketMsg BuildStructMsg()
         {
