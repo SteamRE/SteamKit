@@ -137,9 +137,9 @@ namespace SteamKit2
 
         public override byte[] GetDiskId()
         {
-#if NETSTANDARD1_3
+#if NETSTANDARD1_3 || NET46
             return base.GetDiskId();
-#elif NET46
+#elif WMI_AVAILABLE
             var activePartition = WmiQuery(
                 @"SELECT DiskIndex FROM Win32_DiskPartition
                   WHERE Bootable = 1"
@@ -176,7 +176,7 @@ namespace SteamKit2
         }
 
 
-#if NET46
+#if WMI_AVAILABLE
         IEnumerable<ManagementObject> WmiQuery( string queryFormat, params object[] args )
         {
             string query = string.Format( queryFormat, args );
