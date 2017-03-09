@@ -205,7 +205,7 @@ namespace SteamKit2
         /// <param name="data">The string to write.</param>
         public void Write( string data )
         {
-            Write( data, Encoding.Default );
+            Write( data, Encoding.GetEncoding( 0 ) );
         }
         /// <summary>
         /// Writes the specified string to the message payload using the specified encoding.
@@ -227,7 +227,7 @@ namespace SteamKit2
         /// <param name="data">The string to write.</param>
         public void WriteNullTermString( string data )
         {
-            WriteNullTermString( data, Encoding.Default );
+            WriteNullTermString( data, Encoding.GetEncoding( 0 ) );
         }
         /// <summary>
         /// Writes the specified string and a null terminator to the message payload using the specified encoding.
@@ -408,7 +408,7 @@ namespace SteamKit2
         /// <returns>The string.</returns>
         public string ReadNullTermString()
         {
-            return ReadNullTermString( Encoding.Default );
+            return ReadNullTermString( Encoding.GetEncoding( 0 ) );
         }
         /// <summary>
         /// Reads a null terminated string from the message payload with the specified encoding.
