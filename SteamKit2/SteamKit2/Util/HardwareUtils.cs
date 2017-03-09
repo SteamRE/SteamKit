@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Net.NetworkInformation;
 using System.Text;
+using SteamKit2.Util;
 using SteamKit2.Util.MacHelpers;
 using Microsoft.Win32;
 
@@ -15,7 +16,6 @@ using static SteamKit2.Util.MacHelpers.LibC;
 using static SteamKit2.Util.MacHelpers.CoreFoundation;
 using static SteamKit2.Util.MacHelpers.DiskArbitration;
 using static SteamKit2.Util.MacHelpers.IOKit;
-using SteamKit2.Util;
 
 namespace SteamKit2
 {
