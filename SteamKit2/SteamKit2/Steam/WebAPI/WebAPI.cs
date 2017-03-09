@@ -5,8 +5,10 @@ using System.Dynamic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Reflection;
-using System.Runtime.Serialization;
+using System.Runtime.ExceptionServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -18,12 +20,14 @@ namespace SteamKit2
     /// </summary>
     public sealed class WebAPI
     {
+#if NET46
         static WebAPI()
         {
             // stop WebClient from inserting this header into requests
             // the backend doesn't like it
             ServicePointManager.Expect100Continue = false;
         }
+#endif
 
         /// <summary>
         /// Represents a single interface that exists within the Web API.
@@ -63,38 +67,39 @@ namespace SteamKit2
             /// <exception cref="ArgumentNullException">The function name or request method provided were <c>null</c>.</exception>
             /// <exception cref="WebException">An network error occurred when performing the request.</exception>
             /// <exception cref="InvalidDataException">An error occured when parsing the response from the WebAPI.</exception>
-            public KeyValue Call( string func, int version = 1, Dictionary<string, string> args = null, string method = WebRequestMethods.Http.Get, bool secure = false )
+            public KeyValue Call( string func, int version = 1, Dictionary<string, string> args = null, bool secure = false )
+                => Call( HttpMethod.Get, func, version, args, secure );
+
+
+            /// <summary>
+            /// Manually calls the specified Web API function with the provided details.
+            /// </summary>
+            /// <param name="func">The function name to call.</param>
+            /// <param name="version">The version of the function to call.</param>
+            /// <param name="args">A dictionary of string key value pairs representing arguments to be passed to the API.</param>
+            /// <param name="method">The http request method. Either "POST" or "GET".</param>
+            /// <param name="secure">if set to <c>true</c> this method will be called through the secure API.</param>
+            /// <returns>A <see cref="KeyValue"/> object representing the results of the Web API call.</returns>
+            /// <exception cref="ArgumentNullException">The function name or request method provided were <c>null</c>.</exception>
+            /// <exception cref="WebException">An network error occurred when performing the request.</exception>
+            /// <exception cref="InvalidDataException">An error occured when parsing the response from the WebAPI.</exception>
+            public KeyValue Call( HttpMethod method, string func, int version = 1, Dictionary<string, string> args = null, bool secure = false )
             {
-                var callTask = asyncInterface.Call( func, version, args, method, secure );
+                var callTask = asyncInterface.CallAsync( method, func, version, args, secure );
 
                 try
                 {
                     bool completed = callTask.Wait( Timeout );
 
                     if ( !completed )
-                        throw new WebException( "The WebAPI call timed out", WebExceptionStatus.Timeout );
+                        throw new TimeoutException( "The WebAPI call timed out" );
                 }
-                catch ( AggregateException ex )
+                catch ( AggregateException ex ) when ( ex.InnerException != null )
                 {
                     // because we're internally using the async interface, any WebExceptions thrown will
                     // be wrapped inside an AggregateException.
                     // since callers don't expect this, we need to unwrap and rethrow the inner exception
-
-                    var innerEx = ex.InnerException;
-
-                    // preserve stack trace when rethrowing inner exception
-                    // see: http://stackoverflow.com/a/4557183/139147
-
-                    var prepFunc = typeof( Exception ).GetMethod( "PrepForRemoting", BindingFlags.NonPublic | BindingFlags.Instance );
-                    if ( prepFunc != null )
-                    {
-                        // TODO: we can't use this on mono!
-                        // .NET 4.5 comes with the machinery to preserve a stack trace: ExceptionDispatchInfo, but we target 4.0
-
-                        prepFunc.Invoke( innerEx, new object[ 0 ] );
-                    }
-
-                    throw innerEx;
+                    ExceptionDispatchInfo.Capture( ex.InnerException ).Throw();
                 }
 
                 return callTask.Result;
@@ -160,7 +165,7 @@ namespace SteamKit2
                     bool completed = resultTask.Wait( Timeout );
 
                     if ( !completed )
-                        throw new WebException( "The WebAPI call timed out", WebExceptionStatus.Timeout );
+                        throw new TimeoutException( "The WebAPI call timed out" );
                 }
                 catch ( AggregateException ex )
                 {
@@ -198,7 +203,7 @@ namespace SteamKit2
         /// </summary>
         public sealed class AsyncInterface : DynamicObject, IDisposable
         {
-            WebClient webClient;
+            HttpClient httpClient;
 
             string iface;
             string apiKey;
@@ -213,7 +218,7 @@ namespace SteamKit2
 
             internal AsyncInterface( string iface, string apiKey )
             {
-                webClient = new WebClient();
+                httpClient = new HttpClient();
 
                 this.iface = iface;
                 this.apiKey = apiKey;
@@ -232,25 +237,43 @@ namespace SteamKit2
             /// <exception cref="ArgumentNullException">The function name or request method provided were <c>null</c>.</exception>
             /// <exception cref="WebException">An network error occurred when performing the request.</exception>
             /// <exception cref="InvalidDataException">An error occured when parsing the response from the WebAPI.</exception>
-            public Task<KeyValue> Call( string func, int version = 1, Dictionary<string, string> args = null, string method = WebRequestMethods.Http.Get, bool secure = false )
+            public Task<KeyValue> CallAsync( HttpMethod method, string func, int version = 1, Dictionary<string, string> args = null, bool secure = false )
             {
+                var task = CallAsyncCore( method, func, version, args, secure );
+
+                task.ContinueWith( t =>
+                {
+                    // we need to observe the exception in this OnlyOnFaulted continuation if our task throws an exception but we're not able to observe it
+                    // (such as when waiting for the task times out, and an exception is thrown later)
+                    // see: http://msdn.microsoft.com/en-us/library/dd997415.aspx
+
+                    DebugLog.WriteLine("WebAPI", "Threw an unobserved exception: {0}", t.Exception);
+
+                }, TaskContinuationOptions.OnlyOnFaulted );
+
+                return task;
+            }
+                
+            async Task<KeyValue> CallAsyncCore( HttpMethod method, string func, int version = 1, Dictionary<string, string> args = null, bool secure = false )
+            {
+                if ( method == null )
+                    throw new ArgumentNullException( nameof(method) );
+
                 if ( func == null )
-                    throw new ArgumentNullException( "func" );
+                    throw new ArgumentNullException( nameof(func) );
 
                 if ( args == null )
                     args = new Dictionary<string, string>();
 
-                if ( method == null )
-                    throw new ArgumentNullException( "method" );
 
-                StringBuilder urlBuilder = new StringBuilder();
-                StringBuilder paramBuilder = new StringBuilder();
+                var urlBuilder = new StringBuilder();
+                var paramBuilder = new StringBuilder();
 
                 urlBuilder.Append( secure ? "https://" : "http://" );
                 urlBuilder.Append( API_ROOT );
                 urlBuilder.AppendFormat( "/{0}/{1}/v{2}", iface, func, version );
 
-                bool isGet = method.Equals( WebRequestMethods.Http.Get, StringComparison.OrdinalIgnoreCase );
+                var isGet = HttpMethod.Get.Equals( method );
 
                 if ( isGet )
                 {
@@ -277,55 +300,35 @@ namespace SteamKit2
 
                     return string.Format( "{0}={1}", key, value );
                 } ) ) );
+                
+                var request = new HttpRequestMessage( method, urlBuilder.ToString() );
 
-
-                var task = Task.Factory.StartNew<KeyValue>( () =>
+                if ( !isGet )
                 {
-                    byte[] data = null;
+                    request.Content = new StringContent( paramBuilder.ToString() );
+                    request.Content.Headers.ContentType = new MediaTypeHeaderValue( "application/x-www-form-urlencoded" );
+                }
 
-                    if ( isGet )
-                    {
-                        data = webClient.DownloadData( urlBuilder.ToString() );
-                    }
-                    else
-                    {
-                        byte[] postData = Encoding.Default.GetBytes( paramBuilder.ToString() );
+                var response = await httpClient.SendAsync( request ).ConfigureAwait( false );
 
-                        webClient.Headers.Add( HttpRequestHeader.ContentType, "application/x-www-form-urlencoded" );
-                        data = webClient.UploadData( urlBuilder.ToString(), postData );
-                    }
+                var kv = new KeyValue();
 
-                    KeyValue kv = new KeyValue();
-
-                    using ( var ms = new MemoryStream( data ) )
-                    {
-                        try
-                        {
-                            kv.ReadAsText( ms );
-                        }
-                        catch ( Exception ex )
-                        {
-                            throw new InvalidDataException(
-                                "An internal error occurred when attempting to parse the response from the WebAPI server. This can indicate a change in the VDF format.",
-                                ex
-                            );
-                        }
-                    }
-
-                    return kv;
-                } );
-
-                task.ContinueWith( t =>
+                using ( var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait( false ) )
                 {
-                    // we need to observe the exception in this OnlyOnFaulted continuation if our task throws an exception but we're not able to observe it
-                    // (such as when waiting for the task times out, and an exception is thrown later)
-                    // see: http://msdn.microsoft.com/en-us/library/dd997415.aspx
+                    try
+                    {
+                        kv.ReadAsText( stream );
+                    }
+                    catch ( Exception ex )
+                    {
+                        throw new InvalidDataException(
+                            "An internal error occurred when attempting to parse the response from the WebAPI server. This can indicate a change in the VDF format.",
+                            ex
+                        );
+                    }
+                }
 
-                    DebugLog.WriteLine( "WebAPI", "Threw an unobserved exception: {0}", t.Exception );
-
-                }, TaskContinuationOptions.OnlyOnFaulted );
-
-                return task;
+                return kv;
             }
 
             /// <summary>
@@ -333,7 +336,7 @@ namespace SteamKit2
             /// </summary>
             public void Dispose()
             {
-                webClient.Dispose();
+                httpClient.Dispose();
             }
 
             /// <summary>
@@ -382,7 +385,7 @@ namespace SteamKit2
 
                 var apiArgs = new Dictionary<string, string>();
 
-                string requestMethod = WebRequestMethods.Http.Get;
+                var requestMethod = HttpMethod.Get;
                 bool secure = false;
 
                 // convert named arguments into key value pairs
@@ -394,7 +397,7 @@ namespace SteamKit2
                     // method is a reserved param for selecting the http request method
                     if ( argName.Equals( "method", StringComparison.OrdinalIgnoreCase ) )
                     {
-                        requestMethod = argValue.ToString();
+                        requestMethod = new HttpMethod( argValue.ToString() );
                         continue;
                     }
                     // secure is another reserved param for selecting the http or https apis
@@ -452,7 +455,7 @@ namespace SteamKit2
                     }
                 }
 
-                result = Call( functionName, version, apiArgs, requestMethod, secure );
+                result = CallAsync( requestMethod, functionName, version, apiArgs, secure ).Result; // TODO: Async?
 
                 return true;
             }
