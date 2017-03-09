@@ -52,7 +52,7 @@ namespace SteamKit2
 #if NETSTANDARD1_3
             var directory = System.AppContext.BaseDirectory;
 #elif NET46
-            var directory = Path.GetDirectoryName() new Uri( GetType().Assembly.CodeBase ).LocalPath );
+            var directory = Path.GetDirectoryName( new Uri( GetType().Assembly.CodeBase ).LocalPath );
 #else
 #error Unknown Target Platform
 #endif
