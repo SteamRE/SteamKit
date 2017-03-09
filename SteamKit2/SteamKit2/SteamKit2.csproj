@@ -3,6 +3,8 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard1.3;net46</TargetFrameworks>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <SignAssembly>True</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\..\SteamKit.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
   <ItemGroup>
