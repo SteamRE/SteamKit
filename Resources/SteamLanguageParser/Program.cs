@@ -29,7 +29,7 @@ namespace SteamLanguageParser
         {
             string languagePath = Path.Combine( projectPath, path );
 
-            Environment.CurrentDirectory = languagePath;
+            Directory.SetCurrentDirectory( languagePath );
             Queue<Token> tokenList = LanguageParser.TokenizeString( File.ReadAllText( Path.Combine( languagePath, file ) ) );
 
             Node root = TokenAnalyzer.Analyze( tokenList );
