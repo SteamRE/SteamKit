@@ -43,8 +43,7 @@ namespace SteamKit2
 
         protected override byte[] HashFinal()
         {
-            byte[] hashBuffer = UInt32ToBigEndianBytes( ~hash );
-            this.HashValue = hashBuffer;
+            var hashBuffer = UInt32ToBigEndianBytes( ~hash );
             return hashBuffer;
         }
 
