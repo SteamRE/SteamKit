@@ -9,15 +9,18 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace SteamKit2
 {
     /// <summary>
     /// The CDNClient class is used for downloading game content from the Steam servers.
     /// </summary>
-    public sealed class CDNClient
+    public sealed class CDNClient : IDisposable
     {
         /// <summary>
         /// Represents a single Steam3 'Steampipe' content server.
@@ -158,6 +161,7 @@ namespace SteamKit2
 
 
         SteamClient steamClient;
+        HttpClient httpClient;
 
         byte[] appTicket;
         ConcurrentDictionary<uint, bool> depotIds;
@@ -176,10 +180,12 @@ namespace SteamKit2
         /// </summary>
         public static TimeSpan RequestTimeout = TimeSpan.FromSeconds( 10 );
 
+#if NET46
         static CDNClient()
         {
             ServicePointManager.Expect100Continue = false;
         }
+#endif
 
 
         /// <summary>
@@ -195,6 +201,7 @@ namespace SteamKit2
         public CDNClient( SteamClient steamClient, byte[] appTicket = null )
         {
             this.steamClient = steamClient;
+            this.httpClient = new HttpClient();
 
             this.depotIds = new ConcurrentDictionary<uint, bool>();
             this.appTicket = appTicket;
@@ -221,7 +228,7 @@ namespace SteamKit2
         /// No Steam CS servers available, or the suggested CellID is unavailable.
         /// Check that the <see cref="SteamClient"/> associated with this <see cref="CDNClient"/> instance is logged onto Steam.
         /// </exception>
-        public List<Server> FetchServerList( IPEndPoint csServer = null, uint? cellId = null, int maxServers = 20 )
+        public async Task<IList<Server>> FetchServerListAsync( IPEndPoint csServer = null, uint? cellId = null, int maxServers = 20 )
         {
             DebugLog.Assert( steamClient.IsConnected, "CDNClient", "CMClient is not connected!" );
             DebugLog.Assert( steamClient.CellID != null, "CDNClient", "CMClient is not logged on!" );
@@ -250,7 +257,7 @@ namespace SteamKit2
                 cellId = steamClient.CellID.Value;
             }
 
-            KeyValue serverKv = DoCommand( csServer, "serverlist", args: string.Format( "{0}/{1}/", cellId, maxServers ) );
+            var serverKv = await DoCommandAsync( csServer, HttpMethod.Get, "serverlist", args: string.Format( "{0}/{1}/", cellId, maxServers ) ).ConfigureAwait( false );
 
             var serverList = new List<Server>( maxServers );
 
@@ -313,7 +320,7 @@ namespace SteamKit2
         /// </summary>
         /// <param name="csServer">The content server to connect to.</param>
         /// <exception cref="System.ArgumentNullException">csServer was null.</exception>
-        public void Connect( Server csServer )
+        public async Task ConnectAsync( Server csServer )
         {
             DebugLog.Assert( steamClient.IsConnected, "CDNClient", "CMClient is not connected!" );
 
@@ -350,7 +357,7 @@ namespace SteamKit2
                 data = string.Format( "sessionkey={0}&appticket={1}", WebHelpers.UrlEncode( cryptedSessKey ), WebHelpers.UrlEncode( encryptedAppTicket ) );
             }
 
-            KeyValue initKv = DoCommand( csServer, "initsession", data, WebRequestMethods.Http.Post );
+            var initKv = await DoCommandAsync( csServer, HttpMethod.Post, "initsession", data ).ConfigureAwait( false );
 
             sessionId = initKv["sessionid"].AsUnsignedLong();
             reqCounter = initKv[ "req-counter" ].AsLong();
@@ -366,7 +373,7 @@ namespace SteamKit2
         /// This is used for decrypting filenames (if needed) in depot manifests, and processing depot chunks.
         /// </param>
         /// <param name="cdnAuthToken">CDN auth token for CDN content server endpoints.</param>
-        public void AuthenticateDepot( uint depotid, byte[] depotKey = null, string cdnAuthToken = null )
+        public async Task AuthenticateDepotAsync( uint depotid, byte[] depotKey = null, string cdnAuthToken = null )
         {
             if ( depotIds.ContainsKey( depotid ) )
                 return;
@@ -385,7 +392,7 @@ namespace SteamKit2
                     data = string.Format( "appticket={0}", WebHelpers.UrlEncode( encryptedAppTicket ) );
                 }
 
-                DoCommand( connectedServer, "authdepot", data, WebRequestMethods.Http.Post, true );
+                await DoCommandAsync( connectedServer, HttpMethod.Post, "authdepot", data, doAuth: true ).ConfigureAwait( false);
             }
 
             depotIds[depotid] = true;
@@ -399,7 +406,7 @@ namespace SteamKit2
         /// <param name="depotId">The id of the depot being accessed.</param>
         /// <param name="manifestId">The unique identifier of the manifest to be downloaded.</param>
         /// <returns>A <see cref="DepotManifest"/> instance that contains information about the files present within a depot.</returns>
-        public DepotManifest DownloadManifest( uint depotId, ulong manifestId )
+        public async Task<DepotManifest> DownloadManifestAsync( uint depotId, ulong manifestId )
         {
             string cdnToken = null;
             depotCdnAuthKeys.TryGetValue( depotId, out cdnToken );
@@ -407,7 +414,7 @@ namespace SteamKit2
             byte[] depotKey = null;
             depotKeys.TryGetValue( depotId, out depotKey );
 
-            return DownloadManifestCore( depotId, manifestId, connectedServer, cdnToken, depotKey );
+            return await DownloadManifestCoreAsync( depotId, manifestId, connectedServer, cdnToken, depotKey ).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -422,7 +429,7 @@ namespace SteamKit2
         /// This is used for decrypting filenames (if needed) in depot manifests, and processing depot chunks.
         /// </param>
         /// <returns>A <see cref="DepotManifest"/> instance that contains information about the files present within a depot.</returns>
-        public DepotManifest DownloadManifest( uint depotId, ulong manifestId, string host, string cdnAuthToken, byte[] depotKey = null )
+        public async Task<DepotManifest> DownloadManifestAsync( uint depotId, ulong manifestId, string host, string cdnAuthToken, byte[] depotKey = null )
         {
             var server = new Server
             {
@@ -430,7 +437,7 @@ namespace SteamKit2
                 Port = 80
             };
 
-            return DownloadManifestCore( depotId, manifestId, server, cdnAuthToken, depotKey );
+            return await DownloadManifestCoreAsync( depotId, manifestId, server, cdnAuthToken, depotKey ).ConfigureAwait( false );
         }
 
         // Ambiguous reference in cref attribute: 'CDNClient.DownloadManifest'. Assuming 'SteamKit2.CDNClient.DownloadManifest(uint, ulong)',
@@ -451,7 +458,7 @@ namespace SteamKit2
         /// </param>
         /// <returns>A <see cref="DepotChunk"/> instance that contains the data for the given chunk.</returns>
         /// <exception cref="System.ArgumentNullException">chunk's <see cref="DepotManifest.ChunkData.ChunkID"/> was null.</exception>
-        public DepotChunk DownloadDepotChunk( uint depotId, DepotManifest.ChunkData chunk )
+        public async Task<DepotChunk> DownloadDepotChunkAsync( uint depotId, DepotManifest.ChunkData chunk )
 #pragma warning restore 0419
         {
             if ( chunk.ChunkID == null )
@@ -463,7 +470,7 @@ namespace SteamKit2
             byte[] depotKey = null;
             depotKeys.TryGetValue( depotId, out depotKey );
 
-            return DownloadDepotChunkCore( depotId, chunk, connectedServer, cdnToken, depotKey );
+            return await DownloadDepotChunkCoreAsync( depotId, chunk, connectedServer, cdnToken, depotKey ).ConfigureAwait( false );
         }
 
         // Ambiguous reference in cref attribute: 'CDNClient.DownloadManifest'. Assuming 'SteamKit2.CDNClient.DownloadManifest(uint, ulong)',
@@ -490,7 +497,7 @@ namespace SteamKit2
         /// This is used for decrypting filenames (if needed) in depot manifests, and processing depot chunks.
         /// </param>
         /// <exception cref="System.ArgumentNullException">chunk's <see cref="DepotManifest.ChunkData.ChunkID"/> was null.</exception>
-        public DepotChunk DownloadDepotChunk( uint depotId, DepotManifest.ChunkData chunk, string host, string cdnAuthToken, byte[] depotKey = null )
+        public async Task<DepotChunk> DownloadDepotChunkAsync( uint depotId, DepotManifest.ChunkData chunk, string host, string cdnAuthToken, byte[] depotKey = null )
 #pragma warning restore 0419
         {
             if (chunk.ChunkID == null)
@@ -502,7 +509,15 @@ namespace SteamKit2
                 Port = 80
             };
 
-            return DownloadDepotChunkCore( depotId, chunk, server, cdnAuthToken, depotKey );
+            return await DownloadDepotChunkCoreAsync( depotId, chunk, server, cdnAuthToken, depotKey ).ConfigureAwait( false );
+        }
+
+        /// <summary>
+        /// Disposes of this object.
+        /// </summary>
+        public void Dispose()
+        {
+            httpClient.Dispose();
         }
 
         string BuildCommand( Server server, string command, string args, string authtoken = null )
@@ -510,13 +525,10 @@ namespace SteamKit2
             return string.Format( "http://{0}:{1}/{2}/{3}{4}", server.Host, server.Port, command, args, authtoken ?? "" );
         }
 
-        byte[] DoRawCommand( Server server, string command, string data = null, string method = WebRequestMethods.Http.Get, bool doAuth = false, string args = "", string authtoken = null )
+        async Task<byte[]> DoRawCommandAsync( Server server, HttpMethod method, string command, string data = null, bool doAuth = false, string args = "", string authtoken = null )
         {
-            string url = BuildCommand( server, command, args, authtoken );
-            var webReq = HttpWebRequest.Create( url ) as HttpWebRequest;
-            webReq.Method = method;
-            webReq.Pipelined = true;
-            webReq.KeepAlive = true;
+            var url = BuildCommand( server, command, args, authtoken );
+            var request = new HttpRequestMessage( method, url );
 
             if ( doAuth && server.Type == "CS" )
             {
@@ -540,51 +552,39 @@ namespace SteamKit2
                 string hexHash = Utils.EncodeHexString( shaHash );
                 string authHeader = string.Format( "sessionid={0};req-counter={1};hash={2};", sessionId, req, hexHash );
 
-                webReq.Headers[ "x-steam-auth" ] = authHeader;
+                request.Headers.Add( "x-steam-auth", authHeader );
             }
 
-            if ( method == WebRequestMethods.Http.Post )
+            if ( HttpMethod.Post.Equals( method ) )
             {
-                byte[] payload = Encoding.UTF8.GetBytes( data );
-                webReq.ContentType = "application/x-www-form-urlencoded";
-                webReq.ContentLength = payload.Length;
+                request.Content = new StringContent( data, Encoding.UTF8 );
+                request.Content.Headers.ContentType = new MediaTypeHeaderValue( "application/x-www-form-urlencoded" );
+            }
 
-                using ( var reqStream = webReq.GetRequestStream() )
+
+            HttpResponseMessage response;
+            using ( var cts = new CancellationTokenSource() )
+            {
+                cts.CancelAfter( RequestTimeout );
+
+                try
                 {
-                    reqStream.Write( payload, 0, payload.Length );
+                    response = await httpClient.SendAsync( request, cts.Token ).ConfigureAwait( false );
+
+                    var responseData = await response.Content.ReadAsByteArrayAsync();
+                    return responseData;
                 }
-            }
-
-
-            var result = webReq.BeginGetResponse( null, null );
-
-            if ( !result.AsyncWaitHandle.WaitOne( RequestTimeout ) )
-            {
-                webReq.Abort();
-            }
-
-            try
-            {
-                var response = webReq.EndGetResponse( result );
-
-                using ( var ms = new MemoryStream( ( int ) response.ContentLength ) )
+                catch ( Exception ex )
                 {
-                    response.GetResponseStream().CopyTo( ms );
-                    response.Close();
-
-                    return ms.ToArray();
+                    DebugLog.WriteLine( "CDNClient", "Failed to complete web request to {0}: {1}", url, ex.Message );
+                    throw;
                 }
-            }
-            catch ( Exception ex )
-            {
-                DebugLog.WriteLine( "CDNClient", "Failed to complete web request to {0}: {1}", url, ex.Message );
-                throw;
             }
         }
 
-        KeyValue DoCommand( Server server, string command, string data = null, string method = WebRequestMethods.Http.Get, bool doAuth = false, string args = "", string authtoken = null )
+        async Task<KeyValue> DoCommandAsync( Server server, HttpMethod method, string command, string data = null, bool doAuth = false, string args = "", string authtoken = null )
         {
-            byte[] resultData = DoRawCommand( server, command, data, method, doAuth, args, authtoken );
+            var resultData = await DoRawCommandAsync( server, method, command, data, doAuth, args, authtoken ).ConfigureAwait( false );
 
             var dataKv = new KeyValue();
 
@@ -603,10 +603,10 @@ namespace SteamKit2
             return dataKv;
         }
 
-        DepotManifest DownloadManifestCore( uint depotId, ulong manifestId, Server server, string cdnAuthToken, byte[] depotKey )
+        async Task<DepotManifest> DownloadManifestCoreAsync( uint depotId, ulong manifestId, Server server, string cdnAuthToken, byte[] depotKey )
         {
 
-            byte[] manifestData = DoRawCommand( server, "depot", doAuth: true, args: string.Format( "{0}/manifest/{1}/5", depotId, manifestId ), authtoken: cdnAuthToken );
+            var manifestData = await DoRawCommandAsync( server, HttpMethod.Get, "depot", doAuth: true, args: string.Format( "{0}/manifest/{1}/5", depotId, manifestId ), authtoken: cdnAuthToken ).ConfigureAwait(false);
 
             manifestData = ZipUtil.Decompress( manifestData );
 
@@ -621,11 +621,11 @@ namespace SteamKit2
             return depotManifest;
         }
 
-        DepotChunk DownloadDepotChunkCore( uint depotId, DepotManifest.ChunkData chunk, Server server, string cdnAuthToken, byte[] depotKey )
+        async Task<DepotChunk> DownloadDepotChunkCoreAsync( uint depotId, DepotManifest.ChunkData chunk, Server server, string cdnAuthToken, byte[] depotKey )
         {
             var chunkID = Utils.EncodeHexString( chunk.ChunkID );
 
-            byte[] chunkData = DoRawCommand( server, "depot", doAuth: true, args: string.Format( "{0}/chunk/{1}", depotId, chunkID ), authtoken: cdnAuthToken );
+            var chunkData = await DoRawCommandAsync( server, HttpMethod.Get, "depot", doAuth: true, args: string.Format( "{0}/chunk/{1}", depotId, chunkID ), authtoken: cdnAuthToken ).ConfigureAwait(false);
 
             if ( chunk.CompressedLength != default( uint ) )
             {
