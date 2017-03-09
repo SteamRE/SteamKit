@@ -355,7 +355,7 @@ namespace SteamKit2.Internal
 			bw.Write( HeaderLength );
 			bw.Write( msProto.ToArray() );
 
-			msProto.Close();
+			msProto.Dispose();
 		}
 
 		public void Deserialize( Stream stream )
@@ -399,7 +399,7 @@ namespace SteamKit2.Internal
 			bw.Write( HeaderLength );
 			bw.Write( msProto.ToArray() );
 
-			msProto.Close();
+			msProto.Dispose();
 		}
 
 		public void Deserialize( Stream stream )

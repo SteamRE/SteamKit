@@ -508,7 +508,7 @@ namespace SteamLanguageParser
 
             foreach (String stream in openedStreams)
             {
-                sb.AppendLine(padding + "\t" + stream + ".Close();");
+                sb.AppendLine(padding + "\t" + stream + ".Dispose();");
             }
 
             //sb.AppendLine();
