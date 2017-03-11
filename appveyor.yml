@@ -22,6 +22,9 @@ environment:
 init:
   - git config --global core.autocrlf true
 
+install:
+  - set PATH=C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\bin;%PATH%
+
 before_build:
   - nuget restore SteamKit2\SteamKit2.sln
   - nuget restore Samples\Samples.sln
