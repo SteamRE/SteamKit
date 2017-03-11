@@ -9,13 +9,12 @@ solution: SteamKit2/SteamKit2.sln
 
 install:
     - dotnet restore SteamKit2/SteamKit2.sln
-    - dotnet restore Resources/SteamLanguageParser/SteamLanguageParser.csproj
     - dotnet restore Samples/Samples.sln
 
 script:
-    - dotnet build -f netstandard1.3 SteamKit2/SteamKit2.sln
-    - dotnet build -f netstandard1.3 Samples/Samples.sln
-    - dotnet test -f netstandard1.3 SteamKit2/SteamKit2.sln
+    - dotnet build SteamKit2/SteamKit2.sln
+    - dotnet build Samples/Samples.sln
+    - dotnet test SteamKit2/SteamKit2.sln
 
 notifications:
     irc:
