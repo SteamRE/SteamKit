@@ -1,19 +1,18 @@
 sudo: false
 language: csharp
-mono:
-    - latest
+mono: none
+dotnet: 1.0.1
 
 solution: SteamKit2/SteamKit2.sln
 
 install:
-    - nuget restore SteamKit2/SteamKit2.sln
-    - nuget restore Samples/Samples.sln
-    - nuget install xunit.runner.console -Version 2.0.0 -o SteamKit2/packages
+    - dotnet restore SteamKit2/SteamKit2.sln
+    - dotnet restore Samples/Samples.sln
 
 script:
-    - xbuild /p:NoWarn=1584 SteamKit2/SteamKit2.sln /target:SteamKit2 /target:Tests
-    - xbuild Samples/Samples.sln
-    - mono SteamKit2/packages/xunit.runner.console.2.0.0/tools/xunit.console.exe SteamKit2/Tests/bin/Debug/Tests.dll
+    - dotnet build -f netstandard1.3 SteamKit2/SteamKit2.sln
+    - dotnet build -f netstandard1.3 Samples/Samples.sln
+    - dotnet test -f netstandard1.3 SteamKit2/SteamKit2.sln
 
 notifications:
     irc:
