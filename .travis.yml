@@ -9,6 +9,7 @@ solution: SteamKit2/SteamKit2.sln
 
 install:
     - dotnet restore SteamKit2/SteamKit2.sln
+    - dotnet restore Resources/SteamLanguageParser/SteamLanguageParser.csproj
     - dotnet restore Samples/Samples.sln
 
 script:
