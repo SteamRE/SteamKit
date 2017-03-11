@@ -12,9 +12,11 @@ install:
     - dotnet restore Samples/Samples.sln
 
 script:
-    - dotnet build SteamKit2/SteamKit2.sln
-    - dotnet build Samples/Samples.sln
-    - dotnet test SteamKit2/SteamKit2.sln
+    - dotnet build -f netstandard1.3 SteamKit2/SteamKit2/SteamKit2.csproj
+    - dotnet build -f netcoreapp1.1 SteamKit2/Tests/Tests.csproj
+    - dotnet build -f netcoreapp1.1 Resources/SteamLanguageParser/SteamLanguageParser.csproj
+    - dotnet build -f netcoreapp1.1 Samples/Samples.sln
+    - dotnet test -f netcoreapp1.1 SteamKit2/Tests/Tests.csproj
 
 notifications:
     irc:
