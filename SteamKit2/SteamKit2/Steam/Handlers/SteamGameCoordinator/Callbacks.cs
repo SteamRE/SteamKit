@@ -17,7 +17,8 @@ namespace SteamKit2
             /// <summary>
             /// Gets the game coordinator message type.
             /// </summary>
-            public uint EMsg { get { return MsgUtil.GetGCMsg( eMsg ); } }
+            public uint EMsg => MsgUtil.GetGCMsg( eMsg );
+
             /// <summary>
             /// Gets the AppID of the game coordinator the message is from.
             /// </summary>
@@ -28,7 +29,7 @@ namespace SteamKit2
             /// <value>
             ///   <c>true</c> if this instance is protobuf'd; otherwise, <c>false</c>.
             /// </value>
-            public bool IsProto { get { return MsgUtil.IsProtoBuf( eMsg ); } }
+            public bool IsProto => MsgUtil.IsProtoBuf( eMsg );
 
             /// <summary>
             /// Gets the actual message.

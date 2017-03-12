@@ -32,18 +32,12 @@ namespace SteamKit2
             /// <summary>
             /// Gets the name of the Service.
             /// </summary>
-            public string ServiceName
-            {
-                get { return MethodName.Split( '.' )[0]; }
-            }
+            public string ServiceName => MethodName.Split( '.' )[0];
 
             /// <summary>
             /// Gets the name of the RPC method.
             /// </summary>
-            public string RpcName
-            {
-                get { return MethodName.Substring( ServiceName.Length + 1 ).Split( '#' )[0]; }
-            }
+            public string RpcName => MethodName.Substring( ServiceName.Length + 1 ).Split( '#' )[0];
 
             /// <summary>
             /// Gets the full name of the service method.
@@ -84,18 +78,12 @@ namespace SteamKit2
             /// <summary>
             /// Gets the name of the Service.
             /// </summary>
-            public string ServiceName
-            {
-                get { return MethodName.Split( '.' )[0]; }
-            }
+            public string ServiceName => MethodName.Split( '.' )[0];
 
             /// <summary>
             /// Gets the name of the RPC method.
             /// </summary>
-            public string RpcName
-            {
-                get { return MethodName.Substring( ServiceName.Length + 1 ).Split( '#' )[0]; }
-            }
+            public string RpcName => MethodName.Substring( ServiceName.Length + 1 ).Split( '#' )[0];
 
             /// <summary>
             /// Gets the full name of the service method.

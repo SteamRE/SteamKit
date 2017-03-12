@@ -377,20 +377,15 @@ namespace SteamKit2
         /// <value>
         /// 	<c>true</c> if this instance is a blank anon account; otherwise, <c>false</c>.
         /// </value>
-        public bool IsBlankAnonAccount
-        {
-            get { return this.AccountID == 0 && IsAnonAccount && this.AccountInstance == 0; }
-        }
+        public bool IsBlankAnonAccount => this.AccountID == 0 && IsAnonAccount && this.AccountInstance == 0;
+
         /// <summary>
         /// Gets a value indicating whether this instance is a game server account.
         /// </summary>
         /// <value>
         /// 	<c>true</c> if this instance is a game server account; otherwise, <c>false</c>.
         /// </value>
-        public bool IsGameServerAccount
-        {
-            get { return this.AccountType == EAccountType.GameServer || this.AccountType == EAccountType.AnonGameServer; }
-        }
+        public bool IsGameServerAccount => this.AccountType == EAccountType.GameServer || this.AccountType == EAccountType.AnonGameServer;
 
         /// <summary>
         /// Gets a value indicating whether this instance is a persistent game server account.
@@ -398,10 +393,7 @@ namespace SteamKit2
         /// <value>
         /// 	<c>true</c> if this instance is a persistent game server account; otherwise, <c>false</c>.
         /// </value>
-        public bool IsPersistentGameServerAccount
-        {
-            get { return this.AccountType == EAccountType.GameServer; }
-        }
+        public bool IsPersistentGameServerAccount => this.AccountType == EAccountType.GameServer;
 
         /// <summary>
         /// Gets a value indicating whether this instance is an anonymous game server account.
@@ -409,10 +401,7 @@ namespace SteamKit2
         /// <value>
         /// 	<c>true</c> if this instance is an anon game server account; otherwise, <c>false</c>.
         /// </value>
-        public bool IsAnonGameServerAccount
-        {
-            get { return this.AccountType == EAccountType.AnonGameServer; }
-        }
+        public bool IsAnonGameServerAccount => this.AccountType == EAccountType.AnonGameServer;
 
         /// <summary>
         /// Gets a value indicating whether this instance is a content server account.
@@ -420,73 +409,56 @@ namespace SteamKit2
         /// <value>
         /// 	<c>true</c> if this instance is a content server account; otherwise, <c>false</c>.
         /// </value>
-        public bool IsContentServerAccount
-        {
-            get { return this.AccountType == EAccountType.ContentServer; }
-        }
+        public bool IsContentServerAccount => this.AccountType == EAccountType.ContentServer;
+
         /// <summary>
         /// Gets a value indicating whether this instance is a clan account.
         /// </summary>
         /// <value>
         /// 	<c>true</c> if this instance is a clan account; otherwise, <c>false</c>.
         /// </value>
-        public bool IsClanAccount
-        {
-            get { return this.AccountType == EAccountType.Clan; }
-        }
+        public bool IsClanAccount => this.AccountType == EAccountType.Clan;
+
         /// <summary>
         /// Gets a value indicating whether this instance is a chat account.
         /// </summary>
         /// <value>
         /// 	<c>true</c> if this instance is a chat account; otherwise, <c>false</c>.
         /// </value>
-        public bool IsChatAccount
-        {
-            get { return this.AccountType == EAccountType.Chat; }
-        }
+        public bool IsChatAccount => this.AccountType == EAccountType.Chat;
+
         /// <summary>
         /// Gets a value indicating whether this instance is a lobby.
         /// </summary>
         /// <value>
         ///   <c>true</c> if this instance is a lobby; otherwise, <c>false</c>.
         /// </value>
-        public bool IsLobby
-        {
-            get {
-                return ( this.AccountType == EAccountType.Chat ) &&
-                    ( ( this.AccountInstance & ( uint )ChatInstanceFlags.Lobby ) > 0 );
-            }
-        }
+        public bool IsLobby => ( this.AccountType == EAccountType.Chat ) &&
+                               ( ( this.AccountInstance & ( uint )ChatInstanceFlags.Lobby ) > 0 );
+
         /// <summary>
         /// Gets a value indicating whether this instance is an individual account.
         /// </summary>
         /// <value>
         /// 	<c>true</c> if this instance is an individual account; otherwise, <c>false</c>.
         /// </value>
-        public bool IsIndividualAccount
-        {
-            get { return this.AccountType == EAccountType.Individual || this.AccountType == EAccountType.ConsoleUser; }
-        }
+        public bool IsIndividualAccount => this.AccountType == EAccountType.Individual || this.AccountType == EAccountType.ConsoleUser;
+
         /// <summary>
         /// Gets a value indicating whether this instance is an anonymous account.
         /// </summary>
         /// <value>
         /// 	<c>true</c> if this instance is an anon account; otherwise, <c>false</c>.
         /// </value>
-        public bool IsAnonAccount
-        {
-            get { return this.AccountType == EAccountType.AnonUser || this.AccountType == EAccountType.AnonGameServer; }
-        }
+        public bool IsAnonAccount => this.AccountType == EAccountType.AnonUser || this.AccountType == EAccountType.AnonGameServer;
+
         /// <summary>
         /// Gets a value indicating whether this instance is an anonymous user account.
         /// </summary>
         /// <value>
         /// 	<c>true</c> if this instance is an anon user account; otherwise, <c>false</c>.
         /// </value>
-        public bool IsAnonUserAccount
-        {
-            get { return this.AccountType == EAccountType.AnonUser; }
-        }
+        public bool IsAnonUserAccount => this.AccountType == EAccountType.AnonUser;
 
         /// <summary>
         /// Gets a value indicating whether this instance is a console user account.
@@ -494,10 +466,7 @@ namespace SteamKit2
         /// <value>
         /// 	<c>true</c> if this instance is a console user account; otherwise, <c>false</c>.
         /// </value>
-        public bool IsConsoleUserAccount
-        {
-            get { return this.AccountType == EAccountType.ConsoleUser; }
-        }
+        public bool IsConsoleUserAccount => this.AccountType == EAccountType.ConsoleUser;
 
         /// <summary>
         /// Gets a value indicating whether this instance is valid.

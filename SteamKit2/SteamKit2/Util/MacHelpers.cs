@@ -22,15 +22,9 @@ namespace SteamKit2.Util.MacHelpers
             return true;
         }
 
-        public override bool IsInvalid
-        {
-            get { return handle == IntPtr.Zero; }
-        }
+        public override bool IsInvalid => handle == IntPtr.Zero;
 
-        public static CFTypeRef None
-        {
-            get { return new CFTypeRef(); }
-        }
+        public static CFTypeRef None => new CFTypeRef();
     }
 
     // Taken from <sys/mount.h>

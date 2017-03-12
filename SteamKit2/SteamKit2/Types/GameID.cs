@@ -179,40 +179,31 @@ namespace SteamKit2
         /// <value>
         ///   <c>true</c> if this instance is a mod; otherwise, <c>false</c>.
         /// </value>
-        public bool IsMod
-        {
-            get { return ( this.AppType == GameType.GameMod ); }
-        }
+        public bool IsMod => ( this.AppType == GameType.GameMod );
+
         /// <summary>
         /// Gets a value indicating whether this instance is a shortcut.
         /// </summary>
         /// <value>
         /// 	<c>true</c> if this instance is a shortcut; otherwise, <c>false</c>.
         /// </value>
-        public bool IsShortcut
-        {
-            get { return ( this.AppType == GameType.Shortcut ); }
-        }
+        public bool IsShortcut => ( this.AppType == GameType.Shortcut );
+
         /// <summary>
         /// Gets a value indicating whether this instance is a peer-to-peer file.
         /// </summary>
         /// <value>
         /// 	<c>true</c> if this instance is a p2p file; otherwise, <c>false</c>.
         /// </value>
-        public bool IsP2PFile
-        {
-            get { return ( this.AppType == GameType.P2P ); }
-        }
+        public bool IsP2PFile => ( this.AppType == GameType.P2P );
+
         /// <summary>
         /// Gets a value indicating whether this instance is a steam app.
         /// </summary>
         /// <value>
         /// 	<c>true</c> if this instance is a steam app; otherwise, <c>false</c>.
         /// </value>
-        public bool IsSteamApp
-        {
-            get { return ( this.AppType == GameType.App ); }
-        }
+        public bool IsSteamApp => ( this.AppType == GameType.App );
 
 
         /// <summary>

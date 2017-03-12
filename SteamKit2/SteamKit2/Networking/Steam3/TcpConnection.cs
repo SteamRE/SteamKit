@@ -36,10 +36,7 @@ namespace SteamKit2
             connectionFree = new ManualResetEvent(true);
         }
 
-        public override IPEndPoint CurrentEndPoint
-        {
-            get { return destination; }
-        }
+        public override IPEndPoint CurrentEndPoint => destination;
 
         private void Shutdown()
         {
