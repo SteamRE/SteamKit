@@ -13,7 +13,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle( "SteamKit2 ")]
-[assembly: AssemblyDescription( "Steam Networking Library" )]
+[assembly: AssemblyDescription( ".NET library that aims to interoperate with the Steam network." )]
 [assembly: AssemblyConfiguration( "" )]
 [assembly: AssemblyCompany( "SteamRE Team" )]
 [assembly: AssemblyProduct( "SteamKit2" )]

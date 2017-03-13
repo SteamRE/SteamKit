@@ -31,20 +31,22 @@ build_script:
   - msbuild Resources\NetHookAnalyzer2\NetHookAnalyzer2.sln
 
 after_build:
-  - '7z a NetHook2.zip .\Resources\NetHook2\%SK_BUILD_CONFIGURATION%\*.dll .\Resources\NetHook2\%SK_BUILD_CONFIGURATION%\*.pdb'
+  - '7z a NetHook2.zip .\Resources\NetHook2\%CONFIGURATION%\*.dll .\Resources\NetHook2\%CONFIGURATION%\*.pdb'
   - ps: |
-      $args = @('pack', 'SteamKit2\SteamKit2.nuspec')
+      $args = @('pack', 'SteamKit2\SteamKit2\SteamKit2.csproj', '-configuration', $env:CONFIGURATION)
       $version = $null
       if (Test-Path Env:APPVEYOR_REPO_TAG_NAME)
       {
           $version = (Get-Item Env:APPVEYOR_REPO_TAG_NAME).Value
       }
       
-      if (![string]::IsNullOrEmpty($version))
+      if ([string]::IsNullOrEmpty($version))
       {
-          $args += $('-Version', $version)
+          $version = $env:APPVEYOR_BUILD_VERSION + '-Alpha'
       }
-      & nuget $args
+
+      $args += $('/p:Version=' + $version)
+      & dotnet $args
 
 test_script:
   - ps: |
