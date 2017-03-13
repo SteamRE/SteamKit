@@ -22,9 +22,6 @@ environment:
 init:
   - git config --global core.autocrlf true
 
-install:
-  - set PATH=C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\bin;%PATH%
-
 before_build:
   - nuget restore SteamKit2\SteamKit2.sln
   - nuget restore Samples\Samples.sln
@@ -94,6 +91,3 @@ deploy:
     on:
       configuration: Release
       appveyor_repo_tag: true
-
-on_finish:
-  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
