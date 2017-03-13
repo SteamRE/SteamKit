@@ -61,7 +61,7 @@ test_script:
 
 artifacts:
   - path: NetHook2.zip
-  - path: 'SteamKit2.*.nupkg'
+  - path: 'SteamKit2\SteamKit2\bin\$(configuration)\*.nupkg'
     name: SteamKit2.nupkg
   - path: 'Resources\NetHookAnalyzer2\NetHookAnalyzer2\Bin\$(configuration)'
     name: NetHookAnalyzer2
