@@ -33,7 +33,7 @@ build_script:
 after_build:
   - '7z a NetHook2.zip .\Resources\NetHook2\%CONFIGURATION%\*.dll .\Resources\NetHook2\%CONFIGURATION%\*.pdb'
   - ps: |
-      $args = @('pack', 'SteamKit2\SteamKit2\SteamKit2.csproj', '--configuration', $env:CONFIGURATION)
+      $args = @('pack', 'SteamKit2\SteamKit2\SteamKit2.csproj')
       $version = $null
       if (Test-Path Env:APPVEYOR_REPO_TAG_NAME)
       {
