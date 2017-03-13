@@ -444,6 +444,9 @@ namespace SteamKit2
         // but could have also matched other overloads including 'SteamKit2.CDNClient.DownloadManifest(uint, ulong, string, string, byte[])'.
 #pragma warning disable 0419
 
+        // XML comment has cref attribute 'DownloadManifest' that could not be resolved
+#pragma warning disable 1574
+
         /// <summary>
         /// Downloads the specified depot chunk, and optionally processes the chunk and verifies the checksum if the depot decryption key has been provided.
         /// </summary>
@@ -460,6 +463,7 @@ namespace SteamKit2
         /// <exception cref="System.ArgumentNullException">chunk's <see cref="DepotManifest.ChunkData.ChunkID"/> was null.</exception>
         public async Task<DepotChunk> DownloadDepotChunkAsync( uint depotId, DepotManifest.ChunkData chunk )
 #pragma warning restore 0419
+#pragma warning restore 1574
         {
             if ( chunk.ChunkID == null )
                 throw new ArgumentNullException( "chunk.ChunkID" );
@@ -476,6 +480,9 @@ namespace SteamKit2
         // Ambiguous reference in cref attribute: 'CDNClient.DownloadManifest'. Assuming 'SteamKit2.CDNClient.DownloadManifest(uint, ulong)',
         // but could have also matched other overloads including 'SteamKit2.CDNClient.DownloadManifest(uint, ulong, string, string, byte[])'.
 #pragma warning disable 0419
+
+        // XML comment has cref attribute 'DownloadManifest' that could not be resolved
+#pragma warning disable 1574
 
         /// <summary>
         /// Downloads the specified depot chunk, and optionally processes the chunk and verifies the checksum if the depot decryption key has been provided.
@@ -497,7 +504,8 @@ namespace SteamKit2
         /// This is used for decrypting filenames (if needed) in depot manifests, and processing depot chunks.
         /// </param>
         /// <exception cref="System.ArgumentNullException">chunk's <see cref="DepotManifest.ChunkData.ChunkID"/> was null.</exception>
-        public async Task<DepotChunk> DownloadDepotChunkAsync( uint depotId, DepotManifest.ChunkData chunk, string host, string cdnAuthToken, byte[] depotKey = null )
+        public async Task<DepotChunk> DownloadDepotChunkAsync( uint depotId, DepotManifest.ChunkData chunk, string host, string cdnAuthToken, byte[] depotKey = null)
+#pragma warning restore 1574
 #pragma warning restore 0419
         {
             if (chunk.ChunkID == null)
