@@ -28,6 +28,13 @@ namespace SteamKit2
             return BitConverter.ToInt32( data, 0 );
         }
 
+        public static Int64 ReadInt64(this Stream stream)
+        {
+            stream.Read( data, 0, 8 );
+
+            return BitConverter.ToInt64( data, 0 );
+        }
+
         public static UInt32 ReadUInt32(this Stream stream)
         {
             stream.Read(data, 0, 4);

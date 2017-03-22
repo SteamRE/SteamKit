@@ -228,6 +228,7 @@ namespace SteamKit2
             Color = 6,
             UInt64 = 7,
             End = 8,
+            Int64 = 10,
         }
 
         /// <summary>
@@ -870,6 +871,12 @@ namespace SteamKit2
                     case Type.Float32:
                         {
                             current.Value = Convert.ToString( input.ReadFloat() );
+                            break;
+                        }
+
+                    case Type.Int64:
+                        {
+                            current.Value = Convert.ToString( input.ReadInt64() );
                             break;
                         }
 
