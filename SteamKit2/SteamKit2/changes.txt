@@ -1,4 +1,12 @@
 ------------------------------------------------------------------------------
+v 1.8.2			Mar 23, 2017
+------------------------------------------------------------------------------
+* Added support for Binary KeyValues field type 10 (`Int64`) (#376)
+* Obsoleted `SteamApps.GetAppInfo`, `SteamApps.GetPackageInfo`, and `SteamApps.GetAppChanges`. Use the PICS equivalents instead.
+* Updated game-related GC messages and protobufs.
+
+
+------------------------------------------------------------------------------
 v 1.8.1			Feb 22, 2017
 ------------------------------------------------------------------------------
 * Added support for using CS servers that have (CDN) `usetokenauth` specified.
