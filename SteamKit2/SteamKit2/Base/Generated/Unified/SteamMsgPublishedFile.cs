@@ -435,6 +435,15 @@ namespace SteamKit2.Unified.Internal
       get { return _language; }
       set { _language = value; }
     }
+
+    private uint _return_playtime_stats = default(uint);
+    [global::ProtoBuf.ProtoMember(13, IsRequired = false, Name=@"return_playtime_stats", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint return_playtime_stats
+    {
+      get { return _return_playtime_stats; }
+      set { _return_playtime_stats = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -951,6 +960,15 @@ namespace SteamKit2.Unified.Internal
       set { _vote_data = value; }
     }
 
+    private PublishedFileDetails.PlaytimeStats _playtime_stats = null;
+    [global::ProtoBuf.ProtoMember(64, IsRequired = false, Name=@"playtime_stats", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public PublishedFileDetails.PlaytimeStats playtime_stats
+    {
+      get { return _playtime_stats; }
+      set { _playtime_stats = value; }
+    }
+
     private uint _time_subscribed = default(uint);
     [global::ProtoBuf.ProtoMember(56, IsRequired = false, Name=@"time_subscribed", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     [global::System.ComponentModel.DefaultValue(default(uint))]
@@ -1274,6 +1292,34 @@ namespace SteamKit2.Unified.Internal
     {
       get { return _discount_percentage; }
       set { _discount_percentage = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"PlaytimeStats")]
+  public partial class PlaytimeStats : global::ProtoBuf.IExtensible
+  {
+    public PlaytimeStats() {}
+    
+
+    private ulong _playtime_seconds = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"playtime_seconds", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong playtime_seconds
+    {
+      get { return _playtime_seconds; }
+      set { _playtime_seconds = value; }
+    }
+
+    private ulong _num_sessions = default(ulong);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"num_sessions", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong num_sessions
+    {
+      get { return _num_sessions; }
+      set { _num_sessions = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -1683,6 +1729,15 @@ namespace SteamKit2.Unified.Internal
     {
       get { return _return_metadata; }
       set { _return_metadata = value; }
+    }
+
+    private uint _return_playtime_stats = default(uint);
+    [global::ProtoBuf.ProtoMember(31, IsRequired = false, Name=@"return_playtime_stats", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint return_playtime_stats
+    {
+      get { return _return_playtime_stats; }
+      set { _return_playtime_stats = value; }
     }
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"KVTag")]
   public partial class KVTag : global::ProtoBuf.IExtensible
@@ -2413,6 +2468,15 @@ namespace SteamKit2.Unified.Internal
       get { return _return_metadata; }
       set { _return_metadata = value; }
     }
+
+    private uint _return_playtime_stats = default(uint);
+    [global::ProtoBuf.ProtoMember(36, IsRequired = false, Name=@"return_playtime_stats", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint return_playtime_stats
+    {
+      get { return _return_playtime_stats; }
+      set { _return_playtime_stats = value; }
+    }
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"KVTag")]
   public partial class KVTag : global::ProtoBuf.IExtensible
   {
@@ -2637,6 +2701,82 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPublishedFile_AddChild_Request")]
+  public partial class CPublishedFile_AddChild_Request : global::ProtoBuf.IExtensible
+  {
+    public CPublishedFile_AddChild_Request() {}
+    
+
+    private ulong _publishedfileid = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"publishedfileid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong publishedfileid
+    {
+      get { return _publishedfileid; }
+      set { _publishedfileid = value; }
+    }
+
+    private ulong _child_publishedfileid = default(ulong);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"child_publishedfileid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong child_publishedfileid
+    {
+      get { return _child_publishedfileid; }
+      set { _child_publishedfileid = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPublishedFile_AddChild_Response")]
+  public partial class CPublishedFile_AddChild_Response : global::ProtoBuf.IExtensible
+  {
+    public CPublishedFile_AddChild_Response() {}
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPublishedFile_RemoveChild_Request")]
+  public partial class CPublishedFile_RemoveChild_Request : global::ProtoBuf.IExtensible
+  {
+    public CPublishedFile_RemoveChild_Request() {}
+    
+
+    private ulong _publishedfileid = default(ulong);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"publishedfileid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong publishedfileid
+    {
+      get { return _publishedfileid; }
+      set { _publishedfileid = value; }
+    }
+
+    private ulong _child_publishedfileid = default(ulong);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"child_publishedfileid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong child_publishedfileid
+    {
+      get { return _child_publishedfileid; }
+      set { _child_publishedfileid = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPublishedFile_RemoveChild_Response")]
+  public partial class CPublishedFile_RemoveChild_Response : global::ProtoBuf.IExtensible
+  {
+    public CPublishedFile_RemoveChild_Response() {}
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     public interface IPublishedFile
     {
       CPublishedFile_Subscribe_Response Subscribe(CPublishedFile_Subscribe_Request request);
@@ -2655,6 +2795,8 @@ namespace SteamKit2.Unified.Internal
     CPublishedFile_StopPlaytimeTracking_Response StopPlaytimeTracking(CPublishedFile_StopPlaytimeTracking_Request request);
     CPublishedFile_StopPlaytimeTrackingForAllAppItems_Response StopPlaytimeTrackingForAllAppItems(CPublishedFile_StopPlaytimeTrackingForAllAppItems_Request request);
     CPublishedFile_SetPlaytimeForControllerConfigs_Response SetPlaytimeForControllerConfigs(CPublishedFile_SetPlaytimeForControllerConfigs_Request request);
+    CPublishedFile_AddChild_Response AddChild(CPublishedFile_AddChild_Request request);
+    CPublishedFile_RemoveChild_Response RemoveChild(CPublishedFile_RemoveChild_Request request);
     
     }
     

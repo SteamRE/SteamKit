@@ -3641,6 +3641,15 @@ namespace SteamKit2.Internal
       get { return _is_free_weekend; }
       set { _is_free_weekend = value; }
     }
+
+    private ulong _total_bytes_legacy = default(ulong);
+    [global::ProtoBuf.ProtoMember(19, IsRequired = false, Name=@"total_bytes_legacy", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong total_bytes_legacy
+    {
+      get { return _total_bytes_legacy; }
+      set { _total_bytes_legacy = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

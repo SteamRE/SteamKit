@@ -197,6 +197,13 @@ namespace SteamKit2.Internal
       get { return _is_from_external_source; }
       set { _is_from_external_source = value; }
     }
+    private readonly global::System.Collections.Generic.List<uint> _forward_to_sysid = new global::System.Collections.Generic.List<uint>();
+    [global::ProtoBuf.ProtoMember(27, Name=@"forward_to_sysid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public global::System.Collections.Generic.List<uint> forward_to_sysid
+    {
+      get { return _forward_to_sysid; }
+    }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

@@ -65,6 +65,7 @@ message CPublishedFile_GetDetails_Request {
 	optional bool includeforsaledata = 10 [(description) = "If true, return pricing data, if applicable."];
 	optional bool includemetadata = 11 [(description) = "If true, populate the metadata field."];
 	optional int32 language = 12 [default = 0, (description) = "Specifies the localized text to return. Defaults to English."];
+	optional uint32 return_playtime_stats = 13 [(description) = "Return playtime stats for the specified number of days before today."];
 }
 
 message PublishedFileDetails {
@@ -108,6 +109,11 @@ message PublishedFileDetails {
 		optional uint32 price_category_floor = 4;
 		optional bool price_is_pay_what_you_want = 5;
 		optional uint32 discount_percentage = 6;
+	}
+
+	message PlaytimeStats {
+		optional uint64 playtime_seconds = 1;
+		optional uint64 num_sessions = 2;
 	}
 
 	enum EPublishedFileForSaleStatus {
@@ -176,6 +182,7 @@ message PublishedFileDetails {
 	repeated .PublishedFileDetails.Child children = 53;
 	repeated .PublishedFileDetails.KVTag kvtags = 54;
 	optional .PublishedFileDetails.VoteData vote_data = 55;
+	optional .PublishedFileDetails.PlaytimeStats playtime_stats = 64;
 	optional uint32 time_subscribed = 56 [(description) = "Only valid in PublishedFile.GetUserFiles and not normal PublishedFile.GetDetail calls"];
 	optional .PublishedFileDetails.ForSaleData for_sale_data = 57 [(description) = "Pricing information, if applicable."];
 	optional string metadata = 58 [(description) = "Metadata associated with the item"];
@@ -242,6 +249,7 @@ message CPublishedFile_GetUserFiles_Request {
 	optional bool return_short_description = 24 [default = true, (description) = "Populate the short_description field instead of file_description"];
 	optional bool return_for_sale_data = 26 [(description) = "Return pricing information, if applicable"];
 	optional bool return_metadata = 28 [default = false, (description) = "Populate the metadata field"];
+	optional uint32 return_playtime_stats = 31 [(description) = "Return playtime stats for the specified number of days before today."];
 }
 
 message CPublishedFile_GetUserFiles_Response {
@@ -350,6 +358,7 @@ message CPublishedFile_QueryFiles_Request {
 	optional bool return_short_description = 22 [(description) = "Populate the short_description field instead of file_description"];
 	optional bool return_for_sale_data = 30 [(description) = "Return pricing information, if applicable"];
 	optional bool return_metadata = 32 [default = false, (description) = "Populate the metadata"];
+	optional uint32 return_playtime_stats = 36 [(description) = "Return playtime stats for the specified number of days before today."];
 }
 
 message CPublishedFile_QueryFiles_Response {
@@ -391,6 +400,22 @@ message CPublishedFile_SetPlaytimeForControllerConfigs_Request {
 }
 
 message CPublishedFile_SetPlaytimeForControllerConfigs_Response {
+}
+
+message CPublishedFile_AddChild_Request {
+	optional uint64 publishedfileid = 1;
+	optional uint64 child_publishedfileid = 2;
+}
+
+message CPublishedFile_AddChild_Response {
+}
+
+message CPublishedFile_RemoveChild_Request {
+	optional uint64 publishedfileid = 1;
+	optional uint64 child_publishedfileid = 2;
+}
+
+message CPublishedFile_RemoveChild_Response {
 }
 
 service PublishedFile {
@@ -442,5 +467,11 @@ service PublishedFile {
 	}
 	rpc SetPlaytimeForControllerConfigs (.CPublishedFile_SetPlaytimeForControllerConfigs_Request) returns (.CPublishedFile_SetPlaytimeForControllerConfigs_Response) {
 		option (method_description) = "Stops usage tracking all controller configs for the given app and set the usage time for the for the given controller configs";
+	}
+	rpc AddChild (.CPublishedFile_AddChild_Request) returns (.CPublishedFile_AddChild_Response) {
+		option (method_description) = "Adds a parent->child relationship between the given items.";
+	}
+	rpc RemoveChild (.CPublishedFile_RemoveChild_Request) returns (.CPublishedFile_RemoveChild_Response) {
+		option (method_description) = "Removes parent->child relationship between the given items.";
 	}
 }

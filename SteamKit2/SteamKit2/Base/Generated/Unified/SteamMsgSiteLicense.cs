@@ -31,9 +31,48 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CSiteLicense_ClientSiteLicenseSeatCheckout_Request")]
+  public partial class CSiteLicense_ClientSiteLicenseSeatCheckout_Request : global::ProtoBuf.IExtensible
+  {
+    public CSiteLicense_ClientSiteLicenseSeatCheckout_Request() {}
+    
+
+    private uint _packageid = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"packageid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint packageid
+    {
+      get { return _packageid; }
+      set { _packageid = value; }
+    }
+
+    private uint _appid = default(uint);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"appid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint appid
+    {
+      get { return _appid; }
+      set { _appid = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CSiteLicense_ClientSiteLicenseSeatCheckout_Response")]
+  public partial class CSiteLicense_ClientSiteLicenseSeatCheckout_Response : global::ProtoBuf.IExtensible
+  {
+    public CSiteLicense_ClientSiteLicenseSeatCheckout_Response() {}
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     public interface ISiteLicense
     {
       NoResponse ClientSiteAssociation(CSiteLicense_ClientSiteAssociation_Notification request);
+    CSiteLicense_ClientSiteLicenseSeatCheckout_Response ClientSiteLicenseSeatCheckout(CSiteLicense_ClientSiteLicenseSeatCheckout_Request request);
     
     }
     

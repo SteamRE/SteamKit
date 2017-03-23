@@ -1,0 +1,150 @@
+option optimize_for = SPEED;
+option cc_generic_services = false;
+
+enum EHIDDeviceLocation {
+	k_EDeviceLocationLocal = 0;
+	k_EDeviceLocationRemote = 2;
+	k_EDeviceLocationAny = 3;
+}
+
+enum EHIDDeviceDisconnectMethod {
+	k_EDeviceDisconnectMethodUnknown = 0;
+	k_EDeviceDisconnectMethodBluetooth = 1;
+	k_EDeviceDisconnectMethodFeatureReport = 2;
+}
+
+message CHIDDeviceInfo {
+	optional .EHIDDeviceLocation location = 1 [default = k_EDeviceLocationLocal];
+	optional string path = 2;
+	optional uint32 vendor_id = 3;
+	optional uint32 product_id = 4;
+	optional string serial_number = 5;
+	optional uint32 release_number = 6;
+	optional string manufacturer_string = 7;
+	optional string product_string = 8;
+	optional uint32 usage_page = 9;
+	optional uint32 usage = 10;
+	optional int32 interface_number = 11 [default = -1];
+	optional int32 ostype = 12 [default = -1];
+	optional bool is_generic_gamepad = 13;
+	optional bool is_generic_joystick = 14;
+}
+
+message CHIDDeviceInputReport {
+	optional bytes full_report = 1;
+	optional bytes delta_report = 2;
+	optional uint32 delta_report_size = 3;
+	optional uint32 delta_report_crc = 4;
+}
+
+message CHIDMessageToRemote {
+	message DeviceOpen {
+		optional .CHIDDeviceInfo info = 1;
+	}
+
+	message DeviceClose {
+		optional uint32 device = 1;
+	}
+
+	message DeviceWrite {
+		optional uint32 device = 1;
+		optional bytes data = 2;
+	}
+
+	message DeviceRead {
+		optional uint32 device = 1;
+		optional uint32 length = 2;
+		optional int32 timeout_ms = 3;
+	}
+
+	message DeviceSendFeatureReport {
+		optional uint32 device = 1;
+		optional bytes data = 2;
+	}
+
+	message DeviceGetFeatureReport {
+		optional uint32 device = 1;
+		optional bytes report_number = 2;
+		optional uint32 length = 3;
+	}
+
+	message DeviceGetVendorString {
+		optional uint32 device = 1;
+	}
+
+	message DeviceGetProductString {
+		optional uint32 device = 1;
+	}
+
+	message DeviceGetSerialNumberString {
+		optional uint32 device = 1;
+	}
+
+	message DeviceStartInputReports {
+		optional uint32 device = 1;
+		optional uint32 length = 2;
+	}
+
+	message DeviceRequestFullReport {
+		optional uint32 device = 1;
+	}
+
+	message DeviceDisconnect {
+		optional uint32 device = 1;
+		optional .EHIDDeviceDisconnectMethod disconnectMethod = 2 [default = k_EDeviceDisconnectMethodUnknown];
+		optional bytes data = 3;
+	}
+
+	optional uint32 request_id = 1;
+	oneof command {
+		.CHIDMessageToRemote.DeviceOpen device_open = 2;
+		.CHIDMessageToRemote.DeviceClose device_close = 3;
+		.CHIDMessageToRemote.DeviceWrite device_write = 4;
+		.CHIDMessageToRemote.DeviceRead device_read = 5;
+		.CHIDMessageToRemote.DeviceSendFeatureReport device_send_feature_report = 6;
+		.CHIDMessageToRemote.DeviceGetFeatureReport device_get_feature_report = 7;
+		.CHIDMessageToRemote.DeviceGetVendorString device_get_vendor_string = 8;
+		.CHIDMessageToRemote.DeviceGetProductString device_get_product_string = 9;
+		.CHIDMessageToRemote.DeviceGetSerialNumberString device_get_serial_number_string = 10;
+		.CHIDMessageToRemote.DeviceStartInputReports device_start_input_reports = 11;
+		.CHIDMessageToRemote.DeviceRequestFullReport device_request_full_report = 12;
+		.CHIDMessageToRemote.DeviceDisconnect device_disconnect = 13;
+	}
+}
+
+message CHIDMessageFromRemote {
+	message UpdateDeviceList {
+		repeated .CHIDDeviceInfo devices = 1;
+	}
+
+	message RequestResponse {
+		optional uint32 request_id = 1;
+		optional int32 result = 2;
+		optional bytes data = 3;
+	}
+
+	message DeviceInputReports {
+		message DeviceInputReport {
+			optional uint32 device = 1;
+			repeated .CHIDDeviceInputReport reports = 2;
+		}
+
+		repeated .CHIDMessageFromRemote.DeviceInputReports.DeviceInputReport device_reports = 1;
+	}
+
+	message CloseDevice {
+		optional uint32 device = 1;
+	}
+
+	message CloseAllDevices {
+	}
+
+	oneof command {
+		.CHIDMessageFromRemote.UpdateDeviceList update_device_list = 1;
+		.CHIDMessageFromRemote.RequestResponse response = 2;
+		.CHIDMessageFromRemote.DeviceInputReports reports = 3;
+		.CHIDMessageFromRemote.CloseDevice close_device = 4;
+		.CHIDMessageFromRemote.CloseAllDevices close_all_devices = 5;
+	}
+}
+

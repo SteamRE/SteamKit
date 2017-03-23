@@ -88,6 +88,15 @@ namespace SteamKit2.Unified.Internal
       get { return _ticket; }
       set { _ticket = value; }
     }
+
+    private bool _replayed = default(bool);
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"replayed", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool replayed
+    {
+      get { return _replayed; }
+      set { _replayed = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -144,6 +153,51 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CInventory_GetEligiblePromoItemDefIDs_Request")]
+  public partial class CInventory_GetEligiblePromoItemDefIDs_Request : global::ProtoBuf.IExtensible
+  {
+    public CInventory_GetEligiblePromoItemDefIDs_Request() {}
+    
+
+    private uint _appid = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"appid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint appid
+    {
+      get { return _appid; }
+      set { _appid = value; }
+    }
+
+    private ulong _steamid = default(ulong);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"steamid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong steamid
+    {
+      get { return _steamid; }
+      set { _steamid = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CInventory_GetEligiblePromoItemDefIDs_Response")]
+  public partial class CInventory_GetEligiblePromoItemDefIDs_Response : global::ProtoBuf.IExtensible
+  {
+    public CInventory_GetEligiblePromoItemDefIDs_Response() {}
+    
+    private readonly global::System.Collections.Generic.List<ulong> _itemdefids = new global::System.Collections.Generic.List<ulong>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"itemdefids", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public global::System.Collections.Generic.List<ulong> itemdefids
+    {
+      get { return _itemdefids; }
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CInventory_AddItem_Request")]
   public partial class CInventory_AddItem_Request : global::ProtoBuf.IExtensible
   {
@@ -189,6 +243,15 @@ namespace SteamKit2.Unified.Internal
     {
       get { return _notify; }
       set { _notify = value; }
+    }
+
+    private ulong _requestid = default(ulong);
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"requestid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong requestid
+    {
+      get { return _requestid; }
+      set { _requestid = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -269,57 +332,6 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CInventory_GetItemDefs_Request")]
-  public partial class CInventory_GetItemDefs_Request : global::ProtoBuf.IExtensible
-  {
-    public CInventory_GetItemDefs_Request() {}
-    
-
-    private uint _appid = default(uint);
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"appid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
-    public uint appid
-    {
-      get { return _appid; }
-      set { _appid = value; }
-    }
-
-    private string _modifiedsince = "";
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"modifiedsince", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
-    public string modifiedsince
-    {
-      get { return _modifiedsince; }
-      set { _modifiedsince = value; }
-    }
-    private readonly global::System.Collections.Generic.List<ulong> _itemdefids = new global::System.Collections.Generic.List<ulong>();
-    [global::ProtoBuf.ProtoMember(4, Name=@"itemdefids", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public global::System.Collections.Generic.List<ulong> itemdefids
-    {
-      get { return _itemdefids; }
-    }
-  
-    private readonly global::System.Collections.Generic.List<ulong> _workshopids = new global::System.Collections.Generic.List<ulong>();
-    [global::ProtoBuf.ProtoMember(5, Name=@"workshopids", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public global::System.Collections.Generic.List<ulong> workshopids
-    {
-      get { return _workshopids; }
-    }
-  
-
-    private uint _cache_max_age_seconds = (uint)0;
-    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"cache_max_age_seconds", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue((uint)0)]
-    public uint cache_max_age_seconds
-    {
-      get { return _cache_max_age_seconds; }
-      set { _cache_max_age_seconds = value; }
-    }
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CInventory_ConsumeItem_Request")]
   public partial class CInventory_ConsumeItem_Request : global::ProtoBuf.IExtensible
   {
@@ -369,6 +381,15 @@ namespace SteamKit2.Unified.Internal
     {
       get { return _steamid; }
       set { _steamid = value; }
+    }
+
+    private ulong _requestid = default(ulong);
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"requestid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(ulong))]
+    public ulong requestid
+    {
+      get { return _requestid; }
+      set { _requestid = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -573,10 +594,10 @@ namespace SteamKit2.Unified.Internal
     {
       CInventory_Response GetInventory(CInventory_GetInventory_Request request);
     CInventory_Response ExchangeItem(CInventory_ExchangeItem_Request request);
+    CInventory_GetEligiblePromoItemDefIDs_Response GetEligiblePromoItemDefIDs(CInventory_GetEligiblePromoItemDefIDs_Request request);
     CInventory_Response AddPromoItem(CInventory_AddItem_Request request);
     CInventory_Response SafeModifyItem(CInventory_SafeModifyItem_Request request);
     CInventory_Response ConsumePlaytime(CInventory_ConsumePlaytime_Request request);
-    CInventory_Response GetItemDefs(CInventory_GetItemDefs_Request request);
     CInventory_Response ConsumeItem(CInventory_ConsumeItem_Request request);
     CInventory_Response DevGenerateItem(CInventory_AddItem_Request request);
     CInventory_Response DevSetNextDrop(CInventory_DevSetNextDrop_Request request);

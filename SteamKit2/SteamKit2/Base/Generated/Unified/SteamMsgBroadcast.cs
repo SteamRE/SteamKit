@@ -385,6 +385,15 @@ namespace SteamKit2.Unified.Internal
       get { return _viewer_token; }
       set { _viewer_token = value; }
     }
+
+    private string _hls_m3u8_master_url = "";
+    [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"hls_m3u8_master_url", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string hls_m3u8_master_url
+    {
+      get { return _hls_m3u8_master_url; }
+      set { _hls_m3u8_master_url = value; }
+    }
     [global::ProtoBuf.ProtoContract(Name=@"EWatchResponse", EnumPassthru=true)]
     public enum EWatchResponse
     {

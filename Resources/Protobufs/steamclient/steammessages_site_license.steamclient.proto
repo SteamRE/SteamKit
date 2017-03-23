@@ -6,9 +6,20 @@ message CSiteLicense_ClientSiteAssociation_Notification {
 	optional bytes site_association_file = 1;
 }
 
+message CSiteLicense_ClientSiteLicenseSeatCheckout_Request {
+	optional uint32 packageid = 1 [(description) = "Package ID that client wants to check out"];
+	optional uint32 appid = 2 [(description) = "App ID that client wants to play"];
+}
+
+message CSiteLicense_ClientSiteLicenseSeatCheckout_Response {
+}
+
 service SiteLicense {
 	option (service_description) = "Site License service";
 	rpc ClientSiteAssociation (.CSiteLicense_ClientSiteAssociation_Notification) returns (.NoResponse) {
 		option (method_description) = "Client is sending up site association info";
+	}
+	rpc ClientSiteLicenseSeatCheckout (.CSiteLicense_ClientSiteLicenseSeatCheckout_Request) returns (.CSiteLicense_ClientSiteLicenseSeatCheckout_Response) {
+		option (method_description) = "Client is requesting use of a site license seat";
 	}
 }

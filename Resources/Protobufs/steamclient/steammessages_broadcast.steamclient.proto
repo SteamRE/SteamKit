@@ -41,9 +41,9 @@ message CBroadcast_NotifyBroadcastUploadStop_Notification {
 }
 
 message CBroadcast_WatchBroadcast_Request {
-	optional fixed64 steamid = 1;
-	optional fixed64 existing_broadcast_id = 2;
-	optional fixed64 viewer_token = 3;
+	optional fixed64 steamid = 1 [(description) = "broadcaster steamID."];
+	optional fixed64 existing_broadcast_id = 2 [(description) = "broadcast session ID (optional, rejoin if specified)."];
+	optional fixed64 viewer_token = 3 [(description) = "viewer token received from last WatchRequest call, from browser storage."];
 	optional uint32 client_ip = 4;
 	optional uint32 client_cell = 5;
 }
@@ -74,6 +74,7 @@ message CBroadcast_WatchBroadcast_Response {
 	optional bool is_rtmp = 8;
 	optional int32 seconds_delay = 9;
 	optional fixed64 viewer_token = 10;
+	optional string hls_m3u8_master_url = 11;
 }
 
 message CBroadcast_GetBroadcastStatus_Request {
