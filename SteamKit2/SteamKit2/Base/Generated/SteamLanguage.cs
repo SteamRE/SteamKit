@@ -278,6 +278,7 @@ namespace SteamKit2
 		ClientLogOff = 706,
 		ClientNoUDPConnectivity = 707,
 		ClientInformOfCreateAccount = 708,
+		[Obsolete]
 		ClientAckVACBan = 709,
 		ClientConnectionStats = 710,
 		[Obsolete]
@@ -327,6 +328,7 @@ namespace SteamKit2
 		[Obsolete]
 		ClientGetGiftTargetListResponse = 749,
 		ClientLogOnResponse = 751,
+		[Obsolete]
 		ClientVACChallenge = 753,
 		ClientSetHeartbeatRate = 755,
 		[Obsolete]
@@ -342,6 +344,7 @@ namespace SteamKit2
 		ClientPersonaState = 766,
 		ClientFriendsList = 767,
 		ClientAccountInfo = 768,
+		[Obsolete]
 		ClientVacStatusQuery = 770,
 		ClientNewsUpdate = 771,
 		ClientGameConnectDeny = 773,
@@ -399,10 +402,14 @@ namespace SteamKit2
 		ClientServiceModule = 830,
 		ClientServiceCall = 831,
 		ClientServiceCallResponse = 832,
+		[Obsolete]
 		ClientPackageInfoRequest = 833,
+		[Obsolete]
 		ClientPackageInfoResponse = 834,
 		ClientNatTraversalStatEvent = 839,
+		[Obsolete]
 		ClientAppInfoRequest = 840,
+		[Obsolete]
 		ClientAppInfoResponse = 841,
 		ClientSteamUsageEvent = 842,
 		ClientCheckPassword = 845,
@@ -420,8 +427,11 @@ namespace SteamKit2
 		ClientGetLobbyMetadata = 861,
 		[Obsolete]
 		ClientGetLobbyMetadataResponse = 862,
+		[Obsolete]
 		ClientVTTCert = 863,
+		[Obsolete]
 		ClientAppInfoUpdate = 866,
+		[Obsolete]
 		ClientAppInfoChanges = 867,
 		ClientServerList = 880,
 		ClientEmailChangeResponse = 891,
@@ -1467,7 +1477,9 @@ namespace SteamKit2
 		ClientGetDepotDecryptionKey = 5438,
 		ClientGetDepotDecryptionKeyResponse = 5439,
 		GSPerformHardwareSurvey = 5440,
+		[Obsolete]
 		ClientGetAppBetaPasswords = 5441,
+		[Obsolete]
 		ClientGetAppBetaPasswordsResponse = 5442,
 		ClientEnableTestLicense = 5443,
 		ClientEnableTestLicenseResponse = 5444,
@@ -1547,7 +1559,9 @@ namespace SteamKit2
 		ClientLBSSetUGCResponse = 5530,
 		ClientAMGetClanOfficers = 5531,
 		ClientAMGetClanOfficersResponse = 5532,
+		[Obsolete]
 		ClientCheckFileSignature = 5533,
+		[Obsolete]
 		ClientCheckFileSignatureResponse = 5534,
 		ClientFriendProfileInfo = 5535,
 		ClientFriendProfileInfoResponse = 5536,
@@ -1733,13 +1747,16 @@ namespace SteamKit2
 		GameServerOutOfDate = 6407,
 		DeviceAuthorizationBase = 6500,
 		ClientAuthorizeLocalDeviceRequest = 6501,
+		[Obsolete]
 		ClientAuthorizeLocalDevice = 6502,
+		ClientAuthorizeLocalDeviceResponse = 6502,
 		ClientDeauthorizeDeviceRequest = 6503,
 		ClientDeauthorizeDevice = 6504,
 		ClientUseLocalDeviceAuthorizations = 6505,
 		ClientGetAuthorizedDevices = 6506,
 		ClientGetAuthorizedDevicesResponse = 6507,
 		AMNotifySessionDeviceAuthorized = 6508,
+		ClientAuthorizeLocalDeviceNotification = 6509,
 		MMSBase = 6600,
 		ClientMMSCreateLobby = 6601,
 		ClientMMSCreateLobbyResponse = 6602,

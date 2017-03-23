@@ -252,7 +252,7 @@ enum EMsg
 	ClientLogOff = 706;
 	ClientNoUDPConnectivity = 707;
 	ClientInformOfCreateAccount = 708;
-	ClientAckVACBan = 709;
+	ClientAckVACBan = 709; obsolete
 	ClientConnectionStats = 710;
 	ClientInitPurchase = 711; obsolete
 	ClientPingResponse = 712;
@@ -288,7 +288,7 @@ enum EMsg
 	ClientGetGiftTargetList = 748; obsolete
 	ClientGetGiftTargetListResponse = 749; obsolete
 	ClientLogOnResponse = 751;
-	ClientVACChallenge = 753;
+	ClientVACChallenge = 753; obsolete
 	ClientSetHeartbeatRate = 755;
 	ClientNotLoggedOnDeprecated = 756; obsolete
 	ClientLoggedOff = 757;
@@ -302,7 +302,7 @@ enum EMsg
 	ClientPersonaState = 766;
 	ClientFriendsList = 767;
 	ClientAccountInfo = 768;
-	ClientVacStatusQuery = 770;
+	ClientVacStatusQuery = 770; obsolete
 	ClientNewsUpdate = 771;
 	ClientGameConnectDeny = 773;
 	GSStatusReply = 774;
@@ -348,11 +348,11 @@ enum EMsg
 	ClientServiceModule = 830;
 	ClientServiceCall = 831;
 	ClientServiceCallResponse = 832;
-	ClientPackageInfoRequest = 833;
-	ClientPackageInfoResponse = 834;
+	ClientPackageInfoRequest = 833; obsolete
+	ClientPackageInfoResponse = 834; obsolete
 	ClientNatTraversalStatEvent = 839;
-	ClientAppInfoRequest = 840;
-	ClientAppInfoResponse = 841;
+	ClientAppInfoRequest = 840; obsolete
+	ClientAppInfoResponse = 841; obsolete
 	ClientSteamUsageEvent = 842;
 	ClientCheckPassword = 845;
 	ClientResetPassword = 846;
@@ -367,9 +367,9 @@ enum EMsg
 	ClientGetLobbyListResponse = 860;
 	ClientGetLobbyMetadata = 861; obsolete
 	ClientGetLobbyMetadataResponse = 862; obsolete
-	ClientVTTCert = 863;
-	ClientAppInfoUpdate = 866;
-	ClientAppInfoChanges = 867;
+	ClientVTTCert = 863; obsolete
+	ClientAppInfoUpdate = 866; obsolete
+	ClientAppInfoChanges = 867; obsolete
 	ClientServerList = 880;
 	ClientEmailChangeResponse = 891;
 	ClientSecretQAChangeResponse = 892;
@@ -1275,8 +1275,8 @@ enum EMsg
 	ClientGetDepotDecryptionKey = 5438;
 	ClientGetDepotDecryptionKeyResponse = 5439;
 	GSPerformHardwareSurvey = 5440;
-	ClientGetAppBetaPasswords = 5441;
-	ClientGetAppBetaPasswordsResponse = 5442;
+	ClientGetAppBetaPasswords = 5441; obsolete
+	ClientGetAppBetaPasswordsResponse = 5442; obsolete
 	ClientEnableTestLicense = 5443;
 	ClientEnableTestLicenseResponse = 5444;
 	ClientDisableTestLicense = 5445;
@@ -1353,8 +1353,8 @@ enum EMsg
 	ClientLBSSetUGCResponse = 5530;
 	ClientAMGetClanOfficers = 5531;
 	ClientAMGetClanOfficersResponse = 5532;
-	ClientCheckFileSignature = 5533;
-	ClientCheckFileSignatureResponse = 5534;
+	ClientCheckFileSignature = 5533; obsolete
+	ClientCheckFileSignatureResponse = 5534; obsolete
 	ClientFriendProfileInfo = 5535;
 	ClientFriendProfileInfoResponse = 5536;
 	ClientUpdateMachineAuth = 5537;
@@ -1508,13 +1508,15 @@ enum EMsg
 	
 	DeviceAuthorizationBase = 6500;
 	ClientAuthorizeLocalDeviceRequest = 6501;
-	ClientAuthorizeLocalDevice = 6502;
+	ClientAuthorizeLocalDevice = 6502; obsolete
+	ClientAuthorizeLocalDeviceResponse = 6502;
 	ClientDeauthorizeDeviceRequest = 6503;
 	ClientDeauthorizeDevice = 6504;
 	ClientUseLocalDeviceAuthorizations = 6505;
 	ClientGetAuthorizedDevices = 6506;
 	ClientGetAuthorizedDevicesResponse = 6507;
 	AMNotifySessionDeviceAuthorized = 6508;
+	ClientAuthorizeLocalDeviceNotification = 6509;
 	
 	MMSBase = 6600;
 	ClientMMSCreateLobby = 6601;

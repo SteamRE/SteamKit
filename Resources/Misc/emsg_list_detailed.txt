@@ -10,7 +10,6 @@
 	k_EMsgClientLogOff = 706, // flags: 2, server type: -1
 	k_EMsgClientNoUDPConnectivity = 707, // flags: 2, server type: -1
 	k_EMsgClientInformOfCreateAccount = 708, // flags: 2, server type: -1
-	k_EMsgClientAckVACBan = 709, // flags: 2, server type: -1
 	k_EMsgClientConnectionStats = 710, // flags: 2, server type: -1
 	k_EMsgClientPingResponse = 712, // flags: 2, server type: -1
 	k_EMsgClientRemoveFriend = 714, // flags: 2, server type: -1
@@ -34,7 +33,6 @@
 	k_EMsgClientPurchaseWithMachineID = 746, // flags: 2, server type: -1
 	k_EMsgClientAppUsageEvent = 747, // flags: 2, server type: -1
 	k_EMsgClientLogOnResponse = 751, // flags: 2, server type: -1
-	k_EMsgClientVACChallenge = 753, // flags: 2, server type: -1
 	k_EMsgClientSetHeartbeatRate = 755, // flags: 2, server type: -1
 	k_EMsgClientNotLoggedOnDeprecated = 756, // flags: 2, server type: -1
 	k_EMsgClientLoggedOff = 757, // flags: 2, server type: -1
@@ -48,7 +46,6 @@
 	k_EMsgClientPersonaState = 766, // flags: 2, server type: -1
 	k_EMsgClientFriendsList = 767, // flags: 2, server type: -1
 	k_EMsgClientAccountInfo = 768, // flags: 2, server type: -1
-	k_EMsgClientVacStatusQuery = 770, // flags: 2, server type: -1
 	k_EMsgClientNewsUpdate = 771, // flags: 2, server type: -1
 	k_EMsgClientGameConnectDeny = 773, // flags: 2, server type: -1
 	k_EMsgGSStatusReply = 774, // flags: 2, server type: -1
@@ -84,11 +81,7 @@
 	k_EMsgClientServiceModule = 830, // flags: 6, server type: 41
 	k_EMsgClientServiceCall = 831, // flags: 6, server type: 41
 	k_EMsgClientServiceCallResponse = 832, // flags: 6, server type: 41
-	k_EMsgClientPackageInfoRequest = 833, // flags: 2, server type: -1
-	k_EMsgClientPackageInfoResponse = 834, // flags: 2, server type: -1
 	k_EMsgClientNatTraversalStatEvent = 839, // flags: 2, server type: -1
-	k_EMsgClientAppInfoRequest = 840, // flags: 2, server type: -1
-	k_EMsgClientAppInfoResponse = 841, // flags: 2, server type: -1
 	k_EMsgClientSteamUsageEvent = 842, // flags: 6, server type: 17
 	k_EMsgClientCheckPassword = 845, // flags: 2, server type: -1
 	k_EMsgClientResetPassword = 846, // flags: 2, server type: -1
@@ -100,9 +93,6 @@
 	k_EMsgClientSetIgnoreFriendResponse = 856, // flags: 2, server type: -1
 	k_EMsgClientGetAppOwnershipTicket = 857, // flags: 2, server type: -1
 	k_EMsgClientGetAppOwnershipTicketResponse = 858, // flags: 2, server type: -1
-	k_EMsgClientVTTCert = 863, // flags: 2, server type: -1
-	k_EMsgClientAppInfoUpdate = 866, // flags: 2, server type: -1
-	k_EMsgClientAppInfoChanges = 867, // flags: 2, server type: -1
 	k_EMsgClientServerList = 880, // flags: 2, server type: -1
 	k_EMsgClientEmailChangeResponse = 891, // flags: 2, server type: -1
 	k_EMsgClientSecretQAChangeResponse = 892, // flags: 2, server type: -1
@@ -199,13 +189,9 @@
 	k_EMsgClientStat = 5433, // flags: 2, server type: -1
 	k_EMsgClientP2PConnectionInfo = 5434, // flags: 2, server type: -1
 	k_EMsgClientP2PConnectionFailInfo = 5435, // flags: 2, server type: -1
-	k_EMsgClientGetNumberOfCurrentPlayers = 5436, // flags: 2, server type: -1
-	k_EMsgClientGetNumberOfCurrentPlayersResponse = 5437, // flags: 2, server type: -1
 	k_EMsgClientGetDepotDecryptionKey = 5438, // flags: 2, server type: -1
 	k_EMsgClientGetDepotDecryptionKeyResponse = 5439, // flags: 2, server type: -1
 	k_EMsgGSPerformHardwareSurvey = 5440, // flags: 2, server type: -1
-	k_EMsgClientGetAppBetaPasswords = 5441, // flags: 2, server type: -1
-	k_EMsgClientGetAppBetaPasswordsResponse = 5442, // flags: 2, server type: -1
 	k_EMsgClientEnableTestLicense = 5443, // flags: 2, server type: -1
 	k_EMsgClientEnableTestLicenseResponse = 5444, // flags: 2, server type: -1
 	k_EMsgClientDisableTestLicense = 5445, // flags: 2, server type: -1
@@ -281,8 +267,6 @@
 	k_EMsgClientLBSSetUGCResponse = 5530, // flags: 6, server type: 34
 	k_EMsgClientAMGetClanOfficers = 5531, // flags: 2, server type: -1
 	k_EMsgClientAMGetClanOfficersResponse = 5532, // flags: 2, server type: -1
-	k_EMsgClientCheckFileSignature = 5533, // flags: 2, server type: -1
-	k_EMsgClientCheckFileSignatureResponse = 5534, // flags: 2, server type: -1
 	k_EMsgClientFriendProfileInfo = 5535, // flags: 2, server type: -1
 	k_EMsgClientFriendProfileInfoResponse = 5536, // flags: 2, server type: -1
 	k_EMsgClientUpdateMachineAuth = 5537, // flags: 2, server type: -1
@@ -354,12 +338,13 @@
 	k_EMsgGMSClientServerQueryResponse = 6404, // flags: 59, server type: -1
 	k_EMsgGameServerOutOfDate = 6407, // flags: 59, server type: -1
 	k_EMsgClientAuthorizeLocalDeviceRequest = 6501, // flags: 2, server type: -1
-	k_EMsgClientAuthorizeLocalDevice = 6502, // flags: 2, server type: -1
+	k_EMsgClientAuthorizeLocalDeviceResponse = 6502, // flags: 2, server type: -1
 	k_EMsgClientDeauthorizeDeviceRequest = 6503, // flags: 2, server type: -1
 	k_EMsgClientDeauthorizeDevice = 6504, // flags: 2, server type: -1
 	k_EMsgClientUseLocalDeviceAuthorizations = 6505, // flags: 2, server type: -1
 	k_EMsgClientGetAuthorizedDevices = 6506, // flags: 2, server type: -1
 	k_EMsgClientGetAuthorizedDevicesResponse = 6507, // flags: 2, server type: -1
+	k_EMsgClientAuthorizeLocalDeviceNotification = 6509, // flags: 2, server type: -1
 	k_EMsgClientMMSCreateLobby = 6601, // flags: 63, server type: 42
 	k_EMsgClientMMSCreateLobbyResponse = 6602, // flags: 63, server type: 42
 	k_EMsgClientMMSJoinLobby = 6603, // flags: 63, server type: 42
