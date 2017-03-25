@@ -150,6 +150,7 @@
     <Compile Include="Base\PacketBase.cs" />
     <Compile Include="Steam\Discovery\BasicServerListProto.cs" />
     <Compile Include="Steam\Discovery\FileStorageServerListProvider.cs" />
+    <Compile Include="Steam\Discovery\InMemoryServerListProvider.cs" />
     <Compile Include="Steam\Discovery\NullServerListProvider.cs" />
     <Compile Include="Steam\Discovery\SmartCMServerList.cs" />
     <Compile Include="Steam\CDNClient.cs" />
