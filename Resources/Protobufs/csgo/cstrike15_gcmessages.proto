@@ -1,4 +1,5 @@
 import "steammessages.proto";
+import "engine_gcmessages.proto";
 
 option optimize_for = SPEED;
 option cc_generic_services = false;
@@ -84,14 +85,27 @@ enum ECsgoGCMsg {
 	k_EMsgGCCStrike15_v2_GlobalChat = 9180;
 	k_EMsgGCCStrike15_v2_GlobalChat_Subscribe = 9181;
 	k_EMsgGCCStrike15_v2_GlobalChat_Unsubscribe = 9182;
+	k_EMsgGCCStrike15_v2_ClientAuthKeyCode = 9183;
+	k_EMsgGCCStrike15_v2_GotvSyncPacket = 9184;
+	k_EMsgGCCStrike15_v2_ClientPlayerDecalSign = 9185;
+	k_EMsgGCCStrike15_v2_ClientLogonFatalError = 9187;
+	k_EMsgGCCStrike15_v2_ClientPollState = 9188;
+	k_EMsgGCCStrike15_v2_Party_Register = 9189;
+	k_EMsgGCCStrike15_v2_Party_Unregister = 9190;
+	k_EMsgGCCStrike15_v2_Party_Search = 9191;
+	k_EMsgGCCStrike15_v2_Party_Invite = 9192;
+	k_EMsgGCCStrike15_v2_Account_RequestCoPlays = 9193;
 }
 
 message GameServerPing {
-	optional uint64 gameserver_id = 1;
 	optional int32 ping = 2;
 	optional uint32 ip = 3;
-	optional uint32 port = 4;
 	optional uint32 instances = 5;
+}
+
+message DataCenterPing {
+	optional fixed32 data_center_id = 1;
+	optional sint32 ping = 2;
 }
 
 message DetailedSearchStatistic {
@@ -302,6 +316,7 @@ message CMsgGCCStrike15_v2_MatchmakingStart {
 	optional string ticket_data = 3;
 	optional uint32 client_version = 4;
 	optional .TournamentMatchSetup tournament_match = 5;
+	optional bool prime_only = 6;
 }
 
 message CMsgGCCStrike15_v2_MatchmakingStop {
@@ -312,6 +327,8 @@ message CMsgGCCStrike15_v2_MatchmakingClient2ServerPing {
 	repeated .GameServerPing gameserverpings = 1;
 	optional int32 offset_index = 2;
 	optional int32 final_batch = 3;
+	repeated .DataCenterPing data_center_pings = 4;
+	optional uint32 max_ping = 5;
 }
 
 message CMsgGCCStrike15_v2_MatchmakingGC2ClientUpdate {
@@ -335,6 +352,7 @@ message CMsgGCCStrike15_v2_MatchmakingGC2ClientUpdate {
 	repeated .CMsgGCCStrike15_v2_MatchmakingGC2ClientUpdate.Note notes = 13;
 	repeated uint32 penalty_account_id_sessions_green = 14;
 	repeated uint32 insufficientlevel_sessions = 15;
+	repeated uint32 vsncheck_account_id_sessions = 16;
 }
 
 message CDataGCCStrike15_v2_TournamentMatchDraft {
@@ -399,10 +417,13 @@ message CMsgGCCStrike15_v2_MatchmakingServerReservationResponse {
 	optional uint32 reward_item_attr_reward_idx = 11;
 	optional uint32 reward_drop_list = 12;
 	optional string tournament_tag = 13;
+	optional uint32 steamdatagram_port = 14;
 }
 
 message CMsgGCCStrike15_v2_MatchmakingGC2ClientReserve {
 	optional uint64 serverid = 1;
+	optional uint32 direct_udp_ip = 2;
+	optional uint32 direct_udp_port = 3;
 	optional uint64 reservationid = 4;
 	optional .CMsgGCCStrike15_v2_MatchmakingGC2ServerReserve reservation = 5;
 	optional string map = 6;
@@ -681,6 +702,7 @@ message CEconItemPreviewDataBlock {
 		optional float wear = 3;
 		optional float scale = 4;
 		optional float rotation = 5;
+		optional uint32 tint_id = 6;
 	}
 
 	optional uint32 accountid = 1;
@@ -699,6 +721,7 @@ message CEconItemPreviewDataBlock {
 	optional uint32 origin = 14;
 	optional uint32 questid = 15;
 	optional uint32 dropreason = 16;
+	optional uint32 musicindex = 17;
 }
 
 message CMsgGCCStrike15_v2_MatchEndRewardDropsNotification {
@@ -959,5 +982,98 @@ message CMsgGCCStrike15_v2_ClientToGCChat {
 message CMsgGCCStrike15_v2_GCToClientChat {
 	optional uint32 account_id = 1;
 	optional string text = 2;
+}
+
+message CMsgGCCStrike15_v2_ClientAuthKeyCode {
+	optional uint32 eventid = 1;
+	optional string code = 2;
+}
+
+message CMsgGCCStrike15_GotvSyncPacket {
+	optional .CEngineGotvSyncPacket data = 1;
+}
+
+message PlayerDecalDigitalSignature {
+	optional bytes signature = 1;
+	optional uint32 accountid = 2;
+	optional uint32 rtime = 3;
+	repeated float endpos = 4;
+	repeated float startpos = 5;
+	repeated float right = 6;
+	optional uint32 tx_defidx = 7;
+	optional int32 entindex = 8;
+	optional uint32 hitbox = 9;
+	optional float creationtime = 10;
+	optional uint32 equipslot = 11;
+	optional uint32 trace_id = 12;
+	repeated float normal = 13;
+	optional uint32 tint_id = 14;
+}
+
+message CMsgGCCStrike15_v2_ClientPlayerDecalSign {
+	optional .PlayerDecalDigitalSignature data = 1;
+	optional uint64 itemid = 2;
+}
+
+message CMsgGCCStrike15_v2_ClientLogonFatalError {
+	optional uint32 errorcode = 1;
+	optional string message = 2;
+}
+
+message CMsgGCCStrike15_v2_ClientPollState {
+	optional uint32 pollid = 1;
+	repeated string names = 2;
+	repeated int32 values = 3;
+}
+
+message CMsgGCCStrike15_v2_Party_Register {
+	optional uint32 id = 1;
+	optional uint32 ver = 2;
+	optional uint32 apr = 3;
+	optional uint32 ark = 4;
+	optional uint32 nby = 5;
+	optional uint32 grp = 6;
+	optional uint32 slots = 7;
+	optional uint32 launcher = 8;
+}
+
+message CMsgGCCStrike15_v2_Party_Search {
+	optional uint32 ver = 1;
+	optional uint32 apr = 2;
+	optional uint32 ark = 3;
+	repeated uint32 grps = 4;
+	optional uint32 launcher = 5;
+}
+
+message CMsgGCCStrike15_v2_Party_SearchResults {
+	message Entry {
+		optional uint32 id = 1;
+		optional uint32 grp = 2;
+	}
+
+	repeated .CMsgGCCStrike15_v2_Party_SearchResults.Entry entries = 1;
+}
+
+message CMsgGCCStrike15_v2_Party_Invite {
+	optional uint32 accountid = 1;
+	optional uint32 lobbyid = 2;
+}
+
+message CMsgGCCStrike15_v2_Account_RequestCoPlays {
+	message Player {
+		optional uint32 accountid = 1;
+		optional uint32 rtcoplay = 2;
+		optional bool online = 3;
+	}
+
+	repeated .CMsgGCCStrike15_v2_Account_RequestCoPlays.Player players = 1;
+	optional uint32 servertime = 2;
+}
+
+message CMsgGCCStrike15_v2_ClientToGCRequestTicket {
+	optional fixed64 authorized_steam_id = 1;
+	optional fixed32 authorized_public_ip = 2;
+	optional fixed64 gameserver_steam_id = 3;
+	optional fixed64 gameserver_net_id = 4;
 }
 
