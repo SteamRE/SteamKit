@@ -13,6 +13,7 @@ message CInventory_Response {
 	optional string item_json = 3;
 	optional string itemdef_json = 4;
 	optional bytes ticket = 5;
+	optional bool replayed = 6 [(description) = "If true, the requestid given was processed earlier."];
 }
 
 message CInventory_ExchangeItem_Request {
@@ -23,12 +24,22 @@ message CInventory_ExchangeItem_Request {
 	optional uint64 outputitemdefid = 5;
 }
 
+message CInventory_GetEligiblePromoItemDefIDs_Request {
+	optional uint32 appid = 1;
+	optional uint64 steamid = 2;
+}
+
+message CInventory_GetEligiblePromoItemDefIDs_Response {
+	repeated uint64 itemdefids = 1;
+}
+
 message CInventory_AddItem_Request {
 	optional uint32 appid = 1;
 	repeated uint64 itemdefid = 2;
 	repeated string itempropsjson = 3;
 	optional uint64 steamid = 4;
 	optional bool notify = 5 [(description) = "Should notify the user that the item was added to their Steam Inventory."];
+	optional uint64 requestid = 6;
 }
 
 message CInventory_SafeModifyItem_Request {
@@ -43,20 +54,13 @@ message CInventory_ConsumePlaytime_Request {
 	optional uint64 itemdefid = 2;
 }
 
-message CInventory_GetItemDefs_Request {
-	optional uint32 appid = 1;
-	optional string modifiedsince = 2;
-	repeated uint64 itemdefids = 4;
-	repeated uint64 workshopids = 5;
-	optional uint32 cache_max_age_seconds = 7 [default = 0, (description) = "Allow stale data to be returned for the specified number of seconds."];
-}
-
 message CInventory_ConsumeItem_Request {
 	optional uint32 appid = 1;
 	optional uint64 itemid = 2;
 	optional uint32 quantity = 3;
 	optional string timestamp = 4;
 	optional uint64 steamid = 5;
+	optional uint64 requestid = 6;
 }
 
 message CInventory_DevSetNextDrop_Request {
@@ -98,6 +102,9 @@ service Inventory {
 	rpc ExchangeItem (.CInventory_ExchangeItem_Request) returns (.CInventory_Response) {
 		option (method_description) = "Craft an item in a user's inventory";
 	}
+	rpc GetEligiblePromoItemDefIDs (.CInventory_GetEligiblePromoItemDefIDs_Request) returns (.CInventory_GetEligiblePromoItemDefIDs_Response) {
+		option (method_description) = "Returns a list of promo item defs the user is eligible for";
+	}
 	rpc AddPromoItem (.CInventory_AddItem_Request) returns (.CInventory_Response) {
 		option (method_description) = "Adds a promo item to a user's inventory";
 	}
@@ -106,9 +113,6 @@ service Inventory {
 	}
 	rpc ConsumePlaytime (.CInventory_ConsumePlaytime_Request) returns (.CInventory_Response) {
 		option (method_description) = "Consumes playtime and possibly returns a granted item";
-	}
-	rpc GetItemDefs (.CInventory_GetItemDefs_Request) returns (.CInventory_Response) {
-		option (method_description) = "Get item definitions";
 	}
 	rpc ConsumeItem (.CInventory_ConsumeItem_Request) returns (.CInventory_Response) {
 		option (method_description) = "Consume an item";

@@ -44,6 +44,7 @@ enum ERemoteDeviceStreamingResult {
 	k_ERemoteDeviceStreamingDisabled = 8;
 	k_ERemoteDeviceStreamingBroadcastingActive = 9;
 	k_ERemoteDeviceStreamingVRActive = 10;
+	k_ERemoteDeviceStreamingPINRequired = 11;
 }
 
 message CMsgRemoteClientBroadcastHeader {
@@ -117,6 +118,8 @@ message CMsgRemoteDeviceStreamingRequest {
 	optional int32 audio_channel_count = 4 [default = 2];
 	optional string device_version = 5;
 	optional bool stream_desktop = 6;
+	optional bytes device_token = 7;
+	optional bytes pin = 8;
 }
 
 message CMsgRemoteDeviceStreamingCancelRequest {
@@ -128,7 +131,7 @@ message CMsgRemoteDeviceStreamingResponse {
 	required .ERemoteDeviceStreamingResult result = 2 [default = k_ERemoteDeviceStreamingSuccess];
 	optional uint32 port = 3;
 	optional bytes encrypted_session_key = 4;
-	optional int32 virtualhere_licensed_device_count = 5;
+	optional int32 virtualhere_licensed_device_count_OBSOLETE = 5;
 }
 
 message CMsgRemoteDeviceProofRequest {

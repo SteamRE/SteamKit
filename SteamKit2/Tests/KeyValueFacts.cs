@@ -546,6 +546,21 @@ namespace Tests
             Assert.Equal( expectedValue, text );
         }
 
+        [Fact]
+        public void DecodesBinaryWithFieldType10()
+        {
+            var hex = "00546573744F626A656374000A6B65790001020304050607080808";
+            var binary = Utils.DecodeHexString( hex );
+            var kv = new KeyValue();
+            using (var ms = new MemoryStream(binary))
+            {
+                var read = kv.TryReadAsBinary(ms);
+                Assert.True(read);
+            }
+
+            Assert.Equal( 0x0807060504030201, kv["key"].AsLong() );
+        }
+
         const string TestObjectHex = "00546573744F626A65637400016B65790076616C7565000808";
     }
 }

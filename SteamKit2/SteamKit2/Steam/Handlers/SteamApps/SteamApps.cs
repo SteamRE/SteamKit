@@ -122,9 +122,11 @@ namespace SteamKit2
                 { EMsg.ClientGameConnectTokens, HandleGameConnectTokens },
                 { EMsg.ClientVACBanStatus, HandleVACBanStatus },
                 { EMsg.ClientGetAppOwnershipTicketResponse, HandleAppOwnershipTicketResponse },
+#pragma warning disable CS0612 // Type or member is obsolete
                 { EMsg.ClientAppInfoResponse, HandleAppInfoResponse },
                 { EMsg.ClientPackageInfoResponse, HandlePackageInfoResponse },
                 { EMsg.ClientAppInfoChanges, HandleAppInfoChanges },
+#pragma warning restore CS0612 // Type or member is obsolete
                 { EMsg.ClientGetDepotDecryptionKeyResponse, HandleDepotKeyResponse },
                 { EMsg.ClientPICSAccessTokenResponse, HandlePICSAccessTokenResponse },
                 { EMsg.ClientPICSChangesSinceResponse, HandlePICSChangesSinceResponse },
@@ -165,6 +167,7 @@ namespace SteamKit2
         /// <param name="app">The app to request information for.</param>
         /// <param name="supportsBatches">if set to <c>true</c>, the request supports batches.</param>
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="AppInfoCallback"/>.</returns>
+        [Obsolete]
         public AsyncJob<AppInfoCallback> GetAppInfo( AppDetails app, bool supportsBatches = false )
         {
             return GetAppInfo( new AppDetails[] { app }, supportsBatches );
@@ -179,6 +182,7 @@ namespace SteamKit2
         /// <param name="app">The app to request information for.</param>
         /// <param name="supportsBatches">if set to <c>true</c>, the request supports batches.</param>
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="AppInfoCallback"/>.</returns>
+        [Obsolete]
         public AsyncJob<AppInfoCallback> GetAppInfo( uint app, bool supportsBatches = false )
         {
             return GetAppInfo( new uint[] { app }, supportsBatches );
@@ -193,6 +197,7 @@ namespace SteamKit2
         /// <param name="apps">The apps to request information for.</param>
         /// <param name="supportsBatches">if set to <c>true</c>, the request supports batches.</param>
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="AppInfoCallback"/>.</returns>
+        [Obsolete]
         public AsyncJob<AppInfoCallback> GetAppInfo( IEnumerable<uint> apps, bool supportsBatches = false )
         {
             return GetAppInfo( apps.Select( a => new AppDetails { AppID = a } ), supportsBatches );
@@ -207,6 +212,7 @@ namespace SteamKit2
         /// <param name="apps">The apps to request information for.</param>
         /// <param name="supportsBatches">if set to <c>true</c>, the request supports batches.</param>
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="AppInfoCallback"/>.</returns>
+        [Obsolete]
         public AsyncJob<AppInfoCallback> GetAppInfo( IEnumerable<AppDetails> apps, bool supportsBatches = false )
         {
             var request = new ClientMsgProtobuf<CMsgClientAppInfoRequest>( EMsg.ClientAppInfoRequest );
@@ -242,6 +248,7 @@ namespace SteamKit2
         /// <param name="packageId">The package id to request information for.</param>
         /// <param name="metaDataOnly">if set to <c>true</c>, request metadata only.</param>
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="PackageInfoCallback"/>.</returns>
+        [Obsolete]
         public AsyncJob<PackageInfoCallback> GetPackageInfo( uint packageId, bool metaDataOnly = false )
         {
             return GetPackageInfo( new uint[] { packageId }, metaDataOnly );
@@ -256,6 +263,7 @@ namespace SteamKit2
         /// <param name="packageId">The packages to request information for.</param>
         /// <param name="metaDataOnly">if set to <c>true</c> to request metadata only.</param>
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="PackageInfoCallback"/>.</returns>
+        [Obsolete]
         public AsyncJob<PackageInfoCallback> GetPackageInfo( IEnumerable<uint> packageId, bool metaDataOnly = false )
         {
             var request = new ClientMsgProtobuf<CMsgClientPackageInfoRequest>( EMsg.ClientPackageInfoRequest );
@@ -278,6 +286,7 @@ namespace SteamKit2
         /// </summary>
         /// <param name="lastChangeNumber">The last change number value.</param>
         /// <param name="sendChangelist">if set to <c>true</c>, request a change list.</param>
+        [Obsolete]
         public void GetAppChanges( uint lastChangeNumber = 0, bool sendChangelist = true  )
         {
             var request = new ClientMsgProtobuf<CMsgClientAppInfoUpdate>( EMsg.ClientAppInfoUpdate );

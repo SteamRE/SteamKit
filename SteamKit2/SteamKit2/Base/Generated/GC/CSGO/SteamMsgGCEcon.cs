@@ -95,6 +95,25 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::ProtoBuf.ProtoContract(Name=@"CMsgGCUserTrackTimePlayedConsecutively")]
+  public partial class CMsgGCUserTrackTimePlayedConsecutively : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCUserTrackTimePlayedConsecutively() {}
+    
+
+    private uint _state = default(uint);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"state", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(uint))]
+    public uint state
+    {
+      get { return _state; }
+      set { _state = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     [global::ProtoBuf.ProtoContract(Name=@"EGCItemMsg", EnumPassthru=true)]
     public enum EGCItemMsg
     {
@@ -338,6 +357,9 @@ namespace SteamKit2.GC.CSGO.Internal
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCStatTrakSwap", Value=1088)]
       k_EMsgGCStatTrakSwap = 1088,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCUserTrackTimePlayedConsecutively", Value=1089)]
+      k_EMsgGCUserTrackTimePlayedConsecutively = 1089,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCTradingBase", Value=1500)]
       k_EMsgGCTradingBase = 1500,
