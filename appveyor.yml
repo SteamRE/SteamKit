@@ -86,7 +86,7 @@ deploy:
   - provider: GitHub
     auth_token:
       secure: 'KEOYmhFMh4Ea7RVYmX1Sv/1SWQW5uoNv6p3+aUtJXw/2Vbp2PEmbJxYJxO9xIuc9'
-    release: 'SteamKit2 $(appveyor_repo_tag_name)'
+    release: 'SteamKit $(appveyor_repo_tag_name)'
     artifact: /.*/
     draft: false
     prerelease: true
