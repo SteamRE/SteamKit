@@ -466,7 +466,7 @@ namespace <xsl:value-of select="translate($namespace,':-/\','__..')"/>
     public bool <xsl:value-of select="$nameNoKeyword"/>Specified
     {
       get { return <xsl:value-of select="$field"/> != null; }
-      set { if (value == (<xsl:value-of select="$field"/>== null)) <xsl:value-of select="$field"/> = value ? <xsl:value-of select="$name"/> : (<xsl:value-of select="$fieldType"/>)null; }
+      set { if (value == (<xsl:value-of select="$field"/>== null)) <xsl:value-of select="$field"/> = value ? this.<xsl:value-of select="$name"/> : (<xsl:value-of select="$fieldType"/>)null; }
     }
     private bool ShouldSerialize<xsl:value-of select="$nameNoKeyword"/>() { return <xsl:value-of select="$nameNoKeyword"/>Specified; }
     private void Reset<xsl:value-of select="$nameNoKeyword"/>() { <xsl:value-of select="$nameNoKeyword"/>Specified = false; }

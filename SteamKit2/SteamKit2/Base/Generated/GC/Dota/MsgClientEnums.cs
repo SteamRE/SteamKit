@@ -8,6 +8,8 @@
 //------------------------------------------------------------------------------
 #pragma warning disable 1591
 
+// Option: missing-value detection (*Specified/ShouldSerialize*/Reset*) enabled
+    
 // Option: light framework (CF/Silverlight) enabled
     
 // Generated from: dota_client_enums.proto

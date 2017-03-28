@@ -8,6 +8,8 @@
 //------------------------------------------------------------------------------
 #pragma warning disable 1591
 
+// Option: missing-value detection (*Specified/ShouldSerialize*/Reset*) enabled
+    
 // Option: light framework (CF/Silverlight) enabled
     
 // Generated from: econ_shared_enums.proto
@@ -19,23 +21,41 @@ namespace SteamKit2.GC.Dota.Internal
     public CMsgGenericResult() {}
     
 
-    private uint _eresult = (uint)2;
+    private uint? _eresult;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"eresult", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue((uint)2)]
     public uint eresult
     {
-      get { return _eresult; }
+      get { return _eresult?? (uint)2; }
       set { _eresult = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool eresultSpecified
+    {
+      get { return _eresult != null; }
+      set { if (value == (_eresult== null)) _eresult = value ? this.eresult : (uint?)null; }
+    }
+    private bool ShouldSerializeeresult() { return eresultSpecified; }
+    private void Reseteresult() { eresultSpecified = false; }
+    
 
-    private string _debug_message = "";
+    private string _debug_message;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"debug_message", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
     public string debug_message
     {
-      get { return _debug_message; }
+      get { return _debug_message?? ""; }
       set { _debug_message = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool debug_messageSpecified
+    {
+      get { return _debug_message != null; }
+      set { if (value == (_debug_message== null)) _debug_message = value ? this.debug_message : (string)null; }
+    }
+    private bool ShouldSerializedebug_message() { return debug_messageSpecified; }
+    private void Resetdebug_message() { debug_messageSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

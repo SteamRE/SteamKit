@@ -8,6 +8,8 @@
 //------------------------------------------------------------------------------
 #pragma warning disable 1591
 
+// Option: missing-value detection (*Specified/ShouldSerialize*/Reset*) enabled
+    
 // Option: light framework (CF/Silverlight) enabled
     
 // Generated from: steammessages_site_license.steamclient.proto
@@ -20,14 +22,23 @@ namespace SteamKit2.Unified.Internal
     public CSiteLicense_ClientSiteAssociation_Notification() {}
     
 
-    private byte[] _site_association_file = null;
+    private byte[] _site_association_file;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"site_association_file", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(null)]
     public byte[] site_association_file
     {
-      get { return _site_association_file; }
+      get { return _site_association_file?? null; }
       set { _site_association_file = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool site_association_fileSpecified
+    {
+      get { return _site_association_file != null; }
+      set { if (value == (_site_association_file== null)) _site_association_file = value ? this.site_association_file : (byte[])null; }
+    }
+    private bool ShouldSerializesite_association_file() { return site_association_fileSpecified; }
+    private void Resetsite_association_file() { site_association_fileSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -39,23 +50,41 @@ namespace SteamKit2.Unified.Internal
     public CSiteLicense_ClientSiteLicenseSeatCheckout_Request() {}
     
 
-    private uint _packageid = default(uint);
+    private uint? _packageid;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"packageid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint packageid
     {
-      get { return _packageid; }
+      get { return _packageid?? default(uint); }
       set { _packageid = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool packageidSpecified
+    {
+      get { return _packageid != null; }
+      set { if (value == (_packageid== null)) _packageid = value ? this.packageid : (uint?)null; }
+    }
+    private bool ShouldSerializepackageid() { return packageidSpecified; }
+    private void Resetpackageid() { packageidSpecified = false; }
+    
 
-    private uint _appid = default(uint);
+    private uint? _appid;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"appid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint appid
     {
-      get { return _appid; }
+      get { return _appid?? default(uint); }
       set { _appid = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool appidSpecified
+    {
+      get { return _appid != null; }
+      set { if (value == (_appid== null)) _appid = value ? this.appid : (uint?)null; }
+    }
+    private bool ShouldSerializeappid() { return appidSpecified; }
+    private void Resetappid() { appidSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

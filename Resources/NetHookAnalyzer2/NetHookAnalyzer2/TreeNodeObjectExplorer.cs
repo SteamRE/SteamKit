@@ -14,11 +14,17 @@ namespace NetHookAnalyzer2
 {
 	class TreeNodeObjectExplorer
 	{
-		public TreeNodeObjectExplorer(string name, object value)
+		public static bool ShowAll = true;
+
+		public TreeNodeObjectExplorer(string name, object value, bool showFaded = false)
 		{
 			this.name = name;
 			this.value = value;
 			this.treeNode = new TreeNode();
+			if (showFaded)
+			{
+			    treeNode.ForeColor = System.Drawing.Color.DarkGray;
+			}
 			this.treeNode.ContextMenu = new ContextMenu();
 			this.treeNode.ContextMenu.Popup += OnContextMenuPopup;
 
@@ -581,13 +587,44 @@ namespace NetHookAnalyzer2
 			{
 				var childNodes = new List<TreeNode>();
 
-				foreach (var property in value.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance))
+				var properties = value.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance).ToList();
+				bool valueIsProtobufMsg = value is ProtoBuf.IExtensible;
+
+				if (valueIsProtobufMsg)
+				{
+					// For proto msgs, we want to skip vars where name is "<blah>Specified", unless there's no var named "<blah>"
+					properties = properties.Where(x => {
+				        return !x.Name.EndsWith("Specified") || properties.FirstOrDefault(y => {
+				            return y.Name == x.Name.Remove(x.Name.Length - 9);
+				        }) == null;
+				    }).ToList();
+				}
+
+				foreach (var property in properties)
 				{
 					var childName = property.Name;
 					var childObject = property.GetValue(value, null);
-
-					var childObjectExplorer = new TreeNodeObjectExplorer(childName, childObject);
-					childNodes.Add(childObjectExplorer.TreeNode);
+					bool valueIsSet = true;
+					if (valueIsProtobufMsg)
+					{
+						if (childObject is IList)
+						{
+							// Repeated fields are marshalled as Lists, but aren't "set"/sent if they have no values added.
+							valueIsSet = (property.GetValue(value) as IList).Count != 0;
+						}
+						else
+						{
+							// For non-repeated fields, look for the "<blah>Specfied" field existing and being set to false;
+							var propSpecified = value.GetType().GetProperty(property.Name + "Specified");
+							valueIsSet = propSpecified == null || (bool)propSpecified.GetValue(value);
+						}
+					}
+					
+					if (valueIsSet || ShowAll)
+					{
+					    var childObjectExplorer = new TreeNodeObjectExplorer(childName, childObject, !valueIsSet);
+					    childNodes.Add(childObjectExplorer.TreeNode);
+					}
 				}
 
 				SetValueForDisplay(null, childNodes: childNodes.ToArray());

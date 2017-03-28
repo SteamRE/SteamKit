@@ -8,6 +8,8 @@
 //------------------------------------------------------------------------------
 #pragma warning disable 1591
 
+// Option: missing-value detection (*Specified/ShouldSerialize*/Reset*) enabled
+    
 // Option: light framework (CF/Silverlight) enabled
     
 // Generated from: steammessages_deviceauth.steamclient.proto
@@ -20,23 +22,41 @@ namespace SteamKit2.Unified.Internal
     public CDeviceAuth_GetOwnAuthorizedDevices_Request() {}
     
 
-    private ulong _steamid = default(ulong);
+    private ulong? _steamid;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong steamid
     {
-      get { return _steamid; }
+      get { return _steamid?? default(ulong); }
       set { _steamid = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool steamidSpecified
+    {
+      get { return _steamid != null; }
+      set { if (value == (_steamid== null)) _steamid = value ? this.steamid : (ulong?)null; }
+    }
+    private bool ShouldSerializesteamid() { return steamidSpecified; }
+    private void Resetsteamid() { steamidSpecified = false; }
+    
 
-    private bool _include_canceled = default(bool);
+    private bool? _include_canceled;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"include_canceled", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool include_canceled
     {
-      get { return _include_canceled; }
+      get { return _include_canceled?? default(bool); }
       set { _include_canceled = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool include_canceledSpecified
+    {
+      get { return _include_canceled != null; }
+      set { if (value == (_include_canceled== null)) _include_canceled = value ? this.include_canceled : (bool?)null; }
+    }
+    private bool ShouldSerializeinclude_canceled() { return include_canceledSpecified; }
+    private void Resetinclude_canceled() { include_canceledSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -60,77 +80,149 @@ namespace SteamKit2.Unified.Internal
     public Device() {}
     
 
-    private ulong _auth_device_token = default(ulong);
+    private ulong? _auth_device_token;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"auth_device_token", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong auth_device_token
     {
-      get { return _auth_device_token; }
+      get { return _auth_device_token?? default(ulong); }
       set { _auth_device_token = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool auth_device_tokenSpecified
+    {
+      get { return _auth_device_token != null; }
+      set { if (value == (_auth_device_token== null)) _auth_device_token = value ? this.auth_device_token : (ulong?)null; }
+    }
+    private bool ShouldSerializeauth_device_token() { return auth_device_tokenSpecified; }
+    private void Resetauth_device_token() { auth_device_tokenSpecified = false; }
+    
 
-    private string _device_name = "";
+    private string _device_name;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"device_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
     public string device_name
     {
-      get { return _device_name; }
+      get { return _device_name?? ""; }
       set { _device_name = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool device_nameSpecified
+    {
+      get { return _device_name != null; }
+      set { if (value == (_device_name== null)) _device_name = value ? this.device_name : (string)null; }
+    }
+    private bool ShouldSerializedevice_name() { return device_nameSpecified; }
+    private void Resetdevice_name() { device_nameSpecified = false; }
+    
 
-    private bool _is_pending = default(bool);
+    private bool? _is_pending;
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"is_pending", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool is_pending
     {
-      get { return _is_pending; }
+      get { return _is_pending?? default(bool); }
       set { _is_pending = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool is_pendingSpecified
+    {
+      get { return _is_pending != null; }
+      set { if (value == (_is_pending== null)) _is_pending = value ? this.is_pending : (bool?)null; }
+    }
+    private bool ShouldSerializeis_pending() { return is_pendingSpecified; }
+    private void Resetis_pending() { is_pendingSpecified = false; }
+    
 
-    private bool _is_canceled = default(bool);
+    private bool? _is_canceled;
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"is_canceled", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool is_canceled
     {
-      get { return _is_canceled; }
+      get { return _is_canceled?? default(bool); }
       set { _is_canceled = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool is_canceledSpecified
+    {
+      get { return _is_canceled != null; }
+      set { if (value == (_is_canceled== null)) _is_canceled = value ? this.is_canceled : (bool?)null; }
+    }
+    private bool ShouldSerializeis_canceled() { return is_canceledSpecified; }
+    private void Resetis_canceled() { is_canceledSpecified = false; }
+    
 
-    private uint _last_time_used = default(uint);
+    private uint? _last_time_used;
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"last_time_used", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint last_time_used
     {
-      get { return _last_time_used; }
+      get { return _last_time_used?? default(uint); }
       set { _last_time_used = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool last_time_usedSpecified
+    {
+      get { return _last_time_used != null; }
+      set { if (value == (_last_time_used== null)) _last_time_used = value ? this.last_time_used : (uint?)null; }
+    }
+    private bool ShouldSerializelast_time_used() { return last_time_usedSpecified; }
+    private void Resetlast_time_used() { last_time_usedSpecified = false; }
+    
 
-    private ulong _last_borrower_id = default(ulong);
+    private ulong? _last_borrower_id;
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"last_borrower_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong last_borrower_id
     {
-      get { return _last_borrower_id; }
+      get { return _last_borrower_id?? default(ulong); }
       set { _last_borrower_id = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool last_borrower_idSpecified
+    {
+      get { return _last_borrower_id != null; }
+      set { if (value == (_last_borrower_id== null)) _last_borrower_id = value ? this.last_borrower_id : (ulong?)null; }
+    }
+    private bool ShouldSerializelast_borrower_id() { return last_borrower_idSpecified; }
+    private void Resetlast_borrower_id() { last_borrower_idSpecified = false; }
+    
 
-    private uint _last_app_played = default(uint);
+    private uint? _last_app_played;
     [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"last_app_played", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint last_app_played
     {
-      get { return _last_app_played; }
+      get { return _last_app_played?? default(uint); }
       set { _last_app_played = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool last_app_playedSpecified
+    {
+      get { return _last_app_played != null; }
+      set { if (value == (_last_app_played== null)) _last_app_played = value ? this.last_app_played : (uint?)null; }
+    }
+    private bool ShouldSerializelast_app_played() { return last_app_playedSpecified; }
+    private void Resetlast_app_played() { last_app_playedSpecified = false; }
+    
 
-    private bool _is_limited = default(bool);
+    private bool? _is_limited;
     [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"is_limited", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool is_limited
     {
-      get { return _is_limited; }
+      get { return _is_limited?? default(bool); }
       set { _is_limited = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool is_limitedSpecified
+    {
+      get { return _is_limited != null; }
+      set { if (value == (_is_limited== null)) _is_limited = value ? this.is_limited : (bool?)null; }
+    }
+    private bool ShouldSerializeis_limited() { return is_limitedSpecified; }
+    private void Resetis_limited() { is_limitedSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -147,41 +239,77 @@ namespace SteamKit2.Unified.Internal
     public CDeviceAuth_AcceptAuthorizationRequest_Request() {}
     
 
-    private ulong _steamid = default(ulong);
+    private ulong? _steamid;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong steamid
     {
-      get { return _steamid; }
+      get { return _steamid?? default(ulong); }
       set { _steamid = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool steamidSpecified
+    {
+      get { return _steamid != null; }
+      set { if (value == (_steamid== null)) _steamid = value ? this.steamid : (ulong?)null; }
+    }
+    private bool ShouldSerializesteamid() { return steamidSpecified; }
+    private void Resetsteamid() { steamidSpecified = false; }
+    
 
-    private ulong _auth_device_token = default(ulong);
+    private ulong? _auth_device_token;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"auth_device_token", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong auth_device_token
     {
-      get { return _auth_device_token; }
+      get { return _auth_device_token?? default(ulong); }
       set { _auth_device_token = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool auth_device_tokenSpecified
+    {
+      get { return _auth_device_token != null; }
+      set { if (value == (_auth_device_token== null)) _auth_device_token = value ? this.auth_device_token : (ulong?)null; }
+    }
+    private bool ShouldSerializeauth_device_token() { return auth_device_tokenSpecified; }
+    private void Resetauth_device_token() { auth_device_tokenSpecified = false; }
+    
 
-    private ulong _auth_code = default(ulong);
+    private ulong? _auth_code;
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"auth_code", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong auth_code
     {
-      get { return _auth_code; }
+      get { return _auth_code?? default(ulong); }
       set { _auth_code = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool auth_codeSpecified
+    {
+      get { return _auth_code != null; }
+      set { if (value == (_auth_code== null)) _auth_code = value ? this.auth_code : (ulong?)null; }
+    }
+    private bool ShouldSerializeauth_code() { return auth_codeSpecified; }
+    private void Resetauth_code() { auth_codeSpecified = false; }
+    
 
-    private ulong _from_steamid = default(ulong);
+    private ulong? _from_steamid;
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"from_steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong from_steamid
     {
-      get { return _from_steamid; }
+      get { return _from_steamid?? default(ulong); }
       set { _from_steamid = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool from_steamidSpecified
+    {
+      get { return _from_steamid != null; }
+      set { if (value == (_from_steamid== null)) _from_steamid = value ? this.from_steamid : (ulong?)null; }
+    }
+    private bool ShouldSerializefrom_steamid() { return from_steamidSpecified; }
+    private void Resetfrom_steamid() { from_steamidSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -203,23 +331,41 @@ namespace SteamKit2.Unified.Internal
     public CDeviceAuth_AuthorizeRemoteDevice_Request() {}
     
 
-    private ulong _steamid = default(ulong);
+    private ulong? _steamid;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong steamid
     {
-      get { return _steamid; }
+      get { return _steamid?? default(ulong); }
       set { _steamid = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool steamidSpecified
+    {
+      get { return _steamid != null; }
+      set { if (value == (_steamid== null)) _steamid = value ? this.steamid : (ulong?)null; }
+    }
+    private bool ShouldSerializesteamid() { return steamidSpecified; }
+    private void Resetsteamid() { steamidSpecified = false; }
+    
 
-    private ulong _auth_device_token = default(ulong);
+    private ulong? _auth_device_token;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"auth_device_token", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong auth_device_token
     {
-      get { return _auth_device_token; }
+      get { return _auth_device_token?? default(ulong); }
       set { _auth_device_token = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool auth_device_tokenSpecified
+    {
+      get { return _auth_device_token != null; }
+      set { if (value == (_auth_device_token== null)) _auth_device_token = value ? this.auth_device_token : (ulong?)null; }
+    }
+    private bool ShouldSerializeauth_device_token() { return auth_device_tokenSpecified; }
+    private void Resetauth_device_token() { auth_device_tokenSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -241,23 +387,41 @@ namespace SteamKit2.Unified.Internal
     public CDeviceAuth_DeauthorizeRemoteDevice_Request() {}
     
 
-    private ulong _steamid = default(ulong);
+    private ulong? _steamid;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong steamid
     {
-      get { return _steamid; }
+      get { return _steamid?? default(ulong); }
       set { _steamid = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool steamidSpecified
+    {
+      get { return _steamid != null; }
+      set { if (value == (_steamid== null)) _steamid = value ? this.steamid : (ulong?)null; }
+    }
+    private bool ShouldSerializesteamid() { return steamidSpecified; }
+    private void Resetsteamid() { steamidSpecified = false; }
+    
 
-    private ulong _auth_device_token = default(ulong);
+    private ulong? _auth_device_token;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"auth_device_token", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong auth_device_token
     {
-      get { return _auth_device_token; }
+      get { return _auth_device_token?? default(ulong); }
       set { _auth_device_token = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool auth_device_tokenSpecified
+    {
+      get { return _auth_device_token != null; }
+      set { if (value == (_auth_device_token== null)) _auth_device_token = value ? this.auth_device_token : (ulong?)null; }
+    }
+    private bool ShouldSerializeauth_device_token() { return auth_device_tokenSpecified; }
+    private void Resetauth_device_token() { auth_device_tokenSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -279,14 +443,23 @@ namespace SteamKit2.Unified.Internal
     public CDeviceAuth_GetUsedAuthorizedDevices_Request() {}
     
 
-    private ulong _steamid = default(ulong);
+    private ulong? _steamid;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong steamid
     {
-      get { return _steamid; }
+      get { return _steamid?? default(ulong); }
       set { _steamid = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool steamidSpecified
+    {
+      get { return _steamid != null; }
+      set { if (value == (_steamid== null)) _steamid = value ? this.steamid : (ulong?)null; }
+    }
+    private bool ShouldSerializesteamid() { return steamidSpecified; }
+    private void Resetsteamid() { steamidSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -310,50 +483,95 @@ namespace SteamKit2.Unified.Internal
     public Device() {}
     
 
-    private ulong _auth_device_token = default(ulong);
+    private ulong? _auth_device_token;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"auth_device_token", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong auth_device_token
     {
-      get { return _auth_device_token; }
+      get { return _auth_device_token?? default(ulong); }
       set { _auth_device_token = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool auth_device_tokenSpecified
+    {
+      get { return _auth_device_token != null; }
+      set { if (value == (_auth_device_token== null)) _auth_device_token = value ? this.auth_device_token : (ulong?)null; }
+    }
+    private bool ShouldSerializeauth_device_token() { return auth_device_tokenSpecified; }
+    private void Resetauth_device_token() { auth_device_tokenSpecified = false; }
+    
 
-    private string _device_name = "";
+    private string _device_name;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"device_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
     public string device_name
     {
-      get { return _device_name; }
+      get { return _device_name?? ""; }
       set { _device_name = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool device_nameSpecified
+    {
+      get { return _device_name != null; }
+      set { if (value == (_device_name== null)) _device_name = value ? this.device_name : (string)null; }
+    }
+    private bool ShouldSerializedevice_name() { return device_nameSpecified; }
+    private void Resetdevice_name() { device_nameSpecified = false; }
+    
 
-    private ulong _owner_steamid = default(ulong);
+    private ulong? _owner_steamid;
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"owner_steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong owner_steamid
     {
-      get { return _owner_steamid; }
+      get { return _owner_steamid?? default(ulong); }
       set { _owner_steamid = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool owner_steamidSpecified
+    {
+      get { return _owner_steamid != null; }
+      set { if (value == (_owner_steamid== null)) _owner_steamid = value ? this.owner_steamid : (ulong?)null; }
+    }
+    private bool ShouldSerializeowner_steamid() { return owner_steamidSpecified; }
+    private void Resetowner_steamid() { owner_steamidSpecified = false; }
+    
 
-    private uint _last_time_used = default(uint);
+    private uint? _last_time_used;
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"last_time_used", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint last_time_used
     {
-      get { return _last_time_used; }
+      get { return _last_time_used?? default(uint); }
       set { _last_time_used = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool last_time_usedSpecified
+    {
+      get { return _last_time_used != null; }
+      set { if (value == (_last_time_used== null)) _last_time_used = value ? this.last_time_used : (uint?)null; }
+    }
+    private bool ShouldSerializelast_time_used() { return last_time_usedSpecified; }
+    private void Resetlast_time_used() { last_time_usedSpecified = false; }
+    
 
-    private uint _last_app_played = default(uint);
+    private uint? _last_app_played;
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"last_app_played", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint last_app_played
     {
-      get { return _last_app_played; }
+      get { return _last_app_played?? default(uint); }
       set { _last_app_played = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool last_app_playedSpecified
+    {
+      get { return _last_app_played != null; }
+      set { if (value == (_last_app_played== null)) _last_app_played = value ? this.last_app_played : (uint?)null; }
+    }
+    private bool ShouldSerializelast_app_played() { return last_app_playedSpecified; }
+    private void Resetlast_app_played() { last_app_playedSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -370,32 +588,59 @@ namespace SteamKit2.Unified.Internal
     public CDeviceAuth_GetAuthorizedBorrowers_Request() {}
     
 
-    private ulong _steamid = default(ulong);
+    private ulong? _steamid;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong steamid
     {
-      get { return _steamid; }
+      get { return _steamid?? default(ulong); }
       set { _steamid = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool steamidSpecified
+    {
+      get { return _steamid != null; }
+      set { if (value == (_steamid== null)) _steamid = value ? this.steamid : (ulong?)null; }
+    }
+    private bool ShouldSerializesteamid() { return steamidSpecified; }
+    private void Resetsteamid() { steamidSpecified = false; }
+    
 
-    private bool _include_canceled = default(bool);
+    private bool? _include_canceled;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"include_canceled", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool include_canceled
     {
-      get { return _include_canceled; }
+      get { return _include_canceled?? default(bool); }
       set { _include_canceled = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool include_canceledSpecified
+    {
+      get { return _include_canceled != null; }
+      set { if (value == (_include_canceled== null)) _include_canceled = value ? this.include_canceled : (bool?)null; }
+    }
+    private bool ShouldSerializeinclude_canceled() { return include_canceledSpecified; }
+    private void Resetinclude_canceled() { include_canceledSpecified = false; }
+    
 
-    private bool _include_pending = default(bool);
+    private bool? _include_pending;
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"include_pending", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool include_pending
     {
-      get { return _include_pending; }
+      get { return _include_pending?? default(bool); }
       set { _include_pending = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool include_pendingSpecified
+    {
+      get { return _include_pending != null; }
+      set { if (value == (_include_pending== null)) _include_pending = value ? this.include_pending : (bool?)null; }
+    }
+    private bool ShouldSerializeinclude_pending() { return include_pendingSpecified; }
+    private void Resetinclude_pending() { include_pendingSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -419,41 +664,77 @@ namespace SteamKit2.Unified.Internal
     public Borrower() {}
     
 
-    private ulong _steamid = default(ulong);
+    private ulong? _steamid;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong steamid
     {
-      get { return _steamid; }
+      get { return _steamid?? default(ulong); }
       set { _steamid = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool steamidSpecified
+    {
+      get { return _steamid != null; }
+      set { if (value == (_steamid== null)) _steamid = value ? this.steamid : (ulong?)null; }
+    }
+    private bool ShouldSerializesteamid() { return steamidSpecified; }
+    private void Resetsteamid() { steamidSpecified = false; }
+    
 
-    private bool _is_pending = default(bool);
+    private bool? _is_pending;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"is_pending", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool is_pending
     {
-      get { return _is_pending; }
+      get { return _is_pending?? default(bool); }
       set { _is_pending = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool is_pendingSpecified
+    {
+      get { return _is_pending != null; }
+      set { if (value == (_is_pending== null)) _is_pending = value ? this.is_pending : (bool?)null; }
+    }
+    private bool ShouldSerializeis_pending() { return is_pendingSpecified; }
+    private void Resetis_pending() { is_pendingSpecified = false; }
+    
 
-    private bool _is_canceled = default(bool);
+    private bool? _is_canceled;
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"is_canceled", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool is_canceled
     {
-      get { return _is_canceled; }
+      get { return _is_canceled?? default(bool); }
       set { _is_canceled = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool is_canceledSpecified
+    {
+      get { return _is_canceled != null; }
+      set { if (value == (_is_canceled== null)) _is_canceled = value ? this.is_canceled : (bool?)null; }
+    }
+    private bool ShouldSerializeis_canceled() { return is_canceledSpecified; }
+    private void Resetis_canceled() { is_canceledSpecified = false; }
+    
 
-    private uint _time_created = default(uint);
+    private uint? _time_created;
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"time_created", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint time_created
     {
-      get { return _time_created; }
+      get { return _time_created?? default(uint); }
       set { _time_created = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool time_createdSpecified
+    {
+      get { return _time_created != null; }
+      set { if (value == (_time_created== null)) _time_created = value ? this.time_created : (uint?)null; }
+    }
+    private bool ShouldSerializetime_created() { return time_createdSpecified; }
+    private void Resettime_created() { time_createdSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -470,14 +751,23 @@ namespace SteamKit2.Unified.Internal
     public CDeviceAuth_AddAuthorizedBorrowers_Request() {}
     
 
-    private ulong _steamid = default(ulong);
+    private ulong? _steamid;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong steamid
     {
-      get { return _steamid; }
+      get { return _steamid?? default(ulong); }
       set { _steamid = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool steamidSpecified
+    {
+      get { return _steamid != null; }
+      set { if (value == (_steamid== null)) _steamid = value ? this.steamid : (ulong?)null; }
+    }
+    private bool ShouldSerializesteamid() { return steamidSpecified; }
+    private void Resetsteamid() { steamidSpecified = false; }
+    
     private readonly global::System.Collections.Generic.List<ulong> _steamid_borrower = new global::System.Collections.Generic.List<ulong>();
     [global::ProtoBuf.ProtoMember(2, Name=@"steamid_borrower", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
     public global::System.Collections.Generic.List<ulong> steamid_borrower
@@ -496,14 +786,23 @@ namespace SteamKit2.Unified.Internal
     public CDeviceAuth_AddAuthorizedBorrowers_Response() {}
     
 
-    private int _seconds_to_wait = default(int);
+    private int? _seconds_to_wait;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"seconds_to_wait", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
     public int seconds_to_wait
     {
-      get { return _seconds_to_wait; }
+      get { return _seconds_to_wait?? default(int); }
       set { _seconds_to_wait = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool seconds_to_waitSpecified
+    {
+      get { return _seconds_to_wait != null; }
+      set { if (value == (_seconds_to_wait== null)) _seconds_to_wait = value ? this.seconds_to_wait : (int?)null; }
+    }
+    private bool ShouldSerializeseconds_to_wait() { return seconds_to_waitSpecified; }
+    private void Resetseconds_to_wait() { seconds_to_waitSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -515,14 +814,23 @@ namespace SteamKit2.Unified.Internal
     public CDeviceAuth_RemoveAuthorizedBorrowers_Request() {}
     
 
-    private ulong _steamid = default(ulong);
+    private ulong? _steamid;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong steamid
     {
-      get { return _steamid; }
+      get { return _steamid?? default(ulong); }
       set { _steamid = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool steamidSpecified
+    {
+      get { return _steamid != null; }
+      set { if (value == (_steamid== null)) _steamid = value ? this.steamid : (ulong?)null; }
+    }
+    private bool ShouldSerializesteamid() { return steamidSpecified; }
+    private void Resetsteamid() { steamidSpecified = false; }
+    
     private readonly global::System.Collections.Generic.List<ulong> _steamid_borrower = new global::System.Collections.Generic.List<ulong>();
     [global::ProtoBuf.ProtoMember(2, Name=@"steamid_borrower", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
     public global::System.Collections.Generic.List<ulong> steamid_borrower
@@ -551,32 +859,59 @@ namespace SteamKit2.Unified.Internal
     public CDeviceAuth_GetAuthorizedAsBorrower_Request() {}
     
 
-    private ulong _steamid = default(ulong);
+    private ulong? _steamid;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong steamid
     {
-      get { return _steamid; }
+      get { return _steamid?? default(ulong); }
       set { _steamid = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool steamidSpecified
+    {
+      get { return _steamid != null; }
+      set { if (value == (_steamid== null)) _steamid = value ? this.steamid : (ulong?)null; }
+    }
+    private bool ShouldSerializesteamid() { return steamidSpecified; }
+    private void Resetsteamid() { steamidSpecified = false; }
+    
 
-    private bool _include_canceled = default(bool);
+    private bool? _include_canceled;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"include_canceled", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool include_canceled
     {
-      get { return _include_canceled; }
+      get { return _include_canceled?? default(bool); }
       set { _include_canceled = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool include_canceledSpecified
+    {
+      get { return _include_canceled != null; }
+      set { if (value == (_include_canceled== null)) _include_canceled = value ? this.include_canceled : (bool?)null; }
+    }
+    private bool ShouldSerializeinclude_canceled() { return include_canceledSpecified; }
+    private void Resetinclude_canceled() { include_canceledSpecified = false; }
+    
 
-    private bool _include_pending = default(bool);
+    private bool? _include_pending;
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"include_pending", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool include_pending
     {
-      get { return _include_pending; }
+      get { return _include_pending?? default(bool); }
       set { _include_pending = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool include_pendingSpecified
+    {
+      get { return _include_pending != null; }
+      set { if (value == (_include_pending== null)) _include_pending = value ? this.include_pending : (bool?)null; }
+    }
+    private bool ShouldSerializeinclude_pending() { return include_pendingSpecified; }
+    private void Resetinclude_pending() { include_pendingSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -600,50 +935,95 @@ namespace SteamKit2.Unified.Internal
     public Lender() {}
     
 
-    private ulong _steamid = default(ulong);
+    private ulong? _steamid;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong steamid
     {
-      get { return _steamid; }
+      get { return _steamid?? default(ulong); }
       set { _steamid = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool steamidSpecified
+    {
+      get { return _steamid != null; }
+      set { if (value == (_steamid== null)) _steamid = value ? this.steamid : (ulong?)null; }
+    }
+    private bool ShouldSerializesteamid() { return steamidSpecified; }
+    private void Resetsteamid() { steamidSpecified = false; }
+    
 
-    private uint _time_created = default(uint);
+    private uint? _time_created;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"time_created", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint time_created
     {
-      get { return _time_created; }
+      get { return _time_created?? default(uint); }
       set { _time_created = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool time_createdSpecified
+    {
+      get { return _time_created != null; }
+      set { if (value == (_time_created== null)) _time_created = value ? this.time_created : (uint?)null; }
+    }
+    private bool ShouldSerializetime_created() { return time_createdSpecified; }
+    private void Resettime_created() { time_createdSpecified = false; }
+    
 
-    private bool _is_pending = default(bool);
+    private bool? _is_pending;
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"is_pending", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool is_pending
     {
-      get { return _is_pending; }
+      get { return _is_pending?? default(bool); }
       set { _is_pending = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool is_pendingSpecified
+    {
+      get { return _is_pending != null; }
+      set { if (value == (_is_pending== null)) _is_pending = value ? this.is_pending : (bool?)null; }
+    }
+    private bool ShouldSerializeis_pending() { return is_pendingSpecified; }
+    private void Resetis_pending() { is_pendingSpecified = false; }
+    
 
-    private bool _is_canceled = default(bool);
+    private bool? _is_canceled;
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"is_canceled", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool is_canceled
     {
-      get { return _is_canceled; }
+      get { return _is_canceled?? default(bool); }
       set { _is_canceled = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool is_canceledSpecified
+    {
+      get { return _is_canceled != null; }
+      set { if (value == (_is_canceled== null)) _is_canceled = value ? this.is_canceled : (bool?)null; }
+    }
+    private bool ShouldSerializeis_canceled() { return is_canceledSpecified; }
+    private void Resetis_canceled() { is_canceledSpecified = false; }
+    
 
-    private bool _is_used = default(bool);
+    private bool? _is_used;
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"is_used", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool is_used
     {
-      get { return _is_used; }
+      get { return _is_used?? default(bool); }
       set { _is_used = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool is_usedSpecified
+    {
+      get { return _is_used != null; }
+      set { if (value == (_is_used== null)) _is_used = value ? this.is_used : (bool?)null; }
+    }
+    private bool ShouldSerializeis_used() { return is_usedSpecified; }
+    private void Resetis_used() { is_usedSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -660,14 +1040,23 @@ namespace SteamKit2.Unified.Internal
     public CDeviceAuth_GetExcludedGamesInLibrary_Request() {}
     
 
-    private ulong _steamid = default(ulong);
+    private ulong? _steamid;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong steamid
     {
-      get { return _steamid; }
+      get { return _steamid?? default(ulong); }
       set { _steamid = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool steamidSpecified
+    {
+      get { return _steamid != null; }
+      set { if (value == (_steamid== null)) _steamid = value ? this.steamid : (ulong?)null; }
+    }
+    private bool ShouldSerializesteamid() { return steamidSpecified; }
+    private void Resetsteamid() { steamidSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -691,41 +1080,77 @@ namespace SteamKit2.Unified.Internal
     public ExcludedGame() {}
     
 
-    private uint _appid = default(uint);
+    private uint? _appid;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"appid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint appid
     {
-      get { return _appid; }
+      get { return _appid?? default(uint); }
       set { _appid = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool appidSpecified
+    {
+      get { return _appid != null; }
+      set { if (value == (_appid== null)) _appid = value ? this.appid : (uint?)null; }
+    }
+    private bool ShouldSerializeappid() { return appidSpecified; }
+    private void Resetappid() { appidSpecified = false; }
+    
 
-    private string _game_name = "";
+    private string _game_name;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"game_name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
     public string game_name
     {
-      get { return _game_name; }
+      get { return _game_name?? ""; }
       set { _game_name = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool game_nameSpecified
+    {
+      get { return _game_name != null; }
+      set { if (value == (_game_name== null)) _game_name = value ? this.game_name : (string)null; }
+    }
+    private bool ShouldSerializegame_name() { return game_nameSpecified; }
+    private void Resetgame_name() { game_nameSpecified = false; }
+    
 
-    private bool _vac_banned = default(bool);
+    private bool? _vac_banned;
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"vac_banned", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool vac_banned
     {
-      get { return _vac_banned; }
+      get { return _vac_banned?? default(bool); }
       set { _vac_banned = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool vac_bannedSpecified
+    {
+      get { return _vac_banned != null; }
+      set { if (value == (_vac_banned== null)) _vac_banned = value ? this.vac_banned : (bool?)null; }
+    }
+    private bool ShouldSerializevac_banned() { return vac_bannedSpecified; }
+    private void Resetvac_banned() { vac_bannedSpecified = false; }
+    
 
-    private bool _package_excluded = default(bool);
+    private bool? _package_excluded;
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"package_excluded", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool package_excluded
     {
-      get { return _package_excluded; }
+      get { return _package_excluded?? default(bool); }
       set { _package_excluded = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool package_excludedSpecified
+    {
+      get { return _package_excluded != null; }
+      set { if (value == (_package_excluded== null)) _package_excluded = value ? this.package_excluded : (bool?)null; }
+    }
+    private bool ShouldSerializepackage_excluded() { return package_excludedSpecified; }
+    private void Resetpackage_excluded() { package_excludedSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

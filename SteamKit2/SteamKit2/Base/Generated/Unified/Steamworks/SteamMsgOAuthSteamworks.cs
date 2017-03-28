@@ -8,6 +8,8 @@
 //------------------------------------------------------------------------------
 #pragma warning disable 1591
 
+// Option: missing-value detection (*Specified/ShouldSerialize*/Reset*) enabled
+    
 // Option: light framework (CF/Silverlight) enabled
     
 // Generated from: steammessages_oauth.steamworkssdk.proto
@@ -20,14 +22,23 @@ namespace SteamKit2.Unified.Internal.Steamworks
     public COAuthToken_ImplicitGrantNoPrompt_Request() {}
     
 
-    private string _clientid = "";
+    private string _clientid;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"clientid", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
     public string clientid
     {
-      get { return _clientid; }
+      get { return _clientid?? ""; }
       set { _clientid = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool clientidSpecified
+    {
+      get { return _clientid != null; }
+      set { if (value == (_clientid== null)) _clientid = value ? this.clientid : (string)null; }
+    }
+    private bool ShouldSerializeclientid() { return clientidSpecified; }
+    private void Resetclientid() { clientidSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -39,23 +50,41 @@ namespace SteamKit2.Unified.Internal.Steamworks
     public COAuthToken_ImplicitGrantNoPrompt_Response() {}
     
 
-    private string _access_token = "";
+    private string _access_token;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"access_token", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
     public string access_token
     {
-      get { return _access_token; }
+      get { return _access_token?? ""; }
       set { _access_token = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool access_tokenSpecified
+    {
+      get { return _access_token != null; }
+      set { if (value == (_access_token== null)) _access_token = value ? this.access_token : (string)null; }
+    }
+    private bool ShouldSerializeaccess_token() { return access_tokenSpecified; }
+    private void Resetaccess_token() { access_tokenSpecified = false; }
+    
 
-    private string _redirect_uri = "";
+    private string _redirect_uri;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"redirect_uri", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
     public string redirect_uri
     {
-      get { return _redirect_uri; }
+      get { return _redirect_uri?? ""; }
       set { _redirect_uri = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool redirect_uriSpecified
+    {
+      get { return _redirect_uri != null; }
+      set { if (value == (_redirect_uri== null)) _redirect_uri = value ? this.redirect_uri : (string)null; }
+    }
+    private bool ShouldSerializeredirect_uri() { return redirect_uriSpecified; }
+    private void Resetredirect_uri() { redirect_uriSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

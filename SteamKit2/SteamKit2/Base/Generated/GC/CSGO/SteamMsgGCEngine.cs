@@ -8,6 +8,8 @@
 //------------------------------------------------------------------------------
 #pragma warning disable 1591
 
+// Option: missing-value detection (*Specified/ShouldSerialize*/Reset*) enabled
+    
 // Option: light framework (CF/Silverlight) enabled
     
 // Generated from: engine_gcmessages.proto
@@ -20,86 +22,167 @@ namespace SteamKit2.GC.CSGO.Internal
     public CEngineGotvSyncPacket() {}
     
 
-    private ulong _match_id = default(ulong);
+    private ulong? _match_id;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"match_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong match_id
     {
-      get { return _match_id; }
+      get { return _match_id?? default(ulong); }
       set { _match_id = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool match_idSpecified
+    {
+      get { return _match_id != null; }
+      set { if (value == (_match_id== null)) _match_id = value ? this.match_id : (ulong?)null; }
+    }
+    private bool ShouldSerializematch_id() { return match_idSpecified; }
+    private void Resetmatch_id() { match_idSpecified = false; }
+    
 
-    private uint _instance_id = default(uint);
+    private uint? _instance_id;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"instance_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint instance_id
     {
-      get { return _instance_id; }
+      get { return _instance_id?? default(uint); }
       set { _instance_id = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool instance_idSpecified
+    {
+      get { return _instance_id != null; }
+      set { if (value == (_instance_id== null)) _instance_id = value ? this.instance_id : (uint?)null; }
+    }
+    private bool ShouldSerializeinstance_id() { return instance_idSpecified; }
+    private void Resetinstance_id() { instance_idSpecified = false; }
+    
 
-    private uint _signupfragment = default(uint);
+    private uint? _signupfragment;
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"signupfragment", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint signupfragment
     {
-      get { return _signupfragment; }
+      get { return _signupfragment?? default(uint); }
       set { _signupfragment = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool signupfragmentSpecified
+    {
+      get { return _signupfragment != null; }
+      set { if (value == (_signupfragment== null)) _signupfragment = value ? this.signupfragment : (uint?)null; }
+    }
+    private bool ShouldSerializesignupfragment() { return signupfragmentSpecified; }
+    private void Resetsignupfragment() { signupfragmentSpecified = false; }
+    
 
-    private uint _currentfragment = default(uint);
+    private uint? _currentfragment;
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"currentfragment", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint currentfragment
     {
-      get { return _currentfragment; }
+      get { return _currentfragment?? default(uint); }
       set { _currentfragment = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool currentfragmentSpecified
+    {
+      get { return _currentfragment != null; }
+      set { if (value == (_currentfragment== null)) _currentfragment = value ? this.currentfragment : (uint?)null; }
+    }
+    private bool ShouldSerializecurrentfragment() { return currentfragmentSpecified; }
+    private void Resetcurrentfragment() { currentfragmentSpecified = false; }
+    
 
-    private float _tickrate = default(float);
+    private float? _tickrate;
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"tickrate", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(float))]
     public float tickrate
     {
-      get { return _tickrate; }
+      get { return _tickrate?? default(float); }
       set { _tickrate = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool tickrateSpecified
+    {
+      get { return _tickrate != null; }
+      set { if (value == (_tickrate== null)) _tickrate = value ? this.tickrate : (float?)null; }
+    }
+    private bool ShouldSerializetickrate() { return tickrateSpecified; }
+    private void Resettickrate() { tickrateSpecified = false; }
+    
 
-    private uint _tick = default(uint);
+    private uint? _tick;
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"tick", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint tick
     {
-      get { return _tick; }
+      get { return _tick?? default(uint); }
       set { _tick = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool tickSpecified
+    {
+      get { return _tick != null; }
+      set { if (value == (_tick== null)) _tick = value ? this.tick : (uint?)null; }
+    }
+    private bool ShouldSerializetick() { return tickSpecified; }
+    private void Resettick() { tickSpecified = false; }
+    
 
-    private float _rtdelay = default(float);
+    private float? _rtdelay;
     [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"rtdelay", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(float))]
     public float rtdelay
     {
-      get { return _rtdelay; }
+      get { return _rtdelay?? default(float); }
       set { _rtdelay = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool rtdelaySpecified
+    {
+      get { return _rtdelay != null; }
+      set { if (value == (_rtdelay== null)) _rtdelay = value ? this.rtdelay : (float?)null; }
+    }
+    private bool ShouldSerializertdelay() { return rtdelaySpecified; }
+    private void Resetrtdelay() { rtdelaySpecified = false; }
+    
 
-    private float _rcvage = default(float);
+    private float? _rcvage;
     [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"rcvage", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(float))]
     public float rcvage
     {
-      get { return _rcvage; }
+      get { return _rcvage?? default(float); }
       set { _rcvage = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool rcvageSpecified
+    {
+      get { return _rcvage != null; }
+      set { if (value == (_rcvage== null)) _rcvage = value ? this.rcvage : (float?)null; }
+    }
+    private bool ShouldSerializercvage() { return rcvageSpecified; }
+    private void Resetrcvage() { rcvageSpecified = false; }
+    
 
-    private float _keyframe_interval = default(float);
+    private float? _keyframe_interval;
     [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"keyframe_interval", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(float))]
     public float keyframe_interval
     {
-      get { return _keyframe_interval; }
+      get { return _keyframe_interval?? default(float); }
       set { _keyframe_interval = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool keyframe_intervalSpecified
+    {
+      get { return _keyframe_interval != null; }
+      set { if (value == (_keyframe_interval== null)) _keyframe_interval = value ? this.keyframe_interval : (float?)null; }
+    }
+    private bool ShouldSerializekeyframe_interval() { return keyframe_intervalSpecified; }
+    private void Resetkeyframe_interval() { keyframe_intervalSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

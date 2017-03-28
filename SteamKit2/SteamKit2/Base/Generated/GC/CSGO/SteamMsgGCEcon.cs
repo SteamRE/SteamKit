@@ -8,6 +8,8 @@
 //------------------------------------------------------------------------------
 #pragma warning disable 1591
 
+// Option: missing-value detection (*Specified/ShouldSerialize*/Reset*) enabled
+    
 // Option: light framework (CF/Silverlight) enabled
     
 // Generated from: econ_gcmessages.proto
@@ -20,41 +22,77 @@ namespace SteamKit2.GC.CSGO.Internal
     public CMsgGCGiftedItems() {}
     
 
-    private uint _accountid = default(uint);
+    private uint? _accountid;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"accountid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint accountid
     {
-      get { return _accountid; }
+      get { return _accountid?? default(uint); }
       set { _accountid = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool accountidSpecified
+    {
+      get { return _accountid != null; }
+      set { if (value == (_accountid== null)) _accountid = value ? this.accountid : (uint?)null; }
+    }
+    private bool ShouldSerializeaccountid() { return accountidSpecified; }
+    private void Resetaccountid() { accountidSpecified = false; }
+    
 
-    private uint _giftdefindex = default(uint);
+    private uint? _giftdefindex;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"giftdefindex", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint giftdefindex
     {
-      get { return _giftdefindex; }
+      get { return _giftdefindex?? default(uint); }
       set { _giftdefindex = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool giftdefindexSpecified
+    {
+      get { return _giftdefindex != null; }
+      set { if (value == (_giftdefindex== null)) _giftdefindex = value ? this.giftdefindex : (uint?)null; }
+    }
+    private bool ShouldSerializegiftdefindex() { return giftdefindexSpecified; }
+    private void Resetgiftdefindex() { giftdefindexSpecified = false; }
+    
 
-    private uint _max_gifts_possible = default(uint);
+    private uint? _max_gifts_possible;
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"max_gifts_possible", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint max_gifts_possible
     {
-      get { return _max_gifts_possible; }
+      get { return _max_gifts_possible?? default(uint); }
       set { _max_gifts_possible = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool max_gifts_possibleSpecified
+    {
+      get { return _max_gifts_possible != null; }
+      set { if (value == (_max_gifts_possible== null)) _max_gifts_possible = value ? this.max_gifts_possible : (uint?)null; }
+    }
+    private bool ShouldSerializemax_gifts_possible() { return max_gifts_possibleSpecified; }
+    private void Resetmax_gifts_possible() { max_gifts_possibleSpecified = false; }
+    
 
-    private uint _num_eligible_recipients = default(uint);
+    private uint? _num_eligible_recipients;
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"num_eligible_recipients", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint num_eligible_recipients
     {
-      get { return _num_eligible_recipients; }
+      get { return _num_eligible_recipients?? default(uint); }
       set { _num_eligible_recipients = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool num_eligible_recipientsSpecified
+    {
+      get { return _num_eligible_recipients != null; }
+      set { if (value == (_num_eligible_recipients== null)) _num_eligible_recipients = value ? this.num_eligible_recipients : (uint?)null; }
+    }
+    private bool ShouldSerializenum_eligible_recipients() { return num_eligible_recipientsSpecified; }
+    private void Resetnum_eligible_recipients() { num_eligible_recipientsSpecified = false; }
+    
     private readonly global::System.Collections.Generic.List<uint> _recipients_accountids = new global::System.Collections.Generic.List<uint>();
     [global::ProtoBuf.ProtoMember(5, Name=@"recipients_accountids", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public global::System.Collections.Generic.List<uint> recipients_accountids
@@ -73,23 +111,41 @@ namespace SteamKit2.GC.CSGO.Internal
     public CMsgApplyAutograph() {}
     
 
-    private ulong _autograph_item_id = default(ulong);
+    private ulong? _autograph_item_id;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"autograph_item_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong autograph_item_id
     {
-      get { return _autograph_item_id; }
+      get { return _autograph_item_id?? default(ulong); }
       set { _autograph_item_id = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool autograph_item_idSpecified
+    {
+      get { return _autograph_item_id != null; }
+      set { if (value == (_autograph_item_id== null)) _autograph_item_id = value ? this.autograph_item_id : (ulong?)null; }
+    }
+    private bool ShouldSerializeautograph_item_id() { return autograph_item_idSpecified; }
+    private void Resetautograph_item_id() { autograph_item_idSpecified = false; }
+    
 
-    private ulong _item_item_id = default(ulong);
+    private ulong? _item_item_id;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"item_item_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong item_item_id
     {
-      get { return _item_item_id; }
+      get { return _item_item_id?? default(ulong); }
       set { _item_item_id = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool item_item_idSpecified
+    {
+      get { return _item_item_id != null; }
+      set { if (value == (_item_item_id== null)) _item_item_id = value ? this.item_item_id : (ulong?)null; }
+    }
+    private bool ShouldSerializeitem_item_id() { return item_item_idSpecified; }
+    private void Resetitem_item_id() { item_item_idSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -101,14 +157,23 @@ namespace SteamKit2.GC.CSGO.Internal
     public CMsgGCUserTrackTimePlayedConsecutively() {}
     
 
-    private uint _state = default(uint);
+    private uint? _state;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"state", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint state
     {
-      get { return _state; }
+      get { return _state?? default(uint); }
       set { _state = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool stateSpecified
+    {
+      get { return _state != null; }
+      set { if (value == (_state== null)) _state = value ? this.state : (uint?)null; }
+    }
+    private bool ShouldSerializestate() { return stateSpecified; }
+    private void Resetstate() { stateSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

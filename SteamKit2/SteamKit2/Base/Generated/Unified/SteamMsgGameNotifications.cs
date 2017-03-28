@@ -8,6 +8,8 @@
 //------------------------------------------------------------------------------
 #pragma warning disable 1591
 
+// Option: missing-value detection (*Specified/ShouldSerialize*/Reset*) enabled
+    
 // Option: light framework (CF/Silverlight) enabled
     
 // Generated from: steammessages_gamenotifications.steamclient.proto
@@ -20,23 +22,41 @@ namespace SteamKit2.Unified.Internal
     public CGameNotifications_Variable() {}
     
 
-    private string _key = "";
+    private string _key;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"key", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
     public string key
     {
-      get { return _key; }
+      get { return _key?? ""; }
       set { _key = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool keySpecified
+    {
+      get { return _key != null; }
+      set { if (value == (_key== null)) _key = value ? this.key : (string)null; }
+    }
+    private bool ShouldSerializekey() { return keySpecified; }
+    private void Resetkey() { keySpecified = false; }
+    
 
-    private string _value = "";
+    private string _value;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"value", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
     public string value
     {
-      get { return _value; }
+      get { return _value?? ""; }
       set { _value = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool valueSpecified
+    {
+      get { return _value != null; }
+      set { if (value == (_value== null)) _value = value ? this.value : (string)null; }
+    }
+    private bool ShouldSerializevalue() { return valueSpecified; }
+    private void Resetvalue() { valueSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -48,14 +68,23 @@ namespace SteamKit2.Unified.Internal
     public CGameNotifications_LocalizedText() {}
     
 
-    private string _token = "";
+    private string _token;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"token", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
     public string token
     {
-      get { return _token; }
+      get { return _token?? ""; }
       set { _token = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool tokenSpecified
+    {
+      get { return _token != null; }
+      set { if (value == (_token== null)) _token = value ? this.token : (string)null; }
+    }
+    private bool ShouldSerializetoken() { return tokenSpecified; }
+    private void Resettoken() { tokenSpecified = false; }
+    
     private readonly global::System.Collections.Generic.List<CGameNotifications_Variable> _variables = new global::System.Collections.Generic.List<CGameNotifications_Variable>();
     [global::ProtoBuf.ProtoMember(2, Name=@"variables", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public global::System.Collections.Generic.List<CGameNotifications_Variable> variables
@@ -64,14 +93,23 @@ namespace SteamKit2.Unified.Internal
     }
   
 
-    private string _rendered_text = "";
+    private string _rendered_text;
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"rendered_text", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
     public string rendered_text
     {
-      get { return _rendered_text; }
+      get { return _rendered_text?? ""; }
       set { _rendered_text = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool rendered_textSpecified
+    {
+      get { return _rendered_text != null; }
+      set { if (value == (_rendered_text== null)) _rendered_text = value ? this.rendered_text : (string)null; }
+    }
+    private bool ShouldSerializerendered_text() { return rendered_textSpecified; }
+    private void Resetrendered_text() { rendered_textSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -83,23 +121,41 @@ namespace SteamKit2.Unified.Internal
     public CGameNotifications_UserStatus() {}
     
 
-    private ulong _steamid = default(ulong);
+    private ulong? _steamid;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong steamid
     {
-      get { return _steamid; }
+      get { return _steamid?? default(ulong); }
       set { _steamid = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool steamidSpecified
+    {
+      get { return _steamid != null; }
+      set { if (value == (_steamid== null)) _steamid = value ? this.steamid : (ulong?)null; }
+    }
+    private bool ShouldSerializesteamid() { return steamidSpecified; }
+    private void Resetsteamid() { steamidSpecified = false; }
+    
 
-    private string _state = "";
+    private string _state;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"state", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
     public string state
     {
-      get { return _state; }
+      get { return _state?? ""; }
       set { _state = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool stateSpecified
+    {
+      get { return _state != null; }
+      set { if (value == (_state== null)) _state = value ? this.state : (string)null; }
+    }
+    private bool ShouldSerializestate() { return stateSpecified; }
+    private void Resetstate() { stateSpecified = false; }
+    
 
     private CGameNotifications_LocalizedText _title = null;
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"title", DataFormat = global::ProtoBuf.DataFormat.Default)]
@@ -129,23 +185,41 @@ namespace SteamKit2.Unified.Internal
     public CGameNotifications_CreateSession_Request() {}
     
 
-    private uint _appid = default(uint);
+    private uint? _appid;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"appid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint appid
     {
-      get { return _appid; }
+      get { return _appid?? default(uint); }
       set { _appid = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool appidSpecified
+    {
+      get { return _appid != null; }
+      set { if (value == (_appid== null)) _appid = value ? this.appid : (uint?)null; }
+    }
+    private bool ShouldSerializeappid() { return appidSpecified; }
+    private void Resetappid() { appidSpecified = false; }
+    
 
-    private ulong _context = default(ulong);
+    private ulong? _context;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"context", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong context
     {
-      get { return _context; }
+      get { return _context?? default(ulong); }
       set { _context = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool contextSpecified
+    {
+      get { return _context != null; }
+      set { if (value == (_context== null)) _context = value ? this.context : (ulong?)null; }
+    }
+    private bool ShouldSerializecontext() { return contextSpecified; }
+    private void Resetcontext() { contextSpecified = false; }
+    
 
     private CGameNotifications_LocalizedText _title = null;
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"title", DataFormat = global::ProtoBuf.DataFormat.Default)]
@@ -163,14 +237,23 @@ namespace SteamKit2.Unified.Internal
     }
   
 
-    private ulong _steamid = default(ulong);
+    private ulong? _steamid;
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong steamid
     {
-      get { return _steamid; }
+      get { return _steamid?? default(ulong); }
       set { _steamid = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool steamidSpecified
+    {
+      get { return _steamid != null; }
+      set { if (value == (_steamid== null)) _steamid = value ? this.steamid : (ulong?)null; }
+    }
+    private bool ShouldSerializesteamid() { return steamidSpecified; }
+    private void Resetsteamid() { steamidSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -182,14 +265,23 @@ namespace SteamKit2.Unified.Internal
     public CGameNotifications_CreateSession_Response() {}
     
 
-    private ulong _sessionid = default(ulong);
+    private ulong? _sessionid;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"sessionid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong sessionid
     {
-      get { return _sessionid; }
+      get { return _sessionid?? default(ulong); }
       set { _sessionid = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool sessionidSpecified
+    {
+      get { return _sessionid != null; }
+      set { if (value == (_sessionid== null)) _sessionid = value ? this.sessionid : (ulong?)null; }
+    }
+    private bool ShouldSerializesessionid() { return sessionidSpecified; }
+    private void Resetsessionid() { sessionidSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -201,32 +293,59 @@ namespace SteamKit2.Unified.Internal
     public CGameNotifications_DeleteSession_Request() {}
     
 
-    private ulong _sessionid = default(ulong);
+    private ulong? _sessionid;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"sessionid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong sessionid
     {
-      get { return _sessionid; }
+      get { return _sessionid?? default(ulong); }
       set { _sessionid = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool sessionidSpecified
+    {
+      get { return _sessionid != null; }
+      set { if (value == (_sessionid== null)) _sessionid = value ? this.sessionid : (ulong?)null; }
+    }
+    private bool ShouldSerializesessionid() { return sessionidSpecified; }
+    private void Resetsessionid() { sessionidSpecified = false; }
+    
 
-    private uint _appid = default(uint);
+    private uint? _appid;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"appid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint appid
     {
-      get { return _appid; }
+      get { return _appid?? default(uint); }
       set { _appid = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool appidSpecified
+    {
+      get { return _appid != null; }
+      set { if (value == (_appid== null)) _appid = value ? this.appid : (uint?)null; }
+    }
+    private bool ShouldSerializeappid() { return appidSpecified; }
+    private void Resetappid() { appidSpecified = false; }
+    
 
-    private ulong _steamid = default(ulong);
+    private ulong? _steamid;
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong steamid
     {
-      get { return _steamid; }
+      get { return _steamid?? default(ulong); }
       set { _steamid = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool steamidSpecified
+    {
+      get { return _steamid != null; }
+      set { if (value == (_steamid== null)) _steamid = value ? this.steamid : (ulong?)null; }
+    }
+    private bool ShouldSerializesteamid() { return steamidSpecified; }
+    private void Resetsteamid() { steamidSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -248,23 +367,41 @@ namespace SteamKit2.Unified.Internal
     public CGameNotifications_UpdateSession_Request() {}
     
 
-    private ulong _sessionid = default(ulong);
+    private ulong? _sessionid;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"sessionid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong sessionid
     {
-      get { return _sessionid; }
+      get { return _sessionid?? default(ulong); }
       set { _sessionid = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool sessionidSpecified
+    {
+      get { return _sessionid != null; }
+      set { if (value == (_sessionid== null)) _sessionid = value ? this.sessionid : (ulong?)null; }
+    }
+    private bool ShouldSerializesessionid() { return sessionidSpecified; }
+    private void Resetsessionid() { sessionidSpecified = false; }
+    
 
-    private uint _appid = default(uint);
+    private uint? _appid;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"appid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint appid
     {
-      get { return _appid; }
+      get { return _appid?? default(uint); }
       set { _appid = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool appidSpecified
+    {
+      get { return _appid != null; }
+      set { if (value == (_appid== null)) _appid = value ? this.appid : (uint?)null; }
+    }
+    private bool ShouldSerializeappid() { return appidSpecified; }
+    private void Resetappid() { appidSpecified = false; }
+    
 
     private CGameNotifications_LocalizedText _title = null;
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"title", DataFormat = global::ProtoBuf.DataFormat.Default)]
@@ -282,14 +419,23 @@ namespace SteamKit2.Unified.Internal
     }
   
 
-    private ulong _steamid = default(ulong);
+    private ulong? _steamid;
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong steamid
     {
-      get { return _steamid; }
+      get { return _steamid?? default(ulong); }
       set { _steamid = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool steamidSpecified
+    {
+      get { return _steamid != null; }
+      set { if (value == (_steamid== null)) _steamid = value ? this.steamid : (ulong?)null; }
+    }
+    private bool ShouldSerializesteamid() { return steamidSpecified; }
+    private void Resetsteamid() { steamidSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -311,41 +457,77 @@ namespace SteamKit2.Unified.Internal
     public CGameNotifications_EnumerateSessions_Request() {}
     
 
-    private uint _appid = default(uint);
+    private uint? _appid;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"appid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint appid
     {
-      get { return _appid; }
+      get { return _appid?? default(uint); }
       set { _appid = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool appidSpecified
+    {
+      get { return _appid != null; }
+      set { if (value == (_appid== null)) _appid = value ? this.appid : (uint?)null; }
+    }
+    private bool ShouldSerializeappid() { return appidSpecified; }
+    private void Resetappid() { appidSpecified = false; }
+    
 
-    private bool _include_all_user_messages = default(bool);
+    private bool? _include_all_user_messages;
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"include_all_user_messages", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool include_all_user_messages
     {
-      get { return _include_all_user_messages; }
+      get { return _include_all_user_messages?? default(bool); }
       set { _include_all_user_messages = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool include_all_user_messagesSpecified
+    {
+      get { return _include_all_user_messages != null; }
+      set { if (value == (_include_all_user_messages== null)) _include_all_user_messages = value ? this.include_all_user_messages : (bool?)null; }
+    }
+    private bool ShouldSerializeinclude_all_user_messages() { return include_all_user_messagesSpecified; }
+    private void Resetinclude_all_user_messages() { include_all_user_messagesSpecified = false; }
+    
 
-    private bool _include_auth_user_message = default(bool);
+    private bool? _include_auth_user_message;
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"include_auth_user_message", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool include_auth_user_message
     {
-      get { return _include_auth_user_message; }
+      get { return _include_auth_user_message?? default(bool); }
       set { _include_auth_user_message = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool include_auth_user_messageSpecified
+    {
+      get { return _include_auth_user_message != null; }
+      set { if (value == (_include_auth_user_message== null)) _include_auth_user_message = value ? this.include_auth_user_message : (bool?)null; }
+    }
+    private bool ShouldSerializeinclude_auth_user_message() { return include_auth_user_messageSpecified; }
+    private void Resetinclude_auth_user_message() { include_auth_user_messageSpecified = false; }
+    
 
-    private string _language = "";
+    private string _language;
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"language", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
     public string language
     {
-      get { return _language; }
+      get { return _language?? ""; }
       set { _language = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool languageSpecified
+    {
+      get { return _language != null; }
+      set { if (value == (_language== null)) _language = value ? this.language : (string)null; }
+    }
+    private bool ShouldSerializelanguage() { return languageSpecified; }
+    private void Resetlanguage() { languageSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -357,32 +539,59 @@ namespace SteamKit2.Unified.Internal
     public CGameNotifications_Session() {}
     
 
-    private ulong _sessionid = default(ulong);
+    private ulong? _sessionid;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"sessionid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong sessionid
     {
-      get { return _sessionid; }
+      get { return _sessionid?? default(ulong); }
       set { _sessionid = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool sessionidSpecified
+    {
+      get { return _sessionid != null; }
+      set { if (value == (_sessionid== null)) _sessionid = value ? this.sessionid : (ulong?)null; }
+    }
+    private bool ShouldSerializesessionid() { return sessionidSpecified; }
+    private void Resetsessionid() { sessionidSpecified = false; }
+    
 
-    private ulong _appid = default(ulong);
+    private ulong? _appid;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"appid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong appid
     {
-      get { return _appid; }
+      get { return _appid?? default(ulong); }
       set { _appid = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool appidSpecified
+    {
+      get { return _appid != null; }
+      set { if (value == (_appid== null)) _appid = value ? this.appid : (ulong?)null; }
+    }
+    private bool ShouldSerializeappid() { return appidSpecified; }
+    private void Resetappid() { appidSpecified = false; }
+    
 
-    private ulong _context = default(ulong);
+    private ulong? _context;
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"context", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong context
     {
-      get { return _context; }
+      get { return _context?? default(ulong); }
       set { _context = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool contextSpecified
+    {
+      get { return _context != null; }
+      set { if (value == (_context== null)) _context = value ? this.context : (ulong?)null; }
+    }
+    private bool ShouldSerializecontext() { return contextSpecified; }
+    private void Resetcontext() { contextSpecified = false; }
+    
 
     private CGameNotifications_LocalizedText _title = null;
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"title", DataFormat = global::ProtoBuf.DataFormat.Default)]
@@ -393,23 +602,41 @@ namespace SteamKit2.Unified.Internal
       set { _title = value; }
     }
 
-    private uint _time_created = default(uint);
+    private uint? _time_created;
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"time_created", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint time_created
     {
-      get { return _time_created; }
+      get { return _time_created?? default(uint); }
       set { _time_created = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool time_createdSpecified
+    {
+      get { return _time_created != null; }
+      set { if (value == (_time_created== null)) _time_created = value ? this.time_created : (uint?)null; }
+    }
+    private bool ShouldSerializetime_created() { return time_createdSpecified; }
+    private void Resettime_created() { time_createdSpecified = false; }
+    
 
-    private uint _time_updated = default(uint);
+    private uint? _time_updated;
     [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"time_updated", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint time_updated
     {
-      get { return _time_updated; }
+      get { return _time_updated?? default(uint); }
       set { _time_updated = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool time_updatedSpecified
+    {
+      get { return _time_updated != null; }
+      set { if (value == (_time_updated== null)) _time_updated = value ? this.time_updated : (uint?)null; }
+    }
+    private bool ShouldSerializetime_updated() { return time_updatedSpecified; }
+    private void Resettime_updated() { time_updatedSpecified = false; }
+    
     private readonly global::System.Collections.Generic.List<CGameNotifications_UserStatus> _user_status = new global::System.Collections.Generic.List<CGameNotifications_UserStatus>();
     [global::ProtoBuf.ProtoMember(7, Name=@"user_status", DataFormat = global::ProtoBuf.DataFormat.Default)]
     public global::System.Collections.Generic.List<CGameNotifications_UserStatus> user_status
@@ -452,46 +679,82 @@ namespace SteamKit2.Unified.Internal
     }
   
 
-    private uint _appid = default(uint);
+    private uint? _appid;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"appid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint appid
     {
-      get { return _appid; }
+      get { return _appid?? default(uint); }
       set { _appid = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool appidSpecified
+    {
+      get { return _appid != null; }
+      set { if (value == (_appid== null)) _appid = value ? this.appid : (uint?)null; }
+    }
+    private bool ShouldSerializeappid() { return appidSpecified; }
+    private void Resetappid() { appidSpecified = false; }
+    
 
-    private string _language = "";
+    private string _language;
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"language", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue("")]
     public string language
     {
-      get { return _language; }
+      get { return _language?? ""; }
       set { _language = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool languageSpecified
+    {
+      get { return _language != null; }
+      set { if (value == (_language== null)) _language = value ? this.language : (string)null; }
+    }
+    private bool ShouldSerializelanguage() { return languageSpecified; }
+    private void Resetlanguage() { languageSpecified = false; }
+    
   [global::ProtoBuf.ProtoContract(Name=@"RequestedSession")]
   public partial class RequestedSession : global::ProtoBuf.IExtensible
   {
     public RequestedSession() {}
     
 
-    private ulong _sessionid = default(ulong);
+    private ulong? _sessionid;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"sessionid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong sessionid
     {
-      get { return _sessionid; }
+      get { return _sessionid?? default(ulong); }
       set { _sessionid = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool sessionidSpecified
+    {
+      get { return _sessionid != null; }
+      set { if (value == (_sessionid== null)) _sessionid = value ? this.sessionid : (ulong?)null; }
+    }
+    private bool ShouldSerializesessionid() { return sessionidSpecified; }
+    private void Resetsessionid() { sessionidSpecified = false; }
+    
 
-    private bool _include_auth_user_message = default(bool);
+    private bool? _include_auth_user_message;
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"include_auth_user_message", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool include_auth_user_message
     {
-      get { return _include_auth_user_message; }
+      get { return _include_auth_user_message?? default(bool); }
       set { _include_auth_user_message = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool include_auth_user_messageSpecified
+    {
+      get { return _include_auth_user_message != null; }
+      set { if (value == (_include_auth_user_message== null)) _include_auth_user_message = value ? this.include_auth_user_message : (bool?)null; }
+    }
+    private bool ShouldSerializeinclude_auth_user_message() { return include_auth_user_messageSpecified; }
+    private void Resetinclude_auth_user_message() { include_auth_user_messageSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -525,23 +788,41 @@ namespace SteamKit2.Unified.Internal
     public GameNotificationSettings() {}
     
 
-    private uint _appid = default(uint);
+    private uint? _appid;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"appid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint appid
     {
-      get { return _appid; }
+      get { return _appid?? default(uint); }
       set { _appid = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool appidSpecified
+    {
+      get { return _appid != null; }
+      set { if (value == (_appid== null)) _appid = value ? this.appid : (uint?)null; }
+    }
+    private bool ShouldSerializeappid() { return appidSpecified; }
+    private void Resetappid() { appidSpecified = false; }
+    
 
-    private bool _allow_notifications = default(bool);
+    private bool? _allow_notifications;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"allow_notifications", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool allow_notifications
     {
-      get { return _allow_notifications; }
+      get { return _allow_notifications?? default(bool); }
       set { _allow_notifications = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool allow_notificationsSpecified
+    {
+      get { return _allow_notifications != null; }
+      set { if (value == (_allow_notifications== null)) _allow_notifications = value ? this.allow_notifications : (bool?)null; }
+    }
+    private bool ShouldSerializeallow_notifications() { return allow_notificationsSpecified; }
+    private void Resetallow_notifications() { allow_notificationsSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -580,23 +861,41 @@ namespace SteamKit2.Unified.Internal
     public CGameNotifications_OnNotificationsRequested_Notification() {}
     
 
-    private ulong _steamid = default(ulong);
+    private ulong? _steamid;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong steamid
     {
-      get { return _steamid; }
+      get { return _steamid?? default(ulong); }
       set { _steamid = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool steamidSpecified
+    {
+      get { return _steamid != null; }
+      set { if (value == (_steamid== null)) _steamid = value ? this.steamid : (ulong?)null; }
+    }
+    private bool ShouldSerializesteamid() { return steamidSpecified; }
+    private void Resetsteamid() { steamidSpecified = false; }
+    
 
-    private uint _appid = default(uint);
+    private uint? _appid;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"appid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint appid
     {
-      get { return _appid; }
+      get { return _appid?? default(uint); }
       set { _appid = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool appidSpecified
+    {
+      get { return _appid != null; }
+      set { if (value == (_appid== null)) _appid = value ? this.appid : (uint?)null; }
+    }
+    private bool ShouldSerializeappid() { return appidSpecified; }
+    private void Resetappid() { appidSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -608,32 +907,59 @@ namespace SteamKit2.Unified.Internal
     public CGameNotifications_OnUserStatusChanged_Notification() {}
     
 
-    private ulong _steamid = default(ulong);
+    private ulong? _steamid;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong steamid
     {
-      get { return _steamid; }
+      get { return _steamid?? default(ulong); }
       set { _steamid = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool steamidSpecified
+    {
+      get { return _steamid != null; }
+      set { if (value == (_steamid== null)) _steamid = value ? this.steamid : (ulong?)null; }
+    }
+    private bool ShouldSerializesteamid() { return steamidSpecified; }
+    private void Resetsteamid() { steamidSpecified = false; }
+    
 
-    private ulong _sessionid = default(ulong);
+    private ulong? _sessionid;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"sessionid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong sessionid
     {
-      get { return _sessionid; }
+      get { return _sessionid?? default(ulong); }
       set { _sessionid = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool sessionidSpecified
+    {
+      get { return _sessionid != null; }
+      set { if (value == (_sessionid== null)) _sessionid = value ? this.sessionid : (ulong?)null; }
+    }
+    private bool ShouldSerializesessionid() { return sessionidSpecified; }
+    private void Resetsessionid() { sessionidSpecified = false; }
+    
 
-    private uint _appid = default(uint);
+    private uint? _appid;
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"appid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint appid
     {
-      get { return _appid; }
+      get { return _appid?? default(uint); }
       set { _appid = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool appidSpecified
+    {
+      get { return _appid != null; }
+      set { if (value == (_appid== null)) _appid = value ? this.appid : (uint?)null; }
+    }
+    private bool ShouldSerializeappid() { return appidSpecified; }
+    private void Resetappid() { appidSpecified = false; }
+    
 
     private CGameNotifications_UserStatus _status = null;
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"status", DataFormat = global::ProtoBuf.DataFormat.Default)]
@@ -644,14 +970,23 @@ namespace SteamKit2.Unified.Internal
       set { _status = value; }
     }
 
-    private bool _removed = default(bool);
+    private bool? _removed;
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"removed", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool removed
     {
-      get { return _removed; }
+      get { return _removed?? default(bool); }
       set { _removed = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool removedSpecified
+    {
+      get { return _removed != null; }
+      set { if (value == (_removed== null)) _removed = value ? this.removed : (bool?)null; }
+    }
+    private bool ShouldSerializeremoved() { return removedSpecified; }
+    private void Resetremoved() { removedSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

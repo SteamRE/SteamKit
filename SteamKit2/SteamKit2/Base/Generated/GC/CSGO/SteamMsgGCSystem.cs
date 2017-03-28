@@ -8,6 +8,8 @@
 //------------------------------------------------------------------------------
 #pragma warning disable 1591
 
+// Option: missing-value detection (*Specified/ShouldSerialize*/Reset*) enabled
+    
 // Option: light framework (CF/Silverlight) enabled
     
 // Generated from: gcsystemmsgs.proto
@@ -19,32 +21,59 @@ namespace SteamKit2.GC.CSGO.Internal
     public CMsgGCHVacVerificationChange() {}
     
 
-    private ulong _steamid = default(ulong);
+    private ulong? _steamid;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong steamid
     {
-      get { return _steamid; }
+      get { return _steamid?? default(ulong); }
       set { _steamid = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool steamidSpecified
+    {
+      get { return _steamid != null; }
+      set { if (value == (_steamid== null)) _steamid = value ? this.steamid : (ulong?)null; }
+    }
+    private bool ShouldSerializesteamid() { return steamidSpecified; }
+    private void Resetsteamid() { steamidSpecified = false; }
+    
 
-    private uint _appid = default(uint);
+    private uint? _appid;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"appid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint appid
     {
-      get { return _appid; }
+      get { return _appid?? default(uint); }
       set { _appid = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool appidSpecified
+    {
+      get { return _appid != null; }
+      set { if (value == (_appid== null)) _appid = value ? this.appid : (uint?)null; }
+    }
+    private bool ShouldSerializeappid() { return appidSpecified; }
+    private void Resetappid() { appidSpecified = false; }
+    
 
-    private bool _is_verified = default(bool);
+    private bool? _is_verified;
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"is_verified", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool is_verified
     {
-      get { return _is_verified; }
+      get { return _is_verified?? default(bool); }
       set { _is_verified = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool is_verifiedSpecified
+    {
+      get { return _is_verified != null; }
+      set { if (value == (_is_verified== null)) _is_verified = value ? this.is_verified : (bool?)null; }
+    }
+    private bool ShouldSerializeis_verified() { return is_verifiedSpecified; }
+    private void Resetis_verified() { is_verifiedSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -56,50 +85,95 @@ namespace SteamKit2.GC.CSGO.Internal
     public CMsgGCHAccountPhoneNumberChange() {}
     
 
-    private ulong _steamid = default(ulong);
+    private ulong? _steamid;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong steamid
     {
-      get { return _steamid; }
+      get { return _steamid?? default(ulong); }
       set { _steamid = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool steamidSpecified
+    {
+      get { return _steamid != null; }
+      set { if (value == (_steamid== null)) _steamid = value ? this.steamid : (ulong?)null; }
+    }
+    private bool ShouldSerializesteamid() { return steamidSpecified; }
+    private void Resetsteamid() { steamidSpecified = false; }
+    
 
-    private uint _appid = default(uint);
+    private uint? _appid;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"appid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint appid
     {
-      get { return _appid; }
+      get { return _appid?? default(uint); }
       set { _appid = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool appidSpecified
+    {
+      get { return _appid != null; }
+      set { if (value == (_appid== null)) _appid = value ? this.appid : (uint?)null; }
+    }
+    private bool ShouldSerializeappid() { return appidSpecified; }
+    private void Resetappid() { appidSpecified = false; }
+    
 
-    private ulong _phone_id = default(ulong);
+    private ulong? _phone_id;
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"phone_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong phone_id
     {
-      get { return _phone_id; }
+      get { return _phone_id?? default(ulong); }
       set { _phone_id = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool phone_idSpecified
+    {
+      get { return _phone_id != null; }
+      set { if (value == (_phone_id== null)) _phone_id = value ? this.phone_id : (ulong?)null; }
+    }
+    private bool ShouldSerializephone_id() { return phone_idSpecified; }
+    private void Resetphone_id() { phone_idSpecified = false; }
+    
 
-    private bool _is_verified = default(bool);
+    private bool? _is_verified;
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"is_verified", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool is_verified
     {
-      get { return _is_verified; }
+      get { return _is_verified?? default(bool); }
       set { _is_verified = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool is_verifiedSpecified
+    {
+      get { return _is_verified != null; }
+      set { if (value == (_is_verified== null)) _is_verified = value ? this.is_verified : (bool?)null; }
+    }
+    private bool ShouldSerializeis_verified() { return is_verifiedSpecified; }
+    private void Resetis_verified() { is_verifiedSpecified = false; }
+    
 
-    private bool _is_identifying = default(bool);
+    private bool? _is_identifying;
     [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"is_identifying", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    [global::System.ComponentModel.DefaultValue(default(bool))]
     public bool is_identifying
     {
-      get { return _is_identifying; }
+      get { return _is_identifying?? default(bool); }
       set { _is_identifying = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool is_identifyingSpecified
+    {
+      get { return _is_identifying != null; }
+      set { if (value == (_is_identifying== null)) _is_identifying = value ? this.is_identifying : (bool?)null; }
+    }
+    private bool ShouldSerializeis_identifying() { return is_identifyingSpecified; }
+    private void Resetis_identifying() { is_identifyingSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -111,41 +185,77 @@ namespace SteamKit2.GC.CSGO.Internal
     public CMsgGCHInviteUserToLobby() {}
     
 
-    private ulong _steamid = default(ulong);
+    private ulong? _steamid;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong steamid
     {
-      get { return _steamid; }
+      get { return _steamid?? default(ulong); }
       set { _steamid = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool steamidSpecified
+    {
+      get { return _steamid != null; }
+      set { if (value == (_steamid== null)) _steamid = value ? this.steamid : (ulong?)null; }
+    }
+    private bool ShouldSerializesteamid() { return steamidSpecified; }
+    private void Resetsteamid() { steamidSpecified = false; }
+    
 
-    private uint _appid = default(uint);
+    private uint? _appid;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"appid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(uint))]
     public uint appid
     {
-      get { return _appid; }
+      get { return _appid?? default(uint); }
       set { _appid = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool appidSpecified
+    {
+      get { return _appid != null; }
+      set { if (value == (_appid== null)) _appid = value ? this.appid : (uint?)null; }
+    }
+    private bool ShouldSerializeappid() { return appidSpecified; }
+    private void Resetappid() { appidSpecified = false; }
+    
 
-    private ulong _steamid_invited = default(ulong);
+    private ulong? _steamid_invited;
     [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"steamid_invited", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong steamid_invited
     {
-      get { return _steamid_invited; }
+      get { return _steamid_invited?? default(ulong); }
       set { _steamid_invited = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool steamid_invitedSpecified
+    {
+      get { return _steamid_invited != null; }
+      set { if (value == (_steamid_invited== null)) _steamid_invited = value ? this.steamid_invited : (ulong?)null; }
+    }
+    private bool ShouldSerializesteamid_invited() { return steamid_invitedSpecified; }
+    private void Resetsteamid_invited() { steamid_invitedSpecified = false; }
+    
 
-    private ulong _steamid_lobby = default(ulong);
+    private ulong? _steamid_lobby;
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"steamid_lobby", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    [global::System.ComponentModel.DefaultValue(default(ulong))]
     public ulong steamid_lobby
     {
-      get { return _steamid_lobby; }
+      get { return _steamid_lobby?? default(ulong); }
       set { _steamid_lobby = value; }
     }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool steamid_lobbySpecified
+    {
+      get { return _steamid_lobby != null; }
+      set { if (value == (_steamid_lobby== null)) _steamid_lobby = value ? this.steamid_lobby : (ulong?)null; }
+    }
+    private bool ShouldSerializesteamid_lobby() { return steamid_lobbySpecified; }
+    private void Resetsteamid_lobby() { steamid_lobbySpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

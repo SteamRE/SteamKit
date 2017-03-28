@@ -185,6 +185,12 @@ namespace NetHookAnalyzer2
 			RepopulateListBox();
 		}
 
+		void OnShowAllCheckedChanged(object sender, EventArgs e)
+		{
+			TreeNodeObjectExplorer.ShowAll = showAllCheckBox.Checked;
+			RepopulateTreeView();
+		}
+
 		void searchTextBox_TextChanged(object sender, EventArgs e)
 		{
 			RepopulateListBox();
