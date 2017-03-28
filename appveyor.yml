@@ -1,4 +1,4 @@
-version: 1.8.3.{build}
+version: 2.0.0.{build}
 os: Visual Studio 2017
 
 cache:
@@ -8,7 +8,7 @@ cache:
 assembly_info:
   patch: true
   file: AssemblyInfo.cs
-  assembly_version: "1.8.3"
+  assembly_version: "2.0.0"
   assembly_file_version: "{version}"
   assembly_informational_version: "{version} - CI (AppVeyor, branch: {branch})"
 
