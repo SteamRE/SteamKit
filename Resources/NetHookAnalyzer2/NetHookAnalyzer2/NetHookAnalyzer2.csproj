@@ -88,6 +88,7 @@
     <Compile Include="SteamUtils.cs" />
     <Compile Include="StringExtensions.cs" />
     <Compile Include="TreeNodeObjectExplorer.cs" />
+    <Compile Include="TreeNodeObjectExplorerConfiguration.cs" />
     <Compile Include="TypeExtensions.cs" />
     <Compile Include="WellKnownAppIDs.cs" />
     <EmbeddedResource Include="MainForm.resx">

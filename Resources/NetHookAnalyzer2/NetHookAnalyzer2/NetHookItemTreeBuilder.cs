@@ -28,22 +28,22 @@ namespace NetHookAnalyzer2
 
 		TreeNode Node { get; set; }
 
-		public TreeNode BuildTree()
+		public TreeNode BuildTree(bool displayUnsetFields)
 		{
 			if (Node != null)
 			{
 				return Node;
 			}
 
-			CreateTreeNode();
+			CreateTreeNode(displayUnsetFields);
 			return Node;
 		}
 
-		void CreateTreeNode()
+		void CreateTreeNode(bool displayUnsetFields)
 		{
 			try
 			{
-				Node = CreateTreeNodeCore();
+				Node = CreateTreeNodeCore(displayUnsetFields);
 			}
 			catch (Exception ex)
 			{
@@ -51,27 +51,29 @@ namespace NetHookAnalyzer2
 			}
 		}
 
-		TreeNode CreateTreeNodeCore()
+		TreeNode CreateTreeNodeCore(bool displayUnsetFields)
 		{
+			var configuration = new TreeNodeObjectExplorerConfiguration { ShowUnsetFields = displayUnsetFields };
+
 			var node = new TreeNode();
 
 			using (var stream = item.OpenStream())
 			{
 				var rawEMsg = PeekUInt(stream);
 
-				node.Nodes.Add(BuildInfoNode(rawEMsg));
+				node.Nodes.Add(BuildInfoNode(rawEMsg, configuration));
 
 				var header = ReadHeader(rawEMsg, stream);
-				node.Nodes.Add(new TreeNodeObjectExplorer("Header", header).TreeNode);
+				node.Nodes.Add(new TreeNodeObjectExplorer("Header", header, configuration).TreeNode);
 
 				var body = ReadBody(rawEMsg, stream, header);
-				var bodyNode = new TreeNodeObjectExplorer("Body", body).TreeNode;
+				var bodyNode = new TreeNodeObjectExplorer("Body", body, configuration).TreeNode;
 				node.Nodes.Add(bodyNode);
 
 				var payload = ReadPayload(stream);
 				if (payload != null && payload.Length > 0)
 				{
-					node.Nodes.Add(new TreeNodeObjectExplorer("Payload", payload).TreeNode);
+					node.Nodes.Add(new TreeNodeObjectExplorer("Payload", payload, configuration).TreeNode);
 				}
 
 				if (Specializations != null)
@@ -88,7 +90,7 @@ namespace NetHookAnalyzer2
 
 						bodyNode.Collapse(ignoreChildren: true);
 
-						var extraNodes = specializations.Select(x => new TreeNodeObjectExplorer(x.Key, x.Value).TreeNode).ToArray();
+						var extraNodes = specializations.Select(x => new TreeNodeObjectExplorer(x.Key, x.Value, configuration).TreeNode).ToArray();
 						node.Nodes.AddRange(extraNodes);
 
 						// Let the specializers examine any new message objects.
@@ -100,16 +102,16 @@ namespace NetHookAnalyzer2
 			return node;
 		}
 
-		static TreeNode BuildInfoNode(uint rawEMsg)
+		static TreeNode BuildInfoNode(uint rawEMsg, TreeNodeObjectExplorerConfiguration configuration)
 		{
 			var eMsg = MsgUtil.GetMsg(rawEMsg);
 
-			var eMsgExplorer = new TreeNodeObjectExplorer("EMsg", eMsg);
+			var eMsgExplorer = new TreeNodeObjectExplorer("EMsg", eMsg, configuration);
 
 			return new TreeNode("Info", new[] 
 			{
 				eMsgExplorer.TreeNode,
-				new TreeNodeObjectExplorer("Is Protobuf", MsgUtil.IsProtoBuf(rawEMsg)).TreeNode
+				new TreeNodeObjectExplorer("Is Protobuf", MsgUtil.IsProtoBuf(rawEMsg), configuration).TreeNode
 			});
 		}
 	}

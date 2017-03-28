@@ -14,14 +14,15 @@ namespace NetHookAnalyzer2
 {
 	class TreeNodeObjectExplorer
 	{
-		public static bool ShowAll = true;
-
-		public TreeNodeObjectExplorer(string name, object value, bool showFaded = false)
+		public TreeNodeObjectExplorer(string name, object value, TreeNodeObjectExplorerConfiguration configuration)
 		{
 			this.name = name;
 			this.value = value;
+			this.configuration = configuration;
+
 			this.treeNode = new TreeNode();
-			if (showFaded)
+
+			if (configuration.IsUnsetField)
 			{
 			    treeNode.ForeColor = System.Drawing.Color.DarkGray;
 			}
@@ -33,6 +34,7 @@ namespace NetHookAnalyzer2
 
 		readonly string name;
 		readonly object value;
+		TreeNodeObjectExplorerConfiguration configuration;
 		readonly TreeNode treeNode;
 		string clipboardCopyOverride;
 
@@ -138,7 +140,7 @@ namespace NetHookAnalyzer2
 			}
 			else
 			{
-				SetValueForDisplay(null, childNodes: new[] { new TreeNodeObjectExplorer(kv.Name, kv).TreeNode });
+				SetValueForDisplay(null, childNodes: new[] { new TreeNodeObjectExplorer(kv.Name, kv, configuration).TreeNode });
 			}
 
 			TreeNode.ExpandAll();
@@ -208,10 +210,10 @@ namespace NetHookAnalyzer2
 			var gid = new GlobalID((ulong)Convert.ChangeType(value, typeof(ulong)));
 			var children = new[]
 			{
-				new TreeNodeObjectExplorer("Box", gid.BoxID).TreeNode,
-				new TreeNodeObjectExplorer("Process ID", gid.ProcessID).TreeNode,
-				new TreeNodeObjectExplorer("Sequential Count", gid.SequentialCount).TreeNode,
-				new TreeNodeObjectExplorer("StartTime", gid.StartTime.ToString("yyyy-MM-dd HH:mm:ss")).TreeNode
+				new TreeNodeObjectExplorer("Box", gid.BoxID, configuration).TreeNode,
+				new TreeNodeObjectExplorer("Process ID", gid.ProcessID, configuration).TreeNode,
+				new TreeNodeObjectExplorer("Sequential Count", gid.SequentialCount, configuration).TreeNode,
+				new TreeNodeObjectExplorer("StartTime", gid.StartTime.ToString("yyyy-MM-dd HH:mm:ss"), configuration).TreeNode
 			};
 
 			SetValueForDisplay(null, childNodes: children);
@@ -536,7 +538,7 @@ namespace NetHookAnalyzer2
 					var children = new List<TreeNode>();
 					foreach (var child in kv.Children)
 					{
-						children.Add(new TreeNodeObjectExplorer(child.Name, child).TreeNode);
+						children.Add(new TreeNodeObjectExplorer(child.Name, child, configuration).TreeNode);
 					}
 
 					SetValueForDisplay(null, childNodes: children.ToArray());
@@ -554,7 +556,7 @@ namespace NetHookAnalyzer2
 				foreach (DictionaryEntry entry in dictionary)
 				{
 					var childName = string.Format("[ {0} ]", entry.Key.ToString());
-					var childObjectExplorer = new TreeNodeObjectExplorer(childName, entry.Value);
+					var childObjectExplorer = new TreeNodeObjectExplorer(childName, entry.Value, configuration);
 					childNodes.Add(childObjectExplorer.TreeNode);
 				}
 
@@ -575,7 +577,7 @@ namespace NetHookAnalyzer2
 					}
 
 					var childName = string.Format("[ {0} ]", index);
-					var childObjectExplorer = new TreeNodeObjectExplorer(childName, childObject);
+					var childObjectExplorer = new TreeNodeObjectExplorer(childName, childObject, configuration);
 					childNodes.Add(childObjectExplorer.TreeNode);
 
 					index++;
@@ -620,9 +622,12 @@ namespace NetHookAnalyzer2
 						}
 					}
 					
-					if (valueIsSet || ShowAll)
+					if (valueIsSet || configuration.ShowUnsetFields)
 					{
-					    var childObjectExplorer = new TreeNodeObjectExplorer(childName, childObject, !valueIsSet);
+						var childConfiguration = configuration;
+						childConfiguration.IsUnsetField = !valueIsSet;
+
+					    var childObjectExplorer = new TreeNodeObjectExplorer(childName, childObject, childConfiguration);
 					    childNodes.Add(childObjectExplorer.TreeNode);
 					}
 				}
