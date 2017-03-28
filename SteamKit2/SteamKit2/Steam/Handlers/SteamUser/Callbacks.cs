@@ -246,28 +246,9 @@ namespace SteamKit2
             public string Country { get; private set; }
 
             /// <summary>
-            /// Gets the salt used for the password.
-            /// </summary>
-            [Obsolete( "This field is no longer sent by Steam" )]
-            public byte[] PasswordSalt { get; private set; }
-            /// <summary>
-            /// Gets the SHA-1 disgest of the password.
-            /// </summary>
-            [Obsolete( "This field is no longer sent by Steam" )]
-            public byte[] PasswordSHADisgest { get; private set; }
-
-            /// <summary>
             /// Gets the count of SteamGuard authenticated computers.
             /// </summary>
             public int CountAuthedComputers { get; private set; }
-            /// <summary>
-            /// Gets a value indicating whether this account is locked with IPT.
-            /// </summary>
-            /// <value>
-            ///   <c>true</c> if this account is locked with IPT; otherwise, <c>false</c>.
-            /// </value>
-            [Obsolete( "This field is no longer sent by Steam" )]
-            public bool LockedWithIPT { get; private set; }
 
             /// <summary>
             /// Gets the account flags for this account.

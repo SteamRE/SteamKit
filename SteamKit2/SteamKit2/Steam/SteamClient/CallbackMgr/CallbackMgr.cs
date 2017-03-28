@@ -21,107 +21,105 @@ namespace SteamKit2
             internal abstract Type CallbackType { get; }
             internal abstract void Run( object callback );
         }
-    }
-
-    /// <summary>
-    /// This utility class is used for binding a callback to a function.
-    /// </summary>
-    /// <typeparam name="TCall">The callback type this instance will handle.</typeparam>
-    [Obsolete( "Callback<T> and related APIs are obsolete and will be removed in a future version of SteamKit. Use CallbackManager.Subscribe instead." )]
-    public class Callback<TCall> : Internal.CallbackBase, IDisposable
-        where TCall : class, ICallbackMsg
-    {
-        CallbackManager mgr;
 
         /// <summary>
-        /// Gets or sets the job ID this callback will handle.
-        /// Setting this field to the maximum value of a ulong will unbind this handler,
-        /// allowing all callbacks of type TCall to be handled.
+        /// This utility class is used for binding a callback to a function.
         /// </summary>
-        public JobID JobID { get; set; }
-
-        /// <summary>
-        /// Gets or sets the function to call when a callback of type TCall arrives.
-        /// </summary>
-        public Action<TCall> OnRun { get; set; }
-
-        internal override Type CallbackType { get { return typeof( TCall ); } }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Callback&lt;TCall&gt;"/> class.
-        /// </summary>
-        /// <param name="func">The function to call when a callback of type TCall arrives.</param>
-        /// <param name="mgr">The <see cref="CallbackManager"/> that is responsible for the routing of callbacks to this handler, or null if the callback will be registered manually.</param>
-        public Callback(Action<TCall> func, CallbackManager mgr = null)
-            : this ( func, mgr, JobID.Invalid )
+        /// <typeparam name="TCall">The callback type this instance will handle.</typeparam>
+        sealed class Callback<TCall> : Internal.CallbackBase, IDisposable
+            where TCall : class, ICallbackMsg
         {
-        }
+            CallbackManager mgr;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Callback&lt;TCall&gt;"/> class.
-        /// </summary>
-        /// <param name="func">The function to call when a callback of type TCall arrives.</param>
-        /// <param name="mgr">The <see cref="CallbackManager"/> that is responsible for the routing of callbacks to this handler, or null if the callback will be registered manually.</param>
-        /// <param name="jobID">The <see cref="JobID"/>to filter matching callbacks by. Specify <see cref="P:JobID.Invalid"/> to recieve all callbacks of type TCall.</param>
-        public Callback(Action<TCall> func, CallbackManager mgr, JobID jobID)
-        {
-            this.JobID = jobID;
-            this.OnRun = func;
+            /// <summary>
+            /// Gets or sets the job ID this callback will handle.
+            /// Setting this field to the maximum value of a ulong will unbind this handler,
+            /// allowing all callbacks of type TCall to be handled.
+            /// </summary>
+            public JobID JobID { get; set; }
 
-            AttachTo(mgr);
-        }
+            /// <summary>
+            /// Gets or sets the function to call when a callback of type TCall arrives.
+            /// </summary>
+            public Action<TCall> OnRun { get; set; }
 
-        /// <summary>
-        /// Attaches the specified <see cref="CallbackManager"/> to this handler.
-        /// </summary>
-        /// <param name="mgr">The manager to attach.</param>
-        protected void AttachTo( CallbackManager mgr )
-        {
-            if ( mgr == null )
-                return;
+            internal override Type CallbackType { get { return typeof( TCall ); } }
 
-            this.mgr = mgr;
-            mgr.Register( this );
-        }
-
-        /// <summary>
-        /// Releases unmanaged resources and performs other cleanup operations before the
-        /// <see cref="Callback&lt;TCall&gt;"/> is reclaimed by garbage collection.
-        /// </summary>
-        ~Callback()
-        {
-            Dispose();
-        }
-
-
-        /// <summary>
-        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
-        /// This function will unregister the callback.
-        /// </summary>
-        public void Dispose()
-        {
-            if ( mgr != null )
-                mgr.Unregister( this );
-
-            System.GC.SuppressFinalize( this );
-        }
-
-
-        internal override void Run( object callback )
-        {
-            var cb = callback as TCall;
-            if (cb != null && (cb.JobID == JobID || JobID == JobID.Invalid) && OnRun != null)
+            /// <summary>
+            /// Initializes a new instance of the <see cref="Callback&lt;TCall&gt;"/> class.
+            /// </summary>
+            /// <param name="func">The function to call when a callback of type TCall arrives.</param>
+            /// <param name="mgr">The <see cref="CallbackManager"/> that is responsible for the routing of callbacks to this handler, or null if the callback will be registered manually.</param>
+            public Callback(Action<TCall> func, CallbackManager mgr = null)
+                : this ( func, mgr, JobID.Invalid )
             {
-                OnRun(cb);
             }
-        }
 
-        static Action<TCall, JobID> CreateJoblessAction(Action<TCall> func)
-        {
-            return delegate(TCall callback, JobID jobID)
+            /// <summary>
+            /// Initializes a new instance of the <see cref="Callback&lt;TCall&gt;"/> class.
+            /// </summary>
+            /// <param name="func">The function to call when a callback of type TCall arrives.</param>
+            /// <param name="mgr">The <see cref="CallbackManager"/> that is responsible for the routing of callbacks to this handler, or null if the callback will be registered manually.</param>
+            /// <param name="jobID">The <see cref="JobID"/>to filter matching callbacks by. Specify <see cref="P:JobID.Invalid"/> to recieve all callbacks of type TCall.</param>
+            public Callback(Action<TCall> func, CallbackManager mgr, JobID jobID)
             {
-                func(callback);
-            };
+                this.JobID = jobID;
+                this.OnRun = func;
+
+                AttachTo(mgr);
+            }
+
+            /// <summary>
+            /// Attaches the specified <see cref="CallbackManager"/> to this handler.
+            /// </summary>
+            /// <param name="mgr">The manager to attach.</param>
+            void AttachTo( CallbackManager mgr )
+            {
+                if ( mgr == null )
+                    return;
+
+                this.mgr = mgr;
+                mgr.Register( this );
+            }
+
+            /// <summary>
+            /// Releases unmanaged resources and performs other cleanup operations before the
+            /// <see cref="Callback&lt;TCall&gt;"/> is reclaimed by garbage collection.
+            /// </summary>
+            ~Callback()
+            {
+                Dispose();
+            }
+
+
+            /// <summary>
+            /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            /// This function will unregister the callback.
+            /// </summary>
+            public void Dispose()
+            {
+                mgr?.Unregister( this );
+
+                System.GC.SuppressFinalize( this );
+            }
+
+
+            internal override void Run( object callback )
+            {
+                var cb = callback as TCall;
+                if (cb != null && (cb.JobID == JobID || JobID == JobID.Invalid) && OnRun != null)
+                {
+                    OnRun(cb);
+                }
+            }
+
+            static Action<TCall, JobID> CreateJoblessAction(Action<TCall> func)
+            {
+                return delegate(TCall callback, JobID jobID)
+                {
+                    func(callback);
+                };
+            }
         }
     }
 
@@ -206,8 +204,7 @@ namespace SteamKit2
         /// If the specified callback is already registered, no exception is thrown.
         /// </summary>
         /// <param name="call">The callback handler to register.</param>
-        [Obsolete( "Callback<T> and related APIs are obsolete and will be removed in a future version of SteamKit. Use CallbackManager.Subscribe instead." )]
-        public void Register( Internal.CallbackBase call )
+        internal void Register( Internal.CallbackBase call )
         {
             if ( registeredCallbacks.Contains( call ) )
                 return;
@@ -226,9 +223,7 @@ namespace SteamKit2
         public IDisposable Subscribe<TCallback>( JobID jobID, Action<TCallback> callbackFunc )
             where TCallback : class, ICallbackMsg
         {
-#pragma warning disable 0618 // Callback<T> is not obsolete internally, only to consumers
-            var callback = new Callback<TCallback>( callbackFunc, this, jobID );
-#pragma warning restore 0618
+            var callback = new Internal.Callback<TCallback>( callbackFunc, this, jobID );
             return new Subscription( callback, this );
         }
 
@@ -248,8 +243,7 @@ namespace SteamKit2
         /// If the specified callback isn't registered, no exception is thrown.
         /// </summary>
         /// <param name="call">The callback handler to unregister.</param>
-        [Obsolete( "Callback<T> and related APIs are obsolete and will be removed in a future version of SteamKit. Use CallbackManager.Subscribe instead." )]
-        public void Unregister( Internal.CallbackBase call )
+        internal void Unregister( Internal.CallbackBase call )
         {
             Unsubscribe( call );
         }

@@ -17,44 +17,6 @@ namespace SteamKit2
     public sealed partial class SteamApps : ClientMsgHandler
     {
 
-// Ambiguous reference in cref attribute: 'SteamApps.GetPackageInfo'. Assuming 'SteamKit2.SteamApps.GetPackageInfo(uint, bool)',
-// but could have also matched other overloads including 'SteamKit2.SteamApps.GetPackageInfo(System.Collections.Generic.IEnumerable<uint>, bool)'.
-#pragma warning disable 0419
-
-        /// <summary>
-        /// Represents app request details when calling <see cref="SteamApps.GetAppInfo"/>.
-        /// </summary>
-        public sealed class AppDetails
-#pragma warning restore 0419
-        {
-            /// <summary>
-            /// Gets or sets the AppID for this request.
-            /// </summary>
-            /// <value>The AppID.</value>
-            public uint AppID { get; set; }
-
-            /// <summary>
-            /// Gets or sets the section flags for this request.
-            /// </summary>
-            /// <value>The section flags.</value>
-            public uint SectionFlags { get; set; }
-            /// <summary>
-            /// Gets the Section CRC list for this request.
-            /// </summary>
-            public List<uint> SectionCRC { get; private set; }
-
-
-            /// <summary>
-            /// Initializes a new instance of the <see cref="AppDetails"/> class.
-            /// </summary>
-            public AppDetails()
-            {
-                // request all sections by default
-                SectionFlags = 0xFFFF;
-                SectionCRC = new List<uint>();
-            }
-        }
-
         // Ambiguous reference in cref attribute: 'SteamApps.PICSGetProductInfo'. Assuming 'SteamKit2.SteamApps.PICSGetProductInfo(uint?, uint?, bool, bool)',
         // but could have also matched other overloads including 'SteamKit2.SteamApps.PICSGetProductInfo(System.Collections.Generic.IEnumerable<SteamKit2.SteamApps.PICSRequest>, System.Collections.Generic.IEnumerable<SteamKit2.SteamApps.PICSRequest>, bool)'.
 #pragma warning disable 0419
@@ -122,11 +84,6 @@ namespace SteamKit2
                 { EMsg.ClientGameConnectTokens, HandleGameConnectTokens },
                 { EMsg.ClientVACBanStatus, HandleVACBanStatus },
                 { EMsg.ClientGetAppOwnershipTicketResponse, HandleAppOwnershipTicketResponse },
-#pragma warning disable CS0612 // Type or member is obsolete
-                { EMsg.ClientAppInfoResponse, HandleAppInfoResponse },
-                { EMsg.ClientPackageInfoResponse, HandlePackageInfoResponse },
-                { EMsg.ClientAppInfoChanges, HandleAppInfoChanges },
-#pragma warning restore CS0612 // Type or member is obsolete
                 { EMsg.ClientGetDepotDecryptionKeyResponse, HandleDepotKeyResponse },
                 { EMsg.ClientPICSAccessTokenResponse, HandlePICSAccessTokenResponse },
                 { EMsg.ClientPICSChangesSinceResponse, HandlePICSChangesSinceResponse },
@@ -155,146 +112,6 @@ namespace SteamKit2
             this.Client.Send( request );
 
             return new AsyncJob<AppOwnershipTicketCallback>( this.Client, request.SourceJobID );
-        }
-
-        /// <summary>
-        /// Requests app information for a single app. Use the overload for requesting information on a batch of apps.
-        /// Results are returned in a <see cref="AppInfoCallback"/> callback.
-        /// The returned <see cref="AsyncJob{T}"/> can also be awaited to retrieve the callback result.
-        /// 
-        /// Consider using <see cref="o:SteamApps.PICSGetProductInfo"/> instead.
-        /// </summary>
-        /// <param name="app">The app to request information for.</param>
-        /// <param name="supportsBatches">if set to <c>true</c>, the request supports batches.</param>
-        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="AppInfoCallback"/>.</returns>
-        [Obsolete]
-        public AsyncJob<AppInfoCallback> GetAppInfo( AppDetails app, bool supportsBatches = false )
-        {
-            return GetAppInfo( new AppDetails[] { app }, supportsBatches );
-        }
-        /// <summary>
-        /// Requests app information for a single app. Use the overload for requesting information on a batch of apps.
-        /// Results are returned in a <see cref="AppInfoCallback"/> callback.
-        /// The returned <see cref="AsyncJob{T}"/> can also be awaited to retrieve the callback result.
-        /// 
-        /// Consider using <see cref="o:SteamApps.PICSGetProductInfo"/> instead.
-        /// </summary>
-        /// <param name="app">The app to request information for.</param>
-        /// <param name="supportsBatches">if set to <c>true</c>, the request supports batches.</param>
-        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="AppInfoCallback"/>.</returns>
-        [Obsolete]
-        public AsyncJob<AppInfoCallback> GetAppInfo( uint app, bool supportsBatches = false )
-        {
-            return GetAppInfo( new uint[] { app }, supportsBatches );
-        }
-        /// <summary>
-        /// Requests app information for a list of apps.
-        /// Results are returned in a <see cref="AppInfoCallback"/> callback.
-        /// The returned <see cref="AsyncJob{T}"/> can also be awaited to retrieve the callback result.
-        /// 
-        /// Consider using <see cref="o:SteamApps.PICSGetProductInfo"/> instead.
-        /// </summary>
-        /// <param name="apps">The apps to request information for.</param>
-        /// <param name="supportsBatches">if set to <c>true</c>, the request supports batches.</param>
-        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="AppInfoCallback"/>.</returns>
-        [Obsolete]
-        public AsyncJob<AppInfoCallback> GetAppInfo( IEnumerable<uint> apps, bool supportsBatches = false )
-        {
-            return GetAppInfo( apps.Select( a => new AppDetails { AppID = a } ), supportsBatches );
-        }
-        /// <summary>
-        /// Requests app information for a list of apps.
-        /// Results are returned in a <see cref="AppInfoCallback"/> callback.
-        /// The returned <see cref="AsyncJob{T}"/> can also be awaited to retrieve the callback result.
-        /// 
-        /// Consider using <see cref="o:SteamApps.PICSGetProductInfo"/> instead.
-        /// </summary>
-        /// <param name="apps">The apps to request information for.</param>
-        /// <param name="supportsBatches">if set to <c>true</c>, the request supports batches.</param>
-        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="AppInfoCallback"/>.</returns>
-        [Obsolete]
-        public AsyncJob<AppInfoCallback> GetAppInfo( IEnumerable<AppDetails> apps, bool supportsBatches = false )
-        {
-            var request = new ClientMsgProtobuf<CMsgClientAppInfoRequest>( EMsg.ClientAppInfoRequest );
-            request.SourceJobID = Client.GetNextJobID();
-
-            request.Body.apps.AddRange( apps.Select( a =>
-            {
-                var app = new CMsgClientAppInfoRequest.App
-                {
-                    app_id = a.AppID,
-                    section_flags = a.SectionFlags,
-                };
-
-                app.section_CRC.AddRange( a.SectionCRC );
-
-                return app;
-            } ) );
-
-            request.Body.supports_batches = supportsBatches;
-
-            this.Client.Send( request );
-
-            return new AsyncJob<AppInfoCallback>( this.Client, request.SourceJobID );
-        }
-
-        /// <summary>
-        /// Requests package information for a single package. Use the overload for requesting information on a batch of packages.
-        /// Results are returned in a <see cref="PackageInfoCallback"/> callback.
-        /// The returned <see cref="AsyncJob{T}"/> can also be awaited to retrieve the callback result.
-        /// 
-        /// Consider using <see cref="o:SteamApps.PICSGetProductInfo"/> instead.
-        /// </summary>
-        /// <param name="packageId">The package id to request information for.</param>
-        /// <param name="metaDataOnly">if set to <c>true</c>, request metadata only.</param>
-        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="PackageInfoCallback"/>.</returns>
-        [Obsolete]
-        public AsyncJob<PackageInfoCallback> GetPackageInfo( uint packageId, bool metaDataOnly = false )
-        {
-            return GetPackageInfo( new uint[] { packageId }, metaDataOnly );
-        }
-        /// <summary>
-        /// Requests package information for a list of packages.
-        /// Results are returned in a <see cref="PackageInfoCallback"/> callback.
-        /// The returned <see cref="AsyncJob{T}"/> can also be awaited to retrieve the callback result.
-        /// 
-        /// Consider using <see cref="o:SteamApps.PICSGetProductInfo"/> instead.
-        /// </summary>
-        /// <param name="packageId">The packages to request information for.</param>
-        /// <param name="metaDataOnly">if set to <c>true</c> to request metadata only.</param>
-        /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="PackageInfoCallback"/>.</returns>
-        [Obsolete]
-        public AsyncJob<PackageInfoCallback> GetPackageInfo( IEnumerable<uint> packageId, bool metaDataOnly = false )
-        {
-            var request = new ClientMsgProtobuf<CMsgClientPackageInfoRequest>( EMsg.ClientPackageInfoRequest );
-
-            request.SourceJobID = Client.GetNextJobID();
-
-            request.Body.package_ids.AddRange( packageId );
-            request.Body.meta_data_only = metaDataOnly;
-
-            this.Client.Send( request );
-
-            return new AsyncJob<PackageInfoCallback>( this.Client, request.SourceJobID );
-        }
-
-        /// <summary>
-        /// Requests a list of app changes since the last provided change number value.
-        /// Results are returned in a <see cref="AppChangesCallback"/> callback.
-        /// 
-        /// Consider using <see cref="SteamApps.PICSGetChangesSince"/> instead.
-        /// </summary>
-        /// <param name="lastChangeNumber">The last change number value.</param>
-        /// <param name="sendChangelist">if set to <c>true</c>, request a change list.</param>
-        [Obsolete]
-        public void GetAppChanges( uint lastChangeNumber = 0, bool sendChangelist = true  )
-        {
-            var request = new ClientMsgProtobuf<CMsgClientAppInfoUpdate>( EMsg.ClientAppInfoUpdate );
-
-            request.Body.last_changenumber = lastChangeNumber;
-            request.Body.send_changelist = sendChangelist;
-
-            this.Client.Send( request );
         }
 
         /// <summary>
@@ -557,27 +374,6 @@ namespace SteamKit2
             var ticketResponse = new ClientMsgProtobuf<CMsgClientGetAppOwnershipTicketResponse>( packetMsg );
 
             var callback = new AppOwnershipTicketCallback(ticketResponse.TargetJobID, ticketResponse.Body);
-            this.Client.PostCallback( callback );
-        }
-        void HandleAppInfoResponse( IPacketMsg packetMsg )
-        {
-            var infoResponse = new ClientMsgProtobuf<CMsgClientAppInfoResponse>( packetMsg );
-
-            var callback = new AppInfoCallback(infoResponse.TargetJobID, infoResponse.Body);
-            this.Client.PostCallback( callback );
-        }
-        void HandlePackageInfoResponse( IPacketMsg packetMsg )
-        {
-            var response = new ClientMsgProtobuf<CMsgClientPackageInfoResponse>( packetMsg );
-
-            var callback = new PackageInfoCallback(response.TargetJobID, response.Body);
-            this.Client.PostCallback( callback );
-        }
-        void HandleAppInfoChanges( IPacketMsg packetMsg )
-        {
-            var changes = new ClientMsgProtobuf<CMsgClientAppInfoChanges>( packetMsg );
-
-            var callback = new AppChangesCallback( changes.Body );
             this.Client.PostCallback( callback );
         }
         void HandleDepotKeyResponse( IPacketMsg packetMsg )

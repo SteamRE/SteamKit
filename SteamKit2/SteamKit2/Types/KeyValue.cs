@@ -500,25 +500,6 @@ namespace SteamKit2
         /// Attempts to load the given filename as a binary <see cref="KeyValue"/>.
         /// </summary>
         /// <param name="path">The path to the file to load.</param>
-        /// <returns>a <see cref="KeyValue"/> instance if the load was successful, or <c>null</c> on failure.</returns>
-        [Obsolete( "Use TryReadAsBinary instead. Note that TryLoadAsBinary returns the root object, not a dummy parent node containg the root object." )]
-        public static KeyValue LoadAsBinary( string path )
-        {
-            var kv = LoadFromFile( path, true );
-            if (kv == null)
-            {
-                return null;
-            }
-
-            var parent = new KeyValue();
-            parent.Children.Add(kv);
-            return parent;
-        }
-
-        /// <summary>
-        /// Attempts to load the given filename as a binary <see cref="KeyValue"/>.
-        /// </summary>
-        /// <param name="path">The path to the file to load.</param>
         /// <param name="keyValue">The resulting <see cref="KeyValue"/> object if the load was successful, or <c>null</c> if unsuccessful.</param>
         /// <returns><c>true</c> if the load was successful, or <c>false</c> on failure.</returns>
         public static bool TryLoadAsBinary( string path, out KeyValue keyValue )
@@ -789,19 +770,6 @@ namespace SteamKit2
         {
             byte[] bytes = Encoding.UTF8.GetBytes( ( quote ? "\"" : "" ) + str.Replace( "\"", "\\\"" ) + ( quote ? "\"" : "" ) );
             stream.Write( bytes, 0, bytes.Length );
-        }
-
-        /// <summary>
-        /// Populate this instance from the given <see cref="Stream"/> as a binary <see cref="KeyValue"/>.
-        /// </summary>
-        /// <param name="input">The input <see cref="Stream"/> to read from.</param>
-        /// <returns><c>true</c> if the read was successful; otherwise, <c>false</c>.</returns>
-        [Obsolete( "Use TryReadAsBinary instead. Note that TryReadAsBinary returns the root object, not a dummy parent node containg the root object." )]
-        public bool ReadAsBinary( Stream input )
-        {
-            var dummyChild = new KeyValue();
-            this.Children.Add( dummyChild );
-            return dummyChild.TryReadAsBinary( input );
         }
 
         /// <summary>

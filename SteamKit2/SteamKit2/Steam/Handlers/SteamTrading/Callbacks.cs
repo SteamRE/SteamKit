@@ -3,12 +3,6 @@
  * file 'license.txt', which is part of this source code package.
  */
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Net;
-using System.Collections.ObjectModel;
 using SteamKit2.Internal;
 
 namespace SteamKit2
@@ -30,22 +24,12 @@ namespace SteamKit2
             /// </summary>
             public SteamID OtherClient { get; private set; }
 
-            /// <summary>
-            /// Gets the persona name of the client that sent the proposal.
-            /// </summary>
-            [Obsolete("This field is no longer sent by the Steam servers")]
-            public string OtherName { get; private set; }
-
 
             internal TradeProposedCallback( CMsgTrading_InitiateTradeRequest msg )
             {
                 this.TradeID = msg.trade_request_id;
 
                 this.OtherClient = msg.other_steamid;
-
-#pragma warning disable 0618 // warning CS0618: 'SteamTrading.TradeProposedCallback.OtherName' is obsolete: 'This field is no longer sent by the Steam servers'
-                this.OtherName = msg.other_name;
-#pragma warning restore 0618
             }
         }
 

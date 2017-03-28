@@ -283,47 +283,6 @@ namespace Tests
             }
         }
 
-#pragma warning disable 0618
-
-        [Fact]
-        public void KeyValueBinarySerialization_LoadAsBinaryPreservesBuggyBehavior()
-        {
-            var kv = new KeyValue( "MessageObject" );
-            kv.Children.Add( new KeyValue( "key", "value" ) );
-
-            KeyValue deserializedKv;
-
-            var temporaryFile = Path.GetTempFileName();
-            try
-            {
-                kv.SaveToFile( temporaryFile, asBinary: true );
-                deserializedKv = KeyValue.LoadAsBinary( temporaryFile );
-            }
-            finally
-            {
-                File.Delete( temporaryFile );
-            }
-
-            Assert.Null( deserializedKv.Name );
-            Assert.Equal(1, deserializedKv.Children.Count );
-
-            var actualKv = deserializedKv.Children[ 0 ];
-
-            Assert.Equal( kv.Name, actualKv.Name );
-            Assert.Equal( kv.Children.Count, actualKv.Children.Count );
-
-            for ( int i = 0; i < kv.Children.Count; i++ )
-            {
-                var originalChild = kv.Children[ i ];
-                var deserializedChild = actualKv.Children[ i ];
-                
-                Assert.Equal( originalChild.Name, deserializedChild.Name );
-                Assert.Equal( originalChild.Value, deserializedChild.Value );
-            }
-        }
-
-#pragma warning restore 0618
-
         [Fact]
         public void KeyValues_TryReadAsBinary_ReadsBinary()
         {
@@ -342,33 +301,6 @@ namespace Tests
             Assert.Equal( "key", kv.Children[0].Name );
             Assert.Equal( "value", kv.Children[0].Value );
         }
-
-#pragma warning disable 0618
-
-        [Fact]
-        public void KeyValuesReadsBinary_ReadAsBinary_PreservesBuggyBehavior()
-        {
-            var binary = Utils.DecodeHexString( TestObjectHex );
-            var kv = new KeyValue();
-            bool success;
-            using ( var ms = new MemoryStream( binary ) )
-            {
-                success = kv.ReadAsBinary( ms );
-                Assert.Equal( ms.Length, ms.Position );
-            }
-
-            Assert.True( success, "Should have read test object." );
-            Assert.Null( kv.Name );
-            Assert.Equal( 1, kv.Children.Count );
-
-            var actualKv = kv.Children[ 0 ];
-            Assert.Equal( "TestObject", actualKv.Name );
-            Assert.Equal( 1, actualKv.Children.Count );
-            Assert.Equal( "key", actualKv.Children[0].Name );
-            Assert.Equal( "value", actualKv.Children[0].Value );
-        }
-
-#pragma warning restore 0618
 
         [Fact]
         public void KeyValuesReadsBinaryWithLeftoverData()
