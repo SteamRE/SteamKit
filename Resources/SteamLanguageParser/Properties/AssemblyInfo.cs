@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("SteamLanguageParser")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("SteamLanguage Parser")]
+[assembly: AssemblyDescription("SteamLanguage Parser")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("SteamRE Team")]
 [assembly: AssemblyProduct("SteamLanguageParser")]
-[assembly: AssemblyCopyright("Copyright ©  2017")]
+[assembly: AssemblyCopyright("Copyright © SteamRE Team 2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

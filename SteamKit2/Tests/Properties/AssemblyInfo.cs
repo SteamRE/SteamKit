@@ -5,10 +5,10 @@ using Xunit;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("SteamKit2Tests")]
+[assembly: AssemblyTitle("SteamKit2 Tests")]
 [assembly: AssemblyDescription("SteamKit2 Tests")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("SteamRE Team")]
 [assembly: AssemblyProduct("SteamKit2Tests")]
 [assembly: AssemblyCopyright("Copyright © SteamRE Team 2017")]
 [assembly: AssemblyTrademark("")]
