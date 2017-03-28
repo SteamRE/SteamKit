@@ -8,10 +8,12 @@
 //------------------------------------------------------------------------------
 #pragma warning disable 1591
 
+// Option: light framework (CF/Silverlight) enabled
+    
 // Generated from: econ_shared_enums.proto
 namespace SteamKit2.GC.Dota.Internal
 {
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGenericResult")]
+  [global::ProtoBuf.ProtoContract(Name=@"CMsgGenericResult")]
   public partial class CMsgGenericResult : global::ProtoBuf.IExtensible
   {
     public CMsgGenericResult() {}

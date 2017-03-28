@@ -8,11 +8,13 @@
 //------------------------------------------------------------------------------
 #pragma warning disable 1591
 
+// Option: light framework (CF/Silverlight) enabled
+    
 // Generated from: steammessages_linkfilter.steamclient.proto
 // Note: requires additional types generated from: steammessages_unified_base.steamclient.proto
 namespace SteamKit2.Unified.Internal
 {
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCommunity_GetLinkFilterHashPrefixes_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CCommunity_GetLinkFilterHashPrefixes_Request")]
   public partial class CCommunity_GetLinkFilterHashPrefixes_Request : global::ProtoBuf.IExtensible
   {
     public CCommunity_GetLinkFilterHashPrefixes_Request() {}
@@ -49,7 +51,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCommunity_GetLinkFilterHashPrefixes_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CCommunity_GetLinkFilterHashPrefixes_Response")]
   public partial class CCommunity_GetLinkFilterHashPrefixes_Response : global::ProtoBuf.IExtensible
   {
     public CCommunity_GetLinkFilterHashPrefixes_Response() {}
@@ -66,7 +68,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCommunity_GetLinkFilterHashes_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CCommunity_GetLinkFilterHashes_Request")]
   public partial class CCommunity_GetLinkFilterHashes_Request : global::ProtoBuf.IExtensible
   {
     public CCommunity_GetLinkFilterHashes_Request() {}
@@ -103,7 +105,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCommunity_GetLinkFilterHashes_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CCommunity_GetLinkFilterHashes_Response")]
   public partial class CCommunity_GetLinkFilterHashes_Response : global::ProtoBuf.IExtensible
   {
     public CCommunity_GetLinkFilterHashes_Response() {}
@@ -120,7 +122,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCommunity_GetLinkFilterListVersion_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CCommunity_GetLinkFilterListVersion_Request")]
   public partial class CCommunity_GetLinkFilterListVersion_Request : global::ProtoBuf.IExtensible
   {
     public CCommunity_GetLinkFilterListVersion_Request() {}
@@ -139,7 +141,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCommunity_GetLinkFilterListVersion_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CCommunity_GetLinkFilterListVersion_Response")]
   public partial class CCommunity_GetLinkFilterListVersion_Response : global::ProtoBuf.IExtensible
   {
     public CCommunity_GetLinkFilterListVersion_Response() {}

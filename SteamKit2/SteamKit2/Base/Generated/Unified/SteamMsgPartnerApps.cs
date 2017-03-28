@@ -8,11 +8,13 @@
 //------------------------------------------------------------------------------
 #pragma warning disable 1591
 
+// Option: light framework (CF/Silverlight) enabled
+    
 // Generated from: steammessages_partnerapps.steamclient.proto
 // Note: requires additional types generated from: steammessages_unified_base.steamclient.proto
 namespace SteamKit2.Unified.Internal
 {
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPartnerApps_RequestUploadToken_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CPartnerApps_RequestUploadToken_Request")]
   public partial class CPartnerApps_RequestUploadToken_Request : global::ProtoBuf.IExtensible
   {
     public CPartnerApps_RequestUploadToken_Request() {}
@@ -40,7 +42,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPartnerApps_RequestUploadToken_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CPartnerApps_RequestUploadToken_Response")]
   public partial class CPartnerApps_RequestUploadToken_Response : global::ProtoBuf.IExtensible
   {
     public CPartnerApps_RequestUploadToken_Response() {}
@@ -77,7 +79,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPartnerApps_FinishUpload_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CPartnerApps_FinishUpload_Request")]
   public partial class CPartnerApps_FinishUpload_Request : global::ProtoBuf.IExtensible
   {
     public CPartnerApps_FinishUpload_Request() {}
@@ -114,7 +116,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPartnerApps_FinishUploadKVSign_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CPartnerApps_FinishUploadKVSign_Response")]
   public partial class CPartnerApps_FinishUploadKVSign_Response : global::ProtoBuf.IExtensible
   {
     public CPartnerApps_FinishUploadKVSign_Response() {}
@@ -133,7 +135,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPartnerApps_FinishUploadLegacyDRM_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CPartnerApps_FinishUploadLegacyDRM_Request")]
   public partial class CPartnerApps_FinishUploadLegacyDRM_Request : global::ProtoBuf.IExtensible
   {
     public CPartnerApps_FinishUploadLegacyDRM_Request() {}
@@ -188,7 +190,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPartnerApps_FinishUploadLegacyDRM_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CPartnerApps_FinishUploadLegacyDRM_Response")]
   public partial class CPartnerApps_FinishUploadLegacyDRM_Response : global::ProtoBuf.IExtensible
   {
     public CPartnerApps_FinishUploadLegacyDRM_Response() {}
@@ -207,7 +209,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPartnerApps_FinishUpload_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CPartnerApps_FinishUpload_Response")]
   public partial class CPartnerApps_FinishUpload_Response : global::ProtoBuf.IExtensible
   {
     public CPartnerApps_FinishUpload_Response() {}
@@ -217,7 +219,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPartnerApps_FindDRMUploads_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CPartnerApps_FindDRMUploads_Request")]
   public partial class CPartnerApps_FindDRMUploads_Request : global::ProtoBuf.IExtensible
   {
     public CPartnerApps_FindDRMUploads_Request() {}
@@ -236,7 +238,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPartnerApps_ExistingDRMUpload")]
+  [global::ProtoBuf.ProtoContract(Name=@"CPartnerApps_ExistingDRMUpload")]
   public partial class CPartnerApps_ExistingDRMUpload : global::ProtoBuf.IExtensible
   {
     public CPartnerApps_ExistingDRMUpload() {}
@@ -318,7 +320,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPartnerApps_FindDRMUploads_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CPartnerApps_FindDRMUploads_Response")]
   public partial class CPartnerApps_FindDRMUploads_Response : global::ProtoBuf.IExtensible
   {
     public CPartnerApps_FindDRMUploads_Response() {}
@@ -335,7 +337,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPartnerApps_Download_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CPartnerApps_Download_Request")]
   public partial class CPartnerApps_Download_Request : global::ProtoBuf.IExtensible
   {
     public CPartnerApps_Download_Request() {}
@@ -363,7 +365,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPartnerApps_Download_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CPartnerApps_Download_Response")]
   public partial class CPartnerApps_Download_Response : global::ProtoBuf.IExtensible
   {
     public CPartnerApps_Download_Response() {}

@@ -8,11 +8,13 @@
 //------------------------------------------------------------------------------
 #pragma warning disable 1591
 
+// Option: light framework (CF/Silverlight) enabled
+    
 // Generated from: steammessages_inventory.steamclient.proto
 // Note: requires additional types generated from: steammessages_unified_base.steamclient.proto
 namespace SteamKit2.Unified.Internal
 {
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CInventory_GetInventory_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CInventory_GetInventory_Request")]
   public partial class CInventory_GetInventory_Request : global::ProtoBuf.IExtensible
   {
     public CInventory_GetInventory_Request() {}
@@ -40,7 +42,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CInventory_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CInventory_Response")]
   public partial class CInventory_Response : global::ProtoBuf.IExtensible
   {
     public CInventory_Response() {}
@@ -102,7 +104,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CInventory_ExchangeItem_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CInventory_ExchangeItem_Request")]
   public partial class CInventory_ExchangeItem_Request : global::ProtoBuf.IExtensible
   {
     public CInventory_ExchangeItem_Request() {}
@@ -153,7 +155,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CInventory_GetEligiblePromoItemDefIDs_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CInventory_GetEligiblePromoItemDefIDs_Request")]
   public partial class CInventory_GetEligiblePromoItemDefIDs_Request : global::ProtoBuf.IExtensible
   {
     public CInventory_GetEligiblePromoItemDefIDs_Request() {}
@@ -181,7 +183,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CInventory_GetEligiblePromoItemDefIDs_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CInventory_GetEligiblePromoItemDefIDs_Response")]
   public partial class CInventory_GetEligiblePromoItemDefIDs_Response : global::ProtoBuf.IExtensible
   {
     public CInventory_GetEligiblePromoItemDefIDs_Response() {}
@@ -198,7 +200,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CInventory_AddItem_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CInventory_AddItem_Request")]
   public partial class CInventory_AddItem_Request : global::ProtoBuf.IExtensible
   {
     public CInventory_AddItem_Request() {}
@@ -258,7 +260,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CInventory_SafeModifyItem_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CInventory_SafeModifyItem_Request")]
   public partial class CInventory_SafeModifyItem_Request : global::ProtoBuf.IExtensible
   {
     public CInventory_SafeModifyItem_Request() {}
@@ -304,7 +306,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CInventory_ConsumePlaytime_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CInventory_ConsumePlaytime_Request")]
   public partial class CInventory_ConsumePlaytime_Request : global::ProtoBuf.IExtensible
   {
     public CInventory_ConsumePlaytime_Request() {}
@@ -332,7 +334,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CInventory_ConsumeItem_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CInventory_ConsumeItem_Request")]
   public partial class CInventory_ConsumeItem_Request : global::ProtoBuf.IExtensible
   {
     public CInventory_ConsumeItem_Request() {}
@@ -396,7 +398,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CInventory_DevSetNextDrop_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CInventory_DevSetNextDrop_Request")]
   public partial class CInventory_DevSetNextDrop_Request : global::ProtoBuf.IExtensible
   {
     public CInventory_DevSetNextDrop_Request() {}
@@ -433,7 +435,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CInventory_SplitItemStack_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CInventory_SplitItemStack_Request")]
   public partial class CInventory_SplitItemStack_Request : global::ProtoBuf.IExtensible
   {
     public CInventory_SplitItemStack_Request() {}
@@ -479,7 +481,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CInventory_CombineItemStacks_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CInventory_CombineItemStacks_Request")]
   public partial class CInventory_CombineItemStacks_Request : global::ProtoBuf.IExtensible
   {
     public CInventory_CombineItemStacks_Request() {}
@@ -543,7 +545,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CInventory_GetItemDefMeta_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CInventory_GetItemDefMeta_Request")]
   public partial class CInventory_GetItemDefMeta_Request : global::ProtoBuf.IExtensible
   {
     public CInventory_GetItemDefMeta_Request() {}
@@ -562,7 +564,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CInventory_GetItemDefMeta_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CInventory_GetItemDefMeta_Response")]
   public partial class CInventory_GetItemDefMeta_Response : global::ProtoBuf.IExtensible
   {
     public CInventory_GetItemDefMeta_Response() {}

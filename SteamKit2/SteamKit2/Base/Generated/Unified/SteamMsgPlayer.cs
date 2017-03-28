@@ -8,11 +8,13 @@
 //------------------------------------------------------------------------------
 #pragma warning disable 1591
 
+// Option: light framework (CF/Silverlight) enabled
+    
 // Generated from: steammessages_player.steamclient.proto
 // Note: requires additional types generated from: steammessages_unified_base.steamclient.proto
 namespace SteamKit2.Unified.Internal
 {
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPlayer_GetGameBadgeLevels_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CPlayer_GetGameBadgeLevels_Request")]
   public partial class CPlayer_GetGameBadgeLevels_Request : global::ProtoBuf.IExtensible
   {
     public CPlayer_GetGameBadgeLevels_Request() {}
@@ -31,7 +33,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPlayer_GetGameBadgeLevels_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CPlayer_GetGameBadgeLevels_Response")]
   public partial class CPlayer_GetGameBadgeLevels_Response : global::ProtoBuf.IExtensible
   {
     public CPlayer_GetGameBadgeLevels_Response() {}
@@ -52,7 +54,7 @@ namespace SteamKit2.Unified.Internal
       get { return _badges; }
     }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Badge")]
+  [global::ProtoBuf.ProtoContract(Name=@"Badge")]
   public partial class Badge : global::ProtoBuf.IExtensible
   {
     public Badge() {}
@@ -94,7 +96,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPlayer_GetLastPlayedTimes_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CPlayer_GetLastPlayedTimes_Request")]
   public partial class CPlayer_GetLastPlayedTimes_Request : global::ProtoBuf.IExtensible
   {
     public CPlayer_GetLastPlayedTimes_Request() {}
@@ -113,7 +115,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPlayer_GetLastPlayedTimes_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CPlayer_GetLastPlayedTimes_Response")]
   public partial class CPlayer_GetLastPlayedTimes_Response : global::ProtoBuf.IExtensible
   {
     public CPlayer_GetLastPlayedTimes_Response() {}
@@ -125,7 +127,7 @@ namespace SteamKit2.Unified.Internal
       get { return _games; }
     }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Game")]
+  [global::ProtoBuf.ProtoContract(Name=@"Game")]
   public partial class Game : global::ProtoBuf.IExtensible
   {
     public Game() {}
@@ -176,7 +178,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPlayer_AcceptSSA_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CPlayer_AcceptSSA_Request")]
   public partial class CPlayer_AcceptSSA_Request : global::ProtoBuf.IExtensible
   {
     public CPlayer_AcceptSSA_Request() {}
@@ -186,7 +188,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPlayer_AcceptSSA_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CPlayer_AcceptSSA_Response")]
   public partial class CPlayer_AcceptSSA_Response : global::ProtoBuf.IExtensible
   {
     public CPlayer_AcceptSSA_Response() {}
@@ -196,7 +198,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPlayer_LastPlayedTimes_Notification")]
+  [global::ProtoBuf.ProtoContract(Name=@"CPlayer_LastPlayedTimes_Notification")]
   public partial class CPlayer_LastPlayedTimes_Notification : global::ProtoBuf.IExtensible
   {
     public CPlayer_LastPlayedTimes_Notification() {}

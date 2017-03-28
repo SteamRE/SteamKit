@@ -1,4 +1,5 @@
-﻿using SteamKit2.Discovery;
+﻿#if NET46
+using SteamKit2.Discovery;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -34,3 +35,4 @@ namespace Tests
         }
     }
 }
+#endif

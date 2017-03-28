@@ -1,19 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Management;
+using System.Threading.Tasks;
 using System.Net.NetworkInformation;
 using System.Text;
-using Microsoft.Win32;
+using SteamKit2.Util;
 using SteamKit2.Util.MacHelpers;
+using Microsoft.Win32;
+
+#if NETSTANDARD1_3
+using System.Runtime.InteropServices;
+#endif
 
 using static SteamKit2.Util.MacHelpers.LibC;
 using static SteamKit2.Util.MacHelpers.CoreFoundation;
 using static SteamKit2.Util.MacHelpers.DiskArbitration;
 using static SteamKit2.Util.MacHelpers.IOKit;
-using System.Threading.Tasks;
-using System.Runtime.InteropServices;
 
 namespace SteamKit2
 {
@@ -21,6 +23,20 @@ namespace SteamKit2
     {
         public static MachineInfoProvider GetProvider()
         {
+#if NETSTANDARD1_3
+            if ( RuntimeInformation.IsOSPlatform( OSPlatform.Windows ) )
+            {
+                return new WindowsInfoProvider();
+            }
+            else if ( RuntimeInformation.IsOSPlatform( OSPlatform.OSX ) )
+            {
+                return new OSXInfoProvider();
+            }
+            else if ( RuntimeInformation.IsOSPlatform( OSPlatform.Linux ) )
+            {
+                return new LinuxInfoProvider();
+            }
+#elif NET46
             switch ( Environment.OSVersion.Platform )
             {
                 case PlatformID.Win32NT:
@@ -37,6 +53,9 @@ namespace SteamKit2
                         return new LinuxInfoProvider();
                     }
             }
+#else
+#error Unknown Target Platform
+#endif
 
             return new DefaultInfoProvider();
         }
@@ -50,7 +69,13 @@ namespace SteamKit2
     {
         public override byte[] GetMachineGuid()
         {
+#if NETSTANDARD1_3
+            return Encoding.UTF8.GetBytes( "SteamKit2-MachineID" );
+#elif NET46
             return Encoding.UTF8.GetBytes( Environment.MachineName + "-SteamKit" );
+#else
+#error Unknown Target Platform
+#endif
         }
 
         public override byte[] GetMacAddress()
@@ -81,6 +106,9 @@ namespace SteamKit2
     {
         public override byte[] GetMachineGuid()
         {
+#if NETSTANDARD1_3
+            return base.GetMachineGuid();
+#elif NET46
             RegistryKey localKey = RegistryKey
                 .OpenBaseKey( Microsoft.Win32.RegistryHive.LocalMachine, RegistryView.Registry64 )
                 .OpenSubKey( @"SOFTWARE\Microsoft\Cryptography" );
@@ -98,33 +126,14 @@ namespace SteamKit2
             }
 
             return Encoding.UTF8.GetBytes( guid.ToString() );
+#else
+#error Unknown Target Platform
+#endif
         }
 
         public override byte[] GetDiskId()
         {
-            var activePartition = WmiQuery(
-                @"SELECT DiskIndex FROM Win32_DiskPartition
-                  WHERE Bootable = 1"
-                ).FirstOrDefault();
-
-            if ( activePartition == null )
-            {
-                return base.GetDiskId();
-            }
-
-            uint index = (uint)activePartition["DiskIndex"];
-
-            var bootableDisk = WmiQuery(
-                @"SELECT SerialNumber FROM Win32_DiskDrive
-                  WHERE Index = {0}", index
-                ).FirstOrDefault();
-
-            if ( bootableDisk == null )
-            {
-                return base.GetDiskId();
-            }
-
-            string serialNumber = (string)bootableDisk["SerialNumber"];
+            var serialNumber = Win32Helpers.GetBootDiskSerialNumber();
 
             if ( string.IsNullOrEmpty( serialNumber ) )
             {
@@ -132,23 +141,6 @@ namespace SteamKit2
             }
 
             return Encoding.UTF8.GetBytes( serialNumber );
-        }
-
-
-        IEnumerable<ManagementObject> WmiQuery( string queryFormat, params object[] args )
-        {
-            string query = string.Format( queryFormat, args );
-
-            var searcher = new ManagementObjectSearcher( query );
-
-            try {
-                return searcher.Get().Cast<ManagementObject>();
-            }
-            catch ( Exception ex )
-            {
-                DebugLog.WriteLine( nameof(WindowsInfoProvider), "Failed to execute WMI query '{0}': {1}", query, ex.Message );
-                return Enumerable.Empty<ManagementObject>();
-            }
         }
     }
 

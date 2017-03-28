@@ -8,11 +8,13 @@
 //------------------------------------------------------------------------------
 #pragma warning disable 1591
 
+// Option: light framework (CF/Silverlight) enabled
+    
 // Generated from: steammessages_unified_base.steamclient.proto
 // Note: requires additional types generated from: google/protobuf/descriptor.proto
 namespace SteamKit2.Unified.Internal
 {
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"NoResponse")]
+  [global::ProtoBuf.ProtoContract(Name=@"NoResponse")]
   public partial class NoResponse : global::ProtoBuf.IExtensible
   {
     public NoResponse() {}

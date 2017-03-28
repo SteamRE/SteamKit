@@ -8,11 +8,13 @@
 //------------------------------------------------------------------------------
 #pragma warning disable 1591
 
+// Option: light framework (CF/Silverlight) enabled
+    
 // Generated from: steammessages_secrets.steamclient.proto
 // Note: requires additional types generated from: steammessages_unified_base.steamclient.proto
 namespace SteamKit2.Unified.Internal
 {
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CKeyEscrow_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CKeyEscrow_Request")]
   public partial class CKeyEscrow_Request : global::ProtoBuf.IExtensible
   {
     public CKeyEscrow_Request() {}
@@ -58,7 +60,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CKeyEscrow_Ticket")]
+  [global::ProtoBuf.ProtoContract(Name=@"CKeyEscrow_Ticket")]
   public partial class CKeyEscrow_Ticket : global::ProtoBuf.IExtensible
   {
     public CKeyEscrow_Ticket() {}
@@ -149,7 +151,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CKeyEscrow_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CKeyEscrow_Response")]
   public partial class CKeyEscrow_Response : global::ProtoBuf.IExtensible
   {
     public CKeyEscrow_Response() {}

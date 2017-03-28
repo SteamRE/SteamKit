@@ -8,11 +8,13 @@
 //------------------------------------------------------------------------------
 #pragma warning disable 1591
 
+// Option: light framework (CF/Silverlight) enabled
+    
 // Generated from: engine_gcmessages.proto
 // Note: requires additional types generated from: google/protobuf/descriptor.proto
 namespace SteamKit2.GC.CSGO.Internal
 {
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CEngineGotvSyncPacket")]
+  [global::ProtoBuf.ProtoContract(Name=@"CEngineGotvSyncPacket")]
   public partial class CEngineGotvSyncPacket : global::ProtoBuf.IExtensible
   {
     public CEngineGotvSyncPacket() {}

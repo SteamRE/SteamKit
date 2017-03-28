@@ -8,10 +8,12 @@
 //------------------------------------------------------------------------------
 #pragma warning disable 1591
 
+// Option: light framework (CF/Silverlight) enabled
+    
 // Generated from: dota_shared_enums.proto
 namespace SteamKit2.GC.Dota.Internal
 {
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CDOTAClientHardwareSpecs")]
+  [global::ProtoBuf.ProtoContract(Name=@"CDOTAClientHardwareSpecs")]
   public partial class CDOTAClientHardwareSpecs : global::ProtoBuf.IExtensible
   {
     public CDOTAClientHardwareSpecs() {}
@@ -75,7 +77,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CDOTASaveGame")]
+  [global::ProtoBuf.ProtoContract(Name=@"CDOTASaveGame")]
   public partial class CDOTASaveGame : global::ProtoBuf.IExtensible
   {
     public CDOTASaveGame() {}
@@ -112,7 +114,7 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _save_instances; }
     }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Player")]
+  [global::ProtoBuf.ProtoContract(Name=@"Player")]
   public partial class Player : global::ProtoBuf.IExtensible
   {
     public Player() {}
@@ -149,7 +151,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"SaveInstance")]
+  [global::ProtoBuf.ProtoContract(Name=@"SaveInstance")]
   public partial class SaveInstance : global::ProtoBuf.IExtensible
   {
     public SaveInstance() {}
@@ -206,7 +208,7 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _save_time; }
       set { _save_time = value; }
     }
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"PlayerPositions")]
+  [global::ProtoBuf.ProtoContract(Name=@"PlayerPositions")]
   public partial class PlayerPositions : global::ProtoBuf.IExtensible
   {
     public PlayerPositions() {}

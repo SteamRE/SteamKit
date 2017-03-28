@@ -207,7 +207,7 @@ namespace Sample5_SteamGuard
                 fileSize = ( int )fs.Length;
 
                 fs.Seek( 0, SeekOrigin.Begin );
-                using ( var sha = new SHA1CryptoServiceProvider() )
+                using ( var sha = SHA1.Create() )
                 {
                     sentryHash = sha.ComputeHash( fs );
                 }

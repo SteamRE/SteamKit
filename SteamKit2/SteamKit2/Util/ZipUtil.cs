@@ -262,10 +262,11 @@ namespace SteamKit2
         private static byte[] DeflateBuffer( byte[] uncompressedBuffer )
         {
             using ( MemoryStream ms = new MemoryStream() )
-            using ( DeflateStream deflateStream = new DeflateStream( ms, CompressionMode.Compress ) )
             {
-                deflateStream.Write( uncompressedBuffer, 0, uncompressedBuffer.Length );
-                deflateStream.Close();
+                using ( DeflateStream deflateStream = new DeflateStream( ms, CompressionMode.Compress ) )
+                {
+                    deflateStream.Write( uncompressedBuffer, 0, uncompressedBuffer.Length );
+                }
 
                 return ms.ToArray();
             }

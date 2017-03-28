@@ -8,11 +8,13 @@
 //------------------------------------------------------------------------------
 #pragma warning disable 1591
 
+// Option: light framework (CF/Silverlight) enabled
+    
 // Generated from: dota_gcmessages_client_chat.proto
 // Note: requires additional types generated from: dota_shared_enums.proto
 namespace SteamKit2.GC.Dota.Internal
 {
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientToGCPrivateChatInvite")]
+  [global::ProtoBuf.ProtoContract(Name=@"CMsgClientToGCPrivateChatInvite")]
   public partial class CMsgClientToGCPrivateChatInvite : global::ProtoBuf.IExtensible
   {
     public CMsgClientToGCPrivateChatInvite() {}
@@ -40,7 +42,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientToGCPrivateChatKick")]
+  [global::ProtoBuf.ProtoContract(Name=@"CMsgClientToGCPrivateChatKick")]
   public partial class CMsgClientToGCPrivateChatKick : global::ProtoBuf.IExtensible
   {
     public CMsgClientToGCPrivateChatKick() {}
@@ -68,7 +70,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientToGCPrivateChatPromote")]
+  [global::ProtoBuf.ProtoContract(Name=@"CMsgClientToGCPrivateChatPromote")]
   public partial class CMsgClientToGCPrivateChatPromote : global::ProtoBuf.IExtensible
   {
     public CMsgClientToGCPrivateChatPromote() {}
@@ -96,7 +98,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientToGCPrivateChatDemote")]
+  [global::ProtoBuf.ProtoContract(Name=@"CMsgClientToGCPrivateChatDemote")]
   public partial class CMsgClientToGCPrivateChatDemote : global::ProtoBuf.IExtensible
   {
     public CMsgClientToGCPrivateChatDemote() {}
@@ -124,7 +126,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCToClientPrivateChatResponse")]
+  [global::ProtoBuf.ProtoContract(Name=@"CMsgGCToClientPrivateChatResponse")]
   public partial class CMsgGCToClientPrivateChatResponse : global::ProtoBuf.IExtensible
   {
     public CMsgGCToClientPrivateChatResponse() {}
@@ -211,7 +213,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientToGCPrivateChatInfoRequest")]
+  [global::ProtoBuf.ProtoContract(Name=@"CMsgClientToGCPrivateChatInfoRequest")]
   public partial class CMsgClientToGCPrivateChatInfoRequest : global::ProtoBuf.IExtensible
   {
     public CMsgClientToGCPrivateChatInfoRequest() {}
@@ -230,7 +232,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCToClientPrivateChatInfoResponse")]
+  [global::ProtoBuf.ProtoContract(Name=@"CMsgGCToClientPrivateChatInfoResponse")]
   public partial class CMsgGCToClientPrivateChatInfoResponse : global::ProtoBuf.IExtensible
   {
     public CMsgGCToClientPrivateChatInfoResponse() {}
@@ -269,7 +271,7 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _creation_date; }
       set { _creation_date = value; }
     }
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Member")]
+  [global::ProtoBuf.ProtoContract(Name=@"Member")]
   public partial class Member : global::ProtoBuf.IExtensible
   {
     public Member() {}
@@ -311,7 +313,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAJoinChatChannel")]
+  [global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAJoinChatChannel")]
   public partial class CMsgDOTAJoinChatChannel : global::ProtoBuf.IExtensible
   {
     public CMsgDOTAJoinChatChannel() {}
@@ -339,7 +341,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTALeaveChatChannel")]
+  [global::ProtoBuf.ProtoContract(Name=@"CMsgDOTALeaveChatChannel")]
   public partial class CMsgDOTALeaveChatChannel : global::ProtoBuf.IExtensible
   {
     public CMsgDOTALeaveChatChannel() {}
@@ -358,7 +360,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCChatReportPublicSpam")]
+  [global::ProtoBuf.ProtoContract(Name=@"CMsgGCChatReportPublicSpam")]
   public partial class CMsgGCChatReportPublicSpam : global::ProtoBuf.IExtensible
   {
     public CMsgGCChatReportPublicSpam() {}
@@ -386,7 +388,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAClientIgnoredUser")]
+  [global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAClientIgnoredUser")]
   public partial class CMsgDOTAClientIgnoredUser : global::ProtoBuf.IExtensible
   {
     public CMsgDOTAClientIgnoredUser() {}
@@ -405,7 +407,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAChatMessage")]
+  [global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAChatMessage")]
   public partial class CMsgDOTAChatMessage : global::ProtoBuf.IExtensible
   {
     public CMsgDOTAChatMessage() {}
@@ -671,7 +673,7 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _terse; }
       set { _terse = value; }
     }
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"DiceRoll")]
+  [global::ProtoBuf.ProtoContract(Name=@"DiceRoll")]
   public partial class DiceRoll : global::ProtoBuf.IExtensible
   {
     public DiceRoll() {}
@@ -713,7 +715,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAChatMember")]
+  [global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAChatMember")]
   public partial class CMsgDOTAChatMember : global::ProtoBuf.IExtensible
   {
     public CMsgDOTAChatMember() {}
@@ -759,7 +761,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAJoinChatChannelResponse")]
+  [global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAJoinChatChannelResponse")]
   public partial class CMsgDOTAJoinChatChannelResponse : global::ProtoBuf.IExtensible
   {
     public CMsgDOTAJoinChatChannelResponse() {}
@@ -904,7 +906,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAChatChannelFullUpdate")]
+  [global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAChatChannelFullUpdate")]
   public partial class CMsgDOTAChatChannelFullUpdate : global::ProtoBuf.IExtensible
   {
     public CMsgDOTAChatChannelFullUpdate() {}
@@ -930,7 +932,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAOtherJoinedChatChannel")]
+  [global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAOtherJoinedChatChannel")]
   public partial class CMsgDOTAOtherJoinedChatChannel : global::ProtoBuf.IExtensible
   {
     public CMsgDOTAOtherJoinedChatChannel() {}
@@ -985,7 +987,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAOtherLeftChatChannel")]
+  [global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAOtherLeftChatChannel")]
   public partial class CMsgDOTAOtherLeftChatChannel : global::ProtoBuf.IExtensible
   {
     public CMsgDOTAOtherLeftChatChannel() {}
@@ -1022,7 +1024,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAChatChannelMemberUpdate")]
+  [global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAChatChannelMemberUpdate")]
   public partial class CMsgDOTAChatChannelMemberUpdate : global::ProtoBuf.IExtensible
   {
     public CMsgDOTAChatChannelMemberUpdate() {}
@@ -1050,7 +1052,7 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _joined_members; }
     }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"JoinedMember")]
+  [global::ProtoBuf.ProtoContract(Name=@"JoinedMember")]
   public partial class JoinedMember : global::ProtoBuf.IExtensible
   {
     public JoinedMember() {}
@@ -1101,7 +1103,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTARequestChatChannelList")]
+  [global::ProtoBuf.ProtoContract(Name=@"CMsgDOTARequestChatChannelList")]
   public partial class CMsgDOTARequestChatChannelList : global::ProtoBuf.IExtensible
   {
     public CMsgDOTARequestChatChannelList() {}
@@ -1111,7 +1113,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTARequestChatChannelListResponse")]
+  [global::ProtoBuf.ProtoContract(Name=@"CMsgDOTARequestChatChannelListResponse")]
   public partial class CMsgDOTARequestChatChannelListResponse : global::ProtoBuf.IExtensible
   {
     public CMsgDOTARequestChatChannelListResponse() {}
@@ -1123,7 +1125,7 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _channels; }
     }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ChatChannel")]
+  [global::ProtoBuf.ProtoContract(Name=@"ChatChannel")]
   public partial class ChatChannel : global::ProtoBuf.IExtensible
   {
     public ChatChannel() {}
@@ -1165,7 +1167,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAChatGetUserList")]
+  [global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAChatGetUserList")]
   public partial class CMsgDOTAChatGetUserList : global::ProtoBuf.IExtensible
   {
     public CMsgDOTAChatGetUserList() {}
@@ -1184,7 +1186,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAChatGetUserListResponse")]
+  [global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAChatGetUserListResponse")]
   public partial class CMsgDOTAChatGetUserListResponse : global::ProtoBuf.IExtensible
   {
     public CMsgDOTAChatGetUserListResponse() {}
@@ -1205,7 +1207,7 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _members; }
     }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Member")]
+  [global::ProtoBuf.ProtoContract(Name=@"Member")]
   public partial class Member : global::ProtoBuf.IExtensible
   {
     public Member() {}
@@ -1256,7 +1258,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAChatGetMemberCount")]
+  [global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAChatGetMemberCount")]
   public partial class CMsgDOTAChatGetMemberCount : global::ProtoBuf.IExtensible
   {
     public CMsgDOTAChatGetMemberCount() {}
@@ -1284,7 +1286,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAChatGetMemberCountResponse")]
+  [global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAChatGetMemberCountResponse")]
   public partial class CMsgDOTAChatGetMemberCountResponse : global::ProtoBuf.IExtensible
   {
     public CMsgDOTAChatGetMemberCountResponse() {}
@@ -1321,7 +1323,7 @@ namespace SteamKit2.GC.Dota.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAChatRegionsEnabled")]
+  [global::ProtoBuf.ProtoContract(Name=@"CMsgDOTAChatRegionsEnabled")]
   public partial class CMsgDOTAChatRegionsEnabled : global::ProtoBuf.IExtensible
   {
     public CMsgDOTAChatRegionsEnabled() {}
@@ -1342,7 +1344,7 @@ namespace SteamKit2.GC.Dota.Internal
       get { return _enabled_regions; }
     }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Region")]
+  [global::ProtoBuf.ProtoContract(Name=@"Region")]
   public partial class Region : global::ProtoBuf.IExtensible
   {
     public Region() {}

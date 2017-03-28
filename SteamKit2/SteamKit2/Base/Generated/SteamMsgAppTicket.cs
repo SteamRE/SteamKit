@@ -8,10 +8,12 @@
 //------------------------------------------------------------------------------
 #pragma warning disable 1591
 
+// Option: light framework (CF/Silverlight) enabled
+    
 // Generated from: encrypted_app_ticket.proto
 namespace SteamKit2.Internal
 {
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"EncryptedAppTicket")]
+  [global::ProtoBuf.ProtoContract(Name=@"EncryptedAppTicket")]
   public partial class EncryptedAppTicket : global::ProtoBuf.IExtensible
   {
     public EncryptedAppTicket() {}

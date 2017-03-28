@@ -1,5 +1,5 @@
 version: 1.8.3.{build}
-os: Visual Studio 2015
+os: Visual Studio 2017
 
 cache:
   - '%LocalAppData%\NuGet\Cache'
@@ -16,14 +16,8 @@ configuration:
   - Debug
   - Release
 
-environment:
-  SK_BUILD_CONFIGURATION: $(configuration)
-
 init:
   - git config --global core.autocrlf true
-
-install:
-  - set PATH=C:\Program Files (x86)\MSBuild\14.0\Bin;%PATH%
 
 before_build:
   - nuget restore SteamKit2\SteamKit2.sln
@@ -37,29 +31,29 @@ build_script:
   - msbuild Resources\NetHookAnalyzer2\NetHookAnalyzer2.sln
 
 after_build:
-  - '7z a NetHook2.zip .\Resources\NetHook2\%SK_BUILD_CONFIGURATION%\*.dll .\Resources\NetHook2\%SK_BUILD_CONFIGURATION%\*.pdb'
+  - '7z a NetHook2.zip .\Resources\NetHook2\%CONFIGURATION%\*.dll .\Resources\NetHook2\%CONFIGURATION%\*.pdb'
   - ps: |
-      $args = @('pack', 'SteamKit2\SteamKit2.nuspec')
+      $args = @('pack', 'SteamKit2\SteamKit2\SteamKit2.csproj')
       $version = $null
       if (Test-Path Env:APPVEYOR_REPO_TAG_NAME)
       {
           $version = (Get-Item Env:APPVEYOR_REPO_TAG_NAME).Value
       }
       
-      if (![string]::IsNullOrEmpty($version))
+      if ([string]::IsNullOrEmpty($version))
       {
-          $args += $('-Version', $version)
+          $version = $env:APPVEYOR_BUILD_VERSION + '-Alpha'
       }
-      & nuget $args
+
+      $args += $('/p:Version=' + $version)
+      & dotnet $args
 
 test_script:
   - ps: |
-      $TestAssembly = "SteamKit2\Tests\Bin\$env:SK_BUILD_CONFIGURATION\Tests.dll"
-      
-      if (Test-Path $TestAssembly)
+      if ($env:CONFIGURATION -eq 'Debug')
       {
-          & nuget install OpenCover -Version 4.6.166 -OutputDirectory SteamKit2\packages
-          & SteamKit2\packages\OpenCover.4.6.166\tools\OpenCover.Console.exe -register:user "-target:%xunit20%\xunit.console.exe" "-targetargs:$TestAssembly -noshadow -appveyor" -returntargetcode "-filter:+[SteamKit2]* -[SteamKit2]SteamKit2.Internal.* -[SteamKit2]SteamKit2.*.Internal.* -[SteamKit2]SevenZip*" "-excludebyattribute:*.ProtoContract*" -hideskipped:All -output:SteamKit2-code-coverage.xml
+          & nuget install OpenCover -Version 4.6.519 -OutputDirectory SteamKit2\packages
+          & SteamKit2\packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -register:user "-target:%ProgramFiles%\dotnet\dotnet.exe" "-targetargs:test SteamKit2\Tests\Tests.csproj" -returntargetcode "-filter:+[SteamKit2]* -[SteamKit2]SteamKit2.Internal.* -[SteamKit2]SteamKit2.*.Internal.* -[SteamKit2]SevenZip*" "-excludebyattribute:*.ProtoContract*" -hideskipped:All -output:SteamKit2-code-coverage.xml
           $env:Path = "C:\Python34;C:\Python34\Scripts;" + $env:Path
           & pip install codecov
           & codecov -f "SteamKit2-code-coverage.xml" -X gcov
@@ -67,7 +61,7 @@ test_script:
 
 artifacts:
   - path: NetHook2.zip
-  - path: 'SteamKit2.*.nupkg'
+  - path: 'SteamKit2\SteamKit2\bin\$(configuration)\*.nupkg'
     name: SteamKit2.nupkg
   - path: 'Resources\NetHookAnalyzer2\NetHookAnalyzer2\Bin\$(configuration)'
     name: NetHookAnalyzer2

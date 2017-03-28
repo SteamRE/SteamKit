@@ -5,6 +5,7 @@ using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using SteamKit2.Internal;
+using System.Net.Http;
 
 namespace SteamKit2
 {
@@ -52,7 +53,7 @@ namespace SteamKit2
 
             cancellationToken.ThrowIfCancellationRequested();
 
-            var task = directory.Call( "GetCMList", version: 1, args: args, secure: true );
+            var task = directory.CallAsync( HttpMethod.Get, "GetCMList", version: 1, args: args, secure: true );
             return task.ContinueWith( t =>
             {
                 var response = task.Result;

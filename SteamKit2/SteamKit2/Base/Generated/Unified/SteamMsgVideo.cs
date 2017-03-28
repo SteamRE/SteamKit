@@ -8,11 +8,13 @@
 //------------------------------------------------------------------------------
 #pragma warning disable 1591
 
+// Option: light framework (CF/Silverlight) enabled
+    
 // Generated from: steammessages_video.steamclient.proto
 // Note: requires additional types generated from: steammessages_unified_base.steamclient.proto
 namespace SteamKit2.Unified.Internal
 {
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CVideo_ClientGetVideoURL_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CVideo_ClientGetVideoURL_Request")]
   public partial class CVideo_ClientGetVideoURL_Request : global::ProtoBuf.IExtensible
   {
     public CVideo_ClientGetVideoURL_Request() {}
@@ -40,7 +42,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CVideo_ClientGetVideoURL_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CVideo_ClientGetVideoURL_Response")]
   public partial class CVideo_ClientGetVideoURL_Response : global::ProtoBuf.IExtensible
   {
     public CVideo_ClientGetVideoURL_Response() {}
@@ -68,7 +70,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CVideo_UnlockedH264_Notification")]
+  [global::ProtoBuf.ProtoContract(Name=@"CVideo_UnlockedH264_Notification")]
   public partial class CVideo_UnlockedH264_Notification : global::ProtoBuf.IExtensible
   {
     public CVideo_UnlockedH264_Notification() {}

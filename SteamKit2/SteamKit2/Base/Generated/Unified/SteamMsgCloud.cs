@@ -8,11 +8,13 @@
 //------------------------------------------------------------------------------
 #pragma warning disable 1591
 
+// Option: light framework (CF/Silverlight) enabled
+    
 // Generated from: steammessages_cloud.steamclient.proto
 // Note: requires additional types generated from: steammessages_unified_base.steamclient.proto
 namespace SteamKit2.Unified.Internal
 {
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCloud_GetUploadServerInfo_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CCloud_GetUploadServerInfo_Request")]
   public partial class CCloud_GetUploadServerInfo_Request : global::ProtoBuf.IExtensible
   {
     public CCloud_GetUploadServerInfo_Request() {}
@@ -31,7 +33,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCloud_GetUploadServerInfo_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CCloud_GetUploadServerInfo_Response")]
   public partial class CCloud_GetUploadServerInfo_Response : global::ProtoBuf.IExtensible
   {
     public CCloud_GetUploadServerInfo_Response() {}
@@ -50,7 +52,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCloud_BeginHTTPUpload_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CCloud_BeginHTTPUpload_Request")]
   public partial class CCloud_BeginHTTPUpload_Request : global::ProtoBuf.IExtensible
   {
     public CCloud_BeginHTTPUpload_Request() {}
@@ -126,7 +128,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCloud_BeginHTTPUpload_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CCloud_BeginHTTPUpload_Response")]
   public partial class CCloud_BeginHTTPUpload_Response : global::ProtoBuf.IExtensible
   {
     public CCloud_BeginHTTPUpload_Response() {}
@@ -183,7 +185,7 @@ namespace SteamKit2.Unified.Internal
       get { return _request_headers; }
     }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"HTTPHeaders")]
+  [global::ProtoBuf.ProtoContract(Name=@"HTTPHeaders")]
   public partial class HTTPHeaders : global::ProtoBuf.IExtensible
   {
     public HTTPHeaders() {}
@@ -216,7 +218,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCloud_CommitHTTPUpload_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CCloud_CommitHTTPUpload_Request")]
   public partial class CCloud_CommitHTTPUpload_Request : global::ProtoBuf.IExtensible
   {
     public CCloud_CommitHTTPUpload_Request() {}
@@ -262,7 +264,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCloud_CommitHTTPUpload_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CCloud_CommitHTTPUpload_Response")]
   public partial class CCloud_CommitHTTPUpload_Response : global::ProtoBuf.IExtensible
   {
     public CCloud_CommitHTTPUpload_Response() {}
@@ -281,7 +283,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCloud_GetFileDetails_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CCloud_GetFileDetails_Request")]
   public partial class CCloud_GetFileDetails_Request : global::ProtoBuf.IExtensible
   {
     public CCloud_GetFileDetails_Request() {}
@@ -309,7 +311,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCloud_UserFile")]
+  [global::ProtoBuf.ProtoContract(Name=@"CCloud_UserFile")]
   public partial class CCloud_UserFile : global::ProtoBuf.IExtensible
   {
     public CCloud_UserFile() {}
@@ -382,7 +384,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCloud_GetFileDetails_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CCloud_GetFileDetails_Response")]
   public partial class CCloud_GetFileDetails_Response : global::ProtoBuf.IExtensible
   {
     public CCloud_GetFileDetails_Response() {}
@@ -401,7 +403,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCloud_EnumerateUserFiles_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CCloud_EnumerateUserFiles_Request")]
   public partial class CCloud_EnumerateUserFiles_Request : global::ProtoBuf.IExtensible
   {
     public CCloud_EnumerateUserFiles_Request() {}
@@ -447,7 +449,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCloud_EnumerateUserFiles_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CCloud_EnumerateUserFiles_Response")]
   public partial class CCloud_EnumerateUserFiles_Response : global::ProtoBuf.IExtensible
   {
     public CCloud_EnumerateUserFiles_Response() {}
@@ -473,7 +475,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCloud_Delete_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CCloud_Delete_Request")]
   public partial class CCloud_Delete_Request : global::ProtoBuf.IExtensible
   {
     public CCloud_Delete_Request() {}
@@ -501,7 +503,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCloud_Delete_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CCloud_Delete_Response")]
   public partial class CCloud_Delete_Response : global::ProtoBuf.IExtensible
   {
     public CCloud_Delete_Response() {}
@@ -511,7 +513,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCloud_GetClientEncryptionKey_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CCloud_GetClientEncryptionKey_Request")]
   public partial class CCloud_GetClientEncryptionKey_Request : global::ProtoBuf.IExtensible
   {
     public CCloud_GetClientEncryptionKey_Request() {}
@@ -521,7 +523,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCloud_GetClientEncryptionKey_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CCloud_GetClientEncryptionKey_Response")]
   public partial class CCloud_GetClientEncryptionKey_Response : global::ProtoBuf.IExtensible
   {
     public CCloud_GetClientEncryptionKey_Response() {}
@@ -549,7 +551,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCloud_CDNReport_Notification")]
+  [global::ProtoBuf.ProtoContract(Name=@"CCloud_CDNReport_Notification")]
   public partial class CCloud_CDNReport_Notification : global::ProtoBuf.IExtensible
   {
     public CCloud_CDNReport_Notification() {}
@@ -622,7 +624,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCloud_ExternalStorageTransferReport_Notification")]
+  [global::ProtoBuf.ProtoContract(Name=@"CCloud_ExternalStorageTransferReport_Notification")]
   public partial class CCloud_ExternalStorageTransferReport_Notification : global::ProtoBuf.IExtensible
   {
     public CCloud_ExternalStorageTransferReport_Notification() {}
@@ -713,7 +715,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCloud_ClientBeginFileUpload_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CCloud_ClientBeginFileUpload_Request")]
   public partial class CCloud_ClientBeginFileUpload_Request : global::ProtoBuf.IExtensible
   {
     public CCloud_ClientBeginFileUpload_Request() {}
@@ -813,7 +815,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ClientCloudFileUploadBlockDetails")]
+  [global::ProtoBuf.ProtoContract(Name=@"ClientCloudFileUploadBlockDetails")]
   public partial class ClientCloudFileUploadBlockDetails : global::ProtoBuf.IExtensible
   {
     public ClientCloudFileUploadBlockDetails() {}
@@ -897,7 +899,7 @@ namespace SteamKit2.Unified.Internal
       get { return _may_parallelize; }
       set { _may_parallelize = value; }
     }
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"HTTPHeaders")]
+  [global::ProtoBuf.ProtoContract(Name=@"HTTPHeaders")]
   public partial class HTTPHeaders : global::ProtoBuf.IExtensible
   {
     public HTTPHeaders() {}
@@ -930,7 +932,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCloud_ClientBeginFileUpload_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CCloud_ClientBeginFileUpload_Response")]
   public partial class CCloud_ClientBeginFileUpload_Response : global::ProtoBuf.IExtensible
   {
     public CCloud_ClientBeginFileUpload_Response() {}
@@ -956,7 +958,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCloud_ClientCommitFileUpload_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CCloud_ClientCommitFileUpload_Request")]
   public partial class CCloud_ClientCommitFileUpload_Request : global::ProtoBuf.IExtensible
   {
     public CCloud_ClientCommitFileUpload_Request() {}
@@ -1002,7 +1004,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCloud_ClientCommitFileUpload_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CCloud_ClientCommitFileUpload_Response")]
   public partial class CCloud_ClientCommitFileUpload_Response : global::ProtoBuf.IExtensible
   {
     public CCloud_ClientCommitFileUpload_Response() {}
@@ -1021,7 +1023,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCloud_ClientFileDownload_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CCloud_ClientFileDownload_Request")]
   public partial class CCloud_ClientFileDownload_Request : global::ProtoBuf.IExtensible
   {
     public CCloud_ClientFileDownload_Request() {}
@@ -1049,7 +1051,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCloud_ClientFileDownload_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CCloud_ClientFileDownload_Response")]
   public partial class CCloud_ClientFileDownload_Response : global::ProtoBuf.IExtensible
   {
     public CCloud_ClientFileDownload_Response() {}
@@ -1151,7 +1153,7 @@ namespace SteamKit2.Unified.Internal
       get { return _encrypted; }
       set { _encrypted = value; }
     }
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"HTTPHeaders")]
+  [global::ProtoBuf.ProtoContract(Name=@"HTTPHeaders")]
   public partial class HTTPHeaders : global::ProtoBuf.IExtensible
   {
     public HTTPHeaders() {}
@@ -1184,7 +1186,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCloud_ClientDeleteFile_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CCloud_ClientDeleteFile_Request")]
   public partial class CCloud_ClientDeleteFile_Request : global::ProtoBuf.IExtensible
   {
     public CCloud_ClientDeleteFile_Request() {}
@@ -1221,7 +1223,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CCloud_ClientDeleteFile_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CCloud_ClientDeleteFile_Response")]
   public partial class CCloud_ClientDeleteFile_Response : global::ProtoBuf.IExtensible
   {
     public CCloud_ClientDeleteFile_Response() {}

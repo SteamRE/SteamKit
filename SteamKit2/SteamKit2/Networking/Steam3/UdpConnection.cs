@@ -255,13 +255,13 @@ namespace SteamKit2
 
             try
             {
-                sock.SendTo(data, remoteEndPoint);
+                sock.SendTo( data, remoteEndPoint );
             }
             catch ( SocketException e )
             {
-                DebugLog.WriteLine("UdpConnection", "Critical socket failure: " + e.ErrorCode);
+                DebugLog.WriteLine( "UdpConnection", "Critical socket failure: " + e.SocketErrorCode );
 
-                state = (int)State.Disconnected;
+                state = ( int )State.Disconnected;
                 return;
             }
 
@@ -445,24 +445,24 @@ namespace SteamKit2
                         ReceivePacket(packet);
                     }
                 }
-                catch (IOException ex)
+                catch ( IOException ex )
                 {
-                    DebugLog.WriteLine("UdpConnection", "Exception occurred while reading packet: {0}", ex);
+                    DebugLog.WriteLine( "UdpConnection", "Exception occurred while reading packet: {0}", ex );
 
-                    state = (int)State.Disconnected;
+                    state = ( int )State.Disconnected;
                     break;
                 }
                 catch ( SocketException e )
                 {
-                    DebugLog.WriteLine("UdpConnection", "Critical socket failure: " + e.ErrorCode);
+                    DebugLog.WriteLine( "UdpConnection", "Critical socket failure: " + e.SocketErrorCode );
 
-                    state = (int)State.Disconnected;
+                    state = ( int )State.Disconnected;
                     break;
                 }
 
                 // Send or resend any sequenced packets; a call to ReceivePacket can set our state to disconnected
                 // so don't send anything we have queued in that case
-                if ( state != (int)State.Disconnected )
+                if ( state != ( int )State.Disconnected )
                     SendPendingMessages();
 
                 // If we received data but had no data to send back, we need to manually Ack (usually tags along with
@@ -472,11 +472,11 @@ namespace SteamKit2
 
                 // If a graceful shutdown has been requested, nothing in the outgoing queue is discarded.
                 // Once it's empty, we exit, since the last packet was our disconnect notification.
-                if ( state == (int)State.Disconnecting && outPackets.Count == 0 )
+                if ( state == ( int )State.Disconnecting && outPackets.Count == 0 )
                 {
-                    DebugLog.WriteLine("UdpConnection", "Graceful disconnect completed");
+                    DebugLog.WriteLine( "UdpConnection", "Graceful disconnect completed" );
 
-                    state = (int)State.Disconnected;
+                    state = ( int )State.Disconnected;
                     userRequestedDisconnect = true;
                     break;
                 }

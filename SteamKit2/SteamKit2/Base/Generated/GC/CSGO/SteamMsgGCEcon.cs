@@ -8,11 +8,13 @@
 //------------------------------------------------------------------------------
 #pragma warning disable 1591
 
+// Option: light framework (CF/Silverlight) enabled
+    
 // Generated from: econ_gcmessages.proto
 // Note: requires additional types generated from: steammessages.proto
 namespace SteamKit2.GC.CSGO.Internal
 {
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCGiftedItems")]
+  [global::ProtoBuf.ProtoContract(Name=@"CMsgGCGiftedItems")]
   public partial class CMsgGCGiftedItems : global::ProtoBuf.IExtensible
   {
     public CMsgGCGiftedItems() {}
@@ -65,7 +67,7 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgApplyAutograph")]
+  [global::ProtoBuf.ProtoContract(Name=@"CMsgApplyAutograph")]
   public partial class CMsgApplyAutograph : global::ProtoBuf.IExtensible
   {
     public CMsgApplyAutograph() {}
@@ -93,7 +95,7 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCUserTrackTimePlayedConsecutively")]
+  [global::ProtoBuf.ProtoContract(Name=@"CMsgGCUserTrackTimePlayedConsecutively")]
   public partial class CMsgGCUserTrackTimePlayedConsecutively : global::ProtoBuf.IExtensible
   {
     public CMsgGCUserTrackTimePlayedConsecutively() {}

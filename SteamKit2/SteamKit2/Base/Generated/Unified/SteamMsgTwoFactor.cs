@@ -8,11 +8,13 @@
 //------------------------------------------------------------------------------
 #pragma warning disable 1591
 
+// Option: light framework (CF/Silverlight) enabled
+    
 // Generated from: steammessages_twofactor.steamclient.proto
 // Note: requires additional types generated from: steammessages_unified_base.steamclient.proto
 namespace SteamKit2.Unified.Internal
 {
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_Status_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_Status_Request")]
   public partial class CTwoFactor_Status_Request : global::ProtoBuf.IExtensible
   {
     public CTwoFactor_Status_Request() {}
@@ -31,7 +33,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_Status_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_Status_Response")]
   public partial class CTwoFactor_Status_Response : global::ProtoBuf.IExtensible
   {
     public CTwoFactor_Status_Response() {}
@@ -158,7 +160,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_AddAuthenticator_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_AddAuthenticator_Request")]
   public partial class CTwoFactor_AddAuthenticator_Request : global::ProtoBuf.IExtensible
   {
     public CTwoFactor_AddAuthenticator_Request() {}
@@ -229,7 +231,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_AddAuthenticator_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_AddAuthenticator_Response")]
   public partial class CTwoFactor_AddAuthenticator_Response : global::ProtoBuf.IExtensible
   {
     public CTwoFactor_AddAuthenticator_Response() {}
@@ -329,7 +331,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_SendEmail_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_SendEmail_Request")]
   public partial class CTwoFactor_SendEmail_Request : global::ProtoBuf.IExtensible
   {
     public CTwoFactor_SendEmail_Request() {}
@@ -366,7 +368,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_SendEmail_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_SendEmail_Response")]
   public partial class CTwoFactor_SendEmail_Response : global::ProtoBuf.IExtensible
   {
     public CTwoFactor_SendEmail_Response() {}
@@ -376,7 +378,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_FinalizeAddAuthenticator_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_FinalizeAddAuthenticator_Request")]
   public partial class CTwoFactor_FinalizeAddAuthenticator_Request : global::ProtoBuf.IExtensible
   {
     public CTwoFactor_FinalizeAddAuthenticator_Request() {}
@@ -429,7 +431,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_FinalizeAddAuthenticator_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_FinalizeAddAuthenticator_Response")]
   public partial class CTwoFactor_FinalizeAddAuthenticator_Response : global::ProtoBuf.IExtensible
   {
     public CTwoFactor_FinalizeAddAuthenticator_Response() {}
@@ -475,7 +477,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_RemoveAuthenticator_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_RemoveAuthenticator_Request")]
   public partial class CTwoFactor_RemoveAuthenticator_Request : global::ProtoBuf.IExtensible
   {
     public CTwoFactor_RemoveAuthenticator_Request() {}
@@ -521,7 +523,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_RemoveAuthenticator_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_RemoveAuthenticator_Response")]
   public partial class CTwoFactor_RemoveAuthenticator_Response : global::ProtoBuf.IExtensible
   {
     public CTwoFactor_RemoveAuthenticator_Response() {}
@@ -558,7 +560,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_CreateEmergencyCodes_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_CreateEmergencyCodes_Request")]
   public partial class CTwoFactor_CreateEmergencyCodes_Request : global::ProtoBuf.IExtensible
   {
     public CTwoFactor_CreateEmergencyCodes_Request() {}
@@ -568,7 +570,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_CreateEmergencyCodes_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_CreateEmergencyCodes_Response")]
   public partial class CTwoFactor_CreateEmergencyCodes_Response : global::ProtoBuf.IExtensible
   {
     public CTwoFactor_CreateEmergencyCodes_Response() {}
@@ -585,7 +587,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_DestroyEmergencyCodes_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_DestroyEmergencyCodes_Request")]
   public partial class CTwoFactor_DestroyEmergencyCodes_Request : global::ProtoBuf.IExtensible
   {
     public CTwoFactor_DestroyEmergencyCodes_Request() {}
@@ -604,7 +606,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_DestroyEmergencyCodes_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_DestroyEmergencyCodes_Response")]
   public partial class CTwoFactor_DestroyEmergencyCodes_Response : global::ProtoBuf.IExtensible
   {
     public CTwoFactor_DestroyEmergencyCodes_Response() {}
@@ -614,7 +616,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_ValidateToken_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_ValidateToken_Request")]
   public partial class CTwoFactor_ValidateToken_Request : global::ProtoBuf.IExtensible
   {
     public CTwoFactor_ValidateToken_Request() {}
@@ -633,7 +635,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_ValidateToken_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CTwoFactor_ValidateToken_Response")]
   public partial class CTwoFactor_ValidateToken_Response : global::ProtoBuf.IExtensible
   {
     public CTwoFactor_ValidateToken_Response() {}

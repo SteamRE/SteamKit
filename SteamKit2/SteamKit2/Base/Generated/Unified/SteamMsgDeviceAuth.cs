@@ -8,11 +8,13 @@
 //------------------------------------------------------------------------------
 #pragma warning disable 1591
 
+// Option: light framework (CF/Silverlight) enabled
+    
 // Generated from: steammessages_deviceauth.steamclient.proto
 // Note: requires additional types generated from: steammessages_unified_base.steamclient.proto
 namespace SteamKit2.Unified.Internal
 {
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CDeviceAuth_GetOwnAuthorizedDevices_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CDeviceAuth_GetOwnAuthorizedDevices_Request")]
   public partial class CDeviceAuth_GetOwnAuthorizedDevices_Request : global::ProtoBuf.IExtensible
   {
     public CDeviceAuth_GetOwnAuthorizedDevices_Request() {}
@@ -40,7 +42,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CDeviceAuth_GetOwnAuthorizedDevices_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CDeviceAuth_GetOwnAuthorizedDevices_Response")]
   public partial class CDeviceAuth_GetOwnAuthorizedDevices_Response : global::ProtoBuf.IExtensible
   {
     public CDeviceAuth_GetOwnAuthorizedDevices_Response() {}
@@ -52,7 +54,7 @@ namespace SteamKit2.Unified.Internal
       get { return _devices; }
     }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Device")]
+  [global::ProtoBuf.ProtoContract(Name=@"Device")]
   public partial class Device : global::ProtoBuf.IExtensible
   {
     public Device() {}
@@ -139,7 +141,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CDeviceAuth_AcceptAuthorizationRequest_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CDeviceAuth_AcceptAuthorizationRequest_Request")]
   public partial class CDeviceAuth_AcceptAuthorizationRequest_Request : global::ProtoBuf.IExtensible
   {
     public CDeviceAuth_AcceptAuthorizationRequest_Request() {}
@@ -185,7 +187,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CDeviceAuth_AcceptAuthorizationRequest_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CDeviceAuth_AcceptAuthorizationRequest_Response")]
   public partial class CDeviceAuth_AcceptAuthorizationRequest_Response : global::ProtoBuf.IExtensible
   {
     public CDeviceAuth_AcceptAuthorizationRequest_Response() {}
@@ -195,7 +197,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CDeviceAuth_AuthorizeRemoteDevice_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CDeviceAuth_AuthorizeRemoteDevice_Request")]
   public partial class CDeviceAuth_AuthorizeRemoteDevice_Request : global::ProtoBuf.IExtensible
   {
     public CDeviceAuth_AuthorizeRemoteDevice_Request() {}
@@ -223,7 +225,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CDeviceAuth_AuthorizeRemoteDevice_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CDeviceAuth_AuthorizeRemoteDevice_Response")]
   public partial class CDeviceAuth_AuthorizeRemoteDevice_Response : global::ProtoBuf.IExtensible
   {
     public CDeviceAuth_AuthorizeRemoteDevice_Response() {}
@@ -233,7 +235,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CDeviceAuth_DeauthorizeRemoteDevice_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CDeviceAuth_DeauthorizeRemoteDevice_Request")]
   public partial class CDeviceAuth_DeauthorizeRemoteDevice_Request : global::ProtoBuf.IExtensible
   {
     public CDeviceAuth_DeauthorizeRemoteDevice_Request() {}
@@ -261,7 +263,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CDeviceAuth_DeauthorizeRemoteDevice_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CDeviceAuth_DeauthorizeRemoteDevice_Response")]
   public partial class CDeviceAuth_DeauthorizeRemoteDevice_Response : global::ProtoBuf.IExtensible
   {
     public CDeviceAuth_DeauthorizeRemoteDevice_Response() {}
@@ -271,7 +273,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CDeviceAuth_GetUsedAuthorizedDevices_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CDeviceAuth_GetUsedAuthorizedDevices_Request")]
   public partial class CDeviceAuth_GetUsedAuthorizedDevices_Request : global::ProtoBuf.IExtensible
   {
     public CDeviceAuth_GetUsedAuthorizedDevices_Request() {}
@@ -290,7 +292,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CDeviceAuth_GetUsedAuthorizedDevices_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CDeviceAuth_GetUsedAuthorizedDevices_Response")]
   public partial class CDeviceAuth_GetUsedAuthorizedDevices_Response : global::ProtoBuf.IExtensible
   {
     public CDeviceAuth_GetUsedAuthorizedDevices_Response() {}
@@ -302,7 +304,7 @@ namespace SteamKit2.Unified.Internal
       get { return _devices; }
     }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Device")]
+  [global::ProtoBuf.ProtoContract(Name=@"Device")]
   public partial class Device : global::ProtoBuf.IExtensible
   {
     public Device() {}
@@ -362,7 +364,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CDeviceAuth_GetAuthorizedBorrowers_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CDeviceAuth_GetAuthorizedBorrowers_Request")]
   public partial class CDeviceAuth_GetAuthorizedBorrowers_Request : global::ProtoBuf.IExtensible
   {
     public CDeviceAuth_GetAuthorizedBorrowers_Request() {}
@@ -399,7 +401,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CDeviceAuth_GetAuthorizedBorrowers_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CDeviceAuth_GetAuthorizedBorrowers_Response")]
   public partial class CDeviceAuth_GetAuthorizedBorrowers_Response : global::ProtoBuf.IExtensible
   {
     public CDeviceAuth_GetAuthorizedBorrowers_Response() {}
@@ -411,7 +413,7 @@ namespace SteamKit2.Unified.Internal
       get { return _borrowers; }
     }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Borrower")]
+  [global::ProtoBuf.ProtoContract(Name=@"Borrower")]
   public partial class Borrower : global::ProtoBuf.IExtensible
   {
     public Borrower() {}
@@ -462,7 +464,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CDeviceAuth_AddAuthorizedBorrowers_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CDeviceAuth_AddAuthorizedBorrowers_Request")]
   public partial class CDeviceAuth_AddAuthorizedBorrowers_Request : global::ProtoBuf.IExtensible
   {
     public CDeviceAuth_AddAuthorizedBorrowers_Request() {}
@@ -488,7 +490,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CDeviceAuth_AddAuthorizedBorrowers_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CDeviceAuth_AddAuthorizedBorrowers_Response")]
   public partial class CDeviceAuth_AddAuthorizedBorrowers_Response : global::ProtoBuf.IExtensible
   {
     public CDeviceAuth_AddAuthorizedBorrowers_Response() {}
@@ -507,7 +509,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CDeviceAuth_RemoveAuthorizedBorrowers_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CDeviceAuth_RemoveAuthorizedBorrowers_Request")]
   public partial class CDeviceAuth_RemoveAuthorizedBorrowers_Request : global::ProtoBuf.IExtensible
   {
     public CDeviceAuth_RemoveAuthorizedBorrowers_Request() {}
@@ -533,7 +535,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CDeviceAuth_RemoveAuthorizedBorrowers_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CDeviceAuth_RemoveAuthorizedBorrowers_Response")]
   public partial class CDeviceAuth_RemoveAuthorizedBorrowers_Response : global::ProtoBuf.IExtensible
   {
     public CDeviceAuth_RemoveAuthorizedBorrowers_Response() {}
@@ -543,7 +545,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CDeviceAuth_GetAuthorizedAsBorrower_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CDeviceAuth_GetAuthorizedAsBorrower_Request")]
   public partial class CDeviceAuth_GetAuthorizedAsBorrower_Request : global::ProtoBuf.IExtensible
   {
     public CDeviceAuth_GetAuthorizedAsBorrower_Request() {}
@@ -580,7 +582,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CDeviceAuth_GetAuthorizedAsBorrower_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CDeviceAuth_GetAuthorizedAsBorrower_Response")]
   public partial class CDeviceAuth_GetAuthorizedAsBorrower_Response : global::ProtoBuf.IExtensible
   {
     public CDeviceAuth_GetAuthorizedAsBorrower_Response() {}
@@ -592,7 +594,7 @@ namespace SteamKit2.Unified.Internal
       get { return _lenders; }
     }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Lender")]
+  [global::ProtoBuf.ProtoContract(Name=@"Lender")]
   public partial class Lender : global::ProtoBuf.IExtensible
   {
     public Lender() {}
@@ -652,7 +654,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CDeviceAuth_GetExcludedGamesInLibrary_Request")]
+  [global::ProtoBuf.ProtoContract(Name=@"CDeviceAuth_GetExcludedGamesInLibrary_Request")]
   public partial class CDeviceAuth_GetExcludedGamesInLibrary_Request : global::ProtoBuf.IExtensible
   {
     public CDeviceAuth_GetExcludedGamesInLibrary_Request() {}
@@ -671,7 +673,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CDeviceAuth_GetExcludedGamesInLibrary_Response")]
+  [global::ProtoBuf.ProtoContract(Name=@"CDeviceAuth_GetExcludedGamesInLibrary_Response")]
   public partial class CDeviceAuth_GetExcludedGamesInLibrary_Response : global::ProtoBuf.IExtensible
   {
     public CDeviceAuth_GetExcludedGamesInLibrary_Response() {}
@@ -683,7 +685,7 @@ namespace SteamKit2.Unified.Internal
       get { return _excluded_games; }
     }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ExcludedGame")]
+  [global::ProtoBuf.ProtoContract(Name=@"ExcludedGame")]
   public partial class ExcludedGame : global::ProtoBuf.IExtensible
   {
     public ExcludedGame() {}
