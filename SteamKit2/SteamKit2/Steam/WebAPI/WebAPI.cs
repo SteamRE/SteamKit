@@ -152,8 +152,6 @@ namespace SteamKit2
             public override bool TryInvokeMember( InvokeMemberBinder binder, object[] args, out object result )
             {
                 bool success = asyncInterface.TryInvokeMember( binder, args, out result );
-                Console.WriteLine($"Success: {success}");
-                Console.WriteLine($"Type: {result?.GetType()}");
 
                 // the async interface's return of TryInvokeMember will be a Task<KeyValue>, but users of this interface class
                 // expect a non-future KeyValue, so we need to duplicate the timeout handling logic here
