@@ -15,7 +15,7 @@
   <PropertyGroup>
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\SteamKit2.xml</DocumentationFile>
   </PropertyGroup>
-
+  
   <ItemGroup>
     <None Remove="3rd party.txt" />
     <None Remove="changes.txt" />
@@ -23,25 +23,26 @@
     <None Remove="lgpl.txt" />
     <None Remove="license.txt" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="license.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-
   <ItemGroup>
     <Content Include="3rd party.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        <Pack>true</Pack>
+        <PackagePath />
     </Content>
     <Content Include="changes.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        <Pack>true</Pack>
+        <PackagePath>readme.txt</PackagePath>
     </Content>
     <Content Include="gpl.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        <Pack>true</Pack>
+        <PackagePath />
     </Content>
     <Content Include="lgpl.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        <Pack>true</Pack>
+        <PackagePath />
+    </Content>
+    <Content Include="license.txt">
+        <Pack>true</Pack>
+        <PackagePath />
     </Content>
   </ItemGroup>
 
