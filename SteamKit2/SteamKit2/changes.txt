@@ -7,7 +7,8 @@ v 2.0.0			Mar 28, 2017 (Alpha)
 
 * Updated Protobuf message classes to expose a property indicating if any wire value was specified or not, and a method to clear the value.
 * Updated `CDNClient` and `WebAPI` to expose `Task`-based asynchronous methods.
-* Removed all methods and properties that were marked as `[Obsolete]`.
+* Removed all methods, properties and enum values that were marked as `[Obsolete]`.
+* Removed `MsgClientSendGuestPass`, `MsgClientSendGuestPassResponse` and `SendGuestPassCallback` which relied upon obsoleted messaging.
 
 
 ------------------------------------------------------------------------------
