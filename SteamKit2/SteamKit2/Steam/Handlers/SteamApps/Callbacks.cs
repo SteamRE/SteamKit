@@ -597,23 +597,6 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// This callback is received when a guest pass has been sent
-        /// </summary>
-        public sealed class SendGuestPassCallback : CallbackMsg
-        {
-            /// <summary>
-            /// Result of the operation
-            /// </summary>
-            public EResult Result { get; set; }
-
-
-            internal SendGuestPassCallback( MsgClientSendGuestPassResponse msg )
-            {
-                Result = msg.Result;
-            }
-        }
-
-        /// <summary>
         /// This callback is received when a CDN auth token is received
         /// </summary>
         public sealed class CDNAuthTokenCallback : CallbackMsg

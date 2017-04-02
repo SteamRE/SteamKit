@@ -1,7 +1,7 @@
 enum EUdpPacketType<byte>
 {
 	Invalid = 0;
-		
+
 	ChallengeReq = 1;
 	Challenge = 2;
 	Connect = 3;
@@ -15,29 +15,29 @@ enum EUdpPacketType<byte>
 class UdpHeader
 {
 	const uint MAGIC = 0x31305356;
-	
+
 	uint magic = UdpHeader::MAGIC;
-	
+
 	ushort payloadSize;
 	EUdpPacketType packetType = EUdpPacketType::Invalid;
 	byte flags;
-	
+
 	uint sourceConnID = 512;
 	uint destConnID;
-	
+
 	uint seqThis;
 	uint seqAck;
-	
+
 	uint packetsInMsg;
 	uint msgStartSeq;
-	
+
 	uint msgSize;
 };
 
 class ChallengeData
 {
 	const uint CHALLENGE_MASK = 0xA426DF2B;
-	
+
 	uint challengeValue;
 	uint serverLoad;
 };
@@ -45,7 +45,7 @@ class ChallengeData
 class ConnectData
 {
 	const uint CHALLENGE_MASK = ChallengeData::CHALLENGE_MASK;
-	
+
 	uint challengeValue;
 };
 

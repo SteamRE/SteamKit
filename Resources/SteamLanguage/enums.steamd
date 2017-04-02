@@ -2,7 +2,7 @@
 enum EUniverse
 {
 	Invalid = 0;
-	
+
 	Public = 1;
 	Beta = 2;
 	Internal = 3;
@@ -14,12 +14,12 @@ enum EUniverse
 enum EChatEntryType
 {
 	Invalid = 0;
-	
+
 	ChatMsg = 1;
 	Typing = 2;
 	InviteGame = 3;
-	Emote = 4; obsolete "No longer supported by clients"
-	LobbyGameStart = 5; obsolete "Listen for LobbyGameCreated_t callback instead"
+	Emote = 4; removed
+	LobbyGameStart = 5; removed
 	LeftConversation = 6;
 	Entered = 7;
 	WasKicked = 8;
@@ -66,7 +66,7 @@ enum EAccountType
 enum EFriendRelationship
 {
 	None = 0;
-	
+
 	Blocked = 1;
 	RequestRecipient = 2;
 	Friend = 3;
@@ -81,7 +81,7 @@ enum EFriendRelationship
 enum EAccountFlags flags
 {
 	NormalUser = 0;
-	
+
 	PersonaNameSet = 1;
 	Unbannable = 2;
 	PasswordSet = 4;
@@ -118,7 +118,7 @@ enum EAccountFlags flags
 enum EClanPermission flags
 {
 	Nobody = 0;
-	
+
 	Owner = 1;
 	Officer = 2;
 	OwnerAndOfficer = 3;
@@ -185,15 +185,11 @@ enum EPersonaStateFlag flags
 {
 	HasRichPresence = 1;
 	InJoinableGame = 2;
-	Golden = 4; obsolete "no longer has any effect"
-	
-	OnlineUsingWeb = 256; obsolete "renamed to ClientTypeWeb"
+	Golden = 4; removed
+
 	ClientTypeWeb = 256;
-	OnlineUsingMobile = 512; obsolete "renamed to ClientTypeMobile"
 	ClientTypeMobile = 512;
-	OnlineUsingBigPicture = 1024; obsolete "renamed to ClientTypeTenfoot"
 	ClientTypeTenfoot = 1024;
-	OnlineUsingVR = 2048; obsolete "renamed to ClientTypeVR"
 	ClientTypeVR = 2048;
 	LaunchTypeGamepad = 4096;
 };
@@ -205,7 +201,7 @@ enum EClientPersonaStateFlag flags
 	QueryPort = 4;
 	SourceID = 8;
 	Presence = 16;
-	Metadata = 32; obsolete
+	Metadata = 32; removed
 	LastSeen = 64;
 	ClanInfo = 128;
 	GameExtraInfo = 256;
@@ -295,7 +291,6 @@ enum EPaymentMethod
 	EClubPoints = 35;
 	CreditCardJapan = 36;
 	BankTransferJapan = 37;
-	PayEasyJapan = 38; obsolete "renamed to PayEasy"
 	PayEasy = 38;
 	Zong = 39;
 	CultureVoucher = 40;
@@ -305,7 +300,6 @@ enum EPaymentMethod
 	GameVoucher = 44;
 	Multibanco = 45;
 	Payshop = 46;
-	Maestro = 47; obsolete "renamed to MaestroBoaCompra"
 	MaestroBoaCompra = 47;
 	OXXO = 48;
 	ToditoCash = 49;
@@ -340,9 +334,7 @@ enum EPaymentMethod
 	BitCoin = 79;
 	Wallet = 128;
 	Valve = 129;
-	SteamPressMaster = 130; obsolete "renamed to MasterComp"
 	MasterComp = 130;
-	StorePromotion = 131; obsolete "renamed to Promotional"
 	Promotional = 131;
 	OEMTicket = 256;
 	Split = 512;
@@ -423,7 +415,7 @@ enum EPurchaseResultDetail
 
 enum EIntroducerRouting
 {
-	FileShare = 0; obsolete
+	FileShare = 0; removed
 	P2PVoiceChat = 1;
 	P2PNetworking = 2;
 };
@@ -506,9 +498,9 @@ enum EChatRoomEnterResponse
 	YouBlockedMember = 11;
 
 	// these appear to have been removed
-	NoRankingDataLobby = 12; obsolete
-	NoRankingDataUser = 13; obsolete
-	RankOutOfRange = 14; obsolete
+	NoRankingDataLobby = 12; removed
+	NoRankingDataUser = 13; removed
+	RankOutOfRange = 14; removed
 };
 
 enum EChatRoomType
@@ -571,14 +563,14 @@ enum EAppInfoSection
 	Stats = 5;
 	Install = 6;
 	Depots = 7;
-	VAC = 8; obsolete
-	VAC_UNUSED = 8; obsolete
-	DRM = 9; obsolete
-	DRM_UNUSED = 9; obsolete
+	VAC = 8; removed
+	VAC_UNUSED = 8; removed
+	DRM = 9; removed
+	DRM_UNUSED = 9; removed
 	UFS = 10;
 	OGG = 11;
-	Items = 12; obsolete
-	ItemsUNUSED = 12; obsolete
+	Items = 12; removed
+	ItemsUNUSED = 12; removed
 	Policies = 13;
 	SysReqs = 14;
 	Community = 15;
@@ -606,7 +598,6 @@ enum EPlatformType
 
 	Win32 = 1;
 	Win64 = 2;
-	Linux = 3; obsolete "split to Linux64 and Linux32"
 	Linux64 = 3;
 	OSX = 4;
 	PS3 = 5;
@@ -618,9 +609,9 @@ enum EPlatformType
 enum EOSType
 {
 	Unknown = -1;
-	
+
 	IOSUnknown = -600;
-	
+
 	AndroidUnknown = -500;
 
 	UMQ = -400;
@@ -659,21 +650,16 @@ enum EOSType
 	Win98 = 3;
 	WinME = 4;
 	WinNT = 5;
-	Win200 = 6; obsolete "renamed to Win2000"
 	Win2000 = 6;
 	WinXP = 7;
 	Win2003 = 8;
 	WinVista = 9;
-	Win7 = 10; obsolete "renamed to Windows7"
 	Windows7 = 10;
 	Win2008 = 11;
 	Win2012 = 12;
-	Win8 = 13; obsolete "renamed to Windows8"
 	Windows8 = 13;
-	Win81 = 14; obsolete "renamed to Windows81"
 	Windows81 = 14;
 	Win2012R2 = 15;
-	Win10 = 16; obsolete "renamed to Windows10"
 	Windows10 = 16;
 
 	WinMAX = 15;
@@ -688,60 +674,57 @@ enum EServerType
 
 	Shell = 0;
 	GM = 1;
-	BUM = 2; obsolete
-	BUMOBOSOLETE = 2; obsolete
+	BUM = 2; removed
+	BUMOBOSOLETE = 2; removed
 	AM = 3;
-	BS = 4;	
+	BS = 4;
 	VS = 5;
-	ATS = 6;	
-	CM = 7;	
-	FBS = 8;	
-	FG = 9;	obsolete "renamed to BoxMonitor"
+	ATS = 6;
+	CM = 7;
+	FBS = 8;
 	BoxMonitor = 9;
-	SS = 10;	
-	DRMS = 11;	
-	HubOBSOLETE = 12; obsolete
-	Console = 13;	
-	ASBOBSOLETE = 14; obsolete
+	SS = 10;
+	DRMS = 11;
+	HubOBSOLETE = 12; removed
+	Console = 13;
+	ASBOBSOLETE = 14; removed
 	PICS = 14;
-	Client = 15;	
-	BootstrapOBSOLETE = 16; obsolete;
+	Client = 15;
+	BootstrapOBSOLETE = 16; removed;
 	DP = 17;
-	WG = 18;	
+	WG = 18;
 	SM = 19;
-	SLC = 20;	
-	UFS = 21;	
-	Util = 23;	
-	DSS = 24; obsolete "renamed to Community"
+	SLC = 20;
+	UFS = 21;
+	Util = 23;
 	Community = 24;
-	P2PRelayOBSOLETE = 25; obsolete
-	AppInformation = 26;	
-	Spare = 27;	
-	FTS = 28;	
-	EPM = 29; obsolete
-	EPMOBSOLETE = 29; obsolete
-	PS = 30;	
-	IS = 31;	
-	CCS = 32;	
-	DFS = 33;	
-	LBS = 34;	
-	MDS = 35;	
-	CS = 36;	
-	GC = 37;	
-	NS = 38;	
-	OGS = 39;	
-	WebAPI = 40;	
-	UDS = 41;	
-	MMS = 42;	
-	GMS = 43;	
-	KGS = 44;	
-	UCM = 45;	
-	RM = 46;	
-	FS = 47;	
+	P2PRelayOBSOLETE = 25; removed
+	AppInformation = 26;
+	Spare = 27;
+	FTS = 28;
+	EPM = 29; removed
+	EPMOBSOLETE = 29; removed
+	PS = 30;
+	IS = 31;
+	CCS = 32;
+	DFS = 33;
+	LBS = 34;
+	MDS = 35;
+	CS = 36;
+	GC = 37;
+	NS = 38;
+	OGS = 39;
+	WebAPI = 40;
+	UDS = 41;
+	MMS = 42;
+	GMS = 43;
+	KGS = 44;
+	UCM = 45;
+	RM = 46;
+	FS = 47;
 	Econ = 48;
 	Backpack = 49;
 	UGS = 50;
-	Store = 51; obsolete "renamed to StoreFeature"
 	StoreFeature = 51;
 	MoneyStats = 52;
 	CRE = 53;
@@ -992,7 +975,7 @@ enum EEconTradeResponse
 enum EMarketingMessageFlags flags
 {
 	None = 0;
-	
+
 	HighPriority = 1;
 	PlatformWindows = 2;
 	PlatformMac = 4;
@@ -1036,12 +1019,12 @@ enum EChatFlags flags
 enum ERemoteStoragePlatform flags
 {
 	None = 0;
-	
+
 	Windows = 1;
 	OSX = 2;
 	PS3 = 4;
 	Linux = 8;
-	Reserved1 = 8; obsolete
+	Reserved1 = 8; removed
 	Reserved2 = 16;
 
 	All = -1;
@@ -1050,7 +1033,7 @@ enum ERemoteStoragePlatform flags
 enum EDRMBlobDownloadType flags
 {
 	Error = 0;
-	
+
 	File = 1;
 	Parts = 2;
 	Compressed = 4;
@@ -1064,7 +1047,7 @@ enum EDRMBlobDownloadType flags
 enum EDRMBlobDownloadErrorDetail
 {
 	None = 0;
-	
+
 	DownloadFailed = 1;
 	TargetLocked = 2;
 	OpenZip = 3;
@@ -1084,10 +1067,10 @@ enum EDRMBlobDownloadErrorDetail
 	ApplyValveSignatureHeader = 17;
 	UnzipValveSignatureHeader = 18;
 	PathManipulationError = 19;
-	
+
 	TargetLocked_Base = 65536;
 	TargetLocked_Max = 131071;
-	
+
 	NextBase = 131072;
 };
 
@@ -1098,7 +1081,7 @@ enum EClientStat
 	P2PGameConnections = 2;
 	P2PVoiceConnections = 3;
 	BytesDownloaded = 4;
-	
+
 	Max = 5;
 };
 
@@ -1121,7 +1104,7 @@ enum ELeaderboardDataRequest
 enum ELeaderboardSortMethod
 {
 	None = 0;
-	
+
 	Ascending = 1;
 	Descending = 2;
 };
@@ -1137,7 +1120,7 @@ enum ELeaderboardDisplayType
 enum ELeaderboardUploadScoreMethod
 {
 	None = 0;
-	
+
 	KeepBest = 1;
 	ForceUpdate = 2;
 };
@@ -1148,6 +1131,6 @@ enum EUCMFilePrivacyState flags
 	Private = 2;
 	FriendsOnly = 4;
 	Public = 8;
-	
+
 	All = Public | FriendsOnly | Private; // 14
 };

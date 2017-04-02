@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
 
 namespace SteamLanguageParser
@@ -21,6 +19,7 @@ namespace SteamLanguageParser
     {
         public Symbol Ident { get; set; }
         public Symbol Parent { get; set; }
+        public bool Emit { get; set; }
     }
 
     public class PropNode : Node
@@ -30,10 +29,12 @@ namespace SteamLanguageParser
         public Symbol Type { get; set; }
         public List<Symbol> Default { get; set; }
         public string Obsolete { get; set; }
+        public bool Emit { get; set; }
 
         public PropNode()
         {
             Default = new List<Symbol>();
+            Emit = true;
         }
     }
 
@@ -93,6 +94,8 @@ namespace SteamLanguageParser
                                         parent = Expect(tokens, "identifier");
                                     }
 
+                                    Token removed = Optional(tokens, "identifier", "removed");
+
                                     ClassNode cnode = new ClassNode();
                                     cnode.Name = name.Value;
 
@@ -104,6 +107,15 @@ namespace SteamLanguageParser
                                     if (parent != null)
                                     {
                                         //cnode.Parent = SymbolLocator.LookupSymbol(root, parent.Value, true);
+                                    }
+
+                                    if (removed != null)
+                                    {
+                                        cnode.Emit = false;
+                                    }
+                                    else
+                                    {
+                                        cnode.Emit = true;
                                     }
 
                                     root.childNodes.Add(cnode);
@@ -221,6 +233,12 @@ namespace SteamLanguageParser
 
                     if ( obsoleteReason != null )
                         pnode.Obsolete = obsoleteReason.Value;
+                }
+
+                Token removed = Optional( tokens, "identifier", "removed");
+                if  (removed != null )
+                {
+                    pnode.Emit = false;
                 }
 
                 parent.childNodes.Add(pnode);

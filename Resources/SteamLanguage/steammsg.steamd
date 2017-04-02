@@ -14,7 +14,7 @@ class MsgClientGenericResponse<EMsg::Invalid>
 class MsgChannelEncryptRequest<EMsg::ChannelEncryptRequest>
 {
 	const uint PROTOCOL_VERSION = 1;
-	
+
 	uint protocolVersion = MsgChannelEncryptRequest::PROTOCOL_VERSION;
 	EUniverse universe = EUniverse::Invalid;
 };
@@ -101,7 +101,7 @@ class MsgClientUpdateGuestPassesList<EMsg::ClientUpdateGuestPassesList>
 };
 
 class MsgClientRequestedClientStats<EMsg::ClientRequestedClientStats>
-{	
+{
 	int countStats;
 };
 
@@ -272,7 +272,7 @@ class MsgClientChatActionResult<EMsg::ClientChatActionResult>
 class MsgClientChatRoomInfo<EMsg::ClientChatRoomInfo>
 {
 	steamidmarshal ulong steamIdChat;
-	EChatInfoType type;	
+	EChatInfoType type;
 };
 
 class MsgClientSetIgnoreFriend<EMsg::ClientSetIgnoreFriend>
@@ -306,14 +306,14 @@ class MsgClientLogOnResponse<EMsg::ClientLogOnResponse>
 	uint serverRealTime;
 };
 
-class MsgClientSendGuestPass<EMsg::ClientSendGuestPass>
+class MsgClientSendGuestPass<EMsg::ClientSendGuestPass> removed
 {
 	ulong giftId;
 	byte giftType;
 	uint accountId;
 };
 
-class MsgClientSendGuestPassResponse<EMsg::ClientSendGuestPassResponse>
+class MsgClientSendGuestPassResponse<EMsg::ClientSendGuestPassResponse> removed
 {
 	EResult result;
 };
