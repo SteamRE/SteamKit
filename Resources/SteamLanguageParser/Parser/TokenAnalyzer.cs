@@ -235,8 +235,8 @@ namespace SteamLanguageParser
                         pnode.Obsolete = obsoleteReason.Value;
                 }
 
-                Token removed = Optional( tokens, "identifier", "removed");
-                if  (removed != null )
+                Token removed = Optional( tokens, "identifier", "removed" );
+                if ( removed != null )
                 {
                     pnode.Emit = false;
                 }
