@@ -23,6 +23,7 @@ enum EMsg
 	WebAPIJobResponse = 134;
 	ClientSessionStart = 135;
 	ClientSessionEnd = 136;
+	ClientSessionUpdateAuthTicket = 137; removed "renamed to ClientSessionUpdate"
 	ClientSessionUpdate = 137;
 	StatsDeprecated = 138; removed
 	Ping = 139;
@@ -91,6 +92,7 @@ enum EMsg
 	AISRefreshContentDescription = 401; removed
 	AISRequestContentDescription = 402;
 	AISUpdateAppInfo = 403;
+	AISUpdatePackageInfo = 404; removed "renamed to AISUpdatePackageCosts"
 	AISUpdatePackageCosts = 404;
 	AISGetPackageChangeNumber = 405;
 	AISGetPackageChangeNumberResponse = 406;
@@ -610,7 +612,7 @@ enum EMsg
 	ClientDPSendSpecialSurveyResponseReply = 1623;
 	DPStoreSaleStatistics = 1624;
 	ClientDPUpdateAppJobReport = 1625;
-	ClientDPSteam2AppStarted = 1627; removed obsolete
+	ClientDPSteam2AppStarted = 1627; removed
 	DPUpdateContentEvent = 1626;
 	DPPartnerMicroTxns = 1628;
 	DPPartnerMicroTxnsResponse = 1629;
@@ -660,7 +662,9 @@ enum EMsg
 	GCInterAppMessage = 2219;
 	GCGetEmailTemplate = 2220;
 	GCGetEmailTemplateResponse = 2221;
+	ISRelayToGCH = 2222; removed "renamed to GCHRelay"
 	GCHRelay = 2222;
+	GCHRelayClientToIS = 2223; removed "renamed to GCHRelayToClient"
 	GCHRelayToClient = 2223;
 	GCHUpdateSession = 2224;
 	GCHRequestUpdateSession = 2225;
@@ -792,6 +796,7 @@ enum EMsg
 	AMSetProfileURL = 4005;
 	AMGetAccountEmailAddress = 4006;
 	AMGetAccountEmailAddressResponse = 4007;
+	AMRequestFriendData = 4008; removed "renamed to AMRequestClanData"
 	AMRequestClanData = 4008;
 	AMRouteToClients = 4009;
 	AMLeaveClan = 4010;
@@ -1560,7 +1565,9 @@ enum EMsg
 	UDSRenderUserAuth = 7003;
 	UDSRenderUserAuthResponse = 7004;
 	ClientUDSInviteToGame = 7005;
+	UDSFindSession = 7006; removed "renamed to UDSHasSession"
 	UDSHasSession = 7006;
+	UDSFindSessionResponse = 7007; removed "renamed to UDSHasSessionResponse"
 	UDSHasSessionResponse = 7007;
 
 	MPASBase = 7100;
@@ -1854,6 +1861,7 @@ enum EMsg
 	ClientGetEmoticonList = 9330;
 	ClientEmoticonList = 9331;
 
+	ClientSharedLibraryBase = 9400; removed "renamed to SLCBase"
 	SLCBase = 9400;
 	SLCUserSessionStatus = 9400;
 	SLCRequestUserSessionStatus = 9401;

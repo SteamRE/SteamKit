@@ -56,6 +56,7 @@ enum EResult
 	DataCorruption = 53;
 	DiskFull = 54;
 	RemoteCallFailed = 55;
+	PasswordNotSet = 56; removed "renamed to PasswordUnset"
 	PasswordUnset = 56;
 	ExternalAccountUnlinked = 57;
 	PSNTicketInvalid = 58;
@@ -66,6 +67,7 @@ enum EResult
 	AccountLogonDenied = 63;
 	CannotUseOldPassword = 64;
 	InvalidLoginAuthCode = 65;
+	AccountLogonDeniedNoMailSent = 66; removed "renamed to AccountLogonDeniedNoMail"
 	AccountLogonDeniedNoMail = 66;
 	HardwareNotCapableOfIPT = 67;
 	IPTInitError = 68;
@@ -73,6 +75,7 @@ enum EResult
 	FacebookQueryError = 70;
 	ExpiredLoginAuthCode = 71;
 	IPLoginRestrictionFailed = 72;
+	AccountLocked = 73; removed "renamed to AccountLockedDown"
 	AccountLockedDown = 73;
 	AccountLogonDeniedVerifiedEmailRequired = 74;
 	NoMatchingURL = 75;
@@ -85,16 +88,22 @@ enum EResult
 	RestrictedDevice = 82;
 	RegionLocked = 83;
 	RateLimitExceeded = 84;
+	AccountLogonDeniedNeedTwoFactorCode = 85; removed "renamed to AccountLoginDeniedNeedTwoFactor"
 	AccountLoginDeniedNeedTwoFactor = 85;
+	ItemOrEntryHasBeenDeleted = 86; removed "renamed to ItemDeleted"
 	ItemDeleted = 86;
 	AccountLoginDeniedThrottle = 87;
 	TwoFactorCodeMismatch = 88;
 	TwoFactorActivationCodeMismatch = 89;
+	AccountAssociatedToMultiplePlayers = 90; removed "renamed to AccountAssociatedToMultiplePartners"
 	AccountAssociatedToMultiplePartners = 90;
 	NotModified = 91;
+	NoMobileDeviceAvailable = 92; removed "renamed to NoMobileDevice"
 	NoMobileDevice = 92;
+	TimeIsOutOfSync = 93; removed "renamed to TimeNotSynced"
 	TimeNotSynced = 93;
 	SMSCodeFailed = 94;
+	TooManyAccountsAccessThisResource = 95; removed "renamed to AccountLimitExceeded"
 	AccountLimitExceeded = 95;
 	AccountActivityLimitExceeded = 96;
 	PhoneActivityLimitExceeded = 97;

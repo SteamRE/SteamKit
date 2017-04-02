@@ -18,8 +18,8 @@ enum EChatEntryType
 	ChatMsg = 1;
 	Typing = 2;
 	InviteGame = 3;
-	Emote = 4; removed
-	LobbyGameStart = 5; removed
+	Emote = 4; removed "No longer supported by clients"
+	LobbyGameStart = 5; removed "Listen for LobbyGameCreated_t callback instead"
 	LeftConversation = 6;
 	Entered = 7;
 	WasKicked = 8;
@@ -185,11 +185,15 @@ enum EPersonaStateFlag flags
 {
 	HasRichPresence = 1;
 	InJoinableGame = 2;
-	Golden = 4; removed
+	Golden = 4; removed "no longer has any effect"
 
+	OnlineUsingWeb = 256; removed "renamed to ClientTypeWeb"
 	ClientTypeWeb = 256;
+	OnlineUsingMobile = 512; removed "renamed to ClientTypeMobile"
 	ClientTypeMobile = 512;
+	OnlineUsingBigPicture = 1024; removed "renamed to ClientTypeTenfoot"
 	ClientTypeTenfoot = 1024;
+	OnlineUsingVR = 2048; removed "renamed to ClientTypeVR"
 	ClientTypeVR = 2048;
 	LaunchTypeGamepad = 4096;
 };
@@ -291,6 +295,7 @@ enum EPaymentMethod
 	EClubPoints = 35;
 	CreditCardJapan = 36;
 	BankTransferJapan = 37;
+	PayEasyJapan = 38; removed "renamed to PayEasy"
 	PayEasy = 38;
 	Zong = 39;
 	CultureVoucher = 40;
@@ -300,6 +305,7 @@ enum EPaymentMethod
 	GameVoucher = 44;
 	Multibanco = 45;
 	Payshop = 46;
+	Maestro = 47; removed "renamed to MaestroBoaCompra"
 	MaestroBoaCompra = 47;
 	OXXO = 48;
 	ToditoCash = 49;
@@ -334,7 +340,9 @@ enum EPaymentMethod
 	BitCoin = 79;
 	Wallet = 128;
 	Valve = 129;
+	SteamPressMaster = 130; removed "renamed to MasterComp"
 	MasterComp = 130;
+	StorePromotion = 131; removed "renamed to Promotional"
 	Promotional = 131;
 	OEMTicket = 256;
 	Split = 512;
@@ -598,6 +606,7 @@ enum EPlatformType
 
 	Win32 = 1;
 	Win64 = 2;
+	Linux = 3; removed "split to Linux64 and Linux32"
 	Linux64 = 3;
 	OSX = 4;
 	PS3 = 5;
@@ -650,16 +659,21 @@ enum EOSType
 	Win98 = 3;
 	WinME = 4;
 	WinNT = 5;
+	Win200 = 6; removed "renamed to Win2000"
 	Win2000 = 6;
 	WinXP = 7;
 	Win2003 = 8;
 	WinVista = 9;
+	Win7 = 10; removed "renamed to Windows7"
 	Windows7 = 10;
 	Win2008 = 11;
 	Win2012 = 12;
+	Win8 = 13; removed "renamed to Windows8"
 	Windows8 = 13;
+	Win81 = 14; removed "renamed to Windows81"
 	Windows81 = 14;
 	Win2012R2 = 15;
+	Win10 = 16; removed "renamed to Windows10"
 	Windows10 = 16;
 
 	WinMAX = 15;
@@ -682,6 +696,7 @@ enum EServerType
 	ATS = 6;
 	CM = 7;
 	FBS = 8;
+	FG = 9; removed "renamed to BoxMonitor"
 	BoxMonitor = 9;
 	SS = 10;
 	DRMS = 11;
@@ -697,6 +712,7 @@ enum EServerType
 	SLC = 20;
 	UFS = 21;
 	Util = 23;
+	DSS = 24; removed "renamed to Community"
 	Community = 24;
 	P2PRelayOBSOLETE = 25; removed
 	AppInformation = 26;
@@ -725,6 +741,7 @@ enum EServerType
 	Econ = 48;
 	Backpack = 49;
 	UGS = 50;
+	Store = 51; removed "renamed to StoreFeature"
 	StoreFeature = 51;
 	MoneyStats = 52;
 	CRE = 53;
