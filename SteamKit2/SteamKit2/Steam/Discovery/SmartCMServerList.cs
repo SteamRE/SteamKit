@@ -123,13 +123,13 @@ namespace SteamKit2.Discovery
         {
             DebugWrite( "Resolving server list" );
 
-            IEnumerable<IPEndPoint> serverList = await ServerListProvider.FetchServerListAsync();
+            IEnumerable<IPEndPoint> serverList = await ServerListProvider.FetchServerListAsync().ConfigureAwait( false );
             List<IPEndPoint> endpointList = serverList.ToList();
 
             if ( endpointList.Count == 0 && canFetchDirectory )
             {
                 DebugWrite( "Server list provider had no entries, will query SteamDirectory" );
-                var directoryList = await SteamDirectory.LoadAsync( CellID );
+                var directoryList = await SteamDirectory.LoadAsync( CellID ).ConfigureAwait( false );
 
                 endpointList = directoryList.ToList();
             }
@@ -137,7 +137,7 @@ namespace SteamKit2.Discovery
             if ( endpointList.Count == 0 && canFetchDirectory )
             {
                 DebugWrite( "Could not query SteamDirectory, falling back to cm0" );
-                var cm0 = await Dns.GetHostAddressesAsync( "cm0.steampowered.com" );
+                var cm0 = await Dns.GetHostAddressesAsync( "cm0.steampowered.com" ).ConfigureAwait( false );
 
                 endpointList = cm0.Select( ipaddr => new IPEndPoint(ipaddr, 27015) ).ToList();
             }
@@ -300,7 +300,7 @@ namespace SteamKit2.Discovery
         public async Task<IPEndPoint> GetNextServerCandidateAsync()
         {
             StartFetchingServers();
-            await listTask;
+            await listTask.ConfigureAwait( false );
 
             return GetNextServerCandidateInternal();
         }
