@@ -65,8 +65,11 @@ namespace SteamKit2
         {
             lock (netLock)
             {
-                cancellationToken.Dispose();
-                cancellationToken = null;
+                if (cancellationToken != null)
+                {
+                    cancellationToken.Dispose();
+                    cancellationToken = null;
+                }
 
                 if (netWriter != null)
                 {
@@ -86,8 +89,11 @@ namespace SteamKit2
                     netStream = null;
                 }
 
-                socket.Dispose();
-                socket = null;
+                if (socket != null)
+                {
+                    socket.Dispose();
+                    socket = null;
+                }
 
                 netFilter = null;
             }
@@ -100,7 +106,8 @@ namespace SteamKit2
         private void ConnectCompleted(bool success)
         {
             // Always discard result if our request was cancelled
-            if (cancellationToken.IsCancellationRequested)
+            // If we have no cancellation token source, we were already Release()'ed
+            if (cancellationToken?.IsCancellationRequested ?? true)
             {
                 DebugLog.WriteLine("TcpConnection", "Connection request to {0} was cancelled", destination);
                 if (success) Shutdown();
@@ -169,7 +176,7 @@ namespace SteamKit2
 
             if ( WaitHandle.WaitAny( new WaitHandle[] { asyncWaitHandle, cancellationToken.Token.WaitHandle }, timeout) != 0 )
             {
-                ConnectCompleted(false);
+                Socket.CancelConnectAsync( connectEventArgs );
             }
         }
 
