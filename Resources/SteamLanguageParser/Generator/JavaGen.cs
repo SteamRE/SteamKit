@@ -15,6 +15,17 @@ namespace SteamLanguageParser
             {"long", "Long"},
         };
 
+        private readonly string _package = "net.stream3;";
+
+        public JavaGen()
+        {
+        }
+
+        public JavaGen(string package)
+        {
+            _package = package;
+        }
+
         public void EmitNamespace(StringBuilder sb, bool end, string nspace)
         {
             if (end)
@@ -23,7 +34,10 @@ namespace SteamLanguageParser
             }
             else
             {
-                sb.AppendLine("package net.steam3;");
+                sb.AppendLine("package " + _package);
+                sb.AppendLine("");
+                sb.AppendLine("import java.util.ArrayList;");
+                sb.AppendLine("import java.util.List;");
                 sb.AppendLine("import java.nio.*;");
                 sb.AppendLine("import steamkit.steam3.SteamMessages.*;");
                 sb.AppendLine("import steamkit.util.MsgUtil;");
@@ -83,6 +97,20 @@ namespace SteamLanguageParser
             return "INVALID";
         }
 
+        public string EmitMultipleTypes(List<Symbol> syms, string operation = ",")
+        {
+            var identList = syms.OfType<WeakSymbol>().Select(wsym => wsym.Identifier);
+            int firstChk = 0;
+            Boolean isFirstNum = int.TryParse(identList.First(), out firstChk);
+
+            if (identList.Count() > 1
+                || !isFirstNum)
+            {
+                return "\"" + string.Join("\"" + operation + "\"", identList) + "\"";
+            }
+            return String.Join("", identList) + "L";
+        }
+
         public string GetUpperName(string name)
         {
             return name.Substring(0, 1).ToUpper() + name.Remove(0, 1);
@@ -108,31 +136,49 @@ namespace SteamLanguageParser
             sb.AppendLine(padding + "{");
 
             string lastValue = "0";
+            int curr = 0;
 
             foreach (PropNode prop in enode.childNodes)
             {
-                lastValue = EmitType(prop.Default.FirstOrDefault());
-                sb.AppendLine(padding + "\t" + prop.Name + "(" + lastValue + "),");
+                curr++;
+                lastValue = EmitMultipleTypes(prop.Default);
+
+                if (prop.Obsolete != null)
+                {
+                    sb.AppendLine(padding + "\t@Deprecated");
+                }
+
+                sb.AppendLine(padding + "\t" + prop.Name + "(" + lastValue + ")" + (curr < enode.childNodes.Count ? "," : ";"));
             }
 
-            int maxint = Int32.Parse(lastValue) + 1;
-
-            sb.AppendLine(padding + "\tMax(" + maxint + ");");
-
             sb.AppendLine();
-            sb.AppendLine(padding + "\tprivate int code;");
+            sb.AppendLine(padding + "\tprivate List<Long> code = new ArrayList<Long>();");
 
-            sb.AppendLine(padding + "\tprivate " + enode.Name + "( int c ) { code = c; }");
+            sb.AppendLine(padding + "\t" + enode.Name + "( long c ) { code.add(c); }");
 
-            sb.AppendLine(padding + "\tpublic int getCode() {");
+            sb.AppendLine(padding + "\tpublic List<Long> getCode() {");
             sb.AppendLine(padding + "\t\treturn code;");
             sb.AppendLine(padding + "\t}");
-    
-            sb.AppendLine(padding + "\tpublic static " + enode.Name + " lookup( int code ) {");
+
+            sb.AppendLine(padding + "\t " + enode.Name + "(String... multiple) {");
+
+            sb.AppendLine(padding + "\tfor (String s : multiple) {");
+            sb.AppendLine(padding + "\tfor (" + enode.Name + " e : values()) {");
+            sb.AppendLine(padding + "\tif (s.equals(e.toString())) {");
+            sb.AppendLine(padding + "\tthis.code.addAll(e.getCode());");
+            sb.AppendLine(padding + "\t}");
+            sb.AppendLine(padding + "\t}");
+            sb.AppendLine(padding + "\t}");
+            sb.AppendLine(padding + "\t}");
+
+            sb.AppendLine(padding + "\tpublic static " + enode.Name + " lookup( long code ) {");
             sb.AppendLine(padding + "\t\tfor ( " + enode.Name + " x : values() ) {");
-            sb.AppendLine(padding + "\t\t\tif( x.getCode() == code ) return x;");
+
+            sb.AppendLine(padding + "\t\t\tfor (long c : x.getCode()) {");
+            sb.AppendLine(padding + "\t\t\tif (c == code) return x;");
+            sb.AppendLine(padding + "\t\t\t" + "}");
             sb.AppendLine(padding + "\t\t}");
-            sb.AppendLine(padding + "\t\treturn Invalid;");
+            sb.AppendLine(padding + "\t\treturn null;");
             sb.AppendLine(padding + "\t}");
 
             sb.AppendLine(padding + "}");
