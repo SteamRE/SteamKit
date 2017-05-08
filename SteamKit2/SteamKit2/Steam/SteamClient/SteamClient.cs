@@ -26,7 +26,7 @@ namespace SteamKit2
         Dictionary<Type, ClientMsgHandler> handlers;
 
         long currentJobId = 0;
-        DateTime processStartTime;
+        static DateTime processStartTime = DateTime.Now;
 
         object callbackLock = new object();
         Queue<ICallbackMsg> callbackQueue;
@@ -60,11 +60,6 @@ namespace SteamKit2
             this.AddHandler( new SteamTrading() );
             this.AddHandler( new SteamUnifiedMessages() );
             this.AddHandler( new SteamScreenshots() );
-
-            using ( var process = Process.GetCurrentProcess() )
-            {
-                this.processStartTime = process.StartTime;
-            }
 
             dispatchMap = new Dictionary<EMsg, Action<IPacketMsg>>
             {

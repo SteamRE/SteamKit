@@ -51,7 +51,7 @@ namespace SteamKit2
         /// </summary>
         private volatile int state;
 
-        private Thread netThread;
+        private Task netTask;
         private Socket sock;
         private IPEndPoint remoteEndPoint;
 
@@ -133,9 +133,8 @@ namespace SteamKit2
 
             filter = null;
 
-            netThread = new Thread(NetLoop);
-            netThread.Name = "UdpConnection Thread";
-            netThread.Start(endPointTask);
+            netTask = Task.Factory.StartNew(NetLoop, endPointTask, TaskCreationOptions.LongRunning);
+            netTask.Start();
         }
 
         /// <summary>
@@ -144,7 +143,7 @@ namespace SteamKit2
         /// </summary>
         public override void Disconnect()
         {
-            if ( netThread == null )
+            if ( netTask == null )
                 return;
 
             // if we think we aren't already disconnected, apply disconnecting unless we read back disconnected
@@ -161,7 +160,7 @@ namespace SteamKit2
             }
 
             // Graceful shutdown allows for the connection to empty its queue of messages to send
-            netThread.Join();
+            netTask.Wait();
 
             // Advance this the same way that steam does, when a socket gets reused.
             sourceConnId += 256;
