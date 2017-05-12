@@ -40,24 +40,6 @@ namespace SteamKit2
 
         public static EOSType GetOSType()
         {
-#if NETSTANDARD1_3
-            if ( RuntimeInformation.IsOSPlatform( OSPlatform.Windows ) )
-            {
-                return EOSType.WinUnknown;
-            }
-            else if ( RuntimeInformation.IsOSPlatform( OSPlatform.OSX ) )
-            {
-                return EOSType.MacOSUnknown;
-            }
-            else if ( RuntimeInformation.IsOSPlatform( OSPlatform.Linux ) )
-            {
-                return EOSType.LinuxUnknown;
-            }
-            else
-            {
-                return EOSType.Unknown;
-            }
-#elif NET46
             var osVer = Environment.OSVersion;
             var ver = osVer.Version;
 
@@ -170,14 +152,12 @@ namespace SteamKit2
 
                 // Not currently used by Mono. Maybe .NET Core will use this someday?
                 case PlatformID.MacOSX:
+                
                     return EOSType.MacOSUnknown;
 
                 default:
                     return EOSType.Unknown;
             }
-#else
-#error Unknown Target Platform
-#endif
         }
 
         public static bool IsRunningOnDarwin()
