@@ -26,7 +26,7 @@ namespace SteamKit2
                     return new WindowsInfoProvider();
 
                 case PlatformID.Unix:
-                    if ( Utils.IsRunningOnDarwin() )
+                    if ( Utils.IsMacOS() )
                     {
                         return new OSXInfoProvider();
                     }
@@ -34,9 +34,6 @@ namespace SteamKit2
                     {
                         return new LinuxInfoProvider();
                     }
-
-                case PlatformID.MacOSX:
-                    return new OSXInfoProvider();
             }
 
             return new DefaultInfoProvider();

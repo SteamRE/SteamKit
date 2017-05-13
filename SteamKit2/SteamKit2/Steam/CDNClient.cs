@@ -180,13 +180,6 @@ namespace SteamKit2
         /// </summary>
         public static TimeSpan RequestTimeout = TimeSpan.FromSeconds( 10 );
 
-#if NET46
-        static CDNClient()
-        {
-            ServicePointManager.Expect100Continue = false;
-        }
-#endif
-
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CDNClient"/> class.

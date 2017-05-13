@@ -48,9 +48,7 @@ namespace SteamKit2
                 if (socket.Connected)
                 {
                     socket.Shutdown(SocketShutdown.Both);
-#if NET46
                     socket.Disconnect( true );
-#endif
                 }
             }
             catch

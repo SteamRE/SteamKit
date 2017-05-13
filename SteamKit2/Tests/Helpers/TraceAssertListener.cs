@@ -1,5 +1,4 @@
-﻿#if NET46
-using System;
+﻿using System;
 using System.Diagnostics;
 
 namespace Tests
@@ -33,4 +32,3 @@ namespace Tests
         }
     }
 }
-#endif

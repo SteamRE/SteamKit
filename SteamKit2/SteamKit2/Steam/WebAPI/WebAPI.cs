@@ -20,15 +20,6 @@ namespace SteamKit2
     /// </summary>
     public sealed class WebAPI
     {
-#if NET46
-        static WebAPI()
-        {
-            // stop WebClient from inserting this header into requests
-            // the backend doesn't like it
-            ServicePointManager.Expect100Continue = false;
-        }
-#endif
-
         /// <summary>
         /// Represents a single interface that exists within the Web API.
         /// This is a dynamic object that allows function calls to interfaces with minimal code.
