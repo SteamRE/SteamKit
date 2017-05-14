@@ -2084,7 +2084,61 @@ namespace SteamKit2.GC.Dota.Internal
       k_EMsgDOTAGetPeriodicResourceResponse = 8212,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgDOTAPeriodicResourceUpdated", Value=8213)]
-      k_EMsgDOTAPeriodicResourceUpdated = 8213
+      k_EMsgDOTAPeriodicResourceUpdated = 8213,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgServerToGCSpendWager", Value=8214)]
+      k_EMsgServerToGCSpendWager = 8214,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCSignoutSpendWagerToken", Value=8215)]
+      k_EMsgGCToGCSignoutSpendWagerToken = 8215,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgSubmitTriviaQuestionAnswer", Value=8216)]
+      k_EMsgSubmitTriviaQuestionAnswer = 8216,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgSubmitTriviaQuestionAnswerResponse", Value=8217)]
+      k_EMsgSubmitTriviaQuestionAnswerResponse = 8217,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCGiveTip", Value=8218)]
+      k_EMsgClientToGCGiveTip = 8218,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCGiveTipResponse", Value=8219)]
+      k_EMsgClientToGCGiveTipResponse = 8219,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgStartTriviaSession", Value=8220)]
+      k_EMsgStartTriviaSession = 8220,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgStartTriviaSessionResponse", Value=8221)]
+      k_EMsgStartTriviaSessionResponse = 8221,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgAnchorPhoneNumberRequest", Value=8222)]
+      k_EMsgAnchorPhoneNumberRequest = 8222,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgAnchorPhoneNumberResponse", Value=8223)]
+      k_EMsgAnchorPhoneNumberResponse = 8223,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgUnanchorPhoneNumberRequest", Value=8224)]
+      k_EMsgUnanchorPhoneNumberRequest = 8224,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgUnanchorPhoneNumberResponse", Value=8225)]
+      k_EMsgUnanchorPhoneNumberResponse = 8225,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToClientTipNotification", Value=8226)]
+      k_EMsgGCToClientTipNotification = 8226,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCRequestSlarkGameResult", Value=8227)]
+      k_EMsgClientToGCRequestSlarkGameResult = 8227,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgClientToGCRequestSlarkGameResultResponse", Value=8228)]
+      k_EMsgClientToGCRequestSlarkGameResultResponse = 8228,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCSignoutSpendRankWager", Value=8229)]
+      k_EMsgGCToGCSignoutSpendRankWager = 8229,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCGetFavoriteTeam", Value=8230)]
+      k_EMsgGCToGCGetFavoriteTeam = 8230,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EMsgGCToGCGetFavoriteTeamResponse", Value=8231)]
+      k_EMsgGCToGCGetFavoriteTeamResponse = 8231
     }
   
 }

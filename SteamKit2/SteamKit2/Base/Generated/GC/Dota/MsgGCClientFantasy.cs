@@ -6511,6 +6511,24 @@ namespace SteamKit2.GC.Dota.Internal
     private bool ShouldSerializeplayer_card_item_id() { return player_card_item_idSpecified; }
     private void Resetplayer_card_item_id() { player_card_item_idSpecified = false; }
     
+
+    private uint? _event_id;
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"event_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint event_id
+    {
+      get { return _event_id?? default(uint); }
+      set { _event_id = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool event_idSpecified
+    {
+      get { return _event_id != null; }
+      set { if (value == (_event_id== null)) _event_id = value ? this.event_id : (uint?)null; }
+    }
+    private bool ShouldSerializeevent_id() { return event_idSpecified; }
+    private void Resetevent_id() { event_idSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

@@ -1020,6 +1020,24 @@ namespace SteamKit2.GC.Dota.Internal
     private bool ShouldSerializetrophy_id() { return trophy_idSpecified; }
     private void Resettrophy_id() { trophy_idSpecified = false; }
     
+
+    private bool? _free_weekend;
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"free_weekend", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public bool free_weekend
+    {
+      get { return _free_weekend?? default(bool); }
+      set { _free_weekend = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool free_weekendSpecified
+    {
+      get { return _free_weekend != null; }
+      set { if (value == (_free_weekend== null)) _free_weekend = value ? this.free_weekend : (bool?)null; }
+    }
+    private bool ShouldSerializefree_weekend() { return free_weekendSpecified; }
+    private void Resetfree_weekend() { free_weekendSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -2218,6 +2236,24 @@ namespace SteamKit2.GC.Dota.Internal
     private void Resettimes_bye_and_won() { times_bye_and_wonSpecified = false; }
     
 
+    private uint? _times_unusual_champ;
+    [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"times_unusual_champ", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint times_unusual_champ
+    {
+      get { return _times_unusual_champ?? default(uint); }
+      set { _times_unusual_champ = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool times_unusual_champSpecified
+    {
+      get { return _times_unusual_champ != null; }
+      set { if (value == (_times_unusual_champ== null)) _times_unusual_champ = value ? this.times_unusual_champ : (uint?)null; }
+    }
+    private bool ShouldSerializetimes_unusual_champ() { return times_unusual_champSpecified; }
+    private void Resettimes_unusual_champ() { times_unusual_champSpecified = false; }
+    
+
     private uint? _total_games_won;
     [global::ProtoBuf.ProtoMember(8, IsRequired = false, Name=@"total_games_won", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public uint total_games_won
@@ -2876,7 +2912,10 @@ namespace SteamKit2.GC.Dota.Internal
       k_ETournamentEvent_TeamParticipationTimedOut_EntryFeeRefund = 9,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_ETournamentEvent_TeamParticipationTimedOut_EntryFeeForfeit", Value=10)]
-      k_ETournamentEvent_TeamParticipationTimedOut_EntryFeeForfeit = 10
+      k_ETournamentEvent_TeamParticipationTimedOut_EntryFeeForfeit = 10,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_ETournamentEvent_TeamParticipationTimedOut_GrantedVictory", Value=11)]
+      k_ETournamentEvent_TeamParticipationTimedOut_GrantedVictory = 11
     }
   
 }

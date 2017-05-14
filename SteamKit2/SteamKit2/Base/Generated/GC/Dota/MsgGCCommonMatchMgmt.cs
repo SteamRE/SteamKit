@@ -845,6 +845,24 @@ namespace SteamKit2.GC.Dota.Internal
     private bool ShouldSerializeparty_builder_start_time() { return party_builder_start_timeSpecified; }
     private void Resetparty_builder_start_time() { party_builder_start_timeSpecified = false; }
     
+
+    private bool? _solo_queue;
+    [global::ProtoBuf.ProtoMember(59, IsRequired = false, Name=@"solo_queue", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public bool solo_queue
+    {
+      get { return _solo_queue?? default(bool); }
+      set { _solo_queue = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool solo_queueSpecified
+    {
+      get { return _solo_queue != null; }
+      set { if (value == (_solo_queue== null)) _solo_queue = value ? this.solo_queue : (bool?)null; }
+    }
+    private bool ShouldSerializesolo_queue() { return solo_queueSpecified; }
+    private void Resetsolo_queue() { solo_queueSpecified = false; }
+    
     [global::ProtoBuf.ProtoContract(Name=@"State", EnumPassthru=true)]
     public enum State
     {

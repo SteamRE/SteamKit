@@ -808,7 +808,10 @@ namespace SteamKit2.GC.Dota.Internal
       DOTAChannelType_HLTVSpectator = 20,
             
       [global::ProtoBuf.ProtoEnum(Name=@"DOTAChannelType_GameEvents", Value=21)]
-      DOTAChannelType_GameEvents = 21
+      DOTAChannelType_GameEvents = 21,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTAChannelType_Trivia", Value=22)]
+      DOTAChannelType_Trivia = 22
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"EProfileCardSlotType", EnumPassthru=true)]
@@ -831,7 +834,10 @@ namespace SteamKit2.GC.Dota.Internal
       k_EProfileCardSlotType_Hero = 4,
             
       [global::ProtoBuf.ProtoEnum(Name=@"k_EProfileCardSlotType_Emoticon", Value=5)]
-      k_EProfileCardSlotType_Emoticon = 5
+      k_EProfileCardSlotType_Emoticon = 5,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"k_EProfileCardSlotType_Team", Value=6)]
+      k_EProfileCardSlotType_Team = 6
     }
   
     [global::ProtoBuf.ProtoContract(Name=@"EMatchGroupServerStatus", EnumPassthru=true)]
