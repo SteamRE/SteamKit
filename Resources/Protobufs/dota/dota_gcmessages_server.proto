@@ -267,6 +267,11 @@ message CMsgGameMatchSignOut {
 		optional uint32 publish_timestamp = 1;
 	}
 
+	message EventGameLeaderboardEntry {
+		optional string name_suffix = 1;
+		optional int32 score = 2;
+	}
+
 	optional uint64 match_id = 1 [(key_field) = true];
 	optional uint32 duration = 2;
 	optional bool good_guys_win = 3;
@@ -306,6 +311,7 @@ message CMsgGameMatchSignOut {
 	optional uint32 match_flags = 38;
 	repeated uint32 team_scores = 39;
 	optional uint32 pre_game_duration = 40;
+	repeated .CMsgGameMatchSignOut.EventGameLeaderboardEntry event_game_leaderboard_entries = 42;
 }
 
 message CMsgSignOutDraftInfo {
@@ -901,11 +907,27 @@ message CMsgSignOutWagerStats {
 	optional uint32 event_id = 2;
 }
 
+message CMsgSpendWager {
+	message Player {
+		optional uint32 account_id = 1;
+		optional uint32 wager = 2;
+		optional uint64 wager_token_item_id = 3;
+	}
+
+	repeated .CMsgSpendWager.Player players = 1;
+	optional uint32 event_id = 2;
+	optional uint32 timestamp = 3;
+	optional uint64 match_id = 4;
+	optional uint64 server_steam_id = 5;
+}
+
 message CMsgSignOutXPCoins {
 	message Player {
 		optional uint32 account_id = 1;
 		optional uint32 xp_gained = 2;
 		optional uint32 coins_spent = 3;
+		optional uint64 wager_token_item_id = 4;
+		optional uint32 rank_wager = 5;
 	}
 
 	repeated .CMsgSignOutXPCoins.Player players = 1;
@@ -949,6 +971,7 @@ message CMsgServerToGCStartCompendiumInGamePredictions {
 	optional uint64 match_id = 2;
 	optional float hltv_delay = 3;
 	repeated uint32 prediction_ids = 4;
+	optional uint32 series_id = 5;
 }
 
 message CMsgServerToGCStartCompendiumInGamePredictionsResponse {

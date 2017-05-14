@@ -77,6 +77,7 @@ message CSODOTAParty {
 	optional uint32 party_builder_slots_to_fill = 56;
 	optional uint32 party_builder_match_groups = 57;
 	optional uint32 party_builder_start_time = 58;
+	optional bool solo_queue = 59;
 }
 
 message CSODOTAPartyInvite {

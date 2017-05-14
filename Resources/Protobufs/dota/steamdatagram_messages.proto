@@ -231,8 +231,15 @@ message CMsgSteamDatagramClientPingSampleReply {
 		optional uint32 e2e_ping_ms = 3;
 	}
 
+	message DataCenter {
+		optional fixed32 data_center_id = 1;
+		optional fixed32 via_relay_id = 2;
+		optional uint32 e2e_ping_ms = 3;
+	}
+
 	optional fixed32 client_cookie = 1;
 	repeated .CMsgSteamDatagramClientPingSampleReply.RoutingCluster routing_clusters = 2;
+	repeated .CMsgSteamDatagramClientPingSampleReply.DataCenter data_centers = 3;
 }
 
 message CMsgSteamDatagramClientSwitchedPrimary {

@@ -146,6 +146,7 @@ enum DOTAChatChannelType_t {
 	DOTAChannelType_BattleCup = 19;
 	DOTAChannelType_HLTVSpectator = 20;
 	DOTAChannelType_GameEvents = 21;
+	DOTAChannelType_Trivia = 22;
 }
 
 enum EProfileCardSlotType {
@@ -155,6 +156,7 @@ enum EProfileCardSlotType {
 	k_EProfileCardSlotType_Item = 3;
 	k_EProfileCardSlotType_Hero = 4;
 	k_EProfileCardSlotType_Emoticon = 5;
+	k_EProfileCardSlotType_Team = 6;
 }
 
 enum EMatchGroupServerStatus {

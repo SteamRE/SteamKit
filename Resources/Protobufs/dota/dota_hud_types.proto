@@ -19,5 +19,11 @@ enum EHeroSelectionText {
 	k_EHeroSelectionText_AllDraft_TeammateRandomed = 8 [(hud_localize_token) = "#DOTA_Hero_Selection_AllDraft_TeammateRandomed_Panorama"];
 	k_EHeroSelectionText_AllDraft_YouPicking_LosingGold = 9 [(hud_localize_token) = "#DOTA_Hero_Selection_AllDraft_YouPicking_LosingGold"];
 	k_EHeroSelectionText_AllDraft_TheyPicking_LosingGold = 10 [(hud_localize_token) = "#DOTA_Hero_Selection_AllDraft_TheyPicking_LosingGold"];
+	k_EHeroSelectionText_CaptainsMode_ChooseCaptain = 11 [(hud_localize_token) = "#DOTA_Hero_Selection_CaptainsMode_ChooseCaptain"];
+	k_EHeroSelectionText_CaptainsMode_WaitingForChooseCaptain = 12 [(hud_localize_token) = "#DOTA_Hero_Selection_CaptainsMode_WaitingForChooseCaptain"];
+	k_EHeroSelectionText_CaptainsMode_YouSelect = 13 [(hud_localize_token) = "#DOTA_Hero_Selection_CaptainsMode_YouSelect"];
+	k_EHeroSelectionText_CaptainsMode_TheySelect = 14 [(hud_localize_token) = "#DOTA_Hero_Selection_CaptainsMode_TheySelect"];
+	k_EHeroSelectionText_CaptainsMode_YouBan = 15 [(hud_localize_token) = "#DOTA_Hero_Selection_CaptainsMode_YouBan"];
+	k_EHeroSelectionText_CaptainsMode_TheyBan = 16 [(hud_localize_token) = "#DOTA_Hero_Selection_CaptainsMode_TheyBan"];
 }
 
