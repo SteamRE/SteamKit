@@ -1626,6 +1626,8 @@ namespace SteamKit2
 		InvalidItemType = 104,
 		IPBanned = 105,
 		GSLTExpired = 106,
+		InsufficientFunds = 107,
+		TooManyPending = 108,
 	}
 	public enum EUniverse
 	{
