@@ -10,13 +10,11 @@
 
 // Option: missing-value detection (*Specified/ShouldSerialize*/Reset*) enabled
     
-// Option: light framework (CF/Silverlight) enabled
-    
 // Generated from: steammessages_depotbuilder.steamclient.proto
 // Note: requires additional types generated from: steammessages_unified_base.steamclient.proto
 namespace SteamKit2.Unified.Internal
 {
-  [global::ProtoBuf.ProtoContract(Name=@"CContentBuilder_InitDepotBuild_Request")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CContentBuilder_InitDepotBuild_Request")]
   public partial class CContentBuilder_InitDepotBuild_Request : global::ProtoBuf.IExtensible
   {
     public CContentBuilder_InitDepotBuild_Request() {}
@@ -30,7 +28,7 @@ namespace SteamKit2.Unified.Internal
       set { _appid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool appidSpecified
     {
       get { return _appid != null; }
@@ -48,7 +46,7 @@ namespace SteamKit2.Unified.Internal
       set { _depotid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool depotidSpecified
     {
       get { return _depotid != null; }
@@ -66,7 +64,7 @@ namespace SteamKit2.Unified.Internal
       set { _workshop_itemid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool workshop_itemidSpecified
     {
       get { return _workshop_itemid != null; }
@@ -84,7 +82,7 @@ namespace SteamKit2.Unified.Internal
       set { _for_local_cs = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool for_local_csSpecified
     {
       get { return _for_local_cs != null; }
@@ -98,7 +96,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CContentBuilder_InitDepotBuild_Response")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CContentBuilder_InitDepotBuild_Response")]
   public partial class CContentBuilder_InitDepotBuild_Response : global::ProtoBuf.IExtensible
   {
     public CContentBuilder_InitDepotBuild_Response() {}
@@ -112,7 +110,7 @@ namespace SteamKit2.Unified.Internal
       set { _baseline_manifestid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool baseline_manifestidSpecified
     {
       get { return _baseline_manifestid != null; }
@@ -130,7 +128,7 @@ namespace SteamKit2.Unified.Internal
       set { _chunk_size = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool chunk_sizeSpecified
     {
       get { return _chunk_size != null; }
@@ -148,7 +146,7 @@ namespace SteamKit2.Unified.Internal
       set { _aes_key = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool aes_keySpecified
     {
       get { return _aes_key != null; }
@@ -166,7 +164,7 @@ namespace SteamKit2.Unified.Internal
       set { _rsa_key = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool rsa_keySpecified
     {
       get { return _rsa_key != null; }
@@ -184,7 +182,7 @@ namespace SteamKit2.Unified.Internal
       set { _url_host = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool url_hostSpecified
     {
       get { return _url_host != null; }
@@ -198,7 +196,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CContentBuilder_StartDepotUpload_Request")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CContentBuilder_StartDepotUpload_Request")]
   public partial class CContentBuilder_StartDepotUpload_Request : global::ProtoBuf.IExtensible
   {
     public CContentBuilder_StartDepotUpload_Request() {}
@@ -212,7 +210,7 @@ namespace SteamKit2.Unified.Internal
       set { _appid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool appidSpecified
     {
       get { return _appid != null; }
@@ -230,7 +228,7 @@ namespace SteamKit2.Unified.Internal
       set { _depotid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool depotidSpecified
     {
       get { return _depotid != null; }
@@ -248,7 +246,7 @@ namespace SteamKit2.Unified.Internal
       set { _workshop_itemid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool workshop_itemidSpecified
     {
       get { return _workshop_itemid != null; }
@@ -266,7 +264,7 @@ namespace SteamKit2.Unified.Internal
       set { _for_local_cs = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool for_local_csSpecified
     {
       get { return _for_local_cs != null; }
@@ -284,7 +282,7 @@ namespace SteamKit2.Unified.Internal
       set { _baseline_manifestid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool baseline_manifestidSpecified
     {
       get { return _baseline_manifestid != null; }
@@ -302,7 +300,7 @@ namespace SteamKit2.Unified.Internal
       set { _manifest_size = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool manifest_sizeSpecified
     {
       get { return _manifest_size != null; }
@@ -316,7 +314,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CContentBuilder_StartDepotUpload_Response")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CContentBuilder_StartDepotUpload_Response")]
   public partial class CContentBuilder_StartDepotUpload_Response : global::ProtoBuf.IExtensible
   {
     public CContentBuilder_StartDepotUpload_Response() {}
@@ -330,7 +328,7 @@ namespace SteamKit2.Unified.Internal
       set { _depot_build_handle = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool depot_build_handleSpecified
     {
       get { return _depot_build_handle != null; }
@@ -344,7 +342,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CContentBuilder_GetMissingDepotChunks_Request")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CContentBuilder_GetMissingDepotChunks_Request")]
   public partial class CContentBuilder_GetMissingDepotChunks_Request : global::ProtoBuf.IExtensible
   {
     public CContentBuilder_GetMissingDepotChunks_Request() {}
@@ -358,7 +356,7 @@ namespace SteamKit2.Unified.Internal
       set { _appid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool appidSpecified
     {
       get { return _appid != null; }
@@ -376,7 +374,7 @@ namespace SteamKit2.Unified.Internal
       set { _depot_build_handle = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool depot_build_handleSpecified
     {
       get { return _depot_build_handle != null; }
@@ -390,7 +388,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CContentBuilder_GetMissingDepotChunks_Response")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CContentBuilder_GetMissingDepotChunks_Response")]
   public partial class CContentBuilder_GetMissingDepotChunks_Response : global::ProtoBuf.IExtensible
   {
     public CContentBuilder_GetMissingDepotChunks_Response() {}
@@ -411,7 +409,7 @@ namespace SteamKit2.Unified.Internal
       set { _total_missing_chunks = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool total_missing_chunksSpecified
     {
       get { return _total_missing_chunks != null; }
@@ -429,7 +427,7 @@ namespace SteamKit2.Unified.Internal
       set { _total_missing_bytes = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool total_missing_bytesSpecified
     {
       get { return _total_missing_bytes != null; }
@@ -438,7 +436,7 @@ namespace SteamKit2.Unified.Internal
     private bool ShouldSerializetotal_missing_bytes() { return total_missing_bytesSpecified; }
     private void Resettotal_missing_bytes() { total_missing_bytesSpecified = false; }
     
-  [global::ProtoBuf.ProtoContract(Name=@"Chunks")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Chunks")]
   public partial class Chunks : global::ProtoBuf.IExtensible
   {
     public Chunks() {}
@@ -452,7 +450,7 @@ namespace SteamKit2.Unified.Internal
       set { _sha = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool shaSpecified
     {
       get { return _sha != null; }
@@ -471,7 +469,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CContentBuilder_FinishDepotUpload_Request")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CContentBuilder_FinishDepotUpload_Request")]
   public partial class CContentBuilder_FinishDepotUpload_Request : global::ProtoBuf.IExtensible
   {
     public CContentBuilder_FinishDepotUpload_Request() {}
@@ -485,7 +483,7 @@ namespace SteamKit2.Unified.Internal
       set { _appid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool appidSpecified
     {
       get { return _appid != null; }
@@ -503,7 +501,7 @@ namespace SteamKit2.Unified.Internal
       set { _depot_build_handle = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool depot_build_handleSpecified
     {
       get { return _depot_build_handle != null; }
@@ -517,7 +515,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CContentBuilder_FinishDepotUpload_Response")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CContentBuilder_FinishDepotUpload_Response")]
   public partial class CContentBuilder_FinishDepotUpload_Response : global::ProtoBuf.IExtensible
   {
     public CContentBuilder_FinishDepotUpload_Response() {}
@@ -531,7 +529,7 @@ namespace SteamKit2.Unified.Internal
       set { _manifestid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool manifestidSpecified
     {
       get { return _manifestid != null; }
@@ -549,7 +547,7 @@ namespace SteamKit2.Unified.Internal
       set { _prev_reused = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool prev_reusedSpecified
     {
       get { return _prev_reused != null; }
@@ -563,7 +561,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CContentBuilder_CommitAppBuild_Request")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CContentBuilder_CommitAppBuild_Request")]
   public partial class CContentBuilder_CommitAppBuild_Request : global::ProtoBuf.IExtensible
   {
     public CContentBuilder_CommitAppBuild_Request() {}
@@ -577,7 +575,7 @@ namespace SteamKit2.Unified.Internal
       set { _appid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool appidSpecified
     {
       get { return _appid != null; }
@@ -602,7 +600,7 @@ namespace SteamKit2.Unified.Internal
       set { _build_notes = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool build_notesSpecified
     {
       get { return _build_notes != null; }
@@ -620,7 +618,7 @@ namespace SteamKit2.Unified.Internal
       set { _live_branch = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool live_branchSpecified
     {
       get { return _live_branch != null; }
@@ -629,7 +627,7 @@ namespace SteamKit2.Unified.Internal
     private bool ShouldSerializelive_branch() { return live_branchSpecified; }
     private void Resetlive_branch() { live_branchSpecified = false; }
     
-  [global::ProtoBuf.ProtoContract(Name=@"Depots")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Depots")]
   public partial class Depots : global::ProtoBuf.IExtensible
   {
     public Depots() {}
@@ -643,7 +641,7 @@ namespace SteamKit2.Unified.Internal
       set { _depotid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool depotidSpecified
     {
       get { return _depotid != null; }
@@ -661,7 +659,7 @@ namespace SteamKit2.Unified.Internal
       set { _manifestid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool manifestidSpecified
     {
       get { return _manifestid != null; }
@@ -680,7 +678,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CContentBuilder_CommitAppBuild_Response")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CContentBuilder_CommitAppBuild_Response")]
   public partial class CContentBuilder_CommitAppBuild_Response : global::ProtoBuf.IExtensible
   {
     public CContentBuilder_CommitAppBuild_Response() {}
@@ -694,7 +692,7 @@ namespace SteamKit2.Unified.Internal
       set { _buildid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool buildidSpecified
     {
       get { return _buildid != null; }
@@ -708,7 +706,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CContentBuilder_SignInstallScript_Request")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CContentBuilder_SignInstallScript_Request")]
   public partial class CContentBuilder_SignInstallScript_Request : global::ProtoBuf.IExtensible
   {
     public CContentBuilder_SignInstallScript_Request() {}
@@ -722,7 +720,7 @@ namespace SteamKit2.Unified.Internal
       set { _appid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool appidSpecified
     {
       get { return _appid != null; }
@@ -740,7 +738,7 @@ namespace SteamKit2.Unified.Internal
       set { _depotid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool depotidSpecified
     {
       get { return _depotid != null; }
@@ -758,7 +756,7 @@ namespace SteamKit2.Unified.Internal
       set { _install_script = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool install_scriptSpecified
     {
       get { return _install_script != null; }
@@ -772,7 +770,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CContentBuilder_SignInstallScript_Response")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CContentBuilder_SignInstallScript_Response")]
   public partial class CContentBuilder_SignInstallScript_Response : global::ProtoBuf.IExtensible
   {
     public CContentBuilder_SignInstallScript_Response() {}
@@ -786,7 +784,7 @@ namespace SteamKit2.Unified.Internal
       set { _signed_install_script = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool signed_install_scriptSpecified
     {
       get { return _signed_install_script != null; }

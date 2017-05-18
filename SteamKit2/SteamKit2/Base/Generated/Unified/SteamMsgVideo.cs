@@ -10,13 +10,11 @@
 
 // Option: missing-value detection (*Specified/ShouldSerialize*/Reset*) enabled
     
-// Option: light framework (CF/Silverlight) enabled
-    
 // Generated from: steammessages_video.steamclient.proto
 // Note: requires additional types generated from: steammessages_unified_base.steamclient.proto
 namespace SteamKit2.Unified.Internal
 {
-  [global::ProtoBuf.ProtoContract(Name=@"CVideo_ClientGetVideoURL_Request")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CVideo_ClientGetVideoURL_Request")]
   public partial class CVideo_ClientGetVideoURL_Request : global::ProtoBuf.IExtensible
   {
     public CVideo_ClientGetVideoURL_Request() {}
@@ -30,7 +28,7 @@ namespace SteamKit2.Unified.Internal
       set { _video_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool video_idSpecified
     {
       get { return _video_id != null; }
@@ -48,7 +46,7 @@ namespace SteamKit2.Unified.Internal
       set { _client_cellid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool client_cellidSpecified
     {
       get { return _client_cellid != null; }
@@ -62,7 +60,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CVideo_ClientGetVideoURL_Response")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CVideo_ClientGetVideoURL_Response")]
   public partial class CVideo_ClientGetVideoURL_Response : global::ProtoBuf.IExtensible
   {
     public CVideo_ClientGetVideoURL_Response() {}
@@ -76,7 +74,7 @@ namespace SteamKit2.Unified.Internal
       set { _video_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool video_idSpecified
     {
       get { return _video_id != null; }
@@ -94,7 +92,7 @@ namespace SteamKit2.Unified.Internal
       set { _video_url = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool video_urlSpecified
     {
       get { return _video_url != null; }
@@ -108,7 +106,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CVideo_UnlockedH264_Notification")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CVideo_UnlockedH264_Notification")]
   public partial class CVideo_UnlockedH264_Notification : global::ProtoBuf.IExtensible
   {
     public CVideo_UnlockedH264_Notification() {}
@@ -122,7 +120,7 @@ namespace SteamKit2.Unified.Internal
       set { _encryption_key = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool encryption_keySpecified
     {
       get { return _encryption_key != null; }

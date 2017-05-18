@@ -10,8 +10,6 @@
 
 // Option: missing-value detection (*Specified/ShouldSerialize*/Reset*) enabled
     
-// Option: light framework (CF/Silverlight) enabled
-    
 // Generated from: network_connection.proto
 // Note: requires additional types generated from: google/protobuf/descriptor.proto
 namespace SteamKit2.GC.Dota.Internal

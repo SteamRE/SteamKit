@@ -10,13 +10,11 @@
 
 // Option: missing-value detection (*Specified/ShouldSerialize*/Reset*) enabled
     
-// Option: light framework (CF/Silverlight) enabled
-    
 // Generated from: econ_gcmessages.proto
 // Note: requires additional types generated from: steammessages.proto
 namespace SteamKit2.GC.CSGO.Internal
 {
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgGCGiftedItems")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCGiftedItems")]
   public partial class CMsgGCGiftedItems : global::ProtoBuf.IExtensible
   {
     public CMsgGCGiftedItems() {}
@@ -30,7 +28,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _accountid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool accountidSpecified
     {
       get { return _accountid != null; }
@@ -48,7 +46,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _giftdefindex = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool giftdefindexSpecified
     {
       get { return _giftdefindex != null; }
@@ -66,7 +64,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _max_gifts_possible = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool max_gifts_possibleSpecified
     {
       get { return _max_gifts_possible != null; }
@@ -84,7 +82,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _num_eligible_recipients = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool num_eligible_recipientsSpecified
     {
       get { return _num_eligible_recipients != null; }
@@ -105,7 +103,7 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgApplyAutograph")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgApplyAutograph")]
   public partial class CMsgApplyAutograph : global::ProtoBuf.IExtensible
   {
     public CMsgApplyAutograph() {}
@@ -119,7 +117,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _autograph_item_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool autograph_item_idSpecified
     {
       get { return _autograph_item_id != null; }
@@ -137,7 +135,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _item_item_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool item_item_idSpecified
     {
       get { return _item_item_id != null; }
@@ -151,7 +149,7 @@ namespace SteamKit2.GC.CSGO.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgGCUserTrackTimePlayedConsecutively")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCUserTrackTimePlayedConsecutively")]
   public partial class CMsgGCUserTrackTimePlayedConsecutively : global::ProtoBuf.IExtensible
   {
     public CMsgGCUserTrackTimePlayedConsecutively() {}
@@ -165,7 +163,7 @@ namespace SteamKit2.GC.CSGO.Internal
       set { _state = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool stateSpecified
     {
       get { return _state != null; }

@@ -10,12 +10,10 @@
 
 // Option: missing-value detection (*Specified/ShouldSerialize*/Reset*) enabled
     
-// Option: light framework (CF/Silverlight) enabled
-    
 // Generated from: encrypted_app_ticket.proto
 namespace SteamKit2.Internal
 {
-  [global::ProtoBuf.ProtoContract(Name=@"EncryptedAppTicket")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"EncryptedAppTicket")]
   public partial class EncryptedAppTicket : global::ProtoBuf.IExtensible
   {
     public EncryptedAppTicket() {}
@@ -29,7 +27,7 @@ namespace SteamKit2.Internal
       set { _ticket_version_no = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool ticket_version_noSpecified
     {
       get { return _ticket_version_no != null; }
@@ -47,7 +45,7 @@ namespace SteamKit2.Internal
       set { _crc_encryptedticket = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool crc_encryptedticketSpecified
     {
       get { return _crc_encryptedticket != null; }
@@ -65,7 +63,7 @@ namespace SteamKit2.Internal
       set { _cb_encrypteduserdata = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool cb_encrypteduserdataSpecified
     {
       get { return _cb_encrypteduserdata != null; }
@@ -83,7 +81,7 @@ namespace SteamKit2.Internal
       set { _cb_encrypted_appownershipticket = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool cb_encrypted_appownershipticketSpecified
     {
       get { return _cb_encrypted_appownershipticket != null; }
@@ -101,7 +99,7 @@ namespace SteamKit2.Internal
       set { _encrypted_ticket = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool encrypted_ticketSpecified
     {
       get { return _encrypted_ticket != null; }

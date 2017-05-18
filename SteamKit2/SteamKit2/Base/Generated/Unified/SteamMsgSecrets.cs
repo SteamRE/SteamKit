@@ -10,13 +10,11 @@
 
 // Option: missing-value detection (*Specified/ShouldSerialize*/Reset*) enabled
     
-// Option: light framework (CF/Silverlight) enabled
-    
 // Generated from: steammessages_secrets.steamclient.proto
 // Note: requires additional types generated from: steammessages_unified_base.steamclient.proto
 namespace SteamKit2.Unified.Internal
 {
-  [global::ProtoBuf.ProtoContract(Name=@"CKeyEscrow_Request")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CKeyEscrow_Request")]
   public partial class CKeyEscrow_Request : global::ProtoBuf.IExtensible
   {
     public CKeyEscrow_Request() {}
@@ -30,7 +28,7 @@ namespace SteamKit2.Unified.Internal
       set { _rsa_oaep_sha_ticket = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool rsa_oaep_sha_ticketSpecified
     {
       get { return _rsa_oaep_sha_ticket != null; }
@@ -48,7 +46,7 @@ namespace SteamKit2.Unified.Internal
       set { _password = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool passwordSpecified
     {
       get { return _password != null; }
@@ -66,7 +64,7 @@ namespace SteamKit2.Unified.Internal
       set { _usage = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool usageSpecified
     {
       get { return _usage != null; }
@@ -84,7 +82,7 @@ namespace SteamKit2.Unified.Internal
       set { _device_name = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool device_nameSpecified
     {
       get { return _device_name != null; }
@@ -98,7 +96,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CKeyEscrow_Ticket")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CKeyEscrow_Ticket")]
   public partial class CKeyEscrow_Ticket : global::ProtoBuf.IExtensible
   {
     public CKeyEscrow_Ticket() {}
@@ -112,7 +110,7 @@ namespace SteamKit2.Unified.Internal
       set { _password = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool passwordSpecified
     {
       get { return _password != null; }
@@ -130,7 +128,7 @@ namespace SteamKit2.Unified.Internal
       set { _identifier = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool identifierSpecified
     {
       get { return _identifier != null; }
@@ -148,7 +146,7 @@ namespace SteamKit2.Unified.Internal
       set { _payload = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool payloadSpecified
     {
       get { return _payload != null; }
@@ -166,7 +164,7 @@ namespace SteamKit2.Unified.Internal
       set { _timestamp = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool timestampSpecified
     {
       get { return _timestamp != null; }
@@ -184,7 +182,7 @@ namespace SteamKit2.Unified.Internal
       set { _usage = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool usageSpecified
     {
       get { return _usage != null; }
@@ -202,7 +200,7 @@ namespace SteamKit2.Unified.Internal
       set { _device_name = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool device_nameSpecified
     {
       get { return _device_name != null; }
@@ -220,7 +218,7 @@ namespace SteamKit2.Unified.Internal
       set { _device_model = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool device_modelSpecified
     {
       get { return _device_model != null; }
@@ -238,7 +236,7 @@ namespace SteamKit2.Unified.Internal
       set { _device_serial = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool device_serialSpecified
     {
       get { return _device_serial != null; }
@@ -256,7 +254,7 @@ namespace SteamKit2.Unified.Internal
       set { _device_provisioning_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool device_provisioning_idSpecified
     {
       get { return _device_provisioning_id != null; }
@@ -270,7 +268,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CKeyEscrow_Response")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CKeyEscrow_Response")]
   public partial class CKeyEscrow_Response : global::ProtoBuf.IExtensible
   {
     public CKeyEscrow_Response() {}

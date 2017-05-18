@@ -10,13 +10,11 @@
 
 // Option: missing-value detection (*Specified/ShouldSerialize*/Reset*) enabled
     
-// Option: light framework (CF/Silverlight) enabled
-    
 // Generated from: steammessages_player.steamclient.proto
 // Note: requires additional types generated from: steammessages_unified_base.steamclient.proto
 namespace SteamKit2.Unified.Internal
 {
-  [global::ProtoBuf.ProtoContract(Name=@"CPlayer_GetGameBadgeLevels_Request")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPlayer_GetGameBadgeLevels_Request")]
   public partial class CPlayer_GetGameBadgeLevels_Request : global::ProtoBuf.IExtensible
   {
     public CPlayer_GetGameBadgeLevels_Request() {}
@@ -30,7 +28,7 @@ namespace SteamKit2.Unified.Internal
       set { _appid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool appidSpecified
     {
       get { return _appid != null; }
@@ -44,7 +42,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CPlayer_GetGameBadgeLevels_Response")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPlayer_GetGameBadgeLevels_Response")]
   public partial class CPlayer_GetGameBadgeLevels_Response : global::ProtoBuf.IExtensible
   {
     public CPlayer_GetGameBadgeLevels_Response() {}
@@ -58,7 +56,7 @@ namespace SteamKit2.Unified.Internal
       set { _player_level = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool player_levelSpecified
     {
       get { return _player_level != null; }
@@ -74,7 +72,7 @@ namespace SteamKit2.Unified.Internal
       get { return _badges; }
     }
   
-  [global::ProtoBuf.ProtoContract(Name=@"Badge")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Badge")]
   public partial class Badge : global::ProtoBuf.IExtensible
   {
     public Badge() {}
@@ -88,7 +86,7 @@ namespace SteamKit2.Unified.Internal
       set { _level = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool levelSpecified
     {
       get { return _level != null; }
@@ -106,7 +104,7 @@ namespace SteamKit2.Unified.Internal
       set { _series = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool seriesSpecified
     {
       get { return _series != null; }
@@ -124,7 +122,7 @@ namespace SteamKit2.Unified.Internal
       set { _border_color = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool border_colorSpecified
     {
       get { return _border_color != null; }
@@ -143,7 +141,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CPlayer_GetLastPlayedTimes_Request")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPlayer_GetLastPlayedTimes_Request")]
   public partial class CPlayer_GetLastPlayedTimes_Request : global::ProtoBuf.IExtensible
   {
     public CPlayer_GetLastPlayedTimes_Request() {}
@@ -157,7 +155,7 @@ namespace SteamKit2.Unified.Internal
       set { _min_last_played = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool min_last_playedSpecified
     {
       get { return _min_last_played != null; }
@@ -171,7 +169,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CPlayer_GetLastPlayedTimes_Response")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPlayer_GetLastPlayedTimes_Response")]
   public partial class CPlayer_GetLastPlayedTimes_Response : global::ProtoBuf.IExtensible
   {
     public CPlayer_GetLastPlayedTimes_Response() {}
@@ -183,7 +181,7 @@ namespace SteamKit2.Unified.Internal
       get { return _games; }
     }
   
-  [global::ProtoBuf.ProtoContract(Name=@"Game")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Game")]
   public partial class Game : global::ProtoBuf.IExtensible
   {
     public Game() {}
@@ -197,7 +195,7 @@ namespace SteamKit2.Unified.Internal
       set { _appid = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool appidSpecified
     {
       get { return _appid != null; }
@@ -215,7 +213,7 @@ namespace SteamKit2.Unified.Internal
       set { _last_playtime = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool last_playtimeSpecified
     {
       get { return _last_playtime != null; }
@@ -233,7 +231,7 @@ namespace SteamKit2.Unified.Internal
       set { _playtime_2weeks = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool playtime_2weeksSpecified
     {
       get { return _playtime_2weeks != null; }
@@ -251,7 +249,7 @@ namespace SteamKit2.Unified.Internal
       set { _playtime_forever = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool playtime_foreverSpecified
     {
       get { return _playtime_forever != null; }
@@ -270,7 +268,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CPlayer_AcceptSSA_Request")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPlayer_AcceptSSA_Request")]
   public partial class CPlayer_AcceptSSA_Request : global::ProtoBuf.IExtensible
   {
     public CPlayer_AcceptSSA_Request() {}
@@ -280,7 +278,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CPlayer_AcceptSSA_Response")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPlayer_AcceptSSA_Response")]
   public partial class CPlayer_AcceptSSA_Response : global::ProtoBuf.IExtensible
   {
     public CPlayer_AcceptSSA_Response() {}
@@ -290,7 +288,7 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::ProtoBuf.ProtoContract(Name=@"CPlayer_LastPlayedTimes_Notification")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CPlayer_LastPlayedTimes_Notification")]
   public partial class CPlayer_LastPlayedTimes_Notification : global::ProtoBuf.IExtensible
   {
     public CPlayer_LastPlayedTimes_Notification() {}

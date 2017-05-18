@@ -10,12 +10,10 @@
 
 // Option: missing-value detection (*Specified/ShouldSerialize*/Reset*) enabled
     
-// Option: light framework (CF/Silverlight) enabled
-    
 // Generated from: gc.proto
 namespace SteamKit2.GC.Internal
 {
-  [global::ProtoBuf.ProtoContract(Name=@"CMsgProtoBufHeader")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgProtoBufHeader")]
   public partial class CMsgProtoBufHeader : global::ProtoBuf.IExtensible
   {
     public CMsgProtoBufHeader() {}
@@ -29,7 +27,7 @@ namespace SteamKit2.GC.Internal
       set { _client_steam_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool client_steam_idSpecified
     {
       get { return _client_steam_id != null; }
@@ -47,7 +45,7 @@ namespace SteamKit2.GC.Internal
       set { _client_session_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool client_session_idSpecified
     {
       get { return _client_session_id != null; }
@@ -65,7 +63,7 @@ namespace SteamKit2.GC.Internal
       set { _source_app_id = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool source_app_idSpecified
     {
       get { return _source_app_id != null; }
@@ -83,7 +81,7 @@ namespace SteamKit2.GC.Internal
       set { _job_id_source = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool job_id_sourceSpecified
     {
       get { return _job_id_source != null; }
@@ -101,7 +99,7 @@ namespace SteamKit2.GC.Internal
       set { _job_id_target = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool job_id_targetSpecified
     {
       get { return _job_id_target != null; }
@@ -119,7 +117,7 @@ namespace SteamKit2.GC.Internal
       set { _target_job_name = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool target_job_nameSpecified
     {
       get { return _target_job_name != null; }
@@ -137,7 +135,7 @@ namespace SteamKit2.GC.Internal
       set { _eresult = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool eresultSpecified
     {
       get { return _eresult != null; }
@@ -155,7 +153,7 @@ namespace SteamKit2.GC.Internal
       set { _error_message = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool error_messageSpecified
     {
       get { return _error_message != null; }
@@ -173,7 +171,7 @@ namespace SteamKit2.GC.Internal
       set { _gc_msg_src = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool gc_msg_srcSpecified
     {
       get { return _gc_msg_src != null; }
@@ -191,7 +189,7 @@ namespace SteamKit2.GC.Internal
       set { _gc_dir_index_source = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
-    
+    [global::System.ComponentModel.Browsable(false)]
     public bool gc_dir_index_sourceSpecified
     {
       get { return _gc_dir_index_source != null; }

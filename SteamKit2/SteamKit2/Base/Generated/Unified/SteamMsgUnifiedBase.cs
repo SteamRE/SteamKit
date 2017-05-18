@@ -10,13 +10,11 @@
 
 // Option: missing-value detection (*Specified/ShouldSerialize*/Reset*) enabled
     
-// Option: light framework (CF/Silverlight) enabled
-    
 // Generated from: steammessages_unified_base.steamclient.proto
 // Note: requires additional types generated from: google/protobuf/descriptor.proto
 namespace SteamKit2.Unified.Internal
 {
-  [global::ProtoBuf.ProtoContract(Name=@"NoResponse")]
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"NoResponse")]
   public partial class NoResponse : global::ProtoBuf.IExtensible
   {
     public NoResponse() {}
