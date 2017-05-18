@@ -15,6 +15,7 @@ enum ETournamentEvent {
 	k_ETournamentEvent_Canceled = 8;
 	k_ETournamentEvent_TeamParticipationTimedOut_EntryFeeRefund = 9;
 	k_ETournamentEvent_TeamParticipationTimedOut_EntryFeeForfeit = 10;
+	k_ETournamentEvent_TeamParticipationTimedOut_GrantedVictory = 11;
 }
 
 message CMsgDOTATournamentInfo {
@@ -94,6 +95,7 @@ message CMsgWeekendTourneySchedule {
 		optional uint32 time_window_close = 3;
 		optional uint32 time_window_open_next = 4;
 		optional uint32 trophy_id = 5;
+		optional bool free_weekend = 6;
 	}
 
 	repeated .CMsgWeekendTourneySchedule.Division divisions = 1;
@@ -201,6 +203,7 @@ message CMsgDOTAWeekendTourneyPlayerSkillLevelStats {
 	optional uint32 times_won_3 = 5;
 	optional uint32 times_bye_and_lost = 6;
 	optional uint32 times_bye_and_won = 7;
+	optional uint32 times_unusual_champ = 10;
 	optional uint32 total_games_won = 8;
 	optional uint32 score = 9;
 }

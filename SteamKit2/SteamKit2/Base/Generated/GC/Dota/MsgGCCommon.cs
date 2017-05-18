@@ -616,186 +616,6 @@ namespace SteamKit2.GC.Dota.Internal
     private void Resetsolo_calibration_games_remaining() { solo_calibration_games_remainingSpecified = false; }
     
 
-    private uint? _general_seasonal_ranked_rank;
-    [global::ProtoBuf.ProtoMember(75, IsRequired = false, Name=@"general_seasonal_ranked_rank", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint general_seasonal_ranked_rank
-    {
-      get { return _general_seasonal_ranked_rank?? default(uint); }
-      set { _general_seasonal_ranked_rank = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool general_seasonal_ranked_rankSpecified
-    {
-      get { return _general_seasonal_ranked_rank != null; }
-      set { if (value == (_general_seasonal_ranked_rank== null)) _general_seasonal_ranked_rank = value ? this.general_seasonal_ranked_rank : (uint?)null; }
-    }
-    private bool ShouldSerializegeneral_seasonal_ranked_rank() { return general_seasonal_ranked_rankSpecified; }
-    private void Resetgeneral_seasonal_ranked_rank() { general_seasonal_ranked_rankSpecified = false; }
-    
-
-    private uint? _general_seasonal_ranked_calibration_games_remaining;
-    [global::ProtoBuf.ProtoMember(76, IsRequired = false, Name=@"general_seasonal_ranked_calibration_games_remaining", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint general_seasonal_ranked_calibration_games_remaining
-    {
-      get { return _general_seasonal_ranked_calibration_games_remaining?? default(uint); }
-      set { _general_seasonal_ranked_calibration_games_remaining = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool general_seasonal_ranked_calibration_games_remainingSpecified
-    {
-      get { return _general_seasonal_ranked_calibration_games_remaining != null; }
-      set { if (value == (_general_seasonal_ranked_calibration_games_remaining== null)) _general_seasonal_ranked_calibration_games_remaining = value ? this.general_seasonal_ranked_calibration_games_remaining : (uint?)null; }
-    }
-    private bool ShouldSerializegeneral_seasonal_ranked_calibration_games_remaining() { return general_seasonal_ranked_calibration_games_remainingSpecified; }
-    private void Resetgeneral_seasonal_ranked_calibration_games_remaining() { general_seasonal_ranked_calibration_games_remainingSpecified = false; }
-    
-
-    private uint? _general_seasonal_ranked_games_played;
-    [global::ProtoBuf.ProtoMember(80, IsRequired = false, Name=@"general_seasonal_ranked_games_played", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint general_seasonal_ranked_games_played
-    {
-      get { return _general_seasonal_ranked_games_played?? default(uint); }
-      set { _general_seasonal_ranked_games_played = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool general_seasonal_ranked_games_playedSpecified
-    {
-      get { return _general_seasonal_ranked_games_played != null; }
-      set { if (value == (_general_seasonal_ranked_games_played== null)) _general_seasonal_ranked_games_played = value ? this.general_seasonal_ranked_games_played : (uint?)null; }
-    }
-    private bool ShouldSerializegeneral_seasonal_ranked_games_played() { return general_seasonal_ranked_games_playedSpecified; }
-    private void Resetgeneral_seasonal_ranked_games_played() { general_seasonal_ranked_games_playedSpecified = false; }
-    
-
-    private uint? _general_seasonal_ranked_rank_peak;
-    [global::ProtoBuf.ProtoMember(81, IsRequired = false, Name=@"general_seasonal_ranked_rank_peak", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint general_seasonal_ranked_rank_peak
-    {
-      get { return _general_seasonal_ranked_rank_peak?? default(uint); }
-      set { _general_seasonal_ranked_rank_peak = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool general_seasonal_ranked_rank_peakSpecified
-    {
-      get { return _general_seasonal_ranked_rank_peak != null; }
-      set { if (value == (_general_seasonal_ranked_rank_peak== null)) _general_seasonal_ranked_rank_peak = value ? this.general_seasonal_ranked_rank_peak : (uint?)null; }
-    }
-    private bool ShouldSerializegeneral_seasonal_ranked_rank_peak() { return general_seasonal_ranked_rank_peakSpecified; }
-    private void Resetgeneral_seasonal_ranked_rank_peak() { general_seasonal_ranked_rank_peakSpecified = false; }
-    
-
-    private bool? _general_seasonal_rank_transferred;
-    [global::ProtoBuf.ProtoMember(83, IsRequired = false, Name=@"general_seasonal_rank_transferred", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public bool general_seasonal_rank_transferred
-    {
-      get { return _general_seasonal_rank_transferred?? default(bool); }
-      set { _general_seasonal_rank_transferred = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool general_seasonal_rank_transferredSpecified
-    {
-      get { return _general_seasonal_rank_transferred != null; }
-      set { if (value == (_general_seasonal_rank_transferred== null)) _general_seasonal_rank_transferred = value ? this.general_seasonal_rank_transferred : (bool?)null; }
-    }
-    private bool ShouldSerializegeneral_seasonal_rank_transferred() { return general_seasonal_rank_transferredSpecified; }
-    private void Resetgeneral_seasonal_rank_transferred() { general_seasonal_rank_transferredSpecified = false; }
-    
-
-    private uint? _solo_seasonal_ranked_rank;
-    [global::ProtoBuf.ProtoMember(77, IsRequired = false, Name=@"solo_seasonal_ranked_rank", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint solo_seasonal_ranked_rank
-    {
-      get { return _solo_seasonal_ranked_rank?? default(uint); }
-      set { _solo_seasonal_ranked_rank = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool solo_seasonal_ranked_rankSpecified
-    {
-      get { return _solo_seasonal_ranked_rank != null; }
-      set { if (value == (_solo_seasonal_ranked_rank== null)) _solo_seasonal_ranked_rank = value ? this.solo_seasonal_ranked_rank : (uint?)null; }
-    }
-    private bool ShouldSerializesolo_seasonal_ranked_rank() { return solo_seasonal_ranked_rankSpecified; }
-    private void Resetsolo_seasonal_ranked_rank() { solo_seasonal_ranked_rankSpecified = false; }
-    
-
-    private uint? _solo_seasonal_ranked_calibration_games_remaining;
-    [global::ProtoBuf.ProtoMember(78, IsRequired = false, Name=@"solo_seasonal_ranked_calibration_games_remaining", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint solo_seasonal_ranked_calibration_games_remaining
-    {
-      get { return _solo_seasonal_ranked_calibration_games_remaining?? default(uint); }
-      set { _solo_seasonal_ranked_calibration_games_remaining = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool solo_seasonal_ranked_calibration_games_remainingSpecified
-    {
-      get { return _solo_seasonal_ranked_calibration_games_remaining != null; }
-      set { if (value == (_solo_seasonal_ranked_calibration_games_remaining== null)) _solo_seasonal_ranked_calibration_games_remaining = value ? this.solo_seasonal_ranked_calibration_games_remaining : (uint?)null; }
-    }
-    private bool ShouldSerializesolo_seasonal_ranked_calibration_games_remaining() { return solo_seasonal_ranked_calibration_games_remainingSpecified; }
-    private void Resetsolo_seasonal_ranked_calibration_games_remaining() { solo_seasonal_ranked_calibration_games_remainingSpecified = false; }
-    
-
-    private uint? _solo_seasonal_ranked_games_played;
-    [global::ProtoBuf.ProtoMember(79, IsRequired = false, Name=@"solo_seasonal_ranked_games_played", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint solo_seasonal_ranked_games_played
-    {
-      get { return _solo_seasonal_ranked_games_played?? default(uint); }
-      set { _solo_seasonal_ranked_games_played = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool solo_seasonal_ranked_games_playedSpecified
-    {
-      get { return _solo_seasonal_ranked_games_played != null; }
-      set { if (value == (_solo_seasonal_ranked_games_played== null)) _solo_seasonal_ranked_games_played = value ? this.solo_seasonal_ranked_games_played : (uint?)null; }
-    }
-    private bool ShouldSerializesolo_seasonal_ranked_games_played() { return solo_seasonal_ranked_games_playedSpecified; }
-    private void Resetsolo_seasonal_ranked_games_played() { solo_seasonal_ranked_games_playedSpecified = false; }
-    
-
-    private uint? _solo_seasonal_ranked_rank_peak;
-    [global::ProtoBuf.ProtoMember(82, IsRequired = false, Name=@"solo_seasonal_ranked_rank_peak", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint solo_seasonal_ranked_rank_peak
-    {
-      get { return _solo_seasonal_ranked_rank_peak?? default(uint); }
-      set { _solo_seasonal_ranked_rank_peak = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool solo_seasonal_ranked_rank_peakSpecified
-    {
-      get { return _solo_seasonal_ranked_rank_peak != null; }
-      set { if (value == (_solo_seasonal_ranked_rank_peak== null)) _solo_seasonal_ranked_rank_peak = value ? this.solo_seasonal_ranked_rank_peak : (uint?)null; }
-    }
-    private bool ShouldSerializesolo_seasonal_ranked_rank_peak() { return solo_seasonal_ranked_rank_peakSpecified; }
-    private void Resetsolo_seasonal_ranked_rank_peak() { solo_seasonal_ranked_rank_peakSpecified = false; }
-    
-
-    private bool? _solo_seasonal_rank_transferred;
-    [global::ProtoBuf.ProtoMember(84, IsRequired = false, Name=@"solo_seasonal_rank_transferred", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public bool solo_seasonal_rank_transferred
-    {
-      get { return _solo_seasonal_rank_transferred?? default(bool); }
-      set { _solo_seasonal_rank_transferred = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool solo_seasonal_rank_transferredSpecified
-    {
-      get { return _solo_seasonal_rank_transferred != null; }
-      set { if (value == (_solo_seasonal_rank_transferred== null)) _solo_seasonal_rank_transferred = value ? this.solo_seasonal_rank_transferred : (bool?)null; }
-    }
-    private bool ShouldSerializesolo_seasonal_rank_transferred() { return solo_seasonal_rank_transferredSpecified; }
-    private void Resetsolo_seasonal_rank_transferred() { solo_seasonal_rank_transferredSpecified = false; }
-    
-
     private uint? _recruitment_level;
     [global::ProtoBuf.ProtoMember(55, IsRequired = false, Name=@"recruitment_level", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
     public uint recruitment_level
@@ -1119,6 +939,276 @@ namespace SteamKit2.GC.Dota.Internal
     private bool ShouldSerializefavorite_team() { return favorite_teamSpecified; }
     private void Resetfavorite_team() { favorite_teamSpecified = false; }
     
+
+    private ulong? _anchored_phone_number_id;
+    [global::ProtoBuf.ProtoMember(88, IsRequired = false, Name=@"anchored_phone_number_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public ulong anchored_phone_number_id
+    {
+      get { return _anchored_phone_number_id?? default(ulong); }
+      set { _anchored_phone_number_id = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool anchored_phone_number_idSpecified
+    {
+      get { return _anchored_phone_number_id != null; }
+      set { if (value == (_anchored_phone_number_id== null)) _anchored_phone_number_id = value ? this.anchored_phone_number_id : (ulong?)null; }
+    }
+    private bool ShouldSerializeanchored_phone_number_id() { return anchored_phone_number_idSpecified; }
+    private void Resetanchored_phone_number_id() { anchored_phone_number_idSpecified = false; }
+    
+
+    private uint? _ranked_matchmaking_ban_until_date;
+    [global::ProtoBuf.ProtoMember(89, IsRequired = false, Name=@"ranked_matchmaking_ban_until_date", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint ranked_matchmaking_ban_until_date
+    {
+      get { return _ranked_matchmaking_ban_until_date?? default(uint); }
+      set { _ranked_matchmaking_ban_until_date = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool ranked_matchmaking_ban_until_dateSpecified
+    {
+      get { return _ranked_matchmaking_ban_until_date != null; }
+      set { if (value == (_ranked_matchmaking_ban_until_date== null)) _ranked_matchmaking_ban_until_date = value ? this.ranked_matchmaking_ban_until_date : (uint?)null; }
+    }
+    private bool ShouldSerializeranked_matchmaking_ban_until_date() { return ranked_matchmaking_ban_until_dateSpecified; }
+    private void Resetranked_matchmaking_ban_until_date() { ranked_matchmaking_ban_until_dateSpecified = false; }
+    
+
+    private uint? _recent_game_time_1;
+    [global::ProtoBuf.ProtoMember(90, IsRequired = false, Name=@"recent_game_time_1", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint recent_game_time_1
+    {
+      get { return _recent_game_time_1?? default(uint); }
+      set { _recent_game_time_1 = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool recent_game_time_1Specified
+    {
+      get { return _recent_game_time_1 != null; }
+      set { if (value == (_recent_game_time_1== null)) _recent_game_time_1 = value ? this.recent_game_time_1 : (uint?)null; }
+    }
+    private bool ShouldSerializerecent_game_time_1() { return recent_game_time_1Specified; }
+    private void Resetrecent_game_time_1() { recent_game_time_1Specified = false; }
+    
+
+    private uint? _recent_game_time_2;
+    [global::ProtoBuf.ProtoMember(91, IsRequired = false, Name=@"recent_game_time_2", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint recent_game_time_2
+    {
+      get { return _recent_game_time_2?? default(uint); }
+      set { _recent_game_time_2 = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool recent_game_time_2Specified
+    {
+      get { return _recent_game_time_2 != null; }
+      set { if (value == (_recent_game_time_2== null)) _recent_game_time_2 = value ? this.recent_game_time_2 : (uint?)null; }
+    }
+    private bool ShouldSerializerecent_game_time_2() { return recent_game_time_2Specified; }
+    private void Resetrecent_game_time_2() { recent_game_time_2Specified = false; }
+    
+
+    private uint? _recent_game_time_3;
+    [global::ProtoBuf.ProtoMember(92, IsRequired = false, Name=@"recent_game_time_3", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint recent_game_time_3
+    {
+      get { return _recent_game_time_3?? default(uint); }
+      set { _recent_game_time_3 = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool recent_game_time_3Specified
+    {
+      get { return _recent_game_time_3 != null; }
+      set { if (value == (_recent_game_time_3== null)) _recent_game_time_3 = value ? this.recent_game_time_3 : (uint?)null; }
+    }
+    private bool ShouldSerializerecent_game_time_3() { return recent_game_time_3Specified; }
+    private void Resetrecent_game_time_3() { recent_game_time_3Specified = false; }
+    
+
+    private uint? _general_seasonal_ranked_rank;
+    [global::ProtoBuf.ProtoMember(93, IsRequired = false, Name=@"general_seasonal_ranked_rank", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint general_seasonal_ranked_rank
+    {
+      get { return _general_seasonal_ranked_rank?? default(uint); }
+      set { _general_seasonal_ranked_rank = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool general_seasonal_ranked_rankSpecified
+    {
+      get { return _general_seasonal_ranked_rank != null; }
+      set { if (value == (_general_seasonal_ranked_rank== null)) _general_seasonal_ranked_rank = value ? this.general_seasonal_ranked_rank : (uint?)null; }
+    }
+    private bool ShouldSerializegeneral_seasonal_ranked_rank() { return general_seasonal_ranked_rankSpecified; }
+    private void Resetgeneral_seasonal_ranked_rank() { general_seasonal_ranked_rankSpecified = false; }
+    
+
+    private uint? _general_seasonal_ranked_calibration_games_remaining;
+    [global::ProtoBuf.ProtoMember(94, IsRequired = false, Name=@"general_seasonal_ranked_calibration_games_remaining", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint general_seasonal_ranked_calibration_games_remaining
+    {
+      get { return _general_seasonal_ranked_calibration_games_remaining?? default(uint); }
+      set { _general_seasonal_ranked_calibration_games_remaining = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool general_seasonal_ranked_calibration_games_remainingSpecified
+    {
+      get { return _general_seasonal_ranked_calibration_games_remaining != null; }
+      set { if (value == (_general_seasonal_ranked_calibration_games_remaining== null)) _general_seasonal_ranked_calibration_games_remaining = value ? this.general_seasonal_ranked_calibration_games_remaining : (uint?)null; }
+    }
+    private bool ShouldSerializegeneral_seasonal_ranked_calibration_games_remaining() { return general_seasonal_ranked_calibration_games_remainingSpecified; }
+    private void Resetgeneral_seasonal_ranked_calibration_games_remaining() { general_seasonal_ranked_calibration_games_remainingSpecified = false; }
+    
+
+    private uint? _general_seasonal_ranked_games_played;
+    [global::ProtoBuf.ProtoMember(95, IsRequired = false, Name=@"general_seasonal_ranked_games_played", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint general_seasonal_ranked_games_played
+    {
+      get { return _general_seasonal_ranked_games_played?? default(uint); }
+      set { _general_seasonal_ranked_games_played = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool general_seasonal_ranked_games_playedSpecified
+    {
+      get { return _general_seasonal_ranked_games_played != null; }
+      set { if (value == (_general_seasonal_ranked_games_played== null)) _general_seasonal_ranked_games_played = value ? this.general_seasonal_ranked_games_played : (uint?)null; }
+    }
+    private bool ShouldSerializegeneral_seasonal_ranked_games_played() { return general_seasonal_ranked_games_playedSpecified; }
+    private void Resetgeneral_seasonal_ranked_games_played() { general_seasonal_ranked_games_playedSpecified = false; }
+    
+
+    private uint? _general_seasonal_ranked_rank_peak;
+    [global::ProtoBuf.ProtoMember(96, IsRequired = false, Name=@"general_seasonal_ranked_rank_peak", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint general_seasonal_ranked_rank_peak
+    {
+      get { return _general_seasonal_ranked_rank_peak?? default(uint); }
+      set { _general_seasonal_ranked_rank_peak = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool general_seasonal_ranked_rank_peakSpecified
+    {
+      get { return _general_seasonal_ranked_rank_peak != null; }
+      set { if (value == (_general_seasonal_ranked_rank_peak== null)) _general_seasonal_ranked_rank_peak = value ? this.general_seasonal_ranked_rank_peak : (uint?)null; }
+    }
+    private bool ShouldSerializegeneral_seasonal_ranked_rank_peak() { return general_seasonal_ranked_rank_peakSpecified; }
+    private void Resetgeneral_seasonal_ranked_rank_peak() { general_seasonal_ranked_rank_peakSpecified = false; }
+    
+
+    private bool? _general_seasonal_rank_transferred;
+    [global::ProtoBuf.ProtoMember(97, IsRequired = false, Name=@"general_seasonal_rank_transferred", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public bool general_seasonal_rank_transferred
+    {
+      get { return _general_seasonal_rank_transferred?? default(bool); }
+      set { _general_seasonal_rank_transferred = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool general_seasonal_rank_transferredSpecified
+    {
+      get { return _general_seasonal_rank_transferred != null; }
+      set { if (value == (_general_seasonal_rank_transferred== null)) _general_seasonal_rank_transferred = value ? this.general_seasonal_rank_transferred : (bool?)null; }
+    }
+    private bool ShouldSerializegeneral_seasonal_rank_transferred() { return general_seasonal_rank_transferredSpecified; }
+    private void Resetgeneral_seasonal_rank_transferred() { general_seasonal_rank_transferredSpecified = false; }
+    
+
+    private uint? _solo_seasonal_ranked_rank;
+    [global::ProtoBuf.ProtoMember(98, IsRequired = false, Name=@"solo_seasonal_ranked_rank", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint solo_seasonal_ranked_rank
+    {
+      get { return _solo_seasonal_ranked_rank?? default(uint); }
+      set { _solo_seasonal_ranked_rank = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool solo_seasonal_ranked_rankSpecified
+    {
+      get { return _solo_seasonal_ranked_rank != null; }
+      set { if (value == (_solo_seasonal_ranked_rank== null)) _solo_seasonal_ranked_rank = value ? this.solo_seasonal_ranked_rank : (uint?)null; }
+    }
+    private bool ShouldSerializesolo_seasonal_ranked_rank() { return solo_seasonal_ranked_rankSpecified; }
+    private void Resetsolo_seasonal_ranked_rank() { solo_seasonal_ranked_rankSpecified = false; }
+    
+
+    private uint? _solo_seasonal_ranked_calibration_games_remaining;
+    [global::ProtoBuf.ProtoMember(99, IsRequired = false, Name=@"solo_seasonal_ranked_calibration_games_remaining", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint solo_seasonal_ranked_calibration_games_remaining
+    {
+      get { return _solo_seasonal_ranked_calibration_games_remaining?? default(uint); }
+      set { _solo_seasonal_ranked_calibration_games_remaining = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool solo_seasonal_ranked_calibration_games_remainingSpecified
+    {
+      get { return _solo_seasonal_ranked_calibration_games_remaining != null; }
+      set { if (value == (_solo_seasonal_ranked_calibration_games_remaining== null)) _solo_seasonal_ranked_calibration_games_remaining = value ? this.solo_seasonal_ranked_calibration_games_remaining : (uint?)null; }
+    }
+    private bool ShouldSerializesolo_seasonal_ranked_calibration_games_remaining() { return solo_seasonal_ranked_calibration_games_remainingSpecified; }
+    private void Resetsolo_seasonal_ranked_calibration_games_remaining() { solo_seasonal_ranked_calibration_games_remainingSpecified = false; }
+    
+
+    private uint? _solo_seasonal_ranked_games_played;
+    [global::ProtoBuf.ProtoMember(100, IsRequired = false, Name=@"solo_seasonal_ranked_games_played", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint solo_seasonal_ranked_games_played
+    {
+      get { return _solo_seasonal_ranked_games_played?? default(uint); }
+      set { _solo_seasonal_ranked_games_played = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool solo_seasonal_ranked_games_playedSpecified
+    {
+      get { return _solo_seasonal_ranked_games_played != null; }
+      set { if (value == (_solo_seasonal_ranked_games_played== null)) _solo_seasonal_ranked_games_played = value ? this.solo_seasonal_ranked_games_played : (uint?)null; }
+    }
+    private bool ShouldSerializesolo_seasonal_ranked_games_played() { return solo_seasonal_ranked_games_playedSpecified; }
+    private void Resetsolo_seasonal_ranked_games_played() { solo_seasonal_ranked_games_playedSpecified = false; }
+    
+
+    private uint? _solo_seasonal_ranked_rank_peak;
+    [global::ProtoBuf.ProtoMember(101, IsRequired = false, Name=@"solo_seasonal_ranked_rank_peak", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint solo_seasonal_ranked_rank_peak
+    {
+      get { return _solo_seasonal_ranked_rank_peak?? default(uint); }
+      set { _solo_seasonal_ranked_rank_peak = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool solo_seasonal_ranked_rank_peakSpecified
+    {
+      get { return _solo_seasonal_ranked_rank_peak != null; }
+      set { if (value == (_solo_seasonal_ranked_rank_peak== null)) _solo_seasonal_ranked_rank_peak = value ? this.solo_seasonal_ranked_rank_peak : (uint?)null; }
+    }
+    private bool ShouldSerializesolo_seasonal_ranked_rank_peak() { return solo_seasonal_ranked_rank_peakSpecified; }
+    private void Resetsolo_seasonal_ranked_rank_peak() { solo_seasonal_ranked_rank_peakSpecified = false; }
+    
+
+    private bool? _solo_seasonal_rank_transferred;
+    [global::ProtoBuf.ProtoMember(102, IsRequired = false, Name=@"solo_seasonal_rank_transferred", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public bool solo_seasonal_rank_transferred
+    {
+      get { return _solo_seasonal_rank_transferred?? default(bool); }
+      set { _solo_seasonal_rank_transferred = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool solo_seasonal_rank_transferredSpecified
+    {
+      get { return _solo_seasonal_rank_transferred != null; }
+      set { if (value == (_solo_seasonal_rank_transferred== null)) _solo_seasonal_rank_transferred = value ? this.solo_seasonal_rank_transferred : (bool?)null; }
+    }
+    private bool ShouldSerializesolo_seasonal_rank_transferred() { return solo_seasonal_rank_transferredSpecified; }
+    private void Resetsolo_seasonal_rank_transferred() { solo_seasonal_rank_transferredSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -1153,6 +1243,52 @@ namespace SteamKit2.GC.Dota.Internal
     {
       get { return _account_points; }
     }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"ChatWheelMessageRange")]
+  public partial class ChatWheelMessageRange : global::ProtoBuf.IExtensible
+  {
+    public ChatWheelMessageRange() {}
+    
+
+    private uint? _message_id_start;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"message_id_start", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint message_id_start
+    {
+      get { return _message_id_start?? default(uint); }
+      set { _message_id_start = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool message_id_startSpecified
+    {
+      get { return _message_id_start != null; }
+      set { if (value == (_message_id_start== null)) _message_id_start = value ? this.message_id_start : (uint?)null; }
+    }
+    private bool ShouldSerializemessage_id_start() { return message_id_startSpecified; }
+    private void Resetmessage_id_start() { message_id_startSpecified = false; }
+    
+
+    private uint? _message_id_end;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"message_id_end", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint message_id_end
+    {
+      get { return _message_id_end?? default(uint); }
+      set { _message_id_end = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool message_id_endSpecified
+    {
+      get { return _message_id_end != null; }
+      set { if (value == (_message_id_end== null)) _message_id_end = value ? this.message_id_end : (uint?)null; }
+    }
+    private bool ShouldSerializemessage_id_end() { return message_id_endSpecified; }
+    private void Resetmessage_id_end() { message_id_endSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
   
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"AccountPoints")]
   public partial class AccountPoints : global::ProtoBuf.IExtensible
@@ -1374,6 +1510,49 @@ namespace SteamKit2.GC.Dota.Internal
     }
     private bool ShouldSerializeactive_effects_mask() { return active_effects_maskSpecified; }
     private void Resetactive_effects_mask() { active_effects_maskSpecified = false; }
+    
+    private readonly global::System.Collections.Generic.List<CMsgLobbyEventPoints.ChatWheelMessageRange> _unlocked_chat_wheel_message_ranges = new global::System.Collections.Generic.List<CMsgLobbyEventPoints.ChatWheelMessageRange>();
+    [global::ProtoBuf.ProtoMember(13, Name=@"unlocked_chat_wheel_message_ranges", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CMsgLobbyEventPoints.ChatWheelMessageRange> unlocked_chat_wheel_message_ranges
+    {
+      get { return _unlocked_chat_wheel_message_ranges; }
+    }
+  
+
+    private uint? _rank_wager_tokens_remaining;
+    [global::ProtoBuf.ProtoMember(14, IsRequired = false, Name=@"rank_wager_tokens_remaining", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint rank_wager_tokens_remaining
+    {
+      get { return _rank_wager_tokens_remaining?? default(uint); }
+      set { _rank_wager_tokens_remaining = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool rank_wager_tokens_remainingSpecified
+    {
+      get { return _rank_wager_tokens_remaining != null; }
+      set { if (value == (_rank_wager_tokens_remaining== null)) _rank_wager_tokens_remaining = value ? this.rank_wager_tokens_remaining : (uint?)null; }
+    }
+    private bool ShouldSerializerank_wager_tokens_remaining() { return rank_wager_tokens_remainingSpecified; }
+    private void Resetrank_wager_tokens_remaining() { rank_wager_tokens_remainingSpecified = false; }
+    
+
+    private uint? _rank_wager_tokens_max;
+    [global::ProtoBuf.ProtoMember(15, IsRequired = false, Name=@"rank_wager_tokens_max", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint rank_wager_tokens_max
+    {
+      get { return _rank_wager_tokens_max?? default(uint); }
+      set { _rank_wager_tokens_max = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool rank_wager_tokens_maxSpecified
+    {
+      get { return _rank_wager_tokens_max != null; }
+      set { if (value == (_rank_wager_tokens_max== null)) _rank_wager_tokens_max = value ? this.rank_wager_tokens_max : (uint?)null; }
+    }
+    private bool ShouldSerializerank_wager_tokens_max() { return rank_wager_tokens_maxSpecified; }
+    private void Resetrank_wager_tokens_max() { rank_wager_tokens_maxSpecified = false; }
     
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -3897,6 +4076,96 @@ namespace SteamKit2.GC.Dota.Internal
     private bool ShouldSerializemodifier_purge_npc() { return modifier_purge_npcSpecified; }
     private void Resetmodifier_purge_npc() { modifier_purge_npcSpecified = false; }
     
+
+    private bool? _root_modifier;
+    [global::ProtoBuf.ProtoMember(63, IsRequired = false, Name=@"root_modifier", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public bool root_modifier
+    {
+      get { return _root_modifier?? default(bool); }
+      set { _root_modifier = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool root_modifierSpecified
+    {
+      get { return _root_modifier != null; }
+      set { if (value == (_root_modifier== null)) _root_modifier = value ? this.root_modifier : (bool?)null; }
+    }
+    private bool ShouldSerializeroot_modifier() { return root_modifierSpecified; }
+    private void Resetroot_modifier() { root_modifierSpecified = false; }
+    
+
+    private uint? _total_unit_death_count;
+    [global::ProtoBuf.ProtoMember(64, IsRequired = false, Name=@"total_unit_death_count", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint total_unit_death_count
+    {
+      get { return _total_unit_death_count?? default(uint); }
+      set { _total_unit_death_count = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool total_unit_death_countSpecified
+    {
+      get { return _total_unit_death_count != null; }
+      set { if (value == (_total_unit_death_count== null)) _total_unit_death_count = value ? this.total_unit_death_count : (uint?)null; }
+    }
+    private bool ShouldSerializetotal_unit_death_count() { return total_unit_death_countSpecified; }
+    private void Resettotal_unit_death_count() { total_unit_death_countSpecified = false; }
+    
+
+    private bool? _aura_modifier;
+    [global::ProtoBuf.ProtoMember(65, IsRequired = false, Name=@"aura_modifier", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public bool aura_modifier
+    {
+      get { return _aura_modifier?? default(bool); }
+      set { _aura_modifier = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool aura_modifierSpecified
+    {
+      get { return _aura_modifier != null; }
+      set { if (value == (_aura_modifier== null)) _aura_modifier = value ? this.aura_modifier : (bool?)null; }
+    }
+    private bool ShouldSerializeaura_modifier() { return aura_modifierSpecified; }
+    private void Resetaura_modifier() { aura_modifierSpecified = false; }
+    
+
+    private bool? _armor_debuff_modifier;
+    [global::ProtoBuf.ProtoMember(66, IsRequired = false, Name=@"armor_debuff_modifier", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public bool armor_debuff_modifier
+    {
+      get { return _armor_debuff_modifier?? default(bool); }
+      set { _armor_debuff_modifier = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool armor_debuff_modifierSpecified
+    {
+      get { return _armor_debuff_modifier != null; }
+      set { if (value == (_armor_debuff_modifier== null)) _armor_debuff_modifier = value ? this.armor_debuff_modifier : (bool?)null; }
+    }
+    private bool ShouldSerializearmor_debuff_modifier() { return armor_debuff_modifierSpecified; }
+    private void Resetarmor_debuff_modifier() { armor_debuff_modifierSpecified = false; }
+    
+
+    private bool? _no_physical_damage_modifier;
+    [global::ProtoBuf.ProtoMember(67, IsRequired = false, Name=@"no_physical_damage_modifier", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public bool no_physical_damage_modifier
+    {
+      get { return _no_physical_damage_modifier?? default(bool); }
+      set { _no_physical_damage_modifier = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool no_physical_damage_modifierSpecified
+    {
+      get { return _no_physical_damage_modifier != null; }
+      set { if (value == (_no_physical_damage_modifier== null)) _no_physical_damage_modifier = value ? this.no_physical_damage_modifier : (bool?)null; }
+    }
+    private bool ShouldSerializeno_physical_damage_modifier() { return no_physical_damage_modifierSpecified; }
+    private void Resetno_physical_damage_modifier() { no_physical_damage_modifierSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -4080,6 +4349,15 @@ namespace SteamKit2.GC.Dota.Internal
     {
       get { return _emoticon; }
       set { _emoticon = value; }
+    }
+
+    private CMsgDOTAProfileCard.Slot.Team _team = null;
+    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"team", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public CMsgDOTAProfileCard.Slot.Team team
+    {
+      get { return _team; }
+      set { _team = value; }
     }
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Trophy")]
   public partial class Trophy : global::ProtoBuf.IExtensible
@@ -4305,6 +4583,34 @@ namespace SteamKit2.GC.Dota.Internal
     }
     private bool ShouldSerializeemoticon_id() { return emoticon_idSpecified; }
     private void Resetemoticon_id() { emoticon_idSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Team")]
+  public partial class Team : global::ProtoBuf.IExtensible
+  {
+    public Team() {}
+    
+
+    private uint? _team_id;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"team_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint team_id
+    {
+      get { return _team_id?? default(uint); }
+      set { _team_id = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool team_idSpecified
+    {
+      get { return _team_id != null; }
+      set { if (value == (_team_id== null)) _team_id = value ? this.team_id : (uint?)null; }
+    }
+    private bool ShouldSerializeteam_id() { return team_idSpecified; }
+    private void Resetteam_id() { team_idSpecified = false; }
     
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -8558,6 +8864,24 @@ namespace SteamKit2.GC.Dota.Internal
     private bool ShouldSerializelock_on_selection_set() { return lock_on_selection_setSpecified; }
     private void Resetlock_on_selection_set() { lock_on_selection_setSpecified = false; }
     
+
+    private bool? _use_answer_value_ranges;
+    [global::ProtoBuf.ProtoMember(16, IsRequired = false, Name=@"use_answer_value_ranges", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public bool use_answer_value_ranges
+    {
+      get { return _use_answer_value_ranges?? default(bool); }
+      set { _use_answer_value_ranges = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool use_answer_value_rangesSpecified
+    {
+      get { return _use_answer_value_ranges != null; }
+      set { if (value == (_use_answer_value_ranges== null)) _use_answer_value_ranges = value ? this.use_answer_value_ranges : (bool?)null; }
+    }
+    private bool ShouldSerializeuse_answer_value_ranges() { return use_answer_value_rangesSpecified; }
+    private void Resetuse_answer_value_ranges() { use_answer_value_rangesSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -12232,7 +12556,16 @@ namespace SteamKit2.GC.Dota.Internal
       DOTA_COMBATLOG_SUCCESSFUL_SCAN = 36,
             
       [global::ProtoBuf.ProtoEnum(Name=@"DOTA_COMBATLOG_END_KILLSTREAK", Value=37)]
-      DOTA_COMBATLOG_END_KILLSTREAK = 37
+      DOTA_COMBATLOG_END_KILLSTREAK = 37,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_COMBATLOG_BLOODSTONE_CHARGE", Value=38)]
+      DOTA_COMBATLOG_BLOODSTONE_CHARGE = 38,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_COMBATLOG_CRITICAL_DAMAGE", Value=39)]
+      DOTA_COMBATLOG_CRITICAL_DAMAGE = 39,
+            
+      [global::ProtoBuf.ProtoEnum(Name=@"DOTA_COMBATLOG_SPELL_ABSORB", Value=40)]
+      DOTA_COMBATLOG_SPELL_ABSORB = 40
     }
   
 }

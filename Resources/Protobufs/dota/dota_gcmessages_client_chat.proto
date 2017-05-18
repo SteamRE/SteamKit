@@ -89,6 +89,14 @@ message CMsgDOTAChatMessage {
 		optional int32 result = 3;
 	}
 
+	message TriviaAnswered {
+		optional uint32 question_id = 1;
+		optional uint32 answer_index = 2;
+		optional uint32 party_questions_correct = 3;
+		optional uint32 party_questions_viewed = 4;
+		optional uint32 party_trivia_points = 5;
+	}
+
 	optional uint32 account_id = 1;
 	optional uint64 channel_id = 2;
 	optional string persona_name = 3;
@@ -117,7 +125,10 @@ message CMsgDOTAChatMessage {
 	optional uint32 badge_level = 25;
 	optional uint32 suggest_pick_hero_id = 26;
 	optional string suggest_pick_hero_role = 27;
+	optional uint32 suggest_ban_hero_id = 30;
 	optional bool terse = 28;
+	optional bool ignore_muted = 31;
+	optional .CMsgDOTAChatMessage.TriviaAnswered trivia_answer = 32;
 }
 
 message CMsgDOTAChatMember {

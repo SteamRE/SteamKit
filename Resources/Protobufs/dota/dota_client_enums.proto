@@ -52,6 +52,8 @@ enum ETournamentState {
 	k_ETournamentState_TeamAbandoned = 5;
 	k_ETournamentState_TeamTimeoutForfeit = 6;
 	k_ETournamentState_TeamTimeoutRefund = 7;
+	k_ETournamentState_ServerFailureGrantedVictory = 8;
+	k_ETournamentState_TeamTimeoutGrantedVictory = 9;
 	k_ETournamentState_InProgress = 100;
 	k_ETournamentState_WaitingToMerge = 101;
 }

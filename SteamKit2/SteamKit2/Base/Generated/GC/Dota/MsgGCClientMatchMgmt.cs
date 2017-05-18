@@ -248,6 +248,24 @@ namespace SteamKit2.GC.Dota.Internal
     private bool ShouldSerializeregion_select_flags() { return region_select_flagsSpecified; }
     private void Resetregion_select_flags() { region_select_flagsSpecified = false; }
     
+
+    private bool? _solo_queue;
+    [global::ProtoBuf.ProtoMember(14, IsRequired = false, Name=@"solo_queue", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public bool solo_queue
+    {
+      get { return _solo_queue?? default(bool); }
+      set { _solo_queue = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool solo_queueSpecified
+    {
+      get { return _solo_queue != null; }
+      set { if (value == (_solo_queue== null)) _solo_queue = value ? this.solo_queue : (bool?)null; }
+    }
+    private bool ShouldSerializesolo_queue() { return solo_queueSpecified; }
+    private void Resetsolo_queue() { solo_queueSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -4244,11 +4262,11 @@ namespace SteamKit2.GC.Dota.Internal
     public CMsgClientToGCRequestSteamDatagramTicketResponse() {}
     
 
-    private string _serialized_ticket;
+    private byte[] _serialized_ticket;
     [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"serialized_ticket", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string serialized_ticket
+    public byte[] serialized_ticket
     {
-      get { return _serialized_ticket?? ""; }
+      get { return _serialized_ticket?? null; }
       set { _serialized_ticket = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
@@ -4256,7 +4274,7 @@ namespace SteamKit2.GC.Dota.Internal
     public bool serialized_ticketSpecified
     {
       get { return _serialized_ticket != null; }
-      set { if (value == (_serialized_ticket== null)) _serialized_ticket = value ? this.serialized_ticket : (string)null; }
+      set { if (value == (_serialized_ticket== null)) _serialized_ticket = value ? this.serialized_ticket : (byte[])null; }
     }
     private bool ShouldSerializeserialized_ticket() { return serialized_ticketSpecified; }
     private void Resetserialized_ticket() { serialized_ticketSpecified = false; }
@@ -4278,6 +4296,167 @@ namespace SteamKit2.GC.Dota.Internal
     }
     private bool ShouldSerializemessage() { return messageSpecified; }
     private void Resetmessage() { messageSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgGCToClientSteamDatagramTicket")]
+  public partial class CMsgGCToClientSteamDatagramTicket : global::ProtoBuf.IExtensible
+  {
+    public CMsgGCToClientSteamDatagramTicket() {}
+    
+
+    private uint? _legacy_time_expiry;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"legacy_time_expiry", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public uint legacy_time_expiry
+    {
+      get { return _legacy_time_expiry?? default(uint); }
+      set { _legacy_time_expiry = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool legacy_time_expirySpecified
+    {
+      get { return _legacy_time_expiry != null; }
+      set { if (value == (_legacy_time_expiry== null)) _legacy_time_expiry = value ? this.legacy_time_expiry : (uint?)null; }
+    }
+    private bool ShouldSerializelegacy_time_expiry() { return legacy_time_expirySpecified; }
+    private void Resetlegacy_time_expiry() { legacy_time_expirySpecified = false; }
+    
+
+    private ulong? _legacy_authorized_steam_id;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"legacy_authorized_steam_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public ulong legacy_authorized_steam_id
+    {
+      get { return _legacy_authorized_steam_id?? default(ulong); }
+      set { _legacy_authorized_steam_id = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool legacy_authorized_steam_idSpecified
+    {
+      get { return _legacy_authorized_steam_id != null; }
+      set { if (value == (_legacy_authorized_steam_id== null)) _legacy_authorized_steam_id = value ? this.legacy_authorized_steam_id : (ulong?)null; }
+    }
+    private bool ShouldSerializelegacy_authorized_steam_id() { return legacy_authorized_steam_idSpecified; }
+    private void Resetlegacy_authorized_steam_id() { legacy_authorized_steam_idSpecified = false; }
+    
+
+    private uint? _legacy_authorized_public_ip;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"legacy_authorized_public_ip", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public uint legacy_authorized_public_ip
+    {
+      get { return _legacy_authorized_public_ip?? default(uint); }
+      set { _legacy_authorized_public_ip = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool legacy_authorized_public_ipSpecified
+    {
+      get { return _legacy_authorized_public_ip != null; }
+      set { if (value == (_legacy_authorized_public_ip== null)) _legacy_authorized_public_ip = value ? this.legacy_authorized_public_ip : (uint?)null; }
+    }
+    private bool ShouldSerializelegacy_authorized_public_ip() { return legacy_authorized_public_ipSpecified; }
+    private void Resetlegacy_authorized_public_ip() { legacy_authorized_public_ipSpecified = false; }
+    
+
+    private ulong? _legacy_gameserver_steam_id;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"legacy_gameserver_steam_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public ulong legacy_gameserver_steam_id
+    {
+      get { return _legacy_gameserver_steam_id?? default(ulong); }
+      set { _legacy_gameserver_steam_id = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool legacy_gameserver_steam_idSpecified
+    {
+      get { return _legacy_gameserver_steam_id != null; }
+      set { if (value == (_legacy_gameserver_steam_id== null)) _legacy_gameserver_steam_id = value ? this.legacy_gameserver_steam_id : (ulong?)null; }
+    }
+    private bool ShouldSerializelegacy_gameserver_steam_id() { return legacy_gameserver_steam_idSpecified; }
+    private void Resetlegacy_gameserver_steam_id() { legacy_gameserver_steam_idSpecified = false; }
+    
+
+    private ulong? _legacy_gameserver_net_id;
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"legacy_gameserver_net_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public ulong legacy_gameserver_net_id
+    {
+      get { return _legacy_gameserver_net_id?? default(ulong); }
+      set { _legacy_gameserver_net_id = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool legacy_gameserver_net_idSpecified
+    {
+      get { return _legacy_gameserver_net_id != null; }
+      set { if (value == (_legacy_gameserver_net_id== null)) _legacy_gameserver_net_id = value ? this.legacy_gameserver_net_id : (ulong?)null; }
+    }
+    private bool ShouldSerializelegacy_gameserver_net_id() { return legacy_gameserver_net_idSpecified; }
+    private void Resetlegacy_gameserver_net_id() { legacy_gameserver_net_idSpecified = false; }
+    
+
+    private byte[] _legacy_signature;
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"legacy_signature", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public byte[] legacy_signature
+    {
+      get { return _legacy_signature?? null; }
+      set { _legacy_signature = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool legacy_signatureSpecified
+    {
+      get { return _legacy_signature != null; }
+      set { if (value == (_legacy_signature== null)) _legacy_signature = value ? this.legacy_signature : (byte[])null; }
+    }
+    private bool ShouldSerializelegacy_signature() { return legacy_signatureSpecified; }
+    private void Resetlegacy_signature() { legacy_signatureSpecified = false; }
+    
+
+    private uint? _legacy_app_id;
+    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"legacy_app_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint legacy_app_id
+    {
+      get { return _legacy_app_id?? default(uint); }
+      set { _legacy_app_id = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool legacy_app_idSpecified
+    {
+      get { return _legacy_app_id != null; }
+      set { if (value == (_legacy_app_id== null)) _legacy_app_id = value ? this.legacy_app_id : (uint?)null; }
+    }
+    private bool ShouldSerializelegacy_app_id() { return legacy_app_idSpecified; }
+    private void Resetlegacy_app_id() { legacy_app_idSpecified = false; }
+    
+    private readonly global::System.Collections.Generic.List<byte[]> _legacy_extra_fields = new global::System.Collections.Generic.List<byte[]>();
+    [global::ProtoBuf.ProtoMember(8, Name=@"legacy_extra_fields", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<byte[]> legacy_extra_fields
+    {
+      get { return _legacy_extra_fields; }
+    }
+  
+
+    private byte[] _serialized_ticket;
+    [global::ProtoBuf.ProtoMember(16, IsRequired = false, Name=@"serialized_ticket", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public byte[] serialized_ticket
+    {
+      get { return _serialized_ticket?? null; }
+      set { _serialized_ticket = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool serialized_ticketSpecified
+    {
+      get { return _serialized_ticket != null; }
+      set { if (value == (_serialized_ticket== null)) _serialized_ticket = value ? this.serialized_ticket : (byte[])null; }
+    }
+    private bool ShouldSerializeserialized_ticket() { return serialized_ticketSpecified; }
+    private void Resetserialized_ticket() { serialized_ticketSpecified = false; }
     
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

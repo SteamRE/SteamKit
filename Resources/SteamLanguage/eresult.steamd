@@ -116,4 +116,6 @@ enum EResult
 	InvalidItemType = 104;
 	IPBanned = 105;
 	GSLTExpired = 106;
+	InsufficientFunds = 107;
+	TooManyPending = 108;
 };

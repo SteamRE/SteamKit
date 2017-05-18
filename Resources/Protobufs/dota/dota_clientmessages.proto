@@ -65,6 +65,9 @@ enum EDotaClientMessages {
 	DOTA_CM_RollDice = 362;
 	DOTA_CM_FlipCoin = 363;
 	DOTA_CM_RequestItemSuggestions = 364;
+	DOTA_CM_MakeTeamCaptain = 365;
+	DOTA_CM_CoinWagerToken = 366;
+	DOTA_CM_RankWager = 367;
 }
 
 message CDOTAClientMsg_MapPing {
@@ -163,7 +166,7 @@ message CDOTAClientMsg_RequestGraphUpdate {
 }
 
 message CDOTAClientMsg_ChatWheel {
-	optional .EDOTAChatWheelMessage chat_message = 1 [default = k_EDOTA_CW_Ok];
+	optional uint32 chat_message_id = 1;
 	optional uint32 param_hero_id = 2;
 }
 
@@ -266,6 +269,14 @@ message CDOTAClientMsg_CoinWager {
 	optional uint32 wager_amount = 1;
 }
 
+message CDOTAClientMsg_CoinWagerToken {
+	optional uint64 wager_token_item_id = 1;
+}
+
+message CDOTAClientMsg_RankWager {
+	optional bool announce_wager = 1;
+}
+
 message CDOTAClientMsg_EventPointsTip {
 	optional uint32 recipient_player_id = 1;
 }
@@ -338,5 +349,9 @@ message CDOTAClientMsg_FlipCoin {
 }
 
 message CDOTAClientMsg_RequestItemSuggestions {
+}
+
+message CDOTAClientMsg_MakeTeamCaptain {
+	optional uint32 player_id = 1;
 }
 

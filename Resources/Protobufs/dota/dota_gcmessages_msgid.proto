@@ -691,5 +691,23 @@ enum EDOTAGCMsg {
 	k_EMsgDOTAGetPeriodicResource = 8211;
 	k_EMsgDOTAGetPeriodicResourceResponse = 8212;
 	k_EMsgDOTAPeriodicResourceUpdated = 8213;
+	k_EMsgServerToGCSpendWager = 8214;
+	k_EMsgGCToGCSignoutSpendWagerToken = 8215;
+	k_EMsgSubmitTriviaQuestionAnswer = 8216;
+	k_EMsgSubmitTriviaQuestionAnswerResponse = 8217;
+	k_EMsgClientToGCGiveTip = 8218;
+	k_EMsgClientToGCGiveTipResponse = 8219;
+	k_EMsgStartTriviaSession = 8220;
+	k_EMsgStartTriviaSessionResponse = 8221;
+	k_EMsgAnchorPhoneNumberRequest = 8222;
+	k_EMsgAnchorPhoneNumberResponse = 8223;
+	k_EMsgUnanchorPhoneNumberRequest = 8224;
+	k_EMsgUnanchorPhoneNumberResponse = 8225;
+	k_EMsgGCToClientTipNotification = 8226;
+	k_EMsgClientToGCRequestSlarkGameResult = 8227;
+	k_EMsgClientToGCRequestSlarkGameResultResponse = 8228;
+	k_EMsgGCToGCSignoutSpendRankWager = 8229;
+	k_EMsgGCToGCGetFavoriteTeam = 8230;
+	k_EMsgGCToGCGetFavoriteTeamResponse = 8231;
 }
 

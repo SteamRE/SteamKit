@@ -63,6 +63,8 @@ message CDOTAMatchMetadata {
 			repeated .CDOTAMatchMetadata.Team.InventorySnapshot inventory_snapshot = 24;
 			optional bool avg_stats_calibrated = 25;
 			repeated .CDOTAMatchMetadata.Team.AutoStyleCriteria auto_style_criteria = 26;
+			optional uint32 event_id = 27;
+			optional uint32 event_points = 28;
 		}
 
 		optional uint32 dota_team = 1;

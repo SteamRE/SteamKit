@@ -82,6 +82,9 @@ enum DOTA_COMBATLOG_TYPES {
 	DOTA_COMBATLOG_TREE_CUT = 35;
 	DOTA_COMBATLOG_SUCCESSFUL_SCAN = 36;
 	DOTA_COMBATLOG_END_KILLSTREAK = 37;
+	DOTA_COMBATLOG_BLOODSTONE_CHARGE = 38;
+	DOTA_COMBATLOG_CRITICAL_DAMAGE = 39;
+	DOTA_COMBATLOG_SPELL_ABSORB = 40;
 }
 
 message CSODOTAGameAccountClient {
@@ -118,16 +121,6 @@ message CSODOTAGameAccountClient {
 	optional uint32 calibration_games_remaining = 51;
 	optional uint32 solo_competitive_rank = 52;
 	optional uint32 solo_calibration_games_remaining = 54;
-	optional uint32 general_seasonal_ranked_rank = 75;
-	optional uint32 general_seasonal_ranked_calibration_games_remaining = 76;
-	optional uint32 general_seasonal_ranked_games_played = 80;
-	optional uint32 general_seasonal_ranked_rank_peak = 81;
-	optional bool general_seasonal_rank_transferred = 83;
-	optional uint32 solo_seasonal_ranked_rank = 77;
-	optional uint32 solo_seasonal_ranked_calibration_games_remaining = 78;
-	optional uint32 solo_seasonal_ranked_games_played = 79;
-	optional uint32 solo_seasonal_ranked_rank_peak = 82;
-	optional bool solo_seasonal_rank_transferred = 84;
 	optional uint32 recruitment_level = 55;
 	optional bool has_new_notifications = 56;
 	optional bool is_league_admin = 57;
@@ -146,9 +139,29 @@ message CSODOTAGameAccountClient {
 	optional uint32 tourney_skill_level = 74;
 	optional uint32 tourney_recent_participation_date = 85;
 	optional uint32 favorite_team = 87;
+	optional uint64 anchored_phone_number_id = 88;
+	optional uint32 ranked_matchmaking_ban_until_date = 89;
+	optional uint32 recent_game_time_1 = 90;
+	optional uint32 recent_game_time_2 = 91;
+	optional uint32 recent_game_time_3 = 92;
+	optional uint32 general_seasonal_ranked_rank = 93;
+	optional uint32 general_seasonal_ranked_calibration_games_remaining = 94;
+	optional uint32 general_seasonal_ranked_games_played = 95;
+	optional uint32 general_seasonal_ranked_rank_peak = 96;
+	optional bool general_seasonal_rank_transferred = 97;
+	optional uint32 solo_seasonal_ranked_rank = 98;
+	optional uint32 solo_seasonal_ranked_calibration_games_remaining = 99;
+	optional uint32 solo_seasonal_ranked_games_played = 100;
+	optional uint32 solo_seasonal_ranked_rank_peak = 101;
+	optional bool solo_seasonal_rank_transferred = 102;
 }
 
 message CMsgLobbyEventPoints {
+	message ChatWheelMessageRange {
+		optional uint32 message_id_start = 1;
+		optional uint32 message_id_end = 2;
+	}
+
 	message AccountPoints {
 		optional uint32 account_id = 1;
 		optional uint32 normal_points = 2;
@@ -162,6 +175,9 @@ message CMsgLobbyEventPoints {
 		optional uint32 wager_tokens_remaining = 10;
 		optional uint32 wager_tokens_max = 11;
 		optional uint64 active_effects_mask = 12;
+		repeated .CMsgLobbyEventPoints.ChatWheelMessageRange unlocked_chat_wheel_message_ranges = 13;
+		optional uint32 rank_wager_tokens_remaining = 14;
+		optional uint32 rank_wager_tokens_max = 15;
 	}
 
 	optional uint32 event_id = 1;
@@ -381,6 +397,11 @@ message CMsgDOTACombatLogEntry {
 	optional bool long_range_kill = 60;
 	optional uint32 modifier_purge_ability = 61;
 	optional uint32 modifier_purge_npc = 62;
+	optional bool root_modifier = 63;
+	optional uint32 total_unit_death_count = 64;
+	optional bool aura_modifier = 65;
+	optional bool armor_debuff_modifier = 66;
+	optional bool no_physical_damage_modifier = 67;
 }
 
 message CMsgDOTAProfileCard {
@@ -410,12 +431,17 @@ message CMsgDOTAProfileCard {
 			optional uint32 emoticon_id = 1;
 		}
 
+		message Team {
+			optional uint32 team_id = 1;
+		}
+
 		optional uint32 slot_id = 1;
 		optional .CMsgDOTAProfileCard.Slot.Trophy trophy = 2;
 		optional .CMsgDOTAProfileCard.Slot.Stat stat = 3;
 		optional .CMsgDOTAProfileCard.Slot.Item item = 4;
 		optional .CMsgDOTAProfileCard.Slot.Hero hero = 5;
 		optional .CMsgDOTAProfileCard.Slot.Emoticon emoticon = 6;
+		optional .CMsgDOTAProfileCard.Slot.Team team = 7;
 	}
 
 	enum EStatID {
@@ -806,6 +832,7 @@ message CMsgDOTASeasonPredictions {
 		optional uint32 lock_on_selection_id = 13;
 		optional uint32 lock_on_selection_value = 14;
 		optional bool lock_on_selection_set = 15;
+		optional bool use_answer_value_ranges = 16;
 	}
 
 	message InGamePrediction {
