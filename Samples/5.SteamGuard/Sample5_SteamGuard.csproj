@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFrameworks>netcoreapp2.0;net46</TargetFrameworks>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
     <Authors />
     <Company>SteamRE Team</Company>
     <Description>SteamKit Sample 5: SteamGuard</Description>
