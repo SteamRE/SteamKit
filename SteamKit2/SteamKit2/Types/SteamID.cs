@@ -292,27 +292,15 @@ namespace SteamKit2
                 return false;
             type = typeString[ 0 ];
 
-            uint instance;
+            uint instance = 0;
             var instanceGroup = m.Groups[ "instance" ];
             if ( instanceGroup != null && !string.IsNullOrEmpty( instanceGroup.Value ) )
             {
                 instance = uint.Parse( instanceGroup.Value );
             }
-            else
+            else if ( type == 'U' )
             {
-                switch ( type )
-                {
-                    case 'g':
-                    case 'T':
-                    case 'c':
-                    case 'L':
-                        instance = 0;
-                        break;
-
-                    default:
-                        instance = 1;
-                        break;
-                }
+                instance = DesktopInstance;
             }
 
             if ( type == 'c' )
