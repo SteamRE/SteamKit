@@ -1,0 +1,18 @@
+import "steammessages_unified_base.steamclient.proto";
+
+option cc_generic_services = true;
+
+message CUserAccount_GetAccountLinkStatus_Request {
+}
+
+message CUserAccount_GetAccountLinkStatus_Response {
+	optional uint32 pwid = 1;
+	optional uint32 identity_verification = 2;
+}
+
+service UserAccount {
+	option (service_description) = "A service to get user account information";
+	rpc GetAccountLinkStatus (.CUserAccount_GetAccountLinkStatus_Request) returns (.CUserAccount_GetAccountLinkStatus_Response) {
+		option (method_description) = "Fetches account link status";
+	}
+}

@@ -18,6 +18,7 @@ enum ERemoteClientService {
 	k_ERemoteClientServiceNone = 0;
 	k_ERemoteClientServiceRemoteControl = 1;
 	k_ERemoteClientServiceGameStreaming = 2;
+	k_ERemoteClientServiceSiteLicense = 4;
 }
 
 enum ERemoteDeviceAuthorizationResult {
@@ -120,6 +121,9 @@ message CMsgRemoteDeviceStreamingRequest {
 	optional bool stream_desktop = 6;
 	optional bytes device_token = 7;
 	optional bytes pin = 8;
+	optional bool enable_video_streaming = 9 [default = true];
+	optional bool enable_audio_streaming = 10 [default = true];
+	optional bool enable_input_streaming = 11 [default = true];
 }
 
 message CMsgRemoteDeviceStreamingCancelRequest {

@@ -194,6 +194,11 @@ message CCloud_ClientDeleteFile_Request {
 message CCloud_ClientDeleteFile_Response {
 }
 
+message CCloud_ClientConflictResolution_Notification {
+	optional uint32 appid = 1 [(description) = "App ID for which the conflict was resolved."];
+	optional bool chose_local_files = 2 [(description) = "Did the user choose to keep the files local to the machine they are on right now?"];
+}
+
 service Cloud {
 	option (service_description) = "A service for Steam Cloud operations.";
 	rpc GetUploadServerInfo (.CCloud_GetUploadServerInfo_Request) returns (.CCloud_GetUploadServerInfo_Response) {
@@ -234,5 +239,8 @@ service Cloud {
 	}
 	rpc ClientDeleteFile (.CCloud_ClientDeleteFile_Request) returns (.CCloud_ClientDeleteFile_Response) {
 		option (method_description) = "Delete or forget a file.";
+	}
+	rpc ClientConflictResolution (.CCloud_ClientConflictResolution_Notification) returns (.NoResponse) {
+		option (method_description) = "User has picked a resolution for a Cloud conflict.";
 	}
 }

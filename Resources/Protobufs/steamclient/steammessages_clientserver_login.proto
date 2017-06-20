@@ -1,0 +1,125 @@
+import "steammessages_base.proto";
+
+option optimize_for = SPEED;
+option cc_generic_services = false;
+
+message CMsgClientHeartBeat {
+}
+
+message CMsgClientLogon {
+	optional uint32 protocol_version = 1;
+	optional uint32 obfustucated_private_ip = 2;
+	optional uint32 cell_id = 3;
+	optional uint32 last_session_id = 4;
+	optional uint32 client_package_version = 5;
+	optional string client_language = 6;
+	optional uint32 client_os_type = 7;
+	optional bool should_remember_password = 8 [default = false];
+	optional string wine_version = 9;
+	optional uint32 ping_ms_from_cell_search = 10;
+	optional uint32 public_ip = 20;
+	optional uint32 qos_level = 21;
+	optional fixed64 client_supplied_steam_id = 22;
+	optional bytes machine_id = 30;
+	optional uint32 launcher_type = 31 [default = 0];
+	optional uint32 ui_mode = 32 [default = 0];
+	optional bytes steam2_auth_ticket = 41;
+	optional string email_address = 42;
+	optional fixed32 rtime32_account_creation = 43;
+	optional string account_name = 50;
+	optional string password = 51;
+	optional string game_server_token = 52;
+	optional string login_key = 60;
+	optional bool was_converted_deprecated_msg = 70 [default = false];
+	optional string anon_user_target_account_name = 80;
+	optional fixed64 resolved_user_steam_id = 81;
+	optional int32 eresult_sentryfile = 82;
+	optional bytes sha_sentryfile = 83;
+	optional string auth_code = 84;
+	optional int32 otp_type = 85;
+	optional uint32 otp_value = 86;
+	optional string otp_identifier = 87;
+	optional bool steam2_ticket_request = 88;
+	optional bytes sony_psn_ticket = 90;
+	optional string sony_psn_service_id = 91;
+	optional bool create_new_psn_linked_account_if_needed = 92 [default = false];
+	optional string sony_psn_name = 93;
+	optional int32 game_server_app_id = 94;
+	optional bool steamguard_dont_remember_computer = 95;
+	optional string machine_name = 96;
+	optional string machine_name_userchosen = 97;
+	optional string country_override = 98;
+	optional bool is_steam_box = 99;
+	optional uint64 client_instance_id = 100;
+	optional string two_factor_code = 101;
+	optional bool supports_rate_limit_response = 102;
+	optional string web_logon_nonce = 103;
+}
+
+message CMsgClientLogonResponse {
+	optional int32 eresult = 1 [default = 2];
+	optional int32 out_of_game_heartbeat_seconds = 2;
+	optional int32 in_game_heartbeat_seconds = 3;
+	optional uint32 public_ip = 4;
+	optional fixed32 rtime32_server_time = 5;
+	optional uint32 account_flags = 6;
+	optional uint32 cell_id = 7;
+	optional string email_domain = 8;
+	optional bytes steam2_ticket = 9;
+	optional int32 eresult_extended = 10;
+	optional string webapi_authenticate_user_nonce = 11;
+	optional uint32 cell_id_ping_threshold = 12;
+	optional bool use_pics = 13;
+	optional string vanity_url = 14;
+	optional fixed64 client_supplied_steamid = 20;
+	optional string ip_country_code = 21;
+	optional bytes parental_settings = 22;
+	optional bytes parental_setting_signature = 23;
+	optional int32 count_loginfailures_to_migrate = 24;
+	optional int32 count_disconnects_to_migrate = 25;
+	optional int32 ogs_data_report_time_window = 26;
+	optional uint64 client_instance_id = 27;
+	optional bool force_client_update_check = 28;
+}
+
+message CMsgClientRequestWebAPIAuthenticateUserNonce {
+	optional int32 token_type = 1 [default = -1];
+}
+
+message CMsgClientRequestWebAPIAuthenticateUserNonceResponse {
+	optional int32 eresult = 1 [default = 2];
+	optional string webapi_authenticate_user_nonce = 11;
+	optional int32 token_type = 3 [default = -1];
+}
+
+message CMsgClientLogOff {
+}
+
+message CMsgClientLoggedOff {
+	optional int32 eresult = 1 [default = 2];
+}
+
+message CMsgClientNewLoginKey {
+	optional uint32 unique_id = 1;
+	optional string login_key = 2;
+}
+
+message CMsgClientNewLoginKeyAccepted {
+	optional uint32 unique_id = 1;
+}
+
+message CMsgClientAccountInfo {
+	optional string persona_name = 1;
+	optional string ip_country = 2;
+	optional int32 count_authed_computers = 5;
+	optional uint32 account_flags = 7;
+	optional uint64 facebook_id = 8;
+	optional string facebook_name = 9;
+	optional bool steamguard_notify_newmachines = 14;
+	optional string steamguard_machine_name_user_chosen = 15;
+	optional bool is_phone_verified = 16;
+	optional uint32 two_factor_state = 17;
+	optional bool is_phone_identifying = 18;
+	optional bool is_phone_needing_reverify = 19;
+}
+

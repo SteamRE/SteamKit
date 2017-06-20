@@ -366,6 +366,37 @@ message CPublishedFile_QueryFiles_Response {
 	repeated .PublishedFileDetails publishedfiledetails = 2 [(description) = "Each file details will be populated, depending on what return values were requested."];
 }
 
+message CPublishedFile_AddAppRelationship_Request {
+	optional uint64 publishedfileid = 1;
+	optional uint32 appid = 2;
+	optional uint32 relationship = 3;
+}
+
+message CPublishedFile_AddAppRelationship_Response {
+}
+
+message CPublishedFile_RemoveAppRelationship_Request {
+	optional uint64 publishedfileid = 1;
+	optional uint32 appid = 2;
+	optional uint32 relationship = 3;
+}
+
+message CPublishedFile_RemoveAppRelationship_Response {
+}
+
+message CPublishedFile_GetAppRelationships_Request {
+	optional uint64 publishedfileid = 1;
+}
+
+message CPublishedFile_GetAppRelationships_Response {
+	message AppRelationship {
+		optional uint32 appid = 1;
+		optional uint32 relationship = 2;
+	}
+
+	repeated .CPublishedFile_GetAppRelationships_Response.AppRelationship app_relationships = 3;
+}
+
 message CPublishedFile_StartPlaytimeTracking_Request {
 	optional uint32 appid = 1;
 	repeated uint64 publishedfileids = 2;
@@ -455,6 +486,15 @@ service PublishedFile {
 	}
 	rpc QueryFiles (.CPublishedFile_QueryFiles_Request) returns (.CPublishedFile_QueryFiles_Response) {
 		option (method_description) = "Performs a search query for published files";
+	}
+	rpc AddAppRelationship (.CPublishedFile_AddAppRelationship_Request) returns (.CPublishedFile_AddAppRelationship_Response) {
+		option (method_description) = "Adds a relationship between the published file and the given app";
+	}
+	rpc RemoveAppRelationship (.CPublishedFile_RemoveAppRelationship_Request) returns (.CPublishedFile_RemoveAppRelationship_Response) {
+		option (method_description) = "Remove a relationship between the published file and the given app";
+	}
+	rpc GetAppRelationships (.CPublishedFile_GetAppRelationships_Request) returns (.CPublishedFile_GetAppRelationships_Response) {
+		option (method_description) = "Returns the list of app relationships for this published file";
 	}
 	rpc StartPlaytimeTracking (.CPublishedFile_StartPlaytimeTracking_Request) returns (.CPublishedFile_StartPlaytimeTracking_Response) {
 		option (method_description) = "Start usage tracking for a given set of published files";
