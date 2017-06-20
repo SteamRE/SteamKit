@@ -157,6 +157,78 @@ namespace SteamKit2.Unified.Internal
     private bool ShouldSerializebroadcast_id() { return broadcast_idSpecified; }
     private void Resetbroadcast_id() { broadcast_idSpecified = false; }
     
+
+    private string _thumbnail_upload_address;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"thumbnail_upload_address", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string thumbnail_upload_address
+    {
+      get { return _thumbnail_upload_address?? ""; }
+      set { _thumbnail_upload_address = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool thumbnail_upload_addressSpecified
+    {
+      get { return _thumbnail_upload_address != null; }
+      set { if (value == (_thumbnail_upload_address== null)) _thumbnail_upload_address = value ? this.thumbnail_upload_address : (string)null; }
+    }
+    private bool ShouldSerializethumbnail_upload_address() { return thumbnail_upload_addressSpecified; }
+    private void Resetthumbnail_upload_address() { thumbnail_upload_addressSpecified = false; }
+    
+
+    private string _thumbnail_upload_token;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"thumbnail_upload_token", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string thumbnail_upload_token
+    {
+      get { return _thumbnail_upload_token?? ""; }
+      set { _thumbnail_upload_token = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool thumbnail_upload_tokenSpecified
+    {
+      get { return _thumbnail_upload_token != null; }
+      set { if (value == (_thumbnail_upload_token== null)) _thumbnail_upload_token = value ? this.thumbnail_upload_token : (string)null; }
+    }
+    private bool ShouldSerializethumbnail_upload_token() { return thumbnail_upload_tokenSpecified; }
+    private void Resetthumbnail_upload_token() { thumbnail_upload_tokenSpecified = false; }
+    
+
+    private uint? _thumbnail_interval_seconds;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"thumbnail_interval_seconds", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint thumbnail_interval_seconds
+    {
+      get { return _thumbnail_interval_seconds?? default(uint); }
+      set { _thumbnail_interval_seconds = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool thumbnail_interval_secondsSpecified
+    {
+      get { return _thumbnail_interval_seconds != null; }
+      set { if (value == (_thumbnail_interval_seconds== null)) _thumbnail_interval_seconds = value ? this.thumbnail_interval_seconds : (uint?)null; }
+    }
+    private bool ShouldSerializethumbnail_interval_seconds() { return thumbnail_interval_secondsSpecified; }
+    private void Resetthumbnail_interval_seconds() { thumbnail_interval_secondsSpecified = false; }
+    
+
+    private ulong? _thumbnail_broadcast_relay_id;
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"thumbnail_broadcast_relay_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public ulong thumbnail_broadcast_relay_id
+    {
+      get { return _thumbnail_broadcast_relay_id?? default(ulong); }
+      set { _thumbnail_broadcast_relay_id = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool thumbnail_broadcast_relay_idSpecified
+    {
+      get { return _thumbnail_broadcast_relay_id != null; }
+      set { if (value == (_thumbnail_broadcast_relay_id== null)) _thumbnail_broadcast_relay_id = value ? this.thumbnail_broadcast_relay_id : (ulong?)null; }
+    }
+    private bool ShouldSerializethumbnail_broadcast_relay_id() { return thumbnail_broadcast_relay_idSpecified; }
+    private void Resetthumbnail_broadcast_relay_id() { thumbnail_broadcast_relay_idSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -1891,6 +1963,106 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::ProtoBuf.ProtoContract(Name=@"CBroadcast_SendThumbnailToRelay_Notification")]
+  public partial class CBroadcast_SendThumbnailToRelay_Notification : global::ProtoBuf.IExtensible
+  {
+    public CBroadcast_SendThumbnailToRelay_Notification() {}
+    
+
+    private string _thumbnail_upload_token;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"thumbnail_upload_token", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string thumbnail_upload_token
+    {
+      get { return _thumbnail_upload_token?? ""; }
+      set { _thumbnail_upload_token = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool thumbnail_upload_tokenSpecified
+    {
+      get { return _thumbnail_upload_token != null; }
+      set { if (value == (_thumbnail_upload_token== null)) _thumbnail_upload_token = value ? this.thumbnail_upload_token : (string)null; }
+    }
+    private bool ShouldSerializethumbnail_upload_token() { return thumbnail_upload_tokenSpecified; }
+    private void Resetthumbnail_upload_token() { thumbnail_upload_tokenSpecified = false; }
+    
+
+    private ulong? _thumbnail_broadcast_relay_id;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"thumbnail_broadcast_relay_id", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+    public ulong thumbnail_broadcast_relay_id
+    {
+      get { return _thumbnail_broadcast_relay_id?? default(ulong); }
+      set { _thumbnail_broadcast_relay_id = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool thumbnail_broadcast_relay_idSpecified
+    {
+      get { return _thumbnail_broadcast_relay_id != null; }
+      set { if (value == (_thumbnail_broadcast_relay_id== null)) _thumbnail_broadcast_relay_id = value ? this.thumbnail_broadcast_relay_id : (ulong?)null; }
+    }
+    private bool ShouldSerializethumbnail_broadcast_relay_id() { return thumbnail_broadcast_relay_idSpecified; }
+    private void Resetthumbnail_broadcast_relay_id() { thumbnail_broadcast_relay_idSpecified = false; }
+    
+
+    private byte[] _thumbnail_data;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"thumbnail_data", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public byte[] thumbnail_data
+    {
+      get { return _thumbnail_data?? null; }
+      set { _thumbnail_data = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool thumbnail_dataSpecified
+    {
+      get { return _thumbnail_data != null; }
+      set { if (value == (_thumbnail_data== null)) _thumbnail_data = value ? this.thumbnail_data : (byte[])null; }
+    }
+    private bool ShouldSerializethumbnail_data() { return thumbnail_dataSpecified; }
+    private void Resetthumbnail_data() { thumbnail_dataSpecified = false; }
+    
+
+    private uint? _thumbnail_width;
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"thumbnail_width", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint thumbnail_width
+    {
+      get { return _thumbnail_width?? default(uint); }
+      set { _thumbnail_width = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool thumbnail_widthSpecified
+    {
+      get { return _thumbnail_width != null; }
+      set { if (value == (_thumbnail_width== null)) _thumbnail_width = value ? this.thumbnail_width : (uint?)null; }
+    }
+    private bool ShouldSerializethumbnail_width() { return thumbnail_widthSpecified; }
+    private void Resetthumbnail_width() { thumbnail_widthSpecified = false; }
+    
+
+    private uint? _thumbnail_height;
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"thumbnail_height", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint thumbnail_height
+    {
+      get { return _thumbnail_height?? default(uint); }
+      set { _thumbnail_height = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool thumbnail_heightSpecified
+    {
+      get { return _thumbnail_height != null; }
+      set { if (value == (_thumbnail_height== null)) _thumbnail_height = value ? this.thumbnail_height : (uint?)null; }
+    }
+    private bool ShouldSerializethumbnail_height() { return thumbnail_heightSpecified; }
+    private void Resetthumbnail_height() { thumbnail_heightSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     public interface IBroadcast
     {
       CBroadcast_BeginBroadcastSession_Response BeginBroadcastSession(CBroadcast_BeginBroadcastSession_Request request);
@@ -1919,6 +2091,7 @@ namespace SteamKit2.Unified.Internal
     NoResponse NotifySessionClosed(CBroadcast_SessionClosed_Notification request);
     NoResponse NotifyViewerBroadcastInvite(CBroadcast_ViewerBroadcastInvite_Notification request);
     NoResponse NotifyBroadcastStatus(CBroadcast_BroadcastStatus_Notification request);
+    NoResponse SendThumbnailToRelay(CBroadcast_SendThumbnailToRelay_Notification request);
     
     }
     

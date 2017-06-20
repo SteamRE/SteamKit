@@ -2099,6 +2099,52 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::ProtoBuf.ProtoContract(Name=@"CCloud_ClientConflictResolution_Notification")]
+  public partial class CCloud_ClientConflictResolution_Notification : global::ProtoBuf.IExtensible
+  {
+    public CCloud_ClientConflictResolution_Notification() {}
+    
+
+    private uint? _appid;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"appid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint appid
+    {
+      get { return _appid?? default(uint); }
+      set { _appid = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool appidSpecified
+    {
+      get { return _appid != null; }
+      set { if (value == (_appid== null)) _appid = value ? this.appid : (uint?)null; }
+    }
+    private bool ShouldSerializeappid() { return appidSpecified; }
+    private void Resetappid() { appidSpecified = false; }
+    
+
+    private bool? _chose_local_files;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"chose_local_files", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public bool chose_local_files
+    {
+      get { return _chose_local_files?? default(bool); }
+      set { _chose_local_files = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool chose_local_filesSpecified
+    {
+      get { return _chose_local_files != null; }
+      set { if (value == (_chose_local_files== null)) _chose_local_files = value ? this.chose_local_files : (bool?)null; }
+    }
+    private bool ShouldSerializechose_local_files() { return chose_local_filesSpecified; }
+    private void Resetchose_local_files() { chose_local_filesSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     public interface ICloud
     {
       CCloud_GetUploadServerInfo_Response GetUploadServerInfo(CCloud_GetUploadServerInfo_Request request);
@@ -2114,6 +2160,7 @@ namespace SteamKit2.Unified.Internal
     CCloud_ClientCommitFileUpload_Response ClientCommitFileUpload(CCloud_ClientCommitFileUpload_Request request);
     CCloud_ClientFileDownload_Response ClientFileDownload(CCloud_ClientFileDownload_Request request);
     CCloud_ClientDeleteFile_Response ClientDeleteFile(CCloud_ClientDeleteFile_Request request);
+    NoResponse ClientConflictResolution(CCloud_ClientConflictResolution_Notification request);
     
     }
     

@@ -4466,6 +4466,245 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::ProtoBuf.ProtoContract(Name=@"CPublishedFile_AddAppRelationship_Request")]
+  public partial class CPublishedFile_AddAppRelationship_Request : global::ProtoBuf.IExtensible
+  {
+    public CPublishedFile_AddAppRelationship_Request() {}
+    
+
+    private ulong? _publishedfileid;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"publishedfileid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public ulong publishedfileid
+    {
+      get { return _publishedfileid?? default(ulong); }
+      set { _publishedfileid = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool publishedfileidSpecified
+    {
+      get { return _publishedfileid != null; }
+      set { if (value == (_publishedfileid== null)) _publishedfileid = value ? this.publishedfileid : (ulong?)null; }
+    }
+    private bool ShouldSerializepublishedfileid() { return publishedfileidSpecified; }
+    private void Resetpublishedfileid() { publishedfileidSpecified = false; }
+    
+
+    private uint? _appid;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"appid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint appid
+    {
+      get { return _appid?? default(uint); }
+      set { _appid = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool appidSpecified
+    {
+      get { return _appid != null; }
+      set { if (value == (_appid== null)) _appid = value ? this.appid : (uint?)null; }
+    }
+    private bool ShouldSerializeappid() { return appidSpecified; }
+    private void Resetappid() { appidSpecified = false; }
+    
+
+    private uint? _relationship;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"relationship", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint relationship
+    {
+      get { return _relationship?? default(uint); }
+      set { _relationship = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool relationshipSpecified
+    {
+      get { return _relationship != null; }
+      set { if (value == (_relationship== null)) _relationship = value ? this.relationship : (uint?)null; }
+    }
+    private bool ShouldSerializerelationship() { return relationshipSpecified; }
+    private void Resetrelationship() { relationshipSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::ProtoBuf.ProtoContract(Name=@"CPublishedFile_AddAppRelationship_Response")]
+  public partial class CPublishedFile_AddAppRelationship_Response : global::ProtoBuf.IExtensible
+  {
+    public CPublishedFile_AddAppRelationship_Response() {}
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::ProtoBuf.ProtoContract(Name=@"CPublishedFile_RemoveAppRelationship_Request")]
+  public partial class CPublishedFile_RemoveAppRelationship_Request : global::ProtoBuf.IExtensible
+  {
+    public CPublishedFile_RemoveAppRelationship_Request() {}
+    
+
+    private ulong? _publishedfileid;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"publishedfileid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public ulong publishedfileid
+    {
+      get { return _publishedfileid?? default(ulong); }
+      set { _publishedfileid = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool publishedfileidSpecified
+    {
+      get { return _publishedfileid != null; }
+      set { if (value == (_publishedfileid== null)) _publishedfileid = value ? this.publishedfileid : (ulong?)null; }
+    }
+    private bool ShouldSerializepublishedfileid() { return publishedfileidSpecified; }
+    private void Resetpublishedfileid() { publishedfileidSpecified = false; }
+    
+
+    private uint? _appid;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"appid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint appid
+    {
+      get { return _appid?? default(uint); }
+      set { _appid = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool appidSpecified
+    {
+      get { return _appid != null; }
+      set { if (value == (_appid== null)) _appid = value ? this.appid : (uint?)null; }
+    }
+    private bool ShouldSerializeappid() { return appidSpecified; }
+    private void Resetappid() { appidSpecified = false; }
+    
+
+    private uint? _relationship;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"relationship", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint relationship
+    {
+      get { return _relationship?? default(uint); }
+      set { _relationship = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool relationshipSpecified
+    {
+      get { return _relationship != null; }
+      set { if (value == (_relationship== null)) _relationship = value ? this.relationship : (uint?)null; }
+    }
+    private bool ShouldSerializerelationship() { return relationshipSpecified; }
+    private void Resetrelationship() { relationshipSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::ProtoBuf.ProtoContract(Name=@"CPublishedFile_RemoveAppRelationship_Response")]
+  public partial class CPublishedFile_RemoveAppRelationship_Response : global::ProtoBuf.IExtensible
+  {
+    public CPublishedFile_RemoveAppRelationship_Response() {}
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::ProtoBuf.ProtoContract(Name=@"CPublishedFile_GetAppRelationships_Request")]
+  public partial class CPublishedFile_GetAppRelationships_Request : global::ProtoBuf.IExtensible
+  {
+    public CPublishedFile_GetAppRelationships_Request() {}
+    
+
+    private ulong? _publishedfileid;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"publishedfileid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public ulong publishedfileid
+    {
+      get { return _publishedfileid?? default(ulong); }
+      set { _publishedfileid = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool publishedfileidSpecified
+    {
+      get { return _publishedfileid != null; }
+      set { if (value == (_publishedfileid== null)) _publishedfileid = value ? this.publishedfileid : (ulong?)null; }
+    }
+    private bool ShouldSerializepublishedfileid() { return publishedfileidSpecified; }
+    private void Resetpublishedfileid() { publishedfileidSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::ProtoBuf.ProtoContract(Name=@"CPublishedFile_GetAppRelationships_Response")]
+  public partial class CPublishedFile_GetAppRelationships_Response : global::ProtoBuf.IExtensible
+  {
+    public CPublishedFile_GetAppRelationships_Response() {}
+    
+    private readonly global::System.Collections.Generic.List<CPublishedFile_GetAppRelationships_Response.AppRelationship> _app_relationships = new global::System.Collections.Generic.List<CPublishedFile_GetAppRelationships_Response.AppRelationship>();
+    [global::ProtoBuf.ProtoMember(3, Name=@"app_relationships", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<CPublishedFile_GetAppRelationships_Response.AppRelationship> app_relationships
+    {
+      get { return _app_relationships; }
+    }
+  
+  [global::ProtoBuf.ProtoContract(Name=@"AppRelationship")]
+  public partial class AppRelationship : global::ProtoBuf.IExtensible
+  {
+    public AppRelationship() {}
+    
+
+    private uint? _appid;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"appid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint appid
+    {
+      get { return _appid?? default(uint); }
+      set { _appid = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool appidSpecified
+    {
+      get { return _appid != null; }
+      set { if (value == (_appid== null)) _appid = value ? this.appid : (uint?)null; }
+    }
+    private bool ShouldSerializeappid() { return appidSpecified; }
+    private void Resetappid() { appidSpecified = false; }
+    
+
+    private uint? _relationship;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"relationship", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint relationship
+    {
+      get { return _relationship?? default(uint); }
+      set { _relationship = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    
+    public bool relationshipSpecified
+    {
+      get { return _relationship != null; }
+      set { if (value == (_relationship== null)) _relationship = value ? this.relationship : (uint?)null; }
+    }
+    private bool ShouldSerializerelationship() { return relationshipSpecified; }
+    private void Resetrelationship() { relationshipSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::ProtoBuf.ProtoContract(Name=@"CPublishedFile_StartPlaytimeTracking_Request")]
   public partial class CPublishedFile_StartPlaytimeTracking_Request : global::ProtoBuf.IExtensible
   {
@@ -4811,6 +5050,9 @@ namespace SteamKit2.Unified.Internal
     CPublishedFile_GetChangeHistory_Response GetChangeHistory(CPublishedFile_GetChangeHistory_Request request);
     CPublishedFile_RefreshVotingQueue_Response RefreshVotingQueue(CPublishedFile_RefreshVotingQueue_Request request);
     CPublishedFile_QueryFiles_Response QueryFiles(CPublishedFile_QueryFiles_Request request);
+    CPublishedFile_AddAppRelationship_Response AddAppRelationship(CPublishedFile_AddAppRelationship_Request request);
+    CPublishedFile_RemoveAppRelationship_Response RemoveAppRelationship(CPublishedFile_RemoveAppRelationship_Request request);
+    CPublishedFile_GetAppRelationships_Response GetAppRelationships(CPublishedFile_GetAppRelationships_Request request);
     CPublishedFile_StartPlaytimeTracking_Response StartPlaytimeTracking(CPublishedFile_StartPlaytimeTracking_Request request);
     CPublishedFile_StopPlaytimeTracking_Response StopPlaytimeTracking(CPublishedFile_StopPlaytimeTracking_Request request);
     CPublishedFile_StopPlaytimeTrackingForAllAppItems_Response StopPlaytimeTrackingForAllAppItems(CPublishedFile_StopPlaytimeTrackingForAllAppItems_Request request);
