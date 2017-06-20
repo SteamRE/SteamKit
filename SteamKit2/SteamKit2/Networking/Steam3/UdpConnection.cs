@@ -97,7 +97,7 @@ namespace SteamKit2
         {
             IPEndPoint localEndPoint = new IPEndPoint(IPAddress.Any, 0);
 
-            sock = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+            sock = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, System.Net.Sockets.ProtocolType.Udp);
             sock.Bind(localEndPoint);
 
             state = (int)State.Disconnected;

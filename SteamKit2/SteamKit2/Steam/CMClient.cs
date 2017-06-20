@@ -132,8 +132,12 @@ namespace SteamKit2.Internal
                     connection = new UdpConnection();
                     break;
 
+                case ProtocolType.WebSocket:
+                    connection = new WebSocketConnection();
+                    break;
+
                 default:
-                    throw new NotSupportedException( "The provided protocol type is not supported. Only Tcp and Udp are available." );
+                    throw new ArgumentOutOfRangeException(nameof(type), type, "The provided protocol type is not a valid enum member." );
             }
 
             connection.NetMsgReceived += NetMsgReceived;

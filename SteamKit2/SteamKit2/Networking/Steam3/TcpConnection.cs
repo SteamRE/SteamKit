@@ -198,7 +198,7 @@ namespace SteamKit2
                     Debug.Assert(cancellationToken == null);
                     cancellationToken = new CancellationTokenSource();
 
-                    socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                    socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, System.Net.Sockets.ProtocolType.Tcp);
                     socket.ReceiveTimeout = timeout;
                     socket.SendTimeout = timeout;
 
