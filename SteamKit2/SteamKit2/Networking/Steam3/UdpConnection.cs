@@ -53,7 +53,7 @@ namespace SteamKit2
 
         private Thread netThread;
         private Socket sock;
-        private IPEndPoint remoteEndPoint;
+        private EndPoint remoteEndPoint;
 
         INetFilterEncryption filter;
 
@@ -103,7 +103,7 @@ namespace SteamKit2
             state = (int)State.Disconnected;
         }
 
-        public override IPEndPoint CurrentEndPoint
+        public override EndPoint CurrentEndPoint
         {
             get { return remoteEndPoint; }
         }
@@ -113,7 +113,7 @@ namespace SteamKit2
         /// </summary>
         /// <param name="endPointTask">Task returning the CM server.</param>
         /// <param name="timeout">Timeout in milliseconds</param>
-        public override void Connect(Task<IPEndPoint> endPointTask, int timeout)
+        public override void Connect(Task<EndPoint> endPointTask, int timeout)
         {
             Disconnect();
 

@@ -17,7 +17,7 @@ namespace SteamKit2
     {
         const uint MAGIC = 0x31305456; // "VT01"
 
-        private IPEndPoint destination;
+        private EndPoint destination;
         private Socket socket;
         private INetFilterEncryption netFilter;
         private Thread netThread;
@@ -36,7 +36,7 @@ namespace SteamKit2
             connectionFree = new ManualResetEvent(true);
         }
 
-        public override IPEndPoint CurrentEndPoint
+        public override EndPoint CurrentEndPoint
         {
             get { return destination; }
         }
@@ -185,7 +185,7 @@ namespace SteamKit2
         /// </summary>
         /// <param name="endPointTask">Task returning the end point.</param>
         /// <param name="timeout">Timeout in milliseconds</param>
-        public override void Connect(Task<IPEndPoint> endPointTask, int timeout)
+        public override void Connect(Task<EndPoint> endPointTask, int timeout)
         {
             lock (connectLock)
             {

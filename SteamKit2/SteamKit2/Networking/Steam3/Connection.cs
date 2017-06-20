@@ -20,9 +20,9 @@ namespace SteamKit2
     class NetMsgEventArgs : EventArgs
     {
         public byte[] Data { get; private set; }
-        public IPEndPoint EndPoint { get; private set; }
+        public EndPoint EndPoint { get; private set; }
 
-        public NetMsgEventArgs( byte[] data, IPEndPoint endPoint )
+        public NetMsgEventArgs( byte[] data, EndPoint endPoint )
         {
             this.Data = data;
             this.EndPoint = endPoint;
@@ -131,10 +131,10 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// The <see cref="System.Net.IPEndPoint" /> of the current connection.
+        /// The <see cref="System.Net.EndPoint" /> of the current connection.
         /// This is non-null between <see cref="E:Connected"/> and <see cref="E:Disconnected"/>, inclusive.
         /// </summary>
-        public abstract IPEndPoint CurrentEndPoint { get; }
+        public abstract EndPoint CurrentEndPoint { get; }
 
         /// <summary>
         /// Occurs when the physical connection is established.
@@ -161,7 +161,7 @@ namespace SteamKit2
         /// </summary>
         /// <param name="endPointTask">Task returning the end point.</param>
         /// <param name="timeout">Timeout in milliseconds</param>
-        public abstract void Connect( Task<IPEndPoint> endPointTask, int timeout = DEFAULT_TIMEOUT );
+        public abstract void Connect( Task<EndPoint> endPointTask, int timeout = DEFAULT_TIMEOUT );
         /// <summary>
         /// Disconnects this instance.
         /// </summary>

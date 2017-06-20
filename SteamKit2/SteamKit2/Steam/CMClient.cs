@@ -159,7 +159,7 @@ namespace SteamKit2.Internal
         /// The <see cref="IPEndPoint"/> of the CM server to connect to.
         /// If <c>null</c>, SteamKit will randomly select a CM server from its internal list.
         /// </param>
-        public void Connect( IPEndPoint cmServer = null  )
+        public void Connect( CMServerRecord cmServer = null  )
         {
             this.Disconnect();
 
@@ -167,15 +167,16 @@ namespace SteamKit2.Internal
             pendingNetFilterEncryption = null;
             ExpectDisconnection = false;
 
-            Task<IPEndPoint> epTask = null;
+            Task<EndPoint> epTask = null;
 
             if ( cmServer == null )
             {
-                epTask = Servers.GetNextServerCandidateAsync();
+                epTask = Servers.GetNextServerCandidateAsync()
+                    .ContinueWith(r => r.Result.EndPoint, TaskContinuationOptions.OnlyOnRanToCompletion);
             }
             else
             {
-                epTask = Task.FromResult( cmServer );
+                epTask = Task.FromResult( cmServer.EndPoint );
             }
 
             connection.Connect( epTask, ( int )ConnectionTimeout.TotalMilliseconds );
@@ -606,10 +607,12 @@ namespace SteamKit2.Internal
             DebugLog.Assert( cmMsg.Body.cm_addresses.Count == cmMsg.Body.cm_ports.Count, "CMClient", "HandleCMList received malformed message" );
 
             var cmList = cmMsg.Body.cm_addresses
-                .Zip( cmMsg.Body.cm_ports, ( addr, port ) => new IPEndPoint( NetHelpers.GetIPAddress( addr ), ( int )port ) );
+                .Zip( cmMsg.Body.cm_ports, ( addr, port ) => CMServerRecord.SocketServer( new IPEndPoint( NetHelpers.GetIPAddress( addr ) , ( int )port ) ) );
+
+            var webSocketList = cmMsg.Body.cm_websocket_addresses.Select( addr => CMServerRecord.WebSocketServer( addr ) );
 
             // update our list with steam's list of CMs
-            Servers.ReplaceList( cmList );
+            Servers.ReplaceList( cmList.Concat( webSocketList ) );
         }
         void HandleSessionToken( IPacketMsg packetMsg )
         {

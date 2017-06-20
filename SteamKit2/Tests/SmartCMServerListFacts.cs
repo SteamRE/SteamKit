@@ -22,19 +22,19 @@ namespace Tests
 
             var seedList = new[]
             {
-                new IPEndPoint( IPAddress.Loopback, 27025 ),
-                new IPEndPoint( IPAddress.Loopback, 27035 ),
-                new IPEndPoint( IPAddress.Loopback, 27045 ),
-                new IPEndPoint( IPAddress.Loopback, 27105 ),
+                CMServerRecord.SocketServer(new IPEndPoint( IPAddress.Loopback, 27025 )),
+                CMServerRecord.SocketServer(new IPEndPoint( IPAddress.Loopback, 27035 )),
+                CMServerRecord.SocketServer(new IPEndPoint( IPAddress.Loopback, 27045 )),
+                CMServerRecord.SocketServer(new IPEndPoint( IPAddress.Loopback, 27105 )),
             };
             serverList.ReplaceList( seedList );
             Assert.Equal( 4, seedList.Length );
 
             var listToReplace = new[]
             {
-                new IPEndPoint( IPAddress.Loopback, 27015 ),
-                new IPEndPoint( IPAddress.Loopback, 27035 ),
-                new IPEndPoint( IPAddress.Loopback, 27105 ),
+                CMServerRecord.SocketServer(new IPEndPoint( IPAddress.Loopback, 27015 )),
+                CMServerRecord.SocketServer(new IPEndPoint( IPAddress.Loopback, 27035 )),
+                CMServerRecord.SocketServer(new IPEndPoint( IPAddress.Loopback, 27105 )),
             };
 
             serverList.ReplaceList( listToReplace );
@@ -58,11 +58,11 @@ namespace Tests
         {
             serverList.GetAllEndPoints();
 
-            var endPoint = new IPEndPoint( IPAddress.Loopback, 27015 );
-            serverList.ReplaceList( new List<IPEndPoint>() { endPoint } );
+            var record = CMServerRecord.SocketServer( new IPEndPoint( IPAddress.Loopback, 27015 ) );
+            serverList.ReplaceList( new List<CMServerRecord>() { record } );
 
-            var nextEndPoint = serverList.GetNextServerCandidate();
-            Assert.Equal( endPoint, nextEndPoint );
+            var nextRecord = serverList.GetNextServerCandidate();
+            Assert.Equal( record, nextRecord );
         }
 
         [Fact]
@@ -70,12 +70,12 @@ namespace Tests
         {
             serverList.GetAllEndPoints();
 
-            var endPoint = new IPEndPoint( IPAddress.Loopback, 27015 );
-            serverList.ReplaceList( new List<IPEndPoint>() { endPoint } );
-            serverList.TryMark( endPoint, ServerQuality.Bad );
+            var record = CMServerRecord.SocketServer( new IPEndPoint( IPAddress.Loopback, 27015 ) );
+            serverList.ReplaceList( new List<CMServerRecord>() { record } );
+            serverList.TryMark( record.EndPoint, ServerQuality.Bad );
 
-            var nextEndPoint = serverList.GetNextServerCandidate();
-            Assert.Equal( endPoint, nextEndPoint );
+            var nextRecord = serverList.GetNextServerCandidate();
+            Assert.Equal( record, nextRecord );
         }
 
         [Fact]
@@ -83,39 +83,39 @@ namespace Tests
         {
             serverList.GetAllEndPoints();
 
-            var goodEndPoint = new IPEndPoint(IPAddress.Loopback, 27015);
-            var neutralEndPoint = new IPEndPoint(IPAddress.Loopback, 27016);
-            var badEndPoint = new IPEndPoint(IPAddress.Loopback, 27017);
+            var goodRecord = CMServerRecord.SocketServer( new IPEndPoint(IPAddress.Loopback, 27015));
+            var neutralRecord = CMServerRecord.SocketServer( new IPEndPoint(IPAddress.Loopback, 27016));
+            var badRecord = CMServerRecord.SocketServer( new IPEndPoint(IPAddress.Loopback, 27017));
 
-            serverList.ReplaceList( new List<IPEndPoint>() { badEndPoint, neutralEndPoint, goodEndPoint } );
+            serverList.ReplaceList( new List<CMServerRecord>() { badRecord, neutralRecord, goodRecord } );
 
-            serverList.TryMark( badEndPoint, ServerQuality.Bad );
-            serverList.TryMark( goodEndPoint, ServerQuality.Good );
+            serverList.TryMark( badRecord.EndPoint, ServerQuality.Bad );
+            serverList.TryMark( goodRecord.EndPoint, ServerQuality.Good );
 
-            var nextServerCandidate = serverList.GetNextServerCandidate();
-            Assert.Equal( neutralEndPoint, nextServerCandidate );
+            var nextRecord = serverList.GetNextServerCandidate();
+            Assert.Equal( neutralRecord, nextRecord );
 
-            serverList.TryMark( badEndPoint, ServerQuality.Good);
+            serverList.TryMark( badRecord.EndPoint, ServerQuality.Good);
 
-            nextServerCandidate = serverList.GetNextServerCandidate();
-            Assert.Equal( badEndPoint, nextServerCandidate );
+            nextRecord = serverList.GetNextServerCandidate();
+            Assert.Equal( badRecord, nextRecord );
         }
         
         [Fact]
         public void TryMark_ReturnsTrue_IfServerInList()
         {
-            var endPoint = new IPEndPoint( IPAddress.Loopback, 27015 );
-            serverList.ReplaceList( new List<IPEndPoint>() { endPoint } );
+            var record = CMServerRecord.SocketServer( new IPEndPoint( IPAddress.Loopback, 27015 ));
+            serverList.ReplaceList( new List<CMServerRecord>() { record } );
 
-            var marked = serverList.TryMark( endPoint, ServerQuality.Good );
+            var marked = serverList.TryMark( record.EndPoint, ServerQuality.Good );
             Assert.True( marked );
         }
 
         [Fact]
         public void TryMark_ReturnsFalse_IfServerNotInList()
         {
-            var endPoint = new IPEndPoint( IPAddress.Loopback, 27015 );
-            serverList.ReplaceList( new List<IPEndPoint>() { endPoint } );
+            var record = CMServerRecord.SocketServer( new IPEndPoint( IPAddress.Loopback, 27015 ) );
+            serverList.ReplaceList( new List<CMServerRecord>() { record } );
 
             var marked = serverList.TryMark( new IPEndPoint( IPAddress.Loopback, 27016 ), ServerQuality.Good );
             Assert.False( marked );

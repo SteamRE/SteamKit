@@ -32,7 +32,7 @@ namespace SteamKit2.Discovery
         [DebuggerDisplay("ServerInfo ({EndPoint}, Bad: {LastBadConnectionDateTimeUtc.HasValue})")]
         class ServerInfo
         {
-            public IPEndPoint EndPoint { get; set; }
+            public CMServerRecord Record { get; set; }
             public DateTime? LastBadConnectionDateTimeUtc { get; set; }
         }
 
@@ -123,15 +123,15 @@ namespace SteamKit2.Discovery
         {
             DebugWrite( "Resolving server list" );
 
-            IEnumerable<IPEndPoint> serverList = await ServerListProvider.FetchServerListAsync().ConfigureAwait( false );
-            List<IPEndPoint> endpointList = serverList.ToList();
+            IEnumerable<CMServerRecord> serverList = await ServerListProvider.FetchServerListAsync().ConfigureAwait( false );
+            List<CMServerRecord> endpointList = serverList.ToList();
 
             if ( endpointList.Count == 0 && canFetchDirectory )
             {
                 DebugWrite( "Server list provider had no entries, will query SteamDirectory" );
                 var directoryList = await SteamDirectory.LoadAsync( CellID ).ConfigureAwait( false );
 
-                endpointList = directoryList.ToList();
+                endpointList = directoryList.Select(CMServerRecord.SocketServer).ToList();
             }
 
             if ( endpointList.Count == 0 && canFetchDirectory )
@@ -139,7 +139,7 @@ namespace SteamKit2.Discovery
                 DebugWrite( "Could not query SteamDirectory, falling back to cm0" );
                 var cm0 = await Dns.GetHostAddressesAsync( "cm0.steampowered.com" ).ConfigureAwait( false );
 
-                endpointList = cm0.Select( ipaddr => new IPEndPoint(ipaddr, 27015) ).ToList();
+                endpointList = cm0.Select( ipaddr => CMServerRecord.SocketServer( new IPEndPoint(ipaddr, 27015) ) ).ToList();
             }
 
             DebugWrite( "Resolved {0} servers", endpointList.Count );
@@ -175,8 +175,8 @@ namespace SteamKit2.Discovery
         /// <summary>
         /// Replace the list with a new list of servers provided to us by the Steam servers.
         /// </summary>
-        /// <param name="endpointList">The <see cref="IPEndPoint"/>s to use for this <see cref="SmartCMServerList"/>.</param>
-        public void ReplaceList( IEnumerable<IPEndPoint> endpointList )
+        /// <param name="endpointList">The <see cref="CMServerRecord"/>s to use for this <see cref="SmartCMServerList"/>.</param>
+        public void ReplaceList( IEnumerable<CMServerRecord> endpointList )
         {
             lock ( listLock )
             {
@@ -193,9 +193,9 @@ namespace SteamKit2.Discovery
             }
         }
 
-        void AddCore( IPEndPoint endPoint )
+        void AddCore(CMServerRecord endPoint )
         {
-            var info = new ServerInfo { EndPoint = endPoint };
+            var info = new ServerInfo { Record = endPoint };
 
             servers.Add( info );
         }
@@ -214,11 +214,11 @@ namespace SteamKit2.Discovery
             }
         }
 
-        internal bool TryMark( IPEndPoint endPoint, ServerQuality quality )
+        internal bool TryMark( EndPoint endPoint, ServerQuality quality )
         {
             lock ( listLock )
             {
-                var serverInfo = servers.Where( x => x.EndPoint.Equals( endPoint ) ).SingleOrDefault();
+                var serverInfo = servers.Where( x => x.Record.EndPoint.Equals( endPoint ) ).SingleOrDefault();
                 if ( serverInfo == null )
                 {
                     return false;
@@ -254,7 +254,7 @@ namespace SteamKit2.Discovery
         /// Perform the actual score lookup of the server list and return the candidate
         /// </summary>
         /// <returns>IPEndPoint candidate</returns>
-        private IPEndPoint GetNextServerCandidateInternal()
+        private CMServerRecord GetNextServerCandidateInternal()
         {
             lock ( listLock )
             {
@@ -264,7 +264,7 @@ namespace SteamKit2.Discovery
                 ResetOldScores();
 
                 var serverInfo = servers
-                    .Select( (s, index) => new { EndPoint = s.EndPoint, IsBad = s.LastBadConnectionDateTimeUtc.HasValue, Index = index } )
+                    .Select( (s, index) => new { EndPoint = s.Record, IsBad = s.LastBadConnectionDateTimeUtc.HasValue, Index = index } )
                     .OrderBy( x => x.IsBad )
                     .ThenBy( x => x.Index )
                     .FirstOrDefault();
@@ -283,7 +283,7 @@ namespace SteamKit2.Discovery
         /// Get the next server in the list.
         /// </summary>
         /// <returns>An <see cref="System.Net.IPEndPoint"/>, or null if the list is empty.</returns>
-        public IPEndPoint GetNextServerCandidate()
+        public CMServerRecord GetNextServerCandidate()
         {
             if ( !WaitForServersFetched() )
             {
@@ -297,7 +297,7 @@ namespace SteamKit2.Discovery
         /// Get the next server in the list.
         /// </summary>
         /// <returns>An <see cref="System.Net.IPEndPoint"/>, or null if the list is empty.</returns>
-        public async Task<IPEndPoint> GetNextServerCandidateAsync()
+        public async Task<CMServerRecord> GetNextServerCandidateAsync()
         {
             StartFetchingServers();
             await listTask.ConfigureAwait( false );
@@ -309,24 +309,24 @@ namespace SteamKit2.Discovery
         /// Gets the <see cref="System.Net.IPEndPoint"/>s of all servers in the server list.
         /// </summary>
         /// <returns>An <see cref="T:System.Net.IPEndPoint[]"/> array contains the <see cref="System.Net.IPEndPoint"/>s of the servers in the list</returns>
-        public IPEndPoint[] GetAllEndPoints()
+        public CMServerRecord[] GetAllEndPoints()
         {
-            IPEndPoint[] endPoints;
+            CMServerRecord[] endPoints;
 
             if ( !WaitForServersFetched() )
             {
-                return new IPEndPoint[0];
+                return new CMServerRecord[0];
             }
 
             lock ( listLock )
             {
                 var numServers = servers.Count;
-                endPoints = new IPEndPoint[ numServers ];
+                endPoints = new CMServerRecord[ numServers ];
 
                 for ( int i = 0; i < numServers; i++ )
                 {
                     var serverInfo = servers[ i ];
-                    endPoints[ i ] = serverInfo.EndPoint;
+                    endPoints[ i ] = serverInfo.Record;
                 }
             }
 

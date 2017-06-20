@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ProtoBuf;
+﻿using ProtoBuf;
+using System;
 
 namespace SteamKit2.Discovery
 {
@@ -11,8 +7,10 @@ namespace SteamKit2.Discovery
     class BasicServerListProto
     {
         [ProtoMember(1)]
-        public String ipAddress { get; set; }
+        public string address { get; set; }
         [ProtoMember(2)]
         public int port { get; set; }
+        [ProtoMember(3)]
+        public bool websocket { get; set; }
     }
 }

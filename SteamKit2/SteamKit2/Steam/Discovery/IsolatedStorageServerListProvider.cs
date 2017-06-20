@@ -30,7 +30,7 @@ namespace SteamKit2.Discovery
         /// Read the stored list of servers from IsolatedStore
         /// </summary>
         /// <returns>List of servers if persisted, otherwise an empty list</returns>
-        public Task<IEnumerable<IPEndPoint>> FetchServerListAsync()
+        public Task<IEnumerable<CMServerRecord>> FetchServerListAsync()
         {
             return Task.Run(() =>
             {
@@ -38,15 +38,25 @@ namespace SteamKit2.Discovery
                 {
                     using (IsolatedStorageFileStream fileStream = isolatedStorage.OpenFile(FileName, FileMode.Open, FileAccess.Read))
                     {
-                        return ProtoBuf.Serializer.DeserializeItems<BasicServerListProto>(fileStream, PrefixStyle.Base128, 1)
-                            .Select(item => new IPEndPoint(IPAddress.Parse(item.ipAddress), item.port))
+                        return Serializer.DeserializeItems<BasicServerListProto>(fileStream, PrefixStyle.Base128, 1)
+                            .Select(item =>
+                            {
+                                if (item.websocket)
+                                {
+                                    return CMServerRecord.WebSocketServer(item.address + ":" + item.port);
+                                }
+                                else
+                                {
+                                    return CMServerRecord.SocketServer(new IPEndPoint(IPAddress.Parse(item.address), item.port));
+                                }
+                            })
                             .ToList();
                     }
                 }
                 catch (IOException ex)
                 {
                     DebugLog.WriteLine("IsolatedStorageServerListProvider", "Failed to read file {0}: {1}", FileName, ex.Message);
-                    return Enumerable.Empty<IPEndPoint>();
+                    return Enumerable.Empty<CMServerRecord>();
                 }
             });
         }
@@ -56,7 +66,7 @@ namespace SteamKit2.Discovery
         /// </summary>
         /// <param name="endpoints">List of server endpoints</param>
         /// <returns>Awaitable task for write completion</returns>
-        public Task UpdateServerListAsync(IEnumerable<IPEndPoint> endpoints)
+        public Task UpdateServerListAsync(IEnumerable<CMServerRecord> endpoints)
         {
             return Task.Run(() =>
             {
@@ -64,8 +74,28 @@ namespace SteamKit2.Discovery
                 {
                     using (IsolatedStorageFileStream fileStream = isolatedStorage.OpenFile(FileName, FileMode.Create))
                     {
-                        ProtoBuf.Serializer.Serialize(fileStream,
-                            endpoints.Select(ep => new BasicServerListProto { ipAddress = ep.Address.ToString(), port = ep.Port }));
+                        Serializer.Serialize(fileStream,
+                            endpoints.Select(ep =>
+                            {
+                                if (ep.ServerType == CMServerType.WebSocket)
+                                {
+                                    return new BasicServerListProto
+                                    {
+                                        address = ep.GetHostname(),
+                                        port = ep.GetPort(),
+                                        websocket = true
+                                    };
+                                }
+                                else
+                                {
+                                    return new BasicServerListProto
+                                    {
+                                        address = ep.GetIPAddress().ToString(),
+                                        port = ep.GetPort(),
+                                        websocket = false
+                                    };
+                                }
+                            }));
                         fileStream.SetLength(fileStream.Position);
                     }
                 }

@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using SteamKit2.Internal;
 using System.Net.Http;
+using SteamKit2.Discovery;
 
 namespace SteamKit2
 {
@@ -23,7 +24,7 @@ namespace SteamKit2
             return LoadAsync( cellid ).ContinueWith( t =>
             {
                 var servers = t.Result;
-                CMClient.Servers.ReplaceList(servers);
+                CMClient.Servers.ReplaceList(servers.Select(CMServerRecord.SocketServer));
             }, CancellationToken.None, TaskContinuationOptions.NotOnFaulted | TaskContinuationOptions.NotOnCanceled, TaskScheduler.Current );
         }
 
