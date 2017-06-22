@@ -99,7 +99,12 @@ namespace SteamKit2
 
             public DnsEndPoint EndPoint { get; }
 
-            public async void Start()
+            public void Start()
+            {
+                runloopTask = RunCore();
+            }
+
+            async Task RunCore()
             {
                 var uri = new Uri(FormattableString.Invariant($"wss://{EndPoint.Host}:{EndPoint.Port}/cmsocket/"));
 
