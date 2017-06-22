@@ -7,7 +7,6 @@
 
 using System;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
@@ -19,8 +18,8 @@ namespace SteamKit2
     /// </summary>
     class NetMsgEventArgs : EventArgs
     {
-        public byte[] Data { get; private set; }
-        public EndPoint EndPoint { get; private set; }
+        public byte[] Data { get; }
+        public EndPoint EndPoint { get; }
 
         public NetMsgEventArgs( byte[] data, EndPoint endPoint )
         {
@@ -29,9 +28,26 @@ namespace SteamKit2
         }
     }
 
+    class ConnectedEventArgs : EventArgs
+    {
+        public bool SecureChannel { get; }
+        public EUniverse Universe { get; }
+
+        public ConnectedEventArgs( bool secureChannel )
+            : this( secureChannel, EUniverse.Invalid )
+        {
+        }
+
+        public ConnectedEventArgs( bool secureChannel, EUniverse universe )
+        {
+            this.SecureChannel = secureChannel;
+            this.Universe = universe;
+        }
+    }
+
     class DisconnectedEventArgs : EventArgs
     {
-        public bool UserInitiated { get; private set; }
+        public bool UserInitiated { get; }
 
         public DisconnectedEventArgs( bool userInitiated )
         {
@@ -126,8 +142,7 @@ namespace SteamKit2
         /// <param name="e">The <see cref="SteamKit2.NetMsgEventArgs"/> instance containing the event data.</param>
         protected void OnNetMsgReceived( NetMsgEventArgs e )
         {
-            if ( NetMsgReceived != null )
-                NetMsgReceived( this, e );
+            NetMsgReceived?.Invoke(this, e);
         }
 
         /// <summary>
@@ -139,11 +154,10 @@ namespace SteamKit2
         /// <summary>
         /// Occurs when the physical connection is established.
         /// </summary>
-        public event EventHandler Connected;
-        protected void OnConnected(EventArgs e)
+        public event EventHandler<ConnectedEventArgs> Connected;
+        protected void OnConnected( ConnectedEventArgs e )
         {
-            if (Connected != null)
-                Connected(this, e);
+            Connected?.Invoke(this, e);
         }
 
         /// <summary>
@@ -152,8 +166,7 @@ namespace SteamKit2
         public event EventHandler<DisconnectedEventArgs> Disconnected;
         protected void OnDisconnected( DisconnectedEventArgs e )
         {
-            if ( Disconnected != null )
-                Disconnected( this, e );
+            Disconnected?.Invoke(this, e);
         }
 
         /// <summary>

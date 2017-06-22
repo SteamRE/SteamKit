@@ -596,7 +596,7 @@ namespace SteamKit2
             remoteConnId = packet.Header.SourceConnID;
             inSeqHandled = packet.Header.SeqThis;
 
-            OnConnected( EventArgs.Empty );
+            OnConnected( new ConnectedEventArgs( secureChannel: false ) );
         }
 
         /// <summary>

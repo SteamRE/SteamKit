@@ -247,8 +247,7 @@ namespace SteamKit2.Internal
         /// <returns>List of server endpoints</returns>
         public List<IPEndPoint> GetServersOfType( EServerType type )
         {
-            HashSet<IPEndPoint> set;
-            if ( !serverMap.TryGetValue( type, out set ) )
+            if ( !serverMap.TryGetValue( type, out var set ) )
                 return new List<IPEndPoint>();
 
             return set.ToList();
@@ -287,7 +286,7 @@ namespace SteamKit2.Internal
             if ( ( !encryptionSetup && pendingNetFilterEncryption == null && packetMsg.MsgType != EMsg.ChannelEncryptRequest ) ||
                  ( !encryptionSetup && pendingNetFilterEncryption != null && packetMsg.MsgType != EMsg.ChannelEncryptRequest && packetMsg.MsgType != EMsg.ChannelEncryptResult ) )
             {
-                DebugLog.WriteLine( "CMClient", "Rejected EMsg: {0} during channel setup" );
+                DebugLog.WriteLine( "CMClient", "Rejected EMsg: {0} during channel setup", packetMsg.MsgType );
                 return false;
             }
 
@@ -327,6 +326,13 @@ namespace SteamKit2.Internal
             return true;
         }
         /// <summary>
+        /// Called when the client is securely connected to Steam3.
+        /// </summary>
+        protected virtual void OnClientConnected( EResult result, EUniverse universe )
+        {
+            ConnectedUniverse = universe;
+        }
+        /// <summary>
         /// Called when the client is physically disconnected from Steam3.
         /// </summary>
         protected virtual void OnClientDisconnected( bool userInitiated )
@@ -343,9 +349,15 @@ namespace SteamKit2.Internal
             OnClientMsgReceived( GetPacketMsg( e.Data ) );
         }
 
-        void Connected( object sender, EventArgs e )
+        void Connected( object sender, ConnectedEventArgs e )
         {
             Servers.TryMark( connection.CurrentEndPoint, ServerQuality.Good );
+
+            if ( e.SecureChannel )
+            {
+                encryptionSetup = true;
+                OnClientConnected( EResult.OK, e.Universe );
+            }
         }
 
         void Disconnected( object sender, DisconnectedEventArgs e )
@@ -596,10 +608,9 @@ namespace SteamKit2.Internal
             {
                 var type = ( EServerType )server.server_type;
 
-                HashSet<IPEndPoint> endpointSet;
-                if ( !serverMap.TryGetValue( type, out endpointSet ) )
+                if ( !serverMap.TryGetValue( type, out var endpointSet ) )
                 {
-                    serverMap[ type ] = endpointSet = new HashSet<IPEndPoint>();
+                    serverMap[type] = endpointSet = new HashSet<IPEndPoint>();
                 }
 
                 endpointSet.Add( new IPEndPoint( NetHelpers.GetIPAddress( server.server_ip ), ( int )server.server_port ) );

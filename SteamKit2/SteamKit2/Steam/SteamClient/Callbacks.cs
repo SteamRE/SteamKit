@@ -25,12 +25,6 @@ namespace SteamKit2
             /// <value>The result.</value>
             public EResult Result { get; private set; }
 
-
-            internal ConnectedCallback( MsgChannelEncryptResult result )
-                : this( result.Result )
-            {
-            }
-
             internal ConnectedCallback( EResult result )
             {
                 this.Result = result;

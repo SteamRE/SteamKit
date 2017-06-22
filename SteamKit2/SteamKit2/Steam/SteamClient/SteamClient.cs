@@ -358,6 +358,17 @@ namespace SteamKit2
             return true;
         }
         /// <summary>
+        /// Called when the client is securely connected to Steam3.
+        /// </summary>
+        protected override void OnClientConnected( EResult result, EUniverse universe )
+        {
+            base.OnClientConnected( result, universe );
+
+            jobManager.SetTimeoutsEnabled( true );
+
+            PostCallback( new ConnectedCallback( result ) );
+        }
+        /// <summary>
         /// Called when the client is physically disconnected from Steam3.
         /// </summary>
         protected override void OnClientDisconnected( bool userInitiated )
@@ -379,9 +390,7 @@ namespace SteamKit2
 
             if ( encResult.Body.Result == EResult.OK )
             {
-                jobManager.SetTimeoutsEnabled( true );
-
-                PostCallback( new ConnectedCallback( encResult.Body ) );
+                OnClientConnected( encResult.Body.Result, ConnectedUniverse );
             }
         }
 

@@ -138,7 +138,7 @@ namespace SteamKit2
 
                 netThread.Start();
 
-                OnConnected(EventArgs.Empty);
+                OnConnected( new ConnectedEventArgs( secureChannel: false ) );
             }
             catch (Exception ex)
             {
