@@ -293,21 +293,25 @@ namespace SteamKit2
 
         public override void Disconnect()
         {
-            ConnectionState currentConnectionState = Interlocked.Exchange( ref activeConnectionState, null );
-
-            if ( currentConnectionState != null )
+            // acquire and hold connectLock such that the winning thread must complete this work before anyone else can Connect (or Disconnect no-op)
+            lock ( connectLock )
             {
-                lock ( currentConnectionState.ReleaseLock )
-                {
-                    if ( currentConnectionState.Released )
-                    {
-                        // nothing to do, it was already released
-                        return;
-                    }
+                ConnectionState currentConnectionState = Interlocked.Exchange( ref activeConnectionState, null );
 
-                    // signal the current state to cancel regardless of where it is in the process. Wait for the post-release disconnect callback result to ensure it is queued
-                    currentConnectionState.CancellationToken.Cancel();
-                    currentConnectionState.IssuedDisconnectResult.WaitOne();
+                if ( currentConnectionState != null )
+                {
+                    lock ( currentConnectionState.ReleaseLock )
+                    {
+                        if ( currentConnectionState.Released )
+                        {
+                            // nothing to do, it was already released
+                            return;
+                        }
+
+                        // signal the current state to cancel regardless of where it is in the process. Wait for the post-release disconnect callback result to ensure it is queued
+                        currentConnectionState.CancellationToken.Cancel();
+                        currentConnectionState.IssuedDisconnectResult.WaitOne();
+                    }
                 }
             }
         }
