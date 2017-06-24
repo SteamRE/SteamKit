@@ -41,6 +41,8 @@ namespace SteamKit2
             get { return destination; }
         }
 
+        public override CMConnectionType Kind => CMConnectionType.Socket;
+
         private void Shutdown()
         {
             try

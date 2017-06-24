@@ -5,7 +5,6 @@
 
 
 
-using SteamKit2.Discovery;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -15,6 +14,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading.Tasks;
+using SteamKit2.Discovery;
 
 namespace SteamKit2.Internal
 {
@@ -175,7 +175,7 @@ namespace SteamKit2.Internal
 
             if ( cmServer == null )
             {
-                epTask = Servers.GetNextServerCandidateAsync()
+                epTask = Servers.GetNextServerCandidateAsync( connection.Kind )
                     .ContinueWith(r => r.Result.EndPoint, TaskContinuationOptions.OnlyOnRanToCompletion);
             }
             else

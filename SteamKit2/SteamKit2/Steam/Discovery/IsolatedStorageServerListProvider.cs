@@ -77,7 +77,7 @@ namespace SteamKit2.Discovery
                         Serializer.Serialize(fileStream,
                             endpoints.Select(ep =>
                             {
-                                if (ep.ServerType == CMServerType.WebSocket)
+                                if (ep.ServerType == CMConnectionType.WebSocket)
                                 {
                                     return new BasicServerListProto
                                     {

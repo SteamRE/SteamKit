@@ -1,7 +1,7 @@
-﻿using SteamKit2.Discovery;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using SteamKit2.Discovery;
 using Xunit;
 
 namespace Tests

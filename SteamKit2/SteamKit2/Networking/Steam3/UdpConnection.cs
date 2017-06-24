@@ -5,7 +5,6 @@
 
 
 
-using SteamKit2.Internal;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -13,6 +12,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
+using SteamKit2.Internal;
 
 namespace SteamKit2
 {
@@ -107,6 +107,8 @@ namespace SteamKit2
         {
             get { return remoteEndPoint; }
         }
+
+        public override CMConnectionType Kind => CMConnectionType.Socket;
 
         /// <summary>
         /// Connects to the specified CM server.

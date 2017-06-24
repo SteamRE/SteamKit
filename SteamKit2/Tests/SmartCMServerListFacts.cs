@@ -1,8 +1,8 @@
-﻿using System.Net;
+﻿using System.Collections.Generic;
+using System.Net;
 using SteamKit2;
-using Xunit;
 using SteamKit2.Discovery;
-using System.Collections.Generic;
+using Xunit;
 
 namespace Tests
 {
@@ -49,7 +49,7 @@ namespace Tests
         [Fact]
         public void GetNextServerCandidate_ReturnsNull_IfListIsEmpty()
         {
-            var endPoint = serverList.GetNextServerCandidate();
+            var endPoint = serverList.GetNextServerCandidate( CMConnectionType.Socket );
             Assert.Null( endPoint );
         }
 
@@ -61,7 +61,7 @@ namespace Tests
             var record = CMServerRecord.SocketServer( new IPEndPoint( IPAddress.Loopback, 27015 ) );
             serverList.ReplaceList( new List<CMServerRecord>() { record } );
 
-            var nextRecord = serverList.GetNextServerCandidate();
+            var nextRecord = serverList.GetNextServerCandidate( CMConnectionType.Socket );
             Assert.Equal( record, nextRecord );
         }
 
@@ -74,7 +74,7 @@ namespace Tests
             serverList.ReplaceList( new List<CMServerRecord>() { record } );
             serverList.TryMark( record.EndPoint, ServerQuality.Bad );
 
-            var nextRecord = serverList.GetNextServerCandidate();
+            var nextRecord = serverList.GetNextServerCandidate( CMConnectionType.Socket );
             Assert.Equal( record, nextRecord );
         }
 
@@ -92,12 +92,12 @@ namespace Tests
             serverList.TryMark( badRecord.EndPoint, ServerQuality.Bad );
             serverList.TryMark( goodRecord.EndPoint, ServerQuality.Good );
 
-            var nextRecord = serverList.GetNextServerCandidate();
+            var nextRecord = serverList.GetNextServerCandidate( CMConnectionType.Socket );
             Assert.Equal( neutralRecord, nextRecord );
 
             serverList.TryMark( badRecord.EndPoint, ServerQuality.Good);
 
-            nextRecord = serverList.GetNextServerCandidate();
+            nextRecord = serverList.GetNextServerCandidate( CMConnectionType.Socket );
             Assert.Equal( badRecord, nextRecord );
         }
         

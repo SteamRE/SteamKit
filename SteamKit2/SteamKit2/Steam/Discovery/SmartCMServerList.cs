@@ -124,14 +124,12 @@ namespace SteamKit2.Discovery
             DebugWrite( "Resolving server list" );
 
             IEnumerable<CMServerRecord> serverList = await ServerListProvider.FetchServerListAsync().ConfigureAwait( false );
-            List<CMServerRecord> endpointList = serverList.ToList();
+            IReadOnlyCollection<CMServerRecord> endpointList = serverList.ToList();
 
             if ( endpointList.Count == 0 && canFetchDirectory )
             {
                 DebugWrite( "Server list provider had no entries, will query SteamDirectory" );
-                var directoryList = await SteamDirectory.LoadAsync( CellID ).ConfigureAwait( false );
-
-                endpointList = directoryList.Select(CMServerRecord.SocketServer).ToList();
+                endpointList = await SteamDirectory.LoadAsync( CellID ).ConfigureAwait( false );
             }
 
             if ( endpointList.Count == 0 && canFetchDirectory )
@@ -254,7 +252,7 @@ namespace SteamKit2.Discovery
         /// Perform the actual score lookup of the server list and return the candidate
         /// </summary>
         /// <returns>IPEndPoint candidate</returns>
-        private CMServerRecord GetNextServerCandidateInternal()
+        private CMServerRecord GetNextServerCandidateInternal( CMConnectionType type )
         {
             lock ( listLock )
             {
@@ -264,7 +262,8 @@ namespace SteamKit2.Discovery
                 ResetOldScores();
 
                 var serverInfo = servers
-                    .Select( (s, index) => new { EndPoint = s.Record, IsBad = s.LastBadConnectionDateTimeUtc.HasValue, Index = index } )
+                    .Where( s => s.Record.ServerType == type )
+                    .Select( (s, index) => new { Record = s.Record, IsBad = s.LastBadConnectionDateTimeUtc.HasValue, Index = index } )
                     .OrderBy( x => x.IsBad )
                     .ThenBy( x => x.Index )
                     .FirstOrDefault();
@@ -274,35 +273,37 @@ namespace SteamKit2.Discovery
                     return null;
                 }
 
-                DebugWrite( $"Next server candidiate: {serverInfo.EndPoint}" );
-                return serverInfo.EndPoint;
+                DebugWrite( $"Next server candidiate: {serverInfo.Record.EndPoint} ({serverInfo.Record.ServerType})" );
+                return serverInfo.Record;
             }
         }
 
         /// <summary>
         /// Get the next server in the list.
         /// </summary>
+        /// <param name="type">The <see cref="CMConnectionType"/> of the server to return.</param>
         /// <returns>An <see cref="System.Net.IPEndPoint"/>, or null if the list is empty.</returns>
-        public CMServerRecord GetNextServerCandidate()
+        public CMServerRecord GetNextServerCandidate( CMConnectionType type )
         {
             if ( !WaitForServersFetched() )
             {
                 return null;
             }
 
-            return GetNextServerCandidateInternal();
+            return GetNextServerCandidateInternal( type );
         }
 
         /// <summary>
         /// Get the next server in the list.
         /// </summary>
+        /// <param name="type">The <see cref="CMConnectionType"/> of the server to return.</param>
         /// <returns>An <see cref="System.Net.IPEndPoint"/>, or null if the list is empty.</returns>
-        public async Task<CMServerRecord> GetNextServerCandidateAsync()
+        public async Task<CMServerRecord> GetNextServerCandidateAsync( CMConnectionType type )
         {
             StartFetchingServers();
             await listTask.ConfigureAwait( false );
 
-            return GetNextServerCandidateInternal();
+            return GetNextServerCandidateInternal( type );
         }
 
         /// <summary>

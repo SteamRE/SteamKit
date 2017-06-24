@@ -197,6 +197,12 @@ namespace SteamKit2
         /// </summary>
         /// <param name="filter">filter implementing <see cref="INetFilterEncryption"/></param>
         public abstract void SetNetEncryptionFilter( INetFilterEncryption filter );
+
+
+        /// <summary>
+        /// The type of connection method that this connection uses.
+        /// </summary>
+        public abstract CMConnectionType Kind { get; }
     }
 
 }

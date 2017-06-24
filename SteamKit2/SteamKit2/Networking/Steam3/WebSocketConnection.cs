@@ -1,5 +1,4 @@
-﻿using SteamKit2.Internal;
-using System;
+﻿using System;
 using System.IO;
 using System.Net;
 using System.Net.WebSockets;
@@ -13,6 +12,8 @@ namespace SteamKit2
         WebSocketContext currentContext;
 
         public override EndPoint CurrentEndPoint => currentContext?.EndPoint;
+
+        public override CMConnectionType Kind => CMConnectionType.WebSocket;
 
         public override async void Connect(Task<EndPoint> endPointTask, int timeout = 5000)
         {
@@ -48,7 +49,7 @@ namespace SteamKit2
         }
 
         public override void Disconnect()
-            => DisconnectCore(userInitiated: true);
+            => DisconnectCore(userInitiated: true, specificContext: null);
 
         public override IPAddress GetLocalIP() => IPAddress.None;
 
@@ -61,23 +62,25 @@ namespace SteamKit2
             catch (Exception ex)
             {
                 DebugLog.WriteLine(nameof(WebSocketConnection), "Exception while sending data: {0} - {1}", ex.GetType().FullName, ex.Message);
-                DisconnectCore(userInitiated: false);
+                DisconnectCore(userInitiated: false, specificContext: null);
             }
         }
 
         public override void SetNetEncryptionFilter(INetFilterEncryption filter)
-        {
-            throw new NotImplementedException();
-        }
+            => throw new NotSupportedException("Websocket uses the underlying TLS encryption. Custom encryption is not supported.");
 
-        void DisconnectCore(bool userInitiated)
+        void DisconnectCore(bool userInitiated, WebSocketContext specificContext)
         {
             var oldContext = Interlocked.Exchange(ref currentContext, null);
-            if (oldContext != null)
+            if (oldContext != null && (specificContext == null || oldContext == specificContext))
             {
                 oldContext.Dispose();
 
                 OnDisconnected(new DisconnectedEventArgs(userInitiated));
+            }
+            else
+            {
+                specificContext?.Dispose();
             }
         }
 
@@ -115,20 +118,25 @@ namespace SteamKit2
                 catch (Exception ex)
                 {
                     DebugLog.WriteLine(nameof(WebSocketContext), "Exception connecting websocket: {0} - {1}", ex.GetType().FullName, ex.Message);
-                    connection.DisconnectCore(userInitiated: false);
+                    DisconnectNonBlocking(userInitiated: false);
                     return;
                 }
 
+                DebugLog.WriteLine(nameof(WebSocketContext), "Connected to {0}", uri);
                 connection.OnConnected(new ConnectedEventArgs(secureChannel: true, universe: EUniverse.Public));
 
                 while (!cts.Token.IsCancellationRequested && socket.State == WebSocketState.Open)
                 {
                     var packet = await ReadMessageAsync().ConfigureAwait(false);
-                    connection.OnNetMsgReceived(new NetMsgEventArgs(packet, EndPoint));
+                    if (packet != null)
+                    {
+                        connection.OnNetMsgReceived(new NetMsgEventArgs(packet, EndPoint));
+                    }
                 }
 
                 if (socket.State == WebSocketState.Open)
                 {
+                    DebugLog.WriteLine(nameof(WebSocketContext), "Closing connection...");
                     await socket.CloseAsync(WebSocketCloseStatus.NormalClosure, null, default(CancellationToken)).ConfigureAwait(false);
                 }
             }
@@ -138,6 +146,7 @@ namespace SteamKit2
                 var data = clientMsg.Serialize();
                 var segment = new ArraySegment<byte>(data, 0, data.Length);
                 await socket.SendAsync(segment, WebSocketMessageType.Binary, true, cts.Token).ConfigureAwait(false);
+                DebugLog.WriteLine(nameof(WebSocketContext), "Sent {0} bytes.", data.Length);
             }
 
             public void Dispose()
@@ -166,9 +175,9 @@ namespace SteamKit2
                         {
                             result = await socket.ReceiveAsync(segment, cts.Token).ConfigureAwait(false);
                         }
-                        catch (ObjectDisposedException) when (cts.Token.IsCancellationRequested)
+                        catch (ObjectDisposedException)
                         {
-                            connection.Disconnect();
+                            DisconnectNonBlocking(userInitiated: cts.Token.IsCancellationRequested);
                             return null;
                         }
 
@@ -176,6 +185,7 @@ namespace SteamKit2
                         {
                             case WebSocketMessageType.Binary:
                                 ms.Write(buffer, 0, result.Count);
+                                DebugLog.WriteLine(nameof(WebSocketContext), "Recieved {0} bytes.", result.Count);
                                 break;
 
                             case WebSocketMessageType.Text:
@@ -184,7 +194,7 @@ namespace SteamKit2
 
                             case WebSocketMessageType.Close:
                             default:
-                                connection.Disconnect();
+                                DisconnectNonBlocking(userInitiated: false);
                                 return null;
                         }
                     }
@@ -193,6 +203,9 @@ namespace SteamKit2
                     return ms.ToArray();
                 }
             }
+
+            void DisconnectNonBlocking(bool userInitiated)
+                => Task.Run(() => connection.DisconnectCore(userInitiated, this));
         }
     }
 }
