@@ -214,6 +214,14 @@ namespace SteamKit2
                 RegexOptions.Compiled | RegexOptions.IgnoreCase
             );
 
+            /// <summary>
+            /// Gets or sets the URI which is used to execute WebAPI requests.
+            /// When overriden, "secure" option is ignored. This also affects internal SteamKit requests.
+            /// </summary>
+            /// <value>
+            /// Endpoint URI which is used to execute WebAPI requests. For example, "http://steam-api.local/proxy".
+            /// </value>
+            public static string HttpEndpoint { get; set; }
 
             internal AsyncInterface( string iface, string apiKey )
             {
@@ -268,8 +276,16 @@ namespace SteamKit2
                 var urlBuilder = new StringBuilder();
                 var paramBuilder = new StringBuilder();
 
-                urlBuilder.Append( secure ? "https://" : "http://" );
-                urlBuilder.Append( API_ROOT );
+                if ( HttpEndpoint != null )
+                {
+                    urlBuilder.Append( HttpEndpoint );
+                }
+                else
+                {
+                    urlBuilder.Append( secure ? "https://" : "http://" );
+                    urlBuilder.Append( API_ROOT );
+                }
+
                 urlBuilder.AppendFormat( "/{0}/{1}/v{2}", iface, func, version );
 
                 var isGet = HttpMethod.Get.Equals( method );
