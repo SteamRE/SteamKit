@@ -83,9 +83,9 @@ namespace Tests
         {
             serverList.GetAllEndPoints();
 
-            var goodRecord = CMServerRecord.SocketServer( new IPEndPoint(IPAddress.Loopback, 27015));
-            var neutralRecord = CMServerRecord.SocketServer( new IPEndPoint(IPAddress.Loopback, 27016));
-            var badRecord = CMServerRecord.SocketServer( new IPEndPoint(IPAddress.Loopback, 27017));
+            var goodRecord = CMServerRecord.SocketServer( new IPEndPoint( IPAddress.Loopback, 27015 ) );
+            var neutralRecord = CMServerRecord.SocketServer( new IPEndPoint( IPAddress.Loopback, 27016 ) );
+            var badRecord = CMServerRecord.SocketServer( new IPEndPoint( IPAddress.Loopback, 27017 ) );
 
             serverList.ReplaceList( new List<CMServerRecord>() { badRecord, neutralRecord, goodRecord } );
 
@@ -100,7 +100,33 @@ namespace Tests
             nextRecord = serverList.GetNextServerCandidate( CMConnectionType.Socket );
             Assert.Equal( badRecord, nextRecord );
         }
-        
+
+        [Fact]
+        public void GetNextServerCandidate_OnlyReturnsMatchingServerOfType_Socket()
+        {
+            var record = CMServerRecord.WebSocketServer( "localhost:443" );
+            serverList.ReplaceList( new List<CMServerRecord>() { record } );
+
+            var endPoint = serverList.GetNextServerCandidate( CMConnectionType.Socket );
+            Assert.Null( endPoint );
+
+            endPoint = serverList.GetNextServerCandidate( CMConnectionType.WebSocket );
+            Assert.Same( record, endPoint );
+        }
+
+        [Fact]
+        public void GetNextServerCandidate_OnlyReturnsMatchingServerOfType_WebSocket()
+        {
+            var record = CMServerRecord.SocketServer( new IPEndPoint( IPAddress.Loopback, 27015 ) );
+            serverList.ReplaceList( new List<CMServerRecord>() { record } );
+
+            var endPoint = serverList.GetNextServerCandidate( CMConnectionType.WebSocket );
+            Assert.Null( endPoint );
+
+            endPoint = serverList.GetNextServerCandidate( CMConnectionType.Socket );
+            Assert.Same( record, endPoint );
+        }
+
         [Fact]
         public void TryMark_ReturnsTrue_IfServerInList()
         {
