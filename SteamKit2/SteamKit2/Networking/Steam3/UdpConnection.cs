@@ -363,10 +363,10 @@ namespace SteamKit2
             // Variables that will be used deeper in the function; locating them here avoids recreating
             // them since they don't need to be.
             var userRequestedDisconnect = false;
-            EndPoint packetSender = (EndPoint)new IPEndPoint(IPAddress.Any, 0);
+            EndPoint packetSender = new IPEndPoint(IPAddress.Any, 0);
             byte[] buf = new byte[2048];
 
-            var epTask = param as Task<IPEndPoint>;
+            var epTask = param as Task<EndPoint>;
             try
             {
                 if ( epTask != null )
