@@ -8,10 +8,10 @@ namespace SteamKit2.Discovery
     /// </summary>
     public class CMServerRecord
     {
-        CMServerRecord(EndPoint endPoint, CMConnectionType serverType)
+        CMServerRecord(EndPoint endPoint, ProtocolTypes protocolTypes)
         {
             EndPoint = endPoint ?? throw new ArgumentNullException(nameof(endPoint));
-            ServerType = serverType;
+            ProtocolTypes = protocolTypes;
         }
 
         /// <summary>
@@ -20,9 +20,9 @@ namespace SteamKit2.Discovery
         public EndPoint EndPoint { get; }
 
         /// <summary>
-        /// The type of the server to connect to.
+        /// The various protocol types that can be used to communicate with this server.
         /// </summary>
-        public CMConnectionType ServerType { get; }
+        public ProtocolTypes ProtocolTypes { get; }
 
         /// <summary>
         /// Gets the IP address of the associated endpoint, if this is a socket serve.r
@@ -77,7 +77,7 @@ namespace SteamKit2.Discovery
         /// <param name="endPoint">The IP address and port of the server.</param>
         /// <returns>A new <see cref="CMServerRecord"/> instance</returns>
         public static CMServerRecord SocketServer(IPEndPoint endPoint)
-            => new CMServerRecord(endPoint, CMConnectionType.Socket);
+            => new CMServerRecord(endPoint, ProtocolTypes.Tcp | ProtocolTypes.Udp);
 
         /// <summary>
         /// Creates a WebSocket server given an address in the form of "hostname:port".
@@ -112,7 +112,7 @@ namespace SteamKit2.Discovery
                 endPoint = new DnsEndPoint(address, DefaultPort);
             }
 
-            return new CMServerRecord(endPoint, CMConnectionType.WebSocket);
+            return new CMServerRecord(endPoint, ProtocolTypes.WebSocket);
         }
     }
 }

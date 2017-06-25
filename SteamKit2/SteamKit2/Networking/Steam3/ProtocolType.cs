@@ -1,23 +1,37 @@
-﻿namespace SteamKit2
+﻿/*
+ * This file is subject to the terms and conditions defined in
+ * file 'license.txt', which is part of this source code package.
+ */
+
+
+using System;
+
+namespace SteamKit2
 {
     /// <summary>
     /// The type of communications protocol to use when communicating with the Steam backend
     /// </summary>
-    public enum ProtocolType
+    [Flags]
+    public enum ProtocolTypes
     {
         /// <summary>
         /// TCP
         /// </summary>
-        Tcp,
+        Tcp = 1 << 0,
 
         /// <summary>
         /// UDP
         /// </summary>
-        Udp,
+        Udp = 1 << 1,
 
         /// <summary>
         /// WebSockets (HTTP / TLS)
         /// </summary>
-        WebSocket
+        WebSocket = 1 << 2,
+        
+        /// <summary>
+        /// All available protocol types
+        /// </summary>
+        All = Tcp | Udp | WebSocket
     }
 }

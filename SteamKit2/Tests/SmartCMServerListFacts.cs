@@ -49,7 +49,7 @@ namespace Tests
         [Fact]
         public void GetNextServerCandidate_ReturnsNull_IfListIsEmpty()
         {
-            var endPoint = serverList.GetNextServerCandidate( CMConnectionType.Socket );
+            var endPoint = serverList.GetNextServerCandidate( ProtocolTypes.Tcp );
             Assert.Null( endPoint );
         }
 
@@ -61,7 +61,7 @@ namespace Tests
             var record = CMServerRecord.SocketServer( new IPEndPoint( IPAddress.Loopback, 27015 ) );
             serverList.ReplaceList( new List<CMServerRecord>() { record } );
 
-            var nextRecord = serverList.GetNextServerCandidate( CMConnectionType.Socket );
+            var nextRecord = serverList.GetNextServerCandidate( ProtocolTypes.Tcp );
             Assert.Equal( record, nextRecord );
         }
 
@@ -74,7 +74,7 @@ namespace Tests
             serverList.ReplaceList( new List<CMServerRecord>() { record } );
             serverList.TryMark( record.EndPoint, ServerQuality.Bad );
 
-            var nextRecord = serverList.GetNextServerCandidate( CMConnectionType.Socket );
+            var nextRecord = serverList.GetNextServerCandidate( ProtocolTypes.Tcp );
             Assert.Equal( record, nextRecord );
         }
 
@@ -92,39 +92,51 @@ namespace Tests
             serverList.TryMark( badRecord.EndPoint, ServerQuality.Bad );
             serverList.TryMark( goodRecord.EndPoint, ServerQuality.Good );
 
-            var nextRecord = serverList.GetNextServerCandidate( CMConnectionType.Socket );
+            var nextRecord = serverList.GetNextServerCandidate( ProtocolTypes.Tcp );
             Assert.Equal( neutralRecord, nextRecord );
 
             serverList.TryMark( badRecord.EndPoint, ServerQuality.Good);
 
-            nextRecord = serverList.GetNextServerCandidate( CMConnectionType.Socket );
+            nextRecord = serverList.GetNextServerCandidate( ProtocolTypes.Tcp );
             Assert.Equal( badRecord, nextRecord );
         }
 
         [Fact]
-        public void GetNextServerCandidate_OnlyReturnsMatchingServerOfType_Socket()
+        public void GetNextServerCandidate_OnlyReturnsMatchingServerOfType()
         {
             var record = CMServerRecord.WebSocketServer( "localhost:443" );
             serverList.ReplaceList( new List<CMServerRecord>() { record } );
 
-            var endPoint = serverList.GetNextServerCandidate( CMConnectionType.Socket );
+            var endPoint = serverList.GetNextServerCandidate( ProtocolTypes.Tcp );
+            Assert.Null( endPoint );
+            endPoint = serverList.GetNextServerCandidate( ProtocolTypes.Udp );
+            Assert.Null( endPoint );
+            endPoint = serverList.GetNextServerCandidate( ProtocolTypes.Tcp | ProtocolTypes.Udp);
             Assert.Null( endPoint );
 
-            endPoint = serverList.GetNextServerCandidate( CMConnectionType.WebSocket );
+            endPoint = serverList.GetNextServerCandidate( ProtocolTypes.WebSocket );
             Assert.Same( record, endPoint );
-        }
 
-        [Fact]
-        public void GetNextServerCandidate_OnlyReturnsMatchingServerOfType_WebSocket()
-        {
-            var record = CMServerRecord.SocketServer( new IPEndPoint( IPAddress.Loopback, 27015 ) );
+            endPoint = serverList.GetNextServerCandidate( ProtocolTypes.All );
+            Assert.Null( endPoint );
+
+            record = CMServerRecord.SocketServer( new IPEndPoint( IPAddress.Loopback, 27015 ) );
             serverList.ReplaceList( new List<CMServerRecord>() { record } );
 
-            var endPoint = serverList.GetNextServerCandidate( CMConnectionType.WebSocket );
+            endPoint = serverList.GetNextServerCandidate( ProtocolTypes.WebSocket );
             Assert.Null( endPoint );
 
-            endPoint = serverList.GetNextServerCandidate( CMConnectionType.Socket );
+            endPoint = serverList.GetNextServerCandidate( ProtocolTypes.Tcp );
             Assert.Same( record, endPoint );
+
+            endPoint = serverList.GetNextServerCandidate( ProtocolTypes.Udp);
+            Assert.Same( record, endPoint );
+
+            endPoint = serverList.GetNextServerCandidate( ProtocolTypes.Tcp | ProtocolTypes.Udp );
+            Assert.Same( record, endPoint );
+
+            endPoint = serverList.GetNextServerCandidate( ProtocolTypes.All );
+            Assert.Null( endPoint );
         }
 
         [Fact]

@@ -47,7 +47,7 @@ namespace SteamKit2
 
         SteamClient steamClient;
 
-        Connection connection;
+        IConnection connection;
         INetFilterEncryption pendingNetFilterEncryption;
 
 
@@ -269,7 +269,7 @@ namespace SteamKit2
 
             try
             {
-                connection.Send( msg );
+                connection.Send( msg.Serialize() );
             }
             catch ( IOException )
             {
@@ -392,7 +392,7 @@ namespace SteamKit2
             if ( encResult.Body.Result == EResult.OK && pendingNetFilterEncryption != null )
             {
                 Debug.Assert( pendingNetFilterEncryption != null );
-                connection.SetNetEncryptionFilter( pendingNetFilterEncryption );
+                // connection.SetNetEncryptionFilter( pendingNetFilterEncryption );
 
                 pendingNetFilterEncryption = null;
                 steamClient.PostCallback( new ConnectedCallback( encResult.Body ) );

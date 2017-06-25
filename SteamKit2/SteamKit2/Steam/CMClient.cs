@@ -93,7 +93,7 @@ namespace SteamKit2.Internal
 
         internal bool ExpectDisconnection { get; set; }
 
-        Connection connection;
+        IConnection connection;
         bool encryptionSetup;
         INetFilterEncryption pendingNetFilterEncryption;
 
@@ -110,12 +110,10 @@ namespace SteamKit2.Internal
         /// <summary>
         /// Initializes a new instance of the <see cref="CMClient"/> class with a specific connection type.
         /// </summary>
-        /// <param name="type">The connection type to use.</param>
+        /// <param name="type">The connection types to use.</param>
         /// <exception cref="NotSupportedException">
-        /// The provided <see cref="ProtocolType"/> is not supported.
-        /// Only Tcp and Udp are available.
         /// </exception>
-        public CMClient( ProtocolType type = ProtocolType.Tcp )
+        public CMClient( ProtocolTypes type = ProtocolTypes.Tcp )
         {
             serverMap = new Dictionary<EServerType, HashSet<IPEndPoint>>();
 
@@ -124,15 +122,15 @@ namespace SteamKit2.Internal
 
             switch ( type )
             {
-                case ProtocolType.Tcp:
+                case ProtocolTypes.Tcp:
                     connection = new TcpConnection();
                     break;
 
-                case ProtocolType.Udp:
+                case ProtocolTypes.Udp:
                     connection = new UdpConnection();
                     break;
 
-                case ProtocolType.WebSocket:
+                case ProtocolTypes.WebSocket:
                     connection = new WebSocketConnection();
                     break;
 
@@ -175,7 +173,7 @@ namespace SteamKit2.Internal
 
             if ( cmServer == null )
             {
-                epTask = Servers.GetNextServerCandidateAsync( connection.Kind )
+                epTask = Servers.GetNextServerCandidateAsync( connection.ProtocolTypes )
                     .ContinueWith(r => r.Result.EndPoint, TaskContinuationOptions.OnlyOnRanToCompletion);
             }
             else
@@ -229,7 +227,7 @@ namespace SteamKit2.Internal
 
             try
             {
-                connection.Send( msg );
+                connection.Send( msg.Serialize() );
             }
             catch ( IOException )
             {
@@ -349,15 +347,9 @@ namespace SteamKit2.Internal
             OnClientMsgReceived( GetPacketMsg( e.Data ) );
         }
 
-        void Connected( object sender, ConnectedEventArgs e )
+        void Connected( object sender, EventArgs e )
         {
             Servers.TryMark( connection.CurrentEndPoint, ServerQuality.Good );
-
-            if ( e.SecureChannel )
-            {
-                encryptionSetup = true;
-                OnClientConnected( EResult.OK, e.Universe );
-            }
         }
 
         void Disconnected( object sender, DisconnectedEventArgs e )
@@ -567,7 +559,7 @@ namespace SteamKit2.Internal
             if ( encResult.Body.Result == EResult.OK && pendingNetFilterEncryption != null )
             {
                 Debug.Assert( pendingNetFilterEncryption != null );
-                connection.SetNetEncryptionFilter( pendingNetFilterEncryption );
+                // connection.SetNetEncryptionFilter( pendingNetFilterEncryption );
 
                 pendingNetFilterEncryption = null;
                 encryptionSetup = true;

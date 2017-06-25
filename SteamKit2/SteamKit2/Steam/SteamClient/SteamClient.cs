@@ -40,7 +40,7 @@ namespace SteamKit2
         /// Initializes a new instance of the <see cref="SteamClient"/> class with a specific connection type.
         /// </summary>
         /// <param name="type">The connection type to use.</param>
-        public SteamClient( ProtocolType type = ProtocolType.Tcp )
+        public SteamClient( ProtocolTypes type = ProtocolTypes.Tcp )
             : base( type )
         {
             callbackQueue = new Queue<ICallbackMsg>();

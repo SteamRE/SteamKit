@@ -252,7 +252,7 @@ namespace SteamKit2.Discovery
         /// Perform the actual score lookup of the server list and return the candidate
         /// </summary>
         /// <returns>IPEndPoint candidate</returns>
-        private CMServerRecord GetNextServerCandidateInternal( CMConnectionType type )
+        private CMServerRecord GetNextServerCandidateInternal( ProtocolTypes supportedProtocolTypes )
         {
             lock ( listLock )
             {
@@ -262,7 +262,7 @@ namespace SteamKit2.Discovery
                 ResetOldScores();
 
                 var serverInfo = servers
-                    .Where( s => s.Record.ServerType == type )
+                    .Where( s => (s.Record.ProtocolTypes & supportedProtocolTypes) == supportedProtocolTypes )
                     .Select( (s, index) => new { Record = s.Record, IsBad = s.LastBadConnectionDateTimeUtc.HasValue, Index = index } )
                     .OrderBy( x => x.IsBad )
                     .ThenBy( x => x.Index )
@@ -273,7 +273,7 @@ namespace SteamKit2.Discovery
                     return null;
                 }
 
-                DebugWrite( $"Next server candidiate: {serverInfo.Record.EndPoint} ({serverInfo.Record.ServerType})" );
+                DebugWrite( $"Next server candidiate: {serverInfo.Record.EndPoint} ({serverInfo.Record.ProtocolTypes})" );
                 return serverInfo.Record;
             }
         }
@@ -281,29 +281,29 @@ namespace SteamKit2.Discovery
         /// <summary>
         /// Get the next server in the list.
         /// </summary>
-        /// <param name="type">The <see cref="CMConnectionType"/> of the server to return.</param>
+        /// <param name="supportedProtocolTypes">The minimum supported <see cref="ProtocolTypes"/> of the server to return.</param>
         /// <returns>An <see cref="System.Net.IPEndPoint"/>, or null if the list is empty.</returns>
-        public CMServerRecord GetNextServerCandidate( CMConnectionType type )
+        public CMServerRecord GetNextServerCandidate( ProtocolTypes supportedProtocolTypes )
         {
             if ( !WaitForServersFetched() )
             {
                 return null;
             }
 
-            return GetNextServerCandidateInternal( type );
+            return GetNextServerCandidateInternal( supportedProtocolTypes );
         }
 
         /// <summary>
         /// Get the next server in the list.
         /// </summary>
-        /// <param name="type">The <see cref="CMConnectionType"/> of the server to return.</param>
+        /// <param name="supportedProtocolTypes">The minimum supported <see cref="ProtocolTypes"/> of the server to return.</param>
         /// <returns>An <see cref="System.Net.IPEndPoint"/>, or null if the list is empty.</returns>
-        public async Task<CMServerRecord> GetNextServerCandidateAsync( CMConnectionType type )
+        public async Task<CMServerRecord> GetNextServerCandidateAsync( ProtocolTypes supportedProtocolTypes )
         {
             StartFetchingServers();
             await listTask.ConfigureAwait( false );
 
-            return GetNextServerCandidateInternal( type );
+            return GetNextServerCandidateInternal( supportedProtocolTypes );
         }
 
         /// <summary>

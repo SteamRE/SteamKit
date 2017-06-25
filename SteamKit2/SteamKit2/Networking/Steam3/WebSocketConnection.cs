@@ -7,15 +7,21 @@ using System.Threading.Tasks;
 
 namespace SteamKit2
 {
-    class WebSocketConnection : Connection
+    class WebSocketConnection : IConnection
     {
         WebSocketContext currentContext;
 
-        public override EndPoint CurrentEndPoint => currentContext?.EndPoint;
+        public event EventHandler<NetMsgEventArgs> NetMsgReceived;
 
-        public override CMConnectionType Kind => CMConnectionType.WebSocket;
+        public event EventHandler Connected;
 
-        public override async void Connect(Task<EndPoint> endPointTask, int timeout = 5000)
+        public event EventHandler<DisconnectedEventArgs> Disconnected;
+
+        public EndPoint CurrentEndPoint => currentContext?.EndPoint;
+
+        public ProtocolTypes ProtocolTypes => ProtocolTypes.WebSocket;
+
+        public async void Connect(Task<EndPoint> endPointTask, int timeout = 5000)
         {
             EndPoint endPoint;
             try
@@ -25,14 +31,14 @@ namespace SteamKit2
             catch (Exception ex)
             {
                 DebugLog.WriteLine(nameof(WebSocketConnection), "Exception while awaiting endpoint task: {0} - {1}", ex.GetType().FullName, ex.Message);
-                OnDisconnected(new DisconnectedEventArgs(false));
+                Disconnected?.Invoke(this, new DisconnectedEventArgs(false));
                 return;
             }
 
             if (!(endPoint is DnsEndPoint dnsEp))
             {
                 DebugLog.WriteLine(nameof(WebSocketConnection), "Given endpoint was not a DnsEndPoint.");
-                OnDisconnected(new DisconnectedEventArgs(false));
+                Disconnected?.Invoke(this, new DisconnectedEventArgs(false));
                 return;
             }
 
@@ -42,22 +48,22 @@ namespace SteamKit2
             {
                 DebugLog.WriteLine(nameof(WebSocketConnection), "Attempted to connect while already connected. Closing old connection...");
                 oldContext.Dispose();
-                OnDisconnected(new DisconnectedEventArgs(false));
+                Disconnected?.Invoke(this, new DisconnectedEventArgs(false));
             }
 
-            newContext.Start();
+            newContext.Start(TimeSpan.FromMilliseconds(timeout));
         }
 
-        public override void Disconnect()
+        public void Disconnect()
             => DisconnectCore(userInitiated: true, specificContext: null);
 
-        public override IPAddress GetLocalIP() => IPAddress.None;
+        public IPAddress GetLocalIP() => IPAddress.None;
 
-        public override void Send(IClientMsg clientMsg)
+        public void Send(byte[] data)
         {
             try
             {
-                currentContext?.SendAsync(clientMsg).GetAwaiter().GetResult();
+                currentContext?.SendAsync(data).GetAwaiter().GetResult();
             }
             catch (Exception ex)
             {
@@ -66,9 +72,6 @@ namespace SteamKit2
             }
         }
 
-        public override void SetNetEncryptionFilter(INetFilterEncryption filter)
-            => throw new NotSupportedException("Websocket uses the underlying TLS encryption. Custom encryption is not supported.");
-
         void DisconnectCore(bool userInitiated, WebSocketContext specificContext)
         {
             var oldContext = Interlocked.Exchange(ref currentContext, null);
@@ -76,7 +79,7 @@ namespace SteamKit2
             {
                 oldContext.Dispose();
 
-                OnDisconnected(new DisconnectedEventArgs(userInitiated));
+                Disconnected?.Invoke(this, new DisconnectedEventArgs(userInitiated));
             }
             else
             {
@@ -102,35 +105,47 @@ namespace SteamKit2
 
             public DnsEndPoint EndPoint { get; }
 
-            public void Start()
+            public void Start(TimeSpan connectionTimeout)
             {
-                runloopTask = RunCore();
+                runloopTask = RunCore(connectionTimeout);
             }
 
-            async Task RunCore()
+            async Task RunCore(TimeSpan connectionTimeout)
             {
                 var uri = new Uri(FormattableString.Invariant($"wss://{EndPoint.Host}:{EndPoint.Port}/cmsocket/"));
 
-                try
+                using (var timeout = new CancellationTokenSource())
+                using (var combinedCancellation = CancellationTokenSource.CreateLinkedTokenSource(cts.Token, timeout.Token))
                 {
-                    await socket.ConnectAsync(uri, cts.Token).ConfigureAwait(false);
-                }
-                catch (Exception ex)
-                {
-                    DebugLog.WriteLine(nameof(WebSocketContext), "Exception connecting websocket: {0} - {1}", ex.GetType().FullName, ex.Message);
-                    DisconnectNonBlocking(userInitiated: false);
-                    return;
+                    timeout.CancelAfter(connectionTimeout);
+
+                    try
+                    {
+                        await socket.ConnectAsync(uri, combinedCancellation.Token).ConfigureAwait(false);
+                    }
+                    catch (TaskCanceledException) when (timeout.IsCancellationRequested)
+                    {
+                        DebugLog.WriteLine(nameof(WebSocketContext), "Time out connecting websocket {0} after {1}", uri, connectionTimeout);
+                        DisconnectNonBlocking(userInitiated: false);
+                        return;
+                    }
+                    catch (Exception ex)
+                    {
+                        DebugLog.WriteLine(nameof(WebSocketContext), "Exception connecting websocket: {0} - {1}", ex.GetType().FullName, ex.Message);
+                        DisconnectNonBlocking(userInitiated: false);
+                        return;
+                    }
                 }
 
                 DebugLog.WriteLine(nameof(WebSocketContext), "Connected to {0}", uri);
-                connection.OnConnected(new ConnectedEventArgs(secureChannel: true, universe: EUniverse.Public));
+                connection.Connected?.Invoke(this, EventArgs.Empty);
 
                 while (!cts.Token.IsCancellationRequested && socket.State == WebSocketState.Open)
                 {
                     var packet = await ReadMessageAsync().ConfigureAwait(false);
                     if (packet != null)
                     {
-                        connection.OnNetMsgReceived(new NetMsgEventArgs(packet, EndPoint));
+                        connection.NetMsgReceived?.Invoke(connection, new NetMsgEventArgs(packet, EndPoint));
                     }
                 }
 
@@ -141,9 +156,8 @@ namespace SteamKit2
                 }
             }
 
-            public async Task SendAsync(IClientMsg clientMsg)
+            public async Task SendAsync(byte[] data)
             {
-                var data = clientMsg.Serialize();
                 var segment = new ArraySegment<byte>(data, 0, data.Length);
                 await socket.SendAsync(segment, WebSocketMessageType.Binary, true, cts.Token).ConfigureAwait(false);
                 DebugLog.WriteLine(nameof(WebSocketContext), "Sent {0} bytes.", data.Length);
