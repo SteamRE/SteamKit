@@ -38,11 +38,10 @@ namespace SteamKit2.Internal
         }
 
         /// <summary>
-        /// Gets the connected universe of this client.
-        /// This value will be <see cref="EUniverse.Invalid"/> if the client is not connected to Steam.
+        /// Gets the universe of this client.
         /// </summary>
         /// <value>The universe.</value>
-        public EUniverse ConnectedUniverse { get; private set; }
+        public EUniverse Universe { get; }
 
         /// <summary>
         /// Gets a value indicating whether this instance is connected to the remote CM server.
@@ -50,7 +49,7 @@ namespace SteamKit2.Internal
         /// <value>
         /// 	<c>true</c> if this instance is connected; otherwise, <c>false</c>.
         /// </value>
-        public bool IsConnected { get { return ConnectedUniverse != EUniverse.Invalid; } }
+        public bool IsConnected { get; private set; }
 
         /// <summary>
         /// Gets the session token assigned to this client from the AM.
@@ -109,9 +108,10 @@ namespace SteamKit2.Internal
         /// Initializes a new instance of the <see cref="CMClient"/> class with a specific connection type.
         /// </summary>
         /// <param name="type">The connection types to use.</param>
-        /// <exception cref="NotSupportedException">
+        /// <param name="universe">The universe to connect to.</param>
+        /// <exception cref="ArgumentOutOfRangeException">
         /// </exception>
-        public CMClient( ProtocolTypes type = ProtocolTypes.Tcp )
+        public CMClient( ProtocolTypes type = ProtocolTypes.Tcp, EUniverse universe = EUniverse.Public )
         {
             serverMap = new Dictionary<EServerType, HashSet<IPEndPoint>>();
 
@@ -121,11 +121,11 @@ namespace SteamKit2.Internal
             switch ( type )
             {
                 case ProtocolTypes.Tcp:
-                    connection = new EnvelopeEncryptedConnection( new TcpConnection(), EUniverse.Public );
+                    connection = new EnvelopeEncryptedConnection( new TcpConnection(), universe );
                     break;
 
                 case ProtocolTypes.Udp:
-                    connection = new EnvelopeEncryptedConnection( new UdpConnection(), EUniverse.Public);
+                    connection = new EnvelopeEncryptedConnection( new UdpConnection(), universe );
                     break;
 
                 case ProtocolTypes.WebSocket:
@@ -135,6 +135,8 @@ namespace SteamKit2.Internal
                 default:
                     throw new ArgumentOutOfRangeException(nameof(type), type, "The provided protocol type is not a valid enum member." );
             }
+
+            Universe = universe;
 
             connection.NetMsgReceived += NetMsgReceived;
             connection.Connected += Connected;
@@ -308,9 +310,8 @@ namespace SteamKit2.Internal
         /// <summary>
         /// Called when the client is securely connected to Steam3.
         /// </summary>
-        protected virtual void OnClientConnected( EResult result, EUniverse universe )
+        protected virtual void OnClientConnected()
         {
-            ConnectedUniverse = universe;
         }
         /// <summary>
         /// Called when the client is physically disconnected from Steam3.
@@ -332,10 +333,15 @@ namespace SteamKit2.Internal
         void Connected( object sender, EventArgs e )
         {
             Servers.TryMark( connection.CurrentEndPoint, ServerQuality.Good );
+
+            IsConnected = true;
+            OnClientConnected();
         }
 
         void Disconnected( object sender, DisconnectedEventArgs e )
         {
+            IsConnected = false;
+
             if ( !e.UserInitiated )
             {
                 Servers.TryMark( connection.CurrentEndPoint, ServerQuality.Bad );
@@ -343,8 +349,6 @@ namespace SteamKit2.Internal
 
             SessionID = null;
             SteamID = null;
-
-            ConnectedUniverse = EUniverse.Invalid;
 
             heartBeatFunc.Stop();
 

@@ -6,11 +6,9 @@
 
 
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Net.Sockets;
 using System.Threading;
 using ProtoBuf;
 using SteamKit2.Internal;
@@ -68,9 +66,6 @@ namespace SteamKit2
 
             dispatchMap = new Dictionary<EMsg, Action<IPacketMsg>>
             {
-                // we're interested in this client message to post the connected callback
-                { EMsg.ChannelEncryptResult, HandleEncryptResult },
-
                 { EMsg.ClientCMList, HandleCMList },
                 { EMsg.ClientServerList, HandleServerList },
 
@@ -360,13 +355,13 @@ namespace SteamKit2
         /// <summary>
         /// Called when the client is securely connected to Steam3.
         /// </summary>
-        protected override void OnClientConnected( EResult result, EUniverse universe )
+        protected override void OnClientConnected()
         {
-            base.OnClientConnected( result, universe );
+            base.OnClientConnected();
 
             jobManager.SetTimeoutsEnabled( true );
 
-            PostCallback( new ConnectedCallback( result ) );
+            PostCallback( new ConnectedCallback() );
         }
         /// <summary>
         /// Called when the client is physically disconnected from Steam3.
@@ -383,16 +378,6 @@ namespace SteamKit2
             PostCallback( new DisconnectedCallback( userInitiated ) );
         }
 
-
-        void HandleEncryptResult( IPacketMsg packetMsg )
-        {
-            var encResult = new Msg<MsgChannelEncryptResult>( packetMsg );
-
-            if ( encResult.Body.Result == EResult.OK )
-            {
-                OnClientConnected( encResult.Body.Result, ConnectedUniverse );
-            }
-        }
 
         void HandleCMList( IPacketMsg packetMsg )
         {

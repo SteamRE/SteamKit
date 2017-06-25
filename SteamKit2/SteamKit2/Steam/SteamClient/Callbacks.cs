@@ -3,11 +3,10 @@
  * file 'license.txt', which is part of this source code package.
  */
 
-using System;
-using System.Collections.ObjectModel;
-using System.Net;
-using System.Linq;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Net;
 using SteamKit2.Internal;
 
 namespace SteamKit2
@@ -19,15 +18,8 @@ namespace SteamKit2
         /// </summary>
         public sealed class ConnectedCallback : CallbackMsg
         {
-            /// <summary>
-            /// Gets the result of the connection attempt.
-            /// </summary>
-            /// <value>The result.</value>
-            public EResult Result { get; private set; }
-
-            internal ConnectedCallback( EResult result )
+            internal ConnectedCallback()
             {
-                this.Result = result;
             }
         }
 
