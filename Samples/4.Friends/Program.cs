@@ -37,7 +37,7 @@ namespace Sample4_Friends
             pass = args[ 1 ];
 
             // create our steamclient instance
-            steamClient = new SteamClient( ProtocolType.Tcp );
+            steamClient = new SteamClient( ProtocolTypes.Tcp );
             // create the callback manager which will route callbacks to function calls
             manager = new CallbackManager( steamClient );
 
@@ -78,14 +78,6 @@ namespace Sample4_Friends
 
         static void OnConnected( SteamClient.ConnectedCallback callback )
         {
-            if ( callback.Result != EResult.OK )
-            {
-                Console.WriteLine( "Unable to connect to Steam: {0}", callback.Result );
-
-                isRunning = false;
-                return;
-            }
-
             Console.WriteLine( "Connected to Steam! Logging in '{0}'...", user );
 
             steamUser.LogOn( new SteamUser.LogOnDetails
