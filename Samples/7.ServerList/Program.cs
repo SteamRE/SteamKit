@@ -35,6 +35,26 @@ namespace Sample7_ServerList
             user = args[ 0 ];
             pass = args[ 1 ];
 
+            var configuration = new SteamConfiguration();
+
+            var cellid = 0u;
+
+            // if we've previously connected and saved our cellid, load it.
+            if ( File.Exists( "cellid.txt" ) )
+            {
+                if ( !uint.TryParse( File.ReadAllText( "cellid.txt"), out cellid ) )
+                {
+                    Console.WriteLine( "Error parsing cellid from cellid.txt. Continuing with cellid 0." );
+                }
+                else
+                {
+                    Console.WriteLine( $"Using persisted cell ID {cellid}" );
+                    configuration.CellID = cellid;
+                }
+            }
+
+            configuration.ServerListProvider = new FileStorageServerListProvider("servers_list.bin");
+
             // create our steamclient instance
             steamClient = new SteamClient();
             // create the callback manager which will route callbacks to function calls
@@ -59,24 +79,6 @@ namespace Sample7_ServerList
                 Console.WriteLine( "Received {0}, disconnecting...", e.SpecialKey );
                 steamUser.LogOff();
             };
-
-            var cellid = 0u;
-
-            // if we've previously connected and saved our cellid, load it.
-            if ( File.Exists( "cellid.txt" ) )
-            {
-                if ( !uint.TryParse( File.ReadAllText( "cellid.txt"), out cellid ) )
-                {
-                    Console.WriteLine( "Error parsing cellid from cellid.txt. Continuing with cellid 0." );
-                }
-                else
-                {
-                    Console.WriteLine( $"Using persisted cell ID {cellid}" );
-                }
-            }
-
-            SteamClient.Servers.CellID = cellid;
-            SteamClient.Servers.ServerListProvider = new FileStorageServerListProvider("servers_list.bin");
 
             isRunning = true;
 

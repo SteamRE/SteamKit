@@ -184,9 +184,9 @@ namespace SteamKit2
         /// <summary>
         /// Connects to the specified end point.
         /// </summary>
-        /// <param name="endPointTask">Task returning the end point.</param>
+        /// <param name="endPoint">The end point to connect to.</param>
         /// <param name="timeout">Timeout in milliseconds</param>
-        public void Connect(Task<EndPoint> endPointTask, int timeout)
+        public void Connect(EndPoint endPoint, int timeout)
         {
             lock (connectLock)
             {
@@ -199,42 +199,13 @@ namespace SteamKit2
                     Debug.Assert(cancellationToken == null);
                     cancellationToken = new CancellationTokenSource();
 
-                    socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, System.Net.Sockets.ProtocolType.Tcp);
+                    socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
                     socket.ReceiveTimeout = timeout;
                     socket.SendTimeout = timeout;
 
-                    endPointTask.ContinueWith( t =>
-                    {
-                        if (t.IsFaulted || t.IsCanceled)
-                        {
-                            if (t.Exception != null)
-                            {
-                                foreach (var ex in t.Exception.Flatten().InnerExceptions)
-                                {
-                                    DebugLog.WriteLine("TcpConnection", "Endpoint task threw exception: {0}", ex);
-                                }
-                            }
-
-                            Release(userRequestedDisconnect: false);
-                            return;
-                        }
-
-                        destination = t.Result;
-
-                        if (destination != null)
-                        {
-                            DebugLog.WriteLine("TcpConnection", "Connecting to {0}...", destination);
-                            TryConnect(timeout);
-                        }
-                        else
-                        {
-                            DebugLog.WriteLine("TcpConnection", "No destination supplied from endpoint task");
-                            Release(userRequestedDisconnect: false);
-                            return;
-                        }
-
-                    }, TaskContinuationOptions.LongRunning);
-
+                    destination = endPoint;
+                    DebugLog.WriteLine("TcpConnection", "Connecting to {0}...", destination);
+                    TryConnect(timeout);
                 }
             }
         }

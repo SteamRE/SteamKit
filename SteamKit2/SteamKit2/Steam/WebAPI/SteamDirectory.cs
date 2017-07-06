@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using SteamKit2.Discovery;
-using SteamKit2.Internal;
 
 namespace SteamKit2
 {
@@ -14,45 +14,32 @@ namespace SteamKit2
     public static class SteamDirectory
     {
         /// <summary>
-        /// Initializes <see cref="SteamKit2.Internal.CMClient"/>'s server list with servers from the Steam Directory.
-        /// </summary>
-        /// <param name="cellid">Cell ID</param>
-        public static Task Initialize( uint cellid = 0 )
-        {
-            return LoadAsync( cellid ).ContinueWith( t =>
-            {
-                var servers = t.Result;
-                CMClient.Servers.ReplaceList(servers);
-            }, CancellationToken.None, TaskContinuationOptions.NotOnFaulted | TaskContinuationOptions.NotOnCanceled, TaskScheduler.Current );
-        }
-
-        /// <summary>
         /// Load a list of servers from the Steam Directory.
         /// </summary>
-        /// <param name="cellid">Cell ID</param>
+        /// <param name="configuration">Configuration Object</param>
         /// <returns>A <see cref="System.Threading.Tasks.Task"/> with the Result set to an enumerable list of <see cref="CMServerRecord"/>s.</returns>
-        public static Task<IReadOnlyCollection<CMServerRecord>> LoadAsync( uint cellid = 0 )
+        public static Task<IReadOnlyCollection<CMServerRecord>> LoadAsync( SteamConfiguration configuration )
         {
-            return LoadAsync( cellid, CancellationToken.None );
+            return LoadAsync( configuration, CancellationToken.None );
         }
 
         /// <summary>
         /// Load a list of servers from the Steam Directory.
         /// </summary>
-        /// <param name="cellid">Cell ID</param>
+        /// <param name="configuration">Configuration Object</param>
         /// <param name="cancellationToken">Cancellation Token</param>
         /// <returns>A <see cref="System.Threading.Tasks.Task"/> with the Result set to an enumerable list of <see cref="CMServerRecord"/>s.</returns>
-        public static Task<IReadOnlyCollection<CMServerRecord>> LoadAsync( uint cellid, CancellationToken cancellationToken )
+        public static Task<IReadOnlyCollection<CMServerRecord>> LoadAsync( SteamConfiguration configuration, CancellationToken cancellationToken )
         {
-            var directory = new WebAPI.AsyncInterface( "ISteamDirectory", null );
+            var directory = new WebAPI.AsyncInterface( configuration.WebAPIBaseAddress, "ISteamDirectory", null );
             var args = new Dictionary<string, string>
             {
-                { "cellid", cellid.ToString() }
+                ["cellid"] = configuration.CellID.ToString( CultureInfo.InvariantCulture )
             };
 
             cancellationToken.ThrowIfCancellationRequested();
 
-            var task = directory.CallAsync( HttpMethod.Get, "GetCMList", version: 1, args: args, secure: true );
+            var task = directory.CallAsync( HttpMethod.Get, "GetCMList", version: 1, args: args );
             return task.ContinueWith( t =>
             {
                 var response = task.Result;

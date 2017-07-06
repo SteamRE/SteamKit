@@ -102,7 +102,7 @@ namespace SteamKit2
                 ufsServer = serverList[ random.Next( serverList.Count ) ];
             }
 
-            connection.Connect( Task.FromResult( ( EndPoint )ufsServer ), ( int )ConnectionTimeout.TotalMilliseconds );
+            connection.Connect( ufsServer, ( int )ConnectionTimeout.TotalMilliseconds );
         }
 
         /// <summary>

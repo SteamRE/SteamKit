@@ -37,7 +37,8 @@ namespace Sample4_Friends
             pass = args[ 1 ];
 
             // create our steamclient instance
-            steamClient = new SteamClient( ProtocolTypes.Tcp );
+            var configuration = new SteamConfiguration { ProtocolTypes = ProtocolTypes.Tcp };
+            steamClient = new SteamClient( configuration );
             // create the callback manager which will route callbacks to function calls
             manager = new CallbackManager( steamClient );
 

@@ -10,7 +10,8 @@ namespace Tests
     {
         public SmartCMServerListFacts()
         {
-            serverList = new SmartCMServerList(new NullServerListProvider(), allowDirectoryFetch: false);
+            var configuration = new SteamConfiguration { AllowDirectoryFetch = false };
+            serverList = new SmartCMServerList(configuration);
         }
 
         readonly SmartCMServerList serverList;
@@ -118,7 +119,7 @@ namespace Tests
             Assert.Same( record, endPoint );
 
             endPoint = serverList.GetNextServerCandidate( ProtocolTypes.All );
-            Assert.Null( endPoint );
+            Assert.Same(record, endPoint);
 
             record = CMServerRecord.SocketServer( new IPEndPoint( IPAddress.Loopback, 27015 ) );
             serverList.ReplaceList( new List<CMServerRecord>() { record } );
@@ -136,7 +137,7 @@ namespace Tests
             Assert.Same( record, endPoint );
 
             endPoint = serverList.GetNextServerCandidate( ProtocolTypes.All );
-            Assert.Null( endPoint );
+            Assert.Same(record, endPoint);
         }
 
         [Fact]

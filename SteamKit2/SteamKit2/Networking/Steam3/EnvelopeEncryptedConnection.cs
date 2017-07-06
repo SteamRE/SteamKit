@@ -33,8 +33,8 @@ namespace SteamKit2
 
         public event EventHandler<DisconnectedEventArgs> Disconnected;
 
-        public void Connect( Task<EndPoint> endPointTask, int timeout = 5000 )
-            => inner.Connect( endPointTask, timeout );
+        public void Connect( EndPoint endPoint, int timeout = 5000 )
+            => inner.Connect( endPoint, timeout );
 
         public void Disconnect()
         {

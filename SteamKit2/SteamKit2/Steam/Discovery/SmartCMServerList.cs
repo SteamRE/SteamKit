@@ -39,45 +39,19 @@ namespace SteamKit2.Discovery
         /// <summary>
         /// Initialize SmartCMServerList with a given server list provider
         /// </summary>
-        /// <param name="provider">The ServerListProvider to persist servers</param>
-        /// <param name="allowDirectoryFetch">Specifies if we can query SteamDirectory to discover more servers</param>
-        public SmartCMServerList( IServerListProvider provider, bool allowDirectoryFetch = true )
+        /// <param name="configuration">The Steam configuration to use.</param>
+        /// <exception cref="ArgumentNullException">The configuration object is null.</exception>
+        public SmartCMServerList( SteamConfiguration configuration )
         {
-            ServerListProvider = provider;
-            canFetchDirectory = allowDirectoryFetch;
+            this.configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
 
             servers = new Collection<ServerInfo>();
             listLock = new object();
             BadConnectionMemoryTimeSpan = TimeSpan.FromMinutes( 5 );
         }
 
-        /// <summary>
-        /// Initialize SmartCMServerList with the default <see cref="NullServerListProvider"/> server list provider
-        /// </summary>
-        public SmartCMServerList() :
-            this( new NullServerListProvider() )
-        {
-        }
+        readonly SteamConfiguration configuration;
 
-        /// <summary>
-        /// The server list provider chosen to provide a persistent list of servers to connect to
-        /// </summary>
-        public IServerListProvider ServerListProvider
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// The preferred cell id for retrieving the list of servers from the Steam directory
-        /// </summary>
-        public uint CellID
-        {
-            get;
-            set;
-        }
-
-        bool canFetchDirectory;
         Task listTask;
 
         object listLock;
@@ -105,15 +79,12 @@ namespace SteamKit2.Discovery
 
             try
             {
-                listTask.Wait();
+                listTask.GetAwaiter().GetResult();
                 return true;
             }
-            catch ( AggregateException ae )
+            catch ( Exception ex )
             {
-                foreach( var ex in ae.Flatten().InnerExceptions )
-                {
-                    DebugWrite( "Failed to retrieve server list: {0}", ex );
-                }
+                DebugWrite( "Failed to retrieve server list: {0}", ex );
             }
 
             return false;
@@ -123,16 +94,16 @@ namespace SteamKit2.Discovery
         {
             DebugWrite( "Resolving server list" );
 
-            IEnumerable<CMServerRecord> serverList = await ServerListProvider.FetchServerListAsync().ConfigureAwait( false );
+            IEnumerable<CMServerRecord> serverList = await configuration.ServerListProvider.FetchServerListAsync().ConfigureAwait( false );
             IReadOnlyCollection<CMServerRecord> endpointList = serverList.ToList();
 
-            if ( endpointList.Count == 0 && canFetchDirectory )
+            if ( endpointList.Count == 0 && configuration.AllowDirectoryFetch )
             {
                 DebugWrite( "Server list provider had no entries, will query SteamDirectory" );
-                endpointList = await SteamDirectory.LoadAsync( CellID ).ConfigureAwait( false );
+                endpointList = await SteamDirectory.LoadAsync( configuration ).ConfigureAwait( false );
             }
 
-            if ( endpointList.Count == 0 && canFetchDirectory )
+            if ( endpointList.Count == 0 && configuration.AllowDirectoryFetch )
             {
                 DebugWrite( "Could not query SteamDirectory, falling back to cm0" );
                 var cm0 = await Dns.GetHostAddressesAsync( "cm0.steampowered.com" ).ConfigureAwait( false );
@@ -187,7 +158,7 @@ namespace SteamKit2.Discovery
                     AddCore( distinctEndPoints[ i ] );
                 }
 
-                ServerListProvider.UpdateServerListAsync( distinctEndPoints ).Wait();
+                configuration.ServerListProvider.UpdateServerListAsync( distinctEndPoints ).GetAwaiter().GetResult();
             }
         }
 
@@ -262,7 +233,7 @@ namespace SteamKit2.Discovery
                 ResetOldScores();
 
                 var serverInfo = servers
-                    .Where( s => (s.Record.ProtocolTypes & supportedProtocolTypes) == supportedProtocolTypes )
+                    .Where( s => (s.Record.ProtocolTypes & supportedProtocolTypes) > 0 )
                     .Select( (s, index) => new { Record = s.Record, IsBad = s.LastBadConnectionDateTimeUtc.HasValue, Index = index } )
                     .OrderBy( x => x.IsBad )
                     .ThenBy( x => x.Index )

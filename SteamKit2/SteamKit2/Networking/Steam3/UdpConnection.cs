@@ -113,9 +113,9 @@ namespace SteamKit2
         /// <summary>
         /// Connects to the specified CM server.
         /// </summary>
-        /// <param name="endPointTask">Task returning the CM server.</param>
+        /// <param name="endPoint">The endPoint to connect to</param>
         /// <param name="timeout">Timeout in milliseconds</param>
-        public void Connect(Task<EndPoint> endPointTask, int timeout)
+        public void Connect(EndPoint endPoint, int timeout)
         {
             Disconnect();
 
@@ -135,7 +135,7 @@ namespace SteamKit2
 
             netThread = new Thread(NetLoop);
             netThread.Name = "UdpConnection Thread";
-            netThread.Start(endPointTask);
+            netThread.Start(endPoint);
         }
 
         /// <summary>
@@ -366,26 +366,7 @@ namespace SteamKit2
             EndPoint packetSender = new IPEndPoint(IPAddress.Any, 0);
             byte[] buf = new byte[2048];
 
-            var epTask = param as Task<EndPoint>;
-            try
-            {
-                if ( epTask != null )
-                {
-                    CurrentEndPoint = epTask.Result;
-                }
-                else
-                {
-                    DebugLog.WriteLine("UdpConnection", "Invalid endpoint supplied for connection: {0}", param);
-                }
-                
-            }
-            catch ( AggregateException ae )
-            {
-                foreach ( var ex in ae.Flatten().InnerExceptions )
-                {
-                    DebugLog.WriteLine("UdpConnection", "Endpoint task threw exception: {0}", ex);
-                }
-            }
+            CurrentEndPoint = param as EndPoint;
 
             if ( CurrentEndPoint != null )
             {

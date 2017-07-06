@@ -26,22 +26,19 @@ namespace SteamKit2.Internal
         /// <summary>
         /// Bootstrap list of CM servers.
         /// </summary>
-        public static SmartCMServerList Servers { get; private set; }
+        public SmartCMServerList Servers => configuration.ServerList;
 
         /// <summary>
         /// Returns the the local IP of this client.
         /// </summary>
         /// <returns>The local IP.</returns>
-        public IPAddress LocalIP
-        {
-            get { return connection.GetLocalIP(); }
-        }
+        public IPAddress LocalIP => connection.GetLocalIP();
 
         /// <summary>
         /// Gets the universe of this client.
         /// </summary>
         /// <value>The universe.</value>
-        public EUniverse Universe { get; }
+        public EUniverse Universe => configuration.Universe;
 
         /// <summary>
         /// Gets a value indicating whether this instance is connected to the remote CM server.
@@ -77,12 +74,11 @@ namespace SteamKit2.Internal
 
         /// <summary>
         /// Gets or sets the connection timeout used when connecting to the Steam server.
-        /// The default value is 5 seconds.
         /// </summary>
         /// <value>
         /// The connection timeout.
         /// </value>
-        public TimeSpan ConnectionTimeout { get; set; }
+        public TimeSpan ConnectionTimeout => configuration.ConnectionTimeout;
 
         /// <summary>
         /// Gets or sets the network listening interface. Use this for debugging only.
@@ -98,49 +94,17 @@ namespace SteamKit2.Internal
 
         Dictionary<EServerType, HashSet<IPEndPoint>> serverMap;
 
-
-        static CMClient()
-        {
-            Servers = new SmartCMServerList();
-        }
+        readonly SteamConfiguration configuration;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CMClient"/> class with a specific connection type.
+        /// Initializes a new instance of the <see cref="CMClient"/> class with a specific configuration.
         /// </summary>
-        /// <param name="type">The connection types to use.</param>
-        /// <param name="universe">The universe to connect to.</param>
-        /// <exception cref="ArgumentOutOfRangeException">
-        /// </exception>
-        public CMClient( ProtocolTypes type = ProtocolTypes.Tcp, EUniverse universe = EUniverse.Public )
+        /// <param name="configuration">The configuration to use for this client.</param>
+        /// <exception cref="ArgumentNullException">The configuration object is <c>null</c></exception>
+        public CMClient( SteamConfiguration configuration )
         {
+            this.configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
             serverMap = new Dictionary<EServerType, HashSet<IPEndPoint>>();
-
-            // our default timeout
-            ConnectionTimeout = TimeSpan.FromSeconds( 5 );
-
-            switch ( type )
-            {
-                case ProtocolTypes.Tcp:
-                    connection = new EnvelopeEncryptedConnection( new TcpConnection(), universe );
-                    break;
-
-                case ProtocolTypes.Udp:
-                    connection = new EnvelopeEncryptedConnection( new UdpConnection(), universe );
-                    break;
-
-                case ProtocolTypes.WebSocket:
-                    connection = new WebSocketConnection();
-                    break;
-
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(type), type, "The provided protocol type is not a valid enum member." );
-            }
-
-            Universe = universe;
-
-            connection.NetMsgReceived += NetMsgReceived;
-            connection.Connected += Connected;
-            connection.Disconnected += Disconnected;
 
             heartBeatFunc = new ScheduledFunction( () =>
             {
@@ -164,22 +128,39 @@ namespace SteamKit2.Internal
         public void Connect( CMServerRecord cmServer = null  )
         {
             this.Disconnect();
+            Debug.Assert( connection == null );
 
             ExpectDisconnection = false;
 
-            Task<EndPoint> epTask = null;
+            Task<CMServerRecord> recordTask = null;
 
             if ( cmServer == null )
             {
-                epTask = Servers.GetNextServerCandidateAsync( connection.ProtocolTypes )
-                    .ContinueWith(r => r.Result.EndPoint, TaskContinuationOptions.OnlyOnRanToCompletion);
+                recordTask = Servers.GetNextServerCandidateAsync( configuration.ProtocolTypes )
+                    .ContinueWith(r => r.Result, TaskContinuationOptions.OnlyOnRanToCompletion);
             }
             else
             {
-                epTask = Task.FromResult( cmServer.EndPoint );
+                recordTask = Task.FromResult( cmServer );
             }
 
-            connection.Connect( epTask, ( int )ConnectionTimeout.TotalMilliseconds );
+            recordTask.ContinueWith(t =>
+            {
+                if ( t.IsFaulted || t.IsCanceled )
+                {
+                    DebugLog.WriteLine( nameof(CMClient), "Server record task threw exception: {0}", t.Exception );
+                    OnClientDisconnected( userInitiated: false );
+                    return;
+                }
+
+                var record = t.Result;
+
+                connection = CreateConnection( record.ProtocolTypes & configuration.ProtocolTypes );
+                connection.NetMsgReceived += NetMsgReceived;
+                connection.Connected += Connected;
+                connection.Disconnected += Disconnected;
+                connection.Connect( record.EndPoint, ( int )ConnectionTimeout.TotalMilliseconds );
+            });
         }
 
         /// <summary>
@@ -189,7 +170,7 @@ namespace SteamKit2.Internal
         {
             heartBeatFunc.Stop();
 
-            connection.Disconnect();
+            connection?.Disconnect();
         }
 
         /// <summary>
@@ -225,7 +206,7 @@ namespace SteamKit2.Internal
 
             try
             {
-                connection.Send( msg.Serialize() );
+                connection?.Send( msg.Serialize() );
             }
             catch ( IOException )
             {
@@ -324,6 +305,24 @@ namespace SteamKit2.Internal
             }
         }
 
+        IConnection CreateConnection( ProtocolTypes protocol )
+        {
+            if ( ( protocol & ProtocolTypes.WebSocket ) > 0 )
+            {
+                return new WebSocketConnection();
+            }
+            else if ( ( protocol & ProtocolTypes.Tcp ) > 0 )
+            {
+                return new EnvelopeEncryptedConnection( new TcpConnection(), configuration.Universe );
+            }
+            else if ( ( protocol & ProtocolTypes.Udp ) > 0 )
+            {
+                return new EnvelopeEncryptedConnection( new UdpConnection(), configuration.Universe );
+            }
+
+            throw new ArgumentOutOfRangeException( nameof(protocol), protocol, "Protocol bitmask has no supported protocols set." );
+        }
+
 
         void NetMsgReceived( object sender, NetMsgEventArgs e )
         {
@@ -349,6 +348,12 @@ namespace SteamKit2.Internal
 
             SessionID = null;
             SteamID = null;
+
+
+            connection.NetMsgReceived -= NetMsgReceived;
+            connection.Connected -= Connected;
+            connection.Disconnected -= Disconnected;
+            connection = null;
 
             heartBeatFunc.Stop();
 

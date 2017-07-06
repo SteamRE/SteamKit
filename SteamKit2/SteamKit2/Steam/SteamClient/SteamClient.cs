@@ -33,13 +33,21 @@ namespace SteamKit2
 
         internal AsyncJobManager jobManager;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SteamClient"/> class with the default configuration.
+        /// </summary>
+        public SteamClient()
+            : this( new SteamConfiguration () )
+        {
+        }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SteamClient"/> class with a specific connection type.
+        /// Initializes a new instance of the <see cref="SteamClient"/> class with a specific configuration.
         /// </summary>
-        /// <param name="type">The connection type to use.</param>
-        public SteamClient( ProtocolTypes type = ProtocolTypes.Tcp )
-            : base( type )
+        /// <param name="configuration">The configuration to use for this client.</param>
+        /// <exception cref="ArgumentNullException">The configuration object is <c>null</c></exception>
+        public SteamClient( SteamConfiguration configuration )
+            : base( configuration )
         {
             callbackQueue = new Queue<ICallbackMsg>();
 
@@ -320,8 +328,7 @@ namespace SteamKit2
                 return false;
             }
 
-            Action<IPacketMsg> handlerFunc;
-            bool haveFunc = dispatchMap.TryGetValue( packetMsg.MsgType, out handlerFunc );
+            bool haveFunc = dispatchMap.TryGetValue( packetMsg.MsgType, out var handlerFunc );
 
             if ( haveFunc )
             {

@@ -21,20 +21,8 @@ namespace SteamKit2
 
         public ProtocolTypes ProtocolTypes => ProtocolTypes.WebSocket;
 
-        public async void Connect(Task<EndPoint> endPointTask, int timeout = 5000)
+        public void Connect(EndPoint endPoint, int timeout = 5000)
         {
-            EndPoint endPoint;
-            try
-            {
-                endPoint = await endPointTask.ConfigureAwait(false);
-            }
-            catch (Exception ex)
-            {
-                DebugLog.WriteLine(nameof(WebSocketConnection), "Exception while awaiting endpoint task: {0} - {1}", ex.GetType().FullName, ex.Message);
-                Disconnected?.Invoke(this, new DisconnectedEventArgs(false));
-                return;
-            }
-
             if (!(endPoint is DnsEndPoint dnsEp))
             {
                 DebugLog.WriteLine(nameof(WebSocketConnection), "Given endpoint was not a DnsEndPoint.");
@@ -138,7 +126,7 @@ namespace SteamKit2
                 }
 
                 DebugLog.WriteLine(nameof(WebSocketContext), "Connected to {0}", uri);
-                connection.Connected?.Invoke(this, EventArgs.Empty);
+                connection.Connected?.Invoke(connection, EventArgs.Empty);
 
                 while (!cts.Token.IsCancellationRequested && socket.State == WebSocketState.Open)
                 {
@@ -168,7 +156,7 @@ namespace SteamKit2
                 cts.Cancel();
                 cts.Dispose();
 
-                runloopTask?.Wait();
+                runloopTask?.GetAwaiter().GetResult();
                 runloopTask = null;
 
                 socket.Dispose();

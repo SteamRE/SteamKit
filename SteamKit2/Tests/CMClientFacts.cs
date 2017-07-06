@@ -115,6 +115,7 @@ namespace Tests
         class DummyCMClient : CMClient
         {
             public DummyCMClient()
+                : base( new SteamConfiguration() )
             {
             }
 
