@@ -10,7 +10,6 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
-using System.Threading.Tasks;
 using SteamKit2.Internal;
 
 namespace SteamKit2
@@ -48,7 +47,6 @@ namespace SteamKit2
         SteamClient steamClient;
 
         IConnection connection;
-        INetFilterEncryption pendingNetFilterEncryption;
 
 
         /// <summary>
@@ -67,9 +65,10 @@ namespace SteamKit2
 
             // steamclient has the connection type hardcoded as TCP
             // todo: determine if UFS supports UDP and if we want to support it
-            connection = new TcpConnection();
+            connection = new EnvelopeEncryptedConnection( new TcpConnection(), steamClient.Universe );
 
             connection.NetMsgReceived += NetMsgReceived;
+            connection.Connected += Connected;
             connection.Disconnected += Disconnected;
         }
 
@@ -90,9 +89,7 @@ namespace SteamKit2
         {
             DebugLog.Assert( steamClient.IsConnected, "UFSClient", "CMClient is not connected!" );
 
-            this.Disconnect();
-
-            pendingNetFilterEncryption = null;
+            Disconnect();
 
             if ( ufsServer == null )
             {
@@ -281,6 +278,11 @@ namespace SteamKit2
 
 
         
+        void Connected( object sender, EventArgs e )
+        {
+            steamClient.PostCallback(new ConnectedCallback());
+        }
+
         void Disconnected( object sender, DisconnectedEventArgs e )
         {
             ConnectedUniverse = EUniverse.Invalid;
@@ -296,9 +298,6 @@ namespace SteamKit2
 
             var msgDispatch = new Dictionary<EMsg, Action<IPacketMsg>>
             {
-                { EMsg.ChannelEncryptRequest, HandleEncryptRequest },
-                { EMsg.ChannelEncryptResult, HandleEncryptResult },
-
                 { EMsg.ClientUFSLoginResponse, HandleLoginResponse },
                 { EMsg.ClientUFSUploadFileResponse, HandleUploadFileResponse },
                 { EMsg.ClientUFSUploadFileFinished, HandleUploadFileFinished },
@@ -313,96 +312,6 @@ namespace SteamKit2
 
 
         #region ClientMsg Handlers
-        void HandleEncryptRequest( IPacketMsg packetMsg )
-        {
-            var encRequest = new Msg<MsgChannelEncryptRequest>( packetMsg );
-
-            EUniverse eUniv = encRequest.Body.Universe;
-            uint protoVersion = encRequest.Body.ProtocolVersion;
-
-            DebugLog.WriteLine( "UFSClient", "Got encryption request. Universe: {0} Protocol ver: {1}", eUniv, protoVersion );
-            DebugLog.Assert( protoVersion == 1, "UFSClient", "Encryption handshake protocol version mismatch!" );
-
-            byte[] randomChallenge;
-            if ( encRequest.Payload.Length >= 16 )
-            {
-                randomChallenge = encRequest.Payload.ToArray();
-            }
-            else
-            {
-                randomChallenge = null;
-            }
-
-            byte[] pubKey = KeyDictionary.GetPublicKey( eUniv );
-
-            if ( pubKey == null )
-            {
-                connection.Disconnect();
-
-                DebugLog.WriteLine( "UFSClient", "HandleEncryptionRequest got request for invalid universe! Universe: {0} Protocol ver: {1}", eUniv, protoVersion );
-                return;
-            }
-
-            ConnectedUniverse = eUniv;
-
-            var encResp = new Msg<MsgChannelEncryptResponse>();
-
-            var tempSessionKey = CryptoHelper.GenerateRandomBlock( 32 );
-            byte[] encryptedHandshakeBlob = null;
-
-            using ( var rsa = new RSACrypto( pubKey ) )
-            {
-                if ( randomChallenge != null )
-                {
-                    var blobToEncrypt = new byte[ tempSessionKey.Length + randomChallenge.Length ];
-                    Array.Copy( tempSessionKey, blobToEncrypt, tempSessionKey.Length );
-                    Array.Copy( randomChallenge, 0, blobToEncrypt, tempSessionKey.Length, randomChallenge.Length );
-
-                    encryptedHandshakeBlob = rsa.Encrypt( blobToEncrypt );
-                }
-                else
-                {
-                    encryptedHandshakeBlob = rsa.Encrypt( tempSessionKey );
-                }
-            }
-
-            var keyCrc = CryptoHelper.CRCHash( encryptedHandshakeBlob );
-
-            encResp.Write( encryptedHandshakeBlob );
-            encResp.Write( keyCrc );
-            encResp.Write( ( uint )0 );
-
-            if ( randomChallenge != null )
-            {
-                pendingNetFilterEncryption = new NetFilterEncryptionWithHMAC( tempSessionKey );
-            }
-            else
-            {
-                pendingNetFilterEncryption = new NetFilterEncryption( tempSessionKey );
-            }
-
-            this.Send( encResp );
-        }
-        void HandleEncryptResult( IPacketMsg packetMsg )
-        {
-            var encResult = new Msg<MsgChannelEncryptResult>( packetMsg );
-
-            DebugLog.WriteLine( "UFSClient", "Encryption result: {0}", encResult.Body.Result );
-
-            if ( encResult.Body.Result == EResult.OK && pendingNetFilterEncryption != null )
-            {
-                Debug.Assert( pendingNetFilterEncryption != null );
-                // connection.SetNetEncryptionFilter( pendingNetFilterEncryption );
-
-                pendingNetFilterEncryption = null;
-                steamClient.PostCallback( new ConnectedCallback( encResult.Body ) );
-            }
-            else
-            {
-                DebugLog.WriteLine( "UFSClient", "Encryption channel setup failed" );
-                connection.Disconnect();
-            }
-        }
         void HandleLoginResponse( IPacketMsg packetMsg )
         {
             var loginResp = new ClientMsgProtobuf<CMsgClientUFSLoginResponse>( packetMsg );
