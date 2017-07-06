@@ -461,7 +461,7 @@ namespace SteamKit2
         /// <param name="iface">The interface to retrieve a handler for.</param>
         /// <param name="apiKey">An optional API key to be used for authorized requests.</param>
         /// <returns>A dynamic <see cref="Interface"/> object to interact with the Web API.</returns>
-        public static Interface GetInterface( string iface, string apiKey = "")
+        public static Interface GetInterface( string iface, string apiKey = "" )
         {
             return new Interface( DefaultBaseAddress, iface, apiKey );
         }
