@@ -23,12 +23,11 @@ namespace SteamKit2
         {
             serverListProvider = new NullServerListProvider();
             webAPIBaseAddress = WebAPI.DefaultBaseAddress;
+            ServerList = new SmartCMServerList(this);
         }
 
         IServerListProvider serverListProvider;
         Uri webAPIBaseAddress;
-
-        SmartCMServerList serverList;
 
         /// <summary>
         /// Whether or not to use the Steam Directory to discover available servers.
@@ -76,8 +75,11 @@ namespace SteamKit2
             set => webAPIBaseAddress = value ?? throw new ArgumentNullException(nameof(value));
         }
 
-        internal SmartCMServerList ServerList
-            => LazyInitializer.EnsureInitialized(ref serverList, () => new SmartCMServerList(this));
+        /// <summary>
+        /// The server list used for this configuration.
+        /// If this configuration is used by multiple <see cref="SteamClient"/> instances, they all share the server list.
+        /// </summary>
+        public SmartCMServerList ServerList { get; }
 
     }
 }
