@@ -22,6 +22,7 @@ init:
 before_build:
   - dotnet restore SteamKit2\SteamKit2.sln
   - dotnet restore Samples\Samples.sln
+  - nuget restore Resources\NetHookAnalyzer2\NetHookAnalyzer2.sln
   - Resources\NetHook2\SetupDependencies.cmd
 
 build_script:
