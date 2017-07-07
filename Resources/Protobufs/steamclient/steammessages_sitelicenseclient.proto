@@ -1,0 +1,28 @@
+import "steammessages_base.proto";
+
+option optimize_for = SPEED;
+option cc_generic_services = false;
+
+message CMsgClientSiteInfo {
+	optional uint64 site_id = 1;
+	optional string site_name = 2;
+}
+
+message CMsgClientSiteLicenseCheckout {
+	optional uint32 appid = 1;
+	optional uint32 packageid = 2;
+}
+
+message CMsgClientSiteLicenseCheckoutResponse {
+	optional int32 eresult = 1 [default = 2];
+}
+
+message CMsgClientSiteLicenseGetAvailableSeats {
+	optional uint32 packageid = 1;
+}
+
+message CMsgClientSiteLicenseGetAvailableSeatsResponse {
+	optional int32 eresult = 1 [default = 2];
+	optional uint32 seats = 2;
+}
+

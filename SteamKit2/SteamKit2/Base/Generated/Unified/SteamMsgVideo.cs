@@ -134,6 +134,98 @@ namespace SteamKit2.Unified.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CFovasVideo_ClientGetOPFSettings_Request")]
+  public partial class CFovasVideo_ClientGetOPFSettings_Request : global::ProtoBuf.IExtensible
+  {
+    public CFovasVideo_ClientGetOPFSettings_Request() {}
+    
+
+    private uint? _app_id;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"app_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint app_id
+    {
+      get { return _app_id?? default(uint); }
+      set { _app_id = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool app_idSpecified
+    {
+      get { return _app_id != null; }
+      set { if (value == (_app_id== null)) _app_id = value ? this.app_id : (uint?)null; }
+    }
+    private bool ShouldSerializeapp_id() { return app_idSpecified; }
+    private void Resetapp_id() { app_idSpecified = false; }
+    
+
+    private uint? _client_cellid;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"client_cellid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint client_cellid
+    {
+      get { return _client_cellid?? default(uint); }
+      set { _client_cellid = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool client_cellidSpecified
+    {
+      get { return _client_cellid != null; }
+      set { if (value == (_client_cellid== null)) _client_cellid = value ? this.client_cellid : (uint?)null; }
+    }
+    private bool ShouldSerializeclient_cellid() { return client_cellidSpecified; }
+    private void Resetclient_cellid() { client_cellidSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CFovasVideo_ClientGetOPFSettings_Response")]
+  public partial class CFovasVideo_ClientGetOPFSettings_Response : global::ProtoBuf.IExtensible
+  {
+    public CFovasVideo_ClientGetOPFSettings_Response() {}
+    
+
+    private uint? _app_id;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"app_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint app_id
+    {
+      get { return _app_id?? default(uint); }
+      set { _app_id = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool app_idSpecified
+    {
+      get { return _app_id != null; }
+      set { if (value == (_app_id== null)) _app_id = value ? this.app_id : (uint?)null; }
+    }
+    private bool ShouldSerializeapp_id() { return app_idSpecified; }
+    private void Resetapp_id() { app_idSpecified = false; }
+    
+
+    private string _opf_settings;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"opf_settings", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public string opf_settings
+    {
+      get { return _opf_settings?? ""; }
+      set { _opf_settings = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool opf_settingsSpecified
+    {
+      get { return _opf_settings != null; }
+      set { if (value == (_opf_settings== null)) _opf_settings = value ? this.opf_settings : (string)null; }
+    }
+    private bool ShouldSerializeopf_settings() { return opf_settingsSpecified; }
+    private void Resetopf_settings() { opf_settingsSpecified = false; }
+    
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
     public interface IVideo
     {
       CVideo_ClientGetVideoURL_Response ClientGetVideoURL(CVideo_ClientGetVideoURL_Request request);
@@ -144,6 +236,13 @@ namespace SteamKit2.Unified.Internal
     public interface IVideoClient
     {
       NoResponse NotifyUnlockedH264(CVideo_UnlockedH264_Notification request);
+    
+    }
+    
+    
+    public interface IFovasVideo
+    {
+      CFovasVideo_ClientGetOPFSettings_Response ClientGetOPFSettings(CFovasVideo_ClientGetOPFSettings_Request request);
     
     }
     

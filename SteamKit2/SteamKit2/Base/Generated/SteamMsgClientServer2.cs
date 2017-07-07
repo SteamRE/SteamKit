@@ -1380,6 +1380,24 @@ namespace SteamKit2.Internal
     private bool ShouldSerializepublished_file_id() { return published_file_idSpecified; }
     private void Resetpublished_file_id() { published_file_idSpecified = false; }
     
+
+    private uint? _app_id;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"app_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint app_id
+    {
+      get { return _app_id?? default(uint); }
+      set { _app_id = value; }
+    }
+    [global::System.Xml.Serialization.XmlIgnore]
+    [global::System.ComponentModel.Browsable(false)]
+    public bool app_idSpecified
+    {
+      get { return _app_id != null; }
+      set { if (value == (_app_id== null)) _app_id = value ? this.app_id : (uint?)null; }
+    }
+    private bool ShouldSerializeapp_id() { return app_idSpecified; }
+    private void Resetapp_id() { app_idSpecified = false; }
+    
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -4427,394 +4445,6 @@ namespace SteamKit2.Internal
   public partial class CMsgClientRequestMachineAuthResponse : global::ProtoBuf.IExtensible
   {
     public CMsgClientRequestMachineAuthResponse() {}
-    
-
-    private uint? _eresult;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"eresult", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint eresult
-    {
-      get { return _eresult?? default(uint); }
-      set { _eresult = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool eresultSpecified
-    {
-      get { return _eresult != null; }
-      set { if (value == (_eresult== null)) _eresult = value ? this.eresult : (uint?)null; }
-    }
-    private bool ShouldSerializeeresult() { return eresultSpecified; }
-    private void Reseteresult() { eresultSpecified = false; }
-    
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientCreateFriendsGroup")]
-  public partial class CMsgClientCreateFriendsGroup : global::ProtoBuf.IExtensible
-  {
-    public CMsgClientCreateFriendsGroup() {}
-    
-
-    private ulong? _steamid;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    public ulong steamid
-    {
-      get { return _steamid?? default(ulong); }
-      set { _steamid = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool steamidSpecified
-    {
-      get { return _steamid != null; }
-      set { if (value == (_steamid== null)) _steamid = value ? this.steamid : (ulong?)null; }
-    }
-    private bool ShouldSerializesteamid() { return steamidSpecified; }
-    private void Resetsteamid() { steamidSpecified = false; }
-    
-
-    private string _groupname;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"groupname", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string groupname
-    {
-      get { return _groupname?? ""; }
-      set { _groupname = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool groupnameSpecified
-    {
-      get { return _groupname != null; }
-      set { if (value == (_groupname== null)) _groupname = value ? this.groupname : (string)null; }
-    }
-    private bool ShouldSerializegroupname() { return groupnameSpecified; }
-    private void Resetgroupname() { groupnameSpecified = false; }
-    
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientCreateFriendsGroupResponse")]
-  public partial class CMsgClientCreateFriendsGroupResponse : global::ProtoBuf.IExtensible
-  {
-    public CMsgClientCreateFriendsGroupResponse() {}
-    
-
-    private uint? _eresult;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"eresult", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint eresult
-    {
-      get { return _eresult?? default(uint); }
-      set { _eresult = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool eresultSpecified
-    {
-      get { return _eresult != null; }
-      set { if (value == (_eresult== null)) _eresult = value ? this.eresult : (uint?)null; }
-    }
-    private bool ShouldSerializeeresult() { return eresultSpecified; }
-    private void Reseteresult() { eresultSpecified = false; }
-    
-
-    private int? _groupid;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"groupid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public int groupid
-    {
-      get { return _groupid?? default(int); }
-      set { _groupid = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool groupidSpecified
-    {
-      get { return _groupid != null; }
-      set { if (value == (_groupid== null)) _groupid = value ? this.groupid : (int?)null; }
-    }
-    private bool ShouldSerializegroupid() { return groupidSpecified; }
-    private void Resetgroupid() { groupidSpecified = false; }
-    
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientDeleteFriendsGroup")]
-  public partial class CMsgClientDeleteFriendsGroup : global::ProtoBuf.IExtensible
-  {
-    public CMsgClientDeleteFriendsGroup() {}
-    
-
-    private ulong? _steamid;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"steamid", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    public ulong steamid
-    {
-      get { return _steamid?? default(ulong); }
-      set { _steamid = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool steamidSpecified
-    {
-      get { return _steamid != null; }
-      set { if (value == (_steamid== null)) _steamid = value ? this.steamid : (ulong?)null; }
-    }
-    private bool ShouldSerializesteamid() { return steamidSpecified; }
-    private void Resetsteamid() { steamidSpecified = false; }
-    
-
-    private int? _groupid;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"groupid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public int groupid
-    {
-      get { return _groupid?? default(int); }
-      set { _groupid = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool groupidSpecified
-    {
-      get { return _groupid != null; }
-      set { if (value == (_groupid== null)) _groupid = value ? this.groupid : (int?)null; }
-    }
-    private bool ShouldSerializegroupid() { return groupidSpecified; }
-    private void Resetgroupid() { groupidSpecified = false; }
-    
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientDeleteFriendsGroupResponse")]
-  public partial class CMsgClientDeleteFriendsGroupResponse : global::ProtoBuf.IExtensible
-  {
-    public CMsgClientDeleteFriendsGroupResponse() {}
-    
-
-    private uint? _eresult;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"eresult", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint eresult
-    {
-      get { return _eresult?? default(uint); }
-      set { _eresult = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool eresultSpecified
-    {
-      get { return _eresult != null; }
-      set { if (value == (_eresult== null)) _eresult = value ? this.eresult : (uint?)null; }
-    }
-    private bool ShouldSerializeeresult() { return eresultSpecified; }
-    private void Reseteresult() { eresultSpecified = false; }
-    
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientRenameFriendsGroup")]
-  public partial class CMsgClientRenameFriendsGroup : global::ProtoBuf.IExtensible
-  {
-    public CMsgClientRenameFriendsGroup() {}
-    
-
-    private int? _groupid;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"groupid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public int groupid
-    {
-      get { return _groupid?? default(int); }
-      set { _groupid = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool groupidSpecified
-    {
-      get { return _groupid != null; }
-      set { if (value == (_groupid== null)) _groupid = value ? this.groupid : (int?)null; }
-    }
-    private bool ShouldSerializegroupid() { return groupidSpecified; }
-    private void Resetgroupid() { groupidSpecified = false; }
-    
-
-    private string _groupname;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"groupname", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string groupname
-    {
-      get { return _groupname?? ""; }
-      set { _groupname = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool groupnameSpecified
-    {
-      get { return _groupname != null; }
-      set { if (value == (_groupname== null)) _groupname = value ? this.groupname : (string)null; }
-    }
-    private bool ShouldSerializegroupname() { return groupnameSpecified; }
-    private void Resetgroupname() { groupnameSpecified = false; }
-    
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientRenameFriendsGroupResponse")]
-  public partial class CMsgClientRenameFriendsGroupResponse : global::ProtoBuf.IExtensible
-  {
-    public CMsgClientRenameFriendsGroupResponse() {}
-    
-
-    private uint? _eresult;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"eresult", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint eresult
-    {
-      get { return _eresult?? default(uint); }
-      set { _eresult = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool eresultSpecified
-    {
-      get { return _eresult != null; }
-      set { if (value == (_eresult== null)) _eresult = value ? this.eresult : (uint?)null; }
-    }
-    private bool ShouldSerializeeresult() { return eresultSpecified; }
-    private void Reseteresult() { eresultSpecified = false; }
-    
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientAddFriendToGroup")]
-  public partial class CMsgClientAddFriendToGroup : global::ProtoBuf.IExtensible
-  {
-    public CMsgClientAddFriendToGroup() {}
-    
-
-    private int? _groupid;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"groupid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public int groupid
-    {
-      get { return _groupid?? default(int); }
-      set { _groupid = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool groupidSpecified
-    {
-      get { return _groupid != null; }
-      set { if (value == (_groupid== null)) _groupid = value ? this.groupid : (int?)null; }
-    }
-    private bool ShouldSerializegroupid() { return groupidSpecified; }
-    private void Resetgroupid() { groupidSpecified = false; }
-    
-
-    private ulong? _steamiduser;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"steamiduser", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    public ulong steamiduser
-    {
-      get { return _steamiduser?? default(ulong); }
-      set { _steamiduser = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool steamiduserSpecified
-    {
-      get { return _steamiduser != null; }
-      set { if (value == (_steamiduser== null)) _steamiduser = value ? this.steamiduser : (ulong?)null; }
-    }
-    private bool ShouldSerializesteamiduser() { return steamiduserSpecified; }
-    private void Resetsteamiduser() { steamiduserSpecified = false; }
-    
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientAddFriendToGroupResponse")]
-  public partial class CMsgClientAddFriendToGroupResponse : global::ProtoBuf.IExtensible
-  {
-    public CMsgClientAddFriendToGroupResponse() {}
-    
-
-    private uint? _eresult;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"eresult", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint eresult
-    {
-      get { return _eresult?? default(uint); }
-      set { _eresult = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool eresultSpecified
-    {
-      get { return _eresult != null; }
-      set { if (value == (_eresult== null)) _eresult = value ? this.eresult : (uint?)null; }
-    }
-    private bool ShouldSerializeeresult() { return eresultSpecified; }
-    private void Reseteresult() { eresultSpecified = false; }
-    
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientRemoveFriendFromGroup")]
-  public partial class CMsgClientRemoveFriendFromGroup : global::ProtoBuf.IExtensible
-  {
-    public CMsgClientRemoveFriendFromGroup() {}
-    
-
-    private int? _groupid;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"groupid", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public int groupid
-    {
-      get { return _groupid?? default(int); }
-      set { _groupid = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool groupidSpecified
-    {
-      get { return _groupid != null; }
-      set { if (value == (_groupid== null)) _groupid = value ? this.groupid : (int?)null; }
-    }
-    private bool ShouldSerializegroupid() { return groupidSpecified; }
-    private void Resetgroupid() { groupidSpecified = false; }
-    
-
-    private ulong? _steamiduser;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"steamiduser", DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-    public ulong steamiduser
-    {
-      get { return _steamiduser?? default(ulong); }
-      set { _steamiduser = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool steamiduserSpecified
-    {
-      get { return _steamiduser != null; }
-      set { if (value == (_steamiduser== null)) _steamiduser = value ? this.steamiduser : (ulong?)null; }
-    }
-    private bool ShouldSerializesteamiduser() { return steamiduserSpecified; }
-    private void Resetsteamiduser() { steamiduserSpecified = false; }
-    
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientRemoveFriendFromGroupResponse")]
-  public partial class CMsgClientRemoveFriendFromGroupResponse : global::ProtoBuf.IExtensible
-  {
-    public CMsgClientRemoveFriendFromGroupResponse() {}
     
 
     private uint? _eresult;
@@ -9488,10 +9118,10 @@ namespace SteamKit2.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientFSGetFriendMessageHistory")]
-  public partial class CMsgClientFSGetFriendMessageHistory : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientChatGetFriendMessageHistory")]
+  public partial class CMsgClientChatGetFriendMessageHistory : global::ProtoBuf.IExtensible
   {
-    public CMsgClientFSGetFriendMessageHistory() {}
+    public CMsgClientChatGetFriendMessageHistory() {}
     
 
     private ulong? _steamid;
@@ -9516,10 +9146,10 @@ namespace SteamKit2.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientFSGetFriendMessageHistoryResponse")]
-  public partial class CMsgClientFSGetFriendMessageHistoryResponse : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientChatGetFriendMessageHistoryResponse")]
+  public partial class CMsgClientChatGetFriendMessageHistoryResponse : global::ProtoBuf.IExtensible
   {
-    public CMsgClientFSGetFriendMessageHistoryResponse() {}
+    public CMsgClientChatGetFriendMessageHistoryResponse() {}
     
 
     private ulong? _steamid;
@@ -9557,9 +9187,9 @@ namespace SteamKit2.Internal
     private bool ShouldSerializesuccess() { return successSpecified; }
     private void Resetsuccess() { successSpecified = false; }
     
-    private readonly global::System.Collections.Generic.List<CMsgClientFSGetFriendMessageHistoryResponse.FriendMessage> _messages = new global::System.Collections.Generic.List<CMsgClientFSGetFriendMessageHistoryResponse.FriendMessage>();
+    private readonly global::System.Collections.Generic.List<CMsgClientChatGetFriendMessageHistoryResponse.FriendMessage> _messages = new global::System.Collections.Generic.List<CMsgClientChatGetFriendMessageHistoryResponse.FriendMessage>();
     [global::ProtoBuf.ProtoMember(3, Name=@"messages", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public global::System.Collections.Generic.List<CMsgClientFSGetFriendMessageHistoryResponse.FriendMessage> messages
+    public global::System.Collections.Generic.List<CMsgClientChatGetFriendMessageHistoryResponse.FriendMessage> messages
     {
       get { return _messages; }
     }
@@ -9651,10 +9281,10 @@ namespace SteamKit2.Internal
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientFSGetFriendMessageHistoryForOfflineMessages")]
-  public partial class CMsgClientFSGetFriendMessageHistoryForOfflineMessages : global::ProtoBuf.IExtensible
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientChatGetFriendMessageHistoryForOfflineMessages")]
+  public partial class CMsgClientChatGetFriendMessageHistoryForOfflineMessages : global::ProtoBuf.IExtensible
   {
-    public CMsgClientFSGetFriendMessageHistoryForOfflineMessages() {}
+    public CMsgClientChatGetFriendMessageHistoryForOfflineMessages() {}
     
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
@@ -11680,79 +11310,6 @@ namespace SteamKit2.Internal
     }
     private bool ShouldSerializeapp_played() { return app_playedSpecified; }
     private void Resetapp_played() { app_playedSpecified = false; }
-    
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientGetEmoticonList")]
-  public partial class CMsgClientGetEmoticonList : global::ProtoBuf.IExtensible
-  {
-    public CMsgClientGetEmoticonList() {}
-    
-    private global::ProtoBuf.IExtension extensionObject;
-    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-  }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CMsgClientEmoticonList")]
-  public partial class CMsgClientEmoticonList : global::ProtoBuf.IExtensible
-  {
-    public CMsgClientEmoticonList() {}
-    
-    private readonly global::System.Collections.Generic.List<CMsgClientEmoticonList.Emoticon> _emoticons = new global::System.Collections.Generic.List<CMsgClientEmoticonList.Emoticon>();
-    [global::ProtoBuf.ProtoMember(1, Name=@"emoticons", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public global::System.Collections.Generic.List<CMsgClientEmoticonList.Emoticon> emoticons
-    {
-      get { return _emoticons; }
-    }
-  
-  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Emoticon")]
-  public partial class Emoticon : global::ProtoBuf.IExtensible
-  {
-    public Emoticon() {}
-    
-
-    private string _name;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"name", DataFormat = global::ProtoBuf.DataFormat.Default)]
-    public string name
-    {
-      get { return _name?? ""; }
-      set { _name = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool nameSpecified
-    {
-      get { return _name != null; }
-      set { if (value == (_name== null)) _name = value ? this.name : (string)null; }
-    }
-    private bool ShouldSerializename() { return nameSpecified; }
-    private void Resetname() { nameSpecified = false; }
-    
-
-    private int? _count;
-    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"count", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public int count
-    {
-      get { return _count?? default(int); }
-      set { _count = value; }
-    }
-    [global::System.Xml.Serialization.XmlIgnore]
-    [global::System.ComponentModel.Browsable(false)]
-    public bool countSpecified
-    {
-      get { return _count != null; }
-      set { if (value == (_count== null)) _count = value ? this.count : (int?)null; }
-    }
-    private bool ShouldSerializecount() { return countSpecified; }
-    private void Resetcount() { countSpecified = false; }
     
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

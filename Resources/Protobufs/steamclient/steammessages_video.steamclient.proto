@@ -16,6 +16,16 @@ message CVideo_UnlockedH264_Notification {
 	optional bytes encryption_key = 1;
 }
 
+message CFovasVideo_ClientGetOPFSettings_Request {
+	optional uint32 app_id = 1 [(description) = "App ID"];
+	optional uint32 client_cellid = 2 [(description) = "Cell ID of client, zero if unknown"];
+}
+
+message CFovasVideo_ClientGetOPFSettings_Response {
+	optional uint32 app_id = 1 [(description) = "App ID"];
+	optional string opf_settings = 2 [(description) = "JSON blob of OPF Settings"];
+}
+
 service Video {
 	option (service_description) = "Video methods";
 	rpc ClientGetVideoURL (.CVideo_ClientGetVideoURL_Request) returns (.CVideo_ClientGetVideoURL_Response) {
@@ -26,5 +36,11 @@ service VideoClient {
 	option (service_execution_site) = k_EProtoExecutionSiteSteamClient;
 	rpc NotifyUnlockedH264 (.CVideo_UnlockedH264_Notification) returns (.NoResponse) {
 		option (method_description) = "Notification from server to client that h264 has been unlocked";
+	}
+}
+service FovasVideo {
+	option (service_description) = "Fovas Video Service Methods";
+	rpc ClientGetOPFSettings (.CFovasVideo_ClientGetOPFSettings_Request) returns (.CFovasVideo_ClientGetOPFSettings_Response) {
+		option (method_description) = "Retrieve the OPF settings JSON blob. Available via the Client for 360 Player App";
 	}
 }

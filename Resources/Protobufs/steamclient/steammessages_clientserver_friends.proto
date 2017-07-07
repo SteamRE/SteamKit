@@ -1,0 +1,213 @@
+import "steammessages_base.proto";
+
+option optimize_for = SPEED;
+option cc_generic_services = false;
+
+message CMsgClientFriendMsg {
+	optional fixed64 steamid = 1;
+	optional int32 chat_entry_type = 2;
+	optional bytes message = 3;
+	optional fixed32 rtime32_server_timestamp = 4;
+}
+
+message CMsgClientFriendMsgIncoming {
+	optional fixed64 steamid_from = 1;
+	optional int32 chat_entry_type = 2;
+	optional bool from_limited_account = 3;
+	optional bytes message = 4;
+	optional fixed32 rtime32_server_timestamp = 5;
+}
+
+message CMsgClientAddFriend {
+	optional fixed64 steamid_to_add = 1;
+	optional string accountname_or_email_to_add = 2;
+}
+
+message CMsgClientAddFriendResponse {
+	optional int32 eresult = 1 [default = 2];
+	optional fixed64 steam_id_added = 2;
+	optional string persona_name_added = 3;
+}
+
+message CMsgClientRemoveFriend {
+	optional fixed64 friendid = 1;
+}
+
+message CMsgClientHideFriend {
+	optional fixed64 friendid = 1;
+	optional bool hide = 2;
+}
+
+message CMsgClientFriendsList {
+	message Friend {
+		optional fixed64 ulfriendid = 1;
+		optional uint32 efriendrelationship = 2;
+	}
+
+	optional bool bincremental = 1;
+	repeated .CMsgClientFriendsList.Friend friends = 2;
+	optional uint32 max_friend_count = 3;
+	optional uint32 active_friend_count = 4;
+	optional bool friends_limit_hit = 5;
+}
+
+message CMsgClientFriendsGroupsList {
+	message FriendGroup {
+		optional int32 nGroupID = 1;
+		optional string strGroupName = 2;
+	}
+
+	message FriendGroupsMembership {
+		optional fixed64 ulSteamID = 1;
+		optional int32 nGroupID = 2;
+	}
+
+	optional bool bremoval = 1;
+	optional bool bincremental = 2;
+	repeated .CMsgClientFriendsGroupsList.FriendGroup friendGroups = 3;
+	repeated .CMsgClientFriendsGroupsList.FriendGroupsMembership memberships = 4;
+}
+
+message CMsgClientPlayerNicknameList {
+	message PlayerNickname {
+		optional fixed64 steamid = 1;
+		optional string nickname = 3;
+	}
+
+	optional bool removal = 1;
+	optional bool incremental = 2;
+	repeated .CMsgClientPlayerNicknameList.PlayerNickname nicknames = 3;
+}
+
+message CMsgClientSetPlayerNickname {
+	optional fixed64 steamid = 1;
+	optional string nickname = 2;
+}
+
+message CMsgClientSetPlayerNicknameResponse {
+	optional uint32 eresult = 1;
+}
+
+message CMsgClientRequestFriendData {
+	optional uint32 persona_state_requested = 1;
+	repeated fixed64 friends = 2;
+}
+
+message CMsgClientChangeStatus {
+	optional uint32 persona_state = 1;
+	optional string player_name = 2;
+	optional bool is_auto_generated_name = 3;
+	optional bool high_priority = 4;
+	optional bool persona_set_by_user = 5;
+	optional uint32 persona_state_flags = 6 [default = 0];
+}
+
+message CMsgPersonaChangeResponse {
+	optional uint32 result = 1;
+	optional string player_name = 2;
+}
+
+message CMsgClientPersonaState {
+	message Friend {
+		optional fixed64 friendid = 1;
+		optional uint32 persona_state = 2;
+		optional uint32 game_played_app_id = 3;
+		optional uint32 game_server_ip = 4;
+		optional uint32 game_server_port = 5;
+		optional uint32 persona_state_flags = 6;
+		optional uint32 online_session_instances = 7;
+		optional uint32 published_instance_id = 8;
+		optional bool persona_set_by_user = 10;
+		optional string player_name = 15;
+		optional uint32 query_port = 20;
+		optional fixed64 steamid_source = 25;
+		optional bytes avatar_hash = 31;
+		optional uint32 last_logoff = 45;
+		optional uint32 last_logon = 46;
+		optional uint32 clan_rank = 50;
+		optional string game_name = 55;
+		optional fixed64 gameid = 56;
+		optional bytes game_data_blob = 60;
+		optional string clan_tag = 65;
+		optional string facebook_name = 66;
+		optional uint64 facebook_id = 67;
+	}
+
+	optional uint32 status_flags = 1;
+	repeated .CMsgClientPersonaState.Friend friends = 2;
+}
+
+message CMsgClientFriendProfileInfo {
+	optional fixed64 steamid_friend = 1;
+}
+
+message CMsgClientFriendProfileInfoResponse {
+	optional int32 eresult = 1 [default = 2];
+	optional fixed64 steamid_friend = 2;
+	optional uint32 time_created = 3;
+	optional string real_name = 4;
+	optional string city_name = 5;
+	optional string state_name = 6;
+	optional string country_name = 7;
+	optional string headline = 8;
+	optional string summary = 9;
+}
+
+message CMsgClientCreateFriendsGroup {
+	optional fixed64 steamid = 1;
+	optional string groupname = 2;
+}
+
+message CMsgClientCreateFriendsGroupResponse {
+	optional uint32 eresult = 1;
+	optional int32 groupid = 2;
+}
+
+message CMsgClientDeleteFriendsGroup {
+	optional fixed64 steamid = 1;
+	optional int32 groupid = 2;
+}
+
+message CMsgClientDeleteFriendsGroupResponse {
+	optional uint32 eresult = 1;
+}
+
+message CMsgClientRenameFriendsGroup {
+	optional int32 groupid = 1;
+	optional string groupname = 2;
+}
+
+message CMsgClientRenameFriendsGroupResponse {
+	optional uint32 eresult = 1;
+}
+
+message CMsgClientAddFriendToGroup {
+	optional int32 groupid = 1;
+	optional fixed64 steamiduser = 2;
+}
+
+message CMsgClientAddFriendToGroupResponse {
+	optional uint32 eresult = 1;
+}
+
+message CMsgClientRemoveFriendFromGroup {
+	optional int32 groupid = 1;
+	optional fixed64 steamiduser = 2;
+}
+
+message CMsgClientRemoveFriendFromGroupResponse {
+	optional uint32 eresult = 1;
+}
+
+message CMsgClientGetEmoticonList {
+}
+
+message CMsgClientEmoticonList {
+	message Emoticon {
+		optional string name = 1;
+		optional int32 count = 2;
+	}
+
+	repeated .CMsgClientEmoticonList.Emoticon emoticons = 1;
+}
+

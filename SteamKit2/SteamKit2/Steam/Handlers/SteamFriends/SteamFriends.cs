@@ -573,7 +573,7 @@ namespace SteamKit2
         /// <param name="steamId">SteamID of the friend</param>
         public void RequestMessageHistory( SteamID steamId )
         {
-            var request = new ClientMsgProtobuf<CMsgClientFSGetFriendMessageHistory>( EMsg.ClientFSGetFriendMessageHistory );
+            var request = new ClientMsgProtobuf<CMsgClientChatGetFriendMessageHistory>( EMsg.ClientFSGetFriendMessageHistory );
 
             request.Body.steamid = steamId;
 
@@ -587,7 +587,7 @@ namespace SteamKit2
         /// </summary>
         public void RequestOfflineMessages()
         {
-            var request = new ClientMsgProtobuf<CMsgClientFSGetFriendMessageHistoryForOfflineMessages>( EMsg.ClientFSGetFriendMessageHistoryForOfflineMessages );
+            var request = new ClientMsgProtobuf<CMsgClientChatGetFriendMessageHistoryForOfflineMessages>( EMsg.ClientFSGetFriendMessageHistoryForOfflineMessages );
             
             this.Client.Send( request );
         }
@@ -638,7 +638,7 @@ namespace SteamKit2
 
         private void HandleFriendMessageHistoryResponse( IPacketMsg packetMsg )
         {
-            var historyResponse = new ClientMsgProtobuf<CMsgClientFSGetFriendMessageHistoryResponse>( packetMsg );
+            var historyResponse = new ClientMsgProtobuf<CMsgClientChatGetFriendMessageHistoryResponse>( packetMsg );
 
             var callback = new FriendMsgHistoryCallback( historyResponse.Body, this.Client.ConnectedUniverse );
             this.Client.PostCallback( callback );

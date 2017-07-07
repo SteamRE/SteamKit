@@ -13,6 +13,9 @@ echo.
 echo Steam Messages ClientServer
 ..\..\Protogen\protogen -i:"steammessages_clientserver.proto" -o:"..\..\..\SteamKit2\SteamKit2\Base\Generated\SteamMsgClientServer.cs" -t:csharp -ns:"SteamKit2.Internal" -p:detectMissing
 ..\..\Protogen\protogen -i:"steammessages_clientserver_2.proto" -o:"..\..\..\SteamKit2\SteamKit2\Base\Generated\SteamMsgClientServer2.cs" -t:csharp -ns:"SteamKit2.Internal" -p:detectMissing
+..\..\Protogen\protogen -i:"steammessages_clientserver_friends.proto" -o:"..\..\..\SteamKit2\SteamKit2\Base\Generated\SteamMsgClientServerFriends.cs" -t:csharp -ns:"SteamKit2.Internal" -p:detectMissing
+..\..\Protogen\protogen -i:"steammessages_clientserver_login.proto" -o:"..\..\..\SteamKit2\SteamKit2\Base\Generated\SteamMsgClientServerLogin.cs" -t:csharp -ns:"SteamKit2.Internal" -p:detectMissing
+..\..\Protogen\protogen -i:"steammessages_sitelicenseclient.proto" -o:"..\..\..\SteamKit2\SteamKit2\Base\Generated\SteamMsgSiteLicenseClient.cs" -t:csharp -ns:"SteamKit2.Internal" -p:detectMissing
 echo.
 echo.
 
@@ -27,6 +30,7 @@ echo Unified Messages
 ..\..\Protogen\protogen -s:..\ -i:"steammessages_broadcast.steamclient.proto" -o:"..\..\..\SteamKit2\SteamKit2\Base\Generated\Unified\SteamMsgBroadcast.cs" -t:csharp -ns:"SteamKit2.Unified.Internal" -p:detectMissing
 ..\..\Protogen\protogen -s:..\ -i:"steammessages_cloud.steamclient.proto" -o:"..\..\..\SteamKit2\SteamKit2\Base\Generated\Unified\SteamMsgCloud.cs" -t:csharp -ns:"SteamKit2.Unified.Internal" -p:detectMissing
 ..\..\Protogen\protogen -s:..\ -i:"steammessages_credentials.steamclient.proto" -o:"..\..\..\SteamKit2\SteamKit2\Base\Generated\Unified\SteamMsgCredentials.cs" -t:csharp -ns:"SteamKit2.Unified.Internal" -p:detectMissing
+..\..\Protogen\protogen -s:..\ -i:"steammessages_datapublisher.steamclient.proto" -o:"..\..\..\SteamKit2\SteamKit2\Base\Generated\Unified\SteamMsgDataPublisher.cs" -t:csharp -ns:"SteamKit2.Unified.Internal" -p:detectMissing
 ..\..\Protogen\protogen -s:..\ -i:"steammessages_depotbuilder.steamclient.proto" -o:"..\..\..\SteamKit2\SteamKit2\Base\Generated\Unified\SteamMsgDepotBuilder.cs" -t:csharp -ns:"SteamKit2.Unified.Internal" -p:detectMissing
 ..\..\Protogen\protogen -s:..\ -i:"steammessages_deviceauth.steamclient.proto" -o:"..\..\..\SteamKit2\SteamKit2\Base\Generated\Unified\SteamMsgDeviceAuth.cs" -t:csharp -ns:"SteamKit2.Unified.Internal" -p:detectMissing
 ..\..\Protogen\protogen -s:..\ -i:"steammessages_econ.steamclient.proto" -o:"..\..\..\SteamKit2\SteamKit2\Base\Generated\Unified\SteamMsgEcon.cs" -t:csharp -ns:"SteamKit2.Unified.Internal" -p:detectMissing
@@ -43,6 +47,7 @@ echo Unified Messages
 ..\..\Protogen\protogen -s:..\ -i:"steammessages_secrets.steamclient.proto" -o:"..\..\..\SteamKit2\SteamKit2\Base\Generated\Unified\SteamMsgSecrets.cs" -t:csharp -ns:"SteamKit2.Unified.Internal" -p:detectMissing
 ..\..\Protogen\protogen -s:..\ -i:"steammessages_site_license.steamclient.proto" -o:"..\..\..\SteamKit2\SteamKit2\Base\Generated\Unified\SteamMsgSiteLicense.cs" -t:csharp -ns:"SteamKit2.Unified.Internal" -p:detectMissing
 ..\..\Protogen\protogen -s:..\ -i:"steammessages_twofactor.steamclient.proto" -o:"..\..\..\SteamKit2\SteamKit2\Base\Generated\Unified\SteamMsgTwoFactor.cs" -t:csharp -ns:"SteamKit2.Unified.Internal" -p:detectMissing
+..\..\Protogen\protogen -s:..\ -i:"steammessages_useraccount.steamclient.proto" -o:"..\..\..\SteamKit2\SteamKit2\Base\Generated\Unified\SteamMsgUserAccount.cs" -t:csharp -ns:"SteamKit2.Unified.Internal" -p:detectMissing
 ..\..\Protogen\protogen -s:..\ -i:"steammessages_video.steamclient.proto" -o:"..\..\..\SteamKit2\SteamKit2\Base\Generated\Unified\SteamMsgVideo.cs" -t:csharp -ns:"SteamKit2.Unified.Internal" -p:detectMissing
 
 pause

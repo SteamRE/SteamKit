@@ -1,0 +1,19 @@
+import "steammessages_unified_base.steamclient.proto";
+
+option cc_generic_services = true;
+
+message CDataPublisher_ClientContentCorruptionReport_Notification {
+	optional uint32 appid = 1;
+	optional uint32 depotid = 2;
+	optional string download_source = 3 [(description) = "host name of download source"];
+	optional string objectid = 4 [(description) = "Chunk SHA or Manifest ID"];
+	optional uint32 cellid = 5 [(description) = "Client Cell ID"];
+	optional bool is_manifest = 6 [(description) = "The object is a manifest, not a chunk"];
+	optional uint64 object_size = 7 [(description) = "object size in bytes"];
+	optional uint32 corruption_type = 8 [(description) = "See EContentCorruptionType"];
+}
+
+service DataPublisher {
+	option (service_description) = "Data Publisher (DP) server services";
+	rpc ClientContentCorruptionReport (.CDataPublisher_ClientContentCorruptionReport_Notification) returns (.NoResponse);
+}

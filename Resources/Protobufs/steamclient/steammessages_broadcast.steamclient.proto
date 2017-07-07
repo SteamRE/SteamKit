@@ -13,6 +13,10 @@ message CBroadcast_BeginBroadcastSession_Request {
 
 message CBroadcast_BeginBroadcastSession_Response {
 	optional fixed64 broadcast_id = 1;
+	optional string thumbnail_upload_address = 2 [(description) = "Http address to upload the thumbnail data."];
+	optional string thumbnail_upload_token = 3 [(description) = "token to authorize as broadcaster to upload content to the relay."];
+	optional uint32 thumbnail_interval_seconds = 4 [(description) = "how many seconds between thumbnails"];
+	optional fixed64 thumbnail_broadcast_relay_id = 5 [(description) = "unique identifier on the broadcast relay"];
 }
 
 message CBroadcast_EndBroadcastSession_Request {
@@ -206,6 +210,14 @@ message CBroadcast_BroadcastStatus_Notification {
 	optional int32 num_viewers = 2;
 }
 
+message CBroadcast_SendThumbnailToRelay_Notification {
+	optional string thumbnail_upload_token = 1;
+	optional fixed64 thumbnail_broadcast_relay_id = 2;
+	optional bytes thumbnail_data = 3;
+	optional uint32 thumbnail_width = 4;
+	optional uint32 thumbnail_height = 5;
+}
+
 service Broadcast {
 	option (service_description) = "Methods for Steam broadcast operations";
 	rpc BeginBroadcastSession (.CBroadcast_BeginBroadcastSession_Request) returns (.CBroadcast_BeginBroadcastSession_Response) {
@@ -270,5 +282,8 @@ service BroadcastClient {
 	}
 	rpc NotifyBroadcastStatus (.CBroadcast_BroadcastStatus_Notification) returns (.NoResponse) {
 		option (method_description) = "Notification from server to client about current broadcast status";
+	}
+	rpc SendThumbnailToRelay (.CBroadcast_SendThumbnailToRelay_Notification) returns (.NoResponse) {
+		option (method_description) = "Send thumbnails to relay";
 	}
 }

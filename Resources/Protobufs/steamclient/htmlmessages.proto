@@ -1,6 +1,13 @@
 option optimize_for = SPEED;
 option cc_generic_services = false;
 
+enum EJSRegisterMethodType {
+	k_EJSRegisterMethodType_Invalid = 0;
+	k_EJSRegisterMethodType_Function = 1;
+	k_EJSRegisterMethodType_Callback = 2;
+	k_EJSRegisterMethodType_Promise = 3;
+}
+
 message CMsgKeyUp {
 	optional uint32 browser_handle = 1;
 	optional uint32 keyCode = 2;
@@ -60,6 +67,15 @@ message CMsgBrowserCreate {
 	optional string user_css = 5;
 	optional bool native_dropdowns = 6;
 	optional float dpi_scaling = 7;
+	optional bool offscreen = 8 [default = true];
+	optional uint32 initial_width = 9 [default = 0];
+	optional uint32 initial_height = 10 [default = 0];
+	optional string window_icon = 11;
+	optional bool borderless = 12 [default = false];
+	optional string vroverlay_key = 13;
+	optional uint32 browser_type = 14 [default = 0];
+	optional int32 initial_top = 15 [default = -1];
+	optional int32 initial_left = 16 [default = -1];
 }
 
 message CMsgBrowserCreateResponse {
@@ -210,6 +226,7 @@ message CMsgViewSource {
 
 message CMsgBrowserReady {
 	optional uint32 browser_handle = 1;
+	optional string vr_overlay_key = 2;
 }
 
 message CMsgURLChanged {
@@ -596,9 +613,22 @@ message CMsgScreenDPI {
 	optional float dpi_scaling = 2;
 }
 
+message CMsgAuthedSteamDomains {
+	repeated string domains = 1;
+}
+
+message CMsgSteamAuthNeeded {
+	optional bool filler = 1;
+}
+
+message CMsgSteamAuthCookiesSet {
+	optional bool success = 1;
+}
+
 message CMsgJSRegisterMethod {
 	optional uint32 browser_handle = 1;
 	optional string name = 2;
+	optional .EJSRegisterMethodType method_type = 3 [default = k_EJSRegisterMethodType_Invalid];
 }
 
 message CJSMethodArgument {
@@ -650,5 +680,29 @@ message CMsgLoadLocalization {
 	optional uint32 browser_handle = 1;
 	optional string localization_path = 2;
 	optional string language = 3;
+}
+
+message CMsgEnableSteamClientAPI {
+	optional uint32 browser_handle = 1;
+}
+
+message CMsgJumpListLink {
+	optional string display_name = 1;
+	optional string url_link = 2;
+	optional string icon_path = 3;
+}
+
+message CMSgJumpListMRUApp {
+	optional uint32 appid = 1;
+	optional string display_name = 2;
+	optional string url_link = 3;
+	optional string icon_path = 4;
+}
+
+message CMsgSetJumpList {
+	optional string steam_path = 1;
+	optional string mru_title = 2;
+	repeated .CMSgJumpListMRUApp apps = 3;
+	repeated .CMsgJumpListLink links = 4;
 }
 

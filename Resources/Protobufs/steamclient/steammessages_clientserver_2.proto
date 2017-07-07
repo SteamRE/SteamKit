@@ -112,6 +112,7 @@ message CMsgClientUCMUpdatePublishedFileResponse {
 
 message CMsgClientUCMDeletePublishedFile {
 	optional fixed64 published_file_id = 1;
+	optional uint32 app_id = 2;
 }
 
 message CMsgClientUCMDeletePublishedFileResponse {
@@ -395,52 +396,6 @@ message CMsgClientRequestMachineAuth {
 }
 
 message CMsgClientRequestMachineAuthResponse {
-	optional uint32 eresult = 1;
-}
-
-message CMsgClientCreateFriendsGroup {
-	optional fixed64 steamid = 1;
-	optional string groupname = 2;
-}
-
-message CMsgClientCreateFriendsGroupResponse {
-	optional uint32 eresult = 1;
-	optional int32 groupid = 2;
-}
-
-message CMsgClientDeleteFriendsGroup {
-	optional fixed64 steamid = 1;
-	optional int32 groupid = 2;
-}
-
-message CMsgClientDeleteFriendsGroupResponse {
-	optional uint32 eresult = 1;
-}
-
-message CMsgClientRenameFriendsGroup {
-	optional int32 groupid = 1;
-	optional string groupname = 2;
-}
-
-message CMsgClientRenameFriendsGroupResponse {
-	optional uint32 eresult = 1;
-}
-
-message CMsgClientAddFriendToGroup {
-	optional int32 groupid = 1;
-	optional fixed64 steamiduser = 2;
-}
-
-message CMsgClientAddFriendToGroupResponse {
-	optional uint32 eresult = 1;
-}
-
-message CMsgClientRemoveFriendFromGroup {
-	optional int32 groupid = 1;
-	optional fixed64 steamiduser = 2;
-}
-
-message CMsgClientRemoveFriendFromGroupResponse {
 	optional uint32 eresult = 1;
 }
 
@@ -874,11 +829,11 @@ message CMsgClientOfflineMessageNotification {
 message CMsgClientRequestOfflineMessageCount {
 }
 
-message CMsgClientFSGetFriendMessageHistory {
+message CMsgClientChatGetFriendMessageHistory {
 	optional fixed64 steamid = 1;
 }
 
-message CMsgClientFSGetFriendMessageHistoryResponse {
+message CMsgClientChatGetFriendMessageHistoryResponse {
 	message FriendMessage {
 		optional uint32 accountid = 1;
 		optional uint32 timestamp = 2;
@@ -888,10 +843,10 @@ message CMsgClientFSGetFriendMessageHistoryResponse {
 
 	optional fixed64 steamid = 1;
 	optional uint32 success = 2;
-	repeated .CMsgClientFSGetFriendMessageHistoryResponse.FriendMessage messages = 3;
+	repeated .CMsgClientChatGetFriendMessageHistoryResponse.FriendMessage messages = 3;
 }
 
-message CMsgClientFSGetFriendMessageHistoryForOfflineMessages {
+message CMsgClientChatGetFriendMessageHistoryForOfflineMessages {
 }
 
 message CMsgClientFSGetFriendsSteamLevels {
@@ -1116,18 +1071,6 @@ message CMsgClientGetAuthorizedDevicesResponse {
 
 	optional int32 eresult = 1 [default = 2];
 	repeated .CMsgClientGetAuthorizedDevicesResponse.AuthorizedDevice authorized_device = 2;
-}
-
-message CMsgClientGetEmoticonList {
-}
-
-message CMsgClientEmoticonList {
-	message Emoticon {
-		optional string name = 1;
-		optional int32 count = 2;
-	}
-
-	repeated .CMsgClientEmoticonList.Emoticon emoticons = 1;
 }
 
 message CMsgClientSharedLibraryLockStatus {

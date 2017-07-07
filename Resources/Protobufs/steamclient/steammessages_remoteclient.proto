@@ -35,6 +35,7 @@ message CMsgRemoteClientAppStatus {
 message CMsgRemoteClientAuth {
 	optional uint64 client_id = 1;
 	optional .CMsgRemoteClientBroadcastStatus status = 2;
+	optional uint64 instance_id = 3;
 }
 
 message CMsgRemoteClientAuthResponse {

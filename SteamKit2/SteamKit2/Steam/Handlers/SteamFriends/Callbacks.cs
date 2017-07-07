@@ -515,7 +515,7 @@ namespace SteamKit2
             /// </summary>
             public ReadOnlyCollection<FriendMessage> Messages { get; private set; }
 
-            internal FriendMsgHistoryCallback( CMsgClientFSGetFriendMessageHistoryResponse msg, EUniverse universe )
+            internal FriendMsgHistoryCallback( CMsgClientChatGetFriendMessageHistoryResponse msg, EUniverse universe )
             {
                 Result = ( EResult )msg.success;
 

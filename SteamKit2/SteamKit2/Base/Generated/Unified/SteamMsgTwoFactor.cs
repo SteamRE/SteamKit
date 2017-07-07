@@ -264,22 +264,22 @@ namespace SteamKit2.Unified.Internal
     private void Resetallow_external_authenticator() { allow_external_authenticatorSpecified = false; }
     
 
-    private uint? _external_authenticator_type;
-    [global::ProtoBuf.ProtoMember(13, IsRequired = false, Name=@"external_authenticator_type", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint external_authenticator_type
+    private uint? _time_transferred;
+    [global::ProtoBuf.ProtoMember(13, IsRequired = false, Name=@"time_transferred", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint time_transferred
     {
-      get { return _external_authenticator_type?? default(uint); }
-      set { _external_authenticator_type = value; }
+      get { return _time_transferred?? default(uint); }
+      set { _time_transferred = value; }
     }
     [global::System.Xml.Serialization.XmlIgnore]
     [global::System.ComponentModel.Browsable(false)]
-    public bool external_authenticator_typeSpecified
+    public bool time_transferredSpecified
     {
-      get { return _external_authenticator_type != null; }
-      set { if (value == (_external_authenticator_type== null)) _external_authenticator_type = value ? this.external_authenticator_type : (uint?)null; }
+      get { return _time_transferred != null; }
+      set { if (value == (_time_transferred== null)) _time_transferred = value ? this.time_transferred : (uint?)null; }
     }
-    private bool ShouldSerializeexternal_authenticator_type() { return external_authenticator_typeSpecified; }
-    private void Resetexternal_authenticator_type() { external_authenticator_typeSpecified = false; }
+    private bool ShouldSerializetime_transferred() { return time_transferredSpecified; }
+    private void Resettime_transferred() { time_transferredSpecified = false; }
     
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
