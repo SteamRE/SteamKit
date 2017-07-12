@@ -13,6 +13,7 @@ using System.IO.Compression;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Threading;
 using System.Threading.Tasks;
 using SteamKit2.Discovery;
 
@@ -88,6 +89,8 @@ namespace SteamKit2.Internal
 
         internal bool ExpectDisconnection { get; set; }
 
+        CancellationTokenSource connectionCancellation;
+        Task connectionSetupTask;
         IConnection connection;
 
         ScheduledFunction heartBeatFunc;
@@ -130,23 +133,33 @@ namespace SteamKit2.Internal
             this.Disconnect();
             Debug.Assert( connection == null );
 
+            var cancellation = new CancellationTokenSource();
+            var token = cancellation.Token;
+            var oldCancellation = Interlocked.Exchange(ref connectionCancellation, cancellation);
+            Debug.Assert(oldCancellation == null);
+
             ExpectDisconnection = false;
 
             Task<CMServerRecord> recordTask = null;
 
             if ( cmServer == null )
             {
-                recordTask = Servers.GetNextServerCandidateAsync( configuration.ProtocolTypes )
-                    .ContinueWith(r => r.Result, TaskContinuationOptions.OnlyOnRanToCompletion);
+                recordTask = Servers.GetNextServerCandidateAsync( configuration.ProtocolTypes );
             }
             else
             {
                 recordTask = Task.FromResult( cmServer );
             }
 
-            recordTask.ContinueWith(t =>
+            connectionSetupTask = recordTask.ContinueWith(t =>
             {
-                if ( t.IsFaulted || t.IsCanceled )
+                if ( token.IsCancellationRequested )
+                {
+                    DebugLog.WriteLine( nameof(CMClient), "Connection cancelled before a server could be chosen." );
+                    OnClientDisconnected( userInitiated: true );
+                    return;
+                }
+                else if ( t.IsFaulted || t.IsCanceled )
                 {
                     DebugLog.WriteLine( nameof(CMClient), "Server record task threw exception: {0}", t.Exception );
                     OnClientDisconnected( userInitiated: false );
@@ -170,6 +183,18 @@ namespace SteamKit2.Internal
         {
             heartBeatFunc.Stop();
 
+            var cts = Interlocked.Exchange(ref connectionCancellation, null);
+            if (cts != null)
+            {
+                cts.Cancel();
+                cts.Dispose();
+            }
+
+            var task = Interlocked.Exchange(ref connectionSetupTask, null);
+            if ( task != null )
+            {
+                task.GetAwaiter().GetResult();
+            }
             connection?.Disconnect();
         }
 
