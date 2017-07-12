@@ -95,15 +95,15 @@ namespace SteamKit2
 
             public void Start(TimeSpan connectionTimeout)
             {
-                runloopTask = RunCore(connectionTimeout);
+                runloopTask = RunCore(cts.Token, connectionTimeout);
             }
 
-            async Task RunCore(TimeSpan connectionTimeout)
+            async Task RunCore(CancellationToken cancellationToken, TimeSpan connectionTimeout)
             {
                 var uri = new Uri(FormattableString.Invariant($"wss://{EndPoint.Host}:{EndPoint.Port}/cmsocket/"));
 
                 using (var timeout = new CancellationTokenSource())
-                using (var combinedCancellation = CancellationTokenSource.CreateLinkedTokenSource(cts.Token, timeout.Token))
+                using (var combinedCancellation = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, timeout.Token))
                 {
                     timeout.CancelAfter(connectionTimeout);
 
@@ -128,9 +128,9 @@ namespace SteamKit2
                 DebugLog.WriteLine(nameof(WebSocketContext), "Connected to {0}", uri);
                 connection.Connected?.Invoke(connection, EventArgs.Empty);
 
-                while (!cts.Token.IsCancellationRequested && socket.State == WebSocketState.Open)
+                while (!cancellationToken.IsCancellationRequested && socket.State == WebSocketState.Open)
                 {
-                    var packet = await ReadMessageAsync().ConfigureAwait(false);
+                    var packet = await ReadMessageAsync(cancellationToken).ConfigureAwait(false);
                     if (packet != null)
                     {
                         connection.NetMsgReceived?.Invoke(connection, new NetMsgEventArgs(packet, EndPoint));
@@ -156,13 +156,20 @@ namespace SteamKit2
                 cts.Cancel();
                 cts.Dispose();
 
-                runloopTask?.GetAwaiter().GetResult();
+                try
+                {
+                    runloopTask?.GetAwaiter().GetResult();
+                }
+                catch (OperationCanceledException)
+                {
+                    // We know, we canceled it.
+                }
                 runloopTask = null;
 
                 socket.Dispose();
             }
 
-            async Task<byte[]> ReadMessageAsync()
+            async Task<byte[]> ReadMessageAsync(CancellationToken cancellationToken)
             {
                 using (var ms = new MemoryStream())
                 {
@@ -175,11 +182,11 @@ namespace SteamKit2
 
                         try
                         {
-                            result = await socket.ReceiveAsync(segment, cts.Token).ConfigureAwait(false);
+                            result = await socket.ReceiveAsync(segment, cancellationToken).ConfigureAwait(false);
                         }
                         catch (ObjectDisposedException)
                         {
-                            DisconnectNonBlocking(userInitiated: cts.Token.IsCancellationRequested);
+                            DisconnectNonBlocking(userInitiated: cancellationToken.IsCancellationRequested);
                             return null;
                         }
 
