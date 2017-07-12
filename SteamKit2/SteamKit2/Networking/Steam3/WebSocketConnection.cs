@@ -90,6 +90,7 @@ namespace SteamKit2
             readonly CancellationTokenSource cts;
             readonly ClientWebSocket socket;
             Task runloopTask;
+            bool disposed;
 
             public DnsEndPoint EndPoint { get; }
 
@@ -153,6 +154,11 @@ namespace SteamKit2
 
             public void Dispose()
             {
+                if (disposed)
+                {
+                    return;
+                }
+
                 cts.Cancel();
                 cts.Dispose();
 
@@ -167,6 +173,8 @@ namespace SteamKit2
                 runloopTask = null;
 
                 socket.Dispose();
+
+                disposed = true;
             }
 
             async Task<byte[]> ReadMessageAsync(CancellationToken cancellationToken)
