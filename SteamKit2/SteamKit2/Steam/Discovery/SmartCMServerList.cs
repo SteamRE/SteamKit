@@ -233,7 +233,7 @@ namespace SteamKit2.Discovery
                 ResetOldScores();
 
                 var serverInfo = servers
-                    .Where( s => (s.Record.ProtocolTypes & supportedProtocolTypes) > 0 )
+                    .Where( s => s.Record.ProtocolTypes.HasFlagsFast( supportedProtocolTypes ) )
                     .Select( (s, index) => new { Record = s.Record, IsBad = s.LastBadConnectionDateTimeUtc.HasValue, Index = index } )
                     .OrderBy( x => x.IsBad )
                     .ThenBy( x => x.Index )

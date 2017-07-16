@@ -332,15 +332,15 @@ namespace SteamKit2.Internal
 
         IConnection CreateConnection( ProtocolTypes protocol )
         {
-            if ( ( protocol & ProtocolTypes.WebSocket ) > 0 )
+            if ( protocol.HasFlagsFast( ProtocolTypes.WebSocket ) )
             {
                 return new WebSocketConnection();
             }
-            else if ( ( protocol & ProtocolTypes.Tcp ) > 0 )
+            else if ( protocol.HasFlagsFast( ProtocolTypes.Tcp ) )
             {
                 return new EnvelopeEncryptedConnection( new TcpConnection(), configuration.Universe );
             }
-            else if ( ( protocol & ProtocolTypes.Udp ) > 0 )
+            else if ( protocol.HasFlagsFast( ProtocolTypes.Udp ) )
             {
                 return new EnvelopeEncryptedConnection( new UdpConnection(), configuration.Universe );
             }
