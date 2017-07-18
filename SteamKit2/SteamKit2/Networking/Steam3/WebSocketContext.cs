@@ -16,7 +16,7 @@ namespace SteamKit2
             {
                 this.connection = connection;
                 EndPoint = endPoint;
-                
+
                 cts = new CancellationTokenSource();
                 socket = new ClientWebSocket();
                 hostAndPort = GetHostAndPort(endPoint);
