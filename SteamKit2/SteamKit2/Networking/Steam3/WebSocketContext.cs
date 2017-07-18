@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Net;
+using System.Net.Sockets;
 using System.Net.WebSockets;
 using System.Threading;
 using System.Threading.Tasks;
@@ -11,22 +12,24 @@ namespace SteamKit2
     {
         class WebSocketContext : IDisposable
         {
-            public WebSocketContext(WebSocketConnection connection, DnsEndPoint endPoint)
+            public WebSocketContext(WebSocketConnection connection, EndPoint endPoint)
             {
                 this.connection = connection;
                 EndPoint = endPoint;
-
+                
                 cts = new CancellationTokenSource();
                 socket = new ClientWebSocket();
+                hostAndPort = GetHostAndPort(endPoint);
             }
 
             readonly WebSocketConnection connection;
             readonly CancellationTokenSource cts;
             readonly ClientWebSocket socket;
+            readonly string hostAndPort;
             Task runloopTask;
             int disposed;
 
-            public DnsEndPoint EndPoint { get; }
+            public EndPoint EndPoint { get; }
 
             public void Start(TimeSpan connectionTimeout)
             {
@@ -35,7 +38,7 @@ namespace SteamKit2
 
             async Task RunCore(CancellationToken cancellationToken, TimeSpan connectionTimeout)
             {
-                var uri = new Uri(FormattableString.Invariant($"wss://{EndPoint.Host}:{EndPoint.Port}/cmsocket/"));
+                var uri = new Uri(FormattableString.Invariant($"wss://{hostAndPort}/cmsocket/"));
 
                 using (var timeout = new CancellationTokenSource())
                 using (var combinedCancellation = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, timeout.Token))
@@ -155,6 +158,30 @@ namespace SteamKit2
 
             void DisconnectNonBlocking(bool userInitiated)
                 => Task.Run(() => connection.DisconnectCore(userInitiated, this));
+
+            static string GetHostAndPort(EndPoint endPoint)
+            {
+                switch (endPoint)
+                {
+                    case IPEndPoint ipep:
+                        switch (ipep.AddressFamily)
+                        {
+                            case AddressFamily.InterNetwork:
+                                return FormattableString.Invariant($"{ipep.Address}:{ipep.Port}");
+
+                            case AddressFamily.InterNetworkV6:
+                                // RFC 2732
+                                return FormattableString.Invariant($"[{ipep.ToString()}]:{ipep.Port}");
+                        }
+
+                        break;
+
+                    case DnsEndPoint dns:
+                        return FormattableString.Invariant($"{dns.Host}:{dns.Port}");
+                }
+
+                throw new InvalidOperationException("Unsupported endpoint type.");
+            }
         }
     }
 }

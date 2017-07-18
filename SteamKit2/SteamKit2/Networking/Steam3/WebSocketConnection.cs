@@ -21,14 +21,7 @@ namespace SteamKit2
 
         public void Connect(EndPoint endPoint, int timeout = 5000)
         {
-            if (!(endPoint is DnsEndPoint dnsEp))
-            {
-                DebugLog.WriteLine(nameof(WebSocketConnection), "Given endpoint was not a DnsEndPoint.");
-                Disconnected?.Invoke(this, new DisconnectedEventArgs(false));
-                return;
-            }
-
-            var newContext = new WebSocketContext(this, dnsEp);
+            var newContext = new WebSocketContext(this, endPoint);
             var oldContext = Interlocked.Exchange(ref currentContext, newContext);
             if (oldContext != null)
             {
