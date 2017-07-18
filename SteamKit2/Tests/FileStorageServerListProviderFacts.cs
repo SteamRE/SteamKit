@@ -18,10 +18,10 @@ namespace Tests
         [Fact]
         public async void ReadsUpdatedServerList()
         {
-            await fileStorageProvider.UpdateServerListAsync(new List<CMServerRecord>()
+            await fileStorageProvider.UpdateServerListAsync(new List<ServerRecord>()
             {
-                CMServerRecord.SocketServer(new IPEndPoint(IPAddress.Any, 1234)),
-                CMServerRecord.SocketServer(new IPEndPoint(IPAddress.Loopback, 4321))
+                ServerRecord.SocketServer(new IPEndPoint(IPAddress.Any, 1234)),
+                ServerRecord.SocketServer(new IPEndPoint(IPAddress.Loopback, 4321))
             });
 
             var servers = await fileStorageProvider.FetchServerListAsync();
@@ -30,7 +30,7 @@ namespace Tests
             Assert.Equal(IPAddress.Any, servers.First().GetIPAddress());
             Assert.Equal(1234, servers.First().GetPort());
 
-            await fileStorageProvider.UpdateServerListAsync(new List<CMServerRecord>());
+            await fileStorageProvider.UpdateServerListAsync(new List<ServerRecord>());
         }
     }
 }

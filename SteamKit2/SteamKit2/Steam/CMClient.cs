@@ -128,7 +128,7 @@ namespace SteamKit2.Internal
         /// The <see cref="IPEndPoint"/> of the CM server to connect to.
         /// If <c>null</c>, SteamKit will randomly select a CM server from its internal list.
         /// </param>
-        public void Connect( CMServerRecord cmServer = null  )
+        public void Connect( ServerRecord cmServer = null  )
         {
             this.Disconnect();
             Debug.Assert( connection == null );
@@ -140,7 +140,7 @@ namespace SteamKit2.Internal
 
             ExpectDisconnection = false;
 
-            Task<CMServerRecord> recordTask = null;
+            Task<ServerRecord> recordTask = null;
 
             if ( cmServer == null )
             {
@@ -537,9 +537,9 @@ namespace SteamKit2.Internal
             DebugLog.Assert( cmMsg.Body.cm_addresses.Count == cmMsg.Body.cm_ports.Count, "CMClient", "HandleCMList received malformed message" );
 
             var cmList = cmMsg.Body.cm_addresses
-                .Zip( cmMsg.Body.cm_ports, ( addr, port ) => CMServerRecord.SocketServer( new IPEndPoint( NetHelpers.GetIPAddress( addr ) , ( int )port ) ) );
+                .Zip( cmMsg.Body.cm_ports, ( addr, port ) => ServerRecord.SocketServer( new IPEndPoint( NetHelpers.GetIPAddress( addr ) , ( int )port ) ) );
 
-            var webSocketList = cmMsg.Body.cm_websocket_addresses.Select( addr => CMServerRecord.WebSocketServer( addr ) );
+            var webSocketList = cmMsg.Body.cm_websocket_addresses.Select( addr => ServerRecord.WebSocketServer( addr ) );
 
             // update our list with steam's list of CMs
             Servers.ReplaceList( cmList.Concat( webSocketList ) );

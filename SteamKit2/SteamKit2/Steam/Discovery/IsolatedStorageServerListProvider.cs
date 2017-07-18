@@ -30,7 +30,7 @@ namespace SteamKit2.Discovery
         /// Read the stored list of servers from IsolatedStore
         /// </summary>
         /// <returns>List of servers if persisted, otherwise an empty list</returns>
-        public Task<IEnumerable<CMServerRecord>> FetchServerListAsync()
+        public Task<IEnumerable<ServerRecord>> FetchServerListAsync()
         {
             return Task.Run(() =>
             {
@@ -43,11 +43,11 @@ namespace SteamKit2.Discovery
                             {
                                 if (item.websocket)
                                 {
-                                    return CMServerRecord.WebSocketServer(item.address + ":" + item.port);
+                                    return ServerRecord.WebSocketServer(item.address + ":" + item.port);
                                 }
                                 else
                                 {
-                                    return CMServerRecord.SocketServer(new IPEndPoint(IPAddress.Parse(item.address), item.port));
+                                    return ServerRecord.SocketServer(new IPEndPoint(IPAddress.Parse(item.address), item.port));
                                 }
                             })
                             .ToList();
@@ -56,7 +56,7 @@ namespace SteamKit2.Discovery
                 catch (IOException ex)
                 {
                     DebugLog.WriteLine("IsolatedStorageServerListProvider", "Failed to read file {0}: {1}", FileName, ex.Message);
-                    return Enumerable.Empty<CMServerRecord>();
+                    return Enumerable.Empty<ServerRecord>();
                 }
             });
         }
@@ -66,7 +66,7 @@ namespace SteamKit2.Discovery
         /// </summary>
         /// <param name="endpoints">List of server endpoints</param>
         /// <returns>Awaitable task for write completion</returns>
-        public Task UpdateServerListAsync(IEnumerable<CMServerRecord> endpoints)
+        public Task UpdateServerListAsync(IEnumerable<ServerRecord> endpoints)
         {
             return Task.Run(() =>
             {

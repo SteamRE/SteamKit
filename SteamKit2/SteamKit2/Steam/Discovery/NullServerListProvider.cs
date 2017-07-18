@@ -14,15 +14,15 @@ namespace SteamKit2.Discovery
         /// No-op implementation that returns an empty server list
         /// </summary>
         /// <returns>Empty server list</returns>
-        public Task<IEnumerable<CMServerRecord>> FetchServerListAsync()
-            => Task.FromResult(Enumerable.Empty<CMServerRecord>());
+        public Task<IEnumerable<ServerRecord>> FetchServerListAsync()
+            => Task.FromResult(Enumerable.Empty<ServerRecord>());
 
         /// <summary>
         /// No-op implementation that does not persist server list
         /// </summary>
         /// <param name="endpoints">Server list</param>
         /// <returns>Completed task</returns>
-        public Task UpdateServerListAsync(IEnumerable<CMServerRecord> endpoints)
+        public Task UpdateServerListAsync(IEnumerable<ServerRecord> endpoints)
             => Task.CompletedTask;
     }
 }

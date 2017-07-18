@@ -17,8 +17,8 @@ namespace SteamKit2
         /// Load a list of servers from the Steam Directory.
         /// </summary>
         /// <param name="configuration">Configuration Object</param>
-        /// <returns>A <see cref="System.Threading.Tasks.Task"/> with the Result set to an enumerable list of <see cref="CMServerRecord"/>s.</returns>
-        public static Task<IReadOnlyCollection<CMServerRecord>> LoadAsync( SteamConfiguration configuration )
+        /// <returns>A <see cref="System.Threading.Tasks.Task"/> with the Result set to an enumerable list of <see cref="ServerRecord"/>s.</returns>
+        public static Task<IReadOnlyCollection<ServerRecord>> LoadAsync( SteamConfiguration configuration )
         {
             return LoadAsync( configuration, CancellationToken.None );
         }
@@ -28,8 +28,8 @@ namespace SteamKit2
         /// </summary>
         /// <param name="configuration">Configuration Object</param>
         /// <param name="cancellationToken">Cancellation Token</param>
-        /// <returns>A <see cref="System.Threading.Tasks.Task"/> with the Result set to an enumerable list of <see cref="CMServerRecord"/>s.</returns>
-        public static Task<IReadOnlyCollection<CMServerRecord>> LoadAsync( SteamConfiguration configuration, CancellationToken cancellationToken )
+        /// <returns>A <see cref="System.Threading.Tasks.Task"/> with the Result set to an enumerable list of <see cref="ServerRecord"/>s.</returns>
+        public static Task<IReadOnlyCollection<ServerRecord>> LoadAsync( SteamConfiguration configuration, CancellationToken cancellationToken )
         {
             var directory = new WebAPI.AsyncInterface( configuration.WebAPIBaseAddress, "ISteamDirectory", null );
             var args = new Dictionary<string, string>
@@ -54,7 +54,7 @@ namespace SteamKit2
 
                 cancellationToken.ThrowIfCancellationRequested();
 
-                var serverRecords = new List<CMServerRecord>( capacity: socketList.Children.Count + websocketList.Children.Count );
+                var serverRecords = new List<ServerRecord>( capacity: socketList.Children.Count + websocketList.Children.Count );
 
                 foreach ( var child in socketList.Children )
                 {
@@ -63,15 +63,15 @@ namespace SteamKit2
                         continue;
                     }
 
-                    serverRecords.Add( CMServerRecord.SocketServer( endpoint ) );
+                    serverRecords.Add( ServerRecord.SocketServer( endpoint ) );
                 }
 
                 foreach ( var child in websocketList.Children )
                 {
-                    serverRecords.Add( CMServerRecord.WebSocketServer( child.Value ) );
+                    serverRecords.Add( ServerRecord.WebSocketServer( child.Value ) );
                 }
 
-                return (IReadOnlyCollection<CMServerRecord>)serverRecords;
+                return (IReadOnlyCollection<ServerRecord>)serverRecords;
             }, cancellationToken, TaskContinuationOptions.NotOnCanceled | TaskContinuationOptions.NotOnFaulted, TaskScheduler.Current );
         }
     }

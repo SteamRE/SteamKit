@@ -32,7 +32,7 @@ namespace SteamKit2.Discovery
         [DebuggerDisplay("ServerInfo ({EndPoint}, Bad: {LastBadConnectionDateTimeUtc.HasValue})")]
         class ServerInfo
         {
-            public CMServerRecord Record { get; set; }
+            public ServerRecord Record { get; set; }
             public DateTime? LastBadConnectionDateTimeUtc { get; set; }
         }
 
@@ -94,8 +94,8 @@ namespace SteamKit2.Discovery
         {
             DebugWrite( "Resolving server list" );
 
-            IEnumerable<CMServerRecord> serverList = await configuration.ServerListProvider.FetchServerListAsync().ConfigureAwait( false );
-            IReadOnlyCollection<CMServerRecord> endpointList = serverList.ToList();
+            IEnumerable<ServerRecord> serverList = await configuration.ServerListProvider.FetchServerListAsync().ConfigureAwait( false );
+            IReadOnlyCollection<ServerRecord> endpointList = serverList.ToList();
 
             if ( endpointList.Count == 0 && configuration.AllowDirectoryFetch )
             {
@@ -108,7 +108,7 @@ namespace SteamKit2.Discovery
                 DebugWrite( "Could not query SteamDirectory, falling back to cm0" );
                 var cm0 = await Dns.GetHostAddressesAsync( "cm0.steampowered.com" ).ConfigureAwait( false );
 
-                endpointList = cm0.Select( ipaddr => CMServerRecord.SocketServer( new IPEndPoint(ipaddr, 27015) ) ).ToList();
+                endpointList = cm0.Select( ipaddr => ServerRecord.SocketServer( new IPEndPoint(ipaddr, 27015) ) ).ToList();
             }
 
             DebugWrite( "Resolved {0} servers", endpointList.Count );
@@ -144,8 +144,8 @@ namespace SteamKit2.Discovery
         /// <summary>
         /// Replace the list with a new list of servers provided to us by the Steam servers.
         /// </summary>
-        /// <param name="endpointList">The <see cref="CMServerRecord"/>s to use for this <see cref="SmartCMServerList"/>.</param>
-        public void ReplaceList( IEnumerable<CMServerRecord> endpointList )
+        /// <param name="endpointList">The <see cref="ServerRecord"/>s to use for this <see cref="SmartCMServerList"/>.</param>
+        public void ReplaceList( IEnumerable<ServerRecord> endpointList )
         {
             lock ( listLock )
             {
@@ -162,7 +162,7 @@ namespace SteamKit2.Discovery
             }
         }
 
-        void AddCore(CMServerRecord endPoint )
+        void AddCore(ServerRecord endPoint )
         {
             var info = new ServerInfo { Record = endPoint };
 
@@ -223,7 +223,7 @@ namespace SteamKit2.Discovery
         /// Perform the actual score lookup of the server list and return the candidate
         /// </summary>
         /// <returns>IPEndPoint candidate</returns>
-        private CMServerRecord GetNextServerCandidateInternal( ProtocolTypes supportedProtocolTypes )
+        private ServerRecord GetNextServerCandidateInternal( ProtocolTypes supportedProtocolTypes )
         {
             lock ( listLock )
             {
@@ -254,7 +254,7 @@ namespace SteamKit2.Discovery
         /// </summary>
         /// <param name="supportedProtocolTypes">The minimum supported <see cref="ProtocolTypes"/> of the server to return.</param>
         /// <returns>An <see cref="System.Net.IPEndPoint"/>, or null if the list is empty.</returns>
-        public CMServerRecord GetNextServerCandidate( ProtocolTypes supportedProtocolTypes )
+        public ServerRecord GetNextServerCandidate( ProtocolTypes supportedProtocolTypes )
         {
             if ( !WaitForServersFetched() )
             {
@@ -269,7 +269,7 @@ namespace SteamKit2.Discovery
         /// </summary>
         /// <param name="supportedProtocolTypes">The minimum supported <see cref="ProtocolTypes"/> of the server to return.</param>
         /// <returns>An <see cref="System.Net.IPEndPoint"/>, or null if the list is empty.</returns>
-        public async Task<CMServerRecord> GetNextServerCandidateAsync( ProtocolTypes supportedProtocolTypes )
+        public async Task<ServerRecord> GetNextServerCandidateAsync( ProtocolTypes supportedProtocolTypes )
         {
             StartFetchingServers();
             await listTask.ConfigureAwait( false );
@@ -281,19 +281,19 @@ namespace SteamKit2.Discovery
         /// Gets the <see cref="System.Net.IPEndPoint"/>s of all servers in the server list.
         /// </summary>
         /// <returns>An <see cref="T:System.Net.IPEndPoint[]"/> array contains the <see cref="System.Net.IPEndPoint"/>s of the servers in the list</returns>
-        public CMServerRecord[] GetAllEndPoints()
+        public ServerRecord[] GetAllEndPoints()
         {
-            CMServerRecord[] endPoints;
+            ServerRecord[] endPoints;
 
             if ( !WaitForServersFetched() )
             {
-                return new CMServerRecord[0];
+                return new ServerRecord[0];
             }
 
             lock ( listLock )
             {
                 var numServers = servers.Count;
-                endPoints = new CMServerRecord[ numServers ];
+                endPoints = new ServerRecord[ numServers ];
 
                 for ( int i = 0; i < numServers; i++ )
                 {

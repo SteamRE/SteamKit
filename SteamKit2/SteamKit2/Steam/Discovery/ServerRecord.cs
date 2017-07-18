@@ -6,9 +6,9 @@ namespace SteamKit2.Discovery
     /// <summary>
     /// Represents the information needed to connect to a CM server
     /// </summary>
-    public class CMServerRecord
+    public class ServerRecord
     {
-        CMServerRecord(EndPoint endPoint, ProtocolTypes protocolTypes)
+        ServerRecord(EndPoint endPoint, ProtocolTypes protocolTypes)
         {
             EndPoint = endPoint ?? throw new ArgumentNullException(nameof(endPoint));
             ProtocolTypes = protocolTypes;
@@ -75,16 +75,16 @@ namespace SteamKit2.Discovery
         /// Creates a Socket server given an IP endpoint.
         /// </summary>
         /// <param name="endPoint">The IP address and port of the server.</param>
-        /// <returns>A new <see cref="CMServerRecord"/> instance</returns>
-        public static CMServerRecord SocketServer(IPEndPoint endPoint)
-            => new CMServerRecord(endPoint, ProtocolTypes.Tcp | ProtocolTypes.Udp);
+        /// <returns>A new <see cref="ServerRecord"/> instance</returns>
+        public static ServerRecord SocketServer(IPEndPoint endPoint)
+            => new ServerRecord(endPoint, ProtocolTypes.Tcp | ProtocolTypes.Udp);
 
         /// <summary>
         /// Creates a WebSocket server given an address in the form of "hostname:port".
         /// </summary>
         /// <param name="address">The name and port of the server</param>
-        /// <returns>A new <see cref="CMServerRecord"/> instance</returns>
-        public static CMServerRecord WebSocketServer(string address)
+        /// <returns>A new <see cref="ServerRecord"/> instance</returns>
+        public static ServerRecord WebSocketServer(string address)
         {
             if (address == null)
             {
@@ -112,7 +112,7 @@ namespace SteamKit2.Discovery
                 endPoint = new DnsEndPoint(address, DefaultPort);
             }
 
-            return new CMServerRecord(endPoint, ProtocolTypes.WebSocket);
+            return new ServerRecord(endPoint, ProtocolTypes.WebSocket);
         }
     }
 }
