@@ -25,31 +25,22 @@ namespace SteamKit2.Discovery
         public ProtocolTypes ProtocolTypes { get; }
 
         /// <summary>
-        /// Gets the IP address of the associated endpoint, if this is a socket serve.r
+        /// Gets the host of the associated endpoint. This could be an IP address, or a DNS host name.
         /// </summary>
         /// <returns>The <see cref="IPAddress"/> of the associated endpoint.</returns>
-        public IPAddress GetIPAddress()
+        public string GetHost()
         {
-            if (EndPoint is IPEndPoint ipep)
+            switch (EndPoint)
             {
-                return ipep.Address;
+                case IPEndPoint ipep:
+                    return ipep.Address.ToString();
+
+                case DnsEndPoint dns:
+                    return dns.Host;
+
+                default:
+                    throw new InvalidOperationException("Unknown endpoint type.");
             }
-
-            throw new InvalidOperationException("IP Address is not supported on this type of server record");
-        }
-
-        /// <summary>
-        /// Gets the hostname of the associated endpoint, if this is a websocket server.
-        /// </summary>
-        /// <returns>The hostname of the associated endpoint.</returns>
-        public string GetHostname()
-        {
-            if (EndPoint is DnsEndPoint dns)
-            {
-                return dns.Host;
-            }
-
-            throw new InvalidOperationException("Hostname is not supported on this type of server record");
         }
 
         /// <summary>
@@ -72,11 +63,28 @@ namespace SteamKit2.Discovery
         }
 
         /// <summary>
+        /// Creates a server record for a given endpoint.
+        /// </summary>
+        /// <param name="host">The host to connect to. This can be an IP address or a DNS name.</param>
+        /// <param name="port">The port to connect to.</param>
+        /// <param name="protocolTypes">The protocol types that this server supports.</param>
+        /// <returns></returns>
+        public static ServerRecord CreateServer(string host, int port, ProtocolTypes protocolTypes)
+        {
+            if (IPAddress.TryParse(host, out var address))
+            {
+                return new ServerRecord(new IPEndPoint(address, port), protocolTypes);
+            }
+
+            return new ServerRecord(new DnsEndPoint(host, port), protocolTypes);
+        }
+
+        /// <summary>
         /// Creates a Socket server given an IP endpoint.
         /// </summary>
         /// <param name="endPoint">The IP address and port of the server.</param>
         /// <returns>A new <see cref="ServerRecord"/> instance</returns>
-        public static ServerRecord SocketServer(IPEndPoint endPoint)
+        public static ServerRecord CreateSocketServer(IPEndPoint endPoint)
             => new ServerRecord(endPoint, ProtocolTypes.Tcp | ProtocolTypes.Udp);
 
         /// <summary>
@@ -84,7 +92,7 @@ namespace SteamKit2.Discovery
         /// </summary>
         /// <param name="address">The name and port of the server</param>
         /// <returns>A new <see cref="ServerRecord"/> instance</returns>
-        public static ServerRecord WebSocketServer(string address)
+        public static ServerRecord CreateWebSocketServer(string address)
         {
             if (address == null)
             {

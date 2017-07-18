@@ -1,11 +1,11 @@
 ﻿#if NET46
-using ProtoBuf;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.IsolatedStorage;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using ProtoBuf;
 
 namespace SteamKit2.Discovery
 {
@@ -36,19 +36,12 @@ namespace SteamKit2.Discovery
             {
                 try
                 {
-                    using (IsolatedStorageFileStream fileStream = isolatedStorage.OpenFile(FileName, FileMode.Open, FileAccess.Read))
+                    using (var fileStream = isolatedStorage.OpenFile(FileName, FileMode.Open, FileAccess.Read))
                     {
                         return Serializer.DeserializeItems<BasicServerListProto>(fileStream, PrefixStyle.Base128, 1)
                             .Select(item =>
                             {
-                                if (item.websocket)
-                                {
-                                    return ServerRecord.WebSocketServer(item.address + ":" + item.port);
-                                }
-                                else
-                                {
-                                    return ServerRecord.SocketServer(new IPEndPoint(IPAddress.Parse(item.address), item.port));
-                                }
+                                return ServerRecord.CreateServer(item.Address, item.Port, item.Protocols);
                             })
                             .ToList();
                     }
@@ -77,24 +70,12 @@ namespace SteamKit2.Discovery
                         Serializer.Serialize(fileStream,
                             endpoints.Select(ep =>
                             {
-                                if (ep.ProtocolTypes == ProtocolTypes.WebSocket)
+                                return new BasicServerListProto
                                 {
-                                    return new BasicServerListProto
-                                    {
-                                        address = ep.GetHostname(),
-                                        port = ep.GetPort(),
-                                        websocket = true
-                                    };
-                                }
-                                else
-                                {
-                                    return new BasicServerListProto
-                                    {
-                                        address = ep.GetIPAddress().ToString(),
-                                        port = ep.GetPort(),
-                                        websocket = false
-                                    };
-                                }
+                                    Address = ep.GetHost(),
+                                    Port = ep.GetPort(),
+                                    Protocols = ep.ProtocolTypes
+                                };
                             }));
                         fileStream.SetLength(fileStream.Position);
                     }

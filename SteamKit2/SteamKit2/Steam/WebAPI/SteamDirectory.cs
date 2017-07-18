@@ -63,12 +63,12 @@ namespace SteamKit2
                         continue;
                     }
 
-                    serverRecords.Add( ServerRecord.SocketServer( endpoint ) );
+                    serverRecords.Add( ServerRecord.CreateSocketServer( endpoint ) );
                 }
 
                 foreach ( var child in websocketList.Children )
                 {
-                    serverRecords.Add( ServerRecord.WebSocketServer( child.Value ) );
+                    serverRecords.Add( ServerRecord.CreateWebSocketServer( child.Value ) );
                 }
 
                 return (IReadOnlyCollection<ServerRecord>)serverRecords;

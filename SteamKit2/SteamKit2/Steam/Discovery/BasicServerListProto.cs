@@ -1,5 +1,4 @@
 ﻿using ProtoBuf;
-using System;
 
 namespace SteamKit2.Discovery
 {
@@ -7,10 +6,18 @@ namespace SteamKit2.Discovery
     class BasicServerListProto
     {
         [ProtoMember(1)]
-        public string address { get; set; }
+        public string Address { get; set; }
+
         [ProtoMember(2)]
-        public int port { get; set; }
+        public int Port { get; set; }
+
         [ProtoMember(3)]
-        public bool websocket { get; set; }
+        public ProtocolTypes Protocols
+        {
+            get => protocolTypes ?? (ProtocolTypes.Tcp | ProtocolTypes.Udp);
+            set => protocolTypes = value;
+        }
+
+        ProtocolTypes? protocolTypes;
     }
 }

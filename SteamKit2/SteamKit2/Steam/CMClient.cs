@@ -537,9 +537,9 @@ namespace SteamKit2.Internal
             DebugLog.Assert( cmMsg.Body.cm_addresses.Count == cmMsg.Body.cm_ports.Count, "CMClient", "HandleCMList received malformed message" );
 
             var cmList = cmMsg.Body.cm_addresses
-                .Zip( cmMsg.Body.cm_ports, ( addr, port ) => ServerRecord.SocketServer( new IPEndPoint( NetHelpers.GetIPAddress( addr ) , ( int )port ) ) );
+                .Zip( cmMsg.Body.cm_ports, ( addr, port ) => ServerRecord.CreateSocketServer( new IPEndPoint( NetHelpers.GetIPAddress( addr ) , ( int )port ) ) );
 
-            var webSocketList = cmMsg.Body.cm_websocket_addresses.Select( addr => ServerRecord.WebSocketServer( addr ) );
+            var webSocketList = cmMsg.Body.cm_websocket_addresses.Select( addr => ServerRecord.CreateWebSocketServer( addr ) );
 
             // update our list with steam's list of CMs
             Servers.ReplaceList( cmList.Concat( webSocketList ) );

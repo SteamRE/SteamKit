@@ -23,19 +23,19 @@ namespace Tests
 
             var seedList = new[]
             {
-                ServerRecord.SocketServer(new IPEndPoint( IPAddress.Loopback, 27025 )),
-                ServerRecord.SocketServer(new IPEndPoint( IPAddress.Loopback, 27035 )),
-                ServerRecord.SocketServer(new IPEndPoint( IPAddress.Loopback, 27045 )),
-                ServerRecord.SocketServer(new IPEndPoint( IPAddress.Loopback, 27105 )),
+                ServerRecord.CreateSocketServer(new IPEndPoint( IPAddress.Loopback, 27025 )),
+                ServerRecord.CreateSocketServer(new IPEndPoint( IPAddress.Loopback, 27035 )),
+                ServerRecord.CreateSocketServer(new IPEndPoint( IPAddress.Loopback, 27045 )),
+                ServerRecord.CreateSocketServer(new IPEndPoint( IPAddress.Loopback, 27105 )),
             };
             serverList.ReplaceList( seedList );
             Assert.Equal( 4, seedList.Length );
 
             var listToReplace = new[]
             {
-                ServerRecord.SocketServer(new IPEndPoint( IPAddress.Loopback, 27015 )),
-                ServerRecord.SocketServer(new IPEndPoint( IPAddress.Loopback, 27035 )),
-                ServerRecord.SocketServer(new IPEndPoint( IPAddress.Loopback, 27105 )),
+                ServerRecord.CreateSocketServer(new IPEndPoint( IPAddress.Loopback, 27015 )),
+                ServerRecord.CreateSocketServer(new IPEndPoint( IPAddress.Loopback, 27035 )),
+                ServerRecord.CreateSocketServer(new IPEndPoint( IPAddress.Loopback, 27105 )),
             };
 
             serverList.ReplaceList( listToReplace );
@@ -59,7 +59,7 @@ namespace Tests
         {
             serverList.GetAllEndPoints();
 
-            var record = ServerRecord.SocketServer( new IPEndPoint( IPAddress.Loopback, 27015 ) );
+            var record = ServerRecord.CreateSocketServer( new IPEndPoint( IPAddress.Loopback, 27015 ) );
             serverList.ReplaceList( new List<ServerRecord>() { record } );
 
             var nextRecord = serverList.GetNextServerCandidate( ProtocolTypes.Tcp );
@@ -71,7 +71,7 @@ namespace Tests
         {
             serverList.GetAllEndPoints();
 
-            var record = ServerRecord.SocketServer( new IPEndPoint( IPAddress.Loopback, 27015 ) );
+            var record = ServerRecord.CreateSocketServer( new IPEndPoint( IPAddress.Loopback, 27015 ) );
             serverList.ReplaceList( new List<ServerRecord>() { record } );
             serverList.TryMark( record.EndPoint, ServerQuality.Bad );
 
@@ -84,9 +84,9 @@ namespace Tests
         {
             serverList.GetAllEndPoints();
 
-            var goodRecord = ServerRecord.SocketServer( new IPEndPoint( IPAddress.Loopback, 27015 ) );
-            var neutralRecord = ServerRecord.SocketServer( new IPEndPoint( IPAddress.Loopback, 27016 ) );
-            var badRecord = ServerRecord.SocketServer( new IPEndPoint( IPAddress.Loopback, 27017 ) );
+            var goodRecord = ServerRecord.CreateSocketServer( new IPEndPoint( IPAddress.Loopback, 27015 ) );
+            var neutralRecord = ServerRecord.CreateSocketServer( new IPEndPoint( IPAddress.Loopback, 27016 ) );
+            var badRecord = ServerRecord.CreateSocketServer( new IPEndPoint( IPAddress.Loopback, 27017 ) );
 
             serverList.ReplaceList( new List<ServerRecord>() { badRecord, neutralRecord, goodRecord } );
 
@@ -105,7 +105,7 @@ namespace Tests
         [Fact]
         public void GetNextServerCandidate_OnlyReturnsMatchingServerOfType()
         {
-            var record = ServerRecord.WebSocketServer( "localhost:443" );
+            var record = ServerRecord.CreateWebSocketServer( "localhost:443" );
             serverList.ReplaceList( new List<ServerRecord>() { record } );
 
             var endPoint = serverList.GetNextServerCandidate( ProtocolTypes.Tcp );
@@ -121,7 +121,7 @@ namespace Tests
             endPoint = serverList.GetNextServerCandidate( ProtocolTypes.All );
             Assert.Same(record, endPoint);
 
-            record = ServerRecord.SocketServer( new IPEndPoint( IPAddress.Loopback, 27015 ) );
+            record = ServerRecord.CreateSocketServer( new IPEndPoint( IPAddress.Loopback, 27015 ) );
             serverList.ReplaceList( new List<ServerRecord>() { record } );
 
             endPoint = serverList.GetNextServerCandidate( ProtocolTypes.WebSocket );
@@ -143,7 +143,7 @@ namespace Tests
         [Fact]
         public void TryMark_ReturnsTrue_IfServerInList()
         {
-            var record = ServerRecord.SocketServer( new IPEndPoint( IPAddress.Loopback, 27015 ));
+            var record = ServerRecord.CreateSocketServer( new IPEndPoint( IPAddress.Loopback, 27015 ));
             serverList.ReplaceList( new List<ServerRecord>() { record } );
 
             var marked = serverList.TryMark( record.EndPoint, ServerQuality.Good );
@@ -153,7 +153,7 @@ namespace Tests
         [Fact]
         public void TryMark_ReturnsFalse_IfServerNotInList()
         {
-            var record = ServerRecord.SocketServer( new IPEndPoint( IPAddress.Loopback, 27015 ) );
+            var record = ServerRecord.CreateSocketServer( new IPEndPoint( IPAddress.Loopback, 27015 ) );
             serverList.ReplaceList( new List<ServerRecord>() { record } );
 
             var marked = serverList.TryMark( new IPEndPoint( IPAddress.Loopback, 27016 ), ServerQuality.Good );
