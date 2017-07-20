@@ -114,7 +114,7 @@ namespace SteamKit2
 
             var logon = new ClientMsgProtobuf<CMsgClientLogon>( EMsg.ClientLogonGameServer );
 
-            SteamID gsId = new SteamID( 0, 0, Client.ConnectedUniverse, EAccountType.GameServer );
+            SteamID gsId = new SteamID( 0, 0, Client.Universe, EAccountType.GameServer );
 
             logon.ProtoHeader.client_sessionid = 0;
             logon.ProtoHeader.steamid = gsId.ConvertToUInt64();
@@ -149,7 +149,7 @@ namespace SteamKit2
 
             var logon = new ClientMsgProtobuf<CMsgClientLogon>( EMsg.ClientLogon );
 
-            SteamID gsId = new SteamID( 0, 0, Client.ConnectedUniverse, EAccountType.AnonGameServer );
+            SteamID gsId = new SteamID( 0, 0, Client.Universe, EAccountType.AnonGameServer );
 
             logon.ProtoHeader.client_sessionid = 0;
             logon.ProtoHeader.steamid = gsId.ConvertToUInt64();

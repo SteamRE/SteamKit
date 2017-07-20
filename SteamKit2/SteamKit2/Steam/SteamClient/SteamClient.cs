@@ -6,11 +6,9 @@
 
 
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Net.Sockets;
 using System.Threading;
 using ProtoBuf;
 using SteamKit2.Internal;
@@ -35,13 +33,21 @@ namespace SteamKit2
 
         internal AsyncJobManager jobManager;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SteamClient"/> class with the default configuration.
+        /// </summary>
+        public SteamClient()
+            : this( new SteamConfiguration () )
+        {
+        }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SteamClient"/> class with a specific connection type.
+        /// Initializes a new instance of the <see cref="SteamClient"/> class with a specific configuration.
         /// </summary>
-        /// <param name="type">The connection type to use.</param>
-        public SteamClient( ProtocolType type = ProtocolType.Tcp )
-            : base( type )
+        /// <param name="configuration">The configuration to use for this client.</param>
+        /// <exception cref="ArgumentNullException">The configuration object is <c>null</c></exception>
+        public SteamClient( SteamConfiguration configuration )
+            : base( configuration )
         {
             callbackQueue = new Queue<ICallbackMsg>();
 
@@ -68,9 +74,6 @@ namespace SteamKit2
 
             dispatchMap = new Dictionary<EMsg, Action<IPacketMsg>>
             {
-                // we're interested in this client message to post the connected callback
-                { EMsg.ChannelEncryptResult, HandleEncryptResult },
-
                 { EMsg.ClientCMList, HandleCMList },
                 { EMsg.ClientServerList, HandleServerList },
 
@@ -325,8 +328,7 @@ namespace SteamKit2
                 return false;
             }
 
-            Action<IPacketMsg> handlerFunc;
-            bool haveFunc = dispatchMap.TryGetValue( packetMsg.MsgType, out handlerFunc );
+            bool haveFunc = dispatchMap.TryGetValue( packetMsg.MsgType, out var handlerFunc );
 
             if ( haveFunc )
             {
@@ -358,6 +360,17 @@ namespace SteamKit2
             return true;
         }
         /// <summary>
+        /// Called when the client is securely connected to Steam3.
+        /// </summary>
+        protected override void OnClientConnected()
+        {
+            base.OnClientConnected();
+
+            jobManager.SetTimeoutsEnabled( true );
+
+            PostCallback( new ConnectedCallback() );
+        }
+        /// <summary>
         /// Called when the client is physically disconnected from Steam3.
         /// </summary>
         protected override void OnClientDisconnected( bool userInitiated )
@@ -372,18 +385,6 @@ namespace SteamKit2
             PostCallback( new DisconnectedCallback( userInitiated ) );
         }
 
-
-        void HandleEncryptResult( IPacketMsg packetMsg )
-        {
-            var encResult = new Msg<MsgChannelEncryptResult>( packetMsg );
-
-            if ( encResult.Body.Result == EResult.OK )
-            {
-                jobManager.SetTimeoutsEnabled( true );
-
-                PostCallback( new ConnectedCallback( encResult.Body ) );
-            }
-        }
 
         void HandleCMList( IPacketMsg packetMsg )
         {

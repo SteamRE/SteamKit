@@ -115,8 +115,8 @@ namespace Tests
         class DummyCMClient : CMClient
         {
             public DummyCMClient()
+                : base( new SteamConfiguration() )
             {
-                PretendEncryptionIsSetUp();
             }
 
             public void DummyDisconnect()
@@ -127,12 +127,6 @@ namespace Tests
 
             public void HandleClientMsg( IClientMsg clientMsg )
                 => OnClientMsgReceived( GetPacketMsg( clientMsg.Serialize() ) );
-
-            void PretendEncryptionIsSetUp()
-            {
-                var field = typeof( CMClient ).GetField( "encryptionSetup", BindingFlags.Instance | BindingFlags.NonPublic );
-                field.SetValue( this, true );
-            }
         }
     }
 }

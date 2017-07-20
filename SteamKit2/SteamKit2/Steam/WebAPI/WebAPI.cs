@@ -7,7 +7,6 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Reflection;
 using System.Runtime.ExceptionServices;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -30,6 +29,13 @@ namespace SteamKit2
 #endif
 
         /// <summary>
+        /// The default base address used for the Steam Web API.
+        /// A different base address can be specified in a <see cref="SteamConfiguration"/> object, or
+        /// as a function argument where overloads are available.
+        /// </summary>
+        public static Uri DefaultBaseAddress { get; } = new Uri("https://api.steampowered.com/", UriKind.Absolute);
+
+        /// <summary>
         /// Represents a single interface that exists within the Web API.
         /// This is a dynamic object that allows function calls to interfaces with minimal code.
         /// </summary>
@@ -47,11 +53,11 @@ namespace SteamKit2
             public int Timeout { get; set; }
 
 
-            internal Interface( string iface, string apiKey )
+            internal Interface( Uri baseAddress, string iface, string apiKey )
             {
                 Timeout = 1000 * 100; // 100 sec
 
-                asyncInterface = new AsyncInterface( iface, apiKey );
+                asyncInterface = new AsyncInterface( baseAddress, iface, apiKey );
             }
 
 
@@ -61,13 +67,12 @@ namespace SteamKit2
             /// <param name="func">The function name to call.</param>
             /// <param name="version">The version of the function to call.</param>
             /// <param name="args">A dictionary of string key value pairs representing arguments to be passed to the API.</param>
-            /// <param name="secure">if set to <c>true</c> this method will be called through the secure API.</param>
             /// <returns>A <see cref="KeyValue"/> object representing the results of the Web API call.</returns>
             /// <exception cref="ArgumentNullException">The function name or request method provided were <c>null</c>.</exception>
             /// <exception cref="HttpRequestException">An network error occurred when performing the request.</exception>
             /// <exception cref="InvalidDataException">An error occured when parsing the response from the WebAPI.</exception>
-            public KeyValue Call( string func, int version = 1, Dictionary<string, string> args = null, bool secure = false )
-                => Call( HttpMethod.Get, func, version, args, secure );
+            public KeyValue Call( string func, int version = 1, Dictionary<string, string> args = null )
+                => Call( HttpMethod.Get, func, version, args );
 
 
             /// <summary>
@@ -77,14 +82,13 @@ namespace SteamKit2
             /// <param name="version">The version of the function to call.</param>
             /// <param name="args">A dictionary of string key value pairs representing arguments to be passed to the API.</param>
             /// <param name="method">The http request method. Either "POST" or "GET".</param>
-            /// <param name="secure">if set to <c>true</c> this method will be called through the secure API.</param>
             /// <returns>A <see cref="KeyValue"/> object representing the results of the Web API call.</returns>
             /// <exception cref="ArgumentNullException">The function name or request method provided were <c>null</c>.</exception>
             /// <exception cref="HttpRequestException">An network error occurred when performing the request.</exception>
             /// <exception cref="InvalidDataException">An error occured when parsing the response from the WebAPI.</exception>
-            public KeyValue Call( HttpMethod method, string func, int version = 1, Dictionary<string, string> args = null, bool secure = false )
+            public KeyValue Call( HttpMethod method, string func, int version = 1, Dictionary<string, string> args = null )
             {
-                var callTask = asyncInterface.CallAsync( method, func, version, args, secure );
+                var callTask = asyncInterface.CallAsync( method, func, version, args );
 
                 try
                 {
@@ -166,27 +170,12 @@ namespace SteamKit2
                     if ( !completed )
                         throw new TimeoutException( "The WebAPI call timed out" );
                 }
-                catch ( AggregateException ex )
+                catch ( AggregateException ex ) when ( ex.InnerException != null )
                 {
                     // because we're internally using the async interface, any WebExceptions thrown will
                     // be wrapped inside an AggregateException.
                     // since callers don't expect this, we need to unwrap and rethrow the inner exception
-
-                    var innerEx = ex.InnerException;
-
-                    // preserve stack trace when rethrowing inner exception
-                    // see: http://stackoverflow.com/a/4557183/139147
-
-                    var prepFunc = typeof( Exception ).GetMethod( "PrepForRemoting", BindingFlags.NonPublic | BindingFlags.Instance );
-                    if ( prepFunc != null )
-                    {
-                        // TODO: we can't use this on mono!
-                        // .NET 4.5 comes with the machinery to preserve a stack trace: ExceptionDispatchInfo, but we target 4.0
-
-                        prepFunc.Invoke( innerEx, new object[ 0 ] );
-                    }
-
-                    throw innerEx;
+                    ExceptionDispatchInfo.Capture( ex.InnerException ).Throw();
                 }
 
                 result = resultTask.Result;
@@ -202,22 +191,19 @@ namespace SteamKit2
         /// </summary>
         public sealed class AsyncInterface : DynamicObject, IDisposable
         {
-            HttpClient httpClient;
+            readonly HttpClient httpClient;
 
-            string iface;
-            string apiKey;
-
-            const string API_ROOT = "api.steampowered.com";
+            readonly string iface;
+            readonly string apiKey;
 
             static Regex funcNameRegex = new Regex(
                 @"(?<name>[a-zA-Z]+)(?<version>\d*)",
                 RegexOptions.Compiled | RegexOptions.IgnoreCase
             );
 
-
-            internal AsyncInterface( string iface, string apiKey )
+            internal AsyncInterface( Uri baseAddress, string iface, string apiKey )
             {
-                httpClient = new HttpClient();
+                httpClient = new HttpClient { BaseAddress = baseAddress };
 
                 this.iface = iface;
                 this.apiKey = apiKey;
@@ -231,14 +217,13 @@ namespace SteamKit2
             /// <param name="version">The version of the function to call.</param>
             /// <param name="args">A dictionary of string key value pairs representing arguments to be passed to the API.</param>
             /// <param name="method">The http request method. Either "POST" or "GET".</param>
-            /// <param name="secure">if set to <c>true</c> this method will be called through the secure API.</param>
             /// <returns>A <see cref="Task{T}"/> that contains a <see cref="KeyValue"/> object representing the results of the Web API call.</returns>
             /// <exception cref="ArgumentNullException">The function name or request method provided were <c>null</c>.</exception>
             /// <exception cref="HttpRequestException">An network error occurred when performing the request.</exception>
             /// <exception cref="InvalidDataException">An error occured when parsing the response from the WebAPI.</exception>
-            public Task<KeyValue> CallAsync( HttpMethod method, string func, int version = 1, Dictionary<string, string> args = null, bool secure = false )
+            public Task<KeyValue> CallAsync( HttpMethod method, string func, int version = 1, Dictionary<string, string> args = null )
             {
-                var task = CallAsyncCore( method, func, version, args, secure );
+                var task = CallAsyncCore( method, func, version, args );
 
                 task.ContinueWith( t =>
                 {
@@ -253,7 +238,7 @@ namespace SteamKit2
                 return task;
             }
                 
-            async Task<KeyValue> CallAsyncCore( HttpMethod method, string func, int version = 1, Dictionary<string, string> args = null, bool secure = false )
+            async Task<KeyValue> CallAsyncCore( HttpMethod method, string func, int version = 1, Dictionary<string, string> args = null )
             {
                 if ( method == null )
                     throw new ArgumentNullException( nameof(method) );
@@ -268,9 +253,7 @@ namespace SteamKit2
                 var urlBuilder = new StringBuilder();
                 var paramBuilder = new StringBuilder();
 
-                urlBuilder.Append( secure ? "https://" : "http://" );
-                urlBuilder.Append( API_ROOT );
-                urlBuilder.AppendFormat( "/{0}/{1}/v{2}", iface, func, version );
+                urlBuilder.AppendFormat( "{0}/{1}/v{2}", iface, func, version );
 
                 var isGet = HttpMethod.Get.Equals( method );
 
@@ -454,10 +437,22 @@ namespace SteamKit2
                     }
                 }
 
-                result = CallAsync( requestMethod, functionName, version, apiArgs, secure );
+                result = CallAsync( requestMethod, functionName, version, apiArgs );
 
                 return true;
             }
+        }
+
+        /// <summary>
+        /// Retreives a dynamic handler capable of interacting with the specified interface on the Web API.
+        /// </summary>
+        /// <param name="baseAddress">The base <see cref="Uri"/> of the Steam Web API.</param>
+        /// <param name="iface">The interface to retrieve a handler for.</param>
+        /// <param name="apiKey">An optional API key to be used for authorized requests.</param>
+        /// <returns>A dynamic <see cref="Interface"/> object to interact with the Web API.</returns>
+        public static Interface GetInterface( Uri baseAddress, string iface, string apiKey = "" )
+        {
+            return new Interface( baseAddress, iface, apiKey );
         }
 
         /// <summary>
@@ -468,7 +463,7 @@ namespace SteamKit2
         /// <returns>A dynamic <see cref="Interface"/> object to interact with the Web API.</returns>
         public static Interface GetInterface( string iface, string apiKey = "" )
         {
-            return new Interface( iface, apiKey );
+            return new Interface( DefaultBaseAddress, iface, apiKey );
         }
 
         /// <summary>
@@ -479,7 +474,19 @@ namespace SteamKit2
         /// <returns>A dynamic <see cref="AsyncInterface"/> object to interact with the Web API.</returns>
         public static AsyncInterface GetAsyncInterface( string iface, string apiKey = "" )
         {
-            return new AsyncInterface( iface, apiKey );
+            return new AsyncInterface( DefaultBaseAddress, iface, apiKey );
+        }
+
+        /// <summary>
+        /// Retreives a dynamic handler capable of interacting with the specified interface on the Web API.
+        /// </summary>
+        /// <param name="baseAddress">The base <see cref="Uri"/> of the Steam Web API.</param>
+        /// <param name="iface">The interface to retrieve a handler for.</param>
+        /// <param name="apiKey">An optional API key to be used for authorized requests.</param>
+        /// <returns>A dynamic <see cref="AsyncInterface"/> object to interact with the Web API.</returns>
+        public static AsyncInterface GetAsyncInterface( Uri baseAddress, string iface, string apiKey = "" )
+        {
+            return new AsyncInterface( baseAddress, iface, apiKey );
         }
     }
 

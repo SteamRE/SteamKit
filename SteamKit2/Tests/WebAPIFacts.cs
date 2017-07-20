@@ -1,8 +1,5 @@
-﻿using SteamKit2;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System;
+using SteamKit2;
 using Xunit;
 
 namespace Tests
@@ -12,7 +9,7 @@ namespace Tests
         [Fact]
         public void WebAPIHasDefaultTimeout()
         {
-            var iface = WebAPI.GetInterface( "ISteamWhatever" );
+            var iface = WebAPI.GetInterface( new Uri("https://whatever/"), "ISteamWhatever" );
 
             Assert.Equal( iface.Timeout, 1000 * 100 );
         }

@@ -395,7 +395,7 @@ namespace SteamKit2
             IPEndPoint ipEndPoint = activeSocket.LocalEndPoint as IPEndPoint;
 
             if ( ipEndPoint == null || ipEndPoint.Address == IPAddress.Any )
-                throw new Exception( "Socket not connected" );
+                throw new InvalidOperationException( "Socket not connected" );
 
             return ipEndPoint.Address;
         }

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Net;
 using System.Threading.Tasks;
 
 namespace SteamKit2.Discovery
@@ -13,12 +12,12 @@ namespace SteamKit2.Discovery
         /// Ask a provider to fetch any servers that it has available
         /// </summary>
         /// <returns>A list of IPEndPoints representing servers</returns>
-        Task<IEnumerable<IPEndPoint>> FetchServerListAsync();
+        Task<IEnumerable<ServerRecord>> FetchServerListAsync();
 
         /// <summary>
         /// Update the persistent list of endpoints
         /// </summary>
         /// <param name="endpoints">List of endpoints</param>
-        Task UpdateServerListAsync(IEnumerable<IPEndPoint> endpoints);
+        Task UpdateServerListAsync(IEnumerable<ServerRecord> endpoints);
     }
 }
