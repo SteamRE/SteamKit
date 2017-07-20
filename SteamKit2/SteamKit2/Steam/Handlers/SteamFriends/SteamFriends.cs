@@ -640,7 +640,7 @@ namespace SteamKit2
         {
             var historyResponse = new ClientMsgProtobuf<CMsgClientChatGetFriendMessageHistoryResponse>( packetMsg );
 
-            var callback = new FriendMsgHistoryCallback( historyResponse.Body, this.Client.ConnectedUniverse );
+            var callback = new FriendMsgHistoryCallback( historyResponse.Body, this.Client.Universe );
             this.Client.PostCallback( callback );
         }
 

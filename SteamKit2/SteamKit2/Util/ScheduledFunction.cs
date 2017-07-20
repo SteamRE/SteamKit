@@ -56,8 +56,7 @@ namespace SteamKit2
 
         void Tick( object state )
         {
-            if ( func != null )
-                func();
+            func?.Invoke();
         }
     }
 }

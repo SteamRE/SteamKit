@@ -32,52 +32,26 @@ namespace SteamKit2.Discovery
         [DebuggerDisplay("ServerInfo ({EndPoint}, Bad: {LastBadConnectionDateTimeUtc.HasValue})")]
         class ServerInfo
         {
-            public IPEndPoint EndPoint { get; set; }
+            public ServerRecord Record { get; set; }
             public DateTime? LastBadConnectionDateTimeUtc { get; set; }
         }
 
         /// <summary>
         /// Initialize SmartCMServerList with a given server list provider
         /// </summary>
-        /// <param name="provider">The ServerListProvider to persist servers</param>
-        /// <param name="allowDirectoryFetch">Specifies if we can query SteamDirectory to discover more servers</param>
-        public SmartCMServerList( IServerListProvider provider, bool allowDirectoryFetch = true )
+        /// <param name="configuration">The Steam configuration to use.</param>
+        /// <exception cref="ArgumentNullException">The configuration object is null.</exception>
+        public SmartCMServerList( SteamConfiguration configuration )
         {
-            ServerListProvider = provider;
-            canFetchDirectory = allowDirectoryFetch;
+            this.configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
 
             servers = new Collection<ServerInfo>();
             listLock = new object();
             BadConnectionMemoryTimeSpan = TimeSpan.FromMinutes( 5 );
         }
 
-        /// <summary>
-        /// Initialize SmartCMServerList with the default <see cref="NullServerListProvider"/> server list provider
-        /// </summary>
-        public SmartCMServerList() :
-            this( new NullServerListProvider() )
-        {
-        }
+        readonly SteamConfiguration configuration;
 
-        /// <summary>
-        /// The server list provider chosen to provide a persistent list of servers to connect to
-        /// </summary>
-        public IServerListProvider ServerListProvider
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// The preferred cell id for retrieving the list of servers from the Steam directory
-        /// </summary>
-        public uint CellID
-        {
-            get;
-            set;
-        }
-
-        bool canFetchDirectory;
         Task listTask;
 
         object listLock;
@@ -105,15 +79,12 @@ namespace SteamKit2.Discovery
 
             try
             {
-                listTask.Wait();
+                listTask.GetAwaiter().GetResult();
                 return true;
             }
-            catch ( AggregateException ae )
+            catch ( Exception ex )
             {
-                foreach( var ex in ae.Flatten().InnerExceptions )
-                {
-                    DebugWrite( "Failed to retrieve server list: {0}", ex );
-                }
+                DebugWrite( "Failed to retrieve server list: {0}", ex );
             }
 
             return false;
@@ -123,23 +94,21 @@ namespace SteamKit2.Discovery
         {
             DebugWrite( "Resolving server list" );
 
-            IEnumerable<IPEndPoint> serverList = await ServerListProvider.FetchServerListAsync().ConfigureAwait( false );
-            List<IPEndPoint> endpointList = serverList.ToList();
+            IEnumerable<ServerRecord> serverList = await configuration.ServerListProvider.FetchServerListAsync().ConfigureAwait( false );
+            IReadOnlyCollection<ServerRecord> endpointList = serverList.ToList();
 
-            if ( endpointList.Count == 0 && canFetchDirectory )
+            if ( endpointList.Count == 0 && configuration.AllowDirectoryFetch )
             {
                 DebugWrite( "Server list provider had no entries, will query SteamDirectory" );
-                var directoryList = await SteamDirectory.LoadAsync( CellID ).ConfigureAwait( false );
-
-                endpointList = directoryList.ToList();
+                endpointList = await SteamDirectory.LoadAsync( configuration ).ConfigureAwait( false );
             }
 
-            if ( endpointList.Count == 0 && canFetchDirectory )
+            if ( endpointList.Count == 0 && configuration.AllowDirectoryFetch )
             {
                 DebugWrite( "Could not query SteamDirectory, falling back to cm0" );
                 var cm0 = await Dns.GetHostAddressesAsync( "cm0.steampowered.com" ).ConfigureAwait( false );
 
-                endpointList = cm0.Select( ipaddr => new IPEndPoint(ipaddr, 27015) ).ToList();
+                endpointList = cm0.Select( ipaddr => ServerRecord.CreateSocketServer( new IPEndPoint(ipaddr, 27015) ) ).ToList();
             }
 
             DebugWrite( "Resolved {0} servers", endpointList.Count );
@@ -175,8 +144,8 @@ namespace SteamKit2.Discovery
         /// <summary>
         /// Replace the list with a new list of servers provided to us by the Steam servers.
         /// </summary>
-        /// <param name="endpointList">The <see cref="IPEndPoint"/>s to use for this <see cref="SmartCMServerList"/>.</param>
-        public void ReplaceList( IEnumerable<IPEndPoint> endpointList )
+        /// <param name="endpointList">The <see cref="ServerRecord"/>s to use for this <see cref="SmartCMServerList"/>.</param>
+        public void ReplaceList( IEnumerable<ServerRecord> endpointList )
         {
             lock ( listLock )
             {
@@ -189,13 +158,13 @@ namespace SteamKit2.Discovery
                     AddCore( distinctEndPoints[ i ] );
                 }
 
-                ServerListProvider.UpdateServerListAsync( distinctEndPoints ).Wait();
+                configuration.ServerListProvider.UpdateServerListAsync( distinctEndPoints ).GetAwaiter().GetResult();
             }
         }
 
-        void AddCore( IPEndPoint endPoint )
+        void AddCore(ServerRecord endPoint )
         {
-            var info = new ServerInfo { EndPoint = endPoint };
+            var info = new ServerInfo { Record = endPoint };
 
             servers.Add( info );
         }
@@ -214,11 +183,11 @@ namespace SteamKit2.Discovery
             }
         }
 
-        internal bool TryMark( IPEndPoint endPoint, ServerQuality quality )
+        internal bool TryMark( EndPoint endPoint, ServerQuality quality )
         {
             lock ( listLock )
             {
-                var serverInfo = servers.Where( x => x.EndPoint.Equals( endPoint ) ).SingleOrDefault();
+                var serverInfo = servers.Where( x => x.Record.EndPoint.Equals( endPoint ) ).SingleOrDefault();
                 if ( serverInfo == null )
                 {
                     return false;
@@ -254,7 +223,7 @@ namespace SteamKit2.Discovery
         /// Perform the actual score lookup of the server list and return the candidate
         /// </summary>
         /// <returns>IPEndPoint candidate</returns>
-        private IPEndPoint GetNextServerCandidateInternal()
+        private ServerRecord GetNextServerCandidateInternal( ProtocolTypes supportedProtocolTypes )
         {
             lock ( listLock )
             {
@@ -264,7 +233,8 @@ namespace SteamKit2.Discovery
                 ResetOldScores();
 
                 var serverInfo = servers
-                    .Select( (s, index) => new { EndPoint = s.EndPoint, IsBad = s.LastBadConnectionDateTimeUtc.HasValue, Index = index } )
+                    .Where( s => s.Record.ProtocolTypes.HasFlagsFast( supportedProtocolTypes ) )
+                    .Select( (s, index) => new { Record = s.Record, IsBad = s.LastBadConnectionDateTimeUtc.HasValue, Index = index } )
                     .OrderBy( x => x.IsBad )
                     .ThenBy( x => x.Index )
                     .FirstOrDefault();
@@ -274,59 +244,61 @@ namespace SteamKit2.Discovery
                     return null;
                 }
 
-                DebugWrite( $"Next server candidiate: {serverInfo.EndPoint}" );
-                return serverInfo.EndPoint;
+                DebugWrite( $"Next server candidiate: {serverInfo.Record.EndPoint} ({serverInfo.Record.ProtocolTypes})" );
+                return serverInfo.Record;
             }
         }
 
         /// <summary>
         /// Get the next server in the list.
         /// </summary>
+        /// <param name="supportedProtocolTypes">The minimum supported <see cref="ProtocolTypes"/> of the server to return.</param>
         /// <returns>An <see cref="System.Net.IPEndPoint"/>, or null if the list is empty.</returns>
-        public IPEndPoint GetNextServerCandidate()
+        public ServerRecord GetNextServerCandidate( ProtocolTypes supportedProtocolTypes )
         {
             if ( !WaitForServersFetched() )
             {
                 return null;
             }
 
-            return GetNextServerCandidateInternal();
+            return GetNextServerCandidateInternal( supportedProtocolTypes );
         }
 
         /// <summary>
         /// Get the next server in the list.
         /// </summary>
+        /// <param name="supportedProtocolTypes">The minimum supported <see cref="ProtocolTypes"/> of the server to return.</param>
         /// <returns>An <see cref="System.Net.IPEndPoint"/>, or null if the list is empty.</returns>
-        public async Task<IPEndPoint> GetNextServerCandidateAsync()
+        public async Task<ServerRecord> GetNextServerCandidateAsync( ProtocolTypes supportedProtocolTypes )
         {
             StartFetchingServers();
             await listTask.ConfigureAwait( false );
 
-            return GetNextServerCandidateInternal();
+            return GetNextServerCandidateInternal( supportedProtocolTypes );
         }
 
         /// <summary>
         /// Gets the <see cref="System.Net.IPEndPoint"/>s of all servers in the server list.
         /// </summary>
         /// <returns>An <see cref="T:System.Net.IPEndPoint[]"/> array contains the <see cref="System.Net.IPEndPoint"/>s of the servers in the list</returns>
-        public IPEndPoint[] GetAllEndPoints()
+        public ServerRecord[] GetAllEndPoints()
         {
-            IPEndPoint[] endPoints;
+            ServerRecord[] endPoints;
 
             if ( !WaitForServersFetched() )
             {
-                return new IPEndPoint[0];
+                return new ServerRecord[0];
             }
 
             lock ( listLock )
             {
                 var numServers = servers.Count;
-                endPoints = new IPEndPoint[ numServers ];
+                endPoints = new ServerRecord[ numServers ];
 
                 for ( int i = 0; i < numServers; i++ )
                 {
                     var serverInfo = servers[ i ];
-                    endPoints[ i ] = serverInfo.EndPoint;
+                    endPoints[ i ] = serverInfo.Record;
                 }
             }
 

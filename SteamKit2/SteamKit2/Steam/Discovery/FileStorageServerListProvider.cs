@@ -1,10 +1,8 @@
-﻿using ProtoBuf;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
+using ProtoBuf;
 
 namespace SteamKit2.Discovery
 {
@@ -27,7 +25,7 @@ namespace SteamKit2.Discovery
         /// Read the stored list of servers from the file
         /// </summary>
         /// <returns>List of servers if persisted, otherwise an empty list</returns>
-        public Task<IEnumerable<IPEndPoint>> FetchServerListAsync()
+        public Task<IEnumerable<ServerRecord>> FetchServerListAsync()
         {
             return Task.Run(() =>
             {
@@ -35,15 +33,18 @@ namespace SteamKit2.Discovery
                 {
                     using (FileStream fileStream = File.OpenRead(filename))
                     {
-                        return ProtoBuf.Serializer.DeserializeItems<BasicServerListProto>(fileStream, PrefixStyle.Base128, 1)
-                            .Select(item => new IPEndPoint(IPAddress.Parse(item.ipAddress), item.port))
+                        return Serializer.DeserializeItems<BasicServerListProto>(fileStream, PrefixStyle.Base128, 1)
+                            .Select(item =>
+                            {
+                                return ServerRecord.CreateServer(item.Address, item.Port, item.Protocols);
+                            })
                             .ToList();
                     }
                 }
                 catch (IOException ex)
                 {
                     DebugLog.WriteLine("FileStorageServerListProvider", "Failed to read file {0}: {1}", filename, ex.Message);
-                    return Enumerable.Empty<IPEndPoint>();
+                    return Enumerable.Empty<ServerRecord>();
                 }
             });
         }
@@ -53,16 +54,24 @@ namespace SteamKit2.Discovery
         /// </summary>
         /// <param name="endpoints">List of server endpoints</param>
         /// <returns>Awaitable task for write completion</returns>
-        public Task UpdateServerListAsync(IEnumerable<IPEndPoint> endpoints)
+        public Task UpdateServerListAsync(IEnumerable<ServerRecord> endpoints)
         {
             return Task.Run(() =>
             {
                 try
                 {
-                    using (FileStream fileStream = File.OpenWrite(filename))
+                    using (var fileStream = File.OpenWrite(filename))
                     {
-                        ProtoBuf.Serializer.Serialize(fileStream, 
-                            endpoints.Select(ep => new BasicServerListProto {ipAddress = ep.Address.ToString(), port = ep.Port}));
+                        Serializer.Serialize(fileStream,
+                            endpoints.Select(ep =>
+                            {
+                                return new BasicServerListProto
+                                {
+                                    Address = ep.GetHost(),
+                                    Port = ep.GetPort(),
+                                    Protocols = ep.ProtocolTypes
+                                };
+                            }));
                         fileStream.SetLength(fileStream.Position);
                     }
                 }

@@ -311,7 +311,7 @@ namespace SteamKit2
 
             var logon = new ClientMsgProtobuf<CMsgClientLogon>( EMsg.ClientLogon );
 
-            SteamID steamId = new SteamID( details.AccountID, details.AccountInstance, Client.ConnectedUniverse, EAccountType.Individual );
+            SteamID steamId = new SteamID( details.AccountID, details.AccountInstance, Client.Universe, EAccountType.Individual );
 
             if ( details.LoginID.HasValue )
             {
@@ -380,7 +380,7 @@ namespace SteamKit2
 
             var logon = new ClientMsgProtobuf<CMsgClientLogon>( EMsg.ClientLogon );
 
-            SteamID auId = new SteamID( 0, 0, Client.ConnectedUniverse, EAccountType.AnonUser );
+            SteamID auId = new SteamID( 0, 0, Client.Universe, EAccountType.AnonUser );
 
             logon.ProtoHeader.client_sessionid = 0;
             logon.ProtoHeader.steamid = auId.ConvertToUInt64();

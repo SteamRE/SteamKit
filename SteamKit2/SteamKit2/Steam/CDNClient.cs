@@ -327,7 +327,7 @@ namespace SteamKit2
                 return;
             }
 
-            byte[] pubKey = KeyDictionary.GetPublicKey( steamClient.ConnectedUniverse );
+            byte[] pubKey = KeyDictionary.GetPublicKey( steamClient.Universe );
 
             sessionKey = CryptoHelper.GenerateRandomBlock( 32 );
 
