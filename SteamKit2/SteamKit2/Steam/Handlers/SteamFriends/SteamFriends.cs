@@ -491,21 +491,19 @@ namespace SteamKit2
             this.Client.Send( unbanMember );
         }
 
-
-        // the default details to request in most situations
-        const EClientPersonaStateFlag defaultInfoRequest =
-            EClientPersonaStateFlag.PlayerName | EClientPersonaStateFlag.Presence |
-            EClientPersonaStateFlag.SourceID | EClientPersonaStateFlag.GameExtraInfo |
-            EClientPersonaStateFlag.LastSeen;
-
         /// <summary>
         /// Requests persona state for a list of specified SteamID.
         /// Results are returned in <see cref="SteamFriends.PersonaStateCallback"/>.
         /// </summary>
         /// <param name="steamIdList">A list of SteamIDs to request the info of.</param>
-        /// <param name="requestedInfo">The requested info flags.</param>
-        public void RequestFriendInfo( IEnumerable<SteamID> steamIdList, EClientPersonaStateFlag requestedInfo = defaultInfoRequest )
+        /// <param name="requestedInfo">The requested info flags. If none specified, this uses <see cref="SteamConfiguration.DefaultPersonaStateFlags"/>.</param>
+        public void RequestFriendInfo( IEnumerable<SteamID> steamIdList, EClientPersonaStateFlag requestedInfo = default(EClientPersonaStateFlag) )
         {
+            if ( requestedInfo == default(EClientPersonaStateFlag) )
+            {
+                requestedInfo = Client.Configuration.DefaultPersonaStateFlags;
+            }
+
             var request = new ClientMsgProtobuf<CMsgClientRequestFriendData>( EMsg.ClientRequestFriendData );
 
             request.Body.friends.AddRange( steamIdList.Select( sID => sID.ConvertToUInt64() ) );
@@ -518,8 +516,8 @@ namespace SteamKit2
         /// Results are returned in <see cref="SteamFriends.PersonaStateCallback"/>.
         /// </summary>
         /// <param name="steamId">A SteamID to request the info of.</param>
-        /// <param name="requestedInfo">The requested info flags.</param>
-        public void RequestFriendInfo( SteamID steamId, EClientPersonaStateFlag requestedInfo = defaultInfoRequest )
+        /// <param name="requestedInfo">The requested info flags. If none specified, this uses <see cref="SteamConfiguration.DefaultPersonaStateFlags"/>.</param>
+        public void RequestFriendInfo( SteamID steamId, EClientPersonaStateFlag requestedInfo = 0 )
         {
             RequestFriendInfo( new SteamID[] { steamId }, requestedInfo );
         }
@@ -663,7 +661,7 @@ namespace SteamKit2
             // we have to request information for all of our friends because steam only sends persona information for online friends
             var reqInfo = new ClientMsgProtobuf<CMsgClientRequestFriendData>( EMsg.ClientRequestFriendData );
 
-            reqInfo.Body.persona_state_requested = ( uint )defaultInfoRequest;
+            reqInfo.Body.persona_state_requested = ( uint )Client.Configuration.DefaultPersonaStateFlags;
 
             lock ( listLock )
             {
