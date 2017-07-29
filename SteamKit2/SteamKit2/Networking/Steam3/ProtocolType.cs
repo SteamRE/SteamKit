@@ -5,6 +5,7 @@
 
 
 using System;
+using System.Collections.Generic;
 
 namespace SteamKit2
 {
@@ -39,5 +40,24 @@ namespace SteamKit2
     {
         public static bool HasFlagsFast(this ProtocolTypes self, ProtocolTypes flags)
             => (self & flags) > 0;
+
+        internal static IEnumerable<ProtocolTypes> GetFlags(this ProtocolTypes self)
+        {
+            if (self.HasFlagsFast(ProtocolTypes.Tcp))
+            {
+                yield return ProtocolTypes.Tcp;
+            }
+
+            if (self.HasFlagsFast(ProtocolTypes.Udp))
+            {
+                yield return ProtocolTypes.Udp;
+            }
+
+            if (self.HasFlagsFast(ProtocolTypes.WebSocket))
+            {
+                yield return ProtocolTypes.WebSocket;
+            }
+
+        }
     }
 }

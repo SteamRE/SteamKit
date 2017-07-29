@@ -359,7 +359,7 @@ namespace SteamKit2.Internal
 
         void Connected( object sender, EventArgs e )
         {
-            Servers.TryMark( connection.CurrentEndPoint, ServerQuality.Good );
+            Servers.TryMark( connection.CurrentEndPoint, connection.ProtocolTypes, ServerQuality.Good );
 
             IsConnected = true;
             OnClientConnected();
@@ -371,7 +371,7 @@ namespace SteamKit2.Internal
 
             if ( !e.UserInitiated )
             {
-                Servers.TryMark( connection.CurrentEndPoint, ServerQuality.Bad );
+                Servers.TryMark( connection.CurrentEndPoint, connection.ProtocolTypes, ServerQuality.Bad );
             }
 
             SessionID = null;
@@ -514,7 +514,7 @@ namespace SteamKit2.Internal
 
                 if ( logoffResult == EResult.TryAnotherCM || logoffResult == EResult.ServiceUnavailable )
                 {
-                    Servers.TryMark( connection.CurrentEndPoint, ServerQuality.Bad );
+                    Servers.TryMark( connection.CurrentEndPoint, connection.ProtocolTypes, ServerQuality.Bad );
                 }
             }
         }

@@ -55,8 +55,6 @@ namespace SteamKit2
 
         /// <summary>
         /// The supported protocol types to use when attempting to connect to Steam.
-        /// If <see cref="ProtocolTypes.Tcp"/> and <see cref="ProtocolTypes.Udp"/> are both specified, TCP will take precedence
-        /// and UDP will not be used.
         /// </summary>
         public ProtocolTypes ProtocolTypes { get; set; } = ProtocolTypes.Tcp;
 

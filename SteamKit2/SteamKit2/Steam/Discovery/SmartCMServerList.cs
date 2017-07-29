@@ -29,11 +29,28 @@ namespace SteamKit2.Discovery
     /// </summary>
     public class SmartCMServerList
     {
-        [DebuggerDisplay("ServerInfo ({EndPoint}, Bad: {LastBadConnectionDateTimeUtc.HasValue})")]
+        [DebuggerDisplay("ServerInfo ({Record.EndPoint})")]
         class ServerInfo
         {
+            public ServerInfo( ServerRecord record )
+            {
+                Record = record;
+                LastBadConnectionTimeMap = new Dictionary<ProtocolTypes, DateTime?>();
+
+                foreach ( var protocolType in record.ProtocolTypes.GetFlags() )
+                {
+                    ResetLastBadConnectionTime( protocolType );
+                }
+            }
+
             public ServerRecord Record { get; set; }
-            public DateTime? LastBadConnectionDateTimeUtc { get; set; }
+            public Dictionary<ProtocolTypes, DateTime?> LastBadConnectionTimeMap { get; set; }
+
+            public void ResetLastBadConnectionTime( ProtocolTypes protocol )
+                => LastBadConnectionTimeMap[ protocol ] = null;
+
+            public void SetLastBadConnectionTime( ProtocolTypes protocol, DateTime dateTime )
+                => LastBadConnectionTimeMap[ protocol ] = dateTime;
         }
 
         /// <summary>
@@ -133,9 +150,13 @@ namespace SteamKit2.Discovery
             {
                 foreach ( var serverInfo in servers )
                 {
-                    if ( serverInfo.LastBadConnectionDateTimeUtc.HasValue && ( serverInfo.LastBadConnectionDateTimeUtc.Value + BadConnectionMemoryTimeSpan < DateTime.UtcNow ) )
+                    foreach ( var protocolType in serverInfo.LastBadConnectionTimeMap.Keys )
                     {
-                        serverInfo.LastBadConnectionDateTimeUtc = null;
+                        var lastBadConnectionTime = serverInfo.LastBadConnectionTimeMap[ protocolType ];
+                        if ( lastBadConnectionTime.HasValue && lastBadConnectionTime.Value + BadConnectionMemoryTimeSpan < DateTime.UtcNow )
+                        {
+                            serverInfo.LastBadConnectionTimeMap[ protocolType ] = null;
+                        }
                     }
                 }
             }
@@ -162,9 +183,9 @@ namespace SteamKit2.Discovery
             }
         }
 
-        void AddCore(ServerRecord endPoint )
+        void AddCore( ServerRecord endPoint )
         {
-            var info = new ServerInfo { Record = endPoint };
+            var info = new ServerInfo( endPoint );
 
             servers.Add( info );
         }
@@ -178,12 +199,15 @@ namespace SteamKit2.Discovery
             {
                 foreach ( var server in servers )
                 {
-                    server.LastBadConnectionDateTimeUtc = null;
+                    foreach ( var protocolType in server.LastBadConnectionTimeMap.Keys )
+                    {
+                        server.ResetLastBadConnectionTime( protocolType );
+                    }
                 }
             }
         }
 
-        internal bool TryMark( EndPoint endPoint, ServerQuality quality )
+        internal bool TryMark( EndPoint endPoint, ProtocolTypes protocolTypes, ServerQuality quality )
         {
             lock ( listLock )
             {
@@ -192,30 +216,32 @@ namespace SteamKit2.Discovery
                 {
                     return false;
                 }
-                MarkServerCore( serverInfo, quality );
+                MarkServerCore( serverInfo, protocolTypes, quality );
                 return true;
             }
         }
 
-        void MarkServerCore( ServerInfo serverInfo, ServerQuality quality )
+        void MarkServerCore( ServerInfo serverInfo, ProtocolTypes protocolTypes, ServerQuality quality )
         {
-
-            switch ( quality )
+            foreach ( var protocol in protocolTypes.GetFlags() )
             {
-                case ServerQuality.Good:
+                switch ( quality )
                 {
-                    serverInfo.LastBadConnectionDateTimeUtc = null;
-                    break;
-                }
+                    case ServerQuality.Good:
+                    {
+                        serverInfo.ResetLastBadConnectionTime( protocol );
+                        break;
+                    }
 
-                case ServerQuality.Bad:
-                {
-                    serverInfo.LastBadConnectionDateTimeUtc = DateTime.UtcNow;
-                    break;
-                }
+                    case ServerQuality.Bad:
+                    {
+                        serverInfo.SetLastBadConnectionTime( protocol, DateTime.UtcNow );
+                        break;
+                    }
 
-                default:
-                    throw new ArgumentOutOfRangeException( "quality" );
+                    default:
+                        throw new ArgumentOutOfRangeException( "quality" );
+                }
             }
         }
 
@@ -232,12 +258,17 @@ namespace SteamKit2.Discovery
                 // isn't a problem.
                 ResetOldScores();
 
-                var serverInfo = servers
-                    .Where( s => s.Record.ProtocolTypes.HasFlagsFast( supportedProtocolTypes ) )
-                    .Select( (s, index) => new { Record = s.Record, IsBad = s.LastBadConnectionDateTimeUtc.HasValue, Index = index } )
-                    .OrderBy( x => x.IsBad )
-                    .ThenBy( x => x.Index )
-                    .FirstOrDefault();
+                var query = 
+                    from o in servers.Select((server, index) => new { server, index })
+                    let server = o.server
+                    let index = o.index
+                    where server.Record.ProtocolTypes.HasFlagsFast( supportedProtocolTypes )
+                    from protocol in server.LastBadConnectionTimeMap.Keys
+                    where supportedProtocolTypes.HasFlagsFast( protocol )
+                    let lastBadConnectionTime = server.LastBadConnectionTimeMap[ protocol ]
+                    orderby lastBadConnectionTime.HasValue, index
+                    select new { Record = server.Record, IsBad = lastBadConnectionTime.HasValue, Index = index, Protocol = protocol };
+                var serverInfo = query.FirstOrDefault();
                 
                 if ( serverInfo == null )
                 {
@@ -245,7 +276,7 @@ namespace SteamKit2.Discovery
                 }
 
                 DebugWrite( $"Next server candidiate: {serverInfo.Record.EndPoint} ({serverInfo.Record.ProtocolTypes})" );
-                return serverInfo.Record;
+                return new ServerRecord( serverInfo.Record.EndPoint, serverInfo.Protocol );
             }
         }
 
