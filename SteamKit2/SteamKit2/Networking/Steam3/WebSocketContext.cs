@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
@@ -130,6 +131,11 @@ namespace SteamKit2
                         catch (ObjectDisposedException)
                         {
                             DisconnectNonBlocking(userInitiated: cancellationToken.IsCancellationRequested);
+                            return null;
+                        }
+                        catch (Win32Exception)
+                        {
+                            DisconnectNonBlocking(userInitiated: false);
                             return null;
                         }
 
