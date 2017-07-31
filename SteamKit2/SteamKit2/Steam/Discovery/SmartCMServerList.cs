@@ -29,7 +29,7 @@ namespace SteamKit2.Discovery
     /// </summary>
     public class SmartCMServerList
     {
-        [DebuggerDisplay("ServerInfo ({Record.EndPoint})")]
+        [DebuggerDisplay("ServerInfo ({EndPoint}, {Protocol}, Bad: {LastBadConnectionDateTimeUtc.HasValue})")]
         class ServerInfo
         {
             public ServerInfo( ServerRecord record, ProtocolTypes protocolType )
@@ -259,16 +259,16 @@ namespace SteamKit2.Discovery
                     where server.Protocol.HasFlagsFast( supportedProtocolTypes )
                     let lastBadConnectionTime = server.LastBadConnectionTimeUtc
                     orderby lastBadConnectionTime.HasValue, index
-                    select new { Record = server.Record, IsBad = lastBadConnectionTime.HasValue, Index = index, Protocol = server.Protocol };
-                var serverInfo = query.FirstOrDefault();
+                    select new { EndPoint = server.Record.EndPoint, Protocol = server.Protocol };
+                var result = query.FirstOrDefault();
                 
-                if ( serverInfo == null )
+                if ( result == null )
                 {
                     return null;
                 }
 
-                DebugWrite( $"Next server candidiate: {serverInfo.Record.EndPoint} ({serverInfo.Protocol})" );
-                return new ServerRecord( serverInfo.Record.EndPoint, serverInfo.Protocol );
+                DebugWrite( $"Next server candidiate: {result.EndPoint} ({result.Protocol})" );
+                return new ServerRecord( result.EndPoint, result.Protocol );
             }
         }
 
