@@ -14,9 +14,9 @@ namespace NetHookAnalyzer2
 		{
 			EMsg eMsg = MsgUtil.GetMsg(realEMsg);
 
-			if (MessageTypeOverrides.BodyMap.ContainsKey(eMsg))
+			if (MessageTypeOverrides.BodyMap.TryGetValue(eMsg, out var wellKnownType))
 			{
-				return MessageTypeOverrides.BodyMap[eMsg];
+				return wellKnownType;
 			}
 
 			var protomsgType = SteamKit2Assembly.GetTypes().ToList().Find(t => FilterProtobufMessageBodyType(t, eMsg));
@@ -32,11 +32,9 @@ namespace NetHookAnalyzer2
 		{
 			var gcMsg = MsgUtil.GetGCMsg(rawEMsg);
 
-			Dictionary<uint, Type> gcBodyDict;
-			if (MessageTypeOverrides.GCBodyMap.TryGetValue(gcAppid, out gcBodyDict))
+			if (MessageTypeOverrides.GCBodyMap.TryGetValue(gcAppid, out var gcBodyDict))
 			{
-				Type bodyType;
-				if (gcBodyDict.TryGetValue(gcMsg, out bodyType))
+				if (gcBodyDict.TryGetValue(gcMsg, out var bodyType))
 				{
 					return Enumerable.Repeat(bodyType, 1);
 				}

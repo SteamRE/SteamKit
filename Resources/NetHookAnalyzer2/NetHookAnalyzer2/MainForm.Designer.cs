@@ -220,7 +220,7 @@
 			this.searchTextBox.Size = new System.Drawing.Size(402, 20);
 			this.searchTextBox.TabIndex = 1;
 			this.searchTextBox.Text = "Search...";
-			this.searchTextBox.TextChanged += new System.EventHandler(this.searchTextBox_TextChanged);
+			this.searchTextBox.TextChanged += new System.EventHandler(this.SearchTextBox_TextChanged);
 			this.searchTextBox.Enter += new System.EventHandler(this.OnSearchTextBoxEnter);
 			this.searchTextBox.Leave += new System.EventHandler(this.OnSearchTextBoxLeave);
 			// 

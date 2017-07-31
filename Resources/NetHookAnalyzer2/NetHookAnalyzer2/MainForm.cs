@@ -190,7 +190,7 @@ namespace NetHookAnalyzer2
 			RepopulateTreeView();
 		}
 
-		void searchTextBox_TextChanged(object sender, EventArgs e)
+		void SearchTextBox_TextChanged(object sender, EventArgs e)
 		{
 			RepopulateListBox();
 		}
