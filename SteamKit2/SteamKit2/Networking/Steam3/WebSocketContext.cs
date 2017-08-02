@@ -133,6 +133,11 @@ namespace SteamKit2
                             DisconnectNonBlocking(userInitiated: cancellationToken.IsCancellationRequested);
                             return null;
                         }
+                        catch (WebSocketException)
+                        {
+                            DisconnectNonBlocking(userInitiated: false);
+                            return null;
+                        }
                         catch (Win32Exception)
                         {
                             DisconnectNonBlocking(userInitiated: false);
