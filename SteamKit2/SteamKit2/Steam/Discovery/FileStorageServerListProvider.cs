@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -56,6 +57,11 @@ namespace SteamKit2.Discovery
         /// <returns>Awaitable task for write completion</returns>
         public Task UpdateServerListAsync(IEnumerable<ServerRecord> endpoints)
         {
+            if (endpoints == null)
+            {
+                throw new ArgumentNullException(nameof(endpoints));
+            }
+
             return Task.Run(() =>
             {
                 try
