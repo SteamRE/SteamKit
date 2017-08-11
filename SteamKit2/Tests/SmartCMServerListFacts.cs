@@ -114,10 +114,6 @@ namespace Tests
 
             var endPoint = serverList.GetNextServerCandidate( ProtocolTypes.Tcp );
             Assert.Null( endPoint );
-            endPoint = serverList.GetNextServerCandidate( ProtocolTypes.Udp );
-            Assert.Null( endPoint );
-            endPoint = serverList.GetNextServerCandidate( ProtocolTypes.Tcp | ProtocolTypes.Udp);
-            Assert.Null( endPoint );
 
             endPoint = serverList.GetNextServerCandidate( ProtocolTypes.WebSocket );
             Assert.Equal( record.EndPoint, endPoint.EndPoint );
@@ -136,15 +132,7 @@ namespace Tests
             endPoint = serverList.GetNextServerCandidate( ProtocolTypes.Tcp );
             Assert.Equal( record.EndPoint, endPoint.EndPoint );
             Assert.Equal( ProtocolTypes.Tcp, endPoint.ProtocolTypes );
-
-            endPoint = serverList.GetNextServerCandidate( ProtocolTypes.Udp);
-            Assert.Equal( record.EndPoint, endPoint.EndPoint );
-            Assert.Equal( ProtocolTypes.Udp, endPoint.ProtocolTypes );
-
-            endPoint = serverList.GetNextServerCandidate( ProtocolTypes.Tcp | ProtocolTypes.Udp );
-            Assert.Equal( record.EndPoint, endPoint.EndPoint );
-            Assert.Equal( ProtocolTypes.Tcp, endPoint.ProtocolTypes );
-
+            
             endPoint = serverList.GetNextServerCandidate( ProtocolTypes.All );
             Assert.Equal( record.EndPoint, endPoint.EndPoint );
             Assert.Equal( ProtocolTypes.Tcp, endPoint.ProtocolTypes );
@@ -173,32 +161,32 @@ namespace Tests
         [Fact]
         public void TreatsProtocolsForSameServerIndividiaully()
         {
-            var record1 = ServerRecord.CreateServer( IPAddress.Loopback.ToString(), 27015, ProtocolTypes.Tcp | ProtocolTypes.Udp );
-            var record2 = ServerRecord.CreateServer( IPAddress.Loopback.ToString(), 27016, ProtocolTypes.Tcp | ProtocolTypes.Udp );
+            var record1 = ServerRecord.CreateServer( IPAddress.Loopback.ToString(), 27015, ProtocolTypes.Tcp | ProtocolTypes.WebSocket );
+            var record2 = ServerRecord.CreateServer( IPAddress.Loopback.ToString(), 27016, ProtocolTypes.Tcp | ProtocolTypes.WebSocket );
 
             serverList.ReplaceList( new[] { record1, record2 } );
             
             var nextTcp = serverList.GetNextServerCandidate( ProtocolTypes.Tcp );
-            var nextUdp = serverList.GetNextServerCandidate( ProtocolTypes.Udp );
+            var nextWss = serverList.GetNextServerCandidate( ProtocolTypes.WebSocket );
             
             Assert.Equal( record1.EndPoint, nextTcp.EndPoint );
-            Assert.Equal( record1.EndPoint, nextUdp.EndPoint );
+            Assert.Equal( record1.EndPoint, nextWss.EndPoint );
 
             serverList.TryMark( record1.EndPoint, ProtocolTypes.Tcp, ServerQuality.Bad );
             
             nextTcp = serverList.GetNextServerCandidate( ProtocolTypes.Tcp );
-            nextUdp = serverList.GetNextServerCandidate( ProtocolTypes.Udp );
+            nextWss = serverList.GetNextServerCandidate( ProtocolTypes.WebSocket );
             
             Assert.Equal( record2.EndPoint, nextTcp.EndPoint );
-            Assert.Equal( record1.EndPoint, nextUdp.EndPoint );
+            Assert.Equal( record1.EndPoint, nextWss.EndPoint );
 
-            serverList.TryMark( record1.EndPoint, ProtocolTypes.Udp, ServerQuality.Bad );
+            serverList.TryMark( record1.EndPoint, ProtocolTypes.WebSocket, ServerQuality.Bad );
             
             nextTcp = serverList.GetNextServerCandidate( ProtocolTypes.Tcp );
-            nextUdp = serverList.GetNextServerCandidate( ProtocolTypes.Udp );
+            nextWss = serverList.GetNextServerCandidate( ProtocolTypes.WebSocket );
             
             Assert.Equal( record2.EndPoint, nextTcp.EndPoint );
-            Assert.Equal( record2.EndPoint, nextUdp.EndPoint );
+            Assert.Equal( record2.EndPoint, nextWss.EndPoint );
         }
     }
 }

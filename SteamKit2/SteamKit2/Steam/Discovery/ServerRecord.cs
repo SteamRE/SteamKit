@@ -85,7 +85,7 @@ namespace SteamKit2.Discovery
         /// <param name="endPoint">The IP address and port of the server.</param>
         /// <returns>A new <see cref="ServerRecord"/> instance</returns>
         public static ServerRecord CreateSocketServer(IPEndPoint endPoint)
-            => new ServerRecord(endPoint, ProtocolTypes.Tcp | ProtocolTypes.Udp);
+            => new ServerRecord(endPoint, ProtocolTypes.Tcp);
 
         /// <summary>
         /// Creates a WebSocket server given an address in the form of "hostname:port".

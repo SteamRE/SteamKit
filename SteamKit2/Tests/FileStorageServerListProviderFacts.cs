@@ -32,7 +32,7 @@ namespace Tests
             Assert.Equal(2, servers.Count());
             Assert.Equal(IPAddress.Any.ToString(), servers.First().GetHost());
             Assert.Equal(1234, servers.First().GetPort());
-            Assert.Equal(ProtocolTypes.Tcp | ProtocolTypes.Udp, servers.First().ProtocolTypes);
+            Assert.Equal(ProtocolTypes.Tcp, servers.First().ProtocolTypes);
 
             await fileStorageProvider.UpdateServerListAsync(new List<ServerRecord>());
         }
