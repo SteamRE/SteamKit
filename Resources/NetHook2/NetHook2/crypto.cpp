@@ -10,7 +10,6 @@
 
 
 SymmetricEncryptChosenIVFn Encrypt_Orig = 0;
-SymmetricDecryptRecoverIVFn Decrypt_Orig = 0;
 bool (__cdecl *GetMessageFn)( int * ) = 0;
 
 
@@ -50,7 +49,7 @@ MsgList eMsgList;
 
 
 CCrypto::CCrypto()
-	: Encrypt_Detour( NULL ), Decrypt_Detour( NULL )
+	: Encrypt_Detour( NULL )
 {
 	CSimpleScan steamClientScan( "steamclient.dll" );
 
@@ -65,19 +64,6 @@ CCrypto::CCrypto()
 	Encrypt_Orig = pEncrypt;
 
 	g_pLogger->LogConsole( "CCrypto::SymmetricEncryptChosenIV = 0x%x\n", Encrypt_Orig );
-
-
-	SymmetricDecryptRecoverIVFn pDecrypt = NULL;
-	bool bDecrypt = steamClientScan.FindFunction(
-		"\x55\x8B\xEC\x81\xEC\x04\x01\x00\x00\x83\x7D\x08\x00\x53",
-		"xxxxxxxxxxxxxx",
-		(void **)&pDecrypt
-	);
-
-	Decrypt_Orig = pDecrypt;
-
-	g_pLogger->LogConsole( "CCrypto::SymmetricDecryptRecoverIV = 0x%x\n", Decrypt_Orig );
-
 
 	char *pGetMessageList = NULL;
 	bool bGetMessageList = steamClientScan.FindFunction(
@@ -138,7 +124,6 @@ CCrypto::CCrypto()
 	}
 
 	SymmetricEncryptChosenIVFn encrypt = CCrypto::SymmetricEncryptChosenIV;
-	SymmetricDecryptRecoverIVFn decrypt = CCrypto::SymmetricDecryptRecoverIV;
 
 	if ( bEncrypt )
 	{
@@ -150,18 +135,6 @@ CCrypto::CCrypto()
 	else
 	{
 		g_pLogger->LogConsole( "Unable to hook SymmetricEncryptChosenIV: Func scan failed.\n" );
-	}
-
-	if ( bDecrypt )
-	{
-		Decrypt_Detour = new CSimpleDetour((void **) &Decrypt_Orig, (void*) decrypt);
-		Decrypt_Detour->Attach();
-
-		g_pLogger->LogConsole( "Detoured SymmetricDecryptRecoverIV!\n" );
-	}
-	else
-	{
-		g_pLogger->LogConsole( "Unable to hook SymmetricDecryptRecoverIV: Func scan failed.\n" );
 	}
 }
 
@@ -175,12 +148,6 @@ CCrypto::~CCrypto()
 		Encrypt_Detour->Detach();
 		delete Encrypt_Detour;
 	}
-
-	if ( Decrypt_Detour )
-	{
-		Decrypt_Detour->Detach();
-		delete Decrypt_Detour;
-	}
 }
 
 
@@ -192,14 +159,6 @@ bool __cdecl CCrypto::SymmetricEncryptChosenIV( const uint8 *pubPlaintextData, u
 	return (*Encrypt_Orig)( pubPlaintextData, cubPlaintextData, pIV, cubIV, pubEncryptedData, pcubEncryptedData, pubKey, cubKey );
 }
 
-bool __cdecl CCrypto::SymmetricDecryptRecoverIV( const uint8 *pubEncryptedData, uint32 cubEncryptedData, uint8 *pubPlaintextData, uint32 *pcubPlaintextData, uint8 *pubRecoveredIV, uint32 cubRecoveredIV, const uint8 *pubKey, uint32 cubKey )
-{
-	bool ret = (*Decrypt_Orig)(pubEncryptedData, cubEncryptedData, pubPlaintextData, pcubPlaintextData, pubRecoveredIV, cubRecoveredIV, pubKey, cubKey);
-
-	g_pLogger->LogNetMessage( k_eNetIncoming, pubPlaintextData, *pcubPlaintextData );
-
-	return ret;
-}
 
 
 const char* CCrypto::GetMessage( EMsg eMsg, uint8 serverType )
