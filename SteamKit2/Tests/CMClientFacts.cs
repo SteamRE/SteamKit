@@ -65,6 +65,14 @@ namespace Tests
         }
 
         [Fact]
+        public void GetPacketMsgFailsWithTinyArray()
+        {
+            var data = new byte[3];
+            var packetMsg = CMClient.GetPacketMsg(data);
+            Assert.Null(packetMsg);
+        }
+
+        [Fact]
         public void ServerLookupIsClearedWhenDisconnecting()
         {
             var msg = new ClientMsgProtobuf<CMsgClientServerList>( EMsg.ClientServerList );

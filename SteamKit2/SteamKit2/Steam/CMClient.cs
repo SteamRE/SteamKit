@@ -390,6 +390,12 @@ namespace SteamKit2.Internal
 
         internal static IPacketMsg GetPacketMsg( byte[] data )
         {
+            if ( data.Length < sizeof( uint ) )
+            {
+                DebugLog.WriteLine( nameof(CMClient), "PacketMsg too small to contain a message, was only {0} bytes. Message: 0x{1}", data.Length, BitConverter.ToString( data ).Replace( "-", string.Empty ) );
+                return null;
+            }
+
             uint rawEMsg = BitConverter.ToUInt32( data, 0 );
             EMsg eMsg = MsgUtil.GetMsg( rawEMsg );
 
