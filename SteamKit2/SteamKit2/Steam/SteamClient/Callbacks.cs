@@ -60,7 +60,9 @@ namespace SteamKit2
                 var cmList = cmMsg.cm_addresses
                     .Zip( cmMsg.cm_ports, ( addr, port ) => ServerRecord.CreateSocketServer( new IPEndPoint( NetHelpers.GetIPAddress( addr ), ( int )port ) ) );
 
-                Servers = new ReadOnlyCollection<ServerRecord>( cmList.ToList() );
+                var websocketList = cmMsg.cm_websocket_addresses.Select( ( addr ) => ServerRecord.CreateWebSocketServer( addr ) );
+
+                Servers = new ReadOnlyCollection<ServerRecord>( cmList.Concat( websocketList ).ToList() );
             }
         }
 
