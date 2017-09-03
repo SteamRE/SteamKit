@@ -140,7 +140,6 @@ namespace SteamKit2
                     WebSocketReceiveResult result;
                     do
                     {
-
                         try
                         {
                             result = await socket.ReceiveAsync(segment, cancellationToken).ConfigureAwait(false);
