@@ -45,9 +45,16 @@ namespace SteamKit2
         public TimeSpan ConnectionTimeout { get; set; } = TimeSpan.FromSeconds(5);
 
         /// <summary>
+        /// The default persona state flags used when requesting information for a new friend, or
+        /// when calling <c>SteamFriends.RequestFriendInfo</c> without specifying flags.
+        /// </summary>
+        public EClientPersonaStateFlag DefaultPersonaStateFlags { get; set; } =
+            EClientPersonaStateFlag.PlayerName | EClientPersonaStateFlag.Presence |
+            EClientPersonaStateFlag.SourceID | EClientPersonaStateFlag.GameExtraInfo |
+            EClientPersonaStateFlag.LastSeen;
+
+        /// <summary>
         /// The supported protocol types to use when attempting to connect to Steam.
-        /// If <see cref="ProtocolTypes.Tcp"/> and <see cref="ProtocolTypes.Udp"/> are both specified, TCP will take precedence
-        /// and UDP will not be used.
         /// </summary>
         public ProtocolTypes ProtocolTypes { get; set; } = ProtocolTypes.Tcp;
 

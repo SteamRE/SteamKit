@@ -27,8 +27,8 @@ public:
 	CLogger();
 
 	void LogConsole( const char *szFmt, ... );
-	void LogNetMessage( ENetDirection eDirection, uint8 *pData, uint32 cubData );
-	void LogSessionData( ENetDirection eDirection, uint8 *pData, uint32 cubData );
+	void LogNetMessage( ENetDirection eDirection, const uint8 *pData, uint32 cubData );
+	void LogSessionData( ENetDirection eDirection, const uint8 *pData, uint32 cubData );
 	void LogOpenFile( HANDLE hFile, const char *szFmt, ... );
 
 	HANDLE OpenFile( const char *szFileName, bool bSession );
@@ -37,7 +37,7 @@ public:
 
 private:
 	const char *GetFileNameBase( ENetDirection eDirection, EMsg eMsg, uint8 serverType = 0xFF );
-	void MultiplexMulti( ENetDirection eDirection, uint8 *pData, uint32 cubData );
+	void MultiplexMulti( ENetDirection eDirection, const uint8 *pData, uint32 cubData );
 
 private:
 	std::string m_RootDir;

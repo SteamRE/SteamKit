@@ -25,9 +25,14 @@ namespace SteamKit2.Internal
     public abstract class CMClient
     {
         /// <summary>
+        /// The configuration for this client.
+        /// </summary>
+        public SteamConfiguration Configuration { get; }
+
+        /// <summary>
         /// Bootstrap list of CM servers.
         /// </summary>
-        public SmartCMServerList Servers => configuration.ServerList;
+        public SmartCMServerList Servers => Configuration.ServerList;
 
         /// <summary>
         /// Returns the the local IP of this client.
@@ -39,7 +44,7 @@ namespace SteamKit2.Internal
         /// Gets the universe of this client.
         /// </summary>
         /// <value>The universe.</value>
-        public EUniverse Universe => configuration.Universe;
+        public EUniverse Universe => Configuration.Universe;
 
         /// <summary>
         /// Gets a value indicating whether this instance is connected to the remote CM server.
@@ -79,7 +84,7 @@ namespace SteamKit2.Internal
         /// <value>
         /// The connection timeout.
         /// </value>
-        public TimeSpan ConnectionTimeout => configuration.ConnectionTimeout;
+        public TimeSpan ConnectionTimeout => Configuration.ConnectionTimeout;
 
         /// <summary>
         /// Gets or sets the network listening interface. Use this for debugging only.
@@ -97,8 +102,6 @@ namespace SteamKit2.Internal
 
         Dictionary<EServerType, HashSet<IPEndPoint>> serverMap;
 
-        readonly SteamConfiguration configuration;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="CMClient"/> class with a specific configuration.
         /// </summary>
@@ -106,7 +109,7 @@ namespace SteamKit2.Internal
         /// <exception cref="ArgumentNullException">The configuration object is <c>null</c></exception>
         public CMClient( SteamConfiguration configuration )
         {
-            this.configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
+            Configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
             serverMap = new Dictionary<EServerType, HashSet<IPEndPoint>>();
 
             heartBeatFunc = new ScheduledFunction( () =>
@@ -144,7 +147,7 @@ namespace SteamKit2.Internal
 
             if ( cmServer == null )
             {
-                recordTask = Servers.GetNextServerCandidateAsync( configuration.ProtocolTypes );
+                recordTask = Servers.GetNextServerCandidateAsync( Configuration.ProtocolTypes );
             }
             else
             {
@@ -168,7 +171,7 @@ namespace SteamKit2.Internal
 
                 var record = t.Result;
 
-                connection = CreateConnection( record.ProtocolTypes & configuration.ProtocolTypes );
+                connection = CreateConnection( record.ProtocolTypes & Configuration.ProtocolTypes );
                 connection.NetMsgReceived += NetMsgReceived;
                 connection.Connected += Connected;
                 connection.Disconnected += Disconnected;
@@ -338,11 +341,11 @@ namespace SteamKit2.Internal
             }
             else if ( protocol.HasFlagsFast( ProtocolTypes.Tcp ) )
             {
-                return new EnvelopeEncryptedConnection( new TcpConnection(), configuration.Universe );
+                return new EnvelopeEncryptedConnection( new TcpConnection(), Universe );
             }
             else if ( protocol.HasFlagsFast( ProtocolTypes.Udp ) )
             {
-                return new EnvelopeEncryptedConnection( new UdpConnection(), configuration.Universe );
+                return new EnvelopeEncryptedConnection( new UdpConnection(), Universe );
             }
 
             throw new ArgumentOutOfRangeException( nameof(protocol), protocol, "Protocol bitmask has no supported protocols set." );
@@ -356,7 +359,7 @@ namespace SteamKit2.Internal
 
         void Connected( object sender, EventArgs e )
         {
-            Servers.TryMark( connection.CurrentEndPoint, ServerQuality.Good );
+            Servers.TryMark( connection.CurrentEndPoint, connection.ProtocolTypes, ServerQuality.Good );
 
             IsConnected = true;
             OnClientConnected();
@@ -368,7 +371,7 @@ namespace SteamKit2.Internal
 
             if ( !e.UserInitiated )
             {
-                Servers.TryMark( connection.CurrentEndPoint, ServerQuality.Bad );
+                Servers.TryMark( connection.CurrentEndPoint, connection.ProtocolTypes, ServerQuality.Bad );
             }
 
             SessionID = null;
@@ -387,6 +390,12 @@ namespace SteamKit2.Internal
 
         internal static IPacketMsg GetPacketMsg( byte[] data )
         {
+            if ( data.Length < sizeof( uint ) )
+            {
+                DebugLog.WriteLine( nameof(CMClient), "PacketMsg too small to contain a message, was only {0} bytes. Message: 0x{1}", data.Length, BitConverter.ToString( data ).Replace( "-", string.Empty ) );
+                return null;
+            }
+
             uint rawEMsg = BitConverter.ToUInt32( data, 0 );
             EMsg eMsg = MsgUtil.GetMsg( rawEMsg );
 
@@ -511,7 +520,7 @@ namespace SteamKit2.Internal
 
                 if ( logoffResult == EResult.TryAnotherCM || logoffResult == EResult.ServiceUnavailable )
                 {
-                    Servers.TryMark( connection.CurrentEndPoint, ServerQuality.Bad );
+                    Servers.TryMark( connection.CurrentEndPoint, connection.ProtocolTypes, ServerQuality.Bad );
                 }
             }
         }

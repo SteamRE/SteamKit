@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net;
+using SteamKit2.Discovery;
 using SteamKit2.Internal;
 
 namespace SteamKit2
@@ -51,15 +52,17 @@ namespace SteamKit2
             /// <summary>
             /// Gets the CM server list.
             /// </summary>
-            public ReadOnlyCollection<IPEndPoint> Servers { get; private set; }
+            public ReadOnlyCollection<ServerRecord> Servers { get; private set; }
 
 
             internal CMListCallback( CMsgClientCMList cmMsg )
             {
                 var cmList = cmMsg.cm_addresses
-                    .Zip( cmMsg.cm_ports, ( addr, port ) => new IPEndPoint( NetHelpers.GetIPAddress( addr ), ( int )port ) );
+                    .Zip( cmMsg.cm_ports, ( addr, port ) => ServerRecord.CreateSocketServer( new IPEndPoint( NetHelpers.GetIPAddress( addr ), ( int )port ) ) );
 
-                Servers = new ReadOnlyCollection<IPEndPoint>( cmList.ToList() );
+                var websocketList = cmMsg.cm_websocket_addresses.Select( ( addr ) => ServerRecord.CreateWebSocketServer( addr ) );
+
+                Servers = new ReadOnlyCollection<ServerRecord>( cmList.Concat( websocketList ).ToList() );
             }
         }
 

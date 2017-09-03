@@ -118,11 +118,14 @@ namespace SteamKit2
 
                     var details = new List<int>();
 
-                    using ( var stream = new MemoryStream( entry.details ) )
+                    if ( entry.details != null )
                     {
-                        while ( ( stream.Length - stream.Position ) >= sizeof( int ) )
+                        using ( var stream = new MemoryStream( entry.details ) )
                         {
-                            details.Add( stream.ReadInt32() );
+                            while ( ( stream.Length - stream.Position ) >= sizeof( int ) )
+                            {
+                                details.Add( stream.ReadInt32() );
+                            }
                         }
                     }
 

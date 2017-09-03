@@ -8,7 +8,7 @@ namespace SteamKit2.Discovery
     /// </summary>
     public class ServerRecord
     {
-        ServerRecord(EndPoint endPoint, ProtocolTypes protocolTypes)
+        internal ServerRecord(EndPoint endPoint, ProtocolTypes protocolTypes)
         {
             EndPoint = endPoint ?? throw new ArgumentNullException(nameof(endPoint));
             ProtocolTypes = protocolTypes;

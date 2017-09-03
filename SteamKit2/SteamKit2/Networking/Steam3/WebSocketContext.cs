@@ -1,8 +1,10 @@
 ﻿using System;
+using System.ComponentModel;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Net.WebSockets;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -69,7 +71,7 @@ namespace SteamKit2
                 while (!cancellationToken.IsCancellationRequested && socket.State == WebSocketState.Open)
                 {
                     var packet = await ReadMessageAsync(cancellationToken).ConfigureAwait(false);
-                    if (packet != null)
+                    if (packet != null && packet.Length > 0)
                     {
                         connection.NetMsgReceived?.Invoke(connection, new NetMsgEventArgs(packet, EndPoint));
                     }
@@ -78,14 +80,30 @@ namespace SteamKit2
                 if (socket.State == WebSocketState.Open)
                 {
                     DebugLog.WriteLine(nameof(WebSocketContext), "Closing connection...");
-                    await socket.CloseAsync(WebSocketCloseStatus.NormalClosure, null, default(CancellationToken)).ConfigureAwait(false);
+                    try
+                    {
+                        await socket.CloseAsync(WebSocketCloseStatus.NormalClosure, null, default(CancellationToken)).ConfigureAwait(false);
+                    }
+                    catch (Win32Exception ex)
+                    {
+                        DebugLog.WriteLine(nameof(WebSocketContext), "Error closing connection: {0}", ex.Message);
+                    }
                 }
             }
 
             public async Task SendAsync(byte[] data)
             {
                 var segment = new ArraySegment<byte>(data, 0, data.Length);
-                await socket.SendAsync(segment, WebSocketMessageType.Binary, true, cts.Token).ConfigureAwait(false);
+                try
+                {
+                    await socket.SendAsync(segment, WebSocketMessageType.Binary, true, cts.Token).ConfigureAwait(false);
+                }
+                catch (WebSocketException ex)
+                {
+                    DebugLog.WriteLine(nameof(WebSocketContext), "{0} exception when sending message: {1}", ex.GetType().FullName, ex.Message);
+                    DisconnectNonBlocking(userInitiated: false);
+                    return;
+                }
                 DebugLog.WriteLine(nameof(WebSocketContext), "Sent {0} bytes.", data.Length);
             }
 
@@ -122,7 +140,6 @@ namespace SteamKit2
                     WebSocketReceiveResult result;
                     do
                     {
-
                         try
                         {
                             result = await socket.ReceiveAsync(segment, cancellationToken).ConfigureAwait(false);
@@ -130,6 +147,16 @@ namespace SteamKit2
                         catch (ObjectDisposedException)
                         {
                             DisconnectNonBlocking(userInitiated: cancellationToken.IsCancellationRequested);
+                            return null;
+                        }
+                        catch (WebSocketException)
+                        {
+                            DisconnectNonBlocking(userInitiated: false);
+                            return null;
+                        }
+                        catch (Win32Exception)
+                        {
+                            DisconnectNonBlocking(userInitiated: false);
                             return null;
                         }
 
@@ -141,7 +168,18 @@ namespace SteamKit2
                                 break;
 
                             case WebSocketMessageType.Text:
-                                DebugLog.WriteLine(nameof(WebSocketContext), "Recieved websocket text message.");
+                                try
+                                {
+                                    var message = Encoding.UTF8.GetString(buffer, 0, result.Count);
+                                    DebugLog.WriteLine(nameof(WebSocketContext), "Recieved websocket text message: \"{0}\"", message);
+                                }
+                                catch
+                                {
+                                    var frameBytes = new byte[result.Count];
+                                    Array.Copy(buffer, 0, frameBytes, 0, result.Count);
+                                    var frameHexBytes = BitConverter.ToString(frameBytes).Replace("-", string.Empty);
+                                    DebugLog.WriteLine(nameof(WebSocketContext), "Recieved websocket text message: 0x{0}", frameHexBytes);
+                                }
                                 break;
 
                             case WebSocketMessageType.Close:
@@ -157,7 +195,12 @@ namespace SteamKit2
             }
 
             void DisconnectNonBlocking(bool userInitiated)
-                => Task.Run(() => connection.DisconnectCore(userInitiated, this));
+                => Task.Run(() => connection.DisconnectCore(userInitiated, this))
+                       .ContinueWith(t =>
+                        {
+                            var ex = t.Exception;
+                            DebugLog.WriteLine(nameof(WebSocketContext), "Unhandled {0} when disconnecting: {1}", ex.GetType().FullName, ex.Message);
+                        }, TaskContinuationOptions.OnlyOnFaulted | TaskContinuationOptions.ExecuteSynchronously);
 
             static string GetHostAndPort(EndPoint endPoint)
             {

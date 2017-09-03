@@ -56,7 +56,7 @@ namespace Sample7_ServerList
             configuration.ServerListProvider = new FileStorageServerListProvider("servers_list.bin");
 
             // create our steamclient instance
-            steamClient = new SteamClient();
+            steamClient = new SteamClient( configuration );
             // create the callback manager which will route callbacks to function calls
             manager = new CallbackManager( steamClient );
 
