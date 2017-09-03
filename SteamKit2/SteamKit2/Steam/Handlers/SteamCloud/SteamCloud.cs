@@ -82,7 +82,7 @@ namespace SteamKit2
         /// <param name="appid">The app id of the game.</param>
         /// <param name="filename">The path to the file being requested.</param>
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="ShareFileCallback"/>.</returns>
-        public AsyncJob<ShareFileCallback> ShareFile(uint appid, string filename)
+        public AsyncJob<ShareFileCallback> ShareFile( uint appid, string filename )
         {
             var request = new ClientMsgProtobuf<CMsgClientUFSShareFile>(EMsg.ClientUFSShareFile);
             request.SourceJobID = Client.GetNextJobID();
