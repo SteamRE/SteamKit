@@ -196,7 +196,12 @@ namespace SteamKit2
             }
 
             void DisconnectNonBlocking(bool userInitiated)
-                => Task.Run(() => connection.DisconnectCore(userInitiated, this));
+                => Task.Run(() => connection.DisconnectCore(userInitiated, this))
+                       .ContinueWith(t =>
+                        {
+                            var ex = t.Exception;
+                            DebugLog.WriteLine(nameof(WebSocketContext), "Unhandled {0} when disconnecting: {1}", ex.GetType().FullName, ex.Message);
+                        }, TaskContinuationOptions.OnlyOnFaulted | TaskContinuationOptions.ExecuteSynchronously);
 
             static string GetHostAndPort(EndPoint endPoint)
             {
