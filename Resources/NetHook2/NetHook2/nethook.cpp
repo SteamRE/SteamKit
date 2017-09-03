@@ -3,12 +3,16 @@
 
 #include "logger.h"
 #include "crypto.h"
+#include "net.h"
+
 #include "nh2_string.h"
 
 #include "steammessages_base.pb.h"
 
 CLogger *g_pLogger = NULL;
 CCrypto* g_pCrypto = NULL;
+NetHook::CNet *g_pNet = NULL;
+
 BOOL g_bOwnsConsole = FALSE;
 
 BOOL IsRunDll32()
@@ -37,13 +41,15 @@ BOOL WINAPI DllMain( HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved )
 		g_pLogger = new CLogger();
 
 		g_pCrypto = new CCrypto();
+		g_pNet = new NetHook::CNet();
 
 	}
 	else if ( fdwReason == DLL_PROCESS_DETACH )
 	{
-		delete g_pLogger;
-
+		delete g_pNet;
 		delete g_pCrypto;
+
+		delete g_pLogger;
 
 		if (g_bOwnsConsole)
 		{
