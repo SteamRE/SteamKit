@@ -97,7 +97,7 @@ bool CNet::BBuildAndAsyncSendFrame(void *webSocketConnection, void *unused, EWeb
 {
 	if (eWebSocketOpCode == k_eWebSocketOpCode_Binary)
 	{
-		g_pLogger->LogNetMessage(k_eNetOutgoing, const_cast<uint8 *>(pubData), cubData);
+		g_pLogger->LogNetMessage(k_eNetOutgoing, pubData, cubData);
 	}
 	else
 	{

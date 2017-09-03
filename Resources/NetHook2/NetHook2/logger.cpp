@@ -70,7 +70,7 @@ void CLogger::DeleteFile( const char *szFileName, bool bSession )
 	DeleteFileA( outputFile.c_str() );
 }
 
-void CLogger::LogNetMessage( ENetDirection eDirection, uint8 *pData, uint32 cubData )
+void CLogger::LogNetMessage( ENetDirection eDirection, const uint8 *pData, uint32 cubData )
 {
 	EMsg eMsg = (EMsg)*(uint16*)pData;
 	eMsg = (EMsg)((int)eMsg & (~0x80000000));
@@ -84,7 +84,7 @@ void CLogger::LogNetMessage( ENetDirection eDirection, uint8 *pData, uint32 cubD
 	this->LogSessionData( eDirection, pData, cubData );
 }
 
-void CLogger::LogSessionData( ENetDirection eDirection, uint8 *pData, uint32 cubData )
+void CLogger::LogSessionData( ENetDirection eDirection, const uint8 *pData, uint32 cubData )
 {
 	std::string fullFile = m_LogDir;
 
@@ -159,7 +159,7 @@ const char *CLogger::GetFileNameBase( ENetDirection eDirection, EMsg eMsg, uint8
 	return szFileName;
 }
 
-void CLogger::MultiplexMulti( ENetDirection eDirection, uint8 *pData, uint32 cubData )
+void CLogger::MultiplexMulti( ENetDirection eDirection, const uint8 *pData, uint32 cubData )
 {
 	struct ProtoHdr 
 	{
