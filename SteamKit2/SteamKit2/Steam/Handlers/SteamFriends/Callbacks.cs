@@ -735,11 +735,8 @@ namespace SteamKit2
 
                 this.ChatMsgType = msg.ChatMsgType;
 
-                if ( payload != null )
-                {
-                    this.Message = Encoding.UTF8.GetString( payload );
-                    this.Message = this.Message.TrimEnd( new[] { '\0' } ); // trim any extra null chars from the end
-                }
+                this.Message = Encoding.UTF8.GetString( payload );
+                this.Message = this.Message.TrimEnd( new[] { '\0' } ); // trim any extra null chars from the end
             }
         }
 
