@@ -310,14 +310,14 @@ namespace SteamKit2
             if ( target == null )
             {
                 throw new ArgumentNullException( nameof(target) );
-			}
+            }
 
-			if ( message == null )
-			{
-				throw new ArgumentNullException( nameof(message) );
-			}
+            if ( message == null )
+            {
+                throw new ArgumentNullException( nameof(message) );
+            }
 
-			var chatMsg = new ClientMsgProtobuf<CMsgClientFriendMsg>( EMsg.ClientFriendMsg );
+            var chatMsg = new ClientMsgProtobuf<CMsgClientFriendMsg>( EMsg.ClientFriendMsg );
 
             chatMsg.Body.steamid = target;
             chatMsg.Body.chat_entry_type = ( int )type;
