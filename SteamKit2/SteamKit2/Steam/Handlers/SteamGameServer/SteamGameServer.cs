@@ -187,7 +187,7 @@ namespace SteamKit2
         {
             if (details == null)
             {
-                throw new ArgumentNullException("details");
+                throw new ArgumentNullException( nameof(details) );
             }
 
             if (details.Address != null && details.Address.AddressFamily != AddressFamily.InterNetwork)
